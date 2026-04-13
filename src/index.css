@@ -1,0 +1,50 @@
+/* Global styles for D&D Settlement Generator */
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, select, textarea {
+  font-size: 16px !important;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+/* Parchment background — the main page background */
+.parchment-bg {
+  background-color: #f7f0e4;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(180,140,80,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(160,120,60,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(140,100,50,0.04) 0%, transparent 50%);
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #c8b89a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a0762a; }
+
+/* Tab strip hide scrollbar */
+.tab-strip::-webkit-scrollbar { display: none; }
+.output-tab-btn { -webkit-tap-highlight-color: transparent; }
+
+/* Background-aware card styling */
+body, #root {
+  background: transparent !important;
+}
+.parchment-bg {
+  background: transparent !important;
+}

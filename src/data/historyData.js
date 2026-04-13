@@ -1,0 +1,976 @@
+// historyData.js — History event templates
+// Extracted from economicGenerator.js where they were misplaced.
+// Used by historyGenerator.js for settlement history generation.
+
+export const HISTORY_EVENTS = {
+  government: [
+    {
+      role: "Mayor",
+      title: "mayor",
+      priority: 10,
+      minTier: "village",
+      goalCategories: [
+        "power",
+        "protection"
+      ]
+    },
+    {
+      role: "Lord",
+      title: "lord",
+      priority: 10,
+      minTier: "town",
+      goalCategories: [
+        "power",
+        "wealth"
+      ]
+    },
+    {
+      role: "Governor",
+      title: "mayor",
+      priority: 10,
+      minTier: "city",
+      goalCategories: [
+        "power",
+        "political"
+      ]
+    },
+    {
+      role: "Duke/Viceroy",
+      title: "mayor",
+      priority: 10,
+      minTier: "metropolis",
+      goalCategories: [
+        "power",
+        "political"
+      ]
+    , requiresInstKeyword: ['palace', 'royal seat', "noble governor"]},
+    {
+      role: "Grand Chancellor",
+      title: "council",
+      priority: 9,
+      minTier: "metropolis",
+      goalCategories: [
+        "power",
+        "knowledge"
+      ]
+    , requiresInstKeyword: ['palace', 'royal seat', 'multiple court', "government complex"]},
+    {
+      role: "Master of Coin",
+      title: "guild_master",
+      priority: 8,
+      minTier: "metropolis",
+      goalCategories: [
+        "wealth",
+        "power"
+      ]
+    },
+    {
+      role: "Spymaster",
+      title: "captain",
+      priority: 8,
+      minTier: "metropolis",
+      goalCategories: [
+        "power",
+        "personal"
+      ]
+    , requiresInstKeyword: ['palace', 'royal seat', "noble governor", 'city-state', "government complex"]},
+    {
+      role: "Foreign Ambassador",
+      title: "council",
+      priority: 7,
+      minTier: "metropolis",
+      goalCategories: [
+        "political",
+        "personal"
+      ]
+    , requiresInstKeyword: ['palace', 'royal seat', "government complex", 'guild consortium', 'city-state']},
+    {
+      role: "Council Member",
+      title: "council",
+      priority: 7,
+      minTier: "town",
+      goalCategories: [
+        "power",
+        "reform"
+      ]
+    },
+    {
+      role: "Tax Collector",
+      title: "tax_collector",
+      priority: 5,
+      minTier: "village",
+      goalCategories: [
+        "wealth",
+        "power"
+      ]
+    },
+    {
+      role: "Chief Magistrate",
+      title: "magistrate",
+      priority: 7,
+      minTier: "town",
+      goalCategories: [
+        "justice",
+        "power"
+      ]
+    , requiresInstKeyword: ['court', 'town hall', 'city hall', 'prison']},
+    {
+      role: "City Clerk",
+      title: "clerk",
+      priority: 3,
+      minTier: "town",
+      goalCategories: [
+        "knowledge",
+        "personal"
+      ]
+    , requiresInstKeyword: ['town hall', 'city hall', 'court']},
+    {
+      role: "Harbor Master",
+      title: "harbor_master",
+      priority: 6,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "power"
+      ],
+      requiresPort: !0
+    },
+     { role: 'Reeve',              title: 'overseer', priority: 6, minTier: 'hamlet',  goalCategories: ['justice','wealth'] },
+    { role: 'Herald/Town Crier',   title: 'clerk',    priority: 4, minTier: 'village', goalCategories: ['knowledge','personal'] },
+    { role: 'Notary/Scrivener',    title: 'clerk',    priority: 5, minTier: 'town',    goalCategories: ['knowledge','wealth'] },
+    { role: 'Customs Inspector',   title: 'overseer', priority: 5, minTier: 'town',    goalCategories: ['justice','wealth'] , requiresInstKeyword: ['customs', 'harbour', 'harbor', 'dock', 'assay']},
+    { role: 'Prison Warden',       title: 'warden',   priority: 5, minTier: 'city',    goalCategories: ['justice','power'] , requiresInstKeyword: ['prison', 'stocks', 'workhouse']},
+    { role: 'Royal Envoy',         title: 'advisor',  priority: 7, minTier: 'city',    goalCategories: ['power','knowledge'] , requiresInstKeyword: ['palace', 'royal seat', "noble governor", "lord's"]},
+    { role: 'Alderman',            title: 'council',  priority: 5, minTier: 'town',    goalCategories: ['wealth','justice'] },
+  ],
+  religious: [
+    {
+      role: "High Priest",
+      title: "priest",
+      priority: 9,
+      minTier: "village",
+      goalCategories: [
+        "spiritual",
+        "power"
+      ]
+    },
+    {
+      role: "Abbot/Abbess",
+      title: "priest",
+      priority: 8,
+      minTier: "town",
+      goalCategories: [
+        "spiritual",
+        "knowledge"
+      ]
+    , requiresInstKeyword: ['monastery', 'friary', 'monastic']},
+    {
+      role: "Inquisitor",
+      title: "inquisitor",
+      priority: 7,
+      minTier: "city",
+      goalCategories: [
+        "spiritual",
+        "justice"
+      ]
+    , requiresInstKeyword: ['monastery', 'cathedral', 'friary']},
+    {
+      role: "Archbishop/Patriarch",
+      title: "priest",
+      priority: 10,
+      minTier: "metropolis",
+      goalCategories: [
+        "power",
+        "religion"
+      ]
+    , requiresInstKeyword: ['cathedral', 'great cathedral', 'parish churches']},
+    {
+      role: "Templar Commander",
+      title: "templar",
+      priority: 7,
+      minTier: "city",
+      goalCategories: [
+        "spiritual",
+        "protection"
+      ]
+    , requiresInstKeyword: ['barracks', 'garrison', 'monastery', 'cathedral']},
+    {
+      role: "Parish Priest",
+      title: "priest",
+      priority: 6,
+      minTier: "hamlet",
+      goalCategories: [
+        "spiritual",
+        "personal"
+      ]
+    },
+    {
+      role: "Monastery Archivist",
+      title: "clerk",
+      priority: 4,
+      minTier: "town",
+      goalCategories: [
+        "knowledge",
+        "spiritual"
+      ]
+    , requiresInstKeyword: ['monastery', 'friary', 'great library']},
+     { role: 'Shrine Keeper',       title: 'priest',   priority: 5, minTier: 'thorp',   goalCategories: ['spiritual','personal'] , requiresInstKeyword: ['shrine', 'wayside', 'temple', 'church']},
+    { role: 'Wandering Friar',     title: 'priest',   priority: 5, minTier: 'hamlet',  goalCategories: ['spiritual','personal'] },
+    { role: 'Temple Healer',       title: 'healer',   priority: 6, minTier: 'village', goalCategories: ['spiritual','protection'] , requiresInstKeyword: ['hospital', 'church', 'monastery', 'shrine']},
+    { role: 'Deacon/Curate',       title: 'priest',   priority: 4, minTier: 'hamlet',  goalCategories: ['spiritual','personal'] , requiresInstKeyword: ['church', 'parish', 'cathedral', 'monastery']},
+    { role: 'Chaplain',            title: 'priest',   priority: 5, minTier: 'village', goalCategories: ['spiritual','protection'] , requiresInstKeyword: ['barracks', 'garrison', 'church', 'monastery', "noble governor", 'palace']},
+    { role: 'Prophet/Seer',        title: 'priest',   priority: 7, minTier: 'town',    goalCategories: ['spiritual','knowledge'] },
+    { role: 'Head of the Faithful',title: 'priest',   priority: 8, minTier: 'city',    goalCategories: ['power','spiritual'] , requiresInstKeyword: ['cathedral', 'monastery', 'great cathedral', 'parish churches']},
+    { role: 'Exorcist',            title: 'inquisitor',priority:6, minTier: 'town',    goalCategories: ['spiritual','justice'] , requiresInstKeyword: ['monastery', 'cathedral', 'friary']},
+  ],
+  noble: [
+    { role: 'Lord/Lady of the Manor', title: 'noble', priority: 8, minTier: 'village',    goalCategories: ['power','wealth'] },
+    { role: 'Baron/Baroness',         title: 'noble', priority: 9, minTier: 'town',       goalCategories: ['power','wealth'] },
+    { role: 'Court Advisor',          title: 'advisor',priority:7, minTier: 'town',       goalCategories: ['power','knowledge'] },
+    { role: 'House Steward',          title: 'steward',priority:6, minTier: 'village',    goalCategories: ['wealth','personal'] },
+    { role: 'Noble Heir',             title: 'noble', priority: 5, minTier: 'hamlet',     goalCategories: ['personal','power'] },
+    { role: 'Land Agent',             title: 'agent', priority: 5, minTier: 'village',    goalCategories: ['wealth','personal'] },
+    { role: 'Knight/Dame',            title: 'knight',priority: 7, minTier: 'village',    goalCategories: ['protection','personal'] },
+    { role: 'Duke/Duchess',           title: 'noble', priority:10, minTier: 'metropolis', goalCategories: ['power','wealth'] , requiresInstKeyword: ['palace', 'royal seat', "noble governor", "government complex"]},
+    { role: 'Royal Chamberlain',      title: 'noble', priority: 8, minTier: 'city',       goalCategories: ['power','personal'] , requiresInstKeyword: ['palace', 'royal seat', "government complex"]},
+  ],
+  crafts: [
+    { role: 'Master Blacksmith',         title: 'master',  priority: 7, minTier: 'hamlet',  goalCategories: ['wealth','personal'] },
+    { role: 'Master Carpenter',          title: 'master',  priority: 6, minTier: 'hamlet',  goalCategories: ['wealth','personal'] },
+    { role: 'Master Weaver',             title: 'master',  priority: 6, minTier: 'village', goalCategories: ['wealth','personal'] },
+    { role: 'Master Tanner',             title: 'master',  priority: 5, minTier: 'village', goalCategories: ['wealth','personal'] },
+    { role: 'Head Brewer',               title: 'guild',   priority: 5, minTier: 'hamlet',  goalCategories: ['wealth','personal'] },
+    { role: 'Guild Warden',              title: 'guild',   priority: 7, minTier: 'town',    goalCategories: ['power','wealth'], requiresGuild: true },
+    { role: 'Journeyman Overseer',       title: 'overseer',priority: 5, minTier: 'town',    goalCategories: ['wealth','personal'], requiresGuild: true },
+    { role: 'Craft Guild Representative',title: 'guild',   priority: 6, minTier: 'city',    goalCategories: ['power','wealth'], requiresGuild: true },
+    { role: 'Master Potter',             title: 'master',  priority: 4, minTier: 'village', goalCategories: ['wealth','personal'] },
+    { role: 'Master Glassblower',        title: 'master',  priority: 5, minTier: 'town',    goalCategories: ['wealth','personal'] },
+  ],
+  military: [
+    {
+      role: "Guard Captain",
+      title: "guard",
+      priority: 8,
+      minTier: "village",
+      goalCategories: [
+        "protection",
+        "justice"
+      ]
+    },
+    {
+      role: "Garrison Commander",
+      title: "guard",
+      priority: 8,
+      minTier: "town",
+      goalCategories: [
+        "military",
+        "power"
+      ]
+    },
+    {
+      role: "City Watch Chief",
+      title: "guard",
+      priority: 8,
+      minTier: "city",
+      goalCategories: [
+        "protection",
+        "justice"
+      ]
+    },
+    {
+      role: "Mercenary Captain",
+      title: "captain",
+      priority: 6,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "power"
+      ]
+    , requiresInstKeyword: ['mercenary', 'free company', 'charter', 'hireling']},
+    {
+      role: "Master of Arms",
+      title: "master",
+      priority: 6,
+      minTier: "city",
+      goalCategories: [
+        "protection",
+        "personal"
+      ]
+    , requiresInstKeyword: ['barracks', 'garrison', 'citadel']},
+    {
+      role: "Military Quartermaster",
+      title: "overseer",
+      priority: 5,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "military"
+      ]
+    },
+     { role: 'Scout/Ranger',        title: 'guard',    priority: 6, minTier: 'hamlet',  goalCategories: ['protection','personal'] },
+    { role: 'Siege Engineer',      title: 'master',   priority: 6, minTier: 'city',    goalCategories: ['military','knowledge'] , requiresInstKeyword: ['wall', 'citadel', 'fortif', 'barracks', 'garrison']},
+    { role: 'Border Warden',       title: 'warden',   priority: 6, minTier: 'town',    goalCategories: ['protection','justice'] },
+    { role: 'Veteran Soldier',     title: 'guard',    priority: 5, minTier: 'hamlet',  goalCategories: ['personal','protection'] },
+    { role: 'Cavalry Commander',   title: 'captain',  priority: 7, minTier: 'city',    goalCategories: ['military','power'] , requiresInstKeyword: ['stable', 'barracks', 'garrison', 'knight']},
+    { role: 'Armourer',            title: 'master',   priority: 5, minTier: 'town',    goalCategories: ['wealth','military'] , requiresInstKeyword: ['blacksmith', 'smith', 'metalwork', 'specialized metal']},
+    { role: 'Naval Commander',     title: 'captain',  priority: 8, minTier: 'city',    goalCategories: ['military','power'], requiresPort: true },
+  ],
+  economy: [
+    {
+      role: "Wealthiest Merchant",
+      title: "merchant",
+      priority: 8,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "power"
+      ]
+    },
+    {
+      role: "Guild Master",
+      title: "guild",
+      priority: 8,
+      minTier: "village",
+      goalCategories: [
+        "power",
+        "wealth"
+      ],
+      requiresGuild: !0
+    },
+    {
+      role: "Master Craftsman",
+      title: "master",
+      priority: 6,
+      minTier: "village",
+      goalCategories: [
+        "wealth",
+        "personal"
+      ]
+    },
+    {
+      role: "Moneylender",
+      title: "banker",
+      priority: 7,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "power"
+      ]
+    , requiresInstKeyword: ['money', 'bank', 'pawnbroker', 'exchange', 'credit']},
+    {
+      role: "Market Overseer",
+      title: "overseer",
+      priority: 5,
+      minTier: "village",
+      goalCategories: [
+        "wealth",
+        "justice"
+      ]
+    },
+    {
+      role: "Trade Factor",
+      title: "merchant",
+      priority: 5,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "knowledge"
+      ]
+    },
+    {
+      role: "Master Shipwright",
+      title: "master",
+      priority: 5,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "personal"
+      ],
+      requiresPort: !0
+    },
+     { role: 'Traveling Merchant',  title: 'merchant', priority: 5, minTier: 'thorp',   goalCategories: ['wealth','personal'] },
+    { role: 'Ship Captain',        title: 'captain',  priority: 7, minTier: 'town',    goalCategories: ['wealth','personal'], requiresPort: true },
+    { role: 'Warehouse Master',    title: 'overseer', priority: 5, minTier: 'town',    goalCategories: ['wealth','personal'] , requiresInstKeyword: ['warehouse', 'granary', 'storage']},
+    { role: 'Grain Factor',        title: 'merchant', priority: 6, minTier: 'village', goalCategories: ['wealth','protection'] , requiresInstKeyword: ['granary', 'grain', 'mill', 'market']},
+    { role: 'Auctioneer',          title: 'merchant', priority: 5, minTier: 'town',    goalCategories: ['wealth','knowledge'] },
+    { role: 'Caravan Master',      title: 'merchant', priority: 6, minTier: 'village', goalCategories: ['wealth','personal'] , requiresInstKeyword: ['caravan', 'coaching', 'stable', 'waystation']},
+    { role: 'Banking Agent',       title: 'banker',   priority: 6, minTier: 'city',    goalCategories: ['wealth','power'] , requiresInstKeyword: ['bank', 'banking', 'money changer', 'mint', 'assay']},
+  ],
+  criminal: [
+    {
+      role: "Local Fence",
+      title: "fence",
+      priority: 7,
+      minTier: "thorp",
+      goalCategories: [
+        "wealth",
+        "personal"
+      ]
+    },
+    {
+      role: "Bandit Contact",
+      title: "contact",
+      priority: 6,
+      minTier: "thorp",
+      goalCategories: [
+        "protection",
+        "wealth"
+      ]
+    },
+    {
+      role: "Smuggler",
+      title: "smuggler",
+      priority: 6,
+      minTier: "hamlet",
+      goalCategories: [
+        "wealth",
+        "personal"
+      ]
+    },
+    {
+      role: "Thieves' Guild Master",
+      title: "guild_master",
+      priority: 8,
+      minTier: "town",
+      goalCategories: [
+        "power",
+        "wealth"
+      ]
+    },
+    {
+      role: "Black Market Fence",
+      title: "fence",
+      priority: 6,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "knowledge"
+      ]
+    },
+    {
+      role: "Smuggler Chief",
+      title: "smuggler",
+      priority: 6,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "personal"
+      ]
+    },
+    {
+      role: "Crime Lord",
+      title: "lord",
+      priority: 9,
+      minTier: "city",
+      goalCategories: [
+        "power",
+        "wealth"
+      ]
+    },
+    {
+      role: "Shadow Council Leader",
+      title: "lord",
+      priority: 10,
+      minTier: "metropolis",
+      goalCategories: [
+        "wealth",
+        "power"
+      ]
+    },
+    {
+      role: "Assassin Guildmaster",
+      title: "master",
+      priority: 7,
+      minTier: "city",
+      goalCategories: [
+        "power",
+        "wealth"
+      ]
+    },
+    {
+      role: "Corrupt Official",
+      title: "overseer",
+      priority: 5,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "power"
+      ]
+    },
+     { role: 'Cutpurse/Pickpocket', title: 'fence',    priority: 4, minTier: 'thorp',   goalCategories: ['wealth','personal'] },
+    { role: 'Racketeer',           title: 'contact',  priority: 6, minTier: 'town',    goalCategories: ['wealth','power'] },
+    { role: 'Spy/Informant',       title: 'contact',  priority: 6, minTier: 'village', goalCategories: ['wealth','personal'] },
+    { role: 'Counterfeiter',       title: 'fence',    priority: 6, minTier: 'town',    goalCategories: ['wealth','knowledge'] , requiresInstKeyword: ['bank', 'mint', 'money', 'assay', 'banking']},
+    { role: 'Gang Leader',         title: 'lord',     priority: 7, minTier: 'town',    goalCategories: ['power','wealth'] },
+    { role: 'Underground Broker',  title: 'merchant', priority: 6, minTier: 'city',    goalCategories: ['wealth','knowledge'] },
+  ],
+  magic: [
+    {
+      role: "Tower Wizard",
+      title: "wizard",
+      priority: 8,
+      minTier: "city",
+      goalCategories: [
+        "knowledge",
+        "power"
+      ]
+    , requiresInstKeyword: ["wizard's tower", 'wizard']},
+    {
+      role: "Guild Archmage",
+      title: "archmage",
+      priority: 9,
+      minTier: "city",
+      goalCategories: [
+        "knowledge",
+        "power"
+      ]
+    },
+    {
+      role: "Grand Magister",
+      title: "archmage",
+      priority: 10,
+      minTier: "metropolis",
+      goalCategories: [
+        "power",
+        "knowledge"
+      ]
+    , requiresInstKeyword: ['academy', "mages' district", "mages' guild", 'great library']},
+    {
+      role: "Court Sorcerer",
+      title: "sorcerer",
+      priority: 7,
+      minTier: "town",
+      goalCategories: [
+        "knowledge",
+        "personal"
+      ]
+    , requiresInstKeyword: ['wizard', 'mage', 'alchemist', 'enchant']},
+    {
+      role: "Alchemist",
+      title: "alchemist",
+      priority: 6,
+      minTier: "town",
+      goalCategories: [
+        "knowledge",
+        "wealth"
+      ]
+    , requiresInstKeyword: ['alchemist', 'alchemy']},
+    {
+      role: "Hedge Wizard",
+      title: "wizard",
+      priority: 5,
+      minTier: "village",
+      goalCategories: [
+        "knowledge",
+        "personal"
+      ]
+    },
+    {
+      role: "Arcane Archivist",
+      title: "clerk",
+      priority: 4,
+      minTier: "city",
+      goalCategories: [
+        "knowledge",
+        "spiritual"
+      ]
+    , requiresInstKeyword: ['great library', "mages' guild", 'academy', "mages' district"]},
+     { role: 'Diviner/Seer',        title: 'wizard',   priority: 5, minTier: 'village', goalCategories: ['knowledge','wealth'] },
+    { role: 'Runesmith',           title: 'master',   priority: 6, minTier: 'town',    goalCategories: ['knowledge','wealth'] },
+    { role: 'Enchanter',           title: 'wizard',   priority: 6, minTier: 'town',    goalCategories: ['knowledge','wealth'] , requiresInstKeyword: ['enchant']},
+    { role: 'Conjurer',            title: 'wizard',   priority: 5, minTier: 'village', goalCategories: ['knowledge','personal'] },
+    { role: 'Druid Elder',         title: 'druid',    priority: 7, minTier: 'village', goalCategories: ['spiritual','protection'] , requiresInstKeyword: ['druid', 'elder grove', "warden's lodge"]},
+    { role: 'Warlock/Pact-Bound',  title: 'sorcerer', priority: 6, minTier: 'town',    goalCategories: ['power','personal'] },
+    { role: 'Artificer',           title: 'master',   priority: 6, minTier: 'city',    goalCategories: ['knowledge','wealth'] , requiresInstKeyword: ['arcane', 'mage', 'enchant', 'golem', 'academy']},
+    { role: 'Apprentice Mage',     title: 'wizard',   priority: 4, minTier: 'town',    goalCategories: ['knowledge','personal'] },
+  ],
+  other: [
+    {
+      role: "Tavern Owner",
+      title: "owner",
+      priority: 5,
+      minTier: "hamlet",
+      goalCategories: [
+        "wealth",
+        "knowledge"
+      ]
+    },
+    {
+      role: "Sage/Scholar",
+      title: "sage",
+      priority: 6,
+      minTier: "town",
+      goalCategories: [
+        "knowledge",
+        "personal"
+      ]
+    },
+    {
+      role: "Healer",
+      title: "healer",
+      priority: 7,
+      minTier: "village",
+      goalCategories: [
+        "protection",
+        "spiritual"
+      ]
+    },
+    {
+      role: "Master Builder",
+      title: "master",
+      priority: 6,
+      minTier: "town",
+      goalCategories: [
+        "wealth",
+        "personal"
+      ]
+    },
+    {
+      role: "Bard/Chronicler",
+      title: "sage",
+      priority: 4,
+      minTier: "town",
+      goalCategories: [
+        "knowledge",
+        "personal"
+      ]
+    },
+    {
+      role: "Retired Adventurer",
+      title: "owner",
+      priority: 4,
+      minTier: "village",
+      goalCategories: [
+        "personal",
+        "protection"
+      ]
+    },
+    {
+      role: "Miller",
+      title: "owner",
+      category: "economy",
+      priority: 8,
+      minTier: "thorp",
+      goalCategories: [
+        "wealth",
+        "personal"
+      ]
+    },
+    {
+      role: "Elder",
+      title: "elder",
+      category: "government",
+      priority: 7,
+      minTier: "thorp",
+      goalCategories: [
+        "protection",
+        "personal"
+      ]
+    },
+    {
+      role: "Hedge Witch",
+      title: "healer",
+      priority: 5,
+      minTier: "thorp",
+      goalCategories: [
+        "knowledge",
+        "spiritual"
+      ]
+    },
+    {
+      role: "Innkeeper",
+      title: "owner",
+      category: "economy",
+      priority: 6,
+      minTier: "thorp",
+      goalCategories: [
+        "wealth",
+        "knowledge"
+      ]
+    },
+    {
+      role: "Wandering Peddler",
+      title: "merchant",
+      priority: 4,
+      minTier: "thorp",
+      goalCategories: [
+        "wealth",
+        "knowledge"
+      ]
+    },
+    {
+      role: "Shepherd",
+      title: "owner",
+      priority: 3,
+      minTier: "thorp",
+      goalCategories: [
+        "personal",
+        "protection"
+      ]
+    },
+    {
+      role: "Blacksmith",
+      title: "master",
+      priority: 6,
+      minTier: "thorp",
+      goalCategories: [
+        "wealth",
+        "personal"
+      ]
+    },
+    {
+      role: "Widowed Farmer",
+      title: "elder",
+      priority: 4,
+      minTier: "thorp",
+      goalCategories: [
+        "personal",
+        "protection"
+      ]
+    },
+    {
+      role: "Wounded Soldier",
+      title: "guard",
+      priority: 4,
+      minTier: "thorp",
+      goalCategories: [
+        "personal",
+        "protection"
+      ]
+    },
+    {
+      role: "Village Priest",
+      title: "priest",
+      priority: 5,
+      minTier: "thorp",
+      goalCategories: ["spiritual","personal"]
+    },
+    { role: 'Midwife',              title: 'healer',   priority: 5, minTier: 'thorp',   goalCategories: ['protection','personal'] },
+    { role: 'Apothecary',           title: 'healer',   priority: 6, minTier: 'hamlet',  goalCategories: ['knowledge','wealth'] },
+    { role: 'Cartographer',         title: 'clerk',    priority: 5, minTier: 'town',    goalCategories: ['knowledge','wealth'] },
+    { role: 'Rat Catcher',          title: 'agent',    priority: 3, minTier: 'hamlet',  goalCategories: ['wealth','personal'] },
+    { role: 'Gravedigger',          title: 'agent',    priority: 3, minTier: 'hamlet',  goalCategories: ['personal','spiritual'] },
+    { role: 'Fisherman',            title: 'agent',    priority: 4, minTier: 'thorp',   goalCategories: ['wealth','personal'] },
+    { role: 'Debt-Ridden Noble',    title: 'noble',    priority: 4, minTier: 'town',    goalCategories: ['wealth','personal'] },
+    { role: 'Disgraced Official',   title: 'overseer', priority: 4, minTier: 'town',    goalCategories: ['personal','justice'] },
+    { role: 'Street Preacher',      title: 'priest',   priority: 4, minTier: 'hamlet',  goalCategories: ['spiritual','personal'] },
+    { role: 'Mercenary-for-Hire',   title: 'guard',    priority: 4, minTier: 'hamlet',  goalCategories: ['wealth','personal'] },
+    { role: 'Dockworker/Stevedore', title: 'agent',    priority: 3, minTier: 'town',    goalCategories: ['wealth','personal'], requiresPort: true },
+    { role: 'Travelling Performer', title: 'bard',     priority: 4, minTier: 'hamlet',  goalCategories: ['personal','wealth'] },
+    { role: 'Debt Collector',       title: 'agent',    priority: 5, minTier: 'town',    goalCategories: ['wealth','justice'] },
+    { role: 'Escaped Slave/Serf',   title: 'agent',    priority: 4, minTier: 'hamlet',  goalCategories: ['personal','protection'] },
+  ]
+};
+
+
+// getUpgradeOpportunities
+
+
+// ── History generator data (extracted from historyGenerator.js) ──────────────
+
+export const AGE_BY_TIER = {
+  thorp:      { min: 15,  max: 300 },
+  hamlet:     { min: 30,  max: 120 },
+  village:    { min: 30,  max: 250 },
+  town:       { min: 50,  max: 300 },
+  city:       { min: 100, max: 500 },
+  metropolis: { min: 200, max: 800 },
+}
+
+export const HISTORICAL_EVENTS_DATA = [
+  {
+    type: 'succession_crisis',
+    description: 'The ruler of the time was aging or ill, and potential heirs jockeyed for position',
+    factions: ['Legitimate heir', 'Popular candidate', 'Power behind throne'],
+    plotHooks: [
+      "A would-be heir approaches outsiders to investigate a rival's past",
+      'The ailing ruler wants a final errand completed before naming a successor',
+      'Someone is poisoning the ruler slowly — and the physician knows',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'economic_disparity',
+    description: 'Growing wealth gap between merchant class and common laborers creates resentment',
+    factions: ['Wealthy merchants', 'Poor workers', 'Moderate reformers'],
+    plotHooks: [
+      'A reformer has been found dead — suicide or silenced?',
+      "A hidden ledger documenting wage theft is circulating in the workers' quarter",
+      'A merchant is funding both the reform movement and the suppression of it',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'religious_tension',
+    description: 'Different faiths or interpretations competed for influence and converts',
+    factions: ['Orthodox believers', 'Reformists', 'Secular faction'],
+    plotHooks: [
+      'A relic claimed by both sides has resurfaced in a private collection',
+      'The reformist leader is being blackmailed into silence',
+      'Someone is staging miracles for one side — the question is who benefits',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'guild_conflict',
+    description: 'Rival guilds competed for market share and political influence',
+    factions: ['Established guilds', 'Upstart guilds', 'Non-guild workers'],
+    plotHooks: [
+      "A guild master's records have gone missing ahead of an audit",
+      'A journeyman denied mastership has proof the exam was rigged',
+      'Someone is sabotaging both guilds to destabilize the market for a third party',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'external_threat',
+    description: 'News of approaching danger divided the community on how to respond',
+    factions: ['Prepare for war', 'Seek diplomacy', 'Flee/hide'],
+    plotHooks: [
+      'The threat is being exaggerated by someone who profits from wartime contracts',
+      'A diplomatic channel exists that the war faction is suppressing',
+      'The threat has an agent already inside the settlement',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'resource_scarcity',
+    description: 'A critical resource became scarce, causing hoarding and price gouging',
+    factions: ['Hoarders', 'Desperate poor', 'Price regulators'],
+    plotHooks: [
+      'A warehouse full of the resource is being held off the market deliberately',
+      'The scarcity was engineered — someone destroyed the competing supply route',
+      'An alternative source exists but the information is being suppressed',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'crime_wave',
+    description: 'A surge in criminal activity overwhelmed the authorities; vigilantes began to form',
+    factions: ['Official guards', 'Vigilantes', 'Criminal organisations'],
+    plotHooks: [
+      'The crime wave is coordinated — someone is directing it to create a pretext',
+      'A guard captain is on the payroll of the criminal network',
+      'The vigilantes have begun targeting innocents based on bad information',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'magical_controversy',
+    description: 'Debate over the role and regulation of magic divided the community',
+    factions: ['Pro-magic', 'Anti-magic', 'Regulation advocates'],
+    plotHooks: [
+      'A recent magical accident was covered up and the victims silenced',
+      'An anti-magic agitator is secretly using magic themselves',
+      'Something was sealed away using magic years ago and the seal is weakening',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'generational_divide',
+    description: 'Old ways vs new ideas creates conflict between age groups',
+    factions: ['Traditionalists', 'Progressives', 'Pragmatic middle'],
+    plotHooks: [
+      "A traditional practice conceals something the elders don't want examined",
+      "A young reformer has uncovered records that undermine the old guard's legitimacy",
+      "The 'new idea' being promoted was actually tried once before — and failed badly",
+    ],
+    severity: ['minor'],
+  },
+  {
+    type: 'corruption_scandal',
+    description: 'Evidence of official corruption has surfaced but powerful figures resist investigation',
+    factions: ['Corrupt officials', 'Reformers', 'Complicit beneficiaries'],
+    plotHooks: [
+      'The investigator who uncovered the corruption has received a death threat',
+      "A key witness can be found — but won't speak without protection",
+      'The corruption goes higher than anyone yet suspects; the reformers are being used',
+    ],
+    severity: ['major'],
+  },
+  {
+    type: 'outside_debt',
+    description: 'The settlement owed a significant debt to an external power that was preparing to collect',
+    factions: ['Debtors who took the loans', 'Those who will bear the cost', 'Those who profited and escaped'],
+    plotHooks: [
+      'The original loan documents contain a clause that was never disclosed publicly',
+      "A creditor's agent is in town conducting a quiet assessment before enforcement",
+      'The debt could be voided — if someone can prove it was obtained through fraud',
+    ],
+    severity: ['major'],
+  },
+  {
+    type: 'occupation_legacy',
+    description: 'A previous occupation ended, but collaborators and resisters continued to live side by side, their history unresolved',
+    factions: ['Former collaborators', 'Former resistance', 'New generation wanting to move on'],
+    plotHooks: [
+      "A collaborator family's wartime fortune was built on betrayals that are finally surfacing",
+      'Resistance fighters kept records that would expose people still in power',
+      'A former occupier officer has returned under a false identity',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'infiltration_fear',
+    description: 'Rumours — some true — of enemy agents within the settlement caused suspicion and denunciations',
+    factions: ['Security hardliners', 'Civil libertarians', 'Actual agents exploiting the confusion'],
+    plotHooks: [
+      'One of the loudest voices warning about infiltration is themselves an agent',
+      'An innocent person has been identified as a spy and is about to be executed',
+      "The agents' handler is someone in a position of trust — and the PCs have already met them",
+    ],
+    severity: ['major'],
+  },
+  {
+    type: 'disputed_land',
+    description: 'A land claim from an old charter contradicts current occupation, with both sides legally plausible',
+    factions: ['Original claimants', 'Current occupants', 'Legal class profiting from ambiguity'],
+    plotHooks: [
+      'The original charter is held in a private archive whose owner has gone missing',
+      'Something of value was found on the disputed land — which is why the claim is suddenly being pressed',
+      "A forged document is about to be introduced as evidence; someone knows it's fake",
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'population_friction',
+    description: 'A recently arrived group and the established population fell into sustained, low-level conflict',
+    factions: ['Old families', 'Newcomers', 'Merchants who benefit from cheap newcomer labour'],
+    plotHooks: [
+      'The newcomers fled something — and that something has sent agents after them',
+      "A series of 'accidents' targeting newcomers is being attributed to chance",
+      'An old family is deliberately inflaming tensions to drive out a newcomer who knows something',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'leadership_vacuum',
+    description: 'The last strong leader died or left, and no one has yet consolidated their position',
+    factions: ['Multiple weak claimants', 'Pragmatists who want stability', 'Those who prefer the vacuum'],
+    plotHooks: [
+      "The departed leader left a sealed document designating a successor — and someone wants it destroyed before it's read",
+      'One claimant has manufactured evidence of a mandate they actually lack',
+      'The vacuum is being maintained deliberately by an outside power that benefits from the instability',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+]
+
+export const EVENT_TYPE_NAMES = {
+  succession_crisis:        'The Succession Crisis',
+  economic_disparity:       'The Economic Divide',
+  outside_debt:             'The Debt Crisis',
+  resource_scarcity:        'The Shortage',
+  guild_conflict:           'The Guild War',
+  corruption_scandal:       'The Scandal',
+  infiltration_fear:        'The Occupation',
+  leadership_vacuum:        'The Interregnum',
+  occupation_legacy:        'The Occupation',
+  disputed_land:            'The Land Dispute',
+  population_friction:      'The Migration',
+  generational_divide:      'The Schism',
+  external_threat:          'The Siege',
+  religious_tension:        'The Religious Conflict',
+  magical_controversy:      'The Arcane Incident',
+  exile_return:             'The Return',
+}

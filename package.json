@@ -1,0 +1,25 @@
+{
+  "name": "settlement-generator",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.103.0",
+    "immer": "^11.1.4",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^0.383.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "seedrandom": "^3.0.5",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19",
+    "vite": "^5.4.21"
+  }
+}
