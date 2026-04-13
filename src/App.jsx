@@ -107,7 +107,7 @@ export default function App() {
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
               <MapIcon size={24} color={GOLD} />
               <h1 style={{ margin: 0, fontSize: FS.h1, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
-                Medieval Settlement
+                SettlementForge
               </h1>
             </div>
 
@@ -210,7 +210,7 @@ export default function App() {
           alignItems: 'center',
           gap: SP.lg,
         }}>
-          <span>&copy; 2026 Medieval Settlement Generator</span>
+          <span>&copy; 2026 SettlementForge</span>
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
           <span>All rights reserved</span>
         </footer>

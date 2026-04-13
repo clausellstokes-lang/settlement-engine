@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Settlement Engine integrates with [Azgaar's Fantasy Map Generator](https://github.com/Azgaar/Fantasy-Map-Generator) via an iframe + postMessage bridge. The map provides geography (terrain, rivers, borders, cultures); your settlements provide depth (institutions, factions, NPCs, supply chains).
+The SettlementForge integrates with [Azgaar's Fantasy Map Generator](https://github.com/Azgaar/Fantasy-Map-Generator) via an iframe + postMessage bridge. The map provides geography (terrain, rivers, borders, cultures); your settlements provide depth (institutions, factions, NPCs, supply chains).
 
 ## Setup Steps
 
@@ -65,7 +65,7 @@ npx netlify deploy --prod --dir .
 # Or any static host — it's just HTML/JS/CSS
 ```
 
-### 5. Configure the Settlement Engine
+### 5. Configure the SettlementForge
 
 Set the `VITE_FMG_URL` environment variable to your deployed fork's URL:
 
@@ -77,7 +77,7 @@ Restart the dev server (`npm run dev`) or rebuild (`npm run build`).
 
 ## How It Works
 
-### Messages: FMG → Settlement Engine
+### Messages: FMG → SettlementForge
 
 | Message Type | Payload | When |
 |---|---|---|
@@ -107,7 +107,7 @@ Restart the dev server (`npm run dev`) or rebuild (`npm run build`).
 }
 ```
 
-### Messages: Settlement Engine → FMG
+### Messages: SettlementForge → FMG
 
 | Message Type | Payload | Effect |
 |---|---|---|
@@ -131,6 +131,6 @@ Nodes are circles (filled = producer, outline = consumer). Edges are dashed line
 
 **Map doesn't load:** Check browser console for CORS or CSP errors. Ensure iframe headers allow embedding.
 
-**No burgs appear:** The bridge waits for `pack.cells` to exist. If FMG loads but no burg list is sent, the bridge may not detect the load. Check the console for `[Settlement Engine Bridge]` messages.
+**No burgs appear:** The bridge waits for `pack.cells` to exist. If FMG loads but no burg list is sent, the bridge may not detect the load. Check the console for `[SettlementForge Bridge]` messages.
 
 **Clicks don't register:** The bridge listens for clicks on `#burgLabels` and `#burgIcons` SVG groups. If Azgaar changes these IDs in a future version, the selectors in `fmg-bridge.js` will need updating.

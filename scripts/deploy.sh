@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Settlement Engine — Full Deployment Setup
+# SettlementForge — Full Deployment Setup
 #
 # This script provisions the complete backend:
 #   1. Supabase project creation + migration
@@ -36,7 +36,7 @@ ENV_FILE="$PROJECT_DIR/.env"
 
 echo ""
 echo "═══════════════════════════════════════════════════════════════"
-echo "  Settlement Engine — Deployment Setup"
+echo "  SettlementForge — Deployment Setup"
 echo "═══════════════════════════════════════════════════════════════"
 echo ""
 
@@ -67,8 +67,8 @@ echo ""
 read -rp "  Choice [1/2]: " PROJ_CHOICE
 
 if [[ "$PROJ_CHOICE" == "1" ]]; then
-  read -rp "  Project name [settlement-engine]: " PROJ_NAME
-  PROJ_NAME="${PROJ_NAME:-settlement-engine}"
+  read -rp "  Project name [settlementforge]: " PROJ_NAME
+  PROJ_NAME="${PROJ_NAME:-settlementforge}"
 
   read -rp "  Organization ID (from list above): " ORG_ID
   [[ -z "$ORG_ID" ]] && fail "Organization ID required"
@@ -184,7 +184,7 @@ PREMIUM=$(curl -s https://api.stripe.com/v1/prices \
   -d "unit_amount=499" \
   -d "currency=usd" \
   -d "recurring[interval]=month" \
-  -d "product_data[name]=Settlement Engine Premium" \
+  -d "product_data[name]=SettlementForge Premium" \
   -d "product_data[metadata][product]=premium" \
   | grep -o '"id": *"price_[^"]*"' | head -1 | cut -d'"' -f4)
 ok "Premium subscription: $PREMIUM"

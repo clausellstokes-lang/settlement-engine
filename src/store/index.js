@@ -45,7 +45,7 @@ export const useStore = create(
           ...createCreditsSlice(...a),
         })),
         {
-          name: 'settlement-engine',
+          name: 'settlementforge',
           partialize: (state) => ({
             // Persist only lightweight, user-owned data.
             // Never persist the massive generated settlement object.
@@ -60,7 +60,7 @@ export const useStore = create(
         },
       ),
     ),
-    { name: 'SettlementEngine' },
+    { name: 'SettlementForge' },
   ),
 );
 

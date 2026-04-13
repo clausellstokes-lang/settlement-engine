@@ -1,14 +1,14 @@
 /**
- * Settlement Engine ↔ Azgaar FMG Bridge
+ * SettlementForge ↔ Azgaar FMG Bridge
  *
  * Inject this script into your Azgaar Fantasy Map Generator fork to enable
- * two-way communication with the Settlement Engine via postMessage.
+ * two-way communication with the SettlementForge via postMessage.
  *
  * Installation:
  *   1. Fork https://github.com/Azgaar/Fantasy-Map-Generator
  *   2. Add <script src="fmg-bridge.js"></script> before </body> in index.html
  *   3. Deploy the fork (Vercel, Netlify, or any static host)
- *   4. Set VITE_FMG_URL in your Settlement Engine .env to the fork's URL
+ *   4. Set VITE_FMG_URL in your SettlementForge .env to the fork's URL
  *
  * Protocol:
  *   FMG → Parent:
@@ -133,7 +133,7 @@
     });
   }
 
-  // ── Handle commands from Settlement Engine ──────────────────────────────────
+  // ── Handle commands from SettlementForge ──────────────────────────────────
   const overlayGroup = (() => {
     const svg = document.getElementById('viewbox');
     if (!svg) return null;
@@ -253,5 +253,5 @@
     window.addEventListener('load', checkReady);
   }
 
-  console.log('[Settlement Engine Bridge] Loaded — waiting for map generation...');
+  console.log('[SettlementForge Bridge] Loaded — waiting for map generation...');
 })();

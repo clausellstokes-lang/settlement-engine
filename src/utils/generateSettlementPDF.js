@@ -172,7 +172,7 @@ function masthead(d, name, section, sub='') {
 function footer(d, name, pageLabel) {
   rect(d, ML, BOT-5, CW, 5, INK);
   d.setFont('helvetica','normal'); d.setFontSize(6.5); st(d,[140,110,60]);
-  d.text(`${s(name)}  |  D&D Settlement Generator  |  ${pageLabel}`, ML+2, BOT-1.5);
+  d.text(`${s(name)}  |  SettlementForge  |  ${pageLabel}`, ML+2, BOT-1.5);
 }
 
 // ── Founding string helper ─────────────────────────────────────────────────────
