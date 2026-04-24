@@ -668,16 +668,35 @@ Return JSON: { "items": [{ "who": "<named party or parties>", "what": "<1 senten
       return { npcs, factions, institutions };
     },
     apply: (clone, r) => {
-      if (Array.isArray(r?.items)) {
-        clone.connectionsMap = r.items
-          .filter((x: any) => x && typeof x.from === 'string' && typeof x.to === 'string' && typeof x.nature === 'string')
-          .map((x: any) => ({
-            from:   x.from,
-            to:     x.to,
-            via:    typeof x.via === 'string' ? x.via : '',
-            nature: x.nature,
-          }));
-      }
+      // Defensive: Haiku sometimes wraps in `items`, sometimes returns the array
+      // directly, sometimes uses synonyms (`connections`, `edges`). Accept all.
+      const rawArr = Array.isArray(r)               ? r
+                   : Array.isArray(r?.items)         ? r.items
+                   : Array.isArray(r?.connections)   ? r.connections
+                   : Array.isArray(r?.edges)         ? r.edges
+                   : null;
+      if (!rawArr) return;
+      // Synonym-tolerant field extraction. `from/to/nature` are canonical.
+      const pickStr = (...vals: unknown[]) => {
+        for (const v of vals) if (typeof v === 'string' && v.length > 0) return v;
+        return '';
+      };
+      const normalized = rawArr
+        .map((x: any) => {
+          if (!x || typeof x !== 'object') return null;
+          const from   = pickStr(x.from, x.source, x.a, x.subject);
+          const to     = pickStr(x.to, x.target, x.b, x.object);
+          const nature = pickStr(x.nature, x.relationship, x.relation, x.kind, x.type);
+          if (!from || !to || !nature) return null;
+          return {
+            from,
+            to,
+            via:    pickStr(x.via, x.through, x.mediator),
+            nature,
+          };
+        })
+        .filter(Boolean);
+      if (normalized.length) clone.connectionsMap = normalized;
     },
     instruction: `Extract 4-8 CONNECTIONS between named entities in this settlement — NPC↔faction, NPC↔institution, faction↔institution, or faction↔faction.
 
@@ -685,7 +704,7 @@ ONLY use names that appear in the provided NPCs / factions / institutions lists.
 
 ${PRESERVATION_RULES}
 
-Return JSON: { "items": [{ "from": "<name>", "to": "<name>", "via": "<name or empty>", "nature": "<short phrase>" }, ...] }. No preamble, no markdown.`,
+Return JSON: { "items": [{ "from": "<name>", "to": "<name>", "via": "<name or empty>", "nature": "<short phrase>" }, ...] }. The top-level wrapper key MUST be exactly "items". No preamble, no markdown.`,
   },
 
   // ── 13. DM compass — ready-to-run guidance for the table ──
@@ -720,13 +739,40 @@ Return JSON: { "items": [{ "from": "<name>", "to": "<name>", "via": "<name or em
       return out;
     },
     apply: (clone, r) => {
-      const hooks = Array.isArray(r?.hooks)
-        ? r.hooks.filter((x: unknown) => typeof x === 'string' && x.length > 0).slice(0, 3)
-        : [];
-      const redFlags = Array.isArray(r?.redFlags)
-        ? r.redFlags.filter((x: unknown) => typeof x === 'string' && x.length > 0).slice(0, 2)
-        : [];
-      const twist = typeof r?.twist === 'string' ? r.twist : '';
+      // Defensive: this pass is the ONLY one with a flat schema (no `items`
+      // wrapper), so Haiku occasionally wraps it anyway. Look in the standard
+      // place first; if missing, peel one or two wrapper layers and look again.
+      // Also accept synonym keys (`adventureHooks`, `warnings`, `complication`).
+      const root = (r && typeof r === 'object' ? r : {}) as Record<string, unknown>;
+      const candidates: Array<Record<string, unknown>> = [root];
+      const items = (root as any).items;
+      if (items && typeof items === 'object' && !Array.isArray(items)) candidates.push(items);
+      const dmCompass = (root as any).dmCompass;
+      if (dmCompass && typeof dmCompass === 'object' && !Array.isArray(dmCompass)) candidates.push(dmCompass);
+
+      const pickArr = (key: string, ...synonyms: string[]) => {
+        for (const c of candidates) {
+          for (const k of [key, ...synonyms]) {
+            if (Array.isArray(c[k])) return c[k] as unknown[];
+          }
+        }
+        return null;
+      };
+      const pickStr = (key: string, ...synonyms: string[]) => {
+        for (const c of candidates) {
+          for (const k of [key, ...synonyms]) {
+            const v = c[k];
+            if (typeof v === 'string' && v.length > 0) return v;
+          }
+        }
+        return '';
+      };
+
+      const hooksRaw    = pickArr('hooks', 'adventureHooks', 'sessionHooks');
+      const redFlagsRaw = pickArr('redFlags', 'red_flags', 'warnings', 'cautions');
+      const hooks    = hooksRaw    ? hooksRaw.filter((x: unknown) => typeof x === 'string' && x.length > 0).slice(0, 3) as string[] : [];
+      const redFlags = redFlagsRaw ? redFlagsRaw.filter((x: unknown) => typeof x === 'string' && x.length > 0).slice(0, 2) as string[] : [];
+      const twist    = pickStr('twist', 'complication', 'wildcard');
       if (hooks.length || redFlags.length || twist) {
         clone.dmCompass = { hooks, redFlags, twist };
       }
@@ -741,7 +787,145 @@ ${HOUSE_STYLE}
 
 ${PRESERVATION_RULES}
 
-Return JSON: { "hooks": ["<hook 1>", "<hook 2>", "<hook 3>"], "redFlags": ["<flag 1>", "<flag 2>"], "twist": "<twist>" }. No preamble, no markdown.`,
+Return JSON with this EXACT top-level shape — three sibling keys, NO wrapper object, NO "items" key:
+{ "hooks": ["<hook 1>", "<hook 2>", "<hook 3>"], "redFlags": ["<flag 1>", "<flag 2>"], "twist": "<twist>" }
+No preamble, no markdown.`,
+  },
+
+  // ── 14. Tab notes — one short voice-line per functional tab ──
+  //   Replaces the global identity banner on tabs other than DM Summary /
+  //   Overview. Each note is 1-2 sentences grounded in named data so the
+  //   reader gets a contextual lens onto that aspect of the settlement
+  //   instead of re-reading the thesis on every tab.
+  tabNotes: {
+    snapshotPath: 'narrativeNotes',
+    max_tokens: 1400,
+    extract: (s) => {
+      // Compact digest: just enough specificity that Haiku can ground each
+      // note in a concrete name/fact rather than generic prose.
+      const stressArr = Array.isArray(s.stress) ? s.stress : (s.stress ? [s.stress] : []);
+      const topStress = stressArr.slice(0, 2).map((t: any) => ({
+        label: t?.label, summary: t?.summary,
+      })).filter((x: any) => x.label);
+      const factions = (s.powerStructure?.factions || []).slice(0, 4).map((f: any) => ({
+        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+      })).filter((x: any) => x.name);
+      const npcs = (s.npcs || []).slice(0, 4).map((n: any) => ({
+        name: n?.name, role: n?.role, faction: n?.factionAffiliation,
+      })).filter((x: any) => x.name);
+      const institutions = (s.institutions || []).slice(0, 5).map((i: any) => ({
+        name: i?.name, category: i?.category,
+      })).filter((x: any) => x.name);
+      const conflicts = (s.powerStructure?.conflicts || []).slice(0, 2).map((c: any) => ({
+        factions: c?.factions, issue: c?.issue,
+      })).filter((x: any) => x.issue);
+      const exports_ = (s.economicState?.primaryExports || []).slice(0, 4);
+      const imports_ = (s.economicState?.primaryImports || []).slice(0, 4);
+      const necessityImports = (s.economicState?.necessityImports || []).slice(0, 3);
+      const incomeSrc = (s.economicState?.incomeSources || []).slice(0, 3).map((x: any) => ({
+        source: x?.source, percentage: x?.percentage, criminal: !!x?.isCriminal,
+      })).filter((x: any) => x.source);
+      const histEvents = (s.history?.historicalEvents || []).slice(0, 3).map((e: any) => ({
+        type: e?.type, name: e?.name,
+      })).filter((x: any) => x.name);
+      const tensions = (s.history?.currentTensions || []).slice(0, 2).map((t: any) => ({
+        type: t?.type, severity: t?.severity,
+      })).filter((x: any) => x.type);
+      const resourceState = s.resourceAnalysis ? {
+        critical: s.resourceAnalysis.imports?.critical?.slice(0, 3),
+        local:    (s.localProduction || []).slice(0, 4),
+      } : undefined;
+      const out: Record<string, unknown> = {
+        name: s.name,
+        tier: s.tier,
+        prosperity:        s.economicState?.prosperity,
+        economicComplexity:s.economicState?.economicComplexity,
+        safetyLabel:       s.economicState?.safetyProfile?.safetyLabel,
+        viability:         s.economicViability?.summary,
+        defenseReadiness:  s.defenseAssessment?.readinessLabel || s.defense?.readinessLabel,
+        magicLabel:        s.magicProfile?.label || s.magic?.label,
+      };
+      if (topStress.length)        out.topStressors  = topStress;
+      if (factions.length)         out.factions      = factions;
+      if (npcs.length)             out.npcs          = npcs;
+      if (institutions.length)     out.institutions  = institutions;
+      if (conflicts.length)        out.conflicts     = conflicts;
+      if (exports_.length)         out.exports       = exports_;
+      if (imports_.length)         out.imports       = imports_;
+      if (necessityImports.length) out.necessityImports = necessityImports;
+      if (incomeSrc.length)        out.incomeSources = incomeSrc;
+      if (histEvents.length)       out.historicalEvents = histEvents;
+      if (tensions.length)         out.currentTensions  = tensions;
+      if (resourceState)           out.resourceState    = resourceState;
+      return out;
+    },
+    apply: (clone, r) => {
+      // Defensive: same lesson as dmCompass — flat schemas attract `items`
+      // wrapping. Peel the wrapper and accept either shape.
+      const root = (r && typeof r === 'object' ? r : {}) as Record<string, unknown>;
+      const candidates: Array<Record<string, unknown>> = [root];
+      const items = (root as any).items;
+      if (items && typeof items === 'object' && !Array.isArray(items)) candidates.push(items);
+      const nested = (root as any).narrativeNotes;
+      if (nested && typeof nested === 'object' && !Array.isArray(nested)) candidates.push(nested);
+
+      // Tab keys match the activeTab IDs in OutputContainer so the frontend
+      // can do narrativeNotes[activeTab] without remapping.
+      const TAB_KEYS = [
+        'economics', 'services', 'power', 'defense', 'npcs',
+        'history',   'resources', 'viability', 'plot_hooks',
+      ];
+      // Synonym map: model occasionally outputs camelCase or shortened keys.
+      const SYNONYMS: Record<string, string[]> = {
+        plot_hooks: ['plotHooks', 'hooks', 'plothooks'],
+      };
+      const result: Record<string, string> = {};
+      for (const tab of TAB_KEYS) {
+        const keys = [tab, ...(SYNONYMS[tab] || [])];
+        for (const c of candidates) {
+          let found: string | undefined;
+          for (const k of keys) {
+            const v = c[k];
+            if (typeof v === 'string' && v.trim().length > 0) {
+              found = v.trim();
+              break;
+            }
+          }
+          if (found) { result[tab] = found; break; }
+        }
+      }
+      if (Object.keys(result).length) clone.narrativeNotes = result;
+    },
+    instruction: `Write ONE short VOICE-NOTE per tab — 1-2 sentences each — that gives the DM a contextual lens onto this aspect of the settlement. These replace the identity banner on functional tabs, so each note must add information the identity statement wouldn't have given on its own.
+
+Each note MUST name something specific from the source data (a faction, NPC, stressor, trade good, institution, historical event). No generic phrasing. No re-stating the thesis. No mechanics language.
+
+Tabs to write for, with a one-line steer for each:
+- economics:  the economic mood at street level — what does prosperity (or scarcity) FEEL like here, who keeps the coin moving.
+- services:   what kind of service this town actually provides, who runs them, who's locked out.
+- power:      who really runs this place, and one tension that defines the politics.
+- defense:    the posture — fear, confidence, complacency — and who guards what.
+- npcs:       what unifies or divides the named cast, in one breath.
+- history:    how a specific past event still presses on the present.
+- resources:  what this terrain and town actually do with what they have, and what they can't make.
+- viability:  the honest answer to "will this place still be here in ten years?"
+- plot_hooks: the kind of story this town is set up to tell.
+
+${HOUSE_STYLE}
+
+Return JSON with this EXACT top-level shape — flat, NO wrapper, NO "items" key. The keys MUST be exactly as shown (note the underscore in "plot_hooks"):
+{
+  "economics":  "<1-2 sentences>",
+  "services":   "<1-2 sentences>",
+  "power":      "<1-2 sentences>",
+  "defense":    "<1-2 sentences>",
+  "npcs":       "<1-2 sentences>",
+  "history":    "<1-2 sentences>",
+  "resources":  "<1-2 sentences>",
+  "viability":  "<1-2 sentences>",
+  "plot_hooks": "<1-2 sentences>"
+}
+No preamble, no markdown.`,
   },
 };
 
@@ -800,16 +984,20 @@ CRITICAL: Return ONLY valid JSON matching the schema in the task. No markdown co
 // fall back to thesis-only (conservative).
 
 const PROGRESSION_AFFECTED_FIELDS: Record<string, Array<keyof typeof REFINEMENT_PASSES>> = {
-  addInstitution:    ['opening', 'factions', 'safety'],
-  removeInstitution: ['opening', 'factions', 'safety'],
-  addStressor:       ['stressors', 'opening', 'dmCompass', 'conflicts'],
-  removeStressor:    ['stressors', 'dmCompass'],
-  addTradeGood:      ['safety', 'identityMarkers'],
-  removeTradeGood:   ['safety'],
-  addResource:       ['safety'],
-  removeResource:    ['safety'],
-  setResourceState:  ['safety', 'stressors'],
-  setPrioritySlider: ['safety', 'dmCompass'],
+  // tabNotes is in every entry: the notes are short and grounded in many
+  // facets at once, so any structural change can shift them. Re-running on
+  // every progression keeps the contextual lens accurate at low cost (~1
+  // Haiku call producing 9 short strings).
+  addInstitution:    ['opening', 'factions', 'safety', 'tabNotes'],
+  removeInstitution: ['opening', 'factions', 'safety', 'tabNotes'],
+  addStressor:       ['stressors', 'opening', 'dmCompass', 'conflicts', 'tabNotes'],
+  removeStressor:    ['stressors', 'dmCompass', 'tabNotes'],
+  addTradeGood:      ['safety', 'identityMarkers', 'tabNotes'],
+  removeTradeGood:   ['safety', 'tabNotes'],
+  addResource:       ['safety', 'tabNotes'],
+  removeResource:    ['safety', 'tabNotes'],
+  setResourceState:  ['safety', 'stressors', 'tabNotes'],
+  setPrioritySlider: ['safety', 'dmCompass', 'tabNotes'],
 };
 
 function buildProgressionThesisPrompt(
@@ -1026,6 +1214,11 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
       twist:    typeof prior.dmCompass.twist === 'string' ? prior.dmCompass.twist : '',
     };
   }
+  // narrativeNotes is shallow-copied so progression keeps prior tab notes
+  // when the tabNotes pass isn't re-run, and overwrites them when it is.
+  if (prior.narrativeNotes && typeof prior.narrativeNotes === 'object') {
+    clone.narrativeNotes = { ...prior.narrativeNotes };
+  }
 }
 
 // ── Daily life (Opus, 5 parallel paragraphs) ────────────────────────────────
@@ -1137,6 +1330,28 @@ function getByPath(obj: any, path: string): any {
     ref = ref[k];
   }
   return ref;
+}
+
+/**
+ * Detect when spec.apply produced no change despite a non-empty extract +
+ * a successful Haiku response. This is the "silent shape mismatch" failure
+ * mode: the model returned valid JSON but in a shape the apply doesn't
+ * recognize (e.g. wrapping in `items` when the apply expects flat fields,
+ * or using `source/target` when the apply checks `from/to`). Without this
+ * detection the pass reports "succeeded" but the field stays raw — exactly
+ * what the user reported for dmCompass and connectionsMap.
+ *
+ * Compares serialized snapshots. Returns true if apply mutated something at
+ * (or under) snapshotPath.
+ */
+function applyMutated(beforeJson: string, afterValue: unknown): boolean {
+  try {
+    return beforeJson !== JSON.stringify(afterValue);
+  } catch {
+    // Cyclic or otherwise unstringifiable — assume mutation happened to
+    // avoid spurious warnings.
+    return true;
+  }
 }
 
 /** Check whether a pass's extracted payload has anything to refine. */
@@ -1384,8 +1599,24 @@ serve(async (req) => {
                 );
                 const raw = await callAnthropic(prompt, spec.max_tokens, REFINEMENT_MODEL);
                 const parsed = safeJsonParse(raw);
+
+                // Silent-shape-mismatch detection (see narrative loop above).
+                const beforeSnapshot = spec.snapshotPath.startsWith('__')
+                  ? null
+                  : JSON.stringify(getByPath(aiClone, spec.snapshotPath));
+
                 spec.apply(aiClone, parsed);
                 succeededFields.push(key);
+
+                if (beforeSnapshot !== null) {
+                  const after = getByPath(aiClone, spec.snapshotPath);
+                  if (!applyMutated(beforeSnapshot, after)) {
+                    console.warn(
+                      `[generate-narrative] progression pass '${key}' produced no mutation despite valid response. ` +
+                      `Likely JSON shape mismatch. Raw response (truncated): ${raw.slice(0, 500)}`,
+                    );
+                  }
+                }
 
                 const path = spec.snapshotPath.startsWith('__') ? key : spec.snapshotPath;
                 const snapshot = spec.snapshotPath.startsWith('__')
@@ -1458,8 +1689,26 @@ serve(async (req) => {
               const raw = await callAnthropic(prompt, spec.max_tokens, REFINEMENT_MODEL);
               const parsed = safeJsonParse(raw);
 
+              // Silent-shape-mismatch detection: snapshot the field before apply,
+              // then check whether apply actually wrote anything. Synthetic paths
+              // ('__opening' etc.) write to multiple keys and we don't track them
+              // here — log only for concrete snapshotPath passes.
+              const beforeSnapshot = spec.snapshotPath.startsWith('__')
+                ? null
+                : JSON.stringify(getByPath(aiClone, spec.snapshotPath));
+
               spec.apply(aiClone, parsed);
               succeededFields.push(key);
+
+              if (beforeSnapshot !== null) {
+                const after = getByPath(aiClone, spec.snapshotPath);
+                if (!applyMutated(beforeSnapshot, after)) {
+                  console.warn(
+                    `[generate-narrative] pass '${key}' produced no mutation despite valid response. ` +
+                    `Likely JSON shape mismatch. Raw response (truncated): ${raw.slice(0, 500)}`,
+                  );
+                }
+              }
 
               // Stream the snapshot. For synthetic paths (starting with '__')
               // we use the pass key as the field name; the client only uses
