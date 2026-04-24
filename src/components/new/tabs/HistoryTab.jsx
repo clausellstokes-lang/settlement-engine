@@ -267,4 +267,4 @@ export function HistoryTab({settlement:r, narrativeNote}) {
   );
 }
 
-export default HistoryTab;
+export default React.memo(HistoryTab);

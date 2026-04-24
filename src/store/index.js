@@ -8,7 +8,7 @@
  *   settlement – current + saved settlements, reactive-update state
  *   ai         – narrative layer, daily-life, generation state
  *   neighbour  – neighbour links, imported neighbour, cross-settlement effects
- *   map        – Azgaar bridge state, selected burg, supply-chain overlays
+ *   map        – Fantasy World Map bridge state, selected burg, supply-chain overlays
  *   credits    – credit balance, transaction history
  *
  * Usage:
@@ -28,7 +28,10 @@ import { createSettlementSlice } from './settlementSlice.js';
 import { createAiSlice }         from './aiSlice.js';
 import { createNeighbourSlice }  from './neighbourSlice.js';
 import { createMapSlice }        from './mapSlice.js';
-import { createCreditsSlice }    from './creditsSlice.js';
+import { createCreditsSlice }      from './creditsSlice.js';
+import { createCampaignSlice }     from './campaignSlice.js';
+import { createCustomContentSlice } from './customContentSlice.js';
+import { createOnboardingSlice }    from './onboardingSlice.js';
 
 export const useStore = create(
   devtools(
@@ -43,20 +46,30 @@ export const useStore = create(
           ...createNeighbourSlice(...a),
           ...createMapSlice(...a),
           ...createCreditsSlice(...a),
+          ...createCampaignSlice(...a),
+          ...createCustomContentSlice(...a),
+          ...createOnboardingSlice(...a),
         })),
         {
           name: 'settlementforge',
           partialize: (state) => ({
             // Persist only lightweight, user-owned data.
             // Never persist the massive generated settlement object.
+            // wizardStep is intentionally NOT persisted — users expect a fresh wizard each session.
             config: state.config,
             institutionToggles: state.institutionToggles,
             categoryToggles:    state.categoryToggles,
             goodsToggles:       state.goodsToggles,
             servicesToggles:    state.servicesToggles,
-            wizardStep:         state.wizardStep,
             wizardMode:         state.wizardMode,
           }),
+          // Migrate deprecated 'custom' wizardMode → 'advanced'; always start at step 0
+          onRehydrateStorage: () => (state) => {
+            if (state?.wizardMode === 'custom') {
+              state.wizardMode = 'advanced';
+            }
+            if (state) state.wizardStep = 0;
+          },
         },
       ),
     ),
@@ -78,3 +91,8 @@ export const useCanSave       = () => useStore(s => s.canSave());
 export const useCanUseNeighbour = () => useStore(s => s.canUseNeighbour());
 export const useCanExport     = () => useStore(s => s.canExport());
 export const useMaxTier       = () => useStore(s => s.maxAllowedTier());
+
+// Role helpers
+export const useIsDeveloper   = () => useStore(s => s.isDeveloper());
+export const useIsAdmin       = () => useStore(s => s.isAdmin());
+export const useIsElevated    = () => useStore(s => s.isElevated());

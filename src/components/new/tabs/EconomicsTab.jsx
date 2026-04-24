@@ -497,4 +497,4 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
   );
 }
 
-export default EconomicsTab;
+export default React.memo(EconomicsTab);

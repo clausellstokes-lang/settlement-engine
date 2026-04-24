@@ -204,4 +204,4 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
   );
 }
 
-export default ResourcesTab;
+export default React.memo(ResourcesTab);

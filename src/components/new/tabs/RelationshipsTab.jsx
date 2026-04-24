@@ -259,4 +259,4 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
   );
 }
 
-export default RelationshipsTab;
+export default React.memo(RelationshipsTab);

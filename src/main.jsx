@@ -2,6 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
+import { useStore } from './store';
+
+// Expose store globally in dev so we can validate map features via automation.
+if (import.meta.env.DEV) {
+  window.__store = useStore;
+}
 
 class ErrorBoundary extends React.Component {
   constructor(props) { super(props); this.state = { error: null }; }

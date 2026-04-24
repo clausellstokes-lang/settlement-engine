@@ -43,31 +43,66 @@ export const selectIsManualTier = (state) => {
   return t && t !== 'random' && t !== 'custom';
 };
 
-/** The filtered institution catalog, respecting magic settings and tier. */
+/**
+ * The filtered institution catalog, respecting magic settings and tier.
+ *
+ * Memoised: React 19's useSyncExternalStore requires getSnapshot to return
+ * a stable reference on consecutive calls with the same inputs. Without
+ * caching, every call creates a new object which triggers infinite re-renders.
+ */
+let _catalogCache = { key: null, result: null };
+
 export const selectCurrentCatalog = (state) => {
   const tierForGrid = resolveDisplayTier(state.config);
   const isManualTier = selectIsManualTier(state);
+  const magicExists = state.config.magicExists;
+  const priorityMagic = state.config.priorityMagic;
+
+  const key = `${tierForGrid}|${isManualTier}|${magicExists}|${priorityMagic}`;
+  if (key === _catalogCache.key) return _catalogCache.result;
+
   const raw = isManualTier
     ? getFullCatalogWithTierMeta()
     : getInstitutionalCatalog(tierForGrid);
-  return filterCatalogForMagic(raw, state.config);
+  const result = filterCatalogForMagic(raw, state.config);
+
+  _catalogCache = { key, result };
+  return result;
 };
 
-/** Set of institution names in the native tier. */
+/**
+ * Set of institution names in the native tier.
+ * Memoised for React 19 useSyncExternalStore stability.
+ */
+let _tierNamesCache = { key: null, result: null };
+
 export const selectTierInstitutionNames = (state) => {
   const tierForGrid = resolveDisplayTier(state.config);
-  return getInstitutionsForTier(tierForGrid);
+  if (tierForGrid === _tierNamesCache.key) return _tierNamesCache.result;
+
+  const result = getInstitutionsForTier(tierForGrid);
+  _tierNamesCache = { key: tierForGrid, result };
+  return result;
 };
 
-/** Quick summary of toggle counts for UI display. */
+/**
+ * Quick summary of toggle counts for UI display.
+ * Memoised for React 19 useSyncExternalStore stability.
+ */
+let _toggleSummaryCache = { ref: null, result: null };
+
 export const selectToggleSummary = (state) => {
   const inst = state.institutionToggles;
+  if (inst === _toggleSummaryCache.ref) return _toggleSummaryCache.result;
+
   let forced = 0, excluded = 0;
   for (const v of Object.values(inst)) {
     if (v.require) forced++;
     if (v.forceExclude) excluded++;
   }
-  return { forced, excluded, total: Object.keys(inst).length };
+  const result = { forced, excluded, total: Object.keys(inst).length };
+  _toggleSummaryCache = { ref: inst, result };
+  return result;
 };
 
 /** Count of saved settlements for the save-limit display. */

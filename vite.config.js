@@ -7,36 +7,27 @@ export default defineConfig({
     outDir: 'dist',
     rollupOptions: {
       output: {
-        manualChunks: {
-          // React core — cached across page loads
-          'vendor-react': ['react', 'react-dom'],
-          // State management
-          'vendor-state': ['zustand', 'immer'],
-          // Icons (lucide-react is large)
-          'vendor-icons': ['lucide-react'],
-          // Supabase client
-          'vendor-supabase': ['@supabase/supabase-js'],
-          // Generator engine (data tables + algorithms)
-          'engine': [
-            './src/generators/generateSettlement.js',
-            './src/generators/generateSettlementPipeline.js',
-            './src/generators/pipeline.js',
-            './src/generators/prng.js',
-            './src/generators/economicGenerator.js',
-            './src/generators/npcGenerator.js',
-            './src/generators/powerGenerator.js',
-            './src/generators/narrativeGenerator.js',
-            './src/generators/historyGenerator.js',
-            './src/generators/cascadeGenerator.js',
-            './src/generators/stressGenerator.js',
-          ],
-          // Data tables (institutional catalog, terrain, resources)
-          'data': [
-            './src/data/institutionalCatalog.js',
-            './src/data/constants.js',
-            './src/data/geographyData.js',
-            './src/data/resourceData.js',
-          ],
+        manualChunks(id) {
+          // ── Vendor chunks (stable, cached across deploys) ─────────
+          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/'))
+            return 'vendor-react';
+          if (id.includes('node_modules/zustand') || id.includes('node_modules/immer'))
+            return 'vendor-state';
+          if (id.includes('node_modules/lucide-react'))
+            return 'vendor-icons';
+          if (id.includes('node_modules/@supabase'))
+            return 'vendor-supabase';
+          if (id.includes('node_modules/html2canvas'))
+            return 'vendor-html2canvas';
+
+          // ── Generator engine (all generators together — they have ──
+          // ── circular imports that prevent clean sub-chunking)      ──
+          if (id.includes('/src/generators/'))
+            return 'engine';
+
+          // ── Data tables (static, highly cacheable) ────────────────
+          if (id.includes('/src/data/'))
+            return 'data';
         },
       },
     },

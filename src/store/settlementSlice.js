@@ -24,6 +24,7 @@ export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   settlement:    null,   // current generated settlement object
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
+  savedSettlementsLoaded: false, // true once hydrated from savesService
   lastSeed:      null,   // seed from last generation (for replay/determinism)
   lastCtx:       null,   // full pipeline context from last run (for reactive re-runs)
   usePipeline:   true,   // toggle between legacy and pipeline generator
@@ -85,6 +86,15 @@ export const createSettlementSlice = (set, get) => ({
 
   setSettlement: (settlement) =>
     set(state => { state.settlement = settlement; }),
+
+  clearSettlement: () =>
+    set(state => {
+      state.settlement = null;
+      state.lastSeed = null;
+      state.lastCtx = null;
+      state.whatIfPreview = null;
+      state.pendingChange = null;
+    }),
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
   regenSection: (section) => {
@@ -228,6 +238,13 @@ export const createSettlementSlice = (set, get) => ({
     });
     return true;
   },
+
+  /** Bulk-replace the savedSettlements array (used for hydration from savesService). */
+  setSavedSettlements: (settlements) =>
+    set(state => {
+      state.savedSettlements = settlements || [];
+      state.savedSettlementsLoaded = true;
+    }),
 
   removeSavedSettlement: (id) =>
     set(state => {

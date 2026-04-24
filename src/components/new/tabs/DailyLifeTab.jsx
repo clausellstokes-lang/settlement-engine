@@ -39,7 +39,7 @@ const STRESS_LABELS = {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export function DailyLifeTab({ settlement: r, aiSettlement }) {
+export function DailyLifeTab({ settlement: r, aiSettlement, saveId = null }) {
   const [narrative, setNarrative]   = useState(null);
   const [localLoading, setLocalLoading] = useState(false);
   const [localError, setLocalError]     = useState(null);
@@ -49,15 +49,22 @@ export function DailyLifeTab({ settlement: r, aiSettlement }) {
   const requestDailyLife = useStore(s => s.requestDailyLife);
   const aiDailyLife = useStore(s => s.aiDailyLife);
   const storeAiLoading = useStore(s => s.aiLoading);
+  const storeAiRegenerating = useStore(s => s.aiRegenerating);
   const storeAiError = useStore(s => s.aiError);
+  const storeAiProgress = useStore(s => s.aiProgress);
   const creditBalance = useStore(s => s.creditBalance);
 
   if (!r) return null;
+
+  // AI-1: Daily-life generation is gated on a saved settlement (same rule
+  // as the narrative layer). Local-dev mock remains ungated.
+  const dailyLifeEnabled = isConfigured ? !!saveId : true;
 
   const ctx = extractSettlementContext(r);
   const prompt = buildPrompt(ctx);
 
   const loading = isConfigured ? storeAiLoading : localLoading;
+  const regenerating = isConfigured ? storeAiRegenerating : false;
   const error = isConfigured ? storeAiError : localError;
 
   const LOAD_MSGS = [
@@ -70,7 +77,7 @@ export function DailyLifeTab({ settlement: r, aiSettlement }) {
 
   async function generate() {
     if (isConfigured) {
-      await requestDailyLife();
+      await requestDailyLife(saveId);
       return;
     }
 
@@ -110,9 +117,9 @@ export function DailyLifeTab({ settlement: r, aiSettlement }) {
 
   // Merge store daily life with local narrative
   const displayNarrative = narrative || (aiDailyLife ? formatDailyLifeResult(aiDailyLife) : null);
+  const hasContent = !!displayNarrative;
 
   const tierLabel     = ctx.tierLabel;
-  // magicCtx inlined into JSX to avoid any TDZ risk
   const prospColor    = ctx.prospBand === 'prosperous' ? '#1a5a28' : ctx.prospBand === 'comfortable' ? '#a0762a' : ctx.prospBand === 'subsistence' ? '#8a4010' : '#8b1a1a';
   const safetyBand    = ctx.safetyLabelFromProfile || (ctx.safetyScore >= 70 ? 'Safe' : ctx.safetyScore >= 50 ? 'Moderate' : ctx.safetyScore >= 30 ? 'Dangerous' : 'Hostile');
   const safetyColor   = ctx.safetyScore >= 70 ? '#1a5a28' : ctx.safetyScore >= 50 ? '#a0762a' : ctx.safetyScore >= 30 ? '#8a4010' : '#8b1a1a';
@@ -127,6 +134,23 @@ export function DailyLifeTab({ settlement: r, aiSettlement }) {
     ctx.foodDeficit > 20 ? '#8b1a1a' :
     ctx.foodDeficit > 10 ? '#8a4010' :
     ctx.foodDeficit > 0  ? '#a0762a' : '#1a5a28';
+
+  // Button label logic — first-time generate vs regenerate. Both spend credits;
+  // we name the action plainly so users know.
+  const buttonLabel = (() => {
+    if (!dailyLifeEnabled) return '✦ Save settlement to enable AI Daily Life';
+    if (loading) {
+      return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating…' : 'Generating…');
+    }
+    if (hasContent) {
+      return isConfigured
+        ? `↺ Regenerate Daily Life (${CREDIT_COSTS.dailyLife} credits)`
+        : '↺ Regenerate Daily Life — Powered by AI';
+    }
+    return isConfigured
+      ? `✦ Generate Daily Life (${CREDIT_COSTS.dailyLife} credits)`
+      : '✦ Generate Daily Life — Powered by AI';
+  })();
 
   return (
     <div style={{ fontFamily: sans, padding: mobile ? '12px 10px' : '16px 18px', maxWidth: 720, margin: '0 auto' }}>
@@ -160,31 +184,34 @@ export function DailyLifeTab({ settlement: r, aiSettlement }) {
         )}
       </div>
 
-      {/* ── GENERATE BUTTON ───────────────────────────────────────────────── */}
+      {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
       <button
         onClick={generate}
-        disabled={loading}
+        disabled={loading || !dailyLifeEnabled}
+        title={!dailyLifeEnabled
+          ? 'AI daily-life generation requires a saved settlement so the output can be preserved across sessions.'
+          : (hasContent
+              ? `Regenerate replaces the current daily-life prose by calling the AI again. Spends ${CREDIT_COSTS.dailyLife} credits.`
+              : `Generate daily-life prose for this settlement. Spends ${CREDIT_COSTS.dailyLife} credits.`)}
         style={{
           width: '100%', padding: '13px 20px',
-          background: loading ? '#e8dcc8' : 'linear-gradient(135deg, #a0762a, #7a5a1a)',
-          color: loading ? MUTED : '#fffbf5',
-          border: 'none', borderRadius: 8, cursor: loading ? 'default' : 'pointer',
+          background: !dailyLifeEnabled
+            ? 'rgba(120,100,80,0.12)'
+            : (loading ? '#e8dcc8' : 'linear-gradient(135deg, #a0762a, #7a5a1a)'),
+          color: !dailyLifeEnabled ? MUTED : (loading ? MUTED : '#fffbf5'),
+          border: !dailyLifeEnabled ? '1px dashed rgba(156,128,104,0.45)' : 'none',
+          borderRadius: 8,
+          cursor: (loading || !dailyLifeEnabled) ? 'default' : 'pointer',
           fontSize: 13, fontWeight: 700, fontFamily: sans,
           letterSpacing: '0.03em', marginBottom: 16,
           transition: 'opacity 0.2s',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
         }}
       >
-        {loading ? (
-          <>
-            <span style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}>⟳</span>
-            {loadMsg || 'Generating…'}
-          </>
-        ) : displayNarrative ? (
-          isConfigured ? `↺ Regenerate Daily Life (${CREDIT_COSTS.dailyLife} credits)` : '↺ Regenerate Daily Life — Powered by AI'
-        ) : (
-          isConfigured ? `✦ Generate Daily Life (${CREDIT_COSTS.dailyLife} credits)` : '✦ Generate Daily Life — Powered by AI'
+        {loading && (
+          <span style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}>⟳</span>
         )}
+        {buttonLabel}
       </button>
 
       <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
@@ -200,15 +227,40 @@ export function DailyLifeTab({ settlement: r, aiSettlement }) {
         </div>
       )}
 
-            {/* ── NARRATIVE LAYER DAILY LIFE ─────────────────────────────────── */}
-      {aiSettlement?.dailyLife && !narrative && (
-        <div style={{ marginBottom: 12 }}>
-          <div style={{ fontSize: 9, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span>✦</span> From AI Narrative Layer — <span style={{ fontWeight: 400, textTransform: 'none', fontSize: 9.5, letterSpacing: 0 }}>generate below for a standalone version</span>
-          </div>
-          <div style={{ background: PARCH, border: `1px solid rgba(138,80,176,0.2)`, borderLeft: '3px solid #8a50b0', borderRadius: 8, padding: '16px 18px' }}>
-            {(aiSettlement.dailyLife.split('\n\n').filter(Boolean)).map((para, i, arr) => (
-              <p key={i} style={{ fontSize: 13.5, lineHeight: 1.75, color: INK, margin: 0, marginBottom: i < arr.length - 1 ? 16 : 0, fontFamily: `Georgia, 'Times New Roman', serif` }}>
+      {/* ── NARRATIVE ─────────────────────────────────────────────────────── */}
+      {hasContent && (
+        <div style={{ position: 'relative' }}>
+          {/* Regenerate overlay — floating chip so the user sees "a new version is brewing" */}
+          {regenerating && (
+            <div style={{
+              position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
+              zIndex: 20, background: 'rgba(122,70,26,0.95)', color: '#fffbf5',
+              padding: '8px 16px', borderRadius: 20, border: '1px solid rgba(196,128,60,0.6)',
+              fontSize: 11.5, fontWeight: 700, fontFamily: sans,
+              display: 'flex', alignItems: 'center', gap: 8,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
+            }}>
+              <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>⟳</span>
+              {storeAiProgress || 'Regenerating…'}
+            </div>
+          )}
+          <div style={{
+            background: PARCH,
+            border: `1px solid ${BORDER}`,
+            borderRadius: 8,
+            padding: mobile ? '16px 14px' : '20px 22px',
+            opacity: regenerating ? 0.55 : 1,
+            transition: 'opacity 0.2s',
+          }}>
+            {displayNarrative.split(/\n\n+/).map((para, i, arr) => (
+              <p key={i} style={{
+                fontSize: 13.5,
+                lineHeight: 1.75,
+                color: INK,
+                margin: 0,
+                marginBottom: i < arr.length - 1 ? 16 : 0,
+                fontFamily: `Georgia, 'Times New Roman', serif`,
+              }}>
                 {para.trim()}
               </p>
             ))}
@@ -216,41 +268,18 @@ export function DailyLifeTab({ settlement: r, aiSettlement }) {
         </div>
       )}
 
-      {/* ── NARRATIVE ─────────────────────────────────────────────────────── */}
-      {displayNarrative && (
-        <div style={{
-          background: PARCH,
-          border: `1px solid ${BORDER}`,
-          borderRadius: 8,
-          padding: mobile ? '16px 14px' : '20px 22px',
-        }}>
-          {displayNarrative.split(/\n\n+/).map((para, i) => (
-            <p key={i} style={{
-              fontSize: 13.5,
-              lineHeight: 1.75,
-              color: INK,
-              margin: 0,
-              marginBottom: i < displayNarrative.split(/\n\n+/).length - 1 ? 16 : 0,
-              fontFamily: `Georgia, 'Times New Roman', serif`,
-            }}>
-              {para.trim()}
-            </p>
-          ))}
-        </div>
-      )}
-
       {/* ── EMPTY STATE ───────────────────────────────────────────────────── */}
-      {!displayNarrative && !loading && !error && !aiSettlement?.dailyLife && (
+      {!hasContent && !loading && !error && (
         <div style={{
           background: '#faf8f4', border: `1px solid ${BORDER}`,
           borderRadius: 8, padding: '32px 20px', textAlign: 'center',
         }}>
-          <div style={{ fontSize: 28, marginBottom: 10 }}>️</div>
           <div style={{ fontSize: 13, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
             What is daily life like here?
           </div>
           <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
-            Generate a prose description of ordinary life in this settlement — food, safety, governance, and how it all fits together from the perspective of the people who live here.
+            Generate a prose description of ordinary life in this settlement — dawn, the market, the tavern,
+            the watch. Opus-grade writing, five paragraphs, grounded in this settlement's specific stressors and trade.
           </div>
         </div>
       )}
@@ -267,4 +296,4 @@ function formatDailyLifeResult(result) {
   return parts.join('\n\n');
 }
 
-export default DailyLifeTab;
+export default React.memo(DailyLifeTab);

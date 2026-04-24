@@ -235,4 +235,4 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
   );
 }
 
-export default ViabilityTab;
+export default React.memo(ViabilityTab);

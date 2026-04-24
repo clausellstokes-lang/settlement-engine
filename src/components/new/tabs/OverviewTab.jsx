@@ -315,4 +315,4 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
   );
 }
 
-export default OverviewTab;
+export default React.memo(OverviewTab);

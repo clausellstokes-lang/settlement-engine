@@ -97,16 +97,16 @@ function QuickTab() {
     <div style={{ fontFamily:serif_, fontSize:15, fontWeight:600, color:INK, marginBottom:10 }}>
       First settlement in 60 seconds
     </div>
-    <Step n={1}>Select a <strong>tier</strong> from the top of the Create tab. Hamlet or Village for a small roadside settlement, Town for a proper community.</Step>
-    <Step n={2}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong> if relevant — forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
+    <Step n={1}>On the Create tab, pick a <strong>mode</strong> — <strong>Quick Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
+    <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Free mode can generate Thorp through Village; sign in for Town, City, and Metropolis.</Step>
+    <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong> — forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
     <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft:32 }}>
       <div style={{ width:6, height:6, borderRadius:'50%', background:'#b8860b', flexShrink:0, marginTop:7 }}/>
-      <p style={{ fontSize:12.5, color:'#5a3a00', lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then force that institution in <strong>Institution Configuration → click to enforce</strong>, and generate.</p>
+      <p style={{ fontSize:12.5, color:'#5a3a00', lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
     </div>
-    <Step n={3}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first — it gives you the one-paragraph version ready for the table.</Step>
-    <Step n={4}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and — where relevant — legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
-    <Step n={5}><strong>Export</strong> using the JSON button (full data) or Narrative AI Prompt (for AI assistants like Claude or ChatGPT). To bring a JSON file back into the app, use Import JSON in the Settlements tab — it is added directly to your saved list.</Step>
-    <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions.</Step>
+    <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first — it gives you the one-paragraph version ready for the table.</Step>
+    <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and — where relevant — legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
+    <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for AI assistants like Claude or ChatGPT.</Step>
     <Tip>You don't need to read every tab before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
   </>;
 }
@@ -128,32 +128,31 @@ function PowerTab() {
     <Tip>Forces and exclusions persist through regeneration. Configure once, generate many variations.</Tip>
 
     <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>
-      The Neighbour System
+      Linking Settlements as Neighbours
     </div>
     <p style={{ fontSize:12, color:SEC, lineHeight:1.6, marginBottom:10 }}>
       Generate settlements that know about each other. The relationship type modifies the economic engine,
-      faction weights, and institution probabilities before generation begins.
+      faction weights, and institution probabilities. All linking is done from the <strong>Settlements</strong> tab.
     </p>
-    <Step n={1}>Go to <strong>Neighbour System</strong>. Select a saved settlement from the list and set the relationship type — Trade Partner, Rival, Cold War, etc.</Step>
-    <Step n={2}>Click <strong>Set as Neighbour & Go to Create</strong>. The Create tab resets with the neighbour active. Generate your new settlement.</Step>
-    <Step n={3}><strong>Save both settlements</strong>. The system creates bidirectional links, paired NPC contacts, and cross-settlement conflicts automatically.</Step>
-    <Step n={4}>Open either settlement's <strong>Neighbours tab</strong> to see the full inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
-    <Step n={5}>To link two independently-generated settlements: open one in the <strong>Settlements tab → View → Link Neighbour</strong>. Set the relationship type. Both are updated bidirectionally.</Step>
-    <Step n={6}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records.</Step>
+    <Step n={1}>Open a saved settlement in the <strong>Settlements tab</strong>. In the detail view, click <strong>Link Neighbour</strong> and choose another saved settlement.</Step>
+    <Step n={2}>Pick a relationship type — Trade Partner, Allied, Patron, Client, Rival, Cold War, or Hostile. The relationship is bidirectional and both settlements update immediately.</Step>
+    <Step n={3}>To bias a <em>new</em> settlement against an existing neighbour: in the Settlements tab, click <strong>Set as Neighbour</strong> on a saved settlement. The Create tab opens with that neighbour active, and the engine adjusts its economy and faction weights before generation.</Step>
+    <Step n={4}>Open either settlement's <strong>Neighbours tab</strong> to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
+    <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
     <Tip>Relationship types matter mechanically. A Rival suppresses overlapping exports and elevates criminal presence. A Patron creates dependency chains in the client's economy. A Cold War generates intelligence NPCs on both sides.</Tip>
 
     <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>
-      Managing Saved Settlements
+      Managing Saved Settlements &amp; Campaigns
     </div>
     <p style={{ fontSize:12, color:SEC, lineHeight:1.6, marginBottom:10 }}>
-      The Settlements tab is your campaign library — saves, imports, exports, and linking all live here.
+      The Settlements tab is your campaign library — saves, campaigns, linking, and map placement all live here.
     </p>
-    <Step n={1}><strong>Save</strong> after generating to store a settlement. Up to 30 can be kept locally.</Step>
-    <Step n={2}><strong>Import JSON</strong> — use the Import JSON button to bring in a file exported from another session or shared by another DM. The settlement is added directly to your saved list, ready to view, link, or set as a neighbour.</Step>
-    <Step n={3}><strong>Export JSON</strong> from the detail view header to archive a settlement or share it. The exported file can be re-imported by anyone using this tool.</Step>
+    <Step n={1}><strong>Save</strong> after generating to store a settlement in your library.</Step>
+    <Step n={2}><strong>Campaigns</strong> — group settlements into named campaign folders directly inside the Settlements tab. Use the arrow button on any saved settlement to move it between campaigns. Export a campaign to PDF for a complete campaign dossier.</Step>
+    <Step n={3}><strong>Export PDF</strong> from the detail view header for a print-ready settlement brief, or export a full campaign PDF from the campaign folder.</Step>
     <Step n={4}><strong>Narrative AI Prompt</strong> and <strong>Map AI Prompt</strong> exports are also available in the detail view — use these to feed your settlement into an AI assistant for session fiction or map generation.</Step>
     <Step n={5}><strong>Edit Names</strong> lets you rename any NPC or faction. Changes propagate to all linked neighbour records automatically.</Step>
-    <Step n={6}><strong>Link Neighbour</strong> in the detail view manually connects two saved settlements — useful when you generated them independently and want to establish a relationship.</Step>
+    <Step n={6}><strong>World Map</strong> — drag any saved settlement onto the embedded fantasy map to place it geographically. Click a placed burg to see its linked settlement data. Toggle relationships and supply-chain overlays from the map toolbar.</Step>
   </>;
 }
 
@@ -359,8 +358,17 @@ function PhilosophyTab() {
 
 function RefTab() {
   return <>
+    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'0 0 8px' }}>Navigation</div>
     {[
-      ['Create Tab','Core generation. Configure tier, route, threat, stresses, sliders, then Generate.'],
+      ['Create','The generation wizard. Two modes: Quick (minimal config) and Advanced (step-by-step with full control).'],
+      ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
+      ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
+      ['Compendium','Browse the built-in catalog of institutions, archetypes, stresses, and relationship systems. Switch to My Custom Content to create your own custom items.'],
+      ['How to Use','This guide.'],
+    ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
+
+    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Settlement Detail Tabs</div>
+    {[
       ['DM Summary','One-paragraph brief + arrival scene. Designed for mid-session quick reference.'],
       ['Overview','Physical layout, key institutions, recent history hook.'],
       ['Daily Life','Wealth level, diet, crime, safety. What it feels like to live here.'],
@@ -374,10 +382,29 @@ function RefTab() {
       ['Viability','Economic stress analysis — what is working, what is fragile, what will break.'],
       ['Plot Hooks','Ready-to-run scenario seeds derived from faction tensions and NPC secrets.'],
       ['Neighbours','Cross-settlement view: linked settlements, NPC contacts, active conflicts.'],
-      ['Neighbour System Tab','Select a saved settlement as neighbour to bias the next generation. The relationship type shapes the new settlement\'s economy and institutions.'],
-      ['Settlements Tab','Saved settlement library. View, link, rename, export, import JSON files, delete.'],
+    ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
+
+    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Settlement Workflow</div>
+    {[
+      ['Campaigns','Create named campaign folders in the Settlements tab to group settlements together. Move settlements between campaigns using the arrow button. Export a whole campaign as PDF from its folder header.'],
+      ['Link Neighbour','In the Settlements tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).'],
+      ['Set as Neighbour','Tell the generator to bias a new settlement against an existing one. Opens the Create tab with the neighbour active.'],
       ['Edit Names','Rename any NPC or faction. Changes cascade bidirectionally to linked partners.'],
-      ['Compendium','Mechanical reference for institutions, archetypes, stresses, and all systems.'],
+      ['Export PDF','Print-ready settlement briefing — cover page, index, relationship diagram, NPC cards, and economic appendix.'],
+    ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
+
+    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>World Map</div>
+    {[
+      ['Drag to Place','Drag a saved settlement from the drawer below the map onto any location on the map. A new burg is created at that point, linked to your settlement.'],
+      ['Click for Detail','Click any placed burg to see its linked SettlementForge data and jump to the detail view in the Settlements tab.'],
+      ['Relationship Overlay','Toggle "Relations" to draw colored lines between linked settlements. Line color indicates relationship type.'],
+      ['Supply Chain Overlay','Toggle "Chains" to draw supply-chain routes between exporters and importers across your saved settlements.'],
+    ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
+
+    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Compendium</div>
+    {[
+      ['Built-in Catalog','Searchable reference for tiers, archetypes, stress types, relationship effects, and the full institution catalog.'],
+      ['My Custom Content','Create custom institutions, resources, stressors, trade goods, trade routes, power presets, and defense presets. Custom items appear in the Settlement Editor catalog with a purple badge. All custom content persists to your browser.'],
     ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
   </>;
 }

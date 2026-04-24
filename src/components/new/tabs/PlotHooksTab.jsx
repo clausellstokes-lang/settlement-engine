@@ -252,4 +252,4 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
   );
 }
 
-export default PlotHooksTab;
+export default React.memo(PlotHooksTab);

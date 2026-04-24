@@ -67,7 +67,7 @@ function FactionBar({ factions }) {
 }
 
 // ── Main component ────────────────────────────────────────────────────────────
-export default function SummaryTab({ settlement:r }) {
+function SummaryTab({ settlement:r }) {
   const [copied,setCopied]=useState(false);
   const [settingOpen,setSettingOpen]=useState(false);
   const [hooksOpen,setHooksOpen]=useState(true);
@@ -343,3 +343,5 @@ export default function SummaryTab({ settlement:r }) {
     </div>
   );
 }
+
+export default React.memo(SummaryTab);

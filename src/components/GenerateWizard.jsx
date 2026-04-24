@@ -4,7 +4,7 @@
  * Replaces the old GenerateView with three modes:
  *   Quick    — minimal config, one-click generation
  *   Advanced — full config (one step at a time, not all at once)
- *   Custom   — blank template for manual entry (future)
+ *   Custom   — full workshop for manual entry (premium)
  *
  * Each step shows only its own content, with contextual help in the
  * sidebar/footer drawn from the Compendium and How to Use content.
@@ -12,31 +12,19 @@
  *
  * Reads all state from the Zustand store — zero props.
  */
-import React, { useCallback } from 'react';
-import { Download, Sparkles, Map, FileText, ChevronRight, ChevronLeft, Zap, Settings, Pencil } from 'lucide-react';
+import React, { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react';
+import { ChevronRight, ChevronLeft, Zap, Settings, ArrowLeft, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, selectIsManualTier } from '../store/selectors.js';
-import { generateSettlementPDF } from '../utils/generateSettlementPDF.js';
-import { downloadNarrativePrompt, downloadMapPrompt } from '../utils/promptExporters.js';
+import { saves as savesService } from '../lib/saves.js';
 import ConfigurationPanel from './ConfigurationPanel';
 import InstitutionalGrid from './InstitutionalGrid';
 import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
-import OutputContainer from './OutputContainer';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 
-function downloadJSON(settlement) {
-  if (!settlement) return;
-  const blob = new Blob([JSON.stringify(settlement, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = Object.assign(document.createElement('a'), {
-    href: url,
-    download: `${(settlement.name || 'settlement').replace(/\s+/g, '_')}.json`,
-  });
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
-}
+// Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
+const OutputContainer = lazy(() => import('./OutputContainer'));
 
 // ── Step definitions ─────────────────────────────────────────────────────────
 
@@ -65,40 +53,66 @@ const STEPS = [
 
 // ── Mode selector ────────────────────────────────────────────────────────────
 
-function ModeSelector({ mode, onModeChange }) {
+function ModeSelector({ mode, onModeChange, large = false }) {
   const modes = [
-    { id: 'quick', label: 'Quick Generate', desc: 'Randomised with sensible defaults', Icon: Zap },
-    { id: 'advanced', label: 'Advanced', desc: 'Full configuration, step by step', Icon: Settings },
-    { id: 'custom', label: 'Custom Template', desc: 'Blank template, fill your own fields', Icon: Pencil },
+    { id: 'quick',    label: 'Quick Generate',    desc: 'Minimal config — set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Best for drop-in NPC stops.' },
+    { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',            Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space.' },
   ];
 
   return (
-    <div style={{ display: 'flex', gap: SP.md, justifyContent: 'center', flexWrap: 'wrap', padding: `${SP.sm}px 0` }}>
-      {modes.map(({ id, label, desc, Icon }) => {
+    <div style={{
+      display: 'flex',
+      gap: large ? SP.xl : SP.md,
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      padding: large ? `${SP.xxl}px 0` : `${SP.sm}px 0`,
+    }}>
+      {modes.map(({ id, label, desc, Icon, longDesc }) => {
         const active = mode === id;
-        const disabled = id === 'custom';
         return (
           <button
             key={id}
-            onClick={() => !disabled && onModeChange(id)}
-            disabled={disabled}
+            onClick={() => onModeChange(id)}
             style={{
-              flex: '1 1 200px', maxWidth: 260,
-              padding: `${SP.xl - 2}px ${SP.lg}px`,
+              flex: large ? '1 1 280px' : '1 1 200px',
+              maxWidth: large ? 360 : 260,
+              padding: large ? `${SP.xxl}px ${SP.xl}px` : `${SP.xl - 2}px ${SP.lg}px`,
               background: active ? GOLD_BG : CARD,
               border: `2px solid ${active ? GOLD : BORDER2}`,
-              borderRadius: R.lg, cursor: disabled ? 'not-allowed' : 'pointer',
+              borderRadius: R.lg,
+              cursor: 'pointer',
               textAlign: 'center',
-              opacity: disabled ? 0.45 : 1,
               transition: 'all 0.2s',
+              boxShadow: large ? '0 4px 16px rgba(28,20,9,0.08)' : 'none',
+            }}
+            onMouseOver={e => {
+              if (!large) return;
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(160,118,42,0.25)';
+              e.currentTarget.style.borderColor = GOLD;
+            }}
+            onMouseOut={e => {
+              if (!large) return;
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(28,20,9,0.08)';
+              e.currentTarget.style.borderColor = active ? GOLD : BORDER2;
             }}
           >
-            <Icon size={24} color={active ? GOLD : MUTED} style={{ marginBottom: 6 }} />
-            <div style={{ fontSize: FS.lg, fontWeight: 700, fontFamily: serif_, color: active ? INK : SECOND }}>
+            <Icon size={large ? 40 : 24} color={active ? GOLD : (large ? GOLD : MUTED)} style={{ marginBottom: large ? SP.md : 6 }} />
+            <div style={{
+              fontSize: large ? FS.xxl : FS.lg,
+              fontWeight: 700,
+              fontFamily: serif_,
+              color: active ? INK : (large ? INK : SECOND),
+            }}>
               {label}
             </div>
-            <div style={{ fontSize: FS.sm, color: MUTED, marginTop: SP.xs }}>{desc}</div>
-            {disabled && <div style={{ fontSize: FS.xxs, color: GOLD, marginTop: 6, fontWeight: 600 }}>Coming Soon</div>}
+            <div style={{ fontSize: large ? FS.md : FS.sm, color: MUTED, marginTop: SP.xs }}>{desc}</div>
+            {large && (
+              <div style={{ fontSize: FS.sm, color: SECOND, marginTop: SP.md, lineHeight: 1.5, fontStyle: 'italic' }}>
+                {longDesc}
+              </div>
+            )}
           </button>
         );
       })}
@@ -127,6 +141,63 @@ function StepIndicator({ currentStep, totalSteps }) {
   );
 }
 
+// ── Save to library button ──────────────────────────────────────────────────
+
+function SaveToLibraryButton({ settlement, canSave, isMobile }) {
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = async () => {
+    if (!settlement || saving) return;
+    setSaving(true);
+    try {
+      await savesService.save({
+        name: settlement.name || 'Untitled Settlement',
+        tier: settlement.tier || 'unknown',
+        settlement,
+        config: settlement._config || null,
+      });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch (e) {
+      console.error('Save failed:', e);
+      alert('Failed to save: ' + e.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (!canSave) {
+    return (
+      <button disabled style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+        padding: isMobile ? '13px 24px' : '10px 24px',
+        background: '#8a8a8a', color: '#fff', border: 'none', borderRadius: R.md,
+        cursor: 'not-allowed', fontFamily: sans, fontSize: FS.md, fontWeight: 700,
+        opacity: 0.5,
+      }}>
+        <Save size={15} /> Sign in to save
+      </button>
+    );
+  }
+
+  return (
+    <button onClick={handleSave} disabled={saving || saved} style={{
+      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+      padding: isMobile ? '13px 24px' : '10px 24px',
+      background: saved ? '#2a7a2a' : '#1a4a2a',
+      color: '#fff', border: 'none', borderRadius: R.md,
+      cursor: saving || saved ? 'default' : 'pointer',
+      fontFamily: sans, fontSize: FS.md, fontWeight: 700,
+      boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+      transition: 'all 0.2s',
+    }}>
+      <Save size={15} />
+      {saved ? '✓ Saved to Library' : saving ? 'Saving...' : 'Save to Library'}
+    </button>
+  );
+}
+
 // ── Main wizard component ────────────────────────────────────────────────────
 
 export default function GenerateWizard({ isMobile }) {
@@ -137,8 +208,9 @@ export default function GenerateWizard({ isMobile }) {
   const wizardMode    = useStore(s => s.wizardMode);
   const loadedFromSave = useStore(s => s.loadedFromSave);
   const importedNeighbour = useStore(s => s.importedNeighbour);
-  const canExport     = useStore(s => s.canExport());
+  const canSave       = useStore(s => s.canSave());
   const authTier      = useStore(s => s.auth.tier);
+  const authRole      = useStore(s => s.auth.role);
   const aiSettlement  = useStore(s => s.aiSettlement);
 
   // Store actions
@@ -147,29 +219,135 @@ export default function GenerateWizard({ isMobile }) {
   const setWizardMode   = useStore(s => s.setWizardMode);
   const clearLoadedFromSave = useStore(s => s.clearLoadedFromSave);
   const clearNeighbour  = useStore(s => s.clearNeighbour);
+  const clearSettlement = useStore(s => s.clearSettlement);
+
+  // Local state for back navigation
+  const [showOutput, setShowOutput] = useState(true);
+
+  // Sync showOutput when a new settlement is generated (handles Workshop's own generate button)
+  const prevSettlementRef = useRef(null);
+  useEffect(() => {
+    if (settlement && settlement !== prevSettlementRef.current) {
+      setShowOutput(true);
+      prevSettlementRef.current = settlement;
+    }
+  }, [settlement]);
 
   const handleGenerate = useCallback(() => {
     try {
       generate();
       clearLoadedFromSave();
+      setShowOutput(true); // show output after generation
     } catch (e) {
       console.error('GENERATE ERROR:', e);
       alert('Error: ' + e.message);
     }
   }, [generate, clearLoadedFromSave]);
 
-  // Quick mode: skip steps, go straight to generate
-  if (wizardMode === 'quick' && !settlement) {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 600, margin: '0 auto', padding: `${SP.xl}px 0` }}>
-        <ModeSelector mode={wizardMode} onModeChange={setWizardMode} />
+  /** Navigate back to the wizard, keeping the settlement in memory */
+  const handleBack = useCallback(() => {
+    setShowOutput(false);
+  }, []);
 
-        <div style={{ textAlign: 'center', padding: `${SP.xl}px 0` }}>
-          <p style={{ fontSize: 14, color: SECOND, fontFamily: sans, lineHeight: 1.6 }}>
-            Generate a fully randomised settlement with sensible defaults.
-            No configuration needed — just click and discover your world.
+  /** Start fresh — clear the settlement and return to wizard */
+  const handleNewSettlement = useCallback(() => {
+    if (clearSettlement) clearSettlement();
+    setShowOutput(false);
+    setWizardStep(0);
+  }, [clearSettlement, setWizardStep]);
+
+  // Onboarding coach step tracking
+  const onboardingActive = useStore(s => s.onboardingActive);
+  const onboardingStep = useStore(s => s.onboardingStep);
+  const advanceOnboarding = useStore(s => s.advanceOnboarding);
+
+  // Auto-advance step 0 → 1 when user picks a tier (config.settType changes from 'random')
+  useEffect(() => {
+    if (!onboardingActive) return;
+    if (onboardingStep !== 0) return;
+    if (config.settType && config.settType !== 'random') {
+      advanceOnboarding();
+    }
+  }, [onboardingActive, onboardingStep, config.settType, advanceOnboarding]);
+
+  // Auto-advance step 1 → 2 when a settlement is first generated
+  useEffect(() => {
+    if (!onboardingActive) return;
+    if (onboardingStep >= 2) return;
+    if (settlement) {
+      // Jump straight to "explore" regardless of whether tier was touched
+      useStore.getState().setOnboardingStep(2);
+    }
+  }, [onboardingActive, onboardingStep, settlement]);
+
+  // Card picker: no mode selected yet and no settlement — show ONLY the two mode cards.
+  // User must pick Quick or Advanced before any config UI appears.
+  if (!wizardMode && !settlement) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 860, margin: '0 auto', padding: `${SP.xl}px 0` }}>
+        <div style={{ textAlign: 'center', padding: `${SP.md}px 0` }}>
+          <h2 style={{
+            fontFamily: serif_,
+            fontSize: isMobile ? FS.xxl : 32,
+            fontWeight: 700,
+            color: INK,
+            margin: 0,
+            marginBottom: SP.sm,
+          }}>
+            Create a Settlement
+          </h2>
+          <p style={{
+            fontFamily: sans,
+            fontSize: FS.md,
+            color: MUTED,
+            margin: 0,
+          }}>
+            Choose a generation mode to get started.
           </p>
         </div>
+        {authTier === 'anon' && (
+          <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee', border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, textAlign: 'center' }}>
+            Free mode: generating Thorp, Hamlet, or Village. Sign in for all settlement tiers.
+          </div>
+        )}
+        <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
+      </div>
+    );
+  }
+
+  // "Change mode" back button — shown above the mode-specific UI once a card is picked.
+  const ChangeModeBar = () => (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: SP.sm,
+      padding: `${SP.sm}px ${SP.md}px`,
+      background: CARD_HDR,
+      border: `1px solid ${BORDER}`,
+      borderRadius: R.md,
+      fontSize: FS.sm, color: SECOND,
+    }}>
+      <button
+        onClick={() => setWizardMode(null)}
+        style={{
+          display: 'flex', alignItems: 'center', gap: SP.xs,
+          background: 'transparent', border: 'none', cursor: 'pointer',
+          color: GOLD, fontFamily: sans, fontSize: FS.sm, fontWeight: 600, padding: 0,
+        }}
+      >
+        <ChevronLeft size={14} /> Change mode
+      </button>
+      <span style={{ color: MUTED }}>·</span>
+      <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
+        {wizardMode === 'quick' ? 'Quick Generate' : 'Advanced Generate'}
+      </span>
+    </div>
+  );
+
+  // Quick mode: General Config only, then generate.
+  // Renders the SAME ConfigurationPanel as Advanced step 0 — just no further steps.
+  if (wizardMode === 'quick' && !settlement) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 760, margin: '0 auto', padding: `${SP.xl}px 0` }}>
+        <ChangeModeBar />
 
         {authTier === 'anon' && (
           <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee', border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND }}>
@@ -177,30 +355,57 @@ export default function GenerateWizard({ isMobile }) {
           </div>
         )}
 
-        <button onClick={handleGenerate} style={{
-          width: '100%', padding: isMobile ? `${SP.xl}px 0` : `${SP.xl - 2}px 0`,
-          background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-          color: '#fff', border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
-          fontFamily: serif_,
-          fontSize: isMobile ? 22 : FS.xxl, fontWeight: 600, letterSpacing: '0.02em',
-          boxShadow: '0 4px 20px rgba(160,118,42,0.45)',
-          transition: 'opacity 0.15s, transform 0.1s',
+        {/* Helper banner — explains Quick is one-screen */}
+        <div style={{
+          padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee',
+          border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`,
+          borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
         }}>
+          <strong style={{ fontFamily: serif_ }}>Quick Generate</strong>
+          {' — '}Set the foundations and hit Generate. Everything else is randomized.
+          Switch to <strong>Advanced Generate</strong> for institution toggles, services, and trade dynamics.
+        </div>
+
+        <div
+          data-onboard-highlight={onboardingActive && onboardingStep === 0 ? 'true' : undefined}
+          style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden' }}
+        >
+          <div style={{ padding: `${SP.md}px ${SP.lg}px`, background: CARD_HDR, borderBottom: `1px solid ${BORDER2}` }}>
+            <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>General Configuration</span>
+          </div>
+          <div style={{ padding: `${SP.lg}px 0 0` }}>
+            <ConfigurationPanel />
+          </div>
+        </div>
+
+        <button
+          onClick={handleGenerate}
+          data-onboard-highlight={onboardingActive && onboardingStep === 1 ? 'true' : undefined}
+          style={{
+            width: '100%', padding: isMobile ? `${SP.xl}px 0` : `${SP.xl - 2}px 0`,
+            background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
+            color: '#fff', border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
+            fontFamily: serif_,
+            fontSize: isMobile ? 22 : FS.xxl, fontWeight: 600, letterSpacing: '0.02em',
+            boxShadow: '0 4px 20px rgba(160,118,42,0.45)',
+            transition: 'opacity 0.15s, transform 0.1s',
+          }}
+        >
           Generate Settlement
         </button>
       </div>
     );
   }
 
-  // Advanced mode: step-by-step wizard
+  // Advanced mode: step-by-step wizard (custom mode removed — folded into Compendium)
   const isAdvanced = wizardMode === 'advanced';
   const currentStepDef = STEPS[wizardStep] || STEPS[0];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
-      {/* Mode selector (collapse after first generation) */}
-      {!settlement && <ModeSelector mode={wizardMode} onModeChange={setWizardMode} />}
+      {/* Change-mode bar (collapse after first generation) */}
+      {!settlement && <ChangeModeBar />}
 
       {/* Banners */}
       {loadedFromSave && (
@@ -303,8 +508,9 @@ export default function GenerateWizard({ isMobile }) {
         </>
       )}
 
-      {/* Generate button — visible when on final step or quick mode with settlement */}
-      {(!isAdvanced || wizardStep >= STEPS.length || settlement) && (
+      {/* Generate button — visible for quick mode with settlement (Regenerate),
+          advanced mode after final step, or any mode with existing settlement. */}
+      {(settlement || (isAdvanced && wizardStep >= STEPS.length)) && (
         <button
           onClick={handleGenerate}
           style={{
@@ -324,43 +530,122 @@ export default function GenerateWizard({ isMobile }) {
       )}
 
       {/* Output + export buttons */}
-      {settlement && (
+      {settlement && showOutput && (
         <>
-          <OutputContainer />
+          {/* ── Back navigation toolbar ──────────────────────────── */}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: SP.md,
+            padding: `${SP.md}px ${SP.lg}px`,
+            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+            borderRadius: R.lg,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
+            position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
+          }}>
+            <button
+              onClick={handleBack}
+              style={{
+                display: 'flex', alignItems: 'center', gap: SP.xs,
+                padding: `${SP.sm}px ${SP.md}px`,
+                background: 'rgba(160,118,42,0.15)',
+                border: `1px solid rgba(160,118,42,0.3)`,
+                borderRadius: R.md, cursor: 'pointer',
+                color: GOLD, fontSize: FS.sm, fontWeight: 600, fontFamily: sans,
+              }}
+              title="Back to configuration"
+            >
+              <ArrowLeft size={14} /> Back
+            </button>
 
-          {/* Export buttons — premium only for PDF/JSON */}
-          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'center', gap: isMobile ? SP.sm : SP.sm + 2, paddingTop: SP.xs }}>
-            {[
-              { label: 'Save/Export JSON', Icon: Download, action: () => downloadJSON(settlement), color: '#1a4a2a', premium: true },
-              { label: 'Narrative AI Prompt', Icon: Sparkles, action: () => downloadNarrativePrompt(settlement), color: '#5a3a8a', premium: true },
-              { label: 'Map AI Prompt', Icon: Map, action: () => downloadMapPrompt(settlement), color: '#8a3a1a', premium: true },
-              { label: 'Export PDF', Icon: FileText, action: () => generateSettlementPDF(aiSettlement ? { ...settlement, _aiNarrative: aiSettlement } : settlement), color: '#7a1a1a', premium: true },
-            ].map(({ label, Icon, action, color, premium }) => {
-              const locked = premium && !canExport;
-              return (
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{
+                fontSize: FS.lg, fontWeight: 700, fontFamily: serif_,
+                color: GOLD, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+              }}>
+                {settlement.name || 'Untitled Settlement'}
+              </div>
+              <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                {settlement.tier || 'Settlement'} &middot; Pop. {settlement.population?.toLocaleString?.() || '?'}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: SP.xs }}>
+              {canSave && (
                 <button
-                  key={label}
-                  onClick={locked ? undefined : action}
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-                    padding: isMobile ? `${FS.md}px ${SP.xl - 2}px` : `9px ${SP.xl - 2}px`,
-                    width: isMobile ? '100%' : 'auto',
-                    background: locked ? '#8a8a8a' : color,
-                    color: '#fff', border: 'none', borderRadius: R.md, cursor: locked ? 'not-allowed' : 'pointer',
-                    fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-                    boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-                    opacity: locked ? 0.5 : 1,
-                    transition: 'opacity 0.15s',
+                  onClick={async () => {
+                    try {
+                      await savesService.save({
+                        name: settlement.name || 'Untitled Settlement',
+                        tier: settlement.tier || 'unknown',
+                        settlement,
+                      });
+                    } catch (e) { console.error('Save failed:', e); }
                   }}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: SP.xs,
+                    padding: `${SP.sm}px ${SP.md}px`,
+                    background: 'rgba(42,122,42,0.2)',
+                    border: '1px solid rgba(42,122,42,0.4)',
+                    borderRadius: R.md, cursor: 'pointer',
+                    color: '#4a8a4a', fontSize: FS.sm, fontWeight: 600, fontFamily: sans,
+                  }}
+                  title="Save settlement"
                 >
-                  <Icon size={14} />
-                  {label}
-                  {locked && <span style={{ fontSize: FS.xxs, marginLeft: SP.xs }}>PRO</span>}
+                  <Save size={14} /> Save
                 </button>
-              );
-            })}
+              )}
+              <button
+                onClick={handleNewSettlement}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: SP.xs,
+                  padding: `${SP.sm}px ${SP.md}px`,
+                  background: GOLD,
+                  border: 'none',
+                  borderRadius: R.md, cursor: 'pointer',
+                  color: '#fff', fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
+                }}
+              >
+                <Zap size={14} /> New
+              </button>
+            </div>
+          </div>
+
+          <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
+            <OutputContainer />
+          </Suspense>
+
+          {/* Save to library */}
+          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: SP.xs }}>
+            <SaveToLibraryButton settlement={settlement} canSave={canSave} isMobile={isMobile} />
           </div>
         </>
+      )}
+
+      {/* When settlement exists but user navigated back — show re-view option */}
+      {settlement && !showOutput && (
+        <div style={{
+          padding: `${SP.md}px ${SP.lg}px`, background: '#f0faf2',
+          border: '1px solid #4a8a60', borderRadius: R.lg,
+          display: 'flex', alignItems: 'center', gap: SP.md,
+        }}>
+          <div style={{ flex: 1 }}>
+            <span style={{ fontSize: FS.md, fontWeight: 700, color: '#1a5a28' }}>
+              Last generated: {settlement.name || 'Untitled'}
+            </span>
+            <span style={{ fontSize: FS.sm, color: '#4a8a60', marginLeft: SP.sm }}>
+              {settlement.tier}
+            </span>
+          </div>
+          <button
+            onClick={() => setShowOutput(true)}
+            style={{
+              padding: `${SP.sm}px ${SP.lg}px`, background: '#2a7a2a',
+              color: '#fff', border: 'none', borderRadius: R.md,
+              cursor: 'pointer', fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
+            }}
+          >
+            View Settlement
+          </button>
+        </div>
       )}
     </div>
   );

@@ -5,9 +5,19 @@
  * This component handles navigation, header/footer chrome,
  * and renders the active view. Each view reads its own
  * state from the store via selectors.
+ *
+ * Views:
+ *   generate    — Settlement creation wizard
+ *   settlements — Saved settlements library
+ *   map         — Fantasy World Map (FMG integration)
+ *   neighbour   — Neighbourhood System
+ *   compendium  — Rules & data compendium
+ *   howto       — How to use guide
+ *   account     — Full account page (post-auth)
+ *   admin       — Developer admin panel (elevated roles only)
  */
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { MapPin, FolderOpen, Upload, BookOpen, Sparkles, Map as MapIcon, Zap } from 'lucide-react';
+import { MapPin, FolderOpen, BookOpen, Sparkles, Map as MapIcon, Zap, User, Shield, Headphones } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { GOLD, GOLD_B, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, PARCH, BORDER, sans, serif_, SP, R, FS } from './components/theme.js';
@@ -15,20 +25,22 @@ import { GOLD, GOLD_B, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, PARCH, BORDER, san
 // Lazy-loaded views
 const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
 const SettlementsPanel = lazy(() => import('./components/SettlementsPanel'));
-const NeighbourSystem = lazy(() => import('./components/NeighbourSystem'));
 const CompendiumPanel = lazy(() => import('./components/CompendiumPanel'));
 const HowToUse        = lazy(() => import('./components/HowToUse'));
 const WorldMap         = lazy(() => import('./components/WorldMap.jsx'));
 const AuthModal        = lazy(() => import('./components/AuthModal.jsx'));
 const PurchaseModal    = lazy(() => import('./components/PurchaseModal.jsx'));
+const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
+const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
+
+import OnboardingCoach from './components/OnboardingCoach.jsx';
 
 const NAV = [
-  { id: 'generate',    label: 'Create',           Icon: MapPin },
-  { id: 'settlements', label: 'Settlements',      Icon: FolderOpen },
-  { id: 'map',         label: 'World Map',        Icon: MapIcon },
-  { id: 'neighbour',   label: 'Neighbour System', Icon: Upload },
-  { id: 'compendium',  label: 'Compendium',       Icon: BookOpen },
-  { id: 'howto',       label: 'How To Use',       Icon: Sparkles },
+  { id: 'generate',    label: 'Create',      Icon: MapPin },
+  { id: 'settlements', label: 'Settlements', Icon: FolderOpen },
+  { id: 'map',         label: 'World Map',   Icon: MapIcon },
+  { id: 'compendium',  label: 'Compendium',  Icon: BookOpen },
+  { id: 'howto',       label: 'How To Use',  Icon: Sparkles },
 ];
 
 function Loading() {
@@ -46,18 +58,26 @@ export default function App() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const authTier = useStore(s => s.auth.tier);
+  const authRole = useStore(s => s.auth.role);
   const authLoading = useStore(s => s.auth.loading);
-  const canUseNeighbour = useStore(s => s.canUseNeighbour());
+  const isElevated = useStore(s => s.isElevated());
   const initAuth = useStore(s => s.initAuth);
+  const initOnboarding = useStore(s => s.initOnboarding);
+  const onboardingNudge = useStore(s => s.onboardingNudge);
+  const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
   const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setCreditBalance = useStore(s => s.setCreditBalance);
   const creditBalance = useStore(s => s.creditBalance);
+  const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
+  const migrateLocalCustomContentToCloud = useStore(s => s.migrateLocalCustomContentToCloud);
+  const clearCloudCustomContent = useStore(s => s.clearCloudCustomContent);
   const [checkoutToast, setCheckoutToast] = useState(null);
 
   // Initialize auth session on mount + check post-checkout result + load credits
   useEffect(() => {
     initAuth();
+    initOnboarding();
     import('./lib/stripe.js').then(({ checkCheckoutResult, fetchCreditBalance }) => {
       // Handle Stripe checkout return
       const result = checkCheckoutResult();
@@ -68,7 +88,31 @@ export default function App() {
       // Always fetch credit balance on mount
       fetchCreditBalance().then(bal => setCreditBalance(bal));
     });
-  }, [initAuth, setCreditBalance]);
+  }, [initAuth, initOnboarding, setCreditBalance]);
+
+  // ── Cloud sync custom content when user enters premium / elevated state ───
+  // Triggers once per tier transition. Migrates local items on first premium
+  // sign-in (tracked via the sf_custom_content_migrated localStorage flag).
+  useEffect(() => {
+    if (authLoading) return;
+    const canSyncCloud = authTier === 'premium' || isElevated;
+    if (canSyncCloud) {
+      // First migrate any local items, then load the canonical cloud state
+      migrateLocalCustomContentToCloud()
+        .then(() => loadCustomContentFromCloud())
+        .catch(err => console.error('Custom content cloud sync failed:', err));
+    } else if (authTier === 'anon') {
+      // Sign-out: drop cloud cache, fall back to local (grandfathered) items
+      clearCloudCustomContent();
+    }
+  }, [authTier, isElevated, authLoading, loadCustomContentFromCloud, migrateLocalCustomContentToCloud, clearCloudCustomContent]);
+
+  // Auto-dismiss onboarding nudge after 8s
+  useEffect(() => {
+    if (!onboardingNudge) return;
+    const t = setTimeout(() => clearOnboardingNudge(), 8000);
+    return () => clearTimeout(t);
+  }, [onboardingNudge, clearOnboardingNudge]);
 
   useEffect(() => {
     const onScroll = () => setShowScrollTop(window.scrollY > 400);
@@ -78,16 +122,11 @@ export default function App() {
 
   // Gate premium-only views
   const handleNavClick = (id) => {
-    if (id === 'neighbour' && !canUseNeighbour) {
-      setAuthModalOpen(true);
-      return;
-    }
     setView(id);
   };
 
   // Filter nav items based on visibility
   const visibleNav = NAV.filter(item => {
-    // Hide map tab for anonymous users
     if (item.id === 'map' && authTier === 'anon') return false;
     return true;
   });
@@ -115,7 +154,7 @@ export default function App() {
               <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                 {visibleNav.map(({ id, label, Icon }) => {
                   const active = view === id;
-                  const locked = id === 'neighbour' && !canUseNeighbour;
+                  const locked = false;
                   return (
                     <button
                       key={id}
@@ -158,25 +197,56 @@ export default function App() {
                   }}
                 >
                   <Zap size={13} />
-                  {creditBalance}
+                  {isElevated ? '\u221E' : creditBalance}
+                </button>
+              )}
+
+              {/* Admin button (developer/admin only) */}
+              {isElevated && (
+                <button
+                  onClick={() => setView('admin')}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 4,
+                    padding: `${SP.sm}px ${SP.md}px`, marginLeft: SP.xs,
+                    background: 'rgba(124,58,237,0.15)',
+                    border: '1px solid rgba(124,58,237,0.3)',
+                    borderRadius: R.md, cursor: 'pointer',
+                    color: '#c8a0f0',
+                    fontSize: FS.sm, fontWeight: 600,
+                    fontFamily: sans,
+                  }}
+                  title="Developer Admin Panel"
+                >
+                  <Shield size={13} />
                 </button>
               )}
 
               {/* Account button */}
               <button
-                onClick={() => setAuthModalOpen(true)}
+                onClick={() => authTier === 'anon' ? setAuthModalOpen(true) : setView('account')}
                 style={{
+                  display: 'flex', alignItems: 'center', gap: SP.xs,
                   padding: `${SP.sm}px ${SP.lg}px`, marginLeft: SP.xs,
-                  background: authTier === 'anon' ? GOLD_BG : 'rgba(42,122,42,0.2)',
-                  border: `1px solid ${authTier === 'anon' ? 'rgba(160,118,42,0.3)' : 'rgba(42,122,42,0.4)'}`,
+                  background: authTier === 'anon' ? GOLD_BG
+                    : isElevated ? 'rgba(124,58,237,0.15)'
+                    : 'rgba(42,122,42,0.2)',
+                  border: `1px solid ${authTier === 'anon' ? 'rgba(160,118,42,0.3)'
+                    : isElevated ? 'rgba(124,58,237,0.3)'
+                    : 'rgba(42,122,42,0.4)'}`,
                   borderRadius: R.md, cursor: 'pointer',
-                  color: authTier === 'anon' ? GOLD : '#4a8a4a',
+                  color: authTier === 'anon' ? GOLD
+                    : isElevated ? '#c8a0f0'
+                    : '#4a8a4a',
                   fontSize: FS.sm, fontWeight: 600,
                   fontFamily: sans,
                   letterSpacing: '0.04em', textTransform: 'uppercase',
                 }}
               >
-                {authTier === 'anon' ? 'Sign In' : authTier === 'premium' ? 'PRO' : 'Account'}
+                <User size={13} />
+                {authTier === 'anon' ? 'Sign In'
+                  : isElevated ? 'DEV'
+                  : authTier === 'premium' ? 'PRO'
+                  : 'Account'}
               </button>
             </div>
           </header>
@@ -184,13 +254,15 @@ export default function App() {
 
         {/* ── Main content ────────────────────────────────────── */}
         <main style={{ flex: 1, overflowY: 'auto', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
+          {view === 'generate' && <OnboardingCoach />}
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} />}
-            {view === 'map'         && <WorldMap />}
-            {view === 'neighbour'   && <NeighbourSystem />}
+            {view === 'map'         && <WorldMap onNavigate={setView} />}
             {view === 'compendium'  && <CompendiumPanel standalone />}
             {view === 'howto'       && <HowToUse standalone />}
+            {view === 'account'     && <AccountPage onNavigateAdmin={() => setView('admin')} />}
+            {view === 'admin'       && <AdminPanel onBack={() => setView('account')} />}
           </Suspense>
         </main>
 
@@ -209,10 +281,18 @@ export default function App() {
           justifyContent: 'center',
           alignItems: 'center',
           gap: SP.lg,
+          flexWrap: 'wrap',
         }}>
           <span>&copy; 2026 SettlementForge</span>
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
           <span>All rights reserved</span>
+          <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
+          <a href="mailto:clausellstokes@aol.com" style={{
+            color: MUTED, textDecoration: 'none', display: 'inline-flex',
+            alignItems: 'center', gap: 4,
+          }}>
+            <Headphones size={11} /> Support
+          </a>
         </footer>
 
         {/* ── Mobile bottom nav ───────────────────────────────── */}
@@ -279,7 +359,10 @@ export default function App() {
       {/* ── Auth modal ────────────────────────────────────────── */}
       {authModalOpen && (
         <Suspense fallback={null}>
-          <AuthModal onClose={() => setAuthModalOpen(false)} />
+          <AuthModal
+            onClose={() => setAuthModalOpen(false)}
+            onNavigateAccount={() => { setAuthModalOpen(false); setView('account'); }}
+          />
         </Suspense>
       )}
 
@@ -302,6 +385,34 @@ export default function App() {
           animation: 'fadeIn 0.3s ease-out',
         }}>
           {checkoutToast}
+        </div>
+      )}
+
+      {/* ── Onboarding nudge toast (post-tour tips) ───────────── */}
+      {onboardingNudge && (
+        <div
+          onClick={clearOnboardingNudge}
+          style={{
+            position: 'fixed',
+            bottom: isMobile ? 92 : SP.xxl,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 2000,
+            maxWidth: 480,
+            padding: `${SP.md}px ${SP.lg}px`,
+            background: 'linear-gradient(135deg, #fef9ee 0%, #fdf3d8 100%)',
+            border: `1.5px solid ${GOLD}`,
+            borderLeft: `5px solid ${GOLD}`,
+            color: INK,
+            borderRadius: R.lg,
+            fontSize: FS.sm,
+            fontFamily: sans,
+            boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
+            cursor: 'pointer',
+            lineHeight: 1.5,
+          }}
+        >
+          {onboardingNudge}
         </div>
       )}
     </>

@@ -243,4 +243,4 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
   );
 }
 
-export default ServicesTab;
+export default React.memo(ServicesTab);

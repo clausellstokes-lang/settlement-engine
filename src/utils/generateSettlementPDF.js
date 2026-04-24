@@ -11,6 +11,7 @@
  * 7. No emoji / Unicode outside Latin-1 (jsPDF built-in font constraint)
  */
 import { jsPDF } from 'jspdf';
+import { autoLayout } from './graphLayout.js';
 
 // ── Page geometry ──────────────────────────────────────────────────────────────
 const PW = 210, PH = 297;
@@ -254,6 +255,10 @@ export function generateSettlementPDF(settlement) {
   if (net.length > 0) {
     doc.addPage(); pageN++;
     buildNeighbours(doc, r, net, isr, name, pageN);
+
+    // Relationship diagram page — visual graph of the neighbour network
+    doc.addPage(); pageN++;
+    buildRelationshipDiagram(doc, r, net, name, pageN);
   }
 
   // ── AI Narrative (if generated) ─────────────────────────────────────────────
@@ -687,7 +692,9 @@ function buildNPCs(doc, r, ps, name, startPage) {
     y+=9;
 
     for (const npc of fNPCs) {
-      const cardH=NPC_H[npc.influence]||NPC_H.low;
+      // High-influence NPCs get a taller two-column "stat block" card
+      const isHigh = npc.influence === 'high';
+      const cardH = isHigh ? 72 : (NPC_H[npc.influence] || NPC_H.low);
       if (y+cardH>BOT-8) y=newPage();
 
       // Card container — always cream, always readable
@@ -697,21 +704,114 @@ function buildNPCs(doc, r, ps, name, startPage) {
 
       // Name bar — colored, text always white, height fixed at 9mm
       rect(d,ML,y,CW,9,nc);
-      d.setFont('times','bold'); d.setFontSize(11); st(d,[255,255,255]);
+      d.setFont('times','bold'); d.setFontSize(isHigh?12:11); st(d,[255,255,255]);
       const nameStr=s(npc.name);
       d.text(nameStr,ML+3,y+6.5);
 
       // Role + influence right-aligned in name bar
-      const roleStr=[s(npc.role||''), npc.influence==='high'?'[High]':npc.influence==='moderate'?'[Mod]':''].filter(Boolean).join('  ');
+      const roleStr=[s(npc.role||''), npc.influence==='high'?'[High Influence]':npc.influence==='moderate'?'[Mod]':''].filter(Boolean).join('  ');
       if (roleStr) {
         d.setFont('helvetica','bold'); d.setFontSize(7); st(d,[220,200,160]);
         const rW=d.getStringUnitWidth(roleStr)*7/d.internal.scaleFactor;
         d.text(roleStr,ML+CW-rW-3,y+6.5);
       }
 
-      // Content below name bar — always on CREAM, guaranteed readable
+      // ── HIGH-INFLUENCE STAT BLOCK: two-column layout ────────────────────
+      if (isHigh) {
+        // Stats band — 6mm strip under the name bar with tier, faction, goal strength
+        const bandY = y + 9;
+        rect(d, ML, bandY, CW, 6, [250, 244, 228]);
+        hline(d, ML, bandY + 6, ML + CW, TAN, 0.3);
+        d.setFont('helvetica', 'bold'); d.setFontSize(6.5); st(d, BROWN);
+        const tierLabel = 'TIER';
+        const factionLabel = 'FACTION';
+        const driveLabel = 'DRIVE';
+        const bandInfo = [
+          { label: tierLabel, value: npc.influence === 'high' ? 'High' : npc.influence || 'Unknown' },
+          { label: factionLabel, value: truncate(s(npc.factionAffiliation || 'Independent'), 18) },
+          { label: driveLabel, value: truncate(s(npc.personality?.dominant || npc.goal?.category || 'Varied'), 18) },
+        ];
+        const bandColW = CW / 3;
+        bandInfo.forEach((info, i) => {
+          const bx = ML + i * bandColW + 3;
+          d.setFont('helvetica', 'bold'); d.setFontSize(5.5); st(d, BROWN);
+          d.text(info.label, bx, bandY + 2.8);
+          d.setFont('helvetica', 'bold'); d.setFontSize(7.5); st(d, INK);
+          d.text(info.value, bx, bandY + 5.5);
+        });
+
+        // Split column layout under the stats band
+        const contentY = bandY + 7.5;
+        const colGap = 3;
+        const colW = (CW - colGap) / 2;
+        const lx = ML + 2;
+        const rx = ML + colW + colGap + 2;
+        let ly = contentY;
+        let ry = contentY;
+        const cardBot = y + cardH - 3;
+
+        // ── LEFT COLUMN: Profile (impression → personality → goal) ───────
+        const imp = s(npc.presentation?.impression ||
+          [npc.physical?.age, npc.physical?.build, npc.physical?.feature].filter(Boolean).join(', ') || '');
+        if (imp && ly < cardBot - 4) {
+          d.setFont('helvetica', 'italic'); d.setFontSize(7.5); st(d, BROWN);
+          const impL = wrap(d, imp, colW - 4, 7.5);
+          d.text(impL.slice(0, 2), lx, ly);
+          ly += lh(7.5, Math.min(impL.length, 2)) + 1;
+        }
+
+        if (ly < cardBot - 6) {
+          d.setFont('helvetica', 'bold'); d.setFontSize(6); st(d, nc);
+          d.text('PERSONALITY', lx, ly); ly += 2.8;
+          const traits = [npc.personality?.dominant, npc.personality?.flaw, npc.personality?.modifier].filter(Boolean).join(' | ');
+          d.setFont('helvetica', 'normal'); d.setFontSize(7); st(d, INK);
+          const trL = wrap(d, s(traits), colW - 4, 7);
+          d.text(trL.slice(0, 2), lx, ly);
+          ly += lh(7, Math.min(trL.length, 2)) + 1;
+        }
+
+        if (npc.goal?.short && ly < cardBot - 6) {
+          d.setFont('helvetica', 'bold'); d.setFontSize(6); st(d, nc);
+          d.text('GOAL', lx, ly); ly += 2.8;
+          d.setFont('helvetica', 'normal'); d.setFontSize(7.5); st(d, INK);
+          const gL = wrap(d, s(npc.goal.short), colW - 4, 7.5);
+          d.text(gL.slice(0, 3), lx, ly);
+          ly += lh(7.5, Math.min(gL.length, 3));
+        }
+
+        // ── RIGHT COLUMN: Leverage (secret → hook) ───────────────────────
+        // Vertical divider
+        sd(d, TAN);
+        d.setLineWidth(0.2);
+        d.line(ML + colW + colGap / 2, contentY - 1, ML + colW + colGap / 2, cardBot);
+
+        if (npc.secret?.what && ry < cardBot - 6) {
+          d.setFont('helvetica', 'bold'); d.setFontSize(6); st(d, MIL);
+          d.text('SECRET', rx, ry); ry += 2.8;
+          const secTxt = s(npc.secret.what) + (npc.secret.stakes ? ' (' + s(npc.secret.stakes) + ')' : '');
+          d.setFont('helvetica', 'italic'); d.setFontSize(7.5); st(d, [100, 20, 20]);
+          const secL = wrap(d, secTxt, colW - 4, 7.5);
+          d.text(secL.slice(0, 3), rx, ry);
+          ry += lh(7.5, Math.min(secL.length, 3)) + 1;
+        }
+
+        const hook = (npc.plotHooks || [])[0];
+        const hookTxt = typeof hook === 'string' ? hook : (hook?.hook || '');
+        if (hookTxt && ry < cardBot - 4) {
+          d.setFont('helvetica', 'bold'); d.setFontSize(6); st(d, REL);
+          d.text('PLOT HOOK', rx, ry); ry += 2.8;
+          d.setFont('helvetica', 'italic'); d.setFontSize(7.5); st(d, [20, 70, 20]);
+          const hkL = wrap(d, hookTxt, colW - 4, 7.5);
+          d.text(hkL.slice(0, 3), rx, ry);
+          ry += lh(7.5, Math.min(hkL.length, 3));
+        }
+
+        y += cardH + 3;
+        continue;
+      }
+
+      // ── MODERATE / LOW INFLUENCE: single-column compact card ─────────────
       let iy=y+12.5;
-      const avail=cardH-13;          // available mm for content
       const lineH8=lh(8);
       const lineH7=lh(7.5);
 
@@ -764,11 +864,12 @@ function buildNPCs(doc, r, ps, name, startPage) {
 
       // HOOK (8pt, dark green)
       const hook=(npc.plotHooks||[])[0];
-      if (hook&&iy<y+cardH-5) {
+      const hookTxt=typeof hook==='string'?hook:(hook?.hook||'');
+      if (hookTxt&&iy<y+cardH-5) {
         d.setFont('helvetica','bold'); d.setFontSize(6.5); st(d,REL);
         d.text('HOOK',ML+3,iy); iy+=3.5;
         d.setFont('helvetica','italic'); d.setFontSize(8); st(d,[20,70,20]);
-        const hkL=wrap(d,hook,CW-6,8);
+        const hkL=wrap(d,hookTxt,CW-6,8);
         d.text(hkL.slice(0,1),ML+3,iy);
       }
 
@@ -1211,6 +1312,181 @@ function buildNeighbours(doc, r, net, isr, name, pageN) {
       const lines = wrap(d, desc, CW - 4, 7);
       d.text(lines.slice(0, 2), ML+2, y+8);
       y += 6 + lines.slice(0, 2).length * lh(7);
+    });
+  }
+
+  footer(d, name, `Page ${pageN}`);
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+// RELATIONSHIP DIAGRAM PAGE — force-directed graph of linked settlements
+// ════════════════════════════════════════════════════════════════════════════════
+
+// Relationship edge colors — mirrors neighbourSlice RELATIONSHIP_TYPES
+const REL_COLORS = {
+  neutral:       [136, 136, 136],
+  trade_partner: [ 42, 122,  42],
+  allied:        [ 42,  74, 138],
+  patron:        [106,  74, 138],
+  client:        [138, 106,  42],
+  rival:         [138,  74,  42],
+  cold_war:      [106,  42,  42],
+  hostile:       [139,  26,  26],
+};
+
+function buildRelationshipDiagram(doc, r, net, name, pageN) {
+  const d = doc;
+  let y = masthead(d, name, 'geography', 'Relationship Map');
+
+  // Build nodes: current settlement + all linked neighbours
+  const nodes = [
+    { id: '_self', label: s(r.name || 'This Settlement'), tier: s(r.tier || ''), isSelf: true },
+    ...net.map((nb, i) => ({
+      id: nb.settlementId || `nb_${i}`,
+      label: s(nb.neighbourName || nb.name || `Neighbour ${i + 1}`),
+      tier: s(nb.neighbourTier || nb.tier || ''),
+      relType: (nb.relationshipType || 'neutral').toLowerCase(),
+      isSelf: false,
+    })),
+  ];
+
+  // Build edges: self → each neighbour, typed by relationshipType
+  const edges = net.map((nb, i) => ({
+    from: '_self',
+    to: nb.settlementId || `nb_${i}`,
+    type: (nb.relationshipType || 'neutral').toLowerCase(),
+  }));
+
+  // Compute layout in [0,1] unit square
+  const laid = autoLayout(nodes, edges);
+  const byId = new Map(laid.map(n => [n.id, n]));
+
+  // Available diagram area on the page
+  const DIAG_TOP = y + 4;
+  const DIAG_BOT = BOT - 68; // leave room for legend + node list
+  const DIAG_LEFT = ML + 6;
+  const DIAG_RIGHT = ML + CW - 6;
+  const DIAG_W = DIAG_RIGHT - DIAG_LEFT;
+  const DIAG_H = DIAG_BOT - DIAG_TOP;
+
+  // Background canvas for the diagram
+  rect(d, ML, DIAG_TOP - 2, CW, DIAG_H + 4, CREAM, TAN);
+
+  // Project unit coords to diagram area
+  const project = (node) => ({
+    px: DIAG_LEFT + node.x * DIAG_W,
+    py: DIAG_TOP + node.y * DIAG_H,
+  });
+
+  // ── Draw edges first (so they sit under nodes) ──────────────────────────
+  for (const e of edges) {
+    const a = byId.get(e.from);
+    const b = byId.get(e.to);
+    if (!a || !b) continue;
+    const { px: ax, py: ay } = project(a);
+    const { px: bx, py: by } = project(b);
+    const clr = REL_COLORS[e.type] || REL_COLORS.neutral;
+    sd(d, clr);
+
+    // Edge line weight by relationship strength
+    const isStrong = ['allied', 'trade_partner', 'hostile'].includes(e.type);
+    d.setLineWidth(isStrong ? 0.8 : 0.45);
+    d.line(ax, ay, bx, by);
+
+    // Label near midpoint
+    const midX = (ax + bx) / 2;
+    const midY = (ay + by) / 2;
+    const label = e.type.replace(/_/g, ' ');
+    d.setFont('helvetica', 'bold');
+    d.setFontSize(5.5);
+    st(d, clr);
+    d.text(label, midX + 1, midY - 0.8);
+  }
+
+  // ── Draw nodes on top of edges ──────────────────────────────────────────
+  for (const node of laid) {
+    const { px, py } = project(node);
+    const isSelf = node.isSelf;
+    const nodeR = isSelf ? 7 : 5.5;
+
+    // Shadow ring
+    sf(d, [240, 232, 210]);
+    d.circle(px + 0.5, py + 0.5, nodeR + 0.6, 'F');
+
+    // Node circle
+    sf(d, isSelf ? GOLD : [245, 240, 228]);
+    sd(d, isSelf ? GOLDD : BROWN);
+    d.setLineWidth(isSelf ? 0.8 : 0.5);
+    d.circle(px, py, nodeR, 'FD');
+
+    // Label below the node
+    d.setFont('helvetica', 'bold');
+    d.setFontSize(isSelf ? 8 : 7);
+    st(d, isSelf ? GOLDD : INK);
+    const txt = truncate(node.label, 22);
+    const txtW = d.getStringUnitWidth(txt) * (isSelf ? 8 : 7) / d.internal.scaleFactor;
+    d.text(txt, px - txtW / 2, py + nodeR + 3.5);
+
+    // Tier below label
+    if (node.tier) {
+      d.setFont('helvetica', 'normal');
+      d.setFontSize(5.5);
+      st(d, BROWN);
+      const tierTxt = node.tier.toUpperCase();
+      const tierW = d.getStringUnitWidth(tierTxt) * 5.5 / d.internal.scaleFactor;
+      d.text(tierTxt, px - tierW / 2, py + nodeR + 7);
+    }
+  }
+
+  // ── Legend ──────────────────────────────────────────────────────────────
+  const legendY = DIAG_BOT + 6;
+  y = legendY;
+  y = secBar(d, ML, y, CW, 'Relationship Legend', [26, 70, 90]);
+
+  const legendEntries = Object.entries(REL_COLORS);
+  const colsLeg = 4;
+  const colW = (CW - 4) / colsLeg;
+  legendEntries.forEach(([type, clr], i) => {
+    const col = i % colsLeg;
+    const row = Math.floor(i / colsLeg);
+    const lx = ML + col * colW + 2;
+    const ly = y + row * 5;
+    // Color swatch (line)
+    sd(d, clr);
+    d.setLineWidth(1);
+    d.line(lx, ly, lx + 7, ly);
+    // Label
+    d.setFont('helvetica', 'normal');
+    d.setFontSize(6.5);
+    st(d, INK);
+    d.text(type.replace(/_/g, ' '), lx + 9, ly + 1.5);
+  });
+  y += Math.ceil(legendEntries.length / colsLeg) * 5 + 4;
+
+  // ── Neighbour list (condensed) ──────────────────────────────────────────
+  if (y < BOT - 14) {
+    y = secBar(d, ML, y, CW, 'Linked Settlements', [26, 70, 90]);
+    const colsLst = 2;
+    const lstW = (CW - 4) / colsLst;
+    let colYs = [y, y];
+    net.forEach((nb, i) => {
+      const col = i % colsLst;
+      let cy = colYs[col];
+      if (cy > BOT - 10) return;
+      const cx = ML + col * (lstW + 4);
+      const relType = (nb.relationshipType || 'neutral').toLowerCase();
+      const clr = REL_COLORS[relType] || REL_COLORS.neutral;
+      rect(d, cx, cy, 2, 5.5, clr);
+      d.setFont('helvetica', 'bold');
+      d.setFontSize(7);
+      st(d, INK);
+      d.text(truncate(nb.neighbourName || nb.name || '', 32), cx + 4, cy + 4);
+      d.setFont('helvetica', 'normal');
+      d.setFontSize(6);
+      st(d, BROWN);
+      d.text(`${s(nb.neighbourTier || nb.tier || '')} | ${relType.replace(/_/g, ' ')}`, cx + 4, cy + 7.8);
+      cy += 10;
+      colYs[col] = cy;
     });
   }
 

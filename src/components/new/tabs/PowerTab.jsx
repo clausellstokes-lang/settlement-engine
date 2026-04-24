@@ -297,4 +297,4 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   );
 }
 
-export default PowerTab;
+export default React.memo(PowerTab);

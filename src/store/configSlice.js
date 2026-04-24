@@ -25,6 +25,12 @@ export const DEFAULT_CONFIG = {
   selectedStresses:        [],
   selectedStressesRandom:  true,
   customName:              '',
+  // Custom Generate additions (Phase D)
+  customInstitutions:      [],   // user-defined institution definitions
+  customResources:         [],   // user-defined resource types
+  customTradeRoutes:       [],   // user-defined trade dependencies
+  powerDynamicsConfig:     null, // pre-set faction relationships / government prefs
+  defenseScenarioConfig:   null, // pre-configured defense posture
 };
 
 export const createConfigSlice = (set, get) => ({
@@ -33,7 +39,7 @@ export const createConfigSlice = (set, get) => ({
 
   // Wizard UI state (persisted)
   wizardStep: 0,                   // current step in the wizard
-  wizardMode: 'quick',             // 'quick' | 'advanced' | 'custom'
+  wizardMode: null,                // null (card picker) | 'quick' | 'advanced'
   configPanelOpen:  false,
   instPanelOpen:    false,
   svcPanelOpen:     false,
@@ -58,7 +64,13 @@ export const createConfigSlice = (set, get) => ({
     set(state => { state.wizardStep = step; }),
 
   setWizardMode: (mode) =>
-    set(state => { state.wizardMode = mode; }),
+    set(state => {
+      // Coerce deprecated 'custom' to 'advanced' (Custom mode folded into Compendium)
+      const normalized = mode === 'custom' ? 'advanced' : mode;
+      state.wizardMode = normalized;
+      // Always reset step when mode changes — users expect Advanced to start at General Config
+      state.wizardStep = 0;
+    }),
 
   setConfigPanelOpen: (open) =>
     set(state => { state.configPanelOpen = open; }),

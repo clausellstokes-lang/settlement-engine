@@ -430,4 +430,4 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   );
 }
 
-export default DefenseTab;
+export default React.memo(DefenseTab);
