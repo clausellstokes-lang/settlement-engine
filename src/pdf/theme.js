@@ -89,6 +89,7 @@ Font.register({
     { src: '/fonts/Nunito-Regular.ttf',   fontWeight: 400 },
     { src: '/fonts/Nunito-Bold.ttf',      fontWeight: 700 },
     { src: '/fonts/Nunito-ExtraBold.ttf', fontWeight: 800 },
+    { src: '/fonts/Nunito-Italic.ttf',    fontWeight: 400, fontStyle: 'italic' },
   ],
 });
 
