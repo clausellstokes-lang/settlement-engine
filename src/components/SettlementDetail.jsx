@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, lazy, Suspense } from 'react';
-import {Link2, ChevronLeft, X, FileText, Sparkles, RotateCcw} from 'lucide-react';
+import {Link2, ChevronLeft, X, FileText, Sparkles, RotateCcw, Loader2} from 'lucide-react';
 import {generateSettlementPDF} from '../utils/generateSettlementPDF.js';
 import {getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS} from '../lib/relationshipGraph.js';
 import { useStore } from '../store/index.js';
@@ -257,6 +257,7 @@ export default function SettlementDetail({
   const [editingName, setEditingName] = useState(null);  // {type,id,oldName}
   const [editDraft,   setEditDraft]   = useState('');
   const [saved,       setSaved]       = useState(false);
+  const [exporting,   setExporting]   = useState(false); // PDF export spinner
 
   // AI-1: pull the saved settlement's persisted ai_data into the aiSlice
   // when this detail view opens (or when switching between saves). Without
@@ -316,6 +317,9 @@ export default function SettlementDetail({
     setEditDraft('');
   };
     return<div>
+      {/* Local keyframe so the export-button spinner animates even when
+          OutputContainer (which also defines @keyframes spin) isn't mounted. */}
+      <style>{'@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}'}</style>
       <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16,padding:'12px 14px',background:'#f5ede0',border:`1px solid ${BORDER}`,borderRadius:8}}>
         <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
           <button onClick={()=>{setDetail(null);setLinking(false);}} style={{display:'flex',alignItems:'center',gap:5,background:'rgba(255,251,245,0.96)',border:`1px solid ${BORDER}`,borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:12,fontWeight:700,color:SECOND,fontFamily:sans}}>
@@ -345,7 +349,38 @@ export default function SettlementDetail({
           <button onClick={()=>setLinking(v=>!v)} style={{display:'flex',alignItems:'center',gap:5,background:linking?'#2a3a7a':CARD,color:linking?'#fff':'#2a3a7a',border:'1px solid #2a3a7a',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:sans}}>
             <Link2 size={13}/> {linking?'Cancel':'Link Neighbour'}
           </button>
-          <button onClick={()=>generateSettlementPDF(detail.settlement)} style={{display:'flex',alignItems:'center',gap:5,background:'#7a1a1a',color:'#fff',border:'none',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:sans}}><FileText size={12}/> Export PDF</button>
+          <button
+            disabled={exporting}
+            onClick={async () => {
+              if (exporting) return;
+              setExporting(true);
+              try {
+                await generateSettlementPDF(detail.settlement, {
+                  aiSettlement,
+                  aiDailyLife,
+                  narrativeMode: narrated,
+                });
+              } catch (err) {
+                console.error('[PDF export] failed:', err);
+                alert('PDF export failed. See console for details.');
+              } finally {
+                setExporting(false);
+              }
+            }}
+            title={narrated ? 'Export the narrative-edition dossier (includes AI Appendix).' : 'Export the raw dossier — no AI sections.'}
+            style={{
+              display:'flex',alignItems:'center',gap:5,
+              background: exporting ? '#5a1414' : '#7a1a1a',
+              color:'#fff',border:'none',borderRadius:5,padding:'5px 12px',
+              cursor: exporting ? 'wait' : 'pointer',
+              fontSize:12,fontWeight:700,fontFamily:sans,
+              opacity: exporting ? 0.85 : 1,
+            }}
+          >
+            {exporting
+              ? <><Loader2 size={12} style={{animation:'spin 1s linear infinite'}}/> Building PDF…</>
+              : <><FileText size={12}/> Export PDF{narrated ? ' (Narrative)' : ''}</>}
+          </button>
         </div>
       </div>
 

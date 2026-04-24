@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.5.1",
     "@supabase/supabase-js": "^2.103.0",
     "immer": "^11.1.4",
     "jspdf": "^4.2.1",
