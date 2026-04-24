@@ -185,34 +185,51 @@ export function DailyLifeTab({ settlement: r, aiSettlement, saveId = null }) {
       </div>
 
       {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
-      <button
-        onClick={generate}
-        disabled={loading || !dailyLifeEnabled}
-        title={!dailyLifeEnabled
-          ? 'AI daily-life generation requires a saved settlement so the output can be preserved across sessions.'
-          : (hasContent
-              ? `Regenerate replaces the current daily-life prose by calling the AI again. Spends ${CREDIT_COSTS.dailyLife} credits.`
-              : `Generate daily-life prose for this settlement. Spends ${CREDIT_COSTS.dailyLife} credits.`)}
-        style={{
-          width: '100%', padding: '13px 20px',
-          background: !dailyLifeEnabled
-            ? 'rgba(120,100,80,0.12)'
-            : (loading ? '#e8dcc8' : 'linear-gradient(135deg, #a0762a, #7a5a1a)'),
-          color: !dailyLifeEnabled ? MUTED : (loading ? MUTED : '#fffbf5'),
-          border: !dailyLifeEnabled ? '1px dashed rgba(156,128,104,0.45)' : 'none',
-          borderRadius: 8,
-          cursor: (loading || !dailyLifeEnabled) ? 'default' : 'pointer',
-          fontSize: 13, fontWeight: 700, fontFamily: sans,
-          letterSpacing: '0.03em', marginBottom: 16,
-          transition: 'opacity 0.2s',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-        }}
-      >
-        {loading && (
-          <span style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}>⟳</span>
-        )}
-        {buttonLabel}
-      </button>
+      {/* Unsaved settlements (Create page) get a slim inline hint instead of
+          a disabled teaser button. The user already saw this hint above the
+          tab strip too — repeating it here in tab-context makes the connection
+          to "Daily Life" specifically. */}
+      {!dailyLifeEnabled ? (
+        <div
+          style={{
+            padding: '10px 14px', marginBottom: 16,
+            background: 'linear-gradient(135deg, rgba(122,70,26,0.06), rgba(160,118,42,0.04))',
+            border: `1px solid ${BORDER}`,
+            borderLeft: '3px solid #a0762a',
+            borderRadius: 6,
+            fontSize: 12, color: SECOND, lineHeight: 1.5,
+            fontFamily: sans,
+          }}
+        >
+          <strong style={{ color: '#7a5a1a' }}>✦ Save this settlement</strong>
+          {' '}to generate AI Daily Life — five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
+        </div>
+      ) : (
+        <button
+          onClick={generate}
+          disabled={loading}
+          title={hasContent
+            ? `Regenerate replaces the current daily-life prose by calling the AI again. Spends ${CREDIT_COSTS.dailyLife} credits.`
+            : `Generate daily-life prose for this settlement. Spends ${CREDIT_COSTS.dailyLife} credits.`}
+          style={{
+            width: '100%', padding: '13px 20px',
+            background: loading ? '#e8dcc8' : 'linear-gradient(135deg, #a0762a, #7a5a1a)',
+            color: loading ? MUTED : '#fffbf5',
+            border: 'none',
+            borderRadius: 8,
+            cursor: loading ? 'default' : 'pointer',
+            fontSize: 13, fontWeight: 700, fontFamily: sans,
+            letterSpacing: '0.03em', marginBottom: 16,
+            transition: 'opacity 0.2s',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+          }}
+        >
+          {loading && (
+            <span style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}>⟳</span>
+          )}
+          {buttonLabel}
+        </button>
+      )}
 
       <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
 

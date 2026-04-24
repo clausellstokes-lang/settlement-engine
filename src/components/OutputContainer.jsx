@@ -184,27 +184,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // Three distinct buttons replace the old single action so view-toggling
   // can't accidentally spend credits.
   const renderNarrativeButtons = () => {
-    // Unsaved settlements: show a passive "save first" hint instead of the
-    // generate button. This is the AI-1 gating — narrative must have a
-    // durable home on a saved row before we spend credits refining it.
-    if (!narrativeEnabled) {
-      return React.createElement('div', {
-        title: 'AI narrative generation requires a saved settlement so the output can be preserved across sessions.',
-        style: {
-          display: 'flex', alignItems: 'center', gap: 6,
-          padding: '6px 14px', borderRadius: 20,
-          fontSize: 11, fontWeight: 700,
-          fontFamily: 'Nunito, sans-serif', letterSpacing: '0.04em',
-          background: 'rgba(120,100,80,0.12)',
-          border: '1px dashed rgba(156,128,104,0.45)',
-          color: '#9c8068',
-          cursor: 'help',
-        }
-      },
-        React.createElement('span', { style: { fontSize: 11 } }, '\u2726'),
-        'Save to enable AI Narrative'
-      );
-    }
+    // Unsaved settlements: render nothing here. The AI-enrichment affordance
+    // moved to a slim hint line below the tab strip so the header stays
+    // focused on what the user just generated. This avoids a teaser button
+    // that can't actually fire.
+    if (!narrativeEnabled) return null;
 
     const costLabel = isConfigured ? ` (${CREDIT_COSTS.narrative} credits)` : '';
     const btnBase = {
@@ -348,30 +332,82 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         ),
         React.createElement('button', { onClick: () => scroll(1), style: { position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: '#9c8068', padding: '0 8px' } }, React.createElement(ChevronRight, { size: 14 }))
       ),
+      // Unlock hint — shown only when this is an unsaved settlement (Create
+      // page). Replaces the disabled "save to enable" chip that used to live
+      // in the header next to the regen button. Single calm hint, single
+      // place; clicked nowhere.
+      !narrativeEnabled && React.createElement('div', {
+        style: {
+          padding: '8px 18px',
+          borderBottom: '1px solid #e0d0b0',
+          background: 'linear-gradient(135deg, rgba(74,26,122,0.05), rgba(106,42,154,0.02))',
+          fontSize: 11.5, color: '#6b5340',
+          fontFamily: 'Nunito, sans-serif',
+          display: 'flex', alignItems: 'center', gap: 8,
+        }
+      },
+        React.createElement('span', { style: { fontSize: 12, color: '#8a50b0' } }, '\u2726'),
+        React.createElement('span', null,
+          React.createElement('strong', { style: { color: '#5a2a8a' } }, 'Save this settlement'),
+          ' to unlock AI Narrative & Daily Life prose.'
+        )
+      ),
       // Content — dimmed overlay during regenerate so the user sees "something is changing"
       React.createElement('div', { style: { position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' } },
-        // Thesis banner — only when narrative view is on and a thesis exists
-        showNarrative && aiSettlement?.thesis && React.createElement('div', {
-          style: {
-            padding: '12px 18px',
-            borderBottom: '1px solid rgba(160,100,220,0.2)',
-            background: 'linear-gradient(135deg, rgba(74,26,122,0.06), rgba(106,42,154,0.04))',
-            opacity: aiRegenerating ? 0.55 : 1,
-          }
-        },
-          React.createElement('div', { style: { display: 'flex', alignItems: 'flex-start', gap: 10 } },
-            React.createElement('span', { style: { fontSize: 13, flexShrink: 0, marginTop: 2, color: '#8a50b0' } }, '\u2726'),
-            React.createElement('div', { style: { flex: 1, minWidth: 0 } },
-              React.createElement('div', { style: { fontSize: 9, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 } }, 'AI Narrative Layer \u2014 Identity'),
-              aiSettlement.thesis.split(/\n\n+/).map((para, i, arr) =>
-                React.createElement('p', { key: i, style: { margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: 12.5, color: '#2d1f0e', lineHeight: 1.65, fontFamily: 'Georgia, serif' } }, para.trim())
-              ),
-              storeAiPartialFailure && storeAiPartialFailure.failedFields?.length > 0 && React.createElement('div', {
-                style: { marginTop: 8, padding: '6px 10px', background: 'rgba(196,128,60,0.08)', border: '1px solid rgba(196,128,60,0.2)', borderRadius: 4, fontSize: 10.5, color: '#8a5a20', fontFamily: 'Nunito, sans-serif' }
-              }, `Partial refinement: ${storeAiPartialFailure.failedFields.join(', ')} kept raw data.`)
+        // ── Banners above tab content ────────────────────────────────────────
+        // Banner targeting:
+        //   • Thesis (identity-level prose) lives only on Summary & Overview —
+        //     the high-altitude reads.
+        //   • Per-tab notes (`narrativeNotes[activeTab]`) replace the thesis
+        //     on every functional tab so each tab gets a contextual lens
+        //     instead of re-reading the same identity statement.
+        //   • Daily Life, DM Compass, and Neighbours/Relationships carry
+        //     their own AI prose inside the tab — no banner.
+        // The partial-failure notice was lifted out of the thesis block so it
+        // surfaces on every tab (it's a session-level concern, not an
+        // identity-banner concern).
+        (() => {
+          if (!showNarrative || !aiSettlement) return null;
+          const THESIS_TABS = ['summary', 'overview'];
+          const NOTE_TABS = ['economics', 'services', 'power', 'defense', 'npcs', 'history', 'resources', 'viability', 'plot_hooks'];
+          const showThesis = THESIS_TABS.includes(activeTab) && typeof aiSettlement.thesis === 'string' && aiSettlement.thesis.length > 0;
+          const note = NOTE_TABS.includes(activeTab) ? aiSettlement.narrativeNotes?.[activeTab] : null;
+          const showNote = typeof note === 'string' && note.length > 0;
+          if (!showThesis && !showNote) return null;
+
+          return React.createElement('div', {
+            style: {
+              padding: '12px 18px',
+              borderBottom: '1px solid rgba(160,100,220,0.2)',
+              background: 'linear-gradient(135deg, rgba(74,26,122,0.06), rgba(106,42,154,0.04))',
+              opacity: aiRegenerating ? 0.55 : 1,
+            }
+          },
+            React.createElement('div', { style: { display: 'flex', alignItems: 'flex-start', gap: 10 } },
+              React.createElement('span', { style: { fontSize: 13, flexShrink: 0, marginTop: 2, color: '#8a50b0' } }, '\u2726'),
+              React.createElement('div', { style: { flex: 1, minWidth: 0 } },
+                React.createElement('div', { style: { fontSize: 9, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 } },
+                  showThesis ? 'AI Narrative Layer \u2014 Identity' : 'AI Narrative Layer \u2014 Lens'
+                ),
+                showThesis
+                  ? aiSettlement.thesis.split(/\n\n+/).map((para, i, arr) =>
+                      React.createElement('p', { key: i, style: { margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: 12.5, color: '#2d1f0e', lineHeight: 1.65, fontFamily: 'Georgia, serif' } }, para.trim())
+                    )
+                  : React.createElement('p', { style: { margin: 0, fontSize: 12.5, color: '#2d1f0e', lineHeight: 1.65, fontFamily: 'Georgia, serif' } }, note)
+              )
             )
-          )
-        ),
+          );
+        })(),
+        // Partial-refinement notice — independent of which tab is active.
+        showNarrative && storeAiPartialFailure && storeAiPartialFailure.failedFields?.length > 0 && React.createElement('div', {
+          style: {
+            margin: '8px 18px 0', padding: '6px 10px',
+            background: 'rgba(196,128,60,0.08)',
+            border: '1px solid rgba(196,128,60,0.2)',
+            borderRadius: 4, fontSize: 10.5, color: '#8a5a20',
+            fontFamily: 'Nunito, sans-serif',
+          }
+        }, `Partial refinement: ${storeAiPartialFailure.failedFields.join(', ')} kept raw data.`),
         // Regenerate overlay — floats progress above the dimmed existing content
         aiRegenerating && React.createElement('div', {
           style: {
