@@ -11,10 +11,15 @@
  * pre-flight checks before AI requests.
  */
 
-// Estimated credit costs (mirrored from server config)
+// Estimated credit costs (mirrored from server config).
+// All MUST match the CREDIT_COSTS map in supabase/functions/generate-narrative/index.ts.
 export const CREDIT_COSTS = {
-  narrative: 5,    // credits per narrative synthesis
-  dailyLife: 3,    // credits per daily life generation
+  narrative:   8,    // Opus thesis + 13 Haiku refinement passes
+  dailyLife:   10,   // 5 parallel Opus paragraphs (dawn -> night)
+  // Progression (AI-4): diff-aware evolution of an existing narrative.
+  // Priced above narrative because the Opus thesis sees the prior thesis +
+  // the new state + the change diff; the continuity guarantee is the value.
+  progression: 12,
 };
 
 export const createCreditsSlice = (set, get) => ({
@@ -39,6 +44,7 @@ export const createCreditsSlice = (set, get) => ({
     }),
 
   spendCredits: (amount, feature) => {
+    if (get().isElevated()) return true; // elevated roles have unlimited credits
     const { creditBalance } = get();
     if (creditBalance < amount) return false;
 
@@ -56,6 +62,7 @@ export const createCreditsSlice = (set, get) => ({
 
   /** Pre-flight check: can the user afford this AI feature? */
   canAfford: (feature) => {
+    if (get().isElevated()) return true;
     const cost = CREDIT_COSTS[feature] || 0;
     return get().creditBalance >= cost;
   },

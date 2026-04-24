@@ -72,12 +72,17 @@ async function getAccessTokenSafe() {
 
 /**
  * Generate an AI narrative for a settlement.
- * @param {'narrative' | 'dailyLife'} type
+ * @param {'narrative' | 'dailyLife' | 'progression'} type
  * @param {object} settlement
  * @param {string} [settlementId]
  * @param {object} [opts]
  * @param {(field: string, value: unknown, error?: string) => void} [opts.onField] - called as each field streams in (error set on per-pass failure)
  * @param {(status: object) => void} [opts.onStatus] - called for status/phase events
+ * @param {Array<string|number>} [opts.pinnedNpcIds] - NPC ids the DM pinned; the server drops them from the `npcs` pass so they round-trip unchanged.
+ * @param {string} [opts.changeType] - progression only: classifyChange key (e.g. 'addStressor')
+ * @param {string} [opts.changeLabel] - progression only: human-readable label chronicled with the run
+ * @param {object|null} [opts.priorNarrative] - progression only: the previous aiSettlement (refined)
+ * @param {object|null} [opts.priorDailyLife] - progression only: the previous aiDailyLife (reserved for future)
  * @returns {{ result: object, creditsRemaining: number|null, type: string, partialFailure?: boolean, failedFields?: string[], succeededFields?: string[] }}
  */
 export async function generateNarrative(type, settlement, settlementId, opts = {}) {
@@ -90,6 +95,20 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     throw new Error('Not signed in. Please log in to generate narratives.');
   }
 
+  const pinnedNpcIds = Array.isArray(opts.pinnedNpcIds)
+    ? opts.pinnedNpcIds.filter(x => x != null).map(String)
+    : [];
+
+  // Build the request body. Progression carries extra fields the server needs
+  // to do its diff-aware thesis + subset-of-passes run.
+  const body = { type, settlement, settlementId, pinnedNpcIds };
+  if (type === 'progression') {
+    body.changeType     = opts.changeType || '';
+    body.changeLabel    = opts.changeLabel || '';
+    body.priorNarrative = opts.priorNarrative || null;
+    body.priorDailyLife = opts.priorDailyLife || null;
+  }
+
   const url = `${SUPABASE_URL}/functions/v1/generate-narrative`;
   const res = await fetch(url, {
     method: 'POST',
@@ -98,7 +117,7 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       'Content-Type': 'application/json',
       'apikey': SUPABASE_ANON_KEY,
     },
-    body: JSON.stringify({ type, settlement, settlementId }),
+    body: JSON.stringify(body),
   });
 
   // Non-streaming error path: the function threw before streaming started.

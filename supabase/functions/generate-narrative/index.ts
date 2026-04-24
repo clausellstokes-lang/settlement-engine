@@ -43,8 +43,13 @@ const REFINEMENT_MODEL = 'claude-haiku-4-5-20251001';
 const DAILY_LIFE_MODEL = 'claude-opus-4-7';
 
 const CREDIT_COSTS: Record<string, number> = {
-  narrative: 8,
-  dailyLife: 10,
+  narrative:   8,
+  dailyLife:   10,
+  // Progression is pricier than full narrative because it runs the Opus thesis
+  // over the prior thesis + the new state + the diff label (much larger input
+  // context) and because it preserves voice — the "guarantee of continuity"
+  // is the value, not the raw token count.
+  progression: 12,
 };
 
 // ── Prompt building blocks ──────────────────────────────────────────────────
@@ -149,11 +154,21 @@ ${JSON.stringify(summary, null, 2)}`;
 
 // ── Refinement pass infrastructure ──────────────────────────────────────────
 
+/**
+ * Runtime context threaded into every pass's `extract`. Currently just
+ * `pinnedNpcIds` — the set of NPC ids the DM has flagged to preserve across
+ * regenerations. Passes that touch NPC prose (currently only `npcs`) must
+ * drop pinned entries from their payload so the model never rewrites them.
+ */
+type PassContext = {
+  pinnedNpcIds: string[];
+};
+
 type PassSpec = {
   /** Path on the settlement that best represents what this pass modifies (for streaming snapshot) */
   snapshotPath: string;
   /** Extract the source items/value from the full settlement */
-  extract: (s: any) => unknown;
+  extract: (s: any, ctx?: PassContext) => unknown;
   /** Apply refined value onto the clone */
   apply: (clone: any, refined: any) => void;
   /** Max tokens */
@@ -457,16 +472,32 @@ Return JSON: { "items": [{ "id": <number>, "desc": "<refined>" }, ...] }. Includ
   },
 
   // ── 8. NPCs — the characters the party will meet ──
+  //   Honors `ctx.pinnedNpcIds`: entries whose real NPC id appears in the
+  //   set are dropped from the payload so the model never rewrites them.
+  //   The synthetic `id: idx` used by apply() still maps to the correct
+  //   clone.npcs[idx], so unfiltered entries round-trip as before.
   npcs: {
     snapshotPath: 'npcs',
     max_tokens: 2000,
-    extract: (s) => (s.npcs || []).slice(0, 15).map((n: any, idx: number) => ({
-      id: idx,
-      name: n?.name,
-      role: n?.role,
-      goalShort: n?.goal?.short,
-      secretWhat: n?.secret?.what,
-    })).filter((x: any) => x.goalShort || x.secretWhat),
+    extract: (s, ctx) => {
+      const pinnedSet = new Set((ctx?.pinnedNpcIds || []).map(String));
+      // Pin key matches the client's `npc.id ?? npc.name` fallback so a DM
+      // can pin NPCs that lack a stable id (shouldn't happen in production
+      // but keeps the filter defensive).
+      return (s.npcs || []).slice(0, 15).map((n: any, idx: number) => ({
+        id: idx,
+        pinKey: n?.id != null ? String(n.id)
+              : n?.name != null ? String(n.name)
+              : null,
+        name: n?.name,
+        role: n?.role,
+        goalShort: n?.goal?.short,
+        secretWhat: n?.secret?.what,
+      })).filter((x: any) => {
+        if (x.pinKey && pinnedSet.has(x.pinKey)) return false;
+        return x.goalShort || x.secretWhat;
+      }).map(({ pinKey: _omit, ...rest }: any) => rest);
+    },
     apply: (clone, r) => {
       const items = r?.items || [];
       if (!Array.isArray(clone.npcs)) return;
@@ -547,6 +578,171 @@ ${PRESERVATION_RULES}
 
 Return JSON: { "viabilitySummary": "<refined>", "guardEffectivenessDesc": "<refined>", "safetyDesc": "<refined>", "economicDragDesc": "<refined>", "crimeTypes": [{ "id": <number>, "desc": "<refined>" }, ...] }. Omit any key whose source was empty. No preamble, no markdown.`,
   },
+
+  // ── 10. Identity markers — short sensory details that make THIS settlement specific ──
+  //   DM-facing texture. 4-6 one-liners the DM can drop into description.
+  identityMarkers: {
+    snapshotPath: 'identityMarkers',
+    max_tokens: 600,
+    extract: (s) => {
+      const out: Record<string, unknown> = {
+        name: s.name,
+        tier: s.tier,
+        terrain: s.config?.terrainOverride || s.config?.terrainType || s.config?.terrain,
+        culture: s.config?.culture,
+      };
+      const insts = (s.institutions || []).slice(0, 6).map((i: any) => ({
+        name: i?.name, category: i?.category,
+      })).filter((x: any) => x.name);
+      if (insts.length) out.institutions = insts;
+      const exports_ = (s.economicState?.primaryExports || []).slice(0, 4).map((e: any) =>
+        typeof e === 'string' ? e : e?.name || e?.good
+      ).filter(Boolean);
+      if (exports_.length) out.exports = exports_;
+      // Need at least *something* tangible to ground on.
+      return (insts.length || exports_.length) ? out : {};
+    },
+    apply: (clone, r) => {
+      if (Array.isArray(r?.items)) {
+        clone.identityMarkers = r.items.filter((x: unknown) => typeof x === 'string' && x.length > 0);
+      }
+    },
+    instruction: `Write 4-6 IDENTITY MARKERS for this settlement. Each is ONE concrete sensory or physical detail — an architectural quirk, a characteristic sound, a recurring smell, a visual motif, a habit of the townsfolk, the one thing travellers remember. Each must be specific to THIS settlement's data (terrain, culture, institutions, exports). If you'd be comfortable writing it about a different settlement, rewrite it.
+
+${HOUSE_STYLE}
+
+Return JSON: { "items": ["<marker 1>", "<marker 2>", ...] }. One sentence each. No numbering inside the strings. No preamble, no markdown.`,
+  },
+
+  // ── 11. Friction points — small-scale interpersonal grievances ──
+  //   Sits below settlement-wide stressors. Names specific parties.
+  frictionPoints: {
+    snapshotPath: 'frictionPoints',
+    max_tokens: 800,
+    extract: (s) => {
+      const npcs = (s.npcs || []).slice(0, 6).map((n: any) => ({
+        name: n?.name, role: n?.role, faction: n?.factionAffiliation,
+      })).filter((x: any) => x.name);
+      const factions = (s.powerStructure?.factions || []).slice(0, 4).map((f: any) => ({
+        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+      })).filter((x: any) => x.name);
+      const institutions = (s.institutions || []).slice(0, 3).map((i: any) => ({
+        name: i?.name, category: i?.category,
+      })).filter((x: any) => x.name);
+      // Need at least some named parties to generate interpersonal friction.
+      if (!npcs.length && !factions.length) return {};
+      return { npcs, factions, institutions };
+    },
+    apply: (clone, r) => {
+      if (Array.isArray(r?.items)) {
+        clone.frictionPoints = r.items
+          .filter((x: any) => x && typeof x.who === 'string' && typeof x.what === 'string')
+          .map((x: any) => ({ who: x.who, what: x.what }));
+      }
+    },
+    instruction: `Write 3-5 FRICTION POINTS — small-scale interpersonal grievances the DM can surface in scenes. These sit one level BELOW settlement-wide stressors: personal, local, named.
+
+Each item MUST name specific parties drawn from the provided NPCs, factions, or institutions. Each item's \`what\` is one sentence capturing the specific grievance — a slight, a debt, a rivalry, an obligation, a resentment.
+
+${PRESERVATION_RULES}
+
+Return JSON: { "items": [{ "who": "<named party or parties>", "what": "<1 sentence grievance>" }, ...] }. Do not invent names. No preamble, no markdown.`,
+  },
+
+  // ── 12. Connections map — explicit NPC↔faction↔institution edges ──
+  //   Lets the DM navigate politics at the table without re-reading prose.
+  connectionsMap: {
+    snapshotPath: 'connectionsMap',
+    max_tokens: 1000,
+    extract: (s) => {
+      const npcs = (s.npcs || []).slice(0, 8).map((n: any) => ({
+        name: n?.name, role: n?.role, faction: n?.factionAffiliation,
+      })).filter((x: any) => x.name);
+      const factions = (s.powerStructure?.factions || []).slice(0, 6).map((f: any) => ({
+        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+      })).filter((x: any) => x.name);
+      const institutions = (s.institutions || []).slice(0, 5).map((i: any) => ({
+        name: i?.name, category: i?.category,
+      })).filter((x: any) => x.name);
+      if ((npcs.length + factions.length + institutions.length) < 2) return {};
+      return { npcs, factions, institutions };
+    },
+    apply: (clone, r) => {
+      if (Array.isArray(r?.items)) {
+        clone.connectionsMap = r.items
+          .filter((x: any) => x && typeof x.from === 'string' && typeof x.to === 'string' && typeof x.nature === 'string')
+          .map((x: any) => ({
+            from:   x.from,
+            to:     x.to,
+            via:    typeof x.via === 'string' ? x.via : '',
+            nature: x.nature,
+          }));
+      }
+    },
+    instruction: `Extract 4-8 CONNECTIONS between named entities in this settlement — NPC↔faction, NPC↔institution, faction↔institution, or faction↔faction.
+
+ONLY use names that appear in the provided NPCs / factions / institutions lists. Do NOT invent names. \`nature\` is a short phrase naming the relationship (e.g. "reports to", "funds", "competes with", "hides behind", "owes money to"). \`via\` is optional — use it when the edge is mediated (e.g. "reports to Silver Chain VIA the Moot Hall"); empty string when not.
+
+${PRESERVATION_RULES}
+
+Return JSON: { "items": [{ "from": "<name>", "to": "<name>", "via": "<name or empty>", "nature": "<short phrase>" }, ...] }. No preamble, no markdown.`,
+  },
+
+  // ── 13. DM compass — ready-to-run guidance for the table ──
+  //   3 hooks + 2 red flags + 1 twist. The "how do I actually RUN this" field.
+  dmCompass: {
+    snapshotPath: 'dmCompass',
+    max_tokens: 900,
+    extract: (s) => {
+      const stressArr = Array.isArray(s.stress) ? s.stress : (s.stress ? [s.stress] : []);
+      const out: Record<string, unknown> = {
+        name: s.name,
+        tier: s.tier,
+        prosperity: s.economicViability?.summary || null,
+        safetyLabel: s.economicState?.safetyProfile?.safetyLabel || null,
+      };
+      const stressors = stressArr.slice(0, 3).map((t: any) => ({
+        label: t?.label, summary: t?.summary, crisisHook: t?.crisisHook,
+      })).filter((x: any) => x.label);
+      if (stressors.length) out.stressors = stressors;
+      const conflicts = (s.powerStructure?.conflicts || []).slice(0, 3).map((c: any) => ({
+        factions: c?.factions, issue: c?.issue, stakes: c?.stakes,
+      })).filter((x: any) => x.issue);
+      if (conflicts.length) out.conflicts = conflicts;
+      const npcs = (s.npcs || []).slice(0, 3).map((n: any) => ({
+        name: n?.name, role: n?.role,
+      })).filter((x: any) => x.name);
+      if (npcs.length) out.npcs = npcs;
+      const factions = (s.powerStructure?.factions || []).slice(0, 3).map((f: any) => ({
+        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+      })).filter((x: any) => x.name);
+      if (factions.length) out.factions = factions;
+      return out;
+    },
+    apply: (clone, r) => {
+      const hooks = Array.isArray(r?.hooks)
+        ? r.hooks.filter((x: unknown) => typeof x === 'string' && x.length > 0).slice(0, 3)
+        : [];
+      const redFlags = Array.isArray(r?.redFlags)
+        ? r.redFlags.filter((x: unknown) => typeof x === 'string' && x.length > 0).slice(0, 2)
+        : [];
+      const twist = typeof r?.twist === 'string' ? r.twist : '';
+      if (hooks.length || redFlags.length || twist) {
+        clone.dmCompass = { hooks, redFlags, twist };
+      }
+    },
+    instruction: `Write DM COMPASS — ready-to-run guidance for running this settlement at the table.
+
+- hooks: exactly 3 adventure hooks, one sentence each. Each hook must be tied to a NAMED stressor, faction, or NPC from the source.
+- redFlags: exactly 2 things that might get the party in trouble here (political missteps, custom they'll violate by accident, authority they shouldn't cross). One sentence each.
+- twist: exactly 1 sentence — "if the session is dragging, try this." A specific dramatic turn that leverages something already on the page.
+
+${HOUSE_STYLE}
+
+${PRESERVATION_RULES}
+
+Return JSON: { "hooks": ["<hook 1>", "<hook 2>", "<hook 3>"], "redFlags": ["<flag 1>", "<flag 2>"], "twist": "<twist>" }. No preamble, no markdown.`,
+  },
 };
 
 function buildRefinementPrompt(
@@ -554,7 +750,23 @@ function buildRefinementPrompt(
   thesis: string,
   summary: Record<string, unknown>,
   payload: unknown,
+  /** Prior refined value for this pass — used in progression mode to evolve rather than rewrite */
+  priorValue?: unknown,
+  /** Human-readable change label ("Add market: Silver Crescent") — used in progression mode */
+  changeLabel?: string,
 ): string {
+  const priorBlock = priorValue != null && !isEmptyPayload(priorValue)
+    ? `
+
+PRIOR VERSION (evolve this, do not discard its best lines):
+${JSON.stringify(priorValue, null, 2)}
+
+CHANGE THAT PROMPTED THIS EVOLUTION:
+${changeLabel || '(unlabeled change)'}
+
+Your job is to EVOLVE the prior prose to match the new facts. Keep every sentence from the prior version that is still accurate. Rewrite only what the change invalidates. Do not introduce material that wasn't in the prior version AND isn't demanded by the new facts.`
+    : '';
+
   return `You are a worldbuilding narrator for tabletop RPGs. You wrote the thesis below. Now you are REFINING prose in-place for specific data fields.
 
 THESIS (inherit this voice; reference its themes subtly; do not repeat it):
@@ -569,9 +781,251 @@ SETTLEMENT CONTEXT (for grounding only — do not repeat):
 ${JSON.stringify(summary, null, 2)}
 
 ITEMS TO REFINE:
-${JSON.stringify(payload, null, 2)}
+${JSON.stringify(payload, null, 2)}${priorBlock}
 
 CRITICAL: Return ONLY valid JSON matching the schema in the task. No markdown code fences, no preamble, no commentary.`;
+}
+
+// ── Progression ─────────────────────────────────────────────────────────────
+//
+// A `progression` run surgically evolves an existing narrative against a
+// change (from classifyChange) instead of regenerating it from scratch.
+// The DM keeps voice and pinned NPCs; we only re-run the passes whose output
+// the change plausibly invalidates.
+//
+// Thesis ALWAYS re-runs — the settlement's identity may have shifted subtly.
+// NPCs are deliberately NOT in any default set: structural edits don't
+// invalidate NPCs, and a DM who wants them re-rolled can use full regenerate.
+// Seismic changes are blocked by the client; if one arrives here anyway we
+// fall back to thesis-only (conservative).
+
+const PROGRESSION_AFFECTED_FIELDS: Record<string, Array<keyof typeof REFINEMENT_PASSES>> = {
+  addInstitution:    ['opening', 'factions', 'safety'],
+  removeInstitution: ['opening', 'factions', 'safety'],
+  addStressor:       ['stressors', 'opening', 'dmCompass', 'conflicts'],
+  removeStressor:    ['stressors', 'dmCompass'],
+  addTradeGood:      ['safety', 'identityMarkers'],
+  removeTradeGood:   ['safety'],
+  addResource:       ['safety'],
+  removeResource:    ['safety'],
+  setResourceState:  ['safety', 'stressors'],
+  setPrioritySlider: ['safety', 'dmCompass'],
+};
+
+function buildProgressionThesisPrompt(
+  priorThesis: string,
+  changeLabel: string,
+  summary: Record<string, unknown>,
+): string {
+  return `You are the authorial voice of a worldbuilding narrator for tabletop RPGs.
+
+You wrote the previous identity statement for this settlement:
+"""
+${priorThesis || '(no prior thesis was recorded)'}
+"""
+
+The settlement has changed: ${changeLabel || '(unlabeled change)'}
+
+Update the identity statement to acknowledge this shift without throwing away what was true. Keep the voice. Two to three sentences. Ground the new claim in a specific data point from the new state — name a faction, a stressor, an institution, a trade fact, or an NPC.
+
+${HOUSE_STYLE}
+
+Return ONLY the identity statement. No preamble, no markdown, no headings. Plain prose, one paragraph.
+
+Settlement context (new state):
+${JSON.stringify(summary, null, 2)}`;
+}
+
+/**
+ * Overlay prior refined prose onto the new-settlement clone.
+ *
+ * Progression starts clone = deepClone(new raw settlement) so every mechanical
+ * fact (including the newly added/removed item) is correct. But the raw clone
+ * has RAW prose for every field — losing every prior refinement.
+ *
+ * This helper copies refined prose from `prior` onto `clone` for every
+ * refinable field, matching items by stable key (id/name/label) rather than
+ * by array index. Affected passes will then OVERWRITE the copied prose with
+ * freshly evolved prose. Non-affected passes keep the prior text, which is
+ * the whole point of progression.
+ */
+function overlayPriorRefinedProse(clone: any, prior: any): void {
+  if (!prior || typeof prior !== 'object' || !clone || typeof clone !== 'object') return;
+
+  // ── Scalar string fields: copy if prior had something ──────────────────
+  const copyStr = (path: string) => {
+    const keys = path.split('.');
+    let srcRef: any = prior;
+    let dstRef: any = clone;
+    for (let i = 0; i < keys.length - 1; i++) {
+      srcRef = srcRef?.[keys[i]];
+      if (!dstRef || typeof dstRef !== 'object') return;
+      if (typeof dstRef[keys[i]] !== 'object' || dstRef[keys[i]] === null) dstRef[keys[i]] = {};
+      dstRef = dstRef[keys[i]];
+    }
+    const last = keys[keys.length - 1];
+    if (typeof srcRef?.[last] === 'string' && srcRef[last].length > 0) {
+      dstRef[last] = srcRef[last];
+    }
+  };
+
+  for (const p of [
+    'arrivalScene',
+    'pressureSentence',
+    'history.historicalCharacter',
+    'prominentRelationship.phrasing',
+    'economicViability.summary',
+    'economicState.safetyProfile.guardEffectivenessDesc',
+    'economicState.safetyProfile.safetyDesc',
+    'economicState.safetyProfile.economicDragDesc',
+    'powerStructure.recentConflict',
+    'history.founding.reason',
+    'history.founding.initialChallenge',
+    'history.founding.overcoming',
+    'history.founding.stressNote',
+    'history.founding.foundedBy',
+  ]) copyStr(p);
+
+  // settlementReason: string | string[] | { primary, ... }. Copy only when the
+  // shape matches — otherwise the prior prose won't slot back cleanly.
+  if (prior.settlementReason != null && clone.settlementReason != null) {
+    if (typeof prior.settlementReason === 'string' && typeof clone.settlementReason === 'string') {
+      clone.settlementReason = prior.settlementReason;
+    } else if (Array.isArray(prior.settlementReason) && Array.isArray(clone.settlementReason)
+               && prior.settlementReason.length === clone.settlementReason.length) {
+      clone.settlementReason = prior.settlementReason.slice();
+    } else if (typeof prior.settlementReason === 'object' && typeof prior.settlementReason.primary === 'string'
+               && typeof clone.settlementReason === 'object' && clone.settlementReason) {
+      clone.settlementReason = { ...clone.settlementReason, primary: prior.settlementReason.primary };
+    }
+  }
+
+  // ── Array fields: match by stable key, copy refined fields ─────────────
+
+  // NPCs — match by id (fall back name)
+  if (Array.isArray(prior.npcs) && Array.isArray(clone.npcs)) {
+    const npcKey = (n: any) => n?.id != null ? String(n.id) : String(n?.name || '');
+    const priorMap = new Map(prior.npcs.map((n: any) => [npcKey(n), n]));
+    for (const cn of clone.npcs) {
+      const p: any = priorMap.get(npcKey(cn));
+      if (!p) continue;
+      if (typeof p?.goal?.short === 'string') {
+        cn.goal = cn.goal || {};
+        cn.goal.short = p.goal.short;
+      }
+      if (typeof p?.secret?.what === 'string') {
+        cn.secret = cn.secret || {};
+        cn.secret.what = p.secret.what;
+      }
+    }
+  }
+
+  // Institutions — match by name
+  if (Array.isArray(prior.institutions) && Array.isArray(clone.institutions)) {
+    const priorMap = new Map(prior.institutions.map((i: any) => [String(i?.name || ''), i]));
+    for (const ci of clone.institutions) {
+      const p: any = priorMap.get(String(ci?.name || ''));
+      if (p && typeof p.desc === 'string') ci.desc = p.desc;
+    }
+  }
+
+  // Factions — match by name/faction
+  if (Array.isArray(prior.powerStructure?.factions) && Array.isArray(clone.powerStructure?.factions)) {
+    const facKey = (f: any) => String(f?.name || f?.faction || '');
+    const priorMap = new Map(prior.powerStructure.factions.map((f: any) => [facKey(f), f]));
+    for (const cf of clone.powerStructure.factions) {
+      const p: any = priorMap.get(facKey(cf));
+      if (p && typeof p.desc === 'string') cf.desc = p.desc;
+    }
+  }
+
+  // Stressors — match by type+label (single-object or array)
+  {
+    const priorStress = Array.isArray(prior.stress) ? prior.stress : (prior.stress ? [prior.stress] : []);
+    const cloneStressRef = Array.isArray(clone.stress) ? clone.stress : (clone.stress ? [clone.stress] : []);
+    if (priorStress.length && cloneStressRef.length) {
+      const sKey = (t: any) => `${t?.type || ''}|${t?.label || ''}`;
+      const priorMap = new Map(priorStress.map((t: any) => [sKey(t), t]));
+      for (const ct of cloneStressRef) {
+        const p: any = priorMap.get(sKey(ct));
+        if (!p) continue;
+        if (typeof p.summary === 'string')    ct.summary    = p.summary;
+        if (typeof p.crisisHook === 'string') ct.crisisHook = p.crisisHook;
+      }
+    }
+  }
+
+  // Conflicts — match by factions tuple (sorted) or issue text
+  if (Array.isArray(prior.powerStructure?.conflicts) && Array.isArray(clone.powerStructure?.conflicts)) {
+    const cKey = (c: any) => Array.isArray(c?.factions) ? c.factions.slice().sort().join('|') : String(c?.issue || '');
+    const priorMap = new Map(prior.powerStructure.conflicts.map((c: any) => [cKey(c), c]));
+    for (const cc of clone.powerStructure.conflicts) {
+      const p: any = priorMap.get(cKey(cc));
+      if (!p) continue;
+      if (typeof p.issue === 'string')  cc.issue  = p.issue;
+      if (typeof p.stakes === 'string') cc.stakes = p.stakes;
+    }
+  }
+
+  // Historical events — match by type+name
+  if (Array.isArray(prior.history?.historicalEvents) && Array.isArray(clone.history?.historicalEvents)) {
+    const eKey = (e: any) => `${e?.type || ''}|${e?.name || ''}`;
+    const priorMap = new Map(prior.history.historicalEvents.map((e: any) => [eKey(e), e]));
+    for (const ce of clone.history.historicalEvents) {
+      const p: any = priorMap.get(eKey(ce));
+      if (p && typeof p.description === 'string') ce.description = p.description;
+    }
+  }
+
+  // Current tensions — match by type+severity (descriptions are fuzzy so type
+  // is the stable handle)
+  if (Array.isArray(prior.history?.currentTensions) && Array.isArray(clone.history?.currentTensions)) {
+    const tKey = (t: any) => `${t?.type || ''}|${t?.severity || ''}`;
+    const priorMap = new Map(prior.history.currentTensions.map((t: any) => [tKey(t), t]));
+    for (const ct of clone.history.currentTensions) {
+      const p: any = priorMap.get(tKey(ct));
+      if (p && typeof p.description === 'string') ct.description = p.description;
+    }
+  }
+
+  // Crime types — match by type
+  if (Array.isArray(prior.economicState?.safetyProfile?.crimeTypes)
+      && Array.isArray(clone.economicState?.safetyProfile?.crimeTypes)) {
+    const priorMap = new Map(
+      prior.economicState.safetyProfile.crimeTypes.map((c: any) => [String(c?.type || ''), c]),
+    );
+    for (const cc of clone.economicState.safetyProfile.crimeTypes) {
+      const p: any = priorMap.get(String(cc?.type || ''));
+      if (p && typeof p.desc === 'string') cc.desc = p.desc;
+    }
+  }
+
+  // Coherence notes — match by positional index (no stable identity). When
+  // lengths differ, copy only the overlap and leave extras as raw.
+  if (Array.isArray(prior.coherenceNotes) && Array.isArray(clone.coherenceNotes)) {
+    const n = Math.min(prior.coherenceNotes.length, clone.coherenceNotes.length);
+    for (let i = 0; i < n; i++) {
+      const pn = prior.coherenceNotes[i];
+      const cn = clone.coherenceNotes[i];
+      const pStr = typeof pn === 'string' ? pn : pn?.note;
+      if (typeof pStr === 'string' && pStr.length > 0) {
+        if (typeof cn === 'string') clone.coherenceNotes[i] = pStr;
+        else if (cn && typeof cn === 'object') cn.note = pStr;
+      }
+    }
+  }
+
+  // ── Synthesized arrays (exist only in refined output): wholesale copy ──
+  if (Array.isArray(prior.identityMarkers)) clone.identityMarkers = prior.identityMarkers.slice();
+  if (Array.isArray(prior.frictionPoints))  clone.frictionPoints  = prior.frictionPoints.map((x: any) => ({ ...x }));
+  if (Array.isArray(prior.connectionsMap))  clone.connectionsMap  = prior.connectionsMap.map((x: any) => ({ ...x }));
+  if (prior.dmCompass && typeof prior.dmCompass === 'object') {
+    clone.dmCompass = {
+      hooks:    Array.isArray(prior.dmCompass.hooks)    ? prior.dmCompass.hooks.slice()    : [],
+      redFlags: Array.isArray(prior.dmCompass.redFlags) ? prior.dmCompass.redFlags.slice() : [],
+      twist:    typeof prior.dmCompass.twist === 'string' ? prior.dmCompass.twist : '',
+    };
+  }
 }
 
 // ── Daily life (Opus, 5 parallel paragraphs) ────────────────────────────────
@@ -731,11 +1185,38 @@ serve(async (req) => {
     if (authError || !user) throw new Error('Not authenticated');
 
     // Parse request
-    const { type, settlement, settlementId } = await req.json();
-    if (!type || !['narrative', 'dailyLife'].includes(type)) {
-      throw new Error('Invalid type. Must be "narrative" or "dailyLife"');
+    const {
+      type,
+      settlement,
+      settlementId,
+      pinnedNpcIds,
+      // Progression-only (AI-4b) — ignored for other types.
+      changeType,
+      changeLabel,
+      priorNarrative,
+      priorDailyLife,
+    } = await req.json();
+    if (!type || !['narrative', 'dailyLife', 'progression'].includes(type)) {
+      throw new Error('Invalid type. Must be "narrative", "dailyLife", or "progression"');
     }
     if (!settlement) throw new Error('Missing settlement data');
+    if (type === 'progression') {
+      if (typeof changeType !== 'string' || !changeType) {
+        throw new Error('Progression requires changeType');
+      }
+      if (!priorNarrative || typeof priorNarrative !== 'object') {
+        throw new Error('Progression requires priorNarrative (cannot evolve a never-narrated settlement)');
+      }
+    }
+    // Avoid unused-var lint: priorDailyLife is reserved for a future daily-life
+    // progression pass. We accept it now so the client contract doesn't have
+    // to change when that ships.
+    void priorDailyLife;
+
+    // Normalize pinned NPC ids once, so every pass sees the same stable shape.
+    const normalizedPinnedNpcIds: string[] = Array.isArray(pinnedNpcIds)
+      ? pinnedNpcIds.filter((x: unknown) => x != null).map((x: unknown) => String(x))
+      : [];
 
     const cost = CREDIT_COSTS[type];
 
@@ -832,6 +1313,107 @@ serve(async (req) => {
             return;
           }
 
+          // ── PROGRESSION: thesis + subset of refinement passes ─────────────
+          if (type === 'progression') {
+            const affectedKeys = PROGRESSION_AFFECTED_FIELDS[changeType] || [];
+            // Filter to passes that actually exist (defensive against future
+            // changes to either map).
+            const affectedEntries = affectedKeys
+              .map((k) => [k, REFINEMENT_PASSES[k]] as const)
+              .filter(([, spec]) => !!spec);
+
+            send({
+              status: 'started',
+              type,
+              totalFields: 1 + affectedEntries.length,
+              phase: 'thesis',
+              changeType,
+              changeLabel: typeof changeLabel === 'string' ? changeLabel : '',
+            });
+
+            // Phase 1: Opus thesis grounded in prior thesis + changeLabel
+            let thesis: string;
+            try {
+              const priorThesis = typeof priorNarrative?.thesis === 'string' ? priorNarrative.thesis : '';
+              thesis = await callAnthropic(
+                buildProgressionThesisPrompt(
+                  priorThesis,
+                  typeof changeLabel === 'string' ? changeLabel : '',
+                  summary,
+                ),
+                600,
+                THESIS_MODEL,
+              );
+            } catch (e) {
+              await refund();
+              send({ error: `Progression thesis failed: ${(e as Error).message}`, refunded: !isElevated });
+              controller.close();
+              return;
+            }
+
+            // Start clone from new settlement, then overlay prior refined prose
+            // so non-affected passes keep their text. Affected passes will
+            // overwrite the relevant fields with evolved prose.
+            const aiClone = deepClone(settlement);
+            overlayPriorRefinedProse(aiClone, priorNarrative);
+            aiClone.thesis = thesis;
+            send({ field: 'thesis', value: thesis });
+
+            // Phase 2: run affected passes with priorValue threading.
+            const passCtx: PassContext = { pinnedNpcIds: normalizedPinnedNpcIds };
+            send({ status: 'phase', phase: 'refinements', total: affectedEntries.length });
+            const failedFields: string[] = [];
+            const succeededFields: string[] = [];
+            const skippedFields: string[] = [];
+
+            await Promise.all(affectedEntries.map(async ([key, spec]) => {
+              try {
+                const payload = spec.extract(settlement, passCtx);
+                if (isEmptyPayload(payload)) {
+                  skippedFields.push(key);
+                  return;
+                }
+                const priorValue = spec.extract(priorNarrative, passCtx);
+                const prompt = buildRefinementPrompt(
+                  spec.instruction,
+                  thesis,
+                  summary,
+                  payload,
+                  isEmptyPayload(priorValue) ? undefined : priorValue,
+                  typeof changeLabel === 'string' ? changeLabel : undefined,
+                );
+                const raw = await callAnthropic(prompt, spec.max_tokens, REFINEMENT_MODEL);
+                const parsed = safeJsonParse(raw);
+                spec.apply(aiClone, parsed);
+                succeededFields.push(key);
+
+                const path = spec.snapshotPath.startsWith('__') ? key : spec.snapshotPath;
+                const snapshot = spec.snapshotPath.startsWith('__')
+                  ? { ok: true }
+                  : getByPath(aiClone, spec.snapshotPath);
+                send({ field: path, value: snapshot });
+              } catch (e) {
+                failedFields.push(key);
+                console.error(`[generate-narrative] progression pass '${key}' failed:`, (e as Error).message);
+                send({ field: key, error: (e as Error).message });
+              }
+            }));
+
+            send({
+              done: true,
+              result: aiClone,
+              creditsRemaining: isElevated ? currentCredits : currentCredits - cost,
+              type,
+              changeType,
+              partialFailure: failedFields.length > 0,
+              failedFields,
+              succeededFields,
+              skippedFields,
+            });
+            controller.close();
+            return;
+          }
+
           // ── NARRATIVE: thesis + refinement passes ─────────────────────────
           const passEntries = Object.entries(REFINEMENT_PASSES);
           const totalFields = 1 + passEntries.length; // thesis + 9 passes
@@ -863,9 +1445,10 @@ serve(async (req) => {
           const succeededFields: string[] = [];
           const skippedFields: string[] = [];
 
+          const passCtx: PassContext = { pinnedNpcIds: normalizedPinnedNpcIds };
           await Promise.all(passEntries.map(async ([key, spec]) => {
             try {
-              const payload = spec.extract(settlement);
+              const payload = spec.extract(settlement, passCtx);
               if (isEmptyPayload(payload)) {
                 skippedFields.push(key);
                 return;

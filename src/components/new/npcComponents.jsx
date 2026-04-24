@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
+import { Pin } from 'lucide-react';
 import {C, catColor} from './design';
 import {Ti, serif, PlotHook} from './Primitives';
 import {REL_STYLES} from './tabConstants';
 import {isMobile} from './tabConstants';
 
-export function NPCCategoryGroup({category, label, group, impFilter, search, relationships=[]}) {
+/**
+ * Stable identifier used to pin an NPC. Matches the backend filter contract
+ * in supabase/functions/generate-narrative/index.ts — `npc.id` when defined,
+ * otherwise `npc.name`. Kept at module scope so every consumer agrees.
+ */
+function npcPinKey(npc) {
+  if (npc?.id != null) return String(npc.id);
+  if (npc?.name != null) return String(npc.name);
+  return null;
+}
+
+export function NPCCategoryGroup({category, label, group, impFilter, search, relationships=[], pinnedIds, onTogglePin}) {
   const [open, setOpen] = useState(true);
   const color = catColor(category);
   const displayLabel = label || (category.charAt(0).toUpperCase() + category.slice(1));
@@ -38,7 +50,7 @@ export function NPCCategoryGroup({category, label, group, impFilter, search, rel
         <span style={{fontSize:10,color:'#9c8068',flexShrink:0}}>{open?'▲':'▼'}</span>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
       </button>
-      {open && sorted.map(npc => <NPCInlineCard key={npc.id||npc.name} npc={npc} relationships={relationships}/>)}
+      {open && sorted.map(npc => <NPCInlineCard key={npc.id||npc.name} npc={npc} relationships={relationships} pinnedIds={pinnedIds} onTogglePin={onTogglePin}/>)}
     </div>
   );
 }
@@ -117,7 +129,7 @@ export function ConflictCard({conflict:c}) {
 
 
 // Inline NPC card — replaces the removed NPCCard export
-function NPCInlineCard({ npc, relationships=[] }) {
+function NPCInlineCard({ npc, relationships=[], pinnedIds, onTogglePin }) {
   const [open, setOpen] = useState(false);
   const color = catColor(npc.category);
   const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
@@ -127,8 +139,24 @@ function NPCInlineCard({ npc, relationships=[] }) {
     : [npc.personality?.dominant, npc.personality?.flaw];
   const traits = personality.filter(Boolean);
 
+  // Pin UI is optional. When `onTogglePin` isn't provided (read-only views,
+  // unsaved settlements) the icon doesn't render at all. `pinnedIds` is a Set
+  // of pin keys; we compute isPinned against the same key the backend filters
+  // on so the UI state can't drift from the edge function's behaviour.
+  const pinKey = npcPinKey(npc);
+  const pinAvailable = typeof onTogglePin === 'function' && pinKey != null;
+  const isPinned = pinAvailable && pinnedIds instanceof Set && pinnedIds.has(pinKey);
+  const pinColor = '#6a2a9a'; // purple — ties visually to the narrative accent.
+
   return (
-    <div style={{background:'#faf8f4',border:`1px solid ${color}20`,borderLeft:`3px solid ${color}`,borderRadius:6,marginBottom:6,overflow:'hidden'}}>
+    <div style={{
+      background:'#faf8f4',
+      border:`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`,
+      borderLeft:`3px solid ${isPinned ? pinColor : color}`,
+      borderRadius:6,marginBottom:6,overflow:'hidden',
+      // Subtle tint when pinned — mirrors the narrative panel's purple wash.
+      boxShadow: isPinned ? `inset 2px 0 0 rgba(106,42,154,0.08)` : 'none',
+    }}>
       <button onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1,minWidth:0}}>
           <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
@@ -138,6 +166,29 @@ function NPCInlineCard({ npc, relationships=[] }) {
           </div>
           <div style={{fontSize:11,color:'#6b5340'}}>{npc.role}{npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}</div>
         </div>
+        {pinAvailable && (
+          <span
+            role="button"
+            tabIndex={0}
+            onClick={(e)=>{ e.stopPropagation(); onTogglePin(pinKey); }}
+            onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); onTogglePin(pinKey); } }}
+            title={isPinned
+              ? 'Pinned — this NPC will not be rewritten by regenerate/progress.'
+              : 'Pin this NPC so regenerate/progress leaves it unchanged.'}
+            style={{
+              display:'inline-flex',alignItems:'center',justifyContent:'center',
+              width:22,height:22,flexShrink:0,
+              borderRadius:4,
+              background: isPinned ? 'rgba(106,42,154,0.12)' : 'transparent',
+              border: `1px solid ${isPinned ? 'rgba(160,100,220,0.45)' : 'transparent'}`,
+              color: isPinned ? pinColor : '#b8a898',
+              cursor:'pointer',
+              transition:'all 0.15s',
+            }}
+          >
+            <Pin size={12} fill={isPinned ? pinColor : 'none'} strokeWidth={isPinned ? 2 : 1.7}/>
+          </span>
+        )}
         <span style={{fontSize:10,color:'#9c8068',flexShrink:0}}>{open?'▲':'▼'}</span>
       </button>
       {open && (

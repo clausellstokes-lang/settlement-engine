@@ -52,7 +52,7 @@ function spreadToggles(toggles) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, created_at, updated_at')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   return data.map(row => ({
@@ -65,6 +65,7 @@ async function supabaseList() {
     config:    row.config,
     ...spreadToggles(row.toggles),
     seed:      row.seed,
+    aiData:    row.ai_data || {},
   }));
 }
 
@@ -81,6 +82,7 @@ async function supabaseSave(entry) {
     toggles:         bundleToggles(entry),
     seed:            entry.seed || null,
     neighbour_links: entry.settlement?.neighbourNetwork || null,
+    ai_data:         entry.aiData || {},
   };
 
   const { data, error } = await supabase
@@ -102,6 +104,7 @@ async function supabaseUpdate(id, partial) {
   }
   if (partial.config !== undefined) updates.config = partial.config;
   if (partial.seed   !== undefined) updates.seed = partial.seed;
+  if (partial.aiData !== undefined) updates.ai_data = partial.aiData;
 
   const toggles = bundleToggles(partial);
   if (toggles) updates.toggles = toggles;

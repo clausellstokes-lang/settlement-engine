@@ -1,11 +1,16 @@
 /**
  * PurchaseModal.jsx — Credit pack and premium upgrade purchase UI.
  *
- * Displays available products and initiates Stripe Checkout
- * via the create-checkout edge function.
+ * Displays available products with volume discount pricing and
+ * initiates Stripe Checkout via the create-checkout edge function.
+ *
+ * Credit packs:
+ *   5 credits  / $4.99  ($1.00/ea)
+ *   15 credits / $9.99  ($0.67/ea, 33% off)
+ *   40 credits / $19.99 ($0.50/ea, 50% off)
  */
 import React, { useState } from 'react';
-import { X, Zap, Crown, AlertCircle } from 'lucide-react';
+import { X, Zap, Crown, AlertCircle, TrendingDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -14,6 +19,7 @@ import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_
 export default function PurchaseModal({ onClose }) {
   const creditBalance = useStore(s => s.creditBalance);
   const authTier      = useStore(s => s.auth.tier);
+  const isElevated    = useStore(s => s.isElevated());
   const [loading, setLoading] = useState(null); // product key being purchased
   const [error, setError]     = useState(null);
 
@@ -30,8 +36,9 @@ export default function PurchaseModal({ onClose }) {
   };
 
   const creditPacks = [
-    { key: 'credits_10', icon: <Zap size={20} />, highlight: false },
-    { key: 'credits_50', icon: <Zap size={20} />, highlight: true },
+    { key: 'credits_5',  icon: <Zap size={20} />,  tier: 'starter' },
+    { key: 'credits_15', icon: <Zap size={20} />,  tier: 'value' },
+    { key: 'credits_40', icon: <Zap size={20} />,  tier: 'best' },
   ];
 
   return (
@@ -50,7 +57,7 @@ export default function PurchaseModal({ onClose }) {
           background: CARD, borderRadius: R.xl,
           border: `1px solid ${BORDER}`,
           boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
-          width: '90%', maxWidth: 440, overflow: 'hidden',
+          width: '90%', maxWidth: 520, overflow: 'hidden',
         }}
       >
         {/* Header */}
@@ -61,7 +68,7 @@ export default function PurchaseModal({ onClose }) {
           color: GOLD,
         }}>
           <h2 style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
-            Purchase
+            Purchase Credits
           </h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer' }}>
             <X size={20} />
@@ -77,9 +84,20 @@ export default function PurchaseModal({ onClose }) {
           }}>
             <span style={{ fontSize: FS.sm, color: SECOND, fontFamily: sans }}>Current Balance</span>
             <span style={{ fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: sans }}>
-              {creditBalance} credits
+              {isElevated ? '\u221E Unlimited' : `${creditBalance} credits`}
             </span>
           </div>
+
+          {/* Developer bypass notice */}
+          {isElevated && (
+            <div style={{
+              padding: `${SP.sm + 2}px ${SP.md}px`,
+              background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)',
+              borderRadius: R.md, fontSize: FS.sm, color: '#7c3aed', textAlign: 'center',
+            }}>
+              Developer accounts have unlimited credits. Purchases are not required.
+            </div>
+          )}
 
           {/* Error */}
           {error && (
@@ -104,43 +122,64 @@ export default function PurchaseModal({ onClose }) {
             </div>
           )}
 
-          {/* Credit packs */}
-          <div style={{ fontSize: FS.xs, fontWeight: 700, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-            AI Credit Packs
+          {/* Credit packs with volume discount */}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: SP.sm,
+            fontSize: FS.xs, fontWeight: 700, color: SECOND,
+            textTransform: 'uppercase', letterSpacing: '0.06em',
+          }}>
+            <TrendingDown size={14} /> AI Credit Packs &mdash; Volume Discounts
           </div>
 
-          <div style={{ display: 'flex', gap: SP.md }}>
-            {creditPacks.map(({ key, icon, highlight }) => {
+          <div style={{ display: 'flex', gap: SP.sm }}>
+            {creditPacks.map(({ key, icon, tier }) => {
               const p = PRODUCTS[key];
+              const isBest = tier === 'best';
+              const isValue = tier === 'value';
+              const borderColor = isBest ? '#2a7a2a' : isValue ? GOLD : BORDER;
+              const accentColor = isBest ? '#2a7a2a' : isValue ? GOLD : SECOND;
               return (
                 <button
                   key={key}
                   onClick={() => handlePurchase(key)}
                   disabled={loading || !isConfigured}
                   style={{
-                    flex: 1, padding: `${SP.lg}px ${SP.md}px`,
-                    background: highlight ? 'rgba(42,122,42,0.08)' : CARD,
-                    border: `2px solid ${highlight ? 'rgba(42,122,42,0.4)' : BORDER}`,
+                    flex: 1, padding: `${SP.lg}px ${SP.sm}px`,
+                    background: isBest ? 'rgba(42,122,42,0.06)' : isValue ? 'rgba(160,118,42,0.04)' : CARD,
+                    border: `2px solid ${borderColor}`,
                     borderRadius: R.xl, cursor: loading ? 'wait' : 'pointer',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.sm,
-                    fontFamily: sans, transition: 'border-color 0.2s',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs + 2,
+                    fontFamily: sans, transition: 'border-color 0.2s, transform 0.1s',
                     opacity: loading ? 0.6 : 1,
+                    position: 'relative',
                   }}
                 >
-                  <div style={{ color: highlight ? '#2a7a2a' : GOLD }}>{icon}</div>
-                  <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits} Credits</div>
-                  <div style={{ fontSize: FS.xl, fontWeight: 700, color: highlight ? '#2a7a2a' : GOLD }}>{p.price}</div>
-                  {highlight && <div style={{ fontSize: FS.xxs, color: '#2a7a2a', fontWeight: 600 }}>BEST VALUE</div>}
+                  {/* Discount badge */}
+                  {p.discount && (
+                    <div style={{
+                      position: 'absolute', top: -10, right: -4,
+                      padding: '2px 8px', borderRadius: R.md,
+                      background: accentColor, color: '#fff',
+                      fontSize: 9, fontWeight: 800, letterSpacing: '0.02em',
+                    }}>
+                      {p.discount}
+                    </div>
+                  )}
+
+                  <div style={{ color: accentColor }}>{icon}</div>
+                  <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits}</div>
+                  <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase' }}>Credits</div>
+                  <div style={{ fontSize: FS.xl, fontWeight: 700, color: accentColor }}>{p.price}</div>
                   <div style={{ fontSize: FS.xxs, color: MUTED }}>
-                    {loading === key ? 'Redirecting...' : 'One-time purchase'}
+                    {loading === key ? 'Redirecting...' : p.perCredit + '/ea'}
                   </div>
                 </button>
               );
             })}
           </div>
 
-          {/* Premium upgrade (only if not already premium) */}
-          {authTier !== 'premium' && (
+          {/* Premium upgrade (only if not already premium and not developer) */}
+          {authTier !== 'premium' && !isElevated && (
             <>
               <div style={{ fontSize: FS.xs, fontWeight: 700, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: SP.sm }}>
                 Premium Subscription

@@ -8,10 +8,11 @@ import {NPCCategoryGroup, NPCRelCard2} from '../npcComponents';
 
 import {NarrativeNote} from '../NarrativeNote';
 
-export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote}) {
+export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedIds, onTogglePin}) {
   const [search, setSearch] = useState('');
   const [impFilter, setImpFilter] = useState('all');
   const mobile = isMobile();
+  const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
 
   if (!npcs?.length) return <Empty message="No NPCs generated. Generate a settlement to see key figures."/>;
 
@@ -56,6 +57,13 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote}) {
             {highCount>0&&`${highCount} high influence · `}{modCount>0&&`${modCount} moderate`}
           </span>
         </div>
+        {pinnedCount > 0 && (
+          <span
+            title="Pinned NPCs are preserved across regenerate/progress — their goal and secret won't be rewritten."
+            style={{fontSize:10,fontWeight:800,color:'#6a2a9a',background:'rgba(106,42,154,0.1)',border:'1px solid rgba(160,100,220,0.35)',borderRadius:12,padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
+            ⚲ {pinnedCount} PINNED
+          </span>
+        )}
         {onRerollNPCs&&<button onClick={onRerollNPCs} style={{fontSize:11,fontWeight:700,color:'#a0762a',background:'#f7f0e4',border:'1px solid #c8b89a',borderRadius:5,padding:'5px 12px',cursor:'pointer',flexShrink:0}}>↺ Reroll</button>}
       </div>
 
@@ -94,6 +102,8 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote}) {
           impFilter={impFilter}
           search={q}
           relationships={settlement?.relationships||[]}
+          pinnedIds={pinnedIds}
+          onTogglePin={onTogglePin}
         />
       ))}
 
@@ -118,4 +128,4 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote}) {
   );
 }
 
-export default NPCsTab;
+export default React.memo(NPCsTab);

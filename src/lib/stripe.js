@@ -10,14 +10,15 @@
 import { supabase, isConfigured } from './supabase.js';
 
 const PRODUCTS = {
-  credits_10: { name: '10 AI Credits',     price: '$2.99',  credits: 10 },
-  credits_50: { name: '50 AI Credits',     price: '$9.99',  credits: 50 },
-  premium:    { name: 'Premium Upgrade',   price: '$4.99/mo', credits: 0 },
+  credits_5:  { name: '5 AI Credits',      price: '$4.99',    credits: 5,  perCredit: '$1.00',  discount: null },
+  credits_15: { name: '15 AI Credits',     price: '$9.99',    credits: 15, perCredit: '$0.67',  discount: '33% off' },
+  credits_40: { name: '40 AI Credits',     price: '$19.99',   credits: 40, perCredit: '$0.50',  discount: '50% off' },
+  premium:    { name: 'Premium Upgrade',   price: '$4.99/mo', credits: 0,  perCredit: null,     discount: null },
 };
 
 /**
  * Create a Stripe Checkout session and redirect.
- * @param {'credits_10' | 'credits_50' | 'premium'} product
+ * @param {'credits_5' | 'credits_15' | 'credits_40' | 'premium'} product
  */
 export async function startCheckout(product) {
   if (!isConfigured) {
