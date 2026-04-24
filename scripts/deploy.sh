@@ -219,8 +219,8 @@ read -rsp "  Anthropic API key (sk-ant-...): " ANTHROPIC_KEY
 echo ""
 
 # Determine client URL
-read -rp "  Client URL [http://localhost:5173]: " CLIENT_URL
-CLIENT_URL="${CLIENT_URL:-http://localhost:5173}"
+read -rp "  Client URL [https://settlementforge.com]: " CLIENT_URL
+CLIENT_URL="${CLIENT_URL:-https://settlementforge.com}"
 
 npx supabase secrets set \
   --project-ref "$PROJECT_REF" \

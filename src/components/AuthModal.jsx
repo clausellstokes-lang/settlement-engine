@@ -4,9 +4,15 @@
  *
  * Uses the auth service (lib/auth.js) which auto-selects
  * Supabase or mock mode based on env vars.
+ *
+ * Features:
+ *   - Remember Me toggle on sign-in
+ *   - Enhanced account view with role badge, display name
+ *   - Quick link to full Account page
+ *   - Customer support contact link
  */
 import React, { useState } from 'react';
-import { X, AlertCircle, CheckCircle, Mail } from 'lucide-react';
+import { X, AlertCircle, CheckCircle, Mail, Shield, Crown, User, ExternalLink, Headphones } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -27,6 +33,24 @@ function Input({ type = 'text', placeholder, value, onChange, onKeyDown }) {
         boxSizing: 'border-box',
       }}
     />
+  );
+}
+
+function Checkbox({ checked, onChange, label }) {
+  return (
+    <label style={{
+      display: 'flex', alignItems: 'center', gap: SP.sm,
+      cursor: 'pointer', fontSize: FS.sm, color: SECOND,
+      fontFamily: sans, userSelect: 'none',
+    }}>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={e => onChange(e.target.checked)}
+        style={{ accentColor: GOLD, width: 16, height: 16, cursor: 'pointer' }}
+      />
+      {label}
+    </label>
   );
 }
 
@@ -76,17 +100,41 @@ function Alert({ type, children }) {
   );
 }
 
-export default function AuthModal({ onClose }) {
+/** Role badge component */
+function RoleBadge({ role }) {
+  if (role === 'user') return null;
+  const cfg = {
+    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer', Icon: Shield },
+    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin', Icon: Shield },
+  };
+  const c = cfg[role] || cfg.admin;
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 3,
+      padding: '2px 8px', borderRadius: R.md,
+      background: c.bg, color: c.color,
+      fontSize: FS.xxs, fontWeight: 700,
+      textTransform: 'uppercase', letterSpacing: '0.04em',
+    }}>
+      <c.Icon size={10} /> {c.label}
+    </span>
+  );
+}
+
+export default function AuthModal({ onClose, onNavigateAccount }) {
   const auth       = useStore(s => s.auth);
   const authSignUp = useStore(s => s.authSignUp);
   const authSignIn = useStore(s => s.authSignIn);
   const authSignOut = useStore(s => s.authSignOut);
   const authResetPassword = useStore(s => s.authResetPassword);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  const creditBalance = useStore(s => s.creditBalance);
+  const isElevated  = useStore(s => s.isElevated());
 
   const [view, setView] = useState(auth.user ? 'account' : 'signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -96,7 +144,7 @@ export default function AuthModal({ onClose }) {
     setError(null);
     setLoading(true);
     try {
-      await authSignIn(email.trim(), password);
+      await authSignIn(email.trim(), password, rememberMe);
       onClose();
     } catch (e) {
       setError(e.message || 'Sign-in failed');
@@ -245,6 +293,15 @@ export default function AuthModal({ onClose }) {
               <Input type="email" placeholder="Email address" value={email} onChange={setEmail} onKeyDown={onEnter} />
               <Input type="password" placeholder="Password" value={password} onChange={setPassword} onKeyDown={onEnter} />
 
+              {/* Remember Me checkbox — only on sign in */}
+              {view === 'signin' && (
+                <Checkbox
+                  checked={rememberMe}
+                  onChange={setRememberMe}
+                  label="Remember me on this device"
+                />
+              )}
+
               <Button onClick={submit} disabled={loading}>
                 {loading ? 'Working...' : view === 'signup' ? 'Create Account' : 'Sign In'}
               </Button>
@@ -267,26 +324,91 @@ export default function AuthModal({ onClose }) {
           {/* ── Account view ───────────────────────────────────── */}
           {view === 'account' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
+              {/* User info card */}
               <div style={{ padding: `${SP.md}px ${SP.lg - 2}px`, background: CARD_HDR, borderRadius: R.lg }}>
-                <div style={{ fontSize: FS.md, fontWeight: 600, color: INK }}>{auth.user?.email}</div>
-                <div style={{ fontSize: FS.sm, color: MUTED, marginTop: SP.xs }}>
-                  Tier:{' '}
-                  <strong style={{ color: auth.tier === 'premium' ? '#2a7a2a' : GOLD, textTransform: 'uppercase' }}>
-                    {auth.tier}
-                  </strong>
+                <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
+                  <div style={{
+                    width: 36, height: 36, borderRadius: '50%',
+                    background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: '#fff', fontWeight: 700, fontSize: FS.lg,
+                  }}>
+                    {(auth.displayName || auth.user?.email || '?')[0].toUpperCase()}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    {auth.displayName && (
+                      <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK, fontFamily: serif_ }}>
+                        {auth.displayName}
+                      </div>
+                    )}
+                    <div style={{ fontSize: FS.sm, color: MUTED }}>{auth.user?.email}</div>
+                  </div>
+                  <RoleBadge role={auth.role} />
+                </div>
+
+                <div style={{ display: 'flex', gap: SP.lg, marginTop: SP.md, paddingTop: SP.sm, borderTop: `1px solid ${BORDER}` }}>
+                  <div>
+                    <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Tier</div>
+                    <div style={{
+                      fontSize: FS.md, fontWeight: 700,
+                      color: isElevated ? '#7c3aed' : auth.tier === 'premium' ? '#2a7a2a' : GOLD,
+                      textTransform: 'uppercase',
+                    }}>
+                      {isElevated ? 'Full Access' : auth.tier}
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Credits</div>
+                    <div style={{ fontSize: FS.md, fontWeight: 700, color: '#7c3aed' }}>
+                      {isElevated ? '\u221E' : creditBalance}
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {auth.tier !== 'premium' && (
+              {/* Actions */}
+              {!isElevated && auth.tier !== 'premium' && (
                 <Button variant="success" onClick={() => { onClose(); setPurchaseModalOpen(true); }}>
                   Upgrade to Premium
                 </Button>
               )}
 
+              {onNavigateAccount && (
+                <Button variant="ghost" onClick={() => { onClose(); onNavigateAccount(); }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.sm }}
+                >
+                  <User size={14} /> Full Account Settings <ExternalLink size={12} />
+                </Button>
+              )}
+
               <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.6 }}>
-                <strong>Free Account:</strong> All tiers, 10 saves, custom content
-                <br />
-                <strong>Premium:</strong> Unlimited saves, Neighbourhood System, PDF/JSON export, Map supply chains
+                {isElevated ? (
+                  <>
+                    <strong>Developer Access:</strong> All features unlocked, unlimited saves, unlimited AI credits, admin panel.
+                  </>
+                ) : (
+                  <>
+                    <strong>Free Account:</strong> All tiers, 10 saves, custom content
+                    <br />
+                    <strong>Premium:</strong> Unlimited saves, Neighbourhood System, PDF/JSON export, Map supply chains
+                  </>
+                )}
+              </div>
+
+              {/* Support link */}
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: SP.sm,
+                padding: `${SP.sm}px ${SP.md}px`,
+                background: '#fef9ee', borderRadius: R.md,
+                border: `1px solid rgba(160,118,42,0.2)`,
+              }}>
+                <Headphones size={14} color={GOLD} />
+                <span style={{ fontSize: FS.sm, color: SECOND }}>
+                  Need help?{' '}
+                  <a href="mailto:clausellstokes@aol.com" style={{ color: GOLD, textDecoration: 'none', fontWeight: 600 }}>
+                    Contact Support
+                  </a>
+                </span>
               </div>
 
               <Button variant="danger" onClick={handleSignOut}>

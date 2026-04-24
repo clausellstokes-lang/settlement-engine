@@ -5,11 +5,16 @@
  * Called from the client with the user's auth token.
  *
  * Environment variables (set in Supabase dashboard):
- *   STRIPE_SECRET_KEY  — Stripe secret key
- *   STRIPE_PRICE_CREDITS_10  — Price ID for 10-credit pack
- *   STRIPE_PRICE_CREDITS_50  — Price ID for 50-credit pack
- *   STRIPE_PRICE_PREMIUM     — Price ID for premium subscription
- *   CLIENT_URL               — Frontend origin (e.g. https://yourapp.com)
+ *   STRIPE_SECRET_KEY          — Stripe secret key
+ *   STRIPE_PRICE_CREDITS_5     — Price ID for 5-credit pack ($4.99)
+ *   STRIPE_PRICE_CREDITS_15    — Price ID for 15-credit pack ($9.99)
+ *   STRIPE_PRICE_CREDITS_40    — Price ID for 40-credit pack ($19.99)
+ *   STRIPE_PRICE_PREMIUM       — Price ID for premium subscription ($4.99/mo)
+ *   CLIENT_URL                 — Frontend origin (e.g. https://yourapp.com)
+ *
+ * Legacy env vars (backward compat):
+ *   STRIPE_PRICE_CREDITS_10    — Mapped to credits_10 if still set
+ *   STRIPE_PRICE_CREDITS_50    — Mapped to credits_50 if still set
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
@@ -19,23 +24,48 @@ import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
 const PRICE_MAP: Record<string, string> = {
+  // New volume-discount tiers
+  credits_5:  Deno.env.get('STRIPE_PRICE_CREDITS_5') || '',
+  credits_15: Deno.env.get('STRIPE_PRICE_CREDITS_15') || '',
+  credits_40: Deno.env.get('STRIPE_PRICE_CREDITS_40') || '',
+  premium:    Deno.env.get('STRIPE_PRICE_PREMIUM') || '',
+  // Legacy (backward compat)
   credits_10: Deno.env.get('STRIPE_PRICE_CREDITS_10') || '',
   credits_50: Deno.env.get('STRIPE_PRICE_CREDITS_50') || '',
-  premium:    Deno.env.get('STRIPE_PRICE_PREMIUM') || '',
 };
 
 const CREDIT_AMOUNTS: Record<string, number> = {
+  credits_5:  5,
+  credits_15: 15,
+  credits_40: 40,
   credits_10: 10,
   credits_50: 50,
 };
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': Deno.env.get('CLIENT_URL') || '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-};
+/** Build CORS headers dynamically from the request origin. */
+function getCorsHeaders(req?: Request) {
+  const clientUrl = Deno.env.get('CLIENT_URL') || '';
+  const allowed = [
+    clientUrl,
+    'https://settlementforge.com',
+    'https://www.settlementforge.com',
+    'https://settlementwork.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000',
+  ].filter(Boolean);
+  const origin = req?.headers?.get('Origin') || '';
+  const match = allowed.includes(origin) || !origin;
+  return {
+    'Access-Control-Allow-Origin': match ? (origin || '*') : allowed[0],
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    ...(match ? { 'Vary': 'Origin' } : {}),
+  };
+}
 
 serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req);
+
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
