@@ -68,8 +68,11 @@ function SettlementCard({ s, allModifiers, onView, onDelete, deleteId, setDelete
   const [moveOpen, setMoveOpen] = useState(false);
   const ts = (t) => { try { return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; } };
 
+  // No overflow:hidden on the wrapper — would clip the "move to campaign"
+  // popover that opens below the arrow button. DeleteConfirmation below
+  // carries its own rounded corners + top margin, so nothing visually escapes.
   return (
-    <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:7, overflow:'hidden' }}>
+    <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:7 }}>
       <div style={{ display:'flex', alignItems:'center', gap:8, padding:'9px 12px' }}>
         <div style={{ flex:1, minWidth:0 }}>
           <div style={{ fontSize:13, fontWeight:700, color:INK, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</div>
@@ -152,10 +155,14 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
   const [confirmDelete, setConfirmDelete] = useState(false);
   const collapsed = campaign.collapsed;
 
+  // No overflow:hidden on the wrapper — would clip the "move to campaign"
+  // popover on cards inside this section. The header's top corners are
+  // rounded explicitly to match the parent so the cream background doesn't
+  // poke outside the rounded outer border.
   return (
-    <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden' }}>
+    <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>
       {/* Campaign header */}
-      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:'#f5ede0', borderBottom: collapsed ? 'none' : `1px solid ${BORDER}` }}>
+      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:'#f5ede0', borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
         <button onClick={() => toggleCollapsed(campaign.id)} style={{ background:'none', border:'none', cursor:'pointer', padding:0, display:'flex', color:MUTED }}>
           {collapsed ? <ChevronRight size={14}/> : <ChevronDown size={14}/>}
         </button>
