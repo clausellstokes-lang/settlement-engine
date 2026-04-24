@@ -362,7 +362,8 @@ export default function SettlementDetail({
                 });
               } catch (err) {
                 console.error('[PDF export] failed:', err);
-                alert('PDF export failed. See console for details.');
+                const msg = err?.message || String(err) || 'unknown error';
+                alert('PDF export failed:\n\n' + msg + '\n\nFull error logged to console.');
               } finally {
                 setExporting(false);
               }

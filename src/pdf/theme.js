@@ -69,25 +69,26 @@ export const relColors = {
 };
 
 // ── Font registration ────────────────────────────────────────────────────────
-// Lora (open SIL) for serif body — close in feel to Georgia at print sizes,
-// no licensing question. Nunito for sans labels/nav. Both pulled from Google
-// Fonts CDN at build time and bundled by @react-pdf into the resulting PDF.
+// Lora (open SIL) for serif body, Nunito for sans labels/nav. Both shipped as
+// static assets under public/fonts/ so the PDF render never depends on an
+// external CDN. (Earlier builds pulled from fonts.gstatic.com — Google rotated
+// the v32 URLs and PDF export broke silently for everyone.)
 Font.register({
   family: 'Lora',
   fonts: [
-    { src: 'https://fonts.gstatic.com/s/lora/v32/0QIvMX1D_JOuMw_jLdNrJfh84A.ttf', fontWeight: 400 },
-    { src: 'https://fonts.gstatic.com/s/lora/v32/0QIvMX1D_JOuMw_jLdNrIPg84A.ttf', fontWeight: 700 },
-    { src: 'https://fonts.gstatic.com/s/lora/v32/0QIgMX1D_JOuO7HFKnKduQy8RA.ttf', fontWeight: 400, fontStyle: 'italic' },
-    { src: 'https://fonts.gstatic.com/s/lora/v32/0QIgMX1D_JOuO7HFKny5tAy8RA.ttf', fontWeight: 700, fontStyle: 'italic' },
+    { src: '/fonts/Lora-Regular.ttf',    fontWeight: 400 },
+    { src: '/fonts/Lora-Bold.ttf',       fontWeight: 700 },
+    { src: '/fonts/Lora-Italic.ttf',     fontWeight: 400, fontStyle: 'italic' },
+    { src: '/fonts/Lora-BoldItalic.ttf', fontWeight: 700, fontStyle: 'italic' },
   ],
 });
 
 Font.register({
   family: 'Nunito',
   fonts: [
-    { src: 'https://fonts.gstatic.com/s/nunito/v25/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshRTM9jo7eTWk.ttf', fontWeight: 400 },
-    { src: 'https://fonts.gstatic.com/s/nunito/v25/XRXI3I6Li01BKofiOc5wtlZ2di8HDFEvRTM9jo7eTWk.ttf', fontWeight: 700 },
-    { src: 'https://fonts.gstatic.com/s/nunito/v25/XRXI3I6Li01BKofiOc5wtlZ2di8HDDsuRTM9jo7eTWk.ttf', fontWeight: 800 },
+    { src: '/fonts/Nunito-Regular.ttf',   fontWeight: 400 },
+    { src: '/fonts/Nunito-Bold.ttf',      fontWeight: 700 },
+    { src: '/fonts/Nunito-ExtraBold.ttf', fontWeight: 800 },
   ],
 });
 
