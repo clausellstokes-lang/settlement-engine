@@ -33,7 +33,7 @@ const SettlementPalette = lazy(() => import('./map/SettlementPalette.jsx'));
 // Cachebuster bumped whenever public/map/* changes so browsers don't serve
 // a stale iframe bundle (e.g. old drop handler missing the settlementforge
 // path). Bump this when you edit anything under /public/map.
-const FMG_URL = '/map/index.html?v=sfdrop10';
+const FMG_URL = '/map/index.html?v=sfdrop11';
 
 export default function WorldMap({ onNavigate } = {}) {
   // ── Refs & local state ────────────────────────────────────────────────
@@ -152,11 +152,12 @@ export default function WorldMap({ onNavigate } = {}) {
   }, [setMapLoading]);
 
   // ── Native FMG layer toggles ─────────────────────────────────────────
-  // Subscribe to the `nativeStateBorders` and `nativeCultureRegions` flags
-  // and push them into the iframe so toggling the checkbox actually
-  // shows/hides the corresponding FMG layer.
+  // Subscribe to the native-layer flags and push each into the iframe so
+  // toggling the checkbox (or the Biomes button in the terrain toolbar)
+  // actually shows/hides the corresponding FMG SVG group.
   const nativeStateBorders   = useStore(s => s.mapState.layers.nativeStateBorders);
   const nativeCultureRegions = useStore(s => s.mapState.layers.nativeCultureRegions);
+  const nativeBiomes         = useStore(s => s.mapState.layers.nativeBiomes);
   useEffect(() => {
     if (!bridgeReady) return;
     const bridge = bridgeRef.current;
@@ -171,6 +172,13 @@ export default function WorldMap({ onNavigate } = {}) {
     bridge.call('settlementEngine:setFmgLayer', { layer: 'cultures', visible: !!nativeCultureRegions })
       .catch(e => console.warn('[WorldMap] setFmgLayer cultures failed', e));
   }, [bridgeReady, nativeCultureRegions]);
+  useEffect(() => {
+    if (!bridgeReady) return;
+    const bridge = bridgeRef.current;
+    if (!bridge) return;
+    bridge.call('settlementEngine:setFmgLayer', { layer: 'biomes', visible: !!nativeBiomes })
+      .catch(e => console.warn('[WorldMap] setFmgLayer biomes failed', e));
+  }, [bridgeReady, nativeBiomes]);
 
   // ── Drag-drop (settlement palette → map) ──────────────────────────────
   const handleDragOver = useCallback((e) => {

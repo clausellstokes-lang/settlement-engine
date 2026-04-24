@@ -2348,9 +2348,11 @@ function undraw() {
     },
 
     // Show/hide a native FMG layer (states, cultures, biomes, etc.) by
-    // toggling the corresponding SVG <g> element's display. We don't call
-    // FMG's toggle* functions because many of them run drawing side effects;
-    // direct display toggling is safer for read-only overlays.
+    // toggling the corresponding SVG <g> element's display. We avoid calling
+    // FMG's toggle* helpers in general because many run drawing side effects
+    // we don't want — but biomes is a special case: its <g> is *empty* until
+    // drawBiomes() populates it, so the first show-request needs to invoke
+    // the draw call once. After that, plain display flipping is enough.
     'settlementEngine:setFmgLayer'(data, rid) {
       try {
         const { layer, visible } = data || {};
@@ -2367,6 +2369,17 @@ function undraw() {
           return replyError(rid, 'fmg:setFmgLayerReply',
             `unknown layer: ${layer}. Valid: ${Object.keys(LAYER_MAP).join(', ')}`);
         }
+
+        // Lazy-populate biomes on first show so the layer actually has
+        // something to display when we flip the style.
+        if (layer === 'biomes' && visible) {
+          const g = document.getElementById('biomes');
+          const empty = !g || g.querySelector('path') == null;
+          if (empty && typeof window.drawBiomes === 'function') {
+            try { window.drawBiomes(); } catch (e) { console.warn('[bridge] drawBiomes failed', e); }
+          }
+        }
+
         const applied = [];
         for (const id of ids) {
           const el = document.getElementById(id);

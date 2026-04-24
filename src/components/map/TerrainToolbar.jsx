@@ -1,14 +1,24 @@
 /**
  * TerrainToolbar — contextual toolbar for MAP_MODES.TERRAIN.
  *
- * Terrain editing is handled by FMG's built-in editors; this toolbar is a
- * thin facade that calls bridge.activateTool(...) to pop them open. The
- * actual brush interaction happens inside the iframe using FMG's native
- * UI. Our role is to surface those tools from a single place.
+ * Most of FMG's per-feature editors (rivers, coastline, lakes) require a
+ * clicked map element as their input — they read `d3.event.target` and break
+ * silently when called from a context-free toolbar button. So those buttons
+ * have been removed; users double-click the feature directly on the map to
+ * edit it (the hint at the right of the toolbar surfaces that workflow).
+ *
+ * What remains:
+ *   • Heightmap — opens FMG's heightmap editor (works from a toolbar because
+ *                 editHeightmap defensively defaults its options arg).
+ *   • Biomes    — toggles the visibility of the biomes SVG layer. Wired to
+ *                 mapState.layers.nativeBiomes via the standard layer-toggle
+ *                 path in WorldMap.jsx, so a second click cleanly hides what
+ *                 the first click revealed.
+ *   • Undo / Redo — passed through to FMG's history.
  */
 
 import React from 'react';
-import { Mountain, Waves, Anchor, Droplet, Trees as TreesIcon, Undo2, Redo2, Info } from 'lucide-react';
+import { Mountain, Trees as TreesIcon, Undo2, Redo2, Info } from 'lucide-react';
 import { useStore } from '../../store';
 import { TERRAIN_TOOLS } from '../../store/mapSlice.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R } from '../theme.js';
@@ -16,6 +26,8 @@ import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, SP,
 export default function TerrainToolbar({ bridgeRef }) {
   const terrainTool    = useStore(s => s.terrainTool);
   const setTerrainTool = useStore(s => s.setTerrainTool);
+  const nativeBiomes   = useStore(s => s.mapState.layers.nativeBiomes);
+  const toggleLayer    = useStore(s => s.toggleLayer);
 
   async function activate(tool) {
     setTerrainTool(tool);
@@ -26,6 +38,13 @@ export default function TerrainToolbar({ bridgeRef }) {
     } catch (err) {
       console.warn('[TerrainToolbar] activateTool failed', err);
     }
+  }
+
+  // Biomes is a pure visibility toggle — flipping the store flag fires the
+  // setFmgLayer effect in WorldMap.jsx, which shows/hides the #biomes SVG
+  // group. No editor dialog, no per-feature selection required.
+  function toggleBiomes() {
+    toggleLayer('nativeBiomes');
   }
 
   async function undo() {
@@ -51,30 +70,14 @@ export default function TerrainToolbar({ bridgeRef }) {
         onClick={() => activate(TERRAIN_TOOLS.HEIGHTMAP)}
         Icon={Mountain}
         label="Heightmap"
+        title="Open FMG's heightmap editor — paint terrain elevation."
       />
       <ToolButton
-        active={terrainTool === TERRAIN_TOOLS.RIVERS}
-        onClick={() => activate(TERRAIN_TOOLS.RIVERS)}
-        Icon={Waves}
-        label="Rivers"
-      />
-      <ToolButton
-        active={terrainTool === TERRAIN_TOOLS.COASTLINE}
-        onClick={() => activate(TERRAIN_TOOLS.COASTLINE)}
-        Icon={Anchor}
-        label="Coastline"
-      />
-      <ToolButton
-        active={terrainTool === TERRAIN_TOOLS.LAKES}
-        onClick={() => activate(TERRAIN_TOOLS.LAKES)}
-        Icon={Droplet}
-        label="Lakes"
-      />
-      <ToolButton
-        active={terrainTool === TERRAIN_TOOLS.BIOMES}
-        onClick={() => activate(TERRAIN_TOOLS.BIOMES)}
+        active={!!nativeBiomes}
+        onClick={toggleBiomes}
         Icon={TreesIcon}
-        label="Biomes"
+        label={nativeBiomes ? 'Hide Biomes' : 'Show Biomes'}
+        title="Toggle the biomes overlay on or off. Click again to reverse."
       />
 
       <div style={{ width: 1, height: 24, background: BORDER2 }} />
@@ -91,19 +94,23 @@ export default function TerrainToolbar({ bridgeRef }) {
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
         fontSize: FS.xxs, color: MUTED, fontStyle: 'italic',
+        maxWidth: 360, lineHeight: 1.35,
       }}>
-        <Info size={12} />
-        Pick a tool to open FMG's built-in editor inside the map.
+        <Info size={12} style={{ flexShrink: 0 }} />
+        <span>
+          To edit a river, lake, or coastline, double-click it directly on
+          the map — FMG's per-feature editor will open in place.
+        </span>
       </div>
     </div>
   );
 }
 
-function ToolButton({ active, onClick, Icon, label }) {
+function ToolButton({ active, onClick, Icon, label, title }) {
   return (
     <button
       onClick={onClick}
-      title={label}
+      title={title || label}
       style={{
         display: 'flex', alignItems: 'center', gap: 5,
         padding: '6px 12px',

@@ -19,12 +19,14 @@ export const MAP_MODES = {
   ANNOTATE: 'annotate',
 };
 
+// Terrain tools that actually open a usable FMG editor when invoked from a
+// toolbar button (i.e. without an existing map-feature selection). The Rivers,
+// Coastline, and Lakes editors require a clicked feature to operate (they
+// reach for d3.event.target internally), so they are NOT exposed here — users
+// double-click those features on the map to edit them. Biomes is handled as
+// a layer-visibility toggle in mapState.layers.nativeBiomes, not as a tool.
 export const TERRAIN_TOOLS = {
   HEIGHTMAP: 'heightmap',
-  RIVERS: 'rivers',
-  COASTLINE: 'coastline',
-  LAKES: 'lakes',
-  BIOMES: 'biomes',
 };
 
 export const ANNOTATE_TOOLS = {
@@ -48,6 +50,7 @@ const DEFAULT_LAYERS = {
   forests: true,
   nativeStateBorders: true,
   nativeCultureRegions: false,
+  nativeBiomes: false,
 };
 
 const DEFAULT_VIEWPORT = { cx: 0, cy: 0, scale: 1, width: 0, height: 0 };
