@@ -73,4 +73,35 @@ export const getCompatibleResources = (route, terrain = null) =>
   });
 
 // getDefaultResources
-export const getDefaultResources=r=>{const s={port:["fishing_grounds","salt_flats","deep_harbour","shipbuilding_timber"],river:["river_mills","fertile_floodplain","river_fish","river_clay"],crossroads:["grain_fields","grazing_land","crossroads_position"],road:["grain_fields","grazing_land","managed_forest"],isolated:["hunting_grounds","managed_forest","foraging_areas"]};return s[r]||s.road};
+export const getDefaultResources = (r) => {
+  const s = {
+    port: [
+      "fishing_grounds",
+      "salt_flats",
+      "deep_harbour",
+      "shipbuilding_timber",
+    ],
+    river: [
+      "river_mills",
+      "fertile_floodplain",
+      "river_fish",
+      "river_clay",
+    ],
+    crossroads: [
+      "grain_fields",
+      "grazing_land",
+      "crossroads_position",
+    ],
+    road: [
+      "grain_fields",
+      "grazing_land",
+      "managed_forest",
+    ],
+    isolated: [
+      "hunting_grounds",
+      "managed_forest",
+      "foraging_areas",
+    ],
+  };
+  return s[r] || s.road;
+};

@@ -1,9 +1,626 @@
 // spatialData.js — extracted from bundle
 
-export const INSTITUTION_SPATIAL=[{institution:"Major port",requiredAccess:["port"],reason:"A major port requires ocean or deep-water coastal access.",note:"A river settlement can have docks but not a major seaport."},{institution:"Navy (if coastal)",requiredAccess:["port"],reason:"A navy requires ocean access. River communities can have patrol boats, not a navy."},{institution:"Docks/port facilities",requiredAccess:["port","river"],reason:"Dock facilities require navigable water — ocean coast or navigable river."},{institution:"Fishmonger",requiredAccess:["port","river","crossroads","road"],reason:"A fishmonger requires access to fresh fish — coastal, river, or trade route supply."}];
+export const INSTITUTION_SPATIAL = [
+  {
+    institution: "Major port",
+    requiredAccess: ["port"],
+    reason: "A major port requires ocean or deep-water coastal access.",
+    note: "A river settlement can have docks but not a major seaport."
+  },
+  {
+    institution: "Navy (if coastal)",
+    requiredAccess: ["port"],
+    reason: "A navy requires ocean access. River communities can have patrol boats, not a navy."
+  },
+  {
+    institution: "Docks/port facilities",
+    requiredAccess: ["port", "river"],
+    reason: "Dock facilities require navigable water — ocean coast or navigable river."
+  },
+  {
+    institution: "Fishmonger",
+    requiredAccess: ["port", "river", "crossroads", "road"],
+    reason: "A fishmonger requires access to fresh fish — coastal, river, or trade route supply."
+  }
+];
 
-export const GATE_FEATURES={"Gates (if walled)":{suggestionOnly:true,requires:["Town walls","City walls and gates","Massive walls and fortifications"],reason:"Gates are entry points in walls — walls must exist first."},Citadel:{requires:["City walls and gates","Massive walls and fortifications"],reason:"Inner fortress requires outer defenses."},"Inner citadel":{minTier:"metropolis",requires:["City walls and gates","Massive walls and fortifications"],reason:"Citadel is last-stand fortification within an already-fortified city."},Garrison:{reason:"A garrison provides its own quarters and replaces the citizen militia."},"Navy (if coastal)":{requires:["Docks/port facilities"],requiresAccess:["port"],reason:"Naval forces require port infrastructure. A river militia is not a navy.",accessViolationReason:"A navy requires coastal or ocean access. This settlement is landlocked — SEVERITY can have river patrols but not a navy."},"Multiple garrisons":{minTier:"city",requires:["Garrison","Barracks","Professional guard (hundreds)"],reason:"Multiple garrison facilities require city-scale population and military investment."},"Professional guard (hundreds)":{minTier:"city",requires:["Garrison","Barracks","Town watch"],reason:"Hundreds of professional guards require established military infrastructure."},"Mercenary company HQ":{minTier:"town",reason:"Mercenary companies require town-scale population to recruit and supply."},"Mercenary quarter":{minTier:"city",requires:["Mercenary company HQ","Hireling hall"],reason:"Sellsword district requires military infrastructure and sustained demand."},"Aqueduct or water system":{minTier:"city",reason:"Engineered water supply requires population density to justify the massive cost."},"Advanced water infrastructure":{minTier:"metropolis",reason:"Complex multi-district water distribution requires metropolis-scale population and resources."},"Sewage system":{minTier:"city",requires:["Aqueduct or water system","Advanced water infrastructure","Multiple water sources"],reason:"Sewage infrastructure requires engineered water supply for flushing and drainage."},Tanners:{requires:["Water source","Multiple water sources","Aqueduct or water system","River access"],reason:"Tanning requires massive amounts of water for hide processing."},"Market square":{minTier:"village",reason:"A market square at village scale is the weekly market clearing. Town-scale gets a formal paved square with a royal charter."},"Weekly market":{minTier:"village",requires:["Market square","Common grazing land"],reason:"Regular markets require a designated space. Cannot hold a weekly market without a square."},"Multiple market squares":{minTier:"city",requires:["Market square","Daily markets"],reason:"Multiple permanent market squares require city-scale trade volume."},"Daily markets":{minTier:"city",requires:["Market square","Weekly market"],reason:"Daily trading requires a substantial permanent merchant class."},"District markets (5-10)":{minTier:"metropolis",requires:["Multiple market squares","Daily markets"],reason:"Specialized district markets emerge from growth of general markets across multiple city districts."},"Merchant guilds (3-8)":{minTier:"town",requires:["Weekly market","Annual fair","Market square"],reason:"Merchant guilds require regular trade to justify organization."},"Merchant guilds (15-40)":{minTier:"city",requires:["Merchant guilds (3-8)","Daily markets"],reason:"Large guild networks require established merchant class and daily trading."},"Merchant guilds (50-100+)":{minTier:"metropolis",requires:["Merchant guilds (15-40)","District markets (5-10)"],reason:"Extreme specialization requires metropolis-scale trade volume."},"Warehouse district":{minTier:"city",requires:["Daily markets","Docks/port facilities","Market square"],reason:"Bulk storage requires major trade volume from markets or port access."},"Multiple warehouse districts":{minTier:"metropolis",requires:["Warehouse district"],reason:"Multiple districts require enormous trade throughput."},"International trade center":{minTier:"metropolis",requires:["Warehouse district","Banking houses","Multiple warehouse districts"],reason:"Global trade requires major trade infrastructure — port access or substantial overland networksstructure with banking."},"Stock exchange (early)":{minTier:"metropolis",requires:["Banking district","International trade center"],reason:"Share trading requires sophisticated financial infrastructure."},"Docks/port facilities":{requiresAccess:["port","river"],reason:"Docking facilities require waterfront access — ocean port or navigable river.",accessViolationReason:"Docks require water access. This settlement has no river or coastal access."},"Major port":{requiresAccess:["port"],requires:["Docks/port facilities"],reason:"A major port requires both ocean access and existing dock infrastructure.",accessViolationReason:"A major port requires coastal ocean access. River docks serve river trade only — they cannot become a major port."},"Money changers":{minTier:"town",requires:["Weekly market","Annual fair","Market square"],reason:"Currency exchange requires regular merchant traffic."},"Banking houses":{minTier:"city",requires:["Money changers","Merchant guilds (3-8)","Merchant guilds (15-40)"],reason:"Formal banking grows from established money-changing and merchant activity."},"Banking district":{minTier:"metropolis",requires:["Banking houses"],reason:"Concentration of banks requires enormous trade volume."},"Priest (resident)":{minTier:"hamlet",reason:"A resident priest requires a community large enough to support one."},"Parish church":{minTier:"village",reason:"Villages are legally defined by a parish. Hamlets rely on circuit priests."},"Parish churches (2-5)":{minTier:"town",requires:["Parish church","Priest (resident)"],reason:"Multiple parishes require town-scale population."},"Parish churches (10-30)":{minTier:"city",requires:["Parish churches (2-5)"],reason:"Extensive parish network requires city-scale population."},"Parish churches (50-100+)":{minTier:"metropolis",requires:["Parish churches (10-30)"],reason:"Metropolitan parish network requires tens of thousands of residents."},"Monastery or friary":{minTier:"village",reason:"Monastic communities require enough surrounding population to support them."},"Multiple monasteries":{minTier:"city",requires:["Monastery or friary"],reason:"Multiple religious houses require city-scale wealth and population."},"Major monasteries (5-10)":{minTier:"metropolis",requires:["Multiple monasteries"],reason:"Concentration of major religious houses requires metropolis resources."},"Small hospital":{requires:["Parish church","Monastery or friary","Priest (resident)"],reason:"Medieval hospitals were run by religious orders as acts of charity."},"Major hospital":{minTier:"city",requires:["Cathedral (10,000+ only)","Multiple monasteries","Parish churches (2-5)"],reason:"Large hospitals require wealthy religious backing and multiple orders."},"Hospital network":{minTier:"metropolis",requires:["Major hospital","Great cathedral","Multiple monasteries"],reason:"Network of facilities requires central cathedral authority and multiple orders."},"Cathedral (10,000+ only)":{minTier:"city",requires:["Parish churches (2-5)","Parish churches (10-30)"],reason:"A bishop's seat requires 10,000+ population and an established parish structure."},"Great cathedral":{minTier:"metropolis",requires:["Cathedral (10,000+ only)","Parish churches (10-30)","Parish churches (50-100+)"],reason:"Architectural marvel requires massive wealth, metropolitan population, and deep parish roots."},"Multiple cathedrals":{minTier:"metropolis",requires:["Great cathedral","Cathedral (10,000+ only)"],reason:"Only the largest cities support competing religious authorities of cathedral rank."},"Sage/library":{minTier:"town",reason:"A permanent sage or library requires town-level patronage and literate customers."},"Great library":{minTier:"city",requires:["Sage/library","Cathedral (10,000+ only)","Multiple monasteries"],reason:"Major collections require wealthy religious or civic patronage to fund acquisition."},University:{minTier:"metropolis",requires:["Great library","Cathedral (10,000+ only)","Great cathedral"],reason:"Universities grew from cathedral schools. Require metropolis population (25,000+) and library infrastructure."},"Sage's quarter":{minTier:"city",requires:["Great library","University"],reason:"Concentration of scholars requires educational infrastructure to attract them."},"Bardic college":{minTier:"city",requires:["Sage/library","Theaters","Great library"],reason:"Formal bardic training requires cultural infrastructure."},"Town hall":{minTier:"town",reason:"Formal civic administration requires town-scale governance."},"City hall":{minTier:"city",reason:"City-scale civic administration."},Courthouse:{minTier:"town",requires:["Town hall","Mayor and council","Village reeve"],reason:"Formal courts require civic authority to enforce judgments."},"Multiple court buildings":{minTier:"city",requires:["Courthouse","City hall"],reason:"Specialized courts require large population and complex legal needs."},"Large prison":{requires:["Courthouse","City hall"],reason:"Large-scale incarceration requires an active judicial system."},"Massive prison":{minTier:"metropolis",requires:["Large prison","Multiple court buildings"],reason:"Vast prisons require metropolitan-scale criminal justice system."},"Palace/government complex":{minTier:"metropolis",reason:"Grand civic architecture requires metropolitan resources and centuries of institutional development."},"Craft guilds (5-15)":{minTier:"town",requires:["Weekly market","Market square"],reason:"Craft guilds require regular trade to justify organization."},"Craft guilds (30-80)":{minTier:"city",requires:["Craft guilds (5-15)","Daily markets"],reason:"Large craft networks require established guild tradition."},"Craft guilds (100-150+)":{minTier:"metropolis",requires:["Craft guilds (30-80)"],reason:"Every conceivable trade requires metropolis-scale population."},"Specialized metalworkers":{requires:["Blacksmiths (3-10)","Craft guilds (30-80)","Craft guilds (5-15)"],reason:"Specialization emerges from established metalworking tradition."},"Printing house":{minTier:"city",requires:["Great library","Craft guilds (30-80)"],reason:"Printing requires paper supply, literate market, and skilled craft workers."},Glassmakers:{minTier:"city",requires:["Craft guilds (30-80)","Craft guilds (5-15)"],reason:"Glassmaking requires high-temperature kilns and specialized knowledge."},Mill:{minTier:"village",requires:["Farmland","Subsistence farming","Market square","Weekly market"],reason:"A miller needs grain — either from local farmland or via market access."},"Mills (2-5)":{minTier:"town",requires:["Mill","Market square"],reason:"Multiple mills require established grain supply chain."},"Weavers/Textile workers":{requires:["Farmland","Subsistence farming","Weekly market","Market square"],reason:"Weavers need wool or flax from local pastoral farming or market imports."},Sawmill:{requiresAny:["Market square","Weekly market","Docks/port facilities","Merchant guilds (3-8)","Managed forest","Farmland","Subsistence farming","Common grazing land"],reason:"A sawmill needs timber access — local forest, a market, or an agricultural economy to source bulk timber commercially."},Theaters:{minTier:"city",reason:"Professional performance requires wealthy audience and cultural sophistication."},"Multiple theaters":{minTier:"metropolis",requires:["Theaters"],reason:"Multiple venues require enormous population to sustain."},"Opera house":{minTier:"metropolis",requires:["Multiple theaters","Bardic college"],reason:"Opera requires extremely wealthy patronage and professional musical tradition."},"Colosseum/arena":{minTier:"metropolis",requires:["Professional arena","Fighting pits"],reason:"Colosseum-scale entertainment requires enormous investment and audience."},"Professional arena":{minTier:"city",requires:["Fighting pits"],reason:"Professional events require established fighting culture."},"Gambling district":{minTier:"metropolis",requires:["Gambling halls","Gambling den"],reason:"A district requires concentrated and institutionalized gambling infrastructure."},"Gambling halls":{minTier:"city",requires:["Gambling den","Ale house"],reason:"Organized gambling halls grow from informal establishments."},"Street gang":{minTier:"town",reason:"Organized territorial gangs require enough population density to establish territory."},"Thieves' guild chapter":{minTier:"city",requires:["Street gang","Black market","Gambling den","Front businesses"],reason:"Organized guild structure requires criminal infrastructure to coordinate."},"Thieves' guild (powerful)":{minTier:"metropolis",requires:["Thieves' guild chapter","Multiple criminal factions","Black market"],reason:"Powerful criminal organization requires extensive existing criminal infrastructure."},"Multiple criminal factions":{minTier:"city",requires:["Street gang","Thieves' guild chapter","Smuggling operation"],reason:"Multiple competing criminal organizations require city-scale population."},"Black market bazaar":{minTier:"city",requires:["Black market","Multiple criminal factions","Underground city"],reason:"Large-scale illegal market requires extensive criminal networks and hidden spaces."},"Underground city":{minTier:"city",reason:"Extensive underground networks require large population and old infrastructure."},"Assassins' guild":{minTier:"metropolis",requires:["Thieves' guild (powerful)","Underground city"],reason:"Contract killing organizations require 50,000+ population or regional operations."},"Smuggling operation":{minTier:"town",reason:"Organized smuggling requires sufficient trade volume to hide contraband within."},"Smuggling network":{minTier:"city",requires:["Smuggling operation","Warehouse district"],reason:"Network-scale smuggling requires an established operation and storage infrastructure. Port access is a bonus but not required for overland networks."},"Front businesses":{minTier:"town",requires:["Street gang","Gambling den","Black market"],reason:"Criminal fronts require existing criminal operation to launder."},"Adventurers' charter hall":{minTier:"hamlet",reason:"A charter hall operates under regional authority and can exist in smaller settlements, especially on dangerous frontiers."},"Adventurers' guild hall":{minTier:"city",reason:"Formal adventurers' guild requires city-scale demand. The guild itself provides the hireling and mercenary infrastructure."},"Multiple adventurers' guilds":{minTier:"city",requires:["Adventurers' guild hall"],reason:"Competing guilds require metropolis-scale adventuring demand."},"Dungeon delving supply district":{minTier:"city",requires:["Adventurers' guild hall","Multiple adventurers' guilds"],reason:"Specialized gear suppliers follow adventurer concentration."},"Monster part dealers":{minTier:"city",requires:["Adventurers' guild hall","Alchemist quarter","Alchemist shop"],reason:"Monster component trade requires guild infrastructure and alchemical buyers."},"Traveling hedge wizard":{minTier:"thorp",reason:"A traveling practitioner needs only a large enough community to offer services."},"Hedge wizard":{minTier:"village",reason:"A resident hedge wizard requires a village large enough to support one."},"Wizard's tower":{minTier:"town",reason:"A tower-dwelling wizard establishes their own supply chain at this scale."},"Alchemist shop":{minTier:"town",requires:["Weekly market","Market square"],reason:"An alchemist requires reagent supply from regular trade."},"Scroll scribe":{minTier:"town",requires:["Wizard's tower","Hedge wizard","Alchemist shop"],reason:"Professional scroll production requires a magical practitioner to supervise."},"Enchanter's shop":{minTier:"city",requires:["Wizard's tower","Alchemist shop"],reason:"Enchantment services require established arcane infrastructure."},"Mages' guild":{minTier:"city",requires:["Wizard's tower","Multiple wizard towers"],reason:"Organized magical guild requires established tower infrastructure."},"Academy of magic":{minTier:"city",requires:["Mages' guild","Mages' district","Multiple wizard towers"],reason:"Formal magical education requires organized guild and district infrastructure."},"Mages' district":{minTier:"city",requires:["Wizard's tower","Mages' guild"],reason:"A mages' district requires concentration of practitioners and guild organization."},"Enchanting quarter":{minTier:"city",requires:["Mages' guild","Mages' district","Academy of magic"],reason:"Magic item production requires organized magical community and arcane infrastructure."},"Teleportation circle":{minTier:"town",reason:"Permanent teleportation requires substantial magical investment. Cost: 18,250 GP to create."},"Multiple wizard towers":{minTier:"city",requires:["Wizard's tower","Mages' guild"],reason:"Multiple towers require established magical community and sufficient demand."},"Spellcasting services (1st-4th level)":{minTier:"town",requires:["Wizard's tower","Hedge wizard","Parish church"],reason:"Regular spellcasting services require resident practitioner."},"Spellcasting services (1st-6th level)":{minTier:"city",requires:["Mages' guild","Wizard's tower","Academy of magic"],reason:"Higher-level services require organized magical institutions."},"Spellcasting services (1st-8th level)":{minTier:"metropolis",requires:["Academy of magic","Mages' district","Multiple wizard towers"],reason:"Near-epic spellcasting requires metropolis-scale magical community."},"Golem workforce":{minTier:"city",requires:["Academy of magic","Mages' guild"],reason:"Construct creation requires high-level magical expertise and institutional oversight."},"Undead labor":{minTier:"city",requires:["Mages' guild","Academy of magic"],reason:"Necromantic labor requires organized magical community for control and containment."},"Magical banking (high magic)":{minTier:"metropolis",requires:["Banking district","Mages' guild","Academy of magic"],reason:"Extradimensional vaults require high-level magic and established banking infrastructure."},"Dream parlors (high magic)":{minTier:"metropolis",requires:["Mages' district","Academy of magic"],reason:"5th-level Dream spell services require metropolis population (25,000+) and powerful casters."},"Airship docking (high magic)":{minTier:"metropolis",requires:["Mages' guild","Academy of magic","Multiple wizard towers"],reason:"Airship docking requires major magical infrastructure to operate. Without a mages' guild, academy, or multiple wizard towers, there is no magical expertise to maintain the mooring fields or weather protection."},"Message network (high magic)":{minTier:"metropolis",requires:["Mages' guild","Banking houses"],reason:"Sending Stone networks require institutional coordination and 250–10,000 GP per station."},"Magic item consignment":{minTier:"city",requires:["Mages' guild","Enchanter's shop","Enchanting quarter","Wizard's tower","Arcane university","Magical academy"],reason:"Consignment market requires concentration of both producers and wealthy buyers."},"Curse breaking":{minTier:"city",requires:["Mages' guild","Cathedral (10,000+ only)","Wizard's tower"],reason:"Remove Curse (5th level) requires an established arcane or divine practitioner at city scale."},"Resurrection services (10,000+ only)":{minTier:"city",requires:["Cathedral (10,000+ only)"],reason:"Raise Dead (5th level) requires a major temple with a high-level cleric. Available in cities with 10,000+ population."},"Planar embassy":{minTier:"metropolis",requires:["Teleportation circle","Academy of magic"],reason:"Stable planar contact requires permanent teleportation infrastructure."},"Planar traders":{minTier:"metropolis",suggestionOnly:true,requires:["Planar embassy","International trade center"],reason:"Planar traders without a formal embassy or trade center — extraplanar commerce is possible but operates outside official channels."},"Dragon resident":{minTier:"metropolis",reason:"Only the largest, wealthiest cities can negotiate with or survive the presence of a dragon."}};
+export const GATE_FEATURES = {
+  "Gates (if walled)": {
+    suggestionOnly: true,
+    requires: ["Town walls", "City walls and gates", "Massive walls and fortifications"],
+    reason: "Gates are entry points in walls — walls must exist first."
+  },
+  Citadel: {
+    requires: ["City walls and gates", "Massive walls and fortifications"],
+    reason: "Inner fortress requires outer defenses."
+  },
+  "Inner citadel": {
+    minTier: "metropolis",
+    requires: ["City walls and gates", "Massive walls and fortifications"],
+    reason: "Citadel is last-stand fortification within an already-fortified city."
+  },
+  Garrison: {
+    reason: "A garrison provides its own quarters and replaces the citizen militia."
+  },
+  "Navy (if coastal)": {
+    requires: ["Docks/port facilities"],
+    requiresAccess: ["port"],
+    reason: "Naval forces require port infrastructure. A river militia is not a navy.",
+    accessViolationReason: "A navy requires coastal or ocean access. This settlement is landlocked — SEVERITY can have river patrols but not a navy."
+  },
+  "Multiple garrisons": {
+    minTier: "city",
+    requires: ["Garrison", "Barracks", "Professional guard (hundreds)"],
+    reason: "Multiple garrison facilities require city-scale population and military investment."
+  },
+  "Professional guard (hundreds)": {
+    minTier: "city",
+    requires: ["Garrison", "Barracks", "Town watch"],
+    reason: "Hundreds of professional guards require established military infrastructure."
+  },
+  "Mercenary company HQ": {
+    minTier: "town",
+    reason: "Mercenary companies require town-scale population to recruit and supply."
+  },
+  "Mercenary quarter": {
+    minTier: "city",
+    requires: ["Mercenary company HQ", "Hireling hall"],
+    reason: "Sellsword district requires military infrastructure and sustained demand."
+  },
+  "Aqueduct or water system": {
+    minTier: "city",
+    reason: "Engineered water supply requires population density to justify the massive cost."
+  },
+  "Advanced water infrastructure": {
+    minTier: "metropolis",
+    reason: "Complex multi-district water distribution requires metropolis-scale population and resources."
+  },
+  "Sewage system": {
+    minTier: "city",
+    requires: ["Aqueduct or water system", "Advanced water infrastructure", "Multiple water sources"],
+    reason: "Sewage infrastructure requires engineered water supply for flushing and drainage."
+  },
+  Tanners: {
+    requires: ["Water source", "Multiple water sources", "Aqueduct or water system", "River access"],
+    reason: "Tanning requires massive amounts of water for hide processing."
+  },
+  "Market square": {
+    minTier: "village",
+    reason: "A market square at village scale is the weekly market clearing. Town-scale gets a formal paved square with a royal charter."
+  },
+  "Weekly market": {
+    minTier: "village",
+    requires: ["Market square", "Common grazing land"],
+    reason: "Regular markets require a designated space. Cannot hold a weekly market without a square."
+  },
+  "Multiple market squares": {
+    minTier: "city",
+    requires: ["Market square", "Daily markets"],
+    reason: "Multiple permanent market squares require city-scale trade volume."
+  },
+  "Daily markets": {
+    minTier: "city",
+    requires: ["Market square", "Weekly market"],
+    reason: "Daily trading requires a substantial permanent merchant class."
+  },
+  "District markets (5-10)": {
+    minTier: "metropolis",
+    requires: ["Multiple market squares", "Daily markets"],
+    reason: "Specialized district markets emerge from growth of general markets across multiple city districts."
+  },
+  "Merchant guilds (3-8)": {
+    minTier: "town",
+    requires: ["Weekly market", "Annual fair", "Market square"],
+    reason: "Merchant guilds require regular trade to justify organization."
+  },
+  "Merchant guilds (15-40)": {
+    minTier: "city",
+    requires: ["Merchant guilds (3-8)", "Daily markets"],
+    reason: "Large guild networks require established merchant class and daily trading."
+  },
+  "Merchant guilds (50-100+)": {
+    minTier: "metropolis",
+    requires: ["Merchant guilds (15-40)", "District markets (5-10)"],
+    reason: "Extreme specialization requires metropolis-scale trade volume."
+  },
+  "Warehouse district": {
+    minTier: "city",
+    requires: ["Daily markets", "Docks/port facilities", "Market square"],
+    reason: "Bulk storage requires major trade volume from markets or port access."
+  },
+  "Multiple warehouse districts": {
+    minTier: "metropolis",
+    requires: ["Warehouse district"],
+    reason: "Multiple districts require enormous trade throughput."
+  },
+  "International trade center": {
+    minTier: "metropolis",
+    requires: ["Warehouse district", "Banking houses", "Multiple warehouse districts"],
+    reason: "Global trade requires major trade infrastructure — port access or substantial overland networksstructure with banking."
+  },
+  "Stock exchange (early)": {
+    minTier: "metropolis",
+    requires: ["Banking district", "International trade center"],
+    reason: "Share trading requires sophisticated financial infrastructure."
+  },
+  "Docks/port facilities": {
+    requiresAccess: ["port", "river"],
+    reason: "Docking facilities require waterfront access — ocean port or navigable river.",
+    accessViolationReason: "Docks require water access. This settlement has no river or coastal access."
+  },
+  "Major port": {
+    requiresAccess: ["port"],
+    requires: ["Docks/port facilities"],
+    reason: "A major port requires both ocean access and existing dock infrastructure.",
+    accessViolationReason: "A major port requires coastal ocean access. River docks serve river trade only — they cannot become a major port."
+  },
+  "Money changers": {
+    minTier: "town",
+    requires: ["Weekly market", "Annual fair", "Market square"],
+    reason: "Currency exchange requires regular merchant traffic."
+  },
+  "Banking houses": {
+    minTier: "city",
+    requires: ["Money changers", "Merchant guilds (3-8)", "Merchant guilds (15-40)"],
+    reason: "Formal banking grows from established money-changing and merchant activity."
+  },
+  "Banking district": {
+    minTier: "metropolis",
+    requires: ["Banking houses"],
+    reason: "Concentration of banks requires enormous trade volume."
+  },
+  "Priest (resident)": {
+    minTier: "hamlet",
+    reason: "A resident priest requires a community large enough to support one."
+  },
+  "Parish church": {
+    minTier: "village",
+    reason: "Villages are legally defined by a parish. Hamlets rely on circuit priests."
+  },
+  "Parish churches (2-5)": {
+    minTier: "town",
+    requires: ["Parish church", "Priest (resident)"],
+    reason: "Multiple parishes require town-scale population."
+  },
+  "Parish churches (10-30)": {
+    minTier: "city",
+    requires: ["Parish churches (2-5)"],
+    reason: "Extensive parish network requires city-scale population."
+  },
+  "Parish churches (50-100+)": {
+    minTier: "metropolis",
+    requires: ["Parish churches (10-30)"],
+    reason: "Metropolitan parish network requires tens of thousands of residents."
+  },
+  "Monastery or friary": {
+    minTier: "village",
+    reason: "Monastic communities require enough surrounding population to support them."
+  },
+  "Multiple monasteries": {
+    minTier: "city",
+    requires: ["Monastery or friary"],
+    reason: "Multiple religious houses require city-scale wealth and population."
+  },
+  "Major monasteries (5-10)": {
+    minTier: "metropolis",
+    requires: ["Multiple monasteries"],
+    reason: "Concentration of major religious houses requires metropolis resources."
+  },
+  "Small hospital": {
+    requires: ["Parish church", "Monastery or friary", "Priest (resident)"],
+    reason: "Medieval hospitals were run by religious orders as acts of charity."
+  },
+  "Major hospital": {
+    minTier: "city",
+    requires: ["Cathedral (10,000+ only)", "Multiple monasteries", "Parish churches (2-5)"],
+    reason: "Large hospitals require wealthy religious backing and multiple orders."
+  },
+  "Hospital network": {
+    minTier: "metropolis",
+    requires: ["Major hospital", "Great cathedral", "Multiple monasteries"],
+    reason: "Network of facilities requires central cathedral authority and multiple orders."
+  },
+  "Cathedral (10,000+ only)": {
+    minTier: "city",
+    requires: ["Parish churches (2-5)", "Parish churches (10-30)"],
+    reason: "A bishop's seat requires 10,000+ population and an established parish structure."
+  },
+  "Great cathedral": {
+    minTier: "metropolis",
+    requires: ["Cathedral (10,000+ only)", "Parish churches (10-30)", "Parish churches (50-100+)"],
+    reason: "Architectural marvel requires massive wealth, metropolitan population, and deep parish roots."
+  },
+  "Multiple cathedrals": {
+    minTier: "metropolis",
+    requires: ["Great cathedral", "Cathedral (10,000+ only)"],
+    reason: "Only the largest cities support competing religious authorities of cathedral rank."
+  },
+  "Sage/library": {
+    minTier: "town",
+    reason: "A permanent sage or library requires town-level patronage and literate customers."
+  },
+  "Great library": {
+    minTier: "city",
+    requires: ["Sage/library", "Cathedral (10,000+ only)", "Multiple monasteries"],
+    reason: "Major collections require wealthy religious or civic patronage to fund acquisition."
+  },
+  University: {
+    minTier: "metropolis",
+    requires: ["Great library", "Cathedral (10,000+ only)", "Great cathedral"],
+    reason: "Universities grew from cathedral schools. Require metropolis population (25,000+) and library infrastructure."
+  },
+  "Sage's quarter": {
+    minTier: "city",
+    requires: ["Great library", "University"],
+    reason: "Concentration of scholars requires educational infrastructure to attract them."
+  },
+  "Bardic college": {
+    minTier: "city",
+    requires: ["Sage/library", "Theaters", "Great library"],
+    reason: "Formal bardic training requires cultural infrastructure."
+  },
+  "Town hall": {
+    minTier: "town",
+    reason: "Formal civic administration requires town-scale governance."
+  },
+  "City hall": {
+    minTier: "city",
+    reason: "City-scale civic administration."
+  },
+  Courthouse: {
+    minTier: "town",
+    requires: ["Town hall", "Mayor and council", "Village reeve"],
+    reason: "Formal courts require civic authority to enforce judgments."
+  },
+  "Multiple court buildings": {
+    minTier: "city",
+    requires: ["Courthouse", "City hall"],
+    reason: "Specialized courts require large population and complex legal needs."
+  },
+  "Large prison": {
+    requires: ["Courthouse", "City hall"],
+    reason: "Large-scale incarceration requires an active judicial system."
+  },
+  "Massive prison": {
+    minTier: "metropolis",
+    requires: ["Large prison", "Multiple court buildings"],
+    reason: "Vast prisons require metropolitan-scale criminal justice system."
+  },
+  "Palace/government complex": {
+    minTier: "metropolis",
+    reason: "Grand civic architecture requires metropolitan resources and centuries of institutional development."
+  },
+  "Craft guilds (5-15)": {
+    minTier: "town",
+    requires: ["Weekly market", "Market square"],
+    reason: "Craft guilds require regular trade to justify organization."
+  },
+  "Craft guilds (30-80)": {
+    minTier: "city",
+    requires: ["Craft guilds (5-15)", "Daily markets"],
+    reason: "Large craft networks require established guild tradition."
+  },
+  "Craft guilds (100-150+)": {
+    minTier: "metropolis",
+    requires: ["Craft guilds (30-80)"],
+    reason: "Every conceivable trade requires metropolis-scale population."
+  },
+  "Specialized metalworkers": {
+    requires: ["Blacksmiths (3-10)", "Craft guilds (30-80)", "Craft guilds (5-15)"],
+    reason: "Specialization emerges from established metalworking tradition."
+  },
+  "Printing house": {
+    minTier: "city",
+    requires: ["Great library", "Craft guilds (30-80)"],
+    reason: "Printing requires paper supply, literate market, and skilled craft workers."
+  },
+  Glassmakers: {
+    minTier: "city",
+    requires: ["Craft guilds (30-80)", "Craft guilds (5-15)"],
+    reason: "Glassmaking requires high-temperature kilns and specialized knowledge."
+  },
+  Mill: {
+    minTier: "village",
+    requires: ["Farmland", "Subsistence farming", "Market square", "Weekly market"],
+    reason: "A miller needs grain — either from local farmland or via market access."
+  },
+  "Mills (2-5)": {
+    minTier: "town",
+    requires: ["Mill", "Market square"],
+    reason: "Multiple mills require established grain supply chain."
+  },
+  "Weavers/Textile workers": {
+    requires: ["Farmland", "Subsistence farming", "Weekly market", "Market square"],
+    reason: "Weavers need wool or flax from local pastoral farming or market imports."
+  },
+  Sawmill: {
+    requiresAny: [
+      "Market square",
+      "Weekly market",
+      "Docks/port facilities",
+      "Merchant guilds (3-8)",
+      "Managed forest",
+      "Farmland",
+      "Subsistence farming",
+      "Common grazing land"
+    ],
+    reason: "A sawmill needs timber access — local forest, a market, or an agricultural economy to source bulk timber commercially."
+  },
+  Theaters: {
+    minTier: "city",
+    reason: "Professional performance requires wealthy audience and cultural sophistication."
+  },
+  "Multiple theaters": {
+    minTier: "metropolis",
+    requires: ["Theaters"],
+    reason: "Multiple venues require enormous population to sustain."
+  },
+  "Opera house": {
+    minTier: "metropolis",
+    requires: ["Multiple theaters", "Bardic college"],
+    reason: "Opera requires extremely wealthy patronage and professional musical tradition."
+  },
+  "Colosseum/arena": {
+    minTier: "metropolis",
+    requires: ["Professional arena", "Fighting pits"],
+    reason: "Colosseum-scale entertainment requires enormous investment and audience."
+  },
+  "Professional arena": {
+    minTier: "city",
+    requires: ["Fighting pits"],
+    reason: "Professional events require established fighting culture."
+  },
+  "Gambling district": {
+    minTier: "metropolis",
+    requires: ["Gambling halls", "Gambling den"],
+    reason: "A district requires concentrated and institutionalized gambling infrastructure."
+  },
+  "Gambling halls": {
+    minTier: "city",
+    requires: ["Gambling den", "Ale house"],
+    reason: "Organized gambling halls grow from informal establishments."
+  },
+  "Street gang": {
+    minTier: "town",
+    reason: "Organized territorial gangs require enough population density to establish territory."
+  },
+  "Thieves' guild chapter": {
+    minTier: "city",
+    requires: ["Street gang", "Black market", "Gambling den", "Front businesses"],
+    reason: "Organized guild structure requires criminal infrastructure to coordinate."
+  },
+  "Thieves' guild (powerful)": {
+    minTier: "metropolis",
+    requires: ["Thieves' guild chapter", "Multiple criminal factions", "Black market"],
+    reason: "Powerful criminal organization requires extensive existing criminal infrastructure."
+  },
+  "Multiple criminal factions": {
+    minTier: "city",
+    requires: ["Street gang", "Thieves' guild chapter", "Smuggling operation"],
+    reason: "Multiple competing criminal organizations require city-scale population."
+  },
+  "Black market bazaar": {
+    minTier: "city",
+    requires: ["Black market", "Multiple criminal factions", "Underground city"],
+    reason: "Large-scale illegal market requires extensive criminal networks and hidden spaces."
+  },
+  "Underground city": {
+    minTier: "city",
+    reason: "Extensive underground networks require large population and old infrastructure."
+  },
+  "Assassins' guild": {
+    minTier: "metropolis",
+    requires: ["Thieves' guild (powerful)", "Underground city"],
+    reason: "Contract killing organizations require 50,000+ population or regional operations."
+  },
+  "Smuggling operation": {
+    minTier: "town",
+    reason: "Organized smuggling requires sufficient trade volume to hide contraband within."
+  },
+  "Smuggling network": {
+    minTier: "city",
+    requires: ["Smuggling operation", "Warehouse district"],
+    reason: "Network-scale smuggling requires an established operation and storage infrastructure. Port access is a bonus but not required for overland networks."
+  },
+  "Front businesses": {
+    minTier: "town",
+    requires: ["Street gang", "Gambling den", "Black market"],
+    reason: "Criminal fronts require existing criminal operation to launder."
+  },
+  "Adventurers' charter hall": {
+    minTier: "hamlet",
+    reason: "A charter hall operates under regional authority and can exist in smaller settlements, especially on dangerous frontiers."
+  },
+  "Adventurers' guild hall": {
+    minTier: "city",
+    reason: "Formal adventurers' guild requires city-scale demand. The guild itself provides the hireling and mercenary infrastructure."
+  },
+  "Multiple adventurers' guilds": {
+    minTier: "city",
+    requires: ["Adventurers' guild hall"],
+    reason: "Competing guilds require metropolis-scale adventuring demand."
+  },
+  "Dungeon delving supply district": {
+    minTier: "city",
+    requires: ["Adventurers' guild hall", "Multiple adventurers' guilds"],
+    reason: "Specialized gear suppliers follow adventurer concentration."
+  },
+  "Monster part dealers": {
+    minTier: "city",
+    requires: ["Adventurers' guild hall", "Alchemist quarter", "Alchemist shop"],
+    reason: "Monster component trade requires guild infrastructure and alchemical buyers."
+  },
+  "Traveling hedge wizard": {
+    minTier: "thorp",
+    reason: "A traveling practitioner needs only a large enough community to offer services."
+  },
+  "Hedge wizard": {
+    minTier: "village",
+    reason: "A resident hedge wizard requires a village large enough to support one."
+  },
+  "Wizard's tower": {
+    minTier: "town",
+    reason: "A tower-dwelling wizard establishes their own supply chain at this scale."
+  },
+  "Alchemist shop": {
+    minTier: "town",
+    requires: ["Weekly market", "Market square"],
+    reason: "An alchemist requires reagent supply from regular trade."
+  },
+  "Scroll scribe": {
+    minTier: "town",
+    requires: ["Wizard's tower", "Hedge wizard", "Alchemist shop"],
+    reason: "Professional scroll production requires a magical practitioner to supervise."
+  },
+  "Enchanter's shop": {
+    minTier: "city",
+    requires: ["Wizard's tower", "Alchemist shop"],
+    reason: "Enchantment services require established arcane infrastructure."
+  },
+  "Mages' guild": {
+    minTier: "city",
+    requires: ["Wizard's tower", "Multiple wizard towers"],
+    reason: "Organized magical guild requires established tower infrastructure."
+  },
+  "Academy of magic": {
+    minTier: "city",
+    requires: ["Mages' guild", "Mages' district", "Multiple wizard towers"],
+    reason: "Formal magical education requires organized guild and district infrastructure."
+  },
+  "Mages' district": {
+    minTier: "city",
+    requires: ["Wizard's tower", "Mages' guild"],
+    reason: "A mages' district requires concentration of practitioners and guild organization."
+  },
+  "Enchanting quarter": {
+    minTier: "city",
+    requires: ["Mages' guild", "Mages' district", "Academy of magic"],
+    reason: "Magic item production requires organized magical community and arcane infrastructure."
+  },
+  "Teleportation circle": {
+    minTier: "town",
+    reason: "Permanent teleportation requires substantial magical investment. Cost: 18,250 GP to create."
+  },
+  "Multiple wizard towers": {
+    minTier: "city",
+    requires: ["Wizard's tower", "Mages' guild"],
+    reason: "Multiple towers require established magical community and sufficient demand."
+  },
+  "Spellcasting services (1st-4th level)": {
+    minTier: "town",
+    requires: ["Wizard's tower", "Hedge wizard", "Parish church"],
+    reason: "Regular spellcasting services require resident practitioner."
+  },
+  "Spellcasting services (1st-6th level)": {
+    minTier: "city",
+    requires: ["Mages' guild", "Wizard's tower", "Academy of magic"],
+    reason: "Higher-level services require organized magical institutions."
+  },
+  "Spellcasting services (1st-8th level)": {
+    minTier: "metropolis",
+    requires: ["Academy of magic", "Mages' district", "Multiple wizard towers"],
+    reason: "Near-epic spellcasting requires metropolis-scale magical community."
+  },
+  "Golem workforce": {
+    minTier: "city",
+    requires: ["Academy of magic", "Mages' guild"],
+    reason: "Construct creation requires high-level magical expertise and institutional oversight."
+  },
+  "Undead labor": {
+    minTier: "city",
+    requires: ["Mages' guild", "Academy of magic"],
+    reason: "Necromantic labor requires organized magical community for control and containment."
+  },
+  "Magical banking (high magic)": {
+    minTier: "metropolis",
+    requires: ["Banking district", "Mages' guild", "Academy of magic"],
+    reason: "Extradimensional vaults require high-level magic and established banking infrastructure."
+  },
+  "Dream parlors (high magic)": {
+    minTier: "metropolis",
+    requires: ["Mages' district", "Academy of magic"],
+    reason: "5th-level Dream spell services require metropolis population (25,000+) and powerful casters."
+  },
+  "Airship docking (high magic)": {
+    minTier: "metropolis",
+    requires: ["Mages' guild", "Academy of magic", "Multiple wizard towers"],
+    reason: "Airship docking requires major magical infrastructure to operate. Without a mages' guild, academy, or multiple wizard towers, there is no magical expertise to maintain the mooring fields or weather protection."
+  },
+  "Message network (high magic)": {
+    minTier: "metropolis",
+    requires: ["Mages' guild", "Banking houses"],
+    reason: "Sending Stone networks require institutional coordination and 250\u201310,000 GP per station."
+  },
+  "Magic item consignment": {
+    minTier: "city",
+    requires: [
+      "Mages' guild",
+      "Enchanter's shop",
+      "Enchanting quarter",
+      "Wizard's tower",
+      "Arcane university",
+      "Magical academy",
+    ],
+    reason: "Consignment market requires concentration of both producers and wealthy buyers."
+  },
+  "Curse breaking": {
+    minTier: "city",
+    requires: ["Mages' guild", "Cathedral (10,000+ only)", "Wizard's tower"],
+    reason: "Remove Curse (5th level) requires an established arcane or divine practitioner at city scale."
+  },
+  "Resurrection services (10,000+ only)": {
+    minTier: "city",
+    requires: ["Cathedral (10,000+ only)"],
+    reason: "Raise Dead (5th level) requires a major temple with a high-level cleric. Available in cities with 10,000+ population."
+  },
+  "Planar embassy": {
+    minTier: "metropolis",
+    requires: ["Teleportation circle", "Academy of magic"],
+    reason: "Stable planar contact requires permanent teleportation infrastructure."
+  },
+  "Planar traders": {
+    minTier: "metropolis",
+    suggestionOnly: true,
+    requires: ["Planar embassy", "International trade center"],
+    reason: "Planar traders without a formal embassy or trade center — extraplanar commerce is possible but operates outside official channels."
+  },
+  "Dragon resident": {
+    minTier: "metropolis",
+    reason: "Only the largest, wealthiest cities can negotiate with or survive the presence of a dragon."
+  }
+};
 
 
 // GOVERNMENT_INSTITUTIONS — valid government institutions by settlement type
-export const GOVERNMENT_INSTITUTIONS = {government:["Head-of-household consensus","Informal elder consensus","Village reeve","Lord's steward","Lord's appointee","Mayor and council","Guild governance","Guild consortium","Noble governor","Merchant oligarchy","Democratic assembly","City-state government","Royal seat"],marketScale:["Weekly market","Daily markets","District markets (5-10)"],criminalPower:["Thieves' guild chapter","Thieves' guild (powerful)","Multiple criminal factions"],defenseLevel:["Town walls","City walls and gates","Massive walls and fortifications"]};
+export const GOVERNMENT_INSTITUTIONS = {
+  government: [
+    "Head-of-household consensus",
+    "Informal elder consensus",
+    "Village reeve",
+    "Lord's steward",
+    "Lord's appointee",
+    "Mayor and council",
+    "Guild governance",
+    "Guild consortium",
+    "Noble governor",
+    "Merchant oligarchy",
+    "Democratic assembly",
+    "City-state government",
+    "Royal seat"
+  ],
+  marketScale: [
+    "Weekly market",
+    "Daily markets",
+    "District markets (5-10)"
+  ],
+  criminalPower: [
+    "Thieves' guild chapter",
+    "Thieves' guild (powerful)",
+    "Multiple criminal factions"
+  ],
+  defenseLevel: [
+    "Town walls",
+    "City walls and gates",
+    "Massive walls and fortifications"
+  ]
+};

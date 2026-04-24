@@ -24,13 +24,31 @@ const getDefenseInstitutions = (institutions) => {
     keywords.some(kw => inst.name.toLowerCase().includes(kw));
 
   return {
-    walls:    institutions.filter(i => matches(i, ['wall','citadel','palisade','earthwork','inner citadel','massive walls'])),
-    garrison: institutions.filter(i => matches(i, ['garrison','barracks','professional guard','professional city watch','multiple garrison'])),
-    militia:  institutions.filter(i => matches(i, ['citizen militia','militia'])),
-    watch:    institutions.filter(i => matches(i, ['town watch','city watch','professional city watch'])),
-    mercenary:institutions.filter(i => matches(i, ['mercenary company','mercenary quarter','hired muscle'])),
-    charter:  institutions.filter(i => matches(i, ["adventurers' charter hall","adventurers' guild hall","multiple adventurers'"])),
-    magicDef: institutions.filter(i => matches(i, ["wizard","mages' guild","mage","academy of magic","golem workforce","alchemist"])),
+    walls: institutions.filter(i => matches(i, [
+      'wall', 'citadel', 'palisade', 'earthwork',
+      'inner citadel', 'massive walls',
+    ])),
+    garrison: institutions.filter(i => matches(i, [
+      'garrison', 'barracks', 'professional guard',
+      'professional city watch', 'multiple garrison',
+    ])),
+    militia: institutions.filter(i => matches(i, [
+      'citizen militia', 'militia',
+    ])),
+    watch: institutions.filter(i => matches(i, [
+      'town watch', 'city watch', 'professional city watch',
+    ])),
+    mercenary: institutions.filter(i => matches(i, [
+      'mercenary company', 'mercenary quarter', 'hired muscle',
+    ])),
+    charter: institutions.filter(i => matches(i, [
+      "adventurers' charter hall", "adventurers' guild hall",
+      "multiple adventurers'",
+    ])),
+    magicDef: institutions.filter(i => matches(i, [
+      "wizard", "mages' guild", "mage", "academy of magic",
+      "golem workforce", "alchemist",
+    ])),
   };
 };
 
@@ -308,11 +326,15 @@ const computeDefenseScores = (
     let milPenalty  = 15;
     let econPenalty = 15;
     // Divine: Remove Disease, mass healing (HIGHEST healer)
-    if (hasDivine)
-      { milPenalty = Math.round(milPenalty * 0.33); econPenalty = Math.round(econPenalty * 0.53); } // → -5, -8
+    if (hasDivine) {
+      milPenalty = Math.round(milPenalty * 0.33);   // → -5
+      econPenalty = Math.round(econPenalty * 0.53);  // → -8
+    }
     // Alchemy: plague remedies, quarantine management
-    if (hasAlchemy)
-      { milPenalty = Math.min(milPenalty, Math.round(15 * 0.53)); econPenalty = Math.min(econPenalty, Math.round(15 * 0.67)); } // -8, -10
+    if (hasAlchemy) {
+      milPenalty = Math.min(milPenalty, Math.round(15 * 0.53));   // -8
+      econPenalty = Math.min(econPenalty, Math.round(15 * 0.67)); // -10
+    }
     // Arcane: Heal, mass cure (less efficient)
     if (hasArcane && magPri >= 50)
       milPenalty = Math.min(milPenalty, Math.round(15 * 0.67)); // → -10
@@ -364,8 +386,13 @@ const computeDefenseScores = (
     (hasArcaneGuild && (hasStress('under_siege') || hasStress('famine')))
   );
 
-  return { military, monster, internal, economic, magical, magicDependency,
-           traditions: { hasArcane, hasArcaneGuild, hasDivine, hasDruid, hasAlchemy } };
+  return {
+    military, monster, internal, economic, magical,
+    magicDependency,
+    traditions: {
+      hasArcane, hasArcaneGuild, hasDivine, hasDruid, hasAlchemy,
+    },
+  };
 };
 
 // ─── computeDefenseReadiness ──────────────────────────────────────────────────
@@ -487,10 +514,17 @@ export function generateDefenseProfile(settlement) {
   );
   // ─────────────────────────────────────────────────────────────────────────────
 
-  return { scores: finalScores, readiness: finalReadiness, institutions: defenseInsts,
-           magicDependency: finalScores.magicDependency || false,
-           traditions: finalScores.traditions || {},
-           chainModifiers: { military: chainMilBonus, economic: chainEconBonus } };
+  return {
+    scores: finalScores,
+    readiness: finalReadiness,
+    institutions: defenseInsts,
+    magicDependency: finalScores.magicDependency || false,
+    traditions: finalScores.traditions || {},
+    chainModifiers: {
+      military: chainMilBonus,
+      economic: chainEconBonus,
+    },
+  };
 }
 
 // ── Threat assessment narrative ──────────────────────────────────
@@ -502,57 +536,165 @@ export function buildThreatAssessment(r) {
   const sp = r?.economicState?.safetyProfile || {};
   const f = r?.economicState?.compound?.inst || {};
   const threat = r?.config?.monsterThreat || 'frontier';
-  const hasWalls = (inst.walls||[]).length > 0;
-  const hasGarrison = (inst.garrison||[]).length > 0;
-  const hasMilitia = (inst.militia||[]).length > 0;
-  const hasCharter = (inst.charter||[]).length > 0;
+  const hasWalls = (inst.walls || []).length > 0;
+  const hasGarrison = (inst.garrison || []).length > 0;
+  const hasMilitia = (inst.militia || []).length > 0;
+  const hasCharter = (inst.charter || []).length > 0;
   const result = [];
 
-  const monColor = threat==='plagued'?'#8b1a1a':threat==='frontier'?'#7a5010':'#1a5a28';
+  const monColor = threat === 'plagued'
+    ? '#8b1a1a'
+    : threat === 'frontier'
+      ? '#7a5010'
+      : '#1a5a28';
   let mon = '';
-  if (threat==='plagued') {
-    if (hasWalls&&hasGarrison) mon='Embattled region: constant creature pressure. Walls and garrison have established a survivable posture. Defense is an ongoing operational necessity. '+(hasCharter?'Charter hall coordinates specialist monster response.':'No specialist monster hunters on retainer — the garrison handles everything.');
-    else if (hasWalls&&hasMilitia) mon='Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin — simultaneous incursions will break coverage. '+(hasCharter?'Charter hall provides specialist backup.':'No specialist monster hunters.');
-    else if (hasCharter) mon='No perimeter, but the charter hall provides specialist response for coordinated threats. Creatures that get past initial response reach homes directly.';
-    else if (hasWalls) mon='Walls exist but no organized force to sustain a watch rotation. The palisade creates a chokepoint but holding it requires people, and there are not enough for sustained watch.';
-    else if (hasGarrison) mon='Military force present but no perimeter walls. The garrison engages in the open. Creatures can approach from any direction.';
-    else mon='embattled region with no organized defense and no perimeter. Survival depends on terrain, luck, and the ability to flee. This settlement is in extreme danger.';
-  } else if (threat==='frontier') {
-    if (hasWalls&&hasGarrison) mon='Active frontier. Walls and garrison provide credible deterrence — most creature threats will not press a defended perimeter. '+(hasCharter?'Charter hall handles anything above the garrison usual remit. ':'')+'Adequate for the threat level.';
-    else if (hasWalls&&hasMilitia) mon='Palisade and militia are standard frontier resilience — effective against most creature threats, strained by simultaneous incursions. '+(hasCharter?'Charter hall provides specialist backup. ':'')+'Honest posture for a frontier settlement.';
-    else if (hasGarrison||hasMilitia) mon='Active frontier with '+(hasGarrison?'a garrison':'a militia')+' but no perimeter. Defense is reactive — attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.';
-    else mon='Active frontier with no organized defense. Vulnerable to any monster of moderate capability.';
+  if (threat === 'plagued') {
+    if (hasWalls && hasGarrison) {
+      mon = 'Embattled region: constant creature pressure. Walls and garrison have established a survivable posture. Defense is an ongoing operational necessity. '
+        + (hasCharter
+          ? 'Charter hall coordinates specialist monster response.'
+          : 'No specialist monster hunters on retainer — the garrison handles everything.');
+    } else if (hasWalls && hasMilitia) {
+      mon = 'Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin — simultaneous incursions will break coverage. '
+        + (hasCharter
+          ? 'Charter hall provides specialist backup.'
+          : 'No specialist monster hunters.');
+    } else if (hasCharter) {
+      mon = 'No perimeter, but the charter hall provides specialist response for coordinated threats. Creatures that get past initial response reach homes directly.';
+    } else if (hasWalls) {
+      mon = 'Walls exist but no organized force to sustain a watch rotation. The palisade creates a chokepoint but holding it requires people, and there are not enough for sustained watch.';
+    } else if (hasGarrison) {
+      mon = 'Military force present but no perimeter walls. The garrison engages in the open. Creatures can approach from any direction.';
+    } else {
+      mon = 'embattled region with no organized defense and no perimeter. Survival depends on terrain, luck, and the ability to flee. This settlement is in extreme danger.';
+    }
+  } else if (threat === 'frontier') {
+    if (hasWalls && hasGarrison) {
+      mon = 'Active frontier. Walls and garrison provide credible deterrence — most creature threats will not press a defended perimeter. '
+        + (hasCharter
+          ? 'Charter hall handles anything above the garrison usual remit. '
+          : '')
+        + 'Adequate for the threat level.';
+    } else if (hasWalls && hasMilitia) {
+      mon = 'Palisade and militia are standard frontier resilience — effective against most creature threats, strained by simultaneous incursions. '
+        + (hasCharter
+          ? 'Charter hall provides specialist backup. '
+          : '')
+        + 'Honest posture for a frontier settlement.';
+    } else if (hasGarrison || hasMilitia) {
+      mon = 'Active frontier with '
+        + (hasGarrison ? 'a garrison' : 'a militia')
+        + ' but no perimeter. Defense is reactive — attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.';
+    } else {
+      mon = 'Active frontier with no organized defense. Vulnerable to any monster of moderate capability.';
+    }
   } else {
-    mon=hasWalls&&hasGarrison?'Safe heartland — the existing defenses are substantially more than the threat level requires.':hasWalls||hasGarrison||hasMilitia||hasCharter?'Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary threats here are internal.':'Safe heartland with no organized defense. Acceptable given the threat environment.';
+    if (hasWalls && hasGarrison) {
+      mon = 'Safe heartland — the existing defenses are substantially more than the threat level requires.';
+    } else if (hasWalls || hasGarrison || hasMilitia || hasCharter) {
+      mon = 'Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary threats here are internal.';
+    } else {
+      mon = 'Safe heartland with no organized defense. Acceptable given the threat environment.';
+    }
   }
-  result.push({icon:'',label:'Beasts & Monsters',color:monColor,assess:mon});
+  result.push({
+    icon: '',
+    label: 'Beasts & Monsters',
+    color: monColor,
+    assess: mon,
+  });
 
-  const milScore = scores.military||0;
-  const milColor = milScore>=60?'#1a4a2a':milScore>=35?'#7a5010':'#8b1a1a';
+  const milScore = scores.military || 0;
+  const milColor = milScore >= 60
+    ? '#1a4a2a'
+    : milScore >= 35
+      ? '#7a5010'
+      : '#8b1a1a';
   let mil = '';
-  if (hasWalls&&hasGarrison) mil='Walls and professional garrison provide meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
-  else if (hasWalls&&hasMilitia) mil='Walls with citizen militia — credible deterrence against raiders, inadequate against any professional force with siege capability.';
-  else if (hasWalls) mil='Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.';
-  else if (hasGarrison) mil='Professional garrison without perimeter walls. Effective against raiders; cannot hold against a siege.';
-  else if (hasMilitia) mil='Armed citizens who know their ground. Effective against disorganized raiders. No counter to a disciplined military force.';
-  else mil='No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.';
-  result.push({icon:'',label:'Invasion & War',color:milColor,assess:mil});
+  if (hasWalls && hasGarrison) {
+    mil = 'Walls and professional garrison provide meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
+  } else if (hasWalls && hasMilitia) {
+    mil = 'Walls with citizen militia — credible deterrence against raiders, inadequate against any professional force with siege capability.';
+  } else if (hasWalls) {
+    mil = 'Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.';
+  } else if (hasGarrison) {
+    mil = 'Professional garrison without perimeter walls. Effective against raiders; cannot hold against a siege.';
+  } else if (hasMilitia) {
+    mil = 'Armed citizens who know their ground. Effective against disorganized raiders. No counter to a disciplined military force.';
+  } else {
+    mil = 'No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.';
+  }
+  result.push({
+    icon: '',
+    label: 'Invasion & War',
+    color: milColor,
+    assess: mil,
+  });
 
-  const intScore = scores.internal||0;
-  const intColor = intScore>=60?'#1a4a2a':intScore>=35?'#7a5010':'#8b1a1a';
-  const sl = sp.safetyLabel||'Moderate';
-  let intA = 'Internal security: '+sl+'. ';
-  if (sl.includes('Dangerous')) intA+='Active violence and organized crime make internal order the primary threat. ';
-  intA+=f.hasCourtSystem&&f.hasPrison?'Full legal infrastructure provides enforcement capacity.':f.hasCourtSystem?'Courts prosecute but limited detention.':f.hasPrison?'Detention without systematic prosecution.':'No legal infrastructure — order relies on force alone.';
-  result.push({icon:'',label:'Internal Security',color:intColor,assess:intA});
+  const intScore = scores.internal || 0;
+  const intColor = intScore >= 60
+    ? '#1a4a2a'
+    : intScore >= 35
+      ? '#7a5010'
+      : '#8b1a1a';
+  const sl = sp.safetyLabel || 'Moderate';
+  let intA = 'Internal security: ' + sl + '. ';
+  if (sl.includes('Dangerous')) {
+    intA += 'Active violence and organized crime make internal order the primary threat. ';
+  }
+  if (f.hasCourtSystem && f.hasPrison) {
+    intA += 'Full legal infrastructure provides enforcement capacity.';
+  } else if (f.hasCourtSystem) {
+    intA += 'Courts prosecute but limited detention.';
+  } else if (f.hasPrison) {
+    intA += 'Detention without systematic prosecution.';
+  } else {
+    intA += 'No legal infrastructure — order relies on force alone.';
+  }
+  result.push({
+    icon: '',
+    label: 'Internal Security',
+    color: intColor,
+    assess: intA,
+  });
 
-  const econScore = scores.economic||0;
-  const econColor = econScore>=60?'#1a4a2a':econScore>=35?'#7a5010':'#8b1a1a';
-  const econA = econScore>=65?'Strong economic base can absorb a sustained crisis. Tax revenue funds emergency measures and sustains garrison pay during prolonged engagement.':econScore>=40?'Adequate economic resilience for a short-term crisis. A prolonged siege will begin straining reserves within months.':econScore>=25?'Chronic underfunding limits emergency response. A sustained crisis will exhaust reserves and undermine garrison morale.':'Economic base cannot support crisis response. Any sustained threat quickly overwhelms the capacity to respond.';
-  result.push({icon:'',label:'Economic Survival',color:econColor,assess:econA});
+  const econScore = scores.economic || 0;
+  const econColor = econScore >= 60
+    ? '#1a4a2a'
+    : econScore >= 35
+      ? '#7a5010'
+      : '#8b1a1a';
+  let econA;
+  if (econScore >= 65) {
+    econA = 'Strong economic base can absorb a sustained crisis. Tax revenue funds emergency measures and sustains garrison pay during prolonged engagement.';
+  } else if (econScore >= 40) {
+    econA = 'Adequate economic resilience for a short-term crisis. A prolonged siege will begin straining reserves within months.';
+  } else if (econScore >= 25) {
+    econA = 'Chronic underfunding limits emergency response. A sustained crisis will exhaust reserves and undermine garrison morale.';
+  } else {
+    econA = 'Economic base cannot support crisis response. Any sustained threat quickly overwhelms the capacity to respond.';
+  }
+  result.push({
+    icon: '',
+    label: 'Economic Survival',
+    color: econColor,
+    assess: econA,
+  });
 
-  const disA = (f.hasGranary?'Granary provides food buffer — the community can absorb a bad harvest without immediate hardship.':'No food reserves. A crop failure or supply disruption causes immediate hardship.') + (f.hasHospital?' Hospital infrastructure enables disease containment and systematic quarantine.':f.hasChurch?' Parish clergy provide basic wound care — better than nothing, worse than a hospital.':' No medical infrastructure. Plague spreads until it burns out.');
-  result.push({icon:'',label:'Disasters & Famine',color:'#1a4a5a',assess:disA});
+  const disA = (f.hasGranary
+    ? 'Granary provides food buffer — the community can absorb a bad harvest without immediate hardship.'
+    : 'No food reserves. A crop failure or supply disruption causes immediate hardship.')
+    + (f.hasHospital
+      ? ' Hospital infrastructure enables disease containment and systematic quarantine.'
+      : f.hasChurch
+        ? ' Parish clergy provide basic wound care — better than nothing, worse than a hospital.'
+        : ' No medical infrastructure. Plague spreads until it burns out.');
+  result.push({
+    icon: '',
+    label: 'Disasters & Famine',
+    color: '#1a4a5a',
+    assess: disA,
+  });
 
   return result;
 }

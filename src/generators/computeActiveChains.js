@@ -7,6 +7,7 @@ import {SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS} from '../data/supplyChainData.js
 import {TIER_ORDER} from '../data/constants.js';
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
 import {RESOURCE_DATA} from '../data/resourceData.js';
+import {customDeps} from '../lib/dependencyEngine.js';
 
 // Map resource labels → RESOURCE_DATA keys for matching
 // Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words
@@ -78,6 +79,16 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   const chainActivatedByResource = new Set();
   activeResourceKeys.forEach(rk => {
     (RESOURCE_TO_CHAINS[rk] || []).forEach(c => chainActivatedByResource.add(c));
+  });
+
+  // Custom-content extension: a custom resource (matched by NAME against
+  // RESOURCE_DATA labels) may declare `feedsChains: [chainRefId, ...]`.
+  // Those chain ids feed `chainActivatedByResource` directly.
+  resources.forEach(rk => {
+    const label = RESOURCE_DATA[rk]?.label || rk;
+    customDeps.chainsFedByResource(label).forEach(c => chainActivatedByResource.add(c));
+    // Also try the raw key form (custom resources stored under their own key)
+    if (label !== rk) customDeps.chainsFedByResource(rk).forEach(c => chainActivatedByResource.add(c));
   });
 
   const activeChains = [];

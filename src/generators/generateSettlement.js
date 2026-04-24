@@ -15,7 +15,6 @@ import {applyCascadeInstitutions} from './cascadeGenerator.js';
 import {TERRAIN_DATA} from '../data/geographyData.js';
 import {RESOURCE_DATA} from '../data/resourceData.js';
 
-import {ARCANE_INST_KW as _ARCANE_KW} from '../components/magicFilter.js';
 import {generateStress} from './stressGenerator.js';
 import {generateEconomicState} from './economicGenerator.js';
 import {generateEconomicViability} from './economicGenerator.js';

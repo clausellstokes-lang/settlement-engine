@@ -25,17 +25,29 @@ const SPATIAL_FEATURES = {
   'Daily markets':                  ['Market square', 'Weekly market'],
   'Multiple market squares':        ['Market square', 'Weekly market'],
   // Military
-  'Multiple garrisons':             ['Garrison', 'Barracks', 'Town watch', 'Citizen militia', 'Professional guard (hundreds)'],
+  'Multiple garrisons': [
+    'Garrison', 'Barracks', 'Town watch',
+    'Citizen militia', 'Professional guard (hundreds)',
+  ],
   'Professional guard (hundreds)':  ['Garrison', 'Barracks', 'Town watch', 'Citizen militia'],
   // Fortification
-  'Inner citadel':                  ['Citadel', 'City walls and gates', 'Massive walls and fortifications', 'Town walls'],
+  'Inner citadel': [
+    'Citadel', 'City walls and gates',
+    'Massive walls and fortifications', 'Town walls',
+  ],
   'Massive walls and fortifications': ['City walls and gates', 'Town walls'],
   'City walls and gates':           ['Town walls'],
   // Religious
-  'Parish churches (50-100+)':      ['Parish churches (10-30)', 'Parish churches (2-5)', 'Parish church', 'Priest (resident)'],
+  'Parish churches (50-100+)': [
+    'Parish churches (10-30)', 'Parish churches (2-5)',
+    'Parish church', 'Priest (resident)',
+  ],
   'Parish churches (10-30)':        ['Parish churches (2-5)', 'Parish church', 'Priest (resident)'],
   'Parish churches (2-5)':          ['Parish church', 'Priest (resident)'],
-  'Great cathedral':                ['Cathedral (10,000+ only)', 'Parish churches (10-30)', 'Parish churches (2-5)', 'Parish church'],
+  'Great cathedral': [
+    'Cathedral (10,000+ only)', 'Parish churches (10-30)',
+    'Parish churches (2-5)', 'Parish church',
+  ],
   'Multiple cathedrals':            ['Cathedral (10,000+ only)', 'Great cathedral', 'Parish churches (10-30)'],
   'Major monasteries (5-10)':       ['Multiple monasteries', 'Monastery or friary'],
   'Multiple monasteries':           ['Monastery or friary'],
@@ -49,7 +61,10 @@ const SPATIAL_FEATURES = {
   'Merchant guilds (15-40)':        ['Merchant guilds (3-8)', 'Money changers'],
   'Multiple warehouse districts':   ['Warehouse district'],
   // Hospitality
-  'Hospitality district':           ["Inns and taverns (district)", 'Inn (multiple)', 'Taverns (5-20)', "Travelers' inn", 'Ale house'],
+  'Hospitality district': [
+    "Inns and taverns (district)", 'Inn (multiple)',
+    'Taverns (5-20)', "Travelers' inn", 'Ale house',
+  ],
   "Inns and taverns (district)":    ['Inn (multiple)', 'Taverns (5-20)', "Travelers' inn", 'Ale house'],
   'Inn (multiple)':                 ["Travelers' inn", 'Ale house'],
   // Trade / finance
@@ -62,7 +77,10 @@ const SPATIAL_FEATURES = {
   'Academy of magic':               ["Mages' guild", "Mages' district", 'Multiple wizard towers', "Wizard's tower"],
   'Enchanting quarter':             ["Mages' guild", "Mages' district", "Enchanter's shop"],
   // Criminal
-  "Thieves' guild (powerful)":      ["Thieves' guild chapter", 'Multiple criminal factions', 'Black market', 'Front businesses', 'Street gang'],
+  "Thieves' guild (powerful)": [
+    "Thieves' guild chapter", 'Multiple criminal factions',
+    'Black market', 'Front businesses', 'Street gang',
+  ],
   'Multiple criminal factions':     ["Thieves' guild chapter", 'Street gang'],
   'Black market bazaar':            ['Black market', 'Multiple criminal factions', 'Underground city'],
   "Assassins' guild":               ["Thieves' guild (powerful)", 'Underground city'],
@@ -639,7 +657,9 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     });
   }
 
-  if (route === 'river' && !inExp('Dock') && !inExp('Mill') && !inExp('Fisher') && !inExp('barge') && !inExp('harbour') && !inExp('harbor')) {
+  if (route === 'river'
+      && !inExp('Dock') && !inExp('Mill') && !inExp('Fisher')
+      && !inExp('barge') && !inExp('harbour') && !inExp('harbor')) {
     suggestions.push({
       type:      'suggestion',
       reason:    'A river settlement should exploit its water access — mills, docks, or fishmongers.',

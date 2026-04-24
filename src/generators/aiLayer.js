@@ -34,11 +34,16 @@ function extractFullContext(s) {
   const conflicts = ps.conflicts || [];
   const tensions  = hist.currentTensions || [];
   const instNames = insts.map(i => i.name);
-  const instByCat = insts.reduce((acc, i) => { (acc[i.category] = acc[i.category] || []).push(i.name); return acc; }, {});
+  const instByCat = insts.reduce((acc, i) => {
+    (acc[i.category] = acc[i.category] || []).push(i.name);
+    return acc;
+  }, {});
 
   const fb = via.metrics?.foodBalance;
   const foodSituation = fb
-    ? (fb.deficit ? `${Math.round(fb.deficitPercent || 0)}% food deficit` : `${Math.round(fb.surplus || 0)}% food surplus`)
+    ? (fb.deficit
+      ? `${Math.round(fb.deficitPercent || 0)}% food deficit`
+      : `${Math.round(fb.surplus || 0)}% food surplus`)
     : 'food self-sufficient';
 
   return {
@@ -59,7 +64,9 @@ function extractFullContext(s) {
     chains:       chains.map(c => `${c.label || c.chainId} (${c.status || 'ok'})`).slice(0, 8),
     incomeSources: via.incomeSources?.length || 0,
     foodSituation,
-    tradeDeps:    eco.tradeDependencies?.filter(d => d.severity === 'critical').map(d => d.institution).slice(0, 4) || [],
+    tradeDeps:    eco.tradeDependencies
+      ?.filter(d => d.severity === 'critical')
+      .map(d => d.institution).slice(0, 4) || [],
 
     // Safety
     safetyLabel:  sp.safetyLabel || null,
@@ -237,7 +244,11 @@ export async function runAiLayer(settlement, onProgress) {
   onProgress?.('Weaving the narrative…');
 
   const data = await res.json();
-  const text = data.content?.filter(b => b.type === 'text').map(b => b.text).join('').trim();
+  const text = data.content
+    ?.filter(b => b.type === 'text')
+    .map(b => b.text)
+    .join('')
+    .trim();
   if (!text) throw new Error('Empty response from API');
 
   // Parse JSON — strip any accidental markdown fences
