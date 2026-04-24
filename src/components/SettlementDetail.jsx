@@ -1,24 +1,109 @@
-import React, { useState } from 'react';
-import {Link2, Download, ChevronLeft, X, FileText} from 'lucide-react';
-import {downloadNarrativePrompt, downloadMapPrompt} from '../utils/promptExporters';
+import React, { useState, useMemo, useEffect, lazy, Suspense } from 'react';
+import {Link2, ChevronLeft, X, FileText, Sparkles, RotateCcw} from 'lucide-react';
 import {generateSettlementPDF} from '../utils/generateSettlementPDF.js';
+import {getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS} from '../lib/relationshipGraph.js';
+import { useStore } from '../store/index.js';
 
-import OutputContainer from './OutputContainer';
+const OutputContainer = lazy(() => import('./OutputContainer'));
+import SettlementEditor from './SettlementEditor.jsx';
+import ChroniclePanel from './ChroniclePanel.jsx';
 import {GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_} from './theme';
-
-function downloadJSON(saveEntry) {
-  const data = JSON.stringify(saveEntry.settlement, null, 2);
-  const url = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
-  const a = Object.assign(document.createElement('a'), { href: url, download: `${saveEntry.name || 'settlement'}.json` });
-  document.body.appendChild(a); a.click();
-  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
-}
 
 const REL_COLORS = {
   trade_partner:'#1a5a28', allied:'#1a3a7a', patron:'#4a1a6a',
   client:'#6a3a1a', rival:'#8a5010', cold_war:'#8a3010',
   hostile:'#8b1a1a', neutral:'#6b5340',
 };
+
+// ── Network Effects panel — shows cascading modifiers from the relationship graph ──
+
+function NetworkEffectsPanel({ settlementId, saves }) {
+  const mods = useMemo(
+    () => getSettlementModifiers(settlementId, saves),
+    [settlementId, saves]
+  );
+
+  const hasEffects = mods.sources.length > 0;
+  if (!hasEffects) return null;
+
+  const maxAbs = Math.max(0.01, ...EFFECT_CATEGORIES.map(c => Math.abs(mods.totals[c.key])));
+
+  return (
+    <div style={{ background: '#f8f4ee', border: `1px solid ${BORDER}`, borderRadius: 8, padding: '12px 14px', marginBottom: 14 }}>
+      <div style={{ fontSize: 11, fontWeight: 700, color: '#5a3a1a', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>
+        Network Effects
+      </div>
+
+      {/* Category bars */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
+        {EFFECT_CATEGORIES.map(({ key, label, color }) => {
+          const val = mods.totals[key];
+          const pct = Math.min(Math.abs(val) / maxAbs, 1) * 100;
+          const isPos = val >= 0;
+          return (
+            <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: SECOND, minWidth: 80, fontFamily: sans }}>{label}</span>
+              <div style={{ flex: 1, height: 8, background: '#e8e0d4', borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
+                <div style={{
+                  position: 'absolute',
+                  [isPos ? 'left' : 'right']: 0,
+                  top: 0, height: '100%',
+                  width: `${pct}%`,
+                  background: isPos ? '#2a7a3a' : '#8b1a1a',
+                  borderRadius: 4,
+                  transition: 'width 0.3s',
+                }} />
+              </div>
+              <span style={{
+                fontSize: 10, fontWeight: 700, fontFamily: 'monospace', minWidth: 42, textAlign: 'right',
+                color: Math.abs(val) < 0.005 ? MUTED : isPos ? '#1a5a28' : '#8b1a1a',
+              }}>
+                {fmtMod(val)}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Source breakdown */}
+      <div style={{ fontSize: 10, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
+        Sources
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        {mods.sources.map((src, i) => {
+          const relLabel = REL_LABELS[src.relType] || src.relType;
+          const relColor = REL_COLORS[src.relType] || MUTED;
+          const dominant = EFFECT_CATEGORIES.reduce((best, c) =>
+            Math.abs(src.modifiers[c.key]) > Math.abs(src.modifiers[best] || 0) ? c.key : best
+          , EFFECT_CATEGORIES[0].key);
+          const domVal = src.modifiers[dominant];
+          const depthLabel = src.depth > 1 ? ` (${src.depth}-hop, ${Math.round(src.decay * 100)}% strength)` : '';
+          const trLabel = src.tierRatio && Math.abs(src.tierRatio - 1) > 0.05
+            ? ` TR:${src.tierRatio.toFixed(1)}x` : '';
+
+          return (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 0', borderBottom: i < mods.sources.length - 1 ? '1px solid #e8e0d4' : 'none' }}>
+              <div style={{ width: 5, height: 5, borderRadius: '50%', background: relColor, flexShrink: 0 }} />
+              <span style={{ fontSize: 11, fontWeight: 600, color: INK, flex: 1 }}>
+                {src.settlementName}
+              </span>
+              <span style={{ fontSize: 9, color: relColor, fontWeight: 600, background: `${relColor}18`, padding: '1px 5px', borderRadius: 3 }}>
+                {relLabel}
+              </span>
+              <span style={{ fontSize: 9, color: MUTED }}>{depthLabel}{trLabel}</span>
+              <span style={{
+                fontSize: 10, fontWeight: 700, fontFamily: 'monospace',
+                color: domVal >= 0 ? '#1a5a28' : '#8b1a1a',
+              }}>
+                {fmtMod(domVal)}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 function DetailErrorBoundary({ children }) {
   try { return children; } catch { return <div style={{padding:12,color:'#8b1a1a',fontSize:12}}>Error loading settlement output.</div>; }
@@ -166,12 +251,63 @@ export default function SettlementDetail({
   linking, setLinking,
   editNamesOpen, setEditNamesOpen,
   handleLink, removeNeighbour, applyRename,
-  onLoad,
+  onLoad, onEditSettlement,
 }) {
   const network=detail.settlement.neighbourNetwork||[];
   const [editingName, setEditingName] = useState(null);  // {type,id,oldName}
   const [editDraft,   setEditDraft]   = useState('');
   const [saved,       setSaved]       = useState(false);
+
+  // AI-1: pull the saved settlement's persisted ai_data into the aiSlice
+  // when this detail view opens (or when switching between saves). Without
+  // this, the OutputContainer's narrative chrome would show "Generate"
+  // for a save that already has a narrative on disk.
+  const saveId = detail?.saveData?.id || null;
+  const hydrateAiFromSave = useStore(s => s.hydrateAiFromSave);
+  const revertCurrentToRaw = useStore(s => s.revertCurrentToRaw);
+  const clearAiSettlement = useStore(s => s.clearAiSettlement);
+  const requestNarrative = useStore(s => s.requestNarrative);
+  const requestProgression = useStore(s => s.requestProgression);
+  const aiSettlement = useStore(s => s.aiSettlement);
+  const aiDailyLife  = useStore(s => s.aiDailyLife);
+  const narrated = !!(aiSettlement || aiDailyLife);
+
+  // Chronicle (AI-3b) — pulled from the live savedSettlements entry so the
+  // list updates after each generate / revert without remounting the view.
+  const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
+  const chronicleEntries = liveSaveEntry?.aiData?.chronicle;
+
+  // Drift resolutions for the SettlementEditor — invoked from the drift modal
+  // after a structural/seismic edit is applied. `requestNarrative` re-runs the
+  // full narrative pipeline against the (now-mutated) save; `requestProgression`
+  // evolves the existing narrative using the change diff (AI-4);
+  // `revertCurrentToRaw` clears the narrative entirely.
+  const handleEditorRegenerate = async () => {
+    if (saveId) await requestNarrative(saveId);
+  };
+  const handleEditorProgress = async (changeType, changeLabel) => {
+    if (saveId) await requestProgression(saveId, { changeType, changeLabel });
+  };
+  const handleEditorRevert = async () => {
+    if (saveId) await revertCurrentToRaw(saveId);
+  };
+
+  useEffect(() => {
+    if (detail?.saveData) {
+      hydrateAiFromSave(detail.saveData);
+    }
+    // Clear AI state when leaving the detail view so it doesn't leak into
+    // the Generate wizard or the next save that gets opened.
+    return () => { clearAiSettlement(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [saveId]);
+
+  const handleRevertToRaw = async () => {
+    if (!saveId) return;
+    const ok = window.confirm('Revert this settlement to its raw (pre-AI) view? The saved narrative and daily-life prose will be cleared. Chronicle history (if any) is preserved.');
+    if (!ok) return;
+    await revertCurrentToRaw(saveId);
+  };
 
   // Wrapper: call parent applyRename then clear local edit state
   const handleApplyRename = (type, id, oldName, newName) => {
@@ -186,14 +322,29 @@ export default function SettlementDetail({
             <ChevronLeft size={13}/> Back to list
           </button>
           <span style={{fontFamily:serif_,fontSize:15,fontWeight:600,color:INK,flex:1}}>{detail.name}</span>
+          {/* Narrated/Raw badge — reflects the persisted AI state on this save */}
+          <span style={{
+            display:'inline-flex',alignItems:'center',gap:4,
+            padding:'3px 9px',borderRadius:11,fontSize:10,fontWeight:800,
+            fontFamily:sans,letterSpacing:'0.07em',textTransform:'uppercase',
+            background:narrated?'rgba(90,42,138,0.14)':'rgba(156,128,104,0.14)',
+            color:narrated?'#6a2a9a':'#6b5340',
+            border:`1px solid ${narrated?'rgba(160,100,220,0.35)':'rgba(156,128,104,0.35)'}`,
+          }} title={narrated ? 'This save has an AI-generated narrative or daily-life layer.' : 'This save has no AI narrative — the raw generator output is shown.'}>
+            <Sparkles size={10}/> {narrated ? 'Narrated' : 'Raw'}
+          </span>
+          {narrated && (
+            <button
+              onClick={handleRevertToRaw}
+              title="Clear the AI narrative and daily-life prose on this save, returning it to the raw generator output. Chronicle history is preserved."
+              style={{display:'flex',alignItems:'center',gap:5,background:CARD,color:'#6a2a9a',border:'1px solid rgba(160,100,220,0.45)',borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:11,fontWeight:700,fontFamily:sans}}
+            >
+              <RotateCcw size={12}/> Revert to Raw
+            </button>
+          )}
           <button onClick={()=>setLinking(v=>!v)} style={{display:'flex',alignItems:'center',gap:5,background:linking?'#2a3a7a':CARD,color:linking?'#fff':'#2a3a7a',border:'1px solid #2a3a7a',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:sans}}>
             <Link2 size={13}/> {linking?'Cancel':'Link Neighbour'}
           </button>
-          <button onClick={()=>downloadJSON(detail)} style={{display:'flex',alignItems:'center',gap:5,background:'#1a4a2a',color:'#fff',border:'none',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:sans}}>
-            <Download size={12}/> JSON
-          </button>
-          <button onClick={()=>downloadNarrativePrompt(detail.settlement)} style={{display:'flex',alignItems:'center',gap:5,background:'#5a3a8a',color:'#fff',border:'none',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:sans}}>Narrative AI Prompt</button>
-          <button onClick={()=>downloadMapPrompt(detail.settlement)} style={{display:'flex',alignItems:'center',gap:5,background:'#8a3a1a',color:'#fff',border:'none',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:sans}}>Map AI Prompt</button>
           <button onClick={()=>generateSettlementPDF(detail.settlement)} style={{display:'flex',alignItems:'center',gap:5,background:'#7a1a1a',color:'#fff',border:'none',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:sans}}><FileText size={12}/> Export PDF</button>
         </div>
       </div>
@@ -226,6 +377,23 @@ export default function SettlementDetail({
           </div>;
         })}
       </div>}
+
+      {/* ── Network Effects (cascading modifiers) ─────────────────────────── */}
+      {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} />}
+
+      {/* ── Settlement Editor (CRUD for institutions, resources, etc.) ────── */}
+      {detail?.settlement && onEditSettlement && (
+        <SettlementEditor
+          settlement={detail.settlement}
+          config={detail.config}
+          saveId={detail.saveData?.id}
+          onEdit={onEditSettlement}
+          narrated={narrated}
+          onRegenerateNarrative={handleEditorRegenerate}
+          onProgressNarrative={handleEditorProgress}
+          onRevertToRaw={handleEditorRevert}
+        />
+      )}
 
       {/* ── Full settlement output ──────────────────────────────────────────── */}
       {/* ── Edit Names ─────────────────────────────────────────────────────── */}
@@ -338,9 +506,16 @@ export default function SettlementDetail({
         </div>}
       </div>}
 
+      {/* ── Chronicle: collapsible history log, only surfaced when a save has entries ── */}
+      {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (
+        <ChroniclePanel entries={chronicleEntries} />
+      )}
+
       {detail.settlement&&<div style={{marginBottom:12}}>
         <DetailErrorBoundary>
-          <OutputContainer settlement={detail.settlement} readOnly />
+          <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: '#9c8068' }}>Loading...</div>}>
+            <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />
+          </Suspense>
         </DetailErrorBoundary>
       </div>}
 
