@@ -620,32 +620,63 @@ export default function GenerateWizard({ isMobile }) {
         </>
       )}
 
-      {/* When settlement exists but user navigated back — show re-view option */}
+      {/* When settlement exists but user navigated back — show re-view option + mode picker */}
       {settlement && !showOutput && (
-        <div style={{
-          padding: `${SP.md}px ${SP.lg}px`, background: '#f0faf2',
-          border: '1px solid #4a8a60', borderRadius: R.lg,
-          display: 'flex', alignItems: 'center', gap: SP.md,
-        }}>
-          <div style={{ flex: 1 }}>
-            <span style={{ fontSize: FS.md, fontWeight: 700, color: '#1a5a28' }}>
-              Last generated: {settlement.name || 'Untitled'}
-            </span>
-            <span style={{ fontSize: FS.sm, color: '#4a8a60', marginLeft: SP.sm }}>
-              {settlement.tier}
-            </span>
+        <>
+          <div style={{
+            padding: `${SP.md}px ${SP.lg}px`, background: '#f0faf2',
+            border: '1px solid #4a8a60', borderRadius: R.lg,
+            display: 'flex', alignItems: 'center', gap: SP.md,
+          }}>
+            <div style={{ flex: 1 }}>
+              <span style={{ fontSize: FS.md, fontWeight: 700, color: '#1a5a28' }}>
+                Last generated: {settlement.name || 'Untitled'}
+              </span>
+              <span style={{ fontSize: FS.sm, color: '#4a8a60', marginLeft: SP.sm }}>
+                {settlement.tier}
+              </span>
+            </div>
+            <button
+              onClick={() => setShowOutput(true)}
+              style={{
+                padding: `${SP.sm}px ${SP.lg}px`, background: '#2a7a2a',
+                color: '#fff', border: 'none', borderRadius: R.md,
+                cursor: 'pointer', fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
+              }}
+            >
+              View Settlement
+            </button>
           </div>
-          <button
-            onClick={() => setShowOutput(true)}
-            style={{
-              padding: `${SP.sm}px ${SP.lg}px`, background: '#2a7a2a',
-              color: '#fff', border: 'none', borderRadius: R.md,
-              cursor: 'pointer', fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-            }}
-          >
-            View Settlement
-          </button>
-        </div>
+
+          {/* Mode picker — let the user start fresh in either generation mode.
+              Picking a mode here clears the current settlement so the wizard
+              re-enters its empty state in the chosen mode. The Regenerate
+              button above stays available for "same config, new roll". */}
+          <div style={{
+            padding: `${SP.lg}px ${SP.lg}px ${SP.md}px`,
+            background: CARD,
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.lg,
+          }}>
+            <div style={{ textAlign: 'center', marginBottom: SP.md }}>
+              <div style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK, marginBottom: SP.xs }}>
+                Or start a new settlement
+              </div>
+              <div style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED }}>
+                Pick a mode to begin a fresh generation. Your last settlement remains saved above.
+              </div>
+            </div>
+            <ModeSelector
+              mode={wizardMode}
+              onModeChange={(newMode) => {
+                if (clearSettlement) clearSettlement();
+                setWizardMode(newMode);
+                setWizardStep(0);
+                setShowOutput(false);
+              }}
+            />
+          </div>
+        </>
       )}
     </div>
   );

@@ -55,20 +55,21 @@ export const useStore = create(
           partialize: (state) => ({
             // Persist only lightweight, user-owned data.
             // Never persist the massive generated settlement object.
-            // wizardStep is intentionally NOT persisted — users expect a fresh wizard each session.
+            // wizardStep / wizardMode are intentionally NOT persisted — users
+            // expect to land on the mode picker on every visit, not get
+            // dumped straight into whatever flow they used last session.
             config: state.config,
             institutionToggles: state.institutionToggles,
             categoryToggles:    state.categoryToggles,
             goodsToggles:       state.goodsToggles,
             servicesToggles:    state.servicesToggles,
-            wizardMode:         state.wizardMode,
           }),
-          // Migrate deprecated 'custom' wizardMode → 'advanced'; always start at step 0
+          // On rehydrate: always start the Create page at the mode picker.
+          // (Also wipes any stale wizardMode persisted by older builds.)
           onRehydrateStorage: () => (state) => {
-            if (state?.wizardMode === 'custom') {
-              state.wizardMode = 'advanced';
-            }
-            if (state) state.wizardStep = 0;
+            if (!state) return;
+            state.wizardStep = 0;
+            state.wizardMode = null;
           },
         },
       ),
