@@ -64,16 +64,52 @@ export const CHAIN_DEFS = [
 export function buildChainEdges(settlementA, settlementB) {
   const edges = [];
 
-  const resourcesA = new Set((settlementA.resources || []).map(r => r.id || r.name?.toLowerCase()));
-  const resourcesB = new Set((settlementB.resources || []).map(r => r.id || r.name?.toLowerCase()));
-  const instsA = new Set((settlementA.institutions || []).map(i => (i.id || i.name || '').toLowerCase()));
-  const instsB = new Set((settlementB.institutions || []).map(i => (i.id || i.name || '').toLowerCase()));
+  // Resources can arrive as plain strings (`'iron_ore'`, from nearbyResources),
+  // or as objects `{id, name}` from custom/edited settlements. Handle both.
+  // The canonical list lives on `nearbyResources`; older code wrote `resources`.
+  const normRes = (r) => {
+    if (typeof r === 'string') return r.toLowerCase();
+    if (r && typeof r === 'object') return (r.id || r.name || '').toLowerCase();
+    return '';
+  };
+  // The canonical location on a generated settlement is
+  // `settlement.config.nearbyResources` (set at generateSettlement.js:1031
+  // when spreading effectiveConfig). Fall back to a handful of other shapes
+  // for custom-edited or imported saves.
+  const resListA = settlementA?.config?.nearbyResources
+    || settlementA?.nearbyResources
+    || settlementA?.resources
+    || [];
+  const resListB = settlementB?.config?.nearbyResources
+    || settlementB?.nearbyResources
+    || settlementB?.resources
+    || [];
+  const resourcesA = new Set(resListA.map(normRes).filter(Boolean));
+  const resourcesB = new Set(resListB.map(normRes).filter(Boolean));
+
+  const normInst = (i) => (i?.id || i?.name || '').toLowerCase();
+  const instsA = new Set((settlementA?.institutions || []).map(normInst).filter(Boolean));
+  const instsB = new Set((settlementB?.institutions || []).map(normInst).filter(Boolean));
+
+  // Institution names in the catalog include parenthetical size suffixes
+  // (e.g. "Carpenter (part-time)", "Taverns (5-20)", "Siege Works"). The
+  // chain-def consumer tokens are bare singulars ('carpenter', 'tavern',
+  // 'siege_works'). Treat either as matching if the consumer token appears
+  // as a substring of a catalog name, with "_" mapped to space.
+  const hasInst = (set, consumer) => {
+    if (set.has(consumer)) return true;
+    const needleSpaced = consumer.replace(/_/g, ' ');
+    for (const inst of set) {
+      if (inst.includes(needleSpaced)) return true;
+    }
+    return false;
+  };
 
   for (const chain of CHAIN_DEFS) {
     const aProduces = chain.resources.some(r => resourcesA.has(r));
-    const bConsumes = chain.consumers.some(c => instsB.has(c));
+    const bConsumes = chain.consumers.some(c => hasInst(instsB, c));
     const bProduces = chain.resources.some(r => resourcesB.has(r));
-    const aConsumes = chain.consumers.some(c => instsA.has(c));
+    const aConsumes = chain.consumers.some(c => hasInst(instsA, c));
 
     if (aProduces && bConsumes) {
       edges.push({
