@@ -18,9 +18,18 @@ import React from 'react';
 import { describe, test, expect, beforeAll, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
-import { ResourcesTab } from '../../src/components/new/tabs/ResourcesTab.jsx';
-import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
+import { OverviewTab }      from '../../src/components/new/tabs/OverviewTab.jsx';
+import { ResourcesTab }     from '../../src/components/new/tabs/ResourcesTab.jsx';
+import { EconomicsTab }     from '../../src/components/new/tabs/EconomicsTab.jsx';
+import { DefenseTab }       from '../../src/components/new/tabs/DefenseTab.jsx';
+import { HistoryTab }       from '../../src/components/new/tabs/HistoryTab.jsx';
+import { NPCsTab }          from '../../src/components/new/tabs/NPCsTab.jsx';
+import { PlotHooksTab }     from '../../src/components/new/tabs/PlotHooksTab.jsx';
+import { PowerTab }         from '../../src/components/new/tabs/PowerTab.jsx';
+import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
+import { ServicesTab }      from '../../src/components/new/tabs/ServicesTab.jsx';
+import { ViabilityTab }     from '../../src/components/new/tabs/ViabilityTab.jsx';
+import DMCompassTab         from '../../src/components/new/tabs/DMCompassTab.jsx';
 
 const e = React.createElement;
 const SEED = 'smoke-test-seed-2026-05';
@@ -92,3 +101,36 @@ describe('EconomicsTab smoke', () => {
     expect(container.textContent.length).toBeGreaterThan(0);
   });
 });
+
+// ── Helper for the remaining tabs ────────────────────────────────────────
+// Most tabs follow the same "render with full + sparse" shape. This
+// helper keeps the smoke suite concise.
+function smokeTab(label, Component, propsForFull, propsForSparse = { settlement: { name: 'X' } }) {
+  describe(`${label} smoke`, () => {
+    test('mounts with a full village settlement', () => {
+      expect(() => render(e(Component, propsForFull(villageSettlement)))).not.toThrow();
+    });
+    test('mounts with a full metropolis settlement', () => {
+      expect(() => render(e(Component, propsForFull(metropolisSettlement)))).not.toThrow();
+    });
+    test('mounts with a sparse settlement', () => {
+      expect(() => render(e(Component, propsForSparse))).not.toThrow();
+    });
+  });
+}
+
+// Simple settlement-prop tabs
+smokeTab('DefenseTab',       DefenseTab,       s => ({ settlement: s }));
+smokeTab('HistoryTab',       HistoryTab,       s => ({ settlement: s }));
+smokeTab('PlotHooksTab',     PlotHooksTab,     s => ({ settlement: s }));
+smokeTab('RelationshipsTab', RelationshipsTab, s => ({ settlement: s }));
+smokeTab('ViabilityTab',     ViabilityTab,     s => ({ settlement: s }));
+smokeTab('DMCompassTab',     DMCompassTab,     s => ({ settlement: s }));
+
+// Multi-prop tabs — these take additional slices alongside `settlement`.
+smokeTab('PowerTab',    PowerTab,    s => ({ powerStructure: s.powerStructure, settlement: s }),
+  { powerStructure: null, settlement: { name: 'X' } });
+smokeTab('ServicesTab', ServicesTab, s => ({ services: s.economicState?.institutionalServices || [], settlement: s }),
+  { services: [], settlement: { name: 'X' } });
+smokeTab('NPCsTab',     NPCsTab,     s => ({ npcs: s.npcs || [], settlement: s, pinnedIds: [] }),
+  { npcs: [], settlement: { name: 'X' }, pinnedIds: [] });

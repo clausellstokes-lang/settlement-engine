@@ -32,6 +32,19 @@ const TIER_LABELS = {
  * ≤ 5, treat as fraction and scale up. If > 5, assume already percentage.
  * Anything > 200 is clamped to 200 (pathological data should not crash UI).
  */
+/**
+ * settlement.stress is sometimes an array, sometimes a single stress
+ * object, sometimes null/undefined — depends on which generator path
+ * produced the settlement. Normalize to array at every read site so the
+ * downstream code can iterate uniformly. Caught by the PDF section
+ * smoke tests in tests/pdf/sections.smoke.test.js.
+ */
+function stressArray(s) {
+  if (Array.isArray(s?.stress)) return s.stress;
+  if (s?.stress) return [s.stress];
+  return [];
+}
+
 function normalizeImportCoverage(v) {
   if (v == null) return null;
   const n = Number(v);
@@ -141,7 +154,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
   const top4 = npcs.slice(0, 4);
   const dp = s?.defenseProfile || {};
   const ec = s?.economicState || {};
-  const stress = (s?.stress || []).filter(Boolean);
+  const stress = stressArray(s).filter(Boolean);
 
   return {
     identity: {
@@ -230,14 +243,14 @@ function identitySlice(s) {
       magicalCapability: dp?.magicalCapability || null,
       defenseLabel:   dp?.readiness?.label || null,
       defenseScoreAvg: avgScore(dp?.scores),
-      activeStress:   (s?.stress || []).map(x => x?.label || x?.icon).filter(Boolean),
+      activeStress:   stressArray(s).map(x => x?.label || x?.icon).filter(Boolean),
     },
   };
 }
 
 function overviewSlice(active, ai, useAi) {
   const s = active || {};
-  const stress = (s?.stress || []).map(x => ({
+  const stress = stressArray(s).map(x => ({
     icon:    x?.icon,
     label:   x?.label,
     summary: x?.summary,
@@ -365,7 +378,7 @@ function dailySlice(active, aiDailyLife) {
     services:    active?.availableServices || {},
     institutions: active?.institutions || [],
     safetyRatio: active?.economicState?.safetyProfile?.safetyRatio,
-    stress:      active?.stress || [],
+    stress:      stressArray(active),
   };
 }
 
@@ -506,7 +519,7 @@ function defenseSlice(active) {
   const dp = s?.defenseProfile || {};
   const sp = s?.economicState?.safetyProfile || {};
   const threatsRaw = s?.threats || {};
-  const stress = s?.stress || [];
+  const stress = stressArray(s);
 
   // Per-threat detail — pull description and factors. When the engine doesn't
   // supply a description, synthesize one from score band + threat type so the
@@ -706,7 +719,7 @@ function viabilitySlice(active) {
   const s = active || {};
   const v = s?.economicViability || {};
   const dp = s?.defenseProfile || {};
-  const stress = s?.stress || [];
+  const stress = stressArray(s);
 
   return {
     viable:                v.viable,

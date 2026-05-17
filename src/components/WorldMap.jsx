@@ -33,7 +33,7 @@ const SettlementPalette = lazy(() => import('./map/SettlementPalette.jsx'));
 // Cachebuster bumped whenever public/map/* changes so browsers don't serve
 // a stale iframe bundle (e.g. old drop handler missing the settlementforge
 // path). Bump this when you edit anything under /public/map.
-const FMG_URL = '/map/index.html?v=sfdrop11';
+const FMG_URL = '/map/index.html?v=sfdrop12';
 
 export default function WorldMap({ onNavigate } = {}) {
   // ── Refs & local state ────────────────────────────────────────────────
