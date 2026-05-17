@@ -66,6 +66,7 @@ export default function WorldMap({ onNavigate } = {}) {
   const replaceMapState = useStore(s => s.replaceMapState);
   const resetMapState   = useStore(s => s.resetMapState);
   const setMapSnapshot  = useStore(s => s.setMapSnapshot);
+  const bumpGeometryVersion = useStore(s => s.bumpGeometryVersion);
   const placements      = useStore(s => s.mapState.placements);
 
   const saves          = useStore(s => s.savedSettlements);
@@ -84,12 +85,28 @@ export default function WorldMap({ onNavigate } = {}) {
     [campaigns, activeCampaignId],
   );
 
+  // Audit recommendation: when a campaign is active, default to canon-
+  // only filtering so the map represents the *deployed* world, not
+  // every draft the user is tinkering with. Toggleable via the
+  // toolbar so power users can opt out.
+  const [canonOnlyFilter, setCanonOnlyFilter] = useState(true);
+
   // When a campaign is selected, only its settlements are draggable.
+  // Layered: campaign membership first, then canon filter on top.
   const activeSaves = useMemo(() => {
-    if (!activeCampaign) return saves || [];
-    const ids = new Set(activeCampaign.settlementIds || []);
-    return (saves || []).filter(s => ids.has(s.id));
-  }, [saves, activeCampaign]);
+    let pool = saves || [];
+    if (activeCampaign) {
+      const ids = new Set(activeCampaign.settlementIds || []);
+      pool = pool.filter(s => ids.has(s.id));
+    }
+    if (canonOnlyFilter) {
+      // A save's phase isn't always persisted explicitly; treat
+      // missing-phase as "draft" to be safe (only show settlements
+      // explicitly marked canon).
+      pool = pool.filter(s => s.phase === 'canon' || s.canonizedAt);
+    }
+    return pool;
+  }, [saves, activeCampaign, canonOnlyFilter]);
 
   // ── Hydrate saved settlements into the store (if not already loaded) ──
   useEffect(() => {
@@ -217,6 +234,11 @@ export default function WorldMap({ onNavigate } = {}) {
       });
     } catch (err) {
       console.warn('[WorldMap] place failed', err);
+      // showToast is a store-action setter; called from an async drop
+      // handler (not during render). The immutability rule is over-broad
+      // here — the function is defined during render but only invoked
+      // by user actions.
+      // eslint-disable-next-line react-hooks/immutability
       showToast('error', `Place failed: ${err.message || err}`);
     }
   }, [setDraggingOver]);
@@ -231,6 +253,7 @@ export default function WorldMap({ onNavigate } = {}) {
       if (bridge?.isReady) {
         try { await bridge.clearAllPlacements(); } catch (e) {}
       }
+      bumpGeometryVersion();
       return;
     }
 
@@ -242,6 +265,7 @@ export default function WorldMap({ onNavigate } = {}) {
       if (bridge?.isReady) {
         try { await bridge.clearAllPlacements(); } catch (e) {}
       }
+      bumpGeometryVersion();
       showToast('info', 'New campaign — drag settlements onto the map');
       return;
     }
@@ -278,13 +302,20 @@ export default function WorldMap({ onNavigate } = {}) {
             });
           } catch (e) {}
         }
+        // Geography just changed under React's feet. Roads/relationship/chain
+        // layers cache A*-routed polylines and burg-coordinate lookups; their
+        // useMemo/useEffect deps watch `placements`, but placements may be
+        // identical to before the load — only the underlying world differs.
+        // Bumping the version forces a fresh route compute against the new
+        // geometry without making the user nudge a settlement to do it.
+        bumpGeometryVersion();
       } catch (err) {
         console.warn('[WorldMap] snapshot load failed', err);
         showToast('error', `Load failed: ${err.message || err}`);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getCampaignMapState, replaceMapState, resetMapState, setActiveCampaign, activeCampaign]);
+     
+  }, [getCampaignMapState, replaceMapState, resetMapState, setActiveCampaign, activeCampaign, bumpGeometryVersion]);
 
   const handleSaveMapToCampaign = useCallback(async () => {
     if (!activeCampaignId) return;
@@ -338,11 +369,12 @@ export default function WorldMap({ onNavigate } = {}) {
       showToast('info', 'Regenerating…');
       await bridge.resetMap();
       resetMapState();
+      bumpGeometryVersion();
       showToast('success', 'New world generated');
     } catch (err) {
       showToast('error', `Regenerate failed: ${err.message || err}`);
     }
-  }, [resetMapState]);
+  }, [resetMapState, bumpGeometryVersion]);
 
   // ── Fit map to viewport ───────────────────────────────────────────────
   const handleFit = useCallback(async () => {
@@ -424,6 +456,17 @@ export default function WorldMap({ onNavigate } = {}) {
           active={showLayersPanel}
         >
           <Layers size={13} /> Layers
+        </IconButton>
+        {/* Canon-only toggle — defaults ON when a campaign is active. */}
+        <IconButton
+          onClick={() => setCanonOnlyFilter(v => !v)}
+          title={canonOnlyFilter
+            ? 'Showing only canon settlements. Click to also show drafts.'
+            : 'Showing all settlements. Click to limit to canon.'}
+          active={canonOnlyFilter}
+          aria-pressed={canonOnlyFilter}
+        >
+          {canonOnlyFilter ? 'Canon Only' : 'All Phases'}
         </IconButton>
         {/* Island shape picker */}
         {mapTemplates.length > 0 && (
@@ -526,6 +569,15 @@ export default function WorldMap({ onNavigate } = {}) {
           />
           {bridgeReady && (
             <Suspense fallback={null}>
+              {/* bridgeRef.current is read during render to pass into the overlay.
+                  Strictly a react-hooks/refs violation, but the bridge is
+                  constructed once during the bridge-init effect and never
+                  reassigned for the lifetime of this WorldMap instance.
+                  Fix-it-properly path: lift bridge into useState alongside
+                  bridgeReady, so the prop is state-driven. Deferred — bridge
+                  is non-serializable and state-storing it triggers some Zustand
+                  immer warnings we'd need to silence. */}
+              {/* eslint-disable-next-line react-hooks/refs */}
               <MapOverlay bridge={bridgeRef.current} />
             </Suspense>
           )}

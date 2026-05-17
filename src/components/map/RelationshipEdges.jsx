@@ -29,6 +29,9 @@ export default function RelationshipEdges() {
   const savedSettlements = useStore(s => s.savedSettlements);
   const placements       = useStore(s => s.mapState.placements);
   const filter           = useStore(s => s.mapState.layers.relationshipFilter);
+  // Subscribed only so a fresh world (loadSnapshot / regenerate) re-runs
+  // the memo even when settlement data and placement keys are unchanged.
+  const geometryVersion  = useStore(s => s.geometryVersion);
 
   const edges = useMemo(() => {
     if (!Array.isArray(savedSettlements) || !placements) return [];
@@ -97,7 +100,11 @@ export default function RelationshipEdges() {
     // Stable order: higher priority renders on top (so hostile lines win)
     out.sort((a, b) => (a.style.priority || 0) - (b.style.priority || 0));
     return out;
-  }, [savedSettlements, placements, filter]);
+    // geometryVersion is a deliberate trigger dep — see ChainEdges for the
+    // same pattern. We want this memo to recompute when geometry rolls
+    // even though the body doesn't reference geometryVersion directly.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [savedSettlements, placements, filter, geometryVersion]);
 
   if (!edges.length) return null;
 

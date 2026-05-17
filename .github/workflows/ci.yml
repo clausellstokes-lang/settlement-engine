@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  check:
+    name: Validate, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Fail fast on data corruption: duplicate object keys silently
+      # overwrite earlier definitions in JS, so a regression here would
+      # quietly distort the simulation outputs without breaking the build.
+      - name: Validate data
+        run: npm run validate:data
+
+      # tsc --noEmit against src/domain/. The JSDoc types in the domain
+      # layer get validated by tsc; the pipeline output object shapes,
+      # impairment dimensions, event types, and faction-response shapes
+      # are all enforced at edit time. Adding a new event without
+      # updating EventType union fails here.
+      - name: Type check
+        run: npm run typecheck
+
+      # ESLint on the full src/ + tests + scripts. The error backlog
+      # was paid down to zero in v2026.05 (regex bugs, undefined imports,
+      # rules-of-hooks violations, duplicate keys). The remaining ~550
+      # warnings are React 19 forward-looking rules — surfaced for drift
+      # tracking, intentionally non-blocking. Promote to errors when
+      # adopting React Compiler.
+      - name: Lint
+        run: npm run lint
+
+      # Example tests + property-based tests (fast-check) for the
+      # procedural engine + slice integration tests for the campaign
+      # lifecycle (canonize, apply event, undo, hydrate-from-save).
+      # 133 tests across 13 files as of v2026.05.
+      - name: Run tests
+        run: npm run test
+
+      # Production build — confirms Vite/Rollup chunking is healthy and
+      # the bundle still produces. This is the single source of truth
+      # for "does this branch deploy."
+      - name: Build
+        run: npm run build

@@ -644,7 +644,19 @@ void (function addDragToUpload() {
                 cellId: cellId,
               };
               console.log('[sfBridge] posting to parent:', msg);
-              window.parent && window.parent.postMessage(msg, '*');
+              // Same-origin parent (the React app serves /map/ from itself).
+              // Targeting our own origin avoids leaking placement events to
+              // any third-party that might frame us in the future.
+              if (window.parent) {
+                try {
+                  window.parent.postMessage(msg, window.location.origin);
+                } catch (e) {
+                  // window.location.origin can be 'null' inside a sandboxed
+                  // iframe (e.g. file://). Fall back to '*' only when we
+                  // can't compute a usable origin — never as the default.
+                  window.parent.postMessage(msg, '*');
+                }
+              }
             } catch (err) {
               console.warn('[sfBridge] postMessage failed:', err);
             }
@@ -1599,8 +1611,15 @@ function undraw() {
   }
 
   // ── postMessage plumbing ────────────────────────────────────────────────
+  // Target our own origin (the parent serves /map/ from the same host).
+  // Falls back to '*' only when origin is unavailable (sandboxed iframes,
+  // file:// schemes); never uses '*' as the default.
   function postToParent(msg) {
-    try { window.parent.postMessage(msg, '*'); } catch (e) { /* cross-origin */ }
+    try {
+      window.parent.postMessage(msg, window.location.origin);
+    } catch (e) {
+      try { window.parent.postMessage(msg, '*'); } catch (_) { /* cross-origin */ }
+    }
   }
 
   function reply(rid, payload) {

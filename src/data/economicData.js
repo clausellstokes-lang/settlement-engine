@@ -488,21 +488,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "dock repair"
         ]
       },
-      "Major port": {
-        resources: [
-          "shipbuilding_timber",
-          "managed_forest"
-        ],
-        label: "Timber",
-        detail: "timber for port maintenance and shipbuilding",
-        svcs: [
-          "large vessel berthing",
-          "cargo handling",
-          "ship repair",
-          "shipbuilding"
-        ]
-      },
-      "Navy (if coastal)": {
+            "Navy (if coastal)": {
         resources: [
           "shipbuilding_timber",
           "managed_forest",

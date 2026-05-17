@@ -7,7 +7,8 @@
  * All generator functions have been extracted to their own modules.
  */
 
-import {TIER_ORDER, POPULATION_RANGES, getMagicLevel, chance, pick, randInt, popToTier, TOWN_PLUS_TIERS} from '../data/constants.js';
+import {TIER_ORDER, POPULATION_RANGES, getMagicLevel, popToTier, TOWN_PLUS_TIERS} from '../data/constants.js';
+import {chance, pick, randInt} from './rngContext.js';
 import {extractNeighbourProfile, getNeighbourEconomicBias, getNeighbourGovernmentBias, getNeighbourFactionBias, getMirrorFactionLabel, getOpposeFactionLabel} from './neighbourGenerator.js';
 import {applyTeleportationInfrastructure, applySubsistenceMode, stripArcaneInstitutions} from './isolationGenerator.js';
 import {institutionalCatalog} from '../data/institutionalCatalog.js';

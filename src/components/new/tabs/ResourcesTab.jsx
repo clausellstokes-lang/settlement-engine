@@ -123,7 +123,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           const allRes = [...(r?.config?.nearbyResources || [])].sort();
           const depleted = [...(r?.config?.nearbyResourcesDepleted || [])].sort();
           const abundant = allRes.filter(rk => !depleted.includes(rk));
-          const fmtKey = rk => rk.replace(/_/g,' ').replace(/./g,c=>c.toUpperCase());
+          const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
           return <>
             {depleted.length>0&&<div style={{marginBottom:8}}>
               <div style={{fontSize:10,fontWeight:700,color:'#c05000',letterSpacing:'0.06em',marginBottom:4}}> DEPLETED — consumed locally, export potential reduced</div>

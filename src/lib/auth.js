@@ -133,6 +133,39 @@ async function supabaseResetPassword(email) {
   if (error) throw error;
 }
 
+/**
+ * Magic-link / OTP sign-in. Sends a one-time link to the user's email;
+ * clicking it completes auth without a password. WCAG 2.2 SC 3.3.8
+ * (Accessible Authentication, Minimum) explicitly disallows requiring
+ * a cognitive function test like password recall — magic link
+ * satisfies that without compromising security.
+ *
+ * Same `auth.signInWithOtp` call as the standard Supabase pattern;
+ * we constrain the redirect to our own origin to satisfy the
+ * Supabase redirect-allowlist requirement.
+ */
+async function supabaseSignInWithMagicLink(email) {
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      // Restrict to our own origin so a stolen link can't redirect
+      // a user into an attacker-controlled callback.
+      emailRedirectTo: `${window.location.origin}`,
+      shouldCreateUser: true,  // sign up + sign in are unified
+    },
+  });
+  if (error) throw error;
+  // No session yet — completion happens when the user clicks the link
+  // and Supabase's onAuthStateChange fires.
+  return { sentTo: email };
+}
+
+/** Mock equivalent for local-dev mode. Pretends success after 200ms. */
+async function mockSignInWithMagicLink(email) {
+  await new Promise(r => setTimeout(r, 200));
+  return { sentTo: email };
+}
+
 async function supabaseUpdatePassword(newPassword) {
   const { error } = await supabase.auth.updateUser({ password: newPassword });
   if (error) throw error;
@@ -232,6 +265,7 @@ function mockOnAuthChange() {
 export const auth = {
   signUp:             isConfigured ? supabaseSignUp             : mockSignUp,
   signIn:             isConfigured ? supabaseSignIn              : mockSignIn,
+  signInWithMagicLink:isConfigured ? supabaseSignInWithMagicLink : mockSignInWithMagicLink,
   signOut:            isConfigured ? supabaseSignOut             : mockSignOut,
   getSession:         isConfigured ? supabaseGetSession          : mockGetSession,
   resetPassword:      isConfigured ? supabaseResetPassword       : mockResetPassword,

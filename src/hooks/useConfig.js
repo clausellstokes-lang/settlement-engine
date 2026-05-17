@@ -19,7 +19,10 @@ const DEFAULT_CONFIG = {
   selectedStresses:      [],
   selectedStressesRandom: true,
   customName:            '',
-  magicExists:           true,   // false = no-magic mode (hides magic slider, arcane archetypes, magical node)
+  // Duplicate `magicExists: true` (was also declared at line 14) was
+  // silently overwriting itself with the same value via JS object
+  // literal semantics. Removed 2026-04 after ESLint no-dupe-keys
+  // caught it. The earlier declaration is the canonical one.
 };
 
 export default function useConfig() {

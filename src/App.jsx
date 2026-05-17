@@ -34,6 +34,7 @@ const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
 const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
 
 import OnboardingCoach from './components/OnboardingCoach.jsx';
+import OnboardingChecklist from './components/onboarding/OnboardingChecklist.jsx';
 
 const NAV = [
   { id: 'generate',    label: 'Create',      Icon: MapPin },
@@ -255,6 +256,16 @@ export default function App() {
         {/* ── Main content ────────────────────────────────────── */}
         <main style={{ flex: 1, overflowY: 'auto', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
           {view === 'generate' && <OnboardingCoach />}
+          {/* Audit's onboarding fix: a 4-step task checklist that auto-
+              ticks itself as the user completes lifecycle milestones
+              (generate → save → canonize → event → export). Mounts on
+              the two views where users actually live; auto-hides when
+              all steps are complete or the user dismisses it. */}
+          {(view === 'generate' || view === 'settlements') && (
+            <div style={{ marginBottom: SP.md }}>
+              <OnboardingChecklist />
+            </div>
+          )}
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} />}

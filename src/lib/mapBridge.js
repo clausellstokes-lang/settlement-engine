@@ -64,6 +64,17 @@ export function createMapBridge(getIframe, opts = {}) {
     if (!data || typeof data !== 'object') return;
     const { type, _rid, _error } = data;
 
+    // Origin check: the FMG iframe is served from our own origin
+    // (/map/index.html), so any fmg:* message claiming to come from
+    // elsewhere is a third-party trying to talk to us. Drop it.
+    if (event.origin !== window.location.origin) return;
+
+    // Source check: even within our own origin, only accept messages
+    // from the iframe we created. Stops sibling iframes / popups from
+    // injecting bridge events.
+    const iframe = getIframe?.();
+    if (iframe?.contentWindow && event.source !== iframe.contentWindow) return;
+
     // Ignore messages not meant for us — anything that doesn't start with
     // `fmg:` is someone else's concern.
     if (typeof type !== 'string' || !type.startsWith('fmg:')) return;
@@ -106,7 +117,12 @@ export function createMapBridge(getIframe, opts = {}) {
       return false;
     }
     try {
-      iframe.contentWindow.postMessage(msg, '*');
+      // Target our own origin specifically — never `'*'`. The iframe is
+      // served from `/map/` on the same origin as the parent, so this is
+      // both correct and the safest possible target. With `'*'`, any
+      // future change that swaps the iframe for a cross-origin one would
+      // silently leak our messages to whatever happened to land there.
+      iframe.contentWindow.postMessage(msg, window.location.origin);
       return true;
     } catch (e) {
       console.warn('mapBridge.send failed:', e);

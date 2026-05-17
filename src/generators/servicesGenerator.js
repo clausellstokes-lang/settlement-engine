@@ -1,5 +1,9 @@
 import { random as _rng } from './rngContext.js';
-import { isSaltPreserved } from './economicGenerator.js';
+// `priorityToCategory` was being referenced at lines 302, 303, 377, 399
+// without being imported — a latent ReferenceError waiting on the right
+// code path. Caught by ESLint no-undef once we wired the lint gate.
+// Originally defined and exported from economicGenerator.js:959.
+import { isSaltPreserved, priorityToCategory } from './economicGenerator.js';
 import {
   chance,
   getInstFlags,
@@ -75,20 +79,20 @@ const getTierConstraints = (r, s, o, d) => {
               ? 'the neighbours'
               : 'the guard';
   return r
-    .replace(/the garrison commander/gi, h.replace(/^the /, 'the ') + "'s commander")
-    .replace(/the garrison/gi, h)
-    .replace(/the public watch/gi, b)
-    .replace(/the watch/gi, b)
-    .replace(/the council/gi, g)
-    .replace(/a council/gi, g)
-    .replace(/council meetings/gi, g.replace(/^the /, '') + ' meetings')
-    .replace(/inside the council/gi, 'inside ' + g)
-    .replace(/the grain merchants/gi, w)
-    .replace(/grain merchants/gi, w)
-    .replace(/two healers/gi, 'two ' + p.replace(/^the /, ''))
-    .replace(/the healers/gi, p)
+    .replace(/\bthe garrison commander\b/gi, h.replace(/^the /, 'the ') + "'s commander")
+    .replace(/\bthe garrison\b/gi, h)
+    .replace(/\bthe public watch\b/gi, b)
+    .replace(/\bthe watch\b/gi, b)
+    .replace(/\bthe council\b/gi, g)
+    .replace(/\ba council\b/gi, g)
+    .replace(/\bcouncil meetings\b/gi, g.replace(/^the /, '') + ' meetings')
+    .replace(/\binside the council\b/gi, 'inside ' + g)
+    .replace(/\bthe grain merchants\b/gi, w)
+    .replace(/\bgrain merchants\b/gi, w)
+    .replace(/\btwo healers\b/gi, 'two ' + p.replace(/^the /, ''))
+    .replace(/\bthe healers\b/gi, p)
     .replace(
-      /the mages' quarter/gi,
+      /\bthe mages' quarter\b/gi,
       l('wizard') || l('mage') || l('alchemist') ? "the mages' quarter" : 'the arcane practitioners'
     );
 };

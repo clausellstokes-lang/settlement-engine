@@ -66,6 +66,19 @@ function FactionBar({ factions }) {
   );
 }
 
+// ── Situation tile ────────────────────────────────────────────────────────────
+// Extracted to module scope so React Compiler can memoize it cleanly.
+// Used as <SitTile/> in the SITUATION ROW below.
+function SitTile({ icon, label, value, color, sub }) {
+  return (
+    <div style={{flex:1,minWidth:0,background:'#faf8f4',border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px'}}>
+      <div style={{fontSize:10,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{icon} {label}</div>
+      <div style={{fontSize:12,fontWeight:700,color:ink,lineHeight:1.3,marginBottom:sub?2:0}}>{value}</div>
+      {sub&&<div style={{fontSize:10,color:muted,lineHeight:1.3}}>{sub}</div>}
+    </div>
+  );
+}
+
 // ── Main component ────────────────────────────────────────────────────────────
 function SummaryTab({ settlement:r }) {
   const [copied,setCopied]=useState(false);
@@ -118,15 +131,6 @@ function SummaryTab({ settlement:r }) {
     navigator.clipboard?.writeText(lines);
     setCopied(true); setTimeout(()=>setCopied(false),2000);
   };
-
-  // Situation tile helper
-  const SitTile=({icon,label,value,color,sub})=>(
-    <div style={{flex:1,minWidth:0,background:'#faf8f4',border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px'}}>
-      <div style={{fontSize:10,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{icon} {label}</div>
-      <div style={{fontSize:12,fontWeight:700,color:ink,lineHeight:1.3,marginBottom:sub?2:0}}>{value}</div>
-      {sub&&<div style={{fontSize:10,color:muted,lineHeight:1.3}}>{sub}</div>}
-    </div>
-  );
 
   // Economy situation tile values
   const ecoTileColor=eco.prosperity==='Thriving'||eco.prosperity==='Prosperous'?'#1a5a28':eco.prosperity==='Struggling'||eco.prosperity==='Poor'||eco.prosperity==='Impoverished'?'#8b1a1a':'#a0762a';

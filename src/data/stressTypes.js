@@ -1,3 +1,10 @@
+// @ts-nocheck — legacy data file with implicit globals (getInstFlags
+// is supplied by helpers.js at runtime). Excluded from type-checking
+// until the stress-types module is normalized to explicit imports.
+/* eslint-disable no-undef -- getInstFlags is detected at runtime via
+   typeof check (the closures use `typeof getInstFlags == "function"`
+   to gracefully no-op when it's not bound). Stress-type refactor will
+   make the import explicit. */
 import { random as _rng } from "../generators/rngContext.js";
 // stressTypes.js — extracted from bundle
 // De-minified from original minified identifiers

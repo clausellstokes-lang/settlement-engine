@@ -101,6 +101,15 @@ export const createMapSlice = (set, get) => ({
   mapLoading: true,
   mapError: null,
 
+  // Monotonic counter bumped whenever the underlying FMG geography changes
+  // (snapshot loaded, world regenerated). Derived layers — RoadsLayer,
+  // RelationshipEdges, ChainEdges — include this in their effect deps so
+  // their A* / coordinate caches recompute against the new world even when
+  // placements themselves are unchanged. Without this, loading a saved map
+  // shows stale routes from the previously-rendered world until the user
+  // perturbs a placement.
+  geometryVersion: 0,
+
   // UI state
   mapMode: MAP_MODES.VIEW,
   terrainTool: null,          // one of TERRAIN_TOOLS when mapMode === TERRAIN
@@ -286,6 +295,16 @@ export const createMapSlice = (set, get) => ({
     if (seed != null) state.mapState.seed = seed;
   }),
 
+  /**
+   * Bump the geometry-version counter. Called by WorldMap.jsx after a fresh
+   * FMG snapshot has been loaded, the world has been regenerated, or the
+   * map has been deselected — anything that invalidates A*-routed road
+   * polylines whose coordinates were computed against the previous geometry.
+   */
+  bumpGeometryVersion: () => set(state => {
+    state.geometryVersion = (state.geometryVersion || 0) + 1;
+  }),
+
   // ── Wholesale state swap (campaign load) ──────────────────────────────────
   /**
    * Replace the full mapState with a new one (typically from a loaded campaign).
@@ -371,7 +390,7 @@ export const createMapSlice = (set, get) => ({
   burgToConfig: (burg) => {
     if (!burg) return null;
     const pop = burg.population || 500;
-    let settType = 'village';
+    let settType;
     if (pop <= 60)        settType = 'thorp';
     else if (pop <= 240)  settType = 'hamlet';
     else if (pop <= 900)  settType = 'village';

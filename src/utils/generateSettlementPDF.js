@@ -23,6 +23,17 @@ export async function generateSettlementPDF(settlement, options = {}) {
     aiSettlement = null,
     aiDailyLife = null,
     narrativeMode = false,
+    // Campaign-state engine extras — when present, the PDF emits the
+    // SystemStateSnapshot chapter (always) and the Timeline chapter
+    // (canon mode only). Optional; PDFs from before this feature still
+    // render cleanly without them.
+    systemState = null,
+    eventLog = [],
+    phase = 'draft',
+    // Audit recommendation: three export variants. Default preserves
+    // the previous behavior so any pre-existing caller gets the same
+    // PDF it always got.
+    variant = 'canon_dossier',
   } = options;
 
   const doc = React.createElement(SettlementPDF, {
@@ -30,6 +41,10 @@ export async function generateSettlementPDF(settlement, options = {}) {
     aiSettlement,
     aiDailyLife,
     narrativeMode,
+    systemState,
+    eventLog,
+    phase,
+    variant,
   });
 
   const blob = await pdf(doc).toBlob();

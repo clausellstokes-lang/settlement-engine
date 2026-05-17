@@ -10,15 +10,17 @@
  * What remains:
  *   • Heightmap — opens FMG's heightmap editor (works from a toolbar because
  *                 editHeightmap defensively defaults its options arg).
- *   • Biomes    — toggles the visibility of the biomes SVG layer. Wired to
- *                 mapState.layers.nativeBiomes via the standard layer-toggle
- *                 path in WorldMap.jsx, so a second click cleanly hides what
- *                 the first click revealed.
+ *   • Biomes    — split control: the main button toggles the visibility of
+ *                 the biomes SVG layer; the adjacent pencil opens FMG's
+ *                 native biomes editor (editBiomes) so users can repaint
+ *                 biome regions even while the layer is on. Toggle is wired
+ *                 to mapState.layers.nativeBiomes via the standard layer-
+ *                 toggle path in WorldMap.jsx.
  *   • Undo / Redo — passed through to FMG's history.
  */
 
 import React from 'react';
-import { Mountain, Trees as TreesIcon, Undo2, Redo2, Info } from 'lucide-react';
+import { Mountain, Trees as TreesIcon, Undo2, Redo2, Info, Pencil } from 'lucide-react';
 import { useStore } from '../../store';
 import { TERRAIN_TOOLS } from '../../store/mapSlice.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R } from '../theme.js';
@@ -47,6 +49,21 @@ export default function TerrainToolbar({ bridgeRef }) {
     toggleLayer('nativeBiomes');
   }
 
+  // Open FMG's native biomes editor dialog. Available as a separate
+  // affordance (the pencil button next to Biomes) so users can toggle
+  // visibility without losing the ability to edit, and vice versa.
+  async function editBiomes() {
+    const bridge = bridgeRef?.current;
+    if (!bridge?.isReady) return;
+    // Make sure the layer is on first — editing a hidden layer is confusing.
+    if (!nativeBiomes) toggleLayer('nativeBiomes');
+    try {
+      await bridge.activateTool('biomes');
+    } catch (err) {
+      console.warn('[TerrainToolbar] biomes editor failed', err);
+    }
+  }
+
   async function undo() {
     const bridge = bridgeRef?.current;
     if (!bridge?.isReady) return;
@@ -72,13 +89,37 @@ export default function TerrainToolbar({ bridgeRef }) {
         label="Heightmap"
         title="Open FMG's heightmap editor — paint terrain elevation."
       />
-      <ToolButton
-        active={!!nativeBiomes}
-        onClick={toggleBiomes}
-        Icon={TreesIcon}
-        label={nativeBiomes ? 'Hide Biomes' : 'Show Biomes'}
-        title="Toggle the biomes overlay on or off. Click again to reverse."
-      />
+      <div style={{ display: 'flex', alignItems: 'stretch', gap: 0 }}>
+        <ToolButton
+          active={!!nativeBiomes}
+          onClick={toggleBiomes}
+          Icon={TreesIcon}
+          label={nativeBiomes ? 'Hide Biomes' : 'Show Biomes'}
+          title="Toggle the biomes overlay on or off. Click again to reverse."
+          attached="right"
+        />
+        <button
+          onClick={editBiomes}
+          title="Open FMG's biomes editor — repaint biome regions or change classification."
+          style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '0 8px',
+            background: nativeBiomes ? GOLD_BG : CARD,
+            // Long-hand borders so React doesn't conflict-warn between
+            // `border` shorthand and `borderLeft: none` longhand.
+            borderTop:    `1px solid ${nativeBiomes ? GOLD : BORDER}`,
+            borderRight:  `1px solid ${nativeBiomes ? GOLD : BORDER}`,
+            borderBottom: `1px solid ${nativeBiomes ? GOLD : BORDER}`,
+            borderLeft:   'none',
+            borderTopRightRadius: R.sm,
+            borderBottomRightRadius: R.sm,
+            color: nativeBiomes ? INK : SECOND,
+            cursor: 'pointer',
+          }}
+        >
+          <Pencil size={12} />
+        </button>
+      </div>
 
       <div style={{ width: 1, height: 24, background: BORDER2 }} />
 
@@ -106,7 +147,13 @@ export default function TerrainToolbar({ bridgeRef }) {
   );
 }
 
-function ToolButton({ active, onClick, Icon, label, title }) {
+function ToolButton({ active, onClick, Icon, label, title, attached }) {
+  // `attached="right"` flattens the right side so the button can dock against
+  // a sibling (the biomes-editor pencil) without a visible seam between them.
+  const radiusStyle = attached === 'right'
+    ? { borderTopLeftRadius: R.sm, borderBottomLeftRadius: R.sm,
+        borderTopRightRadius: 0, borderBottomRightRadius: 0 }
+    : { borderRadius: R.sm };
   return (
     <button
       onClick={onClick}
@@ -116,7 +163,7 @@ function ToolButton({ active, onClick, Icon, label, title }) {
         padding: '6px 12px',
         background: active ? GOLD_BG : CARD,
         border: `1px solid ${active ? GOLD : BORDER}`,
-        borderRadius: R.sm,
+        ...radiusStyle,
         color: active ? INK : SECOND,
         fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
       }}

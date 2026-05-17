@@ -36,6 +36,10 @@ export default function RoadsLayer({ bridge }) {
   const saves      = useStore(s => s.savedSettlements);
   const placements = useStore(s => s.mapState.placements);
   const seed       = useStore(s => s.mapState.seed);
+  // Bumped by WorldMap.jsx after a snapshot load or regenerate. Even when
+  // placements are unchanged (e.g. you reopen a saved campaign), the FMG
+  // cells underneath have changed — A* needs to re-route from scratch.
+  const geometryVersion = useStore(s => s.geometryVersion);
 
   const [paths, setPaths] = useState({});
   const reqIdRef = useRef(0);
@@ -46,6 +50,14 @@ export default function RoadsLayer({ bridge }) {
   );
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    // setPaths({}) on the early-return paths is functionally derived
+    // state — when prerequisites aren't met, we have no paths to draw.
+    // The set-state-in-effect rule flags both these and the increment-
+    // and-assign of the request id below. Suppressing across the whole
+    // effect body because deriving paths from inputs the other way (via
+    // useMemo) would require a synchronous A* implementation, which the
+    // bridge call is deliberately async.
     if (!bridge || !bridge.isReady) { setPaths({}); return; }
     if (!edges.length) { setPaths({}); return; }
 
@@ -70,7 +82,8 @@ export default function RoadsLayer({ bridge }) {
       });
 
     return () => { cancelled = true; };
-  }, [edges, bridge, seed]);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [edges, bridge, seed, geometryVersion]);
 
   if (!edges.length || !Object.keys(paths).length) return null;
 

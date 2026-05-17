@@ -1,8 +1,12 @@
 /**
  * selectors.js — Derived/computed selectors for the Zustand store.
  *
- * These replace the useMemo computations that lived in useSettlementGeneration.
  * Components use: const catalog = useStore(selectCurrentCatalog);
+ *
+ * Bundle note: this file imports catalog lookups from `generators/lookups.js`
+ * (not `engine.js`) so the synchronous first-paint graph does not pull
+ * in the generator pipeline. The heavy pipeline is dynamic-imported from
+ * settlementSlice's loadEngine().
  */
 
 import {
@@ -11,7 +15,7 @@ import {
   getInstitutionsForTier,
   getTierOrder,
   getPopulationRanges,
-} from '../generators/engine.js';
+} from '../generators/lookups.js';
 import { filterCatalogForMagic } from '../components/magicFilter.js';
 
 const TIER_ORDER        = getTierOrder();

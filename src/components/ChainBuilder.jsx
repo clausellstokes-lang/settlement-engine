@@ -1,6 +1,16 @@
 /**
  * ChainBuilder.jsx — Supply chain builder & editor.
  *
+ * STATUS: INACTIVE (as of 2026-04). This component is fully implemented
+ * but currently NOT imported anywhere. It was the body of the (now-
+ * removed) "Chains" top-level tab; per the active refactor plan
+ * (`~/.claude/plans/golden-greeting-codd.md`), Phase D will absorb
+ * its surface area into Workshop.jsx as a sub-section of the new
+ * "Custom Generate" mode (premium-gated).
+ *
+ * Do not delete. If Phase D is cancelled or rescoped, retire this in
+ * one PR rather than letting it rot here.
+ *
  * Visual editor for creating, editing, and managing supply chain
  * definitions that drive the map overlay system. Users can:
  *   - View all built-in chains (CHAIN_DEFS) at a glance
@@ -625,6 +635,10 @@ export default function ChainBuilder() {
   const handleDuplicate = (chain) => {
     const copy = {
       ...chain,
+      // Date.now() in a click handler — the rule sees this function defined
+      // during render and flags Date.now() as impure. It only runs on user
+      // click (outside render), so the rule is over-broad here.
+      // eslint-disable-next-line react-hooks/purity
       id: `custom_${Date.now()}`,
       name: `${chain.name} (Copy)`,
       isCustom: true,

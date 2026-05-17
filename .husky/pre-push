@@ -1,0 +1,7 @@
+# Pre-push: full check before code leaves the local machine.
+# Same gate CI runs (validate:data → typecheck → lint → tests → build).
+# Slow (~30s) but catches everything before pushing — saves CI round-trips.
+#
+# To skip in an emergency: git push --no-verify
+# (but only when you've already run `npm run check` locally and it passed).
+npm run check

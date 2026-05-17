@@ -6,6 +6,40 @@ import {isMobile} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
 
+// ── Module-scope helper components ─────────────────────────────────────
+// React Hooks plugin v7 flags components defined inside render functions
+// because each render creates a new component identity, defeating
+// memoization and breaking React Compiler's optimization assumptions.
+// Extracting these two (ScoreRow, StatusTag) to module scope resolves
+// 9 react-hooks/static-components errors. Both are purely presentational
+// and have no closure dependency on OverviewTab state beyond their
+// props, so the lift is mechanical.
+
+function ScoreRow({ label, score, icon }) {
+  const n = Math.min(100, Math.max(0, score || 0));
+  const c = n >= 70 ? '#1a5a28' : n >= 45 ? '#a0762a' : n >= 25 ? '#8a4010' : '#8b1a1a';
+  return (
+    <div style={{ marginBottom: 8 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 3 }}>
+        <span style={{ fontSize: 11, color: '#3d2b1a', fontWeight: 600 }}>{icon} {label}</span>
+        <span style={{ fontSize: 11, fontWeight: 700, color: c }}>{Math.round(n)}</span>
+      </div>
+      <div style={{ height: 6, background: '#e8dcc8', borderRadius: 3, overflow: 'hidden' }}>
+        <div style={{ height: '100%', width: `${n}%`, background: c, borderRadius: 3, transition: 'width 0.4s' }} />
+      </div>
+    </div>
+  );
+}
+
+function StatusTag({ label, value, color, accent }) {
+  return (
+    <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, borderRadius: 6, padding: '7px 10px', minWidth: 0 }}>
+      <div style={{ fontSize: 9, fontWeight: 700, color: accent || '#6b5340', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>{label}</div>
+      <div style={{ fontSize: 12, fontWeight: 700, color: '#1c1409', lineHeight: 1.3 }}>{value || '—'}</div>
+    </div>
+  );
+}
+
 export function OverviewTab({ settlement:r, narrativeNote}) {
   const [instOpen, setInstOpen] = useState(false);
   const [spatialOpen, setSpatialOpen] = useState(false);
@@ -23,36 +57,18 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
   const stresses = (Array.isArray(r.stress) ? r.stress : r.stress ? [r.stress] : []).filter(Boolean);
   const foodBal = via.metrics?.foodBalance;
 
-  // Institution layout
-  const byCategory = r.institutions.reduce((acc,m)=>((acc[m.category]=acc[m.category]||[]).push(m),acc),{});
+  // Institution layout — guard `r.institutions` because sparse saves
+  // (mid-migration, partial gen) can land here without an institutions
+  // array. The smoke test in tests/ui/tabs.smoke.test.js caught this.
+  const byCategory = (r.institutions || []).reduce((acc,m)=>((acc[m.category]=acc[m.category]||[]).push(m),acc),{});
   const catOrder = ['government','military','economy','religious','magic','criminal','other'];
   const catColors2 = {government:'#2a3a7a',military:'#8b1a1a',economy:'#a0762a',religious:'#1a5a28',magic:'#5a2a8a',criminal:'#4a1a4a',other:'#5a4a2a',Essential:'#6b5340',Crafts:'#7a4a1a',Infrastructure:'#1a4a5a',Defense:'#8b1a1a',Entertainment:'#7a1a5a',Adventuring:'#1a5a3a'};
   const getCatColor = c => catColors2[c] || '#6b5340';
 
-  // Score bar inline helper
-  const ScoreRow = ({label,score,icon}) => {
-    const n = Math.min(100,Math.max(0,score||0));
-    const c = n>=70?'#1a5a28':n>=45?'#a0762a':n>=25?'#8a4010':'#8b1a1a';
-    return (
-      <div style={{marginBottom:8}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
-          <span style={{fontSize:11,color:'#3d2b1a',fontWeight:600}}>{icon} {label}</span>
-          <span style={{fontSize:11,fontWeight:700,color:c}}>{Math.round(n)}</span>
-        </div>
-        <div style={{height:6,background:'#e8dcc8',borderRadius:3,overflow:'hidden'}}>
-          <div style={{height:'100%',width:`${n}%`,background:c,borderRadius:3,transition:'width 0.4s'}}/>
-        </div>
-      </div>
-    );
-  };
-
-  // System status tag
-  const StatusTag = ({label,value,color,accent}) => (
-    <div style={{flex:'1 1 130px',background:accent?`${accent}0d`:'#faf8f4',border:`1px solid ${accent?`${accent}35`:'#e0d0b0'}`,borderLeft:`3px solid ${accent||'#c8b89a'}`,borderRadius:6,padding:'7px 10px',minWidth:0}}>
-      <div style={{fontSize:9,fontWeight:700,color:accent||'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:3}}>{label}</div>
-      <div style={{fontSize:12,fontWeight:700,color:'#1c1409',lineHeight:1.3}}>{value||'—'}</div>
-    </div>
-  );
+  // ScoreRow and StatusTag are defined at module scope above. Lifting
+  // them out of the render function (was here originally) fixed 9
+  // react-hooks/static-components errors and gives React Compiler the
+  // identity stability it expects.
 
   return (
     <div>
@@ -146,7 +162,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
       {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}
       {(hist.currentTensions?.length>0||(r.conflicts||[]).length>0)&&<Section title="Tensions & Conflicts" collapsible defaultOpen accent="#b8860b">
         {hist.currentTensions?.map((t,i)=>(
-          <div key={i} style={{display:'flex',gap:8,marginBottom:6,paddingBottom:6,borderBottom:i<hist.currentTensions.length-1||(r.conflicts||[]).length>0?'1px solid #e8d080':'none'}}>
+          <div key={i} style={{display:'flex',gap:8,marginBottom:6,paddingBottom:6,borderBottom:i<(hist.currentTensions?.length||0)-1||(r.conflicts||[]).length>0?'1px solid #e8d080':'none'}}>
             <span style={{fontSize:12,flexShrink:0,marginTop:1,color:'#b8860b'}}>▸</span>
             <div>
               <p style={{fontSize:13,color:'#3d2b1a',lineHeight:1.45,margin:0}}>{typeof t==='object'?t.description:t}</p>
@@ -267,7 +283,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         <button onClick={()=>setInstOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <div style={{display:'flex',alignItems:'center',gap:10}}>
             <span style={{fontSize:11,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
-            <span style={{fontSize:11,color:'#9c8068'}}>{r.institutions.length} total</span>
+            <span style={{fontSize:11,color:'#9c8068'}}>{(r.institutions||[]).length} total</span>
           </div>
           <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap',justifyContent:'flex-end'}}>
             {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(0,5).map(([cat,insts])=>(

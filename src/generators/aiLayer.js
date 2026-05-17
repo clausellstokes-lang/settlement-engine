@@ -257,7 +257,7 @@ export async function runAiLayer(settlement, onProgress) {
   try {
     parsed = JSON.parse(clean);
   } catch (e) {
-    throw new Error('AI returned invalid JSON — try again');
+    throw new Error('AI returned invalid JSON — try again', { cause: e });
   }
 
   // Validate structure

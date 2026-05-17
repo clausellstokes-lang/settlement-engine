@@ -127,6 +127,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
   const authSignIn = useStore(s => s.authSignIn);
   const authSignOut = useStore(s => s.authSignOut);
   const authResetPassword = useStore(s => s.authResetPassword);
+  const authMagicLink = useStore(s => s.authMagicLink);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const creditBalance = useStore(s => s.creditBalance);
   const isElevated  = useStore(s => s.isElevated());
@@ -138,6 +139,10 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  // Auth method: magic-link is the default (WCAG 2.2 SC 3.3.8 prefers
+  // it; conversion is also better). Users can switch to legacy password
+  // via the toggle below — useful for password-managed accounts.
+  const [authMethod, setAuthMethod] = useState('magic');  // 'magic' | 'password'
 
   const handleSignIn = async () => {
     if (!email.trim() || !password) return;
@@ -186,12 +191,37 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
     }
   };
 
+  /**
+   * Magic link sign-in: user enters email, gets a link, clicks it,
+   * Supabase's onAuthStateChange completes auth. We only need to send
+   * the email and surface a "check your inbox" confirmation.
+   */
+  const handleMagicLink = async () => {
+    if (!email.trim()) { setError('Enter your email address'); return; }
+    setError(null);
+    setLoading(true);
+    try {
+      await authMagicLink(email.trim());
+      setMessage(`Check ${email.trim()} for a sign-in link. The link works for 1 hour.`);
+    } catch (e) {
+      setError(e.message || 'Could not send sign-in link');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSignOut = async () => {
     await authSignOut();
     onClose();
   };
 
-  const submit = view === 'signup' ? handleSignUp : handleSignIn;
+  // Submit dispatches based on (view, authMethod). Sign-in via magic
+  // link is one click; sign-up via magic link still creates the user
+  // (Supabase signInWithOtp has shouldCreateUser:true). Password mode
+  // keeps the existing dual sign-in / sign-up paths.
+  const submit = authMethod === 'magic'
+    ? handleMagicLink
+    : view === 'signup' ? handleSignUp : handleSignIn;
   const onEnter = (e) => { if (e.key === 'Enter') submit(); };
 
   return (
@@ -283,18 +313,23 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
               </div>
 
               <p style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
-                {view === 'signup'
-                  ? 'Create a free account to unlock all settlement tiers, save up to 10 settlements, and access the full toolset.'
-                  : 'Sign in to your account to access your saved settlements and settings.'}
+                {authMethod === 'magic'
+                  ? 'Enter your email — we’ll send you a one-time sign-in link. No password required.'
+                  : (view === 'signup'
+                      ? 'Create a free account to unlock all settlement tiers, save up to 10 settlements, and access the full toolset.'
+                      : 'Sign in to your account to access your saved settlements and settings.')}
               </p>
 
               {error && <Alert type="error">{error}</Alert>}
+              {message && <Alert type="success">{message}</Alert>}
 
               <Input type="email" placeholder="Email address" value={email} onChange={setEmail} onKeyDown={onEnter} />
-              <Input type="password" placeholder="Password" value={password} onChange={setPassword} onKeyDown={onEnter} />
+              {authMethod === 'password' && (
+                <Input type="password" placeholder="Password" value={password} onChange={setPassword} onKeyDown={onEnter} />
+              )}
 
-              {/* Remember Me checkbox — only on sign in */}
-              {view === 'signin' && (
+              {/* Remember Me checkbox — only on password sign in */}
+              {authMethod === 'password' && view === 'signin' && (
                 <Checkbox
                   checked={rememberMe}
                   onChange={setRememberMe}
@@ -303,10 +338,24 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
               )}
 
               <Button onClick={submit} disabled={loading}>
-                {loading ? 'Working...' : view === 'signup' ? 'Create Account' : 'Sign In'}
+                {loading
+                  ? 'Working...'
+                  : authMethod === 'magic'
+                    ? 'Send Sign-In Link'
+                    : (view === 'signup' ? 'Create Account' : 'Sign In')}
               </Button>
 
-              {view === 'signin' && (
+              {/* Method toggle — magic link is the default; password
+                  remains available for users who prefer it. */}
+              <button
+                type="button"
+                onClick={() => { setAuthMethod(m => m === 'magic' ? 'password' : 'magic'); setError(null); setMessage(null); }}
+                style={{ background:'none', border:'none', color:GOLD, fontSize:FS.xs, cursor:'pointer', fontFamily:sans, textAlign:'center' }}
+              >
+                {authMethod === 'magic' ? 'Use a password instead' : 'Use a sign-in link instead (recommended)'}
+              </button>
+
+              {authMethod === 'password' && view === 'signin' && (
                 <button onClick={() => { setView('reset'); setError(null); }}
                   style={{ background: 'none', border: 'none', color: GOLD, fontSize: FS.xs, cursor: 'pointer', fontFamily: sans, textAlign: 'center' }}>
                   Forgot password?

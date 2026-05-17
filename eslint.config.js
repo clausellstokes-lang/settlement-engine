@@ -1,0 +1,120 @@
+/**
+ * ESLint v9 flat config — focused, pragmatic ruleset.
+ *
+ * Philosophy: rules earn their place by catching the bugs we've
+ * actually shipped. We don't enforce stylistic preferences (prettier's
+ * job, and we don't run prettier here) — we catch correctness issues:
+ *   - undeclared variables
+ *   - unused variables (warns, doesn't fail, because the codebase has
+ *     a lot of legitimate underscore-prefixed unused parameters)
+ *   - misuse of React hooks (rules-of-hooks + exhaustive-deps)
+ *   - duplicate object keys (the same class of bug that bit us in
+ *     src/data once; this catches it at edit time, not at build)
+ *   - missing `case` breaks in switches
+ *
+ * Scope: every JS/JSX file under src/ except the FMG fork in
+ * public/map/main.js (legacy, untouchable) and node_modules.
+ *
+ * Severity bias: real correctness issues are errors; everything else
+ * is a warning so the linter doesn't block work but surfaces issues.
+ */
+
+import js from '@eslint/js';
+import reactHooks from 'eslint-plugin-react-hooks';
+import globals from 'globals';
+
+// eslint-plugin-react doesn't yet support ESLint 10's flat-config
+// resolver (throws on contextOrFilename.getFilename). We drop it and
+// rely on react-hooks for the high-value rules (rules-of-hooks,
+// exhaustive-deps). Once the plugin catches up, add it back here.
+
+export default [
+  {
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'public/**',
+      '.vercel/**',
+      'supabase/.temp/**',
+      // Build / config scripts that intentionally use Node globals
+      'reformat.cjs',
+    ],
+  },
+
+  // Base rules — recommended JS rules plus our additions.
+  {
+    files: ['src/**/*.{js,jsx}', 'tests/**/*.{js,jsx}', 'scripts/**/*.{js,mjs}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: { ...globals.browser, ...globals.node, ...globals.es2024 },
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+
+      // Correctness — error severity
+      'no-dupe-keys': 'error',
+      'no-dupe-args': 'error',
+      'no-duplicate-case': 'error',
+      'no-fallthrough': 'error',
+      'no-self-assign': 'error',
+      'no-unreachable': 'error',
+      'no-constant-condition': ['error', { checkLoops: false }],
+
+      // Hooks — error severity (the exhaustive-deps warnings are the
+      // ones that catch real bugs, like the geometryVersion fix earlier)
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+
+      // React 19 strict-mode rules — forward-looking checks that flag
+      // patterns the React Compiler doesn't like (refs accessed during
+      // render, impure functions during render, components defined
+      // inside render, setState in effects, etc.). These don't cause
+      // shipped bugs today but break under React Compiler. Demoted to
+      // warnings so we see drift without blocking CI; promote to
+      // errors when adopting React Compiler.
+      'react-hooks/static-components':    'warn',
+      'react-hooks/refs':                 'warn',
+      'react-hooks/purity':               'warn',
+      'react-hooks/set-state-in-effect':  'warn',
+      'react-hooks/immutability':         'warn',
+
+      // Stylistic / pragmatic — warn so we see drift without blocking
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_?(e|err|error)$' }],
+      'no-console': 'off',     // existing codebase logs liberally; not a fight worth picking
+      'no-empty': ['warn', { allowEmptyCatch: true }],
+      'no-prototype-builtins': 'warn',
+      'no-useless-escape': 'warn',
+      'no-case-declarations': 'warn',
+    },
+  },
+
+  // Test files: looser rules. Tests use describe/test/expect globals
+  // (vitest) and frequently shadow names within nested describes.
+  {
+    files: ['tests/**/*.{js,jsx}'],
+    languageOptions: {
+      globals: { ...globals.node, ...globals.es2024 },
+    },
+    rules: {
+      'no-unused-vars': 'off',
+    },
+  },
+
+  // Node-side scripts: enable node globals, allow process/require.
+  {
+    files: ['scripts/**/*.{js,mjs,cjs}'],
+    languageOptions: {
+      globals: { ...globals.node, ...globals.es2024 },
+      sourceType: 'module',
+    },
+    rules: {
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    },
+  },
+];

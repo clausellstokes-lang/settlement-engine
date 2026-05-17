@@ -23,29 +23,73 @@
  *                   partOfChains:          [resourceChains refId, ...] }
  *
  * This module:
- *   1. Builds a registry from the live store (`useStore.getState()`) on demand
+ *   1. Builds a registry from a `customContent` blob on demand
  *   2. Indexes custom items by lowercased name for fast lookup from generators
  *      that pass institution/resource NAMES (not refIds)
  *   3. Exposes resolve helpers that convert refIds → human-readable names so
  *      legacy name-match code keeps working with custom-defined dependencies
  *
- * Usage from generators:
+ * IMPORTANT: this module is intentionally store-agnostic. The previous version
+ * imported `useStore` directly, which made the generator transitively depend
+ * on Zustand and React, blocking headless test/CI/script usage. Now the
+ * customContent source is provided by the caller — the app wires it once at
+ * init via `setCustomContentSource(getter)`, and the pipeline can pass a
+ * snapshot directly via `withCustomContent(customContent, fn)`.
+ *
+ * Usage from generators (unchanged):
  *
  *   import { customDeps } from '../lib/dependencyEngine.js';
  *   const extras = customDeps.servicesProducedBy('My Bespoke Brewery');
- *   const chains = customDeps.chainsFedByResource('Glowmoss bog');
- *   const reqName = customDeps.resolveInstitutionRequirement('custom:lu_xyz');
+ *
+ * Wiring (app init):
+ *
+ *   import { setCustomContentSource } from './lib/dependencyEngine.js';
+ *   setCustomContentSource(() => useStore.getState().customContent);
  */
 
-import { useStore } from '../store';
 import { buildRegistry, parseRefId } from './customRegistry.js';
+
+// ── Custom content source (injected) ───────────────────────────────────────
+// The generator should not import the Zustand store. Instead, the caller
+// (app at init, or pipeline per-call) tells us where to read from. Default
+// returns an empty object — generators always work, just with no custom
+// content visible.
+
+let _sourceGetter = () => ({});
+let _override = null; // for withCustomContent()
+
+/**
+ * Wire the global source. Typically called once at app startup with a
+ * function that returns the live store's customContent slice.
+ */
+export function setCustomContentSource(getter) {
+  _sourceGetter = typeof getter === 'function' ? getter : () => ({});
+  customDeps.invalidate();
+}
+
+/**
+ * Run `fn()` with `customContent` as the override source. Useful for
+ * tests, headless generation, and pipeline calls that want to pin a
+ * specific snapshot rather than read live store state.
+ */
+export function withCustomContent(customContent, fn) {
+  const prev = _override;
+  _override = customContent || {};
+  customDeps.invalidate();
+  try {
+    return fn();
+  } finally {
+    _override = prev;
+    customDeps.invalidate();
+  }
+}
 
 // ── Registry caching ────────────────────────────────────────────────────────
 // Custom content rarely changes during a single generation pass. Cache the
-// registry by (store-revision-key) so repeated calls in the same generation
-// reuse it. We use a simple counter-style key: any add/update/delete in the
-// slice bumps it via a getter on customContent itself (length sum + a hash of
-// the latest updatedAt). Cheap to compute, safe to invalidate.
+// registry by (revision-key) so repeated calls in the same generation reuse
+// it. We use a simple counter-style key: any add/update/delete in the slice
+// bumps it via a getter on customContent itself (length sum + a hash of the
+// latest updatedAt). Cheap to compute, safe to invalidate.
 
 let _registryCache = null;
 let _registryKey = null;
@@ -66,7 +110,7 @@ function currentKey(customContent) {
 }
 
 function getRegistry() {
-  const cc = useStore.getState().customContent || {};
+  const cc = (_override != null ? _override : _sourceGetter()) || {};
   const key = currentKey(cc);
   if (key === _registryKey && _registryCache) return _registryCache;
   _registryCache = buildRegistry(cc);

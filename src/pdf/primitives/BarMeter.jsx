@@ -7,6 +7,7 @@
 import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette } from '../theme.js';
+import { finite, safePct } from '../lib/format.js';
 
 export function BarMeter({
   value = 0,
@@ -16,7 +17,9 @@ export function BarMeter({
   tone = 'gold',
   height = 6,
 }) {
-  const pct = Math.max(0, Math.min(100, ((value || 0) / (max || 100)) * 100));
+  const v = finite(value, 0);
+  const m = finite(max, 100) || 100;
+  const pct = safePct((v / m) * 100);
   const fg = palette[tone] || palette.gold;
   return (
     <View style={{ marginBottom: 6 }}>

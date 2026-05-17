@@ -156,6 +156,16 @@ export default function SettlementEditor({
 }) {
   const [open, setOpen] = useState(false);
   const customContent = useStore(s => s.customContent);
+  // Audit reconciliation §5: in canon mode, direct mutations from the
+  // editor lose continuity. The user wanted post-canon edits folded into
+  // events — but a strict "no edits in canon" rule is too rigid for typo
+  // fixes and renames. We render a banner that asks the user to choose
+  // between Correction (silent edit, no timeline) and Event (canon event
+  // with consequences). The banner is informational; existing edit
+  // controls keep working unchanged for v1, with the structural-event
+  // path migrating from EventComposer over time.
+  // (`phase` is already pulled below for the existing drift-gate logic;
+  // we reuse that same selector to avoid double-subscription.)
 
   // Pending mutation awaiting the user's drift resolution. Holds enough state
   // to (a) label the change in the modal and (b) actually run the edit once
@@ -170,19 +180,79 @@ export default function SettlementEditor({
   const [priorityDraft, setPriorityDraft] = useState(null);
 
   const tier = settlement?.tier?.toLowerCase() || 'village';
-  const institutions = settlement?.institutions || [];
-  const stresses = Array.isArray(settlement?.stress) ? settlement.stress : settlement?.stress ? [settlement.stress] : [];
-  const resources = settlement?.resourceAnalysis?.availableResources || [];
-  const exports_ = settlement?.economicState?.primaryExports || [];
-  const imports_ = settlement?.economicState?.primaryImports || [];
+  // Wrap each derived array in useMemo so the reference is stable when
+  // the source slice of settlement hasn't changed. Without this, every
+  // render allocates a fresh array, and the downstream useMemo blocks
+  // that depend on these (lines ~316/350/381/420/437) recompute every
+  // render — defeating their purpose. The dependency on the specific
+  // settlement subtree (not whole settlement) is the granularity
+  // exhaustive-deps wants for a sound memoization.
+  const institutions = useMemo(
+    () => settlement?.institutions || [],
+    [settlement?.institutions],
+  );
+  const stresses = useMemo(() => {
+    const s = settlement?.stress;
+    if (Array.isArray(s)) return s;
+    if (s) return [s];
+    return [];
+  }, [settlement?.stress]);
+  const resources = useMemo(
+    () => settlement?.resourceAnalysis?.availableResources || [],
+    [settlement?.resourceAnalysis?.availableResources],
+  );
+  const exports_ = useMemo(
+    () => settlement?.economicState?.primaryExports || [],
+    [settlement?.economicState?.primaryExports],
+  );
+  const imports_ = useMemo(
+    () => settlement?.economicState?.primaryImports || [],
+    [settlement?.economicState?.primaryImports],
+  );
+
+  // Audit fix: pull canon phase off the live store so the editor can
+  // distinguish design-time edits from canon-time changes. In canon
+  // mode, the user is presented with a correction-vs-event choice
+  // before any structural edit commits — see confirmStructuralEdit.
+  const phase = useStore(s => s.phase);
+  const isCanon = phase === 'canon';
 
   // ── Drift gate ─────────────────────────────────────────────────────────────
-  // Every structural/seismic mutation flows through this helper. If the save
-  // is not narrated, or the change is cosmetic, we just run applyFn. Otherwise
-  // we park the mutation and let the modal decide.
+  // Every structural/seismic mutation flows through this helper. Two
+  // gates apply, in order:
+  //   1. Canon gate: if phase === 'canon' AND change is structural, ask
+  //      the user "is this a correction or an in-world event?" The
+  //      correction path runs applyFn unchanged. The event path
+  //      cancels — the user is directed to use the EventComposer.
+  //   2. Drift gate (existing): if the save is narrated and the change
+  //      is structural, the prior modal handles regenerate vs revert.
   const confirmStructuralEdit = (changeType, changeLabel, applyFn) => {
     const changeClass = classifyChange(changeType);
-    if (!narrated || changeClass === 'cosmetic') {
+    if (changeClass === 'cosmetic') {
+      applyFn();
+      return;
+    }
+    if (phase === 'canon') {
+      // Canon-mode prompt: bypass the structural drift modal because
+      // the user is making a higher-order decision first. Once they
+      // confirm "correction," we still hit the drift gate below.
+      const choice = window.prompt(
+        'This settlement is canon. Type C for correction (cleanup, no timeline entry) ' +
+        'or E to cancel and use the Event Composer instead.',
+        'C',
+      );
+      if (!choice) return;
+      const c = String(choice).trim().toLowerCase();
+      if (c.startsWith('e')) {
+        // Defer to the EventComposer. We can't auto-fill it because the
+        // editor doesn't know the right event type for an arbitrary
+        // structural edit — but a future revision could pre-populate it.
+        return;
+      }
+      // 'C' (or anything else) → fall through to the drift gate as a
+      // correction-mode edit.
+    }
+    if (!narrated) {
       applyFn();
       return;
     }
@@ -479,6 +549,33 @@ export default function SettlementEditor({
 
       {open && (
         <div style={{ padding:'12px 14px', display:'flex', flexDirection:'column', gap:10 }}>
+
+          {/* Canon-mode reminder. Direct mutations from this editor
+              don't appear in the campaign timeline — they're authorial
+              corrections, not in-world events. For events that should
+              propagate consequences and write a timeline entry, use the
+              Event Composer below. The audit's reconciliation §5
+              (correction vs event) made this distinction explicit; this
+              banner surfaces it to the DM at the right moment. */}
+          {isCanon && (
+            <div role="status" style={{
+              display:'flex', alignItems:'flex-start', gap:8,
+              padding:'8px 10px',
+              background:'#fff7ec',
+              border:`1px solid #e0b070`,
+              borderRadius:6,
+              fontSize:11, fontFamily:sans, color:'#7a4f0f', lineHeight:1.4,
+            }}>
+              <span style={{ fontWeight:800, letterSpacing:'0.04em', textTransform:'uppercase', color:'#7a4f0f' }}>
+                Canon
+              </span>
+              <span style={{ flex:1 }}>
+                Edits here are <strong>corrections</strong> — typo fixes, renames, cleanup.
+                They don't become timeline events. To record an in-world change with consequences
+                (death, fire, refugees, route cut), use the Event Composer below.
+              </span>
+            </div>
+          )}
 
           {/* Institutions */}
           <SubSection title="Institutions" count={institutions.length}>

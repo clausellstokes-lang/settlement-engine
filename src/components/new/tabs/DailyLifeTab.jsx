@@ -85,6 +85,10 @@ export function DailyLifeTab({ settlement: r, aiSettlement, saveId = null }) {
     setLocalLoading(true);
     setLocalError(null);
     setNarrative(null);
+    // Math.random() picks a loading message. The whole function is a
+    // button-click handler — never runs during render — so the purity
+    // rule is over-broad here.
+    // eslint-disable-next-line react-hooks/purity
     setLoadMsg(LOAD_MSGS[Math.floor(Math.random() * LOAD_MSGS.length)]);
 
     try {

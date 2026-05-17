@@ -37,7 +37,9 @@ export const getMagicLevel = (priority = 50) =>
   : priority <= 65  ? 'medium'
   : 'high';
 
-import { chance as _chance, pick as _pick, randInt as _randInt } from '../generators/rngContext.js';
-export const chance = _chance;
-export const pick = _pick;
-export const randInt = _randInt;
+// Note: `chance`, `pick`, `randInt` used to be re-exported here from
+// `../generators/rngContext.js`. That created a circular import between
+// the `data` and `engine` build chunks (`data → engine → data`), which
+// Rollup warned about and which inflated initial chunk graphs. Removed
+// 2026-04. Import these helpers directly from `generators/rngContext.js`
+// in any caller that needs them.

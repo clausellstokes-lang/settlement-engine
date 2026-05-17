@@ -131,6 +131,11 @@ export default function ServicesTogglePanel() {
       });
     });
     return { total, on, forced, excluded };
+    // getToggle is a closure over servicesToggles (already in deps) — its
+    // identity changes every render but its behavior only changes when
+    // servicesToggles does. Adding it to deps would bust the memo on
+    // every render, defeating the purpose.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [instServiceMap, servicesToggles]);
 
   const filtered = Object.fromEntries(Object.entries(

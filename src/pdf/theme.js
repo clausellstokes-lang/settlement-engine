@@ -101,23 +101,23 @@ Font.registerHyphenationCallback(word => [word]);
 // Print-tuned. Body 10pt, labels 8.5pt, page heads 28pt, cover title 56pt.
 export const type = {
   cover_title: { fontFamily: 'Lora', fontSize: 56, fontWeight: 700, lineHeight: 1.1, color: palette.ink },
-  cover_meta:  { fontFamily: 'Nunito', fontSize: 11, color: palette.muted, letterSpacing: 1.2 },
+  cover_meta:  { fontFamily: 'Nunito', fontSize: 11, color: palette.muted, letterSpacing: 0.3 },
 
   page_head:   { fontFamily: 'Lora', fontSize: 28, fontWeight: 700, color: palette.ink, lineHeight: 1.2 },
   section:     { fontFamily: 'Lora', fontSize: 18, fontWeight: 700, color: palette.ink, lineHeight: 1.25 },
-  sub:         { fontFamily: 'Nunito', fontSize: 12, fontWeight: 800, color: palette.gold, textTransform: 'uppercase', letterSpacing: 0.8 },
-  sub_alt:     { fontFamily: 'Nunito', fontSize: 11, fontWeight: 800, color: palette.muted, textTransform: 'uppercase', letterSpacing: 0.8 },
+  sub:         { fontFamily: 'Nunito', fontSize: 12, fontWeight: 800, color: palette.gold, textTransform: 'uppercase', letterSpacing: 0.3 },
+  sub_alt:     { fontFamily: 'Nunito', fontSize: 11, fontWeight: 800, color: palette.muted, textTransform: 'uppercase', letterSpacing: 0.3 },
 
   body:        { fontFamily: 'Lora', fontSize: 10, color: palette.second, lineHeight: 1.45 },
   body_em:     { fontFamily: 'Lora', fontSize: 10, color: palette.ink, fontWeight: 700, lineHeight: 1.45 },
   prose:       { fontFamily: 'Lora', fontSize: 10.5, color: palette.second, lineHeight: 1.55 },
   italic:      { fontFamily: 'Lora', fontSize: 10, color: palette.second, fontStyle: 'italic', lineHeight: 1.5 },
 
-  label:       { fontFamily: 'Nunito', fontSize: 8.5, color: palette.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.6 },
+  label:       { fontFamily: 'Nunito', fontSize: 8.5, color: palette.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.2 },
   label_em:    { fontFamily: 'Nunito', fontSize: 9.5, color: palette.ink, fontWeight: 800 },
 
   caption:     { fontFamily: 'Nunito', fontSize: 8, color: palette.muted, lineHeight: 1.35 },
-  pill:        { fontFamily: 'Nunito', fontSize: 8.5, fontWeight: 700, letterSpacing: 0.4 },
+  pill:        { fontFamily: 'Nunito', fontSize: 8.5, fontWeight: 700, letterSpacing: 0.2 },
 
   numeric_xl:  { fontFamily: 'Lora', fontSize: 28, fontWeight: 700, color: palette.ink, lineHeight: 1 },
   numeric:     { fontFamily: 'Lora', fontSize: 16, fontWeight: 700, color: palette.ink },

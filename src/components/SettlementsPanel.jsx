@@ -3,7 +3,11 @@ import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, A
 
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
 import {getAllModifiers, EFFECT_CATEGORIES, fmtMod} from '../lib/relationshipGraph.js';
-import {generateCampaignPDF} from '../utils/generateCampaignPDF.js';
+// Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
+// Lazy-load on user action so the Settlements first paint stays light —
+// users only need this code when they click "Export Campaign PDF".
+const generateCampaignPDF = (...args) =>
+  import('../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
 import {GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_} from './theme.js';
 import { useStore } from '../store/index.js';
 import { saves as savesService } from '../lib/saves.js';
@@ -297,10 +301,20 @@ export default function SettlementsPanel({ onNavigate }) {
   // navigation to this tab starts on the list.
   const pendingFocusId = useStore(s => s.selectedSettlementId);
   const clearSelectedSettlement = useStore(s => s.clearSelectedSettlementId);
+  // Store-watcher effect: opens the detail view when the world map
+  // requests a focus. setDetail-in-effect is flagged by React Compiler,
+  // but here the effect is a true side-channel (reacting to external
+  // store changes), not a render-derived sync — the correct pattern
+  // remains an effect until store integration moves to useSyncExternalStore.
+  // `detail` and `clearSelectedSettlement` are intentionally omitted
+  // from deps: we only want the effect to re-fire when an external
+  // focus request changes, not when `detail` becomes truthy (we early-
+  // return for that).
   useEffect(() => {
     if (!pendingFocusId || savesLoading || !saves.length || detail) return;
     const match = saves.find(s => s.id === pendingFocusId);
     if (match) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDetail({ ...match, saveData: match });
       clearSelectedSettlement();
     }
@@ -355,7 +369,31 @@ export default function SettlementsPanel({ onNavigate }) {
   const saveCurrentSettlement = async () => {
     if (!settlement || !canSave) return;
     const saveId = Date.now();
-    const newEntry = { id: saveId, name: settlement.name, tier: settlement.tier, timestamp: new Date().toISOString(), settlement, config, institutionToggles, categoryToggles, goodsToggles: goodsToggles||{}, servicesToggles: servicesToggles||{} };
+    // Audit fix: pull the lifecycle data off the global slice and embed
+    // it in the save record's `campaignState`. Without this, canonized
+    // settlements would lose their phase / eventLog / systemState /
+    // canonizedAt on every reload — the CRIT bug from the audit list.
+    const live = useStore.getState();
+    const campaignState = {
+      phase:        live.phase || 'draft',
+      eventLog:     live.eventLog || [],
+      systemState:  live.systemState || null,
+      locks:        live.locks || {},
+      generatedAt:  live.generatedAt || null,
+      editedAt:     new Date().toISOString(),
+      canonizedAt:  live.canonizedAt || null,
+      lastExportAt: live.lastExportAt || null,
+      narrativeDrift: null,
+      exportState:  null,
+    };
+    const newEntry = {
+      id: saveId, name: settlement.name, tier: settlement.tier,
+      timestamp: new Date().toISOString(),
+      settlement, config,
+      institutionToggles, categoryToggles,
+      goodsToggles: goodsToggles||{}, servicesToggles: servicesToggles||{},
+      campaignState,
+    };
 
     // Migrate neighborRelationship → neighbourNetwork
     const nr_raw = newEntry.settlement.neighborRelationship;

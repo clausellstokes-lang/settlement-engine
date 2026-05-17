@@ -272,7 +272,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   }
 
   // ── Guard effectiveness description ───────────────────────────────────────
-  let guardEffectivenessDesc = null;
+  let guardEffectivenessDesc;
 
   if (inst.hasMilitaryInst) {
     const lawRef =

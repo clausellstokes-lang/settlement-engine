@@ -63,6 +63,10 @@ function rect(d,x,y,w,h,fill,stroke=null) {
 function hline(d,x1,y,x2,clr=TAN,lw=0.2) { sd(d,clr); d.setLineWidth(lw); d.line(x1,y,x2,y); }
 
 function s(v) {
+  // Negated class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII,
+  // and printable Latin-1; everything else gets replaced with space
+  // so PDF-bound strings don't contain unprintable control bytes.
+  // eslint-disable-next-line no-control-regex
   return String(v||'').replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g,' ').replace(/\s+/g,' ').trim();
 }
 function wrap(d,text,maxW,fontSize) {
@@ -145,7 +149,6 @@ function buildCover(d, campaign, settlements) {
       d.text(line, centerX, dy, { align: 'center' });
       dy += 5;
     }
-    ty = dy;
   }
 
   // Stat panel (bottom half)

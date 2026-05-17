@@ -5,20 +5,100 @@
  * and the reactive-update engine state (what-if previews, deltas).
  */
 
-import {
-  generateSettlement as engineGenerate,
-  regenNPCs          as engineRegenNPCs,
-  regenHistory       as engineRegenHistory,
-} from '../generators/engine.js';
+// ── Lazy engine loader ─────────────────────────────────────────────────────
+// The generator chunk + its data tables together cost ~430 kB gz on first
+// paint. The user only ever touches them when they click Generate (or
+// regenerate / apply-change). Lifting the static imports to dynamic
+// imports shifts that load to first-generate, shaving the cold-start
+// payload by ~25 %. Subsequent generations are cached.
+//
+// `loadEngine()` resolves once and memoizes — every action calls
+// `await loadEngine()` to get the module bag. Actions that previously
+// were synchronous become async; that's safe because none of them return
+// a value that callers consume (they set Zustand state via the `set`
+// callback). React components that fire-and-forget still work — they
+// just see the resulting state update one microtask later.
+//
+// `createPRNG` was previously imported here but is only used by the
+// store test (which imports it directly). Removed from this chunk.
+/** @type {?{ engineGenerate:Function, engineRegenNPCs:Function, engineRegenHistory:Function, generateSettlementPipeline:Function, regenNPCsPipeline:Function, regenHistoryPipeline:Function, generateSeed:Function, runPipeline:Function, rerunAffected:Function }} */
+let _engineModule = null;
+/** @type {?Promise<NonNullable<typeof _engineModule>>} */
+let _enginePromise = null;
+function loadEngine() {
+  if (_engineModule) return Promise.resolve(_engineModule);
+  if (_enginePromise) return _enginePromise;
+  _enginePromise = Promise.all([
+    import('../generators/engine.js'),
+    import('../generators/generateSettlementPipeline.js'),
+    import('../generators/prng.js'),
+    import('../generators/pipeline.js'),
+  ]).then(([eng, pipe, prng, pipeline]) => {
+    _engineModule = {
+      engineGenerate:             eng.generateSettlement,
+      engineRegenNPCs:            eng.regenNPCs,
+      engineRegenHistory:         eng.regenHistory,
+      generateSettlementPipeline: pipe.generateSettlementPipeline,
+      regenNPCsPipeline:          pipe.regenNPCsPipeline,
+      regenHistoryPipeline:       pipe.regenHistoryPipeline,
+      generateSeed:               prng.generateSeed,
+      runPipeline:                pipeline.runPipeline,
+      rerunAffected:              pipeline.rerunAffected,
+    };
+    return _engineModule;
+  });
+  return _enginePromise;
+}
 
-import {
-  generateSettlementPipeline,
-  regenNPCsPipeline,
-  regenHistoryPipeline,
-} from '../generators/generateSettlementPipeline.js';
+import { deriveSystemState } from '../domain/state/deriveSystemState.js';
+import { compareSystemState } from '../domain/state/compareSystemState.js';
+import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
+import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
+import { inferSuccessors }   from '../domain/entities/successors.js';
+import { inferImportance }   from '../domain/entities/npcs.js';
 
-import { createPRNG, generateSeed } from '../generators/prng.js';
-import { runPipeline, rerunAffected } from '../generators/pipeline.js';
+/**
+ * Build a `campaignState` snapshot from the live slice for persistence
+ * into a save record. Centralizing the shape means the round-trip
+ * (save → reload → hydrateFromSave) is symmetric and a single edit
+ * keeps both sides in step.
+ */
+function pickleCampaignState(state) {
+  return {
+    phase:         state.phase || 'draft',
+    eventLog:      Array.isArray(state.eventLog) ? [...state.eventLog] : [],
+    systemState:   state.systemState ? JSON.parse(JSON.stringify(state.systemState)) : null,
+    locks:         state.locks ? { ...state.locks } : {},
+    generatedAt:   state.generatedAt || null,
+    editedAt:      new Date().toISOString(),
+    canonizedAt:   state.canonizedAt || null,
+    lastExportAt:  state.lastExportAt || null,
+    narrativeDrift: null,
+    exportState:   null,
+  };
+}
+
+/**
+ * Curried predicate-flavored helper for undoLastEvent: returns a map
+ * function that strips any impairment whose causeEventId matches the
+ * supplied event id, and resets `status` to 'active' if no impairments
+ * remain. Centralizing here keeps the undo logic consistent across
+ * institution, faction, and npc entity lists.
+ */
+const stripImpairmentsForEvent = (eventId) => (entity) => {
+  if (!entity) return entity;
+  const impairments = (entity.impairments || []).filter(i => i.causeEventId !== eventId);
+  const next = { ...entity, impairments };
+  // If undo also reversed a removal/destruction caused by the same
+  // event, restore status. We track removedByEventId on entities for this.
+  if (entity.removedByEventId === eventId) {
+    next.status = 'active';
+    delete next.removedByEventId;
+  } else if (entity.status === 'impaired' && impairments.length === 0) {
+    next.status = 'active';
+  }
+  return next;
+};
 
 export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
@@ -33,8 +113,39 @@ export const createSettlementSlice = (set, get) => ({
   whatIfPreview: null,   // { delta, previewSettlement } from a proposed change
   pendingChange: null,   // { type, payload } describing the proposed mutation
 
+  // ── Campaign-state engine (v1) ────────────────────────────────────────────
+  // Phase distinguishes design-time tinkering ('draft') from in-world
+  // events after the settlement is deployed into a campaign ('canon').
+  // Same engine underneath; only policy differs (event-log persistence,
+  // narrative tone, validation strictness). See domain/types.js for the
+  // full contract.
+  phase:           'draft',  // 'draft' | 'canon'
+  locks:           {},       // see Locks typedef in domain/types.js
+  systemState:     null,     // SystemState — derived after every generation/event
+  eventLog:        [],       // EventLogEntry[] — populated only in canon mode
+  pendingPreview:  null,     // EventPreview — set by previewEvent, cleared by apply/dismiss
+
+  // Set by applyEvent when a pillar-tier NPC death just committed.
+  // The SuccessorPrompt UI consumes this to ask the DM whether to
+  // appoint one of the engine-suggested successors. Cleared by the
+  // user dismissing the prompt or by completing an ASSIGN_NPC_TO_ROLE.
+  // Shape: { outgoingNpcId, outgoingNpcName, suggestedSuccessorIds, originEventId }
+  pendingSuccession: null,
+
+  // Provenance timestamps — populated by the relevant handlers below.
+  // Surface in ProvenanceBlock so DMs can see at a glance "when did
+  // this become canon?" / "when was it last exported?" without
+  // hunting through chronicle entries.
+  generatedAt:    null,
+  editedAt:       null,
+  canonizedAt:    null,
+  lastExportAt:   null,
+
   // ── Generation ─────────────────────────────────────────────────────────────
-  generateSettlement: (seedOverride) => {
+  // Async because the generator engine chunk is lazy-loaded (see
+  // loadEngine() above). On first call the user pays ~100-200ms of
+  // chunk-download time; subsequent calls are cached.
+  generateSettlement: async (seedOverride) => {
     const state = get();
     const { config, institutionToggles, categoryToggles, goodsToggles, servicesToggles } = state;
     const neighbor = state.importedNeighbour;
@@ -57,27 +168,63 @@ export const createSettlementSlice = (set, get) => ({
       ...(neighbor ? { _importedNeighbor: neighbor } : {}),
     };
 
+    const eng = await loadEngine();
+
     // Use pipeline or legacy generator
     let result;
     if (state.usePipeline) {
-      const seed = seedOverride || generateSeed();
-      result = generateSettlementPipeline(fullConfig, neighbor, { seed });
+      const seed = seedOverride || eng.generateSeed();
+      // Capture the full pipeline context so reactive applyChange/applyEvent
+      // can re-run only affected steps with the same seed instead of paying
+      // for a full regeneration. Without this, every "what changed?" feature
+      // either rerolls the town's identity or fails outright.
+      let capturedCtx = null;
+      result = eng.generateSettlementPipeline(fullConfig, neighbor, {
+        seed,
+        onComplete: (ctx) => { capturedCtx = ctx; },
+      });
+      // Derive the SystemState immediately so the UI never sees a settlement
+      // without its accompanying state snapshot. The domain function is
+      // pure — no store, no React — and tolerant of partial inputs, so a
+      // sparse settlement still produces a usable state.
+      let systemState = null;
+      try {
+        systemState = deriveSystemState(result);
+      } catch (e) {
+        console.warn('[settlementSlice] deriveSystemState failed:', e);
+      }
+      const now = new Date().toISOString();
       set(state => {
         state.settlement = result;
         state.lastSeed = seed;
+        state.lastCtx = capturedCtx;
+        state.systemState = systemState;
         state.aiSettlement = null;
         state.whatIfPreview = null;
         state.pendingChange = null;
+        state.pendingPreview = null;
+        // Generation always returns the settlement to draft phase. Going to
+        // canon is a deliberate user action (canonize()), not a side-effect
+        // of regeneration — that would silently invalidate any campaign log.
+        state.phase = 'draft';
+        state.eventLog = [];
+        state.generatedAt = now;
+        state.editedAt = now;
+        state.canonizedAt = null;
       });
     } else {
-      result = engineGenerate(fullConfig);
+      result = eng.engineGenerate(fullConfig);
       set(state => {
         state.settlement = result;
         state.lastSeed = null;
         state.lastCtx = null;
+        state.systemState = null;
         state.aiSettlement = null;
         state.whatIfPreview = null;
         state.pendingChange = null;
+        state.pendingPreview = null;
+        state.phase = 'draft';
+        state.eventLog = [];
       });
     }
 
@@ -97,21 +244,23 @@ export const createSettlementSlice = (set, get) => ({
     }),
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
-  regenSection: (section) => {
+  // Async — same reason as generateSettlement (lazy engine load).
+  regenSection: async (section) => {
     const state = get();
     const { settlement, config } = state;
     if (!settlement) return;
     const cfg = settlement.config || config;
+    const eng = await loadEngine();
 
     if (section === 'npcs') {
       const parts = state.usePipeline
-        ? regenNPCsPipeline(settlement, cfg)
-        : engineRegenNPCs(settlement, cfg);
+        ? eng.regenNPCsPipeline(settlement, cfg)
+        : eng.engineRegenNPCs(settlement, cfg);
       set(s => { Object.assign(s.settlement, parts); });
     } else if (section === 'history') {
       const history = state.usePipeline
-        ? regenHistoryPipeline(settlement, cfg)
-        : engineRegenHistory(settlement, cfg);
+        ? eng.regenHistoryPipeline(settlement, cfg)
+        : eng.engineRegenHistory(settlement, cfg);
       set(s => { s.settlement.history = history; });
     }
   },
@@ -178,15 +327,29 @@ export const createSettlementSlice = (set, get) => ({
     });
   },
 
-  /** Apply the pending what-if change for real. */
-  applyChange: () => {
+  /**
+   * Apply the pending what-if change for real.
+   *
+   * IMPORTANT — same-seed reuse: this used to call `generateSeed()`,
+   * meaning every applied change rerolled the entire town under a fresh
+   * seed. That destroyed continuity (the name, the founding lore, the
+   * unrelated NPCs all shifted). The current implementation reuses
+   * `lastSeed` so the deterministic PRNG produces the same output for
+   * any subsystem the change doesn't affect — only the genuinely
+   * impacted parts move. The only path to a new seed is an explicit
+   * regeneration call.
+   *
+   * Future work (Week 4b): replace the full re-generation with
+   * `rerunAffected(lastCtx, ...)` so we don't even pay for the
+   * untouched steps. For v1 we keep the same-seed re-run to preserve
+   * the visible-output contract (full settlement returned) and just
+   * fix the determinism bug.
+   */
+  applyChange: async () => {
     const state = get();
     const { pendingChange } = state;
     if (!pendingChange) return;
 
-    // Re-generate with the modified config applied
-    // For now, do a full re-generation with the overrides baked in.
-    // Once pipeline context caching is stable, this will use rerunAffected.
     const fullConfig = {
       ...(state.settlement?.config || state.config),
       _institutionToggles: pendingChange.overrides.institutionToggles || state.institutionToggles,
@@ -195,17 +358,29 @@ export const createSettlementSlice = (set, get) => ({
       _servicesToggles:    state.servicesToggles,
     };
 
+    const eng = await loadEngine();
+
     if (state.usePipeline) {
-      const seed = generateSeed(); // new seed for the applied change
-      const result = generateSettlementPipeline(fullConfig, state.importedNeighbour, { seed });
+      const seed = state.lastSeed || eng.generateSeed();
+      let capturedCtx = null;
+      const result = eng.generateSettlementPipeline(fullConfig, state.importedNeighbour, {
+        seed,
+        onComplete: (ctx) => { capturedCtx = ctx; },
+      });
+      let nextSystemState = state.systemState;
+      try { nextSystemState = deriveSystemState(result); } catch (e) {
+        console.warn('[settlementSlice.applyChange] deriveSystemState failed:', e);
+      }
       set(s => {
-        s.settlement = result;
-        s.lastSeed = seed;
-        s.pendingChange = null;
-        s.whatIfPreview = null;
+        s.settlement     = result;
+        s.lastSeed       = seed;       // unchanged unless missing — preserves identity
+        s.lastCtx        = capturedCtx;
+        s.systemState    = nextSystemState;
+        s.pendingChange  = null;
+        s.whatIfPreview  = null;
       });
     } else {
-      const result = engineGenerate(fullConfig);
+      const result = eng.engineGenerate(fullConfig);
       set(s => {
         s.settlement = result;
         s.pendingChange = null;
@@ -222,6 +397,17 @@ export const createSettlementSlice = (set, get) => ({
 
   // ── Saved settlements ──────────────────────────────────────────────────────
 
+  /**
+   * Save the current settlement, snapshotting the live lifecycle state
+   * (phase / eventLog / systemState / locks / provenance timestamps) into
+   * the save record's `campaignState` so a subsequent reload restores
+   * exactly what the user is looking at.
+   *
+   * Without this snapshot, two saves would share whatever was last in
+   * the global slice — exactly the bug the audit flagged. The
+   * `campaign_state` JSONB column on Supabase plus the migration helper
+   * in `lib/saves.js` round-trip these fields.
+   */
   saveSettlement: (settlement) => {
     const state = get();
     if (!state.canSave()) return false;
@@ -234,6 +420,7 @@ export const createSettlementSlice = (set, get) => ({
         ...settlement,
         savedAt: Date.now(),
         id: `local_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+        campaignState: pickleCampaignState(state),
       });
     });
     return true;
@@ -269,4 +456,236 @@ export const createSettlementSlice = (set, get) => ({
       if (!state.settlement?.factions?.[factionIndex]) return;
       state.settlement.factions[factionIndex].name = newName;
     }),
+
+  // ── Campaign-state engine handlers ────────────────────────────────────────
+
+  /**
+   * Move the settlement from draft to canon. The act of canonizing is
+   * deliberate — generation never does it automatically — because once
+   * a settlement is canon, every change defaults to a logged in-world
+   * event with permanent timeline impact. Going to canon resets the
+   * event log to an empty timeline starting now and stamps the
+   * canonizedAt provenance timestamp.
+   */
+  canonize: () => set(state => {
+    state.phase = 'canon';
+    state.eventLog = [];
+    state.canonizedAt = new Date().toISOString();
+  }),
+
+  /** Drop back to draft. Useful if the DM wants to keep tinkering before
+   *  the campaign actually starts. Discards any prior event log. */
+  uncanonize: () => set(state => {
+    state.phase = 'draft';
+    state.eventLog = [];
+    state.canonizedAt = null;
+  }),
+
+  /** Stamp lastExportAt — called by export flows. Drives both the
+   *  ProvenanceBlock display and the OnboardingChecklist's "exported"
+   *  step auto-tick. */
+  markExported: () => set(state => {
+    state.lastExportAt = new Date().toISOString();
+  }),
+
+  setLock: (key, value) => set(state => {
+    if (value === false || value === undefined || (Array.isArray(value) && value.length === 0)) {
+      delete state.locks[key];
+    } else {
+      state.locks[key] = value;
+    }
+  }),
+
+  clearLocks: () => set(state => { state.locks = {}; }),
+
+  /**
+   * Run the event preview without committing. UI shows the result as a
+   * "what would happen" panel; user clicks Confirm to commit via
+   * applyEvent. previewEvent is pure, so calling it repeatedly is safe.
+   */
+  previewEvent: (event) => {
+    const state = get();
+    if (!state.settlement) return null;
+    const preview = domainPreviewEvent({
+      settlement: state.settlement,
+      systemState: state.systemState,
+      event,
+    });
+    set(s => { s.pendingPreview = preview; });
+    return preview;
+  },
+
+  /**
+   * Commit an event for real. Mutates the settlement via
+   * `domainApplyEvent`, re-derives systemState from the mutated
+   * settlement, and appends to eventLog (canon only). Updates the
+   * editedAt provenance timestamp.
+   *
+   * The audit's preview-vs-apply integrity rule: prefer
+   * `applyPendingPreview()` when there is one — that path commits
+   * exactly the event the user previewed. This direct `applyEvent`
+   * is for callers (like draft-mode rapid-fire edits) that don't go
+   * through the preview flow.
+   */
+  applyEvent: (event) => {
+    const state = get();
+    if (!state.settlement) return null;
+    const { logEntry, nextSystemState, nextSettlement } = domainApplyEvent({
+      settlement: state.settlement,
+      systemState: state.systemState,
+      event,
+    });
+
+    // Successor detection: when a pillar-tier NPC dies, surface the
+    // engine's ranked successor list to the UI so the DM doesn't have
+    // to invent a replacement from scratch. The prompt is informational
+    // and dismissible; it does not block other UI flow. The original
+    // pre-mutation settlement is the source of truth for "who was alive
+    // and linked to whom" because the post-mutation copy already shows
+    // the dead NPC as removed/dead.
+    let pendingSuccession = null;
+    if (event?.type === 'KILL_NPC') {
+      const outgoing = (state.settlement.npcs || []).find(n =>
+        (n.id && n.id === event.targetId) ||
+        (n.name && n.name.toLowerCase() === String(event.targetId || '').toLowerCase()),
+      );
+      const importance = event.payload?.importance || (outgoing ? inferImportance(outgoing) : 'notable');
+      if (importance === 'pillar' && outgoing) {
+        const suggestedIds = inferSuccessors({ outgoing, settlement: state.settlement, limit: 3 });
+        pendingSuccession = {
+          outgoingNpcId:   outgoing.id || outgoing.name,
+          outgoingNpcName: outgoing.name || 'Unknown',
+          outgoingRole:    outgoing.role || '',
+          linkedInstitutionIds: outgoing.linkedInstitutionIds || [],
+          suggestedSuccessorIds: suggestedIds,
+          originEventId:   event.id,
+        };
+      }
+    }
+
+    set(s => {
+      s.settlement     = nextSettlement;
+      s.systemState    = nextSystemState;
+      s.editedAt       = new Date().toISOString();
+      s.pendingPreview = null;
+      if (pendingSuccession) s.pendingSuccession = pendingSuccession;
+      // Only canon-mode events go into the timeline. Draft edits
+      // produce the same state delta + entity mutation but don't
+      // persist as in-world history — see the draft-vs-canon design
+      // note in domain/types.js.
+      if (s.phase === 'canon') {
+        s.eventLog.push(logEntry);
+      }
+    });
+    return logEntry;
+  },
+
+  /** Dismiss the successor prompt without taking action. */
+  dismissPendingSuccession: () => set(state => { state.pendingSuccession = null; }),
+
+  /**
+   * Commit the currently-pending preview event. This is the audit's
+   * "preview/apply must commit the exact same event" fix. The UI
+   * builds the event once, hands it to previewEvent, then calls this
+   * to apply — guaranteed to commit the previewed event byte-for-byte
+   * (same id, same payload, same severity), so the deltas in the
+   * applied log entry match what the preview panel showed.
+   */
+  applyPendingPreview: () => {
+    const state = get();
+    if (!state.settlement || !state.pendingPreview?.event) return null;
+    return state.applyEvent(state.pendingPreview.event);
+  },
+
+  dismissPreview: () => set(state => { state.pendingPreview = null; }),
+
+  /**
+   * Undo the most recent canon event. Restores both the systemState
+   * and the entity-level mutations the event produced — every
+   * impairment carries its causeEventId, so we can scrub them out
+   * cleanly without rebuilding the settlement from scratch.
+   *
+   * This works for impairment-shaped events. Removal events
+   * (REMOVE_INSTITUTION setting status='removed') aren't reversed
+   * automatically yet — those need an explicit RESTORE_INSTITUTION
+   * follow-up event. The architecture supports finer-grained undo
+   * once removal events also stamp their causeEventId for reversal.
+   */
+  undoLastEvent: () => set(state => {
+    if (state.phase !== 'canon' || state.eventLog.length === 0) return;
+    const popped = state.eventLog.pop();
+    state.systemState = popped.beforeState;
+    const eventId = popped.event?.id;
+    if (!eventId || !state.settlement) return;
+    // Walk every entity list and strip impairments tagged with this event.
+    state.settlement.institutions = (state.settlement.institutions || []).map(stripImpairmentsForEvent(eventId));
+    if (state.settlement.factions) {
+      state.settlement.factions = state.settlement.factions.map(stripImpairmentsForEvent(eventId));
+    }
+    if (state.settlement.powerStructure?.factions) {
+      state.settlement.powerStructure.factions =
+        state.settlement.powerStructure.factions.map(stripImpairmentsForEvent(eventId));
+    }
+    state.settlement.npcs = (state.settlement.npcs || []).map(stripImpairmentsForEvent(eventId));
+  }),
+
+  /** Force a re-derivation of systemState from the current settlement.
+   *  Useful after an out-of-band edit that mutates settlement directly. */
+  refreshSystemState: () => set(state => {
+    if (!state.settlement) return;
+    try {
+      state.systemState = deriveSystemState(state.settlement);
+    } catch (e) {
+      console.warn('[settlementSlice] refreshSystemState failed:', e);
+    }
+  }),
+
+  /**
+   * Hydrate the live lifecycle slots from a saved settlement record.
+   *
+   * The audit's "saved settlements may not persist phase/eventLog/...
+   * — Stoneford detail may show Mossbridge's canon state" CRIT fix.
+   * When the user opens a save, the slice replaces its global lifecycle
+   * fields with that save's `campaignState`. Without this, all saves
+   * share whatever was last in the global state — a campaign-killer.
+   *
+   * Idempotent: if the save lacks a campaignState block (legacy
+   * pre-migration save) the migration default is used. SystemState is
+   * re-derived from the settlement if not stored.
+   */
+  hydrateFromSave: (save) => set(state => {
+    if (!save) return;
+    const cs = save.campaignState || {};
+    state.settlement     = save.settlement || state.settlement;
+    state.lastSeed       = save.seed || state.lastSeed;
+    state.phase          = cs.phase || 'draft';
+    state.eventLog       = Array.isArray(cs.eventLog) ? [...cs.eventLog] : [];
+    state.locks          = cs.locks || {};
+    state.generatedAt    = cs.generatedAt || null;
+    state.editedAt       = cs.editedAt || null;
+    state.canonizedAt    = cs.canonizedAt || null;
+    state.lastExportAt   = cs.lastExportAt || null;
+    state.pendingPreview = null;
+    state.pendingChange  = null;
+    state.aiSettlement   = save.aiSettlement || null;
+
+    // SystemState: prefer the persisted snapshot; if absent or stale,
+    // re-derive from the settlement so the rail/timeline never crashes.
+    if (cs.systemState) {
+      state.systemState = cs.systemState;
+    } else if (save.settlement) {
+      try { state.systemState = deriveSystemState(save.settlement); }
+      catch (e) { state.systemState = null; }
+    } else {
+      state.systemState = null;
+    }
+  }),
+
+  // ── Onboarding checklist ──────────────────────────────────────────────────
+  // The checklist auto-ticks itself by deriving completion from current
+  // store state (see copy/onboardingSteps.js). This pair of fields just
+  // tracks user-driven hide/show.
+  onboardingChecklistDismissed: false,
+  dismissOnboardingChecklist: () => set(state => { state.onboardingChecklistDismissed = true; }),
+  showOnboardingChecklist:    () => set(state => { state.onboardingChecklistDismissed = false; }),
 });

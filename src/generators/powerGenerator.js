@@ -140,20 +140,20 @@ const getTierConstraints = (r, s, o, d) => {
               ? 'the neighbours'
               : 'the guard';
   return r
-    .replace(/the garrison commander/gi, h.replace(/^the /, 'the ') + "'s commander")
-    .replace(/the garrison/gi, h)
-    .replace(/the public watch/gi, b)
-    .replace(/the watch/gi, b)
-    .replace(/the council/gi, g)
-    .replace(/a council/gi, g)
-    .replace(/council meetings/gi, g.replace(/^the /, '') + ' meetings')
-    .replace(/inside the council/gi, 'inside ' + g)
-    .replace(/the grain merchants/gi, w)
-    .replace(/grain merchants/gi, w)
-    .replace(/two healers/gi, 'two ' + p.replace(/^the /, ''))
-    .replace(/the healers/gi, p)
+    .replace(/\bthe garrison commander\b/gi, h.replace(/^the /, 'the ') + "'s commander")
+    .replace(/\bthe garrison\b/gi, h)
+    .replace(/\bthe public watch\b/gi, b)
+    .replace(/\bthe watch\b/gi, b)
+    .replace(/\bthe council\b/gi, g)
+    .replace(/\ba council\b/gi, g)
+    .replace(/\bcouncil meetings\b/gi, g.replace(/^the /, '') + ' meetings')
+    .replace(/\binside the council\b/gi, 'inside ' + g)
+    .replace(/\bthe grain merchants\b/gi, w)
+    .replace(/\bgrain merchants\b/gi, w)
+    .replace(/\btwo healers\b/gi, 'two ' + p.replace(/^the /, ''))
+    .replace(/\bthe healers\b/gi, p)
     .replace(
-      /the mages' quarter/gi,
+      /\bthe mages' quarter\b/gi,
       l('wizard') || l('mage') || l('alchemist') ? "the mages' quarter" : 'the arcane practitioners'
     );
 };
@@ -1077,7 +1077,13 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           ? N +
             ' Operationally distinct from the command council — these are the soldiers and watchmen, not the officers who govern.'
           : N,
+      // `_bFinal` is an optional local that some merchant-oligarchy paths
+      // bind earlier; the `typeof < 'u'` guard reads "if defined, use it;
+      // else fall back to k". A de-minification artifact; works at runtime
+      // because the typeof operator never throws on undeclared names.
+      /* eslint-disable no-undef */
       De = P && P.includes('Merchant oligarchy') ? Math.round((typeof _bFinal < 'u' ? _bFinal : k) * 0.85) : 9999;
+      /* eslint-enable no-undef */
     p.push({
       faction: 'Military/Guard',
       power: Math.min(f, De),
@@ -1843,6 +1849,10 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                 : ke('succession_void')
                   ? (Me = 'Volatile — power is available to whoever moves first')
                   : ke('infiltrated')
+                    // Intentional no-op: 'infiltrated' stressor doesn't override
+                    // the public-tone label set by prior cases. Wrapped as an
+                    // explicit identity to keep the ternary chain consistent.
+                    // eslint-disable-next-line no-self-assign
                     ? (Me = Me)
                     : ke('indebted')
                       ? Me.includes('Unstable') || (Me = 'Strained — debt obligations constrain every decision')

@@ -1,154 +1,245 @@
 /**
- * NotableNPCs — chapter 10.
+ * NotableNPCs — chapter 09. Full NPC sheets with motivation, secrets, hooks.
  *
- * Sorted by power, broken into three tiers so the printed dossier has a
- * scannable hierarchy:
+ * Tiered relative to the cast (so a low-power-mostly settlement still gets
+ * full-card treatment for its three top figures):
+ *   - Major figures: top 3 by power → full editable card, all fields
+ *   - Notable figures: next 4 → compact card with summary + motivation
+ *   - Other names of note: remainder → one-line listing
  *
- *   • Power ≥ 70 → "Major Figures"        — full card per NPC
- *                                            (name, title, faction, blurb,
- *                                            up to two plot hooks)
- *   • 40–69      → "Notable Figures"      — half cards, two per row
- *   • < 40       → "Other Names of Note"  — single-line listing
+ * If absolute power is high enough (≥80) we still pull the figure into the
+ * top tier even past the 3-cap, so a settlement with eight 90+ power players
+ * isn't artificially trimmed.
  *
- * NPC cards wrap={false} so a card never breaks across pages.
+ * Every content text field is editable so the DM can adjust personalities,
+ * motivations, and plot hooks per session.
  */
 import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
-import { Section } from '../primitives/Section.jsx';
-import { Heading } from '../primitives/Heading.jsx';
+import { ChapterBand, ChapterHeadline, KeyValRow, BulletList, HairRule, Tag } from '../primitives/Dense.jsx';
+import { npcsHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space } from '../theme.js';
+import { cap, label, hookText, humanize, stripZwnj } from '../lib/format.js';
+
+/**
+ * TextRow — Label · prose value pair, but the value is rendered as plain
+ * text so PDF text extractors (and screen readers) see it. The previous
+ * FieldRow primitive wrapped the value in a TextInput form field, which
+ * displayed correctly but was invisible to pdftotext, leaving DMs with
+ * "blank" sections when they grep'd the file.
+ */
+function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBottom = 3 }) {
+  if (value == null || value === '') return null;
+  return (
+    <View style={{ flexDirection: 'row', marginBottom, alignItems: 'flex-start' }}>
+      <Text
+        style={{
+          ...type.label,
+          color: palette.muted,
+          fontSize: 7.5,
+          width: labelWidth,
+          paddingTop: 2,
+        }}
+      >
+        {String(l || '').toUpperCase()}
+      </Text>
+      <Text style={{ ...type.body, fontSize: 9.5, flex: 1, lineHeight: multiline ? 1.4 : 1.3 }}>
+        {String(value)}
+      </Text>
+    </View>
+  );
+}
 
 export function NotableNPCs({ settlement, narrativeMode, vm }) {
-  const all = vm.npcs.sorted;
-  const major = all.filter(n => (n.power || 0) >= 70);
-  const notable = all.filter(n => (n.power || 0) >= 40 && (n.power || 0) < 70);
-  const other = all.filter(n => (n.power || 0) < 40);
+  const all = vm.npcs.sorted; // already sorted desc by power
+  // Relative tiering: top 3 (or any with power ≥ 80) → major; next 4 → notable.
+  const majorMin = 3;
+  const notableMin = 4;
+  const HIGH_POWER = 80;
+  const major = [];
+  const notable = [];
+  const other = [];
+  for (const npc of all) {
+    const p = npc.power || 0;
+    if (major.length < majorMin || p >= HIGH_POWER) {
+      major.push(npc);
+    } else if (notable.length < notableMin) {
+      notable.push(npc);
+    } else {
+      other.push(npc);
+    }
+  }
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
-      <Section
-        eyebrow="10"
+      <ChapterBand
+        eyebrow="04"
         title="Notable NPCs"
         accent={narrativeMode ? palette.ai : palette.gold}
-      >
-        {all.length === 0 && (
-          <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>
-            No NPCs detailed for this settlement.
+        sub={`${all.length} figure${all.length === 1 ? '' : 's'}`}
+      />
+
+      <ChapterHeadline tone="gold">
+        {npcsHeadline(vm.npcs)}
+      </ChapterHeadline>
+
+      {all.length === 0 && (
+        <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>
+          No NPCs detailed for this settlement.
+        </Text>
+      )}
+
+      {major.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+            MAJOR FIGURES
           </Text>
-        )}
+          {major.map((npc, i) => (
+            <FullCard key={`maj-${i}`} npc={npc} />
+          ))}
+        </View>
+      )}
 
-        {/* Major figures */}
-        {major.length > 0 && (
-          <View style={{ marginBottom: space.md }}>
-            <Heading level={3}>Major Figures</Heading>
-            {major.map((npc, i) => (
-              <FullCard key={`maj-${i}`} npc={npc} />
-            ))}
-          </View>
-        )}
+      {notable.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+            NOTABLE FIGURES
+          </Text>
+          <CompactGrid items={notable} />
+        </View>
+      )}
 
-        {/* Notable figures — two per row */}
-        {notable.length > 0 && (
-          <View style={{ marginBottom: space.md }}>
-            <Heading level={3}>Notable Figures</Heading>
-            {chunk(notable, 2).map((row, ri) => (
-              <View key={`row-${ri}`} style={{ flexDirection: 'row', gap: 8, marginBottom: 8 }}>
-                {row.map((npc, ci) => (
-                  <View key={`n-${ri}-${ci}`} style={{ flex: 1 }}>
-                    <CompactCard npc={npc} />
-                  </View>
-                ))}
-                {/* Pad row if odd count */}
-                {row.length === 1 && <View style={{ flex: 1 }} />}
-              </View>
-            ))}
-          </View>
-        )}
-
-        {/* Other names */}
-        {other.length > 0 && (
-          <View>
-            <Heading level={3}>Other Names of Note</Heading>
-            {other.map((npc, i) => (
-              <View
-                key={`o-${i}`}
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'baseline',
-                  paddingVertical: 3,
-                  borderBottom: i < other.length - 1 ? `0.3pt solid ${palette.border}` : undefined,
-                }}
-                wrap={false}
-              >
-                <Text style={{ ...type.body_em, color: palette.ink, width: 130 }}>
-                  {npc.name || 'Unnamed'}
-                </Text>
-                <Text style={{ ...type.body, color: palette.second, flex: 1 }}>
-                  {npc.title || '—'}
-                </Text>
-                {npc.factionAffiliation && (
-                  <Text style={{ ...type.caption, color: palette.muted }}>
-                    {labelOfFaction(npc.factionAffiliation)}
-                  </Text>
-                )}
-              </View>
-            ))}
-          </View>
-        )}
-      </Section>
+      {other.length > 0 && (
+        <View>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.muted, fontSize: 8, marginBottom: 3 }}>
+            OTHER NAMES OF NOTE
+          </Text>
+          <OtherNamesGrid items={other} />
+        </View>
+      )}
     </PageChrome>
   );
 }
 
 function FullCard({ npc }) {
-  const hooks = (npc.plotHooks || []).slice(0, 2);
+  const name = stripZwnj(npc.name || 'Unnamed');
+  const title = stripZwnj(npc.title || '');
   return (
     <View
       style={{
-        marginBottom: space.md,
-        padding: 12,
-        border: `0.5pt solid ${palette.border}`,
-        borderRadius: 3,
-        backgroundColor: '#fffaf0',
+        marginBottom: 8,
+        padding: 8,
+        border: `0.4pt solid ${palette.border}`,
+        borderLeft: `2pt solid ${palette.gold}`,
+        borderRadius: 2,
+        backgroundColor: '#fffbf5',
       }}
       wrap={false}
     >
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.body_em, color: palette.ink, fontSize: 13 }}>
-            {npc.name || 'Unnamed'}
+          <Text style={{ ...type.body_em, color: palette.ink, fontSize: 12 }}>
+            {name}
           </Text>
-          <Text style={{ ...type.italic, color: palette.muted, fontSize: 10 }}>
-            {npc.title || ''}
-          </Text>
-        </View>
-        <View style={{ flexDirection: 'row', gap: 6 }}>
-          {npc.factionAffiliation && (
-            <Pill tone="cool">{labelOfFaction(npc.factionAffiliation)}</Pill>
+          {title && (
+            <Text style={{ ...type.italic, color: palette.muted, fontSize: 9.5 }}>
+              {title}
+            </Text>
           )}
-          <Pill tone="gold">PWR {npc.power || 0}</Pill>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+          {npc.factionLabel && <Pill tone="cool">{npc.factionLabel}</Pill>}
+          <View style={{ width: 4 }} />
+          <Pill tone="gold">PWR {npc.power}</Pill>
         </View>
       </View>
-      {npc.blurb && (
-        <Text style={{ ...type.body, color: palette.second, marginTop: 4 }}>{npc.blurb}</Text>
-      )}
-      {npc.influence && (
-        <Text style={{ ...type.caption, color: palette.muted, marginTop: 4 }}>
-          Influence: {typeof npc.influence === 'string' ? npc.influence : (npc.influence.label || JSON.stringify(npc.influence))}
+
+      {/* Identity meta line */}
+      <KeyValRow
+        pairs={[
+          npc.race ? { label: 'RACE', value: humanize(npc.race) } : null,
+          npc.gender ? { label: 'SEX', value: humanize(npc.gender) } : null,
+          npc.age ? { label: 'AGE', value: npc.age } : null,
+          npc.influenceLabel ? { label: 'INFL', value: npc.influenceLabel } : null,
+        ].filter(Boolean)}
+      />
+
+      {npc.influenceDescription && (
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginTop: 2, fontStyle: 'italic' }}>
+          {npc.influenceDescription}
         </Text>
       )}
-      {hooks.length > 0 && (
-        <View style={{ marginTop: 6 }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 7.5, marginBottom: 3 }}>
+
+      {/* Description / blurb */}
+      {npc.blurb && (
+        <View style={{ marginTop: 4 }}>
+          <Text style={{ ...type.body, fontSize: 9.5, lineHeight: 1.4 }}>
+            {stripZwnj(npc.blurb)}
+          </Text>
+        </View>
+      )}
+
+      {/* Personality, appearance, motivation — labeled prose blocks */}
+      <View style={{ marginTop: 4 }}>
+        <TextRow label="PERSONALITY" value={npc.personality} multiline />
+        <TextRow label="APPEARANCE"  value={npc.appearance}  multiline />
+        <TextRow label="MOTIVATION"  value={npc.motivation}  multiline />
+      </View>
+
+      {/* Secrets */}
+      {npc.secrets?.length > 0 && (
+        <View style={{ marginTop: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: 7.5, marginBottom: 1 }}>
+            SECRETS
+          </Text>
+          {npc.secrets.map((s, si) => {
+            const t = typeof s === 'string' ? s : (s?.text || s?.description || '');
+            if (!t) return null;
+            return (
+              <View key={`sec-${si}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>
+                <Text style={{ color: palette.bad, marginRight: 4, fontSize: 9 }}>·</Text>
+                <Text style={{ ...type.body, fontSize: 9, flex: 1 }}>{t}</Text>
+              </View>
+            );
+          })}
+        </View>
+      )}
+
+      {/* Plot hooks (full list, not capped) */}
+      {npc.plotHooks?.length > 0 && (
+        <View style={{ marginTop: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: 7.5, marginBottom: 1 }}>
             PLOT HOOKS
           </Text>
-          {hooks.map((h, i) => (
-            <View key={`h-${i}`} style={{ flexDirection: 'row', marginBottom: 3 }}>
-              <Text style={{ ...type.body_em, color: palette.gold, marginRight: 6 }}>•</Text>
-              <Text style={{ ...type.body, flex: 1 }}>{labelOfHook(h)}</Text>
-            </View>
+          {npc.plotHooks.map((h, hi) => {
+            const t = hookText(h);
+            if (!t) return null;
+            return (
+              <View key={`h-${hi}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>
+                <Text style={{ color: palette.gold, marginRight: 4, fontSize: 9 }}>•</Text>
+                <Text style={{ ...type.body, fontSize: 9, flex: 1 }}>{t}</Text>
+              </View>
+            );
+          })}
+        </View>
+      )}
+
+      {/* Relationships */}
+      {npc.relationships?.length > 0 && (
+        <View style={{ marginTop: 3 }}>
+          <Text style={{ ...type.label, color: palette.muted, fontSize: 7.5, marginBottom: 1 }}>
+            RELATIONSHIPS
+          </Text>
+          {npc.relationships.map((r, ri) => (
+            <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: 8 }}>
+              · {label(r?.with || r?.target || r?.name)}
+              {r?.type ? ` — ${r.type}` : ''}
+              {r?.description ? ` — ${r.description}` : ''}
+            </Text>
           ))}
         </View>
       )}
@@ -156,54 +247,141 @@ function FullCard({ npc }) {
   );
 }
 
-function CompactCard({ npc }) {
-  const firstHook = (npc.plotHooks || [])[0];
+/**
+ * OtherNamesGrid — 2-col tight list for the long-tail "also exists" tier.
+ * Each row is a single line: name · title · faction · PWR.
+ */
+function OtherNamesGrid({ items }) {
+  const rows = [];
+  for (let i = 0; i < items.length; i += 2) {
+    rows.push([items[i], items[i + 1] || null]);
+  }
   return (
-    <View
-      style={{
-        padding: 8,
-        border: `0.5pt solid ${palette.border}`,
-        borderRadius: 3,
-        backgroundColor: '#fffaf0',
-        height: '100%',
-      }}
-      wrap={false}
-    >
-      <Text style={{ ...type.body_em, color: palette.ink, fontSize: 11 }}>{npc.name || 'Unnamed'}</Text>
-      <Text style={{ ...type.italic, color: palette.muted, fontSize: 9, marginBottom: 3 }}>
-        {npc.title || ''}
-      </Text>
-      <View style={{ flexDirection: 'row', gap: 4, marginBottom: 4 }}>
-        {npc.factionAffiliation && (
-          <Pill tone="cool">{labelOfFaction(npc.factionAffiliation)}</Pill>
-        )}
-        <Pill tone="gold">PWR {npc.power || 0}</Pill>
-      </View>
-      {firstHook && (
-        <Text style={{ ...type.caption, color: palette.second, lineHeight: 1.4 }}>
-          {labelOfHook(firstHook)}
-        </Text>
-      )}
+    <View>
+      {rows.map((pair, ri) => (
+        <View key={`og-${ri}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
+          <View style={{ flex: 1, marginRight: 6 }}>
+            {pair[0] && <OtherNameRow npc={pair[0]} />}
+          </View>
+          <View style={{ flex: 1 }}>
+            {pair[1] && <OtherNameRow npc={pair[1]} />}
+          </View>
+        </View>
+      ))}
     </View>
   );
 }
 
-function chunk(arr, n) {
-  const out = [];
-  for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n));
-  return out;
+function OtherNameRow({ npc }) {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'baseline',
+        paddingVertical: 2,
+        borderBottom: `0.3pt solid ${palette.border}`,
+      }}
+      wrap={false}
+    >
+      <Text style={{ ...type.body_em, color: palette.ink, fontSize: 9 }}>
+        {stripZwnj(npc.name || 'Unnamed')}
+      </Text>
+      {npc.title && (
+        <Text style={{ ...type.body, color: palette.second, fontSize: 8.5, marginLeft: 4, flex: 1 }}>
+          · {stripZwnj(npc.title)}
+        </Text>
+      )}
+      {!npc.title && <View style={{ flex: 1 }} />}
+      {npc.factionLabel && (
+        <Text style={{ ...type.caption, color: palette.cool, fontSize: 7.5, marginLeft: 4 }}>
+          {npc.factionLabel}
+        </Text>
+      )}
+      <Text style={{ ...type.label, color: palette.muted, marginLeft: 5, fontSize: 7 }}>
+        {npc.power}
+      </Text>
+    </View>
+  );
 }
 
-function labelOfFaction(f) {
-  if (!f) return '';
-  if (typeof f === 'string') return f;
-  return f.faction || f.name || f.label || '';
+/**
+ * CompactGrid — 2-col layout for the Notable Figures tier. Halves the
+ * vertical footprint so the chapter fits more characters per page without
+ * crowding the Major Figures cards.
+ */
+function CompactGrid({ items }) {
+  const rows = [];
+  for (let i = 0; i < items.length; i += 2) {
+    rows.push([items[i], items[i + 1] || null]);
+  }
+  return (
+    <View>
+      {rows.map((pair, ri) => (
+        <View key={`cg-${ri}`} style={{ flexDirection: 'row', marginBottom: 4 }}>
+          <View style={{ flex: 1, marginRight: 5 }}>
+            {pair[0] && <CompactCard npc={pair[0]} />}
+          </View>
+          <View style={{ flex: 1 }}>
+            {pair[1] && <CompactCard npc={pair[1]} />}
+          </View>
+        </View>
+      ))}
+    </View>
+  );
 }
 
-function labelOfHook(h) {
-  if (!h) return '';
-  if (typeof h === 'string') return h;
-  return h.hook || h.text || h.description || h.title || '';
+function CompactCard({ npc }) {
+  const name = stripZwnj(npc.name || 'Unnamed');
+  const title = stripZwnj(npc.title || '');
+  return (
+    <View
+      style={{
+        padding: 6,
+        border: `0.4pt solid ${palette.border}`,
+        borderRadius: 2,
+        backgroundColor: '#fffbf5',
+        minHeight: 60,
+      }}
+      wrap={false}
+    >
+      <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+        <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, flex: 1 }}>
+          {name}
+        </Text>
+        <Pill tone="gold">PWR {npc.power}</Pill>
+      </View>
+      {(title || npc.factionLabel) && (
+        <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: 1 }}>
+          {title && (
+            <Text style={{ ...type.italic, color: palette.muted, fontSize: 8.5, flex: 1 }}>
+              {title}
+            </Text>
+          )}
+          {npc.factionLabel && <Tag tone="cool">{npc.factionLabel}</Tag>}
+        </View>
+      )}
+      {npc.motivation && (
+        <Text style={{ ...type.caption, fontSize: 8, color: palette.muted, marginTop: 2, lineHeight: 1.3 }}>
+          <Text style={{ color: palette.faint }}>Motive: </Text>
+          {npc.motivation}
+        </Text>
+      )}
+      {npc.plotHooks?.length > 0 && (
+        <View style={{ marginTop: 2 }}>
+          {npc.plotHooks.slice(0, 2).map((h, hi) => {
+            const t = hookText(h);
+            if (!t) return null;
+            return (
+              <View key={`h-${hi}`} style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+                <Text style={{ color: palette.gold, marginRight: 3, fontSize: 8 }}>•</Text>
+                <Text style={{ ...type.body, fontSize: 8, flex: 1, lineHeight: 1.3 }}>{t}</Text>
+              </View>
+            );
+          })}
+        </View>
+      )}
+    </View>
+  );
 }
 
 export default NotableNPCs;

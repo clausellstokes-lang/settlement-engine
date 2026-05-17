@@ -21,10 +21,18 @@ export default function ChainEdges() {
   const saves      = useStore(s => s.savedSettlements);
   const placements = useStore(s => s.mapState.placements);
   const filter     = useStore(s => s.mapState.layers.chainFilter);
+  // Watching this lets us recompute chain paths when geography changes under
+  // identical placements (campaign reload, regenerate).
+  const geometryVersion = useStore(s => s.geometryVersion);
 
+  // geometryVersion is a deliberate "trigger" dep — the body doesn't
+  // read it but we want chain paths to recompute when geography changes
+  // under identical placements (campaign reload, regenerate). ESLint
+  // can't see the intent.
   const supplyChains = useMemo(
     () => computeMapChains(saves, placements),
-    [saves, placements],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [saves, placements, geometryVersion],
   );
 
   const paths = useMemo(() => {
@@ -57,7 +65,9 @@ export default function ChainEdges() {
       });
     }
     return out;
-  }, [supplyChains, placements, filter]);
+    // Same deliberate-trigger pattern as the supplyChains memo above.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supplyChains, placements, filter, geometryVersion]);
 
   if (!paths.length) return null;
 

@@ -330,7 +330,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         minTier: 'hamlet',
         resourceSubstitutes: ['Stone quarry', 'Coal or peat deposits'],
       },
-      ,
       {
         id: 'harbour_trade',
         label: 'Harbour and Maritime',
@@ -760,7 +759,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         minTier: 'village',
       },
-      ,
       {
         id: 'crossroads_trade',
         label: 'Strategic Crossroads Toll',
@@ -856,7 +854,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         entrepot: false,
         minTier: 'town',
       },
-      ,
       {
         id: 'adventuring_escort',
         label: 'Adventuring & Escort',

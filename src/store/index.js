@@ -32,6 +32,7 @@ import { createCreditsSlice }      from './creditsSlice.js';
 import { createCampaignSlice }     from './campaignSlice.js';
 import { createCustomContentSlice } from './customContentSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
+import { setCustomContentSource }   from '../lib/dependencyEngine.js';
 
 export const useStore = create(
   devtools(
@@ -77,6 +78,14 @@ export const useStore = create(
     { name: 'SettlementForge' },
   ),
 );
+
+// Wire the dependencyEngine to read customContent from this store.
+// This is the only edge that connects the (store-agnostic) generator's
+// custom-content lookup back to the live app state. Done here, at the
+// store, rather than inside dependencyEngine itself — that keeps the
+// generator side free of any zustand/react import and makes it
+// runnable headlessly (snapshot tests, scripts, server jobs).
+setCustomContentSource(() => useStore.getState().customContent);
 
 // ── Convenience selectors ────────────────────────────────────────────────────
 // Thin wrappers so components don't repeat selector boilerplate.

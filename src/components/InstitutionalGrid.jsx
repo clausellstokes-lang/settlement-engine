@@ -1,10 +1,12 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {filterCatalogForMagic} from './magicFilter.js';
 import ControlsStrip from './ControlsStrip.jsx';
 import {GOLD as gold, INK as ink, MUTED as muted, SECOND as second, BORDER as border, CARD as card, CARD_ALT as parch, sans} from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, selectIsManualTier } from '../store/selectors.js';
-import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../generators/engine.js';
+// Import from lookups.js directly (not engine.js) — keeps the
+// generator pipeline out of this component's synchronous import graph.
+import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../generators/lookups.js';
 
 const CAT_COLORS = {
   Essential:      '#1a4a20',
@@ -255,12 +257,16 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
 
 function CategorySection({ category, institutions, tier, toggles, onToggle, isEnabled, onCategoryToggle, forceCollapsed, isManualTier, tierInstitutionNames }) {
   const [collapsed, setCollapsed] = useState(true);
-  // Sync local state when forceCollapsed changes — ensures Expand All clears manual collapses
-  const prevForce = React.useRef(forceCollapsed);
-  if (prevForce.current !== forceCollapsed) {
+  // Sync local state when forceCollapsed goes from true → false: an
+  // "Expand All" press should clear individual manual collapses. We
+  // mirror the previous forceCollapsed in a ref + useEffect rather than
+  // doing the comparison during render (react-hooks/refs forbids ref
+  // writes during render; React Compiler enforces the same boundary).
+  const prevForce = useRef(forceCollapsed);
+  useEffect(() => {
+    if (prevForce.current && !forceCollapsed) setCollapsed(false);
     prevForce.current = forceCollapsed;
-    if (!forceCollapsed && collapsed) setCollapsed(false);
-  }
+  }, [forceCollapsed]);
   const isCollapsed = forceCollapsed || collapsed;
   const catColor = CAT_COLORS[category] || muted;
   const forceCount = Object.entries(toggles).filter(([k, v]) => k.startsWith(`${tier}::${category}::`) && v.require).length;
@@ -397,7 +403,12 @@ export default function InstitutionalGrid() {
       if (Object.keys(filtered).length > 0) result[cat] = filtered;
     });
     return result;
-  }, [catalog, search, filterMode, toggles, tier]);
+    // Added `config` — filterCatalogForMagic reads magic-related fields
+    // from it, so the memo must invalidate when those change. Slightly
+    // over-invalidating (any config field changing busts the cache) but
+    // correct. Future: extract just the magic-relevant fields if this
+    // becomes a perf concern.
+  }, [catalog, search, filterMode, toggles, tier, config]);
 
   const forcedTotal = useMemo(() =>
     Object.values(toggles).filter(v => v.require).length,

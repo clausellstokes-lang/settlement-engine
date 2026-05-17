@@ -7,6 +7,172 @@ import {isMobile} from '../tabConstants';
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 
+// ── Status palette for chain cards ────────────────────────────────────────
+// Module-scope so the object identity is stable across renders (avoids
+// re-allocating per render of EconomicFlowsSection).
+const FLOW_STATUS = {
+  impaired:            {label:' Impaired',            color:'#8b1a1a', bg:'#fdf4f4', border:'#e8c0c0'},
+  vulnerable:          {label:' Vulnerable',          color:'#8a4010', bg:'#fdf8f0', border:'#e0c090'},
+  running:             {label:'✓ Running',           color:'#1a5a28', bg:'#f0faf4', border:'#a8d8b0'},
+  entrepot:            {label:' Entrepôt',          color:'#a0762a', bg:'#faf6ec', border:'#d8c090'},
+  magically_sustained: {label:'✦ Magically Sustained', color:'#5a2a8a', bg:'#f8f0ff', border:'#c0a0e0'},
+  operational:         {label:'○ Operational',        color:'#6b5340', bg:'#faf8f4', border:'#e0d0b0'},
+};
+
+/**
+ * EconomicFlowsSection — extracted from a 150-line IIFE that lived inline
+ * in EconomicsTab.jsx. The IIFE pattern violated rules-of-hooks because
+ * the React.useState call lived inside a callback expression, requiring
+ * two eslint-disable directives to stay green. Now a proper component
+ * with normal hook scoping.
+ *
+ * Props are the slices of eco that the section actually consumes — keeps
+ * the prop surface narrow and the component cheap to memoize.
+ */
+function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
+  const [flowFilter, setFlowFilter] = useState('all');
+  const impairedCount   = chains.filter(c => c.status === 'impaired').length;
+  const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
+  const entrepotCount   = chains.filter(c => c.entrepot).length;
+  const runningCount    = chains.filter(c => c.status === 'running').length;
+
+  const filtered = flowFilter === 'all'        ? chains
+    : flowFilter === 'impaired'   ? chains.filter(c => c.status === 'impaired' || c.status === 'vulnerable')
+    : flowFilter === 'productive' ? chains.filter(c => c.activatedByResource || c.status === 'running')
+    : flowFilter === 'magic'      ? chains.filter(c => c.status === 'magically_sustained' || c.magicNote)
+    :                                chains.filter(c => c.entrepot);
+
+  return (
+    <Section title={`Economic Flows (${chains.length + institutionalServices.length} active${impairedCount > 0 ? ` · ${impairedCount} impaired` : ''})`}
+      collapsible defaultOpen={impairedCount > 0} accent={impairedCount > 0 ? '#8b1a1a' : undefined}>
+      {/* Filter tabs */}
+      <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:10}}>
+        {[
+          {key:'all',label:`All (${chains.length + institutionalServices.length})`},
+          impairedCount + vulnerableCount > 0 && {key:'impaired',  label:` Issues (${impairedCount + vulnerableCount})`,  color:'#8b1a1a'},
+          runningCount > 0                    && {key:'productive',label:`✓ Productive (${runningCount})`,            color:'#1a5a28'},
+          entrepotCount > 0                   && {key:'entrepot',  label:` Entrepôt (${entrepotCount})`,              color:'#a0762a'},
+          institutionalServices.length > 0    && {key:'services',  label:` Services (${institutionalServices.length})`, color:'#5a3a1a'},
+        ].filter(Boolean).map(f => (
+          <button key={f.key} onClick={() => setFlowFilter(f.key)} style={{
+            padding:'4px 10px',borderRadius:4,border:'1px solid',fontSize:10,fontWeight:flowFilter===f.key?700:500,cursor:'pointer',
+            background:flowFilter===f.key?(f.color?`${f.color}18`:'#1c140918'):'#fff',
+            color:flowFilter===f.key?(f.color||'#1c1409'):'#6b5340',
+            borderColor:flowFilter===f.key?(f.color||'#1c1409'):'#c8b89a',
+          }}>{f.label}</button>
+        ))}
+      </div>
+
+      {/* Chain cards */}
+      <div style={{display:'flex',flexDirection:'column',gap:6}}>
+        {filtered.map((chain, i) => {
+          const st = FLOW_STATUS[chain.status] || FLOW_STATUS.operational;
+          const hasIncome = incomeSources.some(inc =>
+            inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
+            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'))
+          );
+          const incomeEntry = hasIncome ? incomeSources.find(inc =>
+            inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
+            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'))
+          ) : null;
+
+          return (
+            <div key={i} style={{
+              background:st.bg, border:`1px solid ${st.border}`,
+              borderLeft:`3px solid ${st.color}`,
+              borderRadius:6, padding:'8px 12px',
+            }}>
+              {/* Header row */}
+              <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
+                <span style={{fontSize:13}}>{chain.resourceIcon}</span>
+                <span style={{fontSize:12,fontWeight:700,color:'#1c1409'}}>{chain.label}</span>
+                <span style={{fontSize:9,color:chain.needColor,background:`${chain.needColor}15`,borderRadius:3,padding:'0 5px',fontWeight:700}}>{chain.needIcon} {chain.needLabel}</span>
+                <span style={{fontSize:9,fontWeight:800,color:st.color,background:`${st.color}15`,borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
+              </div>
+
+              {/* Institutions + outputs */}
+              <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:chain.dependency||chain.entrepotNote?6:0}}>
+                <div style={{flex:'1 1 140px'}}>
+                  <div style={{fontSize:9,fontWeight:700,color:'#9c8068',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Via</div>
+                  <div style={{fontSize:11,color:'#3d2b1a',lineHeight:1.3}}>{chain.processingInstitutions.join(' · ')}</div>
+                </div>
+                {chain.outputs.length > 0 && <div style={{flex:'1 1 140px'}}>
+                  <div style={{fontSize:9,fontWeight:700,color:'#9c8068',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Outputs</div>
+                  <div style={{display:'flex',flexWrap:'wrap',gap:2}}>
+                    {chain.outputs.slice(0, 3).map((o, j) => (
+                      <span key={j} style={{fontSize:10,color:'#3d2b1a',background:`${st.color}10`,borderRadius:3,padding:'1px 5px'}}>{o}</span>
+                    ))}
+                  </div>
+                </div>}
+              </div>
+
+              {/* Impairment detail */}
+              {chain.dependency && (
+                <div style={{fontSize:11,color:st.color,background:`${st.color}08`,borderRadius:4,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
+                  <strong>Needs {chain.dependency.resource}</strong> — {chain.dependency.impact}
+                  {chain.dependency.affectedServices.length > 0 && <span style={{color:'#9c8068'}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
+                </div>
+              )}
+
+              {/* Entrepôt note */}
+              {chain.entrepot && chain.entrepotNote && !chain.dependency && (
+                <p style={{fontSize:10,color:'#a0762a',fontStyle:'italic',margin:'4px 0 0',lineHeight:1.3}}>{chain.entrepotNote}</p>
+              )}
+
+              {/* Magic substitution note */}
+              {chain.magicNote && (
+                <div style={{fontSize:10,color:'#5a2a8a',background:'#f8f0ff',borderRadius:4,
+                  padding:'4px 8px',marginTop:4,borderLeft:'3px solid #c0a0e0',lineHeight:1.4}}>
+                  ✦ <em>{chain.magicNote}</em>
+                  {chain.magicRecovery && <span style={{marginLeft:6,fontSize:9,color:'#7a4aaa',fontWeight:700}}>
+                    {Math.round(chain.magicRecovery * 100)}% recovery
+                  </span>}
+                </div>
+              )}
+
+              {/* Income contribution */}
+              {incomeEntry && (
+                <div style={{fontSize:10,color:'#6b5340',marginTop:4}}>
+                  Contributes to <strong>{incomeEntry.source}</strong> — {incomeEntry.percentage}% of income
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Institutional Services — tertiary economy */}
+      {institutionalServices.length > 0 && (flowFilter === 'all' || flowFilter === 'services') && <>
+        <div style={{fontSize:10,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginTop:10,marginBottom:6}}>Service Economy</div>
+        <div style={{display:'flex',flexDirection:'column',gap:5}}>
+          {institutionalServices.map((svc, i) => (
+            <div key={i} style={{
+              background:'#faf8f4',border:`1px solid ${svc.color}30`,
+              borderLeft:`3px solid ${svc.color}`,
+              borderRadius:6,padding:'7px 12px',
+              display:'flex',alignItems:'flex-start',gap:8,
+            }}>
+              <span style={{fontSize:16,flexShrink:0}}>{svc.icon}</span>
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2,flexWrap:'wrap'}}>
+                  <span style={{fontSize:12,fontWeight:700,color:'#1c1409'}}>{svc.label}</span>
+                  <span style={{fontSize:9,fontWeight:700,color:svc.color,background:`${svc.color}15`,borderRadius:3,padding:'0 5px'}}>service</span>
+                  {svc.exportable && <span style={{fontSize:9,color:'#1a5a28',background:'#e8f5ec',borderRadius:3,padding:'0 5px'}}>export</span>}
+                  <span style={{fontSize:9,fontWeight:800,color:'#6b5340',background:'#ede3cc',borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
+                </div>
+                <div style={{fontSize:11,color:'#3d2b1a'}}>
+                  <span style={{color:'#9c8068',marginRight:4}}>Via:</span>{svc.institutions.join(' · ')}
+                </div>
+                <div style={{fontSize:11,color:'#6b5340',marginTop:1}}>{svc.output}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </>}
+    </Section>
+  );
+}
+
 export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const s = settlement;
   const mobile = isMobile();
@@ -185,159 +351,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
       </Section>}
 
       {/* ── ECONOMIC FLOWS (unified production chains + dependencies) ──────── */}
-      {eco.activeChains?.length>0&&(()=>{
-        const [flowFilter, setFlowFilter] = React.useState('all');
-        const chains = eco.activeChains || [];
-        const impairedCount  = chains.filter(c=>c.status==='impaired').length;
-        const vulnerableCount= chains.filter(c=>c.status==='vulnerable').length;
-        const entrepotCount  = chains.filter(c=>c.entrepot).length;
-        const runningCount   = chains.filter(c=>c.status==='running').length;
-        const magicCount     = chains.filter(c=>c.status==='magically_sustained').length;
-        const filtered = flowFilter==='all' ? chains
-          : flowFilter==='impaired'   ? chains.filter(c=>c.status==='impaired'||c.status==='vulnerable')
-          : flowFilter==='productive' ? chains.filter(c=>c.activatedByResource||c.status==='running')
-          : flowFilter==='magic'      ? chains.filter(c=>c.status==='magically_sustained'||c.magicNote)
-          : chains.filter(c=>c.entrepot);
-
-        const STATUS = {
-          impaired:           {label:' Impaired',          color:'#8b1a1a', bg:'#fdf4f4', border:'#e8c0c0'},
-          vulnerable:         {label:' Vulnerable',         color:'#8a4010', bg:'#fdf8f0', border:'#e0c090'},
-          running:            {label:'✓ Running',             color:'#1a5a28', bg:'#f0faf4', border:'#a8d8b0'},
-          entrepot:           {label:' Entrepôt',           color:'#a0762a', bg:'#faf6ec', border:'#d8c090'},
-          magically_sustained:{label:'✦ Magically Sustained', color:'#5a2a8a', bg:'#f8f0ff', border:'#c0a0e0'},
-          operational:        {label:'○ Operational',         color:'#6b5340', bg:'#faf8f4', border:'#e0d0b0'},
-        };
-
-        return (
-          <Section title={`Economic Flows (${chains.length + (eco.institutionalServices?.length||0)} active${impairedCount>0?` · ${impairedCount} impaired`:''})`}
-            collapsible defaultOpen={impairedCount>0} accent={impairedCount>0?'#8b1a1a':undefined}>
-            {/* Filter tabs */}
-            <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:10}}>
-              {[
-                {key:'all',label:`All (${chains.length + (eco.institutionalServices?.length||0)})`},
-                impairedCount+vulnerableCount>0&&{key:'impaired',label:` Issues (${impairedCount+vulnerableCount})`,color:'#8b1a1a'},
-                runningCount>0&&{key:'productive',label:`✓ Productive (${runningCount})`,color:'#1a5a28'},
-                entrepotCount>0&&{key:'entrepot',label:` Entrepôt (${entrepotCount})`,color:'#a0762a'},
-                eco.institutionalServices?.length>0&&{key:'services',label:` Services (${eco.institutionalServices.length})`,color:'#5a3a1a'},
-              ].filter(Boolean).map(f=>(
-                <button key={f.key} onClick={()=>setFlowFilter(f.key)} style={{
-                  padding:'4px 10px',borderRadius:4,border:'1px solid',fontSize:10,fontWeight:flowFilter===f.key?700:500,cursor:'pointer',
-                  background:flowFilter===f.key?(f.color?`${f.color}18`:'#1c140918'):'#fff',
-                  color:flowFilter===f.key?(f.color||'#1c1409'):'#6b5340',
-                  borderColor:flowFilter===f.key?(f.color||'#1c1409'):'#c8b89a',
-                }}>{f.label}</button>
-              ))}
-            </div>
-
-            {/* Chain cards */}
-            <div style={{display:'flex',flexDirection:'column',gap:6}}>
-              {filtered.map((chain,i)=>{
-                const st = STATUS[chain.status] || STATUS.operational;
-                const hasIncome = eco.incomeSources?.some(inc =>
-                  inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
-                  (chain.needKey==='trade_entrepot'&&inc.source.toLowerCase().includes('entrepôt'))
-                );
-                const incomeEntry = hasIncome ? eco.incomeSources?.find(inc =>
-                  inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
-                  (chain.needKey==='trade_entrepot'&&inc.source.toLowerCase().includes('entrepôt'))
-                ) : null;
-
-                return (
-                  <div key={i} style={{
-                    background:st.bg, border:`1px solid ${st.border}`,
-                    borderLeft:`3px solid ${st.color}`,
-                    borderRadius:6, padding:'8px 12px',
-                  }}>
-                    {/* Header row */}
-                    <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
-                      <span style={{fontSize:13}}>{chain.resourceIcon}</span>
-                      <span style={{fontSize:12,fontWeight:700,color:'#1c1409'}}>{chain.label}</span>
-                      <span style={{fontSize:9,color:chain.needColor,background:`${chain.needColor}15`,borderRadius:3,padding:'0 5px',fontWeight:700}}>{chain.needIcon} {chain.needLabel}</span>
-                      <span style={{fontSize:9,fontWeight:800,color:st.color,background:`${st.color}15`,borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
-                    </div>
-
-                    {/* Institutions + outputs */}
-                    <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:chain.dependency||chain.entrepotNote?6:0}}>
-                      <div style={{flex:'1 1 140px'}}>
-                        <div style={{fontSize:9,fontWeight:700,color:'#9c8068',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Via</div>
-                        <div style={{fontSize:11,color:'#3d2b1a',lineHeight:1.3}}>{chain.processingInstitutions.join(' · ')}</div>
-                      </div>
-                      {chain.outputs.length>0&&<div style={{flex:'1 1 140px'}}>
-                        <div style={{fontSize:9,fontWeight:700,color:'#9c8068',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Outputs</div>
-                        <div style={{display:'flex',flexWrap:'wrap',gap:2}}>
-                          {chain.outputs.slice(0,3).map((o,j)=>(
-                            <span key={j} style={{fontSize:10,color:'#3d2b1a',background:`${st.color}10`,borderRadius:3,padding:'1px 5px'}}>{o}</span>
-                          ))}
-                        </div>
-                      </div>}
-                    </div>
-
-                    {/* Impairment detail */}
-                    {chain.dependency&&(
-                      <div style={{fontSize:11,color:st.color,background:`${st.color}08`,borderRadius:4,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
-                         <strong>Needs {chain.dependency.resource}</strong> — {chain.dependency.impact}
-                        {chain.dependency.affectedServices.length>0&&<span style={{color:'#9c8068'}}> · affects: {chain.dependency.affectedServices.slice(0,3).join(', ')}</span>}
-                      </div>
-                    )}
-
-                    {/* Entrepôt note */}
-                    {chain.entrepot&&chain.entrepotNote&&!chain.dependency&&(
-                      <p style={{fontSize:10,color:'#a0762a',fontStyle:'italic',margin:'4px 0 0',lineHeight:1.3}}>{chain.entrepotNote}</p>
-                    )}
-
-                    {/* Magic substitution note */}
-                    {chain.magicNote&&(
-                      <div style={{fontSize:10,color:'#5a2a8a',background:'#f8f0ff',borderRadius:4,
-                        padding:'4px 8px',marginTop:4,borderLeft:'3px solid #c0a0e0',lineHeight:1.4}}>
-                        ✦ <em>{chain.magicNote}</em>
-                        {chain.magicRecovery&&<span style={{marginLeft:6,fontSize:9,color:'#7a4aaa',fontWeight:700}}>
-                          {Math.round(chain.magicRecovery*100)}% recovery
-                        </span>}
-                      </div>
-                    )}
-
-                    {/* Income contribution */}
-                    {incomeEntry&&(
-                      <div style={{fontSize:10,color:'#6b5340',marginTop:4}}>
-                         Contributes to <strong>{incomeEntry.source}</strong> — {incomeEntry.percentage}% of income
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Institutional Services — tertiary economy */}
-            {eco.institutionalServices?.length>0&&(flowFilter==='all'||flowFilter==='services')&&<>
-              <div style={{fontSize:10,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginTop:10,marginBottom:6}}>Service Economy</div>
-              <div style={{display:'flex',flexDirection:'column',gap:5}}>
-                {eco.institutionalServices.map((svc,i)=>(
-                  <div key={i} style={{
-                    background:'#faf8f4',border:`1px solid ${svc.color}30`,
-                    borderLeft:`3px solid ${svc.color}`,
-                    borderRadius:6,padding:'7px 12px',
-                    display:'flex',alignItems:'flex-start',gap:8,
-                  }}>
-                    <span style={{fontSize:16,flexShrink:0}}>{svc.icon}</span>
-                    <div style={{flex:1,minWidth:0}}>
-                      <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2,flexWrap:'wrap'}}>
-                        <span style={{fontSize:12,fontWeight:700,color:'#1c1409'}}>{svc.label}</span>
-                        <span style={{fontSize:9,fontWeight:700,color:svc.color,background:`${svc.color}15`,borderRadius:3,padding:'0 5px'}}>service</span>
-                        {svc.exportable&&<span style={{fontSize:9,color:'#1a5a28',background:'#e8f5ec',borderRadius:3,padding:'0 5px'}}>export</span>}
-                        <span style={{fontSize:9,fontWeight:800,color:'#6b5340',background:'#ede3cc',borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
-                      </div>
-                      <div style={{fontSize:11,color:'#3d2b1a'}}>
-                        <span style={{color:'#9c8068',marginRight:4}}>Via:</span>{svc.institutions.join(' · ')}
-                      </div>
-                      <div style={{fontSize:11,color:'#6b5340',marginTop:1}}>{svc.output}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>}
-          </Section>
-        );
-      })()}
+      {eco.activeChains?.length > 0 && (
+        <EconomicFlowsSection
+          chains={eco.activeChains}
+          institutionalServices={eco.institutionalServices || []}
+          incomeSources={eco.incomeSources || []}
+        />
+      )}
 
       {/* ── ECONOMIC PLOT HOOKS (currently invisible — now surfaced) ─────── */}
       {via?.plotHooks?.length>0&&<Section title={`Economic Plot Hooks (${via.plotHooks.length})`} collapsible defaultOpen={false} accent="#5a2a8a">

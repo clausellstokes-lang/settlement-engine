@@ -37,8 +37,16 @@ export default function MapOverlay({ bridge }) {
   const layers        = useStore(s => s.mapState.layers);
   const isDraggingOver = useStore(s => s.isDraggingOver);
 
+  const wrapperRef = useRef(null);
   const gRef = useRef(null);
   const transformRef = useRef({ tx: 0, ty: 0, scale: 1, width: 0, height: 0 });
+  // `size` drives the SVG viewBox. We deliberately use the wrapper's
+  // observed pixel rect (not FMG's broadcast graphWidth/graphHeight) so the
+  // overlay's coordinate system always matches the iframe's actual displayed
+  // pixels. Otherwise any change to the iframe's CSS size — e.g. opening
+  // the right-side LayersPanel, which narrows the map column — leaves the
+  // viewBox stale and the overlay's icons drift away from the geography
+  // beneath them.
   const [size, setSize] = useState({ width: 0, height: 0 });
 
   // ── Viewport sync ────────────────────────────────────────────────────
@@ -61,13 +69,11 @@ export default function MapOverlay({ bridge }) {
           `translate(${tx}, ${ty}) scale(${scale})`);
       }
 
-      // Only resize when dimensions actually change
-      setSize(prev => {
-        if (prev.width === width && prev.height === height) return prev;
-        return { width, height };
-      });
-
-      // Debounced store persistence (campaigns reload viewport on restore)
+      // Debounced store persistence (campaigns reload viewport on restore).
+      // schedulePersist mutates persistTimerRef.current — legal in an
+      // effect, but the immutability rule fires because the function is
+      // defined-during-render even though only called-from-effects.
+      // eslint-disable-next-line react-hooks/immutability
       schedulePersist(tx, ty, scale, width, height);
     };
 
@@ -81,6 +87,28 @@ export default function MapOverlay({ bridge }) {
 
     return () => { off?.(); };
   }, [bridge]);
+
+  // ── Wrapper size sync (drives viewBox) ──────────────────────────────
+  // Watch the wrapper's rendered rect via ResizeObserver. Toggling the
+  // LayersPanel changes the parent flex layout, which reflows the iframe
+  // and this overlay together — both shrink/grow simultaneously. By keying
+  // the SVG viewBox off the observed rect, content rendered in pixel space
+  // (the same space FMG uses internally, since #map has no viewBox of its
+  // own) stays pixel-aligned with the underlying geography across resizes.
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const measure = () => {
+      const rect = el.getBoundingClientRect();
+      const w = Math.round(rect.width);
+      const h = Math.round(rect.height);
+      setSize(prev => (prev.width === w && prev.height === h) ? prev : { width: w, height: h });
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   // Debounced viewport persistence — don't thrash Immer on pan ticks
   const persistTimerRef = useRef(null);
@@ -120,7 +148,7 @@ export default function MapOverlay({ bridge }) {
   const vbH = size.height || 1;
 
   return (
-    <div style={wrapperStyle}>
+    <div ref={wrapperRef} style={wrapperStyle}>
       <svg
         style={svgStyle}
         viewBox={`0 0 ${vbW} ${vbH}`}

@@ -24,7 +24,13 @@
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../data/resourceData.js';
 import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
-import { STRESS_TYPE_MAP } from '../data/stressTypes.js';
+// Import the pure-data meta map, not the full stressTypes.js. The full
+// file has runtime closures that capture _rng from generators/rngContext —
+// loading it sync (which we do here, from app boot via dependencyEngine)
+// would drag the generator chunk into the first-paint graph. The meta
+// file has every field this enumerator reads (label, historyColour,
+// viabilityNote) with zero imports.
+import { STRESS_TYPE_META as STRESS_TYPE_MAP } from '../data/stressTypesMeta.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 
 // ── Constants ───────────────────────────────────────────────────────────────

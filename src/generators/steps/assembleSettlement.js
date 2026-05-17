@@ -12,6 +12,10 @@ import { registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
+// Faction-to-NPC coupling: synthesizes structural NPCs (high priestess,
+// watch captain, etc.) for any faction archetype that lacks them. Runs
+// at assembly so existing pipeline NPCs are deduplicated against.
+import { ensureFactionStructuralNpcs } from '../factionRoles.js';
 
 const DEFENSE_CONTRIB = {
   'Undefended': -10, 'Vulnerable': -5, 'Defensible': 0,
@@ -96,6 +100,14 @@ registerStep('assembleSettlement', {
 
   const coherenceUpdates = generateCoherence(settlement);
   Object.assign(settlement, coherenceUpdates);
+
+  // Faction-to-NPC coupling. Walks every faction; for each archetype
+  // (temple, watch, merchant, thieves, noble, arcane) ensures the
+  // implied structural NPCs exist with the right importance tier and
+  // institution/faction linkage. Idempotent — won't duplicate NPCs
+  // the population step already generated for the same role + faction.
+  const withStructural = ensureFactionStructuralNpcs(settlement);
+  Object.assign(settlement, withStructural);
 
   return { settlement };
 });

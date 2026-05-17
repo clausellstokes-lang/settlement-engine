@@ -47,15 +47,53 @@ function spreadToggles(toggles) {
   };
 }
 
+// ── Save migration ──────────────────────────────────────────────────────────
+
+/**
+ * Migrate an arbitrary save record to the v2 shape, which adds a single
+ * new field — `campaignState` — holding lifecycle data that used to
+ * live globally on the slice (phase, eventLog, systemState, locks,
+ * provenance timestamps, narrative-drift flags, export state).
+ *
+ * Older saves with no campaignState get default-populated. This means
+ * a settlement canonized before this migration shipped will return as
+ * draft on first reload — no way to recover state that was never
+ * persisted. New saves round-trip cleanly.
+ *
+ * The `campaign_state` JSONB column needs to exist in Supabase. Add via:
+ *   ALTER TABLE settlements ADD COLUMN IF NOT EXISTS campaign_state JSONB;
+ * Until that migration runs, the column read returns null and we fall
+ * through to the defaults — the app keeps working.
+ */
+function migrateSaveToV2(entry) {
+  if (!entry) return entry;
+  if (entry.campaignState && entry.campaignState.phase) return entry;
+  return {
+    ...entry,
+    campaignState: {
+      phase: 'draft',
+      eventLog: [],
+      systemState: null,
+      locks: {},
+      generatedAt: entry.timestamp || (entry.savedAt ? new Date(entry.savedAt).toISOString() : null),
+      editedAt: entry.timestamp || null,
+      canonizedAt: null,
+      lastExportAt: null,
+      narrativeDrift: null,
+      exportState: null,
+    },
+  };
+}
+
 // ── Supabase methods ────────────────────────────────────────────────────────
 
 async function supabaseList() {
   const { data, error } = await supabase
     .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, created_at, updated_at')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, campaign_state, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
-  return data.map(row => ({
+  return data.map(row => migrateSaveToV2({
     id:        row.id,
     name:      row.name,
     tier:      row.tier,
@@ -66,6 +104,7 @@ async function supabaseList() {
     ...spreadToggles(row.toggles),
     seed:      row.seed,
     aiData:    row.ai_data || {},
+    campaignState: row.campaign_state || null,
   }));
 }
 
@@ -73,16 +112,18 @@ async function supabaseSave(entry) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error('Not authenticated');
 
+  const v2 = migrateSaveToV2(entry);
   const row = {
     user_id:         user.id,
-    name:            entry.name,
-    tier:            entry.tier,
-    data:            entry.settlement,
-    config:          entry.config || null,
-    toggles:         bundleToggles(entry),
-    seed:            entry.seed || null,
-    neighbour_links: entry.settlement?.neighbourNetwork || null,
-    ai_data:         entry.aiData || {},
+    name:            v2.name,
+    tier:            v2.tier,
+    data:            v2.settlement,
+    config:          v2.config || null,
+    toggles:         bundleToggles(v2),
+    seed:            v2.seed || null,
+    neighbour_links: v2.settlement?.neighbourNetwork || null,
+    ai_data:         v2.aiData || {},
+    campaign_state:  v2.campaignState || null,
   };
 
   const { data, error } = await supabase
@@ -105,6 +146,7 @@ async function supabaseUpdate(id, partial) {
   if (partial.config !== undefined) updates.config = partial.config;
   if (partial.seed   !== undefined) updates.seed = partial.seed;
   if (partial.aiData !== undefined) updates.ai_data = partial.aiData;
+  if (partial.campaignState !== undefined) updates.campaign_state = partial.campaignState;
 
   const toggles = bundleToggles(partial);
   if (toggles) updates.toggles = toggles;
@@ -130,13 +172,17 @@ async function supabaseCount() {
 // ── Local methods ───────────────────────────────────────────────────────────
 
 async function localList() {
-  return localLoad();
+  // Run the v2 migration on every read so older locally-saved entries
+  // surface with a campaignState block. Cost is trivial (object spread
+  // per save) and makes the rest of the app symmetric with Supabase.
+  return localLoad().map(migrateSaveToV2);
 }
 
 async function localSaveEntry(entry) {
+  const v2 = migrateSaveToV2(entry);
   const saves = localLoad();
-  const id = entry.id || Date.now();
-  saves.unshift({ ...entry, id, savedAt: Date.now() });
+  const id = v2.id || Date.now();
+  saves.unshift({ ...v2, id, savedAt: Date.now() });
   localWrite(saves);
   return id;
 }

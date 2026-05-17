@@ -9,14 +9,17 @@ import {NeighbourLinkCard} from '../neighbourComponents';
 export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
   const [typeFilter,setTypeFilter]=useState('all');
   const [fromFilter,setFromFilter]=useState('all');
-  if (!r) return null;
-
-  const rels=(Array.isArray(r.relationships)?r.relationships:[]);
-  const interSettlementRels=r.interSettlementRelationships||[];
-  // Conflicts: from saved links + live-generated for unsaved settlements
+  // Conflicts: from saved links + live-generated for unsaved settlements.
+  // NOTE: this hook must come BEFORE any early return so React's hooks-
+  // order invariant holds across renders. Previously `useMemo` followed
+  // `if (!r) return null;` (caught by rules-of-hooks). r-guard moved to
+  // a no-op input check inside the memo + a deferred final null check.
+  // Granular deps (r?.name, r?.npcs, etc.) deliberately replace the
+  // whole-`r` dep — `r` is a settlement object that re-allocates on
+  // many unrelated state changes and would over-invalidate the memo.
   const liveConflicts = useMemo(() => {
-    const nr = r.neighborRelationship;
-    if (!nr?.name) return [];
+    const nr = r?.neighborRelationship;
+    if (!r || !nr?.name) return [];
     try {
       const relType = nr.relationshipType || 'neutral';
       const settA = { name: r.name||'', npcs: r.npcs||[], factions: r.factions||[] };
@@ -24,7 +27,13 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
       const { forA } = generateCrossSettlementConflicts(settA, settB, relType, 'live');
       return forA;
     } catch(e) { return []; }
-  }, [r.name, r.neighborRelationship?.name]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [r?.name, r?.neighborRelationship?.name, r?.npcs, r?.factions, r?.neighborRelationship]);
+
+  if (!r) return null;
+
+  const rels=(Array.isArray(r.relationships)?r.relationships:[]);
+  const interSettlementRels=r.interSettlementRelationships||[];
 
   // Only typed entries (conflict / faction_engagement) — not raw NPC contacts (which have no type)
   const crossConflictsRaw = [

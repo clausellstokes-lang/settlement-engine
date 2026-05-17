@@ -1,183 +1,448 @@
 /**
- * EconomicsTrade — chapter 04.
+ * EconomicsTrade — chapter 03. Full economy parity with EconomicsTab.
  *
- * Headline stats → income breakdown → 3-column trade flows → critical
- * dependencies → food balance → active issues → underworld hooks.
+ *   - 4 stat tiles: prosperity / complexity / output / trade access
+ *   - Income sources bars
+ *   - 3-column trade flows + entrepôt callout + necessity imports flag
+ *   - Food security balance bar with full breakdown
+ *   - Economic Flows (chains) with status badges + processing → outputs
+ *   - Institutional services breakdown
+ *   - Resource exploitation (full / partial / unexploited)
+ *   - Shadow economy: capture rate + operations + criminal chains + crime types
+ *   - Active economic issues with descriptions, priorities, suggested fixes
  */
 import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
-import { Section } from '../primitives/Section.jsx';
-import { Heading } from '../primitives/Heading.jsx';
+import {
+  ChapterBand, ChapterHeadline, StatStrip, ThreeCol, BulletList, GoldRule, HairRule, Tag,
+} from '../primitives/Dense.jsx';
+import { economicsHeadline, economicsTone } from '../lib/headlines.js';
+import { ChainRow, StatusCard, ScoreWithBreakdown } from '../primitives/Visuals.jsx';
+import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
-import { BarMeter } from '../primitives/BarMeter.jsx';
-import { StatTile } from '../primitives/StatTile.jsx';
+import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space } from '../theme.js';
+import { cap, num, smart, label, hookText, finite, safePct } from '../lib/format.js';
 
 export function EconomicsTrade({ settlement, narrativeMode, vm }) {
   const e = vm.economics;
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
-      <Section
-        eyebrow="04"
+      <ChapterBand
+        eyebrow="09"
         title="Economics & Trade"
         accent={narrativeMode ? palette.ai : palette.gold}
-      >
-        {/* Headline stats */}
-        <View style={{ flexDirection: 'row', gap: 8, marginBottom: space.md }}>
-          <StatTile value={cap(e.prosperity) || '—'} label="PROSPERITY" />
-          <StatTile value={cap(e.economicComplexity) || '—'} label="COMPLEXITY" />
-          <StatTile
-            value={e.economyOutput != null ? String(e.economyOutput) : '—'}
-            label="OUTPUT"
-            sublabel="economy score"
-          />
-          <StatTile value={cap(e.tradeAccess) || '—'} label="TRADE ACCESS" />
-        </View>
+      />
 
-        {/* Income sources */}
-        {e.incomeSources.length > 0 && (
-          <View style={{ marginBottom: space.md }}>
-            <Heading level={3}>Income Sources</Heading>
-            {e.incomeSources.map((src, i) => (
-              <View key={`is-${i}`} style={{ marginBottom: 6 }} wrap={false}>
-                <BarMeter
-                  value={src.percentage || 0}
-                  max={100}
-                  label={src.source || 'Source'}
-                  sublabel={`${src.percentage || 0}%`}
-                  tone={src.isCriminal ? 'bad' : 'gold'}
-                />
-                {src.desc && (
-                  <Text
-                    style={{
-                      ...type.caption,
-                      color: palette.muted,
-                      marginTop: 1,
-                      marginLeft: 2,
-                    }}
-                  >
-                    {src.desc}
+      <ChapterHeadline tone={economicsTone(e)}>
+        {economicsHeadline(e)}
+      </ChapterHeadline>
+
+      <StatStrip
+        stats={[
+          { label: 'PROSPERITY', value: cap(e.prosperity) || '—' },
+          { label: 'COMPLEXITY', value: cap(e.economicComplexity) || '—' },
+          { label: 'OUTPUT', value: smart(e.economyOutput) },
+          { label: 'TRADE', value: cap(e.tradeAccess) || '—' },
+        ]}
+      />
+
+      {/* ── Income sources ─────────────────────────────────────── */}
+      {e.incomeSources?.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+            INCOME SOURCES
+          </Text>
+          {e.incomeSources.map((s, i) => (
+            <View key={`inc-${i}`} style={{ marginBottom: 3 }} wrap={false}>
+              <BarMeter
+                label={cap(s.source || s.name || 'Source')}
+                value={s.percentage || 0}
+                sublabel={`${num(s.percentage || 0)}%`}
+                tone={s.isCriminal ? 'bad' : 'gold'}
+                height={3}
+              />
+              {s.desc && (
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginTop: -2, marginLeft: 6 }}>
+                  {s.desc}
+                </Text>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* ── Trade flows ───────────────────────────────────────── */}
+      {(e.primaryExports?.length > 0 || e.primaryImports?.length > 0 || e.localProduction?.length > 0) && (
+        <>
+      <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+        TRADE FLOWS
+      </Text>
+      <ThreeCol
+        a={
+          <View>
+            <Text style={{ ...type.label, fontSize: 7.5, color: palette.good }}>EXPORTS</Text>
+            <BulletList
+              items={e.primaryExports}
+              tone="good"
+              emptyText="None significant"
+              itemRender={(item) => label(item)}
+            />
+          </View>
+        }
+        b={
+          <View>
+            <Text style={{ ...type.label, fontSize: 7.5, color: palette.warn }}>IMPORTS</Text>
+            <BulletList
+              items={e.primaryImports}
+              tone="warn"
+              emptyText="None significant"
+              itemRender={(item) => label(item)}
+            />
+          </View>
+        }
+        c={
+          <View>
+            <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>LOCAL PRODUCTION</Text>
+            <BulletList
+              items={e.localProduction}
+              tone="muted"
+              emptyText="None recorded"
+              itemRender={(item) => label(item)}
+            />
+          </View>
+        }
+      />
+        </>
+      )}
+
+      {/* Entrepôt + necessity flags */}
+      {(e.isEntrepot || e.necessityImports) && (
+        <View style={{ flexDirection: 'row', gap: 6, marginTop: 4, marginBottom: space.sm }}>
+          {e.isEntrepot && <Tag tone="cool">ENTREPÔT</Tag>}
+          {e.necessityImports && <Tag tone="bad">NECESSITY IMPORTS</Tag>}
+        </View>
+      )}
+
+      {/* Critical trade dependencies */}
+      {(e.tradeDependencies?.length > 0 || e.criticalImports?.length > 0) && (
+        <View style={{ marginBottom: space.sm }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+            CRITICAL DEPENDENCIES
+          </Text>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+            {[...(e.tradeDependencies || []), ...(e.criticalImports || [])].map((d, i) => (
+              <Tag key={`dep-${i}`} tone="bad">{label(d)}</Tag>
+            ))}
+          </View>
+        </View>
+      )}
+
+      {hasFoodData(e.foodBalance) && (
+        <>
+          <HairRule />
+          {/* ── Food security ─────────────────────────────────────── */}
+          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+            FOOD SECURITY
+          </Text>
+          <FoodBalanceBlock fb={e.foodBalance} />
+        </>
+      )}
+
+      {/* ── Economic flows / chains ───────────────────────────── */}
+      {e.chains?.length > 0 && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+            ECONOMIC FLOWS · {e.chains.length} CHAIN{e.chains.length === 1 ? '' : 'S'}
+          </Text>
+          {e.chains.map((c, i) => (
+            <StatusCard
+              key={`ch-${i}`}
+              compact
+              name={c.name}
+              status={c.status}
+              statusLabel={cap(c.status)}
+              meta={[
+                c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map(label).filter(Boolean).join(', ') } : null,
+                c.outputs?.length ? { label: 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
+                c.dependency ? { label: 'DEP', value: depText(c.dependency) } : null,
+                c.incomeContribution != null ? { label: 'INC', value: smart(c.incomeContribution) } : null,
+              ].filter(b => b && b.value)}
+              description={c.description || null}
+              body={
+                c.hooks?.length > 0 ? (
+                  <View style={{ marginTop: 2 }}>
+                    {c.hooks.map((h, hi) => (
+                      <View key={`chk-${i}-${hi}`} style={{ flexDirection: 'row' }}>
+                        <Text style={{ color: palette.gold, marginRight: 3, fontSize: 8 }}>↳</Text>
+                        <EditableText
+                          name={`economics.chain.${i}.hook.${hi}`}
+                          defaultValue={hookText(h)}
+                          style={{ ...type.italic, fontSize: 8.5, color: palette.second }}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                ) : null
+              }
+            />
+          ))}
+        </View>
+      )}
+
+      {/* ── Resource exploitation ─────────────────────────────── */}
+      {e.resourceExploitation && (e.resourceExploitation.full?.length > 0 || e.resourceExploitation.partial?.length > 0 || e.resourceExploitation.unexploited?.length > 0) && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+            RESOURCE EXPLOITATION
+          </Text>
+          <ThreeCol
+            a={
+              <View>
+                <Text style={{ ...type.label, fontSize: 7.5, color: palette.good }}>FULL</Text>
+                <BulletList items={e.resourceExploitation.full} tone="good" emptyText="None" itemRender={label} />
+              </View>
+            }
+            b={
+              <View>
+                <Text style={{ ...type.label, fontSize: 7.5, color: palette.warn }}>PARTIAL</Text>
+                <BulletList items={e.resourceExploitation.partial} tone="warn" emptyText="None" itemRender={label} />
+              </View>
+            }
+            c={
+              <View>
+                <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>UNEXPLOITED</Text>
+                <BulletList items={e.resourceExploitation.unexploited} tone="muted" emptyText="None" itemRender={label} />
+              </View>
+            }
+          />
+        </View>
+      )}
+
+      {/* ── Shadow economy ─────────────────────────────────────── */}
+      {(e.shadowEconomy.captureRate != null || e.shadowEconomy.operations?.length > 0 || e.shadowEconomy.crimeTypes?.length > 0) && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+            SHADOW ECONOMY
+          </Text>
+          {e.shadowEconomy.captureRate != null && (
+            <Text style={{ ...type.body, fontSize: 9, color: palette.bad, marginBottom: 3 }}>
+              Black market capture: <Text style={{ fontWeight: 700 }}>{smart(e.shadowEconomy.captureRate)}%</Text> of economy
+            </Text>
+          )}
+          {e.shadowEconomy.crimeTypes?.length > 0 && (
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginBottom: 4 }}>
+              {e.shadowEconomy.crimeTypes.map((ct, i) => (
+                <Tag key={`crm-${i}`} tone="bad">{label(ct)}</Tag>
+              ))}
+            </View>
+          )}
+          {e.shadowEconomy.operations?.length > 0 && (
+            <View style={{ marginBottom: 4 }}>
+              <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>ACTIVE OPERATIONS</Text>
+              {e.shadowEconomy.operations.map((op, i) => (
+                <View key={`op-${i}`} style={{ marginBottom: 2 }}>
+                  <Text style={{ ...type.body_em, fontSize: 9, color: palette.bad }}>
+                    {label(op)}
+                  </Text>
+                  {op?.scope && (
+                    <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>
+                      Scope: {op.scope}{op?.target ? ` · target: ${op.target}` : ''}
+                    </Text>
+                  )}
+                  {op?.description && (
+                    <EditableText
+                      name={`economics.shadow.op.${i}.description`}
+                      defaultValue={op.description}
+                      style={{ ...type.body, fontSize: 8.5 }}
+                    />
+                  )}
+                </View>
+              ))}
+            </View>
+          )}
+          {e.shadowEconomy.criminalChains?.length > 0 && (
+            <BulletList
+              items={e.shadowEconomy.criminalChains}
+              tone="bad"
+              itemRender={(c) => label(c)}
+            />
+          )}
+        </View>
+      )}
+
+      {/* ── Economic issues + suggested fixes ─────────────────── */}
+      {e.viabilityIssues?.length > 0 && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+            ACTIVE ECONOMIC ISSUES
+          </Text>
+          {e.viabilityIssues.map((iss, i) => (
+            <View key={`iss-${i}`} style={{ marginBottom: 4 }} wrap={false}>
+              <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+                {iss.severity && <Pill tone={severityTone(iss.severity)}>{iss.severity}</Pill>}
+                <Text style={{ ...type.body_em, fontSize: 9, color: palette.ink, marginLeft: 4, flex: 1 }}>
+                  {iss.title}
+                </Text>
+                {iss.institution && (
+                  <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+                    {iss.institution}
                   </Text>
                 )}
               </View>
-            ))}
-          </View>
-        )}
-
-        {/* Trade flows */}
-        <Heading level={3}>Trade Flows</Heading>
-        <View style={{ flexDirection: 'row', gap: 10, marginBottom: space.md }}>
-          <TradeColumn title="Exports" tone="good" items={e.primaryExports} />
-          <TradeColumn title="Imports" tone="cool" items={e.primaryImports} />
-          <TradeColumn title="Local Production" tone="gold" items={e.localProduction} />
-        </View>
-
-        {/* Entrepôt flag */}
-        {e.isEntrepot && (
-          <Callout tone="cool" kicker="ENTREPÔT">
-            <Text style={type.body}>
-              Re-exports goods rather than producing them locally — a hub for trade flows.
-            </Text>
-          </Callout>
-        )}
-
-        {/* Trade dependencies */}
-        {(e.tradeDependencies.length > 0 || e.criticalImports.length > 0) && (
-          <View style={{ marginTop: space.md }}>
-            <Heading level={4}>Critical Trade Dependencies</Heading>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
-              {[...e.tradeDependencies, ...e.criticalImports].slice(0, 12).map((d, i) => (
-                <Pill key={`td-${i}`} tone="warn">{labelOf(d)}</Pill>
-              ))}
-            </View>
-          </View>
-        )}
-
-        {/* Food balance callout */}
-        {e.foodBalance && (e.foodBalance.deficit > 0 || e.foodBalance.surplus > 0) && (
-          <Callout
-            tone={e.foodBalance.deficit > 0 ? 'bad' : 'good'}
-            kicker="FOOD BALANCE"
-          >
-            <Text style={type.body}>
-              {e.foodBalance.deficit > 0
-                ? `Food deficit: ${e.foodBalance.deficit} units — depends on continuous import.`
-                : `Food surplus: ${e.foodBalance.surplus} units — exportable food production.`}
-            </Text>
-          </Callout>
-        )}
-
-        {/* Issues */}
-        {e.viabilityIssues.length > 0 && (
-          <View style={{ marginTop: space.md }}>
-            <Heading level={4}>Active Economic Issues</Heading>
-            {e.viabilityIssues.slice(0, 8).map((iss, i) => (
-              <View
-                key={`issue-${i}`}
-                style={{ flexDirection: 'row', marginBottom: 4, alignItems: 'center' }}
-                wrap={false}
-              >
-                <Pill tone={severityTone(iss.severity)}>
-                  {(iss.severity || 'NOTE').toUpperCase()}
-                </Pill>
-                <Text style={{ ...type.body, marginLeft: 6, flex: 1 }}>
-                  {iss.title || iss.type || 'issue'}
-                  {iss.institution ? ` (${iss.institution})` : ''}
+              {iss.description && (
+                <EditableProse
+                  name={`economics.issue.${i}.description`}
+                  defaultValue={iss.description}
+                  lines={1}
+                  style={{ ...type.body, fontSize: 9 }}
+                />
+              )}
+              {iss.priorityNote && (
+                <Text style={{ ...type.caption, color: palette.warn, fontSize: 8, fontStyle: 'italic' }}>
+                  {iss.priorityNote}
                 </Text>
-              </View>
-            ))}
-          </View>
-        )}
+              )}
+              {iss.suggestedFixes?.length > 0 && (
+                <View style={{ marginTop: 1, marginLeft: 6 }}>
+                  <Text style={{ ...type.label, color: palette.good, fontSize: 7 }}>SUGGESTED FIXES</Text>
+                  {iss.suggestedFixes.map((fix, fi) => (
+                    <View key={`fix-${i}-${fi}`} style={{ flexDirection: 'row' }}>
+                      <Text style={{ color: palette.good, marginRight: 3, fontSize: 8 }}>+</Text>
+                      <EditableText
+                        name={`economics.issue.${i}.fix.${fi}`}
+                        defaultValue={typeof fix === 'string' ? fix : (fix?.text || fix?.description || '')}
+                        style={{ ...type.body, fontSize: 8.5, flex: 1 }}
+                      />
+                    </View>
+                  ))}
+                </View>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
 
-        {/* Safety hooks */}
-        {e.safetyHooks.length > 0 && (
-          <View style={{ marginTop: space.md }}>
-            <Heading level={4}>Underworld Hooks</Heading>
-            {e.safetyHooks.slice(0, 4).map((h, i) => (
-              <View key={`sh-${i}`} style={{ flexDirection: 'row', marginBottom: 4 }} wrap={false}>
-                <Text style={{ ...type.body_em, color: palette.bad, marginRight: 6 }}>•</Text>
-                <Text style={{ ...type.body, flex: 1 }}>{labelOf(h)}</Text>
-              </View>
-            ))}
-          </View>
-        )}
-      </Section>
+      {/* ── Hooks (compressed) ──────────────────────────────────── */}
+      {(e.viabilityHooks?.length > 0 || e.safetyHooks?.length > 0) && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+            ECONOMIC HOOKS
+          </Text>
+          {[...(e.viabilityHooks || []), ...(e.safetyHooks || [])].map((h, i) => (
+            <View key={`eh-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }}>
+              <Text style={{ color: palette.gold, marginRight: 4, fontSize: 9 }}>·</Text>
+              <EditableText
+                name={`economics.hook.${i}`}
+                defaultValue={hookText(h)}
+                style={{ ...type.body, fontSize: 9 }}
+              />
+            </View>
+          ))}
+        </View>
+      )}
     </PageChrome>
   );
 }
 
-function TradeColumn({ title, tone, items }) {
+function FoodBalanceBlock({ fb }) {
+  if (!fb) return null;
+  const prod = finite(fb.production, 0);
+  const need = finite(fb.need, 0);
+  const max = Math.max(prod, need, 1);
+  const prodPct = safePct((prod / max) * 100);
+  const needPct = safePct((need / max) * 100);
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={{ ...type.label, color: palette[tone] || palette.gold, marginBottom: 4 }}>{title}</Text>
-      {items.length === 0 && (
-        <Text style={{ ...type.caption, color: palette.faint, fontStyle: 'italic' }}>none</Text>
-      )}
-      {items.slice(0, 8).map((item, i) => (
-        <Text key={`item-${i}`} style={{ ...type.caption, marginBottom: 2 }}>
-          · {labelOf(item)}
+    <View style={{ marginBottom: space.sm }} wrap={false}>
+      <View style={{ flexDirection: 'row', gap: 6 }}>
+        <View style={{ flex: 1 }}>
+          <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>PRODUCED</Text>
+          <View style={{ height: 5, backgroundColor: '#f0e8d8', borderRadius: 1, marginTop: 1 }}>
+            <View style={{ width: `${prodPct}%`, height: '100%', backgroundColor: palette.good }} />
+          </View>
+          <Text style={{ ...type.caption, fontSize: 8, marginTop: 1 }}>{smart(prod)}</Text>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>NEEDED</Text>
+          <View style={{ height: 5, backgroundColor: '#f0e8d8', borderRadius: 1, marginTop: 1 }}>
+            <View style={{ width: `${needPct}%`, height: '100%', backgroundColor: palette.bad }} />
+          </View>
+          <Text style={{ ...type.caption, fontSize: 8, marginTop: 1 }}>{smart(need)}</Text>
+        </View>
+        {fb.deficit > 0 && (
+          <View style={{ flex: 1 }}>
+            <Text style={{ ...type.caption, fontSize: 8, color: palette.bad }}>DEFICIT</Text>
+            <Text style={{ ...type.numeric, fontSize: 13, color: palette.bad }}>{smart(fb.deficit)}</Text>
+            {fb.importCoverage != null && (
+              <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>
+                imports cover {smart(fb.importCoverage)}%
+              </Text>
+            )}
+          </View>
+        )}
+        {fb.surplus > 0 && (
+          <View style={{ flex: 1 }}>
+            <Text style={{ ...type.caption, fontSize: 8, color: palette.good }}>SURPLUS</Text>
+            <Text style={{ ...type.numeric, fontSize: 13, color: palette.good }}>{smart(fb.surplus)}</Text>
+          </View>
+        )}
+      </View>
+      {(fb.agricultureModifier != null || fb.stressModifier != null) && (
+        <Text style={{ ...type.caption, fontSize: 8, color: palette.muted, marginTop: 3 }}>
+          {fb.agricultureModifier != null && `Ag mod ${smart(fb.agricultureModifier)}  ·  `}
+          {fb.stressModifier != null && `Stress mod ${smart(fb.stressModifier)}`}
         </Text>
-      ))}
+      )}
+      {fb.summary && (
+        <EditableProse
+          name="economics.foodBalance.summary"
+          defaultValue={fb.summary}
+          lines={1}
+          style={{ ...type.italic, fontSize: 9, color: palette.second, marginTop: 3 }}
+        />
+      )}
     </View>
   );
 }
 
 function severityTone(s) {
-  const x = (s || '').toString().toLowerCase();
-  if (x === 'critical' || x === 'severe') return 'bad';
-  if (x === 'major' || x === 'warning') return 'warn';
-  if (x === 'note' || x === 'info') return 'muted';
-  return 'gold';
+  const k = String(s || '').toLowerCase();
+  if (k === 'critical' || k === 'high' || k === 'severe') return 'bad';
+  if (k === 'medium' || k === 'moderate' || k === 'warning') return 'warn';
+  return 'muted';
 }
 
-function cap(s) { return s && typeof s === 'string' ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
-function labelOf(item) {
-  if (!item) return '';
-  if (typeof item === 'string') return item;
-  return item.good || item.name || item.label || item.title || '';
+// foodBalance has data worth showing if any of production/need/deficit/surplus
+// is non-zero. Empty engine output should not produce an empty section header.
+function hasFoodData(fb) {
+  if (!fb) return false;
+  return [fb.production, fb.need, fb.deficit, fb.surplus]
+    .some(n => n != null && Number(n) > 0);
+}
+
+// Chain dependency may be a string ("imports/iron") or an object
+// ({ resource, type, critical }) — coerce to a presentable string.
+function depText(d) {
+  if (!d) return '';
+  if (typeof d === 'string') return d;
+  if (typeof d === 'object') {
+    const parts = [];
+    if (d.resource) parts.push(label(d.resource));
+    else if (d.name) parts.push(label(d.name));
+    else if (d.type) parts.push(label(d.type));
+    if (d.scope) parts.push(`(${d.scope})`);
+    if (d.critical) parts.push('critical');
+    return parts.filter(Boolean).join(' ');
+  }
+  return String(d);
 }
 
 export default EconomicsTrade;

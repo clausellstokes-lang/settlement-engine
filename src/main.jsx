@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
+import './styles/a11y.css';
 import { useStore } from './store';
 
 // Expose store globally in dev so we can validate map features via automation.

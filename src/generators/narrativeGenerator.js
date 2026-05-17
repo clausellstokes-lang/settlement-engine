@@ -948,7 +948,7 @@ export const generateSettlementReason = (tier, route, neighbor, config = {}) => 
   const routeHooks = TERRAIN_NARRATIVE_HOOKS[route] || TERRAIN_NARRATIVE_HOOKS.isolated;
 
   // Primary settlement reason
-  let reason = '';
+  let reason;
   if (route === 'crossroads') {
     reason = 'Positioned at a major crossroads — trade flows through here by geography, not by choice.';
   } else if (route === 'port') {
@@ -1068,7 +1068,7 @@ export const generateArrivalScene = settlement => {
   const route = config.tradeRouteAccess || 'road';
 
   // Try stress-specific vignette first
-  let openingLine = null;
+  let openingLine;
   if (primaryStress && STRESS_DESCS[primaryStress]) {
     openingLine = pickRandom2(STRESS_DESCS[primaryStress])(name);
   } else if (ARRIVAL_SCENES[route]) {

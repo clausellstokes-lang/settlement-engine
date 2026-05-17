@@ -1,6 +1,19 @@
 /**
  * Workshop.jsx — Additive advanced generation sandbox.
  *
+ * STATUS: INACTIVE (as of 2026-04). This component is fully implemented
+ * but currently NOT imported by App.jsx. It is the planned home for the
+ * "Custom Generate" mode in Phase D of the active refactor plan
+ * (`~/.claude/plans/golden-greeting-codd.md`), which will:
+ *   1. Rename "Custom Template" → "Custom Generate" in the wizard
+ *   2. Re-mount Workshop here, gated behind a premium check
+ *   3. Absorb supply-chain builder + custom institutions/resources/routes
+ *
+ * Do not delete. Until Phase D wires it back in, treat this file as
+ * documentation of the intended Custom mode surface area. If Phase D
+ * is cancelled or rescoped, delete in one PR rather than letting it
+ * rot here.
+ *
  * Power-user config tool that exposes ALL settlement generator
  * parameters simultaneously in a single-page dashboard (unlike the
  * step-by-step wizard). Users can fine-tune:

@@ -43,11 +43,15 @@ export default function PlacementsLayer({ transformRef }) {
   // spamming the Immer store on every pointermove.
   const [dragPreview, setDragPreview] = useState(null);
 
-  // Prefer the live transformRef.scale (updated every viewport tick) and
-  // fall back to the persisted store value. Re-renders happen only when
-  // the persisted scale rolls over (debounced by MapOverlay's 500ms).
-  const persistedScale = useViewportScale();
-  const scale = (transformRef?.current?.scale) || persistedScale || 1;
+  // Counter-scale icons by viewport zoom. We use the persisted store
+  // value (debounced ~500ms by MapOverlay) rather than reading
+  // transformRef.current.scale during render — the latter is a
+  // react-hooks/refs violation under React Compiler and the visual
+  // benefit is sub-perceptible (icons might be the wrong size for up
+  // to 500ms during a continuous zoom; same as the gap between samples).
+  // transformRef is still used in event handlers (screenToMap), which
+  // is the canonical legal use of a ref.
+  const scale = useViewportScale() || 1;
 
   const saveById = useMemo(() => {
     const m = new Map();

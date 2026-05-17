@@ -254,7 +254,7 @@ const computeDefenseScores = (
   const _hasActualMagic = inst.hasMagicInst || hasDruid || hasArcane
     || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
   const _hasMagicInstitution = _hasActualMagic;
-  let magical = 0;
+  let magical;
   if (!magicOn || (_isSmallTier && !_hasMagicInstitution)) {
     magical = 0; // no magic, or small tier with no magic presence
   } else {
@@ -547,7 +547,7 @@ export function buildThreatAssessment(r) {
     : threat === 'frontier'
       ? '#7a5010'
       : '#1a5a28';
-  let mon = '';
+  let mon;
   if (threat === 'plagued') {
     if (hasWalls && hasGarrison) {
       mon = 'Embattled region: constant creature pressure. Walls and garrison have established a survivable posture. Defense is an ongoing operational necessity. '
@@ -610,7 +610,7 @@ export function buildThreatAssessment(r) {
     : milScore >= 35
       ? '#7a5010'
       : '#8b1a1a';
-  let mil = '';
+  let mil;
   if (hasWalls && hasGarrison) {
     mil = 'Walls and professional garrison provide meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
   } else if (hasWalls && hasMilitia) {

@@ -81,7 +81,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const [localAiError, setLocalAiError]     = useState(null);
   const [aiProgress, setAiProgress] = useState('');
   const scrollRef = useRef(null);
-  if (!rawSettlement) return null;
+  // NOTE: do not early-return here. React Hooks must always be called
+  // in the same order on every render; an early return before subsequent
+  // useMemo/useCallback hooks (line 124 etc.) would create a hooks-order
+  // violation flagged by react-hooks/rules-of-hooks. We instead defer
+  // the null check until after all hooks have been called (see below).
+  const earlyExitOnNoSettlement = !rawSettlement;
 
   // Use store-based AI (credit-gated via edge function) when Supabase is configured,
   // fall back to direct aiLayer call for local dev
@@ -295,6 +300,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       }, ' ', aiError)
     );
   };
+
+  // Deferred null check (see comment near the top of this component).
+  // All hooks are now committed; safe to early-exit.
+  if (earlyExitOnNoSettlement) return null;
 
   return (
     React.createElement('div', { style: { background: 'rgba(255,251,245,0.96)', border: '1px solid #c8b89a', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' } },

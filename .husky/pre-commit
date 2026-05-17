@@ -1,0 +1,5 @@
+# Pre-commit: run ESLint with --fix on staged JS/JSX files only.
+# Full check (tsc + tests + build) runs in CI on push — keeping
+# pre-commit fast (~1s) makes the local loop pleasant instead of
+# punishing. If you want to run the whole gate locally, `npm run check`.
+npx lint-staged

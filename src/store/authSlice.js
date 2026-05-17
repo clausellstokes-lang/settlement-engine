@@ -177,6 +177,22 @@ export const createAuthSlice = (set, get) => ({
     }
   },
 
+  /**
+   * Send magic-link / OTP sign-in email. WCAG 2.2 SC 3.3.8 (Accessible
+   * Authentication, Minimum) prefers this path over password recall.
+   * Resolution happens via the auth-state listener on link click — no
+   * follow-up call needed here.
+   */
+  authMagicLink: async (email) => {
+    try {
+      const result = await authService.signInWithMagicLink(email);
+      return result;  // { sentTo: email }
+    } catch (e) {
+      set(state => { state.auth.error = e.message; });
+      throw e;
+    }
+  },
+
   // ── Permission queries (elevated roles bypass all gates) ──────────────────
   canSave: () => {
     if (ELEVATED_ROLES.includes(get().auth.role)) return true;

@@ -14,6 +14,7 @@ import { runPipeline } from './pipeline.js';
 import { generateNPCs, generateRelationships } from './npcGenerator.js';
 import { generateFactions, generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
+import { withCustomContent } from '../lib/dependencyEngine.js';
 
 // Side-effect: registers all pipeline steps
 import './steps/index.js';
@@ -26,6 +27,16 @@ import './steps/index.js';
  * @param {Object}  [options]
  * @param {string}  [options.seed]  — Seed for deterministic generation. Auto-generated if omitted.
  * @param {Function} [options.onStep] — Callback after each step: (name, ctx, patch) => void
+ * @param {Function} [options.onComplete] — Callback after the full pipeline finishes,
+ *   receives the final accumulated context. The reactive-update engine uses this
+ *   to capture `lastCtx` so future `applyEvent` calls can re-run only affected
+ *   steps via `rerunAffected` instead of paying for a full re-generation. Existing
+ *   callers that ignore this option get back exactly the settlement they always did.
+ * @param {Object}  [options.customContent] — Custom-content snapshot to expose to the
+ *   generator's dependencyEngine. If omitted, falls back to whatever the global
+ *   source returns (the live store, when running in the app). Pass an explicit
+ *   blob (or `{}`) to make this generation fully deterministic and headless —
+ *   independent of any app state.
  * @returns {Object} Complete settlement data object (same shape as old generateSettlement)
  */
 export function generateSettlementPipeline(config = {}, importedNeighbour = null, options = {}) {
@@ -38,13 +49,19 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
     _seed: seed,
   };
 
-  const finalCtx = runPipeline(initialContext, rng, {
-    onStep: options.onStep,
-  });
+  const run = () => runPipeline(initialContext, rng, { onStep: options.onStep });
+
+  const finalCtx = options.customContent !== undefined
+    ? withCustomContent(options.customContent, run)
+    : run();
 
   // Attach seed to settlement for replay
   if (finalCtx.settlement) {
     finalCtx.settlement._seed = seed;
+  }
+
+  if (typeof options.onComplete === 'function') {
+    try { options.onComplete(finalCtx); } catch (e) { console.warn('[pipeline] onComplete threw:', e); }
   }
 
   return finalCtx.settlement;

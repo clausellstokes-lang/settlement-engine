@@ -12,8 +12,11 @@
 
 import {
   TIER_ORDER, POPULATION_RANGES, SEVERITY,
-  chance, pick, randInt, popToTier, getMagicLevel, tierAtLeast,
+  popToTier, getMagicLevel, tierAtLeast,
 } from '../data/constants.js';
+// chance/pick/randInt come from rngContext directly (not from constants.js)
+// since 2026-04 — eliminates the data→engine→data circular chunk warning.
+import { chance, pick, randInt } from './rngContext.js';
 export { STRESS_INSTITUTION_EFFECTS } from '../data/stressTypes.js';
 
 

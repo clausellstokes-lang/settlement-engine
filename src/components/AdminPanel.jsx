@@ -253,9 +253,15 @@ export default function AdminPanel({ onBack }) {
     }
   }, []);
 
+  // Mount-fetch pattern: the two fetches each setState internally,
+  // which trips react-hooks/set-state-in-effect under React Compiler.
+  // Migrating away requires a query library (TanStack Query, SWR) or
+  // Suspense — outside the scope of this panel's one-time admin load.
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     fetchUsers();
     fetchSupport();
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [fetchUsers, fetchSupport]);
 
   if (!isElevated) {

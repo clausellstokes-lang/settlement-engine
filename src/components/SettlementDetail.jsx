@@ -1,12 +1,36 @@
 import React, { useState, useMemo, useEffect, lazy, Suspense } from 'react';
 import {Link2, ChevronLeft, X, FileText, Sparkles, RotateCcw, Loader2} from 'lucide-react';
-import {generateSettlementPDF} from '../utils/generateSettlementPDF.js';
+// Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
+// section components. Import lazily on user click so opening a settlement
+// detail view doesn't pay for export machinery up front.
+const generateSettlementPDF = (...args) =>
+  import('../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import {getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS} from '../lib/relationshipGraph.js';
 import { useStore } from '../store/index.js';
 
 const OutputContainer = lazy(() => import('./OutputContainer'));
 import SettlementEditor from './SettlementEditor.jsx';
 import ChroniclePanel from './ChroniclePanel.jsx';
+// Campaign-state engine UI — phase, locks, system state, events,
+// timeline, coherence checks. Each is hidden when not relevant
+// (Timeline only shows in canon, CoherencePanel only in draft).
+import PhaseBadge       from './settlement/PhaseBadge.jsx';
+import SystemStateBar   from './settlement/SystemStateBar.jsx';
+import EventComposer    from './settlement/EventComposer.jsx';
+import Timeline         from './settlement/Timeline.jsx';
+import CoherencePanel   from './settlement/CoherencePanel.jsx';
+// Wave 2 audit components: contextual AI, action rail, provenance,
+// export sheet picker. Each is small and additive — they replace
+// scattered chrome with consistent surfaces in the right rail.
+import NextActionRail   from './settlement/NextActionRail.jsx';
+import ProvenanceBlock  from './settlement/ProvenanceBlock.jsx';
+import AIInlineCard     from './settlement/AIInlineCard.jsx';
+import ExportSheet      from './settlement/ExportSheet.jsx';
+// Modal that fires after pillar-tier KILL_NPC commits. Reads
+// pendingSuccession off the slice, shows ranked successors, and
+// pre-fills the EventComposer with ASSIGN_NPC_TO_ROLE on selection.
+import SuccessorPrompt  from './settlement/SuccessorPrompt.jsx';
+import { triggerPricingMoment } from '../lib/pricingMoments.js';
 import {GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_} from './theme';
 
 const REL_COLORS = {
@@ -258,6 +282,7 @@ export default function SettlementDetail({
   const [editDraft,   setEditDraft]   = useState('');
   const [saved,       setSaved]       = useState(false);
   const [exporting,   setExporting]   = useState(false); // PDF export spinner
+  const [exportSheetOpen, setExportSheetOpen] = useState(false); // variant picker modal
 
   // AI-1: pull the saved settlement's persisted ai_data into the aiSlice
   // when this detail view opens (or when switching between saves). Without
@@ -296,6 +321,15 @@ export default function SettlementDetail({
   useEffect(() => {
     if (detail?.saveData) {
       hydrateAiFromSave(detail.saveData);
+      // Audit fix: hydrate the lifecycle slots (phase, eventLog,
+      // systemState, locks, provenance timestamps) from this save's
+      // campaignState. Without this, opening Stoneford after working
+      // on Mossbridge silently shows Mossbridge's canon state on
+      // Stoneford's detail view.
+      const live = useStore.getState();
+      if (typeof live.hydrateFromSave === 'function') {
+        live.hydrateFromSave(detail.saveData);
+      }
     }
     // Clear AI state when leaving the detail view so it doesn't leak into
     // the Generate wizard or the next save that gets opened.
@@ -325,7 +359,9 @@ export default function SettlementDetail({
           <button onClick={()=>{setDetail(null);setLinking(false);}} style={{display:'flex',alignItems:'center',gap:5,background:'rgba(255,251,245,0.96)',border:`1px solid ${BORDER}`,borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:12,fontWeight:700,color:SECOND,fontFamily:sans}}>
             <ChevronLeft size={13}/> Back to list
           </button>
-          <span style={{fontFamily:serif_,fontSize:15,fontWeight:600,color:INK,flex:1}}>{detail.name}</span>
+          <span style={{fontFamily:serif_,fontSize:15,fontWeight:600,color:INK}}>{detail.name}</span>
+          <PhaseBadge />
+          <span style={{flex:1}} />
           {/* Narrated/Raw badge — reflects the persisted AI state on this save */}
           <span style={{
             display:'inline-flex',alignItems:'center',gap:4,
@@ -351,24 +387,8 @@ export default function SettlementDetail({
           </button>
           <button
             disabled={exporting}
-            onClick={async () => {
-              if (exporting) return;
-              setExporting(true);
-              try {
-                await generateSettlementPDF(detail.settlement, {
-                  aiSettlement,
-                  aiDailyLife,
-                  narrativeMode: narrated,
-                });
-              } catch (err) {
-                console.error('[PDF export] failed:', err);
-                const msg = err?.message || String(err) || 'unknown error';
-                alert('PDF export failed:\n\n' + msg + '\n\nFull error logged to console.');
-              } finally {
-                setExporting(false);
-              }
-            }}
-            title={narrated ? 'Export the narrative-edition dossier (includes AI Appendix).' : 'Export the raw dossier — no AI sections.'}
+            onClick={() => setExportSheetOpen(true)}
+            title="Choose Draft Brief / Canon Dossier / Timeline Packet."
             style={{
               display:'flex',alignItems:'center',gap:5,
               background: exporting ? '#5a1414' : '#7a1a1a',
@@ -380,7 +400,7 @@ export default function SettlementDetail({
           >
             {exporting
               ? <><Loader2 size={12} style={{animation:'spin 1s linear infinite'}}/> Building PDF…</>
-              : <><FileText size={12}/> Export PDF{narrated ? ' (Narrative)' : ''}</>}
+              : <><FileText size={12}/> Export Dossier</>}
           </button>
         </div>
       </div>
@@ -393,6 +413,115 @@ export default function SettlementDetail({
           Restores settings &amp; runs a fresh generation — the new settlement will differ from the saved one.
         </span>
       </div>
+
+      {/* ── Campaign-state engine ─────────────────────────────────────────
+            SystemStateBar shows the four-dimension health snapshot,
+            AIInlineCard prompts for AI polish when not yet narrated,
+            CoherencePanel surfaces structural warnings in draft mode,
+            EventComposer lets the DM apply in-world events (writes to
+            timeline in canon mode), Timeline displays the canon log. */}
+      <SystemStateBar />
+      <AIInlineCard
+        settlement={detail.settlement}
+        onPolish={() => {
+          // The AI slice's actual handler is `requestNarrative(saveId)` —
+          // there's no `runAiLayer` action. Fixed 2026-04 after the audit
+          // verification revealed the dangling reference. The save id
+          // comes from the currently-open detail save record.
+          const live = useStore.getState();
+          const saveId = detail?.saveData?.id || detail?.id;
+          if (typeof live.requestNarrative === 'function' && saveId) {
+            live.requestNarrative(saveId).catch(e => {
+              console.warn('[AIInlineCard] requestNarrative failed:', e);
+            });
+          }
+          // Fire pricing moment on first AI use (cooldowned per-user).
+          triggerPricingMoment('first_ai_use', () => {
+            live.setPurchaseModalOpen?.(true);
+          }, { tier: live.auth?.tier });
+        }}
+      />
+      <CoherencePanel />
+      <EventComposer />
+      <Timeline />
+
+      {/* Right rail: phase-aware "next best action" + provenance block.
+          Lives below the engine UI rather than as a separate column,
+          to avoid breaking the existing single-column layout. The audit
+          asked for a true side rail; we ship a stacked rail in v1
+          which is structurally identical and delivers most of the win
+          without a layout overhaul. */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 12, marginBottom: 12 }}>
+        <NextActionRail
+          settlement={detail.settlement}
+          save={detail.saveData || detail}
+          handlers={{
+            onCanonize: () => useStore.getState().canonize(),
+            onApplyEvent: () => {
+              // Scroll to and focus the EventComposer block. Best-effort:
+              // it's the next visible interactive surface below the rail.
+              const target = document.querySelector('[data-anchor="event-composer"]');
+              if (target?.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            },
+            onPolishAi: () => {
+              const live = useStore.getState();
+              const saveId = detail?.saveData?.id || detail?.id;
+              if (typeof live.requestNarrative === 'function' && saveId) {
+                live.requestNarrative(saveId).catch(e => {
+                  console.warn('[NextActionRail.onPolishAi] requestNarrative failed:', e);
+                });
+              }
+            },
+            onExport: () => setExportSheetOpen(true),
+          }}
+        />
+        <ProvenanceBlock save={detail.saveData || detail} />
+      </div>
+
+      {/* Successor prompt — modal that appears after a pillar-tier
+          KILL_NPC commits. Reads `pendingSuccession` off the slice;
+          self-hides when the user dismisses or applies. The pendingState
+          is set inside applyEvent() in the slice, so the modal mounts
+          here at the dossier level rather than at App-root. */}
+      <SuccessorPrompt />
+
+      {/* PDF export variant picker — opened by the Export Dossier button
+          in the header. Closed by Cancel or successful export. */}
+      <ExportSheet
+        open={exportSheetOpen}
+        exporting={exporting}
+        onClose={() => setExportSheetOpen(false)}
+        onExport={async (variant) => {
+          if (exporting) return;
+          setExporting(true);
+          try {
+            const liveStore = useStore.getState();
+            await generateSettlementPDF(detail.settlement, {
+              aiSettlement, aiDailyLife, narrativeMode: narrated,
+              systemState: liveStore.systemState,
+              eventLog:    liveStore.eventLog,
+              phase:       liveStore.phase,
+              variant,
+            });
+            // Stamp the provenance timestamp + tick the onboarding step.
+            liveStore.markExported?.();
+            // Pricing moment: only on the first canon-tier export, since
+            // that's the value moment that earns the upgrade pitch.
+            if (liveStore.phase === 'canon' && variant !== 'draft_brief') {
+              triggerPricingMoment('first_canon_export', () => {
+                liveStore.setPurchaseModalOpen?.(true);
+              }, { tier: liveStore.auth?.tier });
+            }
+            setExportSheetOpen(false);
+          } catch (err) {
+            console.error('[PDF export] failed:', err);
+            const msg = err?.message || String(err) || 'unknown error';
+            alert('PDF export failed:\n\n' + msg + '\n\nFull error logged to console.');
+          } finally {
+            setExporting(false);
+          }
+        }}
+      />
 
       {linking&&<div style={{marginBottom:14}}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
 

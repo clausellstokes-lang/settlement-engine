@@ -26,6 +26,37 @@ import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, PAR
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
 
+// "Change mode" back button — shown above the mode-specific UI once a card
+// is picked. Module-scope so React Compiler can memoize without seeing it
+// reborn on every render of the parent wizard.
+function ChangeModeBar({ mode, onChangeMode }) {
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: SP.sm,
+      padding: `${SP.sm}px ${SP.md}px`,
+      background: CARD_HDR,
+      border: `1px solid ${BORDER}`,
+      borderRadius: R.md,
+      fontSize: FS.sm, color: SECOND,
+    }}>
+      <button
+        onClick={() => onChangeMode(null)}
+        style={{
+          display: 'flex', alignItems: 'center', gap: SP.xs,
+          background: 'transparent', border: 'none', cursor: 'pointer',
+          color: GOLD, fontFamily: sans, fontSize: FS.sm, fontWeight: 600, padding: 0,
+        }}
+      >
+        <ChevronLeft size={14} /> Change mode
+      </button>
+      <span style={{ color: MUTED }}>·</span>
+      <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
+        {mode === 'quick' ? 'Quick Generate' : 'Advanced Generate'}
+      </span>
+    </div>
+  );
+}
+
 // ── Step definitions ─────────────────────────────────────────────────────────
 
 const STEPS = [
@@ -54,9 +85,13 @@ const STEPS = [
 // ── Mode selector ────────────────────────────────────────────────────────────
 
 function ModeSelector({ mode, onModeChange, large = false }) {
+  // Audit microcopy: every mode produces a *Draft*. Renaming the
+  // outputs and keeping the mode names ("Quick / Advanced") is the
+  // cleanest way to teach the lifecycle without re-flowing the whole
+  // wizard. Card subtitles still describe the mode itself.
   const modes = [
-    { id: 'quick',    label: 'Quick Generate',    desc: 'Minimal config — set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Best for drop-in NPC stops.' },
-    { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',            Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space.' },
+    { id: 'quick',    label: 'Quick Generate',    desc: 'Minimal config — set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
+    { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',            Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space. Produces a draft you can refine, save, and canonize.' },
   ];
 
   return (
@@ -315,39 +350,12 @@ export default function GenerateWizard({ isMobile }) {
     );
   }
 
-  // "Change mode" back button — shown above the mode-specific UI once a card is picked.
-  const ChangeModeBar = () => (
-    <div style={{
-      display: 'flex', alignItems: 'center', gap: SP.sm,
-      padding: `${SP.sm}px ${SP.md}px`,
-      background: CARD_HDR,
-      border: `1px solid ${BORDER}`,
-      borderRadius: R.md,
-      fontSize: FS.sm, color: SECOND,
-    }}>
-      <button
-        onClick={() => setWizardMode(null)}
-        style={{
-          display: 'flex', alignItems: 'center', gap: SP.xs,
-          background: 'transparent', border: 'none', cursor: 'pointer',
-          color: GOLD, fontFamily: sans, fontSize: FS.sm, fontWeight: 600, padding: 0,
-        }}
-      >
-        <ChevronLeft size={14} /> Change mode
-      </button>
-      <span style={{ color: MUTED }}>·</span>
-      <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
-        {wizardMode === 'quick' ? 'Quick Generate' : 'Advanced Generate'}
-      </span>
-    </div>
-  );
-
   // Quick mode: General Config only, then generate.
   // Renders the SAME ConfigurationPanel as Advanced step 0 — just no further steps.
   if (wizardMode === 'quick' && !settlement) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 760, margin: '0 auto', padding: `${SP.xl}px 0` }}>
-        <ChangeModeBar />
+        <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
 
         {authTier === 'anon' && (
           <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee', border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND }}>
@@ -391,7 +399,7 @@ export default function GenerateWizard({ isMobile }) {
             transition: 'opacity 0.15s, transform 0.1s',
           }}
         >
-          Generate Settlement
+          Generate Draft
         </button>
       </div>
     );
@@ -405,7 +413,7 @@ export default function GenerateWizard({ isMobile }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
       {/* Change-mode bar (collapse after first generation) */}
-      {!settlement && <ChangeModeBar />}
+      {!settlement && <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />}
 
       {/* Banners */}
       {loadedFromSave && (
@@ -525,7 +533,7 @@ export default function GenerateWizard({ isMobile }) {
           onMouseOver={e => e.currentTarget.style.opacity = '0.92'}
           onMouseOut={e => e.currentTarget.style.opacity = '1'}
         >
-          {settlement ? 'Regenerate Settlement' : 'Generate Settlement'}
+          {settlement ? 'Regenerate Draft' : 'Generate Draft'}
         </button>
       )}
 
