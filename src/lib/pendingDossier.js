@@ -1,0 +1,77 @@
+/**
+ * pendingDossier.js — Stash an anonymous settlement across a Stripe round-trip.
+ *
+ * The single-dossier flow is:
+ *   1. Anonymous user generates a settlement on the homepage hero.
+ *   2. They click "Buy this dossier" ($2.99). Before redirecting to
+ *      Stripe, we stash the in-memory settlement to localStorage.
+ *   3. Stripe collects payment + email, then redirects back to our
+ *      site with `?checkout=success&product=single_dossier&session=...`.
+ *   4. The success page pulls the stash back out, renders the dossier,
+ *      and offers a PDF download.
+ *
+ * Without this stash, the unsaved settlement disappears across the
+ * full-page navigation to Stripe and the user gets a paid receipt for
+ * an empty dossier — the worst possible failure mode.
+ *
+ * Storage shape:
+ *   { settlement, stashedAt, sessionId? }
+ *
+ * Sessions older than 1 hour are treated as stale and cleared on read.
+ * That's enough time for a normal Stripe checkout, and short enough
+ * that a re-loaded tab from yesterday doesn't surprise the user with
+ * an old dossier.
+ */
+
+const KEY = 'sf.pendingDossier';
+const TTL_MS = 60 * 60 * 1000; // 1 hour
+
+/**
+ * Stash the current settlement for retrieval after Stripe checkout.
+ * Returns true on success, false if storage is unavailable.
+ */
+export function stashPendingDossier(settlement, sessionId = null) {
+  if (!settlement) return false;
+  if (typeof window === 'undefined') return false;
+  try {
+    const payload = {
+      settlement,
+      sessionId,
+      stashedAt: Date.now(),
+    };
+    window.localStorage.setItem(KEY, JSON.stringify(payload));
+    return true;
+  } catch {
+    return false; // private mode or quota — caller can decide how to recover
+  }
+}
+
+/**
+ * Retrieve a stashed dossier, or null. Clears stale entries
+ * (>TTL_MS old) as a side effect.
+ */
+export function readPendingDossier() {
+  if (typeof window === 'undefined') return null;
+  let raw;
+  try { raw = window.localStorage.getItem(KEY); } catch { return null; }
+  if (!raw) return null;
+
+  let parsed;
+  try { parsed = JSON.parse(raw); } catch { clearPendingDossier(); return null; }
+
+  if (!parsed || !parsed.settlement || typeof parsed.stashedAt !== 'number') {
+    clearPendingDossier();
+    return null;
+  }
+  if (Date.now() - parsed.stashedAt > TTL_MS) {
+    clearPendingDossier();
+    return null;
+  }
+  return parsed;
+}
+
+/** Clear the stash (e.g., after the user has downloaded their PDF). */
+export function clearPendingDossier() {
+  if (typeof window === 'undefined') return;
+  try { window.localStorage.removeItem(KEY); } catch { /* ignore */ }
+}

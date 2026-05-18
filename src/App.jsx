@@ -33,6 +33,8 @@ const PurchaseModal    = lazy(() => import('./components/PurchaseModal.jsx'));
 const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
 const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
 const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
+const GalleryPage      = lazy(() => import('./components/GalleryPage.jsx'));
+const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
 
 import OnboardingCoach from './components/OnboardingCoach.jsx';
 import OnboardingChecklist from './components/onboarding/OnboardingChecklist.jsx';
@@ -85,13 +87,41 @@ export default function App() {
       // Handle Stripe checkout return
       const result = checkCheckoutResult();
       if (result?.status === 'success') {
-        setCheckoutToast(result.product === 'premium' ? 'Premium activated!' : 'Credits added!');
-        setTimeout(() => setCheckoutToast(null), 4000);
+        if (result.product === 'single_dossier') {
+          // The single-dossier flow needs a full landing page (PDF
+          // download + sign-up upsell), not just a toast.
+          setView('dossier-success');
+        } else {
+          const msg = result.product === 'premium'
+            ? 'Cartographer activated!'
+            : result.product === 'founder_lifetime'
+              ? 'Welcome aboard, Founder!'
+              : 'Credits added!';
+          setCheckoutToast(msg);
+          setTimeout(() => setCheckoutToast(null), 4000);
+        }
       }
       // Always fetch credit balance on mount
       fetchCreditBalance().then(bal => setCreditBalance(bal));
     });
   }, [initAuth, initOnboarding, setCreditBalance]);
+
+  // Deep-link router. Honors ?view=gallery (with optional ?slug=...) and
+  // ?view=pricing on first load so footer links + shared URLs land on
+  // the right surface. We only consume the param once; later setView
+  // calls navigate without touching the URL. A proper SPA router is the
+  // longer-term answer, but this keeps the public surfaces shareable
+  // today without dragging in react-router.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const deepView = params.get('view');
+    if (deepView === 'gallery' || deepView === 'pricing') {
+      setView(deepView);
+    }
+    // We deliberately do NOT mutate the URL here — the slug param is
+    // read by GalleryPage via its own location lookup if/when needed.
+  }, []);
 
   // ── Cloud sync custom content when user enters premium / elevated state ───
   // Triggers once per tier transition. Migrates local items on first premium
@@ -269,7 +299,7 @@ export default function App() {
             </div>
           )}
           <Suspense fallback={<Loading />}>
-            {view === 'generate'    && <GenerateWizard isMobile={isMobile} />}
+            {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} />}
             {view === 'map'         && <WorldMap onNavigate={setView} />}
             {view === 'compendium'  && <CompendiumPanel standalone />}
@@ -277,6 +307,13 @@ export default function App() {
             {view === 'account'     && <AccountPage onNavigateAdmin={() => setView('admin')} />}
             {view === 'admin'       && <AdminPanel onBack={() => setView('account')} />}
             {view === 'pricing'     && <PricingPage onNavigate={setView} />}
+            {view === 'gallery'     && <GalleryPage onNavigate={setView} />}
+            {view === 'dossier-success' && (
+              <SingleDossierSuccessPage
+                onSignUp={() => { setView('generate'); setAuthModalOpen(true); }}
+                onGenerateAnother={() => setView('generate')}
+              />
+            )}
           </Suspense>
         </main>
 
@@ -307,6 +344,14 @@ export default function App() {
             padding: 0,
           }}>
             Pricing
+          </button>
+          <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
+          <button onClick={() => setView('gallery')} style={{
+            background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
+            fontFamily: sans, fontSize: FS.sm, letterSpacing: '0.04em',
+            padding: 0,
+          }}>
+            Gallery
           </button>
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
           <a href="mailto:clausellstokes@aol.com" style={{

@@ -7,6 +7,8 @@ import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { isConfigured } from '../lib/supabase.js';
 import { sans, serif } from './new/Primitives';
 import PipelineRail from './PipelineRail.jsx';
+import ShareToGallery from './ShareToGallery.jsx';
+import BuyThisDossier from './BuyThisDossier.jsx';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
@@ -335,6 +337,25 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         }, React.createElement(RefreshCw, { size: 12 }), ' ', REROLLABLE[activeTab]),
         // ── AI Narrative Layer button group ──────────────────────────────────
         renderNarrativeButtons()
+      ),
+      // Owner / visitor actions strip — share-to-gallery (owners) and
+      // buy-this-dossier (anonymous visitors). Each child decides
+      // whether to render based on auth/save state. Skipped entirely
+      // in readOnly mode (public dossier viewer).
+      !readOnly && React.createElement('div', {
+        style: {
+          padding: '8px 18px',
+          background: 'rgba(255,251,245,0.6)',
+          borderBottom: '1px solid #e0d0b0',
+          display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
+        }
+      },
+        React.createElement(BuyThisDossier, { settlement }),
+        React.createElement(ShareToGallery, {
+          saveId,
+          isPublic: liveSaveEntry?.is_public,
+          publicSlug: liveSaveEntry?.public_slug,
+        })
       ),
       // Tab strip
       React.createElement('div', { 'data-onboard-highlight': onboardingActive && onboardingStep === 2 ? 'true' : undefined, style: { position: 'relative', borderBottom: '1px solid #e0d0b0', background: '#f7f0e4' } },

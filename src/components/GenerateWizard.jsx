@@ -23,6 +23,8 @@ import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 import { t } from '../copy/index.js';
+import { flag } from '../lib/flags.js';
+import HomeHero from './HomeHero.jsx';
 
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
@@ -236,7 +238,7 @@ function SaveToLibraryButton({ settlement, canSave, isMobile }) {
 
 // ── Main wizard component ────────────────────────────────────────────────────
 
-export default function GenerateWizard({ isMobile }) {
+export default function GenerateWizard({ isMobile, onSignIn }) {
   // Store state
   const settlement    = useStore(s => s.settlement);
   const config        = useStore(s => s.config);
@@ -316,34 +318,51 @@ export default function GenerateWizard({ isMobile }) {
     }
   }, [onboardingActive, onboardingStep, settlement]);
 
-  // Card picker: no mode selected yet and no settlement — show ONLY the two mode cards.
-  // User must pick Quick or Advanced before any config UI appears.
+  // Empty state: no mode selected yet AND no settlement.
+  //
+  //   - Anonymous + homepageAnonGen flag on → show the HomeHero as the
+  //     primary surface. The hero's "Begin" CTA seeds the wizard mode
+  //     and triggers generate() directly, so the user goes straight to
+  //     a dossier without ever interacting with mode chrome. The mode
+  //     picker stays below as a quiet "more options" affordance.
+  //   - Authenticated users (or anyone with the flag off) get the
+  //     legacy two-card mode picker first.
+  const showHomeHero = !wizardMode && !settlement && authTier === 'anon' && flag('homepageAnonGen');
+
   if (!wizardMode && !settlement) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 860, margin: '0 auto', padding: `${SP.xl}px 0` }}>
-        <div style={{ textAlign: 'center', padding: `${SP.md}px 0` }}>
-          <h2 style={{
-            fontFamily: serif_,
-            fontSize: isMobile ? FS.xxl : 32,
-            fontWeight: 700,
-            color: INK,
-            margin: 0,
-            marginBottom: SP.sm,
-          }}>
-            Create a Settlement
-          </h2>
-          <p style={{
-            fontFamily: sans,
-            fontSize: FS.md,
-            color: MUTED,
-            margin: 0,
-          }}>
-            Choose a generation mode to get started.
-          </p>
-        </div>
-        {authTier === 'anon' && (
+        {showHomeHero && <HomeHero onSignIn={onSignIn} />}
+        {!showHomeHero && (
+          <div style={{ textAlign: 'center', padding: `${SP.md}px 0` }}>
+            <h2 style={{
+              fontFamily: serif_,
+              fontSize: isMobile ? FS.xxl : 32,
+              fontWeight: 700,
+              color: INK,
+              margin: 0,
+              marginBottom: SP.sm,
+            }}>
+              Create a Settlement
+            </h2>
+            <p style={{
+              fontFamily: sans,
+              fontSize: FS.md,
+              color: MUTED,
+              margin: 0,
+            }}>
+              Choose a generation mode to get started.
+            </p>
+          </div>
+        )}
+        {authTier === 'anon' && !showHomeHero && (
           <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee', border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, textAlign: 'center' }}>
-            Free mode: generating Thorp, Hamlet, or Village. Sign in for all settlement tiers.
+            Free mode: generating up to Town size. Sign in for City, Capital, and saves.
+          </div>
+        )}
+        {showHomeHero && (
+          <div style={{ textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
+            Want full control? Use one of the modes below.
           </div>
         )}
         <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
