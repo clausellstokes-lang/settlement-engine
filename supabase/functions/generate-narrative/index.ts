@@ -1449,28 +1449,71 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
     );
 
-    const { data: profile } = await supabaseAdmin
-      .from('profiles')
-      .select('credits, role')
-      .eq('id', user.id)
-      .single();
+    // ── Atomic credit spend via the spend_credits RPC (migration 009) ──
+    // The RPC runs SECURITY DEFINER and performs a single compare-and-
+    // decrement that is race-safe even under concurrent calls. It returns
+    // a jsonb result with { ok, balance, spend_id, elevated } on success
+    // or { ok: false, reason, balance } on insufficient funds.
+    //
+    // We capture spend_id so the refund path can target the exact ledger
+    // row this spend created — no "find the most recent spend" guesswork
+    // and no balance-restoration race with intervening transactions.
+    //
+    // Fallback: if the RPC isn't yet exposed (migration 009 not applied),
+    // fall back to the legacy read-then-write pattern. The legacy path
+    // remains racy under concurrency but unblocks the function on a
+    // partial server rollout.
+    let isElevated = false;
+    let currentCredits = 0;            // legacy: pre-spend balance (snapshot)
+    let postSpendBalance = 0;          // canonical post-spend balance for streaming responses
+    let spendId: string | null = null;
+    let useLegacyRefund = false;
 
-    const currentCredits = profile?.credits || 0;
-    const isElevated = ['developer', 'admin'].includes(profile?.role);
+    const { data: spendResult, error: spendErr } = await supabaseUser.rpc('spend_credits', {
+      feature: type,
+    });
 
-    if (!isElevated) {
-      if (currentCredits < cost) {
-        throw new Error(`Insufficient credits. Need ${cost}, have ${currentCredits}.`);
+    if (spendErr || !spendResult) {
+      // Legacy fallback — migration 009 not yet applied.
+      useLegacyRefund = true;
+      const { data: profile } = await supabaseAdmin
+        .from('profiles')
+        .select('credits, role')
+        .eq('id', user.id)
+        .single();
+      currentCredits = profile?.credits || 0;
+      isElevated = ['developer', 'admin'].includes(profile?.role);
+      if (!isElevated) {
+        if (currentCredits < cost) {
+          throw new Error(`Insufficient credits. Need ${cost}, have ${currentCredits}.`);
+        }
+        await supabaseAdmin.from('profiles')
+          .update({ credits: currentCredits - cost })
+          .eq('id', user.id);
+        await supabaseAdmin.from('credit_transactions').insert({
+          user_id: user.id,
+          amount: -cost,
+          reason: type,
+          settlement_id: settlementId || null,
+        });
+        postSpendBalance = currentCredits - cost;
+      } else {
+        postSpendBalance = currentCredits;
       }
-      await supabaseAdmin.from('profiles')
-        .update({ credits: currentCredits - cost })
-        .eq('id', user.id);
-      await supabaseAdmin.from('credit_transactions').insert({
-        user_id: user.id,
-        amount: -cost,
-        reason: type,
-        settlement_id: settlementId || null,
-      });
+    } else {
+      // RPC path (preferred).
+      const result = spendResult as {
+        ok: boolean; reason?: string; balance: number; spend_id?: string; elevated?: boolean;
+      };
+      if (!result.ok) {
+        throw new Error(`Insufficient credits. Need ${cost}, have ${result.balance}.`);
+      }
+      isElevated = Boolean(result.elevated);
+      spendId = result.spend_id || null;
+      // For elevated users the RPC returns balance=-2 as a sentinel — we
+      // surface a friendlier "unlimited" value to the client (Infinity is
+      // not JSON-serializable, so use a high integer).
+      postSpendBalance = result.elevated ? 999999 : result.balance;
     }
 
     const summary = summarizeSettlement(settlement);
@@ -1488,6 +1531,27 @@ serve(async (req) => {
         const refund = async () => {
           if (isElevated) return;
           try {
+            // Preferred path: ledger-consistent refund via RPC. Writes a
+            // NEW grant row that references the spend; idempotent; safe
+            // under concurrent transactions because we don't restore an
+            // "old" balance value that could clobber later writes.
+            if (spendId && !useLegacyRefund) {
+              const { error: refundErr } = await supabaseUser.rpc('refund_credits', {
+                spend_ledger_row: spendId,
+                refund_reason: 'generation failed mid-stream',
+              });
+              if (refundErr) {
+                console.error('[generate-narrative] RPC refund failed, falling back:', refundErr);
+                // Legacy fallback below — still buggy under concurrency,
+                // but better than silently swallowing the refund entirely.
+              } else {
+                return;
+              }
+            }
+            // Legacy fallback (only used when migration 009 isn't applied
+            // OR the RPC errored). Restores the snapshot balance; racy
+            // under concurrent transactions. Kept so refunds still
+            // happen on a partial server rollout.
             await supabaseAdmin.from('profiles')
               .update({ credits: currentCredits })
               .eq('id', user.id);
@@ -1529,7 +1593,7 @@ serve(async (req) => {
               send({
                 done: true,
                 result: results,
-                creditsRemaining: isElevated ? currentCredits : currentCredits - cost,
+                creditsRemaining: postSpendBalance,
                 type,
               });
             }
@@ -1642,7 +1706,7 @@ serve(async (req) => {
             send({
               done: true,
               result: aiClone,
-              creditsRemaining: isElevated ? currentCredits : currentCredits - cost,
+              creditsRemaining: postSpendBalance,
               type,
               changeType,
               partialFailure: failedFields.length > 0,
@@ -1738,7 +1802,7 @@ serve(async (req) => {
           send({
             done: true,
             result: aiClone,
-            creditsRemaining: isElevated ? currentCredits : currentCredits - cost,
+            creditsRemaining: postSpendBalance,
             type,
             partialFailure: failedFields.length > 0,
             failedFields,

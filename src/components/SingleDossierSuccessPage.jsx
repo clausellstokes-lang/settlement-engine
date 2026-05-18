@@ -57,7 +57,13 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
       // initial bundle for users who land on this page from a search
       // engine but never actually trigger a download.
       const { generateSettlementPDF } = await import('../utils/generateSettlementPDF.js');
-      await generateSettlementPDF(pending.settlement);
+      // The single-dossier flow is the canonical anonymous path — these
+      // buyers do not have accounts. The watermark stays out of paid
+      // tier exports (Wanderer/Cartographer/Founder) which use
+      // SettlementDetail's export handler. Founder accounts also pass
+      // their own isFounder flag, which is mutually exclusive with this
+      // anonymous path.
+      await generateSettlementPDF(pending.settlement, { isAnonymous: true });
     } catch (e) {
       console.error('[SingleDossierSuccess] PDF generation failed:', e);
       setDownloadError(e.message || 'Could not generate the PDF.');

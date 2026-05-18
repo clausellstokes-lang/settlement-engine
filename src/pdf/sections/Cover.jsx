@@ -124,7 +124,7 @@ function CrisisRow({ chips }) {
   );
 }
 
-export function Cover({ settlement, narrativeMode = false, vm, isFounder = false }) {
+export function Cover({ settlement, narrativeMode = false, vm, isFounder = false, isAnonymous = false }) {
   const date = new Date().toLocaleDateString(undefined, {
     year: 'numeric', month: 'long', day: 'numeric',
   });
@@ -271,6 +271,28 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
 
         {/* ── Spacer pushes footer to bottom ──────────────────── */}
         <View style={{ flex: 1 }} />
+
+        {/* Anonymous watermark — small parchment-stripe footer above
+            the standard footer, only visible on PDFs exported without
+            an account. Discourages bulk scraping for resale and frames
+            the export as a "free preview" without being obnoxious.
+            Wanderer/Cartographer/Founder accounts get clean exports. */}
+        {isAnonymous && (
+          <View
+            style={{
+              marginTop: 8,
+              paddingHorizontal: 10, paddingVertical: 5,
+              backgroundColor: '#FBF5E6',
+              borderLeft: `2pt solid ${palette.gold}`,
+              borderRadius: 2,
+            }}
+            wrap={false}
+          >
+            <Text style={{ ...type.cover_meta, color: palette.muted, fontSize: 8 }}>
+              Free preview — forge your own at settlementforge.com
+            </Text>
+          </View>
+        )}
 
         <View
           style={{

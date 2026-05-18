@@ -39,6 +39,13 @@ export async function generateSettlementPDF(settlement, options = {}) {
     // (refund, etc.) immediately stops the badge appearing on new
     // exports. Existing exported PDFs are obviously unchanged.
     isFounder = false,
+    // Anonymous / unauthenticated exporters get a small parchment-stripe
+    // watermark in the cover footer. Used by the single-dossier success
+    // page (no account) and any other unauthenticated PDF path. Real
+    // accounts (even Wanderer/free) get clean exports. The watermark
+    // discourages bulk scraping of the anonymous homepage hero for
+    // resale and signals "free preview" without being obnoxious.
+    isAnonymous = false,
   } = options;
 
   const doc = React.createElement(SettlementPDF, {
@@ -51,6 +58,7 @@ export async function generateSettlementPDF(settlement, options = {}) {
     phase,
     variant,
     isFounder,
+    isAnonymous,
   });
 
   const blob = await pdf(doc).toBlob();

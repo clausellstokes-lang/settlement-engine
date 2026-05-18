@@ -76,13 +76,14 @@ CREATE POLICY "Users read own support messages" ON public.support_messages
 CREATE POLICY "Users create support messages" ON public.support_messages
   FOR INSERT WITH CHECK (auth.uid() = user_id);
 
--- ── Set owner account to developer role ─────────────────────────────────────
-UPDATE public.profiles
-  SET role = 'developer', display_name = 'Developer'
-  WHERE id = '0a9519b6-9176-40f0-b201-6b060f76a362';
-
--- ── Insert default system config ────────────────────────────────────────────
-INSERT INTO public.system_config (key, value) VALUES
-  ('support_email', '"clausellstokes@aol.com"'),
-  ('support_enabled', 'true')
-ON CONFLICT (key) DO NOTHING;
+-- ── Owner role bootstrap + default system config ────────────────────────────
+-- Per-deployment data (owner UUID, support email) moved out of the canonical
+-- schema. New instances should run supabase/seed_local.sql separately with
+-- their own values. The schema migration no longer contains identity-specific
+-- rows so anyone forking this repo doesn't inherit the original maintainer's
+-- developer access or support inbox.
+--
+-- A clean schema apply still produces a working app: the system_config rows
+-- read with `support_enabled=false` by default in the application code path
+-- (lib/supabase.js reads the row and treats missing/false as "disabled"),
+-- and there are simply no developer-role users until seed_local sets one.

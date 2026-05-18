@@ -9,3 +9,10 @@ coverage/
 Thumbs.db
 
 .vercel
+
+# Supabase CLI working files. Contains linked-project metadata, pooler
+# URLs, and other deployment-specific data that must not be committed
+# or distributed in source archives.
+supabase/.temp/
+supabase/.branches/
+

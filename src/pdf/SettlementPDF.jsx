@@ -64,6 +64,10 @@ export function SettlementPDF({
   // Edition" badge on the cover. Defaults false so historical PDFs
   // are unaffected.
   isFounder = false,
+  // Anonymous PDFs (single-dossier purchase, anonymous preview) carry
+  // a footer watermark. Account holders — Wanderer, Cartographer,
+  // Founder — get clean exports.
+  isAnonymous = false,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
@@ -108,7 +112,7 @@ export function SettlementPDF({
       creator="SettlementForge"
       subject={`Settlement dossier${useAi ? ' (AI narrative edition)' : ''}`}
     >
-      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} />}
+      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} />}
       {inc('toc')                 && <TableOfContents      settlement={safe} narrativeMode={useAi} entries={tocEntries} />}
       {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} />}

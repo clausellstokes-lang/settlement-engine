@@ -205,17 +205,46 @@ async function supabaseUpdatePassword(newPassword) {
   if (error) throw error;
 }
 
-/** Update the user's display name in both metadata and profiles table. */
+/**
+ * Update the user's display name.
+ *
+ * Calls the `update_display_name(text)` RPC (migration 009) which is the
+ * single safe path for changing display_name — the same migration locks
+ * direct UPDATE on protected columns (role/tier/credits/is_founder) so
+ * routing through the RPC is necessary anyway for forward-compatibility.
+ *
+ * Also mirrors into user_metadata so the JWT-cached read stays consistent
+ * across page loads without waiting for the profiles row to be refetched.
+ *
+ * Falls back to the legacy direct UPDATE if the RPC isn't yet exposed —
+ * that path stays valid because the column-locking policy still permits
+ * display_name writes, even when the RPC isn't available.
+ */
 async function supabaseUpdateDisplayName(displayName) {
+  // Primary path: RPC (introduced in migration 009).
+  const { error: rpcErr } = await supabase.rpc('update_display_name', {
+    new_name: displayName,
+  });
+
+  if (rpcErr) {
+    // Either migration 009 hasn't been applied or RPC permission is missing.
+    // Fall back to the legacy direct-table write so we don't break on a
+    // partial server-side rollout.
+    const { error: tableErr } = await supabase
+      .from('profiles')
+      .update({ display_name: displayName })
+      .eq('id', (await supabase.auth.getUser()).data?.user?.id);
+    if (tableErr) throw tableErr;
+  }
+
+  // Mirror into user_metadata regardless of which path won. This keeps
+  // the JWT representation aligned with the profiles row so any code
+  // reading from `user.user_metadata.display_name` sees the new value
+  // without a separate refresh.
   const { error: metaErr } = await supabase.auth.updateUser({
     data: { display_name: displayName },
   });
   if (metaErr) throw metaErr;
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (user) {
-    await supabase.from('profiles').update({ display_name: displayName }).eq('id', user.id);
-  }
 }
 
 function supabaseOnAuthChange(callback) {
