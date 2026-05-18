@@ -196,9 +196,38 @@ export const FIELD_ALIASES = Object.freeze({
  * @typedef {Object} SupplyChain
  * @property {string} [id]
  * @property {string} name
- * @property {'stable' | 'strained' | 'scarce' | 'blocked' | 'captured' | 'substituted' | 'collapsing'} [status]
+ * @property {SupplyChainStatus} [status]
  * @property {string} [controller]
  * @property {string[]} [dependencies]
+ *
+ * Legacy compatibility note: today's generator produces chain entries
+ * with shape `{ needKey, chainId, label, processingInstitutions, status:
+ * 'operational' | 'running' | 'entrepot' | 'vulnerable' | 'impaired', … }`.
+ * The Tier 4.3 stateful shape (SupplyChainState) is derived from this
+ * on demand via domain/supplyChainState.js#deriveSupplyChainState.
+ */
+
+/**
+ * @typedef {Object} SupplyChainState
+ * Tier 4.3 structured shape. Returned by deriveSupplyChainState().
+ *
+ * @property {string}             id              Stable id ('chain.<need>.<inner>').
+ * @property {string}             name
+ * @property {string}             [needKey]
+ * @property {string}             [needLabel]
+ * @property {SupplyChainStatus}  status          Canonical state.
+ * @property {string}             [legacyStatus]  Legacy value preserved for old consumers.
+ * @property {string}             controller      Faction / institution that takes a rent.
+ * @property {string[]}           dependencies    'resource: X', 'upstream: Y', 'processor: Z'.
+ * @property {string[]}           substitutes
+ * @property {string[]}           beneficiaries
+ * @property {string[]}           victims
+ * @property {string}             failureConsequences  Single-line consequence prose.
+ */
+
+/**
+ * @typedef {'stable' | 'strained' | 'scarce' | 'blocked'
+ *          | 'captured' | 'substituted' | 'collapsing'} SupplyChainStatus
  */
 
 /**

@@ -220,3 +220,46 @@ describe('faction traces emerge from generatePower', () => {
     expect(withDownstream.length).toBeGreaterThan(0);
   });
 });
+
+// ── Supply-chain traces (Tier 4.3) ──────────────────────────────────────
+
+describe('supply-chain traces emerge from generateEconomy', () => {
+  it('a town settlement emits at least one supply-chain trace', () => {
+    const s = gen({ settType: 'town', culture: 'germanic' });
+    const chainTraces = tracesByType(s, 'supply_chain');
+    expect(chainTraces.length).toBeGreaterThan(0);
+    for (const t of chainTraces) {
+      expect(t.step).toBe('generateEconomy');
+      expect(t.targetId).toMatch(/^chain\./);
+    }
+  });
+
+  it('every supply-chain trace cites the tier as a cause', () => {
+    const s = gen({ settType: 'city', culture: 'germanic' });
+    for (const t of tracesByType(s, 'supply_chain')) {
+      const tierCause = t.causes.find(c => c.source === `tier.${s.tier}`);
+      expect(tierCause, `${t.targetId} missing tier cause`).toBeTruthy();
+    }
+  });
+
+  it('result is one of the canonical status values', () => {
+    const s = gen({ settType: 'town', culture: 'germanic' });
+    const canonical = new Set([
+      'stable', 'strained', 'scarce', 'blocked',
+      'captured', 'substituted', 'collapsing',
+    ]);
+    for (const t of tracesByType(s, 'supply_chain')) {
+      expect(canonical.has(t.result), `unexpected status: ${t.result}`).toBe(true);
+    }
+  });
+
+  it('chains declare downstream effects matching their need category', () => {
+    const s = gen({ settType: 'city', culture: 'germanic' });
+    const traces = tracesByType(s, 'supply_chain');
+    if (traces.length === 0) return; // determinism guard
+    for (const t of traces) {
+      expect(Array.isArray(t.downstreamEffects)).toBe(true);
+      expect(t.downstreamEffects.length).toBeGreaterThan(0);
+    }
+  });
+});
