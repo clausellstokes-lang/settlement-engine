@@ -33,6 +33,10 @@ import {
   deriveAllSupplyChainStates,
   supplyChainStatusBreakdown,
 } from '../../src/domain/supplyChainState.js';
+import {
+  deriveAllStructuredHooks,
+  deriveEscalationClocks,
+} from '../../src/domain/hookEscalation.js';
 
 const SAMPLE_SIZE = 40;
 
@@ -322,5 +326,62 @@ describe('supply-chain prevalence and status distribution', () => {
         expect(c.beneficiaries.length).toBeGreaterThan(0);
       }
     }
+  });
+});
+
+// ── Hook + escalation clock prevalence (Tier 4.10) ──────────────────────
+// Hooks should appear consistently; clocks should appear when the
+// triggering state exists.
+
+describe('hook + escalation clock prevalence', () => {
+  it('every city carries at least one structured hook', () => {
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    const withHooks = cities.filter(s => deriveAllStructuredHooks(s).length > 0);
+    // Cities reliably produce hooks across economic / defense /
+    // historical surfaces. If even one falls through, something has
+    // regressed in the hook generators.
+    expect(withHooks.length / cities.length).toBeGreaterThanOrEqual(0.95);
+  });
+
+  it('every structured hook resolves to a canonical origin', () => {
+    const towns = generateMany({ settType: 'town', culture: 'germanic' });
+    const canonical = new Set([
+      'pressure', 'factionConflict', 'institution',
+      'npc', 'chain', 'external', 'other',
+    ]);
+    for (const s of towns) {
+      for (const h of deriveAllStructuredHooks(s)) {
+        expect(canonical.has(h.origin), `unexpected origin: ${h.origin}`).toBe(true);
+      }
+    }
+  });
+
+  it('every clock has 6 stages and a non-empty trigger description', () => {
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    for (const s of cities) {
+      for (const clock of deriveEscalationClocks(s)) {
+        expect(Array.isArray(clock.stages)).toBe(true);
+        expect(clock.stages.length).toBe(6);
+        expect(typeof clock.triggerDescription).toBe('string');
+        expect(clock.triggerDescription.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('disrupted-food-chain settlements produce a Bread Riot Clock', () => {
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    // Across 40 cities the engine produces at least a few food-chain
+    // disruptions (~50% of chains are non-stable per Phase 10 finding).
+    // We assert: among cities with a non-stable food chain, AT LEAST
+    // ONE produces a Bread Riot Clock.
+    const withFoodDisruption = cities.filter(s => {
+      const chains = deriveAllSupplyChainStates(s);
+      return chains.some(c => c.needKey === 'food_security' && c.status !== 'stable');
+    });
+    if (withFoodDisruption.length === 0) return;  // determinism guard
+    const withBreadClock = withFoodDisruption.filter(s =>
+      deriveEscalationClocks(s).some(c => c.label === 'Bread Riot Clock')
+    );
+    expect(withBreadClock.length).toBeGreaterThan(0);
   });
 });

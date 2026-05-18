@@ -307,6 +307,48 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string} [id]
  * @property {string} text
  * @property {Object} [origin]
+ *
+ * Legacy compatibility note: today's generator output produces hooks
+ * with mixed shapes (bare strings on history events, `{ category, hook,
+ * severity }` on economic viability, etc.). The Tier 4.10 structured
+ * shape (StructuredHook below) is derived from any of these via
+ * domain/hookEscalation.js#deriveStructuredHook.
+ */
+
+/**
+ * @typedef {Object} StructuredHook
+ * Tier 4.10 structured shape. Returned by deriveStructuredHook().
+ *
+ * @property {string}      id          Stable id: 'hook.<snake_first_40_chars>'.
+ * @property {string}      text        Single-line hook prose.
+ * @property {HookOrigin}  origin      Classifier output.
+ * @property {string}      severity    'low' | 'medium' | 'high' | 'critical'.
+ * @property {string}      category    Either the generator's category
+ *                                     or the inferred origin.
+ * @property {string}      source      Where the hook came from on the
+ *                                     settlement: 'economic' | 'history'
+ *                                     | 'defense' | 'power' | 'aggregate'.
+ * @property {string|null} [eventName] For history-event hooks.
+ * @property {string[]}    ifIgnored
+ * @property {string[]}    possibleResolutions
+ */
+
+/**
+ * @typedef {'pressure' | 'factionConflict' | 'institution' | 'npc'
+ *          | 'chain' | 'external' | 'other'} HookOrigin
+ */
+
+/**
+ * @typedef {Object} EscalationClock
+ * Tier 4.10 escalation trajectory. Returned by deriveEscalationClocks().
+ *
+ * @property {string}   id                  Stable id ('clock.<type>.<trigger>').
+ * @property {string}   label               Display label (e.g. 'Bread Riot Clock').
+ * @property {string}   triggerDescription  Why this clock is active.
+ * @property {string}   triggerTargetId     Stable id of the entity that triggered it.
+ * @property {string}   triggerSource       'supply_chain' | 'faction' | 'faction_pair'.
+ * @property {string}   triggerStatus       Snapshot of the trigger's state.
+ * @property {string[]} stages              Templated narrative stages (6 by default).
  */
 
 /**
