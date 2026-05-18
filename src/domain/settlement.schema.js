@@ -292,6 +292,63 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string} [role]
  * @property {string} [factionId]
  * @property {string} [institutionId]
+ *
+ * Legacy compatibility note: today's generator produces NPC entries
+ * with shape `{ id, name, role, category, factionAffiliation,
+ * structuralPosition, structuralRank, power, influence, personality,
+ * physical, goal, secret, plotHooks, … }`. The Tier 4.5 structured
+ * shape (NpcProfile below) is derived from this on demand via
+ * domain/npcProfile.js#deriveNpcProfile.
+ */
+
+/**
+ * @typedef {Object} NpcProfile
+ * Tier 4.5 structured shape. Returned by deriveNpcProfile().
+ *
+ * @property {string}        id                   Stable id ('npc_N' or 'npc.<snake>').
+ * @property {string}        name
+ * @property {string|null}   role
+ * @property {string|null}   category             Legacy category field.
+ * @property {FactionArchetype} archetype         Inferred via CATEGORY_TO_ARCHETYPE.
+ * @property {NpcRank}       rank                 'dominant' | 'secondary' | 'minor'.
+ * @property {number|null}   power
+ * @property {string|null}   influence
+ * @property {string|null}   institutionLink      Stable id of the linked institution.
+ * @property {string|null}   factionLink          Stable id of the linked faction.
+ * @property {string|null}   publicReputation     What the town knows of them.
+ * @property {string|null}   privateAgenda        The NPC's long-term goal.
+ * @property {string[]}      leverage             What they control.
+ * @property {string[]}      vulnerabilities      What hangs over their head.
+ * @property {string[]}      offerToPlayers       Hooks the players can engage with.
+ * @property {string|null}   wantsFromPlayers     What the NPC needs.
+ * @property {RemovalConsequence}     consequenceIfRemoved
+ * @property {NpcRelationship|null}   primaryRelationship
+ */
+
+/**
+ * @typedef {'dominant' | 'secondary' | 'minor'} NpcRank
+ */
+
+/**
+ * @typedef {Object} RemovalConsequence
+ * Tier 4.5 forecast of what happens when the NPC is removed from play.
+ *
+ * @property {NpcRank}  severity     Mirrors the NPC's structural rank.
+ * @property {string[]} consequences Single-line consequence prose,
+ *                                   ordered most-to-least immediate.
+ */
+
+/**
+ * @typedef {Object} NpcRelationship
+ * One primary relationship surfaced from settlement.relationships. V1
+ * shape; full triangle support is a follow-up.
+ *
+ * @property {string}      otherId
+ * @property {string}      otherName
+ * @property {string}      type
+ * @property {string|null} typeName
+ * @property {string|null} description
+ * @property {string|null} tension
  */
 
 /**

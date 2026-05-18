@@ -41,6 +41,11 @@ import {
   deriveHistoryBeats,
   historyBeatPresence,
 } from '../../src/domain/historyBeats.js';
+import {
+  deriveAllNpcProfiles,
+  npcArchetypeBreakdown,
+  dominantNpcRemovalImpact,
+} from '../../src/domain/npcProfile.js';
 
 const SAMPLE_SIZE = 40;
 
@@ -442,6 +447,84 @@ describe('history beat prevalence', () => {
         expect(typeof beat.text).toBe('string');
         expect(beat.text.length).toBeGreaterThan(0);
         expect(typeof beat.source).toBe('string');
+      }
+    }
+  });
+});
+
+// ── NPC profile prevalence (Tier 4.5) ───────────────────────────────────
+// Every NPC the generator produces should resolve to a canonical
+// archetype and carry the structured fields. Dominant-rank NPCs should
+// reliably produce non-trivial removal-consequence forecasts.
+
+describe('NPC profile prevalence and structural integrity', () => {
+  it('every town carries at least one NPC', () => {
+    const towns = generateMany({ settType: 'town', culture: 'germanic' });
+    for (const s of towns) {
+      expect(deriveAllNpcProfiles(s).length, `${s.name} missing NPCs`).toBeGreaterThan(0);
+    }
+  });
+
+  it('every NPC profile carries an archetype from the canonical set', () => {
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    const canonical = new Set([
+      'government', 'military', 'religious', 'merchant',
+      'craft', 'criminal', 'arcane', 'occupation', 'other',
+    ]);
+    for (const s of cities) {
+      for (const p of deriveAllNpcProfiles(s)) {
+        expect(canonical.has(p.archetype), `unexpected archetype: ${p.archetype}`).toBe(true);
+      }
+    }
+  });
+
+  it('cities average at least three distinct NPC archetypes', () => {
+    // Larger settlements should produce a more diverse NPC roster.
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    let totalDistinct = 0;
+    for (const s of cities) {
+      const breakdown = npcArchetypeBreakdown(s);
+      const distinct = Object.values(breakdown).filter(n => n > 0).length;
+      totalDistinct += distinct;
+    }
+    expect(totalDistinct / cities.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('every dominant-rank NPC produces a non-trivial removal consequence', () => {
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    for (const s of cities) {
+      for (const p of deriveAllNpcProfiles(s)) {
+        if (p.rank !== 'dominant') continue;
+        expect(p.consequenceIfRemoved.consequences.length, `${p.name} has no removal consequences`)
+          .toBeGreaterThanOrEqual(1);
+      }
+    }
+  });
+
+  it('cities accumulate enough dominant-NPC removal-impact lines to drive a forecast', () => {
+    // Compounding check: across N cities, the dominantNpcRemovalImpact
+    // helper should produce enough lines that future Tier 4.12 (time
+    // progression) has material to work with. Empirical floor is high
+    // since most cities carry ≥2 dominant NPCs each with 3-4 lines.
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    let totalLines = 0;
+    for (const s of cities) {
+      totalLines += dominantNpcRemovalImpact(s).length;
+    }
+    expect(totalLines / cities.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('every NPC with a factionAffiliation carries a factionLink', () => {
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    for (const s of cities) {
+      for (const p of deriveAllNpcProfiles(s)) {
+        // factionAffiliation is the legacy source; factionLink is the
+        // canonical id. The derivation guarantees: when the legacy
+        // field is present and non-empty, the link is non-null.
+        const npc = s.npcs.find(n => n.id === p.id);
+        if (typeof npc?.factionAffiliation === 'string' && npc.factionAffiliation) {
+          expect(p.factionLink, `${p.name} missing factionLink`).toBeTruthy();
+        }
       }
     }
   });
