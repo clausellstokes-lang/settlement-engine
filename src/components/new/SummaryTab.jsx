@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TIER_LABELS, catColor } from './design';
-import { Ti, serif, sans } from './Primitives';
+import { Ti, serif, sans, TabIntro } from './Primitives';
 
 const gold='#a0762a', ink='#1c1409', muted='#9c8068', second='#6b5340';
 const factionColors=['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a'];
@@ -146,6 +146,7 @@ function SummaryTab({ settlement:r }) {
 
   return (
     <div>
+      <TabIntro tabKey="summary" />
 
       {/* ── IDENTITY HEADER ──────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 70%,#1c1409 100%)',borderRadius:8,padding:isMobile?'14px':'16px 20px',marginBottom:16}}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {C} from '../design';
-import {sans, Section, Empty} from '../Primitives';
+import {sans, Section, Empty, TabIntro} from '../Primitives';
 
 import {isMobile} from '../tabConstants';
 
@@ -32,6 +32,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
 
   return (
     <div style={{...sans}}>
+      <TabIntro tabKey="resources" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── TERRAIN IDENTITY HEADER ───────────────────────────────────────── */}

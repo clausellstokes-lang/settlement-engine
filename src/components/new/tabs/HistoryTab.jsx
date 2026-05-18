@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {C} from '../design';
-import {Ti, serif, Collapsible, Section, Empty} from '../Primitives';
+import {Ti, serif, Collapsible, Section, Empty, TabIntro} from '../Primitives';
 import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 
@@ -53,6 +53,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
 
   return (
     <div>
+      <TabIntro tabKey="history" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── IDENTITY HEADER ───────────────────────────────────────────────── */}

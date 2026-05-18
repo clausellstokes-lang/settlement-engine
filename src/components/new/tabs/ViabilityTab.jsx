@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {C} from '../design';
-import {Ti, sans, Section, Empty} from '../Primitives';
+import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 
 import {isMobile} from '../tabConstants';
 
@@ -63,6 +63,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
 
   return (
     <div style={{...sans}}>
+      <TabIntro tabKey="viability" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── VIABILITY VERDICT ────────────────────────────────────────────── */}

@@ -6,6 +6,7 @@ import { useStore } from '../store/index.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { isConfigured } from '../lib/supabase.js';
 import { sans, serif } from './new/Primitives';
+import PipelineRail from './PipelineRail.jsx';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
@@ -305,7 +306,15 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // All hooks are now committed; safe to early-exit.
   if (earlyExitOnNoSettlement) return null;
 
-  return (
+  return React.createElement(React.Fragment, null,
+    // "How this was simulated" rail. Renders above the dossier on every
+    // viewport for V1 — a true side-by-side layout requires lifting the
+    // OutputContainer out of its current standalone card, which is a
+    // bigger refactor than the rail's value justifies right now. Flag-
+    // gated so it can be killed instantly if it confuses test users.
+    React.createElement('div', { style: { marginBottom: 14 } },
+      React.createElement(PipelineRail, { compact: true })
+    ),
     React.createElement('div', { style: { background: 'rgba(255,251,245,0.96)', border: '1px solid #c8b89a', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' } },
       // Header
       React.createElement('div', { style: { padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' } },
@@ -444,5 +453,5 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         React.createElement('style', null, '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }')
       )
     )
-  );
+  ); // close Fragment
 }

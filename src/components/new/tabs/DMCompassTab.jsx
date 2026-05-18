@@ -15,7 +15,7 @@
 
 import React from 'react';
 import { Sparkles, AlertTriangle, Shuffle, MapPin, Users, Network } from 'lucide-react';
-import { Section } from '../Primitives';
+import { Section, TabIntro } from '../Primitives';
 
 // ── Small helpers ────────────────────────────────────────────────────────────
 
@@ -166,6 +166,7 @@ export default function DMCompassTab({ settlement: s }) {
 
   return (
     <div style={{ padding: '14px 18px' }}>
+      <TabIntro tabKey="dmCompass" />
       <CompassPanel           compass={compass} />
       <IdentityMarkersPanel   markers={markers} />
       <FrictionPointsPanel    points={points} />

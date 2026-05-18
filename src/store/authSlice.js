@@ -76,6 +76,11 @@ export const createAuthSlice = (set, get) => ({
    *  chronicle history, supply chains, custom content, etc.). Orthogonal to
    *  role — an elevated role is checked separately via isElevated(). */
   isPremium: () => get().auth.tier === 'premium',
+  /** Whether the user holds a Founder Lifetime grant. Set by the
+   *  stripe-webhook handler at purchase time; surfaces a small badge
+   *  on their dossiers and unlocks Founder-only conveniences. Reads
+   *  from user_metadata so the value follows the JWT across devices. */
+  isFounder: () => Boolean(get().auth.user?.user_metadata?.is_founder),
 
   // ── Auth actions (async, call Supabase or mock) ───────────────────────────
 

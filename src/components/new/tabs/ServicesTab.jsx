@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {C} from '../design';
-import {serif, sans} from '../Primitives';
+import {serif, sans, TabIntro} from '../Primitives';
 import {Ts, J0} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
@@ -75,6 +75,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
 
   return (
     <div style={{...sans}}>
+      <TabIntro tabKey="services" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}

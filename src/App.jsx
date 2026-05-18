@@ -32,9 +32,11 @@ const AuthModal        = lazy(() => import('./components/AuthModal.jsx'));
 const PurchaseModal    = lazy(() => import('./components/PurchaseModal.jsx'));
 const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
 const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
+const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
 
 import OnboardingCoach from './components/OnboardingCoach.jsx';
 import OnboardingChecklist from './components/onboarding/OnboardingChecklist.jsx';
+import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
 
 const NAV = [
   { id: 'generate',    label: 'Create',      Icon: MapPin },
@@ -274,6 +276,7 @@ export default function App() {
             {view === 'howto'       && <HowToUse standalone />}
             {view === 'account'     && <AccountPage onNavigateAdmin={() => setView('admin')} />}
             {view === 'admin'       && <AdminPanel onBack={() => setView('account')} />}
+            {view === 'pricing'     && <PricingPage onNavigate={setView} />}
           </Suspense>
         </main>
 
@@ -297,6 +300,14 @@ export default function App() {
           <span>&copy; 2026 SettlementForge</span>
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
           <span>All rights reserved</span>
+          <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
+          <button onClick={() => setView('pricing')} style={{
+            background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
+            fontFamily: sans, fontSize: FS.sm, letterSpacing: '0.04em',
+            padding: 0,
+          }}>
+            Pricing
+          </button>
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
           <a href="mailto:clausellstokes@aol.com" style={{
             color: MUTED, textDecoration: 'none', display: 'inline-flex',
@@ -426,6 +437,9 @@ export default function App() {
           {onboardingNudge}
         </div>
       )}
+
+      {/* DEV-only feature-flag panel. Renders nothing in production. */}
+      <DevFlagPanel />
     </>
   );
 }

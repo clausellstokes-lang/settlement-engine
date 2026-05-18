@@ -56,6 +56,7 @@ import { previewEvent as domainPreviewEvent } from '../domain/events/previewEven
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
 import { inferImportance }   from '../domain/entities/npcs.js';
+import { metaForStep }       from '../generators/steps/stepMetadata.js';
 
 /**
  * Build a `campaignState` snapshot from the live slice for persistence
@@ -108,6 +109,13 @@ export const createSettlementSlice = (set, get) => ({
   lastSeed:      null,   // seed from last generation (for replay/determinism)
   lastCtx:       null,   // full pipeline context from last run (for reactive re-runs)
   usePipeline:   true,   // toggle between legacy and pipeline generator
+  // History of pipeline steps run for the currently-displayed settlement.
+  // Powers the "How this was simulated" rail. Each entry:
+  //   { id, ts, summary }
+  // where `id` is the step name (e.g. 'assembleInstitutions') and
+  // `summary` is a short factual string built by stepMetadata. Cleared
+  // on regeneration.
+  pipelineHistory: [],
 
   // Reactive update state
   whatIfPreview: null,   // { delta, previewSettlement } from a proposed change
@@ -179,9 +187,22 @@ export const createSettlementSlice = (set, get) => ({
       // for a full regeneration. Without this, every "what changed?" feature
       // either rerolls the town's identity or fails outright.
       let capturedCtx = null;
+      // Per-step trace for the "How this was simulated" rail. Each step
+      // contributes one entry with a factual summary derived from the
+      // accumulated context (e.g. "5 institutions placed"). Errors in
+      // the summarizer don't fail the run — they just produce a null
+      // summary and the rail falls back to the label.
+      const pipelineHistory = [];
       result = eng.generateSettlementPipeline(fullConfig, neighbor, {
         seed,
         onComplete: (ctx) => { capturedCtx = ctx; },
+        onStep: (name, ctx /*, patch */) => {
+          const meta = metaForStep(name);
+          let summary;
+          try { summary = meta.summary ? meta.summary(ctx) : null; }
+          catch { summary = null; }
+          pipelineHistory.push({ id: name, ts: Date.now(), summary });
+        },
       });
       // Derive the SystemState immediately so the UI never sees a settlement
       // without its accompanying state snapshot. The domain function is
@@ -203,6 +224,7 @@ export const createSettlementSlice = (set, get) => ({
         state.whatIfPreview = null;
         state.pendingChange = null;
         state.pendingPreview = null;
+        state.pipelineHistory = pipelineHistory;
         // Generation always returns the settlement to draft phase. Going to
         // canon is a deliberate user action (canonize()), not a side-effect
         // of regeneration — that would silently invalidate any campaign log.

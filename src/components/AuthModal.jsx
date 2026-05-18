@@ -17,6 +17,7 @@ import { useStore } from '../store/index.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 import { isConfigured } from '../lib/supabase.js';
 import { getTierDisplayName } from '../config/pricing.js';
+import FounderBadge from './primitives/FounderBadge.jsx';
 
 function Input({ type = 'text', placeholder, value, onChange, onKeyDown }) {
   return (
@@ -393,7 +394,10 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                     )}
                     <div style={{ fontSize: FS.sm, color: MUTED }}>{auth.user?.email}</div>
                   </div>
-                  <RoleBadge role={auth.role} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <RoleBadge role={auth.role} />
+                    <FounderBadge size="sm" />
+                  </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: SP.lg, marginTop: SP.md, paddingTop: SP.sm, borderTop: `1px solid ${BORDER}` }}>

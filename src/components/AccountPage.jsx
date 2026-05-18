@@ -19,6 +19,7 @@ import { auth as authService } from '../lib/auth.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured, supabase } from '../lib/supabase.js';
 import { getTierDisplayName } from '../config/pricing.js';
+import FounderBadge from './primitives/FounderBadge.jsx';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, PARCH, sans, serif_, SP, R, FS } from './theme.js';
 
 function Section({ title, icon: Icon, children }) {
@@ -208,8 +209,9 @@ export default function AccountPage({ onNavigateAdmin }) {
               )}
             </div>
             <div style={{ fontSize: FS.sm, color: MUTED }}>{auth.user.email}</div>
-            <div style={{ marginTop: SP.sm }}>
+            <div style={{ marginTop: SP.sm, display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
               <RoleBadge role={auth.role} />
+              <FounderBadge size="md" />
             </div>
           </div>
         </div>
