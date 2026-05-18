@@ -352,6 +352,31 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {Object} FactionRelationshipUpdate
+ * Tier 4.2 structured delta describing a single proposed change to a
+ * single faction's structural metric, attributed to a specific event.
+ *
+ * Produced by recalculateFactionRelationships(). Pure data — the
+ * domain layer never applies these deltas itself; downstream consumers
+ * (event-apply layer, time progression, AI overlay) decide whether to
+ * commit, preview, or render them.
+ *
+ * @property {string}              factionId        Stable id ('faction.<snake>').
+ * @property {string}              factionName
+ * @property {FactionArchetype}    archetype
+ * @property {FactionUpdateField}  field            Which metric changes.
+ * @property {number}              delta            Signed numeric change.
+ * @property {string}              reason           Single-line causal prose.
+ * @property {string}              eventType        Event type that produced this delta.
+ * @property {string|null}        [eventTargetId]   Optional target id from the event.
+ */
+
+/**
+ * @typedef {'power' | 'legitimacy' | 'wealth'
+ *          | 'publicTrust' | 'manpower'} FactionUpdateField
+ */
+
+/**
  * @typedef {Object} Threat
  * @property {string} [id]
  * @property {string} name
