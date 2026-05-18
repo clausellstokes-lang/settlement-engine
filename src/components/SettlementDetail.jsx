@@ -502,6 +502,7 @@ export default function SettlementDetail({
               eventLog:    liveStore.eventLog,
               phase:       liveStore.phase,
               variant,
+              isFounder:   liveStore.isFounder?.() ?? false,
             });
             // Stamp the provenance timestamp + tick the onboarding step.
             liveStore.markExported?.();

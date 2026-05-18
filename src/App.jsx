@@ -38,6 +38,7 @@ const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSu
 
 import OnboardingCoach from './components/OnboardingCoach.jsx';
 import OnboardingChecklist from './components/onboarding/OnboardingChecklist.jsx';
+import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
 
 const NAV = [
@@ -482,6 +483,10 @@ export default function App() {
           {onboardingNudge}
         </div>
       )}
+
+      {/* Post-generation onboarding coach — three-step "now what" walkthrough.
+          Self-gates on flag + first-settlement + not-dismissed state. */}
+      <PostGenCoach />
 
       {/* DEV-only feature-flag panel. Renders nothing in production. */}
       <DevFlagPanel />

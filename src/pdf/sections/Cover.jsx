@@ -124,7 +124,7 @@ function CrisisRow({ chips }) {
   );
 }
 
-export function Cover({ settlement, narrativeMode = false, vm }) {
+export function Cover({ settlement, narrativeMode = false, vm, isFounder = false }) {
   const date = new Date().toLocaleDateString(undefined, {
     year: 'numeric', month: 'long', day: 'numeric',
   });
@@ -172,17 +172,33 @@ export function Cover({ settlement, narrativeMode = false, vm }) {
       >
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <Text style={{ ...type.cover_meta, color: palette.muted }}>SETTLEMENT DOSSIER</Text>
-          {narrativeMode && (
-            <View
-              style={{
-                paddingHorizontal: 10, paddingVertical: 4,
-                backgroundColor: palette.aiTint,
-                borderRadius: 3, borderLeft: `2pt solid ${palette.ai}`,
-              }}
-            >
-              <Text style={{ ...type.label, color: palette.ai, fontSize: 8 }}>AI NARRATIVE EDITION</Text>
-            </View>
-          )}
+          <View style={{ flexDirection: 'row', gap: 6 }}>
+            {/* Founder Edition mark — small parchment-gold pill, sits
+                to the left of the AI badge when both are present so
+                "Founder + AI" reads naturally rather than stacking. */}
+            {isFounder && (
+              <View
+                style={{
+                  paddingHorizontal: 10, paddingVertical: 4,
+                  backgroundColor: '#FBF5E6',
+                  borderRadius: 3, borderLeft: `2pt solid ${palette.gold}`,
+                }}
+              >
+                <Text style={{ ...type.label, color: palette.ink, fontSize: 8 }}>FOUNDER EDITION</Text>
+              </View>
+            )}
+            {narrativeMode && (
+              <View
+                style={{
+                  paddingHorizontal: 10, paddingVertical: 4,
+                  backgroundColor: palette.aiTint,
+                  borderRadius: 3, borderLeft: `2pt solid ${palette.ai}`,
+                }}
+              >
+                <Text style={{ ...type.label, color: palette.ai, fontSize: 8 }}>AI NARRATIVE EDITION</Text>
+              </View>
+            )}
+          </View>
         </View>
 
         {/* ── Title block ───────────────────────────────────────── */}

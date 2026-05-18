@@ -60,6 +60,10 @@ export function SettlementPDF({
   // legacy callers that don't supply a variant get exactly what they
   // got before this feature landed.
   variant = 'canon_dossier',
+  // Founder Lifetime exporters see a small parchment-gold "Founder
+  // Edition" badge on the cover. Defaults false so historical PDFs
+  // are unaffected.
+  isFounder = false,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
@@ -104,7 +108,7 @@ export function SettlementPDF({
       creator="SettlementForge"
       subject={`Settlement dossier${useAi ? ' (AI narrative edition)' : ''}`}
     >
-      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} />}
       {inc('toc')                 && <TableOfContents      settlement={safe} narrativeMode={useAi} entries={tocEntries} />}
       {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} />}

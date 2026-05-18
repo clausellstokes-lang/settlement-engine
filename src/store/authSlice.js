@@ -203,6 +203,31 @@ export const createAuthSlice = (set, get) => ({
     }
   },
 
+  /**
+   * Begin an OAuth sign-in flow. Supabase navigates the browser to the
+   * provider; we never resolve to a session here. The session is
+   * established when the user lands back on our origin and the
+   * onAuthStateChange listener fires SIGNED_IN.
+   *
+   * @param {'google' | 'discord' | 'github'} provider
+   */
+  authOAuth: async (provider) => {
+    set(state => { state.auth.loading = true; state.auth.error = null; });
+    try {
+      const result = await authService.signInWithOAuth(provider);
+      // Mock-mode short-circuit: there's no real redirect, so report
+      // back to the caller instead of leaving the UI in a loading state.
+      if (result?.mock) {
+        set(state => { state.auth.loading = false; });
+      }
+      // In real mode the browser is navigating away; no UI update needed.
+      return result;
+    } catch (e) {
+      set(state => { state.auth.loading = false; state.auth.error = e.message; });
+      throw e;
+    }
+  },
+
   // ── Permission queries (elevated roles bypass all gates) ──────────────────
   canSave: () => {
     if (ELEVATED_ROLES.includes(get().auth.role)) return true;

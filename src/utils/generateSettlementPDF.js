@@ -34,6 +34,11 @@ export async function generateSettlementPDF(settlement, options = {}) {
     // the previous behavior so any pre-existing caller gets the same
     // PDF it always got.
     variant = 'canon_dossier',
+    // Founder Lifetime exporters get a "Founder Edition" badge on the
+    // cover. The flag is read at export time so revoking founder status
+    // (refund, etc.) immediately stops the badge appearing on new
+    // exports. Existing exported PDFs are obviously unchanged.
+    isFounder = false,
   } = options;
 
   const doc = React.createElement(SettlementPDF, {
@@ -45,6 +50,7 @@ export async function generateSettlementPDF(settlement, options = {}) {
     eventLog,
     phase,
     variant,
+    isFounder,
   });
 
   const blob = await pdf(doc).toBlob();

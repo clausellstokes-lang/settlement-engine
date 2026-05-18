@@ -68,6 +68,10 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'Discord OAuth button (off until the OAuth review completes).',
   },
+  googleOauth: {
+    default: false,
+    description: 'Google OAuth button (off until the Supabase provider is configured).',
+  },
 
   // ── Surface area ─────────────────────────────────────────────────────────
   gallery: {

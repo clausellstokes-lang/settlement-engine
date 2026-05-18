@@ -166,6 +166,40 @@ async function mockSignInWithMagicLink(email) {
   return { sentTo: email };
 }
 
+/**
+ * OAuth sign-in. Supabase handles the full redirect dance — we tell it
+ * the provider and the URL to return to. On success, the user's session
+ * is established when their browser lands back on our origin and the
+ * onAuthStateChange listener fires.
+ *
+ * Provider notes:
+ *   - 'google'  — works once the user enables Google as an auth provider
+ *                 in the Supabase dashboard (no app code needed beyond
+ *                 the dashboard config + redirect-allowlist entry).
+ *   - 'discord' — same drill; gated behind the `discordOauth` flag in
+ *                 the UI until the Anthropic-Discord review completes.
+ *
+ * @param {'google' | 'discord' | 'github'} provider
+ */
+async function supabaseSignInWithOAuth(provider) {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: `${window.location.origin}`,
+    },
+  });
+  if (error) throw error;
+  // signInWithOAuth returns a redirect URL but Supabase navigates the
+  // browser itself, so the caller never resolves to a session — that
+  // arrives via onAuthStateChange once the user lands back on our origin.
+  return data;
+}
+
+/** Mock equivalent — surfaces a friendly hint and resolves to no session. */
+async function mockSignInWithOAuth(provider) {
+  return { provider, mock: true };
+}
+
 async function supabaseUpdatePassword(newPassword) {
   const { error } = await supabase.auth.updateUser({ password: newPassword });
   if (error) throw error;
@@ -266,6 +300,7 @@ export const auth = {
   signUp:             isConfigured ? supabaseSignUp             : mockSignUp,
   signIn:             isConfigured ? supabaseSignIn              : mockSignIn,
   signInWithMagicLink:isConfigured ? supabaseSignInWithMagicLink : mockSignInWithMagicLink,
+  signInWithOAuth:    isConfigured ? supabaseSignInWithOAuth     : mockSignInWithOAuth,
   signOut:            isConfigured ? supabaseSignOut             : mockSignOut,
   getSession:         isConfigured ? supabaseGetSession          : mockGetSession,
   resetPassword:      isConfigured ? supabaseResetPassword       : mockResetPassword,
