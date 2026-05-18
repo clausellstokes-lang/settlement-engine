@@ -11,6 +11,7 @@
  */
 
 import { supabase, isConfigured } from './supabase.js';
+import { normalizeSettlement } from '../domain/normalizeSettlement.js';
 
 const LOCAL_KEY = 'dnd_settlement_saves';
 
@@ -85,6 +86,21 @@ function migrateSaveToV2(entry) {
   };
 }
 
+/**
+ * Run the canonical-shape adapter on the embedded settlement of a save
+ * entry. Save entries themselves are a separate envelope (id, name,
+ * timestamp, campaignState, etc.); the settlement object lives at
+ * `entry.settlement`. Older entries pre-date schemaVersion stamps —
+ * normalize on read so the rest of the app sees a uniform shape.
+ *
+ * Pure / idempotent — already-canonical settlements pass through
+ * unchanged after the first normalize.
+ */
+function migrateSettlementShape(entry) {
+  if (!entry || !entry.settlement) return entry;
+  return { ...entry, settlement: normalizeSettlement(entry.settlement) };
+}
+
 // ── Supabase methods ────────────────────────────────────────────────────────
 
 async function supabaseList() {
@@ -93,7 +109,7 @@ async function supabaseList() {
     .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, campaign_state, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
-  return data.map(row => migrateSaveToV2({
+  return data.map(row => migrateSettlementShape(migrateSaveToV2({
     id:        row.id,
     name:      row.name,
     tier:      row.tier,
@@ -105,7 +121,7 @@ async function supabaseList() {
     seed:      row.seed,
     aiData:    row.ai_data || {},
     campaignState: row.campaign_state || null,
-  }));
+  })));
 }
 
 async function supabaseSave(entry) {
@@ -172,10 +188,13 @@ async function supabaseCount() {
 // ── Local methods ───────────────────────────────────────────────────────────
 
 async function localList() {
-  // Run the v2 migration on every read so older locally-saved entries
-  // surface with a campaignState block. Cost is trivial (object spread
-  // per save) and makes the rest of the app symmetric with Supabase.
-  return localLoad().map(migrateSaveToV2);
+  // Run the v2 migration + canonical-shape adapter on every read so
+  // older locally-saved entries surface with both a campaignState block
+  // and a normalized settlement shape (version stamps, stable id,
+  // default canonical containers). Cost is trivial — both adapters are
+  // pure object spreads — and it makes the rest of the app symmetric
+  // with the Supabase path.
+  return localLoad().map(migrateSaveToV2).map(migrateSettlementShape);
 }
 
 async function localSaveEntry(entry) {

@@ -16,6 +16,12 @@ import { generateDefenseProfile } from '../defenseGenerator.js';
 // watch captain, etc.) for any faction archetype that lacks them. Runs
 // at assembly so existing pipeline NPCs are deduplicated against.
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
+// Canonical-shape adapter (Tier 1.3). Stamps version fields, mints a
+// stable id, defaults canonical containers. Pure — does not restructure
+// legacy fields. Every freshly-generated settlement passes through here
+// so downstream consumers (save/load, PDF, AI overlay, trace layer)
+// can rely on the canonical contract.
+import { normalizeSettlement } from '../../domain/normalizeSettlement.js';
 
 const DEFENSE_CONTRIB = {
   'Undefended': -10, 'Vulnerable': -5, 'Defensible': 0,
@@ -109,5 +115,11 @@ registerStep('assembleSettlement', {
   const withStructural = ensureFactionStructuralNpcs(settlement);
   Object.assign(settlement, withStructural);
 
-  return { settlement };
+  // Wire the canonical-shape adapter at the assembly boundary. This is
+  // the *only* point at which a newly-generated settlement enters the
+  // wider app; normalizing here means every consumer downstream
+  // (Zustand store, save layer, PDF, AI overlay) sees a settlement with
+  // version stamps and a stable id. The legacy shape is preserved —
+  // normalize only adds, never restructures.
+  return { settlement: normalizeSettlement(settlement) };
 });

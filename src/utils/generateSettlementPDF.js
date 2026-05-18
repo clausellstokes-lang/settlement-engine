@@ -17,6 +17,7 @@
 import React from 'react';
 import { pdf } from '@react-pdf/renderer';
 import { SettlementPDF } from '../pdf/SettlementPDF.jsx';
+import { normalizeSettlement } from '../domain/normalizeSettlement.js';
 
 export async function generateSettlementPDF(settlement, options = {}) {
   const {
@@ -48,8 +49,14 @@ export async function generateSettlementPDF(settlement, options = {}) {
     isAnonymous = false,
   } = options;
 
+  // Run the canonical-shape adapter at the export boundary. Saves loaded
+  // from before Phase 6 don't yet carry version stamps; normalizing here
+  // means every PDF chapter can rely on the canonical contract without
+  // each section adding its own defensive guards.
+  const normalizedSettlement = normalizeSettlement(settlement);
+
   const doc = React.createElement(SettlementPDF, {
-    settlement,
+    settlement: normalizedSettlement,
     aiSettlement,
     aiDailyLife,
     narrativeMode,

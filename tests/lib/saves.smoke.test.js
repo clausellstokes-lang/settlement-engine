@@ -67,7 +67,14 @@ describe('saves — local backend round-trip', () => {
     const loaded = list[0];
     expect(loaded.name).toBe('Test Town');
     expect(loaded.tier).toBe('village');
-    expect(loaded.settlement).toEqual(entry.settlement);
+    // saves.list() runs migrateSettlementShape (normalizeSettlement) at
+    // the boundary, so the loaded settlement carries version stamps +
+    // default canonical containers in addition to the original fields.
+    // toMatchObject asserts the original keys survive without requiring
+    // exact equality.
+    expect(loaded.settlement).toMatchObject(entry.settlement);
+    expect(loaded.settlement.schemaVersion).toBeGreaterThan(0);
+    expect(loaded.settlement.id).toMatch(/^s_/);
     expect(loaded.seed).toBe('seed-123');
     // Local path stores toggles at top level; institutionToggles survives.
     expect(loaded.institutionToggles).toEqual(entry.institutionToggles);
@@ -264,7 +271,11 @@ describe('saves — supabase backend round-trip (mocked)', () => {
     const [e] = await saves.list();
     expect(e.id).toBe('sb-1');
     expect(e.name).toBe('Round Trip');
-    expect(e.settlement).toEqual({ name: 'Round Trip', population: 12000 });
+    // See the local-backend round-trip test above for the rationale:
+    // migrateSettlementShape adds canonical version stamps + container
+    // defaults to every loaded settlement.
+    expect(e.settlement).toMatchObject({ name: 'Round Trip', population: 12000 });
+    expect(e.settlement.schemaVersion).toBeGreaterThan(0);
     // Toggles bundle is spread back to top-level keys.
     expect(e.institutionToggles).toEqual({ 'city::Government::Citadel': { require: true } });
     expect(e.categoryToggles).toEqual({ Magic: { allow: true } });
