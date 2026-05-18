@@ -15,6 +15,56 @@ import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { getBaseChance, checkStructuralValidity } from '../structuralValidator.js';
 import { getTerrainType } from '../terrainHelpers.js';
+import { recordTrace } from '../../domain/trace.js';
+
+// ── Trace helpers (Tier 2.1) ────────────────────────────────────────────────
+// Each successful institution selection emits a structured trace so the
+// PipelineRail / AI overlay / future faction-profile readers can answer
+// "why does this institution exist on this settlement?"
+
+function instId(name) {
+  return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
+}
+
+/** Format the probabilistic roll as a human-readable cause entry. */
+function chanceCause(baseChance, resourceMult) {
+  const finalChance = Math.min(1, baseChance * resourceMult);
+  const pct = Math.round(finalChance * 100);
+  if (Math.abs(resourceMult - 1) < 0.01) {
+    return {
+      source: 'baseChance',
+      effect: `${pct}% likelihood`,
+      reason: `Base chance for this tier/category was ${Math.round(baseChance * 100)}%.`,
+    };
+  }
+  const lift = resourceMult > 1 ? 'lifted' : 'reduced';
+  return {
+    source: 'baseChance',
+    effect: `${pct}% final likelihood`,
+    reason: `Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`,
+  };
+}
+
+/** Downstream effect inferred from institution tags. Light heuristic;
+ *  the real version of this lives in Tier 2.4's unified causal state. */
+function tagsToDownstream(tags) {
+  if (!Array.isArray(tags) || tags.length === 0) return [];
+  const effects = [];
+  const has = (t) => tags.includes(t);
+  if (has('security') || has('law') || has('public_order') || has('military'))
+    effects.push({ target: 'publicOrder', effect: 'reinforced' });
+  if (has('welfare') || has('healing') || has('religious'))
+    effects.push({ target: 'welfareCapacity', effect: 'reinforced' });
+  if (has('trade') || has('market') || has('economic'))
+    effects.push({ target: 'tradeConnectivity', effect: 'reinforced' });
+  if (has('craft') || has('industry'))
+    effects.push({ target: 'craftCapacity', effect: 'reinforced' });
+  if (has('arcane') || has('magic'))
+    effects.push({ target: 'magicCapacity', effect: 'reinforced' });
+  if (has('criminal') || has('smuggling') || has('illicit'))
+    effects.push({ target: 'publicOrder', effect: 'eroded' });
+  return effects;
+}
 
 // Merge city+metropolis catalogs
 function mergeCatalogs(base, override) {
@@ -174,6 +224,22 @@ registerStep('assembleInstitutions', {
         if (inst.exclusiveGroup) exclusiveGroups[inst.exclusiveGroup] = name;
         institutions.push({ category, name, ...inst, source: inst.required ? 'required' : 'forced' });
 
+        // Trace: required / forced selections still warrant a receipt so
+        // the rail can answer "why does this town have a watch?" even
+        // when the answer is "every town has one."
+        recordTrace(ctx, {
+          targetType: 'institution',
+          targetId:   instId(name),
+          step:       'assembleInstitutions',
+          result:     inst.required ? 'required' : 'forced',
+          causes: [
+            inst.required
+              ? { source: `tier.${tier}`, effect: 'required', reason: `Every ${tier}-sized settlement has a ${name.toLowerCase()}.` }
+              : { source: 'userConfig',   effect: 'forced',   reason: 'Toggled on by user config.' },
+          ],
+          downstreamEffects: tagsToDownstream(inst.tags),
+        });
+
       } else if (!forceExclude && catEnabled && (toggle.allow ?? true)) {
         if (inst.exclusiveGroup && exclusiveGroups[inst.exclusiveGroup]) return;
         if (inst.exclusionConditions?.some(ex => institutions.some(i => i.name === ex))) return;
@@ -194,6 +260,35 @@ registerStep('assembleInstitutions', {
         if (rng.chance(baseChance * resourceMult)) {
           if (inst.exclusiveGroup) exclusiveGroups[inst.exclusiveGroup] = name;
           institutions.push({ category, name, ...inst, source: 'generated' });
+
+          // Trace: the most informative case — the engine actually
+          // *decided* to select this one based on probabilistic roll.
+          // Cause records the base chance + resource multiplier so a
+          // reader can see why it was likely. Downstream records what
+          // subsystems this institution feeds back into.
+          const causes = [chanceCause(baseChance, resourceMult)];
+          if (Array.isArray(nearbyResources) && nearbyResources.length && resourceMult > 1) {
+            causes.push({
+              source: 'nearbyResources',
+              effect: `×${resourceMult.toFixed(2)}`,
+              reason: `Nearby resources (${nearbyResources.slice(0, 3).join(', ')}${nearbyResources.length > 3 ? '…' : ''}) shifted the selection odds.`,
+            });
+          }
+          if (terrainType && terrainType !== 'plains') {
+            causes.push({
+              source: `terrain.${terrainType}`,
+              effect: 'context',
+              reason: `Selection occurred in a ${terrainType} setting.`,
+            });
+          }
+          recordTrace(ctx, {
+            targetType: 'institution',
+            targetId:   instId(name),
+            step:       'assembleInstitutions',
+            result:     'selected',
+            causes,
+            downstreamEffects: tagsToDownstream(inst.tags),
+          });
         }
       }
     });

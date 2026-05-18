@@ -115,6 +115,15 @@ registerStep('assembleSettlement', {
   const withStructural = ensureFactionStructuralNpcs(settlement);
   Object.assign(settlement, withStructural);
 
+  // Propagate the in-pipeline causal trace onto the settlement so
+  // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
+  // The trace is built up across the run by `recordTrace(ctx, ...)`
+  // calls inside individual steps; we copy it through here so the
+  // settlement carries the receipt of its own generation.
+  if (Array.isArray(ctx.simulationTrace) && ctx.simulationTrace.length) {
+    settlement.simulationTrace = ctx.simulationTrace;
+  }
+
   // Wire the canonical-shape adapter at the assembly boundary. This is
   // the *only* point at which a newly-generated settlement enters the
   // wider app; normalizing here means every consumer downstream
