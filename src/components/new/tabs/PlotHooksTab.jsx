@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {C} from '../design';
-import {Ti, serif, sans} from '../Primitives';
+import {Ti, serif, sans, TabIntro} from '../Primitives';
 import {EVENT_COLORS, REL_STYLES} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 
@@ -160,6 +160,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
 
   return (
     <div style={{...sans}}>
+      <TabIntro tabKey="plotHooks" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── HEADER ──────────────────────────────────────────────────────── */}

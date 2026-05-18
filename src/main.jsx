@@ -4,6 +4,12 @@ import App from './App';
 import './index.css';
 import './styles/a11y.css';
 import { useStore } from './store';
+import { emitCssTokens } from './design/tokens.js';
+
+// Emit design tokens as CSS custom properties on :root so stylesheets and
+// inline styles can read them as `var(--color-gold-500)`, `var(--space-4)`,
+// `var(--sem-text-body)`, etc. JS imports keep working unchanged.
+emitCssTokens();
 
 // Expose store globally in dev so we can validate map features via automation.
 if (import.meta.env.DEV) {

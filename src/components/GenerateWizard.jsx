@@ -22,6 +22,7 @@ import InstitutionalGrid from './InstitutionalGrid';
 import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+import { t } from '../copy/index.js';
 
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
@@ -401,6 +402,13 @@ export default function GenerateWizard({ isMobile }) {
         >
           Generate Draft
         </button>
+        <p style={{
+          marginTop: SP.sm, marginBottom: 0, textAlign: 'center',
+          fontSize: FS.sm, color: SECOND, fontFamily: serif_, fontStyle: 'italic',
+          lineHeight: 1.5,
+        }}>
+          {t('generate.subline')}
+        </p>
       </div>
     );
   }
@@ -519,22 +527,33 @@ export default function GenerateWizard({ isMobile }) {
       {/* Generate button — visible for quick mode with settlement (Regenerate),
           advanced mode after final step, or any mode with existing settlement. */}
       {(settlement || (isAdvanced && wizardStep >= STEPS.length)) && (
-        <button
-          onClick={handleGenerate}
-          style={{
-            width: '100%', padding: isMobile ? `${SP.lg}px 0` : `${SP.lg - 2}px 0`,
-            background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-            color: '#fff', border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
-            fontFamily: serif_,
-            fontSize: isMobile ? FS.xxl : FS.xxl - 1, fontWeight: 600, letterSpacing: '0.02em',
-            boxShadow: '0 3px 14px rgba(160,118,42,0.45)',
-            transition: 'opacity 0.15s, transform 0.1s',
-          }}
-          onMouseOver={e => e.currentTarget.style.opacity = '0.92'}
-          onMouseOut={e => e.currentTarget.style.opacity = '1'}
-        >
-          {settlement ? 'Regenerate Draft' : 'Generate Draft'}
-        </button>
+        <div>
+          <button
+            onClick={handleGenerate}
+            style={{
+              width: '100%', padding: isMobile ? `${SP.lg}px 0` : `${SP.lg - 2}px 0`,
+              background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
+              color: '#fff', border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
+              fontFamily: serif_,
+              fontSize: isMobile ? FS.xxl : FS.xxl - 1, fontWeight: 600, letterSpacing: '0.02em',
+              boxShadow: '0 3px 14px rgba(160,118,42,0.45)',
+              transition: 'opacity 0.15s, transform 0.1s',
+            }}
+            onMouseOver={e => e.currentTarget.style.opacity = '0.92'}
+            onMouseOut={e => e.currentTarget.style.opacity = '1'}
+          >
+            {settlement ? 'Regenerate Draft' : 'Generate Draft'}
+          </button>
+          {!settlement && (
+            <p style={{
+              marginTop: SP.sm, marginBottom: 0, textAlign: 'center',
+              fontSize: FS.sm, color: SECOND, fontFamily: serif_, fontStyle: 'italic',
+              lineHeight: 1.5,
+            }}>
+              {t('generate.subline')}
+            </p>
+          )}
+        </div>
       )}
 
       {/* Output + export buttons */}

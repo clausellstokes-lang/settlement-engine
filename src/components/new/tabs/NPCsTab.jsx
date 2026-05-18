@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {C} from '../design';
-import {serif, sans, Collapsible, Empty} from '../Primitives';
+import {serif, sans, Collapsible, Empty, TabIntro} from '../Primitives';
 import {relStyle} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 
@@ -48,6 +48,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
 
   return (
     <div>
+      <TabIntro tabKey="npcs" />
       <NarrativeNote note={narrativeNote} />
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
       <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14,flexWrap:'wrap'}}>

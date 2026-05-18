@@ -2,25 +2,33 @@
  * creditsSlice — AI credit balance and transaction tracking.
  *
  * AI features are pay-per-use regardless of account tier.
- * Credits are purchased in packs and spent on:
- *   - Narrative synthesis (~X credits per settlement)
- *   - Daily life generation (~Y credits per generation)
+ * Credits are purchased in packs and spent on narrative synthesis,
+ * daily life generation, and progression (diff-aware evolution).
  *
- * The actual credit costs are defined server-side.
- * This slice tracks the client-side balance and provides
- * pre-flight checks before AI requests.
+ * The actual credit costs live in `src/config/pricing.js` (single
+ * source). This slice reads from there for pre-flight checks and
+ * keeps the client balance synced with server-authoritative spends.
+ *
+ * Server-side cost gates: `supabase/functions/generate-narrative/index.ts`
+ * has its own CREDIT_COSTS — the contract test guards against drift.
  */
 
-// Estimated credit costs (mirrored from server config).
-// All MUST match the CREDIT_COSTS map in supabase/functions/generate-narrative/index.ts.
-export const CREDIT_COSTS = {
-  narrative:   8,    // Opus thesis + 13 Haiku refinement passes
-  dailyLife:   10,   // 5 parallel Opus paragraphs (dawn -> night)
-  // Progression (AI-4): diff-aware evolution of an existing narrative.
-  // Priced above narrative because the Opus thesis sees the prior thesis +
-  // the new state + the change diff; the continuity guarantee is the value.
-  progression: 12,
-};
+import { getActiveAiCosts, getAiCost } from '../config/pricing.js';
+
+/**
+ * Compatibility export. New code should call `getActiveAiCosts()` from
+ * the pricing config; this exists so existing tests + components that
+ * imported the constant directly still resolve. The function call gives
+ * us the *current* flag-driven schedule, not a snapshot.
+ */
+export const CREDIT_COSTS = new Proxy({}, {
+  get(_, feature) { return getAiCost(feature); },
+  ownKeys()       { return Object.keys(getActiveAiCosts()); },
+  has(_, feature) { return feature in getActiveAiCosts(); },
+  getOwnPropertyDescriptor(_, feature) {
+    return { configurable: true, enumerable: true, value: getAiCost(feature) };
+  },
+});
 
 export const createCreditsSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
@@ -63,12 +71,12 @@ export const createCreditsSlice = (set, get) => ({
   /** Pre-flight check: can the user afford this AI feature? */
   canAfford: (feature) => {
     if (get().isElevated()) return true;
-    const cost = CREDIT_COSTS[feature] || 0;
+    const cost = getAiCost(feature);
     return get().creditBalance >= cost;
   },
 
   /** Get the cost for a specific feature. */
-  getCost: (feature) => CREDIT_COSTS[feature] || 0,
+  getCost: (feature) => getAiCost(feature),
 
   setPurchaseModalOpen: (open) =>
     set(state => { state.purchaseModalOpen = open; }),

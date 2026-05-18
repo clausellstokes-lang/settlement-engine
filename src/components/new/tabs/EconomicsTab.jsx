@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {C} from '../design';
-import {Ti, sans, Section, Empty} from '../Primitives';
+import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 
@@ -204,6 +204,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
 
   return (
     <div style={{...sans}}>
+      <TabIntro tabKey="economics" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── PROSPERITY HEADER ───────────────────────────────────────────── */}

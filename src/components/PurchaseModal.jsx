@@ -14,6 +14,7 @@ import { X, Zap, Crown, AlertCircle, TrendingDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
+import { getTierDisplayName } from '../config/pricing.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS } from './theme.js';
 
 export default function PurchaseModal({ onClose }) {
@@ -178,11 +179,11 @@ export default function PurchaseModal({ onClose }) {
             })}
           </div>
 
-          {/* Premium upgrade (only if not already premium and not developer) */}
+          {/* Subscription upgrade (only if not already subscribed and not elevated) */}
           {authTier !== 'premium' && !isElevated && (
             <>
               <div style={{ fontSize: FS.xs, fontWeight: 700, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: SP.sm }}>
-                Premium Subscription
+                {getTierDisplayName('premium')} Subscription
               </div>
               <button
                 onClick={() => handlePurchase('premium')}
@@ -200,7 +201,7 @@ export default function PurchaseModal({ onClose }) {
                 <Crown size={28} color={GOLD} />
                 <div style={{ flex: 1, textAlign: 'left' }}>
                   <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>
-                    Premium {PRODUCTS.premium.price}
+                    {getTierDisplayName('premium')} {PRODUCTS.premium.price}
                   </div>
                   <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5, marginTop: 2 }}>
                     Unlimited saves, Neighbourhood System, PDF/JSON export, Map supply chains

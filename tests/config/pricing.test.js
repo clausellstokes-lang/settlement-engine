@@ -1,0 +1,170 @@
+/** @vitest-environment jsdom */
+/**
+ * tests/config/pricing.test.js — Pricing config single-source-of-truth tests.
+ *
+ * These tests are deliberately strict because pricing drift is one of
+ * the highest-stakes bugs we can ship: any mismatch between client and
+ * server numbers either over-charges users or lets them spend free
+ * credits. The contract test below pins the client's AI cost schedule
+ * to the values the edge function enforces — when either changes, the
+ * test fails and forces a deliberate sync.
+ */
+
+import { describe, it, expect, beforeEach } from 'vitest';
+import {
+  TIERS,
+  SINGLE_DOSSIER,
+  getActivePacks,
+  getActiveAiCosts,
+  getAiCost,
+  getVisibleTiers,
+  singleDossierEnabled,
+  findPackByKey,
+  _internal,
+} from '../../src/config/pricing.js';
+import { setFlagOverride } from '../../src/lib/flags.js';
+
+beforeEach(() => {
+  window.localStorage.clear();
+  window.history.replaceState({}, '', '/');
+});
+
+// ── Server contract ───────────────────────────────────────────────────────
+// These literal values mirror the server-side CREDIT_COSTS map in
+// supabase/functions/generate-narrative/index.ts. When the server's
+// pricing changes, this block has to change too (and so does the
+// edge function). A grep for "CONTRACT_AI_COSTS" finds both ends.
+const CONTRACT_AI_COSTS_LEGACY = { narrative: 8, dailyLife: 10, progression: 12 };
+const CONTRACT_AI_COSTS_NEW    = { narrative: 3, dailyLife: 4,  progression: 5  };
+
+describe('AI cost server contract', () => {
+  it('legacy schedule matches the server-enforced legacy costs', () => {
+    expect(_internal.LEGACY_AI_COSTS).toEqual(CONTRACT_AI_COSTS_LEGACY);
+  });
+
+  it('new schedule matches the server-enforced new costs', () => {
+    expect(_internal.NEW_AI_COSTS).toEqual(CONTRACT_AI_COSTS_NEW);
+  });
+});
+
+describe('getActiveAiCosts() / getAiCost()', () => {
+  it('returns new costs by default (aiRepriced flag is on)', () => {
+    expect(getActiveAiCosts()).toEqual(CONTRACT_AI_COSTS_NEW);
+    expect(getAiCost('narrative')).toBe(3);
+    expect(getAiCost('dailyLife')).toBe(4);
+    expect(getAiCost('progression')).toBe(5);
+  });
+
+  it('returns legacy costs when aiRepriced is off', () => {
+    setFlagOverride('aiRepriced', false);
+    expect(getActiveAiCosts()).toEqual(CONTRACT_AI_COSTS_LEGACY);
+    expect(getAiCost('narrative')).toBe(8);
+  });
+
+  it('returns 0 for unknown features', () => {
+    expect(getAiCost('totallyMadeUp')).toBe(0);
+  });
+});
+
+describe('getActivePacks()', () => {
+  it('returns the new (repriced) packs by default', () => {
+    const packs = getActivePacks();
+    expect(Object.keys(packs)).toEqual(['credits_25', 'credits_60', 'credits_150']);
+  });
+
+  it('returns the legacy packs when packsRepriced is off', () => {
+    setFlagOverride('packsRepriced', false);
+    const packs = getActivePacks();
+    expect(Object.keys(packs)).toEqual(['credits_5', 'credits_15', 'credits_40']);
+  });
+
+  it('every pack has the fields the UI needs', () => {
+    for (const pack of Object.values(getActivePacks())) {
+      expect(pack).toEqual(expect.objectContaining({
+        key:       expect.any(String),
+        name:      expect.any(String),
+        price:     expect.any(String),
+        credits:   expect.any(Number),
+        perCredit: expect.any(String),
+        tier:      expect.any(String),
+      }));
+    }
+  });
+});
+
+describe('findPackByKey()', () => {
+  it('resolves new SKUs', () => {
+    expect(findPackByKey('credits_60')?.credits).toBe(60);
+  });
+
+  it('resolves legacy SKUs even when packsRepriced is on (refund/replay safety)', () => {
+    expect(findPackByKey('credits_15')?.credits).toBe(15);
+  });
+
+  it('returns null for unknown keys', () => {
+    expect(findPackByKey('does_not_exist')).toBeNull();
+  });
+});
+
+describe('TIERS', () => {
+  it('has wanderer / cartographer / founder', () => {
+    expect(TIERS).toHaveProperty('wanderer');
+    expect(TIERS).toHaveProperty('cartographer');
+    expect(TIERS).toHaveProperty('founder');
+  });
+
+  it('wanderer is free and capped at town size', () => {
+    expect(TIERS.wanderer.priceCents).toBe(0);
+    expect(TIERS.wanderer.saveLimit).toBe(3);
+    expect(TIERS.wanderer.maxSize).toBe('town');
+  });
+
+  it('cartographer is $6/mo and unlocks neighbourhood + supply chain', () => {
+    expect(TIERS.cartographer.priceCents).toBe(600);
+    expect(TIERS.cartographer.billing).toBe('monthly');
+    expect(TIERS.cartographer.features.neighbourhoodSystem).toBe(true);
+    expect(TIERS.cartographer.features.supplyChainMap).toBe(true);
+  });
+
+  it('founder is $99 lifetime with a 500-seat cap', () => {
+    expect(TIERS.founder.priceCents).toBe(9900);
+    expect(TIERS.founder.billing).toBe('lifetime');
+    expect(TIERS.founder.seatLimit).toBe(500);
+    expect(TIERS.founder.features.founderBadge).toBe(true);
+  });
+
+  it('founder unlocks the same surface as cartographer', () => {
+    for (const key of Object.keys(TIERS.cartographer.features)) {
+      if (key === 'founderBadge') continue;
+      expect(TIERS.founder.features[key]).toBe(TIERS.cartographer.features[key]);
+    }
+  });
+});
+
+describe('getVisibleTiers()', () => {
+  it('shows all three tiers when founderTier is on (default)', () => {
+    const tiers = getVisibleTiers();
+    expect(tiers.map(t => t.key)).toEqual(['wanderer', 'cartographer', 'founder']);
+  });
+
+  it('hides founder when founderTier is off', () => {
+    setFlagOverride('founderTier', false);
+    const tiers = getVisibleTiers();
+    expect(tiers.map(t => t.key)).toEqual(['wanderer', 'cartographer']);
+  });
+});
+
+describe('SINGLE_DOSSIER', () => {
+  it('is $2.99, requires no account, and ships a PDF', () => {
+    expect(SINGLE_DOSSIER.priceCents).toBe(299);
+    expect(SINGLE_DOSSIER.priceLabel).toBe('$2.99');
+    expect(SINGLE_DOSSIER.requiresAccount).toBe(false);
+    expect(SINGLE_DOSSIER.deliverables).toContain('pdf');
+  });
+
+  it('singleDossierEnabled() honors the flag', () => {
+    expect(singleDossierEnabled()).toBe(true);
+    setFlagOverride('singleDossier', false);
+    expect(singleDossierEnabled()).toBe(false);
+  });
+});

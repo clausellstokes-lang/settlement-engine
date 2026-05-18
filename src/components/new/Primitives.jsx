@@ -1,7 +1,39 @@
 import React, { useState } from 'react';
+import { t } from '../../copy/index.js';
 
 export const serif = { fontFamily: 'Crimson Text, Georgia, serif' };
 export const sans  = { fontFamily: 'Nunito, sans-serif' };
+
+/**
+ * TabIntro — one-line italic prose-l intro shown beneath every tab title.
+ * Source: UI Redesign §18.9 — sets the tone for each tab in one line.
+ *
+ * Usage:
+ *   <TabIntro tabKey="overview" />
+ *
+ * tabKey is the same key used in copy.tabs.* (overview, summary,
+ * economics, power, defense, history, relationships, plotHooks,
+ * dailyLife, services, resources, viability, npcs, dmCompass).
+ */
+export function TabIntro({ tabKey }) {
+  const line = t(`tabs.${tabKey}`);
+  // If the key is missing the t() helper returns the key string itself
+  // ("tabs.overview"). Render nothing in that case rather than a broken
+  // pseudo-string — keeps adoption safe.
+  if (!line || line === `tabs.${tabKey}`) return null;
+  return (
+    <p style={{
+      margin: '0 0 14px 0',
+      fontFamily: 'Crimson Text, Georgia, serif',
+      fontSize: 17,
+      fontStyle: 'italic',
+      color: '#4A3B22',       // ink-600 — WCAG-passing body
+      lineHeight: 1.5,
+    }}>
+      {line}
+    </p>
+  );
+}
 
 // Safe string coercer
 export const Ti = v => v == null ? '' : typeof v === 'string' ? v

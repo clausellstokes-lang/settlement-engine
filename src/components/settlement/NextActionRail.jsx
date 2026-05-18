@@ -23,6 +23,7 @@ import {
   Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3, Layers,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
+import { getAiCost } from '../../config/pricing.js';
 import ActionRail from '../primitives/ActionRail.jsx';
 import { COPY } from '../../copy/strings.js';
 
@@ -87,7 +88,7 @@ function computeItems({ phase, eventCount, narrated, settlement, save, handlers 
     items.push({
       id: 'polish', Icon: Sparkles,
       label: COPY.ai.polishCta,
-      hint:  COPY.ai.inlineHint,
+      hint:  COPY.ai.inlineHintFn(getAiCost('narrative')),
       onClick: handlers.onPolishAi,
     });
   }

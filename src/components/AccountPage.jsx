@@ -18,6 +18,7 @@ import { useStore } from '../store/index.js';
 import { auth as authService } from '../lib/auth.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured, supabase } from '../lib/supabase.js';
+import { getTierDisplayName } from '../config/pricing.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, PARCH, sans, serif_, SP, R, FS } from './theme.js';
 
 function Section({ title, icon: Icon, children }) {
@@ -232,7 +233,7 @@ export default function AccountPage({ onNavigateAdmin }) {
               color: isElevated ? '#7c3aed' : auth.tier === 'premium' ? '#2a7a2a' : GOLD,
               textTransform: 'uppercase',
             }}>
-              {isElevated ? 'Full Access' : auth.tier}
+              {isElevated ? 'Full Access' : getTierDisplayName(auth.tier)}
             </div>
           </div>
 

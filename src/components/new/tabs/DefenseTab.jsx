@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {C} from '../design';
-import {serif, Section} from '../Primitives';
+import {serif, Section, TabIntro} from '../Primitives';
 
 import {isMobile} from '../tabConstants';
 
@@ -156,6 +156,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
   return (
     <div style={{paddingBottom:16}}>
+      <TabIntro tabKey="defense" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── DEFENSE OVERVIEW HEADER ──────────────────────────────────────── */}

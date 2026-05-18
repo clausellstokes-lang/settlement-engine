@@ -16,6 +16,7 @@ import { X, AlertCircle, CheckCircle, Mail, Shield, Crown, User, ExternalLink, H
 import { useStore } from '../store/index.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 import { isConfigured } from '../lib/supabase.js';
+import { getTierDisplayName } from '../config/pricing.js';
 
 function Input({ type = 'text', placeholder, value, onChange, onKeyDown }) {
   return (
@@ -316,8 +317,8 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                 {authMethod === 'magic'
                   ? 'Enter your email — we’ll send you a one-time sign-in link. No password required.'
                   : (view === 'signup'
-                      ? 'Create a free account to unlock all settlement tiers, save up to 10 settlements, and access the full toolset.'
-                      : 'Sign in to your account to access your saved settlements and settings.')}
+                      ? `Create a free ${getTierDisplayName('free')} account to unlock every settlement size, save up to three dossiers, and keep your work across devices.`
+                      : 'Sign in to keep your work — saves, exports, larger settlements, and the Neighbourhood System.')}
               </p>
 
               {error && <Alert type="error">{error}</Alert>}
@@ -403,7 +404,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                       color: isElevated ? '#7c3aed' : auth.tier === 'premium' ? '#2a7a2a' : GOLD,
                       textTransform: 'uppercase',
                     }}>
-                      {isElevated ? 'Full Access' : auth.tier}
+                      {isElevated ? 'Full Access' : getTierDisplayName(auth.tier)}
                     </div>
                   </div>
                   <div>
@@ -418,7 +419,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
               {/* Actions */}
               {!isElevated && auth.tier !== 'premium' && (
                 <Button variant="success" onClick={() => { onClose(); setPurchaseModalOpen(true); }}>
-                  Upgrade to Premium
+                  Upgrade to {getTierDisplayName('premium')}
                 </Button>
               )}
 

@@ -1,35 +1,56 @@
 /**
- * theme.js — Shared design constants for all components.
- * Output tabs (new/) use design.js (C.ink, etc.).
- * Configuration/panel components (this file) use uppercase constants.
+ * theme.js — Backward-compat shim. Canonical tokens live in `src/design/tokens.js`.
  *
- * Canonical source of truth — design.js references these values.
+ * History: this file used to be the single source for flat constants
+ * (GOLD, INK, MUTED, etc.) and was imported by ~80 components. It's now
+ * a re-export shim so those imports keep working unchanged while the
+ * actual values come from the new token system.
+ *
+ * Values intentionally shift to the UI Redesign palette (parchment-50,
+ * ink-900, gold-500, etc.) — same NAMES, refreshed VALUES. That's the
+ * whole point of the shim: re-skin the app without touching 80 files.
+ *
+ * New code should import from `src/design/tokens.js` directly:
+ *   import { color, semantic, type, space, radius } from '@/design/tokens';
+ *
+ * Or read the CSS custom properties (emitted at app boot by
+ * `emitCssTokens()`):
+ *   color: var(--color-gold-500);
+ *   color: var(--sem-text-body);
+ *   padding: var(--space-4);
  */
 
+import { legacy as L } from '../design/tokens.js';
+
 // ── Colors ──────────────────────────────────────────────────────────────────
-export const GOLD     = '#a0762a';     // primary accent (warm gold)
-export const GOLD_B   = '#c49a3c';     // bright gold (hover/highlight)
-export const GOLD_BG  = 'rgba(160,118,42,0.12)';  // gold background tint
-export const INK      = '#1c1409';     // primary text
-export const INK_DEEP = '#2d1f0e';     // header/footer gradient dark
-export const MUTED    = '#9c8068';     // muted text
-export const SECOND   = '#6b5340';     // secondary text
-export const BORDER   = '#c8b89a';     // primary borders
-export const BORDER2  = '#e0d0b0';     // light borders
-export const CARD     = '#fffbf5';     // card background
-export const PARCH    = '#f7f0e4';     // page background
-export const CARD_ALT = '#faf6ef';     // alternate card
-export const CARD_HDR = '#faf4e8';     // card header
+export const GOLD     = L.GOLD;
+export const GOLD_B   = L.GOLD_B;
+export const GOLD_BG  = L.GOLD_BG;
+export const INK      = L.INK;
+export const INK_DEEP = L.INK_DEEP;
+export const MUTED    = L.MUTED;
+// BODY — WCAG-passing body-copy color (ink-600). Use this for prose,
+// description text, helper text, paragraph body. MUTED is too light
+// for body and fails 4.5:1; keep MUTED only for chrome (eyebrows,
+// subtitles, hint text in card headers).
+export const BODY     = L.BODY;
+export const SECOND   = L.SECOND;
+export const BORDER   = L.BORDER;
+export const BORDER2  = L.BORDER2;
+export const CARD     = L.CARD;
+export const PARCH    = L.PARCH;
+export const CARD_ALT = L.CARD_ALT;
+export const CARD_HDR = L.CARD_HDR;
 
 // ── Typography ──────────────────────────────────────────────────────────────
-export const sans   = 'Nunito, sans-serif';
-export const serif_ = 'Crimson Text, Georgia, serif';
+export const sans   = L.sans;
+export const serif_ = L.serif_;
 
 // ── Spacing scale (px) ──────────────────────────────────────────────────────
-export const SP = { xs: 4, sm: 8, md: 12, lg: 16, xl: 20, xxl: 24 };
+export const SP = L.SP;
 
 // ── Border-radius scale (px) ────────────────────────────────────────────────
-export const R = { sm: 4, md: 6, lg: 8, xl: 12 };
+export const R = L.R;
 
 // ── Font-size scale (px) ────────────────────────────────────────────────────
-export const FS = { xxs: 10, xs: 11, sm: 12, md: 13, lg: 15, xl: 17, xxl: 20, h1: 24 };
+export const FS = L.FS;

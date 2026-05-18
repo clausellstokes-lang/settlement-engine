@@ -5,26 +5,74 @@
  * then redirects to Stripe's hosted checkout page.
  *
  * No Stripe SDK needed on the client — we just redirect to the URL.
+ *
+ * Catalog data (packs, tiers, single-dossier) lives in
+ * `src/config/pricing.js`. This module pulls the active set via
+ * `getActivePacks()` so flipping the `packsRepriced` flag rotates the
+ * SKUs offered without touching any UI code.
  */
 
 import { supabase, isConfigured } from './supabase.js';
+import { getActivePacks, findPackByKey, TIERS, SINGLE_DOSSIER } from '../config/pricing.js';
 
-const PRODUCTS = {
-  credits_5:  { name: '5 AI Credits',      price: '$4.99',    credits: 5,  perCredit: '$1.00',  discount: null },
-  credits_15: { name: '15 AI Credits',     price: '$9.99',    credits: 15, perCredit: '$0.67',  discount: '33% off' },
-  credits_40: { name: '40 AI Credits',     price: '$19.99',   credits: 40, perCredit: '$0.50',  discount: '50% off' },
-  premium:    { name: 'Premium Upgrade',   price: '$4.99/mo', credits: 0,  perCredit: null,     discount: null },
-};
+// PRODUCTS preserves the historical shape (object keyed by product id)
+// so existing imports (PurchaseModal, AccountPage) keep working. The
+// premium row is added in here since pricing.js stores it in TIERS,
+// not in the packs catalog.
+function buildProductsMap() {
+  const packs = getActivePacks();
+  return {
+    ...packs,
+    premium: {
+      key:       'premium',
+      name:      'Premium Upgrade',
+      price:     '$6/mo',
+      credits:   0,
+      perCredit: null,
+      discount:  null,
+    },
+    [SINGLE_DOSSIER.key]: {
+      key:       SINGLE_DOSSIER.key,
+      name:      'Single Dossier',
+      price:     SINGLE_DOSSIER.priceLabel,
+      credits:   0,
+      perCredit: null,
+      discount:  null,
+    },
+    founder_lifetime: {
+      key:       'founder_lifetime',
+      name:      'Founder Lifetime',
+      price:     '$99 one-time',
+      credits:   0,
+      perCredit: null,
+      discount:  null,
+    },
+  };
+}
+
+// PRODUCTS is a proxy onto the active map so callers always see the
+// current flag-driven catalog without hot-reload gymnastics.
+const PRODUCTS = new Proxy({}, {
+  get(_, key)        { return buildProductsMap()[key]; },
+  ownKeys()          { return Object.keys(buildProductsMap()); },
+  has(_, key)        { return key in buildProductsMap(); },
+  getOwnPropertyDescriptor(_, key) {
+    const value = buildProductsMap()[key];
+    return value ? { configurable: true, enumerable: true, value } : undefined;
+  },
+});
 
 /**
  * Create a Stripe Checkout session and redirect.
- * @param {'credits_5' | 'credits_15' | 'credits_40' | 'premium'} product
+ * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
  */
 export async function startCheckout(product) {
   if (!isConfigured) {
     throw new Error('Supabase not configured — cannot process payments in local mode');
   }
-  if (!PRODUCTS[product]) {
+  // Allow legacy product keys (credits_5/15/40) too, even when the
+  // catalog has been rotated, so refund/replay links don't 404.
+  if (!PRODUCTS[product] && !findPackByKey(product)) {
     throw new Error(`Unknown product: ${product}`);
   }
 

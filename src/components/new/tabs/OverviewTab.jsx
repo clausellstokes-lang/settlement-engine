@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {C} from '../design';
-import {Ti, serif, Section} from '../Primitives';
+import {Ti, serif, Section, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 
@@ -72,6 +72,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
 
   return (
     <div>
+      <TabIntro tabKey="overview" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── IDENTITY + KEY FACTS STRIP ───────────────────────────────────── */}

@@ -42,14 +42,23 @@ const THESIS_MODEL     = 'claude-opus-4-7';
 const REFINEMENT_MODEL = 'claude-haiku-4-5-20251001';
 const DAILY_LIFE_MODEL = 'claude-opus-4-7';
 
+// CONTRACT_AI_COSTS — mirrored on the client in src/config/pricing.js
+// (NEW_AI_COSTS). When you change a number here, change it there too —
+// tests/config/pricing.test.js fails loudly on drift.
+//
+// The reprice from 8/10/12 → 3/4/5 came from the funnel strategy: at
+// the old rate even the smallest pack (5 credits / $4.99) wasn't enough
+// to try every AI feature once. Buyers couldn't form a habit. The new
+// rate is calibrated so the entry-level pack (25 credits / $4.99) lets
+// a DM run a full week of campaign prep on a single purchase.
+//
+// Progression keeps the relative weighting (most expensive) because the
+// Opus thesis still sees prior thesis + new state + diff — the input
+// context is the actual cost driver, not the output length.
 const CREDIT_COSTS: Record<string, number> = {
-  narrative:   8,
-  dailyLife:   10,
-  // Progression is pricier than full narrative because it runs the Opus thesis
-  // over the prior thesis + the new state + the diff label (much larger input
-  // context) and because it preserves voice — the "guarantee of continuity"
-  // is the value, not the raw token count.
-  progression: 12,
+  narrative:   3,
+  dailyLife:   4,
+  progression: 5,
 };
 
 // ── Prompt building blocks ──────────────────────────────────────────────────

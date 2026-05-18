@@ -59,7 +59,9 @@ export const COPY = {
 
   ai: {
     inlineHook:   'Want table-ready prose?',
-    inlineHint:   '1 credit · streams section by section · partial failures keep your raw draft intact',
+    // Cost is interpolated by the consuming component so the hint stays
+    // honest when the pricing config flips schedules. See aiInlineHint().
+    inlineHintFn: (cost) => `${cost} credit${cost === 1 ? '' : 's'} · streams section by section · partial failures keep your raw draft intact`,
     polishCta:    'Polish with AI',
     progressCta:  'Apply event and progress narrative',
   },
@@ -75,22 +77,26 @@ export const COPY = {
   },
 
   pricing: {
+    // Tier names are intentionally generic ("upgrade") so the helper can
+    // substitute the active tier display name (Cartographer / Premium)
+    // at render time via getTierDisplayName. Hard-coding "Premium" here
+    // would drift the moment the tierRenames flag flips.
     moments: {
       first_canonize: {
         headline: 'You just made a town part of your campaign.',
-        body:     'Premium adds canon snapshots, timeline export variants, and AI prose polish. Free continues to work, just with the basics.',
+        body:     'Upgrade adds canon snapshots, timeline export variants, and AI prose polish. The free tier continues to work, just with the basics.',
       },
       first_ai_use: {
-        headline: 'AI polish costs one credit.',
-        body:     'Premium includes a monthly credit allowance plus discounted top-ups.',
+        headline: 'AI prose costs credits per generation.',
+        body:     'Upgrade includes a monthly credit allowance plus discounted top-ups.',
       },
       first_canon_export: {
         headline: 'Canon dossiers are the deliverable DMs print.',
-        body:     'Premium unlocks unlimited canon-mode exports and the timeline-packet variant.',
+        body:     'Upgrade unlocks unlimited canon-mode exports and the timeline-packet variant.',
       },
       cloud_save: {
         headline: 'Save your campaign across devices.',
-        body:     'Premium syncs your settlements, drafts, and canon timelines to your account.',
+        body:     'Upgrade syncs your settlements, drafts, and canon timelines to your account.',
       },
     },
   },

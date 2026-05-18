@@ -2,9 +2,14 @@
  * authSlice — Authentication state, role-based access, and tier-based permission gates.
  *
  * Tiers (subscription-based, controls feature access):
- *   'anon'    – no account, generate thorp/hamlet/village, no saves
- *   'free'    – account, all tiers, 10 saves, no neighbour/export/map-chains
- *   'premium' – unlimited saves, neighbour system, PDF/JSON, map supply chains
+ *   'anon'    – no account, can generate up to TOWN size, no saves (the
+ *               funnel strategy raised the anon ceiling from village to
+ *               town so first-time visitors get a meaningful artifact
+ *               worth signing up to save).
+ *   'free'    – account, all sizes, 3 saves (Wanderer / Free tier),
+ *               no neighbour/export/map-chains.
+ *   'premium' – Cartographer: unlimited saves, neighbour system,
+ *               PDF/JSON export, map supply chains.
  *
  * Roles (orthogonal to tier, controls administrative privileges):
  *   'user'      – default, no admin access
@@ -18,8 +23,8 @@
 import { auth as authService } from '../lib/auth.js';
 
 const TIER_GATE = {
-  anon:    { maxTier: 'village',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
-  free:    { maxTier: 'metropolis', maxSaves: 10,       neighbour: false, export: false, mapChains: false, customContent: false },
+  anon:    { maxTier: 'town',       maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
+  free:    { maxTier: 'metropolis', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false },
   premium: { maxTier: 'metropolis', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true  },
 };
 

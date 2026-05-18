@@ -1,20 +1,36 @@
 /**
  * Supabase Edge Function: create-checkout
  *
- * Creates a Stripe Checkout session for credit pack or premium upgrade.
- * Called from the client with the user's auth token.
+ * Creates a Stripe Checkout session for any of:
+ *   - Credit packs (new schedule:  25 / 60 / 150)
+ *   - Credit packs (legacy:         5 / 15 / 40)  — kept for refund/replay
+ *   - Premium subscription ($6/mo)
+ *   - Founder Lifetime ($99 one-time)
+ *   - Single-dossier microtransaction ($2.99 one-time)
+ *
+ * Catalog and pricing live in src/config/pricing.js on the client. This
+ * function maps each product key → a Stripe Price ID set in env. The
+ * legacy SKUs stay listed so refund and replay links keep resolving
+ * after the catalog rotates.
  *
  * Environment variables (set in Supabase dashboard):
- *   STRIPE_SECRET_KEY          — Stripe secret key
- *   STRIPE_PRICE_CREDITS_5     — Price ID for 5-credit pack ($4.99)
- *   STRIPE_PRICE_CREDITS_15    — Price ID for 15-credit pack ($9.99)
- *   STRIPE_PRICE_CREDITS_40    — Price ID for 40-credit pack ($19.99)
- *   STRIPE_PRICE_PREMIUM       — Price ID for premium subscription ($4.99/mo)
- *   CLIENT_URL                 — Frontend origin (e.g. https://yourapp.com)
+ *   STRIPE_SECRET_KEY                 — Stripe secret key
+ *   CLIENT_URL                        — Frontend origin (e.g. https://yourapp.com)
  *
- * Legacy env vars (backward compat):
- *   STRIPE_PRICE_CREDITS_10    — Mapped to credits_10 if still set
- *   STRIPE_PRICE_CREDITS_50    — Mapped to credits_50 if still set
+ *   New schedule (active):
+ *     STRIPE_PRICE_CREDITS_25         — 25-credit pack  ($4.99)
+ *     STRIPE_PRICE_CREDITS_60         — 60-credit pack  ($9.99)
+ *     STRIPE_PRICE_CREDITS_150        — 150-credit pack ($19.99)
+ *     STRIPE_PRICE_PREMIUM            — Cartographer subscription ($6/mo)
+ *     STRIPE_PRICE_FOUNDER_LIFETIME   — Founder Lifetime ($99 one-time)
+ *     STRIPE_PRICE_SINGLE_DOSSIER     — Single-dossier microtransaction ($2.99)
+ *
+ *   Legacy (kept for backward compat / refunds):
+ *     STRIPE_PRICE_CREDITS_5          — 5-credit pack  ($4.99)
+ *     STRIPE_PRICE_CREDITS_15         — 15-credit pack ($9.99)
+ *     STRIPE_PRICE_CREDITS_40         — 40-credit pack ($19.99)
+ *     STRIPE_PRICE_CREDITS_10         — 10-credit pack (early beta)
+ *     STRIPE_PRICE_CREDITS_50         — 50-credit pack (early beta)
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
@@ -24,23 +40,38 @@ import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
 const PRICE_MAP: Record<string, string> = {
-  // New volume-discount tiers
-  credits_5:  Deno.env.get('STRIPE_PRICE_CREDITS_5') || '',
-  credits_15: Deno.env.get('STRIPE_PRICE_CREDITS_15') || '',
-  credits_40: Deno.env.get('STRIPE_PRICE_CREDITS_40') || '',
-  premium:    Deno.env.get('STRIPE_PRICE_PREMIUM') || '',
-  // Legacy (backward compat)
-  credits_10: Deno.env.get('STRIPE_PRICE_CREDITS_10') || '',
-  credits_50: Deno.env.get('STRIPE_PRICE_CREDITS_50') || '',
+  // ── Active catalog ───────────────────────────────────────────────────────
+  credits_25:       Deno.env.get('STRIPE_PRICE_CREDITS_25') || '',
+  credits_60:       Deno.env.get('STRIPE_PRICE_CREDITS_60') || '',
+  credits_150:      Deno.env.get('STRIPE_PRICE_CREDITS_150') || '',
+  premium:          Deno.env.get('STRIPE_PRICE_PREMIUM') || '',
+  founder_lifetime: Deno.env.get('STRIPE_PRICE_FOUNDER_LIFETIME') || '',
+  single_dossier:   Deno.env.get('STRIPE_PRICE_SINGLE_DOSSIER') || '',
+  // ── Legacy SKUs (kept resolvable so refund + replay flows work) ──────────
+  credits_5:        Deno.env.get('STRIPE_PRICE_CREDITS_5') || '',
+  credits_15:       Deno.env.get('STRIPE_PRICE_CREDITS_15') || '',
+  credits_40:       Deno.env.get('STRIPE_PRICE_CREDITS_40') || '',
+  credits_10:       Deno.env.get('STRIPE_PRICE_CREDITS_10') || '',
+  credits_50:       Deno.env.get('STRIPE_PRICE_CREDITS_50') || '',
 };
 
 const CREDIT_AMOUNTS: Record<string, number> = {
+  // Active
+  credits_25:  25,
+  credits_60:  60,
+  credits_150: 150,
+  // Legacy
   credits_5:  5,
   credits_15: 15,
   credits_40: 40,
   credits_10: 10,
   credits_50: 50,
 };
+
+// Products that bill as a subscription (vs one-time payment). Everything
+// else uses Stripe's payment mode. Keep this in sync with TIERS.billing
+// in src/config/pricing.js.
+const SUBSCRIPTION_PRODUCTS = new Set(['premium']);
 
 /** Build CORS headers dynamically from the request origin. */
 function getCorsHeaders(req?: Request) {
@@ -95,7 +126,7 @@ serve(async (req) => {
     const clientUrl = Deno.env.get('CLIENT_URL') || 'http://localhost:5173';
 
     // Create Stripe checkout session
-    const mode = product === 'premium' ? 'subscription' : 'payment';
+    const mode = SUBSCRIPTION_PRODUCTS.has(product) ? 'subscription' : 'payment';
     const session = await stripe.checkout.sessions.create({
       mode,
       customer_email: user.email,

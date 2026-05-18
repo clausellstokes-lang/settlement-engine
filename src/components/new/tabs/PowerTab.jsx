@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { serif, Section } from '../Primitives';
+import { serif, Section, TabIntro } from '../Primitives';
 import { isMobile } from '../tabConstants';
 import { NarrativeNote } from '../NarrativeNote';
 
@@ -59,6 +59,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
 
   return (
     <div style={{paddingBottom:16}}>
+      <TabIntro tabKey="power" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── PUBLIC LEGITIMACY BANNER ──────────────────────────────────────── */}
