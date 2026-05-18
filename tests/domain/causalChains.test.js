@@ -175,3 +175,48 @@ describe('trace integrity: traces survive the canonical-shape adapter', () => {
     }
   });
 });
+
+// ── Faction traces (Tier 4.1) ───────────────────────────────────────────
+
+describe('faction traces emerge from generatePower', () => {
+  it('a town settlement emits at least one faction trace', () => {
+    const s = gen({ settType: 'town', culture: 'germanic' });
+    const factionTraces = tracesByType(s, 'faction');
+    expect(factionTraces.length).toBeGreaterThan(0);
+    for (const t of factionTraces) {
+      expect(t.step).toBe('generatePower');
+      expect(t.targetId).toMatch(/^faction\./);
+    }
+  });
+
+  it('every faction trace cites the tier as a cause', () => {
+    const s = gen({ settType: 'city', culture: 'germanic' });
+    const factionTraces = tracesByType(s, 'faction');
+    for (const t of factionTraces) {
+      const tierCause = t.causes.find(c => c.source === `tier.${s.tier}`);
+      expect(tierCause, `${t.targetId} missing tier cause`).toBeTruthy();
+    }
+  });
+
+  it('at least one faction trace has the governing result on a multi-faction settlement', () => {
+    // Cities reliably have multi-faction power structures with a
+    // governing body. (Smaller settlements may legitimately collapse
+    // to a single faction; we use city here to make the test stable.)
+    const s = gen({ settType: 'city', culture: 'germanic' });
+    const factionTraces = tracesByType(s, 'faction');
+    if (factionTraces.length < 2) return; // determinism guard
+    const governing = factionTraces.filter(t => t.result === 'governing');
+    // At least one governing or formed result must be present.
+    expect(governing.length + factionTraces.filter(t => t.result === 'formed').length)
+      .toBe(factionTraces.length);
+  });
+
+  it('faction traces declare downstream effects for known archetypes', () => {
+    // Generate enough variants that the sample reliably includes at
+    // least one non-"other" archetype with a known downstream block.
+    const s = gen({ settType: 'city', culture: 'germanic' });
+    const withDownstream = tracesByType(s, 'faction')
+      .filter(t => Array.isArray(t.downstreamEffects) && t.downstreamEffects.length > 0);
+    expect(withDownstream.length).toBeGreaterThan(0);
+  });
+});

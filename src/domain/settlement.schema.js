@@ -208,6 +208,52 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string} [archetype]
  * @property {number} [power]
  * @property {number} [legitimacy]
+ *
+ * Legacy compatibility note: today's generator produces factions with
+ * shape `{ faction, power, desc }`. The Tier 4.1 enriched profile
+ * (FactionProfile below) is derived from this on demand via
+ * domain/factionProfile.js#deriveFactionProfile. When the generator
+ * eventually produces structured profiles directly, the derivation
+ * becomes an identity pass for already-structured input.
+ */
+
+/**
+ * @typedef {Object} FactionProfile
+ * Tier 4.1 structured shape. Returned by deriveFactionProfile().
+ *
+ * @property {string}            id         Stable id ('faction.<snake_name>').
+ * @property {string}            name
+ * @property {FactionArchetype}  archetype  Inferred from name patterns.
+ * @property {number}            power      Numeric power score (legacy field).
+ * @property {number}            legitimacy 0-100. Governing factions inherit the
+ *                                          settlement's public legitimacy; non-
+ *                                          governing factions default to 50.
+ *                                          Tier 4.2 (event-driven updates) will
+ *                                          adjust this per faction over time.
+ * @property {FactionResources}  resources
+ * @property {string[]}          wants
+ * @property {string[]}          fears
+ * @property {string[]}          leverage
+ * @property {string[]}          vulnerabilities
+ * @property {string}            [desc]     Preserved from legacy shape.
+ */
+
+/**
+ * @typedef {'government' | 'military' | 'religious' | 'merchant' | 'craft'
+ *          | 'criminal' | 'arcane' | 'occupation' | 'other'} FactionArchetype
+ */
+
+/**
+ * @typedef {Object} FactionResources
+ * Qualitative bands per the simulator roadmap §6. Real values are
+ * 'low' | 'medium' | 'high'. Avoiding numbers here keeps the profile
+ * legible for AI overlays and PDF authors without false precision.
+ *
+ * @property {'low'|'medium'|'high'} wealth
+ * @property {'low'|'medium'|'high'} manpower
+ * @property {'low'|'medium'|'high'} publicTrust
+ * @property {'low'|'medium'|'high'} coerciveForce
+ * @property {'low'|'medium'|'high'} informationAccess
  */
 
 /**

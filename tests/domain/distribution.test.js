@@ -28,6 +28,7 @@
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { hasAnyTag, TAG_GROUPS } from '../../src/lib/entities.js';
+import { deriveAllFactionProfiles } from '../../src/domain/factionProfile.js';
 
 const SAMPLE_SIZE = 40;
 
@@ -191,5 +192,65 @@ describe('canonical version stamps', () => {
       expect(typeof s.generatorVersion).toBe('string');
       expect(s.id).toMatch(/^s_[0-9a-f]+$/);
     }
+  });
+});
+
+// ── Faction prevalence (Tier 4.1) ────────────────────────────────────────
+// Towns and cities should reliably carry multi-faction power structures.
+// Faction archetype distribution should reflect the institution mix.
+
+describe('faction prevalence and archetype coverage', () => {
+  it('every town carries at least one faction', () => {
+    const towns = generateMany({ settType: 'town', culture: 'germanic' });
+    const withFactions = towns.filter(s => {
+      const ps = s.powerStructure || s.power || {};
+      return Array.isArray(ps.factions) && ps.factions.length > 0;
+    });
+    expect(withFactions.length).toBe(towns.length);
+  });
+
+  it('at least 80% of cities carry multiple factions', () => {
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    const multi = cities.filter(s => {
+      const ps = s.powerStructure || s.power || {};
+      return Array.isArray(ps.factions) && ps.factions.length >= 2;
+    });
+    expect(multi.length / cities.length).toBeGreaterThanOrEqual(0.80);
+  });
+
+  it('every faction across the sample resolves to a known archetype', () => {
+    const towns = generateMany({ settType: 'town', culture: 'germanic' });
+    const archetypes = new Set();
+    for (const s of towns) {
+      for (const p of deriveAllFactionProfiles(s)) {
+        archetypes.add(p.archetype);
+      }
+    }
+    // The sample should cover at least three distinct archetypes
+    // across 40 towns — if it doesn't, archetype detection has narrowed
+    // suspiciously.
+    expect(archetypes.size).toBeGreaterThanOrEqual(3);
+    // Every archetype must be from the canonical set.
+    const canonical = new Set([
+      'government', 'military', 'religious', 'merchant',
+      'craft', 'criminal', 'arcane', 'occupation', 'other',
+    ]);
+    for (const a of archetypes) {
+      expect(canonical.has(a), `unknown archetype: ${a}`).toBe(true);
+    }
+  });
+
+  it('government or merchant archetype appears in at least 90% of towns', () => {
+    // Every town has SOME form of formal authority, but the classifier
+    // sometimes correctly routes "Merchant Guild Council" / "Guild
+    // Authority" to the merchant archetype rather than government —
+    // both are legitimate governance forms. So the union of the two
+    // is the real "has formal authority" prevalence.
+    const towns = generateMany({ settType: 'town', culture: 'germanic' });
+    const withFormal = towns.filter(s => {
+      const profiles = deriveAllFactionProfiles(s);
+      return profiles.some(p => p.archetype === 'government' || p.archetype === 'merchant');
+    });
+    expect(withFormal.length / towns.length).toBeGreaterThanOrEqual(0.90);
   });
 });
