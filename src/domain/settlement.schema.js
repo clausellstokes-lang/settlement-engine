@@ -339,6 +339,36 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {Object} HistoryBeat
+ * Tier 4.7 structured shape. One slot in a HistoryBeats object.
+ *
+ * @property {string}             key         Canonical slot identifier
+ *                                            (e.g. 'foundingCause').
+ * @property {string}             label       Human-readable label
+ *                                            (e.g. 'Founding cause').
+ * @property {string}             text        Single-line causal prose.
+ * @property {string}             source      Dotted path the data was
+ *                                            sourced from (e.g.
+ *                                            'history.historicalEvents').
+ * @property {Object} [references]            Optional structured pointers
+ *                                            (eventName, yearsAgo, etc.).
+ */
+
+/**
+ * @typedef {Object} HistoryBeats
+ * Tier 4.7 set of seven causal beats. Any beat may be null on a
+ * settlement that lacks the source data; consumers must guard.
+ *
+ * @property {HistoryBeat | null} foundingCause
+ * @property {HistoryBeat | null} firstProsperitySource
+ * @property {HistoryBeat | null} definingCrisis
+ * @property {HistoryBeat | null} institutionalLegacy
+ * @property {HistoryBeat | null} recentDisruption
+ * @property {HistoryBeat | null} unresolvedWound
+ * @property {HistoryBeat | null} likelyFuture
+ */
+
+/**
  * @typedef {Object} EscalationClock
  * Tier 4.10 escalation trajectory. Returned by deriveEscalationClocks().
  *

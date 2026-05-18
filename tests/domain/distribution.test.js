@@ -37,6 +37,10 @@ import {
   deriveAllStructuredHooks,
   deriveEscalationClocks,
 } from '../../src/domain/hookEscalation.js';
+import {
+  deriveHistoryBeats,
+  historyBeatPresence,
+} from '../../src/domain/historyBeats.js';
 
 const SAMPLE_SIZE = 40;
 
@@ -383,5 +387,62 @@ describe('hook + escalation clock prevalence', () => {
       deriveEscalationClocks(s).some(c => c.label === 'Bread Riot Clock')
     );
     expect(withBreadClock.length).toBeGreaterThan(0);
+  });
+});
+
+// ── History beat prevalence (Tier 4.7) ─────────────────────────────────
+// History is one of the most uniformly-populated fields on the
+// generator output. Every settlement should produce at least the
+// foundingCause beat; older / larger settlements should also produce
+// definingCrisis and institutional legacy beats.
+
+describe('history beat prevalence', () => {
+  it('every settlement produces a foundingCause beat', () => {
+    const towns = generateMany({ settType: 'town', culture: 'germanic' });
+    for (const s of towns) {
+      const beats = deriveHistoryBeats(s);
+      expect(beats.foundingCause, `${s.name} missing foundingCause`).toBeTruthy();
+    }
+  });
+
+  it('every settlement produces at least three non-null beats out of seven', () => {
+    // A reasonable richness floor — engine output should never produce
+    // a settlement with fewer than three beats. Cities reliably produce
+    // five or more.
+    const towns = generateMany({ settType: 'town', culture: 'germanic' });
+    let totalNonNull = 0;
+    let totalSlots = 0;
+    for (const s of towns) {
+      const presence = historyBeatPresence(s);
+      const nonNull = Object.values(presence).filter(Boolean).length;
+      totalNonNull += nonNull;
+      totalSlots += 7;
+      expect(nonNull, `${s.name} produced only ${nonNull} beats`).toBeGreaterThanOrEqual(3);
+    }
+    // Aggregate ratio should be comfortably above 50%.
+    expect(totalNonNull / totalSlots).toBeGreaterThanOrEqual(0.55);
+  });
+
+  it('at least 80% of cities have a definingCrisis beat', () => {
+    // Cities have richer history with anchored events. The 80% floor
+    // catches a regression where the historicalEvents generator stops
+    // producing major-or-worse events for city-tier settlements.
+    const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    const withCrisis = cities.filter(s => deriveHistoryBeats(s).definingCrisis != null);
+    expect(withCrisis.length / cities.length).toBeGreaterThanOrEqual(0.80);
+  });
+
+  it('every history beat carries label + text + source', () => {
+    const towns = generateMany({ settType: 'town', culture: 'germanic' });
+    for (const s of towns) {
+      for (const beat of Object.values(deriveHistoryBeats(s))) {
+        if (beat == null) continue;
+        expect(typeof beat.label).toBe('string');
+        expect(beat.label.length).toBeGreaterThan(0);
+        expect(typeof beat.text).toBe('string');
+        expect(beat.text.length).toBeGreaterThan(0);
+        expect(typeof beat.source).toBe('string');
+      }
+    }
   });
 });
