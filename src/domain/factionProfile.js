@@ -240,6 +240,12 @@ export function deriveFactionProfile(faction, settlement) {
     // Preserve everything else off the legacy object so consumers
     // currently reading `faction.desc` etc. keep working.
     ...(typeof faction === 'object' ? { desc: faction.desc } : {}),
+    // Phase 19: preserve controlsInstitutionIds so the explanation
+    // module can answer "which factions control this institution?"
+    // without reaching into the raw faction list separately.
+    controlsInstitutionIds: (typeof faction === 'object' && Array.isArray(faction.controlsInstitutionIds))
+      ? [...faction.controlsInstitutionIds]
+      : [],
   };
 }
 

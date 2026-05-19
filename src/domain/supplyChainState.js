@@ -241,15 +241,22 @@ export function deriveSupplyChainState(chain, settlement) {
 
     // Carry forward common legacy fields so consumers reading the
     // legacy shape via this derivation keep working.
-    outputs:             chain.outputs,
-    services:            chain.services,
-    resource:            chain.resource,
-    exportable:          chain.exportable,
-    entrepot:            chain.entrepot,
-    activatedByResource: chain.activatedByResource,
-    substituteActive:    chain.substituteActive,
-    resourceDepleted:    chain.resourceDepleted,
-    dependency:          chain.dependency,
+    outputs:                chain.outputs,
+    services:               chain.services,
+    resource:               chain.resource,
+    exportable:             chain.exportable,
+    entrepot:               chain.entrepot,
+    activatedByResource:    chain.activatedByResource,
+    substituteActive:       chain.substituteActive,
+    resourceDepleted:       chain.resourceDepleted,
+    dependency:             chain.dependency,
+    // Phase 19: preserve processingInstitutions so the explanation
+    // module can match institutions to the chains that use them as
+    // processors. The legacy generator emits this field; we just
+    // didn't carry it forward in the initial Phase 10 derivation.
+    processingInstitutions: Array.isArray(chain.processingInstitutions)
+      ? [...chain.processingInstitutions]
+      : [],
   };
 }
 

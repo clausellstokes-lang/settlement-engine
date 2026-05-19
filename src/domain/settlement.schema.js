@@ -644,3 +644,72 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {Object<SystemVariableName, number>}         scores
  * @property {Object<CausalBand, SystemVariableName[]>}   summary    Variables grouped by band.
  */
+
+/**
+ * @typedef {'institution' | 'faction' | 'npc' | 'chain' | 'hook'
+ *          | 'condition' | 'clock' | 'history_beat'
+ *          | 'system_variable'} ExplainableEntityType
+ *
+ * Tier 2.6 canonical entity-type vocabulary. The dispatcher in
+ * domain/explanation.js#explainEntity routes to a per-type explainer
+ * based on this. The id-prefix convention ('institution.', 'faction.',
+ * etc.) lets the dispatcher infer the type when only an id is passed.
+ */
+
+/**
+ * @typedef {Object} ExplanationCause
+ *
+ * A single input that contributed to an entity's existence or current
+ * state. Mirrors the Phase 7 trace cause shape but pulls from any
+ * source (traces, profiles, derivations, substrate contributors).
+ *
+ * @property {string}  source    Stable id of the input.
+ * @property {string}  effect    Short verb ('controls', 'requires', 'establishes', ...).
+ * @property {string}  reason    Human-readable explanation.
+ * @property {string=} step      Optional pipeline step name (for trace-sourced causes).
+ * @property {number=} delta     Optional numeric contribution (for substrate contributors).
+ */
+
+/**
+ * @typedef {Object} ExplanationEffect
+ *
+ * A downstream effect the entity supports.
+ *
+ * @property {string}  target    Stable id or name of what's affected.
+ * @property {string}  effect    Short verb describing the effect.
+ * @property {string}  reason    Human-readable explanation.
+ * @property {string=} step      Optional pipeline step name.
+ */
+
+/**
+ * @typedef {Object} ExplanationReference
+ *
+ * A pointer to a related entity the consumer can navigate to.
+ *
+ * @property {string} id
+ * @property {string} label
+ * @property {string} type    May be 'unknown' when the type can't be inferred.
+ */
+
+/**
+ * @typedef {Object} ExplanationEnvelope
+ *
+ * Tier 2.6 unified causal-explanation shape. Returned by
+ * domain/explanation.js#explainEntity for every explainable entity.
+ * Consumers can render the same UI for any entity type — institution
+ * detail, faction profile, NPC card, chain status panel, etc. — by
+ * reading the same envelope.
+ *
+ * @property {ExplainableEntityType | null} entityType
+ * @property {string | null}                entityId
+ * @property {string | null}                entityLabel
+ * @property {string | null}                causalReason       One-line "why does this exist?"
+ * @property {ExplanationCause[]}           causes
+ * @property {ExplanationEffect[]}          downstreamEffects
+ * @property {{consequences: string[]}}     ifRemoved
+ * @property {Object | null}                profile            Per-type rich detail.
+ * @property {ExplanationReference[]}       references         Navigation targets.
+ * @property {string[]}                     sources            Which derivations contributed
+ *                                                              (e.g. 'simulationTrace',
+ *                                                              'factionProfile', 'causalState').
+ */
