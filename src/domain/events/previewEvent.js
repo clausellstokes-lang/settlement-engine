@@ -32,6 +32,11 @@ import { runEventPipeline } from './eventPipeline.js';
  */
 export function previewEvent({ settlement, systemState, event }) {
   const result = runEventPipeline(settlement, event);
+  // Note: we intentionally do NOT return result.nextSettlement here.
+  // The mutated settlement carries `Date.now()` timestamps in
+  // mutateSettlement impairments, which would break the "preview is
+  // pure" determinism contract. Consumers that want the projected
+  // settlement should call runEventPipeline directly.
   return {
     event: result.event,
     beforeState: systemState || result.beforeSystemState || deriveSystemState(settlement),
@@ -41,11 +46,10 @@ export function previewEvent({ settlement, systemState, event }) {
     narrativeSummary: result.narrativeSummary,
     affectedSteps: [],
     warnings: result.warnings,
-    // Phase 18 additions — substrate + faction-delta access
+    // Phase 18 additions — substrate + faction-delta access. These
+    // don't carry timestamps so they're safe to expose on the legacy
+    // pure-preview shape.
     causalStateDeltas: result.causalStateDeltas,
     factionRelationshipDeltas: result.factionRelationshipDeltas,
-    // Phase 18 — preview now also reports the projected settlement so
-    // callers can render counterfactuals without re-running the pipeline.
-    nextSettlement: result.nextSettlement,
   };
 }

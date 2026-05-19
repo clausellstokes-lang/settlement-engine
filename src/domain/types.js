@@ -142,7 +142,12 @@
  *  @property {CoherenceWarning[]} warnings   coherence issues introduced by the event
  *  @property {Array<Object>=} causalStateDeltas          Phase 18 substrate diff
  *  @property {Array<Object>=} factionRelationshipDeltas  Phase 14 structured faction deltas
- *  @property {Object=}        nextSettlement              Phase 18 projected settlement
+ *
+ * Note: the projected nextSettlement is intentionally NOT on the
+ * preview shape — mutateSettlement embeds Date.now() timestamps in
+ * impairments, which would break the preview-is-pure contract.
+ * Consumers wanting the projected settlement should call
+ * runEventPipeline directly.
  */
 
 // No runtime exports — this file is for JSDoc reference only.

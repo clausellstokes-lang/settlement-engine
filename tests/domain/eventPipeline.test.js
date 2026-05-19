@@ -291,7 +291,11 @@ describe('Phase 18 backward compatibility', () => {
     // Phase 18 additions are present but the legacy shape is preserved.
     expect(preview).toHaveProperty('causalStateDeltas');
     expect(preview).toHaveProperty('factionRelationshipDeltas');
-    expect(preview).toHaveProperty('nextSettlement');
+    // nextSettlement is intentionally NOT on previewEvent's return so
+    // the preview-is-pure contract holds (mutateSettlement embeds
+    // Date.now() timestamps in impairments). Use runEventPipeline if
+    // you need the projected settlement.
+    expect(preview).not.toHaveProperty('nextSettlement');
   });
 
   it('applyEvent still returns the legacy { logEntry, nextSystemState, nextSettlement } shape', () => {
