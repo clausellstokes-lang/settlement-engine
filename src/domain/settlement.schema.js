@@ -743,6 +743,46 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'food_culture' | 'dawn_work' | 'gathering_places'
+ *          | 'child_warnings' | 'commoner_resentments'
+ *          | 'outsider_impressions' | 'unspoken_topics'
+ *          | 'recent_changes'} DailyLifeSlotKey
+ *
+ * Tier 4.19 canonical 8-slot vocabulary for daily-life prose
+ * derived by domain/dailyLife.js. Same slot pattern as Phase 12
+ * history beats — every slot always renders something true even
+ * when its source data is thin.
+ */
+
+/**
+ * @typedef {Object} DailyLifeSlot
+ *
+ * One entry in a DailyLifeEnvelope. The text is structurally grounded
+ * prose — it composes signals from substrate / capacities / threats /
+ * conditions / history but presents them as human-readable narrative.
+ *
+ * @property {DailyLifeSlotKey} key
+ * @property {string}           label
+ * @property {string}           text       Narrative line.
+ * @property {string}           source     Dotted path describing what fed the line.
+ * @property {Array<{id: string, label: string, type: string}>} references
+ *           Pointers to Phase 19 explainable entities.
+ */
+
+/**
+ * @typedef {Object} DailyLifeEnvelope
+ *
+ * Tier 4.19 daily-life envelope produced by
+ * domain/dailyLife.js#deriveDailyLife. Eight slots covering food
+ * culture, dawn work, gathering places, child warnings, commoner
+ * resentments, outsider impressions, unspoken topics, and recent
+ * changes.
+ *
+ * @property {Object<DailyLifeSlotKey, DailyLifeSlot>} slots
+ * @property {string[]}                                summary
+ */
+
+/**
  * @typedef {'institution' | 'faction' | 'npc' | 'chain' | 'hook'
  *          | 'condition' | 'clock' | 'history_beat'
  *          | 'system_variable' | 'threat' | 'capacity'} ExplainableEntityType
