@@ -677,3 +677,98 @@ export function summarizeCausalState(settlement) {
 export function supportedSystemVariables() {
   return [...SYSTEM_VARIABLES];
 }
+
+// ── Variable polarity ────────────────────────────────────────────────────
+// Most substrate variables are "higher is better." Two are inverted by
+// name semantics — declared explicitly so consumers can render the
+// right sign in deltas. (housing_pressure was deliberately inverted in
+// the derivation so it matches the higher-is-better convention; the
+// name is kept for roadmap parity.)
+
+const HIGHER_IS_BETTER = new Set([
+  'food_security', 'labor_capacity', 'public_legitimacy', 'ruling_authority',
+  'faction_power', 'trade_connectivity', 'healing_capacity', 'defense_readiness',
+  'religious_authority', 'housing_pressure', 'infrastructure_condition',
+  'magical_stability', 'social_trust',
+]);
+
+const LOWER_IS_BETTER = new Set([
+  'criminal_opportunity',
+]);
+
+export function variablePolarity(variable) {
+  if (HIGHER_IS_BETTER.has(variable)) return 'higher_is_better';
+  if (LOWER_IS_BETTER.has(variable))  return 'lower_is_better';
+  return 'higher_is_better';
+}
+
+// ── compareCausalState ──────────────────────────────────────────────────
+//
+// Returns a structured delta list for two CausalState snapshots. Used
+// by the Phase 18 event pipeline so the substrate-layer delta is
+// reported alongside the legacy 4-dimension delta. Mirrors the shape of
+// compareSystemState so consumers can render the two side-by-side.
+
+const VARIABLE_LABEL = Object.freeze({
+  food_security:           'Food security',
+  labor_capacity:          'Labor capacity',
+  public_legitimacy:       'Public legitimacy',
+  ruling_authority:        'Ruling authority',
+  faction_power:           'Faction power',
+  trade_connectivity:      'Trade connectivity',
+  healing_capacity:        'Healing capacity',
+  defense_readiness:       'Defense readiness',
+  criminal_opportunity:    'Criminal opportunity',
+  religious_authority:     'Religious authority',
+  housing_pressure:        'Housing pressure',
+  infrastructure_condition: 'Infrastructure condition',
+  magical_stability:       'Magical stability',
+  social_trust:            'Social trust',
+});
+
+function explainCausalDelta(variable, before, after, change, bandBefore, bandAfter) {
+  const label = VARIABLE_LABEL[variable] || variable;
+  const polar = variablePolarity(variable);
+  const dir = change > 0 ? 'rose' : 'fell';
+  const mag = Math.abs(change) >= 15 ? 'sharply' : Math.abs(change) >= 7 ? 'noticeably' : 'slightly';
+  const better = (polar === 'higher_is_better' && change > 0) ||
+                 (polar === 'lower_is_better'  && change < 0);
+  if (bandBefore !== bandAfter) {
+    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : ' — pressure increased'}`;
+  }
+  return `${label} ${dir} ${mag}${better ? '' : ' — pressure increased'}`;
+}
+
+/**
+ * Diff two CausalState snapshots. Returns a structured delta entry per
+ * variable that changed, sorted by absolute change descending.
+ *
+ * Each entry:
+ *   { variable, before, after, change, bandBefore, bandAfter,
+ *     polarity, explanation }
+ */
+export function compareCausalState(before, after) {
+  if (!before || !after) return [];
+  const out = [];
+  for (const name of SYSTEM_VARIABLES) {
+    const b = before.scores?.[name];
+    const a = after.scores?.[name];
+    if (typeof b !== 'number' || typeof a !== 'number') continue;
+    const change = a - b;
+    if (change === 0) continue;
+    const bandBefore = before.bands?.[name] || causalBand(b);
+    const bandAfter  = after.bands?.[name]  || causalBand(a);
+    out.push({
+      variable: name,
+      before: b,
+      after: a,
+      change,
+      bandBefore,
+      bandAfter,
+      polarity: variablePolarity(name),
+      explanation: explainCausalDelta(name, b, a, change, bandBefore, bandAfter),
+    });
+  }
+  out.sort((x, y) => Math.abs(y.change) - Math.abs(x.change));
+  return out;
+}

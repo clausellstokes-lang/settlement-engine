@@ -111,6 +111,8 @@
  *  @property {Delta[]} deltas
  *  @property {FactionResponse[]} factionResponses
  *  @property {string} narrativeSummary       short DM-facing summary
+ *  @property {Array<Object>=} causalStateDeltas          Phase 18 substrate-layer diff
+ *  @property {Array<Object>=} factionRelationshipDeltas  Phase 14 structured faction deltas
  */
 
 /** @typedef {Object} CoherenceWarning
@@ -126,6 +128,10 @@
  * happen" before the user confirms. `applyEvent` materializes it into a
  * real EventLogEntry.
  *
+ * Phase 18 (Tier 2.2): preview now also exposes the substrate-layer
+ * diff and the projected mutated settlement so consumers can build
+ * counterfactual surfaces without re-running the pipeline.
+ *
  *  @property {Event} event
  *  @property {SystemState} beforeState
  *  @property {SystemState} afterState
@@ -134,6 +140,9 @@
  *  @property {string} narrativeSummary
  *  @property {string[]} affectedSteps        which pipeline steps would re-run
  *  @property {CoherenceWarning[]} warnings   coherence issues introduced by the event
+ *  @property {Array<Object>=} causalStateDeltas          Phase 18 substrate diff
+ *  @property {Array<Object>=} factionRelationshipDeltas  Phase 14 structured faction deltas
+ *  @property {Object=}        nextSettlement              Phase 18 projected settlement
  */
 
 // No runtime exports — this file is for JSDoc reference only.
