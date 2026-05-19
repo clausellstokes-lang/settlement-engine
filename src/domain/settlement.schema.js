@@ -183,13 +183,63 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'low' | 'medium' | 'high' | 'critical'} ConditionSeverityBand
+ *
+ * Qualitative banding derived from the numeric severity score. Computed
+ * by domain/activeConditions.js#severityBand; consumers should rely on
+ * the band rather than the raw 0..1 number for display.
+ */
+
+/**
+ * @typedef {'worsening' | 'stable' | 'easing'} ConditionStatus
+ *
+ * Trajectory hint for a condition. 'worsening' means the next tick
+ * tends to compound effects; 'easing' means the condition is on its
+ * way out; 'stable' is the no-information default.
+ */
+
+/**
+ * @typedef {Object} ConditionTrigger
+ *
+ * Provenance for an active condition — where did it come from?
+ *
+ * @property {number}        tick                  Tick index at which the condition was added (0 for world creation).
+ * @property {string | null} sourceEventType       e.g. 'PLAGUE_OUTBREAK', or null when generator-stamped.
+ * @property {string | null} sourceEventTargetId   Stable id of the entity that triggered the condition.
+ */
+
+/**
+ * @typedef {Object} ConditionDuration
+ *
+ * Time accounting for an active condition. Both fields are
+ * interval-scale-weighted: a per-week tick advances elapsedTicks by
+ * 0.25, a per-month tick by 1.0, a per-year tick by 6.0 — matching
+ * the Phase 15 INTERVAL_SCALES.
+ *
+ * @property {number}        elapsedTicks      Cumulative scale-weighted advancement.
+ * @property {number | null} expiresAtTicks    Threshold past which the condition expires; null = persists indefinitely.
+ */
+
+/**
  * @typedef {Object} ActiveCondition
- * @property {string} id                'condition.plague' | etc.
- * @property {number} severity          0-1
- * @property {string} status            'worsening' | 'stable' | 'easing'
- * @property {string} [duration]        Human-readable
- * @property {string[]} affectedSystems Subsystem names this condition feeds into
- * @property {string} [sourceEventId]
+ *
+ * Tier 2.3 canonical shape. The set of these on a settlement is the
+ * authoritative description of "what's going wrong right now."
+ * Stored at settlement.activeConditions[]. Enriched (defaults applied,
+ * band recomputed) by domain/activeConditions.js#deriveActiveCondition;
+ * read by Phase 15 advanceTime when no external override is passed.
+ *
+ * @property {string}                  id               Stable id 'condition.<archetype>.<suffix>'.
+ * @property {string}                  archetype        Matches factionRelationshipUpdate vocabulary.
+ * @property {string}                  label            Display label.
+ * @property {string}                  description      Single-line prose.
+ * @property {number}                  severity         0..1 numeric (computation surface).
+ * @property {ConditionSeverityBand}   severityBand     Derived band for display.
+ * @property {ConditionStatus}         status           Trajectory.
+ * @property {ConditionTrigger}        triggeredAt      Provenance.
+ * @property {ConditionDuration}       duration         Time accounting.
+ * @property {string[]}                affectedSystems  Subsystem labels this condition feeds into.
+ * @property {Object[]}                causes           Optional structured causal pointers.
  */
 
 /**
@@ -415,10 +465,12 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {TickInterval}                interval
  * @property {string[]}                    appliedConditions
  * @property {FactionRelationshipUpdate[]} factionDeltas
- * @property {Object}                      factionSummary    Aggregated per-faction.
+ * @property {Object}                      factionSummary      Aggregated per-faction.
  * @property {ClockAdvancement[]}          clockAdvancements
  * @property {ClockResolution[]}           clockResolutions
- * @property {string[]}                    summary           Human-readable lines.
+ * @property {ActiveCondition[]}           [conditionsExpired] Conditions that crossed expiresAtTicks this tick.
+ * @property {ActiveCondition[]}           [activeConditions]  Live conditions after expiry + aging.
+ * @property {string[]}                    summary             Human-readable lines.
  */
 
 /**

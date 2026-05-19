@@ -29,6 +29,12 @@
 
 import { recalculateFactionRelationships, summarizeByFaction } from './factionRelationshipUpdate.js';
 import { deriveEscalationClocks } from './hookEscalation.js';
+import {
+  activeArchetypes,
+  withTickedConditionDurations,
+  withExpiredConditionsRemoved,
+  deriveAllActiveConditions,
+} from './activeConditions.js';
 
 /** @typedef {import('./settlement.schema.js').TickInterval} TickInterval */
 
@@ -215,18 +221,30 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
  * a structured report, and the next clock state.
  *
  * @param {Object} settlement
- * @param {Object} options
+ * @param {Object} [options]
  * @param {TickInterval} [options.interval='one_month']
- * @param {string[]}     [options.activeConditions=[]]   Archetype keys (e.g. 'plague').
+ * @param {string[]}     [options.activeConditions]      Archetype keys (e.g. 'plague').
+ *                                                       When omitted, reads from
+ *                                                       settlement.activeConditions
+ *                                                       (Tier 2.3 canonical state).
  * @param {Object}       [options.previousTickState]     { clockStages: { [clockId]: int } }
  * @returns {Object} { newSettlement, tick, nextTickState }
  */
 export function advanceTime(settlement, options = {}) {
   const {
     interval = 'one_month',
-    activeConditions = [],
+    activeConditions: overrideConditions,
     previousTickState = null,
   } = options;
+
+  // Source of truth for "what archetypes apply this tick":
+  //   - explicit options.activeConditions wins (allows callers to
+  //     simulate hypothetical "what if plague" without mutating state),
+  //   - otherwise read from canonical settlement.activeConditions
+  //     (Phase 16 Tier 2.3).
+  const sourceArchetypes = Array.isArray(overrideConditions)
+    ? overrideConditions
+    : activeArchetypes(settlement);
 
   if (!settlement) {
     return {
@@ -237,6 +255,7 @@ export function advanceTime(settlement, options = {}) {
         factionDeltas: [],
         clockAdvancements: [],
         clockResolutions: [],
+        conditionsExpired: [],
         summary: [],
       },
       nextTickState: previousTickState,
@@ -248,7 +267,7 @@ export function advanceTime(settlement, options = {}) {
 
   // ── 1. Collect faction deltas from every active condition ───────────
   const allDeltas = [];
-  for (const conditionArchetype of activeConditions) {
+  for (const conditionArchetype of sourceArchetypes) {
     const deltas = recalculateFactionRelationships(
       settlement,
       { type: `CONDITION_TICK_${conditionArchetype.toUpperCase()}` },
@@ -265,17 +284,24 @@ export function advanceTime(settlement, options = {}) {
     }
   }
 
-  // ── 2. Apply deltas to the cloned settlement ───────────────────────
-  const newSettlement = applyFactionDeltasToSettlement(settlement, allDeltas);
+  // ── 2. Apply faction deltas to the cloned settlement ───────────────
+  let newSettlement = applyFactionDeltasToSettlement(settlement, allDeltas);
 
-  // ── 3. Advance clocks (against the NEW settlement state so a clock
+  // ── 3. Age + expire canonical settlement conditions (regardless of
+  //      whether the caller passed an override) ────────────────────────
+  newSettlement = withTickedConditionDurations(newSettlement, usableInterval);
+  const expiryResult = withExpiredConditionsRemoved(newSettlement);
+  newSettlement = expiryResult.settlement;
+  const conditionsExpired = expiryResult.expired;
+
+  // ── 4. Advance clocks (against the NEW settlement state so a clock
   //      that lifted in step 2 is correctly seen as resolved) ─────────
   const { nextStages, advancements, resolutions } = advanceClocks(newSettlement, previousTickState);
 
-  // ── 4. Build the report ────────────────────────────────────────────
+  // ── 5. Build the report ────────────────────────────────────────────
   const summary = [];
-  if (activeConditions.length) {
-    summary.push(`${usableInterval.replace(/_/g, ' ')} passed. Active conditions: ${activeConditions.join(', ')}.`);
+  if (sourceArchetypes.length) {
+    summary.push(`${usableInterval.replace(/_/g, ' ')} passed. Active conditions: ${sourceArchetypes.join(', ')}.`);
   } else {
     summary.push(`${usableInterval.replace(/_/g, ' ')} passed under no active conditions.`);
   }
@@ -289,14 +315,19 @@ export function advanceTime(settlement, options = {}) {
   for (const res of resolutions) {
     summary.push(`Clock resolved: ${res.clockId} (was at stage ${res.previousStage}).`);
   }
+  for (const exp of conditionsExpired) {
+    summary.push(`Condition expired: ${exp.label} (after ${exp.duration.elapsedTicks.toFixed(2)} ticks).`);
+  }
 
   const tick = {
     interval: usableInterval,
-    appliedConditions: [...activeConditions],
+    appliedConditions: [...sourceArchetypes],
     factionDeltas: allDeltas,
     factionSummary: summarizeByFaction(allDeltas),
     clockAdvancements: advancements,
     clockResolutions: resolutions,
+    conditionsExpired,
+    activeConditions: deriveAllActiveConditions(newSettlement),
     summary,
   };
 

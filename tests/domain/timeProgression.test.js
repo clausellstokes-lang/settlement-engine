@@ -794,3 +794,146 @@ describe('advanceTime() — real generated settlement', () => {
     expect(pressured.length).toBeGreaterThan(0);
   });
 });
+
+// ── Phase 16: canonical activeConditions integration ───────────────────
+
+describe('advanceTime() — canonical settlement.activeConditions (Phase 16)', () => {
+  function settlementWithCanonicalPlague() {
+    return {
+      name: 'Plagued',
+      powerStructure: {
+        governingName: 'Town Council',
+        publicLegitimacy: { score: 60, label: 'Approved', isApproved: true },
+        factions: [
+          { faction: 'Town Council',         power: 35, desc: '' },
+          { faction: 'Religious Authorities', power: 25, desc: '' },
+          { faction: 'Merchant Guilds',      power: 30, desc: '' },
+          { faction: "Thieves' Guild",       power: 18, desc: '' },
+        ],
+      },
+      activeConditions: [{
+        archetype: 'plague',
+        severity: 0.6,
+        duration: { elapsedTicks: 0, expiresAtTicks: 12 },
+      }],
+    };
+  }
+
+  it('reads archetypes from settlement.activeConditions when no override is passed', () => {
+    const s = settlementWithCanonicalPlague();
+    const result = advanceTime(s, { interval: 'one_month' });
+    expect(result.tick.appliedConditions).toContain('plague');
+    // Plague deltas should land (criminal power up).
+    const thief = result.newSettlement.powerStructure.factions
+      .find(f => f.faction === "Thieves' Guild");
+    expect(thief.power).toBeGreaterThan(18);
+  });
+
+  it('applies the same effect with no options object at all', () => {
+    const s = settlementWithCanonicalPlague();
+    const result = advanceTime(s);
+    expect(result.tick.appliedConditions).toContain('plague');
+  });
+
+  it('options.activeConditions override wins over settlement state', () => {
+    const s = settlementWithCanonicalPlague();
+    const result = advanceTime(s, {
+      activeConditions: ['siege_lifted'],
+      interval: 'one_month',
+    });
+    expect(result.tick.appliedConditions).toEqual(['siege_lifted']);
+    // No plague-style criminal gain.
+    const thief = result.newSettlement.powerStructure.factions
+      .find(f => f.faction === "Thieves' Guild");
+    expect(thief.power).toBe(18);
+  });
+
+  it('explicit empty override means "no deltas this tick" even with canonical conditions', () => {
+    const s = settlementWithCanonicalPlague();
+    const result = advanceTime(s, {
+      activeConditions: [],
+      interval: 'one_month',
+    });
+    expect(result.tick.appliedConditions).toEqual([]);
+    expect(result.tick.factionDeltas).toEqual([]);
+  });
+
+  it('ages settlement conditions even under an external override', () => {
+    const s = settlementWithCanonicalPlague();
+    const result = advanceTime(s, {
+      activeConditions: ['siege_lifted'],
+      interval: 'one_month',
+    });
+    // Plague is still on the settlement but it aged this tick.
+    expect(result.newSettlement.activeConditions).toHaveLength(1);
+    expect(result.newSettlement.activeConditions[0].archetype).toBe('plague');
+    expect(result.newSettlement.activeConditions[0].duration.elapsedTicks).toBe(1);
+  });
+
+  it('expires conditions whose elapsedTicks crosses the cap', () => {
+    const s = {
+      ...settlementWithCanonicalPlague(),
+      activeConditions: [{
+        archetype: 'plague',
+        duration: { elapsedTicks: 11, expiresAtTicks: 12 },
+      }],
+    };
+    const result = advanceTime(s, { interval: 'one_month' });
+    // After ticking: elapsed = 12, hits cap, expired this tick.
+    expect(result.tick.conditionsExpired).toHaveLength(1);
+    expect(result.tick.conditionsExpired[0].archetype).toBe('plague');
+    expect(result.newSettlement.activeConditions).toHaveLength(0);
+    expect(result.tick.summary.some(line => /Condition expired/.test(line))).toBe(true);
+  });
+
+  it('tick.activeConditions reports the live set after aging + expiry', () => {
+    const s = settlementWithCanonicalPlague();
+    const result = advanceTime(s, { interval: 'one_month' });
+    expect(result.tick.activeConditions).toHaveLength(1);
+    expect(result.tick.activeConditions[0].duration.elapsedTicks).toBe(1);
+  });
+
+  it('does not mutate the input settlement', () => {
+    const s = settlementWithCanonicalPlague();
+    const before = JSON.stringify(s);
+    advanceTime(s, { interval: 'one_month' });
+    expect(JSON.stringify(s)).toBe(before);
+  });
+});
+
+describe('forecastTime() — canonical activeConditions threading', () => {
+  it('keeps applying canonical conditions until they expire', () => {
+    const s = {
+      name: 'LongPlague',
+      powerStructure: {
+        governingName: 'Town Council',
+        publicLegitimacy: { score: 60, label: 'Approved' },
+        factions: [
+          { faction: 'Town Council', power: 35, desc: '' },
+          { faction: 'Religious Authorities', power: 25, desc: '' },
+          { faction: 'Merchant Guilds', power: 30, desc: '' },
+          { faction: "Thieves' Guild", power: 18, desc: '' },
+        ],
+      },
+      activeConditions: [{
+        archetype: 'plague',
+        duration: { elapsedTicks: 0, expiresAtTicks: 4 },
+      }],
+    };
+    const forecast = forecastTime(s, { ticks: 6, interval: 'one_month' });
+    // First 4 ticks apply plague (or up to but not including expiry).
+    const tickArchetypes = forecast.ticks.map(t => t.appliedConditions);
+    expect(tickArchetypes[0]).toContain('plague');
+    // After ~4 ticks the condition expires; later ticks should report
+    // no active conditions (the appliedConditions list is empty).
+    const expiredTickIndex = forecast.ticks.findIndex(t => t.conditionsExpired.length > 0);
+    expect(expiredTickIndex).toBeGreaterThanOrEqual(0);
+    // The tick AFTER expiry should have no canonical conditions left.
+    const afterExpiry = forecast.ticks[expiredTickIndex + 1];
+    if (afterExpiry) {
+      expect(afterExpiry.appliedConditions).toEqual([]);
+    }
+    // The projected settlement should no longer carry the plague.
+    expect(forecast.projectedSettlement.activeConditions).toHaveLength(0);
+  });
+});
