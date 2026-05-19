@@ -743,6 +743,42 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'supplier' | 'dependent' | 'rival' | 'protector'
+ *          | 'tax_authority' | 'pilgrimage_center' | 'market_hub'
+ *          | 'refugee_source' | 'military_threat' | 'smuggling_partner'
+ *          | 'religious_superior' | 'resource_provider'
+ *          | 'other'} RegionalRelationshipType
+ *
+ * Tier 4.13 canonical relationship vocabulary for the regional graph.
+ */
+
+/**
+ * @typedef {Object} RegionalLink
+ *
+ * One directional link in the regional graph produced by
+ * domain/regionalGraph.js.
+ *
+ * @property {string} from
+ * @property {string} to
+ * @property {string} toName
+ * @property {RegionalRelationshipType} relationshipType
+ * @property {number} severity                0..1.
+ * @property {'incoming' | 'outgoing' | 'bidirectional'} direction
+ * @property {string[]} propagationHints     How events propagate over this link.
+ * @property {Array<{source: string, effect: string, reason: string}>} contributors
+ */
+
+/**
+ * @typedef {Object} RegionalGraph
+ *
+ * Tier 4.13 envelope.
+ *
+ * @property {string | null} center
+ * @property {Array<{id: string, name: string, role: 'center' | 'neighbour'}>} nodes
+ * @property {RegionalLink[]} links
+ */
+
+/**
  * @typedef {Object} DistrictProfile
  *
  * Tier 4.9 structured district produced by
