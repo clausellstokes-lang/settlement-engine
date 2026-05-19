@@ -106,6 +106,12 @@ export const RERUN_KEYS_FOR_EVENT = {
   REFUGEE_WAVE:           ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   PLAGUE:                 ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   RAID_OR_MONSTER_ATTACK: ['institutions', 'economicState', 'narrative'],
+  // Phase 24 / Tier 4.11 — player intervention events
+  REMOVED_THREAT:         ['economicState', 'powerStructure', 'narrative'],
+  BROKERED_ALLIANCE:      ['powerStructure', 'narrative'],
+  STARTED_RIOT:           ['powerStructure', 'economicState', 'narrative'],
+  OPENED_TRADE_ROUTE:     ['activeChains', 'foodSecurity', 'economicState', 'narrative'],
+  RECOVERED_RESOURCE:     ['resources', 'activeChains', 'economicState', 'narrative'],
 };
 
 /**
@@ -417,6 +423,99 @@ export const EVENT_REGISTRY = {
     narrate(event) {
       const which = event.targetId ? ` by ${labelOf(event.targetId)}` : '';
       return `The settlement was attacked${which}.`;
+    },
+  },
+
+  // ── Phase 24 / Tier 4.11 — Player intervention events ────────────────────
+
+  REMOVED_THREAT: {
+    label: 'Removed threat',
+    description: 'Players neutralized an active threat. External pressure eases, defenders recover footing.',
+    requiresTarget: false,
+    targetPrompt: 'Optional: threat name (e.g. "bandit captain", "blight fey")',
+    stateDeltas(event) {
+      const sev = Number(event.payload?.severity ?? 0.6);
+      return {
+        externalThreat: -Math.round(sev * 18),
+        resilience:     +Math.round(sev * 8),
+        volatility:     -Math.round(sev * 4),
+      };
+    },
+    narrate(event) {
+      const which = event.targetId ? ` (${labelOf(event.targetId)})` : '';
+      return `The threat${which} was neutralized.`;
+    },
+  },
+
+  BROKERED_ALLIANCE: {
+    label: 'Brokered alliance',
+    description: 'Two factions formalize cooperation. Volatility settles; trade and mutual defense improve.',
+    requiresTarget: false,
+    targetPrompt: 'Optional: between-factions hint (e.g. "Merchants + Council")',
+    stateDeltas(event) {
+      const sev = Number(event.payload?.severity ?? 0.6);
+      return {
+        volatility:       -Math.round(sev * 12),
+        resilience:       +Math.round(sev * 8),
+        resourcePressure: -Math.round(sev * 4),
+      };
+    },
+    narrate(event) {
+      const which = event.targetId ? ` between ${labelOf(event.targetId)}` : '';
+      return `An alliance${which} was brokered.`;
+    },
+  },
+
+  STARTED_RIOT: {
+    label: 'Started riot',
+    description: 'Players triggered or fanned a public disturbance. Legitimacy slips; criminal opportunity rises.',
+    requiresTarget: false,
+    targetPrompt: 'Optional: district or trigger (e.g. "Lower Quarter")',
+    stateDeltas(event) {
+      const sev = Number(event.payload?.severity ?? 0.6);
+      return {
+        volatility: +Math.round(sev * 16),
+        resilience: -Math.round(sev * 10),
+      };
+    },
+    narrate(event) {
+      const where = event.targetId ? ` in ${labelOf(event.targetId)}` : '';
+      return `A riot broke out${where}.`;
+    },
+  },
+
+  OPENED_TRADE_ROUTE: {
+    label: 'Opened trade route',
+    description: 'A blocked or new trade route is opened. Imports flow, merchant wealth rises, smuggling premiums collapse.',
+    requiresTarget: true,
+    targetPrompt: 'Trade route name (e.g. "south road", "river quays")',
+    stateDeltas(event) {
+      const sev = Number(event.payload?.severity ?? 0.7);
+      return {
+        resilience:       +Math.round(sev * 12),
+        resourcePressure: -Math.round(sev * 10),
+        volatility:       -Math.round(sev * 4),
+      };
+    },
+    narrate(event) {
+      return `Trade along ${labelOf(event.targetId)} has been opened.`;
+    },
+  },
+
+  RECOVERED_RESOURCE: {
+    label: 'Recovered resource',
+    description: 'A previously depleted or lost resource is recovered or replenished. Resource pressure eases.',
+    requiresTarget: true,
+    targetPrompt: 'Resource name (e.g. "iron vein", "river fish")',
+    stateDeltas(event) {
+      const sev = Number(event.payload?.severity ?? 0.7);
+      return {
+        resourcePressure: -Math.round(sev * 16),
+        resilience:       +Math.round(sev * 8),
+      };
+    },
+    narrate(event) {
+      return `The ${labelOf(event.targetId)} has been recovered.`;
     },
   },
 };
