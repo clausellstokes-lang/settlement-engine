@@ -743,6 +743,23 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {Object} MapProfile
+ *
+ * Tier 4.14 bidirectional map ↔ simulator interface produced by
+ * domain/mapProfile.js#deriveMapProfile.
+ *
+ * @property {{terrain: string|null, biome: string|null, riverAccess: string|null,
+ *             roadAccess: string|null, tradeRouteAccess: string|null,
+ *             monsterThreat: string|null, region: string|null}} inputs
+ * @property {{roadImportance: 'low'|'moderate'|'major'|'critical',
+ *             defensiveTerrain: 'exposed'|'open'|'mixed'|'sheltered'|'fortified',
+ *             regionalAuthority: Array<{id: string, name: string, relationshipType: string}>,
+ *             hazardMarkers: Array<{id: string, label: string, kind: string, severity: number, severityBand: string, visibility: string}>,
+ *             suggestedFeatures: Array<{feature: string, reason: string}>}} outputs
+ * @property {Array<{source: string, effect: string, reason: string}>} contributors
+ */
+
+/**
  * @typedef {'supplier' | 'dependent' | 'rival' | 'protector'
  *          | 'tax_authority' | 'pilgrimage_center' | 'market_hub'
  *          | 'refugee_source' | 'military_threat' | 'smuggling_partner'
