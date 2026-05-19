@@ -490,6 +490,58 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'monster_pressure' | 'bandit_raids' | 'siege'
+ *          | 'rival_neighbor' | 'plague' | 'famine'
+ *          | 'corruption' | 'unrest' | 'arcane_instability'
+ *          | 'cult' | 'economic_collapse' | 'other'} ThreatType
+ *
+ * Tier 4.6 canonical threat type vocabulary. Inferred from existing
+ * settlement surfaces (config.monsterThreat, defenseProfile.scores,
+ * stressors, neighbours, active conditions) by domain/threatProfile.js.
+ */
+
+/**
+ * @typedef {'latent' | 'developing' | 'active' | 'imminent' | 'realized'} ThreatStage
+ *
+ * Trajectory stages a threat moves through as it materializes. Derived
+ * from severity by domain/threatProfile.js#severityToStage.
+ */
+
+/**
+ * @typedef {'open' | 'rumored' | 'hidden'} ThreatVisibility
+ *
+ * Whether the threat is publicly known, only rumored, or actively
+ * concealed (cults, hidden cabals).
+ */
+
+/**
+ * @typedef {Object} ThreatProfile
+ *
+ * Tier 4.6 canonical threat shape. The set of these on a settlement
+ * is the authoritative read of "what does this settlement fear?"
+ * Derived from existing surfaces by domain/threatProfile.js, NOT
+ * stored on the settlement directly (yet) — Tier 4.16 (custom user
+ * content as causal objects) will let users add structured threats.
+ *
+ * @property {string}          id                Stable id 'threat.<type>.<suffix>'.
+ * @property {ThreatType}      type
+ * @property {string}          label
+ * @property {string}          description
+ * @property {string}          source            Where the threat comes from.
+ * @property {string}          target            What is threatened.
+ * @property {string}          vector            How the threat materializes.
+ * @property {ThreatVisibility} visibility
+ * @property {number}          severity          0..1 numeric.
+ * @property {ConditionSeverityBand} severityBand
+ * @property {'worsening'|'stable'|'easing'} trajectory
+ * @property {ThreatStage}     currentStage      Derived from severity.
+ * @property {string[]}        beneficiaries     Who benefits if the threat continues.
+ * @property {string[]}        victims           Who suffers.
+ * @property {SystemVariableName[]} affectedSystems  Phase 17 variables this threat presses on.
+ * @property {string}          originSurface     'config' | 'defenseProfile' | 'stressors' | 'neighbours' | 'activeConditions' | 'threats'
+ */
+
+/**
  * @typedef {Object} Hook
  * @property {string} [id]
  * @property {string} text

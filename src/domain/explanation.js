@@ -41,6 +41,7 @@ import {
 import { deriveAllActiveConditions, findActiveCondition } from './activeConditions.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveSystemVariable, SYSTEM_VARIABLES } from './causalState.js';
+import { deriveAllThreatProfiles } from './threatProfile.js';
 
 // ── Type catalog ─────────────────────────────────────────────────────────
 
@@ -60,6 +61,7 @@ export const EXPLAINABLE_TYPES = Object.freeze([
   'clock',
   'history_beat',
   'system_variable',
+  'threat',
 ]);
 
 const ID_PREFIX_TO_TYPE = Object.freeze({
@@ -72,6 +74,7 @@ const ID_PREFIX_TO_TYPE = Object.freeze({
   'clock.':       'clock',
   'history.':     'history_beat',
   'var.':         'system_variable',
+  'threat.':      'threat',
 });
 
 function inferTypeFromId(id) {
@@ -673,6 +676,93 @@ export function explainSystemVariable(settlement, variable) {
   });
 }
 
+/**
+ * Explain a structured threat — Phase 20 (Tier 4.6). Threats are
+ * derived from existing settlement surfaces (config.monsterThreat,
+ * defenseProfile.scores, stressors, neighbours, active conditions),
+ * so the explainer surfaces the original surface as a cause.
+ */
+export function explainThreat(settlement, threatId) {
+  if (!settlement || !threatId) return null;
+  const all = deriveAllThreatProfiles(settlement);
+  const threat = all.find(t => t.id === threatId);
+  if (!threat) return emptyEnvelope('threat', threatId);
+
+  // Origin surface becomes the primary cause
+  /** @type {Array<{source: string, effect: string, reason: string, step?: string, delta?: number}>} */
+  const causes = [{
+    source: threat.originSurface,
+    effect: 'inferred_from',
+    reason: `Threat inferred from settlement.${threat.originSurface}.`,
+  }];
+
+  // If the threat came from an active condition, cite it
+  if (threat.originSurface === 'activeConditions' && threat.raw?.condition?.id) {
+    causes.push({
+      source: threat.raw.condition.id,
+      effect: 'derives_from',
+      reason: `Underlying condition: ${threat.raw.condition.label}.`,
+    });
+  }
+  if (threat.originSurface === 'neighbours' && threat.raw?.neighbour?.name) {
+    causes.push({
+      source: threat.raw.neighbour.name,
+      effect: 'originates_from',
+      reason: `Hostile relationship with ${threat.raw.neighbour.name}.`,
+    });
+  }
+
+  // Downstream pressures map to system variables
+  /** @type {Array<{target: string, effect: string, reason: string, step?: string}>} */
+  const downstreamEffects = (threat.affectedSystems || []).map(sys => ({
+    target: sys,
+    effect: 'pressures',
+    reason: `${threat.label} pressures ${sys}.`,
+  }));
+
+  // ifRemoved: lifts the pressure on affected systems + beneficiaries lose their hook
+  const ifRemoved = {
+    consequences: [
+      `${threat.label} lifts; pressure on ${(threat.affectedSystems || []).join(', ')} eases.`,
+    ],
+  };
+  for (const v of threat.victims || []) {
+    ifRemoved.consequences.push(`${v} recover from the threat's burden.`);
+  }
+  if ((threat.beneficiaries || []).length) {
+    ifRemoved.consequences.push(`Beneficiaries (${threat.beneficiaries.join(', ')}) lose their leverage.`);
+  }
+
+  const profile = {
+    type: threat.type,
+    severity: threat.severity,
+    severityBand: threat.severityBand,
+    currentStage: threat.currentStage,
+    trajectory: threat.trajectory,
+    visibility: threat.visibility,
+    vector: threat.vector,
+    source: threat.source,
+    target: threat.target,
+    beneficiaries: threat.beneficiaries || [],
+    victims: threat.victims || [],
+    affectedSystems: threat.affectedSystems || [],
+  };
+
+  const references = (threat.affectedSystems || [])
+    .map(s => ({ id: s, label: s, type: 'system_variable' }));
+
+  return envelope({
+    type: 'threat', id: threat.id, label: threat.label,
+    causalReason: threat.description || `${threat.label} (${threat.currentStage}, ${threat.severityBand}).`,
+    causes,
+    downstreamEffects,
+    ifRemoved,
+    profile,
+    references,
+    sources: ['threatProfile', threat.originSurface],
+  });
+}
+
 // ── Universal dispatcher ─────────────────────────────────────────────────
 
 /**
@@ -707,6 +797,7 @@ export function explainEntity(settlement, ref) {
     case 'clock':           return explainEscalationClock(settlement, id);
     case 'history_beat':    return explainHistoryBeat(settlement, id);
     case 'system_variable': return explainSystemVariable(settlement, id);
+    case 'threat':          return explainThreat(settlement, id);
     default:                return emptyEnvelope(type, id);
   }
 }
@@ -769,6 +860,11 @@ export function entityCatalog(settlement) {
   // System variables
   for (const name of SYSTEM_VARIABLES) {
     out.push({ type: 'system_variable', id: `var.${name}`, label: name.replace(/_/g, ' ') });
+  }
+
+  // Threats (Phase 20)
+  for (const t of deriveAllThreatProfiles(settlement)) {
+    out.push({ type: 'threat', id: t.id, label: t.label });
   }
 
   return out;
