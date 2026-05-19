@@ -46,6 +46,7 @@ import {
   deriveCapacityProfile,
   CAPACITY_NAMES,
 } from './capacityModel.js';
+import { deriveAllDistricts } from './districtProfile.js';
 
 // ── Type catalog ─────────────────────────────────────────────────────────
 
@@ -67,6 +68,7 @@ export const EXPLAINABLE_TYPES = Object.freeze([
   'system_variable',
   'threat',
   'capacity',
+  'district',
 ]);
 
 const ID_PREFIX_TO_TYPE = Object.freeze({
@@ -81,6 +83,7 @@ const ID_PREFIX_TO_TYPE = Object.freeze({
   'var.':         'system_variable',
   'threat.':      'threat',
   'capacity.':    'capacity',
+  'district.':    'district',
 });
 
 function inferTypeFromId(id) {
@@ -866,6 +869,66 @@ export function explainCapacity(settlement, capacityRef) {
   });
 }
 
+/**
+ * Explain a district — Phase 29 (Tier 4.9).
+ */
+export function explainDistrict(settlement, districtId) {
+  if (!settlement || !districtId) return null;
+  const all = deriveAllDistricts(settlement);
+  const district = all.find(d => d.id === districtId);
+  if (!district) return emptyEnvelope('district', districtId);
+
+  /** @type {Array<{source: string, effect: string, reason: string, step?: string, delta?: number}>} */
+  const causes = [];
+  if (district.dominantFaction) {
+    causes.push({
+      source: district.dominantFaction.id,
+      effect: 'dominates',
+      reason: `${district.dominantFaction.name} (${district.dominantFaction.archetype}) dominates this district.`,
+    });
+  }
+  for (const c of district.contributors || []) {
+    causes.push({ source: c.source, effect: c.effect, reason: c.reason });
+  }
+
+  /** @type {Array<{target: string, effect: string, reason: string, step?: string}>} */
+  const downstreamEffects = [];
+  for (const inst of district.institutions || []) {
+    downstreamEffects.push({ target: inst.id, effect: 'hosts', reason: `Hosts ${inst.label}.` });
+  }
+  for (const conn of district.connectedDistricts || []) {
+    downstreamEffects.push({ target: `district.${snakeCase(conn)}`, effect: 'connects_to', reason: `Connects to ${conn}.` });
+  }
+
+  return envelope({
+    type: 'district', id: district.id, label: district.name,
+    causalReason: `${district.name} is a ${district.category} district — ${district.wealth}, ${district.safety}.`,
+    causes,
+    downstreamEffects,
+    ifRemoved: {
+      consequences: [
+        `${district.name}'s population disperses to neighboring districts`,
+        `${(district.services || []).join(', ') || 'local services'} lose their primary venue`,
+      ],
+    },
+    profile: {
+      category: district.category,
+      wealth: district.wealth,
+      safety: district.safety,
+      dominantFaction: district.dominantFaction,
+      sensoryIdentity: district.sensoryIdentity,
+      currentTension: district.currentTension,
+      hook: district.hook,
+      services: district.services,
+    },
+    references: [
+      ...(district.institutions || []).map(i => ({ id: i.id, label: i.label, type: 'institution' })),
+      ...(district.dominantFaction ? [{ id: district.dominantFaction.id, label: district.dominantFaction.name, type: 'faction' }] : []),
+    ],
+    sources: ['districtProfile'],
+  });
+}
+
 // ── Universal dispatcher ─────────────────────────────────────────────────
 
 /**
@@ -902,6 +965,7 @@ export function explainEntity(settlement, ref) {
     case 'system_variable': return explainSystemVariable(settlement, id);
     case 'threat':          return explainThreat(settlement, id);
     case 'capacity':        return explainCapacity(settlement, id);
+    case 'district':        return explainDistrict(settlement, id);
     default:                return emptyEnvelope(type, id);
   }
 }
@@ -974,6 +1038,11 @@ export function entityCatalog(settlement) {
   // Capacities (Phase 21) — derived, always 9
   for (const name of CAPACITY_NAMES) {
     out.push({ type: 'capacity', id: `capacity.${name}`, label: name.replace(/_/g, ' ') });
+  }
+
+  // Districts (Phase 29)
+  for (const d of deriveAllDistricts(settlement)) {
+    out.push({ type: 'district', id: d.id, label: d.name });
   }
 
   return out;

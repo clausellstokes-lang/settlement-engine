@@ -743,6 +743,28 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {Object} DistrictProfile
+ *
+ * Tier 4.9 structured district produced by
+ * domain/districtProfile.js#deriveDistrictProfile.
+ *
+ * @property {string} id
+ * @property {string} name
+ * @property {string|null} origin
+ * @property {string} category
+ * @property {string} wealth      'destitute' | 'poor' | 'modest' | 'comfortable' | 'wealthy' | 'opulent'
+ * @property {string} safety      'lawless' | 'unsafe' | 'watched' | 'orderly' | 'fortified'
+ * @property {{id: string, name: string, archetype: string} | null} dominantFaction
+ * @property {Array<{id: string, label: string}>} institutions
+ * @property {string[]} services
+ * @property {string} sensoryIdentity
+ * @property {string} currentTension
+ * @property {string} hook
+ * @property {string[]} connectedDistricts
+ * @property {Array<{source: string, effect: string, reason: string}>} contributors
+ */
+
+/**
  * @typedef {Object} CustomEntityClassification
  *
  * Tier 4.16 structured shape for user-added content. Produced by
@@ -896,7 +918,8 @@ export const FIELD_ALIASES = Object.freeze({
 /**
  * @typedef {'institution' | 'faction' | 'npc' | 'chain' | 'hook'
  *          | 'condition' | 'clock' | 'history_beat'
- *          | 'system_variable' | 'threat' | 'capacity'} ExplainableEntityType
+ *          | 'system_variable' | 'threat' | 'capacity'
+ *          | 'district'} ExplainableEntityType
  *
  * Tier 2.6 canonical entity-type vocabulary. The dispatcher in
  * domain/explanation.js#explainEntity routes to a per-type explainer

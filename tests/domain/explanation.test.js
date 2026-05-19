@@ -120,11 +120,11 @@ function fixtureSettlement() {
 // ── EXPLAINABLE_TYPES catalog ──────────────────────────────────────────
 
 describe('EXPLAINABLE_TYPES', () => {
-  it('exposes the canonical entity types (incl. threat P20 + capacity P21)', () => {
+  it('exposes the canonical entity types (incl. threat P20, capacity P21, district P29)', () => {
     expect(EXPLAINABLE_TYPES).toEqual([
       'institution', 'faction', 'npc', 'chain', 'hook',
       'condition', 'clock', 'history_beat', 'system_variable',
-      'threat', 'capacity',
+      'threat', 'capacity', 'district',
     ]);
   });
 });
