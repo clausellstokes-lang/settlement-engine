@@ -583,3 +583,64 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {Array<{source: string, effect: string, reason: string}>} [causes]
  * @property {Array<{target: string, effect: string}>} [downstreamEffects]
  */
+
+/**
+ * @typedef {'food_security' | 'labor_capacity' | 'public_legitimacy'
+ *          | 'ruling_authority' | 'faction_power' | 'trade_connectivity'
+ *          | 'healing_capacity' | 'defense_readiness' | 'criminal_opportunity'
+ *          | 'religious_authority' | 'housing_pressure' | 'infrastructure_condition'
+ *          | 'magical_stability' | 'social_trust'} SystemVariableName
+ *
+ * Tier 2.4 canonical substrate variable names. Every subsystem (events,
+ * conditions, institutions, factions, supply chains, AI) reads from
+ * the same 14-variable map produced by domain/causalState.js.
+ */
+
+/**
+ * @typedef {'surplus' | 'adequate' | 'strained' | 'critical' | 'collapsed'} CausalBand
+ *
+ * The canonical 5-band vocabulary for substrate variables. Per Tier 5.4
+ * this is the qualitative banding consumers should display in lieu of
+ * raw numeric scores. Boundaries: ≥75 surplus, ≥55 adequate, ≥35
+ * strained, ≥15 critical, else collapsed.
+ */
+
+/**
+ * @typedef {Object} CausalContributor
+ *
+ * A single input that contributed to a variable's score. The list of
+ * these on a SystemVariable is the trace of exactly how the score
+ * was reached.
+ *
+ * @property {string} source   Stable id of the input ('chain.<id>',
+ *                             'condition.<id>', 'faction.<id>', etc.).
+ * @property {string} effect   Short tag describing the input's character.
+ * @property {number} delta    Signed integer added to the variable's score.
+ * @property {string} reason   Human-readable explanation.
+ */
+
+/**
+ * @typedef {Object} SystemVariable
+ *
+ * One entry in the causal substrate. Score is the internal numeric
+ * representation; band is the user-facing qualitative tag.
+ *
+ * @property {SystemVariableName} variable
+ * @property {number}             score          0-100 clamped.
+ * @property {CausalBand}         band
+ * @property {CausalContributor[]} contributors
+ */
+
+/**
+ * @typedef {Object} CausalState
+ *
+ * Tier 2.4 canonical substrate envelope. Produced by
+ * domain/causalState.js#deriveCausalState. Read by every downstream
+ * consumer that wants to know "what's going on with food / authority /
+ * defense / etc."
+ *
+ * @property {Object<SystemVariableName, SystemVariable>} variables
+ * @property {Object<SystemVariableName, CausalBand>}     bands
+ * @property {Object<SystemVariableName, number>}         scores
+ * @property {Object<CausalBand, SystemVariableName[]>}   summary    Variables grouped by band.
+ */
