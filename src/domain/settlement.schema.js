@@ -743,6 +743,31 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'remove' | 'weaken' | 'strengthen' | 'replace'} CounterfactualAction
+ *
+ * Tier 4.17 action vocabulary. domain/counterfactual.js maps these
+ * to either a Phase 18 event (for institutions/npcs) or a manual
+ * clone-and-modify (for factions/chains).
+ */
+
+/**
+ * @typedef {Object} CounterfactualResult
+ *
+ * Tier 4.17 envelope produced by domain/counterfactual.js#counterfactual.
+ * Composes Phase 18 (event pipeline), Phase 19 (explainEntity),
+ * Phase 17 substrate, Phase 21 capacities, Phase 22 daily life.
+ *
+ * @property {{id: string, type: string, label: string|null}} target
+ * @property {CounterfactualAction | null} action
+ * @property {Object | null}              nextSettlement   Projected settlement.
+ * @property {Object | null}              beforeExplanation Phase 19 envelope.
+ * @property {Object | null}              afterExplanation  Phase 19 envelope (may be empty if target removed).
+ * @property {Object}                     deltas           { systemState, causalState, capacities, factionRelationships, dailyLife }.
+ * @property {string[]}                   summary
+ * @property {Array<Object>}              warnings
+ */
+
+/**
  * @typedef {'food_culture' | 'dawn_work' | 'gathering_places'
  *          | 'child_warnings' | 'commoner_resentments'
  *          | 'outsider_impressions' | 'unspoken_topics'

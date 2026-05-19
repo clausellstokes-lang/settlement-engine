@@ -448,3 +448,48 @@ export function summarizeDailyLife(settlement) {
 export function supportedDailyLifeSlots() {
   return [...DAILY_LIFE_SLOTS];
 }
+
+// ── compareDailyLife ────────────────────────────────────────────────────
+//
+// Diff two daily-life envelopes. Returns one entry per slot whose
+// text changed. Useful for the Phase 23 counterfactual tool — "after
+// removing the granary, food_culture changed from X to Y" — and for
+// Tier 5.1 (causal delta summaries after regeneration).
+
+/**
+ * @typedef {Object} DailyLifeDelta
+ * @property {string} key
+ * @property {string} label
+ * @property {string} before
+ * @property {string} after
+ * @property {Array<{id: string, label: string, type: string}>} beforeReferences
+ * @property {Array<{id: string, label: string, type: string}>} afterReferences
+ */
+
+/**
+ * Diff two daily-life envelopes. Returns slot-level diffs for any
+ * slot whose text changed.
+ *
+ * @param {Object} before  Output of deriveDailyLife.
+ * @param {Object} after   Output of deriveDailyLife.
+ * @returns {DailyLifeDelta[]}
+ */
+export function compareDailyLife(before, after) {
+  if (!before || !after) return [];
+  const out = [];
+  for (const key of DAILY_LIFE_SLOTS) {
+    const b = before.slots?.[key];
+    const a = after.slots?.[key];
+    if (!b || !a) continue;
+    if (b.text === a.text) continue;
+    out.push({
+      key,
+      label: SLOT_LABELS[key] || key,
+      before: b.text,
+      after: a.text,
+      beforeReferences: b.references || [],
+      afterReferences:  a.references || [],
+    });
+  }
+  return out;
+}

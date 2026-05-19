@@ -704,3 +704,72 @@ export function strainedCapacities(settlement) {
 export function supportedCapacities() {
   return [...CAPACITY_NAMES];
 }
+
+// ── compareCapacityStates ────────────────────────────────────────────────
+//
+// Diff two capacity states (the envelope from deriveAllCapacities).
+// Returns a structured delta entry per capacity that changed, sorted
+// by absolute ratio change descending. Mirrors compareSystemState /
+// compareCausalState so consumers render all three the same way.
+
+const CAPACITY_LABEL_LOOKUP = CAPACITY_LABEL;
+
+/**
+ * @typedef {Object} CapacityDelta
+ * @property {string} capacity
+ * @property {string} label
+ * @property {{supply: number, demand: number, ratio: number, band: string}} before
+ * @property {{supply: number, demand: number, ratio: number, band: string}} after
+ * @property {number} supplyChange
+ * @property {number} demandChange
+ * @property {number} ratioChange
+ * @property {string} explanation
+ */
+
+function explainCapacityDelta(name, beforeBand, afterBand, supplyChange, demandChange, ratioChange) {
+  const label = CAPACITY_LABEL_LOOKUP[name] || name;
+  if (beforeBand !== afterBand) {
+    return `${label} ${ratioChange < 0 ? 'fell' : 'rose'} ${beforeBand} → ${afterBand}`
+      + (Math.abs(supplyChange) >= Math.abs(demandChange)
+          ? ` (supply ${supplyChange >= 0 ? '+' : ''}${supplyChange}).`
+          : ` (demand ${demandChange >= 0 ? '+' : ''}${demandChange}).`);
+  }
+  if (Math.abs(supplyChange) > Math.abs(demandChange)) {
+    return `${label} supply ${supplyChange >= 0 ? 'rose' : 'fell'} by ${Math.abs(supplyChange)}.`;
+  }
+  return `${label} demand ${demandChange >= 0 ? 'rose' : 'fell'} by ${Math.abs(demandChange)}.`;
+}
+
+/**
+ * Diff two capacity states. Returns structured deltas for every
+ * capacity whose supply, demand, or band changed.
+ *
+ * @param {Object} before  Output of deriveAllCapacities.
+ * @param {Object} after   Output of deriveAllCapacities.
+ * @returns {CapacityDelta[]}
+ */
+export function compareCapacityStates(before, after) {
+  if (!before || !after) return [];
+  const out = [];
+  for (const name of CAPACITY_NAMES) {
+    const b = before.capacities?.[name];
+    const a = after.capacities?.[name];
+    if (!b || !a) continue;
+    const supplyChange = a.supply - b.supply;
+    const demandChange = a.demand - b.demand;
+    const ratioChange = a.ratio - b.ratio;
+    if (supplyChange === 0 && demandChange === 0 && b.band === a.band) continue;
+    out.push({
+      capacity: name,
+      label: CAPACITY_LABEL_LOOKUP[name] || name,
+      before: { supply: b.supply, demand: b.demand, ratio: b.ratio, band: b.band },
+      after:  { supply: a.supply, demand: a.demand, ratio: a.ratio, band: a.band },
+      supplyChange,
+      demandChange,
+      ratioChange: Math.round(ratioChange * 100) / 100,
+      explanation: explainCapacityDelta(name, b.band, a.band, supplyChange, demandChange, ratioChange),
+    });
+  }
+  out.sort((x, y) => Math.abs(y.ratioChange) - Math.abs(x.ratioChange));
+  return out;
+}
