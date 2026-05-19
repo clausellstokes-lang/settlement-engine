@@ -743,6 +743,25 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {Object} MagicProfile
+ *
+ * Tier 4.8 structured magic shape produced by
+ * domain/magicProfile.js#deriveMagicProfile. Reads config.magicLevel,
+ * factions, institutions, and Phase 17 substrate to expose magic as
+ * a 10-facet system.
+ *
+ * @property {'rare'|'limited'|'moderate'|'common'|'broad'|'pervasive'} availability
+ * @property {'forbidden'|'restricted'|'regulated'|'tolerated'|'celebrated'} legality
+ * @property {'unregulated'|'fragmented'|'guild_controlled'} institutionalControl
+ * @property {'cheap'|'moderate'|'costly'|'extortionate'} cost
+ * @property {'low'|'moderate'|'elevated'|'high'|'extreme'} risk
+ * @property {'hostile'|'wary'|'indifferent'|'syncretic'|'celebrated'} religiousAcceptance
+ * @property {{economic: string, military: string, medical: string, infrastructure: string}} roles
+ *           Each role: 'absent' | 'occasional' | 'common' | 'integral'.
+ * @property {Array<{source: string, effect: string, reason: string}>} contributors
+ */
+
+/**
  * @typedef {'invalid' | 'rare_but_justified'
  *          | 'interesting_tension' | 'user_authored_exception'} ContradictionClassification
  *
