@@ -120,11 +120,11 @@ function fixtureSettlement() {
 // ── EXPLAINABLE_TYPES catalog ──────────────────────────────────────────
 
 describe('EXPLAINABLE_TYPES', () => {
-  it('exposes the canonical entity types (including threat after Phase 20)', () => {
+  it('exposes the canonical entity types (incl. threat P20 + capacity P21)', () => {
     expect(EXPLAINABLE_TYPES).toEqual([
       'institution', 'faction', 'npc', 'chain', 'hook',
       'condition', 'clock', 'history_beat', 'system_variable',
-      'threat',
+      'threat', 'capacity',
     ]);
   });
 });

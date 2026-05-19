@@ -42,6 +42,10 @@ import { deriveAllActiveConditions, findActiveCondition } from './activeConditio
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveSystemVariable, SYSTEM_VARIABLES } from './causalState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
+import {
+  deriveCapacityProfile,
+  CAPACITY_NAMES,
+} from './capacityModel.js';
 
 // ── Type catalog ─────────────────────────────────────────────────────────
 
@@ -62,6 +66,7 @@ export const EXPLAINABLE_TYPES = Object.freeze([
   'history_beat',
   'system_variable',
   'threat',
+  'capacity',
 ]);
 
 const ID_PREFIX_TO_TYPE = Object.freeze({
@@ -75,6 +80,7 @@ const ID_PREFIX_TO_TYPE = Object.freeze({
   'history.':     'history_beat',
   'var.':         'system_variable',
   'threat.':      'threat',
+  'capacity.':    'capacity',
 });
 
 function inferTypeFromId(id) {
@@ -84,6 +90,8 @@ function inferTypeFromId(id) {
   }
   // Bare system-variable name (e.g. 'food_security') maps to system_variable.
   if (SYSTEM_VARIABLES.includes(id)) return 'system_variable';
+  // Bare capacity name (e.g. 'labor') maps to capacity.
+  if (CAPACITY_NAMES.includes(id)) return 'capacity';
   return null;
 }
 
@@ -763,6 +771,101 @@ export function explainThreat(settlement, threatId) {
   });
 }
 
+/**
+ * Explain a capacity — Phase 21 (Tier 4.4). Supply + demand are the
+ * two competing pressures; bands derive from supply/demand ratio.
+ */
+export function explainCapacity(settlement, capacityRef) {
+  if (!settlement || !capacityRef) return null;
+  const name = typeof capacityRef === 'string' && capacityRef.startsWith('capacity.')
+    ? capacityRef.slice('capacity.'.length)
+    : capacityRef;
+  if (!CAPACITY_NAMES.includes(name)) return emptyEnvelope('capacity', name);
+
+  const profile = deriveCapacityProfile(name, settlement);
+  if (!profile) return emptyEnvelope('capacity', name);
+
+  // Supply contributors AND demand contributors both feed into the
+  // "causes" envelope, signed so consumers can render the directional
+  // arrow. Supply contributors push the capacity up; demand
+  // contributors push it down. We tag each so consumers can render
+  // them in separate columns if they want.
+  /** @type {Array<{source: string, effect: string, reason: string, step?: string, delta?: number}>} */
+  const causes = [];
+  for (const c of profile.supplyContributors || []) {
+    causes.push({ source: c.source, effect: `supply:${c.effect}`, delta: +c.delta, reason: c.reason });
+  }
+  for (const c of profile.demandContributors || []) {
+    causes.push({ source: c.source, effect: `demand:${c.effect}`, delta: -c.delta, reason: c.reason });
+  }
+
+  /** @type {Array<{target: string, effect: string, reason: string, step?: string}>} */
+  const downstreamEffects = [];
+  // Capacity outcomes drive substrate variables. Surface a few canonical reads.
+  switch (name) {
+    case 'labor':
+      downstreamEffects.push({ target: 'labor_capacity', effect: 'feeds_substrate', reason: 'Labor capacity reads from this profile.' });
+      break;
+    case 'healing':
+      downstreamEffects.push({ target: 'healing_capacity', effect: 'feeds_substrate', reason: 'Healing capacity reads from this profile.' });
+      break;
+    case 'defense':
+      downstreamEffects.push({ target: 'defense_readiness', effect: 'feeds_substrate', reason: 'Defense readiness reads from this profile.' });
+      break;
+    case 'food_production':
+      downstreamEffects.push({ target: 'food_security', effect: 'feeds_substrate', reason: 'Food security reads from this profile.' });
+      break;
+    case 'transport':
+      downstreamEffects.push({ target: 'trade_connectivity', effect: 'feeds_substrate', reason: 'Trade connectivity reads from this profile.' });
+      break;
+    case 'magical':
+      downstreamEffects.push({ target: 'magical_stability', effect: 'feeds_substrate', reason: 'Magical stability reads from this profile.' });
+      break;
+    case 'religious_welfare':
+      downstreamEffects.push({ target: 'religious_authority', effect: 'feeds_substrate', reason: 'Religious authority reads from this profile.' });
+      break;
+    case 'administrative':
+      downstreamEffects.push({ target: 'ruling_authority', effect: 'feeds_substrate', reason: 'Ruling authority reads from this profile.' });
+      break;
+    default:
+      // craft has no direct substrate variable yet
+      break;
+  }
+
+  const ifRemoved = {
+    consequences: [
+      `${profile.label} capacity (currently ${profile.band}, supply ${profile.supply} vs demand ${profile.demand}) collapses;`
+      + ` downstream system variables lose their structural input.`,
+    ],
+  };
+
+  const profileSummary = {
+    capacity: profile.capacity,
+    supply: profile.supply,
+    demand: profile.demand,
+    ratio: profile.ratio,
+    band: profile.band,
+    trajectory: profile.trajectory,
+  };
+
+  const references = (downstreamEffects || []).map(e => ({
+    id: `var.${e.target}`,
+    label: e.target.replace(/_/g, ' '),
+    type: 'system_variable',
+  }));
+
+  return envelope({
+    type: 'capacity', id: `capacity.${name}`, label: profile.label,
+    causalReason: `${profile.label} is ${profile.band} (supply ${profile.supply}, demand ${profile.demand}, ratio ${profile.ratio}).`,
+    causes,
+    downstreamEffects,
+    ifRemoved,
+    profile: profileSummary,
+    references,
+    sources: ['capacityModel'],
+  });
+}
+
 // ── Universal dispatcher ─────────────────────────────────────────────────
 
 /**
@@ -798,6 +901,7 @@ export function explainEntity(settlement, ref) {
     case 'history_beat':    return explainHistoryBeat(settlement, id);
     case 'system_variable': return explainSystemVariable(settlement, id);
     case 'threat':          return explainThreat(settlement, id);
+    case 'capacity':        return explainCapacity(settlement, id);
     default:                return emptyEnvelope(type, id);
   }
 }
@@ -865,6 +969,11 @@ export function entityCatalog(settlement) {
   // Threats (Phase 20)
   for (const t of deriveAllThreatProfiles(settlement)) {
     out.push({ type: 'threat', id: t.id, label: t.label });
+  }
+
+  // Capacities (Phase 21) — derived, always 9
+  for (const name of CAPACITY_NAMES) {
+    out.push({ type: 'capacity', id: `capacity.${name}`, label: name.replace(/_/g, ' ') });
   }
 
   return out;

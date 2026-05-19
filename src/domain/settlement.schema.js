@@ -698,9 +698,54 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'labor' | 'healing' | 'defense' | 'administrative'
+ *          | 'food_production' | 'transport' | 'religious_welfare'
+ *          | 'craft' | 'magical'} CapacityName
+ *
+ * Tier 4.4 canonical capacity vocabulary. Each capacity has a
+ * supply-vs-demand model derived by domain/capacityModel.js. The 9
+ * capacities cover the major operational pressures a settlement
+ * tracks: who works, who heals, who fights, who governs, who feeds
+ * everyone, who moves goods, who provides relief, who makes things,
+ * and who controls arcane.
+ */
+
+/**
+ * @typedef {Object} CapacityContributor
+ *
+ * A single supply-side or demand-side input on a capacity profile.
+ * Same shape as the Phase 17 substrate contributor — { source,
+ * effect, delta, reason } — but kept separate because the polarity
+ * (supply vs demand) matters at the layer above.
+ *
+ * @property {string} source
+ * @property {string} effect
+ * @property {number} delta
+ * @property {string} reason
+ */
+
+/**
+ * @typedef {Object} CapacityProfile
+ *
+ * Tier 4.4 canonical capacity shape. Returned by
+ * domain/capacityModel.js#deriveCapacityProfile. Composes Phase 16
+ * conditions, Phase 17 substrate, Phase 20 threats.
+ *
+ * @property {CapacityName}            capacity
+ * @property {string}                  label
+ * @property {number}                  supply          0..100.
+ * @property {number}                  demand          0..100.
+ * @property {number}                  ratio           supply / demand.
+ * @property {CausalBand}              band            Derived from ratio.
+ * @property {CapacityContributor[]}   supplyContributors
+ * @property {CapacityContributor[]}   demandContributors
+ * @property {'improving' | 'stable' | 'worsening'} trajectory
+ */
+
+/**
  * @typedef {'institution' | 'faction' | 'npc' | 'chain' | 'hook'
  *          | 'condition' | 'clock' | 'history_beat'
- *          | 'system_variable'} ExplainableEntityType
+ *          | 'system_variable' | 'threat' | 'capacity'} ExplainableEntityType
  *
  * Tier 2.6 canonical entity-type vocabulary. The dispatcher in
  * domain/explanation.js#explainEntity routes to a per-type explainer
