@@ -743,6 +743,28 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'invalid' | 'rare_but_justified'
+ *          | 'interesting_tension' | 'user_authored_exception'} ContradictionClassification
+ *
+ * Tier 4.18 classification vocabulary. domain/contradictions.js
+ * detects structural anomalies and tags each with one of these.
+ */
+
+/**
+ * @typedef {Object} Contradiction
+ *
+ * Tier 4.18 structured anomaly with justification.
+ *
+ * @property {string}                       id
+ * @property {string}                       type            One of CONTRADICTION_TYPES.
+ * @property {ContradictionClassification}  classification
+ * @property {string}                       description     What the anomaly is.
+ * @property {string}                       explanation     Why it exists / is justified.
+ * @property {string[]}                     consequences    What it implies.
+ * @property {Array<{id: string, label: string, type: string}>} references
+ */
+
+/**
  * @typedef {'remove' | 'weaken' | 'strengthen' | 'replace'} CounterfactualAction
  *
  * Tier 4.17 action vocabulary. domain/counterfactual.js maps these
