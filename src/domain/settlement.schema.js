@@ -743,6 +743,25 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {Object} CustomEntityClassification
+ *
+ * Tier 4.16 structured shape for user-added content. Produced by
+ * domain/customContent.js#classifyCustomEntity. Lets user prose flow
+ * through Phase 18's pipeline and the Tier 4 derivations like a
+ * generated entity.
+ *
+ * @property {'institution'|'faction'|'npc'|'threat'|'hook'} type
+ * @property {string} rawName
+ * @property {string | null} inferredCategory
+ * @property {string[]} provides
+ * @property {string[]} requires
+ * @property {string} controlledBy
+ * @property {string[]} risks
+ * @property {{substrate: Object<string, number>, capacities: Object<string, {supply?: number, demand?: number}>}} effects
+ * @property {Array<{source: string, effect: string, reason: string}>} contributors
+ */
+
+/**
  * @typedef {'low_magic' | 'grimdark' | 'heroic' | 'weird' | 'cozy'
  *          | 'frontier' | 'gothic' | 'political' | 'sword_and_sorcery'
  *          | 'mythic_high'} CanonicalGenre
