@@ -377,6 +377,59 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'one_week' | 'one_month' | 'one_season' | 'one_year'} TickInterval
+ *
+ * Time-progression intervals. Per Phase 15's intensity scale:
+ *   one_week:   0.25× scale
+ *   one_month:  1.00×  (baseline)
+ *   one_season: 2.25×  (sub-linear vs 3 months due to diminishing returns)
+ *   one_year:   6.00×  (sub-linear vs 12 months)
+ */
+
+/**
+ * @typedef {Object} ClockAdvancement
+ * @property {string}      clockId
+ * @property {string}      label
+ * @property {number}      previousStage
+ * @property {number}      stage             New stage after the tick.
+ * @property {number}      totalStages
+ * @property {string|null} stageDescription
+ * @property {boolean}     completed         True when stage >= totalStages.
+ * @property {string}      triggerDescription
+ */
+
+/**
+ * @typedef {Object} ClockResolution
+ * Emitted when a previously-active clock is no longer triggered
+ * (e.g. a strained supply chain recovered to stable).
+ *
+ * @property {string}  clockId
+ * @property {number}  previousStage
+ * @property {boolean} resolved
+ */
+
+/**
+ * @typedef {Object} TimeProgressionTick
+ * Structured payload describing one advanceTime() call.
+ *
+ * @property {TickInterval}                interval
+ * @property {string[]}                    appliedConditions
+ * @property {FactionRelationshipUpdate[]} factionDeltas
+ * @property {Object}                      factionSummary    Aggregated per-faction.
+ * @property {ClockAdvancement[]}          clockAdvancements
+ * @property {ClockResolution[]}           clockResolutions
+ * @property {string[]}                    summary           Human-readable lines.
+ */
+
+/**
+ * @typedef {Object} TickState
+ * The opaque state passed between consecutive advanceTime() calls so
+ * clocks know where they left off.
+ *
+ * @property {Object<string, number>} clockStages   clockId → stage number.
+ */
+
+/**
  * @typedef {Object} Threat
  * @property {string} [id]
  * @property {string} name
