@@ -743,6 +743,32 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'low_magic' | 'grimdark' | 'heroic' | 'weird' | 'cozy'
+ *          | 'frontier' | 'gothic' | 'political' | 'sword_and_sorcery'
+ *          | 'mythic_high'} CanonicalGenre
+ *
+ * Tier 4.15 canonical genre vocabulary. domain/genreProfile.js maps
+ * each to a structured template of modifiers.
+ */
+
+/**
+ * @typedef {Object} GenreProfile
+ *
+ * Tier 4.15 structured genre shape produced by
+ * domain/genreProfile.js#deriveGenreProfile.
+ *
+ * @property {CanonicalGenre | null} genre
+ * @property {string[]} institutionEmphasis
+ * @property {string[]} threatTypeBias
+ * @property {'amplify' | 'neutral' | 'dampen'} magicBias
+ * @property {'minimal' | 'restrained' | 'frank' | 'brutal'} violenceLevel
+ * @property {'low' | 'moderate' | 'high' | 'pervasive'} weirdnessTolerance
+ * @property {'gentle' | 'classic' | 'noir' | 'gothic' | 'mythic' | 'absurd'} hookStyle
+ * @property {'sparse' | 'standard' | 'lush'} proseDensity
+ * @property {Array<{source: string, effect: string, reason: string}>} contributors
+ */
+
+/**
  * @typedef {Object} MagicProfile
  *
  * Tier 4.8 structured magic shape produced by
