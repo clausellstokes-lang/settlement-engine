@@ -743,6 +743,25 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {Object} RegenerationDelta
+ *
+ * Tier 5.1 structured diff between two settlement snapshots, produced
+ * by domain/regenerationDelta.js#deriveRegenerationDelta.
+ *
+ * @property {Array<Object>} directEffects        Phase 7 SystemState delta.
+ * @property {Array<Object>} rippleEffects        Phase 17 CausalState delta.
+ * @property {Array<Object>} capacityShifts       Phase 21 capacity delta.
+ * @property {Array<Object>} dailyLifeShifts      Phase 22 daily-life delta.
+ * @property {Array<Object>} preservedCanon       Entities present in both snapshots.
+ * @property {string[]}      brokenDependencies   IDs of removed entities.
+ * @property {Array<Object>} newEntities          Entities only in `after`.
+ * @property {Array<Object>} removedEntities      Entities only in `before`.
+ * @property {Array<Object>} newOpportunities     newEntities filtered to hooks.
+ * @property {Array<Object>} newRisks             newEntities filtered to threats/conditions/clocks.
+ * @property {string[]}      summary              Human-readable lines.
+ */
+
+/**
  * @typedef {Object} MapProfile
  *
  * Tier 4.14 bidirectional map ↔ simulator interface produced by
