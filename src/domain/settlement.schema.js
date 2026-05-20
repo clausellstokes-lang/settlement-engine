@@ -753,6 +753,7 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {Object} identity            id / name / tier / seed / versions / canon breakdown.
  * @property {Object} spine               7-line SimulationSpine.
  * @property {{substrate: Object, capacities: Object}} bands  Phase 17 + Phase 21 band maps.
+ * @property {Array<{kind: string, entityIndex: number, label: string, path: string, value: string, editedAt: string|null}>} userEdits  Tier 6.6 — verbatim user-authored prose the AI must preserve.
  * @property {FactionProfile[]} factions  Phase 9.
  * @property {SupplyChainState[]} chains  Phase 10.
  * @property {ActiveCondition[]} conditions  Phase 16.
@@ -768,7 +769,47 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
- * @typedef {'invented_entity' | 'removed_entity' | 'renamed_entity' | 'changed_fact' | 'changed_canon' | 'removed_history_beat'} AiOverlayViolationKind
+ * @typedef {Object} UserEdit
+ *
+ * Tier 5.4 single-field user edit record. Lives on the entity as
+ * `entity._userEdits[path] = UserEdit`. Produced and consumed by
+ * domain/userEdits.js.
+ *
+ * @property {string} value          The user-authored value currently in the field.
+ * @property {*}      originalValue  The pre-edit value captured on the FIRST edit. Reverting restores this.
+ * @property {string} editedAt       ISO-8601 timestamp of the most recent edit.
+ */
+
+/**
+ * @typedef {'npc' | 'faction' | 'institution' | 'hook' | 'historicalEvent' | 'currentTension' | 'settlement'} UserEditableEntityType
+ *
+ * Tier 5.4 closed vocabulary of entity types whose prose fields the
+ * UI may expose for user editing. See domain/userEdits.js EDITABLE_FIELDS
+ * for the per-type whitelist of dotted paths.
+ */
+
+/**
+ * @typedef {Object<string, UserEdit>} UserEditsMap
+ *
+ * Tier 5.4 — the `_userEdits` blob attached to any user-edited entity.
+ * Keys are dotted field paths (e.g. 'secret.what'), values are
+ * UserEdit records.
+ */
+
+/**
+ * @typedef {Object} UserEditWalkEntry
+ *
+ * Tier 5.4 — one tuple yielded by domain/userEdits.js#walkUserEdits.
+ *
+ * @property {UserEditableEntityType|string} kind  Singular entity type ('npc', 'faction', etc.).
+ * @property {number} entityIndex                  Array index of the entity (or -1 for settlement root).
+ * @property {Object} entity                       The entity carrying the edit.
+ * @property {string} path                         Dotted path to the edited field.
+ * @property {UserEdit} record                     The edit record itself.
+ */
+
+/**
+ * @typedef {'invented_entity' | 'removed_entity' | 'renamed_entity' | 'changed_fact' | 'changed_canon' | 'removed_history_beat' | 'changed_user_field'} AiOverlayViolationKind
  *
  * Tier 6.4 — the closed set of contract violations the AI overlay
  * verifier can flag. See domain/aiOverlayVerifier.js for semantics.

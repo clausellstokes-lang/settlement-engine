@@ -62,6 +62,25 @@ import { deriveDailyLife } from './dailyLife.js';
 import { deriveAllDistricts } from './districtProfile.js';
 import { deriveRegionalGraph } from './regionalGraph.js';
 import { canonBreakdown, tagEntityCanon } from './canonStatus.js';
+import { walkUserEdits } from './userEdits.js';
+
+// Surface the user's hand-authored values verbatim in the grounding
+// payload. The structured profile sections strip prose down to typed
+// fields, so the AI wouldn't see the actual edited text without this
+// dedicated section.
+function collectUserEditsSummary(settlement) {
+  if (!settlement) return [];
+  return walkUserEdits(settlement).map(({ kind, entityIndex, entity, path, record }) => ({
+    kind,
+    entityIndex,
+    label: kind === 'settlement'
+      ? 'settlement'
+      : (entity?.name || entity?.faction || `#${entityIndex}`),
+    path,
+    value: record?.value,
+    editedAt: record?.editedAt || null,
+  }));
+}
 
 // ── Defaults ─────────────────────────────────────────────────────────────
 
@@ -138,6 +157,17 @@ export function forbiddenChanges(settlement) {
     if (beat) out.push(`MUST PRESERVE history beat (${key}): "${beat.text}"`);
   }
 
+  // Tier 6.6: user-edited prose is canon. Each `MUST PRESERVE
+  // user-edited field` line names the specific path + label so the AI
+  // doesn't paraphrase or override the DM's hand-authored text.
+  const edits = walkUserEdits(settlement);
+  for (const { kind, entity, entityIndex, path } of edits) {
+    const entityLabel = kind === 'settlement'
+      ? 'settlement'
+      : `${kind} "${entity?.name || entity?.faction || `#${entityIndex}`}"`;
+    out.push(`MUST PRESERVE user-edited field (${path}) on ${entityLabel} — pass through verbatim.`);
+  }
+
   return out;
 }
 
@@ -180,6 +210,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
       identity: null,
       spine: null,
       bands: { substrate: {}, capacities: {} },
+      userEdits: [],
       factions: [],
       chains: [],
       conditions: [],
@@ -222,6 +253,12 @@ export function buildAiGroundingPayload(settlement, options = {}) {
       substrate: { ...causal.bands },
       capacities: { ...capacities.bands },
     },
+
+    // Tier 6.6: user-edited prose lives verbatim in `userEdits` so the
+    // AI sees the values it must preserve. The structured profile
+    // sections (npcs, factions, institutions) are derivations that
+    // strip prose down to typed fields, so they're not enough.
+    userEdits: collectUserEditsSummary(settlement),
 
     factions:        deriveAllFactionProfiles(settlement),
     chains:          deriveAllSupplyChainStates(settlement),

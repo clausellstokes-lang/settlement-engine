@@ -41,6 +41,7 @@
 
 import { tagEntityCanon } from './canonStatus.js';
 import { deriveHistoryBeats } from './historyBeats.js';
+import { walkUserEdits } from './userEdits.js';
 
 // ── Violation kinds (frozen vocabulary) ─────────────────────────────────
 
@@ -51,6 +52,9 @@ export const VIOLATION_KINDS = Object.freeze([
   'changed_fact',
   'changed_canon',
   'removed_history_beat',
+  // Tier 6.6: user-edited prose is canon. The verifier checks that
+  // every value still equals the user's authored string.
+  'changed_user_field',
 ]);
 
 // ── Helpers ─────────────────────────────────────────────────────────────
@@ -255,16 +259,91 @@ function compareHistoryBeats(original, refined) {
 // ── Public API ──────────────────────────────────────────────────────────
 
 /**
+ * Verify that every field the user has hand-edited in the ORIGINAL
+ * settlement still carries the user's exact value in the REFINED
+ * output. User-edited prose is canon — the AI must pass it through
+ * verbatim. Tier 6.6.
+ */
+function compareUserFields(original, refined) {
+  const violations = [];
+  const edits = walkUserEdits(original);
+  if (edits.length === 0) return violations;
+
+  // Resolve the corresponding entity in `refined` for each edit:
+  //   - settlement-root edits: refined itself
+  //   - entity edits: walk the same array path + index
+  // Index-based lookup matches the verifier's existing array
+  // semantics (apply() in the edge function also matches by index).
+  for (const { kind, entityIndex, path } of edits) {
+    const expected = readUserExpectedValue(original, kind, entityIndex, path);
+    const actual   = readUserExpectedValue(refined,  kind, entityIndex, path);
+    if (expected === undefined) continue;
+    if (expected === actual) continue;
+    const ent = locateEntity(refined, kind, entityIndex) || locateEntity(original, kind, entityIndex);
+    const label = ent?.name || ent?.faction || (kind === 'settlement' ? 'settlement' : `#${entityIndex}`);
+    violations.push({
+      kind: 'changed_user_field',
+      field: kind === 'settlement' ? path : `${kind}[${entityIndex}].${path}`,
+      key: `${kind}:${entityIndex}:${path}`,
+      label,
+      before: expected,
+      after: actual,
+      detail: `User-edited field "${path}" on ${kind} "${label}" was overwritten by the AI.`,
+    });
+  }
+  return violations;
+}
+
+const ENTITY_ARRAY_PATH_BY_KIND = {
+  npc:            ['npcs'],
+  institution:    ['institutions'],
+  faction:        ['powerStructure', 'factions'],
+  conflict:       ['powerStructure', 'conflicts'],
+  hook:           ['hooks'],
+  plotHook:       ['plotHooks'],
+  condition:      ['activeConditions'],
+  supplyChain:    ['supplyChains'],
+  historicalEvent:['history', 'historicalEvents'],
+  currentTension: ['history', 'currentTensions'],
+};
+
+function locateEntity(settlement, kind, entityIndex) {
+  if (kind === 'settlement') return settlement;
+  const segs = ENTITY_ARRAY_PATH_BY_KIND[kind];
+  if (!segs) return null;
+  let ref = settlement;
+  for (const seg of segs) {
+    if (ref == null || typeof ref !== 'object') return null;
+    ref = ref[seg];
+  }
+  if (!Array.isArray(ref)) return null;
+  return ref[entityIndex] || null;
+}
+
+function readUserExpectedValue(settlement, kind, entityIndex, path) {
+  const entity = locateEntity(settlement, kind, entityIndex);
+  if (!entity) return undefined;
+  const keys = path.split('.');
+  let ref = entity;
+  for (const k of keys) {
+    if (ref == null || typeof ref !== 'object') return undefined;
+    ref = ref[k];
+  }
+  return ref;
+}
+
+/**
  * Build a violations summary by kind for at-a-glance reporting.
  */
 function summariseViolations(violations) {
   return {
-    invented:     violations.filter(v => v.kind === 'invented_entity').length,
-    removed:      violations.filter(v => v.kind === 'removed_entity').length,
-    renamed:      violations.filter(v => v.kind === 'renamed_entity').length,
-    contradicted: violations.filter(v => v.kind === 'changed_fact').length,
-    canonChanged: violations.filter(v => v.kind === 'changed_canon').length,
-    historyDropped: violations.filter(v => v.kind === 'removed_history_beat').length,
+    invented:        violations.filter(v => v.kind === 'invented_entity').length,
+    removed:         violations.filter(v => v.kind === 'removed_entity').length,
+    renamed:         violations.filter(v => v.kind === 'renamed_entity').length,
+    contradicted:    violations.filter(v => v.kind === 'changed_fact').length,
+    canonChanged:    violations.filter(v => v.kind === 'changed_canon').length,
+    historyDropped:  violations.filter(v => v.kind === 'removed_history_beat').length,
+    userFieldChanged: violations.filter(v => v.kind === 'changed_user_field').length,
   };
 }
 
@@ -327,6 +406,9 @@ export function verifyAiOverlay(original, refined) {
 
   // History beat drop-out.
   violations.push(...compareHistoryBeats(original, refined));
+
+  // Tier 6.6: user-edited prose must round-trip verbatim.
+  violations.push(...compareUserFields(original, refined));
 
   return {
     ok: violations.length === 0,
