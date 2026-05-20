@@ -131,6 +131,11 @@ export default defineConfig({
     // DOM opt in with /** @vitest-environment jsdom */ at the top.
     // Component smoke tests in tests/ui/ use that pragma.
     environment: 'node',
+    // Exclude Playwright E2E specs — they live in e2e/ and require a
+    // running dev server (handled by playwright.config.js#webServer).
+    // Without this exclusion, vitest tries to load them and fails on
+    // the Playwright-only `test.describe` global.
+    exclude: ['e2e/**', 'node_modules/**', 'dist/**', '.git/**'],
     // Route .jsx/.tsx files through Vite's web transform (which applies
     // the @vitejs/plugin-react JSX transform) instead of the default
     // SSR transform (which doesn't). Without this, importing any .jsx

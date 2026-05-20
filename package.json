@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
     "build": "vite build",
     "validate:data": "node scripts/find-duplicate-keys.js",
     "fix:data": "node scripts/fix-duplicate-keys.js",
@@ -11,6 +13,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:report": "playwright show-report",
     "check": "npm run validate:data && npm run typecheck && npm run lint && npm run test && npm run build",
     "check:quick": "npm run lint && npm run test",
     "prepare": "husky"
@@ -28,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
     "@vitejs/plugin-react": "^4.7.0",
