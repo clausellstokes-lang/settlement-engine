@@ -25,6 +25,48 @@ import { saves as savesService } from '../lib/saves.js';
 import { applyRenameToAiData } from '../lib/narrativeMutations.js';
 import { CREDIT_COSTS } from './creditsSlice.js';
 import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
+import { verifyAiOverlay } from '../domain/aiOverlayVerifier.js';
+
+// ── Verifier integration ────────────────────────────────────────────────────
+//
+// Tier 6.5 — every AI overlay commit runs through aiOverlayVerifier. The
+// result is stored on state for UI/PDF surfaces to consume. We never
+// REFUSE to commit on violations (display-only, no blocking): the user
+// paid for the call, and a "your AI output had drift" warning is more
+// useful than refusing to show the prose. Hard violations get a console
+// warning so they show up in DEV-mode logs and Sentry breadcrumbs.
+
+const HARD_VIOLATION_KINDS = Object.freeze(new Set([
+  'invented_entity',
+  'renamed_entity',
+  'changed_fact',
+  'changed_canon',
+]));
+
+function runOverlayVerifier(original, refined) {
+  // Defensive: never let a verifier bug crash an AI commit. If the
+  // verifier throws, we log and return a neutral pass-through report.
+  try {
+    return verifyAiOverlay(original, refined);
+  } catch (e) {
+    console.error('[ai-overlay-verifier] unexpected error', e);
+    return { ok: true, violations: [], summary: {
+      invented: 0, removed: 0, renamed: 0,
+      contradicted: 0, canonChanged: 0, historyDropped: 0,
+    } };
+  }
+}
+
+function logHardViolations(verification, where) {
+  if (verification.ok) return;
+  const hard = verification.violations.filter(v => HARD_VIOLATION_KINDS.has(v.kind));
+  if (hard.length === 0) return;
+  // A single grouped warning so a noisy run doesn't drown the console.
+  console.warn(
+    `[ai-overlay] ${where}: ${hard.length} hard violation(s) detected`,
+    hard.slice(0, 5),
+  );
+}
 
 /**
  * Build the ai_data blob to persist on a saved settlement.
@@ -82,12 +124,20 @@ export const createAiSlice = (set, get) => ({
   aiPartialFailure: null,   // { failedFields: [] } when some passes fell back to raw
   showNarrative:    false,  // toggle: true = show AI narrative, false = show raw data
   aiDataVersion:    null,   // timestamp of settlement data the narrative was built from
+  aiViolations:     null,   // Tier 6.5 verifier report (null when no overlay committed)
 
   // ── Actions ────────────────────────────────────────────────────────────────
   setAiSettlement: (aiData) =>
     set(state => {
+      // Tier 6.5: run the canon-preservation verifier against the
+      // current raw settlement BEFORE committing. The overlay still
+      // commits regardless (display-only guard); the verification
+      // report is surfaced on state so UI/PDF can show warnings.
+      const verification = runOverlayVerifier(state.settlement, aiData);
+      logHardViolations(verification, 'setAiSettlement');
       state.aiSettlement = aiData;
       state.aiDataVersion = Date.now();
+      state.aiViolations = aiData ? verification : null;
     }),
 
   clearAiSettlement: () =>
@@ -96,6 +146,7 @@ export const createAiSlice = (set, get) => ({
       state.aiDailyLife = null;
       state.aiDataVersion = null;
       state.aiPartialFailure = null;
+      state.aiViolations = null;
     }),
 
   setAiDailyLife: (prose) =>
@@ -229,6 +280,12 @@ export const createAiSlice = (set, get) => ({
           },
         });
 
+      // Tier 6.5: verify the final atomic result against the source
+      // settlement so UI surfaces (and the upcoming PDF appendix) can
+      // show violation warnings.
+      const verificationN = runOverlayVerifier(settlement, result);
+      logHardViolations(verificationN, 'requestNarrative');
+
       set(state => {
         state.aiSettlement = result;
         state.aiDataVersion = Date.now();
@@ -237,6 +294,7 @@ export const createAiSlice = (set, get) => ({
         state.aiProgress = '';
         state.showNarrative = true;
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
+        state.aiViolations = verificationN;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
 
@@ -484,6 +542,11 @@ export const createAiSlice = (set, get) => ({
           },
         });
 
+      // Tier 6.5: verify the evolved narrative against the source
+      // settlement (progression v1 only refines existing prose).
+      const verificationP = runOverlayVerifier(settlement, result);
+      logHardViolations(verificationP, 'requestProgression');
+
       set(state => {
         state.aiSettlement = result;
         state.aiDataVersion = Date.now();
@@ -492,6 +555,7 @@ export const createAiSlice = (set, get) => ({
         state.aiProgress = '';
         state.showNarrative = true;
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
+        state.aiViolations = verificationP;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
 
