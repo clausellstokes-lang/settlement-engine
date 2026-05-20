@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
-import {Link2, ChevronLeft, X, FileText, Sparkles, RotateCcw, Loader2} from 'lucide-react';
+import {Link2, ChevronLeft, X, FileText, Sparkles, RotateCcw, Loader2, Edit3, Lock} from 'lucide-react';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
 // section components. Import lazily on user click so opening a settlement
 // detail view doesn't pay for export machinery up front.
@@ -298,6 +298,20 @@ export default function SettlementDetail({
   const aiDailyLife  = useStore(s => s.aiDailyLife);
   const narrated = !!(aiSettlement || aiDailyLife);
 
+  // Tier 5.4 — premium-gated manual editing. The edit toggle lives on
+  // the store so per-tab EditableText components can read it without
+  // prop threading. Non-premium users see a greyed-out button that
+  // opens the pricing modal on click.
+  const editMode             = useStore(s => s.editMode);
+  const toggleEditMode       = useStore(s => s.toggleEditMode);
+  const isSettlementEdited   = useStore(s => s.isSettlementEdited);
+  const countSettlementEdits = useStore(s => s.countSettlementEdits);
+  const authTier             = useStore(s => s.auth?.tier);
+  const isElevated           = useStore(s => typeof s.isElevated === 'function' ? s.isElevated() : false);
+  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  const canEdit              = authTier === 'premium' || authTier === 'founder' || isElevated;
+  const editedCount          = isSettlementEdited && isSettlementEdited() ? countSettlementEdits() : 0;
+
   // Chronicle (AI-3b) — pulled from the live savedSettlements entry so the
   // list updates after each generate / revert without remounting the view.
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
@@ -382,6 +396,54 @@ export default function SettlementDetail({
               <RotateCcw size={12}/> Revert to Raw
             </button>
           )}
+
+          {/* Tier 5.4 — Edited badge surfaces when ANY field on this
+              settlement has been hand-authored. Tooltip explains the
+              guarantees (engine preserves on reroll, AI passes through). */}
+          {editedCount > 0 && (
+            <span
+              title="This dossier contains hand-edited prose. The engine preserves these fields across rerolls; the AI overlay passes them through verbatim."
+              style={{
+                display:'inline-flex',alignItems:'center',gap:4,
+                padding:'3px 9px',borderRadius:11,fontSize:10,fontWeight:800,
+                fontFamily:sans,letterSpacing:'0.07em',textTransform:'uppercase',
+                background:'rgba(90,42,138,0.14)',
+                color:'#6a2a9a',
+                border:'1px solid rgba(160,100,220,0.35)',
+              }}
+            >
+              <Edit3 size={10}/> Edited · {editedCount}
+            </span>
+          )}
+
+          {/* Tier 5.4 — Edit-mode toggle. Premium-gated; non-premium
+              users see a greyed-out variant that opens the pricing
+              modal so they understand it's a premium feature. */}
+          <button
+            onClick={() => {
+              if (canEdit) { toggleEditMode(); }
+              else if (setPurchaseModalOpen) { setPurchaseModalOpen(true); }
+            }}
+            title={canEdit
+              ? (editMode
+                  ? 'Stop editing — fields return to read-only display.'
+                  : 'Edit dossier prose in place. Edits are preserved across rerolls and respected by the AI overlay.')
+              : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
+            style={{
+              display:'flex',alignItems:'center',gap:5,
+              background: !canEdit ? '#e8e0d2' : (editMode ? '#6a2a9a' : CARD),
+              color: !canEdit ? MUTED : (editMode ? '#fff' : '#6a2a9a'),
+              border: `1px solid ${!canEdit ? BORDER : 'rgba(160,100,220,0.45)'}`,
+              borderRadius:5, padding:'5px 10px',
+              cursor:'pointer',
+              fontSize:11, fontWeight:700, fontFamily:sans,
+              opacity: !canEdit ? 0.85 : 1,
+            }}
+          >
+            {!canEdit
+              ? <><Lock size={12}/> Edit (Premium)</>
+              : (editMode ? <><Edit3 size={12}/> Stop Editing</> : <><Edit3 size={12}/> Edit Dossier</>)}
+          </button>
           <button onClick={()=>setLinking(v=>!v)} style={{display:'flex',alignItems:'center',gap:5,background:linking?'#2a3a7a':CARD,color:linking?'#fff':'#2a3a7a',border:'1px solid #2a3a7a',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:sans}}>
             <Link2 size={13}/> {linking?'Cancel':'Link Neighbour'}
           </button>

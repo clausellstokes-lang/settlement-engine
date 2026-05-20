@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Pin } from 'lucide-react';
 import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
+import { EditableText } from '../primitives/EditableText.jsx';
+import { useStore } from '../../store/index.js';
+import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
@@ -129,6 +132,32 @@ export function ConflictCard({conflict:c}) {
 
 // Inline NPC card — replaces the removed NPCCard export
 function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
+  // Tier 5.4 — manual prose editing. editMode is the global toggle on
+  // the dossier header. The save/revert handlers look up the NPC's
+  // index by id at edit time so the action targets the right entity
+  // even if the npcs array has been re-sorted upstream.
+  const editMode             = useStore(s => s.editMode);
+  const applyUserEditAction  = useStore(s => s.applyUserEditAction);
+  const revertUserEditAction = useStore(s => s.revertUserEditAction);
+  const settlement           = useStore(s => s.settlement);
+  const npcKey               = npc?.id != null ? String(npc.id) : (npc?.name != null ? String(npc.name) : null);
+  const resolveNpcIndex = () => {
+    if (!settlement?.npcs || !npcKey) return -1;
+    return settlement.npcs.findIndex(n => {
+      const k = n?.id != null ? String(n.id) : (n?.name != null ? String(n.name) : null);
+      return k === npcKey;
+    });
+  };
+  const secretIsEdited = isEdited(npc, 'secret.what');
+  const secretOriginal = getOriginalValue(npc, 'secret.what');
+  const onSaveSecret = (value) => {
+    const idx = resolveNpcIndex();
+    if (idx >= 0) applyUserEditAction('npc', idx, 'secret.what', value);
+  };
+  const onRevertSecret = () => {
+    const idx = resolveNpcIndex();
+    if (idx >= 0) revertUserEditAction('npc', idx, 'secret.what');
+  };
   const [open, setOpen] = useState(false);
   const color = catColor(npc.category);
   const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
@@ -210,10 +239,20 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               <span style={{fontWeight:700}}>Constraint: </span>{npc.activeConstraint}
             </p>
           )}
-          {npc.secret && (
+          {(npc.secret || editMode) && (
             <div style={{marginTop:6,background:'#f5f0e8',borderRadius:4,padding:'5px 8px'}}>
               <span style={{fontSize:10,fontWeight:700,color:'#6b5340'}}>Secret: </span>
-              <span style={{fontSize:11,color:'#3d2b1a'}}>{typeof npc.secret==='string' ? npc.secret : npc.secret.what}</span>
+              <EditableText
+                value={typeof npc.secret === 'string' ? npc.secret : (npc.secret?.what || '')}
+                originalValue={secretOriginal}
+                isEdited={secretIsEdited}
+                editMode={editMode}
+                onSave={onSaveSecret}
+                onRevert={onRevertSecret}
+                placeholder="Add a secret…"
+                ariaLabel={`Secret for ${npc.name}`}
+                textStyle={{fontSize:11,color:'#3d2b1a'}}
+              />
             </div>
           )}
         </div>

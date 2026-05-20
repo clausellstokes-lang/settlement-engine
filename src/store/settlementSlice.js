@@ -56,6 +56,43 @@ import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.
 import { inferSuccessors }   from '../domain/entities/successors.js';
 import { inferImportance }   from '../domain/entities/npcs.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
+import {
+  applyUserEdit as domainApplyUserEdit,
+  revertUserEdit as domainRevertUserEdit,
+  isEditablePath,
+  countSettlementEdits as domainCountSettlementEdits,
+} from '../domain/userEdits.js';
+
+// ── Per-entity-kind nested array resolver ──────────────────────────────
+//
+// Mirrors the layout used by domain/userEdits.js#walkUserEdits and
+// aiOverlayVerifier#locateEntity. Centralized so a future schema move
+// (e.g. factions out of powerStructure) touches one map, not three.
+const ENTITY_ARRAY_PATH_BY_KIND = Object.freeze({
+  npc:             ['npcs'],
+  institution:     ['institutions'],
+  faction:         ['powerStructure', 'factions'],
+  conflict:        ['powerStructure', 'conflicts'],
+  hook:            ['hooks'],
+  plotHook:        ['plotHooks'],
+  condition:       ['activeConditions'],
+  supplyChain:     ['supplyChains'],
+  historicalEvent: ['history', 'historicalEvents'],
+  currentTension:  ['history', 'currentTensions'],
+});
+
+function _resolveEntity(settlement, kind, entityIndex) {
+  if (kind === 'settlement') return settlement;
+  const segs = ENTITY_ARRAY_PATH_BY_KIND[kind];
+  if (!segs) return null;
+  let ref = settlement;
+  for (const seg of segs) {
+    if (ref == null || typeof ref !== 'object') return null;
+    ref = ref[seg];
+  }
+  if (!Array.isArray(ref)) return null;
+  return ref[entityIndex] || null;
+}
 
 /**
  * Build a `campaignState` snapshot from the live slice for persistence
@@ -477,6 +514,66 @@ export const createSettlementSlice = (set, get) => ({
       if (!state.settlement?.factions?.[factionIndex]) return;
       state.settlement.factions[factionIndex].name = newName;
     }),
+
+  // ── User-edited prose (Tier 5.4) ─────────────────────────────────────────
+  //
+  // Edit-mode toggle: when true, EditableText components in the
+  // dossier become clickable. False by default so casual readers see
+  // the dossier as static prose. The toggle lives on the store so any
+  // component tree (tabs, sidebar, PDF preview) can read the same
+  // value without prop-threading.
+  editMode: false,
+  setEditMode: (next) => set(state => { state.editMode = !!next; }),
+  toggleEditMode: () => set(state => { state.editMode = !state.editMode; }),
+
+
+  //
+  // Apply / revert a hand-authored value at a registered editable
+  // path. The path is gated by EDITABLE_FIELDS so the UI cannot
+  // accidentally edit a structural field (population, tier, faction
+  // power) that would invalidate the simulation math.
+  //
+  // applyUserEditAction(kind, entityIndex, path, value):
+  //   kind:        'settlement' | 'npc' | 'institution' | 'faction' |
+  //                'hook' | 'plotHook' | 'condition' | 'supplyChain' |
+  //                'historicalEvent' | 'currentTension'
+  //   entityIndex: array index (ignored when kind === 'settlement')
+  //   path:        dotted path inside the entity (e.g. 'secret.what')
+  //   value:       the user-authored string
+  //
+  // The canonStatus tagger picks up _authored: true automatically, so
+  // the edited entity becomes source: 'user', locked: true. AI
+  // grounding sees it via `forbiddenChanges`, and the verifier
+  // protects it via `changed_user_field`.
+
+  applyUserEditAction: (kind, entityIndex, path, value) =>
+    set(state => {
+      if (!state.settlement) return;
+      if (!isEditablePath(kind, path)) return;  // strict registry gate
+      const entity = _resolveEntity(state.settlement, kind, entityIndex);
+      if (!entity) return;
+      domainApplyUserEdit(entity, path, value);
+    }),
+
+  revertUserEditAction: (kind, entityIndex, path) =>
+    set(state => {
+      if (!state.settlement) return;
+      const entity = _resolveEntity(state.settlement, kind, entityIndex);
+      if (!entity) return;
+      domainRevertUserEdit(entity, path);
+    }),
+
+  /** Count user edits across the live settlement. Reactive selector. */
+  countSettlementEdits: () => {
+    const s = get().settlement;
+    return s ? domainCountSettlementEdits(s) : 0;
+  },
+
+  /** True if the live settlement has any user edits. Reactive selector. */
+  isSettlementEdited: () => {
+    const s = get().settlement;
+    return !!s && domainCountSettlementEdits(s) > 0;
+  },
 
   // ── Campaign-state engine handlers ────────────────────────────────────────
 
