@@ -743,6 +743,28 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'nudge' | 'rebalance' | 'reforge'} RegenerationMode
+ *
+ * Tier 5.2 reactive regeneration modes. Nudge preserves most;
+ * Rebalance preserves canon and recalcs affected subsystems;
+ * Reforge keeps only hard anchors.
+ */
+
+/**
+ * @typedef {Object} RegenerationPlan
+ *
+ * Tier 5.2 preservation plan produced by
+ * domain/regenerationMode.js#buildRegenerationPlan.
+ *
+ * @property {RegenerationMode} mode
+ * @property {Array<{id: string, type: string, label: string, reason: string}>} preserveEntities
+ * @property {Array<{id: string, type: string, label: string, reason: string}>} rerollEntities
+ * @property {string[]} preserveFields    Hard-anchor settlement fields.
+ * @property {string[]} rerollSubsystems  Pipeline-step keys to recompute.
+ * @property {Array<{source: string, effect: string, reason: string}>} contributors
+ */
+
+/**
  * @typedef {'generated' | 'user' | 'event' | 'ai_overlay'} CanonSource
  */
 
