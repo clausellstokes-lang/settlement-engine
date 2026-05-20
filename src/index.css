@@ -6,10 +6,30 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* ─────────────────────────────────────────────────────────────────────
+   Page background — the painted pastoral fixed under the whole UI.
+   The image lives at /public/parchment-bg.jpg (saved by the user).
+   Two stacked backgrounds:
+     1. A cream-tinted linear gradient (top of stack) at 78% opacity so
+        body text stays legible against the painted scene.
+     2. The painting itself (bottom of stack), fixed and cover-sized so
+        scrolling content drifts over a stationary canvas.
+   The cream `background-color` is the fallback when the painting hasn't
+   yet been saved into /public — page still reads as parchment, never
+   white.
+   ───────────────────────────────────────────────────────────────────── */
 body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
   -webkit-text-size-adjust: 100%;
+  background-color: #f7f0e4;
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.78), rgba(247, 240, 228, 0.78)),
+    url('/parchment-bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 input, select, textarea {
@@ -20,13 +40,14 @@ button {
   touch-action: manipulation;
 }
 
-/* Parchment background — the main page background */
+/* The root and the .parchment-bg wrapper let the body's painting show
+   through — they used to paint their own cream, which would mask the
+   background image. */
+#root {
+  background: transparent !important;
+}
 .parchment-bg {
-  background-color: #f7f0e4;
-  background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(180,140,80,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(160,120,60,0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 80%, rgba(140,100,50,0.04) 0%, transparent 50%);
+  background: transparent !important;
   min-height: 100vh;
 }
 
@@ -39,11 +60,3 @@ button {
 /* Tab strip hide scrollbar */
 .tab-strip::-webkit-scrollbar { display: none; }
 .output-tab-btn { -webkit-tap-highlight-color: transparent; }
-
-/* Background-aware card styling */
-body, #root {
-  background: transparent !important;
-}
-.parchment-bg {
-  background: transparent !important;
-}
