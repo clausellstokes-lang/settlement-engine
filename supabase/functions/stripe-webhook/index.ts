@@ -87,7 +87,39 @@ async function dualWriteGrant(
   }
 }
 
+// ── Trust boundary documentation (Tier 0.5 audit) ──────────────────────────
+//
+// EVERY METADATA READ BELOW IS ONLY SAFE BECAUSE:
+//
+//   1. We require a stripe-signature header AND verify it against
+//      STRIPE_WEBHOOK_SECRET via stripe.webhooks.constructEvent. Without
+//      this, an attacker could POST a fake session.completed event with
+//      any metadata they like.
+//
+//   2. The METADATA POPULATED in session.metadata is set ONLY by
+//      `create-checkout/index.ts`, which:
+//        a. requires a Supabase JWT (line 107 in create-checkout)
+//        b. uses `user.id` from the server-verified JWT for
+//           `metadata.supabase_user_id` — NOT from the request body.
+//           So a user cannot upgrade someone else's account.
+//        c. validates `product` against the server-controlled PRICE_MAP
+//           before passing it into metadata. So a user cannot smuggle
+//           a fake product (e.g. trick the webhook into the
+//           `founder_lifetime` branch via a credit pack purchase).
+//        d. computes `credits` from the server-side CREDIT_AMOUNTS
+//           map, NOT from the request body.
+//
+//   3. Manual Stripe-dashboard invoice creation could in principle
+//      populate arbitrary metadata, but that requires operator-level
+//      Stripe access. Not a user-attackable vector.
+//
+// If you ADD a new entry point that creates Stripe checkout sessions,
+// it MUST follow the same pattern. Otherwise the trust chain breaks.
+// The contract test in tests/edgeFunctions/contracts.test.js
+// (Tier 0.5 — webhook trust boundaries) locks this in.
+
 serve(async (req) => {
+  // ── Signature verification — MUST run before any metadata read ─────
   const signature = req.headers.get('stripe-signature');
   if (!signature) return new Response('Missing signature', { status: 400 });
 

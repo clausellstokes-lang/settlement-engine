@@ -741,3 +741,113 @@ describe('Tier 3.3 — product catalog drift between checkout + webhook', () => 
     }
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────
+// Tier 0.5 — Webhook trust-boundary lock-in
+//
+// The webhook's case statements read session.metadata.supabase_user_id,
+// product, and credits as if they were trusted. They ARE trusted, but
+// only because:
+//   - the signature is verified BEFORE any metadata read, AND
+//   - the metadata is populated ONLY by create-checkout, which uses
+//     the server-verified `user.id` and a server-controlled PRICE_MAP.
+// These tests lock that chain in place so a future refactor can't
+// accidentally introduce a user-attackable path.
+// ─────────────────────────────────────────────────────────────────────
+
+describe('Tier 0.5 — stripe-webhook trust boundary order', () => {
+  let webhookSrc;
+  beforeAll(() => { webhookSrc = readFunction('stripe-webhook'); });
+
+  it('constructEvent (signature verification) runs before any session.metadata read', () => {
+    const constructIdx = webhookSrc.search(/constructEvent\s*\(/);
+    // Look for the specific metadata read pattern used by the case
+    // statements — `session.metadata?.<key>`. The doc block earlier in
+    // the file references `session.metadata` but does NOT read it; the
+    // `?.` form is the live access.
+    const metadataReadIdx = webhookSrc.search(/session\.metadata\?\./);
+    expect(constructIdx).toBeGreaterThan(0);
+    expect(metadataReadIdx).toBeGreaterThan(0);
+    expect(constructIdx).toBeLessThan(metadataReadIdx);
+  });
+
+  it('rejects unsigned requests with 400 before touching the request body', () => {
+    // Pattern: read header, if missing return 400. Body parse comes after.
+    expect(webhookSrc).toMatch(/stripe-signature[\s\S]{0,200}status:\s*400/);
+  });
+
+  it('verifies signature with the STRIPE_WEBHOOK_SECRET env var', () => {
+    expect(webhookSrc).toMatch(/STRIPE_WEBHOOK_SECRET/);
+    expect(webhookSrc).toMatch(/constructEvent\([\s\S]{0,80}signature/);
+  });
+
+  it('failed signature verification short-circuits with 400 (no metadata read)', () => {
+    expect(webhookSrc).toMatch(/Invalid signature[\s\S]{0,80}status:\s*400/);
+  });
+
+  it('founder_lifetime branch is gated on session.metadata.product (not on customer email or any client-controlled field)', () => {
+    // Founder upgrade must come from the metadata.product check, which
+    // was set server-side by create-checkout. Looking up by customer
+    // email would let any user with a known target email upgrade.
+    expect(webhookSrc).toMatch(/product\s*===\s*['"]founder_lifetime['"]/);
+  });
+});
+
+describe('Tier 0.5 — create-checkout metadata population is server-controlled', () => {
+  let checkoutSrc;
+  beforeAll(() => { checkoutSrc = readFunction('create-checkout'); });
+
+  it('supabase_user_id is set from user.id (the server-verified JWT) — NEVER from the request body', () => {
+    expect(checkoutSrc).toMatch(/supabase_user_id:\s*user\.id/);
+    // Negative: no path where the user can pass a different id.
+    expect(checkoutSrc).not.toMatch(/supabase_user_id:\s*req\.|supabase_user_id:\s*body\./);
+  });
+
+  it('requires Authorization header BEFORE reading the request body', () => {
+    const authIdx = checkoutSrc.search(/getUser\s*\(/);
+    const bodyIdx = checkoutSrc.search(/req\.json\s*\(/);
+    expect(authIdx).toBeGreaterThan(0);
+    expect(bodyIdx).toBeGreaterThan(0);
+    expect(authIdx).toBeLessThan(bodyIdx);
+  });
+
+  it('rejects when authentication fails (no anonymous checkout creation)', () => {
+    expect(checkoutSrc).toMatch(/Not authenticated/);
+  });
+
+  it('product is validated against PRICE_MAP before being put into metadata', () => {
+    // Pattern: !PRICE_MAP[product] → throw → never reaches checkout.create.
+    const validateIdx = checkoutSrc.search(/!PRICE_MAP\[product\]/);
+    const createIdx   = checkoutSrc.search(/stripe\.checkout\.sessions\.create/);
+    expect(validateIdx).toBeGreaterThan(0);
+    expect(createIdx).toBeGreaterThan(0);
+    expect(validateIdx).toBeLessThan(createIdx);
+  });
+
+  it('credits in metadata are computed from server-side CREDIT_AMOUNTS — not from request body', () => {
+    expect(checkoutSrc).toMatch(/credits:\s*String\(CREDIT_AMOUNTS\[product\]/);
+    // Negative: no request-body credit injection.
+    expect(checkoutSrc).not.toMatch(/credits:\s*String\(req\.|credits:\s*body\.credits/);
+  });
+
+  it('PRICE_MAP entries are env-driven (the keys are server-known, the values come from secrets)', () => {
+    // Every PRICE_MAP value loads from Deno.env.get(). A hardcoded
+    // price would be a deploy regression but not a trust break;
+    // checking anyway because the same line carries the price-id
+    // contract Stripe uses.
+    expect(checkoutSrc).toMatch(/PRICE_MAP[\s\S]{0,200}Deno\.env\.get/);
+  });
+});
+
+describe('Tier 0.5 — webhook documents its trust-boundary expectations', () => {
+  let webhookSrc;
+  beforeAll(() => { webhookSrc = readFunction('stripe-webhook'); });
+
+  it('the file header or near-handler comment names create-checkout as the only metadata source', () => {
+    expect(webhookSrc).toMatch(/create-checkout/i);
+    // The documentation block points at the trust chain so future
+    // editors don't add a second entry point without thinking about
+    // the metadata it would populate.
+    expect(webhookSrc).toMatch(/trust boundary|Trust boundary/);
+  });
+});
