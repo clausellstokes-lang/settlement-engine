@@ -57,12 +57,12 @@ export function EditableText({
   const [draft, setDraft] = useState(value ?? '');
   const inputRef = useRef(null);
 
-  // Keep the draft in sync when the upstream value changes externally
-  // (e.g. AI overlay refresh, undo via another surface). Don't clobber
-  // a draft that the user is actively editing.
-  useEffect(() => {
-    if (!editing) setDraft(value ?? '');
-  }, [value, editing]);
+  // The draft state is initialized to the live `value` on every
+  // entry into edit mode (see `enterEdit` below), so a sync effect
+  // would be redundant — and the React 19 set-state-in-effect lint
+  // rule rightly flags an `if (!editing) setDraft(value)` effect as
+  // a cascading-render risk. Read mode reads `value` directly, so
+  // external updates surface immediately without any sync state.
 
   // Auto-focus + auto-grow on edit-open.
   useEffect(() => {
@@ -73,6 +73,13 @@ export function EditableText({
     try { el.select?.(); } catch { /* not all inputs support select */ }
     if (multiline) autoGrow(el);
   }, [editing, multiline]);
+
+  // Open editing for the current `value` (snapshot, not a subscription).
+  // Centralized so click + Enter + Space all go through the same path.
+  const enterEdit = useCallback(() => {
+    setDraft(value ?? '');
+    setEditing(true);
+  }, [value]);
 
   const commit = useCallback(() => {
     const next = draft;
@@ -104,7 +111,7 @@ export function EditableText({
   };
 
   const handleClick = () => {
-    if (editMode && !editing) setEditing(true);
+    if (editMode && !editing) enterEdit();
   };
 
   // ── Render ────────────────────────────────────────────────────────────
@@ -130,7 +137,7 @@ export function EditableText({
       onKeyDown: editMode ? (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          setEditing(true);
+          enterEdit();
         }
       } : undefined,
       style: { ...baseStyle, ...textStyle },
