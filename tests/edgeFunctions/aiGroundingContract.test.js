@@ -322,6 +322,91 @@ describe('Tier 6.9 — edge function thesis prompt builds in injection-safe orde
 });
 
 // ─────────────────────────────────────────────────────────────────────
+// Tier 6.8 — edge function imports + uses the shared aiGrounding bundle
+// ─────────────────────────────────────────────────────────────────────
+
+describe('Tier 6.8 — edge function imports the aiGrounding bundle', () => {
+  it('imports from the bundled path under _shared/', () => {
+    expect(EDGE).toMatch(/from\s+['"]\.\.\/_shared\/aiGroundingBundle\.js['"]/);
+  });
+
+  it('imports buildAiGroundingPayload', () => {
+    // Allow whitespace between symbols since the import list is
+    // formatted across multiple lines.
+    expect(EDGE).toMatch(/buildAiGroundingPayload[\s\S]*?from\s+['"]\.\.\/_shared\/aiGroundingBundle\.js['"]/);
+  });
+
+  it('imports forbiddenChanges', () => {
+    expect(EDGE).toMatch(/forbiddenChanges[\s\S]*?from\s+['"]\.\.\/_shared\/aiGroundingBundle\.js['"]/);
+  });
+});
+
+describe('Tier 6.8 — edge function uses the shared composer at request time', () => {
+  it('declares a dynamicPreservationLines helper that calls forbiddenChanges', () => {
+    expect(EDGE).toMatch(/function\s+dynamicPreservationLines/);
+    expect(EDGE).toMatch(/forbiddenChanges\(settlement\)/);
+  });
+
+  it('declares a preservationBlockFor helper that composes per-call rules', () => {
+    expect(EDGE).toMatch(/function\s+preservationBlockFor/);
+  });
+
+  it('declares augmentSummaryWithGrounding that calls buildAiGroundingPayload', () => {
+    expect(EDGE).toMatch(/function\s+augmentSummaryWithGrounding/);
+    expect(EDGE).toMatch(/buildAiGroundingPayload\(settlement[^)]*\)/);
+  });
+
+  it('the request handler invokes augmentSummaryWithGrounding before the AI call', () => {
+    // Specifically: summary is built from augmentSummaryWithGrounding(...)
+    expect(EDGE).toMatch(/const summary = augmentSummaryWithGrounding\(/);
+  });
+
+  it('the request handler computes a per-call dynamicPreservation block', () => {
+    expect(EDGE).toMatch(/const dynamicPreservation = preservationBlockFor\(settlement\)/);
+  });
+
+  it('buildRefinementPrompt receives the dynamicPreservation argument', () => {
+    // Both call sites (narrative + progression) pass it as the last arg.
+    const matches = EDGE.match(/dynamicPreservation/g) || [];
+    // Helper definition + 2 call sites + at least one call-site passthrough.
+    expect(matches.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('buildRefinementPrompt signature accepts dynamicPreservationBlock', () => {
+    expect(EDGE).toMatch(/dynamicPreservationBlock\?:\s*string/);
+  });
+
+  it('the dynamic preservation block precedes the THESIS marker in the prompt template', () => {
+    // The dynamic block lives above the THESIS marker so the AI reads
+    // the specific MUST PRESERVE lines BEFORE the prose voice instructions.
+    // Find the FIRST occurrence of each anchor inside buildRefinementPrompt.
+    const buildIdx = EDGE.indexOf('function buildRefinementPrompt');
+    expect(buildIdx).toBeGreaterThan(0);
+    const dynamicIdx = EDGE.indexOf('SETTLEMENT-SPECIFIC PRESERVATION', buildIdx);
+    const thesisIdx = EDGE.indexOf('THESIS (inherit this voice', buildIdx);
+    expect(dynamicIdx).toBeGreaterThan(buildIdx);
+    expect(thesisIdx).toBeGreaterThan(dynamicIdx);
+  });
+});
+
+describe('Tier 6.8 — dynamic preservation defensive behavior', () => {
+  it('falls back to the static PRESERVATION_RULES when the helper returns the static block', () => {
+    // The buildRefinementPrompt check `dynamicPreservationBlock !==
+    // PRESERVATION_RULES` skips the block when no dynamic lines exist
+    // — keeps the prompt identical to its pre-Tier-6.8 shape.
+    expect(EDGE).toMatch(/dynamicPreservationBlock !== PRESERVATION_RULES/);
+  });
+
+  it('the helpers are wrapped in try/catch so a bundle failure cannot crash the handler', () => {
+    // augmentSummaryWithGrounding has a try/catch that falls back to
+    // the un-augmented summary.
+    expect(EDGE).toMatch(/function augmentSummaryWithGrounding[\s\S]{0,1400}catch/);
+    // dynamicPreservationLines has a try/catch that returns [].
+    expect(EDGE).toMatch(/function dynamicPreservationLines[\s\S]{0,700}catch/);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────
 // Locked-entity preservation — pinned NPCs
 //
 // The DM can pin NPCs to prevent the AI from rewriting them. The

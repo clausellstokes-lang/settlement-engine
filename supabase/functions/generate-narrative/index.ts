@@ -31,6 +31,14 @@
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+// Tier 6.8 — bundled aiGrounding contract. Pre-built by
+// `scripts/build-edge-shared.mjs`. Freshness enforced by
+// tests/edgeFunctions/aiGroundingBundle.freshness.test.js.
+import {
+  buildAiGroundingPayload,
+  forbiddenChanges,
+  summarizeGroundingPayload,
+} from '../_shared/aiGroundingBundle.js';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 
@@ -72,6 +80,38 @@ const PRESERVATION_RULES = `STRICT FACT PRESERVATION:
 - Do not contradict any source fact.
 - You MAY restructure sentences, improve rhythm, add sensory texture, and tie details to the thesis.
 - If a source string is already concrete and specific, you may lightly polish or leave it alone — a non-change is better than drift.`;
+
+// Tier 6.8 — settlement-specific preservation lines composed from the
+// shared aiGrounding contract. Adds explicit "MUST PRESERVE" lines for
+// locked entities, history beats, and user-edited fields so the AI
+// sees the specific names and field paths it must not touch. The
+// static rules above remain — this prefix is appended at call time.
+function dynamicPreservationLines(settlement: any): string[] {
+  if (!settlement) return [];
+  try {
+    const lines = forbiddenChanges(settlement) as string[];
+    if (!Array.isArray(lines)) return [];
+    // The first 7 lines are the static rules (same content as
+    // STATIC_FORBIDDEN inside the bundle); drop them so we don't echo
+    // PRESERVATION_RULES twice. Everything after is settlement-
+    // specific.
+    return lines.slice(7);
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Compose a per-call preservation block that prepends dynamic lines
+ * (locked entities, history beats, user edits) to the static rules.
+ * Pass the result as the {PRESERVATION_RULES_DYNAMIC} substitution
+ * into each pass's instruction.
+ */
+function preservationBlockFor(settlement: any): string {
+  const dyn = dynamicPreservationLines(settlement);
+  if (dyn.length === 0) return PRESERVATION_RULES;
+  return `${PRESERVATION_RULES}\n\nSETTLEMENT-SPECIFIC CONSTRAINTS (do not violate any of these):\n- ${dyn.join('\n- ')}`;
+}
 
 const THESIS_INSTRUCTION = `Write a 2-3 sentence IDENTITY STATEMENT for this settlement. In the first sentence, name what it IS at its core — the single specific truth that defines it. In the second (and optional third) sentence, name the central tension or contradiction that animates daily life here. This is the authorial voice that every subsequent description will inherit.
 
@@ -150,6 +190,41 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
     ),
     prominentRelationship: s.prominentRelationship?.phrasing,
   };
+}
+
+/**
+ * Tier 6.8 — augment the bespoke summary with the structured
+ * grounding envelope. The envelope brings in the canonical lists of
+ * locked entities and user-edited fields the AI must preserve. We
+ * splice them into the summary at a named key so the thesis prompt
+ * sees them alongside the existing fields without changing the
+ * field surface the prompt template already references.
+ *
+ * Pure read; on any failure, falls back to the un-augmented summary.
+ */
+function augmentSummaryWithGrounding(
+  settlement: Record<string, unknown>,
+  summary: Record<string, unknown>,
+): Record<string, unknown> {
+  try {
+    const payload = buildAiGroundingPayload(settlement, { topHooks: 5 }) as any;
+    const locked  = Array.isArray(payload?.constraints?.lockedEntities) ? payload.constraints.lockedEntities : [];
+    const edits   = Array.isArray(payload?.userEdits) ? payload.userEdits : [];
+    const augmented: Record<string, unknown> = { ...summary };
+    if (locked.length > 0) {
+      augmented._lockedEntities = locked.map((e: any) => ({
+        type: e.type, label: e.label, source: e.source,
+      }));
+    }
+    if (edits.length > 0) {
+      augmented._userEdits = edits.map((e: any) => ({
+        kind: e.kind, label: e.label, path: e.path, value: e.value,
+      }));
+    }
+    return augmented;
+  } catch {
+    return summary;
+  }
 }
 
 function buildThesisPrompt(summary: Record<string, unknown>): string {
@@ -947,6 +1022,8 @@ function buildRefinementPrompt(
   priorValue?: unknown,
   /** Human-readable change label ("Add market: Silver Crescent") — used in progression mode */
   changeLabel?: string,
+  /** Tier 6.8 — per-call dynamic preservation block (locked entities + user edits). */
+  dynamicPreservationBlock?: string,
 ): string {
   const priorBlock = priorValue != null && !isEmptyPayload(priorValue)
     ? `
@@ -960,7 +1037,19 @@ ${changeLabel || '(unlabeled change)'}
 Your job is to EVOLVE the prior prose to match the new facts. Keep every sentence from the prior version that is still accurate. Rewrite only what the change invalidates. Do not introduce material that wasn't in the prior version AND isn't demanded by the new facts.`
     : '';
 
-  return `You are a worldbuilding narrator for tabletop RPGs. You wrote the thesis below. Now you are REFINING prose in-place for specific data fields.
+  // Tier 6.8 — settlement-specific preservation block. When dynamic
+  // lines exist (locked entities, history beats, user-edited fields),
+  // they're prepended above THESIS so the AI sees specific names +
+  // paths to leave alone before reading the task instructions.
+  const dynamicBlock = dynamicPreservationBlock && dynamicPreservationBlock !== PRESERVATION_RULES
+    ? `
+
+SETTLEMENT-SPECIFIC PRESERVATION (read this before the task — these are non-negotiable):
+${dynamicPreservationBlock.split('\n').filter(l => l.startsWith('- ') || l.startsWith('SETTLEMENT')).join('\n')}
+`
+    : '';
+
+  return `You are a worldbuilding narrator for tabletop RPGs. You wrote the thesis below. Now you are REFINING prose in-place for specific data fields.${dynamicBlock}
 
 THESIS (inherit this voice; reference its themes subtly; do not repeat it):
 """
@@ -1516,7 +1605,20 @@ serve(async (req) => {
       postSpendBalance = result.elevated ? 999999 : result.balance;
     }
 
-    const summary = summarizeSettlement(settlement);
+    // Tier 6.8 — augment the bespoke summary with the structured
+    // grounding envelope so the AI sees locked entities + user edits.
+    const summary = augmentSummaryWithGrounding(
+      settlement as Record<string, unknown>,
+      summarizeSettlement(settlement as Record<string, unknown>),
+    );
+    // Per-call preservation block — adds settlement-specific MUST
+    // PRESERVE lines on top of the static PRESERVATION_RULES. Threaded
+    // into refinement-pass prompt building below.
+    const dynamicPreservation = preservationBlockFor(settlement);
+    // Optional debug spine. The summarizer is exposed for future
+    // logging hooks (e.g. "what went into the prompt for save X?")
+    // without changing the wire format.
+    void summarizeGroundingPayload;
 
     // Streaming NDJSON response
     const encoder = new TextEncoder();
@@ -1669,6 +1771,7 @@ serve(async (req) => {
                   payload,
                   isEmptyPayload(priorValue) ? undefined : priorValue,
                   typeof changeLabel === 'string' ? changeLabel : undefined,
+                  dynamicPreservation,
                 );
                 const raw = await callAnthropic(prompt, spec.max_tokens, REFINEMENT_MODEL);
                 const parsed = safeJsonParse(raw);
@@ -1758,7 +1861,7 @@ serve(async (req) => {
                 return;
               }
 
-              const prompt = buildRefinementPrompt(spec.instruction, thesis, summary, payload);
+              const prompt = buildRefinementPrompt(spec.instruction, thesis, summary, payload, undefined, undefined, dynamicPreservation);
               const raw = await callAnthropic(prompt, spec.max_tokens, REFINEMENT_MODEL);
               const parsed = safeJsonParse(raw);
 

@@ -8,6 +8,7 @@
     "build": "vite build",
     "validate:data": "node scripts/find-duplicate-keys.js",
     "fix:data": "node scripts/fix-duplicate-keys.js",
+    "build:edge-shared": "node scripts/build-edge-shared.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/ tests/ scripts/",
     "test": "vitest run",

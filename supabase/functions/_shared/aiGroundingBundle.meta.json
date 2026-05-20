@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-05-20T18:18:15.404Z",
+  "entry": "src/domain/aiGrounding.js",
+  "sourceHash": "73c5b88cc593242b",
+  "inputs": [
+    "src/domain/activeConditions.js",
+    "src/domain/aiGrounding.js",
+    "src/domain/canonStatus.js",
+    "src/domain/capacityModel.js",
+    "src/domain/causalState.js",
+    "src/domain/contradictions.js",
+    "src/domain/dailyLife.js",
+    "src/domain/districtProfile.js",
+    "src/domain/factionProfile.js",
+    "src/domain/historyBeats.js",
+    "src/domain/hookEscalation.js",
+    "src/domain/npcProfile.js",
+    "src/domain/regionalGraph.js",
+    "src/domain/simulationSpine.js",
+    "src/domain/supplyChainState.js",
+    "src/domain/threatProfile.js",
+    "src/domain/userEdits.js"
+  ]
+}
