@@ -743,6 +743,25 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'generated' | 'user' | 'event' | 'ai_overlay'} CanonSource
+ */
+
+/**
+ * @typedef {'draft' | 'canon' | 'optional' | 'superseded'} CanonStatus
+ */
+
+/**
+ * @typedef {Object} CanonTag
+ *
+ * Tier 5.3 canon-boundary metadata produced by
+ * domain/canonStatus.js#tagEntityCanon.
+ *
+ * @property {CanonSource} source
+ * @property {CanonStatus} canonStatus
+ * @property {boolean} locked       Will survive a reroll (user-pinned / event-committed).
+ */
+
+/**
  * @typedef {Object} RegenerationDelta
  *
  * Tier 5.1 structured diff between two settlement snapshots, produced
