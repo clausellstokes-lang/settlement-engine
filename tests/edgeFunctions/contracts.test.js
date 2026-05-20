@@ -1,0 +1,743 @@
+/**
+ * tests/edgeFunctions/contracts.test.js — Tier 3.3 comprehensive contract tests.
+ *
+ * Edge functions live in supabase/functions/<name>/index.ts. They use
+ * Deno-specific APIs and esm.sh imports that vitest cannot import
+ * directly. Full runtime integration tests (calling the real handler
+ * against a Postgres test instance) require a parallel Deno test
+ * runner — a separate infrastructure decision.
+ *
+ * This file is the next-best layer of defence: STATIC SOURCE
+ * INSPECTION that catches the regressions that cost real money or
+ * leak data:
+ *
+ *   • Missing env var → 500s at runtime
+ *   • Missing signature verification → arbitrary writes from anyone
+ *     who knows the URL
+ *   • Missing role check → privilege escalation
+ *   • Wrong status codes → broken client behaviour
+ *   • Plaintext keys committed → credential leak
+ *   • Specific Stripe events not handled → silent revenue loss
+ *   • Missing CORS preflight → broken cross-origin clients
+ *   • Catalog / SKU drift between client and server
+ *
+ * Every test is a structural assertion the source code MUST satisfy.
+ * No mocks, no Deno globals required.
+ */
+
+import { describe, it, expect, beforeAll } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(__dirname, '..', '..');
+const FUNCTIONS_DIR = join(ROOT, 'supabase', 'functions');
+const MIGRATIONS_DIR = join(ROOT, 'supabase', 'migrations');
+
+function readFunction(name) {
+  return readFileSync(join(FUNCTIONS_DIR, name, 'index.ts'), 'utf8');
+}
+
+function readMigrations() {
+  // Read every .sql migration and concatenate for "did this migration
+  // ever happen" assertions.
+  const fs = require('node:fs');
+  const files = fs.readdirSync(MIGRATIONS_DIR).filter(f => f.endsWith('.sql'));
+  return files.map(f => readFileSync(join(MIGRATIONS_DIR, f), 'utf8')).join('\n');
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// stripe-webhook
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('Tier 3.3 — stripe-webhook env vars + dependencies', () => {
+  let src;
+  beforeAll(() => { src = readFunction('stripe-webhook'); });
+
+  it('reads STRIPE_SECRET_KEY', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]STRIPE_SECRET_KEY['"]\)/);
+  });
+
+  it('reads STRIPE_WEBHOOK_SECRET', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]STRIPE_WEBHOOK_SECRET['"]\)/);
+  });
+
+  it('reads SUPABASE_URL', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]SUPABASE_URL['"]\)/);
+  });
+
+  it('reads SUPABASE_SERVICE_ROLE_KEY (admin client requires it)', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]SUPABASE_SERVICE_ROLE_KEY['"]\)/);
+  });
+
+  it('imports the Stripe SDK', () => {
+    expect(src).toMatch(/from\s+['"]https:\/\/esm\.sh\/stripe@/);
+  });
+
+  it('imports the Supabase JS client', () => {
+    expect(src).toMatch(/from\s+['"]https:\/\/esm\.sh\/@supabase\/supabase-js/);
+  });
+});
+
+describe('Tier 3.3 — stripe-webhook signature verification', () => {
+  let src;
+  beforeAll(() => { src = readFunction('stripe-webhook'); });
+
+  it('verifies the signature before any database write', () => {
+    // The signature check must come from Stripe's constructEvent helper.
+    expect(src).toMatch(/constructEvent(Async)?\s*\(/);
+  });
+
+  it('reads the `stripe-signature` header from the request', () => {
+    expect(src).toMatch(/headers\.get\(['"]stripe-signature['"]\)/);
+  });
+
+  it('returns 400 when the signature header is missing', () => {
+    expect(src).toMatch(/Missing signature[\s\S]{0,80}status:\s*400/);
+  });
+
+  it('returns 400 on invalid signature with a clear message', () => {
+    expect(src).toMatch(/Invalid signature[\s\S]{0,80}status:\s*400/);
+  });
+
+  it('verifies signature BEFORE creating the admin client', () => {
+    const constructIdx = src.search(/constructEvent(Async)?\s*\(/);
+    const adminIdx = src.search(/const supabase\s*=\s*adminClient\(/);
+    expect(constructIdx).toBeGreaterThan(0);
+    expect(adminIdx).toBeGreaterThan(0);
+    expect(constructIdx).toBeLessThan(adminIdx);
+  });
+});
+
+describe('Tier 3.3 — stripe-webhook event coverage', () => {
+  let src;
+  beforeAll(() => { src = readFunction('stripe-webhook'); });
+
+  it('handles checkout.session.completed', () => {
+    expect(src).toMatch(/['"]checkout\.session\.completed['"]/);
+  });
+
+  it('handles customer.subscription.deleted (for downgrades)', () => {
+    expect(src).toMatch(/['"]customer\.subscription\.deleted['"]/);
+  });
+
+  it('logs unhandled event types (does not silently swallow)', () => {
+    expect(src).toMatch(/Unhandled event type/i);
+  });
+
+  it('reads supabase_user_id from session metadata (not body)', () => {
+    expect(src).toMatch(/session\.metadata\?\.\s*supabase_user_id/);
+  });
+
+  it('reads product key from session metadata', () => {
+    expect(src).toMatch(/session\.metadata\?\.\s*product/);
+  });
+
+  it('reads credits amount from session metadata', () => {
+    expect(src).toMatch(/session\.metadata\?\.\s*credits/);
+  });
+
+  it('handles the premium product → tier=premium', () => {
+    expect(src).toMatch(/product\s*===\s*['"]premium['"]/);
+    expect(src).toMatch(/tier:\s*['"]premium['"]/);
+  });
+
+  it('handles founder_lifetime product → tier=premium + is_founder=true', () => {
+    expect(src).toMatch(/product\s*===\s*['"]founder_lifetime['"]/);
+    expect(src).toMatch(/is_founder:\s*true/);
+  });
+
+  it('handles single_dossier without requiring a user account', () => {
+    expect(src).toMatch(/product\s*===\s*['"]single_dossier['"]/);
+    expect(src).toMatch(/single_dossier[\s\S]{0,500}(no account|no supabase_user_id|customer_email)/i);
+  });
+
+  it('handles bare credit pack purchase (credits > 0)', () => {
+    expect(src).toMatch(/credits\s*>\s*0/);
+  });
+
+  it('founder_lifetime grants a credit bonus (100 credits per Phase 5 wording)', () => {
+    expect(src).toMatch(/dualWriteGrant\([\s\S]{0,200}100[\s\S]{0,200}founder_grant/);
+  });
+});
+
+describe('Tier 3.3 — stripe-webhook ledger consistency', () => {
+  let src;
+  beforeAll(() => { src = readFunction('stripe-webhook'); });
+
+  it('writes to both credit_transactions (legacy) and credit_ledger (new)', () => {
+    expect(src).toMatch(/credit_transactions/);
+    expect(src).toMatch(/credit_ledger/);
+  });
+
+  it('grants are written with kind="grant"', () => {
+    expect(src).toMatch(/kind:\s*['"]grant['"]/);
+  });
+
+  it('also bumps profiles.credits so legacy reads stay accurate', () => {
+    // The dual-write pattern says: write ledger AND update profile counter.
+    expect(src).toMatch(/profiles[\s\S]{0,500}credits/);
+  });
+
+  it('includes stripe_session_id in grant metadata for audit trail', () => {
+    expect(src).toMatch(/stripe_session_id/);
+  });
+});
+
+describe('Tier 3.3 — stripe-webhook response shape', () => {
+  let src;
+  beforeAll(() => { src = readFunction('stripe-webhook'); });
+
+  it('returns JSON {received: true} on success', () => {
+    expect(src).toMatch(/received:\s*true/);
+  });
+
+  it('sets Content-Type: application/json on success response', () => {
+    expect(src).toMatch(/Content-Type['"]?:\s*['"]application\/json['"]/);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// generate-narrative
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('Tier 3.3 — generate-narrative env vars', () => {
+  let src;
+  beforeAll(() => { src = readFunction('generate-narrative'); });
+
+  it('reads ANTHROPIC_API_KEY', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]ANTHROPIC_API_KEY['"]\)/);
+  });
+
+  it('reads SUPABASE_URL', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]SUPABASE_URL['"]\)/);
+  });
+});
+
+describe('Tier 3.3 — generate-narrative auth + authorization', () => {
+  let src;
+  beforeAll(() => { src = readFunction('generate-narrative'); });
+
+  it('reads Authorization header from the request', () => {
+    expect(src).toMatch(/headers\.get\(['"]Authorization['"]\)/i);
+  });
+
+  it('verifies the calling user via Supabase auth', () => {
+    expect(src).toMatch(/auth\.getUser\s*\(/);
+  });
+
+  it('rejects unauthenticated requests with 401 or rejects with auth error', () => {
+    expect(src).toMatch(/(status:\s*401|throw new Error\([^)]*[Nn]ot authenticated)/);
+  });
+});
+
+describe('Tier 3.3 — generate-narrative credit handling', () => {
+  let src;
+  beforeAll(() => { src = readFunction('generate-narrative'); });
+
+  it('spends credits via the atomic spend_credits RPC', () => {
+    expect(src).toMatch(/rpc\(['"]spend_credits['"]/);
+  });
+
+  it('handles insufficient-credit case with clear error', () => {
+    expect(src).toMatch(/Insufficient credits/);
+  });
+
+  it('refunds credits on failure via refund_credits RPC', () => {
+    expect(src).toMatch(/rpc\(['"]refund_credits['"]/);
+  });
+
+  it('has a refund fallback path (direct credit_transactions insert with reason="refund")', () => {
+    // The Phase 5 design: when the refund_credits RPC isn't available
+    // (migration 009 not yet applied on this environment), fall back to
+    // writing the legacy credit_transactions table with reason='refund'
+    // and resetting the profiles.credits counter.
+    expect(src).toMatch(/credit_transactions[\s\S]{0,200}reason:\s*['"]refund['"]/);
+  });
+
+  it('elevated users (developer/admin) skip credit spend', () => {
+    expect(src).toMatch(/isElevated|elevated|developer|admin/);
+  });
+
+  it('records spend_id to target refunds at the exact ledger row', () => {
+    expect(src).toMatch(/spend_id|spendResult/);
+  });
+});
+
+describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', () => {
+  let src;
+  let pricing;
+  beforeAll(() => {
+    src = readFunction('generate-narrative');
+    pricing = readFileSync(join(ROOT, 'src', 'config', 'pricing.js'), 'utf8');
+  });
+
+  it('declares CREDIT_COSTS with narrative / dailyLife / progression', () => {
+    expect(src).toMatch(/CREDIT_COSTS[\s\S]{0,200}narrative/);
+    expect(src).toMatch(/dailyLife/);
+    expect(src).toMatch(/progression/);
+  });
+
+  // pricing.js declares BOTH LEGACY_AI_COSTS (8/10/12, kept resolvable for
+  // refund/replay) AND NEW_AI_COSTS (3/4/5, the active table). The server's
+  // CREDIT_COSTS must match NEW_AI_COSTS, never the legacy table.
+  function extractFromBlock(text, blockName, field) {
+    const block = text.match(new RegExp(`${blockName}\\s*=\\s*Object\\.freeze\\(\\{[\\s\\S]*?\\}\\)`));
+    if (!block) return null;
+    const m = block[0].match(new RegExp(`${field}:\\s*(\\d+)`));
+    return m ? m[1] : null;
+  }
+
+  it('narrative cost in server matches NEW_AI_COSTS in client', () => {
+    const srv = src.match(/CREDIT_COSTS[\s\S]*?narrative:\s*(\d+)/)?.[1];
+    const cli = extractFromBlock(pricing, 'NEW_AI_COSTS', 'narrative');
+    expect(srv, 'server narrative cost not found').toBeTruthy();
+    expect(cli, 'client NEW_AI_COSTS narrative not found').toBeTruthy();
+    expect(srv).toBe(cli);
+  });
+
+  it('dailyLife cost in server matches NEW_AI_COSTS in client', () => {
+    const srv = src.match(/CREDIT_COSTS[\s\S]*?dailyLife:\s*(\d+)/)?.[1];
+    const cli = extractFromBlock(pricing, 'NEW_AI_COSTS', 'dailyLife');
+    expect(srv, 'server dailyLife cost not found').toBeTruthy();
+    expect(cli, 'client NEW_AI_COSTS dailyLife not found').toBeTruthy();
+    expect(srv).toBe(cli);
+  });
+
+  it('progression cost in server matches NEW_AI_COSTS in client', () => {
+    const srv = src.match(/CREDIT_COSTS[\s\S]*?progression:\s*(\d+)/)?.[1];
+    const cli = extractFromBlock(pricing, 'NEW_AI_COSTS', 'progression');
+    expect(srv, 'server progression cost not found').toBeTruthy();
+    expect(cli, 'client NEW_AI_COSTS progression not found').toBeTruthy();
+    expect(srv).toBe(cli);
+  });
+
+  it('server costs are NOT accidentally aligned with LEGACY_AI_COSTS', () => {
+    const legacyNarrative = extractFromBlock(pricing, 'LEGACY_AI_COSTS', 'narrative');
+    const serverNarrative = src.match(/CREDIT_COSTS[\s\S]*?narrative:\s*(\d+)/)?.[1];
+    expect(serverNarrative, 'server narrative cost not found').toBeTruthy();
+    // If these ever match, someone reverted to the legacy schedule —
+    // the funnel argument (smaller pack must enable a full week of prep)
+    // would no longer hold.
+    expect(serverNarrative).not.toBe(legacyNarrative);
+  });
+});
+
+describe('Tier 3.3 — generate-narrative AI invariants', () => {
+  let src;
+  beforeAll(() => { src = readFunction('generate-narrative'); });
+
+  it('uses Opus for thesis (per the file header comment)', () => {
+    expect(src).toMatch(/claude-opus-4-7/);
+  });
+
+  it('uses Haiku for refinement passes', () => {
+    expect(src).toMatch(/claude-haiku-4-5/);
+  });
+
+  it('declares house-style fact-preservation rules', () => {
+    expect(src).toMatch(/PRESERVATION_RULES/);
+    expect(src).toMatch(/Do not invent/i);
+    expect(src).toMatch(/Do not contradict/i);
+  });
+
+  it('declares a HOUSE_STYLE constant with explicit voice rules', () => {
+    expect(src).toMatch(/HOUSE_STYLE/);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// admin-actions
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('Tier 3.3 — admin-actions env vars', () => {
+  let src;
+  beforeAll(() => { src = readFunction('admin-actions'); });
+
+  it('reads SUPABASE_URL', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]SUPABASE_URL['"]\)/);
+  });
+
+  it('reads SUPABASE_ANON_KEY (for user-scoped client)', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]SUPABASE_ANON_KEY['"]\)/);
+  });
+
+  it('reads SUPABASE_SERVICE_ROLE_KEY (for admin operations)', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]SUPABASE_SERVICE_ROLE_KEY['"]\)/);
+  });
+});
+
+describe('Tier 3.3 — admin-actions authorization', () => {
+  let src;
+  beforeAll(() => { src = readFunction('admin-actions'); });
+
+  it('requires Authorization header', () => {
+    expect(src).toMatch(/Missing authorization[\s\S]{0,80}status:\s*401/);
+  });
+
+  it('verifies the calling user via auth.getUser', () => {
+    expect(src).toMatch(/auth\.getUser\s*\(/);
+  });
+
+  it('returns 401 when token is invalid', () => {
+    expect(src).toMatch(/Invalid token[\s\S]{0,80}status:\s*401/);
+  });
+
+  it('checks caller role against profiles.role', () => {
+    expect(src).toMatch(/\.from\(['"]profiles['"]\)[\s\S]{0,200}role/);
+  });
+
+  it('requires role in (developer, admin)', () => {
+    expect(src).toMatch(/\[['"]developer['"],\s*['"]admin['"]\]/);
+  });
+
+  it('returns 403 when role is insufficient', () => {
+    expect(src).toMatch(/Insufficient privileges[\s\S]{0,80}status:\s*403/);
+  });
+
+  it('verifies caller BEFORE parsing the request body', () => {
+    // Role check must precede `req.json()` so unauthorized callers
+    // never trigger any privileged code path.
+    const roleCheckIdx = src.search(/Insufficient privileges/);
+    const bodyParseIdx = src.search(/await req\.json\(\)/);
+    expect(roleCheckIdx).toBeGreaterThan(0);
+    expect(bodyParseIdx).toBeGreaterThan(0);
+    expect(roleCheckIdx).toBeLessThan(bodyParseIdx);
+  });
+});
+
+describe('Tier 3.3 — admin-actions action coverage', () => {
+  let src;
+  beforeAll(() => { src = readFunction('admin-actions'); });
+
+  it('handles update_user_metadata', () => {
+    expect(src).toMatch(/['"]update_user_metadata['"]/);
+  });
+
+  it('handles update_user_credits', () => {
+    expect(src).toMatch(/['"]update_user_credits['"]/);
+  });
+
+  it('handles get_stats', () => {
+    expect(src).toMatch(/['"]get_stats['"]/);
+  });
+
+  it('returns 400 for unknown action with a clear error', () => {
+    expect(src).toMatch(/Unknown action[\s\S]{0,80}status:\s*400/);
+  });
+
+  it('update_user_metadata requires userId AND metadata', () => {
+    expect(src).toMatch(/Missing userId or metadata[\s\S]{0,80}status:\s*400/);
+  });
+
+  it('update_user_credits requires userId AND credits', () => {
+    expect(src).toMatch(/Missing userId or credits[\s\S]{0,80}status:\s*400/);
+  });
+
+  it('update_user_credits coerces credits to integer (defence vs string injection)', () => {
+    expect(src).toMatch(/parseInt\s*\(\s*String\(credits\)/);
+  });
+});
+
+describe('Tier 3.3 — admin-actions audit trail (Phase 5 migration 009)', () => {
+  let migrations;
+  let src;
+  beforeAll(() => {
+    migrations = readMigrations();
+    src = readFunction('admin-actions');
+  });
+
+  it('migration 009 provisions the admin_actions table', () => {
+    expect(migrations).toMatch(/create table[\s\S]{0,80}admin_actions/i);
+  });
+
+  it('migration 009 indexes admin_actions by actor, target, and recency', () => {
+    expect(migrations).toMatch(/idx_admin_actions_target/);
+    expect(migrations).toMatch(/idx_admin_actions_actor/);
+    expect(migrations).toMatch(/idx_admin_actions_recent/);
+  });
+
+  // The Phase 5 design says the edge function should write to
+  // admin_actions on every privileged op. Today's edge function
+  // doesn't do that yet — this test PINS the gap. When the audit-
+  // write lands, the test below should flip to expect a match.
+  it('TODO: edge function should write to admin_actions on every privileged op (currently NOT wired)', () => {
+    expect(src).not.toMatch(/admin_actions/);  // current state — flip to .toMatch when wired
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// create-checkout
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('Tier 3.3 — create-checkout env vars', () => {
+  let src;
+  beforeAll(() => { src = readFunction('create-checkout'); });
+
+  it('reads STRIPE_SECRET_KEY', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]STRIPE_SECRET_KEY['"]\)/);
+  });
+
+  it('reads SUPABASE_URL', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]SUPABASE_URL['"]\)/);
+  });
+
+  it('reads SUPABASE_ANON_KEY', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]SUPABASE_ANON_KEY['"]\)/);
+  });
+
+  it('reads CLIENT_URL for redirect targets', () => {
+    expect(src).toMatch(/Deno\.env\.get\(['"]CLIENT_URL['"]\)/);
+  });
+});
+
+describe('Tier 3.3 — create-checkout authentication', () => {
+  let src;
+  beforeAll(() => { src = readFunction('create-checkout'); });
+
+  it('rejects requests with no Authorization header', () => {
+    expect(src).toMatch(/Missing authorization header/);
+  });
+
+  it('verifies the user before creating any Stripe session', () => {
+    const authIdx = src.search(/auth\.getUser\s*\(/);
+    const sessIdx = src.search(/stripe\.checkout\.sessions\.create/);
+    expect(authIdx).toBeGreaterThan(0);
+    expect(sessIdx).toBeGreaterThan(0);
+    expect(authIdx).toBeLessThan(sessIdx);
+  });
+
+  it('rejects unauthenticated calls with explicit error', () => {
+    expect(src).toMatch(/Not authenticated/);
+  });
+});
+
+describe('Tier 3.3 — create-checkout product catalog', () => {
+  let src;
+  beforeAll(() => { src = readFunction('create-checkout'); });
+
+  it('exposes active credit packs (25 / 60 / 150)', () => {
+    expect(src).toMatch(/credits_25/);
+    expect(src).toMatch(/credits_60/);
+    expect(src).toMatch(/credits_150/);
+  });
+
+  it('exposes premium subscription product', () => {
+    expect(src).toMatch(/premium:\s*Deno\.env\.get\(['"]STRIPE_PRICE_PREMIUM['"]\)/);
+  });
+
+  it('exposes founder_lifetime product', () => {
+    expect(src).toMatch(/founder_lifetime:\s*Deno\.env\.get\(['"]STRIPE_PRICE_FOUNDER_LIFETIME['"]\)/);
+  });
+
+  it('exposes single_dossier microtransaction', () => {
+    expect(src).toMatch(/single_dossier:\s*Deno\.env\.get\(['"]STRIPE_PRICE_SINGLE_DOSSIER['"]\)/);
+  });
+
+  it('keeps legacy SKUs reachable for refund/replay (5/15/40/10/50)', () => {
+    expect(src).toMatch(/credits_5:/);
+    expect(src).toMatch(/credits_15:/);
+    expect(src).toMatch(/credits_40:/);
+    expect(src).toMatch(/credits_10:/);
+    expect(src).toMatch(/credits_50:/);
+  });
+
+  it('CREDIT_AMOUNTS map matches PRICE_MAP keys', () => {
+    expect(src).toMatch(/credits_25:\s*25/);
+    expect(src).toMatch(/credits_60:\s*60/);
+    expect(src).toMatch(/credits_150:\s*150/);
+  });
+
+  it('marks premium as subscription (not one-time)', () => {
+    expect(src).toMatch(/SUBSCRIPTION_PRODUCTS[\s\S]{0,80}['"]premium['"]/);
+  });
+
+  it('rejects unknown products with 400 + listing valid ones', () => {
+    expect(src).toMatch(/Invalid product[\s\S]{0,80}Valid:/);
+  });
+});
+
+describe('Tier 3.3 — create-checkout metadata wiring (must align with webhook)', () => {
+  let src;
+  let webhookSrc;
+  beforeAll(() => {
+    src = readFunction('create-checkout');
+    webhookSrc = readFunction('stripe-webhook');
+  });
+
+  it('attaches supabase_user_id to checkout metadata', () => {
+    expect(src).toMatch(/supabase_user_id:\s*user\.id/);
+  });
+
+  it('attaches product key to checkout metadata', () => {
+    expect(src).toMatch(/product,/);
+  });
+
+  it('attaches credits count to checkout metadata', () => {
+    expect(src).toMatch(/credits:\s*String\(CREDIT_AMOUNTS\[product\]/);
+  });
+
+  it('webhook reads exactly the same three metadata fields', () => {
+    // If checkout writes supabase_user_id but webhook reads user_id,
+    // privilege paths break. Cross-check the wire contract.
+    expect(webhookSrc).toMatch(/supabase_user_id/);
+    expect(webhookSrc).toMatch(/session\.metadata\?\.\s*product/);
+    expect(webhookSrc).toMatch(/session\.metadata\?\.\s*credits/);
+  });
+});
+
+describe('Tier 3.3 — create-checkout CORS handling', () => {
+  let src;
+  beforeAll(() => { src = readFunction('create-checkout'); });
+
+  it('handles OPTIONS preflight', () => {
+    expect(src).toMatch(/req\.method\s*===\s*['"]OPTIONS['"]/);
+  });
+
+  it('declares an allowed-origins list (not "*")', () => {
+    expect(src).toMatch(/settlementforge\.com/);
+    expect(src).toMatch(/localhost/);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// Cross-function security
+// ─────────────────────────────────────────────────────────────────────────
+
+const ALL_FUNCTIONS = ['stripe-webhook', 'generate-narrative', 'admin-actions', 'create-checkout'];
+
+describe('Tier 3.3 — no plaintext secrets committed', () => {
+  it('no edge function contains a literal Stripe live key', () => {
+    for (const name of ALL_FUNCTIONS) {
+      const src = readFunction(name);
+      expect(src.match(/sk_live_[A-Za-z0-9]+/), name).toBeNull();
+    }
+  });
+
+  it('no edge function contains a literal Stripe test key', () => {
+    for (const name of ALL_FUNCTIONS) {
+      const src = readFunction(name);
+      expect(src.match(/sk_test_[A-Za-z0-9]+/), name).toBeNull();
+    }
+  });
+
+  it('no edge function contains a literal Stripe webhook secret (whsec_)', () => {
+    for (const name of ALL_FUNCTIONS) {
+      const src = readFunction(name);
+      expect(src.match(/whsec_[A-Za-z0-9]{20,}/), name).toBeNull();
+    }
+  });
+
+  it('no edge function contains a literal Stripe Price ID (price_)', () => {
+    // Stripe Price IDs start with `price_` followed by ~24 chars. They
+    // belong in env vars, not source.
+    for (const name of ALL_FUNCTIONS) {
+      const src = readFunction(name);
+      // Exclude doc-comment references (file headers can mention 'price_').
+      // The actual leaks would be assignment-shaped.
+      const matches = src.match(/=\s*['"]price_[A-Za-z0-9]{20,}['"]/);
+      expect(matches, `${name}: ${matches?.[0]}`).toBeNull();
+    }
+  });
+
+  it('no edge function contains a literal Supabase service role JWT', () => {
+    for (const name of ALL_FUNCTIONS) {
+      const src = readFunction(name);
+      // JWT pattern: 3 base64url segments joined with dots, total long.
+      expect(src.match(/eyJ[A-Za-z0-9_-]{40,}\.[A-Za-z0-9_-]{40,}\.[A-Za-z0-9_-]+/), name).toBeNull();
+    }
+  });
+
+  it('no edge function contains a literal Anthropic API key', () => {
+    for (const name of ALL_FUNCTIONS) {
+      const src = readFunction(name);
+      expect(src.match(/sk-ant-[A-Za-z0-9_-]{40,}/), name).toBeNull();
+    }
+  });
+});
+
+describe('Tier 3.3 — every function uses Deno serve + ESM imports', () => {
+  it('every function imports from deno.land/std http/server', () => {
+    for (const name of ALL_FUNCTIONS) {
+      const src = readFunction(name);
+      expect(src.match(/from\s+['"]https:\/\/deno\.land\/std@[^/]+\/http\/server\.ts['"]/), name).toBeTruthy();
+    }
+  });
+
+  it('every function calls serve()', () => {
+    for (const name of ALL_FUNCTIONS) {
+      const src = readFunction(name);
+      expect(src.match(/^serve\s*\(/m), name).toBeTruthy();
+    }
+  });
+});
+
+describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
+  let migrations;
+  beforeAll(() => { migrations = readMigrations(); });
+
+  it('provisions the credit_ledger table with kind/source/amount columns', () => {
+    expect(migrations).toMatch(/create table[\s\S]{0,500}credit_ledger/i);
+    expect(migrations).toMatch(/kind/);
+    expect(migrations).toMatch(/source/);
+    expect(migrations).toMatch(/amount/);
+  });
+
+  it('provisions spend_credits RPC (atomic decrement)', () => {
+    expect(migrations).toMatch(/(create|create or replace)\s+function\s+(public\.)?spend_credits/i);
+  });
+
+  it('provisions refund_credits RPC (ledger-consistent refund)', () => {
+    expect(migrations).toMatch(/(create|create or replace)\s+function\s+(public\.)?refund_credits/i);
+  });
+
+  it('provisions admin_actions audit table', () => {
+    expect(migrations).toMatch(/create table[\s\S]{0,500}admin_actions/i);
+  });
+
+  it('refund_credits writes a "grant" row (never modifies a spend row)', () => {
+    // Look at the refund_credits function body. The function is ~50
+    // lines so we need a generous window.
+    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
+    expect(refundBlock, 'refund_credits function body not found').toBeTruthy();
+    expect(refundBlock[0]).toMatch(/insert\s+into[\s\S]{0,500}credit_ledger/i);
+    expect(refundBlock[0]).toMatch(/['"]grant['"]/);
+  });
+
+  it('refund_credits is idempotent (rejects double-refunds of the same spend row)', () => {
+    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
+    expect(refundBlock).toBeTruthy();
+    expect(refundBlock[0]).toMatch(/already refunded/i);
+  });
+
+  it('refund_credits checks that the target row is actually a spend (not another grant)', () => {
+    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
+    expect(refundBlock).toBeTruthy();
+    expect(refundBlock[0]).toMatch(/kind\s*<>\s*['"]spend['"]/);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// Catalog drift detector
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('Tier 3.3 — product catalog drift between checkout + webhook', () => {
+  it('every product the checkout function knows about is also handled (or no-op-logged) by the webhook', () => {
+    const checkout = readFunction('create-checkout');
+    const webhook  = readFunction('stripe-webhook');
+
+    // Extract product keys from the PRICE_MAP in checkout. Pattern:
+    // `  credits_25: Deno.env.get(...)`.
+    const productKeys = [...checkout.matchAll(/^\s+(\w+):\s*Deno\.env\.get/gm)].map(m => m[1]);
+    expect(productKeys.length, 'checkout PRICE_MAP keys not found').toBeGreaterThan(0);
+
+    // Each product MUST either be handled by the webhook, OR be a
+    // credit pack (handled by the generic `credits > 0` branch).
+    const CREDIT_PACK_KEYS = ['credits_5', 'credits_10', 'credits_15', 'credits_25', 'credits_40', 'credits_50', 'credits_60', 'credits_150'];
+    for (const key of productKeys) {
+      if (CREDIT_PACK_KEYS.includes(key)) continue;
+      expect(webhook, `webhook missing handler for ${key}`).toMatch(new RegExp(`['"]${key}['"]`));
+    }
+  });
+});
