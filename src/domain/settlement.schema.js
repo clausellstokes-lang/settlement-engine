@@ -743,6 +743,31 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {Object} AiGroundingPayload
+ *
+ * Tier 6.1 structured AI prompt-grounding envelope produced by
+ * domain/aiGrounding.js#buildAiGroundingPayload. Composes every
+ * Tier 2-5 derivation into a single shape the prompt assembler
+ * stringifies into the dossier section of the AI call.
+ *
+ * @property {Object} identity            id / name / tier / seed / versions / canon breakdown.
+ * @property {Object} spine               7-line SimulationSpine.
+ * @property {{substrate: Object, capacities: Object}} bands  Phase 17 + Phase 21 band maps.
+ * @property {FactionProfile[]} factions  Phase 9.
+ * @property {SupplyChainState[]} chains  Phase 10.
+ * @property {ActiveCondition[]} conditions  Phase 16.
+ * @property {ThreatProfile[]} threats    Phase 20.
+ * @property {NpcProfile[]} npcs          Phase 13 (dominant rank by default).
+ * @property {HistoryBeats} history       Phase 12 (7 canonical beats).
+ * @property {StructuredHook[]} hooks     Phase 11 (top N by severity).
+ * @property {Contradiction[]} contradictions  Phase 25.
+ * @property {DailyLifeEnvelope} dailyLife  Phase 22 (8 slots).
+ * @property {DistrictProfile[]} districts  Phase 29.
+ * @property {RegionalGraph} region       Phase 30.
+ * @property {Object} constraints         { forbidden[], lockedEntities[], userDirection }.
+ */
+
+/**
  * @typedef {'nudge' | 'rebalance' | 'reforge'} RegenerationMode
  *
  * Tier 5.2 reactive regeneration modes. Nudge preserves most;
