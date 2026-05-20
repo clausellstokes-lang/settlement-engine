@@ -15,7 +15,7 @@
  */
 
 import {
-  STATUS_REMOVED, STATUS_DESTROYED,
+  STATUS_REMOVED,
   withImpairment, withoutEventImpairments,
 } from '../entities/status.js';
 import { propagateImpairment } from '../entities/propagate.js';

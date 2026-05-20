@@ -14,8 +14,6 @@
  * style themselves out of accessibility (no "ghost on ghost" combos).
  */
 
-import React from 'react';
-
 const TONES = {
   default:  { bg: '#fff',                       fg: '#1c1409', border: '#d2bd96', hover: '#fffbf5' },
   primary:  { bg: '#a0762a',                    fg: '#ffffff', border: '#a0762a', hover: '#8c651e' },

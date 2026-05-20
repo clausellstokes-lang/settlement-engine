@@ -22,7 +22,6 @@
  * graph that future propagation logic will read.
  */
 
-import { deriveAllFactionProfiles } from './factionProfile.js';
 
 // ── Catalog ──────────────────────────────────────────────────────────────
 

@@ -17,7 +17,7 @@
  * is /?view=pricing — set by the footer + header CTA.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Crown, Zap, Map as MapIcon, Sparkles, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout } from '../lib/stripe.js';

@@ -18,7 +18,6 @@
  *   narrativeMode  — true if the export should pull narrative content where
  *                    available. Drives the Cover badge and chapter accents.
  */
-import React from 'react';
 import { Document } from '@react-pdf/renderer';
 import { Cover } from './sections/Cover.jsx';
 import { TableOfContents } from './sections/TableOfContents.jsx';

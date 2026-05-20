@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import {sans, Empty, TabIntro} from '../Primitives';
+import { sans, TabIntro } from '../Primitives';
 import {isMobile} from '../tabConstants';
 import {extractSettlementContext, buildPrompt} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
@@ -8,7 +8,7 @@ import { CREDIT_COSTS } from '../../../store/creditsSlice.js';
 import { isConfigured } from '../../../lib/supabase.js';
 
 const INK = '#1c1409', MUTED = '#9c8068', SECOND = '#6b5340',
-      BORDER = '#e0d0b0', GOLD = '#a0762a', PARCH = '#fdf8f0', CARD = '#fffbf5';
+      BORDER = '#e0d0b0', GOLD = '#a0762a', PARCH = '#fdf8f0', _CARD = '#fffbf5';
 
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
@@ -39,7 +39,7 @@ const STRESS_LABELS = {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export function DailyLifeTab({ settlement: r, aiSettlement, saveId = null }) {
+export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
   const [narrative, setNarrative]   = useState(null);
   const [localLoading, setLocalLoading] = useState(false);
   const [localError, setLocalError]     = useState(null);
@@ -52,7 +52,7 @@ export function DailyLifeTab({ settlement: r, aiSettlement, saveId = null }) {
   const storeAiRegenerating = useStore(s => s.aiRegenerating);
   const storeAiError = useStore(s => s.aiError);
   const storeAiProgress = useStore(s => s.aiProgress);
-  const creditBalance = useStore(s => s.creditBalance);
+  const _creditBalance = useStore(s => s.creditBalance);
 
   if (!r) return null;
 

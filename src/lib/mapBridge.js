@@ -32,7 +32,7 @@ export function createMapBridge(getIframe, opts = {}) {
   let readyResolved = false;
   let readyPromise = null;
   let readyResolve = null;
-  let readyReject = null;
+  let _readyReject = null;
 
   // Pending RPC calls: rid -> { resolve, reject, timer, type }
   const pending = new Map();
@@ -208,7 +208,7 @@ export function createMapBridge(getIframe, opts = {}) {
     if (readyPromise) return readyPromise;
     readyPromise = new Promise((resolve, reject) => {
       readyResolve = resolve;
-      readyReject = reject;
+      _readyReject = reject;
     });
     return readyPromise;
   }
@@ -236,7 +236,7 @@ export function createMapBridge(getIframe, opts = {}) {
       messageHandler = null;
     }
     // Reject all pending calls
-    for (const [rid, entry] of pending) {
+    for (const [_rid, entry] of pending) {
       clearTimeout(entry.timer);
       entry.reject(new Error('Bridge destroyed'));
     }

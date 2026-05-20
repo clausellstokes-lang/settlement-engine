@@ -7,11 +7,11 @@
  * risks surface as a tooltip / details disclosure.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ShieldCheck, AlertTriangle, Skull, Boxes, Info } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { BAND_COLOR, BAND_HINT } from '../../domain/state/bands.js';
-import { GOLD, INK, MUTED, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { INK, MUTED, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 
 const DIM_META = {
   resilience:       { label: 'Resilience',        Icon: ShieldCheck,    higherIsBetter: true,  desc: 'Can the place absorb shocks?' },

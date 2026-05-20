@@ -25,7 +25,7 @@
  * Pure read-only. No mutation. No side effects.
  */
 
-import { getTraces, tracesByStep, tracesByType } from './trace.js';
+import { getTraces, tracesByType } from './trace.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveAllCapacities } from './capacityModel.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';

@@ -15,7 +15,6 @@
  * user name or settlement title without needing layout glue.
  */
 
-import React from 'react';
 import { Crown } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 

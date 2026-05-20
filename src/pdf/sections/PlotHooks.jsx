@@ -7,16 +7,15 @@
  * Editable fields:
  *   - hooks.<source>.<i>
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, KeyValRow, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, _KeyValRow, _BulletList, _GoldRule, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { hooksHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space } from '../theme.js';
-import { cap, label, hookText, humanize, upper } from '../lib/format.js';
+import { cap, hookText, humanize } from '../lib/format.js';
 
 const SOURCE_LABELS = {
   npc:          { label: 'NPC',          tone: 'cool' },

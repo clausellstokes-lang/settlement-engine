@@ -6,7 +6,7 @@
 import { random as _rng } from './rngContext.js';
 import { customDeps as _customDeps } from '../lib/dependencyEngine.js';
 import {
-  chance,
+  _chance,
   getInstFlags,
   getPriorities,
   getStressFlags,
@@ -374,16 +374,16 @@ const buildFactionList = (population, terrain, institutions, config) => {
   const effectiveRoute = routeOverride || config?.tradeRouteAccess || 'isolated';
   const surplus = dailyProduction - adjustedNeed;
   const rawDeficit = Math.abs(Math.min(surplus, 0));
-  const rawDeficitPct = adjustedNeed > 0 ? (rawDeficit / adjustedNeed) * 100 : 0;
+  const _rawDeficitPct = adjustedNeed > 0 ? (rawDeficit / adjustedNeed) * 100 : 0;
 
   // Import coverage: if trade route is active and food imports exist, imports cover part of deficit
   // effectiveRoute already declared above (uses routeOverride if present)
   const canImportFood = effectiveRoute !== 'isolated' && rawDeficit > 0;
   const foodImportTerms = ['grain', 'food', 'fish', 'livestock', 'dairy', 'bread', 'meat', 'provision', 'flour'];
-  const hasNecessityFood =
+  const _hasNecessityFood =
     canImportFood &&
     (config?.nearbyResources || []).length >= 0 &&
-    foodImportTerms.some((t) =>
+    foodImportTerms.some((_t) =>
       instNames.some((n) => n.includes('granary') || n.includes('market') || n.includes('inn'))
     );
   // Trade route food coverage: port/crossroads can cover more deficit than road
@@ -561,12 +561,17 @@ const buildFactionList = (population, terrain, institutions, config) => {
       stressModifier: productionMult < 1 ? productionMult : undefined,
       importCoverage: importCoverage > 0 ? Math.round(importCoverage) : undefined,
       rawDeficit: rawDeficit > deficit ? Math.round(rawDeficit) : undefined,
+      // Surface the magic-source note alongside its offset so callers
+      // can attribute the food contribution (Druidic / Divine / Arcane).
+      // Conditional inclusion keeps the field shape unchanged when no
+      // magic offset applies.
+      magicFoodNote: magicFoodNote || undefined,
     },
   };
 };
 
 // generateTradeScore
-const generateTradeScore = (deficitPercent, config = {}, institutions = []) => {
+const _generateTradeScore = (deficitPercent, config = {}, institutions = []) => {
   const econCategory = priorityToCategory(getInstFlags(config, institutions).economyOutput);
   const isIsolated = (config?.tradeRouteAccess || 'road') === 'isolated';
   if (deficitPercent <= 0) return null;
@@ -840,7 +845,7 @@ const getCommoditiesForResources = (r = []) => {
 };
 
 // computeIncomeStreams
-const computeIncomeStreams = (tier, institutions = [], route = 'road', goodsToggles = {}, config = {}) => {
+const _computeIncomeStreams = (tier, institutions = [], route = 'road', goodsToggles = {}, config = {}) => {
   const localProduction = getInstitutionEconomicBonus(config.nearbyResources || [], institutions);
   const necessityImports = getInstitutionServices(
     tier,
@@ -962,7 +967,7 @@ export const priorityToCategory = (r = 50) => {
 };
 
 // computeEconomicViability
-const computeEconomicViability = (config = {}, tier = 'town', institutions = []) => {
+const computeEconomicViability = (config = {}, _tier = 'town', institutions = []) => {
   const flags = getInstFlags(config, institutions);
   const stress = getStressFlags(config, institutions);
   const econCat = priorityToCategory(flags.economyOutput);
@@ -1430,7 +1435,7 @@ export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
 // ─── Private helpers (auto-extracted) ────────────────────
 
 // getUpgradeOpps
-const getUpgradeOpps = (institutions, tier, config = {}) => {
+const _getUpgradeOpps = (institutions, tier, config = {}) => {
   const tierIndex = TIER_ORDER.indexOf(tier);
   const result = [];
   Object.entries(HISTORY_EVENTS).forEach(([category, roles]) => {
@@ -1494,7 +1499,7 @@ function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResour
   const alreadyImporting = (label) => chainImports.some((i) => i.toLowerCase().includes(label.toLowerCase()));
   const alreadyExporting = (label) => chainExports.some((e) => e.toLowerCase().includes(label.toLowerCase()));
 
-  for (const [category, cfg] of Object.entries(INSTITUTION_FINISHED_GOODS_DEMAND)) {
+  for (const [_category, cfg] of Object.entries(INSTITUTION_FINISHED_GOODS_DEMAND)) {
     // Tier gate
     const minTierIdx = TIER_ORDER.indexOf(cfg.minTier || 'thorp');
     if (tierIdx < minTierIdx) continue;
@@ -2197,7 +2202,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     re.length = 0; // no exports
     q.length = 0; // no imports
     // Also clear active chains that require trade — keep only subsistence-relevant ones
-    activeChainsList.forEach((ch, idx) => {
+    activeChainsList.forEach((ch, _idx) => {
       // Keep food security chains, remove trade/manufacturing/entrepot chains
       if (ch.entrepot || ch.needKey === 'trade_entrepot') {
         ch.status = 'unexploited';

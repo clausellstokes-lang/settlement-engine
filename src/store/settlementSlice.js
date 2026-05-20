@@ -51,7 +51,6 @@ function loadEngine() {
 }
 
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
-import { compareSystemState } from '../domain/state/compareSystemState.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
@@ -297,7 +296,7 @@ export const createSettlementSlice = (set, get) => ({
    */
   proposeChange: (type, payload) => {
     const state = get();
-    const { settlement, lastSeed, lastCtx } = state;
+    const { settlement, _lastSeed, lastCtx } = state;
     if (!settlement) return;
 
     // Build the config overrides for this change type

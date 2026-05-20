@@ -5,7 +5,7 @@ import { NarrativeNote } from '../NarrativeNote';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
-  const mobile = isMobile();
+  const _mobile = isMobile();
 
   if (!r) return <div style={{padding:32,textAlign:'center',color:'#9c8068'}}>No power structure data.</div>;
 
@@ -14,7 +14,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
     stability:m,
     recentConflict:h,
     publicLegitimacy:leg,
-    factionRelationships:rels = [], // retained for backend use
+    factionRelationships:_rels = [], // retained for backend use
     criminalCaptureState:crimCapture,
   } = r;
 
@@ -31,7 +31,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const governing  = pf.find(f => f.isGoverning) || pf[0];
 
   // ── Relationship type config ────────────────────────────────────────────────
-  const REL = {
+  const _REL = {
     symbiotic:   { color:'#1a5a28', bg:'#f0faf4', border:'#a8d8b0', icon:'⇌', label:'Symbiotic'   },
     dependent:   { color:'#1a3a6a', bg:'#f0f4fa', border:'#a8c0d8', icon:'↔', label:'Dependent'   },
     subordinate: { color:'#4a6a1a', bg:'#f4f8ec', border:'#b8d8a0', icon:'↓', label:'Subordinate' },
@@ -170,9 +170,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
           {pf.map((f,i) => {
             const c      = FACTION_COLORS[i % FACTION_COLORS.length];
             const isExp  = expandedFaction === i;
-            const pct    = Math.round((f.power||0) / total * 100);
+            const _pct    = Math.round((f.power||0) / total * 100);
             const powerChanged = f.rawPower && f.rawPower !== f.power;
-            const mods   = (f.modifiers||[]).concat(f.modifier ? [f.modifier] : []);
+            const _mods   = (f.modifiers||[]).concat(f.modifier ? [f.modifier] : []);
             const matchedGroups = factionGroups.filter(fg => fg.powerFactionName === f.faction);
 
             return (

@@ -22,7 +22,7 @@
  * unconditionally at the App level.
  */
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Sparkles, X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useFlag } from '../lib/flags.js';

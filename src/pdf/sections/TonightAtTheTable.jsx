@@ -12,14 +12,13 @@
  *   - tonight.crisis.<i>.followup
  *   - tonight.scratch
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, GoldRule, HairRule, Tag } from '../primitives/Dense.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space } from '../theme.js';
-import { cap, hookText, humanize } from '../lib/format.js';
+import { hookText, humanize } from '../lib/format.js';
 
 // Source rank: which hook source category to prefer when picking the top 3.
 const SOURCE_RANK = ['crisis', 'tension', 'conflict', 'crime', 'npc', 'relationship', 'history'];

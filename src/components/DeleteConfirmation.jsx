@@ -4,7 +4,6 @@
  * Renders an expandable warning with context-aware messaging.
  * Used by SettlementsPanel, CampaignSection, Compendium, and WorldMap.
  */
-import React from 'react';
 import { CARD, SECOND, BORDER, sans } from './theme.js';
 
 export default function DeleteConfirmation({ entityName, details, onConfirm, onCancel }) {

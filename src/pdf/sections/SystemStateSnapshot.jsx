@@ -9,7 +9,6 @@
  * Bands and colors come from domain/state/bands.js — same source as the
  * UI's SystemStateBar — so the PDF and screen never disagree.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline } from '../primitives/Dense.jsx';

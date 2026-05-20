@@ -13,14 +13,12 @@
  *   - relationships.cross.<i>.description
  *   - relationships.shared.<i>.description
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, KeyValRow, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, _KeyValRow, _BulletList, _GoldRule, HairRule, _Tag,
 } from '../primitives/Dense.jsx';
 import { relationshipsHeadline } from '../lib/headlines.js';
-import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, relColors } from '../theme.js';
@@ -253,7 +251,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
 // ── Sub-components ─────────────────────────────────────────────
 
 function NeighbourCard({ n, idx }) {
-  const relLabel = REL_LABELS[n.type] || (n.type ? cap(n.type) : 'Linked');
+  const _relLabel = REL_LABELS[n.type] || (n.type ? cap(n.type) : 'Linked');
   const color = relColors[n.type] || palette.muted;
   return (
     <View

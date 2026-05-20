@@ -1042,7 +1042,7 @@ export function generateSettlement(config = {}, importedNeighbor = null) {
     const realDefLabel  = settlement.defenseProfile.readiness.label;
     const DEFENSE_CONTRIB = { 'Undefended':-10, 'Vulnerable':-5, 'Defensible':0, 'Well-Defended':7, 'Fortress':10 };
     const provLeg       = settlement.powerStructure.publicLegitimacy;
-    const provDefContrib= DEFENSE_CONTRIB[provLeg.breakdown?.defense != null ? null : 'Defensible'] ?? 0;
+    const _provDefContrib= DEFENSE_CONTRIB[provLeg.breakdown?.defense != null ? null : 'Defensible'] ?? 0;
     const realDefContrib= DEFENSE_CONTRIB[realDefLabel] ?? 0;
     const delta         = realDefContrib - (provLeg.breakdown?.defense ?? 0);
     if (delta !== 0) {

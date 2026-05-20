@@ -89,7 +89,7 @@ const ARCHETYPE_RESPONDERS = {
  * response and can elaborate; the structured response is the source of
  * truth.
  */
-function respondAsMerchantGuild(faction, event, settlement) {
+function respondAsMerchantGuild(faction, event, _settlement) {
   const name = faction.name || faction.faction || 'Merchant Guild';
   const id   = faction.id   || `faction.${name.toLowerCase().replace(/\s+/g, '_')}`;
 

@@ -87,7 +87,7 @@ const computeDefenseScores = (
   const magPri    = magicOn ? (config.priorityMagic ?? 50) : 0;
   const relPri    = config.priorityReligion ?? 50;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
-  const tierIdx   = TIER_ORD.indexOf(tier);
+  const _tierIdx   = TIER_ORD.indexOf(tier);
 
   // ── Tradition detection ─────────────────────────────────────────────────────
   const institutions = config._institutions || [];

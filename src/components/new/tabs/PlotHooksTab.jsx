@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import {C} from '../design';
 import {Ti, serif, sans, TabIntro} from '../Primitives';
-import {EVENT_COLORS, REL_STYLES} from '../tabConstants';
+import { REL_STYLES } from '../tabConstants';
 import {isMobile} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
@@ -10,7 +9,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
   const [filter, setFilter] = useState('all');
   const [sortBy, setSortBy] = useState('priority');
   if (!s) return null;
-  const mobile = isMobile();
+  const _mobile = isMobile();
 
   // Human-readable tension type labels
   const TENSION_LABELS = {
@@ -64,7 +63,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
   // Faction conflicts
   (s.conflicts||[]).forEach(c => {
     const intensity = c.intensity;
-    const intColor = intensity==='high'?'#8b1a1a':intensity==='low'?'#1a5a28':'#a0762a';
+    const _intColor = intensity==='high'?'#8b1a1a':intensity==='low'?'#1a5a28':'#a0762a';
     (c.plotHooks||[]).forEach(h => {
       rawHooks.push({
         text: typeof h==='string'?h:(h?.hook||Ti(h)),
@@ -93,7 +92,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
   // NPC Relationship tensions (each rel.tension is essentially a plot hook)
   (s.relationships||[]).forEach(rel => {
     if (!rel.tension) return;
-    const rs = REL_STYLES[rel.type] || REL_STYLES.respect || {color:'#6b5340'};
+    const _rs = REL_STYLES[rel.type] || REL_STYLES.respect || {color:'#6b5340'};
     rawHooks.push({
       text: rel.tension,
       source: `${rel.npc1Name} & ${rel.npc2Name}`,

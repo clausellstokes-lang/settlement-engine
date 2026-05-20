@@ -15,7 +15,7 @@ const MAINTAINER_DESC = {
 
 // ─── 1. Force magic infrastructure for ANY isolated town+ ─────────────────────
 export function applyTeleportationInfrastructure(
-  institutions, tier, tradeRoute, effectiveConfig, catalogForTier, TOWN_PLUS_TIERS, chance
+  institutions, tier, tradeRoute, effectiveConfig, catalogForTier, TOWN_PLUS_TIERS, _chance
 ) {
   if (!TOWN_PLUS_TIERS.includes(tier) || tradeRoute !== 'isolated') return;
 

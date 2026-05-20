@@ -23,7 +23,7 @@
  *     success page handles the "no stash" path with a support link.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Download, AlertCircle } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useFlag } from '../lib/flags.js';
@@ -31,7 +31,7 @@ import { startCheckout } from '../lib/stripe.js';
 import { stashPendingDossier } from '../lib/pendingDossier.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
-import { GOLD, INK, BORDER, sans, SP, R, FS } from './theme.js';
+import { GOLD, sans, SP, R, FS } from './theme.js';
 
 const MUTED = '#6b5340';
 

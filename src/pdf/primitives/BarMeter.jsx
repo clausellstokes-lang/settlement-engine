@@ -4,7 +4,6 @@
  * Used for percentage-style stats (faction power, defense scores, income
  * source split). Container is muted cream, fill is tone-coded.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette } from '../theme.js';
 import { finite, safePct } from '../lib/format.js';

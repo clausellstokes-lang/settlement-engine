@@ -5,7 +5,6 @@
 
 import { random as _rng } from './rngContext.js';
 import { priorityToCategory } from './economicGenerator.js';
-import { computeEffectiveMagicPresence } from './priorityHelpers.js';
 import {
   getInstFlags,
   getPriorities,
@@ -26,7 +25,7 @@ import {
 import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';
 
 // RELATIONSHIP_TYPES
-const RELATIONSHIP_TYPES = {
+const _RELATIONSHIP_TYPES = {
   ally: {
     name: 'Ally',
     description: 'Mutual support and cooperation',
@@ -440,7 +439,7 @@ export const genSuccessionNarr = (r) => {
 // genRelNarrative
 export const genRelNarrative = (r) => {
   var p, b;
-  const { relationships: s = [], stress: o, config: d = {} } = r;
+  const { relationships: s = [], stress: o, config: _d = {} } = r;
   if (!s.length || random01(0.4)) return null;
   const l = ((p = (o ? (Array.isArray(o) ? o : [o]) : [])[0]) == null ? void 0 : p.type) || null,
     m = l ? STRESS_FLAVOR[l] || [] : [],

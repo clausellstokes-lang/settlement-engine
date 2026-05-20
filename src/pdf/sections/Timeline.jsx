@@ -7,7 +7,6 @@
  * narrative summary, applied date, deltas, and faction responses —
  * the same data the on-screen Timeline UI shows, in print form.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, HairRule } from '../primitives/Dense.jsx';

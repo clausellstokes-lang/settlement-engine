@@ -8,7 +8,6 @@
  *
  * Editable: cover.name, cover.subtitle, cover.tagline, cover.campaign.
  */
-import React from 'react';
 import { Page, View, Text } from '@react-pdf/renderer';
 import { sheet, palette, type, page as pageGeo, toneBg } from '../theme.js';
 import { EditableText } from '../primitives/Editable.jsx';

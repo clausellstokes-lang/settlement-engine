@@ -12,7 +12,6 @@
  * authoritative text for assistive tech; the icon is decorative.
  */
 
-import React from 'react';
 import {
   Edit3, BookMarked, AlertTriangle, Hourglass,
   Sparkles, Box, Lock,

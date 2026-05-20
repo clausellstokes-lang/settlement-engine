@@ -9,7 +9,6 @@
  * Institutions keeps each chapter focused — Services is the player-facing
  * "what can I buy" page, Institutions is the DM-facing "who's in charge" page.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {

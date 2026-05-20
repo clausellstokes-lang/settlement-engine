@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {filterCatalogForMagic} from './magicFilter.js';
 import ControlsStrip from './ControlsStrip.jsx';
-import {GOLD as gold, INK as ink, MUTED as muted, SECOND as second, BORDER as border, CARD as card, CARD_ALT as parch, sans} from './theme.js';
+import { GOLD as gold, INK as ink, MUTED as muted, BORDER as border, sans } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, selectIsManualTier } from '../store/selectors.js';
 // Import from lookups.js directly (not engine.js) — keeps the
@@ -32,6 +32,7 @@ function getToggleState(toggles, tier, category, name, isOutOfTier = false) {
     : { allow: true,  require: false, forceExclude: false };
 }
 
+// eslint-disable-next-line no-unused-vars -- kept for potential reuse; render path bypasses it
 function OutOfTierSection({ category, institutions, tier, toggles, onToggle, forcedCount, allCollapsed }) {
   const [open, setOpen] = React.useState(false);
   const instCount = Object.keys(institutions).length;
@@ -45,7 +46,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
     return { allow: false, require: false, forceExclude: false }; // excluded by default
   };
 
-  const handleToggle = (name, instDef) => {
+  const handleToggle = (name, _instDef) => {
     const cur = getOutToggleState(name);
     const key = `${tier}::${category}::${name}`;
     // Cycle: excluded → forced → excluded (no "allow" for out-of-tier)
@@ -150,7 +151,7 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
   const catColor = CAT_COLORS[category] || muted;
   const reqOverridden = def.required && forceExclude;
   const isExcluded   = forceExclude || (!allow && !req && !def.required);
-  const isDimmed     = isExcluded || (isOutOfTier && !req);
+  const _isDimmed     = isExcluded || (isOutOfTier && !req);
 
   const handleClick = () => {
     if (def.required) {
@@ -255,7 +256,7 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
   );
 }
 
-function CategorySection({ category, institutions, tier, toggles, onToggle, isEnabled, onCategoryToggle, forceCollapsed, isManualTier, tierInstitutionNames }) {
+function CategorySection({ category, institutions, tier, toggles, onToggle, isEnabled, _onCategoryToggle, forceCollapsed, _isManualTier, _tierInstitutionNames }) {
   const [collapsed, setCollapsed] = useState(true);
   // Sync local state when forceCollapsed goes from true → false: an
   // "Expand All" press should clear individual manual collapses. We
@@ -360,11 +361,11 @@ export default function InstitutionalGrid() {
   const tier = useStore(selectTierForGrid);
   const catalog = useStore(selectCurrentCatalog);
   const toggles = useStore(s => s.institutionToggles);
-  const categoryToggles = useStore(s => s.categoryToggles);
+  const _categoryToggles = useStore(s => s.categoryToggles);
   const onToggle = useStore(s => s.toggleInstitution);
   const onCategoryToggle = useStore(s => s.toggleCategory);
   const config = useStore(s => s.config);
-  const goodsToggles = useStore(s => s.goodsToggles);
+  const _goodsToggles = useStore(s => s.goodsToggles);
   const tierInstitutionNames = useStore(selectTierInstitutionNames);
   const isManualTier = useStore(selectIsManualTier);
   const bulkSetInstitutions = useStore(s => s.bulkSetInstitutions);

@@ -3,9 +3,8 @@
  * Renders: search input, action buttons (Force All / Reset / Exclude All / Expand / Collapse),
  * stats row (No overrides active | X forced · Y excluded), and filter pills (All / Forced / Excluded).
  */
-import React from 'react';
 import {Search, X} from 'lucide-react';
-import {GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans} from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans } from './theme.js';
 
 export default function ControlsStrip({
   // Search

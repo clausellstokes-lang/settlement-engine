@@ -10,20 +10,19 @@
  *   - Tensions list with severity, parties, plot hooks
  *   - Active conflicts with issue/stakes/intensity/parties/plot hooks
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, KeyValRow, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, _KeyValRow, _BulletList, _GoldRule, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { powerHeadline, powerTone } from '../lib/headlines.js';
-import { StackedBar, ScoreWithBreakdown, StatusCard } from '../primitives/Visuals.jsx';
+import { StackedBar, ScoreWithBreakdown } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
-import { EditableText, EditableProse } from '../primitives/Editable.jsx';
+import { EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, factionColors, space } from '../theme.js';
-import { cap, num, label, hookText, humanize } from '../lib/format.js';
+import { cap, label, hookText, humanize } from '../lib/format.js';
 
 export function PowerStructure({ settlement, narrativeMode, vm }) {
   const p = vm.power;

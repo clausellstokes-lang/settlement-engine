@@ -32,7 +32,6 @@
  *   - `lines` is only meaningful in showField mode (controls minHeight).
  *   - `showField` opts back IN to the form-field treatment.
  */
-import React from 'react';
 import { TextInput, View, Text } from '@react-pdf/renderer';
 import { palette, type } from '../theme.js';
 import { noLig } from '../lib/format.js';
@@ -42,7 +41,7 @@ const FIELD_BG = '#fdf9f0';
 
 function safeName(raw) {
   if (!raw) return `f_${Math.random().toString(36).slice(2, 9)}`;
-  return String(raw).replace(/[^a-zA-Z0-9_.\-]/g, '_').slice(0, 80);
+  return String(raw).replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 80);
 }
 
 function pickFontSize(style) {

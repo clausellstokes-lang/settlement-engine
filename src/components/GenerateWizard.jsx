@@ -12,16 +12,15 @@
  *
  * Reads all state from the Zustand store — zero props.
  */
-import React, { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react';
+import { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { ChevronRight, ChevronLeft, Zap, Settings, ArrowLeft, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, selectIsManualTier } from '../store/selectors.js';
 import { saves as savesService } from '../lib/saves.js';
 import ConfigurationPanel from './ConfigurationPanel';
 import InstitutionalGrid from './InstitutionalGrid';
 import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import HomeHero from './HomeHero.jsx';
@@ -248,8 +247,8 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
   const importedNeighbour = useStore(s => s.importedNeighbour);
   const canSave       = useStore(s => s.canSave());
   const authTier      = useStore(s => s.auth.tier);
-  const authRole      = useStore(s => s.auth.role);
-  const aiSettlement  = useStore(s => s.aiSettlement);
+  const _authRole      = useStore(s => s.auth.role);
+  const _aiSettlement  = useStore(s => s.aiSettlement);
 
   // Store actions
   const generate        = useStore(s => s.generateSettlement);

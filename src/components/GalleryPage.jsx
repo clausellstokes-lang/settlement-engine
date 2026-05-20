@@ -21,7 +21,7 @@ import { useFlag } from '../lib/flags.js';
 import { fetchPublicGallery, fetchPublicDossier } from '../lib/gallery.js';
 import { TIER_LABELS } from './new/design.js';
 import {
-  GOLD, INK, INK_DEEP, BORDER, CARD, PARCH, sans, serif_, SP, R, FS,
+  GOLD, INK, _INK_DEEP, BORDER, CARD, PARCH, sans, serif_, SP, R, FS,
 } from './theme.js';
 
 const MUTED  = '#6b5340';
@@ -86,7 +86,10 @@ export default function GalleryPage({ onNavigate }) {
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(false);
   const [page, setPage] = useState(0);
-  const [listLoading, setListLoading] = useState(false);
+  // Default to true — the listing fetch fires immediately on mount, so
+  // starting "loading" matches the actual visual state and avoids a
+  // setState-in-effect warning.
+  const [listLoading, setListLoading] = useState(true);
   const [listError, setListError] = useState(null);
 
   // Dossier state (one of: null | { loading: true } | { dossier })
@@ -94,11 +97,11 @@ export default function GalleryPage({ onNavigate }) {
   const [dossier, setDossier] = useState(null);
   const [dossierLoading, setDossierLoading] = useState(false);
 
-  // Initial listing fetch.
+  // Initial listing fetch. listLoading is initialized to true above so
+  // the spinner shows immediately without a setState-in-effect call.
   useEffect(() => {
     if (!enabled) return;
     let cancelled = false;
-    setListLoading(true);
     fetchPublicGallery({ page: 0 })
       .then(res => {
         if (cancelled) return;

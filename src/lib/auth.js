@@ -281,7 +281,7 @@ function mockSaveAuth(data) {
   }
 }
 
-async function mockSignUp(email, password) {
+async function mockSignUp(email, _password) {
   const user = { id: 'mock_' + Date.now(), email, user_metadata: {} };
   const session = { access_token: 'mock_token_' + Date.now() };
   const result = { user, session, tier: 'free', role: 'user', displayName: null, needsVerification: false };
@@ -289,7 +289,7 @@ async function mockSignUp(email, password) {
   return result;
 }
 
-async function mockSignIn(email, password, rememberMe = true) {
+async function mockSignIn(email, password, _rememberMe = true) {
   const saved = mockLoadAuth();
   if (saved && saved.user.email === email) {
     return saved;

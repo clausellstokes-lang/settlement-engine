@@ -9,12 +9,11 @@
  * Editable: nothing — this page is a stable index. Edits live on the detailed
  * sheets in chapter 04.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
-import { ChapterBand, ChapterHeadline, HairRule } from '../primitives/Dense.jsx';
+import { ChapterBand, ChapterHeadline } from '../primitives/Dense.jsx';
 import { Pill } from '../primitives/Pill.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette } from '../theme.js';
 import { humanize } from '../lib/format.js';
 
 function powerTone(p) {

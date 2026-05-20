@@ -10,7 +10,7 @@
  *   - FOREST  → start a pointer-drag that paints trees under the cursor
  */
 
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useStore } from '../../store';
 import { ANNOTATE_TOOLS } from '../../store/mapSlice.js';
 

@@ -29,8 +29,8 @@ const TIER_BOOST_CAPS = {
 };
 
 // Power thresholds: faction must exceed these to trigger boosts
-const STRONG_THRESHOLD = 35;  // top-decile dominance — adds ONE signature institution
-const MILD_THRESHOLD   = 28;  // present but not triggering signature
+const _STRONG_THRESHOLD = 35;  // top-decile dominance — adds ONE signature institution
+const _MILD_THRESHOLD   = 28;  // present but not triggering signature
 
 /**
  * deriveFactionBoosts — compute boost descriptors from a factions array.

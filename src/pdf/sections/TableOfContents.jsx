@@ -9,7 +9,6 @@
  * Page numbers are intentionally omitted in P0 — react-pdf can resolve them
  * via @react-pdf/renderer's bookmark / pageNumber API in a later polish pass.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { Section } from '../primitives/Section.jsx';

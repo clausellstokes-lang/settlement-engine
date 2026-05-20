@@ -7,8 +7,6 @@
  * the symbol anchors correctly.
  */
 
-import React from 'react';
-
 export default function TreeSymbols() {
   return (
     <>

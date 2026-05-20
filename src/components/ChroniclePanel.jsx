@@ -15,7 +15,7 @@
  * owns no persistence. Rotation and appending happen in `aiSlice._appendChronicleEntry`.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BookOpen, History, RotateCcw, Sparkles, Zap, X } from 'lucide-react';
 
 // ── Visual tokens, aligned with SettlementDetail / Primitives ────────────────

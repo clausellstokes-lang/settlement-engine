@@ -13,7 +13,7 @@
  */
 
 import { supabase, isConfigured } from './supabase.js';
-import { getActivePacks, findPackByKey, TIERS, SINGLE_DOSSIER } from '../config/pricing.js';
+import { getActivePacks, findPackByKey, SINGLE_DOSSIER } from '../config/pricing.js';
 
 // PRODUCTS preserves the historical shape (object keyed by product id)
 // so existing imports (PurchaseModal, AccountPage) keep working. The

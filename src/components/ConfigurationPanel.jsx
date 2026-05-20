@@ -1,8 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import {ChevronDown, ChevronUp} from 'lucide-react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {getCompatibleResources} from '../generators/terrainHelpers';
-import {GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans} from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans } from './theme.js';
 import { useStore } from '../store/index.js';
 
 const PARCHMENT='#f7f0e4';
@@ -134,7 +134,7 @@ function NearbyResourcesPanel({config,updateConfig}){
 
   // Four-state cycle: off (unselected) → allow → abundant → depleted → off
   // 'off' has no label — just looks bland, like a stress that wasn't selected
-  const RESOURCE_STATES = ['off','allow','abundant','depleted'];
+  const _RESOURCE_STATES = ['off','allow','abundant','depleted'];
   const STATE_LABELS  = {allow:'○ Allow',abundant:'✦ Abundant',depleted:' Depleted'};
   const STATE_COLORS  = {allow:'#9c8068',abundant:'#1a5a28',depleted:'#c05000'};
   const STATE_BG      = {allow:'transparent',abundant:'#f0faf2',depleted:'#fff7f0'};
@@ -179,7 +179,7 @@ function NearbyResourcesPanel({config,updateConfig}){
       ? {nearbyResourcesRandom:false, nearbyResources:compatible.map(r=>r.key), nearbyResourcesState:{}}
       : {nearbyResourcesRandom:true,  nearbyResources:null, nearbyResourcesState:{}}
   );
-  const toggleResource = key => {
+  const _toggleResource = key => {
     if (isRandom) return;
     const isOn = selected.includes(key);
     if (isOn) {

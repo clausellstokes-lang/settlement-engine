@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {C} from '../design';
-import {serif, sans, Collapsible, Empty, TabIntro} from '../Primitives';
+import { serif, Collapsible, Empty, TabIntro } from '../Primitives';
 import {relStyle} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 
@@ -11,7 +10,7 @@ import {NarrativeNote} from '../NarrativeNote';
 export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedIds, onTogglePin}) {
   const [search, setSearch] = useState('');
   const [impFilter, setImpFilter] = useState('all');
-  const mobile = isMobile();
+  const _mobile = isMobile();
   const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
 
   if (!npcs?.length) return <Empty message="No NPCs generated. Generate a settlement to see key figures."/>;

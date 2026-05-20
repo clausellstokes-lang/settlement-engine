@@ -10,8 +10,6 @@
  * here rather than overriding via inline style at call sites.
  */
 
-import React from 'react';
-
 const VARIANTS = {
   default:    { bg: '#fffbf5', border: '#d2bd96', titleColor: '#1c1409' },
   suggestion: { bg: '#fff7ec', border: '#e0b070', titleColor: '#7a4f0f' },  // soft amber — for AI/onboarding hooks

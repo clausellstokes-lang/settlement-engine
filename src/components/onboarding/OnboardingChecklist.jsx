@@ -19,7 +19,7 @@
  *     keyboard users land on what to do next
  */
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { X, CheckCircle2, Circle } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { ONBOARDING_STEPS, isOnboardingComplete, nextOnboardingStep } from '../../copy/onboardingSteps.js';

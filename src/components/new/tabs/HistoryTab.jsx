@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {C} from '../design';
 import {Ti, serif, Collapsible, Section, Empty, TabIntro} from '../Primitives';
 import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';

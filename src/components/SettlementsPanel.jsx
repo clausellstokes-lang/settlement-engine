@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, ArrowRight, Edit3, Check, X, Map as MapIcon, FileText} from 'lucide-react';
 
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
@@ -65,10 +65,10 @@ function findSaveByName(saves, name) { return saves.find(s => s.name === name ||
 function findSaveById(saves, id) { return saves.find(s => s.id === id) || null; }
 
 const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', allied:'#1a5a28', secret_alliance:'#1a5a28', trade_partner:'#a0762a', patron:'#2a3a7a', client:'#2a3a7a', criminal_network:'#5a2a8a' };
-const REL_TYPES = ['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
+const _REL_TYPES = ['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
 
 // ── Settlement Card (reused in campaigns + unassigned) ────────────────────
-function SettlementCard({ s, allModifiers, onView, onDelete, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId }) {
+function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId }) {
   const [moveOpen, setMoveOpen] = useState(false);
   const ts = (t) => { try { return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; } };
 
@@ -281,7 +281,7 @@ export default function SettlementsPanel({ onNavigate }) {
   const [deleteId, setDeleteId] = useState(null);
   const [detail, setDetail] = useState(null);
   const [linking, setLinking] = useState(false);
-  const [networkVersion, setNetworkVersion] = useState(0);
+  const [_networkVersion, setNetworkVersion] = useState(0);
   const [editNamesOpen, setEditNamesOpen] = useState(false);
   const [newCampaignName, setNewCampaignName] = useState('');
   const [showNewCampaign, setShowNewCampaign] = useState(false);

@@ -52,7 +52,7 @@ function severityScore(s) {
   return SEVERITY_RANK[(s || '').toLowerCase()] || 0;
 }
 
-function topBy(arr, scoreFn) {
+function _topBy(arr, scoreFn) {
   if (!Array.isArray(arr) || !arr.length) return null;
   let best = arr[0];
   let bestScore = scoreFn(best);

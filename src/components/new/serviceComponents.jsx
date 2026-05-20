@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import {C} from './design';
-import {Ti, PlotHook} from './Primitives';
 
-import {foodNarrative} from './tabHelpers';
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
-export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null }) {
+export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null }) {
   const name  = typeof svc === 'string' ? svc : svc?.name || '';
   const desc  = typeof svc === 'object' ? (svc.desc || '') : '';
   const inst  = typeof svc === 'object' ? (svc.institution || '') : '';

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {C} from '../design';
 import {serif, Section, TabIntro} from '../Primitives';
 
 import {isMobile} from '../tabConstants';
@@ -10,7 +9,7 @@ import {NarrativeNote} from '../NarrativeNote';
 export function DefenseTab({ settlement:r, narrativeNote}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
-  const mobile = isMobile();
+  const _mobile = isMobile();
   if (!r) return null;
 
   const d = r.defenseProfile || {};
@@ -54,7 +53,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const crimFaction = r.powerStructure?.factions?.find(f=>f.category==='criminal');
   const ratio       = typeof sp.safetyRatio === 'number' ? sp.safetyRatio : null;
   const safetyLabel = sp.safetyLabel || '';
-  const bmc         = sp.blackMarketCapture || 0;
+  const _bmc         = sp.blackMarketCapture || 0;
 
   // Classify criminal structure: organized / semi-organized / diffuse / none
   const allInstNames = (r.institutions||[]).map(i=>(i.name||'').toLowerCase());

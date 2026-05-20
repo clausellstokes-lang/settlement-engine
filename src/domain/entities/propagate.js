@@ -21,7 +21,7 @@
  * Pure: no React, no store. Returns patch objects the reducer applies.
  */
 
-import { withImpairment, severityFor } from './status.js';
+import { withImpairment } from './status.js';
 
 /** @typedef {import('./status.js').Impairment} Impairment */
 

@@ -21,12 +21,12 @@
  *     happened, point at support.
  */
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Check, Download, AlertCircle, LogIn, ArrowRight } from 'lucide-react';
 import { readPendingDossier, clearPendingDossier } from '../lib/pendingDossier.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import {
-  GOLD, INK, INK_DEEP, BORDER, CARD, PARCH, sans, serif_, SP, R, FS,
+  GOLD, INK, _INK_DEEP, BORDER, CARD, _PARCH, sans, serif_, SP, R, FS,
 } from './theme.js';
 
 const MUTED = '#6b5340';
@@ -36,18 +36,21 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
   const [pending, setPending] = useState(() => readPendingDossier());
   const [downloading, setDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState(null);
-  const [autoDownloaded, setAutoDownloaded] = useState(false);
+  // Ref-based guard avoids the setState-in-effect warning. The auto-
+  // download fires exactly once per mount even under React 19 strict-
+  // mode double-invocation.
+  const autoDownloadedRef = useRef(false);
 
   // Auto-trigger the download once on mount when we have a stash —
   // the user paid for the PDF, they shouldn't have to hunt for the
   // button. The "Download again" affordance below lets them retrigger.
   useEffect(() => {
-    if (autoDownloaded) return;
+    if (autoDownloadedRef.current) return;
     if (!pending?.settlement) return;
-    setAutoDownloaded(true);
+    autoDownloadedRef.current = true;
     handleDownload();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pending, autoDownloaded]);
+  }, [pending]);
 
   async function handleDownload() {
     if (!pending?.settlement) return;
@@ -184,7 +187,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             boxShadow: '0 4px 14px rgba(201,162,76,0.35)',
           }}
         >
-          <Download size={16} /> {downloading ? 'Preparing PDF…' : autoDownloaded ? 'Download again' : 'Download PDF'}
+          <Download size={16} /> {downloading ? 'Preparing PDF…' : autoDownloadedRef.current ? 'Download again' : 'Download PDF'}
         </button>
 
         {downloadError && (

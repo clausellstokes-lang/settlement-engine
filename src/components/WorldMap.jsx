@@ -13,14 +13,14 @@
  * actions. There is no local placement/burg state in React.
  */
 
-import React, { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import {
-  FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, X, Pin, Layers, Loader, Map as MapIcon, Globe,
+  FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, _X, _Pin, Layers, Loader, Map as MapIcon, Globe,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
-import { MAP_MODES, ANNOTATE_TOOLS, TERRAIN_TOOLS } from '../store/mapSlice.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, CARD_HDR, sans, FS, SP, R } from './theme.js';
+import { MAP_MODES } from '../store/mapSlice.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans, FS, SP, R } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
 
 const MapOverlay     = lazy(() => import('./MapOverlay.jsx'));
@@ -62,7 +62,7 @@ export default function WorldMap({ onNavigate } = {}) {
   const addPlacement    = useStore(s => s.addPlacement);
   const removePlacementLocal = useStore(s => s.removePlacementLocal);
   const clearAllPlacementsLocal = useStore(s => s.clearAllPlacementsLocal);
-  const replaceAllPlacements = useStore(s => s.replaceAllPlacements);
+  const _replaceAllPlacements = useStore(s => s.replaceAllPlacements);
   const replaceMapState = useStore(s => s.replaceMapState);
   const resetMapState   = useStore(s => s.resetMapState);
   const setMapSnapshot  = useStore(s => s.setMapSnapshot);
@@ -583,7 +583,7 @@ export default function WorldMap({ onNavigate } = {}) {
           )}
           <Suspense fallback={null}>
             <PlacementDetailCard
-              onOpenDetail={(settlementId) => {
+              onOpenDetail={(_settlementId) => {
                 // SettlementsPanel reads `selectedSettlementId` from the store
                 // on mount and opens the matching save in detail view. So we
                 // just need to navigate — the id is already in the store from

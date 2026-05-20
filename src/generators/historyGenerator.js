@@ -44,7 +44,7 @@ const getSettlementAge = tier => {
  * @param {Object} config  - Settlement config
  * @returns {string}
  */
-const getSettlementHistoryNote = (events, tier, config) => {
+const _getSettlementHistoryNote = (events, _tier, _config) => {
   if (!events || events.length === 0) return 'recently established and still finding its character';
 
   const disasters = events.filter(e => e.type === 'disaster').length;
@@ -292,14 +292,14 @@ const generateTradeNarrative2 = (category, context) => {
     primaryExports,
     incomeSources,
     tradeRouteAccess: route,
-    prosperity,
+    _prosperity,
     dominantFaction,
     govType,
     religiousScale,
     disasterProfile,
     magicLevel,
-    hasTower,
-    hasGuildMag,
+    _hasTower,
+    _hasGuildMag,
   } = context;
 
   const primaryExport = commodity
@@ -771,7 +771,7 @@ const buildHistoricalEvent = (
  */
 const generateRelationshipEvent = (age, tier, config, context = null) => {
   // Number of history events (scaled by age)
-  const ageFraction = age / 100;
+  const _ageFraction = age / 100;
   // Scale event count by age — each tier gets appropriate depth
   const ageFractionScaled = age / 60;
   const rawEventCount = Math.floor(ageFractionScaled * randInt(1, 3));

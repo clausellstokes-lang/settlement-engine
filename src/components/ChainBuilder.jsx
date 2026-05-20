@@ -25,14 +25,14 @@
  */
 import React, { useState, useMemo, useCallback } from 'react';
 import {
-  Link2, Plus, Trash2, Edit3, Check, X, ChevronDown, ChevronRight,
+  Link2, Plus, Trash2, Edit3, _Check, _X, ChevronDown, ChevronRight,
   Eye, EyeOff, Layers, ArrowRight, Package, Factory, Palette, Save,
   RotateCcw, Copy, Zap,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { CHAIN_DEFS } from '../lib/supplyChains.js';
 import {
-  GOLD, GOLD_B, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2,
+  GOLD, _GOLD_B, GOLD_BG, INK, _INK_DEEP, MUTED, SECOND, BORDER, BORDER2,
   CARD, CARD_HDR, CARD_ALT, PARCH, sans, serif_, SP, R, FS,
 } from './theme.js';
 

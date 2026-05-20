@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {C} from '../design';
-import {serif, sans, TabIntro} from '../Primitives';
+import { sans, TabIntro } from '../Primitives';
 import {Ts, J0} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
@@ -65,7 +64,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
 
   const totalImpaired = Object.values(catStats).reduce((s,c) => s+c.imp, 0);
   const totalDegraded = Object.values(catStats).reduce((s,c) => s+c.deg, 0);
-  const catsWithIssues = Object.entries(catStats).filter(([,c]) => c.imp>0||c.deg>0).length;
+  const _catsWithIssues = Object.entries(catStats).filter(([,c]) => c.imp>0||c.deg>0).length;
 
   // Category display order: strictly alphabetical — impairment is shown on each card
   const catOrder = Object.keys(services||{}).filter(k => services[k]?.length).sort((a,b) => a.localeCompare(b));

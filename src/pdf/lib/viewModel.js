@@ -122,7 +122,7 @@ export function buildViewModel({
 
 // ── helpers (used across slices) ─────────────────────────────────────────────
 
-function fmtNum(n, dec = 0) {
+function _fmtNum(n, dec = 0) {
   if (n == null || Number.isNaN(n)) return null;
   if (typeof n !== 'number') return String(n);
   return dec === 0 ? String(Math.round(n)) : n.toFixed(dec);

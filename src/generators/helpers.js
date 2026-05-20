@@ -34,7 +34,7 @@ const SMALL_TIERS     = ['thorp', 'hamlet', 'village'];
 /** True for town, city, metropolis. */
 export const getTradeRouteFeatures = (tier) => TOWN_PLUS_TIERS.includes(tier);
 /** True for thorp, hamlet, village. */
-const isSmallTier = (tier) => SMALL_TIERS.includes(tier);
+const _isSmallTier = (tier) => SMALL_TIERS.includes(tier);
 
 // ─── Math utilities ──────────────────────────────────────────────────────────
 

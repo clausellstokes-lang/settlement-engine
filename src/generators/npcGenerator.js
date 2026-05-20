@@ -3,15 +3,14 @@
  * NPC_ROLES, relationship, and settlement name generation
  */
 
-import { chance, getInstFlags, getStressFlags, pick, priorityToMultiplier, randInt } from './helpers.js';
+import { getInstFlags, getStressFlags, pick, priorityToMultiplier, randInt } from './helpers.js';
 import { getUpgradeOpportunities } from './economicGenerator.js';
-import { random as _rng, pick as ctxPick, chance as ctxChance, randInt as ctxRandInt } from './rngContext.js';
+import { random as _rng, pick as ctxPick } from './rngContext.js';
 
 import { NAMING_DATA } from '../data/namingData.js';
-import { NPC_ROLES, STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';
+import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';
 
 import { computeRelTension } from './powerGenerator.js';
-import { pickRandom } from './helpers.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from './helpers.js';
 import {
@@ -152,7 +151,7 @@ const getNPCCountRange = r =>
   })[r] || { min: 6, max: 10 };
 
 // formatNPCForDisplay
-const formatNPCForDisplay = (r, s, o, d) => {
+const _formatNPCForDisplay = (r, s, o, d) => {
   const l = generateCrimeLevel(r, s, o, d),
     m = l || r.secret;
   let h = r.presentation;
@@ -366,7 +365,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
 };
 
 // generateFactionLeader
-const generateFactionLeader = (category = 'other', config = {}, institutions = []) => {
+const generateFactionLeader = (_category = 'other', config = {}, institutions = []) => {
   const pri = {
     economy: config.priorityEconomy ?? 50,
     military: config.priorityMilitary ?? 50,
@@ -627,7 +626,7 @@ export const getStressHistory = secret => {
 };
 
 // computeRelTension (local)
-const generateFactionConflict = (npcA, npcB, stressFlags, instFlags) => {
+const _generateFactionConflict = (npcA, npcB, stressFlags, instFlags) => {
   const cats = [npcA.category, npcB.category].sort().join('_');
   const powerGap = npcA.power - npcB.power;
 
@@ -700,7 +699,7 @@ const generateFactionConflict = (npcA, npcB, stressFlags, instFlags) => {
   return STRESS_ECONOMIC_EFFECTS.wary_alliance;
 };
 
-const pickFactionName = r => {
+const _pickFactionName = r => {
   var o;
   const s = {};
   return (
@@ -1150,7 +1149,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
 };
 
 // sortNPCsByPriority
-const sortNPCsByPriority = function (historicalEvents, currentTensions, tier) {
+const _sortNPCsByPriority = function (historicalEvents, currentTensions, _tier) {
   if (!historicalEvents || historicalEvents.length === 0) return currentTensions;
 
   // Sort history by recency (most recent first)

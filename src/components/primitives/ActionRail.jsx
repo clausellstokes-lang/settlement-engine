@@ -12,7 +12,7 @@
  * a magnet") is real — additional items go behind a "More" disclosure.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card.jsx';
 

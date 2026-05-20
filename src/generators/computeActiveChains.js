@@ -4,7 +4,6 @@
 // Used by the economic generator to enrich the Economics tab output.
 
 import {SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS} from '../data/supplyChainData.js';
-import {TIER_ORDER} from '../data/constants.js';
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
 import {RESOURCE_DATA} from '../data/resourceData.js';
 import {customDeps} from '../lib/dependencyEngine.js';
@@ -34,7 +33,7 @@ function resourceLabelToKey(label) {
  * @returns {Array} activeChains
  */
 // Income source labels → chain IDs for linkage display
-const INCOME_TO_CHAINS = {
+const _INCOME_TO_CHAINS = {
   'Grain Sales':          ['food_security.grain', 'manufacturing.food_processing'],
   'Wool & Textile Trade': ['manufacturing.textiles'],
   'Iron & Metalwork':     ['manufacturing.weapons_armor', 'raw_extraction.iron'],
@@ -51,7 +50,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   const instNames = institutions.map(i => (i.name || '').toLowerCase());
 
   // Helper: does this settlement have an institution matching any of the names?
-  const hasInst = (...patterns) => patterns.some(p =>
+  const _hasInst = (...patterns) => patterns.some(p =>
     instNames.some(n => n.includes(p.toLowerCase()))
   );
 
@@ -573,7 +572,7 @@ export function deriveImportsFromChains(activeChains, nearbyResources, tier, rou
     if (chain.dependency) {
       const raw = chain.dependency.resource || '';
       // Take only the first part if compound (e.g. "Iron + fuel" → "Iron")
-      const clean = raw.split(/\s*[\+\/]\s*/)[0].trim();
+      const clean = raw.split(/\s*[+/]\s*/)[0].trim();
       if (clean) imports.add(clean);
     }
   });

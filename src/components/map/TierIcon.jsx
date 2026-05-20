@@ -8,8 +8,6 @@
  * Pure presentational component — no store hooks. Caller wires click.
  */
 
-import React from 'react';
-
 const TIER_FROM_POP = (pop = 0) => {
   if (pop <= 60)        return 'thorp';
   if (pop <= 240)       return 'hamlet';

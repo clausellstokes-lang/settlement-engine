@@ -10,7 +10,7 @@
  * selection (wired in WorldMap).
  */
 
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { X, ExternalLink, Trash2 } from 'lucide-react';
 import { useStore } from '../../store';
 import {
@@ -20,7 +20,7 @@ import {
 
 export default function PlacementDetailCard({ onOpenDetail }) {
   const selectedSettlementId = useStore(s => s.selectedSettlementId);
-  const selectedBurgId       = useStore(s => s.selectedBurgId);
+  const _selectedBurgId       = useStore(s => s.selectedBurgId);
   const placements           = useStore(s => s.mapState.placements);
   const saves                = useStore(s => s.savedSettlements);
 

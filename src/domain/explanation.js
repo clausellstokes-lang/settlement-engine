@@ -33,7 +33,7 @@
 import { tracesFor, tracesAffecting, tracesCausedBy } from './trace.js';
 import { deriveFactionProfile, deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveNpcProfile, deriveAllNpcProfiles } from './npcProfile.js';
-import { deriveSupplyChainState, deriveAllSupplyChainStates } from './supplyChainState.js';
+import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import {
   deriveAllStructuredHooks,
   deriveEscalationClocks,

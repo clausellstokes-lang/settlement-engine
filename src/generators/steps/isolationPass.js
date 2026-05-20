@@ -11,7 +11,7 @@ import { registerStep } from '../pipeline.js';
 import {
   applyTeleportationInfrastructure,
   applySubsistenceMode,
-  stripArcaneInstitutions,
+  _stripArcaneInstitutions,
 } from '../isolationGenerator.js';
 import { TOWN_PLUS_TIERS } from '../../data/constants.js';
 

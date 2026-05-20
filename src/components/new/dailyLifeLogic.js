@@ -76,7 +76,7 @@ export function extractSettlementContext(s) {
   const prospBand = (eco.prosperity || 'Unknown').toLowerCase();
 
   const militaryScore  = Math.round(eco.compound?.militaryEffective ?? scores.military ?? 50);
-  const magicScore     = Math.round(scores.magical   ?? 0);
+  const _magicScore     = Math.round(scores.magical   ?? 0);
   const magicDep       = dp.magicDependency ?? false;
 
   // All context descriptions computed here — on ctx object avoids TDZ in minified output
@@ -137,7 +137,7 @@ export function extractSettlementContext(s) {
   };
 }
 // getMagicBand — now delegates to computeEffectiveMagicPresence (single source of truth)
-function getMagicBand(magic, mInstCount = 0, institutions = [], config = {}) {
+function getMagicBand(magic, _mInstCount = 0, institutions = [], config = {}) {
   return computeEffectiveMagicPresence(institutions, config).band;
 }
 

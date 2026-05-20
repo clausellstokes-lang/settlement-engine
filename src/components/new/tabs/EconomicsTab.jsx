@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {C} from '../design';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -189,8 +188,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
     return res.imports?.critical || [];
   })();
 
-  const hasCrit = eco.tradeDependencies?.some(d => d.severity === 'critical');
-  const sp = eco.safetyProfile || {};
+  const _hasCrit = eco.tradeDependencies?.some(d => d.severity === 'critical');
+  const _sp = eco.safetyProfile || {};
   const ecoScore = Math.round(eco.compound?.economyOutput || 0);
   const tradeLabel = (eco.tradeAccess || 'road').replace(/_/g,' ');
 
@@ -247,7 +246,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         <div style={{display:'flex',flexDirection:'column',gap:5}}>
           {eco.incomeSources.map((src,i)=>{
             const isCrim = src.isCriminal;
-            const barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
+            const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
             return (
             <div key={i} style={{display:'flex',alignItems:'center',gap:10}}>
               <div style={{flex:1,background:'#e8dcc8',borderRadius:4,height:26,position:'relative',overflow:'hidden',minWidth:40}}>
@@ -441,7 +440,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         const sevBg    = bmc>=30?'#fdf4f4':bmc>=15?'#fdf0e8':'#faf8e8';
 
         // Scale context: same % means different things at different tiers
-        const tier = s?.tier || 'village';
+        const _tier = s?.tier || 'village';
         const scaleNote = bmc>=30
           ? 'A substantial portion of economic activity bypasses legitimate channels. Tax revenue is severely compressed. Guild structures are being undercut.'
           : bmc>=15
@@ -449,7 +448,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           : 'Minor shadow activity — petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.';
 
         // What goods flow through the shadow economy (from crime types)
-        const shadowGoods = crimeTypes
+        const _shadowGoods = crimeTypes
           .filter(ct => ct.type && ct.type.toLowerCase().includes('smuggl') ||
                         ct.type?.toLowerCase().includes('contraband') ||
                         ct.type?.toLowerCase().includes('black market'))

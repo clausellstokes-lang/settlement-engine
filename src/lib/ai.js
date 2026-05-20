@@ -154,7 +154,6 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     ref[keys[keys.length - 1]] = value;
   };
 
-  /* eslint-disable no-constant-condition */
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
@@ -208,7 +207,6 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       }
     }
   }
-  /* eslint-enable no-constant-condition */
 
   if (fatalError) throw fatalError;
   return { result, creditsRemaining, type: finalType, partialFailure, failedFields, succeededFields };
@@ -230,7 +228,7 @@ async function mockGenerate(type, settlement, onField) {
     const refinedSettlement = JSON.parse(JSON.stringify(settlement));
     refinedSettlement.thesis = thesis;
     if (Array.isArray(refinedSettlement.institutions)) {
-      refinedSettlement.institutions = refinedSettlement.institutions.map((inst, i) => ({
+      refinedSettlement.institutions = refinedSettlement.institutions.map((inst, _i) => ({
         ...inst,
         description: (inst?.description || inst?.detail || 'An institution of the settlement.') +
           ' (Mock refinement — the real narrator would thread the thesis through this description.)',

@@ -11,7 +11,6 @@
  *                      economic chains, services with status, history events.
  *   FactionDistribution — Stacked bar + per-faction label legend.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, toneBg, factionColors, space } from '../theme.js';
 import { Pill } from './Pill.jsx';
@@ -86,7 +85,7 @@ export function StackedBar({ segments, height = 8, showLabels = true, marginBott
 
 // ── ChainRow: Resource ▶ Inst ▶ Output ──────────────────────────────────────
 export function ChainRow({ resource, processing, output, status, tone }) {
-  const statusColor = palette[tone] || palette.gold;
+  const _statusColor = palette[tone] || palette.gold;
   return (
     <View
       style={{

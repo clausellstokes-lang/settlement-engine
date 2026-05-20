@@ -595,7 +595,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   const plotHooks = [];
 
   if (stress.stateCrime) {
-    const garRef = inst.hasGarrison ? 'the garrison' : 'armed officials';
+    const _garRef = inst.hasGarrison ? 'the garrison' : 'armed officials';
     plotHooks.push(`A local family wants evidence of tax extortion gathered quietly — but the extorter wears an official badge.`);
   }
   if (stress.crimeIsGovt) {

@@ -16,7 +16,7 @@
  * settlement would print an empty timeline chapter, which is useless.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FileText, Loader2, X, BookMarked, Clock, Edit3 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { PDF_VARIANTS } from '../../pdf/variants.js';

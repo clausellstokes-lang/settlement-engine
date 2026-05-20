@@ -14,14 +14,13 @@
  * Every content text field is editable so the DM can adjust personalities,
  * motivations, and plot hooks per session.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
-import { ChapterBand, ChapterHeadline, KeyValRow, BulletList, HairRule, Tag } from '../primitives/Dense.jsx';
+import { ChapterBand, ChapterHeadline, KeyValRow, HairRule, Tag } from '../primitives/Dense.jsx';
 import { npcsHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space } from '../theme.js';
-import { cap, label, hookText, humanize, stripZwnj } from '../lib/format.js';
+import { label, hookText, humanize, stripZwnj } from '../lib/format.js';
 
 /**
  * TextRow — Label · prose value pair, but the value is rendered as plain

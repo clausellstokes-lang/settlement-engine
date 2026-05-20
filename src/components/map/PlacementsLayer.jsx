@@ -11,7 +11,7 @@
  * still works between icons.
  */
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useStore } from '../../store';
 import TierIcon, { tierFor } from './TierIcon.jsx';
 

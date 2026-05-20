@@ -12,7 +12,6 @@
  *   - Native culture regions
  */
 
-import React from 'react';
 import { X, Check } from 'lucide-react';
 import { useStore } from '../../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';

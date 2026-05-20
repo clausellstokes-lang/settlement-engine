@@ -16,7 +16,7 @@
  * so it survives reloads.
  */
 
-import React, { useState, useSyncExternalStore } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 
 const STORAGE_KEY = 'flag.__devPanelOpen';

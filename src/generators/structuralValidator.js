@@ -10,7 +10,7 @@ export { getBaseChance } from './institutionProbability.js';
 
 import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
-import {RESOURCE_DATA, SPECIAL_RESOURCES} from '../data/resourceData.js';
+import { RESOURCE_DATA } from '../data/resourceData.js';
 
 // RELATION_TYPES re-exported as alias so existing importers don't break.
 export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
@@ -151,7 +151,7 @@ const expandInstitutionSet = (names) => {
 // ─── getPriorityModifiers ─────────────────────────────────────────────────────
 // Apply goods-toggle penalties to institution keyword → chance multiplier map.
 
-const getPriorityModifiers = (tier, goodsToggles = {}) => {
+const _getPriorityModifiers = (tier, goodsToggles = {}) => {
   const tierGoods = GOODS_MODIFIERS_BY_TIER[tier] || {};
   const penalties = {};
   Object.entries(tierGoods).forEach(([goodName, good]) => {
@@ -176,7 +176,7 @@ const getPriorityModifiers = (tier, goodsToggles = {}) => {
  * @param {string}   [govOverride]- Override for the governing body name
  * @returns {string} Adapted text
  */
-const getTierConstraints = (text, instNames, tier, govOverride) => {
+const _getTierConstraints = (text, instNames, tier, govOverride) => {
   const has = (keyword) => instNames.some(n => n.includes(keyword));
   const isSmall = ['thorp', 'hamlet', 'village'].includes(tier);
 
@@ -254,9 +254,9 @@ const getTierConstraints = (text, instNames, tier, govOverride) => {
  *
  * @param {Array}  institutions - Institution objects
  * @param {string} tier
- * @param {number} magicPriority
+ * @param {number} _magicPriority
  */
-export const checkInstCompat = (institutions, tier, magicPriority) => {
+export const checkInstCompat = (institutions, tier, _magicPriority) => {
   const names = institutions.map(i => (i.name || '').toLowerCase());
   const has   = (...keywords) => keywords.some(k => names.some(n => n.includes(k)));
 
@@ -747,7 +747,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
  * @param {string} tier         - Settlement tier
  * @param {Object} config       - Settlement config
  */
-const resolveUpgrades = (institutions, terrain, route, tier, config) => {
+const _resolveUpgrades = (institutions, terrain, route, tier, config) => {
   const lowerNames = institutions.map(i => i.name.toLowerCase());
 
   /**

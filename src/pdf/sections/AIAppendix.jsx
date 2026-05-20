@@ -11,7 +11,6 @@
  * tint background tones, and an "AI-AUTHORED" eyebrow on every sub-block so
  * the GM remembers this content was generated, not derived from raw rules.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { Section } from '../primitives/Section.jsx';

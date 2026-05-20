@@ -10,21 +10,20 @@
  *   - resources.priorityNote.<i>
  *   - resources.gap.<i>.impact
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, KeyValRow, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, _KeyValRow, _BulletList, _GoldRule, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { resourcesHeadline } from '../lib/headlines.js';
-import { ChainRow, StatusCard } from '../primitives/Visuals.jsx';
+import { ChainRow } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space } from '../theme.js';
-import { cap, label, humanize, num } from '../lib/format.js';
+import { cap, label, humanize } from '../lib/format.js';
 
-const STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
+const _STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
 const VALUE_TONE  = { 'very high': 'good', high: 'good', medium: 'warn', low: 'muted' };
 const SEVERITY_TONE = { high: 'bad', medium: 'warn', low: 'muted' };
 

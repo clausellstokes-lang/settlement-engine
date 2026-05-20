@@ -152,7 +152,7 @@ function deriveDawnWork(s, ctx) {
   return slot('dawn_work', text, 'capacity.labor + capacity.craft + dominant faction', refs);
 }
 
-function deriveGatheringPlaces(s, ctx) {
+function deriveGatheringPlaces(s, _ctx) {
   const refs = [];
   const RELIGIOUS_PATTERN = /(temple|cathedral|chapel|shrine|abbey|monastery)/i;
   const TRADE_PATTERN = /(market|bazaar|forum|exchange|quay|wharf)/i;

@@ -10,11 +10,10 @@
  *   - viability.contradiction.<i>
  *   - viability.stress.<i>.hook
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, KeyValRow, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, _KeyValRow, BulletList, _GoldRule, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { viabilityHeadline, viabilityTone } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';

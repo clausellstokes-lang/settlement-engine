@@ -3,9 +3,9 @@ import { random as _rng } from './rngContext.js';
 // without being imported — a latent ReferenceError waiting on the right
 // code path. Caught by ESLint no-undef once we wired the lint gate.
 // Originally defined and exported from economicGenerator.js:959.
-import { isSaltPreserved, priorityToCategory } from './economicGenerator.js';
+import { priorityToCategory } from './economicGenerator.js';
 import {
-  chance,
+  _chance,
   getInstFlags,
   getPriorities,
   getStressFlags,
@@ -25,7 +25,7 @@ import { INSTITUTION_SERVICES } from '../data/tradeGoodsData.js';
 // ─── Inlined cross-module helpers (cycle-free) ─────────────
 
 // getTierConstraints
-const getTierConstraints = (r, s, o, d) => {
+const _getTierConstraints = (r, s, o, d) => {
   const l = (k) => s.some((f) => f.includes(k)),
     m = ['thorp', 'hamlet', 'village'].includes(o),
     h = l('garrison')
@@ -188,7 +188,7 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
               ? priorityToMultiplier(h.economyOutput)
               : 1;
   },
-  Sv = (r, s = {}, o = []) => {
+  _Sv = (r, s = {}, o = []) => {
     var f;
     const d = getInstFlags(s, o),
       l = d.economyOutput,
@@ -223,7 +223,7 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
       g[Math.min(5, Math.max(0, p))]
     );
   },
-  generateSafetyNarrative2 = (r = {}, s = []) => {
+  _generateSafetyNarrative2 = (r = {}, s = []) => {
     var b;
     const o = getInstFlags(r, s),
       d = getStressFlags(r, s),
@@ -263,7 +263,7 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
       w
     );
   },
-  jv = (r = {}, s = []) => {
+  _jv = (r = {}, s = []) => {
     var w;
     const o = getInstFlags(r, s),
       d = getStressFlags(r, s),
@@ -299,7 +299,7 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
     }
     return g;
   },
-  Av = (r = {}, s = 'town', o = []) => {
+  _Av = (r = {}, _s = 'town', o = []) => {
     var k;
     const d = getInstFlags(r, o),
       l = getStressFlags(r, o),
@@ -377,7 +377,7 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
                     ? 'Official commerce is moderate but a thriving shadow economy undercuts legitimate trade.'
                     : 'Trade proceeds at an ordinary pace for a settlement of this size.';
   },
-  generateTradeScore = (r, s = {}, o = []) => {
+  _generateTradeScore = (r, s = {}, o = []) => {
     const d = priorityToCategory(getInstFlags(s, o).economyOutput),
       l = ((s == null ? void 0 : s.tradeRouteAccess) || 'road') === 'isolated';
     return r <= 0
@@ -396,7 +396,7 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
               ? `Food deficit of ${Math.round(r)}% is a chronic crisis — without meaningful trade, famine is a recurring threat.`
               : null;
   },
-  Rv = (r, s = {}, o = []) => {
+  _Rv = (r, s = {}, o = []) => {
     if (!r) return null;
     const { dailyNeed: d, deficit: l, surplus: m } = r;
     if (d === void 0 || isNaN(d)) return null;
@@ -424,7 +424,7 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
 
 // SERVICE_TIER_CHANCE — base probability modifier per settlement tier
 
-const UPGRADE_CHAINS = {
+const _UPGRADE_CHAINS = {
   thorp: {
     basic: [
       { name: 'Salt', category: 'food_processed', defaultEnabled: !0, desc: 'Food preservation' },
@@ -831,13 +831,13 @@ const getServicesForInstitution = (r, s, o = {}) => {
   }
   const m = r
     .toLowerCase()
-    .split(/[\s'()/,\-]+/)
+    .split(/[\s'(),/-]+/)
     .filter((C) => C.length > 2);
   let h = null,
     g = 0;
   for (const C of d) {
     const T = C.toLowerCase()
-      .split(/[\s'()/,\-]+/)
+      .split(/[\s'(),/-]+/)
       .filter((v) => v.length > 2);
     let M = 0;
     for (const v of T)
@@ -847,7 +847,7 @@ const getServicesForInstitution = (r, s, o = {}) => {
       S = h
         ? h
             .toLowerCase()
-            .split(/[\s'()/,\-]+/)
+            .split(/[\s'(),/-]+/)
             .filter((v) => v.length > 2).length
         : 1,
       y = g / (S * 2);
@@ -938,7 +938,7 @@ const CATEGORY_COLORS = {
 };
 
 // getCategoryDisplay
-const getCategoryDisplay = (r) =>
+const _getCategoryDisplay = (r) =>
   CATEGORY_COLORS[String(r || '').toLowerCase()] || {
     generateNeighborRelationship: '#f7f0e4',
     text: '#6b5340',

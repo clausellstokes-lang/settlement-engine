@@ -1,12 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import {GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_} from './theme.js';
-import {Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Check, X, Package, Swords, Route, Crown, ShieldAlert} from 'lucide-react';
+import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, Route, Crown, ShieldAlert } from 'lucide-react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {useStore} from '../store/index.js';
 import DeleteConfirmation from './DeleteConfirmation';
 
 import {getInstitutionalCatalog, getFullCatalogWithTierMeta} from '../generators/engine';
-import {INSTITUTION_SERVICES} from '../data/institutionServices';
 import EntityPicker from './EntityPicker.jsx';
 import { buildRegistry } from '../lib/customRegistry.js';
 
@@ -99,7 +98,7 @@ const CAT_COLORS = { Economic:'#a0762a', Military:'#8b1a1a', Religious:'#1a4a2a'
 
 // ── Tab content ─────────────────────────────────────────────────────────────
 
-function TiersTab({ search='' }) {
+function TiersTab({ _search='' }) {
   return <>
     <p style={{ fontSize:12, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
       Tier determines the maximum institution count, population band, and available institution categories.
@@ -201,7 +200,7 @@ function NeighbourTab({ search='' }) {
   </>;
 }
 
-function InstitutionsTab({ config, search }) {
+function InstitutionsTab({ _config, search }) {
   const catalog = useMemo(() => { try { return getFullCatalogWithTierMeta(); } catch { try { return getInstitutionalCatalog('all'); } catch { return {}; } } }, []);
   const all = useMemo(() => {
     const seen = new Set();
@@ -581,8 +580,8 @@ function CustomContentManager({ search }) {
   const deleteCustomItem = useStore(s => s.deleteCustomItem);
   const canUseCustomContent = useStore(s => s.canUseCustomContent());
   const authTier = useStore(s => s.auth.tier);
-  const customContentLoading = useStore(s => s.customContentLoading);
-  const customContentError = useStore(s => s.customContentError);
+  const _customContentLoading = useStore(s => s.customContentLoading);
+  const _customContentError = useStore(s => s.customContentError);
 
   const [activeCat, setActiveCat] = useState('institutions');
   const [addingNew, setAddingNew] = useState(false);

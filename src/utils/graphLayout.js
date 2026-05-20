@@ -66,7 +66,7 @@ export function forceLayout(nodes, edges, opts = {}) {
     return ((h & 0x7fffffff) % 1000) / 1000;
   };
 
-  const positions = nodes.map((node, i) => ({
+  const positions = nodes.map((node, _i) => ({
     id: node.id,
     data: node,
     x: 0.5 + (seed(`${node.id}-x`) - 0.5) * 0.5,

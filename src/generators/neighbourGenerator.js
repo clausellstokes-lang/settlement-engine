@@ -181,7 +181,7 @@ function extractDominantFactionTypes(factions) {
 // what the neighbour exports.
 export function getNeighbourEconomicBias(neighbourProfile) {
   if (!neighbourProfile) return {};
-  const { primaryExports, primaryImports, dynamics, relationshipType } = neighbourProfile;
+  const { primaryExports, primaryImports, dynamics, _relationshipType } = neighbourProfile;
   const mode = dynamics.economyMode || 'independent';
   const bias = {};
 

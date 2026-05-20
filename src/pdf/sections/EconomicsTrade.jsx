@@ -11,17 +11,15 @@
  *   - Shadow economy: capture rate + operations + criminal chains + crime types
  *   - Active economic issues with descriptions, priorities, suggested fixes
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, StatStrip, ThreeCol, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, StatStrip, ThreeCol, BulletList, _GoldRule, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { economicsHeadline, economicsTone } from '../lib/headlines.js';
-import { ChainRow, StatusCard, ScoreWithBreakdown } from '../primitives/Visuals.jsx';
+import { StatusCard } from '../primitives/Visuals.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Pill } from '../primitives/Pill.jsx';
-import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space } from '../theme.js';
 import { cap, num, smart, label, hookText, finite, safePct } from '../lib/format.js';

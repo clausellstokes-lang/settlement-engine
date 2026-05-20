@@ -82,7 +82,7 @@ function collectLockedEntities(settlement) {
   const out = [];
   if (!settlement) return out;
 
-  const collect = (arr, type, idKey = 'id', nameKey = 'name', tagSettlement) => {
+  const collect = (arr, type, idKey = 'id', nameKey = 'name', _tagSettlement) => {
     if (!Array.isArray(arr)) return;
     for (const entity of arr) {
       if (!entity) continue;

@@ -48,7 +48,7 @@ function noMagicWorld(config) {
 }
 
 /** Returns true if this institution should be hidden given the current magic state */
-function isMagicFiltered(name, category, tags, config) {
+function _isMagicFiltered(name, category, tags, config) {
   if (!noMagicWorld(config)) return false;
   return isArcaneInst(name, category, tags);
 }
@@ -73,7 +73,7 @@ export function filterCatalogForMagic(catalog, config) {
 }
 
 /** Filter a services map, removing entries for arcane institutions when magic = 0 */
-function filterServicesForMagic(services, config) {
+function _filterServicesForMagic(services, config) {
   if (!noMagicWorld(config)) return services;
   const out = {};
   for (const [instName, svcDef] of Object.entries(services || {})) {
@@ -89,7 +89,7 @@ const ARCANE_GOODS = [
   'Potions', 'Scrolls', 'Enchanted weapons', 'Magical textiles', 'Alchemical goods',
   'Dream parlor services', 'Airship transport',
 ];
-function filterGoodsForMagic(goods, config) {
+function _filterGoodsForMagic(goods, config) {
   if (!noMagicWorld(config)) return goods;
   return (goods || []).filter(g => !ARCANE_GOODS.some(ag =>
     (typeof g === 'string' ? g : g.name || '').toLowerCase().includes(ag.toLowerCase())
@@ -97,7 +97,7 @@ function filterGoodsForMagic(goods, config) {
 }
 
 /** Returns true if the magical_node resource should be hidden */
-function isMagicalNodeFiltered(resourceKey, config) {
+function _isMagicalNodeFiltered(resourceKey, config) {
   if (!noMagicWorld(config)) return false;
   return resourceKey === 'magical_node';
 }

@@ -418,7 +418,7 @@ function clampInv(score) {
  *                         passed in directly.
  * @returns {Object | null}
  */
-export function deriveThreatProfile(source, settlement) {
+export function deriveThreatProfile(source, _settlement) {
   if (!source) return null;
 
   // Accept already-canonical threats by pass-through (idempotent contract).

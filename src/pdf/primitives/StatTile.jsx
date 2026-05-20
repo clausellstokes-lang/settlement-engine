@@ -4,7 +4,6 @@
  * Used in headline rows. The tone prop lets the value pick up an accent
  * color for at-a-glance reads (e.g. red for poor prosperity).
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette } from '../theme.js';
 

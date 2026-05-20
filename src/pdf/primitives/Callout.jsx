@@ -5,7 +5,6 @@
  * passage that should visually peel off the body text. The tone prop drives
  * background tint + left-border colour.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, space, toneBg } from '../theme.js';
 

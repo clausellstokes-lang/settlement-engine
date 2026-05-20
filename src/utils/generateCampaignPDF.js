@@ -99,7 +99,7 @@ function footer(d, campaignName, pageN, totalPagesHint) {
 }
 
 // Ensure there's room for `h` more millimetres, else paginate.
-function ensureSpace(d, y, h, campaignName, pageN, newTopHandler) {
+function _ensureSpace(d, y, h, campaignName, pageN, newTopHandler) {
   if (y + h < BOT) return { y, pageN };
   footer(d, campaignName, pageN);
   d.addPage();

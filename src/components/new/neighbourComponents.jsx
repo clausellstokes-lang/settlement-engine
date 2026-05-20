@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import {C} from './design';
+import { useState } from 'react';
 import {Ti, serif, Tag, PlotHook} from './Primitives';
 
 export function NeighbourLinkCard({link,settlement,styleFor}) {

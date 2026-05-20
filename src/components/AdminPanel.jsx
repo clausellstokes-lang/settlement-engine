@@ -6,14 +6,14 @@
  * All writes go through Supabase RPC or direct table access
  * (developer accounts have elevated RLS policies).
  */
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
-  Users, Shield, Zap, Settings, Search, ChevronLeft,
-  Edit3, Check, X, AlertCircle, RefreshCw, Crown, User,
+  Users, Shield, Zap, _Settings, Search, ChevronLeft,
+  _Edit3, Check, X, AlertCircle, RefreshCw, Crown, _User,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { supabase, isConfigured } from '../lib/supabase.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, PARCH, sans, serif_, SP, R, FS } from './theme.js';
+import { supabase } from '../lib/supabase.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 
 function Section({ title, icon: Icon, children, actions }) {
   return (
@@ -199,7 +199,7 @@ function UserRow({ user, onUpdate }) {
 }
 
 export default function AdminPanel({ onBack }) {
-  const auth = useStore(s => s.auth);
+  const _auth = useStore(s => s.auth);
   const isElevated = useStore(s => s.isElevated());
 
   const [users, setUsers] = useState([]);

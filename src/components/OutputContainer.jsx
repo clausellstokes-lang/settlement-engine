@@ -1,11 +1,10 @@
 import React, { useState, useRef, lazy, Suspense } from 'react';
 import { runAiLayer } from '../generators/aiLayer';
 import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Sparkles, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass } from 'lucide-react';
-import { C, TIER_LABELS } from './new/design';
+import { TIER_LABELS } from './new/design';
 import { useStore } from '../store/index.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { isConfigured } from '../lib/supabase.js';
-import { sans, serif } from './new/Primitives';
 import PipelineRail from './PipelineRail.jsx';
 import ShareToGallery from './ShareToGallery.jsx';
 import BuyThisDossier from './BuyThisDossier.jsx';
@@ -47,10 +46,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
-  const clearAiSettlement = useStore(s => s.clearAiSettlement);
+  const _clearAiSettlement = useStore(s => s.clearAiSettlement);
   const storeRegenerate = useStore(s => s.regenSection);
   const requestNarrative = useStore(s => s.requestNarrative);
-  const creditBalance = useStore(s => s.creditBalance);
+  const _creditBalance = useStore(s => s.creditBalance);
   const storeAiLoading = useStore(s => s.aiLoading);
   const storeAiRegenerating = useStore(s => s.aiRegenerating);
   const storeAiError = useStore(s => s.aiError);

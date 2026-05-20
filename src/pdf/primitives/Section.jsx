@@ -6,7 +6,6 @@
  * narrative-only page swap the gold rule for the AI purple, signalling the
  * tonal shift without an explicit label.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, space } from '../theme.js';
 

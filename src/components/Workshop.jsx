@@ -31,18 +31,18 @@
  * Reads from / writes to the Zustand config slice, then dispatches
  * generation via the settlement slice.
  */
-import React, { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import {
-  Sliders, Play, RotateCcw, Save, Bookmark, ChevronDown, ChevronRight,
-  Shield, Coins, Sparkles, Flame, Skull, Swords, Crown, Globe, Mountain,
-  Trees, Waves, Compass, Users, Tent, Building2, Castle, Landmark,
-  AlertTriangle, Lock, Unlock, Dice5, Hash, Wand2,
+  Sliders, Play, RotateCcw, _Save, _Bookmark, ChevronDown, ChevronRight,
+  Shield, Coins, Sparkles, _Flame, Skull, Swords, Crown, Globe, Mountain,
+  _Trees, _Waves, Compass, _Users, Tent, Building2, Castle, Landmark,
+  AlertTriangle, Lock, Unlock, Dice5, _Hash, Wand2,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { DEFAULT_CONFIG } from '../store/configSlice.js';
 import {
-  GOLD, GOLD_B, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2,
-  CARD, CARD_HDR, CARD_ALT, PARCH, sans, serif_, SP, R, FS,
+  GOLD, _GOLD_B, GOLD_BG, INK, _INK_DEEP, MUTED, SECOND, BORDER, BORDER2,
+  CARD, CARD_HDR, _CARD_ALT, PARCH, sans, serif_, SP, R, FS,
 } from './theme.js';
 
 // ── Static data ──────────────────────────────────────────────────────────────
@@ -280,10 +280,10 @@ export default function Workshop({ isMobile }) {
   const config       = useStore(s => s.config);
   const updateConfig = useStore(s => s.updateConfig);
   const resetConfig  = useStore(s => s.resetConfig);
-  const settlement   = useStore(s => s.settlement);
+  const _settlement   = useStore(s => s.settlement);
 
   const generateSettlement = useStore(s => s.generateSettlement);
-  const isGenerating = useStore(s => s.isGenerating);
+  const _isGenerating = useStore(s => s.isGenerating);
 
   // Local workshop-specific state
   const [seed, setSeed] = useState('');

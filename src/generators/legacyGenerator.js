@@ -202,7 +202,7 @@ export function deriveLegacyAnnotations(history, settlement) {
   // One annotation per event type, max 3 total
   const seen = new Set();
   const result = [];
-  for (const { ev, relationship, suffix, score } of candidates) {
+  for (const { ev, relationship, suffix, _score } of candidates) {
     if (seen.has(ev.type)) continue;
     seen.add(ev.type);
     result.push({

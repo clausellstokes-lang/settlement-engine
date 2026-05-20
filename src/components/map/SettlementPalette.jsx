@@ -6,7 +6,7 @@
  * Placed settlements show a "placed" badge and are visually muted.
  */
 
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { MapPin, Search, GripVertical } from 'lucide-react';
 import { useStore } from '../../store';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';

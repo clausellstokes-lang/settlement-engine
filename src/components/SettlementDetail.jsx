@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, lazy, Suspense } from 'react';
+import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
 import {Link2, ChevronLeft, X, FileText, Sparkles, RotateCcw, Loader2} from 'lucide-react';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
 // section components. Import lazily on user click so opening a settlement
@@ -60,7 +60,7 @@ function NetworkEffectsPanel({ settlementId, saves }) {
 
       {/* Category bars */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
-        {EFFECT_CATEGORIES.map(({ key, label, color }) => {
+        {EFFECT_CATEGORIES.map(({ key, label, _color }) => {
           const val = mods.totals[key];
           const pct = Math.min(Math.abs(val) / maxAbs, 1) * 100;
           const isPos = val >= 0;
@@ -174,7 +174,7 @@ function LinkNeighbourCard({currentSave, allSaves, onLink}){
 
 // ── Save migration ─────────────────────────────────────────────────────────
 // Upgrades old save format to current schema. Safe to call on any save.
-function migrateConfig(config) {
+function _migrateConfig(config) {
   if (!config) return {};
   const c = { ...config };
   // Add magicExists if missing (infer from priorityMagic)
@@ -210,7 +210,7 @@ const CONTACT_DESC = {
 };
 
 // Build paired inter-settlement NPC relationships between two settlements
-function buildInterSettlementNPCs(settlementA, settlementB, relType, linkId) {
+function _buildInterSettlementNPCs(settlementA, settlementB, relType, linkId) {
   const cats = NPC_PAIR_CATS[relType] || ['economy'];
   const descFn = CONTACT_DESC[relType] || CONTACT_DESC.neutral;
   let npcsA = (settlementA.npcs||[]).filter(n => cats.includes((n.category||'').toLowerCase()));
@@ -260,18 +260,18 @@ function buildInterSettlementNPCs(settlementA, settlementB, relType, linkId) {
 }
 
 // Find a save entry by settlement name
-function findSaveByName(saves, name) {
+function _findSaveByName(saves, name) {
   return saves.find(s => s.name === name || s.settlement?.name === name) || null;
 }
 
 // Find a save entry by id
-function findSaveById(saves, id) {
+function _findSaveById(saves, id) {
   return saves.find(s => s.id === id) || null;
 }
 
 export default function SettlementDetail({
   detail, setDetail,
-  saves, setSaves,
+  saves, _setSaves,
   linking, setLinking,
   editNamesOpen, setEditNamesOpen,
   handleLink, removeNeighbour, applyRename,
@@ -280,7 +280,7 @@ export default function SettlementDetail({
   const network=detail.settlement.neighbourNetwork||[];
   const [editingName, setEditingName] = useState(null);  // {type,id,oldName}
   const [editDraft,   setEditDraft]   = useState('');
-  const [saved,       setSaved]       = useState(false);
+  const [_saved,       _setSaved]      = useState(false);
   const [exporting,   setExporting]   = useState(false); // PDF export spinner
   const [exportSheetOpen, setExportSheetOpen] = useState(false); // variant picker modal
 

@@ -10,20 +10,18 @@
  *   - Supporting capabilities (legal/medical/logistics/naval)
  *   - Vulnerabilities list
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, StatStrip, KeyValRow, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, StatStrip, _KeyValRow, BulletList, _GoldRule, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { defenseHeadline, defenseTone } from '../lib/headlines.js';
-import { ScoreCard, ScoreWithBreakdown, StatusCard } from '../primitives/Visuals.jsx';
+import { ScoreCard } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
-import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space } from '../theme.js';
-import { cap, num, smart, label, hookText } from '../lib/format.js';
+import { cap, smart, label, hookText } from '../lib/format.js';
 
 export function DefenseSecurity({ settlement, narrativeMode, vm }) {
   const d = vm.defense;
@@ -104,7 +102,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
         <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
           ARMED FORCES
         </Text>
-        {d.defenseInstitutions.filter(inst => inst.present).map((inst, i) => (
+        {d.defenseInstitutions.filter(inst => inst.present).map((inst, _i) => (
           <View
             key={`di-${inst.key}`}
             style={{

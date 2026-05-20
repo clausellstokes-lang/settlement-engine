@@ -16,11 +16,11 @@
  *   account     — Full account page (post-auth)
  *   admin       — Developer admin panel (elevated roles only)
  */
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { MapPin, FolderOpen, BookOpen, Sparkles, Map as MapIcon, Zap, User, Shield, Headphones } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
-import { GOLD, GOLD_B, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, PARCH, BORDER, sans, serif_, SP, R, FS } from './components/theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS } from './components/theme.js';
 
 // Lazy-loaded views
 const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
@@ -59,12 +59,20 @@ function Loading() {
 
 export default function App() {
   const isMobile = useIsMobile();
-  const [view, setView] = useState('generate');
+  // Lazy initial state honors deep-link params (?view=gallery|pricing)
+  // on first load. This avoids the React 19 "setState in effect"
+  // warning that an after-mount setView would otherwise trigger.
+  const [view, setView] = useState(() => {
+    if (typeof window === 'undefined') return 'generate';
+    const params = new URLSearchParams(window.location.search);
+    const deepView = params.get('view');
+    return (deepView === 'gallery' || deepView === 'pricing') ? deepView : 'generate';
+  });
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const authTier = useStore(s => s.auth.tier);
-  const authRole = useStore(s => s.auth.role);
+  const _authRole = useStore(s => s.auth.role);
   const authLoading = useStore(s => s.auth.loading);
   const isElevated = useStore(s => s.isElevated());
   const initAuth = useStore(s => s.initAuth);
@@ -106,23 +114,6 @@ export default function App() {
       fetchCreditBalance().then(bal => setCreditBalance(bal));
     });
   }, [initAuth, initOnboarding, setCreditBalance]);
-
-  // Deep-link router. Honors ?view=gallery (with optional ?slug=...) and
-  // ?view=pricing on first load so footer links + shared URLs land on
-  // the right surface. We only consume the param once; later setView
-  // calls navigate without touching the URL. A proper SPA router is the
-  // longer-term answer, but this keeps the public surfaces shareable
-  // today without dragging in react-router.
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const params = new URLSearchParams(window.location.search);
-    const deepView = params.get('view');
-    if (deepView === 'gallery' || deepView === 'pricing') {
-      setView(deepView);
-    }
-    // We deliberately do NOT mutate the URL here — the slug param is
-    // read by GalleryPage via its own location lookup if/when needed.
-  }, []);
 
   // ── Cloud sync custom content when user enters premium / elevated state ───
   // Triggers once per tier transition. Migrates local items on first premium

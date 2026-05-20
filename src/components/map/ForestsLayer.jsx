@@ -7,7 +7,7 @@
  * reference to the <symbol> defs in MapOverlay's TreeSymbols.
  */
 
-import React, { useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { useStore } from '../../store';
 import { MAP_MODES, ANNOTATE_TOOLS } from '../../store/mapSlice.js';
 

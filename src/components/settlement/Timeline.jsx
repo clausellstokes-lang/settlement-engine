@@ -8,7 +8,6 @@
  * Hidden in draft mode (no log to show).
  */
 
-import React from 'react';
 import { Clock, Undo2, ChevronRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';

@@ -18,7 +18,7 @@
  * trigger a state update (rare — iframe resize).
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../store';
 import RelationshipEdges from './map/RelationshipEdges.jsx';
 import ChainEdges        from './map/ChainEdges.jsx';

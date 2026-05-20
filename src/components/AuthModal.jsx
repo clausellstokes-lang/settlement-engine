@@ -11,10 +11,10 @@
  *   - Quick link to full Account page
  *   - Customer support contact link
  */
-import React, { useState } from 'react';
-import { X, AlertCircle, CheckCircle, Mail, Shield, Crown, User, ExternalLink, Headphones } from 'lucide-react';
+import { useState } from 'react';
+import { X, AlertCircle, CheckCircle, Mail, Shield, User, ExternalLink, Headphones } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 import { isConfigured } from '../lib/supabase.js';
 import { getTierDisplayName } from '../config/pricing.js';
 import { flag } from '../lib/flags.js';
@@ -45,7 +45,7 @@ function DiscordGlyph() {
   );
 }
 
-function OAuthButton({ provider, glyph, label, onClick, disabled, soonNote }) {
+function OAuthButton({ _provider, glyph, label, onClick, disabled, soonNote }) {
   return (
     <button
       type="button"

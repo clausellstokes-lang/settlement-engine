@@ -23,10 +23,9 @@
  *   • Cancel     → back out of the edit.
  */
 
-import React from 'react';
 import { Sparkles, RotateCcw, X, Zap, GitBranch } from 'lucide-react';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_ } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans } from './theme.js';
 
 const PURPLE = '#6a2a9a';
 const PURPLE_BG = 'rgba(90,42,138,0.08)';

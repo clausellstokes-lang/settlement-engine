@@ -32,7 +32,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   const resources     = config.nearbyResources || [];
   const route         = config.tradeRouteAccess || 'road';
   const terrain       = config.terrainType || 'plains';
-  const threat        = config.monsterThreat || 'heartland';
+  const _threat        = config.monsterThreat || 'heartland';
   const stresses      = config.stressTypes || (config.stressType ? [config.stressType] : []);
   const priorityMagic = config.priorityMagic ?? 0;
   const magicExists   = config.magicExists !== false;
@@ -53,7 +53,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   const hasHunting        = hasInst('hunting', 'managed forest', 'woodcutter');
   const hasOrchard        = hasInst('orchard', 'kitchen garden', 'herb garden');
   const hasMarket         = hasInst('market', 'marketplace', 'daily market', 'district market');
-  const hasBakery         = hasInst('baker', 'bakery');
+  const _hasBakery         = hasInst('baker', 'bakery');
   const hasDruid          = hasInst('druid', 'grove', 'elder grove', 'sacred grove', 'warden');
   const hasDivine         = hasInst('cathedral', 'monastery', 'great cathedral', 'parish church');
   const hasArcane         = hasInst('mage', 'wizard', 'arcane', 'spellcasting');

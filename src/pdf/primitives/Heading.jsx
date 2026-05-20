@@ -9,7 +9,6 @@
  *
  * Pass `color` to override (e.g. AI purple for narrative-only headings).
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, space } from '../theme.js';
 

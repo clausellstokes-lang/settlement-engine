@@ -2214,7 +2214,7 @@ export const institutionalCatalog = {
         tags: ['arcane', 'education'],
         priorityCategory: 'exotic',
       },
-      "Mages\' district": {
+      "Mages' district": {
         required: false,
         minTier: 'metropolis',
         baseChance: 0.45,
@@ -2240,7 +2240,7 @@ export const institutionalCatalog = {
       },
     },
     Criminal: {
-      "Thieves\' guild (powerful)": {
+      "Thieves' guild (powerful)": {
         required: false,
         minTier: 'metropolis',
         exclusiveGroup: 'criminalPower',
@@ -2265,7 +2265,7 @@ export const institutionalCatalog = {
         tags: ['criminal', 'underground'],
         priorityCategory: 'entertainment',
       },
-      "Assassins\' guild": {
+      "Assassins' guild": {
         required: false,
         minTier: 'metropolis',
         baseChance: 0.2,

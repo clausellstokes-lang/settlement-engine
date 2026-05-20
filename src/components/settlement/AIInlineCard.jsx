@@ -16,7 +16,7 @@
  * about presentation, not a new code path.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Sparkles, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import Card from '../primitives/Card.jsx';

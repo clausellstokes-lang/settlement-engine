@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {C} from '../design';
 import {Ti, serif, Section, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -31,7 +30,7 @@ function ScoreRow({ label, score, icon }) {
   );
 }
 
-function StatusTag({ label, value, color, accent }) {
+function StatusTag({ label, value, _color, accent }) {
   return (
     <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, borderRadius: 6, padding: '7px 10px', minWidth: 0 }}>
       <div style={{ fontSize: 9, fontWeight: 700, color: accent || '#6b5340', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>{label}</div>
@@ -51,7 +50,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
   const scores = dp.scores || {};
   const via = r.economicViability || {};
   const sp = eco.safetyProfile || {};
-  const ps = r.powerStructure || {};
+  const _ps = r.powerStructure || {};
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
   const stresses = (Array.isArray(r.stress) ? r.stress : r.stress ? [r.stress] : []).filter(Boolean);
@@ -61,7 +60,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
   // (mid-migration, partial gen) can land here without an institutions
   // array. The smoke test in tests/ui/tabs.smoke.test.js caught this.
   const byCategory = (r.institutions || []).reduce((acc,m)=>((acc[m.category]=acc[m.category]||[]).push(m),acc),{});
-  const catOrder = ['government','military','economy','religious','magic','criminal','other'];
+  const _catOrder = ['government','military','economy','religious','magic','criminal','other'];
   const catColors2 = {government:'#2a3a7a',military:'#8b1a1a',economy:'#a0762a',religious:'#1a5a28',magic:'#5a2a8a',criminal:'#4a1a4a',other:'#5a4a2a',Essential:'#6b5340',Crafts:'#7a4a1a',Infrastructure:'#1a4a5a',Defense:'#8b1a1a',Entertainment:'#7a1a5a',Adventuring:'#1a5a3a'};
   const getCatColor = c => catColors2[c] || '#6b5340';
 

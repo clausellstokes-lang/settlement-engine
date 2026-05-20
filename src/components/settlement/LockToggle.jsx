@@ -9,7 +9,6 @@
  * Visually small — meant to live next to section headers.
  */
 
-import React from 'react';
 import { Lock, Unlock } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { GOLD, MUTED, BORDER, sans, FS, R } from '../theme.js';

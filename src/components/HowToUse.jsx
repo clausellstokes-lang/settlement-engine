@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_ } from './theme.js';
 import { BookOpen, Zap, Star, Cpu, List } from 'lucide-react';
 

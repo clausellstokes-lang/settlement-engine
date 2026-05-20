@@ -23,7 +23,7 @@
  *   visitors see — the legacy flow.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Sparkles, LogIn, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
@@ -31,7 +31,7 @@ import {
   anonAtCap, anonGensRemaining, incrementAnonGen, DEFAULT_DAILY_CAP,
 } from '../lib/anonGenCounter.js';
 import {
-  GOLD, INK, INK_DEEP, BORDER, CARD, sans, serif_, SP, R, FS,
+  GOLD, INK, _INK_DEEP, BORDER, _CARD, sans, serif_, SP, R, FS,
 } from './theme.js';
 
 // Sizes a Wanderer (anonymous) account can generate, in display order.

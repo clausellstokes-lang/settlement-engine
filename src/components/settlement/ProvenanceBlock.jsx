@@ -12,7 +12,6 @@
  * All values are read-only here; mutation happens elsewhere.
  */
 
-import React from 'react';
 import { useStore } from '../../store/index.js';
 import Card from '../primitives/Card.jsx';
 

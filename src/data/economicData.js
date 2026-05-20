@@ -664,7 +664,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "minor treatments"
         ]
       },
-      "Wizard\'s tower": {
+      "Wizard's tower": {
         resources: [
           "magical_node"
         ],

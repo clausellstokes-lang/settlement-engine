@@ -9,7 +9,7 @@
  *   15 credits / $9.99  ($0.67/ea, 33% off)
  *   40 credits / $19.99 ($0.50/ea, 50% off)
  */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { X, Zap, Crown, AlertCircle, TrendingDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';

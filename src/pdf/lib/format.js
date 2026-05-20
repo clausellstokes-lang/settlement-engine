@@ -73,7 +73,7 @@ export function humanize(s) {
   const out = s
     .replace(/([a-z0-9])([A-Z])/g, '$1 $2')   // camel → "camel Case"
     .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2') // ABCDef → "ABC Def"
-    .replace(/[_\-]+/g, ' ')
+    .replace(/[_-]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim()
     .replace(/\b\w/g, c => c.toUpperCase());

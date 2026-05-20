@@ -9,7 +9,7 @@
  * Filter: only chains whose `good` is in mapState.layers.chainFilter show.
  */
 
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useStore } from '../../store';
 import { computeMapChains } from '../../lib/computeMapChains.js';
 
@@ -39,7 +39,7 @@ export default function ChainEdges() {
     if (!supplyChains.length || !placements) return [];
 
     const settlementToXY = new Map();
-    for (const [burgIdStr, p] of Object.entries(placements)) {
+    for (const [_burgIdStr, p] of Object.entries(placements)) {
       if (p?.settlementId && typeof p?.x === 'number' && typeof p?.y === 'number') {
         settlementToXY.set(String(p.settlementId), { x: p.x, y: p.y });
       }

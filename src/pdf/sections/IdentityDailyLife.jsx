@@ -13,17 +13,15 @@
  *   - daily.<time>
  *   - daily.cultureNotes
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, KeyValRow, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, KeyValRow, _BulletList, _GoldRule, HairRule, Tag,
 } from '../primitives/Dense.jsx';
-import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space } from '../theme.js';
-import { cap, label, smart, humanize, num } from '../lib/format.js';
+import { smart, humanize, num } from '../lib/format.js';
 
 export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
   const id = vm.identity;

@@ -4,7 +4,6 @@
  * Tones map to palette[k] / toneBg[k] in theme.js: good, warn, bad, cool,
  * gold, muted, ai. Pass `large` to bump padding for headline contexts.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, toneBg } from '../theme.js';
 import { stripZwnj } from '../lib/format.js';

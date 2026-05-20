@@ -12,11 +12,10 @@
  * page focused: this one for player-facing transactions, the other for the
  * factional/political map of who runs what.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, StatStrip, HairRule, Tag,
+  ChapterBand, ChapterHeadline, _StatStrip, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';

@@ -15,7 +15,6 @@
  *   3 — Explored: "You're all set" (with Finish Tour)
  *   4 — Complete (component returns null)
  */
-import React from 'react';
 import { Sparkles, X } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { GOLD, GOLD_BG, INK, SECOND, sans, serif_, SP, R, FS } from './theme.js';

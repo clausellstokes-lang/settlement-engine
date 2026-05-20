@@ -7,14 +7,13 @@
  * this UI is identical in both modes.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Zap, Flame, Trash2, Plus, MapPinOff, AlertOctagon, X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
-import { BAND_COLOR } from '../../domain/state/bands.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 
-const TYPE_ICONS = {
+const _TYPE_ICONS = {
   ADD_INSTITUTION:    Plus,
   REMOVE_INSTITUTION: Trash2,
   DAMAGE_INSTITUTION: Flame,

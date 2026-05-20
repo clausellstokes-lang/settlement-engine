@@ -21,7 +21,7 @@
  */
 
 import { random as _rng } from './rngContext.js';
-import { chance, pick, pickRandom, pickRandom2, random01 } from './helpers.js';
+import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 
 import {
   PRESSURE_SENTENCES,
@@ -104,7 +104,7 @@ const buildTradeNarrative = (tier, culture, magicPriority) => {
  * Return a one-sentence historical character description driven by the pattern
  * of event types in the settlement's history. Uses POLITICAL_FLAVOR templates.
  */
-const buildStressProfile = (events, tier, config) => {
+const buildStressProfile = (events, _tier, _config) => {
   if (!events || events.length === 0) return 'recently established and still finding its character';
 
   const disasters = events.filter(e => e.type === 'disaster').length;
@@ -216,7 +216,7 @@ const STRESS_DESCS = {
   indebted: [
     r =>
       `${r} is in reasonable shape. The walls are standing, the market is functioning, the main street is paved. The paving needs repair. The wall has a section of new brick that doesn't quite match the old. The repairs that needed doing five years ago are still waiting.`,
-    r =>
+    _r =>
       "A building near the gate has a new sign — an institution that wasn't there last season, with a name that is recognisably the name of an outside creditor. Someone has arrived and set up an office. This is not a good sign.",
     r =>
       `${r} functions. The market is busy enough. The streets are clean enough. The civic buildings are maintained enough. 'Enough' is doing a lot of work in every impression.`,
@@ -290,7 +290,7 @@ const genSettSummary = settlement => {
     npcs = [],
     history = {},
     stress,
-    institutions = [],
+    _institutions = [],
   } = settlement;
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
@@ -763,7 +763,7 @@ const genPressureDetail = settlement => {
  */
 const genCoherence = settlement => {
   const notes = [];
-  const { powerStructure, economicState, config, institutions, history } = settlement;
+  const { powerStructure, economicState, config, _institutions, history } = settlement;
   if (!powerStructure || !economicState) return notes;
 
   const factions = powerStructure.factions || [];
@@ -873,7 +873,7 @@ const genCoherence = settlement => {
  * Return a short flavour sentence matching the settlement's safety label.
  * Returns null if a stress type is active (pressure sentence handles that case).
  */
-const getSettReason = (safetyLabel, monsterThreat, hasStress) => {
+const _getSettReason = (safetyLabel, monsterThreat, hasStress) => {
   if (hasStress) return null;
   const label = (safetyLabel || '').toLowerCase();
 
@@ -943,9 +943,9 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs) => {
  * @param {Object} config
  * @returns {string[]} Array of reason strings (shown as bullet list)
  */
-export const generateSettlementReason = (tier, route, neighbor, config = {}) => {
+export const generateSettlementReason = (tier, route, neighbor, _config = {}) => {
   const lines = [];
-  const routeHooks = TERRAIN_NARRATIVE_HOOKS[route] || TERRAIN_NARRATIVE_HOOKS.isolated;
+  const _routeHooks = TERRAIN_NARRATIVE_HOOKS[route] || TERRAIN_NARRATIVE_HOOKS.isolated;
 
   // Primary settlement reason
   let reason;

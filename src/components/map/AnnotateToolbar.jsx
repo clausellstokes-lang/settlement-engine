@@ -5,11 +5,10 @@
  * the options for each tool (font size, color, marker icon, forest style).
  */
 
-import React from 'react';
 import { MousePointer2, Type, Pin, Trash2, Undo2, Redo2 } from 'lucide-react';
 import { useStore } from '../../store';
 import { ANNOTATE_TOOLS } from '../../store/mapSlice.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R } from '../theme.js';
 
 export default function AnnotateToolbar() {
   const annotateTool    = useStore(s => s.annotateTool);

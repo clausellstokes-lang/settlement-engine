@@ -21,7 +21,6 @@
  * the dossier but doesn't prevent the user from doing other work.
  */
 
-import React from 'react';
 import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';

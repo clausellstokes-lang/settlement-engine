@@ -9,15 +9,14 @@
  * Most content text is editable so a DM can rewrite the elevator pitch in
  * their own voice while keeping the engine output as a starting draft.
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
-import { ChapterBand, StatStrip, KeyValRow, ThreeCol, BulletList, GoldRule, HairRule } from '../primitives/Dense.jsx';
+import { ChapterBand, StatStrip, KeyValRow, ThreeCol, GoldRule, HairRule } from '../primitives/Dense.jsx';
 import { StackedBar } from '../primitives/Visuals.jsx';
 import { EditableText, EditableProse, NotesField } from '../primitives/Editable.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space } from '../theme.js';
-import { cap, num, label, hookText } from '../lib/format.js';
+import { cap, label } from '../lib/format.js';
 
 export function SummaryPage({ settlement, narrativeMode, vm }) {
   const su = vm.summary;

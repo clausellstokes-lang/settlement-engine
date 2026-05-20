@@ -20,7 +20,7 @@
  *   maxSuggestions  - how many suggestions to show (default 12)
  */
 
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { X, Search, AlertTriangle } from 'lucide-react';
 import { useStore } from '../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans } from './theme.js';

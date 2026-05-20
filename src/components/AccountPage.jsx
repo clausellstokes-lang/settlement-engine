@@ -9,10 +9,10 @@
  *   - Customer support contact form
  *   - Developer admin link (if role is developer/admin)
  */
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
-  User, Shield, Crown, Zap, Save, Mail, Headphones,
-  ChevronRight, TrendingDown, Edit3, Check, X, ExternalLink,
+  User, Shield, Crown, _Zap, _Save, _Mail, Headphones,
+  ChevronRight, TrendingDown, Edit3, Check, X, _ExternalLink,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { auth as authService } from '../lib/auth.js';
@@ -20,7 +20,7 @@ import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured, supabase } from '../lib/supabase.js';
 import { getTierDisplayName } from '../config/pricing.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, PARCH, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 
 function Section({ title, icon: Icon, children }) {
   return (
@@ -69,7 +69,7 @@ export default function AccountPage({ onNavigateAdmin }) {
   const auth = useStore(s => s.auth);
   const creditBalance = useStore(s => s.creditBalance);
   const isElevated = useStore(s => s.isElevated());
-  const isDeveloper = useStore(s => s.isDeveloper());
+  const _isDeveloper = useStore(s => s.isDeveloper());
   const savedSettlements = useStore(s => s.savedSettlements);
   const maxSaves = useStore(s => s.maxSaves());
   const authSignOut = useStore(s => s.authSignOut);

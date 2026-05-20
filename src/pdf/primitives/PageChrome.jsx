@@ -11,7 +11,6 @@
  * NARRATIVE" tag so a quick fan of the printed copy reads at-a-glance which
  * pages came from the AI lens vs raw data.
  */
-import React from 'react';
 import { Page, View, Text } from '@react-pdf/renderer';
 import { sheet, palette, type, page as pageGeo } from '../theme.js';
 

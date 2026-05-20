@@ -13,7 +13,6 @@
  * because the settlement has no factions) degrades gracefully.
  */
 
-import React from 'react';
 import { Sparkles, AlertTriangle, Shuffle, MapPin, Users, Network } from 'lucide-react';
 import { Section, TabIntro } from '../Primitives';
 

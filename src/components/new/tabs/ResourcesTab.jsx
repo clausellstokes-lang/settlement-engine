@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import {C} from '../design';
+import React from 'react';
 import {sans, Section, Empty, TabIntro} from '../Primitives';
 
 import {isMobile} from '../tabConstants';
@@ -9,8 +8,8 @@ import {NarrativeNote} from '../NarrativeNote';
 export function ResourcesTab({settlement:r, narrativeNote}) {
   const res = r?.resourceAnalysis;
   if (!res) return <Empty message="No resource data available."/>;
-  const mobile = isMobile();
-  const config = r?.config || {};
+  const _mobile = isMobile();
+  const _config = r?.config || {};
 
   // Imports: object {critical:[], recommended:[], reasons:{}}
 

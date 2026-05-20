@@ -13,7 +13,6 @@
  * a pillar-tier death; the SuccessorPrompt UI consumes the ranked list.
  */
 
-import { importanceWeight } from './npcs.js';
 
 /** @typedef {import('./npcs.js').NpcStructural} NpcStructural */
 

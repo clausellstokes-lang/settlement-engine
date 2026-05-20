@@ -19,7 +19,6 @@
  *   • Undo / Redo — passed through to FMG's history.
  */
 
-import React from 'react';
 import { Mountain, Trees as TreesIcon, Undo2, Redo2, Info, Pencil } from 'lucide-react';
 import { useStore } from '../../store';
 import { TERRAIN_TOOLS } from '../../store/mapSlice.js';

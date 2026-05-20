@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import ControlsStrip from './ControlsStrip.jsx';
 import {GOLD, INK, MUTED, SECOND, BORDER, sans} from './theme.js';
 import { useStore } from '../store/index.js';
@@ -39,11 +39,11 @@ function goodKey(tier, goodName) { return `${tier}_good_${goodName}`; }
 
 // Card-click cycle: allow → force → exclude → allow
 function GoodCard({ good, state, onCycle }) {
-  const { allow, force, forceExclude } = state;
+  const { _allow, force, forceExclude } = state;
   const cc          = catColor(good.category);
   const isForced    = force && !forceExclude;
   const isExcluded  = forceExclude;
-  const isAllowed   = !isForced && !isExcluded;
+  const _isAllowed   = !isForced && !isExcluded;
 
   const bg         = isForced ? '#efe8d0' : '#faf6ef';
   const borderLeft = `3px solid ${isForced ? GOLD : 'transparent'}`;
@@ -71,7 +71,7 @@ function GoodCard({ good, state, onCycle }) {
   );
 }
 
-function SectionHeader({ label, forced, allowed, total, isOpen, onToggle }) {
+function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
   return (
     <button onClick={onToggle} style={{
       width:'100%', display:'flex', alignItems:'center', gap:8, padding:'7px 12px',

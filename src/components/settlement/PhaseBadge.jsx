@@ -10,11 +10,10 @@
  * accidentally if we don't gate it.
  */
 
-import React from 'react';
 import { Edit3, BookMarked, RotateCcw } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { GOLD, GOLD_BG, INK, MUTED, BORDER, sans, FS, R } from '../theme.js';
+import { GOLD, GOLD_BG, INK, sans, FS, R } from '../theme.js';
 
 const COLORS = {
   draft: { bg: '#f3ead8', fg: '#6a4a1c', border: '#c8a96a', icon: Edit3,      label: 'Draft' },

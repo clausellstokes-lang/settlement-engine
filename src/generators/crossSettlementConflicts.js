@@ -59,7 +59,7 @@ function pick(arr) {
   return arr[Math.floor(_rng() * arr.length)];
 }
 
-function pickNPC(npcs, cat) {
+function _pickNPC(npcs, cat) {
   const filtered = npcs.filter(n => (n.category||'').toLowerCase() === cat);
   return filtered.length ? pick(filtered) : null;
 }

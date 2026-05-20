@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import {C} from '../design';
+import React from 'react';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 
 import {isMobile} from '../tabConstants';
@@ -10,7 +9,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
-  const mobile = isMobile();
+  const _mobile = isMobile();
 
   // Strip the "✗ NOT VIABLE: " / "✓ VIABLE: " prefix from summary
   const summaryClean = (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim();
@@ -54,7 +53,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
   )].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
 
   // Clean plot hook text (strip embedded " PLOT HOOK: " prefix)
-  const cleanHook = h => {
+  const _cleanHook = h => {
     const t = typeof h==='object' ? h.hook||Ti(h) : String(h);
     return t.replace(/^\s*PLOT HOOK:\s*/i, '').trim();
   };

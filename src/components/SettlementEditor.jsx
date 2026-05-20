@@ -6,7 +6,7 @@
  * filtered by what's already in the settlement. Custom content from the
  * Compendium appears with a purple "Custom" badge.
  */
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Plus, X, ChevronDown, ChevronUp, Sliders, Search } from 'lucide-react';
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
@@ -179,7 +179,7 @@ export default function SettlementEditor({
   // Shape: { key, val }
   const [priorityDraft, setPriorityDraft] = useState(null);
 
-  const tier = settlement?.tier?.toLowerCase() || 'village';
+  const _tier = settlement?.tier?.toLowerCase() || 'village';
   // Wrap each derived array in useMemo so the reference is stable when
   // the source slice of settlement hasn't changed. Without this, every
   // render allocates a fresh array, and the downstream useMemo blocks

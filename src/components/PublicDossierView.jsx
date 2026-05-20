@@ -17,7 +17,6 @@
  *   object is the world's view of the place, nothing more.
  */
 
-import React from 'react';
 import { ArrowRight, Eye } from 'lucide-react';
 import OutputContainer from './OutputContainer.jsx';
 import { TIER_LABELS } from './new/design.js';

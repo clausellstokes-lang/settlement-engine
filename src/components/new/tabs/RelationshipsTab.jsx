@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import {generateCrossSettlementConflicts} from '../../../generators/crossSettlementConflicts';
-import {C} from '../design';
 import {serif, Section, TabIntro} from '../Primitives';
 
 import {NPCRelCard2, ConflictCard} from '../npcComponents';

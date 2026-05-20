@@ -15,15 +15,15 @@
  * helpers in src/lib/gallery.js — this component owns no truth.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Globe, Lock, Copy, Check, AlertCircle } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useFlag } from '../lib/flags.js';
 import { publishSettlement, unpublishSettlement } from '../lib/gallery.js';
-import { GOLD, INK, BORDER, sans, SP, R, FS } from './theme.js';
+import { GOLD, BORDER, sans, SP, R, FS } from './theme.js';
 
 const MUTED = '#6b5340';
-const BODY  = '#4A3B22';
+const _BODY  = '#4A3B22';
 
 function publicUrlFor(slug) {
   if (typeof window === 'undefined') return `/gallery/${slug}`;

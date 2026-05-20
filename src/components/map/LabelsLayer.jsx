@@ -8,7 +8,7 @@
  *   - Delete via selection panel / keyboard
  */
 
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useStore } from '../../store';
 import { MAP_MODES, ANNOTATE_TOOLS } from '../../store/mapSlice.js';
 
@@ -30,7 +30,7 @@ function Label({ label }) {
   const selectedId    = useStore(s => s.selectedAnnotationId);
   const setSelected   = useStore(s => s.setSelectedAnnotationId);
   const updateLabel   = useStore(s => s.updateLabel);
-  const deleteLabel   = useStore(s => s.deleteLabel);
+  const _deleteLabel   = useStore(s => s.deleteLabel);
 
   const dragRef = useRef(null);
   const isEditable = mapMode === MAP_MODES.ANNOTATE && annotateTool === ANNOTATE_TOOLS.SELECT;
@@ -82,7 +82,6 @@ function Label({ label }) {
   function handleDoubleClick(e) {
     if (!isEditable) return;
     e.stopPropagation();
-    // eslint-disable-next-line no-alert
     const next = window.prompt('Label text:', label.text || '');
     if (next != null && next !== label.text) {
       updateLabel(label.id, { text: next });

@@ -14,20 +14,18 @@
  *   - Warnings & coherence notes
  *   - Institutions panel with category distribution + counts
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, StatStrip, KeyValRow, ThreeCol, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, StatStrip, _KeyValRow, ThreeCol, BulletList, _GoldRule, HairRule, _Tag,
 } from '../primitives/Dense.jsx';
 import { overviewHeadline, overviewTone } from '../lib/headlines.js';
 import { StackedBar } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
-import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, factionColors, space } from '../theme.js';
-import { cap, num, smart, label, hookText, finite, safePct, humanize } from '../lib/format.js';
+import { type, palette, space } from '../theme.js';
+import { cap, smart, label, hookText, finite, safePct, humanize } from '../lib/format.js';
 
 export function Overview({ settlement, narrativeMode, vm }) {
   const o = vm.overview;

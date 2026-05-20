@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { t } from '../../copy/index.js';
 
 export const serif = { fontFamily: 'Crimson Text, Georgia, serif' };

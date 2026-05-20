@@ -10,7 +10,7 @@
  * the overlay's transformed <g> and follows pan/zoom automatically.
  */
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useStore } from '../../store';
 import { computeRoadEdges } from '../../lib/roadNetwork.js';
 

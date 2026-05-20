@@ -87,7 +87,7 @@ function SummaryTab({ settlement:r }) {
   const [instOpen,setInstOpen]=useState(false);
   if (!r) return null;
 
-  const {name,tier,population:pop,institutions:g=[],npcs:w=[],factions:factionGroups=[],conflicts:allConflicts=[],economicState:eco={},spatialLayout:spatial,powerStructure:ps={},history:hist={},economicViability:via,settlementReason:reason,config:cfg={},stress:stressRaw,prominentRelationship:pr,coherenceNotes:cn=[]}=r;
+  const {name,tier,population:pop,institutions:g=[],npcs:w=[],factions:_factionGroups=[],conflicts:allConflicts=[],economicState:eco={},spatialLayout:spatial,powerStructure:ps={},history:hist={},economicViability:via,settlementReason:reason,config:cfg={},stress:stressRaw,prominentRelationship:pr,coherenceNotes:_cn=[]}=r;
   const isMobile=window.innerWidth<640;
   const stresses=(Array.isArray(stressRaw)?stressRaw:stressRaw?[stressRaw]:[]).filter(Boolean);
   const allFactions=ps?.factions||[];
@@ -95,7 +95,7 @@ function SummaryTab({ settlement:r }) {
   const tierLabel=TIER_LABELS[tier]||tier;
   const firstQuarter=spatial?.quarters?.[0];
   const foodBal=via?.metrics?.foodBalance;
-  const topIssue=via?.issues?.[0];
+  const _topIssue=via?.issues?.[0];
   const topNPCs=[...(w||[])].sort((a,b)=>(b.power||0)-(a.power||0)).slice(0,6);
   const dp=r.defenseProfile||{};
 

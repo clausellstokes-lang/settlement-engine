@@ -13,11 +13,10 @@
  *   - history.tension.<i>.description
  *   - history.tension.<i>.hook.<j>
  */
-import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, KeyValRow, BulletList, GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, _KeyValRow, _BulletList, _GoldRule, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { historyHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
@@ -375,7 +374,7 @@ function Timeline({ events, age }) {
           }}
         />
         {/* Dots */}
-        {items.map(({ ev, i, pct, tone }) => (
+        {items.map(({ _ev, i, pct, tone }) => (
           <View
             key={`tl-${i}`}
             style={{

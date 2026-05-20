@@ -27,7 +27,7 @@
  * found post-deploy.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Cog, Feather, ChevronRight, ChevronDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useFlag } from '../lib/flags.js';

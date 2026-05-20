@@ -3,7 +3,7 @@
  * title and note. Drag to move (annotate/select), double-click to edit.
  */
 
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useStore } from '../../store';
 import { MAP_MODES, ANNOTATE_TOOLS } from '../../store/mapSlice.js';
 
@@ -71,7 +71,6 @@ function Marker({ marker }) {
   function handleDoubleClick(e) {
     if (!isEditable) return;
     e.stopPropagation();
-    // eslint-disable-next-line no-alert
     const nextTitle = window.prompt('Marker title:', marker.title || '');
     if (nextTitle != null && nextTitle !== marker.title) {
       updateMarker(marker.id, { title: nextTitle });

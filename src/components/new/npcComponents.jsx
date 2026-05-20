@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Pin } from 'lucide-react';
-import {C, catColor} from './design';
+import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
-import {REL_STYLES} from './tabConstants';
-import {isMobile} from './tabConstants';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
@@ -56,6 +54,7 @@ export function NPCCategoryGroup({category, label, group, impFilter, search, rel
 }
 
 
+// eslint-disable-next-line no-unused-vars -- legacy NPCRelCard; NPCRelCard2 is the live export
 function NPCRelCard({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
   const [open,setOpen]=useState(false);
   return (
@@ -109,7 +108,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
 }
 
 export function ConflictCard({conflict:c}) {
-  const [open,setOpen]=useState(false);
+  const [_open,_setOpen]=useState(false);
   const intStyle={high:{color:'#8b1a1a',label:'HIGH TENSION'},moderate:{color:'#a0762a',label:'MODERATE TENSION'},low:{color:'#1a5a28',label:'LOW TENSION'}};
   const d=intStyle[c.intensity]||intStyle.moderate;
   return (
@@ -129,7 +128,7 @@ export function ConflictCard({conflict:c}) {
 
 
 // Inline NPC card — replaces the removed NPCCard export
-function NPCInlineCard({ npc, relationships=[], pinnedIds, onTogglePin }) {
+function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const [open, setOpen] = useState(false);
   const color = catColor(npc.category);
   const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';

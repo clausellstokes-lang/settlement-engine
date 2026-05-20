@@ -146,7 +146,7 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
  * @param {Object} instFlags
  * @returns {'none'|'adversarial'|'equilibrium'|'corrupted'|'capture'}
  */
-export function computeCriminalCaptureState(factions, safetyRatio, instFlags) {
+export function computeCriminalCaptureState(factions, safetyRatio, _instFlags) {
   const crim = factions.find(f => f.category === 'criminal' || f.faction?.toLowerCase().includes('thiev'));
   if (!crim || crim.power < 5) return 'none';
 
@@ -213,7 +213,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   const rel  = find('religious', 'church', 'clergy');
   const crim = findNonGov('thiev', 'criminal', 'underworld', 'shadow');
   const noble= find('noble', 'landed gentry', 'manor');
-  const arcane=find('arcane', 'wizard', 'mage');
+  const _arcane=find('arcane', 'wizard', 'mage');
 
   const safetyRatio  = instFlags?.safetyRatio || 1.0;
   const crimCapture  = computeCriminalCaptureState(factions, safetyRatio, instFlags);
@@ -374,7 +374,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   // ── Merchant ↔ Religious (at town+ scale) ──────────────────────────────────
   if (merc && rel && ['town','city','metropolis'].includes(tier)) {
     const merP = merc.power, relP = rel.power;
-    let type, direction, narrative;
+    let type, _direction, narrative;
 
     if (merP >= 20 && relP >= 15) {
       type = 'tense';
@@ -429,7 +429,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
  * @param {Object} publicLeg   - from computePublicLegitimacy
  * @param {string} tier
  */
-export function applyLegitimacyMultipliers(factions, publicLeg, tier) {
+export function applyLegitimacyMultipliers(factions, publicLeg, _tier) {
   const POWER_FLOOR = 5;
 
   factions.forEach(f => {

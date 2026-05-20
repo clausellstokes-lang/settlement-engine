@@ -6,11 +6,10 @@
  * the settlement has zero warnings.
  */
 
-import React from 'react';
 import { AlertTriangle, Info } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { checkDraftEdit } from '../../domain/coherence/checkDraftEdit.js';
-import { GOLD, INK, MUTED, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, MUTED, BORDER, sans, FS, SP, R } from '../theme.js';
 
 export default function CoherencePanel() {
   const phase      = useStore(s => s.phase);

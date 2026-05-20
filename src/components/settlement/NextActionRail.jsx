@@ -18,9 +18,8 @@
  * existing handlers — this is purely an aggregation surface.
  */
 
-import React from 'react';
 import {
-  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3, Layers,
+  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3, _Layers,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getAiCost } from '../../config/pricing.js';
@@ -52,7 +51,7 @@ export default function NextActionRail({ settlement, save, handlers }) {
 }
 
 /** Pure derivation — testable without the store. */
-function computeItems({ phase, eventCount, narrated, settlement, save, handlers }) {
+function computeItems({ phase, eventCount, narrated, _settlement, save, handlers }) {
   const items = [];
 
   // ── Primary ladder ──────────────────────────────────────────────────

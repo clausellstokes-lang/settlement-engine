@@ -41,7 +41,7 @@ export function overviewTone(o) {
 }
 
 // ── Power Structure ─────────────────────────────────────────────────────────
-export function powerHeadline(power, identity) {
+export function powerHeadline(power, _identity) {
   if (!power) return null;
   const govType = power.governmentType ? humanize(power.governmentType) : null;
   const factions = power.factions || [];

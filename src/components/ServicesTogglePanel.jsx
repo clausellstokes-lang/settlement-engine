@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import {INSTITUTION_SERVICES} from '../data/tradeGoodsData';
 import ControlsStrip from './ControlsStrip.jsx';
 import {GOLD, INK, MUTED, SECOND, sans} from './theme.js';
@@ -6,10 +6,10 @@ import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog } from '../store/selectors.js';
 
 function matchServiceName(instName) {
-  const lower = instName.toLowerCase().split(/[\s'(),\-\/]+/).filter(w=>w.length>2);
+  const lower = instName.toLowerCase().split(/[\s'(),\-/]+/).filter(w=>w.length>2);
   let best=null, bestScore=0;
   for (const key of Object.keys(INSTITUTION_SERVICES)) {
-    const kw = key.toLowerCase().split(/[\s'(),\-\/]+/).filter(w=>w.length>2);
+    const kw = key.toLowerCase().split(/[\s'(),\-/]+/).filter(w=>w.length>2);
     let score=0;
     for (const kp of kw) for (const lp of lower) {
       if (kp===lp) score+=2;
@@ -26,10 +26,10 @@ function matchServiceName(instName) {
 
 // Card-click cycle: allow → force → exclude → allow
 function ServiceCard({ svcName, def, toggled, onCycle }) {
-  const { allow, force, forceExclude } = toggled;
+  const { _allow, force, forceExclude } = toggled;
   const isForced   = force && !forceExclude;
   const isExcluded = forceExclude;
-  const isAllowed  = !isForced && !isExcluded;
+  const _isAllowed  = !isForced && !isExcluded;
 
   const bg         = isForced ? '#efe8d0' : '#faf6ef';
   const borderLeft = `3px solid ${isForced ? GOLD : 'transparent'}`;

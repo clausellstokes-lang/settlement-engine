@@ -22,7 +22,6 @@
  * Pure: no React, no Zustand. Returns new entities; never mutates input.
  */
 
-import { withImpairment, withoutEventImpairments, STATUS_VACANT } from './status.js';
 
 /** @typedef {'minor'|'notable'|'key'|'pillar'} NpcImportance */
 
