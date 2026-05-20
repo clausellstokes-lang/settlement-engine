@@ -51,6 +51,7 @@ import {
   GENERATOR_VERSION,
   FIELD_ALIASES,
 } from './settlement.schema.js';
+import { migrateSettlementToLatest } from './settlementMigrations.js';
 
 /**
  * Hash a seed string into a stable, opaque id. Same seed → same id.
@@ -151,7 +152,12 @@ export function normalizeSettlement(settlement) {
   if (!Array.isArray(out.aiOverlays))       out.aiOverlays       = [];
   if (out.userCanon == null || typeof out.userCanon !== 'object') out.userCanon = {};
 
-  return out;
+  // ── 5. Apply schema migrations (Tier 1.4) ─────────────────────────────
+  // Older saved settlements may carry a lower schemaVersion than the
+  // current SCHEMA_VERSION constant. Walk the migration chain so the
+  // returned object matches the current shape regardless of when it
+  // was generated.
+  return migrateSettlementToLatest(out);
 }
 
 /**
