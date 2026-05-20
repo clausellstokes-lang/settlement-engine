@@ -8,6 +8,7 @@ import { isConfigured } from '../lib/supabase.js';
 import PipelineRail from './PipelineRail.jsx';
 import ShareToGallery from './ShareToGallery.jsx';
 import BuyThisDossier from './BuyThisDossier.jsx';
+import { AiOverlayViolations } from './primitives/AiOverlayViolations.jsx';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
@@ -55,6 +56,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const storeAiError = useStore(s => s.aiError);
   const storeAiProgress = useStore(s => s.aiProgress);
   const storeAiPartialFailure = useStore(s => s.aiPartialFailure);
+  // Tier 6.7 — runtime canon-preservation report from the AI overlay
+  // verifier. Surfaces drift (invented entity, renamed proper noun,
+  // overridden user edit) to the DM via the AiOverlayViolations card.
+  const storeAiViolations = useStore(s => s.aiViolations);
+  const clearAiViolations = useStore(s => s.clearAiViolations);
   const storeShowNarrative = useStore(s => s.showNarrative);
   const setShowNarrative = useStore(s => s.setShowNarrative);
   // Pinned NPCs — AI-4a. The live save entry is the source of truth so the
@@ -446,6 +452,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             fontFamily: 'Nunito, sans-serif',
           }
         }, `Partial refinement: ${storeAiPartialFailure.failedFields.join(', ')} kept raw data.`),
+        // Tier 6.7 — runtime verifier findings. Surfaces hard
+        // violations (invented entity, renamed proper noun,
+        // overwritten user edit) so the DM sees the AI output isn't
+        // safe to ship without inspection.
+        showNarrative && React.createElement(AiOverlayViolations, {
+          violations: storeAiViolations,
+          onDismiss: clearAiViolations,
+        }),
         // Regenerate overlay — floats progress above the dimmed existing content
         aiRegenerating && React.createElement('div', {
           style: {

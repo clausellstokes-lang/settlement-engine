@@ -149,6 +149,12 @@ export const createAiSlice = (set, get) => ({
       state.aiViolations = null;
     }),
 
+  /** Dismiss the violations notice without clearing the AI settlement
+   *  itself. Used by the AiOverlayViolations card's close button.
+   *  Violations resurface if a subsequent generation flags drift. */
+  clearAiViolations: () =>
+    set(state => { state.aiViolations = null; }),
+
   setAiDailyLife: (prose) =>
     set(state => { state.aiDailyLife = prose; }),
 
