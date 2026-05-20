@@ -768,6 +768,47 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * @typedef {'invented_entity' | 'removed_entity' | 'renamed_entity' | 'changed_fact' | 'changed_canon' | 'removed_history_beat'} AiOverlayViolationKind
+ *
+ * Tier 6.4 — the closed set of contract violations the AI overlay
+ * verifier can flag. See domain/aiOverlayVerifier.js for semantics.
+ */
+
+/**
+ * @typedef {Object} AiOverlayViolation
+ *
+ * Tier 6.4 single-violation record. Produced by
+ * domain/aiOverlayVerifier.js#verifyAiOverlay.
+ *
+ * @property {AiOverlayViolationKind} kind  Closed-vocabulary violation type.
+ * @property {string} field                 Settlement path (e.g. 'powerStructure.factions').
+ * @property {string} key                   Entity-key the violation is anchored on.
+ * @property {string} label                 Human-visible name of the offending entity.
+ * @property {string} detail                One-sentence description of the violation.
+ * @property {string} [newLabel]            For rename violations, the offending new name.
+ * @property {any}    [before]              For changed_fact / changed_canon, the prior value.
+ * @property {any}    [after]               For changed_fact / changed_canon, the new value.
+ */
+
+/**
+ * @typedef {Object} AiOverlayVerification
+ *
+ * Tier 6.4 verification report returned by
+ * domain/aiOverlayVerifier.js#verifyAiOverlay.
+ *
+ * @property {boolean} ok                 false if any violations were found.
+ * @property {AiOverlayViolation[]} violations  Detail per violation.
+ * @property {{
+ *   invented: number,
+ *   removed: number,
+ *   renamed: number,
+ *   contradicted: number,
+ *   canonChanged: number,
+ *   historyDropped: number,
+ * }} summary  Counts by kind for at-a-glance reporting.
+ */
+
+/**
  * @typedef {'nudge' | 'rebalance' | 'reforge'} RegenerationMode
  *
  * Tier 5.2 reactive regeneration modes. Nudge preserves most;
