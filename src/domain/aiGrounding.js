@@ -267,12 +267,32 @@ const OUTPUT_FORMAT_REMINDER = `Output MUST preserve every proper noun from the 
  * Assemble the canonical prompt sections in Tier 6.9 order. Returns a
  * { system, developer, dossier, direction, format } object the edge
  * function joins with model-specific separators.
+ *
+ * Tier 6.9 prompt-injection guard: the user direction is broken out
+ * into its own section AND removed from the dossier payload before
+ * stringification. Without this, an adversarial direction like
+ * "ignore the facts" would appear at the same authority level as the
+ * canonical facts (because it'd live inside `constraints.userDirection`
+ * in the serialized dossier JSON).
  */
 export function assemblePromptSections(payload, options = {}) {
+  // Build a dossier-safe copy of the payload that omits the user
+  // direction from `constraints`. The direction MUST live only in the
+  // `direction` section so the prompt structure makes its lower trust
+  // level explicit to the model.
+  let dossierPayload = payload;
+  if (payload && payload.constraints) {
+     
+    const { userDirection: _drop, ...constraintsWithoutDirection } = payload.constraints;
+    dossierPayload = {
+      ...payload,
+      constraints: constraintsWithoutDirection,
+    };
+  }
   const sections = {
     system: SYSTEM_INSTRUCTIONS,
     developer: options.developerInstructions || DEVELOPER_INSTRUCTIONS,
-    dossier: JSON.stringify(payload, null, 2),
+    dossier: JSON.stringify(dossierPayload, null, 2),
     direction: payload?.constraints?.userDirection || null,
     format: OUTPUT_FORMAT_REMINDER,
   };
