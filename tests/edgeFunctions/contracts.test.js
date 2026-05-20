@@ -26,7 +26,7 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -849,5 +849,121 @@ describe('Tier 0.5 — webhook documents its trust-boundary expectations', () =>
     // editors don't add a second entry point without thinking about
     // the metadata it would populate.
     expect(webhookSrc).toMatch(/trust boundary|Trust boundary/);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────
+// Tier 0.10 — Anonymous abuse defense baseline
+//
+// Every edge function (except stripe-webhook, which is signature-
+// gated) imports botGuard from _shared/requestMeta.ts and calls it
+// before any auth check. Locks the wiring in so a future function
+// addition doesn't quietly skip the guard.
+// ─────────────────────────────────────────────────────────────────────
+
+describe('Tier 0.10 — shared bot-guard helper exists', () => {
+  it('_shared/requestMeta.ts is present', () => {
+    const path = join(FUNCTIONS_DIR, '_shared', 'requestMeta.ts');
+    expect(readFileSync(path, 'utf8')).toMatch(/export function botGuard/);
+  });
+
+  it('exports readRequestMeta, rejectObviousBot, and botGuard', () => {
+    const path = join(FUNCTIONS_DIR, '_shared', 'requestMeta.ts');
+    const src = readFileSync(path, 'utf8');
+    expect(src).toMatch(/export function readRequestMeta/);
+    expect(src).toMatch(/export function rejectObviousBot/);
+    expect(src).toMatch(/export function botGuard/);
+  });
+
+  it('detects common scraper UAs (curl / python-requests / headless)', () => {
+    const path = join(FUNCTIONS_DIR, '_shared', 'requestMeta.ts');
+    const src = readFileSync(path, 'utf8');
+    expect(src).toMatch(/\\bcurl\\b/i);
+    expect(src).toMatch(/python-requests/i);
+    expect(src).toMatch(/headless/i);
+  });
+
+  it('allow-lists Stripe + monitoring UAs so infra integrations aren\'t broken', () => {
+    const path = join(FUNCTIONS_DIR, '_shared', 'requestMeta.ts');
+    const src = readFileSync(path, 'utf8');
+    expect(src).toMatch(/Stripe/);
+    expect(src).toMatch(/UptimeRobot/);
+  });
+});
+
+describe('Tier 0.10 — every user-facing edge function uses the bot guard', () => {
+  // stripe-webhook is INTENTIONALLY excluded: signature verification is
+  // the real gate and Stripe's UA matches the allow-list anyway.
+  const FUNCTIONS_WITH_GUARD = ['create-checkout', 'generate-narrative', 'admin-actions'];
+
+  for (const name of FUNCTIONS_WITH_GUARD) {
+    describe(name, () => {
+      let src;
+      beforeAll(() => { src = readFunction(name); });
+
+      it('imports botGuard from _shared/requestMeta.ts', () => {
+        expect(src).toMatch(/import\s+\{[\s\S]{0,80}botGuard[\s\S]{0,80}\}\s+from\s+['"]\.\.\/_shared\/requestMeta\.ts['"]/);
+      });
+
+      it('calls botGuard inside the request handler', () => {
+        expect(src).toMatch(/botGuard\(req,\s*['"][^'"]+['"]\)/);
+      });
+
+      it('short-circuits with the rejection response when the guard fires', () => {
+        // Pattern: const guard = botGuard(req, '<name>'); if (guard.reject) return guard.reject;
+        expect(src).toMatch(/if\s*\(\s*guard\.reject\s*\)\s*return\s+guard\.reject/);
+      });
+
+      it('the bot guard runs BEFORE the auth header read', () => {
+        // Anchor on the LIVE auth-read pattern (req.headers.get('Authorization')
+        // or req.headers.get("Authorization")) so a comment in the file
+        // header that mentions "Authorization" doesn't count.
+        const guardIdx = src.search(/botGuard\s*\(/);
+        const authIdx  = src.search(/req\.headers\.get\(\s*['"]Authorization['"]/);
+        expect(guardIdx).toBeGreaterThan(0);
+        expect(authIdx).toBeGreaterThan(0);
+        expect(authIdx).toBeGreaterThan(guardIdx);
+      });
+    });
+  }
+});
+
+describe('Tier 0.10 — stripe-webhook is correctly exempt from the bot guard', () => {
+  let webhookSrc;
+  beforeAll(() => { webhookSrc = readFunction('stripe-webhook'); });
+
+  it('does NOT import botGuard (signature verification is the real gate)', () => {
+    expect(webhookSrc).not.toMatch(/from\s+['"]\.\.\/_shared\/requestMeta\.ts['"]/);
+  });
+
+  it('still verifies the request via constructEvent', () => {
+    expect(webhookSrc).toMatch(/constructEvent\s*\(/);
+  });
+});
+
+describe('Tier 0.10 — threat model is documented', () => {
+  it('docs/abuse-model.md exists', () => {
+    expect(existsSync(join(ROOT, 'docs', 'abuse-model.md'))).toBe(true);
+  });
+
+  it('the doc covers every threat-actor category', () => {
+    const doc = readFileSync(join(ROOT, 'docs', 'abuse-model.md'), 'utf8');
+    expect(doc).toMatch(/Casual scraper/i);
+    expect(doc).toMatch(/Credit thief/i);
+    expect(doc).toMatch(/Privilege escalator/i);
+    expect(doc).toMatch(/Stripe/i);
+    expect(doc).toMatch(/Prompt injector/i);
+  });
+
+  it('the doc names the shared bot-guard helper as the baseline defense', () => {
+    const doc = readFileSync(join(ROOT, 'docs', 'abuse-model.md'), 'utf8');
+    expect(doc).toMatch(/botGuard/);
+    expect(doc).toMatch(/requestMeta\.ts/);
+  });
+
+  it('the doc surfaces known gaps (not-yet-done items)', () => {
+    const doc = readFileSync(join(ROOT, 'docs', 'abuse-model.md'), 'utf8');
+    expect(doc).toMatch(/Gaps/i);
+    expect(doc).toMatch(/anomaly logging|per-IP rate-limit/i);
   });
 });

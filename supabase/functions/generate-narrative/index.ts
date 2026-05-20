@@ -39,6 +39,8 @@ import {
   forbiddenChanges,
   summarizeGroundingPayload,
 } from '../_shared/aiGroundingBundle.js';
+// Tier 0.10 — abuse defense baseline (shared with every edge function).
+import { botGuard } from '../_shared/requestMeta.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 
@@ -1476,6 +1478,13 @@ serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
+
+  // Tier 0.10 — obvious-bot guard. Generation is credit-gated, but
+  // bots still cost the function budget every time they reach the
+  // auth check. Rejecting up front keeps Anthropic API budget and
+  // postgres connections from churning on scraper traffic.
+  const guard = botGuard(req, 'generate-narrative');
+  if (guard.reject) return guard.reject;
 
   const streamHeaders = {
     ...corsHeaders,

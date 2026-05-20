@@ -13,6 +13,8 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+// Tier 0.10 — abuse defense baseline (shared with every edge function).
+import { botGuard } from "../_shared/requestMeta.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -25,6 +27,11 @@ serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
+
+  // Tier 0.10 — obvious-bot guard. Admin actions are role-gated, but
+  // bots probing for admin endpoints should be rejected at the door.
+  const guard = botGuard(req, "admin-actions");
+  if (guard.reject) return guard.reject;
 
   try {
     // Get the user's JWT from the Authorization header

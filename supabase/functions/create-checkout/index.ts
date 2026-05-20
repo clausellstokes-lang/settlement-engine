@@ -36,6 +36,7 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
+import { botGuard } from '../_shared/requestMeta.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
@@ -100,6 +101,12 @@ serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
+
+  // Tier 0.10 — obvious-bot guard. Auth gating already protects this
+  // endpoint, but rejecting bots up front saves Stripe API budget +
+  // keeps the function logs readable. Real users are never blocked.
+  const guard = botGuard(req, 'create-checkout');
+  if (guard.reject) return guard.reject;
 
   try {
     // Authenticate the user via Supabase JWT
