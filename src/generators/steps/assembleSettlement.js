@@ -69,7 +69,13 @@ registerStep('assembleSettlement', {
     resourceAnalysis,
     economicViability,
     history,
+    // Tier 1.2 — dual-write the stress array under both the legacy
+    // `stress` name AND the canonical `stressors` name. Consumers that
+    // bypass normalizeSettlement (e.g. UI components that read directly
+    // from a freshly-generated settlement) now see the canonical shape
+    // without going through the adapter.
     stress,
+    stressors: stress,
     config: { ...effectiveConfig },
   };
 

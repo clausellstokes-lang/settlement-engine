@@ -1028,7 +1028,10 @@ export function generateSettlement(config = {}, importedNeighbor = null) {
     resourceAnalysis,
     economicViability,
     history,
+    // Tier 1.2 — dual-write under canonical `stressors` name (matches
+    // assembleSettlement.js + normalizeSettlement's FIELD_ALIASES).
     stress,
+    stressors: stress,
     config: { ...effectiveConfig },
   };
 
