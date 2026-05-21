@@ -127,9 +127,51 @@ serve(async (req) => {
           );
         }
 
+        // Tier 9.9 audit plan #2 — keep the SET semantics admin tooling
+        // expects, but record the underlying delta as a credit_ledger
+        // entry so the audit trail stays continuous. Three-step:
+        //   1. Read current credits.
+        //   2. Compute delta = newValue - currentValue.
+        //   3. Insert a ledger row reflecting the change direction.
+        //   4. SET the new value (atomic — the read could be stale
+        //      under concurrent admin actions, but the ledger row
+        //      makes the change auditable either way).
+        //
+        // A more elegant migration to admin_grant_credits would require
+        // a paired admin_revoke_credits RPC (currently missing). When
+        // that lands, this branch should route through the two RPCs
+        // and drop the direct SET entirely.
+
+        const newCredits = parseInt(String(credits), 10);
+
+        const { data: current } = await adminClient
+          .from("profiles")
+          .select("credits")
+          .eq("id", userId)
+          .single();
+
+        const prevCredits = (current && typeof current.credits === "number") ? current.credits : 0;
+        const delta = newCredits - prevCredits;
+
+        // Write a ledger row for the delta. We use grant/spend kinds
+        // depending on direction; source='admin_set' so reporting can
+        // distinguish from organic grants.
+        if (delta !== 0) {
+          const { error: ledgerErr } = await adminClient.from("credit_ledger").insert({
+            user_id: userId,
+            kind:    delta > 0 ? "grant" : "spend",
+            amount:  Math.abs(delta),
+            source:  "admin_set",
+            metadata: { actor_id: user.id, prev: prevCredits, next: newCredits },
+          });
+          if (ledgerErr) {
+            console.warn("[admin-actions] credit_ledger write failed; continuing with direct SET:", ledgerErr.message);
+          }
+        }
+
         const { error: creditError } = await adminClient
           .from("profiles")
-          .update({ credits: parseInt(String(credits), 10) })
+          .update({ credits: newCredits })
           .eq("id", userId);
 
         if (creditError) {
@@ -139,7 +181,20 @@ serve(async (req) => {
           });
         }
 
-        return new Response(JSON.stringify({ success: true }), {
+        // Audit row capturing actor + before/after.
+        await adminClient.rpc("_audit_action", {
+          p_actor_id: user.id,
+          p_target_id: userId,
+          p_action: "admin_set_credits",
+          p_before: { credits: prevCredits },
+          p_after:  { credits: newCredits, delta },
+          p_reason: null,
+        }).catch((e: unknown) => {
+          // _audit_action is internal — catch is best-effort.
+          console.warn("[admin-actions] _audit_action failed:", (e as Error)?.message);
+        });
+
+        return new Response(JSON.stringify({ success: true, prev: prevCredits, next: newCredits, delta }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
