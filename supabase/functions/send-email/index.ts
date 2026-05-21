@@ -1,0 +1,302 @@
+/**
+ * send-email — Tier 8.5 lifecycle email dispatcher.
+ *
+ * Renders one of the lifecycle templates and posts to Resend
+ * (https://resend.com/docs/api-reference/emails/send-email) via
+ * RESEND_API_KEY. The client-facing entry point is
+ * src/lib/emailLifecycle.js → supabase.functions.invoke('send-email').
+ *
+ * Authorization:
+ *   - For every template EXCEPT cap_warning, the recipient is read
+ *     from auth.uid() — only authenticated users can email themselves.
+ *     This prevents a malicious client from spamming arbitrary
+ *     addresses via the welcome/save/etc. paths.
+ *   - cap_warning accepts an explicit `recipient` payload because
+ *     anonymous users (who hit the cap) have no auth.uid(); we
+ *     still apply a per-IP rate limit via botGuard to keep this
+ *     from becoming a spam relay.
+ *
+ * Templates: inlined here (kept in sync with src/lib/emailTemplates.js
+ * — the client tests assert key parity). Edge function can't import
+ * from src/ because Deno doesn't resolve Vite-aliased ESM at deploy
+ * time; we pay one duplication for one-edge-deploy independence.
+ *
+ * Failure modes:
+ *   - Missing RESEND_API_KEY → returns { ok: false, reason: 'unconfigured' }
+ *     instead of throwing; client emailLifecycle.js handles null
+ *     gracefully so the user action never blocks on email.
+ *   - Resend API error → logged + returned as { ok: false, reason }.
+ *   - Unknown template → 400.
+ */
+
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { botGuard } from "../_shared/requestMeta.ts";
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
+};
+
+// ── Templates (kept in sync with src/lib/emailTemplates.js) ─────────────────
+const TEMPLATES: Record<string, { subject: string; text: string }> = {
+  welcome: {
+    subject: "Welcome to SettlementForge",
+    text: [
+      "Hello {displayName},",
+      "",
+      "Your SettlementForge account is live. A few orientation notes:",
+      "",
+      "  • Every settlement is simulated from constraints. Not AI-generated.",
+      "    Each town is the only coherent settlement that satisfies the",
+      "    constraints you set — sliders, terrain, trade, stress.",
+      "",
+      "  • Your first three saves are free. After that, sign up for a",
+      "    Cartographer subscription or claim a Founder Lifetime seat",
+      "    (limited to the first 500 supporters).",
+      "",
+      "  • Narrative refinement (the optional prose layer) costs credits",
+      "    per pass. Cartographer subscriptions include a monthly",
+      "    allowance; credit packs top you up.",
+      "",
+      "Forge well.",
+      "",
+      "— SettlementForge",
+      "https://settlementforge.com",
+    ].join("\n"),
+  },
+  save_confirmation: {
+    subject: "Saved: {settlementName}",
+    text: [
+      "Hello {displayName},",
+      "",
+      "Your settlement {settlementName} ({tier}) has been saved to your",
+      "campaign library. You can find it any time at:",
+      "",
+      "  https://settlementforge.com/?view=settlements",
+      "",
+      "The save preserves the simulator state, your edits, and any",
+      "narrative refinement passes you have run. Future regenerations",
+      "will not overwrite locked entities.",
+      "",
+      "— SettlementForge",
+    ].join("\n"),
+  },
+  export_confirmation: {
+    subject: "Dossier exported: {settlementName}",
+    text: [
+      "Hello {displayName},",
+      "",
+      "Your {settlementName} ({tier}) dossier export is ready.",
+      "",
+      "The PDF includes the simulator output, your saved canon, and any",
+      "narrative refinement you have layered on. If anything looks off,",
+      "you can re-export from the settlement detail view at any time.",
+      "",
+      "— SettlementForge",
+    ].join("\n"),
+  },
+  credit_low: {
+    subject: "Narrative credits running low",
+    text: [
+      "Hello {displayName},",
+      "",
+      "Your narrative credit balance has dropped to {balance}. Each",
+      "narrative refinement pass costs {narrativeCost} credits; each",
+      "daily-life pass costs {dailyLifeCost}.",
+      "",
+      "Top up here:",
+      "  https://settlementforge.com/?view=pricing",
+      "",
+      "Reminder: settlements themselves never use credits — only the",
+      "optional narrative refinement layer does. Your simulator output",
+      "continues to work as normal.",
+      "",
+      "— SettlementForge",
+    ].join("\n"),
+  },
+  founder_thank_you: {
+    subject: "Welcome, Founder",
+    text: [
+      "Hello {displayName},",
+      "",
+      "You are one of the first 500 supporters. Thank you.",
+      "",
+      "Your Founder Lifetime seat is permanent — Cartographer-tier",
+      "access, unlimited saves, all current and future expansion packs.",
+      "You also get the Founder badge on every dossier you publish.",
+      "",
+      "A direct line to the dev lives in Discord. The invite is on your",
+      "account page.",
+      "",
+      "Forge well.",
+      "",
+      "— SettlementForge",
+    ].join("\n"),
+  },
+  cap_warning: {
+    subject: "Anonymous generation cap reached",
+    text: [
+      "Hello,",
+      "",
+      "You have hit the daily cap for anonymous settlement generation",
+      "on SettlementForge ({capUsed} of {capTotal} used). The cap",
+      "resets at midnight UTC.",
+      "",
+      "Sign up for a free account to unlock:",
+      "  • Up to Town size (Capital with a Cartographer subscription)",
+      "  • Saved settlements (3 free)",
+      "  • PDF export of any saved dossier",
+      "",
+      "Sign up: https://settlementforge.com/?view=signin",
+      "",
+      "— SettlementForge",
+    ].join("\n"),
+  },
+};
+
+// Templates that don't require an authenticated caller. These accept
+// `recipient` in the request body. Per-IP bot guard still applies.
+const ANON_OK_TEMPLATES = new Set(["cap_warning"]);
+
+function interpolate(str: string, vars: Record<string, unknown>): string {
+  return str.replace(/\{(\w+)\}/g, (m, name) =>
+    Object.prototype.hasOwnProperty.call(vars, name) ? String(vars[name]) : m
+  );
+}
+
+async function sendViaResend(opts: {
+  to: string;
+  from: string;
+  subject: string;
+  text: string;
+  apiKey: string;
+}) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${opts.apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from:    opts.from,
+      to:      [opts.to],
+      subject: opts.subject,
+      text:    opts.text,
+    }),
+  });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    throw new Error(`Resend ${res.status}: ${detail}`);
+  }
+  return res.json();
+}
+
+serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+
+  const guard = botGuard(req, "send-email");
+  if (guard.reject) return guard.reject;
+
+  try {
+    const { template, payload = {}, recipient = null } = await req.json();
+
+    // Template validation
+    if (!template || !TEMPLATES[template]) {
+      return new Response(
+        JSON.stringify({ ok: false, reason: "unknown_template" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Recipient resolution. Authenticated paths read the user's email
+    // from auth; anonymous paths (cap_warning) accept an explicit
+    // recipient string from the payload.
+    let to: string | null = null;
+    let displayName: string | null = null;
+
+    if (ANON_OK_TEMPLATES.has(template)) {
+      if (typeof recipient !== "string" || !recipient.includes("@")) {
+        return new Response(
+          JSON.stringify({ ok: false, reason: "bad_recipient" }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      to = recipient;
+    } else {
+      // Authenticated path: read email + display_name from auth.uid()
+      const authHeader = req.headers.get("Authorization");
+      if (!authHeader) {
+        return new Response(
+          JSON.stringify({ ok: false, reason: "auth_required" }),
+          { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+      const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+      const userClient = createClient(supabaseUrl, supabaseAnonKey, {
+        global: { headers: { Authorization: authHeader } },
+      });
+      const { data: { user }, error: userErr } = await userClient.auth.getUser();
+      if (userErr || !user) {
+        return new Response(
+          JSON.stringify({ ok: false, reason: "auth_invalid" }),
+          { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      to = user.email ?? null;
+      displayName = user.user_metadata?.display_name ?? null;
+      if (!to) {
+        return new Response(
+          JSON.stringify({ ok: false, reason: "no_email_on_account" }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+    }
+
+    // Apply provider config. RESEND_API_KEY + RESEND_FROM_EMAIL come
+    // from Supabase secrets — set with:
+    //   npx supabase secrets set RESEND_API_KEY=re_xxx
+    //   npx supabase secrets set RESEND_FROM_EMAIL="SettlementForge <hello@settlementforge.com>"
+    const apiKey = Deno.env.get("RESEND_API_KEY");
+    const fromEmail = Deno.env.get("RESEND_FROM_EMAIL");
+    if (!apiKey || !fromEmail) {
+      // Soft fail — emails are non-blocking by design. Surface in logs
+      // but return 200 so the client doesn't retry.
+      console.warn("[send-email] RESEND_API_KEY or RESEND_FROM_EMAIL not set");
+      return new Response(
+        JSON.stringify({ ok: false, reason: "unconfigured" }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Render. Inject displayName from auth if not supplied.
+    const fullPayload = { displayName: displayName || "there", ...payload };
+    const tmpl = TEMPLATES[template];
+    const subject = interpolate(tmpl.subject, fullPayload);
+    const text = interpolate(tmpl.text, fullPayload);
+
+    try {
+      const result = await sendViaResend({ to: to!, from: fromEmail, subject, text, apiKey });
+      return new Response(
+        JSON.stringify({ ok: true, id: result?.id || null }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    } catch (e) {
+      console.error("[send-email] provider error:", (e as Error).message);
+      return new Response(
+        JSON.stringify({ ok: false, reason: "provider_error", detail: (e as Error).message }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+  } catch (e) {
+    console.error("[send-email] handler error:", (e as Error).message);
+    return new Response(
+      JSON.stringify({ ok: false, reason: "internal_error" }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  }
+});

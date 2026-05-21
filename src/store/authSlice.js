@@ -119,6 +119,27 @@ export const createAuthSlice = (set, get) => ({
             loading: false, error: null,
           };
         });
+
+        // Tier 8.5 — fire the welcome email once per account. We mark a
+        // localStorage flag keyed by user id so we don't double-send on
+        // SIGNED_IN events (e.g. after a token refresh or a sign-out +
+        // sign-in cycle on the same browser). The send is
+        // fire-and-forget — emails never block the auth flow, and an
+        // unconfigured RESEND_API_KEY returns a soft 200 from the edge
+        // function so this path is silent in dev.
+        if (event === 'SIGNED_IN' && user?.id) {
+          const flag = `sf_welcomed_${user.id}`;
+          try {
+            if (typeof localStorage !== 'undefined' && !localStorage.getItem(flag)) {
+              localStorage.setItem(flag, '1');
+              // Lazy-import the lifecycle helper to avoid pulling
+              // emailLifecycle into the critical auth bundle.
+              import('../lib/emailLifecycle.js').then(({ notifyWelcome }) => {
+                notifyWelcome({ displayName: displayName || 'there' });
+              }).catch(() => { /* swallow — never block auth */ });
+            }
+          } catch { /* localStorage unavailable; skip */ }
+        }
       }
     });
   },
