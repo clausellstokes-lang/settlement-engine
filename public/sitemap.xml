@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml — Public SEO surfaces.
+
+  Generated for Tier 8.7 (public compendium SEO surface) and Tier 8.6
+  (comparison pages). Updated by hand when a new public surface ships.
+  Vercel serves /public/* as static files.
+
+  Coverage:
+    /                            — Homepage (anonymous hero)
+    /?view=pricing               — Pricing
+    /?view=gallery               — Public dossier gallery
+    /?view=compare               — Comparison landing
+    /?view=compare-chatgpt       — vs ChatGPT
+    /?view=compare-worldographer — vs Worldographer
+    /?view=compare-kanka         — vs Kanka
+    /?view=compendium&tab=...    — Compendium tabs (seven sections)
+    /?view=howto                 — How-to-use guide
+
+  We use the ?view= query-string routing pattern the SPA already
+  understands; until per-route URLs land, the query-string entries are
+  what Google sees in the SPA's link graph.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home -->
+  <url>
+    <loc>https://settlementforge.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Pricing -->
+  <url>
+    <loc>https://settlementforge.com/?view=pricing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Gallery -->
+  <url>
+    <loc>https://settlementforge.com/?view=gallery</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Comparisons (Tier 8.6) -->
+  <url>
+    <loc>https://settlementforge.com/?view=compare</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/?view=compare-chatgpt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/?view=compare-worldographer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/?view=compare-kanka</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Compendium (Tier 8.7) — one URL per tab so each indexes with its own title -->
+  <url>
+    <loc>https://settlementforge.com/?view=compendium&amp;tab=tiers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/?view=compendium&amp;tab=economy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/?view=compendium&amp;tab=power</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/?view=compendium&amp;tab=arcane</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/?view=compendium&amp;tab=stress</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/?view=compendium&amp;tab=neighbour</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/?view=compendium&amp;tab=institutions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- How-to-use -->
+  <url>
+    <loc>https://settlementforge.com/?view=howto</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>

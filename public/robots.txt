@@ -1,0 +1,12 @@
+# robots.txt — SettlementForge public crawl policy.
+
+User-agent: *
+Allow: /
+
+# Don't waste crawl budget on the API gateway or build artifacts.
+Disallow: /api/
+Disallow: /assets/*.map
+
+# Surface the sitemap so search engines find the compare/compendium
+# URLs without needing to crawl the SPA link graph.
+Sitemap: https://settlementforge.com/sitemap.xml

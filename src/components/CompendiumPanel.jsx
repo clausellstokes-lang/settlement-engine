@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_} from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, Route, Crown, ShieldAlert } from 'lucide-react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
@@ -790,11 +790,64 @@ function CustomContentManager({ search }) {
 
 // ── Main component ──────────────────────────────────────────────────────────
 
+// Tier 8.7 — per-tab SEO metadata. Each tab maps to a discrete
+// document.title + meta description so search engines index each
+// compendium section with its own snippet rather than the generic
+// SettlementForge title. Standalone mode (the public route) wires
+// this; embedded mode leaves the page title alone.
+const TAB_META = Object.freeze({
+  tiers:        { title: 'Settlement tiers & trade routes — SettlementForge Compendium',
+                  desc: 'Reference for thorp through metropolis tiers, trade route effects (road / crossroads / port / river / mountain pass / isolated), and monster threat levels in SettlementForge.' },
+  economy:      { title: 'Economy reference — SettlementForge Compendium',
+                  desc: 'Prosperity tiers, priority sliders, exports/imports, supply chains, viability scoring. The simulator\'s economic model, documented.' },
+  power:        { title: 'Power & faction archetypes — SettlementForge Compendium',
+                  desc: 'Forty-plus settlement archetypes (Merchant Republic, Mage Theocracy, Frontier Outpost, Crusader Synthesis) keyed to slider + threat conditions.' },
+  arcane:       { title: 'Magic & religion reference — SettlementForge Compendium',
+                  desc: 'How magic and religious institutions interact in the simulator: heresy suppression, arcane economy, theocratic governance, sacred goods trade.' },
+  stress:       { title: 'Stress conditions — SettlementForge Compendium',
+                  desc: 'Famine, siege, plague, political fracture, monster pressure: how each stress shifts institutions, factions, and supply chains.' },
+  neighbour:    { title: 'Neighbour System reference — SettlementForge Compendium',
+                  desc: 'Trade partner, ally, patron, client, rival, cold war, hostile — how linked settlements modify each other\'s economy, military, and criminal presence.' },
+  institutions: { title: 'Institutional catalog — SettlementForge Compendium',
+                  desc: 'Every institution the simulator can generate, the conditions that select it, what it implies for the settlement, and how it interacts with others.' },
+});
+
 export default function CompendiumPanel({ config, standalone=false }) {
   const [mode, setMode] = useState('catalog'); // 'catalog' | 'custom'
-  const [activeTab, setActiveTab] = useState('tiers');
+  // Honor a ?tab=foo deep-link on mount so search-engine landing pages
+  // open the right section. Falls back to 'tiers' when missing/invalid.
+  const initialTab = (() => {
+    if (typeof window === 'undefined') return 'tiers';
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get('tab');
+    return TAB_META[t] ? t : 'tiers';
+  })();
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [search, setSearch] = useState('');
   const customContentCount = useStore(s => s.getCustomContentCount());
+
+  // Tier 8.7 — swap document.title + meta description per tab. Only
+  // applies in standalone mode (i.e. when the compendium is the page,
+  // not an in-app panel); embedded use cases keep their host title.
+  useEffect(() => {
+    if (!standalone) return;
+    const meta = TAB_META[activeTab];
+    if (!meta) return;
+    const prevTitle = document.title;
+    document.title = meta.title;
+    let descEl = document.querySelector('meta[name="description"]');
+    const prevDesc = descEl?.getAttribute('content') ?? null;
+    if (!descEl) {
+      descEl = document.createElement('meta');
+      descEl.setAttribute('name', 'description');
+      document.head.appendChild(descEl);
+    }
+    descEl.setAttribute('content', meta.desc);
+    return () => {
+      document.title = prevTitle;
+      if (prevDesc !== null && descEl) descEl.setAttribute('content', prevDesc);
+    };
+  }, [activeTab, standalone]);
 
   const renderTab = () => {
     const q = search.toLowerCase();
