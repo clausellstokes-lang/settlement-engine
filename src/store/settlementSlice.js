@@ -156,6 +156,9 @@ export const createSettlementSlice = (set, get) => ({
   // Reactive update state
   whatIfPreview: null,   // { delta, previewSettlement } from a proposed change
   pendingChange: null,   // { type, payload } describing the proposed mutation
+  // Tier 5.1: structured delta from the most recent regenerate. UI
+  // surfaces it via the RegenerationDeltaCard until dismissed.
+  lastRegenerationDelta: null,
 
   // ── Campaign-state engine (v1) ────────────────────────────────────────────
   // Phase distinguishes design-time tinkering ('draft') from in-world
@@ -310,12 +313,20 @@ export const createSettlementSlice = (set, get) => ({
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
   // Async — same reason as generateSettlement (lazy engine load).
+  // Tier 5.1: every regenerate computes a structured delta against
+  // the prior settlement so the UI's RegenerationDeltaCard can show
+  // what changed. The delta is lazy-imported to keep its transitive
+  // domain modules out of the cold-start chunk.
   regenSection: async (section) => {
     const state = get();
     const { settlement, config } = state;
     if (!settlement) return;
     const cfg = settlement.config || config;
     const eng = await loadEngine();
+
+    // Capture the pre-regen snapshot before mutation so the delta
+    // composer has a clean `before` reference.
+    const before = JSON.parse(JSON.stringify(settlement));
 
     if (section === 'npcs') {
       const parts = state.usePipeline
@@ -328,7 +339,23 @@ export const createSettlementSlice = (set, get) => ({
         : eng.engineRegenHistory(settlement, cfg);
       set(s => { s.settlement.history = history; });
     }
+
+    // Compute the delta against the post-regen settlement.
+    try {
+      const { deriveRegenerationDelta } = await import('../domain/regenerationDelta.js');
+      const after = get().settlement;
+      const delta = deriveRegenerationDelta(before, after);
+      set(s => { s.lastRegenerationDelta = delta; });
+    } catch (e) {
+      // Delta is a defensive surface — never block the regenerate
+      // on a delta-derivation failure.
+      console.warn('[settlementSlice] regenerationDelta failed', e);
+    }
   },
+
+  // Tier 5.1: dismiss the most recent delta summary card.
+  clearLastRegenerationDelta: () =>
+    set(state => { state.lastRegenerationDelta = null; }),
 
   // ── Reactive updates (What-If engine) ──────────────────────────────────────
 

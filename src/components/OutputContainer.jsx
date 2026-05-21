@@ -9,6 +9,7 @@ import PipelineRail from './PipelineRail.jsx';
 import ShareToGallery from './ShareToGallery.jsx';
 import BuyThisDossier from './BuyThisDossier.jsx';
 import { AiOverlayViolations } from './primitives/AiOverlayViolations.jsx';
+import { RegenerationDeltaCard } from './primitives/RegenerationDeltaCard.jsx';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
@@ -61,6 +62,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // overridden user edit) to the DM via the AiOverlayViolations card.
   const storeAiViolations = useStore(s => s.aiViolations);
   const clearAiViolations = useStore(s => s.clearAiViolations);
+  // Tier 5.1 — most-recent regeneration delta, populated by
+  // settlementSlice.regenSection. Persists until dismissed or until
+  // the next regen overwrites it.
+  const storeLastRegenerationDelta = useStore(s => s.lastRegenerationDelta);
+  const clearLastRegenerationDelta = useStore(s => s.clearLastRegenerationDelta);
   const storeShowNarrative = useStore(s => s.showNarrative);
   const setShowNarrative = useStore(s => s.setShowNarrative);
   // Pinned NPCs — AI-4a. The live save entry is the source of truth so the
@@ -459,6 +465,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         showNarrative && React.createElement(AiOverlayViolations, {
           violations: storeAiViolations,
           onDismiss: clearAiViolations,
+        }),
+        // Tier 5.1 — what changed in the most recent regenerate.
+        // Visible regardless of narrative mode so the DM can audit
+        // engine-side decisions independently of AI prose.
+        React.createElement(RegenerationDeltaCard, {
+          delta: storeLastRegenerationDelta,
+          onDismiss: clearLastRegenerationDelta,
         }),
         // Regenerate overlay — floats progress above the dimmed existing content
         aiRegenerating && React.createElement('div', {
