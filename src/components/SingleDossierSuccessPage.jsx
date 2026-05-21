@@ -25,6 +25,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Check, Download, AlertCircle, LogIn, ArrowRight } from 'lucide-react';
 import { readPendingDossier, clearPendingDossier } from '../lib/pendingDossier.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
+import { Funnel, EVENTS, track } from '../lib/analytics.js';
 import {
   GOLD, INK, _INK_DEEP, BORDER, CARD, _PARCH, sans, serif_, SP, R, FS,
 } from './theme.js';
@@ -40,6 +41,19 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
   // download fires exactly once per mount even under React 19 strict-
   // mode double-invocation.
   const autoDownloadedRef = useRef(false);
+
+  // Tier 8.8 / 8.9 — record the purchase event. Fires once when we
+  // have a confirmed pending dossier (i.e. the user really came here
+  // from a successful checkout, not by typing the URL). PAID_AFTER_ANON
+  // attributes back to the anonymous funnel when applicable.
+  const analyticsFiredRef = useRef(false);
+  useEffect(() => {
+    if (analyticsFiredRef.current) return;
+    if (!pending?.settlement) return;
+    analyticsFiredRef.current = true;
+    track(EVENTS.SINGLE_DOSSIER_PURCHASED, { tier: pending.settlement.tier });
+    Funnel.paidAction({ kind: 'single_dossier' });
+  }, [pending]);
 
   // Auto-trigger the download once on mount when we have a stash —
   // the user paid for the PDF, they shouldn't have to hunt for the

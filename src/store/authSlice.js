@@ -137,6 +137,13 @@ export const createAuthSlice = (set, get) => ({
               import('../lib/emailLifecycle.js').then(({ notifyWelcome }) => {
                 notifyWelcome({ displayName: displayName || 'there' });
               }).catch(() => { /* swallow — never block auth */ });
+
+              // Tier 8.8 — fire SIGNUP_COMPLETED + (if applicable)
+              // SIGNUP_AFTER_ANON. We piggyback on the same first-
+              // signin-per-user flag so this fires once per account.
+              import('../lib/analytics.js').then(({ Funnel }) => {
+                Funnel.signupCompleted({ userId: user.id });
+              }).catch(() => { /* never block auth */ });
             }
           } catch { /* localStorage unavailable; skip */ }
         }

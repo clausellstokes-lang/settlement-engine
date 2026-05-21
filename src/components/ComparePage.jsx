@@ -38,7 +38,7 @@ import { useEffect } from 'react';
 import { ArrowRight, Sparkles, Check, X as XIcon } from 'lucide-react';
 import { t } from '../copy/index.js';
 import {
-  GOLD, INK, BODY, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS,
+  GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, SP, R, FS,
 } from './theme.js';
 
 // ── Tiny meta helper ───────────────────────────────────────────────────────

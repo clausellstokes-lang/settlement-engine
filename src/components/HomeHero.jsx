@@ -23,13 +23,14 @@
  *   visitors see — the legacy flow.
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sparkles, LogIn, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
   anonAtCap, anonGensRemaining, incrementAnonGen, DEFAULT_DAILY_CAP,
 } from '../lib/anonGenCounter.js';
+import { Funnel } from '../lib/analytics.js';
 import {
   GOLD, INK, _INK_DEEP, BODY, BORDER, _CARD, sans, serif_, SP, R, FS,
 } from './theme.js';
@@ -79,6 +80,13 @@ export default function HomeHero({ onSignIn }) {
   const atCap = anonAtCap();
   const remaining = anonGensRemaining();
 
+  // Tier 8.8 — fire HOMEPAGE_VIEW once per session when the hero
+  // mounts. Funnel.homepageView() handles the once-per-session guard
+  // via sessionStorage so a re-render doesn't double-count.
+  useEffect(() => {
+    Funnel.homepageView();
+  }, []);
+
   const handleBegin = async () => {
     if (atCap || generating) return;
     setGenerating(true);
@@ -94,6 +102,10 @@ export default function HomeHero({ onSignIn }) {
       // commits the new settlement before this resolves.
       generate();
       incrementAnonGen();
+      // Tier 8.8 — mark the conversion attribution + fire the funnel
+      // event so dashboards can correlate later signups/paid actions
+      // back to this anonymous generation.
+      Funnel.anonGenerationCompleted({ tier: pickedSize });
     } catch (e) {
       console.error('[HomeHero] generate failed:', e);
     } finally {
