@@ -165,6 +165,69 @@ export default function App() {
     <>
       <div className="parchment-bg" style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
+        {/* ── Mobile header ───────────────────────────────────── */}
+        {/*
+          The bottom nav holds the 5 primary destinations
+          (Create / Settlements / Map / Compendium / How To Use) and has
+          no room for the Sign In / Account chip. Without this top bar,
+          anonymous mobile users had no entry point into AuthModal.
+
+          Slim by design: a single row, brand left, auth chip right.
+          Uses the same ink → ink-deep gradient as the bottom nav so the
+          top + bottom chrome read as one unified frame.
+        */}
+        {isMobile && (
+          <header style={{
+            ...headerStyle,
+            padding: `${SP.sm}px ${SP.md}px`,
+            position: 'sticky', top: 0, zIndex: 50,
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.sm,
+            paddingTop: 'calc(env(safe-area-inset-top) + 8px)',
+          }}>
+            <button
+              type="button"
+              onClick={() => setView('generate')}
+              aria-label="SettlementForge home"
+              style={{
+                display: 'flex', alignItems: 'center', gap: SP.xs,
+                background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+              }}
+            >
+              <MapIcon size={18} color={GOLD} />
+              <span style={{ fontSize: FS.lg, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
+                SettlementForge
+              </span>
+            </button>
+
+            <button
+              onClick={() => authTier === 'anon' ? setAuthModalOpen(true) : setView('account')}
+              style={{
+                display: 'flex', alignItems: 'center', gap: SP.xs,
+                padding: `${SP.xs + 1}px ${SP.md}px`,
+                background: authTier === 'anon' ? GOLD_BG
+                  : isElevated ? 'rgba(124,58,237,0.15)'
+                  : 'rgba(42,122,42,0.2)',
+                border: `1px solid ${authTier === 'anon' ? 'rgba(160,118,42,0.3)'
+                  : isElevated ? 'rgba(124,58,237,0.3)'
+                  : 'rgba(42,122,42,0.4)'}`,
+                borderRadius: R.md, cursor: 'pointer',
+                color: authTier === 'anon' ? GOLD
+                  : isElevated ? '#c8a0f0'
+                  : '#4a8a4a',
+                fontSize: FS.xs, fontWeight: 700,
+                fontFamily: sans,
+                letterSpacing: '0.04em', textTransform: 'uppercase',
+              }}
+            >
+              <User size={12} />
+              {authTier === 'anon' ? 'Sign In'
+                : isElevated ? 'DEV'
+                : authTier === 'premium' ? 'PRO'
+                : 'Account'}
+            </button>
+          </header>
+        )}
+
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && (
           <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
