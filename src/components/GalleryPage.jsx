@@ -19,6 +19,7 @@ import React, { useEffect, useState } from 'react';
 import { ChevronLeft, Eye, Sparkles } from 'lucide-react';
 import { useFlag } from '../lib/flags.js';
 import { fetchPublicGallery, fetchPublicDossier } from '../lib/gallery.js';
+import { t } from '../copy/index.js';
 import { TIER_LABELS } from './new/design.js';
 import {
   GOLD, INK, _INK_DEEP, BORDER, CARD, PARCH, sans, serif_, SP, R, FS,
@@ -62,7 +63,7 @@ function GalleryTile({ tile, onOpen }) {
         fontSize: FS.xl, fontWeight: 600, color: INK,
         lineHeight: 1.2,
       }}>
-        {tile.name || 'Untitled settlement'}
+        {tile.name || t('gallery.untitled')}
       </h3>
       <div style={{
         display: 'flex', alignItems: 'center', gap: SP.sm,
@@ -186,7 +187,7 @@ export default function GalleryPage({ onNavigate }) {
             marginBottom: SP.lg,
           }}
         >
-          <ChevronLeft size={14} /> Back to gallery
+          <ChevronLeft size={14} /> {t('gallery.backToList')}
         </button>
         {dossierLoading && (
           <p style={{ color: MUTED, fontStyle: 'italic', textAlign: 'center' }}>
@@ -225,14 +226,14 @@ export default function GalleryPage({ onNavigate }) {
           margin: 0, fontFamily: serif_, fontSize: 36, fontWeight: 600,
           color: INK,
         }}>
-          Gallery
+          {t('gallery.pageTitle')}
         </h1>
         <p style={{
           margin: `${SP.sm}px auto 0`, maxWidth: 540,
           fontSize: FS.lg, color: BODY,
           fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
         }}>
-          Settlements other DMs have shared. Browse for inspiration; click a tile to read the full dossier.
+          {t('gallery.pageSubtitle')}
         </p>
         {/* ── Anti-AI positioning (Tier 7.13) ─────────────────────────── */}
         <p style={{
@@ -243,8 +244,7 @@ export default function GalleryPage({ onNavigate }) {
           fontFamily: sans, fontStyle: 'italic', lineHeight: 1.5,
           textAlign: 'left',
         }}>
-          Every dossier in the gallery was simulated, not AI-generated. The settlements are derived
-          from the same constraint engine — coherent because the simulator made them so.
+          {t('gallery.antiAi')}
         </p>
         <button
           type="button"
@@ -260,7 +260,7 @@ export default function GalleryPage({ onNavigate }) {
             cursor: 'pointer',
           }}
         >
-          <Sparkles size={14} /> Forge your own
+          <Sparkles size={14} /> {t('gallery.forgeYourOwn')}
         </button>
       </header>
 

@@ -421,8 +421,8 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
 
               <p style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
                 {view === 'signup'
-                  ? `Create a free ${getTierDisplayName('free')} account to save your work, push to larger sizes, and link settlements in the Neighbourhood System.`
-                  : 'Sign in to keep your work — saves, exports, larger settlements, and the Neighbourhood System.'}
+                  ? t('auth.signupSubtitle', { tier: getTierDisplayName('free') })
+                  : t('auth.signinSubtitle')}
               </p>
 
               {error && <Alert type="error">{error}</Alert>}
@@ -460,25 +460,25 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
               )}
 
               {/* ── Email path (magic-link by default) ───────────────── */}
-              <Input type="email" placeholder="Email address" value={email} onChange={setEmail} onKeyDown={onEnter} />
+              <Input type="email" placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
               {authMethod === 'password' && (
-                <Input type="password" placeholder="Password" value={password} onChange={setPassword} onKeyDown={onEnter} />
+                <Input type="password" placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
               )}
 
               {authMethod === 'password' && view === 'signin' && (
                 <Checkbox
                   checked={rememberMe}
                   onChange={setRememberMe}
-                  label="Remember me on this device"
+                  label={t('auth.rememberMe')}
                 />
               )}
 
               <Button onClick={submit} disabled={loading}>
                 {loading
-                  ? 'Working...'
+                  ? t('auth.button.working')
                   : authMethod === 'magic'
-                    ? 'Send sign-in link'
-                    : (view === 'signup' ? 'Create account' : 'Sign in')}
+                    ? t('auth.button.sendLink')
+                    : (view === 'signup' ? t('auth.button.createAcct') : t('auth.button.signIn'))}
               </Button>
 
               {/* ── More options disclosure ───────────────────────────
@@ -496,7 +496,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                   fontFamily: sans, textAlign: 'center',
                 }}
               >
-                {moreOpen ? 'Hide more options' : 'More sign-in options'}
+                {moreOpen ? t('auth.button.moreClose') : t('auth.button.moreOpen')}
               </button>
 
               {moreOpen && (
@@ -513,7 +513,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                     onClick={() => { setAuthMethod(m => m === 'magic' ? 'password' : 'magic'); setError(null); setMessage(null); }}
                     style={{ background:'none', border:'none', color:GOLD, fontSize:FS.xs, cursor:'pointer', fontFamily:sans, textAlign:'left', padding: 0 }}
                   >
-                    {authMethod === 'magic' ? 'Use a password instead' : 'Use a magic link instead (recommended)'}
+                    {authMethod === 'magic' ? t('auth.button.usePassword') : t('auth.button.useMagic')}
                   </button>
                   {authMethod === 'password' && view === 'signin' && (
                     <button
@@ -521,7 +521,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                       onClick={() => { setView('reset'); setError(null); }}
                       style={{ background: 'none', border: 'none', color: GOLD, fontSize: FS.xs, cursor: 'pointer', fontFamily: sans, textAlign: 'left', padding: 0 }}
                     >
-                      Forgot password?
+                      {t('auth.password.forgot')}
                     </button>
                   )}
                 </div>
@@ -529,7 +529,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
 
               {!isConfigured && (
                 <div style={{ textAlign: 'center', fontSize: FS.xxs, color: MUTED, fontStyle: 'italic' }}>
-                  Running in local mode — no backend configured
+                  {t('auth.localMode')}
                 </div>
               )}
             </div>

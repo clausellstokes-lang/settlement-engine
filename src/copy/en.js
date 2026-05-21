@@ -90,6 +90,8 @@ export const en = Object.freeze({
   auth: {
     title:    'Sign in to keep your work',
     subtitle: 'Saves, exports, larger settlements, and the Neighbourhood System.',
+    signinSubtitle: 'Sign in to keep your work — saves, exports, larger settlements, and the Neighbourhood System.',
+    signupSubtitle: 'Create a free {tier} account to save your work, push to larger sizes, and link settlements in the Neighbourhood System.',
     discord: {
       label:       'Continue with Discord',
       placeholder: 'Coming soon — we’re finishing the OAuth review.',
@@ -105,6 +107,22 @@ export const en = Object.freeze({
       forgot:   'Forgot password?',
       register: 'Create an account',
     },
+    button: {
+      working:     'Working...',
+      sendLink:    'Send sign-in link',
+      createAcct:  'Create account',
+      signIn:      'Sign in',
+      moreOpen:    'More sign-in options',
+      moreClose:   'Hide more options',
+      usePassword: 'Use a password instead',
+      useMagic:    'Use a magic link instead (recommended)',
+    },
+    placeholder: {
+      email:    'Email address',
+      password: 'Password',
+    },
+    rememberMe: 'Remember me on this device',
+    localMode:  'Running in local mode — no backend configured',
     error: {
       generic:    'Something went wrong. Try again.',
       invalid:    'That email or password didn’t work.',
@@ -247,6 +265,59 @@ export const en = Object.freeze({
       itemNeighbour:   'Link a second settlement (Neighbourhood System)',
       completeBadge:   'Complete!',
     },
+  },
+
+  // ── Account page ─────────────────────────────────────────────────────────
+  account: {
+    setDisplayName:        'Set Display Name',
+    subscriptionHeading:   'Subscription & Credits',
+    profileHeading:        'Profile',
+    cardCurrentTier:       'Current Tier',
+    cardCredits:           'Narrative Credits',
+    cardSaves:             'Saved Settlements',
+    fullAccess:            'Full Access',
+    purchaseCreditsLabel:  'Purchase Credits — Volume Discounts',
+    purchaseErrorTitle:    'Purchase couldn’t start. Try again or refresh the page.',
+  },
+
+  // ── Gallery (public dossier listing) ────────────────────────────────────
+  gallery: {
+    pageTitle:    'Gallery',
+    pageSubtitle: 'Settlements other DMs have shared. Browse for inspiration; click a tile to read the full dossier.',
+    antiAi:       'Every dossier in the gallery was simulated, not AI-generated. The settlements are derived from the same constraint engine — coherent because the simulator made them so.',
+    forgeYourOwn: 'Forge your own',
+    untitled:     'Untitled settlement',
+    emptyTitle:   'No public dossiers yet.',
+    emptyBody:    'Be the first to publish one — every shared dossier becomes a permanent, crawlable page.',
+    loadError:    'Couldn’t load the gallery. Try again in a moment.',
+    backToList:   'Back to gallery',
+  },
+
+  // ── Narrative drift modal (gate for structural edits on narrated saves) ─
+  narrativeDrift: {
+    headingSeismic:    'This is a big change.',
+    headingStructural: 'This change will drift the narrative.',
+    body:              'The narrative layer on this save reasons about the facts you’re changing. A mechanical substitution won’t keep the prose honest — the thesis, faction blurbs, and institution descriptions were written against the old state.',
+    pickOne:           'Pick one:',
+    regenerateTitle:   'Apply & Regenerate Narrative',
+    regenerateBody:    'Full re-run against the new state. Spends {cost} credits.',
+    progressTitle:     'Apply & Progress Narrative ({cost} credits)',
+    progressBody:      'Evolve the existing narrative. Preserves voice and named NPCs.',
+    revertTitle:       'Apply & Revert to Raw',
+    revertBody:        'Clear the narrative and show raw data. No credits. Chronicle history is preserved.',
+    cancelLabel:       'Cancel — don’t apply this change',
+    ariaCancel:        'Cancel',
+  },
+
+  // ── Purchase modal (credit packs + single dossier) ──────────────────────
+  purchase: {
+    title:             'Buy narrative credits',
+    subtitle:          'Credits never expire and apply to every narrative refinement feature.',
+    packsHeading:      'Narrative Credit Packs — Volume Discounts',
+    bestLabel:         'Best value',
+    valueLabel:        'Most popular',
+    perCreditTemplate: '{price}/credit',
+    failureMessage:    'Couldn’t start checkout. Try once more.',
   },
 
   // ── Errors (user-facing only — internal logs stay in console) ────────────

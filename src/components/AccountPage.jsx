@@ -19,6 +19,7 @@ import { auth as authService } from '../lib/auth.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured, supabase } from '../lib/supabase.js';
 import { getTierDisplayName } from '../config/pricing.js';
+import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 
@@ -199,7 +200,7 @@ export default function AccountPage({ onNavigateAdmin }) {
               ) : (
                 <>
                   <span style={{ fontSize: FS.xl, fontWeight: 700, color: INK, fontFamily: serif_ }}>
-                    {auth.displayName || 'Set Display Name'}
+                    {auth.displayName || t('account.setDisplayName')}
                   </span>
                   <button onClick={() => { setNameInput(auth.displayName || ''); setEditingName(true); }}
                     style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer' }}>
@@ -218,7 +219,7 @@ export default function AccountPage({ onNavigateAdmin }) {
       </Section>
 
       {/* ── Subscription & Credits ──────────────────────────────── */}
-      <Section title="Subscription & Credits" icon={Crown}>
+      <Section title={t('account.subscriptionHeading')} icon={Crown}>
         <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
           {/* Tier card */}
           <div style={{
@@ -228,14 +229,14 @@ export default function AccountPage({ onNavigateAdmin }) {
             textAlign: 'center',
           }}>
             <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
-              Current Tier
+              {t('account.cardCurrentTier')}
             </div>
             <div style={{
               fontSize: FS.xxl, fontWeight: 700, fontFamily: serif_,
               color: isElevated ? '#7c3aed' : auth.tier === 'premium' ? '#2a7a2a' : GOLD,
               textTransform: 'uppercase',
             }}>
-              {isElevated ? 'Full Access' : getTierDisplayName(auth.tier)}
+              {isElevated ? t('account.fullAccess') : getTierDisplayName(auth.tier)}
             </div>
           </div>
 
@@ -247,7 +248,7 @@ export default function AccountPage({ onNavigateAdmin }) {
             textAlign: 'center',
           }}>
             <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
-              Narrative Credits
+              {t('account.cardCredits')}
             </div>
             <div style={{ fontSize: FS.xxl, fontWeight: 700, color: '#7c3aed' }}>
               {isElevated ? '\u221E' : creditBalance}
@@ -262,7 +263,7 @@ export default function AccountPage({ onNavigateAdmin }) {
             textAlign: 'center',
           }}>
             <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
-              Saved Settlements
+              {t('account.cardSaves')}
             </div>
             <div style={{ fontSize: FS.xxl, fontWeight: 700, color: '#2a7a2a' }}>
               {savedSettlements.length} / {maxSaves === Infinity ? '\u221E' : maxSaves}
@@ -278,7 +279,7 @@ export default function AccountPage({ onNavigateAdmin }) {
               fontSize: FS.xs, fontWeight: 700, color: SECOND,
               textTransform: 'uppercase', letterSpacing: '0.06em',
             }}>
-              <TrendingDown size={14} /> Purchase Credits &mdash; Volume Discounts
+              <TrendingDown size={14} /> {t('account.purchaseCreditsLabel')}
             </div>
 
             {purchaseError && (

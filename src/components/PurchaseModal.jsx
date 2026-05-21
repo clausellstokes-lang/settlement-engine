@@ -15,6 +15,7 @@ import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
 import { getTierDisplayName } from '../config/pricing.js';
+import { t } from '../copy/index.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS } from './theme.js';
 
 export default function PurchaseModal({ onClose }) {
@@ -69,7 +70,7 @@ export default function PurchaseModal({ onClose }) {
           color: GOLD,
         }}>
           <h2 style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
-            Purchase Credits
+            {t('purchase.title')}
           </h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer' }}>
             <X size={20} />
@@ -129,7 +130,7 @@ export default function PurchaseModal({ onClose }) {
             fontSize: FS.xs, fontWeight: 700, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
-            <TrendingDown size={14} /> Narrative Credit Packs &mdash; Volume Discounts
+            <TrendingDown size={14} /> {t('purchase.packsHeading')}
           </div>
 
           <div style={{ display: 'flex', gap: SP.sm }}>

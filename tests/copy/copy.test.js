@@ -68,7 +68,12 @@ describe('tx()', () => {
 
 describe('en map shape (drift guards)', () => {
   it('exposes all top-level namespaces components depend on', () => {
-    const required = ['common', 'hero', 'generate', 'pipeline', 'auth', 'pricing', 'ai', 'tabs', 'onboarding', 'errors', 'footer'];
+    const required = [
+      'common', 'hero', 'generate', 'pipeline', 'auth', 'pricing', 'ai',
+      'tabs', 'onboarding', 'errors', 'footer',
+      // Added in Tier 7.14 migration:
+      'account', 'gallery', 'narrativeDrift', 'purchase',
+    ];
     for (const ns of required) {
       expect(en).toHaveProperty(ns);
       expect(typeof en[ns]).toBe('object');
@@ -164,5 +169,66 @@ describe('anti-AI positioning (Tier 7.12 + 7.13)', () => {
       // The new phrasing should be present somewhere in the tier's features.
       expect(joined).toContain('narrative refinement');
     }
+  });
+});
+
+// ── Tier 7.14 — Copy-module migration completeness ─────────────────────────
+// New namespaces added when components were migrated off inline literals.
+// Each test pins a representative key per namespace so future component
+// edits can't silently rip out the t() call without the test catching it.
+describe('Tier 7.14 migration coverage', () => {
+  it('exposes all account card labels', () => {
+    expect(t('account.setDisplayName')).toBe('Set Display Name');
+    expect(t('account.subscriptionHeading')).toBe('Subscription & Credits');
+    expect(t('account.cardCurrentTier')).toBe('Current Tier');
+    expect(t('account.cardCredits')).toBe('Narrative Credits');
+    expect(t('account.cardSaves')).toBe('Saved Settlements');
+    expect(t('account.fullAccess')).toBe('Full Access');
+    expect(t('account.purchaseCreditsLabel')).toContain('Purchase Credits');
+  });
+
+  it('exposes all gallery surface strings', () => {
+    expect(t('gallery.pageTitle')).toBe('Gallery');
+    expect(t('gallery.pageSubtitle')).toContain('Settlements other DMs have shared');
+    expect(t('gallery.forgeYourOwn')).toBe('Forge your own');
+    expect(t('gallery.untitled')).toBe('Untitled settlement');
+    expect(t('gallery.backToList')).toBe('Back to gallery');
+  });
+
+  it('exposes all narrative-drift modal strings', () => {
+    expect(t('narrativeDrift.headingSeismic')).toBe('This is a big change.');
+    expect(t('narrativeDrift.headingStructural')).toBe('This change will drift the narrative.');
+    expect(t('narrativeDrift.regenerateTitle')).toContain('Regenerate');
+    expect(t('narrativeDrift.revertTitle')).toContain('Revert to Raw');
+    // Interpolation: cost should substitute.
+    expect(t('narrativeDrift.regenerateBody', { cost: 3 })).toContain('3 credits');
+    expect(t('narrativeDrift.progressTitle', { cost: 5 })).toContain('(5 credits)');
+  });
+
+  it('exposes all purchase modal strings', () => {
+    expect(t('purchase.title')).toBe('Buy narrative credits');
+    expect(t('purchase.packsHeading')).toContain('Narrative Credit Packs');
+    expect(t('purchase.bestLabel')).toBe('Best value');
+    expect(t('purchase.valueLabel')).toBe('Most popular');
+  });
+
+  it('exposes auth modal button + placeholder + subtitle keys', () => {
+    // Buttons:
+    expect(t('auth.button.working')).toBe('Working...');
+    expect(t('auth.button.sendLink')).toBe('Send sign-in link');
+    expect(t('auth.button.createAcct')).toBe('Create account');
+    expect(t('auth.button.signIn')).toBe('Sign in');
+    expect(t('auth.button.moreOpen')).toBe('More sign-in options');
+    expect(t('auth.button.moreClose')).toBe('Hide more options');
+    expect(t('auth.button.usePassword')).toBe('Use a password instead');
+    expect(t('auth.button.useMagic')).toContain('magic link');
+    // Placeholders:
+    expect(t('auth.placeholder.email')).toBe('Email address');
+    expect(t('auth.placeholder.password')).toBe('Password');
+    // Subtitles + checkbox:
+    expect(t('auth.signinSubtitle')).toContain('Sign in to keep your work');
+    expect(t('auth.signupSubtitle', { tier: 'Wanderer' })).toContain('Wanderer');
+    expect(t('auth.rememberMe')).toBe('Remember me on this device');
+    expect(t('auth.localMode')).toContain('local mode');
   });
 });

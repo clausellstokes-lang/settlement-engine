@@ -25,6 +25,7 @@
 
 import { Sparkles, RotateCcw, X, Zap, GitBranch } from 'lucide-react';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
+import { t } from '../copy/index.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans } from './theme.js';
 
 const PURPLE = '#6a2a9a';
@@ -82,7 +83,7 @@ export default function NarrativeDriftModal({
           <Sparkles size={16} color={PURPLE} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 13, fontWeight: 800, color: INK, fontFamily: sans, letterSpacing: '0.02em' }}>
-              {isSeismic ? 'This is a big change.' : 'This change will drift the narrative.'}
+              {isSeismic ? t('narrativeDrift.headingSeismic') : t('narrativeDrift.headingStructural')}
             </div>
             <div style={{ fontSize: 10, color: MUTED, marginTop: 2, fontFamily: sans }}>
               {changeLabel}
@@ -90,7 +91,7 @@ export default function NarrativeDriftModal({
           </div>
           <button
             onClick={onCancel}
-            aria-label="Cancel"
+            aria-label={t('narrativeDrift.ariaCancel')}
             style={{ background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 4, display: 'flex' }}
           >
             <X size={14} />
@@ -100,12 +101,10 @@ export default function NarrativeDriftModal({
         {/* Body */}
         <div style={{ padding: '14px 18px', fontFamily: sans, fontSize: 12, color: SECOND, lineHeight: 1.55 }}>
           <p style={{ margin: 0, marginBottom: 10 }}>
-            The narrative layer on this save reasons about the facts you're changing. A mechanical
-            substitution won't keep the prose honest — the thesis, faction blurbs, and
-            institution descriptions were written against the <em>old</em> state.
+            {t('narrativeDrift.body')}
           </p>
           <p style={{ margin: 0, color: MUTED, fontSize: 11 }}>
-            Pick one:
+            {t('narrativeDrift.pickOne')}
           </p>
         </div>
 
@@ -125,9 +124,9 @@ export default function NarrativeDriftModal({
           >
             <Zap size={14} />
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.02em' }}>Apply & Regenerate Narrative</div>
+              <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.02em' }}>{t('narrativeDrift.regenerateTitle')}</div>
               <div style={{ fontSize: 10, marginTop: 2, opacity: 0.82 }}>
-                Full re-run against the new state. Spends {cost} credits.
+                {t('narrativeDrift.regenerateBody', { cost })}
               </div>
             </div>
           </button>
@@ -150,10 +149,10 @@ export default function NarrativeDriftModal({
               <GitBranch size={14} />
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.02em' }}>
-                  Apply & Progress Narrative ({progCost} credits)
+                  {t('narrativeDrift.progressTitle', { cost: progCost })}
                 </div>
                 <div style={{ fontSize: 10, marginTop: 2, opacity: 0.86 }}>
-                  Evolve the existing narrative. Preserves voice and named NPCs.
+                  {t('narrativeDrift.progressBody')}
                 </div>
               </div>
             </button>
@@ -173,9 +172,9 @@ export default function NarrativeDriftModal({
           >
             <RotateCcw size={14} color={PURPLE}/>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: INK, letterSpacing: '0.02em' }}>Apply & Revert to Raw</div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: INK, letterSpacing: '0.02em' }}>{t('narrativeDrift.revertTitle')}</div>
               <div style={{ fontSize: 10, marginTop: 2, color: MUTED }}>
-                Clear the narrative and show raw data. No credits. Chronicle history is preserved.
+                {t('narrativeDrift.revertBody')}
               </div>
             </div>
           </button>
@@ -191,7 +190,7 @@ export default function NarrativeDriftModal({
               textDecoration: 'underline',
             }}
           >
-            Cancel — don't apply this change
+            {t('narrativeDrift.cancelLabel')}
           </button>
         </div>
       </div>
