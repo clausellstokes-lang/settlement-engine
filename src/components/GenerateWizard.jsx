@@ -624,31 +624,15 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
               </div>
             </div>
 
+            {/* Save UX consolidation (code-review fix): there was a
+                second, smaller save button here that called
+                savesService.save directly with no error toast, no
+                "saved" feedback, and no canSave server-side gate.
+                Removed — the SaveToLibraryButton lower in the page
+                is the single canonical save action. Two save buttons
+                pointing at the same outcome was confusing and meant
+                users frequently clicked the worse one. */}
             <div style={{ display: 'flex', gap: SP.xs }}>
-              {canSave && (
-                <button
-                  onClick={async () => {
-                    try {
-                      await savesService.save({
-                        name: settlement.name || 'Untitled Settlement',
-                        tier: settlement.tier || 'unknown',
-                        settlement,
-                      });
-                    } catch (e) { console.error('Save failed:', e); }
-                  }}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: SP.xs,
-                    padding: `${SP.sm}px ${SP.md}px`,
-                    background: 'rgba(42,122,42,0.2)',
-                    border: '1px solid rgba(42,122,42,0.4)',
-                    borderRadius: R.md, cursor: 'pointer',
-                    color: '#4a8a4a', fontSize: FS.sm, fontWeight: 600, fontFamily: sans,
-                  }}
-                  title="Save settlement"
-                >
-                  <Save size={14} /> Save
-                </button>
-              )}
               <button
                 onClick={handleNewSettlement}
                 style={{
