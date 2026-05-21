@@ -101,3 +101,108 @@ describe('storage resilience', () => {
     window.localStorage.setItem = orig;
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────
+// Tier 7.2 — two-bucket cap (1 full + 2 rerolls)
+// ─────────────────────────────────────────────────────────────────────
+
+import {
+  DEFAULT_DAILY_FULL_CAP,
+  DEFAULT_DAILY_REROLL_CAP,
+  getAnonFullCount,
+  getAnonRerollCount,
+  anonFullRemaining,
+  anonRerollRemaining,
+  anonFullAtCap,
+  anonRerollAtCap,
+  incrementAnonFull,
+  incrementAnonReroll,
+} from '../../src/lib/anonGenCounter.js';
+
+describe('Tier 7.2 — two-bucket cap shape', () => {
+  beforeEach(() => { resetAnonGenCounter(); });
+
+  it('exports per-bucket defaults that sum to the combined cap', () => {
+    expect(DEFAULT_DAILY_FULL_CAP).toBe(1);
+    expect(DEFAULT_DAILY_REROLL_CAP).toBe(2);
+    expect(DEFAULT_DAILY_FULL_CAP + DEFAULT_DAILY_REROLL_CAP).toBe(3);
+  });
+
+  it('fresh state: full=0, reroll=0, both remaining at cap', () => {
+    expect(getAnonFullCount()).toBe(0);
+    expect(getAnonRerollCount()).toBe(0);
+    expect(anonFullRemaining()).toBe(1);
+    expect(anonRerollRemaining()).toBe(2);
+  });
+
+  it('incrementAnonFull bumps only the full bucket', () => {
+    incrementAnonFull();
+    expect(getAnonFullCount()).toBe(1);
+    expect(getAnonRerollCount()).toBe(0);
+  });
+
+  it('incrementAnonReroll bumps only the reroll bucket', () => {
+    incrementAnonReroll();
+    expect(getAnonFullCount()).toBe(0);
+    expect(getAnonRerollCount()).toBe(1);
+  });
+
+  it('anonFullAtCap fires at the full cap', () => {
+    expect(anonFullAtCap()).toBe(false);
+    incrementAnonFull();
+    expect(anonFullAtCap()).toBe(true);
+    expect(anonRerollAtCap()).toBe(false);
+  });
+
+  it('anonRerollAtCap fires at the reroll cap', () => {
+    expect(anonRerollAtCap()).toBe(false);
+    incrementAnonReroll();
+    incrementAnonReroll();
+    expect(anonRerollAtCap()).toBe(true);
+    expect(anonFullAtCap()).toBe(false);
+  });
+
+  it('combined getAnonGenCount returns full + reroll', () => {
+    incrementAnonFull();
+    incrementAnonReroll();
+    incrementAnonReroll();
+    expect(getAnonGenCount()).toBe(3);
+  });
+
+  it('combined anonAtCap fires only when BOTH buckets are full', () => {
+    incrementAnonFull();
+    expect(anonAtCap()).toBe(false);     // 1 + 0 = 1, cap 3
+    incrementAnonReroll();
+    expect(anonAtCap()).toBe(false);     // 1 + 1 = 2
+    incrementAnonReroll();
+    expect(anonAtCap()).toBe(true);      // 1 + 2 = 3
+  });
+
+  it('legacy incrementAnonGen routes to the full bucket', () => {
+    incrementAnonGen();
+    expect(getAnonFullCount()).toBe(1);
+    expect(getAnonRerollCount()).toBe(0);
+  });
+
+  it('day rollover resets BOTH buckets', () => {
+    // Persist a yesterday-shape row directly.
+    window.localStorage.setItem('sf.anon.gens', JSON.stringify({
+      date: '1999-01-01', full: 1, reroll: 2,
+    }));
+    expect(getAnonFullCount()).toBe(0);
+    expect(getAnonRerollCount()).toBe(0);
+  });
+
+  it('backward-compatibility: pre-7.2 saves with only `count` are read as full', () => {
+    const today = (() => {
+      const d = new Date();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const dy = String(d.getDate()).padStart(2, '0');
+      return `${d.getFullYear()}-${m}-${dy}`;
+    })();
+    window.localStorage.setItem('sf.anon.gens', JSON.stringify({ date: today, count: 1 }));
+    expect(getAnonFullCount()).toBe(1);
+    expect(getAnonRerollCount()).toBe(0);
+    expect(getAnonGenCount()).toBe(1);
+  });
+});
