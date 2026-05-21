@@ -13,6 +13,7 @@ import { useStore } from '../store/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import SettlementDetail from './SettlementDetail';
 import DeleteConfirmation from './DeleteConfirmation';
+import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../data/sampleSettlements.js';
 
 // ── Save migration ─────────────────────────────────────────────────────────
 function migrateConfig(config) {
@@ -229,6 +230,118 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
   );
 }
 
+// ── Sample dashboard (Tier 8.2) ────────────────────────────────────────────
+// Rendered in the saves empty state. Three teaser cards seed expectations
+// so new accounts never see "you have nothing — go figure it out." Forking
+// loads the sample's config into the wizard with a user-suffixed seed.
+
+function SampleCard({ sample, onFork }) {
+  return (
+    <article style={{
+      background: CARD,
+      border: `1px solid ${BORDER}`,
+      borderLeft: `3px solid ${GOLD}`,
+      borderRadius: 8,
+      padding: '14px 16px',
+      display: 'flex', flexDirection: 'column', gap: 8,
+      fontFamily: sans,
+      boxShadow: '0 2px 8px rgba(27,20,8,0.06)',
+    }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
+        <h4 style={{
+          margin: 0, fontFamily: serif_, fontSize: 16, fontWeight: 600,
+          color: INK, lineHeight: 1.2,
+        }}>
+          {sample.name}
+        </h4>
+        <span style={{
+          fontSize: 9, fontWeight: 800, color: '#7a5a1a',
+          background: 'rgba(201,162,76,0.14)',
+          border: '1px solid rgba(201,162,76,0.45)',
+          padding: '1px 6px', borderRadius: 999,
+          letterSpacing: '0.06em', textTransform: 'uppercase',
+        }}>
+          Sample
+        </span>
+        <span style={{
+          marginLeft: 'auto', fontSize: 11, color: MUTED,
+          textTransform: 'capitalize',
+        }}>
+          {sample.tier} · {sample.terrain}
+        </span>
+      </div>
+      <p style={{
+        margin: 0, fontSize: 12.5, color: '#4A3B22',
+        fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
+      }}>
+        {sample.teaser}
+      </p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+        {sample.tags.map(tag => (
+          <span key={tag} style={{
+            fontSize: 9.5, fontWeight: 700, color: SECOND,
+            background: '#faf6ee',
+            border: `1px solid ${BORDER}`,
+            padding: '1px 6px', borderRadius: 4,
+            textTransform: 'uppercase', letterSpacing: '0.05em',
+          }}>
+            {tag}
+          </span>
+        ))}
+      </div>
+      <button
+        onClick={() => onFork(sample)}
+        style={{
+          alignSelf: 'flex-start', marginTop: 4,
+          padding: '6px 12px',
+          background: 'transparent',
+          color: GOLD,
+          border: `1.5px solid ${GOLD}`,
+          borderRadius: 999,
+          fontFamily: sans, fontSize: 11, fontWeight: 700,
+          cursor: 'pointer',
+          letterSpacing: '0.04em', textTransform: 'uppercase',
+        }}
+      >
+        Fork &amp; forge
+      </button>
+    </article>
+  );
+}
+
+function SampleDashboard({ onFork }) {
+  return (
+    <div style={{
+      padding: '20px 16px',
+      background: 'rgba(255,251,245,0.96)',
+      border: `1px solid ${BORDER}`,
+      borderRadius: 8,
+    }}>
+      <div style={{
+        fontSize: 11, fontWeight: 800, color: MUTED,
+        textTransform: 'uppercase', letterSpacing: '0.06em',
+        marginBottom: 10,
+        textAlign: 'center',
+      }}>
+        Start from a sample — or roll your own
+      </div>
+      <p style={{
+        margin: '0 auto 14px', maxWidth: 460,
+        fontSize: 12, color: SECOND, lineHeight: 1.5,
+        textAlign: 'center', fontFamily: sans,
+      }}>
+        Three hand-picked seeds you can fork into your own saves. Each forks
+        with a unique character — same setting, different settlement.
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {SAMPLE_SETTLEMENTS.map(sample => (
+          <SampleCard key={sample.id} sample={sample} onFork={onFork} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Main Panel ──────────────────────────────────────────────────────────────
 
 export default function SettlementsPanel({ onNavigate }) {
@@ -248,6 +361,7 @@ export default function SettlementsPanel({ onNavigate }) {
   const maxSaves = useStore(s => s.maxSaves());
   const canSave = useStore(s => s.canSave());
   const authTier = useStore(s => s.auth.tier);
+  const authUser = useStore(s => s.auth.user);
   const setSavedSettlements = useStore(s => s.setSavedSettlements);
   const applyCosmeticRename = useStore(s => s.applyCosmeticRename);
 
@@ -269,6 +383,24 @@ export default function SettlementsPanel({ onNavigate }) {
     if (data.settlement) { setSettlement(data.settlement); setLoadedFromSave({ name: data.settlement.name, tier: data.settlement.tier }); }
     onNavigate?.('generate');
   };
+
+  /**
+   * Fork a Tier 8.2 sample into the wizard. We load the sample's config
+   * into the generator state (no save written yet) and navigate to the
+   * Create view so the user can hit Generate and see their version of
+   * the sample town. Seed is suffixed with the user id so two users
+   * forking the same sample get mechanically-different results.
+   */
+  const forkSample = useCallback((sample) => {
+    if (!sample?.config) return;
+    const seed = forkSeedFor(sample, authUser?.id);
+    updateConfig({
+      ...migrateConfig(sample.config),
+      seed,
+      _forkedFromSample: sample.id,
+    });
+    onNavigate?.('generate');
+  }, [authUser?.id, updateConfig, onNavigate]);
 
   const [saves, _setSavesLocal] = useState([]);
   // Wrapper: update local state + Zustand store so WorldMap palette stays in sync
@@ -600,7 +732,9 @@ export default function SettlementsPanel({ onNavigate }) {
       {savesLoading ? (
         <div style={{ padding:'24px 16px', textAlign:'center', fontSize:13, color:MUTED, background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>Loading saves...</div>
       ) : saves.length === 0 ? (
-        <div style={{ padding:'24px 16px', textAlign:'center', fontSize:13, color:MUTED, background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>No saved settlements yet. Generate one and save it.</div>
+        // Tier 8.2 — show sample dossiers instead of a bare empty state.
+        // Eliminates the "you have nothing — go figure it out" first run.
+        <SampleDashboard onFork={forkSample} />
       ) : (
         <>
           {/* Campaign folders */}
