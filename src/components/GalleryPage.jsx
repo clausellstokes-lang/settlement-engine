@@ -18,7 +18,7 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronLeft, Eye, Sparkles } from 'lucide-react';
 import { useFlag } from '../lib/flags.js';
-import { fetchPublicGallery, fetchPublicDossier } from '../lib/gallery.js';
+import { fetchPublicGallery, fetchPublicDossier, fetchCuratedGallery } from '../lib/gallery.js';
 import { t } from '../copy/index.js';
 import { TIER_LABELS } from './new/design.js';
 import {
@@ -33,6 +33,7 @@ const BODY   = '#4A3B22';
 const PublicDossierView = React.lazy(() => import('./PublicDossierView.jsx'));
 
 function GalleryTile({ tile, onOpen }) {
+  const curated = !!tile.curated;
   return (
     <button
       type="button"
@@ -40,28 +41,56 @@ function GalleryTile({ tile, onOpen }) {
       style={{
         textAlign: 'left',
         background: CARD,
-        border: `1px solid ${BORDER}`,
+        border: `1px solid ${curated ? GOLD : BORDER}`,
         borderRadius: R.xl,
         padding: `${SP.lg}px ${SP.lg}px`,
         cursor: 'pointer',
         display: 'flex', flexDirection: 'column', gap: SP.sm,
         fontFamily: sans,
-        boxShadow: '0 2px 10px rgba(27,20,8,0.06)',
+        boxShadow: curated
+          ? '0 4px 16px rgba(201,162,76,0.18)'
+          : '0 2px 10px rgba(27,20,8,0.06)',
         transition: 'transform 0.1s, box-shadow 0.15s',
+        position: 'relative',
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.boxShadow = '0 6px 18px rgba(27,20,8,0.12)';
+        e.currentTarget.style.boxShadow = curated
+          ? '0 8px 22px rgba(201,162,76,0.30)'
+          : '0 6px 18px rgba(27,20,8,0.12)';
         e.currentTarget.style.transform = 'translateY(-1px)';
       }}
       onMouseLeave={e => {
-        e.currentTarget.style.boxShadow = '0 2px 10px rgba(27,20,8,0.06)';
+        e.currentTarget.style.boxShadow = curated
+          ? '0 4px 16px rgba(201,162,76,0.18)'
+          : '0 2px 10px rgba(27,20,8,0.06)';
         e.currentTarget.style.transform = 'translateY(0)';
       }}
     >
+      {/* Curated badge — top right corner of the tile. Only renders for
+          hand-picked exemplars; community tiles stay clean. */}
+      {curated && (
+        <span
+          aria-label="Curated exemplar"
+          title="Hand-picked by the SettlementForge team"
+          style={{
+            position: 'absolute', top: 10, right: 10,
+            display: 'inline-flex', alignItems: 'center', gap: 3,
+            padding: '2px 7px', borderRadius: 999,
+            background: 'rgba(201,162,76,0.14)',
+            border: '1px solid rgba(201,162,76,0.45)',
+            color: '#7a5a1a',
+            fontSize: 9, fontWeight: 800, letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+          }}
+        >
+          <Sparkles size={9} /> Curated
+        </span>
+      )}
       <h3 style={{
         margin: 0, fontFamily: serif_,
         fontSize: FS.xl, fontWeight: 600, color: INK,
         lineHeight: 1.2,
+        paddingRight: curated ? 76 : 0,  // leave room for the badge
       }}>
         {tile.name || t('gallery.untitled')}
       </h3>
@@ -83,7 +112,9 @@ function GalleryTile({ tile, onOpen }) {
 export default function GalleryPage({ onNavigate }) {
   const enabled = useFlag('gallery');
 
-  // Listing state
+  // Listing state — split into curated (hand-picked exemplars rendered
+  // above the community grid) and the community grid itself.
+  const [curatedItems, setCuratedItems] = useState([]);
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(false);
   const [page, setPage] = useState(0);
@@ -100,12 +131,19 @@ export default function GalleryPage({ onNavigate }) {
 
   // Initial listing fetch. listLoading is initialized to true above so
   // the spinner shows immediately without a setState-in-effect call.
+  // We fan out two requests in parallel: the curated row (small, fixed
+  // set) and the first page of the community grid. They share a single
+  // loading flag because the page only paints once both have resolved.
   useEffect(() => {
     if (!enabled) return;
     let cancelled = false;
-    fetchPublicGallery({ page: 0 })
-      .then(res => {
+    Promise.all([
+      fetchCuratedGallery(),
+      fetchPublicGallery({ page: 0 }),
+    ])
+      .then(([curated, res]) => {
         if (cancelled) return;
+        setCuratedItems(curated);
         setItems(res.items);
         setHasMore(res.hasMore);
         setListError(null);
@@ -293,16 +331,72 @@ export default function GalleryPage({ onNavigate }) {
         </div>
       )}
 
+      {/* ── Curated row (Tier 8.1) ────────────────────────────────────
+          Hand-picked exemplars rendered above the community grid.
+          Hidden entirely when there are no curated tiles so the page
+          doesn't show an empty "Featured" header. */}
+      {curatedItems.length > 0 && (
+        <section style={{ marginBottom: SP.xxl }}>
+          <div style={{
+            display: 'flex', alignItems: 'baseline', gap: SP.sm,
+            marginBottom: SP.lg,
+            paddingBottom: SP.sm,
+            borderBottom: `1px solid ${BORDER}`,
+          }}>
+            <Sparkles size={14} color={GOLD} />
+            <h2 style={{
+              margin: 0, fontFamily: serif_, fontSize: FS.xl,
+              fontWeight: 600, color: INK,
+            }}>
+              Curated
+            </h2>
+            <span style={{ fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>
+              · hand-picked by the team
+            </span>
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+            gap: SP.lg,
+          }}>
+            {curatedItems.map(tile => (
+              <GalleryTile key={tile.slug} tile={tile} onOpen={openDossier} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── Community row ───────────────────────────────────────────── */}
       {items.length > 0 && (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-          gap: SP.lg,
-        }}>
+        <>
+          {curatedItems.length > 0 && (
+            <div style={{
+              display: 'flex', alignItems: 'baseline', gap: SP.sm,
+              marginBottom: SP.lg,
+              paddingBottom: SP.sm,
+              borderBottom: `1px solid ${BORDER}`,
+            }}>
+              <h2 style={{
+                margin: 0, fontFamily: serif_, fontSize: FS.xl,
+                fontWeight: 600, color: INK,
+              }}>
+                Community
+              </h2>
+              <span style={{ fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>
+                · shared by other DMs
+              </span>
+            </div>
+          )}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+            gap: SP.lg,
+          }}>
           {items.map(tile => (
             <GalleryTile key={tile.slug} tile={tile} onOpen={openDossier} />
           ))}
-        </div>
+          </div>
+        </>
       )}
 
       {hasMore && (

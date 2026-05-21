@@ -40,11 +40,13 @@ export async function unpublishSettlement(settlementId) {
  * Fetch the public gallery listing.
  *
  * @param {Object} [opts]
- * @param {number} [opts.page=0]      — Zero-indexed page number.
- * @param {number} [opts.pageSize]    — Items per page; defaults to LIST_PAGE_SIZE.
+ * @param {number} [opts.page=0]              — Zero-indexed page number.
+ * @param {number} [opts.pageSize]            — Items per page; defaults to LIST_PAGE_SIZE.
+ * @param {boolean} [opts.excludeCurated=true] — When true, hides curated dossiers from this listing
+ *                                              (they appear in the curated section instead).
  * @returns {Promise<{ items, hasMore }>}
  */
-export async function fetchPublicGallery({ page = 0, pageSize = LIST_PAGE_SIZE } = {}) {
+export async function fetchPublicGallery({ page = 0, pageSize = LIST_PAGE_SIZE, excludeCurated = true } = {}) {
   if (!isConfigured) return { items: [], hasMore: false };
 
   const from = page * pageSize;
@@ -53,10 +55,19 @@ export async function fetchPublicGallery({ page = 0, pageSize = LIST_PAGE_SIZE }
   // Select only the columns we need to render a tile. The full `data`
   // jsonb stays on the server until the viewer opens a specific
   // dossier — keeps the listing query small and cacheable.
-  const { data, error, count } = await supabase
+  let query = supabase
     .from('settlements')
-    .select('id, public_slug, name, tier, published_at, view_count', { count: 'exact' })
-    .eq('is_public', true)
+    .select('id, public_slug, name, tier, published_at, view_count, is_curated', { count: 'exact' })
+    .eq('is_public', true);
+
+  if (excludeCurated) {
+    // Hide curated dossiers from the community listing — they get
+    // their own surface above via fetchCuratedGallery(). This avoids
+    // duplicating the same tile in two sections.
+    query = query.eq('is_curated', false);
+  }
+
+  const { data, error, count } = await query
     .order('published_at', { ascending: false })
     .range(from, to);
 
@@ -70,6 +81,54 @@ export async function fetchPublicGallery({ page = 0, pageSize = LIST_PAGE_SIZE }
     hasMore: (count ?? 0) > (page + 1) * pageSize,
     total: count ?? null,
   };
+}
+
+/**
+ * Fetch the curated gallery — hand-picked exemplary dossiers shown
+ * above the community listing. Returns dossiers in their explicit
+ * curation order (curated_order asc, nulls last → published_at desc).
+ *
+ * Backed by the `list_curated_dossiers()` RPC (migration 011) so the
+ * sort logic lives server-side and stays consistent with any future
+ * server-side curation tooling. Returns an empty array if Supabase
+ * isn't configured.
+ */
+export async function fetchCuratedGallery() {
+  if (!isConfigured) return [];
+
+  const { data, error } = await supabase.rpc('list_curated_dossiers');
+  if (error) {
+    console.error('[gallery] curated listing failed:', error);
+    return [];
+  }
+
+  return (data || []).map(row => ({
+    id:          row.id,
+    slug:        row.public_slug,
+    name:        row.name,
+    tier:        row.tier,
+    publishedAt: row.published_at,
+    viewCount:   row.view_count ?? 0,
+    curated:     true,
+  }));
+}
+
+/**
+ * Admin-only: mark a dossier as curated (or unmark it). The server
+ * RPC gates this to developer/admin roles and writes an audit row.
+ *
+ * @param {string} settlementId — The settlement to curate.
+ * @param {boolean} curated     — Target state.
+ * @param {number} [sortOrder]  — Optional explicit sort index within the curated section.
+ */
+export async function setCurated(settlementId, curated, sortOrder = null) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  const { error } = await supabase.rpc('set_curated', {
+    target_id:  settlementId,
+    curated,
+    sort_order: sortOrder,
+  });
+  if (error) throw new Error(error.message || 'Curation toggle failed');
 }
 
 /**
@@ -123,6 +182,7 @@ function sanitizeTile(row) {
     tier:         row.tier,
     publishedAt:  row.published_at,
     viewCount:    row.view_count ?? 0,
+    curated:      row.is_curated ?? false,
   };
 }
 
