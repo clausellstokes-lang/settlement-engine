@@ -11,7 +11,10 @@ import { registerStep } from '../pipeline.js';
 import {
   applyTeleportationInfrastructure,
   applySubsistenceMode,
-  _stripArcaneInstitutions,
+  // stripArcaneInstitutions is called from factionCorrelationPass, not
+  // here — but the import path remained as a stale `_`-prefixed unused
+  // reference that didn't match the actual export name (no underscore).
+  // Removing keeps the contract clean.
 } from '../isolationGenerator.js';
 import { TOWN_PLUS_TIERS } from '../../data/constants.js';
 import { recordTrace } from '../../domain/trace.js';

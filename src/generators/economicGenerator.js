@@ -6,7 +6,6 @@
 import { random as _rng } from './rngContext.js';
 import { customDeps as _customDeps } from '../lib/dependencyEngine.js';
 import {
-  _chance,
   getInstFlags,
   getPriorities,
   getStressFlags,

@@ -574,8 +574,15 @@ describe('Tier 3.3 — create-checkout metadata wiring (must align with webhook)
     webhookSrc = readFunction('stripe-webhook');
   });
 
-  it('attaches supabase_user_id to checkout metadata', () => {
-    expect(src).toMatch(/supabase_user_id:\s*user\.id/);
+  it('attaches supabase_user_id to checkout metadata (when an authed user is present)', () => {
+    // P95 changed create-checkout to make single_dossier anonymous-
+    // allowed, so the assignment moved from `user.id` to `user?.id ?? ''`.
+    // The contract is still: the user_id comes from the server-verified
+    // JWT, never from the request body. Pattern updated to allow either
+    // user.id or user?.id with an optional fallback to a literal empty
+    // string. Negative assertions in the dedicated test below still
+    // forbid request-body sourcing.
+    expect(src).toMatch(/supabase_user_id:\s*user\??\.\s*id/);
   });
 
   it('attaches product key to checkout metadata', () => {
@@ -806,21 +813,33 @@ describe('Tier 0.5 — create-checkout metadata population is server-controlled'
   beforeAll(() => { checkoutSrc = readFunction('create-checkout'); });
 
   it('supabase_user_id is set from user.id (the server-verified JWT) — NEVER from the request body', () => {
-    expect(checkoutSrc).toMatch(/supabase_user_id:\s*user\.id/);
+    // P95: allow optional-chained `user?.id` (anonymous single_dossier
+    // path has no user). Contract is unchanged — the user id NEVER
+    // comes from the request body.
+    expect(checkoutSrc).toMatch(/supabase_user_id:\s*user\??\.\s*id/);
     // Negative: no path where the user can pass a different id.
     expect(checkoutSrc).not.toMatch(/supabase_user_id:\s*req\.|supabase_user_id:\s*body\./);
   });
 
-  it('requires Authorization header BEFORE reading the request body', () => {
+  it('reads the request body BEFORE authentication so single_dossier can be anonymous', () => {
+    // P95 inverted the original order: we need to know whether the
+    // requested product is anonymous-allowed (single_dossier) before
+    // deciding whether to require an Authorization header. The auth
+    // path is still mandatory for every NON-single_dossier product,
+    // and supabase_user_id still comes from the server-verified JWT
+    // for any product that does provide auth.
+    const bodyIdx = checkoutSrc.search(/const\s*\{\s*product\s*\}\s*=\s*await\s*req\.json/);
     const authIdx = checkoutSrc.search(/getUser\s*\(/);
-    const bodyIdx = checkoutSrc.search(/req\.json\s*\(/);
-    expect(authIdx).toBeGreaterThan(0);
     expect(bodyIdx).toBeGreaterThan(0);
-    expect(authIdx).toBeLessThan(bodyIdx);
+    expect(authIdx).toBeGreaterThan(0);
+    expect(bodyIdx).toBeLessThan(authIdx);
   });
 
-  it('rejects when authentication fails (no anonymous checkout creation)', () => {
-    expect(checkoutSrc).toMatch(/Not authenticated/);
+  it('rejects non-single_dossier products when authentication is missing', () => {
+    // P95 — auth is still required for credit packs, subscriptions,
+    // and founder seats. Only single_dossier may proceed without it.
+    expect(checkoutSrc).toMatch(/Not authenticated|Missing authorization header/);
+    expect(checkoutSrc).toMatch(/isAnonymousProduct\s*=\s*product\s*===\s*['"]single_dossier['"]/);
   });
 
   it('product is validated against PRICE_MAP before being put into metadata', () => {

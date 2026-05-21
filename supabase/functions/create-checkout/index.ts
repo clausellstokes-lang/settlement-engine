@@ -109,22 +109,38 @@ serve(async (req) => {
   if (guard.reject) return guard.reject;
 
   try {
-    // Authenticate the user via Supabase JWT
-    const authHeader = req.headers.get('Authorization');
-    if (!authHeader) throw new Error('Missing authorization header');
-
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_ANON_KEY')!,
-      { global: { headers: { Authorization: authHeader } } },
-    );
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-    if (authError || !user) throw new Error('Not authenticated');
-
-    // Parse request body
+    // Parse request body first so we know whether the product requires auth.
     const { product } = await req.json();
     if (!product || !PRICE_MAP[product]) {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
+    }
+
+    // Tier 7.4 — single-dossier is anonymous-allowed (per pricing.js
+    // SINGLE_DOSSIER.requiresAccount=false). All other products bind
+    // to a user_id at delivery time (credit packs, subscriptions,
+    // founder seats) so they keep the auth requirement.
+    const isAnonymousProduct = product === 'single_dossier';
+
+    const authHeader = req.headers.get('Authorization');
+    let user: { id: string; email?: string | null } | null = null;
+
+    if (authHeader) {
+      // If auth is provided (even for an anonymous-allowed product), try
+      // to resolve the user so the purchase binds to the account when
+      // possible. Failures fall through to anonymous handling.
+      const supabase = createClient(
+        Deno.env.get('SUPABASE_URL')!,
+        Deno.env.get('SUPABASE_ANON_KEY')!,
+        { global: { headers: { Authorization: authHeader } } },
+      );
+      const { data: { user: authedUser }, error: authError } = await supabase.auth.getUser();
+      if (!authError && authedUser) {
+        user = { id: authedUser.id, email: authedUser.email ?? null };
+      } else if (!isAnonymousProduct) {
+        throw new Error('Not authenticated');
+      }
+    } else if (!isAnonymousProduct) {
+      throw new Error('Missing authorization header');
     }
 
     const priceId = PRICE_MAP[product];
@@ -132,20 +148,27 @@ serve(async (req) => {
 
     const clientUrl = Deno.env.get('CLIENT_URL') || 'http://localhost:5173';
 
-    // Create Stripe checkout session
+    // Create Stripe checkout session. For anonymous purchases we omit
+    // customer_email — Stripe collects it on the checkout page and
+    // sends it back on session.completed via session.customer_details
+    // and session.customer (which the webhook reads).
     const mode = SUBSCRIPTION_PRODUCTS.has(product) ? 'subscription' : 'payment';
-    const session = await stripe.checkout.sessions.create({
+    const sessionParams: Record<string, unknown> = {
       mode,
-      customer_email: user.email,
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: `${clientUrl}?checkout=success&product=${product}`,
       cancel_url:  `${clientUrl}?checkout=cancelled`,
       metadata: {
-        supabase_user_id: user.id,
+        supabase_user_id: user?.id ?? '',
         product,
         credits: String(CREDIT_AMOUNTS[product] || 0),
+        anonymous: isAnonymousProduct && !user ? 'true' : 'false',
       },
-    });
+    };
+    if (user?.email) {
+      sessionParams.customer_email = user.email;
+    }
+    const session = await stripe.checkout.sessions.create(sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]);
 
     return new Response(
       JSON.stringify({ url: session.url }),

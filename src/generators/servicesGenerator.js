@@ -5,7 +5,6 @@ import { random as _rng } from './rngContext.js';
 // Originally defined and exported from economicGenerator.js:959.
 import { priorityToCategory } from './economicGenerator.js';
 import {
-  _chance,
   getInstFlags,
   getPriorities,
   getStressFlags,

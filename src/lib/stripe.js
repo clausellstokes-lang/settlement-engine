@@ -76,8 +76,17 @@ export async function startCheckout(product) {
     throw new Error(`Unknown product: ${product}`);
   }
 
+  // Tier 7.4 — single-dossier checkout is anonymous-allowed (per
+  // pricing.js SINGLE_DOSSIER.requiresAccount=false). All other
+  // products still require auth because they grant ongoing account
+  // benefits (subscription, founder seat, credit pack) that need a
+  // user_id to bind to.
+  const isAnonymousProduct = product === 'single_dossier';
+
   const { data: { session } } = await supabase.auth.getSession();
-  if (!session) throw new Error('You must be signed in to purchase');
+  if (!session && !isAnonymousProduct) {
+    throw new Error('You must be signed in to purchase');
+  }
 
   const { data, error } = await supabase.functions.invoke('create-checkout', {
     body: { product },
