@@ -271,6 +271,13 @@ export const createSettlementSlice = (set, get) => ({
         state.canonizedAt = null;
       });
     } else {
+      // Tier 1.7 — legacy generator path. The pipeline path above
+      // is preferred; this fallback exists for callers that haven't
+      // migrated yet. DEV-only warning so the deprecation is visible
+      // during development without polluting production logs.
+      if (typeof window !== 'undefined' && window?.location?.hostname === 'localhost') {
+        console.warn('[settlementSlice] legacy engineGenerate called — pipeline path is preferred (Tier 1.7).');
+      }
       result = eng.engineGenerate(fullConfig);
       set(state => {
         state.settlement = result;
@@ -438,6 +445,11 @@ export const createSettlementSlice = (set, get) => ({
         s.whatIfPreview  = null;
       });
     } else {
+      // Tier 1.7 — legacy generator path (same deprecation note as
+      // the primary generate() handler).
+      if (typeof window !== 'undefined' && window?.location?.hostname === 'localhost') {
+        console.warn('[settlementSlice] legacy engineGenerate called from applyPendingChange — pipeline path is preferred (Tier 1.7).');
+      }
       const result = eng.engineGenerate(fullConfig);
       set(s => {
         s.settlement = result;

@@ -1,10 +1,37 @@
 /**
- * generateSettlement.js
- * Main settlement generation entry point.
- * Orchestrates all sub-generators into a complete settlement object.
+ * generateSettlement.js — LEGACY GENERATOR PATH (Tier 1.7 deprecation).
  *
- * This is the de-minified equivalent of ie() from the original bundle.
- * All generator functions have been extracted to their own modules.
+ * @deprecated Use generateSettlementPipeline.js instead.
+ *
+ * This is the original monolithic generator. The Strangler-Fig
+ * refactor produces an equivalent (and richer) output via
+ * `generateSettlementPipeline.js` + the per-step modules under
+ * `./steps/`. New code MUST use the pipeline path.
+ *
+ * Why the legacy path still exists:
+ *   1. Saved settlements generated with `engineGenerate` need a
+ *      load-time code path that produces a structurally compatible
+ *      result. Until the schema migration (Tier 1.4) covers any
+ *      shape drift between old and new generators, the legacy path
+ *      remains the only way to deterministically reproduce them
+ *      from a seed.
+ *   2. The store's `generateSettlement` action still falls back to
+ *      `engineGenerate(fullConfig)` (settlementSlice.js ~line 441)
+ *      when the pipeline path isn't taken. That fallback emits a
+ *      DEV-only console.warn (see below).
+ *
+ * Retirement contract (when this file is finally deleted):
+ *   - Remove `engineGenerate` from `engine.js`'s exports.
+ *   - Remove the fallback branch in settlementSlice.js.
+ *   - Add a final migration step in settlementMigrations.js that
+ *     re-runs the pipeline on any save still carrying a v0
+ *     generator output.
+ *   - Update docs/settlement-schema.md to drop the "legacy / pipeline
+ *     duality" caveat.
+ *
+ * The contract test `tests/domain/legacyGeneratorQuarantine.test.js`
+ * locks in: only `engine.js` is allowed to import this file. New
+ * importers fail the test immediately.
  */
 
 import {TIER_ORDER, POPULATION_RANGES, getMagicLevel, popToTier, TOWN_PLUS_TIERS} from '../data/constants.js';
