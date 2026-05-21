@@ -34,6 +34,7 @@ const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
 const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
 const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
 const GalleryPage      = lazy(() => import('./components/GalleryPage.jsx'));
+const ComparePage      = lazy(() => import('./components/ComparePage.jsx'));
 const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
 
 import OnboardingCoach from './components/OnboardingCoach.jsx';
@@ -378,6 +379,7 @@ export default function App() {
             {view === 'admin'       && <AdminPanel onBack={() => setView('account')} />}
             {view === 'pricing'     && <PricingPage onNavigate={setView} />}
             {view === 'gallery'     && <GalleryPage onNavigate={setView} />}
+            {view.startsWith('compare') && <ComparePage view={view} onNavigate={setView} />}
             {view === 'dossier-success' && (
               <SingleDossierSuccessPage
                 onSignUp={() => { setView('generate'); setAuthModalOpen(true); }}
@@ -422,6 +424,14 @@ export default function App() {
             padding: 0,
           }}>
             Gallery
+          </button>
+          <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
+          <button onClick={() => setView('compare')} style={{
+            background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
+            fontFamily: sans, fontSize: FS.sm, letterSpacing: '0.04em',
+            padding: 0,
+          }}>
+            Compare
           </button>
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
           <a href="mailto:clausellstokes@aol.com" style={{
