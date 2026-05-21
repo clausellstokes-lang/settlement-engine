@@ -50,9 +50,16 @@ create table if not exists public.credit_ledger (
 create index if not exists idx_credit_ledger_user
   on public.credit_ledger(user_id);
 
+-- Partial index for perpetual grants (the dominant case: founder
+-- lifetime and credit-pack purchases never expire). We CANNOT include
+-- `or expires_at > now()` in the predicate because `now()` is STABLE,
+-- not IMMUTABLE, and Postgres requires partial-index predicates to be
+-- IMMUTABLE. Time-bounded grants still get filtered correctly by the
+-- balance function's case-when clause; they just don't enjoy this
+-- particular index optimisation.
 create index if not exists idx_credit_ledger_user_active
   on public.credit_ledger(user_id, expires_at)
-  where expires_at is null or expires_at > now();
+  where expires_at is null;
 
 -- ── Balance function ──────────────────────────────────────────────────────
 -- Single source of truth for "how many credits does this user have right
