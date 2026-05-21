@@ -41,11 +41,24 @@ describe('trace surface: every generated settlement carries traces', () => {
     expect(instTraces.length).toBeGreaterThan(0);
   });
 
-  it('institution traces all reference the assembleInstitutions step', () => {
+  it('institution traces reference one of the institution-emitting pipeline steps', () => {
+    // Originally only `assembleInstitutions` emitted institution traces.
+    // After the Tier 2.1 pass, subsumption / cascade / isolation /
+    // factionCorrelation also produce institution-typed traces when
+    // they add or remove institutions. The assertion is the same in
+    // spirit (every trace has a known step) — just widened to the new
+    // reality.
     const s = gen({ settType: 'town', culture: 'germanic' });
     const instTraces = tracesByType(s, 'institution');
+    const VALID = new Set([
+      'assembleInstitutions',
+      'subsumptionPass',
+      'cascadePass',
+      'isolationPass',
+      'factionCorrelationPass',
+    ]);
     for (const t of instTraces) {
-      expect(t.step).toBe('assembleInstitutions');
+      expect(VALID.has(t.step)).toBe(true);
     }
   });
 
@@ -71,12 +84,21 @@ describe('trace surface: every generated settlement carries traces', () => {
 });
 
 describe('trace surface: tracesByStep matches the pipeline step name', () => {
-  it('returns the same traces as filtering tracesByType for institution', () => {
+  it('every assembleInstitutions trace is an institution trace (subset relationship)', () => {
+    // Originally we asserted byStep.length === byType.length — true
+    // when only assembleInstitutions emitted institution traces. After
+    // Tier 2.1 wiring, other steps emit institution traces too, so
+    // byStep('assembleInstitutions') is a SUBSET of byType('institution').
+    // We keep the directional invariant: assembleInstitutions only
+    // emits institution-typed traces.
     const s = gen({ settType: 'town', culture: 'germanic' });
     const byStep = tracesByStep(s, 'assembleInstitutions');
     const byType = tracesByType(s, 'institution');
-    // Today every assembleInstitutions trace is an institution trace.
-    expect(byStep.length).toBe(byType.length);
+    expect(byStep.length).toBeGreaterThan(0);
+    expect(byType.length).toBeGreaterThanOrEqual(byStep.length);
+    for (const t of byStep) {
+      expect(t.targetType).toBe('institution');
+    }
   });
 });
 

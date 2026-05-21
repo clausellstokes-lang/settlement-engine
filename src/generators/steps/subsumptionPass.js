@@ -8,6 +8,11 @@
  */
 
 import { registerStep } from '../pipeline.js';
+import { recordTrace } from '../../domain/trace.js';
+
+function instId(name) {
+  return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
+}
 
 const SUBSUMPTION_RULES = [
   { greater: 'banking district',            lesser: ['banking house', 'money changer', 'money changers'] },
@@ -66,18 +71,48 @@ const SUBSUMPTION_RULES = [
 // Exported for re-use in cascadePass
 export { SUBSUMPTION_RULES };
 
-function applySubsumption(institutions) {
+function applySubsumption(institutions, ctx = null) {
   const names = institutions.map(i => i.name.toLowerCase());
   const toRemove = new Set();
+  // Track which `greater` triggered each removal so the trace can name
+  // the actual reason ("subsumed by Banking District") rather than just
+  // "subsumed."
+  const subsumedBy = new Map();
   SUBSUMPTION_RULES.forEach(({ greater, lesser }) => {
     const hasGreater = names.some(n => n.includes(greater.toLowerCase()));
     if (!hasGreater) return;
     lesser.forEach(l => {
       institutions.forEach((inst, idx) => {
-        if (inst.name.toLowerCase().includes(l.toLowerCase())) toRemove.add(idx);
+        if (inst.name.toLowerCase().includes(l.toLowerCase())) {
+          toRemove.add(idx);
+          if (!subsumedBy.has(idx)) subsumedBy.set(idx, greater);
+        }
       });
     });
   });
+
+  // Tier 2.1 — emit one trace per subsumption so the rail / AI overlay
+  // can explain why a smaller institution disappeared. The "greater"
+  // institution is recorded as the cause; the lesser is the target.
+  if (ctx) {
+    for (const idx of toRemove) {
+      const inst = institutions[idx];
+      if (!inst) continue;
+      const greaterName = subsumedBy.get(idx);
+      recordTrace(ctx, {
+        targetType: 'institution',
+        targetId:   instId(inst.name),
+        step:       'subsumptionPass',
+        result:     'subsumed',
+        causes: [
+          { source: instId(greaterName || 'unknown'),
+            effect: 'absorbed',
+            reason: `"${inst.name}" was absorbed into "${greaterName}" — the larger institution provides equivalent function.` },
+        ],
+      });
+    }
+  }
+
   [...toRemove].sort((a, b) => b - a).forEach(idx => institutions.splice(idx, 1));
 }
 
@@ -86,7 +121,7 @@ registerStep('subsumptionPass', {
   provides: [], // mutates institutions in place
   phase: 'institutions',
 }, (ctx) => {
-  applySubsumption(ctx.institutions);
+  applySubsumption(ctx.institutions, ctx);
   return {};
 });
 

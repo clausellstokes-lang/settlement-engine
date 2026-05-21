@@ -10,6 +10,7 @@
 import { registerStep } from '../pipeline.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { getCompatibleResources, getDefaultResources } from '../terrainHelpers.js';
+import { recordTrace } from '../../domain/trace.js';
 
 const DEPLETION_PROB = {
   thorp: 0.05, hamlet: 0.10, village: 0.20,
@@ -113,6 +114,39 @@ registerStep('resolveResources', {
   // Write back into effectiveConfig for downstream steps
   effectiveConfig.nearbyResources = nearbyResources;
   effectiveConfig.nearbyResourcesDepleted = nearbyResourcesDepleted;
+
+  // Tier 2.1 — emit one trace per nearby resource so downstream
+  // consumers (assembleInstitutions reads these to bias institution
+  // selection) and human readers can answer "why is this a fishing
+  // town?" / "why does this town have a mine?"
+  const depletedSet = new Set(nearbyResourcesDepleted);
+  for (const resourceKey of nearbyResources) {
+    const meta = RESOURCE_DATA[resourceKey] || {};
+    const depleted = depletedSet.has(resourceKey);
+    recordTrace(ctx, {
+      targetType: 'resource',
+      targetId:   `resource.${resourceKey}`,
+      step:       'resolveResources',
+      result:     depleted ? 'present_but_depleted' : 'present',
+      causes: [
+        meta.terrain
+          ? { source: `terrain.${meta.terrain}`, effect: 'enables',
+              reason: `"${resourceKey}" is terrain-specific to ${meta.terrain}, which this settlement borders.` }
+          : { source: 'terrainCompatibility', effect: 'permitted',
+              reason: `"${resourceKey}" is compatible with this settlement's trade route + terrain combination.` },
+        depleted
+          ? { source: `tier.${tier}`, effect: 'depletion roll passed',
+              reason: `Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.` }
+          : null,
+      ].filter(Boolean),
+      downstreamEffects: Array.isArray(meta.instBoosts) || (meta.instBoosts && typeof meta.instBoosts === 'object')
+        ? Object.keys(meta.instBoosts).slice(0, 3).map(name => ({
+            target: `institution.${name.replace(/\s+/g, '_')}`,
+            effect: 'biased toward selection',
+          }))
+        : [],
+    });
+  }
 
   return { nearbyResources, nearbyResourcesDepleted };
 });

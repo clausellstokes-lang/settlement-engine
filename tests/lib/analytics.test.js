@@ -129,17 +129,20 @@ describe('Tier 8.8 — Funnel helpers', () => {
   });
 
   it('signupCompleted fires SIGNUP_AFTER_ANON only when anon-prior is true', async () => {
-    // SHA-256 hashing is async; flush microtasks before asserting so the
-    // provider has received the calls.
+    // SHA-256 hashing is async; both Funnel.signupCompleted dispatches
+    // fire as separate microtasks and may resolve in either order.
+    // Assert SET membership rather than array order — the contract is
+    // "these events fire", not "in this exact sequence."
     Funnel.signupCompleted({ userId: 'u1' });
     await new Promise(r => setTimeout(r, 10));
-    expect(providerCalls.map(c => c.event)).toEqual(['signup_completed']);
+    expect(new Set(providerCalls.map(c => c.event))).toEqual(new Set(['signup_completed']));
     // Now mark anon and try again.
     markAnonGenerated();
     providerCalls.length = 0;
     Funnel.signupCompleted({ userId: 'u2' });
     await new Promise(r => setTimeout(r, 10));
-    expect(providerCalls.map(c => c.event)).toEqual(['signup_completed', 'signup_after_anon']);
+    expect(new Set(providerCalls.map(c => c.event)))
+      .toEqual(new Set(['signup_completed', 'signup_after_anon']));
   });
 
   it('paidAction fires PAID_AFTER_ANON only when anon-prior is true', () => {
