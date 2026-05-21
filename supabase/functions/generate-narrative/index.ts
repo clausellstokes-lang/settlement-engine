@@ -1548,71 +1548,51 @@ serve(async (req) => {
     );
 
     // ── Atomic credit spend via the spend_credits RPC (migration 009) ──
+    // Tier 9.9 audit plan #3 — the spend uses the RPC as the only path.
+    // The legacy read-then-write fallback was dropped after migration
+    // 009 was confirmed in production: silent racy direct writes are
+    // strictly worse than a loud RPC failure (which the client can
+    // retry / the user can ticket support on).
+    //
     // The RPC runs SECURITY DEFINER and performs a single compare-and-
-    // decrement that is race-safe even under concurrent calls. It returns
-    // a jsonb result with { ok, balance, spend_id, elevated } on success
-    // or { ok: false, reason, balance } on insufficient funds.
+    // decrement that is race-safe even under concurrent calls. It
+    // returns { ok, balance, spend_id, elevated } on success or
+    // { ok: false, reason, balance } on insufficient funds.
     //
-    // We capture spend_id so the refund path can target the exact ledger
-    // row this spend created — no "find the most recent spend" guesswork
-    // and no balance-restoration race with intervening transactions.
-    //
-    // Fallback: if the RPC isn't yet exposed (migration 009 not applied),
-    // fall back to the legacy read-then-write pattern. The legacy path
-    // remains racy under concurrency but unblocks the function on a
-    // partial server rollout.
+    // We capture spend_id so the refund path targets the exact ledger
+    // row this spend created — no "find the most recent spend"
+    // guesswork and no balance-restoration race with intervening
+    // transactions.
     let isElevated = false;
-    let currentCredits = 0;            // legacy: pre-spend balance (snapshot)
     let postSpendBalance = 0;          // canonical post-spend balance for streaming responses
     let spendId: string | null = null;
-    let useLegacyRefund = false;
 
     const { data: spendResult, error: spendErr } = await supabaseUser.rpc('spend_credits', {
       feature: type,
     });
 
-    if (spendErr || !spendResult) {
-      // Legacy fallback — migration 009 not yet applied.
-      useLegacyRefund = true;
-      const { data: profile } = await supabaseAdmin
-        .from('profiles')
-        .select('credits, role')
-        .eq('id', user.id)
-        .single();
-      currentCredits = profile?.credits || 0;
-      isElevated = ['developer', 'admin'].includes(profile?.role);
-      if (!isElevated) {
-        if (currentCredits < cost) {
-          throw new Error(`Insufficient credits. Need ${cost}, have ${currentCredits}.`);
-        }
-        await supabaseAdmin.from('profiles')
-          .update({ credits: currentCredits - cost })
-          .eq('id', user.id);
-        await supabaseAdmin.from('credit_transactions').insert({
-          user_id: user.id,
-          amount: -cost,
-          reason: type,
-          settlement_id: settlementId || null,
-        });
-        postSpendBalance = currentCredits - cost;
-      } else {
-        postSpendBalance = currentCredits;
-      }
-    } else {
-      // RPC path (preferred).
-      const result = spendResult as {
-        ok: boolean; reason?: string; balance: number; spend_id?: string; elevated?: boolean;
-      };
-      if (!result.ok) {
-        throw new Error(`Insufficient credits. Need ${cost}, have ${result.balance}.`);
-      }
-      isElevated = Boolean(result.elevated);
-      spendId = result.spend_id || null;
-      // For elevated users the RPC returns balance=-2 as a sentinel — we
-      // surface a friendlier "unlimited" value to the client (Infinity is
-      // not JSON-serializable, so use a high integer).
-      postSpendBalance = result.elevated ? 999999 : result.balance;
+    if (spendErr) {
+      console.error('[generate-narrative] spend_credits RPC errored:', spendErr.message);
+      throw new Error(`Credit spend failed: ${spendErr.message}. Try again — no credits were charged.`);
     }
+    if (!spendResult) {
+      throw new Error('Credit spend returned no result. Try again — no credits were charged.');
+    }
+
+    const result = spendResult as {
+      ok: boolean; reason?: string; balance: number; spend_id?: string; elevated?: boolean;
+    };
+    if (!result.ok) {
+      // Most common reason: insufficient_funds. Surface the balance so
+      // the client UI can show "need N more credits" cleanly.
+      throw new Error(`Insufficient credits. Need ${cost}, have ${result.balance}.`);
+    }
+    isElevated = Boolean(result.elevated);
+    spendId = result.spend_id || null;
+    // For elevated users the RPC returns balance=-2 as a sentinel — we
+    // surface a friendlier "unlimited" value to the client (Infinity
+    // isn't JSON-serializable, so use a high integer).
+    postSpendBalance = result.elevated ? 999999 : result.balance;
 
     // Tier 6.8 — augment the bespoke summary with the structured
     // grounding envelope so the AI sees locked entities + user edits.
@@ -1641,39 +1621,37 @@ serve(async (req) => {
 
         const refund = async () => {
           if (isElevated) return;
+          // Tier 9.9 audit plan #4 — dropped the legacy fallback. The
+          // refund_credits RPC writes a NEW grant row that references
+          // the originating spend; it's idempotent and safe under
+          // concurrent transactions. If the RPC errors, we surface
+          // the failure in logs + the stream (rather than falling
+          // back to a racy direct write that would either double-
+          // credit or silently swallow the refund).
+          if (!spendId) {
+            console.error('[generate-narrative] refund requested but no spend_id captured — RPC spend path must have been bypassed');
+            return;
+          }
           try {
-            // Preferred path: ledger-consistent refund via RPC. Writes a
-            // NEW grant row that references the spend; idempotent; safe
-            // under concurrent transactions because we don't restore an
-            // "old" balance value that could clobber later writes.
-            if (spendId && !useLegacyRefund) {
-              const { error: refundErr } = await supabaseUser.rpc('refund_credits', {
-                spend_ledger_row: spendId,
-                refund_reason: 'generation failed mid-stream',
-              });
-              if (refundErr) {
-                console.error('[generate-narrative] RPC refund failed, falling back:', refundErr);
-                // Legacy fallback below — still buggy under concurrency,
-                // but better than silently swallowing the refund entirely.
-              } else {
-                return;
-              }
-            }
-            // Legacy fallback (only used when migration 009 isn't applied
-            // OR the RPC errored). Restores the snapshot balance; racy
-            // under concurrent transactions. Kept so refunds still
-            // happen on a partial server rollout.
-            await supabaseAdmin.from('profiles')
-              .update({ credits: currentCredits })
-              .eq('id', user.id);
-            await supabaseAdmin.from('credit_transactions').insert({
-              user_id: user.id,
-              amount: cost,
-              reason: 'refund',
-              settlement_id: settlementId || null,
+            const { error: refundErr } = await supabaseUser.rpc('refund_credits', {
+              spend_ledger_row: spendId,
+              refund_reason: 'generation failed mid-stream',
             });
+            if (refundErr) {
+              // Loud failure. The user got partial value (the spend
+              // happened) and the refund didn't land — a support
+              // ticket is the right resolution, not a silent racy
+              // direct write that could compound the inconsistency.
+              console.error('[generate-narrative] refund_credits RPC failed:', refundErr.message);
+              send({
+                refund: 'failed',
+                spend_id: spendId,
+                reason: refundErr.message,
+                supportNote: 'The credits were not refunded automatically. Contact support with this spend_id.',
+              });
+            }
           } catch (refundErr) {
-            console.error('[generate-narrative] refund failed:', refundErr);
+            console.error('[generate-narrative] refund threw:', refundErr);
           }
         };
 

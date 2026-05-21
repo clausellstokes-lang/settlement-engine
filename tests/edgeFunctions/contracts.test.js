@@ -248,12 +248,20 @@ describe('Tier 3.3 — generate-narrative credit handling', () => {
     expect(src).toMatch(/rpc\(['"]refund_credits['"]/);
   });
 
-  it('has a refund fallback path (direct credit_transactions insert with reason="refund")', () => {
-    // The Phase 5 design: when the refund_credits RPC isn't available
-    // (migration 009 not yet applied on this environment), fall back to
-    // writing the legacy credit_transactions table with reason='refund'
-    // and resetting the profiles.credits counter.
-    expect(src).toMatch(/credit_transactions[\s\S]{0,200}reason:\s*['"]refund['"]/);
+  it('refund failures surface loudly on the stream (no silent racy fallback)', () => {
+    // Tier 9.9 audit plan #4 — the legacy direct-write refund fallback
+    // was dropped after migration 009 was confirmed in production.
+    // Phase 5's "credit_transactions reason='refund'" fallback no
+    // longer exists. Instead, refund_credits RPC failures emit a
+    // `{refund: 'failed', spend_id, supportNote}` line on the
+    // streaming response so the user can ticket support with the
+    // spend_id rather than getting silently double-credited or
+    // un-refunded.
+    expect(src).toMatch(/refund:\s*['"]failed['"]/);
+    expect(src).toMatch(/supportNote/);
+    expect(src).toMatch(/spend_id/);
+    // And confirm the legacy direct insert is genuinely gone.
+    expect(src).not.toMatch(/credit_transactions[\s\S]{0,200}reason:\s*['"]refund['"]/);
   });
 
   it('elevated users (developer/admin) skip credit spend', () => {

@@ -614,15 +614,28 @@ describe('Tier 6 — partial-failure refund policy (per file header)', () => {
     expect(EDGE).toMatch(/spend_id/);
   });
 
-  it('falls back to legacy refund when spend_credits RPC is unavailable', () => {
-    // Server can be partially rolled out — keep the legacy path until
-    // migration 009 lands everywhere.
-    expect(EDGE).toMatch(/useLegacyRefund/);
+  it('RPC failures surface loudly (no silent racy direct-write fallback)', () => {
+    // Tier 9.9 audit plan #3+#4 — the legacy read-then-write fallback
+    // was dropped after migration 009 was confirmed in production.
+    // When refund_credits errors, the edge function logs the failure
+    // AND emits a `{refund: 'failed', spend_id, supportNote}` line on
+    // the streaming response so the user knows to contact support.
+    expect(EDGE).toMatch(/refund_credits/);
+    expect(EDGE).toMatch(/refund:\s*['"]failed['"]/);
+    expect(EDGE).toMatch(/supportNote/);
+    // And there's NO useLegacyRefund variable anymore.
+    expect(EDGE).not.toMatch(/useLegacyRefund/);
   });
 
-  it('elevated roles (developer/admin) bypass credit charges', () => {
+  it('elevated roles (developer/admin) bypass credit charges via spend_credits RPC', () => {
+    // Pre-9.9: the edge function had a `['developer', 'admin'].includes(role)`
+    // check in the legacy fallback path. Post-9.9: that check lives
+    // inside the spend_credits RPC (current_user_is_privileged), which
+    // returns { elevated: true, balance: -2 } for those roles. The
+    // edge function honors result.elevated when constructing the
+    // post-spend balance for the streaming response.
     expect(EDGE).toMatch(/isElevated/);
-    expect(EDGE).toMatch(/\[['"]developer['"],\s*['"]admin['"]\]/);
+    expect(EDGE).toMatch(/result\.elevated/);
   });
 });
 
