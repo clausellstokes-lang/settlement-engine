@@ -17,7 +17,7 @@
  * is /?view=pricing — set by the footer + header CTA.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Crown, Zap, Map as MapIcon, Sparkles, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout } from '../lib/stripe.js';
@@ -51,7 +51,7 @@ function FeatureRow({ children }) {
   );
 }
 
-function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised }) {
+function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderSeatsRemaining }) {
   const Icon = TIER_ICONS[tier.key] || Sparkles;
   const features = tx(`pricing.tiers.${tier.key}.features`) || [];
   const tagline  = t(`pricing.tiers.${tier.key}.tagline`);
@@ -117,10 +117,13 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised }) {
 
       {tier.key === 'founder' && (
         <p style={{ margin: 0, fontSize: FS.xs, color: '#7c3aed', fontFamily: sans, fontWeight: 600 }}>
-          {/* seatsRemaining is a placeholder — wire to a counter once we
-              have a live seats-sold query. Until then, advertise the cap
-              honestly so we don't over-promise. */}
-          Limited to 500 seats.
+          {/* Tier 7.6: live seat count via the founder_seats_taken RPC
+              (migration 010). The fetch may fail or be pending; fall
+              back to the safe "Limited to 500 seats" copy in those
+              cases so the card stays informative either way. */}
+          {typeof founderSeatsRemaining === 'number'
+            ? `${founderSeatsRemaining} of 500 seats remaining.`
+            : 'Limited to 500 seats.'}
         </p>
       )}
 
@@ -211,6 +214,25 @@ export default function PricingPage({ onNavigate }) {
   const tiers = getVisibleTiers();
   const packs = Object.values(getActivePacks());
 
+  // Tier 7.6: live founder seat counter. Null until the RPC resolves
+  // OR on any failure — TierCard falls back to "Limited to 500 seats"
+  // when null, so a transient backend hiccup doesn't break the page.
+  const [founderSeatsRemaining, setFounderSeatsRemaining] = useState(null);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { fetchFounderSeatsRemaining } = await import('../lib/founderSeats.js');
+        const remaining = await fetchFounderSeatsRemaining();
+        if (!cancelled) setFounderSeatsRemaining(remaining);
+      } catch {
+        // Lazy-import or fetch failure — leave null and show the
+        // safe fallback copy.
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
   async function buy(product) {
     setLoading(product);
     try {
@@ -281,6 +303,7 @@ export default function PricingPage({ onNavigate }) {
               onCta={cta.onCta}
               loading={loading === (tier.key === 'founder' ? 'founder_lifetime' : 'premium')}
               emphasised={tier.key === 'cartographer'}
+              founderSeatsRemaining={tier.key === 'founder' ? founderSeatsRemaining : undefined}
             />
           );
         })}
