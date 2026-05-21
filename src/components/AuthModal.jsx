@@ -341,6 +341,9 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
     >
       <div
         onClick={e => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-modal-title"
         style={{
           background: CARD, borderRadius: R.xl,
           border: `1px solid ${BORDER}`,
@@ -355,10 +358,10 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
           background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
           color: GOLD,
         }}>
-          <h2 style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
+          <h2 id="auth-modal-title" style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
             {view === 'account' ? 'Account' : view === 'verify' ? 'Verify Email' : view === 'reset' ? 'Reset Password' : 'Welcome'}
           </h2>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer' }}>
+          <button onClick={onClose} aria-label={t('common.close')} style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer' }}>
             <X size={20} />
           </button>
         </div>
