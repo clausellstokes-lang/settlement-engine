@@ -39,7 +39,7 @@ export const createConfigSlice = (set, get) => ({
 
   // Wizard UI state (persisted)
   wizardStep: 0,                   // current step in the wizard
-  wizardMode: null,                // null (card picker) | 'quick' | 'advanced'
+  wizardMode: null,                // null (card picker) | 'basic' (was 'quick') | 'advanced'
   configPanelOpen:  false,
   instPanelOpen:    false,
   svcPanelOpen:     false,

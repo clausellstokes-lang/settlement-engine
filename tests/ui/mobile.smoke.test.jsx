@@ -83,11 +83,15 @@ describe('Tier 7.18 — Mobile viewport baseline', () => {
 describe('Tier 7.18 — Mobile rendering smoke', () => {
   test('HomeHero renders at 360px without throwing', async () => {
     // HomeHero pulls in the store; ensure store mock won't crash.
+    // P96 added auth.tier + auth.displayName reads so the hero can
+    // branch between anon and signed-in variants. The mock needs to
+    // expose those keys or the selector throws.
     vi.doMock('../../src/store/index.js', () => ({
       useStore: (selector) => selector({
         generateSettlement: vi.fn(),
         updateConfig: vi.fn(),
         setWizardMode: vi.fn(),
+        auth: { tier: 'anon', displayName: null },
       }),
     }));
     const HomeHero = (await import('../../src/components/HomeHero.jsx')).default;

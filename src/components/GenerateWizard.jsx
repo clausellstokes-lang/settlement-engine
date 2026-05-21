@@ -53,7 +53,7 @@ function ChangeModeBar({ mode, onChangeMode }) {
       </button>
       <span style={{ color: MUTED }}>·</span>
       <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
-        {mode === 'quick' ? 'Quick Generate' : 'Advanced Generate'}
+        {mode === 'basic' ? 'Basic Generate' : 'Advanced Generate'}
       </span>
     </div>
   );
@@ -87,13 +87,19 @@ const STEPS = [
 // ── Mode selector ────────────────────────────────────────────────────────────
 
 function ModeSelector({ mode, onModeChange, large = false }) {
-  // Audit microcopy: every mode produces a *Draft*. Renaming the
-  // outputs and keeping the mode names ("Quick / Advanced") is the
-  // cleanest way to teach the lifecycle without re-flowing the whole
-  // wizard. Card subtitles still describe the mode itself.
+  // The wizard exposes two named generation modes:
+  //   - Basic    (formerly "Quick"): one-screen config + Generate.
+  //     The hero's instant generation routes here under the hood so
+  //     a user landing on the wizard sees the same shape.
+  //   - Advanced: step-by-step config with institution toggles,
+  //     services, and trade dynamics.
+  // The HomeHero's instant generation is its OWN surface (homepage
+  // card with size-picker chips), not a mode listed here. Anonymous
+  // users see the hero only — these mode cards are gated to
+  // signed-in users.
   const modes = [
-    { id: 'quick',    label: 'Quick Generate',    desc: 'Minimal config — set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
-    { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',            Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space. Produces a draft you can refine, save, and canonize.' },
+    { id: 'basic',    label: 'Basic Generate',    desc: 'One screen — set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
+    { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',         Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space. Produces a draft you can refine, save, and canonize.' },
   ];
 
   return (
@@ -319,17 +325,18 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
 
   // Empty state: no mode selected yet AND no settlement.
   //
-  //   - Anonymous + homepageAnonGen flag on → show the HomeHero as the
-  //     primary surface. The hero's "Begin" CTA seeds the wizard mode
-  //     and triggers generate() directly, so the user goes straight to
-  //     a dossier without ever interacting with mode chrome. The mode
-  //     picker stays below as a quiet "more options" affordance.
-  //   - Signed-in users (or anyone with the flag off) get the legacy
-  //     mode picker first. They've already converted; the marketing
-  //     hero would just be in their way. The "simulator for DMs"
-  //     framing still surfaces for them via the small tagline under
-  //     the desktop header logo (App.jsx).
-  const showHomeHero = !wizardMode && !settlement && authTier === 'anon' && flag('homepageAnonGen');
+  //   - Anonymous: HomeHero is the only surface. Anon users never see
+  //     the Basic/Advanced mode picker — they go from hero → dossier
+  //     in one click. Quick/Advanced are gated behind signup because
+  //     they expose institution toggles, services, and the full
+  //     probability space; selling that complexity to a first-time
+  //     visitor would dilute the funnel.
+  //   - Signed-in: HomeHero serves as "Welcome back" instant
+  //     generation (full size ladder). Below the hero we expose the
+  //     Basic/Advanced mode picker as the "want more control?" path.
+  const heroEnabled = flag('homepageAnonGen');
+  const showHomeHero = !wizardMode && !settlement && heroEnabled;
+  const showModePicker = !wizardMode && !settlement && authTier !== 'anon';
 
   if (!wizardMode && !settlement) {
     return (
@@ -357,27 +364,25 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
             </p>
           </div>
         )}
-        {authTier === 'anon' && !showHomeHero && (
-          <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee', border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, textAlign: 'center' }}>
-            Free mode: generating up to Town size. Sign in for City, Capital, and saves.
-          </div>
+        {showModePicker && (
+          <>
+            <div style={{ textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
+              Want full control? Use one of the modes below.
+            </div>
+            <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
+          </>
         )}
-        {showHomeHero && (
-          <div style={{ textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
-            Want full control? Use one of the modes below.
-          </div>
-        )}
-        <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
       </div>
     );
   }
 
-  // Quick mode: General Config only, then generate.
-  // Renders the SAME ConfigurationPanel as Advanced step 0 — just no further steps.
-  // Layout matches Advanced (full-width, no maxWidth) so step 1 reads as the
-  // same surface in both modes; the only difference between Quick and Advanced
-  // is what comes AFTER step 1, not the width of step 1 itself.
-  if (wizardMode === 'quick' && !settlement) {
+  // Basic mode (renamed from 'quick' in the comprehensive review):
+  // General Config only, then generate. Renders the SAME ConfigurationPanel
+  // as Advanced step 0 — just no further steps. Layout matches Advanced
+  // (full-width, no maxWidth) so step 1 reads as the same surface in
+  // both modes; the only difference between Basic and Advanced is what
+  // comes AFTER step 1, not the width of step 1 itself.
+  if (wizardMode === 'basic' && !settlement) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
         <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />

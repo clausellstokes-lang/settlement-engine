@@ -1,26 +1,24 @@
 /**
- * HomeHero.jsx — Anonymous-first landing hero with one-shot generator.
+ * HomeHero.jsx — Landing hero with two variants.
  *
- * The funnel's gateway. A first-time anonymous visitor lands on this:
- *   1. Reads the eyebrow / title / subtitle (parchment serif).
- *   2. Picks a settlement size (Hamlet / Village / Town — the three
- *      sizes anonymous accounts can generate, per TIER_GATE.anon).
- *   3. Clicks Begin. We seed the store config with the chosen tier,
- *      bump the anon counter, and call the same generate() the wizard
- *      uses. The dossier renders below; the hero hides on its own
- *      because the parent only mounts it when !settlement.
+ * Variants:
+ *   1. Anonymous — marketing eyebrow + headline + anti-AI positioning
+ *      + size picker (hamlet / village / town — the anon TIER_GATE
+ *      ceiling) + Begin CTA. Drives the funnel from cold visitor
+ *      through first dossier.
+ *   2. Signed-in — "Welcome back" header + instant generation across
+ *      all six tiers (thorp → metropolis). No marketing text, no
+ *      anti-AI line — the user is converted; they just need to roll.
+ *      The bottom of the card surfaces the legacy Quick/Advanced
+ *      modes as "Want full control?" affordances.
  *
- * Soft cap:
- *   The hero respects `anonGenCounter.getAnonGenCount()`. After
- *   DEFAULT_DAILY_CAP free generations, the Begin button locks and a
- *   gentle "sign in to keep going" affordance replaces it. The cap is
- *   localStorage-based — not security, just polite friction so the
- *   homepage doesn't become a free dossier-mining tool.
+ * Both variants share:
+ *   - SizeButton primitive
+ *   - handleBegin() generator + analytics + anon cap accounting
+ *   - The parchment gold gradient + ornament
  *
  * Flag:
- *   `homepageAnonGen` (default on). When off, the hero never mounts
- *   and the existing wizard mode-picker is the first thing anonymous
- *   visitors see — the legacy flow.
+ *   `homepageAnonGen` (default on). When off, the hero never mounts.
  */
 
 import { useState, useEffect } from 'react';
@@ -35,19 +33,21 @@ import {
   GOLD, INK, _INK_DEEP, BODY, BORDER, _CARD, sans, serif_, SP, R, FS,
 } from './theme.js';
 
-// Sizes a Wanderer (anonymous) account can generate, in display order.
-// Sourced from the spec ceiling — anon's TIER_GATE max is 'town'.
+// Sizes per audience. Anonymous gets the Wanderer-tier ceiling
+// (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
+// six-tier ladder. Order matters — the picker renders left-to-right.
 const ANON_SIZES = ['hamlet', 'village', 'town'];
+const ALL_SIZES  = ['thorp', 'hamlet', 'village', 'town', 'city', 'capital'];
 
-function SizeButton({ value, label, hint, active, onClick }) {
+function SizeButton({ value, label, hint, active, onClick, compact = false }) {
   return (
     <button
       type="button"
       onClick={() => onClick(value)}
       aria-pressed={active}
       style={{
-        flex: '1 1 0', minWidth: 120,
-        padding: `${SP.md}px ${SP.md}px`,
+        flex: '1 1 0', minWidth: compact ? 92 : 120,
+        padding: compact ? `${SP.sm}px ${SP.sm}px` : `${SP.md}px ${SP.md}px`,
         textAlign: 'left',
         background: active ? 'rgba(201,162,76,0.10)' : '#fff',
         border: `1.5px solid ${active ? GOLD : BORDER}`,
@@ -58,14 +58,16 @@ function SizeButton({ value, label, hint, active, onClick }) {
       }}
     >
       <div style={{
-        fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK,
+        fontFamily: serif_, fontSize: compact ? FS.md : FS.lg, fontWeight: 600, color: INK,
         marginBottom: 2,
       }}>
         {label}
       </div>
-      <div style={{ fontSize: FS.xs, color: '#4A3B22', lineHeight: 1.4 }}>
-        {hint}
-      </div>
+      {hint && (
+        <div style={{ fontSize: FS.xxs, color: '#4A3B22', lineHeight: 1.35 }}>
+          {hint}
+        </div>
+      )}
     </button>
   );
 }
@@ -74,38 +76,46 @@ export default function HomeHero({ onSignIn }) {
   const generate = useStore(s => s.generateSettlement);
   const updateConfig = useStore(s => s.updateConfig);
   const setWizardMode = useStore(s => s.setWizardMode);
+  const authTier = useStore(s => s.auth.tier);
+  const displayName = useStore(s => s.auth.displayName);
 
-  const [pickedSize, setPickedSize] = useState('village');
+  // Variant: signed-in users see instant generation across all sizes;
+  // anonymous users see the marketing hero with the funnel framing.
+  const isAnon = authTier === 'anon';
+  const sizes = isAnon ? ANON_SIZES : ALL_SIZES;
+  const defaultSize = isAnon ? 'village' : 'town';
+
+  const [pickedSize, setPickedSize] = useState(defaultSize);
   const [generating, setGenerating] = useState(false);
   const atCap = anonAtCap();
   const remaining = anonGensRemaining();
 
   // Tier 8.8 — fire HOMEPAGE_VIEW once per session when the hero
   // mounts. Funnel.homepageView() handles the once-per-session guard
-  // via sessionStorage so a re-render doesn't double-count.
+  // via sessionStorage so a re-render doesn't double-count. For the
+  // signed-in variant this fires too — it's still a homepage view,
+  // it just has a different surface.
   useEffect(() => {
     Funnel.homepageView();
   }, []);
 
   const handleBegin = async () => {
-    if (atCap || generating) return;
+    if (isAnon && atCap) return;
+    if (generating) return;
     setGenerating(true);
     try {
-      // Anchor the wizard to a mode so subsequent navigation makes sense.
-      // 'quick' matches the "one-click" feel of the hero CTA.
-      setWizardMode('quick');
-      // Seed the size choice. Other config defaults (terrain, culture,
-      // trade access) stay random — that's what makes the hero a true
-      // one-shot rather than a hidden wizard.
+      // Signed-in users go to 'basic' (renamed from 'quick'); anon
+      // also uses 'basic' so the post-hero state shows them the same
+      // single-step flow if they navigate back to the wizard.
+      setWizardMode('basic');
       updateConfig({ settType: pickedSize });
-      // The generator runs synchronously in the worker; the store
-      // commits the new settlement before this resolves.
       generate();
-      incrementAnonGen();
-      // Tier 8.8 — mark the conversion attribution + fire the funnel
-      // event so dashboards can correlate later signups/paid actions
-      // back to this anonymous generation.
-      Funnel.anonGenerationCompleted({ tier: pickedSize });
+      if (isAnon) {
+        incrementAnonGen();
+        // Tier 8.8 — anon attribution. Permanent flag once set; drives
+        // signup_after_anon and paid_after_anon reporting downstream.
+        Funnel.anonGenerationCompleted({ tier: pickedSize });
+      }
     } catch (e) {
       console.error('[HomeHero] generate failed:', e);
     } finally {
@@ -115,7 +125,7 @@ export default function HomeHero({ onSignIn }) {
 
   return (
     <section
-      aria-label="Anonymous settlement generator"
+      aria-label={isAnon ? 'Anonymous settlement generator' : 'Welcome back — instant generator'}
       style={{
         maxWidth: 720, margin: `${SP.xl}px auto ${SP.xxl}px`,
         padding: `${SP.xxl}px ${SP.xl}px`,
@@ -127,65 +137,94 @@ export default function HomeHero({ onSignIn }) {
         textAlign: 'center',
       }}
     >
-      <div style={{
-        fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
-        textTransform: 'uppercase', color: '#8C6F32',
-        marginBottom: SP.sm,
-      }}>
-        {t('hero.eyebrow')}
-      </div>
-      <h1 style={{
-        margin: 0,
-        fontFamily: serif_, fontWeight: 600,
-        fontSize: 32,
-        color: INK,
-        lineHeight: 1.15,
-      }}>
-        {t('hero.title')}
-      </h1>
-      <p style={{
-        margin: `${SP.md}px auto 0`, maxWidth: 520,
-        fontFamily: serif_, fontStyle: 'italic',
-        fontSize: FS.lg, color: '#4A3B22',
-        lineHeight: 1.55,
-      }}>
-        {t('hero.subtitle')}
-      </p>
+      {/* ── Header ────────────────────────────────────────────────────
+          Two voices: marketing for anon, "Welcome back" for signed-in.
+          Anon carries the eyebrow + headline + anti-AI line; signed-in
+          gets a short greeting + a "Pick a size, hit Generate" prompt.
+      */}
+      {isAnon ? (
+        <>
+          <div style={{
+            fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
+            textTransform: 'uppercase', color: '#8C6F32',
+            marginBottom: SP.sm,
+          }}>
+            {t('hero.eyebrow')}
+          </div>
+          <h1 style={{
+            margin: 0, fontFamily: serif_, fontWeight: 600,
+            fontSize: 32, color: INK, lineHeight: 1.15,
+          }}>
+            {t('hero.title')}
+          </h1>
+          <p style={{
+            margin: `${SP.md}px auto 0`, maxWidth: 520,
+            fontFamily: serif_, fontStyle: 'italic',
+            fontSize: FS.lg, color: '#4A3B22', lineHeight: 1.55,
+          }}>
+            {t('hero.subtitle')}
+          </p>
+          <p style={{
+            margin: `${SP.md}px auto 0`, maxWidth: 480,
+            padding: `${SP.xs}px ${SP.md}px`,
+            borderLeft: `2px solid ${GOLD}`,
+            fontFamily: sans, fontSize: FS.sm, color: '#5a4a2a',
+            lineHeight: 1.5, textAlign: 'left',
+            fontStyle: 'italic',
+          }}>
+            {t('hero.antiAi')}
+          </p>
+        </>
+      ) : (
+        <>
+          <div style={{
+            fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
+            textTransform: 'uppercase', color: '#8C6F32',
+            marginBottom: SP.sm,
+          }}>
+            Instant Generation
+          </div>
+          <h1 style={{
+            margin: 0, fontFamily: serif_, fontWeight: 600,
+            fontSize: 28, color: INK, lineHeight: 1.2,
+          }}>
+            Welcome back{displayName ? `, ${displayName}` : ''}.
+          </h1>
+          <p style={{
+            margin: `${SP.sm}px auto 0`, maxWidth: 480,
+            fontFamily: serif_, fontStyle: 'italic',
+            fontSize: FS.md, color: BODY, lineHeight: 1.55,
+          }}>
+            Pick a size. Roll a settlement. Full ladder unlocked.
+          </p>
+        </>
+      )}
 
-      {/* ── Anti-AI positioning (Tier 7.13) ──────────────────────────── */}
-      {/* Sits between the subtitle and the size picker. Italic, smaller, */}
-      {/* gold border-left bar to mark it as a positioning statement.    */}
-      <p style={{
-        margin: `${SP.md}px auto 0`, maxWidth: 480,
-        padding: `${SP.xs}px ${SP.md}px`,
-        borderLeft: `2px solid ${GOLD}`,
-        fontFamily: sans, fontSize: FS.sm, color: '#5a4a2a',
-        lineHeight: 1.5, textAlign: 'left',
-        fontStyle: 'italic',
-      }}>
-        {t('hero.antiAi')}
-      </p>
-
-      {/* ── Size picker ──────────────────────────────────────────────── */}
+      {/* ── Size picker ───────────────────────────────────────────────
+          Anon sees 3 buttons (hamlet/village/town); signed-in sees 6
+          (thorp through capital). Same primitive, more buttons.
+      */}
       <div style={{
         display: 'flex', gap: SP.sm, marginTop: SP.xl,
         justifyContent: 'center', flexWrap: 'wrap',
       }}>
-        {ANON_SIZES.map(size => (
+        {sizes.map(size => (
           <SizeButton
             key={size}
             value={size}
             label={t(`generate.sizes.${size}`)}
-            hint={t(`generate.sizeHint.${size}`)}
+            hint={isAnon ? t(`generate.sizeHint.${size}`) : null}
             active={pickedSize === size}
             onClick={setPickedSize}
+            compact={!isAnon}
           />
         ))}
       </div>
 
       {/* ── Primary CTA ──────────────────────────────────────────────── */}
       <div style={{ marginTop: SP.xl }}>
-        {atCap ? (
+        {isAnon && atCap ? (
+          // Anon cap-hit: convert prompt.
           <div style={{
             display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.sm,
           }}>
@@ -231,47 +270,53 @@ export default function HomeHero({ onSignIn }) {
               }}
             >
               <Sparkles size={18} />
-              {generating ? 'Forging…' : t('hero.cta')}
+              {generating
+                ? 'Forging…'
+                : isAnon ? t('hero.cta') : `Generate a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
               {!generating && <ArrowRight size={16} />}
             </button>
-            <p style={{
-              margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: BODY,
-              fontStyle: 'italic',
-            }}>
-              {t('hero.ctaSubline')}
-              {' '}
-              <span style={{ opacity: 0.7 }}>
-                ({remaining} of {DEFAULT_DAILY_CAP} free today)
-              </span>
-            </p>
+            {isAnon && (
+              <p style={{
+                margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: BODY,
+                fontStyle: 'italic',
+              }}>
+                {t('hero.ctaSubline')}
+                {' '}
+                <span style={{ opacity: 0.7 }}>
+                  ({remaining} of {DEFAULT_DAILY_CAP} free today)
+                </span>
+              </p>
+            )}
           </>
         )}
       </div>
 
-      {/* ── Footnote ─────────────────────────────────────────────────── */}
-      <p style={{
-        margin: `${SP.lg}px auto 0`, maxWidth: 480,
-        fontSize: FS.xs, color: BODY, lineHeight: 1.5,
-      }}>
-        {t('hero.note')}
-        {onSignIn && (
-          <>
-            {' '}
-            <button
-              type="button"
-              onClick={onSignIn}
-              style={{
-                background: 'none', border: 'none', padding: 0,
-                color: GOLD, fontFamily: 'inherit', fontSize: 'inherit',
-                cursor: 'pointer', textDecoration: 'underline',
-              }}
-            >
-              Sign in
-            </button>
-            .
-          </>
-        )}
-      </p>
+      {/* ── Footnote (anon only) ─────────────────────────────────────── */}
+      {isAnon && (
+        <p style={{
+          margin: `${SP.lg}px auto 0`, maxWidth: 480,
+          fontSize: FS.xs, color: BODY, lineHeight: 1.5,
+        }}>
+          {t('hero.note')}
+          {onSignIn && (
+            <>
+              {' '}
+              <button
+                type="button"
+                onClick={onSignIn}
+                style={{
+                  background: 'none', border: 'none', padding: 0,
+                  color: GOLD, fontFamily: 'inherit', fontSize: 'inherit',
+                  cursor: 'pointer', textDecoration: 'underline',
+                }}
+              >
+                Sign in
+              </button>
+              .
+            </>
+          )}
+        </p>
+      )}
 
       {/* Bottom-edge ornament — subtle ink seal */}
       <div aria-hidden="true" style={{
