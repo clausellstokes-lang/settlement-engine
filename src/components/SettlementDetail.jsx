@@ -384,13 +384,13 @@ export default function SettlementDetail({
             background:narrated?'rgba(90,42,138,0.14)':'rgba(156,128,104,0.14)',
             color:narrated?'#6a2a9a':'#6b5340',
             border:`1px solid ${narrated?'rgba(160,100,220,0.35)':'rgba(156,128,104,0.35)'}`,
-          }} title={narrated ? 'This save has an AI-generated narrative or daily-life layer.' : 'This save has no AI narrative — the raw generator output is shown.'}>
+          }} title={narrated ? 'This save has a narrative refinement or daily-life prose layer atop the simulated facts.' : 'This save has no narrative layer — the raw simulator output is shown.'}>
             <Sparkles size={10}/> {narrated ? 'Narrated' : 'Raw'}
           </span>
           {narrated && (
             <button
               onClick={handleRevertToRaw}
-              title="Clear the AI narrative and daily-life prose on this save, returning it to the raw generator output. Chronicle history is preserved."
+              title="Clear the narrative refinement and daily-life prose on this save, returning it to the raw simulator output. Chronicle history is preserved."
               style={{display:'flex',alignItems:'center',gap:5,background:CARD,color:'#6a2a9a',border:'1px solid rgba(160,100,220,0.45)',borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:11,fontWeight:700,fontFamily:sans}}
             >
               <RotateCcw size={12}/> Revert to Raw

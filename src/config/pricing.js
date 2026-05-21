@@ -39,17 +39,17 @@ import { flag } from '../lib/flags.js';
 // `perCredit` is derived for the UI tile.
 
 const LEGACY_PACKS = Object.freeze({
-  credits_5:  { key: 'credits_5',  name: '5 AI Credits',  price: '$4.99',  credits: 5,  perCredit: '$1.00', discount: null,      tier: 'starter' },
-  credits_15: { key: 'credits_15', name: '15 AI Credits', price: '$9.99',  credits: 15, perCredit: '$0.67', discount: '33% off', tier: 'value'   },
-  credits_40: { key: 'credits_40', name: '40 AI Credits', price: '$19.99', credits: 40, perCredit: '$0.50', discount: '50% off', tier: 'best'    },
+  credits_5:  { key: 'credits_5',  name: '5 Narrative Credits',  price: '$4.99',  credits: 5,  perCredit: '$1.00', discount: null,      tier: 'starter' },
+  credits_15: { key: 'credits_15', name: '15 Narrative Credits', price: '$9.99',  credits: 15, perCredit: '$0.67', discount: '33% off', tier: 'value'   },
+  credits_40: { key: 'credits_40', name: '40 Narrative Credits', price: '$19.99', credits: 40, perCredit: '$0.50', discount: '50% off', tier: 'best'    },
 });
 
-// New, more generous packs — designed around the repriced AI costs
-// (3/4/5 per feature). 25 credits ≈ 7 narratives or 5 daily-lifes.
+// New, more generous packs — designed around the repriced narrative
+// costs (3/4/5 per feature). 25 credits ≈ 7 narratives or 5 daily-lifes.
 const NEW_PACKS = Object.freeze({
-  credits_25:  { key: 'credits_25',  name: '25 AI Credits',  price: '$4.99',  credits: 25,  perCredit: '$0.20', discount: null,      tier: 'starter' },
-  credits_60:  { key: 'credits_60',  name: '60 AI Credits',  price: '$9.99',  credits: 60,  perCredit: '$0.17', discount: '17% off', tier: 'value'   },
-  credits_150: { key: 'credits_150', name: '150 AI Credits', price: '$19.99', credits: 150, perCredit: '$0.13', discount: '34% off', tier: 'best'    },
+  credits_25:  { key: 'credits_25',  name: '25 Narrative Credits',  price: '$4.99',  credits: 25,  perCredit: '$0.20', discount: null,      tier: 'starter' },
+  credits_60:  { key: 'credits_60',  name: '60 Narrative Credits',  price: '$9.99',  credits: 60,  perCredit: '$0.17', discount: '17% off', tier: 'value'   },
+  credits_150: { key: 'credits_150', name: '150 Narrative Credits', price: '$19.99', credits: 150, perCredit: '$0.13', discount: '34% off', tier: 'best'    },
 });
 
 // ── AI feature cost schedules ─────────────────────────────────────────────

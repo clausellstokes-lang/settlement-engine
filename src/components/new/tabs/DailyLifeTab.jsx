@@ -142,18 +142,18 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
   // Button label logic — first-time generate vs regenerate. Both spend credits;
   // we name the action plainly so users know.
   const buttonLabel = (() => {
-    if (!dailyLifeEnabled) return '✦ Save settlement to enable AI Daily Life';
+    if (!dailyLifeEnabled) return '✦ Save settlement to enable Daily Life narrative';
     if (loading) {
       return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating…' : 'Generating…');
     }
     if (hasContent) {
       return isConfigured
         ? `↺ Regenerate Daily Life (${CREDIT_COSTS.dailyLife} credits)`
-        : '↺ Regenerate Daily Life — Powered by AI';
+        : '↺ Regenerate Daily Life — Narrative refinement';
     }
     return isConfigured
       ? `✦ Generate Daily Life (${CREDIT_COSTS.dailyLife} credits)`
-      : '✦ Generate Daily Life — Powered by AI';
+      : '✦ Generate Daily Life — Narrative refinement';
   })();
 
   return (
@@ -207,15 +207,15 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
           }}
         >
           <strong style={{ color: '#7a5a1a' }}>✦ Save this settlement</strong>
-          {' '}to generate AI Daily Life — five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
+          {' '}to refine Daily Life into narrative — five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
         </div>
       ) : (
         <button
           onClick={generate}
           disabled={loading}
           title={hasContent
-            ? `Regenerate replaces the current daily-life prose by calling the AI again. Spends ${CREDIT_COSTS.dailyLife} credits.`
-            : `Generate daily-life prose for this settlement. Spends ${CREDIT_COSTS.dailyLife} credits.`}
+            ? `Regenerate replaces the current daily-life prose with a fresh narrative pass against the simulator output. Spends ${CREDIT_COSTS.dailyLife} credits.`
+            : `Refine the simulator output into daily-life prose for this settlement. Spends ${CREDIT_COSTS.dailyLife} credits.`}
           style={{
             width: '100%', padding: '13px 20px',
             background: loading ? '#e8dcc8' : 'linear-gradient(135deg, #a0762a, #7a5a1a)',

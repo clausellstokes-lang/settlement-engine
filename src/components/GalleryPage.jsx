@@ -234,6 +234,18 @@ export default function GalleryPage({ onNavigate }) {
         }}>
           Settlements other DMs have shared. Browse for inspiration; click a tile to read the full dossier.
         </p>
+        {/* ── Anti-AI positioning (Tier 7.13) ─────────────────────────── */}
+        <p style={{
+          margin: `${SP.sm}px auto 0`, maxWidth: 540,
+          padding: `${SP.xs}px ${SP.md}px`,
+          borderLeft: `2px solid ${GOLD}`,
+          fontSize: FS.sm, color: '#5a4a2a',
+          fontFamily: sans, fontStyle: 'italic', lineHeight: 1.5,
+          textAlign: 'left',
+        }}>
+          Every dossier in the gallery was simulated, not AI-generated. The settlements are derived
+          from the same constraint engine — coherent because the simulator made them so.
+        </p>
         <button
           type="button"
           onClick={() => onNavigate?.('generate')}

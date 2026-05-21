@@ -100,7 +100,7 @@ export default function NarrativeDriftModal({
         {/* Body */}
         <div style={{ padding: '14px 18px', fontFamily: sans, fontSize: 12, color: SECOND, lineHeight: 1.55 }}>
           <p style={{ margin: 0, marginBottom: 10 }}>
-            The AI narrative on this save reasons about the facts you're changing. A mechanical
+            The narrative layer on this save reasons about the facts you're changing. A mechanical
             substitution won't keep the prose honest — the thesis, faction blurbs, and
             institution descriptions were written against the <em>old</em> state.
           </p>

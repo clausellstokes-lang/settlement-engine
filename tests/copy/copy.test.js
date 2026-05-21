@@ -108,3 +108,61 @@ describe('en map shape (drift guards)', () => {
     }
   });
 });
+
+// ── Tier 7.12 + 7.13 — Anti-AI positioning ─────────────────────────────────
+// The product positioning is "Simulated, not AI-generated." Any drift back
+// toward AI framing on the settlement itself would break the funnel — these
+// tests catch it before it ships.
+describe('anti-AI positioning (Tier 7.12 + 7.13)', () => {
+  it('exposes hero.antiAi positioning line', () => {
+    const line = t('hero.antiAi');
+    expect(typeof line).toBe('string');
+    expect(line.length).toBeGreaterThan(20);
+    // Must contain the canonical phrase.
+    expect(line.toLowerCase()).toContain('simulated');
+    expect(line.toLowerCase()).toContain('not ai');
+  });
+
+  it('exposes pricing.antiAi positioning line', () => {
+    const line = t('pricing.antiAi');
+    expect(typeof line).toBe('string');
+    expect(line.length).toBeGreaterThan(40);
+    expect(line.toLowerCase()).toContain('simulated');
+  });
+
+  it('exposes footer.antiAi positioning line', () => {
+    const line = t('footer.antiAi');
+    expect(typeof line).toBe('string');
+    expect(line.toLowerCase()).toContain('simulated');
+  });
+
+  it('hero subtitle uses "simulated in seconds" framing (not "generated")', () => {
+    // The headline subtitle is what the first-visitor reads. Keep the
+    // simulator framing front-and-center.
+    expect(t('hero.subtitle').toLowerCase()).toContain('simulated in seconds');
+    expect(t('hero.subtitle').toLowerCase()).not.toContain('generated in seconds');
+  });
+
+  it('credit-pack heading is "Narrative Credit Packs" (not "AI Credit Packs")', () => {
+    expect(t('pricing.creditPacks.heading')).toBe('Narrative Credit Packs');
+  });
+
+  it('aiUnavailable error mentions narrative refinement, not "AI features"', () => {
+    expect(t('errors.aiUnavailable')).toMatch(/narrative refinement/i);
+    expect(t('errors.aiUnavailable')).not.toMatch(/ai features/i);
+  });
+
+  it('pipeline.quillLabel says "Narrative refinement", not "AI refinement"', () => {
+    expect(t('pipeline.quillLabel')).toBe('Narrative refinement');
+  });
+
+  it('tier feature bullets do not say "Pay-per-use AI features"', () => {
+    for (const tier of ['wanderer', 'cartographer']) {
+      const features = tx(`pricing.tiers.${tier}.features`);
+      const joined = (features || []).join(' | ').toLowerCase();
+      expect(joined).not.toContain('pay-per-use ai features');
+      // The new phrasing should be present somewhere in the tier's features.
+      expect(joined).toContain('narrative refinement');
+    }
+  });
+});

@@ -247,7 +247,7 @@ export default function AccountPage({ onNavigateAdmin }) {
             textAlign: 'center',
           }}>
             <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
-              AI Credits
+              Narrative Credits
             </div>
             <div style={{ fontSize: FS.xxl, fontWeight: 700, color: '#7c3aed' }}>
               {isElevated ? '\u221E' : creditBalance}

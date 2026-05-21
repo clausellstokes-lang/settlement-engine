@@ -2,9 +2,15 @@ import { useState } from 'react';
 import { sans } from './Primitives';
 
 /**
- * NarrativeNote — per-tab addendum from the AI Narrative Layer.
+ * NarrativeNote — per-tab addendum from the Narrative Refinement layer.
  * Shows a collapsible purple-accented card at the top of a tab.
  * Only renders when `note` is a non-empty string.
+ *
+ * The label drops "AI" deliberately. The settlement itself is simulated;
+ * this is the optional refinement that turns the simulator's facts into
+ * prose. Calling the card "AI" suggested the content was AI-generated
+ * fiction, when in fact it's grounded paraphrasing of the simulator's
+ * outputs.
  */
 export function NarrativeNote({ note }) {
   const [open, setOpen] = useState(true);
@@ -31,7 +37,7 @@ export function NarrativeNote({ note }) {
       >
         <span style={{ fontSize: 11, color: '#8a50b0' }}>✦</span>
         <span style={{ fontSize: 9.5, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
-          AI Narrative Layer
+          Narrative Layer
         </span>
         <span style={{ fontSize: 9.5, color: '#a070c0' }}>{open ? '▲' : '▼'}</span>
       </button>

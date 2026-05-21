@@ -78,11 +78,12 @@ function QuickTab() {
         constraint set, not generated independently.
       </p>
       <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
-        <strong style={{ color:GOLD }}>AI Narrative Layer</strong> is built in. Hit the purple button
-        in any generated settlement to synthesize the full settlement state into narrative — not
-        invented fiction, but the mechanical outputs expressed as prose. Faction tensions, economic
-        pressures, historical character, and daily texture become a coherent voice grounded in what
-        was actually generated. The layer augments the outputs rather than replacing them, giving
+        <strong style={{ color:GOLD }}>Narrative Refinement Layer</strong> is built in. The settlement
+        itself is simulated, not AI-generated — but you can optionally refine the simulator's output
+        into table-ready prose. Hit the purple button in any saved settlement and the layer
+        synthesizes the full settlement state into narrative. Faction tensions, economic pressures,
+        historical character, and daily texture become a coherent voice grounded in what was
+        actually simulated. The refinement augments the outputs rather than replacing them, giving
         you something ready for the table without transcribing anything.
       </p>
       <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.7, margin:0 }}>

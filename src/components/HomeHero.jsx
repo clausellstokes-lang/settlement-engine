@@ -140,6 +140,20 @@ export default function HomeHero({ onSignIn }) {
         {t('hero.subtitle')}
       </p>
 
+      {/* ── Anti-AI positioning (Tier 7.13) ──────────────────────────── */}
+      {/* Sits between the subtitle and the size picker. Italic, smaller, */}
+      {/* gold border-left bar to mark it as a positioning statement.    */}
+      <p style={{
+        margin: `${SP.md}px auto 0`, maxWidth: 480,
+        padding: `${SP.xs}px ${SP.md}px`,
+        borderLeft: `2px solid ${GOLD}`,
+        fontFamily: sans, fontSize: FS.sm, color: '#5a4a2a',
+        lineHeight: 1.5, textAlign: 'left',
+        fontStyle: 'italic',
+      }}>
+        {t('hero.antiAi')}
+      </p>
+
       {/* ── Size picker ──────────────────────────────────────────────── */}
       <div style={{
         display: 'flex', gap: SP.sm, marginTop: SP.xl,

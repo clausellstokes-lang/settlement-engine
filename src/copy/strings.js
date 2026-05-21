@@ -84,10 +84,10 @@ export const COPY = {
     moments: {
       first_canonize: {
         headline: 'You just made a town part of your campaign.',
-        body:     'Upgrade adds canon snapshots, timeline export variants, and AI prose polish. The free tier continues to work, just with the basics.',
+        body:     'Upgrade adds canon snapshots, timeline export variants, and narrative refinement. The free tier continues to work, just with the basics.',
       },
       first_ai_use: {
-        headline: 'AI prose costs credits per generation.',
+        headline: 'Narrative refinement costs credits per pass.',
         body:     'Upgrade includes a monthly credit allowance plus discounted top-ups.',
       },
       first_canon_export: {
@@ -120,8 +120,8 @@ export const COPY = {
     tooltips: {
       draft:    'Editable, not yet part of your campaign world.',
       canon:    'Live campaign truth. Changes are logged as events.',
-      narrated: 'AI prose layer is present.',
-      raw:      'Raw mechanical output — no AI prose.',
+      narrated: 'Narrative refinement layer is present.',
+      raw:      'Raw simulation output — no narrative layer.',
       locked:   'Locked. Preserved through regeneration.',
     },
   },

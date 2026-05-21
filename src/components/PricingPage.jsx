@@ -283,6 +283,17 @@ export default function PricingPage({ onNavigate }) {
         }}>
           {t('pricing.pageSubtitle')}
         </p>
+        {/* ── Anti-AI positioning (Tier 7.13) ─────────────────────────── */}
+        <p style={{
+          margin: `${SP.md}px auto 0`, maxWidth: 580,
+          padding: `${SP.xs}px ${SP.md}px`,
+          borderLeft: `2px solid ${GOLD}`,
+          fontSize: FS.sm, color: '#5a4a2a',
+          fontFamily: sans, fontStyle: 'italic', lineHeight: 1.55,
+          textAlign: 'left',
+        }}>
+          {t('pricing.antiAi')}
+        </p>
       </header>
 
       {/* ── Subscription tiers ──────────────────────────────────────────── */}

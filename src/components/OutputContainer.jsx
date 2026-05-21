@@ -224,7 +224,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       return React.createElement('div', { style: { position: 'relative', display: 'flex', alignItems: 'center', gap: 6 } },
         React.createElement('button', {
           onClick: runNarrativeLayer,
-          title: 'AI Narrative Layer — refines every prose field to feel specific to this settlement. Uses credits.',
+          title: 'Narrative Refinement Layer — turns the simulator output into prose that feels specific to this settlement. Uses credits.',
           style: {
             ...btnBase,
             background: 'rgba(90,42,138,0.2)',
@@ -233,7 +233,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           }
         },
           React.createElement('span', { style: { fontSize: 11 } }, '\u2726'),
-          `Generate AI Narrative${costLabel}`
+          `Generate Narrative${costLabel}`
         ),
         aiError && React.createElement('div', {
           style: { position: 'absolute', top: '110%', right: 0, background: '#2d0a0a', border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: 11, color: '#f0a0a0', whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }
@@ -289,13 +289,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         inNarrativeView
           ? React.createElement(EyeOff, { size: 12 })
           : React.createElement(Eye, { size: 12 }),
-        inNarrativeView ? 'View Raw Data' : 'View AI Narrative'
+        inNarrativeView ? 'View Raw Simulation' : 'View Narrative'
       ),
       // Regenerate button — spends credits
       React.createElement('button', {
         onClick: runNarrativeLayer,
         disabled: regenerating,
-        title: `Regenerate the AI Narrative Layer from the source settlement. Spends ${CREDIT_COSTS.narrative} credits.`,
+        title: `Regenerate the Narrative Layer from the simulator output. Spends ${CREDIT_COSTS.narrative} credits.`,
         style: {
           ...btnBase,
           background: regenerating ? 'rgba(90,42,138,0.3)' : 'rgba(90,42,138,0.2)',
@@ -437,7 +437,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               React.createElement('span', { style: { fontSize: 13, flexShrink: 0, marginTop: 2, color: '#8a50b0' } }, '\u2726'),
               React.createElement('div', { style: { flex: 1, minWidth: 0 } },
                 React.createElement('div', { style: { fontSize: 9, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 } },
-                  showThesis ? 'AI Narrative Layer \u2014 Identity' : 'AI Narrative Layer \u2014 Lens'
+                  showThesis ? 'Narrative Layer \u2014 Identity' : 'Narrative Layer \u2014 Lens'
                 ),
                 showThesis
                   ? aiSettlement.thesis.split(/\n\n+/).map((para, i, arr) =>

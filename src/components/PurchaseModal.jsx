@@ -129,7 +129,7 @@ export default function PurchaseModal({ onClose }) {
             fontSize: FS.xs, fontWeight: 700, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
-            <TrendingDown size={14} /> AI Credit Packs &mdash; Volume Discounts
+            <TrendingDown size={14} /> Narrative Credit Packs &mdash; Volume Discounts
           </div>
 
           <div style={{ display: 'flex', gap: SP.sm }}>

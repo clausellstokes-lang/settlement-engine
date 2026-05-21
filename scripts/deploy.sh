@@ -163,7 +163,7 @@ CREDITS_10=$(curl -s https://api.stripe.com/v1/prices \
   -u "$STRIPE_SK:" \
   -d "unit_amount=299" \
   -d "currency=usd" \
-  -d "product_data[name]=10 AI Credits" \
+  -d "product_data[name]=10 Narrative Credits" \
   -d "product_data[metadata][product]=credits_10" \
   | grep -o '"id": *"price_[^"]*"' | head -1 | cut -d'"' -f4)
 ok "10-credit pack: $CREDITS_10"
@@ -173,7 +173,7 @@ CREDITS_50=$(curl -s https://api.stripe.com/v1/prices \
   -u "$STRIPE_SK:" \
   -d "unit_amount=999" \
   -d "currency=usd" \
-  -d "product_data[name]=50 AI Credits" \
+  -d "product_data[name]=50 Narrative Credits" \
   -d "product_data[metadata][product]=credits_50" \
   | grep -o '"id": *"price_[^"]*"' | head -1 | cut -d'"' -f4)
 ok "50-credit pack: $CREDITS_50"
