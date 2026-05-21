@@ -10,8 +10,12 @@
    Page background — the painted pastoral fixed under the whole UI.
    The image lives at /public/parchment-bg.jpg (saved by the user).
    Two stacked backgrounds:
-     1. A cream-tinted linear gradient (top of stack) at 78% opacity so
-        body text stays legible against the painted scene.
+     1. A cream-tinted linear gradient (top of stack) at 50% opacity —
+        the painting reads as a present, painterly scene rather than a
+        whisper. Card surfaces (CARD = #FFFBF5) carry their own opaque
+        background so body text inside cards is unaffected by this
+        opacity choice. Chrome text outside cards remains legible
+        because the painting palette is itself parchment-tinted.
      2. The painting itself (bottom of stack), fixed and cover-sized so
         scrolling content drifts over a stationary canvas.
    The cream `background-color` is the fallback when the painting hasn't
@@ -24,7 +28,7 @@ body {
   -webkit-text-size-adjust: 100%;
   background-color: #f7f0e4;
   background-image:
-    linear-gradient(rgba(247, 240, 228, 0.78), rgba(247, 240, 228, 0.78)),
+    linear-gradient(rgba(247, 240, 228, 0.50), rgba(247, 240, 228, 0.50)),
     url('/parchment-bg.jpg');
   background-size: cover;
   background-position: center top;
