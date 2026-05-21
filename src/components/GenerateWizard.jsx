@@ -319,15 +319,17 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
 
   // Empty state: no mode selected yet AND no settlement.
   //
-  // The HomeHero — eyebrow + headline + anti-AI positioning + size
-  // picker + Begin CTA — used to render only for anonymous users.
-  // That meant signed-in DMs (and developers) never saw the simulator
-  // framing on the Create page. We show it for everyone now: the
-  // hero's Begin button still works (it just calls generate(), and
-  // anon cap logic is internal); the "Use one of the modes below"
-  // link surfaces Quick/Advanced for users who want bigger sizes or
-  // institution toggles.
-  const showHomeHero = !wizardMode && !settlement && flag('homepageAnonGen');
+  //   - Anonymous + homepageAnonGen flag on → show the HomeHero as the
+  //     primary surface. The hero's "Begin" CTA seeds the wizard mode
+  //     and triggers generate() directly, so the user goes straight to
+  //     a dossier without ever interacting with mode chrome. The mode
+  //     picker stays below as a quiet "more options" affordance.
+  //   - Signed-in users (or anyone with the flag off) get the legacy
+  //     mode picker first. They've already converted; the marketing
+  //     hero would just be in their way. The "simulator for DMs"
+  //     framing still surfaces for them via the small tagline under
+  //     the desktop header logo (App.jsx).
+  const showHomeHero = !wizardMode && !settlement && authTier === 'anon' && flag('homepageAnonGen');
 
   if (!wizardMode && !settlement) {
     return (
