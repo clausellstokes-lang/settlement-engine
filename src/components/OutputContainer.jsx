@@ -1,6 +1,6 @@
 import React, { useState, useRef, lazy, Suspense } from 'react';
 import { runAiLayer } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Sparkles, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass } from 'lucide-react';
+import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Sparkles, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog } from 'lucide-react';
 import { TIER_LABELS } from './new/design';
 import { useStore } from '../store/index.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
@@ -41,6 +41,11 @@ const TABS = [
   { id: 'resources',  label: 'Resources',  Icon: Package },
   { id: 'viability',  label: 'Viability',  Icon: CircleCheckBig },
   { id: 'plot_hooks', label: 'Plot Hooks', Icon: Sparkles },
+  // Simulation tab — meta surface. The pipeline rail used to render as
+  // an always-on banner above the dossier, but that pushed the actual
+  // DM-facing content below the fold. Now it lives as the last tab so
+  // the dossier itself is the default landing surface.
+  { id: 'simulation', label: 'Simulation', Icon: Cog },
 ];
 const REROLLABLE = { npcs: 'Reroll NPCs', history: 'Reroll History' };
 
@@ -189,6 +194,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'dm_compass': return React.createElement(DMCompassTab, { settlement: s });
       case 'neighbours':    return React.createElement(RelationshipsTab, { settlement: s, narrativeNote: null, neighboursOnly: true });
       case 'relationships': return React.createElement(RelationshipsTab, { settlement: s, narrativeNote: null });
+      // Simulation = full PipelineRail (non-compact). Since the rail now
+      // lives inside the dossier card, we surface the full pipeline view
+      // here — step labels + traces + the eventual causal expand-on-tap.
+      case 'simulation': return React.createElement('div', { style: { padding: '16px 18px' } },
+        React.createElement(PipelineRail, { compact: false })
+      );
       default:           return React.createElement('div', null);
     }
   };
@@ -320,14 +331,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   if (earlyExitOnNoSettlement) return null;
 
   return React.createElement(React.Fragment, null,
-    // "How this was simulated" rail. Renders above the dossier on every
-    // viewport for V1 — a true side-by-side layout requires lifting the
-    // OutputContainer out of its current standalone card, which is a
-    // bigger refactor than the rail's value justifies right now. Flag-
-    // gated so it can be killed instantly if it confuses test users.
-    React.createElement('div', { style: { marginBottom: 14 } },
-      React.createElement(PipelineRail, { compact: true })
-    ),
+    // Note: the "How this was simulated" rail used to render here as an
+    // always-on banner above the dossier card. User feedback was that
+    // it pushed the actual DM-facing dossier below the fold. Now it
+    // lives as the last tab inside the dossier ("Simulation"), so the
+    // dossier itself is the default landing surface and the simulation
+    // metadata is one tap away rather than top-of-page chrome.
     React.createElement('div', { style: { background: 'rgba(255,251,245,0.96)', border: '1px solid #c8b89a', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' } },
       // Header
       React.createElement('div', { style: { padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' } },
