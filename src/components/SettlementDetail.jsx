@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
-import {Link2, ChevronLeft, X, FileText, Sparkles, RotateCcw, Loader2, Edit3, Lock} from 'lucide-react';
+import {Link2, ChevronLeft, X, FileText, RotateCcw, Loader2, Edit3, Lock} from 'lucide-react';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
 // section components. Import lazily on user click so opening a settlement
 // detail view doesn't pay for export machinery up front.
@@ -31,6 +31,11 @@ import ExportSheet      from './settlement/ExportSheet.jsx';
 // pre-fills the EventComposer with ASSIGN_NPC_TO_ROLE on selection.
 import SuccessorPrompt  from './settlement/SuccessorPrompt.jsx';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
+// Tier 7.15 — phased UI redesign rollout: the Narrated/Raw chip below
+// migrates from an inline ad-hoc <span> to the StateBadge primitive,
+// which centralizes the visual styling and the role="status" a11y
+// announcement under one shared component.
+import StateBadge        from './primitives/StateBadge.jsx';
 import {GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_} from './theme';
 
 const REL_COLORS = {
@@ -376,17 +381,14 @@ export default function SettlementDetail({
           <span style={{fontFamily:serif_,fontSize:15,fontWeight:600,color:INK}}>{detail.name}</span>
           <PhaseBadge />
           <span style={{flex:1}} />
-          {/* Narrated/Raw badge — reflects the persisted AI state on this save */}
-          <span style={{
-            display:'inline-flex',alignItems:'center',gap:4,
-            padding:'3px 9px',borderRadius:11,fontSize:10,fontWeight:800,
-            fontFamily:sans,letterSpacing:'0.07em',textTransform:'uppercase',
-            background:narrated?'rgba(90,42,138,0.14)':'rgba(156,128,104,0.14)',
-            color:narrated?'#6a2a9a':'#6b5340',
-            border:`1px solid ${narrated?'rgba(160,100,220,0.35)':'rgba(156,128,104,0.35)'}`,
-          }} title={narrated ? 'This save has a narrative refinement or daily-life prose layer atop the simulated facts.' : 'This save has no narrative layer — the raw simulator output is shown.'}>
-            <Sparkles size={10}/> {narrated ? 'Narrated' : 'Raw'}
-          </span>
+          {/* Narrated/Raw — Tier 7.15 phased rollout: migrated to StateBadge primitive. */}
+          <StateBadge
+            kind={narrated ? 'narrated' : 'raw'}
+            size="sm"
+            tooltip={narrated
+              ? 'This save has a narrative refinement or daily-life prose layer atop the simulated facts.'
+              : 'This save has no narrative layer — the raw simulator output is shown.'}
+          />
           {narrated && (
             <button
               onClick={handleRevertToRaw}
