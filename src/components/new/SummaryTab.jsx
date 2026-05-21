@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { TIER_LABELS, catColor } from './design';
 import { Ti, serif, sans, TabIntro } from './Primitives';
+import { BODY } from './tabConstants.js';
 
-const gold='#a0762a', ink='#1c1409', muted='#9c8068', second='#6b5340';
+// Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
+// Routing it through `BODY` from tabConstants centralises future contrast
+// changes — keep the local `second` name so we don't churn every usage.
+const gold='#a0762a', ink='#1c1409', muted='#9c8068', second=BODY;
 const factionColors=['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a'];
 
 // ── Settlement character sentence ─────────────────────────────────────────────

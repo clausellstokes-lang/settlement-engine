@@ -6,6 +6,13 @@
  */
 import { CARD, SECOND, BORDER, sans } from './theme.js';
 
+// Tier 7.19 — local BODY alias. The body-copy color used to be a
+// hard-coded '#6b5340' literal; surfacing it as a named constant means
+// a future contrast tweak is one edit. (We don't import from tabConstants
+// because that's a tabs-only concern; this component is reused outside
+// the tab system.)
+const BODY = '#6b5340';
+
 export default function DeleteConfirmation({ entityName, details, onConfirm, onCancel }) {
   return (
     <div style={{
@@ -17,7 +24,7 @@ export default function DeleteConfirmation({ entityName, details, onConfirm, onC
         Delete "{entityName}"?
       </div>
       {details && (
-        <div style={{ fontSize: 11, color: '#6b5340', lineHeight: 1.5, marginBottom: 8 }}>
+        <div style={{ fontSize: 11, color: BODY, lineHeight: 1.5, marginBottom: 8 }}>
           {details}
         </div>
       )}

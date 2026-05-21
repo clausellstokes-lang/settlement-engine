@@ -31,7 +31,7 @@ import {
   anonAtCap, anonGensRemaining, incrementAnonGen, DEFAULT_DAILY_CAP,
 } from '../lib/anonGenCounter.js';
 import {
-  GOLD, INK, _INK_DEEP, BORDER, _CARD, sans, serif_, SP, R, FS,
+  GOLD, INK, _INK_DEEP, BODY, BORDER, _CARD, sans, serif_, SP, R, FS,
 } from './theme.js';
 
 // Sizes a Wanderer (anonymous) account can generate, in display order.
@@ -223,7 +223,7 @@ export default function HomeHero({ onSignIn }) {
               {!generating && <ArrowRight size={16} />}
             </button>
             <p style={{
-              margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: '#6b5340',
+              margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: BODY,
               fontStyle: 'italic',
             }}>
               {t('hero.ctaSubline')}
@@ -239,7 +239,7 @@ export default function HomeHero({ onSignIn }) {
       {/* ── Footnote ─────────────────────────────────────────────────── */}
       <p style={{
         margin: `${SP.lg}px auto 0`, maxWidth: 480,
-        fontSize: FS.xs, color: '#6b5340', lineHeight: 1.5,
+        fontSize: FS.xs, color: BODY, lineHeight: 1.5,
       }}>
         {t('hero.note')}
         {onSignIn && (
