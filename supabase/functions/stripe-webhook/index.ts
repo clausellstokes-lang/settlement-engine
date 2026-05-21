@@ -35,13 +35,18 @@ function adminClient() {
 }
 
 /**
- * Dual-write a credit grant to both the legacy credit_transactions
- * table and the new credit_ledger (migration 007). Also increments
- * profiles.credits so the legacy fallback path keeps showing the
- * correct balance until everyone is reading from get_credit_balance().
+ * Ledger-consistent credit grant — migrated to the system_grant_credits
+ * RPC (migration 012) as part of the Tier 9.9 refund-ledger audit.
  *
- * Failures in either write are logged but don't throw — we'd rather
- * have a partial record than silently swallow a Stripe webhook.
+ * The RPC writes to credit_ledger + credit_transactions + profiles
+ * atomically inside a single SECURITY DEFINER transaction, with an
+ * admin_actions row for traceability. No more read-then-write race
+ * on the profiles counter.
+ *
+ * Falls back to the legacy direct-write pattern if the RPC fails
+ * (e.g. migration 012 hasn't been applied yet on a particular
+ * environment). The fallback should be removed once migration 012 is
+ * confirmed in all envs — track removal via the audit doc.
  */
 async function dualWriteGrant(
   supabase: ReturnType<typeof adminClient>,
@@ -50,6 +55,25 @@ async function dualWriteGrant(
   source: string,
   metadata: Record<string, unknown> = {},
 ) {
+  // Preferred path: ledger-consistent RPC. Single atomic transaction.
+  const { error: rpcErr } = await supabase.rpc('system_grant_credits', {
+    target_user: userId,
+    amount,
+    source,
+    metadata,
+  });
+
+  if (!rpcErr) return;  // success — nothing else to do
+
+  // Fallback: if the RPC isn't deployed yet (migration 012 missing on
+  // staging / a fresh dev env), fall through to the legacy three-step
+  // pattern so credits still land. Surface the RPC error so we know
+  // to investigate.
+  console.warn(
+    '[stripe-webhook] system_grant_credits RPC failed; falling back to legacy direct-write path. Confirm migration 012 is applied. Error:',
+    rpcErr.message,
+  );
+
   // 1. Legacy table.
   const { error: legacyErr } = await supabase.from('credit_transactions').insert({
     user_id: userId,
@@ -58,9 +82,7 @@ async function dualWriteGrant(
   });
   if (legacyErr) console.error('Failed to write credit_transactions:', legacyErr);
 
-  // 2. New ledger. The table may not exist yet if migration 007 hasn't
-  // been applied — silently log and continue so the legacy path still
-  // grants the credits.
+  // 2. New ledger.
   const { error: ledgerErr } = await supabase.from('credit_ledger').insert({
     user_id: userId,
     kind: 'grant',
@@ -70,20 +92,27 @@ async function dualWriteGrant(
   });
   if (ledgerErr) console.warn('credit_ledger write skipped (migration 007 may not be applied):', ledgerErr.message);
 
-  // 3. Bump the counter on profiles.credits so the legacy balance
-  // reader stays accurate. The new RPC computes from the ledger and
-  // doesn't depend on this — but until everyone's on the new client,
-  // both paths need to agree.
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('credits')
-    .eq('id', userId)
-    .single();
+  // 3. Atomic profile counter bump using arithmetic increment to avoid
+  // the read-then-write race in the original pattern.
+  const { error: bumpErr } = await supabase.rpc('exec_sql_increment_credits', {
+    target_user: userId,
+    increment_by: amount,
+  }).catch(() => ({ error: { message: 'fallback-rpc-missing' } }));
 
-  if (profile) {
-    await supabase.from('profiles')
-      .update({ credits: (profile.credits || 0) + amount })
-      .eq('id', userId);
+  if (bumpErr) {
+    // Last-resort: read-then-write. Documented racy; remains because
+    // a failed counter bump on a successful Stripe purchase is worse
+    // than a (very narrow-window) racy bump.
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('credits')
+      .eq('id', userId)
+      .single();
+    if (profile) {
+      await supabase.from('profiles')
+        .update({ credits: (profile.credits || 0) + amount })
+        .eq('id', userId);
+    }
   }
 }
 
