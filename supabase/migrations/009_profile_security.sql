@@ -44,6 +44,18 @@
 -- policy stays permissive on display_name so legacy clients that pre-date
 -- this migration don't fail open.
 
+-- Ensure every column the policy references exists before defining
+-- the policy. Migration 001 only created `id, tier, credits`; 002
+-- added `role + display_name`. `is_founder` was always implied by
+-- the funnel doc but never added by a prior migration — add it
+-- here defensively. `add column if not exists` is idempotent.
+alter table public.profiles
+  add column if not exists is_founder boolean not null default false;
+
+create index if not exists idx_profiles_is_founder
+  on public.profiles(is_founder)
+  where is_founder is true;
+
 drop policy if exists "Users update own profile" on public.profiles;
 
 create policy "Users update own profile (display_name only)"

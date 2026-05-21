@@ -1,6 +1,13 @@
 -- ────────────────────────────────────────────────────────────────────────────
 -- 008_public_gallery.sql — Public dossier gallery (read-only SEO surface).
 --
+-- pgcrypto provides gen_random_bytes() used by _make_public_slug below.
+-- Supabase enables this extension on most projects, but a fresh project
+-- may not — declaring it explicitly here means the migration is
+-- self-sufficient.
+create extension if not exists pgcrypto;
+
+--
 -- The funnel strategy hinges on having public, crawlable dossier URLs:
 --   - Every shared dossier becomes a /gallery/{slug} that any visitor
 --     (and any search engine) can read without an account.
@@ -61,25 +68,31 @@ create policy "Public dossiers are world-readable"
   using (is_public = true);
 
 -- ── Slug generator ─────────────────────────────────────────────────────────
--- Slugs are short, URL-safe, and case-insensitive: 12 base32 chars
--- pulled from gen_random_bytes. Collision probability at 10k slugs is
--- ~1 in 10^15 — fine.
+-- Slugs are short, URL-safe, and case-insensitive: 12 lowercase hex
+-- chars from a v4 UUID. 12 hex = 48 bits of entropy; collision at
+-- 10k slugs is ~1 in 5×10^9.
 --
--- We do NOT slugify the settlement name. Names are user-controlled and
--- can change between publishes; an opaque slug is stable, doesn't leak
--- whatever the dossier was called, and avoids edge cases (Unicode,
--- length, conflict resolution).
+-- We use `gen_random_uuid()` (PG13+, built-in — no extension required,
+-- no schema-qualification needed) rather than the original
+-- `encode(gen_random_bytes(8), 'base32')` formulation because:
+--   1. `gen_random_bytes` lives in the `extensions` schema on Supabase
+--      and isn't on the function's default search_path, so the call
+--      would fail at execute time. Schema-qualifying it would tie this
+--      migration to Supabase's specific layout.
+--   2. `encode(..., 'base32')` isn't a real Postgres encoding —
+--      only `base64`, `hex`, and `escape` are supported.
+--
+-- We do NOT slugify the settlement name. Names are user-controlled
+-- and can change between publishes; an opaque slug is stable, doesn't
+-- leak whatever the dossier was called, and avoids edge cases
+-- (Unicode, length, conflict resolution).
 
 create or replace function public._make_public_slug()
 returns text
 language sql
 volatile
 as $$
-  select lower(
-    -- Base32-ish encoding of 8 random bytes → 13 chars; trim to 12 for
-    -- a nice short URL ("/gallery/k9z7q2j8m4n6").
-    substr(encode(gen_random_bytes(8), 'base32'), 1, 12)
-  );
+  select substr(replace(gen_random_uuid()::text, '-', ''), 1, 12);
 $$;
 
 -- ── Atomic publish/unpublish ───────────────────────────────────────────────
