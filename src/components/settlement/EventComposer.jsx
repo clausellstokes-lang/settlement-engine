@@ -21,6 +21,63 @@ const _TYPE_ICONS = {
   CUT_TRADE_ROUTE:    MapPinOff,
 };
 
+// Code-review fix: target field used to be a free-text input. The user
+// shouldn't have to TYPE the name of an NPC they want to kill — the NPC
+// is already in the dossier. This map declares which dossier collection
+// to pull the target dropdown from for each event type. ADD_*
+// (institution / npc) and CUT_TRADE_ROUTE genuinely have no source list
+// (the user is naming something new), so they keep the text input.
+const TARGET_ENTITY_BY_EVENT = Object.freeze({
+  ADD_INSTITUTION:      null,           // new entity — free text
+  REMOVE_INSTITUTION:   'institutions',
+  DAMAGE_INSTITUTION:   'institutions',
+  IMPAIR_INSTITUTION:   'institutions',
+  ADD_NPC:              null,           // new entity — free text
+  KILL_NPC:             'npcs',
+  ASSIGN_NPC_TO_ROLE:   'npcs',
+  IMPAIR_FACTION:       'factions',
+  CHANGE_RULER:         'npcs',         // pick the new ruler from existing NPCs
+  EXPOSE_CORRUPTION:    'factions',     // or instutions; pick factions as the dominant case
+  DEPLETE_RESOURCE:     'resources',
+  CUT_TRADE_ROUTE:      null,           // route names aren't tracked as entities — free text
+  REFUGEE_INFLUX:       null,           // optional source region — free text
+});
+
+/** Build {id, name} options from a dossier collection for the target dropdown. */
+function buildTargetOptions(settlement, collectionKey) {
+  if (!collectionKey || !settlement) return [];
+  let list;
+  switch (collectionKey) {
+    case 'institutions': list = settlement.institutions || []; break;
+    case 'npcs':         list = settlement.npcs || []; break;
+    case 'factions':     list = settlement.powerStructure?.factions || []; break;
+    case 'resources':    {
+      // Nearby resources are stored as keys in nearbyResources (config) and
+      // sometimes additionally on settlement.resources. Combine + dedupe.
+      const fromConfig = (settlement.config?.nearbyResources || []).map(k => ({ id: k, name: k }));
+      const fromList   = (settlement.resources || []).map(r => ({
+        id: r.id || r.key || r.name,
+        name: r.name || r.id || r.key,
+      }));
+      list = [...fromList, ...fromConfig];
+      break;
+    }
+    default: return [];
+  }
+  // Normalize to {id, name}, dedupe by id, keep insertion order.
+  const seen = new Set();
+  const out = [];
+  for (const item of list) {
+    const id = item.id || item.faction || item.name;
+    const name = item.name || item.faction || item.id;
+    if (!id || !name) continue;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    out.push({ id: String(id), name: String(name) });
+  }
+  return out;
+}
+
 export default function EventComposer() {
   const phase     = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
@@ -125,14 +182,44 @@ export default function EventComposer() {
           </select>
         </Field>
 
-        <Field label="Target" hint={spec?.targetPrompt}>
-          <input
-            value={target}
-            onChange={e => setTarget(e.target.value)}
-            placeholder={spec?.targetPrompt || 'optional'}
-            style={inputStyle}
-          />
-        </Field>
+        {(() => {
+          // Code-review fix: source the target from existing dossier
+          // entities rather than asking the user to type a name that
+          // must match. Falls back to a text input for ADD_* events
+          // (new entities) and route-type events that aren't in the
+          // dossier as discrete records.
+          const collectionKey = TARGET_ENTITY_BY_EVENT[type];
+          const targetOpts = buildTargetOptions(settlement, collectionKey);
+          if (collectionKey && targetOpts.length > 0) {
+            return (
+              <Field label="Target" hint={spec?.targetPrompt}>
+                <select
+                  value={target}
+                  onChange={e => setTarget(e.target.value)}
+                  style={selectStyle}
+                >
+                  <option value="">— Pick a {collectionKey.replace(/s$/, '')} —</option>
+                  {targetOpts.map(o => (
+                    <option key={o.id} value={o.id}>{o.name}</option>
+                  ))}
+                </select>
+              </Field>
+            );
+          }
+          // No collection or empty list → keep the free text input so
+          // the user can still author an event (e.g. ADD_NPC of a brand
+          // new NPC, CUT_TRADE_ROUTE without a tracked route record).
+          return (
+            <Field label="Target" hint={spec?.targetPrompt}>
+              <input
+                value={target}
+                onChange={e => setTarget(e.target.value)}
+                placeholder={spec?.targetPrompt || 'optional'}
+                style={inputStyle}
+              />
+            </Field>
+          );
+        })()}
 
         {type === 'DAMAGE_INSTITUTION' && (
           <Field label={`Severity ${(severity * 100).toFixed(0)}%`}>
