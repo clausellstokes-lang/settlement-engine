@@ -63,14 +63,29 @@ You can swap providers (Postmark, SendGrid, SES) by editing the
    npx supabase functions deploy send-email
    ```
 
-5. **Verify it works** with a curl smoke test against your dev user:
+5. **Verify it works** with the bundled smoke-test script:
 
    ```bash
-   curl -X POST 'https://<project>.supabase.co/functions/v1/send-email' \
-     -H "Authorization: Bearer <user-jwt>" \
-     -H "Content-Type: application/json" \
-     -d '{"template":"welcome","payload":{"displayName":"Test"}}'
+   # Get your JWT from the live app's devtools:
+   #   > (await window.__store.getState().auth.session)?.access_token
+   scripts/verify-email-setup.sh <your-user-jwt>
    ```
+
+   Expected output:
+
+   ```
+   { "ok": true, "id": "re_..." }
+   ```
+
+   If you see `{ "ok": false, "reason": "unconfigured" }`, the
+   RESEND_API_KEY or RESEND_FROM_EMAIL secret isn't set on the
+   Supabase project. Re-run the `npx supabase secrets set ...`
+   commands from step 3.
+
+   If you see `{ "ok": false, "reason": "provider_error", ... }`,
+   the secrets are set but Resend rejected the request — usually
+   means the sender domain isn't verified yet, or the API key
+   is expired. Check the Resend dashboard.
 
    Expected: `{"ok":true,"id":"<resend-message-id>"}`.
 
