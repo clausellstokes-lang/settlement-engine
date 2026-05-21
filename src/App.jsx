@@ -231,27 +231,11 @@ export default function App() {
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && (
           <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
-            {/* Brand block — logo + name on top row, italic tagline beneath.
-                The tagline used to only live on the anonymous HomeHero, which
-                meant signed-in users (and any user past the first dossier)
-                never saw the simulator positioning. Promoting it to the
-                header keeps the "simulator for DMs" framing always visible. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
               <MapIcon size={24} color={GOLD} />
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.1 }}>
-                <h1 style={{ margin: 0, fontSize: FS.h1, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
-                  SettlementForge
-                </h1>
-                <span style={{
-                  fontSize: 10, fontWeight: 600,
-                  color: '#c8a96a', fontFamily: sans,
-                  letterSpacing: '0.12em', textTransform: 'uppercase',
-                  marginTop: 2,
-                  opacity: 0.85,
-                }}>
-                  A simulator for Dungeon Masters
-                </span>
-              </div>
+              <h1 style={{ margin: 0, fontSize: FS.h1, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
+                SettlementForge
+              </h1>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

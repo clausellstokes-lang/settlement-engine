@@ -319,14 +319,15 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
 
   // Empty state: no mode selected yet AND no settlement.
   //
-  //   - Anonymous + homepageAnonGen flag on → show the HomeHero as the
-  //     primary surface. The hero's "Begin" CTA seeds the wizard mode
-  //     and triggers generate() directly, so the user goes straight to
-  //     a dossier without ever interacting with mode chrome. The mode
-  //     picker stays below as a quiet "more options" affordance.
-  //   - Authenticated users (or anyone with the flag off) get the
-  //     legacy two-card mode picker first.
-  const showHomeHero = !wizardMode && !settlement && authTier === 'anon' && flag('homepageAnonGen');
+  // The HomeHero — eyebrow + headline + anti-AI positioning + size
+  // picker + Begin CTA — used to render only for anonymous users.
+  // That meant signed-in DMs (and developers) never saw the simulator
+  // framing on the Create page. We show it for everyone now: the
+  // hero's Begin button still works (it just calls generate(), and
+  // anon cap logic is internal); the "Use one of the modes below"
+  // link surfaces Quick/Advanced for users who want bigger sizes or
+  // institution toggles.
+  const showHomeHero = !wizardMode && !settlement && flag('homepageAnonGen');
 
   if (!wizardMode && !settlement) {
     return (
@@ -371,9 +372,12 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
 
   // Quick mode: General Config only, then generate.
   // Renders the SAME ConfigurationPanel as Advanced step 0 — just no further steps.
+  // Layout matches Advanced (full-width, no maxWidth) so step 1 reads as the
+  // same surface in both modes; the only difference between Quick and Advanced
+  // is what comes AFTER step 1, not the width of step 1 itself.
   if (wizardMode === 'quick' && !settlement) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 760, margin: '0 auto', padding: `${SP.xl}px 0` }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
         <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
 
         {authTier === 'anon' && (
