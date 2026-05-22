@@ -43,6 +43,9 @@ export const en = Object.freeze({
   },
 
   // ── Hero (homepage anonymous-first generator) ─────────────────────────────
+  // Pre-P117 strings preserved for the legacy hero variant. The two-voice
+  // rewrite lives under `hero.v2.*` and is selected when the
+  // `homepage.heroV2` flag is on.
   hero: {
     eyebrow:    'A simulator for Dungeon Masters',
     title:      'Forge a settlement worth running a campaign in.',
@@ -51,6 +54,31 @@ export const en = Object.freeze({
     cta:        'Begin a settlement',
     ctaSubline: 'No account needed. Your first dossier is yours to keep.',
     note:       'Free anonymous generations are capped at town size. Sign in to push further.',
+    // ── P117 two-voice rewrite ──────────────────────────────────────────
+    v2: {
+      headline:     'Most generators roll on a table.',
+      headlineAccent: 'This one simulates.',
+      deck:         'First settlement or hundredth — the pieces explain each other.',
+      ctaTemplate:  'Forge a {tier} →',
+      subline:      '{remaining} of {cap} free today · no account',
+    },
+    // ── P108 anon cap as unlock (X-5) ───────────────────────────────────
+    capUnlock: {
+      headline:   'You’ve explored hamlet, village, town.',
+      body:       'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
+      primaryCta: 'Create free account →',
+      sideDoor:   'or just take this one — buy the dossier for $2.99 ↓',
+    },
+    // ── P115 return-visit ───────────────────────────────────────────────
+    welcomeBack: {
+      eyebrow:    'Welcome back',
+      titleTpl:   'It’s been {days} days, {name}.',
+      bodyTpl:    'How did your session in {settlementName} go?',
+      openCta:    'Open {settlementName}',
+      followUp:   'Forge a follow-up',
+      streakTpl:  '{count} sessions in {weeks} weeks. Cartographer pays for itself in two —',
+      streakLink: 'see what it unlocks →',
+    },
   },
 
   // ── Generate wizard ───────────────────────────────────────────────────────
@@ -327,6 +355,150 @@ export const en = Object.freeze({
     networkOff:   'You’re offline. Reconnect and we’ll retry.',
     generateFail: 'The simulator hit a snag. We’re looking at it — try again in a moment.',
     aiUnavailable: 'Narrative refinement is temporarily unavailable. The simulator is unaffected — your settlement still generates and exports.',
+  },
+
+  // ── Verb registry (P124 / C-1) ───────────────────────────────────────────
+  // Single source of truth for action verbs. The critique flagged
+  // Begin/Forge/Generate/Roll/Reroll/Regenerate competing on the same
+  // surfaces. We commit to Forge (first generation), Reforge (regenerate),
+  // Reroll (one section only), Narrate (AI prose), with explicit loading
+  // verbs. Centralizing here means a future tone shift is one file edit.
+  verbs: {
+    forgeTpl:    'Forge a {tier}',
+    forge:       'Forge',
+    reforge:     'Reforge',
+    rerollTpl:   'Reroll {section}',
+    narrate:     'Narrate',
+    forging:     'Forging…',
+    narrating:   'Narrating…',
+    rerolling:   'Rerolling…',
+  },
+
+  // ── Save / signup / cap surfaces (P101 / X-3) ────────────────────────────
+  save: {
+    button:        'Save',
+    signupButton:  'Save this town — free account →',
+    afterAuthHint: 'We’ll save your dossier as soon as you’re in.',
+    successTpl:    'Saved as {settlementName} — view it in Settlements.',
+    limitReached:  'You’ve hit the {limit}-save cap on the free tier.',
+  },
+
+  // ── Pricing-moment registry (P103 / X-2) ─────────────────────────────────
+  // Augments the existing COPY.pricing.moments registry with the new
+  // moments the critique calls for. usePricingMoment reads from here when
+  // resolving copy by reason. Keep keys snake_case to match the existing
+  // pricingMoments.js storage layout.
+  moments: {
+    first_save: {
+      headline: 'Save it. Come back tomorrow.',
+      body:     'Your dossier is yours to keep. Free tier holds 3 saves — plenty for a campaign’s first arc.',
+    },
+    anon_cap_hit: {
+      headline: 'You’ve explored hamlet, village, town.',
+      body:     'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
+    },
+    first_pdf_export: {
+      headline: 'You just downloaded your first dossier.',
+      body:     'Wanderer gives you 3 exports a month. Cartographer = unlimited, plus cloud sync — phone, laptop, table.',
+    },
+    third_save: {
+      headline: 'You’re building a campaign.',
+      body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, the neighbour network, all six sizes, and full export.',
+    },
+    regen_burst: {
+      headline: 'Power user ahead.',
+      body:     'Locks, drift, chronicle — Cartographer surfaces the worldbuilder-tier controls. Try the upgrade.',
+    },
+    map_clicked: {
+      headline: 'World Map unlocks with Cartographer.',
+      body:     'Place settlements, draw routes, surface supply-chain stress — your campaigns become a place.',
+    },
+    weekly_user: {
+      headline: 'Three sessions in two weeks.',
+      body:     'You’re using SettlementForge weekly — Cartographer pays for itself in two.',
+    },
+    welcome_credit: {
+      headline: 'Try the Narrative Layer once — on us.',
+      body:     'One credit on every signup. The AI prose pass turns this town’s data into prose your players can hear.',
+    },
+  },
+
+  // ── Audience-led pricing tile copy (P122 / X-10) ─────────────────────────
+  // The three tiers each get an audience-shifted pitch line that
+  // PricingPage surfaces above the existing feature list.
+  pricingPitch: {
+    wanderer: {
+      lineNew:          'Three towns, fully prepped. Find out if this works for you.',
+      lineIntermediate: 'Three towns. Free forever. See if a session a week earns the upgrade.',
+      lineWorldbuilder: 'Try the engine. Three towns is enough to see if the moat is real.',
+    },
+    cartographer: {
+      lineNew:          'When you’re ready for a campaign instead of an evening — unlimited saves, every size.',
+      lineIntermediate: 'For DMs running a town a week. Unlimited saves, every size, full export.',
+      lineWorldbuilder: 'The worldbuilder’s tier: neighbour network, locks, drift, full export.',
+    },
+    founder: {
+      lineNew:          'For DMs who already know they’ll build campaigns. Pay once, ship every settlement.',
+      lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 500 seats only.',
+      lineWorldbuilder: 'For DMs building campaigns. Pay once, ship every settlement you’ll ever run.',
+    },
+  },
+
+  // ── Pipeline reveal step labels (P100 / X-1) ─────────────────────────────
+  // Marketing-facing translations of the actual pipeline step names.
+  // Theatrical by design — the user sees engine work, not function names.
+  pipelineSteps: {
+    resolveConfig:          'resolving constraints…',
+    resolveResources:       'sourcing resources…',
+    resolveStress:          'reading the pressure…',
+    resolveNeighbour:       'binding neighbours…',
+    assembleInstitutions:   'sourcing institutions…',
+    subsumptionPass:        'collapsing duplicates…',
+    cascadePass:            'cascading tensions…',
+    isolationPass:          'walking outliers…',
+    generateEconomy:        'building the market…',
+    generatePower:          'naming the powers…',
+    neighbourFactions:      'mirroring the neighbours…',
+    factionCorrelationPass: 'finding alliances…',
+    generatePopulation:     'casting NPCs…',
+    generateNarratives:     'knotting hooks…',
+    assembleSettlement:     'assembling the dossier…',
+  },
+
+  // ── Dossier surfaces (P102 / D-1, D-3) ───────────────────────────────────
+  dossier: {
+    fiveTabGroups: {
+      summary:  'Summary',
+      people:   'People',
+      systems:  'Systems',
+      world:    'World',
+      hooks:    'Hooks',
+    },
+    fiveTabHints: {
+      summary:  'Read this at the table tonight',
+      people:   'Who lives here, who runs it',
+      systems:  'What the town can do for / against PCs',
+      world:    'Where this town sits in the campaign',
+      hooks:    'What I can run next session',
+    },
+    howThisWasBuilt: '⚙ How this was simulated',
+    backToList:      'Back to settlements',
+    editModeOn:      'Edit mode',
+    editModeOff:     'View mode',
+    pendingTpl:      '{count} unsaved {noun}',
+    previewCascade:  'Preview cascade →',
+    commit:          'Commit',
+    revert:          'Revert',
+    cascadeHeading:  'What changes if you apply these edits',
+  },
+
+  // ── Workshop (P107 / CP-2) ───────────────────────────────────────────────
+  workshop: {
+    navLabel:       'Workshop',
+    locked:         'Workshop unlocks with Cartographer.',
+    lockedBody:     'Drag and drop institutions, resources, and stressors. Cascade-preview before you commit. Bring your own custom content.',
+    upgradeCta:     'Upgrade — $6/mo',
+    samplePreview:  'See a sample →',
   },
 
   // ── Footer ────────────────────────────────────────────────────────────────

@@ -153,6 +153,34 @@ export const createSettlementSlice = (set, get) => ({
   // on regeneration.
   pipelineHistory: [],
 
+  // P100 / X-1 — Transient flag set right after the pipeline runs and
+  // cleared when the PipelineReveal overlay finishes its playback. The
+  // overlay reads `pipelineHistory` to animate; the wizard hides the
+  // dossier until this flag drops. Cleared on a fresh generate so the
+  // reveal fires once per generation.
+  pipelineRevealActive: false,
+  dismissPipelineReveal: () => set(state => { state.pipelineRevealActive = false; }),
+
+  // P103 / X-2 — Active pricing moment. usePricingMoment opens these via
+  // setActivePricingMoment({ headline, body, reason }); the
+  // PricingMomentCard subscribes here and renders. Single-active-at-a-time
+  // by design (the cooldown library handles dedupe).
+  activePricingMoment: null,
+  setActivePricingMoment: (content) => set(state => {
+    state.activePricingMoment = content || null;
+  }),
+  clearActivePricingMoment: () => set(state => {
+    state.activePricingMoment = null;
+  }),
+
+  // P104 / X-4 — Lifetime narrate count, used by useReaderAudience to
+  // bump anonymous → intermediate after first narrate spend. Bumped
+  // alongside spendCredits in creditsSlice; here we just declare it.
+  lifetimeNarrateCount: 0,
+  bumpLifetimeNarrate: () => set(state => {
+    state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
+  }),
+
   // Reactive update state
   whatIfPreview: null,   // { delta, previewSettlement } from a proposed change
   pendingChange: null,   // { type, payload } describing the proposed mutation
@@ -264,6 +292,12 @@ export const createSettlementSlice = (set, get) => ({
         state.pendingChange = null;
         state.pendingPreview = null;
         state.pipelineHistory = pipelineHistory;
+        // P100 — arm the reveal overlay. PipelineReveal mounts when this
+        // flips true, plays back through pipelineHistory, then calls
+        // dismissPipelineReveal() to clear it. Gated by the flag at the
+        // consumer site (GenerateWizard) so a flag-flip kills the
+        // behavior without touching the slice.
+        state.pipelineRevealActive = true;
         // Generation always returns the settlement to draft phase. Going to
         // canon is a deliberate user action (canonize()), not a side-effect
         // of regeneration — that would silently invalidate any campaign log.
@@ -321,6 +355,19 @@ export const createSettlementSlice = (set, get) => ({
     const state = get();
     const { settlement, config } = state;
     if (!settlement) return;
+
+    // P103 / X-2 — Track session regen-burst. When the user crosses 5
+    // regens in a single session, fire regen_burst (worldbuilder hint
+    // for locks/drift/chronicle). Counter lives in-memory only since
+    // it's a session-scoped behavior signal.
+    set(s => { s.sessionRegenCount = (s.sessionRegenCount || 0) + 1; });
+    if ((state.sessionRegenCount || 0) + 1 === 5) {
+      import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
+        triggerPricingMoment('regen_burst', (content) => {
+          get().setActivePricingMoment(content);
+        }, { tier: state.auth?.tier });
+      }).catch(() => { /* never block a regen */ });
+    }
     const cfg = settlement.config || config;
     const eng = await loadEngine();
 
@@ -512,6 +559,9 @@ export const createSettlementSlice = (set, get) => ({
     const max = state.maxSaves();
     if (state.savedSettlements.length >= max) return false;
 
+    const wasFirstSave = state.savedSettlements.length === 0;
+    const wasThirdSave = state.savedSettlements.length === 2 && max === 3;
+
     set(s => {
       s.savedSettlements.push({
         ...settlement,
@@ -520,6 +570,19 @@ export const createSettlementSlice = (set, get) => ({
         campaignState: pickleCampaignState(state),
       });
     });
+
+    // P103 / X-2 — first_save + third_save pricing moments. Fire-and-
+    // forget so the save action returns promptly; the moment library
+    // enforces 24h-per-moment cooldown so this can't spam.
+    if (wasFirstSave || wasThirdSave) {
+      import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
+        const reason = wasThirdSave ? 'third_save' : 'first_save';
+        triggerPricingMoment(reason, (content) => {
+          // Use the store-bound opener so PricingMomentCard renders.
+          get().setActivePricingMoment(content);
+        }, { tier: state.auth?.tier });
+      }).catch(() => { /* never block a save */ });
+    }
     return true;
   },
 
@@ -641,9 +704,21 @@ export const createSettlementSlice = (set, get) => ({
   /** Stamp lastExportAt — called by export flows. Drives both the
    *  ProvenanceBlock display and the OnboardingChecklist's "exported"
    *  step auto-tick. */
-  markExported: () => set(state => {
-    state.lastExportAt = new Date().toISOString();
-  }),
+  markExported: () => {
+    // Compute "is first export?" before we stamp it. Drives first_pdf_export.
+    const wasFirstExport = !get().lastExportAt;
+    set(state => {
+      state.lastExportAt = new Date().toISOString();
+    });
+    if (wasFirstExport) {
+      // P103 / X-2 — first_pdf_export pricing moment.
+      import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
+        triggerPricingMoment('first_pdf_export', (content) => {
+          get().setActivePricingMoment(content);
+        }, { tier: get().auth?.tier });
+      }).catch(() => { /* never block an export */ });
+    }
+  },
 
   setLock: (key, value) => set(state => {
     if (value === false || value === undefined || (Array.isArray(value) && value.length === 0)) {

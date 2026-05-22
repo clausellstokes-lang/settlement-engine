@@ -27,6 +27,9 @@ import HomeHero from './HomeHero.jsx';
 
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
+// P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
+// surfaces don't pay for the playback animator).
+const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
 
 // "Change mode" back button — shown above the mode-specific UI once a card
 // is picked. Module-scope so React Compiler can memoize without seeing it
@@ -186,9 +189,10 @@ function StepIndicator({ currentStep, totalSteps }) {
 
 // ── Save to library button ──────────────────────────────────────────────────
 
-function SaveToLibraryButton({ settlement, canSave, isMobile }) {
+function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const saveAsSignupEnabled = flag('saveAsSignup');
 
   const handleSave = async () => {
     if (!settlement || saving) return;
@@ -210,16 +214,67 @@ function SaveToLibraryButton({ settlement, canSave, isMobile }) {
     }
   };
 
+  // P101 / X-3 — Save-as-signup. When the user can't save (anonymous,
+  // or hit the per-tier cap), instead of a disabled tombstone we render
+  // an active "free account" door. Clicking stashes the current dossier
+  // as a pending intent, opens the AuthModal, and on success the auth
+  // intent registry fires savesService.save with the same payload —
+  // the user lands back to a saved settlement.
   if (!canSave) {
+    if (!saveAsSignupEnabled) {
+      // Legacy disabled tombstone — kept only as the flag-off fallback.
+      return (
+        <button disabled style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+          padding: isMobile ? '13px 24px' : '10px 24px',
+          background: '#8a8a8a', color: '#fff', border: 'none', borderRadius: R.md,
+          cursor: 'not-allowed', fontFamily: sans, fontSize: FS.md, fontWeight: 700,
+          opacity: 0.5,
+        }}>
+          <Save size={15} /> Sign in to save
+        </button>
+      );
+    }
+
+    const handleSignupSave = () => {
+      // Lazy-load to avoid pulling authIntents into the wizard bundle
+      // until the user actually clicks the button.
+      import('../lib/authIntents.js').then(({ setPending, INTENTS }) => {
+        setPending(INTENTS.SAVE_SETTLEMENT, {
+          name: settlement.name || 'Untitled Settlement',
+          tier: settlement.tier || 'unknown',
+          settlement,
+          config: settlement._config || null,
+        });
+        // Analytics + auth flow open
+        import('../lib/analytics.js').then(({ Funnel, EVENTS }) => {
+          Funnel.track(EVENTS.SAVE_BUTTON_CLICKED, { tier: settlement.tier });
+          Funnel.track(EVENTS.SAVE_SIGNUP_INTENT_OPENED, { tier: settlement.tier });
+        });
+        if (typeof onSignIn === 'function') onSignIn();
+      });
+    };
+
     return (
-      <button disabled style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-        padding: isMobile ? '13px 24px' : '10px 24px',
-        background: '#8a8a8a', color: '#fff', border: 'none', borderRadius: R.md,
-        cursor: 'not-allowed', fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-        opacity: 0.5,
-      }}>
-        <Save size={15} /> Sign in to save
+      <button
+        onClick={handleSignupSave}
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+          padding: isMobile ? '13px 24px' : '12px 24px',
+          background: '#fff',
+          color: GOLD, fontWeight: 700,
+          border: `1.5px solid ${GOLD}`,
+          borderBottom: `2px solid ${GOLD}`,
+          borderRadius: R.md,
+          cursor: 'pointer',
+          fontFamily: sans, fontSize: FS.md,
+          boxShadow: '0 1px 0 rgba(140,111,50,0.15)',
+          transition: 'all 0.15s',
+        }}
+        title="We'll save your dossier as soon as you're in."
+      >
+        <Save size={15} />
+        Save this town — free account →
       </button>
     );
   }
@@ -263,6 +318,14 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
   const clearLoadedFromSave = useStore(s => s.clearLoadedFromSave);
   const clearNeighbour  = useStore(s => s.clearNeighbour);
   const clearSettlement = useStore(s => s.clearSettlement);
+
+  // P100 / X-1 — Pipeline reveal state. When `pipelineRevealActive` is
+  // true and the `pipelineReveal` flag is on, the dossier is hidden
+  // behind the reveal overlay. Once the overlay's playback completes
+  // it calls dismissPipelineReveal and the dossier appears.
+  const pipelineRevealActive = useStore(s => s.pipelineRevealActive);
+  const dismissPipelineReveal = useStore(s => s.dismissPipelineReveal);
+  const pipelineRevealEnabled = flag('pipelineReveal');
 
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
@@ -585,8 +648,20 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
         </div>
       )}
 
-      {/* Output + export buttons */}
-      {settlement && showOutput && (
+      {/* P100 — pipeline reveal overlay. Renders only when the flag is on,
+          a settlement was just generated, and the slice flagged the reveal
+          as active. Dismisses itself by calling dismissPipelineReveal()
+          when its playback completes. */}
+      {pipelineRevealEnabled && pipelineRevealActive && settlement && (
+        <Suspense fallback={null}>
+          <PipelineReveal onComplete={dismissPipelineReveal} />
+        </Suspense>
+      )}
+
+      {/* Output + export buttons. Hidden behind the reveal overlay during
+          playback so the user's first dossier view is uninterrupted by
+          the overlay dismissing on top of it. */}
+      {settlement && showOutput && !(pipelineRevealEnabled && pipelineRevealActive) && (
         <>
           {/* ── Back navigation toolbar ──────────────────────────── */}
           <div style={{
@@ -655,7 +730,12 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
 
           {/* Save to library */}
           <div style={{ display: 'flex', justifyContent: 'center', paddingTop: SP.xs }}>
-            <SaveToLibraryButton settlement={settlement} canSave={canSave} isMobile={isMobile} />
+            <SaveToLibraryButton
+              settlement={settlement}
+              canSave={canSave}
+              isMobile={isMobile}
+              onSignIn={onSignIn}
+            />
           </div>
         </>
       )}

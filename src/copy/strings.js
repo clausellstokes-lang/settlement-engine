@@ -98,6 +98,43 @@ export const COPY = {
         headline: 'Save your campaign across devices.',
         body:     'Upgrade syncs your settlements, drafts, and canon timelines to your account.',
       },
+      // ── P103 / X-2 — Conversion-arc moments ────────────────────────────
+      first_save: {
+        headline: 'Save it. Come back tomorrow.',
+        body:     'Your dossier is yours to keep. Free tier holds 3 saves — plenty for a campaign’s first arc.',
+      },
+      anon_cap_hit: {
+        headline: 'You’ve explored hamlet, village, town.',
+        body:     'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
+      },
+      first_pdf_export: {
+        headline: 'You just downloaded your first dossier.',
+        body:     'Wanderer gives you 3 exports a month. Cartographer = unlimited, plus cloud sync — phone, laptop, table.',
+      },
+      third_save: {
+        headline: 'You’re building a campaign.',
+        body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, the neighbour network, all six sizes, and full export.',
+      },
+      regen_burst: {
+        headline: 'Power user ahead.',
+        body:     'Locks, drift, chronicle — Cartographer surfaces the worldbuilder-tier controls. Try the upgrade.',
+      },
+      map_clicked: {
+        headline: 'World Map unlocks with Cartographer.',
+        body:     'Place settlements, draw routes, surface supply-chain stress — your campaigns become a place.',
+      },
+      weekly_user: {
+        headline: 'Three sessions in two weeks.',
+        body:     'You’re using SettlementForge weekly — Cartographer pays for itself in two.',
+      },
+      welcome_credit: {
+        headline: 'Try the Narrative Layer once — on us.',
+        body:     'One credit on every signup. The AI prose pass turns this town’s data into prose your players can hear.',
+      },
+      founder_eligible: {
+        headline: 'You’ve earned this offer.',
+        body:     'Five settlements, neighbours linked, exports shipped. Founder Lifetime = $99, lifetime Cartographer access, seat in the credits.',
+      },
     },
   },
 

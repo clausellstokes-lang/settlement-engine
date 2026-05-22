@@ -160,6 +160,19 @@ export const createAuthSlice = (set, get) => ({
             }
           } catch { /* localStorage unavailable; skip */ }
         }
+
+        // P101 / X-3 — Auth intent fulfillment. If the user clicked
+        // "Save this town — free account" before signing in, the
+        // authIntents registry has a pending SAVE_SETTLEMENT entry. Now
+        // that auth is real, dispatch it. The handler is registered at
+        // module init time in store/index.js (see registerSaveIntent).
+        if (event === 'SIGNED_IN' && user?.id) {
+          import('../lib/authIntents.js').then(({ consume }) => {
+            consume({ user, tier, role, displayName });
+          }).catch((e) => {
+            console.warn('[authSlice] authIntents.consume failed:', e);
+          });
+        }
       }
     });
   },

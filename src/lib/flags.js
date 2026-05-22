@@ -96,6 +96,107 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Use ink-600 for body copy (passes WCAG 4.5:1) instead of muted-500.',
   },
+
+  // ── P100–P127 critique implementation ──────────────────────────────────
+  // Each flag gates one critique-mandated change so it can be flipped
+  // dark → staff → GA independently. Defaults reflect the desired
+  // production state after the phase ships; flip to false to roll back.
+  pipelineReveal: {
+    default: true,
+    description: 'P100 / X-1: narrate pipeline steps during generation (visible wow).',
+  },
+  saveAsSignup: {
+    default: true,
+    description: 'P101 / X-3: active "Save this town — free account" button (replaces tombstone).',
+  },
+  dossierFiveTabs: {
+    default: false,
+    description: 'P102 / D-1: consolidate 14 dossier tabs into 5 thematic groups. DARK SHIP UNTIL VERIFIED.',
+  },
+  pricingMomentsFull: {
+    default: true,
+    description: 'P103 / X-2: full 8-moment pricingMoments wiring (save, cap, export, regen, etc.).',
+  },
+  welcomeCredit: {
+    default: true,
+    description: 'P104 / X-4: 1 free Narrate credit granted on signup, surfaced on first save.',
+  },
+  summaryMagazine: {
+    default: false,
+    description: 'P105 / D-2: Summary tab as magazine spread (left pitch / right Tonight at Table).',
+  },
+  inlineEdit: {
+    default: false,
+    description: 'P106 / E-1: click-to-edit names + pills + paragraphs in the dossier. DARK SHIP.',
+  },
+  workshopNav: {
+    default: false,
+    description: 'P107 / CP-2: Workshop as top-level nav destination (currently nested in Compendium).',
+  },
+  librarySearch: {
+    default: true,
+    description: 'P108 / E-6: campaign-aware library — search, sort, filter, phase chips.',
+  },
+  versionHistory: {
+    default: false,
+    description: 'P109 / E-5: per-settlement version timeline + diff + revert. Cartographer-gated.',
+  },
+  mapRoutesMode: {
+    default: false,
+    description: 'P110 / M-4: Routes mode in WorldMap toolbar (relationship-first overlay).',
+  },
+  mapDropPreview: {
+    default: false,
+    description: 'P111 / M-3: hover-tooltip during drag with terrain + trade-route context.',
+  },
+  mapAutosave: {
+    default: false,
+    description: 'P112 / M-5: auto-save map state when a campaign is active.',
+  },
+  anonCapUnlock: {
+    default: true,
+    description: 'P113 / X-5: anon cap reframed as unlock (not block) + $2.99 side-door.',
+  },
+  inlineUpgrade: {
+    default: true,
+    description: 'P114 / X-7: inline upgrade cards at locked features (not modal walls).',
+  },
+  welcomeBack: {
+    default: false,
+    description: 'P115 / X-9: welcome-back hero variant on return visits + post-session check-in.',
+  },
+  founderRecognition: {
+    default: false,
+    description: 'P116 / X-8: Founder Lifetime surfaces only to demonstrated worldbuilders.',
+  },
+  heroV2: {
+    default: false,
+    description: 'P117 / H-1: two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
+  },
+  firstDossierCallouts: {
+    default: false,
+    description: 'P118 / O-2: three teaching callouts on a first-time user\'s first dossier.',
+  },
+  wizardChromeDiet: {
+    default: false,
+    description: 'P119 / W-1: collapse 7 wizard chrome rows into one combined header.',
+  },
+  narrativeLayerStrip: {
+    default: false,
+    description: 'P121 / D-4: lift narrative buttons into labeled strip below dossier title.',
+  },
+  audiencePricingCopy: {
+    default: true,
+    description: 'P122 / X-10: audience-led pricing tile copy via useCopy().audience().',
+  },
+  mobileSingleChrome: {
+    default: false,
+    description: 'P123 / A-2: drop mobile top header; auth chip joins bottom nav.',
+  },
+  compendiumInlineHelp: {
+    default: false,
+    description: 'P126 / CP-1: "?" affordance on every config control opens Compendium snippet.',
+  },
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

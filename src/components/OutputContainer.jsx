@@ -10,6 +10,9 @@ import ShareToGallery from './ShareToGallery.jsx';
 import BuyThisDossier from './BuyThisDossier.jsx';
 import { AiOverlayViolations } from './primitives/AiOverlayViolations.jsx';
 import { RegenerationDeltaCard } from './primitives/RegenerationDeltaCard.jsx';
+// P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
+// first-saved + ledger-unspent state; renders nothing otherwise.
+const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
@@ -376,6 +379,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           isPublic: liveSaveEntry?.is_public,
           publicSlug: liveSaveEntry?.public_slug,
         })
+      ),
+      // P104 — Welcome credit gift card. Self-gates inside; shown to
+      // signed-in users on their first saved dossier when their ledger
+      // still has an unspent kind='welcome' entry.
+      !readOnly && React.createElement(Suspense, { fallback: null },
+        React.createElement(WelcomeCreditCard)
       ),
       // Tab strip
       React.createElement('div', { 'data-onboard-highlight': onboardingActive && onboardingStep === 2 ? 'true' : undefined, style: { position: 'relative', borderBottom: '1px solid #e0d0b0', background: '#f7f0e4' } },

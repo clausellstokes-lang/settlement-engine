@@ -42,6 +42,10 @@ import OnboardingChecklist from './components/onboarding/OnboardingChecklist.jsx
 import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
 import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
+// P103 / X-2 — Active pricing-moment card (inline, not modal). Renders
+// when a moment fires; cooldown enforced by the moments library so it
+// can't hammer the user.
+const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
 
 const NAV = [
   { id: 'generate',    label: 'Create',      Icon: MapPin },
@@ -150,6 +154,17 @@ export default function App() {
   // Gate premium-only views
   const handleNavClick = (id) => {
     setView(id);
+    // P103 / X-2 — map_clicked pricing moment. Wanderers clicking the
+    // World Map nav see a Cartographer-upgrade pitch (cooldown 24h via
+    // the moments library; premium users are auto-skipped). Fires on
+    // navigation rather than landing because the locked-state Map page
+    // (P109/X-7) needs the moment context.
+    if (id === 'map' && authTier !== 'anon' && authTier !== 'premium') {
+      import('./lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
+        const setActive = useStore.getState().setActivePricingMoment;
+        triggerPricingMoment('map_clicked', setActive, { tier: authTier });
+      }).catch(() => { /* never block navigation */ });
+    }
   };
 
   // Filter nav items based on visibility
@@ -576,6 +591,13 @@ export default function App() {
           Supabase). Silent in prod; one-time warning + dismissible UI in dev
           so a contributor doesn't ship-and-pray on email lifecycle changes. */}
       <DevEmailBanner />
+
+      {/* P103 — Active pricing moment card. Always mounted; renders null
+          when no moment is active. Bottom-right fixed-position so it
+          doesn't fight the dossier or wizard for vertical space. */}
+      <Suspense fallback={null}>
+        <PricingMomentCard />
+      </Suspense>
     </>
   );
 }

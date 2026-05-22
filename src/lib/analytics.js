@@ -69,6 +69,39 @@ export const EVENTS = Object.freeze({
   CREDITS_EXHAUSTED:              'credits_exhausted',
   NEIGHBOR_PREVIEW_CLICKED:       'neighbor_preview_clicked',
   UPGRADE_AFTER_NEIGHBOR_CLICKED: 'upgrade_after_neighbor_clicked',
+
+  // ── P100 / Pillar C — Critique-implementation event expansion ──────────
+  // Names locked in (snake_case, stable, no rename without a dashboard
+  // migration plan). Each maps to a specific finding in the UX/UI or
+  // Editing & Map critique.
+  WOW_REVEAL_SHOWN:               'wow_reveal_shown',          // X-1
+  WOW_REVEAL_COMPLETED:           'wow_reveal_completed',      // X-1
+  SAVE_BUTTON_CLICKED:            'save_button_clicked',       // X-3
+  SAVE_SIGNUP_INTENT_OPENED:      'save_signup_intent_opened', // X-3
+  SAVE_SIGNUP_INTENT_FULFILLED:   'save_signup_intent_fulfilled', // X-3
+  PRICING_MOMENT_SHOWN:           'pricing_moment_shown',      // X-2
+  PRICING_MOMENT_CLICKED:         'pricing_moment_clicked',    // X-2
+  PRICING_MOMENT_DISMISSED:       'pricing_moment_dismissed',  // X-2
+  WELCOME_CREDIT_GRANTED:         'welcome_credit_granted',    // X-4
+  WELCOME_CREDIT_SPENT:           'welcome_credit_spent',      // X-4
+  ANON_CAP_UNLOCK_SHOWN:          'anon_cap_unlock_shown',     // X-5
+  DOSSIER_GROUP_TAB_CLICKED:      'dossier_group_tab_clicked', // D-1
+  SIMULATION_DRAWER_OPENED:       'simulation_drawer_opened',  // D-5
+  EDIT_MODE_TOGGLED:              'edit_mode_toggled',         // E-1
+  EDIT_PENDING_QUEUED:            'edit_pending_queued',       // E-2
+  EDIT_CASCADE_PREVIEWED:         'edit_cascade_previewed',    // E-2
+  EDIT_COMMITTED:                 'edit_committed',            // E-2
+  EDIT_REVERTED:                  'edit_reverted',             // E-2
+  WORKSHOP_OPENED:                'workshop_opened',           // CP-2
+  WORKSHOP_LOCKED_SHOWN:          'workshop_locked_shown',     // CP-2
+  MAP_ROUTES_MODE_ENTERED:        'map_routes_mode_entered',   // M-4
+  MAP_DROP_PREVIEW_SHOWN:         'map_drop_preview_shown',    // M-3
+  RETURN_VISIT_DETECTED:          'return_visit_detected',     // X-9
+  WELCOME_BACK_OPEN_CLICKED:      'welcome_back_open_clicked', // X-9
+  FOUNDER_TILE_SHOWN:             'founder_tile_shown',        // X-8
+  FOUNDER_TILE_CLICKED:           'founder_tile_clicked',      // X-8
+  HELP_POPOVER_OPENED:            'help_popover_opened',       // CP-1
+  AI_PROMPT_COPIED:               'ai_prompt_copied',          // HT-4
 });
 
 // ── Anon-prior tracking (drives SIGNUP_AFTER_ANON / PAID_AFTER_ANON) ───────
