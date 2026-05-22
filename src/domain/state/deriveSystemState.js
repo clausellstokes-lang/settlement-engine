@@ -28,6 +28,19 @@ import { bandFor, clamp01 } from './bands.js';
 /** @typedef {import('../types.js').StateDimension} StateDimension */
 
 /**
+ * Return the first argument that is an Array, else []. Used by the
+ * alias-fallback reads below — if `s.stressors` is an object instead
+ * of an array (some legacy fixtures wrap it as `{count, items}`),
+ * fall through to the next candidate instead of throwing on `.filter`.
+ */
+function pickArray(...candidates) {
+  for (const c of candidates) {
+    if (Array.isArray(c)) return c;
+  }
+  return [];
+}
+
+/**
  * @param {Object} settlement — the engine's settlement object
  * @returns {SystemState}
  */
@@ -153,8 +166,13 @@ function deriveVolatility(s) {
     }
   }
 
-  // Stress count
-  const stresses = s.stresses || [];
+  // Stress count. Read the canonical container first (`stressors`,
+  // post-Tier-1.2), then fall back to legacy aliases `stress` and the
+  // older `stresses`. A consumer reading from a partially-migrated
+  // settlement should still see a consistent count. `pickArray` guards
+  // against intermediate consumers that wrap stress in an object
+  // ({ count, items, ... }) instead of leaving it as a bare array.
+  const stresses = pickArray(s.stressors, s.stress, s.stresses);
   if (stresses.length >= 3) {
     value += 8;
     risks.push(`${stresses.length} active stressors`);
@@ -193,8 +211,11 @@ function deriveExternalThreat(s) {
     risks.push(`${hostile} hostile neighbour${hostile === 1 ? '' : 's'}`);
   }
 
-  // Threat-tagged stresses
-  const threatStresses = (s.stresses || []).filter(st => {
+  // Threat-tagged stresses. Same canonical-then-legacy fallback as
+  // resilience above; without it, the threat dimension silently zeros
+  // out on settlements that only carry the new `stressors` field.
+  const stressList = pickArray(s.stressors, s.stress, s.stresses);
+  const threatStresses = stressList.filter(st => {
     const t = String(st.type || st.name || '').toLowerCase();
     return t.includes('siege') || t.includes('occupation') || t.includes('raid')
         || t.includes('plague') || t.includes('war') || t.includes('refugee');

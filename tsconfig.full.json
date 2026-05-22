@@ -1,0 +1,40 @@
+{
+  "//": [
+    "Aspirational tsconfig — extends the strict-clean baseline (tsconfig.json)",
+    "but includes the rest of the source tree. Running",
+    "  npx tsc --noEmit -p tsconfig.full.json",
+    "currently surfaces ~180 errors across store/lib/generators — those are",
+    "the type-debt punch-list for moving past the domain-only signal.",
+    "",
+    "This file is INTENTIONALLY NOT in CI's gate (`npm run check` uses",
+    "tsconfig.json). It's here so:",
+    "  1. The intent — eventually cover the whole src tree — is recorded.",
+    "  2. A contributor fixing a slice can run `typecheck:full` to measure",
+    "     their progress without re-deriving the include list from scratch.",
+    "  3. When the count hits zero, swap `tsconfig.json` to point here and",
+    "     delete this file.",
+    "",
+    "Don't include `tests/` — the test files use vitest globals + JSX in JS",
+    "and would need their own includes/types config to typecheck cleanly."
+  ],
+  "extends": "./tsconfig.json",
+  "compilerOptions": {},
+  "include": [
+    "src/domain/**/*.js",
+    "src/domain/**/*.ts",
+    "src/store/**/*.js",
+    "src/lib/**/*.js",
+    "src/hooks/**/*.js",
+    "src/generators/**/*.js",
+    "src/components/**/*.{js,jsx}",
+    "src/pdf/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public",
+    "src/data",
+    "src/utils",
+    "tests"
+  ]
+}

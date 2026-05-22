@@ -201,19 +201,34 @@ describe('trace integrity: traces survive the canonical-shape adapter', () => {
 // ── Faction traces (Tier 4.1) ───────────────────────────────────────────
 
 describe('faction traces emerge from generatePower', () => {
+  // After Tier 2.1 / P99 wiring, faction-typed traces can come from
+  // either step — generatePower (governing/formed) or neighbourFactions
+  // (mirrored/opposed) or generatePopulation (linked). Tests below
+  // tolerate the multi-step source so adding a new emitter doesn't
+  // require touching every assertion.
+  const FACTION_STEPS = new Set(['generatePower', 'neighbourFactions', 'generatePopulation']);
+  const FACTION_RESULTS = new Set(['governing', 'formed', 'mirrored', 'opposed', 'linked']);
+
   it('a town settlement emits at least one faction trace', () => {
     const s = gen({ settType: 'town', culture: 'germanic' });
     const factionTraces = tracesByType(s, 'faction');
     expect(factionTraces.length).toBeGreaterThan(0);
     for (const t of factionTraces) {
-      expect(t.step).toBe('generatePower');
-      expect(t.targetId).toMatch(/^faction\./);
+      expect(FACTION_STEPS.has(t.step), `unexpected step ${t.step} on ${t.targetId}`).toBe(true);
+      // generatePopulation summary trace uses a structural id, not a
+      // per-faction one; everything else is `faction.<name>`.
+      expect(
+        t.targetId.startsWith('faction.') || t.targetId === 'factions.npcGroupLinkage',
+        `unexpected targetId ${t.targetId}`
+      ).toBe(true);
     }
   });
 
-  it('every faction trace cites the tier as a cause', () => {
+  it('every generatePower faction trace cites the tier as a cause', () => {
     const s = gen({ settType: 'city', culture: 'germanic' });
-    const factionTraces = tracesByType(s, 'faction');
+    // Scope this assertion to generatePower only — neighbour/population
+    // traces have different (and legitimate) cause sources.
+    const factionTraces = tracesByType(s, 'faction').filter(t => t.step === 'generatePower');
     for (const t of factionTraces) {
       const tierCause = t.causes.find(c => c.source === `tier.${s.tier}`);
       expect(tierCause, `${t.targetId} missing tier cause`).toBeTruthy();
@@ -227,10 +242,16 @@ describe('faction traces emerge from generatePower', () => {
     const s = gen({ settType: 'city', culture: 'germanic' });
     const factionTraces = tracesByType(s, 'faction');
     if (factionTraces.length < 2) return; // determinism guard
-    const governing = factionTraces.filter(t => t.result === 'governing');
-    // At least one governing or formed result must be present.
-    expect(governing.length + factionTraces.filter(t => t.result === 'formed').length)
-      .toBe(factionTraces.length);
+    // Every faction trace must have one of the canonical result verbs.
+    for (const t of factionTraces) {
+      expect(
+        FACTION_RESULTS.has(t.result),
+        `unexpected result ${t.result} on ${t.targetId}`
+      ).toBe(true);
+    }
+    // And at least one must be governing/formed (generatePower output).
+    const fromPower = factionTraces.filter(t => t.result === 'governing' || t.result === 'formed');
+    expect(fromPower.length).toBeGreaterThan(0);
   });
 
   it('faction traces declare downstream effects for known archetypes', () => {

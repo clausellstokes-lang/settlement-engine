@@ -10,6 +10,7 @@
     "fix:data": "node scripts/fix-duplicate-keys.js",
     "build:edge-shared": "node scripts/build-edge-shared.mjs",
     "typecheck": "tsc --noEmit",
+    "typecheck:full": "tsc --noEmit -p tsconfig.full.json",
     "lint": "eslint src/ tests/ scripts/",
     "test": "vitest run",
     "test:watch": "vitest",

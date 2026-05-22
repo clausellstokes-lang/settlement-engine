@@ -56,6 +56,16 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      // Mobile project — used by e2e/mobile-pointer-targets.spec.js to
+      // catch interactive elements smaller than the 44×44 touch-target
+      // floor (Apple HIG / Material design guidance). Pinned to a
+      // common iPhone profile so the layout matches what real users
+      // see; if specs need a different viewport they should override
+      // via `test.use({ viewport: ... })`.
+      name: 'mobile-safari',
+      use: { ...devices['iPhone 13'] },
+    },
   ],
 
   // Boot the Vite dev server for the spec lifetime. If a dev server

@@ -10,6 +10,7 @@
 import { registerStep } from '../pipeline.js';
 import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTier } from '../../data/constants.js';
 import { getTerrainType } from '../terrainHelpers.js';
+import { recordTrace } from '../../domain/trace.js';
 
 const TERRAIN_WEIGHTS = [
   ['plains', 22], ['hills', 18], ['forest', 13],
@@ -137,6 +138,100 @@ registerStep('resolveConfig', {
     terrainOverride: resolvedTerrain || config.terrainOverride || null,
     ...(militaryFloor ? { priorityMilitary: militaryFloor } : {}),
   };
+
+  // Causal traces — record the *decisions* this step made (vs. the
+  // values it simply passed through). The "why" on each trace makes
+  // it possible for the PipelineRail and AI-grounding layers to
+  // explain how a settlement got its scaling.
+  recordTrace(ctx, {
+    targetType: 'condition',
+    targetId: `tier.${tier}`,
+    step: 'resolveConfig',
+    result: 'selected',
+    causes: [{
+      source: config.settType === 'random' ? 'config.settType=random' :
+              config.settType === 'custom' ? `config.population=${config.population}` :
+              `config.settType=${config.settType}`,
+      reason: config.settType === 'random'
+        ? `Randomly picked from ${TIER_ORDER.join(', ')}.`
+        : config.settType === 'custom'
+          ? `Tier derived from population ${config.population}.`
+          : 'Tier set directly by user choice.',
+    }],
+    downstreamEffects: [
+      { target: 'population', effect: `range ${popRange.min}–${popRange.max}` },
+      { target: 'institutionPool', effect: 'scaling tier' },
+    ],
+  });
+
+  if (resolvedTerrain) {
+    recordTrace(ctx, {
+      targetType: 'condition',
+      targetId: `terrain.${resolvedTerrain}`,
+      step: 'resolveConfig',
+      result: 'rolled',
+      causes: [{
+        source: 'config.terrainOverride=auto',
+        reason: 'Terrain not pinned — weighted-rolled from regional pool.',
+      }],
+      downstreamEffects: [
+        { target: 'tradeRoutePool', effect: 'terrain-constrained' },
+        { target: 'resourcePool',   effect: 'terrain-biased' },
+      ],
+    });
+  }
+
+  if (routePool) {
+    recordTrace(ctx, {
+      targetType: 'condition',
+      targetId: `tradeRoute.${tradeRoute}`,
+      step: 'resolveConfig',
+      result: 'rolled',
+      causes: [{
+        source: resolvedTerrain ? `terrain.${resolvedTerrain}` : 'config.tradeRouteAccess=random_trade',
+        reason: noMagic && townPlus && rawRoute === 'isolated'
+          ? `Rolled 'isolated' but town-plus + no-magic forces road access.`
+          : `Picked from pool: ${routePool.join(', ')}.`,
+      }],
+      downstreamEffects: [
+        { target: 'economicViability', effect: 'trade-access input' },
+      ],
+    });
+  }
+
+  if (config.monsterThreat === 'random_threat') {
+    recordTrace(ctx, {
+      targetType: 'threat',
+      targetId: `monsterThreat.${threat}`,
+      step: 'resolveConfig',
+      result: 'rolled',
+      causes: [{
+        source: 'config.monsterThreat=random_threat',
+        reason: 'Picked from frontier-weighted threat distribution.',
+      }],
+      downstreamEffects: [
+        { target: 'defenseProfile', effect: 'threat-tier input' },
+        ...(threat === 'plagued' ? [{ target: 'priorityMilitary', effect: 'floored to 25' }] : []),
+      ],
+    });
+  }
+
+  if (config.culture === 'random_culture' || !config.culture) {
+    recordTrace(ctx, {
+      targetType: 'condition',
+      targetId: `culture.${culture}`,
+      step: 'resolveConfig',
+      result: 'rolled',
+      causes: [{
+        source: config.culture ? `config.culture=${config.culture}` : 'config.culture=null',
+        reason: 'Culture not pinned — picked from canonical 11-culture catalog.',
+      }],
+      downstreamEffects: [
+        { target: 'namePool',          effect: 'culture-scoped' },
+        { target: 'institutionFlavor', effect: 'culture-scoped' },
+      ],
+    });
+  }
 
   return {
     tier, population, tradeRoute, terrainType, resolvedTerrain,

@@ -47,6 +47,11 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
     config,
     importedNeighbour,
     _seed: seed,
+    // Deterministic trace timestamps: every recordTrace() call reads
+    // and increments this monotonic counter instead of calling
+    // Date.now(). Snapshots of `simulationTrace[].ts` stay stable
+    // across runs of the same seed.
+    _traceClock: 0,
   };
 
   const run = () => runPipeline(initialContext, rng, { onStep: options.onStep });

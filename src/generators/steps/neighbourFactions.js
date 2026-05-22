@@ -8,6 +8,7 @@
 
 import { registerStep } from '../pipeline.js';
 import { getMirrorFactionLabel, getOpposeFactionLabel } from '../neighbourGenerator.js';
+import { recordTrace } from '../../domain/trace.js';
 
 registerStep('neighbourFactions', {
   deps: ['generatePower', 'resolveNeighbour'],
@@ -39,6 +40,20 @@ registerStep('neighbourFactions', {
           isGoverning:   false,
         });
         existingTypes.add(fType);
+        recordTrace(ctx, {
+          targetType: 'faction',
+          targetId: `faction.${mirrorLabel}`,
+          step: 'neighbourFactions',
+          result: 'mirrored',
+          causes: [{
+            source: `neighbour.${neighbourProfile.name}`,
+            effect: `${fType} influence`,
+            reason: `Influence from ${neighbourProfile.name} (${relType.replace(/_/g, ' ')}) seeded a mirror ${fType} faction here.`,
+          }],
+          downstreamEffects: [
+            { target: 'powerStructure.factions', effect: 'count +1' },
+          ],
+        });
       }
     }
   }
@@ -56,6 +71,21 @@ registerStep('neighbourFactions', {
           source:        'neighbour_opposition',
           neighbourName: neighbourProfile.name,
           isGoverning:   false,
+        });
+        recordTrace(ctx, {
+          targetType: 'faction',
+          targetId: `faction.${opposeLabel}`,
+          step: 'neighbourFactions',
+          result: 'opposed',
+          causes: [{
+            source: `neighbour.${neighbourProfile.name}`,
+            effect: `${fType} reaction`,
+            reason: `Resistance to ${neighbourProfile.name}'s influence (${relType.replace(/_/g, ' ')}) spawned an opposition ${fType} faction.`,
+          }],
+          downstreamEffects: [
+            { target: 'powerStructure.factions', effect: 'count +1' },
+            { target: 'conflicts',               effect: 'tension source' },
+          ],
         });
       }
     }

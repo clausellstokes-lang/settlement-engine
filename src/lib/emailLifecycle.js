@@ -29,6 +29,50 @@ import { supabase, isConfigured } from './supabase.js';
 
 const FN_NAME = 'send-email';
 
+// ── Dev-only observability ────────────────────────────────────────────────
+// When the edge function returns `{ ok: false, reason: 'unconfigured' }`
+// it means RESEND_API_KEY / RESEND_FROM_EMAIL aren't set in Supabase
+// secrets. Emails are non-blocking by design (production must not break
+// when Resend is down), so the failure is silent unless we surface it.
+//
+// In dev we want it loud: a contributor adding a new email type
+// shouldn't ship-and-pray. We:
+//   1. Set a module-level flag the dev banner component reads.
+//   2. Dispatch a CustomEvent so the banner can react without polling.
+//   3. console.warn once (not per email) to keep logs readable.
+//
+// In prod this whole block is dead code — the banner component is gated
+// on `import.meta.env.DEV` at the call site.
+
+let _emailProviderUnconfigured = false;
+let _warnedOnce = false;
+
+/** Read-only: whether the edge function has reported an unconfigured
+ *  provider during this session. Used by the dev banner. */
+export function isEmailProviderUnconfigured() {
+  return _emailProviderUnconfigured;
+}
+
+function markUnconfigured(template) {
+  if (!_emailProviderUnconfigured) {
+    _emailProviderUnconfigured = true;
+    if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
+      try { window.dispatchEvent(new CustomEvent('sf:email-unconfigured', { detail: { template } })); }
+      catch { /* CustomEvent unavailable — fall through silently */ }
+    }
+  }
+  if (import.meta?.env?.DEV && !_warnedOnce) {
+    _warnedOnce = true;
+
+    console.warn(
+      '[emailLifecycle] send-email returned `unconfigured` — Resend secrets ' +
+      'are missing on Supabase. Set with:\n' +
+      '  npx supabase secrets set RESEND_API_KEY=re_xxx\n' +
+      '  npx supabase secrets set RESEND_FROM_EMAIL="SettlementForge <hello@settlementforge.com>"'
+    );
+  }
+}
+
 /**
  * Internal: invoke the send-email edge function. Returns null on
  * failure (no throw). All callers are fire-and-forget.
@@ -51,6 +95,12 @@ async function send(template, payload, recipient = null) {
         console.warn(`[emailLifecycle] ${template} send failed:`, error.message);
       }
       return null;
+    }
+    // Surface the soft-fail unconfigured signal so the dev banner picks
+    // it up. The send() return value stays unchanged — callers that
+    // ignored the response continue to ignore it.
+    if (data && data.ok === false && data.reason === 'unconfigured') {
+      markUnconfigured(template);
     }
     return data;
   } catch (e) {

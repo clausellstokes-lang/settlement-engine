@@ -41,6 +41,7 @@ import OnboardingCoach from './components/OnboardingCoach.jsx';
 import OnboardingChecklist from './components/onboarding/OnboardingChecklist.jsx';
 import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
+import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
 
 const NAV = [
   { id: 'generate',    label: 'Create',      Icon: MapPin },
@@ -569,6 +570,12 @@ export default function App() {
 
       {/* DEV-only feature-flag panel. Renders nothing in production. */}
       <DevFlagPanel />
+
+      {/* DEV-only banner that surfaces when the send-email edge function
+          reports `reason: "unconfigured"` (i.e. Resend secrets missing on
+          Supabase). Silent in prod; one-time warning + dismissible UI in dev
+          so a contributor doesn't ship-and-pray on email lifecycle changes. */}
+      <DevEmailBanner />
     </>
   );
 }

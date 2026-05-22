@@ -116,11 +116,25 @@ function validateTrace(trace) {
 export function recordTrace(ctx, trace) {
   if (!ctx || typeof ctx !== 'object') return null;
   validateTrace(trace);
+  // Deterministic timestamps: when the pipeline runs with a fixed
+  // seed and customContent={} (the "headless deterministic" mode),
+  // tests / snapshot diffs want trace[].ts to NOT vary across runs.
+  // The pipeline can pass a monotonic counter via ctx._traceClock —
+  // if present we use it; otherwise we fall back to Date.now().
+  let ts = trace?.ts;
+  if (ts == null) {
+    if (typeof ctx._traceClock === 'number') {
+      ts = ctx._traceClock;
+      ctx._traceClock += 1;
+    } else {
+      ts = Date.now();
+    }
+  }
   const enriched = {
     causes: [],
     downstreamEffects: [],
     ...trace,
-    ts: trace?.ts ?? Date.now(),
+    ts,
   };
   if (!Array.isArray(ctx.simulationTrace)) {
     ctx.simulationTrace = [];

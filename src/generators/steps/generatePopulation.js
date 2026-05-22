@@ -10,6 +10,7 @@
 import { registerStep } from '../pipeline.js';
 import { generateNPCs, generateRelationships } from '../npcGenerator.js';
 import { generateFactions, generateConflicts } from '../powerGenerator.js';
+import { recordTrace } from '../../domain/trace.js';
 
 const FACTION_ATTRACTION = {
   government: ['government', 'other'],
@@ -98,6 +99,51 @@ registerStep('generatePopulation', {
   });
 
   const conflicts = generateConflicts(factions, relationships, effectiveConfig, institutions);
+
+  // Summary traces — one per category, not one per entity. Per-entity
+  // traces would flood the rail (50+ NPCs is normal at metropolis tier)
+  // and the AI grounding pass does not need that level of detail.
+  recordTrace(ctx, {
+    targetType: 'npc',
+    targetId: `npcs.summary`,
+    step: 'generatePopulation',
+    result: 'populated',
+    causes: [{
+      source: `tier.${tier}`,
+      effect: `${npcs.length} npcs`,
+      reason: `Population scaled from tier; institutions seeded named roles.`,
+    }],
+    downstreamEffects: [
+      { target: 'relationships', effect: `${relationships.length} edges` },
+      { target: 'factions',      effect: `${factions.length} npc faction groups` },
+    ],
+  });
+
+  // Faction-linkage trace — the strategic decision is how NPC faction
+  // groups attached to power factions (direct/attraction/scatter).
+  const linkCounts = factions.reduce((acc, fg) => {
+    const mode = fg.powerFactionFallback ? 'scatter'
+               : powerFactionsByCategory[fg.dominantCategory || 'other'] ? 'direct'
+               : 'attraction';
+    acc[mode] = (acc[mode] || 0) + 1;
+    return acc;
+  }, {});
+  if (factions.length) {
+    recordTrace(ctx, {
+      targetType: 'faction',
+      targetId: 'factions.npcGroupLinkage',
+      step: 'generatePopulation',
+      result: 'linked',
+      causes: [{
+        source: 'powerStructure.factions',
+        effect: `${factions.length} groups linked`,
+        reason: `Direct=${linkCounts.direct || 0}, attraction=${linkCounts.attraction || 0}, power-weighted scatter=${linkCounts.scatter || 0}.`,
+      }],
+      downstreamEffects: [
+        { target: 'conflicts', effect: `${conflicts.length} surfaced` },
+      ],
+    });
+  }
 
   return { npcs, relationships, factions, conflicts };
 });

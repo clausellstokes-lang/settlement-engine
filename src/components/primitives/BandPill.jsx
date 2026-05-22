@@ -103,7 +103,11 @@ export function BandPill({
   showGlyph = true,
   style = {},
 }) {
+  // `ref` here is a settlement-reference name (e.g. 'economy.viability'),
+  // NOT a React useRef — react-hooks/refs flags it as a false positive.
+  // eslint-disable-next-line react-hooks/refs
   const resolvedBand = resolveBand({ band, ref, settlement });
+  // eslint-disable-next-line react-hooks/refs
   const resolvedLabel = resolveLabel({ band: resolvedBand, label, domain, ref });
 
   if (!resolvedBand && !resolvedLabel) return null;

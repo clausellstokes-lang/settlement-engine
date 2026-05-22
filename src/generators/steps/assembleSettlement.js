@@ -130,6 +130,15 @@ registerStep('assembleSettlement', {
     settlement.simulationTrace = ctx.simulationTrace;
   }
 
+  // Deterministic id: normalizeSettlement uses `_seed` to mint a stable
+  // settlement id (idFromSeed). Without _seed on the object at the
+  // normalize step, every regeneration of the same config gets a
+  // different id — which the review flagged as a determinism gap.
+  // Attach _seed BEFORE normalize so the id derives from it.
+  if (ctx._seed && !settlement._seed) {
+    settlement._seed = ctx._seed;
+  }
+
   // Wire the canonical-shape adapter at the assembly boundary. This is
   // the *only* point at which a newly-generated settlement enters the
   // wider app; normalizing here means every consumer downstream
