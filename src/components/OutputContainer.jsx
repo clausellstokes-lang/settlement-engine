@@ -10,6 +10,8 @@ import ShareToGallery from './ShareToGallery.jsx';
 import BuyThisDossier from './BuyThisDossier.jsx';
 import { AiOverlayViolations } from './primitives/AiOverlayViolations.jsx';
 import { RegenerationDeltaCard } from './primitives/RegenerationDeltaCard.jsx';
+import { flag } from '../lib/flags.js';
+import { Funnel, EVENTS } from '../lib/analytics.js';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
@@ -30,6 +32,27 @@ const DailyLifeTab = lazy(() => import('./new/tabs/DailyLifeTab'));
 const RelationshipsTab = lazy(() => import('./new/tabs/RelationshipsTab'));
 const DMCompassTab = lazy(() => import('./new/tabs/DMCompassTab'));
 
+
+// P102 / D-1 — Five thematic group tabs façade. Each group maps to the
+// existing sub-tabs the dossier already renders; this is a navigation
+// layer, not a content change. Flag: `dossierFiveTabs`.
+//
+//   summary  → Summary tab (everything the user reads at the table)
+//   people   → NPCs, Daily Life, Power
+//   systems  → Economics, Services, Defense, Resources, Viability
+//   world    → History, Relationships, Overview
+//   hooks    → Plot Hooks, DM Compass
+//
+// Simulation moves out of the tab strip entirely — see SimulationDrawer
+// (planned). Until that drawer ships, Simulation stays in the People
+// group as a temporary parking spot under the flag-on path.
+export const TAB_GROUPS = Object.freeze({
+  summary: { label: 'Summary', tabs: ['summary'] },
+  people:  { label: 'People',  tabs: ['npcs', 'daily_life', 'power'] },
+  systems: { label: 'Systems', tabs: ['economics', 'services', 'defense', 'resources', 'viability'] },
+  world:   { label: 'World',   tabs: ['history', 'relationships', 'overview'] },
+  hooks:   { label: 'Hooks',   tabs: ['plot_hooks', 'dm_compass'] },
+});
 
 const TABS = [
   { id: 'summary',    label: 'DM Summary', Icon: Scroll },
@@ -171,11 +194,45 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     ))
   ));
 
-  const tabs = [...TABS,
+  const allTabs = [...TABS,
     ...(hasDMCompass ? [{ id:'dm_compass', label:'DM Compass', Icon: Compass }] : []),
     ...(rawSettlement.neighborRelationship || rawSettlement.neighbourRelationship || rawSettlement.neighbourNetwork?.length
       ? [{ id:'neighbours', label:'Neighbours', Icon: MapPin }] : [])
   ];
+
+  // P102 / D-1 — Five thematic group tabs. When the flag is on, render
+  // a group selector ABOVE the existing tab strip; clicking a group
+  // filters the strip to its sub-tabs and selects the group's primary.
+  // When the flag is off, the strip behaves as before (legacy 14 tabs).
+  const fiveTabsEnabled = flag('dossierFiveTabs');
+  const tabToGroup = (() => {
+    const m = {};
+    Object.entries(TAB_GROUPS).forEach(([gid, g]) => {
+      g.tabs.forEach(tid => { m[tid] = gid; });
+    });
+    return m;
+  })();
+  // Initial group derives from the active tab so deep links land correctly.
+  const initialGroup = tabToGroup[activeTab] || 'summary';
+  const [activeGroup, setActiveGroup] = useState(initialGroup);
+  const handleGroupClick = (gid) => {
+    setActiveGroup(gid);
+    const group = TAB_GROUPS[gid];
+    if (group && group.tabs[0] && activeTab !== group.tabs[0]) {
+      const firstAvailable = group.tabs.find(tid => allTabs.some(t => t.id === tid));
+      if (firstAvailable) setActiveTab(firstAvailable);
+    }
+    Funnel.track(EVENTS.DOSSIER_GROUP_TAB_CLICKED, { group: gid });
+  };
+
+  const tabs = fiveTabsEnabled
+    ? allTabs.filter(t => {
+        // Simulation tab is meta — hidden in the 5-group view; surfaces
+        // via "How this was simulated" disclosure planned for D-5.
+        if (t.id === 'simulation') return false;
+        return (TAB_GROUPS[activeGroup]?.tabs || []).includes(t.id);
+      })
+    : allTabs;
 
   const scroll = (dir) => scrollRef.current?.scrollBy({ left: dir * 120, behavior: 'smooth' });
 
@@ -385,6 +442,39 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // still has an unspent kind='welcome' entry.
       !readOnly && React.createElement(Suspense, { fallback: null },
         React.createElement(WelcomeCreditCard)
+      ),
+      // P102 / D-1 — Five thematic group tab strip. Renders only when
+      // the dossierFiveTabs flag is on. Clicking a group selects its
+      // first sub-tab and filters the strip below.
+      fiveTabsEnabled && React.createElement('div', {
+        role: 'tablist',
+        'aria-label': 'Dossier sections',
+        style: {
+          display: 'flex', gap: 2, padding: 4,
+          background: '#f7f0e4', borderBottom: '1px solid #e0d0b0',
+        }
+      },
+        Object.entries(TAB_GROUPS).map(([gid, group]) => {
+          const active = activeGroup === gid;
+          return React.createElement('button', {
+            key: gid,
+            role: 'tab',
+            'aria-selected': active,
+            onClick: () => handleGroupClick(gid),
+            style: {
+              flex: 1, padding: '8px 6px',
+              background: active ? 'rgba(201,162,76,0.10)' : 'transparent',
+              border: active ? '1px solid rgba(201,162,76,0.40)' : '1px solid transparent',
+              borderRadius: 3,
+              fontSize: 12,
+              fontWeight: active ? 700 : 500,
+              color: active ? '#8C6F32' : '#6B5340',
+              fontFamily: 'Nunito, sans-serif',
+              textAlign: 'center',
+              cursor: 'pointer',
+            }
+          }, group.label);
+        })
       ),
       // Tab strip
       React.createElement('div', { 'data-onboard-highlight': onboardingActive && onboardingStep === 2 ? 'true' : undefined, style: { position: 'relative', borderBottom: '1px solid #e0d0b0', background: '#f7f0e4' } },

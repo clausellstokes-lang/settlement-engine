@@ -29,6 +29,7 @@ import {
   anonAtCap, anonGensRemaining, incrementAnonGen, DEFAULT_DAILY_CAP,
 } from '../lib/anonGenCounter.js';
 import { Funnel } from '../lib/analytics.js';
+import { flag } from '../lib/flags.js';
 import {
   GOLD, INK, _INK_DEEP, BODY, BORDER, _CARD, sans, serif_, SP, R, FS,
 } from './theme.js';
@@ -224,31 +225,85 @@ export default function HomeHero({ onSignIn }) {
       {/* ── Primary CTA ──────────────────────────────────────────────── */}
       <div style={{ marginTop: SP.xl }}>
         {isAnon && atCap ? (
-          // Anon cap-hit: convert prompt.
-          <div style={{
-            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.sm,
-          }}>
-            <p style={{
-              margin: 0, fontSize: FS.sm, color: '#4A3B22', maxWidth: 380,
+          // P113 / X-5 — Reframe the anon cap as an unlock, not a wall.
+          // Lead with what signin gets you, not with what you've used up.
+          // Side-door $2.99 link below catches intermediates who just need
+          // Friday's town.
+          flag('anonCapUnlock') ? (
+            <div style={{
+              padding: SP.lg,
+              background: `linear-gradient(135deg, #FBF5E6, #F4EAD0)`,
+              border: `1px solid ${GOLD}`,
+              borderRadius: R.lg,
+              maxWidth: 460, margin: '0 auto', textAlign: 'center',
             }}>
-              You’ve used your {DEFAULT_DAILY_CAP} free generations today.
-              Sign in to keep going — accounts unlock all sizes, saves, and exports.
-            </p>
-            <button
-              type="button"
-              onClick={onSignIn}
-              style={{
-                padding: `${SP.md}px ${SP.xl}px`,
-                background: GOLD, color: '#fff',
-                border: 'none', borderRadius: R.button,
-                fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-                cursor: 'pointer',
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-              }}
-            >
-              <LogIn size={16} /> Sign in to continue
-            </button>
-          </div>
+              <div style={{
+                fontFamily: serif_, fontSize: 18, fontWeight: 600,
+                color: INK, marginBottom: 6,
+              }}>
+                You’ve explored <em style={{ color: '#8C6F32' }}>hamlet, village, town.</em>
+              </div>
+              <div style={{ fontSize: FS.sm, color: '#4A3B22', lineHeight: 1.55 }}>
+                <b>Sign in (free)</b> to unlock thorp through metropolis,
+                save unlimited drafts, and export the PDF.
+              </div>
+              <button
+                type="button"
+                onClick={onSignIn}
+                style={{
+                  marginTop: SP.md,
+                  padding: `${SP.md}px ${SP.xl}px`,
+                  background: GOLD, color: '#fff',
+                  border: 'none',
+                  borderBottom: `2px solid #8C6F32`,
+                  borderRadius: R.sm,
+                  fontFamily: sans, fontSize: FS.md, fontWeight: 700,
+                  cursor: 'pointer',
+                }}
+              >
+                Create free account →
+              </button>
+              <div style={{
+                marginTop: SP.md, paddingTop: SP.sm,
+                borderTop: `1px dashed ${BORDER}`,
+                fontSize: FS.xs, color: '#6B5340', fontStyle: 'italic',
+              }}>
+                or just take this one —{' '}
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); document.querySelector('[data-buy-this-dossier]')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  style={{ color: '#8C6F32', fontWeight: 700, fontStyle: 'normal' }}
+                >
+                  buy the dossier for $2.99 ↓
+                </a>
+              </div>
+            </div>
+          ) : (
+            <div style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.sm,
+            }}>
+              <p style={{
+                margin: 0, fontSize: FS.sm, color: '#4A3B22', maxWidth: 380,
+              }}>
+                You’ve used your {DEFAULT_DAILY_CAP} free generations today.
+                Sign in to keep going — accounts unlock all sizes, saves, and exports.
+              </p>
+              <button
+                type="button"
+                onClick={onSignIn}
+                style={{
+                  padding: `${SP.md}px ${SP.xl}px`,
+                  background: GOLD, color: '#fff',
+                  border: 'none', borderRadius: R.button,
+                  fontFamily: sans, fontSize: FS.md, fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                }}
+              >
+                <LogIn size={16} /> Sign in to continue
+              </button>
+            </div>
+          )
         ) : (
           <>
             <button

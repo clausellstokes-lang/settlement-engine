@@ -17,9 +17,10 @@
  *   admin       — Developer admin panel (elevated roles only)
  */
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { MapPin, FolderOpen, BookOpen, Sparkles, Map as MapIcon, Zap, User, Shield, Headphones } from 'lucide-react';
+import { MapPin, FolderOpen, BookOpen, Sparkles, Map as MapIcon, Zap, User, Shield, Headphones, Settings } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
+import { flag as _readFlag } from './lib/flags.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS } from './components/theme.js';
 
 // Lazy-loaded views
@@ -36,6 +37,9 @@ const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
 const GalleryPage      = lazy(() => import('./components/GalleryPage.jsx'));
 const ComparePage      = lazy(() => import('./components/ComparePage.jsx'));
 const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
+// P107 / CP-2 — Workshop as top-level destination. The component already
+// exists at 1,262 LOC; this lift just gives it a route.
+const Workshop = lazy(() => import('./components/Workshop.jsx'));
 
 import OnboardingCoach from './components/OnboardingCoach.jsx';
 import OnboardingChecklist from './components/onboarding/OnboardingChecklist.jsx';
@@ -47,13 +51,28 @@ import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
 // can't hammer the user.
 const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
 
-const NAV = [
+// P107 / CP-2 — Workshop nav entry. Promoted from a nested Compendium
+// tab to a top-level destination. Cartographer-gated; wanderer/free
+// users see a locked-state preview with an Upgrade CTA. Flag-gated so
+// the nav stays at 5 items while the redesign cooks.
+const NAV_BASE = [
   { id: 'generate',    label: 'Create',      Icon: MapPin },
   { id: 'settlements', label: 'Settlements', Icon: FolderOpen },
   { id: 'map',         label: 'World Map',   Icon: MapIcon },
   { id: 'compendium',  label: 'Compendium',  Icon: BookOpen },
   { id: 'howto',       label: 'How To Use',  Icon: Sparkles },
 ];
+const NAV_WITH_WORKSHOP = [
+  { id: 'generate',    label: 'Create',      Icon: MapPin },
+  { id: 'settlements', label: 'Settlements', Icon: FolderOpen },
+  { id: 'workshop',    label: 'Workshop',    Icon: Settings },
+  { id: 'map',         label: 'World Map',   Icon: MapIcon },
+  { id: 'compendium',  label: 'Compendium',  Icon: BookOpen },
+];
+// Resolved at module-init time so a flag flip requires a reload (which
+// is intended — flag-flipping mid-session leaves the nav inconsistent
+// with deep links).
+const NAV = _readFlag('workshopNav') ? NAV_WITH_WORKSHOP : NAV_BASE;
 
 function Loading() {
   return (
@@ -391,6 +410,7 @@ export default function App() {
             {view === 'map'         && <WorldMap onNavigate={setView} />}
             {view === 'compendium'  && <CompendiumPanel standalone />}
             {view === 'howto'       && <HowToUse standalone />}
+            {view === 'workshop'    && <Workshop />}
             {view === 'account'     && <AccountPage onNavigateAdmin={() => setView('admin')} />}
             {view === 'admin'       && <AdminPanel onBack={() => setView('account')} />}
             {view === 'pricing'     && <PricingPage onNavigate={setView} />}

@@ -27,6 +27,8 @@ import {
   SINGLE_DOSSIER, singleDossierEnabled,
 } from '../config/pricing.js';
 import { t, tx } from '../copy/index.js';
+import { useCopy } from '../hooks/useCopy.js';
+import { flag } from '../lib/flags.js';
 import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS } from './theme.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 
@@ -51,10 +53,13 @@ function FeatureRow({ children }) {
   );
 }
 
-function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderSeatsRemaining }) {
+function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderSeatsRemaining, audienceLine }) {
   const Icon = TIER_ICONS[tier.key] || Sparkles;
   const features = tx(`pricing.tiers.${tier.key}.features`) || [];
-  const tagline  = t(`pricing.tiers.${tier.key}.tagline`);
+  // P122 / X-10 — Prefer audience-led pitch over generic tagline when the
+  // flag is on and a per-audience line is available. Falls back cleanly
+  // to the legacy tagline.
+  const tagline  = audienceLine || t(`pricing.tiers.${tier.key}.tagline`);
   const priceLabel = t(`pricing.tiers.${tier.key}.priceLabel`);
   const priceSub   = t(`pricing.tiers.${tier.key}.priceSub`);
   const name       = getTierDisplayName(tier.legacyKey) || t(`pricing.tiers.${tier.key}.name`);
@@ -214,6 +219,18 @@ export default function PricingPage({ onNavigate }) {
   const tiers = getVisibleTiers();
   const packs = Object.values(getActivePacks());
 
+  // P122 / X-10 — Audience-led pricing pitch. The same tier gets a
+  // different lead line depending on the current reader's archetype.
+  // Keyed off the `audiencePricingCopy` flag so a rollback is one toggle.
+  const copy = useCopy();
+  const audiencePricingEnabled = flag('audiencePricingCopy');
+  const audienceLineFor = (tierKey) => {
+    if (!audiencePricingEnabled) return null;
+    // tier.key in pricing config is one of: wanderer / cartographer / founder
+    const prefix = `pricingPitch.${tierKey}.line`;
+    return copy.audience(prefix);
+  };
+
   // Tier 7.6: live founder seat counter. Null until the RPC resolves
   // OR on any failure — TierCard falls back to "Limited to 500 seats"
   // when null, so a transient backend hiccup doesn't break the page.
@@ -315,6 +332,7 @@ export default function PricingPage({ onNavigate }) {
               loading={loading === (tier.key === 'founder' ? 'founder_lifetime' : 'premium')}
               emphasised={tier.key === 'cartographer'}
               founderSeatsRemaining={tier.key === 'founder' ? founderSeatsRemaining : undefined}
+              audienceLine={audienceLineFor(tier.key)}
             />
           );
         })}
