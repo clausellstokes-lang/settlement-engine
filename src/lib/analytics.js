@@ -231,8 +231,17 @@ export function track(event, props = {}, opts = {}) {
  * Convenience for the four critical funnel events — wraps `track`
  * with their conditional-firing rules so call sites don't have to
  * remember them.
+ *
+ * Also exposes a generic `track(event, props, opts)` passthrough so
+ * critique-implementation phases can call `Funnel.track(EVENTS.X, ...)`
+ * without importing both `track` and `Funnel`. The bare `track` export
+ * above remains the canonical entry point; this passthrough is just
+ * sugar for the common Funnel-already-imported case.
  */
 export const Funnel = Object.freeze({
+  /** Generic event passthrough. Equivalent to the bare `track` export. */
+  track,
+
   /** Anonymous landing impression. Fire once per session. */
   homepageView() {
     if (typeof sessionStorage !== 'undefined') {

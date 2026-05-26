@@ -113,6 +113,22 @@ describe('Tier 8.8 — track()', () => {
 
 // ── Funnel helpers ────────────────────────────────────────────────────────
 describe('Tier 8.8 — Funnel helpers', () => {
+  // P-fix — Funnel must expose a generic `track` passthrough alongside
+  // the four critical helpers. The critique-implementation components
+  // call `Funnel.track(EVENTS.X, props)` directly. Without this contract
+  // they crash at module-init in production (this regression was caught
+  // by the deploy: `m.track is not a function`).
+  //
+  // Use a real event name from EVENTS — `track` whitelists against the
+  // registry to catch typos, so a synthetic event name would be dropped.
+  it('exposes generic track() passthrough', () => {
+    expect(typeof Funnel.track).toBe('function');
+    Funnel.track(EVENTS.WOW_REVEAL_SHOWN, { foo: 'bar' });
+    const matching = providerCalls.find(c => c.event === EVENTS.WOW_REVEAL_SHOWN);
+    expect(matching).toBeTruthy();
+    expect(matching.props).toEqual({ foo: 'bar' });
+  });
+
   it('homepageView fires once per session, not per call', () => {
     Funnel.homepageView();
     Funnel.homepageView();
