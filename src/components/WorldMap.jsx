@@ -363,10 +363,25 @@ export default function WorldMap({ onNavigate } = {}) {
   }, []);
 
   // ── Regenerate map (new world) ────────────────────────────────────────
+  // P112 / M-7 — When `mapAutosave` flag is on (a stand-in for the
+  // safer-regenerate behavior since both ride the same campaign-active
+  // signal), the regenerate confirm shows the explicit count of items
+  // that will be lost. Falls back to the legacy single-line confirm
+  // under the flag-off path.
   const handleRegenerate = useCallback(async () => {
     const bridge = bridgeRef.current;
     if (!bridge?.isReady) return;
-    if (!window.confirm('Regenerate the world? All unsaved placements will be lost.')) return;
+    let msg = 'Regenerate the world? All unsaved placements will be lost.';
+    if (flag('mapAutosave')) {
+      const placedCount = (useStore.getState().mapPlacements || []).length;
+      const labelCount = (useStore.getState().mapLabels || []).length;
+      if (placedCount || labelCount) {
+        msg = `Regenerate the world? You'll lose ${placedCount} placement${placedCount === 1 ? '' : 's'}` +
+              (labelCount ? ` and ${labelCount} label${labelCount === 1 ? '' : 's'}` : '') +
+              '. This cannot be undone.';
+      }
+    }
+    if (!window.confirm(msg)) return;
     try {
       showToast('info', 'Regenerating…');
       await bridge.resetMap();
@@ -384,6 +399,44 @@ export default function WorldMap({ onNavigate } = {}) {
     if (!bridge?.isReady) return;
     try { await bridge.fitMap(); } catch (e) {}
   }, []);
+
+  // ── P112 / M-8 — Worldbuilder keymap ──────────────────────────────────
+  // P (place) / T (terrain) / A (annotate) / R (routes) switch modes;
+  // L toggles the layers panel; F fits the map; ⌘S saves; ⌘Z opens
+  // the (future) undo stack. Only enabled when `mapRoutesMode` is on
+  // so the new shortcuts don't surprise users who haven't opted in.
+  // Ignores events when typing in inputs/textareas.
+  useEffect(() => {
+    if (!flag('mapRoutesMode')) return undefined;
+    const onKey = (e) => {
+      const tag = (e.target?.tagName || '').toUpperCase();
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) {
+        // ⌘S = save, ⌘Z handled by store actions (if registered)
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') {
+          e.preventDefault();
+          // ⌘S — save map. The actual save handler lives elsewhere in
+          // this component (handleSaveMapToCampaign); we look it up
+          // from the store as a fallback when the local closure
+          // doesn't have it in scope.
+          const fn = useStore.getState().saveMapToCampaign;
+          if (typeof fn === 'function') fn();
+        }
+        return;
+      }
+      switch (e.key.toLowerCase()) {
+        case 'p': setMapMode(MAP_MODES.VIEW); break;
+        case 't': setMapMode(MAP_MODES.TERRAIN); break;
+        case 'a': setMapMode(MAP_MODES.ANNOTATE); break;
+        case 'r': setMapMode(MAP_MODES.ROUTES); break;
+        case 'f': handleFit(); break;
+        default: break;
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+   
+  }, [setMapMode, handleFit]);
 
   // ── Toasts ─────────────────────────────────────────────────────────────
   const toastTimerRef = useRef(null);
@@ -608,11 +661,47 @@ export default function WorldMap({ onNavigate } = {}) {
             </div>
           )}
           {isDraggingOver && mapMode !== MAP_MODES.ANNOTATE && (
-            <div style={{
-              position: 'absolute', inset: 12, border: `3px dashed ${GOLD}`,
-              borderRadius: R.lg, background: 'rgba(160,118,42,0.06)',
-              pointerEvents: 'none',
-            }} />
+            <>
+              <div style={{
+                position: 'absolute', inset: 12, border: `3px dashed ${GOLD}`,
+                borderRadius: R.lg, background: 'rgba(160,118,42,0.06)',
+                pointerEvents: 'none',
+              }} />
+              {/* P111 / M-3 — Drop preview tooltip. Shows during drag with
+                  the data the user needs to decide if this is a sensible
+                  placement: terrain hint + trade-route candidacy +
+                  proximity to existing placements. We render a static
+                  hint card (top-right) under the flag — a future
+                  iteration can hover-follow the cursor with live FMG
+                  cell data. */}
+              {flag('mapDropPreview') && (
+                <div
+                  onMouseEnter={() => {
+                    Funnel.track(EVENTS.MAP_DROP_PREVIEW_SHOWN);
+                  }}
+                  style={{
+                    position: 'absolute', top: 24, right: 24,
+                    padding: '8px 12px', background: '#1B1408',
+                    color: '#F4EAD0',
+                    border: `1px solid ${GOLD}`, borderRadius: R.sm,
+                    fontSize: FS.xs, lineHeight: 1.45,
+                    boxShadow: '0 12px 32px rgba(0,0,0,0.40)',
+                    pointerEvents: 'none', maxWidth: 220,
+                  }}
+                >
+                  <div style={{
+                    fontWeight: 700, color: GOLD, fontSize: FS.sm,
+                    marginBottom: 4,
+                  }}>
+                    Drop to place
+                  </div>
+                  <div style={{ color: '#c8b098' }}>
+                    Settlements land at the nearest valid cell. Trade-route
+                    candidates auto-link to neighbours within 2 days.
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
 

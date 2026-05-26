@@ -22,6 +22,7 @@
 import js from '@eslint/js';
 import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
+import visualBudget from './scripts/eslint-plugin-visual-budget.js';
 
 // eslint-plugin-react doesn't yet support ESLint 10's flat-config
 // resolver (throws on contextOrFilename.getFilename). We drop it and
@@ -55,6 +56,7 @@ export default [
     },
     plugins: {
       'react-hooks': reactHooks,
+      'visual-budget': visualBudget,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -99,6 +101,15 @@ export default [
       'no-prototype-builtins': 'warn',
       'no-useless-escape': 'warn',
       'no-case-declarations': 'warn',
+
+      // ── P120 / V-1 V-2 V-5 — Visual budget guardrails ────────────────
+      // Three local rules surface design-system drift without blocking
+      // CI. They warn (not error) because the codebase has legitimate
+      // legacy violations to migrate organically. Promote to error once
+      // the count hits zero.
+      'visual-budget/no-raw-fontsize':   'warn',
+      'visual-budget/no-raw-color':      'warn',
+      'visual-budget/no-raw-button-copy': 'warn',
     },
   },
 

@@ -32,10 +32,10 @@ notes. Updated as phases ship.
 | P106 | E-1 — Inline edits on dossier | **partial** | Substrate ready (pending-queue, commit, revert). Click-to-edit primitives on individual fields still pending — requires per-field EditableText surface upgrades. |
 | P107 | CP-2 — Workshop nav | **shipped (flag-off)** | Top-level nav entry + route added. Component exists. Flag: `workshopNav`. |
 | P108 | E-6 — Library search | **shipped (flag-off)** | `LibraryToolbar.jsx` + pure `applyLibraryFilters()` pipeline + 11 contract tests. Search across name/tier/NPCs/factions; sort by recent/name/tier; filter chips for canon-only and has-neighbours. Mounted in SettlementsPanel. Flag: `librarySearch`. |
-| P109 | E-5 — Version history | **pending** | Per-settlement timeline + diff + revert. Cartographer-gated. Substrate (`campaignState.editedAt`/`canonizedAt`) is already present. |
+| P109 | E-5 — Version history | **shipped (flag-off)** | `VersionsTab.jsx` + pure `buildVersionTimeline()` + 6 contract tests. Timeline derived from `campaignState.editedAt/canonizedAt/lastExportAt` + explicit `versionHistory[]`. Cartographer-gated; wanderer/free users see a locked-state preview with upgrade pitch. Revert UI ready (two-click confirm); the actual snapshot+revert mutation wiring is the next iteration. Flag: `versionHistory`. |
 | P110 | M-4 — Routes mode | **shipped (flag-off)** | `MAP_MODES.ROUTES` added. ModeSwitch renders the new pill when `mapRoutesMode` flag is on. Existing RelationshipEdges + RoadsLayer + ChainEdges layers ready for promotion to primary content. |
-| P111 | M-3 — Map drop preview | **pending** | Hover-tooltip during drag with terrain + trade-route context. |
-| P112 | M-5/M-7/M-8 — Map polish | **pending** | Auto-save, inline regen confirm, keymap. |
+| P111 | M-3 — Map drop preview | **shipped (flag-off)** | Static drop-preview card surfaces during drag in WorldMap. Hints at terrain + trade-route candidacy. Flag: `mapDropPreview`. Future iteration: hover-follow with live FMG cell data. |
+| P112 | M-5/M-7/M-8 — Map polish | **shipped (flag-off)** | M-7: regenerate confirm now shows explicit placement+label loss counts (flag-on path). M-8: P/T/A/R/F keymap + ⌘S save shortcut wired when `mapRoutesMode` flag is on. M-5 auto-save: substrate ready; UI status chip pending. |
 
 ## Wave 4 — Conversion refinement
 
@@ -53,7 +53,7 @@ notes. Updated as phases ship.
 | P117 | H-1 — Hero v2 (two-voice) | **shipped (flag-off)** | `HomeHero.jsx` carries both legacy + v2 paths. Anti-AI line as H1, italic deck translation, flat gold CTA. Flag: `heroV2`. |
 | P118 | O-1/O-2 — Onboarding diet + first-dossier callouts | **partial (flag-off)** | OnboardingCoach overlay suppressed when `onboardingDiet` flag is on. FirstDossierCallouts component still pending (separate flag). |
 | P119 | W-1 — Wizard chrome diet | **shipped (flag-off)** | `GenerateWizard.jsx` collapses ChangeModeBar + 2 banners into one chip row when flag is on. Flag: `wizardChromeDiet`. |
-| P120 | V-1/V-2/V-5 — Visual budget pass | **pending** | Token tiering + ESLint rules `no-raw-fontsize` / `no-raw-color`. |
+| P120 | V-1/V-2/V-5 — Visual budget pass | **shipped (warn-only)** | Local ESLint plugin `scripts/eslint-plugin-visual-budget.js` with three rules: `no-raw-fontsize` (catches `fontSize: 11` literals), `no-raw-color` (catches `color: '#XXXXXX'` literals), `no-raw-button-copy` (catches inline `Generate/Reroll/Save/...` button text). 2,598 existing violations surface as warnings — the size of the design-system debt the critique flagged. Cleanup is organic; promote to error once count hits zero. |
 | P121 | D-4 — Narrative Layer strip | **shipped (flag-off)** | When `narrativeLayerStrip` flag is on, narrative buttons move out of dossier header into a labeled violet-accented strip below: "Narrative Layer · AI prose pass" + explainer + buttons. Flag-off path keeps the legacy header-button cluster. |
 | P122 | X-10 — Audience-led pricing copy | **shipped** | `PricingPage.jsx` reads `useCopy().audience('pricingPitch.{tier}.line')`. Flag: `audiencePricingCopy`. |
 | P123 | A-2 — Mobile chrome reconciliation | **shipped (flag-off)** | When `mobileSingleChrome` flag is on, mobile top header is suppressed; auth chip joins bottom nav as a 6th slot (icon + label, gold for anon / green for signed-in). Frees ~52px on every mobile screen. |
