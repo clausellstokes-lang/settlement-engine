@@ -11,6 +11,8 @@ const generateCampaignPDF = (...args) =>
 import {GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_} from './theme.js';
 import { useStore } from '../store/index.js';
 import { saves as savesService } from '../lib/saves.js';
+import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
+import { flag as _pe_flag } from '../lib/flags.js';
 import SettlementDetail from './SettlementDetail';
 import DeleteConfirmation from './DeleteConfirmation';
 import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../data/sampleSettlements.js';
@@ -672,6 +674,21 @@ export default function SettlementsPanel({ onNavigate }) {
 
   const unassignedSaves = useMemo(() => saves.filter(s => !assignedIds.has(s.id)), [saves, assignedIds]);
 
+  // P108 / E-6 — Library search + sort + filter state. Self-contained
+  // here; LibraryToolbar is a controlled component. The filter pipeline
+  // (applyLibraryFilters) is a pure function over the saves array.
+  const [libraryQuery, setLibraryQuery] = useState('');
+  const [librarySort, setLibrarySort] = useState('recent');
+  const [libraryFilters, setLibraryFilters] = useState({});
+  const filteredSaves = useMemo(() => {
+    if (!_pe_flag('librarySearch')) return saves;
+    return _applyLibraryFilters(saves, {
+      query: libraryQuery,
+      sort: librarySort,
+      filters: libraryFilters,
+    });
+  }, [saves, libraryQuery, librarySort, libraryFilters]);
+
   const onViewSettlement = (s) => setDetail({ ...s, saveData: s });
 
   // ── Detail view ─────────────────────────────────────────────────────────
@@ -688,6 +705,20 @@ export default function SettlementsPanel({ onNavigate }) {
   // ── List view ───────────────────────────────────────────────────────────
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+
+      {/* P108 / E-6 — Library toolbar (search + sort + filter chips). Flag-gated. */}
+      {_pe_flag('librarySearch') && saves.length > 0 && (
+        <LibraryToolbar
+          query={libraryQuery}
+          setQuery={setLibraryQuery}
+          sort={librarySort}
+          setSort={setLibrarySort}
+          filters={libraryFilters}
+          setFilters={setLibraryFilters}
+          totalCount={saves.length}
+          visibleCount={filteredSaves.length}
+        />
+      )}
 
       {/* Save current settlement */}
       <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8, padding:'12px 14px' }}>

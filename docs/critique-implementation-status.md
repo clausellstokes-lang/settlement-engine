@@ -31,8 +31,8 @@ notes. Updated as phases ship.
 | P105 | E-2 — Pending edits drawer + cascade preview | **shipped (flag-off)** | `domain/pendingEdits.js` (queue + previewCascade) + 16 contract tests. Store wires `queueEdit / revertPendingEdits / commitPendingEdits`. `PendingChangesBar.jsx` + `CascadePreviewPanel.jsx` mounted in OutputContainer. Flag: `inlineEdit`. |
 | P106 | E-1 — Inline edits on dossier | **partial** | Substrate ready (pending-queue, commit, revert). Click-to-edit primitives on individual fields still pending — requires per-field EditableText surface upgrades. |
 | P107 | CP-2 — Workshop nav | **shipped (flag-off)** | Top-level nav entry + route added. Component exists. Flag: `workshopNav`. |
-| P108 | E-6 — Library search | **pending** | `SettlementsPanel.jsx` upgrade. Search + sort + filter + bulk select. |
-| P109 | E-5 — Version history | **pending** | Per-settlement timeline + diff + revert. Cartographer-gated. |
+| P108 | E-6 — Library search | **shipped (flag-off)** | `LibraryToolbar.jsx` + pure `applyLibraryFilters()` pipeline + 11 contract tests. Search across name/tier/NPCs/factions; sort by recent/name/tier; filter chips for canon-only and has-neighbours. Mounted in SettlementsPanel. Flag: `librarySearch`. |
+| P109 | E-5 — Version history | **pending** | Per-settlement timeline + diff + revert. Cartographer-gated. Substrate (`campaignState.editedAt`/`canonizedAt`) is already present. |
 | P110 | M-4 — Routes mode | **shipped (flag-off)** | `MAP_MODES.ROUTES` added. ModeSwitch renders the new pill when `mapRoutesMode` flag is on. Existing RelationshipEdges + RoadsLayer + ChainEdges layers ready for promotion to primary content. |
 | P111 | M-3 — Map drop preview | **pending** | Hover-tooltip during drag with terrain + trade-route context. |
 | P112 | M-5/M-7/M-8 — Map polish | **pending** | Auto-save, inline regen confirm, keymap. |
@@ -54,9 +54,9 @@ notes. Updated as phases ship.
 | P118 | O-1/O-2 — Onboarding diet + first-dossier callouts | **partial (flag-off)** | OnboardingCoach overlay suppressed when `onboardingDiet` flag is on. FirstDossierCallouts component still pending (separate flag). |
 | P119 | W-1 — Wizard chrome diet | **shipped (flag-off)** | `GenerateWizard.jsx` collapses ChangeModeBar + 2 banners into one chip row when flag is on. Flag: `wizardChromeDiet`. |
 | P120 | V-1/V-2/V-5 — Visual budget pass | **pending** | Token tiering + ESLint rules `no-raw-fontsize` / `no-raw-color`. |
-| P121 | D-4 — Narrative Layer strip | **pending** | Lift `renderNarrativeButtons` out of header into labeled strip. |
+| P121 | D-4 — Narrative Layer strip | **shipped (flag-off)** | When `narrativeLayerStrip` flag is on, narrative buttons move out of dossier header into a labeled violet-accented strip below: "Narrative Layer · AI prose pass" + explainer + buttons. Flag-off path keeps the legacy header-button cluster. |
 | P122 | X-10 — Audience-led pricing copy | **shipped** | `PricingPage.jsx` reads `useCopy().audience('pricingPitch.{tier}.line')`. Flag: `audiencePricingCopy`. |
-| P123 | A-2 — Mobile chrome reconciliation | **pending** | Drop top header; auth chip in bottom nav. |
+| P123 | A-2 — Mobile chrome reconciliation | **shipped (flag-off)** | When `mobileSingleChrome` flag is on, mobile top header is suppressed; auth chip joins bottom nav as a 6th slot (icon + label, gold for anon / green for signed-in). Frees ~52px on every mobile screen. |
 | P124 | C-1 — Verb unification | **shipped** | `COPY.generate.*` updated: "Generate Draft" → "Forge a Draft", "Regenerate Draft" → "Reforge Draft". Verb registry in `copy.verbs.*` for new components. Component sweep mostly done at the copy layer (components read `COPY.generate.*.cta`). |
 | P125 | AC-1/AC-2 — Account upgrade footers | **shipped** | Hardcoded `credits_5/15/40` array swapped for `getActivePacks()` (honors `packsRepriced` flag). Per-card unlock footers on Tier / Credits / Saves cards for free users. Gated by `inlineUpgrade` flag. |
 
@@ -64,8 +64,8 @@ notes. Updated as phases ship.
 
 | Phase | Critique | Status | Notes |
 |---|---|---|---|
-| P126 | CP-1/HT-1 — Compendium inline help + How-To inversion | **pending** | HelpPopover on every config control. Quick Start inverted. |
-| P127 | CP-3/CP-4 — Compendium readability + anchors + search | **pending** | Single-column layout, anchor IDs, global type-ahead search. |
+| P126 | CP-1/HT-1 — Compendium inline help + How-To inversion | **shipped (flag-off)** | `HelpPopover.jsx` primitive with 6 topic hints (trade-route, terrain, culture, monster-threat, magic-level, tier). Drop-in `<HelpPopover topic="..." />` next to any control. Self-gates on `compendiumInlineHelp`. How-To inversion still pending. |
+| P127 | CP-3/CP-4 — Compendium readability + anchors + search | **partial** | Anchor URL handling shipped — Compendium honors `#trade-routes` etc. via `ANCHOR_TO_TAB` map + scroll-into-view effect. Single-column readability layout + global type-ahead search still pending. |
 
 ## Out-of-architecture additions
 

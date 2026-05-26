@@ -212,7 +212,12 @@ export default function App() {
           Uses the same ink → ink-deep gradient as the bottom nav so the
           top + bottom chrome read as one unified frame.
         */}
-        {isMobile && (
+        {/* P123 / A-2 — When `mobileSingleChrome` is on, drop the mobile
+            top header entirely. The bottom nav becomes the only chrome;
+            the auth chip lives there as a 6th slot (added below in the
+            bottom-nav block). Frees ~52px of vertical real estate on
+            every mobile screen — meaningful on a 640px viewport. */}
+        {isMobile && !_readFlag('mobileSingleChrome') && (
           <header style={{
             ...headerStyle,
             padding: `${SP.sm}px ${SP.md}px`,
@@ -494,7 +499,7 @@ export default function App() {
             boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
             paddingBottom: 'env(safe-area-inset-bottom)',
           }}>
-            {visibleNav.slice(0, 5).map(({ id, label, Icon }) => {
+            {visibleNav.slice(0, _readFlag('mobileSingleChrome') ? 4 : 5).map(({ id, label, Icon }) => {
               const active = view === id;
               return (
                 <button
@@ -519,6 +524,33 @@ export default function App() {
                 </button>
               );
             })}
+            {/* P123 / A-2 — Auth chip as 6th bottom-nav slot. Replaces
+                the dropped mobile top header. Icon-only, gold-outline
+                for anon, green-fill for signed-in. */}
+            {_readFlag('mobileSingleChrome') && (
+              <button
+                onClick={() => authTier === 'anon' ? setAuthModalOpen(true) : setView('account')}
+                aria-label={authTier === 'anon' ? 'Sign in' : 'Account'}
+                style={{
+                  flex: 1, display: 'flex', flexDirection: 'column',
+                  alignItems: 'center', justifyContent: 'center', gap: SP.xs,
+                  padding: `${SP.sm + 2}px ${SP.xs}px`,
+                  background: 'transparent',
+                  border: 'none',
+                  borderTop: view === 'account' ? `2px solid ${GOLD}` : '2px solid transparent',
+                  cursor: 'pointer',
+                  color: authTier === 'anon' ? GOLD : '#4A7A3A',
+                  fontSize: 9, fontWeight: 700,
+                  fontFamily: sans,
+                  letterSpacing: '0.04em', textTransform: 'uppercase',
+                }}
+              >
+                <User size={18} />
+                <span style={{ lineHeight: 1 }}>
+                  {authTier === 'anon' ? 'Sign in' : 'Account'}
+                </span>
+              </button>
+            )}
           </div>
         )}
       </div>

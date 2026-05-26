@@ -419,6 +419,35 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           style: { display: 'flex', alignItems: 'center', gap: 5, padding: '6px 14px', borderRadius: 5, background: 'rgba(196,154,60,0.15)', border: '1px solid rgba(196,154,60,0.3)', color: '#c49a3c', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }
         }, React.createElement(RefreshCw, { size: 12 }), ' ', REROLLABLE[activeTab]),
         // ── AI Narrative Layer button group ──────────────────────────────────
+        // P121 / D-4 — When `narrativeLayerStrip` flag is on, the
+        // narrative buttons move out of the header into a labeled strip
+        // below (rendered further down). The header remains lean. When
+        // the flag is off, the legacy header-button cluster renders.
+        !flag('narrativeLayerStrip') && renderNarrativeButtons()
+      ),
+      // P121 — Labeled narrative-layer strip. Below the header, above
+      // the tab strip. Lives in its own card with title + cost pill +
+      // single primary action. The renderNarrativeButtons() output
+      // sits inside the strip; the buttons themselves are unchanged.
+      flag('narrativeLayerStrip') && !readOnly && React.createElement('div', {
+        style: {
+          margin: '8px 18px',
+          padding: '10px 12px',
+          background: 'linear-gradient(135deg, rgba(123,79,207,0.05), rgba(123,79,207,0.02))',
+          border: '1px solid rgba(123,79,207,0.30)',
+          borderLeft: '3px solid rgba(123,79,207,0.70)',
+          borderRadius: 5,
+          display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap',
+        }
+      },
+        React.createElement('div', { style: { flex: 1, minWidth: 0 } },
+          React.createElement('div', {
+            style: { fontSize: 9, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7B4FCF' }
+          }, 'Narrative Layer · AI prose pass'),
+          React.createElement('div', {
+            style: { fontSize: 11, color: '#4A3B22', marginTop: 2, lineHeight: 1.4 }
+          }, 'Refines the simulated dossier into prose your players can hear.')
+        ),
         renderNarrativeButtons()
       ),
       // Owner / visitor actions strip — share-to-gallery (owners) and

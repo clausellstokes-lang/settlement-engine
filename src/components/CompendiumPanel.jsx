@@ -50,6 +50,29 @@ const TABS = [
   { id:'institutions',label:'Institutions',       Icon: Building2 },
 ];
 
+// P127 / CP-3 — Anchor → tab map. HelpPopover and external deep-links
+// land at URL hashes like `#trade-routes` or `#magic`. The hash maps
+// to a Compendium tab; once that tab mounts, the matching DOM `id`
+// inside the tab is scrolled into view by the effect in
+// CompendiumPanel. Adding a new anchor: add an entry here + ensure
+// the tab content renders `id="<anchor>"` on the target section.
+const ANCHOR_TO_TAB = Object.freeze({
+  'tiers':        'tiers',
+  'trade-routes': 'tiers',
+  'terrain':      'tiers',
+  'economy':      'economy',
+  'exports':      'economy',
+  'power':        'power',
+  'archetypes':   'power',
+  'magic':        'arcane',
+  'cultures':     'arcane',
+  'religion':     'arcane',
+  'stress':       'stress',
+  'threat':       'stress',
+  'neighbours':   'neighbour',
+  'institutions': 'institutions',
+});
+
 const REL_TYPES = [
   { id:'trade_partner',label:'Trade Partner',color:'#1a5a28',effect:'Exports shift toward what the neighbour imports. Supply chains partially share. Complements rather than competes.' },
   { id:'allied',       label:'Allied',       color:'#1a3a7a',effect:'Military and economic cooperation. Elevated garrison institutions and shared defense logic on both sides.' },
@@ -816,13 +839,41 @@ export default function CompendiumPanel({ config, standalone=false }) {
   const [mode, setMode] = useState('catalog'); // 'catalog' | 'custom'
   // Honor a ?tab=foo deep-link on mount so search-engine landing pages
   // open the right section. Falls back to 'tiers' when missing/invalid.
+  //
+  // P127 / CP-3 — Also honor URL hash anchors (#trade-routes etc.) so
+  // the HelpPopover's "Read full reference →" links can deep-link
+  // into a specific section. We map the hash to the matching tab via
+  // ANCHOR_TO_TAB below; if the hash doesn't match a known anchor, we
+  // ignore it and respect ?tab= instead.
   const initialTab = (() => {
     if (typeof window === 'undefined') return 'tiers';
     const params = new URLSearchParams(window.location.search);
     const t = params.get('tab');
-    return TAB_META[t] ? t : 'tiers';
+    if (TAB_META[t]) return t;
+    const hash = (window.location.hash || '').replace(/^#/, '');
+    const fromHash = ANCHOR_TO_TAB[hash];
+    if (fromHash) return fromHash;
+    return 'tiers';
   })();
   const [activeTab, setActiveTab] = useState(initialTab);
+
+  // P127 / CP-3 — Scroll-to-anchor on mount when a hash points into a
+  // specific section. The DOM IDs are stamped onto each section by the
+  // tab renderers; here we just trigger the scroll once content is in
+  // the DOM. Re-runs on tab change so cross-tab anchors work.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const hash = (window.location.hash || '').replace(/^#/, '');
+    if (!hash) return;
+    // Small delay so the tab content has time to mount.
+    const id = setTimeout(() => {
+      const el = document.getElementById(hash);
+      if (el && typeof el.scrollIntoView === 'function') {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 120);
+    return () => clearTimeout(id);
+  }, [activeTab]);
   const [search, setSearch] = useState('');
   const customContentCount = useStore(s => s.getCustomContentCount());
 
