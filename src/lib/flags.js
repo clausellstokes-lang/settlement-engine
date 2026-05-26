@@ -177,6 +177,10 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'P118 / O-2: three teaching callouts on a first-time user\'s first dossier.',
   },
+  onboardingDiet: {
+    default: false,
+    description: 'P118 / O-1: collapse the 4-system onboarding pile-up to Checklist + first-dossier callouts only. Suppresses OnboardingCoach + nudge toast when on.',
+  },
   wizardChromeDiet: {
     default: false,
     description: 'P119 / W-1: collapse 7 wizard chrome rows into one combined header.',

@@ -15,6 +15,9 @@ import { Funnel, EVENTS } from '../lib/analytics.js';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
+// P106 / E-2 — Pending changes drawer (queue + cascade preview).
+// Self-gates inside on flag + pending queue presence.
+const PendingChangesBar = lazy(() => import('./dossier/PendingChangesBar.jsx'));
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
@@ -442,6 +445,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // still has an unspent kind='welcome' entry.
       !readOnly && React.createElement(Suspense, { fallback: null },
         React.createElement(WelcomeCreditCard)
+      ),
+      // P106 / E-2 — Pending changes bar + cascade preview. Self-gates
+      // inside; renders nothing when no edits are queued.
+      !readOnly && React.createElement(Suspense, { fallback: null },
+        React.createElement(PendingChangesBar)
       ),
       // P102 / D-1 — Five thematic group tab strip. Renders only when
       // the dossierFiveTabs flag is on. Clicking a group selects its

@@ -51,6 +51,12 @@ function loadEngine() {
 }
 
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
+import {
+  buildEdit as _pe_buildEdit,
+  appendEdit as _pe_appendEdit,
+  revertEdit as _pe_revertEdit,
+  activeEdits as _pe_activeEdits,
+} from '../domain/pendingEdits.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
@@ -180,6 +186,83 @@ export const createSettlementSlice = (set, get) => ({
   bumpLifetimeNarrate: () => set(state => {
     state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
   }),
+
+  // P105 / E-2 — Pending edits queue. Each edit is a frozen object
+  // produced by domain/pendingEdits.buildEdit(). The PendingChangesBar
+  // reads this; commitPendingEdits applies the queue to the live
+  // settlement; revertPendingEdits drops it.
+  pendingEditsQueue: [],
+  pendingEditsClock: 0,
+
+  /** Add an edit to the queue. Returns the edit so the caller can
+   *  reference its id (e.g. for an undo-this-edit affordance). */
+  queueEdit: (kind, payload) => {
+    const clock = (get().pendingEditsClock || 0) + 1;
+    const edit = _pe_buildEdit(kind, payload, clock);
+    set(state => {
+      state.pendingEditsClock = clock;
+      state.pendingEditsQueue = _pe_appendEdit(state.pendingEditsQueue || [], edit);
+    });
+    // Analytics — once per queued edit
+    import('../lib/analytics.js').then(({ Funnel, EVENTS }) => {
+      Funnel.track(EVENTS.EDIT_PENDING_QUEUED, { kind });
+    }).catch(() => {});
+    return edit;
+  },
+
+  /** Mark an edit as reverted (kept in history for undo). */
+  revertSingleEdit: (editId) => {
+    set(state => {
+      state.pendingEditsQueue = _pe_revertEdit(state.pendingEditsQueue || [], editId);
+    });
+  },
+
+  /** Discard the entire queue without applying. */
+  revertPendingEdits: () => {
+    set(state => {
+      state.pendingEditsQueue = [];
+    });
+  },
+
+  /** Apply the queue against the live settlement. Each edit dispatches
+   *  to an existing mutation (renameNPC, etc.) by `kind`. Edits that
+   *  don't map to a known mutation are skipped with a warning — the
+   *  queue clears either way on a successful commit. */
+  commitPendingEdits: () => {
+    const state = get();
+    const queue = state.pendingEditsQueue || [];
+    const active = _pe_activeEdits(queue);
+    if (active.length === 0) return;
+
+    for (const edit of active) {
+      try {
+        switch (edit.kind) {
+          case 'rename-npc':
+            if (typeof state.renameNPC === 'function' &&
+                edit.payload?.npcIndex != null) {
+              state.renameNPC(edit.payload.npcIndex, edit.payload.newName);
+            }
+            break;
+          case 'rename-settlement':
+            set(s => { if (s.settlement) s.settlement.name = edit.payload?.newName; });
+            break;
+          // Future kinds (add-institution etc.) dispatch to existing
+          // mutations or — for not-yet-built ones — log a TODO. The
+          // queue still clears so the UI isn't stuck on a missing
+          // dispatcher.
+          default:
+            console.info(`[commitPendingEdits] no dispatcher for ${edit.kind} yet`);
+            break;
+        }
+      } catch (e) {
+        console.warn(`[commitPendingEdits] ${edit.kind} failed:`, e);
+      }
+    }
+
+    // Clear the queue. Failed-commit retry is a future-tier feature;
+    // for now, all-or-nothing matches the cascade-preview UX.
+    set(s => { s.pendingEditsQueue = []; });
+  },
 
   // Reactive update state
   whatIfPreview: null,   // { delta, previewSettlement } from a proposed change

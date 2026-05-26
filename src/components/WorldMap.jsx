@@ -15,8 +15,10 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import {
-  FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, _X, _Pin, Layers, Loader, Map as MapIcon, Globe,
+  FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, _X, _Pin, Layers, Loader, Map as MapIcon, Globe, Link as LinkIcon,
 } from 'lucide-react';
+import { flag } from '../lib/flags.js';
+import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useStore } from '../store/index.js';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
 import { MAP_MODES } from '../store/mapSlice.js';
@@ -648,11 +650,25 @@ export default function WorldMap({ onNavigate } = {}) {
 // ── Subcomponents ────────────────────────────────────────────────────────
 
 function ModeSwitch({ mapMode, setMapMode }) {
+  const routesEnabled = flag('mapRoutesMode');
+  // P110 / M-4 — Routes mode appended to the mode pill group. The
+  // existing mode pill is already segmented; this is one more entry.
+  // Click promotes relationship/road/supply-chain layers to primary
+  // content and fires MAP_ROUTES_MODE_ENTERED analytics.
   const modes = [
     { id: MAP_MODES.VIEW,     label: 'View',     Icon: Eye },
     { id: MAP_MODES.TERRAIN,  label: 'Terrain',  Icon: Mountain },
     { id: MAP_MODES.ANNOTATE, label: 'Annotate', Icon: PenTool },
+    ...(routesEnabled
+      ? [{ id: MAP_MODES.ROUTES, label: 'Routes', Icon: LinkIcon }]
+      : []),
   ];
+  const handleClick = (id) => {
+    setMapMode(id);
+    if (id === MAP_MODES.ROUTES) {
+      Funnel.track(EVENTS.MAP_ROUTES_MODE_ENTERED);
+    }
+  };
   return (
     <div style={{
       display: 'flex', gap: 2, padding: 2,
@@ -663,7 +679,7 @@ function ModeSwitch({ mapMode, setMapMode }) {
         return (
           <button
             key={m.id}
-            onClick={() => setMapMode(m.id)}
+            onClick={() => handleClick(m.id)}
             style={{
               display: 'flex', alignItems: 'center', gap: 5,
               padding: '5px 12px',

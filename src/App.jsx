@@ -393,7 +393,13 @@ export default function App() {
 
         {/* ── Main content ────────────────────────────────────── */}
         <main style={{ flex: 1, overflowY: 'auto', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
-          {view === 'generate' && <OnboardingCoach />}
+          {/* P118 / O-1 — Onboarding diet. When the `onboardingDiet`
+              flag is on, suppress the legacy OnboardingCoach (spotlight
+              overlay — flagged 2017 SaaS tic by the critique). The
+              OnboardingChecklist + first-dossier callouts (P118-pending)
+              become the only onboarding surfaces. Flag-off path keeps
+              the legacy behavior intact. */}
+          {view === 'generate' && !_readFlag('onboardingDiet') && <OnboardingCoach />}
           {/* Audit's onboarding fix: a 4-step task checklist that auto-
               ticks itself as the user completes lifecycle milestones
               (generate → save → canonize → event → export). Mounts on
@@ -571,7 +577,12 @@ export default function App() {
         </div>
       )}
 
-      {/* ── Onboarding nudge toast (post-tour tips) ───────────── */}
+      {/* ── Onboarding nudge toast (post-tour tips + intent toasts) ────
+          P118 NOTE: this channel is overloaded — authIntents.SAVE_SETTLEMENT
+          uses it to surface "Saved as {name}" after a signup-save flow.
+          The onboardingDiet flag should NOT suppress those. Only the
+          OnboardingCoach overlay is gated (above). If onboarding tips
+          ever become a problem, route them through a separate channel. */}
       {onboardingNudge && (
         <div
           onClick={clearOnboardingNudge}

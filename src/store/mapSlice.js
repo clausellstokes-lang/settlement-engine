@@ -17,6 +17,11 @@ export const MAP_MODES = {
   VIEW: 'view',
   TERRAIN: 'terrain',
   ANNOTATE: 'annotate',
+  // P110 / M-4 — Routes mode: relationship-first overlay. Forces
+  // RelationshipEdges + RoadsLayer + ChainEdges to full opacity,
+  // hides annotate UI, surfaces a network-stress alert when the
+  // supply-chain state has cascading impacts.
+  ROUTES: 'routes',
 };
 
 // Terrain tools that actually open a usable FMG editor when invoked from a

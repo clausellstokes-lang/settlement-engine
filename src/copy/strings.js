@@ -20,10 +20,16 @@
 
 export const COPY = {
   generate: {
-    quickMode:    { title: 'Quick Generate',    cta: 'Generate Draft', subtitle: 'Minimal config — set the foundations and go' },
-    advancedMode: { title: 'Advanced Generate', cta: 'Generate Draft', subtitle: 'Full configuration, step by step' },
-    customMode:   { title: 'Custom Generate',   cta: 'Build Draft',    subtitle: 'Power-user dashboard with every parameter exposed' },
-    regenerate:   { cta: 'Regenerate Draft',    confirm: 'Regenerate the world? All unsaved placements will be lost.' },
+    // P124 / C-1 — Verb unification. Forge (first generation) / Reforge
+    // (regenerate). Was: "Generate Draft" / "Regenerate Draft" — the
+    // critique flagged the verb chaos (Begin / Generate / Forge / Roll
+    // competing on the same surfaces). Now one verb per action class.
+    // "Draft" is still the artifact noun (draft → canon lifecycle is
+    // preserved); only the action verb changed.
+    quickMode:    { title: 'Basic Generate',    cta: 'Forge a Draft',  subtitle: 'Minimal config — set the foundations and go' },
+    advancedMode: { title: 'Advanced Generate', cta: 'Forge a Draft',  subtitle: 'Full configuration, step by step' },
+    customMode:   { title: 'Custom Generate',   cta: 'Forge a Draft',  subtitle: 'Power-user dashboard with every parameter exposed' },
+    regenerate:   { cta: 'Reforge Draft',       confirm: 'Reforge the settlement? All unsaved placements will be lost.' },
   },
 
   save: {

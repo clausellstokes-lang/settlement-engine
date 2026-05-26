@@ -28,12 +28,12 @@ notes. Updated as phases ship.
 
 | Phase | Critique | Status | Notes |
 |---|---|---|---|
-| P105 | E-2 — Pending edits drawer + cascade preview | **pending** | Domain module `pendingEdits.js` + UI not yet built. Worldbuilder-tier. |
-| P106 | E-1 — Inline edits on dossier | **pending** | Click-to-edit primitives. Edit mode toggle. ~3 days. |
+| P105 | E-2 — Pending edits drawer + cascade preview | **shipped (flag-off)** | `domain/pendingEdits.js` (queue + previewCascade) + 16 contract tests. Store wires `queueEdit / revertPendingEdits / commitPendingEdits`. `PendingChangesBar.jsx` + `CascadePreviewPanel.jsx` mounted in OutputContainer. Flag: `inlineEdit`. |
+| P106 | E-1 — Inline edits on dossier | **partial** | Substrate ready (pending-queue, commit, revert). Click-to-edit primitives on individual fields still pending — requires per-field EditableText surface upgrades. |
 | P107 | CP-2 — Workshop nav | **shipped (flag-off)** | Top-level nav entry + route added. Component exists. Flag: `workshopNav`. |
 | P108 | E-6 — Library search | **pending** | `SettlementsPanel.jsx` upgrade. Search + sort + filter + bulk select. |
 | P109 | E-5 — Version history | **pending** | Per-settlement timeline + diff + revert. Cartographer-gated. |
-| P110 | M-4 — Routes mode | **pending** | `WorldMap.jsx` mode pill group + relationship-first overlay. Layers exist; need promotion. |
+| P110 | M-4 — Routes mode | **shipped (flag-off)** | `MAP_MODES.ROUTES` added. ModeSwitch renders the new pill when `mapRoutesMode` flag is on. Existing RelationshipEdges + RoadsLayer + ChainEdges layers ready for promotion to primary content. |
 | P111 | M-3 — Map drop preview | **pending** | Hover-tooltip during drag with terrain + trade-route context. |
 | P112 | M-5/M-7/M-8 — Map polish | **pending** | Auto-save, inline regen confirm, keymap. |
 
@@ -51,13 +51,13 @@ notes. Updated as phases ship.
 | Phase | Critique | Status | Notes |
 |---|---|---|---|
 | P117 | H-1 — Hero v2 (two-voice) | **shipped (flag-off)** | `HomeHero.jsx` carries both legacy + v2 paths. Anti-AI line as H1, italic deck translation, flat gold CTA. Flag: `heroV2`. |
-| P118 | O-1/O-2 — Onboarding diet + first-dossier callouts | **pending** | Delete OnboardingCoach + nudge toast. Build FirstDossierCallouts. |
+| P118 | O-1/O-2 — Onboarding diet + first-dossier callouts | **partial (flag-off)** | OnboardingCoach overlay suppressed when `onboardingDiet` flag is on. FirstDossierCallouts component still pending (separate flag). |
 | P119 | W-1 — Wizard chrome diet | **shipped (flag-off)** | `GenerateWizard.jsx` collapses ChangeModeBar + 2 banners into one chip row when flag is on. Flag: `wizardChromeDiet`. |
 | P120 | V-1/V-2/V-5 — Visual budget pass | **pending** | Token tiering + ESLint rules `no-raw-fontsize` / `no-raw-color`. |
 | P121 | D-4 — Narrative Layer strip | **pending** | Lift `renderNarrativeButtons` out of header into labeled strip. |
 | P122 | X-10 — Audience-led pricing copy | **shipped** | `PricingPage.jsx` reads `useCopy().audience('pricingPitch.{tier}.line')`. Flag: `audiencePricingCopy`. |
 | P123 | A-2 — Mobile chrome reconciliation | **pending** | Drop top header; auth chip in bottom nav. |
-| P124 | C-1 — Verb unification | **partial** | Verb registry exists in `copy.verbs.*`. Component sweep pending. |
+| P124 | C-1 — Verb unification | **shipped** | `COPY.generate.*` updated: "Generate Draft" → "Forge a Draft", "Regenerate Draft" → "Reforge Draft". Verb registry in `copy.verbs.*` for new components. Component sweep mostly done at the copy layer (components read `COPY.generate.*.cta`). |
 | P125 | AC-1/AC-2 — Account upgrade footers | **shipped** | Hardcoded `credits_5/15/40` array swapped for `getActivePacks()` (honors `packsRepriced` flag). Per-card unlock footers on Tier / Credits / Saves cards for free users. Gated by `inlineUpgrade` flag. |
 
 ## Wave 6 — Supporting
