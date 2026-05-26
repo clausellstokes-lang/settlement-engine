@@ -16,9 +16,14 @@ import {
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { auth as authService } from '../lib/auth.js';
-import { startCheckout, PRODUCTS } from '../lib/stripe.js';
+import { startCheckout } from '../lib/stripe.js';
 import { isConfigured, supabase } from '../lib/supabase.js';
-import { getTierDisplayName } from '../config/pricing.js';
+import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
+import { flag } from '../lib/flags.js';
+import { lazy as _lazy, Suspense as _Suspense } from 'react';
+// P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
+// behavior. Self-gates inside; renders null for non-worldbuilder users.
+const FounderTile = _lazy(() => import('./pricing/FounderTile.jsx'));
 import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
@@ -221,53 +226,95 @@ export default function AccountPage({ onNavigateAdmin }) {
       {/* ── Subscription & Credits ──────────────────────────────── */}
       <Section title={t('account.subscriptionHeading')} icon={Crown}>
         <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
-          {/* Tier card */}
+          {/* Tier card — P125 / AC-1 grows an "unlock" footer for free users. */}
           <div style={{
-            flex: '1 1 180px', padding: SP.lg,
+            flex: '1 1 180px',
             background: GOLD_BG, borderRadius: R.lg,
             border: `1px solid rgba(160,118,42,0.2)`,
-            textAlign: 'center',
+            overflow: 'hidden',
           }}>
-            <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
-              {t('account.cardCurrentTier')}
+            <div style={{ padding: SP.lg, textAlign: 'center' }}>
+              <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+                {t('account.cardCurrentTier')}
+              </div>
+              <div style={{
+                fontSize: FS.xxl, fontWeight: 700, fontFamily: serif_,
+                color: isElevated ? '#7c3aed' : auth.tier === 'premium' ? '#2a7a2a' : GOLD,
+                textTransform: 'uppercase',
+              }}>
+                {isElevated ? t('account.fullAccess') : getTierDisplayName(auth.tier)}
+              </div>
             </div>
-            <div style={{
-              fontSize: FS.xxl, fontWeight: 700, fontFamily: serif_,
-              color: isElevated ? '#7c3aed' : auth.tier === 'premium' ? '#2a7a2a' : GOLD,
-              textTransform: 'uppercase',
-            }}>
-              {isElevated ? t('account.fullAccess') : getTierDisplayName(auth.tier)}
-            </div>
+            {flag('inlineUpgrade') && !isElevated && auth.tier !== 'premium' && (
+              <div style={{
+                padding: `${SP.sm}px ${SP.md}px`,
+                background: 'rgba(124,58,237,0.06)',
+                borderTop: '1px solid rgba(124,58,237,0.20)',
+                fontSize: FS.xs, color: '#3A2F18', lineHeight: 1.5,
+              }}>
+                <b style={{ color: '#7c3aed' }}>Cartographer unlocks:</b> every size,
+                unlimited saves, neighbours, AI prose pass.
+              </div>
+            )}
           </div>
 
-          {/* Credits card */}
+          {/* Credits card \u2014 grows "try Narrate" footer when balance is 0. */}
           <div style={{
-            flex: '1 1 180px', padding: SP.lg,
+            flex: '1 1 180px',
             background: 'rgba(124,58,237,0.06)', borderRadius: R.lg,
             border: '1px solid rgba(124,58,237,0.15)',
-            textAlign: 'center',
+            overflow: 'hidden',
           }}>
-            <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
-              {t('account.cardCredits')}
+            <div style={{ padding: SP.lg, textAlign: 'center' }}>
+              <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+                {t('account.cardCredits')}
+              </div>
+              <div style={{ fontSize: FS.xxl, fontWeight: 700, color: '#7c3aed' }}>
+                {isElevated ? '\u221E' : creditBalance}
+              </div>
             </div>
-            <div style={{ fontSize: FS.xxl, fontWeight: 700, color: '#7c3aed' }}>
-              {isElevated ? '\u221E' : creditBalance}
-            </div>
+            {flag('inlineUpgrade') && !isElevated && creditBalance === 0 && (
+              <div style={{
+                padding: `${SP.sm}px ${SP.md}px`,
+                background: 'rgba(124,58,237,0.10)',
+                borderTop: '1px solid rgba(124,58,237,0.25)',
+                fontSize: FS.xs, color: '#3A2F18', lineHeight: 1.5,
+              }}>
+                <b style={{ color: '#7c3aed' }}>Try Narrate.</b> Turn this town's data
+                into table-ready prose.{' '}
+                <span style={{ color: '#2a7a2a', fontWeight: 700 }}>First credit free.</span>
+              </div>
+            )}
           </div>
 
-          {/* Saves card */}
+          {/* Saves card \u2014 grows "one save left" / "saves full" footer. */}
           <div style={{
-            flex: '1 1 180px', padding: SP.lg,
+            flex: '1 1 180px',
             background: 'rgba(42,122,42,0.06)', borderRadius: R.lg,
             border: '1px solid rgba(42,122,42,0.15)',
-            textAlign: 'center',
+            overflow: 'hidden',
           }}>
-            <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
-              {t('account.cardSaves')}
+            <div style={{ padding: SP.lg, textAlign: 'center' }}>
+              <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+                {t('account.cardSaves')}
+              </div>
+              <div style={{ fontSize: FS.xxl, fontWeight: 700, color: '#2a7a2a' }}>
+                {savedSettlements.length} / {maxSaves === Infinity ? '\u221E' : maxSaves}
+              </div>
             </div>
-            <div style={{ fontSize: FS.xxl, fontWeight: 700, color: '#2a7a2a' }}>
-              {savedSettlements.length} / {maxSaves === Infinity ? '\u221E' : maxSaves}
-            </div>
+            {flag('inlineUpgrade') && !isElevated && maxSaves !== Infinity && savedSettlements.length >= maxSaves - 1 && (
+              <div style={{
+                padding: `${SP.sm}px ${SP.md}px`,
+                background: 'rgba(208,128,32,0.10)',
+                borderTop: '1px solid rgba(208,128,32,0.30)',
+                fontSize: FS.xs, color: '#3A2F18', lineHeight: 1.5,
+              }}>
+                <b style={{ color: '#D08020' }}>
+                  {savedSettlements.length >= maxSaves ? 'Saves full.' : 'One save left.'}
+                </b>{' '}
+                Cartographer = unlimited + cloud sync. Phone, laptop, table.
+              </div>
+            )}
           </div>
         </div>
 
@@ -293,10 +340,18 @@ export default function AccountPage({ onNavigateAdmin }) {
             )}
 
             <div style={{ display: 'flex', gap: SP.sm }}>
-              {['credits_5', 'credits_15', 'credits_40'].map(key => {
-                const p = PRODUCTS[key];
-                const isBest = key === 'credits_40';
-                const accent = isBest ? '#2a7a2a' : key === 'credits_15' ? GOLD : SECOND;
+              {/* P125 / AC-2 — Read packs from getActivePacks() so the
+                  `packsRepriced` flag wins. Hardcoded list was bypassing
+                  the flag and showing legacy 5/15/40 even when the new
+                  25/60/150 catalog was active. The pack record carries
+                  its own `tier` ('starter' | 'value' | 'best') — use
+                  that for accent color so a future repricing doesn't
+                  need a UI update. */}
+              {Object.values(getActivePacks()).map(p => {
+                const key = p.key;
+                const accent = p.tier === 'best'
+                  ? '#2a7a2a'
+                  : p.tier === 'value' ? GOLD : SECOND;
                 return (
                   <button key={key} onClick={() => handlePurchase(key)}
                     disabled={purchasing || !isConfigured}
@@ -324,6 +379,14 @@ export default function AccountPage({ onNavigateAdmin }) {
             </div>
           </div>
         )}
+
+        {/* P116 / X-8 — Founder Lifetime tile. Self-gates on
+            audience='worldbuilder' + flag + seats-remaining > 0.
+            Renders null for everyone else, so this is safe to mount
+            unconditionally here. */}
+        <_Suspense fallback={null}>
+          <FounderTile />
+        </_Suspense>
       </Section>
 
       {/* ── Customer Support ────────────────────────────────────── */}

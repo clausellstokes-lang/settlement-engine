@@ -509,14 +509,84 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
   const isAdvanced = wizardMode === 'advanced';
   const currentStepDef = STEPS[wizardStep] || STEPS[0];
 
+  // P119 / W-1 — Wizard chrome diet. When the flag is on, collapse the
+  // ChangeModeBar + two full-width banners into a single chip row. The
+  // step indicator + step hint banner also collapse into one combined
+  // header (rendered by the step content already).
+  const chromeDiet = flag('wizardChromeDiet');
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
-      {/* Change-mode bar (collapse after first generation) */}
-      {!settlement && <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />}
+      {/* Change-mode bar (collapse after first generation OR when diet is on) */}
+      {!settlement && !chromeDiet && <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />}
 
-      {/* Banners */}
-      {loadedFromSave && (
+      {/* P119 — Combined chip row when diet is on. A single max-32px-tall
+          strip with: an inline "Advanced ⇄ Quick" toggle, a config-loaded
+          chip, a neighbour-active chip. All three were previously full
+          banner rows; now they fit in one. */}
+      {chromeDiet && !settlement && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: SP.sm,
+          padding: `${SP.xs}px ${SP.sm}px`,
+          flexWrap: 'wrap', fontSize: FS.xs,
+        }}>
+          {wizardMode === 'advanced' && (
+            <button
+              onClick={() => setWizardMode('basic')}
+              style={{
+                padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
+                background: '#fff', border: `1px solid ${BORDER}`,
+                borderRadius: 12, color: SECOND,
+                cursor: 'pointer', fontFamily: sans,
+              }}
+            >
+              Switch to Basic →
+            </button>
+          )}
+          {loadedFromSave && (
+            <span style={{
+              padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
+              background: CARD_HDR, border: `1px solid ${BORDER}`,
+              borderRadius: 12, color: '#5a3a00',
+              display: 'inline-flex', alignItems: 'center', gap: 4,
+            }}>
+              📋 {loadedFromSave.name}
+              <button
+                onClick={clearLoadedFromSave}
+                style={{
+                  background: 'transparent', border: 'none',
+                  color: '#5a3a00', cursor: 'pointer', padding: 0,
+                  fontSize: 11, fontWeight: 700,
+                }}
+                aria-label="Clear loaded config"
+              >×</button>
+            </span>
+          )}
+          {importedNeighbour && (
+            <span style={{
+              padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
+              background: '#E2EEDB', border: '1px solid #4a8a60',
+              borderRadius: 12, color: '#1a5a28',
+              display: 'inline-flex', alignItems: 'center', gap: 4,
+            }}>
+              🌐 {importedNeighbour.name}
+              <button
+                onClick={clearNeighbour}
+                style={{
+                  background: 'transparent', border: 'none',
+                  color: '#1a5a28', cursor: 'pointer', padding: 0,
+                  fontSize: 11, fontWeight: 700,
+                }}
+                aria-label="Clear neighbour"
+              >×</button>
+            </span>
+          )}
+        </div>
+      )}
+
+      {/* Banners — only when the chrome diet is off (legacy path) */}
+      {!chromeDiet && loadedFromSave && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#fdf8ee', border: '2px solid #b8860b', borderRadius: 8, padding: '10px 14px' }}>
           <span style={{ fontSize: 16, flexShrink: 0 }}>&#128203;</span>
           <div style={{ flex: 1 }}>
@@ -527,7 +597,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
         </div>
       )}
 
-      {importedNeighbour && (
+      {!chromeDiet && importedNeighbour && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#f0faf2', border: '2px solid #4a8a60', borderRadius: 8, padding: '10px 14px' }}>
           <span style={{ fontSize: 16 }}>&#127760;</span>
           <div style={{ flex: 1 }}>

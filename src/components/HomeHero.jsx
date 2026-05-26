@@ -30,6 +30,7 @@ import {
 } from '../lib/anonGenCounter.js';
 import { Funnel } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
+import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import {
   GOLD, INK, _INK_DEEP, BODY, BORDER, _CARD, sans, serif_, SP, R, FS,
 } from './theme.js';
@@ -125,6 +126,16 @@ export default function HomeHero({ onSignIn }) {
   };
 
   return (
+    <>
+      {/* P115 / X-9 — Welcome-back card. Self-gates inside; renders
+          nothing for anons, first-visit signed-in users, or users
+          without a saved settlement. */}
+      {!isAnon && (
+        <WelcomeBackCard
+          onOpen={() => onSignIn /* placeholder — settlements nav handled by parent */}
+          onForge={() => {/* fall through to existing CTA */}}
+        />
+      )}
     <section
       aria-label={isAnon ? 'Anonymous settlement generator' : 'Welcome back — instant generator'}
       style={{
@@ -144,38 +155,62 @@ export default function HomeHero({ onSignIn }) {
           gets a short greeting + a "Pick a size, hit Generate" prompt.
       */}
       {isAnon ? (
-        <>
-          <div style={{
-            fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
-            textTransform: 'uppercase', color: '#8C6F32',
-            marginBottom: SP.sm,
-          }}>
-            {t('hero.eyebrow')}
-          </div>
-          <h1 style={{
-            margin: 0, fontFamily: serif_, fontWeight: 600,
-            fontSize: 32, color: INK, lineHeight: 1.15,
-          }}>
-            {t('hero.title')}
-          </h1>
-          <p style={{
-            margin: `${SP.md}px auto 0`, maxWidth: 520,
-            fontFamily: serif_, fontStyle: 'italic',
-            fontSize: FS.lg, color: '#4A3B22', lineHeight: 1.55,
-          }}>
-            {t('hero.subtitle')}
-          </p>
-          <p style={{
-            margin: `${SP.md}px auto 0`, maxWidth: 480,
-            padding: `${SP.xs}px ${SP.md}px`,
-            borderLeft: `2px solid ${GOLD}`,
-            fontFamily: sans, fontSize: FS.sm, color: '#5a4a2a',
-            lineHeight: 1.5, textAlign: 'left',
-            fontStyle: 'italic',
-          }}>
-            {t('hero.antiAi')}
-          </p>
-        </>
+        flag('heroV2') ? (
+          // P117 / H-1 — Two-voice hero rewrite. Anti-AI line as H1
+          // (worldbuilder hook); italic deck translates for the new DM
+          // ("the pieces explain each other"). Eyebrow + footer-signin +
+          // anti-AI quote block all removed — the H1 IS the anti-AI line.
+          <>
+            <h1 style={{
+              margin: 0, fontFamily: serif_, fontWeight: 600,
+              fontSize: 32, color: INK, lineHeight: 1.15,
+              letterSpacing: '-0.005em',
+            }}>
+              {t('hero.v2.headline')}<br />
+              <em style={{ color: '#8C6F32' }}>{t('hero.v2.headlineAccent')}</em>
+            </h1>
+            <p style={{
+              margin: `${SP.md}px auto 0`, maxWidth: 520,
+              fontFamily: serif_, fontStyle: 'italic',
+              fontSize: FS.lg, color: '#4A3B22', lineHeight: 1.55,
+            }}>
+              {t('hero.v2.deck')}
+            </p>
+          </>
+        ) : (
+          <>
+            <div style={{
+              fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
+              textTransform: 'uppercase', color: '#8C6F32',
+              marginBottom: SP.sm,
+            }}>
+              {t('hero.eyebrow')}
+            </div>
+            <h1 style={{
+              margin: 0, fontFamily: serif_, fontWeight: 600,
+              fontSize: 32, color: INK, lineHeight: 1.15,
+            }}>
+              {t('hero.title')}
+            </h1>
+            <p style={{
+              margin: `${SP.md}px auto 0`, maxWidth: 520,
+              fontFamily: serif_, fontStyle: 'italic',
+              fontSize: FS.lg, color: '#4A3B22', lineHeight: 1.55,
+            }}>
+              {t('hero.subtitle')}
+            </p>
+            <p style={{
+              margin: `${SP.md}px auto 0`, maxWidth: 480,
+              padding: `${SP.xs}px ${SP.md}px`,
+              borderLeft: `2px solid ${GOLD}`,
+              fontFamily: sans, fontSize: FS.sm, color: '#5a4a2a',
+              lineHeight: 1.5, textAlign: 'left',
+              fontStyle: 'italic',
+            }}>
+              {t('hero.antiAi')}
+            </p>
+          </>
+        )
       ) : (
         <>
           <div style={{
@@ -311,15 +346,23 @@ export default function HomeHero({ onSignIn }) {
               onClick={handleBegin}
               disabled={generating}
               style={{
+                // P117 / H-5 — flat CTA under heroV2; gradient legacy under
+                // the off-flag path. The gradient reads as 2018; flat
+                // gold-on-gold-700-bottom-edge is the modern read.
                 padding: `${SP.md + 2}px ${SP.xxl}px`,
-                background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
+                background: flag('heroV2')
+                  ? GOLD
+                  : `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
                 color: '#fff', border: 'none',
+                borderBottom: flag('heroV2') ? `2px solid #8C6F32` : 'none',
                 borderRadius: R.button,
                 fontFamily: serif_, fontWeight: 600,
                 fontSize: 20, letterSpacing: '0.02em',
                 cursor: generating ? 'wait' : 'pointer',
                 opacity: generating ? 0.7 : 1,
-                boxShadow: '0 4px 18px rgba(201,162,76,0.45)',
+                boxShadow: flag('heroV2')
+                  ? '0 2px 0 rgba(140,111,50,0.25)'
+                  : '0 4px 18px rgba(201,162,76,0.45)',
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 transition: 'transform 0.1s',
               }}
@@ -327,7 +370,11 @@ export default function HomeHero({ onSignIn }) {
               <Sparkles size={18} />
               {generating
                 ? 'Forging…'
-                : isAnon ? t('hero.cta') : `Generate a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
+                : flag('heroV2') && isAnon
+                  ? t('hero.v2.ctaTemplate', { tier: t(`generate.sizes.${pickedSize}`).toLowerCase() })
+                  : isAnon
+                    ? t('hero.cta')
+                    : `Generate a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
               {!generating && <ArrowRight size={16} />}
             </button>
             {isAnon && (
@@ -380,5 +427,6 @@ export default function HomeHero({ onSignIn }) {
         background: `linear-gradient(to right, transparent, ${BORDER}, transparent)`,
       }} />
     </section>
+    </>
   );
 }

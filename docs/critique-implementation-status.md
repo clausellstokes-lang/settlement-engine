@@ -43,22 +43,22 @@ notes. Updated as phases ship.
 |---|---|---|---|
 | P113 | X-5 — Anon cap as unlock | **shipped** | `HomeHero.jsx` reframed cap-state. Flag: `anonCapUnlock`. |
 | P114 | X-7 — Inline upgrade prompts | **partial** | The PricingMomentCard from P103 handles this. Locked-state pages for Map/Neighbour wanderer = pending. |
-| P115 | X-9 — Return-visit personalization | **pending** | `useReturnVisit()` hook, welcome-back hero variant, email sequence. |
-| P116 | X-8 — Founder Lifetime recognition | **pending** | Audience-gated tile. Founder moment copy exists; tile UI not yet. |
+| P115 | X-9 — Return-visit personalization | **shipped (flag-off)** | `useReturnVisit()` hook + `WelcomeBackCard.jsx` mounted in HomeHero. Email sequence still uses existing Resend wiring. Flag: `welcomeBack`. |
+| P116 | X-8 — Founder Lifetime recognition | **shipped (flag-off)** | `FounderTile.jsx`, audience-gated to worldbuilder via useReaderAudience. Live seat counter from existing RPC. Mounted in AccountPage. Flag: `founderRecognition`. |
 
 ## Wave 5 — Surface refinement
 
 | Phase | Critique | Status | Notes |
 |---|---|---|---|
-| P117 | H-1 — Hero v2 (two-voice) | **pending** | Copy lives at `hero.v2.*` in `en.js`. Component swap pending behind `heroV2` flag. |
+| P117 | H-1 — Hero v2 (two-voice) | **shipped (flag-off)** | `HomeHero.jsx` carries both legacy + v2 paths. Anti-AI line as H1, italic deck translation, flat gold CTA. Flag: `heroV2`. |
 | P118 | O-1/O-2 — Onboarding diet + first-dossier callouts | **pending** | Delete OnboardingCoach + nudge toast. Build FirstDossierCallouts. |
-| P119 | W-1 — Wizard chrome diet | **pending** | Collapse 7 chrome rows into 1 header. Flag: `wizardChromeDiet`. |
+| P119 | W-1 — Wizard chrome diet | **shipped (flag-off)** | `GenerateWizard.jsx` collapses ChangeModeBar + 2 banners into one chip row when flag is on. Flag: `wizardChromeDiet`. |
 | P120 | V-1/V-2/V-5 — Visual budget pass | **pending** | Token tiering + ESLint rules `no-raw-fontsize` / `no-raw-color`. |
 | P121 | D-4 — Narrative Layer strip | **pending** | Lift `renderNarrativeButtons` out of header into labeled strip. |
 | P122 | X-10 — Audience-led pricing copy | **shipped** | `PricingPage.jsx` reads `useCopy().audience('pricingPitch.{tier}.line')`. Flag: `audiencePricingCopy`. |
 | P123 | A-2 — Mobile chrome reconciliation | **pending** | Drop top header; auth chip in bottom nav. |
 | P124 | C-1 — Verb unification | **partial** | Verb registry exists in `copy.verbs.*`. Component sweep pending. |
-| P125 | AC-1/AC-2 — Account upgrade footers | **pending** | + hardcoded packs fix (1 hour). |
+| P125 | AC-1/AC-2 — Account upgrade footers | **shipped** | Hardcoded `credits_5/15/40` array swapped for `getActivePacks()` (honors `packsRepriced` flag). Per-card unlock footers on Tier / Credits / Saves cards for free users. Gated by `inlineUpgrade` flag. |
 
 ## Wave 6 — Supporting
 
