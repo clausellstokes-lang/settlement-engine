@@ -29,6 +29,9 @@ const MapOverlay     = lazy(() => import('./MapOverlay.jsx'));
 const PlacementDetailCard = lazy(() => import('./map/PlacementDetailCard.jsx'));
 const AnnotateToolbar = lazy(() => import('./map/AnnotateToolbar.jsx'));
 const TerrainToolbar  = lazy(() => import('./map/TerrainToolbar.jsx'));
+// P132 / M-4 promote — Routes mode contextual toolbar. Lazy because
+// terrain/annotate users never need it.
+const RoutesToolbar   = lazy(() => import('./map/RoutesToolbar.jsx'));
 const LayersPanel     = lazy(() => import('./map/LayersPanel.jsx'));
 const SettlementPalette = lazy(() => import('./map/SettlementPalette.jsx'));
 
@@ -575,6 +578,9 @@ export default function WorldMap({ onNavigate } = {}) {
       )}
       {mapMode === MAP_MODES.TERRAIN && (
         <Suspense fallback={null}><TerrainToolbar bridgeRef={bridgeRef} /></Suspense>
+      )}
+      {mapMode === MAP_MODES.ROUTES && (
+        <Suspense fallback={null}><RoutesToolbar /></Suspense>
       )}
 
       {/* ── Main body: sidebar + map ─────────────────────────────────── */}

@@ -142,8 +142,8 @@ export const FLAGS = Object.freeze({
     description: 'P109 / E-5: per-settlement version timeline + diff + revert. Cartographer-gated.',
   },
   mapRoutesMode: {
-    default: false,
-    description: 'P110 / M-4: Routes mode in WorldMap toolbar (relationship-first overlay).',
+    default: true,
+    description: 'P110 / M-4 + P132 / M-4 promote: Routes mode in WorldMap toolbar. When active, surfaces the RoutesToolbar (filter relationship types, supply-chain emphasis, network-stress alert) and promotes relationship/road/chain layers to primary content.',
   },
   mapDropPreview: {
     default: false,
@@ -217,6 +217,10 @@ export const FLAGS = Object.freeze({
   inlineDossierEdits: {
     default: true,
     description: 'P131 / E-1: click-to-edit on dossier surfaces (settlement name, NPC names, faction labels) — commits flow through the pendingEdits queue + cascade preview.',
+  },
+  simulationDrawer: {
+    default: true,
+    description: 'P135 / D-5: move the Simulation tab content into a right-side slide-out drawer triggered by a "How this was simulated" link below the dossier header. Removes the tab from the strip.',
   },
   tableView: {
     default: false,

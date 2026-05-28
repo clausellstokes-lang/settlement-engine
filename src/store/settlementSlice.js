@@ -262,6 +262,106 @@ export const createSettlementSlice = (set, get) => ({
     // Clear the queue. Failed-commit retry is a future-tier feature;
     // for now, all-or-nothing matches the cascade-preview UX.
     set(s => { s.pendingEditsQueue = []; });
+    // P133 / E-5 — Snapshot the post-commit state so the version
+    // timeline records this as a discrete edit checkpoint. The
+    // snapshot label summarises what edits were applied; the user
+    // can revert to before this batch from VersionsTab.
+    try {
+      const labels = active.map(e => e.kind).join(', ');
+      const fn = get().recordSnapshot;
+      if (typeof fn === 'function') {
+        fn({ kind: 'auto-commit', label: `Edits: ${labels}` });
+      }
+    } catch (_e) { /* silent — snapshot failure shouldn't undo the commit */ }
+  },
+
+  // ── P133 / E-5 · Version history mutations ──────────────────────────
+  //
+  // `recordSnapshot({ saveId?, kind, label, ts? })` appends a frozen
+  // snapshot of the live settlement (or a specified save) into
+  // `versionHistory`. Snapshots are immutable — the timeline never
+  // mutates an existing entry.
+  //
+  // `revertToSnapshot({ saveId, snapshotId })` finds the snapshot in
+  // versionHistory and overwrites the live settlement (or the save's
+  // settlement payload) with the snapshot's content. The CURRENT state
+  // is auto-snapshotted FIRST so reverting is never destructive — the
+  // critique was explicit about that.
+  //
+  // Both mutations are pure-local. Persistence to Supabase (migration
+  // 016 / version_history table) happens via the settlements/PATCH
+  // edge function on the next save round-trip; the slice doesn't
+  // care about the storage layer.
+
+  /** @param {{saveId?: string|null, kind?: string, label?: string, ts?: number}} opts */
+  recordSnapshot: (opts = {}) => {
+    const state = get();
+    const ts = opts.ts || Date.now();
+    const snapshot = {
+      id: `snap_${ts}_${Math.random().toString(36).slice(2, 8)}`,
+      ts,
+      kind: opts.kind || 'manual',
+      label: opts.label || 'Snapshot',
+      settlement: state.settlement ? JSON.parse(JSON.stringify(state.settlement)) : null,
+    };
+    if (opts.saveId) {
+      set(s => {
+        const idx = s.savedSettlements.findIndex(e => e.id === opts.saveId);
+        if (idx === -1) return;
+        const cur = s.savedSettlements[idx];
+        cur.versionHistory = Array.isArray(cur.versionHistory)
+          ? [...cur.versionHistory, snapshot]
+          : [snapshot];
+      });
+    } else {
+      // No saveId — write into the live settlement's history. This
+      // lets unsaved sessions still build a local timeline.
+      set(s => {
+        if (!s.settlement) return;
+        s.settlement.versionHistory = Array.isArray(s.settlement.versionHistory)
+          ? [...s.settlement.versionHistory, snapshot]
+          : [snapshot];
+      });
+    }
+    return snapshot;
+  },
+
+  /** Revert the live settlement (or a save) to a prior snapshot. Auto-
+   *  snapshots the CURRENT state first so the user can re-revert if
+   *  they meant the other thing. */
+  revertToSnapshot: ({ saveId, snapshotId }) => {
+    if (!snapshotId) return false;
+    const state = get();
+    // Read the snapshot from the appropriate version-history slot.
+    const history = saveId
+      ? state.savedSettlements.find(e => e.id === saveId)?.versionHistory
+      : state.settlement?.versionHistory;
+    if (!Array.isArray(history)) return false;
+    const target = history.find(s => s.id === snapshotId);
+    if (!target?.settlement) return false;
+    // Snapshot the pre-revert state so this action is non-destructive.
+    try {
+      const fn = get().recordSnapshot;
+      if (typeof fn === 'function') {
+        fn({
+          saveId,
+          kind: 'pre-revert',
+          label: `Before revert to ${target.label || 'snapshot'}`,
+        });
+      }
+    } catch (_e) { /* silent */ }
+    // Apply.
+    set(s => {
+      if (saveId) {
+        const idx = s.savedSettlements.findIndex(e => e.id === saveId);
+        if (idx === -1) return;
+        s.savedSettlements[idx].settlement = JSON.parse(JSON.stringify(target.settlement));
+      }
+      // Always also refresh the live settlement view so the user sees
+      // the revert immediately.
+      s.settlement = JSON.parse(JSON.stringify(target.settlement));
+    });
+    return true;
   },
 
   // Reactive update state

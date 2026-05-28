@@ -21,6 +21,9 @@ const PendingChangesBar = lazy(() => import('./dossier/PendingChangesBar.jsx'));
 // P130 / O-2 — First-dossier teaching callouts. Self-gates on
 // flag + signed-in + savedCount===0; renders nothing otherwise.
 const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.jsx'));
+// P135 / D-5 — Simulation drawer. Replaces the Simulation tab when
+// `simulationDrawer` flag is on. Self-mounted via a trigger button.
+const SimulationDrawer = lazy(() => import('./dossier/SimulationDrawer.jsx'));
 // P131 / E-1 — Click-to-edit settlement name in the header.
 // The pencil reveals on hover; commit queues a rename-settlement
 // edit through the pending-edits drawer (E-2).
@@ -212,7 +215,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     ))
   ));
 
-  const allTabs = [...TABS,
+  // P135 / D-5 — When the simulation drawer is on, drop the
+  // Simulation entry from the strip; the drawer trigger below the
+  // header is the new entry point.
+  const simulationDrawerOn = flag('simulationDrawer');
+  const baseTabs = simulationDrawerOn
+    ? TABS.filter(t => t.id !== 'simulation')
+    : TABS;
+  const allTabs = [...baseTabs,
     ...(hasDMCompass ? [{ id:'dm_compass', label:'DM Compass', Icon: Compass }] : []),
     ...(rawSettlement.neighborRelationship || rawSettlement.neighbourRelationship || rawSettlement.neighbourNetwork?.length
       ? [{ id:'neighbours', label:'Neighbours', Icon: MapPin }] : [])
@@ -500,7 +510,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           saveId,
           isPublic: liveSaveEntry?.is_public,
           publicSlug: liveSaveEntry?.public_slug,
-        })
+        }),
+        // P135 / D-5 — "How this was simulated" trigger. Self-gated by
+        // the simulationDrawer flag. Lives next to BuyThisDossier so the
+        // user finds it as a "more info" affordance, not a chrome surface.
+        simulationDrawerOn && React.createElement(Suspense, { fallback: null },
+          React.createElement(SimulationDrawer)
+        )
       ),
       // P104 — Welcome credit gift card. Self-gates inside; shown to
       // signed-in users on their first saved dossier when their ledger
