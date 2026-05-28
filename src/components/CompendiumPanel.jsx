@@ -8,6 +8,11 @@ import DeleteConfirmation from './DeleteConfirmation';
 import {getInstitutionalCatalog, getFullCatalogWithTierMeta} from '../generators/engine';
 import EntityPicker from './EntityPicker.jsx';
 import { buildRegistry } from '../lib/customRegistry.js';
+import { flag } from '../lib/flags.js';
+// P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
+// global-search index (CP-4) and these tabs render from one source of truth.
+import { ARCHETYPES, REL_TYPES } from '../domain/compendium/catalogData.js';
+import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 
 // ── Shared primitives ───────────────────────────────────────────────────────
 
@@ -73,57 +78,15 @@ const ANCHOR_TO_TAB = Object.freeze({
   'institutions': 'institutions',
 });
 
-const REL_TYPES = [
-  { id:'trade_partner',label:'Trade Partner',color:'#1a5a28',effect:'Exports shift toward what the neighbour imports. Supply chains partially share. Complements rather than competes.' },
-  { id:'allied',       label:'Allied',       color:'#1a3a7a',effect:'Military and economic cooperation. Elevated garrison institutions and shared defense logic on both sides.' },
-  { id:'patron',       label:'Patron',       color:'#4a1a6a',effect:'The generating settlement is client-dependent. Economy shaped by patron demands. Fewer autonomous institutions.' },
-  { id:'client',       label:'Client',       color:'#6a3a1a',effect:'Production biased toward what the patron needs. Trade dependency embedded in exports.' },
-  { id:'rival',        label:'Rival',        color:'#8a5010',effect:'Competing for the same markets. Overlapping exports suppressed. Criminal presence elevated.' },
-  { id:'cold_war',     label:'Cold War',     color:'#8a3010',effect:'Covert conflict. Intelligence infrastructure elevated. Criminal and military institutions higher on both sides.' },
-  { id:'hostile',      label:'Hostile',      color:'#8b1a1a',effect:'Open conflict. Military dominates. Exports embargoed. Safety degraded. Criminal infiltration likely.' },
-  { id:'neutral',      label:'Neutral',      color:'#6b5340',effect:'No generation influence. Minor economic contact only.' },
-];
-
-const ARCHETYPES = [
-  { cat:'Economic', name:'Merchant Republic',     cond:'Economy ≥65, Military ≤45, Religion ≤45',    desc:'Merchant guilds control governance. Trade law is the law.' },
-  { cat:'Economic', name:'Trade Crossroads',      cond:'Economy ≥60, route: crossroads or port',      desc:'Entreport economy. Profits from flow, not production. High service density.' },
-  { cat:'Economic', name:'Merchant Army',         cond:'Economy ≥68, Military ≤38',                  desc:'Wealthy settlement replaces public guard with private security.' },
-  { cat:'Economic', name:'Theocratic Economy',    cond:'Religion ≥70, Economy ≤42',                  desc:'Church dominates economic life. Sacred goods trade x1.55.' },
-  { cat:'Military', name:'Military Fortress',     cond:'Military ≥72, threat: dangerous',            desc:'Defense first. Civilian economy secondary to garrison supply.' },
-  { cat:'Military', name:'Frontier Outpost',      cond:'Military ≥60, tier: small, threat: frontier',desc:'Exists to hold a line. Austere, disciplined, expendable.' },
-  { cat:'Military', name:'Besieged Holdout',      cond:'Stress: Siege active',                        desc:'Under siege. Supply constrained. Morale is a resource.' },
-  { cat:'Military', name:'Secular Brutalism',     cond:'Military ≥70, Religion ≤25',                 desc:'No religious institutions. Military fills moral and legal vacuum.' },
-  { cat:'Military', name:'State Crime',           cond:'Military ≥70, Economy ≤32',                  desc:'Military predates on the population. Extractions, disappearances, selective enforcement.' },
-  { cat:'Religious',name:'Theocracy',             cond:'Religion ≥72, Military ≤45',                 desc:'Church is the government. Civil and religious law unified.' },
-  { cat:'Religious',name:'Holy Sanctuary',        cond:'Religion ≥65, Criminal ≤30, threat: safe',   desc:'Pilgrimage destination. Protected status. Trade in relics and indulgences.' },
-  { cat:'Religious',name:'Crusader Synthesis',    cond:'Military ≥68, Religion ≥68',                 desc:'Church and military fused. Sacred war is civic duty.' },
-  { cat:'Religious',name:'Heresy Suppression',    cond:'Religion ≥65, Magic ≤38',                    desc:'Church persecutes arcane practitioners. Magic goods suppressed x0.25.' },
-  { cat:'Religious',name:'Religious Fraud',       cond:'Religion ≥60, Criminal ≥55',                 desc:'Church hierarchy is corrupt. Indulgences, false relics, protection rackets.' },
-  { cat:'Religious',name:'Crusader Chapter',      cond:'Military ≥68, Religion ≥60, threat: dangerous',desc:'Martial religious order holds the settlement against monster threat.' },
-  { cat:'Magic',    name:'Mage City',             cond:'Magic ≥70, Economy ≥55',                     desc:'Arcane institutions dominate. Magic is commerce. High reagent import demand.' },
-  { cat:'Magic',    name:'Arcane Academy',        cond:'Magic ≥72, Religion ≤40',                    desc:'Learning institution at center. Magic is scholarship, not faith.' },
-  { cat:'Magic',    name:'Magic Fills Void',      cond:'Magic ≥68, Economy ≤35',                     desc:'Arcane supply substitutes for missing material infrastructure.' },
-  { cat:'Magic',    name:'Arcane Black Market',   cond:'Magic ≥52, Criminal ≥58',                    desc:'Sophisticated magical criminal ecosystem. Import demand x1.45.' },
-  { cat:'Magic',    name:'Mage Theocracy',        cond:'Magic ≥70, Religion ≥65',                    desc:'Magic and faith unified. Arcane clergy governs.' },
-  { cat:'Magic',    name:'Magic Militarized',     cond:'Magic ≥60, Military ≥65',                    desc:'Arcane power weaponized. Military holds mages on retainer.' },
-  { cat:'Criminal', name:'Crime Fills Vacuum',    cond:'Criminal ≥62, Military ≤32',                 desc:'Weak enforcement lets criminal organizations become de facto governance.' },
-  { cat:'Criminal', name:'Criminal Haven',        cond:'Criminal ≥72, Military ≤42',                 desc:'Settlement actively shelters criminal networks. Law is performative.' },
-  { cat:'Criminal', name:'Merchant-Criminal Blur',cond:'Economy ≥65, Criminal ≥58',                  desc:'Legitimate and criminal commerce are indistinguishable. Guilds run protection.' },
-  { cat:'Criminal', name:'Lawless Frontier',      cond:'Criminal ≥60, Military ≤30',                 desc:'Beyond the reach of law. Survival is personal.' },
-  { cat:'Balanced', name:'Safe Province Capital', cond:'All sliders 40-65, threat: safe',            desc:'Stable, diverse, prosperous. The baseline of successful governance.' },
-  { cat:'Balanced', name:'Balanced',              cond:'No slider exceeds 60',                        desc:'No dominant faction. Power distributed. Politics negotiated.' },
-  { cat:'Balanced', name:'Merchant Hunters Lodge',cond:'Military ≥60, threat: dangerous',            desc:'Organized monster hunters are a significant institution.' },
-  { cat:'Balanced', name:'Mining Colony',         cond:'Resource: ore or stone nearby, isolated',    desc:'Exists to extract a resource. Company-town dynamics.' },
-  { cat:'Balanced', name:'Plague of Beasts',      cond:'Stress: Monster Threat active',              desc:'Under active monster pressure. Civilian life constrained to fortified areas.' },
-];
-
+// REL_TYPES + ARCHETYPES are imported from '../domain/compendium/catalogData.js'
+// (see import block above). CAT_COLORS stays here — it's display-only.
 const CAT_COLORS = { Economic:'#a0762a', Military:'#8b1a1a', Religious:'#1a4a2a', Magic:'#3a1a7a', Criminal:'#4a1a4a', Balanced:'#1a3a7a' };
 
 // ── Tab content ─────────────────────────────────────────────────────────────
 
 function TiersTab({ _search='' }) {
   return <>
-    <p style={{ fontSize:12, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
+    <p id="tiers" style={{ fontSize:12, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
       Tier determines the maximum institution count, population band, and available institution categories.
     </p>
     {[['Thorp','20-80','#8b1a1a','Single institution. Subsistence only.'],['Hamlet','80-400','#a05010','2-3 institutions. Local subsistence. Minimal trade.'],['Village','400-900','#a0762a','4-6 institutions. Surplus production begins. Weekly market.'],['Town','900-4,000','#1a5a28','7-10 institutions. Specialization appears. Guilds form.'],['City','4,000-25,000','#1a3a7a','11-14 institutions. Full institutional diversity. Factional politics.'],['Metropolis','25,000+','#4a1a6a','15+ institutions. All systems active. Complex faction dynamics.']].map(([name,pop,color,desc])=>(
@@ -131,13 +94,13 @@ function TiersTab({ _search='' }) {
         <div style={{ minWidth:90, flexShrink:0 }}><div style={{fontSize:13,fontWeight:700,color}}>{name}</div><div style={{fontSize:10,color:MUT}}>{pop} pop.</div></div>
         <div style={{ fontSize:12, color:SEC, lineHeight:1.5 }}>{desc}</div>
       </div>))}
-    <div style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Trade Route Access</div>
+    <div id="trade-routes" style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Trade Route Access</div>
     {[['Road','Standard land access. Moderate trade volume.','#6b5340'],['Crossroads','Multiple road intersections. Higher institution diversity.','#a0762a'],['Port','Sea or river access. Maritime exports, fishing, naval institutions.','#1a3a7a'],['River','Inland waterway. Cheaper bulk movement. Mill and granary likely.','#1a5a28'],['Mountain Pass','Strategic chokepoint. Toll and garrison institutions likely.','#8b1a1a'],['Isolated','No trade route. Subsistence by necessity.','#4a1a4a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
         <span style={{ fontSize:11, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
         <span style={{ fontSize:12, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
-    <div style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Monster Threat</div>
+    <div id="threat" style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Monster Threat</div>
     {[['Safe','Civilian institutions dominate. Military is law enforcement only.','#1a5a28'],['Frontier','Active but managed threat. Walls and garrison elevated.','#a0762a'],['Dangerous','Constant threat. Military dominates. Civilian life constrained.','#8a5010'],['Plagued','Active monster plague. Crisis conditions. Siege-like dynamics.','#8b1a1a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
         <span style={{ fontSize:11, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
@@ -148,6 +111,7 @@ function TiersTab({ _search='' }) {
 
 function EconomyTab() {
   return <>
+    <div id="economy" />
     <Card title="Prosperity Tiers" accent={GOLD}>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial — an output.</Card>
     <Card title="Priority Sliders" accent='#a0762a'>Sliders shift institutional probability, not guarantee it. They interact: high Religion + low Magic triggers heresy suppression.</Card>
     <Card title="Exports & Imports" accent='#1a5a28'>Exports are surplus production. Imports are gaps. Heavy import dependency creates trade vulnerability.</Card>
@@ -165,7 +129,7 @@ function PowerTab_({ search='' }) {
     <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:12 }}>
       {cats.map(c => <button key={c} onClick={() => setCat(c)} style={{ padding:'3px 10px', borderRadius:12, fontSize:11, fontWeight:700, cursor:'pointer', border:'1px solid', background:cat===c?INK:'transparent', color:cat===c?'#f5ede0':SEC, borderColor:cat===c?INK:BOR }}>{c}</button>)}
     </div>
-    <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))', gap:8 }}>
+    <div id="archetypes" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))', gap:8 }}>
       {filtered.map(a => (
         <div key={a.name} style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${CAT_COLORS[a.cat]||GOLD}`, borderRadius:7, padding:'10px 12px', background:'rgba(255,251,245,0.95)' }}>
           <div style={{ display:'flex', alignItems:'center', gap:6, marginBottom:4 }}>
@@ -181,6 +145,7 @@ function PowerTab_({ search='' }) {
 
 function ArcaneTab() {
   return <>
+    <div id="magic" />
     <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic acts as a buffer against deficits. Arcane institutions can substitute for missing production.</Card>
     <Card title="Magic Suppression" accent='#5a2a8a'>Religion 65+ with Magic 38 or less triggers Heresy Suppression. Magic goods suppressed.</Card>
     <Card title="Arcane-Criminal Ecosystem" accent='#4a1a4a'>Magic 52+ and Criminal 58+ creates an Arcane Black Market archetype.</Card>
@@ -198,7 +163,7 @@ function StressTab({ search='' }) {
     { label:'Political Fracture', description:'Governance contested. Multiple factions claim legitimacy.' },
   ];
   return <>
-    <div style={{ padding:'10px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`, borderLeft:`3px solid ${GOLD}`, borderRadius:7, marginBottom:12 }}>
+    <div id="stress" style={{ padding:'10px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`, borderLeft:`3px solid ${GOLD}`, borderRadius:7, marginBottom:12 }}>
       <div style={{ fontSize:11, fontWeight:800, color:GOLD, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>Stresses Compound</div>
       <p style={{ fontSize:12, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by factions.</p>
     </div>
@@ -212,7 +177,7 @@ function StressTab({ search='' }) {
 
 function NeighbourTab({ search='' }) {
   return <>
-    <p style={{ fontSize:12, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, faction weights, and institution probabilities before generation.</p>
+    <p id="neighbours" style={{ fontSize:12, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, faction weights, and institution probabilities before generation.</p>
     {REL_TYPES.filter(r=>!search||r.label.toLowerCase().includes(search)||r.effect.toLowerCase().includes(search)).map(r => (
       <div key={r.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
         <span style={{ fontSize:11, fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, borderRadius:4, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
@@ -914,6 +879,32 @@ export default function CompendiumPanel({ config, standalone=false }) {
     }
   };
 
+  // P139 / CP-4 — global-search result → navigate. Switch to the catalog,
+  // activate the owning tab, pre-filter that tab's local search to the term,
+  // then scroll the section anchor into view (works same-tab or cross-tab).
+  const handleGlobalSelect = (entry) => {
+    if (!entry) return;
+    setMode('catalog');
+    setActiveTab(entry.tab);
+    setSearch(entry.term);
+    if (typeof window === 'undefined' || !entry.anchor) return;
+    try { window.history.replaceState(null, '', `#${entry.anchor}`); } catch { /* hash unavailable */ }
+    setTimeout(() => {
+      const el = document.getElementById(entry.anchor);
+      if (el && typeof el.scrollIntoView === 'function') {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 140);
+  };
+
+  // P139 / CP-3 — readability: cap the reading column so prose doesn't
+  // sprawl edge-to-edge on wide standalone pages. Embedded panels are
+  // already narrow, so the cap only bites on the standalone route.
+  const readable = flag('compendiumReadability');
+  const contentColumn = readable
+    ? { maxWidth: 760, marginLeft: 'auto', marginRight: 'auto' }
+    : undefined;
+
   return (
     <div style={{ borderRadius:standalone?0:8, overflow:'hidden' }}>
       {/* Mode toggle */}
@@ -929,6 +920,8 @@ export default function CompendiumPanel({ config, standalone=false }) {
 
       {mode === 'catalog' ? (
         <>
+          {/* P139 / CP-4 — global type-ahead search across every section. */}
+          <CompendiumGlobalSearch onSelect={handleGlobalSelect} />
           {/* Tab bar + search */}
           <div style={{ background:PARCH, borderBottom:`1px solid ${BOR}` }}>
             <div style={{ display:'flex', overflowX:'auto', gap:0 }}>
@@ -944,7 +937,9 @@ export default function CompendiumPanel({ config, standalone=false }) {
             </div>
           </div>
           <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', maxHeight:'60vh', overflowY:'auto' }}>
-            {renderTab()}
+            <div style={contentColumn}>
+              {renderTab()}
+            </div>
           </div>
         </>
       ) : (

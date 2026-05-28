@@ -238,6 +238,14 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P138 / AC-4: inline FAQ accordion on the Account page (six common Qs: credit grant, cancel, refunds, founder, gallery privacy, AI-vs-sim).',
   },
+  compendiumGlobalSearch: {
+    default: true,
+    description: 'P139 / CP-4: global type-ahead search above the Compendium tabs — type once, match every section (tiers, archetypes, routes, stresses, relationships), jump to the owning tab.',
+  },
+  compendiumReadability: {
+    default: true,
+    description: 'P139 / CP-3: constrain the Compendium catalog content to a readable max-width column (instead of letting prose sprawl edge-to-edge on wide standalone pages).',
+  },
   tableView: {
     default: false,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
