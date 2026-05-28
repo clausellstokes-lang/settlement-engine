@@ -27,6 +27,9 @@ const FounderTile = _lazy(() => import('./pricing/FounderTile.jsx'));
 import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+// P138 / AC-4 — Inline FAQ accordion. Lazy because the copy strings
+// are a chunky import for users who never expand the section.
+const AccountFAQ = _lazy(() => import('./account/AccountFAQ.jsx'));
 
 function Section({ title, icon: Icon, children }) {
   return (
@@ -386,6 +389,13 @@ export default function AccountPage({ onNavigateAdmin }) {
             unconditionally here. */}
         <_Suspense fallback={null}>
           <FounderTile />
+        </_Suspense>
+      </Section>
+
+      {/* ── P138 / AC-4 FAQ ──────────────────────────────────────── */}
+      <Section title="Frequently asked" icon={Headphones}>
+        <_Suspense fallback={null}>
+          <AccountFAQ />
         </_Suspense>
       </Section>
 

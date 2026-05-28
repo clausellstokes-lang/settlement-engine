@@ -560,4 +560,35 @@ export const en = Object.freeze({
     contact:  'Contact',
     copyright: '© {year} SettlementForge',
   },
+
+  // P138 / AC-4 — Inline FAQ on the Account page. Each entry is a
+  // short Q + a 1-2 sentence A. Keep tone plain and free of marketing
+  // hedge — these are the answers users would otherwise email support
+  // for. Edit freely; the keys are stable.
+  accountFaq: {
+    creditGrant: {
+      q: 'How does the welcome credit work?',
+      a: "On signup, every account gets one free Narrative credit. It refines your first saved settlement into prose. Once spent, it doesn't come back — buy more from the Subscription panel.",
+    },
+    cancelAnytime: {
+      q: 'Can I cancel my subscription?',
+      a: 'Yes — open the Manage Subscription link in your Stripe portal. Cancellation takes effect at the end of your current billing period; you keep access until then.',
+    },
+    refundWindow: {
+      q: 'Do you offer refunds?',
+      a: 'Single-dossier purchases are refundable within 7 days if you have not exported or downloaded the PDF. Subscription refunds are handled case-by-case via Customer Support below.',
+    },
+    founderLifetime: {
+      q: 'What is the Founder Lifetime plan?',
+      a: 'A one-time payment that unlocks every current and future tier for the life of the product. Capped at the first 200 buyers; the counter is live above this FAQ.',
+    },
+    galleryPrivacy: {
+      q: 'Is my settlement private when I save it?',
+      a: 'Yes by default. Only you can see saved settlements. Sharing to the public Gallery is an explicit opt-in per settlement — the toggle lives in the dossier header.',
+    },
+    aiOrSim: {
+      q: "Does SettlementForge use AI to write my settlement?",
+      a: 'The structural layer — population, factions, supply chains, hooks — is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
+    },
+  },
 });

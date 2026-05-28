@@ -24,6 +24,10 @@ const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.j
 // P135 / D-5 — Simulation drawer. Replaces the Simulation tab when
 // `simulationDrawer` flag is on. Self-mounted via a trigger button.
 const SimulationDrawer = lazy(() => import('./dossier/SimulationDrawer.jsx'));
+// P137 / HT-4 — "Copy as AI prompt" button. Self-gated by flag +
+// signed-in tier; reserved as a power-user export so anon users
+// don't see the structured grounding.
+const AIPromptButton = lazy(() => import('./dossier/AIPromptButton.jsx'));
 // P131 / E-1 — Click-to-edit settlement name in the header.
 // The pencil reveals on hover; commit queues a rename-settlement
 // edit through the pending-edits drawer (E-2).
@@ -516,6 +520,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         // user finds it as a "more info" affordance, not a chrome surface.
         simulationDrawerOn && React.createElement(Suspense, { fallback: null },
           React.createElement(SimulationDrawer)
+        ),
+        // P137 / HT-4 — "Copy as AI prompt" power-user export. Self-
+        // gates on flag + signed-in. Anon users see nothing.
+        React.createElement(Suspense, { fallback: null },
+          React.createElement(AIPromptButton, { settlement })
         )
       ),
       // P104 — Welcome credit gift card. Self-gates inside; shown to

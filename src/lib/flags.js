@@ -230,6 +230,14 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P136 / M-6: hover-peek card for placed settlements showing name + pressure + top hook. Distinct from the click-to-open PlacementDetailCard; uses hoveredSettlementId.',
   },
+  aiPromptCopy: {
+    default: true,
+    description: 'P137 / HT-4: "Copy as AI prompt" button on the dossier — serialises the grounded prompt envelope for paste into ChatGPT/Claude. Reserved for signed-in users.',
+  },
+  accountFaq: {
+    default: true,
+    description: 'P138 / AC-4: inline FAQ accordion on the Account page (six common Qs: credit grant, cancel, refunds, founder, gallery privacy, AI-vs-sim).',
+  },
   tableView: {
     default: false,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
