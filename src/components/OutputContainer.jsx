@@ -18,9 +18,20 @@ const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
 // P106 / E-2 — Pending changes drawer (queue + cascade preview).
 // Self-gates inside on flag + pending queue presence.
 const PendingChangesBar = lazy(() => import('./dossier/PendingChangesBar.jsx'));
+// P130 / O-2 — First-dossier teaching callouts. Self-gates on
+// flag + signed-in + savedCount===0; renders nothing otherwise.
+const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.jsx'));
+// P131 / E-1 — Click-to-edit settlement name in the header.
+// The pencil reveals on hover; commit queues a rename-settlement
+// edit through the pending-edits drawer (E-2).
+import EditableInline from './primitives/EditableInline.jsx';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
+// P129 / D-2 — Magazine-spread Summary V2. Self-gated by the
+// `summaryMagazineV2` flag in renderTab(); legacy SummaryTab still
+// loads in parallel so toggling the flag is instant.
+const SummaryTabV2 = lazy(() => import('./new/SummaryTabV2.jsx'));
 const OverviewTab = lazy(() => import('./new/tabs/OverviewTab'));
 const EconomicsTab = lazy(() => import('./new/tabs/EconomicsTab'));
 const ServicesTab = lazy(() => import('./new/tabs/ServicesTab'));
@@ -108,6 +119,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
   const pinNpc = useStore(s => s.pinNpc);
   const unpinNpc = useStore(s => s.unpinNpc);
+  // P131 / E-1 — inline-edit pipe. queueEdit goes into the
+  // PendingChangesBar's drawer where the cascade preview lives.
+  const queueEdit = useStore(s => s.queueEdit);
+  const inlineEditsEnabled = flag('inlineDossierEdits');
 
   const rawSettlement = propSettlement || storeSettlement;
   // AI narrative is now gated behind a saveId (AI-1): the ai_data has a
@@ -242,7 +257,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const renderTab = () => {
     const s = activeSettlement;
     switch (activeTab) {
-      case 'summary':    return React.createElement(SummaryTab, { settlement: s });
+      case 'summary':    return flag('summaryMagazineV2')
+        ? React.createElement(SummaryTabV2, {
+            settlement: s,
+            onOpenTableView: flag('tableView')
+              ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
+              : undefined,
+          })
+        : React.createElement(SummaryTab, { settlement: s });
       case 'daily_life': return React.createElement(DailyLifeTab, { settlement: s, aiSettlement, saveId });
       case 'overview':   return React.createElement(OverviewTab, { settlement: s, narrativeNote: null });
       case 'economics':  return React.createElement(EconomicsTab, { settlement: s, narrativeNote: null });
@@ -404,7 +426,18 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // Header
       React.createElement('div', { style: { padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' } },
         React.createElement('div', { style: { flex: 1, minWidth: 0 } },
-          React.createElement('div', { style: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: 24, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 } }, settlement.name),
+          React.createElement('div', { style: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: 24, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 } },
+            (inlineEditsEnabled && !readOnly && queueEdit) ? React.createElement(EditableInline, {
+              value: settlement.name || '',
+              ariaLabel: 'Edit settlement name',
+              textStyle: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: 24, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 },
+              trackEvent: EVENTS.EDIT_PENDING_QUEUED,
+              provenance: { kind: 'rename-settlement', entityId: saveId || 'unsaved' },
+              onCommit: (newName) => {
+                queueEdit('rename-settlement', { newName });
+              },
+            }) : settlement.name
+          ),
           React.createElement('div', { style: { display: 'flex', gap: 8, marginTop: 5, flexWrap: 'wrap', alignItems: 'center' } },
             React.createElement('span', { style: { fontSize: 12, color: '#9c8068', textTransform: 'capitalize', fontWeight: 600 } }, TIER_LABELS[settlement.tier] || settlement.tier),
             React.createElement('span', { style: { fontSize: 12, color: '#6b5340' } }, '\u00b7'),
@@ -479,6 +512,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // inside; renders nothing when no edits are queued.
       !readOnly && React.createElement(Suspense, { fallback: null },
         React.createElement(PendingChangesBar)
+      ),
+      // P130 / O-2 — First-dossier teaching callouts. Self-gates inside;
+      // shown to first-time signed-in users on their first generation.
+      !readOnly && React.createElement(Suspense, { fallback: null },
+        React.createElement(FirstDossierCallouts)
       ),
       // P102 / D-1 — Five thematic group tab strip. Renders only when
       // the dossierFiveTabs flag is on. Clicking a group selects its

@@ -173,10 +173,9 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'P117 / H-1: two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
   },
-  firstDossierCallouts: {
-    default: false,
-    description: 'P118 / O-2: three teaching callouts on a first-time user\'s first dossier.',
-  },
+  // firstDossierCallouts moved to the P128-P146 critique-completion block
+  // below (default:true, full description). Kept the original key + same
+  // semantics; just renumbered the phase tag in the description.
   onboardingDiet: {
     default: false,
     description: 'P118 / O-1: collapse the 4-system onboarding pile-up to Checklist + first-dossier callouts only. Suppresses OnboardingCoach + nudge toast when on.',
@@ -200,6 +199,28 @@ export const FLAGS = Object.freeze({
   compendiumInlineHelp: {
     default: false,
     description: 'P126 / CP-1: "?" affordance on every config control opens Compendium snippet.',
+  },
+
+  // ── P128–P146 critique completion ────────────────────────────────────
+  sampleProofCard: {
+    default: true,
+    description: 'P128 / H-2: sample dossier proof card below HomeHero for anonymous visitors (three audience callouts).',
+  },
+  summaryMagazineV2: {
+    default: false,
+    description: 'P129 / D-2: Summary tab as two-column magazine spread. Replaces single-column layout.',
+  },
+  firstDossierCallouts: {
+    default: true,
+    description: 'P130 / O-2: three teaching callouts (tension / supply / hook) on a first-time user\'s first generated dossier.',
+  },
+  inlineDossierEdits: {
+    default: true,
+    description: 'P131 / E-1: click-to-edit on dossier surfaces (settlement name, NPC names, faction labels) — commits flow through the pendingEdits queue + cascade preview.',
+  },
+  tableView: {
+    default: false,
+    description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
   },
 });
 

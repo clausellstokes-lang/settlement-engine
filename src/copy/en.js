@@ -501,6 +501,53 @@ export const en = Object.freeze({
     samplePreview:  'See a sample →',
   },
 
+  // ── Sample dossier proof card (P128 / H-2) ───────────────────────────────
+  // Renders below HomeHero for anonymous visitors. Three callouts, each
+  // aimed at a different reader. The teach beats are deliberate — every
+  // line should let the reader recognize themselves and the moat in one
+  // glance.
+  sampleDossier: {
+    header: {
+      name:     'Hightower’s Reach',
+      meta:     'TOWN · 2,847 POP · FRONTIER',
+    },
+    callouts: {
+      newDm: {
+        eyebrow: 'For the new DM',
+        body:    'Captain Velda Marsh is corrupt because the wall-fund collapsed to pay for the salt-road garrison. Towns hang together when their problems explain each other.',
+      },
+      worldbuilder: {
+        eyebrow: 'For the worldbuilder',
+        body:    'Salt-road supply chain breaks at Whitestone Pass → preserved-meat exports halt in 11 days. Famine cascade primed. Pull any thread and the next one tightens.',
+      },
+      fridaysSession: {
+        eyebrow: 'For Friday’s session',
+        body:    '“The wall-fund ledger has gone missing. The Captain blames the merchants. The merchants blame the militia. Someone is hiding it in plain sight.”',
+      },
+    },
+    footer: 'A real settlement from the simulator. Yours generates in eight seconds.',
+  },
+
+  // ── First-dossier teaching callouts (P130 / O-2) ─────────────────────────
+  // Three permanent-dismiss callouts on a first-time user's first
+  // generated dossier. Each points at what the engine already did and
+  // teaches by example, not by tutorial.
+  firstDossierCallouts: {
+    tension: {
+      eyebrow: 'Why this town hangs together',
+      body:    'The captain is corrupt because the wall fund is short. Towns hang together when their problems explain each other.',
+    },
+    supply: {
+      eyebrow: 'Why this is a session',
+      body:    'If the salt road closes, this town runs out in 11 days. That’s a session — supply chains aren’t flavor, they’re fuel.',
+    },
+    hook: {
+      eyebrow: 'Where hooks come from',
+      body:    'This hook came from the tension above — not a random table. That’s the difference between a simulator and a roller.',
+    },
+    dismissLabel: 'Got it',
+  },
+
   // ── Footer ────────────────────────────────────────────────────────────────
   footer: {
     tagline:  'A simulator for Dungeon Masters.',

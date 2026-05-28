@@ -24,6 +24,11 @@ import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CAR
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import HomeHero from './HomeHero.jsx';
+// P128 / H-2 — Sample dossier proof card. Self-gates on flag +
+// anonymous + no settlement yet; renders nothing once any of those
+// flip. Mounted directly below HomeHero so anon visitors see proof of
+// the moat without scrolling.
+const HomeSampleDossier = lazy(() => import('./home/HomeSampleDossier.jsx'));
 
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
@@ -404,7 +409,14 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
   if (!wizardMode && !settlement) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 860, margin: '0 auto', padding: `${SP.xl}px 0` }}>
-        {showHomeHero && <HomeHero onSignIn={onSignIn} />}
+        {showHomeHero && (
+          <>
+            <HomeHero onSignIn={onSignIn} />
+            <Suspense fallback={null}>
+              <HomeSampleDossier />
+            </Suspense>
+          </>
+        )}
         {!showHomeHero && (
           <div style={{ textAlign: 'center', padding: `${SP.md}px 0` }}>
             <h2 style={{
