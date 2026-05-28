@@ -122,6 +122,11 @@ export const createMapSlice = (set, get) => ({
   selectedBurgId: null,        // clicked burg id (opaque placement handle)
   selectedSettlementId: null,  // clicked settlement UUID — primary key for detail panels
   selectedAnnotationId: null,  // clicked label/marker/forest
+  // P136 / M-6 — quick-inspector hover state. Distinct from
+  // `selectedSettlementId` because selection is a deliberate click;
+  // hover is a "peek" that doesn't commit. The QuickInspector
+  // component subscribes to this and renders a 3-line card.
+  hoveredSettlementId: null,
 
   // Transient drag state
   isDraggingOver: false,
@@ -170,6 +175,14 @@ export const createMapSlice = (set, get) => ({
   setSelectedSettlementId: (id) => set(state => { state.selectedSettlementId = id; }),
 
   clearSelectedSettlementId: () => set(state => { state.selectedSettlementId = null; }),
+
+  // P136 / M-6 — hover-peek mutations. Setting hoveredSettlementId
+  // does not affect selection; the QuickInspector renders a tiny
+  // floating card with name + pressure + top hook so the user can
+  // peek a placement without committing to opening the full detail.
+  setHoveredSettlementId: (id) => set(state => { state.hoveredSettlementId = id; }),
+
+  clearHoveredSettlementId: () => set(state => { state.hoveredSettlementId = null; }),
 
   setSelectedAnnotationId: (id) => set(state => { state.selectedAnnotationId = id; }),
 

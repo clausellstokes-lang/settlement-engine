@@ -32,6 +32,12 @@ const TerrainToolbar  = lazy(() => import('./map/TerrainToolbar.jsx'));
 // P132 / M-4 promote — Routes mode contextual toolbar. Lazy because
 // terrain/annotate users never need it.
 const RoutesToolbar   = lazy(() => import('./map/RoutesToolbar.jsx'));
+// P136 / M-5 — "Saved 2 min ago" pill. Self-gated by flag +
+// activeCampaign; lazy because it touches a date-formatting tick.
+const AutoSaveChip    = lazy(() => import('./map/AutoSaveChip.jsx'));
+// P136 / M-6 — Hover-peek for placed settlements. Self-gated by flag
+// and hoveredSettlementId presence.
+const QuickInspector  = lazy(() => import('./map/QuickInspector.jsx'));
 const LayersPanel     = lazy(() => import('./map/LayersPanel.jsx'));
 const SettlementPalette = lazy(() => import('./map/SettlementPalette.jsx'));
 
@@ -496,6 +502,9 @@ export default function WorldMap({ onNavigate } = {}) {
                 <IconButton onClick={handleSaveMapToCampaign} title="Save map to campaign" primary>
                   <Save size={13} /> Save
                 </IconButton>
+                <Suspense fallback={null}>
+                  <AutoSaveChip />
+                </Suspense>
                 {activeCampaign?.mapState && (
                   <IconButton onClick={handleClearMapFromCampaign} title="Clear campaign map">
                     <Trash2 size={13} />
@@ -652,6 +661,11 @@ export default function WorldMap({ onNavigate } = {}) {
                 if (typeof onNavigate === 'function') onNavigate('settlements');
               }}
             />
+          </Suspense>
+          {/* P136 / M-6 — Hover peek. Self-gated; renders nothing
+              when no hover-id is set or when click-selection wins. */}
+          <Suspense fallback={null}>
+            <QuickInspector />
           </Suspense>
           {!mapReady && (
             <div style={{

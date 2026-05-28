@@ -222,6 +222,14 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P135 / D-5: move the Simulation tab content into a right-side slide-out drawer triggered by a "How this was simulated" link below the dossier header. Removes the tab from the strip.',
   },
+  mapAutoSaveChip: {
+    default: true,
+    description: 'P136 / M-5: render a "Saved 2 min ago" / "Unsaved changes" pill in the WorldMap top toolbar so users see save state without pressing Ctrl-S anxiously.',
+  },
+  mapQuickInspector: {
+    default: true,
+    description: 'P136 / M-6: hover-peek card for placed settlements showing name + pressure + top hook. Distinct from the click-to-open PlacementDetailCard; uses hoveredSettlementId.',
+  },
   tableView: {
     default: false,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
