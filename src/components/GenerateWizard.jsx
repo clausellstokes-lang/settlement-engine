@@ -20,6 +20,7 @@ import ConfigurationPanel from './ConfigurationPanel';
 import InstitutionalGrid from './InstitutionalGrid';
 import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
+import WizardCloseout from './generate/WizardCloseout.jsx';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
@@ -487,13 +488,13 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
           </div>
         )}
 
-        {/* Helper banner — explains Quick is one-screen */}
+        {/* Helper banner — explains Basic is one-screen */}
         <div style={{
           padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee',
           border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`,
           borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
         }}>
-          <strong style={{ fontFamily: serif_ }}>Quick Generate</strong>
+          <strong style={{ fontFamily: serif_ }}>Basic Generate</strong>
           {' — '}Set the foundations and hit Generate. Everything else is randomized.
           Switch to <strong>Advanced Generate</strong> for institution toggles, services, and trade dynamics.
         </div>
@@ -725,6 +726,13 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
             )}
           </div>
         </>
+      )}
+
+      {/* P145 / W-2 — close-out summary. Only in the advanced wizard's
+          final "Ready to Generate" state (pre-generation); recaps the
+          four steps of config before the commit. Self-gates on the flag. */}
+      {isAdvanced && wizardStep >= STEPS.length && !settlement && (
+        <WizardCloseout />
       )}
 
       {/* Generate button — visible for quick mode with settlement (Regenerate),

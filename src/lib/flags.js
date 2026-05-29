@@ -258,6 +258,10 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P144 / A-4: move focus to the new step heading when the advanced wizard advances/retreats, so keyboard + screen-reader users are oriented (announced + navigable) instead of stranded on the now-clicked or now-disabled nav button.',
   },
+  wizardCloseout: {
+    default: true,
+    description: 'P145 / W-2: close-out summary card at the advanced wizard\'s final "Ready to Generate" step — recaps tier/culture/route/threat/magic, priority emphasis, and manual force/exclude constraint counts so the Generate click is a confirmation, not a leap.',
+  },
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────
