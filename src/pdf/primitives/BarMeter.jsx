@@ -5,7 +5,7 @@
  * source split). Container is muted cream, fill is tone-coded.
  */
 import { View, Text } from '@react-pdf/renderer';
-import { type, palette } from '../theme.js';
+import { type, palette, pt } from '../theme.js';
 import { finite, safePct } from '../lib/format.js';
 
 export function BarMeter({
@@ -29,7 +29,7 @@ export function BarMeter({
           marginBottom: 2,
         }}
       >
-        <Text style={{ ...type.label, fontSize: 8.5, color: palette.ink }}>{label}</Text>
+        <Text style={{ ...type.label, fontSize: pt['8.5'], color: palette.ink }}>{label}</Text>
         {sublabel && (
           <Text style={{ ...type.caption, color: palette.muted }}>{sublabel}</Text>
         )}

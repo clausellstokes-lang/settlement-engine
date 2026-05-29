@@ -20,7 +20,7 @@ import { ScoreCard } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { cap, smart, label, hookText } from '../lib/format.js';
 
 export function DefenseSecurity({ settlement, narrativeMode, vm }) {
@@ -41,7 +41,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       {/* ── Military status override ──────────────────────────────── */}
       {d.militaryStress && (
         <Callout tone="bad" kicker="ACTIVE MILITARY STATUS">
-          <Text style={{ ...type.body_em, color: palette.bad, fontSize: 11 }}>
+          <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['11'] }}>
             {d.militaryStress.label || cap(d.militaryStress.icon || 'Active')}
           </Text>
           {d.militaryStress.summary && (
@@ -49,7 +49,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
               name="defense.militaryStress.summary"
               defaultValue={d.militaryStress.summary}
               lines={1}
-              style={{ ...type.body, fontSize: 9.5 }}
+              style={{ ...type.body, fontSize: pt['9.5'] }}
             />
           )}
         </Callout>
@@ -69,20 +69,20 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       {/* ── Guard assessment ─────────────────────────────────────── */}
       {d.guardAssessment && (
         <View style={{ marginBottom: space.sm }} wrap={false}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             GUARD ASSESSMENT
           </Text>
           <EditableProse
             name="defense.guardAssessment"
             defaultValue={d.guardAssessment}
             lines={2}
-            style={{ ...type.body, fontSize: 9.5 }}
+            style={{ ...type.body, fontSize: pt['9.5'] }}
           />
         </View>
       )}
 
       {/* ── Threat scores with descriptions and factors ──────────── */}
-      <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+      <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
         THREAT ASSESSMENT
       </Text>
       {d.threats.map((t, i) => (
@@ -99,7 +99,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       {/* ── Defense institutions ────────────────────────────────── */}
       <View style={{ marginTop: space.sm }}>
         <HairRule />
-        <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+        <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
           ARMED FORCES
         </Text>
         {d.defenseInstitutions.filter(inst => inst.present).map((inst, _i) => (
@@ -115,13 +115,13 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
             wrap={false}
           >
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ ...type.body_em, fontSize: 10, color: palette.ink, flex: 1, marginRight: 6 }}>
+              <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.ink, flex: 1, marginRight: 6 }}>
                 {inst.name || inst.label}
               </Text>
               <Tag tone="good">PRESENT</Tag>
             </View>
             {(inst.notableUnits || inst.loyaltyNote || inst.arcaneCorps || inst.staffing) && (
-              <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginTop: 2 }}>
+              <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2 }}>
                 {[
                   inst.notableUnits && `Units: ${inst.notableUnits}`,
                   inst.loyaltyNote && `Loyalty: ${inst.loyaltyNote}`,
@@ -134,7 +134,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
               <EditableText
                 name={`defense.inst.${inst.key}.notes`}
                 defaultValue={inst.notes}
-                style={{ ...type.body, fontSize: 9 }}
+                style={{ ...type.body, fontSize: pt['9'] }}
               />
             )}
           </View>
@@ -142,7 +142,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
         {/* Show absent institutions inline */}
         {d.defenseInstitutions.filter(inst => !inst.present).length > 0 && (
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginTop: 4 }}>
-            <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted, marginRight: 4 }}>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, marginRight: 4 }}>
               ABSENT:
             </Text>
             {d.defenseInstitutions.filter(inst => !inst.present).map(inst => (
@@ -156,7 +156,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       {(d.criminalCapture || d.criminalOps?.length > 0 || d.crimeTypes?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             CRIMINAL ARCHITECTURE
           </Text>
           {d.criminalCapture && (
@@ -171,7 +171,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
               wrap={false}
             >
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ ...type.body_em, color: palette.bad, fontSize: 10, flex: 1, marginRight: 6 }}>
+                <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10'], flex: 1, marginRight: 6 }}>
                   {cap(d.criminalCapture.label || d.criminalCapture.classification) || 'Criminal capture'}
                 </Text>
                 {d.criminalCapture.score != null && (
@@ -183,7 +183,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
                   name="defense.criminalCapture.description"
                   defaultValue={d.criminalCapture.description}
                   lines={1}
-                  style={{ ...type.body, fontSize: 9 }}
+                  style={{ ...type.body, fontSize: pt['9'] }}
                 />
               )}
             </View>
@@ -197,14 +197,14 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
           )}
           {d.criminalOps?.length > 0 && (
             <View style={{ marginBottom: 4 }}>
-              <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>OPERATIONS</Text>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>OPERATIONS</Text>
               {d.criminalOps.map((op, i) => (
                 <View key={`cop-${i}`} style={{ marginBottom: 2 }}>
-                  <Text style={{ ...type.body_em, fontSize: 9, color: palette.bad }}>
+                  <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.bad }}>
                     {label(op)}
                   </Text>
                   {(op?.scope || op?.target) && (
-                    <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>
+                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
                       {op?.scope && `Scope: ${op.scope}`}
                       {op?.scope && op?.target && '  ·  '}
                       {op?.target && `Target: ${op.target}`}
@@ -216,7 +216,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
           )}
           {d.criminalFaction && (
             <View style={{ padding: 5, border: `0.4pt solid ${palette.bad}`, borderRadius: 2, marginBottom: 4 }}>
-              <Text style={{ ...type.body_em, fontSize: 10, color: palette.bad }}>
+              <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.bad }}>
                 {d.criminalFaction.faction || d.criminalFaction.name}
               </Text>
               {d.criminalFaction.blurb && (
@@ -224,21 +224,21 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
                   name="defense.criminalFaction.blurb"
                   defaultValue={d.criminalFaction.blurb}
                   lines={1}
-                  style={{ ...type.body, fontSize: 9 }}
+                  style={{ ...type.body, fontSize: pt['9'] }}
                 />
               )}
             </View>
           )}
           {d.orderHooks?.length > 0 && (
             <View>
-              <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>ORDER HOOKS</Text>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>ORDER HOOKS</Text>
               {d.orderHooks.map((h, i) => (
                 <View key={`oh-${i}`} style={{ flexDirection: 'row' }}>
-                  <Text style={{ color: palette.bad, marginRight: 4, fontSize: 9 }}>·</Text>
+                  <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>·</Text>
                   <EditableText
                     name={`defense.orderHook.${i}`}
                     defaultValue={hookText(h)}
-                    style={{ ...type.body, fontSize: 9 }}
+                    style={{ ...type.body, fontSize: pt['9'] }}
                   />
                 </View>
               ))}
@@ -251,7 +251,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       {Object.values(d.supportingCapabilities).some(Boolean) && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             SUPPORTING CAPABILITIES
           </Text>
           {Object.entries(d.supportingCapabilities).filter(([, v]) => v).map(([key, v]) => (
@@ -259,18 +259,18 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
               key={`sc-${key}`}
               style={{ flexDirection: 'row', marginBottom: 3, alignItems: 'flex-start' }}
             >
-              <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted, width: 100 }}>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, width: 100 }}>
                 {capKey(key)}
               </Text>
               <View style={{ flex: 1 }}>
-                <Text style={{ ...type.body, fontSize: 9, color: palette.ink }}>
+                <Text style={{ ...type.body, fontSize: pt['9'], color: palette.ink }}>
                   {typeof v === 'string' ? v : (v?.label || cap(v?.level) || '—')}
                 </Text>
                 {typeof v === 'object' && v?.description && (
                   <EditableText
                     name={`defense.cap.${key}.description`}
                     defaultValue={v.description}
-                    style={{ ...type.caption, fontSize: 8, color: palette.muted }}
+                    style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}
                   />
                 )}
               </View>
@@ -283,7 +283,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       {d.vulnerabilities?.length > 0 && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             VULNERABILITIES
           </Text>
           <BulletList

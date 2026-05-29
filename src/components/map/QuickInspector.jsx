@@ -95,7 +95,7 @@ export default function QuickInspector() {
         gap: 6, justifyContent: 'space-between',
       }}>
         <div style={{
-          fontFamily: serif, fontWeight: 700, fontSize: 14,
+          fontFamily: serif, fontWeight: 700, fontSize: FS['14'],
           color: INK, minWidth: 0, overflow: 'hidden',
           textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1,
         }}>
@@ -116,7 +116,7 @@ export default function QuickInspector() {
       </div>
       {pressure && (
         <div style={{
-          fontFamily: serif, fontSize: 11.5,
+          fontFamily: serif, fontSize: FS['11.5'],
           color: BODY, lineHeight: 1.5,
           marginTop: 6,
           display: '-webkit-box',

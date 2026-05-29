@@ -118,7 +118,7 @@ export default function FounderTile() {
         </div>
         <h2 style={{
           margin: `${SP.sm}px 0 0`, fontFamily: serif_, fontWeight: 600,
-          fontSize: 22, color: GOLD_500, letterSpacing: '-0.005em',
+          fontSize: FS['22'], color: GOLD_500, letterSpacing: '-0.005em',
         }}>
           👑 Founder Lifetime
         </h2>

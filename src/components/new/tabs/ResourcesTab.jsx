@@ -40,8 +40,8 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
         <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:160}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:terrainColor,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:4}}>Terrain</div>
-            <div style={{fontSize:22,fontWeight:700,color:'#1c1409',lineHeight:1.1,marginBottom:6}}>{res.terrain||'Unknown'}</div>
-            {res.strategicValue&&<div style={{fontSize:12.5,color:'#3d2b1a',lineHeight:1.5}}>{res.strategicValue}</div>}
+            <div style={{fontSize: FS['22'],fontWeight:700,color:'#1c1409',lineHeight:1.1,marginBottom:6}}>{res.terrain||'Unknown'}</div>
+            {res.strategicValue&&<div style={{fontSize: FS['12.5'],color:'#3d2b1a',lineHeight:1.5}}>{res.strategicValue}</div>}
           </div>
           {res.economicStrengths?.length>0&&<div style={{flex:'2 1 200px'}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Economic Strengths</div>
@@ -171,7 +171,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           {(res.priorityNotes||[]).map((note,i)=>(
             <div key={i} style={{display:'flex',gap:8,padding:'8px 12px',background:'#f8f4fd',border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',borderRadius:5}}>
               <span style={{fontSize:FS.sm,color:'#5a2a8a',flexShrink:0}}>✦</span>
-              <p style={{fontSize:12.5,color:'#1c1409',lineHeight:1.45,margin:0}}>{note}</p>
+              <p style={{fontSize: FS['12.5'],color:'#1c1409',lineHeight:1.45,margin:0}}>{note}</p>
             </div>
           ))}
           {/* Structural gaps */}

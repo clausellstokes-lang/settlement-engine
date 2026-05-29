@@ -152,7 +152,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               borderRadius:6,padding:'7px 12px',
               display:'flex',alignItems:'flex-start',gap:8,
             }}>
-              <span style={{fontSize:16,flexShrink:0}}>{svc.icon}</span>
+              <span style={{fontSize: FS['16'],flexShrink:0}}>{svc.icon}</span>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2,flexWrap:'wrap'}}>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:'#1c1409'}}>{svc.label}</span>
@@ -211,7 +211,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
       <div style={{background:'linear-gradient(to right,#faf6ec,#f5ede0)',border:'1px solid #d8c090',borderLeft:`4px solid ${prosColor}`,borderRadius:8,padding:'12px 16px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
           <div>
-            <div style={{fontSize:22,fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
+            <div style={{fontSize: FS['22'],fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
             <div style={{fontSize:FS.sm,color:'#6b5340'}}>{eco.economicComplexity}</div>
           </div>
           <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-start'}}>
@@ -461,12 +461,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             {/* Capture rate + scale context */}
             <div style={{background:sevBg,border:`1px solid ${sevColor}30`,borderLeft:`4px solid ${sevColor}`,borderRadius:6,padding:'10px 14px',display:'flex',gap:14,alignItems:'flex-start'}}>
               <div style={{flexShrink:0,textAlign:'center',minWidth:56}}>
-                <div style={{fontWeight:800,fontSize:26,color:sevColor,lineHeight:1}}>{bmc}%</div>
+                <div style={{fontWeight:800,fontSize: FS['26'],color:sevColor,lineHeight:1}}>{bmc}%</div>
                 <div style={{fontSize:FS.micro,fontWeight:700,color:sevColor,textTransform:'uppercase',letterSpacing:'0.05em',marginTop:2}}>Off-book</div>
               </div>
               <div style={{flex:1}}>
                 <p style={{fontSize:FS.sm,color:'#3d2b1a',lineHeight:1.5,margin:'0 0 4px'}}>{scaleNote}</p>
-                {dragDesc&&<p style={{fontSize:11.5,color:'#6b5340',fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
+                {dragDesc&&<p style={{fontSize: FS['11.5'],color:'#6b5340',fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
               </div>
             </div>
 

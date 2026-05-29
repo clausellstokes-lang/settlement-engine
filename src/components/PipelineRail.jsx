@@ -137,7 +137,7 @@ function StepRow({ entry, isLast, traces }) {
                         {c.effect ? <span style={{ color: MUTED }}> · {c.effect}</span> : null}
                         {c.reason ? (
                           <div style={{
-                            fontSize: 10.5, fontStyle: 'italic',
+                            fontSize: FS['10.5'], fontStyle: 'italic',
                             color: MUTED, marginTop: 1,
                             fontFamily: 'Crimson Text, Georgia, serif',
                           }}>
@@ -249,7 +249,7 @@ export default function PipelineRail({ compact = false }) {
         <h3 style={{
           margin: 0,
           fontFamily: 'Crimson Text, Georgia, serif',
-          fontSize: 18, fontWeight: 600, color: INK,
+          fontSize: FS['18'], fontWeight: 600, color: INK,
         }}>
           {t('pipeline.title')}
         </h3>

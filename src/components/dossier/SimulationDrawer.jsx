@@ -127,13 +127,13 @@ export default function SimulationDrawer() {
                 </div>
                 <div style={{
                   fontFamily: '"Crimson Text", Georgia, serif',
-                  fontSize: 18, fontWeight: 600, color: INK,
+                  fontSize: FS['18'], fontWeight: 600, color: INK,
                   marginTop: 2, lineHeight: 1.2,
                 }}>
                   How this was simulated
                 </div>
                 <div style={{
-                  marginTop: 4, fontSize: 11.5, color: BODY,
+                  marginTop: 4, fontSize: FS['11.5'], color: BODY,
                   lineHeight: 1.5, fontFamily: sans,
                 }}>
                   Seventeen pure-functional steps, deterministic per seed.

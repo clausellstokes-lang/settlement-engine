@@ -30,7 +30,7 @@ function Step({ n, children }) {
         fontSize:FS.xs, fontWeight:800, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:1 }}>
         {n}
       </div>
-      <p style={{ fontSize:12.5, color:INK, lineHeight:1.6, margin:0 }}>{children}</p>
+      <p style={{ fontSize: FS['12.5'], color:INK, lineHeight:1.6, margin:0 }}>{children}</p>
     </div>
   );
 }
@@ -65,7 +65,7 @@ function QuickTab() {
   const conceptIntro = (
     <div style={{ padding:'12px 14px', background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
       borderRadius:7, marginBottom:14 }}>
-      <div style={{ fontFamily:serif_, fontSize:16, fontWeight:600, color:GOLD, marginBottom:6 }}>
+      <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:GOLD, marginBottom:6 }}>
         A settlement generator that thinks — and stays within your constraints.
       </div>
       <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
@@ -115,7 +115,7 @@ function QuickTab() {
       <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong> — forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
       <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft:32 }}>
         <div style={{ width:6, height:6, borderRadius:'50%', background:'#b8860b', flexShrink:0, marginTop:7 }}/>
-        <p style={{ fontSize:12.5, color:'#5a3a00', lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
+        <p style={{ fontSize: FS['12.5'], color:'#5a3a00', lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
       </div>
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first — it gives you the one-paragraph version ready for the table.</Step>
       <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and — where relevant — legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
@@ -283,7 +283,7 @@ function PhilosophyTab() {
     {/* Opening card */}
     <div style={{ padding:'14px 16px', background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
       borderRadius:7, marginBottom:14 }}>
-      <div style={{ fontFamily:serif_, fontSize:16, fontWeight:600, color:GOLD, marginBottom:8 }}>
+      <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:GOLD, marginBottom:8 }}>
         Discover your own world.
       </div>
       <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.75, margin:'0 0 10px' }}>

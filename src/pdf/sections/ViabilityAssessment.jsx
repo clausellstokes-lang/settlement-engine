@@ -19,7 +19,7 @@ import { viabilityHeadline, viabilityTone } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { cap, label, smart, humanize, upper } from '../lib/format.js';
 
 const SEVERITY_TONE = {
@@ -57,7 +57,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           name="viability.summary"
           defaultValue={v.summary || ''}
           lines={2}
-          style={{ ...type.body, fontSize: 9.5 }}
+          style={{ ...type.body, fontSize: pt['9.5'] }}
         />
       </Callout>
 
@@ -73,10 +73,10 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           }}
           wrap={false}
         >
-          <Text style={{ ...type.label, color: palette.ai, fontSize: 8, marginBottom: 2 }}>
+          <Text style={{ ...type.label, color: palette.ai, fontSize: pt['8'], marginBottom: 2 }}>
             MAGIC DEPENDENCY
           </Text>
-          <Text style={{ ...type.body, fontSize: 9.5, color: palette.ink }}>
+          <Text style={{ ...type.body, fontSize: pt['9.5'], color: palette.ink }}>
             This settlement leans on arcane infrastructure. If magic-supporting institutions
             are removed or their staff lost, the dependent chains below would fail.
           </Text>
@@ -94,7 +94,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
       {contradictions.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             BY-DESIGN CONTRADICTIONS
           </Text>
           {contradictions.map((c, i) => (
@@ -103,12 +103,12 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
               style={{ flexDirection: 'row', marginBottom: 3, alignItems: 'flex-start' }}
               wrap={false}
             >
-              <Text style={{ color: palette.warn, marginRight: 4, fontSize: 9 }}>↯</Text>
+              <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['9'] }}>↯</Text>
               <View style={{ flex: 1 }}>
                 <EditableText
                   name={`viability.contradiction.${i}`}
                   defaultValue={typeof c === 'string' ? c : (c?.text || c?.description || c?.label || '')}
-                  style={{ ...type.body, fontSize: 9 }}
+                  style={{ ...type.body, fontSize: pt['9'] }}
                 />
               </View>
             </View>
@@ -120,7 +120,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
       {issues.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             ACTIVE ISSUES · {issues.length}
           </Text>
           {issues.map((iss, i) => (
@@ -134,7 +134,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
         <View style={{ marginBottom: space.sm, flexDirection: 'row', gap: space.md }}>
           {warnings.length > 0 && (
             <View style={{ flex: 1 }}>
-              <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 2 }}>
+              <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 2 }}>
                 WARNINGS
               </Text>
               <BulletList
@@ -147,7 +147,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           )}
           {violations.length > 0 && (
             <View style={{ flex: 1 }}>
-              <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 2 }}>
+              <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 2 }}>
                 STRUCTURAL VIOLATIONS
               </Text>
               <BulletList
@@ -165,7 +165,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
       {(stress.length > 0 || stressCons.length > 0) && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             ACTIVE STRESS
           </Text>
           {stress.length > 0 && (
@@ -177,22 +177,22 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           )}
           {stress.filter(s => s.hook).map((s, i) => (
             <View key={`vsh-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }} wrap={false}>
-              <Text style={{ color: palette.bad, marginRight: 4, fontSize: 9 }}>•</Text>
+              <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>•</Text>
               <View style={{ flex: 1 }}>
-                <Text style={{ ...type.label, fontSize: 7, color: palette.muted }}>
+                <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>
                   {upper(humanize(s.label || ''))}
                 </Text>
                 <EditableText
                   name={`viability.stress.${i}.hook`}
                   defaultValue={typeof s.hook === 'string' ? s.hook : (s.hook?.text || s.hook?.hook || '')}
-                  style={{ ...type.body, fontSize: 9 }}
+                  style={{ ...type.body, fontSize: pt['9'] }}
                 />
               </View>
             </View>
           ))}
           {stressCons.length > 0 && (
             <View style={{ marginTop: 3 }}>
-              <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+              <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
                 CONSEQUENCES
               </Text>
               <BulletList
@@ -210,7 +210,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
       {v.metrics && Object.keys(v.metrics).length > 0 && (
         <View>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.muted, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
             KEY METRICS
           </Text>
           {Object.entries(v.metrics).slice(0, 12).map(([k, val]) => (
@@ -228,14 +228,14 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
                 style={{
                   ...type.label,
                   color: palette.muted,
-                  fontSize: 7.5,
+                  fontSize: pt['7.5'],
                   width: 130,
                   letterSpacing: 0.2,
                 }}
               >
                 {upper(humanize(k))}
               </Text>
-              <Text style={{ ...type.body, flex: 1, fontSize: 9, color: palette.ink }}>
+              <Text style={{ ...type.body, flex: 1, fontSize: pt['9'], color: palette.ink }}>
                 {formatVal(val)}
               </Text>
             </View>
@@ -262,27 +262,27 @@ function IssueRow({ iss, idx }) {
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
         <Pill tone={tone}>{cap(iss.severity || 'note')}</Pill>
-        <Text style={{ ...type.body_em, fontSize: 10, color: palette.ink, marginLeft: 6, flex: 1 }}>
+        <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.ink, marginLeft: 6, flex: 1 }}>
           {iss.title || humanize(iss.type || 'Issue')}
         </Text>
       </View>
       {iss.institution && (
-        <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
           {humanize(iss.institution)}
         </Text>
       )}
       {iss.description && (
-        <Text style={{ ...type.body, fontSize: 9, marginTop: 1 }}>{iss.description}</Text>
+        <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>{iss.description}</Text>
       )}
       {iss.suggestedFixes?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.good, marginBottom: 1 }}>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.good, marginBottom: 1 }}>
             SUGGESTED FIXES
           </Text>
           {iss.suggestedFixes.map((fx, j) => (
             <View key={`fx-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-              <Text style={{ color: palette.good, marginRight: 4, fontSize: 8 }}>↳</Text>
-              <Text style={{ ...type.body, fontSize: 8.5, flex: 1 }}>
+              <Text style={{ color: palette.good, marginRight: 4, fontSize: pt['8'] }}>↳</Text>
+              <Text style={{ ...type.body, fontSize: pt['8.5'], flex: 1 }}>
                 {label(fx) || (typeof fx === 'string' ? fx : '')}
               </Text>
             </View>
@@ -290,13 +290,13 @@ function IssueRow({ iss, idx }) {
         </View>
       )}
       <View style={{ marginTop: 3 }}>
-        <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+        <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
           DM NOTE
         </Text>
         <EditableText
           name={`viability.issue.${idx}.note`}
           defaultValue={iss.priorityNote || ''}
-          style={{ ...type.body, fontSize: 8.5 }}
+          style={{ ...type.body, fontSize: pt['8.5'] }}
         />
       </View>
     </View>

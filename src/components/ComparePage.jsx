@@ -89,7 +89,7 @@ function PageTitle({ eyebrow, title, lede }) {
         {eyebrow}
       </div>
       <h1 style={{
-        margin: 0, fontFamily: serif_, fontSize: 36, fontWeight: 600,
+        margin: 0, fontFamily: serif_, fontSize: FS['36'], fontWeight: 600,
         color: INK, lineHeight: 1.15,
       }}>
         {title}

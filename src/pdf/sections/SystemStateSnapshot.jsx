@@ -12,7 +12,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline } from '../primitives/Dense.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { BAND_COLOR, BAND_HINT } from '../../domain/state/bands.js';
 
 const DIM_META = {
@@ -85,14 +85,14 @@ function DimensionCard({ dimKey, dim }) {
         backgroundColor: '#fffbf5',
       }}>
         <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
-          <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10 }}>
+          <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
             {meta.label}
           </Text>
           <Text style={{ flex: 1 }} />
-          <Text style={{ ...type.label_em, color, fontSize: 9, letterSpacing: 0.6 }}>
+          <Text style={{ ...type.label_em, color, fontSize: pt['9'], letterSpacing: 0.6 }}>
             {dim.band.toUpperCase()}
           </Text>
-          <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginLeft: 4 }}>
+          <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginLeft: 4 }}>
             {dim.value}
           </Text>
         </View>
@@ -100,14 +100,14 @@ function DimensionCard({ dimKey, dim }) {
         <View style={{ height: 3, backgroundColor: '#e7d7b8', marginBottom: 4 }}>
           <View style={{ width: `${fillPct}%`, height: '100%', backgroundColor: color }} />
         </View>
-        <Text style={{ ...type.caption, color: palette.muted, fontSize: 7.5, fontStyle: 'italic', marginBottom: 3 }}>
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], fontStyle: 'italic', marginBottom: 3 }}>
           {meta.desc} {BAND_HINT[dim.band]}
         </Text>
         {dim.drivers?.length > 0 && (
           <View style={{ marginBottom: 2 }}>
-            <Text style={{ ...type.label, color: palette.gold, fontSize: 7 }}>DRIVERS</Text>
+            <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7'] }}>DRIVERS</Text>
             {dim.drivers.slice(0, 3).map((d, i) => (
-              <Text key={i} style={{ ...type.body, fontSize: 7.5, color: palette.ink, lineHeight: 1.4 }}>
+              <Text key={i} style={{ ...type.body, fontSize: pt['7.5'], color: palette.ink, lineHeight: 1.4 }}>
                 • {d}
               </Text>
             ))}
@@ -115,9 +115,9 @@ function DimensionCard({ dimKey, dim }) {
         )}
         {dim.risks?.length > 0 && (
           <View>
-            <Text style={{ ...type.label, color: palette.bad, fontSize: 7 }}>RISKS</Text>
+            <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7'] }}>RISKS</Text>
             {dim.risks.slice(0, 3).map((r, i) => (
-              <Text key={i} style={{ ...type.body, fontSize: 7.5, color: palette.ink, lineHeight: 1.4 }}>
+              <Text key={i} style={{ ...type.body, fontSize: pt['7.5'], color: palette.ink, lineHeight: 1.4 }}>
                 • {r}
               </Text>
             ))}

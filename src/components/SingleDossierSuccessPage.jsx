@@ -167,7 +167,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
 
       <h1 style={{
         margin: `${SP.lg}px 0 0`, fontFamily: serif_,
-        fontSize: 28, fontWeight: 600, color: INK,
+        fontSize: FS['28'], fontWeight: 600, color: INK,
       }}>
         Your dossier is ready
       </h1>

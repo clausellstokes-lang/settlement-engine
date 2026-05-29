@@ -75,7 +75,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
           <input value={search} onChange={e=>setSearch(e.target.value)}
             placeholder="Filter by name, role, or faction…"
             style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',borderRadius:5,fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:'#1c1409',background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
-          {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize:16,color:'#9c8068',padding:0,lineHeight:1}}>×</button>}
+          {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize: FS['16'],color:'#9c8068',padding:0,lineHeight:1}}>×</button>}
         </div>
         {[
           {key:'all',   label:'All'},

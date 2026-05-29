@@ -20,7 +20,7 @@ import {
 } from '../primitives/Dense.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { smart, humanize, num } from '../lib/format.js';
 
 export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
@@ -63,7 +63,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
             borderRadius: 2,
           }}
         >
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             ANCHOR FACTS
           </Text>
           <KeyValRow
@@ -100,13 +100,13 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
           )}
           {a.culturalNotes && (
             <View style={{ marginTop: 3 }}>
-              <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+              <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
                 CULTURAL NOTES
               </Text>
               <EditableText
                 name="daily.cultureNotes"
                 defaultValue={a.culturalNotes}
-                style={{ ...type.body, fontSize: 8.5, fontStyle: 'italic' }}
+                style={{ ...type.body, fontSize: pt['8.5'], fontStyle: 'italic' }}
               />
             </View>
           )}
@@ -115,7 +115,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
 
       {/* ── Identity rows (two-column stat-block layout) ─────── */}
       <View style={{ marginBottom: space.sm }}>
-        <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+        <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
           IDENTITY
         </Text>
         {idRows.map((r, i) => (
@@ -134,13 +134,13 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
                 ...type.label,
                 color: palette.muted,
                 width: 100,
-                fontSize: 7.5,
+                fontSize: pt['7.5'],
                 letterSpacing: 0.2,
               }}
             >
               {r.label.toUpperCase()}
             </Text>
-            <Text style={{ ...type.body, color: palette.ink, flex: 1, fontSize: 9.5 }}>
+            <Text style={{ ...type.body, color: palette.ink, flex: 1, fontSize: pt['9.5'] }}>
               {r.value}
             </Text>
           </View>
@@ -151,7 +151,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
       {id.quarters?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             QUARTERS · {id.quarters.length}
           </Text>
           {id.quarters.map((q, i) => (
@@ -164,7 +164,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
       {(d.hasPassages || d.foodBalance) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: accent, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: accent, fontSize: pt['8'], marginBottom: 3 }}>
             DAILY LIFE
           </Text>
           {d.hasPassages ? (
@@ -174,7 +174,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
                   style={{
                     ...type.label,
                     color: accent,
-                    fontSize: 9,
+                    fontSize: pt['9'],
                     letterSpacing: 0.2,
                     marginBottom: 2,
                   }}
@@ -185,7 +185,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
                   name={`daily.${p.time.toLowerCase()}`}
                   defaultValue={p.text || ''}
                   lines={3}
-                  style={{ ...type.prose, fontSize: 9.5 }}
+                  style={{ ...type.prose, fontSize: pt['9.5'] }}
                 />
               </View>
             ))
@@ -195,7 +195,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
                 tone={d.foodBalance.deficit > 0 ? 'bad' : 'good'}
                 kicker="FOOD BALANCE"
               >
-                <Text style={{ ...type.body, fontSize: 9.5 }}>
+                <Text style={{ ...type.body, fontSize: pt['9.5'] }}>
                   {d.foodBalance.deficit > 0
                     ? `Deficit of ${smart(d.foodBalance.deficit)} units — the settlement depends on imports for daily survival.`
                     : `Surplus of ${smart(d.foodBalance.surplus || 0)} units — the local food supply is reliable.`}
@@ -223,7 +223,7 @@ function QuarterCard({ q, idx }) {
       }}
       wrap={false}
     >
-      <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10 }}>
+      <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
         {humanize(q.name || `Quarter ${idx + 1}`)}
       </Text>
       {q.description && (
@@ -232,23 +232,23 @@ function QuarterCard({ q, idx }) {
             name={`identity.quarter.${idx}.description`}
             defaultValue={q.description}
             lines={2}
-            style={{ ...type.body, fontSize: 9 }}
+            style={{ ...type.body, fontSize: pt['9'] }}
           />
         </View>
       )}
       {q.landmarks?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
             LANDMARKS
           </Text>
           {q.landmarks.map((lm, j) => (
             <View key={`lm-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-              <Text style={{ color: palette.gold, marginRight: 4, fontSize: 8 }}>·</Text>
+              <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['8'] }}>·</Text>
               <View style={{ flex: 1 }}>
                 <EditableText
                   name={`identity.quarter.${idx}.landmark.${j}`}
                   defaultValue={typeof lm === 'string' ? lm : (lm?.name || lm?.label || '')}
-                  style={{ ...type.body, fontSize: 8.5 }}
+                  style={{ ...type.body, fontSize: pt['8.5'] }}
                 />
               </View>
             </View>

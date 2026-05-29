@@ -24,7 +24,7 @@ import { StackedBar } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { cap, smart, label, hookText, finite, safePct, humanize } from '../lib/format.js';
 
 export function Overview({ settlement, narrativeMode, vm }) {
@@ -49,7 +49,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {/* ── Thesis (AI mode only) ─────────────────────────────────── */}
       {o.thesis && (
         <Callout tone="ai" kicker="THESIS">
-          <Text style={{ ...type.italic, color: palette.ink, fontSize: 10.5 }}>
+          <Text style={{ ...type.italic, color: palette.ink, fontSize: pt['10.5'] }}>
             {o.thesis}
           </Text>
         </Callout>
@@ -69,7 +69,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {/* ── Active crises ─────────────────────────────────────────── */}
       {o.stress.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             ACTIVE CRISES
           </Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginBottom: 3 }}>
@@ -81,16 +81,16 @@ export function Overview({ settlement, narrativeMode, vm }) {
             <View key={`s-${i}`} style={{ marginBottom: 3 }} wrap={false}>
               {s.summary && (
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ ...type.body_em, color: palette.bad, fontSize: 9, marginRight: 4 }}>
+                  <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['9'], marginRight: 4 }}>
                     {s.label}:
                   </Text>
-                  <Text style={{ ...type.body, fontSize: 9, flex: 1 }}>{s.summary}</Text>
+                  <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{s.summary}</Text>
                 </View>
               )}
               {s.hook && (
                 <View style={{ flexDirection: 'row', marginTop: 1 }}>
-                  <Text style={{ color: palette.bad, marginRight: 4, fontSize: 9 }}>↳</Text>
-                  <Text style={{ ...type.italic, color: palette.second, fontSize: 9, flex: 1 }}>
+                  <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>↳</Text>
+                  <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], flex: 1 }}>
                     {hookText(s.hook)}
                   </Text>
                 </View>
@@ -103,7 +103,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {/* ── Systems Health Dashboard ─────────────────────────────── */}
       {hasSystemsHealth(o) && (
         <>
-      <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3, marginTop: 4 }}>
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3, marginTop: 4 }}>
         SYSTEMS HEALTH
       </Text>
       <View style={{ flexDirection: 'row', gap: space.md }}>
@@ -129,8 +129,8 @@ export function Overview({ settlement, narrativeMode, vm }) {
           {/* Enforcement ratio + food balance bar */}
           {o.safetyRatio != null && (
             <View style={{ marginBottom: 6 }}>
-              <Text style={{ ...type.label, fontSize: 8, color: palette.ink }}>Enforcement ratio</Text>
-              <Text style={{ ...type.body, fontSize: 9, color: palette.second }}>
+              <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Enforcement ratio</Text>
+              <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second }}>
                 {smart(o.safetyRatio)} watch:pop
               </Text>
             </View>
@@ -142,8 +142,8 @@ export function Overview({ settlement, narrativeMode, vm }) {
           )}
           {o.viabilityVerdict && (
             <View>
-              <Text style={{ ...type.label, fontSize: 8, color: palette.ink }}>Viability</Text>
-              <Text style={{ ...type.body, fontSize: 9, color: palette[verdictTone(o.viabilityVerdict)] || palette.muted }}>
+              <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Viability</Text>
+              <Text style={{ ...type.body, fontSize: pt['9'], color: palette[verdictTone(o.viabilityVerdict)] || palette.muted }}>
                 {cap(o.viabilityVerdict)}
               </Text>
             </View>
@@ -156,7 +156,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {/* ── Tensions & Conflicts ──────────────────────────────────── */}
       {(o.tensions.length > 0 || o.conflicts.length > 0) && (
         <View style={{ marginTop: space.sm }}>
-          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             TENSIONS & CONFLICTS
           </Text>
           {o.tensions.map((t, i) => (
@@ -176,7 +176,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
                 <Text
                   style={{
                     ...type.body_em,
-                    fontSize: 9.5,
+                    fontSize: pt['9.5'],
                     color: palette.ink,
                     marginLeft: t.severity ? 6 : 0,
                     flex: 1,
@@ -186,12 +186,12 @@ export function Overview({ settlement, narrativeMode, vm }) {
                 </Text>
               </View>
               {t.description && (
-                <Text style={{ ...type.body, fontSize: 9, marginTop: 1 }}>
+                <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>
                   {t.description}
                 </Text>
               )}
               {t.parties?.length > 0 && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginTop: 1 }}>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 1 }}>
                   {t.parties.map(label).filter(Boolean).join(' / ')}
                 </Text>
               )}
@@ -199,8 +199,8 @@ export function Overview({ settlement, narrativeMode, vm }) {
                 <View style={{ marginTop: 2 }}>
                   {t.hooks.slice(0, 3).map((h, hi) => (
                     <View key={`th-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: 8.5 }}>↳</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: 8.5, flex: 1 }}>
+                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['8.5'] }}>↳</Text>
+                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
                         {hookText(h)}
                       </Text>
                     </View>
@@ -226,7 +226,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
                 <Text
                   style={{
                     ...type.body_em,
-                    fontSize: 9.5,
+                    fontSize: pt['9.5'],
                     color: palette.ink,
                     marginLeft: c.intensity ? 6 : 0,
                     flex: 1,
@@ -236,18 +236,18 @@ export function Overview({ settlement, narrativeMode, vm }) {
                 </Text>
               </View>
               {c.issue && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginTop: 1 }}>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 1 }}>
                   <Text style={{ color: palette.faint }}>Issue: </Text>
                   {c.issue}
                 </Text>
               )}
               {c.description && (
-                <Text style={{ ...type.body, fontSize: 9, marginTop: 1 }}>
+                <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>
                   {c.description}
                 </Text>
               )}
               {c.stakes && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, fontStyle: 'italic', marginTop: 1 }}>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], fontStyle: 'italic', marginTop: 1 }}>
                   Stakes: {c.stakes}
                 </Text>
               )}
@@ -255,8 +255,8 @@ export function Overview({ settlement, narrativeMode, vm }) {
                 <View style={{ marginTop: 2 }}>
                   {c.hooks.slice(0, 3).map((h, hi) => (
                     <View key={`ch-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: 8.5 }}>↳</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: 8.5, flex: 1 }}>
+                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['8.5'] }}>↳</Text>
+                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
                         {hookText(h)}
                       </Text>
                     </View>
@@ -272,16 +272,16 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {(o.character || o.history?.foundedBy || o.history?.origin) && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             CHARACTER & ORIGIN
           </Text>
           {o.character && (
-            <Text style={{ ...type.prose, fontSize: 9.5 }}>
+            <Text style={{ ...type.prose, fontSize: pt['9.5'] }}>
               {o.character}
             </Text>
           )}
           {o.settlementReason && (
-            <Text style={{ ...type.body, marginTop: 3, fontSize: 9 }}>
+            <Text style={{ ...type.body, marginTop: 3, fontSize: pt['9'] }}>
               <Text style={{ color: palette.muted }}>Reason settled: </Text>
               {o.settlementReason}
             </Text>
@@ -293,17 +293,17 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {o.prominentRelationship && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.cool, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>
             NOTABLE CONNECTION
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
-            <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, marginRight: 4 }}>
+            <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], marginRight: 4 }}>
               {label(o.prominentRelationship.otherSettlement) || 'Neighbour'}
             </Text>
             <Pill tone="cool">{cap(o.prominentRelationship.relationshipType || o.prominentRelationship.type) || 'linked'}</Pill>
           </View>
           {o.prominentRelationship.description && (
-            <Text style={{ ...type.body, fontSize: 9 }}>
+            <Text style={{ ...type.body, fontSize: pt['9'] }}>
               {o.prominentRelationship.description}
             </Text>
           )}
@@ -314,13 +314,13 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {(o.geography?.terrainAdvantages?.length > 0 || o.geography?.terrainCriticals?.length > 0 || o.geography?.nearbyResources?.length > 0) && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.good, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.good, fontSize: pt['8'], marginBottom: 3 }}>
             GEOGRAPHY & RESOURCES
           </Text>
           <ThreeCol
             a={
               <View>
-                <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>ADVANTAGES</Text>
+                <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>ADVANTAGES</Text>
                 <BulletList
                   items={o.geography.terrainAdvantages}
                   tone="good"
@@ -331,7 +331,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
             }
             b={
               <View>
-                <Text style={{ ...type.label, fontSize: 7.5, color: palette.bad }}>CRITICALS</Text>
+                <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.bad }}>CRITICALS</Text>
                 <BulletList
                   items={o.geography.terrainCriticals}
                   tone="bad"
@@ -342,7 +342,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
             }
             c={
               <View>
-                <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>NEARBY</Text>
+                <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>NEARBY</Text>
                 <BulletList
                   items={o.geography.nearbyResources?.slice(0, 6) || []}
                   tone="muted"
@@ -359,19 +359,19 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {o.quarters?.length > 0 && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             QUARTERS
           </Text>
           {o.quarters.map((q, i) => (
             <View key={`q-${i}`} style={{ marginBottom: 4 }} wrap={false}>
-              <Text style={{ ...type.body_em, fontSize: 9.5, color: palette.ink }}>{q.name}</Text>
+              <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink }}>{q.name}</Text>
               {q.description && (
-                <Text style={{ ...type.body, fontSize: 9 }}>
+                <Text style={{ ...type.body, fontSize: pt['9'] }}>
                   {q.description}
                 </Text>
               )}
               {q.landmarks?.length > 0 && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
                   Landmarks: {q.landmarks.map(l => label(l)).filter(Boolean).join(', ')}
                 </Text>
               )}
@@ -384,7 +384,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {(o.warnings?.length > 0 || o.coherenceNotes?.length > 0 || o.structuralSuggestions?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             WARNINGS & NOTES
           </Text>
           <BulletList
@@ -404,7 +404,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {o.categoryDistribution?.length > 0 && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             INSTITUTIONS · {o.institutionsCount} TOTAL
           </Text>
           <StackedBar
@@ -497,31 +497,31 @@ function FoodBalanceBar({ fb }) {
   const needPct = safePct((need / max) * 100);
   return (
     <View>
-      <Text style={{ ...type.label, fontSize: 8, color: palette.ink }}>Food balance</Text>
+      <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Food balance</Text>
       <View style={{ marginTop: 2 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
-          <Text style={{ ...type.caption, fontSize: 7.5, width: 40 }}>Produced</Text>
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], width: 40 }}>Produced</Text>
           <View style={{ flex: 1, height: 4, backgroundColor: '#f0e8d8', borderRadius: 1 }}>
             <View style={{ width: `${prodPct}%`, height: '100%', backgroundColor: palette.good }} />
           </View>
-          <Text style={{ ...type.caption, fontSize: 7.5, marginLeft: 4 }}>{smart(prod)}</Text>
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], marginLeft: 4 }}>{smart(prod)}</Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ ...type.caption, fontSize: 7.5, width: 40 }}>Needed</Text>
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], width: 40 }}>Needed</Text>
           <View style={{ flex: 1, height: 4, backgroundColor: '#f0e8d8', borderRadius: 1 }}>
             <View style={{ width: `${needPct}%`, height: '100%', backgroundColor: palette.bad }} />
           </View>
-          <Text style={{ ...type.caption, fontSize: 7.5, marginLeft: 4 }}>{smart(need)}</Text>
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], marginLeft: 4 }}>{smart(need)}</Text>
         </View>
       </View>
       {fb?.deficit > 0 && (
-        <Text style={{ ...type.caption, color: palette.bad, fontSize: 8, marginTop: 1 }}>
+        <Text style={{ ...type.caption, color: palette.bad, fontSize: pt['8'], marginTop: 1 }}>
           Deficit: {smart(fb.deficit)}
           {fb.importCoverage != null ? ` · imports cover ${smart(fb.importCoverage)}%` : ''}
         </Text>
       )}
       {fb?.surplus > 0 && (
-        <Text style={{ ...type.caption, color: palette.good, fontSize: 8, marginTop: 1 }}>
+        <Text style={{ ...type.caption, color: palette.good, fontSize: pt['8'], marginTop: 1 }}>
           Surplus: {smart(fb.surplus)}
         </Text>
       )}

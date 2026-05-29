@@ -129,7 +129,7 @@ export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewCh
                 color: active ? COLORS.active : COLORS.muted,
                 border: 'none',
                 borderBottom: active ? `2px solid ${COLORS.active}` : '2px solid transparent',
-                fontSize: 11.5, fontWeight: active ? 800 : 600,
+                fontSize: FS['11.5'], fontWeight: active ? 800 : 600,
                 textTransform: 'uppercase', letterSpacing: '0.05em',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
@@ -368,7 +368,7 @@ function KeyValRow({ k, v }) {
     <div style={{
       display: 'flex', alignItems: 'baseline', gap: 10,
       padding: '3px 0',
-      fontSize: 11.5, lineHeight: 1.4,
+      fontSize: FS['11.5'], lineHeight: 1.4,
       borderBottom: '1px dotted rgba(210,189,150,0.4)',
     }}>
       <span style={{ flexBasis: '40%', color: COLORS.ink, fontWeight: 700 }}>{String(k)}</span>

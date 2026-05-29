@@ -17,7 +17,7 @@ import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, GoldRule, HairRule, Tag } from '../primitives/Dense.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { hookText, humanize } from '../lib/format.js';
 
 // Source rank: which hook source category to prefer when picking the top 3.
@@ -62,11 +62,11 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
 
       {/* ── Hooks ─────────────────────────────────────────────── */}
       <View style={{ marginBottom: space.sm }}>
-        <Text style={{ ...type.label, color: palette.gold, fontSize: 9, marginBottom: 4 }}>
+        <Text style={{ ...type.label, color: palette.gold, fontSize: pt['9'], marginBottom: 4 }}>
           USE TONIGHT — HOOKS
         </Text>
         {hooks.length === 0 && (
-          <Text style={{ ...type.italic, color: palette.muted, fontSize: 9 }}>
+          <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9'] }}>
             No hooks surfaced. Improvise from the active crises below.
           </Text>
         )}
@@ -93,7 +93,7 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
                   fontFamily: 'Lora',
                   fontWeight: 700,
                   color: palette.gold,
-                  fontSize: 14,
+                  fontSize: pt['14'],
                   width: 18,
                   paddingTop: 1,
                 }}
@@ -103,7 +103,7 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
               <View style={{ flex: 1 }}>
                 {/* Hook text leads — large, scannable. Plain Text so the
                     prose extracts cleanly from the PDF. */}
-                <Text style={{ ...type.body, fontSize: 10.5, color: palette.ink, lineHeight: 1.35 }}>
+                <Text style={{ ...type.body, fontSize: pt['10.5'], color: palette.ink, lineHeight: 1.35 }}>
                   {text}
                 </Text>
                 {/* Source demoted to a small tag underneath */}
@@ -121,11 +121,11 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
 
       {/* ── NPCs ──────────────────────────────────────────────── */}
       <View style={{ marginBottom: space.sm }}>
-        <Text style={{ ...type.label, color: palette.cool, fontSize: 9, marginBottom: 4 }}>
+        <Text style={{ ...type.label, color: palette.cool, fontSize: pt['9'], marginBottom: 4 }}>
           THREE FACES TO REMEMBER
         </Text>
         {npcs.length === 0 && (
-          <Text style={{ ...type.italic, color: palette.muted, fontSize: 9 }}>
+          <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9'] }}>
             No NPCs detailed for this settlement.
           </Text>
         )}
@@ -144,17 +144,17 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
                 marginRight: 6, marginTop: 1,
               }}
             >
-              <Text style={{ ...type.label_em, color: palette.cool, fontSize: 9 }}>
+              <Text style={{ ...type.label_em, color: palette.cool, fontSize: pt['9'] }}>
                 {(npc.name || '?').slice(0, 2).toUpperCase()}
               </Text>
             </View>
             <View style={{ flex: 1 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10.5, marginRight: 6 }}>
+                <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10.5'], marginRight: 6 }}>
                   {npc.name}
                 </Text>
                 {npc.title && (
-                  <Text style={{ ...type.italic, color: palette.muted, fontSize: 9 }}>
+                  <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9'] }}>
                     {npc.title}
                   </Text>
                 )}
@@ -163,15 +163,15 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
               </View>
               {/* What they want this session — extractable prose */}
               <View style={{ flexDirection: 'row', marginTop: 1, alignItems: 'flex-start' }}>
-                <Text style={{ ...type.label, color: palette.cool, fontSize: 7, marginRight: 4, paddingTop: 2 }}>
+                <Text style={{ ...type.label, color: palette.cool, fontSize: pt['7'], marginRight: 4, paddingTop: 2 }}>
                   WANTS:
                 </Text>
-                <Text style={{ ...type.body, fontSize: 9, color: palette.second, flex: 1 }}>
+                <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, flex: 1 }}>
                   {npc.motivation || npc.blurb || 'leverage tonight\u2019s table'}
                 </Text>
               </View>
               {npc.factionLabel && (
-                <Text style={{ ...type.caption, color: palette.cool, fontSize: 7.5, marginTop: 1 }}>
+                <Text style={{ ...type.caption, color: palette.cool, fontSize: pt['7.5'], marginTop: 1 }}>
                   {npc.factionLabel}
                 </Text>
               )}
@@ -185,7 +185,7 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
         <>
           <HairRule />
           <View style={{ marginBottom: space.sm }}>
-            <Text style={{ ...type.label, color: palette.bad, fontSize: 9, marginBottom: 4 }}>
+            <Text style={{ ...type.label, color: palette.bad, fontSize: pt['9'], marginBottom: 4 }}>
               ACTIVE CRISES — KEEP IN MIND
             </Text>
             {crises.map((c, i) => (
@@ -199,17 +199,17 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
                 wrap={false}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 1 }}>
-                  <Text style={{ ...type.body_em, color: palette.bad, fontSize: 10, marginRight: 4 }}>
+                  <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10'], marginRight: 4 }}>
                     {humanize(c.label || c.icon || 'Crisis')}
                   </Text>
                   {c.summary && (
-                    <Text style={{ ...type.italic, color: palette.second, fontSize: 9, flex: 1 }}>
+                    <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], flex: 1 }}>
                       {c.summary}
                     </Text>
                   )}
                 </View>
                 {hookText(c.hook) && (
-                  <Text style={{ ...type.body, fontSize: 8.5, color: palette.muted, fontStyle: 'italic' }}>
+                  <Text style={{ ...type.body, fontSize: pt['8.5'], color: palette.muted, fontStyle: 'italic' }}>
                     {hookText(c.hook)}
                   </Text>
                 )}

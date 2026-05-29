@@ -63,7 +63,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
           <span style={{fontSize:FS.md,color:'#6b5340'}}>{age} years old</span>
           {sortedEvents.length>0&&<span style={{fontSize:FS.sm,color:'#9c8068'}}>{sortedEvents.length} recorded events · {currentTensions.length} current tensions</span>}
         </div>
-        {historicalCharacter&&<p style={{...serif,fontSize:13.5,color:'#4a3020',lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
+        {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:'#4a3020',lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>
 
       {/* ── VISUAL TIMELINE ──────────────────────────────────────────────── */}
@@ -149,7 +149,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
               <div key={i} style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,borderRadius:7,background:'#fdf8e8',padding:'12px 14px'}}>
                 {/* Header */}
                 <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{fontSize:14,flexShrink:0}}>{tm.icon}</span>
+                  <span style={{fontSize: FS['14'],flexShrink:0}}>{tm.icon}</span>
                   <span style={{fontSize:FS.xs,fontWeight:700,color:tm.color,textTransform:'uppercase',letterSpacing:'0.05em'}}>{tm.label}</span>
                   {sevArr.filter(s=>s&&SEV_COLORS[s]).map((s,j)=>(
                     <span key={j} style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,borderRadius:3,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
@@ -168,7 +168,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
                     {t.plotHooks.map((hook,j)=>(
                       <div key={j} style={{display:'flex',gap:7,alignItems:'flex-start'}}>
                         <span style={{color:'#5a2a8a',flexShrink:0,fontSize:FS.sm,marginTop:1}}>✦</span>
-                        <p style={{fontSize:12.5,color:'#1c1409',lineHeight:1.45,margin:0}}>{hook}</p>
+                        <p style={{fontSize: FS['12.5'],color:'#1c1409',lineHeight:1.45,margin:0}}>{hook}</p>
                       </div>
                     ))}
                   </div>
@@ -191,7 +191,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
             ].filter(f=>f.value).map(({label,value})=>(
               <div key={label}>
                 <span style={{fontSize:FS.micro,fontWeight:700,color:'#9c8068',textTransform:'uppercase',letterSpacing:'0.05em',marginRight:5}}>{label}:</span>
-                <span style={{fontSize:12.5,color:'#3d2b1a',lineHeight:1.5}}>{value}</span>
+                <span style={{fontSize: FS['12.5'],color:'#3d2b1a',lineHeight:1.5}}>{value}</span>
               </div>
             ))}
           </div>
@@ -245,7 +245,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
                 {isExp&&<div style={{padding:'0 14px 12px 14px',borderTop:`1px solid ${ec.border}`}}>
                   {evt.lastingEffects?.length>0&&<div style={{marginBottom:8}}>
                     <span style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.05em'}}>Lasting Effects: </span>
-                    <span style={{fontSize:11.5,color:'#6b5340'}}>{evt.lastingEffects.join(' · ')}</span>
+                    <span style={{fontSize: FS['11.5'],color:'#6b5340'}}>{evt.lastingEffects.join(' · ')}</span>
                   </div>}
                   {evt.plotHooks?.length>0&&<div style={{borderTop:`1px solid ${ec.border}`,paddingTop:8,marginTop:4}}>
                     <div style={{fontSize:FS.micro,fontWeight:700,color:'#5a2a8a',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Plot Hooks</div>
@@ -253,7 +253,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
                       const hookText = typeof hook==='object'?hook.hook||Ti(hook):hook;
                       return <div key={j} style={{display:'flex',gap:7,marginBottom:4}}>
                         <span style={{color:'#5a2a8a',flexShrink:0,fontSize:FS.sm}}>✦</span>
-                        <p style={{fontSize:12.5,color:'#1c1409',lineHeight:1.45,margin:0}}>{hookText}</p>
+                        <p style={{fontSize: FS['12.5'],color:'#1c1409',lineHeight:1.45,margin:0}}>{hookText}</p>
                       </div>;
                     })}
                   </div>}

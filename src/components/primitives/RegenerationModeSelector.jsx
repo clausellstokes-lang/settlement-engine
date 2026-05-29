@@ -97,7 +97,7 @@ export function RegenerationModeSelector({
     >
       <h2 style={{
         margin: '0 0 4px',
-        fontSize: 16, fontWeight: 800,
+        fontSize: FS['16'], fontWeight: 800,
         color: COLORS.ink,
         textTransform: 'uppercase', letterSpacing: '0.05em',
       }}>
@@ -236,7 +236,7 @@ function PlanPreview({ plan }) {
         <PlanStat label="Subsystems" count={subsystems.length} color={COLORS.gold} />
       </div>
       {subsystems.length > 0 && (
-        <div style={{ fontSize: 10.5, color: COLORS.muted }}>
+        <div style={{ fontSize: FS['10.5'], color: COLORS.muted }}>
           <strong style={{ color: COLORS.ink }}>Subsystems to recompute:</strong>{' '}
           {subsystems.join(' · ')}
         </div>
@@ -249,7 +249,7 @@ function PlanStat({ label, count, color }) {
   return (
     <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
       <span style={{
-        fontSize: 16, fontWeight: 800,
+        fontSize: FS['16'], fontWeight: 800,
         color,
       }}>
         {count}

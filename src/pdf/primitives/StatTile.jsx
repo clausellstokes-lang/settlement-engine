@@ -5,7 +5,7 @@
  * color for at-a-glance reads (e.g. red for poor prosperity).
  */
 import { View, Text } from '@react-pdf/renderer';
-import { type, palette } from '../theme.js';
+import { type, palette, pt } from '../theme.js';
 
 export function StatTile({ value, label, sublabel, tone = 'ink', flex = 1 }) {
   const fg = palette[tone] || palette.ink;
@@ -19,7 +19,7 @@ export function StatTile({ value, label, sublabel, tone = 'ink', flex = 1 }) {
         borderRadius: 3,
       }}
     >
-      <Text style={{ ...type.label, color: palette.muted, fontSize: 7.5 }}>{label}</Text>
+      <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'] }}>{label}</Text>
       <Text style={{ ...type.numeric, color: fg, marginTop: 4 }}>{value || '—'}</Text>
       {sublabel && (
         <Text style={{ ...type.caption, color: palette.muted, marginTop: 2 }}>{sublabel}</Text>

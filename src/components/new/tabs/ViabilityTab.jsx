@@ -76,7 +76,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:6}}>
-              <span style={{fontSize:22,fontWeight:800,color:viable===false?'#8b1a1a':viable===true?'#1a5a28':'#b8860b',lineHeight:1}}>
+              <span style={{fontSize: FS['22'],fontWeight:800,color:viable===false?'#8b1a1a':viable===true?'#1a5a28':'#b8860b',lineHeight:1}}>
                 {viable===false ? '✗ NOT COHERENT' : viable===true ? '✓ COHERENT' : ' MARGINAL COHERENCE'}
               </span>
             </div>
@@ -122,15 +122,15 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
 
       {/* ── BY-DESIGN CONTRADICTIONS ────────────────────────────────────── */}
       {byDesignIssues.length>0&&<Section title={`✦ By-Design Contradictions (${byDesignIssues.length})`} collapsible defaultOpen={false} accent='#8a3010'>
-        <div style={{fontSize:11.5,color:'#6b5340',marginBottom:8,lineHeight:1.5,fontStyle:'italic'}}>
+        <div style={{fontSize: FS['11.5'],color:'#6b5340',marginBottom:8,lineHeight:1.5,fontStyle:'italic'}}>
           These contradictions are intentional overrides. The settlement has institutions or combinations outside its normal tier. Use these as plot seeds, not problems to fix.
         </div>
         {byDesignIssues.map((v2,i)=>(
           <div key={i} style={{padding:'8px 12px',background:'#fdf8f0',border:'1px solid #d8b880',borderLeft:'3px solid #c05010',borderRadius:4,marginBottom:6}}>
             <div style={{fontSize:FS.sm,fontWeight:700,color:'#8a3010',marginBottom:3}}>{v2.institution}</div>
-            <div style={{fontSize:11.5,color:'#3d2b1a',lineHeight:1.6}}>{v2.reason}</div>
+            <div style={{fontSize: FS['11.5'],color:'#3d2b1a',lineHeight:1.6}}>{v2.reason}</div>
             {v2.suggestedFixes?.[0] && (
-              <div style={{fontSize:10.5,color:'#9c8068',marginTop:4,fontStyle:'italic'}}> {v2.suggestedFixes[0]}</div>
+              <div style={{fontSize: FS['10.5'],color:'#9c8068',marginTop:4,fontStyle:'italic'}}> {v2.suggestedFixes[0]}</div>
             )}
           </div>
         ))}
@@ -156,14 +156,14 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
               {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:'#8b1a1a',textTransform:'uppercase',letterSpacing:'0.05em'}}>{issue.category}</span>}
               {issue.title&&<span style={{fontSize:FS.md,fontWeight:700,color:'#1c1409'}}>{issue.title}</span>}
             </div>
-            <p style={{fontSize:12.5,color:'#3d2b1a',lineHeight:1.55,margin:'0 0 6px'}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
-            {issue.priorityNote&&<p style={{fontSize:11.5,color:'#8b3a1a',fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
+            <p style={{fontSize: FS['12.5'],color:'#3d2b1a',lineHeight:1.55,margin:'0 0 6px'}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
+            {issue.priorityNote&&<p style={{fontSize: FS['11.5'],color:'#8b3a1a',fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
             {issue.suggestedFixes?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8}}>
               <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Suggested Fixes</div>
               {issue.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:3}}>
                   <span style={{color:'#1a5a28',flexShrink:0,fontSize:FS.xs}}>→</span>
-                  <span style={{fontSize:11.5,color:'#3d2b1a'}}>{fix}</span>
+                  <span style={{fontSize: FS['11.5'],color:'#3d2b1a'}}>{fix}</span>
                 </div>
               ))}
             </div>}
@@ -179,7 +179,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           return <div key={i} style={{background:sb,border:`1px solid ${sc}40`,borderLeft:`3px solid ${sc}`,borderRadius:6,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
               {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc,textTransform:'uppercase',letterSpacing:'0.05em'}}>{issue.category}</span>}
-              {issue.title&&<span style={{fontSize:12.5,fontWeight:700,color:'#1c1409'}}>{issue.title}</span>}
+              {issue.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:'#1c1409'}}>{issue.title}</span>}
             </div>
             <p style={{fontSize:FS.sm,color:'#3d2b1a',lineHeight:1.5,margin:0}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
             {issue.suggestedFixes?.length>0&&<div style={{marginTop:6}}>
@@ -201,7 +201,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
         </p>
         {stressConsequences.map((item,i)=>(
           <div key={i} style={{background:'#f9f3e8',border:'1px solid #d4a96a',borderRadius:5,padding:'8px 10px',marginBottom:6}}>
-            {item.title&&<span style={{fontSize:12.5,fontWeight:700,color:'#6b4c2a',display:'block',marginBottom:2}}>{item.title}</span>}
+            {item.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:'#6b4c2a',display:'block',marginBottom:2}}>{item.title}</span>}
             <p style={{fontSize:FS.sm,color:'#5a3e28',lineHeight:1.5,margin:0}}>{typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||''}</p>
           </div>
         ))}
@@ -214,10 +214,10 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           return <div key={i} style={{background:sevBg(wobj.severity||'warning'),border:`1px solid ${sc}35`,borderLeft:`3px solid ${sc}`,borderRadius:6,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
               {wobj.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc,textTransform:'uppercase',letterSpacing:'0.05em'}}>{wobj.category}</span>}
-              {wobj.title&&<span style={{fontSize:12.5,fontWeight:700,color:'#1c1409'}}>{wobj.title}</span>}
+              {wobj.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:'#1c1409'}}>{wobj.title}</span>}
             </div>
             {wobj.description&&<p style={{fontSize:FS.sm,color:'#3d2b1a',lineHeight:1.5,margin:'0 0 4px'}}>{wobj.description}</p>}
-            {wobj.impact&&<p style={{fontSize:11.5,color:'#5a3a10',fontStyle:'italic',margin:'0 0 6px',lineHeight:1.4}}>Impact: {wobj.impact}</p>}
+            {wobj.impact&&<p style={{fontSize: FS['11.5'],color:'#5a3a10',fontStyle:'italic',margin:'0 0 6px',lineHeight:1.4}}>Impact: {wobj.impact}</p>}
             {wobj.suggestedFixes?.length>0&&<div>
               {wobj.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:2}}>

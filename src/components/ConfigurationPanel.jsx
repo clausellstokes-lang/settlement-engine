@@ -119,7 +119,7 @@ function StressPanel({config,updateConfig}){
       </div>
     </div>
     {!isRandom&&<div style={{display:'flex',flexDirection:'column',gap:4,maxHeight:200,overflowY:'auto'}}>
-      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<button key={key} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 8px',borderRadius:4,cursor:'pointer',textAlign:'left',border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent',fontFamily:sans}}><span style={{fontSize:14,flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</button>;})}
+      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<button key={key} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 8px',borderRadius:4,cursor:'pointer',textAlign:'left',border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent',fontFamily:sans}}><span style={{fontSize: FS['14'],flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</button>;})}
     </div>}
   </div>;
 }

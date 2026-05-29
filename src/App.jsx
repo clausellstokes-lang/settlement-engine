@@ -566,7 +566,7 @@ export default function App() {
             width: 38, height: 38, borderRadius: R.lg,
             background: 'rgba(28,20,9,0.82)',
             border: '1px solid rgba(160,118,42,0.5)',
-            color: GOLD, fontSize: 16, cursor: 'pointer',
+            color: GOLD, fontSize: FS['16'], cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
             backdropFilter: 'blur(4px)',

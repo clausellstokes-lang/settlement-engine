@@ -123,6 +123,20 @@ export const type = {
   numeric:     { fontFamily: 'Lora', fontSize: 16, fontWeight: 700, color: palette.ink },
 };
 
+// ── Raw point-size tokens ──────────────────────────────────────────────────────
+// The `type` scale above bundles size + family + weight + color for whole text
+// roles. But the dense chapter layouts frequently override just the size on top
+// of a spread role (e.g. `{ ...type.italic, fontSize: pt['10.5'] }`). These
+// point-valued constants give every such raw inline size a token to route
+// through — keyed by the exact size so the migration off raw literals is
+// byte-identical (zero visual change). With these in place the no-raw-fontsize
+// lint rule can go to error across the PDF subsystem too. Values are PDF points.
+export const pt = {
+  '6.5': 6.5, '7': 7, '7.5': 7.5, '8': 8, '8.5': 8.5, '9': 9, '9.5': 9.5,
+  '10': 10, '10.5': 10.5, '11': 11, '12': 12, '13': 13, '14': 14, '16': 16,
+  '22': 22, '50': 50,
+};
+
 // ── Spacing scale ────────────────────────────────────────────────────────────
 export const space = {
   xxs: 2,

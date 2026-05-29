@@ -13,7 +13,7 @@ import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline } from '../primitives/Dense.jsx';
 import { Pill } from '../primitives/Pill.jsx';
-import { type, palette } from '../theme.js';
+import { type, palette, pt } from '../theme.js';
 import { humanize } from '../lib/format.js';
 
 function powerTone(p) {
@@ -36,23 +36,23 @@ function NPCRow({ npc }) {
       wrap={false}
     >
       <View style={{ flex: 1.4, paddingRight: 4 }}>
-        <Text style={{ ...type.body_em, color: palette.ink, fontSize: 9.5 }}>
+        <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9.5'] }}>
           {npc.name || 'Unnamed'}
         </Text>
         {npc.title && (
-          <Text style={{ ...type.italic, color: palette.muted, fontSize: 8 }}>
+          <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['8'] }}>
             {npc.title}
           </Text>
         )}
       </View>
       <View style={{ flex: 1, paddingRight: 4 }}>
         {npc.factionLabel && (
-          <Text style={{ ...type.caption, color: palette.cool, fontSize: 7.5 }}>
+          <Text style={{ ...type.caption, color: palette.cool, fontSize: pt['7.5'] }}>
             {npc.factionLabel}
           </Text>
         )}
         {(npc.race || npc.gender || npc.age) && (
-          <Text style={{ ...type.caption, color: palette.muted, fontSize: 7.5 }}>
+          <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}>
             {[npc.race && humanize(npc.race), npc.gender && humanize(npc.gender), npc.age && `${npc.age}y`]
               .filter(Boolean).join(' · ')}
           </Text>
@@ -102,13 +102,13 @@ export function NPCQuickRef({ settlement, narrativeMode, vm }) {
           }}
         >
           <View style={{ flex: 1.4 }}>
-            <Text style={{ ...type.label, color: palette.gold, fontSize: 7 }}>NAME</Text>
+            <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7'] }}>NAME</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{ ...type.label, color: palette.gold, fontSize: 7 }}>FACTION · NOTES</Text>
+            <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7'] }}>FACTION · NOTES</Text>
           </View>
           <View style={{ width: 38, alignItems: 'flex-end' }}>
-            <Text style={{ ...type.label, color: palette.gold, fontSize: 7 }}>PWR</Text>
+            <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7'] }}>PWR</Text>
           </View>
         </View>
       )}

@@ -33,7 +33,7 @@
  *   - `showField` opts back IN to the form-field treatment.
  */
 import { TextInput, View, Text } from '@react-pdf/renderer';
-import { palette, type } from '../theme.js';
+import { palette, type, pt } from '../theme.js';
 import { noLig } from '../lib/format.js';
 
 // Visible-field treatment (only used when `showField=true`, i.e. NotesField).
@@ -170,7 +170,7 @@ export function EditableLine({ label, name, defaultValue = '', labelWidth = 110,
   if (!String(defaultValue || '').trim()) return null;
   return (
     <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
-      <Text style={{ ...type.label, width: labelWidth, color: palette.muted, fontSize: 8 }}>
+      <Text style={{ ...type.label, width: labelWidth, color: palette.muted, fontSize: pt['8'] }}>
         {label}
       </Text>
       <View style={{ flex: 1 }}>
@@ -189,7 +189,7 @@ export function NotesField({ name, lines = 6, label = 'NOTES' }) {
   return (
     <View style={{ marginTop: 6 }}>
       {label && (
-        <Text style={{ ...type.label, color: palette.muted, fontSize: 7.5, marginBottom: 3 }}>
+        <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'], marginBottom: 3 }}>
           {label}
         </Text>
       )}

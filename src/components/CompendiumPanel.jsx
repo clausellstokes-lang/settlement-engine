@@ -34,7 +34,7 @@ function Card({ title, sub, children, accent=GOLD }) {
     <div style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${accent}`, borderRadius:7,
       padding:'10px 12px', background:'rgba(255,251,245,0.95)', marginBottom:8 }}>
       <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:sub?2:6 }}>
-        <span style={{ fontFamily:serif_, fontSize:14, fontWeight:700, color:INK, flex:1 }}>{title}</span>
+        <span style={{ fontFamily:serif_, fontSize: FS['14'], fontWeight:700, color:INK, flex:1 }}>{title}</span>
         {sub && <span style={{ fontSize:FS.xxs, fontWeight:700, color:accent, background:`${accent}14`,
           borderRadius:8, padding:'1px 8px', textTransform:'uppercase', letterSpacing:'0.05em' }}>{sub}</span>}
       </div>
@@ -94,13 +94,13 @@ function TiersTab({ _search='' }) {
         <div style={{ minWidth:90, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color}}>{name}</div><div style={{fontSize:FS.xxs,color:MUT}}>{pop} pop.</div></div>
         <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</div>
       </div>))}
-    <div id="trade-routes" style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Trade Route Access</div>
+    <div id="trade-routes" style={{ fontFamily:serif_, fontSize: FS['14'], fontWeight:600, color:INK, margin:'16px 0 8px' }}>Trade Route Access</div>
     {[['Road','Standard land access. Moderate trade volume.','#6b5340'],['Crossroads','Multiple road intersections. Higher institution diversity.','#a0762a'],['Port','Sea or river access. Maritime exports, fishing, naval institutions.','#1a3a7a'],['River','Inland waterway. Cheaper bulk movement. Mill and granary likely.','#1a5a28'],['Mountain Pass','Strategic chokepoint. Toll and garrison institutions likely.','#8b1a1a'],['Isolated','No trade route. Subsistence by necessity.','#4a1a4a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
         <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
-    <div id="threat" style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Monster Threat</div>
+    <div id="threat" style={{ fontFamily:serif_, fontSize: FS['14'], fontWeight:600, color:INK, margin:'16px 0 8px' }}>Monster Threat</div>
     {[['Safe','Civilian institutions dominate. Military is law enforcement only.','#1a5a28'],['Frontier','Active but managed threat. Walls and garrison elevated.','#a0762a'],['Dangerous','Constant threat. Military dominates. Civilian life constrained.','#8a5010'],['Plagued','Active monster plague. Crisis conditions. Siege-like dynamics.','#8b1a1a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
         <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
@@ -137,7 +137,7 @@ function PowerTab_({ search='' }) {
             <Tag label={a.cat} color={CAT_COLORS[a.cat]||GOLD}/>
           </div>
           <div style={{ fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginBottom:4 }}>{a.cond}</div>
-          <div style={{ fontSize:11.5, color:SEC, lineHeight:1.5 }}>{a.desc}</div>
+          <div style={{ fontSize: FS['11.5'], color:SEC, lineHeight:1.5 }}>{a.desc}</div>
         </div>))}
     </div>
   </>;
@@ -183,7 +183,7 @@ function NeighbourTab({ search='' }) {
         <span style={{ fontSize:FS.xs, fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, borderRadius:4, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{r.effect}</span>
       </div>))}
-    <div style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Cross-Settlement Systems</div>
+    <div style={{ fontFamily:serif_, fontSize: FS['14'], fontWeight:600, color:INK, margin:'16px 0 8px' }}>Cross-Settlement Systems</div>
     {[['NPC Contacts','Named NPCs from both settlements paired by category and relationship type.'],['Cross-Settlement Conflicts','Mechanically-derived disputes: market contests, border incursions, intelligence operations.'],['Bidirectional Cascade','Renaming an NPC or faction propagates to all linked partner records.'],['Delink Cleanup','Removing a link removes all cross-settlement contacts and conflicts from both settlements.']].map(([label,desc])=><Row key={label} label={label} lw={160}>{desc}</Row>)}
   </>;
 }
@@ -210,7 +210,7 @@ function InstitutionsTab({ _config, search }) {
       {filtered.map(inst => (
         <div key={inst.name} style={{ border:`1px solid ${BOR}`, borderRadius:6, padding:'8px 10px', background:'rgba(255,251,245,0.95)' }}>
           <div style={{ display:'flex', alignItems:'flex-start', gap:5, marginBottom:3 }}>
-            <span style={{ fontFamily:serif_, fontSize:12.5, fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{inst.name}</span>
+            <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{inst.name}</span>
             {inst.required && <Tag label="Core" color='#1a3a7a'/>}
           </div>
           {inst.category && <Tag label={inst.category} color={catColors[inst.category]||GOLD}/>}
@@ -306,7 +306,7 @@ function CustomContentUpsell({ existingCount, isAnon }) {
         <Sparkles size={26} color="#7c3aed" />
       </div>
       <div style={{
-        fontSize: 18, fontWeight: 700, fontFamily: serif_, color: INK, marginBottom: 4,
+        fontSize: FS['18'], fontWeight: 700, fontFamily: serif_, color: INK, marginBottom: 4,
       }}>
         Custom Compendium &mdash; Premium
       </div>

@@ -115,7 +115,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                   {isForced && <span style={{ fontSize: FS.micro, color: '#fff', fontWeight: 900 }}>F</span>}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 11.5, fontWeight: isForced ? 700 : 500,
+                  <div style={{ fontSize: FS['11.5'], fontWeight: isForced ? 700 : 500,
                     color: isForced ? '#8a3010' : '#6b5340' }}>
                     {name}
                     {instDef.nativeTier && (

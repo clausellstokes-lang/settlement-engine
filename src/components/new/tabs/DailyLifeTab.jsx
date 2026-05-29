@@ -22,8 +22,8 @@ function AnchorFact({ label, value, accent }) {
       borderLeft: `3px solid ${accent || '#c8b89a'}`,
       borderRadius: 5, padding: '5px 9px',
     }}>
-      <div style={{ fontSize: 8.5, fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
-      <div style={{ fontSize: 11.5, fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || '—'}</div>
+      <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
+      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || '—'}</div>
     </div>
   );
 }
@@ -244,7 +244,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
         <div style={{
           background: '#fdf4f4', border: '1px solid #e8c0c0',
           borderRadius: 7, padding: '12px 14px', marginBottom: 14,
-          fontSize: 11.5, color: '#8b1a1a',
+          fontSize: FS['11.5'], color: '#8b1a1a',
         }}>
           <strong>Error:</strong> {error}
         </div>
@@ -259,7 +259,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
               position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
               zIndex: 20, background: 'rgba(122,70,26,0.95)', color: '#fffbf5',
               padding: '8px 16px', borderRadius: 20, border: '1px solid rgba(196,128,60,0.6)',
-              fontSize: 11.5, fontWeight: 700, fontFamily: sans,
+              fontSize: FS['11.5'], fontWeight: 700, fontFamily: sans,
               display: 'flex', alignItems: 'center', gap: 8,
               boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
             }}>
@@ -277,7 +277,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
           }}>
             {displayNarrative.split(/\n\n+/).map((para, i, arr) => (
               <p key={i} style={{
-                fontSize: 13.5,
+                fontSize: FS['13.5'],
                 lineHeight: 1.75,
                 color: INK,
                 margin: 0,
@@ -300,7 +300,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
           <div style={{ fontSize: FS.md, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
             What is daily life like here?
           </div>
-          <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
+          <div style={{ fontSize: FS['11.5'], color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
             Generate a prose description of ordinary life in this settlement — dawn, the market, the tavern,
             the watch. Opus-grade writing, five paragraphs, grounded in this settlement's specific stressors and trade.
           </div>

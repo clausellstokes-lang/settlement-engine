@@ -229,10 +229,10 @@ function Section({ title, items, color, describe, detail }) {
               borderBottom: idx === items.length - 1 ? 'none' : `1px solid ${COLORS.border}`,
             }}
           >
-            <span style={{ flex: 1, fontSize: 11.5, color: COLORS.ink, fontWeight: 600 }}>
+            <span style={{ flex: 1, fontSize: FS['11.5'], color: COLORS.ink, fontWeight: 600 }}>
               {safeText(describe(item))}
             </span>
-            <span style={{ fontSize: 10.5, color: COLORS.muted, textAlign: 'right' }}>
+            <span style={{ fontSize: FS['10.5'], color: COLORS.muted, textAlign: 'right' }}>
               {safeText(detail(item))}
             </span>
           </li>

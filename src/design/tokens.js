@@ -225,7 +225,19 @@ export const legacy = Object.freeze({
   // (badges, pills, eyebrows) the app legitimately uses. Ordered by SI magnitude
   // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. Added in P140 so the
   // ~400 raw sub-10px sizes have exact tokens to migrate to (zero visual change).
-  FS: { pico: 7, nano: 8, micro: 9, xxs: 10, xs: 11, sm: 12, md: 13, lg: 15, xl: 17, xxl: 20, h1: 24 },
+  //
+  // The half-step and gap/display sizes below were added in the visual-budget
+  // burn-down (P120 close-out) so EVERY raw inline fontSize in the screen UI has
+  // an exact token to route through — keyed by size so the migration is
+  // pixel-identical (zero visual change). The curated t-shirt steps above remain
+  // the preferred vocabulary for new code; a future pass can consolidate the
+  // dense legacy sizes onto them. Until then these let the no-raw-fontsize rule
+  // go to error without changing a single rendered pixel.
+  FS: {
+    pico: 7, nano: 8, micro: 9, xxs: 10, xs: 11, sm: 12, md: 13, lg: 15, xl: 17, xxl: 20, h1: 24,
+    '7.5': 7.5, '8.5': 8.5, '9.5': 9.5, '10.5': 10.5, '11.5': 11.5, '12.5': 12.5, '13.5': 13.5,
+    '14': 14, '14.5': 14.5, '16': 16, '18': 18, '22': 22, '26': 26, '28': 28, '32': 32, '36': 36,
+  },
   // ELEV — the 3-tier elevation (box-shadow) scale, exposed to legacy
   // importers. 1 = default cards, 2 = hover/sticky chrome, 3 = modals/popovers.
   // Added in P141/V-4 so components stop inventing bespoke shadows.

@@ -22,7 +22,7 @@ import { historyHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
 
 const FOUNDING_FIELDS = [
@@ -68,23 +68,23 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
             alignItems: 'center',
           }}
         >
-          <Text style={{ ...type.label, color: palette.muted, fontSize: 7 }}>SETTLEMENT AGE</Text>
-          <Text style={{ ...type.numeric_xl, color: palette.ink, marginTop: 2, fontSize: 22 }}>
+          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7'] }}>SETTLEMENT AGE</Text>
+          <Text style={{ ...type.numeric_xl, color: palette.ink, marginTop: 2, fontSize: pt['22'] }}>
             {h.age ?? '—'}
           </Text>
-          <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+          <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
             {h.age === 1 ? 'year' : 'years'}
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.label, color: palette.muted, fontSize: 7.5, marginBottom: 2 }}>
+          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'], marginBottom: 2 }}>
             HISTORICAL CHARACTER
           </Text>
           <EditableProse
             name="history.character"
             defaultValue={h.historicalCharacter || ''}
             lines={4}
-            style={{ ...type.italic, color: palette.ink, fontSize: 10 }}
+            style={{ ...type.italic, color: palette.ink, fontSize: pt['10'] }}
           />
         </View>
       </View>
@@ -92,7 +92,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
       {/* ── Founding ──────────────────────────────────────────── */}
       {(hasFoundingSummary || hasFoundingDetail) && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             FOUNDING
           </Text>
           {hasFoundingSummary && (
@@ -101,7 +101,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
                 name="history.founding.summary"
                 defaultValue={h.founding.summary}
                 lines={2}
-                style={{ ...type.body, fontSize: 9.5 }}
+                style={{ ...type.body, fontSize: pt['9.5'] }}
               />
             </Callout>
           )}
@@ -124,7 +124,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
                       style={{
                         ...type.label,
                         color: palette.muted,
-                        fontSize: 7.5,
+                        fontSize: pt['7.5'],
                         width: 110,
                         paddingTop: 2,
                       }}
@@ -135,7 +135,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
                       <EditableText
                         name={`history.founding.${f.key}`}
                         defaultValue={h.founding[f.key]}
-                        style={{ ...type.body, fontSize: 9.5 }}
+                        style={{ ...type.body, fontSize: pt['9.5'] }}
                       />
                     </View>
                   </View>
@@ -150,7 +150,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
       {events.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             HISTORICAL EVENTS · {events.length}
           </Text>
           <Timeline events={events} age={h.age} />
@@ -164,7 +164,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
       {h.tensions?.length > 0 && (
         <View>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             LIVE TENSIONS · {h.tensions.length}
           </Text>
           {h.tensions.map((t, i) => (
@@ -192,7 +192,7 @@ function EventRow({ ev, idx }) {
       wrap={false}
     >
       <View style={{ width: 60, alignItems: 'flex-start' }}>
-        <Text style={{ ...type.label, color: palette.gold, fontSize: 7.5 }}>{yearLabel}</Text>
+        <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7.5'] }}>{yearLabel}</Text>
         {ev.severity && (
           <View style={{ marginTop: 3 }}>
             <Tag tone={sevTone}>{cap(ev.severity)}</Tag>
@@ -201,10 +201,10 @@ function EventRow({ ev, idx }) {
       </View>
       <View style={{ flex: 1 }}>
         {(ev.title || ev.type) && (
-          <Text style={{ ...type.body_em, color: palette.ink, fontSize: 9.5 }}>
+          <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9.5'] }}>
             {ev.title || humanize(ev.type)}
             {ev.title && ev.type ? (
-              <Text style={{ ...type.caption, color: palette.faint, fontSize: 8 }}>
+              <Text style={{ ...type.caption, color: palette.faint, fontSize: pt['8'] }}>
                 {`  · ${humanize(ev.type)}`}
               </Text>
             ) : null}
@@ -215,32 +215,32 @@ function EventRow({ ev, idx }) {
             name={`history.event.${idx}.description`}
             defaultValue={ev.description}
             lines={2}
-            style={{ ...type.body, fontSize: 9 }}
+            style={{ ...type.body, fontSize: pt['9'] }}
           />
         )}
         {ev.cause && (
-          <Text style={{ ...type.caption, fontSize: 8, color: palette.muted, marginTop: 1 }}>
+          <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, marginTop: 1 }}>
             <Text style={{ color: palette.faint }}>Cause: </Text>{ev.cause}
           </Text>
         )}
         {ev.outcome && (
-          <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>
+          <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
             <Text style={{ color: palette.faint }}>Outcome: </Text>{ev.outcome}
           </Text>
         )}
         {ev.lastingEffects?.length > 0 && (
           <View style={{ marginTop: 2 }}>
-            <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+            <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
               LASTING EFFECTS
             </Text>
             {ev.lastingEffects.map((le, j) => (
               <View key={`le-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                <Text style={{ color: palette.cool, marginRight: 4, fontSize: 8 }}>·</Text>
+                <Text style={{ color: palette.cool, marginRight: 4, fontSize: pt['8'] }}>·</Text>
                 <View style={{ flex: 1 }}>
                   <EditableText
                     name={`history.event.${idx}.lasting.${j}`}
                     defaultValue={typeof le === 'string' ? le : (le?.text || le?.description || '')}
-                    style={{ ...type.body, fontSize: 8.5 }}
+                    style={{ ...type.body, fontSize: pt['8.5'] }}
                   />
                 </View>
               </View>
@@ -249,17 +249,17 @@ function EventRow({ ev, idx }) {
         )}
         {ev.hooks?.length > 0 && (
           <View style={{ marginTop: 2 }}>
-            <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+            <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
               PLOT HOOKS
             </Text>
             {ev.hooks.map((hk, j) => (
               <View key={`eh-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                <Text style={{ color: palette.gold, marginRight: 4, fontSize: 8 }}>•</Text>
+                <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['8'] }}>•</Text>
                 <View style={{ flex: 1 }}>
                   <EditableText
                     name={`history.event.${idx}.hook.${j}`}
                     defaultValue={hookText(hk)}
-                    style={{ ...type.body, fontSize: 8.5 }}
+                    style={{ ...type.body, fontSize: pt['8.5'] }}
                   />
                 </View>
               </View>
@@ -286,13 +286,13 @@ function TensionRow({ tension, idx }) {
       wrap={false}
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
-        <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, flex: 1 }}>
+        <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
           {humanize(tension.label || 'Tension')}
         </Text>
         {tension.severity && <Pill tone={sevTone}>{cap(tension.severity)}</Pill>}
       </View>
       {tension.parties?.length > 0 && (
-        <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginBottom: 2 }}>
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginBottom: 2 }}>
           PARTIES: {tension.parties.map(p => label(p) || humanize(String(p))).join('  vs  ')}
         </Text>
       )}
@@ -301,22 +301,22 @@ function TensionRow({ tension, idx }) {
           name={`history.tension.${idx}.description`}
           defaultValue={tension.description}
           lines={2}
-          style={{ ...type.body, fontSize: 9 }}
+          style={{ ...type.body, fontSize: pt['9'] }}
         />
       )}
       {tension.hooks?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
             PLOT HOOKS
           </Text>
           {tension.hooks.map((hk, j) => (
             <View key={`th-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-              <Text style={{ color: palette.gold, marginRight: 4, fontSize: 8 }}>•</Text>
+              <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['8'] }}>•</Text>
               <View style={{ flex: 1 }}>
                 <EditableText
                   name={`history.tension.${idx}.hook.${j}`}
                   defaultValue={hookText(hk)}
-                  style={{ ...type.body, fontSize: 8.5 }}
+                  style={{ ...type.body, fontSize: pt['8.5'] }}
                 />
               </View>
             </View>
@@ -360,8 +360,8 @@ function Timeline({ events, age }) {
     <View style={{ marginBottom: 8 }} wrap={false}>
       {/* Axis with end labels */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 2 }}>
-        <Text style={{ ...type.caption, fontSize: 7, color: palette.muted }}>FOUNDING (-{age}y)</Text>
-        <Text style={{ ...type.caption, fontSize: 7, color: palette.muted }}>NOW</Text>
+        <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted }}>FOUNDING (-{age}y)</Text>
+        <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted }}>NOW</Text>
       </View>
       <View style={{ position: 'relative', height: 24 }}>
         {/* Base line */}
@@ -397,7 +397,7 @@ function Timeline({ events, age }) {
         {[0.25, 0.5, 0.75].map(p => (
           <Text
             key={`tick-${p}`}
-            style={{ ...type.caption, fontSize: 6.5, color: palette.faint }}
+            style={{ ...type.caption, fontSize: pt['6.5'], color: palette.faint }}
           >
             {Math.round(min + span * p)}y after founding
           </Text>

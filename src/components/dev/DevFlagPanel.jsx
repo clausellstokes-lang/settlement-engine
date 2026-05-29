@@ -123,7 +123,7 @@ export default function DevFlagPanel() {
           aria-label="Close flag panel"
           style={{
             background: 'transparent', border: 'none',
-            color: '#c9a24c', cursor: 'pointer', fontSize: 14, lineHeight: 1,
+            color: '#c9a24c', cursor: 'pointer', fontSize: FS['14'], lineHeight: 1,
           }}
         >×</button>
       </div>

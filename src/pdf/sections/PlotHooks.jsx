@@ -14,7 +14,7 @@ import {
 } from '../primitives/Dense.jsx';
 import { hooksHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { cap, hookText, humanize } from '../lib/format.js';
 
 const SOURCE_LABELS = {
@@ -88,7 +88,7 @@ export function PlotHooks({ settlement, narrativeMode, vm }) {
               wrap={false}
             >
               <Pill tone={cfg.tone}>{cfg.label}</Pill>
-              <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: 8 }}>
+              <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: pt['8'] }}>
                 {list.length} hook{list.length === 1 ? '' : 's'}
               </Text>
             </View>
@@ -101,7 +101,7 @@ export function PlotHooks({ settlement, narrativeMode, vm }) {
       {tensions.length > 0 && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             UNDERLYING TENSIONS
           </Text>
           {tensions.map((t, i) => (
@@ -110,8 +110,8 @@ export function PlotHooks({ settlement, narrativeMode, vm }) {
               style={{ flexDirection: 'row', marginBottom: 2, alignItems: 'flex-start' }}
               wrap={false}
             >
-              <Text style={{ color: palette.warn, marginRight: 4, fontSize: 9 }}>•</Text>
-              <Text style={{ ...type.body, flex: 1, fontSize: 9 }}>
+              <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['9'] }}>•</Text>
+              <Text style={{ ...type.body, flex: 1, fontSize: pt['9'] }}>
                 <Text style={{ ...type.body_em, color: palette.ink }}>
                   {humanize(t.label || t.type || 'Tension')}
                 </Text>
@@ -175,7 +175,7 @@ function HookCard({ hook, number }) {
           ...type.label_em,
           color: palette.gold,
           width: 18,
-          fontSize: 8,
+          fontSize: pt['8'],
           paddingTop: 1,
         }}
       >
@@ -183,7 +183,7 @@ function HookCard({ hook, number }) {
       </Text>
       <View style={{ flex: 1 }}>
         {/* Hook prose — extractable, what the DM reads */}
-        <Text style={{ ...type.body, fontSize: 9, color: palette.ink, lineHeight: 1.35 }}>
+        <Text style={{ ...type.body, fontSize: pt['9'], color: palette.ink, lineHeight: 1.35 }}>
           {text}
         </Text>
         {/* Provenance + tags demoted to a small follow-up line */}
@@ -197,7 +197,7 @@ function HookCard({ hook, number }) {
             }}
           >
             {hook.sourceName && (
-              <Text style={{ ...type.caption, color: palette.faint, fontSize: 7, marginRight: 4 }}>
+              <Text style={{ ...type.caption, color: palette.faint, fontSize: pt['7'], marginRight: 4 }}>
                 {humanize(hook.sourceName)}
               </Text>
             )}

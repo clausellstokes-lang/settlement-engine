@@ -20,7 +20,7 @@ import {
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { StatusCard } from '../primitives/Visuals.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { humanize, label, plural, upper } from '../lib/format.js';
 
 const SERVICE_CATEGORY_ORDER = [
@@ -103,7 +103,7 @@ export function Services({ settlement, narrativeMode, vm }) {
       {s.activeChains?.length > 0 && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             ACTIVE SUPPLY CHAINS · {s.activeChains.length}
           </Text>
           {s.activeChains.map((chain, i) => (
@@ -153,10 +153,10 @@ function CategoryCard({ cat }) {
       wrap={false}
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
-        <Text style={{ ...type.label_em, color: palette.ink, fontSize: 9 }}>
+        <Text style={{ ...type.label_em, color: palette.ink, fontSize: pt['9'] }}>
           {upper(SERVICE_CAT_LABEL[cat.key] || humanize(cat.key))}
         </Text>
-        <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: 7.5 }}>
+        <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: pt['7.5'] }}>
           {cat.items.length} option{cat.items.length === 1 ? '' : 's'}
         </Text>
       </View>
@@ -212,7 +212,7 @@ function ChainCard({ chain }) {
       body={
         note ? (
           <View style={{ marginTop: 3 }}>
-            <Text style={{ ...type.body, fontSize: 8.5, lineHeight: 1.35 }}>
+            <Text style={{ ...type.body, fontSize: pt['8.5'], lineHeight: 1.35 }}>
               {note}
             </Text>
           </View>

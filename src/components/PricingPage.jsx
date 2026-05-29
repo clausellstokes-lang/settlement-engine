@@ -112,7 +112,7 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
       </p>
 
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-        <span style={{ fontSize: 32, fontFamily: serif_, fontWeight: 600, color: INK, lineHeight: 1 }}>
+        <span style={{ fontSize: FS['32'], fontFamily: serif_, fontWeight: 600, color: INK, lineHeight: 1 }}>
           {priceLabel}
         </span>
         <span style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
@@ -288,7 +288,7 @@ export default function PricingPage({ onNavigate }) {
     }}>
       <header style={{ textAlign: 'center', marginBottom: SP.xxl }}>
         <h1 style={{
-          margin: 0, fontFamily: serif_, fontSize: 36, fontWeight: 600,
+          margin: 0, fontFamily: serif_, fontSize: FS['36'], fontWeight: 600,
           color: INK, letterSpacing: '0.01em',
         }}>
           {t('pricing.pageTitle')}
@@ -413,7 +413,7 @@ export default function PricingPage({ onNavigate }) {
             display: 'flex', alignItems: 'baseline', justifyContent: 'center',
             gap: 8, marginTop: SP.md,
           }}>
-            <span style={{ fontFamily: serif_, fontSize: 32, fontWeight: 600 }}>
+            <span style={{ fontFamily: serif_, fontSize: FS['32'], fontWeight: 600 }}>
               {SINGLE_DOSSIER.priceLabel}
             </span>
             <span style={{ fontSize: FS.sm, color: '#E8D9B0' }}>

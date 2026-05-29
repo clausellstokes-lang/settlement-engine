@@ -118,7 +118,7 @@ export default function LockedDestination({
 
       <h2 style={{
         margin: '12px 0 8px',
-        fontFamily: serif, fontWeight: 600, fontSize: 28,
+        fontFamily: serif, fontWeight: 600, fontSize: FS['28'],
         color: INK, letterSpacing: '-0.005em',
         lineHeight: 1.15,
       }}>

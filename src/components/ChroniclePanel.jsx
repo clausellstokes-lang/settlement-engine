@@ -95,7 +95,7 @@ function FullEntryModal({ entry, onClose }) {
     return (
       <div style={{ marginBottom: 14 }}>
         <div style={{ fontSize: FS.xxs, fontWeight: 800, color: '#6a2a9a', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
-        <p style={{ margin: 0, fontSize: 12.5, color: INK, lineHeight: 1.6, fontFamily: 'Georgia, serif', whiteSpace: 'pre-wrap' }}>{text}</p>
+        <p style={{ margin: 0, fontSize: FS['12.5'], color: INK, lineHeight: 1.6, fontFamily: 'Georgia, serif', whiteSpace: 'pre-wrap' }}>{text}</p>
       </div>
     );
   };
@@ -136,7 +136,7 @@ function FullEntryModal({ entry, onClose }) {
           display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(196,154,60,0.2)',
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: 18, fontWeight: 600, color: '#c49a3c' }}>
+            <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS['18'], fontWeight: 600, color: '#c49a3c' }}>
               Chronicle Entry
             </div>
             <div style={{ display: 'flex', gap: 6, marginTop: 4, alignItems: 'center', flexWrap: 'wrap' }}>
@@ -240,7 +240,7 @@ function EntryCard({ entry, onOpen }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
         <Chip color={meta.color} Icon={meta.Icon}>{meta.label}</Chip>
         <Chip color={isFull ? '#6a2a9a' : MUTED}>{isFull ? 'Full' : 'Summary'}</Chip>
-        <span style={{ fontSize: 10.5, color: MUTED, fontFamily: 'Nunito, sans-serif' }} title={absoluteTime(entry.createdAt)}>
+        <span style={{ fontSize: FS['10.5'], color: MUTED, fontFamily: 'Nunito, sans-serif' }} title={absoluteTime(entry.createdAt)}>
           {relativeTime(entry.createdAt)}
         </span>
         <div style={{ flex: 1 }} />
@@ -255,7 +255,7 @@ function EntryCard({ entry, onOpen }) {
               borderRadius: 4,
               padding: '3px 9px',
               cursor: 'pointer',
-              fontSize: 10.5, fontWeight: 700, fontFamily: 'Nunito, sans-serif',
+              fontSize: FS['10.5'], fontWeight: 700, fontFamily: 'Nunito, sans-serif',
             }}
           >
             <BookOpen size={11} /> Read full
@@ -298,7 +298,7 @@ export default function ChroniclePanel({ entries }) {
         }}
       >
         <History size={14} color="#6a2a9a" />
-        <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: 14, fontWeight: 600, color: INK, flex: 1 }}>
+        <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS['14'], fontWeight: 600, color: INK, flex: 1 }}>
           Chronicle {list.length > 0 ? `(${list.length})` : ''}
         </span>
         {list.length > 0 && (

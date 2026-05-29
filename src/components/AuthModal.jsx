@@ -60,7 +60,7 @@ function OAuthButton({ _provider, glyph, label, onClick, disabled, soonNote }) {
         borderRadius: R.lg,
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.55 : 1,
-        fontFamily: sans, fontSize: 14, fontWeight: 600,
+        fontFamily: sans, fontSize: FS['14'], fontWeight: 600,
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
         transition: 'border-color 0.15s, background 0.15s',
       }}
@@ -106,7 +106,7 @@ function Input({ type = 'text', placeholder, value, onChange, onKeyDown }) {
       style={{
         width: '100%', padding: `${SP.md}px ${SP.lg - 2}px`,
         border: `1px solid ${BORDER}`, borderRadius: R.lg,
-        fontSize: 14, fontFamily: sans,
+        fontSize: FS['14'], fontFamily: sans,
         background: '#fff', outline: 'none',
         boxSizing: 'border-box',
       }}
@@ -146,7 +146,7 @@ function Button({ onClick, children, variant = 'primary', disabled, style: extra
       style={{
         width: '100%', padding: `${SP.md}px 0`,
         borderRadius: R.lg, cursor: disabled ? 'not-allowed' : 'pointer',
-        fontFamily: sans, fontSize: 14, fontWeight: 700,
+        fontFamily: sans, fontSize: FS['14'], fontWeight: 700,
         opacity: disabled ? 0.6 : 1,
         transition: 'opacity 0.15s',
         ...styles[variant],

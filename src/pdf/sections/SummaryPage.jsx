@@ -15,7 +15,7 @@ import { ChapterBand, StatStrip, KeyValRow, ThreeCol, GoldRule, HairRule } from 
 import { StackedBar } from '../primitives/Visuals.jsx';
 import { EditableText, EditableProse, NotesField } from '../primitives/Editable.jsx';
 import { Pill } from '../primitives/Pill.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { cap, label } from '../lib/format.js';
 
 export function SummaryPage({ settlement, narrativeMode, vm }) {
@@ -53,10 +53,10 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
           </View>
           {su.crisis.chips.filter(c => c.summary).map((c, i) => (
             <View key={`csum-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }}>
-              <Text style={{ ...type.body_em, color: palette.bad, fontSize: 9, marginRight: 4 }}>
+              <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['9'], marginRight: 4 }}>
                 {c.label}:
               </Text>
-              <Text style={{ ...type.body, fontSize: 9, flex: 1, color: palette.second }}>
+              <Text style={{ ...type.body, fontSize: pt['9'], flex: 1, color: palette.second }}>
                 {c.summary}
               </Text>
             </View>
@@ -67,14 +67,14 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
       {/* ── Arrival scene + pressure sentence (AI mode) ───────────── */}
       {su.arrivalScene && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.ai, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.ai, fontSize: pt['8'], marginBottom: 3 }}>
             ARRIVAL SCENE
           </Text>
           <EditableProse
             name="summary.arrivalScene"
             defaultValue={su.arrivalScene}
             lines={3}
-            style={{ ...type.prose, fontStyle: 'italic', fontSize: 10 }}
+            style={{ ...type.prose, fontStyle: 'italic', fontSize: pt['10'] }}
           />
         </View>
       )}
@@ -84,7 +84,7 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
           <EditableText
             name="summary.pressureSentence"
             defaultValue={su.pressureSentence}
-            style={{ ...type.body_em, color: palette.bad, fontSize: 10 }}
+            style={{ ...type.body_em, color: palette.bad, fontSize: pt['10'] }}
           />
         </View>
       )}
@@ -92,33 +92,33 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
       <GoldRule />
 
       {/* ── 3-tile situation row ──────────────────────────────────── */}
-      <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 4 }}>
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 4 }}>
         SITUATION
       </Text>
       <ThreeCol
         a={
           <View>
-            <Text style={{ ...type.label, color: palette.muted, fontSize: 7.5 }}>POWER</Text>
-            <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, marginTop: 1 }}>
+            <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'] }}>POWER</Text>
+            <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], marginTop: 1 }}>
               {cap(su.situation.power.governanceType) || 'Unspecified'}
             </Text>
             {su.situation.power.governingName && (
               <EditableText
                 name="summary.power.governingName"
                 defaultValue={su.situation.power.governingName}
-                style={{ ...type.caption, color: palette.muted, fontSize: 8 }}
+                style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}
               />
             )}
           </View>
         }
         b={
           <View>
-            <Text style={{ ...type.label, color: palette.gold, fontSize: 7.5 }}>ECONOMY</Text>
-            <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, marginTop: 1 }}>
+            <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7.5'] }}>ECONOMY</Text>
+            <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], marginTop: 1 }}>
               {cap(su.situation.economy.complexity) || 'Unknown'}
             </Text>
             {su.situation.economy.topExport && (
-              <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+              <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
                 exports {su.situation.economy.topExport}
               </Text>
             )}
@@ -126,12 +126,12 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
         }
         c={
           <View>
-            <Text style={{ ...type.label, color: palette.cool, fontSize: 7.5 }}>DEFENSE</Text>
-            <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, marginTop: 1 }}>
+            <Text style={{ ...type.label, color: palette.cool, fontSize: pt['7.5'] }}>DEFENSE</Text>
+            <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], marginTop: 1 }}>
               {su.situation.defense.readiness || 'Unknown'}
             </Text>
             {su.situation.defense.scoreAvg != null && (
-              <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+              <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
                 avg {su.situation.defense.scoreAvg}/100
               </Text>
             )}
@@ -167,7 +167,7 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
       {/* ── Key Figures: top 4 NPCs ────────────────────────────────── */}
       {su.keyFigures.length > 0 && (
         <View wrap={false}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 4 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 4 }}>
             KEY FIGURES
           </Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
@@ -186,17 +186,17 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
                   <EditableText
                     name={`summary.npc.${i}.name`}
                     defaultValue={npc.name || 'Unnamed'}
-                    style={{ ...type.body_em, color: palette.ink, fontSize: 10 }}
+                    style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}
                   />
                   <Pill tone="gold">PWR {npc.power}</Pill>
                 </View>
                 <EditableText
                   name={`summary.npc.${i}.title`}
                   defaultValue={npc.title || ''}
-                  style={{ ...type.italic, color: palette.muted, fontSize: 8.5 }}
+                  style={{ ...type.italic, color: palette.muted, fontSize: pt['8.5'] }}
                 />
                 {npc.faction && (
-                  <Text style={{ ...type.caption, color: palette.cool, fontSize: 7.5, marginTop: 1 }}>
+                  <Text style={{ ...type.caption, color: palette.cool, fontSize: pt['7.5'], marginTop: 1 }}>
                     {npc.faction}
                   </Text>
                 )}
@@ -206,7 +206,7 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
                       name={`summary.npc.${i}.sentence`}
                       defaultValue={npc.sentence}
                       lines={2}
-                      style={{ ...type.body, fontSize: 8.5, lineHeight: 1.4 }}
+                      style={{ ...type.body, fontSize: pt['8.5'], lineHeight: 1.4 }}
                     />
                   </View>
                 )}
@@ -220,11 +220,11 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
       {su.prominentRelationship && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.cool, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>
             NOTABLE CONNECTION
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
-            <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, marginRight: 4 }}>
+            <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], marginRight: 4 }}>
               {label(su.prominentRelationship.otherSettlement) || 'Neighbour'}
             </Text>
             <Pill tone="cool">{cap(su.prominentRelationship.relationshipType || su.prominentRelationship.type) || 'linked'}</Pill>
@@ -234,7 +234,7 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
               name="summary.prominentRelationship.description"
               defaultValue={su.prominentRelationship.description}
               lines={2}
-              style={{ ...type.body, fontSize: 9 }}
+              style={{ ...type.body, fontSize: pt['9'] }}
             />
           )}
         </View>

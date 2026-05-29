@@ -20,7 +20,7 @@
  */
 import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
-import { type, palette, space, toneBg } from '../theme.js';
+import { type, palette, space, toneBg, pt } from '../theme.js';
 import { EditableText, EditableProse } from './Editable.jsx';
 import { stripZwnj } from '../lib/format.js';
 
@@ -45,11 +45,11 @@ export function ChapterBand({ eyebrow, title, accent, sub }) {
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
         {eyebrow && (
-          <Text style={{ ...type.label, color: accent || palette.gold, marginRight: 8, fontSize: 10 }}>
+          <Text style={{ ...type.label, color: accent || palette.gold, marginRight: 8, fontSize: pt['10'] }}>
             {up(eyebrow)}
           </Text>
         )}
-        <Text style={{ ...type.section, color: palette.ink, fontSize: 16 }}>{title}</Text>
+        <Text style={{ ...type.section, color: palette.ink, fontSize: pt['16'] }}>{title}</Text>
       </View>
       {sub && (
         <Text style={{ ...type.caption, color: palette.muted, fontStyle: 'italic' }}>{sub}</Text>
@@ -80,7 +80,7 @@ export function ChapterHeadline({ children, tone = 'gold' }) {
       <Text
         style={{
           fontFamily: 'Lora',
-          fontSize: 9.5,
+          fontSize: pt['9.5'],
           fontStyle: 'italic',
           color: palette.second,
           flex: 1,
@@ -117,7 +117,7 @@ export function StatStrip({ stats, marginBottom = space.sm }) {
             borderLeft: i > 0 ? `0.4pt solid ${palette.border}` : undefined,
           }}
         >
-          <Text style={{ ...type.label, color: palette.muted, fontSize: 7 }}>{up(s.label)}</Text>
+          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7'] }}>{up(s.label)}</Text>
           <Text
             style={{
               fontFamily: 'Lora',
@@ -130,7 +130,7 @@ export function StatStrip({ stats, marginBottom = space.sm }) {
             {s.value || '—'}
           </Text>
           {s.sublabel && (
-            <Text style={{ ...type.caption, color: palette.muted, fontSize: 7.5, marginTop: 1 }}>
+            <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], marginTop: 1 }}>
               {s.sublabel}
             </Text>
           )}
@@ -154,7 +154,7 @@ export function KeyValRow({ pairs, separator = ' · ', style }) {
               {separator}
             </Text>
           )}
-          <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+          <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
             <Text style={{ color: palette.faint }}>{up(p.label)}</Text>
             <Text style={{ color: palette.ink, fontWeight: 700 }}>{` ${p.value}`}</Text>
           </Text>
@@ -219,7 +219,7 @@ export function BulletList({
             key={`b-${i}`}
             style={{ flexDirection: 'row', marginBottom: 3, alignItems: 'flex-start' }}
           >
-            <Text style={{ color: palette[tone] || palette.gold, marginRight: 5, fontSize: 9.5 }}>
+            <Text style={{ color: palette[tone] || palette.gold, marginRight: 5, fontSize: pt['9.5'] }}>
               {bullet}
             </Text>
             {editable ? (
@@ -231,7 +231,7 @@ export function BulletList({
                 />
               </View>
             ) : (
-              <Text style={{ ...type.body, flex: 1, fontSize: 9.5 }}>{text}</Text>
+              <Text style={{ ...type.body, flex: 1, fontSize: pt['9.5'] }}>{text}</Text>
             )}
           </View>
         );
@@ -256,7 +256,7 @@ export function FieldRow({
         style={{
           ...type.label,
           color: palette.muted,
-          fontSize: 7.5,
+          fontSize: pt['7.5'],
           width: labelWidth,
           paddingTop: 2,
         }}
@@ -279,7 +279,7 @@ export function InlineMeta({ parts, color = palette.muted }) {
   const filtered = (parts || []).filter(p => p);
   if (!filtered.length) return null;
   return (
-    <Text style={{ ...type.label, color, fontSize: 8, letterSpacing: 0.2 }}>
+    <Text style={{ ...type.label, color, fontSize: pt['8'], letterSpacing: 0.2 }}>
       {filtered.map(p => up(p)).join('  ·  ')}
     </Text>
   );
@@ -328,7 +328,7 @@ export function Tag({ tone = 'muted', children }) {
         marginBottom: 2,
       }}
     >
-      <Text style={{ ...type.pill, fontSize: 7, color: fg, letterSpacing: 0.15 }}>{up(children)}</Text>
+      <Text style={{ ...type.pill, fontSize: pt['7'], color: fg, letterSpacing: 0.15 }}>{up(children)}</Text>
     </View>
   );
 }

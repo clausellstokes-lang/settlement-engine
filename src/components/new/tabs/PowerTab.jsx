@@ -78,8 +78,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                 Public Legitimacy
               </div>
               <div style={{display:'flex',alignItems:'baseline',gap:8}}>
-                <span style={{fontSize:28,fontWeight:800,color:leg.color,lineHeight:1}}>{leg.score}</span>
-                <span style={{fontSize:14,fontWeight:700,color:leg.color}}>{leg.label}</span>
+                <span style={{fontSize: FS['28'],fontWeight:800,color:leg.color,lineHeight:1}}>{leg.score}</span>
+                <span style={{fontSize: FS['14'],fontWeight:700,color:leg.color}}>{leg.label}</span>
               </div>
             </div>
             {/* Breakdown chips */}
@@ -100,7 +100,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                 ))}
               </div>
               {leg.governanceFractured && (
-                <div style={{marginTop:8,background:'#fdf4f4',border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:5,padding:'6px 10px',fontSize:11.5,color:'#5a1a1a',lineHeight:1.4}}>
+                <div style={{marginTop:8,background:'#fdf4f4',border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:5,padding:'6px 10px',fontSize: FS['11.5'],color:'#5a1a1a',lineHeight:1.4}}>
                   <strong>Governance fractured.</strong> Real decisions are being made informally — the faction that appears to govern is not the faction that governs.
                 </div>
               )}
@@ -125,7 +125,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
           {governing && <div style={{flex:1,minWidth:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:3}}>Governing Authority</div>
             <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
-              <span style={{fontSize:14,fontWeight:700,color:'#1c1409'}}>{governing.faction}</span>
+              <span style={{fontSize: FS['14'],fontWeight:700,color:'#1c1409'}}>{governing.faction}</span>
               <span style={{fontSize:FS.xs,fontWeight:700,color:stabilityColor}}>
                 {governing.powerLabel || ''} ({governing.power})
               </span>
@@ -221,7 +221,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                   <div style={{padding:'6px 12px 8px 28px',background:'#faf8f4',borderLeft:`2px solid ${c}`,marginLeft:4,marginBottom:4,marginTop:2,borderRadius:'0 0 4px 4px'}}>
                     <p style={{fontSize:FS.sm,color:'#3d2b1a',lineHeight:1.65,margin:'0 0 4px'}}>{f.desc}</p>
                     {f.crisisNote && (
-                      <p style={{fontSize:11.5,color:'#8b1a1a',fontStyle:'italic',margin:'6px 0 0',lineHeight:1.4}}>⚠ {f.crisisNote}</p>
+                      <p style={{fontSize: FS['11.5'],color:'#8b1a1a',fontStyle:'italic',margin:'6px 0 0',lineHeight:1.4}}>⚠ {f.crisisNote}</p>
                     )}
                     {matchedGroups.length > 0 && (
                       <div style={{marginTop:8}}>
@@ -273,7 +273,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             return (
               <div key={i} style={{background:'#faf8f4',border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,borderRadius:7,padding:'12px 14px',marginBottom:10}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{...serif,fontSize:14,fontWeight:700,color:'#1c1409',flex:1}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
+                  <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:'#1c1409',flex:1}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
                   <span style={{fontSize:FS.micro,fontWeight:800,color:intColor,background:`${intColor}15`,borderRadius:3,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
                 </div>
                 {c.issue  && <p style={{fontSize:FS.sm,color:'#6b5340',margin:'0 0 4px'}}><strong>At issue:</strong> {c.issue}</p>}

@@ -163,7 +163,7 @@ export default function HomeHero({ onSignIn }) {
           <>
             <h1 style={{
               margin: 0, fontFamily: serif_, fontWeight: 600,
-              fontSize: 32, color: INK, lineHeight: 1.15,
+              fontSize: FS['32'], color: INK, lineHeight: 1.15,
               letterSpacing: '-0.005em',
             }}>
               {t('hero.v2.headline')}<br />
@@ -188,7 +188,7 @@ export default function HomeHero({ onSignIn }) {
             </div>
             <h1 style={{
               margin: 0, fontFamily: serif_, fontWeight: 600,
-              fontSize: 32, color: INK, lineHeight: 1.15,
+              fontSize: FS['32'], color: INK, lineHeight: 1.15,
             }}>
               {t('hero.title')}
             </h1>
@@ -222,7 +222,7 @@ export default function HomeHero({ onSignIn }) {
           </div>
           <h1 style={{
             margin: 0, fontFamily: serif_, fontWeight: 600,
-            fontSize: 28, color: INK, lineHeight: 1.2,
+            fontSize: FS['28'], color: INK, lineHeight: 1.2,
           }}>
             Welcome back{displayName ? `, ${displayName}` : ''}.
           </h1>
@@ -273,7 +273,7 @@ export default function HomeHero({ onSignIn }) {
               maxWidth: 460, margin: '0 auto', textAlign: 'center',
             }}>
               <div style={{
-                fontFamily: serif_, fontSize: 18, fontWeight: 600,
+                fontFamily: serif_, fontSize: FS['18'], fontWeight: 600,
                 color: INK, marginBottom: 6,
               }}>
                 You’ve explored <em style={{ color: '#8C6F32' }}>hamlet, village, town.</em>

@@ -95,11 +95,11 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
       {/* ── SEARCH ──────────────────────────────────────────────────────── */}
       <div style={{marginBottom:14}}>
         <div style={{position:'relative'}}>
-          <span style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',color:'#9c8068',fontSize:14}}></span>
+          <span style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',color:'#9c8068',fontSize: FS['14']}}></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
             placeholder='Search services — "healing", "horse", "fence", "wizard"…'
             style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',borderRadius:6,fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:'#1c1409',background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
-          {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize:18,color:'#9c8068',lineHeight:1,padding:0}}>×</button>}
+          {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize: FS['18'],color:'#9c8068',lineHeight:1,padding:0}}>×</button>}
         </div>
 
         {searchResults !== null && (
@@ -204,7 +204,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                   borderBottom:open?`1px solid ${isCriminal?'#3a1a1a':`${meta.accent}20`}`:'none',
                   cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'
                 }}>
-                  <span style={{fontSize:14}}>{meta.icon}</span>
+                  <span style={{fontSize: FS['14']}}>{meta.icon}</span>
                   <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor,textTransform:'uppercase',letterSpacing:'0.06em'}}>{meta.label}</span>
                   <span style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
                   {hasImp&&<span style={{fontSize:FS.xxs,fontWeight:700,color:'#7a1a1a',background:'#fde8e8',border:'1px solid #f0a0a0',borderRadius:3,padding:'1px 5px',marginLeft:2}}> {cs.imp} impaired</span>}

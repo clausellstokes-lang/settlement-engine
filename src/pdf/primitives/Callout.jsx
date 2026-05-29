@@ -6,7 +6,7 @@
  * background tint + left-border colour.
  */
 import { View, Text } from '@react-pdf/renderer';
-import { type, palette, space, toneBg } from '../theme.js';
+import { type, palette, space, toneBg, pt } from '../theme.js';
 
 export function Callout({ tone = 'gold', title, kicker, children }) {
   const bg = toneBg[tone] || toneBg.gold;
@@ -22,12 +22,12 @@ export function Callout({ tone = 'gold', title, kicker, children }) {
       }}
     >
       {kicker && (
-        <Text style={{ ...type.label, color: accent, fontSize: 7.5, marginBottom: 3 }}>
+        <Text style={{ ...type.label, color: accent, fontSize: pt['7.5'], marginBottom: 3 }}>
           {kicker}
         </Text>
       )}
       {title && (
-        <Text style={{ ...type.section, color: accent, fontSize: 13, marginBottom: 4 }}>
+        <Text style={{ ...type.section, color: accent, fontSize: pt['13'], marginBottom: 4 }}>
           {title}
         </Text>
       )}

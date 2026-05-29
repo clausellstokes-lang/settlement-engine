@@ -21,7 +21,7 @@ import {
 import { relationshipsHeadline } from '../lib/headlines.js';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space, relColors } from '../theme.js';
+import { type, palette, space, relColors, pt } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
 
 const REL_LABELS = {
@@ -78,7 +78,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
             name="relationships.prominent.note"
             defaultValue={r.prominentRelationship.description || r.prominentRelationship.flavour || r.prominentRelationship.flavor || ''}
             lines={2}
-            style={{ ...type.body, fontSize: 9.5 }}
+            style={{ ...type.body, fontSize: pt['9.5'] }}
           />
         </Callout>
       )}
@@ -86,7 +86,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {/* ── Neighbour network ───────────────────────────────── */}
       {r.neighbours?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             NEIGHBOUR NETWORK
           </Text>
           {r.neighbours.map((n, i) => (
@@ -98,7 +98,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {/* ── Single live neighbour fallback ──────────────────── */}
       {!r.neighbours?.length && r.neighborSingle && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             GENERATED NEIGHBOUR
           </Text>
           <NeighbourCard
@@ -119,7 +119,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {r.emergentConditions?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.ai, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.ai, fontSize: pt['8'], marginBottom: 3 }}>
             EMERGENT CONDITIONS
           </Text>
           {r.emergentConditions.map((c, i) => (
@@ -135,9 +135,9 @@ export function Relationships({ settlement, narrativeMode, vm }) {
               }}
               wrap={false}
             >
-              <Text style={{ color: palette.ai, marginRight: 4, fontSize: 9 }}>↯</Text>
+              <Text style={{ color: palette.ai, marginRight: 4, fontSize: pt['9'] }}>↯</Text>
               <View style={{ flex: 1 }}>
-                <Text style={{ ...type.body, fontSize: 9 }}>
+                <Text style={{ ...type.body, fontSize: pt['9'] }}>
                   <Text style={{ ...type.body_em, color: palette.ai }}>
                     {humanize(c.label || c.name || c.type || 'Condition')}
                   </Text>
@@ -153,7 +153,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {r.interSettlement?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.cool, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>
             SHARED FIGURES & STORIES
           </Text>
           {r.interSettlement.map((rel, i) => (
@@ -166,20 +166,20 @@ export function Relationships({ settlement, narrativeMode, vm }) {
               wrap={false}
             >
               <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 1 }}>
-                <Text style={{ ...type.body_em, color: palette.ink, fontSize: 9.5, flex: 1 }}>
+                <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9.5'], flex: 1 }}>
                   {humanize(rel.npcName || rel.title || rel.label || `Relationship ${i + 1}`)}
                 </Text>
                 {rel.relationshipType && <RelPill type={rel.relationshipType} />}
               </View>
               {rel.otherSettlement && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
                   WITH: {humanize(rel.otherSettlement)}
                 </Text>
               )}
               <EditableText
                 name={`relationships.shared.${i}.description`}
                 defaultValue={rel.description || ''}
-                style={{ ...type.body, fontSize: 9 }}
+                style={{ ...type.body, fontSize: pt['9'] }}
               />
             </View>
           ))}
@@ -190,7 +190,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {r.crossConflicts?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             CROSS-SETTLEMENT CONFLICTS
           </Text>
           {r.crossConflicts.map((c, i) => (
@@ -206,18 +206,18 @@ export function Relationships({ settlement, narrativeMode, vm }) {
               }}
               wrap={false}
             >
-              <Text style={{ ...type.body_em, color: palette.bad, fontSize: 10 }}>
+              <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10'] }}>
                 {humanize(c.title || (Array.isArray(c.parties) ? c.parties.join(' vs ') : `Conflict ${i + 1}`))}
               </Text>
               {Array.isArray(c.parties) && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginTop: 1 }}>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 1 }}>
                   PARTIES: {c.parties.map(p => label(p) || humanize(String(p))).join('  vs  ')}
                 </Text>
               )}
               <EditableText
                 name={`relationships.cross.${i}.description`}
                 defaultValue={c.description || ''}
-                style={{ ...type.body, fontSize: 9 }}
+                style={{ ...type.body, fontSize: pt['9'] }}
               />
             </View>
           ))}
@@ -228,13 +228,13 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       {r.internal?.length > 0 && (
         <View>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.muted, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
             INTERNAL RELATIONSHIPS
           </Text>
           {r.internal.slice(0, 12).map((rel, i) => (
             <View key={`i-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }} wrap={false}>
-              <Text style={{ color: palette.cool, marginRight: 4, fontSize: 9 }}>•</Text>
-              <Text style={{ ...type.body, flex: 1, fontSize: 9 }}>
+              <Text style={{ color: palette.cool, marginRight: 4, fontSize: pt['9'] }}>•</Text>
+              <Text style={{ ...type.body, flex: 1, fontSize: pt['9'] }}>
                 <Text style={{ ...type.body_em, color: palette.ink }}>
                   {humanize(rel.label || rel.title || (rel.from && rel.to ? `${rel.from} ↔ ${rel.to}` : 'Link'))}
                 </Text>
@@ -266,7 +266,7 @@ function NeighbourCard({ n, idx }) {
       wrap={false}
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
-        <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, flex: 1 }}>
+        <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
           {humanize(n.name || 'Neighbour')}
         </Text>
         <RelPill type={n.type} />
@@ -275,46 +275,46 @@ function NeighbourCard({ n, idx }) {
         <EditableText
           name={`relationships.neighbour.${idx}.description`}
           defaultValue={n.description}
-          style={{ ...type.body, fontSize: 9 }}
+          style={{ ...type.body, fontSize: pt['9'] }}
         />
       )}
       {n.lastEvent && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
             LAST EVENT
           </Text>
           <EditableText
             name={`relationships.neighbour.${idx}.lastEvent`}
             defaultValue={typeof n.lastEvent === 'string' ? n.lastEvent : (n.lastEvent?.text || n.lastEvent?.description || '')}
-            style={{ ...type.body, fontSize: 8.5, color: palette.second }}
+            style={{ ...type.body, fontSize: pt['8.5'], color: palette.second }}
           />
         </View>
       )}
       {n.flavour && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
             FLAVOUR
           </Text>
           <EditableText
             name={`relationships.neighbour.${idx}.flavour`}
             defaultValue={n.flavour}
-            style={{ ...type.italic, fontSize: 8.5, color: palette.second }}
+            style={{ ...type.italic, fontSize: pt['8.5'], color: palette.second }}
           />
         </View>
       )}
       {n.hooks?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.muted, marginBottom: 1 }}>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
             PLOT HOOKS
           </Text>
           {n.hooks.map((h, j) => (
             <View key={`nh-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-              <Text style={{ color: palette.gold, marginRight: 4, fontSize: 8 }}>•</Text>
+              <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['8'] }}>•</Text>
               <View style={{ flex: 1 }}>
                 <EditableText
                   name={`relationships.neighbour.${idx}.hook.${j}`}
                   defaultValue={hookText(h)}
-                  style={{ ...type.body, fontSize: 8.5 }}
+                  style={{ ...type.body, fontSize: pt['8.5'] }}
                 />
               </View>
             </View>
@@ -342,7 +342,7 @@ function RelPill({ type: relType }) {
       <Text
         style={{
           fontFamily: 'Nunito',
-          fontSize: 7.5,
+          fontSize: pt['7.5'],
           fontWeight: 700,
           letterSpacing: 0.15,
           color,

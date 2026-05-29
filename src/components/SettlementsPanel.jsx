@@ -251,7 +251,7 @@ function SampleCard({ sample, onFork }) {
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
         <h4 style={{
-          margin: 0, fontFamily: serif_, fontSize: 16, fontWeight: 600,
+          margin: 0, fontFamily: serif_, fontSize: FS['16'], fontWeight: 600,
           color: INK, lineHeight: 1.2,
         }}>
           {sample.name}
@@ -273,7 +273,7 @@ function SampleCard({ sample, onFork }) {
         </span>
       </div>
       <p style={{
-        margin: 0, fontSize: 12.5, color: '#4A3B22',
+        margin: 0, fontSize: FS['12.5'], color: '#4A3B22',
         fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
       }}>
         {sample.teaser}
@@ -281,7 +281,7 @@ function SampleCard({ sample, onFork }) {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
         {sample.tags.map(tag => (
           <span key={tag} style={{
-            fontSize: 9.5, fontWeight: 700, color: SECOND,
+            fontSize: FS['9.5'], fontWeight: 700, color: SECOND,
             background: '#faf6ee',
             border: `1px solid ${BORDER}`,
             padding: '1px 6px', borderRadius: 4,
@@ -722,7 +722,7 @@ export default function SettlementsPanel({ onNavigate }) {
 
       {/* Save current settlement */}
       <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8, padding:'12px 14px' }}>
-        <div style={{ fontFamily:serif_, fontSize:16, fontWeight:600, color:INK, marginBottom:8 }}>Saved Settlements</div>
+        <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:INK, marginBottom:8 }}>Saved Settlements</div>
         {settlement && (
           <div style={{ fontSize:FS.xs, color:MUTED, marginBottom:8, padding:'6px 10px', background:'#f5ede0', borderRadius:5, border:`1px solid ${BORDER}`, display:'flex', alignItems:'center', gap:6 }}>
             <span style={{color:SECOND}}>Current:</span>

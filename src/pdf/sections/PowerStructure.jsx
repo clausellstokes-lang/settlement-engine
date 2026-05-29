@@ -21,7 +21,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, factionColors, space } from '../theme.js';
+import { type, palette, factionColors, space, pt } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
 
 export function PowerStructure({ settlement, narrativeMode, vm }) {
@@ -56,19 +56,19 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
       {/* ── Stability strip ───────────────────────────────────────── */}
       <View style={{ flexDirection: 'row', gap: 6, marginBottom: space.sm }}>
         <View style={{ flex: 1, padding: 6, backgroundColor: '#faf3e8', border: `0.4pt solid ${palette.border}`, borderRadius: 2 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.muted }}>STABILITY</Text>
-          <Text style={{ ...type.body_em, fontSize: 11, color: palette.ink, marginTop: 1 }}>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>STABILITY</Text>
+          <Text style={{ ...type.body_em, fontSize: pt['11'], color: palette.ink, marginTop: 1 }}>
             {cap(p.stability) || '—'}
           </Text>
         </View>
         {governing && (
           <View style={{ flex: 2, padding: 6, backgroundColor: '#faf3e8', border: `0.4pt solid ${palette.border}`, borderRadius: 2 }}>
-            <Text style={{ ...type.label, fontSize: 7, color: palette.muted }}>GOVERNING</Text>
-            <Text style={{ ...type.body_em, fontSize: 11, color: palette.ink, marginTop: 1 }}>
+            <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>GOVERNING</Text>
+            <Text style={{ ...type.body_em, fontSize: pt['11'], color: palette.ink, marginTop: 1 }}>
               {governing.name}
             </Text>
             {governing.category && (
-              <Text style={{ ...type.caption, color: palette.muted, fontSize: 7.5 }}>
+              <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}>
                 {cap(governing.category)}
               </Text>
             )}
@@ -76,12 +76,12 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
         )}
         {p.criminalCapture?.label && (
           <View style={{ flex: 1, padding: 6, backgroundColor: '#fde8e8', border: `0.4pt solid ${palette.bad}`, borderRadius: 2 }}>
-            <Text style={{ ...type.label, fontSize: 7, color: palette.bad }}>CRIM. CAPTURE</Text>
-            <Text style={{ ...type.body_em, fontSize: 10, color: palette.bad, marginTop: 1 }}>
+            <Text style={{ ...type.label, fontSize: pt['7'], color: palette.bad }}>CRIM. CAPTURE</Text>
+            <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.bad, marginTop: 1 }}>
               {cap(p.criminalCapture.label)}
             </Text>
             {p.criminalCapture.score != null && (
-              <Text style={{ ...type.caption, color: palette.muted, fontSize: 7.5 }}>
+              <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}>
                 {p.criminalCapture.score}
               </Text>
             )}
@@ -103,7 +103,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
               name="power.recentConflict"
               defaultValue={text}
               lines={2}
-              style={{ ...type.body, fontSize: 9.5 }}
+              style={{ ...type.body, fontSize: pt['9.5'] }}
             />
           </Callout>
         );
@@ -112,7 +112,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
       {/* ── Power distribution stacked bar ───────────────────────── */}
       {p.distribution.length > 0 && (
         <View style={{ marginTop: space.sm }} wrap={false}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             POWER DISTRIBUTION
           </Text>
           <StackedBar
@@ -128,7 +128,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
       )}
 
       {/* ── Faction cards ─────────────────────────────────────────── */}
-      <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3, marginTop: space.sm }}>
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3, marginTop: space.sm }}>
         FACTIONS
       </Text>
       {p.factions.map((f, i) => (
@@ -139,7 +139,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
       {p.tensions.length > 0 && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             CURRENT TENSIONS · {p.tensions.length}
           </Text>
           {p.tensions.map((t, i) => (
@@ -156,12 +156,12 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
             >
               <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
                 {t.severity && <Pill tone={severityTone(t.severity)}>{humanize(t.severity)}</Pill>}
-                <Text style={{ ...type.body_em, fontSize: 9.5, color: palette.ink, marginLeft: t.severity ? 6 : 0, flex: 1 }}>
+                <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, marginLeft: t.severity ? 6 : 0, flex: 1 }}>
                   {humanize(t.label || t.type || 'Tension')}
                 </Text>
               </View>
               {t.description && (
-                <Text style={{ ...type.body, fontSize: 9 }}>
+                <Text style={{ ...type.body, fontSize: pt['9'] }}>
                   {t.description}
                 </Text>
               )}
@@ -176,8 +176,8 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
                 <View style={{ marginTop: 2 }}>
                   {t.hooks.map((h, hi) => (
                     <View key={`th-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: 8.5 }}>↳</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: 8.5, flex: 1 }}>
+                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['8.5'] }}>↳</Text>
+                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
                         {hookText(h)}
                       </Text>
                     </View>
@@ -193,7 +193,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
       {p.conflicts.length > 0 && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             ACTIVE CONFLICTS · {p.conflicts.length}
           </Text>
           {p.conflicts.map((c, i) => (
@@ -210,23 +210,23 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
             >
               <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
                 {c.intensity && <Pill tone={severityTone(c.intensity)}>{humanize(c.intensity)}</Pill>}
-                <Text style={{ ...type.body_em, fontSize: 9.5, color: palette.ink, marginLeft: c.intensity ? 6 : 0, flex: 1 }}>
+                <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, marginLeft: c.intensity ? 6 : 0, flex: 1 }}>
                   {Array.isArray(c.parties) ? c.parties.map(label).filter(Boolean).join(' vs ') : 'Conflict'}
                 </Text>
               </View>
               {c.issue && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
                   <Text style={{ color: palette.faint }}>At issue: </Text>
                   {c.issue}
                 </Text>
               )}
               {c.description && (
-                <Text style={{ ...type.body, fontSize: 9, marginTop: 1 }}>
+                <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>
                   {c.description}
                 </Text>
               )}
               {c.stakes && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, fontStyle: 'italic', marginTop: 1 }}>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], fontStyle: 'italic', marginTop: 1 }}>
                   Stakes: {c.stakes}
                 </Text>
               )}
@@ -234,8 +234,8 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
                 <View style={{ marginTop: 2 }}>
                   {c.hooks.map((h, hi) => (
                     <View key={`ch-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: 8.5 }}>↳</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: 8.5, flex: 1 }}>
+                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['8.5'] }}>↳</Text>
+                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
                         {hookText(h)}
                       </Text>
                     </View>
@@ -266,7 +266,7 @@ function FactionCard({ faction, index }) {
       wrap={false}
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
-        <Text style={{ ...type.body_em, fontSize: 10.5, color: palette.ink, flex: 1 }}>{f.name}</Text>
+        <Text style={{ ...type.body_em, fontSize: pt['10.5'], color: palette.ink, flex: 1 }}>{f.name}</Text>
         <View style={{ flexDirection: 'row', gap: 4 }}>
           {f.category && <Tag tone="muted">{cap(f.category)}</Tag>}
           {f.isGoverning && <Tag tone="gold">GOVERNING</Tag>}
@@ -282,7 +282,7 @@ function FactionCard({ faction, index }) {
         height={3}
       />
       {f.crisisNote && (
-        <Text style={{ ...type.caption, color: palette.bad, fontSize: 8, fontStyle: 'italic', marginTop: 2 }}>
+        <Text style={{ ...type.caption, color: palette.bad, fontSize: pt['8'], fontStyle: 'italic', marginTop: 2 }}>
           ⚠ {f.crisisNote}
         </Text>
       )}
@@ -291,7 +291,7 @@ function FactionCard({ faction, index }) {
           name={`power.faction.${index}.blurb`}
           defaultValue={f.blurb}
           lines={2}
-          style={{ ...type.body, fontSize: 9 }}
+          style={{ ...type.body, fontSize: pt['9'] }}
         />
       )}
       {f.description && f.description !== f.blurb && (
@@ -299,7 +299,7 @@ function FactionCard({ faction, index }) {
           name={`power.faction.${index}.description`}
           defaultValue={f.description}
           lines={2}
-          style={{ ...type.caption, fontSize: 8.5, color: palette.muted, marginTop: 2 }}
+          style={{ ...type.caption, fontSize: pt['8.5'], color: palette.muted, marginTop: 2 }}
         />
       )}
       {f.modifiers?.length > 0 && (
@@ -317,9 +317,9 @@ function FactionCard({ faction, index }) {
       )}
       {f.subFactions?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.muted }}>SUB-FACTIONS / GROUPS</Text>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>SUB-FACTIONS / GROUPS</Text>
           {f.subFactions.map((sf, si) => (
-            <Text key={`sf-${index}-${si}`} style={{ ...type.caption, fontSize: 8, color: palette.second }}>
+            <Text key={`sf-${index}-${si}`} style={{ ...type.caption, fontSize: pt['8'], color: palette.second }}>
               · {label(sf)}
               {Array.isArray(sf?.members) && sf.members.length > 0 && (
                 <Text style={{ color: palette.muted }}> — {sf.members.map(label).filter(Boolean).join(', ')}</Text>

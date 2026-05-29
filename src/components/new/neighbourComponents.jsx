@@ -48,7 +48,7 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
                   <div style={{fontSize:FS.xs,fontWeight:700,color:'#1c1409'}}>{conn.primaryNPCName}</div>
                   <div style={{fontSize:FS.xxs,color:'#6b5340'}}>{conn.primaryNPCRole}{settlement?.name?` · ${settlement.name}`:''}</div>
                 </div>
-                <span style={{fontSize:14,color:'#9c8068',padding:'4px 0',flexShrink:0}}>↔</span>
+                <span style={{fontSize: FS['14'],color:'#9c8068',padding:'4px 0',flexShrink:0}}>↔</span>
                 <div style={{background:'#eef0ff',border:'1px solid #c0c8e8',borderRadius:5,padding:'5px 9px',flexShrink:0}}>
                   <div style={{fontSize:FS.xs,fontWeight:700,color:'#2a3a7a'}}>{conn.neighbourNPCName||`Contact in ${link.neighbourName}`}</div>
                   <div style={{fontSize:FS.xxs,color:'#5a6a9a'}}>{conn.neighbourNPCRole?`${conn.neighbourNPCRole} · `:''}  {link.neighbourName}</div>

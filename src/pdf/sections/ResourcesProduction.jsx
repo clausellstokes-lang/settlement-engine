@@ -20,7 +20,7 @@ import { ChainRow } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { cap, label, humanize } from '../lib/format.js';
 
 const _STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
@@ -58,7 +58,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
             name="resources.strategicValue"
             defaultValue={r.strategicValue}
             lines={2}
-            style={{ ...type.body, fontSize: 9.5 }}
+            style={{ ...type.body, fontSize: pt['9.5'] }}
           />
         </Callout>
       )}
@@ -67,7 +67,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
       {(r.terrainAdvantages?.length > 0 || r.terrainCriticals?.length > 0) && (
         <View style={{ flexDirection: 'row', gap: space.md, marginBottom: space.sm }}>
           <View style={{ flex: 1 }}>
-            <Text style={{ ...type.label, fontSize: 7.5, color: palette.good, marginBottom: 2 }}>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.good, marginBottom: 2 }}>
               TERRAIN ADVANTAGES
             </Text>
             {r.terrainAdvantages?.length > 0 ? (
@@ -77,13 +77,13 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                 ))}
               </View>
             ) : (
-              <Text style={{ ...type.caption, color: palette.faint, fontStyle: 'italic', fontSize: 8 }}>
+              <Text style={{ ...type.caption, color: palette.faint, fontStyle: 'italic', fontSize: pt['8'] }}>
                 none noted
               </Text>
             )}
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{ ...type.label, fontSize: 7.5, color: palette.bad, marginBottom: 2 }}>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.bad, marginBottom: 2 }}>
               TERRAIN CRITICALS
             </Text>
             {r.terrainCriticals?.length > 0 ? (
@@ -93,7 +93,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                 ))}
               </View>
             ) : (
-              <Text style={{ ...type.caption, color: palette.faint, fontStyle: 'italic', fontSize: 8 }}>
+              <Text style={{ ...type.caption, color: palette.faint, fontStyle: 'italic', fontSize: pt['8'] }}>
                 none noted
               </Text>
             )}
@@ -104,7 +104,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
       {/* ── Economic strengths ─────────────────────────────────── */}
       {r.economicStrengths.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.good, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.good, fontSize: pt['8'], marginBottom: 3 }}>
             ECONOMIC STRENGTHS
           </Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
@@ -119,7 +119,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
       {r.chainRows.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             RESOURCE CHAINS
           </Text>
           {fullRows.length > 0 && (
@@ -138,7 +138,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
       {(r.nearbyAbundant?.length > 0 || r.nearbyDepleted?.length > 0 || r.availableCommodities?.length > 0) && (
         <View style={{ marginBottom: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             NEARBY RESOURCES
           </Text>
           {r.nearbyDepleted?.length > 0 && (
@@ -172,12 +172,12 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
       {(importsCritical.length > 0 || importsRecommended.length > 0) && (
         <View style={{ marginBottom: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             IMPORT DEPENDENCIES
           </Text>
           {importsCritical.length > 0 && (
             <View style={{ marginBottom: 4 }}>
-              <Text style={{ ...type.label, fontSize: 7.5, color: palette.bad, marginBottom: 2 }}>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.bad, marginBottom: 2 }}>
                 CRITICAL
               </Text>
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3 }}>
@@ -189,7 +189,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
           )}
           {importsRecommended.length > 0 && (
             <View>
-              <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted, marginBottom: 2 }}>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, marginBottom: 2 }}>
                 RECOMMENDED
               </Text>
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3 }}>
@@ -206,7 +206,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
       {r.exportPotential?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.good, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.good, fontSize: pt['8'], marginBottom: 3 }}>
             EXPORT POTENTIAL
           </Text>
           {[...r.exportPotential]
@@ -227,7 +227,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                 >
                   <View style={{ flex: 1 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-                      <Text style={{ ...type.body_em, fontSize: 9.5, color: palette.ink, flex: 1 }}>
+                      <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, flex: 1 }}>
                         {humanize(e?.product || e?.good || e?.name) || '—'}
                       </Text>
                       <Tag tone={tone}>{cap(e?.value || 'Medium')}</Tag>
@@ -236,7 +236,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                       <EditableText
                         name={`resources.export.${i}.reason`}
                         defaultValue={e?.reason || e?.note || ''}
-                        style={{ ...type.caption, color: palette.muted, fontSize: 8 }}
+                        style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}
                       />
                     )}
                   </View>
@@ -250,7 +250,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
       {r.terrainEffects?.length > 0 && (
         <View style={{ marginBottom: space.sm }} wrap={false}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.cool, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>
             TERRAIN EFFECTS
           </Text>
           {r.terrainEffects.map((te, i) => {
@@ -262,7 +262,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                 style={{ flexDirection: 'row', alignItems: 'flex-start', paddingVertical: 2 }}
               >
                 {feature && (
-                  <Text style={{ ...type.body_em, fontSize: 9, color: palette.cool, width: 90 }}>
+                  <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.cool, width: 90 }}>
                     {humanize(feature)}
                   </Text>
                 )}
@@ -270,7 +270,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                   <EditableText
                     name={`resources.terrainEffect.${i}.effect`}
                     defaultValue={effect || ''}
-                    style={{ ...type.body, fontSize: 9 }}
+                    style={{ ...type.body, fontSize: pt['9'] }}
                   />
                 </View>
               </View>
@@ -283,7 +283,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
       {(r.priorityNotes?.length > 0 || r.structuralGaps?.length > 0) && (
         <View>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             GAPS & OPPORTUNITIES
           </Text>
           {r.priorityNotes?.length > 0 && (
@@ -301,12 +301,12 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                   }}
                   wrap={false}
                 >
-                  <Text style={{ color: '#5a2a8a', marginRight: 4, fontSize: 9 }}>✦</Text>
+                  <Text style={{ color: '#5a2a8a', marginRight: 4, fontSize: pt['9'] }}>✦</Text>
                   <View style={{ flex: 1 }}>
                     <EditableText
                       name={`resources.priorityNote.${i}`}
                       defaultValue={typeof note === 'string' ? note : (note?.text || label(note))}
-                      style={{ ...type.body, fontSize: 9 }}
+                      style={{ ...type.body, fontSize: pt['9'] }}
                     />
                   </View>
                 </View>
@@ -339,14 +339,14 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                     <Tag tone={tone}>{cap(severity)}</Tag>
                     <View style={{ flex: 1, marginLeft: 4 }}>
                       {chain && (
-                        <Text style={{ ...type.body_em, fontSize: 9, color: palette.ink }}>
+                        <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.ink }}>
                           {humanize(chain)}
                         </Text>
                       )}
                       <EditableText
                         name={`resources.gap.${i}.impact`}
                         defaultValue={impact || ''}
-                        style={{ ...type.body, fontSize: 9 }}
+                        style={{ ...type.body, fontSize: pt['9'] }}
                       />
                     </View>
                   </View>
@@ -370,10 +370,10 @@ function ChainGroup({ title, tone, rows }) {
           marginBottom: 1,
         }}
       >
-        <Text style={{ ...type.label, fontSize: 7.5, color: palette[tone] || palette.muted }}>
+        <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette[tone] || palette.muted }}>
           {title.toUpperCase()}
         </Text>
-        <Text style={{ ...type.caption, color: palette.faint, marginLeft: 4, fontSize: 7.5 }}>
+        <Text style={{ ...type.caption, color: palette.faint, marginLeft: 4, fontSize: pt['7.5'] }}>
           {rows.length}
         </Text>
       </View>
@@ -395,11 +395,11 @@ function ResourceRow({ kicker, hint, tone, items }) {
   return (
     <View style={{ marginBottom: 4 }}>
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 1 }}>
-        <Text style={{ ...type.label, fontSize: 7.5, color: palette[tone] || palette.muted }}>
+        <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette[tone] || palette.muted }}>
           {kicker}
         </Text>
         {hint && (
-          <Text style={{ ...type.caption, fontSize: 7.5, color: palette.faint, marginLeft: 5 }}>
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.faint, marginLeft: 5 }}>
             · {hint}
           </Text>
         )}

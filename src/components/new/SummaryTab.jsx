@@ -164,7 +164,7 @@ function SummaryTab({ settlement:r }) {
             {copied?'✓':''} {copied?'Copied!':'Copy'}
           </button>
         </div>
-        <p style={{fontSize:13.5,...serif,color:'#e8d8b0',lineHeight:1.65,margin:0,fontStyle:'italic'}}>
+        <p style={{fontSize: FS['13.5'],...serif,color:'#e8d8b0',lineHeight:1.65,margin:0,fontStyle:'italic'}}>
           {name} is a {characterSentence(r)}
         </p>
       </div>
@@ -174,8 +174,8 @@ function SummaryTab({ settlement:r }) {
         {stresses.map((v,i)=>(
           <div key={i} style={{border:`2px solid ${v.colour}`,borderRadius:8,padding:'14px 16px',background:`${v.colour}10`}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}>
-              <span style={{fontSize:22,lineHeight:1}}>{v.icon}</span>
-              <span style={{...serif,fontSize:18,fontWeight:700,color:v.colour}}>{v.label}</span>
+              <span style={{fontSize: FS['22'],lineHeight:1}}>{v.icon}</span>
+              <span style={{...serif,fontSize: FS['18'],fontWeight:700,color:v.colour}}>{v.label}</span>
               <span style={{fontSize:FS.micro,fontWeight:800,color:'#fff',background:v.colour,borderRadius:4,padding:'2px 7px',letterSpacing:'0.07em'}}>ACTIVE CRISIS</span>
             </div>
             <p style={{fontSize:FS.md,color:ink,lineHeight:1.55,marginBottom:8}}>{v.summary}</p>
@@ -190,7 +190,7 @@ function SummaryTab({ settlement:r }) {
       {/* ── ARRIVAL SCENE ────────────────────────────────────────────────── */}
       {r.arrivalScene&&<div style={{background:'#1c1409',borderRadius:8,padding:'14px 18px',marginBottom:14,border:'1px solid #3a2a10'}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:gold,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:8}}>Arrival</div>
-        <p style={{...serif,fontSize:14,color:'#f0e8d8',lineHeight:1.8,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
+        <p style={{...serif,fontSize: FS['14'],color:'#f0e8d8',lineHeight:1.8,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
       </div>}
 
       {/* Pressure sentence if no arrivalScene */}
@@ -235,7 +235,7 @@ function SummaryTab({ settlement:r }) {
       {/* ── PROMINENT RELATIONSHIP ────────────────────────────────────────── */}
       {pr?.phrasing&&<div style={{background:'#f7f0e4',border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',borderRadius:7,padding:'9px 13px',marginBottom:12}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
-        <p style={{fontSize:12.5,...serif,color:'#3a2a10',lineHeight:1.6,margin:0,fontStyle:'italic'}}>{pr.phrasing}</p>
+        <p style={{fontSize: FS['12.5'],...serif,color:'#3a2a10',lineHeight:1.6,margin:0,fontStyle:'italic'}}>{pr.phrasing}</p>
         <p style={{fontSize:FS.xxs,color:muted,margin:'5px 0 0'}}>→ See Relationships tab for the full web.</p>
       </div>}
 

@@ -16,7 +16,7 @@ import {
 } from '../primitives/Dense.jsx';
 import { servicesHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
-import { type, palette, space, factionColors } from '../theme.js';
+import { type, palette, space, factionColors, pt } from '../theme.js';
 import { cap, label, humanize, hookText, plural } from '../lib/format.js';
 
 const CATEGORY_ORDER = [
@@ -116,10 +116,10 @@ function CategoryHeader({ cat, count, stats }) {
           marginRight: 5,
         }}
       />
-      <Text style={{ ...type.label_em, color: palette.ink, fontSize: 9 }}>
+      <Text style={{ ...type.label_em, color: palette.ink, fontSize: pt['9'] }}>
         {humanize(cat)}
       </Text>
-      <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: 8 }}>
+      <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: pt['8'] }}>
         {count} {plural(count, 'institution')}
       </Text>
       <View style={{ flex: 1 }} />
@@ -194,7 +194,7 @@ function InstitutionCard({ inst, idx }) {
     >
       {/* Title row */}
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
-        <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, flex: 1 }}>
+        <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
           {inst.name}
         </Text>
         {status !== 'healthy' && <Pill tone={tone}>{cap(status)}</Pill>}
@@ -212,7 +212,7 @@ function InstitutionCard({ inst, idx }) {
       {meta.length > 0 && <KeyValRow pairs={meta} />}
 
       {inst.description && (
-        <Text style={{ ...type.body, fontSize: 8.5, color: palette.second, marginTop: 2, lineHeight: 1.35 }}>
+        <Text style={{ ...type.body, fontSize: pt['8.5'], color: palette.second, marginTop: 2, lineHeight: 1.35 }}>
           {inst.description}
         </Text>
       )}
@@ -221,7 +221,7 @@ function InstitutionCard({ inst, idx }) {
         <Text style={{
           ...type.caption,
           color: palette[tone] || palette.muted,
-          fontSize: 7.5,
+          fontSize: pt['7.5'],
           fontStyle: 'italic',
           marginTop: 1,
         }}>
@@ -231,8 +231,8 @@ function InstitutionCard({ inst, idx }) {
 
       {inst.products?.length > 0 && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.muted }}>PRODUCES</Text>
-          <Text style={{ ...type.caption, fontSize: 7.5, color: palette.second }}>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>PRODUCES</Text>
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>
             {inst.products.slice(0, 6).map(p => label(p) || humanize(String(p))).filter(Boolean).join(', ')}
           </Text>
         </View>
@@ -240,15 +240,15 @@ function InstitutionCard({ inst, idx }) {
 
       {inst.requirements?.length > 0 && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.warn }}>NEEDS</Text>
-          <Text style={{ ...type.caption, fontSize: 7.5, color: palette.second }}>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.warn }}>NEEDS</Text>
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>
             {inst.requirements.slice(0, 6).map(r => label(r) || humanize(String(r))).filter(Boolean).join(', ')}
           </Text>
         </View>
       )}
 
       {inst.notableUnits && (
-        <Text style={{ ...type.caption, fontSize: 7.5, color: palette.muted, marginTop: 1 }}>
+        <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, marginTop: 1 }}>
           <Text style={{ color: palette.faint }}>Notable: </Text>
           {typeof inst.notableUnits === 'string'
             ? inst.notableUnits
@@ -260,7 +260,7 @@ function InstitutionCard({ inst, idx }) {
 
       {inst.pressures?.length > 0 && (
         <View style={{ marginTop: 1 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.bad }}>PRESSURES</Text>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.bad }}>PRESSURES</Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
             {inst.pressures.slice(0, 4).map((p, i) => (
               <Tag key={`pr-${idx}-${i}`} tone="warn">{label(p) || humanize(String(p))}</Tag>
@@ -271,14 +271,14 @@ function InstitutionCard({ inst, idx }) {
 
       {inst.plotHooks?.length > 0 && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: 7, color: palette.gold }}>HOOKS</Text>
+          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.gold }}>HOOKS</Text>
           {inst.plotHooks.slice(0, 2).map((h, i) => {
             const t = hookText(h);
             if (!t) return null;
             return (
               <View key={`ih-${idx}-${i}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>
-                <Text style={{ color: palette.gold, marginRight: 3, fontSize: 8 }}>•</Text>
-                <Text style={{ ...type.body, fontSize: 8, flex: 1, lineHeight: 1.3 }}>{t}</Text>
+                <Text style={{ color: palette.gold, marginRight: 3, fontSize: pt['8'] }}>•</Text>
+                <Text style={{ ...type.body, fontSize: pt['8'], flex: 1, lineHeight: 1.3 }}>{t}</Text>
               </View>
             );
           })}
@@ -286,7 +286,7 @@ function InstitutionCard({ inst, idx }) {
       )}
 
       {inst.notes && (
-        <Text style={{ ...type.italic, fontSize: 8, color: palette.muted, marginTop: 2 }}>
+        <Text style={{ ...type.italic, fontSize: pt['8'], color: palette.muted, marginTop: 2 }}>
           {inst.notes}
         </Text>
       )}

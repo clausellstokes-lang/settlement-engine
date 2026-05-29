@@ -127,7 +127,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
       }}>
         <h1 style={{
           margin: 0,
-          fontFamily: serif, fontWeight: 600, fontSize: 22,
+          fontFamily: serif, fontWeight: 600, fontSize: FS['22'],
           color: INK, letterSpacing: '-0.005em',
           lineHeight: 1.15,
         }}>
@@ -166,7 +166,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
 
           <p style={{
             margin: '8px 0 0',
-            fontFamily: serif, fontSize: 14.5,
+            fontFamily: serif, fontSize: FS['14.5'],
             color: INK_DEEP, lineHeight: 1.65,
           }}>
             {accent && (
@@ -258,14 +258,14 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                     gap: 6,
                   }}>
                     <span style={{
-                      fontFamily: serif, fontWeight: 700, fontSize: 11.5,
+                      fontFamily: serif, fontWeight: 700, fontSize: FS['11.5'],
                       color: INK, minWidth: 0, overflow: 'hidden',
                       textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                     }}>
                       {row.title}
                     </span>
                     <span style={{
-                      fontSize: 7.5, fontWeight: 800,
+                      fontSize: FS['7.5'], fontWeight: 800,
                       color: accent, letterSpacing: '0.08em',
                       flexShrink: 0,
                     }}>

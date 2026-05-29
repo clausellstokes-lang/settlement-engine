@@ -203,10 +203,10 @@ function Group({ violations, tone, caption }) {
               {KIND_LABELS[v.kind] || v.kind}
             </span>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 11.5, color: COLORS.ink, fontWeight: 600 }}>
+              <div style={{ fontSize: FS['11.5'], color: COLORS.ink, fontWeight: 600 }}>
                 {v.label || v.field || v.key}
               </div>
-              <div style={{ fontSize: 10.5, color: COLORS.muted, lineHeight: 1.4 }}>
+              <div style={{ fontSize: FS['10.5'], color: COLORS.muted, lineHeight: 1.4 }}>
                 {v.detail}
               </div>
             </div>

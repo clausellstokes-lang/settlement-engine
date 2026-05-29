@@ -119,7 +119,7 @@ export function ConflictCard({conflict:c}) {
     <div style={{background:'#fdf4f4',border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:7,padding:'12px 14px',marginBottom:10}}>
       <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:6}}>
         <span style={{fontSize:FS.micro,fontWeight:800,color:d.color,background:`${d.color}18`,borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
-        <span style={{...serif,fontSize:14,fontWeight:600,color:'#1c1409'}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
+        <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:'#1c1409'}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
       </div>
       <p style={{fontSize:FS.md,color:'#3d2b1a',lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
       {c.stakes&&<div style={{fontSize:FS.xs,color:'#9c8068',marginBottom:8}}><strong>At stake:</strong> {c.stakes}</div>}
@@ -189,7 +189,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
       <button onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1,minWidth:0}}>
           <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
-            <span style={{...serif,fontSize:14,fontWeight:700,color:'#1c1409'}}>{npc.name}</span>
+            <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:'#1c1409'}}>{npc.name}</span>
             <span style={{fontSize:FS.xxs,color:'#9c8068'}}>{npc.title}</span>
             <span style={{fontSize:FS.xs,fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
           </div>

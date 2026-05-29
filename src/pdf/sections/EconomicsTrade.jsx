@@ -21,7 +21,7 @@ import { StatusCard } from '../primitives/Visuals.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { cap, num, smart, label, hookText, finite, safePct } from '../lib/format.js';
 
 export function EconomicsTrade({ settlement, narrativeMode, vm }) {
@@ -51,7 +51,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
       {/* ── Income sources ─────────────────────────────────────── */}
       {e.incomeSources?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             INCOME SOURCES
           </Text>
           {e.incomeSources.map((s, i) => (
@@ -64,7 +64,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
                 height={3}
               />
               {s.desc && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginTop: -2, marginLeft: 6 }}>
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: -2, marginLeft: 6 }}>
                   {s.desc}
                 </Text>
               )}
@@ -76,13 +76,13 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
       {/* ── Trade flows ───────────────────────────────────────── */}
       {(e.primaryExports?.length > 0 || e.primaryImports?.length > 0 || e.localProduction?.length > 0) && (
         <>
-      <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
         TRADE FLOWS
       </Text>
       <ThreeCol
         a={
           <View>
-            <Text style={{ ...type.label, fontSize: 7.5, color: palette.good }}>EXPORTS</Text>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.good }}>EXPORTS</Text>
             <BulletList
               items={e.primaryExports}
               tone="good"
@@ -93,7 +93,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
         }
         b={
           <View>
-            <Text style={{ ...type.label, fontSize: 7.5, color: palette.warn }}>IMPORTS</Text>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>IMPORTS</Text>
             <BulletList
               items={e.primaryImports}
               tone="warn"
@@ -104,7 +104,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
         }
         c={
           <View>
-            <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>LOCAL PRODUCTION</Text>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>LOCAL PRODUCTION</Text>
             <BulletList
               items={e.localProduction}
               tone="muted"
@@ -128,7 +128,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
       {/* Critical trade dependencies */}
       {(e.tradeDependencies?.length > 0 || e.criticalImports?.length > 0) && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             CRITICAL DEPENDENCIES
           </Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
@@ -143,7 +143,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
         <>
           <HairRule />
           {/* ── Food security ─────────────────────────────────────── */}
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             FOOD SECURITY
           </Text>
           <FoodBalanceBlock fb={e.foodBalance} />
@@ -154,7 +154,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
       {e.chains?.length > 0 && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             ECONOMIC FLOWS · {e.chains.length} CHAIN{e.chains.length === 1 ? '' : 'S'}
           </Text>
           {e.chains.map((c, i) => (
@@ -176,11 +176,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
                   <View style={{ marginTop: 2 }}>
                     {c.hooks.map((h, hi) => (
                       <View key={`chk-${i}-${hi}`} style={{ flexDirection: 'row' }}>
-                        <Text style={{ color: palette.gold, marginRight: 3, fontSize: 8 }}>↳</Text>
+                        <Text style={{ color: palette.gold, marginRight: 3, fontSize: pt['8'] }}>↳</Text>
                         <EditableText
                           name={`economics.chain.${i}.hook.${hi}`}
                           defaultValue={hookText(h)}
-                          style={{ ...type.italic, fontSize: 8.5, color: palette.second }}
+                          style={{ ...type.italic, fontSize: pt['8.5'], color: palette.second }}
                         />
                       </View>
                     ))}
@@ -196,25 +196,25 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
       {e.resourceExploitation && (e.resourceExploitation.full?.length > 0 || e.resourceExploitation.partial?.length > 0 || e.resourceExploitation.unexploited?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             RESOURCE EXPLOITATION
           </Text>
           <ThreeCol
             a={
               <View>
-                <Text style={{ ...type.label, fontSize: 7.5, color: palette.good }}>FULL</Text>
+                <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.good }}>FULL</Text>
                 <BulletList items={e.resourceExploitation.full} tone="good" emptyText="None" itemRender={label} />
               </View>
             }
             b={
               <View>
-                <Text style={{ ...type.label, fontSize: 7.5, color: palette.warn }}>PARTIAL</Text>
+                <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>PARTIAL</Text>
                 <BulletList items={e.resourceExploitation.partial} tone="warn" emptyText="None" itemRender={label} />
               </View>
             }
             c={
               <View>
-                <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>UNEXPLOITED</Text>
+                <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>UNEXPLOITED</Text>
                 <BulletList items={e.resourceExploitation.unexploited} tone="muted" emptyText="None" itemRender={label} />
               </View>
             }
@@ -226,11 +226,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
       {(e.shadowEconomy.captureRate != null || e.shadowEconomy.operations?.length > 0 || e.shadowEconomy.crimeTypes?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             SHADOW ECONOMY
           </Text>
           {e.shadowEconomy.captureRate != null && (
-            <Text style={{ ...type.body, fontSize: 9, color: palette.bad, marginBottom: 3 }}>
+            <Text style={{ ...type.body, fontSize: pt['9'], color: palette.bad, marginBottom: 3 }}>
               Black market capture: <Text style={{ fontWeight: 700 }}>{smart(e.shadowEconomy.captureRate)}%</Text> of economy
             </Text>
           )}
@@ -243,14 +243,14 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
           )}
           {e.shadowEconomy.operations?.length > 0 && (
             <View style={{ marginBottom: 4 }}>
-              <Text style={{ ...type.label, fontSize: 7.5, color: palette.muted }}>ACTIVE OPERATIONS</Text>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>ACTIVE OPERATIONS</Text>
               {e.shadowEconomy.operations.map((op, i) => (
                 <View key={`op-${i}`} style={{ marginBottom: 2 }}>
-                  <Text style={{ ...type.body_em, fontSize: 9, color: palette.bad }}>
+                  <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.bad }}>
                     {label(op)}
                   </Text>
                   {op?.scope && (
-                    <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>
+                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
                       Scope: {op.scope}{op?.target ? ` · target: ${op.target}` : ''}
                     </Text>
                   )}
@@ -258,7 +258,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
                     <EditableText
                       name={`economics.shadow.op.${i}.description`}
                       defaultValue={op.description}
-                      style={{ ...type.body, fontSize: 8.5 }}
+                      style={{ ...type.body, fontSize: pt['8.5'] }}
                     />
                   )}
                 </View>
@@ -279,18 +279,18 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
       {e.viabilityIssues?.length > 0 && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             ACTIVE ECONOMIC ISSUES
           </Text>
           {e.viabilityIssues.map((iss, i) => (
             <View key={`iss-${i}`} style={{ marginBottom: 4 }} wrap={false}>
               <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
                 {iss.severity && <Pill tone={severityTone(iss.severity)}>{iss.severity}</Pill>}
-                <Text style={{ ...type.body_em, fontSize: 9, color: palette.ink, marginLeft: 4, flex: 1 }}>
+                <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.ink, marginLeft: 4, flex: 1 }}>
                   {iss.title}
                 </Text>
                 {iss.institution && (
-                  <Text style={{ ...type.caption, color: palette.muted, fontSize: 8 }}>
+                  <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
                     {iss.institution}
                   </Text>
                 )}
@@ -300,24 +300,24 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
                   name={`economics.issue.${i}.description`}
                   defaultValue={iss.description}
                   lines={1}
-                  style={{ ...type.body, fontSize: 9 }}
+                  style={{ ...type.body, fontSize: pt['9'] }}
                 />
               )}
               {iss.priorityNote && (
-                <Text style={{ ...type.caption, color: palette.warn, fontSize: 8, fontStyle: 'italic' }}>
+                <Text style={{ ...type.caption, color: palette.warn, fontSize: pt['8'], fontStyle: 'italic' }}>
                   {iss.priorityNote}
                 </Text>
               )}
               {iss.suggestedFixes?.length > 0 && (
                 <View style={{ marginTop: 1, marginLeft: 6 }}>
-                  <Text style={{ ...type.label, color: palette.good, fontSize: 7 }}>SUGGESTED FIXES</Text>
+                  <Text style={{ ...type.label, color: palette.good, fontSize: pt['7'] }}>SUGGESTED FIXES</Text>
                   {iss.suggestedFixes.map((fix, fi) => (
                     <View key={`fix-${i}-${fi}`} style={{ flexDirection: 'row' }}>
-                      <Text style={{ color: palette.good, marginRight: 3, fontSize: 8 }}>+</Text>
+                      <Text style={{ color: palette.good, marginRight: 3, fontSize: pt['8'] }}>+</Text>
                       <EditableText
                         name={`economics.issue.${i}.fix.${fi}`}
                         defaultValue={typeof fix === 'string' ? fix : (fix?.text || fix?.description || '')}
-                        style={{ ...type.body, fontSize: 8.5, flex: 1 }}
+                        style={{ ...type.body, fontSize: pt['8.5'], flex: 1 }}
                       />
                     </View>
                   ))}
@@ -332,16 +332,16 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
       {(e.viabilityHooks?.length > 0 || e.safetyHooks?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             ECONOMIC HOOKS
           </Text>
           {[...(e.viabilityHooks || []), ...(e.safetyHooks || [])].map((h, i) => (
             <View key={`eh-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }}>
-              <Text style={{ color: palette.gold, marginRight: 4, fontSize: 9 }}>·</Text>
+              <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['9'] }}>·</Text>
               <EditableText
                 name={`economics.hook.${i}`}
                 defaultValue={hookText(h)}
-                style={{ ...type.body, fontSize: 9 }}
+                style={{ ...type.body, fontSize: pt['9'] }}
               />
             </View>
           ))}
@@ -362,25 +362,25 @@ function FoodBalanceBlock({ fb }) {
     <View style={{ marginBottom: space.sm }} wrap={false}>
       <View style={{ flexDirection: 'row', gap: 6 }}>
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>PRODUCED</Text>
+          <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>PRODUCED</Text>
           <View style={{ height: 5, backgroundColor: '#f0e8d8', borderRadius: 1, marginTop: 1 }}>
             <View style={{ width: `${prodPct}%`, height: '100%', backgroundColor: palette.good }} />
           </View>
-          <Text style={{ ...type.caption, fontSize: 8, marginTop: 1 }}>{smart(prod)}</Text>
+          <Text style={{ ...type.caption, fontSize: pt['8'], marginTop: 1 }}>{smart(prod)}</Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>NEEDED</Text>
+          <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>NEEDED</Text>
           <View style={{ height: 5, backgroundColor: '#f0e8d8', borderRadius: 1, marginTop: 1 }}>
             <View style={{ width: `${needPct}%`, height: '100%', backgroundColor: palette.bad }} />
           </View>
-          <Text style={{ ...type.caption, fontSize: 8, marginTop: 1 }}>{smart(need)}</Text>
+          <Text style={{ ...type.caption, fontSize: pt['8'], marginTop: 1 }}>{smart(need)}</Text>
         </View>
         {fb.deficit > 0 && (
           <View style={{ flex: 1 }}>
-            <Text style={{ ...type.caption, fontSize: 8, color: palette.bad }}>DEFICIT</Text>
-            <Text style={{ ...type.numeric, fontSize: 13, color: palette.bad }}>{smart(fb.deficit)}</Text>
+            <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.bad }}>DEFICIT</Text>
+            <Text style={{ ...type.numeric, fontSize: pt['13'], color: palette.bad }}>{smart(fb.deficit)}</Text>
             {fb.importCoverage != null && (
-              <Text style={{ ...type.caption, fontSize: 8, color: palette.muted }}>
+              <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
                 imports cover {smart(fb.importCoverage)}%
               </Text>
             )}
@@ -388,13 +388,13 @@ function FoodBalanceBlock({ fb }) {
         )}
         {fb.surplus > 0 && (
           <View style={{ flex: 1 }}>
-            <Text style={{ ...type.caption, fontSize: 8, color: palette.good }}>SURPLUS</Text>
-            <Text style={{ ...type.numeric, fontSize: 13, color: palette.good }}>{smart(fb.surplus)}</Text>
+            <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.good }}>SURPLUS</Text>
+            <Text style={{ ...type.numeric, fontSize: pt['13'], color: palette.good }}>{smart(fb.surplus)}</Text>
           </View>
         )}
       </View>
       {(fb.agricultureModifier != null || fb.stressModifier != null) && (
-        <Text style={{ ...type.caption, fontSize: 8, color: palette.muted, marginTop: 3 }}>
+        <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, marginTop: 3 }}>
           {fb.agricultureModifier != null && `Ag mod ${smart(fb.agricultureModifier)}  ·  `}
           {fb.stressModifier != null && `Stress mod ${smart(fb.stressModifier)}`}
         </Text>
@@ -404,7 +404,7 @@ function FoodBalanceBlock({ fb }) {
           name="economics.foodBalance.summary"
           defaultValue={fb.summary}
           lines={1}
-          style={{ ...type.italic, fontSize: 9, color: palette.second, marginTop: 3 }}
+          style={{ ...type.italic, fontSize: pt['9'], color: palette.second, marginTop: 3 }}
         />
       )}
     </View>

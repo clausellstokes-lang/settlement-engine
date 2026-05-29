@@ -99,13 +99,13 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
       {stresses.length>0&&<div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:14}}>
         {stresses.map((v,i)=>(
           <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:`${v.colour}0e`,border:`2px solid ${v.colour}`,borderRadius:8,padding:'10px 14px'}}>
-            <span style={{fontSize:18,flexShrink:0}}>{v.icon}</span>
+            <span style={{fontSize: FS['18'],flexShrink:0}}>{v.icon}</span>
             <div style={{flex:1,minWidth:0}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
                 <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:v.colour}}>{v.label}</span>
                 <span style={{fontSize:FS.micro,fontWeight:800,color:'#fff',background:v.colour,borderRadius:4,padding:'1px 6px',letterSpacing:'0.06em'}}>ACTIVE CRISIS</span>
               </div>
-              <p style={{fontSize:12.5,color:'#1c1409',lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
+              <p style={{fontSize: FS['12.5'],color:'#1c1409',lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
               <p style={{fontSize:FS.xs,color:'#3a2a10',fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
             </div>
           </div>
@@ -208,7 +208,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
       {/* ── NOTABLE CONNECTION ────────────────────────────────────────────── */}
       {r.prominentRelationship?.phrasing&&<div style={{background:'#f7f0e4',border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',borderRadius:7,padding:'9px 13px',marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
-        <p style={{fontSize:12.5,...serif,color:'#3a2a10',lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
+        <p style={{fontSize: FS['12.5'],...serif,color:'#3a2a10',lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
         <p style={{fontSize:FS.xxs,color:'#9c8068',margin:'5px 0 0'}}>→ Full relationship web in the Relationships tab.</p>
       </div>}
 
@@ -264,13 +264,13 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:'#fdf4f0',border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',borderRadius:7,padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
             <span style={{color:'#8b3a1a',flexShrink:0}}></span>
-            <span style={{fontSize:12.5,color:'#3d2b1a',lineHeight:1.5}}>{note.note||Ti(note)}</span>
+            <span style={{fontSize: FS['12.5'],color:'#3d2b1a',lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
         {r.coherenceNotes?.filter(n=>n.severity!=='contradiction').map((note,i)=>(
           <div key={i} style={{background:'#f0f4fd',border:'1px solid #a0b4d4',borderLeft:'3px solid #1a3a8b',borderRadius:7,padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
             <span style={{color:'#1a3a8b',flexShrink:0}}>ℹ</span>
-            <span style={{fontSize:12.5,color:'#3d2b1a',lineHeight:1.5}}>{note.note||Ti(note)}</span>
+            <span style={{fontSize: FS['12.5'],color:'#3d2b1a',lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
         {r.structuralSuggestions?.length>0&&<div style={{background:'#f4f6fd',border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',borderRadius:7,padding:'10px 14px'}}>

@@ -28,7 +28,7 @@ function BulletRow({ icon: Icon, color, children }) {
       <span style={{ color, flexShrink: 0, marginTop: 3, display: 'flex' }}>
         <Icon size={13} />
       </span>
-      <div style={{ flex: 1, fontSize: 12.5, color: '#1c1409', lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>
+      <div style={{ flex: 1, fontSize: FS['12.5'], color: '#1c1409', lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>
         {children}
       </div>
     </div>
@@ -127,7 +127,7 @@ function ConnectionsMapPanel({ edges }) {
       {edges.map((e, i) => (
         <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '5px 10px', borderBottom: i < edges.length - 1 ? '1px solid #e0d0b0' : 'none', flexWrap: 'wrap' }}>
           <Network size={12} color="#2a3a7a" style={{ flexShrink: 0 }} />
-          <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1c1409', fontFamily: 'Nunito, sans-serif' }}>{e.from}</span>
+          <span style={{ fontSize: FS['11.5'], fontWeight: 700, color: '#1c1409', fontFamily: 'Nunito, sans-serif' }}>{e.from}</span>
           <span style={{ fontSize: FS.xxs, color: '#6b5340', fontStyle: 'italic', padding: '0 4px', fontFamily: 'Georgia, serif' }}>{e.nature}</span>
           {e.via && (
             <>
@@ -136,7 +136,7 @@ function ConnectionsMapPanel({ edges }) {
             </>
           )}
           <span style={{ fontSize: FS.xxs, color: '#6b5340' }}>&rarr;</span>
-          <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1c1409', fontFamily: 'Nunito, sans-serif' }}>{e.to}</span>
+          <span style={{ fontSize: FS['11.5'], fontWeight: 700, color: '#1c1409', fontFamily: 'Nunito, sans-serif' }}>{e.to}</span>
         </div>
       ))}
     </Section>

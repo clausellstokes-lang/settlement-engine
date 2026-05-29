@@ -89,7 +89,7 @@ export default function HomeSampleDossier() {
         color: GOLD,
       }}>
         <div style={{
-          fontFamily: serif, fontSize: 16, fontWeight: 600,
+          fontFamily: serif, fontSize: FS['16'], fontWeight: 600,
         }}>
           {name}
           <span style={{
@@ -130,7 +130,7 @@ export default function HomeSampleDossier() {
                 {eyebrow}
               </div>
               <div style={{
-                marginTop: 4, fontSize: 11.5,
+                marginTop: 4, fontSize: FS['11.5'],
                 color: '#3A2F18', lineHeight: 1.5,
                 fontFamily: italic ? serif : sans,
                 fontStyle: italic ? 'italic' : 'normal',

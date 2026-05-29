@@ -19,7 +19,7 @@ import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, KeyValRow, HairRule, Tag } from '../primitives/Dense.jsx';
 import { npcsHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
-import { type, palette, space } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { label, hookText, humanize, stripZwnj } from '../lib/format.js';
 
 /**
@@ -37,14 +37,14 @@ function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBo
         style={{
           ...type.label,
           color: palette.muted,
-          fontSize: 7.5,
+          fontSize: pt['7.5'],
           width: labelWidth,
           paddingTop: 2,
         }}
       >
         {String(l || '').toUpperCase()}
       </Text>
-      <Text style={{ ...type.body, fontSize: 9.5, flex: 1, lineHeight: multiline ? 1.4 : 1.3 }}>
+      <Text style={{ ...type.body, fontSize: pt['9.5'], flex: 1, lineHeight: multiline ? 1.4 : 1.3 }}>
         {String(value)}
       </Text>
     </View>
@@ -92,7 +92,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
 
       {major.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             MAJOR FIGURES
           </Text>
           {major.map((npc, i) => (
@@ -104,7 +104,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
       {notable.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             NOTABLE FIGURES
           </Text>
           <CompactGrid items={notable} />
@@ -114,7 +114,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
       {other.length > 0 && (
         <View>
           <HairRule />
-          <Text style={{ ...type.label, color: palette.muted, fontSize: 8, marginBottom: 3 }}>
+          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
             OTHER NAMES OF NOTE
           </Text>
           <OtherNamesGrid items={other} />
@@ -141,11 +141,11 @@ function FullCard({ npc }) {
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
         <View style={{ flex: 1 }}>
-          <Text style={{ ...type.body_em, color: palette.ink, fontSize: 12 }}>
+          <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['12'] }}>
             {name}
           </Text>
           {title && (
-            <Text style={{ ...type.italic, color: palette.muted, fontSize: 9.5 }}>
+            <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9.5'] }}>
               {title}
             </Text>
           )}
@@ -168,7 +168,7 @@ function FullCard({ npc }) {
       />
 
       {npc.influenceDescription && (
-        <Text style={{ ...type.caption, color: palette.muted, fontSize: 8, marginTop: 2, fontStyle: 'italic' }}>
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2, fontStyle: 'italic' }}>
           {npc.influenceDescription}
         </Text>
       )}
@@ -176,7 +176,7 @@ function FullCard({ npc }) {
       {/* Description / blurb */}
       {npc.blurb && (
         <View style={{ marginTop: 4 }}>
-          <Text style={{ ...type.body, fontSize: 9.5, lineHeight: 1.4 }}>
+          <Text style={{ ...type.body, fontSize: pt['9.5'], lineHeight: 1.4 }}>
             {stripZwnj(npc.blurb)}
           </Text>
         </View>
@@ -192,7 +192,7 @@ function FullCard({ npc }) {
       {/* Secrets */}
       {npc.secrets?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, color: palette.bad, fontSize: 7.5, marginBottom: 1 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7.5'], marginBottom: 1 }}>
             SECRETS
           </Text>
           {npc.secrets.map((s, si) => {
@@ -200,8 +200,8 @@ function FullCard({ npc }) {
             if (!t) return null;
             return (
               <View key={`sec-${si}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>
-                <Text style={{ color: palette.bad, marginRight: 4, fontSize: 9 }}>·</Text>
-                <Text style={{ ...type.body, fontSize: 9, flex: 1 }}>{t}</Text>
+                <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>·</Text>
+                <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{t}</Text>
               </View>
             );
           })}
@@ -211,7 +211,7 @@ function FullCard({ npc }) {
       {/* Plot hooks (full list, not capped) */}
       {npc.plotHooks?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: 7.5, marginBottom: 1 }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7.5'], marginBottom: 1 }}>
             PLOT HOOKS
           </Text>
           {npc.plotHooks.map((h, hi) => {
@@ -219,8 +219,8 @@ function FullCard({ npc }) {
             if (!t) return null;
             return (
               <View key={`h-${hi}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>
-                <Text style={{ color: palette.gold, marginRight: 4, fontSize: 9 }}>•</Text>
-                <Text style={{ ...type.body, fontSize: 9, flex: 1 }}>{t}</Text>
+                <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['9'] }}>•</Text>
+                <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{t}</Text>
               </View>
             );
           })}
@@ -230,11 +230,11 @@ function FullCard({ npc }) {
       {/* Relationships */}
       {npc.relationships?.length > 0 && (
         <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, color: palette.muted, fontSize: 7.5, marginBottom: 1 }}>
+          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'], marginBottom: 1 }}>
             RELATIONSHIPS
           </Text>
           {npc.relationships.map((r, ri) => (
-            <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: 8 }}>
+            <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: pt['8'] }}>
               · {label(r?.with || r?.target || r?.name)}
               {r?.type ? ` — ${r.type}` : ''}
               {r?.description ? ` — ${r.description}` : ''}
@@ -282,21 +282,21 @@ function OtherNameRow({ npc }) {
       }}
       wrap={false}
     >
-      <Text style={{ ...type.body_em, color: palette.ink, fontSize: 9 }}>
+      <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>
         {stripZwnj(npc.name || 'Unnamed')}
       </Text>
       {npc.title && (
-        <Text style={{ ...type.body, color: palette.second, fontSize: 8.5, marginLeft: 4, flex: 1 }}>
+        <Text style={{ ...type.body, color: palette.second, fontSize: pt['8.5'], marginLeft: 4, flex: 1 }}>
           · {stripZwnj(npc.title)}
         </Text>
       )}
       {!npc.title && <View style={{ flex: 1 }} />}
       {npc.factionLabel && (
-        <Text style={{ ...type.caption, color: palette.cool, fontSize: 7.5, marginLeft: 4 }}>
+        <Text style={{ ...type.caption, color: palette.cool, fontSize: pt['7.5'], marginLeft: 4 }}>
           {npc.factionLabel}
         </Text>
       )}
-      <Text style={{ ...type.label, color: palette.muted, marginLeft: 5, fontSize: 7 }}>
+      <Text style={{ ...type.label, color: palette.muted, marginLeft: 5, fontSize: pt['7'] }}>
         {npc.power}
       </Text>
     </View>
@@ -344,7 +344,7 @@ function CompactCard({ npc }) {
       wrap={false}
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-        <Text style={{ ...type.body_em, color: palette.ink, fontSize: 10, flex: 1 }}>
+        <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
           {name}
         </Text>
         <Pill tone="gold">PWR {npc.power}</Pill>
@@ -352,7 +352,7 @@ function CompactCard({ npc }) {
       {(title || npc.factionLabel) && (
         <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: 1 }}>
           {title && (
-            <Text style={{ ...type.italic, color: palette.muted, fontSize: 8.5, flex: 1 }}>
+            <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['8.5'], flex: 1 }}>
               {title}
             </Text>
           )}
@@ -360,7 +360,7 @@ function CompactCard({ npc }) {
         </View>
       )}
       {npc.motivation && (
-        <Text style={{ ...type.caption, fontSize: 8, color: palette.muted, marginTop: 2, lineHeight: 1.3 }}>
+        <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, marginTop: 2, lineHeight: 1.3 }}>
           <Text style={{ color: palette.faint }}>Motive: </Text>
           {npc.motivation}
         </Text>
@@ -372,8 +372,8 @@ function CompactCard({ npc }) {
             if (!t) return null;
             return (
               <View key={`h-${hi}`} style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-                <Text style={{ color: palette.gold, marginRight: 3, fontSize: 8 }}>•</Text>
-                <Text style={{ ...type.body, fontSize: 8, flex: 1, lineHeight: 1.3 }}>{t}</Text>
+                <Text style={{ color: palette.gold, marginRight: 3, fontSize: pt['8'] }}>•</Text>
+                <Text style={{ ...type.body, fontSize: pt['8'], flex: 1, lineHeight: 1.3 }}>{t}</Text>
               </View>
             );
           })}

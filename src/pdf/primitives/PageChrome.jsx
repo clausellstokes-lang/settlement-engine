@@ -12,7 +12,7 @@
  * pages came from the AI lens vs raw data.
  */
 import { Page, View, Text } from '@react-pdf/renderer';
-import { sheet, palette, type, page as pageGeo } from '../theme.js';
+import { sheet, palette, type, page as pageGeo, pt } from '../theme.js';
 
 export function PageChrome({ settlement, narrativeMode = false, children, ...pageProps }) {
   const name = settlement?.name || 'Settlement';
@@ -44,10 +44,10 @@ export function PageChrome({ settlement, narrativeMode = false, children, ...pag
               borderRadius: 2,
             }}
           >
-            <Text style={{ ...type.label, fontSize: 7.5, color: palette.ai }}>AI NARRATIVE</Text>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.ai }}>AI NARRATIVE</Text>
           </View>
         ) : (
-          <Text style={{ ...type.label, color: palette.faint, fontSize: 7.5 }}>
+          <Text style={{ ...type.label, color: palette.faint, fontSize: pt['7.5'] }}>
             SETTLEMENT DOSSIER
           </Text>
         )}

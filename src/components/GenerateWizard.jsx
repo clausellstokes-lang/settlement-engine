@@ -621,23 +621,23 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
       {/* Banners — only when the chrome diet is off (legacy path) */}
       {!chromeDiet && loadedFromSave && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#fdf8ee', border: '2px solid #b8860b', borderRadius: 8, padding: '10px 14px' }}>
-          <span style={{ fontSize: 16, flexShrink: 0 }}>&#128203;</span>
+          <span style={{ fontSize: FS['16'], flexShrink: 0 }}>&#128203;</span>
           <div style={{ flex: 1 }}>
             <span style={{ fontSize: FS.md, fontWeight: 700, color: '#5a3a00' }}>Config loaded: {loadedFromSave.name}</span>
             {loadedFromSave.tier && <span style={{ fontSize: FS.sm, color: '#8a6020', marginLeft: 8 }}>{loadedFromSave.tier}</span>}
           </div>
-          <button onClick={clearLoadedFromSave} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(184,134,11,0.15)', border: '1px solid #b8860b', color: '#5a3a00', cursor: 'pointer', fontSize: 16, fontWeight: 700 }}>&times;</button>
+          <button onClick={clearLoadedFromSave} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(184,134,11,0.15)', border: '1px solid #b8860b', color: '#5a3a00', cursor: 'pointer', fontSize: FS['16'], fontWeight: 700 }}>&times;</button>
         </div>
       )}
 
       {!chromeDiet && importedNeighbour && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#f0faf2', border: '2px solid #4a8a60', borderRadius: 8, padding: '10px 14px' }}>
-          <span style={{ fontSize: 16 }}>&#127760;</span>
+          <span style={{ fontSize: FS['16'] }}>&#127760;</span>
           <div style={{ flex: 1 }}>
             <span style={{ fontSize: FS.md, fontWeight: 700, color: '#1a5a28' }}>Neighbour active: {importedNeighbour.name}</span>
             <span style={{ fontSize: FS.sm, color: '#4a8a60', marginLeft: 8 }}>{importedNeighbour.tier}</span>
           </div>
-          <button onClick={clearNeighbour} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(74,138,96,0.15)', border: '1px solid #4a8a60', color: '#1a5a28', cursor: 'pointer', fontSize: 16, fontWeight: 700 }}>&times;</button>
+          <button onClick={clearNeighbour} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(74,138,96,0.15)', border: '1px solid #4a8a60', color: '#1a5a28', cursor: 'pointer', fontSize: FS['16'], fontWeight: 700 }}>&times;</button>
         </div>
       )}
 

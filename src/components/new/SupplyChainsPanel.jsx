@@ -21,7 +21,7 @@ const getStatus = s => STATUS[s] || STATUS.vulnerable;
 
 // ── Arrow component ───────────────────────────────────────────────────────────
 const Arrow = ({ color = '#9c8068' }) => (
-  <span style={{ color, fontSize: 14, fontWeight: 700, flexShrink: 0, userSelect: 'none', padding: '0 3px' }}>→</span>
+  <span style={{ color, fontSize: FS['14'], fontWeight: 700, flexShrink: 0, userSelect: 'none', padding: '0 3px' }}>→</span>
 );
 
 // ── Node: resource ────────────────────────────────────────────────────────────
@@ -200,7 +200,7 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
         border: '1px solid #e0d0b0', borderRadius: 5,
         cursor: 'pointer', textAlign: 'left',
       }}>
-        <span style={{ fontSize: 14 }}>{needIcon || '️'}</span>
+        <span style={{ fontSize: FS['14'] }}>{needIcon || '️'}</span>
         <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1,
           textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           {needLabel || needKey}

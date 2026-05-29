@@ -147,7 +147,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
       <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
         <div style={{flex:1}}>
           <div style={{fontSize:FS.md,fontWeight:700,color:'#1c1409',marginBottom:i.desc?2:0}}>{i.name}</div>
-          {i.desc&&<div style={{fontSize:11.5,color:'#6b5340',lineHeight:1.4}}>{i.desc}</div>}
+          {i.desc&&<div style={{fontSize: FS['11.5'],color:'#6b5340',lineHeight:1.4}}>{i.desc}</div>}
         </div>
         {i.source&&i.source!=='generated'&&<span style={{fontSize:FS.micro,fontWeight:700,color:'#a0762a',background:'#f0e4c0',borderRadius:3,padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
       </div>
@@ -172,7 +172,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
           </div>
           {sp.guardEffectivenessDesc&&<div style={{flex:1,minWidth:200}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Guard Assessment</div>
-            <p style={{fontSize:12.5,color:'#3d2b1a',lineHeight:1.6,margin:0}}>{sp.guardEffectivenessDesc}</p>
+            <p style={{fontSize: FS['12.5'],color:'#3d2b1a',lineHeight:1.6,margin:0}}>{sp.guardEffectivenessDesc}</p>
           </div>}
         </div>
       </div>
@@ -184,8 +184,8 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
           <div style={{fontSize:FS.md,fontWeight:800,color:stressStatus.colour,lineHeight:1.2}}>{stressStatus.posture}</div>
         </div>
         <div style={{flex:1,borderLeft:`1px solid ${stressStatus.colour}40`,paddingLeft:12}}>
-          {stressObj?.summary&&<p style={{fontSize:12.5,color:'#3a2a10',lineHeight:1.5,margin:'0 0 4px'}}>{stressObj.summary}</p>}
-          {stressObj?.viabilityNote&&<p style={{fontSize:11.5,color:'#5a3a10',fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
+          {stressObj?.summary&&<p style={{fontSize: FS['12.5'],color:'#3a2a10',lineHeight:1.5,margin:'0 0 4px'}}>{stressObj.summary}</p>}
+          {stressObj?.viabilityNote&&<p style={{fontSize: FS['11.5'],color:'#5a3a10',fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
         </div>
       </div>}
 
@@ -202,7 +202,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
               <div key={i} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,borderRadius:6,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
                 onClick={()=>setExpandedThreat(isExp?null:i)}>
                 <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px'}}>
-                  <span style={{fontSize:14,flexShrink:0,lineHeight:1}}>{icon}</span>
+                  <span style={{fontSize: FS['14'],flexShrink:0,lineHeight:1}}>{icon}</span>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:'#1c1409',width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
                   <div style={{width:72,height:6,background:'#e8dcc8',borderRadius:3,overflow:'hidden',flexShrink:0}}>
                     <div style={{height:'100%',width:`${sc}%`,background:color,borderRadius:3}}/>
@@ -211,7 +211,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
                   <span style={{fontSize:FS.xxs,color:'#9c8068',flexShrink:0}}>{isExp?'▲':'▼'}</span>
                 </div>
                 {isExp&&<div style={{padding:'0 12px 10px 12px',borderTop:`1px solid ${color}25`}}>
-                  <p style={{fontSize:12.5,color:'#3d2b1a',lineHeight:1.6,margin:'8px 0 0'}}>{assess}</p>
+                  <p style={{fontSize: FS['12.5'],color:'#3d2b1a',lineHeight:1.6,margin:'8px 0 0'}}>{assess}</p>
                 </div>}
               </div>
             );
@@ -293,7 +293,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
                 return (
                   <div key={i} style={{background:'#faf8f4',border:'1px solid #e0d0b0',borderLeft:'3px solid #8b1a1a',borderRadius:5,padding:'8px 12px'}}>
                     <div style={{fontSize:FS.sm,fontWeight:700,color:'#8b1a1a',marginBottom:3}}>{name}</div>
-                    <div style={{fontSize:11.5,color:'#5a3a2a',lineHeight:1.4}}>{note}</div>
+                    <div style={{fontSize: FS['11.5'],color:'#5a3a2a',lineHeight:1.4}}>{note}</div>
                   </div>
                 );
               })}
@@ -307,7 +307,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
             </div>
             <div style={{fontSize:FS.sm,color:'#3d2b1a',lineHeight:1.5}}>{crimFaction.desc}</div>
             {(crimCapture === 'corrupted' || crimCapture === 'capture') && (
-              <div style={{fontSize:11.5,color:'#4a1a4a',fontStyle:'italic',marginTop:6,paddingTop:6,borderTop:'1px solid #e8b0b0',lineHeight:1.4}}>
+              <div style={{fontSize: FS['11.5'],color:'#4a1a4a',fontStyle:'italic',marginTop:6,paddingTop:6,borderTop:'1px solid #e8b0b0',lineHeight:1.4}}>
                 {crimCapture === 'capture'
                   ? 'Criminal organisation effectively governs through compromised institutions. The distinction between official authority and criminal network has collapsed.'
                   : 'Key enforcement officials have arrangements with criminal networks. Selective enforcement — profitable crimes go unpunished, rivals are selectively prosecuted.'}
@@ -322,7 +322,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
               {crimeTypes.map((ct,i)=>(
                 <div key={i} style={{background:'#faf8f4',border:'1px solid #e0d0b0',borderRadius:5,padding:'7px 10px'}}>
                   <div style={{fontSize:FS.xs,fontWeight:700,color:'#3d2b1a',marginBottom:2}}>{ct.type}</div>
-                  <div style={{fontSize:11.5,color:'#6b5340',lineHeight:1.4}}>{ct.desc?.slice(0,200)}{ct.desc?.length>200?'…':''}</div>
+                  <div style={{fontSize: FS['11.5'],color:'#6b5340',lineHeight:1.4}}>{ct.desc?.slice(0,200)}{ct.desc?.length>200?'…':''}</div>
                 </div>
               ))}
             </div>
@@ -344,7 +344,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
       {/* ── ARMED FORCES & FORTIFICATIONS ───────────────────────────────── */}
       <div style={{marginBottom:14}}>
         <button onClick={()=>setShowForces(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 0',background:'none',border:'none',borderBottom:'1px solid #e0d0b0',cursor:'pointer',marginBottom:showForces?10:0,WebkitTapHighlightColor:'transparent'}}>
-          <span style={{...serif,fontSize:16,fontWeight:600,color:'#1c1409'}}>
+          <span style={{...serif,fontSize: FS['16'],fontWeight:600,color:'#1c1409'}}>
             Armed Forces & Fortifications
             <span style={{fontSize:FS.sm,fontWeight:400,color:'#9c8068',marginLeft:8}}>
               {walls.length>0&&`${walls.length} wall${walls.length>1?'s':''}  `}
@@ -392,7 +392,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {caps.map((cap,i)=>(
             <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:'#faf8f4',border:'1px solid #e0d0b0',borderLeft:`3px solid ${cap.color}`,borderRadius:6,padding:'8px 12px'}}>
-              <span style={{fontSize:14,flexShrink:0,marginTop:1}}>{cap.icon}</span>
+              <span style={{fontSize: FS['14'],flexShrink:0,marginTop:1}}>{cap.icon}</span>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:2}}>
                   <span style={{fontSize:FS.xs,fontWeight:700,color:'#3d2b1a'}}>{cap.label}</span>
@@ -404,7 +404,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
                     <span style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{Math.round(cap.score)}</span>
                   </div>}
                 </div>
-                <div style={{fontSize:11.5,color:'#6b5340',lineHeight:1.4}}>{cap.note}</div>
+                <div style={{fontSize: FS['11.5'],color:'#6b5340',lineHeight:1.4}}>{cap.note}</div>
               </div>
             </div>
           ))}

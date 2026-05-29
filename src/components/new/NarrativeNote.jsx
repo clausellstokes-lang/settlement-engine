@@ -37,15 +37,15 @@ export function NarrativeNote({ note }) {
         }}
       >
         <span style={{ fontSize: FS.xs, color: '#8a50b0' }}>✦</span>
-        <span style={{ fontSize: 9.5, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
+        <span style={{ fontSize: FS['9.5'], fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
           Narrative Layer
         </span>
-        <span style={{ fontSize: 9.5, color: '#a070c0' }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: FS['9.5'], color: '#a070c0' }}>{open ? '▲' : '▼'}</span>
       </button>
 
       {/* Body */}
       {open && (
-        <div style={{ padding: '0 12px 10px', fontSize: 12.5, color: '#2d1f0e', lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
+        <div style={{ padding: '0 12px 10px', fontSize: FS['12.5'], color: '#2d1f0e', lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
           {note}
         </div>
       )}

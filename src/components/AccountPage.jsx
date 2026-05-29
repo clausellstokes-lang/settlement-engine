@@ -174,7 +174,7 @@ export default function AccountPage({ onNavigateAdmin }) {
             width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
             background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#fff', fontWeight: 700, fontSize: 22, fontFamily: serif_,
+            color: '#fff', fontWeight: 700, fontSize: FS['22'], fontFamily: serif_,
           }}>
             {(auth.displayName || auth.user.email || '?')[0].toUpperCase()}
           </div>

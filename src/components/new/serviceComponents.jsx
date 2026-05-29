@@ -25,7 +25,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
     }}>
       <div style={{flex:1,minWidth:0}}>
         <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
-          <span style={{fontSize:12.5,fontWeight:600,color:isCriminal?'#c06060':'#1c1409'}}>{name}</span>
+          <span style={{fontSize: FS['12.5'],fontWeight:600,color:isCriminal?'#c06060':'#1c1409'}}>{name}</span>
           {statusLabel&&<span style={{fontSize:FS.micro,fontWeight:800,color:statusColor,background:`${statusColor}18`,borderRadius:3,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}
           {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:FS.micro,fontWeight:600,color:'#6b5340',background:'#f0e8d8',border:'1px solid #c8b89a',borderRadius:3,padding:'0 5px',flexShrink:0}}> {depthLabel}</span>}
         </div>

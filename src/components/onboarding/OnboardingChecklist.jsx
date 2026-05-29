@@ -107,7 +107,7 @@ export default function OnboardingChecklist() {
                 </div>
                 {!done && step.hint && (
                   <div style={{
-                    fontSize: 10.5, color: '#7a4f0f', marginTop: 1,
+                    fontSize: FS['10.5'], color: '#7a4f0f', marginTop: 1,
                     fontFamily: 'system-ui, -apple-system, sans-serif',
                     lineHeight: 1.4,
                   }}>

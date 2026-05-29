@@ -9,7 +9,7 @@
  * Editable: cover.name, cover.subtitle, cover.tagline, cover.campaign.
  */
 import { Page, View, Text } from '@react-pdf/renderer';
-import { sheet, palette, type, page as pageGeo, toneBg } from '../theme.js';
+import { sheet, palette, type, page as pageGeo, toneBg, pt } from '../theme.js';
 import { EditableText } from '../primitives/Editable.jsx';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 
@@ -30,7 +30,7 @@ function StatCell({ label, value, sub, tone = 'gold' }) {
       <Text
         style={{
           fontFamily: 'Nunito',
-          fontSize: 7.5,
+          fontSize: pt['7.5'],
           fontWeight: 700,
           color: palette.muted,
           letterSpacing: 0.2,
@@ -41,7 +41,7 @@ function StatCell({ label, value, sub, tone = 'gold' }) {
       <Text
         style={{
           fontFamily: 'Lora',
-          fontSize: 16,
+          fontSize: pt['16'],
           fontWeight: 700,
           color: palette.ink,
           marginTop: 2,
@@ -54,7 +54,7 @@ function StatCell({ label, value, sub, tone = 'gold' }) {
         <Text
           style={{
             fontFamily: 'Nunito',
-            fontSize: 8,
+            fontSize: pt['8'],
             color: palette.muted,
             marginTop: 1,
           }}
@@ -75,7 +75,7 @@ function CrisisRow({ chips }) {
       <Text
         style={{
           fontFamily: 'Nunito',
-          fontSize: 8,
+          fontSize: pt['8'],
           fontWeight: 800,
           color: palette.bad,
           letterSpacing: 0.3,
@@ -96,14 +96,14 @@ function CrisisRow({ chips }) {
             paddingBottom: 1,
           }}
         >
-          <Text style={{ fontFamily: 'Lora', fontSize: 11, color: palette.ink, fontWeight: 700, marginRight: 6 }}>
+          <Text style={{ fontFamily: 'Lora', fontSize: pt['11'], color: palette.ink, fontWeight: 700, marginRight: 6 }}>
             {humanize(c.label || c.icon || 'Stress')}
           </Text>
           {c.summary && (
             <Text
               style={{
                 fontFamily: 'Lora',
-                fontSize: 9.5,
+                fontSize: pt['9.5'],
                 color: palette.second,
                 flex: 1,
                 fontStyle: 'italic',
@@ -115,7 +115,7 @@ function CrisisRow({ chips }) {
         </View>
       ))}
       {chips.length > top.length && (
-        <Text style={{ fontFamily: 'Nunito', fontSize: 8, color: palette.muted, marginTop: 2 }}>
+        <Text style={{ fontFamily: 'Nunito', fontSize: pt['8'], color: palette.muted, marginTop: 2 }}>
           + {chips.length - top.length} more — see Summary, page 2.
         </Text>
       )}
@@ -183,7 +183,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
                   borderRadius: 3, borderLeft: `2pt solid ${palette.gold}`,
                 }}
               >
-                <Text style={{ ...type.label, color: palette.ink, fontSize: 8 }}>FOUNDER EDITION</Text>
+                <Text style={{ ...type.label, color: palette.ink, fontSize: pt['8'] }}>FOUNDER EDITION</Text>
               </View>
             )}
             {narrativeMode && (
@@ -194,7 +194,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
                   borderRadius: 3, borderLeft: `2pt solid ${palette.ai}`,
                 }}
               >
-                <Text style={{ ...type.label, color: palette.ai, fontSize: 8 }}>AI NARRATIVE EDITION</Text>
+                <Text style={{ ...type.label, color: palette.ai, fontSize: pt['8'] }}>AI NARRATIVE EDITION</Text>
               </View>
             )}
           </View>
@@ -204,11 +204,11 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
         {/* Settlement name is plain Text, not a form field. The cover title
             must always render visibly and be extractable by text tools. */}
         <View style={{ marginTop: 38 }}>
-          <Text style={{ ...type.cover_title, fontSize: 50 }}>
+          <Text style={{ ...type.cover_title, fontSize: pt['50'] }}>
             {stripZwnj(name).toUpperCase()}
           </Text>
           <View style={{ height: 2, width: 80, backgroundColor: palette.gold, marginTop: 14, marginBottom: 12 }} />
-          <Text style={{ fontFamily: 'Lora', fontSize: 13, color: palette.second, fontStyle: 'italic' }}>
+          <Text style={{ fontFamily: 'Lora', fontSize: pt['13'], color: palette.second, fontStyle: 'italic' }}>
             {subtitle}
           </Text>
         </View>
@@ -245,7 +245,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             <Text
               style={{
                 fontFamily: 'Nunito',
-                fontSize: 8,
+                fontSize: pt['8'],
                 fontWeight: 800,
                 color: palette.muted,
                 letterSpacing: 0.3,
@@ -254,11 +254,11 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             >
               GOVERNED BY
             </Text>
-            <Text style={{ fontFamily: 'Lora', fontSize: 11, color: palette.ink, fontWeight: 700 }}>
+            <Text style={{ fontFamily: 'Lora', fontSize: pt['11'], color: palette.ink, fontWeight: 700 }}>
               {govName || govLabel}
             </Text>
             {govName && govLabel && (
-              <Text style={{ fontFamily: 'Lora', fontSize: 9, color: palette.muted, marginLeft: 6, fontStyle: 'italic' }}>
+              <Text style={{ fontFamily: 'Lora', fontSize: pt['9'], color: palette.muted, marginLeft: 6, fontStyle: 'italic' }}>
                 · {govLabel}
               </Text>
             )}
@@ -287,7 +287,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             }}
             wrap={false}
           >
-            <Text style={{ ...type.cover_meta, color: palette.muted, fontSize: 8 }}>
+            <Text style={{ ...type.cover_meta, color: palette.muted, fontSize: pt['8'] }}>
               Free preview — forge your own at settlementforge.com
             </Text>
           </View>
