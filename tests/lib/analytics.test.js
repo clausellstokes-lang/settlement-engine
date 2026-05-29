@@ -90,7 +90,7 @@ describe('Tier 8.8 — track()', () => {
 
   it('rejects unknown events (catches call-site typos)', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    track('mistyped_event_name', { foo: 1 });
+    track('mistyped_event_name', { foo: 1 }); // eslint-disable-line analytics/funnel-event-contract -- intentional raw string: this test proves the runtime whitelist drops unknown events
     expect(providerCalls).toHaveLength(0);
     expect(warn).toHaveBeenCalled();
   });
@@ -98,7 +98,7 @@ describe('Tier 8.8 — track()', () => {
   it('ignores empty / non-string events', () => {
     track(null);
     track(undefined);
-    track('');
+    track(''); // eslint-disable-line analytics/funnel-event-contract -- intentional empty string: this test proves track() ignores falsy/non-string events
     track(42);
     expect(providerCalls).toHaveLength(0);
   });

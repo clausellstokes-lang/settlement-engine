@@ -23,6 +23,7 @@ import js from '@eslint/js';
 import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 import visualBudget from './scripts/eslint-plugin-visual-budget.js';
+import analytics from './scripts/eslint-plugin-analytics.js';
 
 // eslint-plugin-react doesn't yet support ESLint 10's flat-config
 // resolver (throws on contextOrFilename.getFilename). We drop it and
@@ -57,6 +58,7 @@ export default [
     plugins: {
       'react-hooks': reactHooks,
       'visual-budget': visualBudget,
+      'analytics': analytics,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -110,6 +112,15 @@ export default [
       'visual-budget/no-raw-fontsize':   'warn',
       'visual-budget/no-raw-color':      'warn',
       'visual-budget/no-raw-button-copy': 'warn',
+
+      // ── P146 — Funnel/analytics event-name contract ───────────────────
+      // Event names passed to track()/Funnel.track() must be EVENTS.*
+      // constants, never raw strings or template literals. The runtime
+      // whitelist only warns in DEV and drops in prod; this catches the
+      // typo statically. ERROR (not warn) because every existing call
+      // site already complies — there is no legacy debt to migrate, so
+      // the contract can be enforced hard from day one.
+      'analytics/funnel-event-contract': 'error',
     },
   },
 
