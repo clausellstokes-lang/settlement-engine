@@ -262,6 +262,10 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P145 / W-2: close-out summary card at the advanced wizard\'s final "Ready to Generate" step — recaps tier/culture/route/threat/magic, priority emphasis, and manual force/exclude constraint counts so the Generate click is a confirmation, not a leap.',
   },
+  wizardNextSteps: {
+    default: true,
+    description: 'P134 / W-4: post-generate "what\'s next" guidance card under a freshly-generated dossier — a state-aware checklist (save / export / refine / map / generate another) that orients the user after the reveal instead of leaving the flow on a lone Save button.',
+  },
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

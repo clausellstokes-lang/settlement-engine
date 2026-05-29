@@ -21,6 +21,7 @@ import InstitutionalGrid from './InstitutionalGrid';
 import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
 import WizardCloseout from './generate/WizardCloseout.jsx';
+import WizardNextSteps from './generate/WizardNextSteps.jsx';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
@@ -856,6 +857,13 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
               onSignIn={onSignIn}
             />
           </div>
+
+          {/* P134 / W-4 — post-generate "what's next" guide. Closes out the
+              post-generate flow (mirrors WizardCloseout's pre-generate
+              close-out) with a state-aware next-step checklist. Self-gates
+              on the flag; guidance only, so it never competes with the
+              canonical Save / Export / New controls above. */}
+          <WizardNextSteps />
         </>
       )}
 
