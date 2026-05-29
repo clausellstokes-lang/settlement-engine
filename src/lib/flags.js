@@ -246,6 +246,10 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P139 / CP-3: constrain the Compendium catalog content to a readable max-width column (instead of letting prose sprawl edge-to-edge on wide standalone pages).',
   },
+  elevationTokens: {
+    default: true,
+    description: 'P141 / V-4: adopt the 3-tier elevation token scale (ELEV[1..3]) on cards, popovers, and modals for a consistent ink-tinted depth language instead of bespoke per-component shadows.',
+  },
   tableView: {
     default: false,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',

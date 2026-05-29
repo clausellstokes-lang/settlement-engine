@@ -226,4 +226,8 @@ export const legacy = Object.freeze({
   // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. Added in P140 so the
   // ~400 raw sub-10px sizes have exact tokens to migrate to (zero visual change).
   FS: { pico: 7, nano: 8, micro: 9, xxs: 10, xs: 11, sm: 12, md: 13, lg: 15, xl: 17, xxl: 20, h1: 24 },
+  // ELEV — the 3-tier elevation (box-shadow) scale, exposed to legacy
+  // importers. 1 = default cards, 2 = hover/sticky chrome, 3 = modals/popovers.
+  // Added in P141/V-4 so components stop inventing bespoke shadows.
+  ELEV: elevation,
 });

@@ -54,3 +54,7 @@ export const R = L.R;
 
 // ── Font-size scale (px) ────────────────────────────────────────────────────
 export const FS = L.FS;
+
+// ── Elevation scale (box-shadow) ─────────────────────────────────────────────
+// ELEV[1] default cards · ELEV[2] hover/sticky · ELEV[3] modals/popovers.
+export const ELEV = L.ELEV;

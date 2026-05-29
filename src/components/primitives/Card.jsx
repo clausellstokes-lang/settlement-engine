@@ -1,4 +1,5 @@
-import { FS } from '../theme.js';
+import { FS, ELEV } from '../theme.js';
+import { flag } from '../../lib/flags.js';
 /**
  * primitives/Card — Shared card chrome.
  *
@@ -41,6 +42,9 @@ export default function Card({
         border: `1px solid ${v.border}`,
         borderRadius: 6,
         padding: pad,
+        // V-4: subtle ink-tinted lift so the shared card reads as a surface,
+        // not a flat outline. ELEV[1] is the default-card tier.
+        ...(flag('elevationTokens') ? { boxShadow: ELEV[1] } : null),
       }}
       {...rest}
     >

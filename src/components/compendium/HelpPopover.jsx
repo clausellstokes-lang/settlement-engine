@@ -19,7 +19,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, ELEV } from '../theme.js';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 
@@ -124,7 +124,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             color: '#F4EAD0',
             border: '1px solid #8C6F32',
             borderRadius: 6,
-            boxShadow: '0 12px 32px rgba(0,0,0,0.40)',
+            boxShadow: flag('elevationTokens') ? ELEV[3] : '0 12px 32px rgba(0,0,0,0.40)',
             fontSize: FS.xs,
             lineHeight: 1.55,
             fontFamily: '"Nunito", system-ui, sans-serif',
