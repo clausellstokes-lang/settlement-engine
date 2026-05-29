@@ -1,4 +1,5 @@
 import React, { useState, useRef, lazy, Suspense } from 'react';
+import { FS } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
 import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Sparkles, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog } from 'lucide-react';
 import { TIER_LABELS } from './new/design';
@@ -323,7 +324,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     const btnBase = {
       display: 'flex', alignItems: 'center', gap: 6,
       padding: '6px 14px', borderRadius: 20,
-      fontSize: 11, fontWeight: 800,
+      fontSize: FS.xs, fontWeight: 800,
       fontFamily: 'Nunito, sans-serif', letterSpacing: '0.04em',
       transition: 'all 0.2s', whiteSpace: 'nowrap',
       cursor: 'pointer',
@@ -342,11 +343,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             color: '#c8a0f0',
           }
         },
-          React.createElement('span', { style: { fontSize: 11 } }, '\u2726'),
+          React.createElement('span', { style: { fontSize: FS.xs } }, '\u2726'),
           `Generate Narrative${costLabel}`
         ),
         aiError && React.createElement('div', {
-          style: { position: 'absolute', top: '110%', right: 0, background: '#2d0a0a', border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: 11, color: '#f0a0a0', whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }
+          style: { position: 'absolute', top: '110%', right: 0, background: '#2d0a0a', border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: '#f0a0a0', whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }
         }, ' ', aiError)
       );
     }
@@ -420,7 +421,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`
       ),
       aiError && React.createElement('div', {
-        style: { position: 'absolute', top: '110%', right: 0, background: '#2d0a0a', border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: 11, color: '#f0a0a0', whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }
+        style: { position: 'absolute', top: '110%', right: 0, background: '#2d0a0a', border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: '#f0a0a0', whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }
       }, ' ', aiError)
     );
   };
@@ -440,11 +441,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // Header
       React.createElement('div', { style: { padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' } },
         React.createElement('div', { style: { flex: 1, minWidth: 0 } },
-          React.createElement('div', { style: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: 24, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 } },
+          React.createElement('div', { style: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 } },
             (inlineEditsEnabled && !readOnly && queueEdit) ? React.createElement(EditableInline, {
               value: settlement.name || '',
               ariaLabel: 'Edit settlement name',
-              textStyle: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: 24, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 },
+              textStyle: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 },
               trackEvent: EVENTS.EDIT_PENDING_QUEUED,
               provenance: { kind: 'rename-settlement', entityId: saveId || 'unsaved' },
               onCommit: (newName) => {
@@ -453,17 +454,17 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             }) : settlement.name
           ),
           React.createElement('div', { style: { display: 'flex', gap: 8, marginTop: 5, flexWrap: 'wrap', alignItems: 'center' } },
-            React.createElement('span', { style: { fontSize: 12, color: '#9c8068', textTransform: 'capitalize', fontWeight: 600 } }, TIER_LABELS[settlement.tier] || settlement.tier),
-            React.createElement('span', { style: { fontSize: 12, color: '#6b5340' } }, '\u00b7'),
-            React.createElement('span', { style: { fontSize: 12, color: '#9c8068' } }, settlement.population?.toLocaleString() + ' pop.'),
-            settlement.config?.tradeRouteAccess && React.createElement('span', { style: { fontSize: 12, color: '#9c8068' } }, settlement.config.tradeRouteAccess.replace(/_/g,' ')),
-            settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && React.createElement('span', { style: { fontSize: 11, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? '#c87060' : '#c49a3c', background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' } }, settlement.config.monsterThreat === 'plagued' ? ' Embattled' : ' Frontier'),
-            stressObj && React.createElement('span', { style: { fontSize: 10, fontWeight: 800, color: '#ffd080', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' } }, stressObj.label)
+            React.createElement('span', { style: { fontSize: FS.sm, color: '#9c8068', textTransform: 'capitalize', fontWeight: 600 } }, TIER_LABELS[settlement.tier] || settlement.tier),
+            React.createElement('span', { style: { fontSize: FS.sm, color: '#6b5340' } }, '\u00b7'),
+            React.createElement('span', { style: { fontSize: FS.sm, color: '#9c8068' } }, settlement.population?.toLocaleString() + ' pop.'),
+            settlement.config?.tradeRouteAccess && React.createElement('span', { style: { fontSize: FS.sm, color: '#9c8068' } }, settlement.config.tradeRouteAccess.replace(/_/g,' ')),
+            settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && React.createElement('span', { style: { fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? '#c87060' : '#c49a3c', background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' } }, settlement.config.monsterThreat === 'plagued' ? ' Embattled' : ' Frontier'),
+            stressObj && React.createElement('span', { style: { fontSize: FS.xxs, fontWeight: 800, color: '#ffd080', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' } }, stressObj.label)
           )
         ),
         REROLLABLE[activeTab] && onRegenerate && React.createElement('button', {
           onClick: () => onRegenerate(activeTab),
-          style: { display: 'flex', alignItems: 'center', gap: 5, padding: '6px 14px', borderRadius: 5, background: 'rgba(196,154,60,0.15)', border: '1px solid rgba(196,154,60,0.3)', color: '#c49a3c', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }
+          style: { display: 'flex', alignItems: 'center', gap: 5, padding: '6px 14px', borderRadius: 5, background: 'rgba(196,154,60,0.15)', border: '1px solid rgba(196,154,60,0.3)', color: '#c49a3c', fontSize: FS.sm, fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }
         }, React.createElement(RefreshCw, { size: 12 }), ' ', REROLLABLE[activeTab]),
         // ── AI Narrative Layer button group ──────────────────────────────────
         // P121 / D-4 — When `narrativeLayerStrip` flag is on, the
@@ -489,10 +490,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       },
         React.createElement('div', { style: { flex: 1, minWidth: 0 } },
           React.createElement('div', {
-            style: { fontSize: 9, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7B4FCF' }
+            style: { fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7B4FCF' }
           }, 'Narrative Layer · AI prose pass'),
           React.createElement('div', {
-            style: { fontSize: 11, color: '#4A3B22', marginTop: 2, lineHeight: 1.4 }
+            style: { fontSize: FS.xs, color: '#4A3B22', marginTop: 2, lineHeight: 1.4 }
           }, 'Refines the simulated dossier into prose your players can hear.')
         ),
         renderNarrativeButtons()
@@ -566,7 +567,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               background: active ? 'rgba(201,162,76,0.10)' : 'transparent',
               border: active ? '1px solid rgba(201,162,76,0.40)' : '1px solid transparent',
               borderRadius: 3,
-              fontSize: 12,
+              fontSize: FS.sm,
               fontWeight: active ? 700 : 500,
               color: active ? '#8C6F32' : '#6B5340',
               fontFamily: 'Nunito, sans-serif',
@@ -604,7 +605,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           display: 'flex', alignItems: 'center', gap: 8,
         }
       },
-        React.createElement('span', { style: { fontSize: 12, color: '#8a50b0' } }, '\u2726'),
+        React.createElement('span', { style: { fontSize: FS.sm, color: '#8a50b0' } }, '\u2726'),
         React.createElement('span', null,
           React.createElement('strong', { style: { color: '#5a2a8a' } }, 'Save this settlement'),
           ' to unlock AI Narrative & Daily Life prose.'
@@ -642,9 +643,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             }
           },
             React.createElement('div', { style: { display: 'flex', alignItems: 'flex-start', gap: 10 } },
-              React.createElement('span', { style: { fontSize: 13, flexShrink: 0, marginTop: 2, color: '#8a50b0' } }, '\u2726'),
+              React.createElement('span', { style: { fontSize: FS.md, flexShrink: 0, marginTop: 2, color: '#8a50b0' } }, '\u2726'),
               React.createElement('div', { style: { flex: 1, minWidth: 0 } },
-                React.createElement('div', { style: { fontSize: 9, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 } },
+                React.createElement('div', { style: { fontSize: FS.micro, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 } },
                   showThesis ? 'Narrative Layer \u2014 Identity' : 'Narrative Layer \u2014 Lens'
                 ),
                 showThesis
@@ -699,7 +700,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           Suspense,
           { fallback: React.createElement('div', {
               style: { padding: 32, textAlign: 'center', color: '#9c8068',
-                       fontFamily: 'Nunito,sans-serif', fontSize: 13 }
+                       fontFamily: 'Nunito,sans-serif', fontSize: FS.md }
             }, 'Loading\u2026') },
           React.createElement('div', { style: { opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' } },
             renderTab()

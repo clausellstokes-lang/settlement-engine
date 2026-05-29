@@ -8,7 +8,7 @@ import {getAllModifiers, EFFECT_CATEGORIES, fmtMod} from '../lib/relationshipGra
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
-import {GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_} from './theme.js';
+import {GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS} from './theme.js';
 import { useStore } from '../store/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
@@ -82,19 +82,19 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
     <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:7 }}>
       <div style={{ display:'flex', alignItems:'center', gap:8, padding:'9px 12px' }}>
         <div style={{ flex:1, minWidth:0 }}>
-          <div style={{ fontSize:13, fontWeight:700, color:INK, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</div>
-          <div style={{ fontSize:10, color:MUTED, display:'flex', alignItems:'center', gap:6, marginTop:1, flexWrap:'wrap' }}>
+          <div style={{ fontSize:FS.md, fontWeight:700, color:INK, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</div>
+          <div style={{ fontSize:FS.xxs, color:MUTED, display:'flex', alignItems:'center', gap:6, marginTop:1, flexWrap:'wrap' }}>
             <Clock size={10}/> {ts(s.timestamp)} · {s.tier}
           </div>
           {(s.settlement?.neighbourNetwork?.length > 0) && (
             <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginTop:3 }}>
               {(s.settlement.neighbourNetwork||[]).slice(0,3).map((n,ni) => {
                 const nc = REL_COLORS[n.relationshipType] || MUTED;
-                return <span key={ni} style={{ fontSize:9, fontWeight:700, color:nc, background:`${nc}18`, border:`1px solid ${nc}40`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap' }}>
+                return <span key={ni} style={{ fontSize:FS.micro, fontWeight:700, color:nc, background:`${nc}18`, border:`1px solid ${nc}40`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap' }}>
                   <Link2 size={8} style={{display:'inline',verticalAlign:'middle',marginRight:2}}/>{n.neighbourName||n.name} · {(n.relationshipType||'linked').replace(/_/g,' ')}
                 </span>;
               })}
-              {(s.settlement.neighbourNetwork||[]).length > 3 && <span style={{fontSize:9,color:MUTED}}>+{s.settlement.neighbourNetwork.length - 3} more</span>}
+              {(s.settlement.neighbourNetwork||[]).length > 3 && <span style={{fontSize:FS.micro,color:MUTED}}>+{s.settlement.neighbourNetwork.length - 3} more</span>}
             </div>
           )}
           {/* Network effect badges */}
@@ -106,7 +106,7 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
             return <div style={{display:'flex',gap:3,flexWrap:'wrap',marginTop:3}}>
               {badges.map(c => {
                 const v = m.totals[c.key]; const pos = v >= 0;
-                return <span key={c.key} style={{ fontSize:9, fontWeight:700, color:pos?'#1a5a28':'#8b1a1a', background:pos?'#e8f5e8':'#fde8e8', border:`1px solid ${pos?'#a0d0a0':'#e0b0b0'}`, borderRadius:8, padding:'1px 5px', whiteSpace:'nowrap' }}>
+                return <span key={c.key} style={{ fontSize:FS.micro, fontWeight:700, color:pos?'#1a5a28':'#8b1a1a', background:pos?'#e8f5e8':'#fde8e8', border:`1px solid ${pos?'#a0d0a0':'#e0b0b0'}`, borderRadius:8, padding:'1px 5px', whiteSpace:'nowrap' }}>
                   {c.label} {fmtMod(v)}
                 </span>;
               })}
@@ -116,29 +116,29 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
         <div style={{ display:'flex', gap:4, alignItems:'center', flexShrink:0 }}>
           {/* Move to campaign */}
           <div style={{ position:'relative' }}>
-            <button onClick={() => setMoveOpen(!moveOpen)} title={currentCampaignId ? 'Move to...' : 'Add to campaign'} style={{ padding:'4px 6px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:'pointer', fontSize:10, fontWeight:700, fontFamily:sans, display:'flex', alignItems:'center', gap:3 }}>
+            <button onClick={() => setMoveOpen(!moveOpen)} title={currentCampaignId ? 'Move to...' : 'Add to campaign'} style={{ padding:'4px 6px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:'pointer', fontSize:FS.xxs, fontWeight:700, fontFamily:sans, display:'flex', alignItems:'center', gap:3 }}>
               <ArrowRight size={10}/>
             </button>
             {moveOpen && (
               <div style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, borderRadius:6, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:160, padding:4 }}>
                 {currentCampaignId && (
-                  <button onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:11, color:'#8b1a1a', fontFamily:sans, borderRadius:3 }}
+                  <button onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:'#8b1a1a', fontFamily:sans, borderRadius:3 }}
                     onMouseEnter={e => e.target.style.background='#fdf4f4'} onMouseLeave={e => e.target.style.background='none'}>
                     Remove from campaign
                   </button>
                 )}
                 {campaigns.map(c => c.id === currentCampaignId ? null : (
-                  <button key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:11, color:INK, fontFamily:sans, borderRadius:3, display:'flex', alignItems:'center', gap:4 }}
+                  <button key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:INK, fontFamily:sans, borderRadius:3, display:'flex', alignItems:'center', gap:4 }}
                     onMouseEnter={e => e.target.style.background='#f5ede0'} onMouseLeave={e => e.target.style.background='none'}>
                     <FolderOpen size={10} color={GOLD}/> {c.name}
                   </button>
                 ))}
-                {campaigns.length === 0 && <div style={{ padding:'5px 8px', fontSize:10, color:MUTED }}>No campaigns yet</div>}
+                {campaigns.length === 0 && <div style={{ padding:'5px 8px', fontSize:FS.xxs, color:MUTED }}>No campaigns yet</div>}
               </div>
             )}
           </div>
-          <button onClick={() => onView(s)} style={{ padding:'4px 10px', background:'#f0f4ff', color:'#2a3a7a', border:'1px solid #c0c8e8', borderRadius:4, cursor:'pointer', fontSize:11, fontWeight:700, fontFamily:sans }}>View</button>
-          <button onClick={() => setDeleteId(deleteId === s.id ? null : s.id)} style={{ padding:'4px 10px', background:'#fdf4f4', color:'#8b1a1a', border:'1px solid #e8c0c0', borderRadius:4, cursor:'pointer', fontSize:11, fontWeight:700, fontFamily:sans }}>Delete</button>
+          <button onClick={() => onView(s)} style={{ padding:'4px 10px', background:'#f0f4ff', color:'#2a3a7a', border:'1px solid #c0c8e8', borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>View</button>
+          <button onClick={() => setDeleteId(deleteId === s.id ? null : s.id)} style={{ padding:'4px 10px', background:'#fdf4f4', color:'#8b1a1a', border:'1px solid #e8c0c0', borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Delete</button>
         </div>
       </div>
       {deleteId === s.id && (
@@ -178,14 +178,14 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
           <div style={{ flex:1, display:'flex', alignItems:'center', gap:4 }}>
             <input value={editDraft} onChange={e => setEditDraft(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') { onRenameCampaign(campaign.id, editDraft); setEditing(false); } if (e.key === 'Escape') setEditing(false); }}
-              style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, borderRadius:3, fontSize:12, fontFamily:sans, outline:'none' }} autoFocus/>
+              style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, borderRadius:3, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
             <button onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} style={{ background:'none', border:'none', color:'#2a7a2a', cursor:'pointer' }}><Check size={12}/></button>
             <button onClick={() => setEditing(false)} style={{ background:'none', border:'none', color:'#8b1a1a', cursor:'pointer' }}><X size={12}/></button>
           </div>
         ) : (
-          <span style={{ flex:1, fontSize:13, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
+          <span style={{ flex:1, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
         )}
-        <span style={{ fontSize:10, color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
+        <span style={{ fontSize:FS.xxs, color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
         {campaign.mapState && <MapIcon size={11} color={GOLD} title="Map saved"/>}
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
@@ -193,7 +193,7 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
               onClick={(e) => { e.stopPropagation(); generateCampaignPDF(campaign, settlements); }}
               disabled={settlements.length === 0}
               title="Export Campaign PDF"
-              style={{ display:'flex', alignItems:'center', gap:3, background: settlements.length === 0 ? '#d8cdbc' : '#7a1a1a', color:'#fff', border:'none', borderRadius:4, padding:'3px 7px', cursor: settlements.length === 0 ? 'not-allowed' : 'pointer', fontSize:9, fontWeight:700, fontFamily:sans }}>
+              style={{ display:'flex', alignItems:'center', gap:3, background: settlements.length === 0 ? '#d8cdbc' : '#7a1a1a', color:'#fff', border:'none', borderRadius:4, padding:'3px 7px', cursor: settlements.length === 0 ? 'not-allowed' : 'pointer', fontSize:FS.micro, fontWeight:700, fontFamily:sans }}>
               <FileText size={10}/> PDF
             </button>
             <button onClick={() => { setEditing(true); setEditDraft(campaign.name); }} style={{ background:'none', border:'none', color:MUTED, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
@@ -216,7 +216,7 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
       {!collapsed && (
         <div style={{ padding:'6px 8px 8px', display:'flex', flexDirection:'column', gap:4 }}>
           {settlements.length === 0 ? (
-            <div style={{ padding:'10px 8px', fontSize:11, color:MUTED, textAlign:'center', fontStyle:'italic' }}>
+            <div style={{ padding:'10px 8px', fontSize:FS.xs, color:MUTED, textAlign:'center', fontStyle:'italic' }}>
               No settlements in this campaign yet. Use the arrow button to move settlements here.
             </div>
           ) : settlements.map(s => (
@@ -257,7 +257,7 @@ function SampleCard({ sample, onFork }) {
           {sample.name}
         </h4>
         <span style={{
-          fontSize: 9, fontWeight: 800, color: '#7a5a1a',
+          fontSize: FS.micro, fontWeight: 800, color: '#7a5a1a',
           background: 'rgba(201,162,76,0.14)',
           border: '1px solid rgba(201,162,76,0.45)',
           padding: '1px 6px', borderRadius: 999,
@@ -266,7 +266,7 @@ function SampleCard({ sample, onFork }) {
           Sample
         </span>
         <span style={{
-          marginLeft: 'auto', fontSize: 11, color: MUTED,
+          marginLeft: 'auto', fontSize: FS.xs, color: MUTED,
           textTransform: 'capitalize',
         }}>
           {sample.tier} · {sample.terrain}
@@ -300,7 +300,7 @@ function SampleCard({ sample, onFork }) {
           color: GOLD,
           border: `1.5px solid ${GOLD}`,
           borderRadius: 999,
-          fontFamily: sans, fontSize: 11, fontWeight: 700,
+          fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
           cursor: 'pointer',
           letterSpacing: '0.04em', textTransform: 'uppercase',
         }}
@@ -320,7 +320,7 @@ function SampleDashboard({ onFork }) {
       borderRadius: 8,
     }}>
       <div style={{
-        fontSize: 11, fontWeight: 800, color: MUTED,
+        fontSize: FS.xs, fontWeight: 800, color: MUTED,
         textTransform: 'uppercase', letterSpacing: '0.06em',
         marginBottom: 10,
         textAlign: 'center',
@@ -329,7 +329,7 @@ function SampleDashboard({ onFork }) {
       </div>
       <p style={{
         margin: '0 auto 14px', maxWidth: 460,
-        fontSize: 12, color: SECOND, lineHeight: 1.5,
+        fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
         textAlign: 'center', fontFamily: sans,
       }}>
         Three hand-picked seeds you can fork into your own saves. Each forks
@@ -724,7 +724,7 @@ export default function SettlementsPanel({ onNavigate }) {
       <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8, padding:'12px 14px' }}>
         <div style={{ fontFamily:serif_, fontSize:16, fontWeight:600, color:INK, marginBottom:8 }}>Saved Settlements</div>
         {settlement && (
-          <div style={{ fontSize:11, color:MUTED, marginBottom:8, padding:'6px 10px', background:'#f5ede0', borderRadius:5, border:`1px solid ${BORDER}`, display:'flex', alignItems:'center', gap:6 }}>
+          <div style={{ fontSize:FS.xs, color:MUTED, marginBottom:8, padding:'6px 10px', background:'#f5ede0', borderRadius:5, border:`1px solid ${BORDER}`, display:'flex', alignItems:'center', gap:6 }}>
             <span style={{color:SECOND}}>Current:</span>
             <span style={{fontWeight:700,color:INK}}>{settlement.name}</span>
             <span style={{color:MUTED}}>·</span>
@@ -733,10 +733,10 @@ export default function SettlementsPanel({ onNavigate }) {
           </div>
         )}
         <div style={{ display:'flex', gap:8, alignItems:'center', flexWrap:'wrap' }}>
-          <button onClick={saveCurrentSettlement} disabled={!settlement||isDuplicate||!canSave||saves.length>=(maxSaves||30)} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:(!settlement||isDuplicate||!canSave)?'#ccc':GOLD, color:'#fff', border:'none', borderRadius:5, cursor:(!settlement||isDuplicate||!canSave)?'not-allowed':'pointer', fontSize:12, fontWeight:700, fontFamily:sans }}>
+          <button onClick={saveCurrentSettlement} disabled={!settlement||isDuplicate||!canSave||saves.length>=(maxSaves||30)} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:(!settlement||isDuplicate||!canSave)?'#ccc':GOLD, color:'#fff', border:'none', borderRadius:5, cursor:(!settlement||isDuplicate||!canSave)?'not-allowed':'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans }}>
             <Save size={13}/> {saved?'Saved!':!canSave?'Sign In to Save':isDuplicate?'Already Saved':saves.length>=(maxSaves||30)?'Slots Full':'Save Current Settlement'}
           </button>
-          <span style={{ fontSize:11, color:MUTED }}>{saves.length}/{maxSaves||30} slots used</span>
+          <span style={{ fontSize:FS.xs, color:MUTED }}>{saves.length}/{maxSaves||30} slots used</span>
         </div>
       </div>
 
@@ -748,12 +748,12 @@ export default function SettlementsPanel({ onNavigate }) {
               <input value={newCampaignName} onChange={e => setNewCampaignName(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') handleCreateCampaign(); if (e.key === 'Escape') setShowNewCampaign(false); }}
                 placeholder="Campaign name..." autoFocus
-                style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, borderRadius:5, fontSize:12, fontFamily:sans, outline:'none' }}/>
-              <button onClick={handleCreateCampaign} disabled={!newCampaignName.trim()} style={{ padding:'6px 12px', background:newCampaignName.trim()?GOLD:'#ccc', color:'#fff', border:'none', borderRadius:5, cursor:newCampaignName.trim()?'pointer':'not-allowed', fontSize:11, fontWeight:700, fontFamily:sans }}>Create</button>
-              <button onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }} style={{ padding:'6px 10px', background:CARD, color:SECOND, border:`1px solid ${BORDER}`, borderRadius:5, cursor:'pointer', fontSize:11, fontFamily:sans }}>Cancel</button>
+                style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, borderRadius:5, fontSize:FS.sm, fontFamily:sans, outline:'none' }}/>
+              <button onClick={handleCreateCampaign} disabled={!newCampaignName.trim()} style={{ padding:'6px 12px', background:newCampaignName.trim()?GOLD:'#ccc', color:'#fff', border:'none', borderRadius:5, cursor:newCampaignName.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Create</button>
+              <button onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }} style={{ padding:'6px 10px', background:CARD, color:SECOND, border:`1px solid ${BORDER}`, borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontFamily:sans }}>Cancel</button>
             </div>
           ) : (
-            <button onClick={() => setShowNewCampaign(true)} style={{ display:'flex', alignItems:'center', gap:6, padding:'7px 14px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:6, cursor:'pointer', fontSize:12, fontWeight:700, fontFamily:sans }}>
+            <button onClick={() => setShowNewCampaign(true)} style={{ display:'flex', alignItems:'center', gap:6, padding:'7px 14px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:6, cursor:'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans }}>
               <FolderPlus size={14}/> New Campaign
             </button>
           )}
@@ -761,7 +761,7 @@ export default function SettlementsPanel({ onNavigate }) {
       )}
 
       {savesLoading ? (
-        <div style={{ padding:'24px 16px', textAlign:'center', fontSize:13, color:MUTED, background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>Loading saves...</div>
+        <div style={{ padding:'24px 16px', textAlign:'center', fontSize:FS.md, color:MUTED, background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>Loading saves...</div>
       ) : saves.length === 0 ? (
         // Tier 8.2 — show sample dossiers instead of a bare empty state.
         // Eliminates the "you have nothing — go figure it out" first run.
@@ -785,7 +785,7 @@ export default function SettlementsPanel({ onNavigate }) {
           {unassignedSaves.length > 0 && (
             <div>
               {campaigns.length > 0 && (
-                <div style={{ fontSize:10, fontWeight:700, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:6, paddingLeft:4 }}>
+                <div style={{ fontSize:FS.xxs, fontWeight:700, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:6, paddingLeft:4 }}>
                   Unassigned ({unassignedSaves.length})
                 </div>
               )}

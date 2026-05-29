@@ -20,6 +20,7 @@
  */
 
 import { useEffect, useRef } from 'react';
+import { FS } from '../theme.js';
 import { X, CheckCircle2, Circle } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { ONBOARDING_STEPS, isOnboardingComplete, nextOnboardingStep } from '../../copy/onboardingSteps.js';
@@ -95,7 +96,7 @@ export default function OnboardingChecklist() {
               />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{
-                  fontSize: 12,
+                  fontSize: FS.sm,
                   fontWeight: done ? 400 : 700,
                   fontFamily: 'system-ui, -apple-system, sans-serif',
                   color: done ? '#7a5040' : '#1c1409',

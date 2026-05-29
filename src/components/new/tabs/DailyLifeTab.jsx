@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FS } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
 import {isMobile} from '../tabConstants';
@@ -202,7 +203,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
             border: `1px solid ${BORDER}`,
             borderLeft: '3px solid #a0762a',
             borderRadius: 6,
-            fontSize: 12, color: SECOND, lineHeight: 1.5,
+            fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
             fontFamily: sans,
           }}
         >
@@ -223,7 +224,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
             border: 'none',
             borderRadius: 8,
             cursor: loading ? 'default' : 'pointer',
-            fontSize: 13, fontWeight: 700, fontFamily: sans,
+            fontSize: FS.md, fontWeight: 700, fontFamily: sans,
             letterSpacing: '0.03em', marginBottom: 16,
             transition: 'opacity 0.2s',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
@@ -296,7 +297,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
           background: '#faf8f4', border: `1px solid ${BORDER}`,
           borderRadius: 8, padding: '32px 20px', textAlign: 'center',
         }}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
+          <div style={{ fontSize: FS.md, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
             What is daily life like here?
           </div>
           <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>

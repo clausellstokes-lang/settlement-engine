@@ -42,6 +42,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { FS } from '../theme.js';
 
 const GOLD = '#C9A24C';
 const GOLD_DIM = '#D9B566';
@@ -232,7 +233,7 @@ export default function EditableInline({
             position: 'absolute',
             top: '100%', left: 0,
             marginTop: 2,
-            fontSize: 11,
+            fontSize: FS.xs,
             color: '#A23434',
             background: '#fff',
             padding: '2px 6px',

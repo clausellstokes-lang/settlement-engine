@@ -246,7 +246,7 @@ function OptionGrid({ options, value, onChange, columns = 3 }) {
           >
             {Ic && <Ic size={16} />}
             <span>{opt.label}</span>
-            {opt.pop && <span style={{ fontSize: 9, color: MUTED }}>{opt.pop}</span>}
+            {opt.pop && <span style={{ fontSize: FS.micro, color: MUTED }}>{opt.pop}</span>}
           </button>
         );
       })}
@@ -784,7 +784,7 @@ export default function Workshop({ isMobile }) {
                         border: `1px solid ${isDepleted ? '#8b1a1a' : BORDER2}`,
                         borderRadius: `0 ${R.lg}px ${R.lg}px 0`,
                         cursor: 'pointer',
-                        fontSize: 9, color: isDepleted ? '#8b1a1a' : MUTED,
+                        fontSize: FS.micro, color: isDepleted ? '#8b1a1a' : MUTED,
                         fontFamily: sans,
                       }}
                     >
@@ -986,28 +986,28 @@ function CustomContentPanels({ config, updateConfig }) {
   };
 
   const inputStyle = {
-    flex: 1, padding: '5px 8px', fontSize: 11, borderRadius: 4,
+    flex: 1, padding: '5px 8px', fontSize: FS.xs, borderRadius: 4,
     border: `1px solid ${BORDER}`, fontFamily: sans, color: INK,
     background: '#fff', outline: 'none',
   };
-  const labelStyle = { fontSize: 10, fontWeight: 600, color: SECOND, minWidth: 55 };
+  const labelStyle = { fontSize: FS.xxs, fontWeight: 600, color: SECOND, minWidth: 55 };
   const rowStyle = { display: 'flex', alignItems: 'center', gap: 6 };
   const addBtnStyle = {
     padding: '5px 14px', background: GOLD, color: '#fff', border: 'none',
-    borderRadius: 4, cursor: 'pointer', fontSize: 11, fontWeight: 700, fontFamily: sans,
+    borderRadius: 4, cursor: 'pointer', fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
   };
   const pillStyle = (color = '#2a5a7a') => ({
     display: 'inline-flex', alignItems: 'center', gap: 4,
     padding: '3px 8px', borderRadius: 10,
     background: `${color}14`, border: `1px solid ${color}40`,
-    fontSize: 10, fontWeight: 600, color, whiteSpace: 'nowrap',
+    fontSize: FS.xxs, fontWeight: 600, color, whiteSpace: 'nowrap',
   });
 
   return (
     <>
       {/* ── Custom Institutions ──────────────────────────────── */}
       <Panel title="Custom Institutions" icon={Building2} color="#2a5a7a" defaultOpen={false}>
-        <div style={{ fontSize: 11, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
+        <div style={{ fontSize: FS.xs, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
           Define new institution types that will be included in generation.
         </div>
         {customInstitutions.length > 0 && (
@@ -1016,7 +1016,7 @@ function CustomContentPanels({ config, updateConfig }) {
               <span key={i} style={pillStyle('#2a5a7a')}>
                 {inst.name} ({inst.category})
                 <button onClick={() => removeFrom('customInstitutions', i)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#2a5a7a', padding: 0, fontSize: 12, lineHeight: 1 }}>&times;</button>
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#2a5a7a', padding: 0, fontSize: FS.sm, lineHeight: 1 }}>&times;</button>
               </span>
             ))}
           </div>
@@ -1052,7 +1052,7 @@ function CustomContentPanels({ config, updateConfig }) {
 
       {/* ── Custom Resources ─────────────────────────────────── */}
       <Panel title="Custom Resources" icon={Mountain} color="#2a7a2a" defaultOpen={false}>
-        <div style={{ fontSize: 11, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
+        <div style={{ fontSize: FS.xs, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
           Define new resource types for terrain and economy generation.
         </div>
         {customResources.length > 0 && (
@@ -1061,7 +1061,7 @@ function CustomContentPanels({ config, updateConfig }) {
               <span key={i} style={pillStyle('#2a7a2a')}>
                 {res.label}
                 <button onClick={() => removeFrom('customResources', i)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#2a7a2a', padding: 0, fontSize: 12, lineHeight: 1 }}>&times;</button>
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#2a7a2a', padding: 0, fontSize: FS.sm, lineHeight: 1 }}>&times;</button>
               </span>
             ))}
           </div>
@@ -1102,7 +1102,7 @@ function CustomContentPanels({ config, updateConfig }) {
 
       {/* ── Custom Trade Routes ──────────────────────────────── */}
       <Panel title="Custom Trade Routes" icon={Compass} color="#7a5a2a" defaultOpen={false}>
-        <div style={{ fontSize: 11, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
+        <div style={{ fontSize: FS.xs, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
           Define trade dependencies and supply connections.
         </div>
         {customTradeRoutes.length > 0 && (
@@ -1111,7 +1111,7 @@ function CustomContentPanels({ config, updateConfig }) {
               <span key={i} style={pillStyle('#7a5a2a')}>
                 {route.name}
                 <button onClick={() => removeFrom('customTradeRoutes', i)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#7a5a2a', padding: 0, fontSize: 12, lineHeight: 1 }}>&times;</button>
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#7a5a2a', padding: 0, fontSize: FS.sm, lineHeight: 1 }}>&times;</button>
               </span>
             ))}
           </div>
@@ -1150,7 +1150,7 @@ function CustomContentPanels({ config, updateConfig }) {
 
       {/* ── Power Dynamics ───────────────────────────────────── */}
       <Panel title="Power Dynamics" icon={Crown} color="#5a3a8a" defaultOpen={false}>
-        <div style={{ fontSize: 11, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
+        <div style={{ fontSize: FS.xs, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
           Pre-set faction relationships, government preferences, and political tensions.
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -1198,7 +1198,7 @@ function CustomContentPanels({ config, updateConfig }) {
 
       {/* ── Defense Scenarios ────────────────────────────────── */}
       <Panel title="Defense Scenarios" icon={Shield} color="#6b2a2a" defaultOpen={false}>
-        <div style={{ fontSize: 11, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
+        <div style={{ fontSize: FS.xs, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
           Pre-configure defense posture, fortification level, and threat response.
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>

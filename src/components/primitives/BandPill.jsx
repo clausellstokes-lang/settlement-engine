@@ -26,6 +26,7 @@
  */
 
 import { bandFor, displayBandLabel } from '../../domain/qualitativeBands.js';
+import { FS } from '../theme.js';
 
 const BAND_COLORS = Object.freeze({
   surplus:   { bg: 'rgba(26,74,32,0.14)',  fg: '#1a4a20', bdr: 'rgba(26,74,32,0.4)' },
@@ -38,9 +39,9 @@ const BAND_COLORS = Object.freeze({
 const NEUTRAL = { bg: '#faf6ee', fg: '#9c8068', bdr: '#d2bd96' };
 
 const SIZE = Object.freeze({
-  sm: { fontSize: 9,  padX: 5, padY: 1, gap: 3, glyph: 7 },
-  md: { fontSize: 11, padX: 7, padY: 2, gap: 4, glyph: 8 },
-  lg: { fontSize: 13, padX: 9, padY: 3, gap: 5, glyph: 10 },
+  sm: { fontSize: FS.micro,  padX: 5, padY: 1, gap: 3, glyph: 7 },
+  md: { fontSize: FS.xs, padX: 7, padY: 2, gap: 4, glyph: 8 },
+  lg: { fontSize: FS.md, padX: 9, padY: 3, gap: 5, glyph: 10 },
 });
 
 const GLYPHS = Object.freeze({

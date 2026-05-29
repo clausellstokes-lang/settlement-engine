@@ -18,7 +18,7 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { Search } from 'lucide-react';
-import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans } from '../theme.js';
+import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS } from '../theme.js';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { searchCompendium } from '../../domain/compendium/searchIndex.js';
@@ -121,7 +121,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           autoComplete="off"
           style={{
             flex: 1, border: 'none', background: 'transparent',
-            fontFamily: sans, fontSize: 13, color: INK, outline: 'none',
+            fontFamily: sans, fontSize: FS.md, color: INK, outline: 'none',
           }}
         />
         {query && (
@@ -131,7 +131,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
             aria-label="Clear search"
             style={{
               border: 'none', background: 'none', cursor: 'pointer',
-              color: MUT, fontSize: 15, padding: 0, lineHeight: 1,
+              color: MUT, fontSize: FS.lg, padding: 0, lineHeight: 1,
             }}
           >×</button>
         )}
@@ -165,11 +165,11 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                     background: i === active ? `${GOLD}14` : 'transparent',
                   }}
                 >
-                  <span style={{ fontSize: 13, fontWeight: 700, color: INK, flex: 1 }}>
+                  <span style={{ fontSize: FS.md, fontWeight: 700, color: INK, flex: 1 }}>
                     {r.term}
                   </span>
                   <span style={{
-                    fontSize: 9, fontWeight: 700, color,
+                    fontSize: FS.micro, fontWeight: 700, color,
                     background: `${color}18`, borderRadius: 8, padding: '1px 7px',
                     textTransform: 'uppercase', letterSpacing: '0.04em',
                     whiteSpace: 'nowrap',
@@ -188,7 +188,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           position: 'absolute', left: 14, right: 14, top: '100%', marginTop: -2,
           zIndex: 50, padding: '10px 12px', background: CARD,
           border: `1px solid ${BOR}`, borderRadius: 6,
-          fontSize: 12, color: MUT, fontFamily: sans,
+          fontSize: FS.sm, color: MUT, fontFamily: sans,
         }}>
           No matches for &ldquo;{q}&rdquo;. Try a tier, archetype, route, or stress name.
         </div>

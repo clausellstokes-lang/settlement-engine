@@ -79,7 +79,7 @@ function GalleryTile({ tile, onOpen }) {
             background: 'rgba(201,162,76,0.14)',
             border: '1px solid rgba(201,162,76,0.45)',
             color: '#7a5a1a',
-            fontSize: 9, fontWeight: 800, letterSpacing: '0.05em',
+            fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.05em',
             textTransform: 'uppercase',
           }}
         >

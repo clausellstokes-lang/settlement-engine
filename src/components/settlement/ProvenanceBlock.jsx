@@ -13,6 +13,7 @@
  */
 
 import { useStore } from '../../store/index.js';
+import { FS } from '../theme.js';
 import Card from '../primitives/Card.jsx';
 
 /**
@@ -48,7 +49,7 @@ function Row({ label, children }) {
   return (
     <>
       <dt style={{
-        fontSize: 10, fontWeight: 700, color: '#6b5340',
+        fontSize: FS.xxs, fontWeight: 700, color: '#6b5340',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         letterSpacing: '0.04em', textTransform: 'uppercase',
         whiteSpace: 'nowrap',
@@ -57,7 +58,7 @@ function Row({ label, children }) {
       </dt>
       <dd style={{
         margin: 0,
-        fontSize: 11, color: '#1c1409',
+        fontSize: FS.xs, color: '#1c1409',
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}>
         {children}
@@ -83,6 +84,6 @@ function shortSeed(s) {
 
 const codeStyle = {
   fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-  fontSize: 10, color: '#3a2a18',
+  fontSize: FS.xxs, color: '#3a2a18',
   background: '#f3ead8', padding: '1px 4px', borderRadius: 3,
 };

@@ -17,6 +17,7 @@
  */
 
 import { useState, useSyncExternalStore } from 'react';
+import { FS } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 
 const STORAGE_KEY = 'flag.__devPanelOpen';
@@ -70,7 +71,7 @@ export default function DevFlagPanel() {
   const baseStyle = {
     position: 'fixed', bottom: 12, right: 12, zIndex: 10000,
     fontFamily: 'system-ui, -apple-system, sans-serif',
-    fontSize: 12, color: '#1c1409',
+    fontSize: FS.sm, color: '#1c1409',
   };
 
   if (!open) {
@@ -113,7 +114,7 @@ export default function DevFlagPanel() {
         color: '#c9a24c',
         borderBottom: '1px solid #1c1409',
       }}>
-        <span style={{ fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: 11 }}>
+        <span style={{ fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: FS.xs }}>
           ⚑ Feature flags (DEV)
         </span>
         <button
@@ -159,7 +160,7 @@ export default function DevFlagPanel() {
                   {name}
                   {overridden && (
                     <span title="Override set (clear to use default)" style={{
-                      fontSize: 9, fontWeight: 700, color: '#7B4FCF',
+                      fontSize: FS.micro, fontWeight: 700, color: '#7B4FCF',
                       background: '#EBE2FA', border: '1px solid #7B4FCF',
                       borderRadius: 3, padding: '0 4px', letterSpacing: '0.04em',
                     }}>
@@ -167,10 +168,10 @@ export default function DevFlagPanel() {
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: 11, color: '#4A3B22', lineHeight: 1.45, marginTop: 2 }}>
+                <div style={{ fontSize: FS.xs, color: '#4A3B22', lineHeight: 1.45, marginTop: 2 }}>
                   {FLAGS[name].description}
                 </div>
-                <div style={{ fontSize: 10, color: '#6b5340', marginTop: 2 }}>
+                <div style={{ fontSize: FS.xxs, color: '#6b5340', marginTop: 2 }}>
                   default: <strong>{String(FLAGS[name].default)}</strong>
                 </div>
               </div>
@@ -180,7 +181,7 @@ export default function DevFlagPanel() {
                   onClick={(e) => { e.preventDefault(); setOverrideWithNotify(name, null); }}
                   title="Clear override (revert to default)"
                   style={{
-                    fontSize: 10,
+                    fontSize: FS.xxs,
                     background: 'transparent', border: '1px solid #6b5340',
                     color: '#6b5340', borderRadius: 4,
                     padding: '2px 6px', cursor: 'pointer',
@@ -197,7 +198,7 @@ export default function DevFlagPanel() {
 
       <div style={{
         padding: '6px 10px',
-        fontSize: 10, color: '#6b5340',
+        fontSize: FS.xxs, color: '#6b5340',
         background: 'rgba(28,20,9,0.05)',
         borderTop: '1px solid rgba(28,20,9,0.08)',
       }}>

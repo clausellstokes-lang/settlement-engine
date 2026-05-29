@@ -28,6 +28,7 @@
  */
 
 import { useState } from 'react';
+import { FS } from '../theme.js';
 
 const HARD_KINDS = new Set([
   'invented_entity',
@@ -95,12 +96,12 @@ export function AiOverlayViolations({ violations, onDismiss }) {
         }}
       >
         <span style={{
-          fontSize: 11, fontWeight: 800, color: COLORS.hardText,
+          fontSize: FS.xs, fontWeight: 800, color: COLORS.hardText,
           textTransform: 'uppercase', letterSpacing: '0.06em',
         }}>
           ⚠ AI overlay drift detected
         </span>
-        <span style={{ fontSize: 11, color: COLORS.muted, flex: 1 }}>
+        <span style={{ fontSize: FS.xs, color: COLORS.muted, flex: 1 }}>
           {totalCount} issue{totalCount === 1 ? '' : 's'}
           {hardCount > 0 && (
             <> · <strong style={{ color: COLORS.hardText }}>{hardCount} hard</strong></>
@@ -116,7 +117,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
           aria-controls="ai-violations-body"
           style={{
             background: 'none', border: 'none', cursor: 'pointer',
-            fontSize: 10, fontWeight: 700, color: COLORS.muted,
+            fontSize: FS.xxs, fontWeight: 700, color: COLORS.muted,
             padding: '2px 6px',
           }}
         >
@@ -131,7 +132,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
             style={{
               background: 'none', border: `1px solid ${COLORS.hardBdr}`,
               borderRadius: 3, cursor: 'pointer',
-              fontSize: 10, fontWeight: 700, color: COLORS.hardText,
+              fontSize: FS.xxs, fontWeight: 700, color: COLORS.hardText,
               padding: '2px 7px',
             }}
           >
@@ -169,7 +170,7 @@ function Group({ violations, tone, caption }) {
   return (
     <section style={{ marginBottom: 6 }}>
       <p style={{
-        fontSize: 11, color: isHard ? COLORS.hardText : COLORS.softText,
+        fontSize: FS.xs, color: isHard ? COLORS.hardText : COLORS.softText,
         margin: '0 0 6px', lineHeight: 1.4,
       }}>
         {caption}
@@ -191,7 +192,7 @@ function Group({ violations, tone, caption }) {
           >
             <span style={{
               flexShrink: 0,
-              fontSize: 9, fontWeight: 800, letterSpacing: '0.05em',
+              fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.05em',
               textTransform: 'uppercase',
               color: isHard ? COLORS.hardText : COLORS.softText,
               background: '#fff',

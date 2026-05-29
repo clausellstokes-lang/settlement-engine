@@ -16,12 +16,13 @@
  */
 
 import { Crown } from 'lucide-react';
+import { FS } from '../theme.js';
 import { useStore } from '../../store/index.js';
 
 const SIZES = {
-  sm: { fontSize: 9,  iconSize: 9,  pad: '1px 5px',  gap: 3, radius: 3 },
-  md: { fontSize: 10, iconSize: 10, pad: '2px 7px',  gap: 4, radius: 4 },
-  lg: { fontSize: 12, iconSize: 12, pad: '3px 9px',  gap: 5, radius: 5 },
+  sm: { fontSize: FS.micro,  iconSize: 9,  pad: '1px 5px',  gap: 3, radius: 3 },
+  md: { fontSize: FS.xxs, iconSize: 10, pad: '2px 7px',  gap: 4, radius: 4 },
+  lg: { fontSize: FS.sm, iconSize: 12, pad: '3px 9px',  gap: 5, radius: 5 },
 };
 
 export default function FounderBadge({ size = 'md', force = false, style }) {

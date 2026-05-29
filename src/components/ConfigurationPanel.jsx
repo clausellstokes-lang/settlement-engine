@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import {ChevronDown, ChevronUp} from 'lucide-react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {getCompatibleResources} from '../generators/terrainHelpers';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS } from './theme.js';
 import { useStore } from '../store/index.js';
 
 const PARCHMENT='#f7f0e4';
@@ -43,11 +43,11 @@ const PRIORITIES=[
   {key:'priorityCriminal',label:'Criminal',accent:'#4a1a4a'},
 ];
 
-function Lbl({children}){return<div style={{fontSize:11,fontWeight:700,color:SECOND,letterSpacing:'0.05em',textTransform:'uppercase',marginBottom:4}}>{children}</div>;}
-function Sel({value,onChange,children}){return<select value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:12,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
+function Lbl({children}){return<div style={{fontSize:FS.xs,fontWeight:700,color:SECOND,letterSpacing:'0.05em',textTransform:'uppercase',marginBottom:4}}>{children}</div>;}
+function Sel({value,onChange,children}){return<select value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
 function Collapsible({title,status,children}){
   const[open,setOpen]=useState(false);
-  return<div><button onClick={()=>setOpen(o=>!o)} style={{background:'none',border:'none',cursor:'pointer',textAlign:'left',fontSize:12,fontWeight:600,color:SECOND,display:'flex',alignItems:'center',gap:6,padding:'4px 0',width:'100%',fontFamily:sans}}>{open?<ChevronUp size={14}/>:<ChevronDown size={14}/>}<span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:10,fontWeight:600,color:MUTED,background:'#f0ead8',borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</button>{open&&children}</div>;
+  return<div><button onClick={()=>setOpen(o=>!o)} style={{background:'none',border:'none',cursor:'pointer',textAlign:'left',fontSize:FS.sm,fontWeight:600,color:SECOND,display:'flex',alignItems:'center',gap:6,padding:'4px 0',width:'100%',fontFamily:sans}}>{open?<ChevronUp size={14}/>:<ChevronDown size={14}/>}<span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:'#f0ead8',borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</button>{open&&children}</div>;
 }
 
 function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode}){
@@ -61,19 +61,19 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
   return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:randomSliderMode?0:10}}>
       <Lbl>Priority Sliders</Lbl>
-      <button onClick={()=>setRandomSliderMode(!randomSliderMode)} style={{fontSize:11,fontWeight:700,padding:'3px 10px',border:`1px solid ${randomSliderMode?GOLD:BORDER2}`,borderRadius:5,cursor:'pointer',background:randomSliderMode?GOLD:CARD,color:randomSliderMode?'#fff':SECOND,fontFamily:sans}}> {randomSliderMode?'Random':'Set manually'}</button>
+      <button onClick={()=>setRandomSliderMode(!randomSliderMode)} style={{fontSize:FS.xs,fontWeight:700,padding:'3px 10px',border:`1px solid ${randomSliderMode?GOLD:BORDER2}`,borderRadius:5,cursor:'pointer',background:randomSliderMode?GOLD:CARD,color:randomSliderMode?'#fff':SECOND,fontFamily:sans}}> {randomSliderMode?'Random':'Set manually'}</button>
     </div>
     {randomSliderMode
-      ? <p style={{fontSize:11,color:MUTED,margin:'6px 0 0',lineHeight:1.4}}>Each generation randomises all priority sliders. Toggle off to set values manually or choose an archetype.</p>
+      ? <p style={{fontSize:FS.xs,color:MUTED,margin:'6px 0 0',lineHeight:1.4}}>Each generation randomises all priority sliders. Toggle off to set values manually or choose an archetype.</p>
       : <>
         <div style={{marginBottom:10}}>
           <Lbl>Archetype preset</Lbl>
           <div style={{display:'flex',gap:6}}>
-            <select defaultValue="" onChange={apply} style={{flex:1,padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:12,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>
+            <select defaultValue="" onChange={apply} style={{flex:1,padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>
               <option value="">— Choose an archetype —</option>
               {ARCHETYPE_GROUPS.filter(g=>config.magicExists!==false||g.label!=='Arcane').map(({label,keys})=><optgroup key={label} label={label}>{keys.map(key=>{const a=ARCHETYPES.find(x=>x.key===key);return a?<option key={key} value={key}>{a.name} — {a.desc}</option>:null;})}</optgroup>)}
             </select>
-            {applied&&<span style={{fontSize:11,color:'#4a8a60',fontWeight:600,display:'flex',alignItems:'center'}}>✓</span>}
+            {applied&&<span style={{fontSize:FS.xs,color:'#4a8a60',fontWeight:600,display:'flex',alignItems:'center'}}>✓</span>}
           </div>
         </div>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -82,7 +82,7 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
             if (key === 'priorityMagic' && config.magicExists === false) return null;
             const val = config[key] ?? 50;
             return <div key={key} style={{display:'flex',alignItems:'center',gap:8}}>
-              <span style={{fontSize:12,fontWeight:600,color:INK,width:62,flexShrink:0}}>
+              <span style={{fontSize:FS.sm,fontWeight:600,color:INK,width:62,flexShrink:0}}>
                 {label}
               </span>
               <input type="range"
@@ -90,7 +90,7 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
                 value={Math.max(5,val)}
                 onChange={e=>updateConfig({[key]:Number(e.target.value)})}
                 style={{flex:1,accentColor:accent,height:4}}/>
-              <span style={{fontSize:11,fontWeight:700,color:accent,width:46,textAlign:'right',whiteSpace:'nowrap'}}>
+              <span style={{fontSize:FS.xs,fontWeight:700,color:accent,width:46,textAlign:'right',whiteSpace:'nowrap'}}>
                 {val}
               </span>
             </div>;
@@ -110,16 +110,16 @@ function StressPanel({config,updateConfig}){
   return<div style={{background:'#fdf8f0',border:`1px solid ${BORDER2}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
     <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:10,gap:10}}>
       <div style={{flex:1}}>
-        <div style={{fontSize:12,fontWeight:700,color:INK,marginBottom:2}}>Settlement Stress</div>
-        <p style={{fontSize:11,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random stress may fire each Generate (~40% chance). All types are eligible.':`${selected.length} of ${allKeys.length} stress types selected.`}</p>
+        <div style={{fontSize:FS.sm,fontWeight:700,color:INK,marginBottom:2}}>Settlement Stress</div>
+        <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random stress may fire each Generate (~40% chance). All types are eligible.':`${selected.length} of ${allKeys.length} stress types selected.`}</p>
       </div>
       <div style={{display:'flex',gap:5,flexShrink:0}}>
-        <button onClick={toggleRandom} style={{fontSize:11,fontWeight:700,padding:'4px 10px',border:`1px solid ${isRandom?'#8b5a1a':BORDER2}`,borderRadius:5,cursor:'pointer',background:isRandom?'#8b5a1a':CARD,color:isRandom?'#fff':SECOND,fontFamily:sans}}> {isRandom?'Random ON':'Random'}</button>
-        {!isRandom&&<><button onClick={()=>updateConfig({selectedStresses:allKeys})} style={{fontSize:10,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>All</button><button onClick={()=>updateConfig({selectedStresses:[]})} style={{fontSize:10,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>None</button></>}
+        <button onClick={toggleRandom} style={{fontSize:FS.xs,fontWeight:700,padding:'4px 10px',border:`1px solid ${isRandom?'#8b5a1a':BORDER2}`,borderRadius:5,cursor:'pointer',background:isRandom?'#8b5a1a':CARD,color:isRandom?'#fff':SECOND,fontFamily:sans}}> {isRandom?'Random ON':'Random'}</button>
+        {!isRandom&&<><button onClick={()=>updateConfig({selectedStresses:allKeys})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>All</button><button onClick={()=>updateConfig({selectedStresses:[]})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>None</button></>}
       </div>
     </div>
     {!isRandom&&<div style={{display:'flex',flexDirection:'column',gap:4,maxHeight:200,overflowY:'auto'}}>
-      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<button key={key} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 8px',borderRadius:4,cursor:'pointer',textAlign:'left',border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent',fontFamily:sans}}><span style={{fontSize:14,flexShrink:0}}>{d.icon}</span><span style={{fontSize:11,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:10,color:d.colour||GOLD}}>✓</span>}</button>;})}
+      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<button key={key} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 8px',borderRadius:4,cursor:'pointer',textAlign:'left',border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent',fontFamily:sans}}><span style={{fontSize:14,flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</button>;})}
     </div>}
   </div>;
 }
@@ -196,20 +196,20 @@ function NearbyResourcesPanel({config,updateConfig}){
   return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
     <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:10,gap:10}}>
       <div style={{flex:1}}>
-        <div style={{fontSize:12,fontWeight:700,color:INK,marginBottom:2,display:'flex',alignItems:'center',gap:8}}>Nearby Resources<span style={{fontSize:10,fontWeight:400,color:MUTED}}>constrained by {route} access</span></div>
-        <p style={{fontSize:11,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random compatible subset is selected each Generate.':`${selected.filter(k=>compatible.some(r=>r.key===k)).length} of ${compatible.length} compatible resources selected.`}</p>
+        <div style={{fontSize:FS.sm,fontWeight:700,color:INK,marginBottom:2,display:'flex',alignItems:'center',gap:8}}>Nearby Resources<span style={{fontSize:FS.xxs,fontWeight:400,color:MUTED}}>constrained by {route} access</span></div>
+        <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random compatible subset is selected each Generate.':`${selected.filter(k=>compatible.some(r=>r.key===k)).length} of ${compatible.length} compatible resources selected.`}</p>
       </div>
       <div style={{display:'flex',gap:5,flexShrink:0}}>
-        <button onClick={toggleRandom} style={{fontSize:11,fontWeight:700,padding:'4px 10px',border:`1px solid ${isRandom?GOLD:BORDER2}`,borderRadius:5,cursor:'pointer',background:isRandom?GOLD:CARD,color:isRandom?'#fff':SECOND,fontFamily:sans}}> {isRandom?'Random ON':'Random'}</button>
+        <button onClick={toggleRandom} style={{fontSize:FS.xs,fontWeight:700,padding:'4px 10px',border:`1px solid ${isRandom?GOLD:BORDER2}`,borderRadius:5,cursor:'pointer',background:isRandom?GOLD:CARD,color:isRandom?'#fff':SECOND,fontFamily:sans}}> {isRandom?'Random ON':'Random'}</button>
         {!isRandom&&<>
-          <button onClick={()=>updateConfig({nearbyResources:compatible.map(r=>r.key)})} style={{fontSize:10,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>All</button>
-          <button onClick={()=>updateConfig({nearbyResources:[],nearbyResourcesState:{}})} style={{fontSize:10,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>None</button>
+          <button onClick={()=>updateConfig({nearbyResources:compatible.map(r=>r.key)})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>All</button>
+          <button onClick={()=>updateConfig({nearbyResources:[],nearbyResourcesState:{}})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>None</button>
         </>}
       </div>
     </div>
     <div style={{display:'flex',flexDirection:'column',gap:10}}>
       {Object.entries(byCategory).sort(([a],[b])=>a.localeCompare(b)).map(([cat,resources])=><div key={cat}>
-        <div style={{fontSize:10,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:5}}>{cat}</div>
+        <div style={{fontSize:FS.xxs,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:5}}>{cat}</div>
         <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
           {resources.map(r=>{
             // Incompatible with current route/terrain — still clickable but visually dimmed
@@ -219,7 +219,7 @@ function NearbyResourcesPanel({config,updateConfig}){
                 <button key={r.key}
                   onClick={()=>cycleResourceState(r.key)}
                   title={incompatTip}
-                  style={{fontSize:11,padding:'3px 9px',borderRadius:4,border:'1px dashed #c8b8a0',
+                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,border:'1px dashed #c8b8a0',
                     background:'transparent',color:MUTED,fontFamily:sans,opacity:0.45,cursor:'pointer'}}>
                   {r.name||r.key.replace(/_/g,' ')}
                 </button>);
@@ -230,7 +230,7 @@ function NearbyResourcesPanel({config,updateConfig}){
               return(
                 <button key={r.key} disabled
                   title={`In random pool — eligible for this generation. Actual selection happens at generation time based on route and terrain.`}
-                  style={{fontSize:11,padding:'3px 9px',borderRadius:4,
+                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,
                     border:`1px solid #c8a84a`,background:`rgba(160,118,42,0.08)`,color:`#8a6020`,
                     fontFamily:sans,cursor:'default',userSelect:'none',fontWeight:600}}>
                   {r.name||r.key.replace(/_/g,' ')}
@@ -257,10 +257,10 @@ function NearbyResourcesPanel({config,updateConfig}){
                  color:STATE_COLORS[st],fontWeight:700};
             return(
               <button key={r.key} onClick={()=>cycleResourceState(r.key)} title={tip}
-                style={{fontSize:11,padding:'3px 9px',borderRadius:4,cursor:'pointer',
+                style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,cursor:'pointer',
                   fontFamily:sans,WebkitTapHighlightColor:'transparent',userSelect:'none',
                   transition:'all 0.1s',...btnStyle}}>
-                {!isOff&&st!=='allow'&&<span style={{fontSize:9,marginRight:3,opacity:0.85}}>{STATE_LABELS[st].split(' ')[0]}</span>}
+                {!isOff&&st!=='allow'&&<span style={{fontSize:FS.micro,marginRight:3,opacity:0.85}}>{STATE_LABELS[st].split(' ')[0]}</span>}
                 {r.name||r.key.replace(/_/g,' ')}
               </button>);
           })}
@@ -269,15 +269,15 @@ function NearbyResourcesPanel({config,updateConfig}){
       {/* Legend */}
       <div style={{marginTop:8,paddingTop:8,borderTop:'1px solid #e8dcc8',display:'flex',gap:8,flexWrap:'wrap',alignItems:'center'}}>
         {isRandom
-          ? <span style={{fontSize:10,color:SECOND,fontStyle:'italic'}}>
+          ? <span style={{fontSize:FS.xxs,color:SECOND,fontStyle:'italic'}}>
               All compatible resources are in the pool. ~{tierPct}% chance of depleted per resource at <strong>{config.settType||'this tier'}</strong>. Toggle Random OFF to control individually.
             </span>
           : <>
-              <span style={{fontSize:10,color:SECOND}}>Click each resource to cycle:</span>
-              <span style={{fontSize:10,color:MUTED,border:'1px solid #d0c0a8',borderRadius:3,padding:'1px 6px',opacity:0.7}}>Off</span>
-              <span style={{fontSize:10,color:GOLD,background:`${GOLD}10`,border:`1px solid ${GOLD}70`,borderRadius:3,padding:'1px 6px'}}>Allow (~{tierPct}% depleted)</span>
-              <span style={{fontSize:10,color:STATE_COLORS.abundant,background:STATE_BG.abundant,border:`1px solid ${STATE_BORDER.abundant}`,borderRadius:3,padding:'1px 6px'}}>✦ Abundant</span>
-              <span style={{fontSize:10,color:STATE_COLORS.depleted,background:STATE_BG.depleted,border:`1px solid ${STATE_BORDER.depleted}`,borderRadius:3,padding:'1px 6px'}}> Depleted</span>
+              <span style={{fontSize:FS.xxs,color:SECOND}}>Click each resource to cycle:</span>
+              <span style={{fontSize:FS.xxs,color:MUTED,border:'1px solid #d0c0a8',borderRadius:3,padding:'1px 6px',opacity:0.7}}>Off</span>
+              <span style={{fontSize:FS.xxs,color:GOLD,background:`${GOLD}10`,border:`1px solid ${GOLD}70`,borderRadius:3,padding:'1px 6px'}}>Allow (~{tierPct}% depleted)</span>
+              <span style={{fontSize:FS.xxs,color:STATE_COLORS.abundant,background:STATE_BG.abundant,border:`1px solid ${STATE_BORDER.abundant}`,borderRadius:3,padding:'1px 6px'}}>✦ Abundant</span>
+              <span style={{fontSize:FS.xxs,color:STATE_COLORS.depleted,background:STATE_BG.depleted,border:`1px solid ${STATE_BORDER.depleted}`,borderRadius:3,padding:'1px 6px'}}> Depleted</span>
             </>
         }
       </div>
@@ -303,8 +303,8 @@ export default function ConfigurationPanel(){
     <div style={{padding:'0 16px 14px'}}>
       <div style={{marginBottom:12}}>
         <Lbl>Settlement Name (optional)</Lbl>
-        <input type="text" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:13,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
-        {config.customName&&<div style={{fontSize:11,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
+        <input type="text" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
+        {config.customName&&<div style={{fontSize:FS.xs,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
       </div>
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl>Population</Lbl>
@@ -325,7 +325,7 @@ export default function ConfigurationPanel(){
             {blockTownPlus && <option value="town" disabled style={{color:'#bbb'}}>Town — requires magic or road</option>}
             <option value="custom">Custom…</option>
           </Sel>
-          {blockTownPlus && <div style={{fontSize:10,color:'#c05010',marginTop:4,lineHeight:1.4}}>
+          {blockTownPlus && <div style={{fontSize:FS.xxs,color:'#c05010',marginTop:4,lineHeight:1.4}}>
              Town+ requires a trade route or Magic slider above 0
           </div>}
         </div>
@@ -346,7 +346,7 @@ export default function ConfigurationPanel(){
             {blockIsolated && <option value="isolated" disabled style={{color:'#bbb'}}>Isolated — not available at town+ without magic</option>}
             <option value="mountain_pass">Mountain Pass</option>
           </Sel>
-          {blockIsolated && <div style={{fontSize:10,color:'#c05010',marginTop:4,lineHeight:1.4}}>
+          {blockIsolated && <div style={{fontSize:FS.xxs,color:'#c05010',marginTop:4,lineHeight:1.4}}>
              Isolated unavailable at {config.settType} tier without magic infrastructure
           </div>}
         </div>
@@ -357,7 +357,7 @@ export default function ConfigurationPanel(){
             background: '#f0f4ff',
             border: '1px solid #a0b0e0',
             borderLeft: '3px solid #3a5ab0',
-            borderRadius: 6, padding: '8px 12px', fontSize: 11, lineHeight: 1.55,
+            borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, lineHeight: 1.55,
           }}>
             <span style={{fontWeight:700,color:'#3a5ab0'}}>✦ Magical Trade Infrastructure</span><br/>
             <span style={{color:'#2a3a6a'}}>
@@ -379,7 +379,7 @@ export default function ConfigurationPanel(){
           </Sel>
         </div>
       </div>
-      {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:13,fontFamily:sans,boxSizing:'border-box'}}/></div>}
+      {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl>Culture</Lbl>
           <Sel value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>

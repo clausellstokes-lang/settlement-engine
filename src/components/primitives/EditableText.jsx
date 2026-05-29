@@ -27,6 +27,7 @@
  */
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { FS } from '../theme.js';
 
 const COLORS = Object.freeze({
   inkDeep:    '#1c1409',
@@ -185,7 +186,7 @@ export function EditableText({
         placeholder={placeholder}
         style={inputStyle}
       />
-      <span style={{ fontSize: 10, color: COLORS.muted, marginTop: 3, display: 'block' }}>
+      <span style={{ fontSize: FS.xxs, color: COLORS.muted, marginTop: 3, display: 'block' }}>
         Enter to save · Esc to cancel{multiline ? ' · Shift+Enter for newline' : ''}
         {isEdited && (
           <>
@@ -196,7 +197,7 @@ export function EditableText({
               onClick={onRevert}
               style={{
                 background: 'none', border: 'none', padding: 0,
-                color: COLORS.edited, cursor: 'pointer', fontSize: 10,
+                color: COLORS.edited, cursor: 'pointer', fontSize: FS.xxs,
                 textDecoration: 'underline', fontWeight: 600,
               }}
               title={originalValue ? `Revert to: "${truncate(originalValue, 60)}"` : 'Revert to generated value'}
@@ -221,7 +222,7 @@ export function EditedBadge({ count = null, style = {} }) {
       title="This dossier contains user-edited prose. The engine will preserve these edits across rerolls; the AI overlay will pass them through verbatim."
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
-        fontSize: 10, fontWeight: 700, color: COLORS.edited,
+        fontSize: FS.xxs, fontWeight: 700, color: COLORS.edited,
         background: COLORS.editedBg, border: `1px solid ${COLORS.editedBdr}`,
         borderRadius: 3, padding: '2px 6px',
         textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -246,7 +247,7 @@ function RevertChip({ originalValue, onClick }) {
         borderRadius: 3,
         padding: '0 5px',
         color: COLORS.edited,
-        fontSize: 9,
+        fontSize: FS.micro,
         fontWeight: 700,
         cursor: 'pointer',
         lineHeight: 1.6,

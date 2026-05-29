@@ -123,7 +123,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             aria-label="Close"
             style={{
               background: 'transparent', border: 'none',
-              fontSize: 20, color: '#9C8068', cursor: 'pointer',
+              fontSize: FS.xxl, color: '#9C8068', cursor: 'pointer',
               padding: 0, lineHeight: 1,
             }}
           >×</button>

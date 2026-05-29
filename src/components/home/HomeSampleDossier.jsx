@@ -20,6 +20,7 @@
  */
 
 import { useEffect } from 'react';
+import { FS } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
@@ -93,7 +94,7 @@ export default function HomeSampleDossier() {
           {name}
           <span style={{
             marginLeft: 8,
-            fontSize: 9,
+            fontSize: FS.micro,
             color: MUTED,
             fontFamily: sans,
             letterSpacing: '0.06em',
@@ -122,7 +123,7 @@ export default function HomeSampleDossier() {
               }}
             >
               <div style={{
-                fontSize: 9, fontWeight: 800,
+                fontSize: FS.micro, fontWeight: 800,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
                 color: accent,
               }}>
@@ -144,7 +145,7 @@ export default function HomeSampleDossier() {
       <footer style={{
         padding: '8px 16px 14px',
         borderTop: `1px dashed ${BORDER}`,
-        fontSize: 11, color: MUTED,
+        fontSize: FS.xs, color: MUTED,
         fontStyle: 'italic', textAlign: 'center',
         background: PARCH,
       }}>

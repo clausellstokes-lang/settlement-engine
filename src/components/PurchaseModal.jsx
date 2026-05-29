@@ -169,7 +169,7 @@ export default function PurchaseModal({ onClose }) {
                       position: 'absolute', top: -10, right: -4,
                       padding: '2px 8px', borderRadius: R.md,
                       background: accentColor, color: '#fff',
-                      fontSize: 9, fontWeight: 800, letterSpacing: '0.02em',
+                      fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.02em',
                     }}>
                       {p.discount}
                     </div>

@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import {GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_} from './theme.js';
+import {GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS} from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, Route, Crown, ShieldAlert } from 'lucide-react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {useStore} from '../store/index.js';
@@ -17,14 +17,14 @@ import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 // ── Shared primitives ───────────────────────────────────────────────────────
 
 function Tag({ label, color=GOLD }) {
-  return <span style={{ fontSize:9, fontWeight:800, color, background:`${color}18`, borderRadius:3, padding:'1px 6px', letterSpacing:'0.05em', textTransform:'uppercase', marginRight:4 }}>{label}</span>;
+  return <span style={{ fontSize:FS.micro, fontWeight:800, color, background:`${color}18`, borderRadius:3, padding:'1px 6px', letterSpacing:'0.05em', textTransform:'uppercase', marginRight:4 }}>{label}</span>;
 }
 
 function Row({ label, children, lw=130 }) {
   return (
     <div style={{ display:'flex', gap:8, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
-      <span style={{ fontSize:12, fontWeight:700, color:INK, minWidth:lw, flexShrink:0 }}>{label}</span>
-      <span style={{ fontSize:12, color:SEC, lineHeight:1.5 }}>{children}</span>
+      <span style={{ fontSize:FS.sm, fontWeight:700, color:INK, minWidth:lw, flexShrink:0 }}>{label}</span>
+      <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{children}</span>
     </div>
   );
 }
@@ -35,10 +35,10 @@ function Card({ title, sub, children, accent=GOLD }) {
       padding:'10px 12px', background:'rgba(255,251,245,0.95)', marginBottom:8 }}>
       <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:sub?2:6 }}>
         <span style={{ fontFamily:serif_, fontSize:14, fontWeight:700, color:INK, flex:1 }}>{title}</span>
-        {sub && <span style={{ fontSize:10, fontWeight:700, color:accent, background:`${accent}14`,
+        {sub && <span style={{ fontSize:FS.xxs, fontWeight:700, color:accent, background:`${accent}14`,
           borderRadius:8, padding:'1px 8px', textTransform:'uppercase', letterSpacing:'0.05em' }}>{sub}</span>}
       </div>
-      <div style={{ fontSize:12, color:SEC, lineHeight:1.55 }}>{children}</div>
+      <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{children}</div>
     </div>
   );
 }
@@ -86,25 +86,25 @@ const CAT_COLORS = { Economic:'#a0762a', Military:'#8b1a1a', Religious:'#1a4a2a'
 
 function TiersTab({ _search='' }) {
   return <>
-    <p id="tiers" style={{ fontSize:12, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
+    <p id="tiers" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
       Tier determines the maximum institution count, population band, and available institution categories.
     </p>
     {[['Thorp','20-80','#8b1a1a','Single institution. Subsistence only.'],['Hamlet','80-400','#a05010','2-3 institutions. Local subsistence. Minimal trade.'],['Village','400-900','#a0762a','4-6 institutions. Surplus production begins. Weekly market.'],['Town','900-4,000','#1a5a28','7-10 institutions. Specialization appears. Guilds form.'],['City','4,000-25,000','#1a3a7a','11-14 institutions. Full institutional diversity. Factional politics.'],['Metropolis','25,000+','#4a1a6a','15+ institutions. All systems active. Complex faction dynamics.']].map(([name,pop,color,desc])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
-        <div style={{ minWidth:90, flexShrink:0 }}><div style={{fontSize:13,fontWeight:700,color}}>{name}</div><div style={{fontSize:10,color:MUT}}>{pop} pop.</div></div>
-        <div style={{ fontSize:12, color:SEC, lineHeight:1.5 }}>{desc}</div>
+        <div style={{ minWidth:90, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color}}>{name}</div><div style={{fontSize:FS.xxs,color:MUT}}>{pop} pop.</div></div>
+        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</div>
       </div>))}
     <div id="trade-routes" style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Trade Route Access</div>
     {[['Road','Standard land access. Moderate trade volume.','#6b5340'],['Crossroads','Multiple road intersections. Higher institution diversity.','#a0762a'],['Port','Sea or river access. Maritime exports, fishing, naval institutions.','#1a3a7a'],['River','Inland waterway. Cheaper bulk movement. Mill and granary likely.','#1a5a28'],['Mountain Pass','Strategic chokepoint. Toll and garrison institutions likely.','#8b1a1a'],['Isolated','No trade route. Subsistence by necessity.','#4a1a4a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
-        <span style={{ fontSize:11, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
-        <span style={{ fontSize:12, color:SEC, lineHeight:1.5 }}>{desc}</span>
+        <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
+        <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
     <div id="threat" style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Monster Threat</div>
     {[['Safe','Civilian institutions dominate. Military is law enforcement only.','#1a5a28'],['Frontier','Active but managed threat. Walls and garrison elevated.','#a0762a'],['Dangerous','Constant threat. Military dominates. Civilian life constrained.','#8a5010'],['Plagued','Active monster plague. Crisis conditions. Siege-like dynamics.','#8b1a1a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
-        <span style={{ fontSize:11, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
-        <span style={{ fontSize:12, color:SEC, lineHeight:1.5 }}>{desc}</span>
+        <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
+        <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
   </>;
 }
@@ -125,18 +125,18 @@ function PowerTab_({ search='' }) {
   const [cat, setCat] = useState('All');
   const filtered = ARCHETYPES.filter(a => (cat==='All'||a.cat===cat) && (!search||a.name.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search)));
   return <>
-    <p style={{ fontSize:12, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes emerge when slider combinations cross thresholds. Faction power = institutional base x public legitimacy.</p>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes emerge when slider combinations cross thresholds. Faction power = institutional base x public legitimacy.</p>
     <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:12 }}>
-      {cats.map(c => <button key={c} onClick={() => setCat(c)} style={{ padding:'3px 10px', borderRadius:12, fontSize:11, fontWeight:700, cursor:'pointer', border:'1px solid', background:cat===c?INK:'transparent', color:cat===c?'#f5ede0':SEC, borderColor:cat===c?INK:BOR }}>{c}</button>)}
+      {cats.map(c => <button key={c} onClick={() => setCat(c)} style={{ padding:'3px 10px', borderRadius:12, fontSize:FS.xs, fontWeight:700, cursor:'pointer', border:'1px solid', background:cat===c?INK:'transparent', color:cat===c?'#f5ede0':SEC, borderColor:cat===c?INK:BOR }}>{c}</button>)}
     </div>
     <div id="archetypes" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))', gap:8 }}>
       {filtered.map(a => (
         <div key={a.name} style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${CAT_COLORS[a.cat]||GOLD}`, borderRadius:7, padding:'10px 12px', background:'rgba(255,251,245,0.95)' }}>
           <div style={{ display:'flex', alignItems:'center', gap:6, marginBottom:4 }}>
-            <span style={{ fontFamily:serif_, fontSize:13, fontWeight:700, color:INK, flex:1 }}>{a.name}</span>
+            <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, flex:1 }}>{a.name}</span>
             <Tag label={a.cat} color={CAT_COLORS[a.cat]||GOLD}/>
           </div>
-          <div style={{ fontSize:10, color:MUT, fontStyle:'italic', marginBottom:4 }}>{a.cond}</div>
+          <div style={{ fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginBottom:4 }}>{a.cond}</div>
           <div style={{ fontSize:11.5, color:SEC, lineHeight:1.5 }}>{a.desc}</div>
         </div>))}
     </div>
@@ -164,24 +164,24 @@ function StressTab({ search='' }) {
   ];
   return <>
     <div id="stress" style={{ padding:'10px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`, borderLeft:`3px solid ${GOLD}`, borderRadius:7, marginBottom:12 }}>
-      <div style={{ fontSize:11, fontWeight:800, color:GOLD, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>Stresses Compound</div>
-      <p style={{ fontSize:12, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by factions.</p>
+      <div style={{ fontSize:FS.xs, fontWeight:800, color:GOLD, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>Stresses Compound</div>
+      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by factions.</p>
     </div>
     {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.description||s.desc||'').toLowerCase().includes(search)).map(s => (
       <div key={s.label||s.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
-        <div style={{ fontSize:13, fontWeight:700, color:'#8b1a1a', marginBottom:3 }}>{s.label}</div>
-        <div style={{ fontSize:12, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||'—'}</div>
+        <div style={{ fontSize:FS.md, fontWeight:700, color:'#8b1a1a', marginBottom:3 }}>{s.label}</div>
+        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||'—'}</div>
       </div>))}
   </>;
 }
 
 function NeighbourTab({ search='' }) {
   return <>
-    <p id="neighbours" style={{ fontSize:12, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, faction weights, and institution probabilities before generation.</p>
+    <p id="neighbours" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, faction weights, and institution probabilities before generation.</p>
     {REL_TYPES.filter(r=>!search||r.label.toLowerCase().includes(search)||r.effect.toLowerCase().includes(search)).map(r => (
       <div key={r.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
-        <span style={{ fontSize:11, fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, borderRadius:4, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
-        <span style={{ fontSize:12, color:SEC, lineHeight:1.5 }}>{r.effect}</span>
+        <span style={{ fontSize:FS.xs, fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, borderRadius:4, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
+        <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{r.effect}</span>
       </div>))}
     <div style={{ fontFamily:serif_, fontSize:14, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Cross-Settlement Systems</div>
     {[['NPC Contacts','Named NPCs from both settlements paired by category and relationship type.'],['Cross-Settlement Conflicts','Mechanically-derived disputes: market contests, border incursions, intelligence operations.'],['Bidirectional Cascade','Renaming an NPC or faction propagates to all linked partner records.'],['Delink Cleanup','Removing a link removes all cross-settlement contacts and conflicts from both settlements.']].map(([label,desc])=><Row key={label} label={label} lw={160}>{desc}</Row>)}
@@ -203,7 +203,7 @@ function InstitutionsTab({ _config, search }) {
     return all.filter(i => (i.name||'').toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q))).slice(0,80);
   }, [all, search]);
   return <>
-    <p style={{ fontSize:12, color:MUT, lineHeight:1.5, margin:'0 0 10px', fontStyle:'italic' }}>
+    <p style={{ fontSize:FS.sm, color:MUT, lineHeight:1.5, margin:'0 0 10px', fontStyle:'italic' }}>
       {search ? `${filtered.length} results` : `Showing first 48 of ${all.length} institutions. Use search to filter.`}
     </p>
     <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:6 }}>
@@ -214,7 +214,7 @@ function InstitutionsTab({ _config, search }) {
             {inst.required && <Tag label="Core" color='#1a3a7a'/>}
           </div>
           {inst.category && <Tag label={inst.category} color={catColors[inst.category]||GOLD}/>}
-          {inst.desc && <div style={{ fontSize:11, color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
+          {inst.desc && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
         </div>))}
     </div>
   </>;
@@ -311,7 +311,7 @@ function CustomContentUpsell({ existingCount, isAnon }) {
         Custom Compendium &mdash; Premium
       </div>
       <div style={{
-        fontSize: 13, color: SEC, lineHeight: 1.55, marginBottom: 16,
+        fontSize: FS.md, color: SEC, lineHeight: 1.55, marginBottom: 16,
         maxWidth: 460, margin: '0 auto 16px',
       }}>
         Build your own institutions, resources, stressors, trade goods, power presets, and defense
@@ -322,7 +322,7 @@ function CustomContentUpsell({ existingCount, isAnon }) {
         <div style={{
           padding: '10px 14px', background: 'rgba(160,118,42,0.10)',
           border: `1px solid ${GOLD}55`, borderRadius: 7,
-          fontSize: 12, color: GOLD, fontWeight: 600, marginBottom: 16,
+          fontSize: FS.sm, color: GOLD, fontWeight: 600, marginBottom: 16,
           maxWidth: 460, margin: '0 auto 16px',
         }}>
           You have <strong>{existingCount}</strong> grandfathered custom item{existingCount === 1 ? '' : 's'}.
@@ -331,7 +331,7 @@ function CustomContentUpsell({ existingCount, isAnon }) {
       )}
 
       {isAnon ? (
-        <div style={{ fontSize: 12, color: MUT }}>Sign in and upgrade to Premium to unlock.</div>
+        <div style={{ fontSize: FS.sm, color: MUT }}>Sign in and upgrade to Premium to unlock.</div>
       ) : (
         <button
           onClick={() => setPurchaseModalOpen(true)}
@@ -339,7 +339,7 @@ function CustomContentUpsell({ existingCount, isAnon }) {
             padding: '10px 22px',
             background: 'linear-gradient(135deg, #7c3aed 0%, #5a2a8a 100%)',
             color: '#fff', border: 'none', borderRadius: 7, cursor: 'pointer',
-            fontSize: 13, fontWeight: 700, fontFamily: sans, letterSpacing: '0.04em',
+            fontSize: FS.md, fontWeight: 700, fontFamily: sans, letterSpacing: '0.04em',
             boxShadow: '0 3px 12px rgba(124,58,237,0.35)',
           }}
         >
@@ -365,7 +365,7 @@ function ReadOnlyCustomContentList({ search }) {
   return (
     <div style={{ marginTop: 16 }}>
       <div style={{
-        fontSize: 11, fontWeight: 700, color: MUT, textTransform: 'uppercase',
+        fontSize: FS.xs, fontWeight: 700, color: MUT, textTransform: 'uppercase',
         letterSpacing: '0.05em', marginBottom: 8,
       }}>
         Grandfathered items &middot; read only
@@ -377,7 +377,7 @@ function ReadOnlyCustomContentList({ search }) {
           return (
             <button key={c.key} onClick={() => setActiveCat(c.key)} style={{
               display: 'flex', alignItems: 'center', gap: 4, padding: '4px 10px',
-              borderRadius: 12, fontSize: 11,
+              borderRadius: 12, fontSize: FS.xs,
               fontWeight: activeCat === c.key ? 700 : 500, cursor: 'pointer',
               border: `1px solid ${activeCat === c.key ? c.color : BOR}`,
               background: activeCat === c.key ? `${c.color}14` : 'transparent',
@@ -385,7 +385,7 @@ function ReadOnlyCustomContentList({ search }) {
             }}>
               <c.Icon size={11} /> {c.label}
               <span style={{
-                fontSize: 9, fontWeight: 700, background: `${c.color}20`, color: c.color,
+                fontSize: FS.micro, fontWeight: 700, background: `${c.color}20`, color: c.color,
                 borderRadius: 6, padding: '0 4px', marginLeft: 2,
               }}>{count}</span>
             </button>
@@ -393,7 +393,7 @@ function ReadOnlyCustomContentList({ search }) {
         })}
       </div>
       {filtered.length === 0 ? (
-        <div style={{ padding: '14px', textAlign: 'center', fontSize: 12, color: MUT }}>
+        <div style={{ padding: '14px', textAlign: 'center', fontSize: FS.sm, color: MUT }}>
           No items in {catDef.label.toLowerCase()}.
         </div>
       ) : (
@@ -404,14 +404,14 @@ function ReadOnlyCustomContentList({ search }) {
               padding: '8px 12px', background: 'rgba(255,251,245,0.95)', opacity: 0.85,
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ fontFamily: serif_, fontSize: 13, fontWeight: 700, color: INK, flex: 1 }}>
+                <span style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK, flex: 1 }}>
                   {item.name}
                 </span>
                 <Tag label="Local" color="#7c3aed" />
                 {item.category && <Tag label={item.category} color={catDef.color} />}
               </div>
               {item.description && (
-                <div style={{ fontSize: 11, color: SEC, lineHeight: 1.4, marginTop: 4 }}>
+                <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.4, marginTop: 4 }}>
                   {item.description}
                 </div>
               )}
@@ -460,7 +460,7 @@ function DependencySummary({ deps, item }) {
       {fields.map(({ dep, entries }) => (
         <div key={dep.key} style={{ display:'flex', gap:6, alignItems:'flex-start', marginTop:3 }}>
           <span style={{
-            fontSize:9, fontWeight:700, color:MUT, minWidth:84, flexShrink:0,
+            fontSize:FS.micro, fontWeight:700, color:MUT, minWidth:84, flexShrink:0,
             textTransform:'uppercase', letterSpacing:'0.04em', paddingTop:2,
           }}>{dep.label.replace(/\s*\(.*\)$/, '')}</span>
           <div style={{ display:'flex', flexWrap:'wrap', gap:3, flex:1 }}>
@@ -469,7 +469,7 @@ function DependencySummary({ deps, item }) {
                 key={`${e.refId}-${i}`}
                 title={e.missing ? `Reference missing: ${e.refId}` : ''}
                 style={{
-                  fontSize:9, fontWeight:700,
+                  fontSize:FS.micro, fontWeight:700,
                   color: e.missing ? '#8b1a1a' : (e.source==='custom' ? '#7c3aed' : SEC),
                   background: e.missing ? '#fdebec' : (e.source==='custom' ? '#7c3aed14' : '#0001'),
                   border:`1px solid ${e.missing ? '#f0c8cc' : (e.source==='custom' ? '#7c3aed44' : BOR)}`,
@@ -484,7 +484,7 @@ function DependencySummary({ deps, item }) {
       ))}
       {totalMissing > 0 && (
         <div style={{
-          marginTop:4, fontSize:10, color:'#8b1a1a',
+          marginTop:4, fontSize:FS.xxs, color:'#8b1a1a',
           fontStyle:'italic',
         }}>
           {totalMissing} dangling reference{totalMissing===1?'':'s'} — edit this item to fix.
@@ -518,17 +518,17 @@ function DependenciesSection({ deps, draft, setDraft }) {
         }}
       >
         <span style={{
-          fontSize:11, fontWeight:700, color:'#5a2a8a',
+          fontSize:FS.xs, fontWeight:700, color:'#5a2a8a',
           textTransform:'uppercase', letterSpacing:'0.05em',
         }}>
           Dependencies {total > 0 && (
             <span style={{
               marginLeft:6, background:'#7c3aed20', color:'#7c3aed',
-              borderRadius:8, padding:'1px 6px', fontSize:9,
+              borderRadius:8, padding:'1px 6px', fontSize:FS.micro,
             }}>{total}</span>
           )}
         </span>
-        <span style={{ marginLeft:'auto', fontSize:10, color:MUT }}>
+        <span style={{ marginLeft:'auto', fontSize:FS.xxs, color:MUT }}>
           {open ? '▾' : '▸'}
         </span>
       </button>
@@ -537,7 +537,7 @@ function DependenciesSection({ deps, draft, setDraft }) {
           {deps.map(dep => (
             <div key={dep.key}>
               <label style={{
-                fontSize:10, fontWeight:700, color:MUT,
+                fontSize:FS.xxs, fontWeight:700, color:MUT,
                 textTransform:'uppercase', letterSpacing:'0.04em',
                 display:'block', marginBottom:3,
               }}>{dep.label}</label>
@@ -550,7 +550,7 @@ function DependenciesSection({ deps, draft, setDraft }) {
               />
               {dep.hint && (
                 <div style={{
-                  fontSize:10, color:MUT, fontStyle:'italic', marginTop:2,
+                  fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginTop:2,
                 }}>{dep.hint}</div>
               )}
             </div>
@@ -616,7 +616,7 @@ function CustomContentManager({ search }) {
 
   const renderField = (field) => {
     const val = draft[field] || '';
-    const shared = { value:val, onChange:e => setDraft(d=>({...d,[field]:e.target.value})), style:{ width:'100%', padding:'5px 8px', border:`1px solid ${BOR}`, borderRadius:4, fontSize:12, fontFamily:sans, color:INK, outline:'none', background:CARD } };
+    const shared = { value:val, onChange:e => setDraft(d=>({...d,[field]:e.target.value})), style:{ width:'100%', padding:'5px 8px', border:`1px solid ${BOR}`, borderRadius:4, fontSize:FS.sm, fontFamily:sans, color:INK, outline:'none', background:CARD } };
 
     switch(field) {
       case 'category':
@@ -652,7 +652,7 @@ function CustomContentManager({ search }) {
                     setDraft(d => ({ ...d, affects: Array.from(next) }));
                   }}
                   style={{
-                    padding:'2px 8px', borderRadius:10, fontSize:10, fontWeight:700,
+                    padding:'2px 8px', borderRadius:10, fontSize:FS.xxs, fontWeight:700,
                     cursor:'pointer', border:`1px solid ${on?'#8b1a1a':BOR}`,
                     background:on?'#8b1a1a14':'transparent',
                     color:on?'#8b1a1a':SEC, fontFamily:sans, letterSpacing:'0.03em',
@@ -670,13 +670,13 @@ function CustomContentManager({ search }) {
 
   const renderForm = () => (
     <div style={{ padding:'10px 12px', background:'#f8f4ff', border:'1px solid #d0c0e0', borderRadius:7, marginBottom:10 }}>
-      <div style={{ fontSize:11, fontWeight:700, color:'#5a2a8a', textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8 }}>
+      <div style={{ fontSize:FS.xs, fontWeight:700, color:'#5a2a8a', textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8 }}>
         {editingId ? 'Edit Item' : 'New Custom ' + catDef.label.slice(0,-1)}
       </div>
       <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
         {catDef.fields.map(f => (
           <div key={f}>
-            <label style={{ fontSize:10, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em' }}>{f.replace(/([A-Z])/g,' $1')}</label>
+            <label style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em' }}>{f.replace(/([A-Z])/g,' $1')}</label>
             {renderField(f)}
           </div>
         ))}
@@ -692,8 +692,8 @@ function CustomContentManager({ search }) {
       )}
 
       <div style={{ display:'flex', gap:6, marginTop:8 }}>
-        <button onClick={handleSave} disabled={!draft.name?.trim()} style={{ padding:'5px 14px', background:draft.name?.trim()?'#5a2a8a':'#ccc', color:'#fff', border:'none', borderRadius:4, cursor:draft.name?.trim()?'pointer':'not-allowed', fontSize:11, fontWeight:700, fontFamily:sans }}>{editingId?'Update':'Add'}</button>
-        <button onClick={resetDraft} style={{ padding:'5px 10px', background:CARD, color:SEC, border:`1px solid ${BOR}`, borderRadius:4, cursor:'pointer', fontSize:11, fontFamily:sans }}>Cancel</button>
+        <button onClick={handleSave} disabled={!draft.name?.trim()} style={{ padding:'5px 14px', background:draft.name?.trim()?'#5a2a8a':'#ccc', color:'#fff', border:'none', borderRadius:4, cursor:draft.name?.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>{editingId?'Update':'Add'}</button>
+        <button onClick={resetDraft} style={{ padding:'5px 10px', background:CARD, color:SEC, border:`1px solid ${BOR}`, borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontFamily:sans }}>Cancel</button>
       </div>
     </div>
   );
@@ -706,9 +706,9 @@ function CustomContentManager({ search }) {
           const count = (customContent[c.key]||[]).length;
           return (
             <button key={c.key} onClick={() => { setActiveCat(c.key); resetDraft(); }}
-              style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', borderRadius:12, fontSize:11, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
+              style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', borderRadius:12, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
               <c.Icon size={11}/> {c.label}
-              {count > 0 && <span style={{ fontSize:9, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
+              {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
             </button>
           );
         })}
@@ -716,7 +716,7 @@ function CustomContentManager({ search }) {
 
       {/* Add button */}
       {!addingNew && !editingId && (
-        <button onClick={() => { setAddingNew(true); setDraft({}); }} style={{ display:'flex', alignItems:'center', gap:5, padding:'6px 12px', background:'#5a2a8a', color:'#fff', border:'none', borderRadius:5, cursor:'pointer', fontSize:11, fontWeight:700, fontFamily:sans, marginBottom:10 }}>
+        <button onClick={() => { setAddingNew(true); setDraft({}); }} style={{ display:'flex', alignItems:'center', gap:5, padding:'6px 12px', background:'#5a2a8a', color:'#fff', border:'none', borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans, marginBottom:10 }}>
           <Plus size={12}/> Add Custom {catDef.label.slice(0,-1)}
         </button>
       )}
@@ -726,7 +726,7 @@ function CustomContentManager({ search }) {
 
       {/* Items list */}
       {filtered.length === 0 ? (
-        <div style={{ padding:'20px 16px', textAlign:'center', fontSize:12, color:MUT }}>
+        <div style={{ padding:'20px 16px', textAlign:'center', fontSize:FS.sm, color:MUT }}>
           No custom {catDef.label.toLowerCase()} yet. Click "Add" to create one.
         </div>
       ) : (
@@ -734,21 +734,21 @@ function CustomContentManager({ search }) {
           {filtered.map(item => (
             <div key={item.id} style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid #7c3aed`, borderRadius:7, padding:'8px 12px', background:'rgba(255,251,245,0.95)' }}>
               <div style={{ display:'flex', alignItems:'center', gap:6 }}>
-                <span style={{ fontFamily:serif_, fontSize:13, fontWeight:700, color:INK, flex:1 }}>{item.name}</span>
+                <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, flex:1 }}>{item.name}</span>
                 <Tag label="Custom" color='#7c3aed'/>
                 {item.category && <Tag label={item.category} color={catDef.color}/>}
                 <button onClick={() => handleEdit(item)} style={{ background:'none', border:'none', color:MUT, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
                 <button onClick={() => setDeleteId(deleteId===item.id?null:item.id)} style={{ background:'none', border:'none', color:'#8b1a1a', cursor:'pointer', padding:2 }}><Trash2 size={11}/></button>
               </div>
-              {item.description && <div style={{ fontSize:11, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description}</div>}
+              {item.description && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description}</div>}
               {item.tags && <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>{(typeof item.tags==='string'?item.tags.split(','):item.tags).map((t,i)=><Tag key={i} label={t.trim()} color={MUT}/>)}</div>}
-              {item.tierMin && <div style={{ fontSize:10, color:MUT, marginTop:3 }}>Min tier: {item.tierMin}</div>}
+              {item.tierMin && <div style={{ fontSize:FS.xxs, color:MUT, marginTop:3 }}>Min tier: {item.tierMin}</div>}
               {/* Affects pills (stressors only) */}
               {Array.isArray(item.affects) && item.affects.length > 0 && (
                 <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>
                   {item.affects.map((a, i) => (
                     <span key={i} style={{
-                      fontSize:9, fontWeight:700, color:'#8b1a1a',
+                      fontSize:FS.micro, fontWeight:700, color:'#8b1a1a',
                       background:'#8b1a1a14', border:'1px solid #8b1a1a44',
                       borderRadius:8, padding:'1px 6px',
                       textTransform:'uppercase', letterSpacing:'0.04em',
@@ -909,12 +909,12 @@ export default function CompendiumPanel({ config, standalone=false }) {
     <div style={{ borderRadius:standalone?0:8, overflow:'hidden' }}>
       {/* Mode toggle */}
       <div style={{ display:'flex', background:'#f5ede0', borderBottom:`1px solid ${BOR}`, padding:'6px 14px', gap:4 }}>
-        <button onClick={()=>setMode('catalog')} style={{ flex:1, padding:'7px 12px', borderRadius:6, border:`1px solid ${mode==='catalog'?GOLD:BOR}`, background:mode==='catalog'?GOLD_BG:'transparent', color:mode==='catalog'?GOLD:SEC, fontSize:12, fontWeight:mode==='catalog'?700:500, fontFamily:sans, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
+        <button onClick={()=>setMode('catalog')} style={{ flex:1, padding:'7px 12px', borderRadius:6, border:`1px solid ${mode==='catalog'?GOLD:BOR}`, background:mode==='catalog'?GOLD_BG:'transparent', color:mode==='catalog'?GOLD:SEC, fontSize:FS.sm, fontWeight:mode==='catalog'?700:500, fontFamily:sans, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
           <Building2 size={13}/> Built-in Catalog
         </button>
-        <button onClick={()=>setMode('custom')} style={{ flex:1, padding:'7px 12px', borderRadius:6, border:`1px solid ${mode==='custom'?'#7c3aed':'transparent'}`, background:mode==='custom'?'rgba(124,58,237,0.1)':'transparent', color:mode==='custom'?'#7c3aed':SEC, fontSize:12, fontWeight:mode==='custom'?700:500, fontFamily:sans, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
+        <button onClick={()=>setMode('custom')} style={{ flex:1, padding:'7px 12px', borderRadius:6, border:`1px solid ${mode==='custom'?'#7c3aed':'transparent'}`, background:mode==='custom'?'rgba(124,58,237,0.1)':'transparent', color:mode==='custom'?'#7c3aed':SEC, fontSize:FS.sm, fontWeight:mode==='custom'?700:500, fontFamily:sans, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
           <Sparkles size={13}/> My Custom Content
-          {customContentCount > 0 && <span style={{ fontSize:9, fontWeight:700, background:'rgba(124,58,237,0.15)', color:'#7c3aed', borderRadius:8, padding:'1px 6px' }}>{customContentCount}</span>}
+          {customContentCount > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:'rgba(124,58,237,0.15)', color:'#7c3aed', borderRadius:8, padding:'1px 6px' }}>{customContentCount}</span>}
         </button>
       </div>
 
@@ -926,14 +926,14 @@ export default function CompendiumPanel({ config, standalone=false }) {
           <div style={{ background:PARCH, borderBottom:`1px solid ${BOR}` }}>
             <div style={{ display:'flex', overflowX:'auto', gap:0 }}>
               {TABS.map(({ id, label, Icon }) => (
-                <button key={id} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'8px 13px', background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:11, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
+                <button key={id} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'8px 13px', background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
                   <Icon size={12}/> {label}
                 </button>))}
             </div>
             <div style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 14px', borderTop:`1px solid ${BOR}` }}>
               <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
-              <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:12, color:INK, outline:'none' }}/>
-              {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:13, padding:0 }}>x</button>}
+              <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
+              {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:FS.md, padding:0 }}>x</button>}
             </div>
           </div>
           <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', maxHeight:'60vh', overflowY:'auto' }}>
@@ -947,8 +947,8 @@ export default function CompendiumPanel({ config, standalone=false }) {
           {/* Custom content search */}
           <div style={{ display:'flex', alignItems:'center', gap:8, padding:'8px 14px', background:PARCH, borderBottom:`1px solid ${BOR}` }}>
             <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
-            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:12, color:INK, outline:'none' }}/>
-            {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:13, padding:0 }}>x</button>}
+            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
+            {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:FS.md, padding:0 }}>x</button>}
           </div>
           <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', maxHeight:'60vh', overflowY:'auto' }}>
             <CustomContentManager search={search.toLowerCase()}/>

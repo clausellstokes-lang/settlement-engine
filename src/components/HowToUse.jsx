@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_ } from './theme.js';
+import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS } from './theme.js';
 import { BookOpen, Zap, Star, Cpu, List } from 'lucide-react';
 
 
@@ -15,9 +15,9 @@ function Insight({ title, children }) {
   return (
     <div style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`, borderRadius:7,
       padding:'10px 12px', background:CARD, marginBottom:8 }}>
-      <div style={{ fontSize:11, fontWeight:800, color:GOLD, textTransform:'uppercase',
+      <div style={{ fontSize:FS.xs, fontWeight:800, color:GOLD, textTransform:'uppercase',
         letterSpacing:'0.06em', marginBottom:5 }}>{title}</div>
-      <p style={{ fontSize:12, color:SEC, lineHeight:1.6, margin:0 }}>{children}</p>
+      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:0 }}>{children}</p>
     </div>
   );
 }
@@ -26,7 +26,7 @@ function Step({ n, children }) {
   return (
     <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start' }}>
       <div style={{ width:22, height:22, borderRadius:'50%', background:GOLD, color:'#fff',
-        fontSize:11, fontWeight:800, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:1 }}>
+        fontSize:FS.xs, fontWeight:800, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:1 }}>
         {n}
       </div>
       <p style={{ fontSize:12.5, color:INK, lineHeight:1.6, margin:0 }}>{children}</p>
@@ -38,7 +38,7 @@ function Tip({ children }) {
   return (
     <div style={{ padding:'8px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`,
       borderLeft:`3px solid ${GOLD}`, borderRadius:5, marginTop:12 }}>
-      <p style={{ fontSize:12, color:SEC, lineHeight:1.55, margin:0 }}>{children}</p>
+      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>{children}</p>
     </div>
   );
 }
@@ -46,8 +46,8 @@ function Tip({ children }) {
 function Row({ label, children, lw=120 }) {
   return (
     <div style={{ display:'flex', gap:8, padding:'5px 0', borderBottom:`1px solid ${BOR}` }}>
-      <span style={{ fontSize:12, fontWeight:700, color:INK, minWidth:lw, flexShrink:0 }}>{label}</span>
-      <span style={{ fontSize:12, color:SEC, lineHeight:1.5 }}>{children}</span>
+      <span style={{ fontSize:FS.sm, fontWeight:700, color:INK, minWidth:lw, flexShrink:0 }}>{label}</span>
+      <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{children}</span>
     </div>
   );
 }
@@ -59,25 +59,25 @@ function QuickTab() {
       <div style={{ fontFamily:serif_, fontSize:16, fontWeight:600, color:GOLD, marginBottom:6 }}>
         A settlement generator that thinks — and stays within your constraints.
       </div>
-      <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
+      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
         Most generators roll on a table. This one simulates. Every output — institutions, NPC secrets,
         faction tensions, export economy — emerges from interlocking mechanical relationships that governed
         real historical settlements. The outputs aren't random. They're derived.
       </p>
-      <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
+      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
         <strong style={{ color:GOLD }}>Constraint-driven</strong> is the core principle. You don't describe
         what you want — you constrain what's possible. Sliders, stress conditions, forced institutions,
         terrain, neighbour relationships: each is a constraint. The settlement that comes out is the only
         coherent settlement that satisfies all your constraints simultaneously. That's meaningfully different
         from rolling tables, natural language prompting, or selecting from a list.
       </p>
-      <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
+      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
         <strong style={{ color:GOLD }}>Coherence</strong> follows from constraint. A struggling frontier town
         with high criminal priority will have a corrupt guard, underfunded walls, a black market, and NPCs
         whose secrets reflect exactly that pressure — because all those outputs are derived from the same
         constraint set, not generated independently.
       </p>
-      <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
+      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
         <strong style={{ color:GOLD }}>Narrative Refinement Layer</strong> is built in. The settlement
         itself is simulated, not AI-generated — but you can optionally refine the simulator's output
         into table-ready prose. Hit the purple button in any saved settlement and the layer
@@ -86,7 +86,7 @@ function QuickTab() {
         actually simulated. The refinement augments the outputs rather than replacing them, giving
         you something ready for the table without transcribing anything.
       </p>
-      <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.7, margin:0 }}>
+      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:0 }}>
         <strong style={{ color:GOLD }}>Narrative AI Prompt</strong> is for deeper work. The export
         button packages the full settlement brief — economy, power structure, NPC goals and secrets,
         stress conditions, history — as a structured prompt for any external AI tool. Because the
@@ -95,7 +95,7 @@ function QuickTab() {
       </p>
     </div>
 
-    <div style={{ fontFamily:serif_, fontSize:15, fontWeight:600, color:INK, marginBottom:10 }}>
+    <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, marginBottom:10 }}>
       First settlement in 60 seconds
     </div>
     <Step n={1}>On the Create tab, pick a <strong>mode</strong> — <strong>Quick Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
@@ -114,10 +114,10 @@ function QuickTab() {
 
 function PowerTab() {
   return <>
-    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, marginBottom:8 }}>
+    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, marginBottom:8 }}>
       Sliders, Stress & Institution Control
     </div>
-    <p style={{ fontSize:12, color:SEC, lineHeight:1.6, marginBottom:10 }}>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
       The five sliders compete for institutional probability. Raising Economy doesn't suppress Military —
       it makes economic institutions more likely. High Religion + low Magic triggers heresy suppression.
       High Criminal + low Military enables shadow governance. Think of sliders as describing what the
@@ -128,10 +128,10 @@ function PowerTab() {
     <Step n={3}>Multiple stresses <strong>compound</strong>. Famine + Political Fracture means food distribution is contested by factions, not just scarce. The DM Summary names the compound condition.</Step>
     <Tip>Forces and exclusions persist through regeneration. Configure once, generate many variations.</Tip>
 
-    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>
+    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>
       Linking Settlements as Neighbours
     </div>
-    <p style={{ fontSize:12, color:SEC, lineHeight:1.6, marginBottom:10 }}>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
       Generate settlements that know about each other. The relationship type modifies the economic engine,
       faction weights, and institution probabilities. All linking is done from the <strong>Settlements</strong> tab.
     </p>
@@ -142,10 +142,10 @@ function PowerTab() {
     <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
     <Tip>Relationship types matter mechanically. A Rival suppresses overlapping exports and elevates criminal presence. A Patron creates dependency chains in the client's economy. A Cold War generates intelligence NPCs on both sides.</Tip>
 
-    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>
+    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>
       Managing Saved Settlements &amp; Campaigns
     </div>
-    <p style={{ fontSize:12, color:SEC, lineHeight:1.6, marginBottom:10 }}>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
       The Settlements tab is your campaign library — saves, campaigns, linking, and map placement all live here.
     </p>
     <Step n={1}><strong>Save</strong> after generating to store a settlement in your library.</Step>
@@ -159,7 +159,7 @@ function PowerTab() {
 
 function LogicTab() {
   return <>
-    <p style={{ fontSize:12, color:SEC, lineHeight:1.6, marginBottom:12 }}>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:12 }}>
       Understanding these mechanics lets you use the generator as a world-building tool rather than a
       random oracle. The outputs aren't random — they're derived.
     </p>
@@ -260,20 +260,20 @@ function PhilosophyTab() {
       <div style={{ fontFamily:serif_, fontSize:16, fontWeight:600, color:GOLD, marginBottom:8 }}>
         Discover your own world.
       </div>
-      <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.75, margin:'0 0 10px' }}>
+      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.75, margin:'0 0 10px' }}>
         The settlement that emerges from your constraints isn't one you scripted — it's one you
         uncovered. You set the conditions of your world: the terrain, the trade pressures, the
         regional history you've established. The generator derives what a settlement in those
         conditions would actually look like. What appears is genuinely new to you, even though
         you built the world it lives in.
       </p>
-      <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.75, margin:'0 0 10px' }}>
+      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.75, margin:'0 0 10px' }}>
         Every explorer of their own world is bounded by three things: <strong style={{color:GOLD}}>discovery</strong> — what
         you find when you arrive, <strong style={{color:GOLD}}>disappointment</strong> — what isn't
         there, and <strong style={{color:GOLD}}>ingenuity</strong> — what you make of both. These
         aren't limitations of the tool. They're the texture of world-building done honestly.
       </p>
-      <p style={{ fontSize:12, color:'#c8b098', lineHeight:1.75, margin:0 }}>
+      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.75, margin:0 }}>
         Every settlement this tool produces is meant to be woven into your world, not dropped into it.
         Rename the NPCs. Adjust the factions to fit your regional politics. Keep what fits; change
         what doesn't. The generator gives you a coherent foundation — what you build on top is yours.
@@ -359,7 +359,7 @@ function PhilosophyTab() {
 
 function RefTab() {
   return <>
-    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'0 0 8px' }}>Navigation</div>
+    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>Navigation</div>
     {[
       ['Create','The generation wizard. Two modes: Quick (minimal config) and Advanced (step-by-step with full control).'],
       ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
@@ -368,7 +368,7 @@ function RefTab() {
       ['How to Use','This guide.'],
     ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
 
-    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Settlement Detail Tabs</div>
+    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Settlement Detail Tabs</div>
     {[
       ['DM Summary','One-paragraph brief + arrival scene. Designed for mid-session quick reference.'],
       ['Overview','Physical layout, key institutions, recent history hook.'],
@@ -385,7 +385,7 @@ function RefTab() {
       ['Neighbours','Cross-settlement view: linked settlements, NPC contacts, active conflicts.'],
     ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
 
-    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Settlement Workflow</div>
+    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Settlement Workflow</div>
     {[
       ['Campaigns','Create named campaign folders in the Settlements tab to group settlements together. Move settlements between campaigns using the arrow button. Export a whole campaign as PDF from its folder header.'],
       ['Link Neighbour','In the Settlements tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).'],
@@ -394,7 +394,7 @@ function RefTab() {
       ['Export PDF','Print-ready settlement briefing — cover page, index, relationship diagram, NPC cards, and economic appendix.'],
     ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
 
-    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>World Map</div>
+    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>World Map</div>
     {[
       ['Drag to Place','Drag a saved settlement from the drawer below the map onto any location on the map. A new burg is created at that point, linked to your settlement.'],
       ['Click for Detail','Click any placed burg to see its linked SettlementForge data and jump to the detail view in the Settlements tab.'],
@@ -402,7 +402,7 @@ function RefTab() {
       ['Supply Chain Overlay','Toggle "Chains" to draw supply-chain routes between exporters and importers across your saved settlements.'],
     ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
 
-    <div style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Compendium</div>
+    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Compendium</div>
     {[
       ['Built-in Catalog','Searchable reference for tiers, archetypes, stress types, relationship effects, and the full institution catalog.'],
       ['My Custom Content','Create custom institutions, resources, stressors, trade goods, trade routes, power presets, and defense presets. Custom items appear in the Settlement Editor catalog with a purple badge. All custom content persists to your browser.'],
@@ -424,7 +424,7 @@ export default function HowToUse({ standalone=false }) {
               background: activeTab===id ? 'rgba(255,251,245,0.97)' : 'transparent',
               border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',
               cursor:'pointer', color: activeTab===id ? INK : MUT, fontFamily:sans,
-              fontSize:12, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap',
+              fontSize:FS.sm, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap',
               WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
             <Icon size={13} /><span style={{ marginLeft:4 }}>{label}</span>
           </button>
@@ -453,7 +453,7 @@ export default function HowToUse({ standalone=false }) {
                 background: activeTab===id ? CARD : 'transparent',
                 border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',
                 cursor:'pointer', color: activeTab===id ? INK : MUT,
-                fontSize:11, fontWeight:activeTab===id?700:500, fontFamily:sans,
+                fontSize:FS.xs, fontWeight:activeTab===id?700:500, fontFamily:sans,
                 whiteSpace:'nowrap', WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
               <Icon size={12} />
               {label}

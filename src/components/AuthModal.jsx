@@ -69,7 +69,7 @@ function OAuthButton({ _provider, glyph, label, onClick, disabled, soonNote }) {
       <span>Continue with {label}</span>
       {soonNote && (
         <span style={{
-          fontSize: 9, fontWeight: 800, letterSpacing: '0.06em',
+          fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.06em',
           textTransform: 'uppercase', color: '#7B4FCF',
           background: '#EBE2FA', padding: '2px 5px', borderRadius: 3,
           marginLeft: 4,

@@ -13,6 +13,7 @@
  */
 
 import { useState } from 'react';
+import { FS } from '../theme.js';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card.jsx';
 
@@ -65,7 +66,7 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               gap: 4, padding: '4px 8px',
               background: 'transparent', border: 'none',
-              fontSize: 11, fontWeight: 700,
+              fontSize: FS.xs, fontWeight: 700,
               fontFamily: 'system-ui, -apple-system, sans-serif',
               color: '#6b5340', cursor: 'pointer',
             }}
@@ -97,7 +98,7 @@ function ActionRow({ item }) {
         color: tone.fg,
         border: `1px solid ${tone.border}`,
         borderRadius: 4,
-        fontSize: 12, fontWeight: 700,
+        fontSize: FS.sm, fontWeight: 700,
         fontFamily: 'system-ui, -apple-system, sans-serif',
         textAlign: 'left',
         cursor: item.disabled ? 'not-allowed' : 'pointer',
@@ -117,7 +118,7 @@ function ActionRow({ item }) {
             id={`${item.id}-hint`}
             style={{
               display: 'block',
-              fontSize: 10, fontWeight: 400, opacity: 0.85,
+              fontSize: FS.xxs, fontWeight: 400, opacity: 0.85,
               marginTop: 2, lineHeight: 1.35,
             }}
           >

@@ -1,3 +1,4 @@
+import { FS } from '../theme.js';
 /**
  * primitives/Card — Shared card chrome.
  *
@@ -51,7 +52,7 @@ export default function Card({
           <div style={{ flex: 1, minWidth: 0 }}>
             {kicker && (
               <div style={{
-                fontSize: 10, fontWeight: 800,
+                fontSize: FS.xxs, fontWeight: 800,
                 fontFamily: 'system-ui, -apple-system, sans-serif',
                 color: v.titleColor, opacity: 0.7,
                 letterSpacing: '0.06em', textTransform: 'uppercase',
@@ -63,7 +64,7 @@ export default function Card({
             {title && (
               <h3 style={{
                 margin: 0,
-                fontSize: 13, fontWeight: 700,
+                fontSize: FS.md, fontWeight: 700,
                 fontFamily: 'system-ui, -apple-system, sans-serif',
                 color: v.titleColor,
               }}>

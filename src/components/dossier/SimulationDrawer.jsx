@@ -21,6 +21,7 @@
  */
 
 import { useEffect, useState, lazy, Suspense } from 'react';
+import { FS } from '../theme.js';
 import { X } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 
@@ -73,7 +74,7 @@ export default function SimulationDrawer() {
           border: `1px solid ${BORDER}`,
           borderRadius: 4,
           color: MUTED,
-          fontSize: 11, fontFamily: sans, fontWeight: 600,
+          fontSize: FS.xs, fontFamily: sans, fontWeight: 600,
           cursor: 'pointer',
         }}
         title="See the 17-step simulation pipeline that built this settlement"
@@ -118,7 +119,7 @@ export default function SimulationDrawer() {
             }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{
-                  fontSize: 10, fontWeight: 800, color: GOLD,
+                  fontSize: FS.xxs, fontWeight: 800, color: GOLD,
                   letterSpacing: '0.14em', textTransform: 'uppercase',
                   fontFamily: sans,
                 }}>
@@ -157,7 +158,7 @@ export default function SimulationDrawer() {
             <div style={{ flex: 1, overflow: 'auto', padding: 16 }}>
               <Suspense fallback={
                 <div style={{
-                  padding: 16, color: MUTED, fontSize: 12,
+                  padding: 16, color: MUTED, fontSize: FS.sm,
                   fontFamily: sans, textAlign: 'center',
                 }}>
                   Loading pipeline…

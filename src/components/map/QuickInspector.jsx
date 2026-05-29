@@ -26,6 +26,7 @@
  */
 
 import { useMemo } from 'react';
+import { FS } from '../theme.js';
 import { useStore } from '../../store';
 import { flag } from '../../lib/flags.js';
 
@@ -101,7 +102,7 @@ export default function QuickInspector() {
           {name}
         </div>
         <div style={{
-          fontSize: 9, fontWeight: 800, color: GOLD,
+          fontSize: FS.micro, fontWeight: 800, color: GOLD,
           letterSpacing: '0.08em', textTransform: 'uppercase',
           flexShrink: 0,
         }}>
@@ -109,7 +110,7 @@ export default function QuickInspector() {
         </div>
       </div>
       <div style={{
-        fontSize: 10, color: MUTED, marginTop: 1,
+        fontSize: FS.xxs, color: MUTED, marginTop: 1,
       }}>
         {String(tier).toUpperCase()} · {pop} pop
       </div>
@@ -127,11 +128,11 @@ export default function QuickInspector() {
       )}
       {topHook && (
         <div style={{
-          fontSize: 11, color: '#7B4FCF', marginTop: 6,
+          fontSize: FS.xs, color: '#7B4FCF', marginTop: 6,
           display: 'flex', gap: 5, alignItems: 'baseline',
         }}>
           <span style={{
-            fontSize: 8, fontWeight: 800, letterSpacing: '0.08em',
+            fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.08em',
             textTransform: 'uppercase', color: '#7B4FCF',
           }}>
             Hook

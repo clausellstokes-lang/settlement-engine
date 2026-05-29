@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FS } from '../theme.js';
 import { sans } from './Primitives';
 
 /**
@@ -35,7 +36,7 @@ export function NarrativeNote({ note }) {
           cursor: 'pointer', textAlign: 'left',
         }}
       >
-        <span style={{ fontSize: 11, color: '#8a50b0' }}>✦</span>
+        <span style={{ fontSize: FS.xs, color: '#8a50b0' }}>✦</span>
         <span style={{ fontSize: 9.5, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
           Narrative Layer
         </span>

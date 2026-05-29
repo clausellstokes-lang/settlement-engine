@@ -82,7 +82,7 @@ function PageTitle({ eyebrow, title, lede }) {
   return (
     <header style={{ marginBottom: SP.xxl }}>
       <div style={{
-        fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
+        fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
         textTransform: 'uppercase', color: '#8C6F32',
         marginBottom: SP.sm,
       }}>
@@ -115,7 +115,7 @@ function FeatureRow({ feature, sf, other }) {
   const iconFor = (mark) =>
     mark === 'yes'    ? <Check size={14} color="#4A7A3A" /> :
     mark === 'no'     ? <XIcon size={14} color="#A23434" /> :
-    mark === 'partial'? <span style={{ fontSize: 12, color: '#D08020', fontWeight: 800 }}>~</span> :
+    mark === 'partial'? <span style={{ fontSize: FS.sm, color: '#D08020', fontWeight: 800 }}>~</span> :
     null;
   return (
     <tr>

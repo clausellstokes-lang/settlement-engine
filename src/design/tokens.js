@@ -221,5 +221,9 @@ export const legacy = Object.freeze({
   SP: { xs: space['space-1'], sm: space['space-2'], md: space['space-3'],
         lg: space['space-4'], xl: space['space-5'], xxl: space['space-6'] },
   R:  { sm: radius.sm, md: radius.md, lg: radius.lg, xl: radius.xl },
-  FS: { xxs: 10, xs: 11, sm: 12, md: 13, lg: 15, xl: 17, xxl: 20, h1: 24 },
+  // pico/nano/micro extend the scale below xxs for the dense micro-typography
+  // (badges, pills, eyebrows) the app legitimately uses. Ordered by SI magnitude
+  // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. Added in P140 so the
+  // ~400 raw sub-10px sizes have exact tokens to migrate to (zero visual change).
+  FS: { pico: 7, nano: 8, micro: 9, xxs: 10, xs: 11, sm: 12, md: 13, lg: 15, xl: 17, xxl: 20, h1: 24 },
 });

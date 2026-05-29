@@ -1,4 +1,5 @@
 import React from 'react';
+import { FS } from './components/theme.js';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -41,7 +42,7 @@ class ErrorBoundary extends React.Component {
         style: { padding: 24, fontFamily: 'monospace', background: '#fee', border: '2px solid red', margin: 16, borderRadius: 8 }
       },
         React.createElement('h2', null, 'Render Error'),
-        React.createElement('pre', { style: { whiteSpace: 'pre-wrap', fontSize: 12 } },
+        React.createElement('pre', { style: { whiteSpace: 'pre-wrap', fontSize: FS.sm } },
           this.state.error.message + '\n\n' + this.state.error.stack
         )
       );

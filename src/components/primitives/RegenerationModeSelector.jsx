@@ -21,6 +21,7 @@
  */
 
 import { useMemo, useState } from 'react';
+import { FS } from '../theme.js';
 import { buildRegenerationPlan, REGENERATION_MODES } from '../../domain/regenerationMode.js';
 
 const COLORS = Object.freeze({
@@ -104,7 +105,7 @@ export function RegenerationModeSelector({
       </h2>
       <p style={{
         margin: '0 0 12px',
-        fontSize: 12, color: COLORS.muted, lineHeight: 1.4,
+        fontSize: FS.sm, color: COLORS.muted, lineHeight: 1.4,
       }}>
         Pick the strength of the rerun. The preview shows which entities
         survive and which get rerolled before you commit.
@@ -131,7 +132,7 @@ export function RegenerationModeSelector({
                 border: `2px solid ${meta.color}`,
                 borderRadius: 5,
                 cursor: 'pointer',
-                fontSize: 12, fontWeight: 800,
+                fontSize: FS.sm, fontWeight: 800,
                 textTransform: 'uppercase', letterSpacing: '0.05em',
                 transition: 'background 0.15s',
               }}
@@ -150,10 +151,10 @@ export function RegenerationModeSelector({
         borderRadius: 4,
         marginBottom: 12,
       }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: COLORS.ink, marginBottom: 2 }}>
+        <div style={{ fontSize: FS.sm, fontWeight: 700, color: COLORS.ink, marginBottom: 2 }}>
           {MODE_META[mode].summary}
         </div>
-        <div style={{ fontSize: 11, color: COLORS.muted, fontStyle: 'italic' }}>
+        <div style={{ fontSize: FS.xs, color: COLORS.muted, fontStyle: 'italic' }}>
           {MODE_META[mode].tagline}
         </div>
       </div>
@@ -173,7 +174,7 @@ export function RegenerationModeSelector({
             border: `1px solid ${COLORS.border}`,
             borderRadius: 4,
             cursor: 'pointer',
-            fontSize: 12, fontWeight: 700,
+            fontSize: FS.sm, fontWeight: 700,
           }}
         >
           Cancel
@@ -188,7 +189,7 @@ export function RegenerationModeSelector({
             border: 'none',
             borderRadius: 4,
             cursor: 'pointer',
-            fontSize: 12, fontWeight: 800,
+            fontSize: FS.sm, fontWeight: 800,
             letterSpacing: '0.03em',
           }}
         >
@@ -207,7 +208,7 @@ function PlanPreview({ plan }) {
         background: '#faf6ee',
         border: `1px dashed ${COLORS.border}`,
         borderRadius: 4,
-        fontSize: 11, color: COLORS.muted, fontStyle: 'italic',
+        fontSize: FS.xs, color: COLORS.muted, fontStyle: 'italic',
       }}>
         Plan preview unavailable for this settlement.
       </div>
@@ -224,7 +225,7 @@ function PlanPreview({ plan }) {
       background: '#faf6ee',
       border: `1px solid ${COLORS.border}`,
       borderRadius: 4,
-      fontSize: 11, color: COLORS.ink, lineHeight: 1.5,
+      fontSize: FS.xs, color: COLORS.ink, lineHeight: 1.5,
     }}>
       <div style={{
         display: 'flex', gap: 14,
@@ -254,7 +255,7 @@ function PlanStat({ label, count, color }) {
         {count}
       </span>
       <span style={{
-        fontSize: 10, fontWeight: 700,
+        fontSize: FS.xxs, fontWeight: 700,
         color: COLORS.muted,
         textTransform: 'uppercase', letterSpacing: '0.05em',
       }}>

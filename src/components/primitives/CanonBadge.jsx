@@ -31,6 +31,7 @@
  */
 
 import { tagEntityCanon } from '../../domain/canonStatus.js';
+import { FS } from '../theme.js';
 
 const VARIANTS = Object.freeze({
   // source × canonStatus → { glyph, label, bg, fg, bdr }
@@ -98,7 +99,7 @@ export function CanonBadge({ entity, verbose = false, showLock = true, style = {
         title={`source: ${tag.source}, status: ${tag.canonStatus}`}
         style={{
           display: 'inline-block',
-          fontSize: 9, fontWeight: 700,
+          fontSize: FS.micro, fontWeight: 700,
           padding: '1px 5px', borderRadius: 3,
           background: '#faf6ee',
           color: '#9c8068',
@@ -119,7 +120,7 @@ export function CanonBadge({ entity, verbose = false, showLock = true, style = {
       aria-label={`${v.label}${tag.locked ? ', locked' : ''}`}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 3,
-        fontSize: 9, fontWeight: 800,
+        fontSize: FS.micro, fontWeight: 800,
         padding: '1px 5px', borderRadius: 3,
         background: v.bg,
         color: v.fg,

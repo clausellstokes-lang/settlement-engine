@@ -23,6 +23,7 @@
  */
 
 import { useEffect, useState } from 'react';
+import { FS } from '../theme.js';
 import { isEmailProviderUnconfigured } from '../../lib/emailLifecycle.js';
 
 const DISMISS_KEY = 'sf.devEmailBanner.dismissed';
@@ -70,7 +71,7 @@ export default function DevEmailBanner() {
         borderRadius: 6,
         padding: '10px 14px',
         fontFamily: 'monospace',
-        fontSize: 12,
+        fontSize: FS.sm,
         lineHeight: 1.5,
         boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
         display: 'flex',
@@ -102,7 +103,7 @@ npx supabase secrets set RESEND_FROM_EMAIL="SettlementForge <hello@settlementfor
           padding: '4px 8px',
           cursor: 'pointer',
           fontFamily: 'inherit',
-          fontSize: 11,
+          fontSize: FS.xs,
         }}
         aria-label="Dismiss email-unconfigured banner"
       >

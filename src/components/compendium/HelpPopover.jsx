@@ -19,6 +19,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
+import { FS } from '../theme.js';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 
@@ -102,7 +103,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
           background: '#F4EAD0',
           color: '#8C6F32',
           border: '1px solid #D8C588',
-          fontSize: 10, fontWeight: 700,
+          fontSize: FS.xxs, fontWeight: 700,
           cursor: 'help',
           padding: 0, lineHeight: 1,
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
@@ -124,7 +125,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             border: '1px solid #8C6F32',
             borderRadius: 6,
             boxShadow: '0 12px 32px rgba(0,0,0,0.40)',
-            fontSize: 11,
+            fontSize: FS.xs,
             lineHeight: 1.55,
             fontFamily: '"Nunito", system-ui, sans-serif',
           }}
@@ -142,7 +143,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
               <div style={{
                 color: '#C9A24C',
                 fontFamily: '"Crimson Text", Georgia, serif',
-                fontWeight: 600, fontSize: 13, marginBottom: 4,
+                fontWeight: 600, fontSize: FS.md, marginBottom: 4,
               }}>
                 {content.title}
               </div>
@@ -151,7 +152,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
                 href={`?view=compendium#${content.anchor}`}
                 style={{
                   display: 'inline-block', marginTop: 8,
-                  color: '#C9A24C', fontSize: 10, fontWeight: 700,
+                  color: '#C9A24C', fontSize: FS.xxs, fontWeight: 700,
                   textDecoration: 'underline',
                 }}
               >
@@ -167,7 +168,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
                 href={`?view=compendium`}
                 style={{
                   display: 'inline-block', marginTop: 8,
-                  color: '#C9A24C', fontSize: 10, fontWeight: 700,
+                  color: '#C9A24C', fontSize: FS.xxs, fontWeight: 700,
                   textDecoration: 'underline',
                 }}
               >

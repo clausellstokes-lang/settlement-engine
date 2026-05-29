@@ -26,6 +26,7 @@
  */
 
 import { useMemo } from 'react';
+import { FS } from '../theme.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 
 const GOLD = '#8C6F32';
@@ -134,7 +135,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         </h1>
         <div style={{
           marginTop: 2,
-          fontSize: 10, color: MUTED,
+          fontSize: FS.xxs, color: MUTED,
           letterSpacing: '0.04em',
         }}>
           {String(settlement.tier || 'SETTLEMENT').toUpperCase()}
@@ -156,7 +157,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         {/* LEFT — identity prose */}
         <div style={{ flex: 1.2, minWidth: 0 }}>
           <div style={{
-            fontSize: 9, fontWeight: 800,
+            fontSize: FS.micro, fontWeight: 800,
             letterSpacing: '0.14em', textTransform: 'uppercase',
             color: GOLD,
           }}>
@@ -186,7 +187,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
           {settlement.economicState?.prosperity?.tier && (
             <div style={{
               marginTop: 14,
-              fontSize: 11, color: BODY, lineHeight: 1.6,
+              fontSize: FS.xs, color: BODY, lineHeight: 1.6,
             }}>
               <strong style={{ color: GOLD, letterSpacing: '0.04em' }}>
                 {String(settlement.economicState.prosperity.tier).toUpperCase()}
@@ -214,16 +215,16 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             display: 'flex', alignItems: 'center', gap: 6,
             marginBottom: 2,
           }}>
-            <span style={{ fontSize: 11, color: AMBER }}>🕯</span>
+            <span style={{ fontSize: FS.xs, color: AMBER }}>🕯</span>
             <span style={{
-              fontSize: 9, fontWeight: 800,
+              fontSize: FS.micro, fontWeight: 800,
               letterSpacing: '0.14em', textTransform: 'uppercase',
               color: AMBER,
             }}>
               Tonight at the table
             </span>
             <span style={{ flex: 1 }} />
-            <span style={{ fontSize: 9, color: MUTED, fontStyle: 'italic' }}>
+            <span style={{ fontSize: FS.micro, color: MUTED, fontStyle: 'italic' }}>
               cheat sheet
             </span>
           </div>
@@ -231,7 +232,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
           {tableEntries.length === 0 ? (
             <div style={{
               padding: '8px 6px',
-              fontSize: 11, color: MUTED, fontStyle: 'italic',
+              fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
             }}>
               No table-night entries derived yet. Generate a richer
               settlement or run the narrative layer.
@@ -272,7 +273,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                     </span>
                   </div>
                   <div style={{
-                    fontSize: 10, color: BODY,
+                    fontSize: FS.xxs, color: BODY,
                     marginTop: 2, lineHeight: 1.4,
                   }}>
                     {row.body}
@@ -293,7 +294,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                 color: GOLD_ACCENT,
                 border: 'none',
                 borderRadius: 4,
-                fontSize: 10, fontWeight: 700,
+                fontSize: FS.xxs, fontWeight: 700,
                 letterSpacing: '0.06em',
                 cursor: 'pointer',
                 fontFamily: sans,

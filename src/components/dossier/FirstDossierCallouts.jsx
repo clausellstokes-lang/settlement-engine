@@ -24,6 +24,7 @@
  */
 
 import { useEffect, useState } from 'react';
+import { FS } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
@@ -123,14 +124,14 @@ export default function FirstDossierCallouts() {
           >
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{
-                fontSize: 9, fontWeight: 800,
+                fontSize: FS.micro, fontWeight: 800,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
                 color: accent,
               }}>
                 {eyebrow}
               </div>
               <div style={{
-                marginTop: 4, fontSize: 12,
+                marginTop: 4, fontSize: FS.sm,
                 color: '#3A2F18', lineHeight: 1.5,
               }}>
                 {body}
@@ -145,7 +146,7 @@ export default function FirstDossierCallouts() {
                 border: 'none',
                 color: '#9C8068',
                 cursor: 'pointer',
-                fontSize: 11, fontWeight: 700,
+                fontSize: FS.xs, fontWeight: 700,
                 padding: '2px 8px',
                 lineHeight: 1,
                 fontFamily: sans,

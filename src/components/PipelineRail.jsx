@@ -28,6 +28,7 @@
  */
 
 import { useState } from 'react';
+import { FS } from './theme.js';
 import { Cog, Feather, ChevronRight, ChevronDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useFlag } from '../lib/flags.js';
@@ -90,19 +91,19 @@ function StepRow({ entry, isLast, traces }) {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-          <span style={{ fontSize: 13, fontWeight: 600, color: INK }}>
+          <span style={{ fontSize: FS.md, fontWeight: 600, color: INK }}>
             {meta.label}
           </span>
           <Chevron size={11} color={MUTED} style={{ flexShrink: 0, transform: 'translateY(1px)' }} aria-hidden="true" />
         </div>
         {entry.summary && (
-          <div style={{ fontSize: 11, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
+          <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
             {entry.summary}
           </div>
         )}
         {open && meta.description && (
           <div style={{
-            fontSize: 11, fontStyle: 'italic',
+            fontSize: FS.xs, fontStyle: 'italic',
             color: MUTED, marginTop: 6,
             fontFamily: 'Crimson Text, Georgia, serif',
             lineHeight: 1.55,
@@ -123,7 +124,7 @@ function StepRow({ entry, isLast, traces }) {
                 background: '#fff',
                 border: `1px solid ${RAIL_BORDER}`,
                 borderRadius: 4,
-                fontSize: 11, color: BODY, lineHeight: 1.5,
+                fontSize: FS.xs, color: BODY, lineHeight: 1.5,
               }}>
                 <div style={{ fontWeight: 600, color: INK }}>
                   {trace.targetId} <span style={{ color: MUTED, fontWeight: 400 }}>{trace.result}</span>
@@ -148,7 +149,7 @@ function StepRow({ entry, isLast, traces }) {
                   </ul>
                 )}
                 {Array.isArray(trace.downstreamEffects) && trace.downstreamEffects.length > 0 && (
-                  <div style={{ marginTop: 4, fontSize: 10, color: MUTED }}>
+                  <div style={{ marginTop: 4, fontSize: FS.xxs, color: MUTED }}>
                     Downstream:{' '}
                     {trace.downstreamEffects.map((d, k) => (
                       <span key={k}>
@@ -161,7 +162,7 @@ function StepRow({ entry, isLast, traces }) {
               </div>
             ))}
             {stepTraces.length > 8 && (
-              <div style={{ fontSize: 10, color: MUTED, fontStyle: 'italic' }}>
+              <div style={{ fontSize: FS.xxs, color: MUTED, fontStyle: 'italic' }}>
                 + {stepTraces.length - 8} more decisions in this step
               </div>
             )}
@@ -194,7 +195,7 @@ function SimulationSpine({ settlement }) {
       }}
     >
       <div style={{
-        fontSize: 10, fontWeight: 700, letterSpacing: '0.08em',
+        fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.08em',
         textTransform: 'uppercase', color: MUTED,
         marginBottom: 4,
       }}>
@@ -204,13 +205,13 @@ function SimulationSpine({ settlement }) {
         {rows.map(([label, body], i) => (
           <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
             <dt style={{
-              fontSize: 10, color: MUTED, fontWeight: 600,
+              fontSize: FS.xxs, color: MUTED, fontWeight: 600,
               letterSpacing: '0.04em',
             }}>
               {label}
             </dt>
             <dd style={{
-              margin: 0, fontSize: 12, color: BODY, lineHeight: 1.5,
+              margin: 0, fontSize: FS.sm, color: BODY, lineHeight: 1.5,
               fontFamily: 'Crimson Text, Georgia, serif',
             }}>
               {body}
@@ -254,7 +255,7 @@ export default function PipelineRail({ compact = false }) {
         </h3>
         <p style={{
           margin: '4px 0 0',
-          fontSize: 12, fontStyle: 'italic', color: BODY,
+          fontSize: FS.sm, fontStyle: 'italic', color: BODY,
           fontFamily: 'Crimson Text, Georgia, serif',
           lineHeight: 1.5,
         }}>
@@ -265,7 +266,7 @@ export default function PipelineRail({ compact = false }) {
             reads any step. */}
         <div style={{
           display: 'flex', gap: 14, marginTop: 10,
-          fontSize: 10, color: MUTED, fontWeight: 600,
+          fontSize: FS.xxs, color: MUTED, fontWeight: 600,
           textTransform: 'uppercase', letterSpacing: '0.04em',
         }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>

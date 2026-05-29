@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import {INSTITUTION_SERVICES} from '../data/tradeGoodsData';
 import ControlsStrip from './ControlsStrip.jsx';
-import {GOLD, INK, MUTED, SECOND, sans} from './theme.js';
+import {GOLD, INK, MUTED, SECOND, sans, FS} from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog } from '../store/selectors.js';
 
@@ -46,12 +46,12 @@ function ServiceCard({ svcName, def, toggled, onCycle }) {
     }}>
       <div style={{flex:1, minWidth:0}}>
         <div style={{display:'flex', alignItems:'center', gap:6, flexWrap:'wrap'}}>
-          <span style={{fontWeight:600, fontSize:12, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{svcName}</span>
-          {def.requiredInstitution&&<span style={{fontSize:10,color:MUTED,fontStyle:'italic'}}>needs {def.requiredInstitution}</span>}
+          <span style={{fontWeight:600, fontSize:FS.sm, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{svcName}</span>
+          {def.requiredInstitution&&<span style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic'}}>needs {def.requiredInstitution}</span>}
         </div>
-        {def.desc&&<p style={{fontSize:11,color:SECOND,lineHeight:1.3,margin:'1px 0 0'}}>{def.desc}</p>}
+        {def.desc&&<p style={{fontSize:FS.xs,color:SECOND,lineHeight:1.3,margin:'1px 0 0'}}>{def.desc}</p>}
       </div>
-      <span style={{fontSize:9,fontWeight:700,color:labelColor,flexShrink:0,marginTop:2,letterSpacing:'0.03em'}}>{labelText}</span>
+      <span style={{fontSize:FS.micro,fontWeight:700,color:labelColor,flexShrink:0,marginTop:2,letterSpacing:'0.03em'}}>{labelText}</span>
     </div>
   );
 }
@@ -155,7 +155,7 @@ export default function ServicesTogglePanel() {
   }));
 
   if (Object.keys(instServiceMap).length === 0) {
-    return <div style={{padding:'14px 16px', background:'#faf8f4', fontSize:13, color:MUTED}}>
+    return <div style={{padding:'14px 16px', background:'#faf8f4', fontSize:FS.md, color:MUTED}}>
       No services available at this tier.
     </div>;
   }
@@ -181,7 +181,7 @@ export default function ServicesTogglePanel() {
       {/* Institution groups */}
       <div>
         {Object.keys(filtered).length === 0 && search
-          ? <div style={{padding:16, textAlign:'center', color:MUTED, fontSize:12, fontStyle:'italic'}}>No services match "{search}"</div>
+          ? <div style={{padding:16, textAlign:'center', color:MUTED, fontSize:FS.sm, fontStyle:'italic'}}>No services match "{search}"</div>
           : Object.entries(filtered).sort(([a],[b]) => a.localeCompare(b)).map(([svcKey, {catalogNames, services}]) => {
               const isOpen = !!expanded[svcKey];
               const catName = catalogNames[0] || svcKey;
@@ -198,16 +198,16 @@ export default function ServicesTogglePanel() {
                       WebkitTapHighlightColor:'transparent',
                     }}>
                     <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
-                        <span style={{fontSize:12, fontWeight:700, color:'#1c1409', fontFamily:'Crimson Text, Georgia, serif'}}>{catName}</span>
-                        {forcedCount>0 && <span style={{fontSize:9, fontWeight:800, color:GOLD, background:`${GOLD}18`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>}
+                        <span style={{fontSize:FS.sm, fontWeight:700, color:'#1c1409', fontFamily:'Crimson Text, Georgia, serif'}}>{catName}</span>
+                        {forcedCount>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}18`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>}
                       </span>
-                    {forcedCount===0 && <span style={{fontSize:9, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>}
+                    {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>}
                     {forcedCount>0 && <>
-                      <span style={{fontSize:9, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>
-                      <span style={{fontSize:9, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>
+                      <span style={{fontSize:FS.micro, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>
+                      <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>
                     </>}
-                    <span style={{fontSize:9, color:MUTED, marginLeft:4}}>{svcEntries.length}</span>
-                    <span style={{fontSize:10, color:MUTED}}>{isOpen ? '▲' : '▼'}</span>
+                    <span style={{fontSize:FS.micro, color:MUTED, marginLeft:4}}>{svcEntries.length}</span>
+                    <span style={{fontSize:FS.xxs, color:MUTED}}>{isOpen ? '▲' : '▼'}</span>
                   </button>
                   {isOpen && (
                     <div>

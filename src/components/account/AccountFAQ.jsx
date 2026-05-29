@@ -17,6 +17,7 @@
  */
 
 import { useState } from 'react';
+import { FS } from '../theme.js';
 import { Plus, Minus } from 'lucide-react';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
@@ -76,7 +77,7 @@ export default function AccountFAQ() {
                 background: isOpen ? '#FBF5E6' : 'transparent',
                 border: 'none', cursor: 'pointer',
                 textAlign: 'left',
-                fontFamily: sans, fontSize: 13, fontWeight: 600,
+                fontFamily: sans, fontSize: FS.md, fontWeight: 600,
                 color: INK,
               }}
             >
@@ -88,7 +89,7 @@ export default function AccountFAQ() {
             {isOpen && (
               <div style={{
                 padding: '8px 14px 12px',
-                fontSize: 12, color: BODY,
+                fontSize: FS.sm, color: BODY,
                 lineHeight: 1.55, fontFamily: sans,
                 borderTop: `1px solid ${BORDER}`,
               }}>
@@ -99,7 +100,7 @@ export default function AccountFAQ() {
         );
       })}
       <div style={{
-        marginTop: 4, fontSize: 11, color: MUTED, fontStyle: 'italic',
+        marginTop: 4, fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
         fontFamily: sans,
       }}>
         Still stuck? Drop a note via Customer Support below.

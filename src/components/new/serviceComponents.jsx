@@ -1,3 +1,4 @@
+import { FS } from '../theme.js';
 
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
@@ -25,14 +26,14 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
       <div style={{flex:1,minWidth:0}}>
         <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
           <span style={{fontSize:12.5,fontWeight:600,color:isCriminal?'#c06060':'#1c1409'}}>{name}</span>
-          {statusLabel&&<span style={{fontSize:9,fontWeight:800,color:statusColor,background:`${statusColor}18`,borderRadius:3,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}
-          {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:9,fontWeight:600,color:'#6b5340',background:'#f0e8d8',border:'1px solid #c8b89a',borderRadius:3,padding:'0 5px',flexShrink:0}}> {depthLabel}</span>}
+          {statusLabel&&<span style={{fontSize:FS.micro,fontWeight:800,color:statusColor,background:`${statusColor}18`,borderRadius:3,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}
+          {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:FS.micro,fontWeight:600,color:'#6b5340',background:'#f0e8d8',border:'1px solid #c8b89a',borderRadius:3,padding:'0 5px',flexShrink:0}}> {depthLabel}</span>}
         </div>
-        {desc&&<p style={{fontSize:11,color:isCriminal?'#8a5050':'#9c8068',lineHeight:1.3,margin:'1px 0 0'}}>{desc}</p>}
-        {inst&&<p style={{fontSize:10,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}>{inst}</p>}
+        {desc&&<p style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068',lineHeight:1.3,margin:'1px 0 0'}}>{desc}</p>}
+        {inst&&<p style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}>{inst}</p>}
         {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
           const r=depReasons.get(name)||depReasons.get(inst);
-          return <p style={{fontSize:10,color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>
+          return <p style={{fontSize:FS.xxs,color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>
              Needs <strong>{r.resource}</strong>
             {r.impact&&<span style={{fontStyle:'italic',marginLeft:4}}>{r.impact.slice(0,70)}{r.impact.length>70?'…':''}</span>}
           </p>;

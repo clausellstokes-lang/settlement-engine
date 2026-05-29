@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FS } from '../theme.js';
 import { isMobile } from './tabConstants';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
 
@@ -32,8 +33,8 @@ const ResourceNode = ({ icon, label, depleted, st }) => (
     borderRadius: 5, padding: '3px 8px', flexShrink: 0,
     opacity: depleted ? 0.75 : 1,
   }}>
-    {icon && <span style={{ fontSize: 13 }}>{icon}</span>}
-    <span style={{ fontSize: 11, fontWeight: 700, color: depleted ? '#8a5010' : st.color }}>
+    {icon && <span style={{ fontSize: FS.md }}>{icon}</span>}
+    <span style={{ fontSize: FS.xs, fontWeight: 700, color: depleted ? '#8a5010' : st.color }}>
       {label}{depleted ? ' (depleted)' : ''}
     </span>
   </div>
@@ -47,8 +48,8 @@ const InstNode = ({ name, present, st }) => (
     border: `1px ${present ? 'solid' : 'dashed'} ${present ? st.border : '#c8b898'}`,
     borderRadius: 5, padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: 10 }}></span>
-    <span style={{ fontSize: 11, fontWeight: present ? 700 : 400,
+    <span style={{ fontSize: FS.xxs }}></span>
+    <span style={{ fontSize: FS.xs, fontWeight: present ? 700 : 400,
       color: present ? st.color : '#9c8068',
       fontStyle: present ? 'normal' : 'italic' }}>
       {name}{!present ? ' (missing)' : ''}
@@ -63,8 +64,8 @@ const ImportNode = ({ label }) => (
     background: '#f0f4ff', border: '1px dashed #a0b0d8',
     borderRadius: 5, padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: 10 }}></span>
-    <span style={{ fontSize: 11, fontWeight: 600, color: '#2a3a7a' }}>Import: {label}</span>
+    <span style={{ fontSize: FS.xxs }}></span>
+    <span style={{ fontSize: FS.xs, fontWeight: 600, color: '#2a3a7a' }}>Import: {label}</span>
   </div>
 );
 
@@ -76,12 +77,12 @@ const OutputNode = ({ label, isExport }) => (
     border: `1px solid ${isExport ? '#88c880' : '#d8c8a8'}`,
     borderRadius: 5, padding: '3px 8px', flexShrink: 0,
   }}>
-    {isExport && <span style={{ fontSize: 9, fontWeight: 800, color: '#1a5a28' }}>↗</span>}
-    <span style={{ fontSize: 11, fontWeight: isExport ? 700 : 500,
+    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#1a5a28' }}>↗</span>}
+    <span style={{ fontSize: FS.xs, fontWeight: isExport ? 700 : 500,
       color: isExport ? '#1a5a28' : '#6b5340' }}>
       {label}
     </span>
-    {isExport && <span style={{ fontSize: 9, fontWeight: 800, color: '#1a5a28', marginLeft: 2 }}>EXPORT</span>}
+    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#1a5a28', marginLeft: 2 }}>EXPORT</span>}
   </div>
 );
 
@@ -119,11 +120,11 @@ function ChainRow({ chain, instNames, primaryExports, mobile }) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 10px',
         background: st.bg, borderLeft: `3px solid ${st.border}`, borderRadius: 4 }}>
-        <span style={{ fontSize: 12 }}>{chain.resourceIcon || '️'}</span>
-        <span style={{ fontSize: 12, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
-        {hasExport && <span style={{ fontSize: 9, fontWeight: 800, color: '#1a5a28', background: '#e8f5ec', border: '1px solid #a8d8b0', borderRadius: 3, padding: '1px 5px' }}>EXPORT</span>}
-        {missing.length > 0 && <span style={{ fontSize: 9, color: '#2a3a7a', background: '#f0f4ff', border: '1px solid #a0b0d8', borderRadius: 3, padding: '1px 5px' }}> imported</span>}
-        <span style={{ fontSize: 9, fontWeight: 700, color: st.color }}>{st.dot}</span>
+        <span style={{ fontSize: FS.sm }}>{chain.resourceIcon || '️'}</span>
+        <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
+        {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#1a5a28', background: '#e8f5ec', border: '1px solid #a8d8b0', borderRadius: 3, padding: '1px 5px' }}>EXPORT</span>}
+        {missing.length > 0 && <span style={{ fontSize: FS.micro, color: '#2a3a7a', background: '#f0f4ff', border: '1px solid #a0b0d8', borderRadius: 3, padding: '1px 5px' }}> imported</span>}
+        <span style={{ fontSize: FS.micro, fontWeight: 700, color: st.color }}>{st.dot}</span>
       </div>
     );
   }
@@ -177,7 +178,7 @@ function ChainRow({ chain, instNames, primaryExports, mobile }) {
 
       {/* Upstream note */}
       {chain.upstreamNote && (
-        <div style={{ marginTop: 4, fontSize: 10, color: '#6b5340', fontStyle: 'italic' }}>
+        <div style={{ marginTop: 4, fontSize: FS.xxs, color: '#6b5340', fontStyle: 'italic' }}>
           ↑ {chain.upstreamNote}
         </div>
       )}
@@ -200,14 +201,14 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
         cursor: 'pointer', textAlign: 'left',
       }}>
         <span style={{ fontSize: 14 }}>{needIcon || '️'}</span>
-        <span style={{ fontSize: 12, fontWeight: 800, color: needColor || '#1c1409', flex: 1,
+        <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1,
           textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           {needLabel || needKey}
         </span>
-        <span style={{ fontSize: 11, color: '#9c8068' }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
-        {impaired > 0 && <span style={{ fontSize: 9, fontWeight: 800, color: '#8b1a1a', background: '#fdf4f4', border: '1px solid #e8b0b0', borderRadius: 3, padding: '1px 5px' }}>✕ {impaired}</span>}
-        {vulnerable > 0 && <span style={{ fontSize: 9, fontWeight: 800, color: '#8a5010', background: '#fdf8ec', border: '1px solid #e0c070', borderRadius: 3, padding: '1px 5px' }}>◐ {vulnerable}</span>}
-        <span style={{ fontSize: 9, color: '#9c8068' }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: FS.xs, color: '#9c8068' }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
+        {impaired > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#8b1a1a', background: '#fdf4f4', border: '1px solid #e8b0b0', borderRadius: 3, padding: '1px 5px' }}>✕ {impaired}</span>}
+        {vulnerable > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#8a5010', background: '#fdf8ec', border: '1px solid #e0c070', borderRadius: 3, padding: '1px 5px' }}>◐ {vulnerable}</span>}
+        <span style={{ fontSize: FS.micro, color: '#9c8068' }}>{open ? '▲' : '▼'}</span>
       </button>
 
       {open && (
@@ -299,7 +300,7 @@ function Legend() {
     { text: '↗ EXPORT', color: '#1a5a28', label: 'Exported for income' },
   ];
   return (
-    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: 10, color: '#6b5340' }}>
+    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: FS.xxs, color: '#6b5340' }}>
       {items.map((it, i) => (
         <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           <span style={{ fontWeight: 700, color: it.color }}>{it.dot || it.text}</span>

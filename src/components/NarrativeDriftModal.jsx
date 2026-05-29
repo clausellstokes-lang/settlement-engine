@@ -26,7 +26,7 @@
 import { Sparkles, RotateCcw, X, Zap, GitBranch } from 'lucide-react';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { t } from '../copy/index.js';
-import { INK, MUTED, SECOND, BORDER, CARD, sans } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, FS } from './theme.js';
 
 const PURPLE = '#6a2a9a';
 const PURPLE_BG = 'rgba(90,42,138,0.08)';
@@ -82,10 +82,10 @@ export default function NarrativeDriftModal({
         }}>
           <Sparkles size={16} color={PURPLE} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 13, fontWeight: 800, color: INK, fontFamily: sans, letterSpacing: '0.02em' }}>
+            <div style={{ fontSize: FS.md, fontWeight: 800, color: INK, fontFamily: sans, letterSpacing: '0.02em' }}>
               {isSeismic ? t('narrativeDrift.headingSeismic') : t('narrativeDrift.headingStructural')}
             </div>
-            <div style={{ fontSize: 10, color: MUTED, marginTop: 2, fontFamily: sans }}>
+            <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: 2, fontFamily: sans }}>
               {changeLabel}
             </div>
           </div>
@@ -99,11 +99,11 @@ export default function NarrativeDriftModal({
         </div>
 
         {/* Body */}
-        <div style={{ padding: '14px 18px', fontFamily: sans, fontSize: 12, color: SECOND, lineHeight: 1.55 }}>
+        <div style={{ padding: '14px 18px', fontFamily: sans, fontSize: FS.sm, color: SECOND, lineHeight: 1.55 }}>
           <p style={{ margin: 0, marginBottom: 10 }}>
             {t('narrativeDrift.body')}
           </p>
-          <p style={{ margin: 0, color: MUTED, fontSize: 11 }}>
+          <p style={{ margin: 0, color: MUTED, fontSize: FS.xs }}>
             {t('narrativeDrift.pickOne')}
           </p>
         </div>
@@ -124,8 +124,8 @@ export default function NarrativeDriftModal({
           >
             <Zap size={14} />
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.02em' }}>{t('narrativeDrift.regenerateTitle')}</div>
-              <div style={{ fontSize: 10, marginTop: 2, opacity: 0.82 }}>
+              <div style={{ fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.02em' }}>{t('narrativeDrift.regenerateTitle')}</div>
+              <div style={{ fontSize: FS.xxs, marginTop: 2, opacity: 0.82 }}>
                 {t('narrativeDrift.regenerateBody', { cost })}
               </div>
             </div>
@@ -148,10 +148,10 @@ export default function NarrativeDriftModal({
             >
               <GitBranch size={14} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.02em' }}>
+                <div style={{ fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.02em' }}>
                   {t('narrativeDrift.progressTitle', { cost: progCost })}
                 </div>
-                <div style={{ fontSize: 10, marginTop: 2, opacity: 0.86 }}>
+                <div style={{ fontSize: FS.xxs, marginTop: 2, opacity: 0.86 }}>
                   {t('narrativeDrift.progressBody')}
                 </div>
               </div>
@@ -172,8 +172,8 @@ export default function NarrativeDriftModal({
           >
             <RotateCcw size={14} color={PURPLE}/>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: INK, letterSpacing: '0.02em' }}>{t('narrativeDrift.revertTitle')}</div>
-              <div style={{ fontSize: 10, marginTop: 2, color: MUTED }}>
+              <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, letterSpacing: '0.02em' }}>{t('narrativeDrift.revertTitle')}</div>
+              <div style={{ fontSize: FS.xxs, marginTop: 2, color: MUTED }}>
                 {t('narrativeDrift.revertBody')}
               </div>
             </div>
@@ -185,7 +185,7 @@ export default function NarrativeDriftModal({
             style={{
               padding: '7px 10px', borderRadius: 5,
               background: 'transparent', border: 'none',
-              color: MUTED, fontFamily: sans, fontSize: 11, fontWeight: 600,
+              color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 600,
               cursor: 'pointer', alignSelf: 'center',
               textDecoration: 'underline',
             }}

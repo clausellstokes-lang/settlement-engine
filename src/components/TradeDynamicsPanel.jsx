@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import ControlsStrip from './ControlsStrip.jsx';
-import {GOLD, INK, MUTED, SECOND, BORDER, sans} from './theme.js';
+import {GOLD, INK, MUTED, SECOND, BORDER, sans, FS} from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid } from '../store/selectors.js';
 import {SERVICE_TIER_DATA} from '../generators/servicesGenerator';
@@ -60,13 +60,13 @@ function GoodCard({ good, state, onCycle }) {
     }}>
       <div style={{flex:1, minWidth:0}}>
         <div style={{display:'flex', alignItems:'baseline', gap:6, flexWrap:'wrap'}}>
-          <span style={{fontWeight:600, fontSize:12, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{good.name}</span>
-          {cc.label && <span style={{fontSize:10, fontWeight:700, color:cc.text, background:cc.bg, borderRadius:3, padding:'0 4px'}}>{cc.label}</span>}
-          {good.requiredInstitution && <span style={{fontSize:10, color:MUTED, fontStyle:'italic'}}>needs {good.requiredInstitution}</span>}
+          <span style={{fontWeight:600, fontSize:FS.sm, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{good.name}</span>
+          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, borderRadius:3, padding:'0 4px'}}>{cc.label}</span>}
+          {good.requiredInstitution && <span style={{fontSize:FS.xxs, color:MUTED, fontStyle:'italic'}}>needs {good.requiredInstitution}</span>}
         </div>
-        {good.desc && <p style={{fontSize:11, color:SECOND, lineHeight:1.3, marginTop:1, marginBottom:0}}>{good.desc}</p>}
+        {good.desc && <p style={{fontSize:FS.xs, color:SECOND, lineHeight:1.3, marginTop:1, marginBottom:0}}>{good.desc}</p>}
       </div>
-      <span style={{fontSize:9, fontWeight:700, color:labelColor, flexShrink:0, marginTop:2, letterSpacing:'0.03em'}}>{labelText}</span>
+      <span style={{fontSize:FS.micro, fontWeight:700, color:labelColor, flexShrink:0, marginTop:2, letterSpacing:'0.03em'}}>{labelText}</span>
     </div>
   );
 }
@@ -81,15 +81,15 @@ function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
       WebkitTapHighlightColor:'transparent',
     }}>
       <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
-        <span style={{fontSize:12, fontWeight:700, color:INK, fontFamily:"'Crimson Text', Georgia, serif"}}>{label}</span>
-        {forced>0 && <span style={{fontSize:9, fontWeight:800, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>}
+        <span style={{fontSize:FS.sm, fontWeight:700, color:INK, fontFamily:"'Crimson Text', Georgia, serif"}}>{label}</span>
+        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>}
       </span>
-      {forced===0 && <span style={{fontSize:9, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>}
+      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>}
       {forced>0 && <>
-        <span style={{fontSize:9, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>
-        <span style={{fontSize:9, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>
+        <span style={{fontSize:FS.micro, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>
+        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>
       </>}
-      <span style={{fontSize:10, color:MUTED, marginLeft:4}}>{isOpen ? '▲' : '▼'}</span>
+      <span style={{fontSize:FS.xxs, color:MUTED, marginLeft:4}}>{isOpen ? '▲' : '▼'}</span>
     </button>
   );
 }
@@ -179,7 +179,7 @@ function GoodsPanel() {
       {showExport && (
         <div style={{maxHeight:360, overflowY:'auto', background:'#faf6ef'}}>
           {sorted.length===0 && search
-            ? <div style={{padding:12, textAlign:'center', color:MUTED, fontSize:12, fontStyle:'italic'}}>No goods match "{search}"</div>
+            ? <div style={{padding:12, textAlign:'center', color:MUTED, fontSize:FS.sm, fontStyle:'italic'}}>No goods match "{search}"</div>
             : sorted.map(g => <GoodCard key={g.name} good={g} state={getState(g)} onCycle={()=>cycleGood(g)}/>)
           }
         </div>
@@ -189,7 +189,7 @@ function GoodsPanel() {
       {showImport && (
         <div style={{maxHeight:360, overflowY:'auto', background:'#faf6ef'}}>
           {sorted.length===0 && search
-            ? <div style={{padding:12, textAlign:'center', color:MUTED, fontSize:12, fontStyle:'italic'}}>No goods match "{search}"</div>
+            ? <div style={{padding:12, textAlign:'center', color:MUTED, fontSize:FS.sm, fontStyle:'italic'}}>No goods match "{search}"</div>
             : sorted.map(g => <GoodCard key={g.name} good={g} state={getState(g)} onCycle={()=>cycleGood(g)}/>)
           }
         </div>
@@ -203,9 +203,9 @@ export default function TradeDynamicsPanel() {
   return (
     <div style={{border:`1px solid ${BORDER}`, borderRadius:8}}>
       <button onClick={()=>setOpen(v=>!v)} style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:'#f5ede0', border:'none', cursor:'pointer', textAlign:'left', borderBottom:open?'1px solid #e0d0b0':'none', fontFamily:sans}}>
-        <span style={{fontSize:15}}></span>
+        <span style={{fontSize:FS.lg}}></span>
         <span style={{fontFamily:'Crimson Text, Georgia, serif', fontSize:16, fontWeight:600, color:INK, flex:1}}>Step 4: Trade Dynamics</span>
-        <span style={{fontSize:11, color:MUTED, fontWeight:500}}>{open ? 'Collapse' : 'Configure Trade'}</span>
+        <span style={{fontSize:FS.xs, color:MUTED, fontWeight:500}}>{open ? 'Collapse' : 'Configure Trade'}</span>
       </button>
       {open && <GoodsPanel />}
     </div>

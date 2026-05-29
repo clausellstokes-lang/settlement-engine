@@ -84,7 +84,7 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
           style={{
             position: 'absolute', top: -10, right: 16,
             background: GOLD, color: '#fff',
-            fontSize: 10, fontWeight: 800, letterSpacing: '0.06em',
+            fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.06em',
             padding: '3px 9px', borderRadius: 4,
             textTransform: 'uppercase',
           }}
@@ -191,7 +191,7 @@ function PackTile({ pack, onBuy, loading, emphasised }) {
           position: 'absolute', top: -10, right: -4,
           padding: '2px 8px', borderRadius: R.md,
           background: emphasised ? GOLD : SECOND, color: '#fff',
-          fontSize: 9, fontWeight: 800, letterSpacing: '0.02em',
+          fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.02em',
         }}>
           {pack.discount}
         </span>

@@ -284,7 +284,7 @@ export default function App() {
                   SettlementForge
                 </h1>
                 <span style={{
-                  fontSize: 11, fontWeight: 700,
+                  fontSize: FS.xs, fontWeight: 700,
                   color: '#e0c080', fontFamily: sans,
                   letterSpacing: '0.10em', textTransform: 'uppercase',
                   marginTop: 3,
@@ -319,7 +319,7 @@ export default function App() {
                     >
                       <Icon size={16} />
                       {label}
-                      {locked && <span style={{ fontSize: 10, marginLeft: 2 }}>PRO</span>}
+                      {locked && <span style={{ fontSize: FS.xxs, marginLeft: 2 }}>PRO</span>}
                     </button>
                   );
                 })}
@@ -514,7 +514,7 @@ export default function App() {
                     borderTop: active ? `2px solid ${GOLD}` : '2px solid transparent',
                     cursor: 'pointer',
                     color: active ? GOLD : SECOND,
-                    fontSize: 9, fontWeight: active ? 700 : 500,
+                    fontSize: FS.micro, fontWeight: active ? 700 : 500,
                     fontFamily: sans,
                     letterSpacing: '0.04em', textTransform: 'uppercase',
                   }}
@@ -540,7 +540,7 @@ export default function App() {
                   borderTop: view === 'account' ? `2px solid ${GOLD}` : '2px solid transparent',
                   cursor: 'pointer',
                   color: authTier === 'anon' ? GOLD : '#4A7A3A',
-                  fontSize: 9, fontWeight: 700,
+                  fontSize: FS.micro, fontWeight: 700,
                   fontFamily: sans,
                   letterSpacing: '0.04em', textTransform: 'uppercase',
                 }}

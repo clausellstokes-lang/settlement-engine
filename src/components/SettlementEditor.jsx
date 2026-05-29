@@ -12,7 +12,7 @@ import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
 import { STRESS_TYPE_MAP } from '../data/stressTypes.js';
 import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_ } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS } from './theme.js';
 import { useStore } from '../store/index.js';
 import { classifyChange } from '../lib/narrativeMutations.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
@@ -25,8 +25,8 @@ function SubSection({ title, count, children }) {
   return (
     <div style={{ border:`1px solid ${BORDER}`, borderRadius:6, overflow:'hidden' }}>
       <button onClick={() => setOpen(!open)} style={{ width:'100%', display:'flex', alignItems:'center', gap:6, padding:'8px 12px', background:open?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
-        <span style={{ fontSize:11, fontWeight:700, color:INK, flex:1, fontFamily:sans, textTransform:'uppercase', letterSpacing:'0.05em' }}>{title}</span>
-        {count != null && <span style={{ fontSize:10, color:MUTED }}>{count}</span>}
+        <span style={{ fontSize:FS.xs, fontWeight:700, color:INK, flex:1, fontFamily:sans, textTransform:'uppercase', letterSpacing:'0.05em' }}>{title}</span>
+        {count != null && <span style={{ fontSize:FS.xxs, color:MUTED }}>{count}</span>}
         <Toggle size={12} color={MUTED}/>
       </button>
       {open && <div style={{ padding:'10px 12px', background:CARD }}>{children}</div>}
@@ -37,8 +37,8 @@ function SubSection({ title, count, children }) {
 // ── Pill badge ──────────────────────────────────────────────────────────────
 function Pill({ label, color=SECOND, onRemove, isCustom }) {
   return (
-    <span style={{ display:'inline-flex', alignItems:'center', gap:4, padding:'2px 8px', borderRadius:10, background:`${color}14`, border:`1px solid ${color}40`, fontSize:10, fontWeight:600, color, whiteSpace:'nowrap' }}>
-      {isCustom && <span style={{ fontSize:8, fontWeight:800, color:'#7c3aed', background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 3px', marginRight:1 }}>C</span>}
+    <span style={{ display:'inline-flex', alignItems:'center', gap:4, padding:'2px 8px', borderRadius:10, background:`${color}14`, border:`1px solid ${color}40`, fontSize:FS.xxs, fontWeight:600, color, whiteSpace:'nowrap' }}>
+      {isCustom && <span style={{ fontSize:FS.nano, fontWeight:800, color:'#7c3aed', background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 3px', marginRight:1 }}>C</span>}
       {label}
       {onRemove && <button onClick={onRemove} style={{ background:'none', border:'none', cursor:'pointer', color, padding:0, display:'flex', lineHeight:1 }}><X size={10}/></button>}
     </span>
@@ -68,7 +68,7 @@ function CatalogSearch({ items, onAdd, placeholder, categoryFilters }) {
 
   if (!open) {
     return (
-      <button onClick={() => setOpen(true)} style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:'pointer', fontSize:10, fontWeight:700, fontFamily:sans, marginTop:6 }}>
+      <button onClick={() => setOpen(true)} style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:'pointer', fontSize:FS.xxs, fontWeight:700, fontFamily:sans, marginTop:6 }}>
         <Plus size={11}/> Add from catalog ({items.length} available)
       </button>
     );
@@ -79,7 +79,7 @@ function CatalogSearch({ items, onAdd, placeholder, categoryFilters }) {
       {/* Search bar */}
       <div style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 8px', borderBottom:`1px solid ${BORDER}` }}>
         <Search size={11} color={MUTED}/>
-        <input value={query} onChange={e => setQuery(e.target.value)} placeholder={placeholder || 'Search catalog...'} autoFocus style={{ flex:1, border:'none', background:'transparent', fontSize:11, fontFamily:sans, color:INK, outline:'none' }}/>
+        <input value={query} onChange={e => setQuery(e.target.value)} placeholder={placeholder || 'Search catalog...'} autoFocus style={{ flex:1, border:'none', background:'transparent', fontSize:FS.xs, fontFamily:sans, color:INK, outline:'none' }}/>
         <button onClick={() => { setOpen(false); setQuery(''); setCatFilter('All'); }} style={{ background:'none', border:'none', cursor:'pointer', color:MUTED, padding:0 }}><X size={12}/></button>
       </div>
 
@@ -87,7 +87,7 @@ function CatalogSearch({ items, onAdd, placeholder, categoryFilters }) {
       {categoryFilters && categoryFilters.length > 1 && (
         <div style={{ display:'flex', gap:3, padding:'4px 8px', flexWrap:'wrap', borderBottom:`1px solid ${BORDER}` }}>
           {['All', ...categoryFilters].map(c => (
-            <button key={c} onClick={() => setCatFilter(c)} style={{ padding:'1px 7px', borderRadius:8, fontSize:9, fontWeight:catFilter===c?700:500, cursor:'pointer', border:`1px solid ${catFilter===c?GOLD:BORDER}`, background:catFilter===c?GOLD_BG:'transparent', color:catFilter===c?GOLD:SECOND }}>
+            <button key={c} onClick={() => setCatFilter(c)} style={{ padding:'1px 7px', borderRadius:8, fontSize:FS.micro, fontWeight:catFilter===c?700:500, cursor:'pointer', border:`1px solid ${catFilter===c?GOLD:BORDER}`, background:catFilter===c?GOLD_BG:'transparent', color:catFilter===c?GOLD:SECOND }}>
               {c}
             </button>
           ))}
@@ -97,24 +97,24 @@ function CatalogSearch({ items, onAdd, placeholder, categoryFilters }) {
       {/* Results */}
       <div style={{ maxHeight:200, overflowY:'auto', padding:4 }}>
         {filtered.length === 0 ? (
-          <div style={{ padding:'8px 6px', fontSize:10, color:MUTED, textAlign:'center' }}>No matching items</div>
+          <div style={{ padding:'8px 6px', fontSize:FS.xxs, color:MUTED, textAlign:'center' }}>No matching items</div>
         ) : filtered.map(item => (
           <button key={item.id || item.name} onClick={() => { onAdd(item); }}
             style={{ width:'100%', display:'flex', alignItems:'flex-start', gap:6, padding:'5px 8px', border:'none', background:'none', cursor:'pointer', borderRadius:4, textAlign:'left', fontFamily:sans }}
             onMouseEnter={e => e.currentTarget.style.background='#f0ebe0'}
             onMouseLeave={e => e.currentTarget.style.background='none'}>
             <div style={{ flex:1, minWidth:0 }}>
-              <div style={{ fontSize:11, fontWeight:600, color:INK, display:'flex', alignItems:'center', gap:4 }}>
+              <div style={{ fontSize:FS.xs, fontWeight:600, color:INK, display:'flex', alignItems:'center', gap:4 }}>
                 {item.name}
-                {item.isCustom && <span style={{ fontSize:8, fontWeight:800, color:'#7c3aed', background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 4px' }}>Custom</span>}
+                {item.isCustom && <span style={{ fontSize:FS.nano, fontWeight:800, color:'#7c3aed', background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 4px' }}>Custom</span>}
               </div>
-              {item.desc && <div style={{ fontSize:9, color:MUTED, lineHeight:1.3, marginTop:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{item.desc}</div>}
+              {item.desc && <div style={{ fontSize:FS.micro, color:MUTED, lineHeight:1.3, marginTop:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{item.desc}</div>}
             </div>
-            {item.category && <span style={{ fontSize:9, fontWeight:600, color:SECOND, background:`${SECOND}10`, borderRadius:3, padding:'1px 5px', flexShrink:0 }}>{item.category}</span>}
-            {item.alreadyAdded && <span style={{ fontSize:9, color:MUTED, fontStyle:'italic' }}>Added</span>}
+            {item.category && <span style={{ fontSize:FS.micro, fontWeight:600, color:SECOND, background:`${SECOND}10`, borderRadius:3, padding:'1px 5px', flexShrink:0 }}>{item.category}</span>}
+            {item.alreadyAdded && <span style={{ fontSize:FS.micro, color:MUTED, fontStyle:'italic' }}>Added</span>}
           </button>
         ))}
-        {items.length > 30 && !query && <div style={{ padding:'4px 8px', fontSize:9, color:MUTED, textAlign:'center' }}>Search to see more...</div>}
+        {items.length > 30 && !query && <div style={{ padding:'4px 8px', fontSize:FS.micro, color:MUTED, textAlign:'center' }}>Search to see more...</div>}
       </div>
     </div>
   );
@@ -127,7 +127,7 @@ function CatalogSearch({ items, onAdd, placeholder, categoryFilters }) {
 function PrioritySlider({ label, value, onChange, onCommit, color=GOLD }) {
   return (
     <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-      <span style={{ fontSize:10, fontWeight:600, color:SECOND, minWidth:65, fontFamily:sans }}>{label}</span>
+      <span style={{ fontSize:FS.xxs, fontWeight:600, color:SECOND, minWidth:65, fontFamily:sans }}>{label}</span>
       <input
         type="range" min={0} max={100} value={value}
         onChange={e => onChange(+e.target.value)}
@@ -137,7 +137,7 @@ function PrioritySlider({ label, value, onChange, onCommit, color=GOLD }) {
         onBlur={onCommit}
         style={{ flex:1, accentColor:color, height:4 }}
       />
-      <span style={{ fontSize:10, fontWeight:700, color:INK, minWidth:24, textAlign:'right', fontFamily:'monospace' }}>{value}</span>
+      <span style={{ fontSize:FS.xxs, fontWeight:700, color:INK, minWidth:24, textAlign:'right', fontFamily:'monospace' }}>{value}</span>
     </div>
   );
 }
@@ -542,8 +542,8 @@ export default function SettlementEditor({
     <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden', marginBottom:14 }}>
       <button onClick={() => setOpen(!open)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:open?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
         <Sliders size={14} color={GOLD}/>
-        <span style={{ fontFamily:serif_, fontSize:13, fontWeight:600, color:INK, flex:1 }}>Settlement Editor</span>
-        <span style={{ fontSize:10, color:MUTED }}>Institutions, resources, stressors, trade, priorities</span>
+        <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Settlement Editor</span>
+        <span style={{ fontSize:FS.xxs, color:MUTED }}>Institutions, resources, stressors, trade, priorities</span>
         <Toggle size={13} color={MUTED}/>
       </button>
 
@@ -564,7 +564,7 @@ export default function SettlementEditor({
               background:'#fff7ec',
               border:`1px solid #e0b070`,
               borderRadius:6,
-              fontSize:11, fontFamily:sans, color:'#7a4f0f', lineHeight:1.4,
+              fontSize:FS.xs, fontFamily:sans, color:'#7a4f0f', lineHeight:1.4,
             }}>
               <span style={{ fontWeight:800, letterSpacing:'0.04em', textTransform:'uppercase', color:'#7a4f0f' }}>
                 Canon
@@ -583,7 +583,7 @@ export default function SettlementEditor({
               {institutions.map((inst, i) => (
                 <Pill key={i} label={`${inst.name} (${inst.category})`} color="#2a5a7a" isCustom={inst.source==='custom'} onRemove={() => removeInstitution(i)}/>
               ))}
-              {!institutions.length && <span style={{ fontSize:10, color:MUTED }}>No institutions</span>}
+              {!institutions.length && <span style={{ fontSize:FS.xxs, color:MUTED }}>No institutions</span>}
             </div>
             <CatalogSearch items={institutionCatalogItems} onAdd={addInstitution} placeholder="Search institutions..." categoryFilters={institutionCategories}/>
           </SubSection>
@@ -595,7 +595,7 @@ export default function SettlementEditor({
                 const def = RESOURCE_DATA[key];
                 return <Pill key={key} label={def?.label || key} color="#2a7a2a" onRemove={() => removeResource(key)}/>;
               })}
-              {!resources.length && <span style={{ fontSize:10, color:MUTED }}>No resources</span>}
+              {!resources.length && <span style={{ fontSize:FS.xxs, color:MUTED }}>No resources</span>}
             </div>
             <CatalogSearch items={resourceCatalogItems} onAdd={addResource} placeholder="Search resources..." categoryFilters={['water','land','special','subterranean']}/>
           </SubSection>
@@ -607,7 +607,7 @@ export default function SettlementEditor({
                 const def = STRESS_TYPE_MAP[s.type];
                 return <Pill key={i} label={def?.label || s.type} color={def?.colour || '#8b1a1a'} isCustom={s.isCustom} onRemove={() => removeStress(i)}/>;
               })}
-              {!stresses.length && <span style={{ fontSize:10, color:MUTED }}>No active stressors</span>}
+              {!stresses.length && <span style={{ fontSize:FS.xxs, color:MUTED }}>No active stressors</span>}
             </div>
             <CatalogSearch items={stressCatalogItems} onAdd={addStress} placeholder="Search stressors..."/>
           </SubSection>
@@ -615,24 +615,24 @@ export default function SettlementEditor({
           {/* Trade Goods */}
           <SubSection title="Trade Goods" count={exports_.length + imports_.length}>
             <div style={{ marginBottom:8 }}>
-              <div style={{ fontSize:9, fontWeight:700, color:MUTED, textTransform:'uppercase', marginBottom:4 }}>Exports</div>
+              <div style={{ fontSize:FS.micro, fontWeight:700, color:MUTED, textTransform:'uppercase', marginBottom:4 }}>Exports</div>
               <div style={{ display:'flex', flexWrap:'wrap', gap:4, marginBottom:4 }}>
                 {exports_.map((e, i) => {
                   const name = typeof e === 'string' ? e : e.name || e.good || 'unknown';
                   return <Pill key={i} label={name} color="#5a7a2a" onRemove={() => removeExport(i)}/>;
                 })}
-                {!exports_.length && <span style={{ fontSize:10, color:MUTED }}>None</span>}
+                {!exports_.length && <span style={{ fontSize:FS.xxs, color:MUTED }}>None</span>}
               </div>
               <CatalogSearch items={exportCatalogItems} onAdd={addExport} placeholder="Search exports..."/>
             </div>
             <div>
-              <div style={{ fontSize:9, fontWeight:700, color:MUTED, textTransform:'uppercase', marginBottom:4 }}>Imports</div>
+              <div style={{ fontSize:FS.micro, fontWeight:700, color:MUTED, textTransform:'uppercase', marginBottom:4 }}>Imports</div>
               <div style={{ display:'flex', flexWrap:'wrap', gap:4, marginBottom:4 }}>
                 {imports_.map((e, i) => {
                   const name = typeof e === 'string' ? e : e.name || e.good || 'unknown';
                   return <Pill key={i} label={name} color="#7a5a2a" onRemove={() => removeImport(i)}/>;
                 })}
-                {!imports_.length && <span style={{ fontSize:10, color:MUTED }}>None</span>}
+                {!imports_.length && <span style={{ fontSize:FS.xxs, color:MUTED }}>None</span>}
               </div>
               <CatalogSearch items={importCatalogItems} onAdd={addImport} placeholder="Search imports..."/>
             </div>

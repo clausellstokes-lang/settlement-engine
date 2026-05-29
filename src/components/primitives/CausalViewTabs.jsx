@@ -24,6 +24,7 @@
  */
 
 import { useMemo, useState } from 'react';
+import { FS } from '../theme.js';
 import { deriveCausalView, CAUSAL_VIEWS } from '../../domain/causalViews.js';
 
 const COLORS = Object.freeze({
@@ -150,7 +151,7 @@ export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewCh
       >
         {/* Caption */}
         <div style={{
-          fontSize: 11, color: COLORS.muted, lineHeight: 1.5,
+          fontSize: FS.xs, color: COLORS.muted, lineHeight: 1.5,
           marginBottom: 8,
           fontStyle: 'italic',
         }}>
@@ -167,7 +168,7 @@ export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewCh
 function ViewBody({ view, derived }) {
   if (!derived) {
     return (
-      <div style={{ fontSize: 11, color: COLORS.muted, fontStyle: 'italic' }}>
+      <div style={{ fontSize: FS.xs, color: COLORS.muted, fontStyle: 'italic' }}>
         View unavailable for this settlement.
       </div>
     );
@@ -185,7 +186,7 @@ function ViewBody({ view, derived }) {
         }}>
           {summary.map((line, i) => (
             <li key={i} style={{
-              fontSize: 12, color: COLORS.ink, lineHeight: 1.5,
+              fontSize: FS.sm, color: COLORS.ink, lineHeight: 1.5,
               padding: '3px 0',
               borderBottom: i === summary.length - 1 ? 'none' : '1px dashed rgba(210,189,150,0.5)',
             }}>
@@ -351,7 +352,7 @@ function Section({ title, children }) {
     <section style={{ marginBottom: 10 }}>
       <h4 style={{
         margin: '6px 0 4px',
-        fontSize: 10, fontWeight: 800, letterSpacing: '0.05em',
+        fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.05em',
         textTransform: 'uppercase', color: COLORS.muted,
       }}>
         {title}
@@ -378,7 +379,7 @@ function KeyValRow({ k, v }) {
 
 function Empty({ text }) {
   return (
-    <div style={{ fontSize: 11, color: COLORS.muted, fontStyle: 'italic', padding: '4px 0' }}>
+    <div style={{ fontSize: FS.xs, color: COLORS.muted, fontStyle: 'italic', padding: '4px 0' }}>
       {text}
     </div>
   );

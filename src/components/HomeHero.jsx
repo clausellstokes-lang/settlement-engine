@@ -180,7 +180,7 @@ export default function HomeHero({ onSignIn }) {
         ) : (
           <>
             <div style={{
-              fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
+              fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
               textTransform: 'uppercase', color: '#8C6F32',
               marginBottom: SP.sm,
             }}>
@@ -214,7 +214,7 @@ export default function HomeHero({ onSignIn }) {
       ) : (
         <>
           <div style={{
-            fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
+            fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
             textTransform: 'uppercase', color: '#8C6F32',
             marginBottom: SP.sm,
           }}>
@@ -357,7 +357,7 @@ export default function HomeHero({ onSignIn }) {
                 borderBottom: flag('heroV2') ? `2px solid #8C6F32` : 'none',
                 borderRadius: R.button,
                 fontFamily: serif_, fontWeight: 600,
-                fontSize: 20, letterSpacing: '0.02em',
+                fontSize: FS.xxl, letterSpacing: '0.02em',
                 cursor: generating ? 'wait' : 'pointer',
                 opacity: generating ? 0.7 : 1,
                 boxShadow: flag('heroV2')

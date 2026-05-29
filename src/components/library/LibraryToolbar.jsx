@@ -114,7 +114,7 @@ export default function LibraryToolbar({
         border: `1px solid ${BORDER}`,
         borderRadius: R.sm,
       }}>
-        <span style={{ fontSize: 11, color: MUTED }}>🔍</span>
+        <span style={{ fontSize: FS.xs, color: MUTED }}>🔍</span>
         <input
           type="search"
           value={query}
@@ -134,7 +134,7 @@ export default function LibraryToolbar({
             style={{
               background: 'transparent', border: 'none',
               color: MUTED, cursor: 'pointer', padding: 0,
-              fontSize: 13, lineHeight: 1,
+              fontSize: FS.md, lineHeight: 1,
             }}
           >×</button>
         )}

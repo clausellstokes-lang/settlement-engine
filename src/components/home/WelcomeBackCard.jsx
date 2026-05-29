@@ -60,14 +60,14 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
     }}>
       <div style={{ padding: SP.lg }}>
         <div style={{
-          fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
+          fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
           textTransform: 'uppercase', color: '#8C6F32',
         }}>
           {t('hero.welcomeBack.eyebrow') || 'Welcome back'}
         </div>
         <h2 style={{
           margin: '6px 0 0', fontFamily: serif_, fontWeight: 600,
-          fontSize: 20, color: INK,
+          fontSize: FS.xxl, color: INK,
         }}>
           {t('hero.welcomeBack.titleTpl', { days: String(days), name }) ||
             `It's been ${days} days, ${name}.`}

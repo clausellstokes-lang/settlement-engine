@@ -21,6 +21,7 @@
  */
 
 import { useEffect } from 'react';
+import { FS } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { Funnel } from '../../lib/analytics.js';
 
@@ -109,7 +110,7 @@ export default function LockedDestination({
         background: VIOLET_DIM,
         color: VIOLET,
         borderRadius: 4,
-        fontSize: 10, fontWeight: 800,
+        fontSize: FS.xxs, fontWeight: 800,
         letterSpacing: '0.14em', textTransform: 'uppercase',
       }}>
         {eyebrow}
@@ -126,7 +127,7 @@ export default function LockedDestination({
 
       <p style={{
         margin: 0, maxWidth: 600,
-        fontSize: 15, color: BODY, lineHeight: 1.6,
+        fontSize: FS.lg, color: BODY, lineHeight: 1.6,
       }}>
         {body}
       </p>
@@ -174,7 +175,7 @@ export default function LockedDestination({
             padding: '10px 18px',
             background: VIOLET, color: '#fff',
             border: 'none', borderRadius: 4,
-            fontSize: 13, fontWeight: 700, fontFamily: sans,
+            fontSize: FS.md, fontWeight: 700, fontFamily: sans,
             cursor: 'pointer',
             boxShadow: '0 2px 8px rgba(123,79,207,0.35)',
           }}
@@ -185,7 +186,7 @@ export default function LockedDestination({
           <a
             href={secondaryLink}
             style={{
-              fontSize: 12, color: GOLD, fontWeight: 700,
+              fontSize: FS.sm, color: GOLD, fontWeight: 700,
               textDecoration: 'underline', fontFamily: sans,
             }}
           >
@@ -194,7 +195,7 @@ export default function LockedDestination({
         )}
         <span style={{
           marginLeft: 'auto',
-          fontSize: 11, color: MUTED, fontStyle: 'italic',
+          fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
         }}>
           Free 7-day trial · cancel anytime
         </span>

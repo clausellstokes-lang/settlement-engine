@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FS } from '../../theme.js';
 import { serif, Collapsible, Empty, TabIntro } from '../Primitives';
 import {relStyle} from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -52,28 +53,28 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
       <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14,flexWrap:'wrap'}}>
         <div style={{flex:1}}>
-          <span style={{...serif,fontSize:17,fontWeight:600,color:'#1c1409'}}>{npcs.length} Key Figures</span>
-          <span style={{fontSize:11,color:'#9c8068',marginLeft:8}}>
+          <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:'#1c1409'}}>{npcs.length} Key Figures</span>
+          <span style={{fontSize:FS.xs,color:'#9c8068',marginLeft:8}}>
             {highCount>0&&`${highCount} high influence · `}{modCount>0&&`${modCount} moderate`}
           </span>
         </div>
         {pinnedCount > 0 && (
           <span
             title="Pinned NPCs are preserved across regenerate/progress — their goal and secret won't be rewritten."
-            style={{fontSize:10,fontWeight:800,color:'#6a2a9a',background:'rgba(106,42,154,0.1)',border:'1px solid rgba(160,100,220,0.35)',borderRadius:12,padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
+            style={{fontSize:FS.xxs,fontWeight:800,color:'#6a2a9a',background:'rgba(106,42,154,0.1)',border:'1px solid rgba(160,100,220,0.35)',borderRadius:12,padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
             ⚲ {pinnedCount} PINNED
           </span>
         )}
-        {onRerollNPCs&&<button onClick={onRerollNPCs} style={{fontSize:11,fontWeight:700,color:'#a0762a',background:'#f7f0e4',border:'1px solid #c8b89a',borderRadius:5,padding:'5px 12px',cursor:'pointer',flexShrink:0}}>↺ Reroll</button>}
+        {onRerollNPCs&&<button onClick={onRerollNPCs} style={{fontSize:FS.xs,fontWeight:700,color:'#a0762a',background:'#f7f0e4',border:'1px solid #c8b89a',borderRadius:5,padding:'5px 12px',cursor:'pointer',flexShrink:0}}>↺ Reroll</button>}
       </div>
 
       {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         <div style={{position:'relative',flex:1,minWidth:140}}>
-          <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',color:'#9c8068',fontSize:13}}></span>
+          <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',color:'#9c8068',fontSize:FS.md}}></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
             placeholder="Filter by name, role, or faction…"
-            style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',borderRadius:5,fontSize:12,fontFamily:'Nunito,sans-serif',color:'#1c1409',background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
+            style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',borderRadius:5,fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:'#1c1409',background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
           {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize:16,color:'#9c8068',padding:0,lineHeight:1}}>×</button>}
         </div>
         {[
@@ -83,7 +84,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
           {key:'low',   label:'● Low'},
         ].map(f=>(
           <button key={f.key} onClick={()=>setImpFilter(f.key)}
-            style={{padding:'6px 11px',borderRadius:5,border:'1px solid',fontSize:11,fontWeight:impFilter===f.key?700:500,cursor:'pointer',flexShrink:0,
+            style={{padding:'6px 11px',borderRadius:5,border:'1px solid',fontSize:FS.xs,fontWeight:impFilter===f.key?700:500,cursor:'pointer',flexShrink:0,
               background:impFilter===f.key?'#1c1409':'#f7f0e4',
               color:impFilter===f.key?'#c49a3c':'#6b5340',
               borderColor:impFilter===f.key?'#1c1409':'#c8b89a'}}>
@@ -107,7 +108,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
         />
       ))}
 
-      <p style={{fontSize:11,color:'#9c8068',marginTop:8,fontStyle:'italic',textAlign:'right'}}>
+      <p style={{fontSize:FS.xs,color:'#9c8068',marginTop:8,fontStyle:'italic',textAlign:'right'}}>
         {npcs.length} figures · tap any card to expand
       </p>
     

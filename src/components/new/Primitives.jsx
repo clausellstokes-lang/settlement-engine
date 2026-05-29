@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FS } from '../theme.js';
 import { t } from '../../copy/index.js';
 
 export const serif = { fontFamily: 'Crimson Text, Georgia, serif' };
@@ -25,7 +26,7 @@ export function TabIntro({ tabKey }) {
     <p style={{
       margin: '0 0 14px 0',
       fontFamily: 'Crimson Text, Georgia, serif',
-      fontSize: 17,
+      fontSize: FS.xl,
       fontStyle: 'italic',
       color: '#4A3B22',       // ink-600 — WCAG-passing body
       lineHeight: 1.5,
@@ -51,8 +52,8 @@ export function Collapsible({ title, defaultOpen = true, children }) {
         cursor: 'pointer', textAlign: 'left', borderBottom: open ? '1px solid #e0d0b0' : 'none',
         WebkitTapHighlightColor: 'transparent',
       }}>
-        <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: 15, fontWeight: 600, color: '#1c1409' }}>{title}</span>
-        <span style={{ fontSize: 11, color: '#9c8068', fontWeight: 600 }}>{open ? '\u25b2' : '\u25bc'}</span>
+        <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.lg, fontWeight: 600, color: '#1c1409' }}>{title}</span>
+        <span style={{ fontSize: FS.xs, color: '#9c8068', fontWeight: 600 }}>{open ? '\u25b2' : '\u25bc'}</span>
       </button>
       {open && <div style={{ padding: '12px 13px', background: '#faf8f4' }}>{children}</div>}
     </div>
@@ -75,8 +76,8 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
           cursor: 'pointer', textAlign: 'left', borderBottom: open ? `1px solid ${borderColor}` : 'none',
           WebkitTapHighlightColor: 'transparent',
         }}>
-          <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: 15, fontWeight: 600, color: titleColor }}>{title}</span>
-          <span style={{ fontSize: 12, color: '#9c8068' }}>{open ? '\u25b2' : '\u25bc'}</span>
+          <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.lg, fontWeight: 600, color: titleColor }}>{title}</span>
+          <span style={{ fontSize: FS.sm, color: '#9c8068' }}>{open ? '\u25b2' : '\u25bc'}</span>
         </button>
         {open && <div style={{ padding: '12px 13px', background: '#faf8f4' }}>{children}</div>}
       </div>
@@ -84,7 +85,7 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
   }
   return (
     <div style={{ marginBottom: 16 }}>
-      <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: 17, fontWeight: 600, color: '#1c1409', borderBottom: '1px solid #e0d0b0', paddingBottom: 5, marginBottom: 12 }}>
+      <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.xl, fontWeight: 600, color: '#1c1409', borderBottom: '1px solid #e0d0b0', paddingBottom: 5, marginBottom: 12 }}>
         {title}
       </div>
       {children}
@@ -94,9 +95,9 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
 
 export function SectionHeader({ title, count }) {
   return (
-    <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: 17, fontWeight: 600, color: '#1c1409', borderBottom: '1px solid #e0d0b0', paddingBottom: 5, marginBottom: 12, display: 'flex', alignItems: 'baseline', gap: 8 }}>
+    <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.xl, fontWeight: 600, color: '#1c1409', borderBottom: '1px solid #e0d0b0', paddingBottom: 5, marginBottom: 12, display: 'flex', alignItems: 'baseline', gap: 8 }}>
       {title}
-      {count !== undefined && <span style={{ fontSize: 12, color: '#9c8068', fontFamily: 'Nunito, sans-serif', fontWeight: 400 }}>({count})</span>}
+      {count !== undefined && <span style={{ fontSize: FS.sm, color: '#9c8068', fontFamily: 'Nunito, sans-serif', fontWeight: 400 }}>({count})</span>}
     </div>
   );
 }
@@ -126,7 +127,7 @@ export function Card({ children, style }) {
 export function Tag({ color, bg, border, children }) {
   const c = color || '#6b5340';
   return (
-    <span style={{ fontSize: 11, fontWeight: 600, color: c, background: bg || (c + '18'), border: '1px solid ' + (border || (c + '40')), borderRadius: 10, padding: '2px 9px', display: 'inline-block', margin: '2px 3px 2px 0' }}>
+    <span style={{ fontSize: FS.xs, fontWeight: 600, color: c, background: bg || (c + '18'), border: '1px solid ' + (border || (c + '40')), borderRadius: 10, padding: '2px 9px', display: 'inline-block', margin: '2px 3px 2px 0' }}>
       {children}
     </span>
   );
@@ -142,10 +143,10 @@ export function PlotHook({ text, source, color }) {
   const txt = Ti(text);
   return (
     <div style={{ display: 'flex', gap: 8, padding: '6px 0', borderBottom: '1px solid #f0e8d8' }}>
-      <span style={{ color: c, flexShrink: 0, fontSize: 12 }}>\u2746</span>
+      <span style={{ color: c, flexShrink: 0, fontSize: FS.sm }}>\u2746</span>
       <div style={{ flex: 1 }}>
-        {source && <div style={{ fontSize: 10, fontWeight: 700, color: c, marginBottom: 2 }}>{source}</div>}
-        <p style={{ margin: 0, fontSize: 12, color: '#1c1409', lineHeight: 1.45, fontStyle: 'italic' }}>{txt}</p>
+        {source && <div style={{ fontSize: FS.xxs, fontWeight: 700, color: c, marginBottom: 2 }}>{source}</div>}
+        <p style={{ margin: 0, fontSize: FS.sm, color: '#1c1409', lineHeight: 1.45, fontStyle: 'italic' }}>{txt}</p>
       </div>
     </div>
   );
@@ -157,7 +158,7 @@ export function PlotHook({ text, source, color }) {
 
 // Empty state
 export function Empty({ message }) {
-  return <div style={{ padding: '24px 0', textAlign: 'center', color: '#9c8068', fontSize: 13, fontStyle: 'italic' }}>{message}</div>;
+  return <div style={{ padding: '24px 0', textAlign: 'center', color: '#9c8068', fontSize: FS.md, fontStyle: 'italic' }}>{message}</div>;
 }
 
 // Summary accordion card — js in original (mobile=accordion, desktop=always open)

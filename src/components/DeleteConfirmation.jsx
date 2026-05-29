@@ -4,7 +4,7 @@
  * Renders an expandable warning with context-aware messaging.
  * Used by SettlementsPanel, CampaignSection, Compendium, and WorldMap.
  */
-import { CARD, SECOND, BORDER, sans } from './theme.js';
+import { CARD, SECOND, BORDER, sans, FS } from './theme.js';
 
 // Tier 7.19 — local BODY alias. The body-copy color used to be a
 // hard-coded '#6b5340' literal; surfacing it as a named constant means
@@ -20,11 +20,11 @@ export default function DeleteConfirmation({ entityName, details, onConfirm, onC
       background: '#fdf4f4', border: '1px solid #e8c0c0',
       borderRadius: 6,
     }}>
-      <div style={{ fontSize: 12, color: '#8b1a1a', fontWeight: 600, marginBottom: 5 }}>
+      <div style={{ fontSize: FS.sm, color: '#8b1a1a', fontWeight: 600, marginBottom: 5 }}>
         Delete "{entityName}"?
       </div>
       {details && (
-        <div style={{ fontSize: 11, color: BODY, lineHeight: 1.5, marginBottom: 8 }}>
+        <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5, marginBottom: 8 }}>
           {details}
         </div>
       )}
@@ -34,7 +34,7 @@ export default function DeleteConfirmation({ entityName, details, onConfirm, onC
           style={{
             padding: '5px 14px', background: '#8b1a1a', color: '#fff',
             border: 'none', borderRadius: 4, cursor: 'pointer',
-            fontSize: 11, fontWeight: 700, fontFamily: sans,
+            fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
           }}
         >
           Yes, delete permanently
@@ -44,7 +44,7 @@ export default function DeleteConfirmation({ entityName, details, onConfirm, onC
           style={{
             padding: '5px 10px', background: CARD, color: SECOND,
             border: `1px solid ${BORDER}`, borderRadius: 4, cursor: 'pointer',
-            fontSize: 11, fontFamily: sans,
+            fontSize: FS.xs, fontFamily: sans,
           }}
         >
           Cancel

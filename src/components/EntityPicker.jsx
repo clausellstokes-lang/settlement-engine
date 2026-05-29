@@ -23,7 +23,7 @@
 import { useMemo, useState } from 'react';
 import { X, Search, AlertTriangle } from 'lucide-react';
 import { useStore } from '../store';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS } from './theme.js';
 import { buildRegistry } from '../lib/customRegistry.js';
 
 const PURPLE = '#7c3aed';
@@ -125,7 +125,7 @@ export default function EntityPicker({
                   background: missing ? '#fdebec' : `${accent}14`,
                   border: `1px solid ${accent}55`,
                   borderRadius: 12,
-                  fontSize: 11, fontWeight: 600,
+                  fontSize: FS.xs, fontWeight: 600,
                   color: accent, fontFamily: sans,
                 }}
               >
@@ -133,7 +133,7 @@ export default function EntityPicker({
                 <span>{label}</span>
                 {isCustom && !missing && (
                   <span style={{
-                    fontSize: 8, fontWeight: 800, letterSpacing: '0.05em',
+                    fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
                     background: `${PURPLE}28`, color: PURPLE,
                     borderRadius: 4, padding: '0 3px',
                   }}>CUSTOM</span>
@@ -175,7 +175,7 @@ export default function EntityPicker({
             placeholder={placeholder}
             style={{
               flex: 1, border: 'none', outline: 'none', background: 'transparent',
-              fontFamily: sans, fontSize: 12, color: INK,
+              fontFamily: sans, fontSize: FS.sm, color: INK,
             }}
           />
         </div>
@@ -204,17 +204,17 @@ export default function EntityPicker({
               onMouseEnter={e => (e.currentTarget.style.background = '#faf6ef')}
               onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
             >
-              <span style={{ fontSize: 12, fontWeight: 600, color: INK, flex: 1 }}>
+              <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK, flex: 1 }}>
                 {s.name}
               </span>
               {s.subcategory && (
-                <span style={{ fontSize: 10, color: MUTED }}>
+                <span style={{ fontSize: FS.xxs, color: MUTED }}>
                   {s.subcategory}
                 </span>
               )}
               {s.source === 'custom' && (
                 <span style={{
-                  fontSize: 8, fontWeight: 800, letterSpacing: '0.05em',
+                  fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
                   background: `${PURPLE}20`, color: PURPLE,
                   borderRadius: 4, padding: '1px 4px',
                 }}>CUSTOM</span>
@@ -228,7 +228,7 @@ export default function EntityPicker({
       {focused && suggestions.length === 0 && query && (
         <div style={{
           marginTop: 4, padding: '6px 8px',
-          fontSize: 11, color: MUTED, fontStyle: 'italic',
+          fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
           border: `1px dashed ${BORDER}`, borderRadius: 4,
         }}>
           No matches in {category}. Add a custom entry first if needed.
@@ -241,7 +241,7 @@ export default function EntityPicker({
           marginTop: 6, padding: '4px 8px',
           background: '#fdebec', border: '1px solid #f0c8cc',
           borderRadius: 4,
-          fontSize: 10, color: '#8b1a1a',
+          fontSize: FS.xxs, color: '#8b1a1a',
           display: 'flex', alignItems: 'center', gap: 4,
         }}>
           <AlertTriangle size={10} />

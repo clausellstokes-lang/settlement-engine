@@ -23,6 +23,7 @@
  */
 
 import { useEffect, useMemo, useState } from 'react';
+import { FS } from '../theme.js';
 import { useStore } from '../../store';
 import { flag } from '../../lib/flags.js';
 
@@ -110,7 +111,7 @@ export default function AutoSaveChip({ saving = false }) {
         background: `${dotColor}10`,
         border: `1px solid ${dotColor}45`,
         borderRadius: 12,
-        fontSize: 11, color: dirty || saving ? '#3A2F18' : MUTED,
+        fontSize: FS.xs, color: dirty || saving ? '#3A2F18' : MUTED,
         fontFamily: sans, fontWeight: 600,
         userSelect: 'none',
       }}

@@ -18,6 +18,7 @@
  */
 
 import { useState } from 'react';
+import { FS } from '../theme.js';
 import { Clipboard, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
@@ -92,7 +93,7 @@ export default function AIPromptButton({ settlement }) {
         border: `1px solid ${copied ? '#4A7A3A' : BORDER}`,
         borderRadius: 4,
         color: copied ? '#3A6A2A' : MUTED,
-        fontSize: 11, fontFamily: sans, fontWeight: 600,
+        fontSize: FS.xs, fontFamily: sans, fontWeight: 600,
         cursor: 'pointer',
       }}
     >

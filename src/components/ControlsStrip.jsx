@@ -4,7 +4,7 @@
  * stats row (No overrides active | X forced · Y excluded), and filter pills (All / Forced / Excluded).
  */
 import {Search, X} from 'lucide-react';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans, FS } from './theme.js';
 
 export default function ControlsStrip({
   // Search
@@ -61,7 +61,7 @@ export default function ControlsStrip({
 
       {/* Stats + filter pills */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: 10, color: MUTED }}>
+        <span style={{ fontSize: FS.xxs, color: MUTED }}>
           {forcedCount === 0 && excludedCount === 0
             ? 'No overrides active'
             : <>{ForcedPill}{forcedCount > 0 && excludedCount > 0 && ' · '}{ExcludedPill}</>
@@ -69,7 +69,7 @@ export default function ControlsStrip({
         </span>
         {setFilterMode && ['all', 'forced', 'excluded'].map(m => (
           <button key={m} onClick={() => setFilterMode(m)} style={{
-            fontSize: 10, fontWeight: filterMode === m ? 700 : 500,
+            fontSize: FS.xxs, fontWeight: filterMode === m ? 700 : 500,
             padding: '2px 8px', borderRadius: 4, cursor: 'pointer',
             border: `1px solid ${filterMode === m ? GOLD : BORDER}`,
             background: filterMode === m ? `${GOLD}20` : `rgba(250,248,244,0.97)`,
@@ -80,12 +80,12 @@ export default function ControlsStrip({
         ))}
         {extraStats}
         {tier === 'all' && (
-          <span style={{ fontSize: 9, fontWeight: 800, color: '#2a3a7a', background: '#e8ecff', borderRadius: 3, padding: '1px 6px', letterSpacing: '0.04em' }}>
+          <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#2a3a7a', background: '#e8ecff', borderRadius: 3, padding: '1px 6px', letterSpacing: '0.04em' }}>
             ALL TIERS
           </span>
         )}
         {showLegend && (
-          <span style={{ fontSize: 10, color: SECOND, marginLeft: 'auto' }}>
+          <span style={{ fontSize: FS.xxs, color: SECOND, marginLeft: 'auto' }}>
             Click: <strong>○ Allow</strong> → <strong style={{ color: GOLD }}>◆ Force</strong> → <strong style={{ color: '#c04040' }}>✕ Exclude</strong>
           </span>
         )}
@@ -97,7 +97,7 @@ export default function ControlsStrip({
 function btnStyle(border, background, color, fontWeight = 500) {
   return {
     padding: '4px 9px', borderRadius: 4, border, background, color,
-    fontSize: 10, fontWeight, cursor: 'pointer',
+    fontSize: FS.xxs, fontWeight, cursor: 'pointer',
     fontFamily: 'Nunito, sans-serif', whiteSpace: 'nowrap',
   };
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FS } from '../../theme.js';
 import {Ti, serif, sans, TabIntro} from '../Primitives';
 import { REL_STYLES } from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -165,14 +166,14 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:12,flexWrap:'wrap',gap:8}}>
         <div>
-          <span style={{...serif,fontSize:17,fontWeight:600,color:'#1c1409'}}>{rawHooks.length} Plot Hooks</span>
-          <span style={{fontSize:12,color:'#9c8068',marginLeft:8}}>{categories.length} sources</span>
+          <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:'#1c1409'}}>{rawHooks.length} Plot Hooks</span>
+          <span style={{fontSize:FS.sm,color:'#9c8068',marginLeft:8}}>{categories.length} sources</span>
         </div>
         {/* Sort toggle */}
         <div style={{display:'flex',gap:4}}>
           {[{key:'priority',label:'By priority'},{key:'category',label:'By source'}].map(opt=>(
             <button key={opt.key} onClick={()=>setSortBy(opt.key)}
-              style={{padding:'4px 10px',borderRadius:4,border:'1px solid',fontSize:11,fontWeight:sortBy===opt.key?700:400,cursor:'pointer',
+              style={{padding:'4px 10px',borderRadius:4,border:'1px solid',fontSize:FS.xs,fontWeight:sortBy===opt.key?700:400,cursor:'pointer',
                 background:sortBy===opt.key?'#1c1409':'#f7f0e4',
                 color:sortBy===opt.key?'#c49a3c':'#6b5340',
                 borderColor:sortBy===opt.key?'#1c1409':'#c8b89a'}}>
@@ -185,7 +186,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
       {/* ── FILTER TABS ─────────────────────────────────────────────────── */}
       <div style={{display:'flex',gap:5,flexWrap:'wrap',marginBottom:14}}>
         <button onClick={()=>setFilter('all')} style={{
-          padding:'5px 11px',borderRadius:5,border:'1px solid',fontSize:11,cursor:'pointer',
+          padding:'5px 11px',borderRadius:5,border:'1px solid',fontSize:FS.xs,cursor:'pointer',
           background:filter==='all'?'#1c1409':'#f7f0e4',
           color:filter==='all'?'#c49a3c':'#6b5340',
           borderColor:filter==='all'?'#1c1409':'#c8b89a',
@@ -196,7 +197,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
           const active = filter===cat;
           return <button key={cat} onClick={()=>setFilter(cat)} style={{
             padding:'5px 11px',borderRadius:5,border:`1px solid ${active?meta.color:'#c8b89a'}`,
-            fontSize:11,cursor:'pointer',
+            fontSize:FS.xs,cursor:'pointer',
             background:active?`${meta.color}18`:'#f7f0e4',
             color:active?meta.color:'#6b5340',
             fontWeight:active?700:500,
@@ -210,7 +211,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
 
       {/* ── HOOKS LIST ──────────────────────────────────────────────────── */}
       {filtered.length===0
-        ? <div style={{padding:'24px',textAlign:'center',color:'#9c8068',fontSize:13,fontStyle:'italic'}}>No plot hooks in this category.</div>
+        ? <div style={{padding:'24px',textAlign:'center',color:'#9c8068',fontSize:FS.md,fontStyle:'italic'}}>No plot hooks in this category.</div>
         : <div style={{display:'flex',flexDirection:'column',gap:8}}>
             {filtered.map((h,i)=>{
               const meta = CAT[h.category] || CAT.npc;
@@ -231,13 +232,13 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
                   <div style={{flex:1,padding:'10px 14px',minWidth:0}}>
                     {/* Source line */}
                     <div style={{display:'flex',alignItems:'baseline',gap:6,marginBottom:5,flexWrap:'wrap'}}>
-                      <span style={{fontSize:12}}>{meta.icon}</span>
-                      <span style={{fontSize:11,fontWeight:700,color:meta.color}}>{h.source}</span>
-                      {h.role&&<span style={{fontSize:10,color:'#9c8068'}}>{h.role}</span>}
-                      {h.sub&&<span style={{fontSize:10,color:isAccent?meta.color:'#9c8068',fontStyle:!isAccent?'italic':'normal',fontWeight:isAccent?700:400,marginLeft:'auto'}}>{h.sub}</span>}
+                      <span style={{fontSize:FS.sm}}>{meta.icon}</span>
+                      <span style={{fontSize:FS.xs,fontWeight:700,color:meta.color}}>{h.source}</span>
+                      {h.role&&<span style={{fontSize:FS.xxs,color:'#9c8068'}}>{h.role}</span>}
+                      {h.sub&&<span style={{fontSize:FS.xxs,color:isAccent?meta.color:'#9c8068',fontStyle:!isAccent?'italic':'normal',fontWeight:isAccent?700:400,marginLeft:'auto'}}>{h.sub}</span>}
                     </div>
                     {/* Hook text */}
-                    <p style={{fontSize:13,color:'#1c1409',lineHeight:1.6,margin:0}}>{h.text}</p>
+                    <p style={{fontSize:FS.md,color:'#1c1409',lineHeight:1.6,margin:0}}>{h.text}</p>
                   </div>
                 </div>
               );
@@ -245,7 +246,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
           </div>
       }
 
-      <p style={{fontSize:11,color:'#9c8068',marginTop:12,fontStyle:'italic',textAlign:'right'}}>
+      <p style={{fontSize:FS.xs,color:'#9c8068',marginTop:12,fontStyle:'italic',textAlign:'right'}}>
         {rawHooks.length} hooks from {categories.length} sources
       </p>
     </div>

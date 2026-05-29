@@ -17,6 +17,7 @@
  */
 
 import { useState } from 'react';
+import { FS } from '../theme.js';
 import { Sparkles, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import Card from '../primitives/Card.jsx';
@@ -56,7 +57,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
     >
       <p style={{
         margin: '0 0 8px',
-        fontSize: 12, lineHeight: 1.5,
+        fontSize: FS.sm, lineHeight: 1.5,
         fontFamily: 'system-ui, -apple-system, sans-serif',
         color: '#1c1409',
       }}>
@@ -72,7 +73,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
           padding: '6px 12px',
           background: '#a0762a', color: '#fffbf5',
           border: 'none', borderRadius: 4,
-          fontSize: 12, fontWeight: 700,
+          fontSize: FS.sm, fontWeight: 700,
           fontFamily: 'system-ui, -apple-system, sans-serif',
           cursor: 'pointer',
         }}

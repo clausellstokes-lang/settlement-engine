@@ -26,6 +26,7 @@
  */
 
 import { useState } from 'react';
+import { FS } from '../theme.js';
 
 const COLORS = Object.freeze({
   bg:        '#fffbf5',
@@ -87,12 +88,12 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
         }}
       >
         <span style={{
-          fontSize: 11, fontWeight: 800, color: COLORS.gold,
+          fontSize: FS.xs, fontWeight: 800, color: COLORS.gold,
           textTransform: 'uppercase', letterSpacing: '0.06em',
         }}>
           What changed in the rerun
         </span>
-        <span style={{ fontSize: 11, color: COLORS.muted, flex: 1 }}>
+        <span style={{ fontSize: FS.xs, color: COLORS.muted, flex: 1 }}>
           {summarizeCounts(delta)}
         </span>
         <button
@@ -101,7 +102,7 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
           aria-expanded={!collapsed}
           style={{
             background: 'none', border: 'none', cursor: 'pointer',
-            fontSize: 10, fontWeight: 700, color: COLORS.muted,
+            fontSize: FS.xxs, fontWeight: 700, color: COLORS.muted,
             padding: '2px 6px',
           }}
         >
@@ -116,7 +117,7 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
             style={{
               background: 'none', border: `1px solid ${COLORS.border}`,
               borderRadius: 3, cursor: 'pointer',
-              fontSize: 10, fontWeight: 700, color: COLORS.muted,
+              fontSize: FS.xxs, fontWeight: 700, color: COLORS.muted,
               padding: '2px 7px',
             }}
           >
@@ -189,7 +190,7 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
             <div style={{
               marginTop: 6, paddingTop: 6,
               borderTop: `1px dashed ${COLORS.border}`,
-              fontSize: 11, color: COLORS.muted, lineHeight: 1.5,
+              fontSize: FS.xs, color: COLORS.muted, lineHeight: 1.5,
             }}>
               {delta.summary.map((line, i) => (
                 <div key={i}>· {line}</div>
@@ -208,7 +209,7 @@ function Section({ title, items, color, describe, detail }) {
     <section style={{ marginBottom: 8 }}>
       <h4 style={{
         margin: '4px 0',
-        fontSize: 10, fontWeight: 800, letterSpacing: '0.05em',
+        fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.05em',
         textTransform: 'uppercase', color,
       }}>
         {title} ({items.length})
@@ -252,7 +253,7 @@ function BrokenDependenciesRow({ items }) {
         background: COLORS.broken,
         border: `1px solid ${COLORS.brokenBdr}`,
         borderRadius: 4,
-        fontSize: 11, color: '#7a4f0f', lineHeight: 1.5,
+        fontSize: FS.xs, color: '#7a4f0f', lineHeight: 1.5,
       }}
     >
       <strong>Broken dependencies:</strong> {items.join(' · ')}

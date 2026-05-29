@@ -17,6 +17,7 @@
  */
 
 import { useState } from 'react';
+import { FS } from '../theme.js';
 import { FileText, Loader2, X, BookMarked, Clock, Edit3 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { PDF_VARIANTS } from '../../pdf/variants.js';
@@ -123,14 +124,14 @@ function VariantCard({ v, picked, onPick }) {
     >
       <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: '#a0762a' }} />
       <div style={{ flex: 1 }}>
-        <div style={{ fontSize: 13, fontWeight: 700, color: '#1c1409' }}>
+        <div style={{ fontSize: FS.md, fontWeight: 700, color: '#1c1409' }}>
           {v.label}
         </div>
-        <div style={{ fontSize: 11, color: '#6b5340', marginTop: 2, lineHeight: 1.4 }}>
+        <div style={{ fontSize: FS.xs, color: '#6b5340', marginTop: 2, lineHeight: 1.4 }}>
           {v.description}
         </div>
         {v.disabled && v.disabledReason && (
-          <div style={{ fontSize: 10, color: '#8b1a1a', marginTop: 4, fontStyle: 'italic' }}>
+          <div style={{ fontSize: FS.xxs, color: '#8b1a1a', marginTop: 4, fontStyle: 'italic' }}>
             {v.disabledReason}
           </div>
         )}
@@ -177,7 +178,7 @@ const cancelBtnStyle = {
   padding: '6px 12px',
   background: '#fff', color: '#1c1409',
   border: '1px solid #d2bd96', borderRadius: 4,
-  fontSize: 12, fontWeight: 700, fontFamily: 'system-ui, -apple-system, sans-serif',
+  fontSize: FS.sm, fontWeight: 700, fontFamily: 'system-ui, -apple-system, sans-serif',
   cursor: 'pointer',
 };
 function primaryBtnStyle(exporting) {
@@ -186,7 +187,7 @@ function primaryBtnStyle(exporting) {
     padding: '6px 14px',
     background: exporting ? '#a89880' : '#a0762a', color: '#fff',
     border: 'none', borderRadius: 4,
-    fontSize: 12, fontWeight: 700, fontFamily: 'system-ui, -apple-system, sans-serif',
+    fontSize: FS.sm, fontWeight: 700, fontFamily: 'system-ui, -apple-system, sans-serif',
     cursor: exporting ? 'not-allowed' : 'pointer',
   };
 }

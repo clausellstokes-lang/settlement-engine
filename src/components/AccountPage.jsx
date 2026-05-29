@@ -369,7 +369,7 @@ export default function AccountPage({ onNavigateAdmin }) {
                       <span style={{
                         position: 'absolute', top: -8, right: -4,
                         padding: '2px 6px', borderRadius: R.sm, background: accent,
-                        color: '#fff', fontSize: 9, fontWeight: 800,
+                        color: '#fff', fontSize: FS.micro, fontWeight: 800,
                       }}>{p.discount}</span>
                     )}
                     <span style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits}</span>
