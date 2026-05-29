@@ -266,6 +266,10 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P134 / W-4: post-generate "what\'s next" guidance card under a freshly-generated dossier — a state-aware checklist (save / export / refine / map / generate another) that orients the user after the reveal instead of leaving the flow on a lone Save button.',
   },
+  howToInversion: {
+    default: true,
+    description: 'P126 / HT-1: invert the How-To "Quick Start" tab so the actionable "First settlement in 60 seconds" steps lead, with the constraint-driven concept essay reframed as a "Why it works this way" section below — task-first for newcomers instead of opening on five paragraphs of philosophy.',
+  },
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

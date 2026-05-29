@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS } from './theme.js';
 import { BookOpen, Zap, Star, Cpu, List } from 'lucide-react';
+import { flag } from '../lib/flags.js';
 
 
 const TABS = [
@@ -53,7 +54,15 @@ function Row({ label, children, lw=120 }) {
 }
 
 function QuickTab() {
-  return <>
+  // P126 / HT-1 — "How-To inversion". Newcomers open this tab to learn what
+  // to *do*, not to read the design philosophy first. When `howToInversion`
+  // is on we lead with the 60-second action steps and demote the
+  // constraint-driven concept essay to a "Why it works this way" coda below.
+  // Flag off → legacy order (essay first). Pure presentational reorder; the
+  // copy in both fragments is byte-for-byte identical across paths.
+  const inverted = flag('howToInversion');
+
+  const conceptIntro = (
     <div style={{ padding:'12px 14px', background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
       borderRadius:7, marginBottom:14 }}>
       <div style={{ fontFamily:serif_, fontSize:16, fontWeight:600, color:GOLD, marginBottom:6 }}>
@@ -94,21 +103,38 @@ function QuickTab() {
         Claude, ChatGPT, or any assistant and ask it anything about the settlement.
       </p>
     </div>
+  );
 
-    <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, marginBottom:10 }}>
-      First settlement in 60 seconds
+  const quickSteps = (
+    <>
+      <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, marginBottom:10 }}>
+        First settlement in 60 seconds
+      </div>
+      <Step n={1}>On the Create tab, pick a <strong>mode</strong> — <strong>Basic Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
+      <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Free mode can generate Thorp through Village; sign in for Town, City, and Metropolis.</Step>
+      <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong> — forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
+      <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft:32 }}>
+        <div style={{ width:6, height:6, borderRadius:'50%', background:'#b8860b', flexShrink:0, marginTop:7 }}/>
+        <p style={{ fontSize:12.5, color:'#5a3a00', lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
+      </div>
+      <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first — it gives you the one-paragraph version ready for the table.</Step>
+      <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and — where relevant — legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
+      <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for AI assistants like Claude or ChatGPT.</Step>
+      <Tip>You don't need to read every tab before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
+    </>
+  );
+
+  if (inverted) return <>
+    {quickSteps}
+    <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, margin:'18px 0 10px' }}>
+      Why it works this way
     </div>
-    <Step n={1}>On the Create tab, pick a <strong>mode</strong> — <strong>Basic Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
-    <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Free mode can generate Thorp through Village; sign in for Town, City, and Metropolis.</Step>
-    <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong> — forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
-    <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft:32 }}>
-      <div style={{ width:6, height:6, borderRadius:'50%', background:'#b8860b', flexShrink:0, marginTop:7 }}/>
-      <p style={{ fontSize:12.5, color:'#5a3a00', lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
-    </div>
-    <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first — it gives you the one-paragraph version ready for the table.</Step>
-    <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and — where relevant — legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
-    <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for AI assistants like Claude or ChatGPT.</Step>
-    <Tip>You don't need to read every tab before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
+    {conceptIntro}
+  </>;
+
+  return <>
+    {conceptIntro}
+    {quickSteps}
   </>;
 }
 
