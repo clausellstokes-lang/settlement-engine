@@ -32,6 +32,7 @@ import { createCreditsSlice }      from './creditsSlice.js';
 import { createCampaignSlice }     from './campaignSlice.js';
 import { createCustomContentSlice } from './customContentSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
+import { createUiSlice }            from './uiSlice.js';
 import { setCustomContentSource }   from '../lib/dependencyEngine.js';
 
 export const useStore = create(
@@ -50,6 +51,7 @@ export const useStore = create(
           ...createCampaignSlice(...a),
           ...createCustomContentSlice(...a),
           ...createOnboardingSlice(...a),
+          ...createUiSlice(...a),
         })),
         {
           name: 'settlementforge',

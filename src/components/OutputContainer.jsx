@@ -29,6 +29,10 @@ const SimulationDrawer = lazy(() => import('./dossier/SimulationDrawer.jsx'));
 // signed-in tier; reserved as a power-user export so anon users
 // don't see the structured grounding.
 const AIPromptButton = lazy(() => import('./dossier/AIPromptButton.jsx'));
+// P142 / D-6 — Phone-optimized "at the table" view. Mounted only when
+// flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
+// moment the user opens it and never before.
+const TableView = lazy(() => import('./TableView.jsx'));
 // P131 / E-1 — Click-to-edit settlement name in the header.
 // The pencil reveals on hover; commit queues a rename-settlement
 // edit through the pending-edits drawer (E-2).
@@ -143,6 +147,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const trackTabExplored = useStore(s => s.trackTabExplored);
   const onboardingActive = useStore(s => s.onboardingActive);
   const onboardingStep = useStore(s => s.onboardingStep);
+  // P142 / D-6 — Table View overlay state. The trigger lives in
+  // SummaryTabV2 (routed through renderTab's onOpenTableView); this reads
+  // the pref reactively so the overlay mounts/unmounts on toggle.
+  const tableViewOpen = useStore(s => s.userPrefs?.tableViewOpen);
+  const setUserPref = useStore(s => s.setUserPref);
   const [activeTab, _setActiveTab] = useState('summary');
   const setActiveTab = (id) => {
     _setActiveTab(id);
@@ -708,6 +717,15 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         ),
         React.createElement('style', null, '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }')
       )
+    ),
+    // P142 / D-6 — Table View overlay. Rendered as a sibling of the dossier
+    // card so it takes over the full viewport. Gated on flag + the
+    // tableViewOpen pref so the lazy chunk only loads when actually opened.
+    flag('tableView') && tableViewOpen && React.createElement(Suspense, { fallback: null },
+      React.createElement(TableView, {
+        settlement: activeSettlement,
+        onClose: () => setUserPref && setUserPref('tableViewOpen', false),
+      })
     )
   ); // close Fragment
 }
