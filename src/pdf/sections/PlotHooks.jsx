@@ -165,7 +165,7 @@ function HookCard({ hook, number }) {
         paddingVertical: 3,
         paddingHorizontal: 5,
         borderLeft: `1.5pt solid ${palette.gold}`,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
         minHeight: 44,
       }}
       wrap={false}

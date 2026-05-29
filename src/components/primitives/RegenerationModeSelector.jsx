@@ -21,7 +21,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { buildRegenerationPlan, REGENERATION_MODES } from '../../domain/regenerationMode.js';
 
 const COLORS = Object.freeze({
@@ -146,7 +146,7 @@ export function RegenerationModeSelector({
       {/* Active mode description */}
       <div style={{
         padding: '8px 10px',
-        background: '#faf6ee',
+        background: swatch['#FAF6EE'],
         border: `1px solid ${COLORS.border}`,
         borderRadius: 4,
         marginBottom: 12,
@@ -185,7 +185,7 @@ export function RegenerationModeSelector({
           style={{
             padding: '6px 14px',
             background: MODE_META[mode].color,
-            color: '#fff',
+            color: swatch.white,
             border: 'none',
             borderRadius: 4,
             cursor: 'pointer',
@@ -205,7 +205,7 @@ function PlanPreview({ plan }) {
     return (
       <div style={{
         padding: '8px 10px',
-        background: '#faf6ee',
+        background: swatch['#FAF6EE'],
         border: `1px dashed ${COLORS.border}`,
         borderRadius: 4,
         fontSize: FS.xs, color: COLORS.muted, fontStyle: 'italic',
@@ -222,7 +222,7 @@ function PlanPreview({ plan }) {
   return (
     <div style={{
       padding: '8px 10px',
-      background: '#faf6ee',
+      background: swatch['#FAF6EE'],
       border: `1px solid ${COLORS.border}`,
       borderRadius: 4,
       fontSize: FS.xs, color: COLORS.ink, lineHeight: 1.5,

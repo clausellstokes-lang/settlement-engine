@@ -21,7 +21,7 @@ import {
 import { relationshipsHeadline } from '../lib/headlines.js';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space, relColors, pt } from '../theme.js';
+import { type, palette, space, relColors, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
 
 const REL_LABELS = {
@@ -129,7 +129,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
                 flexDirection: 'row',
                 marginBottom: 2,
                 padding: 4,
-                backgroundColor: '#f5f0ff',
+                backgroundColor: swatch['#F5F0FF'],
                 borderLeft: `2pt solid ${palette.ai}`,
                 borderRadius: 1,
               }}
@@ -202,7 +202,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
                 border: `0.4pt solid ${palette.border}`,
                 borderLeft: `2pt solid ${palette.bad}`,
                 borderRadius: 2,
-                backgroundColor: '#fffbf5',
+                backgroundColor: palette.card,
               }}
               wrap={false}
             >
@@ -261,7 +261,7 @@ function NeighbourCard({ n, idx }) {
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2pt solid ${color}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}
       wrap={false}
     >

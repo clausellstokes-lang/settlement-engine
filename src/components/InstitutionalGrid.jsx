@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {filterCatalogForMagic} from './magicFilter.js';
 import ControlsStrip from './ControlsStrip.jsx';
-import { GOLD as gold, INK as ink, MUTED as muted, BORDER as border, sans, FS } from './theme.js';
+import { GOLD as gold, INK as ink, MUTED as muted, BORDER as border, sans, FS, swatch, MUTED } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, selectIsManualTier } from '../store/selectors.js';
 // Import from lookups.js directly (not engine.js) — keeps the
@@ -63,32 +63,32 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
         onClick={() => setOpen(o => !o)}
         style={{
           width: '100%', display: 'flex', alignItems: 'center', gap: 8,
-          padding: '5px 10px', background: '#f5f0e8',
+          padding: '5px 10px', background: swatch['#F5F0E8'],
           border: '1px dashed #c8b89a', borderRadius: 5,
           cursor: 'pointer', textAlign: 'left', marginBottom: open ? 4 : 0,
         }}
       >
-        <span style={{ fontSize: FS.xxs, color: '#9c8068' }}>▸</span>
-        <span style={{ fontSize: FS.xxs, fontWeight: 700, color: '#9c8068', flex: 1,
+        <span style={{ fontSize: FS.xxs, color: MUTED }}>▸</span>
+        <span style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, flex: 1,
           textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           Other-tier options ({instCount})
         </span>
         {forcedCount > 0 && (
-          <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#8a3010',
-            background: '#fdf0e8', border: '1px solid #d8a080',
+          <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A3010'],
+            background: swatch['#FDF0E8'], border: '1px solid #d8a080',
             borderRadius: 3, padding: '1px 6px' }}>
             {forcedCount} forced in
           </span>
         )}
-        <span style={{ fontSize: FS.micro, color: '#9c8068', fontStyle: 'italic' }}>
+        <span style={{ fontSize: FS.micro, color: MUTED, fontStyle: 'italic' }}>
           {open ? '▲ hide' : '▼ show'}
         </span>
       </button>
 
       {open && !allCollapsed && (
         <div style={{ paddingLeft: 8, display: 'flex', flexDirection: 'column', gap: 3 }}>
-          <div style={{ fontSize: FS.xxs, color: '#9c8068', fontStyle: 'italic', marginBottom: 4, padding: '2px 6px',
-            background: '#faf8f4', borderRadius: 3, border: '1px solid #e8dcc8' }}>
+          <div style={{ fontSize: FS.xxs, color: MUTED, fontStyle: 'italic', marginBottom: 4, padding: '2px 6px',
+            background: swatch['#FAF8F4'], borderRadius: 3, border: '1px solid #e8dcc8' }}>
             These institutions are excluded by default. Click to force-include — contradictions will appear in the Viability tab.
           </div>
           {Object.entries(institutions).sort(([a],[b])=>a.localeCompare(b)).map(([name, instDef]) => {
@@ -112,7 +112,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                   border: `2px solid ${isForced ? '#c05010' : '#a09080'}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
-                  {isForced && <span style={{ fontSize: FS.micro, color: '#fff', fontWeight: 900 }}>F</span>}
+                  {isForced && <span style={{ fontSize: FS.micro, color: swatch.white, fontWeight: 900 }}>F</span>}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: FS['11.5'], fontWeight: isForced ? 700 : 500,
@@ -120,21 +120,21 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                     {name}
                     {instDef.nativeTier && (
                       <span style={{ fontSize: FS.micro, fontWeight: 600, marginLeft: 6,
-                        color: '#9c8068', background: '#f0e8d8',
+                        color: MUTED, background: swatch['#F0E8D8'],
                         border: '1px solid #d8c8a8', borderRadius: 3, padding: '0 4px' }}>
                         {instDef.nativeTier}
                       </span>
                     )}
                   </div>
                   {instDef.desc && (
-                    <div style={{ fontSize: FS.xxs, color: '#9c8068', marginTop: 1, lineHeight: 1.4 }}>
+                    <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: 1, lineHeight: 1.4 }}>
                       {instDef.desc.slice(0, 80)}{instDef.desc.length > 80 ? '…' : ''}
                     </div>
                   )}
                 </div>
                 {isForced && (
-                  <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#8a3010',
-                    background: '#fdf0e8', border: '1px solid #d8a080',
+                  <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A3010'],
+                    background: swatch['#FDF0E8'], border: '1px solid #d8a080',
                     borderRadius: 3, padding: '1px 5px', flexShrink: 0 }}>FORCED</span>
                 )}
               </div>
@@ -225,12 +225,12 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
                 textDecoration: isExcluded ? 'line-through' : 'none',
                 opacity: isExcluded ? 0.7 : 1 }}>{name}</span>
           {def.p !== undefined && (
-            <span style={{ fontSize: FS.xxs, color: muted, background: '#f0ead8', borderRadius: 3, padding: '0 4px' }}>
+            <span style={{ fontSize: FS.xxs, color: muted, background: swatch['#F0EAD8'], borderRadius: 3, padding: '0 4px' }}>
               {Math.round((def.p || 0) * 100)}%
             </span>
           )}
           {def.exclusiveGroup && !def.required && (
-            <span style={{ fontSize: FS.xxs, color: '#8b1a1a', background: '#fdf0f0', borderRadius: 3, padding: '0 4px' }}>
+            <span style={{ fontSize: FS.xxs, color: swatch.danger, background: swatch['#FDF0F0'], borderRadius: 3, padding: '0 4px' }}>
               excl.
             </span>
           )}
@@ -304,27 +304,27 @@ function CategorySection({ category, institutions, tier, toggles, onToggle, isEn
             </span>
           )}
           {excludeCount > 0 && (
-            <span style={{ fontSize: FS.micro, fontWeight: 700, color: '#8b1a1a', background: '#8b1a1a18', borderRadius: 3, padding: '1px 5px' }}>
+            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch.danger, borderRadius: 3, padding: '1px 5px' }}>
               {excludeCount} excluded
             </span>
           )}
           {overrideCount > 0 && (
-            <span style={{ fontSize: FS.micro, fontWeight: 700, color: '#8b1a1a', background: '#fdf0f0', border: '1px solid #e8a0a0', borderRadius: 3, padding: '1px 5px' }}>
+            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch['#FDF0F0'], border: '1px solid #e8a0a0', borderRadius: 3, padding: '1px 5px' }}>
               {overrideCount} req. overridden
             </span>
           )}
         </div>
-        {forceCount===0 && excludeCount===0 && <span style={{ fontSize: FS.micro, color: muted, background: '#ede3cc', borderRadius: 3, padding: '1px 5px', marginRight: 4 }}>
+        {forceCount===0 && excludeCount===0 && <span style={{ fontSize: FS.micro, color: muted, background: swatch['#EDE3CC'], borderRadius: 3, padding: '1px 5px', marginRight: 4 }}>
           {Object.keys(institutions).length} allowed
         </span>}
         {(forceCount>0 || excludeCount>0) && <>
-          <span style={{ fontSize: FS.micro, color: muted, background: '#ede3cc', borderRadius: 3, padding: '1px 5px' }}>
+          <span style={{ fontSize: FS.micro, color: muted, background: swatch['#EDE3CC'], borderRadius: 3, padding: '1px 5px' }}>
             {Object.keys(institutions).length - forceCount - excludeCount} allowed
           </span>
           {forceCount>0 && <span style={{ fontSize: FS.micro, fontWeight: 700, color: gold, background: `${gold}20`, borderRadius: 3, padding: '1px 5px' }}>
             {forceCount} forced
           </span>}
-          {excludeCount>0 && <span style={{ fontSize: FS.micro, fontWeight: 700, color: '#8b1a1a', background: '#8b1a1a18', borderRadius: 3, padding: '1px 5px' }}>
+          {excludeCount>0 && <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch.danger, borderRadius: 3, padding: '1px 5px' }}>
             {excludeCount} excluded
           </span>}
         </>}

@@ -110,7 +110,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
               padding: 5,
               border: `0.4pt solid ${palette.border}`,
               borderRadius: 2,
-              backgroundColor: '#fffbf5',
+              backgroundColor: palette.card,
             }}
             wrap={false}
           >
@@ -164,7 +164,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
               style={{
                 padding: 5,
                 marginBottom: 4,
-                backgroundColor: '#fde8e8',
+                backgroundColor: palette.badBg,
                 borderLeft: `2pt solid ${palette.bad}`,
                 borderRadius: 2,
               }}

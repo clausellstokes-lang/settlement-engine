@@ -58,7 +58,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
           style={{
             marginBottom: space.sm,
             padding: 6,
-            backgroundColor: '#fffbf5',
+            backgroundColor: palette.card,
             border: `0.4pt solid ${palette.border}`,
             borderRadius: 2,
           }}
@@ -219,7 +219,7 @@ function QuarterCard({ q, idx }) {
         padding: 5,
         border: `0.4pt solid ${palette.border}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}
       wrap={false}
     >

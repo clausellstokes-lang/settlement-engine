@@ -16,7 +16,7 @@
  */
 
 import { useState } from 'react';
-import { FS } from './theme.js';
+import { FS, swatch } from './theme.js';
 import { BookOpen, History, RotateCcw, Sparkles, Zap, X } from 'lucide-react';
 
 // ── Visual tokens, aligned with SettlementDetail / Primitives ────────────────
@@ -94,7 +94,7 @@ function FullEntryModal({ entry, onClose }) {
     const text = typeof body === 'string' ? body : JSON.stringify(body, null, 2);
     return (
       <div style={{ marginBottom: 14 }}>
-        <div style={{ fontSize: FS.xxs, fontWeight: 800, color: '#6a2a9a', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
+        <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
         <p style={{ margin: 0, fontSize: FS['12.5'], color: INK, lineHeight: 1.6, fontFamily: 'Georgia, serif', whiteSpace: 'pre-wrap' }}>{text}</p>
       </div>
     );
@@ -104,7 +104,7 @@ function FullEntryModal({ entry, onClose }) {
     if (!Array.isArray(arr) || !arr.length) return null;
     return (
       <div style={{ marginBottom: 14 }}>
-        <div style={{ fontSize: FS.xxs, fontWeight: 800, color: '#6a2a9a', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
+        <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
         <ul style={{ margin: 0, paddingLeft: 18, fontSize: FS.sm, color: INK, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>
           {arr.map((item, i) => <li key={i} style={{ marginBottom: 3 }}>{formatter(item)}</li>)}
         </ul>
@@ -125,7 +125,7 @@ function FullEntryModal({ entry, onClose }) {
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: '#fffbf5', border: `1px solid ${BORDER}`, borderRadius: 10,
+          background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
           width: '100%', maxWidth: 720, maxHeight: '85vh', display: 'flex', flexDirection: 'column',
           boxShadow: '0 12px 48px rgba(0,0,0,0.45)',
         }}
@@ -136,19 +136,19 @@ function FullEntryModal({ entry, onClose }) {
           display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(196,154,60,0.2)',
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS['18'], fontWeight: 600, color: '#c49a3c' }}>
+            <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS['18'], fontWeight: 600, color: swatch['#C49A3C'] }}>
               Chronicle Entry
             </div>
             <div style={{ display: 'flex', gap: 6, marginTop: 4, alignItems: 'center', flexWrap: 'wrap' }}>
               <Chip color={meta.color} Icon={meta.Icon} filled>{meta.label}</Chip>
-              <span style={{ fontSize: FS.xs, color: '#9c8068', fontFamily: 'Nunito, sans-serif' }}>
+              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: 'Nunito, sans-serif' }}>
                 {absoluteTime(entry.createdAt)} &middot; {relativeTime(entry.createdAt)}
               </span>
             </div>
           </div>
           <button onClick={onClose} style={{
             background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)',
-            color: '#f5ede0', borderRadius: 5, padding: '5px 8px', cursor: 'pointer',
+            color: swatch['#F5EDE0'], borderRadius: 5, padding: '5px 8px', cursor: 'pointer',
             display: 'flex', alignItems: 'center',
           }} title="Close">
             <X size={14} />
@@ -158,7 +158,7 @@ function FullEntryModal({ entry, onClose }) {
         {/* Body */}
         <div style={{ padding: '16px 22px', overflowY: 'auto', flex: 1 }}>
           {entry.triggeredBy && (
-            <div style={{ marginBottom: 12, padding: '6px 10px', background: 'rgba(106,42,154,0.08)', border: '1px solid rgba(106,42,154,0.2)', borderRadius: 5, fontSize: FS.xs, color: '#6a2a9a', fontFamily: 'Nunito, sans-serif' }}>
+            <div style={{ marginBottom: 12, padding: '6px 10px', background: 'rgba(106,42,154,0.08)', border: '1px solid rgba(106,42,154,0.2)', borderRadius: 5, fontSize: FS.xs, color: swatch.ai, fontFamily: 'Nunito, sans-serif' }}>
               <strong>Triggered by:</strong> {entry.triggeredBy}
             </div>
           )}
@@ -178,7 +178,7 @@ function FullEntryModal({ entry, onClose }) {
 
           {s.dmCompass && (
             <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: FS.xxs, fontWeight: 800, color: '#6a2a9a', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>DM Compass</div>
+              <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>DM Compass</div>
               {Array.isArray(s.dmCompass.hooks) && s.dmCompass.hooks.length > 0 && (
                 <>
                   <div style={{ fontSize: FS.xs, fontWeight: 700, color: INK, marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Hooks</div>
@@ -189,7 +189,7 @@ function FullEntryModal({ entry, onClose }) {
               )}
               {Array.isArray(s.dmCompass.redFlags) && s.dmCompass.redFlags.length > 0 && (
                 <>
-                  <div style={{ fontSize: FS.xs, fontWeight: 700, color: '#8b1a1a', marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Red flags</div>
+                  <div style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.danger, marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Red flags</div>
                   <ul style={{ margin: 0, paddingLeft: 18, fontSize: FS.sm, color: INK, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>
                     {s.dmCompass.redFlags.map((r, i) => <li key={i} style={{ marginBottom: 2 }}>{r}</li>)}
                   </ul>
@@ -197,7 +197,7 @@ function FullEntryModal({ entry, onClose }) {
               )}
               {s.dmCompass.twist && (
                 <>
-                  <div style={{ fontSize: FS.xs, fontWeight: 700, color: '#a0762a', marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Twist</div>
+                  <div style={{ fontSize: FS.xs, fontWeight: 700, color: swatch['#A0762A'], marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Twist</div>
                   <p style={{ margin: 0, fontSize: FS.sm, color: INK, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>{s.dmCompass.twist}</p>
                 </>
               )}
@@ -206,7 +206,7 @@ function FullEntryModal({ entry, onClose }) {
 
           {dl && Object.keys(dl).length > 0 && (
             <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: FS.xxs, fontWeight: 800, color: '#6a2a9a', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Daily Life</div>
+              <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Daily Life</div>
               {['dawn', 'morning', 'midday', 'evening', 'night'].map(k => dl[k] && (
                 <div key={k} style={{ marginBottom: 8 }}>
                   <div style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, textTransform: 'capitalize', fontFamily: 'Nunito, sans-serif', marginBottom: 2 }}>{k}</div>
@@ -250,7 +250,7 @@ function EntryCard({ entry, onOpen }) {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 4,
               background: 'rgba(106,42,154,0.08)',
-              color: '#6a2a9a',
+              color: swatch.ai,
               border: '1px solid rgba(106,42,154,0.3)',
               borderRadius: 4,
               padding: '3px 9px',
@@ -263,7 +263,7 @@ function EntryCard({ entry, onOpen }) {
         )}
       </div>
       {entry.triggeredBy && (
-        <div style={{ fontSize: FS.xxs, color: '#6a2a9a', fontStyle: 'italic', fontFamily: 'Nunito, sans-serif', marginBottom: 4 }}>
+        <div style={{ fontSize: FS.xxs, color: swatch.ai, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif', marginBottom: 4 }}>
           {entry.triggeredBy}
         </div>
       )}
@@ -310,7 +310,7 @@ export default function ChroniclePanel({ entries }) {
       </button>
 
       {open && (
-        <div style={{ padding: '12px 14px', background: '#faf8f4', maxHeight: 420, overflowY: 'auto' }}>
+        <div style={{ padding: '12px 14px', background: swatch['#FAF8F4'], maxHeight: 420, overflowY: 'auto' }}>
           {list.length === 0 ? (
             <div style={{ padding: '18px 0', textAlign: 'center', color: MUTED, fontSize: FS.sm, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
               No chronicle entries yet. Generate a narrative to start the log.

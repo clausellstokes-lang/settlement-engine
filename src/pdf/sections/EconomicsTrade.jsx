@@ -21,7 +21,7 @@ import { StatusCard } from '../primitives/Visuals.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space, pt } from '../theme.js';
+import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, num, smart, label, hookText, finite, safePct } from '../lib/format.js';
 
 export function EconomicsTrade({ settlement, narrativeMode, vm }) {
@@ -363,14 +363,14 @@ function FoodBalanceBlock({ fb }) {
       <View style={{ flexDirection: 'row', gap: 6 }}>
         <View style={{ flex: 1 }}>
           <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>PRODUCED</Text>
-          <View style={{ height: 5, backgroundColor: '#f0e8d8', borderRadius: 1, marginTop: 1 }}>
+          <View style={{ height: 5, backgroundColor: swatch['#F0E8D8'], borderRadius: 1, marginTop: 1 }}>
             <View style={{ width: `${prodPct}%`, height: '100%', backgroundColor: palette.good }} />
           </View>
           <Text style={{ ...type.caption, fontSize: pt['8'], marginTop: 1 }}>{smart(prod)}</Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>NEEDED</Text>
-          <View style={{ height: 5, backgroundColor: '#f0e8d8', borderRadius: 1, marginTop: 1 }}>
+          <View style={{ height: 5, backgroundColor: swatch['#F0E8D8'], borderRadius: 1, marginTop: 1 }}>
             <View style={{ width: `${needPct}%`, height: '100%', backgroundColor: palette.bad }} />
           </View>
           <Text style={{ ...type.caption, fontSize: pt['8'], marginTop: 1 }}>{smart(need)}</Text>

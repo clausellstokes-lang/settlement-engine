@@ -26,9 +26,7 @@ import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import { flag } from '../../lib/flags.js';
 import { startCheckout } from '../../lib/stripe.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import {
-  INK, sans, serif_, FS, SP, R,
-} from '../theme.js';
+import { INK, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 
 const GOLD_500 = '#C9A24C';
 const GOLD_400 = '#D9B566';
@@ -124,7 +122,7 @@ export default function FounderTile() {
         </h2>
         {typeof seatsRemaining === 'number' && (
           <div style={{
-            marginTop: 6, fontSize: FS.xs, color: '#c8b098',
+            marginTop: 6, fontSize: FS.xs, color: swatch['#C8B098'],
             fontStyle: 'italic',
           }}>
             {seatsRemaining} of 500 seats remaining
@@ -135,13 +133,13 @@ export default function FounderTile() {
         <div style={{
           padding: SP.md, background: 'rgba(201,162,76,0.06)',
           border: `1px solid rgba(201,162,76,0.20)`,
-          borderRadius: R.sm, fontSize: FS.sm, color: '#c8b098',
+          borderRadius: R.sm, fontSize: FS.sm, color: swatch['#C8B098'],
           lineHeight: 1.6, fontFamily: serif_,
         }}>
           <div>Two years of Cartographer = <b style={{ color: GOLD_400 }}>$144</b></div>
           <div>Founder = <b style={{ color: GOLD_400 }}>$99 forever</b></div>
           {claimSeat && (
-            <div style={{ marginTop: SP.xs, fontStyle: 'italic', color: '#a08060' }}>
+            <div style={{ marginTop: SP.xs, fontStyle: 'italic', color: swatch['#A08060'] }}>
               …plus your name in the credits (seat {claimSeat}).
             </div>
           )}

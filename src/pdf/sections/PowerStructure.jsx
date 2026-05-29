@@ -21,7 +21,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, factionColors, space, pt } from '../theme.js';
+import { type, palette, factionColors, space, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
 
 export function PowerStructure({ settlement, narrativeMode, vm }) {
@@ -55,14 +55,14 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
 
       {/* ── Stability strip ───────────────────────────────────────── */}
       <View style={{ flexDirection: 'row', gap: 6, marginBottom: space.sm }}>
-        <View style={{ flex: 1, padding: 6, backgroundColor: '#faf3e8', border: `0.4pt solid ${palette.border}`, borderRadius: 2 }}>
+        <View style={{ flex: 1, padding: 6, backgroundColor: swatch['#FAF3E8'], border: `0.4pt solid ${palette.border}`, borderRadius: 2 }}>
           <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>STABILITY</Text>
           <Text style={{ ...type.body_em, fontSize: pt['11'], color: palette.ink, marginTop: 1 }}>
             {cap(p.stability) || '—'}
           </Text>
         </View>
         {governing && (
-          <View style={{ flex: 2, padding: 6, backgroundColor: '#faf3e8', border: `0.4pt solid ${palette.border}`, borderRadius: 2 }}>
+          <View style={{ flex: 2, padding: 6, backgroundColor: swatch['#FAF3E8'], border: `0.4pt solid ${palette.border}`, borderRadius: 2 }}>
             <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>GOVERNING</Text>
             <Text style={{ ...type.body_em, fontSize: pt['11'], color: palette.ink, marginTop: 1 }}>
               {governing.name}
@@ -75,7 +75,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
           </View>
         )}
         {p.criminalCapture?.label && (
-          <View style={{ flex: 1, padding: 6, backgroundColor: '#fde8e8', border: `0.4pt solid ${palette.bad}`, borderRadius: 2 }}>
+          <View style={{ flex: 1, padding: 6, backgroundColor: palette.badBg, border: `0.4pt solid ${palette.bad}`, borderRadius: 2 }}>
             <Text style={{ ...type.label, fontSize: pt['7'], color: palette.bad }}>CRIM. CAPTURE</Text>
             <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.bad, marginTop: 1 }}>
               {cap(p.criminalCapture.label)}
@@ -261,7 +261,7 @@ function FactionCard({ faction, index }) {
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2pt solid ${accent}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}
       wrap={false}
     >

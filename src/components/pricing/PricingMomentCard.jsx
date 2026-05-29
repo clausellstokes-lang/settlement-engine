@@ -23,9 +23,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import {
-  GOLD, INK, BORDER, sans, serif_, FS, SP, R,
-} from '../theme.js';
+import { GOLD, INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED } from '../theme.js';
 
 const VIOLET = '#7B4FCF';
 
@@ -96,7 +94,7 @@ export default function PricingMomentCard() {
         maxWidth: 360,
         width: 'calc(100% - 32px)',
         zIndex: 9500,
-        background: '#fff',
+        background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderLeft: `4px solid ${accent}`,
         borderRadius: R.md,
@@ -122,7 +120,7 @@ export default function PricingMomentCard() {
         {headline}
       </div>
       <div style={{
-        fontSize: FS.sm, color: '#4A3B22', lineHeight: 1.55,
+        fontSize: FS.sm, color: BODY, lineHeight: 1.55,
         marginBottom: SP.md,
       }}>
         {body}
@@ -133,7 +131,7 @@ export default function PricingMomentCard() {
           style={{
             padding: `${SP.sm}px ${SP.md}px`,
             background: accent,
-            color: '#fff',
+            color: swatch.white,
             border: 'none',
             borderRadius: R.sm,
             fontSize: FS.sm,
@@ -149,7 +147,7 @@ export default function PricingMomentCard() {
           style={{
             padding: `${SP.sm}px ${SP.sm}px`,
             background: 'transparent',
-            color: '#9C8068',
+            color: MUTED,
             border: 'none',
             fontSize: FS.xs,
             fontFamily: sans,
@@ -160,7 +158,7 @@ export default function PricingMomentCard() {
         </button>
         <span style={{ flex: 1 }} />
         <span style={{
-          fontSize: FS.xxs, color: '#9C8068',
+          fontSize: FS.xxs, color: MUTED,
           fontStyle: 'italic',
         }}>
           Won't ask again for 24h

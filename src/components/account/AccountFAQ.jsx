@@ -17,7 +17,7 @@
  */
 
 import { useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { Plus, Minus } from 'lucide-react';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
@@ -63,7 +63,7 @@ export default function AccountFAQ() {
               border: `1px solid ${BORDER}`,
               borderRadius: 5,
               overflow: 'hidden',
-              background: '#fff',
+              background: swatch.white,
             }}
           >
             <button

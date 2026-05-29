@@ -13,10 +13,7 @@
 import { useMemo } from 'react';
 import { X, ExternalLink, Trash2 } from 'lucide-react';
 import { useStore } from '../../store';
-import {
-  GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR,
-  FS, SP, R,
-} from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, R, swatch } from '../theme.js';
 
 export default function PlacementDetailCard({ onOpenDetail }) {
   const selectedSettlementId = useStore(s => s.selectedSettlementId);
@@ -126,7 +123,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
               flex: 1,
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 4,
               padding: `${SP.xs}px ${SP.sm}px`,
-              background: GOLD, color: '#fff',
+              background: GOLD, color: swatch.white,
               border: 'none', borderRadius: R.sm,
               fontSize: FS.xs, fontWeight: 700, cursor: 'pointer',
             }}
@@ -140,7 +137,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
             style={{
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 4,
               padding: `${SP.xs}px ${SP.sm}px`,
-              background: 'transparent', color: '#991b1b',
+              background: 'transparent', color: swatch['#991B1B'],
               border: `1px solid #f0c8cc`, borderRadius: R.sm,
               fontSize: FS.xs, fontWeight: 700, cursor: 'pointer',
             }}

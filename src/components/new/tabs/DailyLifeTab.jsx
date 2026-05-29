@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS } from '../../theme.js';
+import { FS, swatch, CARD } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
 import {isMobile} from '../tabConstants';
@@ -207,7 +207,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
             fontFamily: sans,
           }}
         >
-          <strong style={{ color: '#7a5a1a' }}>✦ Save this settlement</strong>
+          <strong style={{ color: swatch['#7A5A1A'] }}>✦ Save this settlement</strong>
           {' '}to refine Daily Life into narrative — five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
         </div>
       ) : (
@@ -242,9 +242,9 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
       {/* ── ERROR ─────────────────────────────────────────────────────────── */}
       {error && (
         <div style={{
-          background: '#fdf4f4', border: '1px solid #e8c0c0',
+          background: swatch.dangerBg, border: '1px solid #e8c0c0',
           borderRadius: 7, padding: '12px 14px', marginBottom: 14,
-          fontSize: FS['11.5'], color: '#8b1a1a',
+          fontSize: FS['11.5'], color: swatch.danger,
         }}>
           <strong>Error:</strong> {error}
         </div>
@@ -257,7 +257,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
           {regenerating && (
             <div style={{
               position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
-              zIndex: 20, background: 'rgba(122,70,26,0.95)', color: '#fffbf5',
+              zIndex: 20, background: 'rgba(122,70,26,0.95)', color: CARD,
               padding: '8px 16px', borderRadius: 20, border: '1px solid rgba(196,128,60,0.6)',
               fontSize: FS['11.5'], fontWeight: 700, fontFamily: sans,
               display: 'flex', alignItems: 'center', gap: 8,
@@ -294,7 +294,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
       {/* ── EMPTY STATE ───────────────────────────────────────────────────── */}
       {!hasContent && !loading && !error && (
         <div style={{
-          background: '#faf8f4', border: `1px solid ${BORDER}`,
+          background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`,
           borderRadius: 8, padding: '32px 20px', textAlign: 'center',
         }}>
           <div style={{ fontSize: FS.md, fontWeight: 600, color: SECOND, marginBottom: 6 }}>

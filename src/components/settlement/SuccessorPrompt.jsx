@@ -24,7 +24,7 @@
 import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 
 export default function SuccessorPrompt() {
@@ -162,10 +162,10 @@ export default function SuccessorPrompt() {
           {suggested.length === 0 && (
             <div style={{
               padding: SP.sm,
-              background: '#fff7ec',
+              background: swatch['#FFF7EC'],
               border: `1px solid #e0b070`,
               borderRadius: R.sm,
-              fontSize: FS.xs, fontFamily: sans, color: '#7a4f0f',
+              fontSize: FS.xs, fontFamily: sans, color: swatch['#7A4F0F'],
               marginBottom: 12, lineHeight: 1.5,
             }}>
               No obvious successor among the existing NPCs. Appoint someone new,

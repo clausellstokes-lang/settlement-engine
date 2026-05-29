@@ -31,7 +31,7 @@ import { startCheckout } from '../lib/stripe.js';
 import { stashPendingDossier } from '../lib/pendingDossier.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
-import { GOLD, sans, SP, R, FS } from './theme.js';
+import { GOLD, sans, SP, R, FS, swatch, RED } from './theme.js';
 
 const MUTED = '#6b5340';
 
@@ -81,7 +81,7 @@ export default function BuyThisDossier({ settlement }) {
           display: 'inline-flex', alignItems: 'center', gap: 6,
           padding: '6px 12px', borderRadius: R.md,
           background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-          color: '#fff', border: 'none',
+          color: swatch.white, border: 'none',
           fontSize: FS.xs, fontWeight: 700,
           fontFamily: sans, cursor: busy ? 'wait' : 'pointer',
           opacity: busy || !isConfigured ? 0.7 : 1,
@@ -99,7 +99,7 @@ export default function BuyThisDossier({ settlement }) {
       {error && (
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 4,
-          fontSize: FS.xs, color: '#A23434',
+          fontSize: FS.xs, color: RED,
         }}>
           <AlertCircle size={11} /> {error}
         </span>

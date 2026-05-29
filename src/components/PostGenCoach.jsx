@@ -27,7 +27,7 @@ import { Sparkles, X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useFlag } from '../lib/flags.js';
 import { t } from '../copy/index.js';
-import { GOLD, INK, BORDER, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, INK, BORDER, sans, serif_, SP, R, FS, swatch, GOLD_DEEP } from './theme.js';
 
 const DISMISS_KEY = 'sf.postGenCoachDismissedAt';
 const MUTED = '#6b5340';
@@ -120,14 +120,14 @@ export default function PostGenCoach() {
       }}>
         <span style={{
           width: 22, height: 22, borderRadius: '50%',
-          background: GOLD, color: '#fff',
+          background: GOLD, color: swatch.white,
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <Sparkles size={12} />
         </span>
         <span style={{
           fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.08em',
-          textTransform: 'uppercase', color: '#8C6F32',
+          textTransform: 'uppercase', color: GOLD_DEEP,
           flex: 1,
         }}>
           {t('onboarding.coach.welcomeTitle')}
@@ -220,7 +220,7 @@ export default function PostGenCoach() {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 4,
               padding: '6px 12px', borderRadius: R.md,
-              background: GOLD, color: '#fff', border: 'none',
+              background: GOLD, color: swatch.white, border: 'none',
               fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
               cursor: 'pointer',
             }}

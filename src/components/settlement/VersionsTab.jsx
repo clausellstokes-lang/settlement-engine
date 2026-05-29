@@ -24,9 +24,7 @@ import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { EVENTS } from '../../lib/analytics.js';
 import LockedDestination from '../primitives/LockedDestination.jsx';
-import {
-  GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R,
-} from '../theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 
 const VIOLET = '#7B4FCF';
 const GREEN = '#4A7A3A';
@@ -233,7 +231,7 @@ export default function VersionsTab({ save }) {
                           onClick={() => { setConfirmRevert(null); /* TODO wire revert */ }}
                           style={{
                             padding: '3px 9px', fontSize: FS.xs, fontWeight: 700,
-                            background: AMBER, color: '#fff', border: 'none',
+                            background: AMBER, color: swatch.white, border: 'none',
                             borderRadius: R.sm, cursor: 'pointer',
                           }}
                         >

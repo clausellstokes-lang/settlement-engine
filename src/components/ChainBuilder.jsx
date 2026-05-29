@@ -31,10 +31,7 @@ import {
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { CHAIN_DEFS } from '../lib/supplyChains.js';
-import {
-  GOLD, _GOLD_B, GOLD_BG, INK, _INK_DEEP, MUTED, SECOND, BORDER, BORDER2,
-  CARD, CARD_HDR, CARD_ALT, PARCH, sans, serif_, SP, R, FS,
-} from './theme.js';
+import { GOLD, _GOLD_B, GOLD_BG, INK, _INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, CARD_ALT, PARCH, sans, serif_, SP, R, FS, swatch } from './theme.js';
 
 // ── Available resources and consumer institution types ────────────────────────
 // Comprehensive lists drawn from the data layer
@@ -218,7 +215,7 @@ function ChainCard({ chain, isActive, isCustom, onToggle, onEdit, onDelete, onDu
             {chain.name}
             {isCustom && (
               <span style={{
-                fontSize: FS.xxs, color: '#7c3aed', background: 'rgba(124,58,237,0.08)',
+                fontSize: FS.xxs, color: swatch['#7C3AED'], background: 'rgba(124,58,237,0.08)',
                 padding: '1px 6px', borderRadius: R.sm, fontWeight: 600, fontFamily: sans,
               }}>Custom</span>
             )}
@@ -258,7 +255,7 @@ function ChainCard({ chain, isActive, isCustom, onToggle, onEdit, onDelete, onDu
                 <Edit3 size={12} />
               </button>
               <button onClick={onDelete}
-                style={{ background: 'none', border: 'none', color: '#8b1a1a', cursor: 'pointer', padding: 2 }}>
+                style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 2 }}>
                 <Trash2 size={12} />
               </button>
             </>
@@ -568,7 +565,7 @@ function ChainEditor({ initial, onSave, onCancel }) {
               display: 'flex', alignItems: 'center', gap: SP.xs,
               padding: `${SP.sm}px ${SP.xl}px`,
               background: valid ? GOLD : '#ccc',
-              color: '#fff', border: 'none', borderRadius: R.md,
+              color: swatch.white, border: 'none', borderRadius: R.md,
               cursor: valid ? 'pointer' : 'not-allowed',
               fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
             }}
@@ -685,7 +682,7 @@ export default function ChainBuilder() {
       {!canUseMapChains && (
         <div style={{
           padding: `${SP.md}px ${SP.lg}px`,
-          background: '#fef9ee', border: `1px solid ${GOLD}`,
+          background: swatch['#FEF9EE'], border: `1px solid ${GOLD}`,
           borderRadius: R.md, fontSize: FS.sm, color: SECOND,
           display: 'flex', alignItems: 'center', gap: SP.sm,
         }}>
@@ -721,7 +718,7 @@ export default function ChainBuilder() {
             style={{
               display: 'flex', alignItems: 'center', gap: 4,
               padding: `${SP.xs}px ${SP.sm + 2}px`,
-              background: GOLD, color: '#fff', border: 'none',
+              background: GOLD, color: swatch.white, border: 'none',
               borderRadius: R.sm, cursor: 'pointer',
               fontSize: FS.xxs, fontWeight: 700, fontFamily: sans,
             }}
@@ -749,15 +746,15 @@ export default function ChainBuilder() {
                 {deleteConfirm === chain.id && (
                   <div style={{
                     padding: `${SP.sm}px ${SP.md}px`,
-                    background: '#fdf4f4', borderRadius: R.md,
+                    background: swatch.dangerBg, borderRadius: R.md,
                     display: 'flex', alignItems: 'center', gap: SP.sm,
                   }}>
-                    <span style={{ flex: 1, fontSize: FS.sm, color: '#8b1a1a' }}>
+                    <span style={{ flex: 1, fontSize: FS.sm, color: swatch.danger }}>
                       Delete "{chain.name}"?
                     </span>
                     <button onClick={() => handleDelete(chain.id)} style={{
-                      padding: `${SP.xs}px ${SP.md}px`, background: '#8b1a1a',
-                      color: '#fff', border: 'none', borderRadius: R.sm,
+                      padding: `${SP.xs}px ${SP.md}px`, background: swatch.danger,
+                      color: swatch.white, border: 'none', borderRadius: R.sm,
                       cursor: 'pointer', fontSize: FS.xxs, fontWeight: 700,
                     }}>Yes</button>
                     <button onClick={() => setDeleteConfirm(null)} style={{
@@ -821,7 +818,7 @@ export default function ChainBuilder() {
               style={{
                 display: 'flex', alignItems: 'center', gap: 4,
                 padding: `${SP.xs + 1}px ${SP.sm + 4}px`,
-                background: 'transparent', color: '#8b1a1a',
+                background: 'transparent', color: swatch.danger,
                 border: `1px solid #8b1a1a44`, borderRadius: R.lg,
                 cursor: 'pointer', fontSize: FS.xxs, fontWeight: 600, fontFamily: sans,
               }}

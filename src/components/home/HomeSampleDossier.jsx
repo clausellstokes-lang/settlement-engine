@@ -20,7 +20,7 @@
  */
 
 import { useEffect } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
@@ -75,7 +75,7 @@ export default function HomeSampleDossier() {
       aria-label="Sample settlement dossier"
       style={{
         maxWidth: 480, margin: '24px auto 56px',
-        background: '#fff',
+        background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderRadius: 8,
         overflow: 'hidden',
@@ -131,7 +131,7 @@ export default function HomeSampleDossier() {
               </div>
               <div style={{
                 marginTop: 4, fontSize: FS['11.5'],
-                color: '#3A2F18', lineHeight: 1.5,
+                color: swatch['#3A2F18'], lineHeight: 1.5,
                 fontFamily: italic ? serif : sans,
                 fontStyle: italic ? 'italic' : 'normal',
               }}>

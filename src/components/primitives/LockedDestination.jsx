@@ -21,7 +21,7 @@
  */
 
 import { useEffect } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { Funnel } from '../../lib/analytics.js';
 
@@ -136,7 +136,7 @@ export default function LockedDestination({
         <div style={{
           marginTop: 24,
           padding: 8,
-          background: '#fff',
+          background: swatch.white,
           border: `1px solid ${BORDER}`,
           borderRadius: 6,
           boxShadow: '0 4px 16px rgba(27,20,8,0.08)',
@@ -173,7 +173,7 @@ export default function LockedDestination({
           onClick={handleCta}
           style={{
             padding: '10px 18px',
-            background: VIOLET, color: '#fff',
+            background: VIOLET, color: swatch.white,
             border: 'none', borderRadius: 4,
             fontSize: FS.md, fontWeight: 700, fontFamily: sans,
             cursor: 'pointer',

@@ -147,7 +147,7 @@ function CategoryCard({ cat }) {
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2pt solid ${accent}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
         minHeight: 60,
       }}
       wrap={false}

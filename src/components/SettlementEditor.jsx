@@ -12,7 +12,7 @@ import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
 import { STRESS_TYPE_MAP } from '../data/stressTypes.js';
 import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, CARD_ALT } from './theme.js';
 import { useStore } from '../store/index.js';
 import { classifyChange } from '../lib/narrativeMutations.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
@@ -38,7 +38,7 @@ function SubSection({ title, count, children }) {
 function Pill({ label, color=SECOND, onRemove, isCustom }) {
   return (
     <span style={{ display:'inline-flex', alignItems:'center', gap:4, padding:'2px 8px', borderRadius:10, background:`${color}14`, border:`1px solid ${color}40`, fontSize:FS.xxs, fontWeight:600, color, whiteSpace:'nowrap' }}>
-      {isCustom && <span style={{ fontSize:FS.nano, fontWeight:800, color:'#7c3aed', background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 3px', marginRight:1 }}>C</span>}
+      {isCustom && <span style={{ fontSize:FS.nano, fontWeight:800, color:swatch['#7C3AED'], background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 3px', marginRight:1 }}>C</span>}
       {label}
       {onRemove && <button onClick={onRemove} style={{ background:'none', border:'none', cursor:'pointer', color, padding:0, display:'flex', lineHeight:1 }}><X size={10}/></button>}
     </span>
@@ -75,7 +75,7 @@ function CatalogSearch({ items, onAdd, placeholder, categoryFilters }) {
   }
 
   return (
-    <div style={{ marginTop:6, border:`1px solid ${BORDER}`, borderRadius:6, background:'#faf6ef', overflow:'hidden' }}>
+    <div style={{ marginTop:6, border:`1px solid ${BORDER}`, borderRadius:6, background:CARD_ALT, overflow:'hidden' }}>
       {/* Search bar */}
       <div style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 8px', borderBottom:`1px solid ${BORDER}` }}>
         <Search size={11} color={MUTED}/>
@@ -106,7 +106,7 @@ function CatalogSearch({ items, onAdd, placeholder, categoryFilters }) {
             <div style={{ flex:1, minWidth:0 }}>
               <div style={{ fontSize:FS.xs, fontWeight:600, color:INK, display:'flex', alignItems:'center', gap:4 }}>
                 {item.name}
-                {item.isCustom && <span style={{ fontSize:FS.nano, fontWeight:800, color:'#7c3aed', background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 4px' }}>Custom</span>}
+                {item.isCustom && <span style={{ fontSize:FS.nano, fontWeight:800, color:swatch['#7C3AED'], background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 4px' }}>Custom</span>}
               </div>
               {item.desc && <div style={{ fontSize:FS.micro, color:MUTED, lineHeight:1.3, marginTop:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{item.desc}</div>}
             </div>
@@ -561,12 +561,12 @@ export default function SettlementEditor({
             <div role="status" style={{
               display:'flex', alignItems:'flex-start', gap:8,
               padding:'8px 10px',
-              background:'#fff7ec',
+              background:swatch['#FFF7EC'],
               border:`1px solid #e0b070`,
               borderRadius:6,
-              fontSize:FS.xs, fontFamily:sans, color:'#7a4f0f', lineHeight:1.4,
+              fontSize:FS.xs, fontFamily:sans, color:swatch['#7A4F0F'], lineHeight:1.4,
             }}>
-              <span style={{ fontWeight:800, letterSpacing:'0.04em', textTransform:'uppercase', color:'#7a4f0f' }}>
+              <span style={{ fontWeight:800, letterSpacing:'0.04em', textTransform:'uppercase', color:swatch['#7A4F0F'] }}>
                 Canon
               </span>
               <span style={{ flex:1 }}>

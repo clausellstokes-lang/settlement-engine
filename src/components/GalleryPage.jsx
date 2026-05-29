@@ -21,9 +21,7 @@ import { useFlag } from '../lib/flags.js';
 import { fetchPublicGallery, fetchPublicDossier, fetchCuratedGallery } from '../lib/gallery.js';
 import { t } from '../copy/index.js';
 import { TIER_LABELS } from './new/design.js';
-import {
-  GOLD, INK, _INK_DEEP, BORDER, CARD, PARCH, sans, serif_, SP, R, FS,
-} from './theme.js';
+import { GOLD, INK, _INK_DEEP, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, swatch, RED_BG, RED } from './theme.js';
 
 const MUTED  = '#6b5340';
 const BODY   = '#4A3B22';
@@ -78,7 +76,7 @@ function GalleryTile({ tile, onOpen }) {
             padding: '2px 7px', borderRadius: 999,
             background: 'rgba(201,162,76,0.14)',
             border: '1px solid rgba(201,162,76,0.45)',
-            color: '#7a5a1a',
+            color: swatch['#7A5A1A'],
             fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.05em',
             textTransform: 'uppercase',
           }}
@@ -278,7 +276,7 @@ export default function GalleryPage({ onNavigate }) {
           margin: `${SP.sm}px auto 0`, maxWidth: 540,
           padding: `${SP.xs}px ${SP.md}px`,
           borderLeft: `2px solid ${GOLD}`,
-          fontSize: FS.sm, color: '#5a4a2a',
+          fontSize: FS.sm, color: swatch['#5A4A2A'],
           fontFamily: sans, fontStyle: 'italic', lineHeight: 1.5,
           textAlign: 'left',
         }}>
@@ -305,8 +303,8 @@ export default function GalleryPage({ onNavigate }) {
       {listError && (
         <div style={{
           padding: SP.md, marginBottom: SP.lg,
-          background: '#F4DEDE', border: '1px solid #A23434', borderRadius: R.md,
-          fontSize: FS.sm, color: '#A23434',
+          background: RED_BG, border: '1px solid #A23434', borderRadius: R.md,
+          fontSize: FS.sm, color: RED,
         }}>
           Could not load the gallery: {listError}
         </div>

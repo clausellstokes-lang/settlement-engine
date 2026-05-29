@@ -26,7 +26,7 @@
  */
 
 import { useMemo } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 
 const GOLD = '#8C6F32';
@@ -117,7 +117,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
     <div style={{
       padding: 0,
       fontFamily: sans,
-      background: '#fff',
+      background: swatch.white,
     }}>
       {/* Header band — name + meta */}
       <header style={{
@@ -245,7 +245,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                   key={i}
                   style={{
                     padding: '6px 8px',
-                    background: '#fff',
+                    background: swatch.white,
                     border: `1px solid ${BORDER}`,
                     borderLeft: `3px solid ${accent}`,
                     borderRadius: 4,

@@ -12,7 +12,7 @@
  *   FactionDistribution — Stacked bar + per-faction label legend.
  */
 import { View, Text } from '@react-pdf/renderer';
-import { type, palette, toneBg, factionColors, space, pt } from '../theme.js';
+import { type, palette, toneBg, factionColors, space, pt, swatch } from '../theme.js';
 import { Pill } from './Pill.jsx';
 import { Tag } from './Dense.jsx';
 import { finite, safePct } from '../lib/format.js';
@@ -32,7 +32,7 @@ export function StackedBar({ segments, height = 8, showLabels = true, marginBott
         style={{
           height,
           flexDirection: 'row',
-          backgroundColor: '#f0e8d8',
+          backgroundColor: swatch['#F0E8D8'],
           borderRadius: 1,
           overflow: 'hidden',
           border: `0.3pt solid ${palette.border}`,
@@ -131,7 +131,7 @@ export function ScoreCard({ label, score, max = 100, tone = 'gold', description,
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2pt solid ${fg}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}
       wrap={false}
     >
@@ -142,7 +142,7 @@ export function ScoreCard({ label, score, max = 100, tone = 'gold', description,
       <View
         style={{
           height: 4,
-          backgroundColor: '#f0e8d8',
+          backgroundColor: swatch['#F0E8D8'],
           borderRadius: 1,
           marginTop: 3,
           overflow: 'hidden',
@@ -259,7 +259,7 @@ export function StatusCard({
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2pt solid ${palette[sTone] || palette.muted}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}
       wrap={false}
     >

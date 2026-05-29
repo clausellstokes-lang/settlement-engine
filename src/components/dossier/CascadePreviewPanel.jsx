@@ -19,7 +19,7 @@
 import { useEffect, useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { previewCascade } from '../../domain/pendingEdits.js';
-import { sans, serif_, FS, SP, R } from '../theme.js';
+import { sans, serif_, FS, SP, R, swatch, PARCH, MUTED, GOLD_DEEP } from '../theme.js';
 
 const VIOLET = '#7B4FCF';
 const VIOLET_BG = '#EBE2FA';
@@ -42,7 +42,7 @@ function ImpactRow({ accent, accentBg, title, body }) {
       borderLeft: `3px solid ${accent}`,
       borderRadius: R.sm,
       fontSize: FS.xs,
-      color: '#3A2F18',
+      color: swatch['#3A2F18'],
       lineHeight: 1.5,
     }}>
       <b style={{ color: accent }}>{title}</b>{' '}
@@ -99,7 +99,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
         style={{
           position: 'absolute', right: 0, top: 0, bottom: 0,
           width: 'min(400px, 100vw)',
-          background: '#FBF5E6',
+          background: PARCH,
           borderLeft: `1px solid ${BORDER}`,
           boxShadow: '-12px 0 32px rgba(0,0,0,0.25)',
           display: 'flex', flexDirection: 'column',
@@ -123,7 +123,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             aria-label="Close"
             style={{
               background: 'transparent', border: 'none',
-              fontSize: FS.xxl, color: '#9C8068', cursor: 'pointer',
+              fontSize: FS.xxl, color: MUTED, cursor: 'pointer',
               padding: 0, lineHeight: 1,
             }}
           >×</button>
@@ -132,7 +132,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
         <div style={{ flex: 1, overflow: 'auto', padding: SP.lg }}>
           <div style={{
             fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
-            textTransform: 'uppercase', color: '#8C6F32',
+            textTransform: 'uppercase', color: GOLD_DEEP,
             marginBottom: SP.xs,
           }}>
             Summary
@@ -218,7 +218,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             onClick={onCommit}
             style={{
               flex: 1, padding: `${SP.sm}px ${SP.md}px`,
-              background: '#8C6F32', color: '#fff',
+              background: GOLD_DEEP, color: swatch.white,
               border: 'none', borderRadius: R.sm,
               fontWeight: 700, cursor: 'pointer',
               fontFamily: sans, fontSize: FS.sm,
@@ -231,7 +231,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             onClick={onClose}
             style={{
               padding: `${SP.sm}px ${SP.md}px`,
-              background: '#fff', color: '#3A2F18',
+              background: swatch.white, color: swatch['#3A2F18'],
               border: `1px solid ${BORDER}`,
               borderRadius: R.sm,
               fontWeight: 600, cursor: 'pointer',

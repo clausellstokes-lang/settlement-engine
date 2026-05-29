@@ -20,7 +20,7 @@
  */
 import React from 'react';
 import { View, Text } from '@react-pdf/renderer';
-import { type, palette, space, toneBg, pt } from '../theme.js';
+import { type, palette, space, toneBg, pt, swatch } from '../theme.js';
 import { EditableText, EditableProse } from './Editable.jsx';
 import { stripZwnj } from '../lib/format.js';
 
@@ -73,7 +73,7 @@ export function ChapterHeadline({ children, tone = 'gold' }) {
         paddingLeft: 6,
         paddingVertical: 3,
         borderLeft: `2pt solid ${accent}`,
-        backgroundColor: '#faf3e8',
+        backgroundColor: swatch['#FAF3E8'],
       }}
       wrap={false}
     >
@@ -100,7 +100,7 @@ export function StatStrip({ stats, marginBottom = space.sm }) {
     <View
       style={{
         flexDirection: 'row',
-        backgroundColor: '#faf3e8',
+        backgroundColor: swatch['#FAF3E8'],
         border: `0.4pt solid ${palette.border}`,
         borderRadius: 2,
         marginBottom,

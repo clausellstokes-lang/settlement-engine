@@ -17,7 +17,7 @@
  */
 import { Sparkles, X } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { GOLD, GOLD_BG, INK, SECOND, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, SECOND, sans, serif_, SP, R, FS, swatch } from './theme.js';
 
 const STEP_CONTENT = [
   {
@@ -145,7 +145,7 @@ export default function OnboardingCoach() {
                 background: GOLD,
                 border: 'none',
                 borderRadius: R.md,
-                color: '#fff',
+                color: swatch.white,
                 fontSize: FS.sm,
                 fontWeight: 700,
                 fontFamily: sans,

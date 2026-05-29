@@ -16,7 +16,7 @@ import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
 import { getTierDisplayName } from '../config/pricing.js';
 import { t } from '../copy/index.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, ELEV } from './theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, ELEV, swatch } from './theme.js';
 import { flag } from '../lib/flags.js';
 
 export default function PurchaseModal({ onClose }) {
@@ -103,7 +103,7 @@ export default function PurchaseModal({ onClose }) {
             <div style={{
               padding: `${SP.sm + 2}px ${SP.md}px`,
               background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)',
-              borderRadius: R.md, fontSize: FS.sm, color: '#7c3aed', textAlign: 'center',
+              borderRadius: R.md, fontSize: FS.sm, color: swatch['#7C3AED'], textAlign: 'center',
             }}>
               Developer accounts have unlimited credits. Purchases are not required.
             </div>
@@ -114,8 +114,8 @@ export default function PurchaseModal({ onClose }) {
             <div style={{
               display: 'flex', alignItems: 'center', gap: SP.sm,
               padding: `${SP.sm + 2}px ${SP.md}px`,
-              background: '#fdf4f4', border: '1px solid #e8b0b0', borderRadius: R.md,
-              fontSize: FS.sm, color: '#8b1a1a',
+              background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md,
+              fontSize: FS.sm, color: swatch.danger,
             }}>
               <AlertCircle size={16} />
               <span>{error}</span>
@@ -169,7 +169,7 @@ export default function PurchaseModal({ onClose }) {
                     <div style={{
                       position: 'absolute', top: -10, right: -4,
                       padding: '2px 8px', borderRadius: R.md,
-                      background: accentColor, color: '#fff',
+                      background: accentColor, color: swatch.white,
                       fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.02em',
                     }}>
                       {p.discount}

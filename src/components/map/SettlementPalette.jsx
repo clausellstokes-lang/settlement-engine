@@ -9,7 +9,7 @@
 import { useMemo, useState } from 'react';
 import { MapPin, Search, GripVertical } from 'lucide-react';
 import { useStore } from '../../store';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R, swatch } from '../theme.js';
 
 export default function SettlementPalette({ saves = [], placements = {}, activeCampaign }) {
   const [query, setQuery] = useState('');
@@ -224,7 +224,7 @@ function SettlementCard({ save, placed, onHover }) {
                 title={`Active stressor: ${stressLabel}`}
                 style={{
                   fontSize: FS.xxs, fontWeight: 700,
-                  color: '#8a5a20',
+                  color: swatch['#8A5A20'],
                   background: 'rgba(196,128,60,0.10)',
                   border: '1px solid rgba(196,128,60,0.30)',
                   borderRadius: 3, padding: '1px 5px',

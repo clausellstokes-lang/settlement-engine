@@ -19,7 +19,7 @@ import { viabilityHeadline, viabilityTone } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space, pt } from '../theme.js';
+import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, smart, humanize, upper } from '../lib/format.js';
 
 const SEVERITY_TONE = {
@@ -68,7 +68,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
             marginBottom: space.sm,
             padding: 6,
             borderLeft: `2pt solid ${palette.ai}`,
-            backgroundColor: '#f5f0ff',
+            backgroundColor: swatch['#F5F0FF'],
             borderRadius: 2,
           }}
           wrap={false}
@@ -256,7 +256,7 @@ function IssueRow({ iss, idx }) {
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2pt solid ${palette[tone] || palette.gold}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}
       wrap={false}
     >

@@ -29,7 +29,7 @@ import {
 import { t, tx } from '../copy/index.js';
 import { useCopy } from '../hooks/useCopy.js';
 import { flag } from '../lib/flags.js';
-import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, BODY, swatch } from './theme.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 
 // Tier-icon mapping. Kept here (not in pricing config) because icons
@@ -44,7 +44,7 @@ function FeatureRow({ children }) {
   return (
     <li style={{
       display: 'flex', alignItems: 'flex-start', gap: 8,
-      padding: '4px 0', color: '#4A3B22', fontSize: FS.sm,
+      padding: '4px 0', color: BODY, fontSize: FS.sm,
       fontFamily: sans, lineHeight: 1.5,
     }}>
       <Check size={14} color={GOLD} style={{ flexShrink: 0, marginTop: 4 }} />
@@ -83,7 +83,7 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
         <span
           style={{
             position: 'absolute', top: -10, right: 16,
-            background: GOLD, color: '#fff',
+            background: GOLD, color: swatch.white,
             fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.06em',
             padding: '3px 9px', borderRadius: 4,
             textTransform: 'uppercase',
@@ -105,7 +105,7 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
       </header>
 
       <p style={{
-        margin: 0, fontSize: FS.sm, color: '#4A3B22',
+        margin: 0, fontSize: FS.sm, color: BODY,
         fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
       }}>
         {tagline}
@@ -121,7 +121,7 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
       </div>
 
       {tier.key === 'founder' && (
-        <p style={{ margin: 0, fontSize: FS.xs, color: '#7c3aed', fontFamily: sans, fontWeight: 600 }}>
+        <p style={{ margin: 0, fontSize: FS.xs, color: swatch['#7C3AED'], fontFamily: sans, fontWeight: 600 }}>
           {/* Tier 7.6: live seat count via the founder_seats_taken RPC
               (migration 010). The fetch may fail or be pending; fall
               back to the safe "Limited to 500 seats" copy in those
@@ -190,7 +190,7 @@ function PackTile({ pack, onBuy, loading, emphasised }) {
         <span style={{
           position: 'absolute', top: -10, right: -4,
           padding: '2px 8px', borderRadius: R.md,
-          background: emphasised ? GOLD : SECOND, color: '#fff',
+          background: emphasised ? GOLD : SECOND, color: swatch.white,
           fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.02em',
         }}>
           {pack.discount}
@@ -295,7 +295,7 @@ export default function PricingPage({ onNavigate }) {
         </h1>
         <p style={{
           margin: `${SP.sm}px auto 0`, maxWidth: 540,
-          fontSize: FS.lg, color: '#4A3B22',
+          fontSize: FS.lg, color: BODY,
           fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
         }}>
           {t('pricing.pageSubtitle')}
@@ -305,7 +305,7 @@ export default function PricingPage({ onNavigate }) {
           margin: `${SP.md}px auto 0`, maxWidth: 580,
           padding: `${SP.xs}px ${SP.md}px`,
           borderLeft: `2px solid ${GOLD}`,
-          fontSize: FS.sm, color: '#5a4a2a',
+          fontSize: FS.sm, color: swatch['#5A4A2A'],
           fontFamily: sans, fontStyle: 'italic', lineHeight: 1.55,
           textAlign: 'left',
         }}>
@@ -357,7 +357,7 @@ export default function PricingPage({ onNavigate }) {
           </h2>
           <p style={{
             margin: `${SP.xs}px auto 0`, maxWidth: 500,
-            fontSize: FS.sm, color: '#4A3B22', lineHeight: 1.5,
+            fontSize: FS.sm, color: BODY, lineHeight: 1.5,
           }}>
             {t('pricing.creditPacks.subhead')}
           </p>
@@ -405,7 +405,7 @@ export default function PricingPage({ onNavigate }) {
           </h2>
           <p style={{
             margin: `${SP.sm}px auto 0`, maxWidth: 500,
-            fontSize: FS.sm, color: '#E8D9B0', lineHeight: 1.5,
+            fontSize: FS.sm, color: BORDER, lineHeight: 1.5,
           }}>
             {t('pricing.singleDossier.description')}
           </p>
@@ -416,7 +416,7 @@ export default function PricingPage({ onNavigate }) {
             <span style={{ fontFamily: serif_, fontSize: FS['32'], fontWeight: 600 }}>
               {SINGLE_DOSSIER.priceLabel}
             </span>
-            <span style={{ fontSize: FS.sm, color: '#E8D9B0' }}>
+            <span style={{ fontSize: FS.sm, color: BORDER }}>
               one-time
             </span>
           </div>

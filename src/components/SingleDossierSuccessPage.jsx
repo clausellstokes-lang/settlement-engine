@@ -26,9 +26,7 @@ import { Check, Download, AlertCircle, LogIn, ArrowRight } from 'lucide-react';
 import { readPendingDossier, clearPendingDossier } from '../lib/pendingDossier.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
-import {
-  GOLD, INK, _INK_DEEP, BORDER, CARD, _PARCH, sans, serif_, SP, R, FS,
-} from './theme.js';
+import { GOLD, INK, _INK_DEEP, BORDER, CARD, _PARCH, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
 
 const MUTED = '#6b5340';
 const BODY  = '#4A3B22';
@@ -132,7 +130,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           style={{
             display: 'inline-block', marginTop: SP.lg,
             padding: `${SP.sm + 2}px ${SP.lg}px`,
-            background: GOLD, color: '#fff',
+            background: GOLD, color: swatch.white,
             border: 'none', borderRadius: R.button,
             fontFamily: sans, fontSize: FS.md, fontWeight: 700,
             textDecoration: 'none',
@@ -158,7 +156,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     }}>
       <div style={{
         width: 56, height: 56, borderRadius: '50%',
-        background: '#4A7A3A', color: '#fff',
+        background: GREEN, color: swatch.white,
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         margin: '0 auto',
       }}>
@@ -193,7 +191,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: `${SP.md}px ${SP.xl}px`,
             background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-            color: '#fff', border: 'none',
+            color: swatch.white, border: 'none',
             borderRadius: R.button,
             fontFamily: sans, fontSize: FS.md, fontWeight: 700,
             cursor: downloading ? 'wait' : 'pointer',
@@ -207,7 +205,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         {downloadError && (
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 6,
-            color: '#A23434', fontSize: FS.sm,
+            color: RED, fontSize: FS.sm,
           }}>
             <AlertCircle size={14} /> {downloadError}
           </div>

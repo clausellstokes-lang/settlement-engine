@@ -22,7 +22,7 @@ import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useStore } from '../store/index.js';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
 import { MAP_MODES } from '../store/mapSlice.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans, FS, SP, R } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans, FS, SP, R, swatch, PARCH_100 } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
 
 const MapOverlay     = lazy(() => import('./MapOverlay.jsx'));
@@ -575,7 +575,7 @@ export default function WorldMap({ onNavigate } = {}) {
           </span>
         )}
         {mapError && (
-          <span style={{ color: '#c54a4a', fontSize: FS.xs, fontWeight: 700 }}>
+          <span style={{ color: swatch['#C54A4A'], fontSize: FS.xs, fontWeight: 700 }}>
             {String(mapError)}
           </span>
         )}
@@ -701,8 +701,8 @@ export default function WorldMap({ onNavigate } = {}) {
                   }}
                   style={{
                     position: 'absolute', top: 24, right: 24,
-                    padding: '8px 12px', background: '#1B1408',
-                    color: '#F4EAD0',
+                    padding: '8px 12px', background: INK,
+                    color: PARCH_100,
                     border: `1px solid ${GOLD}`, borderRadius: R.sm,
                     fontSize: FS.xs, lineHeight: 1.45,
                     boxShadow: '0 12px 32px rgba(0,0,0,0.40)',
@@ -715,7 +715,7 @@ export default function WorldMap({ onNavigate } = {}) {
                   }}>
                     Drop to place
                   </div>
-                  <div style={{ color: '#c8b098' }}>
+                  <div style={{ color: swatch['#C8B098'] }}>
                     Settlements land at the nearest valid cell. Trade-route
                     candidates auto-link to neighbours within 2 days.
                   </div>
@@ -739,7 +739,7 @@ export default function WorldMap({ onNavigate } = {}) {
           position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)',
           padding: '10px 18px',
           background: toast.kind === 'error' ? '#8a2a2a' : toast.kind === 'info' ? '#3a4a5a' : '#1a5a28',
-          color: '#fff', borderRadius: R.md, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
+          color: swatch.white, borderRadius: R.md, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
           boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
           zIndex: 100,
         }}>

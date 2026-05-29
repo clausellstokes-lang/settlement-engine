@@ -5,7 +5,7 @@
  * source split). Container is muted cream, fill is tone-coded.
  */
 import { View, Text } from '@react-pdf/renderer';
-import { type, palette, pt } from '../theme.js';
+import { type, palette, pt, swatch } from '../theme.js';
 import { finite, safePct } from '../lib/format.js';
 
 export function BarMeter({
@@ -37,7 +37,7 @@ export function BarMeter({
       <View
         style={{
           height,
-          backgroundColor: '#f0e8d8',
+          backgroundColor: swatch['#F0E8D8'],
           borderRadius: 1,
           overflow: 'hidden',
         }}

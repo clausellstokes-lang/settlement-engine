@@ -31,7 +31,7 @@
  */
 
 import { tagEntityCanon } from '../../domain/canonStatus.js';
-import { FS } from '../theme.js';
+import { FS, swatch, MUTED } from '../theme.js';
 
 const VARIANTS = Object.freeze({
   // source × canonStatus → { glyph, label, bg, fg, bdr }
@@ -101,8 +101,8 @@ export function CanonBadge({ entity, verbose = false, showLock = true, style = {
           display: 'inline-block',
           fontSize: FS.micro, fontWeight: 700,
           padding: '1px 5px', borderRadius: 3,
-          background: '#faf6ee',
-          color: '#9c8068',
+          background: swatch['#FAF6EE'],
+          color: MUTED,
           border: '1px solid #d2bd96',
           textTransform: 'uppercase', letterSpacing: '0.05em',
           ...style,

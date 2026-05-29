@@ -23,7 +23,7 @@
 import { useMemo, useState } from 'react';
 import { X, Search, AlertTriangle } from 'lucide-react';
 import { useStore } from '../store';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from './theme.js';
 import { buildRegistry } from '../lib/customRegistry.js';
 
 const PURPLE = '#7c3aed';
@@ -163,7 +163,7 @@ export default function EntityPicker({
           padding: '4px 6px',
           border: `1px solid ${focused ? GOLD : BORDER}`,
           borderRadius: 4,
-          background: '#fff',
+          background: swatch.white,
         }}>
           <Search size={11} color={MUTED} />
           <input
@@ -186,7 +186,7 @@ export default function EntityPicker({
         <div style={{
           marginTop: 4,
           border: `1px solid ${BORDER}`, borderRadius: 4,
-          background: '#fff',
+          background: swatch.white,
           maxHeight: 220, overflowY: 'auto',
           boxShadow: '0 4px 10px rgba(0,0,0,0.06)',
         }}>
@@ -239,9 +239,9 @@ export default function EntityPicker({
       {selectedEntries.some(s => !s.entry) && (
         <div style={{
           marginTop: 6, padding: '4px 8px',
-          background: '#fdebec', border: '1px solid #f0c8cc',
+          background: swatch['#FDEBEC'], border: '1px solid #f0c8cc',
           borderRadius: 4,
-          fontSize: FS.xxs, color: '#8b1a1a',
+          fontSize: FS.xxs, color: swatch.danger,
           display: 'flex', alignItems: 'center', gap: 4,
         }}>
           <AlertTriangle size={10} />

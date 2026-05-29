@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS } from '../../theme.js';
+import { FS, swatch, MUTED } from '../../theme.js';
 import {Ti, serif, sans, TabIntro} from '../Primitives';
 import { REL_STYLES } from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -166,8 +166,8 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:12,flexWrap:'wrap',gap:8}}>
         <div>
-          <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:'#1c1409'}}>{rawHooks.length} Plot Hooks</span>
-          <span style={{fontSize:FS.sm,color:'#9c8068',marginLeft:8}}>{categories.length} sources</span>
+          <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:swatch.inkMag}}>{rawHooks.length} Plot Hooks</span>
+          <span style={{fontSize:FS.sm,color:MUTED,marginLeft:8}}>{categories.length} sources</span>
         </div>
         {/* Sort toggle */}
         <div style={{display:'flex',gap:4}}>
@@ -211,7 +211,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
 
       {/* ── HOOKS LIST ──────────────────────────────────────────────────── */}
       {filtered.length===0
-        ? <div style={{padding:'24px',textAlign:'center',color:'#9c8068',fontSize:FS.md,fontStyle:'italic'}}>No plot hooks in this category.</div>
+        ? <div style={{padding:'24px',textAlign:'center',color:MUTED,fontSize:FS.md,fontStyle:'italic'}}>No plot hooks in this category.</div>
         : <div style={{display:'flex',flexDirection:'column',gap:8}}>
             {filtered.map((h,i)=>{
               const meta = CAT[h.category] || CAT.npc;
@@ -234,11 +234,11 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
                     <div style={{display:'flex',alignItems:'baseline',gap:6,marginBottom:5,flexWrap:'wrap'}}>
                       <span style={{fontSize:FS.sm}}>{meta.icon}</span>
                       <span style={{fontSize:FS.xs,fontWeight:700,color:meta.color}}>{h.source}</span>
-                      {h.role&&<span style={{fontSize:FS.xxs,color:'#9c8068'}}>{h.role}</span>}
+                      {h.role&&<span style={{fontSize:FS.xxs,color:MUTED}}>{h.role}</span>}
                       {h.sub&&<span style={{fontSize:FS.xxs,color:isAccent?meta.color:'#9c8068',fontStyle:!isAccent?'italic':'normal',fontWeight:isAccent?700:400,marginLeft:'auto'}}>{h.sub}</span>}
                     </div>
                     {/* Hook text */}
-                    <p style={{fontSize:FS.md,color:'#1c1409',lineHeight:1.6,margin:0}}>{h.text}</p>
+                    <p style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.6,margin:0}}>{h.text}</p>
                   </div>
                 </div>
               );
@@ -246,7 +246,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
           </div>
       }
 
-      <p style={{fontSize:FS.xs,color:'#9c8068',marginTop:12,fontStyle:'italic',textAlign:'right'}}>
+      <p style={{fontSize:FS.xs,color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
         {rawHooks.length} hooks from {categories.length} sources
       </p>
     </div>

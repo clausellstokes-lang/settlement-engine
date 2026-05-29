@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS } from './theme.js';
+import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch } from './theme.js';
 import { BookOpen, Zap, Star, Cpu, List } from 'lucide-react';
 import { flag } from '../lib/flags.js';
 
@@ -26,7 +26,7 @@ function Insight({ title, children }) {
 function Step({ n, children }) {
   return (
     <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start' }}>
-      <div style={{ width:22, height:22, borderRadius:'50%', background:GOLD, color:'#fff',
+      <div style={{ width:22, height:22, borderRadius:'50%', background:GOLD, color:swatch.white,
         fontSize:FS.xs, fontWeight:800, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:1 }}>
         {n}
       </div>
@@ -68,25 +68,25 @@ function QuickTab() {
       <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:GOLD, marginBottom:6 }}>
         A settlement generator that thinks — and stays within your constraints.
       </div>
-      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
+      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:'0 0 8px' }}>
         Most generators roll on a table. This one simulates. Every output — institutions, NPC secrets,
         faction tensions, export economy — emerges from interlocking mechanical relationships that governed
         real historical settlements. The outputs aren't random. They're derived.
       </p>
-      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
+      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:'0 0 8px' }}>
         <strong style={{ color:GOLD }}>Constraint-driven</strong> is the core principle. You don't describe
         what you want — you constrain what's possible. Sliders, stress conditions, forced institutions,
         terrain, neighbour relationships: each is a constraint. The settlement that comes out is the only
         coherent settlement that satisfies all your constraints simultaneously. That's meaningfully different
         from rolling tables, natural language prompting, or selecting from a list.
       </p>
-      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
+      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:'0 0 8px' }}>
         <strong style={{ color:GOLD }}>Coherence</strong> follows from constraint. A struggling frontier town
         with high criminal priority will have a corrupt guard, underfunded walls, a black market, and NPCs
         whose secrets reflect exactly that pressure — because all those outputs are derived from the same
         constraint set, not generated independently.
       </p>
-      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:'0 0 8px' }}>
+      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:'0 0 8px' }}>
         <strong style={{ color:GOLD }}>Narrative Refinement Layer</strong> is built in. The settlement
         itself is simulated, not AI-generated — but you can optionally refine the simulator's output
         into table-ready prose. Hit the purple button in any saved settlement and the layer
@@ -95,7 +95,7 @@ function QuickTab() {
         actually simulated. The refinement augments the outputs rather than replacing them, giving
         you something ready for the table without transcribing anything.
       </p>
-      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.7, margin:0 }}>
+      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:0 }}>
         <strong style={{ color:GOLD }}>Narrative AI Prompt</strong> is for deeper work. The export
         button packages the full settlement brief — economy, power structure, NPC goals and secrets,
         stress conditions, history — as a structured prompt for any external AI tool. Because the
@@ -114,8 +114,8 @@ function QuickTab() {
       <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Free mode can generate Thorp through Village; sign in for Town, City, and Metropolis.</Step>
       <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong> — forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
       <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft:32 }}>
-        <div style={{ width:6, height:6, borderRadius:'50%', background:'#b8860b', flexShrink:0, marginTop:7 }}/>
-        <p style={{ fontSize: FS['12.5'], color:'#5a3a00', lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
+        <div style={{ width:6, height:6, borderRadius:'50%', background:swatch['#B8860B'], flexShrink:0, marginTop:7 }}/>
+        <p style={{ fontSize: FS['12.5'], color:swatch['#5A3A00'], lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
       </div>
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first — it gives you the one-paragraph version ready for the table.</Step>
       <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and — where relevant — legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
@@ -286,20 +286,20 @@ function PhilosophyTab() {
       <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:GOLD, marginBottom:8 }}>
         Discover your own world.
       </div>
-      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.75, margin:'0 0 10px' }}>
+      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.75, margin:'0 0 10px' }}>
         The settlement that emerges from your constraints isn't one you scripted — it's one you
         uncovered. You set the conditions of your world: the terrain, the trade pressures, the
         regional history you've established. The generator derives what a settlement in those
         conditions would actually look like. What appears is genuinely new to you, even though
         you built the world it lives in.
       </p>
-      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.75, margin:'0 0 10px' }}>
+      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.75, margin:'0 0 10px' }}>
         Every explorer of their own world is bounded by three things: <strong style={{color:GOLD}}>discovery</strong> — what
         you find when you arrive, <strong style={{color:GOLD}}>disappointment</strong> — what isn't
         there, and <strong style={{color:GOLD}}>ingenuity</strong> — what you make of both. These
         aren't limitations of the tool. They're the texture of world-building done honestly.
       </p>
-      <p style={{ fontSize:FS.sm, color:'#c8b098', lineHeight:1.75, margin:0 }}>
+      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.75, margin:0 }}>
         Every settlement this tool produces is meant to be woven into your world, not dropped into it.
         Rename the NPCs. Adjust the factions to fit your regional politics. Keep what fits; change
         what doesn't. The generator gives you a coherent foundation — what you build on top is yours.

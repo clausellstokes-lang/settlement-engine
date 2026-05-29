@@ -16,7 +16,7 @@
  */
 
 import { Crown } from 'lucide-react';
-import { FS } from '../theme.js';
+import { FS, INK } from '../theme.js';
 import { useStore } from '../../store/index.js';
 
 const SIZES = {
@@ -45,7 +45,7 @@ export default function FounderBadge({ size = 'md', force = false, style }) {
         // not "purchased": closer to a wax seal than a sale ribbon.
         background: 'linear-gradient(135deg, #FBF5E6 0%, #F4EAD0 100%)',
         border: '1px solid #C9A24C',
-        color: '#1B1408',
+        color: INK,
         fontSize: s.fontSize,
         fontWeight: 700,
         letterSpacing: '0.05em',

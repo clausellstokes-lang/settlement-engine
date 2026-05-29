@@ -22,7 +22,7 @@ import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
 import WizardCloseout from './generate/WizardCloseout.jsx';
 import WizardNextSteps from './generate/WizardNextSteps.jsx';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import HomeHero from './HomeHero.jsx';
@@ -234,7 +234,7 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
         <button disabled style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
           padding: isMobile ? '13px 24px' : '10px 24px',
-          background: '#8a8a8a', color: '#fff', border: 'none', borderRadius: R.md,
+          background: swatch['#8A8A8A'], color: swatch.white, border: 'none', borderRadius: R.md,
           cursor: 'not-allowed', fontFamily: sans, fontSize: FS.md, fontWeight: 700,
           opacity: 0.5,
         }}>
@@ -268,7 +268,7 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
           padding: isMobile ? '13px 24px' : '12px 24px',
-          background: '#fff',
+          background: swatch.white,
           color: GOLD, fontWeight: 700,
           border: `1.5px solid ${GOLD}`,
           borderBottom: `2px solid ${GOLD}`,
@@ -291,7 +291,7 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
       padding: isMobile ? '13px 24px' : '10px 24px',
       background: saved ? '#2a7a2a' : '#1a4a2a',
-      color: '#fff', border: 'none', borderRadius: R.md,
+      color: swatch.white, border: 'none', borderRadius: R.md,
       cursor: saving || saved ? 'default' : 'pointer',
       fontFamily: sans, fontSize: FS.md, fontWeight: 700,
       boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
@@ -484,14 +484,14 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
         <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
 
         {authTier === 'anon' && (
-          <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee', border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND }}>
+          <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'], border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND }}>
             Free mode: generating Thorp, Hamlet, or Village. Sign in for all settlement tiers.
           </div>
         )}
 
         {/* Helper banner — explains Basic is one-screen */}
         <div style={{
-          padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee',
+          padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'],
           border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`,
           borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
         }}>
@@ -518,7 +518,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
           style={{
             width: '100%', padding: isMobile ? `${SP.xl}px 0` : `${SP.xl - 2}px 0`,
             background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-            color: '#fff', border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
+            color: swatch.white, border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
             fontFamily: serif_,
             fontSize: isMobile ? 22 : FS.xxl, fontWeight: 600, letterSpacing: '0.02em',
             boxShadow: '0 4px 20px rgba(160,118,42,0.45)',
@@ -569,7 +569,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
               onClick={() => setWizardMode('basic')}
               style={{
                 padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
-                background: '#fff', border: `1px solid ${BORDER}`,
+                background: swatch.white, border: `1px solid ${BORDER}`,
                 borderRadius: 12, color: SECOND,
                 cursor: 'pointer', fontFamily: sans,
               }}
@@ -581,7 +581,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
             <span style={{
               padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
               background: CARD_HDR, border: `1px solid ${BORDER}`,
-              borderRadius: 12, color: '#5a3a00',
+              borderRadius: 12, color: swatch['#5A3A00'],
               display: 'inline-flex', alignItems: 'center', gap: 4,
             }}>
               📋 {loadedFromSave.name}
@@ -589,7 +589,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
                 onClick={clearLoadedFromSave}
                 style={{
                   background: 'transparent', border: 'none',
-                  color: '#5a3a00', cursor: 'pointer', padding: 0,
+                  color: swatch['#5A3A00'], cursor: 'pointer', padding: 0,
                   fontSize: FS.xs, fontWeight: 700,
                 }}
                 aria-label="Clear loaded config"
@@ -599,8 +599,8 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
           {importedNeighbour && (
             <span style={{
               padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
-              background: '#E2EEDB', border: '1px solid #4a8a60',
-              borderRadius: 12, color: '#1a5a28',
+              background: swatch['#E2EEDB'], border: '1px solid #4a8a60',
+              borderRadius: 12, color: swatch.success,
               display: 'inline-flex', alignItems: 'center', gap: 4,
             }}>
               🌐 {importedNeighbour.name}
@@ -608,7 +608,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
                 onClick={clearNeighbour}
                 style={{
                   background: 'transparent', border: 'none',
-                  color: '#1a5a28', cursor: 'pointer', padding: 0,
+                  color: swatch.success, cursor: 'pointer', padding: 0,
                   fontSize: FS.xs, fontWeight: 700,
                 }}
                 aria-label="Clear neighbour"
@@ -620,24 +620,24 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
 
       {/* Banners — only when the chrome diet is off (legacy path) */}
       {!chromeDiet && loadedFromSave && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#fdf8ee', border: '2px solid #b8860b', borderRadius: 8, padding: '10px 14px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: swatch['#FDF8EE'], border: '2px solid #b8860b', borderRadius: 8, padding: '10px 14px' }}>
           <span style={{ fontSize: FS['16'], flexShrink: 0 }}>&#128203;</span>
           <div style={{ flex: 1 }}>
-            <span style={{ fontSize: FS.md, fontWeight: 700, color: '#5a3a00' }}>Config loaded: {loadedFromSave.name}</span>
-            {loadedFromSave.tier && <span style={{ fontSize: FS.sm, color: '#8a6020', marginLeft: 8 }}>{loadedFromSave.tier}</span>}
+            <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch['#5A3A00'] }}>Config loaded: {loadedFromSave.name}</span>
+            {loadedFromSave.tier && <span style={{ fontSize: FS.sm, color: swatch['#8A6020'], marginLeft: 8 }}>{loadedFromSave.tier}</span>}
           </div>
-          <button onClick={clearLoadedFromSave} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(184,134,11,0.15)', border: '1px solid #b8860b', color: '#5a3a00', cursor: 'pointer', fontSize: FS['16'], fontWeight: 700 }}>&times;</button>
+          <button onClick={clearLoadedFromSave} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(184,134,11,0.15)', border: '1px solid #b8860b', color: swatch['#5A3A00'], cursor: 'pointer', fontSize: FS['16'], fontWeight: 700 }}>&times;</button>
         </div>
       )}
 
       {!chromeDiet && importedNeighbour && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#f0faf2', border: '2px solid #4a8a60', borderRadius: 8, padding: '10px 14px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: swatch.successBg, border: '2px solid #4a8a60', borderRadius: 8, padding: '10px 14px' }}>
           <span style={{ fontSize: FS['16'] }}>&#127760;</span>
           <div style={{ flex: 1 }}>
-            <span style={{ fontSize: FS.md, fontWeight: 700, color: '#1a5a28' }}>Neighbour active: {importedNeighbour.name}</span>
-            <span style={{ fontSize: FS.sm, color: '#4a8a60', marginLeft: 8 }}>{importedNeighbour.tier}</span>
+            <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.success }}>Neighbour active: {importedNeighbour.name}</span>
+            <span style={{ fontSize: FS.sm, color: swatch['#4A8A60'], marginLeft: 8 }}>{importedNeighbour.tier}</span>
           </div>
-          <button onClick={clearNeighbour} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(74,138,96,0.15)', border: '1px solid #4a8a60', color: '#1a5a28', cursor: 'pointer', fontSize: FS['16'], fontWeight: 700 }}>&times;</button>
+          <button onClick={clearNeighbour} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(74,138,96,0.15)', border: '1px solid #4a8a60', color: swatch.success, cursor: 'pointer', fontSize: FS['16'], fontWeight: 700 }}>&times;</button>
         </div>
       )}
 
@@ -648,7 +648,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
 
           {/* Contextual hint for current step */}
           <div style={{
-            padding: `${SP.sm + 2}px ${SP.lg}px`, background: '#fef9ee',
+            padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'],
             border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`,
             borderRadius: R.lg - 1, fontSize: FS.md, color: SECOND, lineHeight: 1.5,
           }}>
@@ -719,7 +719,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
                   display: 'flex', alignItems: 'center', gap: R.md,
                   padding: `${SP.sm + 2}px ${SP.xl}px`, background: GOLD,
                   border: 'none', borderRadius: R.lg, cursor: 'pointer',
-                  fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: '#fff',
+                  fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: swatch.white,
                 }}
               >
                 Ready to Generate <ChevronRight size={16} />
@@ -745,7 +745,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
             style={{
               width: '100%', padding: isMobile ? `${SP.lg}px 0` : `${SP.lg - 2}px 0`,
               background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-              color: '#fff', border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
+              color: swatch.white, border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
               fontFamily: serif_,
               fontSize: isMobile ? FS.xxl : FS.xxl - 1, fontWeight: 600, letterSpacing: '0.02em',
               boxShadow: '0 3px 14px rgba(160,118,42,0.45)',
@@ -836,7 +836,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
                   background: GOLD,
                   border: 'none',
                   borderRadius: R.md, cursor: 'pointer',
-                  color: '#fff', fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
+                  color: swatch.white, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
                 }}
               >
                 <Zap size={14} /> New
@@ -871,23 +871,23 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
       {settlement && !showOutput && (
         <>
           <div style={{
-            padding: `${SP.md}px ${SP.lg}px`, background: '#f0faf2',
+            padding: `${SP.md}px ${SP.lg}px`, background: swatch.successBg,
             border: '1px solid #4a8a60', borderRadius: R.lg,
             display: 'flex', alignItems: 'center', gap: SP.md,
           }}>
             <div style={{ flex: 1 }}>
-              <span style={{ fontSize: FS.md, fontWeight: 700, color: '#1a5a28' }}>
+              <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.success }}>
                 Last generated: {settlement.name || 'Untitled'}
               </span>
-              <span style={{ fontSize: FS.sm, color: '#4a8a60', marginLeft: SP.sm }}>
+              <span style={{ fontSize: FS.sm, color: swatch['#4A8A60'], marginLeft: SP.sm }}>
                 {settlement.tier}
               </span>
             </div>
             <button
               onClick={() => setShowOutput(true)}
               style={{
-                padding: `${SP.sm}px ${SP.lg}px`, background: '#2a7a2a',
-                color: '#fff', border: 'none', borderRadius: R.md,
+                padding: `${SP.sm}px ${SP.lg}px`, background: swatch['#2A7A2A'],
+                color: swatch.white, border: 'none', borderRadius: R.md,
                 cursor: 'pointer', fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
               }}
             >

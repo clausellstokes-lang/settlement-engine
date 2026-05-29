@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import ControlsStrip from './ControlsStrip.jsx';
-import {GOLD, INK, MUTED, SECOND, BORDER, sans, FS} from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, swatch, CARD_ALT } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid } from '../store/selectors.js';
 import {SERVICE_TIER_DATA} from '../generators/servicesGenerator';
@@ -84,9 +84,9 @@ function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
         <span style={{fontSize:FS.sm, fontWeight:700, color:INK, fontFamily:"'Crimson Text', Georgia, serif"}}>{label}</span>
         {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>}
       </span>
-      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>}
+      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>}
       {forced>0 && <>
-        <span style={{fontSize:FS.micro, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>
+        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>
         <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>
       </>}
       <span style={{fontSize:FS.xxs, color:MUTED, marginLeft:4}}>{isOpen ? '▲' : '▼'}</span>
@@ -177,7 +177,7 @@ function GoodsPanel() {
 
       <SectionHeader label="Export Goods" forced={forcedCount} allowed={allowedCount+forcedCount} total={goods.length} isOpen={showExport} onToggle={()=>setShowExport(v=>!v)}/>
       {showExport && (
-        <div style={{maxHeight:360, overflowY:'auto', background:'#faf6ef'}}>
+        <div style={{maxHeight:360, overflowY:'auto', background:CARD_ALT}}>
           {sorted.length===0 && search
             ? <div style={{padding:12, textAlign:'center', color:MUTED, fontSize:FS.sm, fontStyle:'italic'}}>No goods match "{search}"</div>
             : sorted.map(g => <GoodCard key={g.name} good={g} state={getState(g)} onCycle={()=>cycleGood(g)}/>)
@@ -187,7 +187,7 @@ function GoodsPanel() {
 
       <SectionHeader label="Import Goods" forced={0} allowed={allowedCount+forcedCount} total={goods.length} isOpen={showImport} onToggle={()=>setShowImport(v=>!v)}/>
       {showImport && (
-        <div style={{maxHeight:360, overflowY:'auto', background:'#faf6ef'}}>
+        <div style={{maxHeight:360, overflowY:'auto', background:CARD_ALT}}>
           {sorted.length===0 && search
             ? <div style={{padding:12, textAlign:'center', color:MUTED, fontSize:FS.sm, fontStyle:'italic'}}>No goods match "{search}"</div>
             : sorted.map(g => <GoodCard key={g.name} good={g} state={getState(g)} onCycle={()=>cycleGood(g)}/>)
@@ -202,7 +202,7 @@ export default function TradeDynamicsPanel() {
   const [open, setOpen] = useState(false);
   return (
     <div style={{border:`1px solid ${BORDER}`, borderRadius:8}}>
-      <button onClick={()=>setOpen(v=>!v)} style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:'#f5ede0', border:'none', cursor:'pointer', textAlign:'left', borderBottom:open?'1px solid #e0d0b0':'none', fontFamily:sans}}>
+      <button onClick={()=>setOpen(v=>!v)} style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:swatch['#F5EDE0'], border:'none', cursor:'pointer', textAlign:'left', borderBottom:open?'1px solid #e0d0b0':'none', fontFamily:sans}}>
         <span style={{fontSize:FS.lg}}></span>
         <span style={{fontFamily:'Crimson Text, Georgia, serif', fontSize: FS['16'], fontWeight:600, color:INK, flex:1}}>Step 4: Trade Dynamics</span>
         <span style={{fontSize:FS.xs, color:MUTED, fontWeight:500}}>{open ? 'Collapse' : 'Configure Trade'}</span>

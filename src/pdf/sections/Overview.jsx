@@ -24,7 +24,7 @@ import { StackedBar } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
-import { type, palette, space, pt } from '../theme.js';
+import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, smart, label, hookText, finite, safePct, humanize } from '../lib/format.js';
 
 export function Overview({ settlement, narrativeMode, vm }) {
@@ -501,14 +501,14 @@ function FoodBalanceBar({ fb }) {
       <View style={{ marginTop: 2 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
           <Text style={{ ...type.caption, fontSize: pt['7.5'], width: 40 }}>Produced</Text>
-          <View style={{ flex: 1, height: 4, backgroundColor: '#f0e8d8', borderRadius: 1 }}>
+          <View style={{ flex: 1, height: 4, backgroundColor: swatch['#F0E8D8'], borderRadius: 1 }}>
             <View style={{ width: `${prodPct}%`, height: '100%', backgroundColor: palette.good }} />
           </View>
           <Text style={{ ...type.caption, fontSize: pt['7.5'], marginLeft: 4 }}>{smart(prod)}</Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text style={{ ...type.caption, fontSize: pt['7.5'], width: 40 }}>Needed</Text>
-          <View style={{ flex: 1, height: 4, backgroundColor: '#f0e8d8', borderRadius: 1 }}>
+          <View style={{ flex: 1, height: 4, backgroundColor: swatch['#F0E8D8'], borderRadius: 1 }}>
             <View style={{ width: `${needPct}%`, height: '100%', backgroundColor: palette.bad }} />
           </View>
           <Text style={{ ...type.caption, fontSize: pt['7.5'], marginLeft: 4 }}>{smart(need)}</Text>

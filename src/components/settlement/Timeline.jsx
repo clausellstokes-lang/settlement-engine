@@ -10,7 +10,7 @@
 
 import { Clock, Undo2, ChevronRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
 export default function Timeline() {
   const phase    = useStore(s => s.phase);
@@ -66,7 +66,7 @@ function Entry({ entry, isLatest, onUndo }) {
   return (
     <div style={{
       padding: SP.sm,
-      background: '#fffbf5',
+      background: CARD,
       border: `1px solid ${BORDER}`, borderRadius: R.sm,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
@@ -85,7 +85,7 @@ function Entry({ entry, isLatest, onUndo }) {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 3,
               padding: '2px 6px',
-              background: '#fff', color: '#8b1a1a',
+              background: swatch.white, color: swatch.danger,
               border: `1px solid #c89a9a`, borderRadius: R.sm,
               fontSize: FS.xxs, fontFamily: sans, fontWeight: 700, cursor: 'pointer',
             }}

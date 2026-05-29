@@ -36,7 +36,7 @@ import { triggerPricingMoment } from '../lib/pricingMoments.js';
 // which centralizes the visual styling and the role="status" a11y
 // announcement under one shared component.
 import StateBadge        from './primitives/StateBadge.jsx';
-import {GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS} from './theme';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch } from './theme';
 
 const REL_COLORS = {
   trade_partner:'#1a5a28', allied:'#1a3a7a', patron:'#4a1a6a',
@@ -58,8 +58,8 @@ function NetworkEffectsPanel({ settlementId, saves }) {
   const maxAbs = Math.max(0.01, ...EFFECT_CATEGORIES.map(c => Math.abs(mods.totals[c.key])));
 
   return (
-    <div style={{ background: '#f8f4ee', border: `1px solid ${BORDER}`, borderRadius: 8, padding: '12px 14px', marginBottom: 14 }}>
-      <div style={{ fontSize: FS.xs, fontWeight: 700, color: '#5a3a1a', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>
+    <div style={{ background: swatch['#F8F4EE'], border: `1px solid ${BORDER}`, borderRadius: 8, padding: '12px 14px', marginBottom: 14 }}>
+      <div style={{ fontSize: FS.xs, fontWeight: 700, color: swatch['#5A3A1A'], textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>
         Network Effects
       </div>
 
@@ -72,7 +72,7 @@ function NetworkEffectsPanel({ settlementId, saves }) {
           return (
             <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ fontSize: FS.xxs, fontWeight: 600, color: SECOND, minWidth: 80, fontFamily: sans }}>{label}</span>
-              <div style={{ flex: 1, height: 8, background: '#e8e0d4', borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
+              <div style={{ flex: 1, height: 8, background: swatch['#E8E0D4'], borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
                 <div style={{
                   position: 'absolute',
                   [isPos ? 'left' : 'right']: 0,
@@ -135,7 +135,7 @@ function NetworkEffectsPanel({ settlementId, saves }) {
 }
 
 function DetailErrorBoundary({ children }) {
-  try { return children; } catch { return <div style={{padding:12,color:'#8b1a1a',fontSize:FS.sm}}>Error loading settlement output.</div>; }
+  try { return children; } catch { return <div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>; }
 }
 
 const REL_TYPES=['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
@@ -148,9 +148,9 @@ function LinkNeighbourCard({currentSave, allSaves, onLink}){
     if(currentSave?.settlement?.neighbourNetwork?.some(n=>n.id===s.id||n.name===s.name)) return false;
     return true;
   });
-  if(!others.length) return<div style={{padding:'12px 14px',fontSize:FS.sm,color:MUTED,background:'#f7f0e4',borderRadius:8,border:`1px solid ${BORDER}`}}>No other saved settlements to link.</div>;
-  return<div style={{background:'#f0f4ff',border:'1px solid #c0c8e8',borderRadius:8,padding:'12px 14px'}}>
-    <div style={{fontSize:FS.xs,fontWeight:700,color:'#2a3a7a',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
+  if(!others.length) return<div style={{padding:'12px 14px',fontSize:FS.sm,color:MUTED,background:swatch['#F7F0E4'],borderRadius:8,border:`1px solid ${BORDER}`}}>No other saved settlements to link.</div>;
+  return<div style={{background:swatch.infoBg,border:'1px solid #c0c8e8',borderRadius:8,padding:'12px 14px'}}>
+    <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
       <Link2 size={12}/> Link as Neighbour
     </div>
     <div style={{display:'flex',flexDirection:'column',gap:6,marginBottom:8}}>
@@ -159,9 +159,9 @@ function LinkNeighbourCard({currentSave, allSaves, onLink}){
         <span style={{fontSize:FS.xxs,color:MUTED}}>{s.tier}</span>
       </button>)}
     </div>
-    {selected&&<div style={{padding:'8px 10px',background:'#e8eeff',borderRadius:5,border:'1px solid #c0c8e8',display:'flex',flexDirection:'column',gap:8}}>
+    {selected&&<div style={{padding:'8px 10px',background:swatch['#E8EEFF'],borderRadius:5,border:'1px solid #c0c8e8',display:'flex',flexDirection:'column',gap:8}}>
       <div style={{display:'flex',alignItems:'center',gap:8}}>
-        <span style={{fontSize:FS.sm,flex:1,color:'#2a3a7a',fontWeight:600}}>Link: {selected.name}</span>
+        <span style={{fontSize:FS.sm,flex:1,color:swatch.info,fontWeight:600}}>Link: {selected.name}</span>
       </div>
       <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
         <span style={{fontSize:FS.xs,color:SECOND}}>Relationship:</span>
@@ -170,7 +170,7 @@ function LinkNeighbourCard({currentSave, allSaves, onLink}){
         </select>
       </div>
       <div style={{display:'flex',gap:8}}>
-        <button onClick={()=>onLink(selected,relType)} style={{padding:'4px 12px',borderRadius:4,background:'#2a3a7a',color:'#fff',border:'none',cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>Confirm</button>
+        <button onClick={()=>onLink(selected,relType)} style={{padding:'4px 12px',borderRadius:4,background:swatch.info,color:swatch.white,border:'none',cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>Confirm</button>
         <button onClick={()=>setSelected(null)} style={{padding:'4px 10px',borderRadius:4,background:CARD,color:SECOND,border:`1px solid ${BORDER}`,cursor:'pointer',fontSize:FS.xs,fontFamily:sans}}>Cancel</button>
       </div>
     </div>}
@@ -373,7 +373,7 @@ export default function SettlementDetail({
       {/* Local keyframe so the export-button spinner animates even when
           OutputContainer (which also defines @keyframes spin) isn't mounted. */}
       <style>{'@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}'}</style>
-      <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16,padding:'12px 14px',background:'#f5ede0',border:`1px solid ${BORDER}`,borderRadius:8}}>
+      <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16,padding:'12px 14px',background:swatch['#F5EDE0'],border:`1px solid ${BORDER}`,borderRadius:8}}>
         <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
           <button onClick={()=>{setDetail(null);setLinking(false);}} style={{display:'flex',alignItems:'center',gap:5,background:'rgba(255,251,245,0.96)',border:`1px solid ${BORDER}`,borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:FS.sm,fontWeight:700,color:SECOND,fontFamily:sans}}>
             <ChevronLeft size={13}/> Back to list
@@ -393,7 +393,7 @@ export default function SettlementDetail({
             <button
               onClick={handleRevertToRaw}
               title="Clear the narrative refinement and daily-life prose on this save, returning it to the raw simulator output. Chronicle history is preserved."
-              style={{display:'flex',alignItems:'center',gap:5,background:CARD,color:'#6a2a9a',border:'1px solid rgba(160,100,220,0.45)',borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}
+              style={{display:'flex',alignItems:'center',gap:5,background:CARD,color:swatch.ai,border:'1px solid rgba(160,100,220,0.45)',borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}
             >
               <RotateCcw size={12}/> Revert to Raw
             </button>
@@ -410,7 +410,7 @@ export default function SettlementDetail({
                 padding:'3px 9px',borderRadius:11,fontSize:FS.xxs,fontWeight:800,
                 fontFamily:sans,letterSpacing:'0.07em',textTransform:'uppercase',
                 background:'rgba(90,42,138,0.14)',
-                color:'#6a2a9a',
+                color:swatch.ai,
                 border:'1px solid rgba(160,100,220,0.35)',
               }}
             >
@@ -456,7 +456,7 @@ export default function SettlementDetail({
             style={{
               display:'flex',alignItems:'center',gap:5,
               background: exporting ? '#5a1414' : '#7a1a1a',
-              color:'#fff',border:'none',borderRadius:5,padding:'5px 12px',
+              color:swatch.white,border:'none',borderRadius:5,padding:'5px 12px',
               cursor: exporting ? 'wait' : 'pointer',
               fontSize:FS.sm,fontWeight:700,fontFamily:sans,
               opacity: exporting ? 0.85 : 1,
@@ -470,7 +470,7 @@ export default function SettlementDetail({
       </div>
 
       <div style={{display:'flex',gap:8,marginBottom:12,alignItems:'center',flexWrap:'wrap'}}>
-        <button onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}} style={{padding:'7px 14px',background:'#2a3a7a',color:'#fff',border:'none',borderRadius:5,cursor:'pointer',fontFamily:sans,fontSize:FS.xs,fontWeight:700}}>
+        <button onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}} style={{padding:'7px 14px',background:swatch.info,color:swatch.white,border:'none',borderRadius:5,cursor:'pointer',fontFamily:sans,fontSize:FS.xs,fontWeight:700}}>
           ↩ Apply Saved Configuration &amp; Regenerate
         </button>
         <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',borderRadius:4,border:`1px solid ${BORDER}`}}>
@@ -590,8 +590,8 @@ export default function SettlementDetail({
 
       {linking&&<div style={{marginBottom:14}}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
 
-      {network.length>0&&!linking&&<div style={{background:'#f0f4ff',border:'1px solid #c0c8e8',borderRadius:8,padding:'12px 14px',marginBottom:14}}>
-        <div style={{fontSize:FS.xs,fontWeight:700,color:'#2a3a7a',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
+      {network.length>0&&!linking&&<div style={{background:swatch.infoBg,border:'1px solid #c0c8e8',borderRadius:8,padding:'12px 14px',marginBottom:14}}>
+        <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
           <Link2 size={12}/> Neighbour Network ({network.length})
         </div>
         {network.map((n,i)=>{
@@ -663,7 +663,7 @@ export default function SettlementDetail({
                           borderRadius:4,fontFamily:sans,color:INK}}
                       />
                       <button onClick={()=>handleApplyRename('npc',npc.id,npc.name,editDraft)}
-                        style={{padding:'3px 10px',background:GOLD,color:'#fff',border:'none',
+                        style={{padding:'3px 10px',background:GOLD,color:swatch.white,border:'none',
                           borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>
                         Save
                       </button>
@@ -674,7 +674,7 @@ export default function SettlementDetail({
                       </button></>
                     : <><span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{npc.name}</span>
                       <button onClick={()=>{setEditingName({type:'npc',id:npc.id,oldName:npc.name});setEditDraft(npc.name);}}
-                        style={{padding:'2px 9px',background:'#f0f4ff',color:'#2a3a7a',
+                        style={{padding:'2px 9px',background:swatch.infoBg,color:swatch.info,
                           border:'1px solid #c0c8e8',borderRadius:4,cursor:'pointer',fontSize:FS.xxs,fontWeight:700,fontFamily:sans}}>
                         Rename
                       </button></>}
@@ -709,7 +709,7 @@ export default function SettlementDetail({
                           borderRadius:4,fontFamily:sans,color:INK}}
                       />
                       <button onClick={()=>handleApplyRename('faction',fac.name,fac.name,editDraft)}
-                        style={{padding:'3px 10px',background:GOLD,color:'#fff',border:'none',
+                        style={{padding:'3px 10px',background:GOLD,color:swatch.white,border:'none',
                           borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>
                         Save
                       </button>
@@ -720,7 +720,7 @@ export default function SettlementDetail({
                       </button></>
                     : <><span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{fac.name}</span>
                       <button onClick={()=>{setEditingName({type:'faction',id:fac.name,oldName:fac.name});setEditDraft(fac.name);}}
-                        style={{padding:'2px 9px',background:'#f0f4ff',color:'#2a3a7a',
+                        style={{padding:'2px 9px',background:swatch.infoBg,color:swatch.info,
                           border:'1px solid #c0c8e8',borderRadius:4,cursor:'pointer',fontSize:FS.xxs,fontWeight:700,fontFamily:sans}}>
                         Rename
                       </button></>}
@@ -743,7 +743,7 @@ export default function SettlementDetail({
 
       {detail.settlement&&<div style={{marginBottom:12}}>
         <DetailErrorBoundary>
-          <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: '#9c8068' }}>Loading...</div>}>
+          <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
             <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />
           </Suspense>
         </DetailErrorBoundary>

@@ -28,7 +28,7 @@
  */
 
 import { useState } from 'react';
-import { FS } from './theme.js';
+import { FS, swatch } from './theme.js';
 import { Cog, Feather, ChevronRight, ChevronDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useFlag } from '../lib/flags.js';
@@ -73,7 +73,7 @@ function StepRow({ entry, isLast, traces }) {
         position: 'absolute', left: 0, top: 2,
         width: 22, height: 22, borderRadius: '50%',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        background: '#fff', border: `1px solid ${color}`,
+        background: swatch.white, border: `1px solid ${color}`,
         color,
       }}>
         <Icon size={12} aria-hidden="true" />
@@ -121,7 +121,7 @@ function StepRow({ entry, isLast, traces }) {
             {stepTraces.slice(0, 8).map((trace, i) => (
               <div key={i} style={{
                 padding: '6px 8px',
-                background: '#fff',
+                background: swatch.white,
                 border: `1px solid ${RAIL_BORDER}`,
                 borderRadius: 4,
                 fontSize: FS.xs, color: BODY, lineHeight: 1.5,
@@ -187,7 +187,7 @@ function SimulationSpine({ settlement }) {
       style={{
         marginBottom: 14,
         padding: '10px 12px',
-        background: '#fff',
+        background: swatch.white,
         border: `1px solid ${RAIL_BORDER}`,
         borderLeft: `3px solid ${COG_COLOR}`,
         borderRadius: 4,

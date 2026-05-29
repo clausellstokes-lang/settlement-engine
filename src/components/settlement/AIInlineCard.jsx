@@ -17,7 +17,7 @@
  */
 
 import { useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch, CARD } from '../theme.js';
 import { Sparkles, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import Card from '../primitives/Card.jsx';
@@ -59,7 +59,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
         margin: '0 0 8px',
         fontSize: FS.sm, lineHeight: 1.5,
         fontFamily: 'system-ui, -apple-system, sans-serif',
-        color: '#1c1409',
+        color: swatch.inkMag,
       }}>
         Polish this draft with AI — costs {creditCost} credit{creditCost === '1' ? '' : 's'},
         streams section by section. Partial failures keep your raw draft intact, and you can
@@ -71,7 +71,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
         style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
           padding: '6px 12px',
-          background: '#a0762a', color: '#fffbf5',
+          background: swatch['#A0762A'], color: CARD,
           border: 'none', borderRadius: 4,
           fontSize: FS.sm, fontWeight: 700,
           fontFamily: 'system-ui, -apple-system, sans-serif',

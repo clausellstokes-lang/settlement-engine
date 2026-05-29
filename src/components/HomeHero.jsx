@@ -31,9 +31,7 @@ import {
 import { Funnel } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
-import {
-  GOLD, INK, _INK_DEEP, BODY, BORDER, _CARD, sans, serif_, SP, R, FS,
-} from './theme.js';
+import { GOLD, INK, _INK_DEEP, BODY, BORDER, _CARD, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } from './theme.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
@@ -66,7 +64,7 @@ function SizeButton({ value, label, hint, active, onClick, compact = false }) {
         {label}
       </div>
       {hint && (
-        <div style={{ fontSize: FS.xxs, color: '#4A3B22', lineHeight: 1.35 }}>
+        <div style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.35 }}>
           {hint}
         </div>
       )}
@@ -167,12 +165,12 @@ export default function HomeHero({ onSignIn }) {
               letterSpacing: '-0.005em',
             }}>
               {t('hero.v2.headline')}<br />
-              <em style={{ color: '#8C6F32' }}>{t('hero.v2.headlineAccent')}</em>
+              <em style={{ color: GOLD_DEEP }}>{t('hero.v2.headlineAccent')}</em>
             </h1>
             <p style={{
               margin: `${SP.md}px auto 0`, maxWidth: 520,
               fontFamily: serif_, fontStyle: 'italic',
-              fontSize: FS.lg, color: '#4A3B22', lineHeight: 1.55,
+              fontSize: FS.lg, color: BODY, lineHeight: 1.55,
             }}>
               {t('hero.v2.deck')}
             </p>
@@ -181,7 +179,7 @@ export default function HomeHero({ onSignIn }) {
           <>
             <div style={{
               fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
-              textTransform: 'uppercase', color: '#8C6F32',
+              textTransform: 'uppercase', color: GOLD_DEEP,
               marginBottom: SP.sm,
             }}>
               {t('hero.eyebrow')}
@@ -195,7 +193,7 @@ export default function HomeHero({ onSignIn }) {
             <p style={{
               margin: `${SP.md}px auto 0`, maxWidth: 520,
               fontFamily: serif_, fontStyle: 'italic',
-              fontSize: FS.lg, color: '#4A3B22', lineHeight: 1.55,
+              fontSize: FS.lg, color: BODY, lineHeight: 1.55,
             }}>
               {t('hero.subtitle')}
             </p>
@@ -203,7 +201,7 @@ export default function HomeHero({ onSignIn }) {
               margin: `${SP.md}px auto 0`, maxWidth: 480,
               padding: `${SP.xs}px ${SP.md}px`,
               borderLeft: `2px solid ${GOLD}`,
-              fontFamily: sans, fontSize: FS.sm, color: '#5a4a2a',
+              fontFamily: sans, fontSize: FS.sm, color: swatch['#5A4A2A'],
               lineHeight: 1.5, textAlign: 'left',
               fontStyle: 'italic',
             }}>
@@ -215,7 +213,7 @@ export default function HomeHero({ onSignIn }) {
         <>
           <div style={{
             fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
-            textTransform: 'uppercase', color: '#8C6F32',
+            textTransform: 'uppercase', color: GOLD_DEEP,
             marginBottom: SP.sm,
           }}>
             Instant Generation
@@ -276,9 +274,9 @@ export default function HomeHero({ onSignIn }) {
                 fontFamily: serif_, fontSize: FS['18'], fontWeight: 600,
                 color: INK, marginBottom: 6,
               }}>
-                You’ve explored <em style={{ color: '#8C6F32' }}>hamlet, village, town.</em>
+                You’ve explored <em style={{ color: GOLD_DEEP }}>hamlet, village, town.</em>
               </div>
-              <div style={{ fontSize: FS.sm, color: '#4A3B22', lineHeight: 1.55 }}>
+              <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
                 <b>Sign in (free)</b> to unlock thorp through metropolis,
                 save unlimited drafts, and export the PDF.
               </div>
@@ -288,7 +286,7 @@ export default function HomeHero({ onSignIn }) {
                 style={{
                   marginTop: SP.md,
                   padding: `${SP.md}px ${SP.xl}px`,
-                  background: GOLD, color: '#fff',
+                  background: GOLD, color: swatch.white,
                   border: 'none',
                   borderBottom: `2px solid #8C6F32`,
                   borderRadius: R.sm,
@@ -301,13 +299,13 @@ export default function HomeHero({ onSignIn }) {
               <div style={{
                 marginTop: SP.md, paddingTop: SP.sm,
                 borderTop: `1px dashed ${BORDER}`,
-                fontSize: FS.xs, color: '#6B5340', fontStyle: 'italic',
+                fontSize: FS.xs, color: swatch.inkMag3, fontStyle: 'italic',
               }}>
                 or just take this one —{' '}
                 <a
                   href="#"
                   onClick={(e) => { e.preventDefault(); document.querySelector('[data-buy-this-dossier]')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  style={{ color: '#8C6F32', fontWeight: 700, fontStyle: 'normal' }}
+                  style={{ color: GOLD_DEEP, fontWeight: 700, fontStyle: 'normal' }}
                 >
                   buy the dossier for $2.99 ↓
                 </a>
@@ -318,7 +316,7 @@ export default function HomeHero({ onSignIn }) {
               display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.sm,
             }}>
               <p style={{
-                margin: 0, fontSize: FS.sm, color: '#4A3B22', maxWidth: 380,
+                margin: 0, fontSize: FS.sm, color: BODY, maxWidth: 380,
               }}>
                 You’ve used your {DEFAULT_DAILY_CAP} free generations today.
                 Sign in to keep going — accounts unlock all sizes, saves, and exports.
@@ -328,7 +326,7 @@ export default function HomeHero({ onSignIn }) {
                 onClick={onSignIn}
                 style={{
                   padding: `${SP.md}px ${SP.xl}px`,
-                  background: GOLD, color: '#fff',
+                  background: GOLD, color: swatch.white,
                   border: 'none', borderRadius: R.button,
                   fontFamily: sans, fontSize: FS.md, fontWeight: 700,
                   cursor: 'pointer',
@@ -353,7 +351,7 @@ export default function HomeHero({ onSignIn }) {
                 background: flag('heroV2')
                   ? GOLD
                   : `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-                color: '#fff', border: 'none',
+                color: swatch.white, border: 'none',
                 borderBottom: flag('heroV2') ? `2px solid #8C6F32` : 'none',
                 borderRadius: R.button,
                 fontFamily: serif_, fontWeight: 600,

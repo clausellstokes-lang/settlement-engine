@@ -12,7 +12,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline } from '../primitives/Dense.jsx';
-import { type, palette, space, pt } from '../theme.js';
+import { type, palette, space, pt, swatch } from '../theme.js';
 import { BAND_COLOR, BAND_HINT } from '../../domain/state/bands.js';
 
 const DIM_META = {
@@ -82,7 +82,7 @@ function DimensionCard({ dimKey, dim }) {
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2.5pt solid ${color}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}>
         <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
           <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
@@ -97,7 +97,7 @@ function DimensionCard({ dimKey, dim }) {
           </Text>
         </View>
         {/* Bar */}
-        <View style={{ height: 3, backgroundColor: '#e7d7b8', marginBottom: 4 }}>
+        <View style={{ height: 3, backgroundColor: swatch['#E7D7B8'], marginBottom: 4 }}>
           <View style={{ width: `${fillPct}%`, height: '100%', backgroundColor: color }} />
         </View>
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], fontStyle: 'italic', marginBottom: 3 }}>

@@ -42,7 +42,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, RED, swatch } from '../theme.js';
 
 const GOLD = '#C9A24C';
 const GOLD_DIM = '#D9B566';
@@ -234,8 +234,8 @@ export default function EditableInline({
             top: '100%', left: 0,
             marginTop: 2,
             fontSize: FS.xs,
-            color: '#A23434',
-            background: '#fff',
+            color: RED,
+            background: swatch.white,
             padding: '2px 6px',
             border: `1px solid #A23434`,
             borderRadius: 3,

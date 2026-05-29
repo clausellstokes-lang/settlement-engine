@@ -37,9 +37,7 @@
 import { useEffect } from 'react';
 import { ArrowRight, Sparkles, Check, X as XIcon } from 'lucide-react';
 import { t } from '../copy/index.js';
-import {
-  GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, SP, R, FS,
-} from './theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, SP, R, FS, GOLD_DEEP, AMBER, CARD_HDR, swatch } from './theme.js';
 
 // ── Tiny meta helper ───────────────────────────────────────────────────────
 // We don't have react-helmet wired up; for these flat pages a side-effect
@@ -83,7 +81,7 @@ function PageTitle({ eyebrow, title, lede }) {
     <header style={{ marginBottom: SP.xxl }}>
       <div style={{
         fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
-        textTransform: 'uppercase', color: '#8C6F32',
+        textTransform: 'uppercase', color: GOLD_DEEP,
         marginBottom: SP.sm,
       }}>
         {eyebrow}
@@ -115,7 +113,7 @@ function FeatureRow({ feature, sf, other }) {
   const iconFor = (mark) =>
     mark === 'yes'    ? <Check size={14} color="#4A7A3A" /> :
     mark === 'no'     ? <XIcon size={14} color="#A23434" /> :
-    mark === 'partial'? <span style={{ fontSize: FS.sm, color: '#D08020', fontWeight: 800 }}>~</span> :
+    mark === 'partial'? <span style={{ fontSize: FS.sm, color: AMBER, fontWeight: 800 }}>~</span> :
     null;
   return (
     <tr>
@@ -153,11 +151,11 @@ function CompareTable({ otherName, rows }) {
             fontSize: FS.xs, fontWeight: 800, color: MUTED,
             textTransform: 'uppercase', letterSpacing: '0.06em',
             borderBottom: `2px solid ${BORDER}`,
-            background: '#FAF4E8',
+            background: CARD_HDR,
           }}>Feature</th>
           <th style={{
             padding: `${SP.md}px ${SP.md}px`, textAlign: 'left',
-            fontSize: FS.xs, fontWeight: 800, color: '#7a5a1a',
+            fontSize: FS.xs, fontWeight: 800, color: swatch['#7A5A1A'],
             textTransform: 'uppercase', letterSpacing: '0.06em',
             borderBottom: `2px solid ${GOLD}`,
             background: 'rgba(201,162,76,0.10)',
@@ -167,7 +165,7 @@ function CompareTable({ otherName, rows }) {
             fontSize: FS.xs, fontWeight: 800, color: MUTED,
             textTransform: 'uppercase', letterSpacing: '0.06em',
             borderBottom: `2px solid ${BORDER}`,
-            background: '#FAF4E8',
+            background: CARD_HDR,
           }}>{otherName}</th>
         </tr>
       </thead>
@@ -204,7 +202,7 @@ function ForgeCTA({ onNavigate }) {
         onClick={() => onNavigate?.('generate')}
         style={{
           padding: `${SP.md}px ${SP.xl}px`,
-          background: GOLD, color: '#fff', border: 'none',
+          background: GOLD, color: swatch.white, border: 'none',
           borderRadius: R.button,
           fontFamily: sans, fontSize: FS.md, fontWeight: 700,
           cursor: 'pointer',

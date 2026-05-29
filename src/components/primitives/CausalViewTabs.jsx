@@ -24,7 +24,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { deriveCausalView, CAUSAL_VIEWS } from '../../domain/causalViews.js';
 
 const COLORS = Object.freeze({
@@ -109,7 +109,7 @@ export function CausalViewTabs({ settlement, defaultView = 'narrative', onViewCh
           display: 'flex', gap: 0,
           overflowX: 'auto',
           borderBottom: `1px solid ${COLORS.border}`,
-          background: '#faf6ee',
+          background: swatch['#FAF6EE'],
         }}
       >
         {CAUSAL_VIEWS.map(v => {

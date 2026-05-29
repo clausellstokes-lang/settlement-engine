@@ -13,7 +13,7 @@
  */
 
 import { useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card.jsx';
 
@@ -68,7 +68,7 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
               background: 'transparent', border: 'none',
               fontSize: FS.xs, fontWeight: 700,
               fontFamily: 'system-ui, -apple-system, sans-serif',
-              color: '#6b5340', cursor: 'pointer',
+              color: swatch.inkMag3, cursor: 'pointer',
             }}
           >
             {showMore ? <ChevronUp size={11} /> : <ChevronDown size={11} />}

@@ -40,10 +40,7 @@ import {
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { DEFAULT_CONFIG } from '../store/configSlice.js';
-import {
-  GOLD, _GOLD_B, GOLD_BG, INK, _INK_DEEP, MUTED, SECOND, BORDER, BORDER2,
-  CARD, CARD_HDR, _CARD_ALT, PARCH, sans, serif_, SP, R, FS,
-} from './theme.js';
+import { GOLD, _GOLD_B, GOLD_BG, INK, _INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, _CARD_ALT, PARCH, sans, serif_, SP, R, FS, swatch } from './theme.js';
 
 // ── Static data ──────────────────────────────────────────────────────────────
 
@@ -412,12 +409,12 @@ export default function Workshop({ isMobile }) {
         </div>
         {diffCount > 0 && (
           <div style={{
-            padding: `${SP.xs}px ${SP.md}px`, background: '#7c3aed15',
+            padding: `${SP.xs}px ${SP.md}px`, background: swatch['#7C3AED'],
             borderRadius: R.lg, border: '1px solid rgba(124,58,237,0.3)',
             textAlign: 'center',
           }}>
             <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Modified</div>
-            <div style={{ fontSize: FS.lg, fontWeight: 700, color: '#7c3aed' }}>{diffCount}</div>
+            <div style={{ fontSize: FS.lg, fontWeight: 700, color: swatch['#7C3AED'] }}>{diffCount}</div>
           </div>
         )}
       </div>
@@ -475,7 +472,7 @@ export default function Workshop({ isMobile }) {
                   width: 90, padding: `${SP.xs}px ${SP.sm}px`,
                   background: 'rgba(255,255,255,0.08)',
                   border: '1px solid rgba(160,118,42,0.3)',
-                  borderRadius: R.sm, color: '#e8d8c0',
+                  borderRadius: R.sm, color: swatch['#E8D8C0'],
                   fontSize: FS.xxs, fontFamily: 'monospace', outline: 'none',
                 }}
               />
@@ -498,7 +495,7 @@ export default function Workshop({ isMobile }) {
             flex: 1, padding: `${SP.xs + 1}px ${SP.md}px`,
             background: 'rgba(255,255,255,0.06)',
             border: '1px solid rgba(160,118,42,0.25)',
-            borderRadius: R.sm, color: '#e8d8c0',
+            borderRadius: R.sm, color: swatch['#E8D8C0'],
             fontSize: FS.sm, fontFamily: sans, outline: 'none',
             minWidth: 0,
           }}
@@ -507,7 +504,7 @@ export default function Workshop({ isMobile }) {
         <button onClick={handleReset} title="Reset all" style={{
           display: 'flex', alignItems: 'center', gap: 3,
           padding: `${SP.xs + 1}px ${SP.sm + 2}px`,
-          background: 'transparent', color: '#c88a8a',
+          background: 'transparent', color: swatch['#C88A8A'],
           border: '1px solid rgba(200,138,138,0.3)', borderRadius: R.sm,
           cursor: 'pointer', fontSize: FS.xxs, fontWeight: 600, fontFamily: sans,
         }}>
@@ -521,7 +518,7 @@ export default function Workshop({ isMobile }) {
             display: 'flex', alignItems: 'center', gap: SP.xs,
             padding: `${SP.sm}px ${SP.xl}px`,
             background: generating ? '#666' : 'linear-gradient(135deg, #a0762a, #c49a3c)',
-            color: '#fff', border: 'none', borderRadius: R.md,
+            color: swatch.white, border: 'none', borderRadius: R.md,
             cursor: generating ? 'wait' : 'pointer',
             fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
             boxShadow: generating ? 'none' : '0 2px 8px rgba(160,118,42,0.4)',
@@ -860,7 +857,7 @@ export default function Workshop({ isMobile }) {
           <div style={{
             marginTop: SP.sm, padding: `${SP.xs + 2}px ${SP.md}px`,
             background: 'rgba(139,26,26,0.05)', borderRadius: R.md,
-            fontSize: FS.xxs, color: '#8b1a1a',
+            fontSize: FS.xxs, color: swatch.danger,
           }}>
             Multiple stresses create compounding narrative pressure. This can produce extreme or unstable settlements — ideal for crisis scenarios.
           </div>
@@ -910,7 +907,7 @@ export default function Workshop({ isMobile }) {
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.sm,
           padding: `${SP.lg}px`,
           background: generating ? '#666' : 'linear-gradient(135deg, #a0762a, #c49a3c)',
-          color: '#fff', border: 'none', borderRadius: R.xl,
+          color: swatch.white, border: 'none', borderRadius: R.xl,
           cursor: generating ? 'wait' : 'pointer',
           fontSize: FS.lg, fontWeight: 700, fontFamily: sans,
           boxShadow: generating ? 'none' : '0 4px 16px rgba(160,118,42,0.4)',
@@ -1016,7 +1013,7 @@ function CustomContentPanels({ config, updateConfig }) {
               <span key={i} style={pillStyle('#2a5a7a')}>
                 {inst.name} ({inst.category})
                 <button onClick={() => removeFrom('customInstitutions', i)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#2a5a7a', padding: 0, fontSize: FS.sm, lineHeight: 1 }}>&times;</button>
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: swatch['#2A5A7A'], padding: 0, fontSize: FS.sm, lineHeight: 1 }}>&times;</button>
               </span>
             ))}
           </div>
@@ -1061,7 +1058,7 @@ function CustomContentPanels({ config, updateConfig }) {
               <span key={i} style={pillStyle('#2a7a2a')}>
                 {res.label}
                 <button onClick={() => removeFrom('customResources', i)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#2a7a2a', padding: 0, fontSize: FS.sm, lineHeight: 1 }}>&times;</button>
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: swatch['#2A7A2A'], padding: 0, fontSize: FS.sm, lineHeight: 1 }}>&times;</button>
               </span>
             ))}
           </div>
@@ -1111,7 +1108,7 @@ function CustomContentPanels({ config, updateConfig }) {
               <span key={i} style={pillStyle('#7a5a2a')}>
                 {route.name}
                 <button onClick={() => removeFrom('customTradeRoutes', i)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#7a5a2a', padding: 0, fontSize: FS.sm, lineHeight: 1 }}>&times;</button>
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: swatch['#7A5A2A'], padding: 0, fontSize: FS.sm, lineHeight: 1 }}>&times;</button>
               </span>
             ))}
           </div>

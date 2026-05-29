@@ -34,7 +34,7 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import { useStore } from '../../store/index.js';
 import { tx } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK_DEEP, sans, serif_, FS, SP, R } from '../theme.js';
+import { GOLD, INK_DEEP, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 
 // Mono font for the step list. theme.js doesn't export one, so we
 // declare it locally — kept tight (single value, used once).
@@ -119,7 +119,7 @@ export default function PipelineReveal({ onComplete }) {
         position: 'fixed', inset: 0, zIndex: 9000,
         background: INK_DEEP,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontFamily: sans, color: '#c8b098',
+        fontFamily: sans, color: swatch['#C8B098'],
         animation: 'sf-fadeIn 0.2s ease-out',
       }}
     >
@@ -167,7 +167,7 @@ export default function PipelineReveal({ onComplete }) {
           }} />
         </div>
         <div style={{
-          marginTop: SP.md, fontSize: FS.xs, color: '#7a6440',
+          marginTop: SP.md, fontSize: FS.xs, color: swatch['#7A6440'],
           letterSpacing: '0.08em',
         }}>
           Press Esc to skip

@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { Zap, Flame, Trash2, Plus, MapPinOff, AlertOctagon, X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
 const _TYPE_ICONS = {
   ADD_INSTITUTION:    Plus,
@@ -360,13 +360,13 @@ function PreviewPanel({ preview }) {
   return (
     <div style={{
       marginTop: SP.sm, padding: SP.sm,
-      background: '#fffbf5', border: `1px solid ${GOLD}`, borderRadius: R.sm,
+      background: CARD, border: `1px solid ${GOLD}`, borderRadius: R.sm,
     }}>
       <div style={{ fontSize: FS.sm, fontFamily: sans, color: INK, fontWeight: 700, marginBottom: 4 }}>
         {narrativeSummary || 'Preview'}
       </div>
       {warnings?.length > 0 && (
-        <ul style={{ margin: '4px 0', paddingLeft: 18, color: '#8b1a1a', fontSize: FS.xs, fontFamily: sans }}>
+        <ul style={{ margin: '4px 0', paddingLeft: 18, color: swatch.danger, fontSize: FS.xs, fontFamily: sans }}>
           {warnings.map((w, i) => <li key={i}>{w.message}</li>)}
         </ul>
       )}

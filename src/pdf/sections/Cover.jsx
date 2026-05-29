@@ -9,7 +9,7 @@
  * Editable: cover.name, cover.subtitle, cover.tagline, cover.campaign.
  */
 import { Page, View, Text } from '@react-pdf/renderer';
-import { sheet, palette, type, page as pageGeo, toneBg, pt } from '../theme.js';
+import { sheet, palette, type, page as pageGeo, toneBg, pt, swatch } from '../theme.js';
 import { EditableText } from '../primitives/Editable.jsx';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 
@@ -179,7 +179,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
               <View
                 style={{
                   paddingHorizontal: 10, paddingVertical: 4,
-                  backgroundColor: '#FBF5E6',
+                  backgroundColor: swatch['#FBF5E6'],
                   borderRadius: 3, borderLeft: `2pt solid ${palette.gold}`,
                 }}
               >
@@ -281,7 +281,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             style={{
               marginTop: 8,
               paddingHorizontal: 10, paddingVertical: 5,
-              backgroundColor: '#FBF5E6',
+              backgroundColor: swatch['#FBF5E6'],
               borderLeft: `2pt solid ${palette.gold}`,
               borderRadius: 2,
             }}

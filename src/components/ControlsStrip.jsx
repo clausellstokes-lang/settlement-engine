@@ -4,7 +4,7 @@
  * stats row (No overrides active | X forced · Y excluded), and filter pills (All / Forced / Excluded).
  */
 import {Search, X} from 'lucide-react';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans, FS } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans, FS, swatch } from './theme.js';
 
 export default function ControlsStrip({
   // Search
@@ -25,7 +25,7 @@ export default function ControlsStrip({
     ? <span style={{ color: GOLD, fontWeight: 700 }}>{forcedCount} forced</span>
     : null;
   const ExcludedPill = excludedCount > 0
-    ? <span style={{ color: '#c04040' }}>{excludedCount} excluded</span>
+    ? <span style={{ color: swatch['#C04040'] }}>{excludedCount} excluded</span>
     : null;
 
   return (
@@ -54,7 +54,7 @@ export default function ControlsStrip({
         <button onClick={onForceAll} style={btnStyle(`1px solid ${GOLD}`, `${GOLD}18`, GOLD, 700)}>Force All</button>
         <button onClick={onReset} style={btnStyle(`1px solid ${BORDER}`, `rgba(250,248,244,0.97)`, SECOND, 700)}>Reset</button>
         <button onClick={onExcludeAll} style={btnStyle('1px solid #e8b0b0', '#fdf4f4', '#8b1a1a', 700)}>Exclude All</button>
-        {(onExpandAll || onCollapseAll) && <span style={{ width: 1, height: 18, background: '#d0c0a8', flexShrink: 0 }} />}
+        {(onExpandAll || onCollapseAll) && <span style={{ width: 1, height: 18, background: swatch['#D0C0A8'], flexShrink: 0 }} />}
         {onExpandAll  && <button onClick={onExpandAll}  style={btnStyle(`1px solid ${BORDER}`, `rgba(250,248,244,0.97)`, SECOND, 700)}>Expand All</button>}
         {onCollapseAll && <button onClick={onCollapseAll} style={btnStyle(`1px solid ${BORDER}`, `rgba(250,248,244,0.97)`, SECOND, 700)}>Collapse All</button>}
       </div>
@@ -80,13 +80,13 @@ export default function ControlsStrip({
         ))}
         {extraStats}
         {tier === 'all' && (
-          <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#2a3a7a', background: '#e8ecff', borderRadius: 3, padding: '1px 6px', letterSpacing: '0.04em' }}>
+          <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.info, background: swatch['#E8ECFF'], borderRadius: 3, padding: '1px 6px', letterSpacing: '0.04em' }}>
             ALL TIERS
           </span>
         )}
         {showLegend && (
           <span style={{ fontSize: FS.xxs, color: SECOND, marginLeft: 'auto' }}>
-            Click: <strong>○ Allow</strong> → <strong style={{ color: GOLD }}>◆ Force</strong> → <strong style={{ color: '#c04040' }}>✕ Exclude</strong>
+            Click: <strong>○ Allow</strong> → <strong style={{ color: GOLD }}>◆ Force</strong> → <strong style={{ color: swatch['#C04040'] }}>✕ Exclude</strong>
           </span>
         )}
       </div>

@@ -20,7 +20,7 @@ import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { hasPending, activeEdits } from '../../domain/pendingEdits.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { sans, FS, SP, R } from '../theme.js';
+import { sans, FS, SP, R, swatch, GOLD_DEEP, MUTED } from '../theme.js';
 import CascadePreviewPanel from './CascadePreviewPanel.jsx';
 
 const AMBER = '#D08020';
@@ -94,7 +94,7 @@ export default function PendingChangesBar() {
           {count} unsaved {noun}
         </span>
         {summary && (
-          <span style={{ color: '#3A2F18', flex: 1, minWidth: 0 }}>
+          <span style={{ color: swatch['#3A2F18'], flex: 1, minWidth: 0 }}>
             · {summary}
           </span>
         )}
@@ -104,7 +104,7 @@ export default function PendingChangesBar() {
           style={{
             background: 'transparent',
             border: 'none',
-            color: '#8C6F32',
+            color: GOLD_DEEP,
             fontWeight: 700,
             cursor: 'pointer',
             padding: 0,
@@ -117,8 +117,8 @@ export default function PendingChangesBar() {
           type="button"
           onClick={onCommit}
           style={{
-            background: '#8C6F32',
-            color: '#fff',
+            background: GOLD_DEEP,
+            color: swatch.white,
             border: 'none',
             borderRadius: R.sm,
             padding: '4px 10px',
@@ -135,7 +135,7 @@ export default function PendingChangesBar() {
           style={{
             background: 'transparent',
             border: 'none',
-            color: '#9C8068',
+            color: MUTED,
             cursor: 'pointer',
             padding: 0,
             fontFamily: sans, fontSize: FS.xs,

@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch } from './theme.js';
 
 function Section({ title, icon: Icon, children, actions }) {
   return (
@@ -122,10 +122,10 @@ function UserRow({ user, onUpdate }) {
               <option value="admin">Admin</option>
               <option value="developer">Developer</option>
             </select>
-            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: '#2a7a2a', cursor: 'pointer', padding: 0 }}>
+            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
               <Check size={12} />
             </button>
-            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: '#8b1a1a', cursor: 'pointer', padding: 0 }}>
+            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
               <X size={12} />
             </button>
           </div>
@@ -150,10 +150,10 @@ function UserRow({ user, onUpdate }) {
               <option value="free">Free</option>
               <option value="premium">Premium</option>
             </select>
-            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: '#2a7a2a', cursor: 'pointer', padding: 0 }}>
+            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
               <Check size={12} />
             </button>
-            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: '#8b1a1a', cursor: 'pointer', padding: 0 }}>
+            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
               <X size={12} />
             </button>
           </div>
@@ -177,10 +177,10 @@ function UserRow({ user, onUpdate }) {
               onKeyDown={e => e.key === 'Enter' && saveEdit()}
               style={{ width: 60, fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}`, textAlign: 'right' }}
               autoFocus />
-            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: '#2a7a2a', cursor: 'pointer', padding: 0 }}>
+            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
               <Check size={12} />
             </button>
-            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: '#8b1a1a', cursor: 'pointer', padding: 0 }}>
+            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
               <X size={12} />
             </button>
           </div>
@@ -188,7 +188,7 @@ function UserRow({ user, onUpdate }) {
           <button onClick={() => startEdit('credits', user.credits)}
             style={{
               background: 'none', border: 'none', cursor: 'pointer',
-              fontSize: FS.sm, fontWeight: 700, color: '#7c3aed', padding: 0,
+              fontSize: FS.sm, fontWeight: 700, color: swatch['#7C3AED'], padding: 0,
             }}>
             <Zap size={11} style={{ verticalAlign: 'middle' }} /> {user.credits ?? 0}
           </button>
@@ -331,7 +331,7 @@ export default function AdminPanel({ onBack }) {
         <div style={{
           display: 'flex', alignItems: 'center', gap: SP.sm,
           padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
-          background: '#fff', border: `1px solid ${BORDER}`, borderRadius: R.md,
+          background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.md,
         }}>
           <Search size={14} color={MUTED} />
           <input

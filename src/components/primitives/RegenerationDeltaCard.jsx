@@ -26,7 +26,7 @@
  */
 
 import { useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 
 const COLORS = Object.freeze({
   bg:        '#fffbf5',
@@ -216,7 +216,7 @@ function Section({ title, items, color, describe, detail }) {
       </h4>
       <ul style={{
         listStyle: 'none', margin: 0, padding: 0,
-        background: '#faf6ee',
+        background: swatch['#FAF6EE'],
         border: `1px solid ${COLORS.border}`,
         borderRadius: 4,
       }}>
@@ -253,7 +253,7 @@ function BrokenDependenciesRow({ items }) {
         background: COLORS.broken,
         border: `1px solid ${COLORS.brokenBdr}`,
         borderRadius: 4,
-        fontSize: FS.xs, color: '#7a4f0f', lineHeight: 1.5,
+        fontSize: FS.xs, color: swatch['#7A4F0F'], lineHeight: 1.5,
       }}
     >
       <strong>Broken dependencies:</strong> {items.join(' · ')}

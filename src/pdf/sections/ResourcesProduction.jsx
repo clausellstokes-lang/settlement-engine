@@ -20,7 +20,7 @@ import { ChainRow } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space, pt } from '../theme.js';
+import { type, palette, space, pt, swatch, factionColors } from '../theme.js';
 import { cap, label, humanize } from '../lib/format.js';
 
 const _STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
@@ -295,13 +295,13 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                     flexDirection: 'row',
                     marginBottom: 2,
                     padding: 4,
-                    backgroundColor: '#f8f4fd',
+                    backgroundColor: swatch['#F8F4FD'],
                     borderLeft: `2pt solid #5a2a8a`,
                     borderRadius: 1,
                   }}
                   wrap={false}
                 >
-                  <Text style={{ color: '#5a2a8a', marginRight: 4, fontSize: pt['9'] }}>✦</Text>
+                  <Text style={{ color: factionColors.magic, marginRight: 4, fontSize: pt['9'] }}>✦</Text>
                   <View style={{ flex: 1 }}>
                     <EditableText
                       name={`resources.priorityNote.${i}`}
@@ -332,7 +332,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                       padding: 4,
                       borderLeft: `2pt solid ${palette[tone] || palette.muted}`,
                       borderRadius: 1,
-                      backgroundColor: '#fffbf5',
+                      backgroundColor: palette.card,
                     }}
                     wrap={false}
                   >

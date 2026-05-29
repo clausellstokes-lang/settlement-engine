@@ -21,7 +21,7 @@
  */
 
 import { useEffect, useState, lazy, Suspense } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { X } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 
@@ -103,7 +103,7 @@ export default function SimulationDrawer() {
             style={{
               position: 'fixed', top: 0, right: 0, bottom: 0,
               width: 'min(520px, 92vw)',
-              background: '#fff',
+              background: swatch.white,
               borderLeft: `1px solid ${BORDER}`,
               boxShadow: '-12px 0 36px rgba(0,0,0,0.30)',
               zIndex: 100,

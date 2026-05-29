@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch, MUTED } from '../theme.js';
 import { isMobile } from './tabConstants';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
 
@@ -61,11 +61,11 @@ const InstNode = ({ name, present, st }) => (
 const ImportNode = ({ label }) => (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 3,
-    background: '#f0f4ff', border: '1px dashed #a0b0d8',
+    background: swatch.infoBg, border: '1px dashed #a0b0d8',
     borderRadius: 5, padding: '3px 8px', flexShrink: 0,
   }}>
     <span style={{ fontSize: FS.xxs }}></span>
-    <span style={{ fontSize: FS.xs, fontWeight: 600, color: '#2a3a7a' }}>Import: {label}</span>
+    <span style={{ fontSize: FS.xs, fontWeight: 600, color: swatch.info }}>Import: {label}</span>
   </div>
 );
 
@@ -77,12 +77,12 @@ const OutputNode = ({ label, isExport }) => (
     border: `1px solid ${isExport ? '#88c880' : '#d8c8a8'}`,
     borderRadius: 5, padding: '3px 8px', flexShrink: 0,
   }}>
-    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#1a5a28' }}>↗</span>}
+    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success }}>↗</span>}
     <span style={{ fontSize: FS.xs, fontWeight: isExport ? 700 : 500,
       color: isExport ? '#1a5a28' : '#6b5340' }}>
       {label}
     </span>
-    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#1a5a28', marginLeft: 2 }}>EXPORT</span>}
+    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, marginLeft: 2 }}>EXPORT</span>}
   </div>
 );
 
@@ -122,8 +122,8 @@ function ChainRow({ chain, instNames, primaryExports, mobile }) {
         background: st.bg, borderLeft: `3px solid ${st.border}`, borderRadius: 4 }}>
         <span style={{ fontSize: FS.sm }}>{chain.resourceIcon || '️'}</span>
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
-        {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#1a5a28', background: '#e8f5ec', border: '1px solid #a8d8b0', borderRadius: 3, padding: '1px 5px' }}>EXPORT</span>}
-        {missing.length > 0 && <span style={{ fontSize: FS.micro, color: '#2a3a7a', background: '#f0f4ff', border: '1px solid #a0b0d8', borderRadius: 3, padding: '1px 5px' }}> imported</span>}
+        {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', borderRadius: 3, padding: '1px 5px' }}>EXPORT</span>}
+        {missing.length > 0 && <span style={{ fontSize: FS.micro, color: swatch.info, background: swatch.infoBg, border: '1px solid #a0b0d8', borderRadius: 3, padding: '1px 5px' }}> imported</span>}
         <span style={{ fontSize: FS.micro, fontWeight: 700, color: st.color }}>{st.dot}</span>
       </div>
     );
@@ -178,7 +178,7 @@ function ChainRow({ chain, instNames, primaryExports, mobile }) {
 
       {/* Upstream note */}
       {chain.upstreamNote && (
-        <div style={{ marginTop: 4, fontSize: FS.xxs, color: '#6b5340', fontStyle: 'italic' }}>
+        <div style={{ marginTop: 4, fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic' }}>
           ↑ {chain.upstreamNote}
         </div>
       )}
@@ -196,7 +196,7 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
     <div style={{ marginBottom: 8 }}>
       <button onClick={() => setOpen(o => !o)} style={{
         width: '100%', display: 'flex', alignItems: 'center', gap: 8,
-        padding: '6px 10px', background: '#faf8f4',
+        padding: '6px 10px', background: swatch['#FAF8F4'],
         border: '1px solid #e0d0b0', borderRadius: 5,
         cursor: 'pointer', textAlign: 'left',
       }}>
@@ -205,10 +205,10 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
           textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           {needLabel || needKey}
         </span>
-        <span style={{ fontSize: FS.xs, color: '#9c8068' }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
-        {impaired > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#8b1a1a', background: '#fdf4f4', border: '1px solid #e8b0b0', borderRadius: 3, padding: '1px 5px' }}>✕ {impaired}</span>}
-        {vulnerable > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: '#8a5010', background: '#fdf8ec', border: '1px solid #e0c070', borderRadius: 3, padding: '1px 5px' }}>◐ {vulnerable}</span>}
-        <span style={{ fontSize: FS.micro, color: '#9c8068' }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: FS.xs, color: MUTED }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
+        {impaired > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.danger, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: 3, padding: '1px 5px' }}>✕ {impaired}</span>}
+        {vulnerable > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A5010'], background: swatch['#FDF8EC'], border: '1px solid #e0c070', borderRadius: 3, padding: '1px 5px' }}>◐ {vulnerable}</span>}
+        <span style={{ fontSize: FS.micro, color: MUTED }}>{open ? '▲' : '▼'}</span>
       </button>
 
       {open && (
@@ -300,7 +300,7 @@ function Legend() {
     { text: '↗ EXPORT', color: '#1a5a28', label: 'Exported for income' },
   ];
   return (
-    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: FS.xxs, color: '#6b5340' }}>
+    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: FS.xxs, color: swatch.inkMag3 }}>
       {items.map((it, i) => (
         <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           <span style={{ fontWeight: 700, color: it.color }}>{it.dot || it.text}</span>

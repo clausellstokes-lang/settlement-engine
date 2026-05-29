@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import {GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS} from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch } from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, Route, Crown, ShieldAlert } from 'lucide-react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {useStore} from '../store/index.js';
@@ -169,7 +169,7 @@ function StressTab({ search='' }) {
     </div>
     {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.description||s.desc||'').toLowerCase().includes(search)).map(s => (
       <div key={s.label||s.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
-        <div style={{ fontSize:FS.md, fontWeight:700, color:'#8b1a1a', marginBottom:3 }}>{s.label}</div>
+        <div style={{ fontSize:FS.md, fontWeight:700, color:swatch.danger, marginBottom:3 }}>{s.label}</div>
         <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||'—'}</div>
       </div>))}
   </>;
@@ -338,7 +338,7 @@ function CustomContentUpsell({ existingCount, isAnon }) {
           style={{
             padding: '10px 22px',
             background: 'linear-gradient(135deg, #7c3aed 0%, #5a2a8a 100%)',
-            color: '#fff', border: 'none', borderRadius: 7, cursor: 'pointer',
+            color: swatch.white, border: 'none', borderRadius: 7, cursor: 'pointer',
             fontSize: FS.md, fontWeight: 700, fontFamily: sans, letterSpacing: '0.04em',
             boxShadow: '0 3px 12px rgba(124,58,237,0.35)',
           }}
@@ -484,7 +484,7 @@ function DependencySummary({ deps, item }) {
       ))}
       {totalMissing > 0 && (
         <div style={{
-          marginTop:4, fontSize:FS.xxs, color:'#8b1a1a',
+          marginTop:4, fontSize:FS.xxs, color:swatch.danger,
           fontStyle:'italic',
         }}>
           {totalMissing} dangling reference{totalMissing===1?'':'s'} — edit this item to fix.
@@ -518,12 +518,12 @@ function DependenciesSection({ deps, draft, setDraft }) {
         }}
       >
         <span style={{
-          fontSize:FS.xs, fontWeight:700, color:'#5a2a8a',
+          fontSize:FS.xs, fontWeight:700, color:swatch.magic,
           textTransform:'uppercase', letterSpacing:'0.05em',
         }}>
           Dependencies {total > 0 && (
             <span style={{
-              marginLeft:6, background:'#7c3aed20', color:'#7c3aed',
+              marginLeft:6, background:swatch['#7C3AED'], color:swatch['#7C3AED'],
               borderRadius:8, padding:'1px 6px', fontSize:FS.micro,
             }}>{total}</span>
           )}
@@ -669,8 +669,8 @@ function CustomContentManager({ search }) {
   };
 
   const renderForm = () => (
-    <div style={{ padding:'10px 12px', background:'#f8f4ff', border:'1px solid #d0c0e0', borderRadius:7, marginBottom:10 }}>
-      <div style={{ fontSize:FS.xs, fontWeight:700, color:'#5a2a8a', textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8 }}>
+    <div style={{ padding:'10px 12px', background:swatch['#F8F4FF'], border:'1px solid #d0c0e0', borderRadius:7, marginBottom:10 }}>
+      <div style={{ fontSize:FS.xs, fontWeight:700, color:swatch.magic, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8 }}>
         {editingId ? 'Edit Item' : 'New Custom ' + catDef.label.slice(0,-1)}
       </div>
       <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
@@ -692,7 +692,7 @@ function CustomContentManager({ search }) {
       )}
 
       <div style={{ display:'flex', gap:6, marginTop:8 }}>
-        <button onClick={handleSave} disabled={!draft.name?.trim()} style={{ padding:'5px 14px', background:draft.name?.trim()?'#5a2a8a':'#ccc', color:'#fff', border:'none', borderRadius:4, cursor:draft.name?.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>{editingId?'Update':'Add'}</button>
+        <button onClick={handleSave} disabled={!draft.name?.trim()} style={{ padding:'5px 14px', background:draft.name?.trim()?'#5a2a8a':'#ccc', color:swatch.white, border:'none', borderRadius:4, cursor:draft.name?.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>{editingId?'Update':'Add'}</button>
         <button onClick={resetDraft} style={{ padding:'5px 10px', background:CARD, color:SEC, border:`1px solid ${BOR}`, borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontFamily:sans }}>Cancel</button>
       </div>
     </div>
@@ -716,7 +716,7 @@ function CustomContentManager({ search }) {
 
       {/* Add button */}
       {!addingNew && !editingId && (
-        <button onClick={() => { setAddingNew(true); setDraft({}); }} style={{ display:'flex', alignItems:'center', gap:5, padding:'6px 12px', background:'#5a2a8a', color:'#fff', border:'none', borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans, marginBottom:10 }}>
+        <button onClick={() => { setAddingNew(true); setDraft({}); }} style={{ display:'flex', alignItems:'center', gap:5, padding:'6px 12px', background:swatch.magic, color:swatch.white, border:'none', borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans, marginBottom:10 }}>
           <Plus size={12}/> Add Custom {catDef.label.slice(0,-1)}
         </button>
       )}
@@ -738,7 +738,7 @@ function CustomContentManager({ search }) {
                 <Tag label="Custom" color='#7c3aed'/>
                 {item.category && <Tag label={item.category} color={catDef.color}/>}
                 <button onClick={() => handleEdit(item)} style={{ background:'none', border:'none', color:MUT, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
-                <button onClick={() => setDeleteId(deleteId===item.id?null:item.id)} style={{ background:'none', border:'none', color:'#8b1a1a', cursor:'pointer', padding:2 }}><Trash2 size={11}/></button>
+                <button onClick={() => setDeleteId(deleteId===item.id?null:item.id)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><Trash2 size={11}/></button>
               </div>
               {item.description && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description}</div>}
               {item.tags && <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>{(typeof item.tags==='string'?item.tags.split(','):item.tags).map((t,i)=><Tag key={i} label={t.trim()} color={MUT}/>)}</div>}
@@ -748,8 +748,8 @@ function CustomContentManager({ search }) {
                 <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>
                   {item.affects.map((a, i) => (
                     <span key={i} style={{
-                      fontSize:FS.micro, fontWeight:700, color:'#8b1a1a',
-                      background:'#8b1a1a14', border:'1px solid #8b1a1a44',
+                      fontSize:FS.micro, fontWeight:700, color:swatch.danger,
+                      background:swatch.danger, border:'1px solid #8b1a1a44',
                       borderRadius:8, padding:'1px 6px',
                       textTransform:'uppercase', letterSpacing:'0.04em',
                     }}>{a}</span>
@@ -908,13 +908,13 @@ export default function CompendiumPanel({ config, standalone=false }) {
   return (
     <div style={{ borderRadius:standalone?0:8, overflow:'hidden' }}>
       {/* Mode toggle */}
-      <div style={{ display:'flex', background:'#f5ede0', borderBottom:`1px solid ${BOR}`, padding:'6px 14px', gap:4 }}>
+      <div style={{ display:'flex', background:swatch['#F5EDE0'], borderBottom:`1px solid ${BOR}`, padding:'6px 14px', gap:4 }}>
         <button onClick={()=>setMode('catalog')} style={{ flex:1, padding:'7px 12px', borderRadius:6, border:`1px solid ${mode==='catalog'?GOLD:BOR}`, background:mode==='catalog'?GOLD_BG:'transparent', color:mode==='catalog'?GOLD:SEC, fontSize:FS.sm, fontWeight:mode==='catalog'?700:500, fontFamily:sans, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
           <Building2 size={13}/> Built-in Catalog
         </button>
         <button onClick={()=>setMode('custom')} style={{ flex:1, padding:'7px 12px', borderRadius:6, border:`1px solid ${mode==='custom'?'#7c3aed':'transparent'}`, background:mode==='custom'?'rgba(124,58,237,0.1)':'transparent', color:mode==='custom'?'#7c3aed':SEC, fontSize:FS.sm, fontWeight:mode==='custom'?700:500, fontFamily:sans, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
           <Sparkles size={13}/> My Custom Content
-          {customContentCount > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:'rgba(124,58,237,0.15)', color:'#7c3aed', borderRadius:8, padding:'1px 6px' }}>{customContentCount}</span>}
+          {customContentCount > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:'rgba(124,58,237,0.15)', color:swatch['#7C3AED'], borderRadius:8, padding:'1px 6px' }}>{customContentCount}</span>}
         </button>
       </div>
 

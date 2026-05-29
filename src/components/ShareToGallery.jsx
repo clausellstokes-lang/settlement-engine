@@ -20,7 +20,7 @@ import { Globe, Lock, Copy, Check, AlertCircle } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useFlag } from '../lib/flags.js';
 import { publishSettlement, unpublishSettlement } from '../lib/gallery.js';
-import { GOLD, BORDER, sans, SP, R, FS } from './theme.js';
+import { GOLD, BORDER, sans, SP, R, FS, GREEN, RED } from './theme.js';
 
 const MUTED = '#6b5340';
 const _BODY  = '#4A3B22';
@@ -111,7 +111,7 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
           padding: '4px 9px', borderRadius: R.md,
-          background: 'rgba(74,122,58,0.10)', color: '#4A7A3A',
+          background: 'rgba(74,122,58,0.10)', color: GREEN,
           border: '1px solid rgba(74,122,58,0.30)',
           fontSize: FS.xs, fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -149,7 +149,7 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
         {error && (
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 4,
-            fontSize: FS.xs, color: '#A23434',
+            fontSize: FS.xs, color: RED,
           }}>
             <AlertCircle size={11} /> {error}
           </span>
@@ -184,7 +184,7 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
       {error && (
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 4,
-          fontSize: FS.xs, color: '#A23434',
+          fontSize: FS.xs, color: RED,
         }}>
           <AlertCircle size={11} /> {error}
         </span>

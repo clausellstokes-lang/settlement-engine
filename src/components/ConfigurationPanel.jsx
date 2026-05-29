@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import {ChevronDown, ChevronUp} from 'lucide-react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {getCompatibleResources} from '../generators/terrainHelpers';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 
 const PARCHMENT='#f7f0e4';
@@ -47,7 +47,7 @@ function Lbl({children}){return<div style={{fontSize:FS.xs,fontWeight:700,color:
 function Sel({value,onChange,children}){return<select value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
 function Collapsible({title,status,children}){
   const[open,setOpen]=useState(false);
-  return<div><button onClick={()=>setOpen(o=>!o)} style={{background:'none',border:'none',cursor:'pointer',textAlign:'left',fontSize:FS.sm,fontWeight:600,color:SECOND,display:'flex',alignItems:'center',gap:6,padding:'4px 0',width:'100%',fontFamily:sans}}>{open?<ChevronUp size={14}/>:<ChevronDown size={14}/>}<span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:'#f0ead8',borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</button>{open&&children}</div>;
+  return<div><button onClick={()=>setOpen(o=>!o)} style={{background:'none',border:'none',cursor:'pointer',textAlign:'left',fontSize:FS.sm,fontWeight:600,color:SECOND,display:'flex',alignItems:'center',gap:6,padding:'4px 0',width:'100%',fontFamily:sans}}>{open?<ChevronUp size={14}/>:<ChevronDown size={14}/>}<span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:swatch['#F0EAD8'],borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</button>{open&&children}</div>;
 }
 
 function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode}){
@@ -73,7 +73,7 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
               <option value="">— Choose an archetype —</option>
               {ARCHETYPE_GROUPS.filter(g=>config.magicExists!==false||g.label!=='Arcane').map(({label,keys})=><optgroup key={label} label={label}>{keys.map(key=>{const a=ARCHETYPES.find(x=>x.key===key);return a?<option key={key} value={key}>{a.name} — {a.desc}</option>:null;})}</optgroup>)}
             </select>
-            {applied&&<span style={{fontSize:FS.xs,color:'#4a8a60',fontWeight:600,display:'flex',alignItems:'center'}}>✓</span>}
+            {applied&&<span style={{fontSize:FS.xs,color:swatch['#4A8A60'],fontWeight:600,display:'flex',alignItems:'center'}}>✓</span>}
           </div>
         </div>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -107,7 +107,7 @@ function StressPanel({config,updateConfig}){
   const allKeys=Object.keys(STRESS_TYPE_MAP);
   const toggleRandom=()=>updateConfig(isRandom?{selectedStressesRandom:false,selectedStresses:allKeys}:{selectedStressesRandom:true,selectedStresses:[]});
   const toggleStress=key=>{if(isRandom)return;updateConfig({selectedStresses:selected.includes(key)?selected.filter(k=>k!==key):[...selected,key]});};
-  return<div style={{background:'#fdf8f0',border:`1px solid ${BORDER2}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
+  return<div style={{background:swatch['#FDF8F0'],border:`1px solid ${BORDER2}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
     <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:10,gap:10}}>
       <div style={{flex:1}}>
         <div style={{fontSize:FS.sm,fontWeight:700,color:INK,marginBottom:2}}>Settlement Stress</div>
@@ -322,10 +322,10 @@ export default function ConfigurationPanel(){
             {!blockTownPlus && <option value="town">Town (901–5,000)</option>}
             {!blockTownPlus && <option value="city">City (5,001–25,000)</option>}
             {!blockTownPlus && <option value="metropolis">Metropolis (25,001+)</option>}
-            {blockTownPlus && <option value="town" disabled style={{color:'#bbb'}}>Town — requires magic or road</option>}
+            {blockTownPlus && <option value="town" disabled style={{color:swatch['#BBBBBB']}}>Town — requires magic or road</option>}
             <option value="custom">Custom…</option>
           </Sel>
-          {blockTownPlus && <div style={{fontSize:FS.xxs,color:'#c05010',marginTop:4,lineHeight:1.4}}>
+          {blockTownPlus && <div style={{fontSize:FS.xxs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
              Town+ requires a trade route or Magic slider above 0
           </div>}
         </div>
@@ -343,10 +343,10 @@ export default function ConfigurationPanel(){
             <option value="port">Port</option>
             <option value="crossroads">Crossroads</option>
             {!blockIsolated && <option value="isolated">Isolated</option>}
-            {blockIsolated && <option value="isolated" disabled style={{color:'#bbb'}}>Isolated — not available at town+ without magic</option>}
+            {blockIsolated && <option value="isolated" disabled style={{color:swatch['#BBBBBB']}}>Isolated — not available at town+ without magic</option>}
             <option value="mountain_pass">Mountain Pass</option>
           </Sel>
-          {blockIsolated && <div style={{fontSize:FS.xxs,color:'#c05010',marginTop:4,lineHeight:1.4}}>
+          {blockIsolated && <div style={{fontSize:FS.xxs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
              Isolated unavailable at {config.settType} tier without magic infrastructure
           </div>}
         </div>
@@ -354,13 +354,13 @@ export default function ConfigurationPanel(){
         {['town','city','metropolis'].includes(config.settType) &&
           config.tradeRouteAccess === 'isolated' && (
           <div style={{
-            background: '#f0f4ff',
+            background: swatch.infoBg,
             border: '1px solid #a0b0e0',
             borderLeft: '3px solid #3a5ab0',
             borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, lineHeight: 1.55,
           }}>
-            <span style={{fontWeight:700,color:'#3a5ab0'}}>✦ Magical Trade Infrastructure</span><br/>
-            <span style={{color:'#2a3a6a'}}>
+            <span style={{fontWeight:700,color:swatch['#3A5AB0']}}>✦ Magical Trade Infrastructure</span><br/>
+            <span style={{color:swatch['#2A3A6A']}}>
               A Teleportation Circle and arcane maintainer will be forced into this {config.settType} — its only connection to the outside world. All trade flows through the circle. If it fails, the settlement collapses.
             </span>
           </div>

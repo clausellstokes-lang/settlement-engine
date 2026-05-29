@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS } from '../../theme.js';
+import { FS, swatch, MUTED } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -85,7 +85,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {/* Header row */}
               <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>
-                <span style={{fontSize:FS.sm,fontWeight:700,color:'#1c1409'}}>{chain.label}</span>
+                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{chain.label}</span>
                 <span style={{fontSize:FS.micro,color:chain.needColor,background:`${chain.needColor}15`,borderRadius:3,padding:'0 5px',fontWeight:700}}>{chain.needIcon} {chain.needLabel}</span>
                 <span style={{fontSize:FS.micro,fontWeight:800,color:st.color,background:`${st.color}15`,borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
               </div>
@@ -93,14 +93,14 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {/* Institutions + outputs */}
               <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:chain.dependency||chain.entrepotNote?6:0}}>
                 <div style={{flex:'1 1 140px'}}>
-                  <div style={{fontSize:FS.micro,fontWeight:700,color:'#9c8068',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Via</div>
-                  <div style={{fontSize:FS.xs,color:'#3d2b1a',lineHeight:1.3}}>{chain.processingInstitutions.join(' · ')}</div>
+                  <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Via</div>
+                  <div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.3}}>{chain.processingInstitutions.join(' · ')}</div>
                 </div>
                 {chain.outputs.length > 0 && <div style={{flex:'1 1 140px'}}>
-                  <div style={{fontSize:FS.micro,fontWeight:700,color:'#9c8068',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Outputs</div>
+                  <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Outputs</div>
                   <div style={{display:'flex',flexWrap:'wrap',gap:2}}>
                     {chain.outputs.slice(0, 3).map((o, j) => (
-                      <span key={j} style={{fontSize:FS.xxs,color:'#3d2b1a',background:`${st.color}10`,borderRadius:3,padding:'1px 5px'}}>{o}</span>
+                      <span key={j} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:`${st.color}10`,borderRadius:3,padding:'1px 5px'}}>{o}</span>
                     ))}
                   </div>
                 </div>}
@@ -110,21 +110,21 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {chain.dependency && (
                 <div style={{fontSize:FS.xs,color:st.color,background:`${st.color}08`,borderRadius:4,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
                   <strong>Needs {chain.dependency.resource}</strong> — {chain.dependency.impact}
-                  {chain.dependency.affectedServices.length > 0 && <span style={{color:'#9c8068'}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
+                  {chain.dependency.affectedServices.length > 0 && <span style={{color:MUTED}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
                 </div>
               )}
 
               {/* Entrepôt note */}
               {chain.entrepot && chain.entrepotNote && !chain.dependency && (
-                <p style={{fontSize:FS.xxs,color:'#a0762a',fontStyle:'italic',margin:'4px 0 0',lineHeight:1.3}}>{chain.entrepotNote}</p>
+                <p style={{fontSize:FS.xxs,color:swatch['#A0762A'],fontStyle:'italic',margin:'4px 0 0',lineHeight:1.3}}>{chain.entrepotNote}</p>
               )}
 
               {/* Magic substitution note */}
               {chain.magicNote && (
-                <div style={{fontSize:FS.xxs,color:'#5a2a8a',background:'#f8f0ff',borderRadius:4,
+                <div style={{fontSize:FS.xxs,color:swatch.magic,background:swatch['#F8F0FF'],borderRadius:4,
                   padding:'4px 8px',marginTop:4,borderLeft:'3px solid #c0a0e0',lineHeight:1.4}}>
                   ✦ <em>{chain.magicNote}</em>
-                  {chain.magicRecovery && <span style={{marginLeft:6,fontSize:FS.micro,color:'#7a4aaa',fontWeight:700}}>
+                  {chain.magicRecovery && <span style={{marginLeft:6,fontSize:FS.micro,color:swatch['#7A4AAA'],fontWeight:700}}>
                     {Math.round(chain.magicRecovery * 100)}% recovery
                   </span>}
                 </div>
@@ -132,7 +132,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
               {/* Income contribution */}
               {incomeEntry && (
-                <div style={{fontSize:FS.xxs,color:'#6b5340',marginTop:4}}>
+                <div style={{fontSize:FS.xxs,color:swatch.inkMag3,marginTop:4}}>
                   Contributes to <strong>{incomeEntry.source}</strong> — {incomeEntry.percentage}% of income
                 </div>
               )}
@@ -143,11 +143,11 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
       {/* Institutional Services — tertiary economy */}
       {institutionalServices.length > 0 && (flowFilter === 'all' || flowFilter === 'services') && <>
-        <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginTop:10,marginBottom:6}}>Service Economy</div>
+        <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginTop:10,marginBottom:6}}>Service Economy</div>
         <div style={{display:'flex',flexDirection:'column',gap:5}}>
           {institutionalServices.map((svc, i) => (
             <div key={i} style={{
-              background:'#faf8f4',border:`1px solid ${svc.color}30`,
+              background:swatch['#FAF8F4'],border:`1px solid ${svc.color}30`,
               borderLeft:`3px solid ${svc.color}`,
               borderRadius:6,padding:'7px 12px',
               display:'flex',alignItems:'flex-start',gap:8,
@@ -155,15 +155,15 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               <span style={{fontSize: FS['16'],flexShrink:0}}>{svc.icon}</span>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2,flexWrap:'wrap'}}>
-                  <span style={{fontSize:FS.sm,fontWeight:700,color:'#1c1409'}}>{svc.label}</span>
+                  <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{svc.label}</span>
                   <span style={{fontSize:FS.micro,fontWeight:700,color:svc.color,background:`${svc.color}15`,borderRadius:3,padding:'0 5px'}}>service</span>
-                  {svc.exportable && <span style={{fontSize:FS.micro,color:'#1a5a28',background:'#e8f5ec',borderRadius:3,padding:'0 5px'}}>export</span>}
-                  <span style={{fontSize:FS.micro,fontWeight:800,color:'#6b5340',background:'#ede3cc',borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
+                  {svc.exportable && <span style={{fontSize:FS.micro,color:swatch.success,background:swatch['#E8F5EC'],borderRadius:3,padding:'0 5px'}}>export</span>}
+                  <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
                 </div>
-                <div style={{fontSize:FS.xs,color:'#3d2b1a'}}>
-                  <span style={{color:'#9c8068',marginRight:4}}>Via:</span>{svc.institutions.join(' · ')}
+                <div style={{fontSize:FS.xs,color:swatch.inkMag2}}>
+                  <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.join(' · ')}
                 </div>
-                <div style={{fontSize:FS.xs,color:'#6b5340',marginTop:1}}>{svc.output}</div>
+                <div style={{fontSize:FS.xs,color:swatch.inkMag3,marginTop:1}}>{svc.output}</div>
               </div>
             </div>
           ))}
@@ -212,20 +212,20 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
           <div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
-            <div style={{fontSize:FS.sm,color:'#6b5340'}}>{eco.economicComplexity}</div>
+            <div style={{fontSize:FS.sm,color:swatch.inkMag3}}>{eco.economicComplexity}</div>
           </div>
           <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-start'}}>
             <div style={{textAlign:'center',background:'rgba(250,248,244,0.97)',border:'1px solid #d8c090',borderRadius:6,padding:'6px 12px'}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:'#9c8068',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Trade</div>
-              <div style={{fontSize:FS.sm,fontWeight:600,color:'#1c1409',textTransform:'capitalize'}}>{tradeLabel}</div>
+              <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Trade</div>
+              <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag,textTransform:'capitalize'}}>{tradeLabel}</div>
             </div>
             {ecoScore>0&&<div style={{textAlign:'center',background:'rgba(250,248,244,0.97)',border:'1px solid #d8c090',borderRadius:6,padding:'6px 12px'}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:'#9c8068',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Output</div>
+              <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Output</div>
               <div style={{fontSize:FS.md,fontWeight:700,color:ecoScore>=60?'#1a5a28':ecoScore>=35?'#a0762a':'#8b1a1a'}}>{ecoScore}/100</div>
             </div>}
           </div>
         </div>
-        {eco.situationDesc&&<p style={{fontSize:FS.md,color:'#3d2b1a',lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8}}>{eco.situationDesc}</p>}
+        {eco.situationDesc&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8}}>{eco.situationDesc}</p>}
       </div>
 
       {/* ── AT-A-GLANCE TILES ───────────────────────────────────────────── */}
@@ -234,10 +234,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           {icon:'',label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor},
           {icon:'',label:'Food',value:foodLabel,sub:fb?`${fb.dailyProduction?.toLocaleString()} / ${fb.dailyNeed?.toLocaleString()} lbs/day`:undefined,color:foodColor},
         ].map(({icon,label,value,sub,color})=>(
-          <div key={label} style={{flex:'1 1 120px',background:'#faf8f4',border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px',minWidth:0}}>
+          <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px',minWidth:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{icon} {label}</div>
-            <div style={{fontSize:FS.md,fontWeight:700,color:'#1c1409',lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
-            {sub&&<div style={{fontSize:FS.xxs,color:'#9c8068',lineHeight:1.3}}>{sub}</div>}
+            <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
+            {sub&&<div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.3}}>{sub}</div>}
           </div>
         ))}
       </div>
@@ -250,18 +250,18 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
             return (
             <div key={i} style={{display:'flex',alignItems:'center',gap:10}}>
-              <div style={{flex:1,background:'#e8dcc8',borderRadius:4,height:26,position:'relative',overflow:'hidden',minWidth:40}}>
+              <div style={{flex:1,background:swatch['#E8DCC8'],borderRadius:4,height:26,position:'relative',overflow:'hidden',minWidth:40}}>
                 <div style={{position:'absolute',inset:'0',right:`${100-Math.min(src.percentage,100)}%`,background:isCrim?'#4a1a4a':`linear-gradient(to right,${prosColor},#b8860b)`,display:'flex',alignItems:'center',paddingLeft:6}}>
-                  {src.percentage>=8&&<span style={{fontSize:FS.xxs,fontWeight:700,color:'#fff',whiteSpace:'nowrap'}}>{src.percentage}%</span>}
+                  {src.percentage>=8&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.white,whiteSpace:'nowrap'}}>{src.percentage}%</span>}
                 </div>
                 {src.percentage<8&&<span style={{position:'absolute',left:`${src.percentage+1}%`,top:'50%',transform:'translateY(-50%)',fontSize:FS.xxs,fontWeight:700,color:isCrim?'#4a1a4a':'#6b5340'}}>{src.percentage}%</span>}
               </div>
               <div style={{width:mobile?130:210,flexShrink:0,minWidth:0}}>
                 <div style={{fontSize:FS.sm,fontWeight:600,color:isCrim?'#4a1a4a':'#1c1409',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
-                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:'#4a1a4a',background:'#f0e0f0',borderRadius:2,padding:'0 4px',marginRight:4}}>️ CRIMINAL</span>}
+                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],borderRadius:2,padding:'0 4px',marginRight:4}}>️ CRIMINAL</span>}
                   {src.source}
                 </div>
-                {src.desc&&<div style={{fontSize:FS.xxs,color:'#9c8068',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
+                {src.desc&&<div style={{fontSize:FS.xxs,color:MUTED,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
               </div>
             </div>
             );
@@ -274,18 +274,18 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:12,marginBottom:eco.localProduction?.length>0?12:0}}>
           {/* Exports */}
           <div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:'#1a5a28',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Exports</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Exports</div>
             {eco.primaryExports?.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {eco.primaryExports.map((e,i)=>{const t=e.includes('(transit)');return <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,borderRadius:12,padding:'3px 9px'}}>{e}</span>;})}
-                {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:'#2a3a7a',fontStyle:'italic',marginTop:4}}> Blue = re-exported transit goods</div>}
+                {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}> Blue = re-exported transit goods</div>}
               </div>
-              :<p style={{fontSize:FS.sm,color:'#9c8068',fontStyle:'italic',margin:0}}>No significant exports.</p>
+              :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
             }
           </div>
           {/* Imports */}
           <div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:'#8b1a1a',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Imports</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Imports</div>
             {eco.primaryImports?.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {[...eco.primaryImports, ...terrainCriticals.filter(tc => !eco.primaryImports.some(imp => imp.toLowerCase().includes(tc.toLowerCase())))].sort().map((imp,i)=>{
@@ -297,21 +297,21 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                     const icon  = t?' ':n?' ':'';
                     return <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,borderRadius:12,padding:'3px 9px'}}>{imp}{icon}</span>;
                   })}
-                {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:FS.xxs,color:'#6b5340',fontStyle:'italic',marginTop:4}}>
-                  {terrainCriticals.length>0&&<span style={{color:'#7a0a0a'}}> Terrain cannot produce</span>}
+                {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
+                  {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}> Terrain cannot produce</span>}
                   {terrainCriticals.length>0&&eco.necessityImports?.length>0&&<span> · </span>}
-                  {eco.necessityImports?.length>0&&<span style={{color:'#8b1a1a'}}> Settlement necessity</span>}
+                  {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}> Settlement necessity</span>}
                 </div>}
               </div>
-              :<p style={{fontSize:FS.sm,color:'#9c8068',fontStyle:'italic',margin:0}}>No recorded imports.</p>
+              :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No recorded imports.</p>
             }
           </div>
         </div>
         {/* Local production */}
         {eco.localProduction?.length>0&&<div style={{borderTop:'1px solid #e8d8b0',paddingTop:10}}>
-          <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Produced Locally</div>
+          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Produced Locally</div>
           <div style={{display:'flex',flexWrap:'wrap',gap:3}}>
-            {eco.localProduction.map((p,i)=><span key={i} style={{fontSize:FS.xxs,color:'#3d2b1a',background:'#f0ead8',border:'1px solid #d8c890',borderRadius:4,padding:'1px 7px',textTransform:'capitalize'}}>{p.replace(/_/g,' ')}</span>)}
+            {eco.localProduction.map((p,i)=><span key={i} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',borderRadius:4,padding:'1px 7px',textTransform:'capitalize'}}>{p.replace(/_/g,' ')}</span>)}
           </div>
         </div>}
       </Section>}
@@ -323,21 +323,21 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
       {fb&&<Section title="Food Security" collapsible defaultOpen={!!fb.deficit} accent={foodColor}>
         {/* Balance bar */}
         <div style={{marginBottom:10}}>
-          <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xs,color:'#6b5340',marginBottom:4}}>
+          <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xs,color:swatch.inkMag3,marginBottom:4}}>
             <span>Production: {fb.dailyProduction?.toLocaleString()} lbs/day</span>
-            {fb.importCoverage>0&&<span style={{color:'#2a5a8a'}}>+ {fb.importCoverage.toLocaleString()} imported</span>}
+            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {fb.importCoverage.toLocaleString()} imported</span>}
             <span>Need: {fb.dailyNeed?.toLocaleString()} lbs/day</span>
           </div>
-          <div style={{height:10,background:'#e8dcc8',borderRadius:5,overflow:'hidden',position:'relative'}}>
+          <div style={{height:10,background:swatch['#E8DCC8'],borderRadius:5,overflow:'hidden',position:'relative'}}>
             {/* Production bar */}
             <div style={{height:'100%',width:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a',borderRadius:5}}/>
             {/* Import coverage overlay */}
-            {fb.importCoverage>0&&<div style={{position:'absolute',top:0,left:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,height:'100%',width:`${Math.min(100-Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100),Math.round((fb.importCoverage/Math.max(1,fb.dailyNeed))*100))}%`,background:'#2a5a8a80',borderRadius:'0 5px 5px 0'}}/>}
+            {fb.importCoverage>0&&<div style={{position:'absolute',top:0,left:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,height:'100%',width:`${Math.min(100-Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100),Math.round((fb.importCoverage/Math.max(1,fb.dailyNeed))*100))}%`,background:swatch['#2A5A8A'],borderRadius:'0 5px 5px 0'}}/>}
           </div>
-          <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xxs,color:'#9c8068',marginTop:3}}>
+          <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xxs,color:MUTED,marginTop:3}}>
             <span>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
-            {fb.stressModifier&&fb.stressModifier<1&&<span style={{color:'#8b1a1a'}}>Stress penalty: ×{fb.stressModifier}</span>}
-            {fb.importCoverage>0&&<span style={{color:'#2a5a8a'}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
+            {fb.stressModifier&&fb.stressModifier<1&&<span style={{color:swatch.danger}}>Stress penalty: ×{fb.stressModifier}</span>}
+            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
           </div>
         </div>
         {/* Narrative */}
@@ -367,10 +367,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             const text=typeof h==='object'?h.hook||Ti(h):String(h);
             const cat=typeof h==='object'?h.category:null;
             return <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start'}}>
-              <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:'#5a2a8a'}}>✦</span>
+              <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch.magic}}>✦</span>
               <div style={{flex:1}}>
-                {cat&&<span style={{fontSize:FS.xxs,fontWeight:700,color:'#5a2a8a',textTransform:'uppercase',letterSpacing:'0.04em',marginRight:6}}>{cat}</span>}
-                <span style={{fontSize:FS.md,color:'#1c1409',lineHeight:1.5}}>{text}</span>
+                {cat&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.04em',marginRight:6}}>{cat}</span>}
+                <span style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.5}}>{text}</span>
               </div>
             </div>;
           })}
@@ -395,15 +395,15 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         return <Section title="Resource Exploitation" collapsible defaultOpen={false}>
           <div style={{display:'flex',flexDirection:'column',gap:8}}>
             {full.length>0&&<div>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:'#1a5a28',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>
                 ✓ Fully Exploited ({full.length})
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {full.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:'#1a5a28',background:'#e8f5ec',border:'1px solid #a8d8b0',borderRadius:4,padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
+                {full.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',borderRadius:4,padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
               </div>
             </div>}
             {part.length>0&&<div>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:'#8a5010',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#8A5010'],textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>
                 ◑ Partially Exploited ({part.length})
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
@@ -411,16 +411,16 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                 const name = r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?');
                 const missing = r.processingInstitutions?.length
                   ? '' : r.dependsOn?.length ? ' (needs: '+r.dependsOn.slice(0,2).join(', ')+')' : '';
-                return <span key={i} style={{fontSize:FS.xs,color:'#8a5010',background:'#fdf0e0',border:'1px solid #e0b870',borderRadius:4,padding:'2px 8px'}}>{name}{missing}</span>;
+                return <span key={i} style={{fontSize:FS.xs,color:swatch['#8A5010'],background:swatch['#FDF0E0'],border:'1px solid #e0b870',borderRadius:4,padding:'2px 8px'}}>{name}{missing}</span>;
               })}
               </div>
             </div>}
             {unex.length>0&&<div>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>
                 ○ Unexploited Opportunity ({unex.length})
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {unex.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:'#6b5340',background:'#f5f0e8',border:'1px solid #c8b89a',borderRadius:4,padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
+                {unex.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.inkMag3,background:swatch['#F5F0E8'],border:'1px solid #c8b89a',borderRadius:4,padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
               </div>
             </div>}
           </div>
@@ -465,14 +465,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                 <div style={{fontSize:FS.micro,fontWeight:700,color:sevColor,textTransform:'uppercase',letterSpacing:'0.05em',marginTop:2}}>Off-book</div>
               </div>
               <div style={{flex:1}}>
-                <p style={{fontSize:FS.sm,color:'#3d2b1a',lineHeight:1.5,margin:'0 0 4px'}}>{scaleNote}</p>
-                {dragDesc&&<p style={{fontSize: FS['11.5'],color:'#6b5340',fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
+                <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{scaleNote}</p>
+                {dragDesc&&<p style={{fontSize: FS['11.5'],color:swatch.inkMag3,fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
               </div>
             </div>
 
             {/* What operations generate this revenue */}
             {crimInsts.length>0&&<div>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Economic Operations</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Economic Operations</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {crimInsts.map((name,i)=>{
                   const n = name.toLowerCase();
@@ -484,9 +484,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                              : n.includes('thieves')        ? 'protection + extraction'
                              : 'criminal revenue stream';
                   return (
-                    <div key={i} style={{background:'#fdf4f4',border:'1px solid #e0b0b0',borderRadius:5,padding:'5px 10px',display:'flex',flexDirection:'column',gap:1}}>
-                      <span style={{fontSize:FS.xs,fontWeight:700,color:'#8b1a1a'}}>{name}</span>
-                      <span style={{fontSize:FS.xxs,color:'#6b4040'}}>{econ}</span>
+                    <div key={i} style={{background:swatch.dangerBg,border:'1px solid #e0b0b0',borderRadius:5,padding:'5px 10px',display:'flex',flexDirection:'column',gap:1}}>
+                      <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger}}>{name}</span>
+                      <span style={{fontSize:FS.xxs,color:swatch['#6B4040']}}>{econ}</span>
                     </div>
                   );
                 })}
@@ -495,10 +495,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
 
             {/* Active criminal supply chains */}
             {crimChains.length>0&&<div>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Criminal Supply Chains</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Criminal Supply Chains</div>
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
                 {crimChains.map((c,i)=>(
-                  <span key={i} style={{fontSize:FS.xxs,fontWeight:700,color:'#5a1a1a',background:'#fdf4f4',border:'1px solid #e0b0b0',borderRadius:4,padding:'2px 8px'}}>
+                  <span key={i} style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A1A1A'],background:swatch.dangerBg,border:'1px solid #e0b0b0',borderRadius:4,padding:'2px 8px'}}>
                     {c.chainId?.replace(/_/g,' ')} · {c.status}
                   </span>
                 ))}
@@ -506,7 +506,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             </div>}
 
             {/* Note directing to Defense for power structure */}
-            <div style={{fontSize:FS.xs,color:'#9c8068',fontStyle:'italic',borderTop:'1px solid #e8d8c0',paddingTop:8}}>
+            <div style={{fontSize:FS.xs,color:MUTED,fontStyle:'italic',borderTop:'1px solid #e8d8c0',paddingTop:8}}>
               Criminal power structures, enforcement dynamics, and public order detail → Defense tab
             </div>
 

@@ -135,7 +135,7 @@ function FullCard({ npc }) {
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2pt solid ${palette.gold}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}
       wrap={false}
     >
@@ -338,7 +338,7 @@ function CompactCard({ npc }) {
         padding: 6,
         border: `0.4pt solid ${palette.border}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
         minHeight: 60,
       }}
       wrap={false}

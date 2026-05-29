@@ -28,7 +28,7 @@
  */
 
 import { useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, CARD, swatch } from '../theme.js';
 
 const HARD_KINDS = new Set([
   'invented_entity',
@@ -79,7 +79,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
       aria-label="AI overlay violations"
       style={{
         margin: '8px 18px',
-        background: '#fffbf5',
+        background: CARD,
         border: `1px solid ${COLORS.hardBdr}`,
         borderRadius: 6,
         boxShadow: '0 1px 3px rgba(139,26,26,0.05)',
@@ -195,7 +195,7 @@ function Group({ violations, tone, caption }) {
               fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.05em',
               textTransform: 'uppercase',
               color: isHard ? COLORS.hardText : COLORS.softText,
-              background: '#fff',
+              background: swatch.white,
               border: `1px solid ${isHard ? COLORS.hardBdr : COLORS.softBdr}`,
               borderRadius: 3, padding: '1px 5px',
               marginTop: 1,

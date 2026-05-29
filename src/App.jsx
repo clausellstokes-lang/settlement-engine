@@ -21,7 +21,7 @@ import { MapPin, FolderOpen, BookOpen, Sparkles, Map as MapIcon, Zap, User, Shie
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { flag as _readFlag } from './lib/flags.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS } from './components/theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
 
 // Lazy-loaded views
 const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
@@ -285,7 +285,7 @@ export default function App() {
                 </h1>
                 <span style={{
                   fontSize: FS.xs, fontWeight: 700,
-                  color: '#e0c080', fontFamily: sans,
+                  color: swatch['#E0C080'], fontFamily: sans,
                   letterSpacing: '0.10em', textTransform: 'uppercase',
                   marginTop: 3,
                 }}>
@@ -335,7 +335,7 @@ export default function App() {
                     background: 'rgba(90,42,138,0.15)',
                     border: '1px solid rgba(160,100,220,0.3)',
                     borderRadius: R.md, cursor: 'pointer',
-                    color: '#c8a0f0',
+                    color: swatch['#C8A0F0'],
                     fontSize: FS.sm, fontWeight: 600,
                     fontFamily: sans,
                   }}
@@ -355,7 +355,7 @@ export default function App() {
                     background: 'rgba(124,58,237,0.15)',
                     border: '1px solid rgba(124,58,237,0.3)',
                     borderRadius: R.md, cursor: 'pointer',
-                    color: '#c8a0f0',
+                    color: swatch['#C8A0F0'],
                     fontSize: FS.sm, fontWeight: 600,
                     fontFamily: sans,
                   }}
@@ -600,7 +600,7 @@ export default function App() {
           position: 'fixed', top: SP.xl, left: '50%', transform: 'translateX(-50%)',
           zIndex: 2000, padding: `${SP.md}px ${SP.xxl}px`,
           background: 'linear-gradient(135deg, #2a7a2a, #4a8a4a)',
-          color: '#fff', borderRadius: R.xl,
+          color: swatch.white, borderRadius: R.xl,
           fontSize: FS.md, fontWeight: 700, fontFamily: sans,
           boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
           animation: 'fadeIn 0.3s ease-out',

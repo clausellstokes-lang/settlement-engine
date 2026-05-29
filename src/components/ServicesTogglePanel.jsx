@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import {INSTITUTION_SERVICES} from '../data/tradeGoodsData';
 import ControlsStrip from './ControlsStrip.jsx';
-import {GOLD, INK, MUTED, SECOND, sans, FS} from './theme.js';
+import { GOLD, INK, MUTED, SECOND, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog } from '../store/selectors.js';
 
@@ -155,7 +155,7 @@ export default function ServicesTogglePanel() {
   }));
 
   if (Object.keys(instServiceMap).length === 0) {
-    return <div style={{padding:'14px 16px', background:'#faf8f4', fontSize:FS.md, color:MUTED}}>
+    return <div style={{padding:'14px 16px', background:swatch['#FAF8F4'], fontSize:FS.md, color:MUTED}}>
       No services available at this tier.
     </div>;
   }
@@ -198,12 +198,12 @@ export default function ServicesTogglePanel() {
                       WebkitTapHighlightColor:'transparent',
                     }}>
                     <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
-                        <span style={{fontSize:FS.sm, fontWeight:700, color:'#1c1409', fontFamily:'Crimson Text, Georgia, serif'}}>{catName}</span>
+                        <span style={{fontSize:FS.sm, fontWeight:700, color:swatch.inkMag, fontFamily:'Crimson Text, Georgia, serif'}}>{catName}</span>
                         {forcedCount>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}18`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>}
                       </span>
-                    {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>}
+                    {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>}
                     {forcedCount>0 && <>
-                      <span style={{fontSize:FS.micro, color:MUTED, background:'#ede3cc', borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>
+                      <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>
                       <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>
                     </>}
                     <span style={{fontSize:FS.micro, color:MUTED, marginLeft:4}}>{svcEntries.length}</span>

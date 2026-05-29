@@ -19,7 +19,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { FS, ELEV } from '../theme.js';
+import { FS, ELEV, PARCH_100, GOLD_DEEP, INK, GOLD, swatch } from '../theme.js';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 
@@ -100,8 +100,8 @@ export default function HelpPopover({ topic, label = 'Help' }) {
         aria-expanded={open}
         style={{
           width: 16, height: 16, borderRadius: '50%',
-          background: '#F4EAD0',
-          color: '#8C6F32',
+          background: PARCH_100,
+          color: GOLD_DEEP,
           border: '1px solid #D8C588',
           fontSize: FS.xxs, fontWeight: 700,
           cursor: 'help',
@@ -120,8 +120,8 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             zIndex: 100,
             width: 240,
             padding: 12,
-            background: '#1B1408',
-            color: '#F4EAD0',
+            background: INK,
+            color: PARCH_100,
             border: '1px solid #8C6F32',
             borderRadius: 6,
             boxShadow: flag('elevationTokens') ? ELEV[3] : '0 12px 32px rgba(0,0,0,0.40)',
@@ -134,25 +134,25 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             position: 'absolute',
             top: -6, left: '50%', transform: 'translateX(-50%) rotate(45deg)',
             width: 10, height: 10,
-            background: '#1B1408',
+            background: INK,
             borderLeft: '1px solid #8C6F32',
             borderTop: '1px solid #8C6F32',
           }} />
           {content ? (
             <>
               <div style={{
-                color: '#C9A24C',
+                color: GOLD,
                 fontFamily: '"Crimson Text", Georgia, serif',
                 fontWeight: 600, fontSize: FS.md, marginBottom: 4,
               }}>
                 {content.title}
               </div>
-              <div style={{ color: '#c8b098' }}>{content.body}</div>
+              <div style={{ color: swatch['#C8B098'] }}>{content.body}</div>
               <a
                 href={`?view=compendium#${content.anchor}`}
                 style={{
                   display: 'inline-block', marginTop: 8,
-                  color: '#C9A24C', fontSize: FS.xxs, fontWeight: 700,
+                  color: GOLD, fontSize: FS.xxs, fontWeight: 700,
                   textDecoration: 'underline',
                 }}
               >
@@ -161,14 +161,14 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             </>
           ) : (
             <>
-              <div style={{ color: '#c8b098' }}>
+              <div style={{ color: swatch['#C8B098'] }}>
                 More about <b>{topic}</b> in the Compendium.
               </div>
               <a
                 href={`?view=compendium`}
                 style={{
                   display: 'inline-block', marginTop: 8,
-                  color: '#C9A24C', fontSize: FS.xxs, fontWeight: 700,
+                  color: GOLD, fontSize: FS.xxs, fontWeight: 700,
                   textDecoration: 'underline',
                 }}
               >

@@ -8,7 +8,7 @@
 import { MousePointer2, Type, Pin, Trash2, Undo2, Redo2 } from 'lucide-react';
 import { useStore } from '../../store';
 import { ANNOTATE_TOOLS } from '../../store/mapSlice.js';
-import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
 export default function AnnotateToolbar() {
   const annotateTool    = useStore(s => s.annotateTool);
@@ -128,7 +128,7 @@ export default function AnnotateToolbar() {
           style={{
             display: 'flex', alignItems: 'center', gap: 4,
             padding: '5px 10px',
-            background: '#8a2a2a', color: '#fff',
+            background: swatch['#8A2A2A'], color: swatch.white,
             border: 'none', borderRadius: R.sm,
             fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
           }}

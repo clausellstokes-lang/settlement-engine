@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { FS } from '../../theme.js';
+import { FS, MUTED, swatch } from '../../theme.js';
 import {generateCrossSettlementConflicts} from '../../../generators/crossSettlementConflicts';
 import {serif, Section, TabIntro} from '../Primitives';
 
@@ -128,7 +128,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
 
       {/* Inter-Settlement NPC Contacts */}
       {(()=>{const npcContacts=interSettlementRels.filter(x=>!x.type);return npcContacts.length>0&&<Section title={`Cross-Settlement Contacts (${npcContacts.length})`} collapsible defaultOpen>
-        <p style={{fontSize:FS.xs,color:'#9c8068',margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:FS.xs,color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
           Named NPCs with documented ties to figures in linked settlements. Links are removed when neighbours are delinked.
         </p>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -137,14 +137,14 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
             const c=relColors[isr.relType]||'#6b5340';
             return <div key={i} style={{border:`1px solid ${c}30`,borderLeft:`3px solid ${c}`,borderRadius:7,padding:'10px 14px',background:`${c}08`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.sm,fontWeight:700,color:'#1c1409'}}>{isr.npcName}</span>
-                {isr.npcRole&&<span style={{fontSize:FS.xs,color:'#6b5340'}}>({isr.npcRole})</span>}
-                <span style={{fontSize:FS.xs,color:'#9c8068',margin:'0 2px'}}>↔</span>
+                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{isr.npcName}</span>
+                {isr.npcRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({isr.npcRole})</span>}
+                <span style={{fontSize:FS.xs,color:MUTED,margin:'0 2px'}}>↔</span>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:c}}>{isr.partnerName}</span>
-                {isr.partnerRole&&<span style={{fontSize:FS.xs,color:'#6b5340'}}>({isr.partnerRole})</span>}
-                <span style={{fontSize:FS.xxs,color:'#9c8068',marginLeft:'auto',fontStyle:'italic',flexShrink:0}}>{isr.partnerSettlement}</span>
+                {isr.partnerRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({isr.partnerRole})</span>}
+                <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',fontStyle:'italic',flexShrink:0}}>{isr.partnerSettlement}</span>
               </div>
-              {isr.description&&<div style={{fontSize:FS.xs,color:'#3d2b1a',lineHeight:1.45,fontStyle:'italic'}}>{isr.description}</div>}
+              {isr.description&&<div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.45,fontStyle:'italic'}}>{isr.description}</div>}
               <div style={{marginTop:4}}>
                 <span style={{fontSize:FS.xxs,fontWeight:700,color:c,background:`${c}18`,border:`1px solid ${c}40`,borderRadius:10,padding:'1px 8px'}}>
                   {(isr.relType||'linked').replace(/_/g,' ')}
@@ -157,7 +157,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
 
       {/* Cross-Settlement Engagements */}
       {crossConflicts.length>0&&<Section title={`Cross-Settlement Engagements (${crossConflicts.length})`} collapsible defaultOpen>
-        <p style={{fontSize:FS.xs,color:'#9c8068',margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:FS.xs,color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
           Conflicts and faction engagements between this settlement and its neighbours. Removed when the link is broken.
         </p>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -168,20 +168,20 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
             return <div key={i} style={{border:`1px solid ${col}30`,borderLeft:`3px solid ${col}`,borderRadius:7,padding:'10px 14px',background:`${col}06`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:5,flexWrap:'wrap'}}>
                 {isFaction
-                  ? <><span style={{fontSize:FS.sm,fontWeight:700,color:'#1c1409'}}>{c.factionName}</span>
-                      <span style={{fontSize:FS.xs,color:'#9c8068'}}>vs</span>
+                  ? <><span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.factionName}</span>
+                      <span style={{fontSize:FS.xs,color:MUTED}}>vs</span>
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerFactionName}</span>
-                      <span style={{fontSize:FS.xxs,color:'#9c8068',fontStyle:'italic'}}>({c.partnerSettlement})</span></>
-                  : <><span style={{fontSize:FS.sm,fontWeight:700,color:'#1c1409'}}>{c.npcName}</span>
-                      <span style={{fontSize:FS.xs,color:'#9c8068'}}>({c.npcRole})</span>
-                      <span style={{fontSize:FS.xs,color:'#9c8068'}}>vs</span>
+                      <span style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic'}}>({c.partnerSettlement})</span></>
+                  : <><span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.npcName}</span>
+                      <span style={{fontSize:FS.xs,color:MUTED}}>({c.npcRole})</span>
+                      <span style={{fontSize:FS.xs,color:MUTED}}>vs</span>
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerName}</span>
-                      <span style={{fontSize:FS.xs,color:'#9c8068'}}>({c.partnerRole}, {c.partnerSettlement})</span></>}
+                      <span style={{fontSize:FS.xs,color:MUTED}}>({c.partnerRole}, {c.partnerSettlement})</span></>}
                 <span style={{fontSize:FS.xxs,fontWeight:700,color:col,background:`${col}18`,border:`1px solid ${col}40`,borderRadius:8,padding:'1px 7px',marginLeft:'auto',flexShrink:0}}>
                   {isFaction ? 'faction' : (c.conflictNature||'conflict')}
                 </span>
               </div>
-              {c.description&&<div style={{fontSize:FS.xs,color:'#3d2b1a',lineHeight:1.5}}>{c.description}</div>}
+              {c.description&&<div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.5}}>{c.description}</div>}
             </div>;
           })}
         </div>
@@ -189,16 +189,16 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
 
       {/* Emergent conditions banner */}
       {!neighboursOnly&&<>
-      {flagDriven.length>0&&<div style={{background:'#f8f4fd',border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',borderRadius:7,padding:'10px 14px',marginBottom:16}}>
-        <div style={{fontSize:FS.xs,fontWeight:700,color:'#5a2a8a',marginBottom:4}}>◆ EMERGENT CONDITIONS ACTIVE</div>
-        <p style={{fontSize:FS.sm,color:'#3d2b1a',margin:0,lineHeight:1.5}}>
+      {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',borderRadius:7,padding:'10px 14px',marginBottom:16}}>
+        <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,marginBottom:4}}>◆ EMERGENT CONDITIONS ACTIVE</div>
+        <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:0,lineHeight:1.5}}>
           {flagDriven.length} relationship{flagDriven.length>1?'s':''} shaped by the settlement's compound dynamics — these would not exist under neutral slider conditions.
         </p>
       </div>}
 
       {/* NPC Relationships */}
       {rels.length>0&&<Section title={`NPC Relationships (${rels.length})`} collapsible defaultOpen>
-        <p style={{fontSize:FS.xs,color:'#9c8068',margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:FS.xs,color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
           Internal relationships within {settlementName}. Cross-settlement NPC ties appear in each neighbour card above.
         </p>
         {/* Type filter */}
@@ -212,7 +212,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
         </div>
         {/* From filter (only when neighbours exist) */}
         {neighbours.length>0&&<div style={{display:'flex',gap:5,marginBottom:12,flexWrap:'wrap',paddingBottom:10,borderBottom:'1px solid #f0e8d8',alignItems:'center'}}>
-          <span style={{fontSize:FS.xxs,fontWeight:700,color:'#6b5340',textTransform:'uppercase',letterSpacing:'0.05em',flexShrink:0}}>From:</span>
+          <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',flexShrink:0}}>From:</span>
           {['all',...allSettlements].map(name=>(
             <button key={name} onClick={()=>setFromFilter(name)} style={{padding:'3px 9px',borderRadius:20,border:'1px solid',fontSize:FS.xs,fontWeight:600,cursor:'pointer',background:fromFilter===name?'#2a3a7a':'#faf8f4',color:fromFilter===name?'#fff':'#3a4a7a',borderColor:fromFilter===name?'#2a3a7a':'#c0c8e8'}}>
               {name==='all'?'All settlements':name}
@@ -224,16 +224,16 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
         {filteredRels.map((rel,i)=><NPCRelCard2 key={`rel_${i}`} rel={rel} style={styleFor(rel.type)}/>)}
         {/* Cross-settlement connections */}
         {crossConns.map((conn,i)=>(
-          <div key={`conn_${i}`} style={{border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',borderRadius:7,padding:'10px 14px',marginBottom:10,background:'#f8f9ff'}}>
+          <div key={`conn_${i}`} style={{border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',borderRadius:7,padding:'10px 14px',marginBottom:10,background:swatch['#F8F9FF']}}>
             <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-              <span style={{fontSize:FS.sm,fontWeight:700,color:'#1c1409'}}>{conn.primaryNPCName}</span>
-              {conn.primaryNPCRole&&<span style={{fontSize:FS.xs,color:'#6b5340'}}>({conn.primaryNPCRole})</span>}
-              <span style={{fontSize:FS.xs,color:'#9c8068',margin:'0 4px'}}>↔</span>
-              <span style={{fontSize:FS.sm,fontWeight:700,color:'#2a3a7a'}}>{conn.neighbourNPCName||'Unknown'}</span>
-              {conn.neighbourNPCRole&&<span style={{fontSize:FS.xs,color:'#6b5340'}}>({conn.neighbourNPCRole})</span>}
-              {conn._neighbourName&&fromFilter==='all'&&<span style={{fontSize:FS.xxs,color:'#9c8068',marginLeft:'auto',fontStyle:'italic'}}>{conn._neighbourName}</span>}
+              <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{conn.primaryNPCName}</span>
+              {conn.primaryNPCRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({conn.primaryNPCRole})</span>}
+              <span style={{fontSize:FS.xs,color:MUTED,margin:'0 4px'}}>↔</span>
+              <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.info}}>{conn.neighbourNPCName||'Unknown'}</span>
+              {conn.neighbourNPCRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({conn.neighbourNPCRole})</span>}
+              {conn._neighbourName&&fromFilter==='all'&&<span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',fontStyle:'italic'}}>{conn._neighbourName}</span>}
             </div>
-            {conn.description&&<div style={{fontSize:FS.sm,color:'#3d2b1a',lineHeight:1.45}}>{conn.description}</div>}
+            {conn.description&&<div style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.45}}>{conn.description}</div>}
           </div>
         ))}
       </Section>}
@@ -243,12 +243,12 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
         {factionGroups.map((fac,i)=>{
           const catColors={economy:'#a0762a',government:'#2a3a7a',military:'#8b1a1a',religious:'#1a4a2a',magic:'#3a1a7a',criminal:'#4a1a4a',other:'#5a4a2a'};
           const c=catColors[fac.dominantCategory]||'#6b5340';
-          return <div key={i} style={{background:'#faf8f4',border:'1px solid #e0d0b0',borderLeft:`3px solid ${c}`,borderRadius:7,padding:'10px 14px',marginBottom:10}}>
-            <div style={{...serif,fontSize:FS.lg,fontWeight:700,color:'#1c1409',marginBottom:6}}>{fac.name}</div>
+          return <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${c}`,borderRadius:7,padding:'10px 14px',marginBottom:10}}>
+            <div style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag,marginBottom:6}}>{fac.name}</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
               {(fac.members||[]).map(m=>(
                 <span key={m.id||m.name} style={{fontSize:FS.xs,color:c,background:`${c}18`,border:`1px solid ${c}40`,borderRadius:10,padding:'2px 9px'}}>
-                  {m.name} <span style={{color:'#9c8068'}}>({m.role})</span>
+                  {m.name} <span style={{color:MUTED}}>({m.role})</span>
                 </span>
               ))}
             </div>
@@ -262,7 +262,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
       </Section>}
 
       </>
-      }{!hasAny&&<div style={{padding:'32px 16px',textAlign:'center',color:'#9c8068',fontSize:FS.md}}>
+      }{!hasAny&&<div style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:FS.md}}>
         Generate a settlement to see relationship data.
       </div>}
     </div>

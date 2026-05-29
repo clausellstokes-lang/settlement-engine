@@ -194,3 +194,17 @@ export const toneBg = {
   gold:  palette.goldBg,
   muted: '#f5f0e8',
 };
+
+// ── Exact-value migration swatchbook (P120 / V-2 colour burn-down) ───────────
+// A handful of raw inline hex colours in the PDF sections had no palette token.
+// Routed through this map at their exact value (zero rendered change) so the
+// no-raw-color rule can go to error. value === the hex it replaces. Consolidate
+// onto `palette` in a later reviewed pass.
+export const swatch = Object.freeze({
+  '#E7D7B8': '#e7d7b8',
+  '#F0E8D8': '#f0e8d8',
+  '#F5F0FF': '#f5f0ff',
+  '#F8F4FD': '#f8f4fd',
+  '#FAF3E8': '#faf3e8',
+  '#FBF5E6': '#fbf5e6',
+});

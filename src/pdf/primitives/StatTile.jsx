@@ -5,7 +5,7 @@
  * color for at-a-glance reads (e.g. red for poor prosperity).
  */
 import { View, Text } from '@react-pdf/renderer';
-import { type, palette, pt } from '../theme.js';
+import { type, palette, pt, swatch } from '../theme.js';
 
 export function StatTile({ value, label, sublabel, tone = 'ink', flex = 1 }) {
   const fg = palette[tone] || palette.ink;
@@ -14,7 +14,7 @@ export function StatTile({ value, label, sublabel, tone = 'ink', flex = 1 }) {
       style={{
         flex,
         padding: 10,
-        backgroundColor: '#faf3e8',
+        backgroundColor: swatch['#FAF3E8'],
         border: `0.5pt solid ${palette.border}`,
         borderRadius: 3,
       }}

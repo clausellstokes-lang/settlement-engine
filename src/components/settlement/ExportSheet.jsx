@@ -17,7 +17,7 @@
  */
 
 import { useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { FileText, Loader2, X, BookMarked, Clock, Edit3 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { PDF_VARIANTS } from '../../pdf/variants.js';
@@ -122,16 +122,16 @@ function VariantCard({ v, picked, onPick }) {
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
-      <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: '#a0762a' }} />
+      <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: swatch['#A0762A'] }} />
       <div style={{ flex: 1 }}>
-        <div style={{ fontSize: FS.md, fontWeight: 700, color: '#1c1409' }}>
+        <div style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag }}>
           {v.label}
         </div>
-        <div style={{ fontSize: FS.xs, color: '#6b5340', marginTop: 2, lineHeight: 1.4 }}>
+        <div style={{ fontSize: FS.xs, color: swatch.inkMag3, marginTop: 2, lineHeight: 1.4 }}>
           {v.description}
         </div>
         {v.disabled && v.disabledReason && (
-          <div style={{ fontSize: FS.xxs, color: '#8b1a1a', marginTop: 4, fontStyle: 'italic' }}>
+          <div style={{ fontSize: FS.xxs, color: swatch.danger, marginTop: 4, fontStyle: 'italic' }}>
             {v.disabledReason}
           </div>
         )}

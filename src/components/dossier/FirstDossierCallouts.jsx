@@ -24,7 +24,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch, MUTED } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
@@ -132,7 +132,7 @@ export default function FirstDossierCallouts() {
               </div>
               <div style={{
                 marginTop: 4, fontSize: FS.sm,
-                color: '#3A2F18', lineHeight: 1.5,
+                color: swatch['#3A2F18'], lineHeight: 1.5,
               }}>
                 {body}
               </div>
@@ -144,7 +144,7 @@ export default function FirstDossierCallouts() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#9C8068',
+                color: MUTED,
                 cursor: 'pointer',
                 fontSize: FS.xs, fontWeight: 700,
                 padding: '2px 8px',

@@ -187,7 +187,7 @@ function InstitutionCard({ inst, idx }) {
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2pt solid ${palette[tone] || palette.muted}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
         minHeight: 60,
       }}
       wrap={false}

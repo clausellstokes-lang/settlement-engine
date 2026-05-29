@@ -20,7 +20,7 @@
  */
 
 import { useEffect, useRef } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { X, CheckCircle2, Circle } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { ONBOARDING_STEPS, isOnboardingComplete, nextOnboardingStep } from '../../copy/onboardingSteps.js';
@@ -107,7 +107,7 @@ export default function OnboardingChecklist() {
                 </div>
                 {!done && step.hint && (
                   <div style={{
-                    fontSize: FS['10.5'], color: '#7a4f0f', marginTop: 1,
+                    fontSize: FS['10.5'], color: swatch['#7A4F0F'], marginTop: 1,
                     fontFamily: 'system-ui, -apple-system, sans-serif',
                     lineHeight: 1.4,
                   }}>

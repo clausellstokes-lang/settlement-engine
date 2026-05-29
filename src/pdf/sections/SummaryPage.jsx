@@ -179,7 +179,7 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
                   padding: 6,
                   border: `0.4pt solid ${palette.border}`,
                   borderRadius: 2,
-                  backgroundColor: '#fffbf5',
+                  backgroundColor: palette.card,
                 }}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' }}>

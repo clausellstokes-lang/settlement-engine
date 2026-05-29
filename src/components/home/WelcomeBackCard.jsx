@@ -19,9 +19,7 @@ import { flag } from '../../lib/flags.js';
 import { useReturnVisit } from '../../hooks/useReturnVisit.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { t } from '../../copy/index.js';
-import {
-  GOLD, INK, BODY, BORDER, sans, serif_, FS, SP, R,
-} from '../theme.js';
+import { GOLD, INK, BODY, BORDER, sans, serif_, FS, SP, R, GOLD_DEEP, swatch } from '../theme.js';
 
 export default function WelcomeBackCard({ onOpen, onForge }) {
   const tier = useStore(s => s.auth.tier);
@@ -61,7 +59,7 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
       <div style={{ padding: SP.lg }}>
         <div style={{
           fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
-          textTransform: 'uppercase', color: '#8C6F32',
+          textTransform: 'uppercase', color: GOLD_DEEP,
         }}>
           {t('hero.welcomeBack.eyebrow') || 'Welcome back'}
         </div>
@@ -85,7 +83,7 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
             onClick={handleOpen}
             style={{
               padding: `${SP.sm}px ${SP.lg}px`,
-              background: '#1B1408', color: GOLD,
+              background: INK, color: GOLD,
               border: 'none', borderRadius: R.sm,
               fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
               cursor: 'pointer',
@@ -98,7 +96,7 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
             onClick={handleForge}
             style={{
               padding: `${SP.sm}px ${SP.lg}px`,
-              background: '#fff', color: BODY,
+              background: swatch.white, color: BODY,
               border: `1px solid ${BORDER}`,
               borderRadius: R.sm,
               fontSize: FS.sm, fontWeight: 600, fontFamily: sans,

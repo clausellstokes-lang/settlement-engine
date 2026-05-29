@@ -20,9 +20,7 @@
 import { ArrowRight, Eye } from 'lucide-react';
 import OutputContainer from './OutputContainer.jsx';
 import { TIER_LABELS } from './new/design.js';
-import {
-  GOLD, INK, BORDER, sans, serif_, SP, R, FS,
-} from './theme.js';
+import { GOLD, INK, BORDER, sans, serif_, SP, R, FS, swatch } from './theme.js';
 
 const MUTED = '#6b5340';
 const BODY  = '#4A3B22';
@@ -97,7 +95,7 @@ export default function PublicDossierView({ dossier, onForge }) {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: `${SP.sm}px ${SP.lg}px`,
-              background: GOLD, color: '#fff',
+              background: GOLD, color: swatch.white,
               border: 'none', borderRadius: R.button,
               fontFamily: sans, fontSize: FS.sm, fontWeight: 700,
               cursor: 'pointer',

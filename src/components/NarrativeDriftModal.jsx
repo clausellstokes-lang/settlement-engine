@@ -26,7 +26,7 @@
 import { Sparkles, RotateCcw, X, Zap, GitBranch } from 'lucide-react';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { t } from '../copy/index.js';
-import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, ELEV } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, ELEV, swatch } from './theme.js';
 import { flag } from '../lib/flags.js';
 
 const PURPLE = '#6a2a9a';
@@ -119,7 +119,7 @@ export default function NarrativeDriftModal({
               padding: '10px 12px', borderRadius: 6,
               background: `linear-gradient(135deg, ${PURPLE}, #4a1a7a)`,
               border: `1px solid rgba(160,100,220,0.55)`,
-              color: '#f0d8ff', fontFamily: sans,
+              color: swatch['#F0D8FF'], fontFamily: sans,
               cursor: 'pointer', textAlign: 'left',
             }}
           >
@@ -143,7 +143,7 @@ export default function NarrativeDriftModal({
                 padding: '10px 12px', borderRadius: 6,
                 background: `linear-gradient(135deg, ${PURPLE_LIGHT}, ${PURPLE})`,
                 border: `1px solid rgba(180,120,230,0.5)`,
-                color: '#f4e4ff', fontFamily: sans,
+                color: swatch['#F4E4FF'], fontFamily: sans,
                 cursor: 'pointer', textAlign: 'left',
               }}
             >

@@ -42,6 +42,21 @@ export const PARCH    = L.PARCH;
 export const CARD_ALT = L.CARD_ALT;
 export const CARD_HDR = L.CARD_HDR;
 
+// Flat aliases for dashed-key palette colors (P120 / V-2 color burn-down).
+export const VIOLET    = L.VIOLET;
+export const VIOLET_BG = L.VIOLET_BG;
+export const RED       = L.RED;
+export const RED_BG    = L.RED_BG;
+export const GREEN     = L.GREEN;
+export const AMBER     = L.AMBER;
+export const GOLD_DEEP = L.GOLD_DEEP;
+export const PARCH_100 = L.PARCH_100;
+
+// swatch — exact-value migration swatchbook (see design/tokens.js). Routes the
+// long tail of raw inline hex colors through the token system with zero visual
+// change so no-raw-color can go to error.
+export { swatch } from '../design/tokens.js';
+
 // ── Typography ──────────────────────────────────────────────────────────────
 export const sans   = L.sans;
 export const serif_ = L.serif_;

@@ -25,9 +25,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import {
-  INK, BORDER, sans, serif_, FS, SP, R,
-} from '../theme.js';
+import { INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED } from '../theme.js';
 
 const VIOLET = '#7B4FCF';
 const VIOLET_BG = '#EBE2FA';
@@ -126,7 +124,7 @@ export default function WelcomeCreditCard() {
   return (
     <div style={{
       maxWidth: 480, margin: `${SP.md}px auto`,
-      background: '#fff', border: `1px solid ${BORDER}`,
+      background: swatch.white, border: `1px solid ${BORDER}`,
       borderRadius: R.lg, overflow: 'hidden',
       boxShadow: '0 6px 20px rgba(27,20,8,0.08)',
       fontFamily: sans,
@@ -159,7 +157,7 @@ export default function WelcomeCreditCard() {
           </div>
         </div>
         <p style={{
-          margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: '#4A3B22',
+          margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
           lineHeight: 1.55, fontFamily: serif_, fontStyle: 'italic',
         }}>
           It’ll turn this town’s data into prose your players can hear —
@@ -170,7 +168,7 @@ export default function WelcomeCreditCard() {
         padding: SP.md, display: 'flex',
         alignItems: 'center', gap: SP.sm,
       }}>
-        <div style={{ flex: 1, fontSize: FS.xs, color: '#9C8068' }}>
+        <div style={{ flex: 1, fontSize: FS.xs, color: MUTED }}>
           <div>Cost: <s>3 credits</s></div>
           <div style={{ fontWeight: 700, color: VIOLET }}>This one: free</div>
         </div>
@@ -179,7 +177,7 @@ export default function WelcomeCreditCard() {
           style={{
             padding: `${SP.sm}px ${SP.md}px`,
             background: VIOLET,
-            color: '#fff', border: 'none',
+            color: swatch.white, border: 'none',
             borderRadius: R.sm,
             fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
             cursor: 'pointer',
@@ -193,7 +191,7 @@ export default function WelcomeCreditCard() {
           style={{
             padding: `${SP.sm}px ${SP.sm}px`,
             background: 'transparent',
-            color: '#9C8068', border: 'none',
+            color: MUTED, border: 'none',
             fontSize: FS.xs, fontFamily: sans,
             cursor: 'pointer',
           }}

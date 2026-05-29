@@ -16,7 +16,7 @@
  * order.
  */
 
-import { sans, FS, SP, R } from '../theme.js';
+import { sans, FS, SP, R, swatch } from '../theme.js';
 
 const BORDER = '#E8D9B0';
 const PARCH = '#FBF5E6';
@@ -110,7 +110,7 @@ export default function LibraryToolbar({
         flex: 1, minWidth: 180,
         display: 'flex', alignItems: 'center', gap: SP.xs,
         padding: '4px 8px',
-        background: '#fff',
+        background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderRadius: R.sm,
       }}>
@@ -144,7 +144,7 @@ export default function LibraryToolbar({
       <label style={{
         display: 'inline-flex', alignItems: 'center', gap: SP.xs,
         padding: '4px 8px',
-        background: '#fff',
+        background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderRadius: R.sm,
         cursor: 'pointer',

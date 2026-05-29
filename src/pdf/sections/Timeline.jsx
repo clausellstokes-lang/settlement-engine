@@ -53,7 +53,7 @@ function Entry({ entry }) {
         marginBottom: space.sm,
         padding: 6,
         borderLeft: `2pt solid ${palette.gold}`,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>

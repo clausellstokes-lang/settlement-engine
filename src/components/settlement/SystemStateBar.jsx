@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { ShieldCheck, AlertTriangle, Skull, Boxes, Info } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { BAND_COLOR, BAND_HINT } from '../../domain/state/bands.js';
-import { INK, MUTED, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
 const DIM_META = {
   resilience:       { label: 'Resilience',        Icon: ShieldCheck,    higherIsBetter: true,  desc: 'Can the place absorb shocks?' },
@@ -80,7 +80,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
         cursor: 'pointer',
         padding: SP.xs,
         border: `1px solid ${BORDER}`, borderRadius: R.sm,
-        background: '#fffbf5',
+        background: CARD,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
@@ -99,7 +99,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
           {dim.value}
         </span>
       </div>
-      <div style={{ height: 4, background: '#e7d7b8', borderRadius: 2, overflow: 'hidden' }}>
+      <div style={{ height: 4, background: swatch['#E7D7B8'], borderRadius: 2, overflow: 'hidden' }}>
         <div style={{
           height: '100%', width: `${fillPct}%`,
           background: color, transition: 'width 200ms',
@@ -108,7 +108,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
       {isOpen && (
         <div style={{
           marginTop: SP.xs, padding: SP.xs,
-          background: '#fff', border: `1px solid ${BORDER}`, borderRadius: R.sm,
+          background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm,
           fontSize: FS.xxs, color: INK, fontFamily: sans, lineHeight: 1.5,
         }}>
           <div style={{ fontStyle: 'italic', color: MUTED, marginBottom: 4 }}>

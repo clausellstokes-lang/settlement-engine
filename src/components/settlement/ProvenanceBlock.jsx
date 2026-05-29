@@ -13,7 +13,7 @@
  */
 
 import { useStore } from '../../store/index.js';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import Card from '../primitives/Card.jsx';
 
 /**
@@ -49,7 +49,7 @@ function Row({ label, children }) {
   return (
     <>
       <dt style={{
-        fontSize: FS.xxs, fontWeight: 700, color: '#6b5340',
+        fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3,
         fontFamily: 'system-ui, -apple-system, sans-serif',
         letterSpacing: '0.04em', textTransform: 'uppercase',
         whiteSpace: 'nowrap',
@@ -58,7 +58,7 @@ function Row({ label, children }) {
       </dt>
       <dd style={{
         margin: 0,
-        fontSize: FS.xs, color: '#1c1409',
+        fontSize: FS.xs, color: swatch.inkMag,
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}>
         {children}

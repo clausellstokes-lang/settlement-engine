@@ -23,7 +23,7 @@
 
 import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
-import { FS, ELEV } from './theme.js';
+import { FS, ELEV, swatch } from './theme.js';
 import { tonightAtTheTable } from '../domain/summary/tonightAtTheTable.js';
 
 const GOLD = '#8C6F32';
@@ -141,7 +141,7 @@ export default function TableView({ settlement, onClose }) {
           {pressure && (
             <div style={{
               padding: '10px 12px',
-              background: '#fff',
+              background: swatch.white,
               border: `1px solid ${BORDER}`,
               borderLeft: `3px solid ${GOLD}`,
               borderRadius: 6,
@@ -193,7 +193,7 @@ export default function TableView({ settlement, onClose }) {
                   return (
                     <div key={i} style={{
                       padding: '10px 12px',
-                      background: '#fff',
+                      background: swatch.white,
                       border: `1px solid ${BORDER}`,
                       borderLeft: `4px solid ${accent}`,
                       borderRadius: 6,

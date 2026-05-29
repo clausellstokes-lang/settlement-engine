@@ -8,7 +8,7 @@ import {getAllModifiers, EFFECT_CATEGORIES, fmtMod} from '../lib/relationshipGra
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
-import {GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS} from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY } from './theme.js';
 import { useStore } from '../store/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
@@ -122,7 +122,7 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
             {moveOpen && (
               <div style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, borderRadius:6, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:160, padding:4 }}>
                 {currentCampaignId && (
-                  <button onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:'#8b1a1a', fontFamily:sans, borderRadius:3 }}
+                  <button onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:swatch.danger, fontFamily:sans, borderRadius:3 }}
                     onMouseEnter={e => e.target.style.background='#fdf4f4'} onMouseLeave={e => e.target.style.background='none'}>
                     Remove from campaign
                   </button>
@@ -137,8 +137,8 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
               </div>
             )}
           </div>
-          <button onClick={() => onView(s)} style={{ padding:'4px 10px', background:'#f0f4ff', color:'#2a3a7a', border:'1px solid #c0c8e8', borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>View</button>
-          <button onClick={() => setDeleteId(deleteId === s.id ? null : s.id)} style={{ padding:'4px 10px', background:'#fdf4f4', color:'#8b1a1a', border:'1px solid #e8c0c0', borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Delete</button>
+          <button onClick={() => onView(s)} style={{ padding:'4px 10px', background:swatch.infoBg, color:swatch.info, border:'1px solid #c0c8e8', borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>View</button>
+          <button onClick={() => setDeleteId(deleteId === s.id ? null : s.id)} style={{ padding:'4px 10px', background:swatch.dangerBg, color:swatch.danger, border:'1px solid #e8c0c0', borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Delete</button>
         </div>
       </div>
       {deleteId === s.id && (
@@ -169,7 +169,7 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
   return (
     <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>
       {/* Campaign header */}
-      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:'#f5ede0', borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
+      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
         <button onClick={() => toggleCollapsed(campaign.id)} style={{ background:'none', border:'none', cursor:'pointer', padding:0, display:'flex', color:MUTED }}>
           {collapsed ? <ChevronRight size={14}/> : <ChevronDown size={14}/>}
         </button>
@@ -179,8 +179,8 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
             <input value={editDraft} onChange={e => setEditDraft(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') { onRenameCampaign(campaign.id, editDraft); setEditing(false); } if (e.key === 'Escape') setEditing(false); }}
               style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, borderRadius:3, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
-            <button onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} style={{ background:'none', border:'none', color:'#2a7a2a', cursor:'pointer' }}><Check size={12}/></button>
-            <button onClick={() => setEditing(false)} style={{ background:'none', border:'none', color:'#8b1a1a', cursor:'pointer' }}><X size={12}/></button>
+            <button onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} style={{ background:'none', border:'none', color:swatch['#2A7A2A'], cursor:'pointer' }}><Check size={12}/></button>
+            <button onClick={() => setEditing(false)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer' }}><X size={12}/></button>
           </div>
         ) : (
           <span style={{ flex:1, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
@@ -193,11 +193,11 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
               onClick={(e) => { e.stopPropagation(); generateCampaignPDF(campaign, settlements); }}
               disabled={settlements.length === 0}
               title="Export Campaign PDF"
-              style={{ display:'flex', alignItems:'center', gap:3, background: settlements.length === 0 ? '#d8cdbc' : '#7a1a1a', color:'#fff', border:'none', borderRadius:4, padding:'3px 7px', cursor: settlements.length === 0 ? 'not-allowed' : 'pointer', fontSize:FS.micro, fontWeight:700, fontFamily:sans }}>
+              style={{ display:'flex', alignItems:'center', gap:3, background: settlements.length === 0 ? '#d8cdbc' : '#7a1a1a', color:swatch.white, border:'none', borderRadius:4, padding:'3px 7px', cursor: settlements.length === 0 ? 'not-allowed' : 'pointer', fontSize:FS.micro, fontWeight:700, fontFamily:sans }}>
               <FileText size={10}/> PDF
             </button>
             <button onClick={() => { setEditing(true); setEditDraft(campaign.name); }} style={{ background:'none', border:'none', color:MUTED, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
-            <button onClick={() => setConfirmDelete(!confirmDelete)} style={{ background:'none', border:'none', color:'#8b1a1a', cursor:'pointer', padding:2 }}><X size={11}/></button>
+            <button onClick={() => setConfirmDelete(!confirmDelete)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><X size={11}/></button>
           </div>
         )}
       </div>
@@ -257,7 +257,7 @@ function SampleCard({ sample, onFork }) {
           {sample.name}
         </h4>
         <span style={{
-          fontSize: FS.micro, fontWeight: 800, color: '#7a5a1a',
+          fontSize: FS.micro, fontWeight: 800, color: swatch['#7A5A1A'],
           background: 'rgba(201,162,76,0.14)',
           border: '1px solid rgba(201,162,76,0.45)',
           padding: '1px 6px', borderRadius: 999,
@@ -273,7 +273,7 @@ function SampleCard({ sample, onFork }) {
         </span>
       </div>
       <p style={{
-        margin: 0, fontSize: FS['12.5'], color: '#4A3B22',
+        margin: 0, fontSize: FS['12.5'], color: BODY,
         fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
       }}>
         {sample.teaser}
@@ -282,7 +282,7 @@ function SampleCard({ sample, onFork }) {
         {sample.tags.map(tag => (
           <span key={tag} style={{
             fontSize: FS['9.5'], fontWeight: 700, color: SECOND,
-            background: '#faf6ee',
+            background: swatch['#FAF6EE'],
             border: `1px solid ${BORDER}`,
             padding: '1px 6px', borderRadius: 4,
             textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -724,7 +724,7 @@ export default function SettlementsPanel({ onNavigate }) {
       <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8, padding:'12px 14px' }}>
         <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:INK, marginBottom:8 }}>Saved Settlements</div>
         {settlement && (
-          <div style={{ fontSize:FS.xs, color:MUTED, marginBottom:8, padding:'6px 10px', background:'#f5ede0', borderRadius:5, border:`1px solid ${BORDER}`, display:'flex', alignItems:'center', gap:6 }}>
+          <div style={{ fontSize:FS.xs, color:MUTED, marginBottom:8, padding:'6px 10px', background:swatch['#F5EDE0'], borderRadius:5, border:`1px solid ${BORDER}`, display:'flex', alignItems:'center', gap:6 }}>
             <span style={{color:SECOND}}>Current:</span>
             <span style={{fontWeight:700,color:INK}}>{settlement.name}</span>
             <span style={{color:MUTED}}>·</span>
@@ -733,7 +733,7 @@ export default function SettlementsPanel({ onNavigate }) {
           </div>
         )}
         <div style={{ display:'flex', gap:8, alignItems:'center', flexWrap:'wrap' }}>
-          <button onClick={saveCurrentSettlement} disabled={!settlement||isDuplicate||!canSave||saves.length>=(maxSaves||30)} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:(!settlement||isDuplicate||!canSave)?'#ccc':GOLD, color:'#fff', border:'none', borderRadius:5, cursor:(!settlement||isDuplicate||!canSave)?'not-allowed':'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans }}>
+          <button onClick={saveCurrentSettlement} disabled={!settlement||isDuplicate||!canSave||saves.length>=(maxSaves||30)} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:(!settlement||isDuplicate||!canSave)?'#ccc':GOLD, color:swatch.white, border:'none', borderRadius:5, cursor:(!settlement||isDuplicate||!canSave)?'not-allowed':'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans }}>
             <Save size={13}/> {saved?'Saved!':!canSave?'Sign In to Save':isDuplicate?'Already Saved':saves.length>=(maxSaves||30)?'Slots Full':'Save Current Settlement'}
           </button>
           <span style={{ fontSize:FS.xs, color:MUTED }}>{saves.length}/{maxSaves||30} slots used</span>
@@ -749,7 +749,7 @@ export default function SettlementsPanel({ onNavigate }) {
                 onKeyDown={e => { if (e.key === 'Enter') handleCreateCampaign(); if (e.key === 'Escape') setShowNewCampaign(false); }}
                 placeholder="Campaign name..." autoFocus
                 style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, borderRadius:5, fontSize:FS.sm, fontFamily:sans, outline:'none' }}/>
-              <button onClick={handleCreateCampaign} disabled={!newCampaignName.trim()} style={{ padding:'6px 12px', background:newCampaignName.trim()?GOLD:'#ccc', color:'#fff', border:'none', borderRadius:5, cursor:newCampaignName.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Create</button>
+              <button onClick={handleCreateCampaign} disabled={!newCampaignName.trim()} style={{ padding:'6px 12px', background:newCampaignName.trim()?GOLD:'#ccc', color:swatch.white, border:'none', borderRadius:5, cursor:newCampaignName.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Create</button>
               <button onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }} style={{ padding:'6px 10px', background:CARD, color:SECOND, border:`1px solid ${BORDER}`, borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontFamily:sans }}>Cancel</button>
             </div>
           ) : (

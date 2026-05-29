@@ -24,9 +24,7 @@
  */
 
 import { useStore } from '../../store';
-import {
-  GOLD, INK, SECOND, BORDER, BORDER2, CARD, MUTED, sans, FS, SP, R,
-} from '../theme.js';
+import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, MUTED, sans, FS, SP, R, swatch } from '../theme.js';
 import { Link as LinkIcon, AlertTriangle, ChevronRight, Eye, EyeOff } from 'lucide-react';
 
 const REL_TYPES = [
@@ -189,7 +187,7 @@ export default function RoutesToolbar() {
           fontSize: FS.xs, fontFamily: sans,
         }}>
           <AlertTriangle size={11} color="#A23434" />
-          <span style={{ color: '#8a3434', fontWeight: 700 }}>
+          <span style={{ color: swatch['#8A3434'], fontWeight: 700 }}>
             Network stress
           </span>
           <span style={{ color: SECOND }}>

@@ -17,7 +17,7 @@
  */
 
 import { useState, useSyncExternalStore } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch, GOLD, PARCH, VIOLET, VIOLET_BG, BODY } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 
 const STORAGE_KEY = 'flag.__devPanelOpen';
@@ -83,7 +83,7 @@ export default function DevFlagPanel() {
         style={{
           ...baseStyle,
           padding: '6px 10px',
-          background: '#1c1409', color: '#c9a24c',
+          background: swatch.inkMag, color: GOLD,
           border: '1px solid #c9a24c', borderRadius: 6,
           cursor: 'pointer',
           boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
@@ -101,7 +101,7 @@ export default function DevFlagPanel() {
       ...baseStyle,
       width: 340, maxHeight: '70vh',
       display: 'flex', flexDirection: 'column',
-      background: '#fbf5e6', border: '2px solid #1c1409',
+      background: PARCH, border: '2px solid #1c1409',
       borderRadius: 8,
       boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
       overflow: 'hidden',
@@ -111,7 +111,7 @@ export default function DevFlagPanel() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '8px 12px',
         background: 'linear-gradient(to right, #1c1409, #2c2210)',
-        color: '#c9a24c',
+        color: GOLD,
         borderBottom: '1px solid #1c1409',
       }}>
         <span style={{ fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: FS.xs }}>
@@ -123,7 +123,7 @@ export default function DevFlagPanel() {
           aria-label="Close flag panel"
           style={{
             background: 'transparent', border: 'none',
-            color: '#c9a24c', cursor: 'pointer', fontSize: FS['14'], lineHeight: 1,
+            color: GOLD, cursor: 'pointer', fontSize: FS['14'], lineHeight: 1,
           }}
         >×</button>
       </div>
@@ -154,24 +154,24 @@ export default function DevFlagPanel() {
               />
               <div style={{ minWidth: 0 }}>
                 <div style={{
-                  fontWeight: 600, color: '#1c1409',
+                  fontWeight: 600, color: swatch.inkMag,
                   display: 'flex', alignItems: 'center', gap: 6,
                 }}>
                   {name}
                   {overridden && (
                     <span title="Override set (clear to use default)" style={{
-                      fontSize: FS.micro, fontWeight: 700, color: '#7B4FCF',
-                      background: '#EBE2FA', border: '1px solid #7B4FCF',
+                      fontSize: FS.micro, fontWeight: 700, color: VIOLET,
+                      background: VIOLET_BG, border: '1px solid #7B4FCF',
                       borderRadius: 3, padding: '0 4px', letterSpacing: '0.04em',
                     }}>
                       OVERRIDE
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: FS.xs, color: '#4A3B22', lineHeight: 1.45, marginTop: 2 }}>
+                <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.45, marginTop: 2 }}>
                   {FLAGS[name].description}
                 </div>
-                <div style={{ fontSize: FS.xxs, color: '#6b5340', marginTop: 2 }}>
+                <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, marginTop: 2 }}>
                   default: <strong>{String(FLAGS[name].default)}</strong>
                 </div>
               </div>
@@ -183,7 +183,7 @@ export default function DevFlagPanel() {
                   style={{
                     fontSize: FS.xxs,
                     background: 'transparent', border: '1px solid #6b5340',
-                    color: '#6b5340', borderRadius: 4,
+                    color: swatch.inkMag3, borderRadius: 4,
                     padding: '2px 6px', cursor: 'pointer',
                     alignSelf: 'center',
                   }}
@@ -198,7 +198,7 @@ export default function DevFlagPanel() {
 
       <div style={{
         padding: '6px 10px',
-        fontSize: FS.xxs, color: '#6b5340',
+        fontSize: FS.xxs, color: swatch.inkMag3,
         background: 'rgba(28,20,9,0.05)',
         borderTop: '1px solid rgba(28,20,9,0.08)',
       }}>

@@ -26,7 +26,7 @@ import { lazy as _lazy, Suspense as _Suspense } from 'react';
 const FounderTile = _lazy(() => import('./pricing/FounderTile.jsx'));
 import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, AMBER } from './theme.js';
 // P138 / AC-4 — Inline FAQ accordion. Lazy because the copy strings
 // are a chunky import for users who never expand the section.
 const AccountFAQ = _lazy(() => import('./account/AccountFAQ.jsx'));
@@ -174,7 +174,7 @@ export default function AccountPage({ onNavigateAdmin }) {
             width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
             background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#fff', fontWeight: 700, fontSize: FS['22'], fontFamily: serif_,
+            color: swatch.white, fontWeight: 700, fontSize: FS['22'], fontFamily: serif_,
           }}>
             {(auth.displayName || auth.user.email || '?')[0].toUpperCase()}
           </div>
@@ -197,11 +197,11 @@ export default function AccountPage({ onNavigateAdmin }) {
                     autoFocus
                   />
                   <button onClick={handleSaveName} disabled={nameSaving}
-                    style={{ background: 'none', border: 'none', color: '#2a7a2a', cursor: 'pointer' }}>
+                    style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer' }}>
                     <Check size={18} />
                   </button>
                   <button onClick={() => setEditingName(false)}
-                    style={{ background: 'none', border: 'none', color: '#8b1a1a', cursor: 'pointer' }}>
+                    style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer' }}>
                     <X size={18} />
                   </button>
                 </>
@@ -253,9 +253,9 @@ export default function AccountPage({ onNavigateAdmin }) {
                 padding: `${SP.sm}px ${SP.md}px`,
                 background: 'rgba(124,58,237,0.06)',
                 borderTop: '1px solid rgba(124,58,237,0.20)',
-                fontSize: FS.xs, color: '#3A2F18', lineHeight: 1.5,
+                fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
               }}>
-                <b style={{ color: '#7c3aed' }}>Cartographer unlocks:</b> every size,
+                <b style={{ color: swatch['#7C3AED'] }}>Cartographer unlocks:</b> every size,
                 unlimited saves, neighbours, AI prose pass.
               </div>
             )}
@@ -272,7 +272,7 @@ export default function AccountPage({ onNavigateAdmin }) {
               <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
                 {t('account.cardCredits')}
               </div>
-              <div style={{ fontSize: FS.xxl, fontWeight: 700, color: '#7c3aed' }}>
+              <div style={{ fontSize: FS.xxl, fontWeight: 700, color: swatch['#7C3AED'] }}>
                 {isElevated ? '\u221E' : creditBalance}
               </div>
             </div>
@@ -281,11 +281,11 @@ export default function AccountPage({ onNavigateAdmin }) {
                 padding: `${SP.sm}px ${SP.md}px`,
                 background: 'rgba(124,58,237,0.10)',
                 borderTop: '1px solid rgba(124,58,237,0.25)',
-                fontSize: FS.xs, color: '#3A2F18', lineHeight: 1.5,
+                fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
               }}>
-                <b style={{ color: '#7c3aed' }}>Try Narrate.</b> Turn this town's data
+                <b style={{ color: swatch['#7C3AED'] }}>Try Narrate.</b> Turn this town's data
                 into table-ready prose.{' '}
-                <span style={{ color: '#2a7a2a', fontWeight: 700 }}>First credit free.</span>
+                <span style={{ color: swatch['#2A7A2A'], fontWeight: 700 }}>First credit free.</span>
               </div>
             )}
           </div>
@@ -301,7 +301,7 @@ export default function AccountPage({ onNavigateAdmin }) {
               <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
                 {t('account.cardSaves')}
               </div>
-              <div style={{ fontSize: FS.xxl, fontWeight: 700, color: '#2a7a2a' }}>
+              <div style={{ fontSize: FS.xxl, fontWeight: 700, color: swatch['#2A7A2A'] }}>
                 {savedSettlements.length} / {maxSaves === Infinity ? '\u221E' : maxSaves}
               </div>
             </div>
@@ -310,9 +310,9 @@ export default function AccountPage({ onNavigateAdmin }) {
                 padding: `${SP.sm}px ${SP.md}px`,
                 background: 'rgba(208,128,32,0.10)',
                 borderTop: '1px solid rgba(208,128,32,0.30)',
-                fontSize: FS.xs, color: '#3A2F18', lineHeight: 1.5,
+                fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
               }}>
-                <b style={{ color: '#D08020' }}>
+                <b style={{ color: AMBER }}>
                   {savedSettlements.length >= maxSaves ? 'Saves full.' : 'One save left.'}
                 </b>{' '}
                 Cartographer = unlimited + cloud sync. Phone, laptop, table.
@@ -335,8 +335,8 @@ export default function AccountPage({ onNavigateAdmin }) {
             {purchaseError && (
               <div style={{
                 padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
-                background: '#fdf4f4', border: '1px solid #e8b0b0', borderRadius: R.md,
-                fontSize: FS.sm, color: '#8b1a1a',
+                background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md,
+                fontSize: FS.sm, color: swatch.danger,
               }}>
                 {purchaseError}
               </div>
@@ -369,7 +369,7 @@ export default function AccountPage({ onNavigateAdmin }) {
                       <span style={{
                         position: 'absolute', top: -8, right: -4,
                         padding: '2px 6px', borderRadius: R.sm, background: accent,
-                        color: '#fff', fontSize: FS.micro, fontWeight: 800,
+                        color: swatch.white, fontSize: FS.micro, fontWeight: 800,
                       }}>{p.discount}</span>
                     )}
                     <span style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits}</span>
@@ -404,19 +404,19 @@ export default function AccountPage({ onNavigateAdmin }) {
         {supportSent ? (
           <div style={{
             textAlign: 'center', padding: SP.lg,
-            background: '#f0faf2', borderRadius: R.lg,
+            background: swatch.successBg, borderRadius: R.lg,
           }}>
             <Check size={32} color="#2a7a2a" style={{ marginBottom: SP.sm }} />
-            <div style={{ fontSize: FS.md, fontWeight: 600, color: '#1a5a28' }}>
+            <div style={{ fontSize: FS.md, fontWeight: 600, color: swatch.success }}>
               Message sent successfully!
             </div>
-            <div style={{ fontSize: FS.sm, color: '#4a8a60', marginTop: SP.xs }}>
+            <div style={{ fontSize: FS.sm, color: swatch['#4A8A60'], marginTop: SP.xs }}>
               We'll get back to you at {auth.user.email}
             </div>
             <button onClick={() => setSupportSent(false)}
               style={{
                 marginTop: SP.md, padding: `${SP.sm}px ${SP.lg}px`,
-                background: GOLD, color: '#fff', border: 'none',
+                background: GOLD, color: swatch.white, border: 'none',
                 borderRadius: R.md, cursor: 'pointer', fontSize: FS.sm, fontWeight: 600,
               }}>
               Send Another Message
@@ -433,7 +433,7 @@ export default function AccountPage({ onNavigateAdmin }) {
             </div>
 
             {supportError && (
-              <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: '#fdf4f4', border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: '#8b1a1a' }}>
+              <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
                 {supportError}
               </div>
             )}
@@ -462,7 +462,7 @@ export default function AccountPage({ onNavigateAdmin }) {
               onClick={handleSendSupport}
               disabled={supportSending || !supportSubject.trim() || !supportMessage.trim()}
               style={{
-                padding: `${SP.md}px 0`, background: GOLD, color: '#fff',
+                padding: `${SP.md}px 0`, background: GOLD, color: swatch.white,
                 border: 'none', borderRadius: R.lg, cursor: 'pointer',
                 fontSize: FS.md, fontWeight: 700, fontFamily: sans,
                 opacity: supportSending ? 0.6 : 1,
@@ -501,7 +501,7 @@ export default function AccountPage({ onNavigateAdmin }) {
         onClick={authSignOut}
         style={{
           padding: `${SP.md}px 0`,
-          background: 'transparent', color: '#8b1a1a',
+          background: 'transparent', color: swatch.danger,
           border: '1px solid rgba(139,26,26,0.3)',
           borderRadius: R.lg, cursor: 'pointer',
           fontSize: FS.md, fontWeight: 700, fontFamily: sans,

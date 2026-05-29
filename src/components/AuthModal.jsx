@@ -14,7 +14,7 @@
 import { useState } from 'react';
 import { X, AlertCircle, CheckCircle, Mail, Shield, User, ExternalLink, Headphones } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, VIOLET, VIOLET_BG } from './theme.js';
 import { isConfigured } from '../lib/supabase.js';
 import { getTierDisplayName } from '../config/pricing.js';
 import { flag } from '../lib/flags.js';
@@ -54,8 +54,8 @@ function OAuthButton({ _provider, glyph, label, onClick, disabled, soonNote }) {
       title={soonNote || `Continue with ${label}`}
       style={{
         width: '100%', padding: `${SP.md}px ${SP.md}px`,
-        background: '#fff',
-        color: '#1B1408',
+        background: swatch.white,
+        color: INK,
         border: `1px solid ${BORDER}`,
         borderRadius: R.lg,
         cursor: disabled ? 'not-allowed' : 'pointer',
@@ -70,8 +70,8 @@ function OAuthButton({ _provider, glyph, label, onClick, disabled, soonNote }) {
       {soonNote && (
         <span style={{
           fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.06em',
-          textTransform: 'uppercase', color: '#7B4FCF',
-          background: '#EBE2FA', padding: '2px 5px', borderRadius: 3,
+          textTransform: 'uppercase', color: VIOLET,
+          background: VIOLET_BG, padding: '2px 5px', borderRadius: 3,
           marginLeft: 4,
         }}>
           Soon
@@ -107,7 +107,7 @@ function Input({ type = 'text', placeholder, value, onChange, onKeyDown }) {
         width: '100%', padding: `${SP.md}px ${SP.lg - 2}px`,
         border: `1px solid ${BORDER}`, borderRadius: R.lg,
         fontSize: FS['14'], fontFamily: sans,
-        background: '#fff', outline: 'none',
+        background: swatch.white, outline: 'none',
         boxSizing: 'border-box',
       }}
     />
@@ -548,7 +548,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                     width: 36, height: 36, borderRadius: '50%',
                     background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: '#fff', fontWeight: 700, fontSize: FS.lg,
+                    color: swatch.white, fontWeight: 700, fontSize: FS.lg,
                   }}>
                     {(auth.displayName || auth.user?.email || '?')[0].toUpperCase()}
                   </div>
@@ -579,7 +579,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                   </div>
                   <div>
                     <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Credits</div>
-                    <div style={{ fontSize: FS.md, fontWeight: 700, color: '#7c3aed' }}>
+                    <div style={{ fontSize: FS.md, fontWeight: 700, color: swatch['#7C3AED'] }}>
                       {isElevated ? '\u221E' : creditBalance}
                     </div>
                   </div>
@@ -619,7 +619,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
               <div style={{
                 display: 'flex', alignItems: 'center', gap: SP.sm,
                 padding: `${SP.sm}px ${SP.md}px`,
-                background: '#fef9ee', borderRadius: R.md,
+                background: swatch['#FEF9EE'], borderRadius: R.md,
                 border: `1px solid rgba(160,118,42,0.2)`,
               }}>
                 <Headphones size={14} color={GOLD} />

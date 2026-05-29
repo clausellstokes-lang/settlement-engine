@@ -23,7 +23,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { isEmailProviderUnconfigured } from '../../lib/emailLifecycle.js';
 
 const DISMISS_KEY = 'sf.devEmailBanner.dismissed';
@@ -65,8 +65,8 @@ export default function DevEmailBanner() {
         maxWidth: 720,
         margin: '0 auto',
         zIndex: 99999,
-        background: '#3a1a1a',
-        color: '#ffcfcf',
+        background: swatch['#3A1A1A'],
+        color: swatch['#FFCFCF'],
         border: '1px solid #8b1a1a',
         borderRadius: 6,
         padding: '10px 14px',
@@ -97,7 +97,7 @@ npx supabase secrets set RESEND_FROM_EMAIL="SettlementForge <hello@settlementfor
         onClick={dismiss}
         style={{
           background: 'transparent',
-          color: '#ffcfcf',
+          color: swatch['#FFCFCF'],
           border: '1px solid #8b1a1a',
           borderRadius: 4,
           padding: '4px 8px',

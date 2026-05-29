@@ -22,7 +22,7 @@ import { historyHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
-import { type, palette, space, pt } from '../theme.js';
+import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
 
 const FOUNDING_FIELDS = [
@@ -62,7 +62,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
           style={{
             width: 90,
             padding: 6,
-            backgroundColor: '#faf3e8',
+            backgroundColor: swatch['#FAF3E8'],
             border: `0.5pt solid ${palette.border}`,
             borderRadius: 2,
             alignItems: 'center',
@@ -111,7 +111,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
                 padding: 6,
                 border: `0.4pt solid ${palette.border}`,
                 borderRadius: 2,
-                backgroundColor: '#fffbf5',
+                backgroundColor: palette.card,
               }}
             >
               {FOUNDING_FIELDS.map(f =>
@@ -281,7 +281,7 @@ function TensionRow({ tension, idx }) {
         border: `0.4pt solid ${palette.border}`,
         borderLeft: `2pt solid ${palette[sevTone] || palette.warn}`,
         borderRadius: 2,
-        backgroundColor: '#fffbf5',
+        backgroundColor: palette.card,
       }}
       wrap={false}
     >
