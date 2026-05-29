@@ -98,7 +98,7 @@ function QuickTab() {
     <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, marginBottom:10 }}>
       First settlement in 60 seconds
     </div>
-    <Step n={1}>On the Create tab, pick a <strong>mode</strong> — <strong>Quick Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
+    <Step n={1}>On the Create tab, pick a <strong>mode</strong> — <strong>Basic Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
     <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Free mode can generate Thorp through Village; sign in for Town, City, and Metropolis.</Step>
     <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong> — forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
     <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft:32 }}>
@@ -361,7 +361,7 @@ function RefTab() {
   return <>
     <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>Navigation</div>
     {[
-      ['Create','The generation wizard. Two modes: Quick (minimal config) and Advanced (step-by-step with full control).'],
+      ['Create','The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).'],
       ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
       ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
       ['Compendium','Browse the built-in catalog of institutions, archetypes, stresses, and relationship systems. Switch to My Custom Content to create your own custom items.'],
