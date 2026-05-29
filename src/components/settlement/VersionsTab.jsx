@@ -22,6 +22,8 @@
 import { useState, useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
+import { EVENTS } from '../../lib/analytics.js';
+import LockedDestination from '../primitives/LockedDestination.jsx';
 import {
   GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R,
 } from '../theme.js';
@@ -149,50 +151,21 @@ export default function VersionsTab({ save }) {
   }
 
   if (!isPaid) {
-    // Locked-state preview: shows the timeline shape with a Cartographer
-    // upgrade CTA. The critique calls this out (X-7) — locked features
-    // should render destinations that sell themselves, not modal walls.
+    // Locked-state: the critique's X-7 says locked features should render
+    // destinations that sell themselves, not modal walls or quiet toasts.
+    // We now route this through the shared LockedDestination primitive so
+    // every locked surface speaks one voice (and gets the mount-once
+    // analytics + a live "See Cartographer" CTA that opens the purchase
+    // modal — the old hand-rolled button was inert).
     return (
-      <div style={{
-        padding: SP.lg, fontFamily: sans,
-        background: 'rgba(123,79,207,0.04)',
-        border: `1px solid ${VIOLET}30`,
-        borderRadius: R.md,
-      }}>
-        <div style={{
-          fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
-          textTransform: 'uppercase', color: VIOLET,
-        }}>
-          Cartographer · Version history
-        </div>
-        <div style={{
-          fontFamily: serif_, fontSize: FS.xl, fontWeight: 600,
-          color: INK, marginTop: 6,
-        }}>
-          Every change, on a timeline you can roll back.
-        </div>
-        <p style={{
-          margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY, lineHeight: 1.55,
-        }}>
-          Auto-snapshot on canonize, manual snapshot on demand. Side-by-side
-          diff for any two points. Revert creates a new snapshot from the
-          old state — never destructive. The campaign-running worldbuilder's
-          safety net.
-        </p>
-        <button
-          type="button"
-          style={{
-            marginTop: SP.md,
-            padding: `${SP.sm}px ${SP.md}px`,
-            background: VIOLET, color: '#fff', border: 'none',
-            borderRadius: R.sm,
-            fontFamily: sans, fontSize: FS.sm, fontWeight: 700,
-            cursor: 'pointer',
-          }}
-        >
-          See Cartographer
-        </button>
-      </div>
+      <LockedDestination
+        feature="Version history"
+        eyebrow="Cartographer · Version history"
+        headline="Every change, on a timeline you can roll back."
+        body="Auto-snapshot on canonize, manual snapshot on demand. Side-by-side diff for any two points. Revert creates a new snapshot from the old state — never destructive. The campaign-running worldbuilder's safety net."
+        ctaLabel="See Cartographer"
+        trackEvent={EVENTS.LOCKED_DESTINATION_SHOWN}
+      />
     );
   }
 
