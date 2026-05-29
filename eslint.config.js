@@ -105,13 +105,14 @@ export default [
       'no-case-declarations': 'warn',
 
       // ── P120 / V-1 V-2 V-5 — Visual budget guardrails ────────────────
-      // Three local rules surface design-system drift without blocking
-      // CI. They warn (not error) because the codebase has legitimate
-      // legacy violations to migrate organically. Promote to error once
-      // the count hits zero.
-      'visual-budget/no-raw-fontsize':   'warn',
-      'visual-budget/no-raw-color':      'warn',
-      'visual-budget/no-raw-button-copy': 'warn',
+      // Three local rules surface design-system drift. They started as
+      // warnings while the codebase carried legacy violations; the P120/
+      // P121 burn-down migrated every raw fontSize, color, and inline
+      // button verb to a token (zero rendered change). Count is now zero,
+      // so they are promoted to ERROR — new drift fails the gate.
+      'visual-budget/no-raw-fontsize':   'error',
+      'visual-budget/no-raw-color':      'error',
+      'visual-budget/no-raw-button-copy': 'error',
 
       // ── P146 — Funnel/analytics event-name contract ───────────────────
       // Event names passed to track()/Funnel.track() must be EVENTS.*

@@ -209,7 +209,7 @@ function ForgeCTA({ onNavigate }) {
           display: 'inline-flex', alignItems: 'center', gap: 6,
         }}
       >
-        <Sparkles size={14} /> Begin a settlement <ArrowRight size={14} />
+        <Sparkles size={14} /> {t('hero.cta')} <ArrowRight size={14} />
       </button>
     </div>
   );
@@ -549,6 +549,3 @@ export default function ComparePage({ view, onNavigate }) {
 export const COMPARE_VIEWS = Object.freeze([
   'compare', 'compare-chatgpt', 'compare-worldographer', 'compare-kanka',
 ]);
-
-// Silence unused-import in case t() isn't used inline.
-void t;

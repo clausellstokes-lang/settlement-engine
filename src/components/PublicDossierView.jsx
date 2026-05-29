@@ -21,6 +21,7 @@ import { ArrowRight, Eye } from 'lucide-react';
 import OutputContainer from './OutputContainer.jsx';
 import { TIER_LABELS } from './new/design.js';
 import { GOLD, INK, BORDER, sans, serif_, SP, R, FS, swatch } from './theme.js';
+import { t } from '../copy/index.js';
 
 const MUTED = '#6b5340';
 const BODY  = '#4A3B22';
@@ -102,7 +103,7 @@ export default function PublicDossierView({ dossier, onForge }) {
               whiteSpace: 'nowrap',
             }}
           >
-            Forge your own <ArrowRight size={14} />
+            {t('gallery.forgeYourOwn')} <ArrowRight size={14} />
           </button>
         )}
       </header>
