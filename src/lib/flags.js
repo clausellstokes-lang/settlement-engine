@@ -254,6 +254,10 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
   },
+  wizardStepFocus: {
+    default: true,
+    description: 'P144 / A-4: move focus to the new step heading when the advanced wizard advances/retreats, so keyboard + screen-reader users are oriented (announced + navigable) instead of stranded on the now-clicked or now-disabled nav button.',
+  },
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

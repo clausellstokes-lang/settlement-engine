@@ -344,6 +344,25 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
     }
   }, [settlement]);
 
+  // P144 / A-4 — Wizard step focus management. When the advanced wizard
+  // advances or retreats a step, keyboard + screen-reader users were left
+  // on the now-clicked (or now-disabled) nav button with no signal that
+  // the step changed. On each step *change* (not initial mount) we move
+  // focus to the new step's heading — made programmatically focusable via
+  // tabIndex=-1 and labelled "Step N of M: …" — so the change is both
+  // announced and navigable. Additive; gated on wizardStepFocus.
+  const stepHeadingRef = useRef(null);
+  const prevWizardStepRef = useRef(wizardStep);
+  const stepFocusEnabled = flag('wizardStepFocus');
+  useEffect(() => {
+    if (!stepFocusEnabled) { prevWizardStepRef.current = wizardStep; return; }
+    const advanced = wizardMode === 'advanced';
+    if (advanced && !settlement && prevWizardStepRef.current !== wizardStep) {
+      stepHeadingRef.current?.focus();
+    }
+    prevWizardStepRef.current = wizardStep;
+  }, [wizardStep, wizardMode, settlement, stepFocusEnabled]);
+
   const handleGenerate = useCallback(() => {
     try {
       generate();
@@ -637,8 +656,18 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
             {' — '}{currentStepDef.hint}
           </div>
 
-          {/* Current step content */}
-          <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden' }}>
+          {/* Current step content. P144 / A-4 — the step-change effect
+              moves focus to this labelled region so a step swap is both
+              announced (aria-label "Step N of M: …") and navigable for
+              keyboard users. outline:none stops the programmatic focus
+              from drawing a stray ring on this non-tabbable container. */}
+          <div
+            ref={stepHeadingRef}
+            tabIndex={-1}
+            role="group"
+            aria-label={`Step ${wizardStep + 1} of ${STEPS.length}: ${currentStepDef.label}`}
+            style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden', outline: 'none' }}
+          >
             <div style={{ padding: `${SP.lg - 2}px ${SP.lg}px`, background: CARD_HDR, borderBottom: `1px solid ${BORDER2}` }}>
               <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 600, color: INK }}>
                 {currentStepDef.label}
