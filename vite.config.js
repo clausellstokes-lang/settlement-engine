@@ -131,6 +131,15 @@ export default defineConfig({
     // DOM opt in with /** @vitest-environment jsdom */ at the top.
     // Component smoke tests in tests/ui/ use that pragma.
     environment: 'node',
+    // Raise the per-test timeout above Vitest's 5000ms default. The
+    // generation-heavy suites (e.g. tests/domain/distribution.test.js)
+    // push 40–80 settlements through the FULL pipeline per test; in
+    // isolation that runs in ~2s, but under 127-file parallel CPU
+    // contention it crosses 5s and fails as a *timeout* (not a logic
+    // failure — population output is deterministic). 20s gives ample
+    // headroom on loaded/CI machines while still failing genuinely hung
+    // tests in reasonable time.
+    testTimeout: 20000,
     // Exclude Playwright E2E specs — they live in e2e/ and require a
     // running dev server (handled by playwright.config.js#webServer).
     // Without this exclusion, vitest tries to load them and fails on
