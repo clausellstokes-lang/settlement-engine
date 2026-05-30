@@ -6,7 +6,6 @@
  * and teaches worldbuilding by example — not by tutorial-before-the-work.
  *
  * Self-gates on every condition the critique requires:
- *   - flag('firstDossierCallouts')
  *   - auth.tier !== 'anon'           (anons see the H-2 sample card instead)
  *   - savedSettlements.length === 0  (first-time user)
  *   - !localStorage['sf:dismissed_callouts'] (each callout dismissed independently)
@@ -26,7 +25,6 @@
 import { useEffect, useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import { useStore } from '../../store/index.js';
-import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
 
 const DISMISS_KEY_PREFIX = 'sf:dismissed_callouts:';
@@ -61,7 +59,6 @@ function markDismissed(key) {
 }
 
 export default function FirstDossierCallouts() {
-  const enabled = flag('firstDossierCallouts');
   const tier = useStore(s => s.auth.tier);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
   const settlement = useStore(s => s.settlement);
@@ -84,7 +81,6 @@ export default function FirstDossierCallouts() {
     });
   }, []);
 
-  if (!enabled) return null;
   if (tier === 'anon') return null;
   if (savedCount > 0) return null;  // they've been here before; this is the teach-once moment
   if (!settlement) return null;

@@ -31,7 +31,6 @@ import { useState } from 'react';
 import { FS, swatch } from './theme.js';
 import { Cog, Feather, ChevronRight, ChevronDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { useFlag } from '../lib/flags.js';
 import { metaForStep } from '../generators/steps/stepMetadata.js';
 import { tracesByStep } from '../domain/trace.js';
 import { simulationSpineRows } from '../domain/simulationSpine.js';
@@ -224,14 +223,12 @@ function SimulationSpine({ settlement }) {
 }
 
 export default function PipelineRail({ compact = false }) {
-  const enabled = useFlag('pipelineRail');
   const history = useStore(s => s.pipelineHistory);
   // Read the active settlement so trace lookups + the spine card have
   // their data source. Subscribes through useStore so a regeneration
   // refreshes the rail.
   const settlement = useStore(s => s.settlement);
 
-  if (!enabled) return null;
   if (!history || history.length === 0) return null;
 
   return (

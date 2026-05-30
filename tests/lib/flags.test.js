@@ -26,18 +26,24 @@ afterEach(() => {
 
 describe('flag() resolution', () => {
   it('returns the declared default when no overrides are set', () => {
-    // homepageAnonGen defaults to true
-    expect(flag('homepageAnonGen')).toBe(true);
-    // discordOauth defaults to false (off until OAuth review)
+    // With no override, flag() echoes each registry default exactly.
+    // (Looping the registry keeps this robust as flags come and go.)
+    for (const [name, decl] of Object.entries(FLAGS)) {
+      expect(flag(name)).toBe(decl.default);
+    }
+    // discordOauth defaults to false (off until OAuth review).
     expect(flag('discordOauth')).toBe(false);
   });
 
   it('localStorage override beats default', () => {
+    // An explicit true override wins over the false default…
     setFlagOverride('discordOauth', true);
     expect(flag('discordOauth')).toBe(true);
 
-    setFlagOverride('homepageAnonGen', false);
-    expect(flag('homepageAnonGen')).toBe(false);
+    // …and an explicit false override is honored, not treated as "unset"
+    // (guards the nullish-coalescing precedence in flag()).
+    setFlagOverride('discordOauth', false);
+    expect(flag('discordOauth')).toBe(false);
   });
 
   it('removing the override falls back to default', () => {
@@ -49,9 +55,9 @@ describe('flag() resolution', () => {
   });
 
   it('URL parameter beats localStorage', () => {
-    setFlagOverride('homepageAnonGen', false);
-    window.history.replaceState({}, '', '/?flag.homepageAnonGen=true');
-    expect(flag('homepageAnonGen')).toBe(true);
+    setFlagOverride('discordOauth', false);
+    window.history.replaceState({}, '', '/?flag.discordOauth=true');
+    expect(flag('discordOauth')).toBe(true);
   });
 
   it('URL parameter persists to localStorage as a side effect', () => {

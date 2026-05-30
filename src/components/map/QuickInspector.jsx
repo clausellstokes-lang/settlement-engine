@@ -17,7 +17,6 @@
  * card takes over the spot).
  *
  * Self-gated on:
- *   • flag('mapQuickInspector')
  *   • hoveredSettlementId is set
  *   • selectedSettlementId is NOT set (committed selection wins)
  *
@@ -28,7 +27,6 @@
 import { useMemo } from 'react';
 import { FS, VIOLET } from '../theme.js';
 import { useStore } from '../../store';
-import { flag } from '../../lib/flags.js';
 
 const GOLD = '#C9A24C';
 const INK = '#1B1408';
@@ -40,7 +38,6 @@ const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
 
 export default function QuickInspector() {
-  const enabled = flag('mapQuickInspector');
   const hoveredId = useStore(s => s.hoveredSettlementId);
   const selectedId = useStore(s => s.selectedSettlementId);
   const saves = useStore(s => s.savedSettlements);
@@ -50,7 +47,6 @@ export default function QuickInspector() {
     return (saves || []).find(s => s.id === hoveredId) || null;
   }, [hoveredId, saves]);
 
-  if (!enabled) return null;
   if (!hoveredId) return null;
   if (selectedId) return null;  // click-selection takes the slot
   if (!save) return null;

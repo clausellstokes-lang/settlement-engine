@@ -16,13 +16,11 @@
  * changes the single most important next step (save vs. make an account
  * vs. upgrade for more slots).
  *
- * Reads settlement + save/auth state from the store; self-gates on
- * `wizardNextSteps` (returns null when off → additive drop-in). The
- * pure step builder is exported so it can be unit-tested without a DOM.
+ * Reads settlement + save/auth state from the store. The pure step
+ * builder is exported so it can be unit-tested without a DOM.
  */
 
 import { useStore } from '../../store/index.js';
-import { flag } from '../../lib/flags.js';
 import {
   GOLD, GOLD_BG, INK, BODY, MUTED, BORDER, CARD_HDR, sans, serif_, FS, SP, R,
 } from '../theme.js';
@@ -96,7 +94,6 @@ export default function WizardNextSteps() {
   const canSave    = useStore(s => s.canSave());
   const authTier   = useStore(s => s.auth?.tier);
 
-  if (!flag('wizardNextSteps')) return null;
   if (!settlement) return null;
 
   const signedIn = !!authTier && authTier !== 'wanderer';

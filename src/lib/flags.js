@@ -8,7 +8,7 @@
  *
  * Resolution order (highest precedence first):
  *
- *   1. URL parameter  ?flag.homepageAnonGen=false   (persisted to localStorage)
+ *   1. URL parameter  ?flag.heroV2=true             (persisted to localStorage)
  *   2. localStorage   key `flag.<name>`             (set by QA / devs)
  *   3. Vite env var   VITE_FLAG_<NAME_UPPERCASE>    (CI / staging overrides)
  *   4. Hard-coded default in this file              (what ships in prod)
@@ -21,7 +21,7 @@
  *   import { flag, useFlag } from '@/lib/flags';
  *
  *   if (flag('discordOauth')) { ... }              // in plain JS
- *   const showRail = useFlag('pipelineRail');      // in React components
+ *   const showHero = useFlag('heroV2');            // in React components
  *
  * Adding a flag: add a new entry to FLAGS below with `default` +
  * `description`. The description is shown in the dev panel and read by
@@ -37,32 +37,6 @@ import { useSyncExternalStore } from 'react';
 // `default` is what runs in prod when no override is set.
 // `description` is shown in the dev flag panel.
 export const FLAGS = Object.freeze({
-  // ── Funnel / monetization ────────────────────────────────────────────────
-  homepageAnonGen: {
-    default: true,
-    description: 'Anonymous one-shot generator on the homepage (no signup required).',
-  },
-  singleDossier: {
-    default: true,
-    description: '$2.99 single-dossier microtransaction (one PDF, no account).',
-  },
-  founderTier: {
-    default: true,
-    description: 'Founder Lifetime tier ($99 one-time, 500-seat cap).',
-  },
-  aiRepriced: {
-    default: true,
-    description: 'AI costs use the new schedule (3/4/5) instead of the legacy (8/10/12).',
-  },
-  packsRepriced: {
-    default: true,
-    description: 'Credit packs use the new schedule (25/60/150) instead of legacy (5/15/40).',
-  },
-  tierRenames: {
-    default: true,
-    description: 'Tier names use Wanderer/Cartographer instead of Free/Premium.',
-  },
-
   // ── Auth ─────────────────────────────────────────────────────────────────
   discordOauth: {
     default: false,
@@ -73,53 +47,14 @@ export const FLAGS = Object.freeze({
     description: 'Google OAuth button (off until the Supabase provider is configured).',
   },
 
-  // ── Surface area ─────────────────────────────────────────────────────────
-  gallery: {
-    default: true,
-    description: 'Public dossier gallery route at /gallery (SEO surface).',
-  },
-  pipelineRail: {
-    default: true,
-    description: '"How this was simulated" rail beside the dossier output.',
-  },
-  onboardingCoach: {
-    default: true,
-    description: 'Onboarding coach overlay shown after first generation.',
-  },
-  checklist: {
-    default: true,
-    description: 'Onboarding checklist on the dashboard for new accounts.',
-  },
-
-  // ── Accessibility ────────────────────────────────────────────────────────
-  wcagBodyContrast: {
-    default: true,
-    description: 'Use ink-600 for body copy (passes WCAG 4.5:1) instead of muted-500.',
-  },
-
-  // ── P100–P127 critique implementation ──────────────────────────────────
-  // Each flag gates one critique-mandated change so it can be flipped
-  // dark → staff → GA independently. Defaults reflect the desired
-  // production state after the phase ships; flip to false to roll back.
-  pipelineReveal: {
-    default: true,
-    description: 'P100 / X-1: narrate pipeline steps during generation (visible wow).',
-  },
-  saveAsSignup: {
-    default: true,
-    description: 'P101 / X-3: active "Save this town — free account" button (replaces tombstone).',
-  },
+  // ── Dark-shipped / not-yet-enabled critique work ───────────────────────────
+  // Each flag below gates one critique-mandated change that is NOT yet
+  // promoted to GA — defaults are false; flip to true (locally, via env, or
+  // here) to light it up. Flags that soaked default-on everywhere have been
+  // removed and their on-path inlined, per the doctrine note above.
   dossierFiveTabs: {
     default: false,
     description: 'P102 / D-1: consolidate 14 dossier tabs into 5 thematic groups. DARK SHIP UNTIL VERIFIED.',
-  },
-  pricingMomentsFull: {
-    default: true,
-    description: 'P103 / X-2: full 8-moment pricingMoments wiring (save, cap, export, regen, etc.).',
-  },
-  welcomeCredit: {
-    default: true,
-    description: 'P104 / X-4: 1 free Narrate credit granted on signup, surfaced on first save.',
   },
   summaryMagazine: {
     default: false,
@@ -133,17 +68,9 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'P107 / CP-2: Workshop as top-level nav destination (currently nested in Compendium).',
   },
-  librarySearch: {
-    default: true,
-    description: 'P108 / E-6: campaign-aware library — search, sort, filter, phase chips.',
-  },
   versionHistory: {
     default: false,
     description: 'P109 / E-5: per-settlement version timeline + diff + revert. Cartographer-gated.',
-  },
-  mapRoutesMode: {
-    default: true,
-    description: 'P110 / M-4 + P132 / M-4 promote: Routes mode in WorldMap toolbar. When active, surfaces the RoutesToolbar (filter relationship types, supply-chain emphasis, network-stress alert) and promotes relationship/road/chain layers to primary content.',
   },
   mapDropPreview: {
     default: false,
@@ -152,14 +79,6 @@ export const FLAGS = Object.freeze({
   mapAutosave: {
     default: false,
     description: 'P112 / M-5: auto-save map state when a campaign is active.',
-  },
-  anonCapUnlock: {
-    default: true,
-    description: 'P113 / X-5: anon cap reframed as unlock (not block) + $2.99 side-door.',
-  },
-  inlineUpgrade: {
-    default: true,
-    description: 'P114 / X-7: inline upgrade cards at locked features (not modal walls).',
   },
   welcomeBack: {
     default: false,
@@ -173,9 +92,6 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'P117 / H-1: two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
   },
-  // firstDossierCallouts moved to the P128-P146 critique-completion block
-  // below (default:true, full description). Kept the original key + same
-  // semantics; just renumbered the phase tag in the description.
   onboardingDiet: {
     default: false,
     description: 'P118 / O-1: collapse the 4-system onboarding pile-up to Checklist + first-dossier callouts only. Suppresses OnboardingCoach + nudge toast when on.',
@@ -188,10 +104,6 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'P121 / D-4: lift narrative buttons into labeled strip below dossier title.',
   },
-  audiencePricingCopy: {
-    default: true,
-    description: 'P122 / X-10: audience-led pricing tile copy via useCopy().audience().',
-  },
   mobileSingleChrome: {
     default: false,
     description: 'P123 / A-2: drop mobile top header; auth chip joins bottom nav.',
@@ -200,75 +112,13 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'P126 / CP-1: "?" affordance on every config control opens Compendium snippet.',
   },
-
-  // ── P128–P146 critique completion ────────────────────────────────────
-  sampleProofCard: {
-    default: true,
-    description: 'P128 / H-2: sample dossier proof card below HomeHero for anonymous visitors (three audience callouts).',
-  },
   summaryMagazineV2: {
     default: false,
     description: 'P129 / D-2: Summary tab as two-column magazine spread. Replaces single-column layout.',
   },
-  firstDossierCallouts: {
-    default: true,
-    description: 'P130 / O-2: three teaching callouts (tension / supply / hook) on a first-time user\'s first generated dossier.',
-  },
-  inlineDossierEdits: {
-    default: true,
-    description: 'P131 / E-1: click-to-edit on dossier surfaces (settlement name, NPC names, faction labels) — commits flow through the pendingEdits queue + cascade preview.',
-  },
-  simulationDrawer: {
-    default: true,
-    description: 'P135 / D-5: move the Simulation tab content into a right-side slide-out drawer triggered by a "How this was simulated" link below the dossier header. Removes the tab from the strip.',
-  },
-  mapAutoSaveChip: {
-    default: true,
-    description: 'P136 / M-5: render a "Saved 2 min ago" / "Unsaved changes" pill in the WorldMap top toolbar so users see save state without pressing Ctrl-S anxiously.',
-  },
-  mapQuickInspector: {
-    default: true,
-    description: 'P136 / M-6: hover-peek card for placed settlements showing name + pressure + top hook. Distinct from the click-to-open PlacementDetailCard; uses hoveredSettlementId.',
-  },
-  aiPromptCopy: {
-    default: true,
-    description: 'P137 / HT-4: "Copy as AI prompt" button on the dossier — serialises the grounded prompt envelope for paste into ChatGPT/Claude. Reserved for signed-in users.',
-  },
-  accountFaq: {
-    default: true,
-    description: 'P138 / AC-4: inline FAQ accordion on the Account page (six common Qs: credit grant, cancel, refunds, founder, gallery privacy, AI-vs-sim).',
-  },
-  compendiumGlobalSearch: {
-    default: true,
-    description: 'P139 / CP-4: global type-ahead search above the Compendium tabs — type once, match every section (tiers, archetypes, routes, stresses, relationships), jump to the owning tab.',
-  },
-  compendiumReadability: {
-    default: true,
-    description: 'P139 / CP-3: constrain the Compendium catalog content to a readable max-width column (instead of letting prose sprawl edge-to-edge on wide standalone pages).',
-  },
-  elevationTokens: {
-    default: true,
-    description: 'P141 / V-4: adopt the 3-tier elevation token scale (ELEV[1..3]) on cards, popovers, and modals for a consistent ink-tinted depth language instead of bespoke per-component shadows.',
-  },
   tableView: {
     default: false,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
-  },
-  wizardStepFocus: {
-    default: true,
-    description: 'P144 / A-4: move focus to the new step heading when the advanced wizard advances/retreats, so keyboard + screen-reader users are oriented (announced + navigable) instead of stranded on the now-clicked or now-disabled nav button.',
-  },
-  wizardCloseout: {
-    default: true,
-    description: 'P145 / W-2: close-out summary card at the advanced wizard\'s final "Ready to Generate" step — recaps tier/culture/route/threat/magic, priority emphasis, and manual force/exclude constraint counts so the Generate click is a confirmation, not a leap.',
-  },
-  wizardNextSteps: {
-    default: true,
-    description: 'P134 / W-4: post-generate "what\'s next" guidance card under a freshly-generated dossier — a state-aware checklist (save / export / refine / map / generate another) that orients the user after the reveal instead of leaving the flow on a lone Save button.',
-  },
-  howToInversion: {
-    default: true,
-    description: 'P126 / HT-1: invert the How-To "Quick Start" tab so the actionable "First settlement in 60 seconds" steps lead, with the constraint-driven concept essay reframed as a "Why it works this way" section below — task-first for newcomers instead of opening on five paragraphs of philosophy.',
   },
 });
 
@@ -308,7 +158,7 @@ function fromLocalStorage(name) {
   }
 }
 
-// Read from Vite env. Convention: VITE_FLAG_HOMEPAGE_ANON_GEN.
+// Read from Vite env. Convention: VITE_FLAG_MOBILE_SINGLE_CHROME.
 function fromEnv(name) {
   if (typeof import.meta === 'undefined' || !import.meta.env) return undefined;
   const key = 'VITE_FLAG_' + name.replace(/([A-Z])/g, '_$1').toUpperCase();

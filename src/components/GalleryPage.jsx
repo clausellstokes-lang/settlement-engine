@@ -17,7 +17,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { ChevronLeft, Eye, Sparkles } from 'lucide-react';
-import { useFlag } from '../lib/flags.js';
 import { fetchPublicGallery, fetchPublicDossier, fetchCuratedGallery } from '../lib/gallery.js';
 import { t } from '../copy/index.js';
 import { TIER_LABELS } from './new/design.js';
@@ -108,8 +107,6 @@ function GalleryTile({ tile, onOpen }) {
 }
 
 export default function GalleryPage({ onNavigate }) {
-  const enabled = useFlag('gallery');
-
   // Listing state — split into curated (hand-picked exemplars rendered
   // above the community grid) and the community grid itself.
   const [curatedItems, setCuratedItems] = useState([]);
@@ -133,7 +130,6 @@ export default function GalleryPage({ onNavigate }) {
   // set) and the first page of the community grid. They share a single
   // loading flag because the page only paints once both have resolved.
   useEffect(() => {
-    if (!enabled) return;
     let cancelled = false;
     Promise.all([
       fetchCuratedGallery(),
@@ -149,19 +145,18 @@ export default function GalleryPage({ onNavigate }) {
       .catch(e => { if (!cancelled) setListError(e.message); })
       .finally(() => { if (!cancelled) setListLoading(false); });
     return () => { cancelled = true; };
-  }, [enabled]);
+  }, []);
 
   // Deep-link to a specific dossier via ?slug=. Reads once on mount
   // so a shared /?view=gallery&slug=abc URL opens the dossier instead
   // of the listing. Doesn't clear the URL — the user can copy/share it.
   useEffect(() => {
-    if (!enabled) return;
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
     const deepSlug = params.get('slug');
     if (deepSlug) openDossier(deepSlug);
      
-  }, [enabled]);
+  }, []);
 
   // Load more (pagination).
   async function loadMore() {
@@ -197,17 +192,6 @@ export default function GalleryPage({ onNavigate }) {
   }
 
   // ── Render ──────────────────────────────────────────────────────────────
-  if (!enabled) {
-    return (
-      <div style={{
-        maxWidth: 600, margin: '0 auto', padding: `${SP.xxl}px ${SP.lg}px`,
-        textAlign: 'center', color: BODY, fontFamily: sans,
-      }}>
-        <h1 style={{ fontFamily: serif_, color: INK }}>Gallery</h1>
-        <p>The public gallery is coming soon.</p>
-      </div>
-    );
-  }
 
   // Dossier view (single dossier).
   if (activeSlug) {

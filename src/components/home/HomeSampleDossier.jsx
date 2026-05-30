@@ -6,9 +6,8 @@
  * fixture from Pillar G so the entities the callouts reference are
  * stable across renders.
  *
- * Self-gates on flag('sampleProofCard') AND auth.tier === 'anon' AND
- * !settlement (don't render once the user has already generated;
- * they have the real thing).
+ * Self-gates on auth.tier === 'anon' AND !settlement (don't render once
+ * the user has already generated; they have the real thing).
  *
  * Visual mirrors the SampleProofCard mockup from the canvas:
  *   - Dark ink header with the settlement name + meta strip
@@ -22,7 +21,6 @@
 import { useEffect } from 'react';
 import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
-import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { SAMPLE_DOSSIER } from '../../data/sampleDossier.js';
@@ -46,13 +44,12 @@ const CALLOUTS = [
 ];
 
 export default function HomeSampleDossier() {
-  const enabled = flag('sampleProofCard');
   const tier = useStore(s => s.auth.tier);
   const settlement = useStore(s => s.settlement);
 
   // Fire once per session on first eligible render.
   useEffect(() => {
-    if (!enabled || tier !== 'anon' || settlement) return;
+    if (tier !== 'anon' || settlement) return;
     try {
       const key = 'sf:sample_dossier_viewed';
       if (typeof sessionStorage !== 'undefined' &&
@@ -61,9 +58,8 @@ export default function HomeSampleDossier() {
         Funnel.track(EVENTS.DOSSIER_PREVIEW_VIEWED, { source: 'home_sample' });
       }
     } catch { /* storage unavailable; non-fatal */ }
-  }, [enabled, tier, settlement]);
+  }, [tier, settlement]);
 
-  if (!enabled) return null;
   if (tier !== 'anon') return null;
   if (settlement) return null;
 

@@ -412,11 +412,9 @@ export default function WorldMap({ onNavigate } = {}) {
   // ── P112 / M-8 — Worldbuilder keymap ──────────────────────────────────
   // P (place) / T (terrain) / A (annotate) / R (routes) switch modes;
   // L toggles the layers panel; F fits the map; ⌘S saves; ⌘Z opens
-  // the (future) undo stack. Only enabled when `mapRoutesMode` is on
-  // so the new shortcuts don't surprise users who haven't opted in.
+  // the (future) undo stack.
   // Ignores events when typing in inputs/textareas.
   useEffect(() => {
-    if (!flag('mapRoutesMode')) return undefined;
     const onKey = (e) => {
       const tag = (e.target?.tagName || '').toUpperCase();
       if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
@@ -759,7 +757,6 @@ export default function WorldMap({ onNavigate } = {}) {
 // ── Subcomponents ────────────────────────────────────────────────────────
 
 function ModeSwitch({ mapMode, setMapMode }) {
-  const routesEnabled = flag('mapRoutesMode');
   // P110 / M-4 — Routes mode appended to the mode pill group. The
   // existing mode pill is already segmented; this is one more entry.
   // Click promotes relationship/road/supply-chain layers to primary
@@ -768,9 +765,7 @@ function ModeSwitch({ mapMode, setMapMode }) {
     { id: MAP_MODES.VIEW,     label: 'View',     Icon: Eye },
     { id: MAP_MODES.TERRAIN,  label: 'Terrain',  Icon: Mountain },
     { id: MAP_MODES.ANNOTATE, label: 'Annotate', Icon: PenTool },
-    ...(routesEnabled
-      ? [{ id: MAP_MODES.ROUTES, label: 'Routes', Icon: LinkIcon }]
-      : []),
+    { id: MAP_MODES.ROUTES,   label: 'Routes',   Icon: LinkIcon },
   ];
   const handleClick = (id) => {
     setMapMode(id);

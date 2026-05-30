@@ -8,7 +8,6 @@ import DeleteConfirmation from './DeleteConfirmation';
 import {getInstitutionalCatalog, getFullCatalogWithTierMeta} from '../generators/engine';
 import EntityPicker from './EntityPicker.jsx';
 import { buildRegistry } from '../lib/customRegistry.js';
-import { flag } from '../lib/flags.js';
 // P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
 // global-search index (CP-4) and these tabs render from one source of truth.
 import { ARCHETYPES, REL_TYPES } from '../domain/compendium/catalogData.js';
@@ -900,10 +899,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
   // P139 / CP-3 — readability: cap the reading column so prose doesn't
   // sprawl edge-to-edge on wide standalone pages. Embedded panels are
   // already narrow, so the cap only bites on the standalone route.
-  const readable = flag('compendiumReadability');
-  const contentColumn = readable
-    ? { maxWidth: 760, marginLeft: 'auto', marginRight: 'auto' }
-    : undefined;
+  const contentColumn = { maxWidth: 760, marginLeft: 'auto', marginRight: 'auto' };
 
   return (
     <div style={{ borderRadius:standalone?0:8, overflow:'hidden' }}>

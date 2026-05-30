@@ -13,7 +13,6 @@
  * onboarding.coach so tone changes happen there, not here.
  *
  * Visibility rules:
- *   - Flag `onboardingCoach` must be on.
  *   - User has at least one settlement on screen.
  *   - User hasn't dismissed (or completed) this coach before — tracked
  *     via localStorage `sf.postGenCoachDismissedAt`.
@@ -25,7 +24,6 @@
 import { useEffect, useState } from 'react';
 import { Sparkles, X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { useFlag } from '../lib/flags.js';
 import { t } from '../copy/index.js';
 import { GOLD, INK, BORDER, sans, serif_, SP, R, FS, swatch, GOLD_DEEP } from './theme.js';
 
@@ -51,7 +49,6 @@ const STEPS = [
 ];
 
 export default function PostGenCoach() {
-  const enabled = useFlag('onboardingCoach');
   const settlement = useStore(s => s.settlement);
 
   // Skip immediately for users who've already seen / dismissed it.
@@ -68,7 +65,6 @@ export default function PostGenCoach() {
     if (dismissedThisSession) writeDismissed();
   }, [dismissedThisSession]);
 
-  if (!enabled) return null;
   if (alreadyDismissed) return null;
   if (dismissedThisSession) return null;
   if (!settlement) return null;

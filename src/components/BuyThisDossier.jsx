@@ -13,9 +13,6 @@
  *   touch" visitor, the $2.99 microtransaction is the lowest-friction
  *   conversion — pay once, get the dossier, optionally upgrade later.
  *
- * Flags:
- *   - `singleDossier` (default on). Killswitch for the surface.
- *
  * Failure modes:
  *   - Supabase not configured (local dev) → button shows but a click
  *     surfaces an inline error rather than 500-ing through Stripe.
@@ -26,7 +23,6 @@
 import { useState } from 'react';
 import { Download, AlertCircle } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { useFlag } from '../lib/flags.js';
 import { startCheckout } from '../lib/stripe.js';
 import { stashPendingDossier } from '../lib/pendingDossier.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
@@ -36,14 +32,12 @@ import { GOLD, sans, SP, R, FS, swatch, RED } from './theme.js';
 const MUTED = '#6b5340';
 
 export default function BuyThisDossier({ settlement }) {
-  const enabled  = useFlag('singleDossier');
   const authTier = useStore(s => s.auth.tier);
   const isElevated = useStore(s => s.isElevated());
 
   const [busy, setBusy]   = useState(false);
   const [error, setError] = useState(null);
 
-  if (!enabled) return null;
   if (authTier !== 'anon') return null;     // Signed-in users get the subscription CTA elsewhere
   if (isElevated) return null;              // Devs / admins shouldn't see purchase prompts
   if (!settlement) return null;

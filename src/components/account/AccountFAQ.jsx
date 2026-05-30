@@ -12,14 +12,13 @@
  * gallery privacy, AI vs simulator framing). All copy lives in
  * `t('accountFaq.qs')` so the copy team can edit without a code change.
  *
- * Self-gated on flag('accountFaq'). No analytics — this is a passive
- * read surface; we don't track per-question opens.
+ * No analytics — this is a passive read surface; we don't track
+ * per-question opens.
  */
 
 import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { Plus, Minus } from 'lucide-react';
-import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
 
 const GOLD = '#8C6F32';
@@ -42,10 +41,7 @@ const Q_KEYS = [
 ];
 
 export default function AccountFAQ() {
-  const enabled = flag('accountFaq');
   const [open, setOpen] = useState(null);
-
-  if (!enabled) return null;
 
   return (
     <div style={{

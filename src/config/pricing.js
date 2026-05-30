@@ -24,14 +24,12 @@
  * metadata (credits per pack, AI cost per feature) and the display
  * strings; Stripe owns the dollar amounts.
  *
- * Flags:
- *   `aiRepriced`    — switches AI cost schedule (8/10/12 → 3/4/5)
- *   `packsRepriced` — switches pack catalog (5/15/40 → 25/60/150)
- *   `founderTier`   — exposes the Founder Lifetime tier
- *   `singleDossier` — exposes the $2.99 one-shot
+ * The repriced schedules, Founder tier, and single-dossier one-shot all
+ * shipped unconditionally — their roll-out flags were removed once soaked.
+ * The legacy pack + AI-cost maps are retained below: not as a rollback
+ * path, but so historical SKUs still resolve (findPackByKey) and the
+ * server contract test can pin both schedules independently.
  */
-
-import { flag } from '../lib/flags.js';
 
 // ── Credit pack catalogs ──────────────────────────────────────────────────
 // Each pack has a stable key (= Stripe product id stub used by the
@@ -137,21 +135,15 @@ export const SINGLE_DOSSIER = Object.freeze({
   requiresAccount: false,                 // can be claimed without signup
 });
 
-// ── Active-set selectors (flag-driven) ────────────────────────────────────
+// ── Active-set selectors ───────────────────────────────────────────────────
 // Components and slices call these — they never reach for the raw maps.
-// When we kill the flags after a successful rollout, the selectors stay
-// (returning the new map unconditionally) and the legacy map can be
-// deleted in one place.
+// The roll-out flags were removed once soaked; the selectors now return
+// the shipped (repriced) set unconditionally. Legacy maps are kept only
+// for historical SKU resolution + the server contract test.
 
-// Tier display-name maps. The `legacy` map matches what users saw
-// before the rename ("Free", "Premium") and lets us flip back via the
-// `tierRenames` flag without redeploying. The `redesign` map matches
-// the UI Redesign PDF.
-const TIER_LABELS_LEGACY = Object.freeze({
-  free:    'Free',
-  premium: 'Premium',
-  founder: 'Founder',
-});
+// Tier display-name map. Matches the UI Redesign PDF. Accepts both the
+// legacy stored keys ('free' / 'premium') and the redesigned keys so the
+// helper resolves regardless of how a row was written.
 const TIER_LABELS_REDESIGN = Object.freeze({
   free:         'Wanderer',
   wanderer:     'Wanderer',
@@ -164,24 +156,20 @@ const TIER_LABELS_REDESIGN = Object.freeze({
  * Pretty display name for a stored tier value. Accepts both the legacy
  * stored values ('free' / 'premium') and the redesigned names so the
  * helper works regardless of how the row got written.
- *
- * Honors `tierRenames` flag — when off, returns legacy names ("Free",
- * "Premium") so we can roll back the rename without a redeploy.
  */
 export function getTierDisplayName(rawTier) {
   if (!rawTier) return '';
-  const lookup = flag('tierRenames') ? TIER_LABELS_REDESIGN : TIER_LABELS_LEGACY;
-  return lookup[String(rawTier).toLowerCase()] ?? String(rawTier);
+  return TIER_LABELS_REDESIGN[String(rawTier).toLowerCase()] ?? String(rawTier);
 }
 
-/** Active credit pack catalog. Honors `packsRepriced` flag. */
+/** Active credit pack catalog (the repriced set). */
 export function getActivePacks() {
-  return flag('packsRepriced') ? NEW_PACKS : LEGACY_PACKS;
+  return NEW_PACKS;
 }
 
-/** Active AI cost schedule. Honors `aiRepriced` flag. */
+/** Active AI cost schedule (the repriced set). */
 export function getActiveAiCosts() {
-  return flag('aiRepriced') ? NEW_AI_COSTS : LEGACY_AI_COSTS;
+  return NEW_AI_COSTS;
 }
 
 /** Cost in credits for a specific AI feature. */
@@ -189,15 +177,14 @@ export function getAiCost(feature) {
   return getActiveAiCosts()[feature] ?? 0;
 }
 
-/** Which tiers should appear in pricing UI. Honors `founderTier` flag. */
+/** Which tiers should appear in pricing UI. */
 export function getVisibleTiers() {
-  const base = [TIERS.wanderer, TIERS.cartographer];
-  return flag('founderTier') ? [...base, TIERS.founder] : base;
+  return [TIERS.wanderer, TIERS.cartographer, TIERS.founder];
 }
 
 /** Whether the single-dossier microtransaction is offered. */
 export function singleDossierEnabled() {
-  return flag('singleDossier');
+  return true;
 }
 
 // ── Stripe product → catalog reverse lookup ───────────────────────────────

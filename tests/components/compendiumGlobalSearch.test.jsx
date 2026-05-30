@@ -3,21 +3,17 @@
  * compendiumGlobalSearch.test.jsx — contract over P139 / CP-4 UI.
  *
  * Pins:
- *   • Hidden when the flag is off (pure additive drop-in).
- *   • Renders the search box when enabled.
+ *   • Renders the search box.
  *   • Typing surfaces cross-tab results from the real search index.
  *   • Clicking a result fires onSelect(entry) + COMPENDIUM_SEARCH analytics.
  *   • Empty state shown when nothing matches.
  *
- * flags + analytics are mocked; the pure search index runs for real so
- * the test doubles as an integration check of the index wiring.
+ * Analytics is mocked; the pure search index runs for real so the test
+ * doubles as an integration check of the index wiring.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
-
-const flagMock = vi.fn(() => true);
-vi.mock('../../src/lib/flags.js', () => ({ flag: (...a) => flagMock(...a) }));
 
 const trackSpy = vi.fn();
 vi.mock('../../src/lib/analytics.js', () => ({
@@ -31,18 +27,11 @@ const LABEL = 'Search the whole Compendium';
 
 describe('CompendiumGlobalSearch', () => {
   beforeEach(() => {
-    flagMock.mockReturnValue(true);
     trackSpy.mockClear();
   });
   afterEach(() => cleanup());
 
-  it('renders nothing when the flag is off', () => {
-    flagMock.mockReturnValue(false);
-    const { container } = render(<CompendiumGlobalSearch onSelect={() => {}} />);
-    expect(container.firstChild).toBeNull();
-  });
-
-  it('renders the search input when enabled', () => {
+  it('renders the search input', () => {
     render(<CompendiumGlobalSearch onSelect={() => {}} />);
     expect(screen.getByLabelText(LABEL)).toBeTruthy();
   });

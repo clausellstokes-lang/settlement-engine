@@ -12,7 +12,6 @@ import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swat
 import { useStore } from '../store/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
-import { flag as _pe_flag } from '../lib/flags.js';
 import SettlementDetail from './SettlementDetail';
 import DeleteConfirmation from './DeleteConfirmation';
 import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../data/sampleSettlements.js';
@@ -681,7 +680,6 @@ export default function SettlementsPanel({ onNavigate }) {
   const [librarySort, setLibrarySort] = useState('recent');
   const [libraryFilters, setLibraryFilters] = useState({});
   const filteredSaves = useMemo(() => {
-    if (!_pe_flag('librarySearch')) return saves;
     return _applyLibraryFilters(saves, {
       query: libraryQuery,
       sort: librarySort,
@@ -706,8 +704,8 @@ export default function SettlementsPanel({ onNavigate }) {
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
 
-      {/* P108 / E-6 — Library toolbar (search + sort + filter chips). Flag-gated. */}
-      {_pe_flag('librarySearch') && saves.length > 0 && (
+      {/* P108 / E-6 — Library toolbar (search + sort + filter chips). */}
+      {saves.length > 0 && (
         <LibraryToolbar
           query={libraryQuery}
           setQuery={setLibraryQuery}

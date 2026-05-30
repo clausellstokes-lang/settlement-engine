@@ -199,7 +199,6 @@ function StepIndicator({ currentStep, totalSteps }) {
 function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const saveAsSignupEnabled = flag('saveAsSignup');
 
   const handleSave = async () => {
     if (!settlement || saving) return;
@@ -228,21 +227,6 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
   // intent registry fires savesService.save with the same payload —
   // the user lands back to a saved settlement.
   if (!canSave) {
-    if (!saveAsSignupEnabled) {
-      // Legacy disabled tombstone — kept only as the flag-off fallback.
-      return (
-        <button disabled style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-          padding: isMobile ? '13px 24px' : '10px 24px',
-          background: swatch['#8A8A8A'], color: swatch.white, border: 'none', borderRadius: R.md,
-          cursor: 'not-allowed', fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-          opacity: 0.5,
-        }}>
-          <Save size={15} /> Sign in to save
-        </button>
-      );
-    }
-
     const handleSignupSave = () => {
       // Lazy-load to avoid pulling authIntents into the wizard bundle
       // until the user actually clicks the button.
@@ -327,12 +311,11 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
   const clearSettlement = useStore(s => s.clearSettlement);
 
   // P100 / X-1 — Pipeline reveal state. When `pipelineRevealActive` is
-  // true and the `pipelineReveal` flag is on, the dossier is hidden
-  // behind the reveal overlay. Once the overlay's playback completes
-  // it calls dismissPipelineReveal and the dossier appears.
+  // true, the dossier is hidden behind the reveal overlay. Once the
+  // overlay's playback completes it calls dismissPipelineReveal and the
+  // dossier appears.
   const pipelineRevealActive = useStore(s => s.pipelineRevealActive);
   const dismissPipelineReveal = useStore(s => s.dismissPipelineReveal);
-  const pipelineRevealEnabled = flag('pipelineReveal');
 
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
@@ -355,15 +338,13 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
   // announced and navigable. Additive; gated on wizardStepFocus.
   const stepHeadingRef = useRef(null);
   const prevWizardStepRef = useRef(wizardStep);
-  const stepFocusEnabled = flag('wizardStepFocus');
   useEffect(() => {
-    if (!stepFocusEnabled) { prevWizardStepRef.current = wizardStep; return; }
     const advanced = wizardMode === 'advanced';
     if (advanced && !settlement && prevWizardStepRef.current !== wizardStep) {
       stepHeadingRef.current?.focus();
     }
     prevWizardStepRef.current = wizardStep;
-  }, [wizardStep, wizardMode, settlement, stepFocusEnabled]);
+  }, [wizardStep, wizardMode, settlement]);
 
   const handleGenerate = useCallback(() => {
     try {
@@ -423,8 +404,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
   //   - Signed-in: HomeHero serves as "Welcome back" instant
   //     generation (full size ladder). Below the hero we expose the
   //     Basic/Advanced mode picker as the "want more control?" path.
-  const heroEnabled = flag('homepageAnonGen');
-  const showHomeHero = !wizardMode && !settlement && heroEnabled;
+  const showHomeHero = !wizardMode && !settlement;
   const showModePicker = !wizardMode && !settlement && authTier !== 'anon';
 
   if (!wizardMode && !settlement) {
@@ -772,7 +752,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
           a settlement was just generated, and the slice flagged the reveal
           as active. Dismisses itself by calling dismissPipelineReveal()
           when its playback completes. */}
-      {pipelineRevealEnabled && pipelineRevealActive && settlement && (
+      {pipelineRevealActive && settlement && (
         <Suspense fallback={null}>
           <PipelineReveal onComplete={dismissPipelineReveal} />
         </Suspense>
@@ -781,7 +761,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
       {/* Output + export buttons. Hidden behind the reveal overlay during
           playback so the user's first dossier view is uninterrupted by
           the overlay dismissing on top of it. */}
-      {settlement && showOutput && !(pipelineRevealEnabled && pipelineRevealActive) && (
+      {settlement && showOutput && !pipelineRevealActive && (
         <>
           {/* ── Back navigation toolbar ──────────────────────────── */}
           <div style={{

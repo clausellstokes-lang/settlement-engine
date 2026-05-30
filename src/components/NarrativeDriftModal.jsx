@@ -27,7 +27,6 @@ import { Sparkles, RotateCcw, X, Zap, GitBranch } from 'lucide-react';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { t } from '../copy/index.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, ELEV, swatch } from './theme.js';
-import { flag } from '../lib/flags.js';
 
 const PURPLE = '#6a2a9a';
 const PURPLE_BG = 'rgba(90,42,138,0.08)';
@@ -69,7 +68,7 @@ export default function NarrativeDriftModal({
         onClick={e => e.stopPropagation()}
         style={{
           background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
-          boxShadow: flag('elevationTokens') ? ELEV[3] : '0 8px 40px rgba(0,0,0,0.5)',
+          boxShadow: ELEV[3],
           maxWidth: 480, width: '100%',
           overflow: 'hidden',
         }}

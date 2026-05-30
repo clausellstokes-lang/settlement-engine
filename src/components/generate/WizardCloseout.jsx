@@ -9,13 +9,11 @@
  * and a count of manual force/exclude constraints — so the Generate
  * click reads as a confirmation, not a leap into the unknown.
  *
- * Reads config + toggles from the store; self-gates on `wizardCloseout`
- * (returns null when off → additive drop-in). The pure summary builder
+ * Reads config + toggles from the store. The pure summary builder
  * is exported so it can be unit-tested without a DOM.
  */
 
 import { useStore } from '../../store/index.js';
-import { flag } from '../../lib/flags.js';
 import {
   GOLD, GOLD_BG, INK, BODY, MUTED, BORDER, CARD_HDR, sans, serif_, FS, SP, R,
 } from '../theme.js';
@@ -97,8 +95,6 @@ export default function WizardCloseout() {
   const institutionToggles  = useStore(s => s.institutionToggles);
   const servicesToggles     = useStore(s => s.servicesToggles);
   const goodsToggles        = useStore(s => s.goodsToggles);
-
-  if (!flag('wizardCloseout')) return null;
 
   const summary = buildCloseoutSummary(config, {
     institutionToggles, servicesToggles, goodsToggles,

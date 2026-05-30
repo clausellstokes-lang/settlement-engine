@@ -28,7 +28,6 @@ import {
 } from '../config/pricing.js';
 import { t, tx } from '../copy/index.js';
 import { useCopy } from '../hooks/useCopy.js';
-import { flag } from '../lib/flags.js';
 import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, BODY, swatch } from './theme.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 
@@ -221,11 +220,8 @@ export default function PricingPage({ onNavigate }) {
 
   // P122 / X-10 — Audience-led pricing pitch. The same tier gets a
   // different lead line depending on the current reader's archetype.
-  // Keyed off the `audiencePricingCopy` flag so a rollback is one toggle.
   const copy = useCopy();
-  const audiencePricingEnabled = flag('audiencePricingCopy');
   const audienceLineFor = (tierKey) => {
-    if (!audiencePricingEnabled) return null;
     // tier.key in pricing config is one of: wanderer / cartographer / founder
     const prefix = `pricingPitch.${tierKey}.line`;
     return copy.audience(prefix);

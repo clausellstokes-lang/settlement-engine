@@ -134,7 +134,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // P131 / E-1 — inline-edit pipe. queueEdit goes into the
   // PendingChangesBar's drawer where the cascade preview lives.
   const queueEdit = useStore(s => s.queueEdit);
-  const inlineEditsEnabled = flag('inlineDossierEdits');
 
   const rawSettlement = propSettlement || storeSettlement;
   // AI narrative is now gated behind a saveId (AI-1): the ai_data has a
@@ -229,13 +228,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     ))
   ));
 
-  // P135 / D-5 — When the simulation drawer is on, drop the
-  // Simulation entry from the strip; the drawer trigger below the
-  // header is the new entry point.
-  const simulationDrawerOn = flag('simulationDrawer');
-  const baseTabs = simulationDrawerOn
-    ? TABS.filter(t => t.id !== 'simulation')
-    : TABS;
+  // P135 / D-5 — The simulation drawer trigger (below the header) is the
+  // entry point, so drop the Simulation entry from the tab strip.
+  const baseTabs = TABS.filter(t => t.id !== 'simulation');
   const allTabs = [...baseTabs,
     ...(hasDMCompass ? [{ id:'dm_compass', label:'DM Compass', Icon: Compass }] : []),
     ...(rawSettlement.neighborRelationship || rawSettlement.neighbourRelationship || rawSettlement.neighbourNetwork?.length
@@ -451,7 +446,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       React.createElement('div', { style: { padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' } },
         React.createElement('div', { style: { flex: 1, minWidth: 0 } },
           React.createElement('div', { style: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 } },
-            (inlineEditsEnabled && !readOnly && queueEdit) ? React.createElement(EditableInline, {
+            (!readOnly && queueEdit) ? React.createElement(EditableInline, {
               value: settlement.name || '',
               ariaLabel: 'Edit settlement name',
               textStyle: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 },
@@ -525,10 +520,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           isPublic: liveSaveEntry?.is_public,
           publicSlug: liveSaveEntry?.public_slug,
         }),
-        // P135 / D-5 — "How this was simulated" trigger. Self-gated by
-        // the simulationDrawer flag. Lives next to BuyThisDossier so the
-        // user finds it as a "more info" affordance, not a chrome surface.
-        simulationDrawerOn && React.createElement(Suspense, { fallback: null },
+        // P135 / D-5 — "How this was simulated" trigger. Lives next to
+        // BuyThisDossier so the user finds it as a "more info" affordance,
+        // not a chrome surface.
+        React.createElement(Suspense, { fallback: null },
           React.createElement(SimulationDrawer)
         ),
         // P137 / HT-4 — "Copy as AI prompt" power-user export. Self-

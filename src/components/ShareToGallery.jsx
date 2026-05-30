@@ -7,7 +7,6 @@
  * plus a copyable /gallery/{slug} link.
  *
  * Visibility:
- *   - Hidden entirely behind the `gallery` flag.
  *   - Hidden for anonymous users (they have no saved row to publish).
  *   - Hidden in readOnly mode (PublicDossierView, etc.).
  *
@@ -18,7 +17,6 @@
 import { useState } from 'react';
 import { Globe, Lock, Copy, Check, AlertCircle } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { useFlag } from '../lib/flags.js';
 import { publishSettlement, unpublishSettlement } from '../lib/gallery.js';
 import { GOLD, BORDER, sans, SP, R, FS, GREEN, RED } from './theme.js';
 
@@ -31,7 +29,6 @@ function publicUrlFor(slug) {
 }
 
 export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicSlug: slugProp }) {
-  const enabled = useFlag('gallery');
   const auth = useStore(s => s.auth);
   const updateSavedSettlement = useStore(s => s.updateSavedSettlement);
 
@@ -41,7 +38,6 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
   const [error, setError]       = useState(null);
   const [copied, setCopied]     = useState(false);
 
-  if (!enabled) return null;
   if (!auth?.user) return null;
   if (!saveId) {
     return (

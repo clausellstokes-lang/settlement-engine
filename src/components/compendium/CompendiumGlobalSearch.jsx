@@ -6,9 +6,6 @@
  * the owning tab and scrolls to the section. Distinct from the per-tab
  * "Search…" box, which only filters the tab you're already on.
  *
- * Self-gates on flag('compendiumGlobalSearch') — renders nothing when
- * off, so it's a pure additive drop-in over the existing per-tab search.
- *
  * Keyboard: ↑/↓ move the highlight, Enter selects, Esc closes. Mouse:
  * hover highlights, click selects, click-outside closes.
  *
@@ -19,7 +16,6 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { Search } from 'lucide-react';
 import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS } from '../theme.js';
-import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { searchCompendium } from '../../domain/compendium/searchIndex.js';
 
@@ -38,7 +34,6 @@ const CAT_COLOR = Object.freeze({
 });
 
 export default function CompendiumGlobalSearch({ onSelect }) {
-  const enabled = flag('compendiumGlobalSearch');
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
@@ -59,8 +54,6 @@ export default function CompendiumGlobalSearch({ onSelect }) {
     document.addEventListener('pointerdown', onPointerDown, true);
     return () => document.removeEventListener('pointerdown', onPointerDown, true);
   }, [open]);
-
-  if (!enabled) return null;
 
   const choose = (entry) => {
     if (!entry) return;

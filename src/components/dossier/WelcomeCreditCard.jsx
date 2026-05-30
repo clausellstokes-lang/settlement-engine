@@ -17,13 +17,10 @@
  * Once the user clicks "Narrate this town" the existing requestNarrative
  * flow handles the credit spend through the spend_credits RPC. The
  * card auto-dismisses on first narrate.
- *
- * Flag: `welcomeCredit` (default on after migration 015 deploys).
  */
 
 import { useEffect, useState } from 'react';
 import { useStore } from '../../store/index.js';
-import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED } from '../theme.js';
 
@@ -52,7 +49,6 @@ function markDismissed() {
 }
 
 export default function WelcomeCreditCard() {
-  const enabled = flag('welcomeCredit');
   const tier = useStore(s => s.auth.tier);
   const userId = useStore(s => s.auth.user?.id);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
@@ -68,7 +64,6 @@ export default function WelcomeCreditCard() {
   // fires for signed-in users on their first saved dossier — the
   // narrowest possible audience.
   useEffect(() => {
-    if (!enabled) return;
     if (tier === 'anon' || !userId) return;
     if (savedCount !== 1) return;
     if (dismissed) return;
@@ -98,9 +93,8 @@ export default function WelcomeCreditCard() {
     })();
 
     return () => { cancelled = true; };
-  }, [enabled, tier, userId, savedCount, dismissed, creditBalance]);
+  }, [tier, userId, savedCount, dismissed, creditBalance]);
 
-  if (!enabled) return null;
   if (dismissed) return null;
   if (!welcomeUnspent) return null;
   if (!settlement) return null;

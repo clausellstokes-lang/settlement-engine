@@ -11,9 +11,8 @@
  * by `applyLibraryFilters(saves, state)` (exported below for shared use
  * + tested in isolation).
  *
- * Self-gates in the parent via flag('librarySearch'). When the flag is
- * off, the toolbar isn't rendered and the saves list shows in legacy
- * order.
+ * Rendered by the parent (SettlementsPanel) above the saves list
+ * whenever the user has at least one save.
  */
 
 import { sans, FS, SP, R, swatch } from '../theme.js';

@@ -17,15 +17,14 @@
  * cheap fingerprint check (Object.keys lengths + JSON length) is good
  * enough; the user rarely cares about precise diff.
  *
- * Self-gated on `mapAutoSaveChip` flag + activeCampaignId. When there
- * is no active campaign, the chip renders nothing — the save target
- * is undefined, so a save-status indicator would be misleading.
+ * Self-gated on activeCampaignId. When there is no active campaign, the
+ * chip renders nothing — the save target is undefined, so a save-status
+ * indicator would be misleading.
  */
 
 import { useEffect, useMemo, useState } from 'react';
 import { FS } from '../theme.js';
 import { useStore } from '../../store';
-import { flag } from '../../lib/flags.js';
 
 const GOLD = '#C9A24C';
 const AMBER = '#D08020';
@@ -59,7 +58,6 @@ function fingerprint(s) {
 }
 
 export default function AutoSaveChip({ saving = false }) {
-  const enabled = flag('mapAutoSaveChip');
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const campaign = useStore(s =>
     activeCampaignId ? (s.campaigns || []).find(c => c.id === activeCampaignId) : null,
@@ -69,17 +67,16 @@ export default function AutoSaveChip({ saving = false }) {
   // Tick once a minute so the relative timestamp stays current.
   const [, setTick] = useState(0);
   useEffect(() => {
-    if (!enabled || !campaign?.mapState?.savedAt) return undefined;
+    if (!campaign?.mapState?.savedAt) return undefined;
     const id = setInterval(() => setTick(n => n + 1), 30_000);
     return () => clearInterval(id);
-  }, [enabled, campaign?.mapState?.savedAt]);
+  }, [campaign?.mapState?.savedAt]);
 
   const dirty = useMemo(() => {
     if (!campaign?.mapState) return false;
     return fingerprint(liveMapState) !== fingerprint(campaign.mapState);
   }, [liveMapState, campaign?.mapState]);
 
-  if (!enabled) return null;
   if (!activeCampaignId || !campaign) return null;
 
   let dotColor = GOLD;

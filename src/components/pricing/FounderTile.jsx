@@ -13,7 +13,6 @@
  * Self-gates on:
  *   - flag('founderRecognition') (default off; flip when audience hook is stable)
  *   - useReaderAudience() === 'worldbuilder'
- *   - flag('founderTier') (must be enabled at the catalog level)
  *   - founderSeatsRemaining > 0 (live RPC; null tolerated)
  *
  * Click → opens checkout for `founder_lifetime` (same path the
@@ -37,7 +36,6 @@ export default function FounderTile() {
   const audience = useReaderAudience();
   const tier = useStore(s => s.auth.tier);
   const recognitionEnabled = flag('founderRecognition');
-  const founderEnabled = flag('founderTier');
   const [seatsRemaining, setSeatsRemaining] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -59,7 +57,6 @@ export default function FounderTile() {
   // captures them cleanly.
   const eligible =
     recognitionEnabled &&
-    founderEnabled &&
     audience === 'worldbuilder' &&
     tier !== 'premium' &&
     !(typeof seatsRemaining === 'number' && seatsRemaining <= 0);

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch } from './theme.js';
 import { BookOpen, Zap, Star, Cpu, List } from 'lucide-react';
-import { flag } from '../lib/flags.js';
 
 
 const TABS = [
@@ -55,12 +54,10 @@ function Row({ label, children, lw=120 }) {
 
 function QuickTab() {
   // P126 / HT-1 — "How-To inversion". Newcomers open this tab to learn what
-  // to *do*, not to read the design philosophy first. When `howToInversion`
-  // is on we lead with the 60-second action steps and demote the
-  // constraint-driven concept essay to a "Why it works this way" coda below.
-  // Flag off → legacy order (essay first). Pure presentational reorder; the
-  // copy in both fragments is byte-for-byte identical across paths.
-  const inverted = flag('howToInversion');
+  // to *do*, not to read the design philosophy first: we lead with the
+  // 60-second action steps and demote the constraint-driven concept essay
+  // to a "Why it works this way" coda below. Pure presentational order; the
+  // copy in both fragments is byte-for-byte identical.
 
   const conceptIntro = (
     <div style={{ padding:'12px 14px', background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
@@ -124,17 +121,12 @@ function QuickTab() {
     </>
   );
 
-  if (inverted) return <>
+  return <>
     {quickSteps}
     <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, margin:'18px 0 10px' }}>
       Why it works this way
     </div>
     {conceptIntro}
-  </>;
-
-  return <>
-    {conceptIntro}
-    {quickSteps}
   </>;
 }
 

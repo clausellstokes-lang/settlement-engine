@@ -7,7 +7,6 @@
  *     labelled region ("Step N of M: …") so keyboard + screen-reader
  *     users are oriented instead of stranded on the nav button.
  *   • Initial mount does NOT steal focus (no surprise focus theft).
- *   • Flag off → focus never moves.
  *
  * The four step-body panels are heavy store-coupled components; they're
  * stubbed so this test isolates the wizard's own focus logic.
@@ -60,7 +59,9 @@ import { useStore } from '../../src/store/index.js';
 
 describe('GenerateWizard — A-4 step focus', () => {
   beforeEach(() => {
-    flagMock.mockImplementation((name) => name === 'wizardStepFocus');
+    // wizardChromeDiet is the only flag GenerateWizard reads now; keep it at
+    // its default-off so these focus tests see the standard chrome.
+    flagMock.mockReturnValue(false);
     useStore.__set({ wizardStep: 0, wizardMode: 'advanced', settlement: null });
   });
   afterEach(() => cleanup());
@@ -82,13 +83,5 @@ describe('GenerateWizard — A-4 step focus', () => {
 
     const region = screen.getByRole('group', { name: /Step 2 of 4: Institutions/ });
     expect(document.activeElement).toBe(region);
-  });
-
-  it('does not move focus when the wizardStepFocus flag is off', () => {
-    flagMock.mockImplementation(() => false);
-    const { rerender } = render(<GenerateWizard isMobile={false} />);
-    useStore.__set({ wizardStep: 1 });
-    rerender(<GenerateWizard isMobile={false} />);
-    expect(document.activeElement).toBe(document.body);
   });
 });

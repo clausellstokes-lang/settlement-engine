@@ -22,7 +22,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Sparkles, LogIn, ArrowRight } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
@@ -262,9 +262,8 @@ export default function HomeHero({ onSignIn }) {
           // Lead with what signin gets you, not with what you've used up.
           // Side-door $2.99 link below catches intermediates who just need
           // Friday's town.
-          flag('anonCapUnlock') ? (
-            <div style={{
-              padding: SP.lg,
+          <div style={{
+            padding: SP.lg,
               background: `linear-gradient(135deg, #FBF5E6, #F4EAD0)`,
               border: `1px solid ${GOLD}`,
               borderRadius: R.lg,
@@ -311,32 +310,6 @@ export default function HomeHero({ onSignIn }) {
                 </a>
               </div>
             </div>
-          ) : (
-            <div style={{
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.sm,
-            }}>
-              <p style={{
-                margin: 0, fontSize: FS.sm, color: BODY, maxWidth: 380,
-              }}>
-                You’ve used your {DEFAULT_DAILY_CAP} free generations today.
-                Sign in to keep going — accounts unlock all sizes, saves, and exports.
-              </p>
-              <button
-                type="button"
-                onClick={onSignIn}
-                style={{
-                  padding: `${SP.md}px ${SP.xl}px`,
-                  background: GOLD, color: swatch.white,
-                  border: 'none', borderRadius: R.button,
-                  fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-                  cursor: 'pointer',
-                  display: 'inline-flex', alignItems: 'center', gap: 6,
-                }}
-              >
-                <LogIn size={16} /> Sign in to continue
-              </button>
-            </div>
-          )
         ) : (
           <>
             <button

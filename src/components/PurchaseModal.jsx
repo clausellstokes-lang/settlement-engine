@@ -17,7 +17,6 @@ import { isConfigured } from '../lib/supabase.js';
 import { getTierDisplayName } from '../config/pricing.js';
 import { t } from '../copy/index.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, ELEV, swatch } from './theme.js';
-import { flag } from '../lib/flags.js';
 
 export default function PurchaseModal({ onClose }) {
   const creditBalance = useStore(s => s.creditBalance);
@@ -62,7 +61,7 @@ export default function PurchaseModal({ onClose }) {
         style={{
           background: CARD, borderRadius: R.xl,
           border: `1px solid ${BORDER}`,
-          boxShadow: flag('elevationTokens') ? ELEV[3] : '0 8px 40px rgba(0,0,0,0.3)',
+          boxShadow: ELEV[3],
           width: '90%', maxWidth: 520, overflow: 'hidden',
         }}
       >

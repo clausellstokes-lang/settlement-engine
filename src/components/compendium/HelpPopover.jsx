@@ -124,7 +124,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             color: PARCH_100,
             border: '1px solid #8C6F32',
             borderRadius: 6,
-            boxShadow: flag('elevationTokens') ? ELEV[3] : '0 12px 32px rgba(0,0,0,0.40)',
+            boxShadow: ELEV[3],
             fontSize: FS.xs,
             lineHeight: 1.55,
             fontFamily: '"Nunito", system-ui, sans-serif',

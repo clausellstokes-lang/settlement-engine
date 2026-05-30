@@ -3,16 +3,13 @@
  * wizardNextSteps.test.jsx — P134 / W-4 component contract.
  *
  * The pure builder is exercised in wizardNextSteps.test.js (node). This
- * file pins the presentational shell: the flag gate, the no-settlement
- * gate, store wiring, and that the derived guide surfaces in the DOM
- * (headline + step labels, with state-aware save framing).
+ * file pins the presentational shell: the no-settlement gate, store
+ * wiring, and that the derived guide surfaces in the DOM (headline +
+ * step labels, with state-aware save framing).
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
-
-const flagMock = vi.fn(() => true);
-vi.mock('../../src/lib/flags.js', () => ({ flag: (...a) => flagMock(...a) }));
 
 vi.mock('../../src/store/index.js', () => {
   const data = {
@@ -31,7 +28,6 @@ import { useStore } from '../../src/store/index.js';
 
 describe('WizardNextSteps — W-4 post-generate guide', () => {
   beforeEach(() => {
-    flagMock.mockImplementation((name) => name === 'wizardNextSteps');
     useStore.__set({
       settlement: { tier: 'Village' },
       canSave: () => false,
@@ -39,12 +35,6 @@ describe('WizardNextSteps — W-4 post-generate guide', () => {
     });
   });
   afterEach(() => cleanup());
-
-  it('renders nothing when the flag is off', () => {
-    flagMock.mockImplementation(() => false);
-    const { container } = render(<WizardNextSteps />);
-    expect(container.firstChild).toBeNull();
-  });
 
   it('renders nothing when there is no settlement', () => {
     useStore.__set({ settlement: null });

@@ -8,8 +8,8 @@
  * into the same grounded prompt envelope our edge function uses,
  * then drops it on the clipboard with a confirmation toast.
  *
- * Self-gated on flag('aiPromptCopy'). Hidden in readOnly (public
- * dossier viewer). Fires EVENTS.AI_PROMPT_COPIED on success.
+ * Hidden in readOnly (public dossier viewer). Fires
+ * EVENTS.AI_PROMPT_COPIED on success.
  *
  * The prompt body is built from the existing domain helpers
  * (buildAiGroundingPayload + assemblePromptSections) so the
@@ -21,7 +21,6 @@ import { useState } from 'react';
 import { FS } from '../theme.js';
 import { Clipboard, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import {
   buildAiGroundingPayload,
@@ -44,12 +43,10 @@ function buildPromptText(settlement) {
 }
 
 export default function AIPromptButton({ settlement }) {
-  const enabled = flag('aiPromptCopy');
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(null);
   const tier = useStore(s => s.auth.tier);
 
-  if (!enabled) return null;
   if (!settlement) return null;
   // Reserved for signed-in users — anon users would hit a wall trying
   // to feed this into a paid AI, and the export reveals the structured

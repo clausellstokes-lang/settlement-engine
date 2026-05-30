@@ -19,7 +19,6 @@ import { auth as authService } from '../lib/auth.js';
 import { startCheckout } from '../lib/stripe.js';
 import { isConfigured, supabase } from '../lib/supabase.js';
 import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
-import { flag } from '../lib/flags.js';
 import { lazy as _lazy, Suspense as _Suspense } from 'react';
 // P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
@@ -248,7 +247,7 @@ export default function AccountPage({ onNavigateAdmin }) {
                 {isElevated ? t('account.fullAccess') : getTierDisplayName(auth.tier)}
               </div>
             </div>
-            {flag('inlineUpgrade') && !isElevated && auth.tier !== 'premium' && (
+            {!isElevated && auth.tier !== 'premium' && (
               <div style={{
                 padding: `${SP.sm}px ${SP.md}px`,
                 background: 'rgba(124,58,237,0.06)',
@@ -276,7 +275,7 @@ export default function AccountPage({ onNavigateAdmin }) {
                 {isElevated ? '\u221E' : creditBalance}
               </div>
             </div>
-            {flag('inlineUpgrade') && !isElevated && creditBalance === 0 && (
+            {!isElevated && creditBalance === 0 && (
               <div style={{
                 padding: `${SP.sm}px ${SP.md}px`,
                 background: 'rgba(124,58,237,0.10)',
@@ -305,7 +304,7 @@ export default function AccountPage({ onNavigateAdmin }) {
                 {savedSettlements.length} / {maxSaves === Infinity ? '\u221E' : maxSaves}
               </div>
             </div>
-            {flag('inlineUpgrade') && !isElevated && maxSaves !== Infinity && savedSettlements.length >= maxSaves - 1 && (
+            {!isElevated && maxSaves !== Infinity && savedSettlements.length >= maxSaves - 1 && (
               <div style={{
                 padding: `${SP.sm}px ${SP.md}px`,
                 background: 'rgba(208,128,32,0.10)',

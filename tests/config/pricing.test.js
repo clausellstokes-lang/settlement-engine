@@ -22,7 +22,6 @@ import {
   findPackByKey,
   _internal,
 } from '../../src/config/pricing.js';
-import { setFlagOverride } from '../../src/lib/flags.js';
 
 beforeEach(() => {
   window.localStorage.clear();
@@ -48,17 +47,11 @@ describe('AI cost server contract', () => {
 });
 
 describe('getActiveAiCosts() / getAiCost()', () => {
-  it('returns new costs by default (aiRepriced flag is on)', () => {
+  it('returns the repriced cost schedule', () => {
     expect(getActiveAiCosts()).toEqual(CONTRACT_AI_COSTS_NEW);
     expect(getAiCost('narrative')).toBe(3);
     expect(getAiCost('dailyLife')).toBe(4);
     expect(getAiCost('progression')).toBe(5);
-  });
-
-  it('returns legacy costs when aiRepriced is off', () => {
-    setFlagOverride('aiRepriced', false);
-    expect(getActiveAiCosts()).toEqual(CONTRACT_AI_COSTS_LEGACY);
-    expect(getAiCost('narrative')).toBe(8);
   });
 
   it('returns 0 for unknown features', () => {
@@ -67,15 +60,9 @@ describe('getActiveAiCosts() / getAiCost()', () => {
 });
 
 describe('getActivePacks()', () => {
-  it('returns the new (repriced) packs by default', () => {
+  it('returns the new (repriced) packs', () => {
     const packs = getActivePacks();
     expect(Object.keys(packs)).toEqual(['credits_25', 'credits_60', 'credits_150']);
-  });
-
-  it('returns the legacy packs when packsRepriced is off', () => {
-    setFlagOverride('packsRepriced', false);
-    const packs = getActivePacks();
-    expect(Object.keys(packs)).toEqual(['credits_5', 'credits_15', 'credits_40']);
   });
 
   it('every pack has the fields the UI needs', () => {
@@ -142,15 +129,9 @@ describe('TIERS', () => {
 });
 
 describe('getVisibleTiers()', () => {
-  it('shows all three tiers when founderTier is on (default)', () => {
+  it('shows all three tiers (wanderer / cartographer / founder)', () => {
     const tiers = getVisibleTiers();
     expect(tiers.map(t => t.key)).toEqual(['wanderer', 'cartographer', 'founder']);
-  });
-
-  it('hides founder when founderTier is off', () => {
-    setFlagOverride('founderTier', false);
-    const tiers = getVisibleTiers();
-    expect(tiers.map(t => t.key)).toEqual(['wanderer', 'cartographer']);
   });
 });
 
@@ -162,9 +143,7 @@ describe('SINGLE_DOSSIER', () => {
     expect(SINGLE_DOSSIER.deliverables).toContain('pdf');
   });
 
-  it('singleDossierEnabled() honors the flag', () => {
+  it('singleDossierEnabled() is true (the one-shot ships)', () => {
     expect(singleDossierEnabled()).toBe(true);
-    setFlagOverride('singleDossier', false);
-    expect(singleDossierEnabled()).toBe(false);
   });
 });
