@@ -63,15 +63,17 @@ npx supabase db push
 npx supabase db diff
 ```
 
-**The last migration in tree (`009_profile_security.sql`)** is the
-Tier 0 security baseline (column-locked RLS + admin RPCs + audit
-table). It MUST be applied before any premium-tier feature is safe.
-Test it ran:
+**The last migration in tree (`016_version_history.sql`)** adds the
+`version_history` jsonb column to `public.settlements`, giving the
+version-timeline feature (VersionsTab.jsx) a durable, owner-only home
+for per-settlement edit snapshots that survive page reload + device
+switch. It MUST be applied before the version history feature can
+persist anything. Test it ran:
 
 ```bash
-# Should return all six SECURITY DEFINER functions.
+# Should return one row: version_history | jsonb
 npx supabase db remote sql --query \
-  "select proname from pg_proc where proname in ('update_display_name','spend_credits','refund_credits','admin_grant_credits','admin_set_role','_audit_action');"
+  "select column_name, data_type from information_schema.columns where table_schema = 'public' and table_name = 'settlements' and column_name = 'version_history';"
 ```
 
 ## Edge function — manual
@@ -94,6 +96,7 @@ npx supabase functions deploy stripe-webhook
 npx supabase functions deploy create-checkout
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy admin-actions
+npx supabase functions deploy send-email
 ```
 
 Set the required env vars in the Supabase dashboard → Project →
@@ -101,6 +104,8 @@ Functions → Secrets:
 
 ```
 ANTHROPIC_API_KEY            # for generate-narrative
+RESEND_API_KEY               # for send-email (Resend provider key)
+RESEND_FROM_EMAIL            # for send-email (verified sender address)
 STRIPE_SECRET_KEY            # for stripe-webhook + create-checkout
 STRIPE_WEBHOOK_SECRET        # for stripe-webhook signature verification
 STRIPE_PRICE_CREDITS_25      # per the PRICE_MAP in create-checkout
