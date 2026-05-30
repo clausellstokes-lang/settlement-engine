@@ -5,11 +5,13 @@ and Editing & Map critiques. Format: one row per phase, status,
 notes. Updated as phases ship.
 
 **Status: the full P100–P146 + Pillars A–H architecture has shipped.**
-Every critique finding is now landed — most behind a feature flag (default
-on; two default off pending design sign-off — `summaryMagazineV2`,
-`tableView`), a few as flag-free codemods / tooling (P140, P146). Several
-early phases shipped a substrate that a later wave then completed; those
-rows note the follow-on. See the wave sections below.
+Every critique finding is now landed. The default-on roll-out flags have
+since been burned down (Phase 123): each on-path was inlined and the flag
+entry + legacy branches deleted, with zero behavior change. What remains in
+`lib/flags.js` are the default-off flags awaiting sign-off (incl.
+`summaryMagazineV2`, `tableView`) plus the auth OAuth gates. Several early
+phases shipped a substrate that a later wave then completed; those rows note
+the follow-on. See the wave sections below.
 
 ## Cross-cutting infrastructure pillars
 
@@ -185,11 +187,12 @@ the two genuine closeouts (P134/W-4 and P126/HT-1) — has shipped. No
 numbered phases remain.
 
 What's left is operational, not architectural:
-- **Flag burn-down** — promote default-on flags to permanent (delete the
-  legacy branches) once each surface has soaked. Two flags stay off
-  pending design sign-off: `summaryMagazineV2`, `tableView`.
-- **Visual-budget debt** — the 1,650 `visual-budget` warnings are tracked
-  design-system cleanup (P120); promote those rules from warn to error
-  once the count reaches zero.
+- **Flag burn-down — done (Phase 123).** All soaked default-on flags were
+  promoted to permanent: on-paths inlined, flag entries + legacy branches
+  deleted, zero behavior change. The default-off flags remain, two pending
+  design sign-off: `summaryMagazineV2`, `tableView`.
+- **Visual-budget debt — done (Phase 120–122).** The `visual-budget`
+  warnings were burned to zero and the three rules (`no-raw-fontsize`,
+  `no-raw-color`, `no-raw-button-copy`) promoted from warn to error.
 - **Revert-snapshot soak** — P133's version-revert mutation is wired but
   warrants real-world soak before `versionHistory` defaults on.
