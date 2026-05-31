@@ -290,7 +290,7 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
 
 // ── Main wizard component ────────────────────────────────────────────────────
 
-export default function GenerateWizard({ isMobile, onSignIn }) {
+export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Store state
   const settlement    = useStore(s => s.settlement);
   const config        = useStore(s => s.config);
@@ -421,7 +421,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 860, margin: '0 auto', padding: `${SP.xl}px 0` }}>
         {showHomeHero && (
           <>
-            <HomeHero onSignIn={onSignIn} />
+            <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
             <Suspense fallback={null}>
               <HomeSampleDossier />
             </Suspense>

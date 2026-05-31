@@ -81,7 +81,7 @@ export const FLAGS = Object.freeze({
     description: 'P112 / M-5: auto-save map state when a campaign is active.',
   },
   welcomeBack: {
-    default: false,
+    default: true,
     description: 'P115 / X-9: welcome-back hero variant on return visits + post-session check-in.',
   },
   founderRecognition: {

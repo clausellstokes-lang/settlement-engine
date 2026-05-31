@@ -403,7 +403,7 @@ export default function App() {
               this spotlight-overlay variant when on. */}
           {view === 'generate' && authTier !== 'anon' && !_readFlag('onboardingDiet') && <OnboardingCoach />}
           <Suspense fallback={<Loading />}>
-            {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} />}
+            {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} />}
             {view === 'map'         && <WorldMap onNavigate={setView} />}
             {view === 'compendium'  && <CompendiumPanel standalone />}

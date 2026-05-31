@@ -72,12 +72,16 @@ function SizeButton({ value, label, hint, active, onClick, compact = false }) {
   );
 }
 
-export default function HomeHero({ onSignIn }) {
+export default function HomeHero({ onSignIn, onNavigate }) {
   const generate = useStore(s => s.generateSettlement);
   const updateConfig = useStore(s => s.updateConfig);
   const setWizardMode = useStore(s => s.setWizardMode);
   const authTier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
+  // P115 / X-9 — the WelcomeBackCard "Open" CTA selects a saved
+  // settlement; SettlementsPanel reads selectedSettlementId on mount and
+  // opens the matching save in detail view.
+  const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
 
   // Variant: signed-in users see instant generation across all sizes;
   // anonymous users see the marketing hero with the funnel framing.
@@ -133,8 +137,11 @@ export default function HomeHero({ onSignIn }) {
           without a saved settlement. */}
       {!isAnon && (
         <WelcomeBackCard
-          onOpen={() => onSignIn /* placeholder — settlements nav handled by parent */}
-          onForge={() => {/* fall through to existing CTA */}}
+          onOpen={(s) => {
+            if (s?.id && setSelectedSettlementId) setSelectedSettlementId(s.id);
+            if (typeof onNavigate === 'function') onNavigate('settlements');
+          }}
+          onForge={handleBegin}
         />
       )}
     <section
