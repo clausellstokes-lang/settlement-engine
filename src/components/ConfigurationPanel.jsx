@@ -4,6 +4,7 @@ import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {getCompatibleResources} from '../generators/terrainHelpers';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
+import HelpPopover from './compendium/HelpPopover.jsx';
 
 const PARCHMENT='#f7f0e4';
 
@@ -43,7 +44,14 @@ const PRIORITIES=[
   {key:'priorityCriminal',label:'Criminal',accent:'#4a1a4a'},
 ];
 
-function Lbl({children}){return<div style={{fontSize:FS.xs,fontWeight:700,color:SECOND,letterSpacing:'0.05em',textTransform:'uppercase',marginBottom:4}}>{children}</div>;}
+function Lbl({children,topic}){
+  const base={fontSize:FS.xs,fontWeight:700,color:SECOND,letterSpacing:'0.05em',textTransform:'uppercase',marginBottom:4};
+  // P126 / CP-1: optional inline Compendium help. HelpPopover self-gates
+  // on flag('compendiumInlineHelp') and renders null when off, so the
+  // label is byte-identical until the flag is flipped on.
+  if(topic)return<div style={{...base,display:'flex',alignItems:'center',gap:5}}><span>{children}</span><HelpPopover topic={topic}/></div>;
+  return<div style={base}>{children}</div>;
+}
 function Sel({value,onChange,children}){return<select value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
 function Collapsible({title,status,children}){
   const[open,setOpen]=useState(false);
@@ -307,7 +315,7 @@ export default function ConfigurationPanel(){
         {config.customName&&<div style={{fontSize:FS.xs,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
       </div>
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
-        <div><Lbl>Population</Lbl>
+        <div><Lbl topic="tier">Population</Lbl>
           <Sel value={blockTownPlus && isTownPlus ? 'village' : config.settType}
             onChange={e=>{
               const v = e.target.value;
@@ -329,7 +337,7 @@ export default function ConfigurationPanel(){
              Town+ requires a trade route or Magic slider above 0
           </div>}
         </div>
-        <div><Lbl>Trade Route</Lbl>
+        <div><Lbl topic="trade-route">Trade Route</Lbl>
           <Sel
             value={blockIsolated && isIsolated ? 'road' : config.tradeRouteAccess}
             onChange={e=>{
@@ -366,7 +374,7 @@ export default function ConfigurationPanel(){
           </div>
         )}
 
-        <div><Lbl>Terrain</Lbl>
+        <div><Lbl topic="terrain">Terrain</Lbl>
           <Sel value={config.terrainOverride||'auto'} onChange={e=>updateConfig({terrainOverride:e.target.value})}>
             <option value="auto">️ Auto (from route)</option>
             <option value="plains">Plains / Farmland</option>
@@ -381,7 +389,7 @@ export default function ConfigurationPanel(){
       </div>
       {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
-        <div><Lbl>Culture</Lbl>
+        <div><Lbl topic="culture">Culture</Lbl>
           <Sel value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
             <option value="random_culture"> Random</option>
             <option value="germanic">Germanic</option>
@@ -398,7 +406,7 @@ export default function ConfigurationPanel(){
           </Sel>
         </div>
         <div>
-          <Lbl>Regional Threat</Lbl>
+          <Lbl topic="monster-threat">Regional Threat</Lbl>
           <Sel value={config.monsterThreat||'random_threat'} onChange={e=>updateConfig({monsterThreat:e.target.value})}>
             <option value="random_threat"> Random</option>
             <option value="heartland">️ Safe Heartland</option>
@@ -407,7 +415,7 @@ export default function ConfigurationPanel(){
           </Sel>
         </div>
         <div>
-          <Lbl>Magic in the World?</Lbl>
+          <Lbl topic="magic-level">Magic in the World?</Lbl>
           <Sel value={config.magicExists===false?'no':'yes'}
             onChange={e=>{
               const noMagicNow = e.target.value==='no';
