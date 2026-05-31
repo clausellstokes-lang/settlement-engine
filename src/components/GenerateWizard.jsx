@@ -25,6 +25,7 @@ import WizardNextSteps from './generate/WizardNextSteps.jsx';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
+import { anonAtCap } from '../lib/anonGenCounter.js';
 import HomeHero from './HomeHero.jsx';
 // P128 / H-2 — Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
@@ -347,6 +348,14 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
   }, [wizardStep, wizardMode, settlement]);
 
   const handleGenerate = useCallback(() => {
+    // Tier 7.2 — anonymous daily cap. Regeneration counts against the same
+    // 3/day allowance as the first generation (enforced in the store), so
+    // when an anon is already at cap, route to the sign-in/unlock flow
+    // rather than dead-clicking — generateSettlement would no-op anyway.
+    if (authTier === 'anon' && anonAtCap()) {
+      if (typeof onSignIn === 'function') onSignIn();
+      return;
+    }
     try {
       generate();
       clearLoadedFromSave();
@@ -355,7 +364,7 @@ export default function GenerateWizard({ isMobile, onSignIn }) {
       console.error('GENERATE ERROR:', e);
       alert('Error: ' + e.message);
     }
-  }, [generate, clearLoadedFromSave]);
+  }, [generate, clearLoadedFromSave, authTier, onSignIn]);
 
   /** Navigate back to the wizard, keeping the settlement in memory */
   const handleBack = useCallback(() => {

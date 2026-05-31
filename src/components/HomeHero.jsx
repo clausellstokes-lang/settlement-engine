@@ -26,7 +26,7 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
-  anonAtCap, anonGensRemaining, incrementAnonGen, DEFAULT_DAILY_CAP,
+  anonAtCap, anonGensRemaining, DEFAULT_DAILY_CAP,
 } from '../lib/anonGenCounter.js';
 import { Funnel } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
@@ -111,7 +111,10 @@ export default function HomeHero({ onSignIn }) {
       updateConfig({ settType: pickedSize });
       generate();
       if (isAnon) {
-        incrementAnonGen();
+        // Counting the generation against the daily cap is owned by
+        // generateSettlement now (so wizard "Regenerate Draft" and the
+        // sample fork count too, not just this first-gen button). Here
+        // we only fire the anon-attribution analytics event.
         // Tier 8.8 — anon attribution. Permanent flag once set; drives
         // signup_after_anon and paid_after_anon reporting downstream.
         Funnel.anonGenerationCompleted({ tier: pickedSize });

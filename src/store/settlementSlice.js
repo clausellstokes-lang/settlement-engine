@@ -68,6 +68,11 @@ import {
   isEditablePath,
   countSettlementEdits as domainCountSettlementEdits,
 } from '../domain/userEdits.js';
+// Anonymous daily generation cap (localStorage soft cap). Enforced here
+// so EVERY generation path — hero first-gen, wizard "Regenerate Draft",
+// Workshop, sample fork — counts against the same 3/day allowance. The
+// cap used to live only in HomeHero, which let regeneration bypass it.
+import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
 
 // ── Per-entity-kind nested array resolver ──────────────────────────────
 //
@@ -417,6 +422,20 @@ export const createSettlementSlice = (set, get) => ({
       }
     }
 
+    // Anonymous daily generation cap (Tier 7.2). Every full-settlement
+    // generation funnels through this action, so this is the single point
+    // of enforcement. A *regeneration* (a settlement is already on screen)
+    // now counts the same as a first generation — previously rerolls were
+    // free, which let an anon mint unlimited towns past the 3/day cap.
+    // Captured before the engine runs so we can both block at-cap and pick
+    // the right bucket (reroll vs. full) after a successful run.
+    const isAnon = state.auth?.tier === 'anon';
+    const hadSettlement = !!state.settlement;
+    if (isAnon && anonAtCap()) {
+      console.warn('[settlementSlice] anonymous daily generation cap reached.');
+      return null;
+    }
+
     const fullConfig = {
       ...config,
       _institutionToggles: institutionToggles,
@@ -511,6 +530,14 @@ export const createSettlementSlice = (set, get) => ({
         state.phase = 'draft';
         state.eventLog = [];
       });
+    }
+
+    // Count this anonymous generation against the daily cap. A regeneration
+    // (a settlement was already on screen) spends a reroll; the first
+    // generation of the day spends the full allowance. Only on success.
+    if (isAnon && result) {
+      if (hadSettlement) incrementAnonReroll();
+      else incrementAnonFull();
     }
 
     return result;
