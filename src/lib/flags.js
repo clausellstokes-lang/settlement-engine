@@ -56,10 +56,6 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P102 / D-1: consolidate 14 dossier tabs into 5 thematic groups. PROMOTED default-on; flag retained as soak killswitch.',
   },
-  summaryMagazine: {
-    default: false,
-    description: 'P105 / D-2: Summary tab as magazine spread (left pitch / right Tonight at Table).',
-  },
   inlineEdit: {
     default: true,
     description: 'P106 / E-1: click-to-edit names + pills + paragraphs in the dossier. PROMOTED default-on; flag retained as soak killswitch.',
