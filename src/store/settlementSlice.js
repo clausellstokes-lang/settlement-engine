@@ -884,9 +884,8 @@ export const createSettlementSlice = (set, get) => ({
     state.canonizedAt = null;
   }),
 
-  /** Stamp lastExportAt — called by export flows. Drives both the
-   *  ProvenanceBlock display and the OnboardingChecklist's "exported"
-   *  step auto-tick. */
+  /** Stamp lastExportAt — called by export flows. Drives the
+   *  ProvenanceBlock display. */
   markExported: () => {
     // Compute "is first export?" before we stamp it. Drives first_pdf_export.
     const wasFirstExport = !get().lastExportAt;
@@ -1095,12 +1094,4 @@ export const createSettlementSlice = (set, get) => ({
       state.systemState = null;
     }
   }),
-
-  // ── Onboarding checklist ──────────────────────────────────────────────────
-  // The checklist auto-ticks itself by deriving completion from current
-  // store state (see copy/onboardingSteps.js). This pair of fields just
-  // tracks user-driven hide/show.
-  onboardingChecklistDismissed: false,
-  dismissOnboardingChecklist: () => set(state => { state.onboardingChecklistDismissed = true; }),
-  showOnboardingChecklist:    () => set(state => { state.onboardingChecklistDismissed = false; }),
 });

@@ -42,7 +42,6 @@ const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSu
 const Workshop = lazy(() => import('./components/Workshop.jsx'));
 
 import OnboardingCoach from './components/OnboardingCoach.jsx';
-import OnboardingChecklist from './components/onboarding/OnboardingChecklist.jsx';
 import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
 import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
@@ -398,23 +397,11 @@ export default function App() {
 
         {/* ── Main content ────────────────────────────────────── */}
         <main style={{ flex: 1, overflowY: 'auto', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
-          {/* P118 / O-1 — Onboarding diet. When the `onboardingDiet`
-              flag is on, suppress the legacy OnboardingCoach (spotlight
-              overlay — flagged 2017 SaaS tic by the critique). The
-              OnboardingChecklist + first-dossier callouts (P118-pending)
-              become the only onboarding surfaces. Flag-off path keeps
-              the legacy behavior intact. */}
-          {view === 'generate' && !_readFlag('onboardingDiet') && <OnboardingCoach />}
-          {/* Audit's onboarding fix: a 4-step task checklist that auto-
-              ticks itself as the user completes lifecycle milestones
-              (generate → save → canonize → event → export). Mounts on
-              the two views where users actually live; auto-hides when
-              all steps are complete or the user dismisses it. */}
-          {(view === 'generate' || view === 'settlements') && (
-            <div style={{ marginBottom: SP.md }}>
-              <OnboardingChecklist />
-            </div>
-          )}
+          {/* Onboarding coach (first-run, generate view). Gated to
+              signed-in accounts — anonymous visitors don't get the
+              coaching banner. The `onboardingDiet` flag still suppresses
+              this spotlight-overlay variant when on. */}
+          {view === 'generate' && authTier !== 'anon' && !_readFlag('onboardingDiet') && <OnboardingCoach />}
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} />}

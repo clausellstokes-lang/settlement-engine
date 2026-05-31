@@ -4,7 +4,7 @@ import { FS, ELEV } from '../theme.js';
  *
  * The current codebase invents a card border + padding + background
  * combination per component. This unifies them so the campaign-state
- * UI (NextActionRail, ProvenanceBlock, OnboardingChecklist, etc.)
+ * UI (NextActionRail, ProvenanceBlock, etc.)
  * shares one visual language.
  *
  * Variants are bounded to keep the look consistent. Add a new variant
