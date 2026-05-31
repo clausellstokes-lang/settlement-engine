@@ -61,8 +61,8 @@ export const FLAGS = Object.freeze({
     description: 'P105 / D-2: Summary tab as magazine spread (left pitch / right Tonight at Table).',
   },
   inlineEdit: {
-    default: false,
-    description: 'P106 / E-1: click-to-edit names + pills + paragraphs in the dossier. DARK SHIP.',
+    default: true,
+    description: 'P106 / E-1: click-to-edit names + pills + paragraphs in the dossier. PROMOTED default-on; flag retained as soak killswitch.',
   },
   workshopNav: {
     default: false,
@@ -73,7 +73,7 @@ export const FLAGS = Object.freeze({
     description: 'P109 / E-5: per-settlement version timeline + diff + revert. Cartographer-gated.',
   },
   mapDropPreview: {
-    default: false,
+    default: true,
     description: 'P111 / M-3: hover-tooltip during drag with terrain + trade-route context.',
   },
   mapAutosave: {
@@ -93,7 +93,7 @@ export const FLAGS = Object.freeze({
     description: 'P117 / H-1: two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
   },
   onboardingDiet: {
-    default: false,
+    default: true,
     description: 'P118 / O-1: collapse the 4-system onboarding pile-up to Checklist + first-dossier callouts only. Suppresses OnboardingCoach + nudge toast when on.',
   },
   wizardChromeDiet: {
