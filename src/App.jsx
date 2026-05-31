@@ -96,8 +96,8 @@ export default function App() {
   // the imperative navigator so the existing setView(viewId) call sites (and
   // the onNavigate prop threaded into every panel) keep working unchanged —
   // they just push a path now. `legacy`/`notFound` drive the URL-upgrade
-  // effect below.
-  const { view, legacy, notFound } = useRoute();
+  // effect below; `params` carries route segments (e.g. /settlements/:id).
+  const { view, params, legacy, notFound } = useRoute();
   const setView = navigate;
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -449,7 +449,7 @@ export default function App() {
           {view === 'generate' && authTier !== 'anon' && !_readFlag('onboardingDiet') && <OnboardingCoach />}
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
-            {view === 'settlements' && <SettlementsPanel onNavigate={setView} />}
+            {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
             {view === 'map'         && <WorldMap onNavigate={setView} />}
             {view === 'compendium'  && <CompendiumPanel standalone />}
             {view === 'howto'       && <HowToUse standalone />}

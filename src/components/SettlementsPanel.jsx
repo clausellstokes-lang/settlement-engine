@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, ArrowRight, Edit3, Check, X, Map as MapIcon, FileText} from 'lucide-react';
 
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
@@ -10,6 +10,8 @@ const generateCampaignPDF = (...args) =>
   import('../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY } from './theme.js';
 import { useStore } from '../store/index.js';
+import { navigate } from '../hooks/useRoute.js';
+import { viewToPath } from '../lib/routes.js';
 import { t } from '../copy/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
@@ -353,7 +355,7 @@ function SampleDashboard({ onFork, forkingId }) {
 
 // ── Main Panel ──────────────────────────────────────────────────────────────
 
-export default function SettlementsPanel({ onNavigate }) {
+export default function SettlementsPanel({ onNavigate, routeId }) {
   const settlement = useStore(s => s.settlement);
   const config = useStore(s => s.config);
   const institutionToggles = useStore(s => s.institutionToggles);
@@ -516,6 +518,53 @@ export default function SettlementsPanel({ onNavigate }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pendingFocusId, savesLoading, saves]);
+
+  // ── URL ↔ detail sync (path routing, /settlements/:id) ───────────────────
+  // Two one-directional effects keep the address bar and the open detail
+  // view in lockstep without a feedback loop.
+  //
+  // route → detail: a deep link, refresh, or Back/Forward that lands on
+  // /settlements/:id opens the matching save; landing back on /settlements
+  // closes whatever was open. Keyed on `routeId` (+ the loaded saves) and
+  // deliberately NOT on `detail`, so in-place edits to an open dossier
+  // (rename / link / edit) never re-trigger an open or close.
+  useEffect(() => {
+    if (savesLoading) return;
+    const openId = detail?.saveData?.id ?? null;
+    if (routeId) {
+      if (String(openId) === String(routeId)) return;   // already showing it
+      const match = saves.find(s => String(s.id) === String(routeId));
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      if (match) setDetail({ ...match, saveData: match });
+    } else if (openId !== null) {
+       
+      setDetail(null);
+    }
+    // `detail` intentionally omitted — see note above.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [routeId, savesLoading, saves]);
+
+  // detail → route: opening/closing the detail in-app (list click, world-map
+  // focus, Back-to-list, delete) writes the canonical URL. Guarded three ways
+  // so it never fights the route:
+  //   • skip the initial mount (a deep link's detail is still null then — the
+  //     route→detail effect opens it once saves load);
+  //   • only act while we're on the /settlements surface (loading a save into
+  //     the generator navigates to /create + closes detail in the same tick —
+  //     we must not yank the URL back);
+  //   • no-op when the URL already matches (covers Back/Forward, where the
+  //     browser changed the URL before the route→detail effect closed us).
+  const urlSyncReady = useRef(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!urlSyncReady.current) { urlSyncReady.current = true; return; }
+    if (!window.location.pathname.startsWith('/settlements')) return;
+    const openId = detail?.saveData?.id ?? null;
+    const desired = openId ? viewToPath('settlements', { id: openId }) : viewToPath('settlements');
+    if (window.location.pathname === desired) return;
+    if (openId) navigate('settlements', { params: { id: openId } });
+    else navigate('settlements');
+  }, [detail]);
 
   const persistBatch = async (updatedSaves, modifiedIds) => {
     try {
