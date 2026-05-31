@@ -237,7 +237,7 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
 // so new accounts never see "you have nothing — go figure it out." Forking
 // loads the sample's config into the wizard with a user-suffixed seed.
 
-function SampleCard({ sample, onFork }) {
+function SampleCard({ sample, onFork, forking }) {
   return (
     <article style={{
       background: CARD,
@@ -293,6 +293,7 @@ function SampleCard({ sample, onFork }) {
       </div>
       <button
         onClick={() => onFork(sample)}
+        disabled={forking}
         style={{
           alignSelf: 'flex-start', marginTop: 4,
           padding: '6px 12px',
@@ -301,17 +302,18 @@ function SampleCard({ sample, onFork }) {
           border: `1.5px solid ${GOLD}`,
           borderRadius: 999,
           fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
-          cursor: 'pointer',
+          cursor: forking ? 'wait' : 'pointer',
+          opacity: forking ? 0.6 : 1,
           letterSpacing: '0.04em', textTransform: 'uppercase',
         }}
       >
-        {t('generate.button')}
+        {forking ? 'Generating…' : t('generate.button')}
       </button>
     </article>
   );
 }
 
-function SampleDashboard({ onFork }) {
+function SampleDashboard({ onFork, forkingId }) {
   return (
     <div style={{
       padding: '20px 16px',
@@ -337,7 +339,12 @@ function SampleDashboard({ onFork }) {
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {SAMPLE_SETTLEMENTS.map(sample => (
-          <SampleCard key={sample.id} sample={sample} onFork={onFork} />
+          <SampleCard
+            key={sample.id}
+            sample={sample}
+            onFork={onFork}
+            forking={forkingId === sample.id}
+          />
         ))}
       </div>
     </div>
@@ -366,6 +373,9 @@ export default function SettlementsPanel({ onNavigate }) {
   const authUser = useStore(s => s.auth.user);
   const setSavedSettlements = useStore(s => s.setSavedSettlements);
   const applyCosmeticRename = useStore(s => s.applyCosmeticRename);
+  const generateSettlement = useStore(s => s.generateSettlement);
+  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  const clearLoadedFromSave = useStore(s => s.clearLoadedFromSave);
 
   // Campaign store
   const campaigns = useStore(s => s.campaigns);
@@ -386,23 +396,75 @@ export default function SettlementsPanel({ onNavigate }) {
     onNavigate?.('generate');
   };
 
+  // Which sample is mid-generation (holds the sample.id). Drives the
+  // per-card disabled state + transient "Generating…" label so a slow
+  // engine load can't be double-clicked into two concurrent forks.
+  const [forkingId, setForkingId] = useState(null);
+
   /**
-   * Fork a Tier 8.2 sample into the wizard. We load the sample's config
-   * into the generator state (no save written yet) and navigate to the
-   * Create view so the user can hit Generate and see their version of
-   * the sample town. Seed is suffixed with the user id so two users
-   * forking the same sample get mechanically-different results.
+   * Fork a Tier 8.2 sample. "Generate" on a sample card now actually
+   * produces the settlement (it used to only pre-fill the wizard and
+   * navigate, which read as a no-op). The flow:
+   *   1. Load the sample's config into generator state with a
+   *      user-suffixed seed so two users forking the same sample get
+   *      mechanically-different towns.
+   *   2. Run the engine (generateSettlement(seed)) — this populates the
+   *      store's `settlement` so the Create view shows the result.
+   *   3. If the user can save (signed-in, under cap), persist the fork
+   *      to their library immediately — "generate AND save" in one tap.
+   *   4. Navigate to the Create view to reveal the dossier.
+   * If generation returns null (e.g. an anon/free user forking the city
+   * sample, which is tier-gated above town), open the purchase modal so
+   * the button always yields a visible result instead of silently dying.
    */
-  const forkSample = useCallback((sample) => {
-    if (!sample?.config) return;
+  const forkSample = useCallback(async (sample) => {
+    if (!sample?.config || forkingId) return;
+    setForkingId(sample.id);
     const seed = forkSeedFor(sample, authUser?.id);
-    updateConfig({
+    const forkedConfig = {
       ...migrateConfig(sample.config),
       seed,
       _forkedFromSample: sample.id,
-    });
+    };
+    updateConfig(forkedConfig);
+
+    let result = null;
+    try {
+      result = await generateSettlement(seed);
+    } catch (e) {
+      console.error('[SettlementsPanel] fork generate failed:', e);
+    }
+
+    if (!result) {
+      // Tier-gated (anon/free forking a city) or a generation error.
+      // Surface the upgrade path rather than leaving the click inert.
+      setForkingId(null);
+      setPurchaseModalOpen(true);
+      return;
+    }
+
+    // Signed-in users: persist the fork to the library straight away so
+    // the sample becomes a real save, not just an unsaved draft.
+    if (canSave) {
+      try {
+        await savesService.save({
+          name: result.name || sample.name,
+          tier: result.tier || sample.tier,
+          settlement: result,
+          config: result._config || forkedConfig,
+        });
+      } catch (e) {
+        console.error('[SettlementsPanel] fork auto-save failed:', e);
+      }
+    }
+
+    clearLoadedFromSave();
+    setForkingId(null);
     onNavigate?.('generate');
-  }, [authUser?.id, updateConfig, onNavigate]);
+  }, [
+    authUser?.id, updateConfig, generateSettlement, canSave,
+    clearLoadedFromSave, onNavigate, setPurchaseModalOpen, forkingId,
+  ]);
 
   const [saves, _setSavesLocal] = useState([]);
   // Wrapper: update local state + Zustand store so WorldMap palette stays in sync
@@ -764,7 +826,7 @@ export default function SettlementsPanel({ onNavigate }) {
       ) : saves.length === 0 ? (
         // Tier 8.2 — show sample dossiers instead of a bare empty state.
         // Eliminates the "you have nothing — go figure it out" first run.
-        <SampleDashboard onFork={forkSample} />
+        <SampleDashboard onFork={forkSample} forkingId={forkingId} />
       ) : (
         <>
           {/* Campaign folders */}
