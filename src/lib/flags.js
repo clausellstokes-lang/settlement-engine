@@ -53,8 +53,8 @@ export const FLAGS = Object.freeze({
   // here) to light it up. Flags that soaked default-on everywhere have been
   // removed and their on-path inlined, per the doctrine note above.
   dossierFiveTabs: {
-    default: false,
-    description: 'P102 / D-1: consolidate 14 dossier tabs into 5 thematic groups. DARK SHIP UNTIL VERIFIED.',
+    default: true,
+    description: 'P102 / D-1: consolidate 14 dossier tabs into 5 thematic groups. PROMOTED default-on; flag retained as soak killswitch.',
   },
   summaryMagazine: {
     default: false,
@@ -89,7 +89,7 @@ export const FLAGS = Object.freeze({
     description: 'P116 / X-8: Founder Lifetime surfaces only to demonstrated worldbuilders.',
   },
   heroV2: {
-    default: false,
+    default: true,
     description: 'P117 / H-1: two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
   },
   onboardingDiet: {
@@ -97,11 +97,11 @@ export const FLAGS = Object.freeze({
     description: 'P118 / O-1: collapse the 4-system onboarding pile-up to Checklist + first-dossier callouts only. Suppresses OnboardingCoach + nudge toast when on.',
   },
   wizardChromeDiet: {
-    default: false,
+    default: true,
     description: 'P119 / W-1: collapse 7 wizard chrome rows into one combined header.',
   },
   narrativeLayerStrip: {
-    default: false,
+    default: true,
     description: 'P121 / D-4: lift narrative buttons into labeled strip below dossier title.',
   },
   mobileSingleChrome: {
@@ -113,11 +113,11 @@ export const FLAGS = Object.freeze({
     description: 'P126 / CP-1: "?" affordance on every config control opens Compendium snippet.',
   },
   summaryMagazineV2: {
-    default: false,
+    default: true,
     description: 'P129 / D-2: Summary tab as two-column magazine spread. Replaces single-column layout.',
   },
   tableView: {
-    default: false,
+    default: true,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
   },
 });

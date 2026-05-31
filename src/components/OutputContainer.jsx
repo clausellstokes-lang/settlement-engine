@@ -475,7 +475,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         // narrative buttons move out of the header into a labeled strip
         // below (rendered further down). The header remains lean. When
         // the flag is off, the legacy header-button cluster renders.
-        !flag('narrativeLayerStrip') && renderNarrativeButtons()
+        // readOnly exception: the strip below is suppressed in readOnly
+        // (SettlementDetail's saved-dossier view), so keep the header
+        // buttons there or the free View Narrative/Raw toggle vanishes.
+        (!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()
       ),
       // P121 — Labeled narrative-layer strip. Below the header, above
       // the tab strip. Lives in its own card with title + cost pill +
