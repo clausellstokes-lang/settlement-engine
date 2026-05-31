@@ -10,6 +10,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../../src/data/sampleSettlements.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 describe('SAMPLE_SETTLEMENTS shape contract', () => {
   it('ships three samples (matches Tier 8.2 spec)', () => {
@@ -31,20 +32,45 @@ describe('SAMPLE_SETTLEMENTS shape contract', () => {
     }
   });
 
-  it('every sample config matches the generator config shape', () => {
+  it('every sample config matches the live generator config shape', () => {
+    // The keys resolveConfig() actually reads. A sample that ships a
+    // nested `sliders` object or a `nearbyTerrain` key looks plausible
+    // but forks into a generic town — every priority stays at the
+    // default 50 — because the engine never reads those keys. This test
+    // pins the real shape so that regression can't ship again.
+    const PRIORITY_KEYS = [
+      'priorityMilitary', 'priorityReligion', 'priorityEconomy',
+      'priorityCriminal', 'priorityMagic',
+    ];
+    // resolveConfig terrain pool + monsterThreat tiers (see
+    // src/generators/steps/resolveConfig.js).
+    const VALID_TERRAINS = ['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert'];
+    const VALID_THREATS  = ['heartland', 'frontier', 'plagued'];
+
     for (const sample of SAMPLE_SETTLEMENTS) {
       expect(sample.config).toBeDefined();
       expect(sample.config.settType).toBe(sample.tier);
       expect(sample.config.tradeRouteAccess).toBeDefined();
-      expect(sample.config.nearbyTerrain).toBeDefined();
-      expect(sample.config.monsterThreat).toBeDefined();
-      expect(sample.config.sliders).toBeDefined();
-      // Sliders are 0-100 ints; check each is in range so a typo
-      // doesn't ship a 500% military weight.
-      for (const v of Object.values(sample.config.sliders)) {
-        expect(v).toBeGreaterThanOrEqual(0);
-        expect(v).toBeLessThanOrEqual(100);
+
+      // Terrain is pinned via terrainOverride (the key resolveConfig
+      // reads), not the dead `nearbyTerrain` key.
+      expect(sample.config.nearbyTerrain).toBeUndefined();
+      expect(VALID_TERRAINS).toContain(sample.config.terrainOverride);
+
+      // Monster threat must be a real tier — a free-text value like
+      // 'occasional' falls through resolveConfig's normalisation.
+      expect(VALID_THREATS).toContain(sample.config.monsterThreat);
+
+      // Priority weights are flat priority* fields (DEFAULT_CONFIG
+      // shape), each a 0-100 int — not a nested `sliders` object.
+      expect(sample.config.sliders).toBeUndefined();
+      for (const key of PRIORITY_KEYS) {
+        expect(DEFAULT_CONFIG).toHaveProperty(key); // key name is real
+        expect(typeof sample.config[key]).toBe('number');
+        expect(sample.config[key]).toBeGreaterThanOrEqual(0);
+        expect(sample.config[key]).toBeLessThanOrEqual(100);
       }
+
       expect(typeof sample.config.seed).toBe('string');
       expect(sample.config.seed.length).toBeGreaterThan(8);
     }

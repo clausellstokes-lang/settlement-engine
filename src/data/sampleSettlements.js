@@ -24,9 +24,14 @@
  *   - terrain   — one-word terrain hint for the card subtitle
  *   - teaser    — single-sentence character pitch (italic, parchment serif)
  *   - tags      — 3-4 chip-style tags to set expectations
- *   - config    — the generator input the "Fork & Forge" CTA loads into
- *                 the wizard. Same shape as `settlement.config` on a
- *                 real save, plus a seed so forks are reproducible
+ *   - config    — the generator input the "Generate" CTA loads into the
+ *                 wizard. Must be the live generator config shape that
+ *                 resolveConfig() actually reads: flat priority* weights
+ *                 (priorityMilitary / priorityReligion / priorityEconomy
+ *                 / priorityCriminal / priorityMagic), a terrainOverride,
+ *                 and a bounded monsterThreat tier — NOT a nested
+ *                 `sliders` object or a `nearbyTerrain` key (the engine
+ *                 ignores both). Plus a seed so forks are reproducible
  *                 within a session (but each user gets a different
  *                 character because the SEED is suffixed with the user
  *                 id at fork time).
@@ -43,16 +48,14 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     config: {
       settType:         'town',
       tradeRouteAccess: 'port',
-      nearbyTerrain:    'coastal',
-      monsterThreat:    'occasional',
-      sliders: {
-        military:  35,
-        religious: 70,
-        economic:  68,
-        criminal:  30,
-        magical:   25,
-      },
-      seed: 'sample-mossgate-v1',
+      terrainOverride:  'coastal',
+      monsterThreat:    'heartland',
+      priorityMilitary: 35,
+      priorityReligion: 70,
+      priorityEconomy:  68,
+      priorityCriminal: 30,
+      priorityMagic:    25,
+      seed:             'sample-mossgate-v1',
     },
   },
   {
@@ -65,16 +68,14 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     config: {
       settType:         'city',
       tradeRouteAccess: 'crossroads',
-      nearbyTerrain:    'mountain',
+      terrainOverride:  'mountain',
       monsterThreat:    'frontier',
-      sliders: {
-        military:  60,
-        religious: 35,
-        economic:  78,
-        criminal:  45,
-        magical:   30,
-      },
-      seed: 'sample-blackcrag-v1',
+      priorityMilitary: 60,
+      priorityReligion: 35,
+      priorityEconomy:  78,
+      priorityCriminal: 45,
+      priorityMagic:    30,
+      seed:             'sample-blackcrag-v1',
     },
   },
   {
@@ -87,16 +88,14 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     config: {
       settType:         'village',
       tradeRouteAccess: 'road',
-      nearbyTerrain:    'forest',
+      terrainOverride:  'forest',
       monsterThreat:    'frontier',
-      sliders: {
-        military:  55,
-        religious: 50,
-        economic:  30,
-        criminal:  20,
-        magical:   40,
-      },
-      seed: 'sample-thornwell-v1',
+      priorityMilitary: 55,
+      priorityReligion: 50,
+      priorityEconomy:  30,
+      priorityCriminal: 20,
+      priorityMagic:    40,
+      seed:             'sample-thornwell-v1',
     },
   },
 ]);

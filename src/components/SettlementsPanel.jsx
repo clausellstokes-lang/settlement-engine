@@ -10,6 +10,7 @@ const generateCampaignPDF = (...args) =>
   import('../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY } from './theme.js';
 import { useStore } from '../store/index.js';
+import { t } from '../copy/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
@@ -304,7 +305,7 @@ function SampleCard({ sample, onFork }) {
           letterSpacing: '0.04em', textTransform: 'uppercase',
         }}
       >
-        Fork &amp; forge
+        {t('generate.button')}
       </button>
     </article>
   );
