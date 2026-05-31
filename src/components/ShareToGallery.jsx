@@ -24,8 +24,9 @@ const MUTED = '#6b5340';
 const _BODY  = '#4A3B22';
 
 function publicUrlFor(slug) {
-  if (typeof window === 'undefined') return `/gallery/${slug}`;
-  return `${window.location.origin}/?view=gallery&slug=${slug}`;
+  const path = `/gallery?slug=${encodeURIComponent(slug)}`;
+  if (typeof window === 'undefined') return path;
+  return `${window.location.origin}${path}`;
 }
 
 export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicSlug: slugProp }) {

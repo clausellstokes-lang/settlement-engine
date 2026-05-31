@@ -21,6 +21,8 @@ import { MapPin, FolderOpen, BookOpen, Sparkles, Map as MapIcon, Zap, User, Shie
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { flag as _readFlag } from './lib/flags.js';
+import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
+import { titleForView, guardForView, viewToPath } from './lib/routes.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
 
 // Lazy-loaded views
@@ -40,6 +42,12 @@ const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSu
 // P107 / CP-2 — Workshop as top-level destination. The component already
 // exists at 1,262 LOC; this lift just gives it a route.
 const Workshop = lazy(() => import('./components/Workshop.jsx'));
+// Dedicated auth routes (/signin · /register · /reset-password · /verify-email).
+// Thin page wrappers around the same <AuthPanel> the modal renders.
+const SignInPage        = lazy(() => import('./components/auth/SignInPage.jsx'));
+const RegisterPage      = lazy(() => import('./components/auth/RegisterPage.jsx'));
+const ResetPasswordPage = lazy(() => import('./components/auth/ResetPasswordPage.jsx'));
+const VerifyEmailPage   = lazy(() => import('./components/auth/VerifyEmailPage.jsx'));
 
 import OnboardingCoach from './components/OnboardingCoach.jsx';
 import PostGenCoach from './components/PostGenCoach.jsx';
@@ -83,15 +91,14 @@ function Loading() {
 
 export default function App() {
   const isMobile = useIsMobile();
-  // Lazy initial state honors deep-link params (?view=gallery|pricing)
-  // on first load. This avoids the React 19 "setState in effect"
-  // warning that an after-mount setView would otherwise trigger.
-  const [view, setView] = useState(() => {
-    if (typeof window === 'undefined') return 'generate';
-    const params = new URLSearchParams(window.location.search);
-    const deepView = params.get('view');
-    return (deepView === 'gallery' || deepView === 'pricing') ? deepView : 'generate';
-  });
+  // Path-based routing. `useRoute` resolves window.location → { view, … } and
+  // re-renders on Back/Forward + programmatic navigation. `setView` aliases
+  // the imperative navigator so the existing setView(viewId) call sites (and
+  // the onNavigate prop threaded into every panel) keep working unchanged —
+  // they just push a path now. `legacy`/`notFound` drive the URL-upgrade
+  // effect below.
+  const { view, legacy, notFound } = useRoute();
+  const setView = navigate;
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
@@ -122,8 +129,9 @@ export default function App() {
       if (result?.status === 'success') {
         if (result.product === 'single_dossier') {
           // The single-dossier flow needs a full landing page (PDF
-          // download + sign-up upsell), not just a toast.
-          setView('dossier-success');
+          // download + sign-up upsell), not just a toast. Replace so the
+          // Stripe-return URL isn't a Back-button trap.
+          navigate('dossier-success', { replace: true });
         } else {
           const msg = result.product === 'premium'
             ? 'Cartographer activated!'
@@ -138,6 +146,43 @@ export default function App() {
       fetchCreditBalance().then(bal => setCreditBalance(bal));
     });
   }, [initAuth, initOnboarding, setCreditBalance]);
+
+  // ── Auth guards ─────────────────────────────────────────────────────────
+  // Gated routes redirect once the session has resolved. 'auth' views bounce
+  // anonymous visitors to /signin carrying ?next= (so they return to the
+  // gated page post-login); 'elevated' views bounce non-developers home.
+  // Waits on authLoading so we don't act during the initial session check.
+  useEffect(() => {
+    if (authLoading) return;
+    const guard = guardForView(view);
+    if (guard === 'auth' && authTier === 'anon') {
+      navigate('signin', { replace: true, search: `?next=${encodeURIComponent(viewToPath(view))}` });
+    } else if (guard === 'elevated' && !isElevated) {
+      navigate('generate', { replace: true });
+    }
+  }, [view, authTier, isElevated, authLoading]);
+
+  // ── Canonical-URL upgrade ─────────────────────────────────────────────────
+  // Silently rewrite legacy ?view= links, unknown paths, and the bare root to
+  // their canonical path (replaceState, no scroll). Non-view query params
+  // (gallery slug, flag overrides) are preserved. Converges in one extra
+  // render: once the URL is canonical, legacy/notFound clear and it no-ops.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!legacy && !notFound && window.location.pathname !== '/') return;
+    const sp = new URLSearchParams(window.location.search);
+    sp.delete('view');
+    const preserved = sp.toString();
+    const canonical = viewToPath(view) + (preserved ? `?${preserved}` : '');
+    if (canonical !== window.location.pathname + window.location.search) {
+      replacePath(canonical);
+    }
+  }, [view, legacy, notFound]);
+
+  // ── Document title ─────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (typeof document !== 'undefined') document.title = titleForView(view);
+  }, [view]);
 
   // ── Cloud sync custom content when user enters premium / elevated state ───
   // Triggers once per tier transition. Migrates local items on first premium
@@ -409,8 +454,11 @@ export default function App() {
             {view === 'compendium'  && <CompendiumPanel standalone />}
             {view === 'howto'       && <HowToUse standalone />}
             {view === 'workshop'    && <Workshop />}
-            {view === 'account'     && <AccountPage onNavigateAdmin={() => setView('admin')} />}
-            {view === 'admin'       && <AdminPanel onBack={() => setView('account')} />}
+            {/* Guarded views: render only once authorized. The guard effect
+                redirects unauthorized visitors; until the session resolves we
+                show the loader rather than flash (or crash on) gated content. */}
+            {view === 'account'     && (authLoading ? <Loading /> : authTier !== 'anon' ? <AccountPage onNavigateAdmin={() => setView('admin')} /> : null)}
+            {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
             {view === 'pricing'     && <PricingPage onNavigate={setView} />}
             {view === 'gallery'     && <GalleryPage onNavigate={setView} />}
             {view.startsWith('compare') && <ComparePage view={view} onNavigate={setView} />}
@@ -420,6 +468,10 @@ export default function App() {
                 onGenerateAnother={() => setView('generate')}
               />
             )}
+            {view === 'signin'         && <SignInPage />}
+            {view === 'register'       && <RegisterPage />}
+            {view === 'reset-password' && <ResetPasswordPage />}
+            {view === 'verify-email'   && <VerifyEmailPage />}
           </Suspense>
         </main>
 

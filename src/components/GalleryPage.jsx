@@ -147,9 +147,10 @@ export default function GalleryPage({ onNavigate }) {
     return () => { cancelled = true; };
   }, []);
 
-  // Deep-link to a specific dossier via ?slug=. Reads once on mount
-  // so a shared /?view=gallery&slug=abc URL opens the dossier instead
-  // of the listing. Doesn't clear the URL — the user can copy/share it.
+  // Deep-link to a specific dossier via ?slug=. Reads once on mount so a
+  // shared /gallery?slug=abc URL opens the dossier instead of the listing
+  // (legacy /?view=gallery&slug=abc still works — the router preserves the
+  // slug param while upgrading the path). Doesn't clear the URL — copy/share.
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);

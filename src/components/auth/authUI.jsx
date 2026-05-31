@@ -1,0 +1,273 @@
+/**
+ * components/auth/authUI.jsx — shared auth presentational primitives.
+ *
+ * Extracted verbatim from AuthModal so the modal and the dedicated
+ * /signin · /register · /reset-password pages render byte-identical
+ * controls from one source. No logic lives here — just inputs, buttons,
+ * alerts, the OAuth button + brand glyphs, and the page shell chrome.
+ */
+import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon } from 'lucide-react';
+import {
+  GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_,
+  SP, R, FS, swatch, VIOLET, VIOLET_BG,
+} from '../theme.js';
+
+// ── OAuth brand glyphs ──────────────────────────────────────────────────────
+// Inline SVG (vs. a brand-icon package) to control bundle size — each glyph
+// is ~100 bytes. The `fill="#…"` attributes are brand colours on <path>, not
+// inline-style objects, so the visual-budget no-raw-color rule doesn't apply.
+export function GoogleGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+      <path fill="#EA4335" d="M12 5c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 1.62 14.94.5 12 .5 7.31.5 3.26 3.19 1.28 7.07l3.66 2.84C5.93 7.04 8.7 5 12 5z"/>
+      <path fill="#4285F4" d="M23.5 12.28c0-.85-.08-1.67-.21-2.45H12v4.65h6.46c-.28 1.5-1.13 2.78-2.41 3.63l3.55 2.75c2.08-1.92 3.27-4.74 3.27-8.07z"/>
+      <path fill="#FBBC05" d="M4.95 14.09a7.66 7.66 0 0 1 0-4.18L1.28 7.07a11.5 11.5 0 0 0 0 9.86l3.67-2.84z"/>
+      <path fill="#34A853" d="M12 23.5c3.24 0 5.96-1.07 7.95-2.91l-3.55-2.75c-.98.66-2.24 1.05-4.4 1.05-3.3 0-6.07-2.04-7.05-4.91L1.28 16.93C3.26 20.81 7.31 23.5 12 23.5z"/>
+    </svg>
+  );
+}
+
+export function DiscordGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="#5865F2" aria-hidden="true">
+      <path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.06.06 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.42 0-1.333.956-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.974 0c-1.183 0-2.156-1.085-2.156-2.42 0-1.333.955-2.418 2.156-2.418 1.211 0 2.176 1.094 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+    </svg>
+  );
+}
+
+export function OAuthButton({ glyph, label, onClick, disabled, soonNote }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      title={soonNote || `Continue with ${label}`}
+      style={{
+        width: '100%', padding: `${SP.md}px ${SP.md}px`,
+        background: swatch.white,
+        color: INK,
+        border: `1px solid ${BORDER}`,
+        borderRadius: R.lg,
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        opacity: disabled ? 0.55 : 1,
+        fontFamily: sans, fontSize: FS['14'], fontWeight: 600,
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+        transition: 'border-color 0.15s, background 0.15s',
+      }}
+    >
+      {glyph}
+      <span>Continue with {label}</span>
+      {soonNote && (
+        <span style={{
+          fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.06em',
+          textTransform: 'uppercase', color: VIOLET,
+          background: VIOLET_BG, padding: '2px 5px', borderRadius: 3,
+          marginLeft: 4,
+        }}>
+          Soon
+        </span>
+      )}
+    </button>
+  );
+}
+
+/**
+ * FooterLink — a gold text link for the auth-page footers ("Create one",
+ * "Sign in", "Forgot your password?"). Presentational only: the page passes
+ * the real `href` (for crawlers + middle-click/open-in-new-tab) and an
+ * `onClick` that preventDefault()s and calls the SPA navigator.
+ */
+export function FooterLink({ href, onClick, children }) {
+  return (
+    <a
+      href={href}
+      onClick={onClick}
+      style={{
+        color: GOLD, fontWeight: 600, textDecoration: 'none', fontFamily: sans,
+      }}
+    >
+      {children}
+    </a>
+  );
+}
+
+export function OrDivider() {
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: SP.sm,
+      fontSize: FS.xxs, fontWeight: 700, color: MUTED,
+      textTransform: 'uppercase', letterSpacing: '0.08em',
+    }} aria-hidden="true">
+      <span style={{ flex: 1, height: 1, background: BORDER }} />
+      <span>or with email</span>
+      <span style={{ flex: 1, height: 1, background: BORDER }} />
+    </div>
+  );
+}
+
+export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }) {
+  return (
+    <input
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      onKeyDown={onKeyDown}
+      style={{
+        width: '100%', padding: `${SP.md}px ${SP.lg - 2}px`,
+        border: `1px solid ${BORDER}`, borderRadius: R.lg,
+        fontSize: FS['14'], fontFamily: sans,
+        background: swatch.white, outline: 'none',
+        boxSizing: 'border-box',
+      }}
+    />
+  );
+}
+
+export function Checkbox({ checked, onChange, label }) {
+  return (
+    <label style={{
+      display: 'flex', alignItems: 'center', gap: SP.sm,
+      cursor: 'pointer', fontSize: FS.sm, color: SECOND,
+      fontFamily: sans, userSelect: 'none',
+    }}>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={e => onChange(e.target.checked)}
+        style={{ accentColor: GOLD, width: 16, height: 16, cursor: 'pointer' }}
+      />
+      {label}
+    </label>
+  );
+}
+
+export function Button({ onClick, children, variant = 'primary', disabled, style: extra }) {
+  const styles = {
+    primary: { background: GOLD, color: swatch.white, border: 'none' },
+    success: { background: 'linear-gradient(135deg, #2a7a2a 0%, #4a8a4a 100%)', color: swatch.white, border: 'none' },
+    danger:  { background: 'transparent', color: '#8b1a1a', border: '1px solid rgba(139,26,26,0.3)' },
+    ghost:   { background: 'transparent', color: GOLD, border: `1px solid ${GOLD}` },
+  };
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      style={{
+        width: '100%', padding: `${SP.md}px 0`,
+        borderRadius: R.lg, cursor: disabled ? 'not-allowed' : 'pointer',
+        fontFamily: sans, fontSize: FS['14'], fontWeight: 700,
+        opacity: disabled ? 0.6 : 1,
+        transition: 'opacity 0.15s',
+        ...styles[variant],
+        ...extra,
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+export function Alert({ type, children }) {
+  const colors = {
+    error:   { bg: '#fdf4f4', border: '#e8b0b0', text: '#8b1a1a', Icon: AlertCircle },
+    success: { bg: '#f0faf2', border: '#a8d8b0', text: '#1a4a20', Icon: CheckCircle },
+    info:    { bg: '#fef9ee', border: GOLD, text: SECOND, Icon: Mail },
+  };
+  const c = colors[type] || colors.info;
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'flex-start', gap: SP.sm,
+      padding: `${SP.sm + 2}px ${SP.md}px`,
+      background: c.bg, border: `1px solid ${c.border}`, borderRadius: R.md,
+      fontSize: FS.sm, color: c.text, lineHeight: 1.5,
+    }}>
+      <c.Icon size={16} style={{ flexShrink: 0, marginTop: 1 }} />
+      <span>{children}</span>
+    </div>
+  );
+}
+
+/** Role badge (developer / admin). Returns null for ordinary users. */
+export function RoleBadge({ role }) {
+  if (role === 'user') return null;
+  const cfg = {
+    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer', Icon: Shield },
+    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin', Icon: Shield },
+  };
+  const c = cfg[role] || cfg.admin;
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 3,
+      padding: '2px 8px', borderRadius: R.md,
+      background: c.bg, color: c.color,
+      fontSize: FS.xxs, fontWeight: 700,
+      textTransform: 'uppercase', letterSpacing: '0.04em',
+    }}>
+      <c.Icon size={10} /> {c.label}
+    </span>
+  );
+}
+
+/**
+ * AuthPageShell — centered card chrome for the full-page auth routes.
+ * Renders the brand lockup, a title/subtitle, the form body (children),
+ * and optional footer links. The parchment background + site header/footer
+ * come from App's layout; this is just the card.
+ */
+export function AuthPageShell({ title, subtitle, children, footer }) {
+  return (
+    <div style={{
+      maxWidth: 440, margin: '0 auto',
+      padding: `${SP.xxl}px 0`,
+      display: 'flex', flexDirection: 'column', alignItems: 'stretch',
+    }}>
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.sm,
+        marginBottom: SP.lg,
+      }}>
+        <MapIcon size={22} color={GOLD} />
+        <span style={{
+          fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
+          letterSpacing: '0.02em', textTransform: 'lowercase',
+        }}>
+          SettlementForge
+        </span>
+      </div>
+
+      <div style={{
+        background: CARD, borderRadius: R.xl,
+        border: `1px solid ${BORDER}`,
+        boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          padding: `${SP.lg}px ${SP.xl}px`,
+          background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+          color: GOLD,
+        }}>
+          <h1 style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
+            {title}
+          </h1>
+          {subtitle && (
+            <p style={{ margin: `${SP.xs}px 0 0`, fontSize: FS.sm, color: MUTED, lineHeight: 1.4 }}>
+              {subtitle}
+            </p>
+          )}
+        </div>
+        <div style={{ padding: `${SP.xxl}px ${SP.xl}px` }}>
+          {children}
+        </div>
+      </div>
+
+      {footer && (
+        <div style={{
+          marginTop: SP.lg, textAlign: 'center',
+          fontSize: FS.sm, color: SECOND, fontFamily: sans, lineHeight: 1.6,
+        }}>
+          {footer}
+        </div>
+      )}
+    </div>
+  );
+}

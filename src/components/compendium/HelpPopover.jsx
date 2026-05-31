@@ -149,7 +149,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
               </div>
               <div style={{ color: swatch['#C8B098'] }}>{content.body}</div>
               <a
-                href={`?view=compendium#${content.anchor}`}
+                href={`/compendium#${content.anchor}`}
                 style={{
                   display: 'inline-block', marginTop: 8,
                   color: GOLD, fontSize: FS.xxs, fontWeight: 700,
@@ -165,7 +165,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
                 More about <b>{topic}</b> in the Compendium.
               </div>
               <a
-                href={`?view=compendium`}
+                href={`/compendium`}
                 style={{
                   display: 'inline-block', marginTop: 8,
                   color: GOLD, fontSize: FS.xxs, fontWeight: 700,
