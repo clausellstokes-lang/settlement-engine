@@ -22,7 +22,7 @@ import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
 import WizardCloseout from './generate/WizardCloseout.jsx';
 import WizardNextSteps from './generate/WizardNextSteps.jsx';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
@@ -834,7 +834,12 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           </div>
 
           <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
-            <OutputContainer />
+            {/* P139 — cap the dossier body to the shared page width so it
+                doesn't sprawl edge-to-edge on wide screens; the sticky nav
+                toolbar above stays full-width. */}
+            <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
+              <OutputContainer />
+            </div>
           </Suspense>
 
           {/* Save to library */}

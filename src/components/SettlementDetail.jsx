@@ -36,7 +36,7 @@ import { triggerPricingMoment } from '../lib/pricingMoments.js';
 // which centralizes the visual styling and the role="status" a11y
 // announcement under one shared component.
 import StateBadge        from './primitives/StateBadge.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch } from './theme';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
 
 const REL_COLORS = {
   trade_partner:'#1a5a28', allied:'#1a3a7a', patron:'#4a1a6a',
@@ -744,7 +744,11 @@ export default function SettlementDetail({
       {detail.settlement&&<div style={{marginBottom:12}}>
         <DetailErrorBoundary>
           <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
-            <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />
+            {/* P139 — cap the dossier body to the shared page width (the
+                detail toolbar above stays full-width). */}
+            <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
+              <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />
+            </div>
           </Suspense>
         </DetailErrorBoundary>
       </div>}
