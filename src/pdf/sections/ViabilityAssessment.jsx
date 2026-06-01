@@ -13,7 +13,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, _KeyValRow, BulletList, _GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, BulletList, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { viabilityHeadline, viabilityTone } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';

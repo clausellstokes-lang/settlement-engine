@@ -73,3 +73,11 @@ export const FS = L.FS;
 // ── Elevation scale (box-shadow) ─────────────────────────────────────────────
 // ELEV[1] default cards · ELEV[2] hover/sticky · ELEV[3] modals/popovers.
 export const ELEV = L.ELEV;
+
+// ── Layout (page content widths) ─────────────────────────────────────────────
+// Shared caps so pages stop inventing their own narrow columns. PAGE_MAX for
+// content/reference/marketing pages, PROSE_MAX for reading columns inside a
+// wide page, FORM_MAX for genuine forms (auth/success) that stay narrow.
+export const PAGE_MAX  = L.PAGE_MAX;
+export const PROSE_MAX = L.PROSE_MAX;
+export const FORM_MAX  = L.FORM_MAX;

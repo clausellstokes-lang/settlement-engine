@@ -11,8 +11,8 @@
  */
 import { useState } from 'react';
 import {
-  User, Shield, Crown, _Zap, _Save, _Mail, Headphones,
-  ChevronRight, TrendingDown, Edit3, Check, X, _ExternalLink,
+  User, Shield, Crown, Headphones,
+  ChevronRight, TrendingDown, Edit3, Check, X,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { auth as authService } from '../lib/auth.js';

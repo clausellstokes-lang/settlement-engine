@@ -17,7 +17,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, StatStrip, _KeyValRow, ThreeCol, BulletList, _GoldRule, HairRule, _Tag,
+  ChapterBand, ChapterHeadline, StatStrip, ThreeCol, BulletList, HairRule,
 } from '../primitives/Dense.jsx';
 import { overviewHeadline, overviewTone } from '../lib/headlines.js';
 import { StackedBar } from '../primitives/Visuals.jsx';

@@ -31,7 +31,7 @@ import {
 import { Funnel } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
-import { GOLD, INK, _INK_DEEP, BODY, BORDER, _CARD, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } from './theme.js';
+import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } from './theme.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full

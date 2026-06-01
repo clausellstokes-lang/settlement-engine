@@ -37,7 +37,7 @@
 import { useEffect } from 'react';
 import { ArrowRight, Sparkles, Check, X as XIcon } from 'lucide-react';
 import { t } from '../copy/index.js';
-import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, SP, R, FS, GOLD_DEEP, AMBER, CARD_HDR, swatch } from './theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, SP, R, FS, GOLD_DEEP, AMBER, CARD_HDR, swatch, PAGE_MAX } from './theme.js';
 
 // ── Tiny meta helper ───────────────────────────────────────────────────────
 // We don't have react-helmet wired up; for these flat pages a side-effect
@@ -68,7 +68,7 @@ function useDocumentMeta(title, description) {
 function ComparePageShell({ children }) {
   return (
     <div style={{
-      maxWidth: 960, margin: '0 auto', padding: `${SP.xxl}px ${SP.lg}px`,
+      maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.xxl}px ${SP.lg}px`,
       fontFamily: sans, color: INK,
     }}>
       {children}
@@ -483,7 +483,7 @@ function CompareLanding({ onNavigate }) {
       />
 
       <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
         gap: SP.lg, marginBottom: SP.xxl,
       }}>
         {cards.map(card => (

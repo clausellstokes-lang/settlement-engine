@@ -15,7 +15,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, _StatStrip, HairRule, Tag,
+  ChapterBand, ChapterHeadline, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';

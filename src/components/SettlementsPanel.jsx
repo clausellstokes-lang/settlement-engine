@@ -8,7 +8,7 @@ import {getAllModifiers, EFFECT_CATEGORIES, fmtMod} from '../lib/relationshipGra
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY, PAGE_MAX } from './theme.js';
 import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
@@ -814,7 +814,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   // ── List view ───────────────────────────────────────────────────────────
   return (
-    <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+    <div style={{ display:'flex', flexDirection:'column', gap:12, maxWidth: PAGE_MAX, margin:'0 auto', width:'100%' }}>
 
       {/* P108 / E-6 — Library toolbar (search + sort + filter chips). */}
       {saves.length > 0 && (

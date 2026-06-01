@@ -16,7 +16,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, KeyValRow, _BulletList, _GoldRule, HairRule, Tag,
+  ChapterBand, KeyValRow, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';

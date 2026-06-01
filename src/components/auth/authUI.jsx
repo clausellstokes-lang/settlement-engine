@@ -9,7 +9,7 @@
 import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon } from 'lucide-react';
 import {
   GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_,
-  SP, R, FS, swatch, VIOLET, VIOLET_BG,
+  SP, R, FS, swatch, VIOLET, VIOLET_BG, FORM_MAX,
 } from '../theme.js';
 
 // ── OAuth brand glyphs ──────────────────────────────────────────────────────
@@ -218,7 +218,7 @@ export function RoleBadge({ role }) {
 export function AuthPageShell({ title, subtitle, children, footer }) {
   return (
     <div style={{
-      maxWidth: 440, margin: '0 auto',
+      maxWidth: FORM_MAX, margin: '0 auto',
       padding: `${SP.xxl}px 0`,
       display: 'flex', flexDirection: 'column', alignItems: 'stretch',
     }}>

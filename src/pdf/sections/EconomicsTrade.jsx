@@ -14,7 +14,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, StatStrip, ThreeCol, BulletList, _GoldRule, HairRule, Tag,
+  ChapterBand, ChapterHeadline, StatStrip, ThreeCol, BulletList, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { economicsHeadline, economicsTone } from '../lib/headlines.js';
 import { StatusCard } from '../primitives/Visuals.jsx';

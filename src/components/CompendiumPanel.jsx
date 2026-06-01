@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, Route, Crown, ShieldAlert } from 'lucide-react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {useStore} from '../store/index.js';
@@ -896,13 +896,20 @@ export default function CompendiumPanel({ config, standalone=false }) {
     }, 140);
   };
 
-  // P139 / CP-3 — readability: cap the reading column so prose doesn't
-  // sprawl edge-to-edge on wide standalone pages. Embedded panels are
-  // already narrow, so the cap only bites on the standalone route.
-  const contentColumn = { maxWidth: 760, marginLeft: 'auto', marginRight: 'auto' };
+  // P139 / CP-3 — content width. Embedded panels are narrow, so a fixed
+  // reading cap is fine. On the standalone page we frame the whole panel
+  // at PAGE_MAX (below); inside it, the grid tabs (Power, Institutions)
+  // fill the frame so they flow into more columns, while the prose/row
+  // tabs keep a comfortable reading measure so lines don't sprawl.
+  const gridTab = activeTab === 'power' || activeTab === 'institutions';
+  const contentColumn = standalone
+    ? { maxWidth: gridTab ? '100%' : PROSE_MAX, marginLeft: 'auto', marginRight: 'auto' }
+    : { maxWidth: 760, marginLeft: 'auto', marginRight: 'auto' };
 
   return (
-    <div style={{ borderRadius:standalone?0:8, overflow:'hidden' }}>
+    <div style={standalone
+      ? { maxWidth: PAGE_MAX, margin:'0 auto', width:'100%', background:CARD, border:`1px solid ${BOR}`, borderRadius:R.xl, boxShadow:ELEV[1], overflow:'hidden' }
+      : { borderRadius:8, overflow:'hidden' }}>
       {/* Mode toggle */}
       <div style={{ display:'flex', background:swatch['#F5EDE0'], borderBottom:`1px solid ${BOR}`, padding:'6px 14px', gap:4 }}>
         <button onClick={()=>setMode('catalog')} style={{ flex:1, padding:'7px 12px', borderRadius:6, border:`1px solid ${mode==='catalog'?GOLD:BOR}`, background:mode==='catalog'?GOLD_BG:'transparent', color:mode==='catalog'?GOLD:SEC, fontSize:FS.sm, fontWeight:mode==='catalog'?700:500, fontFamily:sans, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
@@ -932,7 +939,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
               {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:FS.md, padding:0 }}>x</button>}
             </div>
           </div>
-          <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', maxHeight:'60vh', overflowY:'auto' }}>
+          <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <div style={contentColumn}>
               {renderTab()}
             </div>
@@ -946,7 +953,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
             <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
             {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:FS.md, padding:0 }}>x</button>}
           </div>
-          <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', maxHeight:'60vh', overflowY:'auto' }}>
+          <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <CustomContentManager search={search.toLowerCase()}/>
           </div>
         </>

@@ -20,7 +20,7 @@ import { ChevronLeft, Eye, Sparkles } from 'lucide-react';
 import { fetchPublicGallery, fetchPublicDossier, fetchCuratedGallery } from '../lib/gallery.js';
 import { t } from '../copy/index.js';
 import { TIER_LABELS } from './new/design.js';
-import { GOLD, INK, _INK_DEEP, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, swatch, RED_BG, RED } from './theme.js';
+import { GOLD, INK, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, swatch, RED_BG, RED, PAGE_MAX } from './theme.js';
 
 const MUTED  = '#6b5340';
 const BODY   = '#4A3B22';
@@ -197,7 +197,7 @@ export default function GalleryPage({ onNavigate }) {
   // Dossier view (single dossier).
   if (activeSlug) {
     return (
-      <div style={{ maxWidth: 1000, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px` }}>
+      <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px` }}>
         <button
           type="button"
           onClick={back}
@@ -239,7 +239,7 @@ export default function GalleryPage({ onNavigate }) {
   // Listing.
   return (
     <div style={{
-      maxWidth: 1100, margin: '0 auto', padding: `${SP.xxl}px ${SP.lg}px`,
+      maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.xxl}px ${SP.lg}px`,
       fontFamily: sans, color: INK,
     }}>
       <header style={{ textAlign: 'center', marginBottom: SP.xxl }}>

@@ -26,7 +26,7 @@ import { Check, Download, AlertCircle, LogIn, ArrowRight } from 'lucide-react';
 import { readPendingDossier, clearPendingDossier } from '../lib/pendingDossier.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
-import { GOLD, INK, _INK_DEEP, BORDER, CARD, _PARCH, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
+import { GOLD, INK, BORDER, CARD, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
 
 const MUTED = '#6b5340';
 const BODY  = '#4A3B22';

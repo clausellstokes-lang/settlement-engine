@@ -15,7 +15,7 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import {
-  FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, _X, _Pin, Layers, Loader, Map as MapIcon, Globe, Link as LinkIcon,
+  FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, Layers, Loader, Map as MapIcon, Globe, Link as LinkIcon,
 } from 'lucide-react';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';

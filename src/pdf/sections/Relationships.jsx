@@ -16,7 +16,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, _KeyValRow, _BulletList, _GoldRule, HairRule, _Tag,
+  ChapterBand, ChapterHeadline, HairRule,
 } from '../primitives/Dense.jsx';
 import { relationshipsHeadline } from '../lib/headlines.js';
 import { Callout } from '../primitives/Callout.jsx';

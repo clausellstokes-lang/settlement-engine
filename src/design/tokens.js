@@ -332,6 +332,27 @@ export const motion = Object.freeze({
   ambient: { duration: 600, easing: 'ease-in-out' },                    // hero parchment glow
 });
 
+// ── Layout (page content widths) ─────────────────────────────────────────────
+// Single source of truth for how wide page content runs on desktop. Before
+// this, every top-level page hard-coded its own centered max-width (440 / 680 /
+// 760 / 860 / 960 / 1100 …), so the site read as arbitrary and felt narrow on
+// wide monitors — a ~860px column on a 2000px screen leaves ~570px of painting
+// dead on each side.
+//
+//   page  — the shared cap for content / reference / marketing pages. Wide
+//           enough to use a large monitor, capped so it still reads as a
+//           framed document on the parchment rather than a full-bleed app.
+//   prose — comfortable single-column reading width for long-form text that
+//           lives *inside* a `page`-wide container (keeps line length sane
+//           even when the surrounding card is wide).
+//   form  — genuine single-task forms (sign-in / sign-up / success). These
+//           stay narrow on purpose; a 1200px-wide login form is bad UX.
+export const layout = Object.freeze({
+  page:  1200,
+  prose: 820,
+  form:  460,
+});
+
 // ── CSS custom property emission ────────────────────────────────────────────
 // Call this once at app boot. Emits all tokens as CSS variables on the
 // :root so any stylesheet can read them as `var(--color-gold-500)` etc.
@@ -412,4 +433,12 @@ export const legacy = Object.freeze({
   // importers. 1 = default cards, 2 = hover/sticky chrome, 3 = modals/popovers.
   // Added in P141/V-4 so components stop inventing bespoke shadows.
   ELEV: elevation,
+
+  // Layout — shared page content widths (see `layout` above). Added so every
+  // top-level page references one cap instead of inventing its own narrow
+  // column. PAGE_MAX for content pages, PROSE_MAX for reading columns inside
+  // them, FORM_MAX for genuine forms that should stay narrow.
+  PAGE_MAX:  layout.page,
+  PROSE_MAX: layout.prose,
+  FORM_MAX:  layout.form,
 });

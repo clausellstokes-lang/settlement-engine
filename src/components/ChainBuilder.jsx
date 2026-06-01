@@ -25,13 +25,13 @@
  */
 import React, { useState, useMemo, useCallback } from 'react';
 import {
-  Link2, Plus, Trash2, Edit3, _Check, _X, ChevronDown, ChevronRight,
+  Link2, Plus, Trash2, Edit3, ChevronDown, ChevronRight,
   Eye, EyeOff, Layers, ArrowRight, Package, Factory, Palette, Save,
   RotateCcw, Copy, Zap,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { CHAIN_DEFS } from '../lib/supplyChains.js';
-import { GOLD, _GOLD_B, GOLD_BG, INK, _INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, CARD_ALT, PARCH, sans, serif_, SP, R, FS, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, CARD_ALT, PARCH, sans, serif_, SP, R, FS, swatch } from './theme.js';
 
 // ── Available resources and consumer institution types ────────────────────────
 // Comprehensive lists drawn from the data layer

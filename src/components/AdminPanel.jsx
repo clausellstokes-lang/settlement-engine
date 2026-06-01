@@ -8,12 +8,12 @@
  */
 import { useState, useEffect, useCallback } from 'react';
 import {
-  Users, Shield, Zap, _Settings, Search, ChevronLeft,
-  _Edit3, Check, X, AlertCircle, RefreshCw, Crown, _User,
+  Users, Shield, Zap, Search, ChevronLeft,
+  Check, X, AlertCircle, RefreshCw, Crown,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
 
 function Section({ title, icon: Icon, children, actions }) {
   return (
@@ -276,7 +276,7 @@ export default function AdminPanel({ onBack }) {
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', gap: SP.lg,
-      maxWidth: 800, margin: '0 auto', padding: `${SP.lg}px 0`,
+      maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px 0`,
     }}>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>

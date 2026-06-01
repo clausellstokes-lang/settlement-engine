@@ -1,6 +1,14 @@
 import { useState } from 'react';
-import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch } from './theme.js';
 import { BookOpen, Zap, Star, Cpu, List } from 'lucide-react';
+import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, PAGE_MAX, sans, serif_, FS, swatch } from './theme.js';
+
+// Responsive multi-column container for card/list-heavy tab content. Uses
+// `column-width` (not a fixed count) so it fills a wide desktop card with as
+// many ~COL-wide columns as fit, and collapses to a single column on narrow
+// screens / the embedded (non-standalone) help panel — no media queries
+// needed. Direct children opt out of mid-column splitting with breakInside.
+const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: '22px' });
+const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 
 
 const TABS = [
@@ -14,7 +22,7 @@ const TABS = [
 function Insight({ title, children }) {
   return (
     <div style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`, borderRadius:7,
-      padding:'10px 12px', background:CARD, marginBottom:8 }}>
+      padding:'10px 12px', background:CARD, marginBottom:14, ...NO_BREAK }}>
       <div style={{ fontSize:FS.xs, fontWeight:800, color:GOLD, textTransform:'uppercase',
         letterSpacing:'0.06em', marginBottom:5 }}>{title}</div>
       <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:0 }}>{children}</p>
@@ -121,58 +129,74 @@ function QuickTab() {
     </>
   );
 
-  return <>
-    {quickSteps}
-    <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, margin:'18px 0 10px' }}>
-      Why it works this way
+  // Two-column on a wide desktop card (steps left, the "why" concept right);
+  // wraps to a single column on narrow screens via flex-wrap + flex-basis.
+  return (
+    <div style={{ display:'flex', flexWrap:'wrap', gap:28, alignItems:'flex-start' }}>
+      <div style={{ flex:'2 1 440px', minWidth:0 }}>
+        {quickSteps}
+      </div>
+      <div style={{ flex:'1 1 320px', minWidth:0 }}>
+        <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, margin:'0 0 10px' }}>
+          Why it works this way
+        </div>
+        {conceptIntro}
+      </div>
     </div>
-    {conceptIntro}
-  </>;
+  );
 }
 
 function PowerTab() {
-  return <>
-    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, marginBottom:8 }}>
-      Sliders, Stress & Institution Control
-    </div>
-    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
-      The five sliders compete for institutional probability. Raising Economy doesn't suppress Military —
-      it makes economic institutions more likely. High Religion + low Magic triggers heresy suppression.
-      High Criminal + low Military enables shadow governance. Think of sliders as describing what the
-      settlement <em>cares about</em>.
-    </p>
-    <Step n={1}>Open <strong>Institution Configuration</strong> to force or exclude specific institutions. A temple-city forces a Cathedral regardless of tier. A hermit kingdom excludes all trade infrastructure.</Step>
-    <Step n={2}>Apply <strong>Stress Conditions</strong> (Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic — they modify institution probabilities, NPC goals, faction tensions, and safety profiles.</Step>
-    <Step n={3}>Multiple stresses <strong>compound</strong>. Famine + Political Fracture means food distribution is contested by factions, not just scarce. The DM Summary names the compound condition.</Step>
-    <Tip>Forces and exclusions persist through regeneration. Configure once, generate many variations.</Tip>
+  return (
+    <div style={COLS(360)}>
+      <section style={{ ...NO_BREAK, marginBottom:18 }}>
+        <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>
+          Sliders, Stress &amp; Institution Control
+        </div>
+        <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
+          The five sliders compete for institutional probability. Raising Economy doesn't suppress Military —
+          it makes economic institutions more likely. High Religion + low Magic triggers heresy suppression.
+          High Criminal + low Military enables shadow governance. Think of sliders as describing what the
+          settlement <em>cares about</em>.
+        </p>
+        <Step n={1}>Open <strong>Institution Configuration</strong> to force or exclude specific institutions. A temple-city forces a Cathedral regardless of tier. A hermit kingdom excludes all trade infrastructure.</Step>
+        <Step n={2}>Apply <strong>Stress Conditions</strong> (Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic — they modify institution probabilities, NPC goals, faction tensions, and safety profiles.</Step>
+        <Step n={3}>Multiple stresses <strong>compound</strong>. Famine + Political Fracture means food distribution is contested by factions, not just scarce. The DM Summary names the compound condition.</Step>
+        <Tip>Forces and exclusions persist through regeneration. Configure once, generate many variations.</Tip>
+      </section>
 
-    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>
-      Linking Settlements as Neighbours
-    </div>
-    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
-      Generate settlements that know about each other. The relationship type modifies the economic engine,
-      faction weights, and institution probabilities. All linking is done from the <strong>Settlements</strong> tab.
-    </p>
-    <Step n={1}>Open a saved settlement in the <strong>Settlements tab</strong>. In the detail view, click <strong>Link Neighbour</strong> and choose another saved settlement.</Step>
-    <Step n={2}>Pick a relationship type — Trade Partner, Allied, Patron, Client, Rival, Cold War, or Hostile. The relationship is bidirectional and both settlements update immediately.</Step>
-    <Step n={3}>To bias a <em>new</em> settlement against an existing neighbour: in the Settlements tab, click <strong>Set as Neighbour</strong> on a saved settlement. The Create tab opens with that neighbour active, and the engine adjusts its economy and faction weights before generation.</Step>
-    <Step n={4}>Open either settlement's <strong>Neighbours tab</strong> to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
-    <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
-    <Tip>Relationship types matter mechanically. A Rival suppresses overlapping exports and elevates criminal presence. A Patron creates dependency chains in the client's economy. A Cold War generates intelligence NPCs on both sides.</Tip>
+      <section style={{ ...NO_BREAK, marginBottom:18 }}>
+        <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>
+          Linking Settlements as Neighbours
+        </div>
+        <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
+          Generate settlements that know about each other. The relationship type modifies the economic engine,
+          faction weights, and institution probabilities. All linking is done from the <strong>Settlements</strong> tab.
+        </p>
+        <Step n={1}>Open a saved settlement in the <strong>Settlements tab</strong>. In the detail view, click <strong>Link Neighbour</strong> and choose another saved settlement.</Step>
+        <Step n={2}>Pick a relationship type — Trade Partner, Allied, Patron, Client, Rival, Cold War, or Hostile. The relationship is bidirectional and both settlements update immediately.</Step>
+        <Step n={3}>To bias a <em>new</em> settlement against an existing neighbour: in the Settlements tab, click <strong>Set as Neighbour</strong> on a saved settlement. The Create tab opens with that neighbour active, and the engine adjusts its economy and faction weights before generation.</Step>
+        <Step n={4}>Open either settlement's <strong>Neighbours tab</strong> to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
+        <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
+        <Tip>Relationship types matter mechanically. A Rival suppresses overlapping exports and elevates criminal presence. A Patron creates dependency chains in the client's economy. A Cold War generates intelligence NPCs on both sides.</Tip>
+      </section>
 
-    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>
-      Managing Saved Settlements &amp; Campaigns
+      <section style={{ ...NO_BREAK, marginBottom:18 }}>
+        <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>
+          Managing Saved Settlements &amp; Campaigns
+        </div>
+        <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
+          The Settlements tab is your campaign library — saves, campaigns, linking, and map placement all live here.
+        </p>
+        <Step n={1}><strong>Save</strong> after generating to store a settlement in your library.</Step>
+        <Step n={2}><strong>Campaigns</strong> — group settlements into named campaign folders directly inside the Settlements tab. Use the arrow button on any saved settlement to move it between campaigns. Export a campaign to PDF for a complete campaign dossier.</Step>
+        <Step n={3}><strong>Export PDF</strong> from the detail view header for a print-ready settlement brief, or export a full campaign PDF from the campaign folder.</Step>
+        <Step n={4}><strong>Narrative AI Prompt</strong> and <strong>Map AI Prompt</strong> exports are also available in the detail view — use these to feed your settlement into an AI assistant for session fiction or map generation.</Step>
+        <Step n={5}><strong>Edit Names</strong> lets you rename any NPC or faction. Changes propagate to all linked neighbour records automatically.</Step>
+        <Step n={6}><strong>World Map</strong> — drag any saved settlement onto the embedded fantasy map to place it geographically. Click a placed burg to see its linked settlement data. Toggle relationships and supply-chain overlays from the map toolbar.</Step>
+      </section>
     </div>
-    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
-      The Settlements tab is your campaign library — saves, campaigns, linking, and map placement all live here.
-    </p>
-    <Step n={1}><strong>Save</strong> after generating to store a settlement in your library.</Step>
-    <Step n={2}><strong>Campaigns</strong> — group settlements into named campaign folders directly inside the Settlements tab. Use the arrow button on any saved settlement to move it between campaigns. Export a campaign to PDF for a complete campaign dossier.</Step>
-    <Step n={3}><strong>Export PDF</strong> from the detail view header for a print-ready settlement brief, or export a full campaign PDF from the campaign folder.</Step>
-    <Step n={4}><strong>Narrative AI Prompt</strong> and <strong>Map AI Prompt</strong> exports are also available in the detail view — use these to feed your settlement into an AI assistant for session fiction or map generation.</Step>
-    <Step n={5}><strong>Edit Names</strong> lets you rename any NPC or faction. Changes propagate to all linked neighbour records automatically.</Step>
-    <Step n={6}><strong>World Map</strong> — drag any saved settlement onto the embedded fantasy map to place it geographically. Click a placed burg to see its linked settlement data. Toggle relationships and supply-chain overlays from the map toolbar.</Step>
-  </>;
+  );
 }
 
 function LogicTab() {
@@ -181,6 +205,7 @@ function LogicTab() {
       Understanding these mechanics lets you use the generator as a world-building tool rather than a
       random oracle. The outputs aren't random — they're derived.
     </p>
+    <div style={COLS()}>
     <Insight title="Constraint-Driven, Not Random">
       The distinction matters. A random generator picks from tables. This engine resolves constraints.
       Your slider values, trade route, terrain, stress conditions, forced/excluded institutions, and
@@ -267,6 +292,7 @@ function LogicTab() {
       multiple queries because everything the AI needs is in the brief, not in its training.
       The coherence of the brief is what makes the AI coherent.
     </Insight>
+    </div>
   </>;
 }
 
@@ -298,6 +324,7 @@ function PhilosophyTab() {
       </p>
     </div>
 
+    <div style={COLS()}>
     <Insight title="Extending Your Reach into the Unmapped Parts">
       Even the most detailed campaign setting has places that haven't been fully developed yet.
       The generator reaches into that unmapped space and gives you a coherent foundation to
@@ -371,23 +398,32 @@ function PhilosophyTab() {
       a place that the conditions of your world would plausibly have produced. Then you adapt it,
       as you always do.
     </Insight>
+    </div>
   </>;
 }
 
 
+function RefSection({ title, rows }) {
+  // breakInside:avoid keeps a heading glued to its rows when the parent flows
+  // these sections into multiple columns on a wide desktop card.
+  return (
+    <section style={{ ...NO_BREAK, marginBottom:16 }}>
+      <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>{title}</div>
+      {rows.map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
+    </section>
+  );
+}
+
 function RefTab() {
-  return <>
-    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>Navigation</div>
-    {[
+  const sections = [
+    { title: 'Navigation', rows: [
       ['Create','The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).'],
       ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
       ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
       ['Compendium','Browse the built-in catalog of institutions, archetypes, stresses, and relationship systems. Switch to My Custom Content to create your own custom items.'],
       ['How to Use','This guide.'],
-    ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
-
-    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Settlement Detail Tabs</div>
-    {[
+    ]},
+    { title: 'Settlement Detail Tabs', rows: [
       ['DM Summary','One-paragraph brief + arrival scene. Designed for mid-session quick reference.'],
       ['Overview','Physical layout, key institutions, recent history hook.'],
       ['Daily Life','Wealth level, diet, crime, safety. What it feels like to live here.'],
@@ -401,61 +437,66 @@ function RefTab() {
       ['Viability','Economic stress analysis — what is working, what is fragile, what will break.'],
       ['Plot Hooks','Ready-to-run scenario seeds derived from faction tensions and NPC secrets.'],
       ['Neighbours','Cross-settlement view: linked settlements, NPC contacts, active conflicts.'],
-    ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
-
-    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Settlement Workflow</div>
-    {[
+    ]},
+    { title: 'Settlement Workflow', rows: [
       ['Campaigns','Create named campaign folders in the Settlements tab to group settlements together. Move settlements between campaigns using the arrow button. Export a whole campaign as PDF from its folder header.'],
       ['Link Neighbour','In the Settlements tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).'],
       ['Set as Neighbour','Tell the generator to bias a new settlement against an existing one. Opens the Create tab with the neighbour active.'],
       ['Edit Names','Rename any NPC or faction. Changes cascade bidirectionally to linked partners.'],
       ['Export PDF','Print-ready settlement briefing — cover page, index, relationship diagram, NPC cards, and economic appendix.'],
-    ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
-
-    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>World Map</div>
-    {[
+    ]},
+    { title: 'World Map', rows: [
       ['Drag to Place','Drag a saved settlement from the drawer below the map onto any location on the map. A new burg is created at that point, linked to your settlement.'],
       ['Click for Detail','Click any placed burg to see its linked SettlementForge data and jump to the detail view in the Settlements tab.'],
       ['Relationship Overlay','Toggle "Relations" to draw colored lines between linked settlements. Line color indicates relationship type.'],
       ['Supply Chain Overlay','Toggle "Chains" to draw supply-chain routes between exporters and importers across your saved settlements.'],
-    ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
-
-    <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'16px 0 8px' }}>Compendium</div>
-    {[
+    ]},
+    { title: 'Compendium', rows: [
       ['Built-in Catalog','Searchable reference for tiers, archetypes, stress types, relationship effects, and the full institution catalog.'],
       ['My Custom Content','Create custom institutions, resources, stressors, trade goods, trade routes, power presets, and defense presets. Custom items appear in the Settlement Editor catalog with a purple badge. All custom content persists to your browser.'],
-    ].map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
-  </>;
+    ]},
+  ];
+  return (
+    <div style={COLS(360)}>
+      {sections.map(s => <RefSection key={s.title} title={s.title} rows={s.rows} />)}
+    </div>
+  );
 }
 
 export default function HowToUse({ standalone=false }) {
   const [activeTab, setActiveTab] = useState('quick');
 
   if (standalone) return (
-    <div style={{ minHeight:'calc(100vh - 60px)', display:'flex', flexDirection:'column' }}>
-      {/* Tab bar */}
-      <div style={{ display:'flex', background:'rgba(245,237,224,0.97)', borderBottom:`1px solid ${BOR}`,
-        overflowX:'auto', flexShrink:0 }}>
-        {TABS.map(({ id, label, Icon }) => (
-          <button key={id} onClick={() => setActiveTab(id)}
-            style={{ display:'flex', alignItems:'center', gap:5, padding:'10px 16px',
-              background: activeTab===id ? 'rgba(255,251,245,0.97)' : 'transparent',
-              border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',
-              cursor:'pointer', color: activeTab===id ? INK : MUT, fontFamily:sans,
-              fontSize:FS.sm, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap',
-              WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
-            <Icon size={13} /><span style={{ marginLeft:4 }}>{label}</span>
-          </button>
-        ))}
-      </div>
-      {/* Content */}
-      <div style={{ padding:'20px', maxWidth:860, margin:'0 auto', flex:1,
-        background:'rgba(255,251,245,0.93)' }}>
-        {activeTab==='quick' && <QuickTab />}
-        {activeTab==='power' && <PowerTab />}
-        {activeTab==='logic' && <LogicTab />}
-        {activeTab==='phil'  && <PhilosophyTab />}
-        {activeTab==='ref'   && <RefTab />}
+    // Centered, shared-width card sized to its content. No full-height cream
+    // fill — short tabs let the parchment painting show through to the footer
+    // instead of stretching a dead cream rectangle (the old `flex:1` bug).
+    <div style={{ maxWidth: PAGE_MAX, margin:'0 auto', width:'100%' }}>
+      <div style={{ background:CARD, border:`1px solid ${BOR}`, borderRadius:R.xl,
+        boxShadow:ELEV[1], overflow:'hidden' }}>
+        {/* Tab bar */}
+        <div className="tab-strip" style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
+          overflowX:'auto' }}>
+          {TABS.map(({ id, label, Icon }) => (
+            <button key={id} onClick={() => setActiveTab(id)}
+              style={{ display:'flex', alignItems:'center', gap:5, padding:'12px 18px',
+                background: activeTab===id ? CARD : 'transparent',
+                border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',
+                cursor:'pointer', color: activeTab===id ? INK : MUT, fontFamily:sans,
+                fontSize:FS.sm, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap',
+                WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
+              <Icon size={13} /><span style={{ marginLeft:4 }}>{label}</span>
+            </button>
+          ))}
+        </div>
+        {/* Content — the card is PAGE_MAX wide; tab bodies fill it via their
+            own responsive multi-column layouts (no inner max-width here). */}
+        <div style={{ padding:'24px 28px' }}>
+          {activeTab==='quick' && <QuickTab />}
+          {activeTab==='power' && <PowerTab />}
+          {activeTab==='logic' && <LogicTab />}
+          {activeTab==='phil'  && <PhilosophyTab />}
+          {activeTab==='ref'   && <RefTab />}
+        </div>
       </div>
     </div>
   );

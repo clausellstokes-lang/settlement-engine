@@ -28,7 +28,7 @@ import {
 } from '../config/pricing.js';
 import { t, tx } from '../copy/index.js';
 import { useCopy } from '../hooks/useCopy.js';
-import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, BODY, swatch } from './theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, BODY, swatch, PAGE_MAX } from './theme.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 
 // Tier-icon mapping. Kept here (not in pricing config) because icons
@@ -279,7 +279,7 @@ export default function PricingPage({ onNavigate }) {
 
   return (
     <div style={{
-      maxWidth: 1100, margin: '0 auto', padding: `${SP.xxl}px ${SP.lg}px`,
+      maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.xxl}px ${SP.lg}px`,
       fontFamily: sans, color: INK,
     }}>
       <header style={{ textAlign: 'center', marginBottom: SP.xxl }}>

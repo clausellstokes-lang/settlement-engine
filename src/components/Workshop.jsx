@@ -33,14 +33,14 @@
  */
 import { useState, useMemo, useCallback } from 'react';
 import {
-  Sliders, Play, RotateCcw, _Save, _Bookmark, ChevronDown, ChevronRight,
-  Shield, Coins, Sparkles, _Flame, Skull, Swords, Crown, Globe, Mountain,
-  _Trees, _Waves, Compass, _Users, Tent, Building2, Castle, Landmark,
-  AlertTriangle, Lock, Unlock, Dice5, _Hash, Wand2,
+  Sliders, Play, RotateCcw, ChevronDown, ChevronRight,
+  Shield, Coins, Sparkles, Skull, Swords, Crown, Globe, Mountain,
+  Compass, Tent, Building2, Castle, Landmark,
+  AlertTriangle, Lock, Unlock, Dice5, Wand2,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { DEFAULT_CONFIG } from '../store/configSlice.js';
-import { GOLD, _GOLD_B, GOLD_BG, INK, _INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, _CARD_ALT, PARCH, sans, serif_, SP, R, FS, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, PARCH, sans, serif_, SP, R, FS, swatch } from './theme.js';
 
 // ── Static data ──────────────────────────────────────────────────────────────
 

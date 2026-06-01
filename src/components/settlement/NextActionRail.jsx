@@ -19,7 +19,7 @@
  */
 
 import {
-  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3, _Layers,
+  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getAiCost } from '../../config/pricing.js';
