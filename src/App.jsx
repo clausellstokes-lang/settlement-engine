@@ -59,9 +59,11 @@ import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
 const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
 
 // P107 / CP-2 — Workshop nav entry. Promoted from a nested Compendium
-// tab to a top-level destination. Cartographer-gated; wanderer/free
-// users see a locked-state preview with an Upgrade CTA. Flag-gated so
-// the nav stays at 5 items while the redesign cooks.
+// tab to a top-level destination (workshopNav now default-on). Added
+// alongside How To Use rather than swapping it out: the desktop header
+// carries all six destinations; the mobile bottom nav still caps at five
+// (slice below), where How To Use drops for signed-in users — they're
+// past onboarding and it stays one tap away on desktop and at /how-to.
 const NAV_BASE = [
   { id: 'generate',    label: 'Create',      Icon: MapPin },
   { id: 'settlements', label: 'Settlements', Icon: FolderOpen },
@@ -75,6 +77,7 @@ const NAV_WITH_WORKSHOP = [
   { id: 'workshop',    label: 'Workshop',    Icon: Settings },
   { id: 'map',         label: 'World Map',   Icon: MapIcon },
   { id: 'compendium',  label: 'Compendium',  Icon: BookOpen },
+  { id: 'howto',       label: 'How To Use',  Icon: Sparkles },
 ];
 // Resolved at module-init time so a flag flip requires a reload (which
 // is intended — flag-flipping mid-session leaves the nav inconsistent

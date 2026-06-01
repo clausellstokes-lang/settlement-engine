@@ -61,8 +61,8 @@ export const FLAGS = Object.freeze({
     description: 'P106 / E-1: click-to-edit names + pills + paragraphs in the dossier. PROMOTED default-on; flag retained as soak killswitch.',
   },
   workshopNav: {
-    default: false,
-    description: 'P107 / CP-2: Workshop as top-level nav destination (currently nested in Compendium).',
+    default: true,
+    description: 'P107 / CP-2: Workshop as top-level nav destination. PROMOTED default-on; flag retained as soak killswitch.',
   },
   versionHistory: {
     default: false,
