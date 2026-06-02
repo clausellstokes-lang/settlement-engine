@@ -10,7 +10,7 @@ commands run with your Supabase + Stripe credentials.
 After pushing to `origin/master`:
 
 1. **CI**: `.github/workflows/ci.yml` runs the check gate (validate-data →
-   typecheck → lint → 2090 tests → build). Watch:
+   typecheck → lint → ~2,400 tests → build). Watch:
    <https://github.com/clausellstokes-lang/settlement-engine/actions>
 
 2. **Vercel auto-deploy**: triggers on push to master. `vercel.json`
@@ -23,6 +23,40 @@ After pushing to `origin/master`:
 If the client app's already up but a new feature is missing, the cause
 is almost always **a) missing migration** or **b) stale edge-function
 bundle**. Check the two manual sections.
+
+## Gating production on CI (recommended)
+
+Today CI and the Vercel deploy are **independent**: a push to `master`
+triggers the Vercel production build immediately, regardless of whether
+`.github/workflows/ci.yml` passed. The local `pre-push` hook is the only
+thing between a red gate and a live deploy — and hooks can be skipped
+(`--no-verify`). For a product that handles payments, make CI a hard gate.
+Two ways, weakest → strongest:
+
+1. **Branch protection + PR flow (minimum).** GitHub → Settings → Branches
+   → add a rule for `master`: *Require status checks to pass before
+   merging* → select the **`check`** job, and *Require a pull request
+   before merging*. Stop pushing straight to `master`; land work via PRs.
+   Vercel still builds `master`, but `master` now only advances through a
+   CI-passed merge.
+
+2. **Deploy from CI (strongest).** Turn OFF Vercel's production auto-deploy
+   on push (Vercel → Settings → Git), and add a deploy step to `ci.yml`
+   that runs **after** Build, only on `master`, with a `VERCEL_TOKEN`
+   secret:
+
+   ```yaml
+   - name: Deploy to Vercel (production)
+     if: github.ref == 'refs/heads/master'
+     run: npx vercel deploy --prod --token "$VERCEL_TOKEN" --yes
+     env:
+       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+   ```
+
+   Now CI is the only path to production: no green gate, no deploy.
+
+Until one of these is in place, **always let the `pre-push` hook run** (never
+`--no-verify` to `master`) and watch the Actions tab after pushing.
 
 ## Client app (Vercel) — automatic
 

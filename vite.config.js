@@ -51,6 +51,24 @@ export default defineConfig({
       },
     },
     rollupOptions: {
+      // Fail the build on missing / unresolved named imports. Rollup only
+      // *warns* on `import { X } from './y'` when './y' has no export named X
+      // — it then emits `undefined` for X. That ships a silent bug to prod
+      // (renders undefined) AND hard-crashes the dev ESM loader, yet sails
+      // through the whole gate: ESLint doesn't resolve imports, no-unused-vars
+      // is only a warning, and tsconfig.json type-checks src/domain only. The
+      // production build is the one place that *sees* the bad import, so make
+      // it authoritative: promote those warning classes to hard errors.
+      onwarn(warning, warn) {
+        if (
+          warning.code === 'MISSING_EXPORT' ||
+          warning.code === 'UNRESOLVED_IMPORT' ||
+          /is not exported by/.test(warning.message || '')
+        ) {
+          throw new Error(`[build] ${warning.code || 'IMPORT_ERROR'}: ${warning.message}`);
+        }
+        warn(warning);
+      },
       output: {
         manualChunks(id) {
           // ── Vendor chunks (stable, cached across deploys) ─────────

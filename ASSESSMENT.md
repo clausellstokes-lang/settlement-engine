@@ -1,5 +1,14 @@
 # SettlementForge — Assessment
 
+> **⚠️ Historical snapshot (superseded).** This was an early external review.
+> Several of its findings have since been addressed and no longer describe the
+> codebase: the engine now has ~2,400 tests (it said "zero tests in 76kloc"),
+> `SettlementsPanel` and the dossier tabs are code-split (it said "2.1 MB
+> chunk"), and the domain layer is JSDoc-typechecked in CI. It's kept for the
+> still-relevant **product** thinking (thesis, pricing, onboarding) and the
+> structural risks that remain open (bus factor, FMG fork). For the current
+> system map, see **`ARCHITECTURE.md`**.
+
 ## What it is
 A constraint-driven D&D settlement simulator. Outputs a printable PDF dossier; offers a procedural fantasy-map workspace and an optional AI narrative layer. Differentiator (per your own copy): **"Most generators roll on a table. This one simulates."** Real moat — if a DM can feel the difference inside 60 seconds.
 

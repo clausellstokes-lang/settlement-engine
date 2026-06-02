@@ -36,24 +36,26 @@ jobs:
       - name: Type check
         run: npm run typecheck
 
-      # ESLint on the full src/ + tests + scripts. The error backlog
-      # was paid down to zero in v2026.05 (regex bugs, undefined imports,
-      # rules-of-hooks violations, duplicate keys). The remaining ~550
-      # warnings are React 19 forward-looking rules — surfaced for drift
-      # tracking, intentionally non-blocking. Promote to errors when
-      # adopting React Compiler.
+      # ESLint on the full src/ + tests + scripts. Correctness rules
+      # (undefined vars, dupe keys, rules-of-hooks, the design-token and
+      # analytics-event contracts) are errors; forward-looking React 19
+      # rules and unused-vars are warnings, surfaced for drift tracking
+      # without blocking. The tree currently lints clean (0 problems).
+      # Promote the React 19 warnings to errors when adopting React Compiler.
       - name: Lint
         run: npm run lint
 
-      # Example tests + property-based tests (fast-check) for the
-      # procedural engine + slice integration tests for the campaign
-      # lifecycle (canonize, apply event, undo, hydrate-from-save).
-      # 133 tests across 13 files as of v2026.05.
+      # Vitest: unit + property-based (fast-check) engine tests, domain +
+      # store + lib integration, component/UI smoke, a11y, security, and
+      # edge-function contract tests. ~2,400 tests across ~134 files.
       - name: Run tests
         run: npm run test
 
-      # Production build — confirms Vite/Rollup chunking is healthy and
-      # the bundle still produces. This is the single source of truth
-      # for "does this branch deploy."
+      # Production build — confirms Vite/Rollup chunking is healthy, the
+      # bundle still produces, and (via the vite.config onwarn guard) that
+      # no named import is missing/unresolved. NOTE: Vercel currently
+      # deploys on push to master independently of this workflow — see
+      # docs/DEPLOY.md ("Gating production on CI") to make this check a
+      # required gate before a production deploy.
       - name: Build
         run: npm run build
