@@ -7,34 +7,17 @@
  *
  * Tier resolution:
  *   - 'anon' = no session
- *   - 'free' = authenticated, no premium metadata
- *   - 'premium' = authenticated + user_metadata.tier === 'premium'
- *                  (set by Stripe webhook or admin dashboard)
+ *   - 'free' = authenticated, no premium profile grant
+ *   - 'premium' = profiles.tier === 'premium'
  *
  * Role resolution (orthogonal to tier):
  *   - 'user'      = default, normal user
  *   - 'developer' = full access, bypasses all gates
  *   - 'admin'     = admin panel access
- *   (set via profiles table role column or user_metadata.role)
+ *   (set via profiles.role only; user_metadata is not trusted)
  */
 
 import { supabase, isConfigured } from './supabase.js';
-
-/** Resolve tier from Supabase user metadata. */
-function resolveTier(user) {
-  if (!user) return 'anon';
-  const meta = user.user_metadata || {};
-  if (meta.tier === 'premium') return 'premium';
-  return 'free';
-}
-
-/** Resolve role from Supabase user metadata. */
-function resolveRole(user) {
-  if (!user) return 'user';
-  const meta = user.user_metadata || {};
-  if (['developer', 'admin'].includes(meta.role)) return meta.role;
-  return 'user';
-}
 
 /** Resolve display name from user metadata. */
 function resolveDisplayName(user) {
@@ -43,28 +26,44 @@ function resolveDisplayName(user) {
   return meta.display_name || null;
 }
 
+function normalizeTier(value, fallback = 'free') {
+  return value === 'premium' || value === 'free' ? value : fallback;
+}
+
+function normalizeRole(value) {
+  return ['developer', 'admin'].includes(value) ? value : 'user';
+}
+
 /**
- * Fetch role and display_name from profiles table (source of truth).
- * Falls back to user_metadata if profiles query fails.
+ * Fetch profile-backed auth grants from the profiles table, the source of
+ * truth for every privileged gate. On failure, fall back to safe non-
+ * privileged defaults rather than trusting user-writable metadata.
  */
-async function fetchProfileRole(user) {
-  if (!user || !supabase) return { role: resolveRole(user), displayName: resolveDisplayName(user) };
+async function fetchProfileAuth(user) {
+  if (!user) {
+    return { tier: 'anon', role: 'user', displayName: null, isFounder: false };
+  }
+  if (!supabase) {
+    return { tier: 'free', role: 'user', displayName: resolveDisplayName(user), isFounder: false };
+  }
   try {
     const { data, error } = await supabase
       .from('profiles')
-      .select('role, display_name')
+      .select('role, display_name, tier, is_founder')
       .eq('id', user.id)
       .single();
     if (!error && data) {
       return {
-        role: data.role || 'user',
-        displayName: data.display_name || null,
+        tier: normalizeTier(data.tier),
+        role: normalizeRole(data.role),
+        displayName: data.display_name || resolveDisplayName(user),
+        isFounder: data.is_founder === true,
       };
     }
   } catch {
-    // Fallback to metadata
+    // Safe defaults below.
   }
-  return { role: resolveRole(user), displayName: resolveDisplayName(user) };
+  return { tier: 'free', role: 'user', displayName: resolveDisplayName(user), isFounder: false };
 }
 
 // ── Supabase auth methods ───────────────────────────────────────────────────
@@ -72,13 +71,14 @@ async function fetchProfileRole(user) {
 async function supabaseSignUp(email, password) {
   const { data, error } = await supabase.auth.signUp({ email, password });
   if (error) throw error;
-  const { role, displayName } = await fetchProfileRole(data.user);
+  const profile = await fetchProfileAuth(data.user);
   return {
     user: data.user,
     session: data.session,
-    tier: resolveTier(data.user),
-    role,
-    displayName,
+    tier: profile.tier,
+    role: profile.role,
+    displayName: profile.displayName,
+    isFounder: profile.isFounder,
     needsVerification: !data.session, // email confirmation required
   };
 }
@@ -97,13 +97,14 @@ async function supabaseSignIn(email, password, rememberMe = true) {
     } catch { /* ignore */ }
   }
 
-  const { role, displayName } = await fetchProfileRole(data.user);
+  const profile = await fetchProfileAuth(data.user);
   return {
     user: data.user,
     session: data.session,
-    tier: resolveTier(data.user),
-    role,
-    displayName,
+    tier: profile.tier,
+    role: profile.role,
+    displayName: profile.displayName,
+    isFounder: profile.isFounder,
   };
 }
 
@@ -116,13 +117,14 @@ async function supabaseGetSession() {
   const { data: { session }, error } = await supabase.auth.getSession();
   if (error) throw error;
   if (!session) return null;
-  const { role, displayName } = await fetchProfileRole(session.user);
+  const profile = await fetchProfileAuth(session.user);
   return {
     user: session.user,
     session,
-    tier: resolveTier(session.user),
-    role,
-    displayName,
+    tier: profile.tier,
+    role: profile.role,
+    displayName: profile.displayName,
+    isFounder: profile.isFounder,
   };
 }
 
@@ -251,10 +253,18 @@ function supabaseOnAuthChange(callback) {
   const { data: { subscription } } = supabase.auth.onAuthStateChange(
     async (event, session) => {
       if (session?.user) {
-        const { role, displayName } = await fetchProfileRole(session.user);
-        callback(event, session.user, session, resolveTier(session.user), role, displayName);
+        const profile = await fetchProfileAuth(session.user);
+        callback(
+          event,
+          session.user,
+          session,
+          profile.tier,
+          profile.role,
+          profile.displayName,
+          profile.isFounder,
+        );
       } else {
-        callback(event, null, null, 'anon', 'user', null);
+        callback(event, null, null, 'anon', 'user', null, false);
       }
     }
   );
@@ -284,7 +294,7 @@ function mockSaveAuth(data) {
 async function mockSignUp(email, _password) {
   const user = { id: 'mock_' + Date.now(), email, user_metadata: {} };
   const session = { access_token: 'mock_token_' + Date.now() };
-  const result = { user, session, tier: 'free', role: 'user', displayName: null, needsVerification: false };
+  const result = { user, session, tier: 'free', role: 'user', displayName: null, isFounder: false, needsVerification: false };
   mockSaveAuth(result);
   return result;
 }

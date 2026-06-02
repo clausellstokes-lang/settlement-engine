@@ -80,6 +80,9 @@ let auth;
 let stubs;
 
 beforeEach(async () => {
+  vi.resetModules();
+  vi.clearAllMocks();
+
   stubs = {
     rpcImpl:        vi.fn(),
     fromUpdate:     vi.fn(),

@@ -2,8 +2,8 @@
  * admin-actions — Edge function for developer/admin operations.
  *
  * Actions:
- *   update_user_metadata — Update a user's auth metadata (tier, role)
- *   update_user_credits  — Adjust a user's credit balance
+ *   update_user_metadata — Update profile-backed auth metadata (tier, role)
+ *   update_user_credits  — Set a user's credit balance through the ledger
  *   list_users           — List all users (with profiles)
  *   get_stats            — System-wide statistics
  *
@@ -22,6 +22,79 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
+const jsonHeaders = { ...corsHeaders, "Content-Type": "application/json" };
+const ALLOWED_ROLES = ["user", "developer", "admin"];
+const ALLOWED_TIERS = ["free", "premium"];
+const ALLOWED_METADATA_KEYS = ["role", "tier", "display_name", "is_founder"];
+
+function json(body: Record<string, unknown>, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: jsonHeaders,
+  });
+}
+
+function errorMessage(err: unknown) {
+  return err instanceof Error ? err.message : String(err);
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return !!value && typeof value === "object" && !Array.isArray(value);
+}
+
+function hasOwn(record: Record<string, unknown>, key: string) {
+  return Object.prototype.hasOwnProperty.call(record, key);
+}
+
+function buildProfilePatch(metadata: Record<string, unknown>) {
+  const unsupported = Object.keys(metadata).filter((key) =>
+    !ALLOWED_METADATA_KEYS.includes(key)
+  );
+  if (unsupported.length) {
+    throw new Error(`Unsupported metadata keys: ${unsupported.join(", ")}`);
+  }
+
+  const patch: Record<string, unknown> = {};
+
+  if (hasOwn(metadata, "role")) {
+    const role = String(metadata.role);
+    if (!ALLOWED_ROLES.includes(role)) throw new Error(`Invalid role: ${role}`);
+    patch.role = role;
+  }
+
+  if (hasOwn(metadata, "tier")) {
+    const tier = String(metadata.tier);
+    if (!ALLOWED_TIERS.includes(tier)) throw new Error(`Invalid tier: ${tier}`);
+    patch.tier = tier;
+  }
+
+  if (hasOwn(metadata, "display_name")) {
+    const rawName = metadata.display_name;
+    if (rawName === null || rawName === undefined) {
+      patch.display_name = null;
+    } else {
+      const displayName = String(rawName).trim();
+      if (displayName.length > 64) {
+        throw new Error("display_name too long (max 64 chars)");
+      }
+      patch.display_name = displayName || null;
+    }
+  }
+
+  if (hasOwn(metadata, "is_founder")) {
+    if (typeof metadata.is_founder !== "boolean") {
+      throw new Error("is_founder must be boolean");
+    }
+    patch.is_founder = metadata.is_founder;
+  }
+
+  if (Object.keys(patch).length === 0) {
+    throw new Error("No supported metadata keys supplied");
+  }
+
+  return patch;
+}
+
 serve(async (req) => {
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
@@ -37,10 +110,7 @@ serve(async (req) => {
     // Get the user's JWT from the Authorization header
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) {
-      return new Response(JSON.stringify({ error: "Missing authorization" }), {
-        status: 401,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return json({ error: "Missing authorization" }, 401);
     }
 
     // Create a client with the user's JWT to verify their identity
@@ -59,10 +129,7 @@ serve(async (req) => {
     } = await userClient.auth.getUser();
 
     if (authError || !callingUser) {
-      return new Response(JSON.stringify({ error: "Invalid token" }), {
-        status: 401,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return json({ error: "Invalid token" }, 401);
     }
 
     // Check that the calling user has an elevated role
@@ -77,126 +144,106 @@ serve(async (req) => {
       !callerProfile ||
       !["developer", "admin"].includes(callerProfile.role)
     ) {
-      return new Response(JSON.stringify({ error: "Insufficient privileges" }), {
-        status: 403,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return json({ error: "Insufficient privileges" }, 403);
     }
 
     // Parse the request body
-    const { action, userId, metadata, credits } = await req.json();
+    const { action, userId, metadata, credits, reason } = await req.json();
+    const auditReason = typeof reason === "string" && reason.trim()
+      ? reason.trim()
+      : null;
 
     switch (action) {
       case "update_user_metadata": {
         if (!userId || !metadata) {
-          return new Response(
-            JSON.stringify({ error: "Missing userId or metadata" }),
-            {
-              status: 400,
-              headers: { ...corsHeaders, "Content-Type": "application/json" },
-            }
-          );
+          return json({ error: "Missing userId or metadata" }, 400);
+        }
+        if (!isRecord(metadata)) {
+          return json({ error: "metadata must be an object" }, 400);
         }
 
-        // Update user metadata via admin API
-        const { error: updateError } =
+        let profilePatch: Record<string, unknown>;
+        try {
+          profilePatch = buildProfilePatch(metadata);
+        } catch (e) {
+          return json({ error: errorMessage(e) }, 400);
+        }
+
+        const { data: profileResult, error: profileError } =
+          await adminClient.rpc("service_update_profile_metadata", {
+            actor_user: callingUser.id,
+            target_user: userId,
+            profile_patch: profilePatch,
+            reason: auditReason,
+          });
+
+        if (profileError) {
+          return json({ error: profileError.message }, 500);
+        }
+
+        // profiles is the source of truth; auth metadata is a compatibility
+        // mirror for legacy JWT/display-name surfaces.
+        const { error: mirrorError } =
           await adminClient.auth.admin.updateUserById(userId, {
-            user_metadata: metadata,
+            user_metadata: profilePatch,
           });
 
-        if (updateError) {
-          return new Response(JSON.stringify({ error: updateError.message }), {
-            status: 500,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
+        if (mirrorError) {
+          console.warn("[admin-actions] user_metadata mirror failed:", mirrorError.message);
+          return json({
+            success: true,
+            profile: profileResult,
+            warning: "Profile updated, but auth metadata mirror failed",
           });
         }
 
-        return new Response(JSON.stringify({ success: true }), {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        return json({ success: true, profile: profileResult });
+      }
+
+      case "list_users": {
+        const rawSearch = typeof metadata?.search === "string"
+          ? metadata.search.trim()
+          : "";
+
+        let query = adminClient
+          .from("profiles")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(100);
+
+        if (rawSearch) {
+          query = query.or(`email.ilike.%${rawSearch}%,display_name.ilike.%${rawSearch}%`);
+        }
+
+        const { data, error } = await query;
+        if (error) return json({ error: error.message }, 500);
+
+        return json({ users: data || [] });
       }
 
       case "update_user_credits": {
         if (!userId || credits === undefined) {
-          return new Response(
-            JSON.stringify({ error: "Missing userId or credits" }),
-            {
-              status: 400,
-              headers: { ...corsHeaders, "Content-Type": "application/json" },
-            }
-          );
+          return json({ error: "Missing userId or credits" }, 400);
         }
-
-        // Tier 9.9 audit plan #2 — keep the SET semantics admin tooling
-        // expects, but record the underlying delta as a credit_ledger
-        // entry so the audit trail stays continuous. Three-step:
-        //   1. Read current credits.
-        //   2. Compute delta = newValue - currentValue.
-        //   3. Insert a ledger row reflecting the change direction.
-        //   4. SET the new value (atomic — the read could be stale
-        //      under concurrent admin actions, but the ledger row
-        //      makes the change auditable either way).
-        //
-        // A more elegant migration to admin_grant_credits would require
-        // a paired admin_revoke_credits RPC (currently missing). When
-        // that lands, this branch should route through the two RPCs
-        // and drop the direct SET entirely.
 
         const newCredits = parseInt(String(credits), 10);
-
-        const { data: current } = await adminClient
-          .from("profiles")
-          .select("credits")
-          .eq("id", userId)
-          .single();
-
-        const prevCredits = (current && typeof current.credits === "number") ? current.credits : 0;
-        const delta = newCredits - prevCredits;
-
-        // Write a ledger row for the delta. We use grant/spend kinds
-        // depending on direction; source='admin_set' so reporting can
-        // distinguish from organic grants.
-        if (delta !== 0) {
-          const { error: ledgerErr } = await adminClient.from("credit_ledger").insert({
-            user_id: userId,
-            kind:    delta > 0 ? "grant" : "spend",
-            amount:  Math.abs(delta),
-            source:  "admin_set",
-            metadata: { actor_id: user.id, prev: prevCredits, next: newCredits },
-          });
-          if (ledgerErr) {
-            console.warn("[admin-actions] credit_ledger write failed; continuing with direct SET:", ledgerErr.message);
-          }
+        if (!Number.isFinite(newCredits) || Number.isNaN(newCredits) || newCredits < 0) {
+          return json({ error: "credits must be a non-negative integer" }, 400);
         }
 
-        const { error: creditError } = await adminClient
-          .from("profiles")
-          .update({ credits: newCredits })
-          .eq("id", userId);
+        const { data: result, error: creditError } =
+          await adminClient.rpc("service_set_credits", {
+            actor_user: callingUser.id,
+            target_user: userId,
+            new_credits: newCredits,
+            reason: auditReason,
+          });
 
         if (creditError) {
-          return new Response(JSON.stringify({ error: creditError.message }), {
-            status: 500,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          });
+          return json({ error: creditError.message }, 500);
         }
 
-        // Audit row capturing actor + before/after.
-        await adminClient.rpc("_audit_action", {
-          p_actor_id: user.id,
-          p_target_id: userId,
-          p_action: "admin_set_credits",
-          p_before: { credits: prevCredits },
-          p_after:  { credits: newCredits, delta },
-          p_reason: null,
-        }).catch((e: unknown) => {
-          // _audit_action is internal — catch is best-effort.
-          console.warn("[admin-actions] _audit_action failed:", (e as Error)?.message);
-        });
-
-        return new Response(JSON.stringify({ success: true, prev: prevCredits, next: newCredits, delta }), {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        return json({ success: true, ...(result || {}) });
       }
 
       case "get_stats": {
@@ -215,32 +262,18 @@ serve(async (req) => {
             ["developer", "admin"].includes(p.role)
           ).length || 0;
 
-        return new Response(
-          JSON.stringify({
-            total,
-            premiumCount,
-            totalCredits,
-            developerCount,
-          }),
-          {
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          }
-        );
+        return json({
+          total,
+          premiumCount,
+          totalCredits,
+          developerCount,
+        });
       }
 
       default:
-        return new Response(
-          JSON.stringify({ error: `Unknown action: ${action}` }),
-          {
-            status: 400,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          }
-        );
+        return json({ error: `Unknown action: ${action}` }, 400);
     }
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return json({ error: errorMessage(err) }, 500);
   }
 });

@@ -54,25 +54,27 @@ export const createAuthSlice = (set, get) => ({
     tier: 'anon',         // 'anon' | 'free' | 'premium'
     role: 'user',         // 'user' | 'developer' | 'admin'
     displayName: null,    // custom display name (from profiles table)
+    isFounder: false,     // founder lifetime grant (from profiles table)
     loading: true,        // true while checking initial session
     error: null,          // last auth error message
   },
 
   // ── Core setters ──────────────────────────────────────────────────────────
-  setAuth: (user, session, tier, role, displayName) =>
+  setAuth: (user, session, tier, role, displayName, isFounder = false) =>
     set(state => {
       state.auth = {
         user, session,
         tier: tier || 'free',
         role: role || 'user',
         displayName: displayName || null,
+        isFounder: Boolean(isFounder),
         loading: false, error: null,
       };
     }),
 
   clearAuth: () =>
     set(state => {
-      state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, loading: false, error: null };
+      state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, loading: false, error: null };
     }),
 
   setAuthLoading: (loading) =>
@@ -89,11 +91,9 @@ export const createAuthSlice = (set, get) => ({
    *  chronicle history, supply chains, custom content, etc.). Orthogonal to
    *  role — an elevated role is checked separately via isElevated(). */
   isPremium: () => get().auth.tier === 'premium',
-  /** Whether the user holds a Founder Lifetime grant. Set by the
-   *  stripe-webhook handler at purchase time; surfaces a small badge
-   *  on their dossiers and unlocks Founder-only conveniences. Reads
-   *  from user_metadata so the value follows the JWT across devices. */
-  isFounder: () => Boolean(get().auth.user?.user_metadata?.is_founder),
+  /** Whether the user holds a Founder Lifetime grant. The profiles row is
+   *  the source of truth; user_metadata is only a compatibility mirror. */
+  isFounder: () => Boolean(get().auth.isFounder),
 
   // ── Auth actions (async, call Supabase or mock) ───────────────────────────
 
@@ -108,6 +108,7 @@ export const createAuthSlice = (set, get) => ({
             user: result.user, session: result.session,
             tier: result.tier, role: result.role || 'user',
             displayName: result.displayName || null,
+            isFounder: Boolean(result.isFounder),
             loading: false, error: null,
           };
         });
@@ -120,7 +121,7 @@ export const createAuthSlice = (set, get) => ({
     }
 
     // Listen for auth state changes (token refresh, sign out from another tab)
-    authService.onAuthChange((event, user, session, tier, role, displayName) => {
+    authService.onAuthChange((event, user, session, tier, role, displayName, isFounder) => {
       if (event === 'SIGNED_OUT') {
         get().clearAuth();
       } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
@@ -129,6 +130,7 @@ export const createAuthSlice = (set, get) => ({
             user, session, tier,
             role: role || 'user',
             displayName: displayName || null,
+            isFounder: Boolean(isFounder),
             loading: false, error: null,
           };
         });
@@ -168,7 +170,7 @@ export const createAuthSlice = (set, get) => ({
         // module init time in store/index.js (see registerSaveIntent).
         if (event === 'SIGNED_IN' && user?.id) {
           import('../lib/authIntents.js').then(({ consume }) => {
-            consume({ user, tier, role, displayName });
+            consume({ user, tier, role, displayName, isFounder });
           }).catch((e) => {
             console.warn('[authSlice] authIntents.consume failed:', e);
           });
@@ -189,6 +191,7 @@ export const createAuthSlice = (set, get) => ({
             user: result.user, session: result.session,
             tier: result.tier, role: result.role || 'user',
             displayName: result.displayName || null,
+            isFounder: Boolean(result.isFounder),
             loading: false, error: null,
           };
         });
@@ -212,6 +215,7 @@ export const createAuthSlice = (set, get) => ({
           user: result.user, session: result.session,
           tier: result.tier, role: result.role || 'user',
           displayName: result.displayName || null,
+          isFounder: Boolean(result.isFounder),
           loading: false, error: null,
         };
       });
