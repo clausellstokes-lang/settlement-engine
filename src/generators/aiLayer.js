@@ -217,53 +217,107 @@ function buildAiLayerPrompt(ctx) {
   return lines.join('\n');
 }
 
-// ── API call ─────────────────────────────────────────────────────────────────
+// ── Local fallback ───────────────────────────────────────────────────────────
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function cloneSettlement(settlement) {
+  try {
+    return structuredClone(settlement);
+  } catch {
+    return JSON.parse(JSON.stringify(settlement || {}));
+  }
+}
+
+function joinList(items, fallback) {
+  const clean = (items || []).filter(Boolean);
+  if (!clean.length) return fallback;
+  if (clean.length === 1) return clean[0];
+  return `${clean.slice(0, -1).join(', ')} and ${clean.at(-1)}`;
+}
+
+function buildLocalThesis(ctx) {
+  const governing = ctx.governing && ctx.governing !== 'none'
+    ? `Power gathers around ${ctx.governing}`
+    : 'Power is diffuse enough that daily authority has to be negotiated in public';
+  const economy = ctx.viabilitySummary || ctx.prosperity || 'a practical economy with visible constraints';
+  const stress = ctx.stresses.length
+    ? `Its visible strain is ${joinList(ctx.stresses, 'pressure from several directions')}.`
+    : 'Its pressure points are quieter: habit, dependency, and the ordinary cost of keeping people fed.';
+
+  return `${ctx.name} reads as a ${ctx.tier} whose identity comes from the collision between governance, trade, and survival. ${governing}, while the economy presents as ${economy}. ${stress}\n\nFor a DM, the useful angle is not a single villain or single resource, but the pattern: institutions are doing enough to keep the settlement legible, while shortages, loyalties, and public order decide which promises people believe.`;
+}
+
+function buildLocalDailyLife(ctx) {
+  const food = ctx.foodSituation || 'ordinary food security';
+  const safety = ctx.safetyLabel || `${ctx.safetyScore}/100 safety`;
+  const services = joinList(ctx.services.slice(0, 4), 'the market, shrine, workshop, and public well');
+
+  return `Morning gathers around ${services}. People learn the day by watching who arrives early, which doors stay shut, and whether prices move before noon.\n\nFood feels like ${food}, and safety feels like ${safety}. Those facts shape small choices: when children are sent on errands, how loudly debts are discussed, and whether strangers are treated as opportunity or trouble.\n\nBy evening, the settlement narrows into familiar rooms and repeated bargains. News travels faster than law, reputation does more work than paperwork, and the public mood is set by whoever can make tomorrow feel predictable.`;
+}
+
+function buildLocalNotes(ctx) {
+  return {
+    overview: `${ctx.name} is best read through its central balance: ${ctx.viabilitySummary || 'the settlement keeps functioning, but not without tradeoffs'}. The important table-facing question is who benefits from that balance and who absorbs the cost.`,
+    economics: `The economic picture turns on ${ctx.foodSituation || 'food supply'} and ${joinList(ctx.chains, 'local production')}. Shortages and trade dependencies should show up as prices, favors, and pressure on marginal households.`,
+    services: `The service mix points to who the settlement is built to serve. ${joinList(ctx.services.slice(0, 5), 'Basic civic services')} define the visible public life, while any absence at this tier is a useful adventure hook.`,
+    power: `${ctx.governing || 'No single faction'} sets the political texture. Stability at ${ctx.stability}/100 means authority should feel ${ctx.stability >= 60 ? 'recognizable and procedural' : 'personal, contested, and frequently renegotiated'}.`,
+    defense: `Defense is ${ctx.defense || 'uneven'}. Use that as a lived detail: gates, watches, drills, avoided roads, or the simple fact that some people know exactly where to run.`,
+    npcs: `Key figures should personify systems rather than merely decorate them. ${joinList(ctx.keyNPCs, 'Local notables')} are strongest when each one reveals a pressure point in economy, power, faith, or safety.`,
+    history: `The past matters because it explains what people think is normal. ${ctx.historicalChar || 'The settlement history'} should color how residents interpret every current threat or opportunity.`,
+    resources: `Resources define both pride and vulnerability. ${joinList(ctx.resources, 'Local materials')} can be treated as the reason outsiders care, while missing imports explain who has leverage.`,
+    viability: `${ctx.viabilitySummary || 'Viability is mixed'}. Translate the abstract result into queues, delayed repairs, political excuses, and household-level compromises.`,
+    plot_hooks: `The strongest hooks grow from the same systems that shape ordinary life. ${joinList(ctx.plotHooks, 'Local tensions')} should feel like symptoms of the settlement, not events pasted on top.`,
+  };
+}
+
+function buildLocalCompass(ctx) {
+  return {
+    hooks: ctx.plotHooks.slice(0, 3),
+    redFlags: [
+      ...(ctx.criticalIssues || []),
+      ...(ctx.tradeDeps || []).map(dep => `Critical dependency: ${dep}`),
+    ].slice(0, 4),
+    twist: ctx.conflicts?.[0] || ctx.tensions?.[0] || 'The public story of who keeps the settlement stable is probably incomplete.',
+  };
+}
 
 export async function runAiLayer(settlement, onProgress) {
   const ctx    = extractFullContext(settlement);
-  const prompt = buildAiLayerPrompt(ctx);
+  const _prompt = buildAiLayerPrompt(ctx);
 
   onProgress?.('Reading the settlement…');
-
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4000,
-      system: 'You are a worldbuilding consultant for tabletop RPG game masters. You write specific, grounded, non-generic content. You always return valid JSON exactly as requested — no markdown, no code fences.',
-      messages: [{ role: 'user', content: prompt }],
-    }),
-  });
-
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err?.error?.message || `API error ${res.status}`);
-  }
+  await delay(200);
 
   onProgress?.('Weaving the narrative…');
+  await delay(200);
 
-  const data = await res.json();
-  const text = data.content
-    ?.filter(b => b.type === 'text')
-    .map(b => b.text)
-    .join('')
-    .trim();
-  if (!text) throw new Error('Empty response from API');
+  const base = cloneSettlement(settlement);
+  const narrativeNotes = buildLocalNotes(ctx);
 
-  // Parse JSON — strip any accidental markdown fences
-  const clean = text.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim();
-  let parsed;
-  try {
-    parsed = JSON.parse(clean);
-  } catch (e) {
-    throw new Error('AI returned invalid JSON — try again', { cause: e });
-  }
-
-  // Validate structure
-  if (!parsed.thesis || !parsed.dailyLife || !parsed.tabNotes) {
-    throw new Error('AI response missing required fields — try again');
-  }
-
-  return parsed;
+  return {
+    ...base,
+    thesis: buildLocalThesis(ctx),
+    dailyLife: buildLocalDailyLife(ctx),
+    tabNotes: narrativeNotes,
+    narrativeNotes,
+    dmCompass: buildLocalCompass(ctx),
+    identityMarkers: [
+      ctx.governing && ctx.governing !== 'none' ? `Governed by ${ctx.governing}` : null,
+      ctx.foodSituation,
+      ctx.defense ? `Defense posture: ${ctx.defense}` : null,
+      ctx.magicInsts.length ? `Magic institutions: ${joinList(ctx.magicInsts, 'none')}` : null,
+    ].filter(Boolean),
+    frictionPoints: [
+      ...ctx.conflicts,
+      ...ctx.tensions,
+      ...ctx.criticalIssues,
+    ].filter(Boolean).slice(0, 6),
+    connectionsMap: [
+      ...(ctx.keyNPCs || []).slice(0, 3).map(npc => `${npc} reflects the settlement's public pressures.`),
+      ...(ctx.factions || []).slice(0, 3).map(faction => `${faction} has visible leverage in civic life.`),
+    ],
+  };
 }

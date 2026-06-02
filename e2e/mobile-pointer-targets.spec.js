@@ -35,11 +35,8 @@ const TARGET_FLOOR_PX = 44;
 // project doesn't try to assert mobile-specific selectors. Pass
 // `--project=mobile-safari` (or omit `--project` and Playwright will
 // run every project; the desktop run will skip).
-test.skip(({ browserName, project }, testInfo) => {
-  // testInfo.project.name is set by Playwright; older versions exposed
-  // it via the destructured `project` arg. Either is fine.
-  const projectName = testInfo.project?.name || project?.name;
-  return projectName !== 'mobile-safari';
+test.skip(({ isMobile }) => {
+  return !isMobile;
 }, 'mobile-only suite — skipped on desktop projects');
 
 test.describe('P99 mobile pointer targets — anonymous landing', () => {

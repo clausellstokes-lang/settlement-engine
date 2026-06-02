@@ -46,7 +46,6 @@ import { FS, RED, swatch } from '../theme.js';
 
 const GOLD = '#C9A24C';
 const GOLD_DIM = '#D9B566';
-const BORDER = '#E8D9B0';
 
 /**
  * @typedef {Object} EditableInlineProps
@@ -88,12 +87,6 @@ export default function EditableInline({
   const [error, setError] = useState(null);
   const inputRef = useRef(null);
   const triggerRef = useRef(null);
-
-  // Keep draft in sync if the parent prop changes while we're NOT editing.
-  // While editing, the user's keystrokes own the draft.
-  useEffect(() => {
-    if (!editing) setDraft(value ?? '');
-  }, [value, editing]);
 
   // Focus the input when we enter edit mode + place cursor at end.
   useEffect(() => {

@@ -59,6 +59,7 @@ import {
 } from '../domain/pendingEdits.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
+import { propagateRegionalEvent } from '../domain/region/index.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
 import { inferImportance }   from '../domain/entities/npcs.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
@@ -73,6 +74,37 @@ import {
 // Workshop, sample fork — counts against the same 3/day allowance. The
 // cap used to live only in HomeHero, which let regeneration bypass it.
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
+import { saves as savesService } from '../lib/saves.js';
+
+function cloneJson(value) {
+  if (value === undefined || value === null) return value;
+  return JSON.parse(JSON.stringify(value));
+}
+
+function persistSaveUpdate(saveId, partial) {
+  if (!saveId || !partial) return;
+  savesService.update(saveId, partial).catch(e => {
+    console.warn('[settlementSlice] save update failed', e);
+  });
+}
+
+function saveEnvelopeFor(saveId, save, settlement, campaignState) {
+  return {
+    ...(save || {}),
+    id: saveId || save?.id || settlement?.id || null,
+    name: save?.name || settlement?.name || 'Untitled Settlement',
+    tier: save?.tier || settlement?.tier || 'unknown',
+    settlement,
+    campaignState: campaignState || save?.campaignState || null,
+  };
+}
+
+function visibleSettlementIdsForCampaign(state, campaign) {
+  const placements = campaign?.mapState?.placements || state.mapState?.placements || {};
+  return Object.values(placements)
+    .map(p => p?.settlementId)
+    .filter(Boolean);
+}
 
 // ── Per-entity-kind nested array resolver ──────────────────────────────
 //
@@ -153,6 +185,7 @@ export const createSettlementSlice = (set, get) => ({
   settlement:    null,   // current generated settlement object
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
   savedSettlementsLoaded: false, // true once hydrated from savesService
+  activeSaveId:  null,   // save id backing the currently-open detail view
   lastSeed:      null,   // seed from last generation (for replay/determinism)
   lastCtx:       null,   // full pipeline context from last run (for reactive re-runs)
   usePipeline:   true,   // toggle between legacy and pipeline generator
@@ -486,6 +519,7 @@ export const createSettlementSlice = (set, get) => ({
       const now = new Date().toISOString();
       set(state => {
         state.settlement = result;
+        state.activeSaveId = null;
         state.lastSeed = seed;
         state.lastCtx = capturedCtx;
         state.systemState = systemState;
@@ -520,6 +554,7 @@ export const createSettlementSlice = (set, get) => ({
       result = eng.engineGenerate(fullConfig);
       set(state => {
         state.settlement = result;
+        state.activeSaveId = null;
         state.lastSeed = null;
         state.lastCtx = null;
         state.systemState = null;
@@ -544,11 +579,15 @@ export const createSettlementSlice = (set, get) => ({
   },
 
   setSettlement: (settlement) =>
-    set(state => { state.settlement = settlement; }),
+    set(state => {
+      state.settlement = settlement;
+      state.activeSaveId = null;
+    }),
 
   clearSettlement: () =>
     set(state => {
       state.settlement = null;
+      state.activeSaveId = null;
       state.lastSeed = null;
       state.lastCtx = null;
       state.whatIfPreview = null;
@@ -971,6 +1010,17 @@ export const createSettlementSlice = (set, get) => ({
   applyEvent: (event) => {
     const state = get();
     if (!state.settlement) return null;
+    const activeSaveId = state.activeSaveId || null;
+    const beforeSave = activeSaveId
+      ? state.savedSettlements.find(save => String(save.id) === String(activeSaveId))
+      : null;
+    const campaign = activeSaveId && state.phase === 'canon'
+      ? (state.campaigns || []).find(c => (c.settlementIds || []).map(String).includes(String(activeSaveId)))
+      : null;
+    const beforeEnvelope = activeSaveId
+      ? saveEnvelopeFor(activeSaveId, beforeSave, state.settlement, beforeSave?.campaignState)
+      : null;
+
     const { logEntry, nextSystemState, nextSettlement } = domainApplyEvent({
       settlement: state.settlement,
       systemState: state.systemState,
@@ -1018,6 +1068,46 @@ export const createSettlementSlice = (set, get) => ({
         s.eventLog.push(logEntry);
       }
     });
+
+    const afterState = get();
+    let afterCampaignState = null;
+    if (activeSaveId && afterState.settlement) {
+      afterCampaignState = pickleCampaignState(afterState);
+      const savePartial = {
+        settlement: cloneJson(afterState.settlement),
+        campaignState: afterCampaignState,
+        timestamp: afterState.editedAt,
+      };
+      if (typeof afterState.updateSavedSettlement === 'function') {
+        afterState.updateSavedSettlement(activeSaveId, savePartial);
+      }
+      persistSaveUpdate(activeSaveId, {
+        settlement: savePartial.settlement,
+        campaignState: savePartial.campaignState,
+      });
+    }
+
+    if (campaign && beforeEnvelope && typeof afterState.setCampaignRegionalGraph === 'function') {
+      const afterEnvelope = saveEnvelopeFor(
+        activeSaveId,
+        beforeSave,
+        afterState.settlement,
+        afterCampaignState || beforeSave?.campaignState,
+      );
+      const result = propagateRegionalEvent({
+        graph: campaign.regionalGraph,
+        beforeSettlement: beforeEnvelope,
+        afterSettlement: afterEnvelope,
+        event,
+        activeSettlementId: activeSaveId,
+        visibleSettlementIds: visibleSettlementIdsForCampaign(afterState, campaign),
+        maxDepth: 2,
+        waveDecay: 0.45,
+      });
+      if (result.impacts.length > 0) {
+        afterState.setCampaignRegionalGraph(campaign.id, result.graph);
+      }
+    }
     return logEntry;
   },
 
@@ -1098,6 +1188,7 @@ export const createSettlementSlice = (set, get) => ({
     if (!save) return;
     const cs = save.campaignState || {};
     state.settlement     = save.settlement || state.settlement;
+    state.activeSaveId   = save.id || null;
     state.lastSeed       = save.seed || state.lastSeed;
     state.phase          = cs.phase || 'draft';
     state.eventLog       = Array.isArray(cs.eventLog) ? [...cs.eventLog] : [];

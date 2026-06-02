@@ -35,6 +35,8 @@
  * self-contained, same constraint Phase 9 honored.
  */
 
+import { deriveAllActiveConditions } from './activeConditions.js';
+
 // ── Status remap ──────────────────────────────────────────────────────────
 // Legacy vocabulary → canonical vocabulary per the roadmap. The status
 // fields encode different intensities:
@@ -152,6 +154,103 @@ function inferFailureConsequence(chain) {
   return h.failureConsequence;
 }
 
+// ── Regional pressure inference ─────────────────────────────────────────
+// The regional engine materializes impacts as active conditions. Supply
+// chains read those conditions as additional pressure, preserving the
+// generator's base chain output while letting campaign-canon causality
+// explain why a normally stable chain has become fragile.
+
+const REGIONAL_CHAIN_ARCHETYPES = new Set([
+  'regional_import_shortage',
+  'regional_export_market_loss',
+  'regional_route_disruption',
+  'regional_service_disruption',
+  'regional_conflict_pressure',
+  'regional_protection_gap',
+  'regional_tax_revenue_disruption',
+]);
+
+function searchableChainText(chain) {
+  return [
+    chain?.name,
+    chain?.label,
+    chain?.chainId,
+    chain?.needKey,
+    chain?.needLabel,
+    chain?.resource,
+    ...(Array.isArray(chain?.outputs) ? chain.outputs : []),
+    ...(Array.isArray(chain?.services) ? chain.services : []),
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+}
+
+function conditionMatchesChain(condition, chain, haystack) {
+  if (!condition || !chain) return false;
+  const systems = Array.isArray(condition.affectedSystems) ? condition.affectedSystems : [];
+  if (systems.includes(chain.needKey)) return true;
+  if (chain.exportable && systems.some(s => ['trade_connectivity', 'merchant_wealth'].includes(s))) return true;
+  if (chain.entrepot && systems.includes('trade_connectivity')) return true;
+  const conditionText = [
+    condition.label,
+    condition.description,
+    ...(Array.isArray(condition.causes) ? condition.causes.map(c => c.reason || c.effect || c.source) : []),
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+  return haystack
+    .split(/[^a-z0-9]+/)
+    .filter(token => token.length >= 4)
+    .some(token => conditionText.includes(token));
+}
+
+function inferRegionalPressures(chain, settlement) {
+  if (!settlement) return [];
+  const haystack = searchableChainText(chain);
+  return deriveAllActiveConditions(settlement)
+    .filter(condition => REGIONAL_CHAIN_ARCHETYPES.has(condition.archetype))
+    .filter(condition => conditionMatchesChain(condition, chain, haystack))
+    .map(condition => ({
+      id: condition.id,
+      archetype: condition.archetype,
+      label: condition.label,
+      severity: condition.severity,
+      status: condition.status,
+      affectedSystems: Array.isArray(condition.affectedSystems) ? [...condition.affectedSystems] : [],
+    }))
+    .sort((a, b) => (b.severity || 0) - (a.severity || 0));
+}
+
+function applyRegionalPressureToStatus(baseStatus, regionalPressures) {
+  if (!regionalPressures.length) return baseStatus;
+  const maxSeverity = Math.max(...regionalPressures.map(p => p.severity || 0));
+  const severeCount = regionalPressures.filter(p => (p.severity || 0) >= 0.55).length;
+
+  if (baseStatus === 'blocked' || baseStatus === 'captured' || baseStatus === 'collapsing') {
+    return severeCount >= 2 ? 'collapsing' : baseStatus;
+  }
+  if (baseStatus === 'scarce') {
+    return severeCount >= 2 || maxSeverity >= 0.8 ? 'collapsing' : 'scarce';
+  }
+  if (baseStatus === 'strained') {
+    return maxSeverity >= 0.65 ? 'scarce' : 'strained';
+  }
+  if (baseStatus === 'substituted') {
+    return maxSeverity >= 0.75 ? 'scarce' : 'substituted';
+  }
+  if (maxSeverity >= 0.65) return 'scarce';
+  if (maxSeverity >= 0.25) return 'strained';
+  return baseStatus;
+}
+
+function appendRegionalFailureContext(base, regionalPressures) {
+  if (!regionalPressures.length) return base;
+  const labels = regionalPressures.slice(0, 2).map(p => p.label).join('; ');
+  return `${base} Regional pressure: ${labels}.`;
+}
+
 // ── Controller inference ──────────────────────────────────────────────────
 // Tier 4.3 wants every chain to declare a controller — usually a
 // faction or institution that takes a rent on the chain's output. We
@@ -212,11 +311,12 @@ function inferSubstitutes(chain) {
  *                            in future iterations.
  * @returns {Object|null}
  */
-// eslint-disable-next-line no-unused-vars
 export function deriveSupplyChainState(chain, settlement) {
   if (!chain || typeof chain !== 'object') return null;
 
-  const status = canonicalSupplyChainStatus(chain.status);
+  const baseStatus = canonicalSupplyChainStatus(chain.status);
+  const regionalPressures = inferRegionalPressures(chain, settlement);
+  const status = applyRegionalPressureToStatus(baseStatus, regionalPressures);
 
   return {
     id: chainIdFromShape(chain),
@@ -237,7 +337,8 @@ export function deriveSupplyChainState(chain, settlement) {
     substitutes:         inferSubstitutes(chain),
     beneficiaries:       inferBeneficiaries(chain),
     victims:             inferVictims(chain),
-    failureConsequences: inferFailureConsequence(chain),
+    failureConsequences: appendRegionalFailureContext(inferFailureConsequence(chain), regionalPressures),
+    regionalPressures,
 
     // Carry forward common legacy fields so consumers reading the
     // legacy shape via this derivation keep working.

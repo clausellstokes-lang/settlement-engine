@@ -229,6 +229,7 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
   // the user lands back to a saved settlement.
   if (!canSave) {
     const handleSignupSave = () => {
+      if (typeof onSignIn === 'function') onSignIn();
       // Lazy-load to avoid pulling authIntents into the wizard bundle
       // until the user actually clicks the button.
       import('../lib/authIntents.js').then(({ setPending, INTENTS }) => {
@@ -243,7 +244,6 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
           Funnel.track(EVENTS.SAVE_BUTTON_CLICKED, { tier: settlement.tier });
           Funnel.track(EVENTS.SAVE_SIGNUP_INTENT_OPENED, { tier: settlement.tier });
         });
-        if (typeof onSignIn === 'function') onSignIn();
       });
     };
 

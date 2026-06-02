@@ -47,6 +47,10 @@ function readMigrations() {
   return files.map(f => readFileSync(join(MIGRATIONS_DIR, f), 'utf8')).join('\n');
 }
 
+function readMigration(name) {
+  return readFileSync(join(MIGRATIONS_DIR, name), 'utf8');
+}
+
 // ─────────────────────────────────────────────────────────────────────────
 // stripe-webhook
 // ─────────────────────────────────────────────────────────────────────────
@@ -381,7 +385,7 @@ describe('Tier 3.3 — admin-actions authorization', () => {
   beforeAll(() => { src = readFunction('admin-actions'); });
 
   it('requires Authorization header', () => {
-    expect(src).toMatch(/Missing authorization[\s\S]{0,80}status:\s*401/);
+    expect(src).toMatch(/Missing authorization[\s\S]{0,80},\s*401\)/);
   });
 
   it('verifies the calling user via auth.getUser', () => {
@@ -389,7 +393,7 @@ describe('Tier 3.3 — admin-actions authorization', () => {
   });
 
   it('returns 401 when token is invalid', () => {
-    expect(src).toMatch(/Invalid token[\s\S]{0,80}status:\s*401/);
+    expect(src).toMatch(/Invalid token[\s\S]{0,80},\s*401\)/);
   });
 
   it('checks caller role against profiles.role', () => {
@@ -401,7 +405,7 @@ describe('Tier 3.3 — admin-actions authorization', () => {
   });
 
   it('returns 403 when role is insufficient', () => {
-    expect(src).toMatch(/Insufficient privileges[\s\S]{0,80}status:\s*403/);
+    expect(src).toMatch(/Insufficient privileges[\s\S]{0,80},\s*403\)/);
   });
 
   it('verifies caller BEFORE parsing the request body', () => {
@@ -432,15 +436,15 @@ describe('Tier 3.3 — admin-actions action coverage', () => {
   });
 
   it('returns 400 for unknown action with a clear error', () => {
-    expect(src).toMatch(/Unknown action[\s\S]{0,80}status:\s*400/);
+    expect(src).toMatch(/Unknown action[\s\S]{0,80},\s*400\)/);
   });
 
   it('update_user_metadata requires userId AND metadata', () => {
-    expect(src).toMatch(/Missing userId or metadata[\s\S]{0,80}status:\s*400/);
+    expect(src).toMatch(/Missing userId or metadata[\s\S]{0,80},\s*400\)/);
   });
 
   it('update_user_credits requires userId AND credits', () => {
-    expect(src).toMatch(/Missing userId or credits[\s\S]{0,80}status:\s*400/);
+    expect(src).toMatch(/Missing userId or credits[\s\S]{0,80},\s*400\)/);
   });
 
   it('update_user_credits coerces credits to integer (defence vs string injection)', () => {
@@ -466,12 +470,10 @@ describe('Tier 3.3 — admin-actions audit trail (Phase 5 migration 009)', () =>
     expect(migrations).toMatch(/idx_admin_actions_recent/);
   });
 
-  // The Phase 5 design says the edge function should write to
-  // admin_actions on every privileged op. Today's edge function
-  // doesn't do that yet — this test PINS the gap. When the audit-
-  // write lands, the test below should flip to expect a match.
-  it('TODO: edge function should write to admin_actions on every privileged op (currently NOT wired)', () => {
-    expect(src).not.toMatch(/admin_actions/);  // current state — flip to .toMatch when wired
+  it('routes privileged writes through audited service-role RPCs', () => {
+    expect(src).toMatch(/service_update_profile_metadata/);
+    expect(src).toMatch(/service_set_credits/);
+    expect(migrations).toMatch(/insert\s+into\s+public\.admin_actions/i);
   });
 });
 
@@ -711,6 +713,10 @@ describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
     expect(migrations).toMatch(/create table[\s\S]{0,500}admin_actions/i);
   });
 
+  it('allows system/webhook audit rows with actor_id NULL', () => {
+    expect(migrations).toMatch(/alter\s+table\s+public\.admin_actions[\s\S]{0,120}actor_id\s+drop\s+not\s+null/i);
+  });
+
   it('refund_credits writes a "grant" row (never modifies a spend row)', () => {
     // Look at the refund_credits function body. The function is ~50
     // lines so we need a generous window.
@@ -730,6 +736,43 @@ describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
     const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
     expect(refundBlock).toBeTruthy();
     expect(refundBlock[0]).toMatch(/kind\s*<>\s*['"]spend['"]/);
+  });
+});
+
+describe('Tier 9.10 — credit/auth integrity migration 017 invariants', () => {
+  let sql;
+  beforeAll(() => { sql = readMigration('017_fix_credit_auth_integrity.sql'); });
+
+  it('replaces the broken welcome-credit trigger with the current ledger schema', () => {
+    const handleBlock = sql.match(/create\s+or\s+replace\s+function\s+public\.handle_new_user[\s\S]*?comment\s+on\s+function\s+public\.handle_new_user/i);
+    expect(handleBlock, 'handle_new_user block not found').toBeTruthy();
+    expect(handleBlock[0]).toMatch(/insert\s+into\s+public\.credit_ledger\s*\(\s*user_id,\s*kind,\s*amount,\s*source,\s*metadata\s*\)/i);
+    expect(handleBlock[0]).toMatch(/'grant'[\s\S]{0,80}'welcome'/i);
+    expect(handleBlock[0]).not.toMatch(/\bdelta\b/i);
+    expect(handleBlock[0]).not.toMatch(/credit_balance/i);
+  });
+
+  it('drops the obsolete auth_users_welcome_credit trigger', () => {
+    expect(sql).toMatch(/drop\s+trigger\s+if\s+exists\s+auth_users_welcome_credit/i);
+  });
+
+  it('exposes welcome_credit_available for the client gift-card gate', () => {
+    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.welcome_credit_available/i);
+    expect(sql).toMatch(/grant\s+execute\s+on\s+function\s+public\.welcome_credit_available\(uuid\)\s+to\s+authenticated/i);
+  });
+
+  it('adds service-role RPCs for audited admin writes', () => {
+    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.service_update_profile_metadata/i);
+    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.service_set_credits/i);
+    expect(sql).toMatch(/_assert_service_admin_actor/i);
+    expect(sql).toMatch(/insert\s+into\s+public\.admin_actions/i);
+  });
+
+  it('moves custom_content writes behind the premium/elevated profile gate', () => {
+    expect(sql).toMatch(/profile_has_premium_access/);
+    expect(sql).toMatch(/premium users insert own custom content/);
+    expect(sql).toMatch(/premium users update own custom content/);
+    expect(sql).toMatch(/premium users delete own custom content/);
   });
 });
 

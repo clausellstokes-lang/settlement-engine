@@ -22,7 +22,7 @@
  * is the right pragmatic UI; the *content* is what teaches.
  */
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
@@ -70,16 +70,6 @@ export default function FirstDossierCallouts() {
     for (const c of CALLOUTS) d[c.key] = isDismissed(c.key);
     return d;
   });
-
-  // Hydration safety — if storage didn't initialize at mount time,
-  // re-read after first paint so an SSR-style render reconciles.
-  useEffect(() => {
-    setDismissed({
-      tension: isDismissed('tension'),
-      supply:  isDismissed('supply'),
-      hook:    isDismissed('hook'),
-    });
-  }, []);
 
   if (tier === 'anon') return null;
   if (savedCount > 0) return null;  // they've been here before; this is the teach-once moment

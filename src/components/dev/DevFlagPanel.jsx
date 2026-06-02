@@ -78,6 +78,7 @@ export default function DevFlagPanel() {
     return (
       <button
         type="button"
+        data-pt-allow-small="1"
         onClick={toggleOpen}
         title="Open feature flag panel (DEV only)"
         style={{

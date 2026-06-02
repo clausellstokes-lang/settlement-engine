@@ -151,6 +151,24 @@ describe('deriveSupplyChainState()', () => {
     deriveSupplyChainState(input);
     expect(JSON.stringify(input)).toBe(before);
   });
+
+  it('uses regional active conditions as supply-chain pressure', () => {
+    const settlement = {
+      activeConditions: [{
+        id: 'condition.regional_import_shortage.grain',
+        archetype: 'regional_import_shortage',
+        label: 'Regional import shortage: grain',
+        description: 'A regional supplier can no longer meet grain needs.',
+        severity: 0.7,
+        status: 'worsening',
+        affectedSystems: ['food_security', 'trade_connectivity'],
+      }],
+    };
+    const out = deriveSupplyChainState(flourChain(), settlement);
+    expect(out.status).toBe('scarce');
+    expect(out.regionalPressures).toHaveLength(1);
+    expect(out.failureConsequences).toMatch(/Regional pressure/);
+  });
 });
 
 // ── deriveAllSupplyChainStates ──────────────────────────────────────────

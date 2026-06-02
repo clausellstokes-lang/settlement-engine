@@ -27,13 +27,45 @@ async function waitForHero(page) {
 }
 
 async function waitForDossier(page) {
-  // The dossier header shows the settlement name in the wizard's
-  // settlement-header div. Wait for the "Loading settlement view..."
-  // fallback to disappear AND a settlement name to appear in the gold
-  // header bar.
-  await page.waitForFunction(() => {
-    return !document.body.innerText.includes('Loading settlement view');
-  }, { timeout: 30_000 });
+  // The pipeline reveal can briefly cover the page after generation. Esc is
+  // the supported skip affordance, then the dossier chrome gives us a stable
+  // signal that generation has completed and the lazy view has mounted.
+  await page.keyboard.press('Escape').catch(() => {});
+  await expect(page.getByRole('button', { name: /^\s*New\s*$/ }).first()).toBeVisible({ timeout: 30_000 });
+  await expect(dossierMeta(page)).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText('Loading settlement view...')).toHaveCount(0, { timeout: 30_000 });
+}
+
+function sizeButton(hero, label) {
+  return hero.locator(`button[data-settlement-size="${label.toLowerCase()}"]`);
+}
+
+function dossierMeta(page) {
+  return page
+    .locator('main')
+    .getByText(/\b(thorp|hamlet|village|town|city|capital|metropolis)\b\s*·\s*pop\.?\s*\d/i)
+    .first();
+}
+
+async function seedAnonCapAndRerender(page) {
+  await page.evaluate(() => {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const d = String(now.getDate()).padStart(2, '0');
+    const date = `${y}-${m}-${d}`;
+    try {
+      localStorage.setItem('sf.anon.gens', JSON.stringify({ date, full: 99, reroll: 99 }));
+    } catch { /* private mode */ }
+  });
+  const hero = page.getByLabel('Anonymous settlement generator');
+  await sizeButton(hero, 'Hamlet').click();
+}
+
+function primaryHeroCta(hero) {
+  return hero.getByRole('button', {
+    name: /Forge a|Begin a settlement|Generate a/i,
+  }).first();
 }
 
 test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export', () => {
@@ -53,22 +85,18 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
     await expect(hero).toBeVisible();
-    // Eyebrow uppercase line
-    await expect(hero.getByText('A simulator for Dungeon Masters', { exact: false })).toBeVisible();
-    // Title
     await expect(hero.getByRole('heading', { level: 1 })).toBeVisible();
-    await expect(hero.getByRole('heading', { level: 1 })).toContainText('Forge a settlement');
-    // Subtitle includes "Every street"
-    await expect(hero.getByText(/Every street, every faction/i)).toBeVisible();
+    await expect(hero.getByRole('heading', { level: 1 })).toContainText(/Forge a settlement|Most generators roll/i);
+    await expect(hero.getByText(/Every street, every faction|pieces explain each other/i)).toBeVisible();
   });
 
   test('hero exposes the three anonymous size buttons', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
     // The button labels come from the copy: 'Hamlet', 'Village', 'Town'.
-    await expect(hero.getByRole('button', { name: /Hamlet/i })).toBeVisible();
-    await expect(hero.getByRole('button', { name: /Village/i })).toBeVisible();
-    await expect(hero.getByRole('button', { name: /Town/i })).toBeVisible();
+    await expect(sizeButton(hero, 'Hamlet')).toBeVisible();
+    await expect(sizeButton(hero, 'Village')).toBeVisible();
+    await expect(sizeButton(hero, 'Town')).toBeVisible();
   });
 
   test('default size selection is Village (aria-pressed)', async ({ page }) => {
@@ -76,24 +104,24 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     const hero = page.getByLabel('Anonymous settlement generator');
     // The button's accessible name concatenates label + hint copy. We
     // match by leading word and rely on the hero scope to disambiguate.
-    const village = hero.getByRole('button', { name: /Village\b/i });
+    const village = sizeButton(hero, 'Village');
     await expect(village).toHaveAttribute('aria-pressed', 'true');
-    await expect(hero.getByRole('button', { name: /Hamlet\b/i })).toHaveAttribute('aria-pressed', 'false');
-    await expect(hero.getByRole('button', { name: /Town\b/i })).toHaveAttribute('aria-pressed', 'false');
+    await expect(sizeButton(hero, 'Hamlet')).toHaveAttribute('aria-pressed', 'false');
+    await expect(sizeButton(hero, 'Town')).toHaveAttribute('aria-pressed', 'false');
   });
 
   test('clicking a different size button updates aria-pressed correctly', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    await hero.getByRole('button', { name: /Hamlet/i }).click();
-    await expect(hero.getByRole('button', { name: /Hamlet/i })).toHaveAttribute('aria-pressed', 'true');
-    await expect(hero.getByRole('button', { name: /Village/i })).toHaveAttribute('aria-pressed', 'false');
+    await sizeButton(hero, 'Hamlet').click();
+    await expect(sizeButton(hero, 'Hamlet')).toHaveAttribute('aria-pressed', 'true');
+    await expect(sizeButton(hero, 'Village')).toHaveAttribute('aria-pressed', 'false');
   });
 
   test('"Begin a settlement" button is enabled before generation', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    const begin = hero.getByRole('button', { name: /Begin a settlement/i });
+    const begin = primaryHeroCta(hero);
     await expect(begin).toBeVisible();
     await expect(begin).toBeEnabled();
   });
@@ -101,38 +129,34 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
   test('generation produces a dossier with name + tier + population', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    await hero.getByRole('button', { name: /Hamlet/i }).click();
-    await hero.getByRole('button', { name: /Begin a settlement/i }).click();
+    await sizeButton(hero, 'Hamlet').click();
+    await primaryHeroCta(hero).click();
 
     await waitForDossier(page);
 
-    // Dossier header includes "POP. " followed by a numeric value, and
-    // a tier line ("HAMLET · POP. 35" or similar).
-    await expect(page.getByText(/Pop\.\s*\d/i)).toBeVisible({ timeout: 30_000 });
-    // Tier shows somewhere on the page in uppercase.
-    await expect(page.getByText(/HAMLET/i)).toBeVisible();
+    await expect(dossierMeta(page)).toContainText(/hamlet/i);
   });
 
   test('anon counter is bumped in localStorage after a generation', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    await hero.getByRole('button', { name: /Village/i }).click();
-    await hero.getByRole('button', { name: /Begin a settlement/i }).click();
+    await sizeButton(hero, 'Village').click();
+    await primaryHeroCta(hero).click();
     await waitForDossier(page);
 
-    // src/lib/anonGenCounter writes to key 'sf.anon.gens' with JSON
-    // value { date, count }.
+    // src/lib/anonGenCounter writes to key 'sf.anon.gens'. Current shape is
+    // { date, full, reroll }, with { date, count } kept as a legacy reader.
     const stored = await page.evaluate(() => localStorage.getItem('sf.anon.gens'));
     expect(stored, 'sf.anon.gens not written after generation').not.toBeNull();
     const parsed = JSON.parse(stored);
-    expect(parsed.count).toBeGreaterThanOrEqual(1);
+    const total = (parsed.full ?? parsed.count ?? 0) + (parsed.reroll ?? 0);
+    expect(total).toBeGreaterThanOrEqual(1);
     expect(parsed.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 
   test('pipeline rail is visible after generation (How this was simulated)', async ({ page }) => {
     await waitForHero(page);
-    await page.getByLabel('Anonymous settlement generator')
-      .getByRole('button', { name: /Begin a settlement/i }).click();
+    await primaryHeroCta(page.getByLabel('Anonymous settlement generator')).click();
     await waitForDossier(page);
 
     // The rail shows step labels — anything that mentions "simulated"
@@ -144,8 +168,7 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
 
   test('"New" button after generation returns to a fresh state', async ({ page }) => {
     await waitForHero(page);
-    await page.getByLabel('Anonymous settlement generator')
-      .getByRole('button', { name: /Begin a settlement/i }).click();
+    await primaryHeroCta(page.getByLabel('Anonymous settlement generator')).click();
     await waitForDossier(page);
 
     // The wizard's "New" button (with Zap icon + " New" text). Be
@@ -159,10 +182,18 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
       await newBtn.click();
       await page.waitForTimeout(500);
       // Fresh state: either hero re-mounts OR wizard mode picker shows.
-      const freshSignal = page.locator(
-        '[aria-label="Anonymous settlement generator"], text=/Pick a size|Generate|New settlement/i'
-      ).first();
-      await expect(freshSignal).toBeVisible({ timeout: 10_000 });
+      await expect.poll(async () => {
+        const heroVisible = await page
+          .getByLabel('Anonymous settlement generator')
+          .isVisible()
+          .catch(() => false);
+        const configVisible = await page
+          .getByText(/Basic Generate|Advanced Generate|General Configuration|New settlement/i)
+          .first()
+          .isVisible()
+          .catch(() => false);
+        return heroVisible || configVisible;
+      }, { timeout: 10_000 }).toBe(true);
     } else {
       // No inline New button. The "Back to configuration" button (Back
       // arrow) should still work as the path home.
@@ -173,8 +204,7 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
 
   test('anonymous user does NOT see the inline Save button (auth-gated)', async ({ page }) => {
     await waitForHero(page);
-    await page.getByLabel('Anonymous settlement generator')
-      .getByRole('button', { name: /Begin a settlement/i }).click();
+    await primaryHeroCta(page.getByLabel('Anonymous settlement generator')).click();
     await waitForDossier(page);
 
     // The inline `Save` button (title="Save settlement") only renders
@@ -185,44 +215,23 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     await expect(inlineSave).toHaveCount(0);
   });
 
-  test('soft cap: after DEFAULT_DAILY_CAP generations, hero swaps to "Sign in to continue"', async ({ page, context }) => {
-    // The default beforeEach clears localStorage on every page nav.
-    // Override that for this test by installing a fresh init script that
-    // seeds the anon counter at-cap before the page reads it. Storage
-    // shape (from src/lib/anonGenCounter.js):
-    //   key:   'sf.anon.gens'
-    //   value: JSON.stringify({ date: 'YYYY-MM-DD', count: <n> })
-    //
-    // addInitScript stacks — the new one runs AFTER the beforeEach's
-    // clear, so the seeded value survives.
-    await context.addInitScript(() => {
-      const now = new Date();
-      const y = now.getFullYear();
-      const m = String(now.getMonth() + 1).padStart(2, '0');
-      const d = String(now.getDate()).padStart(2, '0');
-      const date = `${y}-${m}-${d}`;
-      try {
-        localStorage.setItem('sf.anon.gens', JSON.stringify({ date, count: 99 }));
-      } catch { /* private mode */ }
-    });
-    await page.goto('/');
-    await waitForHero(page);
+  test('soft cap: after DEFAULT_DAILY_CAP generations, hero swaps to "Sign in to continue"', async ({ page }) => {
+    await seedAnonCapAndRerender(page);
 
-    const signInCta = page.getByRole('button', { name: /Sign in to continue/i });
+    const signInCta = page.getByRole('button', { name: /Sign in to continue|Create free account/i });
     await expect(signInCta).toBeVisible();
-    await expect(page.getByRole('button', { name: /Begin a settlement/i })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: /Forge a|Begin a settlement/i })).toHaveCount(0);
   });
 
   test('returning to the page preserves generated settlement (state persistence)', async ({ page }) => {
     await waitForHero(page);
-    await page.getByLabel('Anonymous settlement generator')
-      .getByRole('button', { name: /Village/i }).click();
-    await page.getByLabel('Anonymous settlement generator')
-      .getByRole('button', { name: /Begin a settlement/i }).click();
+    const hero = page.getByLabel('Anonymous settlement generator');
+    await sizeButton(hero, 'Village').click();
+    await primaryHeroCta(hero).click();
     await waitForDossier(page);
 
     // Capture the displayed settlement name.
-    const nameBefore = await page.locator('text=/Pop\\.\\s*\\d/i').first().textContent();
+    const nameBefore = await dossierMeta(page).textContent();
     expect(nameBefore).toBeTruthy();
 
     // Reload the page.
@@ -243,10 +252,9 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     });
 
     await waitForHero(page);
-    await page.getByLabel('Anonymous settlement generator')
-      .getByRole('button', { name: /Village/i }).click();
-    await page.getByLabel('Anonymous settlement generator')
-      .getByRole('button', { name: /Begin a settlement/i }).click();
+    const hero = page.getByLabel('Anonymous settlement generator');
+    await sizeButton(hero, 'Village').click();
+    await primaryHeroCta(hero).click();
     await waitForDossier(page);
 
     // Filter out known noise that the engine emits at INFO level via

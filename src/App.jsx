@@ -278,7 +278,8 @@ export default function App() {
               aria-label="SettlementForge home"
               style={{
                 display: 'flex', alignItems: 'center', gap: SP.xs,
-                background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+                minHeight: 44,
+                background: 'none', border: 'none', padding: `0 ${SP.xs}px`, cursor: 'pointer',
               }}
             >
               <MapIcon size={18} color={GOLD} />
@@ -292,6 +293,7 @@ export default function App() {
               style={{
                 display: 'flex', alignItems: 'center', gap: SP.xs,
                 padding: `${SP.xs + 1}px ${SP.md}px`,
+                minHeight: 44,
                 background: authTier === 'anon' ? GOLD_BG
                   : isElevated ? 'rgba(124,58,237,0.15)'
                   : 'rgba(42,122,42,0.2)',
@@ -502,7 +504,9 @@ export default function App() {
           <button onClick={() => setView('pricing')} style={{
             background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
             fontFamily: sans, fontSize: FS.sm, letterSpacing: '0.04em',
-            padding: 0,
+            padding: isMobile ? `0 ${SP.sm}px` : 0,
+            minHeight: isMobile ? 44 : undefined,
+            display: 'inline-flex', alignItems: 'center',
           }}>
             Pricing
           </button>
@@ -510,7 +514,9 @@ export default function App() {
           <button onClick={() => setView('gallery')} style={{
             background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
             fontFamily: sans, fontSize: FS.sm, letterSpacing: '0.04em',
-            padding: 0,
+            padding: isMobile ? `0 ${SP.sm}px` : 0,
+            minHeight: isMobile ? 44 : undefined,
+            display: 'inline-flex', alignItems: 'center',
           }}>
             Gallery
           </button>
@@ -518,7 +524,9 @@ export default function App() {
           <button onClick={() => setView('compare')} style={{
             background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
             fontFamily: sans, fontSize: FS.sm, letterSpacing: '0.04em',
-            padding: 0,
+            padding: isMobile ? `0 ${SP.sm}px` : 0,
+            minHeight: isMobile ? 44 : undefined,
+            display: 'inline-flex', alignItems: 'center',
           }}>
             Compare
           </button>
@@ -526,6 +534,8 @@ export default function App() {
           <a href="mailto:clausellstokes@aol.com" style={{
             color: MUTED, textDecoration: 'none', display: 'inline-flex',
             alignItems: 'center', gap: 4,
+            padding: isMobile ? `0 ${SP.sm}px` : 0,
+            minHeight: isMobile ? 44 : undefined,
           }}>
             <Headphones size={11} /> Support
           </a>

@@ -3,7 +3,7 @@ import { FS, swatch, CARD } from '../../theme.js';
 
 import { sans, TabIntro } from '../Primitives';
 import {isMobile} from '../tabConstants';
-import {extractSettlementContext, buildPrompt} from '../dailyLifeLogic';
+import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { CREDIT_COSTS } from '../../../store/creditsSlice.js';
 import { isConfigured } from '../../../lib/supabase.js';
@@ -62,7 +62,6 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
   const dailyLifeEnabled = isConfigured ? !!saveId : true;
 
   const ctx = extractSettlementContext(r);
-  const prompt = buildPrompt(ctx);
 
   const loading = isConfigured ? storeAiLoading : localLoading;
   const regenerating = isConfigured ? storeAiRegenerating : false;
@@ -82,7 +81,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
       return;
     }
 
-    // Local mode: direct API call (no credits)
+    // Local mode: deterministic offline prose (no credits, no browser API key).
     setLocalLoading(true);
     setLocalError(null);
     setNarrative(null);
@@ -93,26 +92,8 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
     setLoadMsg(LOAD_MSGS[Math.floor(Math.random() * LOAD_MSGS.length)]);
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: 'You are a worldbuilding consultant for tabletop RPG game masters. You write evocative, specific, grounded descriptions of fictional medieval settlements. You never use game mechanics language or mention statistics.',
-          messages: [{ role: 'user', content: prompt }],
-        }),
-      });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err?.error?.message || `API error ${res.status}`);
-      }
-
-      const data = await res.json();
-      const text = data.content?.filter(b => b.type === 'text').map(b => b.text).join('').trim();
-      if (!text) throw new Error('Empty response');
-      setNarrative(text);
+      await new Promise(resolve => setTimeout(resolve, 250));
+      setNarrative(buildLocalDailyLifeNarrative(ctx));
     } catch (e) {
       setLocalError(e.message);
     } finally {
@@ -317,6 +298,52 @@ function formatDailyLifeResult(result) {
   if (!result) return null;
   const parts = [result.dawn, result.morning, result.midday, result.evening, result.night].filter(Boolean);
   return parts.join('\n\n');
+}
+
+function humanize(value) {
+  if (!value) return '';
+  return String(value)
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, ch => ch.toUpperCase());
+}
+
+function listText(items, fallback) {
+  const clean = (items || []).filter(Boolean);
+  if (!clean.length) return fallback;
+  if (clean.length === 1) return clean[0];
+  return `${clean.slice(0, -1).join(', ')} and ${clean.at(-1)}`;
+}
+
+function buildLocalDailyLifeNarrative(ctx) {
+  const terrain = humanize(ctx.terrain) || 'mixed terrain';
+  const trade = humanize(ctx.tradeRoute) || 'road access';
+  const culture = humanize(ctx.culture) || 'local custom';
+  const food = ctx.foodDeficit > 20
+    ? 'bread is dear and the poorest households plan every meal carefully'
+    : ctx.foodDeficit > 0
+      ? 'food is adequate for most families, though prices are watched closely'
+      : ctx.foodSurplus > 10
+        ? 'granaries and kitchen gardens give the town a little breathing room'
+        : 'the food supply is ordinary, practical, and never taken for granted';
+
+  const order = ctx.safetyScore >= 70
+    ? 'people move after dusk with confidence'
+    : ctx.safetyScore >= 45
+      ? 'doors are barred early and strangers are studied before they are welcomed'
+      : 'ordinary errands carry a careful awareness of who controls the street';
+
+  const institutions = Object.values(ctx.keyInsts || {}).flat().slice(0, 5);
+  const anchors = listText(institutions, 'the market, shrine, workshop, and watch post');
+  const stress = ctx.stressTypes.length
+    ? `The talk of the day keeps returning to ${listText(ctx.stressTypes.map(humanize), 'the current strain')}.`
+    : 'The place is not peaceful so much as practiced: people know its routines and work around its frictions.';
+
+  return [
+    `Morning starts around ${anchors}. ${terrain} and ${trade} shape the pace: carts, tools, and gossip move where the ground and roads allow, while ${culture} gives even routine bargains a recognizable local rhythm.`,
+    `${food}. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.`,
+    `Power is felt through ${ctx.govFaction || 'whoever can make orders stick this week'}. ${ctx.stability < 45 ? "Promises are weighed carefully because yesterday's bargain may not survive tomorrow." : 'Most residents know where authority lives and how to petition it without making themselves memorable.'} ${order}.`,
+    `${stress} By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying.`,
+  ].join('\n\n');
 }
 
 export default React.memo(DailyLifeTab);

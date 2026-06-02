@@ -49,6 +49,12 @@ const DEFAULT_LAYERS = {
   relationshipFilter: ['trade_partner', 'allied', 'patron', 'client', 'rival', 'cold_war', 'hostile'],
   chains: true,
   chainFilter: null, // or string[] of good names
+  regionalChannels: true,
+  regionalChannelFilter: null,
+  regionalImpacts: true,
+  regionalImpactStatusFilter: ['queued', 'applied', 'resolved'],
+  regionalMinSeverity: 0,
+  regionalShowGm: true,
   roads: true,
   labels: true,
   markers: true,

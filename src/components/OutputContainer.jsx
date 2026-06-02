@@ -537,9 +537,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       ),
       // P104 — Welcome credit gift card. Self-gates inside; shown to
       // signed-in users on their first saved dossier when their ledger
-      // still has an unspent kind='welcome' entry.
+      // still has an available welcome grant.
       !readOnly && React.createElement(Suspense, { fallback: null },
-        React.createElement(WelcomeCreditCard)
+        React.createElement(WelcomeCreditCard, { saveId })
       ),
       // P106 / E-2 — Pending changes bar + cascade preview. Self-gates
       // inside; renders nothing when no edits are queued.

@@ -22,6 +22,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../store';
 import RelationshipEdges from './map/RelationshipEdges.jsx';
 import ChainEdges        from './map/ChainEdges.jsx';
+import RegionalCausalityLayer from './map/RegionalCausalityLayer.jsx';
 import RoadsLayer        from './map/RoadsLayer.jsx';
 import LabelsLayer       from './map/LabelsLayer.jsx';
 import MarkersLayer      from './map/MarkersLayer.jsx';
@@ -203,6 +204,7 @@ export default function MapOverlay({ bridge }) {
           {layers.roads         && <RoadsLayer bridge={bridge} />}
           {layers.chains        && <ChainEdges />}
           {layers.relationships && <RelationshipEdges />}
+          <RegionalCausalityLayer />
           {layers.placements !== false && <PlacementsLayer transformRef={transformRef} />}
           {layers.markers       && <MarkersLayer />}
           {layers.labels        && <LabelsLayer />}

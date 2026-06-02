@@ -43,6 +43,7 @@ function SizeButton({ value, label, hint, active, onClick, compact = false }) {
   return (
     <button
       type="button"
+      data-settlement-size={value}
       onClick={() => onClick(value)}
       aria-pressed={active}
       style={{
@@ -388,9 +389,11 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                 type="button"
                 onClick={onSignIn}
                 style={{
-                  background: 'none', border: 'none', padding: 0,
+                  background: 'none', border: 'none', padding: `0 ${SP.xs}px`,
                   color: GOLD, fontFamily: 'inherit', fontSize: 'inherit',
                   cursor: 'pointer', textDecoration: 'underline',
+                  display: 'inline-flex', alignItems: 'center',
+                  minHeight: 44, minWidth: 44,
                 }}
               >
                 Sign in

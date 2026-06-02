@@ -30,6 +30,10 @@ import { immer } from 'zustand/middleware/immer';
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import { createPRNG } from '../../src/generators/prng.js';
+import {
+  deriveGraphWithDiscoveredCandidates,
+  setRegionalChannelStatus,
+} from '../../src/domain/region/index.js';
 
 // Minimal companion slices so settlementSlice's reads don't crash.
 // These mirror the live shape just enough for the contracts under test.
@@ -44,6 +48,10 @@ const stubSlice = (set, get) => ({
   importedNeighbour: null,
   campaigns: [],
   campaignsLoaded: true,
+  setCampaignRegionalGraph: (campaignId, graph) => set(state => {
+    const campaign = state.campaigns.find(c => c.id === campaignId);
+    if (campaign) campaign.regionalGraph = graph;
+  }),
   isTierAllowed: () => true,
   canSave: () => true,
   maxSaves: () => 50,
@@ -56,16 +64,22 @@ function makeStore() {
 
 // Lightweight settlement fixture — just enough for mutateSettlement to
 // find institutions/factions by id.
-function fixture() {
+function fixture(overrides = {}) {
+  const { config: configOverrides, economicState: economicOverrides, ...rest } = overrides;
   return {
     tier: 'town',
     name: 'Testford',
     population: 2000,
-    config: { monsterThreat: 'safe', tradeRouteAccess: 'road' },
+    config: { monsterThreat: 'safe', tradeRouteAccess: 'road', ...(configOverrides || {}) },
     institutions: [
       { id: 'institution.granary', name: 'Granary', category: 'civic', status: 'active' },
       { id: 'institution.temple',  name: 'Temple',  category: 'religious', status: 'active' },
     ],
+    economicState: {
+      primaryExports: [],
+      primaryImports: [],
+      ...(economicOverrides || {}),
+    },
     powerStructure: {
       factions: [
         { id: 'faction.council', name: 'Council' },
@@ -74,6 +88,8 @@ function fixture() {
       conflicts: [],
     },
     npcs: [],
+    activeConditions: [],
+    ...rest,
   };
 }
 
@@ -301,5 +317,103 @@ describe('settlementSlice — hydrateFromSave restores the lifecycle', () => {
     expect(s.phase).toBe('draft');
     expect(s.eventLog).toEqual([]);
     expect(s.systemState).toBeTruthy();  // re-derived from settlement
+  });
+});
+
+describe('settlementSlice — active save regional integration', () => {
+  let store;
+  beforeEach(() => {
+    store = makeStore();
+  });
+
+  test('committed events update the active saved entry and lifecycle snapshot', () => {
+    const save = {
+      id: 'save-1',
+      name: 'Testford',
+      tier: 'town',
+      settlement: fixture(),
+      seed: 'save-seed',
+      campaignState: {
+        phase: 'canon',
+        eventLog: [],
+        systemState: null,
+        locks: {},
+        generatedAt: '2026-01-01T00:00:00.000Z',
+        editedAt: '2026-01-01T00:00:00.000Z',
+        canonizedAt: '2026-01-01T00:00:00.000Z',
+        lastExportAt: null,
+      },
+    };
+    store.setState(s => { s.savedSettlements = [save]; });
+    store.getState().hydrateFromSave(save);
+
+    store.getState().applyEvent({
+      id: 'active-save-1',
+      type: 'DAMAGE_INSTITUTION',
+      targetId: 'institution.granary',
+      payload: { severity: 0.8 },
+      cause: 'player_action',
+    });
+
+    const entry = store.getState().savedSettlements[0];
+    expect(store.getState().activeSaveId).toBe('save-1');
+    expect(entry.settlement.institutions.find(i => i.id === 'institution.granary').status).toBe('impaired');
+    expect(entry.campaignState.phase).toBe('canon');
+    expect(entry.campaignState.eventLog).toHaveLength(1);
+    expect(entry.campaignState.eventLog[0].event.id).toBe('active-save-1');
+  });
+
+  test('canon route events queue regional impacts on the active campaign graph', () => {
+    const supplier = {
+      id: 'supplier',
+      name: 'Granary Ford',
+      tier: 'town',
+      settlement: fixture({
+        name: 'Granary Ford',
+        economicState: { primaryExports: ['Bulk grain and foodstuffs'] },
+      }),
+      campaignState: {
+        phase: 'canon',
+        eventLog: [],
+        systemState: null,
+        locks: {},
+        generatedAt: null,
+        editedAt: null,
+        canonizedAt: '2026-01-01T00:00:00.000Z',
+        lastExportAt: null,
+      },
+    };
+    const buyer = {
+      id: 'buyer',
+      name: 'Millcross',
+      tier: 'town',
+      settlement: fixture({
+        name: 'Millcross',
+        economicState: { primaryImports: ['Grain and malt'] },
+      }),
+      campaignState: { phase: 'canon', eventLog: [], systemState: null, locks: {} },
+    };
+    let graph = deriveGraphWithDiscoveredCandidates([supplier, buyer]);
+    for (const channel of graph.channels) {
+      graph = setRegionalChannelStatus(graph, channel.id, 'confirmed');
+    }
+
+    store.setState(s => {
+      s.savedSettlements = [supplier, buyer];
+      s.campaigns = [{ id: 'camp-1', name: 'Trade Belt', settlementIds: ['supplier', 'buyer'], regionalGraph: graph }];
+    });
+    store.getState().hydrateFromSave(supplier);
+
+    store.getState().applyEvent({
+      id: 'route-cut-1',
+      type: 'CUT_TRADE_ROUTE',
+      targetId: 'east-road',
+      payload: {},
+      cause: 'player_action',
+    });
+
+    const campaign = store.getState().campaigns[0];
+    expect(campaign.regionalGraph.queuedImpacts.length).toBeGreaterThan(0);
+    expect(campaign.regionalGraph.queuedImpacts.some(i => i.targetSettlementId === 'buyer')).toBe(true);
   });
 });

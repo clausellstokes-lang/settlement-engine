@@ -28,7 +28,6 @@ import { Funnel } from '../../lib/analytics.js';
 const PARCH = '#FBF5E6';
 const PARCH_GRAD_HI = '#FCF6E7';
 const VIOLET = '#7B4FCF';
-const VIOLET_BG = '#EBE2FA';
 const VIOLET_DIM = '#EBE2FA80';
 const GOLD = '#C9A24C';
 const INK = '#1B1408';

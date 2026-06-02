@@ -20,7 +20,7 @@
  * the default.
  */
 
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { FS, swatch } from '../theme.js';
 import { X } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
@@ -42,14 +42,14 @@ const sans = '"Nunito", system-ui, sans-serif';
  */
 export default function SimulationDrawer() {
   const [open, setOpen] = useState(false);
-  const [fired, setFired] = useState(false);
+  const firedRef = useRef(false);
 
   useEffect(() => {
-    if (open && !fired) {
+    if (open && !firedRef.current) {
+      firedRef.current = true;
       try { Funnel.track(EVENTS.SIMULATION_DRAWER_OPENED); } catch { /* silent */ }
-      setFired(true);
     }
-  }, [open, fired]);
+  }, [open]);
 
   // Esc-to-close keyboard handling — lives in an effect so the
   // listener is bound only while the drawer is open.

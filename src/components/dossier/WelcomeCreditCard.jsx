@@ -3,15 +3,16 @@
  * they're paying for."
  *
  * The single strongest pitch for Narrate is a Narrate credit the user
- * has already spent. We grant 1 on signup (migration 015) and surface
+ * has already spent. We grant 1 on signup (migration 017 repairs the
+ * original migration 015 trigger) and surface
  * this card on the user's first saved dossier, with a single CTA to
  * spend it.
  *
  * Visibility rules:
  *   - Renders only for signed-in users (anonymous = no ledger entry).
  *   - Renders only on the first saved settlement (i.e. savedCount === 1).
- *   - Renders only while the user still has an unspent welcome credit
- *     (kind='welcome' ledger entry with no matching spend).
+ *   - Renders only while the server says the welcome credit is still
+ *     available for this user.
  *   - Dismisses permanently via localStorage flag.
  *
  * Once the user clicks "Narrate this town" the existing requestNarrative
@@ -48,24 +49,23 @@ function markDismissed() {
   }
 }
 
-export default function WelcomeCreditCard() {
+export default function WelcomeCreditCard({ saveId = null }) {
   const tier = useStore(s => s.auth.tier);
   const userId = useStore(s => s.auth.user?.id);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
-  const creditBalance = useStore(s => s.creditBalance);
   const requestNarrative = useStore(s => s.requestNarrative);
   const settlement = useStore(s => s.settlement);
 
   const [dismissed, setDismissed] = useState(() => readDismissed());
   const [welcomeUnspent, setWelcomeUnspent] = useState(false);
 
-  // Check the ledger for an unspent welcome credit. We do this once per
-  // mount + on user id change. The fetch is small (one row) and only
+  // Ask the server whether the welcome credit is still available. We do
+  // this once per mount + on user id change. The fetch is small and only
   // fires for signed-in users on their first saved dossier — the
   // narrowest possible audience.
   useEffect(() => {
     if (tier === 'anon' || !userId) return;
-    if (savedCount !== 1) return;
+    if (savedCount !== 1 || !saveId) return;
     if (dismissed) return;
 
     let cancelled = false;
@@ -75,17 +75,14 @@ export default function WelcomeCreditCard() {
         if (!isConfigured) {
           // Local dev — assume the credit is present so we can preview
           // the card without a backend.
-          setWelcomeUnspent(true);
+          if (!cancelled) setWelcomeUnspent(true);
           return;
         }
-        const { data, error } = await supabase
-          .from('credit_ledger')
-          .select('id, reason, delta')
-          .eq('user_id', userId)
-          .eq('reason', 'welcome')
-          .limit(1);
+        const { data, error } = await supabase.rpc('welcome_credit_available', {
+          target_user: userId,
+        });
         if (error) return;
-        if (!cancelled && Array.isArray(data) && data.length > 0 && creditBalance > 0) {
+        if (!cancelled && data === true) {
           setWelcomeUnspent(true);
           Funnel.track(EVENTS.WELCOME_CREDIT_GRANTED, { userId });
         }
@@ -93,7 +90,7 @@ export default function WelcomeCreditCard() {
     })();
 
     return () => { cancelled = true; };
-  }, [tier, userId, savedCount, dismissed, creditBalance]);
+  }, [tier, userId, savedCount, saveId, dismissed]);
 
   if (dismissed) return null;
   if (!welcomeUnspent) return null;
@@ -101,7 +98,7 @@ export default function WelcomeCreditCard() {
 
   const onNarrate = async () => {
     try {
-      await requestNarrative?.();
+      await requestNarrative?.(saveId);
       Funnel.track(EVENTS.WELCOME_CREDIT_SPENT, { userId });
     } catch (e) {
       console.warn('[WelcomeCreditCard] requestNarrative failed:', e);

@@ -30,6 +30,44 @@ async function waitForHero(page) {
   await page.waitForSelector('[aria-label="Anonymous settlement generator"]', { timeout: 10_000 });
 }
 
+async function waitForDossier(page) {
+  await page.keyboard.press('Escape').catch(() => {});
+  await expect(dossierMeta(page)).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText('Loading settlement view...')).toHaveCount(0, { timeout: 30_000 });
+}
+
+function sizeButton(hero, label) {
+  return hero.locator(`button[data-settlement-size="${label.toLowerCase()}"]`);
+}
+
+function dossierMeta(page) {
+  return page
+    .locator('main')
+    .getByText(/\b(thorp|hamlet|village|town|city|capital|metropolis)\b\s*·\s*pop\.?\s*\d/i)
+    .first();
+}
+
+function primaryHeroCta(hero) {
+  return hero.getByRole('button', {
+    name: /Forge a|Begin a settlement|Generate a/i,
+  }).first();
+}
+
+async function seedAnonCapAndRerender(page) {
+  await page.evaluate(() => {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const d = String(now.getDate()).padStart(2, '0');
+    const date = `${y}-${m}-${d}`;
+    try {
+      localStorage.setItem('sf.anon.gens', JSON.stringify({ date, full: 99, reroll: 99 }));
+    } catch { /* private mode */ }
+  });
+  const hero = page.getByLabel('Anonymous settlement generator');
+  await sizeButton(hero, 'Hamlet').click();
+}
+
 async function openAuthModal(page) {
   // The header chrome shows a "Sign In" button for anonymous users.
   // We use the role + name selector to remain robust to layout changes.
@@ -146,23 +184,10 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     // the unit tests once the modal implementation stabilizes.
   });
 
-  test('soft-cap "Sign in to continue" also opens AuthModal', async ({ page, context }) => {
-    // Init scripts stack — installing a second one runs after the
-    // beforeEach clear and survives all subsequent navigations.
-    await context.addInitScript(() => {
-      const now = new Date();
-      const y = now.getFullYear();
-      const m = String(now.getMonth() + 1).padStart(2, '0');
-      const d = String(now.getDate()).padStart(2, '0');
-      const date = `${y}-${m}-${d}`;
-      try {
-        localStorage.setItem('sf.anon.gens', JSON.stringify({ date, count: 99 }));
-      } catch { /* private mode */ }
-    });
-    await page.goto('/');
-    await waitForHero(page);
+  test('soft-cap "Sign in to continue" also opens AuthModal', async ({ page }) => {
+    await seedAnonCapAndRerender(page);
 
-    const ctaBtn = page.getByRole('button', { name: /Sign in to continue/i });
+    const ctaBtn = page.getByRole('button', { name: /Sign in to continue|Create free account/i });
     await expect(ctaBtn).toBeVisible();
     await ctaBtn.click();
     await expect(page.getByText('Sign in to keep your work', { exact: false })).toBeVisible();
@@ -170,15 +195,11 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
 
   test('after generation: anonymous Save attempt routes through auth (no silent save)', async ({ page }) => {
     // Generate a settlement first.
-    await page.getByLabel('Anonymous settlement generator')
-      .getByRole('button', { name: /Village/i }).click();
-    await page.getByLabel('Anonymous settlement generator')
-      .getByRole('button', { name: /Begin a settlement/i }).click();
+    const hero = page.getByLabel('Anonymous settlement generator');
+    await sizeButton(hero, 'Village').click();
+    await primaryHeroCta(hero).click();
 
-    // Wait until the dossier renders.
-    await page.waitForFunction(() => {
-      return !document.body.innerText.includes('Loading settlement view');
-    }, { timeout: 30_000 });
+    await waitForDossier(page);
 
     // The Save-to-library CTA exists below the dossier for unauthenticated
     // users — clicking it should open the auth modal. If the CTA is not
@@ -187,11 +208,13 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     if (await saveToLibrary.isVisible().catch(() => false)) {
       await saveToLibrary.click();
       // Either auth modal opens OR a sign-in nudge appears inline.
-      const authOpened = await page.getByText('Sign in to keep your work', { exact: false })
-        .isVisible().catch(() => false);
-      const nudgeShown = await page.getByText(/[Ss]ign in/).first()
-        .isVisible().catch(() => false);
-      expect(authOpened || nudgeShown).toBe(true);
+      await expect.poll(async () => {
+        const authOpened = await page.getByText('Sign in to keep your work', { exact: false })
+          .isVisible().catch(() => false);
+        const nudgeShown = await page.getByText(/[Ss]ign in|free account/i).first()
+          .isVisible().catch(() => false);
+        return authOpened || nudgeShown;
+      }, { timeout: 10_000 }).toBe(true);
     }
   });
 

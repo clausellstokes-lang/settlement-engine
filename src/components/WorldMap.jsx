@@ -16,6 +16,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import {
   FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, Layers, Loader, Map as MapIcon, Globe, Link as LinkIcon,
+  Newspaper, Zap,
 } from 'lucide-react';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
@@ -40,6 +41,8 @@ const AutoSaveChip    = lazy(() => import('./map/AutoSaveChip.jsx'));
 const QuickInspector  = lazy(() => import('./map/QuickInspector.jsx'));
 const LayersPanel     = lazy(() => import('./map/LayersPanel.jsx'));
 const SettlementPalette = lazy(() => import('./map/SettlementPalette.jsx'));
+const WizardNewsPanel = lazy(() => import('./map/WizardNewsPanel.jsx'));
+const WorldPulsePanel = lazy(() => import('./map/WorldPulsePanel.jsx'));
 
 // Cachebuster bumped whenever public/map/* changes so browsers don't serve
 // a stale iframe bundle (e.g. old drop handler missing the settlementforge
@@ -56,6 +59,9 @@ export default function WorldMap({ onNavigate } = {}) {
   const [showLayersPanel, setShowLayersPanel] = useState(false);
   const [mapTemplates, setMapTemplates] = useState([]);
   const [currentTemplate, setCurrentTemplate] = useState('');
+  const [campaignWorkspace, setCampaignWorkspace] = useState('map');
+  const [worldPulseInterval, setWorldPulseInterval] = useState('one_month');
+  const [worldPulseBusy, setWorldPulseBusy] = useState(false);
 
   // ── Store selectors ───────────────────────────────────────────────────
   const mapMode       = useStore(s => s.mapMode);
@@ -90,11 +96,15 @@ export default function WorldMap({ onNavigate } = {}) {
   const saveCampaignMap   = useStore(s => s.saveCampaignMap);
   const clearCampaignMap  = useStore(s => s.clearCampaignMap);
   const getCampaignMapState = useStore(s => s.getCampaignMapState);
+  const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
 
   const activeCampaign = useMemo(
     () => campaigns.find(c => c.id === activeCampaignId) || null,
     [campaigns, activeCampaignId],
   );
+  const showingWizardNews = Boolean(activeCampaign && campaignWorkspace === 'news');
+  const showingWorldPulse = Boolean(activeCampaign && campaignWorkspace === 'pulse');
+  const showingCampaignPanel = showingWizardNews || showingWorldPulse;
 
   // Audit recommendation: when a campaign is active, default to canon-
   // only filtering so the map represents the *deployed* world, not
@@ -256,6 +266,7 @@ export default function WorldMap({ onNavigate } = {}) {
 
   // ── Campaign save/load ────────────────────────────────────────────────
   const handleSelectCampaign = useCallback(async (id) => {
+    setCampaignWorkspace('map');
     const bridge = bridgeRef.current;
     if (!id) {
       // Deselect → reset everything
@@ -358,6 +369,25 @@ export default function WorldMap({ onNavigate } = {}) {
     clearCampaignMap(activeCampaignId);
     showToast('info', 'Campaign map cleared');
   }, [activeCampaignId, clearCampaignMap]);
+
+  const handleAdvanceRealm = useCallback(() => {
+    if (!activeCampaignId || worldPulseBusy) return;
+    setWorldPulseBusy(true);
+    try {
+      const result = advanceCampaignWorld(activeCampaignId, worldPulseInterval);
+      setCampaignWorkspace('pulse');
+      if (result) {
+        showToast('success', `Realm advanced: ${result.autoApplied.length} drift, ${result.proposals.length} proposal(s)`);
+      } else {
+        showToast('error', 'Realm advancement failed');
+      }
+    } catch (err) {
+      console.warn('[WorldMap] advance realm failed', err);
+      showToast('error', `Advance failed: ${err.message || err}`);
+    } finally {
+      setWorldPulseBusy(false);
+    }
+  }, [activeCampaignId, advanceCampaignWorld, worldPulseBusy, worldPulseInterval]);
 
   // ── Template selection ─────────────────────────────────────────────────
   const handleTemplateChange = useCallback(async (templateId) => {
@@ -469,7 +499,43 @@ export default function WorldMap({ onNavigate } = {}) {
         background: CARD, borderRadius: R.lg, border: `1px solid ${BORDER}`,
       }}>
         {/* Mode switcher */}
-        <ModeSwitch mapMode={mapMode} setMapMode={setMapMode} />
+        {!showingCampaignPanel ? (
+          <ModeSwitch mapMode={mapMode} setMapMode={setMapMode} />
+        ) : showingWizardNews ? (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '5px 10px',
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.sm,
+            background: GOLD_BG,
+            color: GOLD,
+            fontFamily: sans,
+            fontSize: FS.sm,
+            fontWeight: 800,
+          }}>
+            <Newspaper size={13} />
+            Wizard News
+          </div>
+        ) : (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '5px 10px',
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.sm,
+            background: GOLD_BG,
+            color: GOLD,
+            fontFamily: sans,
+            fontSize: FS.sm,
+            fontWeight: 800,
+          }}>
+            <Zap size={13} />
+            World Pulse
+          </div>
+        )}
 
         <div style={{ width: 1, height: 24, background: BORDER2 }} />
 
@@ -508,6 +574,55 @@ export default function WorldMap({ onNavigate } = {}) {
                     <Trash2 size={13} />
                   </IconButton>
                 )}
+                <div style={{ width: 1, height: 24, background: BORDER2 }} />
+                <IconButton
+                  onClick={() => setCampaignWorkspace('map')}
+                  title="Show campaign map"
+                  active={campaignWorkspace === 'map'}
+                  aria-pressed={campaignWorkspace === 'map'}
+                >
+                  <MapIcon size={13} /> Map
+                </IconButton>
+                <IconButton
+                  onClick={() => setCampaignWorkspace('pulse')}
+                  title="Show World Pulse"
+                  active={campaignWorkspace === 'pulse'}
+                  aria-pressed={campaignWorkspace === 'pulse'}
+                >
+                  <Zap size={13} /> Pulse
+                </IconButton>
+                <IconButton
+                  onClick={() => setCampaignWorkspace('news')}
+                  title="Show Wizard News"
+                  active={campaignWorkspace === 'news'}
+                  aria-pressed={campaignWorkspace === 'news'}
+                >
+                  <Newspaper size={13} /> News
+                </IconButton>
+                <select
+                  value={worldPulseInterval}
+                  onChange={e => setWorldPulseInterval(e.target.value)}
+                  title="Realm advancement interval"
+                  style={{
+                    padding: '5px 9px',
+                    border: `1px solid ${BORDER}`, borderRadius: R.sm,
+                    background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
+                    cursor: 'pointer',
+                  }}
+                >
+                  <option value="one_week">Week</option>
+                  <option value="one_month">Month</option>
+                  <option value="one_season">Season</option>
+                  <option value="one_year">Year</option>
+                </select>
+                <IconButton
+                  onClick={handleAdvanceRealm}
+                  title="Advance realm simulation"
+                  primary
+                  disabled={worldPulseBusy}
+                >
+                  <Zap size={13} /> {worldPulseBusy ? 'Advancing' : 'Advance Realm'}
+                </IconButton>
               </>
             )}
             <div style={{ width: 1, height: 24, background: BORDER2 }} />
@@ -515,64 +630,68 @@ export default function WorldMap({ onNavigate } = {}) {
         )}
 
         {/* Utility buttons */}
-        <IconButton
-          onClick={() => setShowLayersPanel(v => !v)}
-          title="Toggle layer visibility"
-          active={showLayersPanel}
-        >
-          <Layers size={13} /> Layers
-        </IconButton>
-        {/* Canon-only toggle — defaults ON when a campaign is active. */}
-        <IconButton
-          onClick={() => setCanonOnlyFilter(v => !v)}
-          title={canonOnlyFilter
-            ? 'Showing only canon settlements. Click to also show drafts.'
-            : 'Showing all settlements. Click to limit to canon.'}
-          active={canonOnlyFilter}
-          aria-pressed={canonOnlyFilter}
-        >
-          {canonOnlyFilter ? 'Canon Only' : 'All Phases'}
-        </IconButton>
-        {/* Island shape picker */}
-        {mapTemplates.length > 0 && (
+        {!showingCampaignPanel && (
           <>
-            <Globe size={14} color={MUTED} />
-            <select
-              value={currentTemplate}
-              onChange={e => handleTemplateChange(e.target.value)}
-              title="Island shape for next regeneration"
-              style={{
-                padding: '5px 10px',
-                border: `1px solid ${BORDER}`, borderRadius: R.sm,
-                background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
-                cursor: 'pointer',
-              }}
+            <IconButton
+              onClick={() => setShowLayersPanel(v => !v)}
+              title="Toggle layer visibility"
+              active={showLayersPanel}
             >
-              <option value="">Random island</option>
-              {mapTemplates.map(t => (
-                <option key={t.id} value={t.id}>{t.label}</option>
-              ))}
-            </select>
-            <div style={{ width: 1, height: 24, background: BORDER2 }} />
+              <Layers size={13} /> Layers
+            </IconButton>
+            {/* Canon-only toggle — defaults ON when a campaign is active. */}
+            <IconButton
+              onClick={() => setCanonOnlyFilter(v => !v)}
+              title={canonOnlyFilter
+                ? 'Showing only canon settlements. Click to also show drafts.'
+                : 'Showing all settlements. Click to limit to canon.'}
+              active={canonOnlyFilter}
+              aria-pressed={canonOnlyFilter}
+            >
+              {canonOnlyFilter ? 'Canon Only' : 'All Phases'}
+            </IconButton>
+            {/* Island shape picker */}
+            {mapTemplates.length > 0 && (
+              <>
+                <Globe size={14} color={MUTED} />
+                <select
+                  value={currentTemplate}
+                  onChange={e => handleTemplateChange(e.target.value)}
+                  title="Island shape for next regeneration"
+                  style={{
+                    padding: '5px 10px',
+                    border: `1px solid ${BORDER}`, borderRadius: R.sm,
+                    background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
+                    cursor: 'pointer',
+                  }}
+                >
+                  <option value="">Random island</option>
+                  {mapTemplates.map(t => (
+                    <option key={t.id} value={t.id}>{t.label}</option>
+                  ))}
+                </select>
+                <div style={{ width: 1, height: 24, background: BORDER2 }} />
+              </>
+            )}
+
+            <IconButton onClick={handleFit} title="Fit entire map in view">
+              <MapIcon size={13} /> Fit
+            </IconButton>
+            <IconButton onClick={handleRegenerate} title="Regenerate a new world">
+              <RefreshCw size={13} /> Regenerate
+            </IconButton>
           </>
         )}
-
-        <IconButton onClick={handleFit} title="Fit entire map in view">
-          <MapIcon size={13} /> Fit
-        </IconButton>
-        <IconButton onClick={handleRegenerate} title="Regenerate a new world">
-          <RefreshCw size={13} /> Regenerate
-        </IconButton>
 
         <div style={{ flex: 1 }} />
 
         {/* Status line */}
-        {mapLoading && (
+        {!showingCampaignPanel && mapLoading && (
           <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: MUTED, fontSize: FS.xs }}>
             <Loader size={12} className="sf-spin" /> Loading…
           </span>
         )}
-        {mapError && (
+        {!showingCampaignPanel && mapError && (
           <span style={{ color: swatch['#C54A4A'], fontSize: FS.xs, fontWeight: 700 }}>
             {String(mapError)}
           </span>
@@ -580,17 +699,30 @@ export default function WorldMap({ onNavigate } = {}) {
       </div>
 
       {/* ── Contextual toolbar for current mode ──────────────────────── */}
-      {mapMode === MAP_MODES.ANNOTATE && (
+      {!showingCampaignPanel && mapMode === MAP_MODES.ANNOTATE && (
         <Suspense fallback={null}><AnnotateToolbar /></Suspense>
       )}
-      {mapMode === MAP_MODES.TERRAIN && (
+      {!showingCampaignPanel && mapMode === MAP_MODES.TERRAIN && (
         <Suspense fallback={null}><TerrainToolbar bridgeRef={bridgeRef} /></Suspense>
       )}
-      {mapMode === MAP_MODES.ROUTES && (
+      {!showingCampaignPanel && mapMode === MAP_MODES.ROUTES && (
         <Suspense fallback={null}><RoutesToolbar /></Suspense>
       )}
 
       {/* ── Main body: sidebar + map ─────────────────────────────────── */}
+      {showingWizardNews ? (
+        <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
+            <WizardNewsPanel campaign={activeCampaign} />
+          </Suspense>
+        </div>
+      ) : showingWorldPulse ? (
+        <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
+            <WorldPulsePanel campaign={activeCampaign} />
+          </Suspense>
+        </div>
+      ) : (
       <div style={{ display: 'flex', gap: SP.sm, flex: 1, minHeight: 0 }}>
         {/* Settlement palette — left sidebar */}
         <div style={{
@@ -730,6 +862,7 @@ export default function WorldMap({ onNavigate } = {}) {
           </Suspense>
         )}
       </div>
+      )}
 
       {/* Toast */}
       {toast && (
@@ -803,11 +936,12 @@ function ModeSwitch({ mapMode, setMapMode }) {
   );
 }
 
-function IconButton({ children, onClick, title, primary, active }) {
+function IconButton({ children, onClick, title, primary, active, ...rest }) {
   return (
     <button
       onClick={onClick}
       title={title}
+      {...rest}
       style={{
         display: 'flex', alignItems: 'center', gap: 4,
         padding: '5px 10px',

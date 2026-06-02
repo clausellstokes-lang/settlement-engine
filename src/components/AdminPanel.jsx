@@ -3,8 +3,8 @@
  * credits, roles, and system configuration.
  *
  * Only accessible to users with 'developer' or 'admin' role.
- * All writes go through Supabase RPC or direct table access
- * (developer accounts have elevated RLS policies).
+ * Protected writes go through the admin-actions edge function so role,
+ * tier, founder, and credit changes are audited server-side.
  */
 import { useState, useEffect, useCallback } from 'react';
 import {
@@ -54,29 +54,22 @@ function UserRow({ user, onUpdate }) {
     if (!editing) return;
     setSaving(true);
     try {
-      const updates = {};
-      if (editing === 'credits') updates.credits = parseInt(editValue, 10) || 0;
-      if (editing === 'tier') updates.tier = editValue;
-      if (editing === 'role') updates.role = editValue;
-
-      // Update profiles table
-      const { error } = await supabase
-        .from('profiles')
-        .update(updates)
-        .eq('id', user.id);
-
-      if (error) throw error;
-
-      // Also update user_metadata if tier or role changed
-      if (editing === 'tier' || editing === 'role') {
-        // This requires admin API — edge function handles it
-        await supabase.functions.invoke('admin-actions', {
-          body: {
+      const body = editing === 'credits'
+        ? {
+            action: 'update_user_credits',
+            userId: user.id,
+            credits: parseInt(editValue, 10) || 0,
+          }
+        : {
             action: 'update_user_metadata',
             userId: user.id,
             metadata: { [editing]: editValue },
-          },
-        });
+          };
+
+      const { data, error } = await supabase.functions.invoke('admin-actions', { body });
+      if (error) throw error;
+      if (data?.error) {
+        throw new Error(data.error);
       }
 
       onUpdate();

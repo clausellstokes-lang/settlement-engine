@@ -28,6 +28,35 @@
  * Persistence: localStorage (sf_campaigns) + Supabase for signed-in users.
  */
 
+import {
+  advanceRegionalImpacts,
+  advanceWizardNewsFeed,
+  appendWizardNewsEntries,
+  applyRegionalImpact,
+  conditionFromRegionalImpact,
+  deriveGraphWithDiscoveredCandidates,
+  deriveRegionalGraphFromSaves,
+  deriveWizardNewsEntriesFromGraphChange,
+  ensureRegionalGraph,
+  ensureWizardNewsFeed,
+  isRegionalImpactAvailable,
+  queueRegionalImpacts,
+  setRegionalChannelStatus as domainSetRegionalChannelStatus,
+  setRegionalChannelVisibility as domainSetRegionalChannelVisibility,
+  setRegionalImpactStatus as domainSetRegionalImpactStatus,
+} from '../domain/region/index.js';
+import {
+  advanceCampaignWorld as domainAdvanceCampaignWorld,
+  applyPartyImpact as domainApplyPartyImpact,
+  applyWorldPulseProposal as domainApplyWorldPulseProposal,
+  ensureWorldState,
+  previewCampaignWorldPulse as domainPreviewCampaignWorldPulse,
+  updateProposalStatus as domainUpdateWorldPulseProposalStatus,
+} from '../domain/worldPulse/index.js';
+import { withoutActiveCondition } from '../domain/activeConditions.js';
+import { deriveSystemState } from '../domain/state/deriveSystemState.js';
+import { saves as savesService } from '../lib/saves.js';
+
 const LOCAL_KEY = 'sf_campaigns';
 const SCHEMA_VERSION = 2;
 
@@ -51,12 +80,127 @@ function localWrite(campaigns) {
   }
 }
 
+function cloneJson(value) {
+  if (value === undefined || value === null) return value;
+  return JSON.parse(JSON.stringify(value));
+}
+
+function persistSaveUpdate(saveId, partial) {
+  if (!saveId || !partial) return;
+  savesService.update(saveId, partial).catch(e => {
+    console.warn('[campaignSlice] save update failed', e);
+  });
+}
+
+function campaignStateForRegionalImpact(state, save, systemState, now) {
+  const isActive = state.activeSaveId && String(state.activeSaveId) === String(save.id);
+  const current = save.campaignState || {};
+  return {
+    phase: isActive ? (state.phase || current.phase || 'draft') : (current.phase || 'draft'),
+    eventLog: isActive
+      ? cloneJson(Array.isArray(state.eventLog) ? state.eventLog : [])
+      : cloneJson(Array.isArray(current.eventLog) ? current.eventLog : []),
+    systemState: cloneJson(systemState || current.systemState || null),
+    locks: isActive ? cloneJson(state.locks || {}) : cloneJson(current.locks || {}),
+    generatedAt: isActive ? (state.generatedAt || current.generatedAt || null) : (current.generatedAt || null),
+    editedAt: now,
+    canonizedAt: isActive ? (state.canonizedAt || current.canonizedAt || null) : (current.canonizedAt || null),
+    lastExportAt: isActive ? (state.lastExportAt || current.lastExportAt || null) : (current.lastExportAt || null),
+    narrativeDrift: current.narrativeDrift || null,
+    exportState: current.exportState || null,
+  };
+}
+
+function campaignStateForWorldPulse(state, save, systemState, now, result) {
+  const base = campaignStateForRegionalImpact(state, save, systemState, now);
+  return {
+    ...base,
+    worldPulse: {
+      lastTick: result?.tick ?? null,
+      lastInterval: result?.interval || null,
+      updatedAt: now,
+    },
+  };
+}
+
+function appendWizardNewsForGraphChange(campaign, beforeGraph, afterGraph, options = {}) {
+  if (!campaign) return;
+  const feed = ensureWizardNewsFeed(campaign.wizardNews);
+  const entries = deriveWizardNewsEntriesFromGraphChange(beforeGraph, afterGraph, {
+    tick: feed.currentTick,
+    ...options,
+  });
+  campaign.wizardNews = appendWizardNewsEntries(feed, entries);
+}
+
+function ensureCampaignWizardNews(campaign) {
+  if (!campaign) return null;
+  campaign.wizardNews = ensureWizardNewsFeed(campaign.wizardNews);
+  return campaign.wizardNews;
+}
+
 /** Migrate a single campaign object to the current schema */
 function migrateCampaign(camp) {
   if (!camp || typeof camp !== 'object') return camp;
-  if (!camp.mapState) return camp;
-  camp.mapState = migrateMapState(camp.mapState);
-  return camp;
+  const next = { ...camp };
+  if (camp.mapState) next.mapState = migrateMapState(camp.mapState);
+  if (next.regionalGraph) next.regionalGraph = ensureRegionalGraph(next.regionalGraph);
+  next.wizardNews = ensureWizardNewsFeed(next.wizardNews);
+  next.worldState = ensureWorldState(next.worldState, next);
+  return next;
+}
+
+function campaignSettlements(state, campaignId) {
+  const c = state.campaigns.find(campaign => campaign.id === campaignId);
+  if (!c) return [];
+  const ids = new Set(c.settlementIds || []);
+  return (state.savedSettlements || []).filter(save => ids.has(save.id));
+}
+
+function applyWorldPulseResultToState(state, campaign, result, now) {
+  const persistUpdates = [];
+  const updates = Array.isArray(result?.settlementUpdates) ? result.settlementUpdates : [];
+  for (const update of updates) {
+    const saveIdx = state.savedSettlements.findIndex(save =>
+      String(save.id) === String(update.saveId)
+    );
+    if (saveIdx === -1) continue;
+
+    const save = state.savedSettlements[saveIdx];
+    const nextSettlement = update.settlement || save.settlement;
+    let systemState = save.campaignState?.systemState || null;
+    try {
+      systemState = deriveSystemState(nextSettlement);
+    } catch (e) {
+      console.warn('[campaignSlice] deriveSystemState failed for world pulse', e);
+    }
+    const campaignState = campaignStateForWorldPulse(state, save, systemState, now, result);
+    const nextSave = {
+      ...save,
+      settlement: nextSettlement,
+      campaignState,
+      timestamp: now,
+    };
+    state.savedSettlements[saveIdx] = nextSave;
+
+    if (state.activeSaveId && String(state.activeSaveId) === String(save.id)) {
+      state.settlement = nextSettlement;
+      state.systemState = systemState;
+      state.editedAt = now;
+    }
+
+    persistUpdates.push({
+      saveId: save.id,
+      settlement: cloneJson(nextSettlement),
+      campaignState: cloneJson(campaignState),
+    });
+  }
+
+  campaign.worldState = ensureWorldState(result.worldState, campaign);
+  campaign.regionalGraph = ensureRegionalGraph(result.regionalGraph);
+  campaign.wizardNews = ensureWizardNewsFeed(result.wizardNews);
+  campaign.updatedAt = now;
+  return persistUpdates;
 }
 
 /** Migrate a single campaign mapState to v2 */
@@ -99,6 +243,12 @@ function migrateMapState(ms) {
       relationshipFilter: ['trade_partner', 'allied', 'patron', 'client', 'rival', 'cold_war', 'hostile'],
       chains: false,
       chainFilter: null,
+      regionalChannels: true,
+      regionalChannelFilter: null,
+      regionalImpacts: true,
+      regionalImpactStatusFilter: ['queued', 'applied', 'resolved'],
+      regionalMinSeverity: 0,
+      regionalShowGm: true,
       labels: true,
       markers: true,
       forests: true,
@@ -138,6 +288,9 @@ export const createCampaignSlice = (set, get) => ({
         updatedAt: new Date().toISOString(),
         settlementIds: [],
         mapState: null,
+        regionalGraph: ensureRegionalGraph(),
+        wizardNews: ensureWizardNewsFeed(),
+        worldState: ensureWorldState(null, { id, name }),
         collapsed: false,
       };
       state.campaigns.unshift(campaign);
@@ -228,6 +381,435 @@ export const createCampaignSlice = (set, get) => ({
         c.mapState = null;
         c.updatedAt = new Date().toISOString();
       }
+      localWrite(state.campaigns);
+    }),
+
+  /** Ensure a campaign has the current regional graph envelope. */
+  ensureCampaignRegionalGraph: (campaignId) => {
+    let graph = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      c.regionalGraph = ensureRegionalGraph(c.regionalGraph);
+      ensureCampaignWizardNews(c);
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      localWrite(state.campaigns);
+    });
+    return graph;
+  },
+
+  /**
+   * Rebuild the structural graph from campaign settlements. Existing confirmed
+   * channels are preserved; optional discovery adds suggested P0 channels.
+   */
+  rebuildCampaignRegionalGraph: (campaignId, options = {}) => {
+    const { discover = true } = options;
+    let graph = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      const saves = campaignSettlements(state, campaignId);
+      c.regionalGraph = discover
+        ? deriveGraphWithDiscoveredCandidates(saves, c.regionalGraph)
+        : deriveRegionalGraphFromSaves(saves, c.regionalGraph);
+      ensureCampaignWizardNews(c);
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      localWrite(state.campaigns);
+    });
+    return graph;
+  },
+
+  discoverCampaignRegionalChannels: (campaignId) => {
+    return get().rebuildCampaignRegionalGraph(campaignId, { discover: true });
+  },
+
+  setRegionalChannelStatus: (campaignId, channelId, status) => {
+    let graph = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      c.regionalGraph = domainSetRegionalChannelStatus(c.regionalGraph, channelId, status);
+      ensureCampaignWizardNews(c);
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      localWrite(state.campaigns);
+    });
+    return graph;
+  },
+
+  setRegionalChannelVisibility: (campaignId, channelId, visibility) => {
+    let graph = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      c.regionalGraph = domainSetRegionalChannelVisibility(c.regionalGraph, channelId, visibility);
+      ensureCampaignWizardNews(c);
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      localWrite(state.campaigns);
+    });
+    return graph;
+  },
+
+  setCampaignRegionalGraph: (campaignId, regionalGraph) => {
+    let graph = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      c.regionalGraph = ensureRegionalGraph(regionalGraph);
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph);
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      localWrite(state.campaigns);
+    });
+    return graph;
+  },
+
+  queueCampaignRegionalImpacts: (campaignId, impacts = []) => {
+    let graph = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      c.regionalGraph = queueRegionalImpacts(beforeGraph, impacts);
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph);
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      localWrite(state.campaigns);
+    });
+    return graph;
+  },
+
+  setRegionalImpactStatus: (campaignId, impactId, status, patch = {}) => {
+    let graph = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, status, patch);
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph);
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      localWrite(state.campaigns);
+    });
+    return graph;
+  },
+
+  ignoreQueuedRegionalImpact: (campaignId, impactId) => {
+    return get().setRegionalImpactStatus(campaignId, impactId, 'ignored');
+  },
+
+  advanceCampaignRegionalImpacts: (campaignId, ticks = 1, options = {}) => {
+    let graph = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      c.wizardNews = advanceWizardNewsFeed(c.wizardNews, ticks);
+      c.regionalGraph = advanceRegionalImpacts(beforeGraph, ticks, {
+        ...options,
+        currentTick: c.wizardNews.currentTick,
+      });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, {
+        tick: c.wizardNews.currentTick,
+      });
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      localWrite(state.campaigns);
+    });
+    return graph;
+  },
+
+  previewCampaignWorldPulse: (campaignId, interval = 'one_month', options = {}) => {
+    const state = get();
+    const campaign = state.campaigns.find(c => c.id === campaignId);
+    if (!campaign) return null;
+    return domainPreviewCampaignWorldPulse({
+      campaign: cloneJson(campaign),
+      saves: cloneJson(campaignSettlements(state, campaignId)),
+      interval,
+      now: options.now,
+    });
+  },
+
+  advanceCampaignWorld: (campaignId, interval = 'one_month', options = {}) => {
+    let result = null;
+    let persistUpdates = [];
+    const now = options.now || new Date().toISOString();
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      result = domainAdvanceCampaignWorld({
+        campaign: cloneJson(c),
+        saves: cloneJson(campaignSettlements(state, campaignId)),
+        interval,
+        now,
+      });
+      if (!result) return;
+      persistUpdates = applyWorldPulseResultToState(state, c, result, now);
+      localWrite(state.campaigns);
+    });
+
+    for (const update of persistUpdates) {
+      persistSaveUpdate(update.saveId, {
+        settlement: update.settlement,
+        campaignState: update.campaignState,
+      });
+    }
+    return result;
+  },
+
+  applyWorldPulseProposal: (campaignId, proposalId) => {
+    let result = null;
+    let persistUpdates = [];
+    const now = new Date().toISOString();
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      result = domainApplyWorldPulseProposal({
+        campaign: cloneJson(c),
+        saves: cloneJson(campaignSettlements(state, campaignId)),
+        proposalId,
+        now,
+      });
+      if (!result) return;
+      persistUpdates = applyWorldPulseResultToState(state, c, result, now);
+      localWrite(state.campaigns);
+    });
+
+    for (const update of persistUpdates) {
+      persistSaveUpdate(update.saveId, {
+        settlement: update.settlement,
+        campaignState: update.campaignState,
+      });
+    }
+    return result;
+  },
+
+  // Party as first-class actor: inject the consequences of a party action
+  // (resolve a stressor, broker/inflame a relationship, clear/impose a
+  // condition, move a faction/NPC) as an authoritative, party-tagged pulse
+  // input. Persists like advanceCampaignWorld.
+  recordPartyImpact: (campaignId, action) => {
+    let result = null;
+    let persistUpdates = [];
+    const now = new Date().toISOString();
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      result = domainApplyPartyImpact({
+        campaign: cloneJson(c),
+        saves: cloneJson(campaignSettlements(state, campaignId)),
+        action,
+        now,
+      });
+      if (!result) return;
+      persistUpdates = applyWorldPulseResultToState(state, c, result, now);
+      localWrite(state.campaigns);
+    });
+
+    for (const update of persistUpdates) {
+      persistSaveUpdate(update.saveId, {
+        settlement: update.settlement,
+        campaignState: update.campaignState,
+      });
+    }
+    return result;
+  },
+
+  dismissWorldPulseProposal: (campaignId, proposalId) => {
+    let proposal = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      c.worldState = domainUpdateWorldPulseProposalStatus(
+        ensureWorldState(c.worldState, c),
+        proposalId,
+        'dismissed',
+        { dismissedAt: now },
+      );
+      proposal = c.worldState.proposals.find(item => item.id === proposalId) || null;
+      c.updatedAt = now;
+      localWrite(state.campaigns);
+    });
+    return proposal;
+  },
+
+  applyQueuedRegionalImpact: (campaignId, impactId) => {
+    let result = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      const graph = ensureRegionalGraph(c.regionalGraph);
+      const impact = graph.queuedImpacts.find(i => i.id === impactId);
+      if (!impact || !isRegionalImpactAvailable(impact)) return;
+
+      const saveIdx = state.savedSettlements.findIndex(save =>
+        String(save.id) === String(impact.targetSettlementId)
+      );
+      if (saveIdx === -1) return;
+
+      const save = state.savedSettlements[saveIdx];
+      const nextSettlement = applyRegionalImpact(save.settlement, impact);
+      if (!nextSettlement) return;
+
+      const now = new Date().toISOString();
+      let systemState = save.campaignState?.systemState || null;
+      try {
+        systemState = deriveSystemState(nextSettlement);
+      } catch (e) {
+        console.warn('[campaignSlice] deriveSystemState failed for regional impact', e);
+      }
+
+      const campaignState = campaignStateForRegionalImpact(state, save, systemState, now);
+      const nextSave = {
+        ...save,
+        settlement: nextSettlement,
+        campaignState,
+        timestamp: now,
+      };
+      state.savedSettlements[saveIdx] = nextSave;
+
+      if (state.activeSaveId && String(state.activeSaveId) === String(save.id)) {
+        state.settlement = nextSettlement;
+        state.systemState = systemState;
+        state.editedAt = now;
+      }
+
+      const beforeGraph = graph;
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'applied', { appliedAt: now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
+      c.updatedAt = now;
+      localWrite(state.campaigns);
+
+      result = {
+        saveId: save.id,
+        settlement: cloneJson(nextSettlement),
+        campaignState: cloneJson(campaignState),
+        timestamp: now,
+        impact: cloneJson(impact),
+      };
+    });
+
+    if (result) {
+      persistSaveUpdate(result.saveId, {
+        settlement: result.settlement,
+        campaignState: result.campaignState,
+      });
+    }
+    return result;
+  },
+
+  resolveRegionalImpact: (campaignId, impactId) => {
+    let result = null;
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      const graph = ensureRegionalGraph(c.regionalGraph);
+      const impact = graph.queuedImpacts.find(i => i.id === impactId);
+      if (!impact || impact.status !== 'applied') return;
+
+      const saveIdx = state.savedSettlements.findIndex(save =>
+        String(save.id) === String(impact.targetSettlementId)
+      );
+      if (saveIdx === -1) return;
+
+      const save = state.savedSettlements[saveIdx];
+      const condition = conditionFromRegionalImpact(impact);
+      const nextSettlement = withoutActiveCondition(save.settlement, condition.id);
+      const now = new Date().toISOString();
+      let systemState = save.campaignState?.systemState || null;
+      try {
+        systemState = deriveSystemState(nextSettlement);
+      } catch (e) {
+        console.warn('[campaignSlice] deriveSystemState failed while resolving regional impact', e);
+      }
+
+      const campaignState = campaignStateForRegionalImpact(state, save, systemState, now);
+      const nextSave = {
+        ...save,
+        settlement: nextSettlement,
+        campaignState,
+        timestamp: now,
+      };
+      state.savedSettlements[saveIdx] = nextSave;
+
+      if (state.activeSaveId && String(state.activeSaveId) === String(save.id)) {
+        state.settlement = nextSettlement;
+        state.systemState = systemState;
+        state.editedAt = now;
+      }
+
+      const beforeGraph = graph;
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'resolved', { resolvedAt: now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
+      c.updatedAt = now;
+      localWrite(state.campaigns);
+
+      result = {
+        saveId: save.id,
+        settlement: cloneJson(nextSettlement),
+        campaignState: cloneJson(campaignState),
+        timestamp: now,
+        impact: cloneJson(impact),
+      };
+    });
+
+    if (result) {
+      persistSaveUpdate(result.saveId, {
+        settlement: result.settlement,
+        campaignState: result.campaignState,
+      });
+    }
+    return result;
+  },
+
+  applyAllQueuedRegionalImpacts: (campaignId) => {
+    const graph = get().getCampaignRegionalGraph(campaignId);
+    const ids = graph.queuedImpacts
+      .filter(impact => isRegionalImpactAvailable(impact))
+      .map(impact => impact.id);
+    return ids
+      .map(id => get().applyQueuedRegionalImpact(campaignId, id))
+      .filter(Boolean);
+  },
+
+  ignoreAllQueuedRegionalImpacts: (campaignId) => {
+    const graph = get().getCampaignRegionalGraph(campaignId);
+    const ids = graph.queuedImpacts
+      .filter(impact => impact.status === 'queued')
+      .map(impact => impact.id);
+    for (const id of ids) {
+      get().setRegionalImpactStatus(campaignId, id, 'ignored');
+    }
+    return ids.length;
+  },
+
+  getCampaignRegionalGraph: (campaignId) => {
+    const c = get().campaigns.find(c => c.id === campaignId);
+    return ensureRegionalGraph(c?.regionalGraph);
+  },
+
+  getCampaignWizardNews: (campaignId) => {
+    const c = get().campaigns.find(c => c.id === campaignId);
+    return ensureWizardNewsFeed(c?.wizardNews);
+  },
+
+  getCampaignWorldState: (campaignId) => {
+    const c = get().campaigns.find(c => c.id === campaignId);
+    return ensureWorldState(c?.worldState, c);
+  },
+
+  clearCampaignWizardNews: (campaignId) =>
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      c.wizardNews = ensureWizardNewsFeed();
+      c.updatedAt = new Date().toISOString();
       localWrite(state.campaigns);
     }),
 

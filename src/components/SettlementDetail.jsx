@@ -30,6 +30,7 @@ import ExportSheet      from './settlement/ExportSheet.jsx';
 // pendingSuccession off the slice, shows ranked successors, and
 // pre-fills the EventComposer with ASSIGN_NPC_TO_ROLE on selection.
 import SuccessorPrompt  from './settlement/SuccessorPrompt.jsx';
+import RegionalImpactInbox from './region/RegionalImpactInbox.jsx';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
 // Tier 7.15 — phased UI redesign rollout: the Narrated/Raw chip below
 // migrates from an inline ad-hoc <span> to the StateBadge primitive,
@@ -369,6 +370,26 @@ export default function SettlementDetail({
     setEditingName(null);
     setEditDraft('');
   };
+
+  const handleRegionalImpactApplied = (result) => {
+    if (!result?.settlement) return;
+    setDetail(d => {
+      if (!d) return d;
+      const nextSaveData = {
+        ...(d.saveData || {}),
+        settlement: result.settlement,
+        campaignState: result.campaignState || d.saveData?.campaignState,
+        timestamp: result.timestamp || d.saveData?.timestamp,
+      };
+      return {
+        ...d,
+        settlement: result.settlement,
+        campaignState: result.campaignState || d.campaignState,
+        timestamp: result.timestamp || d.timestamp,
+        saveData: nextSaveData,
+      };
+    });
+  };
     return<div>
       {/* Local keyframe so the export-button spinner animates even when
           OutputContainer (which also defines @keyframes spin) isn't mounted. */}
@@ -508,6 +529,10 @@ export default function SettlementDetail({
       <CoherencePanel />
       <EventComposer />
       <Timeline />
+      <RegionalImpactInbox
+        saveId={detail?.saveData?.id || detail?.id}
+        onApplied={handleRegionalImpactApplied}
+      />
 
       {/* Right rail: phase-aware "next best action" + provenance block.
           Lives below the engine UI rather than as a separate column,

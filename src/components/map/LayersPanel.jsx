@@ -15,6 +15,8 @@
 import { X, Check } from 'lucide-react';
 import { useStore } from '../../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
+import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
+import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
 
 const REL_TYPES = [
   { id: 'trade_partner', label: 'Trade partner', color: '#0f766e' },
@@ -26,17 +28,52 @@ const REL_TYPES = [
   { id: 'hostile',       label: 'Hostile',       color: '#991b1b' },
 ];
 
+const REGIONAL_IMPACT_STATUS_FILTERS = ['queued', 'applied', 'resolved', 'ignored', 'expired'];
+const DEFAULT_REGIONAL_IMPACT_FILTER = ['queued', 'applied', 'resolved'];
+
+function human(value) {
+  return String(value || '').replace(/_/g, ' ');
+}
+
 export default function LayersPanel({ onClose }) {
   const layers         = useStore(s => s.mapState.layers);
   const toggleLayer    = useStore(s => s.toggleLayer);
   const setLayerFilter = useStore(s => s.setLayerFilter);
 
   const relFilter = new Set(Array.isArray(layers.relationshipFilter) ? layers.relationshipFilter : []);
+  const regionalChannelFilter = new Set(
+    Array.isArray(layers.regionalChannelFilter) && layers.regionalChannelFilter.length
+      ? layers.regionalChannelFilter
+      : REGIONAL_CHANNEL_TYPES
+  );
+  const regionalImpactFilter = new Set(
+    Array.isArray(layers.regionalImpactStatusFilter) && layers.regionalImpactStatusFilter.length
+      ? layers.regionalImpactStatusFilter
+      : DEFAULT_REGIONAL_IMPACT_FILTER
+  );
+  const regionalMinSeverity = Number.isFinite(layers.regionalMinSeverity)
+    ? layers.regionalMinSeverity
+    : 0;
 
   function toggleRelType(type) {
     const next = new Set(relFilter);
     if (next.has(type)) next.delete(type); else next.add(type);
     setLayerFilter('relationshipFilter', Array.from(next));
+  }
+
+  function toggleRegionalChannelType(type) {
+    const next = new Set(regionalChannelFilter);
+    if (next.has(type)) next.delete(type); else next.add(type);
+    setLayerFilter(
+      'regionalChannelFilter',
+      next.size === REGIONAL_CHANNEL_TYPES.length ? null : Array.from(next),
+    );
+  }
+
+  function toggleRegionalImpactStatus(status) {
+    const next = new Set(regionalImpactFilter);
+    if (next.has(status)) next.delete(status); else next.add(status);
+    setLayerFilter('regionalImpactStatusFilter', Array.from(next));
   }
 
   return (
@@ -100,6 +137,69 @@ export default function LayersPanel({ onClose }) {
           label="Supply chains"
           checked={!!layers.chains}
           onChange={() => toggleLayer('chains')}
+        />
+        <LayerToggle
+          label="Regional channels"
+          checked={!!layers.regionalChannels}
+          onChange={() => toggleLayer('regionalChannels')}
+        />
+        {layers.regionalChannels && (
+          <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
+            {REGIONAL_CHANNEL_TYPES.map(type => (
+              <FilterChip
+                key={type}
+                label={human(type)}
+                color={regionalChannelColor(type)}
+                active={regionalChannelFilter.has(type)}
+                onClick={() => toggleRegionalChannelType(type)}
+              />
+            ))}
+          </div>
+        )}
+        <LayerToggle
+          label="Regional impacts"
+          checked={!!layers.regionalImpacts}
+          onChange={() => toggleLayer('regionalImpacts')}
+        />
+        {layers.regionalImpacts && (
+          <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
+            {REGIONAL_IMPACT_STATUS_FILTERS.map(status => (
+              <FilterChip
+                key={status}
+                label={human(status)}
+                color={regionalImpactColor(status)}
+                active={regionalImpactFilter.has(status)}
+                onClick={() => toggleRegionalImpactStatus(status)}
+              />
+            ))}
+            <label style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: SP.xs,
+              marginTop: 4,
+              fontSize: FS.xxs,
+              color: MUTED,
+              fontFamily: sans,
+              fontWeight: 700,
+            }}>
+              Severity
+              <input
+                type="range"
+                min="0"
+                max="0.8"
+                step="0.1"
+                value={regionalMinSeverity}
+                onChange={e => setLayerFilter('regionalMinSeverity', Number(e.target.value))}
+                style={{ width: 96, accentColor: GOLD }}
+              />
+              {Math.round(regionalMinSeverity * 100)}%
+            </label>
+          </div>
+        )}
+        <LayerToggle
+          label="GM regional channels"
+          checked={layers.regionalShowGm !== false}
+          onChange={() => toggleLayer('regionalShowGm')}
         />
         <LayerToggle
           label="Roads"

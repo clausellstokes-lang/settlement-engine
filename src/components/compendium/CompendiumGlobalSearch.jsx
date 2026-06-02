@@ -42,9 +42,6 @@ export default function CompendiumGlobalSearch({ onSelect }) {
   const q = query.trim();
   const results = useMemo(() => (q ? searchCompendium(q, { limit: 8 }) : []), [q]);
 
-  // Reset the highlight whenever the result set changes.
-  useEffect(() => { setActive(0); }, [q]);
-
   // Close on click-outside.
   useEffect(() => {
     if (!open) return undefined;
@@ -103,7 +100,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         <Search size={13} style={{ color: GOLD, flexShrink: 0 }} />
         <input
           value={query}
-          onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+          onChange={(e) => { setQuery(e.target.value); setActive(0); setOpen(true); }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
           placeholder="Search the whole Compendium…"
@@ -120,7 +117,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         {query && (
           <button
             type="button"
-            onClick={() => { setQuery(''); setOpen(false); }}
+            onClick={() => { setQuery(''); setActive(0); setOpen(false); }}
             aria-label="Clear search"
             style={{
               border: 'none', background: 'none', cursor: 'pointer',

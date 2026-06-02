@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, ArrowRight, Edit3, Check, X, Map as MapIcon, FileText} from 'lucide-react';
+import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, ArrowRight, Edit3, Check, X, Map as MapIcon, FileText, GitBranch} from 'lucide-react';
 
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
 import {getAllModifiers, EFFECT_CATEGORIES, fmtMod} from '../lib/relationshipGraph.js';
@@ -17,6 +17,7 @@ import { saves as savesService } from '../lib/saves.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import DeleteConfirmation from './DeleteConfirmation';
+import RegionalGraphSummary from './region/RegionalGraphSummary.jsx';
 import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../data/sampleSettlements.js';
 
 // ── Save migration ─────────────────────────────────────────────────────────
@@ -72,8 +73,18 @@ function findSaveById(saves, id) { return saves.find(s => s.id === id) || null; 
 const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', allied:'#1a5a28', secret_alliance:'#1a5a28', trade_partner:'#a0762a', patron:'#2a3a7a', client:'#2a3a7a', criminal_network:'#5a2a8a' };
 const _REL_TYPES = ['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
 
+function regionalCountsForSave(campaign, saveId) {
+  const impacts = campaign?.regionalGraph?.queuedImpacts || [];
+  const counts = { queued: 0, applied: 0, resolved: 0, ignored: 0, expired: 0 };
+  for (const impact of impacts) {
+    if (String(impact.targetSettlementId) !== String(saveId)) continue;
+    if (counts[impact.status] !== undefined) counts[impact.status] += 1;
+  }
+  return counts;
+}
+
 // ── Settlement Card (reused in campaigns + unassigned) ────────────────────
-function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId }) {
+function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts }) {
   const [moveOpen, setMoveOpen] = useState(false);
   const ts = (t) => { try { return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; } };
 
@@ -114,6 +125,25 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
               })}
             </div>;
           })()}
+          {regionalCounts && (regionalCounts.queued || regionalCounts.applied || regionalCounts.resolved) > 0 && (
+            <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:3 }}>
+              {regionalCounts.queued > 0 && (
+                <span style={{ fontSize:FS.micro, fontWeight:700, color:GOLD, background:GOLD_BG, border:`1px solid ${BORDER}`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                  <GitBranch size={8}/> {regionalCounts.queued} queued
+                </span>
+              )}
+              {regionalCounts.applied > 0 && (
+                <span style={{ fontSize:FS.micro, fontWeight:700, color:swatch.success, background:swatch.successBg, border:`1px solid ${BORDER}`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                  <GitBranch size={8}/> {regionalCounts.applied} applied
+                </span>
+              )}
+              {regionalCounts.resolved > 0 && (
+                <span style={{ fontSize:FS.micro, fontWeight:700, color:SECOND, background:swatch.infoBg, border:`1px solid ${BORDER}`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                  <GitBranch size={8}/> {regionalCounts.resolved} resolved
+                </span>
+              )}
+            </div>
+          )}
         </div>
         <div style={{ display:'flex', gap:4, alignItems:'center', flexShrink:0 }}>
           {/* Move to campaign */}
@@ -158,7 +188,7 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
 }
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
-function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed }) {
+function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts }) {
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -214,6 +244,21 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
         />
       )}
 
+      {!collapsed && (
+        <RegionalGraphSummary
+          campaign={campaign}
+          settlementCount={settlements.length}
+          onDiscover={onDiscoverRegional}
+          onConfirmChannel={onConfirmRegionalChannel}
+          onApplyImpact={onApplyRegionalImpact}
+          onIgnoreImpact={onIgnoreRegionalImpact}
+          onResolveImpact={onResolveRegionalImpact}
+          onAdvanceImpacts={onAdvanceRegionalImpacts}
+          onApplyAllImpacts={onApplyAllRegionalImpacts}
+          onIgnoreAllImpacts={onIgnoreAllRegionalImpacts}
+        />
+      )}
+
       {/* Nested settlements */}
       {!collapsed && (
         <div style={{ padding:'6px 8px 8px', display:'flex', flexDirection:'column', gap:4 }}>
@@ -226,7 +271,8 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
               onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}
               deleteConfirmed={deleteConfirmed} campaigns={campaigns}
               addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
-              currentCampaignId={campaign.id}/>
+              currentCampaignId={campaign.id}
+              regionalCounts={regionalCountsForSave(campaign, s.id)}/>
           ))}
         </div>
       )}
@@ -387,6 +433,14 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const toggleCampaignCollapsed = useStore(s => s.toggleCampaignCollapsed);
   const addToCampaign = useStore(s => s.addToCampaign);
   const removeFromCampaign = useStore(s => s.removeFromCampaign);
+  const discoverCampaignRegionalChannels = useStore(s => s.discoverCampaignRegionalChannels);
+  const setRegionalChannelStatus = useStore(s => s.setRegionalChannelStatus);
+  const applyQueuedRegionalImpact = useStore(s => s.applyQueuedRegionalImpact);
+  const ignoreQueuedRegionalImpact = useStore(s => s.ignoreQueuedRegionalImpact);
+  const resolveRegionalImpact = useStore(s => s.resolveRegionalImpact);
+  const advanceCampaignRegionalImpacts = useStore(s => s.advanceCampaignRegionalImpacts);
+  const applyAllQueuedRegionalImpacts = useStore(s => s.applyAllQueuedRegionalImpacts);
+  const ignoreAllQueuedRegionalImpacts = useStore(s => s.ignoreAllQueuedRegionalImpacts);
 
   const onLoad = (data) => {
     if (data.config) updateConfig(migrateConfig(data.config));
@@ -474,6 +528,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     _setSavesLocal(newSaves);
     setSavedSettlements(newSaves);
   }, [setSavedSettlements]);
+  useEffect(() => {
+    return useStore.subscribe(
+      state => state.savedSettlements,
+      nextSaves => { _setSavesLocal(nextSaves || []); },
+    );
+  }, []);
   const [savesLoading, setSavesLoading] = useState(true);
   const [saved, setSaved] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -776,6 +836,30 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     setShowNewCampaign(false);
   };
 
+  const handleApplyRegionalImpact = useCallback((campaignId, impactId) => {
+    applyQueuedRegionalImpact(campaignId, impactId);
+  }, [applyQueuedRegionalImpact]);
+
+  const handleIgnoreRegionalImpact = useCallback((campaignId, impactId) => {
+    ignoreQueuedRegionalImpact(campaignId, impactId);
+  }, [ignoreQueuedRegionalImpact]);
+
+  const handleResolveRegionalImpact = useCallback((campaignId, impactId) => {
+    resolveRegionalImpact(campaignId, impactId);
+  }, [resolveRegionalImpact]);
+
+  const handleAdvanceRegionalImpacts = useCallback((campaignId, ticks) => {
+    advanceCampaignRegionalImpacts(campaignId, ticks);
+  }, [advanceCampaignRegionalImpacts]);
+
+  const handleApplyAllRegionalImpacts = useCallback((campaignId) => {
+    applyAllQueuedRegionalImpacts(campaignId);
+  }, [applyAllQueuedRegionalImpacts]);
+
+  const handleIgnoreAllRegionalImpacts = useCallback((campaignId) => {
+    ignoreAllQueuedRegionalImpacts(campaignId);
+  }, [ignoreAllQueuedRegionalImpacts]);
+
   // Derive assigned/unassigned settlement grouping
   const assignedIds = useMemo(() => {
     const ids = new Set();
@@ -887,7 +971,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 deleteId={deleteId} setDeleteId={setDeleteId} deleteConfirmed={deleteConfirmed}
                 campaigns={campaigns} addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
                 onDeleteCampaign={deleteCampaign} onRenameCampaign={renameCampaign}
-                toggleCollapsed={toggleCampaignCollapsed}/>
+                toggleCollapsed={toggleCampaignCollapsed}
+                onDiscoverRegional={discoverCampaignRegionalChannels}
+                onConfirmRegionalChannel={(campaignId, channelId) => setRegionalChannelStatus(campaignId, channelId, 'confirmed')}
+                onApplyRegionalImpact={handleApplyRegionalImpact}
+                onIgnoreRegionalImpact={handleIgnoreRegionalImpact}
+                onResolveRegionalImpact={handleResolveRegionalImpact}
+                onAdvanceRegionalImpacts={handleAdvanceRegionalImpacts}
+                onApplyAllRegionalImpacts={handleApplyAllRegionalImpacts}
+                onIgnoreAllRegionalImpacts={handleIgnoreAllRegionalImpacts}/>
             );
           })}
 
