@@ -19,6 +19,12 @@ const WORLD_CONDITION_SOURCE_PREFIXES = Object.freeze(['WORLD_PULSE', 'WORLD_STR
 
 /** True when a condition was authored by the regional pulse / party action. */
 export function isWorldAuthoredCondition(condition) {
+  // `regional_*` archetypes are produced exclusively by the regional engine
+  // (propagation.js / flows.js); a local generation never emits them. This is
+  // the reliable signal — propagation stamps `sourceEventType` as the change
+  // kind (route_cut, regional_wave, …) and `causes[].source` as the channel
+  // id, neither of which carries a world/party prefix.
+  if (String(condition?.archetype || '').startsWith('regional_')) return true;
   const src = String(condition?.triggeredAt?.sourceEventType || '');
   if (WORLD_CONDITION_SOURCE_PREFIXES.some(p => src.startsWith(p))) return true;
   return (condition?.causes || []).some(c => {

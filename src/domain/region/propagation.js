@@ -385,6 +385,7 @@ function impactForChannel(channel, localDelta, change) {
 export function deriveRegionalImpacts(localDelta, graph, options = {}) {
   if (!localDelta?.sourceSettlementId) return [];
   const current = ensureRegionalGraph(graph || {});
+  const now = options.now ?? null;
   const channels = activeChannelsFrom(graph, localDelta.sourceSettlementId, {
     includeSuggested: !!options.includeSuggested,
     types: options.types || [...REGIONAL_RULE_TYPES],
@@ -419,6 +420,10 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
     }
     frontier = nextFrontier;
   }
+  // Deterministic timestamp: stamp every impact with the threaded `now` rather
+  // than wall-clock, so a replay is byte-identical (falls back to each impact's
+  // own createdAt when `now` isn't threaded).
+  if (now) for (const item of out) item.createdAt = now;
   return out;
 }
 
@@ -594,6 +599,7 @@ export function applyRegionalImpact(settlement, impactItem, options = {}) {
  * @param {boolean} [args.includeSuggested]
  * @param {number} [args.maxDepth]
  * @param {number} [args.waveDecay]
+ * @param {(string|null)} [args.now]
  */
 export function propagateRegionalEvent(args = {}) {
   const {
@@ -606,10 +612,11 @@ export function propagateRegionalEvent(args = {}) {
     includeSuggested = false,
     maxDepth = 1,
     waveDecay = 0.45,
+    now = null,
   } = args;
   const current = ensureRegionalGraph(graph || {});
   const localDelta = deriveLocalDelta(beforeSettlement, afterSettlement, { event });
-  const impacts = deriveRegionalImpacts(localDelta, current, { includeSuggested, maxDepth, waveDecay });
+  const impacts = deriveRegionalImpacts(localDelta, current, { includeSuggested, maxDepth, waveDecay, now });
   const bundles = aggregateImpactBundles(impacts);
   const focusDecisions = bundles.map(bundle => ({
     bundleId: bundle.id,
@@ -623,6 +630,7 @@ export function propagateRegionalEvent(args = {}) {
 
   let nextGraph = appendRegionalEvent(current, {
     id: `regional_event.${idPart(localDelta.id)}`,
+    recordedAt: now || undefined,
     sourceSettlementId: localDelta.sourceSettlementId,
     sourceSettlementName: localDelta.sourceSettlementName,
     sourceEvent: event ? { id: event.id || null, type: event.type || null, targetId: event.targetId || null } : null,

@@ -135,6 +135,7 @@ export function applyWorldPulseOutcomes({
         activeSettlementId: outcome.targetSaveId,
         visibleSettlementIds: snapshot.settlements.map(item => item.id),
         maxDepth: 2,
+        now,
       });
       graph = propagation.graph;
       newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeGraph, graph, { tick, createdAt: now }));

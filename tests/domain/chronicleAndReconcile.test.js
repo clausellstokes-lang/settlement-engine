@@ -44,6 +44,14 @@ describe('pulse ↔ local reconciliation', () => {
     expect(worldAuthoredConditions(prior).map(c => c.archetype)).toEqual(['regional_import_shortage']);
     expect(isWorldAuthoredCondition({ triggeredAt: { sourceEventType: 'PARTY_ACTION' } })).toBe(true);
     expect(isWorldAuthoredCondition({ archetype: 'plague' })).toBe(false);
+    // propagation.js stamps sourceEventType as the change kind (route_cut) and
+    // the cause source as the channel id — neither world/party-prefixed — so it
+    // must be recognized via the regional_* archetype.
+    expect(isWorldAuthoredCondition({
+      archetype: 'regional_route_disruption',
+      triggeredAt: { sourceEventType: 'route_cut' },
+      causes: [{ source: 'channel.trade_dependency.a.b' }],
+    })).toBe(true);
   });
 
   test('preserveWorldConditions carries world conditions across a regeneration but not local ones', () => {
