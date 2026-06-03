@@ -1,15 +1,12 @@
 /**
  * ChainBuilder.jsx — Supply chain builder & editor.
  *
- * STATUS: INACTIVE (as of 2026-04). This component is fully implemented
- * but currently NOT imported anywhere. It was the body of the (now-
- * removed) "Chains" top-level tab; per the active refactor plan
- * (`~/.claude/plans/golden-greeting-codd.md`), Phase D will absorb
- * its surface area into Workshop.jsx as a sub-section of the new
- * "Custom Generate" mode (premium-gated).
- *
- * Do not delete. If Phase D is cancelled or rescoped, retire this in
- * one PR rather than letting it rot here.
+ * STATUS: ACTIVE. Embedded in Workshop.jsx as the "Supply Chain Builder"
+ * panel inside the Custom Content (premium) section. Pass the `embedded`
+ * prop to render without the standalone page chrome (outer max-width +
+ * gold header banner) so it sits cleanly inside a Workshop <Panel>. This
+ * realizes the Phase D plan to absorb the supply-chain builder into the
+ * Custom Generate surface; it is no longer a standalone top-level tab.
  *
  * Visual editor for creating, editing, and managing supply chain
  * definitions that drive the map overlay system. Users can:
@@ -580,7 +577,7 @@ function ChainEditor({ initial, onSave, onCancel }) {
 
 // ── Main component ───────────────────────────────────────────────────────────
 
-export default function ChainBuilder() {
+export default function ChainBuilder({ embedded = false }) {
   const activeOverlays = useStore(s => s.activeOverlays);
   const toggleOverlay  = useStore(s => s.toggleOverlay);
   const canUseMapChains = useStore(s => s.canUseMapChains?.() ?? true);
@@ -645,38 +642,51 @@ export default function ChainBuilder() {
 
   const activeCount = activeOverlays.length;
 
+  const activeBadge = (
+    <div style={{
+      padding: `${SP.xs}px ${SP.md}px`, background: activeCount > 0 ? '#2a7a2a15' : CARD_HDR,
+      borderRadius: R.lg, textAlign: 'center',
+      border: `1px solid ${activeCount > 0 ? '#4a8a60' : BORDER2}`,
+    }}>
+      <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Active</div>
+      <div style={{ fontSize: FS.lg, fontWeight: 700, color: activeCount > 0 ? '#2a7a2a' : MUTED }}>
+        {activeCount}
+      </div>
+    </div>
+  );
+
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', gap: SP.lg,
-      maxWidth: 720, margin: '0 auto', padding: `${SP.lg}px 0`,
+      ...(embedded ? {} : { maxWidth: 720, margin: '0 auto', padding: `${SP.lg}px 0` }),
     }}>
-      {/* Header info */}
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: SP.md,
-        padding: `${SP.md}px ${SP.lg}px`,
-        background: GOLD_BG, borderRadius: R.xl,
-        border: `1px solid ${GOLD}33`,
-      }}>
-        <Layers size={20} color={GOLD} />
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: FS.md, fontWeight: 700, color: INK, fontFamily: serif_ }}>
-            Supply Chain Builder
-          </div>
-          <div style={{ fontSize: FS.xxs, color: MUTED }}>
+      {/* Header — full gold banner when standalone; slim description row when embedded in a Workshop Panel (which already supplies the title). */}
+      {embedded ? (
+        <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
+          <div style={{ flex: 1, fontSize: FS.xxs, color: MUTED, lineHeight: 1.5 }}>
             Define resource→consumer chains for map overlays. Toggle chains on to visualize trade routes between linked settlements.
           </div>
+          {activeBadge}
         </div>
+      ) : (
         <div style={{
-          padding: `${SP.xs}px ${SP.md}px`, background: activeCount > 0 ? '#2a7a2a15' : CARD_HDR,
-          borderRadius: R.lg, textAlign: 'center',
-          border: `1px solid ${activeCount > 0 ? '#4a8a60' : BORDER2}`,
+          display: 'flex', alignItems: 'center', gap: SP.md,
+          padding: `${SP.md}px ${SP.lg}px`,
+          background: GOLD_BG, borderRadius: R.xl,
+          border: `1px solid ${GOLD}33`,
         }}>
-          <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Active</div>
-          <div style={{ fontSize: FS.lg, fontWeight: 700, color: activeCount > 0 ? '#2a7a2a' : MUTED }}>
-            {activeCount}
+          <Layers size={20} color={GOLD} />
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: FS.md, fontWeight: 700, color: INK, fontFamily: serif_ }}>
+              Supply Chain Builder
+            </div>
+            <div style={{ fontSize: FS.xxs, color: MUTED }}>
+              Define resource→consumer chains for map overlays. Toggle chains on to visualize trade routes between linked settlements.
+            </div>
           </div>
+          {activeBadge}
         </div>
-      </div>
+      )}
 
       {/* Permission gate */}
       {!canUseMapChains && (

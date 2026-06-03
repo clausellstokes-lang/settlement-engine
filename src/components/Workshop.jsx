@@ -1,18 +1,15 @@
 /**
  * Workshop.jsx — Additive advanced generation sandbox.
  *
- * STATUS: INACTIVE (as of 2026-04). This component is fully implemented
- * but currently NOT imported by App.jsx. It is the planned home for the
- * "Custom Generate" mode in Phase D of the active refactor plan
- * (`~/.claude/plans/golden-greeting-codd.md`), which will:
- *   1. Rename "Custom Template" → "Custom Generate" in the wizard
- *   2. Re-mount Workshop here, gated behind a premium check
- *   3. Absorb supply-chain builder + custom institutions/resources/routes
- *
- * Do not delete. Until Phase D wires it back in, treat this file as
- * documentation of the intended Custom mode surface area. If Phase D
- * is cancelled or rescoped, delete in one PR rather than letting it
- * rot here.
+ * STATUS: ACTIVE. Mounted as a top-level "Workshop" destination in
+ * App.jsx (nav entry gated behind the workshopNav flag, default-on).
+ * This is the home for the "Custom Generate" surface from the refactor
+ * plan (`~/.claude/plans/golden-greeting-codd.md`):
+ *   - Custom institutions / resources / trade routes (CustomContentPanels)
+ *   - Supply-chain builder (ChainBuilder, embedded as a Custom panel)
+ * Remaining Phase-D follow-ups: rename the wizard's "Custom Template" →
+ * "Custom Generate", and add a hard premium gate on the Custom panels
+ * (today they are visible; ChainBuilder self-gates overlay activation).
  *
  * Power-user config tool that exposes ALL settlement generator
  * parameters simultaneously in a single-page dashboard (unlike the
@@ -36,11 +33,12 @@ import {
   Sliders, Play, RotateCcw, ChevronDown, ChevronRight,
   Shield, Coins, Sparkles, Skull, Swords, Crown, Globe, Mountain,
   Compass, Tent, Building2, Castle, Landmark,
-  AlertTriangle, Lock, Unlock, Dice5, Wand2,
+  AlertTriangle, Lock, Unlock, Dice5, Wand2, Link2,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { DEFAULT_CONFIG } from '../store/configSlice.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, PARCH, sans, serif_, SP, R, FS, swatch } from './theme.js';
+import ChainBuilder from './ChainBuilder.jsx';
 
 // ── Static data ──────────────────────────────────────────────────────────────
 
@@ -1237,6 +1235,10 @@ function CustomContentPanels({ config, updateConfig }) {
             </select>
           </div>
         </div>
+      </Panel>
+
+      <Panel title="Supply Chain Builder" icon={Link2} color="#2a6a6a" defaultOpen={false}>
+        <ChainBuilder embedded />
       </Panel>
     </>
   );
