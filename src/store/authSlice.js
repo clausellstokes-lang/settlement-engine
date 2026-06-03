@@ -45,6 +45,7 @@ const TIER_RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 
 
 /** Roles that bypass all tier restrictions */
 const ELEVATED_ROLES = ['developer', 'admin'];
+let authUnsubscribe = null;
 
 export const createAuthSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
@@ -72,10 +73,18 @@ export const createAuthSlice = (set, get) => ({
       };
     }),
 
-  clearAuth: () =>
+  clearAuth: () => {
     set(state => {
       state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, loading: false, error: null };
-    }),
+    });
+    try {
+      get().clearCampaigns?.();
+      get().clearSavedSettlements?.();
+      get().clearCloudCustomContent?.();
+    } catch {
+      // Other slices may not be present in isolated unit tests.
+    }
+  },
 
   setAuthLoading: (loading) =>
     set(state => { state.auth.loading = loading; }),
@@ -120,11 +129,23 @@ export const createAuthSlice = (set, get) => ({
       set(state => { state.auth.loading = false; state.auth.error = e.message; });
     }
 
-    // Listen for auth state changes (token refresh, sign out from another tab)
-    authService.onAuthChange((event, user, session, tier, role, displayName, isFounder) => {
+    // Listen for auth state changes (token refresh, sign out from another tab).
+    // initAuth can run more than once under HMR/remounts, so keep exactly one
+    // active subscription.
+    if (authUnsubscribe) {
+      authUnsubscribe();
+      authUnsubscribe = null;
+    }
+    authUnsubscribe = authService.onAuthChange((event, user, session, tier, role, displayName, isFounder) => {
       if (event === 'SIGNED_OUT') {
         get().clearAuth();
       } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        const previousUserId = get().auth?.user?.id;
+        if (previousUserId && user?.id && previousUserId !== user.id) {
+          get().clearCampaigns?.();
+          get().clearSavedSettlements?.();
+          get().clearCloudCustomContent?.();
+        }
         set(state => {
           state.auth = {
             user, session, tier,
@@ -177,6 +198,7 @@ export const createAuthSlice = (set, get) => ({
         }
       }
     });
+    return authUnsubscribe;
   },
 
   /** Sign up with email + password. Returns { needsVerification } or throws. */

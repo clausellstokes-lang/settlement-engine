@@ -24,7 +24,6 @@
 
 import { useEffect, useState } from 'react';
 import { FS, swatch } from '../theme.js';
-import { isEmailProviderUnconfigured } from '../../lib/emailLifecycle.js';
 
 const DISMISS_KEY = 'sf.devEmailBanner.dismissed';
 const IS_DEV = !!import.meta?.env?.DEV;
@@ -34,7 +33,7 @@ export default function DevEmailBanner() {
   // In prod the constant `IS_DEV` short-circuits before render returns
   // any markup; React still calls hooks, but with stable defaults so
   // there's no rules-of-hooks violation.
-  const [unconfigured, setUnconfigured] = useState(() => IS_DEV && isEmailProviderUnconfigured());
+  const [unconfigured, setUnconfigured] = useState(false);
   const [dismissed, setDismissed] = useState(() => {
     if (!IS_DEV) return true;
     try { return localStorage.getItem(DISMISS_KEY) === '1'; } catch { return false; }
@@ -42,9 +41,22 @@ export default function DevEmailBanner() {
 
   useEffect(() => {
     if (!IS_DEV) return undefined;
+    let cancelled = false;
+    import('../../lib/emailLifecycle.js')
+      .then(({ isEmailProviderUnconfigured }) => {
+        if (!cancelled && typeof isEmailProviderUnconfigured === 'function' && isEmailProviderUnconfigured()) {
+          setUnconfigured(true);
+        }
+      })
+      .catch(e => {
+        console.warn('[DevEmailBanner] email lifecycle status load failed:', e);
+      });
     const onUnconfigured = () => setUnconfigured(true);
     window.addEventListener('sf:email-unconfigured', onUnconfigured);
-    return () => window.removeEventListener('sf:email-unconfigured', onUnconfigured);
+    return () => {
+      cancelled = true;
+      window.removeEventListener('sf:email-unconfigured', onUnconfigured);
+    };
   }, []);
 
   if (!IS_DEV || !unconfigured || dismissed) return null;

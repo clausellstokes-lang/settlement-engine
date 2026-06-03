@@ -38,6 +38,7 @@ import { createCustomContentSlice } from './customContentSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
 import { setCustomContentSource }   from '../lib/dependencyEngine.js';
+import { saves as savesService }    from '../lib/saves.js';
 
 export const useStore = create(
   devtools(
@@ -94,44 +95,47 @@ export const useStore = create(
 setCustomContentSource(() => useStore.getState().customContent);
 
 // ── P101 / X-3 — Auth intent handlers ───────────────────────────────────
-// Register handlers for post-auth pending intents. The authSlice's
-// SIGNED_IN hook calls authIntents.consume() which routes to the matching
-// handler here. Each handler executes the action the user originally
-// clicked (save this town, buy this dossier, etc.) using the credentials
-// that just became real.
-import { registerHandler, INTENTS } from '../lib/authIntents.js';
-import { saves as savesService } from '../lib/saves.js';
-
-registerHandler(INTENTS.SAVE_SETTLEMENT, async (payload, ctx) => {
-  if (!payload || !payload.settlement) return null;
-  try {
-    const result = await savesService.save({
-      name: payload.name || 'Untitled Settlement',
-      tier: payload.tier || 'unknown',
-      settlement: payload.settlement,
-      config: payload.config || null,
-    });
-    // Fire analytics + a toast via the store so the user sees the result.
-    const { Funnel, EVENTS } = await import('../lib/analytics.js');
-    Funnel.track(EVENTS.SAVE_SIGNUP_INTENT_FULFILLED, {
-      tier: payload.tier,
-      userId: ctx?.user?.id,
-    });
-    // Surface a toast through the existing onboardingNudge channel so we
-    // don't add another notification mechanism. The user sees this on
-    // their first signed-in dashboard load.
+// Register handlers for post-auth pending intents. Keep authIntents itself
+// lazy so GenerateWizard/authSlice do not create a mixed static/dynamic
+// chunk that Vite has to warn about.
+function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
+  registerHandler(INTENTS.SAVE_SETTLEMENT, async (payload, ctx) => {
+    if (!payload || !payload.settlement) return null;
     try {
-      const setOnboardingNudge = useStore.getState().setOnboardingNudge;
-      if (typeof setOnboardingNudge === 'function') {
-        setOnboardingNudge(`Saved as ${payload.name} — view it in Settlements.`);
-      }
-    } catch { /* nudge slice might not be initialized in tests */ }
-    return result;
-  } catch (e) {
-    console.warn('[authIntent.save-settlement] failed:', e);
-    return null;
-  }
-});
+      const result = await savesService.save({
+        name: payload.name || 'Untitled Settlement',
+        tier: payload.tier || 'unknown',
+        settlement: payload.settlement,
+        config: payload.config || null,
+      });
+      // Fire analytics + a toast via the store so the user sees the result.
+      const { Funnel, EVENTS } = await import('../lib/analytics.js');
+      Funnel.track(EVENTS.SAVE_SIGNUP_INTENT_FULFILLED, {
+        tier: payload.tier,
+        userId: ctx?.user?.id,
+      });
+      // Surface a toast through the existing onboardingNudge channel so we
+      // don't add another notification mechanism. The user sees this on
+      // their first signed-in dashboard load.
+      try {
+        const setOnboardingNudge = useStore.getState().setOnboardingNudge;
+        if (typeof setOnboardingNudge === 'function') {
+          setOnboardingNudge(`Saved as ${payload.name} — view it in Settlements.`);
+        }
+      } catch { /* nudge slice might not be initialized in tests */ }
+      return result;
+    } catch (e) {
+      console.warn('[authIntent.save-settlement] failed:', e);
+      return null;
+    }
+  });
+}
+
+import('../lib/authIntents.js')
+  .then(registerAuthIntentHandlers)
+  .catch(e => {
+    console.warn('[store] auth intent registration failed:', e);
+  });
 
 // ── Convenience selectors ────────────────────────────────────────────────────
 // Thin wrappers so components don't repeat selector boilerplate.

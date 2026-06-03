@@ -106,7 +106,7 @@ function migrateSettlementShape(entry) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, campaign_state, created_at, updated_at')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, campaign_state, version_history, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   return data.map(row => migrateSettlementShape(migrateSaveToV2({
@@ -121,6 +121,7 @@ async function supabaseList() {
     seed:      row.seed,
     aiData:    row.ai_data || {},
     campaignState: row.campaign_state || null,
+    versionHistory: Array.isArray(row.version_history) ? row.version_history : [],
   })));
 }
 
@@ -140,6 +141,7 @@ async function supabaseSave(entry) {
     neighbour_links: v2.settlement?.neighbourNetwork || null,
     ai_data:         v2.aiData || {},
     campaign_state:  v2.campaignState || null,
+    version_history: Array.isArray(v2.versionHistory) ? v2.versionHistory : null,
   };
 
   const { data, error } = await supabase
@@ -163,6 +165,7 @@ async function supabaseUpdate(id, partial) {
   if (partial.seed   !== undefined) updates.seed = partial.seed;
   if (partial.aiData !== undefined) updates.ai_data = partial.aiData;
   if (partial.campaignState !== undefined) updates.campaign_state = partial.campaignState;
+  if (partial.versionHistory !== undefined) updates.version_history = Array.isArray(partial.versionHistory) ? partial.versionHistory : null;
 
   const toggles = bundleToggles(partial);
   if (toggles) updates.toggles = toggles;

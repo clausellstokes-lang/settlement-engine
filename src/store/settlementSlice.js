@@ -76,6 +76,8 @@ import {
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
 import { saves as savesService } from '../lib/saves.js';
 
+const MAX_VERSION_HISTORY = 50;
+
 function cloneJson(value) {
   if (value === undefined || value === null) return value;
   return JSON.parse(JSON.stringify(value));
@@ -86,6 +88,10 @@ function persistSaveUpdate(saveId, partial) {
   savesService.update(saveId, partial).catch(e => {
     console.warn('[settlementSlice] save update failed', e);
   });
+}
+
+function cappedVersionHistory(history) {
+  return Array.isArray(history) ? history.slice(-MAX_VERSION_HISTORY) : [];
 }
 
 function saveEnvelopeFor(saveId, save, settlement, campaignState) {
@@ -326,41 +332,45 @@ export const createSettlementSlice = (set, get) => ({
   // is auto-snapshotted FIRST so reverting is never destructive — the
   // critique was explicit about that.
   //
-  // Both mutations are pure-local. Persistence to Supabase (migration
-  // 016 / version_history table) happens via the settlements/PATCH
-  // edge function on the next save round-trip; the slice doesn't
-  // care about the storage layer.
+  // Saved-settlement timelines persist immediately through the normal
+  // save service (`version_history` in Supabase, `versionHistory` locally).
+  // Unsaved draft timelines remain live-only until the settlement itself
+  // is saved.
 
   /** @param {{saveId?: string|null, kind?: string, label?: string, ts?: number}} opts */
   recordSnapshot: (opts = {}) => {
     const state = get();
     const ts = opts.ts || Date.now();
+    const targetSaveId = opts.saveId || state.activeSaveId || null;
+    const activeTarget = targetSaveId && state.activeSaveId && String(targetSaveId) === String(state.activeSaveId);
+    const sourceSettlement = targetSaveId
+      ? (activeTarget ? state.settlement : state.savedSettlements.find(e => String(e.id) === String(targetSaveId))?.settlement)
+      : state.settlement;
     const snapshot = {
       id: `snap_${ts}_${Math.random().toString(36).slice(2, 8)}`,
       ts,
       kind: opts.kind || 'manual',
       label: opts.label || 'Snapshot',
-      settlement: state.settlement ? JSON.parse(JSON.stringify(state.settlement)) : null,
+      settlement: sourceSettlement ? JSON.parse(JSON.stringify(sourceSettlement)) : null,
     };
-    if (opts.saveId) {
+    let persistedHistory = null;
+    if (targetSaveId) {
       set(s => {
-        const idx = s.savedSettlements.findIndex(e => e.id === opts.saveId);
+        const idx = s.savedSettlements.findIndex(e => String(e.id) === String(targetSaveId));
         if (idx === -1) return;
         const cur = s.savedSettlements[idx];
-        cur.versionHistory = Array.isArray(cur.versionHistory)
-          ? [...cur.versionHistory, snapshot]
-          : [snapshot];
+        cur.versionHistory = cappedVersionHistory([...(Array.isArray(cur.versionHistory) ? cur.versionHistory : []), snapshot]);
+        persistedHistory = cloneJson(cur.versionHistory);
       });
     } else {
       // No saveId — write into the live settlement's history. This
       // lets unsaved sessions still build a local timeline.
       set(s => {
         if (!s.settlement) return;
-        s.settlement.versionHistory = Array.isArray(s.settlement.versionHistory)
-          ? [...s.settlement.versionHistory, snapshot]
-          : [snapshot];
+        s.settlement.versionHistory = cappedVersionHistory([...(Array.isArray(s.settlement.versionHistory) ? s.settlement.versionHistory : []), snapshot]);
       });
     }
+    if (targetSaveId && persistedHistory) persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory });
     return snapshot;
   },
 
@@ -370,9 +380,10 @@ export const createSettlementSlice = (set, get) => ({
   revertToSnapshot: ({ saveId, snapshotId }) => {
     if (!snapshotId) return false;
     const state = get();
+    const targetSaveId = saveId || state.activeSaveId || null;
     // Read the snapshot from the appropriate version-history slot.
-    const history = saveId
-      ? state.savedSettlements.find(e => e.id === saveId)?.versionHistory
+    const history = targetSaveId
+      ? state.savedSettlements.find(e => String(e.id) === String(targetSaveId))?.versionHistory
       : state.settlement?.versionHistory;
     if (!Array.isArray(history)) return false;
     const target = history.find(s => s.id === snapshotId);
@@ -382,23 +393,33 @@ export const createSettlementSlice = (set, get) => ({
       const fn = get().recordSnapshot;
       if (typeof fn === 'function') {
         fn({
-          saveId,
+          saveId: targetSaveId,
           kind: 'pre-revert',
           label: `Before revert to ${target.label || 'snapshot'}`,
         });
       }
     } catch (_e) { /* silent */ }
     // Apply.
+    let persistedSettlement = null;
+    let persistedHistory = null;
     set(s => {
-      if (saveId) {
-        const idx = s.savedSettlements.findIndex(e => e.id === saveId);
+      if (targetSaveId) {
+        const idx = s.savedSettlements.findIndex(e => String(e.id) === String(targetSaveId));
         if (idx === -1) return;
         s.savedSettlements[idx].settlement = JSON.parse(JSON.stringify(target.settlement));
+        persistedSettlement = cloneJson(s.savedSettlements[idx].settlement);
+        persistedHistory = cloneJson(s.savedSettlements[idx].versionHistory || []);
       }
       // Always also refresh the live settlement view so the user sees
       // the revert immediately.
       s.settlement = JSON.parse(JSON.stringify(target.settlement));
     });
+    if (targetSaveId && persistedSettlement) {
+      persistSaveUpdate(targetSaveId, {
+        settlement: persistedSettlement,
+        versionHistory: cappedVersionHistory(persistedHistory),
+      });
+    }
     return true;
   },
 
@@ -840,6 +861,13 @@ export const createSettlementSlice = (set, get) => ({
     set(state => {
       state.savedSettlements = settlements || [];
       state.savedSettlementsLoaded = true;
+    }),
+
+  clearSavedSettlements: () =>
+    set(state => {
+      state.savedSettlements = [];
+      state.savedSettlementsLoaded = false;
+      state.activeSaveId = null;
     }),
 
   removeSavedSettlement: (id) =>

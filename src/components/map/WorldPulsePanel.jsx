@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Activity, CheckCircle2, Clock3, ShieldAlert, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
@@ -112,7 +113,7 @@ function OutcomeCard({ title, summary, severity, reasons = [], actions = null, t
   );
 }
 
-function SmallButton({ children, onClick, tone = 'neutral', title }) {
+function SmallButton({ children, onClick, tone = 'neutral', title, disabled = false }) {
   const primary = tone === 'good';
   const danger = tone === 'danger';
   return (
@@ -120,6 +121,7 @@ function SmallButton({ children, onClick, tone = 'neutral', title }) {
       type="button"
       onClick={onClick}
       title={title}
+      disabled={disabled}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
@@ -133,7 +135,8 @@ function SmallButton({ children, onClick, tone = 'neutral', title }) {
         fontFamily: sans,
         fontSize: FS.xs,
         fontWeight: 900,
-        cursor: 'pointer',
+        opacity: disabled ? 0.62 : 1,
+        cursor: disabled ? 'not-allowed' : 'pointer',
       }}
     >
       {children}
@@ -160,6 +163,8 @@ function Section({ title, count, children }) {
 export default function WorldPulsePanel({ campaign }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
+  const [busyProposalId, setBusyProposalId] = useState(null);
+  const [actionError, setActionError] = useState(null);
   if (!campaign) return null;
 
   const worldState = campaign.worldState || {};
@@ -168,6 +173,21 @@ export default function WorldPulsePanel({ campaign }) {
   const rolls = latestPulse?.rollExplanations || [];
   const resolved = latestPulse?.resolvedStressors || [];
   const selected = latestPulse?.selectedCount || 0;
+
+  const runProposalAction = async (proposalId, action) => {
+    if (busyProposalId) return;
+    setBusyProposalId(`${action}:${proposalId}`);
+    setActionError(null);
+    try {
+      const fn = action === 'apply' ? applyProposal : dismissProposal;
+      const updated = await fn(campaign.id, proposalId);
+      if (!updated) setActionError('Proposal could not be updated.');
+    } catch (err) {
+      setActionError(`Proposal update failed: ${err?.message || err}`);
+    } finally {
+      setBusyProposalId(null);
+    }
+  };
 
   return (
     <section style={{
@@ -225,6 +245,11 @@ export default function WorldPulsePanel({ campaign }) {
         alignItems: 'start',
       }}>
         <Section title="Pending Proposals" count={pending.length}>
+          {actionError && (
+            <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>
+              {actionError}
+            </div>
+          )}
           {pending.length === 0 ? (
             <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pending proposals.
@@ -242,11 +267,21 @@ export default function WorldPulsePanel({ campaign }) {
                   tone="major"
                   actions={(
                     <>
-                      <SmallButton tone="good" onClick={() => applyProposal(campaign.id, proposal.id)} title="Apply proposal">
-                        <CheckCircle2 size={13} /> Apply
+                      <SmallButton
+                        tone="good"
+                        onClick={() => runProposalAction(proposal.id, 'apply')}
+                        title="Apply proposal"
+                        disabled={!!busyProposalId}
+                      >
+                        <CheckCircle2 size={13} /> {busyProposalId === `apply:${proposal.id}` ? 'Applying' : 'Apply'}
                       </SmallButton>
-                      <SmallButton tone="danger" onClick={() => dismissProposal(campaign.id, proposal.id)} title="Dismiss proposal">
-                        <XCircle size={13} /> Dismiss
+                      <SmallButton
+                        tone="danger"
+                        onClick={() => runProposalAction(proposal.id, 'dismiss')}
+                        title="Dismiss proposal"
+                        disabled={!!busyProposalId}
+                      >
+                        <XCircle size={13} /> {busyProposalId === `dismiss:${proposal.id}` ? 'Dismissing' : 'Dismiss'}
                       </SmallButton>
                     </>
                   )}

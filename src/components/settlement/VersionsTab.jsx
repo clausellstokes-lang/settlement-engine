@@ -130,10 +130,26 @@ const KIND_LABEL = {
 export default function VersionsTab({ save }) {
   const enabled = flag('versionHistory');
   const tier = useStore(s => s.auth.tier);
+  const revertToSnapshot = useStore(s => s.revertToSnapshot);
   const isPaid = tier === 'premium' || tier === 'cartographer';
   const [confirmRevert, setConfirmRevert] = useState(null);
+  const [revertError, setRevertError] = useState(null);
 
   const entries = useMemo(() => buildVersionTimeline(save), [save]);
+
+  const handleRevert = (snapshotId) => {
+    if (!snapshotId || typeof revertToSnapshot !== 'function') {
+      setRevertError('Snapshot restore is unavailable.');
+      return;
+    }
+    const ok = revertToSnapshot({ saveId: save?.id || null, snapshotId });
+    if (!ok) {
+      setRevertError('Snapshot could not be restored.');
+      return;
+    }
+    setConfirmRevert(null);
+    setRevertError(null);
+  };
 
   if (!enabled) {
     return (
@@ -183,6 +199,11 @@ export default function VersionsTab({ save }) {
           {entries.length} {entries.length === 1 ? 'entry' : 'entries'}
         </span>
       </div>
+      {revertError && (
+        <div style={{ color: AMBER, fontSize: FS.xs, fontWeight: 700, marginBottom: SP.sm }}>
+          {revertError}
+        </div>
+      )}
 
       {entries.length === 0 ? (
         <div style={{ color: MUTED, fontSize: FS.sm, fontStyle: 'italic' }}>
@@ -228,7 +249,7 @@ export default function VersionsTab({ save }) {
                         </span>
                         <button
                           type="button"
-                          onClick={() => { setConfirmRevert(null); /* TODO wire revert */ }}
+                          onClick={() => handleRevert(e.id)}
                           style={{
                             padding: '3px 9px', fontSize: FS.xs, fontWeight: 700,
                             background: AMBER, color: swatch.white, border: 'none',

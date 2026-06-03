@@ -1,6 +1,30 @@
-import { beforeEach, describe, expect, test } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
+
+vi.mock('../../src/lib/saves.js', () => ({
+  saves: {
+    update: vi.fn(() => Promise.resolve()),
+    isConfigured: false,
+  },
+}));
+
+vi.mock('../../src/lib/campaigns.js', () => {
+  const cached = new Map();
+  const clone = value => JSON.parse(JSON.stringify(value));
+  return {
+    campaigns: {
+      loadCached: vi.fn((ownerId = 'anon') => clone(cached.get(ownerId) || [])),
+      cache: vi.fn((campaigns = [], ownerId = 'anon') => {
+        cached.set(ownerId, clone(campaigns));
+      }),
+      list: vi.fn(() => Promise.resolve([])),
+      upsert: vi.fn(campaign => Promise.resolve(campaign?.id)),
+      delete: vi.fn(() => Promise.resolve()),
+      isConfigured: false,
+    },
+  };
+});
 
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
@@ -56,7 +80,7 @@ describe('campaignSlice world pulse', () => {
     localStorage.removeItem('sf_campaigns');
   });
 
-  test('preview does not mutate campaign state while advance persists a pulse', () => {
+  test('preview does not mutate campaign state while advance persists a pulse', async () => {
     const store = makeStore();
     store.setState(state => {
       state.savedSettlements = [{
@@ -80,7 +104,7 @@ describe('campaignSlice world pulse', () => {
     expect(preview.tick).toBe(1);
     expect(store.getState().campaigns[0].worldState.tick).toBe(0);
 
-    const result = store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
+    const result = await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
     const campaign = store.getState().campaigns[0];
 
     expect(result.tick).toBe(1);
@@ -90,7 +114,7 @@ describe('campaignSlice world pulse', () => {
     expect(store.getState().savedSettlements[0].campaignState.worldPulse.lastTick).toBe(1);
   });
 
-  test('proposal apply and dismiss update world state', () => {
+  test('proposal apply and dismiss update world state', async () => {
     const store = makeStore();
     const proposal = {
       id: 'world_proposal.1.condition.ashford.test',
@@ -137,7 +161,7 @@ describe('campaignSlice world pulse', () => {
       }];
     });
 
-    const applied = store.getState().applyWorldPulseProposal('camp-1', proposal.id);
+    const applied = await store.getState().applyWorldPulseProposal('camp-1', proposal.id);
     expect(applied).toBeTruthy();
     expect(store.getState().campaigns[0].worldState.proposals[0].status).toBe('applied');
     expect(store.getState().savedSettlements[0].settlement.activeConditions.some(c => c.archetype === 'famine')).toBe(true);
@@ -146,8 +170,7 @@ describe('campaignSlice world pulse', () => {
       state.campaigns[0].worldState.proposals = [{ ...proposal, id: 'world_proposal.dismiss', status: 'pending' }];
     });
 
-    const dismissed = store.getState().dismissWorldPulseProposal('camp-1', 'world_proposal.dismiss');
+    const dismissed = await store.getState().dismissWorldPulseProposal('camp-1', 'world_proposal.dismiss');
     expect(dismissed.status).toBe('dismissed');
   });
 });
-

@@ -17,6 +17,7 @@ import {
   getPopulationRanges,
 } from '../generators/lookups.js';
 import { filterCatalogForMagic } from '../components/magicFilter.js';
+import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 
 const TIER_ORDER        = getTierOrder();
 const POPULATION_RANGES = getPopulationRanges();
@@ -115,5 +116,6 @@ export const selectSaveCount = (state) => state.savedSettlements.length;
 /** Whether the settlement data has changed since the last AI narrative. */
 export const selectIsNarrativeStale = (state) => {
   if (!state.aiSettlement || !state.settlement) return true;
-  return state.aiDataVersion < (state.settlement._generatedAt || 0);
+  if (!state.aiDataVersion || !state.aiSourceFingerprint) return true;
+  return state.aiSourceFingerprint !== settlementFingerprint(state.settlement);
 };

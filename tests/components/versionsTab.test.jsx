@@ -13,7 +13,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/react';
+import { fireEvent, render, screen, cleanup } from '@testing-library/react';
 
 const flagMock = vi.fn(() => true);
 vi.mock('../../src/lib/flags.js', () => ({ flag: (...a) => flagMock(...a) }));
@@ -24,7 +24,11 @@ vi.mock('../../src/lib/analytics.js', () => ({
 }));
 
 vi.mock('../../src/store/index.js', () => {
-  const data = { auth: { tier: 'wanderer' }, setPurchaseModalOpen: vi.fn() };
+  const data = {
+    auth: { tier: 'wanderer' },
+    setPurchaseModalOpen: vi.fn(),
+    revertToSnapshot: vi.fn(() => true),
+  };
   function useStore(selector) { return selector(data); }
   useStore.__set = (next) => Object.assign(data, next);
   return { useStore };
@@ -36,7 +40,11 @@ import { useStore } from '../../src/store/index.js';
 describe('VersionsTab — X-7 locked-destination fold-in', () => {
   beforeEach(() => {
     flagMock.mockReturnValue(true);
-    useStore.__set({ auth: { tier: 'wanderer' }, setPurchaseModalOpen: vi.fn() });
+    useStore.__set({
+      auth: { tier: 'wanderer' },
+      setPurchaseModalOpen: vi.fn(),
+      revertToSnapshot: vi.fn(() => true),
+    });
     try { sessionStorage.clear(); } catch { /* ignore */ }
   });
   afterEach(() => cleanup());
@@ -60,5 +68,32 @@ describe('VersionsTab — X-7 locked-destination fold-in', () => {
     flagMock.mockReturnValue(false);
     render(<VersionsTab save={{ name: 'Hollowmere' }} />);
     expect(screen.getByText(/Flip the flag to preview/i)).toBeTruthy();
+  });
+
+  it('reverts a paid user to a confirmed saved snapshot', () => {
+    const revertToSnapshot = vi.fn(() => true);
+    useStore.__set({
+      auth: { tier: 'premium' },
+      setPurchaseModalOpen: vi.fn(),
+      revertToSnapshot,
+    });
+
+    render(<VersionsTab save={{
+      id: 'save-1',
+      name: 'Hollowmere',
+      versionHistory: [
+        {
+          id: 'snap-1',
+          ts: '2024-03-10T12:00:00Z',
+          label: 'Before the siege',
+          settlement: { name: 'Hollowmere' },
+        },
+      ],
+    }} />);
+
+    fireEvent.click(screen.getByRole('button', { name: /Revert to this snapshot/i }));
+    fireEvent.click(screen.getByRole('button', { name: 'Revert' }));
+
+    expect(revertToSnapshot).toHaveBeenCalledWith({ saveId: 'save-1', snapshotId: 'snap-1' });
   });
 });

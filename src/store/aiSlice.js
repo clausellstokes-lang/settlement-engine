@@ -23,6 +23,7 @@
 import { generateNarrative } from '../lib/ai.js';
 import { saves as savesService } from '../lib/saves.js';
 import { applyRenameToAiData } from '../lib/narrativeMutations.js';
+import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { CREDIT_COSTS } from './creditsSlice.js';
 import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
 import { verifyAiOverlay } from '../domain/aiOverlayVerifier.js';
@@ -79,6 +80,9 @@ function buildAiDataBlob(existing, patch) {
     aiDailyLife:          patch.aiDailyLife  !== undefined ? patch.aiDailyLife  : (prev.aiDailyLife  || null),
     narrativeMode:        patch.narrativeMode        || prev.narrativeMode        || 'raw',
     narrativeGeneratedAt: patch.narrativeGeneratedAt !== undefined ? patch.narrativeGeneratedAt : (prev.narrativeGeneratedAt || null),
+    narrativeSourceFingerprint: patch.narrativeSourceFingerprint !== undefined
+      ? patch.narrativeSourceFingerprint
+      : (prev.narrativeSourceFingerprint || null),
     chronicle:            Array.isArray(prev.chronicle)  ? prev.chronicle  : [],
     pinnedNpcs:           Array.isArray(prev.pinnedNpcs) ? prev.pinnedNpcs : [],
   };
@@ -124,6 +128,7 @@ export const createAiSlice = (set, get) => ({
   aiPartialFailure: null,   // { failedFields: [] } when some passes fell back to raw
   showNarrative:    false,  // toggle: true = show AI narrative, false = show raw data
   aiDataVersion:    null,   // timestamp of settlement data the narrative was built from
+  aiSourceFingerprint: null, // stable settlement content hash for stale detection
   aiViolations:     null,   // Tier 6.5 verifier report (null when no overlay committed)
 
   // ── Actions ────────────────────────────────────────────────────────────────
@@ -137,6 +142,7 @@ export const createAiSlice = (set, get) => ({
       logHardViolations(verification, 'setAiSettlement');
       state.aiSettlement = aiData;
       state.aiDataVersion = Date.now();
+      state.aiSourceFingerprint = aiData ? settlementFingerprint(state.settlement) : null;
       state.aiViolations = aiData ? verification : null;
     }),
 
@@ -145,6 +151,7 @@ export const createAiSlice = (set, get) => ({
       state.aiSettlement = null;
       state.aiDailyLife = null;
       state.aiDataVersion = null;
+      state.aiSourceFingerprint = null;
       state.aiPartialFailure = null;
       state.aiViolations = null;
     }),
@@ -177,9 +184,10 @@ export const createAiSlice = (set, get) => ({
    * Check if the current narrative is stale (settlement changed since generation).
    */
   isNarrativeStale: () => {
-    const { aiDataVersion, settlement } = get();
-    if (!aiDataVersion || !settlement) return true;
-    return false;
+    const { aiSettlement, aiDataVersion, aiSourceFingerprint, settlement } = get();
+    if (!aiSettlement || !aiDataVersion || !settlement) return true;
+    if (!aiSourceFingerprint) return true;
+    return aiSourceFingerprint !== settlementFingerprint(settlement);
   },
 
   // ── AI generation actions ─────────────────────────────────────────────────
@@ -286,6 +294,8 @@ export const createAiSlice = (set, get) => ({
           },
         });
 
+      const sourceFingerprint = settlementFingerprint(settlement);
+
       // Tier 6.5: verify the final atomic result against the source
       // settlement so UI surfaces (and the upcoming PDF appendix) can
       // show violation warnings.
@@ -295,6 +305,7 @@ export const createAiSlice = (set, get) => ({
       set(state => {
         state.aiSettlement = result;
         state.aiDataVersion = Date.now();
+        state.aiSourceFingerprint = sourceFingerprint;
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
@@ -313,6 +324,7 @@ export const createAiSlice = (set, get) => ({
           aiDailyLife:          get().aiDailyLife,
           narrativeMode:        'narrated',
           narrativeGeneratedAt: new Date().toISOString(),
+          narrativeSourceFingerprint: sourceFingerprint,
         });
         await savesService.update(saveId, { aiData });
         get().updateSavedSettlement(saveId, { aiData });
@@ -431,6 +443,7 @@ export const createAiSlice = (set, get) => ({
           aiDailyLife:          result,
           narrativeMode:        'narrated',
           narrativeGeneratedAt: existingEntry?.aiData?.narrativeGeneratedAt || new Date().toISOString(),
+          narrativeSourceFingerprint: get().aiSourceFingerprint || settlementFingerprint(settlement),
         });
         await savesService.update(saveId, { aiData });
         get().updateSavedSettlement(saveId, { aiData });
@@ -548,6 +561,8 @@ export const createAiSlice = (set, get) => ({
           },
         });
 
+      const sourceFingerprint = settlementFingerprint(settlement);
+
       // Tier 6.5: verify the evolved narrative against the source
       // settlement (progression v1 only refines existing prose).
       const verificationP = runOverlayVerifier(settlement, result);
@@ -556,6 +571,7 @@ export const createAiSlice = (set, get) => ({
       set(state => {
         state.aiSettlement = result;
         state.aiDataVersion = Date.now();
+        state.aiSourceFingerprint = sourceFingerprint;
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
@@ -574,6 +590,7 @@ export const createAiSlice = (set, get) => ({
           aiDailyLife:          get().aiDailyLife,
           narrativeMode:        'narrated',
           narrativeGeneratedAt: new Date().toISOString(),
+          narrativeSourceFingerprint: sourceFingerprint,
         });
         await savesService.update(saveId, { aiData });
         get().updateSavedSettlement(saveId, { aiData });
@@ -732,6 +749,7 @@ export const createAiSlice = (set, get) => ({
       state.aiSettlement     = blob.aiSettlement || null;
       state.aiDailyLife      = blob.aiDailyLife  || null;
       state.aiDataVersion    = blob.narrativeGeneratedAt ? new Date(blob.narrativeGeneratedAt).getTime() : null;
+      state.aiSourceFingerprint = blob.narrativeSourceFingerprint || null;
       state.showNarrative    = blob.narrativeMode === 'narrated' && !!blob.aiSettlement;
       state.aiError          = null;
       state.aiProgress       = '';
@@ -815,11 +833,13 @@ export const createAiSlice = (set, get) => ({
       aiDailyLife:          null,
       narrativeMode:        'raw',
       narrativeGeneratedAt: null,
+      narrativeSourceFingerprint: null,
     });
     set(state => {
       state.aiSettlement     = null;
       state.aiDailyLife      = null;
       state.aiDataVersion    = null;
+      state.aiSourceFingerprint = null;
       state.showNarrative    = false;
       state.aiPartialFailure = null;
       state.aiError          = null;

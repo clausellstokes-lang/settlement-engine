@@ -16,6 +16,7 @@
  */
 
 import { sans, FS, SP, R, swatch } from '../theme.js';
+import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
 
 const BORDER = '#E8D9B0';
 const PARCH = '#FBF5E6';
@@ -67,10 +68,10 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
   }
 
   if (filters.canonOnly) {
-    out = out.filter(s => (s.settlement?.phase || s.campaignState?.phase) === 'canon');
+    out = out.filter(isCanonSave);
   }
   if (filters.draftOnly) {
-    out = out.filter(s => (s.settlement?.phase || s.campaignState?.phase || 'draft') === 'draft');
+    out = out.filter(s => !isCanonSave(s) && savePhase(s) === 'draft');
   }
   if (filters.hasNeighbours) {
     out = out.filter(s => Array.isArray(s.neighbourLinks) && s.neighbourLinks.length > 0);

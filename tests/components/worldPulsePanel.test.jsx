@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import WorldPulsePanel from '../../src/components/map/WorldPulsePanel.jsx';
 
@@ -19,7 +19,9 @@ describe('WorldPulsePanel', () => {
     vi.clearAllMocks();
   });
 
-  test('renders pulse history, roll explanations, and proposal actions', () => {
+  test('renders pulse history, roll explanations, and proposal actions', async () => {
+    actions.applyWorldPulseProposal.mockResolvedValue({ status: 'applied' });
+    actions.dismissWorldPulseProposal.mockResolvedValue({ status: 'dismissed' });
     const campaign = {
       id: 'camp-1',
       name: 'Realm',
@@ -69,9 +71,14 @@ describe('WorldPulsePanel', () => {
     expect(screen.getAllByText('food pressure').length).toBeGreaterThan(0);
 
     fireEvent.click(screen.getByTitle('Apply proposal'));
-    fireEvent.click(screen.getByTitle('Dismiss proposal'));
+    await waitFor(() => {
+      expect(actions.applyWorldPulseProposal).toHaveBeenCalledWith('camp-1', 'proposal-1');
+      expect(screen.getByTitle('Dismiss proposal').disabled).toBe(false);
+    });
 
-    expect(actions.applyWorldPulseProposal).toHaveBeenCalledWith('camp-1', 'proposal-1');
-    expect(actions.dismissWorldPulseProposal).toHaveBeenCalledWith('camp-1', 'proposal-1');
+    fireEvent.click(screen.getByTitle('Dismiss proposal'));
+    await waitFor(() => {
+      expect(actions.dismissWorldPulseProposal).toHaveBeenCalledWith('camp-1', 'proposal-1');
+    });
   });
 });

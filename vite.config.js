@@ -7,11 +7,9 @@ import { visualizer } from 'rollup-plugin-visualizer';
 const analyze = process.env.ANALYZE === '1';
 
 export default defineConfig({
-  // Vite 5+ uses oxc as its internal JS transformer. @vitejs/plugin-react 4.x
-  // still configures the legacy `esbuild` options, which results in plain
-  // .jsx files (those not specifically processed by react()'s babel
-  // transform) reaching the import-analysis stage with raw JSX intact.
-  // Setting oxc.jsx tells the transformer to handle JSX in any .jsx file.
+  // Vite/Vitest's Rolldown parser still needs an explicit JSX transform
+  // path for .jsx test files. Without this, component tests that contain
+  // inline JSX fail before the React plugin can transform them.
   oxc: {
     jsx: 'automatic',
   },
@@ -30,6 +28,10 @@ export default defineConfig({
   ].filter(Boolean),
   build: {
     outDir: 'dist',
+    // The only chunks above Vite's default 500 kB warning line are deliberate
+    // lazy/manual chunks (engine and vendor-pdf). Keep the warning meaningful
+    // for true runaway bundles without failing every healthy production build.
+    chunkSizeWarningLimit: 2000,
     // Tighter modulePreload policy. By default Vite preloads every chunk
     // reachable from the entry (including lazy-import targets), so even
     // chunks we deliberately gated behind user action (vendor-pdf, engine)

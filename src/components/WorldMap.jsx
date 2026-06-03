@@ -23,6 +23,7 @@ import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useStore } from '../store/index.js';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
 import { MAP_MODES } from '../store/mapSlice.js';
+import { isCanonSave } from '../domain/campaign/canon.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans, FS, SP, R, swatch, PARCH_100 } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
 
@@ -121,10 +122,7 @@ export default function WorldMap({ onNavigate } = {}) {
       pool = pool.filter(s => ids.has(s.id));
     }
     if (canonOnlyFilter) {
-      // A save's phase isn't always persisted explicitly; treat
-      // missing-phase as "draft" to be safe (only show settlements
-      // explicitly marked canon).
-      pool = pool.filter(s => s.phase === 'canon' || s.canonizedAt);
+      pool = pool.filter(isCanonSave);
     }
     return pool;
   }, [saves, activeCampaign, canonOnlyFilter]);
@@ -370,11 +368,11 @@ export default function WorldMap({ onNavigate } = {}) {
     showToast('info', 'Campaign map cleared');
   }, [activeCampaignId, clearCampaignMap]);
 
-  const handleAdvanceRealm = useCallback(() => {
+  const handleAdvanceRealm = useCallback(async () => {
     if (!activeCampaignId || worldPulseBusy) return;
     setWorldPulseBusy(true);
     try {
-      const result = advanceCampaignWorld(activeCampaignId, worldPulseInterval);
+      const result = await advanceCampaignWorld(activeCampaignId, worldPulseInterval);
       setCampaignWorkspace('pulse');
       if (result) {
         showToast('success', `Realm advanced: ${result.autoApplied.length} drift, ${result.proposals.length} proposal(s)`);

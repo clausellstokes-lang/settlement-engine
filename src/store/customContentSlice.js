@@ -11,23 +11,48 @@
  *   - Developers / admins: full CRUD access (cloud).
  *
  * On sign-in as premium, any local items are migrated to the cloud once,
- * tagged via the `sf_custom_content_migrated` flag in localStorage so the
- * push only happens a single time per device.
+ * tagged via a user-scoped migrated flag in localStorage so the push only
+ * happens once per account/device.
  */
 
 import { customContentService } from '../lib/customContent.js';
 
 const LOCAL_KEY = 'sf_custom_content';
-const MIGRATED_FLAG = 'sf_custom_content_migrated';
+const LOCAL_KEY_PREFIX = 'sf_custom_content:';
+const MIGRATED_FLAG_PREFIX = 'sf_custom_content_migrated:';
 
-function localLoad() {
+function scopedLocalKey(ownerId = 'anon') {
+  const owner = String(ownerId || 'anon');
+  if (owner === 'anon') return LOCAL_KEY;
+  return `${LOCAL_KEY_PREFIX}${owner.replace(/[^a-zA-Z0-9_-]/g, '_')}`;
+}
+
+function migrationFlag(ownerId = 'anon') {
+  return `${MIGRATED_FLAG_PREFIX}${String(ownerId || 'anon').replace(/[^a-zA-Z0-9_-]/g, '_')}`;
+}
+
+function ownerIdFromState(state) {
+  return state?.auth?.user?.id ? String(state.auth.user.id) : 'anon';
+}
+
+function localLoad(ownerId = 'anon') {
   try {
-    return JSON.parse(localStorage.getItem(LOCAL_KEY) || '{}');
+    return JSON.parse(localStorage.getItem(scopedLocalKey(ownerId)) || '{}');
   } catch { return {}; }
 }
 
-function localWrite(content) {
-  localStorage.setItem(LOCAL_KEY, JSON.stringify(content));
+function localWrite(content, ownerId = 'anon') {
+  localStorage.setItem(scopedLocalKey(ownerId), JSON.stringify(content));
+}
+
+function flattenLocalContent(ownerId = 'anon') {
+  const raw = localLoad(ownerId);
+  const out = [];
+  for (const [category, items] of Object.entries(raw)) {
+    if (!Array.isArray(items)) continue;
+    for (const item of items) out.push({ category, item });
+  }
+  return out;
 }
 
 const EMPTY = {
@@ -61,8 +86,8 @@ function backfillLocalUids(grouped) {
   return grouped;
 }
 
-function loadAll() {
-  const raw = localLoad();
+function loadAll(ownerId = 'anon') {
+  const raw = localLoad(ownerId);
   return backfillLocalUids({ ...EMPTY, ...raw });
 }
 
@@ -84,7 +109,7 @@ function makeLocalUid() {
 
 export const createCustomContentSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
-  customContent: loadAll(),
+  customContent: loadAll('anon'),
   customContentLoading: false,
   customContentError: null,
   customContentSyncedAt: null,    // timestamp of last successful cloud load
@@ -108,7 +133,7 @@ export const createCustomContentSlice = (set, get) => ({
     };
     set(state => {
       state.customContent[category].unshift(entry);
-      localWrite(state.customContent);
+      localWrite(state.customContent, ownerIdFromState(state));
     });
     // Cloud write (premium / elevated only)
     if (get().canUseCustomContent?.() && customContentService.isConfigured) {
@@ -118,7 +143,7 @@ export const createCustomContentSlice = (set, get) => ({
           const idx = state.customContent[category].findIndex(x => x.id === entry.id);
           if (idx !== -1) {
             state.customContent[category][idx] = saved;
-            localWrite(state.customContent);
+            localWrite(state.customContent, ownerIdFromState(state));
           }
         });
       }).catch(err => {
@@ -135,7 +160,7 @@ export const createCustomContentSlice = (set, get) => ({
       const idx = list.findIndex(x => x.id === id);
       if (idx !== -1) {
         Object.assign(list[idx], partial, { updatedAt: new Date().toISOString() });
-        localWrite(state.customContent);
+        localWrite(state.customContent, ownerIdFromState(state));
       }
     });
     if (get().canUseCustomContent?.() && customContentService.isConfigured) {
@@ -154,7 +179,7 @@ export const createCustomContentSlice = (set, get) => ({
   deleteCustomItem: (category, id) => {
     set(state => {
       state.customContent[category] = state.customContent[category].filter(x => x.id !== id);
-      localWrite(state.customContent);
+      localWrite(state.customContent, ownerIdFromState(state));
     });
     if (get().canUseCustomContent?.() && customContentService.isConfigured) {
       customContentService.delete(id).catch(err => {
@@ -184,17 +209,19 @@ export const createCustomContentSlice = (set, get) => ({
   loadCustomContentFromCloud: async () => {
     if (!customContentService.isConfigured) return;
     if (!get().canUseCustomContent?.()) return;
+    const ownerId = ownerIdFromState(get());
     set(state => { state.customContentLoading = true; state.customContentError = null; });
     try {
       const grouped = await customContentService.list();
       const merged = backfillLocalUids({ ...EMPTY, ...grouped });
+      if (ownerIdFromState(get()) !== ownerId) return;
       set(state => {
         state.customContent = merged;
         state.customContentLoading = false;
         state.customContentSyncedAt = new Date().toISOString();
       });
       // Mirror to local for offline read-only access on this device
-      localWrite(get().customContent);
+      localWrite(get().customContent, ownerId);
     } catch (err) {
       console.error('loadCustomContentFromCloud failed:', err);
       set(state => {
@@ -211,11 +238,13 @@ export const createCustomContentSlice = (set, get) => ({
   migrateLocalCustomContentToCloud: async () => {
     if (!customContentService.isConfigured) return;
     if (!get().canUseCustomContent?.()) return;
-    if (localStorage.getItem(MIGRATED_FLAG) === '1') return;
+    const ownerId = ownerIdFromState(get());
+    const flag = migrationFlag(ownerId);
+    if (localStorage.getItem(flag) === '1') return;
 
-    const items = customContentService.readLocalForMigration();
+    const items = flattenLocalContent(ownerId);
     if (!items.length) {
-      localStorage.setItem(MIGRATED_FLAG, '1');
+      localStorage.setItem(flag, '1');
       return;
     }
 
@@ -232,7 +261,7 @@ export const createCustomContentSlice = (set, get) => ({
         }
         await get().loadCustomContentFromCloud();
       }
-      localStorage.setItem(MIGRATED_FLAG, '1');
+      localStorage.setItem(flag, '1');
     } catch (err) {
       console.error('migrateLocalCustomContentToCloud failed:', err);
       set(state => { state.customContentError = err.message; });
@@ -243,6 +272,7 @@ export const createCustomContentSlice = (set, get) => ({
   clearCloudCustomContent: () => {
     set(state => {
       state.customContent = loadAll();
+      state.customContentLoading = false;
       state.customContentSyncedAt = null;
       state.customContentError = null;
     });

@@ -25,7 +25,8 @@
  * v1 mapStates are migrated on first read (fmgSnapshot null, modern fields
  * filled from legacy keys).
  *
- * Persistence: localStorage (sf_campaigns) + Supabase for signed-in users.
+ * Persistence: localStorage cache (sf_campaigns) + saved_maps cloud sync for
+ * signed-in users.
  */
 
 import {
@@ -56,23 +57,27 @@ import {
 import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { saves as savesService } from '../lib/saves.js';
+import { campaigns as campaignService } from '../lib/campaigns.js';
+import {
+  forgetCampaignSync,
+  mergeCampaignLists,
+  primeCampaignSync,
+  syncCampaignChanges,
+} from '../lib/campaignSync.js';
 
-const LOCAL_KEY = 'sf_campaigns';
 const SCHEMA_VERSION = 2;
 
-function localLoad() {
-  try {
-    const raw = JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]');
-    if (!Array.isArray(raw)) return [];
-    return raw.map(migrateCampaign);
-  } catch {
-    return [];
-  }
+function campaignCacheOwner(state) {
+  return state?.auth?.user?.id ? String(state.auth.user.id) : 'anon';
 }
 
-function localWrite(campaigns) {
+function localLoad(ownerId = 'anon') {
+  return campaignService.loadCached(ownerId).map(migrateCampaign);
+}
+
+function localWrite(campaigns, ownerId = 'anon') {
   try {
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(campaigns));
+    campaignService.cache(campaigns, ownerId);
   } catch (e) {
     // Likely quota exceeded — FMG snapshots can be large (~1MB). The caller
     // should already have warned via canSaveSnapshot(); log and continue.
@@ -80,16 +85,84 @@ function localWrite(campaigns) {
   }
 }
 
+function persistCampaigns(campaigns, changedId = null, ownerId = 'anon', options = {}) {
+  const snapshot = cloneJson(campaigns) || [];
+  localWrite(snapshot, ownerId);
+  const sync = syncCampaignChanges(snapshot, { service: campaignService, changedId });
+  if (options.strict) return sync;
+  sync.catch(e => {
+    console.warn('[campaignSlice] campaign cloud sync failed', e);
+  });
+  return sync;
+}
+
+function persistCampaignState(state, changedId = null, options = {}) {
+  return persistCampaigns(state.campaigns, changedId, campaignCacheOwner(state), options);
+}
+
+function cacheCampaignState(state) {
+  const ownerId = campaignCacheOwner(state);
+  const snapshot = cloneJson(state.campaigns) || [];
+  localWrite(snapshot, ownerId);
+  return { ownerId, snapshot };
+}
+
+function syncCampaignSnapshot(snapshot, changedId) {
+  return syncCampaignChanges(snapshot, { service: campaignService, changedId });
+}
+
+function deletePersistedCampaign(id, campaigns, ownerId = 'anon') {
+  const snapshot = cloneJson(campaigns) || [];
+  localWrite(snapshot, ownerId);
+  forgetCampaignSync(id);
+  if (!campaignService.isConfigured) return;
+  campaignService.delete(id).catch(e => {
+    console.warn('[campaignSlice] campaign cloud delete failed', e);
+  });
+}
+
+function deletePersistedCampaignState(state, id) {
+  return deletePersistedCampaign(id, state.campaigns, campaignCacheOwner(state));
+}
+
 function cloneJson(value) {
   if (value === undefined || value === null) return value;
   return JSON.parse(JSON.stringify(value));
 }
 
+function newCampaignId() {
+  try {
+    if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  } catch {
+    // Fallback below.
+  }
+  return `camp_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function isUuid(value) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || ''));
+}
+
 function persistSaveUpdate(saveId, partial) {
   if (!saveId || !partial) return;
-  savesService.update(saveId, partial).catch(e => {
+  return savesService.update(saveId, partial).catch(e => {
     console.warn('[campaignSlice] save update failed', e);
+    throw e;
   });
+}
+
+async function persistSaveUpdates(updates = []) {
+  for (const update of updates) {
+    await persistSaveUpdate(update.saveId, {
+      settlement: update.settlement,
+      campaignState: update.campaignState,
+      versionHistory: update.versionHistory,
+    });
+  }
+}
+
+function clearCampaignSyncBookkeeping() {
+  primeCampaignSync([]);
 }
 
 function campaignStateForRegionalImpact(state, save, systemState, now) {
@@ -143,6 +216,7 @@ function ensureCampaignWizardNews(campaign) {
 function migrateCampaign(camp) {
   if (!camp || typeof camp !== 'object') return camp;
   const next = { ...camp };
+  if (!isUuid(next.id)) next.id = newCampaignId();
   if (camp.mapState) next.mapState = migrateMapState(camp.mapState);
   if (next.regionalGraph) next.regionalGraph = ensureRegionalGraph(next.regionalGraph);
   next.wizardNews = ensureWizardNewsFeed(next.wizardNews);
@@ -265,21 +339,53 @@ function migrateMapState(ms) {
 
 export const createCampaignSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
-  campaigns: localLoad(),
+  campaigns: [],
   campaignsLoaded: false,
   /** The currently-loaded campaign id (null if none) — used by WorldMap */
   activeCampaignId: null,
 
   // ── Actions ────────────────────────────────────────────────────────────────
 
-  loadCampaigns: () =>
+  loadCampaigns: () => {
+    const ownerId = campaignCacheOwner(get());
+    const cached = localLoad(ownerId);
     set(state => {
-      state.campaigns = localLoad();
-      state.campaignsLoaded = true;
+      state.campaigns = cached;
+      state.campaignsLoaded = !campaignService.isConfigured;
+    });
+    if (!campaignService.isConfigured) return Promise.resolve(cached);
+    return campaignService.list()
+      .then(remote => {
+        const migratedRemote = remote.map(migrateCampaign);
+        primeCampaignSync(migratedRemote);
+        const merged = mergeCampaignLists(cached, migratedRemote);
+        set(state => {
+          state.campaigns = merged;
+          state.campaignsLoaded = true;
+        });
+        localWrite(merged, ownerId);
+        syncCampaignChanges(merged, { service: campaignService }).catch(e => {
+          console.warn('[campaignSlice] campaign cloud backfill failed', e);
+        });
+        return merged;
+      })
+      .catch(error => {
+        console.warn('[campaignSlice] campaign cloud load failed', error);
+        set(state => { state.campaignsLoaded = true; });
+        return cached;
+      });
+  },
+
+  clearCampaigns: () =>
+    set(state => {
+      state.campaigns = [];
+      state.campaignsLoaded = false;
+      state.activeCampaignId = null;
+      clearCampaignSyncBookkeeping();
     }),
 
   createCampaign: (name) => {
-    const id = `camp_${Date.now()}`;
+    const id = newCampaignId();
     set(state => {
       const campaign = {
         id,
@@ -294,7 +400,7 @@ export const createCampaignSlice = (set, get) => ({
         collapsed: false,
       };
       state.campaigns.unshift(campaign);
-      localWrite(state.campaigns);
+      persistCampaignState(state, id);
     });
     return id;
   },
@@ -306,34 +412,44 @@ export const createCampaignSlice = (set, get) => ({
         c.name = String(name || '').trim() || c.name;
         c.updatedAt = new Date().toISOString();
       }
-      localWrite(state.campaigns);
+      persistCampaignState(state, id);
     }),
 
   deleteCampaign: (id) =>
     set(state => {
       state.campaigns = state.campaigns.filter(c => c.id !== id);
       if (state.activeCampaignId === id) state.activeCampaignId = null;
-      localWrite(state.campaigns);
+      deletePersistedCampaignState(state, id);
     }),
 
   toggleCampaignCollapsed: (id) =>
     set(state => {
       const c = state.campaigns.find(c => c.id === id);
       if (c) c.collapsed = !c.collapsed;
-      localWrite(state.campaigns);
+      persistCampaignState(state, id);
     }),
 
   addToCampaign: (campaignId, settlementId) =>
     set(state => {
+      const now = new Date().toISOString();
+      const changedIds = new Set();
       for (const c of state.campaigns) {
-        c.settlementIds = c.settlementIds.filter(id => id !== settlementId);
+        const before = c.settlementIds || [];
+        const next = before.filter(id => id !== settlementId);
+        if (next.length !== before.length) {
+          c.settlementIds = next;
+          c.updatedAt = now;
+          changedIds.add(c.id);
+        }
       }
       const target = state.campaigns.find(c => c.id === campaignId);
       if (target) {
-        target.settlementIds.push(settlementId);
-        target.updatedAt = new Date().toISOString();
+        target.settlementIds = Array.isArray(target.settlementIds) ? target.settlementIds : [];
+        if (!target.settlementIds.includes(settlementId)) target.settlementIds.push(settlementId);
+        target.updatedAt = now;
+        changedIds.add(target.id);
       }
-      localWrite(state.campaigns);
+      persistCampaignState(state, Array.from(changedIds));
     }),
 
   removeFromCampaign: (campaignId, settlementId) =>
@@ -343,7 +459,7 @@ export const createCampaignSlice = (set, get) => ({
         c.settlementIds = c.settlementIds.filter(id => id !== settlementId);
         c.updatedAt = new Date().toISOString();
       }
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     }),
 
   /**
@@ -371,7 +487,7 @@ export const createCampaignSlice = (set, get) => ({
         savedAt:     new Date().toISOString(),
       };
       c.updatedAt = c.mapState.savedAt;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     }),
 
   clearCampaignMap: (campaignId) =>
@@ -381,7 +497,7 @@ export const createCampaignSlice = (set, get) => ({
         c.mapState = null;
         c.updatedAt = new Date().toISOString();
       }
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     }),
 
   /** Ensure a campaign has the current regional graph envelope. */
@@ -394,7 +510,7 @@ export const createCampaignSlice = (set, get) => ({
       ensureCampaignWizardNews(c);
       c.updatedAt = new Date().toISOString();
       graph = c.regionalGraph;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     });
     return graph;
   },
@@ -416,7 +532,7 @@ export const createCampaignSlice = (set, get) => ({
       ensureCampaignWizardNews(c);
       c.updatedAt = new Date().toISOString();
       graph = c.regionalGraph;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     });
     return graph;
   },
@@ -434,7 +550,7 @@ export const createCampaignSlice = (set, get) => ({
       ensureCampaignWizardNews(c);
       c.updatedAt = new Date().toISOString();
       graph = c.regionalGraph;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     });
     return graph;
   },
@@ -448,7 +564,7 @@ export const createCampaignSlice = (set, get) => ({
       ensureCampaignWizardNews(c);
       c.updatedAt = new Date().toISOString();
       graph = c.regionalGraph;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     });
     return graph;
   },
@@ -463,7 +579,7 @@ export const createCampaignSlice = (set, get) => ({
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph);
       c.updatedAt = new Date().toISOString();
       graph = c.regionalGraph;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     });
     return graph;
   },
@@ -478,7 +594,7 @@ export const createCampaignSlice = (set, get) => ({
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph);
       c.updatedAt = new Date().toISOString();
       graph = c.regionalGraph;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     });
     return graph;
   },
@@ -493,7 +609,7 @@ export const createCampaignSlice = (set, get) => ({
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph);
       c.updatedAt = new Date().toISOString();
       graph = c.regionalGraph;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     });
     return graph;
   },
@@ -518,7 +634,7 @@ export const createCampaignSlice = (set, get) => ({
       });
       c.updatedAt = new Date().toISOString();
       graph = c.regionalGraph;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     });
     return graph;
   },
@@ -535,9 +651,10 @@ export const createCampaignSlice = (set, get) => ({
     });
   },
 
-  advanceCampaignWorld: (campaignId, interval = 'one_month', options = {}) => {
+  advanceCampaignWorld: async (campaignId, interval = 'one_month', options = {}) => {
     let result = null;
     let persistUpdates = [];
+    let campaignPersist = null;
     const now = options.now || new Date().toISOString();
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
@@ -550,21 +667,20 @@ export const createCampaignSlice = (set, get) => ({
       });
       if (!result) return;
       persistUpdates = applyWorldPulseResultToState(state, c, result, now);
-      localWrite(state.campaigns);
+      campaignPersist = cacheCampaignState(state);
     });
 
-    for (const update of persistUpdates) {
-      persistSaveUpdate(update.saveId, {
-        settlement: update.settlement,
-        campaignState: update.campaignState,
-      });
+    if (result && campaignPersist) {
+      await persistSaveUpdates(persistUpdates);
+      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     }
     return result;
   },
 
-  applyWorldPulseProposal: (campaignId, proposalId) => {
+  applyWorldPulseProposal: async (campaignId, proposalId) => {
     let result = null;
     let persistUpdates = [];
+    let campaignPersist = null;
     const now = new Date().toISOString();
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
@@ -577,14 +693,12 @@ export const createCampaignSlice = (set, get) => ({
       });
       if (!result) return;
       persistUpdates = applyWorldPulseResultToState(state, c, result, now);
-      localWrite(state.campaigns);
+      campaignPersist = cacheCampaignState(state);
     });
 
-    for (const update of persistUpdates) {
-      persistSaveUpdate(update.saveId, {
-        settlement: update.settlement,
-        campaignState: update.campaignState,
-      });
+    if (result && campaignPersist) {
+      await persistSaveUpdates(persistUpdates);
+      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     }
     return result;
   },
@@ -593,9 +707,10 @@ export const createCampaignSlice = (set, get) => ({
   // (resolve a stressor, broker/inflame a relationship, clear/impose a
   // condition, move a faction/NPC) as an authoritative, party-tagged pulse
   // input. Persists like advanceCampaignWorld.
-  recordPartyImpact: (campaignId, action) => {
+  recordPartyImpact: async (campaignId, action) => {
     let result = null;
     let persistUpdates = [];
+    let campaignPersist = null;
     const now = new Date().toISOString();
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
@@ -608,20 +723,19 @@ export const createCampaignSlice = (set, get) => ({
       });
       if (!result) return;
       persistUpdates = applyWorldPulseResultToState(state, c, result, now);
-      localWrite(state.campaigns);
+      campaignPersist = cacheCampaignState(state);
     });
 
-    for (const update of persistUpdates) {
-      persistSaveUpdate(update.saveId, {
-        settlement: update.settlement,
-        campaignState: update.campaignState,
-      });
+    if (result && campaignPersist) {
+      await persistSaveUpdates(persistUpdates);
+      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     }
     return result;
   },
 
-  dismissWorldPulseProposal: (campaignId, proposalId) => {
+  dismissWorldPulseProposal: async (campaignId, proposalId) => {
     let proposal = null;
+    let campaignPersist = null;
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
       if (!c) return;
@@ -634,8 +748,9 @@ export const createCampaignSlice = (set, get) => ({
       );
       proposal = c.worldState.proposals.find(item => item.id === proposalId) || null;
       c.updatedAt = now;
-      localWrite(state.campaigns);
+      campaignPersist = cacheCampaignState(state);
     });
+    if (proposal && campaignPersist) await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     return proposal;
   },
 
@@ -684,7 +799,7 @@ export const createCampaignSlice = (set, get) => ({
       c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'applied', { appliedAt: now });
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
       c.updatedAt = now;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
 
       result = {
         saveId: save.id,
@@ -748,7 +863,7 @@ export const createCampaignSlice = (set, get) => ({
       c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'resolved', { resolvedAt: now });
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
       c.updatedAt = now;
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
 
       result = {
         saveId: save.id,
@@ -810,7 +925,7 @@ export const createCampaignSlice = (set, get) => ({
       if (!c) return;
       c.wizardNews = ensureWizardNewsFeed();
       c.updatedAt = new Date().toISOString();
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     }),
 
   /** Mark a campaign as the active one (WorldMap uses this to drive reloads) */
@@ -838,6 +953,6 @@ export const createCampaignSlice = (set, get) => ({
         c.settlementIds = settlementIds;
         c.updatedAt = new Date().toISOString();
       }
-      localWrite(state.campaigns);
+      persistCampaignState(state, campaignId);
     }),
 });

@@ -2,6 +2,7 @@ import { deriveCausalState } from '../causalState.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { ensureRegionalGraph } from '../region/index.js';
 import { deriveAllActiveConditions } from '../activeConditions.js';
+import { isCanonSave } from '../campaign/canon.js';
 import { ensureWorldState } from './worldState.js';
 
 function saveSettlement(save) {
@@ -10,14 +11,6 @@ function saveSettlement(save) {
 
 function saveId(save) {
   return String(save?.id || save?.settlement?.id || save?.settlementId || save?.name || 'unknown');
-}
-
-function isCanonSave(save) {
-  return save?.phase === 'canon'
-    || save?.canonizedAt
-    || save?.campaignState?.phase === 'canon'
-    || save?.settlement?.phase === 'canon'
-    || save?.settlement?.campaignState?.phase === 'canon';
 }
 
 /**

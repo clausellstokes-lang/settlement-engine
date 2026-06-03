@@ -227,6 +227,7 @@ describe('saves — supabase backend round-trip (mocked)', () => {
       config: { settType: 'town', culture: 'germanic' },
       institutionToggles: { foo: { require: true } },
       seed: 's1',
+      versionHistory: [{ id: 'snap-1', label: 'Before trouble', settlement: { name: 'Mock Town' } }],
     });
 
     const row = mockState.lastInsert;
@@ -241,6 +242,7 @@ describe('saves — supabase backend round-trip (mocked)', () => {
     // v2 migration default-fills campaign_state on the way in
     expect(row.campaign_state).toBeDefined();
     expect(row.campaign_state.phase).toBe('draft');
+    expect(row.version_history).toEqual([{ id: 'snap-1', label: 'Before trouble', settlement: { name: 'Mock Town' } }]);
   });
 
   test('list maps supabase rows back to entry shape with toggles spread', async () => {
@@ -259,6 +261,7 @@ describe('saves — supabase backend round-trip (mocked)', () => {
       seed: 'seed-rt',
       neighbour_links: null,
       ai_data: { summary: 'Pre-cached AI text' },
+      version_history: [{ id: 'snap-rt', label: 'Round trip', settlement: { name: 'Round Trip' } }],
       campaign_state: {
         phase: 'canon', eventLog: [], systemState: null, locks: {},
         generatedAt: '2026-01-01', editedAt: '2026-01-02',
@@ -282,6 +285,7 @@ describe('saves — supabase backend round-trip (mocked)', () => {
     expect(e.goodsToggles).toEqual({});
     expect(e.servicesToggles).toEqual({});
     expect(e.aiData).toEqual({ summary: 'Pre-cached AI text' });
+    expect(e.versionHistory).toEqual([{ id: 'snap-rt', label: 'Round trip', settlement: { name: 'Round Trip' } }]);
     expect(e.campaignState.phase).toBe('canon');
     expect(e.campaignState.canonizedAt).toBe('2026-01-03');
   });
@@ -300,11 +304,13 @@ describe('saves — supabase backend round-trip (mocked)', () => {
         generatedAt: null, editedAt: null, canonizedAt: '2026-02-01',
         lastExportAt: null, narrativeDrift: null, exportState: null,
       },
+      versionHistory: [{ id: 'snap-upd', label: 'Updated snapshot' }],
     });
 
     expect(mockState.lastUpdate.id).toBe('upd-1');
     expect(mockState.lastUpdate.partial.name).toBe('Updated');
     expect(mockState.lastUpdate.partial.campaign_state.phase).toBe('canon');
+    expect(mockState.lastUpdate.partial.version_history).toEqual([{ id: 'snap-upd', label: 'Updated snapshot' }]);
     // tier wasn't passed → shouldn't appear in the update
     expect(mockState.lastUpdate.partial.tier).toBeUndefined();
     // settlement wasn't passed → no data/neighbour_links update

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
+import { useState, useMemo, useEffect, lazy, Suspense, Component } from 'react';
 import {Link2, ChevronLeft, X, FileText, RotateCcw, Loader2, Edit3, Lock} from 'lucide-react';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
 // section components. Import lazily on user click so opening a settlement
@@ -135,8 +135,26 @@ function NetworkEffectsPanel({ settlementId, saves }) {
   );
 }
 
-function DetailErrorBoundary({ children }) {
-  try { return children; } catch { return <div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>; }
+class DetailErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+
+  componentDidCatch(error, info) {
+    console.error('[SettlementDetail] detail render failed', error, info);
+  }
+
+  render() {
+    if (this.state.error) {
+      return <div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>;
+    }
+    return this.props.children;
+  }
 }
 
 const REL_TYPES=['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];

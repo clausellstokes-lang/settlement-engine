@@ -117,12 +117,11 @@ export function unregisterHandler(type) {
 
 /** Consume + dispatch the pending intent. Called by AuthModal's success
  *  handler. Returns the handler's return value (or null on no-op). The
- *  intent is cleared whether the handler succeeded or threw — failed
- *  intents do NOT linger across sessions. */
+ *  intent is cleared once a handler exists, whether that handler succeeded
+ *  or threw — failed handled intents do NOT linger across sessions. */
 export async function consume(ctx) {
   const pending = readPending();
   if (!pending) return null;
-  clearPending();
 
   const handler = _handlers.get(pending.type);
   if (!handler) {
@@ -133,6 +132,7 @@ export async function consume(ctx) {
     return null;
   }
 
+  clearPending();
   try {
     return await handler(pending.payload, ctx || {});
   } catch (e) {

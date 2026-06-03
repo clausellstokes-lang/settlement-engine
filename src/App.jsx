@@ -107,6 +107,7 @@ export default function App() {
 
   const authTier = useStore(s => s.auth.tier);
   const _authRole = useStore(s => s.auth.role);
+  const authUserId = useStore(s => s.auth.user?.id || null);
   const authLoading = useStore(s => s.auth.loading);
   const isElevated = useStore(s => s.isElevated());
   const initAuth = useStore(s => s.initAuth);
@@ -117,6 +118,7 @@ export default function App() {
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setCreditBalance = useStore(s => s.setCreditBalance);
   const creditBalance = useStore(s => s.creditBalance);
+  const loadCampaigns = useStore(s => s.loadCampaigns);
   const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
   const migrateLocalCustomContentToCloud = useStore(s => s.migrateLocalCustomContentToCloud);
   const clearCloudCustomContent = useStore(s => s.clearCloudCustomContent);
@@ -149,6 +151,12 @@ export default function App() {
       fetchCreditBalance().then(bal => setCreditBalance(bal));
     });
   }, [initAuth, initOnboarding, setCreditBalance]);
+
+  useEffect(() => {
+    if (!authLoading && authTier !== 'anon') {
+      loadCampaigns();
+    }
+  }, [authLoading, authTier, authUserId, loadCampaigns]);
 
   // ── Auth guards ─────────────────────────────────────────────────────────
   // Gated routes redirect once the session has resolved. 'auth' views bounce
@@ -189,7 +197,7 @@ export default function App() {
 
   // ── Cloud sync custom content when user enters premium / elevated state ───
   // Triggers once per tier transition. Migrates local items on first premium
-  // sign-in (tracked via the sf_custom_content_migrated localStorage flag).
+  // sign-in (tracked via a user-scoped localStorage migration flag).
   useEffect(() => {
     if (authLoading) return;
     const canSyncCloud = authTier === 'premium' || isElevated;
@@ -202,7 +210,7 @@ export default function App() {
       // Sign-out: drop cloud cache, fall back to local (grandfathered) items
       clearCloudCustomContent();
     }
-  }, [authTier, isElevated, authLoading, loadCustomContentFromCloud, migrateLocalCustomContentToCloud, clearCloudCustomContent]);
+  }, [authTier, authUserId, isElevated, authLoading, loadCustomContentFromCloud, migrateLocalCustomContentToCloud, clearCloudCustomContent]);
 
   // Auto-dismiss onboarding nudge after 8s
   useEffect(() => {

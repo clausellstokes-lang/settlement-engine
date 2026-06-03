@@ -148,6 +148,17 @@ describe('Tier 6.5 — setAiSettlement runs the verifier', () => {
     expect(store.getState().aiDataVersion).not.toBe(before);
   });
 
+  it('detects narrative staleness from settlement content changes', () => {
+    store.getState().setAiSettlement(clone(baseFixture()));
+    expect(store.getState().isNarrativeStale()).toBe(false);
+
+    store.setState(s => {
+      s.settlement.population = 1600;
+    });
+
+    expect(store.getState().isNarrativeStale()).toBe(true);
+  });
+
   it('null aiData clears aiViolations (no verification report retained)', () => {
     store.getState().setAiSettlement(clone(baseFixture()));
     expect(store.getState().aiViolations).not.toBeNull();

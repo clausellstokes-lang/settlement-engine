@@ -6,9 +6,17 @@
  * silently break the version timeline.
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
+
+vi.mock('../../src/lib/saves.js', () => ({
+  saves: {
+    update: vi.fn(() => Promise.resolve()),
+    isConfigured: false,
+  },
+}));
+
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 
 function makeStore() {
@@ -52,6 +60,34 @@ describe('version history mutations', () => {
     expect(save.versionHistory[0].label).toBe('pre-session-4');
   });
 
+  it('recordSnapshot uses the saved settlement payload when saveId is given', () => {
+    useStore.setState(s => {
+      s.settlement.name = 'Different Live Town';
+      s.savedSettlements[0].settlement.name = 'Saved Hollowmere';
+    });
+
+    useStore.getState().recordSnapshot({ saveId: 'save-1', kind: 'manual', label: 'saved copy' });
+
+    const save = useStore.getState().savedSettlements.find(s => s.id === 'save-1');
+    expect(save.versionHistory[0].settlement.name).toBe('Saved Hollowmere');
+  });
+
+  it('recordSnapshot defaults to the active saved settlement and snapshots the live payload', () => {
+    useStore.setState(s => {
+      s.activeSaveId = 'save-1';
+      s.settlement.name = 'Edited Live Reach';
+      s.savedSettlements[0].settlement.name = 'Stored Reach';
+    });
+
+    useStore.getState().recordSnapshot({ kind: 'manual', label: 'active save checkpoint' });
+
+    const save = useStore.getState().savedSettlements.find(s => s.id === 'save-1');
+    expect(save.versionHistory).toHaveLength(1);
+    expect(save.versionHistory[0].label).toBe('active save checkpoint');
+    expect(save.versionHistory[0].settlement.name).toBe('Edited Live Reach');
+    expect(useStore.getState().settlement.versionHistory).toBeUndefined();
+  });
+
   it('recordSnapshot freezes a deep copy — later mutations do not bleed into history', () => {
     useStore.getState().recordSnapshot({ kind: 'manual', label: 'Before rename' });
     useStore.setState(s => { s.settlement.name = 'Renamed Town'; });
@@ -67,6 +103,25 @@ describe('version history mutations', () => {
     const ok = useStore.getState().revertToSnapshot({ snapshotId: snap.id });
     expect(ok).toBe(true);
     expect(useStore.getState().settlement.name).toBe('Hightower\'s Reach');
+  });
+
+  it('revertToSnapshot defaults to the active saved settlement timeline', () => {
+    useStore.setState(s => {
+      s.activeSaveId = 'save-1';
+      s.settlement.name = 'Before Active Revert';
+      s.savedSettlements[0].versionHistory = [{
+        id: 'snap-active',
+        kind: 'manual',
+        label: 'Active save target',
+        settlement: { name: 'Restored Saved Reach', population: 4200, tier: 'town' },
+      }];
+    });
+
+    const ok = useStore.getState().revertToSnapshot({ snapshotId: 'snap-active' });
+
+    expect(ok).toBe(true);
+    expect(useStore.getState().settlement.name).toBe('Restored Saved Reach');
+    expect(useStore.getState().savedSettlements[0].settlement.name).toBe('Restored Saved Reach');
   });
 
   it('revertToSnapshot is non-destructive — current state is auto-snapshotted first', () => {

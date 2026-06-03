@@ -15,6 +15,7 @@ export const RELATIONSHIP_TYPES = [
   { id: 'rival',         label: 'Rival',          color: '#8a4a2a' },
   { id: 'cold_war',      label: 'Cold War',       color: '#6a2a2a' },
   { id: 'hostile',        label: 'Hostile',        color: '#8b1a1a' },
+  { id: 'criminal_network', label: 'Criminal Network', color: '#5a2a8a' },
 ];
 
 export const createNeighbourSlice = (set, get) => ({

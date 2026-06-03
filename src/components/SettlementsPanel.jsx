@@ -710,6 +710,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     }
 
     let currentSaves = [...saves];
+    let linkedPartnerSave = null;
 
     // Bidirectional linking
     const nr = settlement.neighborRelationship;
@@ -727,6 +728,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           if (s.id !== partnerSave.id) return s;
           return { ...s, settlement: { ...s.settlement, neighbourNetwork: [entryForB, ...(s.settlement?.neighbourNetwork||[]).filter(n=>n.id!==saveId)], interSettlementRelationships: [...(s.settlement?.interSettlementRelationships||[]).filter(r=>r.linkId!==linkId), ...npcForB, ...conflictForB] } };
         });
+        linkedPartnerSave = findSaveById(currentSaves, partnerSave.id);
       }
     }
 
@@ -735,8 +737,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     setSaves(newSaves); setSaved(true); setTimeout(() => setSaved(false), 2000);
     try {
       await savesService.save(newEntry);
-      const partnerSave = settlement.neighborRelationship?.name ? currentSaves.find(s => s !== saves.find(x => x.id === s.id)) : null;
-      if (partnerSave) await savesService.update(partnerSave.id, { settlement: partnerSave.settlement });
+      if (linkedPartnerSave) await savesService.update(linkedPartnerSave.id, { settlement: linkedPartnerSave.settlement });
     } catch (e) { console.error('Save failed:', e); }
   };
 
