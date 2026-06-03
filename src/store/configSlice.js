@@ -39,7 +39,7 @@ export const createConfigSlice = (set, get) => ({
 
   // Wizard UI state (persisted)
   wizardStep: 0,                   // current step in the wizard
-  wizardMode: null,                // null (card picker) | 'basic' (was 'quick') | 'advanced'
+  wizardMode: null,                // null (card picker) | 'basic' (was 'quick') | 'advanced' | 'custom'
   configPanelOpen:  false,
   instPanelOpen:    false,
   svcPanelOpen:     false,
@@ -65,10 +65,12 @@ export const createConfigSlice = (set, get) => ({
 
   setWizardMode: (mode) =>
     set(state => {
-      // Coerce deprecated 'custom' to 'advanced' (Custom mode folded into Compendium)
-      const normalized = mode === 'custom' ? 'advanced' : mode;
-      state.wizardMode = normalized;
-      // Always reset step when mode changes — users expect Advanced to start at General Config
+      // Three real modes: 'basic' (was 'quick'), 'advanced', and 'custom'
+      // (the Workshop power dashboard, surfaced as a Create mode). null
+      // returns to the card picker.
+      state.wizardMode = mode;
+      // Always reset step when mode changes — users expect each mode to start
+      // at the beginning.
       state.wizardStep = 0;
     }),
 

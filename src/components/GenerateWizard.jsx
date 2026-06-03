@@ -13,7 +13,7 @@
  * Reads all state from the Zustand store — zero props.
  */
 import { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react';
-import { ChevronRight, ChevronLeft, Zap, Settings, ArrowLeft, Save } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Zap, Settings, ArrowLeft, Save, Sliders } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import ConfigurationPanel from './ConfigurationPanel';
@@ -38,6 +38,9 @@ const OutputContainer = lazy(() => import('./OutputContainer'));
 // P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
 // surfaces don't pay for the playback animator).
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
+// Custom mode body — the full power-user dashboard, lazy so basic/advanced
+// don't pay for it. Surfaced as the third generate mode (was a top-level tab).
+const Workshop = lazy(() => import('./Workshop.jsx'));
 
 // "Change mode" back button — shown above the mode-specific UI once a card
 // is picked. Module-scope so React Compiler can memoize without seeing it
@@ -64,7 +67,7 @@ function ChangeModeBar({ mode, onChangeMode }) {
       </button>
       <span style={{ color: MUTED }}>·</span>
       <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
-        {mode === 'basic' ? 'Basic Generate' : 'Advanced Generate'}
+        {mode === 'basic' ? 'Basic Generate' : mode === 'custom' ? 'Custom Generate' : 'Advanced Generate'}
       </span>
     </div>
   );
@@ -98,12 +101,14 @@ const STEPS = [
 // ── Mode selector ────────────────────────────────────────────────────────────
 
 function ModeSelector({ mode, onModeChange, large = false }) {
-  // The wizard exposes two named generation modes:
+  // The wizard exposes three named generation modes:
   //   - Basic    (formerly "Quick"): one-screen config + Generate.
   //     The hero's instant generation routes here under the hood so
   //     a user landing on the wizard sees the same shape.
   //   - Advanced: step-by-step config with institution toggles,
   //     services, and trade dynamics.
+  //   - Custom:   the full Workshop power dashboard — every parameter at
+  //     once, plus the supply-chain builder.
   // The HomeHero's instant generation is its OWN surface (homepage
   // card with size-picker chips), not a mode listed here. Anonymous
   // users see the hero only — these mode cards are gated to
@@ -111,6 +116,7 @@ function ModeSelector({ mode, onModeChange, large = false }) {
   const modes = [
     { id: 'basic',    label: 'Basic Generate',    desc: 'One screen — set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
     { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',         Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space. Produces a draft you can refine, save, and canonize.' },
+    { id: 'custom',   label: 'Custom Generate',   desc: 'Power dashboard — every parameter at once', Icon: Sliders,  longDesc: 'Tune every generator parameter on one screen: priorities, resources, stresses, institution/resource/trade-route overrides, and the supply-chain builder. Maximum control for power users.' },
   ];
 
   return (
@@ -527,7 +533,21 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     );
   }
 
-  // Advanced mode: step-by-step wizard (custom mode removed — folded into Compendium)
+  // Custom mode: the full power-user dashboard (Workshop), reached as the
+  // third generate mode. It configures and generates through the same store
+  // path, so the post-generation result view below renders its output.
+  if (wizardMode === 'custom' && !settlement) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
+        <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
+        <Suspense fallback={<div style={{ padding: SP.xl, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Loading the custom dashboard…</div>}>
+          <Workshop isMobile={isMobile} />
+        </Suspense>
+      </div>
+    );
+  }
+
+  // Advanced mode: step-by-step wizard.
   const isAdvanced = wizardMode === 'advanced';
   const currentStepDef = STEPS[wizardStep] || STEPS[0];
 

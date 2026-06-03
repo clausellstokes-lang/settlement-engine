@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BookOpen, Zap, Star, Cpu, List } from 'lucide-react';
+import { BookOpen, Zap, Star, Cpu, List, Scale } from 'lucide-react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, PAGE_MAX, sans, serif_, FS, swatch } from './theme.js';
 
 // Responsive multi-column container for card/list-heavy tab content. Uses
@@ -17,6 +17,7 @@ const TABS = [
   { id:'logic',  label:'Under the Hood',Icon: Cpu },
   { id:'phil',   label:'DM Philosophy', Icon: BookOpen },
   { id:'ref',    label:'Reference',     Icon: List },
+  { id:'compare',label:'How We Compare',Icon: Scale },
 ];
 
 function Insight({ title, children }) {
@@ -463,8 +464,57 @@ function RefTab() {
   );
 }
 
+// How We Compare — the comparison content, folded in from the former
+// standalone /compare pages (which now redirect here). Honest, side-by-side
+// framing: what each alternative does well, and where SettlementForge fits.
+function CompareTab() {
+  return (
+    <div style={{ maxWidth: 760 }}>
+      <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, marginBottom:10 }}>
+        How SettlementForge compares
+      </div>
+      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 14px' }}>
+        Three honest, side-by-side breakdowns against the tools DMs commonly weigh. Each is
+        upfront about what the other tool does well — and where SettlementForge fits alongside
+        it rather than against it.
+      </p>
+      <Insight title="vs ChatGPT — simulated, not prompted">
+        ChatGPT writes fluent prose on demand, but it improvises each answer: ask twice and the
+        guard captain's name, the dominant faction, or the town's economy can quietly drift.
+        SettlementForge <strong>simulates</strong> the settlement from interlocking constraints,
+        so every institution, NPC secret, and faction tension is mutually consistent and
+        reproducible. Best of both: generate the coherent brief here, then hand its Narrative AI
+        Prompt to ChatGPT for table-ready prose that stays on-model.
+      </Insight>
+      <Insight title="vs Worldographer — maps + settlements">
+        Worldographer is a first-class map and hex editor — terrain, regions, the shape of the
+        world. It doesn't simulate what lives inside a settlement. The two are complementary:
+        draw the map in Worldographer, then populate its towns with SettlementForge's simulated
+        economies, power structures, and NPCs.
+      </Insight>
+      <Insight title="vs Kanka — generate vs. store">
+        Kanka is an excellent campaign wiki: it organizes and cross-links the lore you already
+        have, but it doesn't generate that lore. Use SettlementForge to <strong>create</strong>
+        coherent settlements and export the brief, then store and interlink them in Kanka as your
+        living campaign bible.
+      </Insight>
+      <Tip>
+        The throughline: SettlementForge owns the <em>generation</em> of mechanically-coherent
+        settlements. Prose tools, map editors, and campaign wikis each sit naturally downstream of
+        that — use them together, not instead.
+      </Tip>
+    </div>
+  );
+}
+
 export default function HowToUse({ standalone=false }) {
-  const [activeTab, setActiveTab] = useState('quick');
+  // Open straight to the comparison section when arriving from a /compare link
+  // (those routes now redirect here with ?tab=compare). Falls back to Quick Start.
+  const [activeTab, setActiveTab] = useState(() => {
+    try {
+      return new URLSearchParams(window.location.search).get('tab') === 'compare' ? 'compare' : 'quick';
+    } catch { return 'quick'; }
+  });
 
   if (standalone) return (
     // Centered, shared-width card sized to its content. No full-height cream
@@ -496,6 +546,7 @@ export default function HowToUse({ standalone=false }) {
           {activeTab==='logic' && <LogicTab />}
           {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}
+          {activeTab==='compare' && <CompareTab />}
         </div>
       </div>
     </div>
@@ -526,6 +577,7 @@ export default function HowToUse({ standalone=false }) {
           {activeTab==='logic' && <LogicTab />}
           {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}
+          {activeTab==='compare' && <CompareTab />}
         </div>
       </>
     </div>

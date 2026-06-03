@@ -12,12 +12,12 @@
  *   map         — Fantasy World Map (FMG integration)
  *   neighbour   — Neighbourhood System
  *   compendium  — Rules & data compendium
- *   howto       — How to use guide
+ *   howto       — About page (how-to guide + comparisons)
  *   account     — Full account page (post-auth)
  *   admin       — Developer admin panel (elevated roles only)
  */
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { MapPin, FolderOpen, BookOpen, Sparkles, Map as MapIcon, Zap, User, Shield, Headphones, Settings } from 'lucide-react';
+import { MapPin, FolderOpen, BookOpen, Map as MapIcon, Zap, User, Shield, Headphones, Images, Info } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { flag as _readFlag } from './lib/flags.js';
@@ -37,11 +37,7 @@ const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
 const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
 const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
 const GalleryPage      = lazy(() => import('./components/GalleryPage.jsx'));
-const ComparePage      = lazy(() => import('./components/ComparePage.jsx'));
 const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
-// P107 / CP-2 — Workshop as top-level destination. The component already
-// exists at 1,262 LOC; this lift just gives it a route.
-const Workshop = lazy(() => import('./components/Workshop.jsx'));
 // Dedicated auth routes (/signin · /register · /reset-password · /verify-email).
 // Thin page wrappers around the same <AuthPanel> the modal renders.
 const SignInPage        = lazy(() => import('./components/auth/SignInPage.jsx'));
@@ -58,31 +54,25 @@ import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
 // can't hammer the user.
 const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
 
-// P107 / CP-2 — Workshop nav entry. Promoted from a nested Compendium
-// tab to a top-level destination (workshopNav now default-on). Added
-// alongside How To Use rather than swapping it out: the desktop header
-// carries all six destinations; the mobile bottom nav still caps at five
-// (slice below), where How To Use drops for signed-in users — they're
-// past onboarding and it stays one tap away on desktop and at /how-to.
-const NAV_BASE = [
+// Top-nav destinations. Gallery sits between Compendium and About. Workshop
+// is no longer a top-level tab — it now lives inside Create as the third
+// generate mode ("Custom Generate"); see GenerateWizard. Pricing stays a
+// header hero link (HERO_LINKS), not a primary destination.
+const NAV = [
   { id: 'generate',    label: 'Create',      Icon: MapPin },
   { id: 'settlements', label: 'Settlements', Icon: FolderOpen },
   { id: 'map',         label: 'World Map',   Icon: MapIcon },
   { id: 'compendium',  label: 'Compendium',  Icon: BookOpen },
-  { id: 'howto',       label: 'How To Use',  Icon: Sparkles },
+  { id: 'gallery',     label: 'Gallery',     Icon: Images },
+  { id: 'howto',       label: 'About',       Icon: Info },
 ];
-const NAV_WITH_WORKSHOP = [
-  { id: 'generate',    label: 'Create',      Icon: MapPin },
-  { id: 'settlements', label: 'Settlements', Icon: FolderOpen },
-  { id: 'workshop',    label: 'Workshop',    Icon: Settings },
-  { id: 'map',         label: 'World Map',   Icon: MapIcon },
-  { id: 'compendium',  label: 'Compendium',  Icon: BookOpen },
-  { id: 'howto',       label: 'How To Use',  Icon: Sparkles },
+
+// Secondary header link(s). Pricing lives here as a hero link rather than a
+// primary nav tab. (Gallery graduated to a real nav tab; Compare folded into
+// the About page.)
+const HERO_LINKS = [
+  { id: 'pricing', label: 'Pricing' },
 ];
-// Resolved at module-init time so a flag flip requires a reload (which
-// is intended — flag-flipping mid-session leaves the nav inconsistent
-// with deep links).
-const NAV = _readFlag('workshopNav') ? NAV_WITH_WORKSHOP : NAV_BASE;
 
 function Loading() {
   return (
@@ -172,6 +162,19 @@ export default function App() {
       navigate('generate', { replace: true });
     }
   }, [view, authTier, isElevated, authLoading]);
+
+  // ── Demoted destinations → redirect to their new homes ────────────────────
+  // Workshop is now Create's "Custom" mode; /compare* is now a section in
+  // About. The route entries stay (so the URLs still resolve and old links /
+  // SEO keep working), but we bounce them to the new surface.
+  useEffect(() => {
+    if (view === 'workshop') {
+      useStore.getState().setWizardMode('custom');
+      navigate('generate', { replace: true });
+    } else if (view.startsWith('compare')) {
+      navigate('howto', { replace: true, search: '?tab=compare' });
+    }
+  }, [view]);
 
   // ── Canonical-URL upgrade ─────────────────────────────────────────────────
   // Silently rewrite legacy ?view= links, unknown paths, and the bare root to
@@ -326,6 +329,37 @@ export default function App() {
           </header>
         )}
 
+        {/* Mobile hero links — Pricing / Gallery / Compare, promoted from the
+            footer so mobile keeps top-level access. Standalone strip (not tied
+            to the mobile header, which the single-chrome flag can drop). */}
+        {isMobile && (
+          <div style={{
+            display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.lg,
+            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+            borderTop: '1px solid rgba(160,118,42,0.2)',
+            padding: `${SP.xs}px ${SP.md}px`,
+          }}>
+            {HERO_LINKS.map(({ id, label }) => {
+              const active = id === 'compare' ? view.startsWith('compare') : view === id;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setView(id)}
+                  style={{
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    color: active ? GOLD : MUTED,
+                    fontSize: FS.xs, fontWeight: active ? 700 : 500,
+                    fontFamily: sans, letterSpacing: '0.06em', textTransform: 'uppercase',
+                    padding: `${SP.xs}px ${SP.sm}px`, minHeight: 36,
+                  }}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && (
           <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
@@ -352,6 +386,30 @@ export default function App() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              {/* Secondary hero links — Pricing / Gallery / Compare, promoted
+                  from the footer. Plain text links, distinct from the boxed
+                  primary nav tabs to their right. */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
+                {HERO_LINKS.map(({ id, label }) => {
+                  const active = id === 'compare' ? view.startsWith('compare') : view === id;
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => setView(id)}
+                      style={{
+                        background: 'none', border: 'none', cursor: 'pointer',
+                        color: active ? GOLD : MUTED,
+                        fontSize: FS.sm, fontWeight: active ? 700 : 500,
+                        fontFamily: sans, letterSpacing: '0.04em', textTransform: 'uppercase',
+                        padding: `${SP.xs}px 0`, transition: 'color 0.2s',
+                      }}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+              <span style={{ width: 1, height: 20, background: 'rgba(160,118,42,0.3)', margin: `0 ${SP.xs}px` }} />
               <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                 {visibleNav.map(({ id, label, Icon }) => {
                   const active = view === id;
@@ -466,7 +524,6 @@ export default function App() {
             {view === 'map'         && <WorldMap onNavigate={setView} />}
             {view === 'compendium'  && <CompendiumPanel standalone />}
             {view === 'howto'       && <HowToUse standalone />}
-            {view === 'workshop'    && <Workshop />}
             {/* Guarded views: render only once authorized. The guard effect
                 redirects unauthorized visitors; until the session resolves we
                 show the loader rather than flash (or crash on) gated content. */}
@@ -474,7 +531,6 @@ export default function App() {
             {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
             {view === 'pricing'     && <PricingPage onNavigate={setView} />}
             {view === 'gallery'     && <GalleryPage onNavigate={setView} />}
-            {view.startsWith('compare') && <ComparePage view={view} onNavigate={setView} />}
             {view === 'dossier-success' && (
               <SingleDossierSuccessPage
                 onSignUp={() => { setView('generate'); setAuthModalOpen(true); }}
@@ -508,36 +564,6 @@ export default function App() {
           <span>&copy; 2026 SettlementForge</span>
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
           <span>All rights reserved</span>
-          <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
-          <button onClick={() => setView('pricing')} style={{
-            background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
-            fontFamily: sans, fontSize: FS.sm, letterSpacing: '0.04em',
-            padding: isMobile ? `0 ${SP.sm}px` : 0,
-            minHeight: isMobile ? 44 : undefined,
-            display: 'inline-flex', alignItems: 'center',
-          }}>
-            Pricing
-          </button>
-          <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
-          <button onClick={() => setView('gallery')} style={{
-            background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
-            fontFamily: sans, fontSize: FS.sm, letterSpacing: '0.04em',
-            padding: isMobile ? `0 ${SP.sm}px` : 0,
-            minHeight: isMobile ? 44 : undefined,
-            display: 'inline-flex', alignItems: 'center',
-          }}>
-            Gallery
-          </button>
-          <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
-          <button onClick={() => setView('compare')} style={{
-            background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
-            fontFamily: sans, fontSize: FS.sm, letterSpacing: '0.04em',
-            padding: isMobile ? `0 ${SP.sm}px` : 0,
-            minHeight: isMobile ? 44 : undefined,
-            display: 'inline-flex', alignItems: 'center',
-          }}>
-            Compare
-          </button>
           <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
           <a href="mailto:clausellstokes@aol.com" style={{
             color: MUTED, textDecoration: 'none', display: 'inline-flex',

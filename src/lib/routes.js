@@ -34,7 +34,7 @@ export const ROUTES = Object.freeze([
   { view: 'settlements',           path: '/settlements',           title: 'Your Settlements' },
   { view: 'map',                   path: '/map',                   title: 'World Map' },
   { view: 'compendium',            path: '/compendium',            title: 'Compendium' },
-  { view: 'howto',                 path: '/how-to',                title: 'How To Use' },
+  { view: 'howto',                 path: '/how-to',                title: 'About' },
   { view: 'workshop',              path: '/workshop',              title: 'Workshop' },
   { view: 'account',               path: '/account',               title: 'Account',                       guard: 'auth' },
   { view: 'admin',                 path: '/admin',                 title: 'Admin',                         guard: 'elevated' },
