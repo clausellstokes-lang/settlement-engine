@@ -91,15 +91,21 @@ Auth is **two orthogonal axes**: `tier` (anon / free / premium) × `role`
 
 `lib/routes.js` is the single source of truth: a `ROUTES` table mapping internal
 `view` ids ⇄ public paths, plus guards (`auth` / `elevated`). `App.jsx` switches
-on `view`; the nav arrays (`NAV_BASE` / `NAV_WITH_WORKSHOP`) live in `App.jsx`.
-The mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
+on `view`; a single `NAV` array (Create · Settlements · World Map · Compendium ·
+Gallery · About) lives in `App.jsx`, with Pricing as a secondary header link
+(`HERO_LINKS`). Two destinations are folded in rather than top-level: **Workshop
+is the "Custom Generate" mode inside Create** (GenerateWizard), and the former
+`/compare` pages are a tab on the **About** page (renamed from "How To Use").
+`/workshop` and `/compare*` stay as routes that redirect to those surfaces. The
+mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ---
 
 ## Backend (`supabase/`)
 
-- **migrations/** (16) — schema + RLS policies + credit ledger + gallery +
-  version history + save-limit + profile-security. RLS is the security spine.
+- **migrations/** (17) — schema + RLS policies + credit ledger + gallery +
+  version history + save-limit + profile-security + the auth/credit
+  trust-boundary repair (017). RLS is the security spine.
 - **functions/** (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
@@ -142,7 +148,7 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~2,400 tests / ~134 files (unit, property-based, domain/
+- **test** — Vitest, ~2,400 tests / ~159 files (unit, property-based, domain/
   store/lib integration, component/UI smoke, a11y, security, edge-function).
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
