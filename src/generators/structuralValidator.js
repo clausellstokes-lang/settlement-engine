@@ -19,7 +19,7 @@ export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
 // Maps an institution name to the list of lesser institutions it implies
 // (for validation expansion — if you have the greater, you implicitly have the lesser).
 
-const SPATIAL_FEATURES = {
+export const SPATIAL_FEATURES = {
   // Markets
   'District markets (5-10)':        ['Multiple market squares', 'Daily markets', 'Market square', 'Weekly market'],
   'Daily markets':                  ['Market square', 'Weekly market'],
