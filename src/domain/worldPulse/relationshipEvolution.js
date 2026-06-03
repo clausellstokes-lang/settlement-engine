@@ -73,6 +73,15 @@ const RELATIONSHIP_DEFAULTS = {
     tradeBalance: 0.08,
     pactStrength: 0,
   },
+  criminal_network: {
+    trust: 0.22,
+    resentment: 0.45,
+    dependency: 0.28,
+    leverage: 0.55,
+    fear: 0.44,
+    tradeBalance: 0.24,
+    pactStrength: 0.08,
+  },
 };
 
 export const RELATIONSHIP_RULE_MATRIX = {
@@ -124,6 +133,12 @@ export const RELATIONSHIP_RULE_MATRIX = {
     "hostile_forced_tribute",
     "hostile_truce",
   ],
+  criminal_network: [
+    "criminal_smuggling_expands",
+    "criminal_protection_racket",
+    "criminal_to_cold_war",
+    "criminal_legitimizes_trade",
+  ],
 };
 
 const TYPE_ALIASES = {
@@ -132,6 +147,7 @@ const TYPE_ALIASES = {
   ally: "allied",
   war: "hostile",
   enemy: "hostile",
+  criminal_corridor: "criminal_network",
 };
 
 const normalizeType = (type) =>
@@ -942,6 +958,95 @@ function hostileRules(ctx) {
   return candidates;
 }
 
+function criminalNetworkRules(ctx) {
+  const { relState, sourcePressure, targetPressure, tick } = ctx;
+  const crimePressure = mean(sourcePressure.crime, targetPressure.crime);
+  const tradeStress = mean(sourcePressure.trade, targetPressure.trade);
+  const legitimacyStress = mean(sourcePressure.legitimacy, targetPressure.legitimacy);
+  const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict);
+  const candidates = [];
+
+  if (!hasRecentIncident(relState, "smuggling_expansion", tick) && (crimePressure > 0.28 || tradeStress > 0.42)) {
+    candidates.push(
+      internalDrift(ctx, "criminal_smuggling_expands", {
+        ruleId: "criminal_smuggling_expands",
+        severity: 0.24 + Math.max(crimePressure, tradeStress) * 0.38,
+        probability: 0.1 + crimePressure * 0.18 + tradeStress * 0.12,
+        reasons: [
+          "Crime or trade pressure gives the criminal network room to expand smuggling and favors.",
+        ],
+        relationshipPatch: {
+          leverage: clamp01(relState.leverage + 0.05),
+          dependency: clamp01(relState.dependency + 0.03),
+          resentment: clamp01(relState.resentment + 0.025),
+          trajectory: "tightening",
+        },
+        metadata: { incidentType: "smuggling_expansion" },
+      }),
+    );
+  }
+
+  if (!hasRecentIncident(relState, "protection_racket", tick) && (legitimacyStress > 0.38 || relState.fear > 0.48)) {
+    candidates.push(
+      internalDrift(ctx, "criminal_protection_racket", {
+        ruleId: "criminal_protection_racket",
+        severity: 0.26 + Math.max(legitimacyStress, relState.fear) * 0.36,
+        probability: 0.08 + legitimacyStress * 0.16 + relState.fear * 0.12,
+        reasons: [
+          "Weak legitimacy or fear lets the criminal network sell protection as informal order.",
+        ],
+        relationshipPatch: {
+          fear: clamp01(relState.fear + 0.04),
+          leverage: clamp01(relState.leverage + 0.04),
+          resentment: clamp01(relState.resentment + 0.035),
+          trajectory: "coercive",
+        },
+        metadata: { incidentType: "protection_racket" },
+      }),
+    );
+  }
+
+  if (conflictStress > 0.5 && relState.resentment > 0.48 && relState.fear > 0.42) {
+    candidates.push(
+      labelProposal(ctx, "cold_war", "criminal_to_cold_war", {
+        ruleId: "criminal_to_cold_war",
+        severity: 0.36 + conflictStress * 0.28 + relState.resentment * 0.14,
+        probability: 0.06 + conflictStress * 0.16 + relState.fear * 0.1,
+        reasons: [
+          "A criminal relationship under conflict pressure can harden into covert state hostility.",
+        ],
+        relationshipPatch: {
+          fear: clamp01(relState.fear + 0.03),
+          resentment: clamp01(relState.resentment + 0.04),
+          trajectory: "escalating",
+        },
+      }),
+    );
+  }
+
+  if (crimePressure < 0.24 && tradeStress < 0.34 && relState.trust > 0.42 && relState.resentment < 0.34) {
+    candidates.push(
+      labelProposal(ctx, "trade_partner", "criminal_legitimizes_trade", {
+        ruleId: "criminal_legitimizes_trade",
+        severity: 0.28 + relState.trust * 0.24,
+        probability: 0.05 + relState.trust * 0.12,
+        reasons: [
+          "Low crime pressure and rising trust can pull a criminal corridor into legitimate trade.",
+        ],
+        relationshipPatch: {
+          trust: clamp01(relState.trust + 0.04),
+          resentment: clamp01(relState.resentment - 0.035),
+          leverage: clamp01(relState.leverage - 0.04),
+          tradeBalance: clamp01(relState.tradeBalance + 0.08),
+          trajectory: "normalizing",
+        },
+      }),
+    );
+  }
+
+  return candidates;
+}
+
 const RULE_EVALUATORS = {
   neutral: neutralRules,
   trade_partner: tradePartnerRules,
@@ -951,6 +1056,7 @@ const RULE_EVALUATORS = {
   rival: rivalRules,
   cold_war: coldWarRules,
   hostile: hostileRules,
+  criminal_network: criminalNetworkRules,
 };
 
 function buildPressureSummary(pressureIdx, saveId) {

@@ -24,7 +24,7 @@ function pressuresFor(settlementIds, score = 0.86) {
 
 describe('World Pulse rulebook expansion', () => {
   test('relationship matrix covers every visible relationship type and queues visible label changes as proposals', () => {
-    const relationshipTypes = ['neutral', 'trade_partner', 'allied', 'patron', 'client', 'rival', 'cold_war', 'hostile'];
+    const relationshipTypes = ['neutral', 'trade_partner', 'allied', 'patron', 'client', 'rival', 'cold_war', 'hostile', 'criminal_network'];
     const edges = relationshipTypes.map((relationshipType, index) => ({
       id: `edge.${relationshipType}`,
       from: `a${index}`,
@@ -55,6 +55,98 @@ describe('World Pulse rulebook expansion', () => {
     expect(candidates.every(candidate => candidate.ruleFamily === 'relationship')).toBe(true);
     expect(candidates.filter(candidate => candidate.proposalPayload?.kind === 'relationship_label_change')
       .every(candidate => candidate.applyMode === 'proposal')).toBe(true);
+  });
+
+  test('allied settlements buffer target pressure by creating supporter burden and conflict obligation drift', () => {
+    const edge = {
+      id: 'edge.ashford.briar',
+      from: 'ashford',
+      to: 'briar',
+      relationshipType: 'allied',
+    };
+    const snapshot = {
+      worldState: {
+        tick: 12,
+        relationshipStates: {
+          [edge.id]: {
+            relationshipType: 'allied',
+            trust: 0.78,
+            resentment: 0.08,
+            pactStrength: 0.82,
+            obligationFatigue: 0.18,
+            aidBurden: 0.12,
+            militaryBurden: 0.08,
+          },
+        },
+      },
+      regionalGraph: { edges: [edge] },
+    };
+    const candidates = evaluateRelationshipRules(snapshot, pressureIndex([
+      { settlementId: 'ashford', kind: 'conflict', score: 0.22 },
+      { settlementId: 'ashford', kind: 'food', score: 0.12 },
+      { settlementId: 'ashford', kind: 'disease', score: 0.1 },
+      { settlementId: 'briar', kind: 'food', score: 0.84 },
+      { settlementId: 'briar', kind: 'disease', score: 0.66 },
+      { settlementId: 'briar', kind: 'conflict', score: 0.73 },
+      { settlementId: 'briar', kind: 'hostility', score: 0.61 },
+    ]), { tick: 13 });
+
+    const burden = candidates.find(candidate => candidate.ruleId === 'allied_aid_buffer');
+    expect(burden).toBeTruthy();
+    expect(burden.targetSaveId).toBe('ashford');
+    expect(burden.condition?.archetype).toBe('alliance_burden');
+    expect(burden.condition?.relatedSettlementId).toBe('briar');
+    expect(burden.relationshipPatch.aidBurden).toBeGreaterThan(0.12);
+    expect(burden.relationshipPatch.obligationFatigue).toBeGreaterThan(0.18);
+
+    const obligation = candidates.find(candidate => candidate.ruleId === 'allied_conflict_obligation');
+    expect(obligation).toBeTruthy();
+    expect(obligation.applyMode).toBe('auto');
+    expect(obligation.relationshipPatch.trajectory).toBe('committed');
+  });
+
+  test('overburdened alliances queue visible cooling as a proposal instead of auto-changing labels', () => {
+    const edge = {
+      id: 'edge.ashford.briar',
+      from: 'ashford',
+      to: 'briar',
+      relationshipType: 'allied',
+    };
+    const snapshot = {
+      worldState: {
+        tick: 18,
+        relationshipStates: {
+          [edge.id]: {
+            relationshipType: 'allied',
+            trust: 0.44,
+            resentment: 0.36,
+            pactStrength: 0.24,
+            obligationFatigue: 0.7,
+            aidBurden: 0.62,
+            militaryBurden: 0.55,
+          },
+        },
+      },
+      regionalGraph: { edges: [edge] },
+    };
+    const candidates = evaluateRelationshipRules(snapshot, pressureIndex([
+      { settlementId: 'ashford', kind: 'conflict', score: 0.5 },
+      { settlementId: 'briar', kind: 'food', score: 0.9 },
+      { settlementId: 'briar', kind: 'disease', score: 0.74 },
+      { settlementId: 'briar', kind: 'conflict', score: 0.86 },
+    ]), { tick: 19 });
+
+    const cooling = candidates.find(candidate => candidate.ruleId === 'allied_overburdened');
+    expect(cooling).toBeTruthy();
+    expect(cooling.applyMode).toBe('proposal');
+    expect(cooling.proposalPayload).toMatchObject({
+      kind: 'relationship_label_change',
+      relationshipKey: edge.id,
+      fromType: 'allied',
+      toType: 'trade_partner',
+    });
+    expect(cooling.relationshipPatch.proposedRelationshipType).toBe('trade_partner');
+    expect(cooling.conflictTags).toContain(`label:${edge.id}`);
   });
 
   test('stressor catalog births every stressor type and can spread an active roaming stressor', () => {
