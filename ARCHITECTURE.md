@@ -30,10 +30,11 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
              (economic, power, npc, faction, defense, history, resource, …).
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
-             This is the ONLY layer type-checked in the gate (tsconfig.json).
+             Was the only gate-typechecked layer; the gate now covers the full tree.
 store/       Zustand slices (12) — the single client state container.
 components/   React UI. Inline-styled, token-driven. Large feature panels +
-             primitives/ + new/tabs/ (the dossier tabs) + map/ + auth/.
+             primitives/ (accessible Dialog/Button/Toast, no native dialogs) +
+             new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ + auth/.
 pdf/         PDF generation: sections/ + primitives/ + lib/viewModel.js.
 lib/         Services + glue: saves (Supabase+localStorage), analytics, flags,
              routes, authIntents, customRegistry, dependencyEngine.
@@ -103,9 +104,11 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (17) — schema + RLS policies + credit ledger + gallery +
-  version history + save-limit + profile-security + the auth/credit
-  trust-boundary repair (017). RLS is the security spine.
+- **migrations/** (22) — schema + RLS policies + credit ledger + gallery +
+  version history + save-limit + profile-security + auth/credit trust-boundary
+  repair (017) + account/billing models (018) + the community gallery —
+  votes, comments, privacy sanitization, reports, moderation (019-022), all via
+  SECURITY DEFINER RPCs with sanitized public reads. RLS is the security spine.
 - **functions/** (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
@@ -142,9 +145,10 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 `npm run check` = `validate:data && typecheck && lint && test && build`.
 
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
-- **typecheck** — `tsc --noEmit` over **`src/domain` only** (the rest carries a
-  tracked type-debt punch-list; see `tsconfig.full.json` + `npm run
-  typecheck:full`).
+- **typecheck** — `tsc --noEmit -p tsconfig.full.json` over the **full src logic
+  tree** (domain/store/lib/hooks/generators/components/pdf). The old domain-only
+  punch-list reached zero, so the gate was switched to full coverage;
+  `typecheck:domain` keeps the fast domain-only check.
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
@@ -166,9 +170,9 @@ separate (`npm run test:e2e`), not in the default gate.
   bare `import { _Foo }`. Bare `_Foo` requests a *non-existent* export: it
   renders `undefined` in prod and crashes dev ESM. The build now catches this
   (onwarn → error), but write the alias form to begin with.
-- **Only `src/domain` is type-checked** in the gate. A bug expressible only in
-  store/lib/components/pdf types won't be caught by `typecheck` — lean on tests
-  and the build guard. Chip the punch-list down with `typecheck:full`.
+- **The gate type-checks the full src logic tree** (it was domain-only; the
+  punch-list hit zero and the gate switched to `tsconfig.full.json`). `src/data`,
+  `src/utils`, and `tests` stay out of scope — lean on tests + the build guard there.
 - **`OutputContainer.jsx`** (the dossier renderer) is written in raw
   `React.createElement`, not JSX — the densest, highest-stakes view. Edit
   carefully; it's a candidate for a test-guarded JSX refactor.
