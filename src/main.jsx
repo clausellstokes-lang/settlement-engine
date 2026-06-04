@@ -1,5 +1,5 @@
 import React from 'react';
-import { FS } from './components/theme.js';
+import { FS, swatch } from './components/theme.js';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -7,13 +7,14 @@ import './styles/a11y.css';
 import { useStore } from './store';
 import { emitCssTokens } from './design/tokens.js';
 import { installAnalyticsProvider } from './lib/analyticsProvider.js';
+import { reportError, installGlobalErrorHandlers } from './lib/errorReporter.js';
 
 // Emit design tokens as CSS custom properties on :root so stylesheets and
 // inline styles can read them as `var(--color-gold-500)`, `var(--space-4)`,
 // `var(--sem-text-body)`, etc. JS imports keep working unchanged.
 emitCssTokens();
 
-// Tier 8.8 — install the analytics provider (Plausible by default, when
+// Tier 8.8 - install the analytics provider (Plausible by default, when
 // VITE_PLAUSIBLE_DOMAIN is set; PostHog as an opt-in alternative). No-op
 // when neither env var is set, in which case analytics.js falls back to
 // the dev-mode console log. The 4 wired funnel events
@@ -21,6 +22,10 @@ emitCssTokens();
 // paid_after_anon) flow straight through to whichever provider was
 // installed.
 installAnalyticsProvider();
+
+// Production error reporting: window-level errors + unhandled rejections.
+// No-op network unless VITE_ERROR_REPORT_URL is set; always logs locally.
+installGlobalErrorHandlers();
 
 // Expose store globally in dev so we can validate map features via automation.
 if (import.meta.env.DEV) {
@@ -35,11 +40,12 @@ class ErrorBoundary extends React.Component {
     console.error('Error:', e.message);
     console.error('Stack:', e.stack);
     console.error('Component stack:', info.componentStack);
+    reportError(e, { kind: 'react.render', componentStack: info?.componentStack });
   }
   render() {
     if (this.state.error) {
       return React.createElement('div', {
-        style: { padding: 24, fontFamily: 'monospace', background: '#fee', border: '2px solid red', margin: 16, borderRadius: 8 }
+        style: { padding: 24, fontFamily: 'monospace', background: swatch.dangerBg, border: `2px solid ${swatch.danger}`, margin: 16, borderRadius: 8 }
       },
         React.createElement('h2', null, 'Render Error'),
         React.createElement('pre', { style: { whiteSpace: 'pre-wrap', fontSize: FS.sm } },
