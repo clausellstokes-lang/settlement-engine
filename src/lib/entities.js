@@ -1,5 +1,5 @@
 /**
- * lib/entities.js — Tag- and ID-based primitives for mechanical entities.
+ * lib/entities.js - Tag- and ID-based primitives for mechanical entities.
  *
  * These are the helpers mechanics SHOULD use instead of name-pattern
  * matching. Long-term, every "does this institution count as security?"
@@ -17,7 +17,7 @@
  *     derived from their name + category (so two consumers of the
  *     same unnamed entity see the same id).
  *
- * The helpers are also tolerant of mixed-shape inputs — strings (just
+ * The helpers are also tolerant of mixed-shape inputs - strings (just
  * the name), full objects, or partial objects from intermediate
  * generator steps. The runtime overhead per call is two property reads
  * plus an array `.includes`. Cheap enough to use in hot paths.
@@ -33,12 +33,13 @@ export { TAG, TAG_GROUPS };
 // Returns the array of tags on an entity. Empty array for unknown shapes.
 
 /**
- * @param {unknown} entity — Institution, service, resource, etc.
+ * @param {unknown} entity - Institution, service, resource, etc.
  * @returns {string[]} The entity's declared tags (may be empty).
  */
 export function tagsOf(entity) {
   if (!entity || typeof entity !== 'object') return [];
-  if (Array.isArray(entity.tags)) return entity.tags;
+  const e = /** @type {any} */ (entity);
+  if (Array.isArray(e.tags)) return e.tags;
   return [];
 }
 
@@ -92,7 +93,7 @@ export function hasAllTags(entity, group) {
 // Stable id for an entity. If the entity carries one, return it. Otherwise
 // derive a deterministic id from the name + optional category.
 //
-// The fallback id is `prefix.snake_case_name` — e.g. "institution.town_watch".
+// The fallback id is `prefix.snake_case_name` - e.g. "institution.town_watch".
 // Two callers handed the same unnamed entity get the same id. This is the
 // migration path: once consumers start querying by id, the data files can
 // be updated to carry explicit ids without breaking anything.
@@ -114,16 +115,17 @@ function snakeCase(s) {
  */
 export function idOf(entity, prefix = 'entity') {
   if (!entity || typeof entity !== 'object') return null;
-  if (typeof entity.id === 'string' && entity.id) return entity.id;
-  if (typeof entity.name === 'string' && entity.name) {
-    return `${prefix}.${snakeCase(entity.name)}`;
+  const e = /** @type {any} */ (entity);
+  if (typeof e.id === 'string' && e.id) return e.id;
+  if (typeof e.name === 'string' && e.name) {
+    return `${prefix}.${snakeCase(e.name)}`;
   }
   return null;
 }
 
 // ── Convenience queries ────────────────────────────────────────────────────
 // Small wrappers that read as the mechanical question they answer. Cheap
-// to add — every additional question becomes one named function instead
+// to add - every additional question becomes one named function instead
 // of an ad-hoc `hasTag(x, TAG.Y)` peppered across consumers.
 
 /** Any kind of order-enforcement institution (watch, garrison, militia). */

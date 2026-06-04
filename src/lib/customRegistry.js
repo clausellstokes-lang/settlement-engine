@@ -1,5 +1,5 @@
 /**
- * customRegistry — unified resolver for prebuilt + custom catalog content.
+ * customRegistry - unified resolver for prebuilt + custom catalog content.
  *
  * Provides stable `refId`s so dependency references survive renames, cloud
  * round-trips, and grandfathered local items.
@@ -25,7 +25,7 @@ import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../data/resourceData.js';
 import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
 // Import the pure-data meta map, not the full stressTypes.js. The full
-// file has runtime closures that capture _rng from generators/rngContext —
+// file has runtime closures that capture _rng from generators/rngContext -
 // loading it sync (which we do here, from app boot via dependencyEngine)
 // would drag the generator chunk into the first-paint graph. The meta
 // file has every field this enumerator reads (label, historyColour,
@@ -44,7 +44,7 @@ export const REGISTRY_CATEGORIES = [
 ];
 
 /** Map our registry categories to the customContent slice keys (where they
- *  differ — most are 1:1). resourceChains is prebuilt-only for now. */
+ *  differ - most are 1:1). resourceChains is prebuilt-only for now. */
 export const CUSTOM_SLICE_KEY_FOR = {
   institutions:   'institutions',
   resources:      'resources',
@@ -294,6 +294,21 @@ function enumerateCustom(category, customContent) {
 // ── Public API ──────────────────────────────────────────────────────────────
 
 /**
+ * A resolved registry entry (prebuilt or custom), as produced by the
+ * enumerators above.
+ * @typedef {object} RegistryEntry
+ * @property {string} refId
+ * @property {string} name
+ * @property {string} category
+ * @property {string} [subcategory]
+ * @property {string} source - 'prebuilt' | 'custom'
+ * @property {string[]} [tags]
+ * @property {string} [desc]
+ * @property {*} [tierMin]
+ * @property {*} [raw]
+ */
+
+/**
  * Build a registry view from current customContent.
  *
  * @param {object} customContent - the customContentSlice state.customContent
@@ -319,7 +334,7 @@ export function buildRegistry(customContent) {
 
   // Flat refId -> entry index. Custom entries override prebuilt on collision
   // (which can happen if a user names a custom item identically to a prebuilt
-  // — different refId namespaces, no actual collision, but we still favor
+  // - different refId namespaces, no actual collision, but we still favor
   // custom in `resolve` for predictability).
   const index = new Map();
   for (const cat of REGISTRY_CATEGORIES) {
@@ -341,7 +356,7 @@ export function buildRegistry(customContent) {
       if (!refId) return null;
       const direct = index.get(refId);
       if (direct) return direct;
-      // Best-effort: a bare name (legacy form) — try prebuilt name lookup.
+      // Best-effort: a bare name (legacy form) - try prebuilt name lookup.
       // This lets older saves whose deps stored raw names still resolve.
       const parsed = parseRefId(refId);
       if (!parsed) {

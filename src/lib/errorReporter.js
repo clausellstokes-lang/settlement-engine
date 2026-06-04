@@ -32,10 +32,11 @@ function safe(fn) {
  * @param {{ kind?: string, componentStack?: string }} [context]
  */
 export function reportError(error, context = {}) {
+  const e = /** @type {any} */ (error);
   const payload = {
     kind: context.kind || 'error',
-    message: safe(() => String(error?.message ?? error)) || 'unknown error',
-    stack: (safe(() => String(error?.stack || '')) || '').slice(0, 4000),
+    message: safe(() => String(e?.message ?? e)) || 'unknown error',
+    stack: (safe(() => String(e?.stack || '')) || '').slice(0, 4000),
     componentStack: (safe(() => String(context.componentStack || '')) || '').slice(0, 4000),
     url: safe(() => location.href) || '',
     ua: safe(() => navigator.userAgent) || '',

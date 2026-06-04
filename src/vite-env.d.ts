@@ -1,7 +1,7 @@
-// Ambient global types — the Vite client env plus the handful of custom
+// Ambient global types - the Vite client env plus the handful of custom
 // window globals this app installs. Resolves the `import.meta.env` and
 // `window.X` type-error classes across the non-domain layers (measured by
-// `npm run typecheck:full`; see tsconfig.full.json). Types only — this file
+// `npm run typecheck:full`; see tsconfig.full.json). Types only - this file
 // produces no runtime output.
 //
 // Script-mode (no import/export) so the interfaces merge into the global
@@ -13,7 +13,7 @@ interface ImportMetaEnv {
   readonly SSR: boolean;
   readonly MODE: string;
   readonly BASE_URL: string;
-  // App config vars (see .env.example). Optional — unset in some environments.
+  // App config vars (see .env.example). Optional - unset in some environments.
   readonly [key: `VITE_${string}`]: string | undefined;
 }
 
@@ -26,8 +26,8 @@ interface Window {
   __store?: unknown;
   /** Analytics bridge installed by lib/analyticsProvider.js (Tier 8.8). */
   __sf_analytics_provider?: (event: string, props?: Record<string, unknown>) => void;
-  /** Guard flag so the analytics provider installs only once. */
-  __sf_analytics_installed?: boolean;
-  /** Plausible global (present when VITE_PLAUSIBLE_DOMAIN is configured). */
-  plausible?: (...args: unknown[]) => void;
+  /** Which analytics provider installed ('plausible' | 'posthog'), if any. */
+  __sf_analytics_installed?: string;
+  /** Plausible global (present when VITE_PLAUSIBLE_DOMAIN is configured). Carries a `.q` pre-load queue, per Plausible's own stub pattern. */
+  plausible?: ((...args: unknown[]) => void) & { q?: unknown[] };
 }

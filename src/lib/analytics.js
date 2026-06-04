@@ -1,5 +1,5 @@
 /**
- * analytics.js — Tier 8.8 / 8.9 funnel + event tracking.
+ * analytics.js - Tier 8.8 / 8.9 funnel + event tracking.
  *
  * Single-export entry point. Callers do:
  *
@@ -16,12 +16,12 @@
  *       set ANALYTICS_PROVIDER in the dispatch table below
  *       set VITE_ANALYTICS_TOKEN in .env / Vercel project env
  *
- * Funnel hierarchy — Tier 8.8 ships only the *minimum 4*:
- *   - HOMEPAGE_VIEW                 — anonymous landing impression
- *   - ANONYMOUS_GENERATION_COMPLETED— anon hit the engine successfully
- *   - SIGNUP_AFTER_ANON             — auth completed AFTER a prior anon gen
+ * Funnel hierarchy - Tier 8.8 ships only the *minimum 4*:
+ *   - HOMEPAGE_VIEW                 - anonymous landing impression
+ *   - ANONYMOUS_GENERATION_COMPLETED- anon hit the engine successfully
+ *   - SIGNUP_AFTER_ANON             - auth completed AFTER a prior anon gen
  *     (so we know the funnel converted, not just "someone signed up")
- *   - PAID_AFTER_ANON               — paid action following an anon
+ *   - PAID_AFTER_ANON               - paid action following an anon
  *
  * Tier 8.9 expands to the full 19-event schema (constants defined
  * here so wiring is a one-import addition per call site). Validation
@@ -30,7 +30,7 @@
  *
  * Privacy posture:
  *   - No PII. Events carry coarse properties (tier, route, settlement
- *     size band) — never names, emails, settlement contents.
+ *     size band) - never names, emails, settlement contents.
  *   - User id is hashed before send (sha-256 → first 16 chars).
  *     Sufficient for funnel correlation; useless for re-identifying
  *     a user from event logs.
@@ -44,13 +44,13 @@
 // renames here will break dashboards downstream, so they're locked in.
 
 export const EVENTS = Object.freeze({
-  // ── Tier 8.8 — minimum 4-event funnel ─────────────────────────────────
+  // ── Tier 8.8 - minimum 4-event funnel ─────────────────────────────────
   HOMEPAGE_VIEW:                  'homepage_view',
   ANONYMOUS_GENERATION_COMPLETED: 'anonymous_generation_completed',
   SIGNUP_AFTER_ANON:              'signup_after_anon',
   PAID_AFTER_ANON:                'paid_after_anon',
 
-  // ── Tier 8.9 — full schema (queue; ship as call sites are wired) ──────
+  // ── Tier 8.9 - full schema (queue; ship as call sites are wired) ──────
   ANONYMOUS_GENERATION_STARTED:   'anonymous_generation_started',
   DOSSIER_PREVIEW_VIEWED:         'dossier_preview_viewed',
   HOW_SIMULATED_OPENED:           'how_simulated_opened',
@@ -70,7 +70,7 @@ export const EVENTS = Object.freeze({
   NEIGHBOR_PREVIEW_CLICKED:       'neighbor_preview_clicked',
   UPGRADE_AFTER_NEIGHBOR_CLICKED: 'upgrade_after_neighbor_clicked',
 
-  // ── P100 / Pillar C — Critique-implementation event expansion ──────────
+  // ── P100 / Pillar C - Critique-implementation event expansion ──────────
   // Names locked in (snake_case, stable, no rename without a dashboard
   // migration plan). Each maps to a specific finding in the UX/UI or
   // Editing & Map critique.
@@ -110,7 +110,7 @@ export const EVENTS = Object.freeze({
 // We mark a localStorage flag the first time an anonymous user completes
 // a generation. On signup, if the flag is set we fire SIGNUP_AFTER_ANON
 // instead of (or in addition to) the generic SIGNUP_COMPLETED. The flag
-// is intentionally never cleared — once a user converted via the anon
+// is intentionally never cleared - once a user converted via the anon
 // funnel, that's permanent attribution.
 
 const ANON_GENERATED_FLAG = 'sf_anon_generated_v1';
@@ -144,7 +144,7 @@ function dntEnabled() {
 
 // ── User-id hashing (privacy floor) ────────────────────────────────────────
 // Uses the Web Crypto SubtleCrypto API in browsers. Hash output is
-// truncated to 16 chars — plenty for funnel correlation, not enough to
+// truncated to 16 chars - plenty for funnel correlation, not enough to
 // reverse to a user id.
 let _hashCache = new Map();
 async function hashUserId(userId) {
@@ -197,18 +197,18 @@ async function sendToProvider(event, props) {
  * Track an analytics event. Fire-and-forget; never throws or returns
  * a promise the caller has to await.
  *
- * @param {string} event — one of EVENTS.* constants
- * @param {Object} [props] — optional event properties (coarse only, no PII)
+ * @param {string} event - one of EVENTS.* constants
+ * @param {Object} [props] - optional event properties (coarse only, no PII)
  * @param {Object} [opts]
- * @param {string|null} [opts.userId] — Supabase user id; hashed before send
+ * @param {string|null} [opts.userId] - Supabase user id; hashed before send
  */
 export function track(event, props = {}, opts = {}) {
   if (!event || typeof event !== 'string') return;
   if (dntEnabled()) return;
 
-  // Whitelist check — only fire known events. Catches typos at the
+  // Whitelist check - only fire known events. Catches typos at the
   // call site that would otherwise produce garbage in the dashboard.
-  const known = Object.values(EVENTS);
+  const known = /** @type {string[]} */ (Object.values(EVENTS));
   if (!known.includes(event)) {
     if (import.meta?.env?.DEV) {
 
@@ -217,7 +217,7 @@ export function track(event, props = {}, opts = {}) {
     return;
   }
 
-  // Sync provider call — fire-and-forget. The async hashing path
+  // Sync provider call - fire-and-forget. The async hashing path
   // resolves separately and updates the payload before send if the
   // user id was supplied.
   if (opts.userId) {
@@ -230,7 +230,7 @@ export function track(event, props = {}, opts = {}) {
 }
 
 /**
- * Convenience for the four critical funnel events — wraps `track`
+ * Convenience for the four critical funnel events - wraps `track`
  * with their conditional-firing rules so call sites don't have to
  * remember them.
  *
@@ -254,15 +254,15 @@ export const Funnel = Object.freeze({
   },
 
   /** Anon completed a settlement generation. Marks the conversion attribution. */
-  anonGenerationCompleted({ tier } = {}) {
+  anonGenerationCompleted({ tier } = /** @type {{ tier?: string }} */ ({})) {
     markAnonGenerated();
     track(EVENTS.ANONYMOUS_GENERATION_COMPLETED, { tier });
   },
 
-  /** Signup completed — only fires the "after_anon" variant when the
+  /** Signup completed - only fires the "after_anon" variant when the
    *  user had a prior anon generation. The generic SIGNUP_COMPLETED is
    *  always fired alongside. */
-  signupCompleted({ userId } = {}) {
+  signupCompleted({ userId } = /** @type {{ userId?: string }} */ ({})) {
     track(EVENTS.SIGNUP_COMPLETED, {}, { userId });
     if (hasPriorAnonGeneration()) {
       track(EVENTS.SIGNUP_AFTER_ANON, {}, { userId });
@@ -271,7 +271,7 @@ export const Funnel = Object.freeze({
 
   /** Paid action (single dossier / premium / founder). "After_anon"
    *  attribution fires when applicable. */
-  paidAction({ kind, userId } = {}) {
+  paidAction({ kind, userId } = /** @type {{ kind?: string, userId?: string }} */ ({})) {
     if (hasPriorAnonGeneration()) {
       track(EVENTS.PAID_AFTER_ANON, { kind }, { userId });
     }
