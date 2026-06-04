@@ -1,9 +1,9 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 010_founder_seat_counter.sql - Tier 7.6 public seat counter.
+-- 010_founder_seat_counter.sql — Tier 7.6 public seat counter.
 --
 -- The pricing page advertises "X of 500 seats remaining" for the Founder
 -- Lifetime tier. The copy string has lived in src/copy/en.js since Phase
--- 0.2 but had no live count source - it was a stub. This migration ships
+-- 0.2 but had no live count source — it was a stub. This migration ships
 -- the SECURITY DEFINER RPC that returns the current taken-seat count so
 -- the pricing page can swap the {remaining} placeholder for a real
 -- number.

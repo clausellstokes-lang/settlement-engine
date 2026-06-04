@@ -1,4 +1,4 @@
--- Settlement Generator - Migration 002
+-- Settlement Generator — Migration 002
 -- Adds: developer role, saved maps/campaigns, system config, display name
 
 -- ── Developer role on profiles ──────────────────────────────────────────────

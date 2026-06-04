@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- profile_security.sql - Tier 0.6 server-side escalation prevention tests.
+-- profile_security.sql — Tier 0.6 server-side escalation prevention tests.
 --
 -- pgTAP assertions that run against a real Postgres + migration 009 to
 -- prove every profile-escalation path is blocked. Client-side stubs in
@@ -19,15 +19,15 @@
 -- The script wraps every assertion in a transaction it rolls back, so it
 -- never leaves stray rows. It runs in three phases:
 --
---   PHASE A - set up two test users (a regular user + a developer) by
+--   PHASE A — set up two test users (a regular user + a developer) by
 --             inserting into auth.users and profiles directly. Requires
 --             service-role privilege (which `supabase test db` provides).
 --
---   PHASE B - switch to the regular user's authentication context using
+--   PHASE B — switch to the regular user's authentication context using
 --             auth.jwt-style claims, then attempt every escalation path
 --             and assert it's rejected.
 --
---   PHASE C - switch to a developer context and verify privileged RPCs
+--   PHASE C — switch to a developer context and verify privileged RPCs
 --             succeed for them but were blocked for the regular user.
 --
 -- The Node-side `tests/security/profile_security.contract.test.js`

@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 014_enforce_save_limit.sql - Server-side enforcement of the per-tier
+-- 014_enforce_save_limit.sql — Server-side enforcement of the per-tier
 -- save limit.
 --
 -- Comprehensive review flagged:
@@ -59,7 +59,7 @@ begin
   end if;
 
   -- Determine the per-tier cap. Default to 3 (free / wanderer) when
-  -- tier is null or unrecognized - safer than treating an unknown
+  -- tier is null or unrecognized — safer than treating an unknown
   -- tier as unlimited.
   save_limit := case user_tier
     when 'premium'      then null   -- unlimited

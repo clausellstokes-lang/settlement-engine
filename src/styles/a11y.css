@@ -1,5 +1,5 @@
 /*
- * a11y.css - Global accessibility floor.
+ * a11y.css — Global accessibility floor.
  *
  * The audit's accessibility verdict was "Weak" because the codebase
  * suppresses focus outlines per-component, uses many sub-24px touch
@@ -13,7 +13,7 @@
  *   - :focus-visible always shows a ring. Components must NOT override
  *     this with `outline: none`. If the design needs a different ring
  *     color, override --sf-focus only.
- *   - prefers-reduced-motion collapses animation to 1ms - the
+ *   - prefers-reduced-motion collapses animation to 1ms — the
  *     practical equivalent of "off" while keeping animation-end events
  *     firing for any code that depends on them.
  *   - Minimum target size: WCAG 2.2 SC 2.5.8 mandates 24×24px for
@@ -40,7 +40,7 @@
   border-radius: 3px;
 }
 
-/* WCAG 2.2 SC 2.5.8 - Target Size (Minimum). 24x24 CSS px is the
+/* WCAG 2.2 SC 2.5.8 — Target Size (Minimum). 24x24 CSS px is the
  * floor; anything smaller fails. We still allow the rule to be
  * overridden per-element when the larger target is supplied via
  * surrounding hit area (e.g. a small icon inside a 32px button). */
@@ -78,7 +78,7 @@ input[type="radio"],
   border: 0;
 }
 
-/* Skip-to-content link - appears on focus. Uncomment and add the link
+/* Skip-to-content link — appears on focus. Uncomment and add the link
  * to App.jsx when implementing the accessibility pass.
  *
  * .skip-link {

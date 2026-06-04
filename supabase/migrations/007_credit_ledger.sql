@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 007_credit_ledger.sql - Append-only credit grant + spend ledger.
+-- 007_credit_ledger.sql — Append-only credit grant + spend ledger.
 --
 -- Why this exists:
 --   The existing credit_transactions table (migration 001) collapses grants
@@ -13,7 +13,7 @@
 --
 --   This migration introduces a structured ledger with separate grants
 --   and spends, per-grant source + metadata, and per-grant expiry. The
---   computed balance lives in a SQL function - no counter column on
+--   computed balance lives in a SQL function — no counter column on
 --   profiles to drift out of sync.
 --
 -- Migration strategy:
@@ -24,11 +24,11 @@
 --   4. (Application code) Edge functions begin writing to credit_ledger
 --      instead of credit_transactions for new transactions.
 --   5. credit_transactions stays read-only as a historical record. We do
---      NOT drop it - too risky to lose audit before we're sure the new
+--      NOT drop it — too risky to lose audit before we're sure the new
 --      ledger handles every case.
 --
 -- Safe to run more than once (every CREATE uses IF NOT EXISTS and the
--- backfill is idempotent on its INSERT ... ON CONFLICT DO NOTHING).
+-- backfill is idempotent on its INSERT … ON CONFLICT DO NOTHING).
 -- ────────────────────────────────────────────────────────────────────────────
 
 -- ── Tables ────────────────────────────────────────────────────────────────
@@ -64,7 +64,7 @@ create index if not exists idx_credit_ledger_user_active
 -- ── Balance function ──────────────────────────────────────────────────────
 -- Single source of truth for "how many credits does this user have right
 -- now". Reads from the ledger and ignores expired grants. Use this
--- everywhere - never trust a counter column.
+-- everywhere — never trust a counter column.
 
 create or replace function public.get_credit_balance(target_user uuid)
 returns integer

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# scripts/verify-email-setup.sh - Tier 8.5 Resend smoke test.
+# scripts/verify-email-setup.sh — Tier 8.5 Resend smoke test.
 #
 # Verifies the send-email edge function can actually deliver mail.
 # Run AFTER setting RESEND_API_KEY + RESEND_FROM_EMAIL secrets via:

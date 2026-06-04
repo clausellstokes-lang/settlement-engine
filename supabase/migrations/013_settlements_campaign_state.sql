@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 013_settlements_campaign_state.sql - Add the campaign_state column.
+-- 013_settlements_campaign_state.sql — Add the campaign_state column.
 --
 -- The client (src/lib/saves.js line 65) has been requesting / writing a
 -- `campaign_state` JSONB column on the settlements table since the

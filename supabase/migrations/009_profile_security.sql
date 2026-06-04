@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 009_profile_security.sql - Lock protected profile columns + safe-path RPCs.
+-- 009_profile_security.sql — Lock protected profile columns + safe-path RPCs.
 --
 -- Why this exists:
 --   Migration 001 created a "Users update own profile" UPDATE policy with no
@@ -8,7 +8,7 @@
 --     create policy "Users update own profile" on public.profiles
 --       for update using (auth.uid() = id);
 --
---   Migrations 002-008 added `role`, `tier`, `credits`, `is_founder` to the
+--   Migrations 002–008 added `role`, `tier`, `credits`, `is_founder` to the
 --   same table. The composition lets any authenticated user run:
 --
 --     update profiles set role='developer', credits=99999,
@@ -38,7 +38,7 @@
 -- evaluated per-row, so a malicious UPDATE attempting to change role/tier/
 -- credits/is_founder is rejected at the row level.
 --
--- display_name is INTENTIONALLY allowed to change here - losing direct
+-- display_name is INTENTIONALLY allowed to change here — losing direct
 -- table access for it would force every save-display-name call through the
 -- RPC. The RPC exists (see below) and the client SHOULD use it, but the
 -- policy stays permissive on display_name so legacy clients that pre-date
@@ -47,7 +47,7 @@
 -- Ensure every column the policy references exists before defining
 -- the policy. Migration 001 only created `id, tier, credits`; 002
 -- added `role + display_name`. `is_founder` was always implied by
--- the funnel doc but never added by a prior migration - add it
+-- the funnel doc but never added by a prior migration — add it
 -- here defensively. `add column if not exists` is idempotent.
 alter table public.profiles
   add column if not exists is_founder boolean not null default false;
@@ -73,7 +73,7 @@ create policy "Users update own profile (display_name only)"
 -- ── 2. Admin audit table ───────────────────────────────────────────────────
 -- Every privileged write to profiles (role changes, credit grants, tier
 -- bumps, founder grants, refunds) gets a row here. Append-only. Readable
--- only by privileged users - RLS below.
+-- only by privileged users — RLS below.
 
 create table if not exists public.admin_actions (
   id           uuid primary key default gen_random_uuid(),
@@ -102,7 +102,7 @@ comment on table public.admin_actions is
   'Append-only audit of every privileged write to profiles. Inserted by SECURITY DEFINER RPCs only; never by end-user code paths.';
 
 -- ── 3. Helper: write an audit row ──────────────────────────────────────────
--- Used by every RPC below. Internal - not granted to authenticated.
+-- Used by every RPC below. Internal — not granted to authenticated.
 
 create or replace function public._audit_action(
   p_actor_id     uuid,
@@ -179,16 +179,16 @@ grant execute on function public.update_display_name(text) to authenticated;
 --     sync. The legacy credit_transactions table also receives a row for
 --     dual-write parity (matches stripe-webhook's grant flow).
 --   - Returns a jsonb result:
---       { ok: true, balance: int, spend_id: uuid, elevated: false }     - success
---       { ok: true, balance: -2, spend_id: uuid, elevated: true }       - elevated user
---       { ok: false, reason: 'insufficient_funds', balance: int }       - insufficient
+--       { ok: true, balance: int, spend_id: uuid, elevated: false }     — success
+--       { ok: true, balance: -2, spend_id: uuid, elevated: true }       — elevated user
+--       { ok: false, reason: 'insufficient_funds', balance: int }       — insufficient
 --   - Elevated roles (developer / admin) bypass credit accounting entirely;
 --     their balance never changes. We still write a ledger row (with
 --     elevated:true metadata) for analytics parity.
 --
 -- The spend_id return value is what callers pass to refund_credits() when
 -- a generation fails mid-stream. Without it the refund path has to query
--- for "most recent spend by this user" - racy, fragile.
+-- for "most recent spend by this user" — racy, fragile.
 
 create or replace function public.spend_credits(feature text)
 returns jsonb
@@ -206,7 +206,7 @@ begin
     raise exception 'not authenticated';
   end if;
 
-  -- Cost table - keep in lockstep with src/config/pricing.js NEW_AI_COSTS.
+  -- Cost table — keep in lockstep with src/config/pricing.js NEW_AI_COSTS.
   -- Tests in tests/config/pricing.test.js guard the contract.
   cost := case feature
     when 'narrative'   then 3
@@ -275,7 +275,7 @@ grant execute on function public.spend_credits(text) to authenticated;
 -- ── 6. refund_credits(spend_ledger_row uuid, reason text) ──────────────────
 -- Ledger-consistent refund. Writes a NEW grant row that references the
 -- spend being reversed. Never overwrites profiles.credits with an "old
--- value" - that would clobber any intervening transactions.
+-- value" — that would clobber any intervening transactions.
 --
 -- Auth: caller must be (a) the owner of the spend row, or (b) a
 -- privileged role. The privileged path is what admin tooling uses for
