@@ -563,7 +563,7 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
         continue;
       }
     }
-    // A long ambition that has built up finally pays off - independent of this
+    // A long ambition that has built up finally pays off — independent of this
     // tick's pressure.
     if ((state.goalProgress?.long || 0) >= GOAL_CULMINATION_THRESHOLD) {
       out.push(npcGoalCulmination(state, tick));

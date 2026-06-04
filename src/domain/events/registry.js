@@ -1,5 +1,5 @@
 /**
- * domain/events/registry.js - Canon event impact specifications.
+ * domain/events/registry.js — Canon event impact specifications.
  *
  * The registry started as a five-event floor, then expanded into a broader
  * canon event vocabulary. Keep adding types deliberately: every event needs

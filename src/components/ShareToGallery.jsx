@@ -299,7 +299,7 @@ export default function ShareToGallery({
     </div>
   );
 
-  // Published state - show "Public" badge + copy link + unshare.
+  // Published state — show "Public" badge + copy link + unshare.
   if (isPublic && slug) {
     return (
       <div style={{

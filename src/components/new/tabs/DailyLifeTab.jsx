@@ -132,11 +132,11 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
     if (hasContent) {
       return isConfigured
         ? `↺ Regenerate Daily Life (${getCost('dailyLife')} credits)`
-        : '↺ Regenerate Daily Life - Narrative refinement';
+        : '↺ Regenerate Daily Life — Narrative refinement';
     }
     return isConfigured
       ? `✦ Generate Daily Life (${getCost('dailyLife')} credits)`
-      : '✦ Generate Daily Life - Narrative refinement';
+      : '✦ Generate Daily Life — Narrative refinement';
   })();
 
   return (

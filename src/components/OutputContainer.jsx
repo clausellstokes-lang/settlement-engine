@@ -13,7 +13,7 @@ import { RegenerationDeltaCard } from './primitives/RegenerationDeltaCard.jsx';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
-// P104 / X-4 - Welcome-credit gift card. Self-gates on signed-in +
+// P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
 // P106 / E-2 — Pending changes drawer (queue + cascade preview).
@@ -94,7 +94,7 @@ const TABS = [
   { id: 'npcs',       label: 'NPCs',       Icon: Users },
   { id: 'plot_hooks', label: 'Plot Hooks', Icon: Sparkles },
   { id: 'notes',      label: 'Notes',      Icon: StickyNote },
-  // Simulation tab - meta surface. The pipeline rail used to render as
+  // Simulation tab — meta surface. The pipeline rail used to render as
   // an always-on banner above the dossier, but that pushed the actual
   // DM-facing content below the fold. Now it lives as the last tab so
   // the dossier itself is the default landing surface.
@@ -258,7 +258,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
 
   const runNarrativeLayer = () => requestAiAction('narrative');
 
-  // Pin props for the NPCs tab - only surface when we have a real save to
+  // Pin props for the NPCs tab — only surface when we have a real save to
   // persist onto AND we're not in read-only mode. `pinnedIds` is a Set of
   // normalized pin keys so NPCInlineCard can do O(1) lookups and the backend
   // filter's key format matches.

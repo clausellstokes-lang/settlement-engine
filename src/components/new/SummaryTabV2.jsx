@@ -71,7 +71,7 @@ function pickAccentLine(pressureSentence) {
   const trimmed = String(pressureSentence).trim();
   // Try to find an italicizable clause — the part after a comma or
   // dash if there is one, which often carries the punch.
-  const dashMatch = trimmed.match(/-\s*([^.!?-]+[.!?]?)/);
+  const dashMatch = trimmed.match(/—\s*([^.!?—]+[.!?]?)/);
   if (dashMatch && dashMatch[1].length > 12 && dashMatch[1].length < 90) {
     return dashMatch[1].trim();
   }

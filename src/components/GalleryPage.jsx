@@ -1,5 +1,5 @@
 /**
- * GalleryPage.jsx - Community settlement gallery coordinator.
+ * GalleryPage.jsx — Community settlement gallery coordinator.
  *
  * Data and page state live in useGalleryPageState; focused gallery
  * components handle the browsing list, dossier reader, comments, and reports.

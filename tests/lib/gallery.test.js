@@ -1,5 +1,5 @@
 /**
- * tests/lib/gallery.test.js - Gallery client API + curation/privacy contract.
+ * tests/lib/gallery.test.js — Gallery client API + curation/privacy contract.
  *
  * These tests stub the supabase client and verify the gallery.js library
  * dispatches the right RPC / table calls and sanitizes responses

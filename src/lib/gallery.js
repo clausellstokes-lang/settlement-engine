@@ -1,5 +1,5 @@
 /**
- * gallery.js - Client API for the public dossier gallery.
+ * gallery.js — Client API for the public dossier gallery.
  *
  * Responsibilities:
  *   - publish/unpublish a settlement the caller owns (RPCs).

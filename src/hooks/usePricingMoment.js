@@ -29,8 +29,8 @@ import { useStore } from '../store/index.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 
 /**
- * @param {string} reason - A key in COPY.pricing.moments
- * @param {boolean} condition - Trigger; fires on false → true transition
+ * @param {string} reason — A key in COPY.pricing.moments
+ * @param {boolean} condition — Trigger; fires on false → true transition
  * @param {(content: { headline:string, body:string, reason:string }) => void} openModal
  * @param {Object} [opts]
  * @param {boolean} [opts.force=false] - Bypass the cooldown (testing)

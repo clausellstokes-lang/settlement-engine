@@ -1633,7 +1633,7 @@ serve(async (req) => {
       pinnedNpcIds,
       aiGuidance,
       modelPreference,
-      // Progression-only (AI-4b) - ignored for other types.
+      // Progression-only (AI-4b) — ignored for other types.
       changeType,
       changeLabel,
       priorNarrative,
