@@ -1,5 +1,5 @@
 /**
- * domain/factionRelationshipUpdate.js - Event → faction relationship deltas.
+ * domain/factionRelationshipUpdate.js — Event → faction relationship deltas.
  *
  * Tier 4.2 of the roadmap. The first *active* derivation: it doesn't
  * just describe state, it describes how events would change state.
@@ -34,16 +34,16 @@ import { deriveAllFactionProfiles } from './factionProfile.js';
 // Each entry maps a high-level event archetype (which the caller passes
 // directly OR which gets inferred from the legacy event registry below)
 // to a per-archetype response profile. The profile lists structured
-// deltas - power / legitimacy / publicTrust / wealth shifts - with the
+// deltas — power / legitimacy / publicTrust / wealth shifts — with the
 // reason explaining the causal chain.
 //
-// Magnitudes are intentionally moderate (3-10 per delta). Multiple
+// Magnitudes are intentionally moderate (3–10 per delta). Multiple
 // events compound; we don't want any single event to swing a faction
 // from dominant to collapsed in one tick.
 
 const ARCHETYPE_IMPACTS = Object.freeze({
   // ─────────────────────────────────────────────────────────────────────
-  // PLAGUE - illness with collective response. Plays to whichever
+  // PLAGUE — illness with collective response. Plays to whichever
   // faction tends the sick best (religious) and against whoever is
   // perceived as profiteering (merchant) or absent (governing).
 
@@ -72,7 +72,7 @@ const ARCHETYPE_IMPACTS = Object.freeze({
   },
 
   // ─────────────────────────────────────────────────────────────────────
-  // TRADE_ROUTE_CUT - primary signal: merchant wealth falls; criminal
+  // TRADE_ROUTE_CUT — primary signal: merchant wealth falls; criminal
   // smuggling rises; council tax base shrinks.
 
   trade_route_cut: {
@@ -94,7 +94,7 @@ const ARCHETYPE_IMPACTS = Object.freeze({
   },
 
   // ─────────────────────────────────────────────────────────────────────
-  // CORRUPTION_EXPOSED - player or rumor surfaces a major scandal.
+  // CORRUPTION_EXPOSED — player or rumor surfaces a major scandal.
   // Hits the implicated faction; lifts the exposer's natural rival.
 
   corruption_exposed: {
@@ -115,7 +115,7 @@ const ARCHETYPE_IMPACTS = Object.freeze({
   },
 
   // ─────────────────────────────────────────────────────────────────────
-  // GRANARY_DESTROYED / FOOD_INSTITUTION_REMOVED - a food chain anchor
+  // GRANARY_DESTROYED / FOOD_INSTITUTION_REMOVED — a food chain anchor
   // disappears. Compounding stress.
 
   food_anchor_lost: {
@@ -136,7 +136,7 @@ const ARCHETYPE_IMPACTS = Object.freeze({
   },
 
   // ─────────────────────────────────────────────────────────────────────
-  // DOMINANT_NPC_REMOVED - leader killed, exiled, or assigned away.
+  // DOMINANT_NPC_REMOVED — leader killed, exiled, or assigned away.
   // Hits the leader's own faction; opens space for rivals.
 
   dominant_npc_removed: {
@@ -154,7 +154,7 @@ const ARCHETYPE_IMPACTS = Object.freeze({
   },
 
   // ─────────────────────────────────────────────────────────────────────
-  // SIEGE_LIFTED - external pressure ends. Strong gains for everyone
+  // SIEGE_LIFTED — external pressure ends. Strong gains for everyone
   // but especially defenders + governing.
 
   siege_lifted: {
@@ -188,7 +188,7 @@ const FOOD_INSTITUTION_PATTERNS = /granary|mill|bakery|farm|orchard|fishery/i;
 function inferEventArchetype(event) {
   if (!event) return null;
 
-  // Explicit override - callers can pass `event.factionImpactArchetype`
+  // Explicit override — callers can pass `event.factionImpactArchetype`
   // to use a specific archetype regardless of the event type.
   if (typeof event.factionImpactArchetype === 'string') {
     return event.factionImpactArchetype;
@@ -240,7 +240,7 @@ function factionIdFromName(name) {
  *   recalculateFactionRelationships(settlement, { type: 'PLAGUE' }, { archetype: 'plague' })
  *
  * @param {Object} settlement
- * @param {Object} event              { type, targetId?, factionImpactArchetype?, ... }
+ * @param {Object} event              { type, targetId?, factionImpactArchetype?, … }
  * @param {Object} [options]
  * @param {string} [options.archetype]  Override; bypasses inference.
  * @param {Object} [options.targetNpc]  When archetype is 'dominant_npc_removed',
@@ -345,7 +345,7 @@ export function recalculateFactionRelationships(settlement, event, options = {})
 
 /**
  * Aggregate updates by faction. Returns
- *   { 'faction.<id>': { name, archetype, deltas: { power, legitimacy, ... } } }
+ *   { 'faction.<id>': { name, archetype, deltas: { power, legitimacy, … } } }
  * with summed numeric deltas per field. Useful for the "net change per
  * faction" surface and for Tier 4.12 forecast tooling.
  */

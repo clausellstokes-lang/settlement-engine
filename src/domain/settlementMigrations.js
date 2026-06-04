@@ -1,11 +1,11 @@
 /**
- * domain/settlementMigrations.js - Tier 1.4 migration runner.
+ * domain/settlementMigrations.js — Tier 1.4 migration runner.
  *
  * Saved settlements survive engine evolution. Every settlement
  * carries `schemaVersion` (stamped by normalizeSettlement at create
- * time). When the schema changes incompatibly - a field is renamed,
+ * time). When the schema changes incompatibly — a field is renamed,
  * a substructure restructures, a derivation moves to the canonical
- * shape - the SCHEMA_VERSION constant bumps and a migration function
+ * shape — the SCHEMA_VERSION constant bumps and a migration function
  * is registered here that rewrites the older shape into the new one.
  *
  * On load, `migrateSettlementToLatest(settlement)` walks the registry
@@ -18,7 +18,7 @@
  *     object. No I/O, no mutation, no async.
  *   - The registry is ordered by `from` version. A migration's
  *     `to` value MUST equal `from + 1` so the chain is a linear
- *     sequence - no fanout, no branches, no skips.
+ *     sequence — no fanout, no branches, no skips.
  *   - Adding a migration: bump SCHEMA_VERSION in settlement.schema.js,
  *     then append `{ from: <old>, to: <new>, migrate: (s) => ... }`
  *     here. Add a test in tests/domain/settlementMigrations.test.js
@@ -74,7 +74,7 @@ function currentVersion(settlement) {
  *
  * Throws if a chain gap is detected (`from` doesn't match the
  * settlement's current version after a migration step). That would
- * mean MIGRATIONS got reordered or had a hole - a code bug, not
+ * mean MIGRATIONS got reordered or had a hole — a code bug, not
  * runtime data drift.
  */
 export function migrateSettlementToLatest(settlement) {
@@ -101,7 +101,7 @@ export function migrateSettlementToLatest(settlement) {
     }
     out = next;
     if (++safety > 100) {
-      throw new Error('[settlementMigrations] runaway migration chain - abort');
+      throw new Error('[settlementMigrations] runaway migration chain — abort');
     }
   }
   return out;

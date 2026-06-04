@@ -1,5 +1,5 @@
 /**
- * tests/domain/regenerationDelta.test.js - Tier 5.1 lean tests.
+ * tests/domain/regenerationDelta.test.js — Tier 5.1 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

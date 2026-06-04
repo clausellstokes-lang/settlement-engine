@@ -1,5 +1,5 @@
 /**
- * selectors.js - Derived/computed selectors for the Zustand store.
+ * selectors.js — Derived/computed selectors for the Zustand store.
  *
  * Components use: const catalog = useStore(selectCurrentCatalog);
  *

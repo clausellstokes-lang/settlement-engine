@@ -1,10 +1,10 @@
 /**
- * domain/aiOverlayVerifier.js - runtime canon-preservation guard.
+ * domain/aiOverlayVerifier.js — runtime canon-preservation guard.
  *
  * Tier 6.4 of the roadmap. The AI overlay is supposed to refine prose
  * without inventing entities, renaming proper nouns, or contradicting
  * facts (per Tier 6.3 PRESERVATION_RULES + Tier 6.1 forbidden-changes
- * catalog). Models are statistical - sometimes they violate the
+ * catalog). Models are statistical — sometimes they violate the
  * contract anyway. This module is the safety net that catches it:
  *
  *   verifyAiOverlay(original, refined) ->
@@ -15,14 +15,14 @@
  *     }
  *
  * Violations are typed so callers can decide what to do per-class:
- *   - 'invented_entity'    - a faction/NPC/institution exists in refined that wasn't in original.
- *   - 'removed_entity'     - an entity from original is missing in refined.
- *   - 'renamed_entity'     - same entity (by id/index/role) but new name.
- *   - 'changed_fact'       - a numerical or categorical field drifted (population, tier).
- *   - 'changed_canon'      - a locked or user-authored entity's canon tag changed.
- *   - 'removed_history_beat' - a derived history beat went missing.
+ *   - 'invented_entity'    — a faction/NPC/institution exists in refined that wasn't in original.
+ *   - 'removed_entity'     — an entity from original is missing in refined.
+ *   - 'renamed_entity'     — same entity (by id/index/role) but new name.
+ *   - 'changed_fact'       — a numerical or categorical field drifted (population, tier).
+ *   - 'changed_canon'      — a locked or user-authored entity's canon tag changed.
+ *   - 'removed_history_beat' — a derived history beat went missing.
  *
- * Pure read-only. No mutation, no async, no I/O - safe to call inside
+ * Pure read-only. No mutation, no async, no I/O — safe to call inside
  * the AI streaming response pipeline before committing the overlay
  * into store state.
  *
@@ -87,7 +87,7 @@ function asArray(maybe) {
  * displayName).
  *
  * The "same key" comparison matters: ids that survive both sides are
- * the same entity even if the human-visible name changed - which IS
+ * the same entity even if the human-visible name changed — which IS
  * what we want to flag. Without ids we fall back to name and can't
  * detect rename (a rename looks like remove + add).
  */
@@ -104,7 +104,7 @@ function compareEntityArrays(field, originalArr, refinedArr) {
     if (k) rMap.set(k, e);
   }
 
-  // Inventions - keys in refined that aren't in original.
+  // Inventions — keys in refined that aren't in original.
   for (const [k, e] of rMap) {
     if (!oMap.has(k)) {
       violations.push({
@@ -117,7 +117,7 @@ function compareEntityArrays(field, originalArr, refinedArr) {
     }
   }
 
-  // Removals - keys in original that aren't in refined.
+  // Removals — keys in original that aren't in refined.
   for (const [k, e] of oMap) {
     if (!rMap.has(k)) {
       violations.push({
@@ -130,7 +130,7 @@ function compareEntityArrays(field, originalArr, refinedArr) {
     }
   }
 
-  // Renames - keys present on both sides but displayName differs.
+  // Renames — keys present on both sides but displayName differs.
   for (const [k, oEntity] of oMap) {
     if (!rMap.has(k)) continue;
     const rEntity = rMap.get(k);
@@ -143,7 +143,7 @@ function compareEntityArrays(field, originalArr, refinedArr) {
         key: k,
         label: oName,
         newLabel: rName,
-        detail: `Entity "${oName}" renamed to "${rName}" - proper-noun changes are forbidden.`,
+        detail: `Entity "${oName}" renamed to "${rName}" — proper-noun changes are forbidden.`,
       });
     }
   }
@@ -153,7 +153,7 @@ function compareEntityArrays(field, originalArr, refinedArr) {
 
 /**
  * Compare two entity arrays and flag canon-status changes on locked /
- * user-authored entities. (Drafts can become canon - that's a normal
+ * user-authored entities. (Drafts can become canon — that's a normal
  * promotion. The forbidden direction is locked/user → anything else.)
  */
 function compareCanonTags(field, originalArr, refinedArr) {
@@ -233,7 +233,7 @@ function compareRootFacts(original, refined) {
  * Verify that history beats derived from the refined settlement still
  * produce the same set as the original. The beats are derived from
  * history.founding + history.historicalEvents + history.currentTensions
- * - if the AI drops or rewrites one of those to the point that a beat
+ * — if the AI drops or rewrites one of those to the point that a beat
  * no longer derives, this catches it.
  */
 function compareHistoryBeats(original, refined) {
@@ -259,7 +259,7 @@ function compareHistoryBeats(original, refined) {
 /**
  * Verify that every field the user has hand-edited in the ORIGINAL
  * settlement still carries the user's exact value in the REFINED
- * output. User-edited prose is canon - the AI must pass it through
+ * output. User-edited prose is canon — the AI must pass it through
  * verbatim. Tier 6.6.
  */
 function compareUserFields(original, refined) {
@@ -366,7 +366,7 @@ function summariseViolations(violations) {
 export function verifyAiOverlay(original, refined) {
   const violations = [];
 
-  // Null safety. If either side is null, we can't meaningfully verify -
+  // Null safety. If either side is null, we can't meaningfully verify —
   // return a neutral report (ok=true) so callers don't refuse a missing
   // overlay payload. This mirrors how the engine's other null-tolerant
   // derivations behave.
@@ -380,7 +380,7 @@ export function verifyAiOverlay(original, refined) {
   // Root-level facts.
   violations.push(...compareRootFacts(original, refined));
 
-  // Entity arrays - institutions, factions, npcs, hooks, chains, conditions.
+  // Entity arrays — institutions, factions, npcs, hooks, chains, conditions.
   violations.push(...compareEntityArrays('institutions', original.institutions, refined.institutions));
   violations.push(...compareEntityArrays(
     'powerStructure.factions',

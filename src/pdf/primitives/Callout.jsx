@@ -1,5 +1,5 @@
 /**
- * Callout - bordered prose block with tinted background and accent rule.
+ * Callout — bordered prose block with tinted background and accent rule.
  *
  * Used for thesis statements, food-balance verdicts, AI-only notes, and any
  * passage that should visually peel off the body text. The tone prop drives

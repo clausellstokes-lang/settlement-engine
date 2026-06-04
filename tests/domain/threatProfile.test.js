@@ -1,5 +1,5 @@
 /**
- * tests/domain/threatProfile.test.js - Tier 4.6 structured threat contract.
+ * tests/domain/threatProfile.test.js — Tier 4.6 structured threat contract.
  *
  * Pins:
  *   - THREAT_TYPES + THREAT_STAGES catalog stability.
@@ -11,7 +11,7 @@
  *     * top-level threats[]
  *     * stressors with threat-type tags
  *     * hostile / cold_war neighbours
- *     * active conditions (Phase 16) - plague, food_anchor_lost,
+ *     * active conditions (Phase 16) — plague, food_anchor_lost,
  *       corruption_exposed, trade_route_cut, dominant_npc_removed
  *   - Type inference from text patterns.
  *   - deriveThreatProfile produces the canonical envelope.
@@ -345,11 +345,11 @@ describe('pressuresOnSubstrate()', () => {
     };
     const variables = pressuresOnSubstrate(settlement);
     expect(Array.isArray(variables)).toBe(true);
-    // Phase 17 substrate variables - must include healing/labor (plague)
+    // Phase 17 substrate variables — must include healing/labor (plague)
     // and defense (monster).
     expect(variables.includes('defense_readiness')).toBe(true);
     expect(variables.includes('healing_capacity')).toBe(true);
-    // Dedup check - each variable appears at most once.
+    // Dedup check — each variable appears at most once.
     expect(new Set(variables).size).toBe(variables.length);
   });
 });
@@ -391,7 +391,7 @@ describe('catalog accessors', () => {
 
 // ── Phase 19 wiring ────────────────────────────────────────────────────
 
-describe('Phase 19 wiring - explainThreat + EXPLAINABLE_TYPES + entityCatalog', () => {
+describe('Phase 19 wiring — explainThreat + EXPLAINABLE_TYPES + entityCatalog', () => {
   it('EXPLAINABLE_TYPES includes "threat"', () => {
     expect(EXPLAINABLE_TYPES).toContain('threat');
   });
@@ -443,7 +443,7 @@ describe('Phase 19 wiring - explainThreat + EXPLAINABLE_TYPES + entityCatalog', 
 
 // ── Real-settlement integration ────────────────────────────────────────
 
-describe('deriveAllThreatProfiles() - real generated settlement', () => {
+describe('deriveAllThreatProfiles() — real generated settlement', () => {
   it('surfaces at least one threat for a frontier city', () => {
     const settlement = generateSettlementPipeline(
       { settType: 'city', culture: 'germanic' },

@@ -1,5 +1,5 @@
 /**
- * supabase/functions/_shared/requestMeta.ts - Tier 0.10 abuse-defense
+ * supabase/functions/_shared/requestMeta.ts — Tier 0.10 abuse-defense
  * helpers shared across every edge function.
  *
  * Extracts client IP and User-Agent from a Request and provides a
@@ -15,12 +15,12 @@
  *     leftmost), then `x-real-ip`. Falls back to '0.0.0.0'.
  *   - UA is read from `user-agent`. Falls back to ''.
  *   - `denyObviousBot` checks the UA against a small allowlist of
- *     legitimate bots (Stripe, Supabase, monitoring) - those are
+ *     legitimate bots (Stripe, Supabase, monitoring) — those are
  *     accepted. Everything else matching the deny list is rejected.
  *
  * The bot list is conservative: it only matches strings that are
  * clearly bots ("bot", "crawler", "spider", common scraping tools).
- * It does NOT match all browsers - that would create a denial-of-
+ * It does NOT match all browsers — that would create a denial-of-
  * service vector if a Chrome update changed its UA string. False
  * negatives (real bots that get through) are cheaper than false
  * positives (real users blocked).
@@ -63,7 +63,7 @@ const OBVIOUS_BOT_PATTERNS = [
 
 /**
  * Bots we deliberately accept. These are infra integrations we depend
- * on - blocking them would break webhooks / monitoring / e2e tests.
+ * on — blocking them would break webhooks / monitoring / e2e tests.
  *
  * Pattern: longer-than-substring matches so a deceptive UA "stripe-
  * bot-scraper" doesn't slip through on "stripe".
@@ -105,7 +105,7 @@ export function readRequestMeta(req: Request): RequestMeta {
 /**
  * Build a 403 Response for an obvious-bot request. Caller decides
  * whether to invoke based on the function's policy (e.g. stripe-
- * webhook should NEVER reject - Stripe's own UA matches the allowed
+ * webhook should NEVER reject — Stripe's own UA matches the allowed
  * list but the function should always validate the signature even
  * if a forwarder were to spoof the UA).
  *

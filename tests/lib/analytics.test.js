@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/lib/analytics.test.js - Tier 8.8 / 8.9 funnel + tracking contract.
+ * tests/lib/analytics.test.js — Tier 8.8 / 8.9 funnel + tracking contract.
  *
  * Verifies:
  *   1. EVENTS constants exist with the locked names (renames here break
@@ -41,7 +41,7 @@ afterEach(() => {
 });
 
 // ── Event constants ───────────────────────────────────────────────────────
-describe('Tier 8.8 - EVENTS inventory', () => {
+describe('Tier 8.8 — EVENTS inventory', () => {
   it('exposes the minimum 4-event funnel', () => {
     expect(EVENTS.HOMEPAGE_VIEW).toBe('homepage_view');
     expect(EVENTS.ANONYMOUS_GENERATION_COMPLETED).toBe('anonymous_generation_completed');
@@ -76,7 +76,7 @@ describe('Tier 8.8 - EVENTS inventory', () => {
 });
 
 // ── track() ───────────────────────────────────────────────────────────────
-describe('Tier 8.8 - track()', () => {
+describe('Tier 8.8 — track()', () => {
   it('fires known events through the provider', () => {
     track(EVENTS.HOMEPAGE_VIEW);
     expect(providerCalls).toHaveLength(1);
@@ -112,14 +112,14 @@ describe('Tier 8.8 - track()', () => {
 });
 
 // ── Funnel helpers ────────────────────────────────────────────────────────
-describe('Tier 8.8 - Funnel helpers', () => {
-  // P-fix - Funnel must expose a generic `track` passthrough alongside
+describe('Tier 8.8 — Funnel helpers', () => {
+  // P-fix — Funnel must expose a generic `track` passthrough alongside
   // the four critical helpers. The critique-implementation components
   // call `Funnel.track(EVENTS.X, props)` directly. Without this contract
   // they crash at module-init in production (this regression was caught
   // by the deploy: `m.track is not a function`).
   //
-  // Use a real event name from EVENTS - `track` whitelists against the
+  // Use a real event name from EVENTS — `track` whitelists against the
   // registry to catch typos, so a synthetic event name would be dropped.
   it('exposes generic track() passthrough', () => {
     expect(typeof Funnel.track).toBe('function');
@@ -147,7 +147,7 @@ describe('Tier 8.8 - Funnel helpers', () => {
   it('signupCompleted fires SIGNUP_AFTER_ANON only when anon-prior is true', async () => {
     // SHA-256 hashing is async; both Funnel.signupCompleted dispatches
     // fire as separate microtasks and may resolve in either order.
-    // Assert SET membership rather than array order - the contract is
+    // Assert SET membership rather than array order — the contract is
     // "these events fire", not "in this exact sequence."
     Funnel.signupCompleted({ userId: 'u1' });
     await new Promise(r => setTimeout(r, 10));
@@ -174,7 +174,7 @@ describe('Tier 8.8 - Funnel helpers', () => {
 });
 
 // ── Provider dispatch ─────────────────────────────────────────────────────
-describe('Tier 8.8 - Provider dispatch', () => {
+describe('Tier 8.8 — Provider dispatch', () => {
   it('does not throw when no provider is installed', () => {
     delete window.__sf_analytics_provider;
     // In dev this logs; in prod it's silent. Either way no throw.

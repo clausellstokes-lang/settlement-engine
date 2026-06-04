@@ -1,5 +1,5 @@
 /**
- * data/entityTags.js - Canonical tag vocabulary for mechanical entities.
+ * data/entityTags.js — Canonical tag vocabulary for mechanical entities.
  *
  * Why this exists:
  *   Today, mechanics across the codebase check institution / faction /
@@ -11,7 +11,7 @@
  *   That works until someone renames "Town Watch" to "Civic Guard" and
  *   silently breaks the security/legitimacy/defense calculations. The
  *   long-term fix is for every mechanical entity to carry a stable id
- *   and a set of canonical tags - mechanics then query by tag, not name.
+ *   and a set of canonical tags — mechanics then query by tag, not name.
  *
  * What this file declares:
  *   - TAG: an object of constants. Use TAG.SECURITY, not 'security', so
@@ -94,7 +94,7 @@ export const TAG_GROUPS = Object.freeze({
   ENFORCEMENT:  [TAG.SECURITY, TAG.LAW, TAG.PUBLIC_ORDER, TAG.MILITARY],
 
   // "Any institution where a sick / hungry / displaced person could
-  // expect help" - drives welfare-capacity computations.
+  // expect help" — drives welfare-capacity computations.
   WELFARE_PROVIDER: [TAG.WELFARE, TAG.HEALING, TAG.RELIGIOUS],
 
   // "Any institution that participates in trade-route economics"
@@ -120,7 +120,7 @@ const VALID_TAGS = new Set(Object.values(TAG));
  *
  * Today, many existing entities use non-canonical tags ('civic',
  * 'commercial', etc.). Those will resolve as valid string tags via
- * `hasTag` but won't appear in `TAG`. The mismatch is allowed - this
+ * `hasTag` but won't appear in `TAG`. The mismatch is allowed — this
  * helper is for tooling that wants to detect drift, not for runtime
  * filtering.
  */

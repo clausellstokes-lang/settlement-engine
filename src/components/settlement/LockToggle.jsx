@@ -1,12 +1,12 @@
 /**
- * LockToggle - Padlock chip for protecting parts of a settlement from
+ * LockToggle — Padlock chip for protecting parts of a settlement from
  * regeneration. Wired to mapState.locks via setLock.
  *
  * Usage:
  *   <LockToggle which="identity" />              // boolean lock
  *   <LockToggle which="factions" id="merchants"/>// per-id lock in array
  *
- * Visually small - meant to live next to section headers.
+ * Visually small — meant to live next to section headers.
  */
 
 import { Lock, Unlock } from 'lucide-react';
@@ -45,8 +45,8 @@ export default function LockToggle({ which, id, label }) {
       type="button"
       onClick={toggle}
       title={label || (isLocked
-        ? 'Locked - preserved through regeneration'
-        : 'Unlocked - may change on regeneration')}
+        ? 'Locked — preserved through regeneration'
+        : 'Unlocked — may change on regeneration')}
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         width: 22, height: 22, padding: 0,

@@ -1,5 +1,5 @@
 /**
- * campaignSlice - Campaign organization for settlements and maps.
+ * campaignSlice — Campaign organization for settlements and maps.
  *
  * Campaigns are named folders that group settlements and optionally store a
  * map state. Settlements stay in the flat saves array; campaigns hold
@@ -81,7 +81,7 @@ function localWrite(campaigns, ownerId = 'anon') {
   try {
     campaignService.cache(campaigns, ownerId);
   } catch (e) {
-    // Likely quota exceeded - FMG snapshots can be large (~1MB). The caller
+    // Likely quota exceeded — FMG snapshots can be large (~1MB). The caller
     // should already have warned via canSaveSnapshot(); log and continue.
     console.warn('[campaignSlice] localStorage write failed', e);
   }
@@ -334,7 +334,7 @@ function migrateMapState(ms) {
     viewport: { cx: 0, cy: 0, scale: 1, width: 0, height: 0 },
     savedAt: ms.savedAt || new Date().toISOString(),
     // Legacy placements-as-array kept for the restore path that doesn't use
-    // fmgSnapshot - WorldMap can fall back to bridge.restorePlacements().
+    // fmgSnapshot — WorldMap can fall back to bridge.restorePlacements().
     _legacyPlacements: v1Placements,
   };
 }
@@ -343,7 +343,7 @@ export const createCampaignSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   campaigns: [],
   campaignsLoaded: false,
-  /** The currently-loaded campaign id (null if none) - used by WorldMap */
+  /** The currently-loaded campaign id (null if none) — used by WorldMap */
   activeCampaignId: null,
 
   // ── Actions ────────────────────────────────────────────────────────────────

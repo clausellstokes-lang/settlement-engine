@@ -1,5 +1,5 @@
 /**
- * PDF design system - palette, type scale, spacing, page geometry.
+ * PDF design system — palette, type scale, spacing, page geometry.
  *
  * Mirrors src/components/theme.js (the on-screen palette) so the printed
  * artifact reads as an extension of the app, not a separate product.
@@ -23,7 +23,7 @@ export const palette = {
   card:    '#fffbf5',  // page background
   border:  '#e0d0b0',  // dividers, table borders
 
-  // Tone accents - ported from individual tab components
+  // Tone accents — ported from individual tab components
   good:        '#1a5a28',   // viability ok, allied, prosperity positive
   goodBg:      '#e8f5e8',
   warn:        '#a0762a',   // friction, mid stress
@@ -33,13 +33,13 @@ export const palette = {
   cool:        '#2a3a7a',   // patron/client, infrastructure
   coolBg:      '#f0f4ff',
 
-  // AI narrative - purple lens
+  // AI narrative — purple lens
   ai:          '#6a2a9a',
   aiTint:      '#f4ecf8',
   aiRule:      '#8a50b0',
 };
 
-// Faction / category colors - match the tab components
+// Faction / category colors — match the tab components
 export const factionColors = {
   government:    '#a0762a',
   military:      '#8b1a1a',
@@ -71,7 +71,7 @@ export const relColors = {
 // ── Font registration ────────────────────────────────────────────────────────
 // Lora (open SIL) for serif body, Nunito for sans labels/nav. Both shipped as
 // static assets under public/fonts/ so the PDF render never depends on an
-// external CDN. (Earlier builds pulled from fonts.gstatic.com - Google rotated
+// external CDN. (Earlier builds pulled from fonts.gstatic.com — Google rotated
 // the v32 URLs and PDF export broke silently for everyone.)
 Font.register({
   family: 'Lora',
@@ -93,7 +93,7 @@ Font.register({
   ],
 });
 
-// Disable hyphenation - looks bad in narrative prose and breaks names like
+// Disable hyphenation — looks bad in narrative prose and breaks names like
 // "Becanahau" mid-line.
 Font.registerHyphenationCallback(word => [word]);
 
@@ -128,7 +128,7 @@ export const type = {
 // roles. But the dense chapter layouts frequently override just the size on top
 // of a spread role (e.g. `{ ...type.italic, fontSize: pt['10.5'] }`). These
 // point-valued constants give every such raw inline size a token to route
-// through - keyed by the exact size so the migration off raw literals is
+// through — keyed by the exact size so the migration off raw literals is
 // byte-identical (zero visual change). With these in place the no-raw-fontsize
 // lint rule can go to error across the PDF subsystem too. Values are PDF points.
 export const pt = {
@@ -168,7 +168,7 @@ export const sheet = StyleSheet.create({
     fontSize: 10,
     color: palette.second,
   },
-  // Cover page - full bleed, no header/footer
+  // Cover page — full bleed, no header/footer
   coverPage: {
     backgroundColor: palette.card,
     padding: 0,

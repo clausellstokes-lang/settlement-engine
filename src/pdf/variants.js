@@ -1,22 +1,22 @@
 /**
- * pdf/variants.js - Chapter-inclusion rules per export variant.
+ * pdf/variants.js — Chapter-inclusion rules per export variant.
  *
  * Audit's recommendation: a single PDF blob isn't enough. DMs want
  * three different artifacts depending on what the table needs:
  *   - Draft Brief    → quick prep doc, no timeline, no canon-only chapters
  *   - Canon Dossier  → full campaign-ready document (current behavior)
- *   - Timeline Packet→ lean recap - cover, current state, timeline only
+ *   - Timeline Packet→ lean recap — cover, current state, timeline only
  *
  * Three variants share the same chapter components, gated by this
  * inclusion map. Adding a variant = one entry here + one option in
  * ExportSheet. Adding a chapter = one row across all variants.
  *
  * Values per chapter:
- *   true            - always include
- *   false           - never include
- *   'if-canon'      - include only when phase === 'canon'
- *   'if-narrated'   - include only when AI narrative is present
- *   'if-events'     - include only when eventLog has entries
+ *   true            — always include
+ *   false           — never include
+ *   'if-canon'      — include only when phase === 'canon'
+ *   'if-narrated'   — include only when AI narrative is present
+ *   'if-events'     — include only when eventLog has entries
  */
 
 /** @typedef {'draft_brief' | 'canon_dossier' | 'timeline_packet'} PdfVariant */
@@ -24,7 +24,7 @@
 export const PDF_VARIANTS = {
   draft_brief: {
     label: 'Draft Brief',
-    description: 'Quick prep doc - no timeline, no canon-only sections.',
+    description: 'Quick prep doc — no timeline, no canon-only sections.',
     chapters: {
       cover: true,
       toc: true,
@@ -78,7 +78,7 @@ export const PDF_VARIANTS = {
 
   timeline_packet: {
     label: 'Timeline Packet',
-    description: 'Lean recap - cover, current state, timeline only. For reviewing what changed.',
+    description: 'Lean recap — cover, current state, timeline only. For reviewing what changed.',
     chapters: {
       cover: true,
       toc: true,

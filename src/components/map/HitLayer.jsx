@@ -1,5 +1,5 @@
 /**
- * HitLayer - Invisible SVG rect that catches pointer events in annotate mode.
+ * HitLayer — Invisible SVG rect that catches pointer events in annotate mode.
  *
  * Lives BEHIND the content group in SVG document order so individual label/
  * marker/forest elements get click priority. Only empty-canvas clicks reach

@@ -1,17 +1,17 @@
 /**
- * ChroniclePanel - Per-settlement AI narrative history log.
+ * ChroniclePanel — Per-settlement AI narrative history log.
  *
  * Reads a saved settlement's `ai_data.chronicle` array (newest-first) and
  * renders a collapsible section above the settlement tabs. Each entry
- * captures one narrative event - initial generation, regenerate, progression,
- * or revert - with its thesis preserved.
+ * captures one narrative event — initial generation, regenerate, progression,
+ * or revert — with its thesis preserved.
  *
  * Entry modes:
- *   • 'full'    - full snapshot retained. Expandable via "Read full" modal.
- *   • 'summary' - thesis + summaryText only (rotated after hitting the free-tier
+ *   • 'full'    — full snapshot retained. Expandable via "Read full" modal.
+ *   • 'summary' — thesis + summaryText only (rotated after hitting the free-tier
  *                 cap; also used at birth for revert events).
  *
- * This component is purely presentational - it takes `entries` as a prop and
+ * This component is purely presentational — it takes `entries` as a prop and
  * owns no persistence. Rotation and appending happen in `aiSlice._appendChronicleEntry`.
  */
 
@@ -87,7 +87,7 @@ function FullEntryModal({ entry, onClose }) {
   const dl = entry.aiDailyLife || {};
   const meta = REASON_META[entry.reason] || REASON_META.initial;
 
-  // Plain-text dumper for known narrative sections. Intentionally simple - the
+  // Plain-text dumper for known narrative sections. Intentionally simple — the
   // point is to let the DM read what they had, not to re-render the tab UI.
   const renderSection = (title, body) => {
     if (!body) return null;
@@ -174,7 +174,7 @@ function FullEntryModal({ entry, onClose }) {
           {renderList('Stressors', s.stress, (st) => `${st?.label || ''}: ${st?.description || st?.text || ''}`)}
 
           {renderList('Identity Markers', s.identityMarkers, (m) => m)}
-          {renderList('Friction Points', s.frictionPoints, (fp) => `${fp?.who || ''} - ${fp?.what || ''}`)}
+          {renderList('Friction Points', s.frictionPoints, (fp) => `${fp?.who || ''} — ${fp?.what || ''}`)}
 
           {s.dmCompass && (
             <div style={{ marginBottom: 14 }}>

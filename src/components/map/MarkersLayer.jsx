@@ -1,5 +1,5 @@
 /**
- * MarkersLayer - user-placed pin/star/skull/flag markers with optional
+ * MarkersLayer — user-placed pin/star/skull/flag markers with optional
  * title and note. Drag to move (annotate/select), double-click to edit.
  */
 

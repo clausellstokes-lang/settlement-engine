@@ -1,5 +1,5 @@
 /**
- * config/pricing.js - Single source of truth for all pricing data.
+ * config/pricing.js — Single source of truth for all pricing data.
  *
  * Everything related to "what costs what" lives here:
  *   - Credit pack catalog (legacy + repriced; flag selects active set)
@@ -20,12 +20,12 @@
  * should match what this file declares. A `pricing.contract.test.js`
  * keeps the drift visible.
  *
- * Stripe is the ultimate source for actual charged prices - we own the
+ * Stripe is the ultimate source for actual charged prices — we own the
  * metadata (credits per pack, AI cost per feature) and the display
  * strings; Stripe owns the dollar amounts.
  *
  * The repriced schedules, Founder tier, and single-dossier one-shot all
- * shipped unconditionally - their roll-out flags were removed once soaked.
+ * shipped unconditionally — their roll-out flags were removed once soaked.
  * The legacy pack + AI-cost maps are retained below: not as a rollback
  * path, but so historical SKUs still resolve (findPackByKey) and the
  * server contract test can pin both schedules independently.
@@ -42,7 +42,7 @@ const LEGACY_PACKS = Object.freeze({
   credits_40: { key: 'credits_40', name: '40 Narrative Credits', price: '$19.99', credits: 40, perCredit: '$0.50', discount: '50% off', tier: 'best'    },
 });
 
-// New, more generous packs - designed around the repriced narrative
+// New, more generous packs — designed around the repriced narrative
 // costs (3/4/5 per feature). 25 credits ≈ 7 narratives or 5 daily-lifes.
 const NEW_PACKS = Object.freeze({
   credits_25:  { key: 'credits_25',  name: '25 Narrative Credits',  price: '$4.99',  credits: 25,  perCredit: '$0.20', discount: null,      tier: 'starter' },
@@ -52,7 +52,7 @@ const NEW_PACKS = Object.freeze({
 
 // ── AI feature cost schedules ─────────────────────────────────────────────
 // Mirrored on the server (supabase/functions/generate-narrative/index.ts
-// CREDIT_COSTS). Keep server + client in lockstep - a contract test
+// CREDIT_COSTS). Keep server + client in lockstep — a contract test
 // catches drift before it ships.
 
 const LEGACY_AI_COSTS = Object.freeze({
@@ -90,7 +90,7 @@ export function isFastModelPreference(value) {
 
 // ── Subscription tiers ────────────────────────────────────────────────────
 // The flag layer controls which name renders (tierRenames). The plan
-// shape is stable across both naming schemes - only the label changes.
+// shape is stable across both naming schemes — only the label changes.
 
 export const TIERS = Object.freeze({
   wanderer: Object.freeze({
@@ -159,7 +159,7 @@ export const SINGLE_DOSSIER = Object.freeze({
 });
 
 // ── Active-set selectors ───────────────────────────────────────────────────
-// Components and slices call these - they never reach for the raw maps.
+// Components and slices call these — they never reach for the raw maps.
 // The roll-out flags were removed once soaked; the selectors now return
 // the shipped (repriced) set unconditionally. Legacy maps are kept only
 // for historical SKU resolution + the server contract test.

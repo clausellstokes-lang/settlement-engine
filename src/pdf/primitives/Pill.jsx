@@ -1,5 +1,5 @@
 /**
- * Pill - small tinted tag for tone-coded labels (status, faction, severity).
+ * Pill — small tinted tag for tone-coded labels (status, faction, severity).
  *
  * Tones map to palette[k] / toneBg[k] in theme.js: good, warn, bad, cool,
  * gold, muted, ai. Pass `large` to bump padding for headline contexts.
@@ -13,7 +13,7 @@ export function Pill({ tone = 'muted', children, large = false }) {
   const fg = palette[tone] || palette.muted;
   // Pill text isn't uppercase-transformed by the type style here, but consumers
   // often pass humanize()'d strings that contain ZWNJ. ZWNJ between letters
-  // creates a soft line-break in some readers - strip it.
+  // creates a soft line-break in some readers — strip it.
   const text = typeof children === 'string' ? stripZwnj(children) : children;
   return (
     <View

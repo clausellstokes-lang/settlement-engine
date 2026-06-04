@@ -1,5 +1,5 @@
 /**
- * tests/domain/trace.test.js - Causal trace API contract.
+ * tests/domain/trace.test.js — Causal trace API contract.
  *
  * The trace layer becomes load-bearing for every Tier 2+ feature
  * (faction profiles, supply-chain visibility, AI grounded-in-trace,
@@ -182,7 +182,7 @@ describe('summarizeTrace()', () => {
   it('produces a headline, causes, and downstream lines', () => {
     const out = summarizeTrace(sampleTrace());
     expect(out.headline).toBe('institution.town_watch selected');
-    expect(out.causes).toEqual(['threat.banditry (+30% likelihood) - Bandit pressure.']);
+    expect(out.causes).toEqual(['threat.banditry (+30% likelihood) — Bandit pressure.']);
     expect(out.downstreamEffects).toEqual(['publicOrder: improved']);
   });
 

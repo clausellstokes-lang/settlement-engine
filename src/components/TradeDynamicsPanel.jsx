@@ -162,7 +162,7 @@ function GoodsPanel() {
       <ControlsStrip
         search={search}
         setSearch={setSearch}
-        placeholder="Search goods..."
+        placeholder="Search goods…"
         onForceAll={bulkForce}
         onReset={() => setGoodsToggles({})}
         onExcludeAll={bulkExclude}

@@ -1,10 +1,10 @@
 /**
- * domain/capacityModel.js - Supply-vs-demand modeling for the 9
+ * domain/capacityModel.js — Supply-vs-demand modeling for the 9
  * canonical settlement capacities.
  *
  * Tier 4.4 of the roadmap. Phase 17 gave every system variable a
  * single score; for capacities specifically, the score is the *result*
- * of two competing pressures - supply (how much capacity exists) and
+ * of two competing pressures — supply (how much capacity exists) and
  * demand (how much is being asked of it). Phase 21 makes that supply
  * and demand structurally visible:
  *
@@ -21,7 +21,7 @@
  *     adequate -> strained because demand rose, not because supply
  *     fell." That's a different story for AI / PDF / UI to tell.
  *   - Refugee influx raises FOOD DEMAND but adds LABOR SUPPLY. The
- *     same event affects two capacities in opposite directions -
+ *     same event affects two capacities in opposite directions —
  *     impossible to represent with a single substrate score.
  *
  * Coexistence with Phase 17 substrate:
@@ -33,15 +33,15 @@
  *     strained?"
  *
  * The canonical 9 capacities (per the roadmap):
- *   labor               - available worker-hours
- *   healing             - medical / magical healing
- *   defense             - military / watch / fortification
- *   administrative      - bureaucratic / governance throughput
- *   food_production     - farms, mills, fisheries, granaries
- *   transport           - roads, ports, caravans, river access
- *   religious_welfare   - temple relief, ritual support
- *   craft               - production output
- *   magical             - arcane availability
+ *   labor               — available worker-hours
+ *   healing             — medical / magical healing
+ *   defense             — military / watch / fortification
+ *   administrative      — bureaucratic / governance throughput
+ *   food_production     — farms, mills, fisheries, granaries
+ *   transport           — roads, ports, caravans, river access
+ *   religious_welfare   — temple relief, ritual support
+ *   craft               — production output
+ *   magical             — arcane availability
  *
  * Pure read-only derivation. No imports from src/lib. Composes
  * Phase 16 (active conditions) and Phase 20 (structured threats) so
@@ -516,7 +516,7 @@ function deriveCraft(s, ctx) {
 
   const exports = Array.isArray(s.economicState?.exports) ? s.economicState.exports : [];
   if (exports.length >= 2) {
-    demand += 6; push(demandContributors, 'economicState.exports', 'broad', +6, `${exports.length} exports - sustained output demand.`);
+    demand += 6; push(demandContributors, 'economicState.exports', 'broad', +6, `${exports.length} exports — sustained output demand.`);
   }
 
   return {
@@ -689,7 +689,7 @@ export function summarizeCapacities(settlement) {
   const out = [];
   for (const name of CAPACITY_NAMES) {
     const p = state.capacities[name];
-    out.push(`${p.label} - ${p.band} (supply ${p.supply}, demand ${p.demand}, ratio ${p.ratio}).`);
+    out.push(`${p.label} — ${p.band} (supply ${p.supply}, demand ${p.demand}, ratio ${p.ratio}).`);
   }
   return out;
 }

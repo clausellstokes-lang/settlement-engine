@@ -1,5 +1,5 @@
 /**
- * funnelEventContract.test.js - P146 contract over the local ESLint rule
+ * funnelEventContract.test.js — P146 contract over the local ESLint rule
  * `analytics/funnel-event-contract`.
  *
  * Uses ESLint's RuleTester (wired to vitest's describe/it) to pin the
@@ -33,11 +33,11 @@ ruleTester.run('funnel-event-contract', rule, {
     "import { track, EVENTS } from '../lib/analytics.js'; track(EVENTS.HOMEPAGE_VIEW);",
     // EVENTS.* via Funnel.track, with props.
     "import { Funnel, EVENTS } from '../lib/analytics.js'; Funnel.track(EVENTS.SAVE_BUTTON_CLICKED, { tier: 'town' });",
-    // Generic passthrough wrapper - variable first arg is fine (the
+    // Generic passthrough wrapper — variable first arg is fine (the
     // EVENTS.* constant is supplied at the wrapper's own call site).
     "import { Funnel } from '../lib/analytics.js'; function w(eventName, payload) { Funnel.track(eventName, payload); }",
     "import { track } from '../lib/analytics.js'; function w(e) { track(e); }",
-    // Conditional resolving to EVENTS constants - not a literal.
+    // Conditional resolving to EVENTS constants — not a literal.
     "import { track, EVENTS } from '../lib/analytics.js'; const c = true; track(c ? EVENTS.A : EVENTS.B);",
     // Aliased imports still resolve to the analytics bindings (and pass
     // a constant), so they're allowed.

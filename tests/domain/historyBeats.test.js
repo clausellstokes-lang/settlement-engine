@@ -1,5 +1,5 @@
 /**
- * tests/domain/historyBeats.test.js - Structured history beat contract.
+ * tests/domain/historyBeats.test.js — Structured history beat contract.
  *
  * Pins the Tier 4.7 derivation surface: seven beat slots, each either
  * non-null with structured fields or null when source data is missing.

@@ -1,5 +1,5 @@
 /**
- * primitives/RegenerationDeltaCard - Tier 5.1 UI surface.
+ * primitives/RegenerationDeltaCard — Tier 5.1 UI surface.
  *
  * The roadmap's "trust problem with stochastic reruns" is solved
  * here: after a user change + regenerate, surface what changed so
@@ -11,14 +11,14 @@
  *
  * Layout: collapsible card with seven sections, each rendering only
  * when it has content:
- *   1. Direct effects    - system state deltas (immediate result of
+ *   1. Direct effects    — system state deltas (immediate result of
  *                          the change)
- *   2. Ripple effects    - causal-state band shifts
- *   3. Capacity shifts   - supply/demand band changes per capacity
- *   4. Daily-life shifts - slot-level prose changes
- *   5. Preserved canon   - entities that survived the rerun
- *   6. New opportunities - hooks the rerun introduced
- *   7. New risks         - threats / conditions / clocks introduced
+ *   2. Ripple effects    — causal-state band shifts
+ *   3. Capacity shifts   — supply/demand band changes per capacity
+ *   4. Daily-life shifts — slot-level prose changes
+ *   5. Preserved canon   — entities that survived the rerun
+ *   6. New opportunities — hooks the rerun introduced
+ *   7. New risks         — threats / conditions / clocks introduced
  *
  * Broken dependencies surfaces inline as a warning row when present.
  *
@@ -35,13 +35,13 @@ const COLORS = Object.freeze({
   ink:       '#1c1409',
   muted:     '#9c8068',
   gold:      '#a0762a',
-  direct:    '#2a3a7a',   // navy - direct effects
-  ripple:    '#5a2a8a',   // violet - ripple effects
-  capacity:  '#1a5a28',   // green - capacity
-  daily:     '#7a4f0f',   // amber - daily life
-  canon:     '#1a4a20',   // forest - preserved canon
-  hook:      '#a0762a',   // gold - opportunities
-  risk:      '#8b1a1a',   // red - risks
+  direct:    '#2a3a7a',   // navy — direct effects
+  ripple:    '#5a2a8a',   // violet — ripple effects
+  capacity:  '#1a5a28',   // green — capacity
+  daily:     '#7a4f0f',   // amber — daily life
+  canon:     '#1a4a20',   // forest — preserved canon
+  hook:      '#a0762a',   // gold — opportunities
+  risk:      '#8b1a1a',   // red — risks
   broken:    'rgba(196,128,60,0.12)',
   brokenBdr: 'rgba(196,128,60,0.4)',
 });
@@ -128,7 +128,7 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
 
       {!collapsed && (
         <div id="regen-delta-body" style={{ padding: '8px 12px 10px' }}>
-          {/* Broken dependencies - warn loudly */}
+          {/* Broken dependencies — warn loudly */}
           <BrokenDependenciesRow items={delta.brokenDependencies} />
 
           {/* The seven sections */}
@@ -164,7 +164,7 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
           />
           <Section title="New opportunities"
             // Use ?? so an empty explicit array doesn't fall back to
-            // the newEntities filter - but a missing key does.
+            // the newEntities filter — but a missing key does.
             items={
               (Array.isArray(delta.newOpportunities) && delta.newOpportunities.length > 0)
                 ? delta.newOpportunities

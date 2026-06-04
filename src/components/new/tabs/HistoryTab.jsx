@@ -53,7 +53,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
   const eventTitle = (evt) => {
     const ec = ALL_EC[evt.type] || ALL_EC.political;
     const descShort = typeof evt.description === 'string'
-      ? evt.description.slice(0,55) + (evt.description.length>55?'...':'')
+      ? evt.description.slice(0,55) + (evt.description.length>55?'…':'')
       : '';
     return {label: ec.label, desc: descShort};
   };
@@ -119,7 +119,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
             return positioned.map(te => (
               <div key={te.i}>
                 {/* Dot */}
-                <div title={`${te.ec.label} - ${te.yearsAgo}y ago`}
+                <div title={`${te.ec.label} — ${te.yearsAgo}y ago`}
                   style={{position:'absolute',left:`${te.pct}%`,top:'50%',
                     transform:'translate(-50%,-50%)',
                     width:te.anchored?14:10,height:te.anchored?14:10,
@@ -128,7 +128,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
                     boxShadow:te.anchored?`0 0 0 2px ${te.ec.color}`:'none',
                     cursor:'pointer',zIndex:2}}>
                 </div>
-                {/* Year label - alternates above/below to avoid overlap */}
+                {/* Year label — alternates above/below to avoid overlap */}
                 <div style={{
                   position:'absolute',left:`${te.pct}%`,
                   top: te.labelAbove ? 1 : 27,
@@ -162,7 +162,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
         </div>
       </div>}
 
-      {/* ── CURRENT TENSIONS (most DM-relevant - first) ──────────────────── */}
+      {/* ── CURRENT TENSIONS (most DM-relevant — first) ──────────────────── */}
       {currentTensions.length>0&&<Section title={`Current Tensions (${currentTensions.length})`} collapsible defaultOpen accent="#b8860b">
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
           {currentTensions.map((t,i)=>{
@@ -186,7 +186,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
                 {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:t.plotHooks?.length>0?8:0}}>
                   {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'1px 6px'}}>{f}</span>)}
                 </div>}
-                {/* Plot hooks - inline, prominent */}
+                {/* Plot hooks — inline, prominent */}
                 {t.plotHooks?.length>0&&<div style={{borderTop:`1px solid ${border}30`,paddingTop:8,marginTop:4}}>
                   <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Plot Hooks</div>
                   <div style={{display:'flex',flexDirection:'column',gap:4}}>

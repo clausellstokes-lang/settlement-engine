@@ -1,5 +1,5 @@
 /**
- * RoadsLayer - SVG layer rendering the derived road network.
+ * RoadsLayer — SVG layer rendering the derived road network.
  *
  * Pipeline:
  *   1. roadNetwork.computeRoadEdges(saves, placements)  → edge list (React-side)
@@ -38,7 +38,7 @@ export default function RoadsLayer({ bridge }) {
   const seed       = useStore(s => s.mapState.seed);
   // Bumped by WorldMap.jsx after a snapshot load or regenerate. Even when
   // placements are unchanged (e.g. you reopen a saved campaign), the FMG
-  // cells underneath have changed - A* needs to re-route from scratch.
+  // cells underneath have changed — A* needs to re-route from scratch.
   const geometryVersion = useStore(s => s.geometryVersion);
 
   const [paths, setPaths] = useState({});
@@ -52,7 +52,7 @@ export default function RoadsLayer({ bridge }) {
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
     // setPaths({}) on the early-return paths is functionally derived
-    // state - when prerequisites aren't met, we have no paths to draw.
+    // state — when prerequisites aren't met, we have no paths to draw.
     // The set-state-in-effect rule flags both these and the increment-
     // and-assign of the request id below. Suppressing across the whole
     // effect body because deriving paths from inputs the other way (via

@@ -1,5 +1,5 @@
 /**
- * generators/factionRoles.js - Faction archetype → structural NPC roles.
+ * generators/factionRoles.js — Faction archetype → structural NPC roles.
  *
  * Closes the plan's "faction-to-NPC coupling at generation time" gap:
  * when a faction is generated, the structural NPCs it implies (high
@@ -16,7 +16,7 @@
  * Pure data + helper. No React, no store.
  */
 
-// inferImportance is not used directly here yet - kept on the import
+// inferImportance is not used directly here yet — kept on the import
 // graph for future expansion where archetype rules read existing NPC
 // importance to decide whether to skip generation.
 
@@ -24,9 +24,9 @@
  * Per-archetype role definitions. Each role becomes a generated NPC
  * with the given importance + linkage if the faction is detected.
  *
- *   role        - display title
- *   importance  - 'pillar' for solo role-holders, 'key' for senior staff
- *   linkToInst  - optional name pattern; if matched in the institution
+ *   role        — display title
+ *   importance  — 'pillar' for solo role-holders, 'key' for senior staff
+ *   linkToInst  — optional name pattern; if matched in the institution
  *                 list, the NPC's linkedInstitutionIds gets that inst's id
  */
 export const FACTION_ROLES = {

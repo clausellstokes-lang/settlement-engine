@@ -1,5 +1,5 @@
 /**
- * tests/domain/capacityModel.test.js - Tier 4.4 supply/demand contract.
+ * tests/domain/capacityModel.test.js — Tier 4.4 supply/demand contract.
  *
  * Pins:
  *   - CAPACITY_NAMES catalog stability (9 canonical capacities).
@@ -161,7 +161,7 @@ describe('healing capacity behavior', () => {
       activeConditions: [{ archetype: 'plague', severity: 0.7 }],
     });
     expect(plagued.demand).toBeGreaterThan(baseline.demand);
-    // Supply is unchanged - same institutions, same magic, same factions
+    // Supply is unchanged — same institutions, same magic, same factions
     expect(plagued.supply).toBe(baseline.supply);
     // Plague-tagged demand contributor should appear
     expect(plagued.demandContributors.some(c => /plague/i.test(c.reason))).toBe(true);
@@ -359,7 +359,7 @@ describe('supportedCapacities()', () => {
 
 // ── Phase 19 wiring ────────────────────────────────────────────────────
 
-describe('Phase 19 wiring - explainCapacity + EXPLAINABLE_TYPES + entityCatalog', () => {
+describe('Phase 19 wiring — explainCapacity + EXPLAINABLE_TYPES + entityCatalog', () => {
   it('EXPLAINABLE_TYPES includes "capacity"', () => {
     expect(EXPLAINABLE_TYPES).toContain('capacity');
   });
@@ -424,7 +424,7 @@ describe('Phase 19 wiring - explainCapacity + EXPLAINABLE_TYPES + entityCatalog'
 
 // ── Real-settlement integration ────────────────────────────────────────
 
-describe('deriveAllCapacities() - real generated settlement', () => {
+describe('deriveAllCapacities() — real generated settlement', () => {
   it('produces 9 capacities with valid bands against a city-tier settlement', () => {
     const settlement = generateSettlementPipeline(
       { settType: 'city', culture: 'germanic' },

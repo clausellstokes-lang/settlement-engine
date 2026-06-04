@@ -1,6 +1,6 @@
 import { FS, ELEV } from '../theme.js';
 /**
- * primitives/Card - Shared card chrome.
+ * primitives/Card — Shared card chrome.
  *
  * The current codebase invents a card border + padding + background
  * combination per component. This unifies them so the campaign-state
@@ -13,7 +13,7 @@ import { FS, ELEV } from '../theme.js';
 
 const VARIANTS = {
   default:    { bg: '#fffbf5', border: '#d2bd96', titleColor: '#1c1409' },
-  suggestion: { bg: '#fff7ec', border: '#e0b070', titleColor: '#7a4f0f' },  // soft amber - for AI/onboarding hooks
+  suggestion: { bg: '#fff7ec', border: '#e0b070', titleColor: '#7a4f0f' },  // soft amber — for AI/onboarding hooks
   danger:     { bg: '#fff5f5', border: '#c89a9a', titleColor: '#8b1a1a' },
   info:       { bg: '#f0f4ff', border: '#c0c8e8', titleColor: '#2a3a7a' },
 };

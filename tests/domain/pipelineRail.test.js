@@ -1,5 +1,5 @@
 /**
- * tests/domain/pipelineRail.test.js - Tier 5.5 lean tests.
+ * tests/domain/pipelineRail.test.js — Tier 5.5 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

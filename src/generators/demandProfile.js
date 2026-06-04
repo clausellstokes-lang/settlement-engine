@@ -1,4 +1,4 @@
-// demandProfile.js - Item 17: Faction and culture driven demand
+// demandProfile.js — Item 17: Faction and culture driven demand
 // Each faction category represents a consumer class with distinct import needs.
 // Culture determines which specific goods satisfy those needs.
 // Active supply chains suppress imports that are locally produced.
@@ -9,7 +9,7 @@
 
 const FACTION_DEMAND = {
   government: {
-    // Nobles, councils, administrators - prestige display goods
+    // Nobles, councils, administrators — prestige display goods
     arabic:       [['Spices and rare aromatics', 'Fine silk and brocade', 'Carved ivory and ebony']],
     east_asian:   [['Fine porcelain and lacquerware', 'Silk and embroidered cloth', 'Exotic incense']],
     latin:        [['Fine wine and amphorae', 'Marble and ornamental stone', 'Luxury glassware']],
@@ -23,7 +23,7 @@ const FACTION_DEMAND = {
     mesoamerican: [['Quetzal feathers and jade', 'Fine cacao', 'Obsidian and turquoise work']],
   },
   economy: {
-    // Merchants, craft guilds, rising middle class - quality goods and tools of trade
+    // Merchants, craft guilds, rising middle class — quality goods and tools of trade
     arabic:       [['Dyed cloth and quality textiles', 'Tin and copper ingots', 'Paper and writing materials']],
     east_asian:   [['Quality paper and ink', 'Fine metalwork tools', 'Dyed and printed cloth']],
     latin:        [['Parchment and wax tablets', 'Quality wool cloth', 'Tin and lead']],
@@ -37,7 +37,7 @@ const FACTION_DEMAND = {
     mesoamerican: [['Cacao in bulk', 'Cotton cloth', 'Rubber and copal resin']],
   },
   military: {
-    // Guards, garrisons, mercenaries - weapons, provisions, equipment
+    // Guards, garrisons, mercenaries — weapons, provisions, equipment
     arabic:       [['Cavalry horses and tack', 'Laminar armour components', 'Salted provisions and hardtack']],
     east_asian:   [['Lacquered armour fittings', 'Bowstaves and horn', 'Rice and dried provisions']],
     latin:        [['Lorica segmentata fittings', 'Grain and salted pork', 'Cordage and leather']],
@@ -51,7 +51,7 @@ const FACTION_DEMAND = {
     mesoamerican: [['Obsidian for macuahuitl', 'Cotton armour padding', 'Dried provisions and cacao']],
   },
   religious: {
-    // Clergy, temples, shrines - ritual goods, sacred materials
+    // Clergy, temples, shrines — ritual goods, sacred materials
     arabic:       [['Incense and frankincense', 'Fine prayer rugs and cloth', 'Calligraphy tools and inks']],
     east_asian:   [['Incense and ritual paper', 'Fine lacquerwork for shrines', 'Bronze casting materials']],
     latin:        [['Incense and ritual oil', 'Fine linen for vestments', 'Lead for pipe organs']],
@@ -65,7 +65,7 @@ const FACTION_DEMAND = {
     mesoamerican: [['Copal resin incense', 'Jade and turquoise for ritual', 'Obsidian for sacrifice']],
   },
   magic: {
-    // Arcane orders, hedge wizards, alchemists - exotic reagents and materials
+    // Arcane orders, hedge wizards, alchemists — exotic reagents and materials
     arabic:       [['Exotic minerals and salts', 'Rare earths and pigments', 'Manuscripts and star charts']],
     east_asian:   [['Cinnabar and mercury', 'Rare minerals and crystals', 'Medicinal herbs and fungi']],
     latin:        [['Sulfur and alum', 'Parchment and vellum', 'Rare metals and glass vessels']],
@@ -79,8 +79,8 @@ const FACTION_DEMAND = {
     mesoamerican: [['Obsidian mirrors', 'Rare feathers for ritual', 'Copal and rubber for sealing']],
   },
   criminal: {
-    // Thieves guilds, smugglers, black markets - contraband, easily fenced goods
-    // Culture matters less here - what matters is route access and what can be resold
+    // Thieves guilds, smugglers, black markets — contraband, easily fenced goods
+    // Culture matters less here — what matters is route access and what can be resold
     // Use a single universal set, slightly flavored by culture
     arabic:       [['Undeclared luxury silk', 'Stolen spice shipments', 'Forged bills of trade']],
     east_asian:   [['Smuggled jade and gems', 'Opium and exotic narcotics', 'Forged imperial seals']],
@@ -124,7 +124,7 @@ const TIER_DEMAND_BUDGET = {
 const DEMAND_POWER_THRESHOLD = 8;
 
 /**
- * computeDemandImports - main entry point.
+ * computeDemandImports — main entry point.
  * Returns culture × faction driven import labels, suppressed by active chains.
  *
  * @param {Array}  factions      - powerStructure.factions

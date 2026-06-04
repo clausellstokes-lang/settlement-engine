@@ -1,5 +1,5 @@
 /**
- * SummaryPage - chapter 00. The "elevator pitch" page.
+ * SummaryPage — chapter 00. The "elevator pitch" page.
  *
  * Mirrors the on-screen Summary tab, which had no PDF counterpart in the
  * previous build. Densely packed: identity strip → crisis banner → arrival
@@ -21,7 +21,7 @@ import { cap, label } from '../lib/format.js';
 export function SummaryPage({ settlement, narrativeMode, vm }) {
   const su = vm.summary;
   const id = su.identity;
-  const populationFmt = id.population ? id.population.toLocaleString() : '-';
+  const populationFmt = id.population ? id.population.toLocaleString() : '—';
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -35,11 +35,11 @@ export function SummaryPage({ settlement, narrativeMode, vm }) {
       {/* ── Identity strip ─────────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'TIER',       value: id.tier || '-' },
+          { label: 'TIER',       value: id.tier || '—' },
           { label: 'POPULATION', value: populationFmt },
-          { label: 'RACE',       value: cap(id.dominantRace) || '-' },
-          { label: 'TERRAIN',    value: cap(id.terrain) || '-' },
-          { label: 'GOVERNANCE', value: shortGovernance(su.situation.power) || '-' },
+          { label: 'RACE',       value: cap(id.dominantRace) || '—' },
+          { label: 'TERRAIN',    value: cap(id.terrain) || '—' },
+          { label: 'GOVERNANCE', value: shortGovernance(su.situation.power) || '—' },
         ]}
       />
 

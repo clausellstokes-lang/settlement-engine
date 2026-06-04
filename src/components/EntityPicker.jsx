@@ -1,5 +1,5 @@
 /**
- * EntityPicker - multi-select chip input that resolves refIds across the
+ * EntityPicker — multi-select chip input that resolves refIds across the
  * unified prebuilt + custom registry.
  *
  * Used by the Custom Content forms in CompendiumPanel to wire up dependency
@@ -33,7 +33,7 @@ export default function EntityPicker({
   value,
   onChange,
   single = false,
-  placeholder = 'Search to add...',
+  placeholder = 'Search to add…',
   maxSuggestions = 12,
 }) {
   const customContent = useStore(s => s.customContent);

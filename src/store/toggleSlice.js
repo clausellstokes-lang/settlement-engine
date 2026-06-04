@@ -1,5 +1,5 @@
 /**
- * toggleSlice - Institution, category, service, and goods toggles.
+ * toggleSlice — Institution, category, service, and goods toggles.
  *
  * Key formats:
  *   Institution: "tier::category::name"  →  { allow, require, forceExclude }

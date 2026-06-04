@@ -1,5 +1,5 @@
 /**
- * AIPromptButton.jsx - P137 / HT-4: copy this dossier as an AI prompt.
+ * AIPromptButton.jsx — P137 / HT-4: copy this dossier as an AI prompt.
  *
  * Power-user surface. The user has a generated dossier in front of
  * them; they want to feed it into ChatGPT/Claude for a tangential
@@ -13,7 +13,7 @@
  *
  * The prompt body is built from the existing domain helpers
  * (buildAiGroundingPayload + assemblePromptSections) so the
- * exported text matches what our backend would send - no second
+ * exported text matches what our backend would send — no second
  * format to keep in sync.
  */
 
@@ -35,7 +35,7 @@ const sans = '"Nunito", system-ui, sans-serif';
 function buildPromptText(settlement) {
   const payload = buildAiGroundingPayload(settlement);
   const sections = assemblePromptSections(payload);
-  // assemblePromptSections returns an ordered array - flatten with
+  // assemblePromptSections returns an ordered array — flatten with
   // double-newline so the exported prompt reads as discrete sections.
   return Array.isArray(sections)
     ? sections.map(s => typeof s === 'string' ? s : (s.body || '')).filter(Boolean).join('\n\n')
@@ -48,7 +48,7 @@ export default function AIPromptButton({ settlement }) {
   const tier = useStore(s => s.auth.tier);
 
   if (!settlement) return null;
-  // Reserved for signed-in users - anon users would hit a wall trying
+  // Reserved for signed-in users — anon users would hit a wall trying
   // to feed this into a paid AI, and the export reveals the structured
   // grounding which is one of the moat assets. Anon users see nothing.
   if (tier === 'anon') return null;
@@ -70,7 +70,7 @@ export default function AIPromptButton({ settlement }) {
         });
       } catch { /* silent */ }
       // Reset the success state after 2s so the icon goes back to
-      // clipboard - user can copy again if they made a tweak.
+      // clipboard — user can copy again if they made a tweak.
       setTimeout(() => setCopied(false), 2000);
     } catch (e) {
       setError(e?.message || 'Copy failed');

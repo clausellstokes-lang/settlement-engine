@@ -1,5 +1,5 @@
 /**
- * tests/domain/dailyLife.test.js - Tier 4.19 daily-life prose contract.
+ * tests/domain/dailyLife.test.js — Tier 4.19 daily-life prose contract.
  *
  * Pins:
  *   - DAILY_LIFE_SLOTS catalog stability (8 canonical slots).
@@ -342,7 +342,7 @@ describe('supportedDailyLifeSlots()', () => {
 
 // ── Real-settlement integration ────────────────────────────────────────
 
-describe('deriveDailyLife() - real generated settlement', () => {
+describe('deriveDailyLife() — real generated settlement', () => {
   it('produces 8 slots with non-empty text against a city-tier settlement', () => {
     const settlement = generateSettlementPipeline(
       { settType: 'city', culture: 'germanic' },

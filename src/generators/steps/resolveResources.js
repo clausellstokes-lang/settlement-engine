@@ -1,10 +1,10 @@
 /**
  * Step 2: resolveResources
  *
- * Resolves nearby resources from config - random terrain-compatible selection
+ * Resolves nearby resources from config — random terrain-compatible selection
  * or manual state map with tier-weighted depletion.
  *
- * Extracted from generateSettlement.js lines 296-386.
+ * Extracted from generateSettlement.js lines 296–386.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -115,7 +115,7 @@ registerStep('resolveResources', {
   effectiveConfig.nearbyResources = nearbyResources;
   effectiveConfig.nearbyResourcesDepleted = nearbyResourcesDepleted;
 
-  // Tier 2.1 - emit one trace per nearby resource so downstream
+  // Tier 2.1 — emit one trace per nearby resource so downstream
   // consumers (assembleInstitutions reads these to bias institution
   // selection) and human readers can answer "why is this a fishing
   // town?" / "why does this town have a mine?"

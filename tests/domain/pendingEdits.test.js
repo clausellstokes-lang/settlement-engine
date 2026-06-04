@@ -1,5 +1,5 @@
 /**
- * pendingEdits.test.js - Contract over the edit queue + cascade preview.
+ * pendingEdits.test.js — Contract over the edit queue + cascade preview.
  *
  * The pendingEdits module is the substrate for the worldbuilder editor
  * revolution (E-1 / E-2). The UI layer changes; the contract here
@@ -13,7 +13,7 @@ import {
   activeEdits, hasPending, previewCascade, EDIT_KINDS,
 } from '../../src/domain/pendingEdits.js';
 
-describe('pendingEdits - construction', () => {
+describe('pendingEdits — construction', () => {
   it('builds a frozen edit with id + kind + payload + ts', () => {
     const e = buildEdit('rename-npc', { npcId: 'npc1', newName: 'Velda' }, 7);
     expect(e).toMatchObject({
@@ -38,7 +38,7 @@ describe('pendingEdits - construction', () => {
   });
 });
 
-describe('pendingEdits - queue ops', () => {
+describe('pendingEdits — queue ops', () => {
   it('append returns a new queue without mutating the original', () => {
     const e1 = buildEdit('rename-npc', { npcId: 'a', newName: 'A' }, 1);
     const e2 = buildEdit('add-institution', { institutionId: 'i1' }, 2);
@@ -86,7 +86,7 @@ describe('pendingEdits - queue ops', () => {
   });
 });
 
-describe('pendingEdits - cascade preview', () => {
+describe('pendingEdits — cascade preview', () => {
   const baseSettlement = {
     name: 'Hightower',
     npcs: [{ name: 'A' }, { name: 'B' }],

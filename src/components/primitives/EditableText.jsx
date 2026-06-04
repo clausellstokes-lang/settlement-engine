@@ -1,9 +1,9 @@
 /**
- * primitives/EditableText - click-to-edit prose primitive.
+ * primitives/EditableText — click-to-edit prose primitive.
  *
  * Tier 5.4 of the roadmap. Premium users can hand-write any
  * registered prose field (NPC secret, plot hook, history beat, etc.)
- * in place. The primitive is purely presentational - it owns the
+ * in place. The primitive is purely presentational — it owns the
  * draft state and the keyboard/blur handling, but the parent owns
  * persistence (onSave) and revert (onRevert) and decides which
  * fields to render as editable.
@@ -42,7 +42,7 @@ const COLORS = Object.freeze({
 
 export function EditableText({
   value,
-  originalValue,    // string | null - the pre-edit value (for Revert tooltip)
+  originalValue,    // string | null — the pre-edit value (for Revert tooltip)
   isEdited = false,
   editMode = false,
   multiline = true,
@@ -51,7 +51,7 @@ export function EditableText({
   onRevert,
   style = {},
   textStyle = {},
-  // a11y label for screen readers - pass the field name (e.g. "NPC secret")
+  // a11y label for screen readers — pass the field name (e.g. "NPC secret")
   ariaLabel,
 }) {
   const [editing, setEditing] = useState(false);
@@ -60,7 +60,7 @@ export function EditableText({
 
   // The draft state is initialized to the live `value` on every
   // entry into edit mode (see `enterEdit` below), so a sync effect
-  // would be redundant - and the React 19 set-state-in-effect lint
+  // would be redundant — and the React 19 set-state-in-effect lint
   // rule rightly flags an `if (!editing) setDraft(value)` effect as
   // a cascading-render risk. Read mode reads `value` directly, so
   // external updates surface immediately without any sync state.
@@ -267,7 +267,7 @@ function autoGrow(el) {
 
 function truncate(s, n) {
   if (typeof s !== 'string') return '';
-  return s.length > n ? `${s.slice(0, n - 1)}...` : s;
+  return s.length > n ? `${s.slice(0, n - 1)}…` : s;
 }
 
 export default EditableText;

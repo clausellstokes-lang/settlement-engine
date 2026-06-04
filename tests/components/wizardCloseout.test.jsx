@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * wizardCloseout.test.jsx - P145 / W-2 component contract.
+ * wizardCloseout.test.jsx — P145 / W-2 component contract.
  *
  * The pure builder is exercised in wizardCloseout.test.js (node). This
  * file pins the thin presentational shell: store wiring and that the
@@ -27,7 +27,7 @@ vi.mock('../../src/store/index.js', () => {
 import WizardCloseout from '../../src/components/generate/WizardCloseout.jsx';
 import { useStore } from '../../src/store/index.js';
 
-describe('WizardCloseout - W-2 close-out card', () => {
+describe('WizardCloseout — W-2 close-out card', () => {
   beforeEach(() => {
     useStore.__set({
       config: {},
@@ -67,7 +67,7 @@ describe('WizardCloseout - W-2 close-out card', () => {
 
   it('summarizes "no constraints" when nothing is forced/excluded', () => {
     render(<WizardCloseout />);
-    expect(screen.getByText('No manual constraints - fully procedural.')).toBeTruthy();
+    expect(screen.getByText('No manual constraints — fully procedural.')).toBeTruthy();
   });
 
   it('summarizes forced/excluded counts when constraints exist', () => {

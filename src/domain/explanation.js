@@ -1,5 +1,5 @@
 /**
- * domain/explanation.js - Unified "why does this exist?" causal lookup.
+ * domain/explanation.js — Unified "why does this exist?" causal lookup.
  *
  * Tier 2.6 of the roadmap. Every other phase has produced structured
  * facts about parts of the settlement (faction profiles, supply chains,
@@ -13,7 +13,7 @@
  * future PDF detail callouts, the public compendium SEO pages) can
  * pass any entity reference and receive a structured envelope with the
  * causal claim, the inputs that produced it, the downstream effects it
- * supports, and the consequences of removing it - all sourced from
+ * supports, and the consequences of removing it — all sourced from
  * existing derivations, no new generator work.
  *
  * Pure functions only. No imports from src/lib.
@@ -26,7 +26,7 @@
  *   - Tier 4.17 (counterfactual tool) becomes "preview an event, run
  *     this explainer against the entity at risk, render the
  *     ifRemoved branch."
- *   - Tier 8.7 (public compendium) - every entity gets a stable URL
+ *   - Tier 8.7 (public compendium) — every entity gets a stable URL
  *     and a structured detail surface.
  */
 
@@ -142,7 +142,7 @@ function envelope({
 // ── Trace bridges ────────────────────────────────────────────────────────
 // Reach into the Phase 7 trace layer to surface "why was this entity
 // created/preserved/affected?" The trace shape already encodes the
-// {source, effect, reason} causes - we just need to pull the right
+// {source, effect, reason} causes — we just need to pull the right
 // traces and surface them.
 
 /**
@@ -235,7 +235,7 @@ export function explainInstitution(settlement, institutionId) {
     ifRemoved.consequences.push(`${p.name} loses an institutional lever; ${p.archetype} power weakens.`);
   }
   if (ifRemoved.consequences.length === 0) {
-    ifRemoved.consequences.push(`No direct structural consequence detected - ${inst.name} may serve indirect roles in trade or daily life.`);
+    ifRemoved.consequences.push(`No direct structural consequence detected — ${inst.name} may serve indirect roles in trade or daily life.`);
   }
 
   const profile = {
@@ -265,7 +265,7 @@ export function explainInstitution(settlement, institutionId) {
   });
 }
 
-/** Explain a faction - wants/fears/leverage + dependencies + ifRemoved. */
+/** Explain a faction — wants/fears/leverage + dependencies + ifRemoved. */
 export function explainFaction(settlement, factionId) {
   if (!settlement || !factionId) return null;
   const factions = settlement.powerStructure?.factions || [];
@@ -337,7 +337,7 @@ export function explainFaction(settlement, factionId) {
   });
 }
 
-/** Explain an NPC - Phase 13 profile + consequenceIfRemoved + faction link. */
+/** Explain an NPC — Phase 13 profile + consequenceIfRemoved + faction link. */
 export function explainNpc(settlement, npcId) {
   if (!settlement || !npcId) return null;
   const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
@@ -401,7 +401,7 @@ export function explainNpc(settlement, npcId) {
   });
 }
 
-/** Explain a supply chain - Phase 10 controller/dependencies/failureConsequences. */
+/** Explain a supply chain — Phase 10 controller/dependencies/failureConsequences. */
 export function explainSupplyChain(settlement, chainId) {
   if (!settlement || !chainId) return null;
   const all = deriveAllSupplyChainStates(settlement);
@@ -464,7 +464,7 @@ export function explainSupplyChain(settlement, chainId) {
   });
 }
 
-/** Explain a hook - Phase 11 origin/severity/ifIgnored/possibleResolutions. */
+/** Explain a hook — Phase 11 origin/severity/ifIgnored/possibleResolutions. */
 export function explainHook(settlement, hookId) {
   if (!settlement || !hookId) return null;
   const all = deriveAllStructuredHooks(settlement);
@@ -510,7 +510,7 @@ export function explainHook(settlement, hookId) {
   });
 }
 
-/** Explain an active condition - Phase 16 archetype/severity/affectedSystems. */
+/** Explain an active condition — Phase 16 archetype/severity/affectedSystems. */
 export function explainCondition(settlement, conditionId) {
   if (!settlement || !conditionId) return null;
   const cond = findActiveCondition(settlement, conditionId);
@@ -565,7 +565,7 @@ export function explainCondition(settlement, conditionId) {
   });
 }
 
-/** Explain an escalation clock - Phase 11 trigger + stages. */
+/** Explain an escalation clock — Phase 11 trigger + stages. */
 export function explainEscalationClock(settlement, clockId) {
   if (!settlement || !clockId) return null;
   const all = deriveEscalationClocks(settlement);
@@ -608,7 +608,7 @@ export function explainEscalationClock(settlement, clockId) {
   });
 }
 
-/** Explain a history beat - Phase 12. */
+/** Explain a history beat — Phase 12. */
 export function explainHistoryBeat(settlement, beatKey) {
   if (!settlement || !beatKey) return null;
   const beats = deriveHistoryBeats(settlement);
@@ -642,7 +642,7 @@ export function explainHistoryBeat(settlement, beatKey) {
   });
 }
 
-/** Explain a substrate variable - Phase 17 contributors are the causes. */
+/** Explain a substrate variable — Phase 17 contributors are the causes. */
 export function explainSystemVariable(settlement, variable) {
   if (!settlement || !variable) return null;
   const name = variable.startsWith('var.') ? variable.slice('var.'.length) : variable;
@@ -660,7 +660,7 @@ export function explainSystemVariable(settlement, variable) {
   }));
 
   // Downstream effects: which subsystems read this variable? We can
-  // declare a few canonical reads - the substrate doesn't yet track
+  // declare a few canonical reads — the substrate doesn't yet track
   // these explicitly, but Phase 17 documented the inputs each
   // variable consumes.
   const downstreamEffects = [];
@@ -688,7 +688,7 @@ export function explainSystemVariable(settlement, variable) {
 }
 
 /**
- * Explain a structured threat - Phase 20 (Tier 4.6). Threats are
+ * Explain a structured threat — Phase 20 (Tier 4.6). Threats are
  * derived from existing settlement surfaces (config.monsterThreat,
  * defenseProfile.scores, stressors, neighbours, active conditions),
  * so the explainer surfaces the original surface as a cause.
@@ -775,7 +775,7 @@ export function explainThreat(settlement, threatId) {
 }
 
 /**
- * Explain a capacity - Phase 21 (Tier 4.4). Supply + demand are the
+ * Explain a capacity — Phase 21 (Tier 4.4). Supply + demand are the
  * two competing pressures; bands derive from supply/demand ratio.
  */
 export function explainCapacity(settlement, capacityRef) {
@@ -870,7 +870,7 @@ export function explainCapacity(settlement, capacityRef) {
 }
 
 /**
- * Explain a district - Phase 29 (Tier 4.9).
+ * Explain a district — Phase 29 (Tier 4.9).
  */
 export function explainDistrict(settlement, districtId) {
   if (!settlement || !districtId) return null;
@@ -902,7 +902,7 @@ export function explainDistrict(settlement, districtId) {
 
   return envelope({
     type: 'district', id: district.id, label: district.name,
-    causalReason: `${district.name} is a ${district.category} district - ${district.wealth}, ${district.safety}.`,
+    causalReason: `${district.name} is a ${district.category} district — ${district.wealth}, ${district.safety}.`,
     causes,
     downstreamEffects,
     ifRemoved: {
@@ -934,7 +934,7 @@ export function explainDistrict(settlement, districtId) {
 /**
  * The unified entry point. Accepts either:
  *   explainEntity(settlement, { type, id })
- *   explainEntity(settlement, id)   - type inferred from prefix
+ *   explainEntity(settlement, id)   — type inferred from prefix
  *
  * Returns null for missing settlement; an empty envelope for unknown
  * entity types or missing entities.
@@ -1035,7 +1035,7 @@ export function entityCatalog(settlement) {
     out.push({ type: 'threat', id: t.id, label: t.label });
   }
 
-  // Capacities (Phase 21) - derived, always 9
+  // Capacities (Phase 21) — derived, always 9
   for (const name of CAPACITY_NAMES) {
     out.push({ type: 'capacity', id: `capacity.${name}`, label: name.replace(/_/g, ' ') });
   }

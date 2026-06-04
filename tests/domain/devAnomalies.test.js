@@ -1,5 +1,5 @@
 /**
- * tests/domain/devAnomalies.test.js - Tier 3.11 lean tests.
+ * tests/domain/devAnomalies.test.js — Tier 3.11 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

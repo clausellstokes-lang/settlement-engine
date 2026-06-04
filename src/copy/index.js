@@ -1,9 +1,9 @@
 /**
- * copy/index.js - Single entry point for user-facing strings.
+ * copy/index.js — Single entry point for user-facing strings.
  *
  * Components call `t('hero.title')` instead of inlining literals.
  * Switching tone, A/B-testing variants, or adding a new locale all
- * become file-level changes here - components don't move.
+ * become file-level changes here — components don't move.
  *
  * Usage:
  *   import { t } from '@/copy';
@@ -26,7 +26,7 @@ import { en } from './en.js';
 const ACTIVE = en;
 
 // Resolve a dotted key path against a nested object. Returns undefined
-// if any segment is missing. Kept tiny on purpose - no lodash.
+// if any segment is missing. Kept tiny on purpose — no lodash.
 function resolve(obj, dottedKey) {
   const parts = dottedKey.split('.');
   let cur = obj;
@@ -51,7 +51,7 @@ function interpolate(str, vars) {
  * placeholders.
  *
  *   t('common.save')                       // "Save"
- *   t('ai.narrative.button', { cost: 3 })  // "Generate narrative - 3 credits"
+ *   t('ai.narrative.button', { cost: 3 })  // "Generate narrative — 3 credits"
  */
 export function t(key, vars) {
   const raw = resolve(ACTIVE, key);

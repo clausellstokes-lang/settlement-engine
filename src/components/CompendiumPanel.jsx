@@ -8,7 +8,7 @@ import DeleteConfirmation from './DeleteConfirmation';
 import {getInstitutionalCatalog, getFullCatalogWithTierMeta} from '../generators/engine';
 import EntityPicker from './EntityPicker.jsx';
 import { buildRegistry } from '../lib/customRegistry.js';
-// P139 - REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
+// P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
 // global-search index (CP-4) and these tabs render from one source of truth.
 import { ARCHETYPES, REL_TYPES } from '../domain/compendium/catalogData.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
@@ -54,7 +54,7 @@ const TABS = [
   { id:'institutions',label:'Institutions',       Icon: Building2 },
 ];
 
-// P127 / CP-3 - Anchor → tab map. HelpPopover and external deep-links
+// P127 / CP-3 — Anchor → tab map. HelpPopover and external deep-links
 // land at URL hashes like `#trade-routes` or `#magic`. The hash maps
 // to a Compendium tab; once that tab mounts, the matching DOM `id`
 // inside the tab is scrolled into view by the effect in
@@ -78,7 +78,7 @@ const ANCHOR_TO_TAB = Object.freeze({
 });
 
 // REL_TYPES + ARCHETYPES are imported from '../domain/compendium/catalogData.js'
-// (see import block above). CAT_COLORS stays here - it's display-only.
+// (see import block above). CAT_COLORS stays here — it's display-only.
 const CAT_COLORS = { Economic:'#a0762a', Military:'#8b1a1a', Religious:'#1a4a2a', Magic:'#3a1a7a', Criminal:'#4a1a4a', Balanced:'#1a3a7a' };
 
 // ── Tab content ─────────────────────────────────────────────────────────────
@@ -111,7 +111,7 @@ function TiersTab({ _search='' }) {
 function EconomyTab() {
   return <>
     <div id="economy" />
-    <Card title="Prosperity Tiers" accent={GOLD}>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial - an output.</Card>
+    <Card title="Prosperity Tiers" accent={GOLD}>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial — an output.</Card>
     <Card title="Priority Sliders" accent='#a0762a'>Sliders shift institutional probability, not guarantee it. They interact: high Religion + low Magic triggers heresy suppression.</Card>
     <Card title="Exports & Imports" accent='#1a5a28'>Exports are surplus production. Imports are gaps. Heavy import dependency creates trade vulnerability.</Card>
     <Card title="Supply Chains" accent='#1a3a7a'>Linked production sequences. A broken input degrades the output. Magic can substitute for some missing material inputs.</Card>
@@ -169,7 +169,7 @@ function StressTab({ search='' }) {
     {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.description||s.desc||'').toLowerCase().includes(search)).map(s => (
       <div key={s.label||s.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
         <div style={{ fontSize:FS.md, fontWeight:700, color:swatch.danger, marginBottom:3 }}>{s.label}</div>
-        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||'-'}</div>
+        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||'—'}</div>
       </div>))}
   </>;
 }
@@ -423,7 +423,7 @@ function ReadOnlyCustomContentList({ search }) {
 }
 
 /**
- * DependencySummary - read-only inline display of dependency refs on a saved
+ * DependencySummary — read-only inline display of dependency refs on a saved
  * custom item card. Resolves refIds via the registry and surfaces missing
  * targets so the user knows when a delete elsewhere created a dangling link.
  */
@@ -486,7 +486,7 @@ function DependencySummary({ deps, item }) {
           marginTop:4, fontSize:FS.xxs, color:swatch.danger,
           fontStyle:'italic',
         }}>
-          {totalMissing} dangling reference{totalMissing===1?'':'s'} - edit this item to fix.
+          {totalMissing} dangling reference{totalMissing===1?'':'s'} — edit this item to fix.
         </div>
       )}
     </div>
@@ -494,7 +494,7 @@ function DependencySummary({ deps, item }) {
 }
 
 /**
- * DependenciesSection - collapsible group of EntityPicker rows for the
+ * DependenciesSection — collapsible group of EntityPicker rows for the
  * dependency fields of a custom-content category. Each picker stores
  * refId arrays (or a single refId for `single:true`) on the draft.
  */
@@ -545,7 +545,7 @@ function DependenciesSection({ deps, draft, setDraft }) {
                 single={!!dep.single}
                 value={draft[dep.key] ?? (dep.single ? '' : [])}
                 onChange={(next) => setDraft(d => ({ ...d, [dep.key]: next }))}
-                placeholder={`Add ${dep.category}...`}
+                placeholder={`Add ${dep.category}…`}
               />
               {dep.hint && (
                 <div style={{
@@ -681,7 +681,7 @@ function CustomContentManager({ search }) {
         ))}
       </div>
 
-      {/* Dependencies - collapsible. Categories without `dependencies` skip this. */}
+      {/* Dependencies — collapsible. Categories without `dependencies` skip this. */}
       {Array.isArray(catDef.dependencies) && catDef.dependencies.length > 0 && (
         <DependenciesSection
           deps={catDef.dependencies}
@@ -777,25 +777,25 @@ function CustomContentManager({ search }) {
 
 // ── Main component ──────────────────────────────────────────────────────────
 
-// Tier 8.7 - per-tab SEO metadata. Each tab maps to a discrete
+// Tier 8.7 — per-tab SEO metadata. Each tab maps to a discrete
 // document.title + meta description so search engines index each
 // compendium section with its own snippet rather than the generic
 // SettlementForge title. Standalone mode (the public route) wires
 // this; embedded mode leaves the page title alone.
 const TAB_META = Object.freeze({
-  tiers:        { title: 'Settlement tiers & trade routes - SettlementForge Compendium',
+  tiers:        { title: 'Settlement tiers & trade routes — SettlementForge Compendium',
                   desc: 'Reference for thorp through metropolis tiers, trade route effects (road / crossroads / port / river / mountain pass / isolated), and monster threat levels in SettlementForge.' },
-  economy:      { title: 'Economy reference - SettlementForge Compendium',
+  economy:      { title: 'Economy reference — SettlementForge Compendium',
                   desc: 'Prosperity tiers, priority sliders, exports/imports, supply chains, viability scoring. The simulator\'s economic model, documented.' },
-  power:        { title: 'Power & faction archetypes - SettlementForge Compendium',
+  power:        { title: 'Power & faction archetypes — SettlementForge Compendium',
                   desc: 'Forty-plus settlement archetypes (Merchant Republic, Mage Theocracy, Frontier Outpost, Crusader Synthesis) keyed to slider + threat conditions.' },
-  arcane:       { title: 'Magic & religion reference - SettlementForge Compendium',
+  arcane:       { title: 'Magic & religion reference — SettlementForge Compendium',
                   desc: 'How magic and religious institutions interact in the simulator: heresy suppression, arcane economy, theocratic governance, sacred goods trade.' },
-  stress:       { title: 'Stress conditions - SettlementForge Compendium',
+  stress:       { title: 'Stress conditions — SettlementForge Compendium',
                   desc: 'Famine, siege, plague, political fracture, monster pressure: how each stress shifts institutions, factions, and supply chains.' },
-  neighbour:    { title: 'Neighbour System reference - SettlementForge Compendium',
-                  desc: 'Trade partner, ally, patron, client, rival, cold war, hostile - how linked settlements modify each other\'s economy, military, and criminal presence.' },
-  institutions: { title: 'Institutional catalog - SettlementForge Compendium',
+  neighbour:    { title: 'Neighbour System reference — SettlementForge Compendium',
+                  desc: 'Trade partner, ally, patron, client, rival, cold war, hostile — how linked settlements modify each other\'s economy, military, and criminal presence.' },
+  institutions: { title: 'Institutional catalog — SettlementForge Compendium',
                   desc: 'Every institution the simulator can generate, the conditions that select it, what it implies for the settlement, and how it interacts with others.' },
 });
 
@@ -804,7 +804,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
   // Honor a ?tab=foo deep-link on mount so search-engine landing pages
   // open the right section. Falls back to 'tiers' when missing/invalid.
   //
-  // P127 / CP-3 - Also honor URL hash anchors (#trade-routes etc.) so
+  // P127 / CP-3 — Also honor URL hash anchors (#trade-routes etc.) so
   // the HelpPopover's "Read full reference →" links can deep-link
   // into a specific section. We map the hash to the matching tab via
   // ANCHOR_TO_TAB below; if the hash doesn't match a known anchor, we
@@ -821,7 +821,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
   })();
   const [activeTab, setActiveTab] = useState(initialTab);
 
-  // P127 / CP-3 - Scroll-to-anchor on mount when a hash points into a
+  // P127 / CP-3 — Scroll-to-anchor on mount when a hash points into a
   // specific section. The DOM IDs are stamped onto each section by the
   // tab renderers; here we just trigger the scroll once content is in
   // the DOM. Re-runs on tab change so cross-tab anchors work.
@@ -841,7 +841,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
   const [search, setSearch] = useState('');
   const customContentCount = useStore(s => s.getCustomContentCount());
 
-  // Tier 8.7 - swap document.title + meta description per tab. Only
+  // Tier 8.7 — swap document.title + meta description per tab. Only
   // applies in standalone mode (i.e. when the compendium is the page,
   // not an in-app panel); embedded use cases keep their host title.
   useEffect(() => {
@@ -878,7 +878,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
     }
   };
 
-  // P139 / CP-4 - global-search result → navigate. Switch to the catalog,
+  // P139 / CP-4 — global-search result → navigate. Switch to the catalog,
   // activate the owning tab, pre-filter that tab's local search to the term,
   // then scroll the section anchor into view (works same-tab or cross-tab).
   const handleGlobalSelect = (entry) => {
@@ -896,7 +896,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
     }, 140);
   };
 
-  // P139 / CP-3 - content width. Embedded panels are narrow, so a fixed
+  // P139 / CP-3 — content width. Embedded panels are narrow, so a fixed
   // reading cap is fine. On the standalone page we frame the whole panel
   // at PAGE_MAX (below); inside it, the grid tabs (Power, Institutions)
   // fill the frame so they flow into more columns, while the prose/row
@@ -923,7 +923,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
 
       {mode === 'catalog' ? (
         <>
-          {/* P139 / CP-4 - global type-ahead search across every section. */}
+          {/* P139 / CP-4 — global type-ahead search across every section. */}
           <CompendiumGlobalSearch onSelect={handleGlobalSelect} />
           {/* Tab bar + search */}
           <div style={{ background:PARCH, borderBottom:`1px solid ${BOR}` }}>

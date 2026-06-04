@@ -1,12 +1,12 @@
 /**
- * NPCQuickRef - chapter 03. The "look it up fast" page.
+ * NPCQuickRef — chapter 03. The "look it up fast" page.
  *
  * Every named NPC in the settlement, listed in a compressed two-column table
  * with name / title / faction / power. When a player asks "who's the priest at
  * the temple?" the DM can scan one page rather than flipping through detailed
  * sheets. The full-sheet treatment lives in the Notable NPCs chapter.
  *
- * Editable: nothing - this page is a stable index. Edits live on the detailed
+ * Editable: nothing — this page is a stable index. Edits live on the detailed
  * sheets in chapter 04.
  */
 import { View, Text } from '@react-pdf/renderer';

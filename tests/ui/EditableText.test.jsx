@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/EditableText.test.jsx - Tier 5.4 primitive coverage.
+ * tests/ui/EditableText.test.jsx — Tier 5.4 primitive coverage.
  *
  * The EditableText primitive owns the click-to-edit lifecycle the
  * dossier's per-field edit UI depends on. These tests verify:
@@ -20,7 +20,7 @@ import { EditableText, EditedBadge } from '../../src/components/primitives/Edita
 
 afterEach(cleanup);
 
-describe('EditableText - read mode', () => {
+describe('EditableText — read mode', () => {
   test('renders the value as plain text when not in edit mode', () => {
     render(<EditableText value="Hello world" />);
     expect(screen.getByText('Hello world')).toBeTruthy();
@@ -30,7 +30,7 @@ describe('EditableText - read mode', () => {
     const onSave = vi.fn();
     render(<EditableText value="Hello" editMode={false} onSave={onSave} />);
     fireEvent.click(screen.getByText('Hello'));
-    // Still in read mode - no textarea present.
+    // Still in read mode — no textarea present.
     expect(document.querySelector('textarea')).toBeNull();
   });
 
@@ -45,7 +45,7 @@ describe('EditableText - read mode', () => {
   });
 });
 
-describe('EditableText - entering edit mode', () => {
+describe('EditableText — entering edit mode', () => {
   test('clicking text opens an editor when editMode=true', () => {
     render(<EditableText value="Hello" editMode />);
     fireEvent.click(screen.getByText('Hello'));
@@ -81,7 +81,7 @@ describe('EditableText - entering edit mode', () => {
   });
 });
 
-describe('EditableText - commit + cancel', () => {
+describe('EditableText — commit + cancel', () => {
   test('Enter commits the draft via onSave', () => {
     const onSave = vi.fn();
     render(<EditableText value="Old" editMode onSave={onSave} />);
@@ -146,7 +146,7 @@ describe('EditableText - commit + cancel', () => {
   });
 });
 
-describe('EditableText - Revert affordance', () => {
+describe('EditableText — Revert affordance', () => {
   test('Revert button is visible in edit mode when isEdited=true', () => {
     render(
       <EditableText
@@ -197,7 +197,7 @@ describe('EditableText - Revert affordance', () => {
   });
 });
 
-describe('EditableText - external value sync', () => {
+describe('EditableText — external value sync', () => {
   test('external value change updates the read-mode display', () => {
     const { rerender } = render(<EditableText value="v1" editMode={false} />);
     expect(screen.getByText('v1')).toBeTruthy();
@@ -211,13 +211,13 @@ describe('EditableText - external value sync', () => {
     const ta = document.querySelector('textarea');
     fireEvent.change(ta, { target: { value: 'draft in progress' } });
 
-    // External change while editing - should NOT clobber the draft.
+    // External change while editing — should NOT clobber the draft.
     rerender(<EditableText value="v2-external" editMode />);
     expect(document.querySelector('textarea').value).toBe('draft in progress');
   });
 });
 
-describe('EditableText - accessibility', () => {
+describe('EditableText — accessibility', () => {
   test('ariaLabel propagates to the read-mode element', () => {
     render(<EditableText value="Hello" editMode ariaLabel="NPC secret" />);
     expect(screen.getByLabelText('NPC secret')).toBeTruthy();

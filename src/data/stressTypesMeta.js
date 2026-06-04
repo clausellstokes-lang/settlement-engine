@@ -1,5 +1,5 @@
 /**
- * stressTypesMeta.js - Pure-data metadata for every stressor type.
+ * stressTypesMeta.js — Pure-data metadata for every stressor type.
  *
  * Why this file exists: `stressTypes.js` contains the full STRESS_TYPE_MAP
  * with runtime closures that capture `_rng` from `generators/rngContext.js`.
@@ -8,7 +8,7 @@
  * `customRegistry` only needs three string fields per stressor (label,
  * historyColour, viabilityNote) to enumerate prebuilt stressors for the
  * Compendium UI. By keeping those here in pure-data form, customRegistry
- * - and through it the store's dependencyEngine wiring at app boot -
+ * — and through it the store's dependencyEngine wiring at app boot —
  * avoids ever loading the generator chunk on first paint.
  *
  * Keep this in sync with stressTypes.js: adding a stressor there requires
@@ -55,7 +55,7 @@ export const STRESS_TYPE_META = {
   infiltrated: {
     label: 'Infiltrated',
     historyColour: 'political',
-    viabilityNote: 'No economic impact yet. The infiltration is strategic, not extractive - so far.',
+    viabilityNote: 'No economic impact yet. The infiltration is strategic, not extractive — so far.',
   },
   plague_onset: {
     label: 'Disease Outbreak',

@@ -1,5 +1,5 @@
 /**
- * tests/domain/districtProfile.test.js - Tier 4.9 lean tests.
+ * tests/domain/districtProfile.test.js — Tier 4.9 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

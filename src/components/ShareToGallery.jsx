@@ -1,5 +1,5 @@
 /**
- * ShareToGallery.jsx - Publish / unpublish a saved settlement.
+ * ShareToGallery.jsx — Publish / unpublish a saved settlement.
  *
  * Mounts in the dossier toolbar for owned, persisted settlements. When
  * the dossier hasn't been saved yet, the button shows a soft-disabled
@@ -11,7 +11,7 @@
  *   - Hidden in readOnly mode (PublicDossierView, etc.).
  *
  * The slug + is_public state is round-tripped to the server via the
- * helpers in src/lib/gallery.js - this component owns no truth.
+ * helpers in src/lib/gallery.js — this component owns no truth.
  */
 
 import { useMemo, useState } from 'react';
@@ -120,7 +120,7 @@ export default function ShareToGallery({
       // Best-effort: update the cached saved-settlement row so other
       // surfaces (Settlements panel, AccountPage) see the new state
       // without a refetch. updateSavedSettlement may not be defined
-      // in older builds - fall through silently if so.
+      // in older builds — fall through silently if so.
       try {
         updateSavedSettlement?.(saveId, {
           is_public: true,
@@ -355,7 +355,7 @@ export default function ShareToGallery({
             opacity: busy ? 0.6 : 1,
           }}
         >
-          {busy ? 'Working...' : 'Unshare'}
+          {busy ? 'Working…' : 'Unshare'}
         </button>
         {error && (
           <span style={{
@@ -370,7 +370,7 @@ export default function ShareToGallery({
     );
   }
 
-  // Private state - publish button.
+  // Private state — publish button.
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm,
@@ -391,7 +391,7 @@ export default function ShareToGallery({
           opacity: busy || !canonReady ? 0.6 : 1,
         }}
       >
-        <Globe size={12} /> {busy ? 'Publishing...' : 'Share to gallery'}
+        <Globe size={12} /> {busy ? 'Publishing…' : 'Share to gallery'}
       </button>
       <button
         type="button"

@@ -1,9 +1,9 @@
 /**
- * tests/domain/simulationSpine.test.js - Spine derivation contract.
+ * tests/domain/simulationSpine.test.js — Spine derivation contract.
  *
  * The spine is exposed in the dossier rail, the AI grounding prompt,
  * and (eventually) the PDF chapter-1 callout. It needs to be reliable
- * over both rich settlements and bare ones - and tolerant of legacy
+ * over both rich settlements and bare ones — and tolerant of legacy
  * field-name aliases.
  */
 
@@ -41,7 +41,7 @@ describe('deriveSimulationSpine()', () => {
     expect(s.existsBecause).toContain('river crossing');
     expect(s.survivesBy).toContain('smoked river fish');
     expect(s.ruledBy).toContain('merchant council');
-    // Real power differs from formal authority - Temple has 78 vs guild's 60.
+    // Real power differs from formal authority — Temple has 78 vs guild's 60.
     expect(s.realPower).toContain('Riverwarden Temple');
     expect(s.strainedBy).toContain('plague rumors');
     expect(s.peopleFear).toContain('bandits');

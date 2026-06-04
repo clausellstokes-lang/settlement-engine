@@ -1,9 +1,9 @@
 /**
- * components/auth/authUI.jsx - shared auth presentational primitives.
+ * components/auth/authUI.jsx — shared auth presentational primitives.
  *
  * Extracted verbatim from AuthModal so the modal and the dedicated
  * /signin · /register · /reset-password pages render byte-identical
- * controls from one source. No logic lives here - just inputs, buttons,
+ * controls from one source. No logic lives here — just inputs, buttons,
  * alerts, the OAuth button + brand glyphs, and the page shell chrome.
  */
 import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon } from 'lucide-react';
@@ -13,8 +13,8 @@ import {
 } from '../theme.js';
 
 // ── OAuth brand glyphs ──────────────────────────────────────────────────────
-// Inline SVG (vs. a brand-icon package) to control bundle size - each glyph
-// is ~100 bytes. The `fill="#..."` attributes are brand colours on <path>, not
+// Inline SVG (vs. a brand-icon package) to control bundle size — each glyph
+// is ~100 bytes. The `fill="#…"` attributes are brand colours on <path>, not
 // inline-style objects, so the visual-budget no-raw-color rule doesn't apply.
 export function GoogleGlyph() {
   return (
@@ -72,7 +72,7 @@ export function OAuthButton({ glyph, label, onClick, disabled, soonNote }) {
 }
 
 /**
- * FooterLink - a gold text link for the auth-page footers ("Create one",
+ * FooterLink — a gold text link for the auth-page footers ("Create one",
  * "Sign in", "Forgot your password?"). Presentational only: the page passes
  * the real `href` (for crawlers + middle-click/open-in-new-tab) and an
  * `onClick` that preventDefault()s and calls the SPA navigator.
@@ -210,7 +210,7 @@ export function RoleBadge({ role }) {
 }
 
 /**
- * AuthPageShell - centered card chrome for the full-page auth routes.
+ * AuthPageShell — centered card chrome for the full-page auth routes.
  * Renders the brand lockup, a title/subtitle, the form body (children),
  * and optional footer links. The parchment background + site header/footer
  * come from App's layout; this is just the card.

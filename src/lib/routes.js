@@ -1,21 +1,21 @@
 /**
- * lib/routes.js - Path ↔ view routing table.
+ * lib/routes.js — Path ↔ view routing table.
  *
  * The app's navigation is a single `view` string switched by App's render
  * block. This module is the one place that maps those internal view ids to
  * public URL paths (and back), so the address bar, Back/Forward, refresh,
  * and shared links all line up with what's on screen.
  *
- * Pure data + pure functions - no React, no window access. The `useRoute`
+ * Pure data + pure functions — no React, no window access. The `useRoute`
  * hook (src/hooks/useRoute.js) wires this to history; this file is unit-
  * testable in isolation (tests/lib/routes.test.js).
  *
  * Resolution precedence (resolveLocation):
- *   1. Legacy `?view=<id>` query param - back-compat for already-sent
+ *   1. Legacy `?view=<id>` query param — back-compat for already-sent
  *      emails and shared links (e.g. /?view=settlements). Highest
  *      precedence so an old link always lands where it used to, then the
  *      hook silently upgrades the URL to the canonical path.
- *   2. Exact path match (/create, /settlements, ...).
+ *   2. Exact path match (/create, /settlements, …).
  *   3. Param path match (/settlements/:id).
  *   4. Root "/" → default view (/create).
  *   5. Unknown path → default view, notFound:true (hook rewrites to /create).
@@ -25,10 +25,10 @@ const SITE_NAME = 'SettlementForge';
 const DEFAULT_VIEW = 'generate';
 
 // ── The canonical table ─────────────────────────────────────────────────────
-// `view`  - internal id used by App's render switch + nav arrays.
-// `path`  - public URL.
-// `title` - document.title fragment (DEFAULT_VIEW renders bare SITE_NAME).
-// `guard` - 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
+// `view`  — internal id used by App's render switch + nav arrays.
+// `path`  — public URL.
+// `title` — document.title fragment (DEFAULT_VIEW renders bare SITE_NAME).
+// `guard` — 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
 export const ROUTES = Object.freeze([
   { view: 'generate',              path: '/create',                title: 'Create a Settlement' },
   { view: 'settlements',           path: '/settlements',           title: 'Your Settlements' },
@@ -51,7 +51,7 @@ export const ROUTES = Object.freeze([
   { view: 'dossier-success',       path: '/checkout/success',      title: 'Purchase Complete' },
 ]);
 
-// Param routes - matched after exact paths. Each declares a matcher regex
+// Param routes — matched after exact paths. Each declares a matcher regex
 // and a builder that turns the capture groups into a params object.
 const PARAM_ROUTES = Object.freeze([
   { view: 'settlements', re: /^\/settlements\/([^/]+)$/, build: m => ({ id: decodeURIComponent(m[1]) }) },
@@ -153,7 +153,7 @@ export function guardForView(view) {
 /**
  * True if `path` is a safe internal destination for a post-auth redirect
  * (the `?next=` param). Blocks protocol-relative (//evil.com) and absolute
- * (http://...) URLs so the redirect can't be used as an open redirect.
+ * (http://…) URLs so the redirect can't be used as an open redirect.
  */
 export function isSafeNextPath(path) {
   return (

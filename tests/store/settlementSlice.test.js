@@ -1,5 +1,5 @@
 /**
- * settlementSlice integration tests - the critical round-trips that
+ * settlementSlice integration tests — the critical round-trips that
  * keep saved campaigns truthful across reloads.
  *
  * Why these tests exist (audit reconciliation, CRIT category):
@@ -11,7 +11,7 @@
  *      undoing the last event restores the prior systemState and
  *      strips its impairments off institutions/factions.
  *   3. applyEvent must mutate the settlement (status flips, NPC death,
- *      impairment propagation) - not just adjust systemState.
+ *      impairment propagation) — not just adjust systemState.
  *
  * These were the CRIT items the audit kept flagging. Locking them in
  * tests means future slice refactors can't silently undo the fix.
@@ -62,7 +62,7 @@ function makeStore() {
   return create(immer((...a) => ({ ...stubSlice(...a), ...createSettlementSlice(...a) })));
 }
 
-// Lightweight settlement fixture - just enough for mutateSettlement to
+// Lightweight settlement fixture — just enough for mutateSettlement to
 // find institutions/factions by id.
 function fixture(overrides = {}) {
   const { config: configOverrides, economicState: economicOverrides, ...rest } = overrides;
@@ -93,12 +93,12 @@ function fixture(overrides = {}) {
   };
 }
 
-describe('settlementSlice - canonize lifecycle', () => {
+describe('settlementSlice — canonize lifecycle', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
     // Seed the slice with a settlement directly (skip the generation
-    // pipeline - these tests aren't validating generation, they're
+    // pipeline — these tests aren't validating generation, they're
     // validating lifecycle handlers).
     store.setState(s => {
       s.settlement = fixture();
@@ -136,7 +136,7 @@ describe('settlementSlice - canonize lifecycle', () => {
   });
 });
 
-describe('settlementSlice - applyEvent mutates entities', () => {
+describe('settlementSlice — applyEvent mutates entities', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
@@ -186,7 +186,7 @@ describe('settlementSlice - applyEvent mutates entities', () => {
   });
 });
 
-describe('settlementSlice - applyPendingPreview integrity', () => {
+describe('settlementSlice — applyPendingPreview integrity', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
@@ -214,7 +214,7 @@ describe('settlementSlice - applyPendingPreview integrity', () => {
   });
 });
 
-describe('settlementSlice - undoLastEvent reverses impairments', () => {
+describe('settlementSlice — undoLastEvent reverses impairments', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
@@ -247,7 +247,7 @@ describe('settlementSlice - undoLastEvent reverses impairments', () => {
   });
 });
 
-describe('settlementSlice - saveSettlement persists campaignState', () => {
+describe('settlementSlice — saveSettlement persists campaignState', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
@@ -272,7 +272,7 @@ describe('settlementSlice - saveSettlement persists campaignState', () => {
   });
 });
 
-describe('settlementSlice - hydrateFromSave restores the lifecycle', () => {
+describe('settlementSlice — hydrateFromSave restores the lifecycle', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
@@ -320,7 +320,7 @@ describe('settlementSlice - hydrateFromSave restores the lifecycle', () => {
   });
 });
 
-describe('settlementSlice - active save regional integration', () => {
+describe('settlementSlice — active save regional integration', () => {
   let store;
   beforeEach(() => {
     store = makeStore();

@@ -1,5 +1,5 @@
 /**
- * Relationships - chapter 12. Prominent relationship banner, neighbour
+ * Relationships — chapter 12. Prominent relationship banner, neighbour
  * network with per-link plot hooks / lastEvent / flavour, inter-settlement
  * shared figures, cross-settlement conflicts, internal alliances, emergent
  * conditions, and cross-faction notes.

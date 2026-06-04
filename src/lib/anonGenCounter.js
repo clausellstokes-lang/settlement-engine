@@ -1,23 +1,23 @@
 /**
- * anonGenCounter.js - Per-day anonymous generation counter (localStorage).
+ * anonGenCounter.js — Per-day anonymous generation counter (localStorage).
  *
  * Why this exists:
  *   The homepage hero generates settlements without an account so new
  *   visitors can try the product instantly. Without a cap, that's an
  *   open invitation for scrapers and tab-spamming. The cap is a soft
- *   one - generation happens in the browser anyway, so a determined
+ *   one — generation happens in the browser anyway, so a determined
  *   actor can clear localStorage and keep going. This is a polite
  *   "you've hit the free limit, sign in for unlimited" nudge, not
  *   security.
  *
- * Tier 7.2 - two-bucket cap:
+ * Tier 7.2 — two-bucket cap:
  *   The roadmap's "1 full dossier + 2 lightweight rerolls/previews"
  *   pattern is more forgiving than a flat 3/day cap without inviting
  *   abuse. We split the counter into two:
  *
- *     full      - full first-generation runs (population, full
+ *     full      — full first-generation runs (population, full
  *                 derivations). 1 per day for anonymous.
- *     reroll    - preset switches or section rerolls (the user has
+ *     reroll    — preset switches or section rerolls (the user has
  *                 already seen a full dossier and is tweaking). 2
  *                 per day for anonymous.
  *
@@ -26,7 +26,7 @@
  *   exhausted, the upgrade nudge appears.
  *
  * Storage shape (extends prior single-counter shape, backward
- * compatible - pre-7.2 saves have only `count` and get interpreted
+ * compatible — pre-7.2 saves have only `count` and get interpreted
  * as `full: count`):
  *   { date: 'YYYY-MM-DD', full: 0, reroll: 0, count?: 0 }
  *
@@ -37,7 +37,7 @@
 const KEY = 'sf.anon.gens';
 export const DEFAULT_DAILY_FULL_CAP = 1;
 export const DEFAULT_DAILY_REROLL_CAP = 2;
-// Backward-compatibility alias - many call sites still pass DEFAULT_DAILY_CAP.
+// Backward-compatibility alias — many call sites still pass DEFAULT_DAILY_CAP.
 // It now represents the COMBINED cap (full + reroll = 3) so existing
 // "remaining" displays stay sensible without changing the call site.
 export const DEFAULT_DAILY_CAP = DEFAULT_DAILY_FULL_CAP + DEFAULT_DAILY_REROLL_CAP;
@@ -84,7 +84,7 @@ function write(value) {
   if (typeof window === 'undefined') return;
   try {
     window.localStorage.setItem(KEY, JSON.stringify(value));
-  } catch { /* private mode or quota - ignore, soft cap only */ }
+  } catch { /* private mode or quota — ignore, soft cap only */ }
 }
 
 function todaySnapshot() {
@@ -172,7 +172,7 @@ export function anonAtCap(cap = DEFAULT_DAILY_CAP) {
 }
 
 /**
- * Legacy increment - interprets a single bump as a full generation
+ * Legacy increment — interprets a single bump as a full generation
  * (the most-common call site is the hero's first-generation button).
  * Section rerolls and preset switches should use incrementAnonReroll
  * directly.

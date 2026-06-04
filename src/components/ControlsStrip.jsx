@@ -1,5 +1,5 @@
 /**
- * ControlsStrip - Shared sticky controls header for Institutions, Services, and Trade Dynamics.
+ * ControlsStrip — Shared sticky controls header for Institutions, Services, and Trade Dynamics.
  * Renders: search input, action buttons (Force All / Reset / Exclude All / Expand / Collapse),
  * stats row (No overrides active | X forced · Y excluded), and filter pills (All / Forced / Excluded).
  */
@@ -8,7 +8,7 @@ import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans, FS, swatch }
 
 export default function ControlsStrip({
   // Search
-  search, setSearch, placeholder = 'Search...',
+  search, setSearch, placeholder = 'Search…',
   // Action buttons
   onForceAll, onReset, onExcludeAll,
   onExpandAll, onCollapseAll,

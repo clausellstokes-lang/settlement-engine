@@ -459,7 +459,7 @@ function rivalryTargetFor(state, states) {
   return rivals.find(other => other.factionId !== state.factionId) || rivals[0] || null;
 }
 
-// Goal culmination - a long-burning ambition finally pays off. Fires when an
+// Goal culmination — a long-burning ambition finally pays off. Fires when an
 // NPC's long-goal progress crosses the threshold, somewhat independent of this
 // tick's pressure: it turns reactive drift into setup → payoff stories. The
 // patch resets goalProgress (so it doesn't re-fire) and advances the NPC's
@@ -482,7 +482,7 @@ function npcGoalCulmination(state, tick) {
     probability: 0.9,
     applyMode: 'auto',
     headline: `${state.name} achieves a long ambition`,
-    summary: `${state.name} has worked toward "${goal}" for a long while - and now seizes it.`,
+    summary: `${state.name} has worked toward "${goal}" for a long while — and now seizes it.`,
     reasons: [
       `${state.name}'s long-term goal progress reached its culmination.`,
       `Role: ${state.roleArchetype.replace(/_/g, ' ')}; goal: ${goal}.`,

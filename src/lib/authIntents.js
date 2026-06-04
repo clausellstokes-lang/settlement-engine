@@ -1,14 +1,14 @@
 /**
- * authIntents.js - Pending action registry for "click → auth → continue" flows.
+ * authIntents.js — Pending action registry for "click → auth → continue" flows.
  *
  * The single highest-leverage conversion gate in the app (per the UX/UI
- * critique X-3) is "Save this town - free account." The button promises
+ * critique X-3) is "Save this town — free account." The button promises
  * to save the dossier; the auth modal opens; the user signs in; the
  * save must fire automatically.
  *
  * Without a generalized intent contract, every such flow re-invents the
  * wheel and risks the post-auth step silently dropping (which is what
- * happens today for the disabled save button - the user just stares).
+ * happens today for the disabled save button — the user just stares).
  *
  * This module is that contract:
  *
@@ -19,7 +19,7 @@
  *   3. The registry routes the intent to a handler module that knows
  *      how to execute it (e.g. savesService.save for save-settlement).
  *
- * Storage: sessionStorage by default - intents are ephemeral, scoped to
+ * Storage: sessionStorage by default — intents are ephemeral, scoped to
  * a single browser session. If sessionStorage is unavailable, falls
  * back to an in-memory map (still works on a single page lifetime).
  *
@@ -32,7 +32,7 @@
  */
 
 const STORAGE_KEY = 'sf:auth_intent';
-const TTL_MS = 30 * 60 * 1000; // 30 minutes - well past the longest auth flow
+const TTL_MS = 30 * 60 * 1000; // 30 minutes — well past the longest auth flow
 
 /** Intent type constants. Keep snake_case stable strings; analytics + tests pin on these. */
 export const INTENTS = Object.freeze({
@@ -76,7 +76,7 @@ function clearStored() {
 
 // ── Public API ────────────────────────────────────────────────────────
 
-/** Set the pending intent. Overwrites any prior intent - only one at a time. */
+/** Set the pending intent. Overwrites any prior intent — only one at a time. */
 export function setPending(type, payload) {
   if (!type) return;
   writeStored({ type, payload, stashedAt: Date.now() });
@@ -110,7 +110,7 @@ export function registerHandler(type, handlerFn) {
   _handlers.set(type, handlerFn);
 }
 
-/** Test/util - drop a handler registration (used by reset() in tests). */
+/** Test/util — drop a handler registration (used by reset() in tests). */
 export function unregisterHandler(type) {
   _handlers.delete(type);
 }
@@ -118,7 +118,7 @@ export function unregisterHandler(type) {
 /** Consume + dispatch the pending intent. Called by AuthModal's success
  *  handler. Returns the handler's return value (or null on no-op). The
  *  intent is cleared once a handler exists, whether that handler succeeded
- *  or threw - failed handled intents do NOT linger across sessions. */
+ *  or threw — failed handled intents do NOT linger across sessions. */
 export async function consume(ctx) {
   const pending = readPending();
   if (!pending) return null;
@@ -144,7 +144,7 @@ export async function consume(ctx) {
   }
 }
 
-/** Test util - reset all registrations and stored state. */
+/** Test util — reset all registrations and stored state. */
 export function _resetForTests() {
   _handlers.clear();
   clearStored();

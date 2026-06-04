@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * fix-backspace-regexes.js - One-shot script: replace literal 0x08
+ * fix-backspace-regexes.js — One-shot script: replace literal 0x08
  * (backspace) bytes with `\b` (word-boundary regex escape) in
  * generator files where de-minification corrupted `\b` into the actual
  * control character.

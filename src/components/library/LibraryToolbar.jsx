@@ -1,12 +1,12 @@
 /**
- * LibraryToolbar.jsx - P108 / E-6 campaign-aware library toolbar.
+ * LibraryToolbar.jsx — P108 / E-6 campaign-aware library toolbar.
  *
  * Drops above the saves list in SettlementsPanel. Renders:
  *   - Search input (filters by name, tier, settlement.config.tradeRouteAccess)
  *   - Sort dropdown (recent / name / tier)
  *   - Filter chips (phase: canon / draft, has-neighbours, has-pending-edits)
  *
- * Pure controlled component - owns no state. The parent (SettlementsPanel)
+ * Pure controlled component — owns no state. The parent (SettlementsPanel)
  * holds {query, sort, filters} and passes setters in. Output is consumed
  * by `applyLibraryFilters(saves, state)` (exported below for shared use
  * + tested in isolation).
@@ -54,7 +54,7 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
         s.tier,
         s.settlement?.name,
         s.settlement?.config?.tradeRouteAccess,
-        // NPC names - searchable per the critique ("search across saves + NPCs + factions")
+        // NPC names — searchable per the critique ("search across saves + NPCs + factions")
         ...(Array.isArray(s.settlement?.npcs)
           ? s.settlement.npcs.map(n => n.name).slice(0, 50)
           : []),
@@ -119,7 +119,7 @@ export default function LibraryToolbar({
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'} + NPCs + factions...`}
+          placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'} + NPCs + factions…`}
           style={{
             flex: 1, border: 'none', outline: 'none',
             background: 'transparent', fontFamily: sans,

@@ -1,16 +1,16 @@
 /**
- * generateCampaignPDF.js - Campaign-level export.
+ * generateCampaignPDF.js — Campaign-level export.
  *
  * One PDF that zooms out across a whole campaign:
  *   1. Cover page (campaign name + stats)
  *   2. Settlement index (one-line roster, sortable)
  *   3. Relationship map (force-directed diagram across all settlements)
  *   4. Cross-settlement NPC connections (who talks to whom, across places)
- *   5. Per-settlement digest (one card per settlement - not the full sheet)
+ *   5. Per-settlement digest (one card per settlement — not the full sheet)
  *   6. Network effects appendix (cascading modifiers)
  *
  * Uses the same visual language as generateSettlementPDF.js but at a
- * higher altitude - prose is short, lists are wide, the goal is DM at-a-glance.
+ * higher altitude — prose is short, lists are wide, the goal is DM at-a-glance.
  */
 import { jsPDF } from 'jspdf';
 import { autoLayout } from './graphLayout.js';
@@ -349,7 +349,7 @@ function buildMap(d, campaignName, settlements, pageN) {
     const pb = proj(b);
     const clr = REL_COLORS[e.type] || REL_COLORS.neutral;
     sd(d, clr);
-    // Line weight by edge type - stronger for hostile/alliance
+    // Line weight by edge type — stronger for hostile/alliance
     const lw = e.type === 'hostile' ? 0.9 :
                e.type === 'allied'  ? 0.7 :
                e.type === 'trade_partner' ? 0.6 : 0.45;
@@ -566,7 +566,7 @@ function buildDigest(d, campaignName, settlements, pageN) {
     const R_X = ML + colW + colGap + 3;
     const bodyY = y + 10;
 
-    // LEFT - overview line (character & hook)
+    // LEFT — overview line (character & hook)
     d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
     d.text('OVERVIEW', L_X, bodyY);
     hline(d, L_X, bodyY + 1, L_X + colW - 6, TAN, 0.2);
@@ -598,7 +598,7 @@ function buildDigest(d, campaignName, settlements, pageN) {
       }
     }
 
-    // RIGHT - key NPCs
+    // RIGHT — key NPCs
     d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
     d.text('KEY NPCs', R_X, bodyY);
     hline(d, R_X, bodyY + 1, R_X + colW - 6, TAN, 0.2);

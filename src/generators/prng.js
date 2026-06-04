@@ -1,5 +1,5 @@
 /**
- * prng.js - Seeded pseudo-random number generator wrapper.
+ * prng.js — Seeded pseudo-random number generator wrapper.
  *
  * Drop-in replacements for Math.random-based helpers in constants.js.
  * Every generator step receives a PRNG instance from the pipeline context,
@@ -73,7 +73,7 @@ export function createPRNG(seed) {
 
 /**
  * Generate a random seed string (for when the user doesn't provide one).
- * Uses Math.random - this is the ONE place non-determinism enters.
+ * Uses Math.random — this is the ONE place non-determinism enters.
  */
 export function generateSeed() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);

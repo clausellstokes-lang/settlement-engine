@@ -382,7 +382,7 @@ export function ageRoamingStressors(stressors = [], snapshot, rng, options = {})
 
 /**
  * Resolve a single stressor by id (e.g. the party broke the siege). Unlike
- * ageRoamingStressors this is a *directed* resolution - no roll - used by the
+ * ageRoamingStressors this is a *directed* resolution — no roll — used by the
  * party-impact hook. Returns the remaining stressors plus the resolved record
  * and its residual-aftereffect outcomes (so the consequences still linger).
  *
@@ -415,7 +415,7 @@ export function resolveStressorById(stressors = [], stressorId, opts = {}) {
 }
 
 /**
- * Nudge a stressor's severity (the party eased - or worsened - a crisis
+ * Nudge a stressor's severity (the party eased — or worsened — a crisis
  * without fully ending it). Returns the updated stressor list and the changed
  * record (or null when the id wasn't found).
  *
@@ -506,7 +506,7 @@ function spreadTargetsFor(snapshot, stressor) {
   const types = [...new Set((stressor.spreadChannels || []).map(canonicalSpreadChannel).filter(Boolean))];
   if (!types.length) return [];
   const targets = [];
-  // Confirmed, directed channels only - suggested channels never propagate
+  // Confirmed, directed channels only — suggested channels never propagate
   // (design principle). A crisis flows outward from each affected settlement
   // along its outgoing channels of a matching type.
   for (const sourceId of affected) {

@@ -1,23 +1,23 @@
 /**
- * useReturnVisit.js - Detect a return-visit and surface the prior settlement.
+ * useReturnVisit.js — Detect a return-visit and surface the prior settlement.
  *
  * The critique's X-9: when a free user comes back 24+ hours after their
  * last visit, the hero today is identical to the first-visit hero. They
  * get no acknowledgment of what they last did, no welcome-back, no
- * follow-up. A free user who came back is a future paying user - treat
+ * follow-up. A free user who came back is a future paying user — treat
  * them like one.
  *
  * This hook computes:
- *   - isReturn         - true if a previous visit was recorded and >24h ago
+ *   - isReturn         — true if a previous visit was recorded and >24h ago
  *   - daysSinceLastVisit
- *   - lastSettlement   - the most-recently-touched saved settlement (or null)
+ *   - lastSettlement   — the most-recently-touched saved settlement (or null)
  *
  * Implementation:
  *   - Last-visit timestamp lives in localStorage `sf:last_visit_at`,
  *     stamped on every page load. We compare to the previous value
  *     before we overwrite it, so the first-load-after-a-day returns the
  *     gap correctly.
- *   - lastSettlement is derived from the savedSettlements slice - the
+ *   - lastSettlement is derived from the savedSettlements slice — the
  *     entry with the most recent `savedAt` or `campaignState.editedAt`.
  *
  * On first mount of a return-visit, fires RETURN_VISIT_DETECTED analytics.
@@ -45,7 +45,7 @@ function stampVisit() {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem(STORAGE_KEY, String(Date.now()));
     }
-  } catch { /* private mode - accept the loss */ }
+  } catch { /* private mode — accept the loss */ }
 }
 
 export function useReturnVisit() {
@@ -57,7 +57,7 @@ export function useReturnVisit() {
 
   // Lazy-initialized state for the prior visit timestamp + the current
   // wall-clock at hook mount. useState's lazy initializer is the
-  // sanctioned escape hatch from the purity rule - it runs at mount
+  // sanctioned escape hatch from the purity rule — it runs at mount
   // time exactly once and doesn't violate render purity on subsequent
   // calls.
   const [prior] = useState(() => readPriorVisit());

@@ -1,5 +1,5 @@
 /**
- * TonightAtTheTable - chapter 02. The single page a DM can pull up at the
+ * TonightAtTheTable — chapter 02. The single page a DM can pull up at the
  * table when running this settlement on the fly.
  *
  * Picks the most useful three of each: hooks (top by source priority), NPCs
@@ -63,7 +63,7 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
       {/* ── Hooks ─────────────────────────────────────────────── */}
       <View style={{ marginBottom: space.sm }}>
         <Text style={{ ...type.label, color: palette.gold, fontSize: pt['9'], marginBottom: 4 }}>
-          USE TONIGHT - HOOKS
+          USE TONIGHT — HOOKS
         </Text>
         {hooks.length === 0 && (
           <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9'] }}>
@@ -101,7 +101,7 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
                 {i + 1}
               </Text>
               <View style={{ flex: 1 }}>
-                {/* Hook text leads - large, scannable. Plain Text so the
+                {/* Hook text leads — large, scannable. Plain Text so the
                     prose extracts cleanly from the PDF. */}
                 <Text style={{ ...type.body, fontSize: pt['10.5'], color: palette.ink, lineHeight: 1.35 }}>
                   {text}
@@ -161,7 +161,7 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
                 <View style={{ flex: 1 }} />
                 <Pill tone="cool">PWR {npc.power || 0}</Pill>
               </View>
-              {/* What they want this session - extractable prose */}
+              {/* What they want this session — extractable prose */}
               <View style={{ flexDirection: 'row', marginTop: 1, alignItems: 'flex-start' }}>
                 <Text style={{ ...type.label, color: palette.cool, fontSize: pt['7'], marginRight: 4, paddingTop: 2 }}>
                   WANTS:
@@ -180,13 +180,13 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
         ))}
       </View>
 
-      {/* ── Active crises (only when present - no contradiction with the "active pressures" headline) ── */}
+      {/* ── Active crises (only when present — no contradiction with the "active pressures" headline) ── */}
       {crises.length > 0 && (
         <>
           <HairRule />
           <View style={{ marginBottom: space.sm }}>
             <Text style={{ ...type.label, color: palette.bad, fontSize: pt['9'], marginBottom: 4 }}>
-              ACTIVE CRISES - KEEP IN MIND
+              ACTIVE CRISES — KEEP IN MIND
             </Text>
             {crises.map((c, i) => (
               <View

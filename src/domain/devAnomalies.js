@@ -1,5 +1,5 @@
 /**
- * domain/devAnomalies.js - DEV-only anomaly detector.
+ * domain/devAnomalies.js — DEV-only anomaly detector.
  *
  * Tier 3.11 of the roadmap. Surfaces internal warnings about
  * generation edge cases that production users don't see but
@@ -104,7 +104,7 @@ function detectStressorUnconsumed(settlement) {
       out.push({
         severity: 'info',
         type: 'stressor_unconsumed',
-        message: `Stressor "${key}" has no matching active condition - it may be applied only as cosmetic state.`,
+        message: `Stressor "${key}" has no matching active condition — it may be applied only as cosmetic state.`,
         references: [],
       });
     }

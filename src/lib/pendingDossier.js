@@ -1,5 +1,5 @@
 /**
- * pendingDossier.js - Stash an anonymous settlement across a Stripe round-trip.
+ * pendingDossier.js — Stash an anonymous settlement across a Stripe round-trip.
  *
  * The single-dossier flow is:
  *   1. Anonymous user generates a settlement on the homepage hero.
@@ -12,7 +12,7 @@
  *
  * Without this stash, the unsaved settlement disappears across the
  * full-page navigation to Stripe and the user gets a paid receipt for
- * an empty dossier - the worst possible failure mode.
+ * an empty dossier — the worst possible failure mode.
  *
  * Storage shape:
  *   { settlement, stashedAt, sessionId? }
@@ -42,7 +42,7 @@ export function stashPendingDossier(settlement, sessionId = null) {
     window.localStorage.setItem(KEY, JSON.stringify(payload));
     return true;
   } catch {
-    return false; // private mode or quota - caller can decide how to recover
+    return false; // private mode or quota — caller can decide how to recover
   }
 }
 

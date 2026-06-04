@@ -1,5 +1,5 @@
 /**
- * components/auth/VerifyEmailPage.jsx - the dedicated /verify-email route.
+ * components/auth/VerifyEmailPage.jsx — the dedicated /verify-email route.
  *
  * This is the landing page for the confirmation link in the sign-up email.
  * The Supabase client parses the token from the URL on load (detectSessionInUrl)
@@ -7,11 +7,11 @@
  * onAuthStateChange listener wired in initAuth (App mounts that on start).
  *
  * So this page is a thin status surface over auth state:
- *   - loading            → "Confirming your email..."
+ *   - loading            → "Confirming your email…"
  *   - signed in (≠ anon) → "Email confirmed!" then redirect to /create
  *   - still anon         → link was invalid/expired; offer Sign In
  *
- * It establishes no session itself and reads no token - it only reflects the
+ * It establishes no session itself and reads no token — it only reflects the
  * result, so there's nothing here to spoof or replay.
  */
 import { useEffect } from 'react';
@@ -42,14 +42,14 @@ export default function VerifyEmailPage() {
           <>
             <Loader size={40} color={GOLD} style={{ margin: '0 auto' }} />
             <p style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
-              Confirming your email...
+              Confirming your email…
             </p>
           </>
         ) : confirmed ? (
           <>
             <CheckCircle size={40} color={GOLD} style={{ margin: '0 auto' }} />
             <Alert type="success">
-              Your email is confirmed. Taking you to your settlements...
+              Your email is confirmed. Taking you to your settlements…
             </Alert>
             <Button onClick={() => navigatePath('/create', { replace: true })}>
               Continue
@@ -59,7 +59,7 @@ export default function VerifyEmailPage() {
           <>
             <AlertCircle size={40} color={MUTED} style={{ margin: '0 auto' }} />
             <Alert type="error">
-              This confirmation link is invalid or has expired. Try signing in -
+              This confirmation link is invalid or has expired. Try signing in —
               if your account isn't active yet, request a fresh link.
             </Alert>
             <Button variant="ghost" onClick={() => navigate('signin')}>

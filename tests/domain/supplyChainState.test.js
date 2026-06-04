@@ -1,5 +1,5 @@
 /**
- * tests/domain/supplyChainState.test.js - Stateful supply-chain contract.
+ * tests/domain/supplyChainState.test.js — Stateful supply-chain contract.
  *
  * Pins the Tier 4.3 derivation surface: status remap, id minting,
  * dependency/beneficiary/victim inference, controller heuristic,

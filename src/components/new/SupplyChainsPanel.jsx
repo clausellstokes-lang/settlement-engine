@@ -294,8 +294,8 @@ export function SupplyChainsPanel({ settlement, eco: ecoProp }) {
 function Legend() {
   const items = [
     { dot: '●', color: '#1a5a28', label: 'Running' },
-    { dot: '◐', color: '#8a5010', label: 'Vulnerable - upstream imported' },
-    { dot: '○', color: '#8b1a1a', label: 'Impaired - institution missing' },
+    { dot: '◐', color: '#8a5010', label: 'Vulnerable — upstream imported' },
+    { dot: '○', color: '#8b1a1a', label: 'Impaired — institution missing' },
     { text: '', label: 'Import fills gap' },
     { text: '↗ EXPORT', color: '#1a5a28', label: 'Exported for income' },
   ];

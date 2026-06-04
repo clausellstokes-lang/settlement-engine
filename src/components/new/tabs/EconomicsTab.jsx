@@ -20,13 +20,13 @@ const FLOW_STATUS = {
 };
 
 /**
- * EconomicFlowsSection - extracted from a 150-line IIFE that lived inline
+ * EconomicFlowsSection — extracted from a 150-line IIFE that lived inline
  * in EconomicsTab.jsx. The IIFE pattern violated rules-of-hooks because
  * the React.useState call lived inside a callback expression, requiring
  * two eslint-disable directives to stay green. Now a proper component
  * with normal hook scoping.
  *
- * Props are the slices of eco that the section actually consumes - keeps
+ * Props are the slices of eco that the section actually consumes — keeps
  * the prop surface narrow and the component cheap to memoize.
  */
 function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
@@ -109,7 +109,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {/* Impairment detail */}
               {chain.dependency && (
                 <div style={{fontSize:FS.xs,color:st.color,background:`${st.color}08`,borderRadius:4,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
-                  <strong>Needs {chain.dependency.resource}</strong> - {chain.dependency.impact}
+                  <strong>Needs {chain.dependency.resource}</strong> — {chain.dependency.impact}
                   {chain.dependency.affectedServices.length > 0 && <span style={{color:MUTED}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
                 </div>
               )}
@@ -133,7 +133,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {/* Income contribution */}
               {incomeEntry && (
                 <div style={{fontSize:FS.xxs,color:swatch.inkMag3,marginTop:4}}>
-                  Contributes to <strong>{incomeEntry.source}</strong> - {incomeEntry.percentage}% of income
+                  Contributes to <strong>{incomeEntry.source}</strong> — {incomeEntry.percentage}% of income
                 </div>
               )}
             </div>
@@ -141,7 +141,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
         })}
       </div>
 
-      {/* Institutional Services - tertiary economy */}
+      {/* Institutional Services — tertiary economy */}
       {institutionalServices.length > 0 && (flowFilter === 'all' || flowFilter === 'services') && <>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginTop:10,marginBottom:6}}>Service Economy</div>
         <div style={{display:'flex',flexDirection:'column',gap:5}}>
@@ -344,8 +344,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,borderRadius:6,padding:'8px 12px',fontSize:FS.sm,color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
-              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap - residual shortfall is ${fb.deficitPercent}%. Settlement is trade-dependent for food security.`
-              : ` Production deficit of ${fb.deficitPercent}% - settlement requires food imports to sustain population.`
+              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap — residual shortfall is ${fb.deficitPercent}%. Settlement is trade-dependent for food security.`
+              : ` Production deficit of ${fb.deficitPercent}% — settlement requires food imports to sustain population.`
             : `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`
           }
         </div>
@@ -360,7 +360,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         />
       )}
 
-      {/* ── ECONOMIC PLOT HOOKS (currently invisible - now surfaced) ─────── */}
+      {/* ── ECONOMIC PLOT HOOKS (currently invisible — now surfaced) ─────── */}
       {via?.plotHooks?.length>0&&<Section title={`Economic Plot Hooks (${via.plotHooks.length})`} collapsible defaultOpen={false} accent="#5a2a8a">
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {via.plotHooks.map((h,i)=>{
@@ -446,7 +446,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           ? 'A substantial portion of economic activity bypasses legitimate channels. Tax revenue is severely compressed. Guild structures are being undercut.'
           : bmc>=15
           ? 'Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.'
-          : 'Minor shadow activity - petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.';
+          : 'Minor shadow activity — petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.';
 
         // What goods flow through the shadow economy (from crime types)
         const _shadowGoods = crimeTypes
@@ -455,7 +455,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                         ct.type?.toLowerCase().includes('black market'))
           .slice(0, 2);
 
-        return <Section title={`Shadow Economy - ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+        return <Section title={`Shadow Economy — ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
             {/* Capture rate + scale context */}

@@ -1,5 +1,5 @@
 /**
- * tests/domain/aiOverlayVerifier.test.js - Tier 6.4 comprehensive suite.
+ * tests/domain/aiOverlayVerifier.test.js — Tier 6.4 comprehensive suite.
  *
  * Verifies that verifyAiOverlay(original, refined) catches every
  * documented violation class. Each test constructs a minimal pair of
@@ -69,7 +69,7 @@ function clone(o) { return JSON.parse(JSON.stringify(o)); }
 // Envelope shape + null safety
 // ─────────────────────────────────────────────────────────────────────
 
-describe('verifyAiOverlay() - envelope shape', () => {
+describe('verifyAiOverlay() — envelope shape', () => {
   it('returns the canonical { ok, violations, summary } structure', () => {
     const result = verifyAiOverlay(baseFixture(), clone(baseFixture()));
     expect(result).toHaveProperty('ok');
@@ -129,7 +129,7 @@ describe('verifyAiOverlay() - envelope shape', () => {
 // Root-level fact changes
 // ─────────────────────────────────────────────────────────────────────
 
-describe('verifyAiOverlay() - root-level fact changes', () => {
+describe('verifyAiOverlay() — root-level fact changes', () => {
   it('flags a renamed settlement', () => {
     const original = baseFixture();
     const refined = clone(original);
@@ -211,7 +211,7 @@ describe('verifyAiOverlay() - root-level fact changes', () => {
 // Entity invention / removal / rename
 // ─────────────────────────────────────────────────────────────────────
 
-describe('verifyAiOverlay() - invented entities', () => {
+describe('verifyAiOverlay() — invented entities', () => {
   it('flags an invented faction', () => {
     const original = baseFixture();
     const refined = clone(original);
@@ -263,7 +263,7 @@ describe('verifyAiOverlay() - invented entities', () => {
   });
 });
 
-describe('verifyAiOverlay() - removed entities', () => {
+describe('verifyAiOverlay() — removed entities', () => {
   it('flags a removed NPC', () => {
     const original = baseFixture();
     const refined = clone(original);
@@ -302,7 +302,7 @@ describe('verifyAiOverlay() - removed entities', () => {
   });
 });
 
-describe('verifyAiOverlay() - renamed entities', () => {
+describe('verifyAiOverlay() — renamed entities', () => {
   it('flags a renamed NPC (same id, different name)', () => {
     const original = baseFixture();
     const refined = clone(original);
@@ -344,7 +344,7 @@ describe('verifyAiOverlay() - renamed entities', () => {
   it('does NOT flag identical names (no-op refinement is fine)', () => {
     const original = baseFixture();
     const refined = clone(original);
-    // Don't change names - only descriptions.
+    // Don't change names — only descriptions.
     refined.npcs[0].role = 'Senior Guildmaster';
     const result = verifyAiOverlay(original, refined);
     expect(result.summary.renamed).toBe(0);
@@ -355,7 +355,7 @@ describe('verifyAiOverlay() - renamed entities', () => {
 // Canon-tag drift
 // ─────────────────────────────────────────────────────────────────────
 
-describe('verifyAiOverlay() - canon-tag drift', () => {
+describe('verifyAiOverlay() — canon-tag drift', () => {
   it('flags unlocking a locked institution', () => {
     const original = baseFixture();
     const refined = clone(original);
@@ -378,7 +378,7 @@ describe('verifyAiOverlay() - canon-tag drift', () => {
   it('flags changing a user-authored entity\'s source', () => {
     const original = baseFixture();
     const refined = clone(original);
-    // The user-authored cathedral becomes "generated" - that's a downgrade.
+    // The user-authored cathedral becomes "generated" — that's a downgrade.
     refined.institutions[2].source = 'generated';
     delete refined.institutions[2]._authored;
     const result = verifyAiOverlay(original, refined);
@@ -398,11 +398,11 @@ describe('verifyAiOverlay() - canon-tag drift', () => {
   it('flags locked-entity downgrade only (not upgrade)', () => {
     const original = baseFixture();
     const refined = clone(original);
-    // Make the unlocked guard locked - allowed.
+    // Make the unlocked guard locked — allowed.
     refined.institutions[1].locked = true;
     expect(verifyAiOverlay(original, refined).summary.canonChanged).toBe(0);
 
-    // Now mutate so the locked market becomes unlocked - forbidden.
+    // Now mutate so the locked market becomes unlocked — forbidden.
     refined.institutions[0].locked = false;
     expect(verifyAiOverlay(original, refined).summary.canonChanged).toBeGreaterThanOrEqual(1);
   });
@@ -412,7 +412,7 @@ describe('verifyAiOverlay() - canon-tag drift', () => {
 // History beat preservation
 // ─────────────────────────────────────────────────────────────────────
 
-describe('verifyAiOverlay() - history beat preservation', () => {
+describe('verifyAiOverlay() — history beat preservation', () => {
   it('flags removed founding (history beat dropped)', () => {
     const original = baseFixture();
     const refined = clone(original);
@@ -432,7 +432,7 @@ describe('verifyAiOverlay() - history beat preservation', () => {
   it('does NOT flag refined-but-present history beats', () => {
     const original = baseFixture();
     const refined = clone(original);
-    // Same beats present - just with polished prose.
+    // Same beats present — just with polished prose.
     refined.history.founding.reason = 'A refined retelling of the river ford toll.';
     refined.history.historicalEvents[0].summary = 'Polished prose about the flood.';
     const result = verifyAiOverlay(original, refined);
@@ -456,7 +456,7 @@ describe('verifyAiOverlay() - history beat preservation', () => {
 // Mixed-violation scenarios
 // ─────────────────────────────────────────────────────────────────────
 
-describe('verifyAiOverlay() - mixed scenarios', () => {
+describe('verifyAiOverlay() — mixed scenarios', () => {
   it('reports multiple violation classes in one run', () => {
     const original = baseFixture();
     const refined = clone(original);
@@ -511,7 +511,7 @@ describe('verifyAiOverlay() - mixed scenarios', () => {
 // Defensive handling of malformed entities
 // ─────────────────────────────────────────────────────────────────────
 
-describe('verifyAiOverlay() - defensive against malformed entities', () => {
+describe('verifyAiOverlay() — defensive against malformed entities', () => {
   it('tolerates entities without ids (uses name fallback)', () => {
     const original = { id: 's', name: 'S', npcs: [{ name: 'Alice', role: 'Smith' }] };
     const refined  = { id: 's', name: 'S', npcs: [{ name: 'Alice', role: 'Master Smith' }] };
@@ -534,7 +534,7 @@ describe('verifyAiOverlay() - defensive against malformed entities', () => {
     const refined = clone(original);
     refined.npcs = null;
     const result = verifyAiOverlay(original, refined);
-    // All npcs from original now missing in refined - these surface as removed.
+    // All npcs from original now missing in refined — these surface as removed.
     expect(result.summary.removed).toBeGreaterThan(0);
   });
 
@@ -631,7 +631,7 @@ describe('filterViolations()', () => {
 // Real-world AI failure pattern smoke tests
 // ─────────────────────────────────────────────────────────────────────
 
-describe('verifyAiOverlay() - real-world AI failure patterns', () => {
+describe('verifyAiOverlay() — real-world AI failure patterns', () => {
   it('catches the "AI added a flavor NPC" pattern', () => {
     // Model thinks adding a colorful side character helps the prose.
     // Per PRESERVATION_RULES, this is a hard violation.
@@ -678,12 +678,12 @@ describe('verifyAiOverlay() - real-world AI failure patterns', () => {
     expect(summary.historyDropped).toBeGreaterThanOrEqual(1);
   });
 
-  it('passes the "AI did exactly what it should - refined prose only" path', () => {
+  it('passes the "AI did exactly what it should — refined prose only" path', () => {
     const original = baseFixture();
     const refined = clone(original);
     refined.arrivalScene = 'Refined arrival scene with better cadence and specific sensory detail.';
     refined.pressureSentence = 'The Silver Chain Guild squeezes the boatmen, and the boatmen are starting to hold meetings.';
-    refined.history.founding.reason = 'A polished retelling - the river ford was the toll station.';
+    refined.history.founding.reason = 'A polished retelling — the river ford was the toll station.';
     refined.history.historicalEvents[0].summary = 'Polished summary of the flood year.';
     const { ok, summary } = verifyAiOverlay(original, refined);
     expect(ok).toBe(true);

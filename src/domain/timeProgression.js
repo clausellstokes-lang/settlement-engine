@@ -1,5 +1,5 @@
 /**
- * domain/timeProgression.js - Tick-by-tick simulation advancement.
+ * domain/timeProgression.js — Tick-by-tick simulation advancement.
  *
  * Tier 4.12 of the roadmap. The composing tier: applies Phase 14
  * faction deltas, advances Phase 11 escalation clocks, returns a
@@ -17,7 +17,7 @@
  * the canonical state for these; for V1 we accept an array of
  * archetype strings like ['plague', 'trade_route_cut']).
  *
- * Clock state - which stage each known clock has advanced to - is
+ * Clock state — which stage each known clock has advanced to — is
  * threaded explicitly. The caller gets back `nextTickState` from
  * each call and passes it into the next call. Once Tier 2.3 lands,
  * the clock state will live on the settlement; for V1 it's an
@@ -40,7 +40,7 @@ import {
 
 // ── Intervals ────────────────────────────────────────────────────────────
 // Each interval scales the intensity of applied conditions. Larger
-// intervals compound more, but we don't simply multiply - pressures
+// intervals compound more, but we don't simply multiply — pressures
 // have diminishing returns past a point. Use sub-linear scaling.
 
 const INTERVAL_SCALES = Object.freeze({
@@ -142,7 +142,7 @@ function advanceClocks(settlement, previousState) {
 // Power scores live as numbers on each faction (clamped 0-100). Public
 // legitimacy lives as a score + band + flags. The other fields the
 // deltas reference (wealth, publicTrust, manpower) are reported in
-// the tick but not yet stored as numbers on the faction shape -
+// the tick but not yet stored as numbers on the faction shape —
 // they're band-only. Tier 4.16 (custom user content) will add
 // numeric storage for those bands.
 
@@ -406,7 +406,7 @@ export function summarizeForecast(forecast) {
   };
 }
 
-/** Supported intervals - useful for UI affordances + drift detection. */
+/** Supported intervals — useful for UI affordances + drift detection. */
 export function supportedIntervals() {
   return Array.from(VALID_INTERVALS);
 }

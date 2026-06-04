@@ -1,5 +1,5 @@
 /**
- * dependencyEngine - generator-side helpers that surface custom-content
+ * dependencyEngine — generator-side helpers that surface custom-content
  * dependency declarations to the engine.
  *
  * The generators (servicesGenerator, computeActiveChains, economicGenerator)
@@ -32,7 +32,7 @@
  * IMPORTANT: this module is intentionally store-agnostic. The previous version
  * imported `useStore` directly, which made the generator transitively depend
  * on Zustand and React, blocking headless test/CI/script usage. Now the
- * customContent source is provided by the caller - the app wires it once at
+ * customContent source is provided by the caller — the app wires it once at
  * init via `setCustomContentSource(getter)`, and the pipeline can pass a
  * snapshot directly via `withCustomContent(customContent, fn)`.
  *
@@ -52,7 +52,7 @@ import { buildRegistry, parseRefId } from './customRegistry.js';
 // ── Custom content source (injected) ───────────────────────────────────────
 // The generator should not import the Zustand store. Instead, the caller
 // (app at init, or pipeline per-call) tells us where to read from. Default
-// returns an empty object - generators always work, just with no custom
+// returns an empty object — generators always work, just with no custom
 // content visible.
 
 let _sourceGetter = () => ({});
@@ -207,9 +207,9 @@ export const customDeps = {
 
   // ── Required institution for a trade good ──────────────────────────────
   /**
-   * Resolve a trade good's `requiredInstitution` field - which may be a
+   * Resolve a trade good's `requiredInstitution` field — which may be a
    * legacy bare name (prebuilt EXPORT_GOODS_BY_TIER form) or a refId from
-   * the custom system - to the institution NAME the engine should match
+   * the custom system — to the institution NAME the engine should match
    * against in `settlement.institutions[].name`.
    */
   resolveInstitutionRequirement(maybeRefOrName) {

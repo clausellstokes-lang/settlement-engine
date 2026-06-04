@@ -1,5 +1,5 @@
 /**
- * libraryToolbar.test.js - Contract over the pure filter pipeline.
+ * libraryToolbar.test.js — Contract over the pure filter pipeline.
  *
  * applyLibraryFilters is the reusable query/sort/filter pipeline used
  * by SettlementsPanel and tested in isolation. Pinning behavior here
@@ -30,7 +30,7 @@ const fixtures = [
   },
 ];
 
-describe('applyLibraryFilters - pipeline', () => {
+describe('applyLibraryFilters — pipeline', () => {
   it('empty query + default sort → all rows, recent-first', () => {
     const out = applyLibraryFilters(fixtures, {});
     expect(out.length).toBe(3);

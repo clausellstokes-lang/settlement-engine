@@ -15,7 +15,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
   // `if (!r) return null;` (caught by rules-of-hooks). r-guard moved to
   // a no-op input check inside the memo + a deferred final null check.
   // Granular deps (r?.name, r?.npcs, etc.) deliberately replace the
-  // whole-`r` dep - `r` is a settlement object that re-allocates on
+  // whole-`r` dep — `r` is a settlement object that re-allocates on
   // many unrelated state changes and would over-invalidate the memo.
   const liveConflicts = useMemo(() => {
     const nr = r?.neighborRelationship;
@@ -35,7 +35,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
   const rels=(Array.isArray(r.relationships)?r.relationships:[]);
   const interSettlementRels=r.interSettlementRelationships||[];
 
-  // Only typed entries (conflict / faction_engagement) - not raw NPC contacts (which have no type)
+  // Only typed entries (conflict / faction_engagement) — not raw NPC contacts (which have no type)
   const crossConflictsRaw = [
     ...(r.interSettlementRelationships||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
     ...(r.crossSettlementConflicts||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
@@ -192,7 +192,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
       {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',borderRadius:7,padding:'10px 14px',marginBottom:16}}>
         <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,marginBottom:4}}>◆ EMERGENT CONDITIONS ACTIVE</div>
         <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:0,lineHeight:1.5}}>
-          {flagDriven.length} relationship{flagDriven.length>1?'s':''} shaped by the settlement's compound dynamics - these would not exist under neutral slider conditions.
+          {flagDriven.length} relationship{flagDriven.length>1?'s':''} shaped by the settlement's compound dynamics — these would not exist under neutral slider conditions.
         </p>
       </div>}
 

@@ -1,5 +1,5 @@
 /**
- * domain/state tests - derivation + comparison invariants.
+ * domain/state tests — derivation + comparison invariants.
  *
  * The point isn't to lock the exact derivation values forever. The point
  * is to assert the *direction* of causality: a famine settlement scores

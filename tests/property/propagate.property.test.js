@@ -6,7 +6,7 @@
  *   3. BFS terminates (returns finite result) even under construction-induced cycles
  *
  * The propagation engine is the single highest-risk module in the domain
- * layer - it's recursive, the math is custom, and a regression turns one
+ * layer — it's recursive, the math is custom, and a regression turns one
  * event into an infinite loop or a flat earthquake. These properties
  * lock the two safety knobs (damping, maxHops) and the topology guard
  * (visited set against cycles) at the input-space level.
@@ -24,14 +24,14 @@ function totalImpairments(settlement) {
   return n;
 }
 
-// fc.double, not fc.float - float requires 32-bit-representable bounds
+// fc.double, not fc.float — float requires 32-bit-representable bounds
 // (0.1 is not). The engine math is double-precision anyway.
 const sev = fc.double({ min: 0.1, max: 1, noNaN: true });
 const causeId = fc.string({ minLength: 1, maxLength: 8 });
 
 describe('propagateImpairment (property-based)', () => {
   test('origin with no linked factions yields no new impairments', () => {
-    // Build a settlement where the institution has zero faction edges -
+    // Build a settlement where the institution has zero faction edges —
     // no controls/funds/staffs/protects fields touch it. Propagation
     // should return the settlement unchanged.
     fc.assert(fc.property(sev, causeId, (severity, cid) => {
@@ -97,7 +97,7 @@ describe('propagateImpairment (property-based)', () => {
     // Construct a topology with reciprocal links: faction A controls
     // inst X, and inst X is also touched by faction B which controls
     // inst Y, which is controlled by A. BFS with maxHops=2 must still
-    // terminate and total impairments must stay bounded - not infinite,
+    // terminate and total impairments must stay bounded — not infinite,
     // not exponential.
     fc.assert(fc.property(sev, causeId, (severity, cid) => {
       const settlement = {

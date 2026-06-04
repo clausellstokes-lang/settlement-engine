@@ -1,5 +1,5 @@
 /**
- * campaignSync.js - merge and sync policy for campaign persistence.
+ * campaignSync.js — merge and sync policy for campaign persistence.
  *
  * The store owns UI state; this module owns the dull but important rule:
  * local cache and cloud rows are peers, and loading cloud data must never

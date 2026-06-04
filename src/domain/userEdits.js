@@ -1,5 +1,5 @@
 /**
- * domain/userEdits.js - per-field user authorship.
+ * domain/userEdits.js — per-field user authorship.
  *
  * Tier 5.4 of the roadmap. Premium users can hand-write descriptive
  * prose for any field in the dossier (NPC secrets, plot hooks,
@@ -30,7 +30,7 @@
  * domain/canonStatus.js tagger automatically promotes it to
  * `source: 'user'`, `canonStatus: 'canon'`, `locked: true`. Downstream
  * consumers (AI grounding, overlay verifier, engine regenerate)
- * already respect that flag - no new wiring needed for canon
+ * already respect that flag — no new wiring needed for canon
  * preservation.
  *
  * Pure, synchronous, no I/O. Callers either pass a draft (Immer) or a
@@ -40,7 +40,7 @@
 // ── Editable-field registry ────────────────────────────────────────────
 //
 // Tightly scoped to PROSE ONLY. Structural fields (population, tier,
-// faction power, severity bands) are not editable here - those would
+// faction power, severity bands) are not editable here — those would
 // invalidate the simulation math and need their own opt-in surface
 // with confirmation.
 //
@@ -141,7 +141,7 @@ function setAtPath(obj, path, value) {
  * Records the pre-edit value on the FIRST edit to that path so
  * `revertUserEdit` can restore it. Subsequent edits on the same path
  * update the current value and the timestamp but leave the original
- * intact - Revert always restores the truly-original value.
+ * intact — Revert always restores the truly-original value.
  *
  * Sets `entity._authored = true` so canonStatus picks it up as
  * `source: 'user'` automatically.
@@ -254,7 +254,7 @@ export function getOriginalValue(entity, path) {
 
 /**
  * The current effective value at `path` (edited or otherwise). Always
- * returns the live value - the underlying field stays in sync with
+ * returns the live value — the underlying field stays in sync with
  * the edit record, so this is equivalent to a path read. Provided so
  * callers don't need to know whether a field is edited.
  */
@@ -303,7 +303,7 @@ function readNestedArray(settlement, segments) {
 
 /**
  * Iterate every (entity, editedPath, record) tuple in the settlement
- * - root edits as well as per-entity edits. Yields:
+ * — root edits as well as per-entity edits. Yields:
  *
  *   { kind: 'settlement', path: 'arrivalScene', record }
  *   { kind: 'npc', entityIndex: 3, entity, path: 'secret.what', record }

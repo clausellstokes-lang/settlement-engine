@@ -1,11 +1,11 @@
 /**
- * tests/edgeFunctions/contracts.test.js - Tier 3.3 comprehensive contract tests.
+ * tests/edgeFunctions/contracts.test.js — Tier 3.3 comprehensive contract tests.
  *
  * Edge functions live in supabase/functions/<name>/index.ts. They use
  * Deno-specific APIs and esm.sh imports that vitest cannot import
  * directly. Full runtime integration tests (calling the real handler
  * against a Postgres test instance) require a parallel Deno test
- * runner - a separate infrastructure decision.
+ * runner — a separate infrastructure decision.
  *
  * This file is the next-best layer of defence: STATIC SOURCE
  * INSPECTION that catches the regressions that cost real money or
@@ -55,7 +55,7 @@ function readMigration(name) {
 // stripe-webhook
 // ─────────────────────────────────────────────────────────────────────────
 
-describe('Tier 3.3 - stripe-webhook env vars + dependencies', () => {
+describe('Tier 3.3 — stripe-webhook env vars + dependencies', () => {
   let src;
   beforeAll(() => { src = readFunction('stripe-webhook'); });
 
@@ -84,7 +84,7 @@ describe('Tier 3.3 - stripe-webhook env vars + dependencies', () => {
   });
 });
 
-describe('Tier 3.3 - stripe-webhook signature verification', () => {
+describe('Tier 3.3 — stripe-webhook signature verification', () => {
   let src;
   beforeAll(() => { src = readFunction('stripe-webhook'); });
 
@@ -114,7 +114,7 @@ describe('Tier 3.3 - stripe-webhook signature verification', () => {
   });
 });
 
-describe('Tier 3.3 - stripe-webhook event coverage', () => {
+describe('Tier 3.3 — stripe-webhook event coverage', () => {
   let src;
   beforeAll(() => { src = readFunction('stripe-webhook'); });
 
@@ -166,7 +166,7 @@ describe('Tier 3.3 - stripe-webhook event coverage', () => {
   });
 });
 
-describe('Tier 3.3 - stripe-webhook ledger consistency', () => {
+describe('Tier 3.3 — stripe-webhook ledger consistency', () => {
   let src;
   beforeAll(() => { src = readFunction('stripe-webhook'); });
 
@@ -193,7 +193,7 @@ describe('Tier 3.3 - stripe-webhook ledger consistency', () => {
   });
 });
 
-describe('Tier 3.3 - stripe-webhook response shape', () => {
+describe('Tier 3.3 — stripe-webhook response shape', () => {
   let src;
   beforeAll(() => { src = readFunction('stripe-webhook'); });
 
@@ -210,7 +210,7 @@ describe('Tier 3.3 - stripe-webhook response shape', () => {
 // generate-narrative
 // ─────────────────────────────────────────────────────────────────────────
 
-describe('Tier 3.3 - generate-narrative env vars', () => {
+describe('Tier 3.3 — generate-narrative env vars', () => {
   let src;
   beforeAll(() => { src = readFunction('generate-narrative'); });
 
@@ -223,7 +223,7 @@ describe('Tier 3.3 - generate-narrative env vars', () => {
   });
 });
 
-describe('Tier 3.3 - generate-narrative auth + authorization', () => {
+describe('Tier 3.3 — generate-narrative auth + authorization', () => {
   let src;
   beforeAll(() => { src = readFunction('generate-narrative'); });
 
@@ -240,7 +240,7 @@ describe('Tier 3.3 - generate-narrative auth + authorization', () => {
   });
 });
 
-describe('Tier 3.3 - generate-narrative credit handling', () => {
+describe('Tier 3.3 — generate-narrative credit handling', () => {
   let src;
   beforeAll(() => { src = readFunction('generate-narrative'); });
 
@@ -257,7 +257,7 @@ describe('Tier 3.3 - generate-narrative credit handling', () => {
   });
 
   it('refund failures surface loudly on the stream (no silent racy fallback)', () => {
-    // Tier 9.9 audit plan #4 - the legacy direct-write refund fallback
+    // Tier 9.9 audit plan #4 — the legacy direct-write refund fallback
     // was dropped after migration 009 was confirmed in production.
     // Phase 5's "credit_transactions reason='refund'" fallback no
     // longer exists. Instead, refund_credits RPC failures emit a
@@ -281,7 +281,7 @@ describe('Tier 3.3 - generate-narrative credit handling', () => {
   });
 });
 
-describe('Tier 3.3 - generate-narrative cost catalog must match pricing.js', () => {
+describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', () => {
   let src;
   let pricing;
   beforeAll(() => {
@@ -333,14 +333,14 @@ describe('Tier 3.3 - generate-narrative cost catalog must match pricing.js', () 
     const legacyNarrative = extractFromBlock(pricing, 'LEGACY_AI_COSTS', 'narrative');
     const serverNarrative = src.match(/CREDIT_COSTS[\s\S]*?narrative:\s*(\d+)/)?.[1];
     expect(serverNarrative, 'server narrative cost not found').toBeTruthy();
-    // If these ever match, someone reverted to the legacy schedule -
+    // If these ever match, someone reverted to the legacy schedule —
     // the funnel argument (smaller pack must enable a full week of prep)
     // would no longer hold.
     expect(serverNarrative).not.toBe(legacyNarrative);
   });
 });
 
-describe('Tier 3.3 - generate-narrative AI invariants', () => {
+describe('Tier 3.3 — generate-narrative AI invariants', () => {
   let src;
   beforeAll(() => { src = readFunction('generate-narrative'); });
 
@@ -367,7 +367,7 @@ describe('Tier 3.3 - generate-narrative AI invariants', () => {
 // admin-actions
 // ─────────────────────────────────────────────────────────────────────────
 
-describe('Tier 3.3 - admin-actions env vars', () => {
+describe('Tier 3.3 — admin-actions env vars', () => {
   let src;
   beforeAll(() => { src = readFunction('admin-actions'); });
 
@@ -384,7 +384,7 @@ describe('Tier 3.3 - admin-actions env vars', () => {
   });
 });
 
-describe('Tier 3.3 - admin-actions authorization', () => {
+describe('Tier 3.3 — admin-actions authorization', () => {
   let src;
   beforeAll(() => { src = readFunction('admin-actions'); });
 
@@ -423,7 +423,7 @@ describe('Tier 3.3 - admin-actions authorization', () => {
   });
 });
 
-describe('Tier 3.3 - admin-actions action coverage', () => {
+describe('Tier 3.3 — admin-actions action coverage', () => {
   let src;
   beforeAll(() => { src = readFunction('admin-actions'); });
 
@@ -456,7 +456,7 @@ describe('Tier 3.3 - admin-actions action coverage', () => {
   });
 });
 
-describe('Tier 3.3 - admin-actions audit trail (Phase 5 migration 009)', () => {
+describe('Tier 3.3 — admin-actions audit trail (Phase 5 migration 009)', () => {
   let migrations;
   let src;
   beforeAll(() => {
@@ -485,7 +485,7 @@ describe('Tier 3.3 - admin-actions audit trail (Phase 5 migration 009)', () => {
 // create-checkout
 // ─────────────────────────────────────────────────────────────────────────
 
-describe('Tier 3.3 - create-checkout env vars', () => {
+describe('Tier 3.3 — create-checkout env vars', () => {
   let src;
   beforeAll(() => { src = readFunction('create-checkout'); });
 
@@ -506,7 +506,7 @@ describe('Tier 3.3 - create-checkout env vars', () => {
   });
 });
 
-describe('Tier 3.3 - create-checkout authentication', () => {
+describe('Tier 3.3 — create-checkout authentication', () => {
   let src;
   beforeAll(() => { src = readFunction('create-checkout'); });
 
@@ -527,7 +527,7 @@ describe('Tier 3.3 - create-checkout authentication', () => {
   });
 });
 
-describe('Tier 3.3 - create-checkout product catalog', () => {
+describe('Tier 3.3 — create-checkout product catalog', () => {
   let src;
   beforeAll(() => { src = readFunction('create-checkout'); });
 
@@ -572,7 +572,7 @@ describe('Tier 3.3 - create-checkout product catalog', () => {
   });
 });
 
-describe('Tier 3.3 - create-checkout metadata wiring (must align with webhook)', () => {
+describe('Tier 3.3 — create-checkout metadata wiring (must align with webhook)', () => {
   let src;
   let webhookSrc;
   beforeAll(() => {
@@ -608,7 +608,7 @@ describe('Tier 3.3 - create-checkout metadata wiring (must align with webhook)',
   });
 });
 
-describe('Tier 3.3 - create-checkout CORS handling', () => {
+describe('Tier 3.3 — create-checkout CORS handling', () => {
   let src;
   beforeAll(() => { src = readFunction('create-checkout'); });
 
@@ -628,7 +628,7 @@ describe('Tier 3.3 - create-checkout CORS handling', () => {
 
 const ALL_FUNCTIONS = ['stripe-webhook', 'generate-narrative', 'admin-actions', 'create-checkout'];
 
-describe('Tier 3.3 - no plaintext secrets committed', () => {
+describe('Tier 3.3 — no plaintext secrets committed', () => {
   it('no edge function contains a literal Stripe live key', () => {
     for (const name of ALL_FUNCTIONS) {
       const src = readFunction(name);
@@ -678,7 +678,7 @@ describe('Tier 3.3 - no plaintext secrets committed', () => {
   });
 });
 
-describe('Tier 3.3 - every function uses Deno serve + ESM imports', () => {
+describe('Tier 3.3 — every function uses Deno serve + ESM imports', () => {
   it('every function imports from deno.land/std http/server', () => {
     for (const name of ALL_FUNCTIONS) {
       const src = readFunction(name);
@@ -694,7 +694,7 @@ describe('Tier 3.3 - every function uses Deno serve + ESM imports', () => {
   });
 });
 
-describe('Tier 3.3 - Phase 5 migration 009 invariants', () => {
+describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
   let migrations;
   beforeAll(() => { migrations = readMigrations(); });
 
@@ -743,7 +743,7 @@ describe('Tier 3.3 - Phase 5 migration 009 invariants', () => {
   });
 });
 
-describe('Tier 9.10 - credit/auth integrity migration 017 invariants', () => {
+describe('Tier 9.10 — credit/auth integrity migration 017 invariants', () => {
   let sql;
   beforeAll(() => { sql = readMigration('017_fix_credit_auth_integrity.sql'); });
 
@@ -784,7 +784,7 @@ describe('Tier 9.10 - credit/auth integrity migration 017 invariants', () => {
 // Catalog drift detector
 // ─────────────────────────────────────────────────────────────────────────
 
-describe('Tier 3.3 - product catalog drift between checkout + webhook', () => {
+describe('Tier 3.3 — product catalog drift between checkout + webhook', () => {
   it('every product the checkout function knows about is also handled (or no-op-logged) by the webhook', () => {
     const checkout = readFunction('create-checkout');
     const webhook  = readFunction('stripe-webhook');
@@ -805,7 +805,7 @@ describe('Tier 3.3 - product catalog drift between checkout + webhook', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────
-// Tier 0.5 - Webhook trust-boundary lock-in
+// Tier 0.5 — Webhook trust-boundary lock-in
 //
 // The webhook's case statements read session.metadata.supabase_user_id,
 // product, and credits as if they were trusted. They ARE trusted, but
@@ -817,14 +817,14 @@ describe('Tier 3.3 - product catalog drift between checkout + webhook', () => {
 // accidentally introduce a user-attackable path.
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 0.5 - stripe-webhook trust boundary order', () => {
+describe('Tier 0.5 — stripe-webhook trust boundary order', () => {
   let webhookSrc;
   beforeAll(() => { webhookSrc = readFunction('stripe-webhook'); });
 
   it('constructEvent (signature verification) runs before any session.metadata read', () => {
     const constructIdx = webhookSrc.search(/constructEvent\s*\(/);
     // Look for the specific metadata read pattern used by the case
-    // statements - `session.metadata?.<key>`. The doc block earlier in
+    // statements — `session.metadata?.<key>`. The doc block earlier in
     // the file references `session.metadata` but does NOT read it; the
     // `?.` form is the live access.
     const metadataReadIdx = webhookSrc.search(/session\.metadata\?\./);
@@ -855,13 +855,13 @@ describe('Tier 0.5 - stripe-webhook trust boundary order', () => {
   });
 });
 
-describe('Tier 0.5 - create-checkout metadata population is server-controlled', () => {
+describe('Tier 0.5 — create-checkout metadata population is server-controlled', () => {
   let checkoutSrc;
   beforeAll(() => { checkoutSrc = readFunction('create-checkout'); });
 
-  it('supabase_user_id is set from user.id (the server-verified JWT) - NEVER from the request body', () => {
+  it('supabase_user_id is set from user.id (the server-verified JWT) — NEVER from the request body', () => {
     // P95: allow optional-chained `user?.id` (anonymous single_dossier
-    // path has no user). Contract is unchanged - the user id NEVER
+    // path has no user). Contract is unchanged — the user id NEVER
     // comes from the request body.
     expect(checkoutSrc).toMatch(/supabase_user_id:\s*user\??\.\s*id/);
     // Negative: no path where the user can pass a different id.
@@ -883,7 +883,7 @@ describe('Tier 0.5 - create-checkout metadata population is server-controlled', 
   });
 
   it('rejects non-single_dossier products when authentication is missing', () => {
-    // P95 - auth is still required for credit packs, subscriptions,
+    // P95 — auth is still required for credit packs, subscriptions,
     // and founder seats. Only single_dossier may proceed without it.
     expect(checkoutSrc).toMatch(/Not authenticated|Missing authorization header/);
     expect(checkoutSrc).toMatch(/isAnonymousProduct\s*=\s*product\s*===\s*['"]single_dossier['"]/);
@@ -898,7 +898,7 @@ describe('Tier 0.5 - create-checkout metadata population is server-controlled', 
     expect(validateIdx).toBeLessThan(createIdx);
   });
 
-  it('credits in metadata are computed from server-side CREDIT_AMOUNTS - not from request body', () => {
+  it('credits in metadata are computed from server-side CREDIT_AMOUNTS — not from request body', () => {
     expect(checkoutSrc).toMatch(/credits:\s*String\(CREDIT_AMOUNTS\[product\]/);
     // Negative: no request-body credit injection.
     expect(checkoutSrc).not.toMatch(/credits:\s*String\(req\.|credits:\s*body\.credits/);
@@ -913,7 +913,7 @@ describe('Tier 0.5 - create-checkout metadata population is server-controlled', 
   });
 });
 
-describe('Tier 0.5 - webhook documents its trust-boundary expectations', () => {
+describe('Tier 0.5 — webhook documents its trust-boundary expectations', () => {
   let webhookSrc;
   beforeAll(() => { webhookSrc = readFunction('stripe-webhook'); });
 
@@ -927,7 +927,7 @@ describe('Tier 0.5 - webhook documents its trust-boundary expectations', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────
-// Tier 0.10 - Anonymous abuse defense baseline
+// Tier 0.10 — Anonymous abuse defense baseline
 //
 // Every edge function (except stripe-webhook, which is signature-
 // gated) imports botGuard from _shared/requestMeta.ts and calls it
@@ -935,7 +935,7 @@ describe('Tier 0.5 - webhook documents its trust-boundary expectations', () => {
 // addition doesn't quietly skip the guard.
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 0.10 - shared bot-guard helper exists', () => {
+describe('Tier 0.10 — shared bot-guard helper exists', () => {
   it('_shared/requestMeta.ts is present', () => {
     const path = join(FUNCTIONS_DIR, '_shared', 'requestMeta.ts');
     expect(readFileSync(path, 'utf8')).toMatch(/export function botGuard/);
@@ -965,7 +965,7 @@ describe('Tier 0.10 - shared bot-guard helper exists', () => {
   });
 });
 
-describe('Tier 0.10 - every user-facing edge function uses the bot guard', () => {
+describe('Tier 0.10 — every user-facing edge function uses the bot guard', () => {
   // stripe-webhook is INTENTIONALLY excluded: signature verification is
   // the real gate and Stripe's UA matches the allow-list anyway.
   const FUNCTIONS_WITH_GUARD = ['create-checkout', 'generate-narrative', 'admin-actions'];
@@ -1002,7 +1002,7 @@ describe('Tier 0.10 - every user-facing edge function uses the bot guard', () =>
   }
 });
 
-describe('Tier 0.10 - stripe-webhook is correctly exempt from the bot guard', () => {
+describe('Tier 0.10 — stripe-webhook is correctly exempt from the bot guard', () => {
   let webhookSrc;
   beforeAll(() => { webhookSrc = readFunction('stripe-webhook'); });
 
@@ -1015,7 +1015,7 @@ describe('Tier 0.10 - stripe-webhook is correctly exempt from the bot guard', ()
   });
 });
 
-describe('Tier 0.10 - threat model is documented', () => {
+describe('Tier 0.10 — threat model is documented', () => {
   it('docs/abuse-model.md exists', () => {
     expect(existsSync(join(ROOT, 'docs', 'abuse-model.md'))).toBe(true);
   });

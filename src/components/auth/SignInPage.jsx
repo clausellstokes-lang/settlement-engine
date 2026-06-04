@@ -1,5 +1,5 @@
 /**
- * components/auth/SignInPage.jsx - the dedicated /signin route.
+ * components/auth/SignInPage.jsx — the dedicated /signin route.
  *
  * Full-page sign-in: AuthPageShell chrome wrapping the shared AuthPanel in
  * sign-in mode with the tab toggle hidden (mode switches navigate to the
@@ -8,7 +8,7 @@
  * Post-auth redirect: the moment a session is established we leave for the
  * ?next= destination (if it's a safe internal path) or /create. This covers
  * both the synchronous password path (onAuthed) and the async magic-link /
- * OAuth return, where the session lands via onAuthStateChange after mount -
+ * OAuth return, where the session lands via onAuthStateChange after mount —
  * hence the effect on authTier in addition to the onAuthed callback.
  */
 import { useEffect } from 'react';
@@ -41,7 +41,7 @@ export default function SignInPage() {
   return (
     <AuthPageShell
       title="Welcome back"
-      subtitle="Sign in to keep your work - saves, exports, and larger settlements."
+      subtitle="Sign in to keep your work — saves, exports, and larger settlements."
       footer={
         <span>
           New here?{' '}

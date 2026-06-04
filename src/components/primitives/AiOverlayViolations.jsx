@@ -1,8 +1,8 @@
 /**
- * primitives/AiOverlayViolations - surface for the runtime verifier's findings.
+ * primitives/AiOverlayViolations — surface for the runtime verifier's findings.
  *
  * Tier 6.7 of the roadmap. The aiOverlayVerifier (Tier 6.4) catches
- * AI overlay drift at runtime - invented entities, renamed proper
+ * AI overlay drift at runtime — invented entities, renamed proper
  * nouns, contradicted facts, user-edited fields the AI overrode. The
  * verifier's report lives on `state.aiViolations` (Tier 6.5 wiring),
  * but until this component lands the findings are invisible to the
@@ -147,7 +147,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
             <Group
               violations={hard}
               tone="hard"
-              caption="Hard violations - canon was directly compromised. The DM should inspect these before accepting the refined output."
+              caption="Hard violations — canon was directly compromised. The DM should inspect these before accepting the refined output."
             />
           )}
           {softCount > 0 && (
@@ -155,7 +155,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
               violations={soft}
               tone="soft"
               caption={hardCount > 0
-                ? 'Soft violations - informational. The simulation is still valid; some derived prose simply went missing.'
+                ? 'Soft violations — informational. The simulation is still valid; some derived prose simply went missing.'
                 : 'Drift was detected but is informational only. The simulation is still valid.'}
             />
           )}

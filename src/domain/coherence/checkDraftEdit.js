@@ -1,9 +1,9 @@
 /**
- * domain/coherence/checkDraftEdit.js - Draft-mode policy wrapper around
+ * domain/coherence/checkDraftEdit.js — Draft-mode policy wrapper around
  * the existing structuralValidator.
  *
  * The validator already produces violations/suggestions. Draft mode
- * surfaces them as actionable warnings - "you added a port to an
+ * surfaces them as actionable warnings — "you added a port to an
  * inland village; suggested fixes: add river access, change terrain,
  * downgrade to caravanserai." Canon mode silences them: the DM said
  * the temple burned, we don't second-guess them.
@@ -22,7 +22,7 @@ import { checkStructuralValidity } from '../../generators/structuralValidator.js
 export function checkDraftEdit(settlement) {
   // Short-circuit on truly empty input. The validator has tier defaults
   // ('town' + 'frontier') that would otherwise fire a survival-crisis
-  // warning against a settlement that doesn't exist yet - useless noise
+  // warning against a settlement that doesn't exist yet — useless noise
   // for the UI which only cares about real settlements.
   if (settlement == null) return [];
   const s = settlement;
@@ -78,7 +78,7 @@ function formatSuggestion(s) {
 
 /**
  * Tag a violation with possible fixes the user can apply directly. Kept
- * shallow - the structuralValidator's `suggested` field already has
+ * shallow — the structuralValidator's `suggested` field already has
  * most useful hints; we just promote them. A future version can produce
  * "click to add this institution" affordances against the catalog.
  */

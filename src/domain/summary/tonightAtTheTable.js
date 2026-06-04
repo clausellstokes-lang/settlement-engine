@@ -1,5 +1,5 @@
 /**
- * domain/summary/tonightAtTheTable.js - Pure composer for the right
+ * domain/summary/tonightAtTheTable.js — Pure composer for the right
  * column of the magazine-spread Summary tab.
  *
  * Pulls the highest-leverage table-night entries from a settlement:
@@ -10,7 +10,7 @@
  *   - Red flag         (a "don't mention" beat derived from a
  *                       failing supply chain)
  *
- * Pure - same input always yields the same output. The Summary tab
+ * Pure — same input always yields the same output. The Summary tab
  * (P129) calls this once per settlement and renders the cards.
  *
  * Returns an array of `{ kind, title, body }` entries, capped at 6 so
@@ -90,7 +90,7 @@ export function tonightAtTheTable(settlement) {
 
   // ── Red flag ─────────────────────────────────────────────────────────
   // A "don't mention" derived from a failing supply chain. The
-  // critique's canonical example: "Don't mention salt - NPCs go cold.
+  // critique's canonical example: "Don't mention salt — NPCs go cold.
   // Reason: routes broken."
   const failures = settlement.supplyChainState?.failures || [];
   if (failures.length > 0) {
@@ -108,5 +108,5 @@ export function tonightAtTheTable(settlement) {
 function truncate(s, n) {
   const str = String(s || '');
   if (str.length <= n) return str;
-  return str.slice(0, Math.max(0, n - 3)).trimEnd() + '...';
+  return str.slice(0, Math.max(0, n - 1)).trimEnd() + '…';
 }

@@ -1,5 +1,5 @@
 /**
- * primitives/ActionRail - Phase-aware "next best action" stack.
+ * primitives/ActionRail — Phase-aware "next best action" stack.
  *
  * The audit's single most cost-effective UI win: surface the right
  * next CTA in a consistent place, instead of scattering buttons across
@@ -9,7 +9,7 @@
  * of secondaries.
  *
  * Hard cap: 5 visible items. The audit's caveat ("the rail will become
- * a magnet") is real - additional items go behind a "More" disclosure.
+ * a magnet") is real — additional items go behind a "More" disclosure.
  */
 
 import { useState } from 'react';
@@ -41,7 +41,7 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
   if (!items.length) return null;
 
   // Dedupe: only the first primary actually renders as primary.
-  // Stateless form - findIndex finds the first primary slot, map then
+  // Stateless form — findIndex finds the first primary slot, map then
   // demotes every other one. Earlier `let primarySeen = false; ...
   // primarySeen = true` inside .map mutated a closed-over variable,
   // which is a react-hooks/immutability violation under React Compiler.

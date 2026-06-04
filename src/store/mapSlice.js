@@ -1,5 +1,5 @@
 /**
- * mapSlice - Single source of truth for the World Map.
+ * mapSlice — Single source of truth for the World Map.
  *
  * Everything the map needs to render lives here. No local state in
  * WorldMap.jsx, no duplication, no drift. The campaign system persists
@@ -7,7 +7,7 @@
  * blob.
  *
  * Derived selectors (burgSettlementMap, linked settlements, etc.) live
- * in store/selectors.js - never stored directly.
+ * in store/selectors.js — never stored directly.
  *
  * Schema version 2 (2026-04): snapshot-based campaigns, annotation layer,
  * terrain mode support.
@@ -17,7 +17,7 @@ export const MAP_MODES = {
   VIEW: 'view',
   TERRAIN: 'terrain',
   ANNOTATE: 'annotate',
-  // P110 / M-4 - Routes mode: relationship-first overlay. Forces
+  // P110 / M-4 — Routes mode: relationship-first overlay. Forces
   // RelationshipEdges + RoadsLayer + ChainEdges to full opacity,
   // hides annotate UI, surfaces a network-stress alert when the
   // supply-chain state has cascading impacts.
@@ -27,7 +27,7 @@ export const MAP_MODES = {
 // Terrain tools that actually open a usable FMG editor when invoked from a
 // toolbar button (i.e. without an existing map-feature selection). The Rivers,
 // Coastline, and Lakes editors require a clicked feature to operate (they
-// reach for d3.event.target internally), so they are NOT exposed here - users
+// reach for d3.event.target internally), so they are NOT exposed here — users
 // double-click those features on the map to edit them. Biomes is handled as
 // a layer-visibility toggle in mapState.layers.nativeBiomes, not as a tool.
 export const TERRAIN_TOOLS = {
@@ -84,7 +84,7 @@ const DEFAULT_ANNOTATE_OPTIONS = {
   forestDensity: 0.4,
 };
 
-/** Fresh empty map state - used on reset, on first load, and as a baseline for campaigns. */
+/** Fresh empty map state — used on reset, on first load, and as a baseline for campaigns. */
 function freshMapState() {
   return {
     // FMG geography snapshot (base64 blob, nullable if not yet captured)
@@ -113,8 +113,8 @@ export const createMapSlice = (set, get) => ({
   mapError: null,
 
   // Monotonic counter bumped whenever the underlying FMG geography changes
-  // (snapshot loaded, world regenerated). Derived layers - RoadsLayer,
-  // RelationshipEdges, ChainEdges - include this in their effect deps so
+  // (snapshot loaded, world regenerated). Derived layers — RoadsLayer,
+  // RelationshipEdges, ChainEdges — include this in their effect deps so
   // their A* / coordinate caches recompute against the new world even when
   // placements themselves are unchanged. Without this, loading a saved map
   // shows stale routes from the previously-rendered world until the user
@@ -126,9 +126,9 @@ export const createMapSlice = (set, get) => ({
   terrainTool: null,          // one of TERRAIN_TOOLS when mapMode === TERRAIN
   annotateTool: ANNOTATE_TOOLS.SELECT,  // current annotate tool
   selectedBurgId: null,        // clicked burg id (opaque placement handle)
-  selectedSettlementId: null,  // clicked settlement UUID - primary key for detail panels
+  selectedSettlementId: null,  // clicked settlement UUID — primary key for detail panels
   selectedAnnotationId: null,  // clicked label/marker/forest
-  // P136 / M-6 - quick-inspector hover state. Distinct from
+  // P136 / M-6 — quick-inspector hover state. Distinct from
   // `selectedSettlementId` because selection is a deliberate click;
   // hover is a "peek" that doesn't commit. The QuickInspector
   // component subscribes to this and renders a 3-line card.
@@ -145,7 +145,7 @@ export const createMapSlice = (set, get) => ({
   mapUndoStack: [],
   mapRedoStack: [],
 
-  // The map state proper - the thing that gets persisted per campaign
+  // The map state proper — the thing that gets persisted per campaign
   mapState: freshMapState(),
 
   // ── Runtime setters ───────────────────────────────────────────────────────
@@ -182,7 +182,7 @@ export const createMapSlice = (set, get) => ({
 
   clearSelectedSettlementId: () => set(state => { state.selectedSettlementId = null; }),
 
-  // P136 / M-6 - hover-peek mutations. Setting hoveredSettlementId
+  // P136 / M-6 — hover-peek mutations. Setting hoveredSettlementId
   // does not affect selection; the QuickInspector renders a tiny
   // floating card with name + pressure + top hook so the user can
   // peek a placement without committing to opening the full detail.
@@ -322,7 +322,7 @@ export const createMapSlice = (set, get) => ({
   /**
    * Bump the geometry-version counter. Called by WorldMap.jsx after a fresh
    * FMG snapshot has been loaded, the world has been regenerated, or the
-   * map has been deselected - anything that invalidates A*-routed road
+   * map has been deselected — anything that invalidates A*-routed road
    * polylines whose coordinates were computed against the previous geometry.
    */
   bumpGeometryVersion: () => set(state => {
@@ -332,7 +332,7 @@ export const createMapSlice = (set, get) => ({
   // ── Wholesale state swap (campaign load) ──────────────────────────────────
   /**
    * Replace the full mapState with a new one (typically from a loaded campaign).
-   * Does NOT touch the FMG snapshot - that needs to be loaded via the bridge.
+   * Does NOT touch the FMG snapshot — that needs to be loaded via the bridge.
    */
   replaceMapState: (next) => set(state => {
     if (!next) { state.mapState = freshMapState(); return; }
@@ -357,7 +357,7 @@ export const createMapSlice = (set, get) => ({
     state.selectedAnnotationId = null;
   }),
 
-  // ── Undo/redo (coarse - snapshot-per-action) ──────────────────────────────
+  // ── Undo/redo (coarse — snapshot-per-action) ──────────────────────────────
   pushMapUndo: (action) => set(state => {
     state.mapUndoStack.push({
       action,

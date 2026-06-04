@@ -1,7 +1,7 @@
 /**
- * domain/worldPulse/chronicle.js - grounding for an AI campaign chronicle.
+ * domain/worldPulse/chronicle.js — grounding for an AI campaign chronicle.
  *
- * Wizard News is deterministic, structured, and explainable - ideal grounding
+ * Wizard News is deterministic, structured, and explainable — ideal grounding
  * for an optional AI "this season's regional chronicle" prose pass (mirroring
  * the dossier's narrative layer). This builds the PII-free grounding payload.
  *
@@ -22,7 +22,7 @@ const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
  * @param {any} [args.snapshot]     a world snapshot (for settlement names + conditions)
  * @param {number} [args.tick]      restrict to a single tick (default: the latest)
  * @param {number} [args.lookback]  how many recent ticks to include when tick is omitted
- * @returns {Object} grounding payload - pure data, no PII
+ * @returns {Object} grounding payload — pure data, no PII
  */
 export function buildChronicleGrounding({ wizardNews, worldState, snapshot, tick = null, lookback = 1 } = {}) {
   const allEntries = Array.isArray(wizardNews?.entries) ? wizardNews.entries : [];

@@ -1,21 +1,21 @@
 /**
- * SettlementPDF - top-level Document tree.
+ * SettlementPDF — top-level Document tree.
  *
  * Order (prep-friendly): Cover → Overview → Tonight at the Table →
  * People (NPCs, Hooks) → Power & Place (Power, Identity, Services) →
  * Systems (Economics, Resources, Defense) → Background (History, Viability) →
  * External (Relationships) → optional AI Appendix.
  *
- * The legacy Summary page was removed - Overview already carries everything
+ * The legacy Summary page was removed — Overview already carries everything
  * the one-pager held, and the duplication was confusing readers.
  *
  * Props
- *   settlement     - raw settlement object from the save / store
- *   aiSettlement   - narrative payload (thesis, factionBlurbs, npcs ...) when
+ *   settlement     — raw settlement object from the save / store
+ *   aiSettlement   — narrative payload (thesis, factionBlurbs, npcs …) when
  *                    the user is viewing the AI lens. Optional.
- *   aiDailyLife    - { dawn, morning, midday, evening, night } prose blobs.
+ *   aiDailyLife    — { dawn, morning, midday, evening, night } prose blobs.
  *                    Optional. Drives the Daily Life chapter when present.
- *   narrativeMode  - true if the export should pull narrative content where
+ *   narrativeMode  — true if the export should pull narrative content where
  *                    available. Drives the Cover badge and chapter accents.
  */
 import { Document } from '@react-pdf/renderer';
@@ -47,9 +47,9 @@ export function SettlementPDF({
   aiSettlement = null,
   aiDailyLife = null,
   narrativeMode = false,
-  // Campaign-state engine extras - when present, the PDF emits the
+  // Campaign-state engine extras — when present, the PDF emits the
   // SystemStateSnapshot chapter (always) and the Timeline chapter
-  // (canon mode only). When absent, both chapters are skipped - saved
+  // (canon mode only). When absent, both chapters are skipped — saved
   // settlements that pre-date this feature still export cleanly.
   systemState = null,
   eventLog = [],
@@ -64,8 +64,8 @@ export function SettlementPDF({
   // are unaffected.
   isFounder = false,
   // Anonymous PDFs (single-dossier purchase, anonymous preview) carry
-  // a footer watermark. Account holders - Wanderer, Cartographer,
-  // Founder - get clean exports.
+  // a footer watermark. Account holders — Wanderer, Cartographer,
+  // Founder — get clean exports.
   isAnonymous = false,
 }) {
   const safe = settlement || {};
@@ -80,7 +80,7 @@ export function SettlementPDF({
   const showState    = inc('systemState') && !!systemState;
   const showTimeline = inc('timeline');
 
-  // ToC entries - must match the chapters actually rendered below, which
+  // ToC entries — must match the chapters actually rendered below, which
   // are now variant-gated. Build by filtering against the same `inc()`
   // helper so the ToC and the rendered set never diverge.
   const tocEntries = [
@@ -106,7 +106,7 @@ export function SettlementPDF({
 
   return (
     <Document
-      title={`${safe.name || 'Settlement'} - Dossier`}
+      title={`${safe.name || 'Settlement'} — Dossier`}
       author="SettlementForge"
       creator="SettlementForge"
       subject={`Settlement dossier${useAi ? ' (AI narrative edition)' : ''}`}

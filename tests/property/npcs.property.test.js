@@ -5,7 +5,7 @@
  *   2. importanceWeight is monotone across the tier ladder
  *   3. killNpc never mutates input + impairment count is monotone in importance
  *
- * The kill-NPC path is the most consequential mutation in the engine -
+ * The kill-NPC path is the most consequential mutation in the engine —
  * pillar deaths cascade through every linked institution and faction.
  * Locking the monotonicity contract here means future tuning of the
  * propagation engine can't accidentally make a "key" death produce more
@@ -29,7 +29,7 @@ describe('npcs (property-based)', () => {
   test('createNpc returns a complete shape for any partial input', () => {
     fc.assert(fc.property(npcInput, (input) => {
       const npc = createNpc(input);
-      // All structural fields exist with the right types - downstream
+      // All structural fields exist with the right types — downstream
       // consumers (propagate.js, the UI, the PDF) assume these are
       // present without null-checks.
       expect(typeof npc.id).toBe('string');
@@ -46,7 +46,7 @@ describe('npcs (property-based)', () => {
   });
 
   test('importanceWeight is monotone across the tier ladder', () => {
-    // Fixed property - exhaustively true for all 4 tiers, but expressing
+    // Fixed property — exhaustively true for all 4 tiers, but expressing
     // it via fast-check gives shrinking on the (rare) failure case.
     fc.assert(fc.property(fc.constant(null), () => {
       const m = importanceWeight({ importance: 'minor' });
@@ -64,7 +64,7 @@ describe('npcs (property-based)', () => {
   test('killNpc does not mutate input + impairment count is monotone in importance', () => {
     // For an NPC linked to N institutions and M factions, the number of
     // produced impairments must rise (or stay equal) as importance moves
-    // from notable → key → pillar. (minor produces zero - checked
+    // from notable → key → pillar. (minor produces zero — checked
     // separately by the example tests.)
     fc.assert(fc.property(
       fc.array(fc.string({ minLength: 1, maxLength: 12 }), { minLength: 1, maxLength: 3 }),
@@ -106,7 +106,7 @@ describe('npcs (property-based)', () => {
     ), { numRuns: 40 });
   });
 
-  // Bonus invariant: inferImportance is stable - calling it on its own
+  // Bonus invariant: inferImportance is stable — calling it on its own
   // output produces the same result. Catches role-regex drift.
   test('inferImportance is stable on its own output', () => {
     fc.assert(fc.property(npcInput, (input) => {

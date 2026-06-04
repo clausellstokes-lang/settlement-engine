@@ -1,5 +1,5 @@
 /**
- * DefenseSecurity - chapter 04. Threat detail + criminal architecture +
+ * DefenseSecurity — chapter 04. Threat detail + criminal architecture +
  * supporting capabilities.
  *
  *   - Active military status override banner (siege/occupied/civil war)
@@ -58,9 +58,9 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       {/* ── Readiness strip ──────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'READINESS', value: d.readiness?.label || '-' },
+          { label: 'READINESS', value: d.readiness?.label || '—' },
           { label: 'SCORE AVG', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
-          { label: 'SAFETY', value: cap(d.safetyLabel) || '-' },
+          { label: 'SAFETY', value: cap(d.safetyLabel) || '—' },
           { label: 'WATCH:POP', value: smart(d.safetyRatio) },
           { label: 'FOOD RES.', value: smart(d.foodResilience) },
         ]}
@@ -264,7 +264,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
               </Text>
               <View style={{ flex: 1 }}>
                 <Text style={{ ...type.body, fontSize: pt['9'], color: palette.ink }}>
-                  {typeof v === 'string' ? v : (v?.label || cap(v?.level) || '-')}
+                  {typeof v === 'string' ? v : (v?.label || cap(v?.level) || '—')}
                 </Text>
                 {typeof v === 'object' && v?.description && (
                   <EditableText

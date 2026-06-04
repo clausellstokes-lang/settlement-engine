@@ -1,5 +1,5 @@
 /**
- * settlementSlice - Generated settlement state and saved-settlement library.
+ * settlementSlice — Generated settlement state and saved-settlement library.
  *
  * Holds the current generated settlement, the saved settlements list,
  * and the reactive-update engine state (what-if previews, deltas).
@@ -12,11 +12,11 @@
 // imports shifts that load to first-generate, shaving the cold-start
 // payload by ~25 %. Subsequent generations are cached.
 //
-// `loadEngine()` resolves once and memoizes - every action calls
+// `loadEngine()` resolves once and memoizes — every action calls
 // `await loadEngine()` to get the module bag. Actions that previously
 // were synchronous become async; that's safe because none of them return
 // a value that callers consume (they set Zustand state via the `set`
-// callback). React components that fire-and-forget still work - they
+// callback). React components that fire-and-forget still work — they
 // just see the resulting state update one microtask later.
 //
 // `createPRNG` was previously imported here but is only used by the
@@ -70,8 +70,8 @@ import {
   countSettlementEdits as domainCountSettlementEdits,
 } from '../domain/userEdits.js';
 // Anonymous daily generation cap (localStorage soft cap). Enforced here
-// so EVERY generation path - hero first-gen, wizard "Regenerate Draft",
-// Workshop, sample fork - counts against the same 3/day allowance. The
+// so EVERY generation path — hero first-gen, wizard "Regenerate Draft",
+// Workshop, sample fork — counts against the same 3/day allowance. The
 // cap used to live only in HomeHero, which let regeneration bypass it.
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
 import { saves as savesService } from '../lib/saves.js';
@@ -203,7 +203,7 @@ export const createSettlementSlice = (set, get) => ({
   // on regeneration.
   pipelineHistory: [],
 
-  // P100 / X-1 - Transient flag set right after the pipeline runs and
+  // P100 / X-1 — Transient flag set right after the pipeline runs and
   // cleared when the PipelineReveal overlay finishes its playback. The
   // overlay reads `pipelineHistory` to animate; the wizard hides the
   // dossier until this flag drops. Cleared on a fresh generate so the
@@ -211,7 +211,7 @@ export const createSettlementSlice = (set, get) => ({
   pipelineRevealActive: false,
   dismissPipelineReveal: () => set(state => { state.pipelineRevealActive = false; }),
 
-  // P103 / X-2 - Active pricing moment. usePricingMoment opens these via
+  // P103 / X-2 — Active pricing moment. usePricingMoment opens these via
   // setActivePricingMoment({ headline, body, reason }); the
   // PricingMomentCard subscribes here and renders. Single-active-at-a-time
   // by design (the cooldown library handles dedupe).
@@ -223,7 +223,7 @@ export const createSettlementSlice = (set, get) => ({
     state.activePricingMoment = null;
   }),
 
-  // P104 / X-4 - Lifetime narrate count, used by useReaderAudience to
+  // P104 / X-4 — Lifetime narrate count, used by useReaderAudience to
   // bump anonymous → intermediate after first narrate spend. Bumped
   // alongside spendCredits in creditsSlice; here we just declare it.
   lifetimeNarrateCount: 0,
@@ -231,7 +231,7 @@ export const createSettlementSlice = (set, get) => ({
     state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
   }),
 
-  // P105 / E-2 - Pending edits queue. Each edit is a frozen object
+  // P105 / E-2 — Pending edits queue. Each edit is a frozen object
   // produced by domain/pendingEdits.buildEdit(). The PendingChangesBar
   // reads this; commitPendingEdits applies the queue to the live
   // settlement; revertPendingEdits drops it.
@@ -247,7 +247,7 @@ export const createSettlementSlice = (set, get) => ({
       state.pendingEditsClock = clock;
       state.pendingEditsQueue = _pe_appendEdit(state.pendingEditsQueue || [], edit);
     });
-    // Analytics - once per queued edit
+    // Analytics — once per queued edit
     import('../lib/analytics.js').then(({ Funnel, EVENTS }) => {
       Funnel.track(EVENTS.EDIT_PENDING_QUEUED, { kind });
     }).catch(() => {});
@@ -270,7 +270,7 @@ export const createSettlementSlice = (set, get) => ({
 
   /** Apply the queue against the live settlement. Each edit dispatches
    *  to an existing mutation (renameNPC, etc.) by `kind`. Edits that
-   *  don't map to a known mutation are skipped with a warning - the
+   *  don't map to a known mutation are skipped with a warning — the
    *  queue clears either way on a successful commit. */
   commitPendingEdits: () => {
     const state = get();
@@ -291,7 +291,7 @@ export const createSettlementSlice = (set, get) => ({
             set(s => { if (s.settlement) s.settlement.name = edit.payload?.newName; });
             break;
           // Future kinds (add-institution etc.) dispatch to existing
-          // mutations or - for not-yet-built ones - log a TODO. The
+          // mutations or — for not-yet-built ones — log a TODO. The
           // queue still clears so the UI isn't stuck on a missing
           // dispatcher.
           default:
@@ -306,7 +306,7 @@ export const createSettlementSlice = (set, get) => ({
     // Clear the queue. Failed-commit retry is a future-tier feature;
     // for now, all-or-nothing matches the cascade-preview UX.
     set(s => { s.pendingEditsQueue = []; });
-    // P133 / E-5 - Snapshot the post-commit state so the version
+    // P133 / E-5 — Snapshot the post-commit state so the version
     // timeline records this as a discrete edit checkpoint. The
     // snapshot label summarises what edits were applied; the user
     // can revert to before this batch from VersionsTab.
@@ -316,20 +316,20 @@ export const createSettlementSlice = (set, get) => ({
       if (typeof fn === 'function') {
         fn({ kind: 'auto-commit', label: `Edits: ${labels}` });
       }
-    } catch (_e) { /* silent - snapshot failure shouldn't undo the commit */ }
+    } catch (_e) { /* silent — snapshot failure shouldn't undo the commit */ }
   },
 
   // ── P133 / E-5 · Version history mutations ──────────────────────────
   //
   // `recordSnapshot({ saveId?, kind, label, ts? })` appends a frozen
   // snapshot of the live settlement (or a specified save) into
-  // `versionHistory`. Snapshots are immutable - the timeline never
+  // `versionHistory`. Snapshots are immutable — the timeline never
   // mutates an existing entry.
   //
   // `revertToSnapshot({ saveId, snapshotId })` finds the snapshot in
   // versionHistory and overwrites the live settlement (or the save's
   // settlement payload) with the snapshot's content. The CURRENT state
-  // is auto-snapshotted FIRST so reverting is never destructive - the
+  // is auto-snapshotted FIRST so reverting is never destructive — the
   // critique was explicit about that.
   //
   // Saved-settlement timelines persist immediately through the normal
@@ -363,7 +363,7 @@ export const createSettlementSlice = (set, get) => ({
         persistedHistory = cloneJson(cur.versionHistory);
       });
     } else {
-      // No saveId - write into the live settlement's history. This
+      // No saveId — write into the live settlement's history. This
       // lets unsaved sessions still build a local timeline.
       set(s => {
         if (!s.settlement) return;
@@ -438,9 +438,9 @@ export const createSettlementSlice = (set, get) => ({
   // full contract.
   phase:           'draft',  // 'draft' | 'canon'
   locks:           {},       // see Locks typedef in domain/types.js
-  systemState:     null,     // SystemState - derived after every generation/event
-  eventLog:        [],       // EventLogEntry[] - populated only in canon mode
-  pendingPreview:  null,     // EventPreview - set by previewEvent, cleared by apply/dismiss
+  systemState:     null,     // SystemState — derived after every generation/event
+  eventLog:        [],       // EventLogEntry[] — populated only in canon mode
+  pendingPreview:  null,     // EventPreview — set by previewEvent, cleared by apply/dismiss
 
   // Set by applyEvent when a pillar-tier NPC death just committed.
   // The SuccessorPrompt UI consumes this to ask the DM whether to
@@ -449,7 +449,7 @@ export const createSettlementSlice = (set, get) => ({
   // Shape: { outgoingNpcId, outgoingNpcName, suggestedSuccessorIds, originEventId }
   pendingSuccession: null,
 
-  // Provenance timestamps - populated by the relevant handlers below.
+  // Provenance timestamps — populated by the relevant handlers below.
   // Surface in ProvenanceBlock so DMs can see at a glance "when did
   // this become canon?" / "when was it last exported?" without
   // hunting through chronicle entries.
@@ -479,7 +479,7 @@ export const createSettlementSlice = (set, get) => ({
     // Anonymous daily generation cap (Tier 7.2). Every full-settlement
     // generation funnels through this action, so this is the single point
     // of enforcement. A *regeneration* (a settlement is already on screen)
-    // now counts the same as a first generation - previously rerolls were
+    // now counts the same as a first generation — previously rerolls were
     // free, which let an anon mint unlimited towns past the 3/day cap.
     // Captured before the engine runs so we can both block at-cap and pick
     // the right bucket (reroll vs. full) after a successful run.
@@ -513,7 +513,7 @@ export const createSettlementSlice = (set, get) => ({
       // Per-step trace for the "How this was simulated" rail. Each step
       // contributes one entry with a factual summary derived from the
       // accumulated context (e.g. "5 institutions placed"). Errors in
-      // the summarizer don't fail the run - they just produce a null
+      // the summarizer don't fail the run — they just produce a null
       // summary and the rail falls back to the label.
       const pipelineHistory = [];
       result = eng.generateSettlementPipeline(fullConfig, neighbor, {
@@ -529,7 +529,7 @@ export const createSettlementSlice = (set, get) => ({
       });
       // Derive the SystemState immediately so the UI never sees a settlement
       // without its accompanying state snapshot. The domain function is
-      // pure - no store, no React - and tolerant of partial inputs, so a
+      // pure — no store, no React — and tolerant of partial inputs, so a
       // sparse settlement still produces a usable state.
       let systemState = null;
       try {
@@ -549,7 +549,7 @@ export const createSettlementSlice = (set, get) => ({
         state.pendingChange = null;
         state.pendingPreview = null;
         state.pipelineHistory = pipelineHistory;
-        // P100 - arm the reveal overlay. PipelineReveal mounts when this
+        // P100 — arm the reveal overlay. PipelineReveal mounts when this
         // flips true, plays back through pipelineHistory, then calls
         // dismissPipelineReveal() to clear it. Gated by the flag at the
         // consumer site (GenerateWizard) so a flag-flip kills the
@@ -557,7 +557,7 @@ export const createSettlementSlice = (set, get) => ({
         state.pipelineRevealActive = true;
         // Generation always returns the settlement to draft phase. Going to
         // canon is a deliberate user action (canonize()), not a side-effect
-        // of regeneration - that would silently invalidate any campaign log.
+        // of regeneration — that would silently invalidate any campaign log.
         state.phase = 'draft';
         state.eventLog = [];
         state.generatedAt = now;
@@ -565,12 +565,12 @@ export const createSettlementSlice = (set, get) => ({
         state.canonizedAt = null;
       });
     } else {
-      // Tier 1.7 - legacy generator path. The pipeline path above
+      // Tier 1.7 — legacy generator path. The pipeline path above
       // is preferred; this fallback exists for callers that haven't
       // migrated yet. DEV-only warning so the deprecation is visible
       // during development without polluting production logs.
       if (typeof window !== 'undefined' && window?.location?.hostname === 'localhost') {
-        console.warn('[settlementSlice] legacy engineGenerate called - pipeline path is preferred (Tier 1.7).');
+        console.warn('[settlementSlice] legacy engineGenerate called — pipeline path is preferred (Tier 1.7).');
       }
       result = eng.engineGenerate(fullConfig);
       set(state => {
@@ -616,7 +616,7 @@ export const createSettlementSlice = (set, get) => ({
     }),
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
-  // Async - same reason as generateSettlement (lazy engine load).
+  // Async — same reason as generateSettlement (lazy engine load).
   // Tier 5.1: every regenerate computes a structured delta against
   // the prior settlement so the UI's RegenerationDeltaCard can show
   // what changed. The delta is lazy-imported to keep its transitive
@@ -626,7 +626,7 @@ export const createSettlementSlice = (set, get) => ({
     const { settlement, config } = state;
     if (!settlement) return;
 
-    // P103 / X-2 - Track session regen-burst. When the user crosses 5
+    // P103 / X-2 — Track session regen-burst. When the user crosses 5
     // regens in a single session, fire regen_burst (worldbuilder hint
     // for locks/drift/chronicle). Counter lives in-memory only since
     // it's a session-scoped behavior signal.
@@ -664,7 +664,7 @@ export const createSettlementSlice = (set, get) => ({
       const delta = deriveRegenerationDelta(before, after);
       set(s => { s.lastRegenerationDelta = delta; });
     } catch (e) {
-      // Delta is a defensive surface - never block the regenerate
+      // Delta is a defensive surface — never block the regenerate
       // on a delta-derivation failure.
       console.warn('[settlementSlice] regenerationDelta failed', e);
     }
@@ -739,12 +739,12 @@ export const createSettlementSlice = (set, get) => ({
   /**
    * Apply the pending what-if change for real.
    *
-   * IMPORTANT - same-seed reuse: this used to call `generateSeed()`,
+   * IMPORTANT — same-seed reuse: this used to call `generateSeed()`,
    * meaning every applied change rerolled the entire town under a fresh
    * seed. That destroyed continuity (the name, the founding lore, the
    * unrelated NPCs all shifted). The current implementation reuses
    * `lastSeed` so the deterministic PRNG produces the same output for
-   * any subsystem the change doesn't affect - only the genuinely
+   * any subsystem the change doesn't affect — only the genuinely
    * impacted parts move. The only path to a new seed is an explicit
    * regeneration call.
    *
@@ -782,17 +782,17 @@ export const createSettlementSlice = (set, get) => ({
       }
       set(s => {
         s.settlement     = result;
-        s.lastSeed       = seed;       // unchanged unless missing - preserves identity
+        s.lastSeed       = seed;       // unchanged unless missing — preserves identity
         s.lastCtx        = capturedCtx;
         s.systemState    = nextSystemState;
         s.pendingChange  = null;
         s.whatIfPreview  = null;
       });
     } else {
-      // Tier 1.7 - legacy generator path (same deprecation note as
+      // Tier 1.7 — legacy generator path (same deprecation note as
       // the primary generate() handler).
       if (typeof window !== 'undefined' && window?.location?.hostname === 'localhost') {
-        console.warn('[settlementSlice] legacy engineGenerate called from applyPendingChange - pipeline path is preferred (Tier 1.7).');
+        console.warn('[settlementSlice] legacy engineGenerate called from applyPendingChange — pipeline path is preferred (Tier 1.7).');
       }
       const result = eng.engineGenerate(fullConfig);
       set(s => {
@@ -818,7 +818,7 @@ export const createSettlementSlice = (set, get) => ({
    * exactly what the user is looking at.
    *
    * Without this snapshot, two saves would share whatever was last in
-   * the global slice - exactly the bug the audit flagged. The
+   * the global slice — exactly the bug the audit flagged. The
    * `campaign_state` JSONB column on Supabase plus the migration helper
    * in `lib/saves.js` round-trip these fields.
    */
@@ -841,7 +841,7 @@ export const createSettlementSlice = (set, get) => ({
       });
     });
 
-    // P103 / X-2 - first_save + third_save pricing moments. Fire-and-
+    // P103 / X-2 — first_save + third_save pricing moments. Fire-and-
     // forget so the save action returns promptly; the moment library
     // enforces 24h-per-moment cooldown so this can't spam.
     if (wasFirstSave || wasThirdSave) {
@@ -1012,7 +1012,7 @@ export const createSettlementSlice = (set, get) => ({
 
   /**
    * Move the settlement from draft to canon. The act of canonizing is
-   * deliberate - generation never does it automatically - because once
+   * deliberate — generation never does it automatically — because once
    * a settlement is canon, every change defaults to a logged in-world
    * event with permanent timeline impact. Going to canon resets the
    * event log to an empty timeline starting now and stamps the
@@ -1032,7 +1032,7 @@ export const createSettlementSlice = (set, get) => ({
     state.canonizedAt = null;
   }),
 
-  /** Stamp lastExportAt - called by export flows. Drives the
+  /** Stamp lastExportAt — called by export flows. Drives the
    *  ProvenanceBlock display. */
   markExported: () => {
     // Compute "is first export?" before we stamp it. Drives first_pdf_export.
@@ -1041,7 +1041,7 @@ export const createSettlementSlice = (set, get) => ({
       state.lastExportAt = new Date().toISOString();
     });
     if (wasFirstExport) {
-      // P103 / X-2 - first_pdf_export pricing moment.
+      // P103 / X-2 — first_pdf_export pricing moment.
       import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
         triggerPricingMoment('first_pdf_export', (content) => {
           get().setActivePricingMoment(content);
@@ -1084,7 +1084,7 @@ export const createSettlementSlice = (set, get) => ({
    * editedAt provenance timestamp.
    *
    * The audit's preview-vs-apply integrity rule: prefer
-   * `applyPendingPreview()` when there is one - that path commits
+   * `applyPendingPreview()` when there is one — that path commits
    * exactly the event the user previewed. This direct `applyEvent`
    * is for callers (like draft-mode rapid-fire edits) that don't go
    * through the preview flow.
@@ -1144,7 +1144,7 @@ export const createSettlementSlice = (set, get) => ({
       if (pendingSuccession) s.pendingSuccession = pendingSuccession;
       // Only canon-mode events go into the timeline. Draft edits
       // produce the same state delta + entity mutation but don't
-      // persist as in-world history - see the draft-vs-canon design
+      // persist as in-world history — see the draft-vs-canon design
       // note in domain/types.js.
       if (s.phase === 'canon') {
         s.eventLog.push(logEntry);
@@ -1200,7 +1200,7 @@ export const createSettlementSlice = (set, get) => ({
    * Commit the currently-pending preview event. This is the audit's
    * "preview/apply must commit the exact same event" fix. The UI
    * builds the event once, hands it to previewEvent, then calls this
-   * to apply - guaranteed to commit the previewed event byte-for-byte
+   * to apply — guaranteed to commit the previewed event byte-for-byte
    * (same id, same payload, same severity), so the deltas in the
    * applied log entry match what the preview panel showed.
    */
@@ -1214,13 +1214,13 @@ export const createSettlementSlice = (set, get) => ({
 
   /**
    * Undo the most recent canon event. Restores both the systemState
-   * and the entity-level mutations the event produced - every
+   * and the entity-level mutations the event produced — every
    * impairment carries its causeEventId, so we can scrub them out
    * cleanly without rebuilding the settlement from scratch.
    *
    * This works for impairment-shaped events. Removal events
    * (REMOVE_INSTITUTION setting status='removed') aren't reversed
-   * automatically yet - those need an explicit RESTORE_INSTITUTION
+   * automatically yet — those need an explicit RESTORE_INSTITUTION
    * follow-up event. The architecture supports finer-grained undo
    * once removal events also stamp their causeEventId for reversal.
    */
@@ -1257,10 +1257,10 @@ export const createSettlementSlice = (set, get) => ({
    * Hydrate the live lifecycle slots from a saved settlement record.
    *
    * The audit's "saved settlements may not persist phase/eventLog/...
-   * - Stoneford detail may show Mossbridge's canon state" CRIT fix.
+   * — Stoneford detail may show Mossbridge's canon state" CRIT fix.
    * When the user opens a save, the slice replaces its global lifecycle
    * fields with that save's `campaignState`. Without this, all saves
-   * share whatever was last in the global state - a campaign-killer.
+   * share whatever was last in the global state — a campaign-killer.
    *
    * Idempotent: if the save lacks a campaignState block (legacy
    * pre-migration save) the migration default is used. SystemState is

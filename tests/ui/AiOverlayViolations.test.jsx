@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/AiOverlayViolations.test.jsx - Tier 6.7 surface coverage.
+ * tests/ui/AiOverlayViolations.test.jsx — Tier 6.7 surface coverage.
  *
  * The AiOverlayViolations component renders the runtime verifier's
  * findings (state.aiViolations) so DMs see drift before shipping the
@@ -36,7 +36,7 @@ function makeReport({ violations = [], ok = false } = {}) {
   };
 }
 
-describe('AiOverlayViolations - render gates', () => {
+describe('AiOverlayViolations — render gates', () => {
   test('returns null when violations is null', () => {
     const { container } = render(<AiOverlayViolations violations={null} />);
     expect(container.firstChild).toBeNull();
@@ -66,7 +66,7 @@ describe('AiOverlayViolations - render gates', () => {
   });
 });
 
-describe('AiOverlayViolations - hard violations', () => {
+describe('AiOverlayViolations — hard violations', () => {
   test('renders the drift header when hard violations exist', () => {
     const report = makeReport({
       violations: [
@@ -133,7 +133,7 @@ describe('AiOverlayViolations - hard violations', () => {
   });
 });
 
-describe('AiOverlayViolations - soft violations', () => {
+describe('AiOverlayViolations — soft violations', () => {
   test('renders soft violations with the muted tone', () => {
     const report = makeReport({
       violations: [
@@ -158,7 +158,7 @@ describe('AiOverlayViolations - soft violations', () => {
   });
 });
 
-describe('AiOverlayViolations - actions', () => {
+describe('AiOverlayViolations — actions', () => {
   test('dismiss button fires onDismiss', () => {
     const onDismiss = vi.fn();
     const report = makeReport({
@@ -202,7 +202,7 @@ describe('AiOverlayViolations - actions', () => {
   });
 });
 
-describe('AiOverlayViolations - accessibility', () => {
+describe('AiOverlayViolations — accessibility', () => {
   test('outer wrapper has role="region" with an aria-label', () => {
     const report = makeReport({
       violations: [{ kind: 'invented_entity', field: 'f', key: 'k', label: 'X', detail: 'Y' }],
@@ -223,7 +223,7 @@ describe('AiOverlayViolations - accessibility', () => {
   });
 });
 
-describe('AiOverlayViolations - real-world scenarios', () => {
+describe('AiOverlayViolations — real-world scenarios', () => {
   test('mixed hard + soft report renders both sections', () => {
     const report = makeReport({
       violations: [

@@ -1,11 +1,11 @@
 /**
- * AIAppendix - chapter 13. ONLY rendered when narrativeMode is true.
+ * AIAppendix — chapter 13. ONLY rendered when narrativeMode is true.
  *
  * Four AI-only sub-sections, in order:
- *   • DM Compass       - 3 ready-to-run hooks, 2 red-flag warnings, 1 twist
- *   • Identity Markers - 4-6 concrete sensory / physical details
- *   • Friction Points  - 3-5 named small-scale interpersonal grievances
- *   • Connections Map  - 4-8 NPC ↔ faction / institution edges
+ *   • DM Compass       — 3 ready-to-run hooks, 2 red-flag warnings, 1 twist
+ *   • Identity Markers — 4–6 concrete sensory / physical details
+ *   • Friction Points  — 3–5 named small-scale interpersonal grievances
+ *   • Connections Map  — 4–8 NPC ↔ faction / institution edges
  *
  * Visually distinct from the rest of the dossier: purple accent rule, AI
  * tint background tones, and an "AI-AUTHORED" eyebrow on every sub-block so
@@ -89,7 +89,7 @@ export function AIAppendix({ settlement, narrativeMode, vm }) {
             {(a.dmCompass.redFlags || []).length > 0 && (
               <View style={{ marginBottom: space.sm }}>
                 <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7.5'], marginBottom: 6 }}>
-                  RED FLAGS - WATCH FOR
+                  RED FLAGS — WATCH FOR
                 </Text>
                 {a.dmCompass.redFlags.map((f, i) => (
                   <View key={`rf-${i}`} style={{ flexDirection: 'row', marginBottom: 4 }} wrap={false}>
@@ -101,7 +101,7 @@ export function AIAppendix({ settlement, narrativeMode, vm }) {
             )}
 
             {a.dmCompass.twist && (
-              <Callout tone="ai" kicker="WHEN A SESSION DRAGS - THIS TWIST">
+              <Callout tone="ai" kicker="WHEN A SESSION DRAGS — THIS TWIST">
                 <Text style={{ ...type.italic, color: palette.ink, fontSize: pt['10.5'], lineHeight: 1.45 }}>
                   {textOf(a.dmCompass.twist)}
                 </Text>
@@ -148,7 +148,7 @@ export function AIAppendix({ settlement, narrativeMode, vm }) {
           <View style={{ marginBottom: space.lg }}>
             <Heading level={3} color={palette.ai}>Friction Points</Heading>
             <Text style={{ ...type.caption, color: palette.muted, marginBottom: 6 }}>
-              Small-scale interpersonal grievances with named parties - perfect for
+              Small-scale interpersonal grievances with named parties — perfect for
               opening or closing scenes.
             </Text>
             {a.frictionPoints.map((fp, i) => (
@@ -239,9 +239,9 @@ function textOf(item) {
 }
 
 function endpointOf(e) {
-  if (!e) return '-';
+  if (!e) return '—';
   if (typeof e === 'string') return e;
-  return e.name || e.label || e.title || '-';
+  return e.name || e.label || e.title || '—';
 }
 
 function relationshipOf(c) {

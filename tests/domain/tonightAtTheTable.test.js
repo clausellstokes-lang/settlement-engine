@@ -1,5 +1,5 @@
 /**
- * tonightAtTheTable.test.js - Contract over the magazine-spread
+ * tonightAtTheTable.test.js — Contract over the magazine-spread
  * right-column composer.
  *
  * Pinning the picker so a future refactor (rebalancing thresholds,
@@ -106,6 +106,6 @@ describe('tonightAtTheTable', () => {
     };
     const out = tonightAtTheTable(set);
     expect(out[0].body.length).toBeLessThanOrEqual(120);
-    expect(out[0].body.endsWith('...')).toBe(true);
+    expect(out[0].body.endsWith('…')).toBe(true);
   });
 });

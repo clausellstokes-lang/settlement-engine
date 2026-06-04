@@ -1,5 +1,5 @@
 /**
- * auth.js - Authentication service layer.
+ * auth.js — Authentication service layer.
  *
  * Wraps Supabase auth with graceful fallback to mock mode when
  * Supabase is not configured (no env vars). This lets the app
@@ -154,7 +154,7 @@ async function supabaseResetPassword(email) {
  * Magic-link / OTP sign-in. Sends a one-time link to the user's email;
  * clicking it completes auth without a password. WCAG 2.2 SC 3.3.8
  * (Accessible Authentication, Minimum) explicitly disallows requiring
- * a cognitive function test like password recall - magic link
+ * a cognitive function test like password recall — magic link
  * satisfies that without compromising security.
  *
  * Same `auth.signInWithOtp` call as the standard Supabase pattern;
@@ -172,7 +172,7 @@ async function supabaseSignInWithMagicLink(email) {
     },
   });
   if (error) throw error;
-  // No session yet - completion happens when the user clicks the link
+  // No session yet — completion happens when the user clicks the link
   // and Supabase's onAuthStateChange fires.
   return { sentTo: email };
 }
@@ -184,16 +184,16 @@ async function mockSignInWithMagicLink(email) {
 }
 
 /**
- * OAuth sign-in. Supabase handles the full redirect dance - we tell it
+ * OAuth sign-in. Supabase handles the full redirect dance — we tell it
  * the provider and the URL to return to. On success, the user's session
  * is established when their browser lands back on our origin and the
  * onAuthStateChange listener fires.
  *
  * Provider notes:
- *   - 'google'  - works once the user enables Google as an auth provider
+ *   - 'google'  — works once the user enables Google as an auth provider
  *                 in the Supabase dashboard (no app code needed beyond
  *                 the dashboard config + redirect-allowlist entry).
- *   - 'discord' - same drill; gated behind the `discordOauth` flag in
+ *   - 'discord' — same drill; gated behind the `discordOauth` flag in
  *                 the UI until the Anthropic-Discord review completes.
  *
  * @param {'google' | 'discord' | 'github'} provider
@@ -207,12 +207,12 @@ async function supabaseSignInWithOAuth(provider) {
   });
   if (error) throw error;
   // signInWithOAuth returns a redirect URL but Supabase navigates the
-  // browser itself, so the caller never resolves to a session - that
+  // browser itself, so the caller never resolves to a session — that
   // arrives via onAuthStateChange once the user lands back on our origin.
   return data;
 }
 
-/** Mock equivalent - surfaces a friendly hint and resolves to no session. */
+/** Mock equivalent — surfaces a friendly hint and resolves to no session. */
 async function mockSignInWithOAuth(provider) {
   return { provider, mock: true };
 }
@@ -226,14 +226,14 @@ async function supabaseUpdatePassword(newPassword) {
  * Update the user's display name.
  *
  * Calls the `update_display_name(text)` RPC (migration 009) which is the
- * single safe path for changing display_name - the same migration locks
+ * single safe path for changing display_name — the same migration locks
  * direct UPDATE on protected columns (role/tier/credits/is_founder) so
  * routing through the RPC is necessary anyway for forward-compatibility.
  *
  * Also mirrors into user_metadata so the JWT-cached read stays consistent
  * across page loads without waiting for the profiles row to be refetched.
  *
- * Falls back to the legacy direct UPDATE if the RPC isn't yet exposed -
+ * Falls back to the legacy direct UPDATE if the RPC isn't yet exposed —
  * that path stays valid because the column-locking policy still permits
  * display_name writes, even when the RPC isn't available.
  */
@@ -397,7 +397,7 @@ async function mockUpdateProfilePreferences(prefs = {}) {
 }
 
 function mockOnAuthChange() {
-  // No-op - mock mode doesn't have real-time auth changes
+  // No-op — mock mode doesn't have real-time auth changes
   return () => {};
 }
 

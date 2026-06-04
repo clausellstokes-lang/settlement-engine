@@ -1,10 +1,10 @@
 /**
- * stripe.js - Client-side Stripe checkout integration.
+ * stripe.js — Client-side Stripe checkout integration.
  *
  * Calls the Supabase Edge Function to create a Checkout session,
  * then redirects to Stripe's hosted checkout page.
  *
- * No Stripe SDK needed on the client - we just redirect to the URL.
+ * No Stripe SDK needed on the client — we just redirect to the URL.
  *
  * Catalog data (packs, tiers, single-dossier) lives in
  * `src/config/pricing.js`. This module pulls the active set via
@@ -65,11 +65,11 @@ const PRODUCTS = new Proxy({}, {
 
 /**
  * Create a Stripe Checkout session and redirect.
- * @param {string} product - A key from the active PRODUCTS catalog or a legacy pack key.
+ * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
  */
 export async function startCheckout(product) {
   if (!isConfigured) {
-    throw new Error('Supabase not configured - cannot process payments in local mode');
+    throw new Error('Supabase not configured — cannot process payments in local mode');
   }
   // Allow legacy product keys (credits_5/15/40) too, even when the
   // catalog has been rotated, so refund/replay links don't 404.
@@ -77,7 +77,7 @@ export async function startCheckout(product) {
     throw new Error(`Unknown product: ${product}`);
   }
 
-  // Tier 7.4 - single-dossier checkout is anonymous-allowed (per
+  // Tier 7.4 — single-dossier checkout is anonymous-allowed (per
   // pricing.js SINGLE_DOSSIER.requiresAccount=false). All other
   // products still require auth because they grant ongoing account
   // benefits (subscription, founder seat, credit pack) that need a

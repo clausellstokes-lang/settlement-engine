@@ -1,12 +1,12 @@
 /**
- * copy/strings.js - Single source of microcopy for the campaign-state
+ * copy/strings.js — Single source of microcopy for the campaign-state
  * UI surface.
  *
  * The audit's first recommendation was to teach the world-state mental
  * model (Run → Draft → Canon → Event → Timeline → Export) through
  * consistent vocabulary. Hard-coding "Generate Settlement" in every
  * call site fights that model. Routing through this file means a copy
- * tweak - "Build Draft" vs "Generate Draft" - is a single edit.
+ * tweak — "Build Draft" vs "Generate Draft" — is a single edit.
  *
  * Convention: keys are nested by surface, not by feature. e.g.
  *   COPY.generate.quickMode.cta  not  COPY.quickGenerate
@@ -20,13 +20,13 @@
 
 export const COPY = {
   generate: {
-    // P124 / C-1 - Verb unification. Forge (first generation) / Reforge
-    // (regenerate). Was: "Generate Draft" / "Regenerate Draft" - the
+    // P124 / C-1 — Verb unification. Forge (first generation) / Reforge
+    // (regenerate). Was: "Generate Draft" / "Regenerate Draft" — the
     // critique flagged the verb chaos (Begin / Generate / Forge / Roll
     // competing on the same surfaces). Now one verb per action class.
     // "Draft" is still the artifact noun (draft → canon lifecycle is
     // preserved); only the action verb changed.
-    quickMode:    { title: 'Basic Generate',    cta: 'Forge a Draft',  subtitle: 'Minimal config - set the foundations and go' },
+    quickMode:    { title: 'Basic Generate',    cta: 'Forge a Draft',  subtitle: 'Minimal config — set the foundations and go' },
     advancedMode: { title: 'Advanced Generate', cta: 'Forge a Draft',  subtitle: 'Full configuration, step by step' },
     customMode:   { title: 'Custom Generate',   cta: 'Forge a Draft',  subtitle: 'Power-user dashboard with every parameter exposed' },
     regenerate:   { cta: 'Reforge Draft',       confirm: 'Reforge the settlement? All unsaved placements will be lost.' },
@@ -60,7 +60,7 @@ export const COPY = {
   timeline: {
     title:        'Timeline',
     emptyState:   'Apply an in-world event to start the timeline.',
-    undoTooltip:  'Undo this event - restores prior state',
+    undoTooltip:  'Undo this event — restores prior state',
   },
 
   ai: {
@@ -76,9 +76,9 @@ export const COPY = {
     primaryCta:   'Export Dossier',
     sheetTitle:   'Export Dossier',
     variants: {
-      draft_brief:     { label: 'Draft Brief',     desc: 'Quick prep doc - no timeline, no canon-only chapters.' },
+      draft_brief:     { label: 'Draft Brief',     desc: 'Quick prep doc — no timeline, no canon-only chapters.' },
       canon_dossier:   { label: 'Canon Dossier',   desc: 'Full campaign-ready document with current state and timeline.' },
-      timeline_packet: { label: 'Timeline Packet', desc: 'Lean recap - cover, current state, and timeline. For reviewing what changed since last session.' },
+      timeline_packet: { label: 'Timeline Packet', desc: 'Lean recap — cover, current state, and timeline. For reviewing what changed since last session.' },
     },
   },
 
@@ -104,10 +104,10 @@ export const COPY = {
         headline: 'Save your campaign across devices.',
         body:     'Upgrade syncs your settlements, drafts, and canon timelines to your account.',
       },
-      // ── P103 / X-2 - Conversion-arc moments ────────────────────────────
+      // ── P103 / X-2 — Conversion-arc moments ────────────────────────────
       first_save: {
         headline: 'Save it. Come back tomorrow.',
-        body:     'Your dossier is yours to keep. Free tier holds 3 saves - plenty for a campaign’s first arc.',
+        body:     'Your dossier is yours to keep. Free tier holds 3 saves — plenty for a campaign’s first arc.',
       },
       anon_cap_hit: {
         headline: 'You’ve explored hamlet, village, town.',
@@ -115,7 +115,7 @@ export const COPY = {
       },
       first_pdf_export: {
         headline: 'You just downloaded your first dossier.',
-        body:     'Wanderer gives you 3 exports a month. Cartographer = unlimited, plus cloud sync - phone, laptop, table.',
+        body:     'Wanderer gives you 3 exports a month. Cartographer = unlimited, plus cloud sync — phone, laptop, table.',
       },
       third_save: {
         headline: 'You’re building a campaign.',
@@ -123,18 +123,18 @@ export const COPY = {
       },
       regen_burst: {
         headline: 'Power user ahead.',
-        body:     'Locks, drift, chronicle - Cartographer surfaces the worldbuilder-tier controls. Try the upgrade.',
+        body:     'Locks, drift, chronicle — Cartographer surfaces the worldbuilder-tier controls. Try the upgrade.',
       },
       map_clicked: {
         headline: 'World Map unlocks with Cartographer.',
-        body:     'Place settlements, draw routes, surface supply-chain stress - your campaigns become a place.',
+        body:     'Place settlements, draw routes, surface supply-chain stress — your campaigns become a place.',
       },
       weekly_user: {
         headline: 'Three sessions in two weeks.',
-        body:     'You’re using SettlementForge weekly - Cartographer pays for itself in two.',
+        body:     'You’re using SettlementForge weekly — Cartographer pays for itself in two.',
       },
       welcome_credit: {
-        headline: 'Try the Narrative Layer once - on us.',
+        headline: 'Try the Narrative Layer once — on us.',
         body:     'One credit on every signup. The AI prose pass turns this town’s data into prose your players can hear.',
       },
       founder_eligible: {
@@ -164,7 +164,7 @@ export const COPY = {
       draft:    'Editable, not yet part of your campaign world.',
       canon:    'Live campaign truth. Changes are logged as events.',
       narrated: 'Narrative refinement layer is present.',
-      raw:      'Raw simulation output - no narrative layer.',
+      raw:      'Raw simulation output — no narrative layer.',
       locked:   'Locked. Preserved through regeneration.',
     },
   },

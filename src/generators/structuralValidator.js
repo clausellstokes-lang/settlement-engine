@@ -17,7 +17,7 @@ export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
 
 // ─── SPATIAL_FEATURES ────────────────────────────────────────────────────────
 // Maps an institution name to the list of lesser institutions it implies
-// (for validation expansion - if you have the greater, you implicitly have the lesser).
+// (for validation expansion — if you have the greater, you implicitly have the lesser).
 
 export const SPATIAL_FEATURES = {
   // Markets
@@ -263,7 +263,7 @@ export const checkInstCompat = (institutions, tier, _magicPriority) => {
   if (has('great cathedral')) {
     return pickRandom([
       "The great cathedral's spire is the tallest thing for miles.",
-      'A cathedral dominates the skyline - larger than anything else in the settlement, which may say something about what matters here.',
+      'A cathedral dominates the skyline — larger than anything else in the settlement, which may say something about what matters here.',
     ]);
   }
   if (has('cathedral') && tier !== 'thorp' && tier !== 'hamlet') {
@@ -274,7 +274,7 @@ export const checkInstCompat = (institutions, tier, _magicPriority) => {
   }
   if (has('massive wall', 'citadel')) {
     return pickRandom([
-      'The walls are serious - high stone, maintained, with watchtowers spaced to cover every angle.',
+      'The walls are serious — high stone, maintained, with watchtowers spaced to cover every angle.',
       'The citadel on the high ground makes clear that this settlement has been defended before and expects to be again.',
     ]);
   }
@@ -286,13 +286,13 @@ export const checkInstCompat = (institutions, tier, _magicPriority) => {
   }
   if (has('wizard', 'mage') && has('tower')) {
     return pickRandom([
-      "A tower rises above the roofline in a way that isn't architectural - it was added later, and whoever added it wasn't interested in fitting in.",
+      "A tower rises above the roofline in a way that isn't architectural — it was added later, and whoever added it wasn't interested in fitting in.",
       'The mage tower catches the light differently from the other buildings.',
     ]);
   }
   if (has('major port')) {
     return pickRandom([
-      'The harbour cranes are visible from the road - tall, necessary, industrial.',
+      'The harbour cranes are visible from the road — tall, necessary, industrial.',
       'Half the settlement seems to be about the water.',
     ]);
   }
@@ -305,7 +305,7 @@ export const checkInstCompat = (institutions, tier, _magicPriority) => {
   if (has('university', 'academy of magic')) {
     return pickRandom([
       'The university buildings take up more of the skyline than you expected.',
-      'A complex of old stone buildings - the university - anchors the northern quarter.',
+      'A complex of old stone buildings — the university — anchors the northern quarter.',
     ]);
   }
   return null;
@@ -366,7 +366,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
 
     if (gate.requires?.length > 0 && !gate.requires.some(r => expandedSet.includes(r))) {
       if (gate.suggestionOnly) {
-        // Soft dependency - push as a suggestion, not a violation
+        // Soft dependency — push as a suggestion, not a violation
         suggestions.push({
           type:        'suggestion',
           institution: instName,
@@ -439,7 +439,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         violations.push({
           type:        'context_warning',
           institution: instName,
-          reason:      `Magic level is set to Low - ${instName} would be exceptionally rare and likely controversial in this setting.`,
+          reason:      `Magic level is set to Low — ${instName} would be exceptionally rare and likely controversial in this setting.`,
           severity:    'warning',
         });
       }
@@ -486,7 +486,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
       violations.push({
         type:        'survival_crisis',
         institution: 'Settlement (Regional Threat)',
-        reason:      'Embattled region with no fortification. Walls, a palisade, or a citadel are not optional under constant creature pressure - defenders need something to stand behind.',
+        reason:      'Embattled region with no fortification. Walls, a palisade, or a citadel are not optional under constant creature pressure — defenders need something to stand behind.',
         severity:    isTownPlus ? 'warning' : 'error',
       });
     } else if (!hasMilForce) {
@@ -497,7 +497,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         severity:    isTownPlus ? 'warning' : 'error',
       });
     } else {
-      // Has both - check funding level
+      // Has both — check funding level
       if (resolvedMilPriority < 25) {
         violations.push({
           type:        'survival_crisis',
@@ -509,7 +509,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         violations.push({
           type:        'survival_crisis',
           institution: 'Regional Threat',
-          reason:      `Embattled region: Military priority is ${resolvedMilPriority}/100. Fortification and forces are present but chronically underfunded - poor equipment, low morale, and thin reinforcement. A beleaguered outpost surviving on the edge.`,
+          reason:      `Embattled region: Military priority is ${resolvedMilPriority}/100. Fortification and forces are present but chronically underfunded — poor equipment, low morale, and thin reinforcement. A beleaguered outpost surviving on the edge.`,
           severity:    'warning',
         });
       }
@@ -518,7 +518,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     violations.push({
       type:        'survival_crisis',
       institution: 'Settlement (Regional Threat)',
-      reason:      'Frontier region with no fortification. Active monster threats make an unfortified town-scale settlement a liability - raiders and creatures exploit the lack of a perimeter.',
+      reason:      'Frontier region with no fortification. Active monster threats make an unfortified town-scale settlement a liability — raiders and creatures exploit the lack of a perimeter.',
       severity:    'warning',
     });
   }
@@ -535,7 +535,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
       violations.push({
         type:        'structural_gap',
         institution: 'Settlement Defense',
-        reason:      `A ${tier} without a garrison or professional guard is indefensible. City-scale settlements require permanent military infrastructure - the walls require someone to man them.`,
+        reason:      `A ${tier} without a garrison or professional guard is indefensible. City-scale settlements require permanent military infrastructure — the walls require someone to man them.`,
         severity:    'error',
       });
     }
@@ -559,7 +559,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   }
 
   // ── Isolation viability ───────────────────────────────────────────────────
-  // Small isolated settlements (thorp/hamlet) are subsistence economies - historically valid
+  // Small isolated settlements (thorp/hamlet) are subsistence economies — historically valid
   if (['thorp','hamlet'].includes(tier) && route === 'isolated') {
     const struggleChance = _rng();
     if (struggleChance < 0.40) {
@@ -618,7 +618,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     suggestions.push({
       type:      'suggestion',
       reason:    threat === 'plagued'
-        ? "A garrison without walls is untenable in a embattled region - defenders have nowhere to make a stand."
+        ? "A garrison without walls is untenable in a embattled region — defenders have nowhere to make a stand."
         : "Military forces shelter behind walls. A garrison without a perimeter is a vulnerability on the frontier.",
       suggested: ['Town walls', 'City walls and gates'],
     });
@@ -635,7 +635,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   if (tierAtLeast(tier, 'city') && (inExp('Mages') || inExp('Wizard')) && !inExp('Alchemist')) {
     suggestions.push({
       type:      'suggestion',
-      reason:    'Magical communities attract alchemists - reagent supply is mutually beneficial.',
+      reason:    'Magical communities attract alchemists — reagent supply is mutually beneficial.',
       suggested: ['Alchemist quarter', 'Alchemist shop'],
     });
   }
@@ -662,7 +662,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
       && !inExp('barge') && !inExp('harbour') && !inExp('harbor')) {
     suggestions.push({
       type:      'suggestion',
-      reason:    'A river settlement should exploit its water access - mills, docks, or fishmongers.',
+      reason:    'A river settlement should exploit its water access — mills, docks, or fishmongers.',
       suggested: ['Docks/port facilities', 'Mill'],
     });
   }
@@ -671,7 +671,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
       && !inExp('Multiple court')) {
     suggestions.push({
       type:      'suggestion',
-      reason:    'A powerful criminal organization usually exists in tension with law - courts and criminal infrastructure co-evolve.',
+      reason:    'A powerful criminal organization usually exists in tension with law — courts and criminal infrastructure co-evolve.',
       suggested: ['Courthouse', 'Multiple court buildings'],
     });
   }
@@ -690,21 +690,21 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   });
 
     // ── Out-of-tier contradictions (by-design) ─────────────────────────────────
-  // These are not errors - they're DM choices. Surface them in Viability as
+  // These are not errors — they're DM choices. Surface them in Viability as
   // "By Design Contradictions" so the DM knows the tension exists.
   const outOfTierInsts = (institutions || []).filter(i => i.outOfTier);
   outOfTierInsts.forEach(inst => {
     violations.push({
       type:        'out_of_tier',
       institution: inst.name,
-      reason:      `${inst.name} is a ${inst.nativeTier || 'higher'}-tier institution in a ${tier} settlement. This is a deliberate override - the settlement has infrastructure beyond its normal scale.`,
+      reason:      `${inst.name} is a ${inst.nativeTier || 'higher'}-tier institution in a ${tier} settlement. This is a deliberate override — the settlement has infrastructure beyond its normal scale.`,
       severity:    'by_design',
-      suggestedFixes: ['This contradiction is intentional - no fix needed unless you want to remove the institution'],
+      suggestedFixes: ['This contradiction is intentional — no fix needed unless you want to remove the institution'],
     });
   });
 
   // ── Exclusivity conflicts (by-design) ───────────────────────────────────────
-  // Two institutions in the same exclusive group both present - flag but don't block.
+  // Two institutions in the same exclusive group both present — flag but don't block.
   const exclusiveGroupMap = {};
   (institutions || []).forEach(inst => {
     if (!inst.exclusiveGroup) return;
@@ -716,9 +716,9 @@ export const checkStructuralValidity = (institutions, config = {}) => {
       violations.push({
         type:        'exclusivity_conflict',
         institution: names.join(' + '),
-        reason:      `${names.join(' and ')} normally cannot coexist (exclusive group: ${group}). This is a deliberate override - expect political tension, power struggle, or a unique historical circumstance.`,
+        reason:      `${names.join(' and ')} normally cannot coexist (exclusive group: ${group}). This is a deliberate override — expect political tension, power struggle, or a unique historical circumstance.`,
         severity:    'by_design',
-        suggestedFixes: ['This contradiction is intentional - use it as a plot seed: why do both exist?'],
+        suggestedFixes: ['This contradiction is intentional — use it as a plot seed: why do both exist?'],
       });
     }
   });
@@ -912,7 +912,7 @@ const _resolveUpgrades = (institutions, terrain, route, tier, config) => {
  * configuration. Applies priority slider multipliers, trade route bonuses/penalties,
  * monster threat modifiers, and goods-toggle penalties.
  *
- * @param {number} baseChance    - Institution's raw base probability (0-1)
+ * @param {number} baseChance    - Institution's raw base probability (0–1)
  * @param {string} category      - Category string e.g. "economy", "defense"
  * @param {string} name          - Institution name string
  * @param {Object} config        - Settlement config

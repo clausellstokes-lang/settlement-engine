@@ -1,5 +1,5 @@
 /**
- * FounderBadge.jsx - Small pill marking a Founder Lifetime account.
+ * FounderBadge.jsx — Small pill marking a Founder Lifetime account.
  *
  * The Founder tier is a 500-seat one-time-purchase Cartographer grant.
  * It's the sort of thing supporters appreciate visible acknowledgement
@@ -11,7 +11,7 @@
  *   <FounderBadge force />               // always shows (e.g. for design-system docs)
  *   <FounderBadge size="lg" />           // bigger
  *
- * Props deliberately minimal - the badge is meant to drop in beside a
+ * Props deliberately minimal — the badge is meant to drop in beside a
  * user name or settlement title without needing layout glue.
  */
 
@@ -41,7 +41,7 @@ export default function FounderBadge({ size = 'md', force = false, style }) {
         gap: s.gap,
         padding: s.pad,
         borderRadius: s.radius,
-        // Parchment-warm gold gradient with ink text - reads "earned",
+        // Parchment-warm gold gradient with ink text — reads "earned",
         // not "purchased": closer to a wax seal than a sale ribbon.
         background: 'linear-gradient(135deg, #FBF5E6 0%, #F4EAD0 100%)',
         border: '1px solid #C9A24C',

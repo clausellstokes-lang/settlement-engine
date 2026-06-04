@@ -1,15 +1,15 @@
 /** @vitest-environment jsdom */
 /**
- * tableView.test.jsx - P142 / D-6 contract over the phone Table View.
+ * tableView.test.jsx — P142 / D-6 contract over the phone Table View.
  *
  * Pins:
  *   • Renders the settlement name, the tension line, stressor chips, and the
  *     reused "Tonight at the table" cheat-sheet entries.
- *   • Closes via the X button, via Escape, and via backdrop click - but NOT
+ *   • Closes via the X button, via Escape, and via backdrop click — but NOT
  *     when the inner card itself is clicked (stopPropagation).
  *
  * TableView is presentational (settlement + onClose props, no store/flag
- * reads), so no mocks are needed - the caller owns the flag/pref gating.
+ * reads), so no mocks are needed — the caller owns the flag/pref gating.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';

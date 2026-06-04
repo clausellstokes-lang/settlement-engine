@@ -1,5 +1,5 @@
 /**
- * PipelineRail.jsx - "How this was simulated" rail.
+ * PipelineRail.jsx — "How this was simulated" rail.
  *
  * The single most important new feature in the UI redesign (§7.4): a
  * column beside the dossier output that lists every procedural step
@@ -19,7 +19,7 @@
  *   summary }; metaForStep maps the id to a human label + description.
  *
  *   Procedural steps render with a cog icon (bronze). AI refinement
- *   passes - when the user runs the AI features - render with a quill
+ *   passes — when the user runs the AI features — render with a quill
  *   icon (violet). The "cog vs quill" visual grammar matches the
  *   §2.4 design system.
  *
@@ -36,7 +36,7 @@ import { tracesByStep } from '../domain/trace.js';
 import { simulationSpineRows } from '../domain/simulationSpine.js';
 import { t } from '../copy/index.js';
 
-// Visual grammar - kept here so the rail's identity is one read.
+// Visual grammar — kept here so the rail's identity is one read.
 const COG_COLOR = '#8C6F32';      // gold-700 (procedural, bronze cog)
 const QUILL_COLOR = '#7B4FCF';    // violet-500 (AI refinement, quill)
 const RAIL_BG = '#FBF5E6';        // parchment-50
@@ -110,7 +110,7 @@ function StepRow({ entry, isLast, traces }) {
             {meta.description}
           </div>
         )}
-        {/* Trace decisions - only rendered when the step has emitted
+        {/* Trace decisions — only rendered when the step has emitted
             structured traces (Tier 2.1). Today only assembleInstitutions
             emits these; the rest of the pipeline will adopt incrementally.
             Each trace is rendered as a small block: "what was decided"
@@ -258,7 +258,7 @@ export default function PipelineRail({ compact = false }) {
         }}>
           {t('pipeline.subtitle')}
         </p>
-        {/* Visual legend - explains the cog vs quill grammar exactly
+        {/* Visual legend — explains the cog vs quill grammar exactly
             once, at the top, so the meaning is set before the user
             reads any step. */}
         <div style={{
@@ -277,7 +277,7 @@ export default function PipelineRail({ compact = false }) {
         </div>
       </header>
 
-      {/* Simulation spine - the 7-line distillation. Only renders when
+      {/* Simulation spine — the 7-line distillation. Only renders when
           the settlement has the underlying fields populated; tolerant
           of bare settlements via simulationSpineRows. */}
       <SimulationSpine settlement={settlement} />

@@ -1,14 +1,14 @@
 /**
- * domain/worldPulse/reconcile.js - pulse ↔ local reconciliation policy.
+ * domain/worldPulse/reconcile.js — pulse ↔ local reconciliation policy.
  *
  * The pulse applies conditions to a settlement as `activeConditions` (never
  * silent field edits). But the DM can later regenerate or edit that settlement
  * locally. Policy: **world/party-authored conditions survive a local
  * regeneration; locally-authored conditions are owned by the regenerator.**
  *
- * World-authored conditions are identified by provenance - their
- * `triggeredAt.sourceEventType` (WORLD_PULSE..., WORLD_STRESSOR..., PARTY_ACTION...,
- * REGIONAL...) or a `causes[].source` of `world_pulse`. This module exposes the
+ * World-authored conditions are identified by provenance — their
+ * `triggeredAt.sourceEventType` (WORLD_PULSE…, WORLD_STRESSOR…, PARTY_ACTION…,
+ * REGIONAL…) or a `causes[].source` of `world_pulse`. This module exposes the
  * predicate + a `preserveWorldConditions` helper the regeneration path can call
  * to re-attach them.
  */
@@ -21,8 +21,8 @@ const WORLD_CONDITION_SOURCE_PREFIXES = Object.freeze(['WORLD_PULSE', 'WORLD_STR
 export function isWorldAuthoredCondition(condition) {
   // `regional_*` archetypes are produced exclusively by the regional engine
   // (propagation.js / flows.js); a local generation never emits them. This is
-  // the reliable signal - propagation stamps `sourceEventType` as the change
-  // kind (route_cut, regional_wave, ...) and `causes[].source` as the channel
+  // the reliable signal — propagation stamps `sourceEventType` as the change
+  // kind (route_cut, regional_wave, …) and `causes[].source` as the channel
   // id, neither of which carries a world/party prefix.
   if (String(condition?.archetype || '').startsWith('regional_')) return true;
   const src = String(condition?.triggeredAt?.sourceEventType || '');

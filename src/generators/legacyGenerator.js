@@ -11,7 +11,7 @@
  *   - Economic events > 150yr → cannot explain current faction balance
  *   - Political events > 200yr → cannot explain current legitimacy
  *   - Religious events > 300yr → founding character drift only
- * Returns 0-3 annotations; empty is valid.
+ * Returns 0–3 annotations; empty is valid.
  */
 
 const MAX_CAUSAL_AGE = {
@@ -52,7 +52,7 @@ function factionStrength(factions, matcher) {
 
 // ── Build annotation using the event's own content ────────────────────────────
 // effect: optional lasting effect string from the event, rephrased abstractly
-// The annotation is always one sentence - structural, no world-specific facts.
+// The annotation is always one sentence — structural, no world-specific facts.
 
 function buildAnnotation(ev, relationship, suffix) {
   const name   = ev.name   || 'a significant historical event';
@@ -60,7 +60,7 @@ function buildAnnotation(ev, relationship, suffix) {
 
   // relationship: 'unresolved' | 'recovery' | 'drift'
   const effectClause = effect
-    ? ` The lasting consequence - ${effect.charAt(0).toLowerCase() + effect.slice(1)} - remains structurally embedded.`
+    ? ` The lasting consequence — ${effect.charAt(0).toLowerCase() + effect.slice(1)} — remains structurally embedded.`
     : '';
 
   if (relationship === 'unresolved') {
@@ -111,7 +111,7 @@ function scoreEvent(ev, legState, prosState, foodState, factions) {
   if (type === 'economic') {
     if (prosState === 'stressed' && yrs <= maxAge('economic', 'current_economy')) {
       relationship = 'unresolved';
-      suffix = 'current economic pressure has structural antecedents - the present situation reflects dependencies established then.';
+      suffix = 'current economic pressure has structural antecedents — the present situation reflects dependencies established then.';
       score = 85 + sevBonus;
     } else if (foodState === 'crisis' && yrs <= maxAge('economic', 'current_food')) {
       relationship = 'unresolved';
@@ -119,15 +119,15 @@ function scoreEvent(ev, legState, prosState, foodState, factions) {
       score = 80;
     } else if (prosState === 'prosperous' && yrs <= maxAge('economic', 'institutional')) {
       relationship = 'recovery';
-      suffix = 'current commercial strength is accumulated recovery - the present prosperity was built on what was reconstructed.';
+      suffix = 'current commercial strength is accumulated recovery — the present prosperity was built on what was reconstructed.';
       score = 50;
     } else if (['Dominant','Strong'].includes(mercPow) && yrs <= maxAge('economic', 'faction_balance')) {
       relationship = 'drift';
-      suffix = 'commercial interests have held structural relevance since - the present merchant faction\'s strength is accumulated rather than sudden.';
+      suffix = 'commercial interests have held structural relevance since — the present merchant faction\'s strength is accumulated rather than sudden.';
       score = 40;
     } else if (['Minor','Suppressed'].includes(mercPow) && yrs > 20 && yrs <= maxAge('economic', 'faction_balance')) {
       relationship = 'drift';
-      suffix = 'commercial interests have since lost the structural position they held - the present weakness reflects that displacement.';
+      suffix = 'commercial interests have since lost the structural position they held — the present weakness reflects that displacement.';
       score = 35;
     }
   }
@@ -149,11 +149,11 @@ function scoreEvent(ev, legState, prosState, foodState, factions) {
     const isStrong = ['Dominant','Strong'].includes(relPow);
     if (isWeak && yrs > 60 && yrs <= maxAge('religious', 'institutional')) {
       relationship = 'drift';
-      suffix = 'the religious institution\'s structural prominence has declined significantly since - the settlement\'s current secular character reflects a long displacement.';
+      suffix = 'the religious institution\'s structural prominence has declined significantly since — the settlement\'s current secular character reflects a long displacement.';
       score = 55;
     } else if (isStrong && yrs > 60 && yrs <= maxAge('religious', 'institutional')) {
       relationship = 'drift';
-      suffix = 'religious institutional prominence has been sustained since - the present strength is accumulated rather than recent.';
+      suffix = 'religious institutional prominence has been sustained since — the present strength is accumulated rather than recent.';
       score = 45;
     } else if (yrs <= maxAge('religious', 'faction_balance')) {
       relationship = 'unresolved';

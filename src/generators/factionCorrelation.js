@@ -1,4 +1,4 @@
-// factionCorrelation.js - Item 16: Power-economy correlation
+// factionCorrelation.js — Item 16: Power-economy correlation
 // Faction presence modulates institution probability bidirectionally.
 // Dominant factions get extra institution chances in their category,
 // constrained by tier caps so small settlements don't over-inflate.
@@ -21,7 +21,7 @@ const FACTION_TO_CATALOG = {
 // How many institutions a faction boost can add, by tier
 const TIER_BOOST_CAPS = {
   thorp:    0,
-  hamlet:   0,   // no faction boost at hamlet - too small
+  hamlet:   0,   // no faction boost at hamlet — too small
   village:  0,   // ditto
   town:     1,   // one signature institution max
   city:     1,
@@ -29,11 +29,11 @@ const TIER_BOOST_CAPS = {
 };
 
 // Power thresholds: faction must exceed these to trigger boosts
-const _STRONG_THRESHOLD = 35;  // top-decile dominance - adds ONE signature institution
+const _STRONG_THRESHOLD = 35;  // top-decile dominance — adds ONE signature institution
 const _MILD_THRESHOLD   = 28;  // present but not triggering signature
 
 /**
- * deriveFactionBoosts - compute boost descriptors from a factions array.
+ * deriveFactionBoosts — compute boost descriptors from a factions array.
  * Returns [{factionCategory, catalogCategories, strength, factionName}]
  * Only factions exceeding MILD_THRESHOLD trigger boosts.
  */
@@ -43,10 +43,10 @@ export function deriveFactionBoosts(factions, tier) {
   const boosts = [];
   const seen = new Set(); // one boost per catalog category
 
-  // Sort by power descending - most dominant faction wins each category
+  // Sort by power descending — most dominant faction wins each category
   const sorted = [...factions].sort((a, b) => (b.power||0) - (a.power||0));
 
-  // Category-calibrated thresholds - each faction type has different power ceilings
+  // Category-calibrated thresholds — each faction type has different power ceilings
   // set by the power generator. Metropolis gets a 3-point discount (more faction dilution).
   const tierDiscount = tier === 'metropolis' ? 3 : 0;
   const CATEGORY_THRESHOLDS = {
@@ -63,7 +63,7 @@ export function deriveFactionBoosts(factions, tier) {
   sorted.forEach(faction => {
     if (faction.isGoverning) return;
     const fcat_pre = faction.category || 'government';
-    if (fcat_pre === 'government') return; // skip government - handled by governing faction
+    if (fcat_pre === 'government') return; // skip government — handled by governing faction
     const power = faction.power || 0;
     const catThreshold = CATEGORY_THRESHOLDS[fcat_pre] || 99;
     if (power < catThreshold) return; // not dominant enough for this category
@@ -90,7 +90,7 @@ export function deriveFactionBoosts(factions, tier) {
 }
 
 /**
- * applyFactionInstitutionBoosts - run a capped second-chance pass for
+ * applyFactionInstitutionBoosts — run a capped second-chance pass for
  * institution categories weighted by dominant factions.
  * Returns new institutions to add (not already present).
  */
@@ -143,7 +143,7 @@ export function applyFactionInstitutionBoosts(
 
       if (eligible.length === 0) continue;
 
-      // Sort by baseChance descending - boost most likely candidates first
+      // Sort by baseChance descending — boost most likely candidates first
       eligible.sort((a, b) => (b[1].p || 0.5) - (a[1].p || 0.5));
 
       for (const [name, def] of eligible) {

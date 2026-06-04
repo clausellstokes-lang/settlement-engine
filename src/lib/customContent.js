@@ -1,11 +1,11 @@
 /**
- * customContent.js - Custom content persistence service.
+ * customContent.js — Custom content persistence service.
  *
  * Mirrors the pattern from saves.js: dual-backend with Supabase when
  * configured, localStorage fallback otherwise. The service is category-
  * aware so the slice can fetch grouped sets in one call.
  *
- * Premium gate is enforced at the slice/UI layer - this service has no
+ * Premium gate is enforced at the slice/UI layer — this service has no
  * opinion about who is allowed to read/write. Free users with grandfathered
  * local items still load through `localList()`.
  */
@@ -70,7 +70,7 @@ async function supabaseAdd(category, item) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error('Not authenticated');
 
-  // Strip metadata fields from the item before storing - those live in columns
+  // Strip metadata fields from the item before storing — those live in columns
   const { id: _id, createdAt: _c, updatedAt: _u, isCustom: _ic, ...payload } = item;
 
   const { data, error } = await supabase
@@ -184,7 +184,7 @@ async function localClear() {
   localWriteAll({});
 }
 
-/** One-shot read of localStorage as a flat list - used for migration to cloud. */
+/** One-shot read of localStorage as a flat list — used for migration to cloud. */
 function readLocalForMigration() {
   const raw = localLoadAll();
   const out = [];

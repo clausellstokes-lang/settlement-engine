@@ -1,5 +1,5 @@
 /**
- * configSlice - Settlement generation configuration.
+ * configSlice — Settlement generation configuration.
  *
  * Holds every parameter the generator reads: tier, trade route, culture,
  * threat level, priority sliders, magic toggle, resources, stresses, etc.
@@ -71,7 +71,7 @@ export const createConfigSlice = (set, get) => ({
       // (the Workshop power dashboard, surfaced as a Create mode). null
       // returns to the card picker.
       state.wizardMode = mode;
-      // Always reset step when mode changes - users expect each mode to start
+      // Always reset step when mode changes — users expect each mode to start
       // at the beginning.
       state.wizardStep = 0;
     }),

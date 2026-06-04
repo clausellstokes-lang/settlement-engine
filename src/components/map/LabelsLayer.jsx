@@ -1,5 +1,5 @@
 /**
- * LabelsLayer - renders user-placed text labels from mapState.labels.
+ * LabelsLayer — renders user-placed text labels from mapState.labels.
  *
  * Each label supports:
  *   - Click to select

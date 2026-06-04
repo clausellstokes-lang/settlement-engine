@@ -1,16 +1,16 @@
 /**
- * PipelineReveal.jsx - P100 / X-1 "the wow is the simulation."
+ * PipelineReveal.jsx — P100 / X-1 "the wow is the simulation."
  *
  * Renders a 2-3 second overlay narrating the pipeline steps the engine
  * just ran. Each user-facing step name is sourced from
  * copy.en.pipelineSteps (theatrical translations of the actual function
- * names - "casting NPCs..." instead of "generatePopulation").
+ * names — "casting NPCs…" instead of "generatePopulation").
  *
  * The reveal plays back from the `pipelineHistory` written by the
  * settlementSlice.generateSettlement action. Because the engine runs
  * synchronously, "live narration" isn't possible without paying for an
  * async refactor; instead we record + replay, which feels identical to
- * the user (the moment to convey is "the engine just did work" - not
+ * the user (the moment to convey is "the engine just did work" — not
  * the literal millisecond-by-millisecond timing).
  *
  * Lifecycle:
@@ -37,7 +37,7 @@ import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { GOLD, INK_DEEP, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 
 // Mono font for the step list. theme.js doesn't export one, so we
-// declare it locally - kept tight (single value, used once).
+// declare it locally — kept tight (single value, used once).
 const mono = '"JetBrains Mono", Consolas, monospace';
 
 const STEP_INTERVAL_MS = 280;
@@ -52,7 +52,7 @@ export default function PipelineReveal({ onComplete }) {
 
   // Pre-render: filter history to entries we have labels for. Some
   // internal pass steps (subsumptionPass, isolationPass) intentionally
-  // don't have user-facing labels - skip them entirely.
+  // don't have user-facing labels — skip them entirely.
   const steps = useMemo(() => {
     if (!Array.isArray(history)) return [];
     return history
@@ -75,7 +75,7 @@ export default function PipelineReveal({ onComplete }) {
       return undefined;
     }
     Funnel.track(EVENTS.WOW_REVEAL_SHOWN, { steps: steps.length });
-    // Stamp inside the effect (not in render - purity rule).
+    // Stamp inside the effect (not in render — purity rule).
     startedAtRef.current = Date.now();
 
     const total = Math.max(MIN_TOTAL_MS, steps.length * STEP_INTERVAL_MS);
@@ -135,7 +135,7 @@ export default function PipelineReveal({ onComplete }) {
           fontFamily: serif_, fontSize: FS.xl, fontWeight: 600,
           color: GOLD, marginBottom: SP.xl,
         }}>
-          Forging {settlementName}...
+          Forging {settlementName}…
         </div>
         <div style={{ textAlign: 'left', fontFamily: mono, fontSize: FS.sm }}>
           {steps.map((s, i) => {

@@ -1,5 +1,5 @@
 /**
- * OnboardingCoach.jsx - First-run coaching banner.
+ * OnboardingCoach.jsx — First-run coaching banner.
  *
  * Renders a contextual banner above the main content that guides new
  * users through their first settlement generation. The banner is:
@@ -9,11 +9,11 @@
  *   - Invisible once the user has completed their first settlement
  *
  * Steps:
- *   0 - Welcome: "Pick a size to start"
- *   1 - Tier chosen: "Now hit Generate"
- *   2 - Settlement generated: "Scroll through tabs to explore"
- *   3 - Explored: "You're all set" (with Finish Tour)
- *   4 - Complete (component returns null)
+ *   0 — Welcome: "Pick a size to start"
+ *   1 — Tier chosen: "Now hit Generate"
+ *   2 — Settlement generated: "Scroll through tabs to explore"
+ *   3 — Explored: "You're all set" (with Finish Tour)
+ *   4 — Complete (component returns null)
  */
 import { Sparkles, X } from 'lucide-react';
 import { useStore } from '../store/index.js';
@@ -29,12 +29,12 @@ const STEP_CONTENT = [
   {
     id: 'ready',
     title: 'Ready to forge your world',
-    body: 'Hit the Generate button below. Every click produces a new settlement shaped by your config - economy, factions, NPCs, crises.',
+    body: 'Hit the Generate button below. Every click produces a new settlement shaped by your config — economy, factions, NPCs, crises.',
     highlight: 'generate-button',
   },
   {
     id: 'explore',
-    title: 'Here it is - explore the tabs',
+    title: 'Here it is — explore the tabs',
     body: 'Each tab reveals a different layer: DM Summary, Daily Life, Economics, Power, NPCs, Plot Hooks, and more. Click around.',
     highlight: 'output-tabs',
   },

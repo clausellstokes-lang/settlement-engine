@@ -1,5 +1,5 @@
 /**
- * primitives/RegenerationModeSelector - Tier 5.2 surface.
+ * primitives/RegenerationModeSelector — Tier 5.2 surface.
  *
  * Three rerun strengths the DM can choose from before regenerating:
  *
@@ -13,7 +13,7 @@
  *
  * Consumes domain/regenerationMode.js#buildRegenerationPlan to show
  * the user what each mode WOULD do before they commit. Pure
- * presentational - the parent owns the rerun action and passes
+ * presentational — the parent owns the rerun action and passes
  * `onConfirm(mode)` to fire it.
  *
  * Mode selection is sticky within the modal but resets on close.

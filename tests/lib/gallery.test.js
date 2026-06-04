@@ -43,7 +43,7 @@ import {
 
 afterEach(() => vi.clearAllMocks());
 
-describe('gallery.js - publish/unpublish (RPC)', () => {
+describe('gallery.js — publish/unpublish (RPC)', () => {
   it('publishSettlement calls publish_settlement and returns the slug', async () => {
     supabase.rpc.mockResolvedValueOnce({ data: 'abc123', error: null });
     const slug = await publishSettlement('settlement-uuid');
@@ -79,7 +79,7 @@ describe('gallery.js - publish/unpublish (RPC)', () => {
   });
 });
 
-describe('gallery.js - fetchPublicGallery (community listing)', () => {
+describe('gallery.js — fetchPublicGallery (community listing)', () => {
   beforeEach(() => {
     supabase.rpc.mockResolvedValue({
       data: [
@@ -163,7 +163,7 @@ describe('gallery.js - fetchPublicGallery (community listing)', () => {
   });
 });
 
-describe('gallery.js - fetchCuratedGallery (Tier 8.1)', () => {
+describe('gallery.js — fetchCuratedGallery (Tier 8.1)', () => {
   it('calls list_curated_dossiers RPC and returns curated tiles', async () => {
     supabase.rpc.mockResolvedValueOnce({
       data: [
@@ -199,7 +199,7 @@ describe('gallery.js - fetchCuratedGallery (Tier 8.1)', () => {
   });
 });
 
-describe('gallery.js - setCurated (admin RPC)', () => {
+describe('gallery.js — setCurated (admin RPC)', () => {
   it('calls set_curated with target + curated + sort_order', async () => {
     supabase.rpc.mockResolvedValueOnce({ data: null, error: null });
     await setCurated('settlement-uuid', true, 5);
@@ -226,7 +226,7 @@ describe('gallery.js - setCurated (admin RPC)', () => {
   });
 });
 
-describe('gallery.js - fetchPublicDossier (slug lookup)', () => {
+describe('gallery.js — fetchPublicDossier (slug lookup)', () => {
   it('returns null for missing/invalid slugs without hitting the network', async () => {
     expect(await fetchPublicDossier(null)).toBe(null);
     expect(await fetchPublicDossier('')).toBe(null);

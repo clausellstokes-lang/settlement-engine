@@ -1,5 +1,5 @@
 /**
- * primitives/StateBadge - One badge to rule the lifecycle states.
+ * primitives/StateBadge — One badge to rule the lifecycle states.
  *
  * Replaces ad-hoc badge styles scattered across PhaseBadge, the
  * Narrated/Raw chip in SettlementDetail, and the LockToggle's locked

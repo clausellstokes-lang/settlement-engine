@@ -83,11 +83,11 @@ const getInstitutionNames = (institutions = []) => {
  *
  * Single source of truth for magic level across Daily Life, Defense, and Power.
  * Three inputs interact:
- *   1. World slider (priorityMagic) - ambient baseline + ceiling
- *   2. Institution presence - weighted by sophistication tier
- *   3. Nearby magical resources - land-level amplifier
+ *   1. World slider (priorityMagic) — ambient baseline + ceiling
+ *   2. Institution presence — weighted by sophistication tier
+ *   3. Nearby magical resources — land-level amplifier
  *
- * Returns { score (0-100), band ('none'|'low'|'moderate'|'high'), label, primarySources }
+ * Returns { score (0–100), band ('none'|'low'|'moderate'|'high'), label, primarySources }
  */
 export const computeEffectiveMagicPresence = (institutions = [], config = {}) => {
   if (config.magicExists === false || (config.priorityMagic ?? 50) === 0) {
@@ -96,11 +96,11 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
 
   const slider = config.priorityMagic ?? 50;
 
-  // ── 1. World slider contribution (0-55) ────────────────────────────────────
+  // ── 1. World slider contribution (0–55) ────────────────────────────────────
   const sliderContrib = slider * 0.55;
 
-  // ── 2. Institution contribution (0-40) ────────────────────────────────────
-  // Weighted by sophistication tier - what matters is depth, not headcount.
+  // ── 2. Institution contribution (0–40) ────────────────────────────────────
+  // Weighted by sophistication tier — what matters is depth, not headcount.
   const INST_WEIGHTS = {
     folk:         { weight:  5, keywords: ["hedge wizard","traveling hedge wizard","healer (divine","warden's lodge","druid circle","wayside shrine"] },
     practitioner: { weight: 10, keywords: ["alchemist shop","scroll scribe","apothecary","village scribe"] },
@@ -129,11 +129,11 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
   const hasMagicCat = instCategories.some(c => c === 'magic' || c === 'exotic');
   if (hasMagicCat && rawInstScore === 0) rawInstScore += 5;
 
-  // Normalize institution score to 0-40 cap
+  // Normalize institution score to 0–40 cap
   // Assumes a ~full mages-district city has raw score ~100
   const instContrib = Math.min(40, rawInstScore * 0.4);
 
-  // ── 3. Resource bonus (0-22) ──────────────────────────────────────────────
+  // ── 3. Resource bonus (0–22) ──────────────────────────────────────────────
   const resources = config.nearbyResources || [];
   let resourceBonus = 0;
   const resourceSources = [];
@@ -171,7 +171,7 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
 
 export const hasTeleportationInfra = (institutions = [], config = {}) => {
   // _magicTradeOnly flag is set by isolationGenerator after injection, or pre-derived
-  // by generateSettlement before the structural validator runs - trust it explicitly.
+  // by generateSettlement before the structural validator runs — trust it explicitly.
   if (config?._magicTradeOnly === true) return true;
   // Check actual institution presence
   const hasInstitution = institutions.some(inst => {
@@ -209,7 +209,7 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
       ? { buffered: true,  strength: 'moderate',
           note: 'Magical trade infrastructure (teleportation) enables limited craft imports despite isolation.' }
       : { buffered: false, strength: 'none',
-          note: 'No trade pipeline - isolated settlement cannot import raw materials.' };
+          note: 'No trade pipeline — isolated settlement cannot import raw materials.' };
   }
 
   if (effectiveEconomy < 40) {
@@ -235,10 +235,10 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
  * Compute effective influence scores for the five power domains.
  *
  * Accounts for priority sliders, institution presence, active stress conditions,
- * monster threat level, and neighbor relationship type. These 0-100 scores are
+ * monster threat level, and neighbor relationship type. These 0–100 scores are
  * consumed by nearly every downstream generator.
  *
- * @param {Object} config        - Settlement config (priorities, stress, threat, neighbor, ...)
+ * @param {Object} config        - Settlement config (priorities, stress, threat, neighbor, …)
  * @param {Array}  institutions  - Settlement institution objects
  * @returns {{
  *   criminalEffective: number,
@@ -320,9 +320,9 @@ export const getInstFlags = (config = {}, institutions = []) => {
     (s('religious_conversion') ? 1.35 : 1) *
     (s('slave_revolt')         ? 1.10 : 1);
 
-  // ── Criminal effective score (0-100) ─────────────────────────────────────
+  // ── Criminal effective score (0–100) ─────────────────────────────────────
   // High military suppresses crime; high economy/low religion can amplify it.
-  // Minimum 2 - some crime always exists.
+  // Minimum 2 — some crime always exists.
   const militarySuppressCrime = Math.max(0.12, 1 - (pri.military - 50) / 170);
   const economyModCrime       = 1 + (pri.economy - 50) / 240;
   const religionSuppressCrime = Math.max(0.72, 1 - (pri.religion - 50) / 290);
@@ -337,7 +337,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
     crimeStressMult
   ));
 
-  // ── Military effective score (0-100) ─────────────────────────────────────
+  // ── Military effective score (0–100) ─────────────────────────────────────
   // Garrison quality scales with economic investment; high crime degrades effectiveness.
   const garrisonBase = inst.hasGarrison
     ? Math.max(0.55, 0.80 + pri.economy / 210)
@@ -364,7 +364,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
     neighborMilMult
   );
 
-  // ── Economy output score (0-100) ─────────────────────────────────────────
+  // ── Economy output score (0–100) ─────────────────────────────────────────
   const crimeDegradeEconomy = Math.max(0.58, 1 - (criminalEffective - 30) / 310);
   const magicBoostEconomy   = 1 + (pri.magic - 50) / 290;
   const marketInstMult      = inst.hasMarket ? 1.0 : 0.75;
@@ -385,7 +385,7 @@ export const getInstFlags = (config = {}, institutions = []) => {
     neighborEconMult
   );
 
-  // ── Religion influence score (0-100) ─────────────────────────────────────
+  // ── Religion influence score (0–100) ─────────────────────────────────────
   const crimeDegradeReligion = Math.min(1, Math.max(0.68, 1 - (criminalEffective - 40) / 370));
   const economyModReligion   = Math.min(1, Math.max(0.82, 1 - (pri.economy - 65) / 340));
   const churchInstMult       = inst.hasChurch ? 1.0 : 0.5;
@@ -398,8 +398,8 @@ export const getInstFlags = (config = {}, institutions = []) => {
     religionStressMult
   );
 
-  // ── Magic influence score (0-100) ────────────────────────────────────────
-  // Now driven by computeEffectiveMagicPresence - single source of truth.
+  // ── Magic influence score (0–100) ────────────────────────────────────────
+  // Now driven by computeEffectiveMagicPresence — single source of truth.
   // Economic prosperity and crime still modulate the institutional score.
   const _effectiveMagic   = computeEffectiveMagicPresence(institutions, config);
   const economyBaseMagic  = Math.max(0.52, 0.72 + pri.economy / 240);
@@ -441,7 +441,7 @@ export const getStressFlags = (config = {}, institutions = []) => {
   const flags = getInstFlags(config, institutions);
   const inst  = flags.inst;
 
-  // Deterministic pseudo-random threshold per settlement (0-96).
+  // Deterministic pseudo-random threshold per settlement (0–96).
   const threshold = Math.abs(
     (pri.economy  *  7 +
      pri.military * 13 +
@@ -500,7 +500,7 @@ export const getStressFlags = (config = {}, institutions = []) => {
   const arcaneBlackMarket = arcaneCond && arcaneInst && fires(52);
 
   // ── theocraticEconomy ────────────────────────────────────────────────────
-  // Religion dominates economy - tithing, religious markets, church-owned land.
+  // Religion dominates economy — tithing, religious markets, church-owned land.
   const theoCond         = pri.religion >= 70 && pri.economy <= 42 &&
                            (pri.religion - pri.economy) >= 28;
   const theoInst         = (inst.hasCathedral || inst.hasMonastery) && inst.hasMarket;
@@ -532,7 +532,7 @@ export const getStressFlags = (config = {}, institutions = []) => {
   const merchantCriminalBlur = blurCond && blurInst && fires(55);
 
   // ── magicMilitarized ────────────────────────────────────────────────────
-  // Military leads magic - arcane resources are directed toward warfare.
+  // Military leads magic — arcane resources are directed toward warfare.
   const magMilCond       = pri.military >= 65 && pri.magic >= 55 && pri.military > pri.magic;
   const magMilInst       = inst.hasMilitaryInst && inst.hasMagicInst;
   const magicMilitarized = magMilCond && magMilInst && fires(50);

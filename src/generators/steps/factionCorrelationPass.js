@@ -4,7 +4,7 @@
  * Faction-institution correlation feedback loop + demand imports.
  * Also runs arcane institution strip for no-magic worlds.
  *
- * Extracted from generateSettlement.js lines 851-889.
+ * Extracted from generateSettlement.js lines 851–889.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -28,7 +28,7 @@ registerStep('factionCorrelationPass', {
     powerStructure, economicState,
   } = ctx;
 
-  // Demand imports - faction purchasing power + culture shapes imports
+  // Demand imports — faction purchasing power + culture shapes imports
   const _hasMagicTrade = institutions.some(i => /teleport|airship|planar/i.test(i.name));
   if (effectiveConfig.tradeRouteAccess !== 'isolated' || _hasMagicTrade) {
     const demandImports = computeDemandImports(
@@ -55,7 +55,7 @@ registerStep('factionCorrelationPass', {
     );
     if (boostAdditions.length > 0) {
       institutions.push(...boostAdditions);
-      // Tier 2.1 - trace each faction-boost addition. The cause is the
+      // Tier 2.1 — trace each faction-boost addition. The cause is the
       // dominant faction that pulled the institution into existence.
       // Powers the "why is this institution here?" answer when the
       // root cause is a sociopolitical fit rather than a base roll.
@@ -77,7 +77,7 @@ registerStep('factionCorrelationPass', {
     }
   }
 
-  // Arcane institution safety-net - strips arcane institutions when
+  // Arcane institution safety-net — strips arcane institutions when
   // the world's magicExists flag is false.
   const beforeStrip = new Set(institutions.map(i => i.name));
   stripArcaneInstitutions(institutions, effectiveConfig);

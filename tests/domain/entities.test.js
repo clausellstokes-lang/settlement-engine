@@ -61,7 +61,7 @@ describe('entity status', () => {
     expect(s).toBeLessThan(1);
   });
 
-  test('removed status is sticky - withImpairment does not override it', () => {
+  test('removed status is sticky — withImpairment does not override it', () => {
     const removed = { name: 'X', status: STATUS_REMOVED };
     const next = withImpairment(removed, { type: 'capacity', severity: 0.5, causeEventId: 'e1', description: 'A' });
     expect(next.status).toBe(STATUS_REMOVED);

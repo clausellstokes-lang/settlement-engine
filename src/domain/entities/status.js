@@ -1,5 +1,5 @@
 /**
- * domain/entities/status.js - Entity status + impairment data model.
+ * domain/entities/status.js — Entity status + impairment data model.
  *
  * The plan's clarifying insight: events cannot only update SystemState.
  * If the event says "the granary burned," the granary cannot still
@@ -8,25 +8,25 @@
  * subsequent renders consult.
  *
  * Three structural ideas:
- *   1. Status - coarse lifecycle of an entity (active/impaired/removed/...)
- *   2. Impairments - typed, severity-scaled annotations explaining WHY
+ *   1. Status — coarse lifecycle of an entity (active/impaired/removed/...)
+ *   2. Impairments — typed, severity-scaled annotations explaining WHY
  *      something is impaired and what dimension is affected (capacity,
  *      legitimacy, influence, wealth, etc.)
- *   3. Causes - every impairment carries the event id that produced it,
+ *   3. Causes — every impairment carries the event id that produced it,
  *      so the timeline can be replayed and a single event can be undone
  *      without losing unrelated impairments.
  *
- * Pure data - no React, no Zustand, no I/O. The propagation engine
+ * Pure data — no React, no Zustand, no I/O. The propagation engine
  * lives in `propagate.js`; this file is types and predicates only.
  */
 
 /** @typedef {'active'|'impaired'|'removed'|'destroyed'|'vacant'} EntityStatus
  *
- *   active     - fully functional. Default.
- *   impaired   - reduced capacity / legitimacy / influence; has at least one impairment
- *   removed    - institution closed, NPC departed, faction dissolved (recoverable)
- *   destroyed  - physical destruction; rebuild required (rarely automatic)
- *   vacant     - institution exists but lacks leadership (an NPC slot is empty)
+ *   active     — fully functional. Default.
+ *   impaired   — reduced capacity / legitimacy / influence; has at least one impairment
+ *   removed    — institution closed, NPC departed, faction dissolved (recoverable)
+ *   destroyed  — physical destruction; rebuild required (rarely automatic)
+ *   vacant     — institution exists but lacks leadership (an NPC slot is empty)
  */
 
 /** @typedef {'capacity'|'legitimacy'|'influence'|'wealth'|'staffing'|'infrastructure'|'access'|'corruption'} InstitutionImpairmentType */
@@ -46,8 +46,8 @@
  *  @property {ImpairmentType} type
  *  @property {number} severity        0-1; 0.0 = no effect, 1.0 = total impairment
  *                                     (negative values used for restoration patches)
- *  @property {string} causeEventId    timeline link - supports undo and replay
- *  @property {string=} description    human-readable, surfaced in UI/PDF (optional -
+ *  @property {string} causeEventId    timeline link — supports undo and replay
+ *  @property {string=} description    human-readable, surfaced in UI/PDF (optional —
  *                                     auto-generated from propagation if absent)
  *  @property {string=} appliedAt      ISO timestamp
  */
@@ -103,7 +103,7 @@ export function effectiveStatus(entity) {
  * of the same type from the same cause (idempotent re-apply). If a new
  * impairment of the same type comes from a *different* cause, it stacks.
  *
- * Returns a new entity object - never mutates the input. The pipeline
+ * Returns a new entity object — never mutates the input. The pipeline
  * uses this to compose patches; the store reducer applies them.
  *
  * @param {Object} entity
@@ -129,7 +129,7 @@ export function withImpairment(entity, impairment) {
 }
 
 /**
- * Remove all impairments produced by a given event id - the inverse of
+ * Remove all impairments produced by a given event id — the inverse of
  * withImpairment. Used by undoLastEvent to restore prior state.
  */
 export function withoutEventImpairments(entity, causeEventId) {
@@ -143,13 +143,13 @@ export function withoutEventImpairments(entity, causeEventId) {
 }
 
 /**
- * Compute the aggregate severity for a given impairment dimension -
+ * Compute the aggregate severity for a given impairment dimension —
  * useful for UI display and propagation rules ("how much capacity has
  * this institution lost?"). Multiple impairments of the same type
  * compound but cap at 1.0.
  *
  * Compounding rule: combined = 1 - prod(1 - s_i). Two 0.5 impairments
- * yield 0.75, not 1.0 - preserves "still has some capacity."
+ * yield 0.75, not 1.0 — preserves "still has some capacity."
  */
 export function severityFor(entity, type) {
   const impairments = (entity?.impairments || []).filter(i => i.type === type);

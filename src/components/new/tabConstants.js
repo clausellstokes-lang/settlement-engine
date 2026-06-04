@@ -2,7 +2,7 @@
 
 export const isMobile = () => window.innerWidth < 640;
 
-// ── Tier 7.19 - BODY token (sweep across components) ─────────────────────────
+// ── Tier 7.19 — BODY token (sweep across components) ─────────────────────────
 // The tabs historically used a per-file `const second='#6b5340'` for body
 // copy. Centralising it here means a future contrast adjustment is one edit,
 // not 13. The hex value matches the existing ink-mid brown so the visual

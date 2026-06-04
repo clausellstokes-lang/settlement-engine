@@ -13,9 +13,9 @@
  *   admin audit trail in one database transaction.
  *
  * Environment variables:
- *   STRIPE_SECRET_KEY       - Stripe secret key
- *   STRIPE_WEBHOOK_SECRET   - Webhook signing secret
- *   SUPABASE_SERVICE_ROLE_KEY - Service role key (bypasses RLS)
+ *   STRIPE_SECRET_KEY       — Stripe secret key
+ *   STRIPE_WEBHOOK_SECRET   — Webhook signing secret
+ *   SUPABASE_SERVICE_ROLE_KEY — Service role key (bypasses RLS)
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
@@ -148,7 +148,7 @@ async function grantMonthlyAllowanceIfNeeded(
 //      `create-checkout/index.ts`, which:
 //        a. requires a Supabase JWT (line 107 in create-checkout)
 //        b. uses `user.id` from the server-verified JWT for
-//           `metadata.supabase_user_id` - NOT from the request body.
+//           `metadata.supabase_user_id` — NOT from the request body.
 //           So a user cannot upgrade someone else's account.
 //        c. validates `product` against the server-controlled PRICE_MAP
 //           before passing it into metadata. So a user cannot smuggle
@@ -164,10 +164,10 @@ async function grantMonthlyAllowanceIfNeeded(
 // If you ADD a new entry point that creates Stripe checkout sessions,
 // it MUST follow the same pattern. Otherwise the trust chain breaks.
 // The contract test in tests/edgeFunctions/contracts.test.js
-// (Tier 0.5 - webhook trust boundaries) locks this in.
+// (Tier 0.5 — webhook trust boundaries) locks this in.
 
 serve(async (req) => {
-  // ── Signature verification - MUST run before any metadata read ─────
+  // ── Signature verification — MUST run before any metadata read ─────
   const signature = req.headers.get('stripe-signature');
   if (!signature) return new Response('Missing signature', { status: 400 });
 
@@ -191,7 +191,7 @@ serve(async (req) => {
 
       // single_dossier is the only product that may legitimately have no
       // supabase_user_id (it doesn't require an account). Everything else
-      // does - bail with a log so we get a Stripe dashboard breadcrumb.
+      // does — bail with a log so we get a Stripe dashboard breadcrumb.
       if (!userId && product !== 'single_dossier') {
         console.error('No supabase_user_id in session metadata');
         break;
@@ -236,7 +236,7 @@ serve(async (req) => {
         console.log(`User ${userId} upgraded to Founder Lifetime (+30 credits)`);
       } else if (product === 'single_dossier') {
         // One-shot purchase, no account required. Nothing to mutate on
-        // user state - the customer's receipt + the success-page redirect
+        // user state — the customer's receipt + the success-page redirect
         // (handled client-side via session_id query param) deliver the PDF.
         // We log it so audit can match against Stripe payments.
         console.log(`single_dossier purchased: session=${session.id} email=${session.customer_email}`);

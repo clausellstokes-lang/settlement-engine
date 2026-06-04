@@ -1,9 +1,9 @@
 /**
- * domain/worldPulse/realmEvents.js - realm-scope arc synthesis.
+ * domain/worldPulse/realmEvents.js — realm-scope arc synthesis.
  *
  * Most pulse outcomes are settlement- or relationship-scoped. This recognizes
  * when the SAME stressor grips several settlements at once and promotes it to a
- * named, realm-scope Wizard News arc ("The Great Hunger", "The War") - the
+ * named, realm-scope Wizard News arc ("The Great Hunger", "The War") — the
  * payoff a DM wants from a *regional* engine. Deterministic + explainable; it
  * reads the post-tick world state and emits Wizard-News-shaped entries.
  */

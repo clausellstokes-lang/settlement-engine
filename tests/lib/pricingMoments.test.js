@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/lib/pricingMoments.test.js - Tier 3.8 comprehensive coverage.
+ * tests/lib/pricingMoments.test.js — Tier 3.8 comprehensive coverage.
  */
 
 import { describe, test, expect, beforeEach, vi } from 'vitest';

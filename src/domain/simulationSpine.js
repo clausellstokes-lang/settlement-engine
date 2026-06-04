@@ -1,18 +1,18 @@
 /**
- * domain/simulationSpine.js - Compact causal summary of a settlement.
+ * domain/simulationSpine.js — Compact causal summary of a settlement.
  *
  * Tier 2.5 of the roadmap. The spine answers seven structured questions
  * about a settlement in single-line answers derived from existing
  * simulation fields. No new generator work needed; this is read-only
  * over current settlement state.
  *
- *   This settlement exists because...   (settlementReason / history)
- *   It survives by...                   (economy + resources)
- *   It is ruled by...                   (governance / dominant faction)
- *   Its real power lies with...         (faction power vs. legitimacy)
- *   It is currently strained by...      (stressors / volatility)
- *   Its people fear...                  (threats / conflicts)
- *   Its likely future is...             (tensions trajectory)
+ *   This settlement exists because…   (settlementReason / history)
+ *   It survives by…                   (economy + resources)
+ *   It is ruled by…                   (governance / dominant faction)
+ *   Its real power lies with…         (faction power vs. legitimacy)
+ *   It is currently strained by…      (stressors / volatility)
+ *   Its people fear…                  (threats / conflicts)
+ *   Its likely future is…             (tensions trajectory)
  *
  * Why this exists as a structured object instead of a paragraph:
  *   - The PipelineRail can render each line as a separate row.
@@ -20,13 +20,13 @@
  *   - The AI overlay can use individual lines as grounding prompts
  *     ("describe the temple's prominence given THIS spine").
  *   - The web app can show the spine on the dossier overview as a
- *     "spine card" - the user sees the settlement's identity in 7 lines.
+ *     "spine card" — the user sees the settlement's identity in 7 lines.
  *
  * Tolerant of missing fields: every line falls back to a sensible
  * placeholder if the source data isn't present. A settlement loaded
  * from before this feature existed still produces a usable spine.
  *
- * Pure function - no I/O, no state, no React. Safe to call from
+ * Pure function — no I/O, no state, no React. Safe to call from
  * anywhere.
  */
 
@@ -93,7 +93,7 @@ function deriveRuledBy(s) {
   const formal = firstNonEmpty(power.governanceType, power.governance);
   if (formal) {
     const factionName = firstNonEmpty(power.governingName);
-    if (factionName) return `${formal} - currently ${factionName}.`;
+    if (factionName) return `${formal} — currently ${factionName}.`;
     return `${formal}.`;
   }
 
@@ -117,9 +117,9 @@ function deriveRealPower(s) {
     // Same. The spine entry becomes about legitimacy instead.
     const leg = power.publicLegitimacy?.label;
     if (leg && leg !== 'Endorsed') {
-      return `The governing hand is also the strongest hand - but its legitimacy is ${leg.toLowerCase()}.`;
+      return `The governing hand is also the strongest hand — but its legitimacy is ${leg.toLowerCase()}.`;
     }
-    return 'Authority and power are aligned - for now.';
+    return 'Authority and power are aligned — for now.';
   }
 
   if (top.name) {
@@ -168,7 +168,7 @@ function derivePeopleFear(s) {
     return 'People watch the hooks that the DM hasn’t shown them yet.';
   }
 
-  return 'No widely-shared dread - yet.';
+  return 'No widely-shared dread — yet.';
 }
 
 function deriveLikelyFuture(s) {
@@ -209,7 +209,7 @@ function deriveLikelyFuture(s) {
  */
 export function deriveSimulationSpine(settlement) {
   if (!settlement || typeof settlement !== 'object') {
-    // Defensive - return a placeholder spine rather than throwing.
+    // Defensive — return a placeholder spine rather than throwing.
     return {
       existsBecause: 'Origin unknown.',
       survivesBy:    'Means unknown.',
@@ -235,7 +235,7 @@ export function deriveSimulationSpine(settlement) {
 /**
  * Render the spine as an ordered array of `[label, body]` pairs, ready
  * for the rail or PDF. Skips lines that came back null (only realPower
- * can be null today - it's deliberately omitted when authority and
+ * can be null today — it's deliberately omitted when authority and
  * real power are aligned).
  */
 export function simulationSpineRows(settlement) {

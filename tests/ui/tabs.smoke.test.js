@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * Component smoke tests for the tab views - render + unmount with
+ * Component smoke tests for the tab views — render + unmount with
  * various settlement shapes (full, sparse, null) and assert no throws.
  *
  * Catches the class of bug where a tab assumes a field is present and
@@ -83,7 +83,7 @@ describe('ResourcesTab smoke', () => {
 
 describe('EconomicsTab smoke', () => {
   // Extra value here: we extracted EconomicFlowsSection from this tab
-  // last round - these tests guard the refactor.
+  // last round — these tests guard the refactor.
   test('mounts with a full village settlement', () => {
     expect(() => render(e(EconomicsTab, {
       economicState: villageSettlement.economicState,
@@ -127,7 +127,7 @@ smokeTab('RelationshipsTab', RelationshipsTab, s => ({ settlement: s }));
 smokeTab('ViabilityTab',     ViabilityTab,     s => ({ settlement: s }));
 smokeTab('DMCompassTab',     DMCompassTab,     s => ({ settlement: s }));
 
-// Multi-prop tabs - these take additional slices alongside `settlement`.
+// Multi-prop tabs — these take additional slices alongside `settlement`.
 smokeTab('PowerTab',    PowerTab,    s => ({ powerStructure: s.powerStructure, settlement: s }),
   { powerStructure: null, settlement: { name: 'X' } });
 smokeTab('ServicesTab', ServicesTab, s => ({ services: s.economicState?.institutionalServices || [], settlement: s }),

@@ -1,5 +1,5 @@
 /**
- * SystemStateBar - Four bars, one per dimension, with band labels.
+ * SystemStateBar — Four bars, one per dimension, with band labels.
  *
  * Numbers are deliberately de-emphasized (small, gray) and bands are
  * the primary visual ("Strained", "Vulnerable") because the architect
@@ -69,7 +69,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
   const color = BAND_COLOR[dim.band] || MUTED;
   // For "lower is better" dims (volatility, threat, pressure), render
   // the bar from the right so bigger values look heavier and a "good"
-  // value reads as a small bar - matches DM intuition.
+  // value reads as a small bar — matches DM intuition.
   const fillPct = meta.higherIsBetter ? dim.value : (100 - dim.value);
 
   return (

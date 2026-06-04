@@ -1,9 +1,9 @@
 /**
- * PublicDossierView.jsx - Read-only renderer for shared public dossiers.
+ * PublicDossierView.jsx — Read-only renderer for shared public dossiers.
  *
  * Wraps OutputContainer in read-only mode and passes the settlement
  * object straight in (bypasses the store). Adds a small header strip
- * with title, tier, view count, and a "forge your own" CTA - the
+ * with title, tier, view count, and a "forge your own" CTA — the
  * gallery's whole point is to drive new sign-ups.
  *
  * Why not just reuse OutputContainer alone:
@@ -13,7 +13,7 @@
  *   `readOnly` gives the public viewer a clean, owner-free surface.
  *
  * Privacy:
- *   No owner name, email, or display name is rendered - the dossier
+ *   No owner name, email, or display name is rendered — the dossier
  *   object is the world's view of the place, nothing more.
  */
 

@@ -22,7 +22,7 @@ function AnchorFact({ label, value, accent }) {
       borderRadius: 5, padding: '5px 9px',
     }}>
       <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
-      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || '-'}</div>
+      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || '—'}</div>
     </div>
   );
 }
@@ -68,11 +68,11 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const error = isConfigured ? storeAiError : localError;
 
   const LOAD_MSGS = [
-    'Walking the streets...',
-    'Listening at the alehouse...',
-    'Watching the market open...',
-    'Asking the locals...',
-    'Reading the mood...',
+    'Walking the streets…',
+    'Listening at the alehouse…',
+    'Watching the market open…',
+    'Asking the locals…',
+    'Reading the mood…',
   ];
 
   async function generate() {
@@ -87,7 +87,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
     setLocalError(null);
     setNarrative(null);
     // Math.random() picks a loading message. The whole function is a
-    // button-click handler - never runs during render - so the purity
+    // button-click handler — never runs during render — so the purity
     // rule is over-broad here.
     // eslint-disable-next-line react-hooks/purity
     setLoadMsg(LOAD_MSGS[Math.floor(Math.random() * LOAD_MSGS.length)]);
@@ -122,12 +122,12 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
     ctx.foodDeficit > 10 ? '#8a4010' :
     ctx.foodDeficit > 0  ? '#a0762a' : '#1a5a28';
 
-  // Button label logic - first-time generate vs regenerate. Both spend credits;
+  // Button label logic — first-time generate vs regenerate. Both spend credits;
   // we name the action plainly so users know.
   const buttonLabel = (() => {
     if (!dailyLifeEnabled) return '✦ Save settlement to enable Daily Life narrative';
     if (loading) {
-      return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating...' : 'Generating...');
+      return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating…' : 'Generating…');
     }
     if (hasContent) {
       return isConfigured
@@ -175,7 +175,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
       {/* Unsaved settlements (Create page) get a slim inline hint instead of
           a disabled teaser button. The user already saw this hint above the
-          tab strip too - repeating it here in tab-context makes the connection
+          tab strip too — repeating it here in tab-context makes the connection
           to "Daily Life" specifically. */}
       {!dailyLifeEnabled ? (
         <div
@@ -190,7 +190,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           }}
         >
           <strong style={{ color: swatch['#7A5A1A'] }}>✦ Save this settlement</strong>
-          {' '}to refine Daily Life into narrative - five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
+          {' '}to refine Daily Life into narrative — five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
         </div>
       ) : (
         <button
@@ -235,7 +235,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       {/* ── NARRATIVE ─────────────────────────────────────────────────────── */}
       {hasContent && (
         <div style={{ position: 'relative' }}>
-          {/* Regenerate overlay - floating chip so the user sees "a new version is brewing" */}
+          {/* Regenerate overlay — floating chip so the user sees "a new version is brewing" */}
           {regenerating && (
             <div style={{
               position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
@@ -246,7 +246,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
               boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
             }}>
               <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>⟳</span>
-              {storeAiProgress || 'Regenerating...'}
+              {storeAiProgress || 'Regenerating…'}
             </div>
           )}
           <div style={{
@@ -283,7 +283,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
             What is daily life like here?
           </div>
           <div style={{ fontSize: FS['11.5'], color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
-            Generate a prose description of ordinary life in this settlement - dawn, the market, the tavern,
+            Generate a prose description of ordinary life in this settlement — dawn, the market, the tavern,
             the watch. Opus-grade writing, five paragraphs, grounded in this settlement's specific stressors and trade.
           </div>
         </div>

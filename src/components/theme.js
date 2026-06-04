@@ -1,5 +1,5 @@
 /**
- * theme.js - Backward-compat shim. Canonical tokens live in `src/design/tokens.js`.
+ * theme.js — Backward-compat shim. Canonical tokens live in `src/design/tokens.js`.
  *
  * History: this file used to be the single source for flat constants
  * (GOLD, INK, MUTED, etc.) and was imported by ~80 components. It's now
@@ -7,7 +7,7 @@
  * actual values come from the new token system.
  *
  * Values intentionally shift to the UI Redesign palette (parchment-50,
- * ink-900, gold-500, etc.) - same NAMES, refreshed VALUES. That's the
+ * ink-900, gold-500, etc.) — same NAMES, refreshed VALUES. That's the
  * whole point of the shim: re-skin the app without touching 80 files.
  *
  * New code should import from `src/design/tokens.js` directly:
@@ -29,7 +29,7 @@ export const GOLD_BG  = L.GOLD_BG;
 export const INK      = L.INK;
 export const INK_DEEP = L.INK_DEEP;
 export const MUTED    = L.MUTED;
-// BODY - WCAG-passing body-copy color (ink-600). Use this for prose,
+// BODY — WCAG-passing body-copy color (ink-600). Use this for prose,
 // description text, helper text, paragraph body. MUTED is too light
 // for body and fails 4.5:1; keep MUTED only for chrome (eyebrows,
 // subtitles, hint text in card headers).
@@ -56,7 +56,7 @@ export const BLUE_BG   = L.BLUE_BG;
 export const GOLD_DEEP = L.GOLD_DEEP;
 export const PARCH_100 = L.PARCH_100;
 
-// swatch - exact-value migration swatchbook (see design/tokens.js). Routes the
+// swatch — exact-value migration swatchbook (see design/tokens.js). Routes the
 // long tail of raw inline hex colors through the token system with zero visual
 // change so no-raw-color can go to error.
 export { swatch } from '../design/tokens.js';

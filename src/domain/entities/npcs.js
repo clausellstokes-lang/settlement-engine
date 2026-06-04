@@ -1,5 +1,5 @@
 /**
- * domain/entities/npcs.js - Structural NPC model + event helpers.
+ * domain/entities/npcs.js — Structural NPC model + event helpers.
  *
  * The plan: most NPCs stay flavor; a small subset becomes load-bearing
  * with mechanical effects on linked institutions and factions. This
@@ -36,13 +36,13 @@
  *  @property {string[]=} linkedInstitutionIds
  *  @property {string[]=} linkedFactionIds
  *  @property {number=} influence              0-100, optional
- *  @property {number=} legitimacyContribution 0-100 - what they prop up when alive
- *  @property {number=} stabilityContribution  0-100 - how much their absence destabilizes
+ *  @property {number=} legitimacyContribution 0-100 — what they prop up when alive
+ *  @property {number=} stabilityContribution  0-100 — how much their absence destabilizes
  *  @property {string[]=} serviceContribution  e.g. ["healing", "charity", "funerary_rites"]
  *  @property {string[]=} potentialSuccessors  npc ids the engine pre-suggests on death
  *  @property {string=} removedByEventId
  *  @property {string=} notes                  free-form DM annotation
- *  @property {string=} generatedAs            'pipeline'|'faction_structural' - provenance marker
+ *  @property {string=} generatedAs            'pipeline'|'faction_structural' — provenance marker
  */
 
 const IMPORTANCE_WEIGHT = {
@@ -119,7 +119,7 @@ export function killNpc(npc, eventId) {
   const dead = /** @type {NpcStructural} */ ({ ...npc, status: 'dead', removedByEventId: eventId });
   const weight = importanceWeight(npc);
 
-  // Minor NPCs leave no mechanical trace - the campaign feels their
+  // Minor NPCs leave no mechanical trace — the campaign feels their
   // death narratively but the engine doesn't ripple it through.
   if (weight === 0) return { npc: dead, institutionImpairments: [], factionImpairments: [] };
 
@@ -136,7 +136,7 @@ export function killNpc(npc, eventId) {
         description: `Lost key staff member: ${npc.name}${npc.role ? ` (${npc.role})` : ''}`,
       },
     });
-    // Pillar NPCs also impair legitimacy - their public identity
+    // Pillar NPCs also impair legitimacy — their public identity
     // *was* part of the institution's claim to authority.
     if (npc.importance === 'pillar') {
       institutionImpairments.push({
@@ -158,7 +158,7 @@ export function killNpc(npc, eventId) {
         type: npc.importance === 'pillar' ? 'leadership' : 'membership',
         severity: weight,
         causeEventId: eventId,
-        description: `${npc.name} is gone - ${npc.importance === 'pillar' ? 'leadership' : 'ranks'} affected.`,
+        description: `${npc.name} is gone — ${npc.importance === 'pillar' ? 'leadership' : 'ranks'} affected.`,
       },
     });
   }
@@ -172,9 +172,9 @@ export function killNpc(npc, eventId) {
  * vacancy. Replacement quality determines how much restoration occurs.
  *
  * Quality scale:
- *   - weak           : 0.3 - token replacement, minimal capacity recovery
- *   - competent      : 0.7 - does the job, capacity recovers
- *   - popular        : 0.9 - improves both capacity AND legitimacy
+ *   - weak           : 0.3 — token replacement, minimal capacity recovery
+ *   - competent      : 0.7 — does the job, capacity recovers
+ *   - popular        : 0.9 — improves both capacity AND legitimacy
  *   - corrupt        : 0.5 capacity, REDUCES legitimacy (controversial)
  *   - faction_captured: 0.6 capacity, controlled-by-faction effect
  *
@@ -194,8 +194,8 @@ export function assignNpcToRole({ npc, institutionId, role, quality, factionAlig
 
   const restorations = [];
   // We "restore" by removing prior staffing impairments that came
-  // from a kill event - handled by the reducer via withoutEventImpairments
-  // - then optionally adding a positive-severity legitimacy bump for
+  // from a kill event — handled by the reducer via withoutEventImpairments
+  // — then optionally adding a positive-severity legitimacy bump for
   // popular replacements.
   const Q = QUALITY[quality] || QUALITY.competent;
   if (Q.legitimacyBoost > 0) {

@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * versionsTab.test.jsx - P143 / X-7 fold-in contract.
+ * versionsTab.test.jsx — P143 / X-7 fold-in contract.
  *
  * Pins that the locked state of the Cartographer-gated Versions tab now
  * routes through the shared LockedDestination primitive (not the old
@@ -37,7 +37,7 @@ vi.mock('../../src/store/index.js', () => {
 import VersionsTab from '../../src/components/settlement/VersionsTab.jsx';
 import { useStore } from '../../src/store/index.js';
 
-describe('VersionsTab - X-7 locked-destination fold-in', () => {
+describe('VersionsTab — X-7 locked-destination fold-in', () => {
   beforeEach(() => {
     flagMock.mockReturnValue(true);
     useStore.__set({

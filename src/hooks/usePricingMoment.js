@@ -1,5 +1,5 @@
 /**
- * usePricingMoment.js - Fire a pricing moment on rising-edge condition.
+ * usePricingMoment.js — Fire a pricing moment on rising-edge condition.
  *
  * The library `lib/pricingMoments.js` enforces 24h cooldown + premium-skip
  * and looks up copy from COPY.pricing.moments. This hook wraps it for

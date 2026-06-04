@@ -1,5 +1,5 @@
 /**
- * PricingMomentCard.jsx - Inline upgrade card surfaced by usePricingMoment.
+ * PricingMomentCard.jsx — Inline upgrade card surfaced by usePricingMoment.
  *
  * The library `lib/pricingMoments.js` triggers a moment by calling
  * `openModal({ headline, body, reason })`. The conventional opener is
@@ -13,7 +13,7 @@
  *   - Single primary button + dismiss
  *   - 24h cooldown enforced by the library
  *
- * Audience-aware copy via useCopy().audience() - the same moment fires
+ * Audience-aware copy via useCopy().audience() — the same moment fires
  * different pitches to new DM vs. worldbuilder.
  *
  * Renders fixed-position bottom-right so it doesn't fight the dossier
@@ -70,7 +70,7 @@ export default function PricingMomentCard() {
   }, [reason, setPurchaseModalOpen, handleExit]);
 
   // Auto-dismiss after 30s if the user doesn't interact. Critique X-2:
-  // moments are doors, not walls - they don't hold the screen.
+  // moments are doors, not walls — they don't hold the screen.
   useEffect(() => {
     if (!activeMoment) return undefined;
     const t = setTimeout(() => handleDismiss(), 30_000);

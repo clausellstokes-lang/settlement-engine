@@ -1,5 +1,5 @@
 /**
- * Cover - full-bleed first page of the dossier.
+ * Cover — full-bleed first page of the dossier.
  *
  * The DM picks this folder up at the table. The cover answers in one glance:
  * what is this place, how big, what shape is it in, what's actively going
@@ -48,7 +48,7 @@ function StatCell({ label, value, sub, tone = 'gold' }) {
           lineHeight: 1.05,
         }}
       >
-        {value || '-'}
+        {value || '—'}
       </Text>
       {sub && (
         <Text
@@ -116,7 +116,7 @@ function CrisisRow({ chips }) {
       ))}
       {chips.length > top.length && (
         <Text style={{ fontFamily: 'Nunito', fontSize: pt['8'], color: palette.muted, marginTop: 2 }}>
-          + {chips.length - top.length} more - see Summary, page 2.
+          + {chips.length - top.length} more — see Summary, page 2.
         </Text>
       )}
     </View>
@@ -172,7 +172,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <Text style={{ ...type.cover_meta, color: palette.muted }}>SETTLEMENT DOSSIER</Text>
           <View style={{ flexDirection: 'row', gap: 6 }}>
-            {/* Founder Edition mark - small parchment-gold pill, sits
+            {/* Founder Edition mark — small parchment-gold pill, sits
                 to the left of the AI badge when both are present so
                 "Founder + AI" reads naturally rather than stacking. */}
             {isFounder && (
@@ -271,7 +271,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
         {/* ── Spacer pushes footer to bottom ──────────────────── */}
         <View style={{ flex: 1 }} />
 
-        {/* Anonymous watermark - small parchment-stripe footer above
+        {/* Anonymous watermark — small parchment-stripe footer above
             the standard footer, only visible on PDFs exported without
             an account. Discourages bulk scraping for resale and frames
             the export as a "free preview" without being obnoxious.
@@ -288,7 +288,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             wrap={false}
           >
             <Text style={{ ...type.cover_meta, color: palette.muted, fontSize: pt['8'] }}>
-              Free preview - forge your own at settlementforge.com
+              Free preview — forge your own at settlementforge.com
             </Text>
           </View>
         )}

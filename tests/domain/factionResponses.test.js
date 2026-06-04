@@ -1,9 +1,9 @@
 /**
- * Faction archetype tests - the four shipped responders (Merchant Guild,
+ * Faction archetype tests — the four shipped responders (Merchant Guild,
  * Temple, Watch, Thieves' Guild) match correctly and produce sensible
  * stances for the canonical event types.
  *
- * Direction-of-causality only - we don't pin exact prose strings since
+ * Direction-of-causality only — we don't pin exact prose strings since
  * those will be tuned, but we do pin (a) which archetype responds and
  * (b) the stance, since those are user-facing engine claims.
  */
@@ -85,12 +85,12 @@ describe('faction archetype matching', () => {
 describe('temple responses', () => {
   const temple = settlementWith([{ name: 'Temple of Mercy', category: 'religious' }]);
 
-  test('PLAGUE: opportunity_and_threat - both relief role and risk', () => {
+  test('PLAGUE: opportunity_and_threat — both relief role and risk', () => {
     const [r] = generateFactionResponses(temple, ev('PLAGUE'));
     expect(r.stance).toBe('opportunity_and_threat');
   });
 
-  test('REFUGEE_WAVE: temple opens doors - opportunity_and_threat', () => {
+  test('REFUGEE_WAVE: temple opens doors — opportunity_and_threat', () => {
     const [r] = generateFactionResponses(temple, ev('REFUGEE_WAVE'));
     expect(r.stance).toBe('opportunity_and_threat');
   });

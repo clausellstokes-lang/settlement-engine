@@ -1,5 +1,5 @@
 /**
- * compendiumSearch.test.js - contract over P139 / CP-4 global search.
+ * compendiumSearch.test.js — contract over P139 / CP-4 global search.
  *
  * Pins:
  *   • empty / whitespace query → no results

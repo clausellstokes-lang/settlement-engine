@@ -1,5 +1,5 @@
 /**
- * tests/lib/creditLedger.test.js - Pure-function tests for ledger formatters.
+ * tests/lib/creditLedger.test.js — Pure-function tests for ledger formatters.
  *
  * Network-touching paths (fetchCreditBalanceFromLedger,
  * fetchRecentTransactions) are exercised through integration tests when

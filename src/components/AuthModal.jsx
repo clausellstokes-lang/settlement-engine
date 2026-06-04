@@ -1,5 +1,5 @@
 /**
- * AuthModal.jsx - the overlay entry point into auth.
+ * AuthModal.jsx — the overlay entry point into auth.
  *
  * Two faces, frozen at open time:
  *   - signed-out → the shared <AuthPanel> (sign-in / sign-up / reset / verify),

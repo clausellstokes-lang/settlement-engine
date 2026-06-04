@@ -31,7 +31,7 @@ import {
   NPC_PRESENTATION_MODES,
 } from '../data/npcData.js';
 
-// pickFromArray - uses seeded PRNG when available
+// pickFromArray — uses seeded PRNG when available
 const pickFromArray = r => ctxPick(r);
 
 // ─── NPC_ROLES sub-generators ────────────────────────────────
@@ -247,7 +247,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
     under_siege: [
       {
         short: `Secure enough ${commodity || 'food'} reserves to outlast the blockade`,
-        long: 'Survive this - everything else can wait',
+        long: 'Survive this — everything else can wait',
         driven_by: 'protection',
       },
       {
@@ -264,7 +264,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
     famine: [
       {
         short: `Control the ${commodity || 'grain'} supply before a competing faction corners it`,
-        long: "Be the person who kept people fed - or profit from the fact that others weren't",
+        long: "Be the person who kept people fed — or profit from the fact that others weren't",
         driven_by: 'wealth',
       },
       {
@@ -280,7 +280,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
     ],
     occupied: [
       {
-        short: 'Navigate the occupation without losing position or principles - ideally both',
+        short: 'Navigate the occupation without losing position or principles — ideally both',
         long: 'Be remembered as someone who preserved what could be preserved',
         driven_by: 'personal',
       },
@@ -291,7 +291,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
       },
       {
         short: "Satisfy the occupiers' demands while protecting the people they're demanding from",
-        long: 'Find the line between pragmatism and betrayal - and stay on the right side of it',
+        long: 'Find the line between pragmatism and betrayal — and stay on the right side of it',
         driven_by: 'protection',
       },
     ],
@@ -334,7 +334,7 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
     succession_void: [
       {
         short: `Position themselves before ${topFaction || 'a rival faction'} moves first`,
-        long: 'Secure authority through the right means - not just the fastest',
+        long: 'Secure authority through the right means — not just the fastest',
         driven_by: 'power',
       },
       {
@@ -550,7 +550,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
     const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex));
     return pickRandom2([
       {
-        what: `Knows something about ${otherNpc.name} that ${otherNpc.name} believes no one else knows - and has been deciding for months whether to use it`,
+        what: `Knows something about ${otherNpc.name} that ${otherNpc.name} believes no one else knows — and has been deciding for months whether to use it`,
         stakes: `${otherNpc.name} would move against them immediately if they suspected`,
       },
       {
@@ -558,7 +558,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
         stakes: "The situation they're both ignoring is becoming relevant again",
       },
       {
-        what: `Owes ${otherNpc.name} a debt from before either of them held their current position - one that ${otherNpc.name} has never formally called in`,
+        what: `Owes ${otherNpc.name} a debt from before either of them held their current position — one that ${otherNpc.name} has never formally called in`,
         stakes: 'The silence feels like patience rather than forgiveness',
       },
       {
@@ -733,7 +733,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
   const instNames = (institutions || []).map(i => (i.name || '').toLowerCase());
   const hasInst = kw => instNames.some(n => n.includes(kw));
 
-  // Find key faction references - category-first so generic names like "Religious Authorities" still match
+  // Find key faction references — category-first so generic names like "Religious Authorities" still match
   const govFaction = factions.find(f => f.isGoverning) || factions[0];
   const crimeFaction = factions.find(
     f =>
@@ -907,7 +907,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
   // Track how many NPCs have actually been assigned to each faction
   const factionAssignCount = new Map(factions.map(f => [f.faction, 0]));
 
-  // Category compatibility - gates which faction types each NPC category can join
+  // Category compatibility — gates which faction types each NPC category can join
   const CATEGORY_COMPAT = {
     government: ['government', 'noble', 'military', 'economy'],
     military: ['military', 'government', 'noble'],
@@ -917,7 +917,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
     magic: ['magic', 'religious', 'economy'],
     criminal: ['criminal', 'economy'],
     noble: ['noble', 'government', 'military'],
-    other: null, // generalists - no restriction
+    other: null, // generalists — no restriction
   };
 
   return npcs.map((npc, idx) => {
@@ -1017,7 +1017,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
           },
           merchant: {
             short:
-              'Secure a war contract before a rival does - or find a way to profit from the disruption instead of suffering it',
+              'Secure a war contract before a rival does — or find a way to profit from the disruption instead of suffering it',
           },
         },
         insurgency: {
@@ -1032,7 +1032,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
           },
           rel: {
             short:
-              'Avoid being forced to publicly declare support for either the governing faction or the insurgency - and run out of reasons before the pressure does',
+              'Avoid being forced to publicly declare support for either the governing faction or the insurgency — and run out of reasons before the pressure does',
           },
         },
         mass_migration: {
@@ -1043,11 +1043,11 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
           },
           merchant: {
             short:
-              'Either profit from the demographic change or find a way to be insulated from it - either answer requires moving faster than the uncertainty',
+              'Either profit from the demographic change or find a way to be insulated from it — either answer requires moving faster than the uncertainty',
           },
           mil: {
             short:
-              'Establish which residents are registered, which are transient, and which are neither - before one of the third category becomes a problem',
+              'Establish which residents are registered, which are transient, and which are neither — before one of the third category becomes a problem',
           },
         },
         religious_conversion: {
@@ -1064,7 +1064,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         slave_revolt: {
           gov: {
             short:
-              'End the revolt without either full suppression or formal negotiation - both options set precedents the governing faction cannot afford',
+              'End the revolt without either full suppression or formal negotiation — both options set precedents the governing faction cannot afford',
             note: "The revolt's continued existence is itself a delegitimisation. Every day it continues is evidence that the authority is not in control.",
           },
           mil: {
@@ -1074,7 +1074,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
           },
           merchant: {
             short:
-              'Recover the economic loss from the market suspension - or redirect capital away from a labour system that may not survive this in its current form',
+              'Recover the economic loss from the market suspension — or redirect capital away from a labour system that may not survive this in its current form',
           },
         },
       };

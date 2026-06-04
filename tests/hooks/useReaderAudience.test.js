@@ -1,5 +1,5 @@
 /**
- * useReaderAudience.test.js - Behavior-signal → audience archetype contract.
+ * useReaderAudience.test.js — Behavior-signal → audience archetype contract.
  *
  * Verifies the pure `computeReaderAudience` over a fixture matrix. Tests
  * the rules directly so a future refactor of the hook plumbing (selectors,

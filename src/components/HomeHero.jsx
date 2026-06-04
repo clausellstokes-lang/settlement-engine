@@ -1,14 +1,14 @@
 /**
- * HomeHero.jsx - Landing hero with two variants.
+ * HomeHero.jsx — Landing hero with two variants.
  *
  * Variants:
- *   1. Anonymous - marketing eyebrow + headline + anti-AI positioning
- *      + size picker (hamlet / village / town - the anon TIER_GATE
+ *   1. Anonymous — marketing eyebrow + headline + anti-AI positioning
+ *      + size picker (hamlet / village / town — the anon TIER_GATE
  *      ceiling) + Begin CTA. Drives the funnel from cold visitor
  *      through first dossier.
- *   2. Signed-in - "Welcome back" header + instant generation across
+ *   2. Signed-in — "Welcome back" header + instant generation across
  *      all six tiers (thorp → metropolis). No marketing text, no
- *      anti-AI line - the user is converted; they just need to roll.
+ *      anti-AI line — the user is converted; they just need to roll.
  *      The bottom of the card surfaces the legacy Quick/Advanced
  *      modes as "Want full control?" affordances.
  *
@@ -35,7 +35,7 @@ import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } f
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
-// six-tier ladder. Order matters - the picker renders left-to-right.
+// six-tier ladder. Order matters — the picker renders left-to-right.
 const ANON_SIZES = ['hamlet', 'village', 'town'];
 const ALL_SIZES  = ['thorp', 'hamlet', 'village', 'town', 'city', 'capital'];
 
@@ -79,7 +79,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
   const setWizardMode = useStore(s => s.setWizardMode);
   const authTier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
-  // P115 / X-9 - the WelcomeBackCard "Open" CTA selects a saved
+  // P115 / X-9 — the WelcomeBackCard "Open" CTA selects a saved
   // settlement; SettlementsPanel reads selectedSettlementId on mount and
   // opens the matching save in detail view.
   const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
@@ -95,10 +95,10 @@ export default function HomeHero({ onSignIn, onNavigate }) {
   const atCap = anonAtCap();
   const remaining = anonGensRemaining();
 
-  // Tier 8.8 - fire HOMEPAGE_VIEW once per session when the hero
+  // Tier 8.8 — fire HOMEPAGE_VIEW once per session when the hero
   // mounts. Funnel.homepageView() handles the once-per-session guard
   // via sessionStorage so a re-render doesn't double-count. For the
-  // signed-in variant this fires too - it's still a homepage view,
+  // signed-in variant this fires too — it's still a homepage view,
   // it just has a different surface.
   useEffect(() => {
     Funnel.homepageView();
@@ -120,7 +120,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         // generateSettlement now (so wizard "Regenerate Draft" and the
         // sample fork count too, not just this first-gen button). Here
         // we only fire the anon-attribution analytics event.
-        // Tier 8.8 - anon attribution. Permanent flag once set; drives
+        // Tier 8.8 — anon attribution. Permanent flag once set; drives
         // signup_after_anon and paid_after_anon reporting downstream.
         Funnel.anonGenerationCompleted({ tier: pickedSize });
       }
@@ -133,7 +133,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
 
   return (
     <>
-      {/* P115 / X-9 - Welcome-back card. Self-gates inside; renders
+      {/* P115 / X-9 — Welcome-back card. Self-gates inside; renders
           nothing for anons, first-visit signed-in users, or users
           without a saved settlement. */}
       {!isAnon && (
@@ -146,7 +146,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         />
       )}
     <section
-      aria-label={isAnon ? 'Anonymous settlement generator' : 'Welcome back - instant generator'}
+      aria-label={isAnon ? 'Anonymous settlement generator' : 'Welcome back — instant generator'}
       style={{
         maxWidth: 720, margin: `${SP.xl}px auto ${SP.xxl}px`,
         padding: `${SP.xxl}px ${SP.xl}px`,
@@ -165,10 +165,10 @@ export default function HomeHero({ onSignIn, onNavigate }) {
       */}
       {isAnon ? (
         flag('heroV2') ? (
-          // P117 / H-1 - Two-voice hero rewrite. Anti-AI line as H1
+          // P117 / H-1 — Two-voice hero rewrite. Anti-AI line as H1
           // (worldbuilder hook); italic deck translates for the new DM
           // ("the pieces explain each other"). Eyebrow + footer-signin +
-          // anti-AI quote block all removed - the H1 IS the anti-AI line.
+          // anti-AI quote block all removed — the H1 IS the anti-AI line.
           <>
             <h1 style={{
               margin: 0, fontFamily: serif_, fontWeight: 600,
@@ -269,7 +269,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
       {/* ── Primary CTA ──────────────────────────────────────────────── */}
       <div style={{ marginTop: SP.xl }}>
         {isAnon && atCap ? (
-          // P113 / X-5 - Reframe the anon cap as an unlock, not a wall.
+          // P113 / X-5 — Reframe the anon cap as an unlock, not a wall.
           // Lead with what signin gets you, not with what you've used up.
           // Side-door $2.99 link below catches intermediates who just need
           // Friday's town.
@@ -311,7 +311,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                 borderTop: `1px dashed ${BORDER}`,
                 fontSize: FS.xs, color: swatch.inkMag3, fontStyle: 'italic',
               }}>
-                or just take this one -{' '}
+                or just take this one —{' '}
                 <a
                   href="#"
                   onClick={(e) => { e.preventDefault(); document.querySelector('[data-buy-this-dossier]')?.scrollIntoView({ behavior: 'smooth' }); }}
@@ -328,7 +328,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
               onClick={handleBegin}
               disabled={generating}
               style={{
-                // P117 / H-5 - flat CTA under heroV2; gradient legacy under
+                // P117 / H-5 — flat CTA under heroV2; gradient legacy under
                 // the off-flag path. The gradient reads as 2018; flat
                 // gold-on-gold-700-bottom-edge is the modern read.
                 padding: `${SP.md + 2}px ${SP.xxl}px`,
@@ -351,7 +351,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
             >
               <Sparkles size={18} />
               {generating
-                ? 'Forging...'
+                ? 'Forging…'
                 : flag('heroV2') && isAnon
                   ? t('hero.v2.ctaTemplate', { tier: t(`generate.sizes.${pickedSize}`).toLowerCase() })
                   : isAnon
@@ -404,7 +404,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         </p>
       )}
 
-      {/* Bottom-edge ornament - subtle ink seal */}
+      {/* Bottom-edge ornament — subtle ink seal */}
       <div aria-hidden="true" style={{
         marginTop: SP.xl,
         height: 1,

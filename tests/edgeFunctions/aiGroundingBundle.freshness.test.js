@@ -1,8 +1,8 @@
 /**
- * tests/edgeFunctions/aiGroundingBundle.freshness.test.js - Tier 6.8.
+ * tests/edgeFunctions/aiGroundingBundle.freshness.test.js — Tier 6.8.
  *
  * The Supabase Edge Function imports from
- * `supabase/functions/_shared/aiGroundingBundle.js` - an esbuild-
+ * `supabase/functions/_shared/aiGroundingBundle.js` — an esbuild-
  * bundled copy of `src/domain/aiGrounding.js` + every transitive
  * domain dep. The bundle is committed (so deploy stays simple), and
  * this test fails when it's out of date.
@@ -13,7 +13,7 @@
  * developer must run `npm run build:edge-shared` and re-commit.
  *
  * The test ALSO verifies the bundle exports the symbols the edge
- * function imports - catches accidental tree-shaking + renames.
+ * function imports — catches accidental tree-shaking + renames.
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -27,7 +27,7 @@ const ROOT = join(__dirname, '..', '..');
 const BUNDLE = join(ROOT, 'supabase', 'functions', '_shared', 'aiGroundingBundle.js');
 const META   = join(ROOT, 'supabase', 'functions', '_shared', 'aiGroundingBundle.meta.json');
 
-describe('Tier 6.8 - aiGrounding bundle exists', () => {
+describe('Tier 6.8 — aiGrounding bundle exists', () => {
   it('the bundle file is committed in tree', () => {
     expect(existsSync(BUNDLE)).toBe(true);
   });
@@ -37,7 +37,7 @@ describe('Tier 6.8 - aiGrounding bundle exists', () => {
   });
 });
 
-describe('Tier 6.8 - aiGrounding bundle is fresh', () => {
+describe('Tier 6.8 — aiGrounding bundle is fresh', () => {
   let bundleSrc;
   let meta;
 
@@ -57,7 +57,7 @@ describe('Tier 6.8 - aiGrounding bundle is fresh', () => {
 
   it('every input path in the meta still exists on disk', () => {
     for (const p of meta.inputs) {
-      expect(existsSync(join(ROOT, p)), `${p} missing - bundle is referencing a deleted file`).toBe(true);
+      expect(existsSync(join(ROOT, p)), `${p} missing — bundle is referencing a deleted file`).toBe(true);
     }
   });
 
@@ -77,7 +77,7 @@ describe('Tier 6.8 - aiGrounding bundle is fresh', () => {
   });
 });
 
-describe('Tier 6.8 - aiGrounding bundle exports the contract surface', () => {
+describe('Tier 6.8 — aiGrounding bundle exports the contract surface', () => {
   let bundleSrc;
   beforeAll(() => { bundleSrc = readFileSync(BUNDLE, 'utf8'); });
 
@@ -114,7 +114,7 @@ describe('Tier 6.8 - aiGrounding bundle exports the contract surface', () => {
   });
 });
 
-describe('Tier 6.8 - runtime smoke: the bundle is loadable and behaves like the source', () => {
+describe('Tier 6.8 — runtime smoke: the bundle is loadable and behaves like the source', () => {
   it('importing the bundle in Node yields working exports', async () => {
     const bundle = await import(BUNDLE);
     expect(typeof bundle.buildAiGroundingPayload).toBe('function');

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * find-duplicate-keys - Scan src/data/*.js for duplicate object keys
+ * find-duplicate-keys — Scan src/data/*.js for duplicate object keys
  * (case-sensitive AND case-insensitive collisions). Emits a per-file
  * report and exits non-zero if any are found.
  *

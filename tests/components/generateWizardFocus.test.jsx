@@ -1,10 +1,10 @@
 /** @vitest-environment jsdom */
 /**
- * generateWizardFocus.test.jsx - P144 / A-4 contract.
+ * generateWizardFocus.test.jsx — P144 / A-4 contract.
  *
  * Pins the advanced wizard's step-focus management:
  *   • On a step *change* (Next/Back), focus moves to the new step's
- *     labelled region ("Step N of M: ...") so keyboard + screen-reader
+ *     labelled region ("Step N of M: …") so keyboard + screen-reader
  *     users are oriented instead of stranded on the nav button.
  *   • Initial mount does NOT steal focus (no surprise focus theft).
  *
@@ -57,7 +57,7 @@ vi.mock('../../src/store/index.js', () => {
 import GenerateWizard from '../../src/components/GenerateWizard.jsx';
 import { useStore } from '../../src/store/index.js';
 
-describe('GenerateWizard - A-4 step focus', () => {
+describe('GenerateWizard — A-4 step focus', () => {
   beforeEach(() => {
     // wizardChromeDiet is the only flag GenerateWizard reads now; keep it at
     // its default-off so these focus tests see the standard chrome.
@@ -68,9 +68,9 @@ describe('GenerateWizard - A-4 step focus', () => {
 
   it('does not steal focus on initial mount', () => {
     render(<GenerateWizard isMobile={false} />);
-    // The labelled step region renders...
+    // The labelled step region renders…
     expect(screen.getByRole('group', { name: /Step 1 of 4/ })).toBeTruthy();
-    // ...but focus is left on the body, not yanked into it.
+    // …but focus is left on the body, not yanked into it.
     expect(document.activeElement).toBe(document.body);
   });
 

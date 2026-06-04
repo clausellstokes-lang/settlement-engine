@@ -1,11 +1,11 @@
 /**
- * TierIcon - pure SVG glyph for a settlement placement.
+ * TierIcon — pure SVG glyph for a settlement placement.
  *
  * Renders a tier-appropriate shape (thorp dot through metropolis crown)
  * with optional port (anchor), capital (gold ring), and selected (halo)
  * modifiers. Counter-scales by 1/scale so icons stay legible at any zoom.
  *
- * Pure presentational component - no store hooks. Caller wires click.
+ * Pure presentational component — no store hooks. Caller wires click.
  */
 
 const TIER_FROM_POP = (pop = 0) => {
@@ -78,7 +78,7 @@ function TierShape({ tier, capital }) {
   }
 }
 
-/** Anchor overlay for ports - tucked to the lower-right of the body. */
+/** Anchor overlay for ports — tucked to the lower-right of the body. */
 function PortBadge() {
   return (
     <g transform="translate(7, 7)">
@@ -92,14 +92,14 @@ function PortBadge() {
 
 /**
  * @param {object}   props
- * @param {string}   props.tier         - thorp|hamlet|village|town|city|metropolis
- * @param {boolean}  [props.port]       - render anchor badge
- * @param {boolean}  [props.capital]    - render gold capital ring + brighter body
- * @param {boolean}  [props.selected]   - render selection halo + 1.3x scale
- * @param {number}   props.scale        - current map zoom scale (counter-scale by 1/scale)
- * @param {number}   props.x            - map x (caller wraps in <g transform="translate(...)">)
- * @param {number}   props.y            - map y
- * @param {string}   [props.label]      - optional name displayed below
+ * @param {string}   props.tier         — thorp|hamlet|village|town|city|metropolis
+ * @param {boolean}  [props.port]       — render anchor badge
+ * @param {boolean}  [props.capital]    — render gold capital ring + brighter body
+ * @param {boolean}  [props.selected]   — render selection halo + 1.3x scale
+ * @param {number}   props.scale        — current map zoom scale (counter-scale by 1/scale)
+ * @param {number}   props.x            — map x (caller wraps in <g transform="translate(...)">)
+ * @param {number}   props.y            — map y
+ * @param {string}   [props.label]      — optional name displayed below
  * @param {function} [props.onClick]
  * @param {function} [props.onPointerDown]
  * @param {string}   [props.cursor]

@@ -106,21 +106,21 @@ const computeFactionPowers = (institutions, terrain, nearbyResources, config = {
   });
 
   // Institution-as-producer map: if the settlement has an institution that IS the
-  // production source for a resource, that counts as local infrastructure -
+  // production source for a resource, that counts as local infrastructure —
   // even if the terrain resource isn't explicitly listed in nearbyResources.
   // Principle: trade access (non-isolated) = valid infrastructure for any import.
   // For isolated settlements: only flag if there's genuinely NO local institution
   // that could plausibly cover the need.
   const RESOURCE_LOCAL_PRODUCERS = {
-    // Grain / agriculture - any farming institution covers grain needs
+    // Grain / agriculture — any farming institution covers grain needs
     'Grain fields': ['farm', 'farmland', 'subsistence', 'grain', 'agriculture', 'mill', 'common graz'],
     'Fertile Floodplain': ['farm', 'farmland', 'subsistence', 'grain', 'agriculture', 'mill'],
     'Oasis and Water Rights': ['farm', 'farmland', 'subsistence', 'agriculture', 'well', 'water'],
     'Date Palms and Orchards': ['farm', 'farmland', 'subsistence', 'agriculture', 'orchard'],
-    // Livestock / grazing - any animal husbandry institution
+    // Livestock / grazing — any animal husbandry institution
     'Grazing land': ['shepherd', 'grazing', 'dairy', 'livestock', 'cattle', 'common graz', 'stable', 'farmer'],
     'Alpine Pastures': ['shepherd', 'grazing', 'dairy', 'livestock', 'cattle', 'common graz'],
-    // Fishing - any water access institution
+    // Fishing — any water access institution
     'Fishing grounds': ['fisher', 'fish market', 'fish', 'dock', 'port', 'river', 'barge', 'cooper', 'barrel'],
     'River fisheries': ['fisher', 'fish', 'river', 'barge', 'ferry', 'dock', 'port', 'landing', 'cooper', 'barrel'],
     Marshlands: ['fisher', 'fish', 'river', 'barge', 'marsh', 'chan', 'dock', 'cooper'],
@@ -139,7 +139,7 @@ const computeFactionPowers = (institutions, terrain, nearbyResources, config = {
     'Deep Natural Harbour': ['port', 'dock', 'harbour', 'harbor', 'shipyard'],
     // Mill infrastructure
     'Mill Sites': ['mill', 'farmland', 'farm', 'water', 'stream'],
-    // Wild resources - any settlement with outdoors access
+    // Wild resources — any settlement with outdoors access
     'Foraging areas': ['druid', 'elder grove', 'apothecary', 'healer', 'warden', 'hedge', 'forest'],
     'Hunting grounds': ['hunter', 'warden', 'wildfowl', 'tanner', 'trapper', 'lodge'],
     'Wild foraging areas': ['druid', 'elder grove', 'apothecary', 'healer', 'warden'],
@@ -172,7 +172,7 @@ const computeFactionPowers = (institutions, terrain, nearbyResources, config = {
         // Imports on any trade route also count as valid infrastructure.
         const localProducerKws = RESOURCE_LOCAL_PRODUCERS[resource] || [];
         const hasProducingInstitution = localProducerKws.some((kw) => instNames.some((n) => n.includes(kw)));
-        // Teleportation infrastructure counts as trade access - magical supply chains replace roads
+        // Teleportation infrastructure counts as trade access — magical supply chains replace roads
         const hasMagicTrade = isIsolated && hasTeleportationInfra(institutions, config);
         const hasTradeAccess = !isIsolated || hasMagicTrade; // trade route OR magic = imports available
 
@@ -184,7 +184,7 @@ const computeFactionPowers = (institutions, terrain, nearbyResources, config = {
           issues.push({
             severity: SEVERITY.IMPLAUSIBLE,
             category: 'Resource Access',
-            title: `${inst.name} - no viable resource supply`,
+            title: `${inst.name} — no viable resource supply`,
             description: `${inst.name} requires ${resource} to function but the settlement has no local production, no nearby deposits, and no trade access to import it.`,
             impact: 'Institution cannot function without a supply source.',
             suggestedFixes: [
@@ -334,7 +334,7 @@ const buildFactionList = (population, terrain, institutions, config) => {
       'alchemist',
     ]);
     if (hasMagicFarm) {
-      // Boost agriMod for magical food production - represents: grow spells,
+      // Boost agriMod for magical food production — represents: grow spells,
       // summoned water, magically accelerated crops, divinely-blessed fields.
       agriMod = Math.min(agriMod + 0.3, 0.8); // higher cap for magic
     }
@@ -358,7 +358,7 @@ const buildFactionList = (population, terrain, institutions, config) => {
   }
   if (stresses.includes('plague_onset')) {
     productionMult *= 0.75;
-    stressNotes.push('Plague: agricultural workforce decimated by illness - fields understaffed.');
+    stressNotes.push('Plague: agricultural workforce decimated by illness — fields understaffed.');
   }
   if (stresses.includes('occupied')) {
     consumptionMult *= 1.2;
@@ -495,7 +495,7 @@ const buildFactionList = (population, terrain, institutions, config) => {
       category: 'Food Production',
       title: 'Agricultural Surplus',
       description: `Settlement produces ${Math.round((surplus / adjustedNeed) * 100)}% more food than needed.`,
-      impact: 'Export opportunity - could generate significant trade income.',
+      impact: 'Export opportunity — could generate significant trade income.',
       suggestedFixes: [
         'Add merchants to export surplus grain',
         'Add granary for long-term storage',
@@ -513,7 +513,7 @@ const buildFactionList = (population, terrain, institutions, config) => {
       severity: SEVERITY.CRITICAL,
       category: 'Food Storage',
       title: 'No Grain Storage Facility',
-      description: `Settlement of ${population.toLocaleString()} lacks a granary - cannot buffer harvests or maintain strategic food reserves.`,
+      description: `Settlement of ${population.toLocaleString()} lacks a granary — cannot buffer harvests or maintain strategic food reserves.`,
       impact: 'Vulnerable to seasonal shortages and siege starvation without grain reserves.',
       suggestedFixes: ['Add Town granary, City granaries, or State granary complex'],
     });
@@ -578,17 +578,17 @@ const _generateTradeScore = (deficitPercent, config = {}, institutions = []) => 
   if (deficitPercent <= 0) return null;
   if (isIsolated) {
     if (hasTeleportationInfra(institutions, config))
-      return `Food deficit of ${Math.round(deficitPercent)}% is covered through magical supply chains - teleportation imports are reliable but extraordinarily expensive. Any disruption to the magical infrastructure means immediate food crisis.`;
+      return `Food deficit of ${Math.round(deficitPercent)}% is covered through magical supply chains — teleportation imports are reliable but extraordinarily expensive. Any disruption to the magical infrastructure means immediate food crisis.`;
     if (deficitPercent > 40)
-      return `Food deficit of ${Math.round(deficitPercent)}% with no external trade - this settlement cannot feed itself and has no mechanism to import what it lacks. Starvation or mass emigration is the long-term outcome without change.`;
-    return `Food deficit of ${Math.round(deficitPercent)}% with no external trade route - entirely dependent on local production. A poor harvest means genuine hunger.`;
+      return `Food deficit of ${Math.round(deficitPercent)}% with no external trade — this settlement cannot feed itself and has no mechanism to import what it lacks. Starvation or mass emigration is the long-term outcome without change.`;
+    return `Food deficit of ${Math.round(deficitPercent)}% with no external trade route — entirely dependent on local production. A poor harvest means genuine hunger.`;
   }
   if (econCategory === 'very_high' || econCategory === 'high')
-    return `Food deficit of ${Math.round(deficitPercent)}% is covered through active grain imports - merchant networks ensure supply chain resilience.`;
+    return `Food deficit of ${Math.round(deficitPercent)}% is covered through active grain imports — merchant networks ensure supply chain resilience.`;
   if (econCategory === 'low')
-    return `Food deficit of ${Math.round(deficitPercent)}% is a genuine vulnerability - limited trade capacity means shortages are only one poor harvest away.`;
+    return `Food deficit of ${Math.round(deficitPercent)}% is a genuine vulnerability — limited trade capacity means shortages are only one poor harvest away.`;
   if (econCategory === 'very_low')
-    return `Food deficit of ${Math.round(deficitPercent)}% is a chronic crisis - without meaningful trade, famine is a recurring threat.`;
+    return `Food deficit of ${Math.round(deficitPercent)}% is a chronic crisis — without meaningful trade, famine is a recurring threat.`;
   return null;
 };
 
@@ -624,7 +624,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       suggestions.push({
         category: 'Economic Diversity',
         title: 'Trade-dependent craft economy',
-        description: `Craft guilds operate on imported materials - sustained by strong ${config?.tradeRouteAccess} trade. Vulnerable to supply disruption.`,
+        description: `Craft guilds operate on imported materials — sustained by strong ${config?.tradeRouteAccess} trade. Vulnerable to supply disruption.`,
       });
     } else {
       warnings.push({
@@ -638,7 +638,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         suggestedFixes: water.buffered
           ? ['Develop local resource base to reduce trade dependency']
           : [
-              'Add craft guilds - smiths, weavers, tanners, etc.',
+              'Add craft guilds — smiths, weavers, tanners, etc.',
               'Improve trade access and economy for trade-sustained crafts',
             ],
       });
@@ -655,7 +655,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       warnings.push({
         severity: SEVERITY.DEPENDENCY,
         category: 'Economic Isolation',
-        title: 'Structural Isolation - Economic Impact',
+        title: 'Structural Isolation — Economic Impact',
         description: `A ${tierLabel} in isolation cannot source specialist goods, process surpluses, or pay for skilled labour. Economy is permanently stunted regardless of slider values.`,
         impact: 'Income sources, trade goods, and services are all compromised. Prosperity capped at Poor.',
         suggestedFixes: ['Add a trade route', 'Add teleportation infrastructure (high magic)'],
@@ -688,7 +688,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         description: 'Military slider is high but the settlement has no walls, garrison, or barracks.',
         impact: 'Military investment without physical infrastructure produces limited security.',
         suggestedFixes: ['Add Town Walls or Garrison'],
-        priorityNote: `Military priority is ${pri.military} - defence institutions are expected.`,
+        priorityNote: `Military priority is ${pri.military} — defence institutions are expected.`,
       });
     }
   }
@@ -712,7 +712,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         description: 'Religion slider is high but no religious institution is present.',
         impact: 'Religious fervour without institutional anchoring produces instability.',
         suggestedFixes: ['Add Parish Church, Temple, or Monastery'],
-        priorityNote: `Religion priority is ${pri.religion} - a religious centre is expected.`,
+        priorityNote: `Religion priority is ${pri.religion} — a religious centre is expected.`,
       });
     }
   }
@@ -733,9 +733,9 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         category: 'Magical Priorities',
         title: 'High Magic Priority Without Arcane Institutions',
         description: 'Magic slider is high but no arcane institution is present.',
-        impact: 'Magical potential is unrealised - adventurers will find no magical services.',
+        impact: 'Magical potential is unrealised — adventurers will find no magical services.',
         suggestedFixes: ["Add Hedge Wizard, Alchemist Shop, or Wizard's Tower"],
-        priorityNote: `Magic priority is ${pri.magic} - an arcane institution is expected.`,
+        priorityNote: `Magic priority is ${pri.magic} — an arcane institution is expected.`,
       });
     }
   }
@@ -750,11 +750,11 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       warnings.push({
         severity: SEVERITY.DEPENDENCY,
         category: 'Criminal Activity',
-        title: 'High Crime Priority - No Criminal or Guard Institutions',
+        title: 'High Crime Priority — No Criminal or Guard Institutions',
         description: 'Criminal slider is high but neither criminal organisations nor guard infrastructure are present.',
         impact: 'High crime without institutions creates ungoverned chaos rather than structured underworld.',
         suggestedFixes: ["Add Thieves' Guild, Black Market, or City Watch"],
-        priorityNote: `Criminal priority is ${pri.criminal} - some underworld structure is expected.`,
+        priorityNote: `Criminal priority is ${pri.criminal} — some underworld structure is expected.`,
       });
     }
   }
@@ -890,7 +890,7 @@ const _computeIncomeStreams = (tier, institutions = [], route = 'road', goodsTog
 
 // getInstitutionServices
 const getInstitutionServices = (tier, route, localProduction, institutions = [], nearbyResources = []) => {
-  // Isolated settlements cannot import anything - they are self-contained by definition.
+  // Isolated settlements cannot import anything — they are self-contained by definition.
   // Return empty to avoid showing imports that contradict the "no external trade" description.
   if (route === 'isolated') return [];
 
@@ -999,13 +999,13 @@ const computeEconomicViability = (config = {}, _tier = 'town', institutions = []
   if (primaryStress === 'under_siege')
     return 'All normal economic activity is suspended. Markets are closed, merchant caravans have stopped arriving, and whatever currency existed is being redirected toward survival. The only economic question is the arithmetic of remaining supplies.';
   if (primaryStress === 'famine')
-    return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense - prices are simply at levels that exclude most of the population.';
+    return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense — prices are simply at levels that exclude most of the population.';
   if (primaryStress === 'occupied')
     return `Revenue flows outward to the occupying authority via ${route === 'port' ? 'maritime levies' : 'road tolls and seizure powers'} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one.`;
   if (primaryStress === 'indebted')
     return "Debt service obligations consume a meaningful share of revenue before any local investment is possible. The creditor's representative has effective veto power over fiscal decisions. Economic activity continues but its fruits are partly spoken for before they are earned.";
   if (primaryStress === 'plague_onset')
-    return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis - as it is, each problem is making the other worse.";
+    return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis — as it is, each problem is making the other worse.";
   if (primaryStress === 'politically_fractured')
     return 'Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but it is slower and more expensive than it should be.';
 
@@ -1015,29 +1015,29 @@ const computeEconomicViability = (config = {}, _tier = 'town', institutions = []
     if (isTownPlus && !hasMagicTrade)
       return 'This settlement is too large to survive in true isolation. Without trade routes, specialist goods cannot be sourced, surpluses cannot be sold, and population density cannot be sustained. The economy is structurally broken.';
     if (isTownPlus && hasMagicTrade)
-      return 'Trade flows through magical channels - teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.';
+      return 'Trade flows through magical channels — teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.';
     if (stress.stateCrime)
-      return 'Internal production is suppressed by institutional extraction - what little surplus exists flows upward rather than into communal welfare.';
+      return 'Internal production is suppressed by institutional extraction — what little surplus exists flows upward rather than into communal welfare.';
     if (econCat === 'very_high' || econCat === 'high')
-      return 'Despite isolation, internal production is well-organised - skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.';
+      return 'Despite isolation, internal production is well-organised — skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.';
     if (econCat === 'low' || econCat === 'very_low')
       return 'The settlement struggles to sustain itself without outside trade. Resources are tightly rationed and growth is impossible.';
     return 'The settlement meets its own needs without external trade, though surpluses are modest and specialist goods are unavailable.';
   }
 
   if (stress.theocraticEconomy)
-    return 'The church controls most economic activity - land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.';
+    return 'The church controls most economic activity — land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.';
   if (stress.merchantCriminalBlur)
     return 'Commerce is vigorous and the distinction between legitimate trade and criminal enterprise is largely academic. The wealthiest operators play both sides.';
   if (stress.stateCrime)
-    return 'The official economy appears functional. The reality is that institutional extraction - confiscations, forced sales, and selective taxation - suppresses productive activity.';
+    return 'The official economy appears functional. The reality is that institutional extraction — confiscations, forced sales, and selective taxation — suppresses productive activity.';
   if (econCat === 'very_high')
-    return 'Commerce is the lifeblood of this settlement - markets are active at all hours and guild influence reaches every trade.';
+    return 'Commerce is the lifeblood of this settlement — markets are active at all hours and guild influence reaches every trade.';
   if (econCat === 'high')
     return 'Trade is vigorous and the guilds are well-organized, generating steady civic revenue.';
   if (econCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
   if (econCat === 'very_low')
-    return 'The economy is barely functional - barter replaces coin and few outsiders bother to trade here.';
+    return 'The economy is barely functional — barter replaces coin and few outsiders bother to trade here.';
   if (crimeCat === 'high' || crimeCat === 'very_high')
     return 'Official commerce is moderate but a thriving shadow economy undercuts legitimate trade.';
   return 'Trade proceeds at an ordinary pace for a settlement of this size.';
@@ -1051,27 +1051,27 @@ const generateEconomicNarrative = (prosperity, config = {}, institutions = []) =
   const LABELS = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
   const BASE = { Subsistence: 0, Poor: 1, Moderate: 2, Comfortable: 3, Prosperous: 4, Wealthy: 5 };
   let idx = BASE[prosperity] !== undefined ? BASE[prosperity] : 2;
-  // Subsistence isolated settlements can still struggle further - 35% chance of Struggling
+  // Subsistence isolated settlements can still struggle further — 35% chance of Struggling
   if (prosperity === 'Subsistence') {
     idx = _rng() < 0.4 ? 0 : _rng() < 0.5 ? 0 : 1; // 40% Struggling, ~30% Poor, ~30% luckier
-    idx = Math.max(0, Math.min(1, idx)); // cap at Poor - subsistence can never be Moderate+
+    idx = Math.max(0, Math.min(1, idx)); // cap at Poor — subsistence can never be Moderate+
   }
-  // Economy output adjustments - calibrated for truly random sliders (5-95 uniform)
+  // Economy output adjustments — calibrated for truly random sliders (5-95 uniform)
   // Low econOut = low commercial investment, not necessarily crisis
   if (econOut >= 70)
     idx = Math.min(5, idx + 1); // high economy → bonus
   else if (econOut < 15) idx = Math.max(0, idx - 1); // very low economy → -1 (was -2)
-  // Note: removed the 15-32 range penalty - a moderate-low economy is still functional
+  // Note: removed the 15-32 range penalty — a moderate-low economy is still functional
   // Small settlement floors:
   // - Isolated thorp/hamlet: cap at Poor (subsistence mode, valid to be Poor)
-  // - Connected thorp/hamlet (road/river/etc): floor at Poor - they're struggling but not destitute
-  // Derive tier from config - settType may be 'random' in random mode, so check config.tier too
+  // - Connected thorp/hamlet (road/river/etc): floor at Poor — they're struggling but not destitute
+  // Derive tier from config — settType may be 'random' in random mode, so check config.tier too
   const _tier = config.tier || config.settType || '';
   const isSmallTier = _tier === 'thorp' || _tier === 'hamlet';
   const isIsolatedSmall = isSmallTier && config.tradeRouteAccess === 'isolated';
   const isConnectedSmall = isSmallTier && config.tradeRouteAccess !== 'isolated';
   if (isIsolatedSmall) idx = Math.max(0, Math.min(idx, 1)); // cap at Poor for isolated subsistence
-  if (isConnectedSmall) idx = Math.max(1, idx); // floor at Poor - connected small settlement can't be Struggling
+  if (isConnectedSmall) idx = Math.max(1, idx); // floor at Poor — connected small settlement can't be Struggling
   // High crime drags down perceived prosperity
   if (flags.criminalEffective >= 65) idx = Math.max(0, idx - 1);
   // Stress penalties
@@ -1156,7 +1156,7 @@ const getGoodsModifiers = (r, s = [], o = {}) => {
   );
 };
 
-// UPGRADE_GOODS_BY_TIER - goods available as upgrades per tier
+// UPGRADE_GOODS_BY_TIER — goods available as upgrades per tier
 const UPGRADE_GOODS_BY_TIER = {
   thorp: {
     basic: [
@@ -1372,7 +1372,7 @@ const UPGRADE_GOODS_BY_TIER = {
 
 // getUpgradeChain
 const getUpgradeChain = (tier, route, isFromHigher = false, goodsToggles = {}) => {
-  // Isolated settlements have no trade access - no upgrade goods come in from outside
+  // Isolated settlements have no trade access — no upgrade goods come in from outside
   if (route === 'isolated') return [];
   const tierData = UPGRADE_GOODS_BY_TIER[tier] || {};
   const result = [];
@@ -1674,7 +1674,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       ? {
           source: 'Military Extraction',
           percentage: 20,
-          desc: 'Forced contributions and confiscations collected by the garrison - not formally a tax.',
+          desc: 'Forced contributions and confiscations collected by the garrison — not formally a tax.',
         }
       : {
           source: 'Military Levy',
@@ -1716,7 +1716,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: Math.round(ecoInstFlags.religionInfluence / 9),
         desc: 'Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.',
       })); // ── Three-tier magic economy ──────────────────────────────────────────────
-  // Tier thresholds scale with settlement size - small settlements need higher
+  // Tier thresholds scale with settlement size — small settlements need higher
   // magic density to support commercial arcane activity
   const magPri = ecoInstFlags.magicInfluence; // priorityMagic value (0-100)
   const hasAlch = hasInst('alchemist', 'herbalist', 'apothecary', 'hedge wizard');
@@ -1733,7 +1733,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   const tierIdx = TIER_ORDER_LOCAL.indexOf(tier);
 
   if (magPri > 0) {
-    // LOW: apothecary / hedge magic - alchemists, herbalists, hedge wizards
+    // LOW: apothecary / hedge magic — alchemists, herbalists, hedge wizards
     // Available from village+ when any alchemical institution present
     if (magPri >= 15 && hasAlch && tierIdx >= 2) {
       const pct = Math.round(Math.max(4, magPri / 14));
@@ -1747,7 +1747,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       });
     }
 
-    // MEDIUM: commercial spellcasting - identification, divination, minor enchanting
+    // MEDIUM: commercial spellcasting — identification, divination, minor enchanting
     // Available from town+ when spellcasting institutions present
     if (magPri >= 35 && hasSpell && tierIdx >= 3) {
       const pct = Math.round(Math.max(6, magPri / 10));
@@ -1757,11 +1757,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         desc:
           magPri < 60
             ? 'Fees for identification, minor enchanting, and divination. Adventurers and merchants both pay well for reliable magical services.'
-            : 'A busy market for spell services - identification, augury, message sending, and contract-grade enchanting brings steady coin.',
+            : 'A busy market for spell services — identification, augury, message sending, and contract-grade enchanting brings steady coin.',
       });
     }
 
-    // HIGH: arcane industry - enchanting contracts, research, magical item market
+    // HIGH: arcane industry — enchanting contracts, research, magical item market
     // Available from city+ when mages' guild or academy present
     if (magPri >= 65 && hasMagesGuild && tierIdx >= 4) {
       const pct = Math.round(Math.max(10, magPri / 7));
@@ -1789,11 +1789,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       incomeBuild.push({
         source: 'Security Contracts',
         percentage: 12,
-        desc: 'Guild-funded private security surcharges - effectively a privatised protection tax on trade.',
+        desc: 'Guild-funded private security surcharges — effectively a privatised protection tax on trade.',
       }),
     safetyProfile.blackMarketCapture > 10 &&
       (() => {
-        // Unified criminal economy income - uses raw bmc as weight so normalized % matches Shadow Economy section
+        // Unified criminal economy income — uses raw bmc as weight so normalized % matches Shadow Economy section
         const bmc = safetyProfile.blackMarketCapture;
         const crimInsts = safetyProfile.criminalInstitutions || [];
         const hasGuild = crimInsts.some(
@@ -1815,7 +1815,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
                 : bmc >= 20
                   ? 'Shadow Economy (untaxed)'
                   : 'Black Market Revenue';
-        const desc = `An estimated ${bmc}% of economic activity flows through unofficial channels - ${
+        const desc = `An estimated ${bmc}% of economic activity flows through unofficial channels — ${
           hasGuild
             ? 'guild-organised fencing, extortion, and black market trade'
             : hasSmuggling
@@ -1831,7 +1831,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         desc: 'Barter and in-kind exchange; no significant monetary income. Survival is the economy.',
       }));
   if (!isSubsistenceOnly) {
-    // Resource trade income - only when trade routes exist
+    // Resource trade income — only when trade routes exist
     const ee = (v.localProduction || []).map(function (K) {
         return (typeof K == 'string' ? K : K.name || '').toLowerCase();
       }),
@@ -1870,7 +1870,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           source: 'Grain Sales',
           percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 9)),
           desc: X('grain_field', 'fertile_flood')
-            ? 'Surplus from local harvest sold to nearby settlements and passing merchants - steady income tied to the growing season.'
+            ? 'Surplus from local harvest sold to nearby settlements and passing merchants — steady income tied to the growing season.'
             : 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.',
         }),
       (ee.some(function (K) {
@@ -1887,7 +1887,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
           desc: X('grazing_land')
             ? 'Local flocks provide raw wool; weavers and fullers convert SEVERITY to cloth sold across the region.'
-            : 'Wool bought from pastoral regions and processed locally - value-add trade dependent on consistent supply.',
+            : 'Wool bought from pastoral regions and processed locally — value-add trade dependent on consistent supply.',
         }),
       (X('iron_deposit', 'coal_deposit', 'precious_metal') ||
         ((ee.some(function (K) {
@@ -1903,7 +1903,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           source: 'Iron & Metalwork',
           percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
           desc: X('iron_deposit', 'coal_deposit', 'precious_metal')
-            ? 'Local ore feeds the smithy directly - metalwork income is not trade-route dependent.'
+            ? 'Local ore feeds the smithy directly — metalwork income is not trade-route dependent.'
             : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
         }),
       X('managed_forest', 'forest_access', 'timber_rights') &&
@@ -1914,7 +1914,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
           desc: X('managed_forest', 'shipbuilding_timber', 'hunting_ground')
             ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
-            : 'Timber sourced from more distant forests and resold or processed locally - trade route dependent.',
+            : 'Timber sourced from more distant forests and resold or processed locally — trade route dependent.',
         }),
       (ee.some(function (K) {
         return K.includes('fish') || K.includes('herring') || K.includes('cod') || K.includes('salt');
@@ -1941,7 +1941,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           source: 'Stone Quarrying',
           percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
           desc: X('stone_quarry', 'gemstone')
-            ? 'Local quarry provides dressed stone to regional builders - reliable income with low transport overhead.'
+            ? 'Local quarry provides dressed stone to regional builders — reliable income with low transport overhead.'
             : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
         }),
       goodsToggles && Object.keys(goodsToggles).length > 0)
@@ -2045,10 +2045,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     if (E >= 2 && X >= 60 && (O('mercenary') || O('garrison') || O('barracks') || O('professional guard'))) {
       const fe =
         X >= 80
-          ? 'Military services - standing army leasing, siege engineering, garrison contracts'
+          ? 'Military services — standing army leasing, siege engineering, garrison contracts'
           : O('mercenary')
-            ? 'Mercenary services - trained companies available for hire'
-            : 'Military services - garrison contracts and armed escort';
+            ? 'Mercenary services — trained companies available for hire'
+            : 'Military services — garrison contracts and armed escort';
       re.some(function (ge) {
         return ge.toLowerCase().includes('military') || ge.toLowerCase().includes('mercenary');
       }) || re.push(fe);
@@ -2067,18 +2067,18 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           dt = F.includes('occupied') || K > 65,
           Gt =
             ke && dt
-              ? 'Slave trade - transit market for human trafficking; imported labour and exported captives'
+              ? 'Slave trade — transit market for human trafficking; imported labour and exported captives'
               : ke
-                ? 'Slave labour - purchased workforce for agricultural estates, mines, and domestic service'
+                ? 'Slave labour — purchased workforce for agricultural estates, mines, and domestic service'
                 : dt
-                  ? 'Captive trade - war captives and debtors sold through established trafficking networks'
-                  : 'Slave trade - human trafficking and forced labour; legally tolerated or actively regulated';
+                  ? 'Captive trade — war captives and debtors sold through established trafficking networks'
+                  : 'Slave trade — human trafficking and forced labour; legally tolerated or actively regulated';
         (re.push(Gt),
           ke &&
             !q.some(function (Me) {
               return Me.toLowerCase().includes('slave');
             }) &&
-            q.push('Enslaved labour - purchased from regional trafficking networks'));
+            q.push('Enslaved labour — purchased from regional trafficking networks'));
       }
     }
   }
@@ -2094,7 +2094,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       return de.includes('war council') || de.includes('siege') || de.includes('rationing');
     });
   const isIsolatedRoute = tradeRoute === 'isolated';
-  // Teleportation infrastructure counts as trade access - don't treat as stockpile-only
+  // Teleportation infrastructure counts as trade access — don't treat as stockpile-only
   const _hasMagicTradeForDeps = hasTeleportationInfra(institutions || [], config);
   const isEffectivelyIsolated = isIsolatedRoute && !_hasMagicTradeForDeps;
   (institutions || []).forEach(function (V) {
@@ -2110,11 +2110,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       return;
     const ge = isUnderStress || isEffectivelyIsolated ? 'critical' : 'vulnerable',
       ke = isUnderStress
-        ? 'Supply route severed - operating at minimal capacity or shut down.'
+        ? 'Supply route severed — operating at minimal capacity or shut down.'
         : isEffectivelyIsolated
-          ? 'No trade access - running on existing stockpiles only.'
+          ? 'No trade access — running on existing stockpiles only.'
           : _hasMagicTradeForDeps && isIsolatedRoute
-            ? 'Supplied via magical trade infrastructure - teleportation imports replace road access.'
+            ? 'Supplied via magical trade infrastructure — teleportation imports replace road access.'
             : 'Dependent on trade routes. Siege, road closure, or blockade would impair operations.';
     H.push({
       institution: de,
@@ -2125,7 +2125,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       impact: ke,
       affectedServices: fe.svcs || [],
     });
-  }); // ── Stage 4: Chain derivation - compute before return object ─────────────────
+  }); // ── Stage 4: Chain derivation — compute before return object ─────────────────
   const depletedResources = config.nearbyResourcesDepleted || [];
   const activeChainsList = computeActiveChains(
     institutions || [],
@@ -2161,7 +2161,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   const serviceExports = deriveServiceExports(instServices);
 
   // Depleted resources at town+ scale: settlement needs to import what it can no longer
-  // produce in sufficient quantity - local exhaustion triggers trade dependency
+  // produce in sufficient quantity — local exhaustion triggers trade dependency
   const TIER_DEPLETED_IMPORT_THRESHOLD = ['town', 'city', 'metropolis'];
   if (depletedResources.length > 0 && TIER_DEPLETED_IMPORT_THRESHOLD.includes(tier)) {
     const DEPLETED_IMPORT_MAP = {
@@ -2186,7 +2186,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // and pushes results into chainImports / chainExports before final assembly.
   computeFinishedGoodsDemand(tier, tradeRoute, institutions, config.nearbyResources || [], chainExports, chainImports);
 
-  // Override heuristic arrays with chain-derived values (clean mutation - before return)
+  // Override heuristic arrays with chain-derived values (clean mutation — before return)
   re.length = 0;
   chainExports.forEach((e) => re.push(e));
   serviceExports.forEach((e) => {
@@ -2195,14 +2195,14 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   q.length = 0;
   chainImports.forEach((i) => q.push(i));
 
-  // ── Isolated thorp/hamlet: subsistence economy - no imports or exports ────
+  // ── Isolated thorp/hamlet: subsistence economy — no imports or exports ────
   // These settlements have no trade route and cannot participate in external trade.
   // Their economy is purely self-contained subsistence. Clear all trade goods.
   const _isSubsistenceIsolated = ['thorp', 'hamlet'].includes(tier) && tradeRoute === 'isolated';
   if (_isSubsistenceIsolated) {
     re.length = 0; // no exports
     q.length = 0; // no imports
-    // Also clear active chains that require trade - keep only subsistence-relevant ones
+    // Also clear active chains that require trade — keep only subsistence-relevant ones
     activeChainsList.forEach((ch, _idx) => {
       // Keep food security chains, remove trade/manufacturing/entrepot chains
       if (ch.entrepot || ch.needKey === 'trade_entrepot') {
@@ -2242,7 +2242,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         }
       }
     } else if (_econMode === 'compete') {
-      // Rival/cold war: no removal - rivals compete in same space (handled at inst level)
+      // Rival/cold war: no removal — rivals compete in same space (handled at inst level)
     } else if (_econMode === 'dependent') {
       // Patron/client: ensure we export something the patron needs
       for (const [bk, weight] of Object.entries(_econBias)) {
@@ -2254,7 +2254,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     }
   }
 
-  // Sort income sources by percentage desc, then alphabetically - must be LAST
+  // Sort income sources by percentage desc, then alphabetically — must be LAST
   incomeNormalized.sort((a, b) => b.percentage - a.percentage || a.source.localeCompare(b.source));
   // ── Base prosperity model ───────────────────────────────────────────────
   // Inputs: route (channel), tier (capacity), economy slider (investment),
@@ -2262,7 +2262,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   //         defensibility (security premium on trade routes)
   const _PLABELS = ['Subsistence', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
 
-  // 1. Route base - how much commerce can flow at all
+  // 1. Route base — how much commerce can flow at all
   const _routeBase =
     tradeRoute === 'crossroads' || tradeRoute === 'port'
       ? 3 // Comfortable
@@ -2274,24 +2274,24 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
             : 1
         : 2; // road/river → Moderate
 
-  // 2. Tier development bonus - division of labour, institutional multiplication
+  // 2. Tier development bonus — division of labour, institutional multiplication
   const _tierBonus = { thorp: 0, hamlet: 0, village: 0, town: 1, city: 1, metropolis: 2 }[tier] || 0;
 
-  // 3. Economy slider - institutional investment in commerce (±1.25 range)
+  // 3. Economy slider — institutional investment in commerce (±1.25 range)
   const _priEcon = config.priorityEconomy ?? 50;
   const _ecoBonus = (_priEcon - 50) / 40;
 
-  // 4. Magic bonus - tier-scaled productive output (only meaningful at town+, only when active)
+  // 4. Magic bonus — tier-scaled productive output (only meaningful at town+, only when active)
   const _priMagic = config.priorityMagic ?? 0;
   const _magicActive = config.magicExists !== false && _priMagic > 25;
   const _magicTierScale = { thorp: 0, hamlet: 0, village: 0.3, town: 0.6, city: 1.0, metropolis: 1.4 }[tier] || 0;
   const _magicBonus = _magicActive ? Math.max(0, (_priMagic - 25) / 75) * _magicTierScale : 0;
 
-  // 5. Threat penalty - disrupted trade, insecure fields, rerouted merchants
+  // 5. Threat penalty — disrupted trade, insecure fields, rerouted merchants
   const _monsterThreat = config.monsterThreat || 'frontier';
   const _threatPenalty = _monsterThreat === 'plagued' ? -1 : _monsterThreat === 'frontier' ? -0.5 : 0;
 
-  // 6. Military effects - heavy spending diverts capital; but security enables trade
+  // 6. Military effects — heavy spending diverts capital; but security enables trade
   const _priMil = config.priorityMilitary ?? 50;
   const _milDrain = _priMil > 75 ? -0.3 : 0; // garrison costs crowd out investment
   const _hasWalls = instNames.some(
@@ -2303,11 +2303,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   );
   const _defPremium = _hasWalls && _hasGarrison && (tradeRoute === 'crossroads' || tradeRoute === 'port') ? 0.3 : 0;
 
-  // Food security modifier - computed here so it can cap/floor base prosperity
+  // Food security modifier — computed here so it can cap/floor base prosperity
   const _foodSec = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
   const _foodMod = _foodSec.prosperityMod;
 
-  // 7. Institutional depth - count of Economy+Crafts institutions weighted vs tier expectation
+  // 7. Institutional depth — count of Economy+Crafts institutions weighted vs tier expectation
   // A city with 12 economy institutions is richer than one with 4, regardless of slider.
   // Expectations calibrated to actual generator output averages per tier.
   const _econInstCount = institutions.filter((i) => i.category === 'Economy' || i.category === 'Crafts').length;
@@ -2315,11 +2315,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // Bonus: +1 if well above expectation, -1 if well below. Bounded ±1 to avoid dominating.
   const _depthBonus = _econInstCount >= _tierExpectedEco * 1.3 ? 1 : _econInstCount >= _tierExpectedEco * 0.75 ? 0 : -1;
 
-  // 8. Income diversity bonus - many distinct income sources = genuinely complex economy
+  // 8. Income diversity bonus — many distinct income sources = genuinely complex economy
   const _incomeCount = incomeNormalized?.length || 0;
   const _diversityBonus = _incomeCount >= 7 ? 0.5 : _incomeCount >= 5 ? 0.25 : 0;
 
-  // Combine - cap at Prosperous (4); Wealthy only through narrative modifier (strong econOut)
+  // Combine — cap at Prosperous (4); Wealthy only through narrative modifier (strong econOut)
   let _baseIdx = Math.min(
     4,
     Math.max(
@@ -2344,7 +2344,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     if (_foodMod.type === 'bonus') _baseIdx = Math.min(4, _baseIdx + Math.round(_foodMod.value));
   }
   // Thorp/hamlet prosperity floor: subsistence communities with required institutions
-  // functioning normally should never label below Poor - they're not in crisis, they're
+  // functioning normally should never label below Poor — they're not in crisis, they're
   // just small. Struggling is reserved for active stress/famine on top of structural poverty.
   const _hasRequiredEco = institutions.some((i) => {
     const n = (i.name || '').toLowerCase();
@@ -2397,16 +2397,16 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           _ = hasInst('market', 'trading', 'merchant', 'guild');
         return tier === 'metropolis' || tier === 'city'
           ? ee >= 9
-            ? 'Highly diversified - multiple major revenue streams'
+            ? 'Highly diversified — multiple major revenue streams'
             : ee >= 6
-              ? 'Diversified - broad institutional economic base'
-              : 'Concentrated - fewer revenue streams than scale suggests'
+              ? 'Diversified — broad institutional economic base'
+              : 'Concentrated — fewer revenue streams than scale suggests'
           : tier === 'town'
             ? _ && ee >= 6
               ? 'Diversified market economy'
               : ee >= 4
                 ? 'Specialized production and trade'
-                : 'Limited - narrow economic base for this scale'
+                : 'Limited — narrow economic base for this scale'
             : tier === 'village'
               ? _
                 ? 'Mixed subsistence and market'
@@ -2415,7 +2415,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
                   : 'Subsistence with minor surplus'
               : E >= 3
                 ? 'Subsistence with surplus'
-                : 'Subsistence - survival economy';
+                : 'Subsistence — survival economy';
       })(),
     }
   );
@@ -2503,7 +2503,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
         description: `${vulnerable.length} institution${vulnerable.length > 1 ? 's' : ''} depend on imported materials (${vulnerable
           .slice(0, 3)
           .map((d) => d.resource)
-          .join(', ')}). Standard for this trade route - vulnerability if supply is disrupted.`,
+          .join(', ')}). Standard for this trade route — vulnerability if supply is disrupted.`,
       });
   }
 

@@ -23,12 +23,12 @@ export default function useToggles() {
       } else if (mode === 'exclude') {
         next = { allow: false, require: false, forceExclude: true };
       } else if (mode === 'clear') {
-        // Remove explicit toggle - revert to default (used for out-of-tier un-forcing)
+        // Remove explicit toggle — revert to default (used for out-of-tier un-forcing)
         const newToggles = { ...prev };
         delete newToggles[key];
         return newToggles;
       } else {
-        // 'allow' - toggle back to default
+        // 'allow' — toggle back to default
         next = { allow: !cur.allow, require: false, forceExclude: cur.allow };
       }
       return { ...prev, [key]: next };

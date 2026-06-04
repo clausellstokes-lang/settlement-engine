@@ -16,7 +16,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
   const summaryClean = (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim();
 
   // Stress-consequence issues: expected effects of active stressors (siege, famine, etc.)
-  // These are NOT structural problems - they belong in a separate "Active Conditions" section
+  // These are NOT structural problems — they belong in a separate "Active Conditions" section
   // so they don't pollute the structural plausibility assessment.
   const stressConsequences = [...(v.issues||[]), ...(v.warnings||[])].filter(i =>
     i.type === 'stress_consequence'
@@ -32,7 +32,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
   // Critical issues vs lower-severity
   const byDesignIssues = [...(v.issues||[]).filter(i => i.severity==='by_design')].sort((a,b)=>(a.institution||'').localeCompare(b.institution||''));
   const criticalIssues = [...(v.issues||[]).filter(i => i.severity==='critical' && i.type !== 'stress_consequence')].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
-  // Strip dependency/resource chain issues - those are in Economics & Resources tabs
+  // Strip dependency/resource chain issues — those are in Economics & Resources tabs
   // Viability only shows logic violations, structural conflicts, and by-design contradictions
   const VIABILITY_EXCLUDED_TYPES = ['dependency','resource_chain','opportunity','incomplete_chain','trade_dependency','food_security'];
   const VIABILITY_EXCLUDED_SEV   = ['dependency','opportunity'];
@@ -44,7 +44,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
     w.category !== 'Economic Opportunity' &&
     w.category !== 'Water Dependency'
   );
-  // Suggestions (opportunities) excluded from Viability tab - see Economics tab
+  // Suggestions (opportunities) excluded from Viability tab — see Economics tab
 
   const otherIssues    = [...(v.issues||[]).filter(i =>
     i.severity!=='critical' && i.severity!=='by_design' &&
@@ -82,7 +82,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
             </div>
             {summaryClean&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}
             <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
-              This tab checks whether your settlement makes logical sense - not whether it&apos;s economically optimised. 
+              This tab checks whether your settlement makes logical sense — not whether it&apos;s economically optimised. 
               A viable settlement can have unexploited resources and unsatisfied demand; what matters is whether the 
               pieces fit together plausibly.
             </p>
@@ -108,8 +108,8 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5}}>
             This settlement's resilience relies on active magical infrastructure. One or more supply
             chains are magically sustained, or stress conditions are being offset by arcane, divine,
-            or druidic intervention. Loss of magical practitioners - through conflict, plague, or
-            political disruption - would immediately expose critical vulnerabilities.
+            or druidic intervention. Loss of magical practitioners — through conflict, plague, or
+            political disruption — would immediately expose critical vulnerabilities.
           </div>
           {(s.economicState?.activeChains||[]).filter(c=>c.magicNote).map((c,i)=>(
             <div key={i} style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,
@@ -197,7 +197,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
       {/* ── WARNINGS ─────────────────────────────────────────────────────── */}
       {stressConsequences.length>0&&<Section title={`⚡ Active Stress Effects (${stressConsequences.length})`} collapsible defaultOpen={true} accent='#6b4c2a'>
         <p style={{fontSize:FS.sm,color:swatch['#5A3E28'],lineHeight:1.5,margin:'0 0 10px',fontStyle:'italic'}}>
-          These are expected consequences of active stress conditions - not structural flaws. A settlement under siege losing supply chain access is working as intended.
+          These are expected consequences of active stress conditions — not structural flaws. A settlement under siege losing supply chain access is working as intended.
         </p>
         {stressConsequences.map((item,i)=>(
           <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',borderRadius:5,padding:'8px 10px',marginBottom:6}}>

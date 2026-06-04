@@ -1,5 +1,5 @@
 /**
- * tests/lib/entities.test.js - Entity tag / id helper contract.
+ * tests/lib/entities.test.js — Entity tag / id helper contract.
  *
  * These helpers are the long-term replacement for name-pattern matching
  * (`name.toLowerCase().includes('watch')` and friends) across the

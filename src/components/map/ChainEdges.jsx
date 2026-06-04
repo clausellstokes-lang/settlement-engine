@@ -1,8 +1,8 @@
 /**
- * ChainEdges - draws supply chain paths between settlements.
+ * ChainEdges — draws supply chain paths between settlements.
  *
  * Chains are DERIVED from savedSettlements + placements at render time (via
- * computeMapChains). No `supplyChains` store slice is needed - the source of
+ * computeMapChains). No `supplyChains` store slice is needed — the source of
  * truth is the saves themselves, and pairwise edges are cheap to recompute
  * when placements change.
  *
@@ -25,7 +25,7 @@ export default function ChainEdges() {
   // identical placements (campaign reload, regenerate).
   const geometryVersion = useStore(s => s.geometryVersion);
 
-  // geometryVersion is a deliberate "trigger" dep - the body doesn't
+  // geometryVersion is a deliberate "trigger" dep — the body doesn't
   // read it but we want chain paths to recompute when geography changes
   // under identical placements (campaign reload, regenerate). ESLint
   // can't see the intent.

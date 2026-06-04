@@ -1,10 +1,10 @@
 /**
- * primitives/BandPill - Tier 5.4 surface.
+ * primitives/BandPill — Tier 5.4 surface.
  *
  * Color-coded pill that renders a qualitative band label
  * ("Abundant", "Strained", "Critical", "Collapsed") instead of an
  * internal numeric score. TTRPG users find bands more useful than
- * raw numbers - "Legitimacy: Contested" reads as DM-actionable;
+ * raw numbers — "Legitimacy: Contested" reads as DM-actionable;
  * "Legitimacy: 37" doesn't.
  *
  * Consumes domain/qualitativeBands.js#displayValueFor + #bandFor.
@@ -83,15 +83,15 @@ function resolveLabel({ band, label, domain, ref }) {
  * Render a qualitative-band pill.
  *
  * Props:
- *   band        - explicit band string (surplus / adequate / strained / critical / collapsed)
- *   domain      - explicit domain ('substrate' / 'capacity' / 'chain' / ...) for the label lookup
- *   ref         - { kind, key } for settlement-driven lookups
- *   settlement  - required when ref is given
- *   label       - explicit override label (e.g. "Contested")
- *   labelBefore - string to prepend to the label ("Legitimacy: ")
- *   size        - 'sm' | 'md' | 'lg' (default 'md')
- *   showGlyph   - render the band glyph (default true)
- *   style       - caller overrides
+ *   band        — explicit band string (surplus / adequate / strained / critical / collapsed)
+ *   domain      — explicit domain ('substrate' / 'capacity' / 'chain' / ...) for the label lookup
+ *   ref         — { kind, key } for settlement-driven lookups
+ *   settlement  — required when ref is given
+ *   label       — explicit override label (e.g. "Contested")
+ *   labelBefore — string to prepend to the label ("Legitimacy: ")
+ *   size        — 'sm' | 'md' | 'lg' (default 'md')
+ *   showGlyph   — render the band glyph (default true)
+ *   style       — caller overrides
  */
 export function BandPill({
   band,
@@ -105,7 +105,7 @@ export function BandPill({
   style = {},
 }) {
   // `ref` here is a settlement-reference name (e.g. 'economy.viability'),
-  // NOT a React useRef - react-hooks/refs flags it as a false positive.
+  // NOT a React useRef — react-hooks/refs flags it as a false positive.
   // eslint-disable-next-line react-hooks/refs
   const resolvedBand = resolveBand({ band, ref, settlement });
   // eslint-disable-next-line react-hooks/refs

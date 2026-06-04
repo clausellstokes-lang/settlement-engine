@@ -3,7 +3,7 @@ import { FS, swatch } from '../theme.js';
 import { sans } from './Primitives';
 
 /**
- * NarrativeNote - per-tab addendum from the Narrative Refinement layer.
+ * NarrativeNote — per-tab addendum from the Narrative Refinement layer.
  * Shows a collapsible purple-accented card at the top of a tab.
  * Only renders when `note` is a non-empty string.
  *

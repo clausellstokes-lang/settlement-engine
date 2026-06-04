@@ -1,20 +1,20 @@
 /**
- * PostGenCoach.jsx - Three-step coach shown after a first generation.
+ * PostGenCoach.jsx — Three-step coach shown after a first generation.
  *
  * The pre-generation OnboardingCoach (src/components/OnboardingCoach.jsx)
  * walks the user through "pick a size, hit generate, scroll the tabs".
  * Once they have a settlement, a different conversation starts:
  *
- *   1. Read the dossier - here's what to look at first.
- *   2. Watch how it was simulated - the rail to the right shows it.
- *   3. Save it - sign in to keep it.
+ *   1. Read the dossier — here's what to look at first.
+ *   2. Watch how it was simulated — the rail to the right shows it.
+ *   3. Save it — sign in to keep it.
  *
  * Source: UI Redesign §18.6. Copy is in src/copy/en.js under
  * onboarding.coach so tone changes happen there, not here.
  *
  * Visibility rules:
  *   - User has at least one settlement on screen.
- *   - User hasn't dismissed (or completed) this coach before - tracked
+ *   - User hasn't dismissed (or completed) this coach before — tracked
  *     via localStorage `sf.postGenCoachDismissedAt`.
  *
  * The component renders nothing if any rule fails, so safe to mount

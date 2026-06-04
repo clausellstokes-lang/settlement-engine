@@ -1,28 +1,28 @@
 /**
- * authSlice - Authentication state, role-based access, and tier-based permission gates.
+ * authSlice — Authentication state, role-based access, and tier-based permission gates.
  *
  * Tiers (subscription-based, controls feature access):
- *   'anon'    - no account, can generate up to TOWN size, no saves (the
+ *   'anon'    – no account, can generate up to TOWN size, no saves (the
  *               funnel strategy raised the anon ceiling from village to
  *               town so first-time visitors get a meaningful artifact
  *               worth signing up to save).
- *   'free'    - account, all sizes, 3 saves (Wanderer / Free tier),
+ *   'free'    – account, all sizes, 3 saves (Wanderer / Free tier),
  *               no neighbour/export/map-chains.
- *   'premium' - Cartographer: unlimited saves, neighbour system,
+ *   'premium' – Cartographer: unlimited saves, neighbour system,
  *               PDF/JSON export, map supply chains.
  *
  * Roles (orthogonal to tier, controls administrative privileges):
- *   'user'      - default, no admin access
- *   'developer' - full bypass of all tier restrictions, admin panel access
- *   'admin'     - admin panel access, user management
+ *   'user'      – default, no admin access
+ *   'developer' – full bypass of all tier restrictions, admin panel access
+ *   'admin'     – admin panel access, user management
  *
  * Developers/admins bypass ALL tier gates automatically.
- * AI features are gated by credits (creditsSlice), not tier - except developers get unlimited.
+ * AI features are gated by credits (creditsSlice), not tier — except developers get unlimited.
  */
 
 import { auth as authService } from '../lib/auth.js';
 
-// Source of truth for tier ceilings is src/config/pricing.js - TIERS.{key}.maxSize.
+// Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
 // This map mirrors those ceilings so the auth-gating layer never drifts:
 //   wanderer/free    → town       (pricing.js:85)
 //   cartographer/    → capital    (pricing.js:102)
@@ -104,7 +104,7 @@ export const createAuthSlice = (set, get) => ({
   isElevated: () => ELEVATED_ROLES.includes(get().auth.role),
   /** Whether the user's account tier grants premium benefits (unlimited
    *  chronicle history, supply chains, custom content, etc.). Orthogonal to
-   *  role - an elevated role is checked separately via isElevated(). */
+   *  role — an elevated role is checked separately via isElevated(). */
   isPremium: () => get().auth.tier === 'premium',
   /** Whether the user holds a Founder Lifetime grant. The profiles row is
    *  the source of truth; user_metadata is only a compatibility mirror. */
@@ -168,11 +168,11 @@ export const createAuthSlice = (set, get) => ({
           };
         });
 
-        // Tier 8.5 - fire the welcome email once per account. We mark a
+        // Tier 8.5 — fire the welcome email once per account. We mark a
         // localStorage flag keyed by user id so we don't double-send on
         // SIGNED_IN events (e.g. after a token refresh or a sign-out +
         // sign-in cycle on the same browser). The send is
-        // fire-and-forget - emails never block the auth flow, and an
+        // fire-and-forget — emails never block the auth flow, and an
         // unconfigured RESEND_API_KEY returns a soft 200 from the edge
         // function so this path is silent in dev.
         if (event === 'SIGNED_IN' && user?.id) {
@@ -184,9 +184,9 @@ export const createAuthSlice = (set, get) => ({
               // emailLifecycle into the critical auth bundle.
               import('../lib/emailLifecycle.js').then(({ notifyWelcome }) => {
                 notifyWelcome({ displayName: displayName || 'there' });
-              }).catch(() => { /* swallow - never block auth */ });
+              }).catch(() => { /* swallow — never block auth */ });
 
-              // Tier 8.8 - fire SIGNUP_COMPLETED + (if applicable)
+              // Tier 8.8 — fire SIGNUP_COMPLETED + (if applicable)
               // SIGNUP_AFTER_ANON. We piggyback on the same first-
               // signin-per-user flag so this fires once per account.
               import('../lib/analytics.js').then(({ Funnel }) => {
@@ -196,8 +196,8 @@ export const createAuthSlice = (set, get) => ({
           } catch { /* localStorage unavailable; skip */ }
         }
 
-        // P101 / X-3 - Auth intent fulfillment. If the user clicked
-        // "Save this town - free account" before signing in, the
+        // P101 / X-3 — Auth intent fulfillment. If the user clicked
+        // "Save this town — free account" before signing in, the
         // authIntents registry has a pending SAVE_SETTLEMENT entry. Now
         // that auth is real, dispatch it. The handler is registered at
         // module init time in store/index.js (see registerSaveIntent).
@@ -288,7 +288,7 @@ export const createAuthSlice = (set, get) => ({
   /**
    * Send magic-link / OTP sign-in email. WCAG 2.2 SC 3.3.8 (Accessible
    * Authentication, Minimum) prefers this path over password recall.
-   * Resolution happens via the auth-state listener on link click - no
+   * Resolution happens via the auth-state listener on link click — no
    * follow-up call needed here.
    */
   authMagicLink: async (email) => {

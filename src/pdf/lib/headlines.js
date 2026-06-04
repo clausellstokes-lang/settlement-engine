@@ -1,12 +1,12 @@
 /**
- * headlines - single-line "TLDR" insight for each chapter.
+ * headlines — single-line "TLDR" insight for each chapter.
  *
  * Each function takes the relevant viewModel slice and returns either:
  *   - a string headline ready to render in <ChapterHeadline>
  *   - or null if there's nothing strong enough to surface
  *
  * Keep the logic conservative: only call something out when the data
- * actually warrants it. A weak or generic headline is worse than none -
+ * actually warrants it. A weak or generic headline is worse than none —
  * it forces the DM to read past empty noise on every chapter opener.
  */
 import { cap, humanize, label as labelOf } from './format.js';
@@ -27,7 +27,7 @@ export function overviewHeadline(o, identity) {
   }
   // Viability flag if explicit
   if (o.viability === false) {
-    parts.push('- viability flagged as marginal or worse');
+    parts.push('— viability flagged as marginal or worse');
   }
   if (!parts.length) return null;
   return parts.join(' ') + '.';
@@ -58,7 +58,7 @@ export function powerHeadline(power, _identity) {
     bits.push(`${factions.length - 1} other faction${factions.length - 1 === 1 ? '' : 's'} compete for influence`);
   }
   if (!bits.length) return null;
-  return bits.join(' - ') + '.';
+  return bits.join(' — ') + '.';
 }
 
 export function powerTone(power) {
@@ -105,7 +105,7 @@ export function defenseHeadline(def, identity) {
   if (readiness) bits.push(`${typeof readiness === 'string' ? cap(readiness) : readiness} readiness`);
   if (avg != null) bits.push(`avg defense ${avg}/100`);
   if (def.magicDependency) bits.push('magic-dependent');
-  return `Defense for a ${tier} - ${bits.join(' · ')}.`;
+  return `Defense for a ${tier} — ${bits.join(' · ')}.`;
 }
 
 export function defenseTone(def) {
@@ -130,7 +130,7 @@ export function servicesHeadline(services) {
   }
   const sorted = Object.entries(byCat).sort((a, b) => b[1] - a[1]);
   const top2 = sorted.slice(0, 2).map(([c, n]) => `${n} ${humanize(c).toLowerCase()}`).join(', ');
-  return `${total} institution${total === 1 ? '' : 's'} on the books - heaviest in ${top2}.`;
+  return `${total} institution${total === 1 ? '' : 's'} on the books — heaviest in ${top2}.`;
 }
 
 // ── Resources ──────────────────────────────────────────────────────────────
@@ -187,7 +187,7 @@ export function npcsHeadline(npcs) {
   const top = sorted[0];
   const total = list.length;
   if (!top) return null;
-  return `${total} named figure${total === 1 ? '' : 's'} - ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`;
+  return `${total} named figure${total === 1 ? '' : 's'} — ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`;
 }
 
 // ── Hooks ──────────────────────────────────────────────────────────────────
@@ -202,7 +202,7 @@ export function hooksHeadline(hooks) {
     bySrc[k] = (bySrc[k] || 0) + 1;
   }
   const top = Object.entries(bySrc).sort((a, b) => b[1] - a[1])[0];
-  return `${all.length} plot hook${all.length === 1 ? '' : 's'} surfaced - heaviest from ${humanize(top[0]).toLowerCase()} (${top[1]}).`;
+  return `${all.length} plot hook${all.length === 1 ? '' : 's'} surfaced — heaviest from ${humanize(top[0]).toLowerCase()} (${top[1]}).`;
 }
 
 // ── Relationships ──────────────────────────────────────────────────────────

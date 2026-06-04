@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * Smoke tests for src/lib/mapBridge.js - the typed RPC client for the
+ * Smoke tests for src/lib/mapBridge.js — the typed RPC client for the
  * FMG iframe.
  *
  * What this catches: regressions in the request/response pairing
@@ -36,7 +36,7 @@ function makeRig() {
       postMessage: (msg, _origin) => { sent.push(msg); },
     },
   };
-  // (No reassignment needed - replyFromIframe below uses
+  // (No reassignment needed — replyFromIframe below uses
   // fakeIframe.contentWindow directly as event.source, so identity holds
   // automatically. The bridge's source-check is `event.source !==
   // iframe.contentWindow`; same reference on both sides passes.)
@@ -58,7 +58,7 @@ describe('mapBridge', () => {
   let bridge;
 
   // Track promises that are intentionally left pending (e.g. timeout
-  // tests that await rejection at the test level - but with the bridge
+  // tests that await rejection at the test level — but with the bridge
   // around them, destroy() will reject any orphaned ones). Catching all
   // of them here keeps the test output clean.
   let trackedPromises = [];
@@ -81,7 +81,7 @@ describe('mapBridge', () => {
   // here so its eventual rejection (from destroy) is swallowed.
   function tracked(p) { trackedPromises.push(p); return p; }
 
-  // Legacy no-op for tests that previously called teardown() explicitly -
+  // Legacy no-op for tests that previously called teardown() explicitly —
   // the afterEach hook handles it now.
   function teardown() { /* no-op */ }
 
@@ -113,7 +113,7 @@ describe('mapBridge', () => {
     expect(sent.type).toBe('settlementEngine:fitMap');
     expect(sent._rid).toMatch(/^rpc_/);
 
-    // Reply with the same _rid - must use fmg: prefix per the bridge's
+    // Reply with the same _rid — must use fmg: prefix per the bridge's
     // input filter (handleMessage drops anything not starting with fmg:).
     rig.replyFromIframe({ type: 'fmg:reply', _rid: sent._rid, ok: true });
 
@@ -189,7 +189,7 @@ describe('mapBridge', () => {
     bridge.on('ready', (data) => seen.push(data));
     rig.replyFromIframe({ type: 'fmg:ready', seed: 's1' });
     rig.replyFromIframe({ type: 'fmg:ready', seed: 's2' });
-    // Both ready messages fire the listener - even though ready() promise
+    // Both ready messages fire the listener — even though ready() promise
     // only resolves once. Useful for components that want to react to map
     // reloads.
     expect(seen).toHaveLength(2);
@@ -203,7 +203,7 @@ describe('mapBridge', () => {
     rig.replyFromIframe({ type: 'fmg:ready' });
     const p = bridge.call('settlementEngine:fitMap', {}, { timeout: 50 });
     const sent = rig.sent[rig.sent.length - 1];
-    // Reply but with the wrong origin - should be ignored, so the call times out.
+    // Reply but with the wrong origin — should be ignored, so the call times out.
     const ev = new MessageEvent('message', {
       data: { type: 'fmg:reply', _rid: sent._rid, ok: true },
       origin: 'https://evil.example.com',
@@ -217,7 +217,7 @@ describe('mapBridge', () => {
   test('messages without an fmg: prefix are dropped', () => {
     const seen = [];
     bridge.on('burgSelected', (data) => seen.push(data));
-    // Send a burgSelected without the fmg: prefix - should be ignored
+    // Send a burgSelected without the fmg: prefix — should be ignored
     const ev = new MessageEvent('message', {
       data: { type: 'burgSelected', burg: { id: 1 } },
       origin: window.location.origin,

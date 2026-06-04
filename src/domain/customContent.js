@@ -1,8 +1,8 @@
 /**
- * domain/customContent.js - Classify user-added content as causal objects.
+ * domain/customContent.js — Classify user-added content as causal objects.
  *
  * Tier 4.16 of the roadmap. When a user adds "Dragonbone Foundry,"
- * the simulator needs to know what it IS structurally - category,
+ * the simulator needs to know what it IS structurally — category,
  * what it provides, what it requires, what controls it, what risks
  * it raises, what effects it has on substrate / capacities. Without
  * structure, user content is just appended prose; with it, the
@@ -17,7 +17,7 @@
  *   }
  *
  * Pure read-only. Pattern-based inference (same Phase 11 / Phase 20
- * pattern). The simulator's rerun is already Phase 18's job - this
+ * pattern). The simulator's rerun is already Phase 18's job — this
  * module produces the structured input Phase 18 consumes.
  */
 
@@ -44,7 +44,7 @@ export const INSTITUTION_CATEGORIES = Object.freeze([
 // ── Type inference ───────────────────────────────────────────────────────
 
 const TYPE_PATTERNS = Object.freeze([
-  // Order matters - most specific first.
+  // Order matters — most specific first.
   // Threats come before factions because "cult menace" reads as threat,
   // not faction; faction-specific words (guild / order / council) stay
   // unambiguous for the faction line.
@@ -231,12 +231,12 @@ export function classifyCustomInstitution(rawEntity, settlement) {
     : [...tmpl.requires];
 
   // Effects always merged from template (user can override individual
-  // entries; we don't deep-merge - keep it simple).
+  // entries; we don't deep-merge — keep it simple).
   const effects = rawEntity.effects
     ? rawEntity.effects
     : { substrate: { ...tmpl.effects.substrate }, capacities: { ...tmpl.effects.capacities } };
 
-  // Modest contextual hint - settlement size, magic level.
+  // Modest contextual hint — settlement size, magic level.
   if (settlement?.config?.magicLevel && category === 'arcane') {
     const level = settlement.config.magicLevel;
     if (level === 'rare' || level === 'low') {

@@ -1,5 +1,5 @@
 /**
- * PowerStructure - chapter 02. Stability + legitimacy + factions.
+ * PowerStructure — chapter 02. Stability + legitimacy + factions.
  *
  * Mirrors PowerTab.jsx in full:
  *   - Public legitimacy banner with breakdown chips
@@ -49,7 +49,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
           scoreLabel={cap(p.legitimacy.label) || ''}
           tone={legitTone(p.legitimacy.score)}
           breakdown={p.legitimacyBreakdown}
-          footer={p.governanceFractured ? '⚠ Governance fractured - no faction holds clear authority' : null}
+          footer={p.governanceFractured ? '⚠ Governance fractured — no faction holds clear authority' : null}
         />
       )}
 
@@ -58,7 +58,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
         <View style={{ flex: 1, padding: 6, backgroundColor: swatch['#FAF3E8'], border: `0.4pt solid ${palette.border}`, borderRadius: 2 }}>
           <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>STABILITY</Text>
           <Text style={{ ...type.body_em, fontSize: pt['11'], color: palette.ink, marginTop: 1 }}>
-            {cap(p.stability) || '-'}
+            {cap(p.stability) || '—'}
           </Text>
         </View>
         {governing && (
@@ -322,7 +322,7 @@ function FactionCard({ faction, index }) {
             <Text key={`sf-${index}-${si}`} style={{ ...type.caption, fontSize: pt['8'], color: palette.second }}>
               · {label(sf)}
               {Array.isArray(sf?.members) && sf.members.length > 0 && (
-                <Text style={{ color: palette.muted }}> - {sf.members.map(label).filter(Boolean).join(', ')}</Text>
+                <Text style={{ color: palette.muted }}> — {sf.members.map(label).filter(Boolean).join(', ')}</Text>
               )}
             </Text>
           ))}

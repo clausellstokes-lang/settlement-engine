@@ -1,5 +1,5 @@
 /**
- * tests/domain/canonStatus.test.js - Tier 5.3 lean tests.
+ * tests/domain/canonStatus.test.js — Tier 5.3 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

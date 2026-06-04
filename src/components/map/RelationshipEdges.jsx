@@ -1,5 +1,5 @@
 /**
- * RelationshipEdges - draws lines between linked settlements, styled by
+ * RelationshipEdges — draws lines between linked settlements, styled by
  * relationship type. Pulls edges from the saved settlements' neighbour
  * blocks and maps them to burg coordinates via mapState.placements.
  *
@@ -37,7 +37,7 @@ export default function RelationshipEdges() {
     if (!Array.isArray(savedSettlements) || !placements) return [];
 
     // Build settlementId → burgId lookup. Burg ids are now synthetic strings
-    // (e.g. "sf_lq8x7k4p_ab3c"), so keep keys as strings - coercing to Number
+    // (e.g. "sf_lq8x7k4p_ab3c"), so keep keys as strings — coercing to Number
     // yields NaN and collapses every placement onto one key.
     const settlementToBurg = new Map();
     for (const [burgIdStr, p] of Object.entries(placements)) {
@@ -100,7 +100,7 @@ export default function RelationshipEdges() {
     // Stable order: higher priority renders on top (so hostile lines win)
     out.sort((a, b) => (a.style.priority || 0) - (b.style.priority || 0));
     return out;
-    // geometryVersion is a deliberate trigger dep - see ChainEdges for the
+    // geometryVersion is a deliberate trigger dep — see ChainEdges for the
     // same pattern. We want this memo to recompute when geometry rolls
     // even though the body doesn't reference geometryVersion directly.
     // eslint-disable-next-line react-hooks/exhaustive-deps

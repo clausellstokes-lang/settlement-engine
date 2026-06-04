@@ -4,9 +4,9 @@ import { TIER_LABELS, catColor } from './design';
 import { Ti, serif, sans, TabIntro } from './Primitives';
 import { BODY } from './tabConstants.js';
 
-// Tier 7.19 - `second` was the per-file body-copy alias for '#6b5340'.
+// Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
-// changes - keep the local `second` name so we don't churn every usage.
+// changes — keep the local `second` name so we don't churn every usage.
 const gold='#a0762a', ink='#1c1409', muted='#9c8068', second=BODY;
 const factionColors=['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a'];
 
@@ -29,7 +29,7 @@ function characterSentence(r) {
   const threatNote=threat==='plagued'?' The surrounding region is plagued by monster activity.':threat==='frontier'?' It sits on an active frontier.':'';
   const safetyNote=sl.includes('Dangerous')?' The streets are not safe.':sl.includes('Authoritarian')?(hasArmed?' The garrison controls the streets with an iron hand.':' The strongest armed group enforces community order.'):sl.includes('Criminal Governance')?(hasCrim?' Criminal organizations effectively run the settlement.':''):'' ;
   const ageNote=age?` Founded approximately ${age} years ago.`:'';
-  return `${prosperity.toLowerCase()} ${tierDesc} - a ${tradeDesc}.${ageNote}${threatNote} Power rests with ${ruling.toLowerCase()}; stability: ${stability.toLowerCase().replace(/[()]/g,'')}.${safetyNote}${recentConflict?' '+recentConflict.charAt(0).toUpperCase()+recentConflict.slice(1)+'.':''}`;
+  return `${prosperity.toLowerCase()} ${tierDesc} — a ${tradeDesc}.${ageNote}${threatNote} Power rests with ${ruling.toLowerCase()}; stability: ${stability.toLowerCase().replace(/[()]/g,'')}.${safetyNote}${recentConflict?' '+recentConflict.charAt(0).toUpperCase()+recentConflict.slice(1)+'.':''}`;
 }
 
 // ── Stacked faction power bar ─────────────────────────────────────────────────
@@ -124,11 +124,11 @@ function SummaryTab({ settlement:r }) {
     const lines=[
       `# ${name}`,
       `*${tierLabel} · Pop. ${pop?.toLocaleString()} · ${tradeAccess} · ${hist?.age||'?'} years old*`,
-      stresses.length?'\n**Active Crisis:** '+stresses.map(v=>`${v.label} - ${v.crisisHook}`).join(' | '):'',
+      stresses.length?'\n**Active Crisis:** '+stresses.map(v=>`${v.label} — ${v.crisisHook}`).join(' | '):'',
       r.arrivalScene?`\n> ${r.arrivalScene}`:'',
       `\n**${characterSentence(r)}**`,
       `\n**Power:** ${allFactions.slice(0,3).map(f=>`${f.faction} (${f.power}%)`).join(', ')}. ${ps?.stability||''}`,
-      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodBal?.deficit>0?` Food deficit ${foodBal.deficitPercent}%.`:''}`,
+      `**Economy:** ${eco.prosperity||'?'} — ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodBal?.deficit>0?` Food deficit ${foodBal.deficitPercent}%.`:''}`,
       `**Defense:** ${dp.readiness?.label||'Unknown'}`,
       `\n**Key NPCs:**`,...topNPCs.map(v=>`- ${v.name} (${v.title}): ${[v.personality?.dominant,v.personality?.flaw].filter(Boolean).join(', ')}. Goal: ${v.goal?.short||'?'}`),
       `\n**Plot Hooks:**`,...topHooks.map(v=>`- [${v.source}] ${v.text}`),
@@ -201,9 +201,9 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── SITUATION ROW (3 scannable tiles) ───────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
-        <SitTile icon="" label="Power" value={powStab.split(';')[0].split('-')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
-        <SitTile icon="" label="Economy" value={eco.prosperity||'-'} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split('-')[0].trim()}/>
-        <SitTile icon="" label="Defense" value={dp.readiness?.label||'-'} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
+        <SitTile icon="" label="Power" value={powStab.split(';')[0].split('—')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
+        <SitTile icon="" label="Economy" value={eco.prosperity||'—'} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split('—')[0].trim()}/>
+        <SitTile icon="" label="Defense" value={dp.readiness?.label||'—'} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
       </div>
 
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}

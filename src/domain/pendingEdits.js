@@ -1,5 +1,5 @@
 /**
- * domain/pendingEdits.js - Queue-based edit primitive with cascade preview.
+ * domain/pendingEdits.js — Queue-based edit primitive with cascade preview.
  *
  * The Editing & Map critique's E-1 / E-2 reframes the dossier as the
  * surface the DM edits, not a read-only view. To make that safe, the
@@ -12,16 +12,16 @@
  *
  * Edit shape:
  *   {
- *     id:        string         - uuid-ish, stable for revert
- *     kind:      EditKind       - see EDIT_KINDS below
- *     payload:   any            - kind-specific (renameNPC: { npcId, newName })
- *     ts:        number         - monotonic timestamp from edit clock
- *     reverted?: boolean        - soft-revert (kept in history)
+ *     id:        string         — uuid-ish, stable for revert
+ *     kind:      EditKind       — see EDIT_KINDS below
+ *     payload:   any            — kind-specific (renameNPC: { npcId, newName })
+ *     ts:        number         — monotonic timestamp from edit clock
+ *     reverted?: boolean        — soft-revert (kept in history)
  *   }
  *
  * Cascade-preview shape:
  *   {
- *     summaryLines:        string[]  - "+1 institution", "viability shifted +0.04"
+ *     summaryLines:        string[]  — "+1 institution", "viability shifted +0.04"
  *     downstreamCounts:    { npcs?, hooks?, factions?, linkedSaves? }
  *     narrativeImpact:     'none' | 'regenerate-needed' | 'progression-suggested'
  *     warnings:            string[]
@@ -73,7 +73,7 @@ export function appendEdit(queue, edit) {
   return [...queue, edit];
 }
 
-/** Mark a queue entry as reverted (soft delete - kept for history). */
+/** Mark a queue entry as reverted (soft delete — kept for history). */
 export function revertEdit(queue, editId) {
   if (!Array.isArray(queue)) return [];
   return queue.map(e => e.id === editId ? { ...e, reverted: true } : e);
@@ -103,11 +103,11 @@ export function hasPending(queue) {
  * the live settlement. This is pure; the UI calls it whenever the
  * queue changes and renders the result in a side panel.
  *
- * The preview is *coarse* - it summarizes counts and impact bands,
+ * The preview is *coarse* — it summarizes counts and impact bands,
  * not a full re-simulation. A full re-sim is what `commit()` does.
  *
- * @param {Object} settlement - live settlement (pre-edit state)
- * @param {Array}  queue      - pending edits to preview
+ * @param {Object} settlement — live settlement (pre-edit state)
+ * @param {Array}  queue      — pending edits to preview
  * @returns {Object} preview as documented above
  */
 export function previewCascade(settlement, queue) {
@@ -148,7 +148,7 @@ export function previewCascade(settlement, queue) {
         proseEdits += 1;
         break;
       default:
-        // unknown kinds were rejected at buildEdit() - defensive only
+        // unknown kinds were rejected at buildEdit() — defensive only
         break;
     }
   }
@@ -175,7 +175,7 @@ export function previewCascade(settlement, queue) {
     out.summaryLines.push(`${proseEdits} prose edit${proseEdits === 1 ? '' : 's'}`);
   }
 
-  // Downstream counts - approximate, drawn from the live settlement.
+  // Downstream counts — approximate, drawn from the live settlement.
   out.downstreamCounts.npcs = Array.isArray(settlement.npcs) ? settlement.npcs.length : 0;
   out.downstreamCounts.factions = Array.isArray(settlement.factions) ? settlement.factions.length : 0;
   out.downstreamCounts.hooks = Array.isArray(settlement.plotHooks)
@@ -198,10 +198,10 @@ export function previewCascade(settlement, queue) {
     }
   }
 
-  // Warnings - surface the things the DM should think about.
+  // Warnings — surface the things the DM should think about.
   if (structuralCount > 0 && isNarrated) {
     out.warnings.push(
-      'Structural change on a narrated save - the narrative layer will need regeneration to stay coherent.'
+      'Structural change on a narrated save — the narrative layer will need regeneration to stay coherent.'
     );
   }
   if (netInstitutions < 0 && Math.abs(netInstitutions) >= 2) {

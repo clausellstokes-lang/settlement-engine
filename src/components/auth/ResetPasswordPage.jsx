@@ -1,8 +1,8 @@
 /**
- * components/auth/ResetPasswordPage.jsx - the dedicated /reset-password route.
+ * components/auth/ResetPasswordPage.jsx — the dedicated /reset-password route.
  *
  * Wraps AuthPanel in 'reset' mode: collect an email, fire the reset link,
- * show the "check your email" confirmation. No post-auth redirect here - the
+ * show the "check your email" confirmation. No post-auth redirect here — the
  * actual password change happens on the Supabase-hosted recovery link, not on
  * this request form. A "Back to Sign In" affordance lives inside AuthPanel;
  * the footer offers the same as a crawlable link.

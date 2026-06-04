@@ -1,8 +1,8 @@
 /**
- * domain/contradictions.js - Structured anomaly detection + classification.
+ * domain/contradictions.js — Structured anomaly detection + classification.
  *
  * Tier 4.18 of the roadmap. Detects places where the settlement has
- * structural mismatches - outsized institutions for tier, missing
+ * structural mismatches — outsized institutions for tier, missing
  * enforcement, factional power without supporting institutions, etc.
  * Each contradiction gets a classification + a structured
  * justification consumers can render.
@@ -10,10 +10,10 @@
  *   detectContradictions(settlement) -> Contradiction[]
  *
  * Classifications:
- *   invalid                  - broken state, shouldn't happen
- *   rare_but_justified       - unusual but explicable
- *   interesting_tension      - narrative-worthy contradiction
- *   user_authored_exception  - user explicitly added this
+ *   invalid                  — broken state, shouldn't happen
+ *   rare_but_justified       — unusual but explicable
+ *   interesting_tension      — narrative-worthy contradiction
+ *   user_authored_exception  — user explicitly added this
  *
  * Pure read-only. Composes Phase 9 factions, Phase 17 substrate,
  * Phase 20 threats, Phase 21 capacities.
@@ -101,7 +101,7 @@ function detectMissingEnforcement(settlement) {
     description: `${tier} without an enforcement institution`,
     explanation: `A ${tier} normally maintains some form of watch, militia, or garrison. Its absence implies either a non-coercive governance model (religious peace, council mediation) or hidden enforcement (informal violence, patronage networks).`,
     consequences: [
-      'order is maintained informally - by faction patronage, religious authority, or fear',
+      'order is maintained informally — by faction patronage, religious authority, or fear',
       'outside intervention is the only response to organized violence',
       'criminal opportunity rises silently',
     ],
@@ -118,7 +118,7 @@ function detectLegitimacyVsCrime(settlement, causal) {
       type: 'legitimacy_vs_crime_mismatch',
       classification: 'interesting_tension',
       description: 'High public legitimacy alongside high criminal opportunity',
-      explanation: 'The governing order enjoys public approval, yet criminal networks operate openly. The two coexist because crime serves the order, not against it - smuggling pays taxes, the watch takes a share, the council looks elsewhere.',
+      explanation: 'The governing order enjoys public approval, yet criminal networks operate openly. The two coexist because crime serves the order, not against it — smuggling pays taxes, the watch takes a share, the council looks elsewhere.',
       consequences: [
         'corruption ties governance to crime',
         'reform attempts threaten both',
@@ -167,7 +167,7 @@ function detectOrphanedFactionPower(settlement, profiles) {
 
 function detectSurplusButCritical(settlement, causal, capacities) {
   const out = [];
-  // food_security surplus but food_production capacity critical/collapsed - the
+  // food_security surplus but food_production capacity critical/collapsed — the
   // two layers tell different stories. Surface as a tension worth telling.
   for (const [substrate, capacity, pair] of [
     ['food_security',     'food_production', 'food'],
@@ -181,9 +181,9 @@ function detectSurplusButCritical(settlement, causal, capacities) {
         type: 'surplus_but_capacity_critical',
         classification: 'interesting_tension',
         description: `${substrate} reads surplus while ${capacity} capacity is ${capacityBand}`,
-        explanation: `The substrate shows abundance in ${pair}, but the underlying capacity model says supply is overwhelmed by demand. The surplus is being consumed in real time - what's measured is the flow, not the reserve.`,
+        explanation: `The substrate shows abundance in ${pair}, but the underlying capacity model says supply is overwhelmed by demand. The surplus is being consumed in real time — what's measured is the flow, not the reserve.`,
         consequences: [
-          `${pair} surplus is fragile - any shock removes the buffer immediately`,
+          `${pair} surplus is fragile — any shock removes the buffer immediately`,
           `the ${pair} system has no slack to absorb the next surprise`,
         ],
         references: [

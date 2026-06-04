@@ -16,31 +16,31 @@ import { ConfirmDialog } from './primitives/Dialog.jsx';
 // P104 / X-4 - Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
-// P106 / E-2 - Pending changes drawer (queue + cascade preview).
+// P106 / E-2 — Pending changes drawer (queue + cascade preview).
 // Self-gates inside on flag + pending queue presence.
 const PendingChangesBar = lazy(() => import('./dossier/PendingChangesBar.jsx'));
-// P130 / O-2 - First-dossier teaching callouts. Self-gates on
+// P130 / O-2 — First-dossier teaching callouts. Self-gates on
 // flag + signed-in + savedCount===0; renders nothing otherwise.
 const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.jsx'));
-// P135 / D-5 - Simulation drawer. Replaces the Simulation tab when
+// P135 / D-5 — Simulation drawer. Replaces the Simulation tab when
 // `simulationDrawer` flag is on. Self-mounted via a trigger button.
 const SimulationDrawer = lazy(() => import('./dossier/SimulationDrawer.jsx'));
-// P137 / HT-4 - "Copy as AI prompt" button. Self-gated by flag +
+// P137 / HT-4 — "Copy as AI prompt" button. Self-gated by flag +
 // signed-in tier; reserved as a power-user export so anon users
 // don't see the structured grounding.
 const AIPromptButton = lazy(() => import('./dossier/AIPromptButton.jsx'));
-// P142 / D-6 - Phone-optimized "at the table" view. Mounted only when
+// P142 / D-6 — Phone-optimized "at the table" view. Mounted only when
 // flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
 // moment the user opens it and never before.
 const TableView = lazy(() => import('./TableView.jsx'));
-// P131 / E-1 - Click-to-edit settlement name in the header.
+// P131 / E-1 — Click-to-edit settlement name in the header.
 // The pencil reveals on hover; commit queues a rename-settlement
 // edit through the pending-edits drawer (E-2).
 import EditableInline from './primitives/EditableInline.jsx';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
-// P129 / D-2 - Magazine-spread Summary V2. Self-gated by the
+// P129 / D-2 — Magazine-spread Summary V2. Self-gated by the
 // `summaryMagazineV2` flag in renderTab(); legacy SummaryTab still
 // loads in parallel so toggling the flag is instant.
 const SummaryTabV2 = lazy(() => import('./new/SummaryTabV2.jsx'));
@@ -60,7 +60,7 @@ const DMCompassTab = lazy(() => import('./new/tabs/DMCompassTab'));
 const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 
 
-// P102 / D-1 - Five thematic group tabs façade. Each group maps to the
+// P102 / D-1 — Five thematic group tabs façade. Each group maps to the
 // existing sub-tabs the dossier already renders; this is a navigation
 // layer, not a content change. Flag: `dossierFiveTabs`.
 //
@@ -147,24 +147,24 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const storeAiError = useStore(s => s.aiError);
   const storeAiProgress = useStore(s => s.aiProgress);
   const storeAiPartialFailure = useStore(s => s.aiPartialFailure);
-  // Tier 6.7 - runtime canon-preservation report from the AI overlay
+  // Tier 6.7 — runtime canon-preservation report from the AI overlay
   // verifier. Surfaces drift (invented entity, renamed proper noun,
   // overridden user edit) to the DM via the AiOverlayViolations card.
   const storeAiViolations = useStore(s => s.aiViolations);
   const clearAiViolations = useStore(s => s.clearAiViolations);
-  // Tier 5.1 - most-recent regeneration delta, populated by
+  // Tier 5.1 — most-recent regeneration delta, populated by
   // settlementSlice.regenSection. Persists until dismissed or until
   // the next regen overwrites it.
   const storeLastRegenerationDelta = useStore(s => s.lastRegenerationDelta);
   const clearLastRegenerationDelta = useStore(s => s.clearLastRegenerationDelta);
   const storeShowNarrative = useStore(s => s.showNarrative);
   const setShowNarrative = useStore(s => s.setShowNarrative);
-  // Pinned NPCs - AI-4a. The live save entry is the source of truth so the
+  // Pinned NPCs — AI-4a. The live save entry is the source of truth so the
   // pin icons stay in sync across tabs without an extra hydration hop.
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
   const pinNpc = useStore(s => s.pinNpc);
   const unpinNpc = useStore(s => s.unpinNpc);
-  // P131 / E-1 - inline-edit pipe. queueEdit goes into the
+  // P131 / E-1 — inline-edit pipe. queueEdit goes into the
   // PendingChangesBar's drawer where the cascade preview lives.
   const queueEdit = useStore(s => s.queueEdit);
 
@@ -179,7 +179,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const trackTabExplored = useStore(s => s.trackTabExplored);
   const onboardingActive = useStore(s => s.onboardingActive);
   const onboardingStep = useStore(s => s.onboardingStep);
-  // P142 / D-6 - Table View overlay state. The trigger lives in
+  // P142 / D-6 — Table View overlay state. The trigger lives in
   // SummaryTabV2 (routed through renderTab's onOpenTableView); this reads
   // the pref reactively so the overlay mounts/unmounts on toggle.
   const tableViewOpen = useStore(s => s.userPrefs?.tableViewOpen);
@@ -285,7 +285,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     ))
   ));
 
-  // P135 / D-5 - The simulation drawer trigger (below the header) is the
+  // P135 / D-5 — The simulation drawer trigger (below the header) is the
   // entry point, so drop the Simulation entry from the tab strip.
   const baseTabs = TABS.filter(t => {
     if (t.id === 'simulation') return false;
@@ -304,7 +304,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const visibleGroupEntries = Object.entries(TAB_GROUPS)
     .filter(([, group]) => group.tabs.some(tid => allTabs.some(t => t.id === tid)));
 
-  // P102 / D-1 - Five thematic group tabs. When the flag is on, render
+  // P102 / D-1 — Five thematic group tabs. When the flag is on, render
   // a group selector ABOVE the existing tab strip; clicking a group
   // filters the strip to its sub-tabs and selects the group's primary.
   // When the flag is off, the strip behaves as before (legacy 14 tabs).
@@ -370,7 +370,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'relationships': return React.createElement(RelationshipsTab, { settlement: s, narrativeNote: null });
       // Simulation = full PipelineRail (non-compact). Since the rail now
       // lives inside the dossier card, we surface the full pipeline view
-      // here - step labels + traces + the eventual causal expand-on-tap.
+      // here — step labels + traces + the eventual causal expand-on-tap.
       case 'simulation': return React.createElement('div', { style: { padding: '16px 18px' } },
         React.createElement(PipelineRail, { compact: false })
       );
@@ -378,7 +378,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     }
   };
 
-  // Header chips read from the raw settlement - mechanical facts shouldn't
+  // Header chips read from the raw settlement — mechanical facts shouldn't
   // change between views.
   const settlement = rawSettlement;
   const stressObj = settlement.stress
@@ -409,7 +409,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       return React.createElement('div', { style: { position: 'relative', display: 'flex', alignItems: 'center', gap: 6 } },
         React.createElement('button', {
           onClick: runNarrativeLayer,
-          title: 'Narrative Refinement Layer - turns the simulator output into prose that feels specific to this settlement. Uses credits.',
+          title: 'Narrative Refinement Layer — turns the simulator output into prose that feels specific to this settlement. Uses credits.',
           style: {
             ...btnBase,
             background: 'rgba(90,42,138,0.2)',
@@ -445,13 +445,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     }
 
     // State 3 or 4: narrative exists → toggle + regenerate pair
-    // (Includes the aiLoading && aiRegenerating case - buttons appear but the
+    // (Includes the aiLoading && aiRegenerating case — buttons appear but the
     // Regenerate one is disabled while the new narrative is brewing.)
     const inNarrativeView = storeShowNarrative;
     const regenerating = aiLoading && aiRegenerating;
 
     return React.createElement('div', { style: { position: 'relative', display: 'flex', alignItems: 'center', gap: 6 } },
-      // Toggle view button - free action
+      // Toggle view button — free action
       React.createElement('button', {
         onClick: () => setShowNarrative(!inNarrativeView),
         disabled: regenerating,
@@ -476,7 +476,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           : React.createElement(Eye, { size: 12 }),
         inNarrativeView ? 'View Raw Simulation' : 'View Narrative'
       ),
-      // Regenerate button - spends credits
+      // Regenerate button — spends credits
       React.createElement('button', {
         onClick: runNarrativeLayer,
         disabled: regenerating,
@@ -541,7 +541,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           style: { display: 'flex', alignItems: 'center', gap: 5, padding: '6px 14px', borderRadius: 5, background: 'rgba(196,154,60,0.15)', border: '1px solid rgba(196,154,60,0.3)', color: '#c49a3c', fontSize: FS.sm, fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }
         }, React.createElement(RefreshCw, { size: 12 }), ' ', REROLLABLE[selectedTab]),
         // ── AI Narrative Layer button group ──────────────────────────────────
-        // P121 / D-4 - When `narrativeLayerStrip` flag is on, the
+        // P121 / D-4 — When `narrativeLayerStrip` flag is on, the
         // narrative buttons move out of the header into a labeled strip
         // below (rendered further down). The header remains lean. When
         // the flag is off, the legacy header-button cluster renders.
@@ -550,7 +550,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         // buttons there or the free View Narrative/Raw toggle vanishes.
         (!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()
       ),
-      // P121 - Labeled narrative-layer strip. Below the header, above
+      // P121 — Labeled narrative-layer strip. Below the header, above
       // the tab strip. Lives in its own card with title + cost pill +
       // single primary action. The renderNarrativeButtons() output
       // sits inside the strip; the buttons themselves are unchanged.
@@ -575,7 +575,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         ),
         renderNarrativeButtons()
       ),
-      // Owner / visitor actions strip - share-to-gallery (owners) and
+      // Owner / visitor actions strip — share-to-gallery (owners) and
       // buy-this-dossier (anonymous visitors). Each child decides
       // whether to render based on auth/save state. Skipped entirely
       // in readOnly mode (public dossier viewer).
@@ -599,35 +599,35 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           galleryTags: liveSaveEntry?.gallery_tags,
           campaignState: liveSaveEntry?.campaignState,
         }),
-        // P135 / D-5 - "How this was simulated" trigger. Lives next to
+        // P135 / D-5 — "How this was simulated" trigger. Lives next to
         // BuyThisDossier so the user finds it as a "more info" affordance,
         // not a chrome surface.
         React.createElement(Suspense, { fallback: null },
           React.createElement(SimulationDrawer)
         ),
-        // P137 / HT-4 - "Copy as AI prompt" power-user export. Self-
+        // P137 / HT-4 — "Copy as AI prompt" power-user export. Self-
         // gates on flag + signed-in. Anon users see nothing.
         React.createElement(Suspense, { fallback: null },
           React.createElement(AIPromptButton, { settlement })
         )
       ),
-      // P104 - Welcome credit gift card. Self-gates inside; shown to
+      // P104 — Welcome credit gift card. Self-gates inside; shown to
       // signed-in users on their first saved dossier when their ledger
       // still has an available welcome grant.
       !readOnly && React.createElement(Suspense, { fallback: null },
         React.createElement(WelcomeCreditCard, { saveId })
       ),
-      // P106 / E-2 - Pending changes bar + cascade preview. Self-gates
+      // P106 / E-2 — Pending changes bar + cascade preview. Self-gates
       // inside; renders nothing when no edits are queued.
       !readOnly && React.createElement(Suspense, { fallback: null },
         React.createElement(PendingChangesBar)
       ),
-      // P130 / O-2 - First-dossier teaching callouts. Self-gates inside;
+      // P130 / O-2 — First-dossier teaching callouts. Self-gates inside;
       // shown to first-time signed-in users on their first generation.
       !readOnly && React.createElement(Suspense, { fallback: null },
         React.createElement(FirstDossierCallouts)
       ),
-      // P102 / D-1 - Five thematic group tab strip. Renders only when
+      // P102 / D-1 — Five thematic group tab strip. Renders only when
       // the dossierFiveTabs flag is on. Clicking a group selects its
       // first sub-tab and filters the strip below.
       fiveTabsEnabled && React.createElement('div', {
@@ -674,7 +674,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         ),
         React.createElement('button', { onClick: () => scroll(1), style: { position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: '#9c8068', padding: '0 8px' } }, React.createElement(ChevronRight, { size: 14 }))
       ),
-      // Unlock hint - shown only when this is an unsaved settlement (Create
+      // Unlock hint — shown only when this is an unsaved settlement (Create
       // page). Replaces the disabled "save to enable" chip that used to live
       // in the header next to the regen button. Single calm hint, single
       // place; clicked nowhere.
@@ -694,17 +694,17 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           ' to unlock AI Narrative & Daily Life prose.'
         )
       ),
-      // Content - dimmed overlay during regenerate so the user sees "something is changing"
+      // Content — dimmed overlay during regenerate so the user sees "something is changing"
       React.createElement('div', { style: { position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' } },
         // ── Banners above tab content ────────────────────────────────────────
         // Banner targeting:
-        //   • Thesis (identity-level prose) lives only on Summary & Overview -
+        //   • Thesis (identity-level prose) lives only on Summary & Overview —
         //     the high-altitude reads.
         //   • Per-tab notes (`narrativeNotes[selectedTab]`) replace the thesis
         //     on every functional tab so each tab gets a contextual lens
         //     instead of re-reading the same identity statement.
         //   • Daily Life, DM Compass, and Neighbours/Relationships carry
-        //     their own AI prose inside the tab - no banner.
+        //     their own AI prose inside the tab — no banner.
         // The partial-failure notice was lifted out of the thesis block so it
         // surfaces on every tab (it's a session-level concern, not an
         // identity-banner concern).
@@ -740,7 +740,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             )
           );
         })(),
-        // Partial-refinement notice - independent of which tab is active.
+        // Partial-refinement notice — independent of which tab is active.
         showNarrative && storeAiPartialFailure && storeAiPartialFailure.failedFields?.length > 0 && React.createElement('div', {
           style: {
             margin: '8px 18px 0', padding: '6px 10px',
@@ -750,7 +750,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             fontFamily: 'Nunito, sans-serif',
           }
         }, `Partial refinement: ${storeAiPartialFailure.failedFields.join(', ')} kept raw data.`),
-        // Tier 6.7 - runtime verifier findings. Surfaces hard
+        // Tier 6.7 — runtime verifier findings. Surfaces hard
         // violations (invented entity, renamed proper noun,
         // overwritten user edit) so the DM sees the AI output isn't
         // safe to ship without inspection.
@@ -758,14 +758,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           violations: storeAiViolations,
           onDismiss: clearAiViolations,
         }),
-        // Tier 5.1 - what changed in the most recent regenerate.
+        // Tier 5.1 — what changed in the most recent regenerate.
         // Visible regardless of narrative mode so the DM can audit
         // engine-side decisions independently of AI prose.
         React.createElement(RegenerationDeltaCard, {
           delta: storeLastRegenerationDelta,
           onDismiss: clearLastRegenerationDelta,
         }),
-        // Regenerate overlay - floats progress above the dimmed existing content
+        // Regenerate overlay — floats progress above the dimmed existing content
         aiRegenerating && React.createElement('div', {
           style: {
             position: 'absolute', top: 10, left: '50%', transform: 'translateX(-50%)',
@@ -792,7 +792,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         React.createElement('style', null, '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }')
       )
     ),
-    // P142 / D-6 - Table View overlay. Rendered as a sibling of the dossier
+    // P142 / D-6 — Table View overlay. Rendered as a sibling of the dossier
     // card so it takes over the full viewport. Gated on flag + the
     // tableViewOpen pref so the lazy chunk only loads when actually opened.
     flag('tableView') && tableViewOpen && React.createElement(Suspense, { fallback: null },

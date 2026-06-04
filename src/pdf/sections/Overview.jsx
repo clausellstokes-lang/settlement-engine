@@ -1,5 +1,5 @@
 /**
- * Overview - chapter 01. Systems Health Dashboard + crises + situation.
+ * Overview — chapter 01. Systems Health Dashboard + crises + situation.
  *
  * Dense, character-sheet style. Mirrors OverviewTab.jsx with full parity:
  *   - Identity strip
@@ -31,8 +31,8 @@ export function Overview({ settlement, narrativeMode, vm }) {
   const o = vm.overview;
   const id = vm.identity;
 
-  const populationFmt = id.population ? id.population.toLocaleString() : '-';
-  const ageFmt = id.age ? `${id.age} yr${id.age === 1 ? '' : 's'}` : '-';
+  const populationFmt = id.population ? id.population.toLocaleString() : '—';
+  const ageFmt = id.age ? `${id.age} yr${id.age === 1 ? '' : 's'}` : '—';
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -60,9 +60,9 @@ export function Overview({ settlement, narrativeMode, vm }) {
         stats={[
           { label: 'POPULATION', value: populationFmt, sublabel: id.tier },
           { label: 'AGE',        value: ageFmt, sublabel: id.terrain },
-          { label: 'PROSPERITY', value: cap(o.prosperity) || '-', tone: o.prosperityTone },
-          { label: 'SAFETY',     value: cap(o.safety) || '-', tone: o.safetyTone },
-          { label: 'STABILITY',  value: cap(o.stability) || '-' },
+          { label: 'PROSPERITY', value: cap(o.prosperity) || '—', tone: o.prosperityTone },
+          { label: 'SAFETY',     value: cap(o.safety) || '—', tone: o.safetyTone },
+          { label: 'STABILITY',  value: cap(o.stability) || '—' },
         ]}
       />
 
@@ -108,7 +108,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
       </Text>
       <View style={{ flexDirection: 'row', gap: space.md }}>
         <View style={{ flex: 1 }}>
-          {/* defense score bars - only render numeric entries (engine may
+          {/* defense score bars — only render numeric entries (engine may
               include object-shaped fields like magicDependency that aren't
               0-100 scores) */}
           {Object.entries(o.defenseScores || {})

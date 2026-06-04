@@ -2,11 +2,11 @@
  * Generation snapshot + invariant tests.
  *
  * What this proves:
- *   1. Determinism - same seed produces the same output (structurally).
+ *   1. Determinism — same seed produces the same output (structurally).
  *      We snapshot the SHAPE (counts, presence of key sections, basic
  *      stat ranges) rather than full prose, so cosmetic re-wordings
  *      don't fail every CI run.
- *   2. Invariants - every settlement, regardless of tier or culture,
+ *   2. Invariants — every settlement, regardless of tier or culture,
  *      satisfies the rules the engine implicitly relies on (no orphan
  *      references, no NaN populations, etc.). When these break, the
  *      downstream UI/PDF will silently misrender, which is the slow,
@@ -14,7 +14,7 @@
  *
  * The configs span the tier spectrum and a few dimensions known to
  * change behavior (terrain, trade-route access). We don't try to be
- * exhaustive - we want a fast tripwire, not a fixture museum.
+ * exhaustive — we want a fast tripwire, not a fixture museum.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -36,7 +36,7 @@ const FIXTURES = [
 ];
 
 function gen(config) {
-  // customContent: {} pins generation to a clean, headless state - no
+  // customContent: {} pins generation to a clean, headless state — no
   // store, no React, no app-specific custom institutions leaking in.
   return generateSettlementPipeline(config, null, { seed: SEED, customContent: {} });
 }
@@ -46,7 +46,7 @@ describe('determinism', () => {
     const a = gen(config);
     const b = gen(config);
     // The full settlement object includes generated NPCs whose IDs may embed
-    // timestamps or other entropy - compare structure, not deep equality.
+    // timestamps or other entropy — compare structure, not deep equality.
     expect(structureFingerprint(a)).toEqual(structureFingerprint(b));
   });
 });
@@ -83,7 +83,7 @@ describe('invariants', () => {
       }
     }
 
-    // No duplicate institution NAMES - would cause the toggle UI to merge
+    // No duplicate institution NAMES — would cause the toggle UI to merge
     // them and the generator's name-match lookups to behave non-deterministically.
     if (Array.isArray(s.institutions)) {
       const names = s.institutions.map(i => i.name?.toLowerCase()).filter(Boolean);

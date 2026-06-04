@@ -1,22 +1,22 @@
 /**
- * TerrainToolbar - contextual toolbar for MAP_MODES.TERRAIN.
+ * TerrainToolbar — contextual toolbar for MAP_MODES.TERRAIN.
  *
  * Most of FMG's per-feature editors (rivers, coastline, lakes) require a
- * clicked map element as their input - they read `d3.event.target` and break
+ * clicked map element as their input — they read `d3.event.target` and break
  * silently when called from a context-free toolbar button. So those buttons
  * have been removed; users double-click the feature directly on the map to
  * edit it (the hint at the right of the toolbar surfaces that workflow).
  *
  * What remains:
- *   • Heightmap - opens FMG's heightmap editor (works from a toolbar because
+ *   • Heightmap — opens FMG's heightmap editor (works from a toolbar because
  *                 editHeightmap defensively defaults its options arg).
- *   • Biomes    - split control: the main button toggles the visibility of
+ *   • Biomes    — split control: the main button toggles the visibility of
  *                 the biomes SVG layer; the adjacent pencil opens FMG's
  *                 native biomes editor (editBiomes) so users can repaint
  *                 biome regions even while the layer is on. Toggle is wired
  *                 to mapState.layers.nativeBiomes via the standard layer-
  *                 toggle path in WorldMap.jsx.
- *   • Undo / Redo - passed through to FMG's history.
+ *   • Undo / Redo — passed through to FMG's history.
  */
 
 import { Mountain, Trees as TreesIcon, Undo2, Redo2, Info, Pencil } from 'lucide-react';
@@ -41,7 +41,7 @@ export default function TerrainToolbar({ bridgeRef }) {
     }
   }
 
-  // Biomes is a pure visibility toggle - flipping the store flag fires the
+  // Biomes is a pure visibility toggle — flipping the store flag fires the
   // setFmgLayer effect in WorldMap.jsx, which shows/hides the #biomes SVG
   // group. No editor dialog, no per-feature selection required.
   function toggleBiomes() {
@@ -54,7 +54,7 @@ export default function TerrainToolbar({ bridgeRef }) {
   async function editBiomes() {
     const bridge = bridgeRef?.current;
     if (!bridge?.isReady) return;
-    // Make sure the layer is on first - editing a hidden layer is confusing.
+    // Make sure the layer is on first — editing a hidden layer is confusing.
     if (!nativeBiomes) toggleLayer('nativeBiomes');
     try {
       await bridge.activateTool('biomes');
@@ -86,7 +86,7 @@ export default function TerrainToolbar({ bridgeRef }) {
         onClick={() => activate(TERRAIN_TOOLS.HEIGHTMAP)}
         Icon={Mountain}
         label="Heightmap"
-        title="Open FMG's heightmap editor - paint terrain elevation."
+        title="Open FMG's heightmap editor — paint terrain elevation."
       />
       <div style={{ display: 'flex', alignItems: 'stretch', gap: 0 }}>
         <ToolButton
@@ -99,7 +99,7 @@ export default function TerrainToolbar({ bridgeRef }) {
         />
         <button
           onClick={editBiomes}
-          title="Open FMG's biomes editor - repaint biome regions or change classification."
+          title="Open FMG's biomes editor — repaint biome regions or change classification."
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             padding: '0 8px',
@@ -139,7 +139,7 @@ export default function TerrainToolbar({ bridgeRef }) {
         <Info size={12} style={{ flexShrink: 0 }} />
         <span>
           To edit a river, lake, or coastline, double-click it directly on
-          the map - FMG's per-feature editor will open in place.
+          the map — FMG's per-feature editor will open in place.
         </span>
       </div>
     </div>

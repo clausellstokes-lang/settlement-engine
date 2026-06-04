@@ -1,5 +1,5 @@
 /**
- * customContentSlice - User-created custom content persistence.
+ * customContentSlice — User-created custom content persistence.
  *
  * Stores custom institutions, resources, stressors, trade goods,
  * trade routes, power presets, and defense presets.
@@ -99,7 +99,7 @@ function makeId(prefix) {
  * Stable uid that survives Supabase round-trip.
  *
  * The Supabase row's `id` column is rewritten from a local string to a cloud
- * UUID after `add()` resolves - that breaks any dependency reference stored
+ * UUID after `add()` resolves — that breaks any dependency reference stored
  * by `id`. `localUid` lives inside the JSONB body, so it stays put. Used by
  * the customRegistry resolver as the canonical reference for custom items.
  */
@@ -124,7 +124,7 @@ export const createCustomContentSlice = (set, get) => ({
     const entry = {
       ...item,
       id: makeId(category.slice(0, 4)),
-      // Stable cross-cloud reference id - never reassigned. Preserved if the
+      // Stable cross-cloud reference id — never reassigned. Preserved if the
       // caller already supplied one (unlikely outside of test fixtures).
       localUid: item?.localUid || makeLocalUid(),
       isCustom: true,
@@ -233,7 +233,7 @@ export const createCustomContentSlice = (set, get) => ({
 
   /**
    * Migrate localStorage items to the cloud once when a user upgrades to premium.
-   * Idempotent - checks the migrated flag first.
+   * Idempotent — checks the migrated flag first.
    */
   migrateLocalCustomContentToCloud: async () => {
     if (!customContentService.isConfigured) return;
@@ -255,7 +255,7 @@ export const createCustomContentSlice = (set, get) => ({
         await get().loadCustomContentFromCloud();
         console.info(`Migrated ${inserted.length} custom items to the cloud.`);
       } else {
-        // Service has no bulk method - fall back to per-item add
+        // Service has no bulk method — fall back to per-item add
         for (const { category, item } of items) {
           await customContentService.add(category, item);
         }

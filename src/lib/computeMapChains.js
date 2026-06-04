@@ -1,11 +1,11 @@
 /**
- * computeMapChains - derives chain edges for the map overlay.
+ * computeMapChains — derives chain edges for the map overlay.
  *
  * Input:  savedSettlements[] + mapState.placements
  * Output: [{ id, good, color, path: [settlementId, settlementId] }, ...]
  *
  * Only pairs where BOTH settlements are actually placed on the map contribute
- * edges - otherwise there's nothing to draw between. Chains are pairwise
+ * edges — otherwise there's nothing to draw between. Chains are pairwise
  * (length 2 path); multi-hop tracing can come later if useful.
  *
  * ChainEdges.jsx consumes this shape directly via `useStore(s => s.supplyChains)`.
@@ -46,7 +46,7 @@ export function computeMapChains(saves, placements) {
 
       const edges = buildChainEdges(settA, settB);
       for (const e of edges) {
-        // buildChainEdges returns {from, to} as names - map back to ids.
+        // buildChainEdges returns {from, to} as names — map back to ids.
         const fromSave = byName.get(e.from);
         const toSave   = byName.get(e.to);
         if (!fromSave || !toSave) continue;

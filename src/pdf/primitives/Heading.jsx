@@ -1,5 +1,5 @@
 /**
- * Heading - sub-section headings inside a Section.
+ * Heading — sub-section headings inside a Section.
  *
  * Levels:
  *   1 → page_head (rare; usually the Section primitive owns level 1)

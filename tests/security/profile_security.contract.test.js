@@ -1,5 +1,5 @@
 /**
- * tests/security/profile_security.contract.test.js - Tier 0.6 contract.
+ * tests/security/profile_security.contract.test.js — Tier 0.6 contract.
  *
  * The actual escalation-prevention assertions live in pgTAP SQL at
  * supabase/tests/profile_security.sql and must be executed against a
@@ -17,7 +17,7 @@
  *     report the assertion failure)
  *
  * That's why the SQL file MUST also be run periodically via
- * `supabase test db` - typically pre-deploy. Once a Postgres test job
+ * `supabase test db` — typically pre-deploy. Once a Postgres test job
  * lands in CI, this contract test stays in place as the cheap guard.
  */
 
@@ -30,7 +30,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
 const SQL_FILE = join(ROOT, 'supabase', 'tests', 'profile_security.sql');
 
-describe('Tier 0.6 - profile_security.sql exists and is runnable', () => {
+describe('Tier 0.6 — profile_security.sql exists and is runnable', () => {
   it('the pgTAP test file is committed at supabase/tests/profile_security.sql', () => {
     expect(existsSync(SQL_FILE)).toBe(true);
   });
@@ -46,7 +46,7 @@ describe('Tier 0.6 - profile_security.sql exists and is runnable', () => {
     const planMatch = sql.match(/select plan\((\d+)\)/);
     expect(planMatch).toBeTruthy();
     const planCount = parseInt(planMatch[1], 10);
-    // Count meaningful assertion calls - throws_ok / is / isnt / lives_ok.
+    // Count meaningful assertion calls — throws_ok / is / isnt / lives_ok.
     // These are the pgTAP assertion verbs that increment the plan.
     const matches = sql.match(/^\s*select\s+(throws_ok|lives_ok|is|isnt)\s*\(/gm) || [];
     expect(matches.length).toBe(planCount);
@@ -58,7 +58,7 @@ describe('Tier 0.6 - profile_security.sql exists and is runnable', () => {
   });
 });
 
-describe('Tier 0.6 - every escalation path is asserted blocked', () => {
+describe('Tier 0.6 — every escalation path is asserted blocked', () => {
   let sql;
   beforeAll(() => { sql = readFileSync(SQL_FILE, 'utf8'); });
 
@@ -79,13 +79,13 @@ describe('Tier 0.6 - every escalation path is asserted blocked', () => {
   });
 
   it('asserts combined multi-column escalation is rejected (no bundling bypass)', () => {
-    // The assertion sets ALL four protected columns in one UPDATE - a
+    // The assertion sets ALL four protected columns in one UPDATE — a
     // common bypass attempt that the WITH CHECK clause must still block.
     expect(sql).toMatch(/role=['"]admin['"][\s\S]{0,200}tier=['"]premium['"][\s\S]{0,200}credits=[0-9]+[\s\S]{0,200}is_founder=true/);
   });
 });
 
-describe('Tier 0.6 - safe-path RPCs work for end users', () => {
+describe('Tier 0.6 — safe-path RPCs work for end users', () => {
   let sql;
   beforeAll(() => { sql = readFileSync(SQL_FILE, 'utf8'); });
 
@@ -118,7 +118,7 @@ describe('Tier 0.6 - safe-path RPCs work for end users', () => {
   });
 });
 
-describe('Tier 0.6 - admin RPCs require privilege', () => {
+describe('Tier 0.6 — admin RPCs require privilege', () => {
   let sql;
   beforeAll(() => { sql = readFileSync(SQL_FILE, 'utf8'); });
 
@@ -144,12 +144,12 @@ describe('Tier 0.6 - admin RPCs require privilege', () => {
   });
 });
 
-describe('Tier 0.6 - phase separation between regular and developer contexts', () => {
+describe('Tier 0.6 — phase separation between regular and developer contexts', () => {
   let sql;
   beforeAll(() => { sql = readFileSync(SQL_FILE, 'utf8'); });
 
   it('seeds both a regular user and a developer', () => {
-    // The two fixture rows use 'user' and 'developer' role strings -
+    // The two fixture rows use 'user' and 'developer' role strings —
     // verify both appear in the INSERT VALUES block.
     expect(sql).toMatch(/'user',\s*'free'/);
     expect(sql).toMatch(/'developer',\s*'premium'/);
@@ -171,7 +171,7 @@ describe('Tier 0.6 - phase separation between regular and developer contexts', (
   });
 });
 
-describe('Tier 0.6 - runner discovery + documentation', () => {
+describe('Tier 0.6 — runner discovery + documentation', () => {
   let sql;
   beforeAll(() => { sql = readFileSync(SQL_FILE, 'utf8'); });
 

@@ -2,7 +2,7 @@
  * stressGenerator.js
  * Stress condition selection and application.
  *
- * Generates the stress object(s) for a settlement - either from forced user
+ * Generates the stress object(s) for a settlement — either from forced user
  * selection, or probabilistically based on settlement characteristics.
  */
 
@@ -54,7 +54,7 @@ const buildStressEntry = (settlementName, stressType, stressData) => ({
  * @param {string} tier
  * @param {Object} config
  * @param {Array}  institutions
- * @returns {number} Adjusted probability (0-0.35)
+ * @returns {number} Adjusted probability (0–0.35)
  */
 const buildStressContext = (stressType, tier, config, institutions) => {
   let prob = STRESS_TYPE_MAP[stressType].probability;
@@ -157,7 +157,7 @@ const buildStressContext = (stressType, tier, config, institutions) => {
     if (military > 65)                  prob *= 0.5;
   }
 
-  // ── Monster pressure (timber boosts - forests hide monsters) ─────────────
+  // ── Monster pressure (timber boosts — forests hide monsters) ─────────────
   if (stressType === 'monster_pressure') {
     if (hasTimber)   prob *= 1.3;
     if (hasWalls)    prob *= 0.6;

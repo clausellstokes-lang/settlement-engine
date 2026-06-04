@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * Tier 3.6 - Map bridge protocol contract test.
+ * Tier 3.6 — Map bridge protocol contract test.
  *
  * Pins the FMG iframe message contract:
  *   - Every typed command exists on the bridge surface and sends the
@@ -48,7 +48,7 @@ const CANONICAL_COMMANDS = [
 ];
 
 // ── Push events the bridge MUST allow listeners to subscribe to.
-// (No central registry on the bridge - pulled from real usage.) ────────
+// (No central registry on the bridge — pulled from real usage.) ────────
 
 const PUSH_EVENTS = [
   'burgSelected',
@@ -98,7 +98,7 @@ afterEach(() => {
 
 // ── Catalog completeness ──────────────────────────────────────────────
 
-describe('Tier 3.6 - map bridge command catalog', () => {
+describe('Tier 3.6 — map bridge command catalog', () => {
   test('every canonical command method exists on the bridge', () => {
     for (const { method } of CANONICAL_COMMANDS) {
       expect(typeof rig.bridge[method], `method ${method}`).toBe('function');
@@ -124,7 +124,7 @@ describe('Tier 3.6 - map bridge command catalog', () => {
 
 // ── Envelope shape ────────────────────────────────────────────────────
 
-describe('Tier 3.6 - outgoing envelope shape', () => {
+describe('Tier 3.6 — outgoing envelope shape', () => {
   test('every command attaches a _rid string to the payload', () => {
     for (const { method } of CANONICAL_COMMANDS) {
       rig.sent.length = 0;
@@ -160,7 +160,7 @@ describe('Tier 3.6 - outgoing envelope shape', () => {
 
 // ── Reply envelope shape ──────────────────────────────────────────────
 
-describe('Tier 3.6 - reply envelope shape', () => {
+describe('Tier 3.6 — reply envelope shape', () => {
   test('successful reply { type: fmg:reply, _rid, ... } resolves the promise', async () => {
     const promise = rig.bridge.getViewport();
     const msg = rig.sent[rig.sent.length - 1];
@@ -191,7 +191,7 @@ describe('Tier 3.6 - reply envelope shape', () => {
 
 // ── Push events ───────────────────────────────────────────────────────
 
-describe('Tier 3.6 - push event surface', () => {
+describe('Tier 3.6 — push event surface', () => {
   test('every documented push event can be subscribed to', () => {
     for (const event of PUSH_EVENTS) {
       const unsub = rig.bridge.on(event, () => {});
@@ -241,7 +241,7 @@ describe('Tier 3.6 - push event surface', () => {
 
 // ── Queueing before ready ─────────────────────────────────────────────
 
-describe('Tier 3.6 - queueing before ready', () => {
+describe('Tier 3.6 — queueing before ready', () => {
   test('commands issued before ready do not post', () => {
     // Use a fresh rig that has NOT yet received fmg:ready.
     const sent = [];
@@ -341,7 +341,7 @@ describe('Tier 3.6 - queueing before ready', () => {
 
 // ── Origin and source filtering ───────────────────────────────────────
 
-describe('Tier 3.6 - origin / source filtering (security)', () => {
+describe('Tier 3.6 — origin / source filtering (security)', () => {
   test('drops messages from a different origin', async () => {
     const promise = rig.bridge.getViewport();
     const msg = rig.sent[rig.sent.length - 1];
@@ -399,7 +399,7 @@ describe('Tier 3.6 - origin / source filtering (security)', () => {
 
 // ── Lifecycle: destroy ────────────────────────────────────────────────
 
-describe('Tier 3.6 - destroy()', () => {
+describe('Tier 3.6 — destroy()', () => {
   test('rejects all pending promises with "Bridge destroyed"', async () => {
     const p = rig.bridge.getViewport();
     rig.bridge.destroy();
@@ -432,7 +432,7 @@ describe('Tier 3.6 - destroy()', () => {
 
 // ── Timeout behaviour ─────────────────────────────────────────────────
 
-describe('Tier 3.6 - RPC timeout', () => {
+describe('Tier 3.6 — RPC timeout', () => {
   test('a call rejects with "RPC timeout" if no reply arrives', async () => {
     vi.useFakeTimers();
     try {
@@ -483,7 +483,7 @@ describe('Tier 3.6 - RPC timeout', () => {
 
 // ── notify (fire-and-forget) ──────────────────────────────────────────
 
-describe('Tier 3.6 - notify (fire-and-forget)', () => {
+describe('Tier 3.6 — notify (fire-and-forget)', () => {
   test('notify returns true after ready', () => {
     expect(rig.bridge.notify('settlementEngine:viewportSync', { cx: 1 })).toBe(true);
     const msg = rig.sent[rig.sent.length - 1];
@@ -514,7 +514,7 @@ describe('Tier 3.6 - notify (fire-and-forget)', () => {
 
 // ── isReady introspection ─────────────────────────────────────────────
 
-describe('Tier 3.6 - isReady', () => {
+describe('Tier 3.6 — isReady', () => {
   test('false before ready signal', () => {
     const fakeIframe = { contentWindow: { postMessage: () => {} } };
     const bridge = createMapBridge(() => fakeIframe);
@@ -530,7 +530,7 @@ describe('Tier 3.6 - isReady', () => {
 
 // ── _rid counter monotonicity ─────────────────────────────────────────
 
-describe('Tier 3.6 - _rid generation', () => {
+describe('Tier 3.6 — _rid generation', () => {
   test('rid format matches rpc_<timestamp>_<seq>', () => {
     rig.sent.length = 0;
     rig.bridge.getViewport().catch(() => {});

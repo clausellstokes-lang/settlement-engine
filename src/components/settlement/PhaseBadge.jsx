@@ -1,12 +1,12 @@
 /**
- * PhaseBadge - Draft / Canon indicator + canonize toggle.
+ * PhaseBadge — Draft / Canon indicator + canonize toggle.
  *
  * Sits in the SettlementDetail header. Communicates the current
  * lifecycle phase ("draft = tinkering OK" / "canon = changes get
  * timeline entries") and exposes one button to advance the phase.
  *
  * Going from canon → draft is exposed as "Reset to Draft" with a
- * confirm - that path discards the event log, so it's easy to do
+ * confirm — that path discards the event log, so it's easy to do
  * accidentally if we don't gate it.
  */
 

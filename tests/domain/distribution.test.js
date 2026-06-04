@@ -1,5 +1,5 @@
 /**
- * tests/domain/distribution.test.js - Distributional invariants.
+ * tests/domain/distribution.test.js — Distributional invariants.
  *
  * Tier 3.2 of the roadmap. Generation is stochastic; assertions about
  * single seeds (in causalChains.test.js) can catch obvious failures but
@@ -15,7 +15,7 @@
  * Single-seed tests can't answer those. Sample size can.
  *
  * Performance budget: every test generates N settlements through the
- * full pipeline. We use N=40 here - enough for stable proportions on
+ * full pipeline. We use N=40 here — enough for stable proportions on
  * "common" categories (95% CI roughly ±15%), small enough that the
  * suite still runs in seconds. Tests assert generous thresholds that
  * give wide margin against random variation; if any one fails it's a
@@ -76,7 +76,7 @@ function averageOf(settlements, getNumber) {
 // the most basic distributional sanity check; if it fails, the engine's
 // tier system itself has regressed.
 
-describe('tier scaling - population grows with tier', () => {
+describe('tier scaling — population grows with tier', () => {
   it('towns average more institutions than villages', () => {
     const villages = generateMany({ settType: 'village', culture: 'germanic' });
     const towns    = generateMany({ settType: 'town',    culture: 'germanic' });
@@ -86,7 +86,7 @@ describe('tier scaling - population grows with tier', () => {
 
   it('cities average a higher population than towns', () => {
     // We deliberately don't assert `cities have more institutions than
-    // towns` - the UPGRADE_CHAINS dedup pass in assembleInstitutions
+    // towns` — the UPGRADE_CHAINS dedup pass in assembleInstitutions
     // collapses lesser → greater pairs (e.g. "Town watch" + "Professional
     // city watch" → just the greater), so cities legitimately carry a
     // tighter institution count even though they're structurally larger.
@@ -148,7 +148,7 @@ describe('trade-route gating', () => {
         && i.tradeRouteRequired.length > 0
         && !i.tradeRouteRequired.includes('none')
         // Allow if the institution has a fallback terrainAccess that
-        // matches the settlement's terrain - that's a valid bypass
+        // matches the settlement's terrain — that's a valid bypass
         // path in the assembleInstitutions logic.
         && !(Array.isArray(i.terrainAccess) && i.terrainAccess.length > 0))
     );
@@ -244,7 +244,7 @@ describe('faction prevalence and archetype coverage', () => {
       }
     }
     // The sample should cover at least three distinct archetypes
-    // across 40 towns - if it doesn't, archetype detection has narrowed
+    // across 40 towns — if it doesn't, archetype detection has narrowed
     // suspiciously.
     expect(archetypes.size).toBeGreaterThanOrEqual(3);
     // Every archetype must be from the canonical set.
@@ -260,7 +260,7 @@ describe('faction prevalence and archetype coverage', () => {
   it('government or merchant archetype appears in at least 90% of towns', () => {
     // Every town has SOME form of formal authority, but the classifier
     // sometimes correctly routes "Merchant Guild Council" / "Guild
-    // Authority" to the merchant archetype rather than government -
+    // Authority" to the merchant archetype rather than government —
     // both are legitimate governance forms. So the union of the two
     // is the real "has formal authority" prevalence.
     const towns = generateMany({ settType: 'town', culture: 'germanic' });
@@ -275,7 +275,7 @@ describe('faction prevalence and archetype coverage', () => {
 // ── Supply-chain prevalence (Tier 4.3) ──────────────────────────────────
 // Every settlement of meaningful size should have at least one active
 // supply chain. The distribution of chain statuses should skew heavily
-// toward 'stable' on a healthy generation - most chains aren't disrupted
+// toward 'stable' on a healthy generation — most chains aren't disrupted
 // out of the gate. Disruption is reserved for events / active conditions.
 
 describe('supply-chain prevalence and status distribution', () => {
@@ -296,7 +296,7 @@ describe('supply-chain prevalence and status distribution', () => {
   it('on healthy generation, at least half of chains are stable', () => {
     // Status remap: legacy 'operational' / 'running' / 'entrepot' all
     // become canonical 'stable'. Cities legitimately carry more chains
-    // AND more disruption - the deeper supply graphs mean more
+    // AND more disruption — the deeper supply graphs mean more
     // dependencies AND more places to be strained. The "at least half"
     // floor catches a regression where stable chains disappear, but
     // tolerates the engine's real ratio (~53% on the current sample).
@@ -411,7 +411,7 @@ describe('history beat prevalence', () => {
   });
 
   it('every settlement produces at least three non-null beats out of seven', () => {
-    // A reasonable richness floor - engine output should never produce
+    // A reasonable richness floor — engine output should never produce
     // a settlement with fewer than three beats. Cities reliably produce
     // five or more.
     const towns = generateMany({ settType: 'town', culture: 'germanic' });

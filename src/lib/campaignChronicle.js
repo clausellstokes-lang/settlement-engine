@@ -1,9 +1,9 @@
 /**
- * lib/campaignChronicle.js - client side of the AI campaign chronicle.
+ * lib/campaignChronicle.js — client side of the AI campaign chronicle.
  *
  * Builds the deterministic grounding from the campaign's Wizard News +
  * world state, then POSTs it to the `generate-chronicle` edge function (which
- * holds the Anthropic key). The browser never calls Anthropic directly - this
+ * holds the Anthropic key). The browser never calls Anthropic directly — this
  * only ever fetches our own endpoint (enforced by clientAiBoundary.contract).
  */
 
@@ -29,7 +29,7 @@ export async function requestCampaignChronicle({ campaign, snapshot, tick = null
   });
 
   if (!isConfigured || !CHRONICLE_URL) {
-    // No backend wired - return the grounding so a caller can preview or the
+    // No backend wired — return the grounding so a caller can preview or the
     // UI can show a "configure VITE_GENERATE_CHRONICLE_URL" hint.
     return { error: 'chronicle endpoint not configured', grounding };
   }

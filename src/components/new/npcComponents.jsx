@@ -9,7 +9,7 @@ import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
- * in supabase/functions/generate-narrative/index.ts - `npc.id` when defined,
+ * in supabase/functions/generate-narrative/index.ts — `npc.id` when defined,
  * otherwise `npc.name`. Kept at module scope so every consumer agrees.
  */
 function npcPinKey(npc) {
@@ -131,9 +131,9 @@ export function ConflictCard({conflict:c}) {
 }
 
 
-// Inline NPC card - replaces the removed NPCCard export
+// Inline NPC card — replaces the removed NPCCard export
 function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
-  // Tier 5.4 - manual prose editing. editMode is the global toggle on
+  // Tier 5.4 — manual prose editing. editMode is the global toggle on
   // the dossier header. The save/revert handlers look up the NPC's
   // index by id at edit time so the action targets the right entity
   // even if the npcs array has been re-sorted upstream.
@@ -175,7 +175,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const pinKey = npcPinKey(npc);
   const pinAvailable = typeof onTogglePin === 'function' && pinKey != null;
   const isPinned = pinAvailable && pinnedIds instanceof Set && pinnedIds.has(pinKey);
-  const pinColor = '#6a2a9a'; // purple - ties visually to the narrative accent.
+  const pinColor = '#6a2a9a'; // purple — ties visually to the narrative accent.
 
   return (
     <div style={{
@@ -183,7 +183,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
       border:`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`,
       borderLeft:`3px solid ${isPinned ? pinColor : color}`,
       borderRadius:6,marginBottom:6,overflow:'hidden',
-      // Subtle tint when pinned - mirrors the narrative panel's purple wash.
+      // Subtle tint when pinned — mirrors the narrative panel's purple wash.
       boxShadow: isPinned ? `inset 2px 0 0 rgba(106,42,154,0.08)` : 'none',
     }}>
       <button onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
@@ -202,7 +202,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
             onClick={(e)=>{ e.stopPropagation(); onTogglePin(pinKey); }}
             onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); onTogglePin(pinKey); } }}
             title={isPinned
-              ? 'Pinned - this NPC will not be rewritten by regenerate/progress.'
+              ? 'Pinned — this NPC will not be rewritten by regenerate/progress.'
               : 'Pin this NPC so regenerate/progress leaves it unchanged.'}
             style={{
               display:'inline-flex',alignItems:'center',justifyContent:'center',
@@ -250,7 +250,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
                 editMode={editMode}
                 onSave={onSaveSecret}
                 onRevert={onRevertSecret}
-                placeholder="Add a secret..."
+                placeholder="Add a secret…"
                 ariaLabel={`Secret for ${npc.name}`}
                 textStyle={{fontSize:FS.xs,color:'#3d2b1a'}}
               />

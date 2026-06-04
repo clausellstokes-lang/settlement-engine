@@ -1,5 +1,5 @@
 /**
- * domain/events/applyEvent.js - Commit an event to the settlement.
+ * domain/events/applyEvent.js — Commit an event to the settlement.
  *
  * Phase 18 (Tier 2.2): this is now a thin wrapper around
  * `runEventPipeline`. Both previewEvent and applyEvent run the same
@@ -7,7 +7,7 @@
  * apply delivers. The only thing apply does differently is persist
  * the mutated settlement and write the EventLogEntry.
  *
- * Pure function - no store, no React.
+ * Pure function — no store, no React.
  */
 
 import { deriveSystemState } from '../state/deriveSystemState.js';
@@ -39,7 +39,7 @@ export function applyEvent({ settlement, systemState, event, now = null }) {
     deltas: result.systemStateDeltas,
     factionResponses: result.factionResponses,
     narrativeSummary: result.narrativeSummary,
-    // Phase 18 additions - the substrate-layer delta and the structured
+    // Phase 18 additions — the substrate-layer delta and the structured
     // faction-relationship deltas are persisted alongside the legacy
     // 4-dim delta, so the timeline UI / AI overlay can read either.
     causalStateDeltas: result.causalStateDeltas,

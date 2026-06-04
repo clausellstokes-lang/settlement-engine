@@ -1,5 +1,5 @@
 /**
- * domain/regenerationDelta.js - Structured diff between two settlements.
+ * domain/regenerationDelta.js — Structured diff between two settlements.
  *
  * Tier 5.1 of the roadmap. After a user change + rerun, the UI needs
  * to show what changed at every layer: substrate variables, capacity
@@ -97,7 +97,7 @@ export function deriveRegenerationDelta(before, after) {
   // that a remaining (preserved) entity's references[] points to.
   // We don't run full reference walk here (would require explaining
   // every preserved entity, expensive); instead we just surface the
-  // removed ids - consumers that need full link analysis can call
+  // removed ids — consumers that need full link analysis can call
   // Phase 19 explainEntity on each.
   const brokenDependencies = removed.map(e => e.id);
 

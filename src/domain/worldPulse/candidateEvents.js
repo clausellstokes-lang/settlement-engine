@@ -11,7 +11,7 @@ function stablePart(value) {
 
 /**
  * World volatility scales every candidate's roll probability. `normal` is 1.0
- * (a no-op, so default behavior - and the determinism fixtures - are
+ * (a no-op, so default behavior — and the determinism fixtures — are
  * unchanged); `calm` dampens the world, `turbulent` makes events more likely.
  * A DM-facing dial set on campaign.worldState.volatility.
  */

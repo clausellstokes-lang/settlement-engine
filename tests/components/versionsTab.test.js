@@ -1,5 +1,5 @@
 /**
- * versionsTab.test.js - Contract over the pure timeline-builder.
+ * versionsTab.test.js — Contract over the pure timeline-builder.
  *
  * VersionsTab renders an interactive timeline; the pure
  * `buildVersionTimeline()` extracts entries from a save's campaignState

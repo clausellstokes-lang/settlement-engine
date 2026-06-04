@@ -1,5 +1,5 @@
 /**
- * uiSlice.test.js - P142 / D-6 contract over the transient UI-prefs bag.
+ * uiSlice.test.js — P142 / D-6 contract over the transient UI-prefs bag.
  *
  * Pins the small store surface the Table View (and any future transient
  * pref) rides on:
@@ -7,7 +7,7 @@
  *   • setUserPref(key, value) writes through, including brand-new keys.
  *   • getUserPref reads the same value back.
  *
- * Built from createUiSlice alone - the slice has no cross-slice reads, so a
+ * Built from createUiSlice alone — the slice has no cross-slice reads, so a
  * one-slice store is the whole contract.
  */
 
@@ -19,7 +19,7 @@ import { createUiSlice } from '../../src/store/uiSlice.js';
 
 const makeStore = () => create(immer((...a) => ({ ...createUiSlice(...a) })));
 
-describe('uiSlice - transient UI prefs', () => {
+describe('uiSlice — transient UI prefs', () => {
   let store;
   beforeEach(() => { store = makeStore(); });
 

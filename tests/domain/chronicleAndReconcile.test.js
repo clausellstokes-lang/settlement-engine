@@ -45,7 +45,7 @@ describe('pulse ↔ local reconciliation', () => {
     expect(isWorldAuthoredCondition({ triggeredAt: { sourceEventType: 'PARTY_ACTION' } })).toBe(true);
     expect(isWorldAuthoredCondition({ archetype: 'plague' })).toBe(false);
     // propagation.js stamps sourceEventType as the change kind (route_cut) and
-    // the cause source as the channel id - neither world/party-prefixed - so it
+    // the cause source as the channel id — neither world/party-prefixed — so it
     // must be recognized via the regional_* archetype.
     expect(isWorldAuthoredCondition({
       archetype: 'regional_route_disruption',

@@ -1,23 +1,23 @@
 /**
- * SummaryTabV2.jsx - P129 / D-2 magazine-spread Summary.
+ * SummaryTabV2.jsx — P129 / D-2 magazine-spread Summary.
  *
  * Two-column layout:
- *   LEFT (flex 1.2) - "The town in 4 sentences"
+ *   LEFT (flex 1.2) — "The town in 4 sentences"
  *     Serif elevator pitch with an italic accent line on the key tension.
  *     Pulls from settlement.pressureSentence + arrivalScene, with
  *     the italic accent picked from settlement.pressureSentence
  *     itself (the sentence the engine already wrote as the
  *     headline tension).
  *
- *   RIGHT (flex 0.95) - "Tonight at the table"
+ *   RIGHT (flex 0.95) — "Tonight at the table"
  *     NPC / Hook / Twist / Red flag cards composed by
  *     domain/summary/tonightAtTheTable.js. Color-coded left borders
  *     mirror the canvas mockup.
  *
- *   FOOTER - "📱 Open in Table View" button that triggers the
+ *   FOOTER — "📱 Open in Table View" button that triggers the
  *     P142 / D-6 Table View flag in user preferences.
  *
- * Self-gates upstream - OutputContainer renders SummaryTabV2 vs the
+ * Self-gates upstream — OutputContainer renders SummaryTabV2 vs the
  * legacy SummaryTab based on flag('summaryMagazineV2').
  *
  * Read-only on the props. No store mutation, no state. The user-edits
@@ -61,7 +61,7 @@ const KIND_LABEL = {
 };
 
 /**
- * Pick the italic accent line - the one phrase that names the headline
+ * Pick the italic accent line — the one phrase that names the headline
  * tension. We prefer pressureSentence if it's a single sentence with a
  * clear "because" / "stopped pretending" / "runs a quiet" pattern,
  * else we just take the first sentence of pressureSentence.
@@ -69,7 +69,7 @@ const KIND_LABEL = {
 function pickAccentLine(pressureSentence) {
   if (!pressureSentence) return null;
   const trimmed = String(pressureSentence).trim();
-  // Try to find an italicizable clause - the part after a comma or
+  // Try to find an italicizable clause — the part after a comma or
   // dash if there is one, which often carries the punch.
   const dashMatch = trimmed.match(/-\s*([^.!?-]+[.!?]?)/);
   if (dashMatch && dashMatch[1].length > 12 && dashMatch[1].length < 90) {
@@ -83,7 +83,7 @@ function pickAccentLine(pressureSentence) {
 
 export default function SummaryTabV2({ settlement, onOpenTableView }) {
   // NOTE: keep ALL hooks above any early return. React Hooks must be
-  // called in the same order every render - gating the useMemos behind
+  // called in the same order every render — gating the useMemos behind
   // an early `if (!settlement)` would create a hooks-order violation
   // flagged by react-hooks/rules-of-hooks.
   const tableEntries = useMemo(
@@ -119,7 +119,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
       fontFamily: sans,
       background: swatch.white,
     }}>
-      {/* Header band - name + meta */}
+      {/* Header band — name + meta */}
       <header style={{
         padding: '16px 18px 12px',
         background: PARCH,
@@ -154,7 +154,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         padding: '16px 18px',
         alignItems: 'flex-start',
       }}>
-        {/* LEFT - identity prose */}
+        {/* LEFT — identity prose */}
         <div style={{ flex: 1.2, minWidth: 0 }}>
           <div style={{
             fontSize: FS.micro, fontWeight: 800,
@@ -202,7 +202,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
           )}
         </div>
 
-        {/* RIGHT - Tonight at the table */}
+        {/* RIGHT — Tonight at the table */}
         <aside style={{
           flex: 0.95,
           padding: 12,

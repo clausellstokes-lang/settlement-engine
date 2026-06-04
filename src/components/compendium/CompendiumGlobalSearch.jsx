@@ -1,10 +1,10 @@
 /**
- * CompendiumGlobalSearch.jsx - P139 / CP-4 global type-ahead search.
+ * CompendiumGlobalSearch.jsx — P139 / CP-4 global type-ahead search.
  *
  * Sits above the Compendium tab bar. Type once, search every built-in
  * section; pick a result and the parent (CompendiumPanel) switches to
  * the owning tab and scrolls to the section. Distinct from the per-tab
- * "Search..." box, which only filters the tab you're already on.
+ * "Search…" box, which only filters the tab you're already on.
  *
  * Keyboard: ↑/↓ move the highlight, Enter selects, Esc closes. Mouse:
  * hover highlights, click selects, click-outside closes.
@@ -103,7 +103,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           onChange={(e) => { setQuery(e.target.value); setActive(0); setOpen(true); }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
-          placeholder="Search the whole Compendium..."
+          placeholder="Search the whole Compendium…"
           aria-label="Search the whole Compendium"
           role="combobox"
           aria-expanded={showDropdown}

@@ -1,5 +1,5 @@
 /**
- * PricingPage.jsx - Public pricing page.
+ * PricingPage.jsx — Public pricing page.
  *
  * Reads the catalog from `src/config/pricing.js` and the strings from
  * `src/copy/`. Hard-coding nothing here means a price/copy/tier change
@@ -14,7 +14,7 @@
  * SEO note: this is one of the public surfaces. Eventually the route
  * needs a proper crawlable URL (currently it's a state-driven view).
  * Until the SPA gets split into per-page routes, the canonical link
- * is /?view=pricing - set by the footer + header CTA.
+ * is /?view=pricing — set by the footer + header CTA.
  */
 
 import { useEffect, useState } from 'react';
@@ -32,7 +32,7 @@ import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, 
 import FounderBadge from './primitives/FounderBadge.jsx';
 
 // Tier-icon mapping. Kept here (not in pricing config) because icons
-// are a UI concern - the config stays headless.
+// are a UI concern — the config stays headless.
 const TIER_ICONS = {
   wanderer:     MapIcon,
   cartographer: Sparkles,
@@ -55,7 +55,7 @@ function FeatureRow({ children }) {
 function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderSeatsRemaining, audienceLine }) {
   const Icon = TIER_ICONS[tier.key] || Sparkles;
   const features = tx(`pricing.tiers.${tier.key}.features`) || [];
-  // P122 / X-10 - Prefer audience-led pitch over generic tagline when the
+  // P122 / X-10 — Prefer audience-led pitch over generic tagline when the
   // flag is on and a per-audience line is available. Falls back cleanly
   // to the legacy tagline.
   const tagline  = audienceLine || t(`pricing.tiers.${tier.key}.tagline`);
@@ -153,7 +153,7 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
           letterSpacing: '0.02em',
         }}
       >
-        {loading ? 'Redirecting...' : ctaLabel}
+        {loading ? 'Redirecting…' : ctaLabel}
       </button>
       {ctaSub && (
         <p style={{
@@ -220,7 +220,7 @@ export default function PricingPage({ onNavigate }) {
   const tiers = getVisibleTiers();
   const packs = Object.values(getActivePacks());
 
-  // P122 / X-10 - Audience-led pricing pitch. The same tier gets a
+  // P122 / X-10 — Audience-led pricing pitch. The same tier gets a
   // different lead line depending on the current reader's archetype.
   const copy = useCopy();
   const audienceLineFor = (tierKey) => {
@@ -230,7 +230,7 @@ export default function PricingPage({ onNavigate }) {
   };
 
   // Tier 7.6: live founder seat counter. Null until the RPC resolves
-  // OR on any failure - TierCard falls back to "Limited to 500 seats"
+  // OR on any failure — TierCard falls back to "Limited to 500 seats"
   // when null, so a transient backend hiccup doesn't break the page.
   const [founderSeatsRemaining, setFounderSeatsRemaining] = useState(null);
   useEffect(() => {
@@ -241,7 +241,7 @@ export default function PricingPage({ onNavigate }) {
         const remaining = await fetchFounderSeatsRemaining();
         if (!cancelled) setFounderSeatsRemaining(remaining);
       } catch {
-        // Lazy-import or fetch failure - leave null and show the
+        // Lazy-import or fetch failure — leave null and show the
         // safe fallback copy.
       }
     })();
@@ -460,7 +460,7 @@ export default function PricingPage({ onNavigate }) {
               cursor: 'pointer', opacity: loading === SINGLE_DOSSIER.key ? 0.6 : 1,
             }}
           >
-            {loading === SINGLE_DOSSIER.key ? 'Redirecting...' : t('pricing.singleDossier.cta')}
+            {loading === SINGLE_DOSSIER.key ? 'Redirecting…' : t('pricing.singleDossier.cta')}
           </button>
         </section>
       )}

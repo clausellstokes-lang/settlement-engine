@@ -1,6 +1,6 @@
 /**
  * Guard against the engine's deepest fragility: institution names are coupled
- * across several maps by EXACT STRING - institutionalCatalog (definitions),
+ * across several maps by EXACT STRING — institutionalCatalog (definitions),
  * spatialData's GATE_FEATURES / INSTITUTION_SPATIAL (structural requirements),
  * and structuralValidator's SPATIAL_FEATURES (greater→implied-lesser). A rename
  * or typo in one place silently breaks the cross-reference with no type error
@@ -9,9 +9,9 @@
  * This pins it: every institution name *referenced* as a requirement or
  * implication must be *defined* somewhere in the union of those maps.
  *
- * When this fails you've either (a) typo'd / renamed a name on one side only -
- * fix the data so both sides agree - or (b) added a genuinely new structural-
- * only feature - extend the defined set or KNOWN_UNRESOLVED below.
+ * When this fails you've either (a) typo'd / renamed a name on one side only —
+ * fix the data so both sides agree — or (b) added a genuinely new structural-
+ * only feature — extend the defined set or KNOWN_UNRESOLVED below.
  */
 import { describe, it, expect } from 'vitest';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
@@ -27,9 +27,9 @@ import { SPATIAL_FEATURES } from '../../src/generators/structuralValidator.js';
 // so the requirement can never resolve. Fixing them is a domain/behavioral call
 // (which name was intended?), so they're quarantined here rather than guessed:
 //   - "Arcane university" / "Magical academy"  (required by "Magic item
-//     consignment") - no such institutions; likely meant "Academy of magic"
+//     consignment") — no such institutions; likely meant "Academy of magic"
 //     and/or "Mages' guild".
-//   - "River access"  (required by "Tanners") - an ACCESS type, not an
+//   - "River access"  (required by "Tanners") — an ACCESS type, not an
 //     institution; belongs in `requiresAccess: ['river']`, not `requires`.
 // Remove each entry as the underlying data is fixed (the test enforces that:
 // a fixed name left in this list will fail).

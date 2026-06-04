@@ -1,5 +1,5 @@
 /**
- * hooks/useRoute.js - path-based routing for the App view machine.
+ * hooks/useRoute.js — path-based routing for the App view machine.
  *
  * The app has ~18 destinations and a single navigation chokepoint (App's
  * `setView` / the `onNavigate` prop threaded into every panel). Rather than
@@ -10,7 +10,7 @@
  *     navigation event) and resolves the current URL to { view, params }.
  *   - `navigate(view, opts)` is the imperative entry point. It's signature-
  *     compatible with the old `setView(viewString)`, so existing call sites
- *     (`onNavigate('settlements')`, `setView('account')`) keep working - they
+ *     (`onNavigate('settlements')`, `setView('account')`) keep working — they
  *     just push a path now.
  *
  * pushState/replaceState do NOT emit popstate, so navigate() dispatches a
@@ -48,7 +48,7 @@ function emit() {
 }
 
 /**
- * Imperative navigation. `view` is an internal view id - the same strings
+ * Imperative navigation. `view` is an internal view id — the same strings
  * App's render switch and nav arrays use.
  *
  * opts:

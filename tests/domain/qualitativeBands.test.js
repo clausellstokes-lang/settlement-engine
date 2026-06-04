@@ -1,5 +1,5 @@
 /**
- * tests/domain/qualitativeBands.test.js - Tier 5.4 lean tests.
+ * tests/domain/qualitativeBands.test.js — Tier 5.4 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -75,7 +75,7 @@ describe('displayBandLabel()', () => {
 
 // ── bandFor across each domain ─────────────────────────────────────────
 
-describe('bandFor() - substrate', () => {
+describe('bandFor() — substrate', () => {
   it('returns band for var.<name>', () => {
     // Score 80 - plague drag 10 = 70 → adequate
     expect(bandFor('var.public_legitimacy', fixture())).toBe('adequate');
@@ -90,7 +90,7 @@ describe('bandFor() - substrate', () => {
   });
 });
 
-describe('bandFor() - capacity', () => {
+describe('bandFor() — capacity', () => {
   it('returns band for capacity.<name>', () => {
     const b = bandFor('capacity.healing', fixture());
     expect(['surplus', 'adequate', 'strained', 'critical', 'collapsed']).toContain(b);
@@ -101,7 +101,7 @@ describe('bandFor() - capacity', () => {
   });
 });
 
-describe('bandFor() - chain / condition / threat / district', () => {
+describe('bandFor() — chain / condition / threat / district', () => {
   it('returns supply chain status', () => {
     const b = bandFor('chain.food_security.grain_to_bread', fixture());
     expect(b).toBe('stable');  // operational maps to stable
@@ -112,7 +112,7 @@ describe('bandFor() - chain / condition / threat / district', () => {
     const cond = s.activeConditions[0];
     // Conditions get derived IDs; we need to find via derived shape
     const idMatch = bandFor(`condition.plague.${cond.archetype}`, s);
-    // Either matches by derived id or falls through - test the band exists when the id is real
+    // Either matches by derived id or falls through — test the band exists when the id is real
     // Simpler: assert the band lookup works for *any* condition.
     expect(['low', 'medium', 'high', 'critical', null]).toContain(idMatch);
   });
@@ -133,7 +133,7 @@ describe('bandFor() - chain / condition / threat / district', () => {
   });
 });
 
-describe('bandFor() - edge cases', () => {
+describe('bandFor() — edge cases', () => {
   it('returns null for nullish settlement', () => {
     expect(bandFor('var.food_security', null)).toBeNull();
   });

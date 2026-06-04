@@ -1,5 +1,5 @@
 /**
- * narrativeMutations.js - Pure helpers for keeping AI narrative in sync with
+ * narrativeMutations.js — Pure helpers for keeping AI narrative in sync with
  * settlement edits.
  *
  * The AI narrative layer refines the settlement's prose. When the user edits
@@ -11,7 +11,7 @@
  *
  *   structural: the change altered something the narrative reasons ABOUT
  *               (institutions added/removed, stressors, goods, priorities).
- *               Search-and-replace can't fix it - the UI prompts the user
+ *               Search-and-replace can't fix it — the UI prompts the user
  *               to Regenerate or Revert to Raw. Progress (evolve existing
  *               narrative with the diff) lands in AI-4.
  *
@@ -19,7 +19,7 @@
  *               The narrative's premise no longer holds. Same UX as
  *               structural today; may get its own heavier modal later.
  *
- * This module is deliberately pure - no store, no persistence. Callers
+ * This module is deliberately pure — no store, no persistence. Callers
  * (aiSlice) are responsible for writing the mutated blob back to disk.
  */
 
@@ -84,7 +84,7 @@ function mapStrings(value, fn) {
  * `newName`. The word-boundary check means renaming "Aldric" doesn't also
  * rewrite "Aldric's" → wait, it does. JavaScript `\b` handles apostrophes
  * correctly (apostrophe is a non-word character, so `\bAldric\b` matches
- * the "Aldric" in "Aldric's"). Good - possessives get rewritten too.
+ * the "Aldric" in "Aldric's"). Good — possessives get rewritten too.
  */
 function substituteWholeWord(text, oldName, newName) {
   if (!oldName || oldName === newName) return text;
@@ -95,7 +95,7 @@ function substituteWholeWord(text, oldName, newName) {
 /**
  * Apply a cosmetic rename to an ai_data blob. Returns a new blob (or the
  * original reference if no narrative exists to touch). Safe to call when
- * aiData is null/empty - just returns the input.
+ * aiData is null/empty — just returns the input.
  */
 export function applyRenameToAiData(aiData, oldName, newName) {
   if (!aiData || !oldName || oldName === newName) return aiData;

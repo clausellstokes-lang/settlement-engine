@@ -4,7 +4,7 @@ import ControlsStrip from './ControlsStrip.jsx';
 import { GOLD as gold, INK as ink, MUTED as muted, BORDER as border, sans, FS, swatch, MUTED } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, selectIsManualTier } from '../store/selectors.js';
-// Import from lookups.js directly (not engine.js) - keeps the
+// Import from lookups.js directly (not engine.js) — keeps the
 // generator pipeline out of this component's synchronous import graph.
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../generators/lookups.js';
 
@@ -89,7 +89,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
         <div style={{ paddingLeft: 8, display: 'flex', flexDirection: 'column', gap: 3 }}>
           <div style={{ fontSize: FS.xxs, color: MUTED, fontStyle: 'italic', marginBottom: 4, padding: '2px 6px',
             background: swatch['#FAF8F4'], borderRadius: 3, border: '1px solid #e8dcc8' }}>
-            These institutions are excluded by default. Click to force-include - contradictions will appear in the Viability tab.
+            These institutions are excluded by default. Click to force-include — contradictions will appear in the Viability tab.
           </div>
           {Object.entries(institutions).sort(([a],[b])=>a.localeCompare(b)).map(([name, instDef]) => {
             const st = getOutToggleState(name);
@@ -128,7 +128,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                   </div>
                   {instDef.desc && (
                     <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: 1, lineHeight: 1.4 }}>
-                      {instDef.desc.slice(0, 80)}{instDef.desc.length > 80 ? '...' : ''}
+                      {instDef.desc.slice(0, 80)}{instDef.desc.length > 80 ? '…' : ''}
                     </div>
                   )}
                 </div>
@@ -203,10 +203,10 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
     <div
       onClick={handleClick}
       title={
-        reqOverridden           ? 'Force-excluded - click to restore'
-        : isOutOfTier && !req   ? `Out-of-tier (${def.nativeTier || 'other'} tier) - click to force include`
-        : isOutOfTier && req    ? 'Cross-tier forced - click to remove'
-        : def.required          ? 'Required - click to force-exclude'
+        reqOverridden           ? 'Force-excluded — click to restore'
+        : isOutOfTier && !req   ? `Out-of-tier (${def.nativeTier || 'other'} tier) — click to force include`
+        : isOutOfTier && req    ? 'Cross-tier forced — click to remove'
+        : def.required          ? 'Required — click to force-exclude'
         : def.desc
       }
       style={{
@@ -404,7 +404,7 @@ export default function InstitutionalGrid() {
       if (Object.keys(filtered).length > 0) result[cat] = filtered;
     });
     return result;
-    // Added `config` - filterCatalogForMagic reads magic-related fields
+    // Added `config` — filterCatalogForMagic reads magic-related fields
     // from it, so the memo must invalidate when those change. Slightly
     // over-invalidating (any config field changing busts the cache) but
     // correct. Future: extract just the magic-relevant fields if this
@@ -430,7 +430,7 @@ export default function InstitutionalGrid() {
       <ControlsStrip
         search={search}
         setSearch={setSearch}
-        placeholder="Search institutions..."
+        placeholder="Search institutions…"
         onForceAll={onBulkForce}
         onReset={onBulkAllow}
         onExcludeAll={onBulkExclude}

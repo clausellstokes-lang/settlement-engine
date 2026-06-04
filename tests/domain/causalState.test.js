@@ -1,5 +1,5 @@
 /**
- * tests/domain/causalState.test.js - Tier 2.4 substrate contract.
+ * tests/domain/causalState.test.js — Tier 2.4 substrate contract.
  *
  * Pins:
  *   - SYSTEM_VARIABLES catalog stability (the 14 names).
@@ -418,7 +418,7 @@ describe('supportedSystemVariables()', () => {
 
 // ── Real-settlement integration ────────────────────────────────────────
 
-describe('deriveCausalState() - real generated settlement', () => {
+describe('deriveCausalState() — real generated settlement', () => {
   it('produces a complete substrate against a city-tier settlement', () => {
     const settlement = generateSettlementPipeline(
       { settType: 'city', culture: 'germanic' },

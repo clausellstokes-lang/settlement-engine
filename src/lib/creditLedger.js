@@ -1,5 +1,5 @@
 /**
- * creditLedger.js - Client reader for the credit ledger (migration 007).
+ * creditLedger.js — Client reader for the credit ledger (migration 007).
  *
  * Background:
  *   The legacy approach stored a `credits` counter column on profiles
@@ -72,7 +72,7 @@ export async function fetchCreditBalanceFromLedger() {
 
 /**
  * Fetch recent ledger rows for the transactions UI. Most recent first.
- * @param {number} limit - How many rows to return (default 50).
+ * @param {number} limit — How many rows to return (default 50).
  */
 export async function fetchRecentTransactions(limit = 50) {
   if (!isConfigured) return [];

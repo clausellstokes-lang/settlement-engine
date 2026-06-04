@@ -1,5 +1,5 @@
 /**
- * CoherencePanel - Surfaces draft-mode coherence warnings.
+ * CoherencePanel — Surfaces draft-mode coherence warnings.
  *
  * Hidden in canon mode (changes are diegetic; the engine doesn't
  * second-guess what the DM said happened). Hidden in draft mode too if

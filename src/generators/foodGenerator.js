@@ -74,14 +74,14 @@ export function generateFoodSecurity(tier, institutions, config) {
   };
   const activeChains      = Object.entries(chains).filter(([,v])=>v).map(([k])=>k);
   const activeChainsCount = activeChains.length;
-  const diversityScore    = Math.min(1, activeChainsCount / 3); // 0-1 normalized
+  const diversityScore    = Math.min(1, activeChainsCount / 3); // 0–1 normalized
 
   // ── Storage buffer (months of food security) ──────────────────────────────
   const baseStorage = hasStateGranary ? (tier === 'metropolis' ? 12 : 8)
                     : hasCityGranary  ? (tier === 'city' ? 7 : 5)
                     : hasGranary      ? (tier === 'town' ? 5 : tier === 'village' ? 3.5 : 2.5)
                     : (['thorp','hamlet'].includes(tier) ? 1.5 : 1.0);
-  // Mill extends storage - flour lasts longer than grain
+  // Mill extends storage — flour lasts longer than grain
   const storageMonths = Math.round((hasMill ? baseStorage * 1.25 : baseStorage) * 10) / 10;
 
   // ── Import dependency ─────────────────────────────────────────────────────
@@ -132,11 +132,11 @@ export function generateFoodSecurity(tier, institutions, config) {
   const rawSurplus      = dailyProduction - dailyNeed;
   const rawDeficit      = Math.max(0, -rawSurplus);
   // Magic trade bypass: isolated settlements with teleportation get import coverage
-  // at ~road level - real but expensive; extraordinary cost is reflected in lower coverage
+  // at ~road level — real but expensive; extraordinary cost is reflected in lower coverage
   // than a physical road (0.35), but still meaningful food security.
   const hasMagicTradeImport = effectiveRoute === 'isolated' && hasTeleport && config.magicExists !== false;
   // Terrain-aware import coverage: mountain/desert settlements structurally
-  // depend on food imports - they import more efficiently (specialized trade infrastructure)
+  // depend on food imports — they import more efficiently (specialized trade infrastructure)
   const _isLowAgriTerrain = ['mountain','desert','hills'].includes(config.terrainType || '');
   const _terrainImportBoost = _isLowAgriTerrain && effectiveRoute !== 'isolated' ? 0.15 : 0;
   const importCoverageRate = hasMagicTradeImport     ? 0.30  // magic trade: real but expensive
@@ -160,7 +160,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   const deficitPct    = dailyNeed > 0 ? deficit / dailyNeed * 100 : 0;
   const surplusPct    = dailyNeed > 0 ? Math.max(0, rawSurplus / dailyNeed * 100) : 0;
 
-  // Normalized food ratio - 1.0 = exactly adequate
+  // Normalized food ratio — 1.0 = exactly adequate
   const localRatio    = dailyProduction / Math.max(1, dailyNeed);
   const importedRatio = importCoverage / Math.max(1, dailyNeed);
   const magicRatio    = magicOffset / Math.max(1, dailyNeed);
@@ -169,7 +169,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   // ── Food security label ───────────────────────────────────────────────────
   let label, color, bg;
   if (stressFamine) {
-    label = 'Deficit - Active Famine';
+    label = 'Deficit — Active Famine';
     color = '#8b1a1a'; bg = '#fdf4f4';
   } else if (deficitPct > 40) {
     label = 'Deficit';
@@ -191,7 +191,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   // ── Prosperity modifier ───────────────────────────────────────────────────
   // Food security floors or caps prosperity before other modifiers apply
   let prosperityMod = null;
-  // Magic-trade isolated settlements can import food at extraordinary cost - soften caps to penalties
+  // Magic-trade isolated settlements can import food at extraordinary cost — soften caps to penalties
   const _magicFoodMitigated = hasTeleport && config.magicExists !== false && effectiveRoute === 'isolated';
   // Terrain-structural deficits: mountain/desert settlements import food by economic design.
   // A mountain mining town or desert caravan hub with road trade access is NOT in crisis
@@ -203,17 +203,17 @@ export function generateFoodSecurity(tier, institutions, config) {
     prosperityMod = { type: 'cap', value: 0, reason: 'Active famine: food production collapsed, prosperity cannot exceed Struggling' };
   } else if (deficitPct > 40) {
     if (_terrainStructural) {
-      // Mountain/desert: severe deficit is normal - penalty not hard cap, imports cover it
-      prosperityMod = { type: 'penalty', value: -1, reason: 'Terrain requires significant food imports - structural dependency, not crisis' };
+      // Mountain/desert: severe deficit is normal — penalty not hard cap, imports cover it
+      prosperityMod = { type: 'penalty', value: -1, reason: 'Terrain requires significant food imports — structural dependency, not crisis' };
     } else if (_magicFoodMitigated) {
-      prosperityMod = { type: 'cap', value: 2, reason: 'Severe food deficit mitigated by magical imports - prosperity capped at Moderate' };
+      prosperityMod = { type: 'cap', value: 2, reason: 'Severe food deficit mitigated by magical imports — prosperity capped at Moderate' };
     } else {
       prosperityMod = { type: 'cap', value: 1, reason: 'Severe structural food deficit caps prosperity at Poor' };
     }
   } else if (deficitPct > 20) {
     if (_terrainStructural) {
-      // Minor penalty only - importing food is normal for these terrains
-      prosperityMod = null; // no modifier - structural import is priced into economy
+      // Minor penalty only — importing food is normal for these terrains
+      prosperityMod = null; // no modifier — structural import is priced into economy
     } else if (_magicFoodMitigated) {
       prosperityMod = { type: 'penalty', value: -1, reason: 'Food imports via magical infrastructure are reliable but costly' };
     } else {
@@ -235,15 +235,15 @@ export function generateFoodSecurity(tier, institutions, config) {
   const storageNote = storageMonths >= 8 ? `${storageMonths} months strategic reserve`
                     : storageMonths >= 4 ? `${storageMonths} months buffer`
                     : storageMonths >= 2 ? 'seasonal buffer only'
-                    : 'minimal storage - vulnerable to disruption';
+                    : 'minimal storage — vulnerable to disruption';
 
   const magicNote = magicSupplement > 0.2 ? 'Significant magical food supplement'
                   : magicSupplement > 0.1 ? 'Modest magical food supplement'
                   : magicSupplement > 0 ? 'Trace magical food contribution'
                   : null;
 
-  const importNote = importPct >= 40 ? `${importPct}% import-dependent - trade disruption = immediate crisis`
-                   : importPct >= 20 ? `${importPct}% imported - meaningful external dependency`
+  const importNote = importPct >= 40 ? `${importPct}% import-dependent — trade disruption = immediate crisis`
+                   : importPct >= 20 ? `${importPct}% imported — meaningful external dependency`
                    : importPct >= 5  ? `${importPct}% supplemented by imports`
                    : null;
 

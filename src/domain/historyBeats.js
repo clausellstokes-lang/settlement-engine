@@ -1,11 +1,11 @@
 /**
- * domain/historyBeats.js - Structured causal beats over settlement history.
+ * domain/historyBeats.js — Structured causal beats over settlement history.
  *
  * Tier 4.7 of the roadmap. Today's history fields are descriptive prose:
  *
  *   settlement.history.age
- *   settlement.history.founding             { age, reason, foundedBy, ... }
- *   settlement.history.historicalEvents[]   { name, yearsAgo, severity, lastingEffects, ... }
+ *   settlement.history.founding             { age, reason, foundedBy, … }
+ *   settlement.history.historicalEvents[]   { name, yearsAgo, severity, lastingEffects, … }
  *   settlement.history.currentTensions[]
  *   settlement.history.historicalCharacter
  *   settlement.history.eventsTimeline[]
@@ -14,13 +14,13 @@
  *
  * The roadmap's target promotes these into seven canonical causal beats:
  *
- *   founding_cause           - why the settlement exists at all
- *   first_prosperity_source  - what made it economically viable
- *   defining_crisis          - the single event that shapes present character
- *   institutional_legacy     - which institutions trace to historical pressure
- *   recent_disruption        - what's still being felt
- *   unresolved_wound         - what hasn't healed
- *   likely_future            - where this is going (delegated to simulationSpine)
+ *   founding_cause           — why the settlement exists at all
+ *   first_prosperity_source  — what made it economically viable
+ *   defining_crisis          — the single event that shapes present character
+ *   institutional_legacy     — which institutions trace to historical pressure
+ *   recent_disruption        — what's still being felt
+ *   unresolved_wound         — what hasn't healed
+ *   likely_future            — where this is going (delegated to simulationSpine)
  *
  * Each beat is structured:
  *   { key, label, text, source, references? }
@@ -28,7 +28,7 @@
  * Pure read-only derivation; no generator changes; tolerant of missing
  * fields. The legacy text is preserved; the canonical shape is layered.
  *
- * No imports from src/lib - domain tsconfig include stays self-contained.
+ * No imports from src/lib — domain tsconfig include stays self-contained.
  */
 
 // ── Helpers ─────────────────────────────────────────────────────────────
@@ -97,7 +97,7 @@ function deriveFoundingCause(settlement) {
 }
 
 function deriveFirstProsperitySource(settlement) {
-  // Strongest signal today: the topExport on the economic state - that's
+  // Strongest signal today: the topExport on the economic state — that's
   // what the settlement currently trades on. We hedge with the founding
   // arc when no export is reported.
   const eco = settlement?.economicState || settlement?.economy || {};
@@ -123,7 +123,7 @@ function deriveFirstProsperitySource(settlement) {
 
 function deriveDefiningCrisis(settlement) {
   // The defining crisis is the most severe historical event. Among
-  // events of equal severity, prefer the older one - those leave deeper
+  // events of equal severity, prefer the older one — those leave deeper
   // institutional grooves.
   const events = settlement?.history?.historicalEvents;
   if (!Array.isArray(events) || events.length === 0) return null;
@@ -137,8 +137,8 @@ function deriveDefiningCrisis(settlement) {
   if (severityScore(top.severity) < SEVERITY_RANK.major) return null;
 
   const text = top.description
-    ? `${top.name} (${top.yearsAgo ?? '-'} years ago): ${top.description}`
-    : `${top.name} (${top.yearsAgo ?? '-'} years ago).`;
+    ? `${top.name} (${top.yearsAgo ?? '—'} years ago): ${top.description}`
+    : `${top.name} (${top.yearsAgo ?? '—'} years ago).`;
 
   return {
     key: 'definingCrisis',
@@ -168,7 +168,7 @@ function deriveInstitutionalLegacy(settlement) {
     );
   });
 
-  // Fall back to legacyAnnotations[0] - the generator's own structured
+  // Fall back to legacyAnnotations[0] — the generator's own structured
   // commentary on what an event left behind.
   if (carriers.length === 0) {
     const ann = settlement?.history?.legacyAnnotations?.[0];
@@ -205,7 +205,7 @@ function deriveInstitutionalLegacy(settlement) {
 }
 
 function deriveRecentDisruption(settlement) {
-  // Most recent significant disruption - within the last 30 years AND
+  // Most recent significant disruption — within the last 30 years AND
   // severity ≥ major. Falls back to legacyAnnotations[0] if no recent
   // major events. Falls back to null if neither is present.
   const events = settlement?.history?.historicalEvents || [];
@@ -248,7 +248,7 @@ function deriveRecentDisruption(settlement) {
 
 function deriveUnresolvedWound(settlement) {
   // Pulled from currentTensions. The generator produces tensions as
-  // strings OR objects depending on the source - handle both.
+  // strings OR objects depending on the source — handle both.
   const tensions = settlement?.history?.currentTensions;
   if (!Array.isArray(tensions) || !tensions.length) return null;
 
@@ -270,7 +270,7 @@ function deriveUnresolvedWound(settlement) {
 function deriveLikelyFuture(settlement) {
   // Pull from history.currentTensions trajectory if available, else
   // power-structure stability. Mirrors the simulationSpine logic so the
-  // two derivations stay consistent - but produces a structured beat.
+  // two derivations stay consistent — but produces a structured beat.
   const tensions = settlement?.history?.currentTensions;
   if (Array.isArray(tensions) && tensions.length) {
     const first = tensions[0];

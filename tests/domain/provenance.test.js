@@ -1,5 +1,5 @@
 /**
- * tests/domain/provenance.test.js - Tier 5.6 lean tests.
+ * tests/domain/provenance.test.js — Tier 5.6 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

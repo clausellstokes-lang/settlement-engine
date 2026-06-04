@@ -1,5 +1,5 @@
 /**
- * Workshop.jsx - Additive advanced generation sandbox.
+ * Workshop.jsx — Additive advanced generation sandbox.
  *
  * STATUS: ACTIVE. Mounted as a top-level "Workshop" destination in
  * App.jsx (nav entry gated behind the workshopNav flag, default-on).
@@ -43,12 +43,12 @@ import ChainBuilder from './ChainBuilder.jsx';
 // ── Static data ──────────────────────────────────────────────────────────────
 
 const TIERS = [
-  { id: 'thorp',      label: 'Thorp',      pop: '8-60',       Icon: Tent },
-  { id: 'hamlet',     label: 'Hamlet',     pop: '61-240',     Icon: Tent },
-  { id: 'village',    label: 'Village',    pop: '401-900',    Icon: Building2 },
-  { id: 'town',       label: 'Town',       pop: '901-5,000',  Icon: Building2 },
-  { id: 'city',       label: 'City',       pop: '5,001-25k',  Icon: Castle },
-  { id: 'metropolis', label: 'Metropolis', pop: '25,001-100k', Icon: Landmark },
+  { id: 'thorp',      label: 'Thorp',      pop: '8–60',       Icon: Tent },
+  { id: 'hamlet',     label: 'Hamlet',     pop: '61–240',     Icon: Tent },
+  { id: 'village',    label: 'Village',    pop: '401–900',    Icon: Building2 },
+  { id: 'town',       label: 'Town',       pop: '901–5,000',  Icon: Building2 },
+  { id: 'city',       label: 'City',       pop: '5,001–25k',  Icon: Castle },
+  { id: 'metropolis', label: 'Metropolis', pop: '25,001–100k', Icon: Landmark },
 ];
 
 const CULTURES = [
@@ -894,7 +894,7 @@ export default function Workshop({ isMobile }) {
             background: 'rgba(139,26,26,0.05)', borderRadius: R.md,
             fontSize: FS.xxs, color: swatch.danger,
           }}>
-            Multiple stresses create compounding narrative pressure. This can produce extreme or unstable settlements - ideal for crisis scenarios.
+            Multiple stresses create compounding narrative pressure. This can produce extreme or unstable settlements — ideal for crisis scenarios.
           </div>
         )}
       </Panel>
@@ -1220,10 +1220,10 @@ function CustomContentPanels({ config, updateConfig }) {
               powerDynamicsConfig: { ...powerConfig, factionCount: e.target.value ? +e.target.value : null }
             })} style={{ ...inputStyle, flex: 'none', width: 160 }}>
               <option value="">Random</option>
-              <option value="1">1 - Monopoly</option>
-              <option value="2">2 - Duopoly</option>
-              <option value="3">3 - Triad</option>
-              <option value="4">4+ - Fractured</option>
+              <option value="1">1 — Monopoly</option>
+              <option value="2">2 — Duopoly</option>
+              <option value="3">3 — Triad</option>
+              <option value="4">4+ — Fractured</option>
             </select>
           </div>
         </div>

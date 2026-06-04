@@ -1,12 +1,12 @@
 /**
- * WizardCloseout.jsx - P145 / W-2 wizard close-out summary.
+ * WizardCloseout.jsx — P145 / W-2 wizard close-out summary.
  *
  * The advanced wizard's final ("Ready to Generate") state used to be a
  * bare button: the user walked through four steps of configuration and
  * got no recap of what they'd set before committing to a generation.
- * This card closes out the flow with a human-readable summary -
+ * This card closes out the flow with a human-readable summary —
  * tier / culture / trade route / threat / magic, any priority emphasis,
- * and a count of manual force/exclude constraints - so the Generate
+ * and a count of manual force/exclude constraints — so the Generate
  * click reads as a confirmation, not a leap into the unknown.
  *
  * Reads config + toggles from the store. The pure summary builder
@@ -20,7 +20,7 @@ import {
 
 /** Title-case a config enum value; collapse any `random*` value to "Random". */
 function humanize(v) {
-  if (v == null || v === '') return '-';
+  if (v == null || v === '') return '—';
   const s = String(v);
   if (/^random/i.test(s)) return 'Random';
   return s
@@ -29,7 +29,7 @@ function humanize(v) {
     .join(' ');
 }
 
-// [configKey, label] for the five priority sliders (0-100, 50 = baseline).
+// [configKey, label] for the five priority sliders (0–100, 50 = baseline).
 const PRIORITY_FIELDS = [
   ['priorityEconomy',  'Economy'],
   ['priorityMilitary', 'Military'],
@@ -58,8 +58,8 @@ function countConstraints(map, forceKey) {
 /**
  * Build the close-out summary from the live config + toggle maps. Pure.
  *
- * @param {Object} config  - the generation config (configSlice `config`).
- * @param {Object} toggles - { institutionToggles, servicesToggles, goodsToggles }.
+ * @param {Object} config  — the generation config (configSlice `config`).
+ * @param {Object} toggles — { institutionToggles, servicesToggles, goodsToggles }.
  * @returns {{ facts: Array<{label,value}>, emphasis: string[]|null, forced: number, excluded: number }}
  */
 export function buildCloseoutSummary(config = {}, toggles = {}) {
@@ -101,7 +101,7 @@ export default function WizardCloseout() {
   });
 
   const constraintLine = summary.forced === 0 && summary.excluded === 0
-    ? 'No manual constraints - fully procedural.'
+    ? 'No manual constraints — fully procedural.'
     : `${summary.forced} forced · ${summary.excluded} excluded`;
 
   return (

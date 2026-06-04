@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * tests/lib/anonGenCounter.test.js - Anonymous gen counter contract.
+ * tests/lib/anonGenCounter.test.js — Anonymous gen counter contract.
  *
  * The counter governs the homepage hero's "free generations" gate.
  * Edge cases that matter:
@@ -43,7 +43,7 @@ describe('getAnonGenCount()', () => {
 
     vi.setSystemTime(new Date('2026-01-02T08:00:00'));
     expect(getAnonGenCount()).toBe(0);
-    // Storage still holds yesterday's row - read-only access doesn't write.
+    // Storage still holds yesterday's row — read-only access doesn't write.
     const raw = JSON.parse(window.localStorage.getItem('sf.anon.gens'));
     expect(raw.date).toBe('2026-01-01');
   });
@@ -103,7 +103,7 @@ describe('storage resilience', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────
-// Tier 7.2 - two-bucket cap (1 full + 2 rerolls)
+// Tier 7.2 — two-bucket cap (1 full + 2 rerolls)
 // ─────────────────────────────────────────────────────────────────────
 
 import {
@@ -119,7 +119,7 @@ import {
   incrementAnonReroll,
 } from '../../src/lib/anonGenCounter.js';
 
-describe('Tier 7.2 - two-bucket cap shape', () => {
+describe('Tier 7.2 — two-bucket cap shape', () => {
   beforeEach(() => { resetAnonGenCounter(); });
 
   it('exports per-bucket defaults that sum to the combined cap', () => {

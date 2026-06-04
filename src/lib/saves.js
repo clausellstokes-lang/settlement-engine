@@ -1,5 +1,5 @@
 /**
- * saves.js - Settlement save/load service.
+ * saves.js — Settlement save/load service.
  *
  * Uses Supabase when configured, falls back to localStorage.
  * Both backends expose the same async API so components are
@@ -52,19 +52,19 @@ function spreadToggles(toggles) {
 
 /**
  * Migrate an arbitrary save record to the v2 shape, which adds a single
- * new field - `campaignState` - holding lifecycle data that used to
+ * new field — `campaignState` — holding lifecycle data that used to
  * live globally on the slice (phase, eventLog, systemState, locks,
  * provenance timestamps, narrative-drift flags, export state).
  *
  * Older saves with no campaignState get default-populated. This means
  * a settlement canonized before this migration shipped will return as
- * draft on first reload - no way to recover state that was never
+ * draft on first reload — no way to recover state that was never
  * persisted. New saves round-trip cleanly.
  *
  * The `campaign_state` JSONB column needs to exist in Supabase. Add via:
  *   ALTER TABLE settlements ADD COLUMN IF NOT EXISTS campaign_state JSONB;
  * Until that migration runs, the column read returns null and we fall
- * through to the defaults - the app keeps working.
+ * through to the defaults — the app keeps working.
  */
 function migrateSaveToV2(entry) {
   if (!entry) return entry;
@@ -90,10 +90,10 @@ function migrateSaveToV2(entry) {
  * Run the canonical-shape adapter on the embedded settlement of a save
  * entry. Save entries themselves are a separate envelope (id, name,
  * timestamp, campaignState, etc.); the settlement object lives at
- * `entry.settlement`. Older entries pre-date schemaVersion stamps -
+ * `entry.settlement`. Older entries pre-date schemaVersion stamps —
  * normalize on read so the rest of the app sees a uniform shape.
  *
- * Pure / idempotent - already-canonical settlements pass through
+ * Pure / idempotent — already-canonical settlements pass through
  * unchanged after the first normalize.
  */
 function migrateSettlementShape(entry) {
@@ -194,8 +194,8 @@ async function localList() {
   // Run the v2 migration + canonical-shape adapter on every read so
   // older locally-saved entries surface with both a campaignState block
   // and a normalized settlement shape (version stamps, stable id,
-  // default canonical containers). Cost is trivial - both adapters are
-  // pure object spreads - and it makes the rest of the app symmetric
+  // default canonical containers). Cost is trivial — both adapters are
+  // pure object spreads — and it makes the rest of the app symmetric
   // with the Supabase path.
   return localLoad().map(migrateSaveToV2).map(migrateSettlementShape);
 }
@@ -239,7 +239,7 @@ export const saves = {
   update:   isConfigured ? supabaseUpdate   : localUpdate,
   delete:   isConfigured ? supabaseDelete   : localDelete,
   count:    isConfigured ? supabaseCount    : localCount,
-  /** Write entire saves array - only available in local mode. */
+  /** Write entire saves array — only available in local mode. */
   writeAll: isConfigured ? null             : localWriteAll,
   isConfigured,
 };

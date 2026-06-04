@@ -1,5 +1,5 @@
 /**
- * domain/events/mutate.js - Apply an event's entity patches to a
+ * domain/events/mutate.js — Apply an event's entity patches to a
  * settlement object.
  *
  * The architecture fix the audit kept flagging: events must mutate
@@ -10,7 +10,7 @@
  *   - propagation chains computed and applied
  *   - removed/created/replaced npc records
  *
- * Pure function - no store, no React, no I/O. The store calls into
+ * Pure function — no store, no React, no I/O. The store calls into
  * this from `applyEvent` and persists the result.
  */
 
@@ -110,7 +110,7 @@ export function mutateSettlement({ settlement, event, now = null }) {
       break;
 
     default:
-      // Unknown event type - no entity mutation. SystemState delta still
+      // Unknown event type — no entity mutation. SystemState delta still
       // applies through applyEvent's normal path.
       break;
   }
@@ -179,7 +179,7 @@ function addInstitution(s, event) {
   const name = labelFromTarget(event.targetId);
   const list = s.institutions || [];
   // Idempotent: if an institution with the same name already exists,
-  // we don't duplicate - we just clear any prior REMOVED status.
+  // we don't duplicate — we just clear any prior REMOVED status.
   const existing = list.find(i => i.name?.toLowerCase() === name.toLowerCase());
   if (existing) {
     const restored = { ...existing, status: 'active', impairments: [] };
@@ -217,7 +217,7 @@ function restoreInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
   if (!inst) return s;
   // If the user supplied a specific cause event id, remove only those
-  // impairments. Otherwise clear all impairments - full reset.
+  // impairments. Otherwise clear all impairments — full reset.
   const causeId = event.payload?.causeEventId;
   const restored = causeId
     ? withoutEventImpairments(inst, causeId)
@@ -270,7 +270,7 @@ function depleteResource(s, event) {
 }
 
 function cutTradeRoute(s, event) {
-  // Mark the trade route status on settlement.config - coarse but
+  // Mark the trade route status on settlement.config — coarse but
   // sufficient until the full campaign-graph route model lands.
   const config = s.config || {};
   const cutRoutes = Array.isArray(config._cutRoutes) ? [...config._cutRoutes] : [];
@@ -323,7 +323,7 @@ function killNpcMutation(s, event) {
       entityType: 'npc',
       entityId: idOf(npc),
       impairment: {
-        type: 'staffing',  // arbitrary - propagation maps it per target
+        type: 'staffing',  // arbitrary — propagation maps it per target
         severity: importance === 'pillar' ? 1.0 : importance === 'key' ? 0.7 : 0.4,
         causeEventId: event.id,
         description: `Death of ${npc.name}`,
@@ -379,7 +379,7 @@ function assignNpcMutation(s, event) {
 // ── Wave 1 extended event handlers ─────────────────────────────────────────
 
 /**
- * KILL_LEADER - kill the named NPC at pillar importance regardless of
+ * KILL_LEADER — kill the named NPC at pillar importance regardless of
  * what the NPC record says. The "leader" framing is a contract: the
  * settlement's primary authority is gone, with all the consequences
  * that entails. Reuses killNpcMutation under the hood.
@@ -393,7 +393,7 @@ function killLeaderMutation(s, event) {
 }
 
 /**
- * EXPOSE_CORRUPTION - applies a legitimacy impairment to the target
+ * EXPOSE_CORRUPTION — applies a legitimacy impairment to the target
  * (faction OR institution; we try both). Propagates so a corrupt watch
  * captain hits both the watch institution and the controlling faction.
  */
@@ -430,7 +430,7 @@ function exposeCorruption(s, event) {
 }
 
 /**
- * REFUGEE_WAVE - population shift annotation. Records the wave on the
+ * REFUGEE_WAVE — population shift annotation. Records the wave on the
  * settlement so downstream pipeline reruns and the foodSecurity model
  * can consume it. Coarse for v1; future versions will derive specific
  * institution strain from the wave size.
@@ -448,7 +448,7 @@ function refugeeWave(s, event) {
 }
 
 /**
- * PLAGUE - disease outbreak annotation. Records severity, optionally a
+ * PLAGUE — disease outbreak annotation. Records severity, optionally a
  * disease name. Strains healing institutions (capacity impairment),
  * propagates through faction links so the watch and temple respond.
  */
@@ -486,7 +486,7 @@ function plague(s, event) {
 }
 
 /**
- * RAID_OR_MONSTER_ATTACK - external strike. If a specific institution
+ * RAID_OR_MONSTER_ATTACK — external strike. If a specific institution
  * is named in the payload, damage it; otherwise just record the raid
  * on the settlement so the next pipeline rerun consumes it.
  */
@@ -567,7 +567,7 @@ function replaceInstitution(s, oldInst, newInst) {
 }
 
 function replaceFaction(s, oldF, newF) {
-  // Factions can live in two places - settlement.factions or
+  // Factions can live in two places — settlement.factions or
   // settlement.powerStructure.factions. Normalize on the latter.
   if (s.powerStructure?.factions) {
     const list = s.powerStructure.factions;

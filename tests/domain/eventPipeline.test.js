@@ -1,5 +1,5 @@
 /**
- * tests/domain/eventPipeline.test.js - Tier 2.2 unified-pipeline contract.
+ * tests/domain/eventPipeline.test.js — Tier 2.2 unified-pipeline contract.
  *
  * The core invariant: previewEvent and applyEvent produce the SAME
  * afterSystemState, afterCausalState, systemStateDeltas, and
@@ -70,7 +70,7 @@ function ev(overrides) {
 
 // ── Envelope shape ─────────────────────────────────────────────────────
 
-describe('runEventPipeline() - envelope shape', () => {
+describe('runEventPipeline() — envelope shape', () => {
   it('returns the canonical EventPipelineResult envelope', () => {
     const result = runEventPipeline(baseSettlement(), ev());
     expect(result).toHaveProperty('event');
@@ -121,7 +121,7 @@ describe('runEventPipeline() does not mutate', () => {
 
 // ── Event validation ───────────────────────────────────────────────────
 
-describe('runEventPipeline() - validation', () => {
+describe('runEventPipeline() — validation', () => {
   it('unknown event type returns a mismatch warning + no deltas', () => {
     const result = runEventPipeline(baseSettlement(), { type: 'NUKE_FROM_ORBIT' });
     expect(result.warnings.some(w => w.severity === 'mismatch')).toBe(true);
@@ -193,7 +193,7 @@ describe('preview/apply drift invariant (Tier 2.2)', () => {
 
 // ── Substrate-layer signals ────────────────────────────────────────────
 
-describe('runEventPipeline() - CausalState deltas', () => {
+describe('runEventPipeline() — CausalState deltas', () => {
   it('damaging the granary produces a non-empty causalStateDeltas list', () => {
     const settlement = baseSettlement();
     const result = runEventPipeline(settlement, ev());
@@ -227,7 +227,7 @@ describe('runEventPipeline() - CausalState deltas', () => {
     const diff = compareCausalState(a, b);
     expect(diff.length).toBeGreaterThan(0);
     // First entry should be the biggest absolute mover (public_legitimacy
-    // - score moved from 80 to 30).
+    // — score moved from 80 to 30).
     expect(diff[0].variable).toBe('public_legitimacy');
     expect(diff[0].change).toBeLessThan(0);
   });
@@ -235,7 +235,7 @@ describe('runEventPipeline() - CausalState deltas', () => {
 
 // ── Faction relationship deltas (Phase 14 wiring) ──────────────────────
 
-describe('runEventPipeline() - Phase 14 faction relationship deltas', () => {
+describe('runEventPipeline() — Phase 14 faction relationship deltas', () => {
   it('CUT_TRADE_ROUTE produces faction relationship deltas', () => {
     const result = runEventPipeline(baseSettlement(), ev({ type: 'CUT_TRADE_ROUTE', targetId: 'south_road' }));
     expect(Array.isArray(result.factionRelationshipDeltas)).toBe(true);
@@ -313,7 +313,7 @@ describe('Phase 18 backward compatibility', () => {
     expect(result.logEntry).toHaveProperty('deltas');
     expect(result.logEntry).toHaveProperty('factionResponses');
     expect(result.logEntry).toHaveProperty('narrativeSummary');
-    // Phase 18 - logEntry now also carries the substrate-layer deltas.
+    // Phase 18 — logEntry now also carries the substrate-layer deltas.
     expect(result.logEntry).toHaveProperty('causalStateDeltas');
     expect(result.logEntry).toHaveProperty('factionRelationshipDeltas');
   });

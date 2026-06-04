@@ -1,5 +1,5 @@
 /**
- * tests/domain/npcProfile.test.js - Structured NPC profile contract.
+ * tests/domain/npcProfile.test.js — Structured NPC profile contract.
  *
  * Pins the Tier 4.5 derivation surface: category → archetype mapping,
  * institution / faction linkage inference, removal-consequence

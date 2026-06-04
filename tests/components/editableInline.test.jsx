@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * editableInline.test.jsx - Contract over the click-to-edit primitive.
+ * editableInline.test.jsx — Contract over the click-to-edit primitive.
  *
  * EditableInline is used by every per-field edit surface in the
  * dossier (NPC names, faction labels, summary prose, sample card
@@ -17,7 +17,7 @@ describe('EditableInline', () => {
   // exposes Jest globals or vitest is configured with `globals: true`.
   // We don't enable globals (keeps `describe`/`it` explicit), so we
   // call cleanup() ourselves to ensure each test renders into a fresh
-  // tree - otherwise `getByRole('button')` matches buttons left over
+  // tree — otherwise `getByRole('button')` matches buttons left over
   // from prior tests.
   afterEach(cleanup);
   it('renders the value in read-only mode', () => {
@@ -42,7 +42,7 @@ describe('EditableInline', () => {
     expect(onCommit).toHaveBeenCalledWith('B');
   });
 
-  it('cancels on Escape - no commit, value reverts', () => {
+  it('cancels on Escape — no commit, value reverts', () => {
     const onCommit = vi.fn();
     render(<EditableInline value="A" onCommit={onCommit} />);
     fireEvent.click(screen.getByRole('button'));

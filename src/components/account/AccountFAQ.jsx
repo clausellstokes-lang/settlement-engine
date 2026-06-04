@@ -1,5 +1,5 @@
 /**
- * AccountFAQ.jsx - P138 / AC-4 inline FAQ in the AccountPage.
+ * AccountFAQ.jsx — P138 / AC-4 inline FAQ in the AccountPage.
  *
  * The critique flagged that account-page surfaces were credit-counters
  * and Stripe portal links with no "what do I do if I run out of
@@ -12,7 +12,7 @@
  * gallery privacy, AI vs simulator framing). All copy lives in
  * `t('accountFaq.qs')` so the copy team can edit without a code change.
  *
- * No analytics - this is a passive read surface; we don't track
+ * No analytics — this is a passive read surface; we don't track
  * per-question opens.
  */
 
@@ -28,7 +28,7 @@ const MUTED = '#9C8068';
 const BORDER = '#E8D9B0';
 const sans = '"Nunito", system-ui, sans-serif';
 
-// Question keys - t() will resolve `${key}.q` and `${key}.a` from the
+// Question keys — t() will resolve `${key}.q` and `${key}.a` from the
 // copy module. Keeping the keys here so the iteration order is
 // deterministic.
 const Q_KEYS = [

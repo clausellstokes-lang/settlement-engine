@@ -1,5 +1,5 @@
 /**
- * tests/domain/factionProfile.test.js - Structured faction profile contract.
+ * tests/domain/factionProfile.test.js — Structured faction profile contract.
  *
  * Tier 4.1's substrate is read-only derivation: the generator output
  * stays the same; this layer enriches it on demand. The contract:

@@ -1,5 +1,5 @@
 /**
- * generateSettlementPipeline.js - Pipeline-based settlement generation.
+ * generateSettlementPipeline.js — Pipeline-based settlement generation.
  *
  * Drop-in replacement for generateSettlement() that uses the pipeline runner.
  * Same signature, same output, but internally runs through registered steps
@@ -22,7 +22,7 @@ import './steps/index.js';
 /**
  * Generate a complete settlement using the pipeline.
  *
- * @param {Object}  config          - Generation configuration (same as old generateSettlement)
+ * @param {Object}  config          — Generation configuration (same as old generateSettlement)
  * @param {Object}  [importedNeighbour] - Previously generated settlement to link as neighbour
  * @param {Object}  [options]
  * @param {string}  [options.seed]  - Seed for deterministic generation. Auto-generated if omitted.
@@ -35,7 +35,7 @@ import './steps/index.js';
  * @param {Object}  [options.customContent] - Custom-content snapshot to expose to the
  *   generator's dependencyEngine. If omitted, falls back to whatever the global
  *   source returns (the live store, when running in the app). Pass an explicit
- *   blob (or `{}`) to make this generation fully deterministic and headless -
+ *   blob (or `{}`) to make this generation fully deterministic and headless —
  *   independent of any app state.
  * @returns {Object} Complete settlement data object (same shape as old generateSettlement)
  */

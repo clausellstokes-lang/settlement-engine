@@ -21,7 +21,7 @@ const VALID_STANCES = new Set([
   'opportunity', 'threat', 'opportunity_and_threat', 'neutral',
 ]);
 
-// All event types the engine ships with - generation should cover
+// All event types the engine ships with — generation should cover
 // every branch of every archetype responder.
 const eventType = fc.constantFrom(
   'DAMAGE_INSTITUTION', 'REMOVE_INSTITUTION', 'ADD_INSTITUTION',
@@ -40,7 +40,7 @@ const factionName = fc.constantFrom(
   'Temple of the Sun', 'High Clergy', 'Stone Monastery',
   'City Watch', 'Militia', 'Sheriff\'s Office',
   'Thieves\' Guild', 'Smuggler\'s Ring', 'Shadow Brotherhood',
-  'Generic Council',  // unmatched archetype - produces no response
+  'Generic Council',  // unmatched archetype — produces no response
 );
 
 const factionArb = fc.record({
@@ -87,7 +87,7 @@ describe('generateFactionResponses (property-based)', () => {
       const out = generateFactionResponses(settlement, event);
       expect(Array.isArray(out)).toBe(true);
     }), { numRuns: 60 });
-    // Edge cases - degenerate inputs.
+    // Edge cases — degenerate inputs.
     expect(Array.isArray(generateFactionResponses(null, null))).toBe(true);
     expect(Array.isArray(generateFactionResponses({}, { type: 'X' }))).toBe(true);
     expect(generateFactionResponses(null, null)).toEqual([]);

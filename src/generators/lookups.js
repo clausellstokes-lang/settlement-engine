@@ -1,11 +1,11 @@
 /**
- * lookups.js - Pure catalog/tier lookups extracted from engine.js.
+ * lookups.js — Pure catalog/tier lookups extracted from engine.js.
  *
  * Why this file exists: store selectors and a few synchronously-loaded
  * components (InstitutionalGrid) need cheap catalog/tier accessors at
  * boot. Before this extraction they imported them from `engine.js`,
  * which transitively pulled the entire generator pipeline (~300 kB gz)
- * into the synchronous first-paint graph - even though the pipeline
+ * into the synchronous first-paint graph — even though the pipeline
  * itself only runs on user click.
  *
  * This module deliberately depends ONLY on `/src/data/`:
@@ -25,7 +25,7 @@ import { TIER_ORDER, POPULATION_RANGES } from '../data/constants.js';
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
 
 // These need to be FUNCTIONS (not values) because hooks/selectors
-// historically called them as getTierOrder() - preserving the signature.
+// historically called them as getTierOrder() — preserving the signature.
 export const getTierOrder        = () => TIER_ORDER;
 export const getPopulationRanges = () => POPULATION_RANGES;
 

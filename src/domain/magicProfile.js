@@ -1,5 +1,5 @@
 /**
- * domain/magicProfile.js - Magic as a structured system.
+ * domain/magicProfile.js — Magic as a structured system.
  *
  * Tier 4.8 of the roadmap. Until now magic existed as a single
  * config flag (`config.magicLevel`: low / moderate / high / pervasive)
@@ -121,24 +121,24 @@ function deriveInstitutionalControl(settlement, profiles, contributors) {
     contributors.push({
       source: 'institutions',
       effect: 'institutional',
-      reason: `Arcane institution(s) without dominant faction presence - fragmented control.`,
+      reason: `Arcane institution(s) without dominant faction presence — fragmented control.`,
     });
     return 'fragmented';
   }
   contributors.push({
     source: 'config',
     effect: 'unregulated',
-    reason: 'No arcane institutions - practice is informal or absent.',
+    reason: 'No arcane institutions — practice is informal or absent.',
   });
   return 'unregulated';
 }
 
 function deriveCost(settlement, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
-  if (magic === 'pervasive')                    { contributors.push({ source: 'config.magicLevel', effect: 'cheap', reason: 'Pervasive magic - services cheap.' }); return 'cheap'; }
-  if (magic === 'high' || magic === 'common')   { contributors.push({ source: 'config.magicLevel', effect: 'moderate', reason: 'Magic widespread - services priced moderately.' }); return 'moderate'; }
-  if (magic === 'moderate')                     { contributors.push({ source: 'config.magicLevel', effect: 'costly', reason: 'Moderate magic - services costly.' }); return 'costly'; }
-  contributors.push({ source: 'config.magicLevel', effect: 'extortionate', reason: 'Rare magic - services extortionate.' });
+  if (magic === 'pervasive')                    { contributors.push({ source: 'config.magicLevel', effect: 'cheap', reason: 'Pervasive magic — services cheap.' }); return 'cheap'; }
+  if (magic === 'high' || magic === 'common')   { contributors.push({ source: 'config.magicLevel', effect: 'moderate', reason: 'Magic widespread — services priced moderately.' }); return 'moderate'; }
+  if (magic === 'moderate')                     { contributors.push({ source: 'config.magicLevel', effect: 'costly', reason: 'Moderate magic — services costly.' }); return 'costly'; }
+  contributors.push({ source: 'config.magicLevel', effect: 'extortionate', reason: 'Rare magic — services extortionate.' });
   return 'extortionate';
 }
 
@@ -152,7 +152,7 @@ function deriveRisk(settlement, causal, contributors) {
     contributors.push({
       source: 'var.magical_stability',
       effect: 'destabilized',
-      reason: `Magical stability is ${stabBand} - risks rise.`,
+      reason: `Magical stability is ${stabBand} — risks rise.`,
     });
     return upBand(RISK_BANDS, base, 1);
   }
@@ -163,20 +163,20 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
   const religious = profiles.find(p => p.archetype === 'religious');
   const arcane = profiles.find(p => p.archetype === 'arcane');
   if (!religious) {
-    contributors.push({ source: 'powerStructure', effect: 'no_religious', reason: 'No religious faction - acceptance defaults to indifferent.' });
+    contributors.push({ source: 'powerStructure', effect: 'no_religious', reason: 'No religious faction — acceptance defaults to indifferent.' });
     return 'indifferent';
   }
   const relPower = religious.power || 0;
   const arcPower = arcane?.power || 0;
   if (relPower > arcPower + 20) {
-    contributors.push({ source: religious.id, effect: 'hostile', reason: `${religious.name} dominates arcane influence - opposition is open.` });
+    contributors.push({ source: religious.id, effect: 'hostile', reason: `${religious.name} dominates arcane influence — opposition is open.` });
     return 'hostile';
   }
   if (arcPower > relPower + 20) {
-    contributors.push({ source: arcane?.id || 'powerStructure', effect: 'syncretic', reason: 'Arcane power dwarfs religious - magic woven into ritual.' });
+    contributors.push({ source: arcane?.id || 'powerStructure', effect: 'syncretic', reason: 'Arcane power dwarfs religious — magic woven into ritual.' });
     return 'syncretic';
   }
-  contributors.push({ source: religious.id, effect: 'wary', reason: 'Religious and arcane powers in rough balance - wary coexistence.' });
+  contributors.push({ source: religious.id, effect: 'wary', reason: 'Religious and arcane powers in rough balance — wary coexistence.' });
   return 'wary';
 }
 
@@ -267,6 +267,6 @@ export function summarizeMagic(settlement) {
     `Institutional control: ${m.institutionalControl}.`,
     `Cost: ${m.cost}. Risk: ${m.risk}.`,
     `Religious acceptance: ${m.religiousAcceptance}.`,
-    `Roles - economic: ${m.roles.economic}; military: ${m.roles.military}; medical: ${m.roles.medical}; infrastructure: ${m.roles.infrastructure}.`,
+    `Roles — economic: ${m.roles.economic}; military: ${m.roles.military}; medical: ${m.roles.medical}; infrastructure: ${m.roles.infrastructure}.`,
   ];
 }

@@ -1,5 +1,5 @@
 /**
- * domain/causalState.js - Unified causal state substrate.
+ * domain/causalState.js — Unified causal state substrate.
  *
  * Tier 2.4 of the roadmap. Today's settlement state is scattered across
  * a dozen subsystem-specific fields (`economicState.foodSecurity`,
@@ -34,11 +34,11 @@
  *     and is the canonical substrate vocabulary going forward.
  *
  * Inputs the substrate reads from:
- *   - Phase 9  factionProfile.js          - archetype + power
- *   - Phase 10 supplyChainState.js        - canonical chain statuses
- *   - Phase 13 npcProfile.js              - NPC composition
- *   - Phase 16 activeConditions.js        - canonical condition state
- *   - Settlement generator output         - population, prosperity,
+ *   - Phase 9  factionProfile.js          — archetype + power
+ *   - Phase 10 supplyChainState.js        — canonical chain statuses
+ *   - Phase 13 npcProfile.js              — NPC composition
+ *   - Phase 16 activeConditions.js        — canonical condition state
+ *   - Settlement generator output         — population, prosperity,
  *                                            stressors, defenseProfile,
  *                                            safetyProfile, etc.
  *
@@ -93,7 +93,7 @@ export const CAUSAL_BANDS = Object.freeze([
  * Map a 0..100 score to a band. Boundaries:
  *   ≥75 surplus | ≥50 adequate | ≥30 strained | ≥15 critical | else collapsed
  *
- * 50 is the neutral / no-information score and lands in 'adequate' -
+ * 50 is the neutral / no-information score and lands in 'adequate' —
  * the substrate is default-optimistic; surfaces only flag pressure
  * when there's evidence for it.
  */
@@ -121,11 +121,11 @@ export function defaultScoreForCausalBand(band) {
 
 /**
  * @typedef {Object} CausalContributor
- * @property {string} source   - Stable id of the input ('chain.food_security.x',
+ * @property {string} source   — Stable id of the input ('chain.food_security.x',
  *                                'condition.plague.y', 'faction.merchant_guilds').
- * @property {string} effect   - Short tag ('stable', 'strained', 'pressure', 'lift', ...).
- * @property {number} delta    - Signed integer added to the variable's score.
- * @property {string} reason   - Human-readable explanation.
+ * @property {string} effect   — Short tag ('stable', 'strained', 'pressure', 'lift', ...).
+ * @property {number} delta    — Signed integer added to the variable's score.
+ * @property {string} reason   — Human-readable explanation.
  */
 
 function push(contributors, source, effect, delta, reason) {
@@ -226,7 +226,7 @@ function derivePublicLegitimacy(s) {
   // Read directly from the legitimacy substrate
   const leg = s.powerStructure?.publicLegitimacy;
   if (leg && typeof leg.score === 'number') {
-    // Use the legitimacy score directly - it's already a 0-100 measure.
+    // Use the legitimacy score directly — it's already a 0-100 measure.
     score = leg.score;
     push(contributors, 'powerStructure.publicLegitimacy', leg.label || 'measured', 0,
       `Governing legitimacy score: ${leg.score} (${leg.label || 'unbanded'}).`);
@@ -638,7 +638,7 @@ export function deriveCausalState(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Convenience accessor - band for one variable. */
+/** Convenience accessor — band for one variable. */
 export function bandForVariable(settlement, variable) {
   const v = deriveSystemVariable(variable, settlement);
   return v ? v.band : null;
@@ -680,7 +680,7 @@ export function supportedSystemVariables() {
 
 // ── Variable polarity ────────────────────────────────────────────────────
 // Most substrate variables are "higher is better." Two are inverted by
-// name semantics - declared explicitly so consumers can render the
+// name semantics — declared explicitly so consumers can render the
 // right sign in deltas. (housing_pressure was deliberately inverted in
 // the derivation so it matches the higher-is-better convention; the
 // name is kept for roadmap parity.)
@@ -734,9 +734,9 @@ function explainCausalDelta(variable, before, after, change, bandBefore, bandAft
   const better = (polar === 'higher_is_better' && change > 0) ||
                  (polar === 'lower_is_better'  && change < 0);
   if (bandBefore !== bandAfter) {
-    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : ' - pressure increased'}`;
+    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : ' — pressure increased'}`;
   }
-  return `${label} ${dir} ${mag}${better ? '' : ' - pressure increased'}`;
+  return `${label} ${dir} ${mag}${better ? '' : ' — pressure increased'}`;
 }
 
 /**

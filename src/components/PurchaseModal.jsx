@@ -1,5 +1,5 @@
 /**
- * PurchaseModal.jsx - Credit pack and premium upgrade purchase UI.
+ * PurchaseModal.jsx — Credit pack and premium upgrade purchase UI.
  *
  * Displays available products with volume discount pricing and
  * initiates Stripe Checkout via the create-checkout edge function.
@@ -30,7 +30,7 @@ export default function PurchaseModal({ onClose }) {
     setLoading(product);
     try {
       await startCheckout(product);
-      // Redirects to Stripe - won't reach here unless it fails
+      // Redirects to Stripe — won't reach here unless it fails
     } catch (e) {
       setError(e.message);
       setLoading(null);

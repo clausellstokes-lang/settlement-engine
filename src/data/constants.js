@@ -1,4 +1,4 @@
-// constants.js - extracted from bundle
+// constants.js — extracted from bundle
 
 export const TIER_ORDER = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 export const TOWN_PLUS_TIERS = ['town', 'city', 'metropolis'];

@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * tests/lib/pendingDossier.test.js - Pre/post Stripe-redirect stash.
+ * tests/lib/pendingDossier.test.js — Pre/post Stripe-redirect stash.
  *
  * The stash is the only thing standing between a paid receipt and an
  * empty dossier, so pin its contract: TTL works, malformed payloads

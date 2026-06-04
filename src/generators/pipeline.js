@@ -1,5 +1,5 @@
 /**
- * pipeline.js - Settlement generation pipeline runner.
+ * pipeline.js — Settlement generation pipeline runner.
  *
  * Replaces the monolithic generateSettlement() with a sequence of named,
  * dependency-tracked steps that accumulate into a shared context object.
@@ -25,12 +25,12 @@ const _steps = new Map();
 /**
  * Register a pipeline step.
  *
- * @param {string}   name     - Unique step name (e.g. 'resolveTier')
- * @param {Object}   meta     - Step metadata
- * @param {string[]} meta.deps     - Names of steps this one reads from
- * @param {string[]} meta.provides - Context keys this step writes
+ * @param {string}   name     — Unique step name (e.g. 'resolveTier')
+ * @param {Object}   meta     — Step metadata
+ * @param {string[]} meta.deps     — Names of steps this one reads from
+ * @param {string[]} meta.provides — Context keys this step writes
  * @param {string}   [meta.phase]  - Logical phase grouping (for UI/debugging)
- * @param {Function} fn       - (ctx, rng) => Object  (patch to merge into ctx)
+ * @param {Function} fn       — (ctx, rng) => Object  (patch to merge into ctx)
  */
 export function registerStep(name, meta, fn) {
   if (_steps.has(name)) {
@@ -74,8 +74,8 @@ export function getStepOrder() {
 /**
  * Run the full pipeline.
  *
- * @param {Object} initialContext - Seed context (config, toggles, importedNeighbour, etc.)
- * @param {Object} rng           - Root PRNG instance from createPRNG()
+ * @param {Object} initialContext — Seed context (config, toggles, importedNeighbour, etc.)
+ * @param {Object} rng           — Root PRNG instance from createPRNG()
  * @param {Object} [options]
  * @param {Function} [options.onStep]  - Called after each step: (name, ctx, patch) => void
  * @param {string[]} [options.only]    - Run only these steps (+ their deps). For reactive re-runs.
@@ -131,7 +131,7 @@ export function runPipeline(initialContext, rng, options = {}) {
  * Given a set of changed context keys, return the minimal set of steps
  * that need to re-run (the changed keys' downstream dependents).
  *
- * @param {string[]} changedKeys - Context keys that changed
+ * @param {string[]} changedKeys — Context keys that changed
  * @returns {string[]} Step names to re-run (in pipeline order)
  */
 export function getAffectedSteps(changedKeys) {
@@ -171,9 +171,9 @@ export function getAffectedSteps(changedKeys) {
 /**
  * Re-run only the affected steps, using an existing context as base.
  *
- * @param {Object}   existingCtx  - Full context from a previous run
- * @param {string[]} changedKeys  - Which context keys changed
- * @param {Object}   rng          - Root PRNG (same seed for determinism)
+ * @param {Object}   existingCtx  — Full context from a previous run
+ * @param {string[]} changedKeys  — Which context keys changed
+ * @param {Object}   rng          — Root PRNG (same seed for determinism)
  * @param {Object}   [overrides]  - New values for the changed keys
  * @returns {Object} Updated context
  */

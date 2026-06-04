@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * aiPromptButton.test.jsx - Contract over P137 / HT-4.
+ * aiPromptButton.test.jsx — Contract over P137 / HT-4.
  *
  * Pins:
  *   • Hidden for anonymous users (anon tier sees nothing).

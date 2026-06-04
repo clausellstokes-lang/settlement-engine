@@ -1,5 +1,5 @@
 /**
- * tests/data/sampleSettlements.test.js - Tier 8.2 sample fixtures contract.
+ * tests/data/sampleSettlements.test.js — Tier 8.2 sample fixtures contract.
  *
  * Pins the sample shape so a future drift can't silently empty the
  * dashboard or strip required fields. Three integrity checks:
@@ -35,8 +35,8 @@ describe('SAMPLE_SETTLEMENTS shape contract', () => {
   it('every sample config matches the live generator config shape', () => {
     // The keys resolveConfig() actually reads. A sample that ships a
     // nested `sliders` object or a `nearbyTerrain` key looks plausible
-    // but forks into a generic town - every priority stays at the
-    // default 50 - because the engine never reads those keys. This test
+    // but forks into a generic town — every priority stays at the
+    // default 50 — because the engine never reads those keys. This test
     // pins the real shape so that regression can't ship again.
     const PRIORITY_KEYS = [
       'priorityMilitary', 'priorityReligion', 'priorityEconomy',
@@ -57,12 +57,12 @@ describe('SAMPLE_SETTLEMENTS shape contract', () => {
       expect(sample.config.nearbyTerrain).toBeUndefined();
       expect(VALID_TERRAINS).toContain(sample.config.terrainOverride);
 
-      // Monster threat must be a real tier - a free-text value like
+      // Monster threat must be a real tier — a free-text value like
       // 'occasional' falls through resolveConfig's normalisation.
       expect(VALID_THREATS).toContain(sample.config.monsterThreat);
 
       // Priority weights are flat priority* fields (DEFAULT_CONFIG
-      // shape), each a 0-100 int - not a nested `sliders` object.
+      // shape), each a 0-100 int — not a nested `sliders` object.
       expect(sample.config.sliders).toBeUndefined();
       for (const key of PRIORITY_KEYS) {
         expect(DEFAULT_CONFIG).toHaveProperty(key); // key name is real
@@ -104,7 +104,7 @@ describe('forkSeedFor()', () => {
 
   it('truncates the user-id suffix to keep seeds short and stable', () => {
     // forkSeedFor uses the first 8 chars of the user id, so two users
-    // whose ids differ only after char 8 collide deliberately - same
+    // whose ids differ only after char 8 collide deliberately — same
     // session, same fork.
     const a = forkSeedFor(sample, 'aaaaaaaa-different-tail-1');
     const b = forkSeedFor(sample, 'aaaaaaaa-different-tail-2');

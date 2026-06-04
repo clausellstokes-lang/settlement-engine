@@ -1,5 +1,5 @@
 /**
- * emailTemplates.js - Tier 8.5 lifecycle email templates.
+ * emailTemplates.js — Tier 8.5 lifecycle email templates.
  *
  * Defines the six lifecycle email types as plain JS templates with
  * subject + plain-text body + minimal HTML body. The edge function
@@ -15,9 +15,9 @@
  * verified without round-tripping through Supabase.
  *
  * Public surfaces of this module:
- *   - TEMPLATES - frozen map of key → { subject, text, html }
+ *   - TEMPLATES — frozen map of key → { subject, text, html }
  *   - renderTemplate(key, payload) → { subject, text, html }
- *   - listTemplateKeys() - for the edge function's enum check
+ *   - listTemplateKeys() — for the edge function's enum check
  *
  * Templates use `{var}` placeholders. The renderer substitutes from
  * the payload. Missing vars render as the literal `{var}` so a bug
@@ -43,7 +43,7 @@ export const TEMPLATES = Object.freeze({
       '',
       '  • Every settlement is simulated from constraints. Not AI-generated.',
       '    Each town is the only coherent settlement that satisfies the',
-      '    constraints you set - sliders, terrain, trade, stress.',
+      '    constraints you set — sliders, terrain, trade, stress.',
       '',
       '  • Your first three saves are free. After that, sign up for a',
       '    Cartographer subscription or claim a Founder Lifetime seat',
@@ -55,7 +55,7 @@ export const TEMPLATES = Object.freeze({
       '',
       'Forge well.',
       '',
-      '- SettlementForge',
+      '— SettlementForge',
       'https://settlementforge.com',
     ].join('\n'),
     html: null,  // text-only for v1; HTML can be added per template later
@@ -75,7 +75,7 @@ export const TEMPLATES = Object.freeze({
       'narrative refinement passes you have run. Future regenerations',
       'will not overwrite locked entities.',
       '',
-      '- SettlementForge',
+      '— SettlementForge',
     ].join('\n'),
     html: null,
   },
@@ -91,7 +91,7 @@ export const TEMPLATES = Object.freeze({
       'narrative refinement you have layered on. If anything looks off,',
       'you can re-export from the settlement detail view at any time.',
       '',
-      '- SettlementForge',
+      '— SettlementForge',
     ].join('\n'),
     html: null,
   },
@@ -108,11 +108,11 @@ export const TEMPLATES = Object.freeze({
       'Top up here:',
       '  https://settlementforge.com/pricing',
       '',
-      'Reminder: settlements themselves never use credits - only the',
+      'Reminder: settlements themselves never use credits — only the',
       'optional narrative refinement layer does. Your simulator output',
       'continues to work as normal.',
       '',
-      '- SettlementForge',
+      '— SettlementForge',
     ].join('\n'),
     html: null,
   },
@@ -124,7 +124,7 @@ export const TEMPLATES = Object.freeze({
       '',
       'You are one of the first 500 supporters. Thank you.',
       '',
-      'Your Founder Lifetime seat is permanent - Cartographer-tier',
+      'Your Founder Lifetime seat is permanent — Cartographer-tier',
       'access, unlimited saves, all current and future expansion packs.',
       'You also get the Founder badge on every dossier you publish.',
       '',
@@ -133,7 +133,7 @@ export const TEMPLATES = Object.freeze({
       '',
       'Forge well.',
       '',
-      '- SettlementForge',
+      '— SettlementForge',
     ].join('\n'),
     html: null,
   },
@@ -154,7 +154,7 @@ export const TEMPLATES = Object.freeze({
       '',
       'Sign up: https://settlementforge.com/signin',
       '',
-      '- SettlementForge',
+      '— SettlementForge',
     ].join('\n'),
     html: null,
   },
@@ -193,7 +193,7 @@ export function listTemplateKeys() {
  * the template uses is present as a key in the payload. Useful for the
  * edge function to fail fast on bad inputs before calling the provider.
  *
- * @returns {string[]} - array of missing variable names; empty when ok.
+ * @returns {string[]} — array of missing variable names; empty when ok.
  */
 export function missingVariables(key, payload = {}) {
   const tmpl = TEMPLATES[key];

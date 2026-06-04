@@ -4,7 +4,7 @@ import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, A
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
 import {getAllModifiers, EFFECT_CATEGORIES, fmtMod} from '../lib/relationshipGraph.js';
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
-// Lazy-load on user action so the Settlements first paint stays light -
+// Lazy-load on user action so the Settlements first paint stays light —
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
@@ -88,7 +88,7 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
   const [moveOpen, setMoveOpen] = useState(false);
   const ts = (t) => { try { return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; } };
 
-  // No overflow:hidden on the wrapper - would clip the "move to campaign"
+  // No overflow:hidden on the wrapper — would clip the "move to campaign"
   // popover that opens below the arrow button. DeleteConfirmation below
   // carries its own rounded corners + top margin, so nothing visually escapes.
   return (
@@ -194,7 +194,7 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
   const [confirmDelete, setConfirmDelete] = useState(false);
   const collapsed = campaign.collapsed;
 
-  // No overflow:hidden on the wrapper - would clip the "move to campaign"
+  // No overflow:hidden on the wrapper — would clip the "move to campaign"
   // popover on cards inside this section. The header's top corners are
   // rounded explicitly to match the parent so the cream background doesn't
   // poke outside the rounded outer border.
@@ -282,7 +282,7 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
 
 // ── Sample dashboard (Tier 8.2) ────────────────────────────────────────────
 // Rendered in the saves empty state. Three teaser cards seed expectations
-// so new accounts never see "you have nothing - go figure it out." Forking
+// so new accounts never see "you have nothing — go figure it out." Forking
 // loads the sample's config into the wizard with a user-suffixed seed.
 
 function SampleCard({ sample, onFork, forking }) {
@@ -355,7 +355,7 @@ function SampleCard({ sample, onFork, forking }) {
           letterSpacing: '0.04em', textTransform: 'uppercase',
         }}
       >
-        {forking ? 'Generating...' : t('generate.button')}
+        {forking ? 'Generating…' : t('generate.button')}
       </button>
     </article>
   );
@@ -375,7 +375,7 @@ function SampleDashboard({ onFork, forkingId }) {
         marginBottom: 10,
         textAlign: 'center',
       }}>
-        Start from a sample - or roll your own
+        Start from a sample — or roll your own
       </div>
       <p style={{
         margin: '0 auto 14px', maxWidth: 460,
@@ -383,7 +383,7 @@ function SampleDashboard({ onFork, forkingId }) {
         textAlign: 'center', fontFamily: sans,
       }}>
         Three hand-picked seeds you can fork into your own saves. Each forks
-        with a unique character - same setting, different settlement.
+        with a unique character — same setting, different settlement.
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {SAMPLE_SETTLEMENTS.map(sample => (
@@ -453,7 +453,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   };
 
   // Which sample is mid-generation (holds the sample.id). Drives the
-  // per-card disabled state + transient "Generating..." label so a slow
+  // per-card disabled state + transient "Generating…" label so a slow
   // engine load can't be double-clicked into two concurrent forks.
   const [forkingId, setForkingId] = useState(null);
 
@@ -464,10 +464,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
    *   1. Load the sample's config into generator state with a
    *      user-suffixed seed so two users forking the same sample get
    *      mechanically-different towns.
-   *   2. Run the engine (generateSettlement(seed)) - this populates the
+   *   2. Run the engine (generateSettlement(seed)) — this populates the
    *      store's `settlement` so the Create view shows the result.
    *   3. If the user can save (signed-in, under cap), persist the fork
-   *      to their library immediately - "generate AND save" in one tap.
+   *      to their library immediately — "generate AND save" in one tap.
    *   4. Navigate to the Create view to reveal the dossier.
    * If generation returns null (e.g. an anon/free user forking the city
    * sample, which is tier-gated above town), open the purchase modal so
@@ -562,7 +562,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // Store-watcher effect: opens the detail view when the world map
   // requests a focus. setDetail-in-effect is flagged by React Compiler,
   // but here the effect is a true side-channel (reacting to external
-  // store changes), not a render-derived sync - the correct pattern
+  // store changes), not a render-derived sync — the correct pattern
   // remains an effect until store integration moves to useSyncExternalStore.
   // `detail` and `clearSelectedSettlement` are intentionally omitted
   // from deps: we only want the effect to re-fire when an external
@@ -600,17 +600,17 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
        
       setDetail(null);
     }
-    // `detail` intentionally omitted - see note above.
+    // `detail` intentionally omitted — see note above.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeId, savesLoading, saves]);
 
   // detail → route: opening/closing the detail in-app (list click, world-map
   // focus, Back-to-list, delete) writes the canonical URL. Guarded three ways
   // so it never fights the route:
-  //   • skip the initial mount (a deep link's detail is still null then - the
+  //   • skip the initial mount (a deep link's detail is still null then — the
   //     route→detail effect opens it once saves load);
   //   • only act while we're on the /settlements surface (loading a save into
-  //     the generator navigates to /create + closes detail in the same tick -
+  //     the generator navigates to /create + closes detail in the same tick —
   //     we must not yank the URL back);
   //   • no-op when the URL already matches (covers Back/Forward, where the
   //     browser changed the URL before the route→detail effect closed us).
@@ -660,7 +660,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     const updatedDetailSave = updatedSaves.find(s => s.id === saveId);
     if (updatedDetailSave) setDetail(d => ({ ...d, ...updatedDetailSave, saveData: updatedDetailSave }));
 
-    // AI-2: cosmetic-tier change - cascade the rename into every touched
+    // AI-2: cosmetic-tier change — cascade the rename into every touched
     // save's ai_data blob too. applyCosmeticRename no-ops when a save has
     // no narrative, so this is cheap for unnarrated saves.
     for (const mid of modifiedIds) {
@@ -677,7 +677,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     // Audit fix: pull the lifecycle data off the global slice and embed
     // it in the save record's `campaignState`. Without this, canonized
     // settlements would lose their phase / eventLog / systemState /
-    // canonizedAt on every reload - the CRIT bug from the audit list.
+    // canonizedAt on every reload — the CRIT bug from the audit list.
     const live = useStore.getState();
     const campaignState = {
       phase:        live.phase || 'draft',
@@ -870,7 +870,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   const unassignedSaves = useMemo(() => saves.filter(s => !assignedIds.has(s.id)), [saves, assignedIds]);
 
-  // P108 / E-6 - Library search + sort + filter state. Self-contained
+  // P108 / E-6 — Library search + sort + filter state. Self-contained
   // here; LibraryToolbar is a controlled component. The filter pipeline
   // (applyLibraryFilters) is a pure function over the saves array.
   const [libraryQuery, setLibraryQuery] = useState('');
@@ -901,7 +901,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:12, maxWidth: PAGE_MAX, margin:'0 auto', width:'100%' }}>
 
-      {/* P108 / E-6 - Library toolbar (search + sort + filter chips). */}
+      {/* P108 / E-6 — Library toolbar (search + sort + filter chips). */}
       {saves.length > 0 && (
         <LibraryToolbar
           query={libraryQuery}
@@ -958,8 +958,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       {savesLoading ? (
         <div style={{ padding:'24px 16px', textAlign:'center', fontSize:FS.md, color:MUTED, background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>Loading saves...</div>
       ) : saves.length === 0 ? (
-        // Tier 8.2 - show sample dossiers instead of a bare empty state.
-        // Eliminates the "you have nothing - go figure it out" first run.
+        // Tier 8.2 — show sample dossiers instead of a bare empty state.
+        // Eliminates the "you have nothing — go figure it out" first run.
         <SampleDashboard onFork={forkSample} forkingId={forkingId} />
       ) : (
         <>

@@ -1,4 +1,4 @@
-// INSTITUTION_TAGS - institution tag constants (matching institutionalCatalog.js)
+// INSTITUTION_TAGS — institution tag constants (matching institutionalCatalog.js)
 const INSTITUTION_TAGS = {
   TRADE: "trade",
   MARKET: "market",
@@ -44,7 +44,7 @@ const INSTITUTION_TAGS = {
   EXOTIC: "exotic"
 };
 
-// geographyData.js - extracted from bundle
+// geographyData.js — extracted from bundle
 // De-minified from original minified identifiers
 
 export const TERRAIN_DATA = {
@@ -705,4 +705,4 @@ export const TERRAIN_DATA = {
   }
 };
 
-// TERRAIN_PENALTIES computed from STRESS_TYPES - see stressTypes.js
+// TERRAIN_PENALTIES computed from STRESS_TYPES — see stressTypes.js

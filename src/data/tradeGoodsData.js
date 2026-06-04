@@ -830,7 +830,7 @@ export const GOODS_MODIFIERS_BY_TIER = {
     },
   },
 };
-// COMMODITY_CATEGORY_MAP - maps resource keys to commodity categories
+// COMMODITY_CATEGORY_MAP — maps resource keys to commodity categories
 export const COMMODITY_CATEGORY_MAP = {
   fish: "fish",
   salt: "salt",

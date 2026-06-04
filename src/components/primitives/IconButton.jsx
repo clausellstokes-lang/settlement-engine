@@ -1,5 +1,5 @@
 /**
- * primitives/IconButton - Required-aria-label icon button.
+ * primitives/IconButton — Required-aria-label icon button.
  *
  * Why this primitive: the audit found we strip focus outlines and use
  * many small icon-only buttons without accessible labels. WCAG 2.2's
@@ -8,7 +8,7 @@
  *   1. an aria-label is always provided (development-time error if not)
  *   2. minimum 24×24 px target
  *   3. a visible focus ring via the global :focus-visible rule
- *   4. native <button> semantics - never a div with onClick
+ *   4. native <button> semantics — never a div with onClick
  *
  * Tones map to the existing palette but are bounded so callers can't
  * style themselves out of accessibility (no "ghost on ghost" combos).
@@ -31,12 +31,12 @@ const SIZES = {
 /**
  * @param {Object} props
  * @param {React.ComponentType<{size?:number}>} props.Icon  lucide-react icon component
- * @param {string} props.label                aria-label / tooltip - REQUIRED
+ * @param {string} props.label                aria-label / tooltip — REQUIRED
  * @param {() => void} [props.onClick]
  * @param {keyof typeof TONES} [props.tone='default']
  * @param {keyof typeof SIZES} [props.size='md']
  * @param {boolean} [props.disabled]
- * @param {boolean} [props.pressed]           for toggle buttons - sets aria-pressed
+ * @param {boolean} [props.pressed]           for toggle buttons — sets aria-pressed
  * @param {string} [props.type='button']
  */
 export default function IconButton({

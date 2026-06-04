@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * tests/lib/flags.test.js - Feature flag resolution contract.
+ * tests/lib/flags.test.js — Feature flag resolution contract.
  *
  * The resolution order is the whole point of the flag system, so we
  * pin it down explicitly: URL > localStorage > env > default.
@@ -36,11 +36,11 @@ describe('flag() resolution', () => {
   });
 
   it('localStorage override beats default', () => {
-    // An explicit true override wins over the false default...
+    // An explicit true override wins over the false default…
     setFlagOverride('discordOauth', true);
     expect(flag('discordOauth')).toBe(true);
 
-    // ...and an explicit false override is honored, not treated as "unset"
+    // …and an explicit false override is honored, not treated as "unset"
     // (guards the nullish-coalescing precedence in flag()).
     setFlagOverride('discordOauth', false);
     expect(flag('discordOauth')).toBe(false);

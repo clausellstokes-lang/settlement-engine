@@ -8,7 +8,7 @@
  *
  * Why server-side: the browser must never hold the Anthropic key (enforced by
  * tests/security/clientAiBoundary.contract.test.js). Same trust-boundary shape
- * as generate-narrative - bot guard → JWT auth → atomic credit spend RPC →
+ * as generate-narrative — bot guard → JWT auth → atomic credit spend RPC →
  * model call → refund on failure.
  *
  * NOTE for deploy: mirror CHRONICLE_COST into src/config/pricing.js if you wire
@@ -24,7 +24,7 @@ const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 const CHRONICLE_MODEL = 'claude-haiku-4-5-20251001';
 const CHRONICLE_COST = 2; // credits; mirror in src/config/pricing.js when wired
 
-const HOUSE_STYLE = `Voice: a measured court chronicler. Concrete, specific, a little wry. No "nestled", no "bustling", no "tapestry of". Name the settlements. Do NOT invent events, NPCs, or facts - narrate ONLY what the grounding provides.`;
+const HOUSE_STYLE = `Voice: a measured court chronicler. Concrete, specific, a little wry. No "nestled", no "bustling", no "tapestry of". Name the settlements. Do NOT invent events, NPCs, or facts — narrate ONLY what the grounding provides.`;
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -38,7 +38,7 @@ function json(body: unknown, status = 200) {
 
 function buildPrompt(grounding: any): string {
   const headlines = (grounding?.headlines || [])
-    .map((h: any) => `- [${h.scope}/${h.significance}] ${h.headline}${h.summary ? ` - ${h.summary}` : ''}`)
+    .map((h: any) => `- [${h.scope}/${h.significance}] ${h.headline}${h.summary ? ` — ${h.summary}` : ''}`)
     .join('\n');
   const stressors = (grounding?.stressors || [])
     .map((s: any) => `- ${s.label || s.type} (severity ${Number(s.severity || 0).toFixed(2)}) in ${(s.affected || []).join(', ')}`)
@@ -54,7 +54,7 @@ SEASON: ${grounding?.calendar ? `${grounding.calendar.season || ''} of year ${gr
 REALM-WIDE ARCS:
 ${realm || '(none)'}
 
-HEADLINES (ground every claim in these - do not add events):
+HEADLINES (ground every claim in these — do not add events):
 ${headlines || '(a quiet season)'}
 
 ACTIVE PRESSURES:

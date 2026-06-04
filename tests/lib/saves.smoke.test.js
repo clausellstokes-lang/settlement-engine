@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * Smoke tests for src/lib/saves.js - the save/load service that backs
+ * Smoke tests for src/lib/saves.js — the save/load service that backs
  * the campaign library.
  *
  * Architecture note: `saves.*` is bound at module-load time to either
@@ -27,7 +27,7 @@
 import { describe, test, expect, beforeEach, vi } from 'vitest';
 
 // ── Test 1: local backend (supabase mocked to unconfigured) ────────────
-describe('saves - local backend round-trip', () => {
+describe('saves — local backend round-trip', () => {
   let saves;
 
   beforeEach(async () => {
@@ -158,7 +158,7 @@ describe('saves - local backend round-trip', () => {
 });
 
 // ── Test 2: supabase backend (mocked fluent client) ────────────────────
-describe('saves - supabase backend round-trip (mocked)', () => {
+describe('saves — supabase backend round-trip (mocked)', () => {
   let saves;
   const mockState = { rows: [], lastInsert: null, lastUpdate: null };
 

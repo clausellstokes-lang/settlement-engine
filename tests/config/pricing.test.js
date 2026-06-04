@@ -1,12 +1,12 @@
 /** @vitest-environment jsdom */
 /**
- * tests/config/pricing.test.js - Pricing config single-source-of-truth tests.
+ * tests/config/pricing.test.js — Pricing config single-source-of-truth tests.
  *
  * These tests are deliberately strict because pricing drift is one of
  * the highest-stakes bugs we can ship: any mismatch between client and
  * server numbers either over-charges users or lets them spend free
  * credits. The contract test below pins the client's AI cost schedule
- * to the values the edge function enforces - when either changes, the
+ * to the values the edge function enforces — when either changes, the
  * test fails and forces a deliberate sync.
  */
 

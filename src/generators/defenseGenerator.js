@@ -1,6 +1,6 @@
 /**
  * defenseGenerator.js
- * Defense profile generation - fortress readiness scores across five dimensions.
+ * Defense profile generation — fortress readiness scores across five dimensions.
  *
  * Provides:
  *  - getDefenseInstitutions: classify institutions into defense categories
@@ -54,22 +54,22 @@ const getDefenseInstitutions = (institutions) => {
 
 // ─── computeDefenseScores ─────────────────────────────────────────────────────
 /**
- * Calculate five defense dimension scores (0-100 each) from institution
+ * Calculate five defense dimension scores (0–100 each) from institution
  * presence, influence scores, and active stress conditions.
  *
  * Dimensions:
- *  military  - conventional force readiness (walls + garrison = highest weight)
- *  monster   - capacity to handle supernatural/creature threats
- *  internal  - civil order and law enforcement effectiveness
- *  economic  - logistical resilience (food, medicine, trade access)
- *  magical   - arcane defense and countermeasure capability
+ *  military  — conventional force readiness (walls + garrison = highest weight)
+ *  monster   — capacity to handle supernatural/creature threats
+ *  internal  — civil order and law enforcement effectiveness
+ *  economic  — logistical resilience (food, medicine, trade access)
+ *  magical   — arcane defense and countermeasure capability
  *
  * @param {Object} inst          - Institution presence flags from getInstFlags
- * @param {number} milEffective  - Military effective score (0-100)
- * @param {number} crimEffective - Criminal effective score (0-100)
- * @param {number} econOutput    - Economy output score (0-100)
- * @param {number} magInfluence  - Magic influence score (0-100)
- * @param {number} relInfluence  - Religion influence score (0-100)
+ * @param {number} milEffective  - Military effective score (0–100)
+ * @param {number} crimEffective - Criminal effective score (0–100)
+ * @param {number} econOutput    - Economy output score (0–100)
+ * @param {number} magInfluence  - Magic influence score (0–100)
+ * @param {number} relInfluence  - Religion influence score (0–100)
  * @param {Object} priorities    - Raw priority values
  * @param {string} threat        - Monster threat level
  * @param {Object} config        - Settlement config
@@ -104,7 +104,7 @@ const computeDefenseScores = (
     'mages\' guild','wizard\'s tower','arcane academy','mages\' district','academy of magic'
   );
 
-  // Divine: cleric/temple - uses religion priority as primary gate (not magic)
+  // Divine: cleric/temple — uses religion priority as primary gate (not magic)
   // Suppressed in no-magic mode for supernatural effects
   const hasDivine   = magicOn && relPri >= 55 && (
     hasInst('cathedral','monastery','great cathedral','parish church') ||
@@ -113,18 +113,18 @@ const computeDefenseScores = (
   // Strong divine: cathedral/monastery level
   const hasDivineStrong = magicOn && relPri >= 65 && hasInst('cathedral','monastery','great cathedral');
 
-  // Druid/nature tradition - not route-gated, but more likely in certain contexts
+  // Druid/nature tradition — not route-gated, but more likely in certain contexts
   const hasDruid    = magicOn && magPri >= 30 && hasInst(
     'druid circle','grove shrine','elder grove','warden\'s lodge','sacred grove'
   );
 
-  // Alchemy - amplifier tradition, lower magic threshold
+  // Alchemy — amplifier tradition, lower magic threshold
   const hasAlchemy  = magicOn && magPri >= 15 && hasInst(
     'alchemist','apothecary district','alchemist quarter'
   );
 
   // ── Tier-appropriate community defense baseline (thorp/hamlet/village) ─────
-  // Small settlements don't have garrison/walls - they have terrain, cohesion,
+  // Small settlements don't have garrison/walls — they have terrain, cohesion,
   // and community alertness. Score these directly rather than penalising absence.
   const isSmall  = ['thorp','hamlet','village'].includes(tier);
   const isThorp  = tier === 'thorp';
@@ -169,7 +169,7 @@ const computeDefenseScores = (
   if (inst.hasMercenary)   military += 14;
   if (inst.hasCharterHall) military += 10;
 
-  // Arcane deterrence - scaled (replaces flat +8)
+  // Arcane deterrence — scaled (replaces flat +8)
   if (hasArcane) {
     const deterrence = Math.round(10 + Math.min(15, (magPri - 35) * 0.25));
     military += deterrence;
@@ -182,12 +182,12 @@ const computeDefenseScores = (
   const hasAnyDefense = inst.hasWalls || inst.hasGarrison || inst.hasMilitia ||
                         inst.hasWatch || inst.hasMercenary || inst.hasCharterHall;
   military = Math.min(100, military + Math.round(milEffective * (hasAnyDefense ? 0.35 : 0.06)));
-  // Apply terrain multiplier - natural chokepoints, elevation, approach restriction
+  // Apply terrain multiplier — natural chokepoints, elevation, approach restriction
   military = Math.min(100, Math.round(military * terrainMilMult));
 
   // ── Monster score ───────────────────────────────────────────────────────────
   let monster = 0;
-  // Threat-level baseline even at thorp tier - pitchforks and communal watch
+  // Threat-level baseline even at thorp tier — pitchforks and communal watch
   if (threat === 'plagued')  monster += 8;
   else if (threat === 'frontier') monster += 4;
   if (inst.hasCharterHall) monster += 35;
@@ -196,10 +196,10 @@ const computeDefenseScores = (
   if (inst.hasMilitia)     monster += 12;
   if (inst.hasHospital)    monster +=  5;
 
-  // Tradition bonuses - capped at +35 combined
+  // Tradition bonuses — capped at +35 combined
   let monsterMagicBonus = 0;
   if (hasArcane)  monsterMagicBonus += Math.round(15 + Math.min(10, (magPri - 35) * 0.2)); // fireballs, force
-  if (hasDivine)  monsterMagicBonus += 18; // Turn Undead - highest vs undead/fiends
+  if (hasDivine)  monsterMagicBonus += 18; // Turn Undead — highest vs undead/fiends
   if (hasDruid)   monsterMagicBonus += 12; // beast lore, tracking
   monster = Math.min(100, monster + Math.min(35, monsterMagicBonus));
   if (threat === 'plagued') monster = Math.max(0, monster - 15);
@@ -243,13 +243,13 @@ const computeDefenseScores = (
   economic = Math.min(100, economic); // re-cap after alchemy bonus
 
   // ── Magical defense score ───────────────────────────────────────────────────
-  // Driven by computeEffectiveMagicPresence - same source of truth as Daily Life and Power tabs.
+  // Driven by computeEffectiveMagicPresence — same source of truth as Daily Life and Power tabs.
   // Tradition flags (arcane/divine/druid) modify the defensive PROFILE, not the base score.
   // Tier gate: thorps and hamlets get 0 magical defense unless a magic institution is actually present.
-  // The slider alone shouldn't give tiny settlements magical defense - they have no practitioners.
+  // The slider alone shouldn't give tiny settlements magical defense — they have no practitioners.
   const _isSmallTier = ['thorp','hamlet','village'].includes(tier);
   // For the tier gate: hasDivine means actual miracle/healing presence, not just a standard parish.
-  // Parish church is universal at village+ - it shouldn't unlock magical defense on its own.
+  // Parish church is universal at village+ — it shouldn't unlock magical defense on its own.
   // Use hasInst() which is already available in this scope.
   const _hasActualMagic = inst.hasMagicInst || hasDruid || hasArcane
     || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
@@ -363,10 +363,10 @@ const computeDefenseScores = (
   }
 
   if (hasStress('monster_pressure')) {
-    // Base penalty - but magic can REVERSE this into a net positive
+    // Base penalty — but magic can REVERSE this into a net positive
     let monsterPenalty = 20;
     let milPenalty     = 5;
-    // Arcane: fireballs, force walls - can turn pressure into opportunity
+    // Arcane: fireballs, force walls — can turn pressure into opportunity
     if (hasArcane && magPri >= 40) monsterPenalty = Math.round(monsterPenalty * 0.25); // -20 → -5
     if (hasDivine)                 monsterPenalty = Math.round(monsterPenalty * 0.4);  // -20 → -8
     if (hasDruid)                  monsterPenalty = Math.round(monsterPenalty * 0.5);  // -20 → -10
@@ -375,7 +375,7 @@ const computeDefenseScores = (
   }
 
   // ── Magic dependency flag ───────────────────────────────────────────────────
-  // Computed but returned separately - indicates vulnerability if magic lost
+  // Computed but returned separately — indicates vulnerability if magic lost
   // Magic dependency: fires when magic is actively compensating for vulnerabilities
   // Either under stress with magic filling gaps, OR when multiple traditions present
   // in a settlement that has supply chain or resource deficits
@@ -407,7 +407,7 @@ const computeDefenseScores = (
  * @returns {{ label, color, background, border }}
  */
 const computeDefenseReadiness = (scores, threat, tier, magicExists = true) => {
-  // Small tiers are cheaper to defend - small bonus that reflects genuine scale
+  // Small tiers are cheaper to defend — small bonus that reflects genuine scale
   // (fewer approaches, everyone knows everyone, simpler to coordinate)
   const tierBonus =
     tier === 'thorp'  ? 12 :
@@ -553,9 +553,9 @@ export function buildThreatAssessment(r) {
       mon = 'Embattled region: constant creature pressure. Walls and garrison have established a survivable posture. Defense is an ongoing operational necessity. '
         + (hasCharter
           ? 'Charter hall coordinates specialist monster response.'
-          : 'No specialist monster hunters on retainer - the garrison handles everything.');
+          : 'No specialist monster hunters on retainer — the garrison handles everything.');
     } else if (hasWalls && hasMilitia) {
-      mon = 'Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin - simultaneous incursions will break coverage. '
+      mon = 'Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin — simultaneous incursions will break coverage. '
         + (hasCharter
           ? 'Charter hall provides specialist backup.'
           : 'No specialist monster hunters.');
@@ -570,13 +570,13 @@ export function buildThreatAssessment(r) {
     }
   } else if (threat === 'frontier') {
     if (hasWalls && hasGarrison) {
-      mon = 'Active frontier. Walls and garrison provide credible deterrence - most creature threats will not press a defended perimeter. '
+      mon = 'Active frontier. Walls and garrison provide credible deterrence — most creature threats will not press a defended perimeter. '
         + (hasCharter
           ? 'Charter hall handles anything above the garrison usual remit. '
           : '')
         + 'Adequate for the threat level.';
     } else if (hasWalls && hasMilitia) {
-      mon = 'Palisade and militia are standard frontier resilience - effective against most creature threats, strained by simultaneous incursions. '
+      mon = 'Palisade and militia are standard frontier resilience — effective against most creature threats, strained by simultaneous incursions. '
         + (hasCharter
           ? 'Charter hall provides specialist backup. '
           : '')
@@ -584,13 +584,13 @@ export function buildThreatAssessment(r) {
     } else if (hasGarrison || hasMilitia) {
       mon = 'Active frontier with '
         + (hasGarrison ? 'a garrison' : 'a militia')
-        + ' but no perimeter. Defense is reactive - attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.';
+        + ' but no perimeter. Defense is reactive — attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.';
     } else {
       mon = 'Active frontier with no organized defense. Vulnerable to any monster of moderate capability.';
     }
   } else {
     if (hasWalls && hasGarrison) {
-      mon = 'Safe heartland - the existing defenses are substantially more than the threat level requires.';
+      mon = 'Safe heartland — the existing defenses are substantially more than the threat level requires.';
     } else if (hasWalls || hasGarrison || hasMilitia || hasCharter) {
       mon = 'Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary threats here are internal.';
     } else {
@@ -614,7 +614,7 @@ export function buildThreatAssessment(r) {
   if (hasWalls && hasGarrison) {
     mil = 'Walls and professional garrison provide meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
   } else if (hasWalls && hasMilitia) {
-    mil = 'Walls with citizen militia - credible deterrence against raiders, inadequate against any professional force with siege capability.';
+    mil = 'Walls with citizen militia — credible deterrence against raiders, inadequate against any professional force with siege capability.';
   } else if (hasWalls) {
     mil = 'Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.';
   } else if (hasGarrison) {
@@ -649,7 +649,7 @@ export function buildThreatAssessment(r) {
   } else if (f.hasPrison) {
     intA += 'Detention without systematic prosecution.';
   } else {
-    intA += 'No legal infrastructure - order relies on force alone.';
+    intA += 'No legal infrastructure — order relies on force alone.';
   }
   result.push({
     icon: '',
@@ -682,12 +682,12 @@ export function buildThreatAssessment(r) {
   });
 
   const disA = (f.hasGranary
-    ? 'Granary provides food buffer - the community can absorb a bad harvest without immediate hardship.'
+    ? 'Granary provides food buffer — the community can absorb a bad harvest without immediate hardship.'
     : 'No food reserves. A crop failure or supply disruption causes immediate hardship.')
     + (f.hasHospital
       ? ' Hospital infrastructure enables disease containment and systematic quarantine.'
       : f.hasChurch
-        ? ' Parish clergy provide basic wound care - better than nothing, worse than a hospital.'
+        ? ' Parish clergy provide basic wound care — better than nothing, worse than a hospital.'
         : ' No medical infrastructure. Plague spreads until it burns out.');
   result.push({
     icon: '',

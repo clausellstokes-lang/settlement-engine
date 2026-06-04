@@ -1,20 +1,20 @@
 /**
- * lib/pricingMoments.js - Trigger pricing prompts at value moments,
+ * lib/pricingMoments.js — Trigger pricing prompts at value moments,
  * not at first visit.
  *
  * The audit's pricing-funnel critique: don't ask users to pay before
  * they understand the core value. Apple HIG agrees. The current app
  * shows pricing prompts in places that aren't tied to user intent
  * (modal walls). This module replaces that with a small registry of
- * "moments" - first canonize, first AI use, first canon export, cloud
- * save - each with its own copy and a per-moment cooldown.
+ * "moments" — first canonize, first AI use, first canon export, cloud
+ * save — each with its own copy and a per-moment cooldown.
  *
  * Cooldown: 24h per moment per user (localStorage). The same
  * canonize-completion-prompt won't fire again the next morning, but
  * the next user-visible moment (their first export, say) is a fresh
  * trigger and a different copy.
  *
- * Premium users are skipped entirely - they've already converted.
+ * Premium users are skipped entirely — they've already converted.
  * Anonymous users see all moments. Free authenticated users see the
  * upgrade pitch.
  *
@@ -65,13 +65,13 @@ export function triggerPricingMoment(reason, openModal, opts = {}) {
   }
 }
 
-/** Force-reset a moment's cooldown - exposed for testing and "show me
+/** Force-reset a moment's cooldown — exposed for testing and "show me
  *  again" affordances in settings. */
 export function resetPricingMoment(reason) {
   try { localStorage.removeItem(STORAGE_PREFIX + reason); } catch {}
 }
 
-/** Reset all moments - useful on sign-out so the next user starts fresh. */
+/** Reset all moments — useful on sign-out so the next user starts fresh. */
 export function resetAllPricingMoments() {
   if (typeof localStorage === 'undefined') return;
   try {

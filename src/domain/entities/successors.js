@@ -1,10 +1,10 @@
 /**
- * domain/entities/successors.js - Suggest successors for a removed NPC.
+ * domain/entities/successors.js — Suggest successors for a removed NPC.
  *
  * The plan flagged this gap: when a pillar NPC dies, the engine knows
  * the institution is now vacant but doesn't know who could fill the
  * role. Without successor logic, every leader-death event creates an
- * authoring burden - the user has to invent a replacement from scratch.
+ * authoring burden — the user has to invent a replacement from scratch.
  *
  * `inferSuccessors` walks the settlement and ranks viable candidates
  * for an outgoing NPC by linkage strength + importance + alignment.
@@ -20,10 +20,10 @@
  * Find the most likely successors to an outgoing NPC.
  *
  * Ranking criteria (in order):
- *   1. Already linked to the same institution(s) - internal succession
+ *   1. Already linked to the same institution(s) — internal succession
  *      (the obvious candidate: the deputy)
- *   2. Linked to the same faction(s) - political loyalty
- *   3. Importance tier - key > notable > minor
+ *   2. Linked to the same faction(s) — political loyalty
+ *   3. Importance tier — key > notable > minor
  *   4. Influence score (if present)
  *
  * Returns up to `limit` candidates. Pillar NPCs aren't normally
@@ -68,7 +68,7 @@ export function precomputeSuccessors({ npc, settlement, limit = 3 }) {
 }
 
 function scoreCandidate(candidate, outInst, outFac) {
-  // Institutional overlap is the strongest signal - internal succession
+  // Institutional overlap is the strongest signal — internal succession
   // is the standard inheritance pattern (deputy mayor becomes mayor).
   const candInst = candidate.linkedInstitutionIds || [];
   let instOverlap = 0;
@@ -76,7 +76,7 @@ function scoreCandidate(candidate, outInst, outFac) {
     if (outInst.has(id)) instOverlap += 50;
   }
 
-  // Faction overlap is the next strongest - political loyalty matters.
+  // Faction overlap is the next strongest — political loyalty matters.
   const candFac = candidate.linkedFactionIds || [];
   let facOverlap = 0;
   for (const id of candFac) {
@@ -87,19 +87,19 @@ function scoreCandidate(candidate, outInst, outFac) {
   // unrelated NPC (random townsperson) would score points just for
   // being notable, and an outgoing NPC with no linkages (a stranger,
   // an unsettled wanderer) would receive a list of every key NPC in
-  // the settlement as "successor candidates" - meaningless.
+  // the settlement as "successor candidates" — meaningless.
   const overlap = instOverlap + facOverlap;
   if (overlap === 0) return 0;
 
   let score = overlap;
 
-  // Importance tier breaks ties - a key NPC is a more credible successor
+  // Importance tier breaks ties — a key NPC is a more credible successor
   // than a notable one. Pillar candidates are slightly downweighted on
   // the assumption that they have their own duties.
   if (candidate.importance === 'pillar') score += 10;       // own pillar role probably keeps them busy
   else if (candidate.importance === 'key') score += 30;     // sweet spot
   else if (candidate.importance === 'notable') score += 15;
-  // minor adds nothing extra - they only get counted via overlap
+  // minor adds nothing extra — they only get counted via overlap
 
   // Influence score (if generated) breaks remaining ties
   if (typeof candidate.influence === 'number') score += Math.min(candidate.influence / 10, 10);

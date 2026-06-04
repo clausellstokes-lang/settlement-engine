@@ -1,5 +1,5 @@
 /**
- * tests/domain/causalChains.test.js - End-to-end causal chain assertions.
+ * tests/domain/causalChains.test.js — End-to-end causal chain assertions.
  *
  * The Tier 2 trace layer is only as valuable as the causal claims it
  * lets us verify. These tests generate real settlements through the
@@ -46,7 +46,7 @@ describe('trace surface: every generated settlement carries traces', () => {
     // After the Tier 2.1 pass, subsumption / cascade / isolation /
     // factionCorrelation also produce institution-typed traces when
     // they add or remove institutions. The assertion is the same in
-    // spirit (every trace has a known step) - just widened to the new
+    // spirit (every trace has a known step) — just widened to the new
     // reality.
     const s = gen({ settType: 'town', culture: 'germanic' });
     const instTraces = tracesByType(s, 'institution');
@@ -85,7 +85,7 @@ describe('trace surface: every generated settlement carries traces', () => {
 
 describe('trace surface: tracesByStep matches the pipeline step name', () => {
   it('every assembleInstitutions trace is an institution trace (subset relationship)', () => {
-    // Originally we asserted byStep.length === byType.length - true
+    // Originally we asserted byStep.length === byType.length — true
     // when only assembleInstitutions emitted institution traces. After
     // Tier 2.1 wiring, other steps emit institution traces too, so
     // byStep('assembleInstitutions') is a SUBSET of byType('institution').
@@ -121,7 +121,7 @@ describe('causal chain: probabilistic institutions cite their selection odds', (
     const s = gen({ settType: 'town', culture: 'germanic' });
     const selected = tracesByType(s, 'institution').filter(t => t.result === 'selected');
     if (selected.length === 0) {
-      // Highly unlikely with town tier - but guard so the test doesn't
+      // Highly unlikely with town tier — but guard so the test doesn't
       // spuriously fail on a strange seed.
       return;
     }
@@ -202,7 +202,7 @@ describe('trace integrity: traces survive the canonical-shape adapter', () => {
 
 describe('faction traces emerge from generatePower', () => {
   // After Tier 2.1 / P99 wiring, faction-typed traces can come from
-  // either step - generatePower (governing/formed) or neighbourFactions
+  // either step — generatePower (governing/formed) or neighbourFactions
   // (mirrored/opposed) or generatePopulation (linked). Tests below
   // tolerate the multi-step source so adding a new emitter doesn't
   // require touching every assertion.
@@ -226,7 +226,7 @@ describe('faction traces emerge from generatePower', () => {
 
   it('every generatePower faction trace cites the tier as a cause', () => {
     const s = gen({ settType: 'city', culture: 'germanic' });
-    // Scope this assertion to generatePower only - neighbour/population
+    // Scope this assertion to generatePower only — neighbour/population
     // traces have different (and legitimate) cause sources.
     const factionTraces = tracesByType(s, 'faction').filter(t => t.step === 'generatePower');
     for (const t of factionTraces) {

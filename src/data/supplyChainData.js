@@ -640,7 +640,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Trade & Entrepôt',
     icon: '️',
     color: '#a0762a',
-    desc: 'Goods that flow through for redistribution - the wealth of crossroads, ports, and river hubs',
+    desc: 'Goods that flow through for redistribution — the wealth of crossroads, ports, and river hubs',
     chains: [
       {
         id: 'spices_dyes',
@@ -704,7 +704,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: true,
         entrepotNote:
-          'Ports and crossroads profit by charging for storage, loading, and onward transport - not by producing anything themselves.',
+          'Ports and crossroads profit by charging for storage, loading, and onward transport — not by producing anything themselves.',
         minTier: 'town',
       },
       {
@@ -1089,7 +1089,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Religion & Civic',
     icon: '',
     color: '#5a3a1a',
-    desc: 'What holds the settlement together - faith, law, administration, and social order',
+    desc: 'What holds the settlement together — faith, law, administration, and social order',
     chains: [
       {
         id: 'parish',
@@ -1140,7 +1140,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: false,
         minTier: 'hamlet',
-        note: 'Holy sites generate economic activity through pilgrim spending - effectively a non-trade income stream.',
+        note: 'Holy sites generate economic activity through pilgrim spending — effectively a non-trade income stream.',
       },
     ],
   },
@@ -1202,7 +1202,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Criminal Economy',
     icon: '️',
     color: '#4a1a4a',
-    desc: 'The shadow economy - what moves without documentation and who profits',
+    desc: 'The shadow economy — what moves without documentation and who profits',
     chains: [
       {
         id: 'smuggling',
@@ -1273,7 +1273,7 @@ export const SUPPLY_CHAIN_NEEDS = {
 };
 
 // ── FLAT CATEGORY MAP ─────────────────────────────────────────────────────────
-// For the "By Category" view - maps every good/service to one of four top categories
+// For the "By Category" view — maps every good/service to one of four top categories
 
 const ITEM_CATEGORIES = {
   // RAW MATERIALS
@@ -1334,7 +1334,7 @@ const ITEM_CATEGORIES = {
     label: 'Consumables',
     icon: '',
     color: '#1a5a28',
-    desc: 'Used up - food, fuel, medicine, drink',
+    desc: 'Used up — food, fuel, medicine, drink',
     items: [
       'Milled flour',
       'Baked goods',
@@ -1364,7 +1364,7 @@ const ITEM_CATEGORIES = {
     label: 'Manufactured Goods',
     icon: '️',
     color: '#2a3a7a',
-    desc: 'Processed and crafted - tools, cloth, weapons, luxury items',
+    desc: 'Processed and crafted — tools, cloth, weapons, luxury items',
     items: [
       'Guild-manufactured goods',
       'Processed textiles',
@@ -1400,7 +1400,7 @@ const ITEM_CATEGORIES = {
     label: 'Services',
     icon: '',
     color: '#5a3a1a',
-    desc: 'Delivered not shipped - legal, financial, magical, civic',
+    desc: 'Delivered not shipped — legal, financial, magical, civic',
     items: [
       'Legal services',
       'Financial services',

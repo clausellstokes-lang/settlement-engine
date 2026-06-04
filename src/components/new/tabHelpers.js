@@ -45,13 +45,13 @@ export function foodNarrative(fb, config) {
   const deficit = fb.deficit > 0;
   const pct = fb.deficitPercent || 0;
   if (!deficit) return null; // Let the surplus path use its inline fallback
-  if (route === 'isolated') return `Isolated with a ${pct}% food deficit - no trade routes to cover the gap. Any supply disruption becomes an immediate survival crisis.`;
-  if (route === 'port') return `Imports ${pct}% of food needs via port. Sea supply is reliable until it isn't - a blockade or naval threat converts this dependency into a famine countdown.`;
+  if (route === 'isolated') return `Isolated with a ${pct}% food deficit — no trade routes to cover the gap. Any supply disruption becomes an immediate survival crisis.`;
+  if (route === 'port') return `Imports ${pct}% of food needs via port. Sea supply is reliable until it isn't — a blockade or naval threat converts this dependency into a famine countdown.`;
   if (route === 'river') return `River supply covers ${pct}% of food needs. Upstream disruption propagates downstream within weeks.`;
   return null; // Let inline fallback handle standard road/crossroads
 }
 
-// computeChainDepthMap - returns a Map of chainId → depth (number of hops in chain)
+// computeChainDepthMap — returns a Map of chainId → depth (number of hops in chain)
 // depth 1 = raw resource chain (timber, iron, grain)
 // depth 2 = first-order processed (smelting, food_processing)
 // depth 3+ = higher-order processed (weapons_armor, luxury_goods)

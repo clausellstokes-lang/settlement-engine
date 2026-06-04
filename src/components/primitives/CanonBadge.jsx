@@ -1,5 +1,5 @@
 /**
- * primitives/CanonBadge - Tier 5.3 surface.
+ * primitives/CanonBadge — Tier 5.3 surface.
  *
  * Inline chip that surfaces an entity's canon tag (source +
  * canonStatus + locked). Drops next to entity names in the dossier
@@ -14,7 +14,7 @@
  *   ┌──────────────┬──────────────┬──────────────┬──────────────┐
  *   │              │ generated    │ user         │ event        │
  *   ├──────────────┼──────────────┼──────────────┼──────────────┤
- *   │ draft        │ - (default)  │ -            │ -            │
+ *   │ draft        │ — (default)  │ —            │ —            │
  *   │ canon        │ ● canon      │ ✎ user       │ ✦ event      │
  *   │ optional     │ ○ optional   │ ○ optional   │ ○ optional   │
  *   │ superseded   │ ✕ superseded │ ✕ superseded │ ✕ superseded │
@@ -23,7 +23,7 @@
  * ai_overlay × canon renders as `✧ ai`.
  *
  * For brevity, drafts (the default for procedurally-generated
- * entities) render NOTHING - most dossier entities are draft and
+ * entities) render NOTHING — most dossier entities are draft and
  * the visual noise would drown the signal. The badge fires only
  * when an entity has been promoted beyond its default state.
  *
@@ -78,10 +78,10 @@ function variantFor(tag) {
  * default-state entities (generated + draft) unless `verbose` is set.
  *
  * Props:
- *   entity   - the entity to tag. Required.
- *   verbose  - when true, render every state (debug surfaces).
- *   showLock - when true and tag.locked, append a lock indicator.
- *   style    - caller-provided overrides.
+ *   entity   — the entity to tag. Required.
+ *   verbose  — when true, render every state (debug surfaces).
+ *   showLock — when true and tag.locked, append a lock indicator.
+ *   style    — caller-provided overrides.
  */
 export function CanonBadge({ entity, verbose = false, showLock = true, style = {} }) {
   if (!entity || typeof entity !== 'object') return null;

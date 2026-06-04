@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/BandPill.test.jsx - Tier 5.4 surface tests.
+ * tests/ui/BandPill.test.jsx — Tier 5.4 surface tests.
  */
 
 import { describe, test, expect, afterEach } from 'vitest';
@@ -10,7 +10,7 @@ import { BandPill } from '../../src/components/primitives/BandPill.jsx';
 
 afterEach(cleanup);
 
-describe('BandPill - render gates', () => {
+describe('BandPill — render gates', () => {
   test('returns null with no band, ref, or label', () => {
     const { container } = render(<BandPill />);
     expect(container.firstChild).toBeNull();
@@ -27,7 +27,7 @@ describe('BandPill - render gates', () => {
   });
 });
 
-describe('BandPill - bands', () => {
+describe('BandPill — bands', () => {
   test('renders surplus with the surplus glyph', () => {
     render(<BandPill band="surplus" />);
     expect(screen.getByRole('status').textContent).toMatch(/▲/);
@@ -59,7 +59,7 @@ describe('BandPill - bands', () => {
   });
 });
 
-describe('BandPill - display labels', () => {
+describe('BandPill — display labels', () => {
   test('substrate domain renders the user-facing label', () => {
     // qualitativeBands maps substrate.surplus → 'Abundant'
     render(<BandPill domain="substrate" band="surplus" />);
@@ -79,7 +79,7 @@ describe('BandPill - display labels', () => {
   });
 });
 
-describe('BandPill - settlement-driven', () => {
+describe('BandPill — settlement-driven', () => {
   test('uses bandFor when given ref + settlement', () => {
     const settlement = {
       id: 's', name: 'X', tier: 'town', population: 1500,
@@ -112,7 +112,7 @@ describe('BandPill - settlement-driven', () => {
   });
 });
 
-describe('BandPill - sizes', () => {
+describe('BandPill — sizes', () => {
   test('size=sm renders a smaller pill than size=lg', () => {
     // Render two pills in separate test bodies (cleanup between)
     // so each container query has its own DOM.
@@ -130,7 +130,7 @@ describe('BandPill - sizes', () => {
   });
 });
 
-describe('BandPill - accessibility', () => {
+describe('BandPill — accessibility', () => {
   test('exposes role=status', () => {
     render(<BandPill band="strained" />);
     expect(screen.getByRole('status')).toBeTruthy();

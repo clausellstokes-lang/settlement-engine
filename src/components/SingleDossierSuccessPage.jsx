@@ -1,9 +1,9 @@
 /**
- * SingleDossierSuccessPage.jsx - Post-checkout landing for the $2.99 one-shot.
+ * SingleDossierSuccessPage.jsx — Post-checkout landing for the $2.99 one-shot.
  *
  * The single-dossier flow:
  *   1. Anonymous visitor generates a settlement on the homepage hero.
- *   2. Clicks "Buy this dossier" - we stash the settlement (see
+ *   2. Clicks "Buy this dossier" — we stash the settlement (see
  *      lib/pendingDossier) and redirect to Stripe.
  *   3. Stripe collects payment, then redirects back with
  *      ?checkout=success&product=single_dossier.
@@ -40,7 +40,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
   // mode double-invocation.
   const autoDownloadedRef = useRef(false);
 
-  // Tier 8.8 / 8.9 - record the purchase event. Fires once when we
+  // Tier 8.8 / 8.9 — record the purchase event. Fires once when we
   // have a confirmed pending dossier (i.e. the user really came here
   // from a successful checkout, not by typing the URL). PAID_AFTER_ANON
   // attributes back to the anonymous funnel when applicable.
@@ -53,7 +53,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     Funnel.paidAction({ kind: 'single_dossier' });
   }, [pending]);
 
-  // Auto-trigger the download once on mount when we have a stash -
+  // Auto-trigger the download once on mount when we have a stash —
   // the user paid for the PDF, they shouldn't have to hunt for the
   // button. The "Download again" affordance below lets them retrigger.
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
       // initial bundle for users who land on this page from a search
       // engine but never actually trigger a download.
       const { generateSettlementPDF } = await import('../utils/generateSettlementPDF.js');
-      // The single-dossier flow is the canonical anonymous path - these
+      // The single-dossier flow is the canonical anonymous path — these
       // buyers do not have accounts. The watermark stays out of paid
       // tier exports (Wanderer/Cartographer/Founder) which use
       // SettlementDetail's export handler. Founder accounts also pass
@@ -89,7 +89,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
 
   function handleKeep() {
     // The user has their PDF. Clear the stash so the next anonymous
-    // generation starts clean. We do NOT clear the in-memory store -
+    // generation starts clean. We do NOT clear the in-memory store —
     // if they want to keep editing they'll need to sign up, which
     // routes them through normal save flow.
     clearPendingDossier();
@@ -121,7 +121,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           fontSize: FS.md, color: BODY, lineHeight: 1.55,
         }}>
           Your purchase went through, but this device doesn’t have the original
-          settlement cached anymore. Check your email - Stripe will have sent a
+          settlement cached anymore. Check your email — Stripe will have sent a
           receipt with the session ID. Forward that to support and we’ll resend
           your dossier.
         </p>
@@ -175,7 +175,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         fontSize: FS.lg, color: BODY, lineHeight: 1.55,
       }}>
         Thanks for backing the work. <strong style={{ fontStyle: 'normal' }}>{settlementName}</strong>{' '}
-        is yours - the download should begin automatically.
+        is yours — the download should begin automatically.
       </p>
 
       {/* Download actions */}
@@ -199,7 +199,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             boxShadow: '0 4px 14px rgba(201,162,76,0.35)',
           }}
         >
-          <Download size={16} /> {downloading ? 'Preparing PDF...' : autoDownloadedRef.current ? 'Download again' : 'Download PDF'}
+          <Download size={16} /> {downloading ? 'Preparing PDF…' : autoDownloadedRef.current ? 'Download again' : 'Download PDF'}
         </button>
 
         {downloadError && (

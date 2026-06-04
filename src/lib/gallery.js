@@ -93,7 +93,7 @@ export async function fetchPublicGallery({
 }
 
 /**
- * Fetch the curated gallery - hand-picked exemplary dossiers shown
+ * Fetch the curated gallery — hand-picked exemplary dossiers shown
  * above the community listing. Returns dossiers in their explicit
  * curation order (curated_order asc, nulls last → published_at desc).
  *
@@ -126,8 +126,8 @@ export async function fetchCuratedGallery() {
  * Admin-only: mark a dossier as curated (or unmark it). The server
  * RPC gates this to developer/admin roles and writes an audit row.
  *
- * @param {string} settlementId - The settlement to curate.
- * @param {boolean} curated     - Target state.
+ * @param {string} settlementId — The settlement to curate.
+ * @param {boolean} curated     — Target state.
  * @param {number} [sortOrder]  - Optional explicit sort index within the curated section.
  */
 export async function setCurated(settlementId, curated, sortOrder = null) {

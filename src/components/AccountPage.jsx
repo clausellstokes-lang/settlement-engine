@@ -1,5 +1,5 @@
 /**
- * AccountPage.jsx - Full-page account management.
+ * AccountPage.jsx — Full-page account management.
  *
  * Sections:
  *   - Profile (display name, email, role badge)
@@ -21,13 +21,13 @@ import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { isConfigured, supabase } from '../lib/supabase.js';
 import { AI_MODEL_OPTIONS, getTierDisplayName, getActivePacks } from '../config/pricing.js';
 import { lazy as _lazy, Suspense as _Suspense } from 'react';
-// P116 / X-8 - Founder Lifetime tile, audience-gated to worldbuilder
+// P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('./pricing/FounderTile.jsx'));
 import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, AMBER } from './theme.js';
-// P138 / AC-4 - Inline FAQ accordion. Lazy because the copy strings
+// P138 / AC-4 — Inline FAQ accordion. Lazy because the copy strings
 // are a chunky import for users who never expand the section.
 const AccountFAQ = _lazy(() => import('./account/AccountFAQ.jsx'));
 
@@ -368,7 +368,7 @@ export default function AccountPage({ onNavigateAdmin }) {
       {/* ── Subscription & Credits ──────────────────────────────── */}
       <Section title={t('account.subscriptionHeading')} icon={Crown}>
         <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
-          {/* Tier card - P125 / AC-1 grows an "unlock" footer for free users. */}
+          {/* Tier card — P125 / AC-1 grows an "unlock" footer for free users. */}
           <div style={{
             flex: '1 1 180px',
             background: GOLD_BG, borderRadius: R.lg,
@@ -503,11 +503,11 @@ export default function AccountPage({ onNavigateAdmin }) {
             )}
 
             <div style={{ display: 'flex', gap: SP.sm }}>
-              {/* P125 / AC-2 - Read packs from getActivePacks() so the
+              {/* P125 / AC-2 — Read packs from getActivePacks() so the
                   `packsRepriced` flag wins. Hardcoded list was bypassing
                   the flag and showing legacy 5/15/40 even when the new
                   25/60/150 catalog was active. The pack record carries
-                  its own `tier` ('starter' | 'value' | 'best') - use
+                  its own `tier` ('starter' | 'value' | 'best') — use
                   that for accent color so a future repricing doesn't
                   need a UI update. */}
               {Object.values(getActivePacks()).map(p => {
@@ -543,7 +543,7 @@ export default function AccountPage({ onNavigateAdmin }) {
           </div>
         )}
 
-        {/* P116 / X-8 - Founder Lifetime tile. Self-gates on
+        {/* P116 / X-8 — Founder Lifetime tile. Self-gates on
             audience='worldbuilder' + flag + seats-remaining > 0.
             Renders null for everyone else, so this is safe to mount
             unconditionally here. */}

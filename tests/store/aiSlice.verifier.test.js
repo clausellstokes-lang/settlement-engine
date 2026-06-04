@@ -1,5 +1,5 @@
 /**
- * tests/store/aiSlice.verifier.test.js - Tier 6.5 integration tests.
+ * tests/store/aiSlice.verifier.test.js — Tier 6.5 integration tests.
  *
  * Verifies the aiOverlayVerifier wiring inside aiSlice:
  *
@@ -11,7 +11,7 @@
  *   - The verifier never crashes the slice, even if the verifier
  *     itself were to throw.
  *
- * We don't exercise `requestNarrative` here - that requires mocking the
+ * We don't exercise `requestNarrative` here — that requires mocking the
  * generate-narrative edge function. The verifier call is identical in
  * both code paths; setAiSettlement covers the contract.
  */
@@ -71,7 +71,7 @@ function clone(o) { return JSON.parse(JSON.stringify(o)); }
 // setAiSettlement integration
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.5 - setAiSettlement runs the verifier', () => {
+describe('Tier 6.5 — setAiSettlement runs the verifier', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
@@ -90,7 +90,7 @@ describe('Tier 6.5 - setAiSettlement runs the verifier', () => {
 
   it('reports ok:true for a clean refinement (no violations)', () => {
     const overlay = clone(baseFixture());
-    // Polish prose only - no entity/fact changes.
+    // Polish prose only — no entity/fact changes.
     overlay.arrivalScene = 'A polished arrival scene.';
     store.getState().setAiSettlement(overlay);
     expect(store.getState().aiViolations.ok).toBe(true);
@@ -212,7 +212,7 @@ describe('Tier 6.5 - setAiSettlement runs the verifier', () => {
 // clearAiSettlement clears the verification record
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.5 - clearAiSettlement clears aiViolations', () => {
+describe('Tier 6.5 — clearAiSettlement clears aiViolations', () => {
   it('clearAiSettlement nulls out aiViolations alongside aiSettlement', () => {
     const store = makeStore();
     store.setState(s => { s.settlement = baseFixture(); });
@@ -230,7 +230,7 @@ describe('Tier 6.5 - clearAiSettlement clears aiViolations', () => {
 // Initial state
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.5 - initial state', () => {
+describe('Tier 6.5 — initial state', () => {
   it('aiViolations defaults to null (no overlay → no report)', () => {
     const store = makeStore();
     expect(store.getState().aiViolations).toBeNull();
@@ -238,10 +238,10 @@ describe('Tier 6.5 - initial state', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────
-// Defensive - verifier crash shouldn't break the slice
+// Defensive — verifier crash shouldn't break the slice
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.5 - verifier defensive guards', () => {
+describe('Tier 6.5 — verifier defensive guards', () => {
   it('overlay still commits even if the settlement is null', () => {
     const store = makeStore();
     // No raw settlement set.
@@ -264,10 +264,10 @@ describe('Tier 6.5 - verifier defensive guards', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────
-// Schema lock - violation kinds + summary keys
+// Schema lock — violation kinds + summary keys
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.5 - aiViolations record schema', () => {
+describe('Tier 6.5 — aiViolations record schema', () => {
   it('summary has every documented counter even on the clean path', () => {
     const store = makeStore();
     store.setState(s => { s.settlement = baseFixture(); });

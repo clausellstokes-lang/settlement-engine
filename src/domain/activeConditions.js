@@ -1,8 +1,8 @@
 /**
- * domain/activeConditions.js - First-class persistent world conditions.
+ * domain/activeConditions.js — First-class persistent world conditions.
  *
  * Tier 2.3 of the roadmap. Plague, refugee waves, cut routes, sieges,
- * corruption scandals - these are not one-shot events. They linger,
+ * corruption scandals — these are not one-shot events. They linger,
  * accumulate effects, and eventually resolve or escalate. Today the
  * generator stamps them onto stressors and the time-progression layer
  * (Phase 15) takes them as an external array. This module promotes
@@ -267,7 +267,7 @@ export function severityBand(severity) {
   return 'low';
 }
 
-/** Returns the default severity for a band - symmetric to severityBand. */
+/** Returns the default severity for a band — symmetric to severityBand. */
 export function defaultSeverityForBand(band) {
   switch (band) {
     case 'critical': return 0.85;
@@ -280,7 +280,7 @@ export function defaultSeverityForBand(band) {
 // ── ID helpers ───────────────────────────────────────────────────────────
 // Stable id format: 'condition.<archetype>.<short-suffix>'. Suffix is
 // derived from the trigger event id when available (so re-deriving a
-// condition twice produces the same id) - falls back to a hash of the
+// condition twice produces the same id) — falls back to a hash of the
 // archetype + label on first construction.
 
 function snakeCase(s) {
@@ -510,7 +510,7 @@ export function summarizeActiveConditions(settlement) {
   for (const c of all) {
     byArchetype[c.archetype] = (byArchetype[c.archetype] || 0) + 1;
     if (bySeverityBand[c.severityBand] !== undefined) bySeverityBand[c.severityBand] += 1;
-    summaryLines.push(`${c.label} - ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`);
+    summaryLines.push(`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`);
   }
 
   return {
@@ -526,7 +526,7 @@ export function supportedConditionArchetypes() {
   return Object.keys(CONDITION_ARCHETYPE_TEMPLATES);
 }
 
-/** Catalog access - exposes the per-archetype defaults for UI/help text. */
+/** Catalog access — exposes the per-archetype defaults for UI/help text. */
 export function conditionArchetypeTemplate(archetype) {
   return CONDITION_ARCHETYPE_TEMPLATES[archetype] || null;
 }

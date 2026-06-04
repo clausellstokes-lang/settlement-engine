@@ -1,15 +1,15 @@
 /**
- * useReaderAudience.js - Derive the current user's reader archetype.
+ * useReaderAudience.js — Derive the current user's reader archetype.
  *
  * The UX/UI critique frames every fix around three readers:
- *   - 'new'           - first-time DM, has never run a settlement at the
+ *   - 'new'           — first-time DM, has never run a settlement at the
  *                       table; needs reassurance and worked examples.
- *   - 'intermediate'  - runs a session a week; needs speed and the
+ *   - 'intermediate'  — runs a session a week; needs speed and the
  *                       printable cheat-sheet path.
- *   - 'worldbuilder'  - running a multi-settlement arc; needs the
+ *   - 'worldbuilder'  — running a multi-settlement arc; needs the
  *                       engine surfaced as a prep instrument.
  *
- * The audience is computed from behavior signals already on the store -
+ * The audience is computed from behavior signals already on the store —
  * saved settlements count, export count, narrate spend, neighbour usage,
  * regenerate-with-locks usage. Anonymous users default to 'new' since
  * they haven't given us any signal yet.
@@ -21,7 +21,7 @@
  * Why a hook (vs. a derived selector): some surfaces need to read the
  * audience outside React (e.g. analytics tagging, edge functions). For
  * those, `computeReaderAudience(state)` is the pure function this hook
- * wraps. Keep them in sync - both consult the same signal set.
+ * wraps. Keep them in sync — both consult the same signal set.
  */
 
 import { useMemo } from 'react';
@@ -35,12 +35,12 @@ import { useStore } from '../store/index.js';
  * payloads, server-side rendering).
  *
  * @param {Object} signals
- * @param {number} signals.savedCount         - `savedSettlements.length`
- * @param {number} signals.exportCount        - cumulative PDF exports this user has done
- * @param {number} signals.narrateCount       - cumulative narrate credits the user has spent
- * @param {boolean} signals.hasUsedNeighbours - any save with neighbourLinks present
- * @param {boolean} signals.hasUsedLocks      - any save with locked sections
- * @param {string} signals.tier               - 'anon' | 'free' | 'premium' | ...
+ * @param {number} signals.savedCount         — `savedSettlements.length`
+ * @param {number} signals.exportCount        — cumulative PDF exports this user has done
+ * @param {number} signals.narrateCount       — cumulative narrate credits the user has spent
+ * @param {boolean} signals.hasUsedNeighbours — any save with neighbourLinks present
+ * @param {boolean} signals.hasUsedLocks      — any save with locked sections
+ * @param {string} signals.tier               — 'anon' | 'free' | 'premium' | …
  * @returns {ReaderAudience}
  */
 export function computeReaderAudience(signals) {
@@ -53,7 +53,7 @@ export function computeReaderAudience(signals) {
     tier = 'anon',
   } = signals || {};
 
-  // Anonymous users are always 'new' - we have no behavior signal yet.
+  // Anonymous users are always 'new' — we have no behavior signal yet.
   if (tier === 'anon') return 'new';
 
   // Worldbuilder: 5+ saves AND at least one campaign-tier behavior
@@ -63,7 +63,7 @@ export function computeReaderAudience(signals) {
   }
 
   // Intermediate: 2+ saves, or first export, or first narrate spend.
-  // These signal "I'm coming back to use this" - not exploring.
+  // These signal "I'm coming back to use this" — not exploring.
   if (savedCount >= 2 || exportCount >= 1 || narrateCount >= 1) {
     return 'intermediate';
   }
@@ -73,7 +73,7 @@ export function computeReaderAudience(signals) {
 }
 
 /**
- * React hook - current reader archetype, memoized over the inputs.
+ * React hook — current reader archetype, memoized over the inputs.
  *
  * Components use this for audience-aware affordances:
  *
@@ -87,7 +87,7 @@ export function computeReaderAudience(signals) {
 export function useReaderAudience() {
   const tier = useStore(s => s.auth.tier);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
-  // Behavior-signal aggregates - read derived counters from the store.
+  // Behavior-signal aggregates — read derived counters from the store.
   // creditsSlice tracks lifetime narrate-spend via spendCredits; we use
   // a session-resilient counter held in the store. exportCount is the
   // sum of `lastExportAt` markers across saved settlements; locks is

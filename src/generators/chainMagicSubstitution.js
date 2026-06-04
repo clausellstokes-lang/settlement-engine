@@ -1,4 +1,4 @@
-// chainMagicSubstitution.js - Magic tradition substitution pass for supply chains
+// chainMagicSubstitution.js — Magic tradition substitution pass for supply chains
 // Upgrades impaired/depleted chains when magical traditions can compensate.
 // Called from computeActiveChains after the main chain activation loop.
 

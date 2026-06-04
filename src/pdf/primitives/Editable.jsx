@@ -1,17 +1,17 @@
 /**
- * Editable - content primitives that render as extractable prose by default,
+ * Editable — content primitives that render as extractable prose by default,
  * with an opt-in form-field mode for DM scratch space.
  *
  * Two flavors:
- *   <EditableText name=... defaultValue=... style=... />     single-line content,
+ *   <EditableText name=… defaultValue=… style=… />     single-line content,
  *       used for names, titles, short labels, one-liners.
- *   <EditableProse name=... defaultValue=... style=... />    multi-line content,
+ *   <EditableProse name=… defaultValue=… style=… />    multi-line content,
  *       used for descriptions, blurbs, plot hooks, suggested fixes, NPC bios.
  *
  * Design intent (v2):
  *   The DM (and pdftotext / search / screen readers) MUST be able to see and
  *   extract the engine's prose. The original implementation wrapped every
- *   default value in a `TextInput` so it was click-to-edit in PDF readers -
+ *   default value in a `TextInput` so it was click-to-edit in PDF readers —
  *   but TextInput defaults are not part of the PDF text stream, so anyone
  *   running the dossier through `pdftotext`, an AI summarizer, full-text
  *   search, or accessibility tooling saw blank where the engine output
@@ -22,7 +22,7 @@
  *     - Default mode renders plain `Text`. Engine prose IS the document.
  *     - `showField` opt-in renders a `TextInput` with visible chrome for
  *       the few places we actually want a writable empty field
- *       (`NotesField` - the DM scratch box).
+ *       (`NotesField` — the DM scratch box).
  *
  * Conventions (preserved):
  *   - `name` kept on the prop signature so callers don't need to change.
@@ -163,7 +163,7 @@ export function EditableProse({
 }
 
 /**
- * EditableLine - a labeled single-line input for definition-list rows.
+ * EditableLine — a labeled single-line input for definition-list rows.
  * Renders: [Label]   [Editable value]
  */
 export function EditableLine({ label, name, defaultValue = '', labelWidth = 110, style }) {
@@ -181,8 +181,8 @@ export function EditableLine({ label, name, defaultValue = '', labelWidth = 110,
 }
 
 /**
- * NotesField - blank multi-line field for DM handwritten notes. This is
- * the ONE place we deliberately want visible field chrome - the DM expects
+ * NotesField — blank multi-line field for DM handwritten notes. This is
+ * the ONE place we deliberately want visible field chrome — the DM expects
  * empty space to write in. Default ~6 lines.
  */
 export function NotesField({ name, lines = 6, label = 'NOTES' }) {

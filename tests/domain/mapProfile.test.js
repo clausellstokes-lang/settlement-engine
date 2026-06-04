@@ -1,5 +1,5 @@
 /**
- * tests/domain/mapProfile.test.js - Tier 4.14 lean tests.
+ * tests/domain/mapProfile.test.js — Tier 4.14 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';
