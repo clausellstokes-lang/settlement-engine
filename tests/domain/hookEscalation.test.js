@@ -1,5 +1,5 @@
 /**
- * tests/domain/hookEscalation.test.js — Structured hooks + escalation clocks.
+ * tests/domain/hookEscalation.test.js - Structured hooks + escalation clocks.
  *
  * The Tier 4.10 layer is the first one to compose across three of the
  * structural foundations we've built (supply chains, factions,

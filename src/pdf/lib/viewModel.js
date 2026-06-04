@@ -1,5 +1,5 @@
 /**
- * viewModel — translate a settlement save into PDF-ready slices.
+ * viewModel - translate a settlement save into PDF-ready slices.
  *
  * This is the single source of truth for what the PDF renders. Sections never
  * reach into deeply nested optional paths themselves; they read pre-shaped
@@ -10,15 +10,15 @@
  * to render and how.
  *
  * Returned shape:
- *   raw             — original settlement object
- *   ai              — original aiSettlement (or null)
- *   active          — whichever of the two the user is currently looking at
- *   narrativeMode   — true iff AI is actually being used
- *   aiDailyLife     — five dawn-to-night prose passages (or null)
+ *   raw             - original settlement object
+ *   ai              - original aiSettlement (or null)
+ *   active          - whichever of the two the user is currently looking at
+ *   narrativeMode   - true iff AI is actually being used
+ *   aiDailyLife     - five dawn-to-night prose passages (or null)
  *
  *   summary, identity, overview, daily, power, economics, defense, services,
  *   resources, viability, history, npcs, hooks, relationships, aiAppendix
- *     — pre-shaped slices.
+ *     - pre-shaped slices.
  */
 
 const TIER_LABELS = {
@@ -27,14 +27,14 @@ const TIER_LABELS = {
 };
 
 /**
- * normalizeImportCoverage — engine emits importCoverage as either a fraction
+ * normalizeImportCoverage - engine emits importCoverage as either a fraction
  * (0.31 = 31%) or already as a percentage (31). Heuristic: if the value is
  * ≤ 5, treat as fraction and scale up. If > 5, assume already percentage.
  * Anything > 200 is clamped to 200 (pathological data should not crash UI).
  */
 /**
  * settlement.stress is sometimes an array, sometimes a single stress
- * object, sometimes null/undefined — depends on which generator path
+ * object, sometimes null/undefined - depends on which generator path
  * produced the settlement. Normalize to array at every read site so the
  * downstream code can iterate uniformly. Caught by the PDF section
  * smoke tests in tests/pdf/sections.smoke.test.js.
@@ -79,14 +79,14 @@ export function buildViewModel({
   aiSettlement = null,
   aiDailyLife = null,
   narrativeMode = false,
-  // Campaign-state engine extras — passed through unchanged for the
+  // Campaign-state engine extras - passed through unchanged for the
   // SystemStateSnapshot and Timeline chapters to consume. Optional;
   // older callers that don't supply them get undefined here, which
   // those chapters handle gracefully.
   systemState = null,
   eventLog = [],
   phase = 'draft',
-} = {}) {
+} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string }} */ ({})) {
   const raw = settlement || {};
   const ai = aiSettlement || null;
   const useAi = !!(narrativeMode && ai);
@@ -142,7 +142,7 @@ function avgScore(scores) {
 // ── slice builders ──────────────────────────────────────────────────────────
 
 /**
- * summarySlice — feeds the new Summary page (closes the biggest gap).
+ * summarySlice - feeds the new Summary page (closes the biggest gap).
  * Mirrors SummaryTab.jsx: identity strip + crisis banner + arrival scene +
  * pressure sentence + 3-tile situation row + key figures.
  */
@@ -402,7 +402,7 @@ function powerSlice(active) {
     subFactions: f?.subFactions || f?.matchedGroups || [],
   })).sort((a, b) => (b.power || 0) - (a.power || 0));
 
-  // Stacked bar segments — total for normalisation
+  // Stacked bar segments - total for normalisation
   const totalPower = factions.reduce((a, f) => a + (f.power || 0), 0);
   const distribution = factions.map(f => ({
     name: f.name,
@@ -521,7 +521,7 @@ function defenseSlice(active) {
   const threatsRaw = s?.threats || {};
   const stress = stressArray(s);
 
-  // Per-threat detail — pull description and factors. When the engine doesn't
+  // Per-threat detail - pull description and factors. When the engine doesn't
   // supply a description, synthesize one from score band + threat type so the
   // section reads like prose rather than just a bare bar.
   const threats = ['military', 'monster', 'internal', 'economic', 'magical'].map(key => {
@@ -752,7 +752,7 @@ function historySlice(active) {
   const events = (h?.historicalEvents || []).slice().sort((a, b) => (a?.yearsAgo ?? 0) - (b?.yearsAgo ?? 0));
   // Engine emits founding.reason via genArrivalDetail; slice exposes it as
   // `origin` (the field the chapter renders). Top-level `settlementReason`
-  // is the higher-level "why this place exists" prose — use it as the
+  // is the higher-level "why this place exists" prose - use it as the
   // founding summary callout when the engine doesn't supply one.
   const settlementReason = typeof s?.settlementReason === 'string'
     ? s.settlementReason
@@ -809,14 +809,14 @@ function npcsSlice(active) {
     // Engine puts goals under `goal: { short, long }`, NOT `motivation`
     const g = n?.motivation || n?.goal;
     const motivationStr = typeof g === 'string' ? g : (g && typeof g === 'object'
-      ? [g.short, g.long].filter(Boolean).join(' — ')
+      ? [g.short, g.long].filter(Boolean).join(' - ')
       : null);
     // Engine puts secrets as singular `secret: { what, stakes }` not array `secrets[]`
     const sec = n?.secrets;
     const secretsArr = Array.isArray(sec) ? sec.slice() : [];
     if (n?.secret && typeof n.secret === 'object' && n.secret.what) {
       secretsArr.push(n.secret.stakes
-        ? `${n.secret.what} — ${n.secret.stakes}`
+        ? `${n.secret.what} - ${n.secret.stakes}`
         : n.secret.what);
     }
     // Drop empty/blank entries so the SECRETS subsection vanishes when no real
@@ -1030,7 +1030,7 @@ function labelOfHook(h) {
 }
 
 /**
- * normSeverity — coerce the engine's severity field into a single string.
+ * normSeverity - coerce the engine's severity field into a single string.
  * The engine sometimes emits severity as an array (`['minor', 'major']`),
  * a min/max object (`{ min: 'minor', max: 'major' }`), or just a string.
  * Without normalization, an array renders as "minormajor" because react-pdf
@@ -1059,7 +1059,7 @@ function normSeverity(s) {
 }
 
 /**
- * cleanHooks — drop empty entries from a plotHooks array. The engine
+ * cleanHooks - drop empty entries from a plotHooks array. The engine
  * sometimes emits `[null]` or `[{ hook: '' }]` which made an empty
  * "PLOT HOOKS" header strip render with no body.
  */
@@ -1076,7 +1076,7 @@ function cleanHooks(arr) {
 }
 
 /**
- * normalizeIncomeSources — engine emits incomeSources as either:
+ * normalizeIncomeSources - engine emits incomeSources as either:
  *   - array of { source, percentage }   (percentage = 0..100)
  *   - array of { source, value }        (raw economy units)
  * If percentages don't sum to ~100, treat as raw values and re-derive percent.
@@ -1102,7 +1102,7 @@ function normalizeIncomeSources(arr) {
 }
 
 /**
- * synthThreatDescription — short situational prose for a threat band when the
+ * synthThreatDescription - short situational prose for a threat band when the
  * engine doesn't supply one. Each entry is one short sentence to keep the
  * Defense page scannable; factors[] (when present) carries the detail.
  */
@@ -1148,7 +1148,7 @@ function synthThreatDescription(key, score, factors) {
 }
 
 /**
- * cleanRelationships — drop empty relationship entries (no target name).
+ * cleanRelationships - drop empty relationship entries (no target name).
  */
 function cleanRelationships(arr) {
   if (!Array.isArray(arr)) return [];

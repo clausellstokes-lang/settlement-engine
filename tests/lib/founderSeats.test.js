@@ -1,5 +1,5 @@
 /**
- * tests/lib/founderSeats.test.js — Tier 7.6 client helper.
+ * tests/lib/founderSeats.test.js - Tier 7.6 client helper.
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
@@ -16,7 +16,7 @@ async function loadWithStubs({ rpcImpl = vi.fn(), isConfigured = true } = {}) {
   return await import('../../src/lib/founderSeats.js');
 }
 
-describe('Tier 7.6 — founder seat helpers', () => {
+describe('Tier 7.6 - founder seat helpers', () => {
   it('FOUNDER_SEAT_CAP is the documented value (500)', async () => {
     const mod = await loadWithStubs();
     expect(mod.FOUNDER_SEAT_CAP).toBe(500);
@@ -96,7 +96,7 @@ describe('fetchFounderSeatsRemaining()', () => {
   });
 });
 
-describe('Tier 7.6 — migration 010 contract', () => {
+describe('Tier 7.6 - migration 010 contract', () => {
   it('the migration file exists in tree', async () => {
     const { readFileSync, existsSync } = await import('node:fs');
     const { fileURLToPath } = await import('node:url');

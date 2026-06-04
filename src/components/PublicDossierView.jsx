@@ -1,9 +1,9 @@
 /**
- * PublicDossierView.jsx — Read-only renderer for shared public dossiers.
+ * PublicDossierView.jsx - Read-only renderer for shared public dossiers.
  *
  * Wraps OutputContainer in read-only mode and passes the settlement
  * object straight in (bypasses the store). Adds a small header strip
- * with title, tier, view count, and a "forge your own" CTA — the
+ * with title, tier, view count, and a "forge your own" CTA - the
  * gallery's whole point is to drive new sign-ups.
  *
  * Why not just reuse OutputContainer alone:
@@ -13,7 +13,7 @@
  *   `readOnly` gives the public viewer a clean, owner-free surface.
  *
  * Privacy:
- *   No owner name, email, or display name is rendered — the dossier
+ *   No owner name, email, or display name is rendered - the dossier
  *   object is the world's view of the place, nothing more.
  */
 
@@ -37,7 +37,7 @@ function formatDate(iso) {
   }
 }
 
-export default function PublicDossierView({ dossier, onForge }) {
+export default function PublicDossierView({ dossier, onForge, showHeader = true }) {
   if (!dossier || !dossier.settlement) {
     return (
       <div style={{
@@ -55,7 +55,7 @@ export default function PublicDossierView({ dossier, onForge }) {
   return (
     <article style={{ fontFamily: sans, color: INK }}>
       {/* Public-dossier banner */}
-      <header style={{
+      {showHeader && <header style={{
         marginBottom: SP.lg,
         padding: `${SP.md}px ${SP.lg}px`,
         background: 'linear-gradient(135deg, #FBF5E6 0%, #F4EAD0 100%)',
@@ -106,10 +106,10 @@ export default function PublicDossierView({ dossier, onForge }) {
             {t('gallery.forgeYourOwn')} <ArrowRight size={14} />
           </button>
         )}
-      </header>
+      </header>}
 
       {/* The dossier itself, in read-only mode. */}
-      <OutputContainer settlement={settlement} readOnly />
+      <OutputContainer settlement={settlement} readOnly playerView />
     </article>
   );
 }

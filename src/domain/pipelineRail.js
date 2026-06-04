@@ -1,5 +1,5 @@
 /**
- * domain/pipelineRail.js — Structured payload for the rail's
+ * domain/pipelineRail.js - Structured payload for the rail's
  * step-expansion view.
  *
  * Tier 5.5 of the roadmap. The PipelineRail UI already exists; this
@@ -64,7 +64,7 @@ export function expandPipelineStep(settlement, stepName) {
   } else {
     summary.push(`${decisions.length} decision(s) at step "${stepName}".`);
     for (const d of decisions.slice(0, 4)) {
-      summary.push(`${d.targetType}: ${d.targetId} — ${d.result || 'recorded'}`);
+      summary.push(`${d.targetType}: ${d.targetId} - ${d.result || 'recorded'}`);
     }
   }
 

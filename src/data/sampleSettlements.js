@@ -1,8 +1,8 @@
 /**
- * sampleSettlements.js — Tier 8.2 seed dashboard fixtures.
+ * sampleSettlements.js - Tier 8.2 seed dashboard fixtures.
  *
  * Three hand-curated example settlements shown to new accounts (and any
- * account with zero saves). Each is a teaser, not a full dossier — the
+ * account with zero saves). Each is a teaser, not a full dossier - the
  * card surfaces the headline character of the place so the user can
  * decide which sample to fork.
  *
@@ -18,18 +18,18 @@
  *      and stay synchronised with the engine's actual capabilities.
  *
  * Each sample carries:
- *   - id        — stable identifier (used by the fork action)
- *   - name      — display name shown on the card
- *   - tier      — settlement tier ('hamlet' | 'village' | 'town' | 'city' | 'capital')
- *   - terrain   — one-word terrain hint for the card subtitle
- *   - teaser    — single-sentence character pitch (italic, parchment serif)
- *   - tags      — 3-4 chip-style tags to set expectations
- *   - config    — the generator input the "Generate" CTA loads into the
+ *   - id        - stable identifier (used by the fork action)
+ *   - name      - display name shown on the card
+ *   - tier      - settlement tier ('hamlet' | 'village' | 'town' | 'city' | 'capital')
+ *   - terrain   - one-word terrain hint for the card subtitle
+ *   - teaser    - single-sentence character pitch (italic, parchment serif)
+ *   - tags      - 3-4 chip-style tags to set expectations
+ *   - config    - the generator input the "Generate" CTA loads into the
  *                 wizard. Must be the live generator config shape that
  *                 resolveConfig() actually reads: flat priority* weights
  *                 (priorityMilitary / priorityReligion / priorityEconomy
  *                 / priorityCriminal / priorityMagic), a terrainOverride,
- *                 and a bounded monsterThreat tier — NOT a nested
+ *                 and a bounded monsterThreat tier - NOT a nested
  *                 `sliders` object or a `nearbyTerrain` key (the engine
  *                 ignores both). Plus a seed so forks are reproducible
  *                 within a session (but each user gets a different

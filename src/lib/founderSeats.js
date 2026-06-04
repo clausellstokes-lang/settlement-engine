@@ -1,5 +1,5 @@
 /**
- * lib/founderSeats.js — Tier 7.6 live seat counter.
+ * lib/founderSeats.js - Tier 7.6 live seat counter.
  *
  * Reads the public `founder_seats_taken()` RPC introduced by migration
  * 010. Returns the number of remaining seats out of FOUNDER_SEAT_CAP.

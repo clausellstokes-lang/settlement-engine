@@ -1,5 +1,5 @@
 /**
- * tests/domain/userEdits.test.js — Tier 5.4 comprehensive suite.
+ * tests/domain/userEdits.test.js - Tier 5.4 comprehensive suite.
  *
  * Verifies the per-field user-authorship domain layer:
  *   - apply / revert lifecycle

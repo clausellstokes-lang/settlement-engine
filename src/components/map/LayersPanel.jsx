@@ -1,10 +1,10 @@
 /**
- * LayersPanel — right-side sidebar listing every overlay layer with a
+ * LayersPanel - right-side sidebar listing every overlay layer with a
  * checkbox toggle and, where applicable, a filter sub-list.
  *
  * Layers:
- *   - Relationships (with per-type filter: trade_partner, allied, …)
- *   - Supply chains (with per-good filter — optional)
+ *   - Relationships (with per-type filter: trade_partner, allied, ...)
+ *   - Supply chains (with per-good filter - optional)
  *   - Labels
  *   - Markers
  *   - Forests

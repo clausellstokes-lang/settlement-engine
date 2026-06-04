@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 016_version_history.sql — Persist per-settlement edit snapshots.
+-- 016_version_history.sql - Persist per-settlement edit snapshots.
 --
 -- P133 / E-5: a worldbuilder running a 6-month arc wants to see what
 -- changed between session 3 and session 8, and roll back if a player
@@ -9,7 +9,7 @@
 --
 -- Shape:
 --   We add a single nullable jsonb column `version_history` to the
---   existing `settlements` table — no new table. Rationale:
+--   existing `settlements` table - no new table. Rationale:
 --     • Settlements are already row-per-save; snapshots ride with
 --       them and inherit the same RLS policies (owner-only).
 --     • Average snapshot size is small (~5-30 kB) and we cap the
@@ -38,5 +38,5 @@ comment on column public.settlements.version_history is
   'P133 / E-5: array of snapshots {id, ts, kind, label, settlement} for the version timeline. NULL until the first snapshot writes. Capped at 50 entries client-side to bound row size.';
 
 -- Optional index on (user_id, updated_at) is already present from
--- migration 001; no new index needed — version_history is read
+-- migration 001; no new index needed - version_history is read
 -- alongside the settlement row, never queried in isolation.

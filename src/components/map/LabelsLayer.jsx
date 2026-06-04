@@ -1,10 +1,10 @@
 /**
- * LabelsLayer — renders user-placed text labels from mapState.labels.
+ * LabelsLayer - renders user-placed text labels from mapState.labels.
  *
  * Each label supports:
  *   - Click to select
  *   - Drag to move (annotate mode only)
- *   - Inline edit on double-click (prompts for new text)
+ *   - Edit dialog on double-click
  *   - Delete via selection panel / keyboard
  */
 
@@ -12,19 +12,19 @@ import { useRef } from 'react';
 import { useStore } from '../../store';
 import { MAP_MODES, ANNOTATE_TOOLS } from '../../store/mapSlice.js';
 
-export default function LabelsLayer() {
+export default function LabelsLayer({ onEditLabel = null }) {
   const labels = useStore(s => s.mapState.labels);
 
   if (!labels?.length) return null;
 
   return (
     <g className="sf-labels-layer">
-      {labels.map(lbl => <Label key={lbl.id} label={lbl} />)}
+      {labels.map(lbl => <Label key={lbl.id} label={lbl} onEditLabel={onEditLabel} />)}
     </g>
   );
 }
 
-function Label({ label }) {
+function Label({ label, onEditLabel }) {
   const mapMode       = useStore(s => s.mapMode);
   const annotateTool  = useStore(s => s.annotateTool);
   const selectedId    = useStore(s => s.selectedAnnotationId);
@@ -82,10 +82,7 @@ function Label({ label }) {
   function handleDoubleClick(e) {
     if (!isEditable) return;
     e.stopPropagation();
-    const next = window.prompt('Label text:', label.text || '');
-    if (next != null && next !== label.text) {
-      updateLabel(label.id, { text: next });
-    }
+    if (onEditLabel) onEditLabel(label);
   }
 
   return (

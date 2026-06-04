@@ -44,10 +44,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   // ── Criminal capture state display ─────────────────────────────────────────
   const CAPTURE = {
     none:        { color:'#1a5a28', bg:'#f0faf4', label:'No organised crime' },
-    adversarial: { color:'#4a6a1a', bg:'#f4f8ec', label:'Criminal — Adversarial' },
-    equilibrium: { color:'#8a4010', bg:'#fdf6ec', label:'Criminal — Tolerated' },
-    corrupted:   { color:'#8b1a1a', bg:'#fdf4f4', label:'Criminal — Corrupted Officials' },
-    capture:     { color:'#4a1a4a', bg:'#fdf0fc', label:'Criminal — Governance Captured' },
+    adversarial: { color:'#4a6a1a', bg:'#f4f8ec', label:'Criminal - Adversarial' },
+    equilibrium: { color:'#8a4010', bg:'#fdf6ec', label:'Criminal - Tolerated' },
+    corrupted:   { color:'#8b1a1a', bg:'#fdf4f4', label:'Criminal - Corrupted Officials' },
+    capture:     { color:'#4a1a4a', bg:'#fdf0fc', label:'Criminal - Governance Captured' },
   };
   const captureStyle = CAPTURE[crimCapture] || CAPTURE.none;
 
@@ -101,7 +101,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
               </div>
               {leg.governanceFractured && (
                 <div style={{marginTop:8,background:swatch.dangerBg,border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:5,padding:'6px 10px',fontSize: FS['11.5'],color:swatch['#5A1A1A'],lineHeight:1.4}}>
-                  <strong>Governance fractured.</strong> Real decisions are being made informally — the faction that appears to govern is not the faction that governs.
+                  <strong>Governance fractured.</strong> Real decisions are being made informally - the faction that appears to govern is not the faction that governs.
                 </div>
               )}
             </div>
@@ -150,7 +150,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
       </div>
 
       {/* ── POWER DISTRIBUTION ───────────────────────────────────────────── */}
-      <Section title={`Power Distribution — ${pf.length} Factions`} collapsible defaultOpen>
+      <Section title={`Power Distribution - ${pf.length} Factions`} collapsible defaultOpen>
         {/* Stacked bar */}
         <div style={{display:'flex',height:22,borderRadius:5,overflow:'hidden',marginBottom:12,gap:1}}>
           {pf.map((f,i) => {

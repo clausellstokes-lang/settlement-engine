@@ -1,5 +1,5 @@
 /**
- * tests/domain/playerInterventionEvents.test.js — Tier 4.11 catalog.
+ * tests/domain/playerInterventionEvents.test.js - Tier 4.11 catalog.
  *
  * Pins the 5 new player-intervention event types added in Phase 24.
  * Each auto-inherits Phase 18's pipeline, so the tests only need to
@@ -37,7 +37,7 @@ function fixture() {
   };
 }
 
-describe('Phase 24 / Tier 4.11 — player intervention events', () => {
+describe('Phase 24 / Tier 4.11 - player intervention events', () => {
   it('every new event is registered with required fields', () => {
     for (const type of NEW_EVENTS) {
       expect(EVENT_TYPES, type).toContain(type);

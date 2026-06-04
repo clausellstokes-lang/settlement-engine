@@ -1,5 +1,5 @@
 /**
- * versionHistory.test.js — Contract over P133 / E-5 snapshot mutations.
+ * versionHistory.test.js - Contract over P133 / E-5 snapshot mutations.
  *
  * Pins the behavior of recordSnapshot + revertToSnapshot so a future
  * refactor (richer kind taxonomy, server-side compression, etc.) can't
@@ -88,7 +88,7 @@ describe('version history mutations', () => {
     expect(useStore.getState().settlement.versionHistory).toBeUndefined();
   });
 
-  it('recordSnapshot freezes a deep copy — later mutations do not bleed into history', () => {
+  it('recordSnapshot freezes a deep copy - later mutations do not bleed into history', () => {
     useStore.getState().recordSnapshot({ kind: 'manual', label: 'Before rename' });
     useStore.setState(s => { s.settlement.name = 'Renamed Town'; });
     const history = useStore.getState().settlement.versionHistory;
@@ -124,15 +124,15 @@ describe('version history mutations', () => {
     expect(useStore.getState().savedSettlements[0].settlement.name).toBe('Restored Saved Reach');
   });
 
-  it('revertToSnapshot is non-destructive — current state is auto-snapshotted first', () => {
+  it('revertToSnapshot is non-destructive - current state is auto-snapshotted first', () => {
     const snap = useStore.getState().recordSnapshot({ kind: 'manual', label: 'Checkpoint A' });
     useStore.setState(s => { s.settlement.name = 'Pre-Revert State'; });
     useStore.getState().revertToSnapshot({ snapshotId: snap.id });
-    // After revert: history has 3 entries — Checkpoint A, the auto-pre-revert
+    // After revert: history has 3 entries - Checkpoint A, the auto-pre-revert
     // snapshot, and Checkpoint A's settlement now overwriting the head, so the
     // history that survived the revert from the *target snapshot* contains
     // only [Checkpoint A]. Verify the pre-revert auto-snapshot exists on the
-    // PRE-REVERT history snapshot — we read the auto entry by kind on the
+    // PRE-REVERT history snapshot - we read the auto entry by kind on the
     // history that was alive at the time of the revert.
     // Easier check: the target snapshot's settlement, when restored, included
     // its OWN versionHistory (which had Checkpoint A in it). So we just

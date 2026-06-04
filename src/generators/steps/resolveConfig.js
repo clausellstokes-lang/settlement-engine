@@ -4,7 +4,7 @@
  * Resolves tier, population, trade route, terrain, culture, magic level,
  * monster threat, and priority sliders from raw user config.
  *
- * Extracted from generateSettlement.js lines 198–410.
+ * Extracted from generateSettlement.js lines 198-410.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -139,7 +139,7 @@ registerStep('resolveConfig', {
     ...(militaryFloor ? { priorityMilitary: militaryFloor } : {}),
   };
 
-  // Causal traces — record the *decisions* this step made (vs. the
+  // Causal traces - record the *decisions* this step made (vs. the
   // values it simply passed through). The "why" on each trace makes
   // it possible for the PipelineRail and AI-grounding layers to
   // explain how a settlement got its scaling.
@@ -159,7 +159,7 @@ registerStep('resolveConfig', {
           : 'Tier set directly by user choice.',
     }],
     downstreamEffects: [
-      { target: 'population', effect: `range ${popRange.min}–${popRange.max}` },
+      { target: 'population', effect: `range ${popRange.min}-${popRange.max}` },
       { target: 'institutionPool', effect: 'scaling tier' },
     ],
   });
@@ -172,7 +172,7 @@ registerStep('resolveConfig', {
       result: 'rolled',
       causes: [{
         source: 'config.terrainOverride=auto',
-        reason: 'Terrain not pinned — weighted-rolled from regional pool.',
+        reason: 'Terrain not pinned - weighted-rolled from regional pool.',
       }],
       downstreamEffects: [
         { target: 'tradeRoutePool', effect: 'terrain-constrained' },
@@ -224,7 +224,7 @@ registerStep('resolveConfig', {
       result: 'rolled',
       causes: [{
         source: config.culture ? `config.culture=${config.culture}` : 'config.culture=null',
-        reason: 'Culture not pinned — picked from canonical 11-culture catalog.',
+        reason: 'Culture not pinned - picked from canonical 11-culture catalog.',
       }],
       downstreamEffects: [
         { target: 'namePool',          effect: 'culture-scoped' },

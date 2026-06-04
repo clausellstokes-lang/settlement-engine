@@ -1,5 +1,5 @@
 /**
- * tests/store/userEdits.actions.test.js — Tier 5.4 store integration.
+ * tests/store/userEdits.actions.test.js - Tier 5.4 store integration.
  *
  * Verifies the applyUserEditAction / revertUserEditAction wiring on
  * settlementSlice:
@@ -17,7 +17,7 @@ import { immer } from 'zustand/middleware/immer';
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 
-// Minimal companion slices — same pattern as settlementSlice.test.js
+// Minimal companion slices - same pattern as settlementSlice.test.js
 const stubSlice = (_set, _get) => ({
   auth: { user: null, tier: 'premium', loading: false },
   config: { settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' },
@@ -116,7 +116,7 @@ describe('applyUserEditAction', () => {
 
   test('SILENTLY REJECTS unregistered paths (registry gate)', () => {
     store.getState().applyUserEditAction('npc', 0, 'name', 'Renamed Aldis');
-    // Name didn't change — registry doesn't allow it.
+    // Name didn't change - registry doesn't allow it.
     expect(store.getState().settlement.npcs[0].name).toBe('Aldis');
     expect(store.getState().settlement.npcs[0]._userEdits).toBeUndefined();
   });

@@ -1,5 +1,5 @@
 {
-  "_comment": "Pillar G — Hand-curated sample dossier used by the landing-page proof card (H-2), first-dossier callouts (O-2), and the workshop locked-state preview. Crafted around the canonical Hightower's Reach example the critique uses verbatim. Schema-compatible with a real generated settlement but tuned for teaching: NPC 0 carries the wall-fund corruption secret, the supply chain has a stated 11-day failure timeline, plot hook 0 is the missing-ledger arc. Update the script scripts/build-sample-dossier.mjs if regeneration is ever needed.",
+  "_comment": "Pillar G - Hand-curated sample dossier used by the landing-page proof card (H-2), first-dossier callouts (O-2), and the workshop locked-state preview. Crafted around the canonical Hightower's Reach example the critique uses verbatim. Schema-compatible with a real generated settlement but tuned for teaching: NPC 0 carries the wall-fund corruption secret, the supply chain has a stated 11-day failure timeline, plot hook 0 is the missing-ledger arc. Update the script scripts/build-sample-dossier.mjs if regeneration is ever needed.",
   "_seed": "hightowers-reach-2026-04-canon",
   "_version": 1,
   "schemaVersion": 1,
@@ -18,7 +18,7 @@
     "culture": "germanic"
   },
   "pressureSentence": "A walled border town that stopped pretending the salt-road still works.",
-  "arrivalScene": "Stone walls cap a low hill above the road. Salt-cured smoke from the smokehouses drifts north on the prevailing wind. Most travellers see the garrison first — the new wing is two seasons too new to weather honestly. Locals nod, then watch you walk past.",
+  "arrivalScene": "Stone walls cap a low hill above the road. Salt-cured smoke from the smokehouses drifts north on the prevailing wind. Most travellers see the garrison first - the new wing is two seasons too new to weather honestly. Locals nod, then watch you walk past.",
   "institutions": [
     { "id": "garrison",       "name": "The Garrison",           "category": "military",  "size": "large",  "weight": 0.9 },
     { "id": "sanctuary",      "name": "Sanctuary of the Lantern","category": "religious", "size": "medium", "weight": 0.7 },
@@ -34,7 +34,7 @@
       "role": "Garrison Captain",
       "importance": "major",
       "institutionId": "garrison",
-      "secret": "Skimming the wall-fund to pay for outer-watch patrols. Knows the wall will crumble inside three winters. Believes the alternative — monsters in the streets — is worse.",
+      "secret": "Skimming the wall-fund to pay for outer-watch patrols. Knows the wall will crumble inside three winters. Believes the alternative - monsters in the streets - is worse.",
       "want": "Keep the lie alive six more months.",
       "publicFace": "stern, respected, the woman who keeps the town safe"
     },
@@ -44,7 +44,7 @@
       "role": "Sanctuary Archivist",
       "importance": "major",
       "institutionId": "sanctuary",
-      "secret": "Has the missing wall-fund ledger. Won't hand it over until someone asks the right question — wants the crisis to break on its own terms.",
+      "secret": "Has the missing wall-fund ledger. Won't hand it over until someone asks the right question - wants the crisis to break on its own terms.",
       "want": "For someone to make the choice he can't.",
       "publicFace": "patient, scholarly, never volunteers an opinion"
     },
@@ -55,7 +55,7 @@
       "importance": "major",
       "institutionId": "saltguild",
       "secret": "Has spent her own coin three times to keep convoys moving. Her name is on the wreck the moment the route closes.",
-      "want": "A new route — through anywhere — before her name is on the wreck."
+      "want": "A new route - through anywhere - before her name is on the wreck."
     },
     {
       "id": "npc.han",
@@ -118,7 +118,7 @@
       "id": "hook.funeral",
       "tier": "C",
       "title": "A funeral with no body",
-      "body": "Brother Aldwin holds a vigil for a stable-hand 'found at the pass.' Old Han knows the man is alive — and hiding.",
+      "body": "Brother Aldwin holds a vigil for a stable-hand 'found at the pass.' Old Han knows the man is alive - and hiding.",
       "connectsTo": ["npc.aldwin", "npc.han"]
     }
   ],
@@ -126,7 +126,7 @@
     "events": [
       { "yearsAgo": 142, "type": "founded",      "title": "Founded as a salt-road waystation",      "summary": "Frontier outpost on the Whitestone trade route." },
       { "yearsAgo": 1.5, "type": "trade_break",  "title": "The convoy attack at Whitestone Pass",   "summary": "Route closes intermittently. The wall-fund is first dipped to pay outriders." },
-      { "yearsAgo": 0.06,"type": "garrison_exp", "title": "Garrison expanded — wall-fund drained",  "summary": "Captain Marsh quietly begins the shakedowns of the merchant guilds." }
+      { "yearsAgo": 0.06,"type": "garrison_exp", "title": "Garrison expanded - wall-fund drained",  "summary": "Captain Marsh quietly begins the shakedowns of the merchant guilds." }
     ]
   },
   "neighbourLinks": [

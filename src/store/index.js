@@ -1,19 +1,19 @@
 /**
- * store/index.js — Unified Zustand store with 12 slices.
+ * store/index.js - Unified Zustand store with 12 slices.
  *
  * Slices:
- *   auth          – user session, tier (anon / free / premium), permissions
- *   config        – settlement configuration, tier-gated by auth
- *   toggles       – institution / service / goods toggles
- *   settlement    – current + saved settlements, reactive-update state
- *   ai            – narrative layer, daily-life, generation state
- *   neighbour     – neighbour links, imported neighbour, cross-settlement effects
- *   map           – Fantasy World Map bridge state, selected burg, supply-chain overlays
- *   credits       – credit balance, transaction history
- *   campaign      – campaign folders + per-settlement campaign state
- *   customContent – user-authored institutions / resources / trade routes
- *   onboarding    – first-run coaching + nudge state
- *   ui            – cross-cutting UI flags (modals, wizard step / mode)
+ *   auth          - user session, tier (anon / free / premium), permissions
+ *   config        - settlement configuration, tier-gated by auth
+ *   toggles       - institution / service / goods toggles
+ *   settlement    - current + saved settlements, reactive-update state
+ *   ai            - narrative layer, daily-life, generation state
+ *   neighbour     - neighbour links, imported neighbour, cross-settlement effects
+ *   map           - Fantasy World Map bridge state, selected burg, supply-chain overlays
+ *   credits       - credit balance, transaction history
+ *   campaign      - campaign folders + per-settlement campaign state
+ *   customContent - user-authored institutions / resources / trade routes
+ *   onboarding    - first-run coaching + nudge state
+ *   ui            - cross-cutting UI flags (modals, wizard step / mode)
  *
  * Usage:
  *   import { useStore } from '../store';
@@ -44,26 +44,26 @@ export const useStore = create(
   devtools(
     subscribeWithSelector(
       persist(
-        immer((...a) => ({
-          ...createAuthSlice(...a),
-          ...createConfigSlice(...a),
-          ...createToggleSlice(...a),
-          ...createSettlementSlice(...a),
-          ...createAiSlice(...a),
-          ...createNeighbourSlice(...a),
-          ...createMapSlice(...a),
-          ...createCreditsSlice(...a),
-          ...createCampaignSlice(...a),
-          ...createCustomContentSlice(...a),
-          ...createOnboardingSlice(...a),
-          ...createUiSlice(...a),
+        immer((set, get) => ({
+          ...createAuthSlice(set, get),
+          ...createConfigSlice(set, get),
+          ...createToggleSlice(set, get),
+          ...createSettlementSlice(set, get),
+          ...createAiSlice(set, get),
+          ...createNeighbourSlice(set, get),
+          ...createMapSlice(set, get),
+          ...createCreditsSlice(set, get),
+          ...createCampaignSlice(set, get),
+          ...createCustomContentSlice(set, get),
+          ...createOnboardingSlice(set, get),
+          ...createUiSlice(set, get),
         })),
         {
           name: 'settlementforge',
           partialize: (state) => ({
             // Persist only lightweight, user-owned data.
             // Never persist the massive generated settlement object.
-            // wizardStep / wizardMode are intentionally NOT persisted — users
+            // wizardStep / wizardMode are intentionally NOT persisted - users
             // expect to land on the mode picker on every visit, not get
             // dumped straight into whatever flow they used last session.
             config: state.config,
@@ -89,12 +89,12 @@ export const useStore = create(
 // Wire the dependencyEngine to read customContent from this store.
 // This is the only edge that connects the (store-agnostic) generator's
 // custom-content lookup back to the live app state. Done here, at the
-// store, rather than inside dependencyEngine itself — that keeps the
+// store, rather than inside dependencyEngine itself - that keeps the
 // generator side free of any zustand/react import and makes it
 // runnable headlessly (snapshot tests, scripts, server jobs).
 setCustomContentSource(() => useStore.getState().customContent);
 
-// ── P101 / X-3 — Auth intent handlers ───────────────────────────────────
+// ── P101 / X-3 - Auth intent handlers ───────────────────────────────────
 // Register handlers for post-auth pending intents. Keep authIntents itself
 // lazy so GenerateWizard/authSlice do not create a mixed static/dynamic
 // chunk that Vite has to warn about.
@@ -120,7 +120,7 @@ function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
       try {
         const setOnboardingNudge = useStore.getState().setOnboardingNudge;
         if (typeof setOnboardingNudge === 'function') {
-          setOnboardingNudge(`Saved as ${payload.name} — view it in Settlements.`);
+          setOnboardingNudge(`Saved as ${payload.name} - view it in Settlements.`);
         }
       } catch { /* nudge slice might not be initialized in tests */ }
       return result;

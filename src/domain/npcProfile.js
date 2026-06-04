@@ -1,11 +1,11 @@
 /**
- * domain/npcProfile.js — Structured NPC profiles + removal consequences.
+ * domain/npcProfile.js - Structured NPC profiles + removal consequences.
  *
  * Tier 4.5 of the roadmap. Today's NPC entries are already rich:
  *
  *   { id, name, role, category, factionAffiliation,
  *     structuralPosition, structuralRank, influence, power,
- *     personality, physical, goal, secret, plotHooks, … }
+ *     personality, physical, goal, secret, plotHooks, ... }
  *
  * The roadmap target promotes them into causal nodes with:
  *
@@ -19,7 +19,7 @@
  * powerful?" UI) call the derivation and get the structured shape
  * without anyone migrating the generator.
  *
- * No imports from src/lib — domain tsconfig include stays
+ * No imports from src/lib - domain tsconfig include stays
  * self-contained, same constraint Phases 9-12 honored.
  */
 
@@ -124,7 +124,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   government: {
     dominant: [
       'Tax collection slows; the watch loses paid authority.',
-      'A succession contender steps forward — possibly a rival faction.',
+      'A succession contender steps forward - possibly a rival faction.',
       'Public legitimacy of the governing body drops several bands.',
       'Quiet courtiers and clients realign overnight.',
     ],
@@ -139,7 +139,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   religious: {
     dominant: [
       'Temple relief authority weakens; food queues lengthen.',
-      'A sectarian successor emerges — possibly with a harder line.',
+      'A sectarian successor emerges - possibly with a harder line.',
       'Public mourning becomes a political moment.',
       'The governing faction loses a major source of moral cover.',
     ],
@@ -209,7 +209,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   },
   occupation: {
     dominant: [
-      'The homeland recalls or replaces — the replacement is an unknown quantity.',
+      'The homeland recalls or replaces - the replacement is an unknown quantity.',
       'Local cells of resistance test the new chain of command.',
       'Tribute schedules slip while the transition settles.',
     ],
@@ -263,7 +263,7 @@ function factionIdFromName(name) {
 
 // ── Institution link inference ──────────────────────────────────────────
 // Match the NPC's category / role to the first settlement institution
-// with overlapping tags or name patterns. Best-effort — returns null
+// with overlapping tags or name patterns. Best-effort - returns null
 // when no clear link exists.
 
 const CATEGORY_INSTITUTION_HINTS = Object.freeze({
@@ -294,7 +294,7 @@ function inferInstitutionLink(npc, settlement) {
 // For Tier 4.5 V1, we surface a single primary relationship: the
 // strongest ally or rival the NPC has, sourced from
 // settlement.relationships. Triangles (three-way structures) are a
-// follow-up — the data is there, but the surface needs careful UX.
+// follow-up - the data is there, but the surface needs careful UX.
 
 function inferPrimaryRelationship(npc, settlement) {
   const rels = Array.isArray(settlement?.relationships) ? settlement.relationships : [];
@@ -304,7 +304,7 @@ function inferPrimaryRelationship(npc, settlement) {
   const candidates = rels.filter(r => r.npc1Id === npc.id || r.npc2Id === npc.id);
   if (candidates.length === 0) return null;
 
-  // Prefer relationships with explicit tension over plain alliances —
+  // Prefer relationships with explicit tension over plain alliances -
   // these are the more campaign-actionable connections.
   const withTension = candidates.find(r => typeof r.tension === 'string' && r.tension);
   const chosen = withTension || candidates[0];
@@ -369,7 +369,7 @@ export function deriveNpcProfile(npc, settlement) {
       npc.goal?.short,
     ),
 
-    // Tier 4.5 structured fields — leverage / vulnerability from template,
+    // Tier 4.5 structured fields - leverage / vulnerability from template,
     // augmented with the NPC's own secret stakes / plot hooks.
     leverage:        [...template.leverage],
     vulnerabilities: (() => {
@@ -379,7 +379,7 @@ export function deriveNpcProfile(npc, settlement) {
       return out;
     })(),
 
-    // Player-facing — derived from existing hooks. We intentionally
+    // Player-facing - derived from existing hooks. We intentionally
     // present the same hook prose without paraphrasing; the structured
     // wrapping is what's new.
     offerToPlayers:    Array.isArray(npc.plotHooks) ? npc.plotHooks.slice(0, 2) : [],
@@ -424,7 +424,7 @@ export function npcArchetypeBreakdown(settlement) {
 
 /**
  * Forecast the cumulative impact of removing all 'dominant'-rank NPCs.
- * Returns a flat list of consequences — useful for the future
+ * Returns a flat list of consequences - useful for the future
  * "If the players burn through the leadership" forecasting UI.
  */
 export function dominantNpcRemovalImpact(settlement) {

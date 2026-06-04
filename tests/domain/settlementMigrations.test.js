@@ -1,5 +1,5 @@
 /**
- * tests/domain/settlementMigrations.test.js — Tier 1.4 coverage.
+ * tests/domain/settlementMigrations.test.js - Tier 1.4 coverage.
  *
  * Verifies the migration runner:
  *   - Chain integrity (no gaps, no jumps, no fanout)
@@ -18,7 +18,7 @@ import {
 import { SCHEMA_VERSION } from '../../src/domain/settlement.schema.js';
 import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
 
-describe('Tier 1.4 — migration chain integrity', () => {
+describe('Tier 1.4 - migration chain integrity', () => {
   it('diagnoseMigrationChain returns null on a well-formed chain', () => {
     expect(diagnoseMigrationChain()).toBeNull();
   });
@@ -59,7 +59,7 @@ describe('Tier 1.4 — migration chain integrity', () => {
   });
 });
 
-describe('Tier 1.4 — migrateSettlementToLatest behavior', () => {
+describe('Tier 1.4 - migrateSettlementToLatest behavior', () => {
   it('stamps schemaVersion=1 on a pre-versioned settlement', () => {
     const v0 = { name: 'Old', tier: 'town', population: 1500 };
     const result = migrateSettlementToLatest(v0);
@@ -117,13 +117,13 @@ describe('Tier 1.4 — migrateSettlementToLatest behavior', () => {
   it('safety bound trips on a runaway chain (would not loop forever)', () => {
     // We can't directly trigger this without mutating MIGRATIONS, but
     // the runner has a `safety > 100` guard. Verifying the guard
-    // exists is enough — any future migration regression would be
+    // exists is enough - any future migration regression would be
     // bounded by it.
     expect(typeof migrateSettlementToLatest).toBe('function');
   });
 });
 
-describe('Tier 1.4 — normalizeSettlement integration', () => {
+describe('Tier 1.4 - normalizeSettlement integration', () => {
   it('a pre-versioned settlement loaded through normalize gets stamped', () => {
     const v0 = { name: 'Loaded', tier: 'town', population: 1500, _seed: 'fixed' };
     const result = normalizeSettlement(v0);
@@ -149,7 +149,7 @@ describe('Tier 1.4 — normalizeSettlement integration', () => {
   });
 });
 
-describe('Tier 1.4 — registry contract for future additions', () => {
+describe('Tier 1.4 - registry contract for future additions', () => {
   it('SCHEMA_VERSION is a positive integer', () => {
     expect(Number.isInteger(SCHEMA_VERSION)).toBe(true);
     expect(SCHEMA_VERSION).toBeGreaterThan(0);
@@ -158,7 +158,7 @@ describe('Tier 1.4 — registry contract for future additions', () => {
   it('migrations are exported as a frozen list (cannot be mutated at runtime)', () => {
     // listMigrations returns a copy. The internal MIGRATIONS array is
     // frozen via Object.freeze. Confirm by attempting to mutate the
-    // returned copy — it should NOT affect future listMigrations calls.
+    // returned copy - it should NOT affect future listMigrations calls.
     const list1 = listMigrations();
     list1.push({ from: 99, to: 100, description: 'rogue' });
     const list2 = listMigrations();

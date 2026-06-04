@@ -1,5 +1,5 @@
 /**
- * AnnotateToolbar — contextual toolbar for MAP_MODES.ANNOTATE.
+ * AnnotateToolbar - contextual toolbar for MAP_MODES.ANNOTATE.
  *
  * Lets the user pick a tool (select / label / marker / forest) and tune
  * the options for each tool (font size, color, marker icon, forest style).
@@ -23,7 +23,7 @@ export default function AnnotateToolbar() {
 
   function handleDelete() {
     if (!selectedId) return;
-    // We don't know which layer the id is in — try both.
+    // We don't know which layer the id is in - try both.
     deleteLabel(selectedId);
     deleteMarker(selectedId);
   }

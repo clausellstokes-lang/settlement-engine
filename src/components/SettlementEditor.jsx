@@ -1,5 +1,5 @@
 /**
- * SettlementEditor.jsx — CRUD editor for saved settlements.
+ * SettlementEditor.jsx - CRUD editor for saved settlements.
  *
  * Searchable catalog-backed editor: institutions, resources, stressors,
  * trade goods, and priority sliders. "Add" opens a full catalog search
@@ -17,6 +17,7 @@ import { useStore } from '../store/index.js';
 import { classifyChange } from '../lib/narrativeMutations.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import NarrativeDriftModal from './NarrativeDriftModal.jsx';
+import { ChoiceDialog } from './primitives/Dialog.jsx';
 
 // ── Sub-section wrapper ─────────────────────────────────────────────────────
 function SubSection({ title, count, children }) {
@@ -150,15 +151,15 @@ export default function SettlementEditor({
   // design decision 4 ("kill leave stale"). If narrated is false, edits apply
   // silently as before.
   narrated = false,
-  onRegenerateNarrative,  // async () => void — re-run narrative pipeline
-  onProgressNarrative,    // async (changeType, changeLabel) => void — evolve narrative (AI-4)
-  onRevertToRaw,          // async () => void — clear narrative, keep raw
+  onRegenerateNarrative,  // async () => void - re-run narrative pipeline
+  onProgressNarrative,    // async (changeType, changeLabel) => void - evolve narrative (AI-4)
+  onRevertToRaw,          // async () => void - clear narrative, keep raw
 }) {
   const [open, setOpen] = useState(false);
   const customContent = useStore(s => s.customContent);
   // Audit reconciliation §5: in canon mode, direct mutations from the
   // editor lose continuity. The user wanted post-canon edits folded into
-  // events — but a strict "no edits in canon" rule is too rigid for typo
+  // events - but a strict "no edits in canon" rule is too rigid for typo
   // fixes and renames. We render a banner that asks the user to choose
   // between Correction (silent edit, no timeline) and Event (canon event
   // with consequences). The banner is informational; existing edit
@@ -173,6 +174,7 @@ export default function SettlementEditor({
   //
   // Shape: { changeType, changeLabel, changeClass, applyFn }
   const [pendingMutation, setPendingMutation] = useState(null);
+  const [canonChoice, setCanonChoice] = useState(null);
 
   // Local draft for priority sliders so we can let them drag freely and only
   // trigger the drift gate on commit (mouseUp/touchEnd/blur/keyUp).
@@ -184,7 +186,7 @@ export default function SettlementEditor({
   // the source slice of settlement hasn't changed. Without this, every
   // render allocates a fresh array, and the downstream useMemo blocks
   // that depend on these (lines ~316/350/381/420/437) recompute every
-  // render — defeating their purpose. The dependency on the specific
+  // render - defeating their purpose. The dependency on the specific
   // settlement subtree (not whole settlement) is the granularity
   // exhaustive-deps wants for a sound memoization.
   const institutions = useMemo(
@@ -213,7 +215,7 @@ export default function SettlementEditor({
   // Audit fix: pull canon phase off the live store so the editor can
   // distinguish design-time edits from canon-time changes. In canon
   // mode, the user is presented with a correction-vs-event choice
-  // before any structural edit commits — see confirmStructuralEdit.
+  // before any structural edit commits - see confirmStructuralEdit.
   const phase = useStore(s => s.phase);
   const isCanon = phase === 'canon';
 
@@ -223,40 +225,36 @@ export default function SettlementEditor({
   //   1. Canon gate: if phase === 'canon' AND change is structural, ask
   //      the user "is this a correction or an in-world event?" The
   //      correction path runs applyFn unchanged. The event path
-  //      cancels — the user is directed to use the EventComposer.
+  //      cancels - the user is directed to use the EventComposer.
   //   2. Drift gate (existing): if the save is narrated and the change
   //      is structural, the prior modal handles regenerate vs revert.
+  const continueStructuralEdit = (mutation) => {
+    if (!mutation) return;
+    if (!narrated) {
+      mutation.applyFn();
+      return;
+    }
+    setPendingMutation(mutation);
+  };
+
   const confirmStructuralEdit = (changeType, changeLabel, applyFn) => {
     const changeClass = classifyChange(changeType);
     if (changeClass === 'cosmetic') {
       applyFn();
       return;
     }
+    const mutation = { changeType, changeLabel, changeClass, applyFn };
     if (phase === 'canon') {
-      // Canon-mode prompt: bypass the structural drift modal because
-      // the user is making a higher-order decision first. Once they
-      // confirm "correction," we still hit the drift gate below.
-      const choice = window.prompt(
-        'This settlement is canon. Type C for correction (cleanup, no timeline entry) ' +
-        'or E to cancel and use the Event Composer instead.',
-        'C',
-      );
-      if (!choice) return;
-      const c = String(choice).trim().toLowerCase();
-      if (c.startsWith('e')) {
-        // Defer to the EventComposer. We can't auto-fill it because the
-        // editor doesn't know the right event type for an arbitrary
-        // structural edit — but a future revision could pre-populate it.
-        return;
-      }
-      // 'C' (or anything else) → fall through to the drift gate as a
-      // correction-mode edit.
-    }
-    if (!narrated) {
-      applyFn();
+      setCanonChoice(mutation);
       return;
     }
-    setPendingMutation({ changeType, changeLabel, changeClass, applyFn });
+    continueStructuralEdit(mutation);
+  };
+
+  const handleCanonChoice = (choice) => {
+    const mutation = canonChoice;
+    setCanonChoice(null);
+    if (choice === 'correction') continueStructuralEdit(mutation);
   };
 
   const handleDriftRegenerate = async () => {
@@ -270,7 +268,7 @@ export default function SettlementEditor({
     }
   };
 
-  // Progress (AI-4) — apply the edit, then evolve the existing narrative
+  // Progress (AI-4) - apply the edit, then evolve the existing narrative
   // against the change diff rather than rewriting from scratch. The
   // changeType/changeLabel are threaded to the endpoint so the server can
   // run the right subset of refinement passes and produce a chronicle entry.
@@ -298,7 +296,7 @@ export default function SettlementEditor({
 
   const handleDriftCancel = () => {
     // Cancelling the modal drops the pending mutation AND any in-flight slider
-    // draft — the slider reverts to its committed value because the display
+    // draft - the slider reverts to its committed value because the display
     // reads from priorityDraft when present, otherwise from `priorities`.
     setPendingMutation(null);
     setPriorityDraft(null);
@@ -512,12 +510,12 @@ export default function SettlementEditor({
   const getSliderValue = (key) =>
     priorityDraft?.key === key ? priorityDraft.val : priorities[key];
 
-  // Drag handler — update local draft only (no persistence).
+  // Drag handler - update local draft only (no persistence).
   const handleSliderChange = (key, val) => {
     setPriorityDraft({ key, val });
   };
 
-  // Release handler — run the drift gate (which will either apply immediately
+  // Release handler - run the drift gate (which will either apply immediately
   // when unnarrated, or park and show the modal when narrated).
   const handleSliderCommit = () => {
     if (!priorityDraft) return;
@@ -551,7 +549,7 @@ export default function SettlementEditor({
         <div style={{ padding:'12px 14px', display:'flex', flexDirection:'column', gap:10 }}>
 
           {/* Canon-mode reminder. Direct mutations from this editor
-              don't appear in the campaign timeline — they're authorial
+              don't appear in the campaign timeline - they're authorial
               corrections, not in-world events. For events that should
               propagate consequences and write a timeline entry, use the
               Event Composer below. The audit's reconciliation §5
@@ -570,7 +568,7 @@ export default function SettlementEditor({
                 Canon
               </span>
               <span style={{ flex:1 }}>
-                Edits here are <strong>corrections</strong> — typo fixes, renames, cleanup.
+                Edits here are <strong>corrections</strong> - typo fixes, renames, cleanup.
                 They don't become timeline events. To record an in-world change with consequences
                 (death, fire, refugees, route cut), use the Event Composer below.
               </span>
@@ -651,7 +649,7 @@ export default function SettlementEditor({
         </div>
       )}
 
-      {/* Narrative drift gate — opens when a structural/seismic edit is
+      {/* Narrative drift gate - opens when a structural/seismic edit is
           attempted on a narrated save. Per design decision 4, there's no
           "leave stale" option. Progress is only offered when the parent
           wired up onProgressNarrative (i.e. we have a saveId and are online);
@@ -665,6 +663,17 @@ export default function SettlementEditor({
         progressionCost={CREDIT_COSTS.progression}
         onRevert={handleDriftRevert}
         onCancel={handleDriftCancel}
+      />
+      <ChoiceDialog
+        open={!!canonChoice}
+        title="Canon settlement edit"
+        body="This settlement is canon. Choose whether this is a correction or an in-world event."
+        choices={[
+          { id: 'correction', label: 'Correction', description: 'Apply the edit as cleanup with no timeline entry.' },
+          { id: 'event', label: 'Use Event Composer', description: 'Cancel this edit so you can record consequences as an event.' },
+        ]}
+        onChoose={handleCanonChoice}
+        onCancel={() => setCanonChoice(null)}
       />
     </div>
   );

@@ -131,7 +131,7 @@ export default function ServicesTogglePanel() {
       });
     });
     return { total, on, forced, excluded };
-    // getToggle is a closure over servicesToggles (already in deps) — its
+    // getToggle is a closure over servicesToggles (already in deps) - its
     // identity changes every render but its behavior only changes when
     // servicesToggles does. Adding it to deps would bust the memo on
     // every render, defeating the purpose.
@@ -165,7 +165,7 @@ export default function ServicesTogglePanel() {
       <ControlsStrip
         search={search}
         setSearch={setSearch}
-        placeholder="Search services…"
+        placeholder="Search services..."
         onForceAll={bulkForce}
         onReset={() => setServiceToggles({})}
         onExcludeAll={bulkExclude}

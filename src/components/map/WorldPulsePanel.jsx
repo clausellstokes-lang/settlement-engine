@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Activity, CheckCircle2, Clock3, ShieldAlert, XCircle } from 'lucide-react';
+import { Activity, BookMarked, CheckCircle2, Clock3, ShieldAlert, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
@@ -10,6 +10,15 @@ function percent(value) {
 
 function human(value) {
   return String(value || '').replace(/_/g, ' ');
+}
+
+function signedNumber(value) {
+  const n = Math.round(Number(value) || 0);
+  return `${n > 0 ? '+' : ''}${n.toLocaleString()}`;
+}
+
+function unique(values = []) {
+  return values.filter(Boolean).filter((value, index, arr) => arr.indexOf(value) === index);
 }
 
 function Pill({ children, tone = 'neutral' }) {
@@ -38,6 +47,9 @@ function Pill({ children, tone = 'neutral' }) {
 
 function proposalDetails(outcome = {}) {
   const payload = outcome.proposalPayload || {};
+  if (payload.kind === 'tier_change') {
+    return [`${human(payload.fromTier)} -> ${human(payload.toTier)}`, human(payload.direction)];
+  }
   if (payload.kind === 'relationship_label_change') {
     return [`${human(payload.fromType)} -> ${human(payload.toType)}`, human(outcome.ruleId || outcome.ruleFamily)];
   }
@@ -57,6 +69,30 @@ function proposalDetails(outcome = {}) {
     return [human(payload.kind), human(payload.cause)].filter(Boolean);
   }
   return [human(outcome.ruleFamily), human(outcome.ruleId)].filter(Boolean).slice(0, 2);
+}
+
+function outcomeDetails(outcome = {}) {
+  const details = [...proposalDetails(outcome)];
+  if (outcome.tierChange) {
+    details.push(`${human(outcome.tierChange.fromTier)} -> ${human(outcome.tierChange.toTier)}`);
+  }
+  if (outcome.populationDeltas?.length) {
+    details.push(...outcome.populationDeltas.slice(0, 3).map(delta => `${delta.saveId}: ${signedNumber(delta.delta)}`));
+  }
+  if (outcome.resourcePatch) {
+    details.push(`${human(outcome.resourcePatch.resource)} ${human(outcome.resourcePatch.state)}`);
+  }
+  if (outcome.npcPatch?.shortGoal) details.push(`short: ${human(outcome.npcPatch.shortGoal)}`);
+  if (outcome.npcPatch?.longGoal) details.push(`long: ${human(outcome.npcPatch.longGoal)}`);
+  if (outcome.stressor?.type) details.push(human(outcome.stressor.type));
+  if (outcome.metadata?.economicRole) details.push(human(outcome.metadata.economicRole));
+  if (outcome.metadata?.transferMode) details.push(`migration ${human(outcome.metadata.transferMode)}`);
+  if (outcome.metadata?.rebellionOutcome) details.push(`rebellion ${human(outcome.metadata.rebellionOutcome)}`);
+  return unique(details).slice(0, 5);
+}
+
+function rollIsDeterministic(roll = {}) {
+  return !!roll.conflictResolution?.deterministic || (roll.probability >= 1 && roll.roll === 0);
 }
 
 function OutcomeCard({ title, summary, severity, reasons = [], actions = null, tone = 'normal', details = [] }) {
@@ -101,8 +137,8 @@ function OutcomeCard({ title, summary, severity, reasons = [], actions = null, t
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
         <Pill tone={major ? 'major' : 'neutral'}>Severity {percent(severity)}</Pill>
-        {details.slice(0, 3).map(detail => <Pill key={detail}>{detail}</Pill>)}
-        {reasons.slice(0, 3).map(reason => <Pill key={reason}>{reason}</Pill>)}
+        {details.slice(0, 5).map((detail, index) => <Pill key={`${detail}-${index}`}>{detail}</Pill>)}
+        {reasons.slice(0, 3).map((reason, index) => <Pill key={`${reason}-${index}`}>{reason}</Pill>)}
       </div>
       {actions && (
         <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 2 }}>
@@ -163,15 +199,19 @@ function Section({ title, count, children }) {
 export default function WorldPulsePanel({ campaign }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
+  const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
   const [busyProposalId, setBusyProposalId] = useState(null);
+  const [canonBusy, setCanonBusy] = useState(false);
   const [actionError, setActionError] = useState(null);
   if (!campaign) return null;
 
   const worldState = campaign.worldState || {};
   const pending = (worldState.proposals || []).filter(proposal => proposal.status === 'pending');
   const latestPulse = (worldState.pulseHistory || [])[worldState.pulseHistory.length - 1] || null;
+  const rules = worldState.simulationRules || {};
   const rolls = latestPulse?.rollExplanations || [];
   const resolved = latestPulse?.resolvedStressors || [];
+  const appliedOutcomes = latestPulse?.selectedOutcomes || [];
   const selected = latestPulse?.selectedCount || 0;
 
   const runProposalAction = async (proposalId, action) => {
@@ -188,6 +228,84 @@ export default function WorldPulsePanel({ campaign }) {
       setBusyProposalId(null);
     }
   };
+
+  const runCanonizeWorld = async () => {
+    if (canonBusy) return;
+    setCanonBusy(true);
+    setActionError(null);
+    try {
+      await canonizeCampaignWorld(campaign.id);
+    } catch (err) {
+      setActionError(`Canonize failed: ${err?.message || err}`);
+    } finally {
+      setCanonBusy(false);
+    }
+  };
+
+  if (!worldState.canonizedAt) {
+    return (
+      <section style={{
+        flex: 1,
+        minHeight: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        background: CARD,
+        border: `1px solid ${BORDER}`,
+        borderRadius: 8,
+        overflow: 'hidden',
+      }}>
+        <header style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          padding: '13px 16px',
+          borderBottom: `1px solid ${BORDER}`,
+          background: CARD_ALT,
+        }}>
+          <div style={{
+            width: 34,
+            height: 34,
+            borderRadius: 8,
+            border: `1px solid ${BORDER2}`,
+            background: CARD,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <Activity size={18} color={GOLD} />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>
+              World Pulse
+            </h2>
+            <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+              <span>{campaign.name}</span>
+              <span>Draft world</span>
+            </div>
+          </div>
+        </header>
+        <div style={{ padding: 16 }}>
+          {actionError && (
+            <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>
+              {actionError}
+            </div>
+          )}
+          <OutcomeCard
+            title="Canonize the campaign world first"
+            summary="World Pulse advancement starts after you lock the map, placements, and campaign assumptions as canon."
+            severity={0.45}
+            details={['required before advancement']}
+            actions={(
+              <SmallButton tone="good" onClick={runCanonizeWorld} disabled={canonBusy} title="Canonize campaign world">
+                <BookMarked size={13} /> {canonBusy ? 'Canonizing' : 'Canonize world'}
+              </SmallButton>
+            )}
+          />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section style={{
@@ -229,6 +347,8 @@ export default function WorldPulsePanel({ campaign }) {
             <span>{campaign.name}</span>
             <span>Tick {worldState.tick || 0}</span>
             <span>{human(worldState.calendar?.season || 'spring')}</span>
+            <span>{human(rules.propagationMode || 'full')}</span>
+            <span>{human(rules.intensity || 'normal')}</span>
             <span>{pending.length} pending</span>
           </div>
         </div>
@@ -304,6 +424,17 @@ export default function WorldPulsePanel({ campaign }) {
                 severity={Math.min(1, selected / 8)}
                 reasons={[latestPulse.interval, latestPulse.calendar?.season, `${rolls.length} rolls`].filter(Boolean)}
               />
+              {appliedOutcomes.slice(0, 10).map(outcome => (
+                <OutcomeCard
+                  key={outcome.id}
+                  title={outcome.headline || human(outcome.candidateType)}
+                  summary={outcome.summary}
+                  severity={outcome.severity}
+                  reasons={outcome.reasons}
+                  details={outcomeDetails(outcome)}
+                  tone={outcome.applyMode === 'proposal' ? 'major' : 'normal'}
+                />
+              ))}
               {resolved.map(stressor => (
                 <OutcomeCard
                   key={stressor.id}
@@ -326,6 +457,7 @@ export default function WorldPulsePanel({ campaign }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {rolls.slice(0, 18).map(roll => {
                 const passed = !!roll.passed;
+                const deterministic = rollIsDeterministic(roll);
                 return (
                   <article key={roll.candidateId} style={{
                     display: 'grid',
@@ -342,8 +474,8 @@ export default function WorldPulsePanel({ campaign }) {
                         {human(roll.candidateType)}
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 6 }}>
-                        <Pill tone={passed ? 'major' : 'neutral'}>{passed ? 'selected' : 'missed'}</Pill>
-                        <Pill>Roll {percent(roll.roll)}</Pill>
+                        <Pill tone={passed ? 'major' : 'neutral'}>{deterministic ? 'deterministic' : passed ? 'selected' : 'missed'}</Pill>
+                        {!deterministic && <Pill>Roll {percent(roll.roll)}</Pill>}
                         <Pill>Chance {percent(roll.probability)}</Pill>
                         <Pill>Severity {percent(roll.severity)}</Pill>
                         {roll.ruleFamily && <Pill>{human(roll.ruleFamily)}</Pill>}

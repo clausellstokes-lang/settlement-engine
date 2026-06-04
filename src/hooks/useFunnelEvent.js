@@ -1,5 +1,5 @@
 /**
- * useFunnelEvent.js — One-shot funnel-event firing on condition transition.
+ * useFunnelEvent.js - One-shot funnel-event firing on condition transition.
  *
  * Many critique findings (X-2 pricing moments, X-3 save intent, X-4
  * welcome credit) want to fire an analytics event exactly once per
@@ -20,7 +20,7 @@
  *   );
  *
  * Per-session dedupe is the right default for "first export", "first
- * save", "saw welcome card" — events that only matter once. Pass
+ * save", "saw welcome card" - events that only matter once. Pass
  * `{ once: false }` to fire on every transition.
  */
 
@@ -49,12 +49,12 @@ function markFiredThisSession(eventName) {
 }
 
 /**
- * @param {string} eventName  — A value from EVENTS in lib/analytics.js
- * @param {boolean} condition — The trigger. Fires on false → true transition.
- * @param {Function|Object} [getPayload] — Either a function returning
+ * @param {string} eventName  - A value from EVENTS in lib/analytics.js
+ * @param {boolean} condition - The trigger. Fires on false → true transition.
+ * @param {Function|Object} [getPayload] - Either a function returning
  *   the payload at fire time, or a stable payload object.
  * @param {Object} [opts]
- * @param {boolean} [opts.once=true] — Per-session dedupe.
+ * @param {boolean} [opts.once=true] - Per-session dedupe.
  */
 export function useFunnelEvent(eventName, condition, getPayload, opts = {}) {
   const { once = true } = opts;

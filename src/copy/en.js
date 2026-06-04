@@ -1,5 +1,5 @@
 /**
- * copy/en.js — English copy strings, organized by namespace.
+ * copy/en.js - English copy strings, organized by namespace.
  *
  * Every user-facing string in the app should live here, not as literals
  * scattered through components. Three reasons this matters more than it
@@ -15,7 +15,7 @@
  *   3. i18n later. Add `src/copy/es.js` with the same shape; flip the
  *      active locale in `copy/index.js`. No component changes.
  *
- * Naming convention: namespace.scope.key. Keep keys short and stable —
+ * Naming convention: namespace.scope.key. Keep keys short and stable -
  * they're referenced by string, so renames are find-and-replace.
  *
  * Template interpolation: use `{varName}`. The `t()` helper substitutes
@@ -38,7 +38,7 @@ export const en = Object.freeze({
     next:        'Next',
     yes:         'Yes',
     no:          'No',
-    loading:     'Loading…',
+    loading:     'Loading...',
     moreOptions: 'More options',
   },
 
@@ -49,8 +49,8 @@ export const en = Object.freeze({
   hero: {
     eyebrow:    'A simulator for Dungeon Masters',
     title:      'Forge a settlement worth running a campaign in.',
-    subtitle:   'Every street, every faction, every reason the place hasn’t collapsed yet — simulated in seconds, exported in a click.',
-    antiAi:     'Simulated, not AI-generated. The town is derived from constraints — coherent because it has to be.',
+    subtitle:   'Every street, every faction, every reason the place hasn’t collapsed yet - simulated in seconds, exported in a click.',
+    antiAi:     'Simulated, not AI-generated. The town is derived from constraints - coherent because it has to be.',
     cta:        'Begin a settlement',
     ctaSubline: 'No account needed. Your first dossier is yours to keep.',
     note:       'Free anonymous generations are capped at town size. Sign in to push further.',
@@ -58,7 +58,7 @@ export const en = Object.freeze({
     v2: {
       headline:     'Most generators roll on a table.',
       headlineAccent: 'This one simulates.',
-      deck:         'First settlement or hundredth — the pieces explain each other.',
+      deck:         'First settlement or hundredth - the pieces explain each other.',
       ctaTemplate:  'Forge a {tier} →',
       subline:      '{remaining} of {cap} free today · no account',
     },
@@ -67,7 +67,7 @@ export const en = Object.freeze({
       headline:   'You’ve explored hamlet, village, town.',
       body:       'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
       primaryCta: 'Create free account →',
-      sideDoor:   'or just take this one — buy the dossier for $2.99 ↓',
+      sideDoor:   'or just take this one - buy the dossier for $2.99 ↓',
     },
     // ── P115 return-visit ───────────────────────────────────────────────
     welcomeBack: {
@@ -76,7 +76,7 @@ export const en = Object.freeze({
       bodyTpl:    'How did your session in {settlementName} go?',
       openCta:    'Open {settlementName}',
       followUp:   'Forge a follow-up',
-      streakTpl:  '{count} sessions in {weeks} weeks. Cartographer pays for itself in two —',
+      streakTpl:  '{count} sessions in {weeks} weeks. Cartographer pays for itself in two -',
       streakLink: 'see what it unlocks →',
     },
   },
@@ -86,7 +86,7 @@ export const en = Object.freeze({
     title:    'New settlement',
     subtitle: 'Pick a size and a region. The rest is up to the simulator.',
     button:   'Generate',
-    subline:  'Roughly 10–20 seconds. Watch the pipeline as it runs.',
+    subline:  'Roughly 10-20 seconds. Watch the pipeline as it runs.',
     sizes: {
       hamlet:  'Hamlet',
       village: 'Village',
@@ -109,7 +109,7 @@ export const en = Object.freeze({
     subtitle: 'Fourteen procedural steps. Tap any one to see what it decided and why.',
     cogLabel:    'Procedural step',
     quillLabel:  'Narrative refinement',
-    stepRunning: 'Running…',
+    stepRunning: 'Running...',
     stepDone:    'Done',
     stepFailed:  'Failed',
   },
@@ -118,11 +118,11 @@ export const en = Object.freeze({
   auth: {
     title:    'Sign in to keep your work',
     subtitle: 'Saves, exports, larger settlements, and the Neighbourhood System.',
-    signinSubtitle: 'Sign in to keep your work — saves, exports, larger settlements, and the Neighbourhood System.',
+    signinSubtitle: 'Sign in to keep your work - saves, exports, larger settlements, and the Neighbourhood System.',
     signupSubtitle: 'Create a free {tier} account to save your work, push to larger sizes, and link settlements in the Neighbourhood System.',
     discord: {
       label:       'Continue with Discord',
-      placeholder: 'Coming soon — we’re finishing the OAuth review.',
+      placeholder: 'Coming soon - we’re finishing the OAuth review.',
     },
     google:  { label: 'Continue with Google' },
     email: {
@@ -150,7 +150,7 @@ export const en = Object.freeze({
       password: 'Password',
     },
     rememberMe: 'Remember me on this device',
-    localMode:  'Running in local mode — no backend configured',
+    localMode:  'Running in local mode - no backend configured',
     error: {
       generic:    'Something went wrong. Try again.',
       invalid:    'That email or password didn’t work.',
@@ -164,7 +164,7 @@ export const en = Object.freeze({
   pricing: {
     pageTitle:    'Pricing',
     pageSubtitle: 'Pay once for credits. Subscribe if you want more room.',
-    antiAi:       'Settlements are simulated from constraints — not generated by AI. Narrative refinement is the only step that uses language synthesis, and it grounds itself in the simulator output.',
+    antiAi:       'Settlements are simulated from constraints - not generated by AI. Narrative refinement is the only step that uses language synthesis, and it grounds itself in the simulator output.',
     tiers: {
       wanderer: {
         name:        'Wanderer',
@@ -212,7 +212,7 @@ export const en = Object.freeze({
     singleDossier: {
       title:       'Just want one dossier?',
       priceLabel:  '$2.99',
-      description: 'One-time payment. We’ll generate, export, and email you a full PDF — no account needed.',
+      description: 'One-time payment. We’ll generate, export, and email you a full PDF - no account needed.',
       cta:         'Buy a one-shot dossier',
     },
     creditPacks: {
@@ -230,22 +230,22 @@ export const en = Object.freeze({
   // Cost is interpolated at call time so we never drift between UI + ledger.
   ai: {
     narrative: {
-      button:      'Generate narrative — {cost} credits',
+      button:      'Generate narrative - {cost} credits',
       shortLabel:  'Narrative',
       description: 'A literary thesis of the settlement, refined across 13 passes.',
-      running:     'Composing the thesis…',
+      running:     'Composing the thesis...',
     },
     dailyLife: {
-      button:      'Generate daily life — {cost} credits',
+      button:      'Generate daily life - {cost} credits',
       shortLabel:  'Daily life',
       description: 'Five parallel paragraphs from dawn to night, in the voice of the place.',
-      running:     'Living the day…',
+      running:     'Living the day...',
     },
     progression: {
-      button:      'Generate progression — {cost} credits',
+      button:      'Generate progression - {cost} credits',
       shortLabel:  'Progression',
       description: 'A diff-aware evolution of the prior narrative against new state.',
-      running:     'Tracking what changed…',
+      running:     'Tracking what changed...',
     },
     insufficient: 'You need {cost} credits for this. You have {balance}.',
     buyMore:      'Buy more credits',
@@ -262,7 +262,7 @@ export const en = Object.freeze({
     history:       'The decisions that shaped the streets your players walk.',
     relationships: 'The threads tying NPCs into something larger than a cast list.',
     plotHooks:     'Things gone wrong, things going wrong, things about to.',
-    dailyLife:     'A day in the life — dawn to dusk to dusk again.',
+    dailyLife:     'A day in the life - dawn to dusk to dusk again.',
     services:      'Who sells what, who fixes what, and who you don’t ask.',
     resources:     'What the land gives, what the trade brings, what runs short.',
     viability:     'Whether this place survives a hard winter, and why.',
@@ -304,7 +304,7 @@ export const en = Object.freeze({
     cardCredits:           'Narrative Credits',
     cardSaves:             'Saved Settlements',
     fullAccess:            'Full Access',
-    purchaseCreditsLabel:  'Purchase Credits — Volume Discounts',
+    purchaseCreditsLabel:  'Purchase Credits - Volume Discounts',
     purchaseErrorTitle:    'Purchase couldn’t start. Try again or refresh the page.',
   },
 
@@ -312,11 +312,11 @@ export const en = Object.freeze({
   gallery: {
     pageTitle:    'Gallery',
     pageSubtitle: 'Settlements other DMs have shared. Browse for inspiration; click a tile to read the full dossier.',
-    antiAi:       'Every dossier in the gallery was simulated, not AI-generated. The settlements are derived from the same constraint engine — coherent because the simulator made them so.',
+    antiAi:       'Every dossier in the gallery was simulated, not AI-generated. The settlements are derived from the same constraint engine - coherent because the simulator made them so.',
     forgeYourOwn: 'Forge your own',
     untitled:     'Untitled settlement',
     emptyTitle:   'No public dossiers yet.',
-    emptyBody:    'Be the first to publish one — every shared dossier becomes a permanent, crawlable page.',
+    emptyBody:    'Be the first to publish one - every shared dossier becomes a permanent, crawlable page.',
     loadError:    'Couldn’t load the gallery. Try again in a moment.',
     backToList:   'Back to gallery',
   },
@@ -325,7 +325,7 @@ export const en = Object.freeze({
   narrativeDrift: {
     headingSeismic:    'This is a big change.',
     headingStructural: 'This change will drift the narrative.',
-    body:              'The narrative layer on this save reasons about the facts you’re changing. A mechanical substitution won’t keep the prose honest — the thesis, faction blurbs, and institution descriptions were written against the old state.',
+    body:              'The narrative layer on this save reasons about the facts you’re changing. A mechanical substitution won’t keep the prose honest - the thesis, faction blurbs, and institution descriptions were written against the old state.',
     pickOne:           'Pick one:',
     regenerateTitle:   'Apply & Regenerate Narrative',
     regenerateBody:    'Full re-run against the new state. Spends {cost} credits.',
@@ -333,7 +333,7 @@ export const en = Object.freeze({
     progressBody:      'Evolve the existing narrative. Preserves voice and named NPCs.',
     revertTitle:       'Apply & Revert to Raw',
     revertBody:        'Clear the narrative and show raw data. No credits. Chronicle history is preserved.',
-    cancelLabel:       'Cancel — don’t apply this change',
+    cancelLabel:       'Cancel - don’t apply this change',
     ariaCancel:        'Cancel',
   },
 
@@ -341,20 +341,20 @@ export const en = Object.freeze({
   purchase: {
     title:             'Buy narrative credits',
     subtitle:          'Credits never expire and apply to every narrative refinement feature.',
-    packsHeading:      'Narrative Credit Packs — Volume Discounts',
+    packsHeading:      'Narrative Credit Packs - Volume Discounts',
     bestLabel:         'Best value',
     valueLabel:        'Most popular',
     perCreditTemplate: '{price}/credit',
     failureMessage:    'Couldn’t start checkout. Try once more.',
   },
 
-  // ── Errors (user-facing only — internal logs stay in console) ────────────
+  // ── Errors (user-facing only - internal logs stay in console) ────────────
   errors: {
-    saveFailed:   'Couldn’t save. Your work is still on screen — try once more.',
+    saveFailed:   'Couldn’t save. Your work is still on screen - try once more.',
     loadFailed:   'Couldn’t load that dossier. Refresh and try again.',
     networkOff:   'You’re offline. Reconnect and we’ll retry.',
-    generateFail: 'The simulator hit a snag. We’re looking at it — try again in a moment.',
-    aiUnavailable: 'Narrative refinement is temporarily unavailable. The simulator is unaffected — your settlement still generates and exports.',
+    generateFail: 'The simulator hit a snag. We’re looking at it - try again in a moment.',
+    aiUnavailable: 'Narrative refinement is temporarily unavailable. The simulator is unaffected - your settlement still generates and exports.',
   },
 
   // ── Verb registry (P124 / C-1) ───────────────────────────────────────────
@@ -369,17 +369,17 @@ export const en = Object.freeze({
     reforge:     'Reforge',
     rerollTpl:   'Reroll {section}',
     narrate:     'Narrate',
-    forging:     'Forging…',
-    narrating:   'Narrating…',
-    rerolling:   'Rerolling…',
+    forging:     'Forging...',
+    narrating:   'Narrating...',
+    rerolling:   'Rerolling...',
   },
 
   // ── Save / signup / cap surfaces (P101 / X-3) ────────────────────────────
   save: {
     button:        'Save',
-    signupButton:  'Save this town — free account →',
+    signupButton:  'Save this town - free account →',
     afterAuthHint: 'We’ll save your dossier as soon as you’re in.',
-    successTpl:    'Saved as {settlementName} — view it in Settlements.',
+    successTpl:    'Saved as {settlementName} - view it in Settlements.',
     limitReached:  'You’ve hit the {limit}-save cap on the free tier.',
   },
 
@@ -391,7 +391,7 @@ export const en = Object.freeze({
   moments: {
     first_save: {
       headline: 'Save it. Come back tomorrow.',
-      body:     'Your dossier is yours to keep. Free tier holds 3 saves — plenty for a campaign’s first arc.',
+      body:     'Your dossier is yours to keep. Free tier holds 3 saves - plenty for a campaign’s first arc.',
     },
     anon_cap_hit: {
       headline: 'You’ve explored hamlet, village, town.',
@@ -399,7 +399,7 @@ export const en = Object.freeze({
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
-      body:     'Wanderer gives you 3 exports a month. Cartographer = unlimited, plus cloud sync — phone, laptop, table.',
+      body:     'Wanderer gives you 3 exports a month. Cartographer = unlimited, plus cloud sync - phone, laptop, table.',
     },
     third_save: {
       headline: 'You’re building a campaign.',
@@ -407,18 +407,18 @@ export const en = Object.freeze({
     },
     regen_burst: {
       headline: 'Power user ahead.',
-      body:     'Locks, drift, chronicle — Cartographer surfaces the worldbuilder-tier controls. Try the upgrade.',
+      body:     'Locks, drift, chronicle - Cartographer surfaces the worldbuilder-tier controls. Try the upgrade.',
     },
     map_clicked: {
       headline: 'World Map unlocks with Cartographer.',
-      body:     'Place settlements, draw routes, surface supply-chain stress — your campaigns become a place.',
+      body:     'Place settlements, draw routes, surface supply-chain stress - your campaigns become a place.',
     },
     weekly_user: {
       headline: 'Three sessions in two weeks.',
-      body:     'You’re using SettlementForge weekly — Cartographer pays for itself in two.',
+      body:     'You’re using SettlementForge weekly - Cartographer pays for itself in two.',
     },
     welcome_credit: {
-      headline: 'Try the Narrative Layer once — on us.',
+      headline: 'Try the Narrative Layer once - on us.',
       body:     'One credit on every signup. The AI prose pass turns this town’s data into prose your players can hear.',
     },
   },
@@ -433,7 +433,7 @@ export const en = Object.freeze({
       lineWorldbuilder: 'Try the engine. Three towns is enough to see if the moat is real.',
     },
     cartographer: {
-      lineNew:          'When you’re ready for a campaign instead of an evening — unlimited saves, every size.',
+      lineNew:          'When you’re ready for a campaign instead of an evening - unlimited saves, every size.',
       lineIntermediate: 'For DMs running a town a week. Unlimited saves, every size, full export.',
       lineWorldbuilder: 'The worldbuilder’s tier: neighbour network, locks, drift, full export.',
     },
@@ -446,23 +446,23 @@ export const en = Object.freeze({
 
   // ── Pipeline reveal step labels (P100 / X-1) ─────────────────────────────
   // Marketing-facing translations of the actual pipeline step names.
-  // Theatrical by design — the user sees engine work, not function names.
+  // Theatrical by design - the user sees engine work, not function names.
   pipelineSteps: {
-    resolveConfig:          'resolving constraints…',
-    resolveResources:       'sourcing resources…',
-    resolveStress:          'reading the pressure…',
-    resolveNeighbour:       'binding neighbours…',
-    assembleInstitutions:   'sourcing institutions…',
-    subsumptionPass:        'collapsing duplicates…',
-    cascadePass:            'cascading tensions…',
-    isolationPass:          'walking outliers…',
-    generateEconomy:        'building the market…',
-    generatePower:          'naming the powers…',
-    neighbourFactions:      'mirroring the neighbours…',
-    factionCorrelationPass: 'finding alliances…',
-    generatePopulation:     'casting NPCs…',
-    generateNarratives:     'knotting hooks…',
-    assembleSettlement:     'assembling the dossier…',
+    resolveConfig:          'resolving constraints...',
+    resolveResources:       'sourcing resources...',
+    resolveStress:          'reading the pressure...',
+    resolveNeighbour:       'binding neighbours...',
+    assembleInstitutions:   'sourcing institutions...',
+    subsumptionPass:        'collapsing duplicates...',
+    cascadePass:            'cascading tensions...',
+    isolationPass:          'walking outliers...',
+    generateEconomy:        'building the market...',
+    generatePower:          'naming the powers...',
+    neighbourFactions:      'mirroring the neighbours...',
+    factionCorrelationPass: 'finding alliances...',
+    generatePopulation:     'casting NPCs...',
+    generateNarratives:     'knotting hooks...',
+    assembleSettlement:     'assembling the dossier...',
   },
 
   // ── Dossier surfaces (P102 / D-1, D-3) ───────────────────────────────────
@@ -497,13 +497,13 @@ export const en = Object.freeze({
     navLabel:       'Workshop',
     locked:         'Workshop unlocks with Cartographer.',
     lockedBody:     'Drag and drop institutions, resources, and stressors. Cascade-preview before you commit. Bring your own custom content.',
-    upgradeCta:     'Upgrade — $6/mo',
+    upgradeCta:     'Upgrade - $6/mo',
     samplePreview:  'See a sample →',
   },
 
   // ── Sample dossier proof card (P128 / H-2) ───────────────────────────────
   // Renders below HomeHero for anonymous visitors. Three callouts, each
-  // aimed at a different reader. The teach beats are deliberate — every
+  // aimed at a different reader. The teach beats are deliberate - every
   // line should let the reader recognize themselves and the moat in one
   // glance.
   sampleDossier: {
@@ -539,11 +539,11 @@ export const en = Object.freeze({
     },
     supply: {
       eyebrow: 'Why this is a session',
-      body:    'If the salt road closes, this town runs out in 11 days. That’s a session — supply chains aren’t flavor, they’re fuel.',
+      body:    'If the salt road closes, this town runs out in 11 days. That’s a session - supply chains aren’t flavor, they’re fuel.',
     },
     hook: {
       eyebrow: 'Where hooks come from',
-      body:    'This hook came from the tension above — not a random table. That’s the difference between a simulator and a roller.',
+      body:    'This hook came from the tension above - not a random table. That’s the difference between a simulator and a roller.',
     },
     dismissLabel: 'Got it',
   },
@@ -561,18 +561,18 @@ export const en = Object.freeze({
     copyright: '© {year} SettlementForge',
   },
 
-  // P138 / AC-4 — Inline FAQ on the Account page. Each entry is a
+  // P138 / AC-4 - Inline FAQ on the Account page. Each entry is a
   // short Q + a 1-2 sentence A. Keep tone plain and free of marketing
-  // hedge — these are the answers users would otherwise email support
+  // hedge - these are the answers users would otherwise email support
   // for. Edit freely; the keys are stable.
   accountFaq: {
     creditGrant: {
       q: 'How does the welcome credit work?',
-      a: "On signup, every account gets one free Narrative credit. It refines your first saved settlement into prose. Once spent, it doesn't come back — buy more from the Subscription panel.",
+      a: "On signup, every account gets one free Narrative credit. It refines your first saved settlement into prose. Once spent, it doesn't come back - buy more from the Subscription panel.",
     },
     cancelAnytime: {
       q: 'Can I cancel my subscription?',
-      a: 'Yes — open the Manage Subscription link in your Stripe portal. Cancellation takes effect at the end of your current billing period; you keep access until then.',
+      a: 'Yes - open the Manage Subscription link in your Stripe portal. Cancellation takes effect at the end of your current billing period; you keep access until then.',
     },
     refundWindow: {
       q: 'Do you offer refunds?',
@@ -584,11 +584,11 @@ export const en = Object.freeze({
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',
-      a: 'Yes by default. Only you can see saved settlements. Sharing to the public Gallery is an explicit opt-in per settlement — the toggle lives in the dossier header.',
+      a: 'Yes by default. Only you can see saved settlements. Sharing to the public Gallery is an explicit opt-in per settlement - the toggle lives in the dossier header.',
     },
     aiOrSim: {
       q: "Does SettlementForge use AI to write my settlement?",
-      a: 'The structural layer — population, factions, supply chains, hooks — is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
+      a: 'The structural layer - population, factions, supply chains, hooks - is a deterministic simulator, not an LLM. Optional Narrative Refinement spends a credit to turn the simulation into prose. You can keep the raw output and skip the LLM entirely.',
     },
   },
 });

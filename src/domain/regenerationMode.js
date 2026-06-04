@@ -1,13 +1,13 @@
 /**
- * domain/regenerationMode.js — Reactive regeneration modes.
+ * domain/regenerationMode.js - Reactive regeneration modes.
  *
  * Tier 5.2 of the roadmap. Three modes control how aggressive a
  * rerun is. Phase 35 produces the structured preservation plan
  * consumers (the regen UI, the pipeline) read:
  *
- *   Nudge      — preserve most; reroll only minor service / detail fields
- *   Rebalance  — preserve canon + locked entities; reroll affected subsystems
- *   Reforge    — keep only the hard anchors (seed, name, tier, geography)
+ *   Nudge      - preserve most; reroll only minor service / detail fields
+ *   Rebalance  - preserve canon + locked entities; reroll affected subsystems
+ *   Reforge    - keep only the hard anchors (seed, name, tier, geography)
  *
  *   buildRegenerationPlan(settlement, { mode, change? }) -> {
  *     mode,
@@ -54,10 +54,10 @@ const MODE_SUBSYSTEM_REROLLS = Object.freeze({
 
 // ── Per-entity-type preservation rules per mode ─────────────────────────
 //
-// 'always' — preserve unconditionally
-// 'canon'  — preserve if canonStatus === 'canon' or locked
-// 'locked' — preserve only if locked
-// 'never'  — always reroll
+// 'always' - preserve unconditionally
+// 'canon'  - preserve if canonStatus === 'canon' or locked
+// 'locked' - preserve only if locked
+// 'never'  - always reroll
 
 const PRESERVATION_RULES = Object.freeze({
   nudge: {
@@ -196,7 +196,7 @@ export function buildRegenerationPlan(settlement, options = {}) {
 function lookupTagForEntity(settlement, catalogEntry) {
   // Resolve the underlying object (institution, faction, etc.) so we
   // can tag it. For derived entities (system_variable, capacity,
-  // district, etc.) the raw object isn't on the settlement — we treat
+  // district, etc.) the raw object isn't on the settlement - we treat
   // those as generated/draft.
   const id = catalogEntry.id;
   const type = catalogEntry.type;

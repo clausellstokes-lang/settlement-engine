@@ -3,7 +3,7 @@
  *
  * Creates a Stripe Checkout session for any of:
  *   - Credit packs (new schedule:  25 / 60 / 150)
- *   - Credit packs (legacy:         5 / 15 / 40)  — kept for refund/replay
+ *   - Credit packs (legacy:         5 / 15 / 40)  - kept for refund/replay
  *   - Premium subscription ($6/mo)
  *   - Founder Lifetime ($99 one-time)
  *   - Single-dossier microtransaction ($2.99 one-time)
@@ -14,23 +14,23 @@
  * after the catalog rotates.
  *
  * Environment variables (set in Supabase dashboard):
- *   STRIPE_SECRET_KEY                 — Stripe secret key
- *   CLIENT_URL                        — Frontend origin (e.g. https://yourapp.com)
+ *   STRIPE_SECRET_KEY                 - Stripe secret key
+ *   CLIENT_URL                        - Frontend origin (e.g. https://yourapp.com)
  *
  *   New schedule (active):
- *     STRIPE_PRICE_CREDITS_25         — 25-credit pack  ($4.99)
- *     STRIPE_PRICE_CREDITS_60         — 60-credit pack  ($9.99)
- *     STRIPE_PRICE_CREDITS_150        — 150-credit pack ($19.99)
- *     STRIPE_PRICE_PREMIUM            — Cartographer subscription ($6/mo)
- *     STRIPE_PRICE_FOUNDER_LIFETIME   — Founder Lifetime ($99 one-time)
- *     STRIPE_PRICE_SINGLE_DOSSIER     — Single-dossier microtransaction ($2.99)
+ *     STRIPE_PRICE_CREDITS_25         - 25-credit pack  ($4.99)
+ *     STRIPE_PRICE_CREDITS_60         - 60-credit pack  ($9.99)
+ *     STRIPE_PRICE_CREDITS_150        - 150-credit pack ($19.99)
+ *     STRIPE_PRICE_PREMIUM            - Cartographer subscription ($6/mo)
+ *     STRIPE_PRICE_FOUNDER_LIFETIME   - Founder Lifetime ($99 one-time)
+ *     STRIPE_PRICE_SINGLE_DOSSIER     - Single-dossier microtransaction ($2.99)
  *
  *   Legacy (kept for backward compat / refunds):
- *     STRIPE_PRICE_CREDITS_5          — 5-credit pack  ($4.99)
- *     STRIPE_PRICE_CREDITS_15         — 15-credit pack ($9.99)
- *     STRIPE_PRICE_CREDITS_40         — 40-credit pack ($19.99)
- *     STRIPE_PRICE_CREDITS_10         — 10-credit pack (early beta)
- *     STRIPE_PRICE_CREDITS_50         — 50-credit pack (early beta)
+ *     STRIPE_PRICE_CREDITS_5          - 5-credit pack  ($4.99)
+ *     STRIPE_PRICE_CREDITS_15         - 15-credit pack ($9.99)
+ *     STRIPE_PRICE_CREDITS_40         - 40-credit pack ($19.99)
+ *     STRIPE_PRICE_CREDITS_10         - 10-credit pack (early beta)
+ *     STRIPE_PRICE_CREDITS_50         - 50-credit pack (early beta)
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
@@ -102,7 +102,7 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Tier 0.10 — obvious-bot guard. Auth gating already protects this
+  // Tier 0.10 - obvious-bot guard. Auth gating already protects this
   // endpoint, but rejecting bots up front saves Stripe API budget +
   // keeps the function logs readable. Real users are never blocked.
   const guard = botGuard(req, 'create-checkout');
@@ -115,7 +115,7 @@ serve(async (req) => {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
     }
 
-    // Tier 7.4 — single-dossier is anonymous-allowed (per pricing.js
+    // Tier 7.4 - single-dossier is anonymous-allowed (per pricing.js
     // SINGLE_DOSSIER.requiresAccount=false). All other products bind
     // to a user_id at delivery time (credit packs, subscriptions,
     // founder seats) so they keep the auth requirement.
@@ -147,9 +147,38 @@ serve(async (req) => {
     if (!priceId) throw new Error(`Price ID not configured for ${product}`);
 
     const clientUrl = Deno.env.get('CLIENT_URL') || 'http://localhost:5173';
+    let stripeCustomerId: string | null = null;
+
+    if (user) {
+      const admin = createClient(
+        Deno.env.get('SUPABASE_URL')!,
+        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+      );
+      const { data: profile } = await admin
+        .from('profiles')
+        .select('stripe_customer_id')
+        .eq('id', user.id)
+        .single();
+
+      stripeCustomerId = typeof profile?.stripe_customer_id === 'string'
+        ? profile.stripe_customer_id
+        : null;
+
+      if (!stripeCustomerId) {
+        const customer = await stripe.customers.create({
+          email: user.email || undefined,
+          metadata: { supabase_user_id: user.id },
+        });
+        stripeCustomerId = customer.id;
+        await admin
+          .from('profiles')
+          .update({ stripe_customer_id: stripeCustomerId })
+          .eq('id', user.id);
+      }
+    }
 
     // Create Stripe checkout session. For anonymous purchases we omit
-    // customer_email — Stripe collects it on the checkout page and
+    // customer_email - Stripe collects it on the checkout page and
     // sends it back on session.completed via session.customer_details
     // and session.customer (which the webhook reads).
     const mode = SUBSCRIPTION_PRODUCTS.has(product) ? 'subscription' : 'payment';
@@ -165,7 +194,9 @@ serve(async (req) => {
         anonymous: isAnonymousProduct && !user ? 'true' : 'false',
       },
     };
-    if (user?.email) {
+    if (stripeCustomerId) {
+      sessionParams.customer = stripeCustomerId;
+    } else if (user?.email) {
       sessionParams.customer_email = user.email;
     }
     const session = await stripe.checkout.sessions.create(sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]);

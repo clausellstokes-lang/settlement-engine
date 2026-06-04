@@ -1,5 +1,5 @@
 /**
- * domain/regionalGraph.js — Typed neighbour graph.
+ * domain/regionalGraph.js - Typed neighbour graph.
  *
  * Tier 4.13 of the roadmap. Neighbours are currently a free-form
  * list (or empty). Phase 30 promotes them to a typed graph where
@@ -18,7 +18,7 @@
  * inference based on trade connectivity).
  *
  * Active propagation (Ironmere mine collapse → Westford tool prices)
- * is reserved for a future tier — Phase 30 exposes the structural
+ * is reserved for a future tier - Phase 30 exposes the structural
  * graph that future propagation logic will read.
  */
 
@@ -252,6 +252,6 @@ export function summarizeRegional(settlement) {
   const g = deriveRegionalGraph(settlement);
   if (g.links.length === 0) return ['No structured regional neighbours.'];
   return g.links.map(l =>
-    `${l.toName} — ${l.relationshipType} (${l.direction}, severity ${l.severity}).`
+    `${l.toName} - ${l.relationshipType} (${l.direction}, severity ${l.severity}).`
   );
 }

@@ -1,5 +1,5 @@
 /**
- * App.jsx — Pure layout shell. Zero state declarations.
+ * App.jsx - Pure layout shell. Zero state declarations.
  *
  * All state lives in the Zustand store (src/store/).
  * This component handles navigation, header/footer chrome,
@@ -7,14 +7,14 @@
  * state from the store via selectors.
  *
  * Views:
- *   generate    — Settlement creation wizard
- *   settlements — Saved settlements library
- *   map         — Fantasy World Map (FMG integration)
- *   neighbour   — Neighbourhood System
- *   compendium  — Rules & data compendium
- *   howto       — About page (how-to guide + comparisons)
- *   account     — Full account page (post-auth)
- *   admin       — Developer admin panel (elevated roles only)
+ *   generate    - Settlement creation wizard
+ *   settlements - Saved settlements library
+ *   map         - Fantasy World Map (FMG integration)
+ *   neighbour   - Neighbourhood System
+ *   compendium  - Rules & data compendium
+ *   howto       - About page (how-to guide + comparisons)
+ *   account     - Full account page (post-auth)
+ *   admin       - Developer admin panel (elevated roles only)
  */
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { MapPin, FolderOpen, BookOpen, Map as MapIcon, Zap, User, Shield, Headphones, Images, Info } from 'lucide-react';
@@ -49,13 +49,13 @@ import OnboardingCoach from './components/OnboardingCoach.jsx';
 import PostGenCoach from './components/PostGenCoach.jsx';
 import DevFlagPanel from './components/dev/DevFlagPanel.jsx';
 import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
-// P103 / X-2 — Active pricing-moment card (inline, not modal). Renders
+// P103 / X-2 - Active pricing-moment card (inline, not modal). Renders
 // when a moment fires; cooldown enforced by the moments library so it
 // can't hammer the user.
 const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
 
 // Top-nav destinations. Gallery sits between Compendium and About. Workshop
-// is no longer a top-level tab — it now lives inside Create as the third
+// is no longer a top-level tab - it now lives inside Create as the third
 // generate mode ("Custom Generate"); see GenerateWizard. Pricing stays a
 // header hero link (HERO_LINKS), not a primary destination.
 const NAV = [
@@ -84,10 +84,10 @@ function Loading() {
 
 export default function App() {
   const isMobile = useIsMobile();
-  // Path-based routing. `useRoute` resolves window.location → { view, … } and
+  // Path-based routing. `useRoute` resolves window.location → { view, ... } and
   // re-renders on Back/Forward + programmatic navigation. `setView` aliases
   // the imperative navigator so the existing setView(viewId) call sites (and
-  // the onNavigate prop threaded into every panel) keep working unchanged —
+  // the onNavigate prop threaded into every panel) keep working unchanged -
   // they just push a path now. `legacy`/`notFound` drive the URL-upgrade
   // effect below; `params` carries route segments (e.g. /settlements/:id).
   const { view, params, legacy, notFound } = useRoute();
@@ -231,7 +231,7 @@ export default function App() {
   // Gate premium-only views
   const handleNavClick = (id) => {
     setView(id);
-    // P103 / X-2 — map_clicked pricing moment. Wanderers clicking the
+    // P103 / X-2 - map_clicked pricing moment. Wanderers clicking the
     // World Map nav see a Cartographer-upgrade pitch (cooldown 24h via
     // the moments library; premium users are auto-skipped). Fires on
     // navigation rather than landing because the locked-state Map page
@@ -270,11 +270,11 @@ export default function App() {
           Uses the same ink → ink-deep gradient as the bottom nav so the
           top + bottom chrome read as one unified frame.
         */}
-        {/* P123 / A-2 — When `mobileSingleChrome` is on, drop the mobile
+        {/* P123 / A-2 - When `mobileSingleChrome` is on, drop the mobile
             top header entirely. The bottom nav becomes the only chrome;
             the auth chip lives there as a 6th slot (added below in the
             bottom-nav block). Frees ~52px of vertical real estate on
-            every mobile screen — meaningful on a 640px viewport. */}
+            every mobile screen - meaningful on a 640px viewport. */}
         {isMobile && !_readFlag('mobileSingleChrome') && (
           <header style={{
             ...headerStyle,
@@ -329,7 +329,7 @@ export default function App() {
           </header>
         )}
 
-        {/* Mobile hero links — Pricing / Gallery / Compare, promoted from the
+        {/* Mobile hero links - Pricing / Gallery / Compare, promoted from the
             footer so mobile keeps top-level access. Standalone strip (not tied
             to the mobile header, which the single-chrome flag can drop). */}
         {isMobile && (
@@ -363,7 +363,7 @@ export default function App() {
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && (
           <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
-            {/* Brand block — logo + wordmark on top row, italic tagline
+            {/* Brand block - logo + wordmark on top row, italic tagline
                 beneath. The HomeHero (which carries the full positioning
                 block) is gated to anonymous-only; this small tagline
                 keeps the "simulator for DMs" framing visible for
@@ -386,7 +386,7 @@ export default function App() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              {/* Secondary hero links — Pricing / Gallery / Compare, promoted
+              {/* Secondary hero links - Pricing / Gallery / Compare, promoted
                   from the footer. Plain text links, distinct from the boxed
                   primary nav tabs to their right. */}
               <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
@@ -514,7 +514,7 @@ export default function App() {
         {/* ── Main content ────────────────────────────────────── */}
         <main style={{ flex: 1, overflowY: 'auto', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
           {/* Onboarding coach (first-run, generate view). Gated to
-              signed-in accounts — anonymous visitors don't get the
+              signed-in accounts - anonymous visitors don't get the
               coaching banner. The `onboardingDiet` flag still suppresses
               this spotlight-overlay variant when on. */}
           {view === 'generate' && authTier !== 'anon' && !_readFlag('onboardingDiet') && <OnboardingCoach />}
@@ -530,7 +530,7 @@ export default function App() {
             {view === 'account'     && (authLoading ? <Loading /> : authTier !== 'anon' ? <AccountPage onNavigateAdmin={() => setView('admin')} /> : null)}
             {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
             {view === 'pricing'     && <PricingPage onNavigate={setView} />}
-            {view === 'gallery'     && <GalleryPage onNavigate={setView} />}
+            {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} />}
             {view === 'dossier-success' && (
               <SingleDossierSuccessPage
                 onSignUp={() => { setView('generate'); setAuthModalOpen(true); }}
@@ -610,7 +610,7 @@ export default function App() {
                 </button>
               );
             })}
-            {/* P123 / A-2 — Auth chip as 6th bottom-nav slot. Replaces
+            {/* P123 / A-2 - Auth chip as 6th bottom-nav slot. Replaces
                 the dropped mobile top header. Icon-only, gold-outline
                 for anon, green-fill for signed-in. */}
             {_readFlag('mobileSingleChrome') && (
@@ -696,7 +696,7 @@ export default function App() {
       )}
 
       {/* ── Onboarding nudge toast (post-tour tips + intent toasts) ────
-          P118 NOTE: this channel is overloaded — authIntents.SAVE_SETTLEMENT
+          P118 NOTE: this channel is overloaded - authIntents.SAVE_SETTLEMENT
           uses it to surface "Saved as {name}" after a signup-save flow.
           The onboardingDiet flag should NOT suppress those. Only the
           OnboardingCoach overlay is gated (above). If onboarding tips
@@ -728,7 +728,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Post-generation onboarding coach — three-step "now what" walkthrough.
+      {/* Post-generation onboarding coach - three-step "now what" walkthrough.
           Self-gates on flag + first-settlement + not-dismissed state. */}
       <PostGenCoach />
 
@@ -741,7 +741,7 @@ export default function App() {
           so a contributor doesn't ship-and-pray on email lifecycle changes. */}
       <DevEmailBanner />
 
-      {/* P103 — Active pricing moment card. Always mounted; renders null
+      {/* P103 - Active pricing moment card. Always mounted; renders null
           when no moment is active. Bottom-right fixed-position so it
           doesn't fight the dossier or wizard for vertical space. */}
       <Suspense fallback={null}>

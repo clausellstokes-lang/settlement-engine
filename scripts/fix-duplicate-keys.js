@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * fix-duplicate-keys — Remove earlier occurrences of exact duplicate
+ * fix-duplicate-keys - Remove earlier occurrences of exact duplicate
  * object keys. Preserves runtime behavior exactly: in JS object literals
  * the *later* key wins, so by removing the *earlier* duplicate we end up
- * with the same effective object the engine has been using all along —
+ * with the same effective object the engine has been using all along -
  * just declared once, traversable by tools, and visible to validators.
  *
  * Casing collisions (e.g. "Foo" vs "foo") are NOT auto-fixed; they're
@@ -102,17 +102,17 @@ function processFile(file, dryRun) {
   for (const r of removals) {
     // Extend the deletion range forward to consume the property separator.
     // The source files use a few formatting variants:
-    //   `},`                            — comma immediately after `}`
-    //   `}\n,`                          — comma on its own line after `}`
-    //   `}\n  \n,\n`                    — comma after blank lines (rare but real)
-    //   `}` (last property in the literal) — no separator at all
+    //   `},`                            - comma immediately after `}`
+    //   `}\n,`                          - comma on its own line after `}`
+    //   `}\n  \n,\n`                    - comma after blank lines (rare but real)
+    //   `}` (last property in the literal) - no separator at all
     //
     // Strategy: scan forward through ALL whitespace (including newlines) to
     // find the first non-whitespace char. If it's a `,`, we own that comma
-    // (it was this property's separator) — consume up to and including it,
+    // (it was this property's separator) - consume up to and including it,
     // plus one trailing newline so we don't leave an empty line. If the
     // first non-whitespace char is anything else (typically `}` closing the
-    // outer object), don't extend at all — this property was the last one
+    // outer object), don't extend at all - this property was the last one
     // and had no trailing comma to consume.
     let end = r.end;
     let scan = end;
@@ -152,7 +152,7 @@ function main() {
       reportLines.push(`## src/${rel.replace(/\\/g, '/')}`);
       for (const d of res.dropped) {
         if (d.kind === 'casing') {
-          reportLines.push(`### "${d.key}" — casing collision with "${d.otherKey}" (kept earlier "${d.otherKey}" at L${d.laterLine}; this entry was unreachable via case-insensitive lookup)`);
+          reportLines.push(`### "${d.key}" - casing collision with "${d.otherKey}" (kept earlier "${d.otherKey}" at L${d.laterLine}; this entry was unreachable via case-insensitive lookup)`);
         } else {
           reportLines.push(`### "${d.key}" (was at L${d.line}, kept later occurrence at L${d.laterLine})`);
         }
@@ -163,7 +163,7 @@ function main() {
     totalCasing += res.casingCollisions.length;
   }
   if (allCasing.length) {
-    console.log(`\nCasing collisions (NOT auto-fixed — review manually):`);
+    console.log(`\nCasing collisions (NOT auto-fixed - review manually):`);
     for (const c of allCasing) {
       const rel = c.file.split(/[/\\]src[/\\]/).pop();
       console.log(`  src/${rel}  "${c.otherKey}" L${c.otherLine}  vs  "${c.key}" L${c.line}`);

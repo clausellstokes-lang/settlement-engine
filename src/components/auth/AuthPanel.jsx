@@ -1,5 +1,5 @@
 /**
- * components/auth/AuthPanel.jsx — the shared sign-in / sign-up / reset /
+ * components/auth/AuthPanel.jsx - the shared sign-in / sign-up / reset /
  * verify form body.
  *
  * This is the single implementation of the email + OAuth auth flow. It's
@@ -32,7 +32,7 @@ import {
 // dedicated page lives at. The modal switches modes in place and never
 // touches this; the /signin · /register · /reset-password pages use it to
 // turn an onModeChange(mode) callback into a navigate(view). 'verify' is
-// absent on purpose — that transition stays inline ("check your inbox").
+// absent on purpose - that transition stays inline ("check your inbox").
 export const AUTH_MODE_VIEW = Object.freeze({
   signin: 'signin',
   signup: 'register',
@@ -42,7 +42,7 @@ export const AUTH_MODE_VIEW = Object.freeze({
 export default function AuthPanel({
   initialMode = 'signin',   // 'signin' | 'signup' | 'reset' | 'verify'
   onAuthed,                 // called after a session is established (password paths)
-  onModeChange,             // (mode) => void — pages navigate; modal switches in place
+  onModeChange,             // (mode) => void - pages navigate; modal switches in place
   showTabs = true,          // modal shows the Sign In / Create Account toggle
 }) {
   const authSignUp = useStore(s => s.authSignUp);
@@ -63,7 +63,7 @@ export default function AuthPanel({
 
   // User-initiated mode switch. Pages hand this to the router (changes the
   // URL); the modal switches in place. The signup → verify transition is
-  // NOT routed through here — it stays inline ("check your inbox").
+  // NOT routed through here - it stays inline ("check your inbox").
   const requestMode = (next) => {
     setError(null);
     setMessage(null);
@@ -81,7 +81,7 @@ export default function AuthPanel({
     try {
       const result = await authOAuth(provider);
       if (result?.mock) {
-        setMessage(`OAuth (${provider}) is mocked in local mode — no real sign-in occurred.`);
+        setMessage(`OAuth (${provider}) is mocked in local mode - no real sign-in occurred.`);
       }
       // Real mode: Supabase has navigated away; nothing more to do.
     } catch (e) {
@@ -113,7 +113,7 @@ export default function AuthPanel({
     try {
       const { needsVerification } = await authSignUp(email.trim(), password);
       if (needsVerification) {
-        setMode('verify'); // inline "check your inbox" — no route change
+        setMode('verify'); // inline "check your inbox" - no route change
       } else {
         onAuthed?.();
       }

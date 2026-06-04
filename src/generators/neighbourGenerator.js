@@ -103,7 +103,7 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
   // Active supply chain IDs
   const activeChains    = econ.activeChains    || [];
 
-  // Prosperity → economic strength 0–1
+  // Prosperity → economic strength 0-1
   const PROSPERITY_RANK = {
     'Subsistence':0.05,'Poor':0.2,'Struggling':0.3,'Modest':0.45,
     'Moderate':0.55,'Comfortable':0.65,'Prosperous':0.75,'Wealthy':0.85,'Affluent':1.0,
@@ -113,7 +113,7 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
   // Military strength from config priority
   const militaryStrength = ((config.priorityMilitary ?? 50) / 100);
 
-  // Government type — extract from powerStructure
+  // Government type - extract from powerStructure
   const governmentType = extractGovernmentType(power);
 
   // Dominant faction types (top 2 by influence)
@@ -190,12 +190,12 @@ export function getNeighbourEconomicBias(neighbourProfile) {
     for (const imp of primaryImports) {
       bias[imp] = (bias[imp] || 1.0) * 1.4;
     }
-    // Neighbour's exports we should NOT duplicate — complementarity means specializing elsewhere
+    // Neighbour's exports we should NOT duplicate - complementarity means specializing elsewhere
     for (const exp of primaryExports) {
       bias[exp] = (bias[exp] || 1.0) * 0.6;
     }
   } else if (mode === 'compete') {
-    // Rivals compete in the same space — elevated chance of same exports
+    // Rivals compete in the same space - elevated chance of same exports
     for (const exp of primaryExports) {
       bias[exp] = (bias[exp] || 1.0) * 1.35;
     }
@@ -239,7 +239,7 @@ export function getNeighbourFactionBias(neighbourProfile) {
   if (!neighbourProfile?.dominantFactionTypes?.length) return null;
   const { dominantFactionTypes, dynamics } = neighbourProfile;
 
-  // Opposition faction types — inverse of neighbour's dominant types
+  // Opposition faction types - inverse of neighbour's dominant types
   const FACTION_OPPOSITION = {
     military:   ['criminal', 'economy'],
     religious:  ['economy', 'government'],

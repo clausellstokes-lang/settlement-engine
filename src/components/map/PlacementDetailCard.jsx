@@ -1,5 +1,5 @@
 /**
- * PlacementDetailCard — floating card that appears over the map when a
+ * PlacementDetailCard - floating card that appears over the map when a
  * settlement placement is selected. Shows key stats and exposes actions:
  *   - Open full settlement detail (navigate to Settlements tab)
  *   - Remove placement from map (keeps the underlying save)
@@ -44,7 +44,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
 
   const s = settlement.settlement || settlement;
   const name  = s.name || settlement.name || 'Untitled';
-  const tier  = s.tier || settlement.tier || '—';
+  const tier  = s.tier || settlement.tier || '-';
   const pop   = s.population || 0;
   const culture = s.culture || s.cultureName || '';
   const terrain = s.terrain || '';

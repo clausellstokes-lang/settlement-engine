@@ -1,4 +1,4 @@
-// cascadeGenerator.js — Supply chain cascade pass
+// cascadeGenerator.js - Supply chain cascade pass
 // Gives chain-adjacent institutions a boosted second chance after main generation.
 // Extracted from generateSettlement.js for maintainability.
 
@@ -36,7 +36,7 @@ function _buildCascadeMap() {
   return map;
 }
 
-// Memoised — cascade map is static after module load
+// Memoised - cascade map is static after module load
 let _cachedCascadeMap = null;
 function getCascadeMap() {
   if (!_cachedCascadeMap) _cachedCascadeMap = _buildCascadeMap();
@@ -108,7 +108,7 @@ function applyCascadeInstitutions(institutions, tier) {
         if (added.some(a => mk(a.name) === nameMK)) return; // already cascade-added
 
         const baseChance   = data.p || 0;
-        // Cap cascade chance at 0.65 — can't guarantee an institution appears
+        // Cap cascade chance at 0.65 - can't guarantee an institution appears
         // Cap: cascade gives a second chance but can't guarantee appearances
         // Lower cap means cascades supplement rather than dominate generation
         const cascadeChance = Math.min(baseChance * boost, 0.45);

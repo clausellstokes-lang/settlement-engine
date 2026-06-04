@@ -1,15 +1,15 @@
 /**
- * WizardNextSteps.jsx — P134 / W-4 post-generate "what's next" guide.
+ * WizardNextSteps.jsx - P134 / W-4 post-generate "what's next" guide.
  *
  * The post-generate flow used to end on a lone Save button: the user
  * walks through the pipeline reveal (X-1), reads their dossier, and then
- * the page just… stops. Power users know they can also export a PDF,
- * refine fields, drop the settlement on the world map, or roll another —
+ * the page just... stops. Power users know they can also export a PDF,
+ * refine fields, drop the settlement on the world map, or roll another -
  * but a first-timer is left wondering "now what?".
  *
  * This card closes out the post-generate flow the way WizardCloseout
  * (W-2) closes out the pre-generate flow: a short, state-aware checklist
- * of next steps. It is GUIDANCE, not a second set of action buttons —
+ * of next steps. It is GUIDANCE, not a second set of action buttons -
  * the canonical Save / Export / New controls keep their existing homes,
  * so this never competes with (or duplicates) them. The only piece of
  * real state it reflects is whether the user can save yet, because that
@@ -38,13 +38,13 @@ function saveStep({ canSave, signedIn }) {
     // Signed in but blocked → almost always the per-tier save cap.
     return {
       id: 'save',
-      label: 'Save it — free up a slot or upgrade',
+      label: 'Save it - free up a slot or upgrade',
       hint: "You've reached your library's save cap.",
     };
   }
   return {
     id: 'save',
-    label: 'Save it — create a free account',
+    label: 'Save it - create a free account',
     hint: 'Free accounts keep your settlements and unlock Town+ tiers.',
   };
 }
@@ -54,9 +54,9 @@ function saveStep({ canSave, signedIn }) {
  * Pure.
  *
  * @param {Object}  args
- * @param {Object}  [args.settlement] — the generated settlement (for the headline tier).
- * @param {boolean} [args.canSave]    — store `canSave()` result.
- * @param {boolean} [args.signedIn]   — whether the user is authenticated (non-wanderer).
+ * @param {Object}  [args.settlement] - the generated settlement (for the headline tier).
+ * @param {boolean} [args.canSave]    - store `canSave()` result.
+ * @param {boolean} [args.signedIn]   - whether the user is authenticated (non-wanderer).
  * @returns {{ headline: string, steps: Array<{id,label,hint}> }}
  */
 export function buildNextSteps({ settlement, canSave = false, signedIn = false } = {}) {

@@ -1,5 +1,5 @@
 /**
- * Workshop.jsx — Additive advanced generation sandbox.
+ * Workshop.jsx - Additive advanced generation sandbox.
  *
  * STATUS: ACTIVE. Mounted as a top-level "Workshop" destination in
  * App.jsx (nav entry gated behind the workshopNav flag, default-on).
@@ -32,7 +32,7 @@ import { useState, useMemo, useCallback } from 'react';
 import {
   Sliders, Play, RotateCcw, ChevronDown, ChevronRight,
   Shield, Coins, Sparkles, Skull, Swords, Crown, Globe, Mountain,
-  Compass, Tent, Building2, Castle, Landmark,
+  Compass, Tent, Building2, Castle, Landmark, Clock,
   AlertTriangle, Lock, Unlock, Dice5, Wand2, Link2,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
@@ -43,16 +43,17 @@ import ChainBuilder from './ChainBuilder.jsx';
 // ── Static data ──────────────────────────────────────────────────────────────
 
 const TIERS = [
-  { id: 'thorp',      label: 'Thorp',      pop: '8–60',       Icon: Tent },
-  { id: 'hamlet',     label: 'Hamlet',     pop: '61–240',     Icon: Tent },
-  { id: 'village',    label: 'Village',    pop: '401–900',    Icon: Building2 },
-  { id: 'town',       label: 'Town',       pop: '901–5,000',  Icon: Building2 },
-  { id: 'city',       label: 'City',       pop: '5,001–25k',  Icon: Castle },
-  { id: 'metropolis', label: 'Metropolis', pop: '25,001–100k', Icon: Landmark },
+  { id: 'thorp',      label: 'Thorp',      pop: '8-60',       Icon: Tent },
+  { id: 'hamlet',     label: 'Hamlet',     pop: '61-240',     Icon: Tent },
+  { id: 'village',    label: 'Village',    pop: '401-900',    Icon: Building2 },
+  { id: 'town',       label: 'Town',       pop: '901-5,000',  Icon: Building2 },
+  { id: 'city',       label: 'City',       pop: '5,001-25k',  Icon: Castle },
+  { id: 'metropolis', label: 'Metropolis', pop: '25,001-100k', Icon: Landmark },
 ];
 
 const CULTURES = [
   { id: 'random_culture', label: 'Random' },
+  { id: 'mixed',          label: 'Mixed' },
   { id: 'germanic',       label: 'Germanic' },
   { id: 'latin',          label: 'Latin' },
   { id: 'celtic',         label: 'Celtic' },
@@ -64,6 +65,12 @@ const CULTURES = [
   { id: 'south_asian',    label: 'South Asian' },
   { id: 'steppe',         label: 'Steppe' },
   { id: 'greek',          label: 'Greek' },
+];
+
+const AGE_MODES = [
+  { id: 'auto',   label: 'Auto' },
+  { id: 'new',    label: 'New' },
+  { id: 'custom', label: 'Custom' },
 ];
 
 const TRADE_ROUTES = [
@@ -588,6 +595,36 @@ export default function Workshop({ isMobile }) {
           />
         </Panel>
 
+        <Panel title="Settlement Age" icon={Clock}>
+          <OptionGrid
+            options={AGE_MODES}
+            value={config.settlementAgeMode || 'auto'}
+            onChange={v => setField('settlementAgeMode', v)}
+            columns={3}
+          />
+          {(config.settlementAgeMode || 'auto') === 'custom' && (
+            <div style={{ marginTop: SP.md }}>
+              <label style={{ fontSize: FS.xxs, fontWeight: 700, color: SECOND, textTransform: 'uppercase' }}>
+                Years old
+              </label>
+              <input
+                type="number"
+                min={0}
+                max={5000}
+                value={config.settlementAgeYears || 0}
+                onChange={e => setField('settlementAgeYears', parseInt(e.target.value, 10) || 0)}
+                style={{
+                  width: '100%', marginTop: SP.xs,
+                  padding: `${SP.sm}px ${SP.md}px`,
+                  border: `1px solid ${BORDER}`, borderRadius: R.md,
+                  fontSize: FS.sm, fontFamily: sans, outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+          )}
+        </Panel>
+
         {/* Trade Route */}
         <Panel title="Trade Route Access" icon={Compass}>
           <OptionGrid
@@ -857,7 +894,7 @@ export default function Workshop({ isMobile }) {
             background: 'rgba(139,26,26,0.05)', borderRadius: R.md,
             fontSize: FS.xxs, color: swatch.danger,
           }}>
-            Multiple stresses create compounding narrative pressure. This can produce extreme or unstable settlements — ideal for crisis scenarios.
+            Multiple stresses create compounding narrative pressure. This can produce extreme or unstable settlements - ideal for crisis scenarios.
           </div>
         )}
       </Panel>
@@ -879,6 +916,7 @@ export default function Workshop({ isMobile }) {
         }}>
           <SummaryBadge label="Tier" value={config.settType} />
           <SummaryBadge label="Culture" value={config.culture?.replace('_', ' ')} />
+          <SummaryBadge label="Age" value={(config.settlementAgeMode || 'auto') === 'custom' ? `${config.settlementAgeYears || 0}y` : (config.settlementAgeMode || 'auto')} />
           <SummaryBadge label="Trade" value={config.tradeRouteAccess?.replace('_', ' ')} />
           <SummaryBadge label="Threat" value={config.monsterThreat?.replace('_', ' ')} />
           <SummaryBadge label="Magic" value={config.magicExists ? 'Yes' : 'No'} />
@@ -1182,10 +1220,10 @@ function CustomContentPanels({ config, updateConfig }) {
               powerDynamicsConfig: { ...powerConfig, factionCount: e.target.value ? +e.target.value : null }
             })} style={{ ...inputStyle, flex: 'none', width: 160 }}>
               <option value="">Random</option>
-              <option value="1">1 — Monopoly</option>
-              <option value="2">2 — Duopoly</option>
-              <option value="3">3 — Triad</option>
-              <option value="4">4+ — Fractured</option>
+              <option value="1">1 - Monopoly</option>
+              <option value="2">2 - Duopoly</option>
+              <option value="3">3 - Triad</option>
+              <option value="4">4+ - Fractured</option>
             </select>
           </div>
         </div>

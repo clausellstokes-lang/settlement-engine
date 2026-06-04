@@ -1,5 +1,5 @@
 /**
- * domain/events/eventPipeline.js — Unified event preview/apply/derive flow.
+ * domain/events/eventPipeline.js - Unified event preview/apply/derive flow.
  *
  * Tier 2.2 of the roadmap. Before Phase 18, `previewEvent` and
  * `applyEvent` ran on *different* code paths:
@@ -7,7 +7,7 @@
  *   previewEvent: applyStateDeltas(beforeState, spec.stateDeltas(event))
  *   applyEvent:   deriveSystemState(mutateSettlement(settlement, event))
  *
- * The two could (and did) disagree — the preview promised one outcome,
+ * The two could (and did) disagree - the preview promised one outcome,
  * the applied change produced another. This file collapses both into a
  * single canonical flow:
  *
@@ -16,7 +16,7 @@
  *   3. Re-derive SystemState (4-dim UI surface) from the mutated clone
  *   4. Apply the registry's authored stateDeltas additively on top
  *      (this preserves the authored-effect surface that mutate doesn't
- *      structurally model — e.g. "food storage damage raises resource
+ *      structurally model - e.g. "food storage damage raises resource
  *      pressure by +12" lives in the registry, not in the derivation)
  *   5. Re-derive CausalState (14-variable substrate, Phase 17)
  *   6. Compute deltas at both layers (compareSystemState +
@@ -99,10 +99,11 @@ function applyAuthoredStateDeltas(state, deltas) {
  * @param {Event}  event
  * @param {Object} [options]
  * @param {boolean} [options.skipFactionResponses=false]
+ * @param {string} [options.now] deterministic ISO timestamp for entity annotations
  * @returns {EventPipelineResult}
  */
 export function runEventPipeline(settlement, event, options = {}) {
-  const { skipFactionResponses = false } = options;
+  const { skipFactionResponses = false, now = null } = options;
 
   const beforeSettlement = settlement;
   const beforeSystemState = deriveSystemState(beforeSettlement);
@@ -117,7 +118,7 @@ export function runEventPipeline(settlement, event, options = {}) {
     warnings.push({ severity: 'mismatch', message: `${spec.label} requires a target` });
   }
 
-  // Early-return if validation failed — no mutation, no deltas
+  // Early-return if validation failed - no mutation, no deltas
   if (warnings.some(w => w.severity === 'mismatch')) {
     return {
       event,
@@ -136,10 +137,10 @@ export function runEventPipeline(settlement, event, options = {}) {
     };
   }
 
-  // 2. Mutate a cloned settlement — entity-level changes (status flips,
+  // 2. Mutate a cloned settlement - entity-level changes (status flips,
   //    impairments, NPC patches, propagation). mutateSettlement never
   //    mutates the input.
-  const nextSettlement = mutateSettlement({ settlement: beforeSettlement, event });
+  const nextSettlement = mutateSettlement({ settlement: beforeSettlement, event, now });
 
   // 3. Re-derive structural SystemState from the mutated settlement
   const afterStructural = deriveSystemState(nextSettlement);
@@ -151,14 +152,14 @@ export function runEventPipeline(settlement, event, options = {}) {
   //    both preview and apply now use.
   //
   //    Cast: spec.stateDeltas is typed as 1-arg in the registry typedef
-  //    but accepts an optional settlement parameter — every spec we
+  //    but accepts an optional settlement parameter - every spec we
   //    have today honors it. Cast through Function to express that.
   const rawAuthoredDeltas = /** @type {Function} */ (spec.stateDeltas)(event, beforeSettlement) || {};
   const afterSystemState = applyAuthoredStateDeltas(afterStructural, rawAuthoredDeltas);
 
   // 5. Re-derive CausalState from the mutated settlement (Phase 17
   //    substrate). The substrate reads from supply chains, factions,
-  //    NPCs, active conditions, and generator output — most of which
+  //    NPCs, active conditions, and generator output - most of which
   //    mutateSettlement may have changed.
   const afterCausalState = deriveCausalState(nextSettlement);
 
@@ -166,7 +167,7 @@ export function runEventPipeline(settlement, event, options = {}) {
   const systemStateDeltas = compareSystemState(beforeSystemState, afterSystemState);
   const causalStateDeltas = compareCausalState(beforeCausalState, afterCausalState);
 
-  // 7. Phase 14 faction relationship deltas — computed against the
+  // 7. Phase 14 faction relationship deltas - computed against the
   //    BEFORE settlement because the deltas describe how the event
   //    moves factions, not what the post-event state already reflects.
   let factionRelationshipDeltas = [];
@@ -178,7 +179,7 @@ export function runEventPipeline(settlement, event, options = {}) {
     }
   }
 
-  // 8. Faction responses (existing system) — computed against the
+  // 8. Faction responses (existing system) - computed against the
   //    MUTATED settlement so impaired factions speak as such.
   let factionResponses = [];
   if (!skipFactionResponses) {
@@ -189,7 +190,7 @@ export function runEventPipeline(settlement, event, options = {}) {
     }
   }
 
-  // 9. Narrative summary — uses the BEFORE settlement for label
+  // 9. Narrative summary - uses the BEFORE settlement for label
   //    resolution since the event names what it intended to do.
   //    Same cast as stateDeltas: narrate accepts an optional settlement.
   const narrativeSummary = typeof spec.narrate === 'function'

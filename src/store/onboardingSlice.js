@@ -1,14 +1,14 @@
 /**
- * onboardingSlice — First-run coaching + progressive feature discovery.
+ * onboardingSlice - First-run coaching + progressive feature discovery.
  *
  * Tracks whether the user has completed initial onboarding and which
  * features they've already discovered. Onboarding is NOT a separate
- * tutorial layer — it's a coaching overlay on the real Quick Generate
+ * tutorial layer - it's a coaching overlay on the real Quick Generate
  * flow. The user's first settlement IS the onboarding.
  *
  * Persistence:
- *   sf_onboarded        — 'true' after first completed generation
- *   sf_features_used    — JSON map of feature keys → boolean
+ *   sf_onboarded        - 'true' after first completed generation
+ *   sf_features_used    - JSON map of feature keys → boolean
  */
 
 const ONBOARDED_KEY = 'sf_onboarded';
@@ -51,7 +51,7 @@ export const createOnboardingSlice = (set, get) => ({
   onboardingStep: 0,
   /** Count of tabs the user has clicked during post-generation exploration */
   onboardingTabsExplored: 0,
-  /** Features the user has already used — hints won't re-show */
+  /** Features the user has already used - hints won't re-show */
   featuresUsed: loadFeaturesUsed(),
   /** Post-onboarding nudge toast */
   onboardingNudge: null,
@@ -71,7 +71,7 @@ export const createOnboardingSlice = (set, get) => ({
         state.onboardingTabsExplored = 0;
       });
     } catch {
-      /* localStorage blocked — treat as already-onboarded to avoid showing coach */
+      /* localStorage blocked - treat as already-onboarded to avoid showing coach */
       set(state => { state.onboardingActive = false; });
     }
   },
@@ -126,7 +126,7 @@ export const createOnboardingSlice = (set, get) => ({
 
   /**
    * Mark a feature as used. Feature hints will not re-show after this.
-   * @param {string} key — one of: saved, edited, linked, aiNarrative, campaign, customContent, exported
+   * @param {string} key - one of: saved, edited, linked, aiNarrative, campaign, customContent, exported
    */
   markFeatureUsed: (key) => {
     const current = get().featuresUsed || {};
@@ -142,7 +142,7 @@ export const createOnboardingSlice = (set, get) => ({
     return !features[key];
   },
 
-  /** Reset all onboarding state — used for testing / "show tour again" buttons. */
+  /** Reset all onboarding state - used for testing / "show tour again" buttons. */
   resetOnboarding: () => {
     try {
       localStorage.removeItem(ONBOARDED_KEY);

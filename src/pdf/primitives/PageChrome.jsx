@@ -1,5 +1,5 @@
 /**
- * PageChrome — wraps a Page with consistent header / footer / page-number.
+ * PageChrome - wraps a Page with consistent header / footer / page-number.
  *
  * Every interior page in the dossier (everything except the cover) is built
  * by passing children to <PageChrome>. It renders an absolute-positioned

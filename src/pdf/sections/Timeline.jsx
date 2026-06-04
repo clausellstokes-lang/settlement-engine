@@ -1,10 +1,10 @@
 /**
- * Timeline — PDF chapter rendering the canon-mode event log.
+ * Timeline - PDF chapter rendering the canon-mode event log.
  *
  * Only meaningful for canon settlements with at least one applied
  * event. For draft settlements the chapter is skipped entirely (the
  * SettlementPDF top-level decides). When present, each entry shows the
- * narrative summary, applied date, deltas, and faction responses —
+ * narrative summary, applied date, deltas, and faction responses -
  * the same data the on-screen Timeline UI shows, in print form.
  */
 import { View, Text } from '@react-pdf/renderer';

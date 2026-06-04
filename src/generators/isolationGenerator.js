@@ -5,10 +5,10 @@
  * but the infrastructure itself is always mandatory.
  */
 
-import { ARCANE_INST_KW as _ARCANE_KW } from '../components/magicFilter.js';
+import { ARCANE_INST_KW as _ARCANE_KW } from '../domain/magicFilter.js';
 
 const MAINTAINER_DESC = {
-  town:       'A hedge wizard maintains the teleportation circle — the settlement\'s only trade lifeline. Without them, the circle fails.',
+  town:       'A hedge wizard maintains the teleportation circle - the settlement\'s only trade lifeline. Without them, the circle fails.',
   city:       'A resident wizard maintains the teleportation infrastructure. Their role is civic, not merely commercial.',
   metropolis: 'A tower of wizards maintains the teleportation circle. As critical to the settlement as a harbour master\'s office is to a port.',
 };
@@ -40,7 +40,7 @@ export function applyTeleportationInfrastructure(
       const [infraName, infraDef] = infraEntry;
       institutions.push({
         name: infraName, category: 'Magic',
-        desc: infraDef.desc || `${infraName} — the settlement's only connection to the outside world.`,
+        desc: infraDef.desc || `${infraName} - the settlement's only connection to the outside world.`,
         tags: infraDef.tags || ['arcane', 'planar'],
         forcedByIsolation: true, source: 'forced',
       });

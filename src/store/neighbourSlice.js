@@ -1,5 +1,5 @@
 /**
- * neighbourSlice — Neighbour relationships, imported neighbour, cross-settlement effects.
+ * neighbourSlice - Neighbour relationships, imported neighbour, cross-settlement effects.
  *
  * Premium-gated: only premium users can use the neighbour system.
  * Holds the currently imported neighbour (for next generation),

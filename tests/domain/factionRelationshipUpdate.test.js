@@ -1,5 +1,5 @@
 /**
- * tests/domain/factionRelationshipUpdate.test.js — First active derivation.
+ * tests/domain/factionRelationshipUpdate.test.js - First active derivation.
  *
  * Pins the Tier 4.2 contract: pure deltas, no mutation, archetype
  * routing per event archetype, dominant-NPC routing splits hits
@@ -37,7 +37,7 @@ function multiFactionSettlement(over = {}) {
 
 // ── Inference / routing ────────────────────────────────────────────────
 
-describe('recalculateFactionRelationships() — archetype inference', () => {
+describe('recalculateFactionRelationships() - archetype inference', () => {
   it('CUT_TRADE_ROUTE infers trade_route_cut archetype', () => {
     const updates = recalculateFactionRelationships(
       multiFactionSettlement(),
@@ -107,7 +107,7 @@ describe('recalculateFactionRelationships() — archetype inference', () => {
 
 // ── Per-archetype impact correctness ───────────────────────────────────
 
-describe('recalculateFactionRelationships() — archetype impacts', () => {
+describe('recalculateFactionRelationships() - archetype impacts', () => {
   const PLAGUE = { type: 'PLAGUE', factionImpactArchetype: 'plague' };
 
   it('plague: religious gains legitimacy + publicTrust', () => {
@@ -168,7 +168,7 @@ describe('recalculateFactionRelationships() — archetype impacts', () => {
 
 // ── dominant_npc_removed routing ───────────────────────────────────────
 
-describe('recalculateFactionRelationships() — dominant_npc_removed', () => {
+describe('recalculateFactionRelationships() - dominant_npc_removed', () => {
   const targetNpc = {
     id: 'npc.captain_rusk',
     name: 'Captain Rusk',
@@ -277,7 +277,7 @@ describe('recalculateFactionRelationships() does not mutate', () => {
 
 // ── Nullish handling ────────────────────────────────────────────────────
 
-describe('recalculateFactionRelationships() — nullish + edge cases', () => {
+describe('recalculateFactionRelationships() - nullish + edge cases', () => {
   it('returns [] for nullish settlement', () => {
     expect(recalculateFactionRelationships(null, { type: 'CUT_TRADE_ROUTE' })).toEqual([]);
   });
@@ -339,7 +339,7 @@ describe('factionIdFromName()', () => {
 
 // ── Integration: real generated settlement ─────────────────────────────
 
-describe('recalculateFactionRelationships() — real generated settlement', () => {
+describe('recalculateFactionRelationships() - real generated settlement', () => {
   it('produces deltas against a city-tier settlement\'s actual factions', () => {
     const settlement = generateSettlementPipeline(
       { settType: 'city', culture: 'germanic' },

@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * cardElevation.test.jsx — P141 / V-4 contract over the Card primitive's
+ * cardElevation.test.jsx - P141 / V-4 contract over the Card primitive's
  * elevation adoption.
  *
  * Pins:

@@ -4,7 +4,7 @@
  * Generates NPCs, relationships, NPC faction groups, and links them
  * to power factions. Also generates conflicts.
  *
- * Extracted from generateSettlement.js lines 891–993.
+ * Extracted from generateSettlement.js lines 891-993.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -100,7 +100,7 @@ registerStep('generatePopulation', {
 
   const conflicts = generateConflicts(factions, relationships, effectiveConfig, institutions);
 
-  // Summary traces — one per category, not one per entity. Per-entity
+  // Summary traces - one per category, not one per entity. Per-entity
   // traces would flood the rail (50+ NPCs is normal at metropolis tier)
   // and the AI grounding pass does not need that level of detail.
   recordTrace(ctx, {
@@ -119,7 +119,7 @@ registerStep('generatePopulation', {
     ],
   });
 
-  // Faction-linkage trace — the strategic decision is how NPC faction
+  // Faction-linkage trace - the strategic decision is how NPC faction
   // groups attached to power factions (direct/attraction/scatter).
   const linkCounts = factions.reduce((acc, fg) => {
     const mode = fg.powerFactionFallback ? 'scatter'

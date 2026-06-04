@@ -1,4 +1,4 @@
-// historyData.js — History event templates
+// historyData.js - History event templates
 // Extracted from economicGenerator.js where they were misplaced.
 // Used by historyGenerator.js for settlement history generation.
 
@@ -1093,7 +1093,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
       'The ailing ruler wants a final errand completed before naming a successor',
-      'Someone is poisoning the ruler slowly — and the physician knows',
+      'Someone is poisoning the ruler slowly - and the physician knows',
     ],
     severity: ['minor', 'major'],
   },
@@ -1102,7 +1102,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'Growing wealth gap between merchant class and common laborers creates resentment',
     factions: ['Wealthy merchants', 'Poor workers', 'Moderate reformers'],
     plotHooks: [
-      'A reformer has been found dead — suicide or silenced?',
+      'A reformer has been found dead - suicide or silenced?',
       "A hidden ledger documenting wage theft is circulating in the workers' quarter",
       'A merchant is funding both the reform movement and the suppression of it',
     ],
@@ -1115,7 +1115,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'A relic claimed by both sides has resurfaced in a private collection',
       'The reformist leader is being blackmailed into silence',
-      'Someone is staging miracles for one side — the question is who benefits',
+      'Someone is staging miracles for one side - the question is who benefits',
     ],
     severity: ['minor', 'major'],
   },
@@ -1147,7 +1147,7 @@ export const HISTORICAL_EVENTS_DATA = [
     factions: ['Hoarders', 'Desperate poor', 'Price regulators'],
     plotHooks: [
       'A warehouse full of the resource is being held off the market deliberately',
-      'The scarcity was engineered — someone destroyed the competing supply route',
+      'The scarcity was engineered - someone destroyed the competing supply route',
       'An alternative source exists but the information is being suppressed',
     ],
     severity: ['minor', 'major'],
@@ -1157,7 +1157,7 @@ export const HISTORICAL_EVENTS_DATA = [
     description: 'A surge in criminal activity overwhelmed the authorities; vigilantes began to form',
     factions: ['Official guards', 'Vigilantes', 'Criminal organisations'],
     plotHooks: [
-      'The crime wave is coordinated — someone is directing it to create a pretext',
+      'The crime wave is coordinated - someone is directing it to create a pretext',
       'A guard captain is on the payroll of the criminal network',
       'The vigilantes have begun targeting innocents based on bad information',
     ],
@@ -1181,7 +1181,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       "A traditional practice conceals something the elders don't want examined",
       "A young reformer has uncovered records that undermine the old guard's legitimacy",
-      "The 'new idea' being promoted was actually tried once before — and failed badly",
+      "The 'new idea' being promoted was actually tried once before - and failed badly",
     ],
     severity: ['minor'],
   },
@@ -1191,7 +1191,7 @@ export const HISTORICAL_EVENTS_DATA = [
     factions: ['Corrupt officials', 'Reformers', 'Complicit beneficiaries'],
     plotHooks: [
       'The investigator who uncovered the corruption has received a death threat',
-      "A key witness can be found — but won't speak without protection",
+      "A key witness can be found - but won't speak without protection",
       'The corruption goes higher than anyone yet suspects; the reformers are being used',
     ],
     severity: ['major'],
@@ -1207,7 +1207,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The original loan documents contain a clause that was never disclosed publicly',
       "A creditor's agent is in town conducting a quiet assessment before enforcement",
-      'The debt could be voided — if someone can prove it was obtained through fraud',
+      'The debt could be voided - if someone can prove it was obtained through fraud',
     ],
     severity: ['major'],
   },
@@ -1230,7 +1230,7 @@ export const HISTORICAL_EVENTS_DATA = [
   {
     type: 'infiltration_fear',
     description:
-      'Rumours — some true — of enemy agents within the settlement caused suspicion and denunciations',
+      'Rumours - some true - of enemy agents within the settlement caused suspicion and denunciations',
     factions: [
       'Security hardliners',
       'Civil libertarians',
@@ -1239,7 +1239,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'One of the loudest voices warning about infiltration is themselves an agent',
       'An innocent person has been identified as a spy and is about to be executed',
-      "The agents' handler is someone in a position of trust — and the PCs have already met them",
+      "The agents' handler is someone in a position of trust - and the PCs have already met them",
     ],
     severity: ['major'],
   },
@@ -1254,7 +1254,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The original charter is held in a private archive whose owner has gone missing',
-      'Something of value was found on the disputed land — which is why the claim is suddenly being pressed',
+      'Something of value was found on the disputed land - which is why the claim is suddenly being pressed',
       "A forged document is about to be introduced as evidence; someone knows it's fake",
     ],
     severity: ['minor', 'major'],
@@ -1269,7 +1269,7 @@ export const HISTORICAL_EVENTS_DATA = [
       'Merchants who benefit from cheap newcomer labour',
     ],
     plotHooks: [
-      'The newcomers fled something — and that something has sent agents after them',
+      'The newcomers fled something - and that something has sent agents after them',
       "A series of 'accidents' targeting newcomers is being attributed to chance",
       'An old family is deliberately inflaming tensions to drive out a newcomer who knows something',
     ],
@@ -1285,7 +1285,7 @@ export const HISTORICAL_EVENTS_DATA = [
       'Those who prefer the vacuum',
     ],
     plotHooks: [
-      "The departed leader left a sealed document designating a successor — and someone wants it destroyed before it's read",
+      "The departed leader left a sealed document designating a successor - and someone wants it destroyed before it's read",
       'One claimant has manufactured evidence of a mandate they actually lack',
       'The vacuum is being maintained deliberately by an outside power that benefits from the instability',
     ],

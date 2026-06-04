@@ -1,5 +1,5 @@
 /**
- * stepMetadata.js — Human-readable labels + summaries for pipeline steps.
+ * stepMetadata.js - Human-readable labels + summaries for pipeline steps.
  *
  * The Pipeline Rail ("How this was simulated") shows each procedural
  * step the engine ran, with a one-line description of what that step
@@ -11,9 +11,9 @@
  * machine name. Both are loud in DEV through the test below.
  *
  * Naming:
- *   - `label`        — short noun phrase shown in the rail.
- *   - `description`  — one sentence shown on hover/expand.
- *   - `summary(ctx)` — optional. Receives the post-step context, returns
+ *   - `label`        - short noun phrase shown in the rail.
+ *   - `description`  - one sentence shown on hover/expand.
+ *   - `summary(ctx)` - optional. Receives the post-step context, returns
  *                      a short factual string (e.g. "5 institutions
  *                      assembled"). The rail renders it under the label
  *                      so the user sees what *actually* happened on
@@ -112,7 +112,7 @@ export const STEP_METADATA = Object.freeze({
   },
   generateNarratives: {
     label: 'Compose narratives',
-    description: 'Write the prose layer — history, defense, daily-life, and per-faction asides.',
+    description: 'Write the prose layer - history, defense, daily-life, and per-faction asides.',
     summary: () => null,
   },
   assembleSettlement: {

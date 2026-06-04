@@ -8,7 +8,7 @@
  *      produces both staffing AND legitimacy impairments on it
  *
  * These are the structural contracts the event reducer in the store
- * relies on. Property #1 protects redux/zustand immutability — if a
+ * relies on. Property #1 protects redux/zustand immutability - if a
  * future refactor introduces a hidden mutation, the entire React tree
  * stops re-rendering correctly. #2 protects the undo path. #3 protects
  * the pillar-death narrative coherence.
@@ -19,7 +19,7 @@ import fc from 'fast-check';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 
 // Deep-freeze a value so any attempted mutation throws TypeError in strict
-// mode. JSON round-trip then freeze recursively — the cleanest way to
+// mode. JSON round-trip then freeze recursively - the cleanest way to
 // detect "did the function mutate my input?" without instrumenting it.
 function deepFreeze(o) {
   if (o && typeof o === 'object') {
@@ -44,7 +44,7 @@ function makeSettlement(opts = {}) {
   };
 }
 
-// fc.double, not fc.float — float requires 32-bit-representable bounds
+// fc.double, not fc.float - float requires 32-bit-representable bounds
 // (0.1 is not). The engine math is double-precision anyway.
 const severity = fc.double({ min: 0.1, max: 1, noNaN: true });
 const eventId  = fc.string({ minLength: 1, maxLength: 8 });
@@ -76,7 +76,7 @@ describe('mutateSettlement (property-based)', () => {
     // Apply DAMAGE_INSTITUTION (creates an impairment whose causeEventId
     // is the event id), then RESTORE_INSTITUTION with payload.causeEventId
     // matching that same id. The impairment count on the targeted
-    // institution must return to zero — this is the undo guarantee.
+    // institution must return to zero - this is the undo guarantee.
     fc.assert(fc.property(severity, eventId, (sev, eid) => {
       const settlement = makeSettlement();
       const damaged = mutateSettlement({
@@ -131,7 +131,7 @@ describe('mutateSettlement (property-based)', () => {
       });
       const temple = next.institutions.find(i => i.id === 'inst.temple');
       const types = (temple.impairments || []).map(i => i.type);
-      // Both dimensions of impact must be present — pillar deaths are
+      // Both dimensions of impact must be present - pillar deaths are
       // both a staffing problem and a legitimacy problem for the
       // institution that anchored them.
       expect(types).toContain('staffing');

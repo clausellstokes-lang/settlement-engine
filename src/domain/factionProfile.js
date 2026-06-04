@@ -1,5 +1,5 @@
 /**
- * domain/factionProfile.js — Structured faction profile derivation.
+ * domain/factionProfile.js - Structured faction profile derivation.
  *
  * Tier 4.1 of the roadmap. Today's faction objects are flat:
  *   { faction: string, power: number, desc: string }
@@ -25,12 +25,12 @@
  * directly, the derivation becomes a no-op for already-structured
  * input.
  *
- * Pure functions only — no I/O, no state, no React. Tolerant of
+ * Pure functions only - no I/O, no state, no React. Tolerant of
  * missing fields; every output line falls back to a sensible default
  * so the profile is always well-formed.
  */
 
-// Small inline id helper — derives 'faction.<snake_name>' from a faction
+// Small inline id helper - derives 'faction.<snake_name>' from a faction
 // name. Kept local to this file so the domain layer doesn't import
 // across into src/lib (which is outside the domain tsconfig include).
 // Matches the format produced by src/lib/entities.js#idOf so consumers
@@ -65,7 +65,7 @@ const ARCHETYPE_RULES = [
 /**
  * Best-effort archetype inference from the faction's display name.
  * Returns one of the canonical archetypes, or 'other' if no rule
- * matches. Cheap regex pass — no fuzzy logic.
+ * matches. Cheap regex pass - no fuzzy logic.
  */
 export function deriveFactionArchetype(faction) {
   if (!faction) return 'other';
@@ -154,7 +154,7 @@ const ARCHETYPE_TEMPLATES = Object.freeze({
 
 /**
  * Look up the archetype template. Returns 'other' for unknown values.
- * Read-only — returns a shallow clone so callers can safely customize.
+ * Read-only - returns a shallow clone so callers can safely customize.
  */
 export function templateForArchetype(archetype) {
   const t = ARCHETYPE_TEMPLATES[archetype] || ARCHETYPE_TEMPLATES.other;
@@ -202,7 +202,7 @@ function legitimacyFor(faction, settlement) {
  * Build a structured profile for a faction.
  *
  * Pure: doesn't mutate the input. Idempotent: running it twice
- * produces the same output. Lossless on the input fields — `power`,
+ * produces the same output. Lossless on the input fields - `power`,
  * `desc`, etc. are preserved on the returned profile.
  *
  * @param {Object|string} faction

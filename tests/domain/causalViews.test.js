@@ -1,5 +1,5 @@
 /**
- * tests/domain/causalViews.test.js — Tier 5.7 lean tests.
+ * tests/domain/causalViews.test.js - Tier 5.7 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

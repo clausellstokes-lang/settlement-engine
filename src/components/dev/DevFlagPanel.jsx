@@ -1,5 +1,5 @@
 /**
- * DevFlagPanel.jsx — Floating DEV-only overlay for flipping feature flags.
+ * DevFlagPanel.jsx - Floating DEV-only overlay for flipping feature flags.
  *
  * Renders nothing in production (gated on import.meta.env.DEV). In DEV
  * it shows every flag from the registry with a toggle, a description,
@@ -47,7 +47,7 @@ function readIsOverridden(name) {
 }
 
 export default function DevFlagPanel() {
-  // Hooks first — bailing on !DEV happens AFTER all hooks are declared
+  // Hooks first - bailing on !DEV happens AFTER all hooks are declared
   // so React's invariants hold across the prod / dev render paths.
   const [open, setOpen] = useState(() => {
     try { return window.localStorage.getItem(STORAGE_KEY) === '1'; } catch { return false; }

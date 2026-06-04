@@ -1,5 +1,5 @@
 /**
- * domain/supplyChainState.js — Stateful supply-chain derivation.
+ * domain/supplyChainState.js - Stateful supply-chain derivation.
  *
  * Tier 4.3 of the roadmap. Today's chain object lives on
  * `settlement.economicState.activeChains[]` with shape:
@@ -31,7 +31,7 @@
  * "Why did flour prices rise?" surfaces) call `deriveSupplyChainState`
  * and get the canonical shape.
  *
- * No imports from src/lib — the domain tsconfig include stays
+ * No imports from src/lib - the domain tsconfig include stays
  * self-contained, same constraint Phase 9 honored.
  */
 
@@ -41,13 +41,13 @@ import { deriveAllActiveConditions } from './activeConditions.js';
 // Legacy vocabulary → canonical vocabulary per the roadmap. The status
 // fields encode different intensities:
 //
-//   stable      — chain runs normally with all inputs available
-//   strained    — chain runs but with stress (e.g. substituted inputs)
-//   scarce      — chain is producing below normal output
-//   blocked     — chain is offline due to a hard upstream failure
-//   captured    — chain is controlled by a single faction taking rents
-//   substituted — chain runs via an alternative path (e.g. magic substitute)
-//   collapsing  — chain is failing under multiple compounding pressures
+//   stable      - chain runs normally with all inputs available
+//   strained    - chain runs but with stress (e.g. substituted inputs)
+//   scarce      - chain is producing below normal output
+//   blocked     - chain is offline due to a hard upstream failure
+//   captured    - chain is controlled by a single faction taking rents
+//   substituted - chain runs via an alternative path (e.g. magic substitute)
+//   collapsing  - chain is failing under multiple compounding pressures
 //
 // The current generator only emits a subset of these states; the
 // remaining states (`blocked`, `captured`, `collapsing`) become
@@ -70,7 +70,7 @@ const CANONICAL_STATUSES = new Set([
 /**
  * Map a legacy status string to the canonical vocabulary. Already-
  * canonical values pass through. Unknown values default to 'stable'
- * (the most-conservative reading — keeps the engine running).
+ * (the most-conservative reading - keeps the engine running).
  */
 export function canonicalSupplyChainStatus(legacyStatus) {
   if (typeof legacyStatus !== 'string') return 'stable';
@@ -79,7 +79,7 @@ export function canonicalSupplyChainStatus(legacyStatus) {
 }
 
 // ── Chain id helper ──────────────────────────────────────────────────────
-// Stable id format: 'chain.<needKey>.<chainId>' — matches the legacy
+// Stable id format: 'chain.<needKey>.<chainId>' - matches the legacy
 // composite id construction in computeActiveChains.js. Consumers
 // querying traces by id from either path see the same shape.
 
@@ -252,7 +252,7 @@ function appendRegionalFailureContext(base, regionalPressures) {
 }
 
 // ── Controller inference ──────────────────────────────────────────────────
-// Tier 4.3 wants every chain to declare a controller — usually a
+// Tier 4.3 wants every chain to declare a controller - usually a
 // faction or institution that takes a rent on the chain's output. We
 // derive from the dependency.institution when present (the most
 // reliable signal), falling back to the first processing institution.
@@ -306,7 +306,7 @@ function inferSubstitutes(chain) {
  *
  * @param {Object} chain      Active chain entry from
  *                            settlement.economicState.activeChains[].
- * @param {Object} [settlement] Optional context — reserved for
+ * @param {Object} [settlement] Optional context - reserved for
  *                            controller-by-faction-archetype derivation
  *                            in future iterations.
  * @returns {Object|null}

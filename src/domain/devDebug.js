@@ -1,5 +1,5 @@
 /**
- * domain/devDebug.js — Dev simulation debugger payload.
+ * domain/devDebug.js - Dev simulation debugger payload.
  *
  * Tier 3.9 of the roadmap. Composes every Phase 2 / Phase 4 / Phase 5
  * derivation into a single dev-mode envelope. The DEV-only debugger
@@ -117,7 +117,7 @@ export function deriveDevDebug(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Just the counts — useful for dev dashboard tiles. */
+/** Just the counts - useful for dev dashboard tiles. */
 export function devDebugCounts(settlement) {
   const d = deriveDevDebug(settlement);
   return {

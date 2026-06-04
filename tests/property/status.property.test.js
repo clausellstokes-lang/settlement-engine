@@ -11,7 +11,7 @@
  * list mutation are the load-bearing pieces of the event pipeline. A
  * regression here breaks every downstream consumer (UI badges,
  * propagation, PDF rendering). Properties catch the class of bug that
- * example tests miss — the unusual input you never thought to write.
+ * example tests miss - the unusual input you never thought to write.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -21,7 +21,7 @@ import {
   withImpairment, effectiveStatus, severityFor,
 } from '../../src/domain/entities/status.js';
 
-// Reusable arbitraries — keep them small enough that the test runner
+// Reusable arbitraries - keep them small enough that the test runner
 // stays fast (hundreds of runs * shrinking can dominate CI time).
 const impairmentType = fc.constantFrom(
   'capacity', 'legitimacy', 'influence', 'wealth', 'staffing',
@@ -104,7 +104,7 @@ describe('status (property-based)', () => {
     ), { numRuns: 50 });
   });
 
-  // Bonus: sanity-anchor — effectiveStatus on bare entity is 'active'.
+  // Bonus: sanity-anchor - effectiveStatus on bare entity is 'active'.
   // Not strictly a property, but cheap and catches the dumbest regression.
   test('effectiveStatus default is active', () => {
     expect(effectiveStatus({ name: 'X' })).toBe(STATUS_ACTIVE);

@@ -1,5 +1,5 @@
 /**
- * domain/threatProfile.js — Structured threat modeling.
+ * domain/threatProfile.js - Structured threat modeling.
  *
  * Tier 4.6 of the roadmap. Today the generator implies threats
  * across several surfaces without ever materializing them as
@@ -37,7 +37,7 @@
  *   - Phase 19's explainEntity gains a 'threat' explainer.
  *   - Tier 4.11 (player intervention events) gets a stable target
  *     vocabulary: events like 'removed_threat' reference threat ids.
- *   - Tier 6.1 (AI grounded-in-trace) — AI can ground "the settlement
+ *   - Tier 6.1 (AI grounded-in-trace) - AI can ground "the settlement
  *     fears X" claims in real threat-profile state.
  */
 
@@ -67,11 +67,11 @@ export const THREAT_TYPES = Object.freeze([
 
 /**
  * Canonical stage vocabulary per the roadmap. Derived from severity.
- *   latent      — known but distant
- *   developing  — gathering momentum
- *   active      — currently exerting pressure
- *   imminent    — about to break
- *   realized    — the threat has materialized
+ *   latent      - known but distant
+ *   developing  - gathering momentum
+ *   active      - currently exerting pressure
+ *   imminent    - about to break
+ *   realized    - the threat has materialized
  */
 export const THREAT_STAGES = Object.freeze([
   'latent', 'developing', 'active', 'imminent', 'realized',
@@ -266,7 +266,7 @@ export function collectThreatSources(settlement) {
   if (!settlement) return [];
   const out = [];
 
-  // 1. config.monsterThreat — environmental wilderness pressure
+  // 1. config.monsterThreat - environmental wilderness pressure
   const monster = settlement.config?.monsterThreat;
   if (monster === 'plagued') {
     out.push({
@@ -282,7 +282,7 @@ export function collectThreatSources(settlement) {
     });
   }
 
-  // 2. defenseProfile.scores — low scores translate to threat pressure
+  // 2. defenseProfile.scores - low scores translate to threat pressure
   const scores = settlement.defenseProfile?.scores;
   if (scores) {
     if (typeof scores.internal === 'number' && scores.internal < 50) {
@@ -372,7 +372,7 @@ export function collectThreatSources(settlement) {
     }
   }
 
-  // 7. Active conditions — Phase 16 — that are themselves threats
+  // 7. Active conditions - Phase 16 - that are themselves threats
   for (const cond of deriveAllActiveConditions(settlement)) {
     let inferredType;
     switch (cond.archetype) {
@@ -512,7 +512,7 @@ export function summarizeThreats(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
   if (profiles.length === 0) return ['No threats currently pressing the settlement.'];
   return profiles.map(t =>
-    `${t.label} — ${t.severityBand} (${t.currentStage}) via ${t.vector} on ${(t.affectedSystems || []).join(', ')}`
+    `${t.label} - ${t.severityBand} (${t.currentStage}) via ${t.vector} on ${(t.affectedSystems || []).join(', ')}`
   );
 }
 

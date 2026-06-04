@@ -1,13 +1,13 @@
 /**
- * eslint-plugin-analytics.js — Local ESLint rule for P146.
+ * eslint-plugin-analytics.js - Local ESLint rule for P146.
  *
- * funnel-event-contract — event names passed to the analytics `track()`
+ * funnel-event-contract - event names passed to the analytics `track()`
  *   and `Funnel.track()` must be EVENTS.* constants from
  *   src/lib/analytics.js, never raw string literals or dynamically-built
  *   template strings.
  *
  *   Why a lint rule: track() already whitelists event names at RUNTIME
- *   (Object.values(EVENTS).includes(event)) — but an unknown name only
+ *   (Object.values(EVENTS).includes(event)) - but an unknown name only
  *   produces a DEV console.warn and is then silently dropped in
  *   production. A misspelled event ('hompage_view') therefore costs a
  *   silent dashboard hole that nobody notices until the funnel looks
@@ -16,18 +16,18 @@
  *   follows; typo a string and lint fails before merge.
  *
  *   Allowed:
- *     track(EVENTS.HOMEPAGE_VIEW)            — the canonical form
+ *     track(EVENTS.HOMEPAGE_VIEW)            - the canonical form
  *     Funnel.track(EVENTS.X, { ... })
- *     Funnel.track(eventName, payload)       — generic passthrough
+ *     Funnel.track(eventName, payload)       - generic passthrough
  *       wrappers (useFunnelEvent, EditableInline, LockedDestination)
  *       receive the EVENTS.* constant from THEIR callers, so a variable
  *       first argument is fine.
  *   Flagged:
- *     track('homepage_view')                 — raw string (typo vector)
- *     Funnel.track(`evt_${id}`)              — dynamically-built name
+ *     track('homepage_view')                 - raw string (typo vector)
+ *     Funnel.track(`evt_${id}`)              - dynamically-built name
  *
  *   Precision: the rule only fires on the `track` / `Funnel` bindings
- *   actually imported from the analytics module — it records their local
+ *   actually imported from the analytics module - it records their local
  *   names from the ImportDeclaration first. An unrelated `track()` or a
  *   different `Funnel` object elsewhere is never touched. Membership of
  *   EVENTS.* members is intentionally NOT validated here: that would
@@ -53,9 +53,9 @@ export default {
         schema: [],
         messages: {
           rawString:
-            '{{callee}} event name is a raw string "{{value}}" — pass an EVENTS.* constant from analytics.js so the name is typo-proof and stays in the dashboard schema.',
+            '{{callee}} event name is a raw string "{{value}}" - pass an EVENTS.* constant from analytics.js so the name is typo-proof and stays in the dashboard schema.',
           dynamic:
-            '{{callee}} event name is a {{kind}} — event names must be EVENTS.* constants, not dynamically-built strings.',
+            '{{callee}} event name is a {{kind}} - event names must be EVENTS.* constants, not dynamically-built strings.',
         },
       },
       create(context) {

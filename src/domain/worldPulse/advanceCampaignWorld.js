@@ -11,9 +11,62 @@ import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from '.
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { synthesizeRealmEvents } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
+import { evaluatePopulationDynamics } from './populationDynamics.js';
+import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
+import { normalizeSimulationRules } from './simulationRules.js';
 
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
+}
+
+function compactNpcPatch(patch = null) {
+  if (!patch) return null;
+  return {
+    shortGoal: patch.shortGoal || null,
+    longGoal: patch.longGoal || null,
+    contextSignature: patch.contextSignature || null,
+    contextTier: patch.contextTier || null,
+    dotRank: patch.dotRank ?? null,
+    factionSeat: patch.factionSeat || null,
+    lastAction: patch.lastAction || null,
+  };
+}
+
+function compactOutcomeForHistory(outcome = {}) {
+  return {
+    id: outcome.id,
+    type: outcome.type || null,
+    candidateType: outcome.candidateType || null,
+    ruleId: outcome.ruleId || null,
+    ruleFamily: outcome.ruleFamily || null,
+    targetSaveId: outcome.targetSaveId || null,
+    relationshipKey: outcome.relationshipKey || null,
+    npcId: outcome.npcId || null,
+    factionId: outcome.factionId || null,
+    severity: outcome.severity ?? null,
+    probability: outcome.probability ?? null,
+    roll: outcome.roll ?? null,
+    applyMode: outcome.applyMode || null,
+    headline: outcome.headline || 'World pulse outcome',
+    summary: outcome.summary || '',
+    reasons: (outcome.reasons || []).slice(0, 4),
+    metadata: clone(outcome.metadata || null),
+    populationDeltas: clone(outcome.populationDeltas || null),
+    tierChange: clone(outcome.tierChange || null),
+    resourcePatch: clone(outcome.resourcePatch || null),
+    proposalPayload: clone(outcome.proposalPayload || null),
+    npcPatch: compactNpcPatch(outcome.npcPatch),
+    relationshipPatch: clone(outcome.relationshipPatch || null),
+    stressor: outcome.stressor
+      ? {
+          id: outcome.stressor.id,
+          type: outcome.stressor.type,
+          label: outcome.stressor.label,
+          severity: outcome.stressor.severity,
+          affectedSettlementIds: clone(outcome.stressor.affectedSettlementIds || []),
+        }
+      : null,
+  };
 }
 
 function saveId(save) {
@@ -61,8 +114,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   /** @type {import('../settlement.schema.js').TickInterval} */
   const tickInterval = usableTickInterval(interval);
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
+  const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
-  let worldState = nextWorldStateForPulse(startingWorldState, campaign, tickInterval);
+  let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules };
   let snapshot = buildWorldSnapshot({ campaign, saves, worldState });
 
   worldState = ensureAllRelationshipStates(worldState, snapshot);
@@ -77,7 +131,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   worldState = seatNpcsIntoFactions(worldState);
   snapshot = buildWorldSnapshot({ campaign: { ...campaign, worldState }, saves, worldState });
 
-  const agedStressors = ageRoamingStressors(worldState.stressors, snapshot, rng.fork('stressors'), { tick: worldState.tick, now });
+  const agedStressors = simulationRules.stressorsEnabled
+    ? ageRoamingStressors(worldState.stressors, snapshot, rng.fork('stressors'), { tick: worldState.tick, now })
+    : { stressors: worldState.stressors || [], resolved: [], residualOutcomes: [] };
   worldState = { ...worldState, stressors: agedStressors.stressors };
 
   const localSettlements = new Map();
@@ -101,16 +157,49 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const postTimeSnapshot = buildWorldSnapshot({ campaign: postTimeCampaign, saves: postTimeSaves, worldState });
   const pressures = deriveSettlementPressures(postTimeSnapshot);
   const pIndex = pressureIndex(pressures);
+  const tierResource = evaluateTierResourceDynamics(worldState, postTimeSnapshot, pIndex, {
+    tick: worldState.tick,
+    interval: tickInterval,
+    simulationRules,
+  });
+  worldState = tierResource.worldState;
+  const structuralCandidates = evaluatePopulationDynamics(postTimeSnapshot, pIndex, {
+    tick: worldState.tick,
+    interval: tickInterval,
+    simulationRules,
+  });
   const candidates = evaluateWorldPulseRules(postTimeSnapshot, {
     pressures,
     pressureIndex: pIndex,
     tick: worldState.tick,
+    interval: tickInterval,
+    simulationRules,
   });
+  const stochasticCandidates = [...candidates, ...tierResource.candidates];
   const { selected, rollExplanations } = rollCandidates(
-    [...agedStressors.residualOutcomes, ...candidates],
+    [...agedStressors.residualOutcomes, ...stochasticCandidates],
     rng.fork('candidate-rolls'),
     { maxAuto: 7, maxProposals: 5, volatility: volatilityMultiplier(worldState.volatility) },
   );
+  const deterministicExplanations = structuralCandidates.map(candidate => ({
+    candidateId: candidate.id,
+    candidateType: candidate.candidateType,
+    ruleId: candidate.ruleId || null,
+    ruleFamily: candidate.ruleFamily || null,
+    targetSaveId: candidate.targetSaveId || null,
+    relationshipKey: candidate.relationshipKey || null,
+    npcId: candidate.npcId || null,
+    factionId: candidate.factionId || null,
+    severity: candidate.severity,
+    probability: 1,
+    roll: 0,
+    passed: true,
+    gates: candidate.reasons || [],
+    applyMode: candidate.applyMode,
+    proposalPayload: candidate.proposalPayload || null,
+    conflictResolution: { selected: true, deterministic: true },
+  }));
+  const selectedForApply = [...structuralCandidates, ...selected];
 
   const settlementMap = buildSettlementMap(postTimeSnapshot, localSettlements);
   const applied = applyWorldPulseOutcomes({
@@ -119,9 +208,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     regionalGraph: postTimeSnapshot.regionalGraph,
     wizardNews: campaign?.wizardNews,
     settlementMap,
-    outcomes: selected,
+    outcomes: selectedForApply,
     tick: worldState.tick,
     now,
+    simulationRules,
   });
 
   const pulseRecord = {
@@ -131,10 +221,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     committed: commit,
     createdAt: now,
     calendar: applied.worldState.calendar,
-    candidateCount: candidates.length,
-    selectedCount: selected.length,
+    candidateCount: candidates.length + tierResource.candidates.length + structuralCandidates.length,
+    selectedCount: selectedForApply.length,
     autoAppliedCount: applied.autoApplied.length,
     proposalCount: applied.proposals.length,
+    selectedOutcomes: selectedForApply.slice(0, 24).map(compactOutcomeForHistory),
     resolvedStressors: agedStressors.resolved.map(stressor => ({
       id: stressor.id,
       type: stressor.type,
@@ -142,7 +233,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       resolutionChance: stressor.resolutionChance,
       resolutionRoll: stressor.resolutionRoll,
     })),
-    rollExplanations,
+    rollExplanations: [...deterministicExplanations, ...rollExplanations],
     timeTicks: timeTicks.map(t => ({ saveId: t.saveId, summary: t.tick.summary })),
   };
   // Realm-scope arcs: promote stressors shared across many settlements into
@@ -163,9 +254,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       ...update,
       settlement: clone(update.settlement),
     })),
-    candidates,
-    selected,
-    rollExplanations,
+    candidates: [...structuralCandidates, ...candidates, ...tierResource.candidates],
+    selected: selectedForApply,
+    rollExplanations: [...deterministicExplanations, ...rollExplanations],
     autoApplied: applied.autoApplied,
     proposals: applied.proposals,
     resolvedStressors: agedStressors.resolved,

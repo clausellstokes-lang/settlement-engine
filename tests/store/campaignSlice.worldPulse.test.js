@@ -96,13 +96,25 @@ describe('campaignSlice world pulse', () => {
         settlementIds: ['ashford'],
         regionalGraph: ensureRegionalGraph(),
         wizardNews: { currentTick: 0, entries: [] },
-        worldState: { rngSeed: 'store-seed', tick: 0 },
+        worldState: { rngSeed: 'store-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
       }];
     });
 
     const preview = store.getState().previewCampaignWorldPulse('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
     expect(preview.tick).toBe(1);
     expect(store.getState().campaigns[0].worldState.tick).toBe(0);
+
+    const draftPreview = store.getState().previewCampaignWorldPulse('camp-1', 'one_month', {
+      now: '2026-01-01T00:00:00.000Z',
+      simulationRules: { propagationMode: 'local', intensity: 'conservative', migrationFlowsEnabled: false },
+    });
+    expect(draftPreview.worldState.simulationRules).toMatchObject({
+      propagationMode: 'local',
+      intensity: 'conservative',
+      migrationFlowsEnabled: false,
+      presetId: 'custom',
+    });
+    expect(store.getState().campaigns[0].worldState.simulationRules).toBeUndefined();
 
     const result = await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
     const campaign = store.getState().campaigns[0];

@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * Save schema drift test — locks the canonical entry / campaignState /
+ * Save schema drift test - locks the canonical entry / campaignState /
  * supabase-row shapes used by src/lib/saves.js.
  *
  * Why this exists: same pattern as tests/data/stressTypesMeta.test.js
@@ -10,13 +10,13 @@
  * campaign state silently. This test fails CI before that ships.
  *
  * What it locks:
- *   1. ENTRY_SCHEMA — the keys / type contracts a loaded entry must
+ *   1. ENTRY_SCHEMA - the keys / type contracts a loaded entry must
  *      have. Adding fields is fine; removing is not (without intent).
- *   2. CAMPAIGN_STATE_SCHEMA — the lifecycle fields on campaignState.
+ *   2. CAMPAIGN_STATE_SCHEMA - the lifecycle fields on campaignState.
  *      These are the CRIT-tier audit fields (phase, eventLog,
  *      systemState, locks, provenance timestamps). Any change here
  *      breaks the save-load-then-undo flow.
- *   3. SUPABASE_ROW_SCHEMA — the columns saves.js writes to. Drift
+ *   3. SUPABASE_ROW_SCHEMA - the columns saves.js writes to. Drift
  *      here means a v2 client can't read v1 supabase rows (or vice
  *      versa).
  *   4. The migration helper is idempotent and the migration produces
@@ -42,7 +42,7 @@ const ENTRY_SCHEMA = {
   seed:              'optional-string-or-null',
   savedAt:           'number',
   campaignState:     'object',
-  // aiData lives next to the entry but is optional — saves written
+  // aiData lives next to the entry but is optional - saves written
   // before the AI layer can be missing it entirely.
   aiData:            'optional-object',
 };
@@ -112,7 +112,7 @@ function assertShape(actual, schema, label = 'shape') {
 }
 
 // ── Local backend round-trip locks ENTRY + CAMPAIGN_STATE shape ──────
-describe('save schema — entry + campaignState (local)', () => {
+describe('save schema - entry + campaignState (local)', () => {
   let saves;
 
   beforeEach(async () => {
@@ -156,7 +156,7 @@ describe('save schema — entry + campaignState (local)', () => {
     expect(loaded.campaignState.locks).toEqual({});
   });
 
-  test('migration is idempotent — a v2 entry round-trips unchanged', async () => {
+  test('migration is idempotent - a v2 entry round-trips unchanged', async () => {
     const v2 = {
       id: 7, name: 'V2', tier: 'city', settlement: { name: 'V2' },
       campaignState: {
@@ -194,7 +194,7 @@ describe('save schema — entry + campaignState (local)', () => {
 });
 
 // ── Supabase row shape lock ──────────────────────────────────────────
-describe('save schema — supabase row (mocked)', () => {
+describe('save schema - supabase row (mocked)', () => {
   let saves;
   const mockState = { lastInsert: null };
 

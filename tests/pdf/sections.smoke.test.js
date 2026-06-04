@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * Smoke tests for src/pdf/sections/* — the PDF chapter components.
+ * Smoke tests for src/pdf/sections/* - the PDF chapter components.
  *
  * What this catches: the class of bug where a PDF chapter crashes
  * during render because a settlement field is unexpectedly null/empty.
@@ -54,14 +54,14 @@ beforeAll(() => {
   );
   metropolisVm = buildViewModel({ settlement: metropolisSettlement });
 
-  // Deliberately threadbare — simulates partial generation / mid-migration
+  // Deliberately threadbare - simulates partial generation / mid-migration
   // saves the user can encounter. PDF chapters should handle gracefully.
   sparseSettlement = { name: 'Sparse', tier: 'thorp', population: 30 };
   sparseVm = buildViewModel({ settlement: sparseSettlement });
 });
 
 // Helper: call a PDF chapter as a function; assert it returns a truthy
-// element tree without throwing. We don't render to PDF bytes — that's
+// element tree without throwing. We don't render to PDF bytes - that's
 // integration-test territory and slow. This catches the bugs the user
 // actually encounters (chapter blows up on render for X settlement shape).
 function smokeChapter(Chapter, props) {

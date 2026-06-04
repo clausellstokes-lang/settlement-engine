@@ -1,15 +1,15 @@
 /**
- * AutoSaveChip.jsx — P136 / M-5 visible save-state indicator.
+ * AutoSaveChip.jsx - P136 / M-5 visible save-state indicator.
  *
  * A pill that tells the user "Saved 2 min ago" so they don't keep
  * pressing Ctrl-S out of anxiety. Lives in the WorldMap top toolbar
  * alongside the existing save button. Three visual states:
  *
- *   • idle    — gold dot · "Saved 2 min ago"   (default — the campaign
+ *   • idle    - gold dot · "Saved 2 min ago"   (default - the campaign
  *               map has been persisted; nothing pending)
- *   • dirty   — amber dot · "Unsaved changes"  (placements/labels/etc
+ *   • dirty   - amber dot · "Unsaved changes"  (placements/labels/etc
  *               changed since the last save)
- *   • saving  — purple dot · "Saving…"         (a save is in flight;
+ *   • saving  - purple dot · "Saving..."         (a save is in flight;
  *               state is observable via WorldMap's local saving flag)
  *
  * The "dirty" state derives from comparing the live mapState to the
@@ -18,7 +18,7 @@
  * enough; the user rarely cares about precise diff.
  *
  * Self-gated on activeCampaignId. When there is no active campaign, the
- * chip renders nothing — the save target is undefined, so a save-status
+ * chip renders nothing - the save target is undefined, so a save-status
  * indicator would be misleading.
  */
 
@@ -86,7 +86,7 @@ export default function AutoSaveChip({ saving = false }) {
 
   if (saving) {
     dotColor = VIOLET;
-    label = 'Saving…';
+    label = 'Saving...';
   } else if (dirty) {
     dotColor = AMBER;
     label = 'Unsaved changes';

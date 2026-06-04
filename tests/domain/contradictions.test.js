@@ -1,5 +1,5 @@
 /**
- * tests/domain/contradictions.test.js — Tier 4.18.
+ * tests/domain/contradictions.test.js - Tier 4.18.
  *
  * One detector test each + envelope shape + smoke.
  */

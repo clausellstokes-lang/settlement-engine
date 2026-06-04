@@ -1,5 +1,5 @@
 /**
- * wizardCloseout.test.js — P145 / W-2 contract over the pure summary
+ * wizardCloseout.test.js - P145 / W-2 contract over the pure summary
  * builder. WizardCloseout renders a config recap; buildCloseoutSummary()
  * derives that recap from the live config + toggle maps. Tested here in
  * isolation (no DOM).

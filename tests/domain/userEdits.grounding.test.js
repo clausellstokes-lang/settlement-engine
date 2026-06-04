@@ -1,5 +1,5 @@
 /**
- * tests/domain/userEdits.grounding.test.js — Tier 6.6 integration suite.
+ * tests/domain/userEdits.grounding.test.js - Tier 6.6 integration suite.
  *
  * Verifies the cross-module wiring that makes user edits visible to
  * the AI:
@@ -74,10 +74,10 @@ function settlementFixture() {
 function clone(o) { return JSON.parse(JSON.stringify(o)); }
 
 // ─────────────────────────────────────────────────────────────────────
-// forbiddenChanges() — emit MUST PRESERVE lines for user edits
+// forbiddenChanges() - emit MUST PRESERVE lines for user edits
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.6 — forbiddenChanges emits MUST PRESERVE lines for user edits', () => {
+describe('Tier 6.6 - forbiddenChanges emits MUST PRESERVE lines for user edits', () => {
   it('no edits → no user-field lines in forbiddenChanges', () => {
     const lines = forbiddenChanges(settlementFixture());
     expect(lines.some(l => l.includes('user-edited field'))).toBe(false);
@@ -123,10 +123,10 @@ describe('Tier 6.6 — forbiddenChanges emits MUST PRESERVE lines for user edits
 });
 
 // ─────────────────────────────────────────────────────────────────────
-// buildAiGroundingPayload — edited entities surface in lockedEntities
+// buildAiGroundingPayload - edited entities surface in lockedEntities
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.6 — edited entities appear in lockedEntities', () => {
+describe('Tier 6.6 - edited entities appear in lockedEntities', () => {
   it('an edited NPC appears in constraints.lockedEntities', () => {
     const s = settlementFixture();
     applyUserEdit(s.npcs[0], 'secret.what', 'X');
@@ -163,10 +163,10 @@ describe('Tier 6.6 — edited entities appear in lockedEntities', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────
-// assemblePromptSections — user edits stay inside the dossier
+// assemblePromptSections - user edits stay inside the dossier
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.6 — user-edited values flow through the dossier section', () => {
+describe('Tier 6.6 - user-edited values flow through the dossier section', () => {
   it('the user\'s edited prose appears in the dossier JSON', () => {
     const s = settlementFixture();
     applyUserEdit(s.npcs[0], 'secret.what', 'CANARY-USER-EDIT-12345');
@@ -186,10 +186,10 @@ describe('Tier 6.6 — user-edited values flow through the dossier section', () 
 });
 
 // ─────────────────────────────────────────────────────────────────────
-// aiOverlayVerifier — changed_user_field detection
+// aiOverlayVerifier - changed_user_field detection
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.6 — aiOverlayVerifier detects changed_user_field violations', () => {
+describe('Tier 6.6 - aiOverlayVerifier detects changed_user_field violations', () => {
   it('clean refinement (AI passes user field through verbatim) → ok', () => {
     const original = settlementFixture();
     applyUserEdit(original.npcs[0], 'secret.what', 'Hand-written.');
@@ -262,7 +262,7 @@ describe('Tier 6.6 — aiOverlayVerifier detects changed_user_field violations',
     const original = settlementFixture();
     applyUserEdit(original.npcs[0], 'secret.what', 'User text.');
     const refined = clone(original);
-    // Refine the NPC's role (not user-edited) and ANOTHER NPC's whole record — fine.
+    // Refine the NPC's role (not user-edited) and ANOTHER NPC's whole record - fine.
     refined.npcs[0].role = 'Senior Guildmaster';
     refined.npcs[1].role = 'Captain of the Watch';
     const result = verifyAiOverlay(original, refined);
@@ -297,7 +297,7 @@ describe('Tier 6.6 — aiOverlayVerifier detects changed_user_field violations',
 // Defensive
 // ─────────────────────────────────────────────────────────────────────
 
-describe('Tier 6.6 — defensive', () => {
+describe('Tier 6.6 - defensive', () => {
   it('null original / refined still returns ok:true (matches existing semantics)', () => {
     expect(verifyAiOverlay(null, settlementFixture()).ok).toBe(true);
     expect(verifyAiOverlay(settlementFixture(), null).ok).toBe(true);

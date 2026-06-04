@@ -1,5 +1,5 @@
 /**
- * domain/worldPulse/partyImpact.js — the party as a first-class actor.
+ * domain/worldPulse/partyImpact.js - the party as a first-class actor.
  *
  * The world pulse advances autonomously, but in a TTRPG the *party* is the main
  * causal force. This module lets the DM inject the consequences of party action
@@ -9,7 +9,7 @@
  * faction state.
  *
  * Design notes:
- *  - Party impacts are CANON by construction — the DM is declaring what
+ *  - Party impacts are CANON by construction - the DM is declaring what
  *    happened. So they auto-apply (no probabilistic roll) and relationship
  *    label changes apply immediately rather than queuing as proposals.
  *  - They reuse the existing apply pipeline (`applyWorldPulseOutcomes`) so
@@ -21,7 +21,7 @@
  *  - Every effect is tagged `party`-sourced and carries the DM's note as a
  *    reason, so the audit trail (Wizard News) distinguishes "the world did this"
  *    from "the table did this".
- *  - Pure + deterministic: no rolls, no `new Date()` — the caller threads `now`.
+ *  - Pure + deterministic: no rolls, no `new Date()` - the caller threads `now`.
  */
 
 import { ensureWorldState, stablePart } from './worldState.js';
@@ -300,7 +300,7 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
 /**
  * Apply a party action to a campaign. Returns the same result shape as
  * `advanceCampaignWorld` (worldState, regionalGraph, wizardNews,
- * settlementUpdates, autoApplied, …) so the store can persist it identically.
+ * settlementUpdates, autoApplied, ...) so the store can persist it identically.
  * Returns null when the action is invalid or affects nothing.
  *
  * @param {Object} [args]
@@ -341,6 +341,7 @@ export function applyPartyImpact({ campaign, saves = [], action, now = null } = 
     // Party impacts are a discrete injection, not a time advance.
     advanceNewsTick: false,
     advanceRegionalImpacts: false,
+    simulationRules: built.worldState?.simulationRules,
   });
 
   return {

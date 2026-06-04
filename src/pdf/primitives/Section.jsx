@@ -1,5 +1,5 @@
 /**
- * Section — chapter opener with eyebrow, big head, and accent rule.
+ * Section - chapter opener with eyebrow, big head, and accent rule.
  *
  * Every major chapter in the dossier opens with this primitive so the reader's
  * eye finds the section break without scanning. The accent prop lets a

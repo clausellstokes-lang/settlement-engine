@@ -1,5 +1,5 @@
 /**
- * tests/lib/routes.test.js — path ↔ view routing table contract.
+ * tests/lib/routes.test.js - path ↔ view routing table contract.
  *
  * Guards the invariants the rest of the routing layer leans on:
  *   - every view round-trips view → path → view
@@ -20,7 +20,7 @@ import {
   isSafeNextPath,
 } from '../../src/lib/routes.js';
 
-describe('routes — table integrity', () => {
+describe('routes - table integrity', () => {
   it('has unique view ids and unique paths', () => {
     const views = ROUTES.map(r => r.view);
     const paths = ROUTES.map(r => r.path);
@@ -43,7 +43,7 @@ describe('routes — table integrity', () => {
   });
 });
 
-describe('routes — view ↔ path round-trip', () => {
+describe('routes - view ↔ path round-trip', () => {
   it('maps every view back to itself through its path', () => {
     for (const r of ROUTES) {
       const resolved = resolveLocation(viewToPath(r.view));
@@ -68,7 +68,7 @@ describe('routes — view ↔ path round-trip', () => {
   });
 });
 
-describe('routes — resolveLocation paths', () => {
+describe('routes - resolveLocation paths', () => {
   it('resolves root to the default view', () => {
     expect(resolveLocation('/').view).toBe('generate');
     expect(resolveLocation('/').notFound).toBeFalsy();
@@ -93,7 +93,7 @@ describe('routes — resolveLocation paths', () => {
   });
 });
 
-describe('routes — /settlements/:id param route', () => {
+describe('routes - /settlements/:id param route', () => {
   it('extracts the id', () => {
     const r = resolveLocation('/settlements/abc-123');
     expect(r.view).toBe('settlements');
@@ -109,6 +109,15 @@ describe('routes — /settlements/:id param route', () => {
     expect(r.params.id).toBe(id);
   });
 
+  it('round-trips a gallery slug', () => {
+    const slug = 'bramble fen';
+    const path = viewToPath('gallery', { slug });
+    expect(path).toBe('/gallery/bramble%20fen');
+    const r = resolveLocation(path);
+    expect(r.view).toBe('gallery');
+    expect(r.params.slug).toBe(slug);
+  });
+
   it('bare /settlements has no id param', () => {
     const r = resolveLocation('/settlements');
     expect(r.view).toBe('settlements');
@@ -116,7 +125,7 @@ describe('routes — /settlements/:id param route', () => {
   });
 });
 
-describe('routes — legacy ?view= back-compat', () => {
+describe('routes - legacy ?view= back-compat', () => {
   it('resolves already-sent email links', () => {
     expect(resolveLocation('/?view=settlements').view).toBe('settlements');
     expect(resolveLocation('/?view=pricing').view).toBe('pricing');
@@ -141,7 +150,7 @@ describe('routes — legacy ?view= back-compat', () => {
   });
 });
 
-describe('routes — titles + guards', () => {
+describe('routes - titles + guards', () => {
   it('home is the bare site name; others are suffixed', () => {
     expect(titleForView('generate')).toBe('SettlementForge');
     expect(titleForView('pricing')).toBe('Pricing · SettlementForge');
@@ -161,7 +170,7 @@ describe('routes — titles + guards', () => {
   });
 });
 
-describe('routes — isSafeNextPath (open-redirect guard)', () => {
+describe('routes - isSafeNextPath (open-redirect guard)', () => {
   it('accepts internal absolute paths', () => {
     expect(isSafeNextPath('/account')).toBe(true);
     expect(isSafeNextPath('/settlements/abc')).toBe(true);

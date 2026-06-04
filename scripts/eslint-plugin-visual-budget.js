@@ -1,27 +1,27 @@
 /**
- * eslint-plugin-visual-budget.js — Local ESLint rules for P120 / V-1/V-2/V-5.
+ * eslint-plugin-visual-budget.js - Local ESLint rules for P120 / V-1/V-2/V-5.
  *
- * Three rules, all warnings (not errors — the codebase has legitimate
+ * Three rules, all warnings (not errors - the codebase has legitimate
  * legacy violations to migrate). They surface drift without blocking
  * CI so the cleanup happens organically rather than as a blocking
  * sweep.
  *
- *   no-raw-fontsize — fontSize: 11 / fontSize: '13px' literal in inline
+ *   no-raw-fontsize - fontSize: 11 / fontSize: '13px' literal in inline
  *     styles. The design token `FS.{xxs,xs,sm,md,lg,xl,xxl}` should be
  *     the source. Raw values bypass the type scale.
  *
- *   no-raw-color — `color: '#XXXXXX'` or `background: '#XXXXXX'`
+ *   no-raw-color - `color: '#XXXXXX'` or `background: '#XXXXXX'`
  *     literals in inline styles. The token system (GOLD, INK, BODY,
  *     MUTED, etc.) is the source. Raw hex bypasses the palette tiering.
- *     Allows `rgba(...)` and CSS custom properties (var(--…)) since
+ *     Allows `rgba(...)` and CSS custom properties (var(--...)) since
  *     those go through the token system or compose dynamically.
  *
- *   no-raw-button-copy — strings inside JSX <button> that look like
+ *   no-raw-button-copy - strings inside JSX <button> that look like
  *     verbs ("Generate", "Reroll", "Save"). Encourages routing through
  *     copy/index.js so the verb-unification (C-1) stays honest.
  *
  * Used by eslint.config.js as a local plugin. Keep this file
- * dependency-free — it imports nothing.
+ * dependency-free - it imports nothing.
  */
 
 const RAW_HEX_PATTERN = /^#[0-9a-fA-F]{3,8}$/;
@@ -81,7 +81,7 @@ export default {
                     (typeof valueNode.value === 'string' && /\d+px$/i.test(valueNode.value))) {
                   context.report({
                     node: valueNode,
-                    message: `Raw fontSize "${valueNode.value}" — use FS.{xxs,xs,sm,md,lg,xl,xxl} from theme.js.`,
+                    message: `Raw fontSize "${valueNode.value}" - use FS.{xxs,xs,sm,md,lg,xl,xxl} from theme.js.`,
                   });
                 }
               }
@@ -111,7 +111,7 @@ export default {
                   RAW_HEX_PATTERN.test(valueNode.value.trim())) {
                 context.report({
                   node: valueNode,
-                  message: `Raw hex color "${valueNode.value}" on ${keyName} — use a token (GOLD, INK, BODY, MUTED, BORDER, …) or a semantic var.`,
+                  message: `Raw hex color "${valueNode.value}" on ${keyName} - use a token (GOLD, INK, BODY, MUTED, BORDER, ...) or a semantic var.`,
                 });
               }
             }
@@ -138,7 +138,7 @@ export default {
               if (VERB_PATTERNS.some(p => p.test(text))) {
                 context.report({
                   node: child,
-                  message: `Inline button verb "${text.split('\n')[0].slice(0, 40)}" — route through COPY.* in src/copy/.`,
+                  message: `Inline button verb "${text.split('\n')[0].slice(0, 40)}" - route through COPY.* in src/copy/.`,
                 });
               }
             }

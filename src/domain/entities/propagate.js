@@ -1,5 +1,5 @@
 /**
- * domain/entities/propagate.js — Cross-entity impairment propagation.
+ * domain/entities/propagate.js - Cross-entity impairment propagation.
  *
  * The plan: institution impaired → linked faction impaired (and vice
  * versa). NPC removed from a load-bearing role → institution loses its
@@ -100,7 +100,7 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
     for (const node of frontier) {
       if (node.hops >= maxHops) continue;
       const propagatedSeverity = node.severity * damping;
-      if (propagatedSeverity < 0.05) continue;  // negligible — stop early
+      if (propagatedSeverity < 0.05) continue;  // negligible - stop early
 
       // Find linked entities and apply impairments.
       const links = findLinkedEntities(working, node);
@@ -166,7 +166,7 @@ function findLinkedEntities(settlement, node) {
   // Factions live in either `settlement.factions` or
   // `settlement.powerStructure.factions` depending on which generator
   // path produced the settlement. Normalize here so propagation walks
-  // both — without this, `powerStructure`-shaped fixtures see no
+  // both - without this, `powerStructure`-shaped fixtures see no
   // cross-entity propagation. The matching helper `factionsList` is
   // used everywhere a faction lookup happens.
   const factions = factionsList(settlement);
@@ -206,7 +206,7 @@ function mapDimension(fromType, toType, dim) {
 
 /**
  * Estimate the strength of a faction's link to an institution. Returns
- * 0 if no link, 0.0–1.0 otherwise. Prefers explicit fields; falls back
+ * 0 if no link, 0.0-1.0 otherwise. Prefers explicit fields; falls back
  * to category match.
  */
 function factionInstitutionStrength(faction, instId) {
@@ -265,7 +265,7 @@ function applyImpairmentToEntity(settlement, type, id, impairment) {
   return settlement;
 }
 
-// ── Lookup helpers — entities lack consistent ID fields, so we
+// ── Lookup helpers - entities lack consistent ID fields, so we
 //    normalize via name fallback. Long-term, structured IDs replace this.
 const instId    = (i) => i?.id || i?.name || '';
 const factionId = (f) => f?.id || f?.faction || f?.name || '';

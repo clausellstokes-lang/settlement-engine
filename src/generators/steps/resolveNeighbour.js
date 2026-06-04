@@ -3,7 +3,7 @@
  *
  * Extracts structured relationship data from the imported neighbour settlement.
  *
- * Extracted from generateSettlement.js lines 431–441.
+ * Extracted from generateSettlement.js lines 431-441.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -32,7 +32,7 @@ registerStep('resolveNeighbour', {
   const neighbourGovBias  = getNeighbourGovernmentBias(neighbourProfile);
   const neighbourFacBias  = getNeighbourFactionBias(neighbourProfile);
 
-  // Only emit a trace when an actual neighbour was bound — a missing
+  // Only emit a trace when an actual neighbour was bound - a missing
   // neighbour is a non-decision and would just be noise in the rail.
   if (rawNeighbour && neighbourProfile) {
     recordTrace(ctx, {

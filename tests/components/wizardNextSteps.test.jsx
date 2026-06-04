@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * wizardNextSteps.test.jsx — P134 / W-4 component contract.
+ * wizardNextSteps.test.jsx - P134 / W-4 component contract.
  *
  * The pure builder is exercised in wizardNextSteps.test.js (node). This
  * file pins the presentational shell: the no-settlement gate, store
@@ -26,7 +26,7 @@ vi.mock('../../src/store/index.js', () => {
 import WizardNextSteps from '../../src/components/generate/WizardNextSteps.jsx';
 import { useStore } from '../../src/store/index.js';
 
-describe('WizardNextSteps — W-4 post-generate guide', () => {
+describe('WizardNextSteps - W-4 post-generate guide', () => {
   beforeEach(() => {
     useStore.__set({
       settlement: { tier: 'Village' },

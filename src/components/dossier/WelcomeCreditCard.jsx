@@ -1,5 +1,5 @@
 /**
- * WelcomeCreditCard.jsx — P104 / X-4 "every paying user has felt what
+ * WelcomeCreditCard.jsx - P104 / X-4 "every paying user has felt what
  * they're paying for."
  *
  * The single strongest pitch for Narrate is a Narrate credit the user
@@ -61,7 +61,7 @@ export default function WelcomeCreditCard({ saveId = null }) {
 
   // Ask the server whether the welcome credit is still available. We do
   // this once per mount + on user id change. The fetch is small and only
-  // fires for signed-in users on their first saved dossier — the
+  // fires for signed-in users on their first saved dossier - the
   // narrowest possible audience.
   useEffect(() => {
     if (tier === 'anon' || !userId) return;
@@ -73,7 +73,7 @@ export default function WelcomeCreditCard({ saveId = null }) {
       try {
         const { supabase, isConfigured } = await import('../../lib/supabase.js');
         if (!isConfigured) {
-          // Local dev — assume the credit is present so we can preview
+          // Local dev - assume the credit is present so we can preview
           // the card without a backend.
           if (!cancelled) setWelcomeUnspent(true);
           return;
@@ -86,7 +86,7 @@ export default function WelcomeCreditCard({ saveId = null }) {
           setWelcomeUnspent(true);
           Funnel.track(EVENTS.WELCOME_CREDIT_GRANTED, { userId });
         }
-      } catch { /* network failure — just don't show the card */ }
+      } catch { /* network failure - just don't show the card */ }
     })();
 
     return () => { cancelled = true; };
@@ -151,7 +151,7 @@ export default function WelcomeCreditCard({ saveId = null }) {
           margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
           lineHeight: 1.55, fontFamily: serif_, fontStyle: 'italic',
         }}>
-          It’ll turn this town’s data into prose your players can hear —
+          It’ll turn this town’s data into prose your players can hear -
           the difference between a sheet and a session.
         </p>
       </div>

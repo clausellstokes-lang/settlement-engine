@@ -217,6 +217,86 @@ function pressureScore(pressureIdx, settlementId, kinds = []) {
     .reduce((max, score) => Math.max(max, score), 0);
 }
 
+function settlementForState(snapshot, state) {
+  return (snapshot?.settlements || []).find(item => String(item.id) === String(state.settlementId)) || null;
+}
+
+function dominantRelationshipContext(snapshot, settlementId) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const sid = String(settlementId);
+  for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const from = String(edge.from || edge.source || '');
+    const to = String(edge.to || edge.target || '');
+    if (from !== sid && to !== sid) continue;
+    const key = edge.id || `rel.${from}.${to}`;
+    const rel = states[key]?.relationshipType || edge.relationshipType || edge.type || 'neutral';
+    if (rel === 'vassal') return to === sid ? 'vassal' : 'overlord';
+    if (rel === 'hostile' || rel === 'cold_war') return rel;
+    if (rel === 'allied') return 'allied';
+  }
+  return 'local';
+}
+
+function contextForNpc(snapshot, state) {
+  const item = settlementForState(snapshot, state);
+  const tier = item?.settlement?.tier || 'village';
+  const conditions = (item?.activeConditions || [])
+    .map(c => c.archetype || c.label || '')
+    .filter(Boolean)
+    .sort()
+    .slice(0, 3);
+  const relationship = dominantRelationshipContext(snapshot, state.settlementId);
+  return {
+    tier,
+    conditions,
+    relationship,
+    signature: `${tier}|${relationship}|${conditions.join(',')}`,
+  };
+}
+
+function tierDirection(previousTier, nextTier) {
+  const order = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+  const prev = order.indexOf(previousTier);
+  const next = order.indexOf(nextTier);
+  if (prev < 0 || next < 0 || prev === next) return null;
+  return next > prev ? 'promotion' : 'demotion';
+}
+
+function branchedGoals(state, context) {
+  const dir = tierDirection(state.contextTier, context.tier);
+  const conditionText = context.conditions.join(' ');
+  if (context.relationship === 'vassal') {
+    if (['dissident', 'military', 'civic'].includes(state.roleArchetype)) {
+      return { shortGoal: 'organize_autonomy', longGoal: 'break_vassalage' };
+    }
+    return { shortGoal: 'survive_tribute', longGoal: 'bind_external_patron' };
+  }
+  if (context.relationship === 'overlord') {
+    return { shortGoal: 'secure_tribute', longGoal: 'expand_influence' };
+  }
+  if (/famine|plague|disease|war|siege|rebellion/.test(conditionText)) {
+    if (['healer', 'religious', 'labor_resource'].includes(state.roleArchetype)) {
+      return { shortGoal: 'protect_followers', longGoal: 'restore_order' };
+    }
+    if (state.corruption) return { shortGoal: 'exploit_desperation', longGoal: 'expand_influence' };
+    return { shortGoal: 'survive_crisis', longGoal: 'restore_order' };
+  }
+  if (dir === 'promotion') {
+    if (state.roleArchetype === 'merchant') return { shortGoal: 'join_guild', longGoal: 'expand_trade_house' };
+    if (state.roleArchetype === 'military') return { shortGoal: 'secure_new_garrison', longGoal: 'professionalize_guard' };
+    if (['ruler', 'civic', 'heir'].includes(state.roleArchetype)) return { shortGoal: 'formalize_new_charter', longGoal: 'secure_office' };
+    return { shortGoal: 'profit_from_change', longGoal: 'expand_influence' };
+  }
+  if (dir === 'demotion') {
+    if (state.corruption) return { shortGoal: 'punish_rivals', longGoal: 'exploit_desperation' };
+    return { shortGoal: 'survive_crisis', longGoal: 'protect_followers' };
+  }
+  if (context.relationship === 'hostile' || context.relationship === 'cold_war') {
+    return { shortGoal: 'mobilize_defenses', longGoal: 'settle_rivalry' };
+  }
+  return null;
+}
+
 function roleSeatFor(dotRank) {
   if (dotRank >= 3) return 'leader_champion';
   if (dotRank === 2) return 'lieutenant_operator';
@@ -229,7 +309,13 @@ export function ensureNpcStates(worldState, snapshot, rng) {
     const npcs = item.settlement?.npcs || [];
     npcs.forEach((npc, index) => {
       const id = npcId(item.id, npc, index);
-      if (npcStates[id]) return;
+      if (npcStates[id]) {
+        if (!npcStates[id].contextSignature) {
+          const context = contextForNpc(snapshot, { settlementId: item.id });
+          npcStates[id] = { ...npcStates[id], contextSignature: context.signature, contextTier: context.tier };
+        }
+        return;
+      }
       const local = rng.fork(`npc:${id}`);
       const corrupt = local.random() < 0.06;
       const roleArchetype = inferRoleArchetype(npc);
@@ -265,6 +351,8 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         lastActedTick: null,
         lastAction: null,
         corruption: corrupt,
+        contextSignature: contextForNpc(snapshot, { settlementId: item.id }).signature,
+        contextTier: item.settlement?.tier || 'village',
       };
     });
   }
@@ -371,7 +459,7 @@ function rivalryTargetFor(state, states) {
   return rivals.find(other => other.factionId !== state.factionId) || rivals[0] || null;
 }
 
-// Goal culmination — a long-burning ambition finally pays off. Fires when an
+// Goal culmination - a long-burning ambition finally pays off. Fires when an
 // NPC's long-goal progress crosses the threshold, somewhat independent of this
 // tick's pressure: it turns reactive drift into setup → payoff stories. The
 // patch resets goalProgress (so it doesn't re-fire) and advances the NPC's
@@ -394,7 +482,7 @@ function npcGoalCulmination(state, tick) {
     probability: 0.9,
     applyMode: 'auto',
     headline: `${state.name} achieves a long ambition`,
-    summary: `${state.name} has worked toward "${goal}" for a long while — and now seizes it.`,
+    summary: `${state.name} has worked toward "${goal}" for a long while - and now seizes it.`,
     reasons: [
       `${state.name}'s long-term goal progress reached its culmination.`,
       `Role: ${state.roleArchetype.replace(/_/g, ' ')}; goal: ${goal}.`,
@@ -422,13 +510,60 @@ function npcGoalCulmination(state, tick) {
   };
 }
 
+function npcGoalRebranch(state, context, tick) {
+  const goals = branchedGoals(state, context);
+  if (!goals) return null;
+  return {
+    id: `candidate.npc.goal_rebranch.${stablePart(state.npcId)}.${tick}`,
+    type: 'npc',
+    candidateType: 'npc_goal_rebranch',
+    ruleId: `npc_${state.roleArchetype}_goal_rebranch`,
+    ruleFamily: 'npc',
+    targetSaveId: state.settlementId,
+    npcId: state.npcId,
+    factionId: state.factionId,
+    severity: 0.44,
+    probability: 1,
+    applyMode: 'auto',
+    headline: `${state.name} changes ambitions`,
+    summary: `${state.name}'s goals shift because the settlement context changed.`,
+    reasons: [
+      `Context changed from ${state.contextSignature || 'unknown'} to ${context.signature}.`,
+      `Personality remains anchored by ideal ${String(state.ideal || 'unknown').replace(/_/g, ' ')} and flaw ${String(state.flaw || 'unknown').replace(/_/g, ' ')}.`,
+    ],
+    npcPatch: {
+      ...goals,
+      goalProgress: { short: 0, long: 0 },
+      contextSignature: context.signature,
+      contextTier: context.tier,
+      momentum: clamp01((state.momentum || 0) + 0.08),
+      lastActedTick: tick,
+      lastAction: 'goal_rebranch',
+    },
+    metadata: {
+      roleArchetype: state.roleArchetype,
+      previousContext: state.contextSignature || null,
+      nextContext: context.signature,
+    },
+    conflictTags: [`npc:${state.npcId}`, `settlement:${state.settlementId}:npc_goal_rebranch`],
+  };
+}
+
 export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
   const tick = options.tick ?? snapshot.worldState.tick + 1;
   const states = Object.values(snapshot.worldState.npcStates || {});
   const out = [];
 
   for (const state of states) {
-    // A long ambition that has built up finally pays off — independent of this
+    const context = contextForNpc(snapshot, state);
+    if (state.contextSignature && state.contextSignature !== context.signature) {
+      const rebranch = npcGoalRebranch(state, context, tick);
+      if (rebranch) {
+        out.push(rebranch);
+        continue;
+      }
+    }
+    // A long ambition that has built up finally pays off - independent of this
     // tick's pressure.
     if ((state.goalProgress?.long || 0) >= GOAL_CULMINATION_THRESHOLD) {
       out.push(npcGoalCulmination(state, tick));
@@ -467,14 +602,34 @@ export function applyNpcPatch(worldState, outcome) {
   if (!outcome?.npcId) return worldState;
   const npcStates = { ...(worldState.npcStates || {}) };
   const current = npcStates[outcome.npcId] || {};
+  const patch = outcome.npcPatch || {};
+  const goalChanged = (patch.shortGoal && patch.shortGoal !== current.shortGoal)
+    || (patch.longGoal && patch.longGoal !== current.longGoal);
+  const goalHistory = goalChanged
+    ? [
+        ...(Array.isArray(current.goalHistory) ? current.goalHistory.slice(-11) : []),
+        {
+          tick: worldState.tick ?? null,
+          outcomeId: outcome.id || null,
+          candidateType: outcome.candidateType || null,
+          fromShortGoal: current.shortGoal || null,
+          toShortGoal: patch.shortGoal || current.shortGoal || null,
+          fromLongGoal: current.longGoal || null,
+          toLongGoal: patch.longGoal || current.longGoal || null,
+          previousContext: current.contextSignature || outcome.metadata?.previousContext || null,
+          nextContext: patch.contextSignature || outcome.metadata?.nextContext || null,
+        },
+      ]
+    : current.goalHistory || [];
   npcStates[outcome.npcId] = {
     ...current,
-    ...(outcome.npcPatch || {}),
+    ...patch,
     goalProgress: {
       ...(current.goalProgress || {}),
-      ...(outcome.npcPatch?.goalProgress || {}),
+      ...(patch.goalProgress || {}),
     },
-    rivalryTargets: outcome.npcPatch?.rivalryTargets || current.rivalryTargets || [],
+    rivalryTargets: patch.rivalryTargets || current.rivalryTargets || [],
+    goalHistory,
   };
   return { ...worldState, npcStates };
 }

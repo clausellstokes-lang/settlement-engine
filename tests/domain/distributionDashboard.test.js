@@ -1,5 +1,5 @@
 /**
- * tests/domain/distributionDashboard.test.js — Tier 3.10 lean tests.
+ * tests/domain/distributionDashboard.test.js - Tier 3.10 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

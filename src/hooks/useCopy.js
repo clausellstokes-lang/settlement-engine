@@ -1,5 +1,5 @@
 /**
- * useCopy.js — Audience-aware wrapper over t().
+ * useCopy.js - Audience-aware wrapper over t().
  *
  * The plain `t('key')` helper from src/copy/index.js looks up a single
  * string. Many critique findings (X-10 audience-led pricing copy, C-3
@@ -38,7 +38,7 @@ export function useCopy() {
     /** Pick an audience-specific copy string with safe fallback. */
     function pickAudience(prefix, vars) {
       const specific = t(prefix + suffix, vars);
-      // The t() helper returns the key string when missing — detect
+      // The t() helper returns the key string when missing - detect
       // that and fall back to the new-DM line.
       const looksMissing = specific === prefix + suffix;
       return looksMissing ? t(prefix + SUFFIX.new, vars) : specific;

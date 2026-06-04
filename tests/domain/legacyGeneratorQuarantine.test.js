@@ -1,9 +1,9 @@
 /**
- * tests/domain/legacyGeneratorQuarantine.test.js — Tier 1.7 contract.
+ * tests/domain/legacyGeneratorQuarantine.test.js - Tier 1.7 contract.
  *
  * `generateSettlement.js` is deprecated. Only the existing engine
  * shim (`src/generators/engine.js`) is allowed to import it. Any new
- * import is a regression — code should use
+ * import is a regression - code should use
  * `generateSettlementPipeline.js` instead.
  *
  * This test grep's the codebase for imports of the legacy module and
@@ -63,7 +63,7 @@ function findLegacyImporters() {
   return importers;
 }
 
-describe('Tier 1.7 — legacy generator deprecation', () => {
+describe('Tier 1.7 - legacy generator deprecation', () => {
   it('generateSettlement.js carries an @deprecated JSDoc tag', () => {
     const src = readFileSync(join(SRC, LEGACY_MODULE), 'utf8');
     expect(src).toMatch(/@deprecated/);
@@ -80,13 +80,13 @@ describe('Tier 1.7 — legacy generator deprecation', () => {
   });
 });
 
-describe('Tier 1.7 — quarantine: only the allowed shim imports the legacy module', () => {
+describe('Tier 1.7 - quarantine: only the allowed shim imports the legacy module', () => {
   const importers = findLegacyImporters();
 
   it('importer list matches the grandfather set exactly', () => {
     // No surprises in either direction:
-    //  - any NEW importer fails the test (regression — use the pipeline)
-    //  - any REMOVED importer fails the test (allowlist drift —
+    //  - any NEW importer fails the test (regression - use the pipeline)
+    //  - any REMOVED importer fails the test (allowlist drift -
     //    update ALLOWED_IMPORTERS to reflect intent)
     const actual = new Set(importers);
     const allowed = ALLOWED_IMPORTERS;
@@ -102,7 +102,7 @@ describe('Tier 1.7 — quarantine: only the allowed shim imports the legacy modu
   });
 });
 
-describe('Tier 1.7 — runtime warning on the legacy fallback path', () => {
+describe('Tier 1.7 - runtime warning on the legacy fallback path', () => {
   it('settlementSlice.js logs a DEV-only warn when engineGenerate is called', () => {
     const slice = readFileSync(join(SRC, 'store', 'settlementSlice.js'), 'utf8');
     // Both fallback branches should be wrapped.
@@ -116,7 +116,7 @@ describe('Tier 1.7 — runtime warning on the legacy fallback path', () => {
   });
 });
 
-describe('Tier 1.7 — pipeline path is the preferred surface', () => {
+describe('Tier 1.7 - pipeline path is the preferred surface', () => {
   it('generateSettlementPipeline.js exists', () => {
     expect(() => readFileSync(join(SRC, 'generators', 'generateSettlementPipeline.js'), 'utf8')).not.toThrow();
   });

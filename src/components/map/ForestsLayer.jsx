@@ -1,5 +1,5 @@
 /**
- * ForestsLayer — renders forest brush strokes from mapState.forests.
+ * ForestsLayer - renders forest brush strokes from mapState.forests.
  *
  * Each forest entry is a { x, y, radius, density, treeStyle } record.
  * We scatter trees within the radius using a deterministic PRNG seeded by
@@ -11,7 +11,7 @@ import { useMemo, useRef } from 'react';
 import { useStore } from '../../store';
 import { MAP_MODES, ANNOTATE_TOOLS } from '../../store/mapSlice.js';
 
-/** Mulberry32 — small deterministic PRNG */
+/** Mulberry32 - small deterministic PRNG */
 function prng(seed) {
   let t = seed | 0;
   return function() {

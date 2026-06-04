@@ -1,12 +1,12 @@
 /**
- * design/tokens.js — Single source of truth for every visual value in the app.
+ * design/tokens.js - Single source of truth for every visual value in the app.
  *
  * This is the foundation the rest of the design system stands on. Every
  * colour, font, spacing value, radius, elevation, motion curve comes from
  * here. Three big consequences:
  *
  *   1. Adding dark mode later means swapping `light` for `dark` in one
- *      `theme` map — no component changes.
+ *      `theme` map - no component changes.
  *   2. Adding a brand variant means a new theme map, not a fork of every
  *      component file.
  *   3. WCAG contrast fixes happen by editing token values, not by hunting
@@ -23,51 +23,52 @@
  *     model and avoids re-teaching every new contributor)
  *
  * Spec references (UI Redesign PDF):
- *   §2.1 Typography  — display/prose/ui/mono tokens
- *   §2.2 Colour      — parchment / ink / gold / muted / violet / red / green / amber
- *   §2.3 Spacing     — 8-pt grid (space-1 .. space-12)
- *   §2.3 Radius      — card / button / input
- *   §2.3 Elevation   — 1 / 2 / 3
- *   §2.4 Motion      — quick / base / page / ambient
+ *   §2.1 Typography  - display/prose/ui/mono tokens
+ *   §2.2 Colour      - parchment / ink / gold / muted / violet / red / green / amber
+ *   §2.3 Spacing     - 8-pt grid (space-1 .. space-12)
+ *   §2.3 Radius      - card / button / input
+ *   §2.3 Elevation   - 1 / 2 / 3
+ *   §2.4 Motion      - quick / base / page / ambient
  */
 
 // ── Colours ────────────────────────────────────────────────────────────────
 // Light theme (canonical). A dark theme can be added later by defining
 // `darkColors` with the same keys and swapping which map is exported.
 const lightColors = Object.freeze({
-  // Parchment — page + card surfaces
+  // Parchment - page + card surfaces
   'parchment-50':  '#FBF5E6',  // page background, default card surface
   'parchment-100': '#F4EAD0',  // hover surface, subtle fill
   'parchment-200': '#E8D9B0',  // card border, dividers
 
-  // Ink — text + dark gradient surfaces
+  // Ink - text + dark gradient surfaces
   'ink-900': '#1B1408',  // header gradient end, primary text
   'ink-800': '#2C2210',  // header gradient start, secondary text
   'ink-600': '#4A3B22',  // tertiary text, BODY COPY (replaces legacy MUTED for body)
 
-  // Gold — primary accent, CTAs, brand
+  // Gold - primary accent, CTAs, brand
   'gold-500': '#C9A24C',  // primary CTA, brand mark, badges
   'gold-400': '#D9B566',  // CTA hover
   'gold-700': '#8C6F32',  // active/pressed gold
 
-  // Muted — chrome-only secondary text (NEVER body copy — fails WCAG)
+  // Muted - chrome-only secondary text (NEVER body copy - fails WCAG)
   'muted-500': '#9C8068',
 
-  // Violet — AI affordances. The single visual marker that means
+  // Violet - AI affordances. The single visual marker that means
   // "this surface is gated / opt-in / spends credits". Never used for
   // anything else, never collapses with gold.
   'violet-500': '#7B4FCF',
   'violet-100': '#EBE2FA',
 
-  // Red — destructive actions and hard errors only
+  // Red - destructive actions and hard errors only
   'red-600': '#A23434',
   'red-100': '#F4DEDE',
 
-  // Green — confirmation, canon-phase badge
+  // Green - confirmation, canon-phase badge
   'green-600': '#4A7A3A',
 
-  // Amber — warnings, drift-detected banners, founder lifetime pill
+  // Amber - warnings, drift-detected banners, founder lifetime pill
   'amber-500': '#D08020',
+  'amber-100': '#FDF4EC',
 });
 
 export const color = lightColors;
@@ -100,12 +101,16 @@ export const semantic = Object.freeze({
   destructive:    color['red-600'],
   destructiveBg:  color['red-100'],
   success:        color['green-600'],
+  successBg:      '#f0faf2',
+  info:           '#2a3a7a',
+  infoBg:         '#f0f4ff',
   warning:        color['amber-500'],
+  warningBg:      color['amber-100'],
 });
 
 // ── Exact-value migration swatchbook (P120 / V-2 colour burn-down) ───────────
 // The burn-down found ~140 distinct raw hex colours inline across the screen
-// UI — a long tail of near-duplicate browns, creams, reds, greens, blues and
+// UI - a long tail of near-duplicate browns, creams, reds, greens, blues and
 // purples accumulated over many phases. Consolidating them onto the curated
 // palette above is a *visual* change (sub-perceptual for near-dupes, real for
 // a few), so it is deferred to a separate, reviewed follow-up pass.
@@ -114,10 +119,10 @@ export const semantic = Object.freeze({
 // every such colour is routed through this map. value === the exact hex it
 // replaces, so the render is byte-identical. The high-frequency, clearly
 // semantic tones get readable keys; the rest are keyed by their exact hex.
-// A future consolidation pass repoints keys here at curated tokens — call
+// A future consolidation pass repoints keys here at curated tokens - call
 // sites never change again.
 export const swatch = Object.freeze({
-  // Recurring tones — named for readability (exact values; consolidation deferred)
+  // Recurring tones - named for readability (exact values; consolidation deferred)
   danger: '#8b1a1a',
   dangerBg: '#fdf4f4',
   success: '#1a5a28',
@@ -130,7 +135,7 @@ export const swatch = Object.freeze({
   inkMag: '#1c1409',
   inkMag2: '#3d2b1a',
   inkMag3: '#6b5340',
-  // Long tail — keyed by exact hex (consolidation deferred)
+  // Long tail - keyed by exact hex (consolidation deferred)
   '#1A2A5A': '#1a2a5a',
   '#1A3A8B': '#1a3a8b',
   '#1A4A2A': '#1a4a2a',
@@ -272,21 +277,21 @@ export const fontFamily = Object.freeze({
 });
 
 export const type = Object.freeze({
-  // Display — Crimson serif, used for hero + section titles
+  // Display - Crimson serif, used for hero + section titles
   'display-xl': { family: fontFamily.serif, size: 40, weight: 600, lineHeight: 1.15 },
   'display-l':  { family: fontFamily.serif, size: 32, weight: 600, lineHeight: 1.2 },
   'display-m':  { family: fontFamily.serif, size: 22, weight: 600, lineHeight: 1.25 },
 
-  // Prose — Crimson serif, used for dossier body
+  // Prose - Crimson serif, used for dossier body
   'prose-l':    { family: fontFamily.serif, size: 18, weight: 400, lineHeight: 1.65, style: 'italic' },
   'prose-m':    { family: fontFamily.serif, size: 16, weight: 400, lineHeight: 1.65 },
 
-  // UI — Nunito sans, used for chrome
+  // UI - Nunito sans, used for chrome
   'ui-l':       { family: fontFamily.sans, size: 13, weight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' },
   'ui-m':       { family: fontFamily.sans, size: 14, weight: 600 },
   'ui-s':       { family: fontFamily.sans, size: 12, weight: 600 },
 
-  // Mono — pipeline step IDs in "How this was simulated", JSON views
+  // Mono - pipeline step IDs in "How this was simulated", JSON views
   'mono':       { family: fontFamily.mono, size: 13, weight: 400, lineHeight: 1.5 },
 });
 
@@ -310,7 +315,7 @@ export const space = Object.freeze({
 export const radius = Object.freeze({
   card:   8,
   input:  6,
-  button: 999,  // pill — matches the parchment-cartouche aesthetic
+  button: 999,  // pill - matches the parchment-cartouche aesthetic
   sm:     4,
   md:     6,
   lg:     8,
@@ -335,17 +340,17 @@ export const motion = Object.freeze({
 // ── Layout (page content widths) ─────────────────────────────────────────────
 // Single source of truth for how wide page content runs on desktop. Before
 // this, every top-level page hard-coded its own centered max-width (440 / 680 /
-// 760 / 860 / 960 / 1100 …), so the site read as arbitrary and felt narrow on
-// wide monitors — a ~860px column on a 2000px screen leaves ~570px of painting
+// 760 / 860 / 960 / 1100 ...), so the site read as arbitrary and felt narrow on
+// wide monitors - a ~860px column on a 2000px screen leaves ~570px of painting
 // dead on each side.
 //
-//   page  — the shared cap for content / reference / marketing pages. Wide
+//   page  - the shared cap for content / reference / marketing pages. Wide
 //           enough to use a large monitor, capped so it still reads as a
 //           framed document on the parchment rather than a full-bleed app.
-//   prose — comfortable single-column reading width for long-form text that
+//   prose - comfortable single-column reading width for long-form text that
 //           lives *inside* a `page`-wide container (keeps line length sane
 //           even when the surrounding card is wide).
-//   form  — genuine single-task forms (sign-in / sign-up / success). These
+//   form  - genuine single-task forms (sign-in / sign-up / success). These
 //           stay narrow on purpose; a 1200px-wide login form is bad UX.
 export const layout = Object.freeze({
   page:  1200,
@@ -380,8 +385,8 @@ export const legacy = Object.freeze({
   GOLD_BG:  'rgba(201,162,76,0.12)',
   INK:      color['ink-900'],
   INK_DEEP: color['ink-800'],
-  MUTED:    color['muted-500'],   // unchanged — chrome only (eyebrows, subtitles)
-  // BODY — new export. The WCAG-passing body-copy color. Components
+  MUTED:    color['muted-500'],   // unchanged - chrome only (eyebrows, subtitles)
+  // BODY - new export. The WCAG-passing body-copy color. Components
   // currently using MUTED for actual prose (description text, helper
   // text, paragraph body) should migrate to this. The 4.5:1 contrast
   // ratio on parchment is what AA mandates and what MUTED fails.
@@ -402,7 +407,11 @@ export const legacy = Object.freeze({
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],
+  GREEN_BG:  semantic.successBg,
   AMBER:     color['amber-500'],
+  AMBER_BG:  semantic.warningBg,
+  BLUE:      semantic.info,
+  BLUE_BG:   semantic.infoBg,
   GOLD_DEEP: color['gold-700'],
   PARCH_100: color['parchment-100'],
 
@@ -414,12 +423,12 @@ export const legacy = Object.freeze({
   R:  { sm: radius.sm, md: radius.md, lg: radius.lg, xl: radius.xl },
   // pico/nano/micro extend the scale below xxs for the dense micro-typography
   // (badges, pills, eyebrows) the app legitimately uses. Ordered by SI magnitude
-  // (pico < nano < micro < …) so 7 < 8 < 9 reads correctly. Added in P140 so the
+  // (pico < nano < micro < ...) so 7 < 8 < 9 reads correctly. Added in P140 so the
   // ~400 raw sub-10px sizes have exact tokens to migrate to (zero visual change).
   //
   // The half-step and gap/display sizes below were added in the visual-budget
   // burn-down (P120 close-out) so EVERY raw inline fontSize in the screen UI has
-  // an exact token to route through — keyed by size so the migration is
+  // an exact token to route through - keyed by size so the migration is
   // pixel-identical (zero visual change). The curated t-shirt steps above remain
   // the preferred vocabulary for new code; a future pass can consolidate the
   // dense legacy sizes onto them. Until then these let the no-raw-fontsize rule
@@ -429,12 +438,12 @@ export const legacy = Object.freeze({
     '7.5': 7.5, '8.5': 8.5, '9.5': 9.5, '10.5': 10.5, '11.5': 11.5, '12.5': 12.5, '13.5': 13.5,
     '14': 14, '14.5': 14.5, '16': 16, '18': 18, '22': 22, '26': 26, '28': 28, '32': 32, '36': 36,
   },
-  // ELEV — the 3-tier elevation (box-shadow) scale, exposed to legacy
+  // ELEV - the 3-tier elevation (box-shadow) scale, exposed to legacy
   // importers. 1 = default cards, 2 = hover/sticky chrome, 3 = modals/popovers.
   // Added in P141/V-4 so components stop inventing bespoke shadows.
   ELEV: elevation,
 
-  // Layout — shared page content widths (see `layout` above). Added so every
+  // Layout - shared page content widths (see `layout` above). Added so every
   // top-level page references one cap instead of inventing its own narrow
   // column. PAGE_MAX for content pages, PROSE_MAX for reading columns inside
   // them, FORM_MAX for genuine forms that should stay narrow.

@@ -1,10 +1,10 @@
 /**
- * stripe.js — Client-side Stripe checkout integration.
+ * stripe.js - Client-side Stripe checkout integration.
  *
  * Calls the Supabase Edge Function to create a Checkout session,
  * then redirects to Stripe's hosted checkout page.
  *
- * No Stripe SDK needed on the client — we just redirect to the URL.
+ * No Stripe SDK needed on the client - we just redirect to the URL.
  *
  * Catalog data (packs, tiers, single-dossier) lives in
  * `src/config/pricing.js`. This module pulls the active set via
@@ -14,6 +14,7 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { getActivePacks, findPackByKey, SINGLE_DOSSIER } from '../config/pricing.js';
+import { fetchCreditBalanceFromLedger } from './creditLedger.js';
 
 // PRODUCTS preserves the historical shape (object keyed by product id)
 // so existing imports (PurchaseModal, AccountPage) keep working. The
@@ -27,7 +28,7 @@ function buildProductsMap() {
       key:       'premium',
       name:      'Premium Upgrade',
       price:     '$6/mo',
-      credits:   0,
+      credits:   30,
       perCredit: null,
       discount:  null,
     },
@@ -43,7 +44,7 @@ function buildProductsMap() {
       key:       'founder_lifetime',
       name:      'Founder Lifetime',
       price:     '$99 one-time',
-      credits:   0,
+      credits:   30,
       perCredit: null,
       discount:  null,
     },
@@ -64,11 +65,11 @@ const PRODUCTS = new Proxy({}, {
 
 /**
  * Create a Stripe Checkout session and redirect.
- * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
+ * @param {string} product - A key from the active PRODUCTS catalog or a legacy pack key.
  */
 export async function startCheckout(product) {
   if (!isConfigured) {
-    throw new Error('Supabase not configured — cannot process payments in local mode');
+    throw new Error('Supabase not configured - cannot process payments in local mode');
   }
   // Allow legacy product keys (credits_5/15/40) too, even when the
   // catalog has been rotated, so refund/replay links don't 404.
@@ -76,7 +77,7 @@ export async function startCheckout(product) {
     throw new Error(`Unknown product: ${product}`);
   }
 
-  // Tier 7.4 — single-dossier checkout is anonymous-allowed (per
+  // Tier 7.4 - single-dossier checkout is anonymous-allowed (per
   // pricing.js SINGLE_DOSSIER.requiresAccount=false). All other
   // products still require auth because they grant ongoing account
   // benefits (subscription, founder seat, credit pack) that need a
@@ -96,6 +97,23 @@ export async function startCheckout(product) {
   if (!data?.url) throw new Error('No checkout URL returned');
 
   // Redirect to Stripe
+  window.location.href = data.url;
+}
+
+/** Create a Stripe Billing Portal session and redirect the signed-in user. */
+export async function startCustomerPortal() {
+  if (!isConfigured) {
+    throw new Error('Supabase not configured - cannot manage billing in local mode');
+  }
+
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) throw new Error('You must be signed in to manage billing');
+
+  const { data, error } = await supabase.functions.invoke('create-customer-portal', {
+    body: {},
+  });
+  if (error) throw new Error(error.message || 'Billing portal failed');
+  if (!data?.url) throw new Error('No billing portal URL returned');
   window.location.href = data.url;
 }
 
@@ -127,6 +145,12 @@ export async function fetchCreditBalance() {
 
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return 0;
+
+  try {
+    return await fetchCreditBalanceFromLedger();
+  } catch {
+    // Legacy fallback below.
+  }
 
   const { data, error } = await supabase
     .from('profiles')

@@ -1,4 +1,9 @@
+import { TIER_ORDER } from '../../data/constants.js';
+
 const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+
+const stablePart = (value) =>
+  String(value || "unknown").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
 
 const RELATIONSHIP_DEFAULTS = {
   neutral: {
@@ -45,6 +50,15 @@ const RELATIONSHIP_DEFAULTS = {
     fear: 0.32,
     tradeBalance: 0.38,
     pactStrength: 0.45,
+  },
+  vassal: {
+    trust: 0.34,
+    resentment: 0.48,
+    dependency: 0.82,
+    leverage: 0.82,
+    fear: 0.48,
+    tradeBalance: 0.32,
+    pactStrength: 0.58,
   },
   rival: {
     trust: 0.24,
@@ -115,6 +129,13 @@ export const RELATIONSHIP_RULE_MATRIX = {
     "client_appeals_for_protection",
     "client_debt_spiral",
   ],
+  vassal: [
+    "vassal_tribute_extraction",
+    "vassal_protection_burden",
+    "vassal_stability_compact",
+    "vassal_rebellion_pressure",
+    "vassal_rebellion_resolution",
+  ],
   rival: [
     "rival_arms_race",
     "rival_sabotage",
@@ -147,6 +168,8 @@ const TYPE_ALIASES = {
   ally: "allied",
   war: "hostile",
   enemy: "hostile",
+  subject: "vassal",
+  tributary: "vassal",
   criminal_corridor: "criminal_network",
 };
 
@@ -332,6 +355,96 @@ const internalDrift = (ctx, candidateType, details) => candidateBase({ ...ctx, .
 
 const hasRecentIncident = (relState, type, tick, cooldown = 2) =>
   (relState.recentIncidents || []).some((incident) => incident.type === type && tick - (incident.tick || 0) <= cooldown);
+
+function itemFor(snapshot, saveId) {
+  return snapshot?.byId?.get?.(String(saveId)) || null;
+}
+
+function tierRankFor(item) {
+  const tier = item?.settlement?.tier || "village";
+  const rank = TIER_ORDER.indexOf(tier);
+  return rank >= 0 ? rank : TIER_ORDER.indexOf("village");
+}
+
+function populationFor(item) {
+  return Math.max(0, Number(item?.settlement?.population) || 0);
+}
+
+function settlementStrength(item, pressure = {}) {
+  const pop = populationFor(item);
+  const popScore = Math.min(1, Math.log10(Math.max(10, pop)) / 5);
+  return clamp01(
+    tierRankFor(item) / Math.max(1, TIER_ORDER.length - 1) * 0.42
+    + popScore * 0.22
+    + (1 - (pressure.conflict || 0)) * 0.18
+    + (1 - (pressure.trade || 0)) * 0.1
+    + (1 - (pressure.legitimacy || 0)) * 0.08,
+  );
+}
+
+function canSubjugate(ctx) {
+  const settlements = getRelationshipSettlements(ctx.edge);
+  const source = itemFor(ctx.snapshot, settlements.from);
+  const target = itemFor(ctx.snapshot, settlements.to);
+  if (!source || !target) return false;
+  const sourceRank = tierRankFor(source);
+  const targetRank = tierRankFor(target);
+  if (sourceRank < targetRank) return false;
+  if (sourceRank === targetRank && populationFor(source) < populationFor(target) * 0.72) return false;
+  const sourceStrength = settlementStrength(source, ctx.sourcePressure);
+  const targetStrength = settlementStrength(target, ctx.targetPressure);
+  return sourceStrength >= targetStrength * 0.82;
+}
+
+function activeRebellionAgainstVassal(snapshot, vassalId) {
+  return (snapshot?.worldState?.stressors || []).some(stressor =>
+    stressor?.type === "rebellion"
+    && (stressor.affectedSettlementIds || []).map(String).includes(String(vassalId))
+    && !["resolved", "dormant"].includes(stressor.status),
+  );
+}
+
+function sharedHostileThird(snapshot, a, b) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const hostileToA = new Set();
+  const hostileToB = new Set();
+  for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const key = relationshipKeyFromEdge(edge);
+    const state = ensureRelationshipState(edge, states[key]);
+    if (!["hostile", "cold_war"].includes(state.relationshipType)) continue;
+    const s = getRelationshipSettlements(edge);
+    if (String(s.from) === String(a)) hostileToA.add(String(s.to));
+    if (String(s.to) === String(a)) hostileToA.add(String(s.from));
+    if (String(s.from) === String(b)) hostileToB.add(String(s.to));
+    if (String(s.to) === String(b)) hostileToB.add(String(s.from));
+  }
+  return [...hostileToA].find(id => hostileToB.has(id)) || null;
+}
+
+function sharedEnemyAllianceCandidate(ctx) {
+  const settlements = getRelationshipSettlements(ctx.edge);
+  if (!settlements.from || !settlements.to) return null;
+  if (["allied", "hostile", "cold_war", "vassal"].includes(ctx.relState.relationshipType)) return null;
+  const enemyId = sharedHostileThird(ctx.snapshot, settlements.from, settlements.to);
+  if (!enemyId) return null;
+  const trustGate = ctx.relState.trust + ctx.relState.pactStrength * 0.4 - ctx.relState.resentment * 0.35;
+  if (trustGate < 0.22) return null;
+  return labelProposal(ctx, "allied", "shared_enemy_alliance", {
+    ruleId: "shared_enemy_alliance",
+    severity: clamp01(0.42 + trustGate * 0.24 + Math.max(ctx.sourcePressure.conflict, ctx.targetPressure.conflict) * 0.22),
+    probability: clamp01(0.08 + trustGate * 0.16 + Math.max(ctx.sourcePressure.conflict, ctx.targetPressure.conflict) * 0.14),
+    reasons: [
+      "Both settlements are independently threatened by the same hostile power, making alliance plausible.",
+      `Common hostile settlement: ${enemyId}.`,
+    ],
+    relationshipPatch: {
+      trust: clamp01(ctx.relState.trust + 0.07),
+      pactStrength: clamp01(ctx.relState.pactStrength + 0.16),
+      trajectory: "aligning",
+    },
+    metadata: { commonEnemySaveId: enemyId },
+  });
+}
 
 function neutralRules(ctx) {
   const { relState, sourcePressure, targetPressure, tick } = ctx;
@@ -729,6 +842,174 @@ function clientRules(ctx) {
   return candidates;
 }
 
+function vassalRules(ctx) {
+  const { edge, relState, sourcePressure, targetPressure, tick } = ctx;
+  const settlements = getRelationshipSettlements(edge);
+  const overlordId = settlements.from;
+  const vassalId = settlements.to;
+  const vassalStrain = mean(targetPressure.legitimacy, targetPressure.trade, targetPressure.conflict, relState.resentment);
+  const overlordWeakness = mean(sourcePressure.conflict, sourcePressure.legitimacy, sourcePressure.trade);
+  const candidates = [];
+
+  candidates.push(
+    candidateBase({
+      ...ctx,
+      candidateType: "vassal_tribute_extraction",
+      ruleId: "vassal_tribute_extraction",
+      type: "condition",
+      targetSaveId: vassalId,
+      severity: clamp01(0.28 + relState.leverage * 0.32 + relState.dependency * 0.18),
+      probability: 0.14 + relState.leverage * 0.18,
+      reasons: [
+        "Vassalage creates recurring tribute, legal concessions, and military obligation.",
+        "The overlord benefits structurally, but the vassal's local economy and legitimacy are strained.",
+      ],
+      relationshipPatch: {
+        resentment: clamp01(relState.resentment + 0.035),
+        dependency: clamp01(relState.dependency + 0.025),
+        leverage: clamp01(relState.leverage + 0.025),
+        tradeBalance: clamp01(relState.tradeBalance - 0.025),
+        pactStrength: clamp01(relState.pactStrength + 0.015),
+        overlordSaveId: overlordId,
+        vassalSaveId: vassalId,
+        trajectory: "extractive",
+      },
+      condition: {
+        archetype: "vassal_extraction",
+        label: "Vassal extraction",
+        description: "Tribute, levies, or legal concessions are draining local capacity.",
+        severity: clamp01(0.28 + relState.leverage * 0.32 + relState.dependency * 0.18),
+        status: "stable",
+        triggeredAt: { tick, sourceEventType: "WORLD_PULSE_VASSALAGE", sourceEventTargetId: overlordId },
+        affectedSystems: ["trade_connectivity", "public_legitimacy", "faction_power", "defense_readiness"],
+        causes: [{ source: relationshipKeyFromEdge(edge), effect: "vassal_extraction", reason: "A vassal relationship transfers value upward." }],
+      },
+      metadata: { incidentType: "vassal_extraction", overlordSaveId: overlordId, vassalSaveId: vassalId },
+    }),
+  );
+
+  if (targetPressure.conflict > 0.38 || targetPressure.crime > 0.42) {
+    candidates.push(
+      internalDrift(ctx, "vassal_protection_burden", {
+        ruleId: "vassal_protection_burden",
+        severity: clamp01(0.26 + Math.max(targetPressure.conflict, targetPressure.crime) * 0.4),
+        probability: 0.1 + relState.pactStrength * 0.16,
+        reasons: ["The overlord has incentive to protect the vassal, but protection deepens obligation and dependence."],
+        relationshipPatch: {
+          militaryBurden: clamp01(relState.militaryBurden + 0.05),
+          dependency: clamp01(relState.dependency + 0.04),
+          fear: clamp01(relState.fear + 0.02),
+          trust: clamp01(relState.trust + 0.015),
+        },
+        metadata: { incidentType: "vassal_protection" },
+      }),
+    );
+  }
+
+  const rebellionActive = activeRebellionAgainstVassal(ctx.snapshot, vassalId);
+  const stableVassalage = clamp01(relState.trust * 0.34 + relState.pactStrength * 0.28 + (1 - vassalStrain) * 0.38);
+  if (!rebellionActive && stableVassalage > 0.55 && !hasRecentIncident(relState, "stable_vassalage", tick, 3)) {
+    candidates.push(
+      internalDrift(ctx, "vassal_stability_compact", {
+        ruleId: "vassal_stability_compact",
+        severity: clamp01(0.24 + stableVassalage * 0.32),
+        probability: clamp01(0.08 + stableVassalage * 0.18),
+        reasons: [
+          "The vassalage is burdensome, but trust, protection, and low strain make a stable compact plausible.",
+          `Stable compact gate ${stableVassalage.toFixed(2)} with strain ${vassalStrain.toFixed(2)}.`,
+        ],
+        relationshipPatch: {
+          trust: clamp01(relState.trust + 0.045),
+          resentment: clamp01(relState.resentment - 0.035),
+          dependency: clamp01(relState.dependency + 0.015),
+          pactStrength: clamp01(relState.pactStrength + 0.04),
+          obligationFatigue: clamp01((relState.obligationFatigue || 0) - 0.035),
+          trajectory: "stable_vassalage",
+        },
+        metadata: { incidentType: "stable_vassalage", overlordSaveId: overlordId, vassalSaveId: vassalId, stableVassalage },
+      }),
+    );
+  }
+
+  if (!rebellionActive && vassalStrain > 0.55) {
+    const severity = clamp01(0.42 + vassalStrain * 0.36 + (1 - relState.trust) * 0.12);
+    candidates.push({
+      id: `candidate.vassal.rebellion.${stablePart(relationshipKeyFromEdge(edge))}.${tick}`,
+      type: "stressor",
+      candidateType: "vassal_rebellion",
+      ruleId: "vassal_rebellion_pressure",
+      ruleFamily: "relationship",
+      relationshipKey: relationshipKeyFromEdge(edge),
+      targetSaveId: vassalId,
+      severity,
+      probability: clamp01(0.05 + vassalStrain * 0.22 + relState.resentment * 0.12),
+      applyMode: severity >= 0.72 ? "proposal" : "auto",
+      headline: `Rebellion may rise in ${itemFor(ctx.snapshot, vassalId)?.name || vassalId}`,
+      summary: "Vassal extraction, low legitimacy, and poor defenses create an independence crisis.",
+      reasons: [
+        `Vassal strain ${vassalStrain.toFixed(2)} with resentment ${relState.resentment.toFixed(2)}.`,
+        "A rebellion can end vassalage if it succeeds, but it does not erase prior structural changes.",
+      ],
+      stressor: {
+        id: `world_stressor.rebellion.${stablePart(vassalId)}.${tick}`,
+        type: "rebellion",
+        label: "Rebellion pressure",
+        originSettlementId: vassalId,
+        severity,
+        affectedSettlementIds: [vassalId],
+        durationPolicy: "episodic",
+        residualEffects: ["reprisal_memory", "autonomy_cells", "broken_tax_obligations"],
+        spreadChannels: ["information_flow", "political_authority", "criminal_corridor"],
+      },
+      metadata: { overlordSaveId: overlordId, vassalSaveId: vassalId, relationshipKey: relationshipKeyFromEdge(edge) },
+      conflictTags: [`stressor:rebellion:${vassalId}`, `relationship:${relationshipKeyFromEdge(edge)}`],
+    });
+  }
+
+  if (rebellionActive) {
+    const successPressure = clamp01(vassalStrain + overlordWeakness * 0.45 - relState.fear * 0.2);
+    if (successPressure > 0.48) {
+      candidates.push(
+        labelProposal(ctx, "rival", "vassal_rebellion_succeeds", {
+          ruleId: "vassal_rebellion_resolution",
+          severity: clamp01(0.46 + successPressure * 0.36),
+          probability: clamp01(0.06 + successPressure * 0.24),
+          reasons: [
+            "The rebellion has a plausible path to break vassalage.",
+            "Prior economic, factional, and power changes remain as scars rather than reverting.",
+          ],
+          relationshipPatch: {
+            resentment: clamp01(relState.resentment + 0.05),
+            dependency: clamp01(relState.dependency - 0.12),
+            leverage: clamp01(relState.leverage - 0.12),
+            fear: clamp01(relState.fear - 0.04),
+            trajectory: "broken",
+          },
+          metadata: { overlordSaveId: overlordId, vassalSaveId: vassalId, rebellionOutcome: "succeeds" },
+        }),
+      );
+    } else {
+      candidates.push(
+        internalDrift(ctx, "vassal_rebellion_quashed", {
+          ruleId: "vassal_rebellion_resolution",
+          severity: clamp01(0.34 + (1 - successPressure) * 0.28),
+          probability: clamp01(0.08 + (1 - successPressure) * 0.18),
+          reasons: ["The overlord has enough coercive advantage to quash the rebellion for now."],
+          relationshipPatch: {
+            resentment: clamp01(relState.resentment + 0.04),
+            fear: clamp01(relState.fear + 0.08),
+            dependency: clamp01(relState.dependency + 0.03),
+            trajectory: "suppressed",
+          },
+          metadata: { incidentType: "rebellion_quashed", overlordSaveId: overlordId, vassalSaveId: vassalId },
+        }),
+      );
+    }
+  }
+
+  return candidates;
+}
+
 function rivalRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.resentment);
@@ -903,20 +1184,27 @@ function hostileRules(ctx) {
     }),
   );
 
-  if (powerGap > 0.48 && conflictStress > 0.55) {
+  if (powerGap > 0.48 && conflictStress > 0.55 && canSubjugate(ctx)) {
     candidates.push(
-      labelProposal(ctx, "client", "hostile_occupation_pressure", {
+      labelProposal(ctx, "vassal", "hostile_occupation_pressure", {
         ruleId: "hostile_occupation_pressure",
         severity: 0.52 + powerGap * 0.24 + conflictStress * 0.22,
         probability: 0.04 + powerGap * 0.14 + conflictStress * 0.12,
-        reasons: ["A hostile imbalance can create occupation, tribute, or forced clientage pressure."],
+        reasons: ["A hostile imbalance can create occupation, tribute, or forced vassalage pressure."],
         relationshipPatch: {
           dependency: clamp01(relState.dependency + 0.08),
           fear: clamp01(relState.fear + 0.08),
           leverage: clamp01(relState.leverage + 0.08),
+          trust: clamp01(relState.trust - 0.02),
+          overlordSaveId: getRelationshipSettlements(ctx.edge).from,
+          vassalSaveId: getRelationshipSettlements(ctx.edge).to,
           trajectory: "subjugating",
         },
-        metadata: { powerGap },
+        metadata: {
+          powerGap,
+          overlordSaveId: getRelationshipSettlements(ctx.edge).from,
+          vassalSaveId: getRelationshipSettlements(ctx.edge).to,
+        },
       }),
     );
   }
@@ -1053,6 +1341,7 @@ const RULE_EVALUATORS = {
   allied: alliedRules,
   patron: patronRules,
   client: clientRules,
+  vassal: vassalRules,
   rival: rivalRules,
   cold_war: coldWarRules,
   hostile: hostileRules,
@@ -1084,7 +1373,7 @@ export function evaluateRelationshipRules(snapshot, pressureIdx, context = {}) {
     const settlements = getRelationshipSettlements(edge);
     const sourcePressure = buildPressureSummary(pressureIdx, settlements.from);
     const targetPressure = buildPressureSummary(pressureIdx, settlements.to);
-    return evaluator({
+    const ctx = {
       edge,
       relState,
       sourcePressure,
@@ -1092,7 +1381,11 @@ export function evaluateRelationshipRules(snapshot, pressureIdx, context = {}) {
       pressureIdx,
       snapshot,
       tick,
-    });
+    };
+    return [
+      ...evaluator(ctx),
+      sharedEnemyAllianceCandidate(ctx),
+    ].filter(Boolean);
   });
 }
 

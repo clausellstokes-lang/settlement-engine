@@ -1,4 +1,4 @@
--- Settlement Generator — Initial Schema
+-- Settlement Generator - Initial Schema
 -- Run this in your Supabase SQL Editor or via supabase db push
 
 -- ── User profiles (extends auth.users) ──────────────────────────────────────

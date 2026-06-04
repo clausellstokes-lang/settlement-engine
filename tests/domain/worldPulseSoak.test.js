@@ -4,7 +4,7 @@ import { advanceCampaignWorld } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { deriveAllActiveConditions } from '../../src/domain/activeConditions.js';
 
-// A long-horizon "soak" test — the feel/balance analog of the generator's
+// A long-horizon "soak" test - the feel/balance analog of the generator's
 // distribution test. We advance a small region many ticks and assert the world
 // stays plausible: it keeps producing events (alive) but doesn't explode
 // (bounded) or peg every settlement into permanent all-crisis.
@@ -41,7 +41,7 @@ function save(id, name, seed) {
   };
 }
 
-describe('world pulse — long-horizon soak / balance', () => {
+describe('world pulse - long-horizon soak / balance', () => {
   test('40 ticks across 5 settlements stays bounded, alive, and stable', () => {
     const ids = ['a', 'b', 'c', 'd', 'e'];
     let saves = ids.map((id, i) => save(id, `Town-${id.toUpperCase()}`, i + 1));

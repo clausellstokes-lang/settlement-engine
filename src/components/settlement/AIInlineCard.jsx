@@ -1,5 +1,5 @@
 /**
- * AIInlineCard — Contextual AI affordance, mounted right below the
+ * AIInlineCard - Contextual AI affordance, mounted right below the
  * dossier title.
  *
  * The audit's framing: AI should not be the first thing the product
@@ -12,7 +12,7 @@
  *   - the user dismisses it (one click; persists for the session)
  *   - there's no settlement to polish
  *
- * The CTA wires to the existing AI invocation flow — this is purely
+ * The CTA wires to the existing AI invocation flow - this is purely
  * about presentation, not a new code path.
  */
 
@@ -27,7 +27,7 @@ import { COPY } from '../../copy/strings.js';
 /**
  * @param {Object} props
  * @param {Object} props.settlement
- * @param {() => void} props.onPolish        invoked on CTA click — wired by the parent
+ * @param {() => void} props.onPolish        invoked on CTA click - wired by the parent
  *   to the appropriate AI handler (typically `requestNarrative(saveId)` from
  *   the AI slice). The card stays handler-agnostic so callers can route to
  *   different flows (raw narrative, progression, daily life) without
@@ -61,7 +61,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
         fontFamily: 'system-ui, -apple-system, sans-serif',
         color: swatch.inkMag,
       }}>
-        Polish this draft with AI — costs {creditCost} credit{creditCost === '1' ? '' : 's'},
+        Polish this draft with AI - costs {creditCost} credit{creditCost === '1' ? '' : 's'},
         streams section by section. Partial failures keep your raw draft intact, and you can
         revert to raw any time.
       </p>

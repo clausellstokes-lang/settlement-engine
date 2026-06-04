@@ -1,5 +1,5 @@
 /**
- * components/auth/RegisterPage.jsx — the dedicated /register route.
+ * components/auth/RegisterPage.jsx - the dedicated /register route.
  *
  * Sign-up twin of SignInPage. AuthPanel starts in 'signup' mode with tabs
  * hidden; if the project requires email confirmation the panel flips to its
@@ -35,7 +35,7 @@ export default function RegisterPage() {
   return (
     <AuthPageShell
       title="Create your account"
-      subtitle="Free to start — save your work, push to larger sizes, and link settlements."
+      subtitle="Free to start - save your work, push to larger sizes, and link settlements."
       footer={
         <span>
           Already have an account?{' '}

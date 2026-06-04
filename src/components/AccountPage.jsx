@@ -1,5 +1,5 @@
 /**
- * AccountPage.jsx — Full-page account management.
+ * AccountPage.jsx - Full-page account management.
  *
  * Sections:
  *   - Profile (display name, email, role badge)
@@ -13,20 +13,21 @@ import { useState } from 'react';
 import {
   User, Shield, Crown, Headphones,
   ChevronRight, TrendingDown, Edit3, Check, X,
+  CreditCard, Mail, Bot,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { auth as authService } from '../lib/auth.js';
-import { startCheckout } from '../lib/stripe.js';
+import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { isConfigured, supabase } from '../lib/supabase.js';
-import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
+import { AI_MODEL_OPTIONS, getTierDisplayName, getActivePacks } from '../config/pricing.js';
 import { lazy as _lazy, Suspense as _Suspense } from 'react';
-// P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
+// P116 / X-8 - Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('./pricing/FounderTile.jsx'));
 import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, AMBER } from './theme.js';
-// P138 / AC-4 — Inline FAQ accordion. Lazy because the copy strings
+// P138 / AC-4 - Inline FAQ accordion. Lazy because the copy strings
 // are a chunky import for users who never expand the section.
 const AccountFAQ = _lazy(() => import('./account/AccountFAQ.jsx'));
 
@@ -86,6 +87,20 @@ export default function AccountPage({ onNavigateAdmin }) {
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(auth.displayName || '');
   const [nameSaving, setNameSaving] = useState(false);
+  const profileSourceKey = [
+    auth.avatarUrl || '',
+    auth.emailNotifications !== false ? 'email:on' : 'email:off',
+    auth.modelPreference || 'claude_best',
+  ].join('\u0000');
+  const [profileDraft, setProfileDraft] = useState(() => ({
+    sourceKey: profileSourceKey,
+    avatarInput: auth.avatarUrl || '',
+    emailNotifications: auth.emailNotifications !== false,
+    modelPreference: auth.modelPreference || 'claude_best',
+  }));
+  const [profileSaving, setProfileSaving] = useState(false);
+  const [profileSaved, setProfileSaved] = useState(false);
+  const [profileError, setProfileError] = useState(null);
 
   // Support form
   const [supportSubject, setSupportSubject] = useState('');
@@ -97,6 +112,23 @@ export default function AccountPage({ onNavigateAdmin }) {
   // Purchase state
   const [purchasing, setPurchasing] = useState(null);
   const [purchaseError, setPurchaseError] = useState(null);
+  const [portalBusy, setPortalBusy] = useState(false);
+
+  if (!profileSaving && profileDraft.sourceKey !== profileSourceKey) {
+    setProfileDraft({
+      sourceKey: profileSourceKey,
+      avatarInput: auth.avatarUrl || '',
+      emailNotifications: auth.emailNotifications !== false,
+      modelPreference: auth.modelPreference || 'claude_best',
+    });
+  }
+
+  const avatarInput = profileDraft.avatarInput;
+  const emailNotifications = profileDraft.emailNotifications;
+  const modelPreference = profileDraft.modelPreference;
+  const setAvatarInput = (avatarInput) => setProfileDraft(draft => ({ ...draft, avatarInput }));
+  const setEmailNotifications = (emailNotifications) => setProfileDraft(draft => ({ ...draft, emailNotifications }));
+  const setModelPreference = (modelPreference) => setProfileDraft(draft => ({ ...draft, modelPreference }));
 
   const handleSaveName = async () => {
     if (!nameInput.trim()) return;
@@ -107,12 +139,65 @@ export default function AccountPage({ onNavigateAdmin }) {
       // Force refresh auth state
       const result = await authService.getSession();
       if (result) {
-        useStore.getState().setAuth(result.user, result.session, result.tier, result.role, nameInput.trim());
+        useStore.getState().setAuth(
+          result.user,
+          result.session,
+          result.tier,
+          result.role,
+          nameInput.trim(),
+          result.isFounder,
+          result.avatarUrl,
+          result.emailNotifications,
+          result.modelPreference,
+        );
       }
     } catch (e) {
       console.error('Failed to update name:', e);
     } finally {
       setNameSaving(false);
+    }
+  };
+
+  const handleSaveProfilePreferences = async () => {
+    setProfileSaving(true);
+    setProfileSaved(false);
+    setProfileError(null);
+    try {
+      const profile = await authService.updateProfilePreferences({
+        avatarUrl: avatarInput,
+        emailNotifications,
+        modelPreference,
+      });
+      const result = await authService.getSession();
+      const next = result || { ...auth, ...profile };
+      useStore.getState().setAuth(
+        next.user || auth.user,
+        next.session || auth.session,
+        next.tier || auth.tier,
+        next.role || auth.role,
+        next.displayName || auth.displayName,
+        next.isFounder ?? auth.isFounder,
+        profile?.avatarUrl ?? next.avatarUrl ?? avatarInput,
+        profile?.emailNotifications ?? next.emailNotifications ?? emailNotifications,
+        profile?.modelPreference ?? next.modelPreference ?? modelPreference,
+      );
+      setProfileSaved(true);
+      setTimeout(() => setProfileSaved(false), 1800);
+    } catch (e) {
+      setProfileError(e.message || 'Profile update failed');
+    } finally {
+      setProfileSaving(false);
+    }
+  };
+
+  const handleManageBilling = async () => {
+    setPurchaseError(null);
+    setPortalBusy(true);
+    try {
+      await startCustomerPortal();
+    } catch (e) {
+      setPurchaseError(e.message || 'Billing portal failed');
+      setPortalBusy(false);
     }
   };
 
@@ -171,11 +256,13 @@ export default function AccountPage({ onNavigateAdmin }) {
           {/* Avatar */}
           <div style={{
             width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
-            background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
+            background: avatarInput
+              ? `center / cover no-repeat url("${avatarInput}")`
+              : `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             color: swatch.white, fontWeight: 700, fontSize: FS['22'], fontFamily: serif_,
           }}>
-            {(auth.displayName || auth.user.email || '?')[0].toUpperCase()}
+            {!avatarInput && (auth.displayName || auth.user.email || '?')[0].toUpperCase()}
           </div>
 
           <div style={{ flex: 1 }}>
@@ -223,12 +310,65 @@ export default function AccountPage({ onNavigateAdmin }) {
             </div>
           </div>
         </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, marginTop: SP.lg }}>
+          {profileError && (
+            <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+              {profileError}
+            </div>
+          )}
+          <label style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
+            Avatar URL
+            <input
+              value={avatarInput}
+              onChange={e => setAvatarInput(e.target.value)}
+              placeholder="https://..."
+              style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
+            />
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, color: SECOND, fontWeight: 700 }}>
+            <input
+              type="checkbox"
+              checked={emailNotifications}
+              onChange={e => setEmailNotifications(e.target.checked)}
+            />
+            <Mail size={14} color={GOLD} /> Email notifications
+          </label>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> AI model preference</span>
+            <select
+              value={modelPreference}
+              onChange={e => setModelPreference(e.target.value)}
+              style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD }}
+            >
+              {AI_MODEL_OPTIONS.map(option => (
+                <option key={option.key} value={option.key}>{option.label}</option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="button"
+            onClick={handleSaveProfilePreferences}
+            disabled={profileSaving}
+            style={{
+              alignSelf: 'flex-start',
+              display: 'inline-flex', alignItems: 'center', gap: SP.xs,
+              padding: `${SP.sm}px ${SP.lg}px`,
+              background: GOLD, color: swatch.white, border: 'none',
+              borderRadius: R.md, cursor: profileSaving ? 'wait' : 'pointer',
+              fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
+              opacity: profileSaving ? 0.65 : 1,
+            }}
+          >
+            <Check size={14} /> {profileSaving ? 'Saving...' : profileSaved ? 'Saved' : 'Save profile'}
+          </button>
+        </div>
       </Section>
 
       {/* ── Subscription & Credits ──────────────────────────────── */}
       <Section title={t('account.subscriptionHeading')} icon={Crown}>
         <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
-          {/* Tier card — P125 / AC-1 grows an "unlock" footer for free users. */}
+          {/* Tier card - P125 / AC-1 grows an "unlock" footer for free users. */}
           <div style={{
             flex: '1 1 180px',
             background: GOLD_BG, borderRadius: R.lg,
@@ -320,6 +460,27 @@ export default function AccountPage({ onNavigateAdmin }) {
           </div>
         </div>
 
+        {auth.tier === 'premium' && !isElevated && (
+          <div style={{ marginTop: SP.lg }}>
+            <button
+              type="button"
+              onClick={handleManageBilling}
+              disabled={portalBusy || !isConfigured}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: SP.sm,
+                padding: `${SP.sm}px ${SP.lg}px`,
+                background: CARD, color: GOLD,
+                border: `1px solid ${GOLD}`, borderRadius: R.lg,
+                cursor: portalBusy ? 'wait' : 'pointer',
+                fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
+                opacity: portalBusy ? 0.65 : 1,
+              }}
+            >
+              <CreditCard size={15} /> {portalBusy ? 'Opening billing...' : 'Manage billing'}
+            </button>
+          </div>
+        )}
+
         {/* Purchase credits (inline) */}
         {!isElevated && (
           <div style={{ marginTop: SP.lg }}>
@@ -342,11 +503,11 @@ export default function AccountPage({ onNavigateAdmin }) {
             )}
 
             <div style={{ display: 'flex', gap: SP.sm }}>
-              {/* P125 / AC-2 — Read packs from getActivePacks() so the
+              {/* P125 / AC-2 - Read packs from getActivePacks() so the
                   `packsRepriced` flag wins. Hardcoded list was bypassing
                   the flag and showing legacy 5/15/40 even when the new
                   25/60/150 catalog was active. The pack record carries
-                  its own `tier` ('starter' | 'value' | 'best') — use
+                  its own `tier` ('starter' | 'value' | 'best') - use
                   that for accent color so a future repricing doesn't
                   need a UI update. */}
               {Object.values(getActivePacks()).map(p => {
@@ -382,7 +543,7 @@ export default function AccountPage({ onNavigateAdmin }) {
           </div>
         )}
 
-        {/* P116 / X-8 — Founder Lifetime tile. Self-gates on
+        {/* P116 / X-8 - Founder Lifetime tile. Self-gates on
             audience='worldbuilder' + flag + seats-remaining > 0.
             Renders null for everyone else, so this is safe to mount
             unconditionally here. */}

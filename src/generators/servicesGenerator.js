@@ -1,6 +1,6 @@
 import { random as _rng } from './rngContext.js';
 // `priorityToCategory` was being referenced at lines 302, 303, 377, 399
-// without being imported — a latent ReferenceError waiting on the right
+// without being imported - a latent ReferenceError waiting on the right
 // code path. Caught by ESLint no-undef once we wired the lint gate.
 // Originally defined and exported from economicGenerator.js:959.
 import { priorityToCategory } from './economicGenerator.js';
@@ -12,13 +12,13 @@ import {
   priorityToMultiplier,
   hasTeleportationInfra,
 } from './helpers.js';
-import { ARCANE_INST_KW as _ARCANE_SVC_KW } from '../components/magicFilter.js';
+import { ARCANE_INST_KW as _ARCANE_SVC_KW } from '../domain/magicFilter.js';
 import { generateSafetyProfile } from './safetyProfile.js';
 import { INSTITUTION_SERVICES } from '../data/tradeGoodsData.js';
 
 /**
  * servicesGenerator.js
- * Available services generation — DEFINITIVE FILE, replace whole not parts.
+ * Available services generation - DEFINITIVE FILE, replace whole not parts.
  */
 
 // ─── Inlined cross-module helpers (cycle-free) ─────────────
@@ -334,13 +334,13 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
     if (b === 'under_siege')
       return 'All normal economic activity is suspended. Markets are closed, merchant caravans have stopped arriving, and whatever currency existed is being redirected toward survival. The only economic question is the arithmetic of remaining supplies.';
     if (b === 'famine')
-      return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense — prices are simply at levels that exclude most of the population.';
+      return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense - prices are simply at levels that exclude most of the population.';
     if (b === 'occupied')
       return `Revenue flows outward to the occupying authority via ${g === 'port' ? 'maritime levies' : 'road tolls and seizure powers'} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one.`;
     if (b === 'indebted')
       return "Debt service obligations consume a meaningful share of revenue before any local investment is possible. The creditor's representative has effective veto power over fiscal decisions. Economic activity continues but its fruits are partly spoken for before they are earned.";
     if (b === 'plague_onset')
-      return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if SEVERITY weren't compounded by the medical crisis — as SEVERITY is, each problem is making the other worse.";
+      return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if SEVERITY weren't compounded by the medical crisis - as SEVERITY is, each problem is making the other worse.";
     if (b === 'politically_fractured')
       return 'Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but SEVERITY is slower and more expensive than SEVERITY should be.';
     if (w) {
@@ -349,29 +349,29 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
       return f && !C
         ? 'This settlement is too large to survive in true isolation. Without trade routes, specialist goods cannot be sourced, surpluses cannot be sold, and population density cannot be sustained. The economy is structurally broken.'
         : f && C
-          ? 'Trade flows through magical channels — teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.'
+          ? 'Trade flows through magical channels - teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.'
           : l.stateCrime
-            ? 'Internal production is suppressed by institutional extraction — what little surplus exists flows upward rather than into communal welfare.'
+            ? 'Internal production is suppressed by institutional extraction - what little surplus exists flows upward rather than into communal welfare.'
             : m === 'very_high' || m === 'high'
-              ? 'Despite isolation, internal production is well-organised — skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.'
+              ? 'Despite isolation, internal production is well-organised - skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.'
               : m === 'low' || m === 'very_low'
                 ? 'The settlement struggles to sustain itself without outside trade. Resources are tightly rationed and growth is impossible.'
                 : 'The settlement meets its own needs without external trade, though surpluses are modest and specialist goods are unavailable.';
     }
     return l.theocraticEconomy
-      ? 'The church controls most economic activity — land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.'
+      ? 'The church controls most economic activity - land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.'
       : l.merchantCriminalBlur
         ? 'Commerce is vigorous and the distinction between legitimate trade and criminal enterprise is largely academic. The wealthiest operators play both sides.'
         : l.stateCrime
-          ? 'The official economy appears functional. The reality is that institutional extraction — confiscations, forced sales, and selective taxation — suppresses productive activity.'
+          ? 'The official economy appears functional. The reality is that institutional extraction - confiscations, forced sales, and selective taxation - suppresses productive activity.'
           : m === 'very_high'
-            ? 'Commerce is the lifeblood of this settlement — markets are active at all hours and guild influence reaches every trade.'
+            ? 'Commerce is the lifeblood of this settlement - markets are active at all hours and guild influence reaches every trade.'
             : m === 'high'
               ? 'Trade is vigorous and the guilds are well-organized, generating steady civic revenue.'
               : m === 'low'
                 ? 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.'
                 : m === 'very_low'
-                  ? 'The economy is barely functional — barter replaces coin and few outsiders bother to trade here.'
+                  ? 'The economy is barely functional - barter replaces coin and few outsiders bother to trade here.'
                   : h === 'high' || h === 'very_high'
                     ? 'Official commerce is moderate but a thriving shadow economy undercuts legitimate trade.'
                     : 'Trade proceeds at an ordinary pace for a settlement of this size.';
@@ -383,16 +383,16 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
       ? null
       : l
         ? hasTeleportationInfra(o, s)
-          ? `Food deficit of ${Math.round(r)}% is covered through magical supply chains — teleportation imports are reliable but extraordinarily expensive. Any disruption to the magical infrastructure means immediate food crisis.`
+          ? `Food deficit of ${Math.round(r)}% is covered through magical supply chains - teleportation imports are reliable but extraordinarily expensive. Any disruption to the magical infrastructure means immediate food crisis.`
           : r > 40
-            ? `Food deficit of ${Math.round(r)}% with no external trade — this settlement cannot feed itself and has no mechanism to import what SEVERITY lacks. Starvation or mass emigration is the long-term outcome without change.`
-            : `Food deficit of ${Math.round(r)}% with no external trade route — entirely dependent on local production. A poor harvest means genuine hunger.`
+            ? `Food deficit of ${Math.round(r)}% with no external trade - this settlement cannot feed itself and has no mechanism to import what SEVERITY lacks. Starvation or mass emigration is the long-term outcome without change.`
+            : `Food deficit of ${Math.round(r)}% with no external trade route - entirely dependent on local production. A poor harvest means genuine hunger.`
         : d === 'very_high' || d === 'high'
-          ? `Food deficit of ${Math.round(r)}% is covered through active grain imports — merchant networks ensure supply chain resilience.`
+          ? `Food deficit of ${Math.round(r)}% is covered through active grain imports - merchant networks ensure supply chain resilience.`
           : d === 'low'
-            ? `Food deficit of ${Math.round(r)}% is a genuine vulnerability — limited trade capacity means shortages are only one poor harvest away.`
+            ? `Food deficit of ${Math.round(r)}% is a genuine vulnerability - limited trade capacity means shortages are only one poor harvest away.`
             : d === 'very_low'
-              ? `Food deficit of ${Math.round(r)}% is a chronic crisis — without meaningful trade, famine is a recurring threat.`
+              ? `Food deficit of ${Math.round(r)}% is a chronic crisis - without meaningful trade, famine is a recurring threat.`
               : null;
   },
   _Rv = (r, s = {}, o = []) => {
@@ -404,24 +404,24 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
       const g = Math.round((l / d) * 100);
       return ((s == null ? void 0 : s.tradeRouteAccess) || 'road') === 'isolated'
         ? hasTeleportationInfra(o, s)
-          ? `Food deficit of ${g}% managed through magical supply chains — teleportation imports fill the gap at great cost. Magical infrastructure failure means immediate famine.`
-          : `Food deficit of ${g}% with no trade access — the settlement cannot import what SEVERITY lacks. This is a structural survival problem.`
+          ? `Food deficit of ${g}% managed through magical supply chains - teleportation imports fill the gap at great cost. Magical infrastructure failure means immediate famine.`
+          : `Food deficit of ${g}% with no trade access - the settlement cannot import what SEVERITY lacks. This is a structural survival problem.`
         : h === 'very_high' || h === 'high'
-          ? `Food deficit of ${g}% is actively managed through trade — merchant networks provide reliable grain imports, but the cost is a permanent economic drag.`
+          ? `Food deficit of ${g}% is actively managed through trade - merchant networks provide reliable grain imports, but the cost is a permanent economic drag.`
           : h === 'low' || h === 'very_low'
-            ? `Food deficit of ${g}% is a genuine crisis — without strong trade infrastructure, the settlement teeters on the edge of seasonal famine.`
+            ? `Food deficit of ${g}% is a genuine crisis - without strong trade infrastructure, the settlement teeters on the edge of seasonal famine.`
             : `Food deficit of ${g}% requires consistent grain imports. Any disruption to supply becomes a survival threat.`;
     }
     if (m > 0) {
       const g = Math.round((m / d) * 100);
       return g > 50
-        ? `Agricultural surplus of ${g}% above daily needs — this settlement is a net grain exporter and could weather a poor harvest.`
-        : `Modest food surplus of ${g}% — sufficient buffer against a bad harvest, with some grain available for trade.`;
+        ? `Agricultural surplus of ${g}% above daily needs - this settlement is a net grain exporter and could weather a poor harvest.`
+        : `Modest food surplus of ${g}% - sufficient buffer against a bad harvest, with some grain available for trade.`;
     }
-    return 'Food production is in rough balance with population needs — no significant surplus or deficit.';
+    return 'Food production is in rough balance with population needs - no significant surplus or deficit.';
   };
 
-// SERVICE_TIER_CHANCE — base probability modifier per settlement tier
+// SERVICE_TIER_CHANCE - base probability modifier per settlement tier
 
 const _UPGRADE_CHAINS = {
   thorp: {
@@ -766,7 +766,7 @@ export const SERVICE_TIER_DATA = {
 
 const SERVICE_TIER_CHANCE = { thorp: 0.25, hamlet: 0.35, village: 0.5, town: 0.65, city: 0.8, metropolis: 0.95 };
 
-// Custom-content dependency surface — institution.produces declarations
+// Custom-content dependency surface - institution.produces declarations
 import { customDeps as _customDeps } from '../lib/dependencyEngine.js';
 
 /**
@@ -807,7 +807,7 @@ const getServicesForInstitution = (r, s, o = {}) => {
   // Custom-content extension: any services declared via `produces` augment
   // (or, for unknown custom institutions, replace) the prebuilt service set.
   const _customServices = _customProducedServices(r, s, o);
-  // Exact match first — avoids fuzzy collision between e.g. "Contract killer" and "Contract Killer"
+  // Exact match first - avoids fuzzy collision between e.g. "Contract killer" and "Contract Killer"
   // Case-insensitive lookup: find the canonical key even if caller passes wrong case
   const _exactKey = !l && Object.keys(INSTITUTION_SERVICES).find((k) => k.toLowerCase() === r.toLowerCase());
   if (_exactKey) {
@@ -1474,7 +1474,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
       h = (A, S) => {
         const y = A.toLowerCase(),
           v = S.toLowerCase();
-        // Explicit lookup first — covers all 260 known services unambiguously
+        // Explicit lookup first - covers all 260 known services unambiguously
         const _mapped = SERVICE_CATEGORY_MAP[A];
         if (_mapped) return _mapped;
         return y === 'lodging' ||
@@ -2052,7 +2052,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         },
         {
           name: 'Disappear quietly',
-          desc: 'Those who know the right people can arrange to vanish from the official register — for a price.',
+          desc: 'Those who know the right people can arrange to vanish from the official register - for a price.',
         },
         {
           name: 'Intelligence on officials',
@@ -2094,11 +2094,11 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
           },
           {
             name: 'Unlicensed enchantment',
-            desc: 'Practitioners working outside guild oversight — cheaper, less traceable, and legally inadvisable.',
+            desc: 'Practitioners working outside guild oversight - cheaper, less traceable, and legally inadvisable.',
           },
           {
             name: 'Magical forgery',
-            desc: 'Identification papers, writs, and seals with genuine magical authentication — fraudulently applied.',
+            desc: 'Identification papers, writs, and seals with genuine magical authentication - fraudulently applied.',
           },
         ].forEach((A) => {
           l.criminal.some((S) => S.name === A.name) ||
@@ -2132,7 +2132,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         [
           {
             name: 'Unofficial arbitration',
-            desc: 'Commercial disputes resolved outside the courts — faster, cheaper, and more reliably enforced.',
+            desc: 'Commercial disputes resolved outside the courts - faster, cheaper, and more reliably enforced.',
           },
           {
             name: 'Gray market goods',
@@ -2167,7 +2167,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
       T.has('Survival crime') &&
         M(
           'Fence (word of mouth)',
-          'No questions asked — stolen goods move through back channels for a fraction of value.',
+          'No questions asked - stolen goods move through back channels for a fraction of value.',
           '(covert)'
         ),
       T.has('Street gang activity') &&
@@ -2178,7 +2178,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         ),
         M(
           'Muscle for hire',
-          'Rough up a target, intimidate a debtor, move a problem — informal, no contract.',
+          'Rough up a target, intimidate a debtor, move a problem - informal, no contract.',
           '(street gang)'
         )),
       T.has('Smuggling') &&
@@ -2190,7 +2190,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
       T.has('Magical crime') &&
         M(
           'Arcane services (illicit)',
-          'Magical practitioners outside guild oversight — identity work, scrying, targeted effects. Available if you know where to ask.',
+          'Magical practitioners outside guild oversight - identity work, scrying, targeted effects. Available if you know where to ask.',
           '(arcane underground)'
         ),
       T.has('Lawlessness') &&
@@ -2205,7 +2205,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
           '(informal)'
         )),
       T.has('Organized guild crime') &&
-        M('Fence (stolen goods)', 'Move recovered goods, no questions — expect 30-50% of value.', '(thieves guild)'),
+        M('Fence (stolen goods)', 'Move recovered goods, no questions - expect 30-50% of value.', '(thieves guild)'),
       T.has('Background crime') &&
         M(
           'Fence (word of mouth)',

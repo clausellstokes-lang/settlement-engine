@@ -1,5 +1,5 @@
 /**
- * domain/causalViews.js — Multiple causal views over one settlement.
+ * domain/causalViews.js - Multiple causal views over one settlement.
  *
  * Tier 5.7 of the roadmap. The same dossier, filtered through 7
  * different causal lenses. Each view is a pure derivation that
@@ -13,13 +13,13 @@
  *   }
  *
  * Views:
- *   narrative      — simulation spine + daily-life slots
- *   simulation     — substrate + capacities (the structural read)
- *   delta          — recent event-log entries / regen deltas
- *   faction        — faction profiles + relationships
- *   supply_chain   — chain states + dependencies
- *   timeline       — history beats + recent disruption + clocks
- *   district       — district profiles
+ *   narrative      - simulation spine + daily-life slots
+ *   simulation     - substrate + capacities (the structural read)
+ *   delta          - recent event-log entries / regen deltas
+ *   faction        - faction profiles + relationships
+ *   supply_chain   - chain states + dependencies
+ *   timeline       - history beats + recent disruption + clocks
+ *   district       - district profiles
  *
  * Pure read-only.
  */
@@ -85,7 +85,7 @@ function viewDelta(settlement) {
   return {
     eventLog: recent,
     summary: recent.length
-      ? recent.map(e => `${e.appliedAt || '—'}: ${e.event?.type || 'unknown'} — ${e.narrativeSummary || 'no narrative'}`)
+      ? recent.map(e => `${e.appliedAt || '-'}: ${e.event?.type || 'unknown'} - ${e.narrativeSummary || 'no narrative'}`)
       : ['No applied events yet.'],
   };
 }
@@ -105,7 +105,7 @@ function viewSupplyChain(settlement) {
   return {
     chains,
     summary: chains.length
-      ? chains.map(c => `${c.name} — ${c.status}. Controller: ${c.controller || 'unattributed'}.`)
+      ? chains.map(c => `${c.name} - ${c.status}. Controller: ${c.controller || 'unattributed'}.`)
       : ['No supply chains on this settlement.'],
   };
 }
@@ -118,7 +118,7 @@ function viewTimeline(settlement) {
     if (beat) lines.push(`${beat.label}: ${beat.text}`);
   }
   for (const clock of clocks) {
-    lines.push(`Clock — ${clock.label}: ${clock.triggerDescription}`);
+    lines.push(`Clock - ${clock.label}: ${clock.triggerDescription}`);
   }
   return {
     historyBeats: beats,

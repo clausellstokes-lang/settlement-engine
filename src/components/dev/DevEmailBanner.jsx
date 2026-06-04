@@ -1,5 +1,5 @@
 /**
- * DevEmailBanner.jsx — Floating dev-only warning when Resend secrets are
+ * DevEmailBanner.jsx - Floating dev-only warning when Resend secrets are
  * missing on Supabase.
  *
  * Renders nothing in production (gated on import.meta.env.DEV). In DEV
@@ -9,7 +9,7 @@
  * a slim banner with the exact `supabase secrets set` commands.
  *
  * Why a UI banner and not just a console.warn:
- * Lifecycle emails are fire-and-forget — they fail silently in
+ * Lifecycle emails are fire-and-forget - they fail silently in
  * production by design (a Resend outage must not break sign-in). The
  * cost of that design is that a contributor who never sets the secrets
  * locally won't notice the lifecycle is broken until QA. The banner
@@ -29,7 +29,7 @@ const DISMISS_KEY = 'sf.devEmailBanner.dismissed';
 const IS_DEV = !!import.meta?.env?.DEV;
 
 export default function DevEmailBanner() {
-  // Hooks must always run in the same order — early-return AFTER hooks.
+  // Hooks must always run in the same order - early-return AFTER hooks.
   // In prod the constant `IS_DEV` short-circuits before render returns
   // any markup; React still calls hooks, but with stable defaults so
   // there's no rules-of-hooks violation.
@@ -63,7 +63,7 @@ export default function DevEmailBanner() {
 
   const dismiss = () => {
     setDismissed(true);
-    try { localStorage.setItem(DISMISS_KEY, '1'); } catch { /* storage unavailable — accept the redraw */ }
+    try { localStorage.setItem(DISMISS_KEY, '1'); } catch { /* storage unavailable - accept the redraw */ }
   };
 
   return (

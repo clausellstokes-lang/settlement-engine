@@ -27,7 +27,7 @@ function makeState(values) {
   return out;
 }
 
-// Arbitrary for one full SystemState — values 0..100 per dim.
+// Arbitrary for one full SystemState - values 0..100 per dim.
 const stateArb = fc.record({
   resilience:       fc.integer({ min: 0, max: 100 }),
   volatility:       fc.integer({ min: 0, max: 100 }),

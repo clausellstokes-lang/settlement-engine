@@ -4,7 +4,7 @@
  * (full data + runtime closures, used by the engine pipeline).
  *
  * If someone adds a stressor to one and forgets the other, the
- * Compendium UI silently drops the new stressor — this catches that.
+ * Compendium UI silently drops the new stressor - this catches that.
  */
 
 import { describe, test, expect } from 'vitest';

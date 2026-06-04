@@ -1,5 +1,5 @@
 /**
- * tests/domain/explanation.test.js — Tier 2.6 unified causal lookup.
+ * tests/domain/explanation.test.js - Tier 2.6 unified causal lookup.
  *
  * Pins:
  *   - explainEntity dispatcher routes by type prefix (institution., faction.,
@@ -187,7 +187,7 @@ describe('ExplanationEnvelope shape', () => {
     assertEnvelope(explainInstitution(s, 'institution.granary'));
     assertEnvelope(explainFaction(s, 'faction.town_council'));
     assertEnvelope(explainNpc(s, 'npc.captain_rusk'));
-    // The chain id we'd derive — find it from the catalog.
+    // The chain id we'd derive - find it from the catalog.
     const chains = entityCatalog(s).filter(e => e.type === 'chain');
     if (chains.length) {
       assertEnvelope(explainSupplyChain(s, chains[0].id));
@@ -428,7 +428,7 @@ describe('entityCatalog()', () => {
   it('enumerates every explainable entity', () => {
     const cat = entityCatalog(fixtureSettlement());
     // Institutions, factions, NPCs, chains, conditions, hooks, history
-    // beats, system variables — at least one of each from the fixture.
+    // beats, system variables - at least one of each from the fixture.
     const types = new Set(cat.map(e => e.type));
     expect(types.has('institution')).toBe(true);
     expect(types.has('faction')).toBe(true);
@@ -480,7 +480,7 @@ describe('explainEntity() does not mutate', () => {
 
 // ── Real-settlement integration ────────────────────────────────────────
 
-describe('explainEntity() — real generated settlement', () => {
+describe('explainEntity() - real generated settlement', () => {
   it('produces non-trivial envelopes against a real city-tier settlement', () => {
     const settlement = generateSettlementPipeline(
       { settType: 'city', culture: 'germanic' },
@@ -500,7 +500,7 @@ describe('explainEntity() — real generated settlement', () => {
       expect(env, `${type} ${entries[0].id}`).toBeTruthy();
       expect(env.entityType, `${type} envelope type`).toBe(type);
       expect(env.entityId, `${type} envelope id`).toBe(entries[0].id);
-      // Either ifRemoved consequences OR causes should be non-empty —
+      // Either ifRemoved consequences OR causes should be non-empty -
       // an entity worth listing has at least one of the two.
       const hasContent = env.ifRemoved.consequences.length > 0
         || env.causes.length > 0

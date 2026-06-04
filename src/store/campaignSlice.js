@@ -1,5 +1,5 @@
 /**
- * campaignSlice — Campaign organization for settlements and maps.
+ * campaignSlice - Campaign organization for settlements and maps.
  *
  * Campaigns are named folders that group settlements and optionally store a
  * map state. Settlements stay in the flat saves array; campaigns hold
@@ -50,7 +50,9 @@ import {
   advanceCampaignWorld as domainAdvanceCampaignWorld,
   applyPartyImpact as domainApplyPartyImpact,
   applyWorldPulseProposal as domainApplyWorldPulseProposal,
+  canonizeWorldState,
   ensureWorldState,
+  normalizeSimulationRules,
   previewCampaignWorldPulse as domainPreviewCampaignWorldPulse,
   updateProposalStatus as domainUpdateWorldPulseProposalStatus,
 } from '../domain/worldPulse/index.js';
@@ -79,7 +81,7 @@ function localWrite(campaigns, ownerId = 'anon') {
   try {
     campaignService.cache(campaigns, ownerId);
   } catch (e) {
-    // Likely quota exceeded — FMG snapshots can be large (~1MB). The caller
+    // Likely quota exceeded - FMG snapshots can be large (~1MB). The caller
     // should already have warned via canSaveSnapshot(); log and continue.
     console.warn('[campaignSlice] localStorage write failed', e);
   }
@@ -332,7 +334,7 @@ function migrateMapState(ms) {
     viewport: { cx: 0, cy: 0, scale: 1, width: 0, height: 0 },
     savedAt: ms.savedAt || new Date().toISOString(),
     // Legacy placements-as-array kept for the restore path that doesn't use
-    // fmgSnapshot — WorldMap can fall back to bridge.restorePlacements().
+    // fmgSnapshot - WorldMap can fall back to bridge.restorePlacements().
     _legacyPlacements: v1Placements,
   };
 }
@@ -341,7 +343,7 @@ export const createCampaignSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   campaigns: [],
   campaignsLoaded: false,
-  /** The currently-loaded campaign id (null if none) — used by WorldMap */
+  /** The currently-loaded campaign id (null if none) - used by WorldMap */
   activeCampaignId: null,
 
   // ── Actions ────────────────────────────────────────────────────────────────
@@ -643,22 +645,73 @@ export const createCampaignSlice = (set, get) => ({
     const state = get();
     const campaign = state.campaigns.find(c => c.id === campaignId);
     if (!campaign) return null;
+    const previewCampaign = cloneJson(campaign);
+    if (options.simulationRules) {
+      previewCampaign.worldState = {
+        ...(previewCampaign.worldState || {}),
+        simulationRules: normalizeSimulationRules(options.simulationRules),
+      };
+    }
     return domainPreviewCampaignWorldPulse({
-      campaign: cloneJson(campaign),
+      campaign: previewCampaign,
       saves: cloneJson(campaignSettlements(state, campaignId)),
       interval,
       now: options.now,
     });
   },
 
+  canonizeCampaignWorld: async (campaignId) => {
+    let campaignPersist = /** @type {any} */ (null);
+    const now = new Date().toISOString();
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      c.worldState = canonizeWorldState(c.worldState, now, c);
+      c.updatedAt = now;
+      campaignPersist = cacheCampaignState(state);
+    });
+    if (campaignPersist) {
+      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+    }
+    return campaignPersist?.snapshot?.find(c => c.id === campaignId)?.worldState || null;
+  },
+
+  updateCampaignSimulationRules: async (campaignId, patch = {}) => {
+    let campaignPersist = /** @type {any} */ (null);
+    const now = new Date().toISOString();
+    set(state => {
+      const c = state.campaigns.find(c => c.id === campaignId);
+      if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      c.worldState = {
+        ...worldState,
+        simulationRules: normalizeSimulationRules({
+          ...(worldState.simulationRules || {}),
+          ...(patch || {}),
+        }),
+      };
+      c.updatedAt = now;
+      campaignPersist = cacheCampaignState(state);
+    });
+    if (campaignPersist) {
+      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+    }
+    return campaignPersist?.snapshot?.find(c => c.id === campaignId)?.worldState?.simulationRules || null;
+  },
+
   advanceCampaignWorld: async (campaignId, interval = 'one_month', options = {}) => {
-    let result = null;
+    let result = /** @type {any} */ (null);
     let persistUpdates = [];
-    let campaignPersist = null;
+    let campaignPersist = /** @type {any} */ (null);
     const now = options.now || new Date().toISOString();
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
       if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      if (!worldState.canonizedAt) {
+        result = { ok: false, reason: 'world_not_canonized' };
+        return;
+      }
       result = domainAdvanceCampaignWorld({
         campaign: cloneJson(c),
         saves: cloneJson(campaignSettlements(state, campaignId)),
@@ -678,9 +731,9 @@ export const createCampaignSlice = (set, get) => ({
   },
 
   applyWorldPulseProposal: async (campaignId, proposalId) => {
-    let result = null;
+    let result = /** @type {any} */ (null);
     let persistUpdates = [];
-    let campaignPersist = null;
+    let campaignPersist = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
@@ -708,9 +761,9 @@ export const createCampaignSlice = (set, get) => ({
   // condition, move a faction/NPC) as an authoritative, party-tagged pulse
   // input. Persists like advanceCampaignWorld.
   recordPartyImpact: async (campaignId, action) => {
-    let result = null;
+    let result = /** @type {any} */ (null);
     let persistUpdates = [];
-    let campaignPersist = null;
+    let campaignPersist = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
@@ -734,8 +787,8 @@ export const createCampaignSlice = (set, get) => ({
   },
 
   dismissWorldPulseProposal: async (campaignId, proposalId) => {
-    let proposal = null;
-    let campaignPersist = null;
+    let proposal = /** @type {any} */ (null);
+    let campaignPersist = /** @type {any} */ (null);
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
       if (!c) return;
@@ -755,7 +808,7 @@ export const createCampaignSlice = (set, get) => ({
   },
 
   applyQueuedRegionalImpact: (campaignId, impactId) => {
-    let result = null;
+    let result = /** @type {any} */ (null);
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
       if (!c) return;
@@ -820,7 +873,7 @@ export const createCampaignSlice = (set, get) => ({
   },
 
   resolveRegionalImpact: (campaignId, impactId) => {
-    let result = null;
+    let result = /** @type {any} */ (null);
     set(state => {
       const c = state.campaigns.find(c => c.id === campaignId);
       if (!c) return;

@@ -1,15 +1,15 @@
 /**
- * tests/security/profile_escalation.test.js — Profile escalation prevention.
+ * tests/security/profile_escalation.test.js - Profile escalation prevention.
  *
  * Two layers of testing live here:
  *
- *   1. CLIENT-SIDE — pure assertions about how src/lib/auth.js calls
+ *   1. CLIENT-SIDE - pure assertions about how src/lib/auth.js calls
  *      supabase. We stub the supabase client and verify the RPC path is
  *      tried first, the table-update fallback runs only on RPC failure,
  *      and the user_metadata mirror always fires. This catches client
  *      regressions where we accidentally route around the RPC.
  *
- *   2. SERVER-SIDE (commented-only) — pgTAP-style SQL assertions that
+ *   2. SERVER-SIDE (commented-only) - pgTAP-style SQL assertions that
  *      verify migration 009's policy actually blocks role/tier/credits/
  *      is_founder updates. These can't run from Vitest (they need a real
  *      Postgres + supabase CLI). They're written here as a runnable

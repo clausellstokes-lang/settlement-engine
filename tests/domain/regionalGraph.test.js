@@ -1,5 +1,5 @@
 /**
- * tests/domain/regionalGraph.test.js — Tier 4.13 lean tests.
+ * tests/domain/regionalGraph.test.js - Tier 4.13 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

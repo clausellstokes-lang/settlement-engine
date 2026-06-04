@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * howToInversion.test.jsx — P126 / HT-1 contract.
+ * howToInversion.test.jsx - P126 / HT-1 contract.
  *
  * The How-To "Quick Start" tab historically opened on a five-paragraph
  * concept essay, burying the actionable "First settlement in 60 seconds"
@@ -22,12 +22,12 @@ const ESSAY_ANCHOR = /A settlement generator that thinks/;
 const ESSAY_TEXT = 'A settlement generator that thinks';
 const CODA_HEADER = 'Why it works this way';
 
-describe('HowToUse — HT-1 Quick Start inversion', () => {
+describe('HowToUse - HT-1 Quick Start inversion', () => {
   afterEach(() => cleanup());
 
   it('inverted: steps lead, essay is demoted under a "Why it works this way" coda', () => {
     const { container } = render(<HowToUse />);
-    // Both halves still render — nothing is lost in the reorder.
+    // Both halves still render - nothing is lost in the reorder.
     expect(screen.getByText(STEPS_ANCHOR)).toBeTruthy();
     expect(screen.getByText(ESSAY_ANCHOR)).toBeTruthy();
     // The coda header is the inverted-only framing for the essay.

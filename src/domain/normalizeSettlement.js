@@ -1,5 +1,5 @@
 /**
- * domain/normalizeSettlement.js — Compatibility adapter between the
+ * domain/normalizeSettlement.js - Compatibility adapter between the
  * legacy settlement shape and the canonical schema in settlement.schema.js.
  *
  * Design contract:
@@ -17,7 +17,7 @@
  * Current behavior (Phase 6 / Tier 1.3):
  *
  *   1. Stamps version fields if absent (schemaVersion, simulationVersion,
- *      generatorVersion). Existing values are preserved — never overwritten.
+ *      generatorVersion). Existing values are preserved - never overwritten.
  *
  *   2. Stamps `id` if absent. Deterministic from `_seed` when available
  *      (so the same seed always produces the same id); falls back to a
@@ -36,7 +36,7 @@
  *   5. Does NOT yet restructure into the nested target shape
  *      (`identity`, `geography`, etc.). That migration is deferred until
  *      consumers are ready in a future iteration. Today the adapter is
- *      purely additive — every legacy field stays where it is.
+ *      purely additive - every legacy field stays where it is.
  *
  * Future behavior (deferred):
  *   - Lift name/tier/culture/genre into `identity` substructure.
@@ -55,7 +55,7 @@ import { migrateSettlementToLatest } from './settlementMigrations.js';
 
 /**
  * Hash a seed string into a stable, opaque id. Same seed → same id.
- * Not cryptographically strong — just a deterministic short identifier
+ * Not cryptographically strong - just a deterministic short identifier
  * that survives reruns of the same seed.
  */
 function idFromSeed(seed) {
@@ -77,7 +77,7 @@ function idFromSeed(seed) {
 }
 
 function randomId() {
-  // Non-crypto random id for settlements without a seed (very rare —
+  // Non-crypto random id for settlements without a seed (very rare -
   // mostly imported/mock data). 16 hex chars to match the seed-derived form.
   const hex = Math.floor(Math.random() * 0xffffffff).toString(16).padStart(8, '0');
   const hex2 = Math.floor(Math.random() * 0xffffffff).toString(16).padStart(8, '0');
@@ -98,15 +98,15 @@ function resolveAliased(settlement, canonicalKey) {
 }
 
 /**
- * Convert a settlement (any shape — legacy, partially-canonical, fully
+ * Convert a settlement (any shape - legacy, partially-canonical, fully
  * canonical) into a canonical settlement.
  *
  * @param {Object} settlement
- * @returns {Object} New object — input is not mutated.
+ * @returns {Object} New object - input is not mutated.
  */
 export function normalizeSettlement(settlement) {
   if (!settlement || typeof settlement !== 'object') {
-    // Defensive — callers should never pass nullish, but if they do we
+    // Defensive - callers should never pass nullish, but if they do we
     // return a minimal valid canonical shape rather than crashing.
     return {
       schemaVersion:     SCHEMA_VERSION,

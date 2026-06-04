@@ -1,5 +1,5 @@
 /**
- * tests/domain/normalizeSettlement.test.js — Settlement-shape adapter contract.
+ * tests/domain/normalizeSettlement.test.js - Settlement-shape adapter contract.
  *
  * The adapter is the boundary between today's pipeline output and the
  * canonical schema. Every claim about it (idempotent, lossless on
@@ -58,7 +58,7 @@ describe('normalizeSettlement()', () => {
   it('resolves the stressors canonical from the legacy `stress` alias', () => {
     const out = normalizeSettlement(sampleLegacy());
     expect(out.stressors).toBe('plague');
-    // Legacy alias is preserved — old readers still work.
+    // Legacy alias is preserved - old readers still work.
     expect(out.stress).toBe('plague');
   });
 
@@ -87,7 +87,7 @@ describe('normalizeSettlement()', () => {
     expect(out.userCanon).toEqual({});
   });
 
-  it('is idempotent — normalize(normalize(s)) deep-equals normalize(s)', () => {
+  it('is idempotent - normalize(normalize(s)) deep-equals normalize(s)', () => {
     const once  = normalizeSettlement(sampleLegacy());
     const twice = normalizeSettlement(once);
     expect(twice).toEqual(once);

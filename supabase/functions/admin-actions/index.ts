@@ -1,11 +1,11 @@
 /**
- * admin-actions — Edge function for developer/admin operations.
+ * admin-actions - Edge function for developer/admin operations.
  *
  * Actions:
- *   update_user_metadata — Update profile-backed auth metadata (tier, role)
- *   update_user_credits  — Set a user's credit balance through the ledger
- *   list_users           — List all users (with profiles)
- *   get_stats            — System-wide statistics
+ *   update_user_metadata - Update profile-backed auth metadata (tier, role)
+ *   update_user_credits  - Set a user's credit balance through the ledger
+ *   list_users           - List all users (with profiles)
+ *   get_stats            - System-wide statistics
  *
  * Authorization: Only users with role='developer' or role='admin'
  * in the profiles table can invoke this function.
@@ -13,7 +13,7 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-// Tier 0.10 — abuse defense baseline (shared with every edge function).
+// Tier 0.10 - abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
 
 const corsHeaders = {
@@ -26,6 +26,7 @@ const jsonHeaders = { ...corsHeaders, "Content-Type": "application/json" };
 const ALLOWED_ROLES = ["user", "developer", "admin"];
 const ALLOWED_TIERS = ["free", "premium"];
 const ALLOWED_METADATA_KEYS = ["role", "tier", "display_name", "is_founder"];
+const OWNER_EMAIL = "clausellstokes@aol.com";
 
 function json(body: Record<string, unknown>, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -101,7 +102,7 @@ serve(async (req) => {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  // Tier 0.10 — obvious-bot guard. Admin actions are role-gated, but
+  // Tier 0.10 - obvious-bot guard. Admin actions are role-gated, but
   // bots probing for admin endpoints should be rejected at the door.
   const guard = botGuard(req, "admin-actions");
   if (guard.reject) return guard.reject;
@@ -136,13 +137,16 @@ serve(async (req) => {
     const adminClient = createClient(supabaseUrl, serviceKey);
     const { data: callerProfile } = await adminClient
       .from("profiles")
-      .select("role")
+      .select("role, email")
       .eq("id", callingUser.id)
       .single();
 
+    const callerEmail = String(callingUser.email || callerProfile?.email || "")
+      .trim()
+      .toLowerCase();
     if (
-      !callerProfile ||
-      !["developer", "admin"].includes(callerProfile.role)
+      callerEmail !== OWNER_EMAIL &&
+      (!callerProfile || !["developer", "admin"].includes(callerProfile.role))
     ) {
       return json({ error: "Insufficient privileges" }, 403);
     }

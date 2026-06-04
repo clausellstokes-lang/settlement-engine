@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/RegenerationModeSelector.test.jsx — Tier 5.2 surface tests.
+ * tests/ui/RegenerationModeSelector.test.jsx - Tier 5.2 surface tests.
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
@@ -33,7 +33,7 @@ function fixture() {
   };
 }
 
-describe('RegenerationModeSelector — initial render', () => {
+describe('RegenerationModeSelector - initial render', () => {
   test('renders the three mode chips', () => {
     render(<RegenerationModeSelector settlement={fixture()} />);
     // Use role=radio to disambiguate from the Confirm button which
@@ -66,7 +66,7 @@ describe('RegenerationModeSelector — initial render', () => {
   });
 });
 
-describe('RegenerationModeSelector — mode switching', () => {
+describe('RegenerationModeSelector - mode switching', () => {
   test('clicking a chip flips aria-checked', () => {
     render(<RegenerationModeSelector settlement={fixture()} />);
     fireEvent.click(screen.getByRole('radio', { name: /Reforge/i }));
@@ -89,7 +89,7 @@ describe('RegenerationModeSelector — mode switching', () => {
   });
 });
 
-describe('RegenerationModeSelector — plan preview', () => {
+describe('RegenerationModeSelector - plan preview', () => {
   test('shows non-zero preserve count when entities are user-authored or locked', () => {
     const { container } = render(<RegenerationModeSelector settlement={fixture()} />);
     // The Rebalance default preserves canon + locked; with our fixture
@@ -110,7 +110,7 @@ describe('RegenerationModeSelector — plan preview', () => {
   });
 });
 
-describe('RegenerationModeSelector — actions', () => {
+describe('RegenerationModeSelector - actions', () => {
   test('cancel button fires onCancel', () => {
     const onCancel = vi.fn();
     render(<RegenerationModeSelector settlement={fixture()} onCancel={onCancel} />);

@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/CanonBadge.test.jsx — Tier 5.3 surface tests.
+ * tests/ui/CanonBadge.test.jsx - Tier 5.3 surface tests.
  */
 
 import { describe, test, expect, afterEach } from 'vitest';
@@ -10,7 +10,7 @@ import { CanonBadge } from '../../src/components/primitives/CanonBadge.jsx';
 
 afterEach(cleanup);
 
-describe('CanonBadge — silent default', () => {
+describe('CanonBadge - silent default', () => {
   test('renders nothing for generated + draft entities (the silent majority)', () => {
     const { container } = render(<CanonBadge entity={{ id: 'x', name: 'X' }} />);
     expect(container.firstChild).toBeNull();
@@ -25,7 +25,7 @@ describe('CanonBadge — silent default', () => {
   });
 });
 
-describe('CanonBadge — populated variants', () => {
+describe('CanonBadge - populated variants', () => {
   test('user-authored entity renders the user chip', () => {
     render(<CanonBadge entity={{ id: 'x', name: 'X', _authored: true }} />);
     expect(screen.getByText(/user-authored/i)).toBeTruthy();
@@ -52,7 +52,7 @@ describe('CanonBadge — populated variants', () => {
   });
 });
 
-describe('CanonBadge — lock indicator', () => {
+describe('CanonBadge - lock indicator', () => {
   test('shows lock icon when entity is locked AND showLock=true (default)', () => {
     render(<CanonBadge entity={{ id: 'x', name: 'X', _authored: true, locked: true }} />);
     // The role=status outer span carries the entire chip content.
@@ -73,7 +73,7 @@ describe('CanonBadge — lock indicator', () => {
   });
 });
 
-describe('CanonBadge — verbose mode', () => {
+describe('CanonBadge - verbose mode', () => {
   test('verbose=true forces a chip even for generated+draft', () => {
     render(<CanonBadge entity={{ id: 'x', name: 'X' }} verbose />);
     // Verbose default chip uses "source·status" text.
@@ -81,7 +81,7 @@ describe('CanonBadge — verbose mode', () => {
   });
 });
 
-describe('CanonBadge — accessibility', () => {
+describe('CanonBadge - accessibility', () => {
   test('exposes role=status', () => {
     render(<CanonBadge entity={{ id: 'x', name: 'X', _authored: true }} />);
     expect(screen.getByRole('status')).toBeTruthy();

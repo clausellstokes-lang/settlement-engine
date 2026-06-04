@@ -1,5 +1,5 @@
 /**
- * tests/domain/regenerationMode.test.js — Tier 5.2 lean tests.
+ * tests/domain/regenerationMode.test.js - Tier 5.2 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

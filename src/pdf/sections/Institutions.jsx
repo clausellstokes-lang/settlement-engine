@@ -1,12 +1,12 @@
 /**
- * Institutions — chapter 08b. The factional/political map of who runs what:
+ * Institutions - chapter 08b. The factional/political map of who runs what:
  * government, military, religious, economy, magic, crafts, infrastructure,
  * defense, entertainment, adventuring, criminal.
  *
  * Layout: per-category header (with status counts), then a 2-column grid of
  * institution cards. Each card shows status, leadership, building, and a
  * tight summary with hooks and pressures. Splitting Services vs.
- * Institutions keeps each chapter focused — Services is the player-facing
+ * Institutions keeps each chapter focused - Services is the player-facing
  * "what can I buy" page, Institutions is the DM-facing "who's in charge" page.
  */
 import { View, Text } from '@react-pdf/renderer';

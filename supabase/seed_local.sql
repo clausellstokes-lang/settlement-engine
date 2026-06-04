@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- seed_local.sql — Per-deployment bootstrap data.
+-- seed_local.sql - Per-deployment bootstrap data.
 --
 -- This file is NOT part of the canonical migration sequence. It exists so the
 -- maintainer of a specific deployment can seed their own owner account,
@@ -11,13 +11,13 @@
 --   2. Run against your project once after migrations are applied:
 --        psql "$DATABASE_URL" -f supabase/seed_local.sql
 --      (or paste into the Supabase SQL editor for a one-off run).
---   3. Do NOT commit your filled-in copy — keep your changes in a private
+--   3. Do NOT commit your filled-in copy - keep your changes in a private
 --      branch or apply directly. The file in the repo stays template-clean.
 --
 -- Values to replace:
---   <OWNER_UUID>   — auth.users.id of the deploying maintainer's account.
+--   <OWNER_UUID>   - auth.users.id of the deploying maintainer's account.
 --                    Get this by signing in once, then `select auth.uid();`.
---   <SUPPORT_EMAIL> — the inbox that contact-form submissions email to.
+--   <SUPPORT_EMAIL> - the inbox that contact-form submissions email to.
 -- ────────────────────────────────────────────────────────────────────────────
 
 -- Grant the owner account the developer role + a display name.

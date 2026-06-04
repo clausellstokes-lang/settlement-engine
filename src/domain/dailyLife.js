@@ -1,5 +1,5 @@
 /**
- * domain/dailyLife.js — Daily-life prose grounded in structural state.
+ * domain/dailyLife.js - Daily-life prose grounded in structural state.
  *
  * Tier 4.19 of the roadmap. The most consumed output a dossier
  * produces is the "what is life like here?" prose. Until Phase 22,
@@ -16,7 +16,7 @@
  *   - Phase 20 threats (typed pressures, visibility)
  *   - Phase 21 capacity model (supply vs demand for 9 capacities)
  *
- * The 8 canonical daily-life slots — the same shape as Phase 12
+ * The 8 canonical daily-life slots - the same shape as Phase 12
  * history beats so consumers render them the same way:
  *
  *   food_culture           What people eat / who controls grain
@@ -32,7 +32,7 @@
  * arrays so the UI can let the user click through to the explainEntity
  * envelope for any cited subsystem (Phase 19).
  *
- * No imports from src/lib. No mutation. No AI — this is the pre-AI
+ * No imports from src/lib. No mutation. No AI - this is the pre-AI
  * substrate the AI overlay later grounds in.
  */
 
@@ -78,7 +78,7 @@ const SLOT_LABELS = Object.freeze({
 //
 // references[] is an array of structured pointers (id + type + label)
 // that consumers can hand to Phase 19's explainEntity. The deriver
-// always produces a slot — even when data is thin, it falls back to
+// always produces a slot - even when data is thin, it falls back to
 // a generic but truthful line.
 
 function snakeCase(s) {
@@ -137,7 +137,7 @@ function deriveDawnWork(s, ctx) {
 
   let text;
   if (labor.band === 'collapsed' || labor.band === 'critical') {
-    text = 'The streets are quieter than they should be — too few hands, too many tasks.';
+    text = 'The streets are quieter than they should be - too few hands, too many tasks.';
   } else if (craft.band === 'surplus' && dominantCraftPower >= 25) {
     text = 'Smithy fires light before sunrise; guild-callers move from shop to shop, and apprentices haul water before the bell.';
   } else if (dominantMerchantPower >= 30) {
@@ -176,8 +176,8 @@ function deriveGatheringPlaces(s, _ctx) {
   }
 
   const text = places.length
-    ? `By midday people are gathered at ${places.join(', ')} — talking, trading, and watching.`
-    : 'People gather where they can — the well, the bridge, the open square.';
+    ? `By midday people are gathered at ${places.join(', ')} - talking, trading, and watching.`
+    : 'People gather where they can - the well, the bridge, the open square.';
 
   return slot('gathering_places', text, 'institutions matched by category pattern', refs);
 }
@@ -206,7 +206,7 @@ function threatWarning(threat) {
     case 'siege':               return 'staying close when the bells ring three times';
     case 'rival_neighbor':      return `anything bearing the colors of the neighbour`;
     case 'plague':              return 'the sick-house and unfamiliar coughs';
-    case 'famine':              return 'wandering off — bread is short';
+    case 'famine':              return 'wandering off - bread is short';
     case 'corruption':          return 'talking to officials they don\'t know';
     case 'unrest':              return 'crowds that gather quickly';
     case 'arcane_instability':  return 'shimmering air and unfamiliar lights';
@@ -278,12 +278,12 @@ function deriveOutsiderImpressions(s, ctx) {
     refs.push({ id: top.id, label: top.label, type: 'threat' });
   }
   if (strainedCaps.length >= 3) {
-    parts.push('several civic services run short — visitors notice missing watch, slow service, or shuttered shops');
+    parts.push('several civic services run short - visitors notice missing watch, slow service, or shuttered shops');
   }
 
   const text = parts.length
     ? `Outsiders notice ${parts.join('; ')}.`
-    : 'The settlement reads to outsiders as ordinary — quiet streets, predictable bells, faces that don\'t yet know yours.';
+    : 'The settlement reads to outsiders as ordinary - quiet streets, predictable bells, faces that don\'t yet know yours.';
 
   return slot('outsider_impressions', text, 'dominant faction + top threat + strained capacities', refs);
 }
@@ -349,7 +349,7 @@ function deriveRecentChanges(s, ctx) {
 
   const text = changes.length
     ? `Recent changes: ${changes.join('; ')}.`
-    : 'The last few seasons have run their usual course — no notable shifts in the rhythm of the place.';
+    : 'The last few seasons have run their usual course - no notable shifts in the rhythm of the place.';
 
   return slot('recent_changes', text, 'history.recentDisruption + new conditions + acute threats', refs);
 }
@@ -406,7 +406,7 @@ function buildContext(settlement) {
 export function deriveDailyLifeSlot(key, settlement) {
   if (!key || !DERIVERS[key]) return null;
   if (!settlement) {
-    return slot(key, '—', 'no settlement', []);
+    return slot(key, '-', 'no settlement', []);
   }
   const ctx = buildContext(settlement);
   return DERIVERS[key](settlement, ctx);
@@ -423,7 +423,7 @@ export function deriveDailyLifeSlot(key, settlement) {
 export function deriveDailyLife(settlement) {
   if (!settlement) {
     const empty = {};
-    for (const key of DAILY_LIFE_SLOTS) empty[key] = slot(key, '—', 'no settlement', []);
+    for (const key of DAILY_LIFE_SLOTS) empty[key] = slot(key, '-', 'no settlement', []);
     return { slots: empty, summary: [] };
   }
   const ctx = buildContext(settlement);
@@ -452,8 +452,8 @@ export function supportedDailyLifeSlots() {
 // ── compareDailyLife ────────────────────────────────────────────────────
 //
 // Diff two daily-life envelopes. Returns one entry per slot whose
-// text changed. Useful for the Phase 23 counterfactual tool — "after
-// removing the granary, food_culture changed from X to Y" — and for
+// text changed. Useful for the Phase 23 counterfactual tool - "after
+// removing the granary, food_culture changed from X to Y" - and for
 // Tier 5.1 (causal delta summaries after regeneration).
 
 /**

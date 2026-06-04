@@ -1,5 +1,5 @@
 /**
- * TableView.jsx — P142 / D-6 phone-optimized "at the table" view.
+ * TableView.jsx - P142 / D-6 phone-optimized "at the table" view.
  *
  * A ~380px single-column takeover for running a settlement live during a
  * session. Where the dossier is the wide read-at-home surface, this is the
@@ -12,11 +12,11 @@
  * column there can never drift apart.
  *
  * Presentational + a close affordance:
- *   props.settlement — the settlement to run (raw or AI-refined; caller picks)
- *   props.onClose    — () => dismiss the overlay
+ *   props.settlement - the settlement to run (raw or AI-refined; caller picks)
+ *   props.onClose    - () => dismiss the overlay
  *
  * Esc and backdrop-click both close. Self-gating (flag + the tableViewOpen
- * pref) is the caller's job — OutputContainer only mounts this when
+ * pref) is the caller's job - OutputContainer only mounts this when
  * flag('tableView') && userPrefs.tableViewOpen, so this component renders
  * unconditionally when present.
  */
@@ -47,7 +47,7 @@ const KIND_ACCENT = { NPC: GREEN, HOOK: AMBER, TWIST: VIOLET, RED };
 const KIND_LABEL = { NPC: 'NPC', HOOK: 'HOOK', TWIST: 'TWIST', RED: 'RED' };
 
 export default function TableView({ settlement, onClose }) {
-  // Esc closes — mirrors HelpPopover. Registered unconditionally because the
+  // Esc closes - mirrors HelpPopover. Registered unconditionally because the
   // caller only mounts TableView when it should be open.
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose?.(); };

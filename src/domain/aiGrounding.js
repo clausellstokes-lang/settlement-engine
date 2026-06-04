@@ -1,8 +1,8 @@
 /**
- * domain/aiGrounding.js — AI prompt grounding envelope.
+ * domain/aiGrounding.js - AI prompt grounding envelope.
  *
  * Tier 6.1 of the roadmap. The AI overlay must be grounded in the
- * simulator's structured facts — never inventing names, facts, or
+ * simulator's structured facts - never inventing names, facts, or
  * relationships. Phase 46 composes every Tier 2-5 derivation into a
  * single envelope the prompt assembler stringifies:
  *
@@ -10,20 +10,20 @@
  *     identity,         id/name/tier/seed/versions
  *     spine,            7-line simulation spine (P7)
  *     bands: {
- *       substrate,      P17 — variable → band
- *       capacities,     P21 — capacity → band
+ *       substrate,      P17 - variable → band
+ *       capacities,     P21 - capacity → band
  *     },
- *     factions,         P9 — wants/fears/leverage/vulnerabilities
- *     chains,           P10 — status / controller / beneficiaries / victims
- *     conditions,       P16 — archetype / severity / affected systems
- *     threats,          P20 — severity / current stage / visibility
- *     npcs,             P13 — dominant rank, archetype, removal impact
- *     history,          P12 — 7 canonical beats
- *     hooks,            P11 — top-N by severity
- *     contradictions,   P25 — structural anomalies + justifications
- *     dailyLife,        P22 — 8 slots
- *     districts,        P29 — wealth / safety / tension / hook per district
- *     region,           P30 — typed neighbour graph
+ *     factions,         P9 - wants/fears/leverage/vulnerabilities
+ *     chains,           P10 - status / controller / beneficiaries / victims
+ *     conditions,       P16 - archetype / severity / affected systems
+ *     threats,          P20 - severity / current stage / visibility
+ *     npcs,             P13 - dominant rank, archetype, removal impact
+ *     history,          P12 - 7 canonical beats
+ *     hooks,            P11 - top-N by severity
+ *     contradictions,   P25 - structural anomalies + justifications
+ *     dailyLife,        P22 - 8 slots
+ *     districts,        P29 - wealth / safety / tension / hook per district
+ *     region,           P30 - typed neighbour graph
  *     constraints: {
  *       forbidden,      what the AI MUST NOT do
  *       lockedEntities, P33 canon-tagged entities preserved
@@ -34,13 +34,10 @@
  * Pure read-only. Composes every Phase 7+ derivation; no mutation.
  *
  * Architectural fit:
- *   - The edge function `supabase/functions/generate-narrative` is
- *     today the prompt builder. It currently inlines its own
- *     domain extraction. Tier 6.1 makes that extraction a single,
- *     centrally-tested derivation the edge function should adopt —
- *     in this commit we ship the envelope shape + helpers; the
- *     edge function wiring is a follow-up that swaps its bespoke
- *     extraction for `buildAiGroundingPayload`.
+ *   - The edge function `supabase/functions/generate-narrative` consumes
+ *     a bundled copy of this module from `_shared/aiGroundingBundle.js`.
+ *     That keeps Deno deployment self-contained while preserving the
+ *     same centrally-tested derivation used by app-side tests.
  *   - `assemblePromptSections(payload)` returns the canonical
  *     ordering for the prompt: system instructions → dossier →
  *     user direction → output format. The order matches the
@@ -151,7 +148,7 @@ export function forbiddenChanges(settlement) {
     out.push(`MUST PRESERVE: ${e.type} "${e.label}" (locked, source: ${e.source}).`);
   }
 
-  // History beats are timeline-anchored — call them out explicitly.
+  // History beats are timeline-anchored - call them out explicitly.
   const history = deriveHistoryBeats(settlement);
   for (const [key, beat] of Object.entries(history)) {
     if (beat) out.push(`MUST PRESERVE history beat (${key}): "${beat.text}"`);
@@ -165,7 +162,7 @@ export function forbiddenChanges(settlement) {
     const entityLabel = kind === 'settlement'
       ? 'settlement'
       : `${kind} "${entity?.name || entity?.faction || `#${entityIndex}`}"`;
-    out.push(`MUST PRESERVE user-edited field (${path}) on ${entityLabel} — pass through verbatim.`);
+    out.push(`MUST PRESERVE user-edited field (${path}) on ${entityLabel} - pass through verbatim.`);
   }
 
   return out;
@@ -294,7 +291,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
 // We return these as text sections the edge function can join with
 // model-specific separators.
 
-const SYSTEM_INSTRUCTIONS = `You are a structural narrator. The dossier below is a single source of truth — every name, faction, institution, number, and relationship in the dossier is canonical. You may rewrite prose for tone and rhythm. You MUST NOT add new entities, contradict any stated fact, or rename any proper noun.`;
+const SYSTEM_INSTRUCTIONS = `You are a structural narrator. The dossier below is a single source of truth - every name, faction, institution, number, and relationship in the dossier is canonical. You may rewrite prose for tone and rhythm. You MUST NOT add new entities, contradict any stated fact, or rename any proper noun.`;
 
 const DEVELOPER_INSTRUCTIONS = `Voice: confident, unhurried. Specific over generic. Tie every descriptive line to a fact already present in the dossier. If a fact would have to be invented to make a sentence work, drop the sentence instead.`;
 

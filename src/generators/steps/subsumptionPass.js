@@ -4,7 +4,7 @@
  * Removes lesser institutions when greater ones are present.
  * 70+ rules (e.g. "banking district" subsumes "money changer").
  *
- * Extracted from generateSettlement.js lines 639–740.
+ * Extracted from generateSettlement.js lines 639-740.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -91,7 +91,7 @@ function applySubsumption(institutions, ctx = null) {
     });
   });
 
-  // Tier 2.1 — emit one trace per subsumption so the rail / AI overlay
+  // Tier 2.1 - emit one trace per subsumption so the rail / AI overlay
   // can explain why a smaller institution disappeared. The "greater"
   // institution is recorded as the cause; the lesser is the target.
   if (ctx) {
@@ -107,7 +107,7 @@ function applySubsumption(institutions, ctx = null) {
         causes: [
           { source: instId(greaterName || 'unknown'),
             effect: 'absorbed',
-            reason: `"${inst.name}" was absorbed into "${greaterName}" — the larger institution provides equivalent function.` },
+            reason: `"${inst.name}" was absorbed into "${greaterName}" - the larger institution provides equivalent function.` },
         ],
       });
     }

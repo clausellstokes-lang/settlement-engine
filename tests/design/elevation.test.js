@@ -1,5 +1,5 @@
 /**
- * elevation.test.js — P141 / V-4 contract over the elevation token scale.
+ * elevation.test.js - P141 / V-4 contract over the elevation token scale.
  *
  * Pins that the 3-tier elevation scale is real and reaches components through
  * the legacy theme shim (so `import { ELEV } from '.../theme.js'` works), and

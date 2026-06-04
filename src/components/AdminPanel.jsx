@@ -1,5 +1,5 @@
 /**
- * AdminPanel.jsx — Developer admin panel for managing users,
+ * AdminPanel.jsx - Developer admin panel for managing users,
  * credits, roles, and system configuration.
  *
  * Only accessible to users with 'developer' or 'admin' role.
@@ -9,10 +9,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   Users, Shield, Zap, Search, ChevronLeft,
-  Check, X, AlertCircle, RefreshCw, Crown,
+  Check, X, AlertCircle, RefreshCw, Crown, Flag,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
+import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
 
 function Section({ title, icon: Icon, children, actions }) {
@@ -249,7 +250,7 @@ export default function AdminPanel({ onBack }) {
   // Mount-fetch pattern: the two fetches each setState internally,
   // which trips react-hooks/set-state-in-effect under React Compiler.
   // Migrating away requires a query library (TanStack Query, SWR) or
-  // Suspense — outside the scope of this panel's one-time admin load.
+  // Suspense - outside the scope of this panel's one-time admin load.
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
     fetchUsers();
@@ -368,6 +369,10 @@ export default function AdminPanel({ onBack }) {
         <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: SP.sm, textAlign: 'center' }}>
           Click any value to edit it inline. Changes are saved immediately.
         </div>
+      </Section>
+
+      <Section title="Gallery Reports" icon={Flag}>
+        <GalleryModerationPanel />
       </Section>
 
       {/* Support Messages */}

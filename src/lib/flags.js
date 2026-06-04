@@ -1,9 +1,9 @@
 /**
- * lib/flags.js — Feature flag registry.
+ * lib/flags.js - Feature flag registry.
  *
  * Every cross-cutting product change ships behind a flag so we can
  * roll back without redeploying. The funnel + UI redesign is a big
- * change touching dozens of components — without flags, "ship it" and
+ * change touching dozens of components - without flags, "ship it" and
  * "revert it" both become multi-hour migrations.
  *
  * Resolution order (highest precedence first):
@@ -25,7 +25,7 @@
  *
  * Adding a flag: add a new entry to FLAGS below with `default` +
  * `description`. The description is shown in the dev panel and read by
- * the team — keep it short and concrete.
+ * the team - keep it short and concrete.
  */
 
 import { useSyncExternalStore } from 'react';
@@ -49,7 +49,7 @@ export const FLAGS = Object.freeze({
 
   // ── Dark-shipped / not-yet-enabled critique work ───────────────────────────
   // Each flag below gates one critique-mandated change that is NOT yet
-  // promoted to GA — defaults are false; flip to true (locally, via env, or
+  // promoted to GA - defaults are false; flip to true (locally, via env, or
   // here) to light it up. Flags that soaked default-on everywhere have been
   // removed and their on-path inlined, per the doctrine note above.
   dossierFiveTabs: {
@@ -162,7 +162,7 @@ function fromEnv(name) {
 }
 
 /**
- * Read a flag's current value. Cheap — call it inline in render code.
+ * Read a flag's current value. Cheap - call it inline in render code.
  */
 export function flag(name) {
   const decl = FLAGS[name];

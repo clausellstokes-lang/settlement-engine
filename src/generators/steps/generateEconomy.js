@@ -4,11 +4,11 @@
  * Generates economic state, spatial layout, and available services.
  * Threads neighbour economic bias into config.
  *
- * Extracted from generateSettlement.js lines 793–801.
+ * Extracted from generateSettlement.js lines 793-801.
  *
  * Tier 4.3: emits structured supply-chain traces after the legacy
  * economic generator finishes. Traces are layered on top via
- * deriveSupplyChainState — same Strangler Fig pattern Phase 7 + 9
+ * deriveSupplyChainState - same Strangler Fig pattern Phase 7 + 9
  * established. The generator itself is not refactored.
  */
 
@@ -54,7 +54,7 @@ registerStep('generateEconomy', {
   // → strained, impaired → scarce) happens in deriveSupplyChainState.
   //
   // Disrupted chains (anything except 'stable') emit different
-  // downstream targets — stable chains reinforce trade/food/etc.;
+  // downstream targets - stable chains reinforce trade/food/etc.;
   // disrupted chains erode the same subsystems. This is the seed of
   // Tier 2.4's unified causal state model.
 
@@ -64,7 +64,7 @@ registerStep('generateEconomy', {
     if (!state) continue;
 
     const causes = [];
-    // Tier baseline — same shape as other traces.
+    // Tier baseline - same shape as other traces.
     causes.push({
       source: `tier.${tier}`,
       effect: 'chain candidate',

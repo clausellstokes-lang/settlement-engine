@@ -1,5 +1,5 @@
 /**
- * Services — chapter 08a. The DM-at-table reference: "what can my players
+ * Services - chapter 08a. The DM-at-table reference: "what can my players
  * actually buy here?" Lodging, food, equipment, magic, healing, info,
  * transport, legal, employment, entertainment, criminal.
  *
@@ -7,7 +7,7 @@
  * label, count, and the buyable options as Pills. Notable absences and
  * active supply chains follow in their own panels.
  *
- * Companion chapter: Institutions (08b) — the per-category institution cards
+ * Companion chapter: Institutions (08b) - the per-category institution cards
  * with status, leadership, building, hooks, etc. Splitting them keeps each
  * page focused: this one for player-facing transactions, the other for the
  * factional/political map of who runs what.

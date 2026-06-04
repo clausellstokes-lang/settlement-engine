@@ -6,8 +6,8 @@ export const serif = { fontFamily: 'Crimson Text, Georgia, serif' };
 export const sans  = { fontFamily: 'Nunito, sans-serif' };
 
 /**
- * TabIntro — one-line italic prose-l intro shown beneath every tab title.
- * Source: UI Redesign §18.9 — sets the tone for each tab in one line.
+ * TabIntro - one-line italic prose-l intro shown beneath every tab title.
+ * Source: UI Redesign §18.9 - sets the tone for each tab in one line.
  *
  * Usage:
  *   <TabIntro tabKey="overview" />
@@ -20,7 +20,7 @@ export function TabIntro({ tabKey }) {
   const line = t(`tabs.${tabKey}`);
   // If the key is missing the t() helper returns the key string itself
   // ("tabs.overview"). Render nothing in that case rather than a broken
-  // pseudo-string — keeps adoption safe.
+  // pseudo-string - keeps adoption safe.
   if (!line || line === `tabs.${tabKey}`) return null;
   return (
     <p style={{
@@ -28,7 +28,7 @@ export function TabIntro({ tabKey }) {
       fontFamily: 'Crimson Text, Georgia, serif',
       fontSize: FS.xl,
       fontStyle: 'italic',
-      color: BODY,       // ink-600 — WCAG-passing body
+      color: BODY,       // ink-600 - WCAG-passing body
       lineHeight: 1.5,
     }}>
       {line}
@@ -102,9 +102,9 @@ export function SectionHeader({ title, count }) {
   );
 }
 
-// Stat card with left border — Ma in original
+// Stat card with left border - Ma in original
 
-// Accent card (left border) — Es in original
+// Accent card (left border) - Es in original
 
 // Basic card
 export function Card({ children, style }) {
@@ -115,9 +115,9 @@ export function Card({ children, style }) {
   );
 }
 
-// Score bar — nl in original
+// Score bar - nl in original
 
-// Power bar — j1 in original
+// Power bar - j1 in original
 
 // Stat row
 
@@ -133,9 +133,9 @@ export function Tag({ color, bg, border, children }) {
   );
 }
 
-// Role badge pill — u1 in original
+// Role badge pill - u1 in original
 
-// Influence dots — h1 in original
+// Influence dots - h1 in original
 
 // Plot hook row
 export function PlotHook({ text, source, color }) {
@@ -161,4 +161,4 @@ export function Empty({ message }) {
   return <div style={{ padding: '24px 0', textAlign: 'center', color: MUTED, fontSize: FS.md, fontStyle: 'italic' }}>{message}</div>;
 }
 
-// Summary accordion card — js in original (mobile=accordion, desktop=always open)
+// Summary accordion card - js in original (mobile=accordion, desktop=always open)

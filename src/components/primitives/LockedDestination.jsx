@@ -1,20 +1,20 @@
 /**
- * LockedDestination.jsx — Reusable "this destination sells itself" card.
+ * LockedDestination.jsx - Reusable "this destination sells itself" card.
  *
  * The critique's X-7 was explicit: locked-tier features shouldn't be
  * modal walls or quiet "upgrade to access" toasts. They should be
- * destinations the user lands on that pitch themselves — a preview
+ * destinations the user lands on that pitch themselves - a preview
  * screenshot of the actual feature + a one-paragraph value pitch + a
  * primary CTA.
  *
  * Used by:
- *   - MapWanderer.jsx       — wanderer navigates to World Map
- *   - NeighbourWanderer.jsx — wanderer navigates to Neighbour view
- *   - WorkshopLocked.jsx    — free user navigates to Workshop
- *   - VersionsTab.jsx       — already has a hand-rolled version of this;
+ *   - MapWanderer.jsx       - wanderer navigates to World Map
+ *   - NeighbourWanderer.jsx - wanderer navigates to Neighbour view
+ *   - WorkshopLocked.jsx    - free user navigates to Workshop
+ *   - VersionsTab.jsx       - already has a hand-rolled version of this;
  *                             will fold into this primitive in a follow-up.
  *
- * Self-gates on nothing — the parent decides when to render us. We're a
+ * Self-gates on nothing - the parent decides when to render us. We're a
  * pure presentation component. Fires the supplied trackEvent on mount
  * (once per session via useFunnelEvent) so the consumer doesn't need
  * to.
@@ -40,16 +40,16 @@ const serif = '"Crimson Text", Georgia, serif';
 
 /**
  * @param {Object} props
- * @param {string} props.feature                — display label ("World Map", "Workshop", etc.)
- * @param {string} props.eyebrow                — e.g. "Cartographer · Map"
- * @param {string} props.headline               — serif H2
- * @param {string} props.body                   — one-paragraph pitch
- * @param {string} [props.previewImageSrc]      — optional screenshot src
- * @param {string} [props.previewAlt]           — alt text for the screenshot
- * @param {string} [props.ctaLabel='Upgrade — $6/mo']
- * @param {Function} [props.onCta]              — defaults to opening the purchase modal
- * @param {string} [props.secondaryLink]        — optional "See sample →" link href
- * @param {string} [props.trackEvent]           — analytics event fired on mount
+ * @param {string} props.feature                - display label ("World Map", "Workshop", etc.)
+ * @param {string} props.eyebrow                - e.g. "Cartographer · Map"
+ * @param {string} props.headline               - serif H2
+ * @param {string} props.body                   - one-paragraph pitch
+ * @param {string} [props.previewImageSrc]      - optional screenshot src
+ * @param {string} [props.previewAlt]           - alt text for the screenshot
+ * @param {string} [props.ctaLabel='Upgrade - $6/mo']
+ * @param {Function} [props.onCta]              - defaults to opening the purchase modal
+ * @param {string} [props.secondaryLink]        - optional "See sample →" link href
+ * @param {string} [props.trackEvent]           - analytics event fired on mount
  */
 export default function LockedDestination({
   feature,
@@ -58,7 +58,7 @@ export default function LockedDestination({
   body,
   previewImageSrc,
   previewAlt,
-  ctaLabel = 'Upgrade — $6/mo',
+  ctaLabel = 'Upgrade - $6/mo',
   onCta,
   secondaryLink,
   trackEvent,
@@ -68,7 +68,7 @@ export default function LockedDestination({
   // Fire the mount event once per session per feature. We don't need
   // the rising-edge plumbing of useFunnelEvent here because the
   // component only mounts when the user has navigated to the locked
-  // destination — the navigation IS the rising edge.
+  // destination - the navigation IS the rising edge.
   useEffect(() => {
     if (!trackEvent) return;
     const key = `sf:locked_shown:${feature}`;
@@ -92,7 +92,7 @@ export default function LockedDestination({
   return (
     <div
       role="region"
-      aria-label={`${feature} — Cartographer feature locked`}
+      aria-label={`${feature} - Cartographer feature locked`}
       style={{
         maxWidth: 720, margin: '40px auto',
         padding: 32,

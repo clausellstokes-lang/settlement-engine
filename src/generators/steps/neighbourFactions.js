@@ -3,7 +3,7 @@
  *
  * Injects mirror and opposition factions from neighbour influence.
  *
- * Extracted from generateSettlement.js lines 804–849.
+ * Extracted from generateSettlement.js lines 804-849.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -34,7 +34,7 @@ registerStep('neighbourFactions', {
           faction:       mirrorLabel,
           category:      fType,
           power:         rng.randInt(10, 30),
-          desc:          `${mirrorLabel} — presence from ${neighbourProfile.name} (${neighbourProfile.relationshipType.replace(/_/g,' ')}).`,
+          desc:          `${mirrorLabel} - presence from ${neighbourProfile.name} (${neighbourProfile.relationshipType.replace(/_/g,' ')}).`,
           source:        'neighbour_mirror',
           neighbourName: neighbourProfile.name,
           isGoverning:   false,
@@ -67,7 +67,7 @@ registerStep('neighbourFactions', {
           faction:       opposeLabel,
           category:      fType,
           power:         rng.randInt(8, 26),
-          desc:          `${opposeLabel} — formed in reaction to ${neighbourProfile.name}'s influence.`,
+          desc:          `${opposeLabel} - formed in reaction to ${neighbourProfile.name}'s influence.`,
           source:        'neighbour_opposition',
           neighbourName: neighbourProfile.name,
           isGoverning:   false,

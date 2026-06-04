@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# SettlementForge — Full Deployment Setup
+# SettlementForge - Full Deployment Setup
 #
 # This script provisions the complete backend:
 #   1. Supabase project creation + migration
@@ -36,7 +36,7 @@ ENV_FILE="$PROJECT_DIR/.env"
 
 echo ""
 echo "═══════════════════════════════════════════════════════════════"
-echo "  SettlementForge — Deployment Setup"
+echo "  SettlementForge - Deployment Setup"
 echo "═══════════════════════════════════════════════════════════════"
 echo ""
 

@@ -1,5 +1,5 @@
 /**
- * EditableInline.jsx — Click-to-edit primitive used everywhere a single
+ * EditableInline.jsx - Click-to-edit primitive used everywhere a single
  * piece of dossier text becomes editable.
  *
  * The critique's E-1 ("the dossier is the artifact the DM edits, not a
@@ -12,7 +12,7 @@
  *   • Click → switch text → input with the same on-screen dimensions
  *     (no jump). Cursor goes to end of value.
  *   • Enter commits. Shift+Enter inserts a newline in multiline mode.
- *   • Esc cancels — value reverts to the prop, no commit fires.
+ *   • Esc cancels - value reverts to the prop, no commit fires.
  *   • Blur commits, unless `validate` rejected the value.
  *   • Empty commit reverts to last good value (no destructive empty
  *     unless `allowEmpty` is on).
@@ -25,7 +25,7 @@
  *   On a successful commit the component dispatches `trackEvent`
  *   through Funnel.track + records a `userEdit` via the existing
  *   domain/userEdits.js module IF `provenance` is provided. The
- *   provenance shape — { kind, entityId } — is the same one the
+ *   provenance shape - { kind, entityId } - is the same one the
  *   AI-overlay verifier (P49) already consumes, so edits become
  *   traceable end-to-end without a new contract.
  *
@@ -49,20 +49,20 @@ const GOLD_DIM = '#D9B566';
 
 /**
  * @typedef {Object} EditableInlineProps
- * @property {string} value                          — current text
- * @property {(v: string) => void} onCommit          — fires when committed
- * @property {() => void} [onCancel]                 — fires on Esc
+ * @property {string} value                          - current text
+ * @property {(v: string) => void} onCommit          - fires when committed
+ * @property {() => void} [onCancel]                 - fires on Esc
  * @property {(v: string) => true | string} [validate]
  *   Return true to accept, or a string error message to block.
- * @property {boolean} [multiline=false]             — textarea instead of input
- * @property {string}  [placeholder]                 — shown when empty in edit mode
- * @property {string}  [ariaLabel]                   — required for a11y if no label nearby
- * @property {React.CSSProperties} [textStyle]       — typography for the read-only display
- * @property {React.CSSProperties} [editStyle]       — overrides for the input/textarea
- * @property {boolean} [disabled=false]              — read-only (tier-gated fields)
- * @property {boolean} [allowEmpty=false]            — allow committing empty
- * @property {string}  [trackEvent]                  — analytics event on commit
- * @property {Object}  [provenance]                  — { kind, entityId } for userEdits
+ * @property {boolean} [multiline=false]             - textarea instead of input
+ * @property {string}  [placeholder]                 - shown when empty in edit mode
+ * @property {string}  [ariaLabel]                   - required for a11y if no label nearby
+ * @property {React.CSSProperties} [textStyle]       - typography for the read-only display
+ * @property {React.CSSProperties} [editStyle]       - overrides for the input/textarea
+ * @property {boolean} [disabled=false]              - read-only (tier-gated fields)
+ * @property {boolean} [allowEmpty=false]            - allow committing empty
+ * @property {string}  [trackEvent]                  - analytics event on commit
+ * @property {Object}  [provenance]                  - { kind, entityId } for userEdits
  * @property {string}  [className]
  */
 
@@ -133,7 +133,7 @@ export default function EditableInline({
     // Only fire onCommit if the value actually changed.
     if (next !== (value ?? '')) {
       if (typeof onCommit === 'function') onCommit(next);
-      // Analytics — fire-and-forget, never block the edit.
+      // Analytics - fire-and-forget, never block the edit.
       if (trackEvent) {
         import('../../lib/analytics.js').then(({ Funnel }) => {
           Funnel.track(trackEvent, {
@@ -142,7 +142,7 @@ export default function EditableInline({
           });
         }).catch(() => { /* silent */ });
       }
-      // Provenance — record into userEdits if the consumer wants tracking.
+      // Provenance - record into userEdits if the consumer wants tracking.
       if (provenance && provenance.kind && provenance.entityId) {
         import('../../domain/userEdits.js').then(mod => {
           if (typeof mod.recordEdit === 'function') {
@@ -180,7 +180,7 @@ export default function EditableInline({
     }
   };
 
-  // ── Render — edit mode ──────────────────────────────────────────────────
+  // ── Render - edit mode ──────────────────────────────────────────────────
   if (editing) {
     const sharedInputStyle = {
       width: '100%',
@@ -242,7 +242,7 @@ export default function EditableInline({
     );
   }
 
-  // ── Render — read-only display with hover pencil ────────────────────────
+  // ── Render - read-only display with hover pencil ────────────────────────
   const displayText = value ?? '';
   const isEmpty = !displayText || !String(displayText).trim();
 

@@ -1,5 +1,5 @@
 /**
- * domain/events/mutate.js — Apply an event's entity patches to a
+ * domain/events/mutate.js - Apply an event's entity patches to a
  * settlement object.
  *
  * The architecture fix the audit kept flagging: events must mutate
@@ -10,7 +10,7 @@
  *   - propagation chains computed and applied
  *   - removed/created/replaced npc records
  *
- * Pure function — no store, no React, no I/O. The store calls into
+ * Pure function - no store, no React, no I/O. The store calls into
  * this from `applyEvent` and persists the result.
  */
 
@@ -32,50 +32,57 @@ import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entitie
  * @param {Object} args
  * @param {Object} args.settlement
  * @param {Event} args.event
+ * @param {string} [args.now] deterministic ISO timestamp for replay/tests
  * @returns {Object} mutated settlement
  */
-export function mutateSettlement({ settlement, event }) {
+export function mutateSettlement({ settlement, event, now = null }) {
   if (!settlement || !event) return settlement;
+  const timedEvent = /** @type {any} */ (event);
+  const timestamp = timedEvent.timestamp || timedEvent.createdAt || now || new Date().toISOString();
+  const stampedEvent = timedEvent.timestamp ? timedEvent : { ...event, timestamp };
   let next = { ...settlement };
 
-  switch (event.type) {
+  switch (stampedEvent.type) {
+    case 'DESTROY_SETTLEMENT':
+      next = destroySettlement(next, stampedEvent);
+      break;
     case 'DAMAGE_INSTITUTION':
-      next = damageInstitution(next, event);
+      next = damageInstitution(next, stampedEvent);
       break;
     case 'REMOVE_INSTITUTION':
-      next = removeInstitution(next, event);
+      next = removeInstitution(next, stampedEvent);
       break;
     case 'ADD_INSTITUTION':
-      next = addInstitution(next, event);
+      next = addInstitution(next, stampedEvent);
       break;
     case 'DEPLETE_RESOURCE':
-      next = depleteResource(next, event);
+      next = depleteResource(next, stampedEvent);
       break;
     case 'CUT_TRADE_ROUTE':
-      next = cutTradeRoute(next, event);
+      next = cutTradeRoute(next, stampedEvent);
       break;
 
     case 'ADD_NPC':
-      next = addNpc(next, event);
+      next = addNpc(next, stampedEvent);
       break;
     case 'KILL_NPC':
-      next = killNpcMutation(next, event);
+      next = killNpcMutation(next, stampedEvent);
       break;
     case 'ASSIGN_NPC_TO_ROLE':
-      next = assignNpcMutation(next, event);
+      next = assignNpcMutation(next, stampedEvent);
       break;
 
     case 'IMPAIR_INSTITUTION':
-      next = impairInstitution(next, event);
+      next = impairInstitution(next, stampedEvent);
       break;
     case 'RESTORE_INSTITUTION':
-      next = restoreInstitution(next, event);
+      next = restoreInstitution(next, stampedEvent);
       break;
     case 'IMPAIR_FACTION':
-      next = impairFaction(next, event);
+      next = impairFaction(next, stampedEvent);
       break;
     case 'RESTORE_FACTION':
-      next = restoreFaction(next, event);
+      next = restoreFaction(next, stampedEvent);
       break;
 
     // Wave 1 extended events. Each is implemented by reusing primitives:
@@ -87,23 +94,23 @@ export function mutateSettlement({ settlement, event }) {
     // optionally damages an institution if specified.
 
     case 'KILL_LEADER':
-      next = killLeaderMutation(next, event);
+      next = killLeaderMutation(next, stampedEvent);
       break;
     case 'EXPOSE_CORRUPTION':
-      next = exposeCorruption(next, event);
+      next = exposeCorruption(next, stampedEvent);
       break;
     case 'REFUGEE_WAVE':
-      next = refugeeWave(next, event);
+      next = refugeeWave(next, stampedEvent);
       break;
     case 'PLAGUE':
-      next = plague(next, event);
+      next = plague(next, stampedEvent);
       break;
     case 'RAID_OR_MONSTER_ATTACK':
-      next = raidOrMonsterAttack(next, event);
+      next = raidOrMonsterAttack(next, stampedEvent);
       break;
 
     default:
-      // Unknown event type — no entity mutation. SystemState delta still
+      // Unknown event type - no entity mutation. SystemState delta still
       // applies through applyEvent's normal path.
       break;
   }
@@ -111,6 +118,21 @@ export function mutateSettlement({ settlement, event }) {
 }
 
 // ── Institution mutations ──────────────────────────────────────────────────
+
+function destroySettlement(s, event) {
+  return {
+    ...s,
+    status: 'destroyed',
+    destroyedAt: eventTime(event),
+    destroyedByEventId: event.id,
+    destroyedCause: event.targetId || event.payload?.cause || null,
+    config: {
+      ...(s.config || {}),
+      _destroyed: true,
+      _destroyedByEventId: event.id,
+    },
+  };
+}
 
 function damageInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
@@ -157,7 +179,7 @@ function addInstitution(s, event) {
   const name = labelFromTarget(event.targetId);
   const list = s.institutions || [];
   // Idempotent: if an institution with the same name already exists,
-  // we don't duplicate — we just clear any prior REMOVED status.
+  // we don't duplicate - we just clear any prior REMOVED status.
   const existing = list.find(i => i.name?.toLowerCase() === name.toLowerCase());
   if (existing) {
     const restored = { ...existing, status: 'active', impairments: [] };
@@ -195,7 +217,7 @@ function restoreInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
   if (!inst) return s;
   // If the user supplied a specific cause event id, remove only those
-  // impairments. Otherwise clear all impairments — full reset.
+  // impairments. Otherwise clear all impairments - full reset.
   const causeId = event.payload?.causeEventId;
   const restored = causeId
     ? withoutEventImpairments(inst, causeId)
@@ -248,12 +270,12 @@ function depleteResource(s, event) {
 }
 
 function cutTradeRoute(s, event) {
-  // Mark the trade route status on settlement.config — coarse but
+  // Mark the trade route status on settlement.config - coarse but
   // sufficient until the full campaign-graph route model lands.
   const config = s.config || {};
   const cutRoutes = Array.isArray(config._cutRoutes) ? [...config._cutRoutes] : [];
   const which = event.targetId || 'primary';
-  cutRoutes.push({ name: which, atEventId: event.id, atTimestamp: new Date().toISOString() });
+  cutRoutes.push({ name: which, atEventId: event.id, atTimestamp: eventTime(event) });
   return {
     ...s,
     config: { ...config, _cutRoutes: cutRoutes },
@@ -301,7 +323,7 @@ function killNpcMutation(s, event) {
       entityType: 'npc',
       entityId: idOf(npc),
       impairment: {
-        type: 'staffing',  // arbitrary — propagation maps it per target
+        type: 'staffing',  // arbitrary - propagation maps it per target
         severity: importance === 'pillar' ? 1.0 : importance === 'key' ? 0.7 : 0.4,
         causeEventId: event.id,
         description: `Death of ${npc.name}`,
@@ -357,7 +379,7 @@ function assignNpcMutation(s, event) {
 // ── Wave 1 extended event handlers ─────────────────────────────────────────
 
 /**
- * KILL_LEADER — kill the named NPC at pillar importance regardless of
+ * KILL_LEADER - kill the named NPC at pillar importance regardless of
  * what the NPC record says. The "leader" framing is a contract: the
  * settlement's primary authority is gone, with all the consequences
  * that entails. Reuses killNpcMutation under the hood.
@@ -371,7 +393,7 @@ function killLeaderMutation(s, event) {
 }
 
 /**
- * EXPOSE_CORRUPTION — applies a legitimacy impairment to the target
+ * EXPOSE_CORRUPTION - applies a legitimacy impairment to the target
  * (faction OR institution; we try both). Propagates so a corrupt watch
  * captain hits both the watch institution and the controlling faction.
  */
@@ -408,7 +430,7 @@ function exposeCorruption(s, event) {
 }
 
 /**
- * REFUGEE_WAVE — population shift annotation. Records the wave on the
+ * REFUGEE_WAVE - population shift annotation. Records the wave on the
  * settlement so downstream pipeline reruns and the foodSecurity model
  * can consume it. Coarse for v1; future versions will derive specific
  * institution strain from the wave size.
@@ -420,13 +442,13 @@ function refugeeWave(s, event) {
     size: event.payload?.size || 'medium',
     fromRegion: event.targetId || null,
     atEventId: event.id,
-    atTimestamp: new Date().toISOString(),
+    atTimestamp: eventTime(event),
   });
   return { ...s, config: { ...config, _refugeeWaves: waves } };
 }
 
 /**
- * PLAGUE — disease outbreak annotation. Records severity, optionally a
+ * PLAGUE - disease outbreak annotation. Records severity, optionally a
  * disease name. Strains healing institutions (capacity impairment),
  * propagates through faction links so the watch and temple respond.
  */
@@ -437,7 +459,7 @@ function plague(s, event) {
     name: event.targetId || 'unspecified',
     severity,
     atEventId: event.id,
-    atTimestamp: new Date().toISOString(),
+    atTimestamp: eventTime(event),
   };
   let next = {
     ...s,
@@ -464,7 +486,7 @@ function plague(s, event) {
 }
 
 /**
- * RAID_OR_MONSTER_ATTACK — external strike. If a specific institution
+ * RAID_OR_MONSTER_ATTACK - external strike. If a specific institution
  * is named in the payload, damage it; otherwise just record the raid
  * on the settlement so the next pipeline rerun consumes it.
  */
@@ -476,7 +498,7 @@ function raidOrMonsterAttack(s, event) {
     source: event.targetId || 'unknown',
     severity,
     atEventId: event.id,
-    atTimestamp: new Date().toISOString(),
+    atTimestamp: eventTime(event),
   });
   let next = { ...s, config: { ...config, _raidHistory: raids } };
 
@@ -504,6 +526,7 @@ function raidOrMonsterAttack(s, event) {
 
 const idOf        = (i) => i?.id || i?.name || '';
 const factionIdOf = (f) => f?.id || f?.faction || f?.name || '';
+const eventTime = (event) => event.timestamp || event.createdAt;
 
 function findInstitution(s, target) {
   const list = s.institutions || [];
@@ -544,7 +567,7 @@ function replaceInstitution(s, oldInst, newInst) {
 }
 
 function replaceFaction(s, oldF, newF) {
-  // Factions can live in two places — settlement.factions or
+  // Factions can live in two places - settlement.factions or
   // settlement.powerStructure.factions. Normalize on the latter.
   if (s.powerStructure?.factions) {
     const list = s.powerStructure.factions;

@@ -1,11 +1,11 @@
 /**
- * QuickInspector.jsx — P136 / M-6 hover-peek for placed settlements.
+ * QuickInspector.jsx - P136 / M-6 hover-peek for placed settlements.
  *
  * When the user hovers a placement marker (without clicking), this
  * floating card surfaces three high-leverage lines:
  *   • Name + tier · pop
  *   • Pressure sentence (the engine's headline tension)
- *   • Top hook title — the Tier-A plot hook if there is one
+ *   • Top hook title - the Tier-A plot hook if there is one
  *
  * The full PlacementDetailCard is still the click-to-open surface.
  * QuickInspector is the "what's this place?" peek so the user doesn't
@@ -53,7 +53,7 @@ export default function QuickInspector() {
 
   const s = save.settlement || save;
   const name = s.name || save.name || 'Unnamed';
-  const tier = s.tier || save.tier || '—';
+  const tier = s.tier || save.tier || '-';
   const pop = (s.population || 0).toLocaleString();
   const pressure = s.pressureSentence || '';
   const topHook = (() => {

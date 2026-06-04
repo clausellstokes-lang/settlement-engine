@@ -1,5 +1,5 @@
 /**
- * helpers.js — Core shared utilities for all generators.
+ * helpers.js - Core shared utilities for all generators.
  *
  * Single source of truth for:
  *  - Re-exported constants/primitives from data/constants.js
@@ -7,7 +7,7 @@
  *  - Core influence scoring      (getInstFlags, getStressFlags)
  *  - Trade/water dependency      (evaluateWaterDependency)
  *  - NPC secret content          (STRESS_INSTITUTION_EFFECTS)
- *  - Shared utility functions    (pickRandom, clamp, replaceTokens, …)
+ *  - Shared utility functions    (pickRandom, clamp, replaceTokens, ...)
  */
 
 import {
@@ -15,7 +15,7 @@ import {
   popToTier, getMagicLevel, tierAtLeast,
 } from '../data/constants.js';
 // chance/pick/randInt come from rngContext directly (not from constants.js)
-// since 2026-04 — eliminates the data→engine→data circular chunk warning.
+// since 2026-04 - eliminates the data→engine→data circular chunk warning.
 import { chance, pick, randInt } from './rngContext.js';
 export { STRESS_INSTITUTION_EFFECTS } from '../data/stressTypes.js';
 
@@ -38,10 +38,10 @@ const _isSmallTier = (tier) => SMALL_TIERS.includes(tier);
 
 // ─── Math utilities ──────────────────────────────────────────────────────────
 
-/** Clamp a value between lo and hi (defaults: 0–100). */
+/** Clamp a value between lo and hi (defaults: 0-100). */
 export const clamp = (val, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, val));
 
-/** Convert a 0–100 priority slider to a multiplier centred at 1.0 when priority = 50. */
+/** Convert a 0-100 priority slider to a multiplier centred at 1.0 when priority = 50. */
 export const priorityToMultiplier = (priority = 50) => Math.max(0, (priority ?? 50) / 50);
 
 // ─── Random utilities ────────────────────────────────────────────────────────
@@ -53,7 +53,7 @@ export const random01 = (p) => _chance(p);
 
 /** Pick a random element from an array. */
 export const pickRandom  = (arr) => _pick(arr);
-/** Alias for pickRandom — kept for call-site compatibility. */
+/** Alias for pickRandom - kept for call-site compatibility. */
 export const pickRandom2 = (arr) => _pick(arr);
 
 /** Replace {key} tokens in a template string using values from data. */

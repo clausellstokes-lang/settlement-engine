@@ -1,16 +1,16 @@
 /**
- * tests/lib/emailTemplates.test.js — Tier 8.5 template contract tests.
+ * tests/lib/emailTemplates.test.js - Tier 8.5 template contract tests.
  *
  * Three classes of guarantee:
  *
  *   1. Every template renders without throwing, with all placeholders
  *      substituted.
- *   2. Voice contract — no AI-generated framing slips in. Templates
+ *   2. Voice contract - no AI-generated framing slips in. Templates
  *      that mention narrative refinement use the "narrative refinement"
  *      phrase, never "AI prose" or "AI features." Settlement language
- *      uses "simulated" — the simulation-first identity is positioning,
+ *      uses "simulated" - the simulation-first identity is positioning,
  *      not marketing.
- *   3. Edge function parity — the inlined template strings in
+ *   3. Edge function parity - the inlined template strings in
  *      supabase/functions/send-email/index.ts must keep the same keys
  *      as src/lib/emailTemplates.js. We read the TS file as plain text
  *      and scan for the keys.
@@ -32,7 +32,7 @@ const ALL_KEYS = [
   'cap_warning',
 ];
 
-describe('Tier 8.5 — TEMPLATES inventory', () => {
+describe('Tier 8.5 - TEMPLATES inventory', () => {
   it('ships all six lifecycle templates', () => {
     expect(listTemplateKeys().sort()).toEqual([...ALL_KEYS].sort());
   });
@@ -54,7 +54,7 @@ describe('Tier 8.5 — TEMPLATES inventory', () => {
   });
 });
 
-describe('Tier 8.5 — renderTemplate()', () => {
+describe('Tier 8.5 - renderTemplate()', () => {
   it('throws on unknown keys', () => {
     expect(() => renderTemplate('does-not-exist')).toThrow(/Unknown email template/);
   });
@@ -87,13 +87,13 @@ describe('Tier 8.5 — renderTemplate()', () => {
 
   it('leaves missing placeholders visible (loud, not silent)', () => {
     const r = renderTemplate('save_confirmation', { displayName: 'Stoke' });
-    // settlementName and tier are NOT supplied — should remain {literal}.
+    // settlementName and tier are NOT supplied - should remain {literal}.
     expect(r.text).toContain('{settlementName}');
     expect(r.text).toContain('{tier}');
   });
 });
 
-describe('Tier 8.5 — missingVariables()', () => {
+describe('Tier 8.5 - missingVariables()', () => {
   it('returns the unfilled variables for a partial payload', () => {
     const missing = missingVariables('save_confirmation', { displayName: 'x' });
     expect(missing.sort()).toEqual(['settlementName', 'tier'].sort());
@@ -111,7 +111,7 @@ describe('Tier 8.5 — missingVariables()', () => {
   });
 });
 
-describe('Tier 8.5 — Voice contract (anti-AI positioning lives in emails too)', () => {
+describe('Tier 8.5 - Voice contract (anti-AI positioning lives in emails too)', () => {
   it('welcome email frames settlements as simulated, not AI-generated', () => {
     const text = TEMPLATES.welcome.text;
     expect(text).toMatch(/simulated/i);
@@ -136,7 +136,7 @@ describe('Tier 8.5 — Voice contract (anti-AI positioning lives in emails too)'
   });
 });
 
-describe('Tier 8.5 — Edge function parity (client templates ↔ server templates)', () => {
+describe('Tier 8.5 - Edge function parity (client templates ↔ server templates)', () => {
   // Read the edge function source so we can verify the inlined template
   // keys haven't drifted from the client copy. We do NOT parse the TS;
   // we just check that the literal key tokens appear as object keys.

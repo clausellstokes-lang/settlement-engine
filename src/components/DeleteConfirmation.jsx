@@ -1,12 +1,12 @@
 /**
- * DeleteConfirmation — Reusable inline delete confirmation panel.
+ * DeleteConfirmation - Reusable inline delete confirmation panel.
  *
  * Renders an expandable warning with context-aware messaging.
  * Used by SettlementsPanel, CampaignSection, Compendium, and WorldMap.
  */
 import { CARD, SECOND, BORDER, sans, FS, swatch } from './theme.js';
 
-// Tier 7.19 — local BODY alias. The body-copy color used to be a
+// Tier 7.19 - local BODY alias. The body-copy color used to be a
 // hard-coded '#6b5340' literal; surfacing it as a named constant means
 // a future contrast tweak is one edit. (We don't import from tabConstants
 // because that's a tabs-only concern; this component is reused outside

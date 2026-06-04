@@ -1,5 +1,5 @@
 /**
- * SimulationDrawer.jsx — P135 / D-5 slide-out for "how this was simulated".
+ * SimulationDrawer.jsx - P135 / D-5 slide-out for "how this was simulated".
  *
  * The original Simulation tab lived as the last entry on the dossier
  * tab strip. The critique's D-5 calls this out as noise: most DMs
@@ -10,7 +10,7 @@
  *   • Surfaces a small "How this was simulated" link below the
  *     dossier header so curious users still find it.
  *   • Renders the full PipelineRail inside a right-side panel that
- *     slides over the page chrome — no layout reflow.
+ *     slides over the page chrome - no layout reflow.
  *
  * Fires EVENTS.SIMULATION_DRAWER_OPENED on first open so we can
  * measure whether the drawer's discoverability is acceptable.
@@ -37,8 +37,8 @@ const sans = '"Nunito", system-ui, sans-serif';
 
 /**
  * Trigger button + drawer pair. The trigger renders inline wherever
- * the consumer mounts it; the drawer is portal-style — fixed-position
- * over the page chrome — so it doesn't push content around.
+ * the consumer mounts it; the drawer is portal-style - fixed-position
+ * over the page chrome - so it doesn't push content around.
  */
 export default function SimulationDrawer() {
   const [open, setOpen] = useState(false);
@@ -51,7 +51,7 @@ export default function SimulationDrawer() {
     }
   }, [open]);
 
-  // Esc-to-close keyboard handling — lives in an effect so the
+  // Esc-to-close keyboard handling - lives in an effect so the
   // listener is bound only while the drawer is open.
   useEffect(() => {
     if (!open) return;
@@ -161,7 +161,7 @@ export default function SimulationDrawer() {
                   padding: 16, color: MUTED, fontSize: FS.sm,
                   fontFamily: sans, textAlign: 'center',
                 }}>
-                  Loading pipeline…
+                  Loading pipeline...
                 </div>
               }>
                 <PipelineRail compact={false} />

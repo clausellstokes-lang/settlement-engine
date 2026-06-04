@@ -1,5 +1,5 @@
 /**
- * supplyChains.js — Supply chain definitions for map overlays.
+ * supplyChains.js - Supply chain definitions for map overlays.
  *
  * Each chain connects resource production to consumption across settlements.
  * The WorldMap component uses these to draw overlay lines between linked burgs.

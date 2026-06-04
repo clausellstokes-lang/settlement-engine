@@ -1,27 +1,27 @@
 /**
- * emailLifecycle.js — Tier 8.5 client-side lifecycle hooks.
+ * emailLifecycle.js - Tier 8.5 client-side lifecycle hooks.
  *
  * Thin wrapper over the `send-email` edge function. Each helper here
  * corresponds to one TEMPLATES key in emailTemplates.js and assembles
  * the right payload from whatever store/auth state the caller has.
  *
  * Every helper is fire-and-forget. Email failures must never block a
- * user action — a save that succeeded shouldn't roll back because the
+ * user action - a save that succeeded shouldn't roll back because the
  * confirmation email's SMTP timed out. Errors are logged in DEV and
  * swallowed in PROD.
  *
  * Where to call each:
- *   notifyWelcome         — App.jsx, on first successful auth state change
+ *   notifyWelcome         - App.jsx, on first successful auth state change
  *                            from anon → signed-in
- *   notifySaved           — saves.js, after a save succeeds
- *   notifyExported        — utils/generateSettlementPDF.js, after
+ *   notifySaved           - saves.js, after a save succeeds
+ *   notifyExported        - utils/generateSettlementPDF.js, after
  *                            successful PDF emit (only once per dossier)
- *   notifyCreditLow       — creditsSlice.js, after spend if balance
+ *   notifyCreditLow       - creditsSlice.js, after spend if balance
  *                            crosses below threshold (5 by default)
- *   notifyFounderThankYou — stripe-webhook side-effect after founder
+ *   notifyFounderThankYou - stripe-webhook side-effect after founder
  *                            purchase processes (this one is server-side)
- *   notifyCapWarning      — anonGenCounter.js, when anon hits the cap
- *                            (clients only — server has no email
+ *   notifyCapWarning      - anonGenCounter.js, when anon hits the cap
+ *                            (clients only - server has no email
  *                            address for an anon yet)
  */
 
@@ -41,7 +41,7 @@ const FN_NAME = 'send-email';
 //   2. Dispatch a CustomEvent so the banner can react without polling.
 //   3. console.warn once (not per email) to keep logs readable.
 //
-// In prod this whole block is dead code — the banner component is gated
+// In prod this whole block is dead code - the banner component is gated
 // on `import.meta.env.DEV` at the call site.
 
 let _emailProviderUnconfigured = false;
@@ -58,14 +58,14 @@ function markUnconfigured(template) {
     _emailProviderUnconfigured = true;
     if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
       try { window.dispatchEvent(new CustomEvent('sf:email-unconfigured', { detail: { template } })); }
-      catch { /* CustomEvent unavailable — fall through silently */ }
+      catch { /* CustomEvent unavailable - fall through silently */ }
     }
   }
   if (import.meta?.env?.DEV && !_warnedOnce) {
     _warnedOnce = true;
 
     console.warn(
-      '[emailLifecycle] send-email returned `unconfigured` — Resend secrets ' +
+      '[emailLifecycle] send-email returned `unconfigured` - Resend secrets ' +
       'are missing on Supabase. Set with:\n' +
       '  npx supabase secrets set RESEND_API_KEY=re_xxx\n' +
       '  npx supabase secrets set RESEND_FROM_EMAIL="SettlementForge <hello@settlementforge.com>"'
@@ -81,7 +81,7 @@ async function send(template, payload, recipient = null) {
   if (!isConfigured) {
     if (import.meta?.env?.DEV) {
 
-      console.info(`[emailLifecycle] supabase not configured — would send ${template}`, payload);
+      console.info(`[emailLifecycle] supabase not configured - would send ${template}`, payload);
     }
     return null;
   }
@@ -97,7 +97,7 @@ async function send(template, payload, recipient = null) {
       return null;
     }
     // Surface the soft-fail unconfigured signal so the dev banner picks
-    // it up. The send() return value stays unchanged — callers that
+    // it up. The send() return value stays unchanged - callers that
     // ignored the response continue to ignore it.
     if (data && data.ok === false && data.reason === 'unconfigured') {
       markUnconfigured(template);
@@ -114,13 +114,13 @@ async function send(template, payload, recipient = null) {
 
 // ── Public helpers ─────────────────────────────────────────────────────────
 
-/** Welcome email — first signup. Authenticated call; server reads
+/** Welcome email - first signup. Authenticated call; server reads
  *  the recipient from auth.uid() so we don't pass the address. */
 export function notifyWelcome({ displayName = 'there' } = {}) {
   return send('welcome', { displayName });
 }
 
-/** Save confirmation — fires once per fresh save (not on re-save). */
+/** Save confirmation - fires once per fresh save (not on re-save). */
 export function notifySaved({ displayName, settlementName, tier }) {
   return send('save_confirmation', {
     displayName: displayName || 'there',
@@ -129,7 +129,7 @@ export function notifySaved({ displayName, settlementName, tier }) {
   });
 }
 
-/** Export confirmation — after PDF emit. Same fire-and-forget shape. */
+/** Export confirmation - after PDF emit. Same fire-and-forget shape. */
 export function notifyExported({ displayName, settlementName, tier }) {
   return send('export_confirmation', {
     displayName: displayName || 'there',
@@ -138,7 +138,7 @@ export function notifyExported({ displayName, settlementName, tier }) {
   });
 }
 
-/** Credit-low warning — call only when balance crosses below threshold. */
+/** Credit-low warning - call only when balance crosses below threshold. */
 export function notifyCreditLow({ displayName, balance, narrativeCost = 3, dailyLifeCost = 4 }) {
   return send('credit_low', {
     displayName: displayName || 'there',
@@ -152,11 +152,11 @@ export function notifyCreditLow({ displayName, balance, narrativeCost = 3, daily
  *  the user; here we expose the client-side helper for completeness
  *  but in practice this should be called from the stripe-webhook
  *  edge function, not from the client. */
-export function notifyFounderThankYou({ displayName } = {}) {
+export function notifyFounderThankYou({ displayName } = /** @type {{ displayName?: string }} */ ({})) {
   return send('founder_thank_you', { displayName: displayName || 'there' });
 }
 
-/** Anonymous cap warning — emailable only when the user has actually
+/** Anonymous cap warning - emailable only when the user has actually
  *  given us an address. For now this surfaces in the cap-hit UI as a
  *  "want to be reminded?" form; the helper exists for that path. */
 export function notifyCapWarning({ recipient, capUsed, capTotal }) {

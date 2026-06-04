@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 011_gallery_curation.sql — Tier 8.1 curated dossier surface.
+-- 011_gallery_curation.sql - Tier 8.1 curated dossier surface.
 --
 -- The gallery (migration 008) was already listing every public dossier in
 -- reverse-published-at order. Strategic-review §9 explicitly warns against
@@ -27,7 +27,7 @@ alter table public.settlements
   add column if not exists curated_order integer;
 
 comment on column public.settlements.is_curated is
-  'When true, the dossier appears in the curated section of the gallery (hand-picked exemplars). Only admins/developers can flip this — normal users cannot self-curate.';
+  'When true, the dossier appears in the curated section of the gallery (hand-picked exemplars). Only admins/developers can flip this - normal users cannot self-curate.';
 
 comment on column public.settlements.curated_order is
   'Sort order within the curated section. Lower values render first. NULL means "no explicit order; sort by published_at desc within curated set."';
@@ -98,7 +98,7 @@ begin
 
   -- Audit log entry via the existing _audit_action helper. The
   -- admin_actions table's target_id column references auth.users(id),
-  -- so we can't put a settlement_id there directly — instead we pass
+  -- so we can't put a settlement_id there directly - instead we pass
   -- target_id=NULL and store the settlement context inside the
   -- before/after JSON payloads (with the settlement id explicit).
   perform public._audit_action(

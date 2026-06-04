@@ -1,16 +1,16 @@
 /**
- * GenerateWizard.jsx — Step-by-step settlement creation wizard.
+ * GenerateWizard.jsx - Step-by-step settlement creation wizard.
  *
  * Replaces the old GenerateView with three modes:
- *   Quick    — minimal config, one-click generation
- *   Advanced — full config (one step at a time, not all at once)
- *   Custom   — full workshop for manual entry (premium)
+ *   Quick    - minimal config, one-click generation
+ *   Advanced - full config (one step at a time, not all at once)
+ *   Custom   - full workshop for manual entry (premium)
  *
  * Each step shows only its own content, with contextual help in the
  * sidebar/footer drawn from the Compendium and How to Use content.
  * Steps are navigated with Next/Back, not all visible simultaneously.
  *
- * Reads all state from the Zustand store — zero props.
+ * Reads all state from the Zustand store - zero props.
  */
 import { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { ChevronRight, ChevronLeft, Zap, Settings, ArrowLeft, Save, Sliders } from 'lucide-react';
@@ -27,22 +27,22 @@ import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import HomeHero from './HomeHero.jsx';
-// P128 / H-2 — Sample dossier proof card. Self-gates on flag +
+// P128 / H-2 - Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
 // flip. Mounted directly below HomeHero so anon visitors see proof of
 // the moat without scrolling.
 const HomeSampleDossier = lazy(() => import('./home/HomeSampleDossier.jsx'));
 
-// Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
+// Lazy-load OutputContainer - 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
-// P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
+// P100 - pipeline reveal overlay (tiny, but stays lazy so non-generating
 // surfaces don't pay for the playback animator).
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
-// Custom mode body — the full power-user dashboard, lazy so basic/advanced
+// Custom mode body - the full power-user dashboard, lazy so basic/advanced
 // don't pay for it. Surfaced as the third generate mode (was a top-level tab).
 const Workshop = lazy(() => import('./Workshop.jsx'));
 
-// "Change mode" back button — shown above the mode-specific UI once a card
+// "Change mode" back button - shown above the mode-specific UI once a card
 // is picked. Module-scope so React Compiler can memoize without seeing it
 // reborn on every render of the parent wizard.
 function ChangeModeBar({ mode, onChangeMode }) {
@@ -84,7 +84,7 @@ const STEPS = [
   {
     id: 'institutions',
     label: 'Institutions',
-    hint: 'Force or exclude specific institutions. The generator uses your toggles as hard constraints — forced institutions always appear, excluded ones never do.',
+    hint: 'Force or exclude specific institutions. The generator uses your toggles as hard constraints - forced institutions always appear, excluded ones never do.',
   },
   {
     id: 'services',
@@ -107,16 +107,16 @@ function ModeSelector({ mode, onModeChange, large = false }) {
   //     a user landing on the wizard sees the same shape.
   //   - Advanced: step-by-step config with institution toggles,
   //     services, and trade dynamics.
-  //   - Custom:   the full Workshop power dashboard — every parameter at
+  //   - Custom:   the full Workshop power dashboard - every parameter at
   //     once, plus the supply-chain builder.
   // The HomeHero's instant generation is its OWN surface (homepage
   // card with size-picker chips), not a mode listed here. Anonymous
-  // users see the hero only — these mode cards are gated to
+  // users see the hero only - these mode cards are gated to
   // signed-in users.
   const modes = [
-    { id: 'basic',    label: 'Basic Generate',    desc: 'One screen — set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
+    { id: 'basic',    label: 'Basic Generate',    desc: 'One screen - set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
     { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',         Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space. Produces a draft you can refine, save, and canonize.' },
-    { id: 'custom',   label: 'Custom Generate',   desc: 'Power dashboard — every parameter at once', Icon: Sliders,  longDesc: 'Tune every generator parameter on one screen: priorities, resources, stresses, institution/resource/trade-route overrides, and the supply-chain builder. Maximum control for power users.' },
+    { id: 'custom',   label: 'Custom Generate',   desc: 'Power dashboard - every parameter at once', Icon: Sliders,  longDesc: 'Tune every generator parameter on one screen: priorities, resources, stresses, institution/resource/trade-route overrides, and the supply-chain builder. Maximum control for power users.' },
   ];
 
   return (
@@ -206,9 +206,11 @@ function StepIndicator({ currentStep, totalSteps }) {
 function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState(null);
 
   const handleSave = async () => {
     if (!settlement || saving) return;
+    setSaveError(null);
     setSaving(true);
     try {
       await savesService.save({
@@ -221,17 +223,17 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
       setTimeout(() => setSaved(false), 3000);
     } catch (e) {
       console.error('Save failed:', e);
-      alert('Failed to save: ' + e.message);
+      setSaveError(`Failed to save: ${e.message || e}`);
     } finally {
       setSaving(false);
     }
   };
 
-  // P101 / X-3 — Save-as-signup. When the user can't save (anonymous,
+  // P101 / X-3 - Save-as-signup. When the user can't save (anonymous,
   // or hit the per-tier cap), instead of a disabled tombstone we render
   // an active "free account" door. Clicking stashes the current dossier
   // as a pending intent, opens the AuthModal, and on success the auth
-  // intent registry fires savesService.save with the same payload —
+  // intent registry fires savesService.save with the same payload -
   // the user lands back to a saved settlement.
   if (!canSave) {
     const handleSignupSave = () => {
@@ -272,25 +274,32 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
         title="We'll save your dossier as soon as you're in."
       >
         <Save size={15} />
-        Save this town — free account →
+        Save this town - free account →
       </button>
     );
   }
 
   return (
-    <button onClick={handleSave} disabled={saving || saved} style={{
-      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-      padding: isMobile ? '13px 24px' : '10px 24px',
-      background: saved ? '#2a7a2a' : '#1a4a2a',
-      color: swatch.white, border: 'none', borderRadius: R.md,
-      cursor: saving || saved ? 'default' : 'pointer',
-      fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-      boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-      transition: 'all 0.2s',
-    }}>
-      <Save size={15} />
-      {saved ? '✓ Saved to Library' : saving ? 'Saving...' : 'Save to Library'}
-    </button>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs }}>
+      <button onClick={handleSave} disabled={saving || saved} style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+        padding: isMobile ? '13px 24px' : '10px 24px',
+        background: saved ? '#2a7a2a' : '#1a4a2a',
+        color: swatch.white, border: 'none', borderRadius: R.md,
+        cursor: saving || saved ? 'default' : 'pointer',
+        fontFamily: sans, fontSize: FS.md, fontWeight: 700,
+        boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+        transition: 'all 0.2s',
+      }}>
+        <Save size={15} />
+        {saved ? '✓ Saved to Library' : saving ? 'Saving...' : 'Save to Library'}
+      </button>
+      {saveError && (
+        <div style={{ color: swatch.danger, fontSize: FS.xs, fontFamily: sans, maxWidth: 420, textAlign: 'center' }}>
+          {saveError}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -317,7 +326,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const clearNeighbour  = useStore(s => s.clearNeighbour);
   const clearSettlement = useStore(s => s.clearSettlement);
 
-  // P100 / X-1 — Pipeline reveal state. When `pipelineRevealActive` is
+  // P100 / X-1 - Pipeline reveal state. When `pipelineRevealActive` is
   // true, the dossier is hidden behind the reveal overlay. Once the
   // overlay's playback completes it calls dismissPipelineReveal and the
   // dossier appears.
@@ -326,6 +335,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
+  const [generateError, setGenerateError] = useState(null);
 
   // Sync showOutput when a new settlement is generated (handles Workshop's own generate button)
   const prevSettlementRef = useRef(null);
@@ -336,12 +346,12 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     }
   }, [settlement]);
 
-  // P144 / A-4 — Wizard step focus management. When the advanced wizard
+  // P144 / A-4 - Wizard step focus management. When the advanced wizard
   // advances or retreats a step, keyboard + screen-reader users were left
   // on the now-clicked (or now-disabled) nav button with no signal that
   // the step changed. On each step *change* (not initial mount) we move
-  // focus to the new step's heading — made programmatically focusable via
-  // tabIndex=-1 and labelled "Step N of M: …" — so the change is both
+  // focus to the new step's heading - made programmatically focusable via
+  // tabIndex=-1 and labelled "Step N of M: ..." - so the change is both
   // announced and navigable. Additive; gated on wizardStepFocus.
   const stepHeadingRef = useRef(null);
   const prevWizardStepRef = useRef(wizardStep);
@@ -354,21 +364,22 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   }, [wizardStep, wizardMode, settlement]);
 
   const handleGenerate = useCallback(() => {
-    // Tier 7.2 — anonymous daily cap. Regeneration counts against the same
+    // Tier 7.2 - anonymous daily cap. Regeneration counts against the same
     // 3/day allowance as the first generation (enforced in the store), so
     // when an anon is already at cap, route to the sign-in/unlock flow
-    // rather than dead-clicking — generateSettlement would no-op anyway.
+    // rather than dead-clicking - generateSettlement would no-op anyway.
     if (authTier === 'anon' && anonAtCap()) {
       if (typeof onSignIn === 'function') onSignIn();
       return;
     }
+    setGenerateError(null);
     try {
       generate();
       clearLoadedFromSave();
       setShowOutput(true); // show output after generation
     } catch (e) {
       console.error('GENERATE ERROR:', e);
-      alert('Error: ' + e.message);
+      setGenerateError(`Error: ${e.message || e}`);
     }
   }, [generate, clearLoadedFromSave, authTier, onSignIn]);
 
@@ -377,7 +388,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     setShowOutput(false);
   }, []);
 
-  /** Start fresh — clear the settlement and return to wizard */
+  /** Start fresh - clear the settlement and return to wizard */
   const handleNewSettlement = useCallback(() => {
     if (clearSettlement) clearSettlement();
     setShowOutput(false);
@@ -411,7 +422,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Empty state: no mode selected yet AND no settlement.
   //
   //   - Anonymous: HomeHero is the only surface. Anon users never see
-  //     the Basic/Advanced mode picker — they go from hero → dossier
+  //     the Basic/Advanced mode picker - they go from hero → dossier
   //     in one click. Quick/Advanced are gated behind signup because
   //     they expose institution toggles, services, and the full
   //     probability space; selling that complexity to a first-time
@@ -469,7 +480,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
   // Basic mode (renamed from 'quick' in the comprehensive review):
   // General Config only, then generate. Renders the SAME ConfigurationPanel
-  // as Advanced step 0 — just no further steps. Layout matches Advanced
+  // as Advanced step 0 - just no further steps. Layout matches Advanced
   // (full-width, no maxWidth) so step 1 reads as the same surface in
   // both modes; the only difference between Basic and Advanced is what
   // comes AFTER step 1, not the width of step 1 itself.
@@ -484,14 +495,14 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           </div>
         )}
 
-        {/* Helper banner — explains Basic is one-screen */}
+        {/* Helper banner - explains Basic is one-screen */}
         <div style={{
           padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'],
           border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`,
           borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
         }}>
           <strong style={{ fontFamily: serif_ }}>Basic Generate</strong>
-          {' — '}Set the foundations and hit Generate. Everything else is randomized.
+          {' - '}Set the foundations and hit Generate. Everything else is randomized.
           Switch to <strong>Advanced Generate</strong> for institution toggles, services, and trade dynamics.
         </div>
 
@@ -540,7 +551,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
         <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
-        <Suspense fallback={<div style={{ padding: SP.xl, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Loading the custom dashboard…</div>}>
+        <Suspense fallback={<div style={{ padding: SP.xl, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Loading the custom dashboard...</div>}>
           <Workshop isMobile={isMobile} />
         </Suspense>
       </div>
@@ -551,7 +562,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const isAdvanced = wizardMode === 'advanced';
   const currentStepDef = STEPS[wizardStep] || STEPS[0];
 
-  // P119 / W-1 — Wizard chrome diet. When the flag is on, collapse the
+  // P119 / W-1 - Wizard chrome diet. When the flag is on, collapse the
   // ChangeModeBar + two full-width banners into a single chip row. The
   // step indicator + step hint banner also collapse into one combined
   // header (rendered by the step content already).
@@ -563,7 +574,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       {/* Change-mode bar (collapse after first generation OR when diet is on) */}
       {!settlement && !chromeDiet && <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />}
 
-      {/* P119 — Combined chip row when diet is on. A single max-32px-tall
+      {/* P119 - Combined chip row when diet is on. A single max-32px-tall
           strip with: an inline "Advanced ⇄ Quick" toggle, a config-loaded
           chip, a neighbour-active chip. All three were previously full
           banner rows; now they fit in one. */}
@@ -627,7 +638,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         </div>
       )}
 
-      {/* Banners — only when the chrome diet is off (legacy path) */}
+      {/* Banners - only when the chrome diet is off (legacy path) */}
       {!chromeDiet && loadedFromSave && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: swatch['#FDF8EE'], border: '2px solid #b8860b', borderRadius: 8, padding: '10px 14px' }}>
           <span style={{ fontSize: FS['16'], flexShrink: 0 }}>&#128203;</span>
@@ -664,12 +675,12 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             <strong style={{ fontFamily: serif_ }}>
               Step {wizardStep + 1}: {currentStepDef.label}
             </strong>
-            {' — '}{currentStepDef.hint}
+            {' - '}{currentStepDef.hint}
           </div>
 
-          {/* Current step content. P144 / A-4 — the step-change effect
+          {/* Current step content. P144 / A-4 - the step-change effect
               moves focus to this labelled region so a step swap is both
-              announced (aria-label "Step N of M: …") and navigable for
+              announced (aria-label "Step N of M: ...") and navigable for
               keyboard users. outline:none stops the programmatic focus
               from drawing a stray ring on this non-tabbable container. */}
           <div
@@ -738,14 +749,14 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         </>
       )}
 
-      {/* P145 / W-2 — close-out summary. Only in the advanced wizard's
+      {/* P145 / W-2 - close-out summary. Only in the advanced wizard's
           final "Ready to Generate" state (pre-generation); recaps the
           four steps of config before the commit. Self-gates on the flag. */}
       {isAdvanced && wizardStep >= STEPS.length && !settlement && (
         <WizardCloseout />
       )}
 
-      {/* Generate button — visible for quick mode with settlement (Regenerate),
+      {/* Generate button - visible for quick mode with settlement (Regenerate),
           advanced mode after final step, or any mode with existing settlement. */}
       {(settlement || (isAdvanced && wizardStep >= STEPS.length)) && (
         <div>
@@ -774,10 +785,24 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               {t('generate.subline')}
             </p>
           )}
+          {generateError && (
+            <div style={{
+              marginTop: SP.sm,
+              padding: `${SP.sm}px ${SP.md}px`,
+              background: swatch.dangerBg,
+              border: '1px solid #e8b0b0',
+              borderRadius: R.md,
+              color: swatch.danger,
+              fontFamily: sans,
+              fontSize: FS.sm,
+            }}>
+              {generateError}
+            </div>
+          )}
         </div>
       )}
 
-      {/* P100 — pipeline reveal overlay. Renders only when the flag is on,
+      {/* P100 - pipeline reveal overlay. Renders only when the flag is on,
           a settlement was just generated, and the slice flagged the reveal
           as active. Dismisses itself by calling dismissPipelineReveal()
           when its playback completes. */}
@@ -832,7 +857,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 second, smaller save button here that called
                 savesService.save directly with no error toast, no
                 "saved" feedback, and no canSave server-side gate.
-                Removed — the SaveToLibraryButton lower in the page
+                Removed - the SaveToLibraryButton lower in the page
                 is the single canonical save action. Two save buttons
                 pointing at the same outcome was confusing and meant
                 users frequently clicked the worse one. */}
@@ -854,7 +879,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           </div>
 
           <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
-            {/* P139 — cap the dossier body to the shared page width so it
+            {/* P139 - cap the dossier body to the shared page width so it
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
                 toolbar above stays full-width. */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
@@ -872,7 +897,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             />
           </div>
 
-          {/* P134 / W-4 — post-generate "what's next" guide. Closes out the
+          {/* P134 / W-4 - post-generate "what's next" guide. Closes out the
               post-generate flow (mirrors WizardCloseout's pre-generate
               close-out) with a state-aware next-step checklist. Self-gates
               on the flag; guidance only, so it never competes with the
@@ -881,7 +906,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         </>
       )}
 
-      {/* When settlement exists but user navigated back — show re-view option + mode picker */}
+      {/* When settlement exists but user navigated back - show re-view option + mode picker */}
       {settlement && !showOutput && (
         <>
           <div style={{
@@ -909,7 +934,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             </button>
           </div>
 
-          {/* Mode picker — let the user start fresh in either generation mode.
+          {/* Mode picker - let the user start fresh in either generation mode.
               Picking a mode here clears the current settlement so the wizard
               re-enters its empty state in the chosen mode. The Regenerate
               button above stays available for "same config, new roll". */}

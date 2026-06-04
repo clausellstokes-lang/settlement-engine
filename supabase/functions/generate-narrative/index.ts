@@ -1,7 +1,7 @@
 /**
  * Supabase Edge Function: generate-narrative
  *
- * AI NARRATIVE LAYER — REFINEMENT-IN-PLACE ARCHITECTURE
+ * AI NARRATIVE LAYER - REFINEMENT-IN-PLACE ARCHITECTURE
  *
  * Phase 1 (Opus 4.7): write a 2-3 sentence IDENTITY STATEMENT for the settlement.
  *   Acts as authorial voice for phase 2.
@@ -25,13 +25,13 @@
  *   { done: true, result, creditsRemaining, type, partialFailure?, failedFields? }
  *
  * Partial-failure policy: if the thesis succeeds and some passes fail, we
- * keep what succeeded and do NOT refund — the user got the Opus thesis
+ * keep what succeeded and do NOT refund - the user got the Opus thesis
  * plus whatever polish completed. If the thesis itself fails, full refund.
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-// Tier 6.8 — bundled aiGrounding contract. Pre-built by
+// Tier 6.8 - bundled aiGrounding contract. Pre-built by
 // `scripts/build-edge-shared.mjs`. Freshness enforced by
 // tests/edgeFunctions/aiGroundingBundle.freshness.test.js.
 import {
@@ -39,21 +39,64 @@ import {
   forbiddenChanges,
   summarizeGroundingPayload,
 } from '../_shared/aiGroundingBundle.js';
-// Tier 0.10 — abuse defense baseline (shared with every edge function).
+// Tier 0.10 - abuse defense baseline (shared with every edge function).
 import { botGuard } from '../_shared/requestMeta.ts';
 
-const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
+const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY') || '';
+const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') || '';
 
 // Hybrid model strategy:
-//   • Opus 4.7 — thesis (highest-visibility prose) + daily life (atmospheric showcase).
-//   • Haiku 4.5 — 8 parallel refinement passes. Thesis is passed in as
+//   • Opus 4.7 - thesis (highest-visibility prose) + daily life (atmospheric showcase).
+//   • Haiku 4.5 - 8 parallel refinement passes. Thesis is passed in as
 //     explicit authorial voice so tone stays coherent.
 const THESIS_MODEL     = 'claude-opus-4-7';
 const REFINEMENT_MODEL = 'claude-haiku-4-5-20251001';
 const DAILY_LIFE_MODEL = 'claude-opus-4-7';
+const ANTHROPIC_BEST_MODEL = Deno.env.get('ANTHROPIC_BEST_MODEL') || THESIS_MODEL;
+const ANTHROPIC_FAST_MODEL = Deno.env.get('ANTHROPIC_FAST_MODEL') || REFINEMENT_MODEL;
+const OPENAI_BEST_MODEL = Deno.env.get('OPENAI_BEST_MODEL') || 'gpt-4.1';
+const OPENAI_FAST_MODEL = Deno.env.get('OPENAI_FAST_MODEL') || 'gpt-4.1-mini';
 
-// CONTRACT_AI_COSTS — mirrored on the client in src/config/pricing.js
-// (NEW_AI_COSTS). When you change a number here, change it there too —
+type ModelPreference = 'claude_best' | 'claude_fast' | 'chatgpt_best' | 'chatgpt_fast';
+type ModelPhase = 'thesis' | 'refinement' | 'dailyLife';
+type Provider = 'anthropic' | 'openai';
+
+type ModelProfile = {
+  provider: Provider;
+  thesis: string;
+  refinement: string;
+  dailyLife: string;
+};
+
+const MODEL_PROFILES: Record<ModelPreference, ModelProfile> = {
+  claude_best: {
+    provider: 'anthropic',
+    thesis: ANTHROPIC_BEST_MODEL,
+    refinement: ANTHROPIC_FAST_MODEL,
+    dailyLife: ANTHROPIC_BEST_MODEL,
+  },
+  claude_fast: {
+    provider: 'anthropic',
+    thesis: ANTHROPIC_FAST_MODEL,
+    refinement: ANTHROPIC_FAST_MODEL,
+    dailyLife: ANTHROPIC_FAST_MODEL,
+  },
+  chatgpt_best: {
+    provider: 'openai',
+    thesis: OPENAI_BEST_MODEL,
+    refinement: OPENAI_FAST_MODEL,
+    dailyLife: OPENAI_BEST_MODEL,
+  },
+  chatgpt_fast: {
+    provider: 'openai',
+    thesis: OPENAI_FAST_MODEL,
+    refinement: OPENAI_FAST_MODEL,
+    dailyLife: OPENAI_FAST_MODEL,
+  },
+};
+
+// CONTRACT_AI_COSTS - mirrored on the client in src/config/pricing.js
+// (NEW_AI_COSTS). When you change a number here, change it there too -
 // tests/config/pricing.test.js fails loudly on drift.
 //
 // The reprice from 8/10/12 → 3/4/5 came from the funnel strategy: at
@@ -63,13 +106,37 @@ const DAILY_LIFE_MODEL = 'claude-opus-4-7';
 // a DM run a full week of campaign prep on a single purchase.
 //
 // Progression keeps the relative weighting (most expensive) because the
-// Opus thesis still sees prior thesis + new state + diff — the input
+// Opus thesis still sees prior thesis + new state + diff - the input
 // context is the actual cost driver, not the output length.
 const CREDIT_COSTS: Record<string, number> = {
   narrative:   3,
   dailyLife:   4,
   progression: 5,
+  narrative_fast:   2,
+  dailyLife_fast:   3,
+  progression_fast: 4,
 };
+
+function normalizeModelPreference(value: unknown): ModelPreference {
+  return typeof value === 'string' && value in MODEL_PROFILES
+    ? value as ModelPreference
+    : 'claude_best';
+}
+
+function spendFeatureFor(type: string, modelPreference: ModelPreference): string {
+  return modelPreference.endsWith('_fast') ? `${type}_fast` : type;
+}
+
+function guidanceBlock(aiGuidance: string): string {
+  const trimmed = aiGuidance.trim().slice(0, 4000);
+  if (!trimmed) return '';
+  return `
+
+DM-PROVIDED AI GUIDANCE:
+${trimmed}
+
+Treat this guidance as preference and emphasis only. It is subordinate to source facts, preservation rules, locked canon, and user edits. Never invent entities or contradict the settlement data to satisfy guidance.`;
+}
 
 // ── Prompt building blocks ──────────────────────────────────────────────────
 
@@ -81,13 +148,13 @@ const PRESERVATION_RULES = `STRICT FACT PRESERVATION:
 - Do not invent new NPCs, factions, institutions, or events.
 - Do not contradict any source fact.
 - You MAY restructure sentences, improve rhythm, add sensory texture, and tie details to the thesis.
-- If a source string is already concrete and specific, you may lightly polish or leave it alone — a non-change is better than drift.`;
+- If a source string is already concrete and specific, you may lightly polish or leave it alone - a non-change is better than drift.`;
 
-// Tier 6.8 — settlement-specific preservation lines composed from the
+// Tier 6.8 - settlement-specific preservation lines composed from the
 // shared aiGrounding contract. Adds explicit "MUST PRESERVE" lines for
 // locked entities, history beats, and user-edited fields so the AI
 // sees the specific names and field paths it must not touch. The
-// static rules above remain — this prefix is appended at call time.
+// static rules above remain - this prefix is appended at call time.
 function dynamicPreservationLines(settlement: any): string[] {
   if (!settlement) return [];
   try {
@@ -115,9 +182,9 @@ function preservationBlockFor(settlement: any): string {
   return `${PRESERVATION_RULES}\n\nSETTLEMENT-SPECIFIC CONSTRAINTS (do not violate any of these):\n- ${dyn.join('\n- ')}`;
 }
 
-const THESIS_INSTRUCTION = `Write a 2-3 sentence IDENTITY STATEMENT for this settlement. In the first sentence, name what it IS at its core — the single specific truth that defines it. In the second (and optional third) sentence, name the central tension or contradiction that animates daily life here. This is the authorial voice that every subsequent description will inherit.
+const THESIS_INSTRUCTION = `Write a 2-3 sentence IDENTITY STATEMENT for this settlement. In the first sentence, name what it IS at its core - the single specific truth that defines it. In the second (and optional third) sentence, name the central tension or contradiction that animates daily life here. This is the authorial voice that every subsequent description will inherit.
 
-Ground ALL claims in specific data from the context — a specific stressor, a specific faction, a specific trade fact, a specific NPC. If you'd be comfortable writing the same sentence about a different settlement, rewrite it.
+Ground ALL claims in specific data from the context - a specific stressor, a specific faction, a specific trade fact, a specific NPC. If you'd be comfortable writing the same sentence about a different settlement, rewrite it.
 
 ${HOUSE_STYLE}
 
@@ -195,7 +262,7 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
 }
 
 /**
- * Tier 6.8 — augment the bespoke summary with the structured
+ * Tier 6.8 - augment the bespoke summary with the structured
  * grounding envelope. The envelope brings in the canonical lists of
  * locked entities and user-edited fields the AI must preserve. We
  * splice them into the summary at a named key so the thesis prompt
@@ -229,10 +296,11 @@ function augmentSummaryWithGrounding(
   }
 }
 
-function buildThesisPrompt(summary: Record<string, unknown>): string {
+function buildThesisPrompt(summary: Record<string, unknown>, aiGuidance = ''): string {
   return `You are the authorial voice of a worldbuilding narrator for tabletop RPGs.
 
 ${THESIS_INSTRUCTION}
+${guidanceBlock(aiGuidance)}
 
 Settlement context:
 ${JSON.stringify(summary, null, 2)}`;
@@ -242,7 +310,7 @@ ${JSON.stringify(summary, null, 2)}`;
 
 /**
  * Runtime context threaded into every pass's `extract`. Currently just
- * `pinnedNpcIds` — the set of NPC ids the DM has flagged to preserve across
+ * `pinnedNpcIds` - the set of NPC ids the DM has flagged to preserve across
  * regenerations. Passes that touch NPC prose (currently only `npcs`) must
  * drop pinned entries from their payload so the model never rewrites them.
  */
@@ -264,7 +332,7 @@ type PassSpec = {
 };
 
 const REFINEMENT_PASSES: Record<string, PassSpec> = {
-  // ── 1. Opening prose — the DM's first read: arrival, pressure, reason, history ──
+  // ── 1. Opening prose - the DM's first read: arrival, pressure, reason, history ──
   opening: {
     snapshotPath: '__opening',
     max_tokens: 1400,
@@ -291,7 +359,7 @@ const REFINEMENT_PASSES: Record<string, PassSpec> = {
       if (typeof r?.settlementReason === 'string') {
         const orig = clone.settlementReason;
         if (Array.isArray(orig)) {
-          // Preserve array shape — split refined prose on blank lines
+          // Preserve array shape - split refined prose on blank lines
           const parts = r.settlementReason.split(/\n\n+/).map((p: string) => p.trim()).filter(Boolean);
           if (parts.length >= orig.length) {
             clone.settlementReason = parts.slice(0, orig.length);
@@ -317,11 +385,11 @@ const REFINEMENT_PASSES: Record<string, PassSpec> = {
         clone.prominentRelationship.phrasing = r.prominentRelationshipPhrasing;
       }
     },
-    instruction: `Refine the OPENING NARRATIVE FIELDS. These are the most visible prose in the entire settlement — the DM reads these first.
+    instruction: `Refine the OPENING NARRATIVE FIELDS. These are the most visible prose in the entire settlement - the DM reads these first.
 
 - arrivalScene: the scene the party sees approaching the settlement. Sensory, present tense, grounded in the terrain and trade specifics. 3-5 sentences.
 - pressureSentence: one sentence capturing the political/social pressure this settlement is under RIGHT NOW. Hard-edged, specific, names a tension.
-- settlementReason: why this settlement exists where it exists. If the source has multiple paragraphs separated by blank lines, return the SAME NUMBER of paragraphs separated by blank lines, each refined. Keep it tight — 1-2 sentences per paragraph.
+- settlementReason: why this settlement exists where it exists. If the source has multiple paragraphs separated by blank lines, return the SAME NUMBER of paragraphs separated by blank lines, each refined. Keep it tight - 1-2 sentences per paragraph.
 - historicalCharacter: a short sentence characterizing the settlement's historical pattern (prosperity/calamity/resilience etc.).
 - prominentRelationshipPhrasing: one sentence on the settlement's most important relational dynamic (a patron, a faction tie, a signature rivalry).
 
@@ -332,7 +400,7 @@ ${PRESERVATION_RULES}
 Return JSON: { "arrivalScene": "<refined>", "pressureSentence": "<refined>", "settlementReason": "<refined>", "historicalCharacter": "<refined>", "prominentRelationshipPhrasing": "<refined>" }. OMIT any key whose source was missing. No preamble, no markdown.`,
   },
 
-  // ── 2. Coherence notes — the "what to watch for" aside ──
+  // ── 2. Coherence notes - the "what to watch for" aside ──
   coherenceNotes: {
     snapshotPath: 'coherenceNotes',
     max_tokens: 1000,
@@ -350,14 +418,14 @@ Return JSON: { "arrivalScene": "<refined>", "pressureSentence": "<refined>", "se
         else if (target && typeof target === 'object') target.note = item.note;
       }
     },
-    instruction: `Refine each COHERENCE NOTE. These are DM asides that point at the contradictions and seams in the settlement — what's tonally off, what data points are fighting each other. Let the thesis sharpen the specific contradiction each note is calling out. 1-2 sentences each, incisive, specific.
+    instruction: `Refine each COHERENCE NOTE. These are DM asides that point at the contradictions and seams in the settlement - what's tonally off, what data points are fighting each other. Let the thesis sharpen the specific contradiction each note is calling out. 1-2 sentences each, incisive, specific.
 
 ${PRESERVATION_RULES}
 
 Return JSON: { "items": [{ "id": <number>, "note": "<refined>" }, ...] }. Include every input item. No preamble, no markdown.`,
   },
 
-  // ── 3. Stressors — what's pressing on the settlement ──
+  // ── 3. Stressors - what's pressing on the settlement ──
   stressors: {
     snapshotPath: 'stress',
     max_tokens: 1000,
@@ -386,15 +454,15 @@ Return JSON: { "items": [{ "id": <number>, "note": "<refined>" }, ...] }. Includ
     },
     instruction: `Refine each stressor's SUMMARY and CRISIS HOOK. Keep type and label EXACT.
 
-- summary: 2 sentences capturing what the stressor IS in THIS settlement — who it hurts, who benefits, the specific mechanism it uses to squeeze.
-- crisisHook: 1 sentence pointing at the next escalation — what happens if one more thing tips.
+- summary: 2 sentences capturing what the stressor IS in THIS settlement - who it hurts, who benefits, the specific mechanism it uses to squeeze.
+- crisisHook: 1 sentence pointing at the next escalation - what happens if one more thing tips.
 
 ${PRESERVATION_RULES}
 
 Return JSON: { "items": [{ "id": <number>, "summary": "<refined>", "crisisHook": "<refined>" }, ...] }. Include every input item. Omit a key if source was empty. No preamble, no markdown.`,
   },
 
-  // ── 4. Factions — who holds what ──
+  // ── 4. Factions - who holds what ──
   factions: {
     snapshotPath: 'powerStructure.factions',
     max_tokens: 1800,
@@ -424,7 +492,7 @@ ${PRESERVATION_RULES}
 Return JSON: { "items": [{ "id": <number>, "desc": "<refined>" }, ...] }. Include every input item. No preamble, no markdown.`,
   },
 
-  // ── 5. Conflicts — active power tensions ──
+  // ── 5. Conflicts - active power tensions ──
   conflicts: {
     snapshotPath: 'powerStructure.conflicts',
     max_tokens: 1400,
@@ -457,16 +525,16 @@ Return JSON: { "items": [{ "id": <number>, "desc": "<refined>" }, ...] }. Includ
     },
     instruction: `Refine each conflict's ISSUE and STAKES, plus the top-level RECENT CONFLICT line. Keep faction names EXACT.
 
-- issue: 1 sentence — what is actually being fought over, concretely.
-- stakes: 1 sentence — what each side loses if they back down.
-- recentConflict: 1-2 sentences — the most recent flashpoint or current tension, named specifically.
+- issue: 1 sentence - what is actually being fought over, concretely.
+- stakes: 1 sentence - what each side loses if they back down.
+- recentConflict: 1-2 sentences - the most recent flashpoint or current tension, named specifically.
 
 ${PRESERVATION_RULES}
 
 Return JSON: { "items": [{ "id": <number>, "issue": "<refined>", "stakes": "<refined>" }, ...], "recentConflict": "<refined>" }. Omit keys/arrays whose source was empty. No preamble, no markdown.`,
   },
 
-  // ── 6. History — founding + events + current tensions ──
+  // ── 6. History - founding + events + current tensions ──
   history: {
     snapshotPath: 'history',
     max_tokens: 2000,
@@ -520,8 +588,8 @@ Return JSON: { "items": [{ "id": <number>, "issue": "<refined>", "stakes": "<ref
     },
     instruction: `Refine the HISTORICAL NARRATIVE: founding, events, and current tensions.
 
-- founding.reason / initialChallenge / overcoming / stressNote / foundedBy: keep factual anchors, polish phrasing to feel like lived history — what do old-timers still say about this? 1-2 sentences per field.
-- events[].description: 2-3 sentences each. Ground each event in specific consequence — what did this change that's still true today?
+- founding.reason / initialChallenge / overcoming / stressNote / foundedBy: keep factual anchors, polish phrasing to feel like lived history - what do old-timers still say about this? 1-2 sentences per field.
+- events[].description: 2-3 sentences each. Ground each event in specific consequence - what did this change that's still true today?
 - currentTensions[].description: 1-2 sentences each, tied to named factions where possible.
 
 ${PRESERVATION_RULES}
@@ -529,7 +597,7 @@ ${PRESERVATION_RULES}
 Return JSON: { "founding": { "reason": "...", "initialChallenge": "...", "overcoming": "...", "stressNote": "...", "foundedBy": "..." }, "events": [{ "id": <number>, "description": "<refined>" }, ...], "currentTensions": [{ "id": <number>, "description": "<refined>" }, ...] }. Omit any key/array whose source was empty. No preamble, no markdown.`,
   },
 
-  // ── 7. Institutions — buildings and what they mean here ──
+  // ── 7. Institutions - buildings and what they mean here ──
   institutions: {
     snapshotPath: 'institutions',
     max_tokens: 1800,
@@ -550,14 +618,14 @@ Return JSON: { "founding": { "reason": "...", "initialChallenge": "...", "overco
     },
     instruction: `Refine each institution's DESC (this is the field the UI displays). Keep name and category EXACT.
 
-Aim for 2 sentences per description. Don't just describe what the building is — say what it's FOR in THIS settlement, who really runs it, what's peculiar about how it operates here.
+Aim for 2 sentences per description. Don't just describe what the building is - say what it's FOR in THIS settlement, who really runs it, what's peculiar about how it operates here.
 
 ${PRESERVATION_RULES}
 
 Return JSON: { "items": [{ "id": <number>, "desc": "<refined>" }, ...] }. Include every input item. No preamble, no markdown.`,
   },
 
-  // ── 8. NPCs — the characters the party will meet ──
+  // ── 8. NPCs - the characters the party will meet ──
   //   Honors `ctx.pinnedNpcIds`: entries whose real NPC id appears in the
   //   set are dropped from the payload so the model never rewrites them.
   //   The synthetic `id: idx` used by apply() still maps to the correct
@@ -603,8 +671,8 @@ Return JSON: { "items": [{ "id": <number>, "desc": "<refined>" }, ...] }. Includ
     },
     instruction: `For each NPC, refine their GOAL.SHORT and SECRET.WHAT. Keep name and role EXACT.
 
-- goalShort: 1 concrete sentence — what this person is TRYING to get or do, specific to this settlement.
-- secretWhat: 1 sentence — what they're hiding. Make it dramatically useful — something the party could leverage.
+- goalShort: 1 concrete sentence - what this person is TRYING to get or do, specific to this settlement.
+- secretWhat: 1 sentence - what they're hiding. Make it dramatically useful - something the party could leverage.
 
 Both should feel like they belong in THIS settlement, not a generic fantasy town.
 
@@ -613,7 +681,7 @@ ${PRESERVATION_RULES}
 Return JSON: { "items": [{ "id": <number>, "goalShort": "<refined>", "secretWhat": "<refined>" }, ...] }. Include every input item. Omit a key if source was empty. No preamble, no markdown.`,
   },
 
-  // ── 9. Safety / viability — the "what's actually dangerous here" prose ──
+  // ── 9. Safety / viability - the "what's actually dangerous here" prose ──
   safety: {
     snapshotPath: '__safety',
     max_tokens: 1600,
@@ -665,7 +733,7 @@ ${PRESERVATION_RULES}
 Return JSON: { "viabilitySummary": "<refined>", "guardEffectivenessDesc": "<refined>", "safetyDesc": "<refined>", "economicDragDesc": "<refined>", "crimeTypes": [{ "id": <number>, "desc": "<refined>" }, ...] }. Omit any key whose source was empty. No preamble, no markdown.`,
   },
 
-  // ── 10. Identity markers — short sensory details that make THIS settlement specific ──
+  // ── 10. Identity markers - short sensory details that make THIS settlement specific ──
   //   DM-facing texture. 4-6 one-liners the DM can drop into description.
   identityMarkers: {
     snapshotPath: 'identityMarkers',
@@ -693,14 +761,14 @@ Return JSON: { "viabilitySummary": "<refined>", "guardEffectivenessDesc": "<refi
         clone.identityMarkers = r.items.filter((x: unknown) => typeof x === 'string' && x.length > 0);
       }
     },
-    instruction: `Write 4-6 IDENTITY MARKERS for this settlement. Each is ONE concrete sensory or physical detail — an architectural quirk, a characteristic sound, a recurring smell, a visual motif, a habit of the townsfolk, the one thing travellers remember. Each must be specific to THIS settlement's data (terrain, culture, institutions, exports). If you'd be comfortable writing it about a different settlement, rewrite it.
+    instruction: `Write 4-6 IDENTITY MARKERS for this settlement. Each is ONE concrete sensory or physical detail - an architectural quirk, a characteristic sound, a recurring smell, a visual motif, a habit of the townsfolk, the one thing travellers remember. Each must be specific to THIS settlement's data (terrain, culture, institutions, exports). If you'd be comfortable writing it about a different settlement, rewrite it.
 
 ${HOUSE_STYLE}
 
 Return JSON: { "items": ["<marker 1>", "<marker 2>", ...] }. One sentence each. No numbering inside the strings. No preamble, no markdown.`,
   },
 
-  // ── 11. Friction points — small-scale interpersonal grievances ──
+  // ── 11. Friction points - small-scale interpersonal grievances ──
   //   Sits below settlement-wide stressors. Names specific parties.
   frictionPoints: {
     snapshotPath: 'frictionPoints',
@@ -726,16 +794,16 @@ Return JSON: { "items": ["<marker 1>", "<marker 2>", ...] }. One sentence each. 
           .map((x: any) => ({ who: x.who, what: x.what }));
       }
     },
-    instruction: `Write 3-5 FRICTION POINTS — small-scale interpersonal grievances the DM can surface in scenes. These sit one level BELOW settlement-wide stressors: personal, local, named.
+    instruction: `Write 3-5 FRICTION POINTS - small-scale interpersonal grievances the DM can surface in scenes. These sit one level BELOW settlement-wide stressors: personal, local, named.
 
-Each item MUST name specific parties drawn from the provided NPCs, factions, or institutions. Each item's \`what\` is one sentence capturing the specific grievance — a slight, a debt, a rivalry, an obligation, a resentment.
+Each item MUST name specific parties drawn from the provided NPCs, factions, or institutions. Each item's \`what\` is one sentence capturing the specific grievance - a slight, a debt, a rivalry, an obligation, a resentment.
 
 ${PRESERVATION_RULES}
 
 Return JSON: { "items": [{ "who": "<named party or parties>", "what": "<1 sentence grievance>" }, ...] }. Do not invent names. No preamble, no markdown.`,
   },
 
-  // ── 12. Connections map — explicit NPC↔faction↔institution edges ──
+  // ── 12. Connections map - explicit NPC↔faction↔institution edges ──
   //   Lets the DM navigate politics at the table without re-reading prose.
   connectionsMap: {
     snapshotPath: 'connectionsMap',
@@ -784,16 +852,16 @@ Return JSON: { "items": [{ "who": "<named party or parties>", "what": "<1 senten
         .filter(Boolean);
       if (normalized.length) clone.connectionsMap = normalized;
     },
-    instruction: `Extract 4-8 CONNECTIONS between named entities in this settlement — NPC↔faction, NPC↔institution, faction↔institution, or faction↔faction.
+    instruction: `Extract 4-8 CONNECTIONS between named entities in this settlement - NPC↔faction, NPC↔institution, faction↔institution, or faction↔faction.
 
-ONLY use names that appear in the provided NPCs / factions / institutions lists. Do NOT invent names. \`nature\` is a short phrase naming the relationship (e.g. "reports to", "funds", "competes with", "hides behind", "owes money to"). \`via\` is optional — use it when the edge is mediated (e.g. "reports to Silver Chain VIA the Moot Hall"); empty string when not.
+ONLY use names that appear in the provided NPCs / factions / institutions lists. Do NOT invent names. \`nature\` is a short phrase naming the relationship (e.g. "reports to", "funds", "competes with", "hides behind", "owes money to"). \`via\` is optional - use it when the edge is mediated (e.g. "reports to Silver Chain VIA the Moot Hall"); empty string when not.
 
 ${PRESERVATION_RULES}
 
 Return JSON: { "items": [{ "from": "<name>", "to": "<name>", "via": "<name or empty>", "nature": "<short phrase>" }, ...] }. The top-level wrapper key MUST be exactly "items". No preamble, no markdown.`,
   },
 
-  // ── 13. DM compass — ready-to-run guidance for the table ──
+  // ── 13. DM compass - ready-to-run guidance for the table ──
   //   3 hooks + 2 red flags + 1 twist. The "how do I actually RUN this" field.
   dmCompass: {
     snapshotPath: 'dmCompass',
@@ -863,22 +931,22 @@ Return JSON: { "items": [{ "from": "<name>", "to": "<name>", "via": "<name or em
         clone.dmCompass = { hooks, redFlags, twist };
       }
     },
-    instruction: `Write DM COMPASS — ready-to-run guidance for running this settlement at the table.
+    instruction: `Write DM COMPASS - ready-to-run guidance for running this settlement at the table.
 
 - hooks: exactly 3 adventure hooks, one sentence each. Each hook must be tied to a NAMED stressor, faction, or NPC from the source.
 - redFlags: exactly 2 things that might get the party in trouble here (political missteps, custom they'll violate by accident, authority they shouldn't cross). One sentence each.
-- twist: exactly 1 sentence — "if the session is dragging, try this." A specific dramatic turn that leverages something already on the page.
+- twist: exactly 1 sentence - "if the session is dragging, try this." A specific dramatic turn that leverages something already on the page.
 
 ${HOUSE_STYLE}
 
 ${PRESERVATION_RULES}
 
-Return JSON with this EXACT top-level shape — three sibling keys, NO wrapper object, NO "items" key:
+Return JSON with this EXACT top-level shape - three sibling keys, NO wrapper object, NO "items" key:
 { "hooks": ["<hook 1>", "<hook 2>", "<hook 3>"], "redFlags": ["<flag 1>", "<flag 2>"], "twist": "<twist>" }
 No preamble, no markdown.`,
   },
 
-  // ── 14. Tab notes — one short voice-line per functional tab ──
+  // ── 14. Tab notes - one short voice-line per functional tab ──
   //   Replaces the global identity banner on tabs other than DM Summary /
   //   Overview. Each note is 1-2 sentences grounded in named data so the
   //   reader gets a contextual lens onto that aspect of the settlement
@@ -946,7 +1014,7 @@ No preamble, no markdown.`,
       return out;
     },
     apply: (clone, r) => {
-      // Defensive: same lesson as dmCompass — flat schemas attract `items`
+      // Defensive: same lesson as dmCompass - flat schemas attract `items`
       // wrapping. Peel the wrapper and accept either shape.
       const root = (r && typeof r === 'object' ? r : {}) as Record<string, unknown>;
       const candidates: Array<Record<string, unknown>> = [root];
@@ -982,15 +1050,15 @@ No preamble, no markdown.`,
       }
       if (Object.keys(result).length) clone.narrativeNotes = result;
     },
-    instruction: `Write ONE short VOICE-NOTE per tab — 1-2 sentences each — that gives the DM a contextual lens onto this aspect of the settlement. These replace the identity banner on functional tabs, so each note must add information the identity statement wouldn't have given on its own.
+    instruction: `Write ONE short VOICE-NOTE per tab - 1-2 sentences each - that gives the DM a contextual lens onto this aspect of the settlement. These replace the identity banner on functional tabs, so each note must add information the identity statement wouldn't have given on its own.
 
 Each note MUST name something specific from the source data (a faction, NPC, stressor, trade good, institution, historical event). No generic phrasing. No re-stating the thesis. No mechanics language.
 
 Tabs to write for, with a one-line steer for each:
-- economics:  the economic mood at street level — what does prosperity (or scarcity) FEEL like here, who keeps the coin moving.
+- economics:  the economic mood at street level - what does prosperity (or scarcity) FEEL like here, who keeps the coin moving.
 - services:   what kind of service this town actually provides, who runs them, who's locked out.
 - power:      who really runs this place, and one tension that defines the politics.
-- defense:    the posture — fear, confidence, complacency — and who guards what.
+- defense:    the posture - fear, confidence, complacency - and who guards what.
 - npcs:       what unifies or divides the named cast, in one breath.
 - history:    how a specific past event still presses on the present.
 - resources:  what this terrain and town actually do with what they have, and what they can't make.
@@ -999,7 +1067,7 @@ Tabs to write for, with a one-line steer for each:
 
 ${HOUSE_STYLE}
 
-Return JSON with this EXACT top-level shape — flat, NO wrapper, NO "items" key. The keys MUST be exactly as shown (note the underscore in "plot_hooks"):
+Return JSON with this EXACT top-level shape - flat, NO wrapper, NO "items" key. The keys MUST be exactly as shown (note the underscore in "plot_hooks"):
 {
   "economics":  "<1-2 sentences>",
   "services":   "<1-2 sentences>",
@@ -1020,12 +1088,13 @@ function buildRefinementPrompt(
   thesis: string,
   summary: Record<string, unknown>,
   payload: unknown,
-  /** Prior refined value for this pass — used in progression mode to evolve rather than rewrite */
+  /** Prior refined value for this pass - used in progression mode to evolve rather than rewrite */
   priorValue?: unknown,
-  /** Human-readable change label ("Add market: Silver Crescent") — used in progression mode */
+  /** Human-readable change label ("Add market: Silver Crescent") - used in progression mode */
   changeLabel?: string,
-  /** Tier 6.8 — per-call dynamic preservation block (locked entities + user edits). */
+  /** Tier 6.8 - per-call dynamic preservation block (locked entities + user edits). */
   dynamicPreservationBlock?: string,
+  aiGuidance = '',
 ): string {
   const priorBlock = priorValue != null && !isEmptyPayload(priorValue)
     ? `
@@ -1039,14 +1108,14 @@ ${changeLabel || '(unlabeled change)'}
 Your job is to EVOLVE the prior prose to match the new facts. Keep every sentence from the prior version that is still accurate. Rewrite only what the change invalidates. Do not introduce material that wasn't in the prior version AND isn't demanded by the new facts.`
     : '';
 
-  // Tier 6.8 — settlement-specific preservation block. When dynamic
+  // Tier 6.8 - settlement-specific preservation block. When dynamic
   // lines exist (locked entities, history beats, user-edited fields),
   // they're prepended above THESIS so the AI sees specific names +
   // paths to leave alone before reading the task instructions.
   const dynamicBlock = dynamicPreservationBlock && dynamicPreservationBlock !== PRESERVATION_RULES
     ? `
 
-SETTLEMENT-SPECIFIC PRESERVATION (read this before the task — these are non-negotiable):
+SETTLEMENT-SPECIFIC PRESERVATION (read this before the task - these are non-negotiable):
 ${dynamicPreservationBlock.split('\n').filter(l => l.startsWith('- ') || l.startsWith('SETTLEMENT')).join('\n')}
 `
     : '';
@@ -1060,8 +1129,9 @@ ${thesis}
 
 TASK:
 ${instruction}
+${guidanceBlock(aiGuidance)}
 
-SETTLEMENT CONTEXT (for grounding only — do not repeat):
+SETTLEMENT CONTEXT (for grounding only - do not repeat):
 ${JSON.stringify(summary, null, 2)}
 
 ITEMS TO REFINE:
@@ -1077,7 +1147,7 @@ CRITICAL: Return ONLY valid JSON matching the schema in the task. No markdown co
 // The DM keeps voice and pinned NPCs; we only re-run the passes whose output
 // the change plausibly invalidates.
 //
-// Thesis ALWAYS re-runs — the settlement's identity may have shifted subtly.
+// Thesis ALWAYS re-runs - the settlement's identity may have shifted subtly.
 // NPCs are deliberately NOT in any default set: structural edits don't
 // invalidate NPCs, and a DM who wants them re-rolled can use full regenerate.
 // Seismic changes are blocked by the client; if one arrives here anyway we
@@ -1104,6 +1174,7 @@ function buildProgressionThesisPrompt(
   priorThesis: string,
   changeLabel: string,
   summary: Record<string, unknown>,
+  aiGuidance = '',
 ): string {
   return `You are the authorial voice of a worldbuilding narrator for tabletop RPGs.
 
@@ -1114,9 +1185,10 @@ ${priorThesis || '(no prior thesis was recorded)'}
 
 The settlement has changed: ${changeLabel || '(unlabeled change)'}
 
-Update the identity statement to acknowledge this shift without throwing away what was true. Keep the voice. Two to three sentences. Ground the new claim in a specific data point from the new state — name a faction, a stressor, an institution, a trade fact, or an NPC.
+Update the identity statement to acknowledge this shift without throwing away what was true. Keep the voice. Two to three sentences. Ground the new claim in a specific data point from the new state - name a faction, a stressor, an institution, a trade fact, or an NPC.
 
 ${HOUSE_STYLE}
+${guidanceBlock(aiGuidance)}
 
 Return ONLY the identity statement. No preamble, no markdown, no headings. Plain prose, one paragraph.
 
@@ -1129,7 +1201,7 @@ ${JSON.stringify(summary, null, 2)}`;
  *
  * Progression starts clone = deepClone(new raw settlement) so every mechanical
  * fact (including the newly added/removed item) is correct. But the raw clone
- * has RAW prose for every field — losing every prior refinement.
+ * has RAW prose for every field - losing every prior refinement.
  *
  * This helper copies refined prose from `prior` onto `clone` for every
  * refinable field, matching items by stable key (id/name/label) rather than
@@ -1175,7 +1247,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
   ]) copyStr(p);
 
   // settlementReason: string | string[] | { primary, ... }. Copy only when the
-  // shape matches — otherwise the prior prose won't slot back cleanly.
+  // shape matches - otherwise the prior prose won't slot back cleanly.
   if (prior.settlementReason != null && clone.settlementReason != null) {
     if (typeof prior.settlementReason === 'string' && typeof clone.settlementReason === 'string') {
       clone.settlementReason = prior.settlementReason;
@@ -1190,7 +1262,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
 
   // ── Array fields: match by stable key, copy refined fields ─────────────
 
-  // NPCs — match by id (fall back name)
+  // NPCs - match by id (fall back name)
   if (Array.isArray(prior.npcs) && Array.isArray(clone.npcs)) {
     const npcKey = (n: any) => n?.id != null ? String(n.id) : String(n?.name || '');
     const priorMap = new Map(prior.npcs.map((n: any) => [npcKey(n), n]));
@@ -1208,7 +1280,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
     }
   }
 
-  // Institutions — match by name
+  // Institutions - match by name
   if (Array.isArray(prior.institutions) && Array.isArray(clone.institutions)) {
     const priorMap = new Map(prior.institutions.map((i: any) => [String(i?.name || ''), i]));
     for (const ci of clone.institutions) {
@@ -1217,7 +1289,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
     }
   }
 
-  // Factions — match by name/faction
+  // Factions - match by name/faction
   if (Array.isArray(prior.powerStructure?.factions) && Array.isArray(clone.powerStructure?.factions)) {
     const facKey = (f: any) => String(f?.name || f?.faction || '');
     const priorMap = new Map(prior.powerStructure.factions.map((f: any) => [facKey(f), f]));
@@ -1227,7 +1299,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
     }
   }
 
-  // Stressors — match by type+label (single-object or array)
+  // Stressors - match by type+label (single-object or array)
   {
     const priorStress = Array.isArray(prior.stress) ? prior.stress : (prior.stress ? [prior.stress] : []);
     const cloneStressRef = Array.isArray(clone.stress) ? clone.stress : (clone.stress ? [clone.stress] : []);
@@ -1243,7 +1315,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
     }
   }
 
-  // Conflicts — match by factions tuple (sorted) or issue text
+  // Conflicts - match by factions tuple (sorted) or issue text
   if (Array.isArray(prior.powerStructure?.conflicts) && Array.isArray(clone.powerStructure?.conflicts)) {
     const cKey = (c: any) => Array.isArray(c?.factions) ? c.factions.slice().sort().join('|') : String(c?.issue || '');
     const priorMap = new Map(prior.powerStructure.conflicts.map((c: any) => [cKey(c), c]));
@@ -1255,7 +1327,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
     }
   }
 
-  // Historical events — match by type+name
+  // Historical events - match by type+name
   if (Array.isArray(prior.history?.historicalEvents) && Array.isArray(clone.history?.historicalEvents)) {
     const eKey = (e: any) => `${e?.type || ''}|${e?.name || ''}`;
     const priorMap = new Map(prior.history.historicalEvents.map((e: any) => [eKey(e), e]));
@@ -1265,7 +1337,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
     }
   }
 
-  // Current tensions — match by type+severity (descriptions are fuzzy so type
+  // Current tensions - match by type+severity (descriptions are fuzzy so type
   // is the stable handle)
   if (Array.isArray(prior.history?.currentTensions) && Array.isArray(clone.history?.currentTensions)) {
     const tKey = (t: any) => `${t?.type || ''}|${t?.severity || ''}`;
@@ -1276,7 +1348,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
     }
   }
 
-  // Crime types — match by type
+  // Crime types - match by type
   if (Array.isArray(prior.economicState?.safetyProfile?.crimeTypes)
       && Array.isArray(clone.economicState?.safetyProfile?.crimeTypes)) {
     const priorMap = new Map(
@@ -1288,7 +1360,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
     }
   }
 
-  // Coherence notes — match by positional index (no stable identity). When
+  // Coherence notes - match by positional index (no stable identity). When
   // lengths differ, copy only the overlap and leave extras as raw.
   if (Array.isArray(prior.coherenceNotes) && Array.isArray(clone.coherenceNotes)) {
     const n = Math.min(prior.coherenceNotes.length, clone.coherenceNotes.length);
@@ -1348,8 +1420,9 @@ const DAILY_LIFE_FIELDS: Record<string, FieldCfg> = {
   },
 };
 
-function buildDailyLifePrompt(instruction: string, summary: Record<string, unknown>): string {
+function buildDailyLifePrompt(instruction: string, summary: Record<string, unknown>, aiGuidance = ''): string {
   return `You are a worldbuilding narrator for tabletop RPGs. ${instruction}
+${guidanceBlock(aiGuidance)}
 
 Return ONLY the paragraph. No preamble, no markdown, no heading.
 
@@ -1386,6 +1459,7 @@ function getCorsHeaders(req?: Request) {
 // ── Anthropic call ──────────────────────────────────────────────────────────
 
 async function callAnthropic(prompt: string, maxTokens: number, model: string): Promise<string> {
+  if (!ANTHROPIC_API_KEY) throw new Error('Anthropic API key is not configured');
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -1407,6 +1481,51 @@ async function callAnthropic(prompt: string, maxTokens: number, model: string): 
 
   const json = await res.json();
   return (json.content?.[0]?.text || '').trim();
+}
+
+async function callOpenAI(prompt: string, maxTokens: number, model: string): Promise<string> {
+  if (!OPENAI_API_KEY) throw new Error('OpenAI API key is not configured');
+  const res = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model,
+      input: prompt,
+      max_output_tokens: maxTokens,
+    }),
+  });
+
+  if (!res.ok) {
+    const errBody = await res.text();
+    throw new Error(`AI API error: ${res.status} ${errBody.slice(0, 200)}`);
+  }
+
+  const json = await res.json();
+  const outputText = typeof json.output_text === 'string' ? json.output_text : '';
+  if (outputText.trim()) return outputText.trim();
+  const content = Array.isArray(json.output)
+    ? json.output.flatMap((item: any) => Array.isArray(item?.content) ? item.content : [])
+    : [];
+  return content
+    .map((item: any) => item?.text || '')
+    .filter(Boolean)
+    .join('\n')
+    .trim();
+}
+
+async function callModel(
+  prompt: string,
+  maxTokens: number,
+  phase: ModelPhase,
+  modelPreference: ModelPreference,
+): Promise<string> {
+  const profile = MODEL_PROFILES[modelPreference] || MODEL_PROFILES.claude_best;
+  const model = profile[phase];
+  if (profile.provider === 'openai') return callOpenAI(prompt, maxTokens, model);
+  return callAnthropic(prompt, maxTokens, model);
 }
 
 function safeJsonParse(text: string): any {
@@ -1438,7 +1557,7 @@ function getByPath(obj: any, path: string): any {
  * mode: the model returned valid JSON but in a shape the apply doesn't
  * recognize (e.g. wrapping in `items` when the apply expects flat fields,
  * or using `source/target` when the apply checks `from/to`). Without this
- * detection the pass reports "succeeded" but the field stays raw — exactly
+ * detection the pass reports "succeeded" but the field stays raw - exactly
  * what the user reported for dmCompass and connectionsMap.
  *
  * Compares serialized snapshots. Returns true if apply mutated something at
@@ -1448,7 +1567,7 @@ function applyMutated(beforeJson: string, afterValue: unknown): boolean {
   try {
     return beforeJson !== JSON.stringify(afterValue);
   } catch {
-    // Cyclic or otherwise unstringifiable — assume mutation happened to
+    // Cyclic or otherwise unstringifiable - assume mutation happened to
     // avoid spurious warnings.
     return true;
   }
@@ -1479,7 +1598,7 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Tier 0.10 — obvious-bot guard. Generation is credit-gated, but
+  // Tier 0.10 - obvious-bot guard. Generation is credit-gated, but
   // bots still cost the function budget every time they reach the
   // auth check. Rejecting up front keeps Anthropic API budget and
   // postgres connections from churning on scraper traffic.
@@ -1512,7 +1631,9 @@ serve(async (req) => {
       settlement,
       settlementId,
       pinnedNpcIds,
-      // Progression-only (AI-4b) — ignored for other types.
+      aiGuidance,
+      modelPreference,
+      // Progression-only (AI-4b) - ignored for other types.
       changeType,
       changeLabel,
       priorNarrative,
@@ -1540,7 +1661,10 @@ serve(async (req) => {
       ? pinnedNpcIds.filter((x: unknown) => x != null).map((x: unknown) => String(x))
       : [];
 
-    const cost = CREDIT_COSTS[type];
+    const selectedModelPreference = normalizeModelPreference(modelPreference);
+    const confirmedAiGuidance = typeof aiGuidance === 'string' ? aiGuidance.trim().slice(0, 4000) : '';
+    const spendFeature = spendFeatureFor(type, selectedModelPreference);
+    const cost = CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[type];
 
     const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL')!,
@@ -1548,7 +1672,7 @@ serve(async (req) => {
     );
 
     // ── Atomic credit spend via the spend_credits RPC (migration 009) ──
-    // Tier 9.9 audit plan #3 — the spend uses the RPC as the only path.
+    // Tier 9.9 audit plan #3 - the spend uses the RPC as the only path.
     // The legacy read-then-write fallback was dropped after migration
     // 009 was confirmed in production: silent racy direct writes are
     // strictly worse than a loud RPC failure (which the client can
@@ -1560,7 +1684,7 @@ serve(async (req) => {
     // { ok: false, reason, balance } on insufficient funds.
     //
     // We capture spend_id so the refund path targets the exact ledger
-    // row this spend created — no "find the most recent spend"
+    // row this spend created - no "find the most recent spend"
     // guesswork and no balance-restoration race with intervening
     // transactions.
     let isElevated = false;
@@ -1568,15 +1692,15 @@ serve(async (req) => {
     let spendId: string | null = null;
 
     const { data: spendResult, error: spendErr } = await supabaseUser.rpc('spend_credits', {
-      feature: type,
+      feature: spendFeature,
     });
 
     if (spendErr) {
       console.error('[generate-narrative] spend_credits RPC errored:', spendErr.message);
-      throw new Error(`Credit spend failed: ${spendErr.message}. Try again — no credits were charged.`);
+      throw new Error(`Credit spend failed: ${spendErr.message}. Try again - no credits were charged.`);
     }
     if (!spendResult) {
-      throw new Error('Credit spend returned no result. Try again — no credits were charged.');
+      throw new Error('Credit spend returned no result. Try again - no credits were charged.');
     }
 
     const result = spendResult as {
@@ -1589,18 +1713,18 @@ serve(async (req) => {
     }
     isElevated = Boolean(result.elevated);
     spendId = result.spend_id || null;
-    // For elevated users the RPC returns balance=-2 as a sentinel — we
+    // For elevated users the RPC returns balance=-2 as a sentinel - we
     // surface a friendlier "unlimited" value to the client (Infinity
     // isn't JSON-serializable, so use a high integer).
     postSpendBalance = result.elevated ? 999999 : result.balance;
 
-    // Tier 6.8 — augment the bespoke summary with the structured
+    // Tier 6.8 - augment the bespoke summary with the structured
     // grounding envelope so the AI sees locked entities + user edits.
     const summary = augmentSummaryWithGrounding(
       settlement as Record<string, unknown>,
       summarizeSettlement(settlement as Record<string, unknown>),
     );
-    // Per-call preservation block — adds settlement-specific MUST
+    // Per-call preservation block - adds settlement-specific MUST
     // PRESERVE lines on top of the static PRESERVATION_RULES. Threaded
     // into refinement-pass prompt building below.
     const dynamicPreservation = preservationBlockFor(settlement);
@@ -1621,7 +1745,7 @@ serve(async (req) => {
 
         const refund = async () => {
           if (isElevated) return;
-          // Tier 9.9 audit plan #4 — dropped the legacy fallback. The
+          // Tier 9.9 audit plan #4 - dropped the legacy fallback. The
           // refund_credits RPC writes a NEW grant row that references
           // the originating spend; it's idempotent and safe under
           // concurrent transactions. If the RPC errors, we surface
@@ -1629,7 +1753,7 @@ serve(async (req) => {
           // back to a racy direct write that would either double-
           // credit or silently swallow the refund).
           if (!spendId) {
-            console.error('[generate-narrative] refund requested but no spend_id captured — RPC spend path must have been bypassed');
+            console.error('[generate-narrative] refund requested but no spend_id captured - RPC spend path must have been bypassed');
             return;
           }
           try {
@@ -1639,7 +1763,7 @@ serve(async (req) => {
             });
             if (refundErr) {
               // Loud failure. The user got partial value (the spend
-              // happened) and the refund didn't land — a support
+              // happened) and the refund didn't land - a support
               // ticket is the right resolution, not a silent racy
               // direct write that could compound the inconsistency.
               console.error('[generate-narrative] refund_credits RPC failed:', refundErr.message);
@@ -1665,8 +1789,8 @@ serve(async (req) => {
 
             await Promise.all(entries.map(async ([fieldName, cfg]) => {
               try {
-                const prompt = buildDailyLifePrompt(cfg.instruction, summary);
-                const value = await callAnthropic(prompt, cfg.max_tokens, DAILY_LIFE_MODEL);
+                const prompt = buildDailyLifePrompt(cfg.instruction, summary, confirmedAiGuidance);
+                const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference);
                 results[fieldName] = value;
                 send({ field: fieldName, value });
               } catch (e) {
@@ -1712,14 +1836,16 @@ serve(async (req) => {
             let thesis: string;
             try {
               const priorThesis = typeof priorNarrative?.thesis === 'string' ? priorNarrative.thesis : '';
-              thesis = await callAnthropic(
+              thesis = await callModel(
                 buildProgressionThesisPrompt(
                   priorThesis,
                   typeof changeLabel === 'string' ? changeLabel : '',
                   summary,
+                  confirmedAiGuidance,
                 ),
                 600,
-                THESIS_MODEL,
+                'thesis',
+                selectedModelPreference,
               );
             } catch (e) {
               await refund();
@@ -1759,8 +1885,9 @@ serve(async (req) => {
                   isEmptyPayload(priorValue) ? undefined : priorValue,
                   typeof changeLabel === 'string' ? changeLabel : undefined,
                   dynamicPreservation,
+                  confirmedAiGuidance,
                 );
-                const raw = await callAnthropic(prompt, spec.max_tokens, REFINEMENT_MODEL);
+                const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference);
                 const parsed = safeJsonParse(raw);
 
                 // Silent-shape-mismatch detection (see narrative loop above).
@@ -1817,10 +1944,11 @@ serve(async (req) => {
           // Phase 1: Opus thesis
           let thesis: string;
           try {
-            thesis = await callAnthropic(
-              buildThesisPrompt(summary),
+            thesis = await callModel(
+              buildThesisPrompt(summary, confirmedAiGuidance),
               600,
-              THESIS_MODEL,
+              'thesis',
+              selectedModelPreference,
             );
           } catch (e) {
             await refund();
@@ -1848,14 +1976,14 @@ serve(async (req) => {
                 return;
               }
 
-              const prompt = buildRefinementPrompt(spec.instruction, thesis, summary, payload, undefined, undefined, dynamicPreservation);
-              const raw = await callAnthropic(prompt, spec.max_tokens, REFINEMENT_MODEL);
+              const prompt = buildRefinementPrompt(spec.instruction, thesis, summary, payload, undefined, undefined, dynamicPreservation, confirmedAiGuidance);
+              const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference);
               const parsed = safeJsonParse(raw);
 
               // Silent-shape-mismatch detection: snapshot the field before apply,
               // then check whether apply actually wrote anything. Synthetic paths
               // ('__opening' etc.) write to multiple keys and we don't track them
-              // here — log only for concrete snapshotPath passes.
+              // here - log only for concrete snapshotPath passes.
               const beforeSnapshot = spec.snapshotPath.startsWith('__')
                 ? null
                 : JSON.stringify(getByPath(aiClone, spec.snapshotPath));

@@ -1,20 +1,20 @@
 /**
- * Dense — character-sheet-density layout primitives.
+ * Dense - character-sheet-density layout primitives.
  *
  * The original PDF leaned magazine-spacious. These primitives target the
- * opposite: every page should feel like a D&D stat block — labels tight to
+ * opposite: every page should feel like a D&D stat block - labels tight to
  * values, bullets stacked, columns packed. Generous white-space is a sin.
  *
  * Components:
- *   ChapterBand   — compact section opener (replaces tall <Section>)
- *   StatStrip     — horizontal row of mini-stats (one line each)
- *   KeyValRow     — single row of label: value pairs (no card wrapper)
- *   TwoCol        — flex: 1 / flex: 1 with optional gap
- *   ThreeCol      — three even columns
- *   BulletList    — tight bullet list, optional editable
- *   InlineMeta    — small caps meta line (e.g. "TIER · POPULATION · TERRAIN")
- *   FieldRow      — tight definition-row with EditableText value
- *   GoldRule      — thin gold rule (used between dense sections)
+ *   ChapterBand   - compact section opener (replaces tall <Section>)
+ *   StatStrip     - horizontal row of mini-stats (one line each)
+ *   KeyValRow     - single row of label: value pairs (no card wrapper)
+ *   TwoCol        - flex: 1 / flex: 1 with optional gap
+ *   ThreeCol      - three even columns
+ *   BulletList    - tight bullet list, optional editable
+ *   InlineMeta    - small caps meta line (e.g. "TIER · POPULATION · TERRAIN")
+ *   FieldRow      - tight definition-row with EditableText value
+ *   GoldRule      - thin gold rule (used between dense sections)
  *
  * All primitives default to wrap={false} where it makes sense. Use sparingly.
  */
@@ -127,7 +127,7 @@ export function StatStrip({ stats, marginBottom = space.sm }) {
               marginTop: 1,
             }}
           >
-            {s.value || '—'}
+            {s.value || '-'}
           </Text>
           {s.sublabel && (
             <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], marginTop: 1 }}>

@@ -1,5 +1,5 @@
 /**
- * BarMeter — horizontal progress bar with label and value subtext.
+ * BarMeter - horizontal progress bar with label and value subtext.
  *
  * Used for percentage-style stats (faction power, defense scores, income
  * source split). Container is muted cream, fill is tone-coded.

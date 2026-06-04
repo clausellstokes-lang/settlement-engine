@@ -1,9 +1,9 @@
 /**
- * domain/compendium/searchIndex.js — P139 / CP-4 global type-ahead search.
+ * domain/compendium/searchIndex.js - P139 / CP-4 global type-ahead search.
  *
  * The Compendium's per-tab search only ever filters the tab you're
  * already on. The critique (CP-4) flagged that a reader who knows the
- * word "theocracy" but not which tab it lives under has no way in — the
+ * word "theocracy" but not which tab it lives under has no way in - the
  * search is local, the knowledge is global.
  *
  * This module builds ONE flat, searchable index across every built-in
@@ -12,19 +12,19 @@
  * lives on and an `anchor` hash, so the UI can switch tabs and scroll
  * the reader to the right place.
  *
- * The index is a NAVIGATION aid, not the display source — the tabs still
+ * The index is a NAVIGATION aid, not the display source - the tabs still
  * render their own content. That decoupling is deliberate: a slightly
  * stale index entry still routes the reader to a valid, live tab rather
  * than 404-ing. The two big arrays (archetypes, relationship types) are
  * imported from `catalogData.js`, the same source the tabs render, so
  * those stay drift-free automatically.
  *
- * Pure module — no React, no DOM, no flags. Safe to unit test in node.
+ * Pure module - no React, no DOM, no flags. Safe to unit test in node.
  */
 
 import { ARCHETYPES, REL_TYPES } from './catalogData.js';
 
-// Valid destination tabs — must mirror the TABS ids in CompendiumPanel.
+// Valid destination tabs - must mirror the TABS ids in CompendiumPanel.
 export const COMPENDIUM_TABS = Object.freeze([
   'tiers', 'economy', 'power', 'arcane', 'stress', 'neighbour', 'institutions',
 ]);
@@ -39,7 +39,7 @@ function slug(s) {
 
 // ── Curated reference entries for the smaller, hardcoded sections ──────────
 // These mirror the inline arrays the Tiers / Economy / Magic / Stress
-// tabs render. They're concise on purpose — enough to match a query and
+// tabs render. They're concise on purpose - enough to match a query and
 // route the reader, not a second copy of the prose.
 
 const TIER_ENTRIES = [
@@ -159,7 +159,7 @@ function scoreEntry(entry, q, tokens) {
   if (term.split(/\s+/).some(w => w.startsWith(q))) return 65;
   if (term.includes(q)) return 55;
   if (haystack.includes(q)) return 35;
-  // every token present somewhere — handles out-of-order multi-word queries
+  // every token present somewhere - handles out-of-order multi-word queries
   if (tokens.length > 1 && tokens.every(t => haystack.includes(t))) return 20;
   return 0;
 }
@@ -167,7 +167,7 @@ function scoreEntry(entry, q, tokens) {
 /**
  * Search the Compendium index. Pure; returns ranked navigation targets.
  *
- * @param {string} query — raw user input.
+ * @param {string} query - raw user input.
  * @param {{ limit?: number, index?: ReadonlyArray<object> }} [opts]
  * @returns {Array<object>} ranked entries (the index objects themselves).
  */

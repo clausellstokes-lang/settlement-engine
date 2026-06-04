@@ -5,7 +5,7 @@
  * runs narrative overlays, defense profile, legitimacy patching,
  * and coherence generation.
  *
- * Extracted from generateSettlement.js lines 1003–1071.
+ * Extracted from generateSettlement.js lines 1003-1071.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -17,7 +17,7 @@ import { generateDefenseProfile } from '../defenseGenerator.js';
 // at assembly so existing pipeline NPCs are deduplicated against.
 import { ensureFactionStructuralNpcs } from '../factionRoles.js';
 // Canonical-shape adapter (Tier 1.3). Stamps version fields, mints a
-// stable id, defaults canonical containers. Pure — does not restructure
+// stable id, defaults canonical containers. Pure - does not restructure
 // legacy fields. Every freshly-generated settlement passes through here
 // so downstream consumers (save/load, PDF, AI overlay, trace layer)
 // can rely on the canonical contract.
@@ -69,7 +69,7 @@ registerStep('assembleSettlement', {
     resourceAnalysis,
     economicViability,
     history,
-    // Tier 1.2 — dual-write the stress array under both the legacy
+    // Tier 1.2 - dual-write the stress array under both the legacy
     // `stress` name AND the canonical `stressors` name. Consumers that
     // bypass normalizeSettlement (e.g. UI components that read directly
     // from a freshly-generated settlement) now see the canonical shape
@@ -116,7 +116,7 @@ registerStep('assembleSettlement', {
   // Faction-to-NPC coupling. Walks every faction; for each archetype
   // (temple, watch, merchant, thieves, noble, arcane) ensures the
   // implied structural NPCs exist with the right importance tier and
-  // institution/faction linkage. Idempotent — won't duplicate NPCs
+  // institution/faction linkage. Idempotent - won't duplicate NPCs
   // the population step already generated for the same role + faction.
   const withStructural = ensureFactionStructuralNpcs(settlement);
   Object.assign(settlement, withStructural);
@@ -133,7 +133,7 @@ registerStep('assembleSettlement', {
   // Deterministic id: normalizeSettlement uses `_seed` to mint a stable
   // settlement id (idFromSeed). Without _seed on the object at the
   // normalize step, every regeneration of the same config gets a
-  // different id — which the review flagged as a determinism gap.
+  // different id - which the review flagged as a determinism gap.
   // Attach _seed BEFORE normalize so the id derives from it.
   if (ctx._seed && !settlement._seed) {
     settlement._seed = ctx._seed;
@@ -143,7 +143,7 @@ registerStep('assembleSettlement', {
   // the *only* point at which a newly-generated settlement enters the
   // wider app; normalizing here means every consumer downstream
   // (Zustand store, save layer, PDF, AI overlay) sees a settlement with
-  // version stamps and a stable id. The legacy shape is preserved —
+  // version stamps and a stable id. The legacy shape is preserved -
   // normalize only adds, never restructures.
   return { settlement: normalizeSettlement(settlement) };
 });

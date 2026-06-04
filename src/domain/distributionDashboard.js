@@ -1,5 +1,5 @@
 /**
- * domain/distributionDashboard.js — Aggregate stats over many settlements.
+ * domain/distributionDashboard.js - Aggregate stats over many settlements.
  *
  * Tier 3.10 of the roadmap. Generation is stochastic; the DEV dashboard
  * shows aggregate distributions across N settlements to make tuning

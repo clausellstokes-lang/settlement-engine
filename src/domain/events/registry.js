@@ -1,15 +1,10 @@
 /**
- * domain/events/registry.js — The five v1 event types and their impact
- * specifications.
+ * domain/events/registry.js - Canon event impact specifications.
  *
- * Why exactly five: the architect critique pushed for ~25-30 event types
- * across categories. Five is the floor that covers ~80% of common
- * player-driven changes (burn the granary, kill the mine, blockade the
- * road, found a temple, deplete the silver vein). Add more only when an
- * actual user repeatedly asks. The surface area is intentionally small
- * because every event type has to be (1) authored as an impact spec,
- * (2) supported by the rerun-affected map, (3) covered by a faction-
- * response branch, and (4) tested. Each new event multiplies that work.
+ * The registry started as a five-event floor, then expanded into a broader
+ * canon event vocabulary. Keep adding types deliberately: every event needs
+ * (1) an impact spec, (2) a rerun-affected map entry, (3) faction-response
+ * coverage where relevant, and (4) tests.
  *
  * An impact spec has three parts:
  *   - state:    direct adjustments to SystemState dimensions (additive)
@@ -19,7 +14,7 @@
  *               narrativeSummary
  *
  * Tags on the event target (e.g. an institution's `tags: ['food_storage']`)
- * can refine the state effects — but in v1 we keep it simple and use
+ * can refine the state effects - but in v1 we keep it simple and use
  * coarse classification by name pattern. A future tag system replaces
  * `classifyInstitution` without touching this registry.
  */
@@ -64,7 +59,7 @@ function classifyInstitution(name) {
 /**
  * State-effect tables per institution kind. The numbers are deltas
  * applied to the *raw* dimension value before it's clamped/banded.
- * They're chosen so a typical event produces a 7–20 point swing —
+ * They're chosen so a typical event produces a 7-20 point swing -
  * enough to feel real, not so much that one event vaults a town
  * across two bands.
  */
@@ -84,7 +79,7 @@ const INSTITUTION_KIND_DELTAS = {
  * Pipeline-step `provides` keys to invalidate when an event of a given
  * type fires. These map onto `getAffectedSteps()` in the pipeline so a
  * reactive rerun touches only the necessary subsystems. Keep the lists
- * tight — over-invalidating costs CPU and risks reshuffling unrelated
+ * tight - over-invalidating costs CPU and risks reshuffling unrelated
  * generated content (which would feel like a regen).
  */
 export const RERUN_KEYS_FOR_EVENT = {
@@ -106,12 +101,13 @@ export const RERUN_KEYS_FOR_EVENT = {
   REFUGEE_WAVE:           ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   PLAGUE:                 ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   RAID_OR_MONSTER_ATTACK: ['institutions', 'economicState', 'narrative'],
-  // Phase 24 / Tier 4.11 — player intervention events
+  // Phase 24 / Tier 4.11 - player intervention events
   REMOVED_THREAT:         ['economicState', 'powerStructure', 'narrative'],
   BROKERED_ALLIANCE:      ['powerStructure', 'narrative'],
   STARTED_RIOT:           ['powerStructure', 'economicState', 'narrative'],
   OPENED_TRADE_ROUTE:     ['activeChains', 'foodSecurity', 'economicState', 'narrative'],
   RECOVERED_RESOURCE:     ['resources', 'activeChains', 'economicState', 'narrative'],
+  DESTROY_SETTLEMENT:     ['economicState', 'powerStructure', 'narrative'],
 };
 
 /**
@@ -146,7 +142,7 @@ export const EVENT_REGISTRY = {
     stateDeltas(event) {
       const kind = classifyInstitution(event.targetId);
       const base = INSTITUTION_KIND_DELTAS[kind] || INSTITUTION_KIND_DELTAS.other;
-      // Full removal is slightly more severe than damage — multiply by
+      // Full removal is slightly more severe than damage - multiply by
       // 1.2 to express that.
       return scale(base, 1.2);
     },
@@ -163,7 +159,7 @@ export const EVENT_REGISTRY = {
     stateDeltas(event) {
       const kind = classifyInstitution(event.targetId);
       const base = INSTITUTION_KIND_DELTAS[kind] || INSTITUTION_KIND_DELTAS.other;
-      // Damage scaled by severity (default 0.7) — burning the granary at
+      // Damage scaled by severity (default 0.7) - burning the granary at
       // severity 1.0 hurts as much as removal; vandalizing it at 0.3
       // costs much less.
       const sev = Number(event.payload?.severity ?? 0.7);
@@ -182,7 +178,7 @@ export const EVENT_REGISTRY = {
     requiresTarget: true,
     targetPrompt: 'Resource name (e.g. "iron vein", "river fish")',
     stateDeltas() {
-      // Flat impact — resource loss always hurts resilience and bumps
+      // Flat impact - resource loss always hurts resilience and bumps
       // resource pressure regardless of which resource. Specifics
       // come from the cascading rerun.
       return { resilience: -10, resourcePressure: +18 };
@@ -206,9 +202,23 @@ export const EVENT_REGISTRY = {
     },
   },
 
+  DESTROY_SETTLEMENT: {
+    label: 'Destroy settlement',
+    description: 'The settlement is destroyed, abandoned, or rendered uninhabitable. Kept as campaign history rather than deleted.',
+    requiresTarget: false,
+    targetPrompt: 'Optional cause (e.g. "dragon fire", "flood", "siege")',
+    stateDeltas() {
+      return { resilience: -100, volatility: +20, externalThreat: +20, resourcePressure: +15 };
+    },
+    narrate(event, settlement) {
+      const cause = event.targetId ? ` by ${labelOf(event.targetId)}` : '';
+      return `${settlement?.name || 'The settlement'} was destroyed${cause}.`;
+    },
+  },
+
   // ── NPC events ─────────────────────────────────────────────────────────
   // Three structural NPC events form the core. The plan emphasized that
-  // "an add NPC function both before canonization and after" — in draft
+  // "an add NPC function both before canonization and after" - in draft
   // mode this is an authorial edit (cause: 'authoring'); in canon mode
   // it's an in-world event (cause: 'player_action' or 'world_event').
   // The event spec is identical; the policy difference lives in the store.
@@ -217,7 +227,7 @@ export const EVENT_REGISTRY = {
     label: 'Add NPC',
     description: 'A new NPC arrives, is appointed, inherits office, or is recruited.',
     requiresTarget: true,
-    targetPrompt: 'NPC name (or "role @ institution" — e.g. "High Priestess @ Temple")',
+    targetPrompt: 'NPC name (or "role @ institution" - e.g. "High Priestess @ Temple")',
     stateDeltas(event) {
       // Adding a key NPC slightly improves resilience; minor NPCs are noise.
       const importance = event.payload?.importance || 'notable';
@@ -278,7 +288,7 @@ export const EVENT_REGISTRY = {
   // ── Impairment events ──────────────────────────────────────────────────
   // Generic impairment events let the user mark institutions or factions
   // as impaired without a specific cause. Useful when DMs want to record
-  // a non-physical setback ("The temple's legitimacy is shaken — too
+  // a non-physical setback ("The temple's legitimacy is shaken - too
   // many failed prophecies").
 
   IMPAIR_INSTITUTION: {
@@ -332,7 +342,7 @@ export const EVENT_REGISTRY = {
   // ── Wave 1: extended event surface ──────────────────────────────────────
   // Five events that cover ~80% of common in-world incidents in canon
   // play. Each is implemented as a thin wrapper over the existing
-  // mutation primitives — no new architecture, just authored content.
+  // mutation primitives - no new architecture, just authored content.
 
   KILL_LEADER: {
     label: 'Kill leader',
@@ -340,13 +350,13 @@ export const EVENT_REGISTRY = {
     requiresTarget: true,
     targetPrompt: 'Leader\'s name (NPC)',
     stateDeltas() {
-      // Always a pillar-tier consequence regardless of authored importance —
+      // Always a pillar-tier consequence regardless of authored importance -
       // killing the LEADER is the structural shock by definition.
       return { resilience: -16, volatility: +18, externalThreat: +4 };
     },
     narrate(event) {
       const cause = event.payload?.cause ? ` (${event.payload.cause})` : '';
-      return `${labelOf(event.targetId)} — the settlement's leader — is gone${cause}.`;
+      return `${labelOf(event.targetId)} - the settlement's leader - is gone${cause}.`;
     },
   },
 
@@ -409,7 +419,7 @@ export const EVENT_REGISTRY = {
 
   RAID_OR_MONSTER_ATTACK: {
     label: 'Raid or monster attack',
-    description: 'External force strikes — bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
+    description: 'External force strikes - bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
     requiresTarget: false,
     targetPrompt: 'Optional: source (e.g. "frost trolls", "Iron Crow bandits")',
     stateDeltas(event) {
@@ -426,7 +436,7 @@ export const EVENT_REGISTRY = {
     },
   },
 
-  // ── Phase 24 / Tier 4.11 — Player intervention events ────────────────────
+  // ── Phase 24 / Tier 4.11 - Player intervention events ────────────────────
 
   REMOVED_THREAT: {
     label: 'Removed threat',

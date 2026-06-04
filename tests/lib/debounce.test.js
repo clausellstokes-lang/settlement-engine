@@ -1,5 +1,5 @@
 /**
- * tests/lib/debounce.test.js — Tier 3.8 coverage.
+ * tests/lib/debounce.test.js - Tier 3.8 coverage.
  */
 
 import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';

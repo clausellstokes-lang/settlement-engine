@@ -3,7 +3,7 @@
  *
  * Generates stress events and threads stress types into effectiveConfig.
  *
- * Extracted from generateSettlement.js lines 412–429.
+ * Extracted from generateSettlement.js lines 412-429.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -34,7 +34,7 @@ registerStep('resolveStress', {
   ].filter(Boolean);
   effectiveConfig._population = population;
 
-  // Tier 2.1 — emit one trace per active stressor so downstream consumers
+  // Tier 2.1 - emit one trace per active stressor so downstream consumers
   // (PipelineRail, AI grounding, the "what's pressuring this town?"
   // viewer) can answer why famine/plague/siege is in play. The intended
   // vs effective distinction matters: a stressor the user requested but
@@ -63,7 +63,7 @@ registerStep('resolveStress', {
       ],
     });
   }
-  // Surface declined-intent stressors too — these are the cases where
+  // Surface declined-intent stressors too - these are the cases where
   // the user asked for X but the engine returned Y (or nothing). Without
   // a trace here, the discrepancy is invisible.
   for (const intended of intendedSet) {

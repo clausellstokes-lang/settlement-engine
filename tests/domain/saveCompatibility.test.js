@@ -1,5 +1,5 @@
 /**
- * tests/domain/saveCompatibility.test.js — Save shape backward compatibility.
+ * tests/domain/saveCompatibility.test.js - Save shape backward compatibility.
  *
  * Tier 3.4 of the roadmap. Users will save settlements before the engine
  * stabilizes. Every future change to the canonical schema is a potential
@@ -14,7 +14,7 @@
  * across the full version history.
  *
  * NOTE: fixtures live in this file (not separate JSON) because they're
- * deliberately minimal — just enough fields to exercise the migration
+ * deliberately minimal - just enough fields to exercise the migration
  * surface, not full real settlements. A separate fixture museum would
  * be more realistic but also rot faster.
  */
@@ -150,7 +150,7 @@ describe('every fixture loads into the current canonical shape', () => {
         expect(typeof out.userCanon).toBe('object');
       });
 
-      it('round-trips idempotently — normalize(normalize(x)) === normalize(x)', () => {
+      it('round-trips idempotently - normalize(normalize(x)) === normalize(x)', () => {
         const once  = normalizeSettlement(fixture.raw);
         const twice = normalizeSettlement(once);
         expect(twice).toEqual(once);

@@ -1,4 +1,4 @@
-// powerData.js — extracted from bundle
+// powerData.js - extracted from bundle
 
 export const FACTION_DESCRIPTORS = {
   economy: [

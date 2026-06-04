@@ -1,5 +1,5 @@
 /**
- * tests/domain/customContent.test.js — Tier 4.16 lean tests.
+ * tests/domain/customContent.test.js - Tier 4.16 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

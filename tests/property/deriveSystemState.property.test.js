@@ -1,14 +1,14 @@
 /**
  * Property-based tests for src/domain/state/deriveSystemState.js
  *
- *   1. Always returns a valid SystemState shape — no throws, all four
+ *   1. Always returns a valid SystemState shape - no throws, all four
  *      dimensions present with value in [0,100] and a valid band
  *   2. resilience monotonic: more impaired institutions ⇒ resilience
  *      never INCREASES
  *   3. externalThreat monotonic: more hostile neighbours ⇒ externalThreat
  *      never DECREASES
  *
- * The derive function is the public reduction surface for the engine —
+ * The derive function is the public reduction surface for the engine -
  * the UI bar, the PDF SystemStateSnapshot, and the compareSystemState
  * delta logic all read it. The "tolerant of sparse inputs" guarantee
  * means partial/legacy/in-flight settlements never crash the render.
@@ -33,7 +33,7 @@ function isValidDimension(d) {
 describe('deriveSystemState (property-based)', () => {
   test('returns a valid 4-dimension shape for arbitrary inputs', () => {
     // Pull arbitrary "reasonable" settlement shapes from a structured
-    // arbitrary — we sample real fields rather than fully random JSON
+    // arbitrary - we sample real fields rather than fully random JSON
     // so the test exercises the actual derivation paths.
     const settlementArb = fc.record({
       economicState: fc.record({

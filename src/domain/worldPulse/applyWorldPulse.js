@@ -11,6 +11,9 @@ import { applyRelationshipPatch, relationshipKeyFromEdge } from './relationshipE
 import { applyNpcPatch } from './npcAgency.js';
 import { applyFactionPatch } from './factionCompetition.js';
 import { proposalIdFor, updateProposalStatus, upsertProposal } from './worldState.js';
+import { applyPopulationOutcomeToSettlement } from './populationDynamics.js';
+import { applyResourceOutcomeToSettlement, applyTierOutcomeToSettlement } from './tierResourceDynamics.js';
+import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
 
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
@@ -78,6 +81,7 @@ function applyRelationshipLabelToGraph(graph, outcome, now) {
  * @param {string} [args.now]
  * @param {boolean} [args.advanceNewsTick]
  * @param {boolean} [args.advanceRegionalImpacts]
+ * @param {any} [args.simulationRules]
  */
 export function applyWorldPulseOutcomes({
   snapshot,
@@ -90,9 +94,12 @@ export function applyWorldPulseOutcomes({
   now,
   advanceNewsTick = true,
   advanceRegionalImpacts: shouldAdvanceRegionalImpacts = true,
+  simulationRules = null,
 } = {}) {
   let graph = ensureRegionalGraph(regionalGraph || snapshot.regionalGraph);
   let state = worldState;
+  const rules = normalizeSimulationRules(simulationRules || worldState?.simulationRules || snapshot?.worldState?.simulationRules);
+  const propagationDepth = propagationDepthForRules(rules);
   let feed = !advanceNewsTick
     ? (wizardNews || snapshot.campaign?.wizardNews)
     : advanceWizardNewsFeed(wizardNews || snapshot.campaign?.wizardNews, 1);
@@ -123,22 +130,46 @@ export function applyWorldPulseOutcomes({
 
     const beforeGraph = graph;
     const target = outcome.targetSaveId ? settlementUpdates.get(String(outcome.targetSaveId)) : null;
+    if (outcome.type === 'population') {
+      for (const delta of outcome.populationDeltas || []) {
+        const entry = settlementUpdates.get(String(delta.saveId));
+        if (!entry) continue;
+        settlementUpdates.set(String(delta.saveId), {
+          ...entry,
+          settlement: applyPopulationOutcomeToSettlement(entry.settlement, outcome, delta.saveId),
+        });
+      }
+    }
+    if (target && outcome.type === 'tier') {
+      settlementUpdates.set(String(outcome.targetSaveId), {
+        ...target,
+        settlement: applyTierOutcomeToSettlement(target.settlement, outcome),
+      });
+    }
+    if (target && outcome.type === 'resource') {
+      settlementUpdates.set(String(outcome.targetSaveId), {
+        ...target,
+        settlement: applyResourceOutcomeToSettlement(target.settlement, outcome),
+      });
+    }
     if (target && outcome.condition) {
       const beforeSettlement = target.settlement;
       const afterSettlement = applyOutcomeToSettlement(beforeSettlement, outcome);
       settlementUpdates.set(String(outcome.targetSaveId), { ...target, settlement: afterSettlement });
-      const propagation = propagateRegionalEvent({
-        graph,
-        beforeSettlement,
-        afterSettlement,
-        event: { id: outcome.id, type: 'WORLD_PULSE', targetId: outcome.targetSaveId, payload: { severity: outcome.severity } },
-        activeSettlementId: outcome.targetSaveId,
-        visibleSettlementIds: snapshot.settlements.map(item => item.id),
-        maxDepth: 2,
-        now,
-      });
-      graph = propagation.graph;
-      newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeGraph, graph, { tick, createdAt: now }));
+      if (propagationDepth > 0) {
+        const propagation = propagateRegionalEvent({
+          graph,
+          beforeSettlement,
+          afterSettlement,
+          event: { id: outcome.id, type: 'WORLD_PULSE', targetId: outcome.targetSaveId, payload: { severity: outcome.severity } },
+          activeSettlementId: outcome.targetSaveId,
+          visibleSettlementIds: snapshot.settlements.map(item => item.id),
+          maxDepth: propagationDepth,
+          now,
+        });
+        graph = propagation.graph;
+        newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeGraph, graph, { tick, createdAt: now }));
+      }
     }
 
     if (outcome.relationshipKey && outcome.relationshipPatch) {
@@ -156,7 +187,7 @@ export function applyWorldPulseOutcomes({
     newsEntries.push(newsEntryForOutcome(outcome, tick, 'applied'));
   }
 
-  if (shouldAdvanceRegionalImpacts) {
+  if (shouldAdvanceRegionalImpacts && propagationDepth > 0) {
     const beforeRegionalAdvance = graph;
     graph = advanceRegionalImpacts(graph, 1, { currentTick: tick });
     newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeRegionalAdvance, graph, { tick, createdAt: now }));
@@ -202,6 +233,7 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
     now,
     advanceNewsTick: false,
     advanceRegionalImpacts: false,
+    simulationRules: campaign.worldState?.simulationRules,
   });
   result.worldState = updateProposalStatus(result.worldState, proposalId, 'applied', { appliedAt: now });
   return result;

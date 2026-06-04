@@ -1,5 +1,5 @@
 /**
- * chronicle.js — Pure helpers for the per-settlement narrative chronicle.
+ * chronicle.js - Pure helpers for the per-settlement narrative chronicle.
  *
  * A chronicle entry is an immutable record of a narrative generation event
  * (initial / regenerate / progression / revert). Entries live on the saved
@@ -9,13 +9,13 @@
  * Ordering: newest-first. Index 0 is the most recent entry.
  *
  * Modes:
- *   • 'full'    — carries the full aiSettlement/aiDailyLife snapshot.
- *   • 'summary' — only thesis + summaryText; heavy fields nulled.
+ *   • 'full'    - carries the full aiSettlement/aiDailyLife snapshot.
+ *   • 'summary' - only thesis + summaryText; heavy fields nulled.
  *
  * Rotation: when `full` entries exceed `limit`, the oldest `full` entries
  * are rotated in-place to `summary`. Summary entries are never pruned.
  *
- * No store access, no async, no side effects — safe to import anywhere.
+ * No store access, no async, no side effects - safe to import anywhere.
  */
 
 // ── Limits ───────────────────────────────────────────────────────────────────
@@ -26,10 +26,10 @@ export const CHRONICLE_LIMITS = {
   elevated: Infinity, // developer / admin
 };
 
-// ── UUID (tiny, self-contained — avoids pulling a dep just for ids) ──────────
+// ── UUID (tiny, self-contained - avoids pulling a dep just for ids) ──────────
 
 function uuid() {
-  // Good enough for local identifiers — not cryptographic.
+  // Good enough for local identifiers - not cryptographic.
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
     try { return crypto.randomUUID(); } catch (_) { /* fall through */ }
   }
@@ -48,15 +48,27 @@ function uuid() {
  *
  * @param {object} args
  * @param {'initial'|'regenerate'|'progression'|'revert'} args.reason
- * @param {object|null} args.aiSettlement  — snapshot to preserve
- * @param {object|null} args.aiDailyLife   — snapshot to preserve
- * @param {string|null} [args.triggeredBy] — human-readable note (for progression)
+ * @param {object|null} args.aiSettlement  - snapshot to preserve
+ * @param {object|null} args.aiDailyLife   - snapshot to preserve
+ * @param {string|null} [args.triggeredBy] - human-readable note (for progression)
  * @param {'full'|'summary'} [args.mode='full']
  * @returns {ChronicleEntry}
  */
+/**
+ * @typedef {object} ChronicleEntry
+ * @property {string} id
+ * @property {string} createdAt
+ * @property {'full'|'summary'} mode
+ * @property {string} reason
+ * @property {string} thesis
+ * @property {string} summaryText
+ * @property {object|null} [aiSettlement]
+ * @property {object|null} [aiDailyLife]
+ * @property {string|null} [triggeredBy]
+ */
 export function createChronicleEntry({ reason, aiSettlement, aiDailyLife, triggeredBy = null, mode = 'full' }) {
   const thesis = typeof aiSettlement?.thesis === 'string' ? aiSettlement.thesis : '';
-  // summaryText defaults to thesis — cheap, zero extra API calls. If callers
+  // summaryText defaults to thesis - cheap, zero extra API calls. If callers
   // ever want a derived short summary, they can override after construction.
   const summaryText = thesis;
   const isSummary = mode === 'summary';
@@ -96,9 +108,9 @@ export function rotateToSummary(entry) {
  * oldest first. Summary entries do not count against the limit and are never
  * pruned.
  *
- * Returns a new array — never mutates the input.
+ * Returns a new array - never mutates the input.
  */
-export function appendChronicleEntry(chronicle, entry, { limit } = {}) {
+export function appendChronicleEntry(chronicle, entry, { limit } = /** @type {{ limit?: number }} */ ({})) {
   const list = Array.isArray(chronicle) ? chronicle : [];
   const capped = typeof limit === 'number' && Number.isFinite(limit) ? Math.max(0, limit) : Infinity;
 

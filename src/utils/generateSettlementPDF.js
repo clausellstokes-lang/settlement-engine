@@ -1,11 +1,11 @@
 /**
- * generateSettlementPDF — entry point that builds and downloads the dossier PDF.
+ * generateSettlementPDF - entry point that builds and downloads the dossier PDF.
  *
  * Replaces the legacy hand-painted jsPDF generator with a thin wrapper around
  * @react-pdf/renderer. The actual layout lives in src/pdf/SettlementPDF.jsx
  * and its supporting primitives / sections under src/pdf/.
  *
- * Signature is backward-compatible — existing callers may invoke
+ * Signature is backward-compatible - existing callers may invoke
  *   generateSettlementPDF(settlement)
  * and get a clean dossier. To export the AI narrative edition, callers should
  * pass:
@@ -24,7 +24,7 @@ export async function generateSettlementPDF(settlement, options = {}) {
     aiSettlement = null,
     aiDailyLife = null,
     narrativeMode = false,
-    // Campaign-state engine extras — when present, the PDF emits the
+    // Campaign-state engine extras - when present, the PDF emits the
     // SystemStateSnapshot chapter (always) and the Timeline chapter
     // (canon mode only). Optional; PDFs from before this feature still
     // render cleanly without them.

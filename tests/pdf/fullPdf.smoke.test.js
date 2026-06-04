@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/pdf/fullPdf.smoke.test.js — End-to-end PDF assembly smoke test.
+ * tests/pdf/fullPdf.smoke.test.js - End-to-end PDF assembly smoke test.
  *
  * Tier 3.5 of the roadmap. The existing sections smoke test (in
  * sections.smoke.test.js) exercises individual chapter components.
@@ -12,14 +12,14 @@
  *     → normalizeSettlement (Phase 6)
  *     → SettlementPDF element tree
  *
- * What it catches: regressions in the chain glue — generation produces
+ * What it catches: regressions in the chain glue - generation produces
  * a settlement shape that SettlementPDF can't render, or normalize
  * mutates a field that a PDF chapter then crashes on, or the variant /
  * isFounder / isAnonymous props (added across Phases 2.3 / 4.3 / 5.E)
  * stop reaching the cover correctly.
  *
  * It does NOT verify the actual PDF blob. That requires fontkit + jsdom
- * combinations that the existing test suite deliberately avoids — and
+ * combinations that the existing test suite deliberately avoids - and
  * the slow render time would dominate the CI gate. The smoke version
  * here runs in ~100ms and catches the class of bugs we actually see.
  */
@@ -84,7 +84,7 @@ describe('PDF full-document assembly smoke test', () => {
   });
 
   test('renders cleanly against a normalized (post-Phase-6) settlement', () => {
-    // Specifically exercise the chain where normalize runs first — this
+    // Specifically exercise the chain where normalize runs first - this
     // matches what generateSettlementPDF does at the export boundary.
     const settlement = normalizeSettlement(generate());
     const element = React.createElement(SettlementPDF, { settlement });

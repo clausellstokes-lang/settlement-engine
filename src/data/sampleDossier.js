@@ -1,11 +1,11 @@
 /**
- * sampleDossier.js — JS re-export of sampleDossier.json so consumers can
+ * sampleDossier.js - JS re-export of sampleDossier.json so consumers can
  * import a plain object without needing the host's JSON loader.
  *
  * Pillar G. Used by:
- *   - HomeSampleDossier.jsx (P128 — landing proof card)
- *   - FirstDossierCallouts.jsx (P130 — anchor targets for callouts)
- *   - WorkshopLockedPreview.jsx (P143 — locked-state sample)
+ *   - HomeSampleDossier.jsx (P128 - landing proof card)
+ *   - FirstDossierCallouts.jsx (P130 - anchor targets for callouts)
+ *   - WorkshopLockedPreview.jsx (P143 - locked-state sample)
  *
  * Frozen so consumers can't accidentally mutate the shared fixture.
  */

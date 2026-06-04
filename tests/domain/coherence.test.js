@@ -1,5 +1,5 @@
 /**
- * Coherence-warning tests — wrap-policy invariants for draft mode.
+ * Coherence-warning tests - wrap-policy invariants for draft mode.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -7,7 +7,7 @@ import { checkDraftEdit } from '../../src/domain/coherence/checkDraftEdit.js';
 
 describe('checkDraftEdit', () => {
   test('empty settlement does not throw and returns an array', () => {
-    // Empty doesn't necessarily mean "no warnings" — the validator runs
+    // Empty doesn't necessarily mean "no warnings" - the validator runs
     // against tier defaults (e.g. defaults to 'town' + 'frontier'), and
     // a town with no fortification on a frontier is a survival crisis.
     // The contract we care about here is "doesn't throw, returns an

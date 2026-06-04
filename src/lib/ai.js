@@ -1,5 +1,5 @@
 /**
- * ai.js — AI narrative generation service.
+ * ai.js - AI narrative generation service.
  *
  * Streams results from the generate-narrative edge function via NDJSON.
  *
@@ -10,7 +10,7 @@
  * sends a full `aiSettlement` object as the authoritative final state.
  *
  * Per-pass errors are reported via `onField(field, null, error)` but
- * are NOT fatal — the server keeps the raw data for any failed pass,
+ * are NOT fatal - the server keeps the raw data for any failed pass,
  * so the client's final `result` still has something sensible at that
  * path (just unrefined). Top-level errors (thesis failure, auth, credit
  * check) ARE fatal and throw.
@@ -41,7 +41,7 @@ const AUTH_TOKEN_LS_KEY = (() => {
  * auth lock. Strategy: race `supabase.auth.getSession()` against a 2s timeout;
  * on timeout, read the token straight out of localStorage (skipping the
  * auto-refresh path). The noop-lock change in `supabase.js` should prevent
- * the hang in the first place — this is belt-and-suspenders for any future
+ * the hang in the first place - this is belt-and-suspenders for any future
  * regression (supabase-js upgrade, stale tab, etc.).
  */
 async function getAccessTokenSafe() {
@@ -79,11 +79,13 @@ async function getAccessTokenSafe() {
  * @param {(field: string, value: unknown, error?: string) => void} [opts.onField] - called as each field streams in (error set on per-pass failure)
  * @param {(status: object) => void} [opts.onStatus] - called for status/phase events
  * @param {Array<string|number>} [opts.pinnedNpcIds] - NPC ids the DM pinned; the server drops them from the `npcs` pass so they round-trip unchanged.
+ * @param {string} [opts.aiGuidance] - DM-approved guidance sent to the model. Private DM Notes are never sent.
+ * @param {string} [opts.modelPreference] - User model preference key.
  * @param {string} [opts.changeType] - progression only: classifyChange key (e.g. 'addStressor')
  * @param {string} [opts.changeLabel] - progression only: human-readable label chronicled with the run
  * @param {object|null} [opts.priorNarrative] - progression only: the previous aiSettlement (refined)
  * @param {object|null} [opts.priorDailyLife] - progression only: the previous aiDailyLife (reserved for future)
- * @returns {{ result: object, creditsRemaining: number|null, type: string, partialFailure?: boolean, failedFields?: string[], succeededFields?: string[] }}
+ * @returns {Promise<{ result: object, creditsRemaining: number|null, type: string, partialFailure?: boolean, failedFields?: string[], succeededFields?: string[] }>}
  */
 export async function generateNarrative(type, settlement, settlementId, opts = {}) {
   if (!isConfigured) {
@@ -102,6 +104,12 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   // Build the request body. Progression carries extra fields the server needs
   // to do its diff-aware thesis + subset-of-passes run.
   const body = { type, settlement, settlementId, pinnedNpcIds };
+  if (typeof opts.aiGuidance === 'string' && opts.aiGuidance.trim()) {
+    body.aiGuidance = opts.aiGuidance.trim();
+  }
+  if (typeof opts.modelPreference === 'string' && opts.modelPreference.trim()) {
+    body.modelPreference = opts.modelPreference.trim();
+  }
   if (type === 'progression') {
     body.changeType     = opts.changeType || '';
     body.changeLabel    = opts.changeLabel || '';
@@ -180,21 +188,21 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
         continue;
       }
 
-      // Per-field error — NOT fatal. Server keeps raw data for failed passes;
+      // Per-field error - NOT fatal. Server keeps raw data for failed passes;
       // notify the UI but keep reading so the stream drains and we get `done`.
       if (msg.field && msg.error) {
         try { opts.onField?.(msg.field, null, msg.error); } catch (_) { /* UI error */ }
         continue;
       }
 
-      // Per-field success — progressive UI update (supports dotted paths)
+      // Per-field success - progressive UI update (supports dotted paths)
       if (msg.field) {
         setPath(result, msg.field, msg.value);
         try { opts.onField?.(msg.field, msg.value); } catch (_) { /* UI error should not break stream */ }
         continue;
       }
 
-      // Final success line — the server's `result` is authoritative
+      // Final success line - the server's `result` is authoritative
       if (msg.done) {
         if (msg.result && typeof msg.result === 'object') {
           result = msg.result;
@@ -220,7 +228,7 @@ async function mockGenerate(type, settlement, onField) {
 
   if (type === 'narrative') {
     // Mock refinement architecture: thesis + a couple of refined sections
-    const thesis = `${name} is a settlement that remembers its debts. The old charter is signed but the signatures mean different things to different people — and the people who know the difference are the ones who decide which doors open after dark.`;
+    const thesis = `${name} is a settlement that remembers its debts. The old charter is signed but the signatures mean different things to different people - and the people who know the difference are the ones who decide which doors open after dark.`;
     await delay(400);
     try { onField?.('thesis', thesis); } catch (_) {}
 
@@ -231,7 +239,7 @@ async function mockGenerate(type, settlement, onField) {
       refinedSettlement.institutions = refinedSettlement.institutions.map((inst, _i) => ({
         ...inst,
         description: (inst?.description || inst?.detail || 'An institution of the settlement.') +
-          ' (Mock refinement — the real narrator would thread the thesis through this description.)',
+          ' (Mock refinement - the real narrator would thread the thesis through this description.)',
       }));
       await delay(300);
       try { onField?.('institutions', refinedSettlement.institutions); } catch (_) {}

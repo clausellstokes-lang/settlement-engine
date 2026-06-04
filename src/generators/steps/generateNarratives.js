@@ -4,7 +4,7 @@
  * Generates settlement reason, resource analysis, economic viability,
  * history, and legacy annotations.
  *
- * Extracted from generateSettlement.js lines 891, 984–1001.
+ * Extracted from generateSettlement.js lines 891, 984-1001.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -46,7 +46,7 @@ registerStep('generateNarratives', {
     history.legacyAnnotations = legacyAnnotations;
   }
 
-  // Causal traces — record the narrative anchors so the AI grounding
+  // Causal traces - record the narrative anchors so the AI grounding
   // layer can quote "the engine decided X because Y" without re-deriving.
   if (settlementReason) {
     recordTrace(ctx, {

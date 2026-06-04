@@ -1,5 +1,5 @@
 /**
- * roadNetwork.js — derive the list of road edges to render on the map.
+ * roadNetwork.js - derive the list of road edges to render on the map.
  *
  * Design (see chat transcript for full architecture):
  *   - Three tiers: highway / trade / lane + an implicit "sea" mode
@@ -35,7 +35,7 @@ const HOSTILE_RELATIONSHIPS = new Set([
 
 /**
  * @param {Array} saves       savedSettlements from the store
- * @param {Object} placements mapState.placements — keyed by burgId
+ * @param {Object} placements mapState.placements - keyed by burgId
  * @returns {Array<{id, fromBurgId, toBurgId, fromX, fromY, toX, toY, tier, preferSea, reason}>}
  */
 export function computeRoadEdges(saves, placements) {
@@ -106,7 +106,7 @@ export function computeRoadEdges(saves, placements) {
     });
   };
 
-  // ── 1. Highways — MST over city+ placements ──────────────────────────────
+  // ── 1. Highways - MST over city+ placements ──────────────────────────────
   const topNodes = nodes.filter(n => n.rank >= 4);
   if (topNodes.length >= 2) {
     const connected = new Set([topNodes[0].burgId]);
@@ -129,7 +129,7 @@ export function computeRoadEdges(saves, placements) {
     }
   }
 
-  // ── 2. Trade roads — chains + trade/allied/patron relationships ──────────
+  // ── 2. Trade roads - chains + trade/allied/patron relationships ──────────
   const nodeBySettId = new Map();
   for (const n of nodes) {
     if (n.settlementId) nodeBySettId.set(n.settlementId, n);
@@ -162,7 +162,7 @@ export function computeRoadEdges(saves, placements) {
     }
   }
 
-  // ── 3. Country lanes — each unconnected placement → nearest other ────────
+  // ── 3. Country lanes - each unconnected placement → nearest other ────────
   const connectedIds = new Set();
   for (const e of edges) {
     connectedIds.add(e.fromBurgId);

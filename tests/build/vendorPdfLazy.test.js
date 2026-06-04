@@ -1,8 +1,8 @@
 /**
- * tests/build/vendorPdfLazy.test.js — Tier 9.7 vendor-pdf lazy verification.
+ * tests/build/vendorPdfLazy.test.js - Tier 9.7 vendor-pdf lazy verification.
  *
  * The @react-pdf/renderer + jsPDF stack weighs ~1.86 MB (~619 kB gz).
- * It must NOT load on first paint — only when a user clicks "Export
+ * It must NOT load on first paint - only when a user clicks "Export
  * PDF". Three contracts make that real:
  *
  *   1. The vite.config.js manualChunks function isolates the PDF
@@ -25,7 +25,7 @@ const distDir = resolve(process.cwd(), 'dist');
 const assetsDir = join(distDir, 'assets');
 const distExists = existsSync(distDir) && existsSync(assetsDir);
 
-describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
+describe.runIf(distExists)('Tier 9.7 - vendor-pdf lazy load contract', () => {
   // ── Chunk isolation ─────────────────────────────────────────────────────
   it('vendor-pdf is its own chunk in dist/assets/', () => {
     const files = readdirSync(assetsDir);
@@ -38,9 +38,9 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     const vendorPdf = files.find(f => /^vendor-pdf-[A-Za-z0-9_-]+\.js$/.test(f));
     expect(vendorPdf).toBeDefined();
     const size = statSync(join(assetsDir, vendorPdf)).size;
-    // Asserts the chunk is meaningfully large (>500 KB) — if it shrinks
+    // Asserts the chunk is meaningfully large (>500 KB) - if it shrinks
     // dramatically, something is wrong (e.g. PDF code merged into a
-    // hot chunk). Asserts the upper bound (<3 MB) too — runaway growth
+    // hot chunk). Asserts the upper bound (<3 MB) too - runaway growth
     // means a new dep snuck in.
     expect(size).toBeGreaterThan(500_000);
     expect(size).toBeLessThan(3_000_000);
@@ -61,7 +61,7 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
   // Vite's mapDeps system registers EVERY lazy-import target's chunk
   // filename in the entry chunk so the runtime knows what to fetch
   // when an import() resolves. The reference is metadata, not an
-  // eager load — that's what makes lazy splitting work. So we do NOT
+  // eager load - that's what makes lazy splitting work. So we do NOT
   // check that vendor-pdf is absent from the entry chunk string;
   // the meaningful check is the modulepreload filter (above).
 });
@@ -71,7 +71,7 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
 // export use dynamic import() rather than a top-level static import,
 // so the lazy chain stays intact through source-level refactors.
 
-describe('Tier 9.7 — source uses dynamic import for PDF generation', () => {
+describe('Tier 9.7 - source uses dynamic import for PDF generation', () => {
   const lazyConsumers = [
     'src/components/SettlementDetail.jsx',
     'src/components/SingleDossierSuccessPage.jsx',

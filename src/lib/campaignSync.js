@@ -1,5 +1,5 @@
 /**
- * campaignSync.js — merge and sync policy for campaign persistence.
+ * campaignSync.js - merge and sync policy for campaign persistence.
  *
  * The store owns UI state; this module owns the dull but important rule:
  * local cache and cloud rows are peers, and loading cloud data must never
@@ -106,7 +106,7 @@ export function getCampaignsNeedingSync(campaigns = [], changedId = null) {
   });
 }
 
-export async function syncCampaignChanges(campaigns = [], { service, changedId = null } = {}) {
+export async function syncCampaignChanges(campaigns = [], { service, changedId = null } = /** @type {{ service?: any, changedId?: string|null }} */ ({})) {
   if (!service?.isConfigured || typeof service.upsert !== 'function') return [];
   const changed = getCampaignsNeedingSync(campaigns, changedId);
   if (!changed.length) return [];
@@ -119,5 +119,5 @@ export async function syncCampaignChanges(campaigns = [], { service, changedId =
 
   const failed = results.find(result => result.status === 'rejected');
   if (failed) throw failed.reason;
-  return results.map(result => result.value);
+  return results.map(result => /** @type {PromiseFulfilledResult<any>} */ (result).value);
 }

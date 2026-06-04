@@ -1,5 +1,5 @@
 /**
- * tests/domain/genreProfile.test.js — Tier 4.15 lean tests.
+ * tests/domain/genreProfile.test.js - Tier 4.15 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/a11y.audit.test.jsx — Tier 7.17 accessibility regression tests.
+ * tests/ui/a11y.audit.test.jsx - Tier 7.17 accessibility regression tests.
  *
  * The Tier 7.17 audit (docs/a11y-audit.md) found three classes of issues:
  *   1. Modal dialogs were missing role/aria-modal/aria-labelledby
@@ -19,7 +19,7 @@
  *   - Test color contrast (no rendered pixels in jsdom)
  *
  * For full a11y coverage we'd add @axe-core/playwright in the e2e suite.
- * That's not in scope for Tier 7.17 — the audit doc captures it.
+ * That's not in scope for Tier 7.17 - the audit doc captures it.
  */
 
 import React from 'react';
@@ -49,7 +49,7 @@ afterEach(cleanup);
 // Modal dialogs must announce themselves as a dialog, declare modality so
 // screen readers know to trap, and reference their heading via labelledby.
 
-describe('Tier 7.17 — Modal dialog a11y', () => {
+describe('Tier 7.17 - Modal dialog a11y', () => {
   test('NarrativeDriftModal exposes role=dialog + aria-modal', async () => {
     const NarrativeDriftModal = (await import('../../src/components/NarrativeDriftModal.jsx')).default;
     const { container } = render(
@@ -90,7 +90,7 @@ describe('Tier 7.17 — Modal dialog a11y', () => {
 // These tests assert the contract by rendering each primitive in its default
 // state and looking for the attribute. Adding new primitives? Add a test here.
 
-describe('Tier 7.17 — Primitive a11y contracts', () => {
+describe('Tier 7.17 - Primitive a11y contracts', () => {
   test('BandPill exposes role=status', async () => {
     const { BandPill } = await import('../../src/components/primitives/BandPill.jsx');
     const { container } = render(<BandPill band="strained" />);
@@ -114,11 +114,11 @@ describe('Tier 7.17 — Primitive a11y contracts', () => {
   });
 
   test('FounderBadge has an accessible name', async () => {
-    // FounderBadge is a small pill — should at least carry role="status" or a title.
+    // FounderBadge is a small pill - should at least carry role="status" or a title.
     const FounderBadge = (await import('../../src/components/primitives/FounderBadge.jsx')).default;
     const { container } = render(<FounderBadge size="md" />);
     // FounderBadge renders nothing when the user isn't a founder. That's
-    // fine — we just assert it doesn't crash.
+    // fine - we just assert it doesn't crash.
     expect(container).toBeDefined();
   });
 });
@@ -127,7 +127,7 @@ describe('Tier 7.17 — Primitive a11y contracts', () => {
 // Catches the most-common a11y bug: an icon-only button with no aria-label
 // and no visible text. Scoped to the components we audited.
 
-describe('Tier 7.17 — Icon-only button accessibility', () => {
+describe('Tier 7.17 - Icon-only button accessibility', () => {
   test('NarrativeDriftModal close button has aria-label', async () => {
     const NarrativeDriftModal = (await import('../../src/components/NarrativeDriftModal.jsx')).default;
     const { container } = render(

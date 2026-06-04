@@ -1,11 +1,11 @@
 /**
- * DMCompassTab — Consolidated DM-facing meta-guidance from the narrative layer.
+ * DMCompassTab - Consolidated DM-facing meta-guidance from the narrative layer.
  *
  * Four fields produced by the AI narrative pipeline (AI-3a) live here:
- *   • dmCompass       — 3 hooks, 2 red flags, 1 twist. Ready-to-run guidance.
- *   • identityMarkers — 4-6 concrete sensory/physical details.
- *   • frictionPoints  — 3-5 small-scale interpersonal grievances with named parties.
- *   • connectionsMap  — 4-8 named NPC↔faction↔institution edges.
+ *   • dmCompass       - 3 hooks, 2 red flags, 1 twist. Ready-to-run guidance.
+ *   • identityMarkers - 4-6 concrete sensory/physical details.
+ *   • frictionPoints  - 3-5 small-scale interpersonal grievances with named parties.
+ *   • connectionsMap  - 4-8 named NPC↔faction↔institution edges.
  *
  * The tab is only registered in OutputContainer when at least one of these
  * fields is present on `aiSettlement`. Individual sections render only if
@@ -98,7 +98,7 @@ function FrictionPointsPanel({ points }) {
   return (
     <Section title="Friction Points" accent="#a0762a">
       <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, marginBottom: 8, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-        Small-scale grievances between named parties — surface them in scenes to texture daily life.
+        Small-scale grievances between named parties - surface them in scenes to texture daily life.
       </div>
       {points.map((p, i) => (
         <div key={i} style={{ display: 'flex', gap: 10, padding: '7px 10px', marginBottom: 5, background: 'rgba(160,118,42,0.06)', border: '1px solid rgba(160,118,42,0.18)', borderRadius: 5 }}>
@@ -155,7 +155,7 @@ export default function DMCompassTab({ settlement: s }) {
 
   const anyContent = has(compass) || has(markers) || has(points) || has(edges);
   if (!anyContent) {
-    // Defensive — OutputContainer already gates visibility, but render a
+    // Defensive - OutputContainer already gates visibility, but render a
     // gentle empty state just in case.
     return (
       <div style={{ padding: 24, textAlign: 'center', color: MUTED, fontSize: FS.sm, fontFamily: 'Nunito, sans-serif' }}>

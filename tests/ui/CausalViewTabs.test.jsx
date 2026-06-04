@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/CausalViewTabs.test.jsx — Tier 5.7 surface tests.
+ * tests/ui/CausalViewTabs.test.jsx - Tier 5.7 surface tests.
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
@@ -31,7 +31,7 @@ function fixture() {
   };
 }
 
-describe('CausalViewTabs — render gates', () => {
+describe('CausalViewTabs - render gates', () => {
   test('renders a placeholder when settlement is missing', () => {
     render(<CausalViewTabs />);
     expect(screen.getByText(/No settlement loaded/i)).toBeTruthy();
@@ -43,7 +43,7 @@ describe('CausalViewTabs — render gates', () => {
   });
 });
 
-describe('CausalViewTabs — tabs', () => {
+describe('CausalViewTabs - tabs', () => {
   test('renders all seven view tabs', () => {
     render(<CausalViewTabs settlement={fixture()} />);
     const tabs = screen.getAllByRole('tab');
@@ -83,7 +83,7 @@ describe('CausalViewTabs — tabs', () => {
   });
 });
 
-describe('CausalViewTabs — panel content', () => {
+describe('CausalViewTabs - panel content', () => {
   test('the tabpanel maps to the active tab via aria-labelledby + id', () => {
     render(<CausalViewTabs settlement={fixture()} />);
     const panel = screen.getByRole('tabpanel');
@@ -124,7 +124,7 @@ describe('CausalViewTabs — panel content', () => {
   });
 });
 
-describe('CausalViewTabs — defensive', () => {
+describe('CausalViewTabs - defensive', () => {
   test('null settlement renders the placeholder, not a crash', () => {
     expect(() => render(<CausalViewTabs settlement={null} />)).not.toThrow();
     expect(screen.getByText(/No settlement loaded/i)).toBeTruthy();
@@ -142,7 +142,7 @@ describe('CausalViewTabs — defensive', () => {
   });
 });
 
-describe('CausalViewTabs — accessibility', () => {
+describe('CausalViewTabs - accessibility', () => {
   test('tablist has aria-label', () => {
     render(<CausalViewTabs settlement={fixture()} />);
     expect(screen.getByLabelText(/Causal views/i)).toBeTruthy();

@@ -1,5 +1,5 @@
 /**
- * tests/domain/counterfactual.test.js — Tier 4.17 counterfactual.
+ * tests/domain/counterfactual.test.js - Tier 4.17 counterfactual.
  *
  * Core invariants only:
  *   - Action vocabulary stable.
@@ -99,7 +99,7 @@ describe('counterfactual() envelope shape', () => {
 
 // ── Event-pipeline paths ───────────────────────────────────────────────
 
-describe('counterfactual() — event-pipeline actions', () => {
+describe('counterfactual() - event-pipeline actions', () => {
   it('institution:remove produces causal state deltas + summary lines', () => {
     const r = counterfactual(fixture(), { type: 'institution', id: 'institution.granary', action: 'remove' });
     expect(r.nextSettlement).not.toBeNull();
@@ -122,7 +122,7 @@ describe('counterfactual() — event-pipeline actions', () => {
 
 // ── Manual-path actions ────────────────────────────────────────────────
 
-describe('counterfactual() — manual-path actions', () => {
+describe('counterfactual() - manual-path actions', () => {
   it('faction:weaken drops faction power on the cloned settlement', () => {
     const r = counterfactual(fixture(), { type: 'faction', id: 'faction.council', action: 'weaken' });
     const before = fixture().powerStructure.factions.find(f => f.id === 'faction.council').power;
@@ -186,7 +186,7 @@ describe('summarizeCounterfactual()', () => {
 
 // ── Real-settlement smoke ──────────────────────────────────────────────
 
-describe('counterfactual() — real generated settlement', () => {
+describe('counterfactual() - real generated settlement', () => {
   it('runs over a city without throwing and produces a non-empty result', () => {
     const settlement = generateSettlementPipeline(
       { settType: 'city', culture: 'germanic' },

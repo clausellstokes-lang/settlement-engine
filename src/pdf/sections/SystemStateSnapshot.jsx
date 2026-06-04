@@ -1,13 +1,13 @@
 /**
- * SystemStateSnapshot — PDF chapter showing the four-dimension state.
+ * SystemStateSnapshot - PDF chapter showing the four-dimension state.
  *
  * Renders in both draft and canon PDFs. In draft, it's a "current state
  * of the design" snapshot. In canon, it's "where the settlement stands
- * right now in the campaign" — paired with the Timeline chapter so the
+ * right now in the campaign" - paired with the Timeline chapter so the
  * DM has both the current pressures and the recent history at hand.
  *
- * Bands and colors come from domain/state/bands.js — same source as the
- * UI's SystemStateBar — so the PDF and screen never disagree.
+ * Bands and colors come from domain/state/bands.js - same source as the
+ * UI's SystemStateBar - so the PDF and screen never disagree.
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
@@ -26,7 +26,7 @@ const DIM_ORDER = ['resilience', 'volatility', 'externalThreat', 'resourcePressu
 export function SystemStateSnapshot({ settlement, narrativeMode, vm }) {
   const state = vm?.systemState;
   if (!state) {
-    // No SystemState (e.g. legacy save) — render the chapter shell with
+    // No SystemState (e.g. legacy save) - render the chapter shell with
     // a polite explanatory note rather than failing the whole PDF.
     return (
       <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -48,7 +48,7 @@ export function SystemStateSnapshot({ settlement, narrativeMode, vm }) {
         eyebrow="03B"
         title="Current State"
         accent={narrativeMode ? palette.ai : palette.gold}
-        sub="Four dimensions, scored 0–100, banded for quick reads"
+        sub="Four dimensions, scored 0-100, banded for quick reads"
       />
       <ChapterHeadline tone="gold">
         How healthy and how stressed the settlement is right now.

@@ -1,5 +1,5 @@
 /**
- * rngContext.js — Global PRNG context for deterministic generation.
+ * rngContext.js - Global PRNG context for deterministic generation.
  *
  * When the pipeline runs, it sets the active PRNG via setActiveRng().
  * All generator code that calls chance(), pick(), randInt(), shuffle(),

@@ -4,7 +4,7 @@
  * Applies teleportation infrastructure for isolated town+ settlements,
  * subsistence mode stripping, and arcane institution safety-net.
  *
- * Extracted from generateSettlement.js lines 787–797, 888–889.
+ * Extracted from generateSettlement.js lines 787-797, 888-889.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -12,7 +12,7 @@ import {
   applyTeleportationInfrastructure,
   applySubsistenceMode,
   // stripArcaneInstitutions is called from factionCorrelationPass, not
-  // here — but the import path remained as a stale `_`-prefixed unused
+  // here - but the import path remained as a stale `_`-prefixed unused
   // reference that didn't match the actual export name (no underscore).
   // Removing keeps the contract clean.
 } from '../isolationGenerator.js';
@@ -72,7 +72,7 @@ registerStep('isolationPass', {
         result:     'subsistence_stripped',
         causes: [
           { source: 'subsistenceMode', effect: 'removed',
-            reason: `Settlement is in subsistence mode — "${name}" requires external supply chains that don't reach here.` },
+            reason: `Settlement is in subsistence mode - "${name}" requires external supply chains that don't reach here.` },
         ],
       });
     }

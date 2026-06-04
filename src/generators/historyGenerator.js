@@ -17,7 +17,7 @@ import { genArrivalDetail } from './narrativeGenerator.js';
 import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES } from '../data/historyData.js';
 
 // ─── priorityMult ─────────────────────────────────────────────────────────────
-// Convert a 0–100 priority/influence score to a 0–2 multiplier centred at 1.
+// Convert a 0-100 priority/influence score to a 0-2 multiplier centred at 1.
 // (Named distinctly to avoid confusion with helpers.popToTier which maps population → tier string.)
 
 const priorityMult = (score = 50) => Math.max(0, (score ?? 50) / 50);
@@ -32,6 +32,16 @@ const getSettlementAge = tier => {
   return randInt(range.min, range.max);
 };
 
+const resolveSettlementAge = (tier, config = {}) => {
+  const mode = config.settlementAgeMode || 'auto';
+  if (mode === 'new') return 0;
+  if (mode === 'custom') {
+    const years = Math.floor(Number(config.settlementAgeYears ?? 0));
+    return Math.max(0, Math.min(5000, Number.isFinite(years) ? years : 0));
+  }
+  return getSettlementAge(tier);
+};
+
 // ─── HISTORICAL_EVENTS_DATA ───────────────────────────────────────────────────
 
 // ─── getSettlementHistoryNote ─────────────────────────────────────────────────
@@ -40,8 +50,8 @@ const getSettlementAge = tier => {
  * of event types in the settlement's historical record.
  *
  * @param {Array}  events  - Historical event objects with .type and .severity
- * @param {string} tier    - Settlement tier
- * @param {Object} config  - Settlement config
+ * @param {string} _tier   - Settlement tier
+ * @param {Object} _config - Settlement config
  * @returns {string}
  */
 const _getSettlementHistoryNote = (events, _tier, _config) => {
@@ -100,7 +110,7 @@ const _getSettlementHistoryNote = (events, _tier, _config) => {
  * @param {Object} config        - Settlement config
  * @param {Array}  institutions  - Institution objects
  * @param {Object} economicState - Generated economic state
- * @param {Object} powerStructure- Generated power structure
+ * @param {Object} powerStructure - Generated power structure
  * @returns {Object} Context object with named descriptors
  */
 const buildHistoryContext = (config, institutions = [], economicState = null, powerStructure = null) => {
@@ -517,7 +527,7 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}) => {
   }
 
   // Plot hooks only for events within living/recent memory (≤80 years ago).
-  // Ancient and deep history events are too distant to generate actionable hooks —
+  // Ancient and deep history events are too distant to generate actionable hooks -
   // they're background texture, not immediate adventure seeds.
   const selectedHooks = [];
   if (yearsAgo <= 80) {
@@ -526,8 +536,8 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}) => {
     for (let i = 0; i < Math.min(hookCount, availableHooks.length); i++) {
       const idx = randInt(0, availableHooks.length - 1);
       let hook = availableHooks.splice(idx, 1)[0];
-      // For older events (last century: 30–80y), reframe present-tense hooks as
-      // historical discoveries — things uncovered now, not things actively happening.
+      // For older events (last century: 30-80y), reframe present-tense hooks as
+      // historical discoveries - things uncovered now, not things actively happening.
       if (yearsAgo > 30 && hook) {
         const ECHO_PREFIXES = [
           'Old records suggest ',
@@ -660,7 +670,7 @@ const buildHistoricalEvent = (
         const commodity = economicState?.tradeCommodity || 'key goods';
         selected.push({
           ...tmpl,
-          description: `The supply of ${commodity} — the settlement's economic backbone — is under pressure. ${economicViability.issues[0].message}`,
+          description: `The supply of ${commodity} - the settlement's economic backbone - is under pressure. ${economicViability.issues[0].message}`,
           specificIssue: economicViability.issues[0].message,
         });
         usedTypes.add('resource_scarcity');
@@ -772,7 +782,7 @@ const buildHistoricalEvent = (
 const generateRelationshipEvent = (age, tier, config, context = null) => {
   // Number of history events (scaled by age)
   const _ageFraction = age / 100;
-  // Scale event count by age — each tier gets appropriate depth
+  // Scale event count by age - each tier gets appropriate depth
   const ageFractionScaled = age / 60;
   const rawEventCount = Math.floor(ageFractionScaled * randInt(1, 3));
   const eventCount =
@@ -821,7 +831,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     } while (usedCats.has(cat) && attempts < 5);
     usedCats.add(cat);
 
-    // Map category to an event type data object (simplified — use a generic template)
+    // Map category to an event type data object (simplified - use a generic template)
     const tmpl = HISTORICAL_EVENTS_DATA.find(e => {
       const typeMap = {
         economic: ['economic_disparity', 'outside_debt', 'resource_scarcity', 'guild_conflict'],
@@ -937,7 +947,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
         "Compact signatories' families still hold preferential market positions",
       ],
       plotHooks: [
-        'A clause in the compact entitles certain families to first refusal on grain sales — and the current shortage makes that clause valuable',
+        'A clause in the compact entitles certain families to first refusal on grain sales - and the current shortage makes that clause valuable',
         'The original compact was signed under duress; someone wants that history exposed',
       ],
       severity: ['minor', 'major'],
@@ -950,13 +960,13 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     resourceEvents.push({
       name: 'The Great Construction',
       description:
-        "A period of ambitious stone construction transformed the settlement's character — walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+        "A period of ambitious stone construction transformed the settlement's character - walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
       lastingEffects: [
         "Quarrymen's guild retains unusual civic influence",
         "Architectural legacy of the construction period defines the settlement's visual character",
       ],
       plotHooks: [
-        'Something was sealed inside the walls during construction — deliberately',
+        'Something was sealed inside the walls during construction - deliberately',
         "The quarry foreman's descendants claim unpaid wages from the original commission",
       ],
       severity: ['major'],
@@ -975,7 +985,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
         'Arcane regulatory body established with unusual local authority',
       ],
       plotHooks: [
-        'The incident was caused by deliberate misuse of the node — someone covered it up',
+        'The incident was caused by deliberate misuse of the node - someone covered it up',
         'The transformation affected a family lineage in ways that are only now becoming apparent',
       ],
       severity: ['major', 'catastrophic'],
@@ -993,7 +1003,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     events.sort((a, b) => (b.yearsAgo || 0) - (a.yearsAgo || 0));
   }
 
-  // Final deduplication pass — the anchor pass can produce same event name
+  // Final deduplication pass - the anchor pass can produce same event name
   // across multiple slots when two events share a category type mapping.
   const seenNames = new Set();
   const deduped = events.filter(e => {
@@ -1026,7 +1036,7 @@ export const generateHistory = (
   economicState = null,
   powerStructure = null,
 ) => {
-  const age = getSettlementAge(tier);
+  const age = resolveSettlementAge(tier, config);
   const context = buildHistoryContext(config, institutions, economicState, powerStructure);
   if (context) context._institutions = institutions;
 
@@ -1035,7 +1045,7 @@ export const generateHistory = (
   founding.age = age;
 
   // Historical timeline
-  const timeline = generateRelationshipEvent(age, tier, config, context);
+  const timeline = age > 0 ? generateRelationshipEvent(age, tier, config, context) : [];
 
   // Current tensions
   const tensions = buildHistoricalEvent(
@@ -1052,7 +1062,7 @@ export const generateHistory = (
   const political = timeline.filter(e => e.type === 'political').length;
   const economic = timeline.filter(e => e.type === 'economic').length;
 
-  let historicalCharacter = 'stable and prosperous';
+  let historicalCharacter = age <= 0 ? 'newly founded and still becoming itself' : 'stable and prosperous';
   if (disasters >= 2) historicalCharacter = 'marked by repeated calamities';
   else if (political >= 2) historicalCharacter = 'politically turbulent';
   else if (economic >= 2) historicalCharacter = 'economically dynamic';

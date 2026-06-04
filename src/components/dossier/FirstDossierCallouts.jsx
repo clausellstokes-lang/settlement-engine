@@ -1,9 +1,9 @@
 /**
- * FirstDossierCallouts.jsx — P130 / O-2 first-dossier teaching callouts.
+ * FirstDossierCallouts.jsx - P130 / O-2 first-dossier teaching callouts.
  *
  * Renders THREE permanent-dismiss callouts on a first-time user's
  * first generated dossier. Each points at what the engine already did
- * and teaches worldbuilding by example — not by tutorial-before-the-work.
+ * and teaches worldbuilding by example - not by tutorial-before-the-work.
  *
  * Self-gates on every condition the critique requires:
  *   - auth.tier !== 'anon'           (anons see the H-2 sample card instead)
@@ -17,7 +17,7 @@
  * Positioning: this is a stacked banner at the top of the dossier
  * tab content (above the live settlement). The originally-mocked
  * inline-anchor approach (absolute positioning over specific cards)
- * was tempting but tied us to dossier internal layout — too brittle.
+ * was tempting but tied us to dossier internal layout - too brittle.
  * A stacked banner that introduces the three teaching points in order
  * is the right pragmatic UI; the *content* is what teaches.
  */

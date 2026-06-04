@@ -1,5 +1,5 @@
 /**
- * campaigns.js — Campaign persistence.
+ * campaigns.js - Campaign persistence.
  *
  * Uses the existing saved_maps table for cloud-backed campaign records.
  * The full SettlementForge campaign envelope lives in map_data so newer

@@ -1,5 +1,5 @@
 /**
- * tests/domain/schemaDrift.test.js — Sanity checks against schema drift.
+ * tests/domain/schemaDrift.test.js - Sanity checks against schema drift.
  *
  * As new canonical fields, aliases, and tags get added, these checks
  * catch the most common forms of "someone added X but forgot Y" drift:

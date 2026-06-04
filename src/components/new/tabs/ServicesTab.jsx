@@ -67,7 +67,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
   const totalDegraded = Object.values(catStats).reduce((s,c) => s+c.deg, 0);
   const _catsWithIssues = Object.entries(catStats).filter(([,c]) => c.imp>0||c.deg>0).length;
 
-  // Category display order: strictly alphabetical — impairment is shown on each card
+  // Category display order: strictly alphabetical - impairment is shown on each card
   const catOrder = Object.keys(services||{}).filter(k => services[k]?.length).sort((a,b) => a.localeCompare(b));
 
   const toggleCat = (cat) => setOpenCats(prev => ({...prev, [cat]: prev[cat] !== false ? false : true}));
@@ -97,7 +97,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
         <div style={{position:'relative'}}>
           <span style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',color:MUTED,fontSize: FS['14']}}></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
-            placeholder='Search services — "healing", "horse", "fence", "wizard"…'
+            placeholder='Search services - "healing", "horse", "fence", "wizard"...'
             style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',borderRadius:6,fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
           {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize: FS['18'],color:MUTED,lineHeight:1,padding:0}}>×</button>}
         </div>
@@ -106,7 +106,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
           <div style={{marginTop:8}}>
             {searchResults.length === 0
               ? <div style={{background:swatch.dangerBg,border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:6,padding:'10px 14px',fontSize:FS.md,color:swatch['#5A1A1A']}}>
-                  <strong>Not available</strong> — nothing matching "{search}" in this settlement.
+                  <strong>Not available</strong> - nothing matching "{search}" in this settlement.
                   {missing.length>0&&<span style={{color:swatch.inkMag3}}> Missing categories: {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}.</span>}
                 </div>
               : <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #c8b89a',borderRadius:6,padding:'10px 14px'}}>
@@ -173,7 +173,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
         {/* ── NOTABLE ABSENCES ─────────────────────────────────────────────── */}
         {missing.length > 0 && (
           <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',borderRadius:6,padding:'9px 14px',marginBottom:14,fontSize:FS.sm,color:swatch['#5A3A10']}}>
-            <strong>Not available for a {tier}:</strong> {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')} — the party will need to look elsewhere.
+            <strong>Not available for a {tier}:</strong> {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')} - the party will need to look elsewhere.
           </div>
         )}
 

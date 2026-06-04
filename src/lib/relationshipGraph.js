@@ -1,5 +1,5 @@
 /**
- * relationshipGraph.js — Reactive cascading modifier engine.
+ * relationshipGraph.js - Reactive cascading modifier engine.
  *
  * Computes how a settlement's network position affects it across five
  * categories: economy, safety, supply, political, defensibility.
@@ -11,7 +11,7 @@
  *      (via PROPAGATION_MATRIX); cumulative decay determines HOW MUCH.
  *   4. Returns modifier totals + per-source breakdown for UI display.
  *
- * Max depth is capped at 3 — beyond that, decay makes effects negligible
+ * Max depth is capped at 3 - beyond that, decay makes effects negligible
  * and computation stays fast even with large networks.
  */
 
@@ -157,9 +157,9 @@ export function buildGraph(savedSettlements) {
  * Compute cascading modifiers for a single settlement via BFS wave.
  *
  * @param {string} settlementId
- * @param {Map} graph — adjacency list from buildGraph()
- * @param {Map|null} saveIndex — Map<id, saveEntry> for tier-ratio/factor-delta (optional)
- * @param {Map|null} currentModifiers — Map<id, totals> from previous iteration (optional)
+ * @param {Map} graph - adjacency list from buildGraph()
+ * @param {Map|null} saveIndex - Map<id, saveEntry> for tier-ratio/factor-delta (optional)
+ * @param {Map|null} currentModifiers - Map<id, totals> from previous iteration (optional)
  *
  * Returns {
  *   totals:   { economy, safety, supply, political, defensibility },

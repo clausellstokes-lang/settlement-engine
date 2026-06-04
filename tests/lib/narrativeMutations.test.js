@@ -1,5 +1,5 @@
 /**
- * tests/lib/narrativeMutations.test.js — Tier 3.8 comprehensive coverage.
+ * tests/lib/narrativeMutations.test.js - Tier 3.8 comprehensive coverage.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -47,7 +47,7 @@ describe('classifyChange()', () => {
 
 describe('applyRenameToAiData()', () => {
   // The function operates on aiData.aiSettlement and aiData.aiDailyLife.
-  // Bare top-level strings are left alone — only the narrative blobs
+  // Bare top-level strings are left alone - only the narrative blobs
   // get rewritten.
 
   test('replaces whole-word occurrences inside aiSettlement', () => {

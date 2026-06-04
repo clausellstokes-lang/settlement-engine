@@ -1,5 +1,5 @@
 /**
- * EconomicsTrade — chapter 03. Full economy parity with EconomicsTab.
+ * EconomicsTrade - chapter 03. Full economy parity with EconomicsTab.
  *
  *   - 4 stat tiles: prosperity / complexity / output / trade access
  *   - Income sources bars
@@ -41,10 +41,10 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
 
       <StatStrip
         stats={[
-          { label: 'PROSPERITY', value: cap(e.prosperity) || '—' },
-          { label: 'COMPLEXITY', value: cap(e.economicComplexity) || '—' },
+          { label: 'PROSPERITY', value: cap(e.prosperity) || '-' },
+          { label: 'COMPLEXITY', value: cap(e.economicComplexity) || '-' },
           { label: 'OUTPUT', value: smart(e.economyOutput) },
-          { label: 'TRADE', value: cap(e.tradeAccess) || '—' },
+          { label: 'TRADE', value: cap(e.tradeAccess) || '-' },
         ]}
       />
 
@@ -427,7 +427,7 @@ function hasFoodData(fb) {
 }
 
 // Chain dependency may be a string ("imports/iron") or an object
-// ({ resource, type, critical }) — coerce to a presentable string.
+// ({ resource, type, critical }) - coerce to a presentable string.
 function depText(d) {
   if (!d) return '';
   if (typeof d === 'string') return d;

@@ -1,5 +1,5 @@
 /**
- * tests/domain/devDebug.test.js — Tier 3.9 lean tests.
+ * tests/domain/devDebug.test.js - Tier 3.9 lean tests.
  */
 
 import { describe, it, expect } from 'vitest';

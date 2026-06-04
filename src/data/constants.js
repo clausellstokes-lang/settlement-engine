@@ -1,4 +1,4 @@
-// constants.js — extracted from bundle
+// constants.js - extracted from bundle
 
 export const TIER_ORDER = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 export const TOWN_PLUS_TIERS = ['town', 'city', 'metropolis'];
@@ -6,7 +6,7 @@ export const SMALL_TIERS = ['thorp', 'hamlet', 'village'];
 
 export const POPULATION_RANGES = {
   thorp:      { min: 8,     max: 60 },
-  hamlet:     { min: 61,    max: 240 },
+  hamlet:     { min: 61,    max: 400 },
   village:    { min: 401,   max: 900 },
   town:       { min: 901,   max: 5000 },
   city:       { min: 5001,  max: 25000 },

@@ -7,10 +7,10 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   Page background — the painted pastoral fixed under the whole UI.
+   Page background - the painted pastoral fixed under the whole UI.
    The image lives at /public/parchment-bg.jpg (saved by the user).
    Two stacked backgrounds:
-     1. A cream-tinted linear gradient (top of stack) at 35% opacity —
+     1. A cream-tinted linear gradient (top of stack) at 35% opacity -
         the painting dominates the page, reading like an oil-painted
         backdrop with UI floating on it. Card surfaces (CARD = #FFFBF5)
         carry their own opaque background so body text inside cards is
@@ -20,7 +20,7 @@
      2. The painting itself (bottom of stack), fixed and cover-sized so
         scrolling content drifts over a stationary canvas.
    The cream `background-color` is the fallback when the painting hasn't
-   yet been saved into /public — page still reads as parchment, never
+   yet been saved into /public - page still reads as parchment, never
    white.
    ───────────────────────────────────────────────────────────────────── */
 body {
@@ -46,7 +46,7 @@ button {
 }
 
 /* The root and the .parchment-bg wrapper let the body's painting show
-   through — they used to paint their own cream, which would mask the
+   through - they used to paint their own cream, which would mask the
    background image. */
 #root {
   background: transparent !important;

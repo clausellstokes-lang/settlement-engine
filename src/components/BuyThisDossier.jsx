@@ -1,5 +1,5 @@
 /**
- * BuyThisDossier.jsx — $2.99 single-dossier CTA for anonymous viewers.
+ * BuyThisDossier.jsx - $2.99 single-dossier CTA for anonymous viewers.
  *
  * Shown in the dossier toolbar for anonymous users only. Clicking:
  *   1. Stashes the current settlement so it survives the redirect.
@@ -11,7 +11,7 @@
  *   Signed-in users already have saves and exports; for them the
  *   subscription tiers are the right offer. For the anonymous "first
  *   touch" visitor, the $2.99 microtransaction is the lowest-friction
- *   conversion — pay once, get the dossier, optionally upgrade later.
+ *   conversion - pay once, get the dossier, optionally upgrade later.
  *
  * Failure modes:
  *   - Supabase not configured (local dev) → button shows but a click
@@ -46,7 +46,7 @@ export default function BuyThisDossier({ settlement }) {
     setBusy(true); setError(null);
     try {
       // Stash before navigating. Even if it fails (private mode), we
-      // still try checkout — the success page has a recovery path.
+      // still try checkout - the success page has a recovery path.
       stashPendingDossier(settlement);
       await startCheckout('single_dossier');
       // startCheckout redirects on success, so we only reach this
@@ -83,7 +83,7 @@ export default function BuyThisDossier({ settlement }) {
         }}
       >
         <Download size={12} />
-        {busy ? 'Redirecting…' : `Buy this dossier — ${SINGLE_DOSSIER.priceLabel}`}
+        {busy ? 'Redirecting...' : `Buy this dossier - ${SINGLE_DOSSIER.priceLabel}`}
       </button>
       <span style={{
         fontSize: FS.xs, color: MUTED, fontStyle: 'italic',

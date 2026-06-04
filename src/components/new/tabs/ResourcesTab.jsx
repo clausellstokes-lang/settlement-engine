@@ -58,7 +58,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
       {(unexploited.length>0||partExploited.length>0||fullExploited.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
 
-          {/* Unexploited — most interesting for DMs */}
+          {/* Unexploited - most interesting for DMs */}
           {unexploited.map((chain,i)=>(
             <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',borderRadius:6,padding:'10px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
@@ -127,13 +127,13 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
           return <>
             {depleted.length>0&&<div style={{marginBottom:8}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}> DEPLETED — consumed locally, export potential reduced</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}> DEPLETED - consumed locally, export potential reduced</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {depleted.map((rk,i)=><span key={i} style={{fontSize:FS.xs,color:swatch['#8B3000'],background:swatch['#FFF3ED'],border:'1px solid #e08040',borderRadius:4,padding:'2px 9px',fontWeight:600}}> {fmtKey(rk)}</span>)}
               </div>
             </div>}
             {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>✦ ABUNDANT — full export potential</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>✦ ABUNDANT - full export potential</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {abundant.map((rk,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch.successBg,border:'1px solid #88c880',borderRadius:4,padding:'2px 9px'}}>{fmtKey(rk)}</span>)}
               </div>
@@ -167,7 +167,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
       {/* ── GAPS & OPPORTUNITIES (combined) ──────────────────────────────── */}
       {(res.gaps?.length>0||res.priorityNotes?.length>0)&&<Section title="Gaps & Opportunities" collapsible defaultOpen accent="#5a2a8a">
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
-          {/* Priority notes — DM opportunity hooks */}
+          {/* Priority notes - DM opportunity hooks */}
           {(res.priorityNotes||[]).map((note,i)=>(
             <div key={i} style={{display:'flex',gap:8,padding:'8px 12px',background:swatch['#F8F4FD'],border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',borderRadius:5}}>
               <span style={{fontSize:FS.sm,color:swatch.magic,flexShrink:0}}>✦</span>

@@ -1,5 +1,5 @@
 /**
- * analyticsProvider.js — Tier 8.8 / 8.9 provider bridge.
+ * analyticsProvider.js - Tier 8.8 / 8.9 provider bridge.
  *
  * The analytics module (src/lib/analytics.js) calls
  * `window.__sf_analytics_provider(event, props)` for every tracked
@@ -7,12 +7,12 @@
  *
  * Two providers are supported out of the box:
  *
- *   1. Plausible (default — privacy-first, single script tag).
+ *   1. Plausible (default - privacy-first, single script tag).
  *      Activated when VITE_PLAUSIBLE_DOMAIN is set. The Plausible
  *      script tag goes in index.html (also env-gated via a small
  *      bootstrap script). Events fire via `window.plausible(name, opts)`.
  *
- *   2. PostHog (alternative — full product analytics).
+ *   2. PostHog (alternative - full product analytics).
  *      Activated when VITE_POSTHOG_KEY is set. Requires posthog-js
  *      via npm. If you switch to PostHog, uncomment the import
  *      below and run `npm i posthog-js`.
@@ -25,20 +25,20 @@
  *
  * If neither env var is set, no provider is installed and analytics.js
  * falls back to its dev-console log (silent in prod). The call sites
- * keep working — they just don't surface anywhere visible.
+ * keep working - they just don't surface anywhere visible.
  */
 
 const PLAUSIBLE_DOMAIN = import.meta.env.VITE_PLAUSIBLE_DOMAIN;
 const PLAUSIBLE_API    = import.meta.env.VITE_PLAUSIBLE_API || 'https://plausible.io';
 const POSTHOG_KEY      = import.meta.env.VITE_POSTHOG_KEY;
-// PostHog host is read inside installPostHog() — kept as a top-level
+// PostHog host is read inside installPostHog() - kept as a top-level
 // constant once you uncomment the dispatch. Prefixed with _ to silence
 // no-unused-vars while the PostHog path is commented out.
 const _POSTHOG_HOST    = import.meta.env.VITE_POSTHOG_HOST || 'https://app.posthog.com';
 
 /**
  * Inject the Plausible script tag and install the provider hook.
- * Idempotent — calling twice does nothing on the second call.
+ * Idempotent - calling twice does nothing on the second call.
  */
 function installPlausible(domain) {
   if (typeof document === 'undefined' || typeof window === 'undefined') return;
@@ -82,7 +82,7 @@ function installPlausible(domain) {
 }
 
 /**
- * PostHog provider — alternative path. Requires `posthog-js` package.
+ * PostHog provider - alternative path. Requires `posthog-js` package.
  * Commented out by default; uncomment + install if you choose PostHog.
  */
 function installPostHog(_key) {
@@ -114,7 +114,7 @@ function toPascal(snake) {
 }
 
 /**
- * Public entry — call once from src/main.jsx after the React tree mounts.
+ * Public entry - call once from src/main.jsx after the React tree mounts.
  * Selects a provider based on which env var is set; if neither is set
  * the function is a no-op and analytics.js falls back to its dev-log.
  */
@@ -127,6 +127,6 @@ export function installAnalyticsProvider() {
     installPostHog(POSTHOG_KEY);
     return;
   }
-  // No provider configured — leave window.__sf_analytics_provider
+  // No provider configured - leave window.__sf_analytics_provider
   // unset. analytics.js logs to console in DEV, no-ops in PROD.
 }

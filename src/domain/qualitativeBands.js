@@ -1,5 +1,5 @@
 /**
- * domain/qualitativeBands.js — Unified band accessor + display labels.
+ * domain/qualitativeBands.js - Unified band accessor + display labels.
  *
  * Tier 5.4 of the roadmap. The substrate (Phase 17), capacities
  * (Phase 21), conditions (Phase 16), threats (Phase 20), and chain
@@ -178,7 +178,7 @@ export function bandFor(ref, settlement) {
     return t?.severityBand || null;
   }
 
-  // District — needs a domain modifier (wealth | safety).
+  // District - needs a domain modifier (wealth | safety).
   if (id.startsWith('district.')) {
     const d = deriveAllDistricts(settlement).find(x => x.id === id);
     if (!d) return null;

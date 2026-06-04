@@ -1,4 +1,4 @@
-// servicesData.js — Static service and goods data
+// servicesData.js - Static service and goods data
 // Extracted from servicesGenerator.js (was inline module-scope data)
 
 import { GOODS_CATEGORIES as _GC } from "../data/tradeGoodsData.js";

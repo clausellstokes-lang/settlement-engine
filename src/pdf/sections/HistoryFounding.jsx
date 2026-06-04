@@ -1,5 +1,5 @@
 /**
- * HistoryFounding — chapter 08. Founding decomposition (origin / foundedBy /
+ * HistoryFounding - chapter 08. Founding decomposition (origin / foundedBy /
  * initial challenge / overcoming / stress note), age + character, sorted
  * historical events with severity + lasting effects + plot hooks, and live
  * tensions with parties + severity + plot hooks.
@@ -70,7 +70,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
         >
           <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7'] }}>SETTLEMENT AGE</Text>
           <Text style={{ ...type.numeric_xl, color: palette.ink, marginTop: 2, fontSize: pt['22'] }}>
-            {h.age ?? '—'}
+            {h.age ?? '-'}
           </Text>
           <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
             {h.age === 1 ? 'year' : 'years'}

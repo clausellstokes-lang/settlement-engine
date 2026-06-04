@@ -1,5 +1,5 @@
 /**
- * mapBridge.js — Typed RPC client for the FMG iframe.
+ * mapBridge.js - Typed RPC client for the FMG iframe.
  *
  * Replaces the fire-and-forget postMessage pattern in WorldMap.jsx.
  * Every command returns a Promise. Commands issued before the iframe
@@ -75,7 +75,7 @@ export function createMapBridge(getIframe, opts = {}) {
     const iframe = getIframe?.();
     if (iframe?.contentWindow && event.source !== iframe.contentWindow) return;
 
-    // Ignore messages not meant for us — anything that doesn't start with
+    // Ignore messages not meant for us - anything that doesn't start with
     // `fmg:` is someone else's concern.
     if (typeof type !== 'string' || !type.startsWith('fmg:')) return;
 
@@ -92,7 +92,7 @@ export function createMapBridge(getIframe, opts = {}) {
       return;
     }
 
-    // RPC reply — has _rid matching a pending call
+    // RPC reply - has _rid matching a pending call
     if (_rid && pending.has(_rid)) {
       const entry = pending.get(_rid);
       clearTimeout(entry.timer);
@@ -105,7 +105,7 @@ export function createMapBridge(getIframe, opts = {}) {
       return;
     }
 
-    // Push event — strip the "fmg:" prefix for the event name
+    // Push event - strip the "fmg:" prefix for the event name
     const eventName = type.slice(4);
     emit(eventName, data);
   }
@@ -113,11 +113,11 @@ export function createMapBridge(getIframe, opts = {}) {
   function send(msg) {
     const iframe = getIframe?.();
     if (!iframe?.contentWindow) {
-      log('send dropped — no iframe', msg.type);
+      log('send dropped - no iframe', msg.type);
       return false;
     }
     try {
-      // Target our own origin specifically — never `'*'`. The iframe is
+      // Target our own origin specifically - never `'*'`. The iframe is
       // served from `/map/` on the same origin as the parent, so this is
       // both correct and the safest possible target. With `'*'`, any
       // future change that swaps the iframe for a cross-origin one would
@@ -170,7 +170,7 @@ export function createMapBridge(getIframe, opts = {}) {
    * Issue an RPC call. Returns a promise resolving with the reply payload
    * or rejecting on timeout/error. Queued if ready hasn't fired yet.
    */
-  function call(type, payload = {}, { timeout, skipQueue } = {}) {
+  function call(type, payload = {}, { timeout, skipQueue } = /** @type {{ timeout?: number, skipQueue?: boolean }} */ ({})) {
     if (destroyed) return Promise.reject(new Error('Bridge destroyed'));
     const rid = nextRid();
     return new Promise((resolve, reject) => {
@@ -197,7 +197,7 @@ export function createMapBridge(getIframe, opts = {}) {
   function notify(type, payload = {}) {
     if (destroyed) return false;
     if (!readyResolved) {
-      // Don't queue notifications — by the time they drain they're stale
+      // Don't queue notifications - by the time they drain they're stale
       return false;
     }
     return send({ type, ...payload });
@@ -251,7 +251,7 @@ export function createMapBridge(getIframe, opts = {}) {
     readyPromise = null;
   }
 
-  // Typed surface — the API parent components talk to
+  // Typed surface - the API parent components talk to
   const api = {
     // Lifecycle
     start, destroy, ready,

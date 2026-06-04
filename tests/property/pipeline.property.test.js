@@ -3,10 +3,10 @@
  *
  *   1. Generation never throws across the (tier × culture × terrain ×
  *      tradeRouteAccess) config space
- *   2. Output is structurally complete — required fields present and
+ *   2. Output is structurally complete - required fields present and
  *      well-typed, regardless of config
- *   3. Determinism — same seed produces structurally identical output
- *   4. Seed sensitivity — different seeds usually produce different
+ *   3. Determinism - same seed produces structurally identical output
+ *   4. Seed sensitivity - different seeds usually produce different
  *      structural fingerprints (no accidental seed bypass)
  *
  * Why properties on top of generation.test.js: the 10 fixtures hit
@@ -43,7 +43,7 @@ const SEED = 'pipeline-prop-test-2026-05';
 function gen(config, opts = {}) {
   return generateSettlementPipeline(config, null, {
     seed: opts.seed ?? SEED,
-    customContent: {},  // headless — no store dependency
+    customContent: {},  // headless - no store dependency
   });
 }
 
@@ -102,7 +102,7 @@ describe('pipeline (property-based)', () => {
     // Catches the failure mode where someone accidentally bypasses the
     // PRNG and uses Math.random() (or a hardcoded value). We expect that
     // across 8 paired runs with different seeds, at least some pairs
-    // differ — otherwise the seed has no effect.
+    // differ - otherwise the seed has no effect.
     fc.assert(fc.property(configArb, (config) => {
       let differingPairs = 0;
       for (let i = 0; i < 8; i++) {
@@ -112,7 +112,7 @@ describe('pipeline (property-based)', () => {
           differingPairs++;
         }
       }
-      // Allow up to 2 collisions out of 8 — small tiers (thorp/hamlet)
+      // Allow up to 2 collisions out of 8 - small tiers (thorp/hamlet)
       // have a constrained output space where the fingerprint can
       // legitimately match across seeds. But if ALL 8 pairs match, the
       // seed is being ignored.
@@ -120,7 +120,7 @@ describe('pipeline (property-based)', () => {
     }), { numRuns: 6 });
   });
 
-  // Bonus: thorps are tiny — population should fit in the tier band.
+  // Bonus: thorps are tiny - population should fit in the tier band.
   test('thorps stay under 60 population', () => {
     fc.assert(fc.property(culture, terrain, (cul, terr) => {
       const s = gen({ settType: 'thorp', culture: cul, terrain: terr, tradeRouteAccess: 'isolated' });

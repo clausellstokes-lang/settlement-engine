@@ -1,9 +1,9 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 008_public_gallery.sql — Public dossier gallery (read-only SEO surface).
+-- 008_public_gallery.sql - Public dossier gallery (read-only SEO surface).
 --
 -- pgcrypto provides gen_random_bytes() used by _make_public_slug below.
 -- Supabase enables this extension on most projects, but a fresh project
--- may not — declaring it explicitly here means the migration is
+-- may not - declaring it explicitly here means the migration is
 -- self-sufficient.
 create extension if not exists pgcrypto;
 
@@ -14,19 +14,21 @@ create extension if not exists pgcrypto;
 --   - The author retains all edit rights; readers see a frozen snapshot
 --     of the dossier as of the moment it was shared.
 --   - Authors can unshare at any time, which sets is_public=false and
---     causes the URL to return a 404 — the row is preserved.
+--     causes the URL to return a 404 - the row is preserved.
 --
 -- New columns on `settlements`:
---   is_public      — boolean toggle (default false; only the owner
+--   is_public      - boolean toggle (default false; only the owner
 --                    can flip it via the existing user-update RLS).
---   public_slug    — opaque URL-safe identifier; generated on first
+--   public_slug    - opaque URL-safe identifier; generated on first
 --                    publish and never reused. Lets us change the
 --                    internal id without breaking shared links.
---   published_at   — timestamp of the most recent publish.
---   view_count     — cheap counter, incremented client-side on read.
+--   published_at   - timestamp of the most recent publish.
+--   view_count     - cheap counter, incremented client-side on read.
 --
--- New RLS policy: anyone (even anon) can SELECT rows WHERE is_public=true.
--- The existing "owner can do everything" policies are unchanged.
+-- Initial RLS policy: anyone (even anon) can SELECT rows WHERE is_public=true.
+-- Migration 020 revokes this broad read path and replaces public reads with
+-- sanitized gallery RPCs. The existing "owner can do everything" policies
+-- are unchanged.
 --
 -- Re-runnable: every change uses IF NOT EXISTS / CREATE OR REPLACE.
 -- ────────────────────────────────────────────────────────────────────────────
@@ -40,7 +42,7 @@ alter table public.settlements
   add column if not exists view_count   integer not null default 0;
 
 -- Slug uniqueness: enforced only when set (partial index so unshared
--- rows can have NULL freely). Slugs are stable — we never reuse one,
+-- rows can have NULL freely). Slugs are stable - we never reuse one,
 -- so a row that was published once keeps its slug across re-publish
 -- toggles. That lets bookmarks and search-engine links survive a
 -- temporary unshare.
@@ -54,12 +56,13 @@ create index if not exists settlements_public_listing
   on public.settlements(published_at desc)
   where is_public = true;
 
--- ── RLS: public read access ────────────────────────────────────────────────
+-- ── RLS: initial public read access ────────────────────────────────────────
 -- The owner already has full CRUD via migration 001's policies. This
 -- adds a separate SELECT policy that allows ANY caller (including
 -- anon / unauthenticated) to read rows where is_public = true. Postgres
 -- ORs RLS policies, so this opens public reads without weakening the
--- owner-only writes.
+-- owner-only writes. Migration 020 intentionally drops this policy once
+-- server-side sanitized gallery RPCs exist.
 
 drop policy if exists "Public dossiers are world-readable" on public.settlements;
 create policy "Public dossiers are world-readable"
@@ -72,14 +75,14 @@ create policy "Public dossiers are world-readable"
 -- chars from a v4 UUID. 12 hex = 48 bits of entropy; collision at
 -- 10k slugs is ~1 in 5×10^9.
 --
--- We use `gen_random_uuid()` (PG13+, built-in — no extension required,
+-- We use `gen_random_uuid()` (PG13+, built-in - no extension required,
 -- no schema-qualification needed) rather than the original
 -- `encode(gen_random_bytes(8), 'base32')` formulation because:
 --   1. `gen_random_bytes` lives in the `extensions` schema on Supabase
 --      and isn't on the function's default search_path, so the call
 --      would fail at execute time. Schema-qualifying it would tie this
 --      migration to Supabase's specific layout.
---   2. `encode(..., 'base32')` isn't a real Postgres encoding —
+--   2. `encode(..., 'base32')` isn't a real Postgres encoding -
 --      only `base64`, `hex`, and `escape` are supported.
 --
 -- We do NOT slugify the settlement name. Names are user-controlled
@@ -111,7 +114,7 @@ declare
   existing_slug text;
   new_slug      text;
 begin
-  -- Owner check — the row must belong to the calling user.
+  -- Owner check - the row must belong to the calling user.
   perform 1 from public.settlements
     where id = target_id and user_id = auth.uid();
   if not found then
@@ -178,7 +181,7 @@ grant execute on function public.unpublish_settlement(uuid) to authenticated;
 
 -- ── View counter ───────────────────────────────────────────────────────────
 -- Lightweight: anyone reading a public dossier can call this. No auth
--- required. Doesn't dedupe by IP or session — the number is for vanity,
+-- required. Doesn't dedupe by IP or session - the number is for vanity,
 -- not analytics. Real analytics live in whatever telemetry layer we
 -- add later.
 

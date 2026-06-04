@@ -1,4 +1,4 @@
--- Settlement Generator — Migration 004
+-- Settlement Generator - Migration 004
 -- Adds: custom_content table for premium-only user-created content
 --
 -- Categories: institutions, resources, stressors, tradeGoods, tradeRoutes,
@@ -7,7 +7,7 @@
 -- Each row is a single custom item; the JSONB `data` column holds the full
 -- item shape (name, description, tags, fields specific to category, etc.).
 -- Free users can read their grandfathered local items but cannot create/edit
--- in the cloud — this gate is enforced at the application layer.
+-- in the cloud - this gate is enforced at the application layer.
 
 CREATE TABLE IF NOT EXISTS public.custom_content (
   id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),

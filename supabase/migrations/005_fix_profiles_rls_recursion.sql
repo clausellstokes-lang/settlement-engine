@@ -1,15 +1,15 @@
--- Settlement Generator — Migration 005
+-- Settlement Generator - Migration 005
 -- Fixes: infinite recursion in profiles RLS policies (introduced by 003)
 --
 -- Root cause: migration 003's "Developers read all profiles" policy contains
--- `EXISTS (SELECT 1 FROM public.profiles ...)` — evaluating the policy on
+-- `EXISTS (SELECT 1 FROM public.profiles ...)` - evaluating the policy on
 -- profiles triggers the SAME policy, which re-evaluates itself, etc.
 --
 -- Fix: wrap the role check in a SECURITY DEFINER function. SECURITY DEFINER
 -- runs as the function owner and bypasses RLS on the tables it reads, so the
 -- inner SELECT doesn't re-trigger the outer policy.
 --
--- Safe to run whether or not migration 004 has been applied — the
+-- Safe to run whether or not migration 004 has been applied - the
 -- custom_content policy drops/creates are guarded by DO blocks.
 
 -- ── Helper function: is current user a developer/admin? ────────────────────
@@ -36,7 +36,7 @@ DROP POLICY IF EXISTS "Developers update any profile"        ON public.profiles;
 DROP POLICY IF EXISTS "Developers read all support messages" ON public.support_messages;
 DROP POLICY IF EXISTS "Developers update support messages"   ON public.support_messages;
 
--- Guard the custom_content drop — table may not exist yet if 004 hasn't run
+-- Guard the custom_content drop - table may not exist yet if 004 hasn't run
 DO $$
 BEGIN
   IF EXISTS (

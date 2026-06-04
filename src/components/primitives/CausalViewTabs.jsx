@@ -1,5 +1,5 @@
 /**
- * primitives/CausalViewTabs — Tier 5.7 surface.
+ * primitives/CausalViewTabs - Tier 5.7 surface.
  *
  * Tabbed view-switcher that renders the same settlement through any
  * of seven causal lenses. The dossier is one set of facts; this

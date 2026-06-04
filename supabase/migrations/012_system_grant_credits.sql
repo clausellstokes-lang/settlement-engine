@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 012_system_grant_credits.sql — Webhook-callable ledger-consistent grant.
+-- 012_system_grant_credits.sql - Webhook-callable ledger-consistent grant.
 --
 -- The Tier 9.9 audit (docs/refund-ledger-audit.md) called out the
 -- stripe-webhook's `update profiles set credits = credits + amount`
@@ -9,10 +9,10 @@
 -- The existing `admin_grant_credits()` RPC (migration 009) gates on
 -- `current_user_is_privileged()`, which requires an auth.uid() that
 -- has role='developer' or 'admin'. The stripe webhook calls with the
--- service-role JWT — no auth.uid(), no profile row — so that RPC
+-- service-role JWT - no auth.uid(), no profile row - so that RPC
 -- rejects.
 --
--- This migration adds `system_grant_credits()` — a SECURITY DEFINER
+-- This migration adds `system_grant_credits()` - a SECURITY DEFINER
 -- function that:
 --   1. Verifies the caller is the service role (the only role outside
 --      'authenticated' / 'anon'). The webhook uses the service-role

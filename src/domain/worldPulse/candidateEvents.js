@@ -3,6 +3,7 @@ import { evaluateNpcRules } from './npcAgency.js';
 import { evaluateRelationshipRules } from './relationshipEvolution.js';
 import { evaluateStressorRules, stressorCandidateForPressure } from './stressors.js';
 import { deriveFlowCandidates } from './flows.js';
+import { normalizeSimulationRules } from './simulationRules.js';
 
 function stablePart(value) {
   return String(value || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
@@ -10,7 +11,7 @@ function stablePart(value) {
 
 /**
  * World volatility scales every candidate's roll probability. `normal` is 1.0
- * (a no-op, so default behavior — and the determinism fixtures — are
+ * (a no-op, so default behavior - and the determinism fixtures - are
  * unchanged); `calm` dampens the world, `turbulent` makes events more likely.
  * A DM-facing dial set on campaign.worldState.volatility.
  */
@@ -161,18 +162,35 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const pressures = context.pressures || [];
   const pressureIndex = context.pressureIndex;
+  const rules = normalizeSimulationRules(context.simulationRules || snapshot?.worldState?.simulationRules);
   const candidates = [];
 
-  candidates.push(
-    ...pressures
-      .map(pressure => pressureConditionCandidate(pressure, tick))
-      .filter(Boolean),
-  );
-  candidates.push(...evaluateStressorRules(snapshot, pressureIndex, { ...context, tick, pressures }));
-  candidates.push(...evaluateRelationshipRules(snapshot, pressureIndex, { ...context, tick }));
-  candidates.push(...evaluateNpcRules(snapshot, pressureIndex, { ...context, tick }));
-  candidates.push(...evaluateFactionRules(snapshot, pressureIndex, { ...context, tick }));
-  candidates.push(...deriveFlowCandidates(snapshot, { tick }));
+  if (rules.emergentEventsEnabled) {
+    candidates.push(
+      ...pressures
+        .map(pressure => pressureConditionCandidate(pressure, tick))
+        .filter(Boolean),
+    );
+  }
+  if (rules.stressorsEnabled) {
+    candidates.push(...evaluateStressorRules(snapshot, pressureIndex, { ...context, tick, pressures, simulationRules: rules }));
+  }
+  if (rules.relationshipDynamicsEnabled) {
+    candidates.push(...evaluateRelationshipRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
+  }
+  if (rules.npcAgencyEnabled) {
+    candidates.push(...evaluateNpcRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
+  }
+  if (rules.factionCompetitionEnabled) {
+    candidates.push(...evaluateFactionRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
+  }
+  if (!['off', 'local'].includes(rules.propagationMode) && (rules.migrationFlowsEnabled || rules.tradeFlowsEnabled)) {
+    candidates.push(...deriveFlowCandidates(snapshot, { tick }).filter(candidate => {
+      if (candidate.metadata?.flowKind === 'population') return rules.migrationFlowsEnabled;
+      if (candidate.metadata?.flowKind === 'trade') return rules.tradeFlowsEnabled;
+      return true;
+    }));
+  }
 
   return resolveCandidateConflicts(candidates, context.budgets || {});
 }

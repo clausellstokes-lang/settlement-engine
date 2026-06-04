@@ -73,7 +73,7 @@ describe('auth profile source of truth', () => {
     const session = await auth.getSession();
 
     expect(stubs.from).toHaveBeenCalledWith('profiles');
-    expect(stubs.select).toHaveBeenCalledWith('role, display_name, tier, is_founder');
+    expect(stubs.select).toHaveBeenCalledWith('role, display_name, tier, is_founder, avatar_url, email_notifications, model_preference, email');
     expect(session.tier).toBe('free');
     expect(session.role).toBe('user');
     expect(session.isFounder).toBe(false);

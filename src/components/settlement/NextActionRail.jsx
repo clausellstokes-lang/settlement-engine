@@ -1,5 +1,5 @@
 /**
- * NextActionRail — Phase-aware "what should I do next?" panel.
+ * NextActionRail - Phase-aware "what should I do next?" panel.
  *
  * The audit's single highest-leverage UX win. Every action that
  * matters at the current state is gathered here, with at most one
@@ -15,7 +15,7 @@
  * rest go into a "Show more" disclosure (handled by ActionRail).
  *
  * The rail does NOT do any of the actions. It dispatches into the
- * existing handlers — this is purely an aggregation surface.
+ * existing handlers - this is purely an aggregation surface.
  */
 
 import {
@@ -50,7 +50,7 @@ export default function NextActionRail({ settlement, save, handlers }) {
   return <ActionRail title="Next best action" items={items} />;
 }
 
-/** Pure derivation — testable without the store. */
+/** Pure derivation - testable without the store. */
 function computeItems({ phase, eventCount, narrated, _settlement, save, handlers }) {
   const items = [];
 
@@ -82,7 +82,7 @@ function computeItems({ phase, eventCount, narrated, _settlement, save, handlers
     });
   }
 
-  // ── Secondaries — always offered when applicable ────────────────────
+  // ── Secondaries - always offered when applicable ────────────────────
   if (!narrated && handlers.onPolishAi) {
     items.push({
       id: 'polish', Icon: Sparkles,

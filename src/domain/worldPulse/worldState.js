@@ -1,3 +1,5 @@
+import { normalizeSimulationRules } from './simulationRules.js';
+
 export const WORLD_STATE_SCHEMA_VERSION = 1;
 
 const MAX_HISTORY = 80;
@@ -36,6 +38,7 @@ export function createDefaultWorldState(campaign = {}) {
   const seedPart = campaign.id || campaign.name || 'campaign';
   return {
     schemaVersion: WORLD_STATE_SCHEMA_VERSION,
+    canonizedAt: null,
     tick: 0,
     calendar: {
       elapsedMonths: 0,
@@ -45,6 +48,7 @@ export function createDefaultWorldState(campaign = {}) {
     },
     rngSeed: `world-pulse:${seedPart}`,
     volatility: 'normal',
+    simulationRules: normalizeSimulationRules(),
     stressors: [],
     relationshipStates: {},
     npcStates: {},
@@ -62,6 +66,7 @@ export function ensureWorldState(raw = {}, campaign = {}) {
     ...base,
     ...cloneObject(raw),
     schemaVersion: WORLD_STATE_SCHEMA_VERSION,
+    canonizedAt: raw?.canonizedAt || null,
     tick: Math.max(0, Math.floor(finite(raw?.tick, 0))),
     calendar: {
       ...base.calendar,
@@ -73,6 +78,7 @@ export function ensureWorldState(raw = {}, campaign = {}) {
     },
     rngSeed: raw?.rngSeed || base.rngSeed,
     volatility: ['calm', 'normal', 'turbulent'].includes(raw?.volatility) ? raw.volatility : base.volatility,
+    simulationRules: normalizeSimulationRules(raw?.simulationRules),
     stressors: cloneArray(raw?.stressors),
     relationshipStates: cloneObject(raw?.relationshipStates),
     npcStates: cloneObject(raw?.npcStates),
@@ -80,6 +86,14 @@ export function ensureWorldState(raw = {}, campaign = {}) {
     proposals: cloneArray(raw?.proposals).slice(-MAX_PROPOSALS),
     pulseHistory: cloneArray(raw?.pulseHistory).slice(-MAX_HISTORY),
     settlementTickStates: cloneObject(raw?.settlementTickStates),
+  };
+}
+
+export function canonizeWorldState(worldState, now = new Date().toISOString(), campaign = {}) {
+  const current = ensureWorldState(worldState, campaign);
+  return {
+    ...current,
+    canonizedAt: now,
   };
 }
 
@@ -133,4 +147,3 @@ export function updateProposalStatus(worldState, proposalId, status, patch = {})
     )),
   };
 }
-

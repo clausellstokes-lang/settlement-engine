@@ -1,5 +1,5 @@
 /**
- * uiSlice — ephemeral, non-persisted UI preferences.
+ * uiSlice - ephemeral, non-persisted UI preferences.
  *
  * A small key→value bag for transient view state that several components
  * need to share but that we deliberately do NOT persist. Like wizardStep,
@@ -7,14 +7,14 @@
  * dumped back into whatever overlay they happened to leave open.
  *
  * Keys in use:
- *   tableViewOpen — P142 / D-6. When true, the phone-optimized Table View
+ *   tableViewOpen - P142 / D-6. When true, the phone-optimized Table View
  *                   overlay is shown over the dossier. Set true by the
  *                   "Open in Table View" button in SummaryTabV2 (routed via
  *                   OutputContainer) and back to false by the close
  *                   affordance inside TableView.
  *
  * The generic setUserPref(key, value) shape matches the call site the
- * Summary tab already speaks — `setUserPref('tableViewOpen', true)` — and
+ * Summary tab already speaks - `setUserPref('tableViewOpen', true)` - and
  * gives future transient prefs a home without minting a new slice each time.
  *
  * NOTE: intentionally left out of the persist `partialize` in store/index.js

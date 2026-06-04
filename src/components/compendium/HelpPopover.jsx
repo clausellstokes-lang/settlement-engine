@@ -1,18 +1,18 @@
 /**
- * HelpPopover.jsx — P126 / CP-1 inline Compendium help.
+ * HelpPopover.jsx - P126 / CP-1 inline Compendium help.
  *
  * Drop a `<HelpPopover topic="trade-route" />` next to any config
  * label and the user gets a "?" affordance that opens a small popover
  * with the relevant Compendium snippet. "Read full reference →" inside
  * the popover links to the Compendium scrolled to the matching section.
  *
- * Content source — `src/data/compendiumHints.js` (a tiny lookup that
+ * Content source - `src/data/compendiumHints.js` (a tiny lookup that
  * mirrors the Compendium tab content for the topics we want
  * inline-help on). Falls back to a generic "see Compendium" link when
  * the topic isn't in the lookup.
  *
  * Self-gates on flag('compendiumInlineHelp'). When the flag is off the
- * component renders nothing — drop-in to any control without breaking
+ * component renders nothing - drop-in to any control without breaking
  * the visual layout (the `?` only appears under the flag).
  *
  * Click-outside closes; Esc closes; keyboard-accessible.
@@ -36,7 +36,7 @@ const COMPENDIUM_HINTS = Object.freeze({
   },
   'culture': {
     title: 'Culture',
-    body: 'Names, naming patterns, institution flavor, faction archetypes. Drives the prose of the place more than the math — a "germanic" town and a "south-asian" town with identical configs read very differently.',
+    body: 'Names, naming patterns, institution flavor, faction archetypes. Drives the prose of the place more than the math - a "germanic" town and a "south-asian" town with identical configs read very differently.',
     anchor: 'cultures',
   },
   'monster-threat': {
@@ -80,7 +80,7 @@ export default function HelpPopover({ topic, label = 'Help' }) {
 
   const content = COMPENDIUM_HINTS[topic];
   if (!content) {
-    // Unknown topic — still render the "?" but link to Compendium root.
+    // Unknown topic - still render the "?" but link to Compendium root.
     // Better than silently dropping the affordance.
   }
 

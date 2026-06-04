@@ -1,5 +1,5 @@
 /**
- * selectors.js — Derived/computed selectors for the Zustand store.
+ * selectors.js - Derived/computed selectors for the Zustand store.
  *
  * Components use: const catalog = useStore(selectCurrentCatalog);
  *
@@ -16,7 +16,7 @@ import {
   getTierOrder,
   getPopulationRanges,
 } from '../generators/lookups.js';
-import { filterCatalogForMagic } from '../components/magicFilter.js';
+import { filterCatalogForMagic } from '../domain/magicFilter.js';
 import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 
 const TIER_ORDER        = getTierOrder();

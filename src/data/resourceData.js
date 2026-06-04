@@ -1,4 +1,4 @@
-// INSTITUTION_TAGS — institution tag constants (matching institutionalCatalog.js)
+// INSTITUTION_TAGS - institution tag constants (matching institutionalCatalog.js)
 const INSTITUTION_TAGS = {
   TRADE: "trade",
   MARKET: "market",
@@ -44,7 +44,7 @@ const INSTITUTION_TAGS = {
   EXOTIC: "exotic",
 };
 
-// resourceData.js — extracted from bundle
+// resourceData.js - extracted from bundle
 // De-minified from original minified identifiers
 
 export const RESOURCE_DATA = {
@@ -332,14 +332,14 @@ export const RESOURCE_DATA = {
     instBoosts: { market: 1.6, caravanserai: 2.8, merchant: 1.5, inn: 1.8 },
     tradeGoods: ["Water rights", "Date surplus", "Oasis provisions"],
     forbidden: ["port", "river"],
-    warning: "Oasis water — settlement depends on sustained water access",
+    warning: "Oasis water - settlement depends on sustained water access",
     category: "special",
   },
   date_palms: {
     terrain: "desert",
     label: "Date Palms and Orchards",
     icon: "",
-    desc: "Productive desert agriculture — dates, figs, and drought-resistant crops in sufficient quantity to trade.",
+    desc: "Productive desert agriculture - dates, figs, and drought-resistant crops in sufficient quantity to trade.",
     commodities: ["grain", "dates"],
     instBoosts: { market: 1.4, farm: 1.6, granary: 1.5 },
     tradeGoods: ["Date harvest", "Dried fruit", "Desert grain"],
@@ -363,7 +363,7 @@ export const RESOURCE_DATA = {
     terrain: "desert",
     label: "Salt Pans",
     icon: "",
-    desc: "Extensive salt deposits from ancient dried seabeds — major trade commodity across all desert routes.",
+    desc: "Extensive salt deposits from ancient dried seabeds - major trade commodity across all desert routes.",
     commodities: ["salt"],
     instBoosts: { market: 1.6, merchant: 1.5 },
     tradeGoods: ["Rock salt", "Salt blocks", "Evaporated salt"],
@@ -387,7 +387,7 @@ export const RESOURCE_DATA = {
     terrain: "mountain",
     label: "Alpine Pastures",
     icon: "️",
-    desc: "High summer pasture for sheep and goats — wool, cheese, and live animals traded at seasonal markets.",
+    desc: "High summer pasture for sheep and goats - wool, cheese, and live animals traded at seasonal markets.",
     commodities: ["wool", "livestock"],
     instBoosts: { market: 1.4, weaver: 1.5, farm: 1.3 },
     tradeGoods: ["Raw wool", "Mountain cheese", "Live sheep"],
@@ -399,7 +399,7 @@ export const RESOURCE_DATA = {
     terrain: "mountain",
     label: "Mountain Timber",
     icon: "",
-    desc: "Dense evergreen forests at elevation — structural timber, fuel wood, and charcoal production.",
+    desc: "Dense evergreen forests at elevation - structural timber, fuel wood, and charcoal production.",
     commodities: ["timber"],
     instBoosts: { sawmill: 2.0, carpenter: 1.7, charcoal: 1.8 },
     tradeGoods: ["Hewn timber", "Pine planks", "Charcoal"],

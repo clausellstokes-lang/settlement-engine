@@ -1,5 +1,5 @@
 /**
- * send-email — Tier 8.5 lifecycle email dispatcher.
+ * send-email - Tier 8.5 lifecycle email dispatcher.
  *
  * Renders one of the lifecycle templates and posts to Resend
  * (https://resend.com/docs/api-reference/emails/send-email) via
@@ -8,7 +8,7 @@
  *
  * Authorization:
  *   - For every template EXCEPT cap_warning, the recipient is read
- *     from auth.uid() — only authenticated users can email themselves.
+ *     from auth.uid() - only authenticated users can email themselves.
  *     This prevents a malicious client from spamming arbitrary
  *     addresses via the welcome/save/etc. paths.
  *   - cap_warning accepts an explicit `recipient` payload because
@@ -17,7 +17,7 @@
  *     from becoming a spam relay.
  *
  * Templates: inlined here (kept in sync with src/lib/emailTemplates.js
- * — the client tests assert key parity). Edge function can't import
+ * - the client tests assert key parity). Edge function can't import
  * from src/ because Deno doesn't resolve Vite-aliased ESM at deploy
  * time; we pay one duplication for one-edge-deploy independence.
  *
@@ -50,7 +50,7 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "",
       "  • Every settlement is simulated from constraints. Not AI-generated.",
       "    Each town is the only coherent settlement that satisfies the",
-      "    constraints you set — sliders, terrain, trade, stress.",
+      "    constraints you set - sliders, terrain, trade, stress.",
       "",
       "  • Your first three saves are free. After that, sign up for a",
       "    Cartographer subscription or claim a Founder Lifetime seat",
@@ -62,7 +62,7 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "",
       "Forge well.",
       "",
-      "— SettlementForge",
+      "- SettlementForge",
       "https://settlementforge.com",
     ].join("\n"),
   },
@@ -80,7 +80,7 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "narrative refinement passes you have run. Future regenerations",
       "will not overwrite locked entities.",
       "",
-      "— SettlementForge",
+      "- SettlementForge",
     ].join("\n"),
   },
   export_confirmation: {
@@ -94,7 +94,7 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "narrative refinement you have layered on. If anything looks off,",
       "you can re-export from the settlement detail view at any time.",
       "",
-      "— SettlementForge",
+      "- SettlementForge",
     ].join("\n"),
   },
   credit_low: {
@@ -109,11 +109,11 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "Top up here:",
       "  https://settlementforge.com/?view=pricing",
       "",
-      "Reminder: settlements themselves never use credits — only the",
+      "Reminder: settlements themselves never use credits - only the",
       "optional narrative refinement layer does. Your simulator output",
       "continues to work as normal.",
       "",
-      "— SettlementForge",
+      "- SettlementForge",
     ].join("\n"),
   },
   founder_thank_you: {
@@ -123,7 +123,7 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "",
       "You are one of the first 500 supporters. Thank you.",
       "",
-      "Your Founder Lifetime seat is permanent — Cartographer-tier",
+      "Your Founder Lifetime seat is permanent - Cartographer-tier",
       "access, unlimited saves, all current and future expansion packs.",
       "You also get the Founder badge on every dossier you publish.",
       "",
@@ -132,7 +132,7 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "",
       "Forge well.",
       "",
-      "— SettlementForge",
+      "- SettlementForge",
     ].join("\n"),
   },
   cap_warning: {
@@ -151,7 +151,7 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "",
       "Sign up: https://settlementforge.com/?view=signin",
       "",
-      "— SettlementForge",
+      "- SettlementForge",
     ].join("\n"),
   },
 };
@@ -258,13 +258,13 @@ serve(async (req) => {
     }
 
     // Apply provider config. RESEND_API_KEY + RESEND_FROM_EMAIL come
-    // from Supabase secrets — set with:
+    // from Supabase secrets - set with:
     //   npx supabase secrets set RESEND_API_KEY=re_xxx
     //   npx supabase secrets set RESEND_FROM_EMAIL="SettlementForge <hello@settlementforge.com>"
     const apiKey = Deno.env.get("RESEND_API_KEY");
     const fromEmail = Deno.env.get("RESEND_FROM_EMAIL");
     if (!apiKey || !fromEmail) {
-      // Soft fail — emails are non-blocking by design. Surface in logs
+      // Soft fail - emails are non-blocking by design. Surface in logs
       // but return 200 so the client doesn't retry.
       console.warn("[send-email] RESEND_API_KEY or RESEND_FROM_EMAIL not set");
       return new Response(

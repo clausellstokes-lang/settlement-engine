@@ -1,15 +1,15 @@
 /**
- * domain/worldPulse/flows.js — inter-settlement population + trade flows.
+ * domain/worldPulse/flows.js - inter-settlement population + trade flows.
  *
  * Channels emit conditions, but until now nothing actually *moved* between
  * settlements. This adds two flows, distinct from stressor spread (which makes
  * the SAME crisis jump a channel): flows model the SPILLOVER of a crisis onto
  * connected settlements.
  *
- *  • population flow — a settlement under a severe displacement crisis (famine,
- *    siege, plague, occupation, …) sends refugees down its confirmed channels;
+ *  • population flow - a settlement under a severe displacement crisis (famine,
+ *    siege, plague, occupation, ...) sends refugees down its confirmed channels;
  *    the destination gets `regional_migration_pressure` with a populationDelta.
- *  • trade-scarcity flow — a trade_dependency supplier in a trade/route crisis
+ *  • trade-scarcity flow - a trade_dependency supplier in a trade/route crisis
  *    transmits `regional_import_shortage` (price scarcity) to its dependents.
  *
  * Pure + deterministic; emits candidate outcomes in the standard shape, so they

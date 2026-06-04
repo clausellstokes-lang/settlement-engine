@@ -1,5 +1,5 @@
 /**
- * Event engine tests — preview/apply produce expected deltas, log
+ * Event engine tests - preview/apply produce expected deltas, log
  * entries, and direction-of-causality.
  */
 
@@ -113,7 +113,7 @@ describe('previewEvent', () => {
     const damageRes = damage.deltas.find(d => d.key === 'resilience')?.change ?? 0;
     const addRes    = add.deltas.find(d => d.key === 'resilience')?.change ?? 0;
     // Damage at severity 1.0 ≈ removal magnitude * 1, ADD inverts the
-    // damage table's sign — they should be equal in magnitude, opposite
+    // damage table's sign - they should be equal in magnitude, opposite
     // in sign.
     expect(Math.sign(damageRes)).toBe(-1);
     expect(Math.sign(addRes)).toBe(1);
@@ -138,7 +138,7 @@ describe('previewEvent', () => {
     expect(preview.deltas.find(d => d.key === 'resourcePressure')?.change).toBeGreaterThan(0);
   });
 
-  test('preview is pure — calling twice with same inputs yields equal results', () => {
+  test('preview is pure - calling twice with same inputs yields equal results', () => {
     const before = deriveSystemState(baseSettlement);
     const args = {
       settlement: baseSettlement,
@@ -169,7 +169,7 @@ describe('applyEvent', () => {
 
   test('applying a NO-OP event (cosmetic) leaves state unchanged', () => {
     const systemState = deriveSystemState(baseSettlement);
-    // ADD an "other"-classified institution at the smallest impact —
+    // ADD an "other"-classified institution at the smallest impact -
     // resilience should rise, but the test is only that the structure
     // is valid even when the magnitudes are small.
     const { logEntry, nextSystemState } = applyEvent({

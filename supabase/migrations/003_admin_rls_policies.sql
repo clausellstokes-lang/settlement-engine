@@ -1,4 +1,4 @@
--- Settlement Generator — Migration 003
+-- Settlement Generator - Migration 003
 -- Adds: RLS policies for admin/developer access to profiles and support_messages
 
 -- ── Allow developers to read all profiles ──────────────────────────────────

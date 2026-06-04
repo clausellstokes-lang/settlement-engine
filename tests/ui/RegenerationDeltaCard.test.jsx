@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/RegenerationDeltaCard.test.jsx — Tier 5.1 surface tests.
+ * tests/ui/RegenerationDeltaCard.test.jsx - Tier 5.1 surface tests.
  *
  * Verifies the card:
  *   - Returns null when the delta is missing / empty
@@ -34,7 +34,7 @@ function makeDelta(over = {}) {
   };
 }
 
-describe('RegenerationDeltaCard — render gates', () => {
+describe('RegenerationDeltaCard - render gates', () => {
   test('returns null when delta is missing', () => {
     const { container } = render(<RegenerationDeltaCard />);
     expect(container.firstChild).toBeNull();
@@ -46,7 +46,7 @@ describe('RegenerationDeltaCard — render gates', () => {
   });
 });
 
-describe('RegenerationDeltaCard — header + summary counts', () => {
+describe('RegenerationDeltaCard - header + summary counts', () => {
   test('renders the header when at least one section has content', () => {
     const delta = makeDelta({
       directEffects: [{ label: 'food_security', before: 'adequate', after: 'strained' }],
@@ -71,7 +71,7 @@ describe('RegenerationDeltaCard — header + summary counts', () => {
   });
 });
 
-describe('RegenerationDeltaCard — sections', () => {
+describe('RegenerationDeltaCard - sections', () => {
   test('Direct effects section renders the label + band change', () => {
     const delta = makeDelta({
       directEffects: [{ label: 'food_security', before: 'adequate', after: 'strained' }],
@@ -151,7 +151,7 @@ describe('RegenerationDeltaCard — sections', () => {
   });
 });
 
-describe('RegenerationDeltaCard — broken dependencies', () => {
+describe('RegenerationDeltaCard - broken dependencies', () => {
   test('renders the broken-dependencies row when present', () => {
     const delta = makeDelta({
       brokenDependencies: ['supplyChain.iron', 'faction.silver'],
@@ -170,7 +170,7 @@ describe('RegenerationDeltaCard — broken dependencies', () => {
   });
 });
 
-describe('RegenerationDeltaCard — summary footer', () => {
+describe('RegenerationDeltaCard - summary footer', () => {
   test('renders summary lines below the sections', () => {
     const delta = makeDelta({
       directEffects: [{ label: 'a', before: 'x', after: 'y' }],
@@ -192,7 +192,7 @@ describe('RegenerationDeltaCard — summary footer', () => {
   });
 });
 
-describe('RegenerationDeltaCard — actions', () => {
+describe('RegenerationDeltaCard - actions', () => {
   test('dismiss button fires onDismiss', () => {
     const onDismiss = vi.fn();
     const delta = makeDelta({ directEffects: [{ label: 'a', before: 'x', after: 'y' }] });

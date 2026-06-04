@@ -1,9 +1,9 @@
 /**
- * aiSlice — AI narrative layer and daily-life generation state.
+ * aiSlice - AI narrative layer and daily-life generation state.
  *
  * The narrative layer REFINES the settlement's prose in place rather than
  * adding a separate commentary layer. The server returns an `aiSettlement`
- * that mirrors the shape of `settlement` — same fields, better prose.
+ * that mirrors the shape of `settlement` - same fields, better prose.
  * A `thesis` field is added at the top as the authorial voice.
  *
  * The UI flips between raw and narrative views by swapping which object
@@ -24,13 +24,13 @@ import { generateNarrative } from '../lib/ai.js';
 import { saves as savesService } from '../lib/saves.js';
 import { applyRenameToAiData } from '../lib/narrativeMutations.js';
 import { settlementFingerprint } from '../lib/settlementFingerprint.js';
-import { CREDIT_COSTS } from './creditsSlice.js';
+import { getAiCostForModel } from '../config/pricing.js';
 import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
 import { verifyAiOverlay } from '../domain/aiOverlayVerifier.js';
 
 // ── Verifier integration ────────────────────────────────────────────────────
 //
-// Tier 6.5 — every AI overlay commit runs through aiOverlayVerifier. The
+// Tier 6.5 - every AI overlay commit runs through aiOverlayVerifier. The
 // result is stored on state for UI/PDF surfaces to consume. We never
 // REFUSE to commit on violations (display-only, no blocking): the user
 // paid for the call, and a "your AI output had drift" warning is more
@@ -85,6 +85,9 @@ function buildAiDataBlob(existing, patch) {
       : (prev.narrativeSourceFingerprint || null),
     chronicle:            Array.isArray(prev.chronicle)  ? prev.chronicle  : [],
     pinnedNpcs:           Array.isArray(prev.pinnedNpcs) ? prev.pinnedNpcs : [],
+    dossierNotes:         patch.dossierNotes !== undefined
+      ? patch.dossierNotes
+      : (prev.dossierNotes && typeof prev.dossierNotes === 'object' ? prev.dossierNotes : null),
   };
 }
 
@@ -122,7 +125,7 @@ export const createAiSlice = (set, get) => ({
   aiSettlement:     null,   // AI-refined version of settlement (display only)
   aiDailyLife:      null,   // AI-generated daily life prose ({dawn, morning, ..., night})
   aiLoading:        false,  // true while an AI request is in-flight
-  aiRegenerating:   false,  // true when regenerating — UI keeps showing old content dimmed
+  aiRegenerating:   false,  // true when regenerating - UI keeps showing old content dimmed
   aiError:          null,   // error message from last failed request
   aiProgress:       '',     // human-readable progress text shown in UI
   aiPartialFailure: null,   // { failedFields: [] } when some passes fell back to raw
@@ -210,8 +213,12 @@ export const createAiSlice = (set, get) => ({
       return;
     }
 
+    const saveEntry = get().savedSettlements.find(s => s.id === saveId);
+    const dossierNotes = saveEntry?.aiData?.dossierNotes || {};
+    const aiGuidance = typeof dossierNotes.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
+    const modelPreference = get().auth?.modelPreference;
     const isRegenerate = !!aiSettlement;
-    const cost = CREDIT_COSTS.narrative;
+    const cost = getAiCostForModel('narrative', modelPreference);
     const elevated = get().isElevated();
     if (!elevated && creditBalance < cost) {
       set(state => { state.aiError = `Insufficient credits (need ${cost}, have ${state.creditBalance})`; });
@@ -258,7 +265,6 @@ export const createAiSlice = (set, get) => ({
     // Pinned NPC ids travel to the edge function so the `npcs` refinement pass
     // skips them. Read from the persisted ai_data, not from in-session state,
     // so the pin survives page reloads.
-    const saveEntry = get().savedSettlements.find(s => s.id === saveId);
     const pinnedNpcIds = Array.isArray(saveEntry?.aiData?.pinnedNpcs)
       ? saveEntry.aiData.pinnedNpcs
       : [];
@@ -267,6 +273,8 @@ export const createAiSlice = (set, get) => ({
       const { result, creditsRemaining, partialFailure, failedFields } =
         await generateNarrative('narrative', settlement, saveId, {
           pinnedNpcIds,
+          aiGuidance,
+          modelPreference,
           onField(fieldName, value, error) {
             // Per-pass error: not fatal. Progress counter still advances so
             // the percentage reflects passes *attempted*, not successful.
@@ -283,7 +291,7 @@ export const createAiSlice = (set, get) => ({
             lastFieldMsg = true;
             const label = NARRATIVE_FIELD_LABELS[fieldName] || `Writing ${fieldName}`;
             set(state => {
-              // During regenerate, don't overwrite the old aiSettlement — the
+              // During regenerate, don't overwrite the old aiSettlement - the
               // final result will swap in atomically on success.
               if (!isRegenerate) {
                 if (!state.aiSettlement) state.aiSettlement = {};
@@ -316,7 +324,7 @@ export const createAiSlice = (set, get) => ({
       });
 
       // Persist the refined narrative + mode flip to the saved settlement.
-      // Generation succeeded — don't let a persist error lose what the user just paid for.
+      // Generation succeeded - don't let a persist error lose what the user just paid for.
       try {
         const existingEntry = get().savedSettlements.find(s => s.id === saveId);
         const aiData = buildAiDataBlob(existingEntry?.aiData, {
@@ -330,12 +338,12 @@ export const createAiSlice = (set, get) => ({
         get().updateSavedSettlement(saveId, { aiData });
       } catch (persistErr) {
         console.error('Failed to persist narrative to save:', persistErr);
-        set(state => { state.aiError = 'Narrative generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Narrative generated but save failed - it may not persist across sessions.'; });
       }
 
       // Chronicle: after a successful generation, append an entry logging this
       // run. Tier-based rotation handled inside _appendChronicleEntry.
-      // Non-fatal on failure — the narrative itself is already persisted above.
+      // Non-fatal on failure - the narrative itself is already persisted above.
       try {
         await get()._appendChronicleEntry(saveId, {
           reason: isRegenerate ? 'regenerate' : 'initial',
@@ -374,8 +382,12 @@ export const createAiSlice = (set, get) => ({
       return;
     }
 
+    const saveEntry = get().savedSettlements.find(s => s.id === saveId);
+    const dossierNotes = saveEntry?.aiData?.dossierNotes || {};
+    const aiGuidance = typeof dossierNotes.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
+    const modelPreference = get().auth?.modelPreference;
     const isRegenerate = !!aiDailyLife;
-    const cost = CREDIT_COSTS.dailyLife;
+    const cost = getAiCostForModel('dailyLife', modelPreference);
     const elevated = get().isElevated();
     if (!elevated && creditBalance < cost) {
       set(state => { state.aiError = `Insufficient credits (need ${cost}, have ${state.creditBalance})`; });
@@ -406,6 +418,8 @@ export const createAiSlice = (set, get) => ({
 
     try {
       const { result, creditsRemaining } = await generateNarrative('dailyLife', settlement, saveId, {
+        aiGuidance,
+        modelPreference,
         onField(fieldName, value, error) {
           if (error) {
             fieldsDone += 1;
@@ -449,7 +463,7 @@ export const createAiSlice = (set, get) => ({
         get().updateSavedSettlement(saveId, { aiData });
       } catch (persistErr) {
         console.error('Failed to persist daily-life to save:', persistErr);
-        set(state => { state.aiError = 'Daily life generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Daily life generated but save failed - it may not persist across sessions.'; });
       }
     } catch (e) {
       set(state => {
@@ -476,7 +490,7 @@ export const createAiSlice = (set, get) => ({
    *   • honors pinned NPCs (never in the default affected set; backend
    *     filter is belt-and-suspenders for future expansion)
    *
-   * Always behaves like a regenerate from the UI's perspective — old narrative
+   * Always behaves like a regenerate from the UI's perspective - old narrative
    * stays visible (dimmed) until the new one lands atomically. Chronicle gets
    * a `progression` entry tagged with `triggeredBy: changeLabel` so the DM
    * can see what prompted each evolution.
@@ -502,7 +516,11 @@ export const createAiSlice = (set, get) => ({
       return;
     }
 
-    const cost = CREDIT_COSTS.progression;
+    const saveEntry = get().savedSettlements.find(s => s.id === saveId);
+    const dossierNotes = saveEntry?.aiData?.dossierNotes || {};
+    const aiGuidance = typeof dossierNotes.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
+    const modelPreference = get().auth?.modelPreference;
+    const cost = getAiCostForModel('progression', modelPreference);
     const elevated = get().isElevated();
     if (!elevated && creditBalance < cost) {
       set(state => { state.aiError = `Insufficient credits (need ${cost}, have ${state.creditBalance})`; });
@@ -530,7 +548,6 @@ export const createAiSlice = (set, get) => ({
       set(state => { state.aiProgress = ROTATING_MSGS[rotIdx]; });
     }, 2500);
 
-    const saveEntry = get().savedSettlements.find(s => s.id === saveId);
     const pinnedNpcIds = Array.isArray(saveEntry?.aiData?.pinnedNpcs)
       ? saveEntry.aiData.pinnedNpcs
       : [];
@@ -543,6 +560,8 @@ export const createAiSlice = (set, get) => ({
           pinnedNpcIds,
           changeType,
           changeLabel,
+          aiGuidance,
+          modelPreference,
           priorNarrative: aiSettlement,
           priorDailyLife: aiDailyLife,
           onField(fieldName, value, error) {
@@ -582,7 +601,7 @@ export const createAiSlice = (set, get) => ({
       });
 
       // Persist the evolved narrative. Daily life is carried through
-      // unchanged — progression v1 doesn't touch it.
+      // unchanged - progression v1 doesn't touch it.
       try {
         const existingEntry = get().savedSettlements.find(s => s.id === saveId);
         const aiData = buildAiDataBlob(existingEntry?.aiData, {
@@ -596,7 +615,7 @@ export const createAiSlice = (set, get) => ({
         get().updateSavedSettlement(saveId, { aiData });
       } catch (persistErr) {
         console.error('Failed to persist progression to save:', persistErr);
-        set(state => { state.aiError = 'Progression generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Progression generated but save failed - it may not persist across sessions.'; });
       }
 
       // Chronicle: record the progression with its human-readable trigger so
@@ -615,7 +634,7 @@ export const createAiSlice = (set, get) => ({
         state.aiLoading = false;
         state.aiRegenerating = false;
         state.aiProgress = '';
-        // Old aiSettlement stays intact — the user didn't lose anything.
+        // Old aiSettlement stays intact - the user didn't lose anything.
       });
     } finally {
       clearInterval(rotation);
@@ -627,7 +646,7 @@ export const createAiSlice = (set, get) => ({
    *
    * Called on narrative generation success (initial/regenerate) and on
    * revert-to-raw. Snapshots the CURRENT `aiSettlement` / `aiDailyLife`
-   * from store state — so callers should invoke this BEFORE clearing those
+   * from store state - so callers should invoke this BEFORE clearing those
    * fields (e.g. before the revert nulls them).
    *
    * Chronicle cap is tier-based:
@@ -677,6 +696,26 @@ export const createAiSlice = (set, get) => ({
     catch (e) { console.error('Failed to persist chronicle entry:', e); }
   },
 
+  updateDossierNotes: async (saveId, notes = {}) => {
+    if (!saveId) return null;
+    const entry = get().savedSettlements.find(s => s.id === saveId);
+    if (!entry) return null;
+    const dossierNotes = {
+      dmNotes: typeof notes.dmNotes === 'string' ? notes.dmNotes : '',
+      aiGuidance: typeof notes.aiGuidance === 'string' ? notes.aiGuidance : '',
+      updatedAt: new Date().toISOString(),
+    };
+    const nextAiData = buildAiDataBlob(entry.aiData, { dossierNotes });
+    get().updateSavedSettlement(saveId, { aiData: nextAiData });
+    try {
+      await savesService.update(saveId, { aiData: nextAiData });
+    } catch (e) {
+      console.error('Failed to persist dossier notes:', e);
+      throw e;
+    }
+    return dossierNotes;
+  },
+
   // ── Pinned NPCs (AI-4a) ───────────────────────────────────────────────────
   //
   // The DM can pin specific NPCs on a save; pinned ids ride along with every
@@ -686,9 +725,9 @@ export const createAiSlice = (set, get) => ({
   // pin survives reload and is scoped per-save.
   //
   // Storage: `savedSettlements[].aiData.pinnedNpcs: Array<string|number>`
-  // (normalized to strings at call sites — the edge function coerces).
+  // (normalized to strings at call sites - the edge function coerces).
   //
-  // No in-session mirror — the save entry is the single source of truth,
+  // No in-session mirror - the save entry is the single source of truth,
   // read live via `useStore(s => s.savedSettlements.find(...))` in components.
 
   /**
@@ -764,7 +803,7 @@ export const createAiSlice = (set, get) => ({
    * both the savedSettlements entry and (if it's the currently viewed save)
    * the in-session aiSettlement/aiDailyLife state.
    *
-   * This is the cosmetic tier of the AI-2 change classifier — mechanical
+   * This is the cosmetic tier of the AI-2 change classifier - mechanical
    * substitution is semantically safe, no credit spend, no user confirm.
    */
   applyCosmeticRename: async ({ saveId, oldName, newName }) => {
@@ -778,7 +817,7 @@ export const createAiSlice = (set, get) => ({
     // skip the network round-trip.
     if (nextAiData === entry.aiData) return;
 
-    // Update the session view first if this is the active save — keeps the
+    // Update the session view first if this is the active save - keeps the
     // UI responsive even if the persist round-trip takes a moment.
     if (state.aiSettlement || state.aiDailyLife) {
       set(s => {
@@ -794,7 +833,7 @@ export const createAiSlice = (set, get) => ({
       console.error('Failed to persist cosmetic rename to ai_data:', e);
       // Non-fatal: in-memory state is correct, next save-triggered update
       // will retry. We don't surface an aiError because the rename DID
-      // succeed from the user's perspective — only the cross-session
+      // succeed from the user's perspective - only the cross-session
       // persistence is at risk.
     }
   },
@@ -814,7 +853,7 @@ export const createAiSlice = (set, get) => ({
     // Chronicle FIRST: snapshot the narrative we're about to discard as a
     // summary-mode entry. We call this BEFORE nulling state so the snapshot
     // reads the still-live aiSettlement/aiDailyLife. Summary-at-birth matches
-    // user intent — they explicitly asked to drop the narrative, so retaining
+    // user intent - they explicitly asked to drop the narrative, so retaining
     // the full payload would contradict that. Thesis + summaryText survive
     // so the chronicle still shows WHAT was reverted.
     try {
@@ -849,7 +888,7 @@ export const createAiSlice = (set, get) => ({
       get().updateSavedSettlement(saveId, { aiData });
     } catch (e) {
       console.error('Failed to persist revert-to-raw:', e);
-      set(state => { state.aiError = 'Reverted in view but save failed — it may persist on reload.'; });
+      set(state => { state.aiError = 'Reverted in view but save failed - it may persist on reload.'; });
     }
   },
 });

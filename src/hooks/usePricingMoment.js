@@ -1,5 +1,5 @@
 /**
- * usePricingMoment.js — Fire a pricing moment on rising-edge condition.
+ * usePricingMoment.js - Fire a pricing moment on rising-edge condition.
  *
  * The library `lib/pricingMoments.js` enforces 24h cooldown + premium-skip
  * and looks up copy from COPY.pricing.moments. This hook wraps it for
@@ -29,11 +29,11 @@ import { useStore } from '../store/index.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 
 /**
- * @param {string} reason — A key in COPY.pricing.moments
- * @param {boolean} condition — Trigger; fires on false → true transition
- * @param {Function} openModal — (content) => void
+ * @param {string} reason - A key in COPY.pricing.moments
+ * @param {boolean} condition - Trigger; fires on false → true transition
+ * @param {(content: { headline:string, body:string, reason:string }) => void} openModal
  * @param {Object} [opts]
- * @param {boolean} [opts.force=false] — Bypass the cooldown (testing)
+ * @param {boolean} [opts.force=false] - Bypass the cooldown (testing)
  */
 export function usePricingMoment(reason, condition, openModal, opts = {}) {
   const tier = useStore(s => s.auth.tier);
@@ -44,7 +44,7 @@ export function usePricingMoment(reason, condition, openModal, opts = {}) {
     prevRef.current = !!condition;
     if (!condition || prev === !!condition) return;
 
-    const fired = triggerPricingMoment(reason, openModal, {
+    const fired = triggerPricingMoment(/** @type {any} */ (reason), openModal, {
       tier,
       force: !!opts.force,
     });

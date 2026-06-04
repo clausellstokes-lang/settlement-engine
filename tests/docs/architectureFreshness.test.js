@@ -2,7 +2,7 @@
  * Lightweight freshness guard for ARCHITECTURE.md.
  *
  * The doc is the cheapest onboarding artifact in the repo, so it's also the
- * easiest to let rot. This doesn't try to verify every claim — it pins a couple
+ * easiest to let rot. This doesn't try to verify every claim - it pins a couple
  * of facts that have already drifted (or easily could), so the same drift can't
  * silently come back.
  */

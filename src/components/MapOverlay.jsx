@@ -1,5 +1,5 @@
 /**
- * MapOverlay — React-owned SVG layer positioned over the FMG iframe.
+ * MapOverlay - React-owned SVG layer positioned over the FMG iframe.
  *
  * Subscribes to `fmg:viewport` broadcasts from the map bridge and mirrors
  * FMG's d3 zoom transform so that all children can be authored in map
@@ -15,7 +15,7 @@
  *
  * The root <g> is mutated directly via ref on every viewport tick (60fps)
  * to avoid React re-renders during pan/zoom. Only viewport *size* changes
- * trigger a state update (rare — iframe resize).
+ * trigger a state update (rare - iframe resize).
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -31,12 +31,15 @@ import HitLayer          from './map/HitLayer.jsx';
 import TreeSymbols       from './map/TreeSymbols.jsx';
 import PlacementsLayer   from './map/PlacementsLayer.jsx';
 import { MAP_MODES }     from '../store/mapSlice.js';
+import { TextInputDialog } from './primitives/Dialog.jsx';
 
 export default function MapOverlay({ bridge }) {
   const mapMode       = useStore(s => s.mapMode);
   const annotateTool  = useStore(s => s.annotateTool);
   const layers        = useStore(s => s.mapState.layers);
   const isDraggingOver = useStore(s => s.isDraggingOver);
+  const updateLabel = useStore(s => s.updateLabel);
+  const updateMarker = useStore(s => s.updateMarker);
 
   const wrapperRef = useRef(null);
   const gRef = useRef(null);
@@ -44,11 +47,12 @@ export default function MapOverlay({ bridge }) {
   // `size` drives the SVG viewBox. We deliberately use the wrapper's
   // observed pixel rect (not FMG's broadcast graphWidth/graphHeight) so the
   // overlay's coordinate system always matches the iframe's actual displayed
-  // pixels. Otherwise any change to the iframe's CSS size — e.g. opening
-  // the right-side LayersPanel, which narrows the map column — leaves the
+  // pixels. Otherwise any change to the iframe's CSS size - e.g. opening
+  // the right-side LayersPanel, which narrows the map column - leaves the
   // viewBox stale and the overlay's icons drift away from the geography
   // beneath them.
   const [size, setSize] = useState({ width: 0, height: 0 });
+  const [editDialog, setEditDialog] = useState(null);
 
   // ── Viewport sync ────────────────────────────────────────────────────
   useEffect(() => {
@@ -64,14 +68,14 @@ export default function MapOverlay({ bridge }) {
 
       transformRef.current = { tx, ty, scale, width, height };
 
-      // Direct DOM update — avoids React re-render on every pan tick
+      // Direct DOM update - avoids React re-render on every pan tick
       if (gRef.current) {
         gRef.current.setAttribute('transform',
           `translate(${tx}, ${ty}) scale(${scale})`);
       }
 
       // Debounced store persistence (campaigns reload viewport on restore).
-      // schedulePersist mutates persistTimerRef.current — legal in an
+      // schedulePersist mutates persistTimerRef.current - legal in an
       // effect, but the immutability rule fires because the function is
       // defined-during-render even though only called-from-effects.
       // eslint-disable-next-line react-hooks/immutability
@@ -92,7 +96,7 @@ export default function MapOverlay({ bridge }) {
   // ── Wrapper size sync (drives viewBox) ──────────────────────────────
   // Watch the wrapper's rendered rect via ResizeObserver. Toggling the
   // LayersPanel changes the parent flex layout, which reflows the iframe
-  // and this overlay together — both shrink/grow simultaneously. By keying
+  // and this overlay together - both shrink/grow simultaneously. By keying
   // the SVG viewBox off the observed rect, content rendered in pixel space
   // (the same space FMG uses internally, since #map has no viewBox of its
   // own) stays pixel-aligned with the underlying geography across resizes.
@@ -111,7 +115,7 @@ export default function MapOverlay({ bridge }) {
     return () => ro.disconnect();
   }, []);
 
-  // Debounced viewport persistence — don't thrash Immer on pan ticks
+  // Debounced viewport persistence - don't thrash Immer on pan ticks
   const persistTimerRef = useRef(null);
   function schedulePersist(tx, ty, scale, width, height) {
     if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
@@ -188,7 +192,7 @@ export default function MapOverlay({ bridge }) {
           </symbol>
         </defs>
 
-        {/* Hit layer — bottom of the stack so content layers get click priority */}
+        {/* Hit layer - bottom of the stack so content layers get click priority */}
         {overlayInteractive && (
           <HitLayer
             transformRef={transformRef}
@@ -198,7 +202,7 @@ export default function MapOverlay({ bridge }) {
           />
         )}
 
-        {/* Content group — transformed to match FMG's d3 zoom */}
+        {/* Content group - transformed to match FMG's d3 zoom */}
         <g ref={gRef}>
           {layers.forests       && <ForestsLayer />}
           {layers.roads         && <RoadsLayer bridge={bridge} />}
@@ -206,10 +210,26 @@ export default function MapOverlay({ bridge }) {
           {layers.relationships && <RelationshipEdges />}
           <RegionalCausalityLayer />
           {layers.placements !== false && <PlacementsLayer transformRef={transformRef} />}
-          {layers.markers       && <MarkersLayer />}
-          {layers.labels        && <LabelsLayer />}
+          {layers.markers       && <MarkersLayer onEditMarker={marker => setEditDialog({ kind: 'marker', item: marker })} />}
+          {layers.labels        && <LabelsLayer onEditLabel={label => setEditDialog({ kind: 'label', item: label })} />}
         </g>
       </svg>
+      <TextInputDialog
+        open={!!editDialog}
+        title={editDialog?.kind === 'marker' ? 'Edit marker title' : 'Edit label'}
+        label={editDialog?.kind === 'marker' ? 'Marker title' : 'Label text'}
+        initialValue={editDialog?.item?.title || editDialog?.item?.text || ''}
+        confirmLabel="Save"
+        onConfirm={(value) => {
+          if (editDialog?.kind === 'marker') {
+            if (value !== editDialog.item.title) updateMarker(editDialog.item.id, { title: value });
+          } else if (editDialog?.kind === 'label') {
+            if (value !== editDialog.item.text) updateLabel(editDialog.item.id, { text: value });
+          }
+          setEditDialog(null);
+        }}
+        onCancel={() => setEditDialog(null)}
+      />
     </div>
   );
 }

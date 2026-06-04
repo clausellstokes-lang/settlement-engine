@@ -1,5 +1,5 @@
 /**
- * tests/domain/timeProgression.test.js — Tier 4.12 composing-tier contract.
+ * tests/domain/timeProgression.test.js - Tier 4.12 composing-tier contract.
  *
  * Pins advanceTime / forecastTime / summarizeForecast behavior:
  *   - Pure: no mutation of input settlement, event, or previousTickState.
@@ -63,7 +63,7 @@ function multiFactionSettlement(over = {}) {
 
 // ── Single-tick contract ───────────────────────────────────────────────
 
-describe('advanceTime() — basic contract', () => {
+describe('advanceTime() - basic contract', () => {
   it('returns the canonical { newSettlement, tick, nextTickState } shape', () => {
     const result = advanceTime(multiFactionSettlement(), {
       interval: 'one_month',
@@ -144,7 +144,7 @@ describe('advanceTime() does not mutate input', () => {
 
 // ── Faction-delta application ──────────────────────────────────────────
 
-describe('advanceTime() — applies faction deltas to settlement', () => {
+describe('advanceTime() - applies faction deltas to settlement', () => {
   it('plague: criminal faction power increases', () => {
     const s = multiFactionSettlement();
     const before = s.powerStructure.factions.find(f => f.faction === "Thieves' Guild").power;
@@ -218,7 +218,7 @@ describe('advanceTime() — applies faction deltas to settlement', () => {
 
 // ── Interval scaling ───────────────────────────────────────────────────
 
-describe('advanceTime() — interval scaling', () => {
+describe('advanceTime() - interval scaling', () => {
   it('per-week is less intense than per-month for the same condition', () => {
     const baseline = multiFactionSettlement();
     const weekly = advanceTime(baseline, {
@@ -273,7 +273,7 @@ describe('advanceTime() — interval scaling', () => {
 
 // ── Legitimacy re-banding ──────────────────────────────────────────────
 
-describe('advanceTime() — governing legitimacy re-bands', () => {
+describe('advanceTime() - governing legitimacy re-bands', () => {
   it('plague drops Town Council legitimacy and updates the band label/flags', () => {
     // Start in 'Tolerated' band (45-59). Plague hits governing for -5
     // per month; over a year (6.0x scale) the hit is -30, plunging the
@@ -317,7 +317,7 @@ describe('advanceTime() — governing legitimacy re-bands', () => {
     expect(updated.govMultiplier).toBe(0.60);
   });
 
-  it('keeps legitimacy score within 0–100 even with large drops', () => {
+  it('keeps legitimacy score within 0-100 even with large drops', () => {
     const s = multiFactionSettlement({
       powerStructure: {
         governingName: 'Town Council',
@@ -366,7 +366,7 @@ describe('advanceTime() — governing legitimacy re-bands', () => {
 
 // ── Clock advancement ──────────────────────────────────────────────────
 
-describe('advanceTime() — clock advancement', () => {
+describe('advanceTime() - clock advancement', () => {
   function settlementWithFoodChainDisruption() {
     return {
       name: 'Disrupted',
@@ -491,7 +491,7 @@ describe('advanceTime() — clock advancement', () => {
 
 // ── Summary lines ──────────────────────────────────────────────────────
 
-describe('advanceTime() — narrative summary', () => {
+describe('advanceTime() - narrative summary', () => {
   it('always produces a non-empty summary', () => {
     const result = advanceTime(multiFactionSettlement(), {
       activeConditions: ['plague'],
@@ -550,7 +550,7 @@ describe('advanceTime() — narrative summary', () => {
 
 // ── forecastTime ───────────────────────────────────────────────────────
 
-describe('forecastTime() — multi-tick projection', () => {
+describe('forecastTime() - multi-tick projection', () => {
   it('returns { projectedSettlement, ticks[], finalState } with N ticks', () => {
     const result = forecastTime(multiFactionSettlement(), {
       ticks: 3,
@@ -720,7 +720,7 @@ describe('supportedIntervals()', () => {
 
 // ── Integration: real generated settlement ─────────────────────────────
 
-describe('advanceTime() — real generated settlement', () => {
+describe('advanceTime() - real generated settlement', () => {
   it('advances a real city under plague without throwing', () => {
     const settlement = generateSettlementPipeline(
       { settType: 'city', culture: 'germanic' },
@@ -797,7 +797,7 @@ describe('advanceTime() — real generated settlement', () => {
 
 // ── Phase 16: canonical activeConditions integration ───────────────────
 
-describe('advanceTime() — canonical settlement.activeConditions (Phase 16)', () => {
+describe('advanceTime() - canonical settlement.activeConditions (Phase 16)', () => {
   function settlementWithCanonicalPlague() {
     return {
       name: 'Plagued',
@@ -901,7 +901,7 @@ describe('advanceTime() — canonical settlement.activeConditions (Phase 16)', (
   });
 });
 
-describe('forecastTime() — canonical activeConditions threading', () => {
+describe('forecastTime() - canonical activeConditions threading', () => {
   it('keeps applying canonical conditions until they expire', () => {
     const s = {
       name: 'LongPlague',

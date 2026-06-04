@@ -1,10 +1,10 @@
 /**
- * domain/counterfactual.js — "What if removed?" causal projection.
+ * domain/counterfactual.js - "What if removed?" causal projection.
  *
  * Tier 4.17 of the roadmap. This is the pure composition tier:
- * everything Phases 17, 18, 19, 21, 22 produced — substrate diffs,
+ * everything Phases 17, 18, 19, 21, 22 produced - substrate diffs,
  * event pipeline, explanation envelopes, capacity supply/demand,
- * daily-life slots — can now answer:
+ * daily-life slots - can now answer:
  *
  *   counterfactual(settlement, { type, id, action }) ->
  *     CounterfactualResult {
@@ -20,17 +20,17 @@
  *     }
  *
  * Action vocabulary (V1):
- *   remove      — entirely remove the entity
- *   weaken      — significant degradation (severity 0.8)
- *   strengthen  — boost / restore the entity
- *   replace     — remove and substitute (future iteration)
+ *   remove      - entirely remove the entity
+ *   weaken      - significant degradation (severity 0.8)
+ *   strengthen  - boost / restore the entity
+ *   replace     - remove and substitute (future iteration)
  *
  * Supported entity types in V1:
- *   institution   — uses Phase 18 event pipeline
+ *   institution   - uses Phase 18 event pipeline
  *                   (REMOVE_INSTITUTION / DAMAGE_INSTITUTION / ADD_INSTITUTION)
- *   npc           — KILL_NPC via Phase 18
- *   faction       — manual clone-and-modify (no event archetype yet)
- *   chain         — manual clone-and-modify of chain status
+ *   npc           - KILL_NPC via Phase 18
+ *   faction       - manual clone-and-modify (no event archetype yet)
+ *   chain         - manual clone-and-modify of chain status
  *
  * Pure function. The input settlement is never mutated.
  *
@@ -39,9 +39,9 @@
  *     The pure projection lets the UI show real numeric deltas with
  *     real prose, not authored guesses.
  *   - Tier 5.1 (causal delta summaries after regeneration) is the
- *     same shape as a counterfactual diff — both consume the same
+ *     same shape as a counterfactual diff - both consume the same
  *     helpers.
- *   - Tier 6.1 (AI grounded-in-trace) — the counterfactual result is
+ *   - Tier 6.1 (AI grounded-in-trace) - the counterfactual result is
  *     a complete grounding envelope the AI can describe with prose.
  */
 
@@ -168,7 +168,7 @@ export function counterfactual(settlement, ref) {
   const beforeCapacities  = deriveAllCapacities(settlement);
   const beforeDailyLife   = deriveDailyLife(settlement);
 
-  // 2. Run the projection — either through Phase 18 event pipeline
+  // 2. Run the projection - either through Phase 18 event pipeline
   // (institutions / npcs) or via manual clone-and-modify (factions /
   // chains).
   let nextSettlement;
@@ -186,7 +186,7 @@ export function counterfactual(settlement, ref) {
     if (nextSettlement === settlement) {
       warnings.push({
         severity: 'mismatch',
-        message: `No counterfactual path for ${ref.type}:${action} yet — settlement unchanged.`,
+        message: `No counterfactual path for ${ref.type}:${action} yet - settlement unchanged.`,
       });
     }
   }
@@ -327,5 +327,5 @@ function snakeCase(s) {
 function truncateText(s, n) {
   const str = String(s || '');
   if (str.length <= n) return str;
-  return str.slice(0, n - 1).trimEnd() + '…';
+  return str.slice(0, n - 1).trimEnd() + '...';
 }

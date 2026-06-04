@@ -1,5 +1,5 @@
 /**
- * ExportSheet — Variant picker for PDF export.
+ * ExportSheet - Variant picker for PDF export.
  *
  * Replaces the single "Export PDF" button with a small modal where the
  * user chooses Draft Brief / Canon Dossier / Timeline Packet. Each
@@ -92,7 +92,7 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
             style={primaryBtnStyle(exporting)}
           >
             {exporting
-              ? <><Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> Building PDF…</>
+              ? <><Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> Building PDF...</>
               : <>Export {PDF_VARIANTS[picked].label}</>}
           </button>
         </footer>

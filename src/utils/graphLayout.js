@@ -1,9 +1,9 @@
 /**
- * graphLayout.js — Layout algorithms for relationship-graph diagrams.
+ * graphLayout.js - Layout algorithms for relationship-graph diagrams.
  *
  * Used by the PDF exporter to position settlement nodes on a page.
  * Two layout strategies:
- *   - circularLayout:  even angle distribution around a circle (1–8 nodes)
+ *   - circularLayout:  even angle distribution around a circle (1-8 nodes)
  *   - forceLayout:     spring-based force simulation (larger graphs)
  *
  * All layouts return nodes normalised to the [0,1] unit square.
@@ -12,8 +12,8 @@
 
 /**
  * Place nodes evenly around a circle.
- * @param {Array} nodes — [{id, label, ...}]
- * @returns {Array} — [{id, x, y, ...}]  (x,y in [0,1])
+ * @param {Array} nodes - [{id, label, ...}]
+ * @returns {Array} - [{id, x, y, ...}]  (x,y in [0,1])
  */
 export function circularLayout(nodes) {
   const n = nodes.length;
@@ -38,10 +38,10 @@ export function circularLayout(nodes) {
  * repulsion between all pairs pushing them apart. Runs a fixed number of
  * iterations, no need for a library.
  *
- * @param {Array} nodes — [{id, ...}]
- * @param {Array} edges — [{from, to, ...}]
+ * @param {Array} nodes - [{id, ...}]
+ * @param {Array} edges - [{from, to, ...}]
  * @param {Object} opts
- * @returns {Array} — [{id, x, y, ...}]
+ * @returns {Array} - [{id, x, y, ...}]
  */
 export function forceLayout(nodes, edges, opts = {}) {
   const {

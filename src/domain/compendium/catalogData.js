@@ -1,15 +1,15 @@
 /**
- * domain/compendium/catalogData.js — shared, pure Compendium reference data.
+ * domain/compendium/catalogData.js - shared, pure Compendium reference data.
  *
  * These two arrays were previously inlined inside CompendiumPanel.jsx.
  * They're lifted here so two consumers can share one source of truth:
  *
- *   1. CompendiumPanel.jsx          — renders them in the Power & Neighbour tabs.
- *   2. domain/compendium/searchIndex.js — builds the global type-ahead
+ *   1. CompendiumPanel.jsx          - renders them in the Power & Neighbour tabs.
+ *   2. domain/compendium/searchIndex.js - builds the global type-ahead
  *      index (P139 / CP-4) so a search for "theocracy" or "cold war"
  *      lands the reader on the right tab.
  *
- * Pure data only — no React, no side effects — so the domain test suite
+ * Pure data only - no React, no side effects - so the domain test suite
  * and the search index can import it without dragging in the component
  * tree. Display-only concerns (CAT_COLORS, icons) stay in the component.
  */
@@ -27,7 +27,7 @@ export const REL_TYPES = [
   { id:'neutral',      label:'Neutral',      color:'#6b5340',effect:'No generation influence. Minor economic contact only.' },
 ];
 
-// Settlement archetypes — emergent labels keyed to slider + threat
+// Settlement archetypes - emergent labels keyed to slider + threat
 // conditions. `cat` groups them; `cond` is the trigger; `desc` is the play.
 export const ARCHETYPES = [
   { cat:'Economic', name:'Merchant Republic',     cond:'Economy ≥65, Military ≤45, Religion ≤45',    desc:'Merchant guilds control governance. Trade law is the law.' },

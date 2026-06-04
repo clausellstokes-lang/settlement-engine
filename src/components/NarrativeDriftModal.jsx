@@ -1,5 +1,5 @@
 /**
- * NarrativeDriftModal — Gate for structural/seismic edits on a narrated save.
+ * NarrativeDriftModal - Gate for structural/seismic edits on a narrated save.
  *
  * When the user tries to change something that the AI narrative reasons ABOUT
  * (add/remove institution, stressor, trade good, resource, priorities, tier,
@@ -7,7 +7,7 @@
  * narrative claims are rooted in the old facts.
  *
  * Per design decision 4 (kill "leave stale"), the user isn't allowed to just
- * silently drift — they must pick an explicit resolution at the moment of
+ * silently drift - they must pick an explicit resolution at the moment of
  * the edit:
  *
  *   • Regenerate → apply the edit, then re-run the full narrative pipeline
@@ -17,7 +17,7 @@
  *                  what changed. More expensive than regenerate but preserves
  *                  voice, named NPCs, and thematic throughlines. Hidden when
  *                  the change class is seismic (too much has shifted to evolve
- *                  responsibly — the user must regenerate).
+ *                  responsibly - the user must regenerate).
  *   • Revert     → apply the edit, then clear the narrative entirely.
  *                  Zero credit cost; the save goes back to showing raw data.
  *   • Cancel     → back out of the edit.
@@ -48,7 +48,7 @@ export default function NarrativeDriftModal({
   const cost = CREDIT_COSTS.narrative;
   // Progress is only offered for structural changes (not seismic) and only when
   // the caller wired up a handler. Seismic changes shift too much of the world
-  // to evolve responsibly — the user needs to regenerate.
+  // to evolve responsibly - the user needs to regenerate.
   const showProgress = !!onProgress && !isSeismic;
   const progCost = typeof progressionCost === 'number' ? progressionCost : CREDIT_COSTS.progression;
 

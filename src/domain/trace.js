@@ -1,5 +1,5 @@
 /**
- * domain/trace.js — Causal trace API for the simulation pipeline.
+ * domain/trace.js - Causal trace API for the simulation pipeline.
  *
  * Tier 2.1 of the roadmap. This is the foundation the rest of the
  * simulator's causality work compounds on: faction profiles, supply-
@@ -19,11 +19,11 @@
  * Trace shape:
  *   Every trace is a structured fact about WHAT decision the engine
  *   made, WHY (the causes that pushed it), and WHAT DOWNSTREAM effects
- *   the decision has. Free-text reason strings are encouraged — the
+ *   the decision has. Free-text reason strings are encouraged - the
  *   point of a trace is to be human-readable, not just parseable.
  *
  *     {
- *       targetType: 'institution' | 'faction' | 'npc' | 'resource' | …
+ *       targetType: 'institution' | 'faction' | 'npc' | 'resource' | ...
  *       targetId:   stable id of the affected entity
  *       step:       pipeline step name that produced the trace
  *       result:     short verb describing what happened ('selected',
@@ -55,7 +55,7 @@ const ALLOWED_TARGET_TYPES = new Set([
 function validateTrace(trace) {
   // Validation is cheap (a handful of property checks); always-on. If
   // the cost ever shows up in a profile, gate this behind a build-time
-  // flag — but DON'T gate on import.meta.env here because the domain
+  // flag - but DON'T gate on import.meta.env here because the domain
   // tsconfig doesn't expose Vite's env type and we don't want to
   // introduce a global type augmentation just to skip a microcheck.
   if (!trace || typeof trace !== 'object') {
@@ -119,7 +119,7 @@ export function recordTrace(ctx, trace) {
   // Deterministic timestamps: when the pipeline runs with a fixed
   // seed and customContent={} (the "headless deterministic" mode),
   // tests / snapshot diffs want trace[].ts to NOT vary across runs.
-  // The pipeline can pass a monotonic counter via ctx._traceClock —
+  // The pipeline can pass a monotonic counter via ctx._traceClock -
   // if present we use it; otherwise we fall back to Date.now().
   let ts = trace?.ts;
   if (ts == null) {
@@ -203,18 +203,18 @@ export function tracesAffecting(settlement, targetId) {
 }
 
 /**
- * Render-friendly summary of a single trace — short lines suitable for
+ * Render-friendly summary of a single trace - short lines suitable for
  * a tooltip or expanded rail step. Pure; returns strings, not JSX.
  */
 export function summarizeTrace(trace) {
   if (!trace) return null;
   const causeLines = (trace.causes || []).map(c => {
     const lead = c.effect ? `${c.effect}` : '';
-    const tail = c.reason ? ` — ${c.reason}` : '';
+    const tail = c.reason ? ` - ${c.reason}` : '';
     return `${c.source}${lead ? ' (' + lead + ')' : ''}${tail}`;
   });
   const downstreamLines = (trace.downstreamEffects || []).map(d => {
-    return `${d.target}: ${d.effect}${d.reason ? ` — ${d.reason}` : ''}`;
+    return `${d.target}: ${d.effect}${d.reason ? ` - ${d.reason}` : ''}`;
   });
   return {
     headline: `${trace.targetId} ${trace.result}`,

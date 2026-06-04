@@ -1,22 +1,22 @@
 /**
- * VersionsTab.jsx — P109 / E-5 version history.
+ * VersionsTab.jsx - P109 / E-5 version history.
  *
  * A worldbuilder running a 6-month arc wants to see what changed between
- * session 3 and session 8 — and roll back if a player retconned
+ * session 3 and session 8 - and roll back if a player retconned
  * themselves out of an event. The save's `campaignState` already tracks
  * `editedAt / canonizedAt / lastExportAt`; this tab surfaces them as a
  * timeline + offers manual snapshot + side-by-side diff + revert.
  *
  * Snapshots live in `save.versionHistory: [{ id, ts, label, snapshot }]`
- * — appended on canonize, on demand, and on every Nth commit. Reverting
- * creates a *new* snapshot from the old state (never destructive — the
+ * - appended on canonize, on demand, and on every Nth commit. Reverting
+ * creates a *new* snapshot from the old state (never destructive - the
  * critique was explicit about that).
  *
  * Cartographer-gated. Wanderer/Free users see a locked-state preview
  * with a Cartographer upgrade pitch.
  *
  * Self-gates on `versionHistory` flag. Wraps the existing campaignState
- * data — no schema migration needed.
+ * data - no schema migration needed.
  */
 
 import { useState, useMemo } from 'react';
@@ -31,7 +31,7 @@ const GREEN = '#4A7A3A';
 const AMBER = '#D08020';
 
 function formatTs(ts) {
-  if (!ts) return '—';
+  if (!ts) return '-';
   try {
     return new Date(ts).toLocaleString('en-GB', {
       day: 'numeric', month: 'short', year: '2-digit',
@@ -50,7 +50,7 @@ export function buildVersionTimeline(save) {
 
   const cs = save.campaignState || {};
 
-  // Explicit snapshots (if present) — these are the user-saved or auto-
+  // Explicit snapshots (if present) - these are the user-saved or auto-
   // saved checkpoints we'd revert TO.
   if (Array.isArray(save.versionHistory)) {
     for (const v of save.versionHistory) {
@@ -65,12 +65,12 @@ export function buildVersionTimeline(save) {
     }
   }
 
-  // Lifecycle milestones — derived from campaignState fields.
+  // Lifecycle milestones - derived from campaignState fields.
   if (cs.canonizedAt) {
     entries.push({
       id: 'canonized',
       ts: cs.canonizedAt,
-      label: 'Canonized — events from here forward are campaign log',
+      label: 'Canonized - events from here forward are campaign log',
       kind: 'canonize',
       revertable: false,
     });
@@ -170,13 +170,13 @@ export default function VersionsTab({ save }) {
     // We now route this through the shared LockedDestination primitive so
     // every locked surface speaks one voice (and gets the mount-once
     // analytics + a live "See Cartographer" CTA that opens the purchase
-    // modal — the old hand-rolled button was inert).
+    // modal - the old hand-rolled button was inert).
     return (
       <LockedDestination
         feature="Version history"
         eyebrow="Cartographer · Version history"
         headline="Every change, on a timeline you can roll back."
-        body="Auto-snapshot on canonize, manual snapshot on demand. Side-by-side diff for any two points. Revert creates a new snapshot from the old state — never destructive. The campaign-running worldbuilder's safety net."
+        body="Auto-snapshot on canonize, manual snapshot on demand. Side-by-side diff for any two points. Revert creates a new snapshot from the old state - never destructive. The campaign-running worldbuilder's safety net."
         ctaLabel="See Cartographer"
         trackEvent={EVENTS.LOCKED_DESTINATION_SHOWN}
       />
@@ -207,7 +207,7 @@ export default function VersionsTab({ save }) {
 
       {entries.length === 0 ? (
         <div style={{ color: MUTED, fontSize: FS.sm, fontStyle: 'italic' }}>
-          No history yet — save or canonize to start the timeline.
+          No history yet - save or canonize to start the timeline.
         </div>
       ) : (
         <div style={{ position: 'relative', paddingLeft: 24 }}>

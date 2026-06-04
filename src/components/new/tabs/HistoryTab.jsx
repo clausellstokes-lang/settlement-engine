@@ -6,7 +6,14 @@ import {isMobile} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
 
-export function HistoryTab({settlement:r, narrativeNote}) {
+function formatRecentDate(value) {
+  if (!value) return '';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
   const [expandedEvent, setExpandedEvent] = useState(null);
   if (!r?.history) return <Empty message="No historical data available."/>;
   const h = r.history;
@@ -46,7 +53,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
   const eventTitle = (evt) => {
     const ec = ALL_EC[evt.type] || ALL_EC.political;
     const descShort = typeof evt.description === 'string'
-      ? evt.description.slice(0,55) + (evt.description.length>55?'…':'')
+      ? evt.description.slice(0,55) + (evt.description.length>55?'...':'')
       : '';
     return {label: ec.label, desc: descShort};
   };
@@ -65,6 +72,24 @@ export function HistoryTab({settlement:r, narrativeNote}) {
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>
+
+      {/* ── RECENT EVENTS ────────────────────────────────────────────────── */}
+      {recentEvents.length>0&&<Section title={`Recent Events (${recentEvents.length})`} collapsible defaultOpen accent={swatch.info}>
+        <div style={{display:'flex',flexDirection:'column',gap:8}}>
+          {recentEvents.map((event,i)=>(
+            <div key={event.id||i} style={{border:'1px solid #c8d0e8',borderLeft:`3px solid ${swatch.info}`,borderRadius:7,background:swatch['#F4F6FD'],padding:'10px 12px'}}>
+              <div style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap',marginBottom:event.summary?4:0}}>
+                <span style={{fontSize:FS.xs,fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.05em'}}>
+                  {String(event.title||'Recent event').replace(/_/g,' ')}
+                </span>
+                {event.at&&<span style={{fontSize:FS.micro,color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
+                {event.severity&&<span style={{fontSize:FS.micro,color:swatch['#5A3010'],background:swatch['#FDF4EC'],borderRadius:3,padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
+              </div>
+              {event.summary&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{event.summary}</p>}
+            </div>
+          ))}
+        </div>
+      </Section>}
 
       {/* ── VISUAL TIMELINE ──────────────────────────────────────────────── */}
       {age>0&&eventsTimeline.length>0&&<div style={{marginBottom:16}}>
@@ -94,7 +119,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
             return positioned.map(te => (
               <div key={te.i}>
                 {/* Dot */}
-                <div title={`${te.ec.label} — ${te.yearsAgo}y ago`}
+                <div title={`${te.ec.label} - ${te.yearsAgo}y ago`}
                   style={{position:'absolute',left:`${te.pct}%`,top:'50%',
                     transform:'translate(-50%,-50%)',
                     width:te.anchored?14:10,height:te.anchored?14:10,
@@ -103,7 +128,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
                     boxShadow:te.anchored?`0 0 0 2px ${te.ec.color}`:'none',
                     cursor:'pointer',zIndex:2}}>
                 </div>
-                {/* Year label — alternates above/below to avoid overlap */}
+                {/* Year label - alternates above/below to avoid overlap */}
                 <div style={{
                   position:'absolute',left:`${te.pct}%`,
                   top: te.labelAbove ? 1 : 27,
@@ -137,7 +162,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
         </div>
       </div>}
 
-      {/* ── CURRENT TENSIONS (most DM-relevant — first) ──────────────────── */}
+      {/* ── CURRENT TENSIONS (most DM-relevant - first) ──────────────────── */}
       {currentTensions.length>0&&<Section title={`Current Tensions (${currentTensions.length})`} collapsible defaultOpen accent="#b8860b">
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
           {currentTensions.map((t,i)=>{
@@ -161,7 +186,7 @@ export function HistoryTab({settlement:r, narrativeNote}) {
                 {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:t.plotHooks?.length>0?8:0}}>
                   {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'1px 6px'}}>{f}</span>)}
                 </div>}
-                {/* Plot hooks — inline, prominent */}
+                {/* Plot hooks - inline, prominent */}
                 {t.plotHooks?.length>0&&<div style={{borderTop:`1px solid ${border}30`,paddingTop:8,marginTop:4}}>
                   <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Plot Hooks</div>
                   <div style={{display:'flex',flexDirection:'column',gap:4}}>

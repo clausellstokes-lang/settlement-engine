@@ -1,13 +1,13 @@
 /** @vitest-environment jsdom */
 /**
- * autoSaveChip.test.jsx — Contract over P136 / M-5 save-state pill.
+ * autoSaveChip.test.jsx - Contract over P136 / M-5 save-state pill.
  *
  * Pins:
  *   • Hidden when no active campaign (chip would be misleading).
  *   • Renders "Saved <relative>" when the campaign mapState matches
  *     the live mapState (clean).
  *   • Renders "Unsaved changes" when placements diverge.
- *   • Renders "Saving…" when the saving prop is true.
+ *   • Renders "Saving..." when the saving prop is true.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -102,7 +102,7 @@ describe('AutoSaveChip', () => {
     expect(screen.getByText('Unsaved changes')).toBeTruthy();
   });
 
-  it('renders "Saving…" when saving=true', () => {
+  it('renders "Saving..." when saving=true', () => {
     const savedAt = new Date(NOW - 60_000).toISOString();
     useStore.__set({
       activeCampaignId: 'c1',
@@ -117,7 +117,7 @@ describe('AutoSaveChip', () => {
       mapState: { placements: {}, labels: [], markers: [], forests: [] },
     });
     render(<AutoSaveChip saving />);
-    expect(screen.getByText('Saving…')).toBeTruthy();
+    expect(screen.getByText('Saving...')).toBeTruthy();
   });
 
   it('renders "just now" when saved in the last 60 seconds', () => {

@@ -1,5 +1,5 @@
 /**
- * EventComposer — Pick an event, see preview, confirm/cancel.
+ * EventComposer - Pick an event, see preview, confirm/cancel.
  *
  * Available in both phases. In draft mode the same engine runs but
  * nothing is logged ("see what would happen"). In canon mode applying
@@ -22,25 +22,25 @@ const _TYPE_ICONS = {
 };
 
 // Code-review fix: target field used to be a free-text input. The user
-// shouldn't have to TYPE the name of an NPC they want to kill — the NPC
+// shouldn't have to TYPE the name of an NPC they want to kill - the NPC
 // is already in the dossier. This map declares which dossier collection
 // to pull the target dropdown from for each event type. ADD_*
 // (institution / npc) and CUT_TRADE_ROUTE genuinely have no source list
 // (the user is naming something new), so they keep the text input.
 const TARGET_ENTITY_BY_EVENT = Object.freeze({
-  ADD_INSTITUTION:      null,           // new entity — free text
+  ADD_INSTITUTION:      null,           // new entity - free text
   REMOVE_INSTITUTION:   'institutions',
   DAMAGE_INSTITUTION:   'institutions',
   IMPAIR_INSTITUTION:   'institutions',
-  ADD_NPC:              null,           // new entity — free text
+  ADD_NPC:              null,           // new entity - free text
   KILL_NPC:             'npcs',
   ASSIGN_NPC_TO_ROLE:   'npcs',
   IMPAIR_FACTION:       'factions',
   CHANGE_RULER:         'npcs',         // pick the new ruler from existing NPCs
   EXPOSE_CORRUPTION:    'factions',     // or instutions; pick factions as the dominant case
   DEPLETE_RESOURCE:     'resources',
-  CUT_TRADE_ROUTE:      null,           // route names aren't tracked as entities — free text
-  REFUGEE_INFLUX:       null,           // optional source region — free text
+  CUT_TRADE_ROUTE:      null,           // route names aren't tracked as entities - free text
+  REFUGEE_INFLUX:       null,           // optional source region - free text
 });
 
 /** Build {id, name} options from a dossier collection for the target dropdown. */
@@ -146,7 +146,7 @@ export default function EventComposer() {
   function onApply() {
     // Audit fix: prefer committing the pending preview (the exact event
     // the user previewed) over building a new event. Falls back to
-    // applyEvent(buildEvent()) only if no preview is pending — which
+    // applyEvent(buildEvent()) only if no preview is pending - which
     // shouldn't happen in normal flow because the Apply button is only
     // visible after a preview.
     if (pendingPreview?.event) {
@@ -198,7 +198,7 @@ export default function EventComposer() {
                   onChange={e => setTarget(e.target.value)}
                   style={selectStyle}
                 >
-                  <option value="">— Pick a {collectionKey.replace(/s$/, '')} —</option>
+                  <option value="">- Pick a {collectionKey.replace(/s$/, '')} -</option>
                   {targetOpts.map(o => (
                     <option key={o.id} value={o.id}>{o.name}</option>
                   ))}
@@ -238,7 +238,7 @@ export default function EventComposer() {
             importance === 'pillar' ? 'Death creates major consequences' :
             importance === 'key'    ? 'Meaningful effect on linked entity' :
             importance === 'notable'? 'Small modifier on linked entity'   :
-                                      'Flavor only — no engine effect'
+                                      'Flavor only - no engine effect'
           }>
             <select value={importance} onChange={e => setImportance(e.target.value)} style={selectStyle}>
               <option value="minor">Minor</option>
@@ -258,7 +258,7 @@ export default function EventComposer() {
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && institutionOptions.length > 0 && (
           <Field label="Institution" hint="link this NPC to an institution">
             <select value={institutionId} onChange={e => setInstitutionId(e.target.value)} style={selectStyle}>
-              <option value="">— None —</option>
+              <option value="">- None -</option>
               {institutionOptions.map(o => (
                 <option key={o.id} value={o.id}>{o.name}</option>
               ))}

@@ -1,5 +1,5 @@
 /**
- * creditsSlice — AI credit balance and transaction tracking.
+ * creditsSlice - AI credit balance and transaction tracking.
  *
  * AI features are pay-per-use regardless of account tier.
  * Credits are purchased in packs and spent on narrative synthesis,
@@ -10,10 +10,10 @@
  * keeps the client balance synced with server-authoritative spends.
  *
  * Server-side cost gates: `supabase/functions/generate-narrative/index.ts`
- * has its own CREDIT_COSTS — the contract test guards against drift.
+ * has its own CREDIT_COSTS - the contract test guards against drift.
  */
 
-import { getActiveAiCosts, getAiCost } from '../config/pricing.js';
+import { getActiveAiCosts, getAiCost, getAiCostForModel } from '../config/pricing.js';
 
 /**
  * Compatibility export. New code should call `getActiveAiCosts()` from
@@ -71,12 +71,12 @@ export const createCreditsSlice = (set, get) => ({
   /** Pre-flight check: can the user afford this AI feature? */
   canAfford: (feature) => {
     if (get().isElevated()) return true;
-    const cost = getAiCost(feature);
+    const cost = getAiCostForModel(feature, get().auth?.modelPreference);
     return get().creditBalance >= cost;
   },
 
   /** Get the cost for a specific feature. */
-  getCost: (feature) => getAiCost(feature),
+  getCost: (feature) => getAiCostForModel(feature, get().auth?.modelPreference),
 
   setPurchaseModalOpen: (open) =>
     set(state => { state.purchaseModalOpen = open; }),

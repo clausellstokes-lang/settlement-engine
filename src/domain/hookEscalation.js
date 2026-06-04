@@ -1,28 +1,28 @@
 /**
- * domain/hookEscalation.js — Structured hooks + escalation-clock derivation.
+ * domain/hookEscalation.js - Structured hooks + escalation-clock derivation.
  *
  * Tier 4.10 of the roadmap. Today's hooks live scattered across:
  *
- *   settlement.economicViability.plotHooks      — economic pressures
- *   settlement.history.events[].plotHooks       — historical event hooks
- *   settlement.defenseProfile.plotHooks         — defense / threat hooks
- *   settlement.powerStructure.plotHooks         — faction-level hooks
- *   settlement.plotHooks                        — aggregated top-level hooks
+ *   settlement.economicViability.plotHooks      - economic pressures
+ *   settlement.history.events[].plotHooks       - historical event hooks
+ *   settlement.defenseProfile.plotHooks         - defense / threat hooks
+ *   settlement.powerStructure.plotHooks         - faction-level hooks
+ *   settlement.plotHooks                        - aggregated top-level hooks
  *
  * The shapes differ (some are strings, some are { category, hook,
  * severity } objects, some carry hidden context). This module presents
  * a single canonical surface:
  *
- *   collectAllHooks(settlement)        — flat list of raw hook entries
- *   deriveStructuredHook(hook, settlement) — enriches one hook with
+ *   collectAllHooks(settlement)        - flat list of raw hook entries
+ *   deriveStructuredHook(hook, settlement) - enriches one hook with
  *                                       canonical origin / consequences
  *   deriveAllStructuredHooks(settlement)
- *   deriveEscalationClocks(settlement) — multi-stage trajectories
+ *   deriveEscalationClocks(settlement) - multi-stage trajectories
  *                                       grounded in current state
  *
  * Pure functions only. Read-only over current generator output. The
  * "consequences if ignored" and "possible resolutions" are derived
- * from need-category + status combinations, not from generator code —
+ * from need-category + status combinations, not from generator code -
  * which means clocks remain accurate as the catalog grows because
  * they read state, not prose.
  */
@@ -54,7 +54,7 @@ export function collectAllHooks(settlement) {
     for (const h of econ.plotHooks) out.push({ source: 'economic', raw: h });
   }
 
-  // Economic state — additional plot-hook surfaces (e.g. safety profile).
+  // Economic state - additional plot-hook surfaces (e.g. safety profile).
   const ecoState = settlement.economicState;
   if (ecoState?.safetyProfile && Array.isArray(ecoState.safetyProfile.plotHooks)) {
     for (const h of ecoState.safetyProfile.plotHooks) out.push({ source: 'safety', raw: h });
@@ -85,7 +85,7 @@ export function collectAllHooks(settlement) {
     }
   }
 
-  // NPC-level hooks — the largest source by count, attached per NPC by
+  // NPC-level hooks - the largest source by count, attached per NPC by
   // the population generator. We carry the NPC name through so the
   // structured hook can cite who it concerns.
   if (Array.isArray(settlement.npcs)) {
@@ -102,8 +102,8 @@ export function collectAllHooks(settlement) {
 }
 
 // ── Hook text extraction ────────────────────────────────────────────────
-// Hooks come in three shapes: bare string, { hook: string, … }, or
-// { text: string, … }. Normalize to a single text field.
+// Hooks come in three shapes: bare string, { hook: string, ... }, or
+// { text: string, ... }. Normalize to a single text field.
 
 function hookTextFrom(raw) {
   if (raw == null) return '';
@@ -132,17 +132,17 @@ function hookSeverityFrom(raw) {
 // hook text. Today's hooks are written by the generator with predictable
 // vocabulary, so this catches the common patterns reliably.
 //
-// 'pressure'        — generic settlement-wide pressure (food, weather, time)
-// 'factionConflict' — friction between named factions
-// 'institution'     — concerns a specific institution
-// 'npc'             — concerns a specific named NPC
-// 'chain'           — concerns a specific supply chain
-// 'external'        — concerns an outside force (bandit, neighbour, weather)
-// 'other'           — couldn't classify
+// 'pressure'        - generic settlement-wide pressure (food, weather, time)
+// 'factionConflict' - friction between named factions
+// 'institution'     - concerns a specific institution
+// 'npc'             - concerns a specific named NPC
+// 'chain'           - concerns a specific supply chain
+// 'external'        - concerns an outside force (bandit, neighbour, weather)
+// 'other'           - couldn't classify
 
 // Order matters. External threats (bandits raiding caravans, plague
 // striking the mill, fire taking the warehouse) read as external
-// pressures FIRST — even though the affected vocabulary is "caravan",
+// pressures FIRST - even though the affected vocabulary is "caravan",
 // "mill", "warehouse". Without the external rule taking precedence,
 // every "bandits target the grain caravan" hook collapses to a chain
 // classification, which is structurally wrong: the proximate cause is
@@ -170,7 +170,7 @@ export function deriveHookOrigin(hookText) {
 
 // ── "If ignored" + possible resolutions ────────────────────────────────
 // Per-origin consequence templates. Same shape as the supply-chain
-// failure-consequence heuristic — short prose anchored to the origin
+// failure-consequence heuristic - short prose anchored to the origin
 // category. Consumers (PDF, AI overlay) can render directly.
 
 const ORIGIN_CONSEQUENCES = Object.freeze({
@@ -200,7 +200,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   institution: {
     ifIgnored: [
-      'The institution becomes impaired — services it provides degrade.',
+      'The institution becomes impaired - services it provides degrade.',
       'Dependent factions / chains lose their anchor.',
       'A rival institution captures the vacated role.',
     ],
@@ -212,7 +212,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   npc: {
     ifIgnored: [
-      'The NPC takes drastic action — defection, betrayal, departure, or death.',
+      'The NPC takes drastic action - defection, betrayal, departure, or death.',
       'Their faction or institution loses leadership and capacity.',
       'A power vacuum opens; opportunistic actors rush in.',
     ],
@@ -224,14 +224,14 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   external: {
     ifIgnored: [
-      'The external pressure compounds — more refugees, more raids, deeper plague.',
+      'The external pressure compounds - more refugees, more raids, deeper plague.',
       'Local resources are consumed defending or absorbing the impact.',
       'Public order strains as the threat lingers.',
     ],
     possibleResolutions: [
       'Confront the external force directly (combat, diplomacy, magic).',
       'Hire intermediaries to absorb the threat.',
-      'Adapt — reorganize the settlement around the new reality.',
+      'Adapt - reorganize the settlement around the new reality.',
     ],
   },
   pressure: {
@@ -248,7 +248,7 @@ const ORIGIN_CONSEQUENCES = Object.freeze({
   },
   other: {
     ifIgnored: [
-      'The hook fades — but leaves consequences the DM can pick up later.',
+      'The hook fades - but leaves consequences the DM can pick up later.',
     ],
     possibleResolutions: [
       'Direct intervention by the players.',
@@ -299,7 +299,7 @@ export function deriveStructuredHook(rawWrapper, settlement) {
     npcName:   rawWrapper.npcName   || null,
     ifIgnored:           [...consequences.ifIgnored],
     possibleResolutions: [...consequences.possibleResolutions],
-    // Settlement reference is informational — not stored on the hook
+    // Settlement reference is informational - not stored on the hook
     // (avoids circular references in serialization). Consumers needing
     // settlement context should query separately.
     _settlementName: settlement?.name || null,
@@ -379,7 +379,7 @@ const CLOCK_TEMPLATES = Object.freeze({
       'Allies are forced to pick sides.',
       'Quiet inducements / threats circulate.',
       'A symbolic act of defiance occurs.',
-      'Open break — the principals stop speaking publicly.',
+      'Open break - the principals stop speaking publicly.',
     ],
   },
 });

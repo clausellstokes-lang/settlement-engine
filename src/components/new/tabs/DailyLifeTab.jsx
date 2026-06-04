@@ -5,7 +5,6 @@ import { sans, TabIntro } from '../Primitives';
 import {isMobile} from '../tabConstants';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
-import { CREDIT_COSTS } from '../../../store/creditsSlice.js';
 import { isConfigured } from '../../../lib/supabase.js';
 
 const INK = '#1c1409', MUTED = '#9c8068', SECOND = '#6b5340',
@@ -23,7 +22,7 @@ function AnchorFact({ label, value, accent }) {
       borderRadius: 5, padding: '5px 9px',
     }}>
       <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
-      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || '—'}</div>
+      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || '-'}</div>
     </div>
   );
 }
@@ -40,7 +39,7 @@ const STRESS_LABELS = {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
+export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRequestDailyLife = null }) {
   const [narrative, setNarrative]   = useState(null);
   const [localLoading, setLocalLoading] = useState(false);
   const [localError, setLocalError]     = useState(null);
@@ -48,6 +47,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
   const mobile = isMobile();
 
   const requestDailyLife = useStore(s => s.requestDailyLife);
+  const getCost = useStore(s => s.getCost);
   const aiDailyLife = useStore(s => s.aiDailyLife);
   const storeAiLoading = useStore(s => s.aiLoading);
   const storeAiRegenerating = useStore(s => s.aiRegenerating);
@@ -68,16 +68,17 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
   const error = isConfigured ? storeAiError : localError;
 
   const LOAD_MSGS = [
-    'Walking the streets…',
-    'Listening at the alehouse…',
-    'Watching the market open…',
-    'Asking the locals…',
-    'Reading the mood…',
+    'Walking the streets...',
+    'Listening at the alehouse...',
+    'Watching the market open...',
+    'Asking the locals...',
+    'Reading the mood...',
   ];
 
   async function generate() {
     if (isConfigured) {
-      await requestDailyLife(saveId);
+      if (onRequestDailyLife) await onRequestDailyLife();
+      else await requestDailyLife(saveId);
       return;
     }
 
@@ -86,7 +87,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
     setLocalError(null);
     setNarrative(null);
     // Math.random() picks a loading message. The whole function is a
-    // button-click handler — never runs during render — so the purity
+    // button-click handler - never runs during render - so the purity
     // rule is over-broad here.
     // eslint-disable-next-line react-hooks/purity
     setLoadMsg(LOAD_MSGS[Math.floor(Math.random() * LOAD_MSGS.length)]);
@@ -121,21 +122,21 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
     ctx.foodDeficit > 10 ? '#8a4010' :
     ctx.foodDeficit > 0  ? '#a0762a' : '#1a5a28';
 
-  // Button label logic — first-time generate vs regenerate. Both spend credits;
+  // Button label logic - first-time generate vs regenerate. Both spend credits;
   // we name the action plainly so users know.
   const buttonLabel = (() => {
     if (!dailyLifeEnabled) return '✦ Save settlement to enable Daily Life narrative';
     if (loading) {
-      return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating…' : 'Generating…');
+      return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating...' : 'Generating...');
     }
     if (hasContent) {
       return isConfigured
-        ? `↺ Regenerate Daily Life (${CREDIT_COSTS.dailyLife} credits)`
-        : '↺ Regenerate Daily Life — Narrative refinement';
+        ? `↺ Regenerate Daily Life (${getCost('dailyLife')} credits)`
+        : '↺ Regenerate Daily Life - Narrative refinement';
     }
     return isConfigured
-      ? `✦ Generate Daily Life (${CREDIT_COSTS.dailyLife} credits)`
-      : '✦ Generate Daily Life — Narrative refinement';
+      ? `✦ Generate Daily Life (${getCost('dailyLife')} credits)`
+      : '✦ Generate Daily Life - Narrative refinement';
   })();
 
   return (
@@ -174,7 +175,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
       {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
       {/* Unsaved settlements (Create page) get a slim inline hint instead of
           a disabled teaser button. The user already saw this hint above the
-          tab strip too — repeating it here in tab-context makes the connection
+          tab strip too - repeating it here in tab-context makes the connection
           to "Daily Life" specifically. */}
       {!dailyLifeEnabled ? (
         <div
@@ -189,15 +190,15 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
           }}
         >
           <strong style={{ color: swatch['#7A5A1A'] }}>✦ Save this settlement</strong>
-          {' '}to refine Daily Life into narrative — five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
+          {' '}to refine Daily Life into narrative - five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
         </div>
       ) : (
         <button
           onClick={generate}
           disabled={loading}
           title={hasContent
-            ? `Regenerate replaces the current daily-life prose with a fresh narrative pass against the simulator output. Spends ${CREDIT_COSTS.dailyLife} credits.`
-            : `Refine the simulator output into daily-life prose for this settlement. Spends ${CREDIT_COSTS.dailyLife} credits.`}
+            ? `Regenerate replaces the current daily-life prose with a fresh narrative pass against the simulator output. Spends ${getCost('dailyLife')} credits.`
+            : `Refine the simulator output into daily-life prose for this settlement. Spends ${getCost('dailyLife')} credits.`}
           style={{
             width: '100%', padding: '13px 20px',
             background: loading ? '#e8dcc8' : 'linear-gradient(135deg, #a0762a, #7a5a1a)',
@@ -234,7 +235,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
       {/* ── NARRATIVE ─────────────────────────────────────────────────────── */}
       {hasContent && (
         <div style={{ position: 'relative' }}>
-          {/* Regenerate overlay — floating chip so the user sees "a new version is brewing" */}
+          {/* Regenerate overlay - floating chip so the user sees "a new version is brewing" */}
           {regenerating && (
             <div style={{
               position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
@@ -245,7 +246,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
               boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
             }}>
               <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>⟳</span>
-              {storeAiProgress || 'Regenerating…'}
+              {storeAiProgress || 'Regenerating...'}
             </div>
           )}
           <div style={{
@@ -282,7 +283,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null }) {
             What is daily life like here?
           </div>
           <div style={{ fontSize: FS['11.5'], color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
-            Generate a prose description of ordinary life in this settlement — dawn, the market, the tavern,
+            Generate a prose description of ordinary life in this settlement - dawn, the market, the tavern,
             the watch. Opus-grade writing, five paragraphs, grounded in this settlement's specific stressors and trade.
           </div>
         </div>

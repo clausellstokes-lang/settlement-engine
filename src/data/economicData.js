@@ -1,4 +1,4 @@
-// economicData.js — Trade dependency lookup table
+// economicData.js - Trade dependency lookup table
 // Extracted from generateEconomicState (was inline anonymous block)
 // Maps institution/service name → { resources, label, detail, svcs }
 
@@ -911,12 +911,12 @@ export const TRADE_DEPENDENCY_NEEDS = {
 // Maps institution categories to finished goods they CONSUME at operating scale.
 // Unlike TRADE_DEPENDENCY_NEEDS (which fires when raw materials are absent),
 // this table fires when demand for finished goods exceeds local production
-// capacity — even when raw materials are present.
+// capacity - even when raw materials are present.
 //
 // demandLevel:         How much finished goods consumed (1=minimal, 5=bulk)
 // supplyKeywords:      Institution name fragments that cover this demand locally
 // supplyPerKeyword:    How much supply each keyword provides (matches demandLevel scale)
-// importLabels:        [small gap, medium gap, large gap] — scaled import labels
+// importLabels:        [small gap, medium gap, large gap] - scaled import labels
 // exportBonus:         Export label when supply significantly exceeds demand
 //
 export const INSTITUTION_FINISHED_GOODS_DEMAND = {
@@ -964,7 +964,7 @@ export const INSTITUTION_FINISHED_GOODS_DEMAND = {
   // ── Religious consumables ──────────────────────────────────────────────────
   // Religious institutions consume incense, candles, ritual oil, vestment
   // materials, and vellum at operating scale. These are almost never produced
-  // locally — they are imported luxury/specialty goods by default.
+  // locally - they are imported luxury/specialty goods by default.
   religious: {
     consumers: {
       'parish church':            { demand: 1 },

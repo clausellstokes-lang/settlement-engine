@@ -1,18 +1,18 @@
 /**
- * RoutesToolbar — contextual toolbar for MAP_MODES.ROUTES.
+ * RoutesToolbar - contextual toolbar for MAP_MODES.ROUTES.
  *
  * P110 / M-4 + P132 / M-4 promote. When Routes mode is the active map
  * mode, this strip surfaces beneath the mode pills and gives the user:
  *
  *   • A relationship-type filter (Trade / Allied / Patron / Rival /
- *     Hostile) — clicking a chip toggles that edge type on the
+ *     Hostile) - clicking a chip toggles that edge type on the
  *     relationships layer.
- *   • A supply-chain emphasis toggle — flips the chain layer between
+ *   • A supply-chain emphasis toggle - flips the chain layer between
  *     "all chains" and "stressed chains only" (the latter uses the
  *     existing chainFilter slot).
  *   • A "Show roads" toggle for completeness.
  *   • A network-stress hint when supplyChainState reports cascading
- *     failures — this is the "your routes are at risk" red-flag
+ *     failures - this is the "your routes are at risk" red-flag
  *     surface the critique called out.
  *
  * Pure presentational layer over the existing mapSlice. No new
@@ -173,7 +173,7 @@ export default function RoutesToolbar() {
         Chains
       </button>
 
-      {/* Network-stress callout — pulled to the right so it reads as a
+      {/* Network-stress callout - pulled to the right so it reads as a
           red flag, not a setting */}
       {topFailure && (
         <div style={{

@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 /**
- * scripts/strip-unused-vars.mjs — automated cleanup of no-unused-vars warnings.
+ * scripts/strip-unused-vars.mjs - automated cleanup of no-unused-vars warnings.
  *
  * Walks the ESLint JSON report and applies safe mechanical fixes per
  * category:
  *
- *   1. **Unused named import** — the warning's column lands on a name
+ *   1. **Unused named import** - the warning's column lands on a name
  *      inside `import { ... } from '...';`. We delete just that name
  *      from the import list. If the list becomes empty, drop the
  *      whole line.
- *   2. **Unused function parameter** — the warning lands on a name
+ *   2. **Unused function parameter** - the warning lands on a name
  *      inside a function parameter list. We rename it to `_name` so
  *      it matches the existing `argsIgnorePattern: '^_'`.
- *   3. **Other** — left untouched. Hand-edit those.
+ *   3. **Other** - left untouched. Hand-edit those.
  *
  * Bails on multi-line import statements (we'd need a real parser to
  * be safe). Those are rare in this codebase and easy to fix by hand.
@@ -95,7 +95,7 @@ for (const report of reports) {
     const line = lines[lineIdx];
     if (line === undefined) { skipped.push(`${path}:${msg.line} (no line)`); continue; }
 
-    // Skip if we've already queued an edit for this line — we'll
+    // Skip if we've already queued an edit for this line - we'll
     // re-run after writing.
     if (fileEdits.has(path) && fileEdits.get(path).has(lineIdx)) {
       // Another warning on the same line. Re-apply removal to the

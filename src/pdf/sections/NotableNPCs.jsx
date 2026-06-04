@@ -1,5 +1,5 @@
 /**
- * NotableNPCs — chapter 09. Full NPC sheets with motivation, secrets, hooks.
+ * NotableNPCs - chapter 09. Full NPC sheets with motivation, secrets, hooks.
  *
  * Tiered relative to the cast (so a low-power-mostly settlement still gets
  * full-card treatment for its three top figures):
@@ -23,7 +23,7 @@ import { type, palette, space, pt } from '../theme.js';
 import { label, hookText, humanize, stripZwnj } from '../lib/format.js';
 
 /**
- * TextRow — Label · prose value pair, but the value is rendered as plain
+ * TextRow - Label · prose value pair, but the value is rendered as plain
  * text so PDF text extractors (and screen readers) see it. The previous
  * FieldRow primitive wrapped the value in a TextInput form field, which
  * displayed correctly but was invisible to pdftotext, leaving DMs with
@@ -182,7 +182,7 @@ function FullCard({ npc }) {
         </View>
       )}
 
-      {/* Personality, appearance, motivation — labeled prose blocks */}
+      {/* Personality, appearance, motivation - labeled prose blocks */}
       <View style={{ marginTop: 4 }}>
         <TextRow label="PERSONALITY" value={npc.personality} multiline />
         <TextRow label="APPEARANCE"  value={npc.appearance}  multiline />
@@ -236,8 +236,8 @@ function FullCard({ npc }) {
           {npc.relationships.map((r, ri) => (
             <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: pt['8'] }}>
               · {label(r?.with || r?.target || r?.name)}
-              {r?.type ? ` — ${r.type}` : ''}
-              {r?.description ? ` — ${r.description}` : ''}
+              {r?.type ? ` - ${r.type}` : ''}
+              {r?.description ? ` - ${r.description}` : ''}
             </Text>
           ))}
         </View>
@@ -247,7 +247,7 @@ function FullCard({ npc }) {
 }
 
 /**
- * OtherNamesGrid — 2-col tight list for the long-tail "also exists" tier.
+ * OtherNamesGrid - 2-col tight list for the long-tail "also exists" tier.
  * Each row is a single line: name · title · faction · PWR.
  */
 function OtherNamesGrid({ items }) {
@@ -304,7 +304,7 @@ function OtherNameRow({ npc }) {
 }
 
 /**
- * CompactGrid — 2-col layout for the Notable Figures tier. Halves the
+ * CompactGrid - 2-col layout for the Notable Figures tier. Halves the
  * vertical footprint so the chapter fits more characters per page without
  * crowding the Major Figures cards.
  */

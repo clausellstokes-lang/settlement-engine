@@ -1,5 +1,5 @@
 /**
- * tests/domain/activeConditions.test.js — Tier 2.3 canonical state contract.
+ * tests/domain/activeConditions.test.js - Tier 2.3 canonical state contract.
  *
  * Pins:
  *   - severityBand boundaries (low / medium / high / critical).

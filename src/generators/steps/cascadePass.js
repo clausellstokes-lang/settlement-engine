@@ -4,7 +4,7 @@
  * Boosts chain-adjacent institutions after subsumption. Handles airship
  * overrides and re-runs subsumption on the expanded list.
  *
- * Extracted from generateSettlement.js lines 742–785.
+ * Extracted from generateSettlement.js lines 742-785.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -31,10 +31,10 @@ registerStep('cascadePass', {
   if (cascadeAdditions.length > 0) {
     institutions.push(...cascadeAdditions);
 
-    // Tier 2.1 — emit a trace per cascade addition. Cascade additions
+    // Tier 2.1 - emit a trace per cascade addition. Cascade additions
     // are chain-adjacent institutions: "you got a smelter, so you also
     // got a charcoal burner." The cause is the existence of whichever
-    // institution triggered the chain — we surface that as a coarse
+    // institution triggered the chain - we surface that as a coarse
     // "supply chain demand" cause rather than the specific trigger,
     // because the cascade rules in cascadeGenerator don't currently
     // surface which one fired.
@@ -47,7 +47,7 @@ registerStep('cascadePass', {
         causes: [
           { source: 'supplyChainCascade',
             effect: 'added',
-            reason: `"${add.name}" was pulled in by the cascade pass — a chain-adjacent institution already on the roster created demand for this one.` },
+            reason: `"${add.name}" was pulled in by the cascade pass - a chain-adjacent institution already on the roster created demand for this one.` },
         ],
         downstreamEffects: Array.isArray(add.tags)
           ? add.tags.slice(0, 3).map(t => ({ target: `tag.${t}`, effect: 'reinforced' }))
@@ -87,7 +87,7 @@ registerStep('cascadePass', {
       });
     }
 
-    // Re-run subsumption on expanded list — emit "subsumed" traces for
+    // Re-run subsumption on expanded list - emit "subsumed" traces for
     // anything the post-cascade dedup removes. Same shape as
     // subsumptionPass's primary emission.
     SUBSUMPTION_RULES.forEach(({ greater, lesser }) => {
@@ -118,7 +118,7 @@ registerStep('cascadePass', {
     });
   }
 
-  // Silence unused — the pre-cascade snapshot is currently used only
+  // Silence unused - the pre-cascade snapshot is currently used only
   // by future delta-trace work (e.g. tagging which adds were genuinely
   // new vs upgrades). Kept here so a follow-up pass can use it without
   // re-snapshotting.

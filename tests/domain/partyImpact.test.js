@@ -59,7 +59,7 @@ const SAVES = [
   save('b', 'Briarwatch'),
 ];
 
-describe('party impact — the table changes the world', () => {
+describe('party impact - the table changes the world', () => {
   test('resolve_stressor ends the crisis and leaves a residual condition', () => {
     const result = applyPartyImpact({
       campaign: campaign(),

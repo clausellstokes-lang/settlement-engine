@@ -1,9 +1,9 @@
 /**
- * domain/state/deriveSystemState.js — Reduce a generated settlement to
+ * domain/state/deriveSystemState.js - Reduce a generated settlement to
  * four user-facing health/pressure dimensions.
  *
  * Why four (not ten): the architect critique pushed for ten dimensions on
- * a 0–100 scale. Ten is too many — DMs don't think in spreadsheets, and
+ * a 0-100 scale. Ten is too many - DMs don't think in spreadsheets, and
  * adding more dimensions multiplies the surfaces where the math can lie.
  * Four is the floor: enough to express resilience vs volatility vs
  * external vs resource pressure separately, but few enough that each one
@@ -29,7 +29,7 @@ import { bandFor, clamp01 } from './bands.js';
 
 /**
  * Return the first argument that is an Array, else []. Used by the
- * alias-fallback reads below — if `s.stressors` is an object instead
+ * alias-fallback reads below - if `s.stressors` is an object instead
  * of an array (some legacy fixtures wrap it as `{count, items}`),
  * fall through to the next candidate instead of throwing on `.filter`.
  */
@@ -41,7 +41,7 @@ function pickArray(...candidates) {
 }
 
 /**
- * @param {Object} settlement — the engine's settlement object
+ * @param {Object} settlement - the engine's settlement object
  * @returns {SystemState}
  */
 export function deriveSystemState(settlement) {
@@ -65,7 +65,7 @@ function deriveResilience(s) {
   const drivers = [];
   const risks = [];
 
-  // Prosperity is a strong signal — pulled directly from economicState if present
+  // Prosperity is a strong signal - pulled directly from economicState if present
   const econ = s.economicState || {};
   const prosperity = econ.prosperity?.tier || econ.prosperity || null;
   if (prosperity === 'Wealthy' || prosperity === 'Prosperous') {
@@ -90,10 +90,10 @@ function deriveResilience(s) {
     }
   }
 
-  // Export/import diversity — many narrow exports = fragile
+  // Export/import diversity - many narrow exports = fragile
   const exportCount = (econ.exports || []).length;
   if (exportCount === 0) {
-    risks.push('No exports — economic isolation');
+    risks.push('No exports - economic isolation');
   } else if (exportCount >= 5) {
     value += 5;
     drivers.push(`Diversified exports (${exportCount})`);
@@ -120,7 +120,7 @@ function deriveResilience(s) {
  * thieves' guilds, and weak rulers scores high.
  */
 function deriveVolatility(s) {
-  let value = 30; // baseline — most towns have some friction
+  let value = 30; // baseline - most towns have some friction
   const drivers = [];
   const risks = [];
 
@@ -131,7 +131,7 @@ function deriveVolatility(s) {
     risks.push(`${factions.length} active factions competing`);
   } else if (factions.length <= 2) {
     value -= 5;
-    drivers.push('Few factions — concentrated power');
+    drivers.push('Few factions - concentrated power');
   }
 
   // Hostile/rival faction relationships
@@ -154,7 +154,7 @@ function deriveVolatility(s) {
     drivers.push('Crime well-suppressed');
   }
 
-  // Public legitimacy — when the rulers are doubted, the place wobbles
+  // Public legitimacy - when the rulers are doubted, the place wobbles
   const legitimacy = power.publicLegitimacy ?? safety.publicLegitimacy ?? null;
   if (typeof legitimacy === 'number') {
     if (legitimacy <= 30) {
@@ -197,7 +197,7 @@ function deriveExternalThreat(s) {
     risks.push('Region is plagued by monsters');
   } else if (monsterThreat === 'frontier') {
     value += 15;
-    risks.push('Frontier conditions — monsters present');
+    risks.push('Frontier conditions - monsters present');
   } else if (monsterThreat === 'safe' || monsterThreat === 'civilized') {
     value -= 5;
     drivers.push('Monster activity minimal');
@@ -255,7 +255,7 @@ function deriveResourcePressure(s) {
     risks.push(`${vulnerable} vulnerable supply chain${vulnerable === 1 ? '' : 's'}`);
   }
 
-  // Unmet imports — high import dependency without a real trade route
+  // Unmet imports - high import dependency without a real trade route
   const tradeAccess = s.config?.tradeRouteAccess || 'none';
   const imports = (econ.imports || []).length;
   if (imports >= 4 && (tradeAccess === 'none' || tradeAccess === 'isolated')) {
@@ -281,7 +281,7 @@ function countByStatus(items, statuses) {
 /**
  * Wrap raw value+drivers+risks into the StateDimension shape with band
  * label and clamped value. Centralizing this means every dimension comes
- * out of derivation in the same shape — no surprises for the UI consumer.
+ * out of derivation in the same shape - no surprises for the UI consumer.
  */
 function finalize(rawValue, drivers, risks) {
   const value = Math.round(clamp01(rawValue));

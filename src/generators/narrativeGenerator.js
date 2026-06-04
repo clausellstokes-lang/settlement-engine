@@ -3,21 +3,21 @@
  * Arrival scenes, pressure sentences, settlement summaries, and coherence notes.
  *
  * Exports consumed by generateSettlement.js:
- *  - generateSettlementReason  — why the settlement exists (trade/founding reason)
- *  - generatePressureSentence  — one-liner describing the current political pressure
- *  - generateArrivalScene      — vivid first-impression paragraph for DMs
- *  - generateCoherence         — cross-tab contradiction notes
+ *  - generateSettlementReason  - why the settlement exists (trade/founding reason)
+ *  - generatePressureSentence  - one-liner describing the current political pressure
+ *  - generateArrivalScene      - vivid first-impression paragraph for DMs
+ *  - generateCoherence         - cross-tab contradiction notes
  *
  * Internal helpers used only within this file:
- *  - STRESS_DESCS              — per-stress-type arrival vignettes (exported for UI)
- *  - genSettSummary            — structured summary of key settlement facts
- *  - genArrivalDetail          — full founding + arrival context object
- *  - genPressureDetail         — structured pressure context object
- *  - genCoherence              — coherence note array
- *  - getSettReason             — safety label → flavour sentence
- *  - buildTradeNarrative       — culture-appropriate architectural detail
- *  - buildStressProfile        — history-pattern → character string
- *  - generateSiegeCapability   — history → tension string
+ *  - STRESS_DESCS              - per-stress-type arrival vignettes (exported for UI)
+ *  - genSettSummary            - structured summary of key settlement facts
+ *  - genArrivalDetail          - full founding + arrival context object
+ *  - genPressureDetail         - structured pressure context object
+ *  - genCoherence              - coherence note array
+ *  - getSettReason             - safety label → flavour sentence
+ *  - buildTradeNarrative       - culture-appropriate architectural detail
+ *  - buildStressProfile        - history-pattern → character string
+ *  - generateSiegeCapability   - history → tension string
  */
 
 import { random as _rng } from './rngContext.js';
@@ -42,7 +42,7 @@ import { generateCrimeLevel, getStressHistory } from './npcGenerator.js';
  *
  * @param {string} tier
  * @param {string} culture
- * @param {number} magicPriority - 0–100
+ * @param {number} magicPriority - 0-100
  */
 const buildTradeNarrative = (tier, culture, magicPriority) => {
   const CULTURAL_DETAILS = {
@@ -83,9 +83,9 @@ const buildTradeNarrative = (tier, culture, magicPriority) => {
   const TIER_BASE = {
     thorp: `The settlement is small enough that you can see all of it from the road: ${detail}.`,
     hamlet: `A dozen buildings around a central green, most of them old. ${detail}.`,
-    village: `A proper village, large enough to have a market and small enough that strangers are noticed — ${detail}.`,
+    village: `A proper village, large enough to have a market and small enough that strangers are noticed - ${detail}.`,
     town: `A market town of substance: multiple streets, a visible guild quarter, ${detail}.`,
-    city: `A city, properly speaking — dense, layered, too large to take in at once. ${detail}.`,
+    city: `A city, properly speaking - dense, layered, too large to take in at once. ${detail}.`,
     metropolis: `The scale of the place takes a moment to register. This is not a large settlement. It is a city in its own right. ${detail}.`,
   };
 
@@ -163,7 +163,7 @@ const generateSiegeCapability = (historicalEvents, currentTensions, age) => {
   const recent = recentEvents[0];
   if (!recent?.name) return currentTensions;
 
-  return `The ${recent.name} is still present in living memory — ${currentTensions || 'its effects shape current decisions'}.`;
+  return `The ${recent.name} is still present in living memory - ${currentTensions || 'its effects shape current decisions'}.`;
 };
 
 // ─── STRESS_DESCS ─────────────────────────────────────────────────────────────
@@ -175,27 +175,27 @@ const generateSiegeCapability = (historicalEvents, currentTensions, age) => {
 const STRESS_DESCS = {
   under_siege: [
     r =>
-      `The gates of ${r} are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day — these are people watching the treeline. A runner comes out of the small side gate, sees your group, stops.`,
+      `The gates of ${r} are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day - these are people watching the treeline. A runner comes out of the small side gate, sees your group, stops.`,
     r =>
-      `${r}'s gates are open but attended — every person entering is noted, every cart searched. The guards are professional about it, which makes it worse. Professional means this has been happening long enough to become routine.`,
+      `${r}'s gates are open but attended - every person entering is noted, every cart searched. The guards are professional about it, which makes it worse. Professional means this has been happening long enough to become routine.`,
     r =>
-      `From the road, ${r} looks ordinary. Smoke from cookfires, the sound of a market. It is only at the gate that the weight becomes apparent — the guards' expressions, the way conversation stops when strangers approach.`,
+      `From the road, ${r} looks ordinary. Smoke from cookfires, the sound of a market. It is only at the gate that the weight becomes apparent - the guards' expressions, the way conversation stops when strangers approach.`,
     r =>
       `The approach to ${r} is quieter than it should be for a settlement this size. The outlying farms are empty. The road has not been maintained recently. The settlement itself is intact, but everything around it has been abandoned to the walls.`,
   ],
   famine: [
     r =>
-      `${r} looks prosperous in the merchant quarter — new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.`,
+      `${r} looks prosperous in the merchant quarter - new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.`,
     r =>
       `${r} is functional. The market is open, the streets are swept, the guards are at their posts. Something is wrong anyway. It takes a moment to identify: there are no children playing in the street.`,
     r =>
-      `The queue at the granary gate is the first thing you see in ${r}. Not a market queue, not a water queue — the organised, patient, daily queue of people who are waiting to receive what they are owed and are not certain they will receive it.`,
+      `The queue at the granary gate is the first thing you see in ${r}. Not a market queue, not a water queue - the organised, patient, daily queue of people who are waiting to receive what they are owed and are not certain they will receive it.`,
     r =>
       `${r} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.`,
   ],
   occupied: [
     r =>
-      `The flags above ${r}'s gatehouse are not the settlement's own. Two soldiers at the gate — their uniform is not local. They look at your papers with the particular expression of people who have been told to look at papers.`,
+      `The flags above ${r}'s gatehouse are not the settlement's own. Two soldiers at the gate - their uniform is not local. They look at your papers with the particular expression of people who have been told to look at papers.`,
     r =>
       `${r} looks normal from the approach. It is only at the gate that the nature of normal becomes apparent: the guard asks where you are from, writes it down, and asks how long you intend to stay. This is not the usual question.`,
     r =>
@@ -205,19 +205,19 @@ const STRESS_DESCS = {
   ],
   politically_fractured: [
     r =>
-      `${r} has two gates. The eastern one is controlled by one faction, the western by another — you can tell by the pennants. The road you are on leads to the eastern gate.`,
+      `${r} has two gates. The eastern one is controlled by one faction, the western by another - you can tell by the pennants. The road you are on leads to the eastern gate.`,
     r =>
-      `The gate guard at ${r} asks where you intend to stay — which inn, which district. The answer apparently matters. They note it and say nothing further.`,
+      `The gate guard at ${r} asks where you intend to stay - which inn, which district. The answer apparently matters. They note it and say nothing further.`,
     r =>
-      `The road into ${r} has been marked. Symbols painted on fence posts and milestone stones — the same symbol, repeated, belonging to one faction or another. Someone has been doing this recently; the paint is fresh.`,
+      `The road into ${r} has been marked. Symbols painted on fence posts and milestone stones - the same symbol, repeated, belonging to one faction or another. Someone has been doing this recently; the paint is fresh.`,
     r =>
-      `${r} is quieter than it should be. Not the quiet of a sleeping town or a working one — the particular quiet of a place where people have learned to be careful about what they say in earshot of strangers.`,
+      `${r} is quieter than it should be. Not the quiet of a sleeping town or a working one - the particular quiet of a place where people have learned to be careful about what they say in earshot of strangers.`,
   ],
   indebted: [
     r =>
       `${r} is in reasonable shape. The walls are standing, the market is functioning, the main street is paved. The paving needs repair. The wall has a section of new brick that doesn't quite match the old. The repairs that needed doing five years ago are still waiting.`,
     _r =>
-      "A building near the gate has a new sign — an institution that wasn't there last season, with a name that is recognisably the name of an outside creditor. Someone has arrived and set up an office. This is not a good sign.",
+      "A building near the gate has a new sign - an institution that wasn't there last season, with a name that is recognisably the name of an outside creditor. Someone has arrived and set up an office. This is not a good sign.",
     r =>
       `${r} functions. The market is busy enough. The streets are clean enough. The civic buildings are maintained enough. 'Enough' is doing a lot of work in every impression.`,
     r =>
@@ -227,11 +227,11 @@ const STRESS_DESCS = {
     r =>
       `The guard at ${r}'s gate is polite, thorough, and writes down more than guards usually write down. You are asked your business three times, by three different people, in the space of five minutes.`,
     r =>
-      `Something happened in ${r} recently. You cannot immediately say what, but the settlement has the quality of a place that is still processing something — hushed conversations, people watching the street.`,
+      `Something happened in ${r} recently. You cannot immediately say what, but the settlement has the quality of a place that is still processing something - hushed conversations, people watching the street.`,
     r =>
       `There are notices posted at the gate of ${r}. You take a moment to read one: it is asking for information about a specific event, with a contact at the council offices. The date on the notice is recent.`,
     r =>
-      `${r} looks ordinary from the approach. It is only in the expressions of the people at the gate — watchful in a specific, tired way — that something registers.`,
+      `${r} looks ordinary from the approach. It is only in the expressions of the people at the gate - watchful in a specific, tired way - that something registers.`,
   ],
   infiltrated: [
     r =>
@@ -239,25 +239,25 @@ const STRESS_DESCS = {
     r =>
       `The approach to ${r} is unremarkable in every respect. Gate, road, market noise, smoke, the usual questions from the guard. Nothing to note.`,
     r =>
-      `${r} looks normal. There is a moment at the gate — a guard glancing at another guard after you answer a question — that is probably nothing.`,
+      `${r} looks normal. There is a moment at the gate - a guard glancing at another guard after you answer a question - that is probably nothing.`,
     r =>
       `${r} is functioning well. Clean streets, busy market, maintained walls. If you were looking for problems, you would not find them from the outside.`,
   ],
   plague_onset: [
     r =>
-      `The approach to ${r} is interrupted by a checkpoint a quarter mile from the gates — a temporary structure, manned by people wearing cloth over their faces. They want to know where you came from and when.`,
+      `The approach to ${r} is interrupted by a checkpoint a quarter mile from the gates - a temporary structure, manned by people wearing cloth over their faces. They want to know where you came from and when.`,
     r =>
-      `${r}'s gate is open, the market is running, and there are people in the street. People are giving each other slightly more space than usual. A cart passes with barrels marked with an unfamiliar symbol — you have seen that symbol once before, on a quarantine notice.`,
+      `${r}'s gate is open, the market is running, and there are people in the street. People are giving each other slightly more space than usual. A cart passes with barrels marked with an unfamiliar symbol - you have seen that symbol once before, on a quarantine notice.`,
     r =>
-      `Near the gate of ${r} there is a temporary shelter — a healer's station, by the look of it, with two attendants and a queue. The queue is not yet long. That is either good or early.`,
+      `Near the gate of ${r} there is a temporary shelter - a healer's station, by the look of it, with two attendants and a queue. The queue is not yet long. That is either good or early.`,
     r =>
-      `Some of ${r}'s market stalls are closed. Not all, not most — but several, in a pattern that isn't about the day of the week. The ones that are open are busy; the ones that are closed have been for a while.`,
+      `Some of ${r}'s market stalls are closed. Not all, not most - but several, in a pattern that isn't about the day of the week. The ones that are open are busy; the ones that are closed have been for a while.`,
   ],
   succession_void: [
     r =>
-      `There are two sets of pennants above ${r}'s main gate — different colours, same height. Someone made a decision to hang them both and has committed to maintaining the ambiguity.`,
+      `There are two sets of pennants above ${r}'s main gate - different colours, same height. Someone made a decision to hang them both and has committed to maintaining the ambiguity.`,
     r =>
-      `${r} has the specific quality of a settlement waiting for news. People are going about their business, but there is a particular alertness to the street — people checking who is talking to whom.`,
+      `${r} has the specific quality of a settlement waiting for news. People are going about their business, but there is a particular alertness to the street - people checking who is talking to whom.`,
     r =>
       `The road into ${r} has been busy recently. You can tell by the wheel ruts, the quality of the mud, the number of horses at the inn you pass on the approach. Something is happening that requires people to arrive quickly.`,
     r =>
@@ -265,9 +265,9 @@ const STRESS_DESCS = {
   ],
   monster_pressure: [
     r =>
-      `${r} is more fortified than its size suggests. The walls are new — or newly repaired, the mortar still pale. There are more torches at the gate than a settlement like this would normally need.`,
+      `${r} is more fortified than its size suggests. The walls are new - or newly repaired, the mortar still pale. There are more torches at the gate than a settlement like this would normally need.`,
     r =>
-      `The farms outside ${r} are partially abandoned. You count three sets of buildings that have not been worked recently — the fields untended, the doors standing open. The settlement's wall is a quarter mile closer than it would have been three months ago.`,
+      `The farms outside ${r} are partially abandoned. You count three sets of buildings that have not been worked recently - the fields untended, the doors standing open. The settlement's wall is a quarter mile closer than it would have been three months ago.`,
     r =>
       `${r}'s gate is attended by its usual guards and, less usually, by several people in road-worn equipment who are clearly not local and clearly not merchants. The settlement is paying for help.`,
     r =>
@@ -448,7 +448,7 @@ export const genArrivalDetail = (config, economicContext = null) => {
       ],
       fish: [
         'started as a seasonal camp for deep-water fishers who stopped bothering to go home between seasons',
-        'grew around a natural harbour that fish seemed to prefer — nobody knows why, and nobody questions it',
+        'grew around a natural harbour that fish seemed to prefer - nobody knows why, and nobody questions it',
       ],
       iron: [
         'was founded the week someone hit iron three feet below the surface and word reached the nearest city',
@@ -456,7 +456,7 @@ export const genArrivalDetail = (config, economicContext = null) => {
       ],
       stone: [
         'began when quarry workers sent to extract stone for a distant cathedral decided the site was worth keeping for themselves',
-        "was established because the local stone cuts cleanly and doesn't crack in frost — a property worth more than it sounds",
+        "was established because the local stone cuts cleanly and doesn't crack in frost - a property worth more than it sounds",
       ],
       gems: [
         "was founded the day a shepherd's child found a stone in a streambed that turned out to be worth more than the flock",
@@ -472,7 +472,7 @@ export const genArrivalDetail = (config, economicContext = null) => {
       ],
       salt: [
         'was established to control a salt deposit that the local lord considered more valuable than the surrounding farmland combined',
-        'grew around salt workings that made everything they touched last longer — including the settlement itself',
+        'grew around salt workings that made everything they touched last longer - including the settlement itself',
       ],
       alchemy: [
         "attracted practitioners seeking ingredients found nowhere else within three days' travel",
@@ -480,7 +480,7 @@ export const genArrivalDetail = (config, economicContext = null) => {
       ],
       crafts: [
         'was founded when a group of skilled artisans pooled resources to build a permanent workshop district away from guild restrictions',
-        "grew because the local clay and water made the finest ceramic work in the region — a reputation that preceded the settlement's name",
+        "grew because the local clay and water made the finest ceramic work in the region - a reputation that preceded the settlement's name",
       ],
     };
     const commodityHooks = COMMODITY_HOOKS[commodity] || [];
@@ -606,7 +606,7 @@ export const genArrivalDetail = (config, economicContext = null) => {
     plague_onset:
       'The settlers chose this location for its resources and access. Disease does not respect those original calculations.',
     succession_void:
-      'The founding generation is gone. What remains is contested — in ways the founders did not anticipate and did not plan for.',
+      'The founding generation is gone. What remains is contested - in ways the founders did not anticipate and did not plan for.',
     monster_pressure:
       'The founding required pushing into terrain that was not entirely safe. That calculation is being revisited.',
   };
@@ -842,7 +842,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'overview',
-      note: `${crimeFaction.faction} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output — a meaningful share flows outside official taxation.`,
+      note: `${crimeFaction.faction} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output - a meaningful share flows outside official taxation.`,
     });
   }
 
@@ -860,7 +860,7 @@ const genCoherence = settlement => {
         type: 'historical_economic',
         severity: 'context',
         tab: 'history',
-        note: 'This settlement has a recovery narrative — significant economic hardship in its past, followed by more recent growth. Current prosperity was rebuilt, not inherited. The memory of the collapse shapes how risk and surplus are managed.',
+        note: 'This settlement has a recovery narrative - significant economic hardship in its past, followed by more recent growth. Current prosperity was rebuilt, not inherited. The memory of the collapse shapes how risk and surplus are managed.',
       });
     }
   }
@@ -897,7 +897,7 @@ const _getSettReason = (safetyLabel, monsterThreat, hasStress) => {
   }
   if (label.includes('military') || label.includes('ordered')) {
     return pickRandom([
-      'The settlement has a military discipline to it — not oppressive, but structured.',
+      'The settlement has a military discipline to it - not oppressive, but structured.',
       'The guards are well-turned-out. Someone takes their job seriously.',
     ]);
   }
@@ -940,7 +940,7 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs) => {
  * @param {string} tier
  * @param {string} route       - Trade route access string
  * @param {Object} neighbor    - Neighbor settlement (unused, kept for compat)
- * @param {Object} config
+ * @param {Object} _config
  * @returns {string[]} Array of reason strings (shown as bullet list)
  */
 export const generateSettlementReason = (tier, route, neighbor, _config = {}) => {
@@ -950,22 +950,22 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}) =>
   // Primary settlement reason
   let reason;
   if (route === 'crossroads') {
-    reason = 'Positioned at a major crossroads — trade flows through here by geography, not by choice.';
+    reason = 'Positioned at a major crossroads - trade flows through here by geography, not by choice.';
   } else if (route === 'port') {
     reason = 'A coastal settlement whose existence is inseparable from the sea.';
   } else if (route === 'river') {
-    reason = 'Built along the river — water access shapes every economic decision.';
+    reason = 'Built along the river - water access shapes every economic decision.';
   } else if (route === 'isolated') {
     reason = 'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.';
   } else {
-    reason = 'Established along a road route — trade flows in, goods flow out, people pass through.';
+    reason = 'Established along a road route - trade flows in, goods flow out, people pass through.';
   }
   lines.push(reason);
 
   // Tier-specific context
   if (tier === 'metropolis') {
     lines.push(
-      'At this scale, the settlement no longer serves a single economic function — it IS the economic function for its region.',
+      'At this scale, the settlement no longer serves a single economic function - it IS the economic function for its region.',
     );
   } else if (tier === 'city') {
     lines.push(
@@ -1014,7 +1014,7 @@ export const generatePressureSentence = settlement => {
   // Fallback: generic pressure
   if (detail.recentConflict) return detail.recentConflict;
 
-  // Thorp/hamlet fallback — even stable small settlements have subsistence-level tensions
+  // Thorp/hamlet fallback - even stable small settlements have subsistence-level tensions
   if (['thorp', 'hamlet'].includes(detail.tier || '')) {
     const thorpPressures = [
       'A dispute over grazing rights and water access has been running for two seasons without resolution.',
@@ -1098,7 +1098,7 @@ export const generateArrivalScene = settlement => {
 
 // ─── generateCoherence ────────────────────────────────────────────────────────
 /**
- * Top-level coherence pass — enriches the settlement with:
+ * Top-level coherence pass - enriches the settlement with:
  *  - NPC faction affiliations and stress-modified goals
  *  - Historical character description
  *  - Prominent NPC relationship

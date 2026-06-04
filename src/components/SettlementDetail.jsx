@@ -11,7 +11,7 @@ import { useStore } from '../store/index.js';
 const OutputContainer = lazy(() => import('./OutputContainer'));
 import SettlementEditor from './SettlementEditor.jsx';
 import ChroniclePanel from './ChroniclePanel.jsx';
-// Campaign-state engine UI — phase, locks, system state, events,
+// Campaign-state engine UI - phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
 // (Timeline only shows in canon, CoherencePanel only in draft).
 import PhaseBadge       from './settlement/PhaseBadge.jsx';
@@ -20,7 +20,7 @@ import EventComposer    from './settlement/EventComposer.jsx';
 import Timeline         from './settlement/Timeline.jsx';
 import CoherencePanel   from './settlement/CoherencePanel.jsx';
 // Wave 2 audit components: contextual AI, action rail, provenance,
-// export sheet picker. Each is small and additive — they replace
+// export sheet picker. Each is small and additive - they replace
 // scattered chrome with consistent surfaces in the right rail.
 import NextActionRail   from './settlement/NextActionRail.jsx';
 import ProvenanceBlock  from './settlement/ProvenanceBlock.jsx';
@@ -32,11 +32,12 @@ import ExportSheet      from './settlement/ExportSheet.jsx';
 import SuccessorPrompt  from './settlement/SuccessorPrompt.jsx';
 import RegionalImpactInbox from './region/RegionalImpactInbox.jsx';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
-// Tier 7.15 — phased UI redesign rollout: the Narrated/Raw chip below
+// Tier 7.15 - phased UI redesign rollout: the Narrated/Raw chip below
 // migrates from an inline ad-hoc <span> to the StateBadge primitive,
 // which centralizes the visual styling and the role="status" a11y
 // announcement under one shared component.
 import StateBadge        from './primitives/StateBadge.jsx';
+import { ConfirmDialog } from './primitives/Dialog.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
 
 const REL_COLORS = {
@@ -45,7 +46,7 @@ const REL_COLORS = {
   hostile:'#8b1a1a', neutral:'#6b5340',
 };
 
-// ── Network Effects panel — shows cascading modifiers from the relationship graph ──
+// ── Network Effects panel - shows cascading modifiers from the relationship graph ──
 
 function NetworkEffectsPanel({ settlementId, saves }) {
   const mods = useMemo(
@@ -307,6 +308,8 @@ export default function SettlementDetail({
   const [_saved,       _setSaved]      = useState(false);
   const [exporting,   setExporting]   = useState(false); // PDF export spinner
   const [exportSheetOpen, setExportSheetOpen] = useState(false); // variant picker modal
+  const [confirmRevertRaw, setConfirmRevertRaw] = useState(false);
+  const [pdfError, setPdfError] = useState(null);
 
   // AI-1: pull the saved settlement's persisted ai_data into the aiSlice
   // when this detail view opens (or when switching between saves). Without
@@ -322,7 +325,7 @@ export default function SettlementDetail({
   const aiDailyLife  = useStore(s => s.aiDailyLife);
   const narrated = !!(aiSettlement || aiDailyLife);
 
-  // Tier 5.4 — premium-gated manual editing. The edit toggle lives on
+  // Tier 5.4 - premium-gated manual editing. The edit toggle lives on
   // the store so per-tab EditableText components can read it without
   // prop threading. Non-premium users see a greyed-out button that
   // opens the pricing modal on click.
@@ -336,12 +339,12 @@ export default function SettlementDetail({
   const canEdit              = authTier === 'premium' || authTier === 'founder' || isElevated;
   const editedCount          = isSettlementEdited && isSettlementEdited() ? countSettlementEdits() : 0;
 
-  // Chronicle (AI-3b) — pulled from the live savedSettlements entry so the
+  // Chronicle (AI-3b) - pulled from the live savedSettlements entry so the
   // list updates after each generate / revert without remounting the view.
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
   const chronicleEntries = liveSaveEntry?.aiData?.chronicle;
 
-  // Drift resolutions for the SettlementEditor — invoked from the drift modal
+  // Drift resolutions for the SettlementEditor - invoked from the drift modal
   // after a structural/seismic edit is applied. `requestNarrative` re-runs the
   // full narrative pipeline against the (now-mutated) save; `requestProgression`
   // evolves the existing narrative using the change diff (AI-4);
@@ -377,8 +380,12 @@ export default function SettlementDetail({
 
   const handleRevertToRaw = async () => {
     if (!saveId) return;
-    const ok = window.confirm('Revert this settlement to its raw (pre-AI) view? The saved narrative and daily-life prose will be cleared. Chronicle history (if any) is preserved.');
-    if (!ok) return;
+    setConfirmRevertRaw(true);
+  };
+
+  const confirmRevertToRaw = async () => {
+    if (!saveId) return;
+    setConfirmRevertRaw(false);
     await revertCurrentToRaw(saveId);
   };
 
@@ -420,13 +427,13 @@ export default function SettlementDetail({
           <span style={{fontFamily:serif_,fontSize:FS.lg,fontWeight:600,color:INK}}>{detail.name}</span>
           <PhaseBadge />
           <span style={{flex:1}} />
-          {/* Narrated/Raw — Tier 7.15 phased rollout: migrated to StateBadge primitive. */}
+          {/* Narrated/Raw - Tier 7.15 phased rollout: migrated to StateBadge primitive. */}
           <StateBadge
             kind={narrated ? 'narrated' : 'raw'}
             size="sm"
             tooltip={narrated
               ? 'This save has a narrative refinement or daily-life prose layer atop the simulated facts.'
-              : 'This save has no narrative layer — the raw simulator output is shown.'}
+              : 'This save has no narrative layer - the raw simulator output is shown.'}
           />
           {narrated && (
             <button
@@ -438,7 +445,7 @@ export default function SettlementDetail({
             </button>
           )}
 
-          {/* Tier 5.4 — Edited badge surfaces when ANY field on this
+          {/* Tier 5.4 - Edited badge surfaces when ANY field on this
               settlement has been hand-authored. Tooltip explains the
               guarantees (engine preserves on reroll, AI passes through). */}
           {editedCount > 0 && (
@@ -457,7 +464,7 @@ export default function SettlementDetail({
             </span>
           )}
 
-          {/* Tier 5.4 — Edit-mode toggle. Premium-gated; non-premium
+          {/* Tier 5.4 - Edit-mode toggle. Premium-gated; non-premium
               users see a greyed-out variant that opens the pricing
               modal so they understand it's a premium feature. */}
           <button
@@ -467,7 +474,7 @@ export default function SettlementDetail({
             }}
             title={canEdit
               ? (editMode
-                  ? 'Stop editing — fields return to read-only display.'
+                  ? 'Stop editing - fields return to read-only display.'
                   : 'Edit dossier prose in place. Edits are preserved across rerolls and respected by the AI overlay.')
               : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
             style={{
@@ -502,7 +509,7 @@ export default function SettlementDetail({
             }}
           >
             {exporting
-              ? <><Loader2 size={12} style={{animation:'spin 1s linear infinite'}}/> Building PDF…</>
+              ? <><Loader2 size={12} style={{animation:'spin 1s linear infinite'}}/> Building PDF...</>
               : <><FileText size={12}/> Export Dossier</>}
           </button>
         </div>
@@ -513,7 +520,7 @@ export default function SettlementDetail({
           ↩ Apply Saved Configuration &amp; Regenerate
         </button>
         <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',borderRadius:4,border:`1px solid ${BORDER}`}}>
-          Restores settings &amp; runs a fresh generation — the new settlement will differ from the saved one.
+          Restores settings &amp; runs a fresh generation - the new settlement will differ from the saved one.
         </span>
       </div>
 
@@ -527,7 +534,7 @@ export default function SettlementDetail({
       <AIInlineCard
         settlement={detail.settlement}
         onPolish={() => {
-          // The AI slice's actual handler is `requestNarrative(saveId)` —
+          // The AI slice's actual handler is `requestNarrative(saveId)` -
           // there's no `runAiLayer` action. Fixed 2026-04 after the audit
           // verification revealed the dangling reference. The save id
           // comes from the currently-open detail save record.
@@ -585,14 +592,14 @@ export default function SettlementDetail({
         <ProvenanceBlock save={detail.saveData || detail} />
       </div>
 
-      {/* Successor prompt — modal that appears after a pillar-tier
+      {/* Successor prompt - modal that appears after a pillar-tier
           KILL_NPC commits. Reads `pendingSuccession` off the slice;
           self-hides when the user dismisses or applies. The pendingState
           is set inside applyEvent() in the slice, so the modal mounts
           here at the dossier level rather than at App-root. */}
       <SuccessorPrompt />
 
-      {/* PDF export variant picker — opened by the Export Dossier button
+      {/* PDF export variant picker - opened by the Export Dossier button
           in the header. Closed by Cancel or successful export. */}
       <ExportSheet
         open={exportSheetOpen}
@@ -600,6 +607,7 @@ export default function SettlementDetail({
         onClose={() => setExportSheetOpen(false)}
         onExport={async (variant) => {
           if (exporting) return;
+          setPdfError(null);
           setExporting(true);
           try {
             const liveStore = useStore.getState();
@@ -624,12 +632,17 @@ export default function SettlementDetail({
           } catch (err) {
             console.error('[PDF export] failed:', err);
             const msg = err?.message || String(err) || 'unknown error';
-            alert('PDF export failed:\n\n' + msg + '\n\nFull error logged to console.');
+            setPdfError(`PDF export failed: ${msg}`);
           } finally {
             setExporting(false);
           }
         }}
       />
+      {pdfError && (
+        <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
+          {pdfError}
+        </div>
+      )}
 
       {linking&&<div style={{marginBottom:14}}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
 
@@ -787,7 +800,7 @@ export default function SettlementDetail({
       {detail.settlement&&<div style={{marginBottom:12}}>
         <DetailErrorBoundary>
           <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
-            {/* P139 — cap the dossier body to the shared page width (the
+            {/* P139 - cap the dossier body to the shared page width (the
                 detail toolbar above stays full-width). */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
               <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />
@@ -795,6 +808,16 @@ export default function SettlementDetail({
           </Suspense>
         </DetailErrorBoundary>
       </div>}
+
+      <ConfirmDialog
+        open={confirmRevertRaw}
+        tone="warning"
+        title="Revert to raw view?"
+        body="The saved narrative and daily-life prose will be cleared. Chronicle history, if any, is preserved."
+        confirmLabel="Revert"
+        onConfirm={confirmRevertToRaw}
+        onCancel={() => setConfirmRevertRaw(false)}
+      />
 
     </div>;
 }

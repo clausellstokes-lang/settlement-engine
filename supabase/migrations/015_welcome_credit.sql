@@ -1,15 +1,15 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 015_welcome_credit.sql — Grant 1 narrate credit on signup.
+-- 015_welcome_credit.sql - Grant 1 narrate credit on signup.
 --
 -- P104 / X-4: every paying user has felt what they're paying for. The
 -- single strongest premium pitch is a Narrate credit the user has already
--- spent — so they know exactly what they're buying when the second one
+-- spent - so they know exactly what they're buying when the second one
 -- costs money.
 --
 -- Behavior:
 --   On every INSERT into auth.users, a one-time grant of 1 credit is
 --   recorded in the credit_ledger with reason='welcome'. The trigger is
---   idempotent — re-running the migration on an existing user does NOT
+--   idempotent - re-running the migration on an existing user does NOT
 --   re-grant (the trigger fires only at INSERT, not UPDATE).
 --
 --   The grant flows through the existing admin_grant_credits RPC so it
@@ -72,4 +72,4 @@ create trigger auth_users_welcome_credit
   execute function public.grant_welcome_credit();
 
 comment on function public.grant_welcome_credit() is
-  'P104 / X-4: grants 1 welcome credit on signup. Idempotent — ledger-guard prevents double-grant.';
+  'P104 / X-4: grants 1 welcome credit on signup. Idempotent - ledger-guard prevents double-grant.';

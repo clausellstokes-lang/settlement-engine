@@ -6,18 +6,16 @@
  *                                  founder lifetime grant, single dossier
  *   - customer.subscription.deleted → downgrade from premium
  *
- * Ledger dual-write:
- *   For credit purchases we write to BOTH tables — credit_transactions
- *   (legacy) and credit_ledger (new, see migration 007). The legacy
- *   table stays the system of record until we're confident the ledger
- *   is producing balances that match. The client falls back to the
- *   legacy profiles.credits counter when the ledger RPC isn't yet
- *   exposed, so dual-write is the safe path during the transition.
+ * Credit grants:
+ *   All Stripe-originated grants go through the service-role-only
+ *   `system_grant_credits` RPC. The RPC owns the compatibility writes
+ *   to credit_ledger, credit_transactions, profiles.credits, and the
+ *   admin audit trail in one database transaction.
  *
  * Environment variables:
- *   STRIPE_SECRET_KEY       — Stripe secret key
- *   STRIPE_WEBHOOK_SECRET   — Webhook signing secret
- *   SUPABASE_SERVICE_ROLE_KEY — Service role key (bypasses RLS)
+ *   STRIPE_SECRET_KEY       - Stripe secret key
+ *   STRIPE_WEBHOOK_SECRET   - Webhook signing secret
+ *   SUPABASE_SERVICE_ROLE_KEY - Service role key (bypasses RLS)
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
@@ -35,85 +33,106 @@ function adminClient() {
 }
 
 /**
- * Ledger-consistent credit grant — migrated to the system_grant_credits
- * RPC (migration 012) as part of the Tier 9.9 refund-ledger audit.
+ * Ledger-consistent credit grant through the system_grant_credits RPC.
  *
  * The RPC writes to credit_ledger + credit_transactions + profiles
  * atomically inside a single SECURITY DEFINER transaction, with an
  * admin_actions row for traceability. No more read-then-write race
  * on the profiles counter.
- *
- * Falls back to the legacy direct-write pattern if the RPC fails
- * (e.g. migration 012 hasn't been applied yet on a particular
- * environment). The fallback should be removed once migration 012 is
- * confirmed in all envs — track removal via the audit doc.
  */
-async function dualWriteGrant(
+async function grantCredits(
   supabase: ReturnType<typeof adminClient>,
   userId: string,
   amount: number,
   source: string,
   metadata: Record<string, unknown> = {},
+  expiresAt: string | null = null,
 ) {
-  // Preferred path: ledger-consistent RPC. Single atomic transaction.
   const { error: rpcErr } = await supabase.rpc('system_grant_credits', {
     target_user: userId,
     amount,
     source,
     metadata,
+    expires_at: expiresAt,
   });
 
-  if (!rpcErr) return;  // success — nothing else to do
+  if (rpcErr) {
+    console.error('[stripe-webhook] system_grant_credits RPC failed:', rpcErr.message);
+    throw new Error(`Credit grant failed: ${rpcErr.message}`);
+  }
+}
 
-  // Fallback: if the RPC isn't deployed yet (migration 012 missing on
-  // staging / a fresh dev env), fall through to the legacy three-step
-  // pattern so credits still land. Surface the RPC error so we know
-  // to investigate.
-  console.warn(
-    '[stripe-webhook] system_grant_credits RPC failed; falling back to legacy direct-write path. Confirm migration 012 is applied. Error:',
-    rpcErr.message,
-  );
-
-  // 1. Legacy table.
-  const { error: legacyErr } = await supabase.from('credit_transactions').insert({
-    user_id: userId,
-    amount,
-    reason: source,
-  });
-  if (legacyErr) console.error('Failed to write credit_transactions:', legacyErr);
-
-  // 2. New ledger.
-  const { error: ledgerErr } = await supabase.from('credit_ledger').insert({
-    user_id: userId,
-    kind: 'grant',
-    amount,
-    source,
-    metadata,
-  });
-  if (ledgerErr) console.warn('credit_ledger write skipped (migration 007 may not be applied):', ledgerErr.message);
-
-  // 3. Atomic profile counter bump using arithmetic increment to avoid
-  // the read-then-write race in the original pattern.
-  const { error: bumpErr } = await supabase.rpc('exec_sql_increment_credits', {
-    target_user: userId,
-    increment_by: amount,
-  }).catch(() => ({ error: { message: 'fallback-rpc-missing' } }));
-
-  if (bumpErr) {
-    // Last-resort: read-then-write. Documented racy; remains because
-    // a failed counter bump on a successful Stripe purchase is worse
-    // than a (very narrow-window) racy bump.
+async function findUserIdForStripeCustomer(
+  supabase: ReturnType<typeof adminClient>,
+  customerId: string | null,
+  fallbackEmail?: string | null,
+) {
+  if (customerId) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('credits')
-      .eq('id', userId)
-      .single();
-    if (profile) {
-      await supabase.from('profiles')
-        .update({ credits: (profile.credits || 0) + amount })
-        .eq('id', userId);
+      .select('id, is_founder')
+      .eq('stripe_customer_id', customerId)
+      .maybeSingle();
+    if (profile?.id) return { userId: profile.id as string, isFounder: Boolean(profile.is_founder) };
+  }
+
+  let email = fallbackEmail || null;
+  if (!email && customerId) {
+    try {
+      const customer = await stripe.customers.retrieve(customerId) as Stripe.Customer;
+      email = customer.email || null;
+    } catch (e) {
+      console.warn('[stripe-webhook] customer lookup failed:', e);
     }
   }
+  if (!email) return null;
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('id, is_founder')
+    .ilike('email', email)
+    .maybeSingle();
+  if (!profile?.id) return null;
+
+  if (customerId) {
+    await supabase.from('profiles')
+      .update({ stripe_customer_id: customerId })
+      .eq('id', profile.id);
+  }
+  return { userId: profile.id as string, isFounder: Boolean(profile.is_founder) };
+}
+
+async function grantMonthlyAllowanceIfNeeded(
+  supabase: ReturnType<typeof adminClient>,
+  invoice: Stripe.Invoice,
+) {
+  const customerId = typeof invoice.customer === 'string'
+    ? invoice.customer
+    : invoice.customer?.id || null;
+  const profile = await findUserIdForStripeCustomer(supabase, customerId, invoice.customer_email || null);
+  if (!profile?.userId) {
+    console.error('[stripe-webhook] monthly allowance invoice has no matching profile:', invoice.id);
+    return;
+  }
+
+  const { data: existing } = await supabase
+    .from('credit_ledger')
+    .select('id')
+    .eq('source', 'monthly_allowance')
+    .eq('metadata->>stripe_invoice_id', invoice.id)
+    .maybeSingle();
+  if (existing?.id) return;
+
+  const firstLine = invoice.lines?.data?.[0];
+  const periodEnd = firstLine?.period?.end || invoice.period_end || null;
+  const expiresAt = periodEnd ? new Date(periodEnd * 1000).toISOString() : null;
+  await grantCredits(supabase, profile.userId, 30, 'monthly_allowance', {
+    stripe_invoice_id: invoice.id,
+    stripe_subscription_id: typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id || '',
+    stripe_customer_id: customerId || '',
+    period_end: periodEnd || null,
+  }, expiresAt);
+  console.log(`Granted 30 monthly credits to user ${profile.userId} for invoice ${invoice.id}`);
 }
 
 // ── Trust boundary documentation (Tier 0.5 audit) ──────────────────────────
@@ -129,7 +148,7 @@ async function dualWriteGrant(
 //      `create-checkout/index.ts`, which:
 //        a. requires a Supabase JWT (line 107 in create-checkout)
 //        b. uses `user.id` from the server-verified JWT for
-//           `metadata.supabase_user_id` — NOT from the request body.
+//           `metadata.supabase_user_id` - NOT from the request body.
 //           So a user cannot upgrade someone else's account.
 //        c. validates `product` against the server-controlled PRICE_MAP
 //           before passing it into metadata. So a user cannot smuggle
@@ -145,10 +164,10 @@ async function dualWriteGrant(
 // If you ADD a new entry point that creates Stripe checkout sessions,
 // it MUST follow the same pattern. Otherwise the trust chain breaks.
 // The contract test in tests/edgeFunctions/contracts.test.js
-// (Tier 0.5 — webhook trust boundaries) locks this in.
+// (Tier 0.5 - webhook trust boundaries) locks this in.
 
 serve(async (req) => {
-  // ── Signature verification — MUST run before any metadata read ─────
+  // ── Signature verification - MUST run before any metadata read ─────
   const signature = req.headers.get('stripe-signature');
   if (!signature) return new Response('Missing signature', { status: 400 });
 
@@ -172,7 +191,7 @@ serve(async (req) => {
 
       // single_dossier is the only product that may legitimately have no
       // supabase_user_id (it doesn't require an account). Everything else
-      // does — bail with a log so we get a Stripe dashboard breadcrumb.
+      // does - bail with a log so we get a Stripe dashboard breadcrumb.
       if (!userId && product !== 'single_dossier') {
         console.error('No supabase_user_id in session metadata');
         break;
@@ -186,7 +205,10 @@ serve(async (req) => {
         });
         if (error) console.error('Failed to upgrade user:', error);
 
-        await supabase.from('profiles').update({ tier: 'premium' }).eq('id', userId);
+        await supabase.from('profiles').update({
+          tier: 'premium',
+          stripe_customer_id: typeof session.customer === 'string' ? session.customer : session.customer?.id || null,
+        }).eq('id', userId);
         console.log(`User ${userId} upgraded to premium (Cartographer)`);
       } else if (product === 'founder_lifetime') {
         // Founder Lifetime: $99 one-time. Gives Cartographer access forever +
@@ -200,28 +222,39 @@ serve(async (req) => {
         if (error) console.error('Failed to upgrade user to founder:', error);
 
         await supabase.from('profiles')
-          .update({ tier: 'premium', is_founder: true })
+          .update({
+            tier: 'premium',
+            is_founder: true,
+            stripe_customer_id: typeof session.customer === 'string' ? session.customer : session.customer?.id || null,
+          })
           .eq('id', userId);
 
-        // Founder bonus: also seed 100 credits as a welcome.
-        await dualWriteGrant(supabase, userId!, 100, 'founder_grant', {
+        // Founder bonus: one-time 30-credit grant.
+        await grantCredits(supabase, userId!, 30, 'founder_grant', {
           stripe_session_id: session.id,
         });
-        console.log(`User ${userId} upgraded to Founder Lifetime (+100 credits)`);
+        console.log(`User ${userId} upgraded to Founder Lifetime (+30 credits)`);
       } else if (product === 'single_dossier') {
         // One-shot purchase, no account required. Nothing to mutate on
-        // user state — the customer's receipt + the success-page redirect
+        // user state - the customer's receipt + the success-page redirect
         // (handled client-side via session_id query param) deliver the PDF.
         // We log it so audit can match against Stripe payments.
         console.log(`single_dossier purchased: session=${session.id} email=${session.customer_email}`);
       } else if (credits > 0) {
-        // Credit pack purchase. Dual-write: legacy credit_transactions
-        // table (current source of truth) + new credit_ledger (forward).
-        await dualWriteGrant(supabase, userId!, credits, 'purchase', {
+        // Credit pack purchase. The RPC handles ledger, legacy counter,
+        // compatibility table, and audit writes atomically.
+        await grantCredits(supabase, userId!, credits, 'purchase', {
           stripe_session_id: session.id,
         });
         console.log(`Added ${credits} credits to user ${userId}`);
       }
+      break;
+    }
+
+    case 'invoice.paid':
+    case 'invoice.payment_succeeded': {
+      const invoice = event.data.object as Stripe.Invoice;
+      await grantMonthlyAllowanceIfNeeded(supabase, invoice);
       break;
     }
 
@@ -230,18 +263,17 @@ serve(async (req) => {
       const subscription = event.data.object as Stripe.Subscription;
       const customerId = subscription.customer as string;
 
-      // Find user by Stripe customer ID — look up via email
-      const customer = await stripe.customers.retrieve(customerId) as Stripe.Customer;
-      if (customer.email) {
-        const { data: users } = await supabase.auth.admin.listUsers();
-        const user = users?.users?.find(u => u.email === customer.email);
-        if (user) {
-          await supabase.auth.admin.updateUserById(user.id, {
-            user_metadata: { tier: 'free' },
-          });
-          await supabase.from('profiles').update({ tier: 'free' }).eq('id', user.id);
-          console.log(`User ${user.id} downgraded to free`);
+      const profile = await findUserIdForStripeCustomer(supabase, customerId);
+      if (profile?.userId) {
+        if (profile.isFounder) {
+          console.log(`User ${profile.userId} kept premium after subscription deletion (Founder Lifetime)`);
+          break;
         }
+        await supabase.auth.admin.updateUserById(profile.userId, {
+          user_metadata: { tier: 'free' },
+        });
+        await supabase.from('profiles').update({ tier: 'free' }).eq('id', profile.userId);
+        console.log(`User ${profile.userId} downgraded to free`);
       }
       break;
     }

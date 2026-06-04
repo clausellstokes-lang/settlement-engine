@@ -1,5 +1,5 @@
 /**
- * WelcomeBackCard.jsx — P115 / X-9 return-visit personalization.
+ * WelcomeBackCard.jsx - P115 / X-9 return-visit personalization.
  *
  * Surfaces above the (signed-in) HomeHero when the user returns 24h+
  * after their last visit. Reads the most-recent saved settlement from

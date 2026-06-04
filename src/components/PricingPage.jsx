@@ -1,5 +1,5 @@
 /**
- * PricingPage.jsx — Public pricing page.
+ * PricingPage.jsx - Public pricing page.
  *
  * Reads the catalog from `src/config/pricing.js` and the strings from
  * `src/copy/`. Hard-coding nothing here means a price/copy/tier change
@@ -14,13 +14,13 @@
  * SEO note: this is one of the public surfaces. Eventually the route
  * needs a proper crawlable URL (currently it's a state-driven view).
  * Until the SPA gets split into per-page routes, the canonical link
- * is /?view=pricing — set by the footer + header CTA.
+ * is /?view=pricing - set by the footer + header CTA.
  */
 
 import { useEffect, useState } from 'react';
 import { Crown, Zap, Map as MapIcon, Sparkles, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { startCheckout } from '../lib/stripe.js';
+import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
 import {
   getVisibleTiers, getActivePacks, getTierDisplayName,
@@ -32,7 +32,7 @@ import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, 
 import FounderBadge from './primitives/FounderBadge.jsx';
 
 // Tier-icon mapping. Kept here (not in pricing config) because icons
-// are a UI concern — the config stays headless.
+// are a UI concern - the config stays headless.
 const TIER_ICONS = {
   wanderer:     MapIcon,
   cartographer: Sparkles,
@@ -55,7 +55,7 @@ function FeatureRow({ children }) {
 function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderSeatsRemaining, audienceLine }) {
   const Icon = TIER_ICONS[tier.key] || Sparkles;
   const features = tx(`pricing.tiers.${tier.key}.features`) || [];
-  // P122 / X-10 — Prefer audience-led pitch over generic tagline when the
+  // P122 / X-10 - Prefer audience-led pitch over generic tagline when the
   // flag is on and a per-audience line is available. Falls back cleanly
   // to the legacy tagline.
   const tagline  = audienceLine || t(`pricing.tiers.${tier.key}.tagline`);
@@ -153,7 +153,7 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
           letterSpacing: '0.02em',
         }}
       >
-        {loading ? 'Redirecting…' : ctaLabel}
+        {loading ? 'Redirecting...' : ctaLabel}
       </button>
       {ctaSub && (
         <p style={{
@@ -213,12 +213,14 @@ function PackTile({ pack, onBuy, loading, emphasised }) {
 export default function PricingPage({ onNavigate }) {
   const isElevated = useStore(s => s.isElevated());
   const authTier   = useStore(s => s.auth.tier);
+  const isFounder  = useStore(s => s.auth.isFounder);
   const [loading, setLoading] = useState(null); // product key in flight
+  const [checkoutError, setCheckoutError] = useState(null);
 
   const tiers = getVisibleTiers();
   const packs = Object.values(getActivePacks());
 
-  // P122 / X-10 — Audience-led pricing pitch. The same tier gets a
+  // P122 / X-10 - Audience-led pricing pitch. The same tier gets a
   // different lead line depending on the current reader's archetype.
   const copy = useCopy();
   const audienceLineFor = (tierKey) => {
@@ -228,7 +230,7 @@ export default function PricingPage({ onNavigate }) {
   };
 
   // Tier 7.6: live founder seat counter. Null until the RPC resolves
-  // OR on any failure — TierCard falls back to "Limited to 500 seats"
+  // OR on any failure - TierCard falls back to "Limited to 500 seats"
   // when null, so a transient backend hiccup doesn't break the page.
   const [founderSeatsRemaining, setFounderSeatsRemaining] = useState(null);
   useEffect(() => {
@@ -239,7 +241,7 @@ export default function PricingPage({ onNavigate }) {
         const remaining = await fetchFounderSeatsRemaining();
         if (!cancelled) setFounderSeatsRemaining(remaining);
       } catch {
-        // Lazy-import or fetch failure — leave null and show the
+        // Lazy-import or fetch failure - leave null and show the
         // safe fallback copy.
       }
     })();
@@ -247,12 +249,25 @@ export default function PricingPage({ onNavigate }) {
   }, []);
 
   async function buy(product) {
+    setCheckoutError(null);
     setLoading(product);
     try {
       await startCheckout(product);
     } catch (e) {
-      // Surfacing via store error handler would be nicer; for now just log.
       console.error('Checkout failed:', e);
+      setCheckoutError(e.message || 'Checkout failed');
+      setLoading(null);
+    }
+  }
+
+  async function manageBilling() {
+    setCheckoutError(null);
+    setLoading('portal');
+    try {
+      await startCustomerPortal();
+    } catch (e) {
+      console.error('Billing portal failed:', e);
+      setCheckoutError(e.message || 'Billing portal failed');
       setLoading(null);
     }
   }
@@ -266,14 +281,15 @@ export default function PricingPage({ onNavigate }) {
     }
     if (tier.key === 'founder') {
       return {
-        label: t('pricing.tiers.founder.cta'),
-        onCta: () => buy('founder_lifetime'),
+        label: isFounder ? 'Founder active' : t('pricing.tiers.founder.cta'),
+        onCta: isFounder ? manageBilling : () => buy('founder_lifetime'),
       };
     }
     // Cartographer (premium)
+    const currentPaid = authTier === 'premium' || isElevated;
     return {
-      label: authTier === 'premium' || isElevated ? 'Current plan' : t('pricing.tiers.cartographer.cta'),
-      onCta: () => buy('premium'),
+      label: currentPaid ? 'Manage subscription' : t('pricing.tiers.cartographer.cta'),
+      onCta: currentPaid ? manageBilling : () => buy('premium'),
     };
   }
 
@@ -307,6 +323,21 @@ export default function PricingPage({ onNavigate }) {
         }}>
           {t('pricing.antiAi')}
         </p>
+        {checkoutError && (
+          <div style={{
+            margin: `${SP.lg}px auto 0`,
+            maxWidth: 560,
+            padding: `${SP.sm}px ${SP.md}px`,
+            background: swatch.dangerBg,
+            border: '1px solid #e8b0b0',
+            borderRadius: R.md,
+            color: swatch.danger,
+            fontFamily: sans,
+            fontSize: FS.sm,
+          }}>
+            {checkoutError}
+          </div>
+        )}
       </header>
 
       {/* ── Subscription tiers ──────────────────────────────────────────── */}
@@ -429,7 +460,7 @@ export default function PricingPage({ onNavigate }) {
               cursor: 'pointer', opacity: loading === SINGLE_DOSSIER.key ? 0.6 : 1,
             }}
           >
-            {loading === SINGLE_DOSSIER.key ? 'Redirecting…' : t('pricing.singleDossier.cta')}
+            {loading === SINGLE_DOSSIER.key ? 'Redirecting...' : t('pricing.singleDossier.cta')}
           </button>
         </section>
       )}

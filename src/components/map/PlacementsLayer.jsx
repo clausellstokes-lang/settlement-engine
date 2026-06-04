@@ -1,5 +1,5 @@
 /**
- * PlacementsLayer — renders one TierIcon per settlement placement.
+ * PlacementsLayer - renders one TierIcon per settlement placement.
  *
  * Reads `mapState.placements` and looks up each settlement in
  * `savedSettlements` to determine tier, port, and capital flags.
@@ -45,7 +45,7 @@ export default function PlacementsLayer({ transformRef }) {
 
   // Counter-scale icons by viewport zoom. We use the persisted store
   // value (debounced ~500ms by MapOverlay) rather than reading
-  // transformRef.current.scale during render — the latter is a
+  // transformRef.current.scale during render - the latter is a
   // react-hooks/refs violation under React Compiler and the visual
   // benefit is sub-perceptible (icons might be the wrong size for up
   // to 500ms during a continuous zoom; same as the gap between samples).
@@ -94,7 +94,7 @@ export default function PlacementsLayer({ transformRef }) {
   }
 
   function handleDragPointerDown(e, it) {
-    // Only drag if this icon is already selected — avoids hijacking a fresh
+    // Only drag if this icon is already selected - avoids hijacking a fresh
     // click on a non-selected icon (which should just select it).
     const isSelected =
       String(selectedBurgId) === String(it.burgId) ||

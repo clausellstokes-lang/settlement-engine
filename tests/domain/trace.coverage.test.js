@@ -1,9 +1,9 @@
 /**
- * tests/domain/trace.coverage.test.js — Tier 2.1 trace coverage gate.
+ * tests/domain/trace.coverage.test.js - Tier 2.1 trace coverage gate.
  *
  * Runs the live pipeline against a few representative configs and
  * asserts that the resulting `settlement.simulationTrace[]` actually
- * carries traces from multiple steps — not just from
+ * carries traces from multiple steps - not just from
  * assembleInstitutions like it used to.
  *
  * The previous trace landscape: 1 of 17 pipeline steps emitted traces.
@@ -17,12 +17,12 @@
  *   - isolationPass             (teleport infra + subsistence stripping)
  *   - factionCorrelationPass    (faction-pulled adds + arcane strip)
  *   - generateEconomy           (supply chain state)
- *   - generatePower             (faction profiles — Tier 4.1)
+ *   - generatePower             (faction profiles - Tier 4.1)
  *
  * Each step we expect to fire is asserted by step name. Steps still
  * pending instrumentation (resolveConfig, resolveNeighbour,
  * neighbourFactions, generatePopulation, generateNarratives,
- * assembleSettlement-as-a-producer) are NOT asserted here — adding
+ * assembleSettlement-as-a-producer) are NOT asserted here - adding
  * them later is the natural next pass.
  */
 
@@ -44,7 +44,7 @@ function gen(extraConfig = {}) {
   }, { seed: SEED, customContent: {} });
 }
 
-describe('Tier 2.1 — trace layer is live on the engine', () => {
+describe('Tier 2.1 - trace layer is live on the engine', () => {
   test('settlement.simulationTrace is populated on every generation', () => {
     const s = gen();
     const traces = getTraces(s);
@@ -67,7 +67,7 @@ describe('Tier 2.1 — trace layer is live on the engine', () => {
   });
 });
 
-describe('Tier 2.1 — every wired pipeline step actually emits traces', () => {
+describe('Tier 2.1 - every wired pipeline step actually emits traces', () => {
   // We hit a deliberately rich config so as many wired steps as
   // possible fire. A coastal port-tied town generally has resources +
   // a stressor + cascade-triggered chain institutions + a dominant
@@ -102,7 +102,7 @@ describe('Tier 2.1 — every wired pipeline step actually emits traces', () => {
   }
 
   test('total trace count is meaningfully large (not just one stub per step)', () => {
-    // A town/city should produce dozens of traces — at minimum one per
+    // A town/city should produce dozens of traces - at minimum one per
     // institution selected, one per resource, one per faction, one per
     // stressor. If the total is single-digit, the wiring regressed.
     const total = getTraces(settlement).length;
@@ -121,7 +121,7 @@ describe('Tier 2.1 — every wired pipeline step actually emits traces', () => {
   });
 });
 
-describe('Tier 2.1 — causes + downstream effects are populated', () => {
+describe('Tier 2.1 - causes + downstream effects are populated', () => {
   test('most institution traces carry at least one cause', () => {
     const s = gen();
     const instTraces = getTraces(s).filter(t => t.targetType === 'institution');
@@ -139,7 +139,7 @@ describe('Tier 2.1 — causes + downstream effects are populated', () => {
     expect(resTraces.length).toBeGreaterThan(0);
     for (const t of resTraces) {
       const causeSources = (t.causes || []).map(c => c.source);
-      // Either terrain.* or terrainCompatibility — the two ways a
+      // Either terrain.* or terrainCompatibility - the two ways a
       // resource enters resolveResources's trace.
       const hasCompatCause = causeSources.some(s =>
         typeof s === 'string' && (s.startsWith('terrain.') || s === 'terrainCompatibility' || s.startsWith('tier.'))
@@ -149,7 +149,7 @@ describe('Tier 2.1 — causes + downstream effects are populated', () => {
   });
 });
 
-describe('Tier 2.1 — query helpers work on real traces', () => {
+describe('Tier 2.1 - query helpers work on real traces', () => {
   const s = gen({ tradeRouteAccess: 'port', terrain: 'coastal' });
   const traces = getTraces(s);
 

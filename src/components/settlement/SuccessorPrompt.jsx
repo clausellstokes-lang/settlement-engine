@@ -1,5 +1,5 @@
 /**
- * SuccessorPrompt — Modal shown after a pillar-tier NPC death.
+ * SuccessorPrompt - Modal shown after a pillar-tier NPC death.
  *
  * Closes the gap the architect critique kept flagging: when a leader
  * dies, the institutional vacuum needs filling, and the DM shouldn't
@@ -42,7 +42,7 @@ export default function SuccessorPrompt() {
     .map(id => (settlement.npcs || []).find(n => (n.id || n.name) === id))
     .filter(Boolean);
 
-  // Primary institution to fill — most pillar NPCs link to exactly
+  // Primary institution to fill - most pillar NPCs link to exactly
   // one; if there are multiple, we take the first and the user can
   // re-target via the EventComposer before applying.
   const institutionId = pending.linkedInstitutionIds?.[0] || '';
@@ -63,7 +63,7 @@ export default function SuccessorPrompt() {
       payload: {
         institutionId,
         role: pending.outgoingRole || 'replacement',
-        quality: 'competent',          // sensible default — user can adjust
+        quality: 'competent',          // sensible default - user can adjust
       },
       cause: 'world_event',
       description: `${npc.name} succeeds ${pending.outgoingNpcName}.`,
@@ -126,7 +126,7 @@ export default function SuccessorPrompt() {
           }}>
             <strong>{pending.outgoingNpcName}</strong>
             {pending.outgoingRole && (
-              <> — {pending.outgoingRole}</>
+              <> - {pending.outgoingRole}</>
             )}{' '}
             is gone. <strong>{institutionName}</strong> has lost its leader.
             Who steps into the role?
@@ -169,7 +169,7 @@ export default function SuccessorPrompt() {
               marginBottom: 12, lineHeight: 1.5,
             }}>
               No obvious successor among the existing NPCs. Appoint someone new,
-              or dismiss this prompt to leave the role vacant — the impairment
+              or dismiss this prompt to leave the role vacant - the impairment
               will persist until filled.
             </div>
           )}

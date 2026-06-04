@@ -1,5 +1,5 @@
 /**
- * ShareToGallery.jsx — Publish / unpublish a saved settlement.
+ * ShareToGallery.jsx - Publish / unpublish a saved settlement.
  *
  * Mounts in the dossier toolbar for owned, persisted settlements. When
  * the dossier hasn't been saved yet, the button shows a soft-disabled
@@ -11,14 +11,14 @@
  *   - Hidden in readOnly mode (PublicDossierView, etc.).
  *
  * The slug + is_public state is round-tripped to the server via the
- * helpers in src/lib/gallery.js — this component owns no truth.
+ * helpers in src/lib/gallery.js - this component owns no truth.
  */
 
-import { useState } from 'react';
-import { Globe, Lock, Copy, Check, AlertCircle } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { publishSettlement, unpublishSettlement } from '../lib/gallery.js';
-import { GOLD, BORDER, sans, SP, R, FS, GREEN, RED } from './theme.js';
+import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
+import { GOLD, BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY } from './theme.js';
 
 const MUTED = '#6b5340';
 const _BODY  = '#4A3B22';
@@ -29,15 +29,69 @@ function publicUrlFor(slug) {
   return `${window.location.origin}${path}`;
 }
 
-export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicSlug: slugProp }) {
+function isCampaignCanonized(campaignState) {
+  if (!campaignState) return true;
+  return Boolean(
+    campaignState.phase === 'canon' ||
+    campaignState.canonizedAt ||
+    campaignState.worldState?.canonizedAt
+  );
+}
+
+function suggestedTagsFor(settlement = {}) {
+  return [
+    settlement.tier,
+    settlement.config?.terrain,
+    settlement.config?.magicLevel ? `${settlement.config.magicLevel} magic` : null,
+    settlement.powerStructure?.governmentType,
+    settlement.viability?.stability,
+    settlement.config?.nearbyResources?.[0],
+  ].filter(Boolean).slice(0, 6);
+}
+
+function Field({ label, children }) {
+  return (
+    <label style={{ display: 'grid', gap: 4, minWidth: 0 }}>
+      <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        {label}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+export default function ShareToGallery({
+  saveId,
+  isPublic: isPublicProp,
+  publicSlug: slugProp,
+  campaignState = null,
+  settlement = null,
+  galleryDescription = '',
+  galleryImageUrl = '',
+  galleryImageAlt = '',
+  galleryTags = [],
+}) {
   const auth = useStore(s => s.auth);
   const updateSavedSettlement = useStore(s => s.updateSavedSettlement);
 
   const [isPublic, setIsPublic] = useState(Boolean(isPublicProp));
   const [slug, setSlug]         = useState(slugProp || null);
+  const [detailsOpen, setDetailsOpen] = useState(!isPublicProp);
+  const [description, setDescription] = useState(galleryDescription || '');
+  const [imageUrl, setImageUrl] = useState(galleryImageUrl || '');
+  const [imageAlt, setImageAlt] = useState(galleryImageAlt || '');
+  const [tagsInput, setTagsInput] = useState((galleryTags?.length ? galleryTags : suggestedTagsFor(settlement)).join(', '));
   const [busy, setBusy]         = useState(false);
   const [error, setError]       = useState(null);
   const [copied, setCopied]     = useState(false);
+  const [savedDetails, setSavedDetails] = useState(false);
+  const canonReady = isCampaignCanonized(campaignState);
+  const metadata = useMemo(() => ({
+    description,
+    imageUrl,
+    imageAlt,
+    tags: tagsInput,
+  }), [description, imageAlt, imageUrl, tagsInput]);
 
   if (!auth?.user) return null;
   if (!saveId) {
@@ -54,20 +108,53 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
   }
 
   async function handlePublish() {
+    if (!canonReady) {
+      setError('Canonize the campaign world before sharing this dossier publicly.');
+      return;
+    }
     setBusy(true); setError(null);
     try {
-      const newSlug = await publishSettlement(saveId);
+      const newSlug = await publishSettlement(saveId, metadata);
       setSlug(newSlug);
       setIsPublic(true);
       // Best-effort: update the cached saved-settlement row so other
       // surfaces (Settlements panel, AccountPage) see the new state
       // without a refetch. updateSavedSettlement may not be defined
-      // in older builds — fall through silently if so.
+      // in older builds - fall through silently if so.
       try {
-        updateSavedSettlement?.(saveId, { is_public: true, public_slug: newSlug });
+        updateSavedSettlement?.(saveId, {
+          is_public: true,
+          public_slug: newSlug,
+          gallery_description: description,
+          gallery_image_url: imageUrl,
+          gallery_image_alt: imageAlt,
+          gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
+        });
       } catch { /* non-fatal */ }
     } catch (e) {
       setError(e.message || 'Publish failed');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleSaveDetails() {
+    if (!saveId) return;
+    setBusy(true);
+    setError(null);
+    setSavedDetails(false);
+    try {
+      await updateGalleryMetadata(saveId, metadata);
+      updateSavedSettlement?.(saveId, {
+        gallery_description: description,
+        gallery_image_url: imageUrl,
+        gallery_image_alt: imageAlt,
+        gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
+      });
+      setSavedDetails(true);
+      setTimeout(() => setSavedDetails(false), 1600);
+    } catch (e) {
+      setError(e.message || 'Gallery details could not be saved');
     } finally {
       setBusy(false);
     }
@@ -98,12 +185,126 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
       .catch(() => { /* clipboard refused; nothing to do */ });
   }
 
-  // Published state — show "Public" badge + copy link + unshare.
+  const detailsForm = detailsOpen && (
+    <div style={{
+      width: '100%',
+      display: 'grid',
+      gap: SP.sm,
+      padding: SP.sm,
+      border: `1px solid ${BORDER2}`,
+      borderRadius: R.md,
+      background: CARD_ALT,
+      marginTop: SP.xs,
+    }}>
+      <Field label="Public description">
+        <textarea
+          value={description}
+          onChange={event => setDescription(event.target.value)}
+          rows={3}
+          maxLength={1200}
+          placeholder="A short public note for DMs browsing the gallery."
+          style={{
+            width: '100%',
+            boxSizing: 'border-box',
+            resize: 'vertical',
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.md,
+            background: CARD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            lineHeight: 1.45,
+            padding: SP.sm,
+          }}
+        />
+      </Field>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: SP.sm }}>
+        <Field label="Image URL">
+          <input
+            value={imageUrl}
+            onChange={event => setImageUrl(event.target.value)}
+            placeholder="https://..."
+            style={{
+              minHeight: 32,
+              border: `1px solid ${BORDER}`,
+              borderRadius: R.md,
+              background: CARD,
+              color: INK,
+              fontFamily: sans,
+              fontSize: FS.xs,
+              padding: '6px 8px',
+            }}
+          />
+        </Field>
+        <Field label="Image alt">
+          <input
+            value={imageAlt}
+            onChange={event => setImageAlt(event.target.value)}
+            placeholder={settlement?.name ? `Image for ${settlement.name}` : 'Image description'}
+            style={{
+              minHeight: 32,
+              border: `1px solid ${BORDER}`,
+              borderRadius: R.md,
+              background: CARD,
+              color: INK,
+              fontFamily: sans,
+              fontSize: FS.xs,
+              padding: '6px 8px',
+            }}
+          />
+        </Field>
+      </div>
+      <Field label="Gallery tags">
+        <input
+          value={tagsInput}
+          onChange={event => setTagsInput(event.target.value)}
+          placeholder="frontier, high magic, unstable"
+          style={{
+            minHeight: 32,
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.md,
+            background: CARD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            padding: '6px 8px',
+          }}
+        />
+      </Field>
+      {isPublic && (
+        <button
+          type="button"
+          onClick={handleSaveDetails}
+          disabled={busy}
+          style={{
+            justifySelf: 'start',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 5,
+            minHeight: 30,
+            padding: '5px 9px',
+            border: `1px solid ${GOLD}`,
+            borderRadius: R.md,
+            background: CARD,
+            color: GOLD,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            fontWeight: 850,
+            cursor: busy ? 'wait' : 'pointer',
+          }}
+        >
+          <Save size={12} /> {savedDetails ? 'Saved' : 'Save gallery details'}
+        </button>
+      )}
+    </div>
+  );
+
+  // Published state - show "Public" badge + copy link + unshare.
   if (isPublic && slug) {
     return (
       <div style={{
-        display: 'inline-flex', alignItems: 'center', gap: SP.sm,
-        flexWrap: 'wrap', fontFamily: sans,
+        display: 'flex', alignItems: 'center', gap: SP.sm,
+        flexWrap: 'wrap', fontFamily: sans, width: '100%',
       }}>
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
@@ -131,6 +332,19 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
         </button>
         <button
           type="button"
+          onClick={() => setDetailsOpen(open => !open)}
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 5,
+            padding: '4px 9px', borderRadius: R.md,
+            background: 'transparent', color: BODY,
+            border: `1px solid ${BORDER}`,
+            fontSize: FS.xs, fontFamily: sans, cursor: 'pointer',
+          }}
+        >
+          <ImageIcon size={12} /> Gallery details
+        </button>
+        <button
+          type="button"
           onClick={handleUnpublish}
           disabled={busy}
           style={{
@@ -141,7 +355,7 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
             opacity: busy ? 0.6 : 1,
           }}
         >
-          {busy ? 'Working…' : 'Unshare'}
+          {busy ? 'Working...' : 'Unshare'}
         </button>
         {error && (
           <span style={{
@@ -151,20 +365,21 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
             <AlertCircle size={11} /> {error}
           </span>
         )}
+        {detailsForm}
       </div>
     );
   }
 
-  // Private state — publish button.
+  // Private state - publish button.
   return (
     <div style={{
-      display: 'inline-flex', alignItems: 'center', gap: SP.sm,
-      flexWrap: 'wrap', fontFamily: sans,
+      display: 'flex', alignItems: 'center', gap: SP.sm,
+      flexWrap: 'wrap', fontFamily: sans, width: '100%',
     }}>
       <button
         type="button"
         onClick={handlePublish}
-        disabled={busy}
+        disabled={busy || !canonReady}
         title="Make this dossier readable to anyone with the link"
         style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
@@ -172,11 +387,24 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
           background: 'transparent', color: GOLD,
           border: `1px solid ${GOLD}`,
           fontSize: FS.xs, fontFamily: sans, fontWeight: 700,
-          cursor: busy ? 'wait' : 'pointer',
-          opacity: busy ? 0.6 : 1,
+          cursor: busy ? 'wait' : canonReady ? 'pointer' : 'not-allowed',
+          opacity: busy || !canonReady ? 0.6 : 1,
         }}
       >
-        <Globe size={12} /> {busy ? 'Publishing…' : 'Share to gallery'}
+        <Globe size={12} /> {busy ? 'Publishing...' : 'Share to gallery'}
+      </button>
+      <button
+        type="button"
+        onClick={() => setDetailsOpen(open => !open)}
+        style={{
+          display: 'inline-flex', alignItems: 'center', gap: 5,
+          padding: '4px 9px', borderRadius: R.md,
+          background: 'transparent', color: BODY,
+          border: `1px solid ${BORDER}`,
+          fontSize: FS.xs, fontFamily: sans, cursor: 'pointer',
+        }}
+      >
+        <ImageIcon size={12} /> Details
       </button>
       {error && (
         <span style={{
@@ -189,8 +417,11 @@ export default function ShareToGallery({ saveId, isPublic: isPublicProp, publicS
       <span style={{
         fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
       }}>
-        Public dossiers appear in the gallery. Your name and email stay private.
+        {canonReady
+          ? 'Public dossiers appear in the gallery. Your name and email stay private.'
+          : 'Canonize this campaign world before sharing the dossier publicly.'}
       </span>
+      {detailsForm}
     </div>
   );
 }

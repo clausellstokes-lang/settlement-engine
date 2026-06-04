@@ -1,5 +1,5 @@
 /**
- * PendingChangesBar.jsx — P106 / E-2 pending-changes floating drawer.
+ * PendingChangesBar.jsx - P106 / E-2 pending-changes floating drawer.
  *
  * Renders below the dossier title whenever the store has unapplied
  * edits in `pendingEditsQueue`. Lists count + categories, with three

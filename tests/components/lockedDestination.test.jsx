@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * lockedDestination.test.jsx — P143 / X-7 contract over the shared
+ * lockedDestination.test.jsx - P143 / X-7 contract over the shared
  * "destination sells itself" primitive.
  *
  * Pins:

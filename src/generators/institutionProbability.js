@@ -1,4 +1,4 @@
-// institutionProbability.js — Institution base chance calculation
+// institutionProbability.js - Institution base chance calculation
 // Extracted from structuralValidator.js.
 // Pure function: given a base chance, applies priority/resource/config multipliers.
 
@@ -80,7 +80,7 @@ export const getBaseChance = (
     chance *= magicMult * tierMagicPenalty;
 
     // Druid/nature institutions: boost on natural routes, but not excluded from others
-    // A sewer druid or urban grove druid can exist anywhere — just less likely
+    // A sewer druid or urban grove druid can exist anywhere - just less likely
     const isDruidInst = inst.includes('druid') || inst.includes('grove shrine') ||
                         inst.includes("warden's lodge") || inst.includes('sacred grove') ||
                         inst.includes('elder grove');
@@ -126,7 +126,7 @@ export const getBaseChance = (
   }
 
   // Isolated high-magic settlements: heavily boost teleportation/planar infrastructure
-  // This allows isolated town+ to self-resolve via magic — the violation check will
+  // This allows isolated town+ to self-resolve via magic - the violation check will
   // detect the infrastructure and downgrade from critical to warning.
   const isHighMagicIsolated = config.tradeRouteAccess === 'isolated' &&
     (config.priorityMagic || 0) >= 70 &&

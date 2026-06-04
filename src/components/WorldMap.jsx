@@ -1,14 +1,14 @@
 /**
- * WorldMap.jsx — Unified world-map workspace.
+ * WorldMap.jsx - Unified world-map workspace.
  *
  * Architecture (v2, 2026-04):
  *   iframe (FMG geography engine)
  *     └─ <MapOverlay> (React-owned SVG for annotations + relationship lines)
- *   toolbar row 1 — mode switcher (View / Terrain / Annotate)
- *   toolbar row 2 — contextual toolbar for the current mode
- *   sidebar — settlement palette (drag to place), campaign controls
+ *   toolbar row 1 - mode switcher (View / Terrain / Annotate)
+ *   toolbar row 2 - contextual toolbar for the current mode
+ *   sidebar - settlement palette (drag to place), campaign controls
  *
- * State is held in the Zustand map slice. This component is a controller —
+ * State is held in the Zustand map slice. This component is a controller -
  * it wires DOM events to bridge RPC calls and bridge push events to store
  * actions. There is no local placement/burg state in React.
  */
@@ -16,7 +16,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import {
   FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, Layers, Loader, Map as MapIcon, Globe, Link as LinkIcon,
-  Newspaper, Zap,
+  Newspaper, SlidersHorizontal, Zap,
 } from 'lucide-react';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
@@ -26,24 +26,26 @@ import { MAP_MODES } from '../store/mapSlice.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans, FS, SP, R, swatch, PARCH_100 } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
+import { ConfirmDialog } from './primitives/Dialog.jsx';
 
 const MapOverlay     = lazy(() => import('./MapOverlay.jsx'));
 const PlacementDetailCard = lazy(() => import('./map/PlacementDetailCard.jsx'));
 const AnnotateToolbar = lazy(() => import('./map/AnnotateToolbar.jsx'));
 const TerrainToolbar  = lazy(() => import('./map/TerrainToolbar.jsx'));
-// P132 / M-4 promote — Routes mode contextual toolbar. Lazy because
+// P132 / M-4 promote - Routes mode contextual toolbar. Lazy because
 // terrain/annotate users never need it.
 const RoutesToolbar   = lazy(() => import('./map/RoutesToolbar.jsx'));
-// P136 / M-5 — "Saved 2 min ago" pill. Self-gated by flag +
+// P136 / M-5 - "Saved 2 min ago" pill. Self-gated by flag +
 // activeCampaign; lazy because it touches a date-formatting tick.
 const AutoSaveChip    = lazy(() => import('./map/AutoSaveChip.jsx'));
-// P136 / M-6 — Hover-peek for placed settlements. Self-gated by flag
+// P136 / M-6 - Hover-peek for placed settlements. Self-gated by flag
 // and hoveredSettlementId presence.
 const QuickInspector  = lazy(() => import('./map/QuickInspector.jsx'));
 const LayersPanel     = lazy(() => import('./map/LayersPanel.jsx'));
 const SettlementPalette = lazy(() => import('./map/SettlementPalette.jsx'));
 const WizardNewsPanel = lazy(() => import('./map/WizardNewsPanel.jsx'));
 const WorldPulsePanel = lazy(() => import('./map/WorldPulsePanel.jsx'));
+const SimulationRulesDialog = lazy(() => import('./map/SimulationRulesDialog.jsx'));
 
 // Cachebuster bumped whenever public/map/* changes so browsers don't serve
 // a stale iframe bundle (e.g. old drop handler missing the settlementforge
@@ -63,6 +65,8 @@ export default function WorldMap({ onNavigate } = {}) {
   const [campaignWorkspace, setCampaignWorkspace] = useState('map');
   const [worldPulseInterval, setWorldPulseInterval] = useState('one_month');
   const [worldPulseBusy, setWorldPulseBusy] = useState(false);
+  const [showSimulationRules, setShowSimulationRules] = useState(false);
+  const [regenerateConfirm, setRegenerateConfirm] = useState(null);
 
   // ── Store selectors ───────────────────────────────────────────────────
   const mapMode       = useStore(s => s.mapMode);
@@ -255,7 +259,7 @@ export default function WorldMap({ onNavigate } = {}) {
       console.warn('[WorldMap] place failed', err);
       // showToast is a store-action setter; called from an async drop
       // handler (not during render). The immutability rule is over-broad
-      // here — the function is defined during render but only invoked
+      // here - the function is defined during render but only invoked
       // by user actions.
       // eslint-disable-next-line react-hooks/immutability
       showToast('error', `Place failed: ${err.message || err}`);
@@ -280,17 +284,17 @@ export default function WorldMap({ onNavigate } = {}) {
     setActiveCampaign(id);
     const ms = getCampaignMapState(id);
     if (!ms) {
-      // Fresh campaign, no map yet — wipe current placements only
+      // Fresh campaign, no map yet - wipe current placements only
       resetMapState();
       if (bridge?.isReady) {
         try { await bridge.clearAllPlacements(); } catch (e) {}
       }
       bumpGeometryVersion();
-      showToast('info', 'New campaign — drag settlements onto the map');
+      showToast('info', 'New campaign - drag settlements onto the map');
       return;
     }
 
-    // Replace map slice with the saved state (labels, markers, forests, layers…)
+    // Replace map slice with the saved state (labels, markers, forests, layers...)
     replaceMapState(ms);
 
     // Load the FMG snapshot if present; otherwise fall back to restorePlacements.
@@ -298,7 +302,7 @@ export default function WorldMap({ onNavigate } = {}) {
       try {
         if (ms.fmgSnapshot) {
           await bridge.loadSnapshot(ms.fmgSnapshot);
-          // Re-apply the v2 placements (settlementId mapping — FMG doesn't
+          // Re-apply the v2 placements (settlementId mapping - FMG doesn't
           // know about settlementId, so we need to re-restore)
           const arr = legacyPlacementsArray(ms);
           if (arr.length) await bridge.restorePlacements(arr);
@@ -325,7 +329,7 @@ export default function WorldMap({ onNavigate } = {}) {
         // Geography just changed under React's feet. Roads/relationship/chain
         // layers cache A*-routed polylines and burg-coordinate lookups; their
         // useMemo/useEffect deps watch `placements`, but placements may be
-        // identical to before the load — only the underlying world differs.
+        // identical to before the load - only the underlying world differs.
         // Bumping the version forces a fresh route compute against the new
         // geometry without making the user nudge a settlement to do it.
         bumpGeometryVersion();
@@ -345,7 +349,7 @@ export default function WorldMap({ onNavigate } = {}) {
       return;
     }
     try {
-      showToast('info', 'Capturing map snapshot…');
+      showToast('info', 'Capturing map snapshot...');
       const reply = await bridge.saveSnapshot();
       const snapshot = reply?.snapshot;
       if (!snapshot) throw new Error('empty snapshot');
@@ -374,7 +378,11 @@ export default function WorldMap({ onNavigate } = {}) {
     try {
       const result = await advanceCampaignWorld(activeCampaignId, worldPulseInterval);
       setCampaignWorkspace('pulse');
-      if (result) {
+      if (result?.reason === 'world_not_canonized') {
+        showToast('error', 'Canonize the campaign world before advancing the realm');
+      } else if (result?.ok === false) {
+        showToast('error', result.reason || 'Realm advancement failed');
+      } else if (result) {
         showToast('success', `Realm advanced: ${result.autoApplied.length} drift, ${result.proposals.length} proposal(s)`);
       } else {
         showToast('error', 'Realm advancement failed');
@@ -400,7 +408,7 @@ export default function WorldMap({ onNavigate } = {}) {
   }, []);
 
   // ── Regenerate map (new world) ────────────────────────────────────────
-  // P112 / M-7 — When `mapAutosave` flag is on (a stand-in for the
+  // P112 / M-7 - When `mapAutosave` flag is on (a stand-in for the
   // safer-regenerate behavior since both ride the same campaign-active
   // signal), the regenerate confirm shows the explicit count of items
   // that will be lost. Falls back to the legacy single-line confirm
@@ -418,9 +426,15 @@ export default function WorldMap({ onNavigate } = {}) {
               '. This cannot be undone.';
       }
     }
-    if (!window.confirm(msg)) return;
+    setRegenerateConfirm(msg);
+  }, []);
+
+  const performRegenerate = useCallback(async () => {
+    const bridge = bridgeRef.current;
+    if (!bridge?.isReady) return;
+    setRegenerateConfirm(null);
     try {
-      showToast('info', 'Regenerating…');
+      showToast('info', 'Regenerating...');
       await bridge.resetMap();
       resetMapState();
       bumpGeometryVersion();
@@ -437,7 +451,7 @@ export default function WorldMap({ onNavigate } = {}) {
     try { await bridge.fitMap(); } catch (e) {}
   }, []);
 
-  // ── P112 / M-8 — Worldbuilder keymap ──────────────────────────────────
+  // ── P112 / M-8 - Worldbuilder keymap ──────────────────────────────────
   // P (place) / T (terrain) / A (annotate) / R (routes) switch modes;
   // L toggles the layers panel; F fits the map; ⌘S saves; ⌘Z opens
   // the (future) undo stack.
@@ -450,7 +464,7 @@ export default function WorldMap({ onNavigate } = {}) {
         // ⌘S = save, ⌘Z handled by store actions (if registered)
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') {
           e.preventDefault();
-          // ⌘S — save map. The actual save handler lives elsewhere in
+          // ⌘S - save map. The actual save handler lives elsewhere in
           // this component (handleSaveMapToCampaign); we look it up
           // from the store as a fallback when the local closure
           // doesn't have it in scope.
@@ -551,7 +565,7 @@ export default function WorldMap({ onNavigate } = {}) {
                 cursor: 'pointer', minWidth: 180,
               }}
             >
-              <option value="">— No campaign —</option>
+              <option value="">- No campaign -</option>
               {campaigns.map(c => (
                 <option key={c.id} value={c.id}>
                   {c.name}{c.mapState ? ' ●' : ''}
@@ -588,6 +602,14 @@ export default function WorldMap({ onNavigate } = {}) {
                   aria-pressed={campaignWorkspace === 'pulse'}
                 >
                   <Zap size={13} /> Pulse
+                </IconButton>
+                <IconButton
+                  onClick={() => setShowSimulationRules(true)}
+                  title="Simulation rules"
+                  active={showSimulationRules}
+                  aria-pressed={showSimulationRules}
+                >
+                  <SlidersHorizontal size={13} /> Rules
                 </IconButton>
                 <IconButton
                   onClick={() => setCampaignWorkspace('news')}
@@ -637,7 +659,7 @@ export default function WorldMap({ onNavigate } = {}) {
             >
               <Layers size={13} /> Layers
             </IconButton>
-            {/* Canon-only toggle — defaults ON when a campaign is active. */}
+            {/* Canon-only toggle - defaults ON when a campaign is active. */}
             <IconButton
               onClick={() => setCanonOnlyFilter(v => !v)}
               title={canonOnlyFilter
@@ -686,7 +708,7 @@ export default function WorldMap({ onNavigate } = {}) {
         {/* Status line */}
         {!showingCampaignPanel && mapLoading && (
           <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: MUTED, fontSize: FS.xs }}>
-            <Loader size={12} className="sf-spin" /> Loading…
+            <Loader size={12} className="sf-spin" /> Loading...
           </span>
         )}
         {!showingCampaignPanel && mapError && (
@@ -710,25 +732,25 @@ export default function WorldMap({ onNavigate } = {}) {
       {/* ── Main body: sidebar + map ─────────────────────────────────── */}
       {showingWizardNews ? (
         <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
-          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
+          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading...</div>}>
             <WizardNewsPanel campaign={activeCampaign} />
           </Suspense>
         </div>
       ) : showingWorldPulse ? (
         <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
-          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
+          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading...</div>}>
             <WorldPulsePanel campaign={activeCampaign} />
           </Suspense>
         </div>
       ) : (
       <div style={{ display: 'flex', gap: SP.sm, flex: 1, minHeight: 0 }}>
-        {/* Settlement palette — left sidebar */}
+        {/* Settlement palette - left sidebar */}
         <div style={{
           width: 240, minHeight: 0, display: 'flex', flexDirection: 'column',
           background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
           overflow: 'hidden',
         }}>
-          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
+          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading...</div>}>
             <SettlementPalette
               saves={activeSaves}
               placements={placements}
@@ -772,7 +794,7 @@ export default function WorldMap({ onNavigate } = {}) {
                   constructed once during the bridge-init effect and never
                   reassigned for the lifetime of this WorldMap instance.
                   Fix-it-properly path: lift bridge into useState alongside
-                  bridgeReady, so the prop is state-driven. Deferred — bridge
+                  bridgeReady, so the prop is state-driven. Deferred - bridge
                   is non-serializable and state-storing it triggers some Zustand
                   immer warnings we'd need to silence. */}
               {/* eslint-disable-next-line react-hooks/refs */}
@@ -784,13 +806,13 @@ export default function WorldMap({ onNavigate } = {}) {
               onOpenDetail={(_settlementId) => {
                 // SettlementsPanel reads `selectedSettlementId` from the store
                 // on mount and opens the matching save in detail view. So we
-                // just need to navigate — the id is already in the store from
+                // just need to navigate - the id is already in the store from
                 // the map click that opened this card.
                 if (typeof onNavigate === 'function') onNavigate('settlements');
               }}
             />
           </Suspense>
-          {/* P136 / M-6 — Hover peek. Self-gated; renders nothing
+          {/* P136 / M-6 - Hover peek. Self-gated; renders nothing
               when no hover-id is set or when click-selection wins. */}
           <Suspense fallback={null}>
             <QuickInspector />
@@ -804,7 +826,7 @@ export default function WorldMap({ onNavigate } = {}) {
             }}>
               <Loader size={32} color={GOLD} className="sf-spin" />
               <div style={{ fontSize: FS.md, fontWeight: 700, color: SECOND }}>
-                Summoning the world…
+                Summoning the world...
               </div>
             </div>
           )}
@@ -815,11 +837,11 @@ export default function WorldMap({ onNavigate } = {}) {
                 borderRadius: R.lg, background: 'rgba(160,118,42,0.06)',
                 pointerEvents: 'none',
               }} />
-              {/* P111 / M-3 — Drop preview tooltip. Shows during drag with
+              {/* P111 / M-3 - Drop preview tooltip. Shows during drag with
                   the data the user needs to decide if this is a sensible
                   placement: terrain hint + trade-route candidacy +
                   proximity to existing placements. We render a static
-                  hint card (top-right) under the flag — a future
+                  hint card (top-right) under the flag - a future
                   iteration can hover-follow the cursor with live FMG
                   cell data. */}
               {flag('mapDropPreview') && (
@@ -853,7 +875,7 @@ export default function WorldMap({ onNavigate } = {}) {
           )}
         </div>
 
-        {/* Layers panel — right sidebar (toggleable) */}
+        {/* Layers panel - right sidebar (toggleable) */}
         {showLayersPanel && (
           <Suspense fallback={null}>
             <LayersPanel onClose={() => setShowLayersPanel(false)} />
@@ -876,6 +898,24 @@ export default function WorldMap({ onNavigate } = {}) {
         </div>
       )}
 
+      <ConfirmDialog
+        open={!!regenerateConfirm}
+        tone="warning"
+        title="Regenerate world?"
+        body={regenerateConfirm || ''}
+        confirmLabel="Regenerate"
+        onConfirm={performRegenerate}
+        onCancel={() => setRegenerateConfirm(null)}
+      />
+
+      <Suspense fallback={null}>
+        <SimulationRulesDialog
+          open={showSimulationRules}
+          campaign={activeCampaign}
+          onClose={() => setShowSimulationRules(false)}
+        />
+      </Suspense>
+
       {/* Spinner animation */}
       <style>{`
         .sf-spin { animation: sf-spin 1.2s linear infinite; }
@@ -888,7 +928,7 @@ export default function WorldMap({ onNavigate } = {}) {
 // ── Subcomponents ────────────────────────────────────────────────────────
 
 function ModeSwitch({ mapMode, setMapMode }) {
-  // P110 / M-4 — Routes mode appended to the mode pill group. The
+  // P110 / M-4 - Routes mode appended to the mode pill group. The
   // existing mode pill is already segmented; this is one more entry.
   // Click promotes relationship/road/supply-chain layers to primary
   // content and fires MAP_ROUTES_MODE_ENTERED analytics.

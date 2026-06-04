@@ -1,5 +1,5 @@
 /**
- * Successor inference tests — when a pillar NPC dies, the engine should
+ * Successor inference tests - when a pillar NPC dies, the engine should
  * suggest reasonable replacements ranked by institutional/factional
  * overlap and importance tier.
  */
@@ -33,13 +33,13 @@ const settlementFixture = () => ({
       linkedInstitutionIds: ['inst.smithy'], linkedFactionIds: ['faction.guild'],
       influence: 40,
     }),
-    // Dead NPC — should be filtered out
+    // Dead NPC - should be filtered out
     createNpc({
       id: 'npc.deadOne', name: 'Old Priest Elias', importance: 'key',
       linkedInstitutionIds: ['inst.temple'], linkedFactionIds: ['faction.clergy'],
       status: 'dead',
     }),
-    // The one we're killing — should not appear in own successor list
+    // The one we're killing - should not appear in own successor list
   ],
 });
 
@@ -50,7 +50,7 @@ describe('inferSuccessors', () => {
     const successors = inferSuccessors({ outgoing, settlement });
 
     expect(successors.length).toBeGreaterThan(0);
-    // Deputy should be #1 — same temple AND same faction AND key tier
+    // Deputy should be #1 - same temple AND same faction AND key tier
     expect(successors[0].id).toBe('npc.deputy');
   });
 

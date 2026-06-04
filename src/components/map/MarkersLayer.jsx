@@ -1,5 +1,5 @@
 /**
- * MarkersLayer — user-placed pin/star/skull/flag markers with optional
+ * MarkersLayer - user-placed pin/star/skull/flag markers with optional
  * title and note. Drag to move (annotate/select), double-click to edit.
  */
 
@@ -7,18 +7,18 @@ import { useRef } from 'react';
 import { useStore } from '../../store';
 import { MAP_MODES, ANNOTATE_TOOLS } from '../../store/mapSlice.js';
 
-export default function MarkersLayer() {
+export default function MarkersLayer({ onEditMarker = null }) {
   const markers = useStore(s => s.mapState.markers);
   if (!markers?.length) return null;
 
   return (
     <g className="sf-markers-layer">
-      {markers.map(m => <Marker key={m.id} marker={m} />)}
+      {markers.map(m => <Marker key={m.id} marker={m} onEditMarker={onEditMarker} />)}
     </g>
   );
 }
 
-function Marker({ marker }) {
+function Marker({ marker, onEditMarker }) {
   const mapMode      = useStore(s => s.mapMode);
   const annotateTool = useStore(s => s.annotateTool);
   const selectedId   = useStore(s => s.selectedAnnotationId);
@@ -71,10 +71,7 @@ function Marker({ marker }) {
   function handleDoubleClick(e) {
     if (!isEditable) return;
     e.stopPropagation();
-    const nextTitle = window.prompt('Marker title:', marker.title || '');
-    if (nextTitle != null && nextTitle !== marker.title) {
-      updateMarker(marker.id, { title: nextTitle });
-    }
+    if (onEditMarker) onEditMarker(marker);
   }
 
   const iconKind = marker.icon || 'pin';

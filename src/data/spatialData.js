@@ -1,4 +1,4 @@
-// spatialData.js — extracted from bundle
+// spatialData.js - extracted from bundle
 
 export const INSTITUTION_SPATIAL = [
   {
@@ -15,12 +15,12 @@ export const INSTITUTION_SPATIAL = [
   {
     institution: "Docks/port facilities",
     requiredAccess: ["port", "river"],
-    reason: "Dock facilities require navigable water — ocean coast or navigable river."
+    reason: "Dock facilities require navigable water - ocean coast or navigable river."
   },
   {
     institution: "Fishmonger",
     requiredAccess: ["port", "river", "crossroads", "road"],
-    reason: "A fishmonger requires access to fresh fish — coastal, river, or trade route supply."
+    reason: "A fishmonger requires access to fresh fish - coastal, river, or trade route supply."
   }
 ];
 
@@ -28,7 +28,7 @@ export const GATE_FEATURES = {
   "Gates (if walled)": {
     suggestionOnly: true,
     requires: ["Town walls", "City walls and gates", "Massive walls and fortifications"],
-    reason: "Gates are entry points in walls — walls must exist first."
+    reason: "Gates are entry points in walls - walls must exist first."
   },
   Citadel: {
     requires: ["City walls and gates", "Massive walls and fortifications"],
@@ -46,7 +46,7 @@ export const GATE_FEATURES = {
     requires: ["Docks/port facilities"],
     requiresAccess: ["port"],
     reason: "Naval forces require port infrastructure. A river militia is not a navy.",
-    accessViolationReason: "A navy requires coastal or ocean access. This settlement is landlocked — SEVERITY can have river patrols but not a navy."
+    accessViolationReason: "A navy requires coastal or ocean access. This settlement is landlocked - SEVERITY can have river patrols but not a navy."
   },
   "Multiple garrisons": {
     minTier: "city",
@@ -136,7 +136,7 @@ export const GATE_FEATURES = {
   "International trade center": {
     minTier: "metropolis",
     requires: ["Warehouse district", "Banking houses", "Multiple warehouse districts"],
-    reason: "Global trade requires major trade infrastructure — port access or substantial overland networksstructure with banking."
+    reason: "Global trade requires major trade infrastructure - port access or substantial overland networksstructure with banking."
   },
   "Stock exchange (early)": {
     minTier: "metropolis",
@@ -145,14 +145,14 @@ export const GATE_FEATURES = {
   },
   "Docks/port facilities": {
     requiresAccess: ["port", "river"],
-    reason: "Docking facilities require waterfront access — ocean port or navigable river.",
+    reason: "Docking facilities require waterfront access - ocean port or navigable river.",
     accessViolationReason: "Docks require water access. This settlement has no river or coastal access."
   },
   "Major port": {
     requiresAccess: ["port"],
     requires: ["Docks/port facilities"],
     reason: "A major port requires both ocean access and existing dock infrastructure.",
-    accessViolationReason: "A major port requires coastal ocean access. River docks serve river trade only — they cannot become a major port."
+    accessViolationReason: "A major port requires coastal ocean access. River docks serve river trade only - they cannot become a major port."
   },
   "Money changers": {
     minTier: "town",
@@ -322,7 +322,7 @@ export const GATE_FEATURES = {
   Mill: {
     minTier: "village",
     requires: ["Farmland", "Subsistence farming", "Market square", "Weekly market"],
-    reason: "A miller needs grain — either from local farmland or via market access."
+    reason: "A miller needs grain - either from local farmland or via market access."
   },
   "Mills (2-5)": {
     minTier: "town",
@@ -344,7 +344,7 @@ export const GATE_FEATURES = {
       "Subsistence farming",
       "Common grazing land"
     ],
-    reason: "A sawmill needs timber access — local forest, a market, or an agricultural economy to source bulk timber commercially."
+    reason: "A sawmill needs timber access - local forest, a market, or an agricultural economy to source bulk timber commercially."
   },
   Theaters: {
     minTier: "city",
@@ -582,7 +582,7 @@ export const GATE_FEATURES = {
     minTier: "metropolis",
     suggestionOnly: true,
     requires: ["Planar embassy", "International trade center"],
-    reason: "Planar traders without a formal embassy or trade center — extraplanar commerce is possible but operates outside official channels."
+    reason: "Planar traders without a formal embassy or trade center - extraplanar commerce is possible but operates outside official channels."
   },
   "Dragon resident": {
     minTier: "metropolis",
@@ -591,7 +591,7 @@ export const GATE_FEATURES = {
 };
 
 
-// GOVERNMENT_INSTITUTIONS — valid government institutions by settlement type
+// GOVERNMENT_INSTITUTIONS - valid government institutions by settlement type
 export const GOVERNMENT_INSTITUTIONS = {
   government: [
     "Head-of-household consensus",

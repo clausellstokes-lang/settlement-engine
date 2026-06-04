@@ -1,5 +1,5 @@
 /**
- * format — small string/number formatters used across PDF sections.
+ * format - small string/number formatters used across PDF sections.
  *
  * Centralised so floats don't show up as "37.80241935483871" anywhere.
  */
@@ -10,24 +10,24 @@ export function cap(s) {
 }
 
 export function num(n, dec = 0) {
-  if (n == null || Number.isNaN(n) || n === '') return '—';
+  if (n == null || Number.isNaN(n) || n === '') return '-';
   if (typeof n !== 'number') return String(n);
   if (dec === 0) return String(Math.round(n));
   return Number(n.toFixed(dec)).toString();
 }
 
 export function pct(n, dec = 0) {
-  if (n == null || Number.isNaN(n)) return '—';
+  if (n == null || Number.isNaN(n)) return '-';
   if (typeof n !== 'number') return String(n);
   return `${num(n, dec)}%`;
 }
 
 /**
  * Format a float that might appear in raw engine output (e.g. food balance,
- * safety ratio). Caps to 2 decimals, drops trailing zeros, returns '—' if null.
+ * safety ratio). Caps to 2 decimals, drops trailing zeros, returns '-' if null.
  */
 export function smart(n) {
-  if (n == null || Number.isNaN(n) || n === '') return '—';
+  if (n == null || Number.isNaN(n) || n === '') return '-';
   if (typeof n !== 'number') return String(n);
   if (Number.isInteger(n)) return String(n);
   if (Math.abs(n) >= 100) return String(Math.round(n));
@@ -41,7 +41,7 @@ export function plural(n, sing, plur) {
 }
 
 /**
- * label — extract a human-readable label from a possibly-object value.
+ * label - extract a human-readable label from a possibly-object value.
  * Engine items are often `{ name, label, type, ... }`. Snake-case keys are
  * humanised (e.g. `iron_ore` → `Iron Ore`) so they read naturally on the page.
  */
@@ -54,7 +54,7 @@ export function label(item) {
 }
 
 /**
- * humanize — turn `snake_case`, `kebab-case`, or `camelCase` keys into Title Case.
+ * humanize - turn `snake_case`, `kebab-case`, or `camelCase` keys into Title Case.
  * Strings already containing spaces are returned as-is (with light casing).
  *
  * Idempotent: strips any ZWNJ from prior `noLig()` calls before processing,
@@ -81,7 +81,7 @@ export function humanize(s) {
 }
 
 /**
- * hookText — extract the text of a plot hook regardless of shape. The engine
+ * hookText - extract the text of a plot hook regardless of shape. The engine
  * emits hooks under many keys depending on which subsystem produced them
  * (NPC, conflict, viability, history, neighbour). Walk the common ones.
  */
@@ -105,7 +105,7 @@ export function hookText(h) {
 }
 
 /**
- * sentence — capitalize first letter and ensure ends with punctuation.
+ * sentence - capitalize first letter and ensure ends with punctuation.
  */
 export function sentence(s) {
   if (!s || typeof s !== 'string') return s || '';
@@ -117,17 +117,17 @@ export function sentence(s) {
 }
 
 /**
- * truncate — cap a string at maxLen, append ellipsis. Used for compact cards.
+ * truncate - cap a string at maxLen, append ellipsis. Used for compact cards.
  */
 export function truncate(s, maxLen) {
   if (!s || typeof s !== 'string') return s || '';
   if (s.length <= maxLen) return s;
-  return s.slice(0, maxLen).trimEnd() + '…';
+  return s.slice(0, maxLen).trimEnd() + '...';
 }
 
 /**
- * finite — coerce a value to a finite number or fall back to a default. Use
- * before any arithmetic that feeds into a width/position style — `??` doesn't
+ * finite - coerce a value to a finite number or fall back to a default. Use
+ * before any arithmetic that feeds into a width/position style - `??` doesn't
  * catch NaN (`NaN ?? 0` is NaN), and `||` collapses 0 to the default. Both are
  * wrong for percentage math.
  */
@@ -140,7 +140,7 @@ export function finite(n, fallback = 0) {
 }
 
 /**
- * safePct — always returns a finite number in [0, 100]. Use anywhere a
+ * safePct - always returns a finite number in [0, 100]. Use anywhere a
  * `${x}%` style string is built. NaN, Infinity, null, undefined → 0.
  */
 export function safePct(n) {
@@ -151,7 +151,7 @@ export function safePct(n) {
 }
 
 /**
- * noLig — defuse OpenType ligature substitutions that the bundled Lora fontkit
+ * noLig - defuse OpenType ligature substitutions that the bundled Lora fontkit
  * subset renders incorrectly (notably `fi`/`fl`/`ffi`/`ffl`, where the ligated
  * glyph drops the dotted-i and looks like the user typed `f` instead of `fi`).
  *
@@ -173,7 +173,7 @@ export function noLig(s) {
 }
 
 /**
- * safe — `noLig` + null guard. Use for any string about to hit the renderer.
+ * safe - `noLig` + null guard. Use for any string about to hit the renderer.
  */
 export function safe(s) {
   if (s == null) return '';
@@ -181,7 +181,7 @@ export function safe(s) {
 }
 
 /**
- * stripZwnj — remove the zero-width non-joiners noLig inserts. ZWNJ persists
+ * stripZwnj - remove the zero-width non-joiners noLig inserts. ZWNJ persists
  * through `.toUpperCase()` / `textTransform: 'uppercase'` and creates a
  * line-break opportunity inside the word in some PDF readers (so "Conflict"
  * → "Conf‌lict" → uppercased to "CONF‌LICT" → renders as "CONF LICT").
@@ -196,7 +196,7 @@ export function stripZwnj(s) {
 }
 
 /**
- * upper — uppercase a string with ZWNJ stripped. Use anywhere code calls
+ * upper - uppercase a string with ZWNJ stripped. Use anywhere code calls
  * `.toUpperCase()` directly (rather than relying on CSS textTransform).
  */
 export function upper(s) {

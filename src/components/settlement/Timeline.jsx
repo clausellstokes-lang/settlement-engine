@@ -1,5 +1,5 @@
 /**
- * Timeline — Event log view for canon-mode settlements.
+ * Timeline - Event log view for canon-mode settlements.
  *
  * Renders eventLog as a vertical list, newest first. Each entry shows
  * the narrative summary, the deltas, the faction responses, and an
@@ -81,7 +81,7 @@ function Entry({ entry, isLatest, onUndo }) {
         {isLatest && (
           <button
             onClick={onUndo}
-            title="Undo this event — restores prior state"
+            title="Undo this event - restores prior state"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 3,
               padding: '2px 6px',

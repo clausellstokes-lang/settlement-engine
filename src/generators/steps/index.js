@@ -1,5 +1,5 @@
 /**
- * steps/index.js — Registers all pipeline steps in dependency order.
+ * steps/index.js - Registers all pipeline steps in dependency order.
  *
  * Import this file once at app startup to populate the pipeline registry.
  * Each step module calls registerStep() as a side effect on import.

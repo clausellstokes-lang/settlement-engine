@@ -1,5 +1,6 @@
 import { stablePart } from './worldState.js';
 import { activeChannelsFrom, REGIONAL_CHANNEL_TYPES } from '../region/index.js';
+import { normalizeSimulationRules } from './simulationRules.js';
 
 // The stressor catalog was authored with a looser channel vocabulary than the
 // canonical regional taxonomy (region/graph.js). Map the divergent names onto
@@ -157,6 +158,15 @@ export const STRESSOR_CATALOG = Object.freeze({
     spreadChannels: ['labor_dependency', 'criminal_corridor', 'information_network'],
     residualEffects: ['manumission_pressure', 'reprisal_fear', 'labor_reordering'],
     affectedSystems: ['labor_capacity', 'public_legitimacy', 'defense_readiness'],
+  },
+  rebellion: {
+    label: 'Rebellion pressure',
+    durationPolicy: 'episodic',
+    pressureKinds: ['legitimacy', 'conflict'],
+    birthThreshold: 0.7,
+    spreadChannels: ['information_flow', 'political_authority', 'criminal_corridor'],
+    residualEffects: ['reprisal_memory', 'autonomy_cells', 'broken_tax_obligations'],
+    affectedSystems: ['public_legitimacy', 'faction_stability', 'defense_readiness'],
   },
   wartime: {
     label: 'Wartime footing',
@@ -372,7 +382,7 @@ export function ageRoamingStressors(stressors = [], snapshot, rng, options = {})
 
 /**
  * Resolve a single stressor by id (e.g. the party broke the siege). Unlike
- * ageRoamingStressors this is a *directed* resolution — no roll — used by the
+ * ageRoamingStressors this is a *directed* resolution - no roll - used by the
  * party-impact hook. Returns the remaining stressors plus the resolved record
  * and its residual-aftereffect outcomes (so the consequences still linger).
  *
@@ -405,7 +415,7 @@ export function resolveStressorById(stressors = [], stressorId, opts = {}) {
 }
 
 /**
- * Nudge a stressor's severity (the party eased — or worsened — a crisis
+ * Nudge a stressor's severity (the party eased - or worsened - a crisis
  * without fully ending it). Returns the updated stressor list and the changed
  * record (or null when the id wasn't found).
  *
@@ -496,7 +506,7 @@ function spreadTargetsFor(snapshot, stressor) {
   const types = [...new Set((stressor.spreadChannels || []).map(canonicalSpreadChannel).filter(Boolean))];
   if (!types.length) return [];
   const targets = [];
-  // Confirmed, directed channels only — suggested channels never propagate
+  // Confirmed, directed channels only - suggested channels never propagate
   // (design principle). A crisis flows outward from each affected settlement
   // along its outgoing channels of a matching type.
   for (const sourceId of affected) {
@@ -511,6 +521,7 @@ function spreadTargetsFor(snapshot, stressor) {
 export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const pressures = context.pressures || [];
+  const rules = normalizeSimulationRules(context.simulationRules || snapshot?.worldState?.simulationRules);
   const currentStressors = (snapshot?.worldState?.stressors || []).map(normalizeStressor);
   const existingKeys = existingStressorKeys(currentStressors);
   const candidates = [];
@@ -558,7 +569,7 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
       });
     }
 
-    if (stressor.severity > 0.42) {
+    if (stressor.severity > 0.42 && !['off', 'local'].includes(rules.propagationMode)) {
       for (const targetSaveId of spreadTargetsFor(snapshot, stressor).slice(0, 3)) {
         const targetKey = `${stressor.type}:${targetSaveId}`;
         if (existingKeys.has(targetKey)) continue;

@@ -1,5 +1,5 @@
 /**
- * debounce.js — Utility for debouncing function calls.
+ * debounce.js - Utility for debouncing function calls.
  */
 
 /**

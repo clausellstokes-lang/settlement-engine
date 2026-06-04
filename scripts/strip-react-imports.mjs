@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * scripts/strip-react-imports.mjs — one-shot lint cleanup (Tier 9.4).
+ * scripts/strip-react-imports.mjs - one-shot lint cleanup (Tier 9.4).
  *
  * Vite + React 19's automatic JSX runtime means a bare
  *   import React from 'react';
@@ -15,7 +15,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 
-// Collect target files from eslint output rather than a static list — that way
+// Collect target files from eslint output rather than a static list - that way
 // the script never strips an import that's actually being used (eslint only
 // flags genuinely-unused imports).
 const eslintOut = execSync('npx eslint . --format=json', { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
@@ -50,7 +50,7 @@ for (const file of targets) {
     (_m, names) => `import {${names}} from 'react';`,
   );
 
-  // Pattern B: `import React from 'react';` — delete the whole line
+  // Pattern B: `import React from 'react';` - delete the whole line
   src = src.replace(/^import\s+React\s+from\s+['"]react['"]\s*;?\s*\r?\n/m, '');
 
   if (src === before) {
@@ -59,7 +59,7 @@ for (const file of targets) {
   }
 
   if (/^import\s+React[\s,]/m.test(src)) {
-    // Our regex missed something — bail to avoid silent corruption.
+    // Our regex missed something - bail to avoid silent corruption.
     skipped.push(`${file}: pattern unmatched (still has 'import React')`);
     continue;
   }

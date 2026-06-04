@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 /**
- * compendiumGlobalSearch.test.jsx — contract over P139 / CP-4 UI.
+ * compendiumGlobalSearch.test.jsx - contract over P139 / CP-4 UI.
  *
  * Pins:
  *   • Renders the search box.

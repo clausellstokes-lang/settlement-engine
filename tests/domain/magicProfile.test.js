@@ -1,5 +1,5 @@
 /**
- * tests/domain/magicProfile.test.js — Tier 4.8.
+ * tests/domain/magicProfile.test.js - Tier 4.8.
  *
  * Pin facet directions + envelope shape + no-mutation + smoke.
  */
@@ -69,7 +69,7 @@ describe('legality + religious acceptance', () => {
     };
     const m = deriveMagicProfile(s);
     expect(m.religiousAcceptance).toBe('hostile');
-    // legality is "restricted" — religious factor pulled it down one
+    // legality is "restricted" - religious factor pulled it down one
     const bands = magicLegalityBands();
     const baseline = deriveMagicProfile({ config: { magicLevel: 'moderate' } });
     expect(bands.indexOf(m.legality)).toBeLessThan(bands.indexOf(baseline.legality));

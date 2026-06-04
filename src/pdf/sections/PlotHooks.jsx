@@ -1,5 +1,5 @@
 /**
- * PlotHooks — chapter 11. Aggregates every hook the engine has surfaced
+ * PlotHooks - chapter 11. Aggregates every hook the engine has surfaced
  * (NPC personal hooks, conflict hooks, underworld hooks, viability-crisis
  * hooks, tension hooks, relationship hooks, historical-event hooks) into a
  * single ledger grouped by source, with priority dots and category tags.
@@ -126,7 +126,7 @@ export function PlotHooks({ settlement, narrativeMode, vm }) {
 }
 
 /**
- * HookGrid — 2-col layout for a hook source group. Each cell is a
+ * HookGrid - 2-col layout for a hook source group. Each cell is a
  * HookCard. Pairs of cards share a row so the chapter stops being a tall
  * single-column scroll; long source groups now fit inside one page.
  */
@@ -182,7 +182,7 @@ function HookCard({ hook, number }) {
         {String(number).padStart(2, '0')}
       </Text>
       <View style={{ flex: 1 }}>
-        {/* Hook prose — extractable, what the DM reads */}
+        {/* Hook prose - extractable, what the DM reads */}
         <Text style={{ ...type.body, fontSize: pt['9'], color: palette.ink, lineHeight: 1.35 }}>
           {text}
         </Text>

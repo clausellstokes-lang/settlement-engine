@@ -20,7 +20,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
 
   const quarters = [];
 
-  // Market quarter — present if any market institution
+  // Market quarter - present if any market institution
   if (has('Market')) {
     quarters.push({
       name:      'Market Quarter',
@@ -32,7 +32,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     });
   }
 
-  // Religious quarter — present if any church/monastery institution
+  // Religious quarter - present if any church/monastery institution
   if (has('church') || has('Cathedral') || has('monastery')) {
     quarters.push({
       name:      'Religious Quarter',
@@ -52,7 +52,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     });
   }
 
-  // Noxious trades — tanneries, butchers, slaughterhouses go downwind
+  // Noxious trades - tanneries, butchers, slaughterhouses go downwind
   if (has('Tanner') || has('Butcher') || has('Slaughter')) {
     quarters.push({
       name:      'Noxious Trades Quarter',
@@ -72,12 +72,12 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     });
   }
 
-  // Hamlet alehouse / gathering place — present if alehouse institution
+  // Hamlet alehouse / gathering place - present if alehouse institution
   if (tier === 'hamlet' && (has('Alehouse') || has('alehouse') || has('Wayside inn'))) {
     quarters.push({
       name:      'Alehouse & Common',
       location:  'Village centre',
-      desc:      'The alehouse and a scrap of common ground — the social heart of the settlement',
+      desc:      'The alehouse and a scrap of common ground - the social heart of the settlement',
       landmarks: ['Common well', 'Alehouse', 'Notice post'],
     });
   }
@@ -102,7 +102,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     });
   }
 
-  // Artisan quarter — craft guilds (excluding merchant guilds)
+  // Artisan quarter - craft guilds (excluding merchant guilds)
   if (has('craft') || (has('guild') && !has('Merchant'))) {
     quarters.push({
       name:      'Artisan Quarter',
@@ -126,7 +126,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     });
   }
 
-  // Mages' quarter — isolated for safety
+  // Mages' quarter - isolated for safety
   if (has('Wizard') || has('Mage') || has('Magic')) {
     quarters.push({
       name:      "Mages' Quarter",

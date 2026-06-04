@@ -1,5 +1,5 @@
 /**
- * ChainBuilder.jsx — Supply chain builder & editor.
+ * ChainBuilder.jsx - Supply chain builder & editor.
  *
  * STATUS: ACTIVE. Embedded in Workshop.jsx as the "Supply Chain Builder"
  * panel inside the Custom Content (premium) section. Pass the `embedded`
@@ -629,7 +629,7 @@ export default function ChainBuilder({ embedded = false }) {
   const handleDuplicate = (chain) => {
     const copy = {
       ...chain,
-      // Date.now() in a click handler — the rule sees this function defined
+      // Date.now() in a click handler - the rule sees this function defined
       // during render and flags Date.now() as impure. It only runs on user
       // click (outside render), so the rule is over-broad here.
       // eslint-disable-next-line react-hooks/purity
@@ -660,7 +660,7 @@ export default function ChainBuilder({ embedded = false }) {
       display: 'flex', flexDirection: 'column', gap: SP.lg,
       ...(embedded ? {} : { maxWidth: 720, margin: '0 auto', padding: `${SP.lg}px 0` }),
     }}>
-      {/* Header — full gold banner when standalone; slim description row when embedded in a Workshop Panel (which already supplies the title). */}
+      {/* Header - full gold banner when standalone; slim description row when embedded in a Workshop Panel (which already supplies the title). */}
       {embedded ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
           <div style={{ flex: 1, fontSize: FS.xxs, color: MUTED, lineHeight: 1.5 }}>
@@ -800,7 +800,7 @@ export default function ChainBuilder({ embedded = false }) {
           fontSize: FS.xxs, fontWeight: 700, color: SECOND,
           textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.sm,
         }}>
-          Quick Toggle — All Chains
+          Quick Toggle - All Chains
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
           {allChains.map(chain => (

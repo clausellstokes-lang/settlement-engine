@@ -1,5 +1,5 @@
 /**
- * SettlementPalette — left sidebar showing the available settlements that
+ * SettlementPalette - left sidebar showing the available settlements that
  * can be dragged onto the map. Each card is a draggable element with the
  * settlement's id/name/population encoded in its dataTransfer payload.
  *
@@ -14,7 +14,7 @@ import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, san
 export default function SettlementPalette({ saves = [], placements = {}, activeCampaign }) {
   const [query, setQuery] = useState('');
   const setSelectedBurgId = useStore(s => s.setSelectedBurgId);
-  // P136 / M-6 — hover on a palette card sets the QuickInspector
+  // P136 / M-6 - hover on a palette card sets the QuickInspector
   // target so the worldbuilder peeks what they're about to drag.
   const setHover = useStore(s => s.setHoveredSettlementId);
   const clearHover = useStore(s => s.clearHoveredSettlementId);
@@ -58,7 +58,7 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder="Search…"
+            placeholder="Search..."
             style={{
               width: '100%',
               padding: '6px 8px 6px 26px',
@@ -113,7 +113,7 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
   );
 }
 
-// P136 / M-2 — Enriched palette. The card surfaces tier + pop + threat
+// P136 / M-2 - Enriched palette. The card surfaces tier + pop + threat
 // + stress so a worldbuilder choosing where to place a settlement sees
 // the relevant facts without opening the dossier.
 //
@@ -132,10 +132,10 @@ const THREAT_COLOR = {
 function SettlementCard({ save, placed, onHover }) {
   const settlement = save.settlement || {};
   const name = save.name || settlement.name || 'Untitled';
-  const tier = save.tier || settlement.tier || '—';
+  const tier = save.tier || settlement.tier || '-';
   const pop  = settlement.population || 0;
   const threat = settlement.config?.monsterThreat;
-  // Stress can be an array (stressors[]) or a single object — both
+  // Stress can be an array (stressors[]) or a single object - both
   // shapes surface a label.
   const stressLabel = (() => {
     const stressors = settlement.stressors;

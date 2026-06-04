@@ -50,7 +50,7 @@ export function buildRegionalMapOverlay({
   channelTypes = null,
   impactStatuses = ['queued', 'applied', 'resolved'],
   minSeverity = 0,
-} = {}) {
+} = /** @type {{ campaign?: any, placements?: any, includeGm?: boolean, includeHidden?: boolean, channelTypes?: string[]|null, impactStatuses?: string[]|null, minSeverity?: number }} */ ({})) {
   const graph = ensureRegionalGraph(campaign?.regionalGraph);
   const points = pointBySettlement(placements);
   const nodeNames = new Map(graph.nodes.map(node => [String(node.id), node.name]));

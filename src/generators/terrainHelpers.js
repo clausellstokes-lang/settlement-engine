@@ -8,7 +8,7 @@ import {RESOURCE_DATA} from '../data/resourceData.js';
 
 // ─────────────────────────────────────────────────────────
 
-// getTerrainType — map trade route to terrain category
+// getTerrainType - map trade route to terrain category
 // terrainOverride allows explicit desert/mountain/hills selection
 export const getTerrainType = (tradeRoute, terrainOverride = null) => {
   if (terrainOverride && terrainOverride !== 'auto') return terrainOverride;

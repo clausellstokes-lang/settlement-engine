@@ -1,5 +1,5 @@
 /**
- * tests/copy/copy.test.js — Copy module contract tests.
+ * tests/copy/copy.test.js - Copy module contract tests.
  *
  * These are deliberately picky. The copy module is one of the few
  * places where a silent failure (missing key, broken interpolation)
@@ -21,12 +21,12 @@ describe('t()', () => {
   });
 
   it('interpolates {var} placeholders', () => {
-    expect(t('ai.narrative.button', { cost: 3 })).toBe('Generate narrative — 3 credits');
+    expect(t('ai.narrative.button', { cost: 3 })).toBe('Generate narrative - 3 credits');
   });
 
   it('leaves unknown placeholders as literal {name} (loud, not silent)', () => {
-    // "Generate narrative — {cost} credits" with no vars provided.
-    expect(t('ai.narrative.button')).toBe('Generate narrative — {cost} credits');
+    // "Generate narrative - {cost} credits" with no vars provided.
+    expect(t('ai.narrative.button')).toBe('Generate narrative - {cost} credits');
   });
 
   it('returns the key string when missing (prod-safe fallback)', () => {
@@ -114,9 +114,9 @@ describe('en map shape (drift guards)', () => {
   });
 });
 
-// ── Tier 7.12 + 7.13 — Anti-AI positioning ─────────────────────────────────
+// ── Tier 7.12 + 7.13 - Anti-AI positioning ─────────────────────────────────
 // The product positioning is "Simulated, not AI-generated." Any drift back
-// toward AI framing on the settlement itself would break the funnel — these
+// toward AI framing on the settlement itself would break the funnel - these
 // tests catch it before it ships.
 describe('anti-AI positioning (Tier 7.12 + 7.13)', () => {
   it('exposes hero.antiAi positioning line', () => {
@@ -172,7 +172,7 @@ describe('anti-AI positioning (Tier 7.12 + 7.13)', () => {
   });
 });
 
-// ── Tier 7.14 — Copy-module migration completeness ─────────────────────────
+// ── Tier 7.14 - Copy-module migration completeness ─────────────────────────
 // New namespaces added when components were migrated off inline literals.
 // Each test pins a representative key per namespace so future component
 // edits can't silently rip out the t() call without the test catching it.

@@ -1,5 +1,5 @@
 /**
- * CascadePreviewPanel.jsx — P105 / E-2 side-panel cascade preview.
+ * CascadePreviewPanel.jsx - P105 / E-2 side-panel cascade preview.
  *
  * Opens when the user clicks "Preview cascade" in PendingChangesBar.
  * Reads the live settlement + pending queue, calls
@@ -57,7 +57,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
   const savedSettlements = useStore(s => s.savedSettlements || []);
 
   // Re-derive the preview whenever the queue or settlement changes. Pure
-  // function — no side effects, safe to call on every render.
+  // function - no side effects, safe to call on every render.
   const preview = useMemo(
     () => previewCascade(settlement, queue),
     [settlement, queue],
@@ -190,7 +190,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
                 accent={BLUE}
                 accentBg={BLUE_BG}
                 title="Linked saves"
-                body={`${linkedSaves} ${linkedSaves === 1 ? 'save' : 'saves'} reference this settlement — they may see a flag.`}
+                body={`${linkedSaves} ${linkedSaves === 1 ? 'save' : 'saves'} reference this settlement - they may see a flag.`}
               />
               <div style={{ height: SP.sm }} />
             </>

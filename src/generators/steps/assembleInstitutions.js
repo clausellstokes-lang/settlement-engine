@@ -5,7 +5,7 @@
  * probabilistic generation, out-of-tier forced institutions, and upgrade
  * chain deduplication.
  *
- * Extracted from generateSettlement.js lines 442–625.
+ * Extracted from generateSettlement.js lines 442-625.
  */
 
 import { registerStep } from '../pipeline.js';
@@ -261,7 +261,7 @@ registerStep('assembleInstitutions', {
           if (inst.exclusiveGroup) exclusiveGroups[inst.exclusiveGroup] = name;
           institutions.push({ category, name, ...inst, source: 'generated' });
 
-          // Trace: the most informative case — the engine actually
+          // Trace: the most informative case - the engine actually
           // *decided* to select this one based on probabilistic roll.
           // Cause records the base chance + resource multiplier so a
           // reader can see why it was likely. Downstream records what
@@ -271,7 +271,7 @@ registerStep('assembleInstitutions', {
             causes.push({
               source: 'nearbyResources',
               effect: `×${resourceMult.toFixed(2)}`,
-              reason: `Nearby resources (${nearbyResources.slice(0, 3).join(', ')}${nearbyResources.length > 3 ? '…' : ''}) shifted the selection odds.`,
+              reason: `Nearby resources (${nearbyResources.slice(0, 3).join(', ')}${nearbyResources.length > 3 ? '...' : ''}) shifted the selection odds.`,
             });
           }
           if (terrainType && terrainType !== 'plains') {

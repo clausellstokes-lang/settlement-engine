@@ -1,5 +1,5 @@
 /**
- * tests/domain/schemaCanonicalShape.test.js — Tier 1.2 contract.
+ * tests/domain/schemaCanonicalShape.test.js - Tier 1.2 contract.
  *
  * The roadmap requires the generator to write the canonical schema
  * shape DIRECTLY, not just rely on `normalizeSettlement` as a read-
@@ -24,7 +24,7 @@ const ROOT = join(__dirname, '..', '..');
 const ASSEMBLE = join(ROOT, 'src', 'generators', 'steps', 'assembleSettlement.js');
 const LEGACY   = join(ROOT, 'src', 'generators', 'generateSettlement.js');
 
-describe('Tier 1.2 — schema aliases are documented', () => {
+describe('Tier 1.2 - schema aliases are documented', () => {
   it('FIELD_ALIASES is frozen and exports the documented alias groups', () => {
     expect(Object.isFrozen(FIELD_ALIASES)).toBe(true);
     expect(FIELD_ALIASES).toHaveProperty('stressors');
@@ -37,7 +37,7 @@ describe('Tier 1.2 — schema aliases are documented', () => {
   });
 });
 
-describe('Tier 1.2 — pipeline path writes both stress and stressors', () => {
+describe('Tier 1.2 - pipeline path writes both stress and stressors', () => {
   let src;
   beforeAll(() => { src = readFileSync(ASSEMBLE, 'utf8'); });
 
@@ -66,7 +66,7 @@ describe('Tier 1.2 — pipeline path writes both stress and stressors', () => {
   });
 });
 
-describe('Tier 1.2 — legacy path also writes both stress and stressors', () => {
+describe('Tier 1.2 - legacy path also writes both stress and stressors', () => {
   let src;
   beforeAll(() => { src = readFileSync(LEGACY, 'utf8'); });
 
@@ -83,7 +83,7 @@ describe('Tier 1.2 — legacy path also writes both stress and stressors', () =>
   });
 });
 
-describe('Tier 1.2 — round-trip: legacy and canonical names always agree', () => {
+describe('Tier 1.2 - round-trip: legacy and canonical names always agree', () => {
   it('when a fresh settlement carries `stress`, `stressors` is the same reference', () => {
     // Mock a generated-shape settlement and check the dual-write contract.
     const stressArr = [{ type: 'plague', severity: 'moderate' }];

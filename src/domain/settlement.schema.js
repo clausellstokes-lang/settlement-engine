@@ -1,10 +1,10 @@
 /**
- * domain/settlement.schema.js — Canonical settlement shape + version stamps.
+ * domain/settlement.schema.js - Canonical settlement shape + version stamps.
  *
  * This file is the single source of truth for "what is a settlement,
  * structurally?" Three things live here:
  *
- *   1. JSDoc typedefs (zero runtime cost — purely documentary). Editors
+ *   1. JSDoc typedefs (zero runtime cost - purely documentary). Editors
  *      and code reviewers see the same contract that PDF authors and
  *      AI prompt authors read.
  *
@@ -42,7 +42,7 @@
 // SCHEMA_VERSION jumps when fields are renamed, removed, or restructured.
 // SIMULATION_VERSION jumps when generator output semantics change in a way
 // that older saves wouldn't recompute identically. GENERATOR_VERSION is the
-// build-time stamp — useful for "this save was made by SettlementForge 1.2.3."
+// build-time stamp - useful for "this save was made by SettlementForge 1.2.3."
 
 export const SCHEMA_VERSION     = 1;
 export const SIMULATION_VERSION = 1;
@@ -68,12 +68,12 @@ export const FIELD_ALIASES = Object.freeze({
  * @typedef {Object} CanonicalSettlement
  *
  * @property {string} id
- *   Stable identifier — opaque, slug-safe. Generated once at create time;
+ *   Stable identifier - opaque, slug-safe. Generated once at create time;
  *   preserved across regenerations and saves.
  *
  * @property {string} _seed
  *   PRNG seed used to generate this settlement. Replay determinism depends
- *   on this — never mutate.
+ *   on this - never mutate.
  *
  * @property {number} schemaVersion
  * @property {number} simulationVersion
@@ -97,7 +97,7 @@ export const FIELD_ALIASES = Object.freeze({
  *   `stress`, `stresses`, or `stressTypes`.
  *
  * @property {ActiveCondition[]} [activeConditions]
- *   Persistent world conditions (Tier 2.3 in the roadmap) — initially empty.
+ *   Persistent world conditions (Tier 2.3 in the roadmap) - initially empty.
  *   Populated as the event system promotes annotations to first-class
  *   conditions.
  *
@@ -128,7 +128,7 @@ export const FIELD_ALIASES = Object.freeze({
  *   must respect them.
  *
  * @property {TraceEntry[]} [simulationTrace]
- *   Causal trace data — populated by Tier 2.1's trace layer. Empty until
+ *   Causal trace data - populated by Tier 2.1's trace layer. Empty until
  *   the trace layer ships.
  *
  * @property {Object[]} [eventLog]
@@ -201,7 +201,7 @@ export const FIELD_ALIASES = Object.freeze({
 /**
  * @typedef {Object} ConditionTrigger
  *
- * Provenance for an active condition — where did it come from?
+ * Provenance for an active condition - where did it come from?
  *
  * @property {number}        tick                  Tick index at which the condition was added (0 for world creation).
  * @property {string | null} sourceEventType       e.g. 'PLAGUE_OUTBREAK', or null when generator-stamped.
@@ -213,7 +213,7 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * Time accounting for an active condition. Both fields are
  * interval-scale-weighted: a per-week tick advances elapsedTicks by
- * 0.25, a per-month tick by 1.0, a per-year tick by 6.0 — matching
+ * 0.25, a per-month tick by 1.0, a per-year tick by 6.0 - matching
  * the Phase 15 INTERVAL_SCALES.
  *
  * @property {number}        elapsedTicks      Cumulative scale-weighted advancement.
@@ -252,7 +252,7 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * Legacy compatibility note: today's generator produces chain entries
  * with shape `{ needKey, chainId, label, processingInstitutions, status:
- * 'operational' | 'running' | 'entrepot' | 'vulnerable' | 'impaired', … }`.
+ * 'operational' | 'running' | 'entrepot' | 'vulnerable' | 'impaired', ... }`.
  * The Tier 4.3 stateful shape (SupplyChainState) is derived from this
  * on demand via domain/supplyChainState.js#deriveSupplyChainState.
  */
@@ -346,7 +346,7 @@ export const FIELD_ALIASES = Object.freeze({
  * Legacy compatibility note: today's generator produces NPC entries
  * with shape `{ id, name, role, category, factionAffiliation,
  * structuralPosition, structuralRank, power, influence, personality,
- * physical, goal, secret, plotHooks, … }`. The Tier 4.5 structured
+ * physical, goal, secret, plotHooks, ... }`. The Tier 4.5 structured
  * shape (NpcProfile below) is derived from this on demand via
  * domain/npcProfile.js#deriveNpcProfile.
  */
@@ -406,7 +406,7 @@ export const FIELD_ALIASES = Object.freeze({
  * Tier 4.2 structured delta describing a single proposed change to a
  * single faction's structural metric, attributed to a specific event.
  *
- * Produced by recalculateFactionRelationships(). Pure data — the
+ * Produced by recalculateFactionRelationships(). Pure data - the
  * domain layer never applies these deltas itself; downstream consumers
  * (event-apply layer, time progression, AI overlay) decide whether to
  * commit, preview, or render them.
@@ -520,7 +520,7 @@ export const FIELD_ALIASES = Object.freeze({
  * Tier 4.6 canonical threat shape. The set of these on a settlement
  * is the authoritative read of "what does this settlement fear?"
  * Derived from existing surfaces by domain/threatProfile.js, NOT
- * stored on the settlement directly (yet) — Tier 4.16 (custom user
+ * stored on the settlement directly (yet) - Tier 4.16 (custom user
  * content as causal objects) will let users add structured threats.
  *
  * @property {string}          id                Stable id 'threat.<type>.<suffix>'.
@@ -714,8 +714,8 @@ export const FIELD_ALIASES = Object.freeze({
  * @typedef {Object} CapacityContributor
  *
  * A single supply-side or demand-side input on a capacity profile.
- * Same shape as the Phase 17 substrate contributor — { source,
- * effect, delta, reason } — but kept separate because the polarity
+ * Same shape as the Phase 17 substrate contributor - { source,
+ * effect, delta, reason } - but kept separate because the polarity
  * (supply vs demand) matters at the layer above.
  *
  * @property {string} source
@@ -753,7 +753,7 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {Object} identity            id / name / tier / seed / versions / canon breakdown.
  * @property {Object} spine               7-line SimulationSpine.
  * @property {{substrate: Object, capacities: Object}} bands  Phase 17 + Phase 21 band maps.
- * @property {Array<{kind: string, entityIndex: number, label: string, path: string, value: string, editedAt: string|null}>} userEdits  Tier 6.6 — verbatim user-authored prose the AI must preserve.
+ * @property {Array<{kind: string, entityIndex: number, label: string, path: string, value: string, editedAt: string|null}>} userEdits  Tier 6.6 - verbatim user-authored prose the AI must preserve.
  * @property {FactionProfile[]} factions  Phase 9.
  * @property {SupplyChainState[]} chains  Phase 10.
  * @property {ActiveCondition[]} conditions  Phase 16.
@@ -791,7 +791,7 @@ export const FIELD_ALIASES = Object.freeze({
 /**
  * @typedef {Object<string, UserEdit>} UserEditsMap
  *
- * Tier 5.4 — the `_userEdits` blob attached to any user-edited entity.
+ * Tier 5.4 - the `_userEdits` blob attached to any user-edited entity.
  * Keys are dotted field paths (e.g. 'secret.what'), values are
  * UserEdit records.
  */
@@ -799,7 +799,7 @@ export const FIELD_ALIASES = Object.freeze({
 /**
  * @typedef {Object} UserEditWalkEntry
  *
- * Tier 5.4 — one tuple yielded by domain/userEdits.js#walkUserEdits.
+ * Tier 5.4 - one tuple yielded by domain/userEdits.js#walkUserEdits.
  *
  * @property {UserEditableEntityType|string} kind  Singular entity type ('npc', 'faction', etc.).
  * @property {number} entityIndex                  Array index of the entity (or -1 for settlement root).
@@ -811,7 +811,7 @@ export const FIELD_ALIASES = Object.freeze({
 /**
  * @typedef {'invented_entity' | 'removed_entity' | 'renamed_entity' | 'changed_fact' | 'changed_canon' | 'removed_history_beat' | 'changed_user_field'} AiOverlayViolationKind
  *
- * Tier 6.4 — the closed set of contract violations the AI overlay
+ * Tier 6.4 - the closed set of contract violations the AI overlay
  * verifier can flag. See domain/aiOverlayVerifier.js for semantics.
  */
 
@@ -1103,7 +1103,7 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * Tier 4.19 canonical 8-slot vocabulary for daily-life prose
  * derived by domain/dailyLife.js. Same slot pattern as Phase 12
- * history beats — every slot always renders something true even
+ * history beats - every slot always renders something true even
  * when its source data is thin.
  */
 
@@ -1111,7 +1111,7 @@ export const FIELD_ALIASES = Object.freeze({
  * @typedef {Object} DailyLifeSlot
  *
  * One entry in a DailyLifeEnvelope. The text is structurally grounded
- * prose — it composes signals from substrate / capacities / threats /
+ * prose - it composes signals from substrate / capacities / threats /
  * conditions / history but presents them as human-readable narrative.
  *
  * @property {DailyLifeSlotKey} key
@@ -1187,8 +1187,8 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * Tier 2.6 unified causal-explanation shape. Returned by
  * domain/explanation.js#explainEntity for every explainable entity.
- * Consumers can render the same UI for any entity type — institution
- * detail, faction profile, NPC card, chain status panel, etc. — by
+ * Consumers can render the same UI for any entity type - institution
+ * detail, faction profile, NPC card, chain status panel, etc. - by
  * reading the same envelope.
  *
  * @property {ExplainableEntityType | null} entityType

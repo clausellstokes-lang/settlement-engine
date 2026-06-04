@@ -1,5 +1,5 @@
 /**
- * tests/lib/chronicle.test.js — Tier 3.8 coverage.
+ * tests/lib/chronicle.test.js - Tier 3.8 coverage.
  */
 
 import { describe, test, expect } from 'vitest';

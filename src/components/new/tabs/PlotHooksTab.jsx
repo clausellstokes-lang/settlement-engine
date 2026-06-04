@@ -82,7 +82,7 @@ export function PlotHooksTab({settlement:s, narrativeNote}) {
     (t.plotHooks||[]).forEach(h => {
       rawHooks.push({
         text: typeof h==='string'?h:Ti(h),
-        source: label, role: typeof t.description==='string'?t.description.slice(0,60)+'…':'',
+        source: label, role: typeof t.description==='string'?t.description.slice(0,60)+'...':'',
         sub: null,
         category:'tension', priority:7,
         accent: false,

@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/mobile.smoke.test.jsx — Tier 7.18 mobile responsiveness smoke.
+ * tests/ui/mobile.smoke.test.jsx - Tier 7.18 mobile responsiveness smoke.
  *
  * Verifies primary surfaces render at narrow viewport widths without
  * crashing or producing horizontal overflow. jsdom doesn't render to
@@ -9,13 +9,13 @@
  * helper reads, so we can exercise the mobile branch of every
  * `mobile ? X : Y` ternary in the layout code.
  *
- * We do NOT validate exact widths in pixels — jsdom layout is fake
+ * We do NOT validate exact widths in pixels - jsdom layout is fake
  * (no flexbox, no media queries actually trigger). What we check:
  *   1. The component renders without throwing at mobile width
  *   2. The `isMobile()` helper returns true at the chosen width
  *   3. Mobile-only flags propagate correctly
  *
- * Real mobile QA happens in Playwright with actual viewports — this
+ * Real mobile QA happens in Playwright with actual viewports - this
  * test is the regression net so a code change can't quietly crash the
  * mobile branch.
  */
@@ -60,7 +60,7 @@ vi.mock('../../src/lib/founderSeats.js', () => ({
   fetchFounderSeatsRemaining: vi.fn(() => Promise.resolve(500)),
 }));
 
-describe('Tier 7.18 — Mobile viewport baseline', () => {
+describe('Tier 7.18 - Mobile viewport baseline', () => {
   test('isMobile() returns true at 360px (iPhone SE width)', () => {
     expect(isMobile()).toBe(true);
   });
@@ -80,7 +80,7 @@ describe('Tier 7.18 — Mobile viewport baseline', () => {
   });
 });
 
-describe('Tier 7.18 — Mobile rendering smoke', () => {
+describe('Tier 7.18 - Mobile rendering smoke', () => {
   test('HomeHero renders at 360px without throwing', async () => {
     // HomeHero pulls in the store; ensure store mock won't crash.
     // P96 added auth.tier + auth.displayName reads so the hero can
@@ -122,10 +122,10 @@ describe('Tier 7.18 — Mobile rendering smoke', () => {
   });
 });
 
-describe('Tier 7.18 — Viewport meta + a11y CSS', () => {
+describe('Tier 7.18 - Viewport meta + a11y CSS', () => {
   test('viewport meta tag is configured for responsive rendering', () => {
     // index.html sets <meta name="viewport" content="width=device-width, initial-scale=1.0" />.
-    // jsdom doesn't load index.html, but the constant matters — this
+    // jsdom doesn't load index.html, but the constant matters - this
     // test is a documentation-style anchor.
     const expected = 'width=device-width, initial-scale=1.0';
     expect(expected).toBe('width=device-width, initial-scale=1.0');

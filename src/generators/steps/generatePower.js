@@ -6,7 +6,7 @@
  * Extracted from generateSettlement.js line 802.
  *
  * Tier 4.1: emits structured faction traces after the legacy power
- * generator finishes. The generator itself is not refactored — the
+ * generator finishes. The generator itself is not refactored - the
  * traces are layered on top via deriveFactionProfile, which is the
  * same Strangler Fig pattern the rest of the simulator's causality
  * work follows.
@@ -67,7 +67,7 @@ registerStep('generatePower', {
     if (Array.isArray(institutions) && institutions.length) {
       // Mention the institutional ground-truth that the power generator
       // keys off. We don't try to attribute specific institutions to
-      // specific factions here — that's a Tier 4.2 concern.
+      // specific factions here - that's a Tier 4.2 concern.
       causes.push({
         source: 'institutionMix',
         effect: 'archetype context',
@@ -106,7 +106,7 @@ registerStep('generatePower', {
         downstreamEffects.push({ target: 'publicLegitimacy', effect: isGoverning ? 'anchored' : 'influenced' });
         break;
       default:
-        // 'other' — no canonical downstream
+        // 'other' - no canonical downstream
         break;
     }
 

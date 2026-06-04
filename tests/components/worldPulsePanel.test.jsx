@@ -26,6 +26,7 @@ describe('WorldPulsePanel', () => {
       id: 'camp-1',
       name: 'Realm',
       worldState: {
+        canonizedAt: '2026-01-01T00:00:00.000Z',
         tick: 2,
         calendar: { season: 'spring' },
         proposals: [{
@@ -51,14 +52,36 @@ describe('WorldPulsePanel', () => {
             resolutionRoll: 0.12,
             resolutionChance: 0.42,
           }],
-          rollExplanations: [{
-            candidateId: 'candidate-1',
-            candidateType: 'food_pressure',
-            severity: 0.82,
-            probability: 0.5,
-            roll: 0.3,
-            passed: true,
+          selectedOutcomes: [{
+            id: 'selected-population',
+            type: 'population',
+            candidateType: 'population_decline',
+            ruleFamily: 'population',
+            headline: 'Ashford population may fall',
+            summary: 'Ashford loses people from cumulative pressure.',
+            severity: 0.44,
+            reasons: ['population pressure'],
+            populationDeltas: [{ saveId: 'ashford', delta: -12 }],
           }],
+          rollExplanations: [
+            {
+              candidateId: 'candidate-1',
+              candidateType: 'food_pressure',
+              severity: 0.82,
+              probability: 0.5,
+              roll: 0.3,
+              passed: true,
+            },
+            {
+              candidateId: 'candidate-2',
+              candidateType: 'population_decline',
+              severity: 0.44,
+              probability: 1,
+              roll: 0,
+              passed: true,
+              conflictResolution: { deterministic: true },
+            },
+          ],
         }],
       },
     };
@@ -68,6 +91,8 @@ describe('WorldPulsePanel', () => {
     expect(screen.getByText('World Pulse')).toBeTruthy();
     expect(screen.getByText('Famine pressure may take hold')).toBeTruthy();
     expect(screen.getByText('Disease outbreak resolved')).toBeTruthy();
+    expect(screen.getByText('Ashford population may fall')).toBeTruthy();
+    expect(screen.getByText('deterministic')).toBeTruthy();
     expect(screen.getAllByText('food pressure').length).toBeGreaterThan(0);
 
     fireEvent.click(screen.getByTitle('Apply proposal'));

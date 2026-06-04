@@ -1,17 +1,17 @@
 /**
- * tests/security/refundLedger.contract.test.js — Tier 9.9 contract.
+ * tests/security/refundLedger.contract.test.js - Tier 9.9 contract.
  *
  * Pins the three ledger-consistent RPCs (`spend_credits`,
  * `refund_credits`, `admin_grant_credits`) by grepping migration 009
  * for their signatures. If somebody renames an RPC or drops a
- * parameter, this fails immediately — even without a Postgres test
+ * parameter, this fails immediately - even without a Postgres test
  * runner.
  *
  * Real concurrent-spend / refund-correlation tests live alongside
  * `tests/security/profile_security.contract.test.js` and run via
  * `supabase test db` when Docker is available.
  *
- * The audit doc is docs/refund-ledger-audit.md — it catalogues every
+ * The audit doc is docs/refund-ledger-audit.md - it catalogues every
  * credit-touching path and tracks migration status off direct writes
  * onto these RPCs.
  */
@@ -26,12 +26,12 @@ const AUDIT_DOC = join(ROOT, 'docs', 'refund-ledger-audit.md');
 
 const migExists = existsSync(MIG_009);
 
-describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit paths)', () => {
+describe.runIf(migExists)('Tier 9.9 - RPC contract (ledger-consistent credit paths)', () => {
   const sql = readFileSync(MIG_009, 'utf-8');
 
   it('spend_credits(feature text) RPC exists with the right signature', () => {
     // Allow either order of clauses (language plpgsql / security definer
-    // / set search_path) — assert just the signature.
+    // / set search_path) - assert just the signature.
     expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.spend_credits\s*\(\s*feature\s+text\s*\)/i);
     expect(sql).toMatch(/spend_credits[\s\S]{0,500}security\s+definer/i);
   });
@@ -64,7 +64,7 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
     // `reversed_by` (column-level link) or `refund_of` (JSON metadata).
     expect(body).toMatch(/reversed_by|refund_of/i);
     // The profile counter MUST only be touched via `credits + N`
-    // arithmetic — never `credits = $1` style assignment that would
+    // arithmetic - never `credits = $1` style assignment that would
     // restore a stale snapshot.
     const dangerousRestore = /credits\s*=\s*(\$\d+|p_credits|old_credits)\b/i;
     expect(body).not.toMatch(dangerousRestore);
@@ -96,7 +96,7 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
   });
 });
 
-describe('Tier 9.9 — audit doc is in the repo', () => {
+describe('Tier 9.9 - audit doc is in the repo', () => {
   it('docs/refund-ledger-audit.md is committed', () => {
     expect(existsSync(AUDIT_DOC)).toBe(true);
   });

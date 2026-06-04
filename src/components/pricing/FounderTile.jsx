@@ -1,5 +1,5 @@
 /**
- * FounderTile.jsx — P116 / X-8 personalized Founder Lifetime recognition.
+ * FounderTile.jsx - P116 / X-8 personalized Founder Lifetime recognition.
  *
  * $99 lifetime is a conviction product. Wrong for the new DM (premature),
  * neutral for the intermediate (don't know they'll use it long-term),
@@ -7,7 +7,7 @@
  * for a year. The current pricing page shows it to everyone equally.
  *
  * This tile surfaces only when the user has demonstrated worldbuilder
- * behavior (audience='worldbuilder'). Then it's not a discount — it's
+ * behavior (audience='worldbuilder'). Then it's not a discount - it's
  * a recognition: "you've earned this offer."
  *
  * Self-gates on:
@@ -137,7 +137,7 @@ export default function FounderTile() {
           <div>Founder = <b style={{ color: GOLD_400 }}>$99 forever</b></div>
           {claimSeat && (
             <div style={{ marginTop: SP.xs, fontStyle: 'italic', color: swatch['#A08060'] }}>
-              …plus your name in the credits (seat {claimSeat}).
+              ...plus your name in the credits (seat {claimSeat}).
             </div>
           )}
         </div>
@@ -157,10 +157,10 @@ export default function FounderTile() {
           }}
         >
           {loading
-            ? 'Starting checkout…'
+            ? 'Starting checkout...'
             : claimSeat
-              ? `Claim seat ${claimSeat} — $99 one-time`
-              : 'Claim a Founder seat — $99 one-time'}
+              ? `Claim seat ${claimSeat} - $99 one-time`
+              : 'Claim a Founder seat - $99 one-time'}
         </button>
       </div>
     </div>
