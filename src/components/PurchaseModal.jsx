@@ -14,7 +14,7 @@ import { X, Zap, Crown, AlertCircle, TrendingDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
-import { getTierDisplayName } from '../config/pricing.js';
+import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
 import { t } from '../copy/index.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, ELEV, swatch } from './theme.js';
 
@@ -37,11 +37,14 @@ export default function PurchaseModal({ onClose }) {
     }
   };
 
-  const creditPacks = [
-    { key: 'credits_5',  icon: <Zap size={20} />,  tier: 'starter' },
-    { key: 'credits_15', icon: <Zap size={20} />,  tier: 'value' },
-    { key: 'credits_40', icon: <Zap size={20} />,  tier: 'best' },
-  ];
+  // Derive from the active catalog (pricing.js) so the keys always match
+  // PRODUCTS. Hardcoding legacy keys (credits_5/15/40) crashed this modal once
+  // the catalog was repriced to credits_25/60/150 and PRODUCTS[key] went undefined.
+  const creditPacks = Object.values(getActivePacks()).map((pack) => ({
+    key: pack.key,
+    icon: <Zap size={20} />,
+    tier: pack.tier,
+  }));
 
   return (
     <div
@@ -143,6 +146,7 @@ export default function PurchaseModal({ onClose }) {
           <div style={{ display: 'flex', gap: SP.sm }}>
             {creditPacks.map(({ key, icon, tier }) => {
               const p = PRODUCTS[key];
+              if (!p) return null;
               const isBest = tier === 'best';
               const isValue = tier === 'value';
               const borderColor = isBest ? '#2a7a2a' : isValue ? GOLD : BORDER;
