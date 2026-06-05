@@ -55,7 +55,7 @@ button {
 .page-bg {
   background-color: #f7f0e4;
   background-image:
-    linear-gradient(rgba(247, 240, 228, 0.60), rgba(247, 240, 228, 0.66)),
+    linear-gradient(rgba(247, 240, 228, 0.54), rgba(247, 240, 228, 0.59)),
     var(--page-bg, none);
   background-size: cover;
   background-position: center top;
@@ -64,7 +64,7 @@ button {
 }
 .page-bg.is-flow {
   background-image:
-    linear-gradient(rgba(247, 240, 228, 0.54), rgba(247, 240, 228, 0.62)),
+    linear-gradient(rgba(247, 240, 228, 0.49), rgba(247, 240, 228, 0.56)),
     var(--page-bg, none);
 }
 
@@ -75,14 +75,14 @@ button {
 .mode-card-bg {
   background-color: #FFFBF5;
   background-image:
-    linear-gradient(rgba(247, 240, 228, 0.72), rgba(247, 240, 228, 0.80)),
+    linear-gradient(rgba(247, 240, 228, 0.65), rgba(247, 240, 228, 0.72)),
     var(--card-bg, none);
   background-size: cover;
   background-position: center;
 }
 .mode-card-bg.is-active {
   background-image:
-    linear-gradient(rgba(247, 240, 228, 0.48), rgba(247, 240, 228, 0.56)),
+    linear-gradient(rgba(247, 240, 228, 0.43), rgba(247, 240, 228, 0.50)),
     var(--card-bg, none);
 }
 

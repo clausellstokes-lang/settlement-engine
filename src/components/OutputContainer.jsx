@@ -335,11 +335,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   };
 
   const tabs = fiveTabsEnabled
-    ? allTabs.filter(t => {
-        // Simulation is meta; the drawer trigger below the header owns it.
-        if (t.id === 'simulation') return false;
-        return (TAB_GROUPS[selectedGroup]?.tabs || []).includes(t.id);
-      })
+    // Sub-tab order follows the group's DECLARED order in TAB_GROUPS (e.g.
+    // World shows NPCs before History; Systems leads with Services), not the
+    // flat TABS array. Resolve each declared id to its live tab object and
+    // drop any the current settlement doesn't render (plus the meta sim tab).
+    ? (TAB_GROUPS[selectedGroup]?.tabs || [])
+        .filter(tid => tid !== 'simulation')
+        .map(tid => allTabs.find(t => t.id === tid))
+        .filter(Boolean)
     : allTabs;
 
   const scroll = (dir) => scrollRef.current?.scrollBy({ left: dir * 120, behavior: 'smooth' });

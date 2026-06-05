@@ -31,6 +31,7 @@ import {
 import { Funnel } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
+import AnonTierTeaser from './AnonTierTeaser.jsx';
 import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } from './theme.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
@@ -273,6 +274,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
           // Lead with what signin gets you, not with what you've used up.
           // Side-door $2.99 link below catches intermediates who just need
           // Friday's town.
+          <>
           <div style={{
             padding: SP.lg,
               background: `linear-gradient(135deg, #FBF5E6, #F4EAD0)`,
@@ -321,6 +323,8 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                 </a>
               </div>
             </div>
+            <AnonTierTeaser onSignIn={onSignIn} />
+          </>
         ) : (
           <>
             <button

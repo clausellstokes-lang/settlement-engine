@@ -89,7 +89,7 @@ export const en = Object.freeze({
     button:   'Generate',
     subline:  'Roughly 10 to 20 seconds. Watch the pipeline as it runs.',
     sizes: {
-      thorpe:  'Thorpe',
+      thorp:   'Thorpe',
       hamlet:  'Hamlet',
       village: 'Village',
       town:    'Town',
@@ -97,7 +97,7 @@ export const en = Object.freeze({
       capital: 'Capital',
     },
     sizeHint: {
-      thorpe:  'A few households at a crossroads. Barely a dot on the map.',
+      thorp:   'A few households at a crossroads. Barely a dot on the map.',
       hamlet:  'A handful of families. One inn, if you’re lucky.',
       village: 'A market square, a temple, a militia of farmers.',
       town:    'A real economy. Guilds. A jail.',

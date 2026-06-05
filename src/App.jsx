@@ -25,6 +25,7 @@ import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
+import AccountMenu from './components/AccountMenu.jsx';
 
 // Lazy-loaded views
 const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
@@ -68,12 +69,12 @@ const NAV = [
   { id: 'howto',       label: 'About',       Icon: Info },
 ];
 
-// Secondary header link(s). Pricing lives here as a hero link rather than a
-// primary nav tab. (Gallery graduated to a real nav tab; Compare folded into
-// the About page.)
-const HERO_LINKS = [
-  { id: 'pricing', label: 'Pricing' },
-];
+// Secondary header links. "Pricing" was pulled from the top bar — subscription
+// and credit management now lives in the account-chip dropdown for signed-in
+// users (and inline on the Create page once an anonymous visitor hits the cap).
+// Kept as an (empty) array so the hero-link render sites still work and future
+// links can be added back here.
+const HERO_LINKS = [];
 
 function Loading() {
   return (
@@ -97,6 +98,7 @@ export default function App() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const authTier = useStore(s => s.auth.tier);
+  const displayName = useStore(s => s.auth.displayName);
   const _authRole = useStore(s => s.auth.role);
   const authUserId = useStore(s => s.auth.user?.id || null);
   const authLoading = useStore(s => s.auth.loading);
@@ -314,40 +316,22 @@ export default function App() {
               </span>
             </button>
 
-            <button
-              onClick={() => authTier === 'anon' ? setAuthModalOpen(true) : setView('account')}
-              style={{
-                display: 'flex', alignItems: 'center', gap: SP.xs,
-                padding: `${SP.xs + 1}px ${SP.md}px`,
-                minHeight: 44,
-                background: authTier === 'anon' ? GOLD_BG
-                  : isElevated ? 'rgba(124,58,237,0.15)'
-                  : 'rgba(42,122,42,0.2)',
-                border: `1px solid ${authTier === 'anon' ? 'rgba(160,118,42,0.3)'
-                  : isElevated ? 'rgba(124,58,237,0.3)'
-                  : 'rgba(42,122,42,0.4)'}`,
-                borderRadius: R.md, cursor: 'pointer',
-                color: authTier === 'anon' ? GOLD
-                  : isElevated ? '#c8a0f0'
-                  : '#4a8a4a',
-                fontSize: FS.xs, fontWeight: 700,
-                fontFamily: sans,
-                letterSpacing: '0.04em', textTransform: 'uppercase',
-              }}
-            >
-              <User size={12} />
-              {authTier === 'anon' ? 'Sign In'
-                : isElevated ? 'DEV'
-                : authTier === 'premium' ? 'PRO'
-                : 'Account'}
-            </button>
+            <AccountMenu
+              compact
+              isAnon={authTier === 'anon'}
+              displayName={displayName}
+              isElevated={isElevated}
+              onSignIn={() => setAuthModalOpen(true)}
+              onAccount={() => setView('account')}
+              onManageSubscription={() => setView('pricing')}
+            />
           </header>
         )}
 
         {/* Mobile hero links — Pricing / Gallery / Compare, promoted from the
             footer so mobile keeps top-level access. Standalone strip (not tied
             to the mobile header, which the single-chrome flag can drop). */}
-        {isMobile && (
+        {isMobile && HERO_LINKS.length > 0 && (
           <div style={{
             display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.lg,
             background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
@@ -424,7 +408,7 @@ export default function App() {
                   );
                 })}
               </div>
-              <span style={{ width: 1, height: 20, background: 'rgba(160,118,42,0.3)', margin: `0 ${SP.xs}px` }} />
+              {HERO_LINKS.length > 0 && <span style={{ width: 1, height: 20, background: 'rgba(160,118,42,0.3)', margin: `0 ${SP.xs}px` }} />}
               <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                 {visibleNav.map(({ id, label }) => {
                   const active = view === id;
@@ -495,33 +479,15 @@ export default function App() {
                 </button>
               )}
 
-              {/* Account button */}
-              <button
-                onClick={() => authTier === 'anon' ? setAuthModalOpen(true) : setView('account')}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: SP.xs,
-                  padding: `${SP.sm}px ${SP.lg}px`, marginLeft: SP.xs,
-                  background: authTier === 'anon' ? GOLD_BG
-                    : isElevated ? 'rgba(124,58,237,0.15)'
-                    : 'rgba(42,122,42,0.2)',
-                  border: `1px solid ${authTier === 'anon' ? 'rgba(160,118,42,0.3)'
-                    : isElevated ? 'rgba(124,58,237,0.3)'
-                    : 'rgba(42,122,42,0.4)'}`,
-                  borderRadius: R.md, cursor: 'pointer',
-                  color: authTier === 'anon' ? GOLD
-                    : isElevated ? '#c8a0f0'
-                    : '#4a8a4a',
-                  fontSize: FS.sm, fontWeight: 600,
-                  fontFamily: sans,
-                  letterSpacing: '0.04em', textTransform: 'uppercase',
-                }}
-              >
-                <User size={13} />
-                {authTier === 'anon' ? 'Sign In'
-                  : isElevated ? 'DEV'
-                  : authTier === 'premium' ? 'PRO'
-                  : 'Account'}
-              </button>
+              {/* Account identity + menu (Account / Manage subscription & credits) */}
+              <AccountMenu
+                isAnon={authTier === 'anon'}
+                displayName={displayName}
+                isElevated={isElevated}
+                onSignIn={() => setAuthModalOpen(true)}
+                onAccount={() => setView('account')}
+                onManageSubscription={() => setView('pricing')}
+              />
             </div>
           </header>
         )}
