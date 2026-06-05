@@ -26,6 +26,7 @@ import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CAR
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
+import { backgroundImageUrl, MODE_BACKGROUNDS } from '../config/pageBackgrounds.js';
 import HomeHero from './HomeHero.jsx';
 // P128 / H-2 — Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
@@ -133,11 +134,14 @@ function ModeSelector({ mode, onModeChange, large = false }) {
           <button
             key={id}
             onClick={() => onModeChange(id)}
+            className={large ? `mode-card-bg${active ? ' is-active' : ''}` : undefined}
             style={{
               flex: large ? '1 1 280px' : '1 1 200px',
               maxWidth: large ? 360 : 260,
               padding: large ? `${SP.xxl}px ${SP.xl}px` : `${SP.xl - 2}px ${SP.lg}px`,
-              background: active ? GOLD_BG : CARD,
+              ...(large
+                ? { '--card-bg': backgroundImageUrl(MODE_BACKGROUNDS[id]) }
+                : { background: active ? GOLD_BG : CARD }),
               border: `2px solid ${active ? GOLD : BORDER2}`,
               borderRadius: R.lg,
               cursor: 'pointer',

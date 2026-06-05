@@ -159,7 +159,7 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
           {/* Move to campaign */}
           <div style={{ position:'relative' }}>
             <button disabled={!active} onClick={() => active && setMoveOpen(!moveOpen)} title={active ? (currentCampaignId ? 'Move to...' : 'Add to campaign') : 'Reactivate to use campaigns'} style={{ padding:'4px 6px', background:active ? GOLD_BG : '#ddd5c8', color:active ? GOLD : MUTED, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xxs, fontWeight:700, fontFamily:sans, display:'flex', alignItems:'center', gap:3 }}>
-              <ArrowRight size={10}/>
+              <ArrowRight size={10}/> {currentCampaignId ? 'Move' : 'Add to Campaign'}
             </button>
             {moveOpen && (
               <div style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, borderRadius:6, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:160, padding:4 }}>

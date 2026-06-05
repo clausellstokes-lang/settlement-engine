@@ -24,6 +24,7 @@ import { flag as _readFlag } from './lib/flags.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
+import { resolveViewBackground } from './config/pageBackgrounds.js';
 
 // Lazy-loaded views
 const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
@@ -100,6 +101,12 @@ export default function App() {
   const authUserId = useStore(s => s.auth.user?.id || null);
   const authLoading = useStore(s => s.auth.loading);
   const isElevated = useStore(s => s.isElevated());
+  // Drive the per-view painted background (and the generation-flow override).
+  const wizardMode = useStore(s => s.wizardMode);
+  const settlement = useStore(s => s.settlement);
+  // The standing "buy credits" header chip is retired — credits are bought at
+  // the moment of need (the insufficient-credits modal). Flip to restore.
+  const showHeaderCredits = false;
   const initAuth = useStore(s => s.initAuth);
   const initOnboarding = useStore(s => s.initOnboarding);
   const onboardingNudge = useStore(s => s.onboardingNudge);
@@ -255,9 +262,17 @@ export default function App() {
     boxShadow: '0 2px 12px rgba(0,0,0,0.35)',
   };
 
+  // Per-view painted background. On the Create page a generation flow blows
+  // up the chosen settlement scene (basic→thorpe, advanced→village,
+  // custom→city); see src/config/pageBackgrounds.js + .page-bg in index.css.
+  const pageBg = resolveViewBackground({ view, wizardMode, settlement });
+
   return (
     <>
-      <div className="parchment-bg" style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <div
+        className={`parchment-bg page-bg${pageBg.isFlow ? ' is-flow' : ''}`}
+        style={{ '--page-bg': pageBg.url, position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
+      >
 
         {/* ── Mobile header ───────────────────────────────────── */}
         {/*
@@ -411,7 +426,7 @@ export default function App() {
               </div>
               <span style={{ width: 1, height: 20, background: 'rgba(160,118,42,0.3)', margin: `0 ${SP.xs}px` }} />
               <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-                {visibleNav.map(({ id, label, Icon }) => {
+                {visibleNav.map(({ id, label }) => {
                   const active = view === id;
                   const locked = false;
                   return (
@@ -432,7 +447,6 @@ export default function App() {
                         opacity: locked ? 0.6 : 1,
                       }}
                     >
-                      <Icon size={16} />
                       {label}
                       {locked && <span style={{ fontSize: FS.xxs, marginLeft: 2 }}>PRO</span>}
                     </button>
@@ -440,8 +454,9 @@ export default function App() {
                 })}
               </nav>
 
-              {/* Credits button (visible when signed in and has credits) */}
-              {authTier !== 'anon' && (
+              {/* Credits button — retired from the header (showHeaderCredits=false);
+                  credits are bought at the moment of need. Kept, not deleted. */}
+              {showHeaderCredits && authTier !== 'anon' && (
                 <button
                   onClick={() => setPurchaseModalOpen(true)}
                   style={{

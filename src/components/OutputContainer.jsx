@@ -1,7 +1,7 @@
 import React, { useState, useRef, lazy, Suspense } from 'react';
 import { FS } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote } from 'lucide-react';
+import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote, Sparkles } from 'lucide-react';
 import { TIER_LABELS } from './new/design';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -65,17 +65,18 @@ const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 //
 //   summary  → Summary tab (everything the user reads at the table)
 //   people   → NPCs, Daily Life, Power
-//   systems  → Economics, Services, Defense, Resources, Viability
-//   world    → History, Relationships, Overview
+//   systems  → Services, Economics, Power, Defense, Resources, Viability
+//   world    → Relationships, Daily Life, NPCs, History, Neighbours
+//   notes    → DM Notes, AI Notes
 //   guidance → DM Compass. Plot hooks live inside Summary.
 //
 // Simulation lives in the drawer trigger near the dossier actions, not in
 // the reading tab strip.
 export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary'] },
-  systems: { label: 'Systems', tabs: ['power', 'economics', 'services', 'defense', 'resources', 'viability'] },
-  world:   { label: 'World',   tabs: ['history', 'relationships', 'daily_life', 'npcs', 'neighbours'] },
-  notes:   { label: 'Notes',   tabs: ['notes'] },
+  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability'] },
+  world:   { label: 'World',   tabs: ['relationships', 'daily_life', 'npcs', 'history', 'neighbours'] },
+  notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes'] },
   guidance:{ label: 'Guidance', tabs: ['dm_compass'] },
 });
 
@@ -91,7 +92,8 @@ const TABS = [
   { id: 'history',    label: 'History',    Icon: History },
   { id: 'daily_life', label: 'Daily Life', Icon: Users },
   { id: 'npcs',       label: 'NPCs',       Icon: Users },
-  { id: 'notes',      label: 'Notes',      Icon: StickyNote },
+  { id: 'dm_notes',   label: 'DM Notes',   Icon: StickyNote },
+  { id: 'ai_notes',   label: 'AI Notes',   Icon: Sparkles },
   // Simulation tab — meta surface. The pipeline rail used to render as
   // an always-on banner above the dossier, but that pushed the actual
   // DM-facing content below the fold. Now it lives as the last tab so
@@ -287,8 +289,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // entry point, so drop the Simulation entry from the tab strip.
   const baseTabs = TABS.filter(t => {
     if (t.id === 'simulation') return false;
-    if (readOnly && t.id === 'notes') return false;
-    if (playerView && ['summary', 'notes'].includes(t.id)) return false;
+    // Notes (DM/AI) are owner-private prep: hidden from the public player
+    // view, but shown on saved settlements even though the dossier prose is
+    // readOnly (editability is keyed on saveId inside NotesTab, not readOnly).
+    if (playerView && ['summary', 'dm_notes', 'ai_notes'].includes(t.id)) return false;
     return true;
   });
   const allTabs = [...baseTabs,
@@ -362,7 +366,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'resources':  return React.createElement(ResourcesTab, { settlement: s, narrativeNote: null });
       case 'viability':  return React.createElement(ViabilityTab, { settlement: s, narrativeNote: null });
       case 'dm_compass': return React.createElement(DMCompassTab, { settlement: s });
-      case 'notes':      return React.createElement(NotesTab, { saveId, notes: dossierNotes, readOnly });
+      case 'dm_notes':   return React.createElement(NotesTab, { saveId, notes: dossierNotes, section: 'dm' });
+      case 'ai_notes':   return React.createElement(NotesTab, { saveId, notes: dossierNotes, section: 'ai' });
       case 'neighbours':    return React.createElement(RelationshipsTab, { settlement: s, narrativeNote: null, neighboursOnly: true });
       case 'relationships': return React.createElement(RelationshipsTab, { settlement: s, narrativeNote: null });
       // Simulation = full PipelineRail (non-compact). Since the rail now

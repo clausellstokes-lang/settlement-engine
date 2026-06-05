@@ -206,7 +206,7 @@ describe('Tier 7.14 migration coverage', () => {
   });
 
   it('exposes all purchase modal strings', () => {
-    expect(t('purchase.title')).toBe('Buy narrative credits');
+    expect(t('purchase.title')).toBe('Buy more credits');
     expect(t('purchase.packsHeading')).toContain('Narrative Credit Packs');
     expect(t('purchase.bestLabel')).toBe('Best value');
     expect(t('purchase.valueLabel')).toBe('Most popular');

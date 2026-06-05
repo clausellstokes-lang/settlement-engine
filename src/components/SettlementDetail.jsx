@@ -372,6 +372,10 @@ export default function SettlementDetail({
         live.hydrateFromSave(detail.saveData);
       }
     }
+    // View opens read-only: the dossier shows, and the header "Edit Dossier"
+    // button toggles edit mode. Reset here so a prior edit session's global
+    // editMode flag doesn't carry into a freshly opened settlement.
+    useStore.getState().setEditMode?.(false);
     // Clear AI state when leaving the detail view so it doesn't leak into
     // the Generate wizard or the next save that gets opened.
     return () => { clearAiSettlement(); };

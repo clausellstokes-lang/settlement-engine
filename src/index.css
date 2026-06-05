@@ -25,14 +25,9 @@ body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
   -webkit-text-size-adjust: 100%;
+  /* Flat parchment fallback. The painting now lives per-view on the
+     .page-bg wrapper (see below), set from App.jsx by the current view. */
   background-color: #f7f0e4;
-  background-image:
-    linear-gradient(rgba(247, 240, 228, 0.72), rgba(247, 240, 228, 0.76)),
-    url('/parchment-bg.jpg');
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
 }
 
 input, select, textarea {
@@ -50,8 +45,45 @@ button {
   background: transparent !important;
 }
 .parchment-bg {
-  background: transparent !important;
   min-height: 100vh;
+}
+
+/* Per-view page background. App.jsx sets the image via the --page-bg custom
+   property based on the current view; the cream overlay keeps text legible
+   over any painting. `is-flow` (during a generation flow) lightens the
+   overlay so the chosen settlement scene reads through more strongly. */
+.page-bg {
+  background-color: #f7f0e4;
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.60), rgba(247, 240, 228, 0.66)),
+    var(--page-bg, none);
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.page-bg.is-flow {
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.54), rgba(247, 240, 228, 0.62)),
+    var(--page-bg, none);
+}
+
+/* Scaled-down settlement scene behind a Create-page mode card. The image
+   URL comes from the --card-bg custom property; the overlay is heavier than
+   the page (card copy is dense) and lifts on the active card to reveal more
+   of the scene. */
+.mode-card-bg {
+  background-color: #FFFBF5;
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.72), rgba(247, 240, 228, 0.80)),
+    var(--card-bg, none);
+  background-size: cover;
+  background-position: center;
+}
+.mode-card-bg.is-active {
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.48), rgba(247, 240, 228, 0.56)),
+    var(--card-bg, none);
 }
 
 /* Scrollbar styling */

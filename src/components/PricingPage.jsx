@@ -39,6 +39,12 @@ const TIER_ICONS = {
   founder:      Crown,
 };
 
+// Single-dossier ($2.99 one-shot) is intentionally kept off this
+// subscription-focused pricing page. The section below is retained for
+// reference, and the one-shot still appears in-context on a freshly
+// generated dossier (see BuyThisDossier). Flip this to re-list it here.
+const SHOW_SINGLE_DOSSIER_ON_PRICING = false;
+
 function FeatureRow({ children }) {
   return (
     <li style={{
@@ -421,8 +427,9 @@ export default function PricingPage({ onNavigate }) {
         )}
       </section>
 
-      {/* ── Single-dossier microtransaction ─────────────────────────────── */}
-      {singleDossierEnabled() && (
+      {/* Single-dossier removed from this subscription page; it remains the
+          in-context one-shot on a freshly generated dossier (BuyThisDossier). */}
+      {SHOW_SINGLE_DOSSIER_ON_PRICING && singleDossierEnabled() && (
         <section
           aria-label="Single dossier"
           style={{

@@ -484,7 +484,7 @@ export default function AccountPage({ onNavigateAdmin }) {
                 opacity: portalBusy ? 0.65 : 1,
               }}
             >
-              <CreditCard size={15} /> {portalBusy ? 'Opening billing...' : 'Manage billing'}
+              <CreditCard size={15} /> {portalBusy ? 'Opening portal...' : 'Manage subscription'}
             </button>
           </div>
         )}

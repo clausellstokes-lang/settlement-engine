@@ -10,7 +10,7 @@
  *   40 credits / $19.99 ($0.50/ea, 50% off)
  */
 import { useState } from 'react';
-import { X, Zap, Crown, AlertCircle, TrendingDown } from 'lucide-react';
+import { X, Zap, AlertCircle, TrendingDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -191,39 +191,25 @@ export default function PurchaseModal({ onClose }) {
             })}
           </div>
 
-          {/* Subscription upgrade (only if not already subscribed and not elevated) */}
+          {/* Free users: a soft upsell to the subscription (which includes a
+              monthly credit allowance) instead of repeat credit top-ups. */}
           {authTier !== 'premium' && !isElevated && (
-            <>
-              <div style={{ fontSize: FS.xs, fontWeight: 700, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: SP.sm }}>
-                {getTierDisplayName('premium')} Subscription
-              </div>
+            <div style={{ fontSize: FS.sm, color: SECOND, textAlign: 'center', lineHeight: 1.55 }}>
+              Buying credits often?{' '}
               <button
+                type="button"
                 onClick={() => handlePurchase('premium')}
                 disabled={loading || !isConfigured}
                 style={{
-                  padding: `${SP.lg}px ${SP.xl}px`,
-                  background: 'linear-gradient(135deg, rgba(160,118,42,0.1) 0%, rgba(160,118,42,0.05) 100%)',
-                  border: `2px solid ${GOLD}`,
-                  borderRadius: R.xl, cursor: loading ? 'wait' : 'pointer',
-                  display: 'flex', alignItems: 'center', gap: SP.lg,
-                  fontFamily: sans, transition: 'border-color 0.2s',
-                  opacity: loading ? 0.6 : 1,
+                  background: 'none', border: 'none', padding: 0,
+                  color: GOLD, fontWeight: 700, cursor: loading ? 'wait' : 'pointer',
+                  textDecoration: 'underline', fontFamily: sans, fontSize: 'inherit',
                 }}
               >
-                <Crown size={28} color={GOLD} />
-                <div style={{ flex: 1, textAlign: 'left' }}>
-                  <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>
-                    {getTierDisplayName('premium')} {PRODUCTS.premium.price}
-                  </div>
-                  <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5, marginTop: 2 }}>
-                    Unlimited saves, Neighbourhood System, PDF/JSON export, Map supply chains
-                  </div>
-                </div>
-                <div style={{ fontSize: FS.sm, fontWeight: 600, color: GOLD }}>
-                  {loading === 'premium' ? 'Redirecting...' : 'Upgrade'}
-                </div>
+                {loading === 'premium' ? 'Redirecting...' : `or upgrade to ${getTierDisplayName('premium')}`}
               </button>
-            </>
+              {' '}for a monthly credit allowance.
+            </div>
           )}
 
           <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5 }}>
