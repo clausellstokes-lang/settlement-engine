@@ -50,6 +50,14 @@ export const RELATIONSHIP_TOKENS = Object.freeze({
     border: color['parchment-200'],
     edge: { width: 2, dash: '6 3', priority: 2, arrow: false },
   },
+  vassal: {
+    id: 'vassal',
+    label: 'Vassal',
+    color: color['violet-500'],
+    bg: color['violet-100'],
+    border: color['parchment-200'],
+    edge: { width: 2.3, dash: '8 3', priority: 3, arrow: true },
+  },
   rival: {
     id: 'rival',
     label: 'Rival',
@@ -93,7 +101,7 @@ export const RELATIONSHIP_TOKENS = Object.freeze({
 });
 
 export const RELATIONSHIP_TYPE_OPTIONS = Object.freeze(
-  ['neutral', 'trade_partner', 'allied', 'patron', 'client', 'rival', 'cold_war', 'hostile', 'criminal_network']
+  ['neutral', 'trade_partner', 'allied', 'patron', 'client', 'vassal', 'rival', 'cold_war', 'hostile', 'criminal_network']
     .map(id => {
       const token = RELATIONSHIP_TOKENS[id];
       return { id, label: token.label, color: token.color };

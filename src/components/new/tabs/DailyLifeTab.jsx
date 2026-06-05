@@ -22,7 +22,7 @@ function AnchorFact({ label, value, accent }) {
       borderRadius: 5, padding: '5px 9px',
     }}>
       <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
-      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || '—'}</div>
+      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || ', '}</div>
     </div>
   );
 }
@@ -132,11 +132,11 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
     if (hasContent) {
       return isConfigured
         ? `↺ Regenerate Daily Life (${getCost('dailyLife')} credits)`
-        : '↺ Regenerate Daily Life — Narrative refinement';
+        : '↺ Regenerate Daily Life: Narrative refinement';
     }
     return isConfigured
       ? `✦ Generate Daily Life (${getCost('dailyLife')} credits)`
-      : '✦ Generate Daily Life — Narrative refinement';
+      : '✦ Generate Daily Life: Narrative refinement';
   })();
 
   return (
@@ -190,7 +190,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           }}
         >
           <strong style={{ color: swatch['#7A5A1A'] }}>✦ Save this settlement</strong>
-          {' '}to refine Daily Life into narrative — five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
+          {' '}to refine Daily Life into narrative. Five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
         </div>
       ) : (
         <button
@@ -283,7 +283,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
             What is daily life like here?
           </div>
           <div style={{ fontSize: FS['11.5'], color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
-            Generate a prose description of ordinary life in this settlement — dawn, the market, the tavern,
+            Generate a prose description of ordinary life in this settlement. Dawn, the market, the tavern,
             the watch. Opus-grade writing, five paragraphs, grounded in this settlement's specific stressors and trade.
           </div>
         </div>

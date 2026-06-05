@@ -1,0 +1,453 @@
+import { TIER_ORDER } from '../../data/constants.js';
+import {
+  ensureRelationshipState,
+  getRelationshipSettlements,
+  normalizeRelationshipEdge,
+  relationshipKeyFromEdge,
+} from './relationshipEvolution.js';
+
+export const RELATIONSHIP_MEMORY_HALF_LIFE_TICKS = 4;
+export const RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS = 24;
+export const RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS = 6;
+export const RELATIONSHIP_MEMORY_MAX_CONTEXT_MEMORIES = 3;
+
+const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+
+const round2 = (value) => Math.round((Number(value) || 0) * 100) / 100;
+
+const TYPE_DAILY_LIFE_BASE = Object.freeze({
+  neutral: 0.08,
+  trade_partner: 0.34,
+  allied: 0.42,
+  patron: 0.5,
+  client: 0.48,
+  vassal: 0.62,
+  rival: 0.34,
+  cold_war: 0.7,
+  hostile: 0.78,
+  criminal_network: 0.48,
+});
+
+const POSTURE_LABELS = Object.freeze({
+  stable_neutral: 'stable neutral posture',
+  open_neutral: 'open but uncommitted neutral posture',
+  open_trade: 'open trade posture',
+  strained_trade: 'strained trade posture',
+  protective_alliance: 'protective alliance posture',
+  strained_alliance: 'strained alliance posture',
+  protective_patronage: 'protective patronage posture',
+  coercive_patronage: 'coercive patronage posture',
+  stable_vassalage: 'stable vassalage posture',
+  coercive_subject: 'coercive subject posture',
+  rebellious_subject: 'rebellious subject posture',
+  managed_rivalry: 'managed rivalry posture',
+  escalating_rivalry: 'escalating rivalry posture',
+  covert_pressure: 'covert cold-war posture',
+  sanctions_posture: 'sanctions posture',
+  open_hostility: 'open hostility posture',
+  war_exhaustion: 'war-exhaustion posture',
+  covert_corridor: 'covert criminal-corridor posture',
+});
+
+function clipText(value, max = 220) {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  return text.length > max ? `${text.slice(0, max - 1).trim()}...` : text;
+}
+
+function titleForType(type) {
+  return String(type || 'neutral').replace(/_/g, ' ');
+}
+
+function tierRank(item) {
+  const tier = item?.settlement?.tier || item?.tier || 'village';
+  const rank = TIER_ORDER.indexOf(tier);
+  return rank >= 0 ? rank : TIER_ORDER.indexOf('village');
+}
+
+function population(item) {
+  const pop = item?.settlement?.population;
+  if (typeof pop === 'number') return pop;
+  if (pop && typeof pop.total === 'number') return pop.total;
+  return 0;
+}
+
+function settlementPower(item) {
+  if (!item) return 0.35;
+  const popScore = Math.min(1, Math.log10(Math.max(10, population(item))) / 5);
+  const tierScore = tierRank(item) / Math.max(1, TIER_ORDER.length - 1);
+  const scores = item.causal?.scores || {};
+  const economy = (scores.trade_connectivity ?? 50) / 100;
+  const defense = (scores.defense_readiness ?? 50) / 100;
+  const legitimacy = (scores.public_legitimacy ?? 50) / 100;
+  return clamp01(tierScore * 0.38 + popScore * 0.18 + economy * 0.18 + defense * 0.16 + legitimacy * 0.1);
+}
+
+function itemFor(snapshot, saveId) {
+  return snapshot?.byId?.get?.(String(saveId)) || null;
+}
+
+function nameFor({ snapshot, savedSettlements, saveId }) {
+  const id = String(saveId);
+  const item = itemFor(snapshot, id);
+  if (item?.name) return item.name;
+  const save = (savedSettlements || []).find(s => String(s.id || s.settlement?.id) === id);
+  return save?.name || save?.settlement?.name || id;
+}
+
+export function relationshipMemoryWeight(
+  eventTick,
+  currentTick = 0,
+  {
+    halfLifeTicks = RELATIONSHIP_MEMORY_HALF_LIFE_TICKS,
+    maxLookbackTicks = RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS,
+  } = {},
+) {
+  if (!Number.isFinite(eventTick)) return 0.35;
+  const age = Math.max(0, Number(currentTick || 0) - eventTick);
+  if (age > maxLookbackTicks) return 0;
+  return clamp01(Math.pow(0.5, age / Math.max(1, halfLifeTicks)));
+}
+
+function memoryEntry(raw, currentTick, fallbackType) {
+  const tick = Number.isFinite(raw?.tick) ? raw.tick : null;
+  const severity = clamp01(raw?.severity ?? raw?.outcome?.severity ?? 0.45);
+  const weight = relationshipMemoryWeight(tick, currentTick);
+  if (weight <= 0) return null;
+  const type = raw?.type || raw?.candidateType || raw?.ruleId || fallbackType || 'relationship_memory';
+  const summary = raw?.summary || raw?.headline || raw?.reason || raw?.label || `${titleForType(type)} affected the relationship.`;
+  return {
+    tick,
+    type,
+    label: titleForType(type),
+    summary: clipText(summary),
+    severity: round2(severity),
+    weight: round2(weight),
+    score: round2(severity * weight),
+  };
+}
+
+function collectRelationshipMemories({ worldState, relationshipKey, relState, currentTick }) {
+  const out = [];
+  for (const incident of relState.recentIncidents || []) {
+    const entry = memoryEntry(incident, currentTick, 'recent_incident');
+    if (entry) out.push(entry);
+  }
+  for (const item of relState.history || []) {
+    const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_history');
+    if (entry) out.push(entry);
+  }
+  for (const item of relState.hierarchyResolutions || []) {
+    const entry = memoryEntry({ severity: 0.74, ...item }, currentTick, 'hierarchy_resolution');
+    if (entry) out.push(entry);
+  }
+  for (const pulse of worldState?.pulseHistory || []) {
+    const pulseTick = Number.isFinite(pulse?.tick) ? pulse.tick : null;
+    for (const outcome of pulse?.selectedOutcomes || []) {
+      if (outcome?.relationshipKey !== relationshipKey) continue;
+      const entry = memoryEntry({
+        ...outcome,
+        tick: Number.isFinite(outcome?.tick) ? outcome.tick : pulseTick,
+      }, currentTick, outcome?.candidateType || 'pulse_outcome');
+      if (entry) out.push(entry);
+    }
+  }
+  return out.sort((a, b) => b.score - a.score).slice(0, 8);
+}
+
+function flowProfile(type, relState) {
+  const trust = clamp01(relState.trust);
+  const resentment = clamp01(relState.resentment);
+  const dependency = clamp01(relState.dependency);
+  const leverage = clamp01(relState.leverage);
+  const pact = clamp01(relState.pactStrength);
+  switch (type) {
+    case 'trade_partner':
+      return { trade: round2(0.45 + trust * 0.35), security: 0.1, authority: 0, information: 0.35, tribute: 0 };
+    case 'allied':
+      return { trade: round2(0.25 + trust * 0.25), security: round2(0.45 + pact * 0.4), authority: 0.08, information: 0.48, tribute: 0 };
+    case 'patron':
+      return { trade: round2(0.18 + dependency * 0.22), security: round2(0.22 + pact * 0.26), authority: round2(0.42 + leverage * 0.34), information: 0.28, tribute: round2(0.24 + dependency * 0.38) };
+    case 'vassal':
+      return { trade: round2(0.12 + dependency * 0.18), security: round2(0.3 + pact * 0.36), authority: round2(0.58 + leverage * 0.34), information: 0.42, tribute: round2(0.48 + dependency * 0.34) };
+    case 'rival':
+      return { trade: round2(-0.12 - resentment * 0.22), security: round2(-0.18 - resentment * 0.24), authority: -0.12, information: 0.2, tribute: 0 };
+    case 'cold_war':
+      return { trade: round2(-0.22 - resentment * 0.2), security: round2(-0.28 - relState.fear * 0.24), authority: -0.18, information: 0.52, tribute: 0 };
+    case 'hostile':
+      return { trade: round2(-0.42 - resentment * 0.18), security: round2(-0.5 - relState.fear * 0.28), authority: -0.34, information: 0.18, tribute: 0 };
+    case 'criminal_network':
+      return { trade: round2(0.08 - resentment * 0.12), security: round2(-0.2 - relState.fear * 0.18), authority: round2(-0.08 + leverage * 0.18), information: 0.46, tribute: round2(leverage * 0.22) };
+    default:
+      return { trade: round2(0.05 + trust * 0.08), security: 0.03, authority: 0, information: 0.08, tribute: 0 };
+  }
+}
+
+function classifyPosture(type, relState, memoryScore) {
+  if (type === 'neutral') return relState.trust > 0.55 ? 'open_neutral' : 'stable_neutral';
+  if (type === 'trade_partner') return relState.resentment > 0.34 || relState.tradeBalance < 0.38 ? 'strained_trade' : 'open_trade';
+  if (type === 'allied') return relState.obligationFatigue > 0.45 || relState.resentment > 0.28 ? 'strained_alliance' : 'protective_alliance';
+  if (type === 'patron' || type === 'client') return relState.resentment > 0.5 || relState.fear > 0.45 ? 'coercive_patronage' : 'protective_patronage';
+  if (type === 'vassal') {
+    if (relState.resentment > 0.64 || relState.overlordWeaknessStreak >= 2) return 'rebellious_subject';
+    if (relState.fear > 0.5 || relState.leverage > 0.75) return 'coercive_subject';
+    return 'stable_vassalage';
+  }
+  if (type === 'rival') return relState.resentment > 0.62 || memoryScore > 0.5 ? 'escalating_rivalry' : 'managed_rivalry';
+  if (type === 'cold_war') return relState.tradeBalance < 0.24 || relState.leverage > 0.5 ? 'sanctions_posture' : 'covert_pressure';
+  if (type === 'hostile') return relState.militaryBurden > 0.45 || relState.trust > 0.16 ? 'war_exhaustion' : 'open_hostility';
+  if (type === 'criminal_network') return 'covert_corridor';
+  return 'stable_neutral';
+}
+
+function postureReasons(type, relState, memories, asymmetry) {
+  const out = [];
+  if (memories[0]) out.push(`Recent memory: ${memories[0].summary}`);
+  if (relState.resentment > 0.5) out.push(`High resentment (${relState.resentment.toFixed(2)}) shapes the posture.`);
+  if (relState.trust > 0.65) out.push(`High trust (${relState.trust.toFixed(2)}) keeps the relationship functional.`);
+  if (relState.dependency > 0.6) out.push(`Dependency (${relState.dependency.toFixed(2)}) makes the relationship materially unequal.`);
+  if (Math.abs(asymmetry) > 0.22) {
+    out.push(asymmetry > 0
+      ? 'The source settlement has the stronger structural position.'
+      : 'The target settlement has the stronger structural position.');
+  }
+  if (!out.length) out.push(`${titleForType(type)} relationship is currently quiet.`);
+  return out.slice(0, 4);
+}
+
+function practicalEffects(type, posture) {
+  if (type === 'trade_partner') return posture === 'strained_trade'
+    ? ['Merchants price risk into contracts.', 'Caravans delay departures or seek alternate routes.', 'Market gossip tracks shortages and favors.']
+    : ['Caravans and market factors move with confidence.', 'Imported goods feel routine rather than exceptional.'];
+  if (type === 'allied') return posture === 'strained_alliance'
+    ? ['Envoys ask what the alliance still costs.', 'Patrols share news but count supplies carefully.', 'Common folk hear rumors of obligation fatigue.']
+    : ['Messengers and scouts move openly.', 'Militia talk assumes help can arrive.', 'Shared threats shape watch routines.'];
+  if (type === 'patron' || type === 'client') return posture === 'coercive_patronage'
+    ? ['Tax collectors, creditors, or inspectors are more visible.', 'Local elites measure speech around patron interests.', 'Protection feels mixed with pressure.']
+    : ['Patron protection keeps roads and contracts steadier.', 'Client leaders frame concessions as practical necessity.'];
+  if (type === 'vassal') return posture === 'rebellious_subject'
+    ? ['Tribute and levy talk makes daily life tense.', 'Local leaders quietly test autonomy.', 'Overlord weakness becomes tavern arithmetic.']
+    : ['Tribute schedules, legal obligations, and patrol expectations shape ordinary routines.', 'People distinguish local custom from overlord command.'];
+  if (type === 'rival') return posture === 'escalating_rivalry'
+    ? ['Craftsmen and merchants compare prices like weapons.', 'Prestige contests spill into rumor and recruitment.', 'Border incidents feel possible.']
+    : ['Competition is sharp but not yet ruinous.', 'People watch the rival as a measuring stick.'];
+  if (type === 'cold_war') return posture === 'sanctions_posture'
+    ? ['Sanctions, inspections, and quiet embargoes touch the market day.', 'Agents and informants matter more than soldiers.', 'Travelers get questioned twice.']
+    : ['Rumors, coded messages, and cautious patrols shape the mood.', 'The conflict is present even when no banners move.'];
+  if (type === 'hostile') return posture === 'war_exhaustion'
+    ? ['People still fear raids, but exhaustion makes truce talk plausible.', 'Supply clerks and guards count losses before glory.']
+    : ['Watch patrols, road checks, and defensive routines dominate public life.', 'Households keep one ear turned toward the border.'];
+  if (type === 'criminal_network') return ['Smuggling, favors, and protection money distort ordinary commerce.', 'People know which doors are safer left unopened.'];
+  return ['Regional politics stays mostly background noise today.'];
+}
+
+/**
+ * @param {{ worldState?: any, regionalGraph?: any, snapshot?: any, currentTick?: number|null }} [args]
+ */
+export function buildRelationshipPostures({ worldState = {}, regionalGraph = {}, snapshot = null, currentTick = null } = {}) {
+  const tick = Number.isFinite(currentTick) ? currentTick : Number(worldState?.tick) || 0;
+  const states = worldState?.relationshipStates || {};
+  const edges = regionalGraph?.edges || snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
+  const postures = [];
+
+  for (const rawEdge of edges) {
+    const relationshipKey = relationshipKeyFromEdge(rawEdge);
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[relationshipKey]);
+    const { from, to } = getRelationshipSettlements(edge);
+    if (!from || !to) continue;
+    const memories = collectRelationshipMemories({ worldState, relationshipKey, relState, currentTick: tick });
+    const memoryScore = clamp01(memories.reduce((sum, item) => sum + item.score, 0));
+    const type = relState.relationshipType;
+    const posture = classifyPosture(type, relState, memoryScore);
+    const asymmetry = round2(settlementPower(itemFor(snapshot, from)) - settlementPower(itemFor(snapshot, to)));
+    const flow = flowProfile(type, relState);
+    const reasons = postureReasons(type, relState, memories, asymmetry);
+    const dailyLifeWeight = clamp01((TYPE_DAILY_LIFE_BASE[type] ?? 0.12) + memoryScore * 0.35 + Math.max(0, relState.resentment - 0.35) * 0.18);
+
+    postures.push({
+      relationshipKey,
+      from: String(from),
+      to: String(to),
+      relationshipType: type,
+      legacyRelationshipType: edge.legacyRelationshipType || null,
+      posture,
+      postureLabel: POSTURE_LABELS[posture] || titleForType(posture),
+      memoryScore: round2(memoryScore),
+      dailyLifeWeight: round2(dailyLifeWeight),
+      asymmetry,
+      flowProfile: flow,
+      recentMemory: memories,
+      reasons,
+      practicalEffects: practicalEffects(type, posture),
+      edge,
+    });
+  }
+
+  return postures.sort((a, b) => b.dailyLifeWeight - a.dailyLifeWeight);
+}
+
+/**
+ * @param {any} [worldState]
+ * @param {any} [regionalGraph]
+ * @param {any} [snapshot]
+ * @param {{ currentTick?: number|null }} [options]
+ * @returns {any}
+ */
+export function refreshRelationshipMemory(worldState = {}, regionalGraph = {}, snapshot = null, options = {}) {
+  const postures = buildRelationshipPostures({
+    worldState,
+    regionalGraph,
+    snapshot,
+    currentTick: options.currentTick,
+  });
+  const relationshipStates = { ...(worldState?.relationshipStates || {}) };
+  for (const posture of postures) {
+    const current = ensureRelationshipState(posture.edge, relationshipStates[posture.relationshipKey]);
+    const relationshipMemory = {
+      posture: posture.posture,
+      postureLabel: posture.postureLabel,
+      score: posture.memoryScore,
+      dailyLifeWeight: posture.dailyLifeWeight,
+      flowProfile: posture.flowProfile,
+      asymmetry: posture.asymmetry,
+      recentMemory: posture.recentMemory.slice(0, 4).map(({ tick, type, label, summary, severity, weight }) => ({
+        tick,
+        type,
+        label,
+        summary,
+        severity,
+        weight,
+      })),
+      reasons: posture.reasons,
+      updatedAtTick: Number.isFinite(options.currentTick) ? options.currentTick : worldState?.tick ?? null,
+    };
+    relationshipStates[posture.relationshipKey] = {
+      ...current,
+      posture: posture.posture,
+      memoryScore: posture.memoryScore,
+      dailyLifeWeight: posture.dailyLifeWeight,
+      postureUpdatedAtTick: relationshipMemory.updatedAtTick,
+      postureReasons: posture.reasons,
+      relationshipMemory,
+    };
+  }
+  return { ...worldState, relationshipStates };
+}
+
+function directionFor(posture, settlementId) {
+  const id = String(settlementId);
+  if (posture.from === id && posture.to === id) return 'self';
+  if (posture.from === id) {
+    if (posture.relationshipType === 'vassal') return 'overlord_to_vassal';
+    if (posture.relationshipType === 'patron') return 'patron_to_client';
+    return 'outgoing';
+  }
+  if (posture.to === id) {
+    if (posture.relationshipType === 'vassal') return 'vassal_to_overlord';
+    if (posture.relationshipType === 'patron') return 'client_to_patron';
+    return 'incoming';
+  }
+  return 'indirect';
+}
+
+function entrySummary(posture, settlementId, otherName) {
+  const direction = directionFor(posture, settlementId);
+  if (direction === 'overlord_to_vassal') return `${otherName} is a vassal under a ${posture.postureLabel}.`;
+  if (direction === 'vassal_to_overlord') return `${otherName} is the overlord; the settlement lives under a ${posture.postureLabel}.`;
+  if (direction === 'patron_to_client') return `${otherName} is a client in a ${posture.postureLabel}.`;
+  if (direction === 'client_to_patron') return `${otherName} is the patron in a ${posture.postureLabel}.`;
+  return `${otherName} has a ${posture.postureLabel} with this settlement.`;
+}
+
+/**
+ * @param {any} context
+ * @param {{ maxRelationships?: number, maxMemories?: number }} [options]
+ */
+export function sanitizeRelationshipMemoryContext(context, {
+  maxRelationships = RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS,
+  maxMemories = RELATIONSHIP_MEMORY_MAX_CONTEXT_MEMORIES,
+} = {}) {
+  if (!context || typeof context !== 'object') return null;
+  const relationships = Array.isArray(context.relationships) ? context.relationships : [];
+  const sanitized = relationships.slice(0, maxRelationships).map(item => ({
+    otherSettlementId: item.otherSettlementId ? String(item.otherSettlementId) : null,
+    otherSettlementName: clipText(item.otherSettlementName, 80),
+    relationshipType: clipText(item.relationshipType, 40),
+    posture: clipText(item.posture, 80),
+    direction: clipText(item.direction, 40),
+    summary: clipText(item.summary, 240),
+    practicalEffects: (Array.isArray(item.practicalEffects) ? item.practicalEffects : [])
+      .slice(0, 4)
+      .map(text => clipText(text, 180)),
+    recentMemory: (Array.isArray(item.recentMemory) ? item.recentMemory : [])
+      .slice(0, maxMemories)
+      .map(memory => ({
+        tick: Number.isFinite(memory?.tick) ? memory.tick : null,
+        label: clipText(memory?.label || memory?.type, 80),
+        summary: clipText(memory?.summary, 200),
+      })),
+  })).filter(item => item.otherSettlementName || item.summary);
+  if (!sanitized.length) return null;
+  return {
+    settlementId: context.settlementId ? String(context.settlementId) : null,
+    generatedAtTick: Number.isFinite(context.generatedAtTick) ? context.generatedAtTick : null,
+    emphasis: 'Earlier relationships in this list have stronger Daily Life influence because they are more recent, severe, or structurally close.',
+    relationships: sanitized,
+  };
+}
+
+/**
+ * @param {{
+ *   settlementId?: string,
+ *   worldState?: any,
+ *   regionalGraph?: any,
+ *   snapshot?: any,
+ *   savedSettlements?: any[],
+ *   maxRelationships?: number,
+ *   maxMemories?: number,
+ * }} [args]
+ */
+export function buildSettlementRelationshipMemoryContext({
+  settlementId,
+  worldState = {},
+  regionalGraph = {},
+  snapshot = null,
+  savedSettlements = [],
+  maxRelationships = RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS,
+  maxMemories = RELATIONSHIP_MEMORY_MAX_CONTEXT_MEMORIES,
+} = {}) {
+  if (!settlementId) return null;
+  const id = String(settlementId);
+  const postures = buildRelationshipPostures({
+    worldState,
+    regionalGraph,
+    snapshot,
+    currentTick: worldState?.tick,
+  }).filter(posture => posture.from === id || posture.to === id);
+
+  if (!postures.length) return null;
+  const relationships = postures.slice(0, maxRelationships).map(posture => {
+    const otherId = posture.from === id ? posture.to : posture.from;
+    const otherSettlementName = nameFor({ snapshot, savedSettlements, saveId: otherId });
+    return {
+      otherSettlementId: otherId,
+      otherSettlementName,
+      relationshipType: posture.relationshipType,
+      posture: posture.postureLabel,
+      direction: directionFor(posture, id),
+      summary: entrySummary(posture, id, otherSettlementName),
+      practicalEffects: posture.practicalEffects,
+      recentMemory: posture.recentMemory.slice(0, maxMemories).map(memory => ({
+        tick: memory.tick,
+        label: memory.label,
+        summary: memory.summary,
+      })),
+    };
+  });
+
+  return sanitizeRelationshipMemoryContext({
+    settlementId: id,
+    generatedAtTick: Number.isFinite(worldState?.tick) ? worldState.tick : null,
+    relationships,
+  }, { maxRelationships, maxMemories });
+}

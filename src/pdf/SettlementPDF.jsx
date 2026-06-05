@@ -106,7 +106,7 @@ export function SettlementPDF({
 
   return (
     <Document
-      title={`${safe.name || 'Settlement'} — Dossier`}
+      title={`${safe.name || 'Settlement'}: Dossier`}
       author="SettlementForge"
       creator="SettlementForge"
       subject={`Settlement dossier${useAi ? ' (AI narrative edition)' : ''}`}

@@ -86,7 +86,7 @@ export default function TerrainToolbar({ bridgeRef }) {
         onClick={() => activate(TERRAIN_TOOLS.HEIGHTMAP)}
         Icon={Mountain}
         label="Heightmap"
-        title="Open FMG's heightmap editor — paint terrain elevation."
+        title="Open FMG's heightmap editor. Paint terrain elevation."
       />
       <div style={{ display: 'flex', alignItems: 'stretch', gap: 0 }}>
         <ToolButton
@@ -99,7 +99,7 @@ export default function TerrainToolbar({ bridgeRef }) {
         />
         <button
           onClick={editBiomes}
-          title="Open FMG's biomes editor — repaint biome regions or change classification."
+          title="Open FMG's biomes editor. Repaint biome regions or change classification."
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             padding: '0 8px',
@@ -139,7 +139,7 @@ export default function TerrainToolbar({ bridgeRef }) {
         <Info size={12} style={{ flexShrink: 0 }} />
         <span>
           To edit a river, lake, or coastline, double-click it directly on
-          the map — FMG's per-feature editor will open in place.
+          the map: FMG's per-feature editor will open in place.
         </span>
       </div>
     </div>

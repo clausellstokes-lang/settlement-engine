@@ -24,6 +24,7 @@
  *     dailyLife,        P22 — 8 slots
  *     districts,        P29 — wealth / safety / tension / hook per district
  *     region,           P30 — typed neighbour graph
+ *     relationshipMemory, background regional posture for Daily Life
  *     constraints: {
  *       forbidden,      what the AI MUST NOT do
  *       lockedEntities, P33 canon-tagged entities preserved
@@ -58,6 +59,7 @@ import { detectContradictions } from './contradictions.js';
 import { deriveDailyLife } from './dailyLife.js';
 import { deriveAllDistricts } from './districtProfile.js';
 import { deriveRegionalGraph } from './regionalGraph.js';
+import { sanitizeRelationshipMemoryContext as sanitizeWorldPulseRelationshipMemory } from './worldPulse/relationshipMemory.js';
 import { canonBreakdown, tagEntityCanon } from './canonStatus.js';
 import { walkUserEdits } from './userEdits.js';
 
@@ -86,6 +88,7 @@ const DEFAULT_OPTIONS = Object.freeze({
   dominantNpcsOnly: true, // most prompts only care about dominant figures
   includeContradictions: true,
   userDirection: null,
+  relationshipMemoryContext: null,
 });
 
 // ── Locked-entity enumeration ────────────────────────────────────────────
@@ -219,6 +222,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
       dailyLife: null,
       districts: [],
       region: { center: null, nodes: [], links: [] },
+      relationshipMemory: sanitizeWorldPulseRelationshipMemory(opts.relationshipMemoryContext),
       constraints: {
         forbidden: [...STATIC_FORBIDDEN],
         lockedEntities: [],
@@ -270,6 +274,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
     dailyLife:       deriveDailyLife(settlement),
     districts:       deriveAllDistricts(settlement),
     region:          deriveRegionalGraph(settlement),
+    relationshipMemory: sanitizeWorldPulseRelationshipMemory(opts.relationshipMemoryContext),
 
     constraints: {
       forbidden: forbiddenChanges(settlement),
@@ -353,6 +358,7 @@ export function summarizeGroundingPayload(payload) {
   lines.push(`Top hooks: ${payload.hooks?.length || 0}.`);
   lines.push(`Contradictions: ${payload.contradictions?.length || 0}.`);
   lines.push(`Districts: ${payload.districts?.length || 0}.`);
+  lines.push(`Relationship memory entries: ${payload.relationshipMemory?.relationships?.length || 0}.`);
   lines.push(`Forbidden-change rules: ${payload.constraints?.forbidden?.length || 0}.`);
   lines.push(`Locked entities: ${payload.constraints?.lockedEntities?.length || 0}.`);
   if (payload.constraints?.userDirection) {
@@ -372,3 +378,5 @@ export function defaultGroundingOptions() {
 export function staticForbiddenRules() {
   return [...STATIC_FORBIDDEN];
 }
+
+export const sanitizeRelationshipMemoryContext = sanitizeWorldPulseRelationshipMemory;

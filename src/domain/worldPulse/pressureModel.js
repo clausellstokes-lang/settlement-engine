@@ -121,6 +121,15 @@ export function deriveSettlementPressures(snapshot) {
       conflictReasons.push('a hostile neighbour relationship raises conflict pressure');
     }
     out.push({ ...base, kind: 'conflict', label: 'Conflict pressure', score: clamp01(conflict), reasons: conflictReasons });
+    out.push({
+      ...base,
+      kind: 'hostility',
+      label: 'Hostility pressure',
+      score: clamp01(hostility),
+      reasons: hostility > 0
+        ? ['hostile, cold-war, or rival relationships are exerting pressure']
+        : ['no major hostile relationship pressure detected'],
+    });
 
     const tradeReasons = [];
     let trade = pressureFromScore(scores.trade_connectivity);
@@ -130,6 +139,24 @@ export function deriveSettlementPressures(snapshot) {
     }
     out.push({ ...base, kind: 'trade', label: 'Trade pressure', score: clamp01(trade), reasons: tradeReasons });
 
+    const economyReasons = [];
+    const economyScore = Math.round((
+      (scores.trade_connectivity ?? 50)
+      + (scores.labor_capacity ?? 50)
+      + (scores.infrastructure_condition ?? 50)
+      + (scores.food_security ?? 50)
+    ) / 4);
+    let economy = pressureFromScore(economyScore);
+    if (hasCondition(item, /tax_revenue|economic|debt|market|export_market|import_shortage|route/)) {
+      economy += 0.14;
+      economyReasons.push('market, debt, route, or tax condition');
+    }
+    if ((scores.criminal_opportunity ?? 50) > 65) {
+      economy += 0.06;
+      economyReasons.push('criminal opportunity drags on commerce');
+    }
+    out.push({ ...base, kind: 'economy', label: 'Economic pressure', score: clamp01(economy), reasons: economyReasons });
+
     const legitimacyReasons = [];
     let legitimacy = pressureFromScore(scores.public_legitimacy);
     if (hasCondition(item, /authority|corruption|leadership|information|religious/)) {
@@ -137,6 +164,23 @@ export function deriveSettlementPressures(snapshot) {
       legitimacyReasons.push('authority or trust condition');
     }
     out.push({ ...base, kind: 'legitimacy', label: 'Legitimacy pressure', score: clamp01(legitimacy), reasons: legitimacyReasons });
+
+    const defenseReasons = [];
+    const defenseScore = Math.round((
+      (scores.defense_readiness ?? 50)
+      + (scores.infrastructure_condition ?? 50)
+      + (scores.labor_capacity ?? 50)
+    ) / 3);
+    let defense = pressureFromScore(defenseScore);
+    if (hasCondition(item, /war|siege|occupation|protection_gap|raid|defense|insurgency/)) {
+      defense += 0.16;
+      defenseReasons.push('military or protection condition');
+    }
+    if (countChannels(snapshot, item.id, ['war_front']) > 0) {
+      defense += 0.08;
+      defenseReasons.push('war-front regional channel exists');
+    }
+    out.push({ ...base, kind: 'defense', label: 'Defense pressure', score: clamp01(defense), reasons: defenseReasons });
 
     const crimeReasons = [];
     let crime = pressureFromScore(scores.criminal_opportunity, false);
@@ -155,10 +199,15 @@ export function deriveSettlementPressures(snapshot) {
 
 export function pressureIndex(pressures = []) {
   const map = new Map();
+  const bySettlement = {};
   for (const pressure of pressures) {
     map.set(`${pressure.settlementId}:${pressure.kind}`, pressure);
+    const id = String(pressure.settlementId);
+    if (!bySettlement[id]) bySettlement[id] = [];
+    bySettlement[id].push(pressure);
   }
   return {
+    bySettlement,
     get: (settlementId, kind) => map.get(`${settlementId}:${kind}`) || null,
     strongest: (settlementId, kinds = []) => kinds
       .map(kind => map.get(`${settlementId}:${kind}`))
@@ -166,4 +215,3 @@ export function pressureIndex(pressures = []) {
       .sort((a, b) => b.score - a.score)[0] || null,
   };
 }
-

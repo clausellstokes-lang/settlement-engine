@@ -332,6 +332,10 @@ describe('Tier 6.8 — edge function imports the aiGrounding bundle', () => {
   it('imports forbiddenChanges', () => {
     expect(EDGE).toMatch(/forbiddenChanges[\s\S]*?from\s+['"]\.\.\/_shared\/aiGroundingBundle\.js['"]/);
   });
+
+  it('imports sanitizeRelationshipMemoryContext', () => {
+    expect(EDGE).toMatch(/sanitizeRelationshipMemoryContext[\s\S]*?from\s+['"]\.\.\/_shared\/aiGroundingBundle\.js['"]/);
+  });
 });
 
 describe('Tier 6.8 — edge function uses the shared composer at request time', () => {
@@ -351,11 +355,18 @@ describe('Tier 6.8 — edge function uses the shared composer at request time', 
 
   it('the request handler invokes augmentSummaryWithGrounding before the AI call', () => {
     // Specifically: summary is built from augmentSummaryWithGrounding(...)
-    expect(EDGE).toMatch(/const summary = augmentSummaryWithGrounding\(/);
+    expect(EDGE).toMatch(/const baseSummary = augmentSummaryWithGrounding\(/);
   });
 
   it('the request handler computes a per-call dynamicPreservation block', () => {
     expect(EDGE).toMatch(/const dynamicPreservation = preservationBlockFor\(settlement\)/);
+  });
+
+  it('daily life sanitizes optional relationship memory before prompt use', () => {
+    expect(EDGE).toMatch(/relationshipMemoryContext/);
+    expect(EDGE).toMatch(/confirmedRelationshipMemoryContext/);
+    expect(EDGE).toMatch(/sanitizeRelationshipMemoryContext\(relationshipMemoryContext\)/);
+    expect(EDGE).toMatch(/buildDailyLifePrompt\(cfg\.instruction,\s*summary,\s*confirmedAiGuidance,\s*confirmedRelationshipMemoryContext\)/);
   });
 
   it('buildRefinementPrompt receives the dynamicPreservation argument', () => {
@@ -442,23 +453,25 @@ describe('Tier 6.4 — pinned NPCs drop from refinement extract', () => {
 // ─────────────────────────────────────────────────────────────────────
 
 describe('Tier 6 — AI model strategy is explicit', () => {
-  it('THESIS_MODEL is Opus 4.7', () => {
-    expect(EDGE).toMatch(/THESIS_MODEL\s*=\s*['"]claude-opus-4-7['"]/);
+  it('declares a default explicit model preference', () => {
+    expect(EDGE).toMatch(/DEFAULT_MODEL_PREFERENCE\s*=\s*['"]anthropic_claude_opus_4_8['"]/);
   });
 
-  it('REFINEMENT_MODEL is Haiku 4.5', () => {
-    expect(EDGE).toMatch(/REFINEMENT_MODEL\s*=\s*['"]claude-haiku-4-5/);
+  it('declares provider/model profiles for Anthropic and OpenAI', () => {
+    expect(EDGE).toMatch(/anthropic_claude_opus_4_8[\s\S]{0,240}claude-opus-4-8/);
+    expect(EDGE).toMatch(/anthropic_claude_haiku_4_5[\s\S]{0,260}claude-haiku-4-5-20251001/);
+    expect(EDGE).toMatch(/openai_gpt_5_2[\s\S]{0,220}gpt-5\.2/);
   });
 
-  it('DAILY_LIFE_MODEL is Opus (atmospheric showcase)', () => {
-    expect(EDGE).toMatch(/DAILY_LIFE_MODEL\s*=\s*['"]claude-opus-4-7['"]/);
+  it('normalizes old preference keys to the explicit catalog', () => {
+    expect(EDGE).toMatch(/MODEL_ALIASES/);
+    expect(EDGE).toMatch(/claude_best:\s*['"]anthropic_claude_opus_4_8['"]/);
+    expect(EDGE).toMatch(/chatgpt_fast:\s*['"]openai_gpt_5_mini['"]/);
   });
 
-  it('the three model assignments are declared as top-level constants', () => {
-    // Lets future tooling (eval framework, swap-on-incident playbook)
-    // tweak models without grepping the whole file.
-    const lines = EDGE.split('\n').filter(l => /_MODEL\s*=\s*['"]claude-/.test(l));
-    expect(lines.length).toBeGreaterThanOrEqual(3);
+  it('chooses the model from the requested phase on the selected profile', () => {
+    expect(EDGE).toMatch(/const profile = MODEL_PROFILES\[modelPreference\]/);
+    expect(EDGE).toMatch(/const model = profile\[phase\]/);
   });
 });
 
@@ -650,15 +663,40 @@ describe('aiGrounding contract surfaces — domain side', () => {
     simulationVersion: 19,
   });
 
-  it('buildAiGroundingPayload returns the documented 14 envelope sections', () => {
+  it('buildAiGroundingPayload returns the documented envelope sections', () => {
     const p = buildAiGroundingPayload(fixture());
     for (const key of [
       'identity', 'spine', 'bands', 'factions', 'chains', 'conditions',
       'threats', 'npcs', 'history', 'hooks', 'contradictions',
-      'dailyLife', 'districts', 'region', 'constraints',
+      'dailyLife', 'districts', 'region', 'relationshipMemory', 'constraints',
     ]) {
       expect(p).toHaveProperty(key);
     }
+  });
+
+  it('relationshipMemory is optional and sanitized for AI use', () => {
+    const p = buildAiGroundingPayload(fixture(), {
+      relationshipMemoryContext: {
+        settlementId: 'sett.contract',
+        generatedAtTick: 4,
+        relationships: [{
+          otherSettlementId: 'sett.other',
+          otherSettlementName: 'Otherhold',
+          relationshipType: 'cold_war',
+          posture: 'sanctions posture',
+          direction: 'outgoing',
+          summary: 'Sanctions shape the market.',
+          dailyLifeWeight: 0.99,
+          recentMemory: [{ tick: 4, label: 'raid', summary: 'A raid hardened the border.', weight: 1 }],
+        }],
+      },
+    });
+
+    expect(p.relationshipMemory.relationships[0]).toMatchObject({
+      otherSettlementName: 'Otherhold',
+      relationshipType: 'cold_war',
+    });
+    expect(JSON.stringify(p.relationshipMemory)).not.toMatch(/dailyLifeWeight|weight/);
   });
 
   it('payload.constraints includes forbidden, lockedEntities, userDirection', () => {

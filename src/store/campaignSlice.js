@@ -316,7 +316,7 @@ function migrateMapState(ms) {
     forests: [],
     layers: {
       relationships: true,
-      relationshipFilter: ['trade_partner', 'allied', 'patron', 'client', 'rival', 'cold_war', 'hostile'],
+      relationshipFilter: ['trade_partner', 'allied', 'patron', 'client', 'vassal', 'rival', 'cold_war', 'hostile'],
       chains: false,
       chainFilter: null,
       regionalChannels: true,

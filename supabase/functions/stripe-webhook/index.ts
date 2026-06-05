@@ -208,7 +208,11 @@ serve(async (req) => {
         await supabase.from('profiles').update({
           tier: 'premium',
           stripe_customer_id: typeof session.customer === 'string' ? session.customer : session.customer?.id || null,
+          premium_downgraded_at: null,
+          premium_retention_expires_at: null,
         }).eq('id', userId);
+        const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
+        if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
         console.log(`User ${userId} upgraded to premium (Cartographer)`);
       } else if (product === 'founder_lifetime') {
         // Founder Lifetime: $99 one-time. Gives Cartographer access forever +
@@ -226,8 +230,12 @@ serve(async (req) => {
             tier: 'premium',
             is_founder: true,
             stripe_customer_id: typeof session.customer === 'string' ? session.customer : session.customer?.id || null,
+            premium_downgraded_at: null,
+            premium_retention_expires_at: null,
           })
           .eq('id', userId);
+        const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
+        if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
 
         // Founder bonus: one-time 30-credit grant.
         await grantCredits(supabase, userId!, 30, 'founder_grant', {
@@ -269,11 +277,16 @@ serve(async (req) => {
           console.log(`User ${profile.userId} kept premium after subscription deletion (Founder Lifetime)`);
           break;
         }
+        const { error: downgradeError } = await supabase.rpc('handle_premium_downgrade', {
+          target_user: profile.userId,
+        });
+        if (downgradeError) {
+          throw new Error(`Premium downgrade failed: ${downgradeError.message}`);
+        }
         await supabase.auth.admin.updateUserById(profile.userId, {
           user_metadata: { tier: 'free' },
         });
-        await supabase.from('profiles').update({ tier: 'free' }).eq('id', profile.userId);
-        console.log(`User ${profile.userId} downgraded to free`);
+        console.log(`User ${profile.userId} downgraded to free with retention window`);
       }
       break;
     }

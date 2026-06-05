@@ -290,7 +290,7 @@ export default function WorldMap({ onNavigate } = {}) {
         try { await bridge.clearAllPlacements(); } catch (e) {}
       }
       bumpGeometryVersion();
-      showToast('info', 'New campaign — drag settlements onto the map');
+      showToast('info', 'New campaign. Drag settlements onto the map');
       return;
     }
 
@@ -565,7 +565,7 @@ export default function WorldMap({ onNavigate } = {}) {
                 cursor: 'pointer', minWidth: 180,
               }}
             >
-              <option value="">— No campaign —</option>
+              <option value="">, No campaign</option>
               {campaigns.map(c => (
                 <option key={c.id} value={c.id}>
                   {c.name}{c.mapState ? ' ●' : ''}

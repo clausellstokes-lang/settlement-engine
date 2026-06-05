@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, ArrowRight, Edit3, Check, X, Map as MapIcon, FileText, GitBranch} from 'lucide-react';
+import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, ArrowRight, Edit3, Check, X, Map as MapIcon, FileText, GitBranch, Unlock} from 'lucide-react';
 
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
 import {getAllModifiers, EFFECT_CATEGORIES, fmtMod} from '../lib/relationshipGraph.js';
@@ -14,6 +14,8 @@ import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
 import { t } from '../copy/index.js';
 import { saves as savesService } from '../lib/saves.js';
+import { activeSaveCount, inactiveRetentionCount, isPlanInactiveSave, isSaveActive } from '../lib/saveAccess.js';
+import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import DeleteConfirmation from './DeleteConfirmation';
@@ -84,21 +86,29 @@ function regionalCountsForSave(campaign, saveId) {
 }
 
 // ── Settlement Card (reused in campaigns + unassigned) ────────────────────
-function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts }) {
+function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId }) {
   const [moveOpen, setMoveOpen] = useState(false);
   const ts = (t) => { try { return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; } };
+  const active = isSaveActive(s);
+  const planInactive = isPlanInactiveSave(s);
+  const retentionUntil = s.retentionExpiresAt ? ts(s.retentionExpiresAt) : null;
 
   // No overflow:hidden on the wrapper — would clip the "move to campaign"
   // popover that opens below the arrow button. DeleteConfirmation below
   // carries its own rounded corners + top margin, so nothing visually escapes.
   return (
-    <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:7 }}>
+    <div style={{ background: active ? 'rgba(255,251,245,0.96)' : '#eee9df', border:`1px solid ${active ? BORDER : '#c9c0b2'}`, borderRadius:7, opacity: active ? 1 : 0.68 }}>
       <div style={{ display:'flex', alignItems:'center', gap:8, padding:'9px 12px' }}>
         <div style={{ flex:1, minWidth:0 }}>
           <div style={{ fontSize:FS.md, fontWeight:700, color:INK, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</div>
           <div style={{ fontSize:FS.xxs, color:MUTED, display:'flex', alignItems:'center', gap:6, marginTop:1, flexWrap:'wrap' }}>
             <Clock size={10}/> {ts(s.timestamp)} · {s.tier}
           </div>
+          {!active && (
+            <div style={{ fontSize:FS.micro, color:GOLD, background:GOLD_BG, border:`1px solid ${BORDER}`, borderRadius:8, padding:'2px 6px', display:'inline-flex', alignItems:'center', gap:4, marginTop:4, fontWeight:700 }}>
+              Retained inactive{retentionUntil ? ` until ${retentionUntil}` : ''}
+            </div>
+          )}
           {(s.settlement?.neighbourNetwork?.length > 0) && (
             <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginTop:3 }}>
               {(s.settlement.neighbourNetwork||[]).slice(0,3).map((n,ni) => {
@@ -148,7 +158,7 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
         <div style={{ display:'flex', gap:4, alignItems:'center', flexShrink:0 }}>
           {/* Move to campaign */}
           <div style={{ position:'relative' }}>
-            <button onClick={() => setMoveOpen(!moveOpen)} title={currentCampaignId ? 'Move to...' : 'Add to campaign'} style={{ padding:'4px 6px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:'pointer', fontSize:FS.xxs, fontWeight:700, fontFamily:sans, display:'flex', alignItems:'center', gap:3 }}>
+            <button disabled={!active} onClick={() => active && setMoveOpen(!moveOpen)} title={active ? (currentCampaignId ? 'Move to...' : 'Add to campaign') : 'Reactivate to use campaigns'} style={{ padding:'4px 6px', background:active ? GOLD_BG : '#ddd5c8', color:active ? GOLD : MUTED, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xxs, fontWeight:700, fontFamily:sans, display:'flex', alignItems:'center', gap:3 }}>
               <ArrowRight size={10}/>
             </button>
             {moveOpen && (
@@ -169,7 +179,16 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
               </div>
             )}
           </div>
-          <button onClick={() => onView(s)} style={{ padding:'4px 10px', background:swatch.infoBg, color:swatch.info, border:'1px solid #c0c8e8', borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>View</button>
+          {!active && planInactive && (
+            <button
+              onClick={() => onReactivate?.(s)}
+              disabled={!canReactivate || reactivatingId === s.id}
+              style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', background:canReactivate ? GOLD_BG : '#e0d8ca', color:canReactivate ? GOLD : MUTED, border:`1px solid ${BORDER}`, borderRadius:4, cursor:canReactivate ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}
+            >
+              <Unlock size={11}/>{reactivatingId === s.id ? 'Restoring...' : 'Reactivate'}
+            </button>
+          )}
+          <button disabled={!active} onClick={() => active && onView(s)} style={{ padding:'4px 10px', background:active ? swatch.infoBg : '#ddd5c8', color:active ? swatch.info : MUTED, border:'1px solid #c0c8e8', borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>View</button>
           <button onClick={() => setDeleteId(deleteId === s.id ? null : s.id)} style={{ padding:'4px 10px', background:swatch.dangerBg, color:swatch.danger, border:'1px solid #e8c0c0', borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Delete</button>
         </div>
       </div>
@@ -188,7 +207,7 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
 }
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
-function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts }) {
+function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId }) {
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -272,7 +291,10 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
               deleteConfirmed={deleteConfirmed} campaigns={campaigns}
               addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
               currentCampaignId={campaign.id}
-              regionalCounts={regionalCountsForSave(campaign, s.id)}/>
+              regionalCounts={regionalCountsForSave(campaign, s.id)}
+              onReactivate={onReactivate}
+              canReactivate={canReactivate}
+              reactivatingId={reactivatingId}/>
           ))}
         </div>
       )}
@@ -375,7 +397,7 @@ function SampleDashboard({ onFork, forkingId }) {
         marginBottom: 10,
         textAlign: 'center',
       }}>
-        Start from a sample — or roll your own
+        Start from a sample. Or roll your own
       </div>
       <p style={{
         margin: '0 auto 14px', maxWidth: 460,
@@ -383,7 +405,7 @@ function SampleDashboard({ onFork, forkingId }) {
         textAlign: 'center', fontFamily: sans,
       }}>
         Three hand-picked seeds you can fork into your own saves. Each forks
-        with a unique character — same setting, different settlement.
+        with a unique character. Same setting, different settlement.
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {SAMPLE_SETTLEMENTS.map(sample => (
@@ -443,6 +465,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const ignoreAllQueuedRegionalImpacts = useStore(s => s.ignoreAllQueuedRegionalImpacts);
 
   const onLoad = (data) => {
+    if (data && !isSaveActive(data)) return;
     if (data.config) updateConfig(migrateConfig(data.config));
     if (data.institutionToggles) setInstitutionToggles(data.institutionToggles);
     if (data.categoryToggles) setCategoryToggles(data.categoryToggles);
@@ -543,15 +566,49 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [editNamesOpen, setEditNamesOpen] = useState(false);
   const [newCampaignName, setNewCampaignName] = useState('');
   const [showNewCampaign, setShowNewCampaign] = useState(false);
+  const [reactivatingId, setReactivatingId] = useState(null);
+  const [reactivationError, setReactivationError] = useState('');
 
   const allModifiers = useMemo(() => getAllModifiers(saves), [saves]);
+  const activeSlotsUsed = useMemo(() => activeSaveCount(saves), [saves]);
+  const inactiveRetained = useMemo(() => inactiveRetentionCount(saves), [saves]);
+  const canReactivateInactive = authTier === 'free' && activeSlotsUsed < Math.min(maxSaves || 0, 3);
+
+  const reloadSaves = useCallback(async () => {
+    const loaded = await savesService.list();
+    setSaves(loaded);
+    return loaded;
+  }, [setSaves]);
 
   useEffect(() => {
     savesService.list()
       .then(loaded => { setSaves(loaded); setSavesLoading(false); })
       .catch(e => { console.error('Failed to load saves:', e); setSavesLoading(false); });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setSaves]);
+
+  const handleReactivateSave = async (save) => {
+    if (!save?.id || !canReactivateInactive) {
+      setReactivationError('Choose an inactive settlement after freeing one of your three free slots.');
+      return;
+    }
+    setReactivatingId(save.id);
+    setReactivationError('');
+    try {
+      const result = await savesService.reactivateFreeSettlement(save.id);
+      if (result && result.ok === false) {
+        setReactivationError(result.reason === 'free_limit_reached'
+          ? 'Your three free settlement slots are already active.'
+          : 'That settlement could not be reactivated.');
+        return;
+      }
+      await reloadSaves();
+    } catch (e) {
+      console.error('Reactivation failed:', e);
+      setReactivationError('That settlement could not be reactivated.');
+    } finally {
+      setReactivatingId(null);
+    }
+  };
 
   // If the user jumped here from the World Map's "Open" button, the map had
   // already set selectedSettlementId in the store. Honor it by opening the
@@ -571,7 +628,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   useEffect(() => {
     if (!pendingFocusId || savesLoading || !saves.length || detail) return;
     const match = saves.find(s => s.id === pendingFocusId);
-    if (match) {
+    if (match && isSaveActive(match)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setDetail({ ...match, saveData: match });
       clearSelectedSettlement();
@@ -595,7 +652,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       if (String(openId) === String(routeId)) return;   // already showing it
       const match = saves.find(s => String(s.id) === String(routeId));
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (match) setDetail({ ...match, saveData: match });
+      if (match && isSaveActive(match)) setDetail({ ...match, saveData: match });
     } else if (openId !== null) {
        
       setDetail(null);
@@ -629,7 +686,17 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const persistBatch = async (updatedSaves, modifiedIds) => {
     try {
       if (savesService.writeAll) await savesService.writeAll(updatedSaves);
-      else for (const id of modifiedIds) { const s = updatedSaves.find(x => x.id === id); if (s) await savesService.update(id, { settlement: s.settlement }); }
+      else for (const id of modifiedIds) {
+        const s = updatedSaves.find(x => x.id === id);
+        if (s) {
+          await savesService.update(id, {
+            settlement: s.settlement,
+            config: s.config,
+            campaignState: s.campaignState,
+            versionHistory: s.versionHistory,
+          });
+        }
+      }
     } catch (e) { console.error('Persist failed:', e); }
   };
 
@@ -668,11 +735,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     }
   };
 
-  const isDuplicate = settlement && saves.some(s => s.name === settlement.name && s.tier === settlement.tier && (s.settlement?.institutions||[]).length === (settlement.institutions||[]).length);
+  const isDuplicate = settlement && saves.some(s => isSaveActive(s) && s.name === settlement.name && s.tier === settlement.tier && (s.settlement?.institutions||[]).length === (settlement.institutions||[]).length);
 
   // ── Save current ────────────────────────────────────────────────────────
   const saveCurrentSettlement = async () => {
     if (!settlement || !canSave) return;
+    if (activeSlotsUsed >= (maxSaves || 30)) return;
     const saveId = Date.now();
     // Audit fix: pull the lifecycle data off the global slice and embed
     // it in the save record's `campaignState`. Without this, canonized
@@ -732,8 +800,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       }
     }
 
-    const effectiveMax = maxSaves || 30;
-    const newSaves = [newEntry, ...currentSaves].slice(0, effectiveMax);
+    const newSaves = [newEntry, ...currentSaves];
     setSaves(newSaves); setSaved(true); setTimeout(() => setSaved(false), 2000);
     try {
       await savesService.save(newEntry);
@@ -819,6 +886,11 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           if (v && typeof v === 'object' && !Array.isArray(v)) merged.settlement[k] = { ...(s.settlement[k] || {}), ...v };
           else merged.settlement[k] = v;
         }
+        merged.settlement = reconcileSettlementChange(merged.settlement, s.settlement, {
+          source: 'settlement_editor',
+          changeType: Object.keys(patch.settlement).join(','),
+          changeLabel: 'manual edit',
+        });
       }
       if (patch.config) merged.config = { ...(s.config || {}), ...patch.config };
       return merged;
@@ -884,7 +956,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     });
   }, [saves, libraryQuery, librarySort, libraryFilters]);
 
-  const onViewSettlement = (s) => setDetail({ ...s, saveData: s });
+  const onViewSettlement = (s) => {
+    if (!isSaveActive(s)) return;
+    setDetail({ ...s, saveData: s });
+  };
 
   // ── Detail view ─────────────────────────────────────────────────────────
   if (detail) {
@@ -928,10 +1003,11 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           </div>
         )}
         <div style={{ display:'flex', gap:8, alignItems:'center', flexWrap:'wrap' }}>
-          <button onClick={saveCurrentSettlement} disabled={!settlement||isDuplicate||!canSave||saves.length>=(maxSaves||30)} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:(!settlement||isDuplicate||!canSave)?'#ccc':GOLD, color:swatch.white, border:'none', borderRadius:5, cursor:(!settlement||isDuplicate||!canSave)?'not-allowed':'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans }}>
-            <Save size={13}/> {saved?'Saved!':!canSave?'Sign In to Save':isDuplicate?'Already Saved':saves.length>=(maxSaves||30)?'Slots Full':'Save Current Settlement'}
+          <button onClick={saveCurrentSettlement} disabled={!settlement||isDuplicate||!canSave||activeSlotsUsed>=(maxSaves||30)} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:(!settlement||isDuplicate||!canSave||activeSlotsUsed>=(maxSaves||30))?'#ccc':GOLD, color:swatch.white, border:'none', borderRadius:5, cursor:(!settlement||isDuplicate||!canSave||activeSlotsUsed>=(maxSaves||30))?'not-allowed':'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans }}>
+            <Save size={13}/> {saved?'Saved!':!canSave?'Sign In to Save':isDuplicate?'Already Saved':activeSlotsUsed>=(maxSaves||30)?'Slots Full':'Save Current Settlement'}
           </button>
-          <span style={{ fontSize:FS.xs, color:MUTED }}>{saves.length}/{maxSaves||30} slots used</span>
+          <span style={{ fontSize:FS.xs, color:MUTED }}>{activeSlotsUsed}/{maxSaves||30} active slots used{inactiveRetained ? ` · ${inactiveRetained} inactive retained` : ''}</span>
+          {reactivationError && <span style={{ fontSize:FS.xs, color:swatch.danger }}>{reactivationError}</span>}
         </div>
       </div>
 
@@ -948,7 +1024,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
               <button onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }} style={{ padding:'6px 10px', background:CARD, color:SECOND, border:`1px solid ${BORDER}`, borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontFamily:sans }}>Cancel</button>
             </div>
           ) : (
-            <button onClick={() => setShowNewCampaign(true)} style={{ display:'flex', alignItems:'center', gap:6, padding:'7px 14px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:6, cursor:'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans }}>
+            <button onClick={() => setShowNewCampaign(true)} style={{ display:'flex', alignItems:'center', gap:6, padding:'7px 14px', background:CARD, color:GOLD, border:`1px solid rgba(160,118,42,0.55)`, borderRadius:6, cursor:'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans, boxShadow:'0 1px 6px rgba(27,20,8,0.08)' }}>
               <FolderPlus size={14}/> New Campaign
             </button>
           )}
@@ -980,7 +1056,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 onResolveRegionalImpact={handleResolveRegionalImpact}
                 onAdvanceRegionalImpacts={handleAdvanceRegionalImpacts}
                 onApplyAllRegionalImpacts={handleApplyAllRegionalImpacts}
-                onIgnoreAllRegionalImpacts={handleIgnoreAllRegionalImpacts}/>
+                onIgnoreAllRegionalImpacts={handleIgnoreAllRegionalImpacts}
+                onReactivate={handleReactivateSave}
+                canReactivate={canReactivateInactive}
+                reactivatingId={reactivatingId}/>
             );
           })}
 
@@ -998,7 +1077,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                     onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}
                     deleteConfirmed={deleteConfirmed} campaigns={campaigns}
                     addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
-                    currentCampaignId={null}/>
+                    currentCampaignId={null}
+                    onReactivate={handleReactivateSave}
+                    canReactivate={canReactivateInactive}
+                    reactivatingId={reactivatingId}/>
                 ))}
               </div>
             </div>

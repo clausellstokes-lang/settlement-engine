@@ -33,22 +33,24 @@ import {
   Sliders, Play, RotateCcw, ChevronDown, ChevronRight,
   Shield, Coins, Sparkles, Skull, Swords, Crown, Globe, Mountain,
   Compass, Tent, Building2, Castle, Landmark, Clock,
-  AlertTriangle, Lock, Unlock, Dice5, Wand2, Link2,
+  AlertTriangle, Lock, Unlock, Dice5, Wand2, Link2, Search,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { DEFAULT_CONFIG } from '../store/configSlice.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, PARCH, sans, serif_, SP, R, FS, swatch } from './theme.js';
 import ChainBuilder from './ChainBuilder.jsx';
+import { buildRegistry } from '../lib/customRegistry.js';
+import { INSTITUTION_SERVICES } from '../data/tradeGoodsData.js';
 
 // ── Static data ──────────────────────────────────────────────────────────────
 
 const TIERS = [
-  { id: 'thorp',      label: 'Thorp',      pop: '8–60',       Icon: Tent },
-  { id: 'hamlet',     label: 'Hamlet',     pop: '61–240',     Icon: Tent },
-  { id: 'village',    label: 'Village',    pop: '401–900',    Icon: Building2 },
-  { id: 'town',       label: 'Town',       pop: '901–5,000',  Icon: Building2 },
-  { id: 'city',       label: 'City',       pop: '5,001–25k',  Icon: Castle },
-  { id: 'metropolis', label: 'Metropolis', pop: '25,001–100k', Icon: Landmark },
+  { id: 'thorp',      label: 'Thorp',      pop: '8-60',       Icon: Tent },
+  { id: 'hamlet',     label: 'Hamlet',     pop: '61-240',     Icon: Tent },
+  { id: 'village',    label: 'Village',    pop: '401-900',    Icon: Building2 },
+  { id: 'town',       label: 'Town',       pop: '901-5,000',  Icon: Building2 },
+  { id: 'city',       label: 'City',       pop: '5,001-25k',  Icon: Castle },
+  { id: 'metropolis', label: 'Metropolis', pop: '25,001-100k', Icon: Landmark },
 ];
 
 const CULTURES = [
@@ -894,7 +896,7 @@ export default function Workshop({ isMobile }) {
             background: 'rgba(139,26,26,0.05)', borderRadius: R.md,
             fontSize: FS.xxs, color: swatch.danger,
           }}>
-            Multiple stresses create compounding narrative pressure. This can produce extreme or unstable settlements — ideal for crisis scenarios.
+            Multiple stresses create compounding narrative pressure. This can produce extreme or unstable settlements. Ideal for crisis scenarios.
           </div>
         )}
       </Panel>
@@ -962,6 +964,11 @@ export default function Workshop({ isMobile }) {
 // trade routes, power dynamics, and defense scenarios for generation.
 
 const INST_CATEGORIES = ['Government', 'Religious', 'Criminal', 'Economy', 'Crafts', 'Markets', 'Defense', 'Infrastructure', 'Education', 'Entertainment'];
+const EXISTING_CATALOG_KINDS = [
+  { key: 'institutions', label: 'Institutions', color: '#2a5a7a' },
+  { key: 'resources', label: 'Resources', color: '#2a7a2a' },
+  { key: 'services', label: 'Services', color: '#7a5a2a' },
+];
 
 function CustomContentPanels({ config, updateConfig }) {
   const customInstitutions = config.customInstitutions || [];
@@ -969,10 +976,114 @@ function CustomContentPanels({ config, updateConfig }) {
   const customTradeRoutes = config.customTradeRoutes || [];
   const powerConfig = config.powerDynamicsConfig || {};
   const defenseConfig = config.defenseScenarioConfig || {};
+  const customContent = useStore(s => s.customContent);
+  const institutionToggles = useStore(s => s.institutionToggles);
+  const mergeInstitutionToggles = useStore(s => s.mergeInstitutionToggles);
+  const servicesToggles = useStore(s => s.servicesToggles);
+  const setServiceToggles = useStore(s => s.setServiceToggles);
 
   const [instDraft, setInstDraft] = useState({ name: '', category: 'Economy', tags: '', desc: '' });
   const [resDraft, setResDraft] = useState({ name: '', category: 'land', commodities: '', desc: '' });
   const [routeDraft, setRouteDraft] = useState({ name: '', source: '', dest: '', goods: '', desc: '' });
+  const [catalogKind, setCatalogKind] = useState('institutions');
+  const [catalogSearch, setCatalogSearch] = useState('');
+
+  const registry = useMemo(() => buildRegistry(customContent || {}), [customContent]);
+  const serviceEntries = useMemo(() => Object.entries(INSTITUTION_SERVICES || {})
+    .flatMap(([institutionName, services]) => Object.entries(services || {}).map(([serviceName, def]) => ({
+      refId: `service:${institutionName}:${serviceName}`,
+      name: serviceName,
+      category: 'services',
+      subcategory: institutionName,
+      desc: def?.desc || '',
+      key: `${institutionName}_service_${serviceName}`,
+      raw: def || {},
+    })))
+    .sort((a, b) => a.name.localeCompare(b.name)), []);
+
+  const catalogEntries = useMemo(() => {
+    const query = catalogSearch.trim().toLowerCase();
+    const base = catalogKind === 'services'
+      ? serviceEntries
+      : registry.listPrebuilt(catalogKind);
+    return base
+      .filter(entry => {
+        if (!query) return true;
+        return [
+          entry.name,
+          entry.subcategory,
+          entry.desc,
+          ...(entry.tags || []),
+        ].some(value => String(value || '').toLowerCase().includes(query));
+      })
+      .slice(0, 80);
+  }, [catalogKind, catalogSearch, registry, serviceEntries]);
+
+  const resourceKeyFor = (entry) => entry.key || entry.refId?.split(':').pop() || entry.name;
+  const institutionToggleKey = (entry) => `all::${entry.subcategory || 'Economy'}::${entry.name}`;
+
+  const isCatalogSelected = (entry) => {
+    if (catalogKind === 'institutions') return Boolean(institutionToggles[institutionToggleKey(entry)]?.require);
+    if (catalogKind === 'resources') return (config.nearbyResources || []).includes(resourceKeyFor(entry));
+    if (catalogKind === 'services') {
+      const toggle = servicesToggles[entry.key];
+      return Boolean(toggle?.force && !toggle?.forceExclude);
+    }
+    return false;
+  };
+
+  const addCatalogEntry = (entry) => {
+    if (catalogKind === 'institutions') {
+      mergeInstitutionToggles({
+        [institutionToggleKey(entry)]: { allow: true, require: true, forceExclude: false },
+      });
+      return;
+    }
+    if (catalogKind === 'resources') {
+      const key = resourceKeyFor(entry);
+      const current = config.nearbyResources || [];
+      const next = current.includes(key) ? current : [...current, key];
+      updateConfig({
+        nearbyResourcesRandom: false,
+        nearbyResources: next,
+        nearbyResourcesState: {
+          ...(config.nearbyResourcesState || {}),
+          [key]: config.nearbyResourcesState?.[key] || 'allow',
+        },
+      });
+      return;
+    }
+    if (catalogKind === 'services') {
+      setServiceToggles({
+        ...servicesToggles,
+        [entry.key]: { allow: true, force: true, forceExclude: false },
+      });
+    }
+  };
+
+  const removeCatalogEntry = (entry) => {
+    if (catalogKind === 'institutions') {
+      mergeInstitutionToggles({
+        [institutionToggleKey(entry)]: { allow: true, require: false, forceExclude: false },
+      });
+      return;
+    }
+    if (catalogKind === 'resources') {
+      const key = resourceKeyFor(entry);
+      const state = { ...(config.nearbyResourcesState || {}) };
+      delete state[key];
+      updateConfig({
+        nearbyResources: (config.nearbyResources || []).filter(item => item !== key),
+        nearbyResourcesState: state,
+      });
+      return;
+    }
+    if (catalogKind === 'services') {
+      const next = { ...servicesToggles };
+      delete next[entry.key];
+      setServiceToggles(next);
+    }
+  };
 
   const addInstitution = () => {
     if (!instDraft.name.trim()) return;
@@ -1038,6 +1149,99 @@ function CustomContentPanels({ config, updateConfig }) {
 
   return (
     <>
+      {/* ── Existing Catalog ────────────────────────────────── */}
+      <Panel title="Existing Catalog" icon={Search} color="#5a3a8a" defaultOpen={false}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
+          {EXISTING_CATALOG_KINDS.map(kind => (
+            <button
+              key={kind.key}
+              onClick={() => { setCatalogKind(kind.key); setCatalogSearch(''); }}
+              style={{
+                padding: '5px 10px',
+                border: `1px solid ${catalogKind === kind.key ? kind.color : BORDER}`,
+                background: catalogKind === kind.key ? `${kind.color}14` : '#fff',
+                color: catalogKind === kind.key ? kind.color : SECOND,
+                borderRadius: 4,
+                cursor: 'pointer',
+                fontSize: FS.xxs,
+                fontWeight: 700,
+                fontFamily: sans,
+              }}
+            >
+              {kind.label}
+            </button>
+          ))}
+        </div>
+        <div style={{ position: 'relative', marginBottom: 10 }}>
+          <Search size={12} color={MUTED} style={{ position: 'absolute', left: 9, top: '50%', transform: 'translateY(-50%)' }} />
+          <input
+            value={catalogSearch}
+            onChange={e => setCatalogSearch(e.target.value)}
+            placeholder={`Search ${catalogKind}`}
+            style={{
+              ...inputStyle,
+              width: '100%',
+              boxSizing: 'border-box',
+              paddingLeft: 28,
+            }}
+          />
+        </div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+          gap: 6,
+          maxHeight: 360,
+          overflow: 'auto',
+          paddingRight: 2,
+        }}>
+          {catalogEntries.map(entry => {
+            const selected = isCatalogSelected(entry);
+            const activeColor = EXISTING_CATALOG_KINDS.find(kind => kind.key === catalogKind)?.color || GOLD;
+            return (
+              <button
+                key={entry.refId}
+                onClick={() => selected ? removeCatalogEntry(entry) : addCatalogEntry(entry)}
+                title={selected ? 'Remove' : 'Add'}
+                style={{
+                  minHeight: 70,
+                  textAlign: 'left',
+                  padding: '8px 10px',
+                  border: `1px solid ${selected ? activeColor : BORDER}`,
+                  background: selected ? `${activeColor}12` : '#fff',
+                  borderRadius: 6,
+                  cursor: 'pointer',
+                  fontFamily: sans,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 3,
+                  overflow: 'hidden',
+                }}
+              >
+                <span style={{ fontSize: FS.xs, fontWeight: 700, color: selected ? activeColor : INK, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {entry.name}
+                </span>
+                <span style={{ fontSize: FS.micro, color: MUTED, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {entry.subcategory || entry.source || catalogKind}
+                </span>
+                {entry.desc && (
+                  <span style={{
+                    fontSize: FS.xxs,
+                    color: SECOND,
+                    lineHeight: 1.25,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                  }}>
+                    {entry.desc}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </Panel>
+
       {/* ── Custom Institutions ──────────────────────────────── */}
       <Panel title="Custom Institutions" icon={Building2} color="#2a5a7a" defaultOpen={false}>
         <div style={{ fontSize: FS.xs, color: MUTED, marginBottom: 8, lineHeight: 1.5 }}>
@@ -1220,10 +1424,10 @@ function CustomContentPanels({ config, updateConfig }) {
               powerDynamicsConfig: { ...powerConfig, factionCount: e.target.value ? +e.target.value : null }
             })} style={{ ...inputStyle, flex: 'none', width: 160 }}>
               <option value="">Random</option>
-              <option value="1">1 — Monopoly</option>
-              <option value="2">2 — Duopoly</option>
-              <option value="3">3 — Triad</option>
-              <option value="4">4+ — Fractured</option>
+              <option value="1">1: Monopoly</option>
+              <option value="2">2: Duopoly</option>
+              <option value="3">3: Triad</option>
+              <option value="4">4+: Fractured</option>
             </select>
           </div>
         </div>

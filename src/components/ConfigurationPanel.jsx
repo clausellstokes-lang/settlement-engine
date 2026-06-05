@@ -16,7 +16,7 @@ const ARCHETYPES=[
   {key:'military_fortress',name:'Military Fortress',desc:'Heavily garrisoned; spartan',threat:'frontier',e:28,m:92,mg:18,r:42,c:28},
   {key:'frontier_outpost',name:'Frontier Outpost',desc:'Small post on edge of civilisation',threat:'frontier',e:35,m:80,mg:25,r:38,c:40},
   {key:'besieged_holdout',name:'Besieged Holdout',desc:'Under constant threat; fortified by necessity',threat:'plagued',e:25,m:88,mg:32,r:65,c:35},
-  {key:'plague_of_beasts',name:'Embattled — Creature Threat',desc:'Hostile incursion; survival economy',threat:'plagued',e:22,m:75,mg:38,r:78,c:48},
+  {key:'plague_of_beasts',name:'Embattled: Creature Threat',desc:'Hostile incursion; survival economy',threat:'plagued',e:22,m:75,mg:38,r:78,c:48},
   {key:'theocracy',name:'Theocracy',desc:'Church controls civic life',threat:'heartland',e:38,m:52,mg:35,r:92,c:18},
   {key:'holy_sanctuary',name:'Holy Sanctuary',desc:'Peaceful pilgrimage centre',threat:'heartland',e:35,m:22,mg:38,r:95,c:15},
   {key:'crusader_chapter',name:'Crusader Chapter',desc:'Faith and force unified',threat:'frontier',e:32,m:82,mg:28,r:82,c:18},
@@ -78,8 +78,8 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
           <Lbl>Archetype preset</Lbl>
           <div style={{display:'flex',gap:6}}>
             <select defaultValue="" onChange={apply} style={{flex:1,padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>
-              <option value="">— Choose an archetype —</option>
-              {ARCHETYPE_GROUPS.filter(g=>config.magicExists!==false||g.label!=='Arcane').map(({label,keys})=><optgroup key={label} label={label}>{keys.map(key=>{const a=ARCHETYPES.find(x=>x.key===key);return a?<option key={key} value={key}>{a.name} — {a.desc}</option>:null;})}</optgroup>)}
+              <option value="">, Choose an archetype</option>
+              {ARCHETYPE_GROUPS.filter(g=>config.magicExists!==false||g.label!=='Arcane').map(({label,keys})=><optgroup key={label} label={label}>{keys.map(key=>{const a=ARCHETYPES.find(x=>x.key===key);return a?<option key={key} value={key}>{a.name} - {a.desc}</option>:null;})}</optgroup>)}
             </select>
             {applied&&<span style={{fontSize:FS.xs,color:swatch['#4A8A60'],fontWeight:600,display:'flex',alignItems:'center'}}>✓</span>}
           </div>
@@ -222,7 +222,7 @@ function NearbyResourcesPanel({config,updateConfig}){
           {resources.map(r=>{
             // Incompatible with current route/terrain — still clickable but visually dimmed
             if(!r.compatible && !selected.includes(r.key) && !isRandom) {
-              const incompatTip = (r.incompatibleReason||'Not compatible with current access') + ' — click to force include anyway';
+              const incompatTip = (r.incompatibleReason||'Not compatible with current access') + '. Click to force include anyway';
               return(
                 <button key={r.key}
                   onClick={()=>cycleResourceState(r.key)}
@@ -237,7 +237,7 @@ function NearbyResourcesPanel({config,updateConfig}){
               // RANDOM MODE: all in pool — clearly shown as included/active
               return(
                 <button key={r.key} disabled
-                  title={`In random pool — eligible for this generation. Actual selection happens at generation time based on route and terrain.`}
+                  title={`In random pool. Eligible for this generation. Actual selection happens at generation time based on route and terrain.`}
                   style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,
                     border:`1px solid #c8a84a`,background:`rgba(160,118,42,0.08)`,color:`#8a6020`,
                     fontFamily:sans,cursor:'default',userSelect:'none',fontWeight:600}}>
@@ -251,10 +251,10 @@ function NearbyResourcesPanel({config,updateConfig}){
             const tip = isOff
               ? 'Not included. Click to add (Allow state).'
               : st==='allow'
-              ? `Included — ~${tierPct}% chance of depleted at generation. Click to force Abundant.`
+              ? `Included, ~${tierPct}% chance of depleted at generation. Click to force Abundant.`
               : st==='abundant'
-              ? 'Forced abundant — full export potential. Click to force Depleted.'
-              : 'Forced depleted — local use only, import dependency at town+. Click to remove.';
+              ? 'Forced abundant. Full export potential. Click to force Depleted.'
+              : 'Forced depleted. Local use only, import dependency at town+. Click to remove.';
             // Visual: off=bland/dim, allow=subtle gold, abundant=green, depleted=orange
             const btnStyle = isOff
               ? {border:'1px solid #d0c0a8',background:'transparent',color:MUTED,
@@ -324,13 +324,13 @@ export default function ConfigurationPanel(){
               updateConfig({settType:v});
             }}>
             <option value="random"> Random</option>
-            <option value="thorp">Thorp (20–80)</option>
-            <option value="hamlet">Hamlet (81–400)</option>
-            <option value="village">Village (401–900)</option>
-            {!blockTownPlus && <option value="town">Town (901–5,000)</option>}
-            {!blockTownPlus && <option value="city">City (5,001–25,000)</option>}
+            <option value="thorp">Thorp (20-80)</option>
+            <option value="hamlet">Hamlet (81-400)</option>
+            <option value="village">Village (401-900)</option>
+            {!blockTownPlus && <option value="town">Town (901-5,000)</option>}
+            {!blockTownPlus && <option value="city">City (5,001-25,000)</option>}
             {!blockTownPlus && <option value="metropolis">Metropolis (25,001+)</option>}
-            {blockTownPlus && <option value="town" disabled style={{color:swatch['#BBBBBB']}}>Town — requires magic or road</option>}
+            {blockTownPlus && <option value="town" disabled style={{color:swatch['#BBBBBB']}}>Town. Requires magic or road</option>}
             <option value="custom">Custom…</option>
           </Sel>
           {blockTownPlus && <div style={{fontSize:FS.xxs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
@@ -351,7 +351,7 @@ export default function ConfigurationPanel(){
             <option value="port">Port</option>
             <option value="crossroads">Crossroads</option>
             {!blockIsolated && <option value="isolated">Isolated</option>}
-            {blockIsolated && <option value="isolated" disabled style={{color:swatch['#BBBBBB']}}>Isolated — not available at town+ without magic</option>}
+            {blockIsolated && <option value="isolated" disabled style={{color:swatch['#BBBBBB']}}>Isolated. Not available at town+ without magic</option>}
             <option value="mountain_pass">Mountain Pass</option>
           </Sel>
           {blockIsolated && <div style={{fontSize:FS.xxs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
@@ -369,7 +369,7 @@ export default function ConfigurationPanel(){
           }}>
             <span style={{fontWeight:700,color:swatch['#3A5AB0']}}>✦ Magical Trade Infrastructure</span><br/>
             <span style={{color:swatch['#2A3A6A']}}>
-              A Teleportation Circle and arcane maintainer will be forced into this {config.settType} — its only connection to the outside world. All trade flows through the circle. If it fails, the settlement collapses.
+              A Teleportation Circle and arcane maintainer will be forced into this {config.settType}. Its only connection to the outside world. All trade flows through the circle. If it fails, the settlement collapses.
             </span>
           </div>
         )}
@@ -447,8 +447,8 @@ export default function ConfigurationPanel(){
                 ...(noMagicNow && isTownPlusNow && isIsolatedNow ? {tradeRouteAccess:'road'} : {}),
               });
             }}>
-            <option value="yes">✦ Yes — magic exists</option>
-            <option value="no">○ No — historical mode</option>
+            <option value="yes">✦ Yes. Magic exists</option>
+            <option value="no">○ No. Historical mode</option>
           </Sel>
         </div>
       </div>

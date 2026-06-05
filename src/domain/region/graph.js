@@ -160,6 +160,8 @@ export function normalizeChannel(channel) {
     goods: Array.isArray(channel.goods) ? channel.goods.map(g => ({ ...g })) : [],
     evidence: Array.isArray(channel.evidence) ? [...channel.evidence] : [],
     explanation: channel.explanation || '',
+    relationshipType: channel.relationshipType || null,
+    relationshipKey: channel.relationshipKey || null,
     discoveredAt: channel.discoveredAt || nowIso(),
     confirmedAt: channel.confirmedAt || null,
     updatedAt: channel.updatedAt || nowIso(),
@@ -310,6 +312,126 @@ export function addRegionalChannels(graph, channels = []) {
     }
   }
   return ensureRegionalGraph({ ...current, channels: [...byId.values()], updatedAt: nowIso() });
+}
+
+function relationshipEvidence(relationshipType, options = {}) {
+  return [{
+    source: 'relationship_label',
+    reason: options.reason || `Relationship became ${String(relationshipType || 'linked').replace(/_/g, ' ')}.`,
+    outcomeId: options.outcomeId || null,
+  }];
+}
+
+function relationshipChannel(raw, relationshipType, options = {}) {
+  const now = options.now || nowIso();
+  return normalizeChannel({
+    status: options.status || 'confirmed',
+    confidence: options.confidence ?? 0.75,
+    discoveredAt: now,
+    confirmedAt: now,
+    updatedAt: now,
+    evidence: relationshipEvidence(relationshipType, options),
+    relationshipType,
+    relationshipKey: options.relationshipKey || null,
+    ...raw,
+  });
+}
+
+function twoWayChannels(type, from, to, relationshipType, options, strength, confidence, extra = {}) {
+  return [
+    relationshipChannel({ type, from, to, strength, confidence, ...extra }, relationshipType, options),
+    relationshipChannel({ type, from: to, to: from, strength, confidence, ...extra }, relationshipType, options),
+  ];
+}
+
+/**
+ * Convert a relationship label into confirmed regional channels. Direction is
+ * edge-significant for hierarchical labels: edge.from is the patron/overlord,
+ * edge.to is the client/vassal.
+ */
+export function relationshipChannelBundle(edge, relationshipType, options = {}) {
+  if (!edge?.from || !edge?.to || !relationshipType) return [];
+  let from = String(edge.from);
+  let to = String(edge.to);
+  let rel = String(relationshipType);
+  if (rel === 'client') {
+    [from, to] = [to, from];
+    rel = 'patron';
+  }
+  const base = { ...options, relationshipKey: options.relationshipKey || edge.id || `${from}->${to}` };
+  const out = [];
+
+  if (rel === 'vassal') {
+    out.push(
+      relationshipChannel({ type: 'political_authority', from, to, strength: 0.82, confidence: 0.82, explanation: `${from} exercises overlord authority over ${to}.` }, rel, base),
+      relationshipChannel({ type: 'military_protection', from, to, strength: 0.7, confidence: 0.76, explanation: `${from} is expected to protect ${to}.` }, rel, base),
+      relationshipChannel({ type: 'tax_obligation', from: to, to: from, strength: 0.76, confidence: 0.78, explanation: `${to} owes tribute or obligation to ${from}.` }, rel, base),
+      relationshipChannel({ type: 'information_flow', from, to, strength: 0.46, confidence: 0.62, visibility: 'gm' }, rel, base),
+      relationshipChannel({ type: 'information_flow', from: to, to: from, strength: 0.4, confidence: 0.58, visibility: 'gm' }, rel, base),
+    );
+  } else if (rel === 'patron') {
+    out.push(
+      relationshipChannel({ type: 'political_authority', from, to, strength: 0.62, confidence: 0.72, explanation: `${from} exercises patron authority over ${to}.` }, rel, base),
+      relationshipChannel({ type: 'military_protection', from, to, strength: 0.55, confidence: 0.64, explanation: `${from} may protect or pressure ${to}.` }, rel, base),
+      relationshipChannel({ type: 'tax_obligation', from: to, to: from, strength: 0.45, confidence: 0.58, explanation: `${to} may owe taxes, tribute, or concessions to ${from}.` }, rel, base),
+    );
+  } else if (rel === 'allied' || rel === 'ally') {
+    out.push(
+      ...twoWayChannels('military_protection', from, to, rel, base, 0.62, 0.72),
+      ...twoWayChannels('trade_route', from, to, rel, base, 0.55, 0.66),
+      ...twoWayChannels('information_flow', from, to, rel, base, 0.5, 0.65, { visibility: 'public' }),
+    );
+  } else if (rel === 'trade_partner') {
+    out.push(
+      ...twoWayChannels('trade_route', from, to, rel, base, 0.72, 0.82),
+      ...twoWayChannels('information_flow', from, to, rel, base, 0.42, 0.6),
+    );
+  } else if (rel === 'hostile') {
+    out.push(
+      ...twoWayChannels('war_front', from, to, rel, base, 0.72, 0.78),
+      ...twoWayChannels('resource_competition', from, to, rel, base, 0.58, 0.62),
+    );
+  } else if (rel === 'rival' || rel === 'cold_war') {
+    out.push(
+      ...twoWayChannels('resource_competition', from, to, rel, base, 0.56, 0.6),
+      ...twoWayChannels('information_flow', from, to, rel, base, 0.44, 0.56, { visibility: 'gm' }),
+    );
+  } else if (rel === 'criminal_network' || rel === 'criminal_corridor') {
+    out.push(
+      ...twoWayChannels('criminal_corridor', from, to, rel, base, 0.68, 0.72, { visibility: 'gm' }),
+      ...twoWayChannels('information_flow', from, to, rel, base, 0.36, 0.52, { visibility: 'hidden' }),
+    );
+  }
+
+  return out.filter(Boolean);
+}
+
+export function syncRelationshipChannelBundle(graph, edge, relationshipType, options = {}) {
+  const current = ensureRegionalGraph(graph || {});
+  const bundle = relationshipChannelBundle(edge, relationshipType, options);
+  const nextIds = new Set(bundle.map(channel => channel.id));
+  const from = String(edge?.from || '');
+  const to = String(edge?.to || '');
+  const relationshipKey = options.relationshipKey || edge?.id || `${from}->${to}`;
+  const samePair = channel =>
+    (String(channel.from) === from && String(channel.to) === to)
+    || (String(channel.from) === to && String(channel.to) === from);
+  const now = options.now || nowIso();
+  const channels = current.channels.map(channel => {
+    const relationshipGenerated = channel.relationshipKey === relationshipKey
+      || (samePair(channel) && (channel.evidence || []).some(item => item.source === 'relationship_label'));
+    if (!relationshipGenerated || nextIds.has(channel.id)) return channel;
+    return {
+      ...channel,
+      status: 'dormant',
+      updatedAt: now,
+      evidence: [
+        ...(channel.evidence || []),
+        { source: 'relationship_label', reason: `Dormant after relationship became ${String(relationshipType).replace(/_/g, ' ')}.` },
+      ],
+    };
+  });
+  return addRegionalChannels({ ...current, channels, updatedAt: now }, bundle);
 }
 
 export function setRegionalChannelStatus(graph, channelId, status) {

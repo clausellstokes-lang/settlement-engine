@@ -98,7 +98,7 @@ function FrictionPointsPanel({ points }) {
   return (
     <Section title="Friction Points" accent="#a0762a">
       <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, marginBottom: 8, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-        Small-scale grievances between named parties — surface them in scenes to texture daily life.
+        Small-scale grievances between named parties. Surface them in scenes to texture daily life.
       </div>
       {points.map((p, i) => (
         <div key={i} style={{ display: 'flex', gap: 10, padding: '7px 10px', marginBottom: 5, background: 'rgba(160,118,42,0.06)', border: '1px solid rgba(160,118,42,0.18)', borderRadius: 5 }}>

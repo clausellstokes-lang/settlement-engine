@@ -1,7 +1,7 @@
 import React, { useState, useRef, lazy, Suspense } from 'react';
 import { FS } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Sparkles, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote } from 'lucide-react';
+import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote } from 'lucide-react';
 import { TIER_LABELS } from './new/design';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -53,7 +53,6 @@ const NPCsTab = lazy(() => import('./new/tabs/NPCsTab'));
 const HistoryTab = lazy(() => import('./new/tabs/HistoryTab'));
 const ResourcesTab = lazy(() => import('./new/tabs/ResourcesTab'));
 const ViabilityTab = lazy(() => import('./new/tabs/ViabilityTab'));
-const PlotHooksTab = lazy(() => import('./new/tabs/PlotHooksTab'));
 const DailyLifeTab = lazy(() => import('./new/tabs/DailyLifeTab'));
 const RelationshipsTab = lazy(() => import('./new/tabs/RelationshipsTab'));
 const DMCompassTab = lazy(() => import('./new/tabs/DMCompassTab'));
@@ -68,7 +67,7 @@ const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 //   people   → NPCs, Daily Life, Power
 //   systems  → Economics, Services, Defense, Resources, Viability
 //   world    → History, Relationships, Overview
-//   hooks    → Plot Hooks, DM Compass
+//   guidance → DM Compass. Plot hooks live inside Summary.
 //
 // Simulation lives in the drawer trigger near the dossier actions, not in
 // the reading tab strip.
@@ -77,7 +76,7 @@ export const TAB_GROUPS = Object.freeze({
   systems: { label: 'Systems', tabs: ['power', 'economics', 'services', 'defense', 'resources', 'viability'] },
   world:   { label: 'World',   tabs: ['history', 'relationships', 'daily_life', 'npcs', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['notes'] },
-  hooks:   { label: 'Hooks',   tabs: ['plot_hooks', 'dm_compass'] },
+  guidance:{ label: 'Guidance', tabs: ['dm_compass'] },
 });
 
 const TABS = [
@@ -92,7 +91,6 @@ const TABS = [
   { id: 'history',    label: 'History',    Icon: History },
   { id: 'daily_life', label: 'Daily Life', Icon: Users },
   { id: 'npcs',       label: 'NPCs',       Icon: Users },
-  { id: 'plot_hooks', label: 'Plot Hooks', Icon: Sparkles },
   { id: 'notes',      label: 'Notes',      Icon: StickyNote },
   // Simulation tab — meta surface. The pipeline rail used to render as
   // an always-on banner above the dossier, but that pushed the actual
@@ -290,7 +288,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const baseTabs = TABS.filter(t => {
     if (t.id === 'simulation') return false;
     if (readOnly && t.id === 'notes') return false;
-    if (playerView && ['summary', 'plot_hooks', 'notes'].includes(t.id)) return false;
+    if (playerView && ['summary', 'notes'].includes(t.id)) return false;
     return true;
   });
   const allTabs = [...baseTabs,
@@ -363,7 +361,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'history':    return React.createElement(HistoryTab, { settlement: s, narrativeNote: null, recentEvents });
       case 'resources':  return React.createElement(ResourcesTab, { settlement: s, narrativeNote: null });
       case 'viability':  return React.createElement(ViabilityTab, { settlement: s, narrativeNote: null });
-      case 'plot_hooks': return React.createElement(PlotHooksTab, { settlement: s, narrativeNote: null });
       case 'dm_compass': return React.createElement(DMCompassTab, { settlement: s });
       case 'notes':      return React.createElement(NotesTab, { saveId, notes: dossierNotes, readOnly });
       case 'neighbours':    return React.createElement(RelationshipsTab, { settlement: s, narrativeNote: null, neighboursOnly: true });
@@ -409,7 +406,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       return React.createElement('div', { style: { position: 'relative', display: 'flex', alignItems: 'center', gap: 6 } },
         React.createElement('button', {
           onClick: runNarrativeLayer,
-          title: 'Narrative Refinement Layer — turns the simulator output into prose that feels specific to this settlement. Uses credits.',
+          title: 'Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement. Uses credits.',
           style: {
             ...btnBase,
             background: 'rgba(90,42,138,0.2)',

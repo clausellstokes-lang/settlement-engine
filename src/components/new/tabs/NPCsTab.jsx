@@ -60,7 +60,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
         </div>
         {pinnedCount > 0 && (
           <span
-            title="Pinned NPCs are preserved across regenerate/progress — their goal and secret won't be rewritten."
+            title="Pinned NPCs are preserved across regenerate/progress. Their goal and secret won't be rewritten."
             style={{fontSize:FS.xxs,fontWeight:800,color:swatch.ai,background:'rgba(106,42,154,0.1)',border:'1px solid rgba(160,100,220,0.35)',borderRadius:12,padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
             ⚲ {pinnedCount} PINNED
           </span>

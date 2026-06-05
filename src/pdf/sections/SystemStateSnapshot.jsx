@@ -48,7 +48,7 @@ export function SystemStateSnapshot({ settlement, narrativeMode, vm }) {
         eyebrow="03B"
         title="Current State"
         accent={narrativeMode ? palette.ai : palette.gold}
-        sub="Four dimensions, scored 0–100, banded for quick reads"
+        sub="Four dimensions, scored 0-100, banded for quick reads"
       />
       <ChapterHeadline tone="gold">
         How healthy and how stressed the settlement is right now.

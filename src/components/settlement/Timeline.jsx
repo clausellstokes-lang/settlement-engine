@@ -81,7 +81,7 @@ function Entry({ entry, isLatest, onUndo }) {
         {isLatest && (
           <button
             onClick={onUndo}
-            title="Undo this event — restores prior state"
+            title="Undo this event. Restores prior state"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 3,
               padding: '2px 6px',

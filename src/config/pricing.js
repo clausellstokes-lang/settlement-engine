@@ -73,19 +73,91 @@ const FAST_AI_COSTS = Object.freeze({
   progression: 4,
 });
 
+export const DEFAULT_MODEL_PREFERENCE = 'anthropic_claude_opus_4_8';
+
 export const AI_MODEL_OPTIONS = Object.freeze([
-  { key: 'claude_best',   label: 'Claude Best',   provider: 'anthropic', speed: 'best' },
-  { key: 'claude_fast',   label: 'Claude Fast',   provider: 'anthropic', speed: 'fast' },
-  { key: 'chatgpt_best',  label: 'ChatGPT Best',  provider: 'openai',    speed: 'best' },
-  { key: 'chatgpt_fast',  label: 'ChatGPT Fast',  provider: 'openai',    speed: 'fast' },
+  {
+    key: 'anthropic_claude_opus_4_8',
+    label: 'Claude Opus 4.8',
+    provider: 'anthropic',
+    model: 'claude-opus-4-8',
+    speed: 'premium',
+    costTier: 'standard',
+  },
+  {
+    key: 'anthropic_claude_sonnet_4_6',
+    label: 'Claude Sonnet 4.6',
+    provider: 'anthropic',
+    model: 'claude-sonnet-4-6',
+    speed: 'balanced',
+    costTier: 'standard',
+  },
+  {
+    key: 'anthropic_claude_haiku_4_5',
+    label: 'Claude Haiku 4.5',
+    provider: 'anthropic',
+    model: 'claude-haiku-4-5-20251001',
+    speed: 'fast',
+    costTier: 'fast',
+  },
+  {
+    key: 'openai_gpt_5_2',
+    label: 'OpenAI GPT-5.2',
+    provider: 'openai',
+    model: 'gpt-5.2',
+    speed: 'premium',
+    costTier: 'standard',
+  },
+  {
+    key: 'openai_gpt_5_mini',
+    label: 'OpenAI GPT-5 mini',
+    provider: 'openai',
+    model: 'gpt-5-mini',
+    speed: 'fast',
+    costTier: 'fast',
+  },
+  {
+    key: 'openai_gpt_5_nano',
+    label: 'OpenAI GPT-5 nano',
+    provider: 'openai',
+    model: 'gpt-5-nano',
+    speed: 'fastest',
+    costTier: 'fast',
+  },
+  {
+    key: 'openai_gpt_4_1',
+    label: 'OpenAI GPT-4.1',
+    provider: 'openai',
+    model: 'gpt-4.1',
+    speed: 'legacy',
+    costTier: 'standard',
+  },
+  {
+    key: 'openai_gpt_4_1_mini',
+    label: 'OpenAI GPT-4.1 mini',
+    provider: 'openai',
+    model: 'gpt-4.1-mini',
+    speed: 'legacy-fast',
+    costTier: 'fast',
+  },
 ]);
 
+export const AI_MODEL_ALIASES = Object.freeze({
+  claude_best: 'anthropic_claude_opus_4_8',
+  claude_fast: 'anthropic_claude_haiku_4_5',
+  chatgpt_best: 'openai_gpt_5_2',
+  chatgpt_fast: 'openai_gpt_5_mini',
+});
+
 export function normalizeModelPreference(value) {
-  return AI_MODEL_OPTIONS.some(option => option.key === value) ? value : 'claude_best';
+  const key = AI_MODEL_ALIASES[value] || value;
+  return AI_MODEL_OPTIONS.some(option => option.key === key) ? key : DEFAULT_MODEL_PREFERENCE;
 }
 
 export function isFastModelPreference(value) {
-  return normalizeModelPreference(value).endsWith('_fast');
+  const key = normalizeModelPreference(value);
+  const option = AI_MODEL_OPTIONS.find(item => item.key === key);
+  return option?.costTier === 'fast';
 }
 
 // ── Subscription tiers ────────────────────────────────────────────────────
@@ -234,5 +306,5 @@ export function findPackByKey(key) {
 // the admin panel show "all SKUs ever sold" without reaching through
 // flags.
 export const _internal = Object.freeze({
-  LEGACY_PACKS, NEW_PACKS, LEGACY_AI_COSTS, NEW_AI_COSTS, FAST_AI_COSTS,
+  LEGACY_PACKS, NEW_PACKS, LEGACY_AI_COSTS, NEW_AI_COSTS, FAST_AI_COSTS, AI_MODEL_ALIASES,
 });

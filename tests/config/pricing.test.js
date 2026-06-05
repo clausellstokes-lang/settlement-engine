@@ -20,6 +20,10 @@ import {
   getVisibleTiers,
   singleDossierEnabled,
   findPackByKey,
+  AI_MODEL_OPTIONS,
+  DEFAULT_MODEL_PREFERENCE,
+  normalizeModelPreference,
+  isFastModelPreference,
   _internal,
 } from '../../src/config/pricing.js';
 
@@ -56,6 +60,39 @@ describe('getActiveAiCosts() / getAiCost()', () => {
 
   it('returns 0 for unknown features', () => {
     expect(getAiCost('totallyMadeUp')).toBe(0);
+  });
+});
+
+describe('AI model preferences', () => {
+  it('defaults to the explicit Claude Opus preference', () => {
+    expect(DEFAULT_MODEL_PREFERENCE).toBe('anthropic_claude_opus_4_8');
+    expect(AI_MODEL_OPTIONS.find(option => option.key === DEFAULT_MODEL_PREFERENCE)?.model).toBe('claude-opus-4-8');
+  });
+
+  it('offers explicit Anthropic and OpenAI model IDs', () => {
+    expect(AI_MODEL_OPTIONS.map(option => option.key)).toEqual([
+      'anthropic_claude_opus_4_8',
+      'anthropic_claude_sonnet_4_6',
+      'anthropic_claude_haiku_4_5',
+      'openai_gpt_5_2',
+      'openai_gpt_5_mini',
+      'openai_gpt_5_nano',
+      'openai_gpt_4_1',
+      'openai_gpt_4_1_mini',
+    ]);
+    expect(AI_MODEL_OPTIONS.find(option => option.key === 'openai_gpt_5_2')?.model).toBe('gpt-5.2');
+  });
+
+  it('normalizes legacy aliases into current explicit preferences', () => {
+    expect(normalizeModelPreference('claude_best')).toBe('anthropic_claude_opus_4_8');
+    expect(normalizeModelPreference('chatgpt_fast')).toBe('openai_gpt_5_mini');
+    expect(normalizeModelPreference('not_real')).toBe(DEFAULT_MODEL_PREFERENCE);
+  });
+
+  it('uses model cost tiers for fast pricing', () => {
+    expect(isFastModelPreference('anthropic_claude_haiku_4_5')).toBe(true);
+    expect(isFastModelPreference('openai_gpt_5_mini')).toBe(true);
+    expect(isFastModelPreference('openai_gpt_5_2')).toBe(false);
   });
 });
 

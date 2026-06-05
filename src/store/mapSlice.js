@@ -46,7 +46,7 @@ export const FOREST_STYLES = ['pine', 'oak', 'palm', 'birch'];
 const DEFAULT_LAYERS = {
   placements: true,
   relationships: true,
-  relationshipFilter: ['trade_partner', 'allied', 'patron', 'client', 'rival', 'cold_war', 'hostile'],
+  relationshipFilter: ['trade_partner', 'allied', 'patron', 'client', 'vassal', 'rival', 'cold_war', 'hostile'],
   chains: true,
   chainFilter: null, // or string[] of good names
   regionalChannels: true,

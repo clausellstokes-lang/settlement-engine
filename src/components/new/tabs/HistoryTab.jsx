@@ -119,7 +119,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
             return positioned.map(te => (
               <div key={te.i}>
                 {/* Dot */}
-                <div title={`${te.ec.label} — ${te.yearsAgo}y ago`}
+                <div title={`${te.ec.label} - ${te.yearsAgo}y ago`}
                   style={{position:'absolute',left:`${te.pct}%`,top:'50%',
                     transform:'translate(-50%,-50%)',
                     width:te.anchored?14:10,height:te.anchored?14:10,

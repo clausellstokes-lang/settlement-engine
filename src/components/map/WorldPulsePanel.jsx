@@ -91,6 +91,16 @@ function outcomeDetails(outcome = {}) {
   return unique(details).slice(0, 5);
 }
 
+function digestDetails(entry = {}) {
+  return unique([
+    human(entry.scope),
+    human(entry.kind),
+    human(entry.impactKind),
+    human(entry.channelType),
+    entry.settlementIds?.length ? `${entry.settlementIds.length} settlement${entry.settlementIds.length === 1 ? '' : 's'}` : null,
+  ]).slice(0, 5);
+}
+
 function rollIsDeterministic(roll = {}) {
   return !!roll.conflictResolution?.deterministic || (roll.probability >= 1 && roll.roll === 0);
 }
@@ -212,6 +222,7 @@ export default function WorldPulsePanel({ campaign }) {
   const rolls = latestPulse?.rollExplanations || [];
   const resolved = latestPulse?.resolvedStressors || [];
   const appliedOutcomes = latestPulse?.selectedOutcomes || [];
+  const impactDigest = latestPulse?.impactDigest || [];
   const selected = latestPulse?.selectedCount || 0;
 
   const runProposalAction = async (proposalId, action) => {
@@ -442,6 +453,32 @@ export default function WorldPulsePanel({ campaign }) {
                   summary={`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`}
                   severity={stressor.resolutionChance}
                   reasons={['time bounded stressor', human(stressor.type)]}
+                />
+              ))}
+            </div>
+          )}
+        </Section>
+
+        <Section title="Impact Digest" count={impactDigest.length}>
+          {!latestPulse ? (
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+              No pulse history yet.
+            </div>
+          ) : impactDigest.length === 0 ? (
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+              No regional impacts recorded for this pulse.
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {impactDigest.slice(0, 12).map(entry => (
+                <OutcomeCard
+                  key={entry.id}
+                  title={entry.headline}
+                  summary={entry.summary}
+                  severity={entry.severity ?? Math.min(1, (entry.score || 0) / 100)}
+                  reasons={entry.reasons}
+                  details={digestDetails(entry)}
+                  tone={entry.significance === 'major' ? 'major' : 'normal'}
                 />
               ))}
             </div>

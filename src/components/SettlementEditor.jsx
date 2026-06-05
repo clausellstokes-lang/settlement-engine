@@ -568,7 +568,7 @@ export default function SettlementEditor({
                 Canon
               </span>
               <span style={{ flex:1 }}>
-                Edits here are <strong>corrections</strong> — typo fixes, renames, cleanup.
+                Edits here are <strong>corrections</strong>. Typo fixes, renames, cleanup.
                 They don't become timeline events. To record an in-world change with consequences
                 (death, fire, refugees, route cut), use the Event Composer below.
               </span>

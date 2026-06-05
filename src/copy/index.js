@@ -51,7 +51,7 @@ function interpolate(str, vars) {
  * placeholders.
  *
  *   t('common.save')                       // "Save"
- *   t('ai.narrative.button', { cost: 3 })  // "Generate narrative — 3 credits"
+ *   t('ai.narrative.button', { cost: 3 })  // "Generate narrative (3 credits)"
  */
 export function t(key, vars) {
   const raw = resolve(ACTIVE, key);

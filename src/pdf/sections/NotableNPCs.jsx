@@ -236,8 +236,8 @@ function FullCard({ npc }) {
           {npc.relationships.map((r, ri) => (
             <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: pt['8'] }}>
               · {label(r?.with || r?.target || r?.name)}
-              {r?.type ? ` — ${r.type}` : ''}
-              {r?.description ? ` — ${r.description}` : ''}
+              {r?.type ? ` - ${r.type}` : ''}
+              {r?.description ? ` - ${r.description}` : ''}
             </Text>
           ))}
         </View>

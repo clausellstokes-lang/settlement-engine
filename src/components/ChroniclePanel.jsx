@@ -174,7 +174,7 @@ function FullEntryModal({ entry, onClose }) {
           {renderList('Stressors', s.stress, (st) => `${st?.label || ''}: ${st?.description || st?.text || ''}`)}
 
           {renderList('Identity Markers', s.identityMarkers, (m) => m)}
-          {renderList('Friction Points', s.frictionPoints, (fp) => `${fp?.who || ''} — ${fp?.what || ''}`)}
+          {renderList('Friction Points', s.frictionPoints, (fp) => `${fp?.who || ''} - ${fp?.what || ''}`)}
 
           {s.dmCompass && (
             <div style={{ marginBottom: 14 }}>

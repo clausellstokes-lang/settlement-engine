@@ -126,7 +126,7 @@ export default function SuccessorPrompt() {
           }}>
             <strong>{pending.outgoingNpcName}</strong>
             {pending.outgoingRole && (
-              <> — {pending.outgoingRole}</>
+              <> - {pending.outgoingRole}</>
             )}{' '}
             is gone. <strong>{institutionName}</strong> has lost its leader.
             Who steps into the role?
@@ -169,7 +169,7 @@ export default function SuccessorPrompt() {
               marginBottom: 12, lineHeight: 1.5,
             }}>
               No obvious successor among the existing NPCs. Appoint someone new,
-              or dismiss this prompt to leave the role vacant — the impairment
+              or dismiss this prompt to leave the role vacant. The impairment
               will persist until filled.
             </div>
           )}

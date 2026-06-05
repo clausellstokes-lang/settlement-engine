@@ -146,7 +146,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         />
       )}
     <section
-      aria-label={isAnon ? 'Anonymous settlement generator' : 'Welcome back — instant generator'}
+      aria-label={isAnon ? 'Anonymous settlement generator' : 'Welcome back. Instant generator'}
       style={{
         maxWidth: 720, margin: `${SP.xl}px auto ${SP.xxl}px`,
         padding: `${SP.xxl}px ${SP.xl}px`,
@@ -311,7 +311,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                 borderTop: `1px dashed ${BORDER}`,
                 fontSize: FS.xs, color: swatch.inkMag3, fontStyle: 'italic',
               }}>
-                or just take this one —{' '}
+                or just take this one{' '}
                 <a
                   href="#"
                   onClick={(e) => { e.preventDefault(); document.querySelector('[data-buy-this-dossier]')?.scrollIntoView({ behavior: 'smooth' }); }}

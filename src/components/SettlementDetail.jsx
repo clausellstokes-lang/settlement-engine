@@ -433,7 +433,7 @@ export default function SettlementDetail({
             size="sm"
             tooltip={narrated
               ? 'This save has a narrative refinement or daily-life prose layer atop the simulated facts.'
-              : 'This save has no narrative layer — the raw simulator output is shown.'}
+              : 'This save has no narrative layer. The raw simulator output is shown.'}
           />
           {narrated && (
             <button
@@ -474,7 +474,7 @@ export default function SettlementDetail({
             }}
             title={canEdit
               ? (editMode
-                  ? 'Stop editing — fields return to read-only display.'
+                  ? 'Stop editing. Fields return to read-only display.'
                   : 'Edit dossier prose in place. Edits are preserved across rerolls and respected by the AI overlay.')
               : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
             style={{
@@ -520,7 +520,7 @@ export default function SettlementDetail({
           ↩ Apply Saved Configuration &amp; Regenerate
         </button>
         <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',borderRadius:4,border:`1px solid ${BORDER}`}}>
-          Restores settings &amp; runs a fresh generation — the new settlement will differ from the saved one.
+          Restores settings &amp; runs a fresh generation. The new settlement will differ from the saved one.
         </span>
       </div>
 

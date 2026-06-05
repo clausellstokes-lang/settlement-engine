@@ -136,6 +136,7 @@ function enumeratePrebuiltResources() {
       source: 'prebuilt',
       tags: [],
       desc: props?.desc || '',
+      key,
       raw: props || {},
     });
   }
@@ -149,6 +150,7 @@ function enumeratePrebuiltResources() {
       source: 'prebuilt',
       tags: [],
       desc: props?.desc || '',
+      key,
       raw: props || {},
     });
   }

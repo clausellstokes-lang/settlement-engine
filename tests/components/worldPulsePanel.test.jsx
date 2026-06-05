@@ -63,6 +63,20 @@ describe('WorldPulsePanel', () => {
             reasons: ['population pressure'],
             populationDeltas: [{ saveId: 'ashford', delta: -12 }],
           }],
+          impactDigest: [{
+            id: 'wizard_news.2.queued.regional_impact.import',
+            headline: 'Briarwatch faces import shortage',
+            summary: 'Queued via trade dependency: Ashford can no longer reliably supply grain.',
+            kind: 'queued',
+            scope: 'regional',
+            significance: 'major',
+            score: 91,
+            impactKind: 'import_shortage',
+            channelType: 'trade_dependency',
+            severity: 0.78,
+            settlementIds: ['ashford', 'briarwatch'],
+            reasons: ['high severity'],
+          }],
           rollExplanations: [
             {
               candidateId: 'candidate-1',
@@ -92,6 +106,8 @@ describe('WorldPulsePanel', () => {
     expect(screen.getByText('Famine pressure may take hold')).toBeTruthy();
     expect(screen.getByText('Disease outbreak resolved')).toBeTruthy();
     expect(screen.getByText('Ashford population may fall')).toBeTruthy();
+    expect(screen.getByText('Impact Digest')).toBeTruthy();
+    expect(screen.getByText('Briarwatch faces import shortage')).toBeTruthy();
     expect(screen.getByText('deterministic')).toBeTruthy();
     expect(screen.getAllByText('food pressure').length).toBeGreaterThan(0);
 

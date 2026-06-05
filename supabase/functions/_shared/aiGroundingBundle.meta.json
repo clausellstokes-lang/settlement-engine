@@ -1,8 +1,9 @@
 {
-  "generatedAt": "2026-06-04T23:02:36.818Z",
+  "generatedAt": "2026-06-05T17:27:12.675Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "ac30f3ea9b2f3e83",
+  "sourceHash": "33b79a252a7eba3a",
   "inputs": [
+    "src/data/constants.js",
     "src/domain/activeConditions.js",
     "src/domain/aiGrounding.js",
     "src/domain/canonStatus.js",
@@ -19,6 +20,8 @@
     "src/domain/simulationSpine.js",
     "src/domain/supplyChainState.js",
     "src/domain/threatProfile.js",
-    "src/domain/userEdits.js"
+    "src/domain/userEdits.js",
+    "src/domain/worldPulse/relationshipEvolution.js",
+    "src/domain/worldPulse/relationshipMemory.js"
   ]
 }

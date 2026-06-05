@@ -83,7 +83,7 @@ export default function BuyThisDossier({ settlement }) {
         }}
       >
         <Download size={12} />
-        {busy ? 'Redirecting…' : `Buy this dossier — ${SINGLE_DOSSIER.priceLabel}`}
+        {busy ? 'Redirecting…' : `Buy this dossier${SINGLE_DOSSIER.priceLabel}`}
       </button>
       <span style={{
         fontSize: FS.xs, color: MUTED, fontStyle: 'italic',

@@ -95,6 +95,7 @@ function exclusiveTags(candidate) {
     || /:institution:/.test(tag)
     || /:stressor_birth$/.test(tag)
     || /^stressor:[^:]+:[^:]+$/.test(tag)
+    || /^population_transfer:[^:]+$/.test(tag)
     || /^npc:[^:]+$/.test(tag)
     || /^faction:[^:]+$/.test(tag)
   );

@@ -66,7 +66,14 @@ export default function GalleryList({
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, fontFamily: sans, color: INK }}>
       <style>{GALLERY_RESPONSIVE_CSS}</style>
-      <header style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto', gap: SP.md, alignItems: 'end', marginBottom: SP.lg }}>
+      <header className="sf-readable-surface" style={{
+        display: 'grid',
+        gridTemplateColumns: 'minmax(0, 1fr) auto',
+        gap: SP.md,
+        alignItems: 'end',
+        marginBottom: SP.lg,
+        padding: SP.lg,
+      }}>
         <div style={{ minWidth: 0 }}>
           <h1 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS['36'], lineHeight: 1.05, fontWeight: 750 }}>
             {t('gallery.pageTitle')}

@@ -31,7 +31,7 @@ const GREEN = '#4A7A3A';
 const AMBER = '#D08020';
 
 function formatTs(ts) {
-  if (!ts) return '—';
+  if (!ts) return ', ';
   try {
     return new Date(ts).toLocaleString('en-GB', {
       day: 'numeric', month: 'short', year: '2-digit',
@@ -70,7 +70,7 @@ export function buildVersionTimeline(save) {
     entries.push({
       id: 'canonized',
       ts: cs.canonizedAt,
-      label: 'Canonized — events from here forward are campaign log',
+      label: 'Canonized. Events from here forward are campaign log',
       kind: 'canonize',
       revertable: false,
     });
@@ -176,7 +176,7 @@ export default function VersionsTab({ save }) {
         feature="Version history"
         eyebrow="Cartographer · Version history"
         headline="Every change, on a timeline you can roll back."
-        body="Auto-snapshot on canonize, manual snapshot on demand. Side-by-side diff for any two points. Revert creates a new snapshot from the old state — never destructive. The campaign-running worldbuilder's safety net."
+        body="Auto-snapshot on canonize, manual snapshot on demand. Side-by-side diff for any two points. Revert creates a new snapshot from the old state. Never destructive. The campaign-running worldbuilder's safety net."
         ctaLabel="See Cartographer"
         trackEvent={EVENTS.LOCKED_DESTINATION_SHOWN}
       />
@@ -207,7 +207,7 @@ export default function VersionsTab({ save }) {
 
       {entries.length === 0 ? (
         <div style={{ color: MUTED, fontSize: FS.sm, fontStyle: 'italic' }}>
-          No history yet — save or canonize to start the timeline.
+          No history yet. Save or canonize to start the timeline.
         </div>
       ) : (
         <div style={{ position: 'relative', paddingLeft: 24 }}>

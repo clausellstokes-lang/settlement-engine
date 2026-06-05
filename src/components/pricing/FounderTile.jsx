@@ -159,8 +159,8 @@ export default function FounderTile() {
           {loading
             ? 'Starting checkout…'
             : claimSeat
-              ? `Claim seat ${claimSeat} — $99 one-time`
-              : 'Claim a Founder seat — $99 one-time'}
+              ? `Claim seat ${claimSeat}, $99 one-time`
+              : 'Claim a Founder seat, $99 one-time'}
         </button>
       </div>
     </div>

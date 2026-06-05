@@ -21,12 +21,12 @@ describe('t()', () => {
   });
 
   it('interpolates {var} placeholders', () => {
-    expect(t('ai.narrative.button', { cost: 3 })).toBe('Generate narrative — 3 credits');
+    expect(t('ai.narrative.button', { cost: 3 })).toBe('Generate narrative (3 credits)');
   });
 
   it('leaves unknown placeholders as literal {name} (loud, not silent)', () => {
-    // "Generate narrative — {cost} credits" with no vars provided.
-    expect(t('ai.narrative.button')).toBe('Generate narrative — {cost} credits');
+    // "Generate narrative ({cost} credits)" with no vars provided.
+    expect(t('ai.narrative.button')).toBe('Generate narrative ({cost} credits)');
   });
 
   it('returns the key string when missing (prod-safe fallback)', () => {

@@ -26,7 +26,7 @@ const TIER_RANK = {
 };
 
 const TRADE_RELATIONSHIPS = new Set([
-  'trade_partner', 'allied', 'patron', 'client',
+  'trade_partner', 'allied', 'patron', 'client', 'vassal',
 ]);
 
 const HOSTILE_RELATIONSHIPS = new Set([

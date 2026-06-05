@@ -147,6 +147,11 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
     expect(src).toMatch(/tier:\s*['"]premium['"]/);
   });
 
+  it('restores retained settlements on premium/founder upgrade', () => {
+    expect(src).toMatch(/restore_premium_settlements/);
+    expect(src).toMatch(/Premium restore failed/);
+  });
+
   it('handles founder_lifetime product → tier=premium + is_founder=true', () => {
     expect(src).toMatch(/product\s*===\s*['"]founder_lifetime['"]/);
     expect(src).toMatch(/is_founder:\s*true/);
@@ -163,6 +168,11 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
 
   it('founder_lifetime grants the one-time 30 credit bonus', () => {
     expect(src).toMatch(/grantCredits\([\s\S]{0,200}30[\s\S]{0,200}founder_grant/);
+  });
+
+  it('downgrades through the retention RPC, not a bare profile tier write', () => {
+    expect(src).toMatch(/handle_premium_downgrade/);
+    expect(src).toMatch(/Premium downgrade failed/);
   });
 });
 
@@ -344,12 +354,21 @@ describe('Tier 3.3 — generate-narrative AI invariants', () => {
   let src;
   beforeAll(() => { src = readFunction('generate-narrative'); });
 
-  it('uses Opus for thesis (per the file header comment)', () => {
-    expect(src).toMatch(/claude-opus-4-7/);
+  it('declares an explicit model preference catalog', () => {
+    expect(src).toMatch(/DEFAULT_MODEL_PREFERENCE\s*=\s*['"]anthropic_claude_opus_4_8['"]/);
+    expect(src).toMatch(/MODEL_PROFILES/);
+    expect(src).toMatch(/anthropic_claude_opus_4_8/);
+    expect(src).toMatch(/openai_gpt_5_2/);
   });
 
-  it('uses Haiku for refinement passes', () => {
-    expect(src).toMatch(/claude-haiku-4-5/);
+  it('keeps legacy preference aliases as forward-only migration shims', () => {
+    expect(src).toMatch(/claude_best:\s*['"]anthropic_claude_opus_4_8['"]/);
+    expect(src).toMatch(/chatgpt_fast:\s*['"]openai_gpt_5_mini['"]/);
+  });
+
+  it('uses the selected preference model for thesis, refinement, and daily life calls', () => {
+    expect(src).toMatch(/profile\[phase\]/);
+    expect(src).toMatch(/callModel\([\s\S]{0,200}selectedModelPreference/);
   });
 
   it('declares house-style fact-preservation rules', () => {
@@ -360,6 +379,22 @@ describe('Tier 3.3 — generate-narrative AI invariants', () => {
 
   it('declares a HOUSE_STYLE constant with explicit voice rules', () => {
     expect(src).toMatch(/HOUSE_STYLE/);
+  });
+
+  it('records estimated AI usage telemetry and streams an aggregate on completion', () => {
+    expect(src).toMatch(/type AiUsageRecord/);
+    expect(src).toMatch(/ESTIMATED_AI_PRICES_PER_MTOK/);
+    expect(src).toMatch(/aggregateAiUsage/);
+    expect(src).toMatch(/usageTelemetry\.push/);
+    expect(src).toMatch(/aiUsage/);
+    expect(src).toMatch(/estimatedProviderCostUsd/);
+    expect(src).toMatch(/console\.(info|warn)\(['"]\[generate-narrative\] ai_usage/);
+  });
+
+  it('sanitizes relationship memory before using it in Daily Life prompts', () => {
+    expect(src).toMatch(/relationshipMemoryContext/);
+    expect(src).toMatch(/sanitizeRelationshipMemoryContext\(relationshipMemoryContext\)/);
+    expect(src).toMatch(/REGIONAL RELATIONSHIP MEMORY FOR DAILY LIFE/);
   });
 });
 

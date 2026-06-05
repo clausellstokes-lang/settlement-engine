@@ -313,7 +313,7 @@ function verdictOf(v) {
 }
 
 function formatVal(val) {
-  if (val == null || val === '') return '—';
+  if (val == null || val === '') return ', ';
   if (typeof val === 'number') return smart(val);
   if (typeof val === 'string') return val;
   if (typeof val === 'boolean') return val ? 'yes' : 'no';
@@ -322,7 +322,7 @@ function formatVal(val) {
     if (val.surplus != null) return `+${smart(val.surplus)}`;
     if (val.label) return val.label;
     if (val.value != null) return formatVal(val.value);
-    return '—';
+    return ', ';
   }
   return String(val);
 }

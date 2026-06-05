@@ -8,8 +8,8 @@ export const DEFAULT_SIMULATION_PRESET_ID = 'realistic_regional';
 export const DEFAULT_SIMULATION_RULES = Object.freeze({
   schemaVersion: SIMULATION_RULES_SCHEMA_VERSION,
   presetId: DEFAULT_SIMULATION_PRESET_ID,
-  propagationMode: 'full',
-  intensity: 'normal',
+  propagationMode: 'first_order',
+  intensity: 'conservative',
   stressorsEnabled: true,
   emergentEventsEnabled: true,
   relationshipDynamicsEnabled: true,
@@ -126,6 +126,9 @@ export function normalizeSimulationRules(raw = {}) {
 
 export function propagationDepthForRules(raw = {}) {
   const rules = normalizeSimulationRules(raw);
+  // `off` and `local` both stop regional channel propagation. `local` still
+  // permits local World Pulse drift, while `off` is intended for disabling
+  // regional effects entirely at the rule-selection layer.
   if (rules.propagationMode === 'off' || rules.propagationMode === 'local') return 0;
   if (rules.propagationMode === 'first_order') return 1;
   return 2;

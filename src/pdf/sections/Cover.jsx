@@ -48,7 +48,7 @@ function StatCell({ label, value, sub, tone = 'gold' }) {
           lineHeight: 1.05,
         }}
       >
-        {value || '—'}
+        {value || ', '}
       </Text>
       {sub && (
         <Text
@@ -116,7 +116,7 @@ function CrisisRow({ chips }) {
       ))}
       {chips.length > top.length && (
         <Text style={{ fontFamily: 'Nunito', fontSize: pt['8'], color: palette.muted, marginTop: 2 }}>
-          + {chips.length - top.length} more — see Summary, page 2.
+          + {chips.length - top.length} more. See Summary, page 2.
         </Text>
       )}
     </View>
@@ -288,7 +288,7 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             wrap={false}
           >
             <Text style={{ ...type.cover_meta, color: palette.muted, fontSize: pt['8'] }}>
-              Free preview — forge your own at settlementforge.com
+              Free preview. Forge your own at settlementforge.com
             </Text>
           </View>
         )}

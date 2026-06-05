@@ -21,6 +21,7 @@
  */
 
 import { auth as authService } from '../lib/auth.js';
+import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 
 // Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
 // This map mirrors those ceilings so the auth-gating layer never drifts:
@@ -58,13 +59,13 @@ export const createAuthSlice = (set, get) => ({
     isFounder: false,     // founder lifetime grant (from profiles table)
     avatarUrl: null,      // optional profile avatar URL
     emailNotifications: true,
-    modelPreference: 'claude_best',
+    modelPreference: DEFAULT_MODEL_PREFERENCE,
     loading: true,        // true while checking initial session
     error: null,          // last auth error message
   },
 
   // ── Core setters ──────────────────────────────────────────────────────────
-  setAuth: (user, session, tier, role, displayName, isFounder = false, avatarUrl = null, emailNotifications = true, modelPreference = 'claude_best') =>
+  setAuth: (user, session, tier, role, displayName, isFounder = false, avatarUrl = null, emailNotifications = true, modelPreference = DEFAULT_MODEL_PREFERENCE) =>
     set(state => {
       state.auth = {
         user, session,
@@ -74,14 +75,14 @@ export const createAuthSlice = (set, get) => ({
         isFounder: Boolean(isFounder),
         avatarUrl: avatarUrl || null,
         emailNotifications: emailNotifications !== false,
-        modelPreference: modelPreference || 'claude_best',
+        modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
         loading: false, error: null,
       };
     }),
 
   clearAuth: () => {
     set(state => {
-      state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: 'claude_best', loading: false, error: null };
+      state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
     });
     try {
       get().clearCampaigns?.();
@@ -126,7 +127,7 @@ export const createAuthSlice = (set, get) => ({
             isFounder: Boolean(result.isFounder),
             avatarUrl: result.avatarUrl || null,
             emailNotifications: result.emailNotifications !== false,
-            modelPreference: result.modelPreference || 'claude_best',
+            modelPreference: result.modelPreference || DEFAULT_MODEL_PREFERENCE,
             loading: false, error: null,
           };
         });
@@ -163,7 +164,7 @@ export const createAuthSlice = (set, get) => ({
             isFounder: Boolean(isFounder),
             avatarUrl: avatarUrl || null,
             emailNotifications: emailNotifications !== false,
-            modelPreference: modelPreference || 'claude_best',
+            modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
             loading: false, error: null,
           };
         });
@@ -228,7 +229,7 @@ export const createAuthSlice = (set, get) => ({
             isFounder: Boolean(result.isFounder),
             avatarUrl: result.avatarUrl || null,
             emailNotifications: result.emailNotifications !== false,
-            modelPreference: result.modelPreference || 'claude_best',
+            modelPreference: result.modelPreference || DEFAULT_MODEL_PREFERENCE,
             loading: false, error: null,
           };
         });
@@ -255,7 +256,7 @@ export const createAuthSlice = (set, get) => ({
           isFounder: Boolean(result.isFounder),
           avatarUrl: result.avatarUrl || null,
           emailNotifications: result.emailNotifications !== false,
-          modelPreference: result.modelPreference || 'claude_best',
+          modelPreference: result.modelPreference || DEFAULT_MODEL_PREFERENCE,
           loading: false, error: null,
         };
       });

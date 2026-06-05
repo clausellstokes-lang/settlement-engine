@@ -35,7 +35,7 @@ function StatusTag({ label, value, _color, accent }) {
   return (
     <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, borderRadius: 6, padding: '7px 10px', minWidth: 0 }}>
       <div style={{ fontSize: FS.micro, fontWeight: 700, color: accent || '#6b5340', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>{label}</div>
-      <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || '—'}</div>
+      <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || ', '}</div>
     </div>
   );
 }
@@ -118,8 +118,8 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
           <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]}/>
-          <StatusTag label="Safety" value={sp.safetyLabel?.split('—')[0].trim()} accent={sp.safetyLabel?.includes('Dangerous')||sp.safetyLabel?.includes('Desperate')?'#8b1a1a':sp.safetyLabel?.includes('Unsafe')?'#a0580a':sp.safetyLabel?.includes('Safe')?'#1a5a28':'#a0762a'}/>
-          <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':'—'} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
+          <StatusTag label="Safety" value={sp.safetyLabel?.split(', ')[0].trim()} accent={sp.safetyLabel?.includes('Dangerous')||sp.safetyLabel?.includes('Desperate')?'#8b1a1a':sp.safetyLabel?.includes('Unsafe')?'#a0580a':sp.safetyLabel?.includes('Safe')?'#1a5a28':'#a0762a'}/>
+          <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':', '} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
         </div>
 
@@ -129,7 +129,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
           padding:'5px 10px',marginTop:6}}>
           <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
           <span style={{fontSize:FS.xs,fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
-          <span style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],flex:1}}>— resilience relies on magical infrastructure. See Viability tab.</span>
+          <span style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],flex:1}}>, resilience relies on magical infrastructure. See Viability tab.</span>
         </div>}
 
         {/* Score bars — 2-col grid */}
@@ -142,7 +142,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
           {sp.safetyRatio!==undefined&&<div style={{marginBottom:8}}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
               <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}> Enforcement Ratio</span>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a'}}>{typeof sp.safetyRatio==='number'?sp.safetyRatio.toFixed(1):'—'}×</span>
+              <span style={{fontSize:FS.xs,fontWeight:700,color:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a'}}>{typeof sp.safetyRatio==='number'?sp.safetyRatio.toFixed(1):', '}×</span>
             </div>
             <div style={{height:6,background:swatch['#E8DCC8'],borderRadius:3,overflow:'hidden'}}>
               <div style={{height:'100%',width:`${Math.min(100,(sp.safetyRatio||0)*25)}%`,background:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a',borderRadius:3}}/>
@@ -275,7 +275,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         ))}
         {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',borderRadius:7,padding:'10px 14px'}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}> Suggestions</div>
-          {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#1A2A5A'],marginBottom:3}}>{v.reason}{v.suggested&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}> — consider: {v.suggested.join(', ')}</span>}</div>)}
+          {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#1A2A5A'],marginBottom:3}}>{v.reason}{v.suggested&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>. Consider{v.suggested.join(', ')}</span>}</div>)}
         </div>}
       </div>}
 

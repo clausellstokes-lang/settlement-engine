@@ -31,8 +31,8 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
 
   const idRows = [
     { label: 'Name',          value: id.name },
-    { label: 'Tier',          value: id.tier || '—' },
-    { label: 'Population',    value: id.population ? id.population.toLocaleString() : '—' },
+    { label: 'Tier',          value: id.tier || ', ' },
+    { label: 'Population',    value: id.population ? id.population.toLocaleString() : ', ' },
     id.dominantRace   ? { label: 'Dominant Race', value: humanize(id.dominantRace) } : null,
     id.terrain        ? { label: 'Terrain',       value: humanize(id.terrain) } : null,
     id.layout         ? { label: 'Layout',        value: humanize(id.layout) } : null,
@@ -197,8 +197,8 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
               >
                 <Text style={{ ...type.body, fontSize: pt['9.5'] }}>
                   {d.foodBalance.deficit > 0
-                    ? `Deficit of ${smart(d.foodBalance.deficit)} units — the settlement depends on imports for daily survival.`
-                    : `Surplus of ${smart(d.foodBalance.surplus || 0)} units — the local food supply is reliable.`}
+                    ? `Deficit of ${smart(d.foodBalance.deficit)} units. The settlement depends on imports for daily survival.`
+                    : `Surplus of ${smart(d.foodBalance.surplus || 0)} units. The local food supply is reliable.`}
                 </Text>
               </Callout>
             )
@@ -260,9 +260,9 @@ function QuarterCard({ q, idx }) {
 }
 
 function foundingLabel(f) {
-  if (!f) return '—';
+  if (!f) return ', ';
   if (typeof f === 'string') return f;
-  return f.summary || f.event || f.label || '—';
+  return f.summary || f.event || f.label || ', ';
 }
 
 export default IdentityDailyLife;

@@ -15,7 +15,7 @@
 
 import { useStore } from '../../store/index.js';
 import {
-  GOLD, GOLD_BG, INK, BODY, MUTED, BORDER, CARD_HDR, sans, serif_, FS, SP, R,
+  GOLD, GOLD_BG, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, R,
 } from '../theme.js';
 
 /** Title-case a config enum value; collapse any `random*` value to "Random". */
@@ -111,6 +111,8 @@ export default function WizardCloseout() {
       style={{
         border: `1px solid ${BORDER}`, borderRadius: R.lg,
         overflow: 'hidden', marginBottom: SP.sm,
+        background: CARD,
+        boxShadow: '0 2px 10px rgba(27,20,8,0.08)',
       }}
     >
       <div style={{

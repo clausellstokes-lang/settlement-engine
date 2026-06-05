@@ -18,6 +18,7 @@ import {
 } from '../generators/lookups.js';
 import { filterCatalogForMagic } from '../domain/magicFilter.js';
 import { settlementFingerprint } from '../lib/settlementFingerprint.js';
+import { activeSaveCount } from '../lib/saveAccess.js';
 
 const TIER_ORDER        = getTierOrder();
 const POPULATION_RANGES = getPopulationRanges();
@@ -110,8 +111,8 @@ export const selectToggleSummary = (state) => {
   return result;
 };
 
-/** Count of saved settlements for the save-limit display. */
-export const selectSaveCount = (state) => state.savedSettlements.length;
+/** Count of active saved settlements for save-limit display. */
+export const selectSaveCount = (state) => activeSaveCount(state.savedSettlements);
 
 /** Whether the settlement data has changed since the last AI narrative. */
 export const selectIsNarrativeStale = (state) => {

@@ -198,7 +198,7 @@ export default function EventComposer() {
                   onChange={e => setTarget(e.target.value)}
                   style={selectStyle}
                 >
-                  <option value="">— Pick a {collectionKey.replace(/s$/, '')} —</option>
+                  <option value="">, Pick a {collectionKey.replace(/s$/, '')} -</option>
                   {targetOpts.map(o => (
                     <option key={o.id} value={o.id}>{o.name}</option>
                   ))}
@@ -238,7 +238,7 @@ export default function EventComposer() {
             importance === 'pillar' ? 'Death creates major consequences' :
             importance === 'key'    ? 'Meaningful effect on linked entity' :
             importance === 'notable'? 'Small modifier on linked entity'   :
-                                      'Flavor only — no engine effect'
+                                      'Flavor only. No engine effect'
           }>
             <select value={importance} onChange={e => setImportance(e.target.value)} style={selectStyle}>
               <option value="minor">Minor</option>
@@ -258,7 +258,7 @@ export default function EventComposer() {
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && institutionOptions.length > 0 && (
           <Field label="Institution" hint="link this NPC to an institution">
             <select value={institutionId} onChange={e => setInstitutionId(e.target.value)} style={selectStyle}>
-              <option value="">— None —</option>
+              <option value="">, None</option>
               {institutionOptions.map(o => (
                 <option key={o.id} value={o.id}>{o.name}</option>
               ))}

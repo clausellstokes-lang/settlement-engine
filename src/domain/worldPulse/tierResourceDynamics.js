@@ -2,6 +2,7 @@ import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { POPULATION_RANGES, TIER_ORDER, popToTier, tierAtLeast } from '../../data/constants.js';
 import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
+import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
 
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
@@ -52,7 +53,7 @@ function catalogEntryByName(name) {
 
 function existingInstitutionNames(settlement) {
   return new Set((settlement?.institutions || [])
-    .filter(inst => inst?.status !== 'removed')
+    .filter(inst => inst?.status !== 'removed' && !inst?._worldPulseInactive)
     .map(inst => String(inst.name || '').toLowerCase()));
 }
 
@@ -81,7 +82,7 @@ function promotionAdditions(settlement, toTier) {
 }
 
 function shouldRemoveForDemotion(inst, toTier) {
-  if (!inst || inst.status === 'removed') return false;
+  if (!inst || inst.status === 'removed' || inst._worldPulseInactive) return false;
   if (inst._worldPulseTierAdded && inst.requiredForTier && !tierAtLeast(toTier, inst.requiredForTier)) return true;
   const entry = catalogEntryByName(inst.name);
   if (!entry) return false;
@@ -90,12 +91,32 @@ function shouldRemoveForDemotion(inst, toTier) {
   return false;
 }
 
-function removeForDemotion(inst, outcome) {
+function demotionFateForInstitution(inst) {
+  const entry = catalogEntryByName(inst?.name);
+  const category = String(inst?.category || entry?.category || '').toLowerCase();
+  const text = `${inst?.name || ''} ${(inst?.tags || []).join(' ')} ${category}`.toLowerCase();
+  if (/watch|guard|garrison|barrack|military|defense|fort|wall/.test(text)) return { fate: 'reduced_to_watch_post', status: 'remnant' };
+  if (/academy|library|sage|wizard|mage|arcane|college|school/.test(text)) return { fate: 'abandoned', status: 'removed' };
+  if (/market|guild|bank|merchant|warehouse|trade|craft|smith|mill/.test(text)) return { fate: 'privatized', status: 'remnant' };
+  if (/temple|church|shrine|monastery|religious|divine/.test(text)) return { fate: 'survives_as_remnant', status: 'remnant' };
+  if (/court|council|hall|bureau|civic|legal|government|administration/.test(text)) return { fate: 'downsized', status: 'remnant' };
+  if (/thief|smuggl|criminal|gang/.test(text)) return { fate: 'captured_by_local_powers', status: 'remnant' };
+  return { fate: 'hollowed_out', status: 'remnant' };
+}
+
+function deactivateForDemotion(inst, outcome, toTier) {
+  const fate = demotionFateForInstitution(inst);
   return {
     ...inst,
-    status: 'removed',
-    removedByWorldPulseOutcomeId: outcome?.id || null,
-    removedReason: `Demoted below ${inst.requiredForTier || catalogEntryByName(inst.name)?.nativeTier || 'higher'} tier support.`,
+    status: fate.status,
+    _worldPulseInactive: true,
+    worldPulseFate: fate.fate,
+    demotedByWorldPulseOutcomeId: outcome?.id || null,
+    removedByWorldPulseOutcomeId: fate.status === 'removed' ? (outcome?.id || null) : inst.removedByWorldPulseOutcomeId,
+    removedReason: `Demoted below ${inst.requiredForTier || catalogEntryByName(inst.name)?.nativeTier || 'higher'} tier support; fate: ${fate.fate.replace(/_/g, ' ')}.`,
+    remnantReason: fate.status === 'remnant'
+      ? `No longer fully supported after demotion to ${toTier}; survives as ${fate.fate.replace(/_/g, ' ')}.`
+      : inst.remnantReason,
   };
 }
 
@@ -246,6 +267,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
   for (const resource of resources.slice(0, 8)) {
     const state = resourceState(settlement, resource);
     const economicRole = resourceEconomicRole(settlement, resource);
+    const taxonomy = classifyResource(resource);
     const tradeLoad = economicRole === 'primary_export' || economicRole === 'export_and_import' ? 0.12 : economicRole === 'primary_import' ? 0.06 : 0;
     const effectivePressure = clamp01(pressureScore + tradeLoad);
     if (state !== 'depleted' && (effectivePressure >= 0.64 || rank >= tierRank('city'))) {
@@ -268,10 +290,15 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
           economicRole !== 'local_resource' ? `Economic role: ${economicRole.replace(/_/g, ' ')}.` : null,
         ].filter(Boolean),
         resourcePatch: { saveId: item.id, resource, state: 'depleted' },
-        metadata: { resource, fromState: state, toState: 'depleted', economicRole },
+        metadata: { resource, fromState: state, toState: 'depleted', economicRole, resourceTaxonomy: taxonomy },
         conflictTags: [`resource:${item.id}:${resource}`],
       });
     } else if (state === 'depleted' && ((pressureScore <= 0.32 && economicRole !== 'primary_export') || previousDrift?.direction === 'demotion')) {
+      const recovery = canRecoverResource(resource, settlement, {
+        demotion: previousDrift?.direction === 'demotion',
+        pressureScore,
+      });
+      if (!recovery.canRecover) continue;
       const severity = clamp01((1 - pressureScore) * 0.5 + (previousDrift?.direction === 'demotion' ? 0.22 : 0));
       out.push({
         id: `candidate.resource.recover.${stablePart(item.id)}.${stablePart(resource)}.${tick}`,
@@ -287,11 +314,12 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
         summary: `${item.name || item.id} consumes less ${resource.replace(/_/g, ' ')}, allowing it to become available again.`,
         reasons: [
           `Resource pressure ${pressureScore.toFixed(2)} is low enough for recovery.`,
+          recovery.reason,
           previousDrift?.direction === 'demotion' ? 'Demotion pressure implies reduced consumption.' : null,
           economicRole !== 'local_resource' ? `Economic role: ${economicRole.replace(/_/g, ' ')}.` : null,
         ].filter(Boolean),
         resourcePatch: { saveId: item.id, resource, state: previousDrift?.direction === 'demotion' ? 'abundant' : 'allow' },
-        metadata: { resource, fromState: state, toState: previousDrift?.direction === 'demotion' ? 'abundant' : 'allow', economicRole },
+        metadata: { resource, fromState: state, toState: previousDrift?.direction === 'demotion' ? 'abundant' : 'allow', economicRole, resourceTaxonomy: recovery.taxonomy },
         conflictTags: [`resource:${item.id}:${resource}`],
       });
     }
@@ -362,10 +390,10 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
       institutionFates.push({
         name: inst.name,
         category: inst.category || catalogEntryByName(inst.name)?.category || null,
-        fate: 'removed',
+        fate: demotionFateForInstitution(inst).fate,
         tier: toTier,
       });
-      return removeForDemotion(inst, outcome);
+      return deactivateForDemotion(inst, outcome, toTier);
     });
   }
 

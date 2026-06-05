@@ -298,7 +298,11 @@ export default function PricingPage({ onNavigate }) {
       maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.xxl}px ${SP.lg}px`,
       fontFamily: sans, color: INK,
     }}>
-      <header style={{ textAlign: 'center', marginBottom: SP.xxl }}>
+      <header className="sf-readable-surface" style={{
+        textAlign: 'center',
+        marginBottom: SP.xxl,
+        padding: `${SP.xl}px ${SP.lg}px`,
+      }}>
         <h1 style={{
           margin: 0, fontFamily: serif_, fontSize: FS['36'], fontWeight: 600,
           color: INK, letterSpacing: '0.01em',
@@ -317,6 +321,8 @@ export default function PricingPage({ onNavigate }) {
           margin: `${SP.md}px auto 0`, maxWidth: 580,
           padding: `${SP.xs}px ${SP.md}px`,
           borderLeft: `2px solid ${GOLD}`,
+          background: 'rgba(255,251,245,0.78)',
+          borderRadius: R.md,
           fontSize: FS.sm, color: swatch['#5A4A2A'],
           fontFamily: sans, fontStyle: 'italic', lineHeight: 1.55,
           textAlign: 'left',

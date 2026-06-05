@@ -98,15 +98,15 @@ export function ChainRow({ resource, processing, output, status, tone }) {
       wrap={false}
     >
       <Text style={{ ...type.body, color: palette.ink, flex: 1.2, fontSize: pt['9'] }}>
-        {resource || '—'}
+        {resource || ', '}
       </Text>
       <Text style={{ color: palette.faint, marginHorizontal: 4, fontSize: pt['9'] }}>▶</Text>
       <Text style={{ ...type.body, color: palette.second, flex: 1.5, fontSize: pt['9'] }}>
-        {processing || (status === 'unexploited' ? 'unprocessed' : '—')}
+        {processing || (status === 'unexploited' ? 'unprocessed' : ', ')}
       </Text>
       <Text style={{ color: palette.faint, marginHorizontal: 4, fontSize: pt['9'] }}>▶</Text>
       <Text style={{ ...type.body, color: palette.second, flex: 1.5, fontSize: pt['9'] }}>
-        {output || (status === 'unexploited' ? 'no output' : '—')}
+        {output || (status === 'unexploited' ? 'no output' : ', ')}
       </Text>
       {status && (
         <View style={{ marginLeft: 4 }}>
@@ -137,7 +137,7 @@ export function ScoreCard({ label, score, max = 100, tone = 'gold', description,
     >
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <Text style={{ ...type.label_em, color: palette.ink, fontSize: pt['10'] }}>{label}</Text>
-        <Text style={{ ...type.numeric, color: fg, fontSize: pt['13'] }}>{score ?? '—'}</Text>
+        <Text style={{ ...type.numeric, color: fg, fontSize: pt['13'] }}>{score ?? ', '}</Text>
       </View>
       <View
         style={{
@@ -189,7 +189,7 @@ export function ScoreWithBreakdown({ label, score, scoreLabel, tone = 'gold', br
         <Text style={{ ...type.label, color: fg, fontSize: pt['8'] }}>{label}</Text>
         <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
           <Text style={{ ...type.numeric, color: fg, fontSize: pt['16'], marginRight: 4 }}>
-            {score ?? '—'}
+            {score ?? ', '}
           </Text>
           {scoreLabel && (
             <Text style={{ ...type.label, color: palette.second, fontSize: pt['8'] }}>{scoreLabel}</Text>

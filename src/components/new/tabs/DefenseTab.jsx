@@ -69,11 +69,11 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
   const crimStructureData = {
     organized:      { label:'Organized Syndicate', color:'#8b1a1a', bg:'#fdf4f4',
-      note:'A structured criminal hierarchy controls what crime is permitted. Predictable rules, a hierarchy to negotiate with — or cross. Random violence is suppressed because it draws enforcement. The real danger is systematic: protection, extortion, corruption of officials.' },
+      note:'A structured criminal hierarchy controls what crime is permitted. Predictable rules, a hierarchy to negotiate with. Or cross. Random violence is suppressed because it draws enforcement. The real danger is systematic: protection, extortion, corruption of officials.' },
     'semi-organized':{ label:'Semi-Organized Networks', color:'#8a3010', bg:'#fdf0e8',
       note:'Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Multiple factions may be competing. Less predictable than a guild, more structured than street crime.' },
     diffuse:        { label:'Diffuse Criminal Presence', color:'#7a5010', bg:'#faf8e0',
-      note:'Opportunistic crime without organizational infrastructure. Fences, bandits, and minor operators work independently. Less politically dangerous but harder to suppress — no single node to threaten or buy off.' },
+      note:'Opportunistic crime without organizational infrastructure. Fences, bandits, and minor operators work independently. Less politically dangerous but harder to suppress. No single node to threaten or buy off.' },
   };
   const csd = crimStructure ? crimStructureData[crimStructure] : null;
 
@@ -111,29 +111,29 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
       icon:'', label:'Magical Capability',
       status: f.hasMagicInst?'Arcane support':'None',
       color: f.hasMagicInst?'#5a2a8a':'#9c8068', score: scores.magical||0,
-      note: f.hasMagicInst?`${magicDef.slice(0,2).map(m=>m.name).join(', ')} — detection, wards, counterspell.`:'Conventional defense only. Invisible threats go undetected and unanswered.',
+      note: f.hasMagicInst?`${magicDef.slice(0,2).map(m=>m.name).join(', ')}. Detection, wards, counterspell.`:'Conventional defense only. Invisible threats go undetected and unanswered.',
     },
     {
       icon:'', label:'Legal Infrastructure',
       status: f.hasCourtSystem&&f.hasPrison?'Court + Prison':f.hasCourtSystem?'Court only':f.hasPrison?'Prison only':'None',
       color: f.hasCourtSystem&&f.hasPrison?'#1a3a5a':f.hasCourtSystem?'#3a5a7a':f.hasPrison?'#7a5a3a':'#9c8068', score:null,
-      note: f.hasCourtSystem&&f.hasPrison?'Full enforcement chain — arrest, prosecute, detain.':f.hasCourtSystem?'Courts without detention — fines and exile only.':f.hasPrison?'Detention without process — arbitrary enforcement.':'No deterrence beyond force.',
+      note: f.hasCourtSystem&&f.hasPrison?'Full enforcement chain. Arrest, prosecute, detain.':f.hasCourtSystem?'Courts without detention. Fines and exile only.':f.hasPrison?'Detention without process. Arbitrary enforcement.':'No deterrence beyond force.',
     },
     {
       icon:'', label:'Medical Readiness',
       status: f.hasHospital?'Hospital present':f.hasChurch?'Clergy care':'None',
       color: f.hasHospital?'#1a5a28':f.hasChurch?'#7a5010':'#8b1a1a', score:null,
-      note: f.hasHospital?'Casualty treatment, outbreak containment, recovery capacity.':f.hasChurch?'Parish care — basic wound and disease management.':'No dedicated healers. Plague burns unchecked.',
+      note: f.hasHospital?'Casualty treatment, outbreak containment, recovery capacity.':f.hasChurch?'Parish care. Basic wound and disease management.':'No dedicated healers. Plague burns unchecked.',
     },
     {
       icon:'', label:'Logistics & Supply',
       status: f.hasGranary?'Granary present':'No reserves',
       color: f.hasGranary?'#1a5a28':'#8b1a1a', score:null,
-      note: f.hasGranary?(f.hasPort?'Granary + sea access — historically the hardest siege posture to break.':tradeAccess==='isolated'?'Granary in isolation — endurance depends entirely on stored reserves.':'Granary with road supply. Cut the roads, cut the supply.'):(tradeAccess==='port'?'No reserves, but sea supply continues while port is open.':'No food buffer. Any supply disruption becomes a survival crisis within days.'),
+      note: f.hasGranary?(f.hasPort?'Granary + sea access. Historically the hardest siege posture to break.':tradeAccess==='isolated'?'Granary in isolation. Endurance depends entirely on stored reserves.':'Granary with road supply. Cut the roads, cut the supply.'):(tradeAccess==='port'?'No reserves, but sea supply continues while port is open.':'No food buffer. Any supply disruption becomes a survival crisis within days.'),
     },
   ];
   if (f.hasNavy||f.hasPort) {
-    caps.push({icon:'',label:'Naval Defense',status:f.hasNavy?'Naval force':'Port only',color:f.hasNavy?'#1a3a6a':'#3a5a7a',score:null,note:f.hasNavy?'Naval force controls sea approaches. Amphibious assault requires fleet superiority.':'Port facility but no naval force — sea approaches are accessible to any vessel.'});
+    caps.push({icon:'',label:'Naval Defense',status:f.hasNavy?'Naval force':'Port only',color:f.hasNavy?'#1a3a6a':'#3a5a7a',score:null,note:f.hasNavy?'Naval force controls sea approaches. Amphibious assault requires fleet superiority.':'Port facility but no naval force. Sea approaches are accessible to any vessel.'});
   }
 
   // Defense violations
@@ -230,7 +230,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
             const orderStatus = intScore>=65 ? 'Strong Public Order'
                               : intScore>=40 ? 'Adequate Public Order'
                               : intScore>=20 ? 'Weak Public Order'
-                              : 'Critical — Order Failing';
+                              : 'Critical: Order Failing';
             const orderBadge  = intScore>=65?'STRONG':intScore>=40?'ADEQUATE':intScore>=20?'WEAK':'CRITICAL';
             return (
               <div style={{background:orderBg,border:`1px solid ${orderColor}30`,borderLeft:`4px solid ${orderColor}`,borderRadius:6,padding:'10px 14px'}}>
@@ -256,7 +256,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
           {/* Criminal structure classification */}
           {csd&&<div style={{background:csd.bg,border:`1px solid ${csd.color}30`,borderLeft:`3px solid ${csd.color}`,borderRadius:6,padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>Criminal Structure — {csd.label}</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>Criminal Structure{csd.label}</div>
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
           </div>}
 
@@ -303,14 +303,14 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
           {/* Criminal faction power dynamics + capture state note */}
           {crimFaction&&<div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',borderRadius:6,padding:'9px 13px'}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>
-              Criminal Faction — Power {crimFaction.power||0}
+              Criminal Faction: Power {crimFaction.power||0}
             </div>
             <div style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5}}>{crimFaction.desc}</div>
             {(crimCapture === 'corrupted' || crimCapture === 'capture') && (
               <div style={{fontSize: FS['11.5'],color:swatch['#4A1A4A'],fontStyle:'italic',marginTop:6,paddingTop:6,borderTop:'1px solid #e8b0b0',lineHeight:1.4}}>
                 {crimCapture === 'capture'
                   ? 'Criminal organisation effectively governs through compromised institutions. The distinction between official authority and criminal network has collapsed.'
-                  : 'Key enforcement officials have arrangements with criminal networks. Selective enforcement — profitable crimes go unpunished, rivals are selectively prosecuted.'}
+                  : 'Key enforcement officials have arrangements with criminal networks. Selective enforcement. Profitable crimes go unpunished, rivals are selectively prosecuted.'}
               </div>
             )}
           </div>}

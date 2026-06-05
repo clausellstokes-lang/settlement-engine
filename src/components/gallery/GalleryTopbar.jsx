@@ -4,6 +4,7 @@ import { GALLERY_SORT_OPTIONS } from '../../lib/gallery.js';
 import {
   BORDER,
   CARD,
+  BODY,
   FS,
   INK,
   MUTED,
@@ -59,7 +60,14 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
       >
         {GALLERY_SORT_OPTIONS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
       </select>
-      <div style={{ gridColumn: '1 / -1', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+      <div className="sf-readable-strip" style={{
+        gridColumn: '1 / -1',
+        color: BODY,
+        fontFamily: sans,
+        fontSize: FS.xs,
+        fontWeight: 850,
+        justifySelf: 'start',
+      }}>
         {loading ? 'Loading settlements...' : `${total ?? 0} public settlement${total === 1 ? '' : 's'}`}
       </div>
     </div>

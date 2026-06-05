@@ -44,7 +44,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
 
   const s = settlement.settlement || settlement;
   const name  = s.name || settlement.name || 'Untitled';
-  const tier  = s.tier || settlement.tier || '—';
+  const tier  = s.tier || settlement.tier || ', ';
   const pop   = s.population || 0;
   const culture = s.culture || s.cultureName || '';
   const terrain = s.terrain || '';

@@ -111,7 +111,7 @@ function TiersTab({ _search='' }) {
 function EconomyTab() {
   return <>
     <div id="economy" />
-    <Card title="Prosperity Tiers" accent={GOLD}>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial — an output.</Card>
+    <Card title="Prosperity Tiers" accent={GOLD}>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial. An output.</Card>
     <Card title="Priority Sliders" accent='#a0762a'>Sliders shift institutional probability, not guarantee it. They interact: high Religion + low Magic triggers heresy suppression.</Card>
     <Card title="Exports & Imports" accent='#1a5a28'>Exports are surplus production. Imports are gaps. Heavy import dependency creates trade vulnerability.</Card>
     <Card title="Supply Chains" accent='#1a3a7a'>Linked production sequences. A broken input degrades the output. Magic can substitute for some missing material inputs.</Card>
@@ -169,7 +169,7 @@ function StressTab({ search='' }) {
     {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.description||s.desc||'').toLowerCase().includes(search)).map(s => (
       <div key={s.label||s.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
         <div style={{ fontSize:FS.md, fontWeight:700, color:swatch.danger, marginBottom:3 }}>{s.label}</div>
-        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||'—'}</div>
+        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||', '}</div>
       </div>))}
   </>;
 }
@@ -486,7 +486,7 @@ function DependencySummary({ deps, item }) {
           marginTop:4, fontSize:FS.xxs, color:swatch.danger,
           fontStyle:'italic',
         }}>
-          {totalMissing} dangling reference{totalMissing===1?'':'s'} — edit this item to fix.
+          {totalMissing} dangling reference{totalMissing===1?'':'s'}. Edit this item to fix.
         </div>
       )}
     </div>
@@ -783,19 +783,19 @@ function CustomContentManager({ search }) {
 // SettlementForge title. Standalone mode (the public route) wires
 // this; embedded mode leaves the page title alone.
 const TAB_META = Object.freeze({
-  tiers:        { title: 'Settlement tiers & trade routes — SettlementForge Compendium',
+  tiers:        { title: 'Settlement tiers & trade routes: SettlementForge Compendium',
                   desc: 'Reference for thorp through metropolis tiers, trade route effects (road / crossroads / port / river / mountain pass / isolated), and monster threat levels in SettlementForge.' },
-  economy:      { title: 'Economy reference — SettlementForge Compendium',
+  economy:      { title: 'Economy reference: SettlementForge Compendium',
                   desc: 'Prosperity tiers, priority sliders, exports/imports, supply chains, viability scoring. The simulator\'s economic model, documented.' },
-  power:        { title: 'Power & faction archetypes — SettlementForge Compendium',
+  power:        { title: 'Power & faction archetypes: SettlementForge Compendium',
                   desc: 'Forty-plus settlement archetypes (Merchant Republic, Mage Theocracy, Frontier Outpost, Crusader Synthesis) keyed to slider + threat conditions.' },
-  arcane:       { title: 'Magic & religion reference — SettlementForge Compendium',
+  arcane:       { title: 'Magic & religion reference: SettlementForge Compendium',
                   desc: 'How magic and religious institutions interact in the simulator: heresy suppression, arcane economy, theocratic governance, sacred goods trade.' },
-  stress:       { title: 'Stress conditions — SettlementForge Compendium',
+  stress:       { title: 'Stress conditions: SettlementForge Compendium',
                   desc: 'Famine, siege, plague, political fracture, monster pressure: how each stress shifts institutions, factions, and supply chains.' },
-  neighbour:    { title: 'Neighbour System reference — SettlementForge Compendium',
-                  desc: 'Trade partner, ally, patron, client, rival, cold war, hostile — how linked settlements modify each other\'s economy, military, and criminal presence.' },
-  institutions: { title: 'Institutional catalog — SettlementForge Compendium',
+  neighbour:    { title: 'Neighbour System reference: SettlementForge Compendium',
+                  desc: 'Trade partner, ally, patron, client, rival, cold war, hostile. How linked settlements modify each other\'s economy, military, and criminal presence.' },
+  institutions: { title: 'Institutional catalog: SettlementForge Compendium',
                   desc: 'Every institution the simulator can generate, the conditions that select it, what it implies for the settlement, and how it interacts with others.' },
 });
 

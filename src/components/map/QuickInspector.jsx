@@ -53,7 +53,7 @@ export default function QuickInspector() {
 
   const s = save.settlement || save;
   const name = s.name || save.name || 'Unnamed';
-  const tier = s.tier || save.tier || '—';
+  const tier = s.tier || save.tier || ', ';
   const pop = (s.population || 0).toLocaleString();
   const pressure = s.pressureSentence || '';
   const topHook = (() => {

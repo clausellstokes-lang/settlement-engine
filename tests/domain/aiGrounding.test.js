@@ -95,6 +95,7 @@ describe('defaultGroundingOptions()', () => {
     expect(d.dominantNpcsOnly).toBe(true);
     expect(d.includeContradictions).toBe(true);
     expect(d.userDirection).toBeNull();
+    expect(d.relationshipMemoryContext).toBeNull();
   });
 
   it('returns a fresh copy each call (not the frozen original)', () => {
@@ -109,12 +110,12 @@ describe('defaultGroundingOptions()', () => {
 // ── Envelope shape ───────────────────────────────────────────────────
 
 describe('buildAiGroundingPayload() — envelope shape', () => {
-  it('returns the canonical 15-section envelope', () => {
+  it('returns the canonical 16-section envelope', () => {
     const p = buildAiGroundingPayload(fixture());
     for (const section of [
       'identity', 'spine', 'bands', 'factions', 'chains', 'conditions',
       'threats', 'npcs', 'history', 'hooks', 'contradictions',
-      'dailyLife', 'districts', 'region', 'constraints',
+      'dailyLife', 'districts', 'region', 'relationshipMemory', 'constraints',
     ]) {
       expect(p, `missing section: ${section}`).toHaveProperty(section);
     }
@@ -146,12 +147,45 @@ describe('buildAiGroundingPayload() — envelope shape', () => {
     expect(p.constraints).toHaveProperty('userDirection');
   });
 
+  it('sanitizes optional relationship memory for prompt use', () => {
+    const p = buildAiGroundingPayload(fixture(), {
+      relationshipMemoryContext: {
+        settlementId: 's_test',
+        generatedAtTick: 9,
+        relationships: [{
+          otherSettlementId: 's_rival',
+          otherSettlementName: 'Redbridge',
+          relationshipType: 'cold_war',
+          posture: 'sanctions posture',
+          direction: 'outgoing',
+          summary: 'Caravans reroute around Redbridge toll patrols.',
+          dailyLifeWeight: 0.94,
+          recentMemory: [{
+            tick: 9,
+            label: 'border inspection',
+            summary: 'Inspectors seized disputed cargo.',
+            weight: 1,
+          }],
+        }],
+      },
+    });
+
+    expect(p.relationshipMemory.relationships[0]).toMatchObject({
+      otherSettlementId: 's_rival',
+      otherSettlementName: 'Redbridge',
+      relationshipType: 'cold_war',
+      posture: 'sanctions posture',
+    });
+    expect(JSON.stringify(p.relationshipMemory)).not.toMatch(/dailyLifeWeight|weight/);
+  });
+
   it('returns the empty envelope for nullish settlement', () => {
     const p = buildAiGroundingPayload(null);
     expect(p.identity).toBeNull();
     expect(p.factions).toEqual([]);
     expect(p.chains).toEqual([]);
     expect(p.threats).toEqual([]);
+    expect(p.relationshipMemory).toBeNull();
     expect(p.constraints.forbidden.length).toBeGreaterThan(0);
     expect(p.constraints.lockedEntities).toEqual([]);
   });
@@ -434,6 +468,7 @@ describe('summarizeGroundingPayload()', () => {
     expect(lines.some(l => /Substrate variables:/.test(l))).toBe(true);
     expect(lines.some(l => /Capacities:/.test(l))).toBe(true);
     expect(lines.some(l => /Factions:/.test(l))).toBe(true);
+    expect(lines.some(l => /Relationship memory entries:/.test(l))).toBe(true);
     expect(lines.some(l => /Forbidden-change rules:/.test(l))).toBe(true);
     expect(lines.some(l => /Locked entities:/.test(l))).toBe(true);
   });

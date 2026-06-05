@@ -3,10 +3,10 @@
  *
  * AI NARRATIVE LAYER — REFINEMENT-IN-PLACE ARCHITECTURE
  *
- * Phase 1 (Opus 4.7): write a 2-3 sentence IDENTITY STATEMENT for the settlement.
+ * Phase 1 (selected preference model): write a 2-3 sentence identity statement for the settlement.
  *   Acts as authorial voice for phase 2.
  *
- * Phase 2 (Haiku 4.5, parallel): 8 refinement passes that rewrite specific
+ * Phase 2 (selected preference model, parallel): 8 refinement passes that rewrite specific
  *   prose fields in place. The server starts from a deep clone of the
  *   source settlement, applies refinements on top, and returns the merged
  *   object. Fields the AI never touched fall back to raw data.
@@ -37,6 +37,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import {
   buildAiGroundingPayload,
   forbiddenChanges,
+  sanitizeRelationshipMemoryContext,
   summarizeGroundingPayload,
 } from '../_shared/aiGroundingBundle.js';
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
@@ -45,19 +46,15 @@ import { botGuard } from '../_shared/requestMeta.ts';
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY') || '';
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') || '';
 
-// Hybrid model strategy:
-//   • Opus 4.7 — thesis (highest-visibility prose) + daily life (atmospheric showcase).
-//   • Haiku 4.5 — 8 parallel refinement passes. Thesis is passed in as
-//     explicit authorial voice so tone stays coherent.
-const THESIS_MODEL     = 'claude-opus-4-7';
-const REFINEMENT_MODEL = 'claude-haiku-4-5-20251001';
-const DAILY_LIFE_MODEL = 'claude-opus-4-7';
-const ANTHROPIC_BEST_MODEL = Deno.env.get('ANTHROPIC_BEST_MODEL') || THESIS_MODEL;
-const ANTHROPIC_FAST_MODEL = Deno.env.get('ANTHROPIC_FAST_MODEL') || REFINEMENT_MODEL;
-const OPENAI_BEST_MODEL = Deno.env.get('OPENAI_BEST_MODEL') || 'gpt-4.1';
-const OPENAI_FAST_MODEL = Deno.env.get('OPENAI_FAST_MODEL') || 'gpt-4.1-mini';
+const DEFAULT_MODEL_PREFERENCE = 'anthropic_claude_opus_4_8';
+const MODEL_ALIASES: Record<string, string> = {
+  claude_best: 'anthropic_claude_opus_4_8',
+  claude_fast: 'anthropic_claude_haiku_4_5',
+  chatgpt_best: 'openai_gpt_5_2',
+  chatgpt_fast: 'openai_gpt_5_mini',
+};
 
-type ModelPreference = 'claude_best' | 'claude_fast' | 'chatgpt_best' | 'chatgpt_fast';
+type ModelPreference = string;
 type ModelPhase = 'thesis' | 'refinement' | 'dailyLife';
 type Provider = 'anthropic' | 'openai';
 
@@ -66,32 +63,81 @@ type ModelProfile = {
   thesis: string;
   refinement: string;
   dailyLife: string;
+  costTier: 'standard' | 'fast';
 };
 
-const MODEL_PROFILES: Record<ModelPreference, ModelProfile> = {
-  claude_best: {
+type AiUsageRecord = {
+  featureType: string;
+  phase: ModelPhase;
+  provider: Provider;
+  model: string;
+  modelPreference: ModelPreference;
+  maxTokens: number;
+  inputChars: number;
+  outputChars: number;
+  inputTokensEstimate: number;
+  outputTokensEstimate: number;
+  estimatedCostUsd: number;
+  durationMs: number;
+  ok: boolean;
+};
+
+const MODEL_PROFILES: Record<string, ModelProfile> = {
+  anthropic_claude_opus_4_8: {
     provider: 'anthropic',
-    thesis: ANTHROPIC_BEST_MODEL,
-    refinement: ANTHROPIC_FAST_MODEL,
-    dailyLife: ANTHROPIC_BEST_MODEL,
+    thesis: Deno.env.get('ANTHROPIC_CLAUDE_OPUS_4_8_MODEL') || 'claude-opus-4-8',
+    refinement: Deno.env.get('ANTHROPIC_CLAUDE_OPUS_4_8_MODEL') || 'claude-opus-4-8',
+    dailyLife: Deno.env.get('ANTHROPIC_CLAUDE_OPUS_4_8_MODEL') || 'claude-opus-4-8',
+    costTier: 'standard',
   },
-  claude_fast: {
+  anthropic_claude_sonnet_4_6: {
     provider: 'anthropic',
-    thesis: ANTHROPIC_FAST_MODEL,
-    refinement: ANTHROPIC_FAST_MODEL,
-    dailyLife: ANTHROPIC_FAST_MODEL,
+    thesis: Deno.env.get('ANTHROPIC_CLAUDE_SONNET_4_6_MODEL') || 'claude-sonnet-4-6',
+    refinement: Deno.env.get('ANTHROPIC_CLAUDE_SONNET_4_6_MODEL') || 'claude-sonnet-4-6',
+    dailyLife: Deno.env.get('ANTHROPIC_CLAUDE_SONNET_4_6_MODEL') || 'claude-sonnet-4-6',
+    costTier: 'standard',
   },
-  chatgpt_best: {
-    provider: 'openai',
-    thesis: OPENAI_BEST_MODEL,
-    refinement: OPENAI_FAST_MODEL,
-    dailyLife: OPENAI_BEST_MODEL,
+  anthropic_claude_haiku_4_5: {
+    provider: 'anthropic',
+    thesis: Deno.env.get('ANTHROPIC_CLAUDE_HAIKU_4_5_MODEL') || 'claude-haiku-4-5-20251001',
+    refinement: Deno.env.get('ANTHROPIC_CLAUDE_HAIKU_4_5_MODEL') || 'claude-haiku-4-5-20251001',
+    dailyLife: Deno.env.get('ANTHROPIC_CLAUDE_HAIKU_4_5_MODEL') || 'claude-haiku-4-5-20251001',
+    costTier: 'fast',
   },
-  chatgpt_fast: {
+  openai_gpt_5_2: {
     provider: 'openai',
-    thesis: OPENAI_FAST_MODEL,
-    refinement: OPENAI_FAST_MODEL,
-    dailyLife: OPENAI_FAST_MODEL,
+    thesis: Deno.env.get('OPENAI_GPT_5_2_MODEL') || 'gpt-5.2',
+    refinement: Deno.env.get('OPENAI_GPT_5_2_MODEL') || 'gpt-5.2',
+    dailyLife: Deno.env.get('OPENAI_GPT_5_2_MODEL') || 'gpt-5.2',
+    costTier: 'standard',
+  },
+  openai_gpt_5_mini: {
+    provider: 'openai',
+    thesis: Deno.env.get('OPENAI_GPT_5_MINI_MODEL') || 'gpt-5-mini',
+    refinement: Deno.env.get('OPENAI_GPT_5_MINI_MODEL') || 'gpt-5-mini',
+    dailyLife: Deno.env.get('OPENAI_GPT_5_MINI_MODEL') || 'gpt-5-mini',
+    costTier: 'fast',
+  },
+  openai_gpt_5_nano: {
+    provider: 'openai',
+    thesis: Deno.env.get('OPENAI_GPT_5_NANO_MODEL') || 'gpt-5-nano',
+    refinement: Deno.env.get('OPENAI_GPT_5_NANO_MODEL') || 'gpt-5-nano',
+    dailyLife: Deno.env.get('OPENAI_GPT_5_NANO_MODEL') || 'gpt-5-nano',
+    costTier: 'fast',
+  },
+  openai_gpt_4_1: {
+    provider: 'openai',
+    thesis: Deno.env.get('OPENAI_GPT_4_1_MODEL') || 'gpt-4.1',
+    refinement: Deno.env.get('OPENAI_GPT_4_1_MODEL') || 'gpt-4.1',
+    dailyLife: Deno.env.get('OPENAI_GPT_4_1_MODEL') || 'gpt-4.1',
+    costTier: 'standard',
+  },
+  openai_gpt_4_1_mini: {
+    provider: 'openai',
+    thesis: Deno.env.get('OPENAI_GPT_4_1_MINI_MODEL') || 'gpt-4.1-mini',
+    refinement: Deno.env.get('OPENAI_GPT_4_1_MINI_MODEL') || 'gpt-4.1-mini',
+    dailyLife: Deno.env.get('OPENAI_GPT_4_1_MINI_MODEL') || 'gpt-4.1-mini',
+    costTier: 'fast',
   },
 };
 
@@ -117,14 +163,80 @@ const CREDIT_COSTS: Record<string, number> = {
   progression_fast: 4,
 };
 
+const ESTIMATED_AI_PRICES_PER_MTOK: Record<Provider, Record<string, { input: number; output: number }>> = {
+  anthropic: {
+    opus: { input: 15, output: 75 },
+    haiku: { input: 1, output: 5 },
+    default: { input: 3, output: 15 },
+  },
+  openai: {
+    mini: { input: 0.4, output: 1.6 },
+    default: { input: 2, output: 8 },
+  },
+};
+
+function estimateTokens(text: string): number {
+  return Math.max(1, Math.ceil(String(text || '').length / 4));
+}
+
+function priceBucket(provider: Provider, model: string): { input: number; output: number } {
+  const normalized = model.toLowerCase();
+  if (provider === 'anthropic') {
+    if (normalized.includes('opus')) return ESTIMATED_AI_PRICES_PER_MTOK.anthropic.opus;
+    if (normalized.includes('haiku')) return ESTIMATED_AI_PRICES_PER_MTOK.anthropic.haiku;
+    return ESTIMATED_AI_PRICES_PER_MTOK.anthropic.default;
+  }
+  if (normalized.includes('mini')) return ESTIMATED_AI_PRICES_PER_MTOK.openai.mini;
+  return ESTIMATED_AI_PRICES_PER_MTOK.openai.default;
+}
+
+function estimateUsd(provider: Provider, model: string, inputTokens: number, outputTokens: number): number {
+  const prices = priceBucket(provider, model);
+  return Number((((inputTokens / 1_000_000) * prices.input) + ((outputTokens / 1_000_000) * prices.output)).toFixed(6));
+}
+
+function aggregateAiUsage(records: AiUsageRecord[]) {
+  const byPhase: Record<string, { calls: number; estimatedCostUsd: number; durationMs: number; inputTokensEstimate: number; outputTokensEstimate: number }> = {};
+  for (const record of records) {
+    if (!byPhase[record.phase]) {
+      byPhase[record.phase] = {
+        calls: 0,
+        estimatedCostUsd: 0,
+        durationMs: 0,
+        inputTokensEstimate: 0,
+        outputTokensEstimate: 0,
+      };
+    }
+    const bucket = byPhase[record.phase];
+    bucket.calls += 1;
+    bucket.estimatedCostUsd += record.estimatedCostUsd;
+    bucket.durationMs += record.durationMs;
+    bucket.inputTokensEstimate += record.inputTokensEstimate;
+    bucket.outputTokensEstimate += record.outputTokensEstimate;
+  }
+  return {
+    calls: records.length,
+    failedCalls: records.filter(record => !record.ok).length,
+    estimatedProviderCostUsd: Number(records.reduce((sum, record) => sum + record.estimatedCostUsd, 0).toFixed(6)),
+    inputTokensEstimate: records.reduce((sum, record) => sum + record.inputTokensEstimate, 0),
+    outputTokensEstimate: records.reduce((sum, record) => sum + record.outputTokensEstimate, 0),
+    durationMs: records.reduce((sum, record) => sum + record.durationMs, 0),
+    byPhase: Object.fromEntries(Object.entries(byPhase).map(([phase, value]) => [phase, {
+      ...value,
+      estimatedCostUsd: Number(value.estimatedCostUsd.toFixed(6)),
+    }])),
+  };
+}
+
 function normalizeModelPreference(value: unknown): ModelPreference {
-  return typeof value === 'string' && value in MODEL_PROFILES
-    ? value as ModelPreference
-    : 'claude_best';
+  const raw = typeof value === 'string' ? value : '';
+  const key = MODEL_ALIASES[raw] || raw;
+  return key in MODEL_PROFILES ? key : DEFAULT_MODEL_PREFERENCE;
 }
 
 function spendFeatureFor(type: string, modelPreference: ModelPreference): string {
-  return modelPreference.endsWith('_fast') ? `${type}_fast` : type;
+  const profile = MODEL_PROFILES[normalizeModelPreference(modelPreference)] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
+  return profile.costTier === 'fast' ? `${type}_fast` : type;
 }
 
 function guidanceBlock(aiGuidance: string): string {
@@ -1420,9 +1532,25 @@ const DAILY_LIFE_FIELDS: Record<string, FieldCfg> = {
   },
 };
 
-function buildDailyLifePrompt(instruction: string, summary: Record<string, unknown>, aiGuidance = ''): string {
+function relationshipMemoryBlock(relationshipMemoryContext: Record<string, unknown> | null): string {
+  if (!relationshipMemoryContext) return '';
+  return `
+
+REGIONAL RELATIONSHIP MEMORY FOR DAILY LIFE:
+${JSON.stringify(relationshipMemoryContext, null, 2)}
+
+Use this strongly as background pressure on ordinary routines: market caution, patrol tempo, sanctions, tribute, vassal levies, ally hesitation, patron protection, rumors, road checks, and who ordinary people avoid or trust. Do NOT invent new relationships, battles, NPCs, or events beyond this memory.`;
+}
+
+function buildDailyLifePrompt(
+  instruction: string,
+  summary: Record<string, unknown>,
+  aiGuidance = '',
+  relationshipMemoryContext: Record<string, unknown> | null = null,
+): string {
   return `You are a worldbuilding narrator for tabletop RPGs. ${instruction}
 ${guidanceBlock(aiGuidance)}
+${relationshipMemoryBlock(relationshipMemoryContext)}
 
 Return ONLY the paragraph. No preamble, no markdown, no heading.
 
@@ -1521,11 +1649,41 @@ async function callModel(
   maxTokens: number,
   phase: ModelPhase,
   modelPreference: ModelPreference,
+  featureType: string,
+  usageTelemetry?: AiUsageRecord[],
 ): Promise<string> {
-  const profile = MODEL_PROFILES[modelPreference] || MODEL_PROFILES.claude_best;
+  const profile = MODEL_PROFILES[modelPreference] || MODEL_PROFILES[DEFAULT_MODEL_PREFERENCE];
   const model = profile[phase];
-  if (profile.provider === 'openai') return callOpenAI(prompt, maxTokens, model);
-  return callAnthropic(prompt, maxTokens, model);
+  const started = Date.now();
+  let output = '';
+  let ok = false;
+  try {
+    output = profile.provider === 'openai'
+      ? await callOpenAI(prompt, maxTokens, model)
+      : await callAnthropic(prompt, maxTokens, model);
+    ok = true;
+    return output;
+  } finally {
+    if (usageTelemetry) {
+      const inputTokensEstimate = estimateTokens(prompt);
+      const outputTokensEstimate = estimateTokens(output);
+      usageTelemetry.push({
+        featureType,
+        phase,
+        provider: profile.provider,
+        model,
+        modelPreference,
+        maxTokens,
+        inputChars: prompt.length,
+        outputChars: output.length,
+        inputTokensEstimate,
+        outputTokensEstimate,
+        estimatedCostUsd: estimateUsd(profile.provider, model, inputTokensEstimate, outputTokensEstimate),
+        durationMs: Date.now() - started,
+        ok,
+      });
+    }
+  }
 }
 
 function safeJsonParse(text: string): any {
@@ -1633,6 +1791,7 @@ serve(async (req) => {
       pinnedNpcIds,
       aiGuidance,
       modelPreference,
+      relationshipMemoryContext,
       // Progression-only (AI-4b) — ignored for other types.
       changeType,
       changeLabel,
@@ -1663,6 +1822,9 @@ serve(async (req) => {
 
     const selectedModelPreference = normalizeModelPreference(modelPreference);
     const confirmedAiGuidance = typeof aiGuidance === 'string' ? aiGuidance.trim().slice(0, 4000) : '';
+    const confirmedRelationshipMemoryContext = type === 'dailyLife'
+      ? sanitizeRelationshipMemoryContext(relationshipMemoryContext)
+      : null;
     const spendFeature = spendFeatureFor(type, selectedModelPreference);
     const cost = CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[type];
 
@@ -1720,10 +1882,13 @@ serve(async (req) => {
 
     // Tier 6.8 — augment the bespoke summary with the structured
     // grounding envelope so the AI sees locked entities + user edits.
-    const summary = augmentSummaryWithGrounding(
+    const baseSummary = augmentSummaryWithGrounding(
       settlement as Record<string, unknown>,
       summarizeSettlement(settlement as Record<string, unknown>),
     );
+    const summary = confirmedRelationshipMemoryContext
+      ? { ...baseSummary, relationshipMemory: confirmedRelationshipMemoryContext }
+      : baseSummary;
     // Per-call preservation block — adds settlement-specific MUST
     // PRESERVE lines on top of the static PRESERVATION_RULES. Threaded
     // into refinement-pass prompt building below.
@@ -1732,6 +1897,7 @@ serve(async (req) => {
     // logging hooks (e.g. "what went into the prompt for save X?")
     // without changing the wire format.
     void summarizeGroundingPayload;
+    const usageTelemetry: AiUsageRecord[] = [];
 
     // Streaming NDJSON response
     const encoder = new TextEncoder();
@@ -1789,8 +1955,8 @@ serve(async (req) => {
 
             await Promise.all(entries.map(async ([fieldName, cfg]) => {
               try {
-                const prompt = buildDailyLifePrompt(cfg.instruction, summary, confirmedAiGuidance);
-                const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference);
+                const prompt = buildDailyLifePrompt(cfg.instruction, summary, confirmedAiGuidance, confirmedRelationshipMemoryContext);
+                const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry);
                 results[fieldName] = value;
                 send({ field: fieldName, value });
               } catch (e) {
@@ -1801,13 +1967,18 @@ serve(async (req) => {
 
             if (firstError) {
               await refund();
-              send({ error: (firstError as Error).message, refunded: !isElevated });
+              const aiUsage = aggregateAiUsage(usageTelemetry);
+              console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
+              send({ error: (firstError as Error).message, refunded: !isElevated, aiUsage });
             } else {
+              const aiUsage = aggregateAiUsage(usageTelemetry);
+              console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
               send({
                 done: true,
                 result: results,
                 creditsRemaining: postSpendBalance,
                 type,
+                aiUsage,
               });
             }
             controller.close();
@@ -1846,10 +2017,14 @@ serve(async (req) => {
                 600,
                 'thesis',
                 selectedModelPreference,
+                type,
+                usageTelemetry,
               );
             } catch (e) {
               await refund();
-              send({ error: `Progression thesis failed: ${(e as Error).message}`, refunded: !isElevated });
+              const aiUsage = aggregateAiUsage(usageTelemetry);
+              console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
+              send({ error: `Progression thesis failed: ${(e as Error).message}`, refunded: !isElevated, aiUsage });
               controller.close();
               return;
             }
@@ -1887,7 +2062,7 @@ serve(async (req) => {
                   dynamicPreservation,
                   confirmedAiGuidance,
                 );
-                const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference);
+                const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry);
                 const parsed = safeJsonParse(raw);
 
                 // Silent-shape-mismatch detection (see narrative loop above).
@@ -1920,6 +2095,8 @@ serve(async (req) => {
               }
             }));
 
+            const aiUsage = aggregateAiUsage(usageTelemetry);
+            console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
             send({
               done: true,
               result: aiClone,
@@ -1930,6 +2107,7 @@ serve(async (req) => {
               failedFields,
               succeededFields,
               skippedFields,
+              aiUsage,
             });
             controller.close();
             return;
@@ -1949,10 +2127,14 @@ serve(async (req) => {
               600,
               'thesis',
               selectedModelPreference,
+              type,
+              usageTelemetry,
             );
           } catch (e) {
             await refund();
-            send({ error: `Thesis generation failed: ${(e as Error).message}`, refunded: !isElevated });
+            const aiUsage = aggregateAiUsage(usageTelemetry);
+            console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
+            send({ error: `Thesis generation failed: ${(e as Error).message}`, refunded: !isElevated, aiUsage });
             controller.close();
             return;
           }
@@ -1977,7 +2159,7 @@ serve(async (req) => {
               }
 
               const prompt = buildRefinementPrompt(spec.instruction, thesis, summary, payload, undefined, undefined, dynamicPreservation, confirmedAiGuidance);
-              const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference);
+              const raw = await callModel(prompt, spec.max_tokens, 'refinement', selectedModelPreference, type, usageTelemetry);
               const parsed = safeJsonParse(raw);
 
               // Silent-shape-mismatch detection: snapshot the field before apply,
@@ -2017,6 +2199,8 @@ serve(async (req) => {
             }
           }));
 
+          const aiUsage = aggregateAiUsage(usageTelemetry);
+          console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
           send({
             done: true,
             result: aiClone,
@@ -2026,13 +2210,16 @@ serve(async (req) => {
             failedFields,
             succeededFields,
             skippedFields,
+            aiUsage,
           });
           controller.close();
         } catch (err) {
           await refund();
           const msg = err instanceof Error ? err.message : 'Unknown error';
           console.error('[generate-narrative] stream error:', msg);
-          send({ error: msg, refunded: !isElevated });
+          const aiUsage = aggregateAiUsage(usageTelemetry);
+          console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
+          send({ error: msg, refunded: !isElevated, aiUsage });
           controller.close();
         }
       },

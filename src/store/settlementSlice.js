@@ -60,6 +60,7 @@ import {
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
+import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
 import { inferImportance }   from '../domain/entities/npcs.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
@@ -75,6 +76,7 @@ import {
 // cap used to live only in HomeHero, which let regeneration bypass it.
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
 import { saves as savesService } from '../lib/saves.js';
+import { activeSaveCount } from '../lib/saveAccess.js';
 
 const MAX_VERSION_HISTORY = 50;
 
@@ -827,10 +829,11 @@ export const createSettlementSlice = (set, get) => ({
     if (!state.canSave()) return false;
 
     const max = state.maxSaves();
-    if (state.savedSettlements.length >= max) return false;
+    const activeCount = activeSaveCount(state.savedSettlements);
+    if (activeCount >= max) return false;
 
-    const wasFirstSave = state.savedSettlements.length === 0;
-    const wasThirdSave = state.savedSettlements.length === 2 && max === 3;
+    const wasFirstSave = activeCount === 0;
+    const wasThirdSave = activeCount === 2 && max === 3;
 
     set(s => {
       s.savedSettlements.push({
@@ -1103,11 +1106,22 @@ export const createSettlementSlice = (set, get) => ({
       ? saveEnvelopeFor(activeSaveId, beforeSave, state.settlement, beforeSave?.campaignState)
       : null;
 
-    const { logEntry, nextSystemState, nextSettlement } = domainApplyEvent({
+    let { logEntry, nextSystemState, nextSettlement } = domainApplyEvent({
       settlement: state.settlement,
       systemState: state.systemState,
       event,
     });
+    nextSettlement = reconcileSettlementChange(nextSettlement, state.settlement, {
+      source: state.phase === 'canon' ? 'canon_event' : 'draft_event',
+      changeType: event?.type,
+      changeLabel: event?.targetId || event?.payload?.label || event?.id,
+      now: logEntry.appliedAt,
+    });
+    nextSystemState = deriveSystemState(nextSettlement);
+    logEntry = {
+      ...logEntry,
+      afterState: nextSystemState,
+    };
 
     // Successor detection: when a pillar-tier NPC dies, surface the
     // engine's ranked successor list to the UI so the DM doesn't have

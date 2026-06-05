@@ -35,7 +35,7 @@ export default function RegisterPage() {
   return (
     <AuthPageShell
       title="Create your account"
-      subtitle="Free to start — save your work, push to larger sizes, and link settlements."
+      subtitle="Free to start. Save your work, push to larger sizes, and link settlements."
       footer={
         <span>
           Already have an account?{' '}

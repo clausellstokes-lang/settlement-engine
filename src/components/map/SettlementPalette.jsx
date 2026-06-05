@@ -132,7 +132,7 @@ const THREAT_COLOR = {
 function SettlementCard({ save, placed, onHover }) {
   const settlement = save.settlement || {};
   const name = save.name || settlement.name || 'Untitled';
-  const tier = save.tier || settlement.tier || '—';
+  const tier = save.tier || settlement.tier || ', ';
   const pop  = settlement.population || 0;
   const threat = settlement.config?.monsterThreat;
   // Stress can be an array (stressors[]) or a single object — both

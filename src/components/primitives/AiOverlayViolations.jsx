@@ -147,7 +147,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
             <Group
               violations={hard}
               tone="hard"
-              caption="Hard violations — canon was directly compromised. The DM should inspect these before accepting the refined output."
+              caption="Hard violations. Canon was directly compromised. The DM should inspect these before accepting the refined output."
             />
           )}
           {softCount > 0 && (
@@ -155,7 +155,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
               violations={soft}
               tone="soft"
               caption={hardCount > 0
-                ? 'Soft violations — informational. The simulation is still valid; some derived prose simply went missing.'
+                ? 'Soft violations. Informational. The simulation is still valid; some derived prose simply went missing.'
                 : 'Drift was detected but is informational only. The simulation is still valid.'}
             />
           )}

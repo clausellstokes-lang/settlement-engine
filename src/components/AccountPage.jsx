@@ -19,7 +19,8 @@ import { useStore } from '../store/index.js';
 import { auth as authService } from '../lib/auth.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { isConfigured, supabase } from '../lib/supabase.js';
-import { AI_MODEL_OPTIONS, getTierDisplayName, getActivePacks } from '../config/pricing.js';
+import { AI_MODEL_OPTIONS, DEFAULT_MODEL_PREFERENCE, getTierDisplayName, getActivePacks } from '../config/pricing.js';
+import { activeSaveCount, inactiveRetentionCount } from '../lib/saveAccess.js';
 import { lazy as _lazy, Suspense as _Suspense } from 'react';
 // P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
@@ -82,6 +83,8 @@ export default function AccountPage({ onNavigateAdmin }) {
   const savedSettlements = useStore(s => s.savedSettlements);
   const maxSaves = useStore(s => s.maxSaves());
   const authSignOut = useStore(s => s.authSignOut);
+  const activeSaves = activeSaveCount(savedSettlements);
+  const inactiveSaves = inactiveRetentionCount(savedSettlements);
 
   // Display name editing
   const [editingName, setEditingName] = useState(false);
@@ -90,13 +93,13 @@ export default function AccountPage({ onNavigateAdmin }) {
   const profileSourceKey = [
     auth.avatarUrl || '',
     auth.emailNotifications !== false ? 'email:on' : 'email:off',
-    auth.modelPreference || 'claude_best',
+    auth.modelPreference || DEFAULT_MODEL_PREFERENCE,
   ].join('\u0000');
   const [profileDraft, setProfileDraft] = useState(() => ({
     sourceKey: profileSourceKey,
     avatarInput: auth.avatarUrl || '',
     emailNotifications: auth.emailNotifications !== false,
-    modelPreference: auth.modelPreference || 'claude_best',
+    modelPreference: auth.modelPreference || DEFAULT_MODEL_PREFERENCE,
   }));
   const [profileSaving, setProfileSaving] = useState(false);
   const [profileSaved, setProfileSaved] = useState(false);
@@ -119,7 +122,7 @@ export default function AccountPage({ onNavigateAdmin }) {
       sourceKey: profileSourceKey,
       avatarInput: auth.avatarUrl || '',
       emailNotifications: auth.emailNotifications !== false,
-      modelPreference: auth.modelPreference || 'claude_best',
+      modelPreference: auth.modelPreference || DEFAULT_MODEL_PREFERENCE,
     });
   }
 
@@ -441,10 +444,15 @@ export default function AccountPage({ onNavigateAdmin }) {
                 {t('account.cardSaves')}
               </div>
               <div style={{ fontSize: FS.xxl, fontWeight: 700, color: swatch['#2A7A2A'] }}>
-                {savedSettlements.length} / {maxSaves === Infinity ? '\u221E' : maxSaves}
+                {activeSaves} / {maxSaves === Infinity ? '\u221E' : maxSaves}
               </div>
+              {inactiveSaves > 0 && (
+                <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: SP.xs }}>
+                  {inactiveSaves} inactive retained
+                </div>
+              )}
             </div>
-            {!isElevated && maxSaves !== Infinity && savedSettlements.length >= maxSaves - 1 && (
+            {!isElevated && maxSaves !== Infinity && activeSaves >= maxSaves - 1 && (
               <div style={{
                 padding: `${SP.sm}px ${SP.md}px`,
                 background: 'rgba(208,128,32,0.10)',
@@ -452,7 +460,7 @@ export default function AccountPage({ onNavigateAdmin }) {
                 fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
               }}>
                 <b style={{ color: AMBER }}>
-                  {savedSettlements.length >= maxSaves ? 'Saves full.' : 'One save left.'}
+                  {activeSaves >= maxSaves ? 'Saves full.' : 'One save left.'}
                 </b>{' '}
                 Cartographer = unlimited + cloud sync. Phone, laptop, table.
               </div>
@@ -661,8 +669,8 @@ export default function AccountPage({ onNavigateAdmin }) {
         onClick={authSignOut}
         style={{
           padding: `${SP.md}px 0`,
-          background: 'transparent', color: swatch.danger,
-          border: '1px solid rgba(139,26,26,0.3)',
+          background: swatch.dangerBg, color: swatch.danger,
+          border: '1px solid rgba(139,26,26,0.35)',
           borderRadius: R.lg, cursor: 'pointer',
           fontSize: FS.md, fontWeight: 700, fontFamily: sans,
         }}

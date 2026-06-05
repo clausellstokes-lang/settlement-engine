@@ -45,6 +45,7 @@ function populationFlows(snapshot, tick) {
         if (!dest) continue;
         const fraction = Math.min(0.12, 0.04 + (s.severity - 0.6) * 0.2);
         const refugees = Math.round(sourcePop * fraction);
+        if (refugees <= 0) continue;
         const severity = clamp01(0.3 + s.severity * 0.3);
         const human = String(s.type).replace(/_/g, ' ');
         out.push({
@@ -70,8 +71,12 @@ function populationFlows(snapshot, tick) {
             triggeredAt: { tick, sourceEventType: 'WORLD_PULSE_FLOW_MIGRATION', sourceEventTargetId: sourceId },
             causes: [{ source: s.id, effect: 'population_flow', reason: `Refugees fleeing ${human}.` }],
           }),
+          populationDeltas: [
+            { saveId: sourceId, delta: -refugees, reason: `Refugees flee ${human}.` },
+            { saveId: destId, delta: refugees, reason: `Refugees arrive from ${source?.name || sourceId}.` },
+          ],
           metadata: { flowKind: 'population', from: sourceId, to: destId, populationDelta: refugees, channelType: channel.type },
-          conflictTags: [`settlement:${destId}:migration`, `flow:migration:${sourceId}:${destId}`],
+          conflictTags: [`settlement:${destId}:migration`, `flow:migration:${sourceId}:${destId}`, `population_transfer:${sourceId}`],
         });
       }
     }

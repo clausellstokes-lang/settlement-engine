@@ -59,7 +59,7 @@ export default function VerifyEmailPage() {
           <>
             <AlertCircle size={40} color={MUTED} style={{ margin: '0 auto' }} />
             <Alert type="error">
-              This confirmation link is invalid or has expired. Try signing in —
+              This confirmation link is invalid or has expired. Try signing in,
               if your account isn't active yet, request a fresh link.
             </Alert>
             <Button variant="ghost" onClick={() => navigate('signin')}>

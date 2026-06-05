@@ -34,12 +34,12 @@ export default function ProvenanceBlock({ save }) {
   return (
     <Card kicker="Provenance" compact>
       <dl style={{ margin: 0, display: 'grid', gridTemplateColumns: 'auto 1fr', columnGap: 8, rowGap: 4 }}>
-        <Row label="Seed">{lastSeed ? <code style={codeStyle}>{shortSeed(lastSeed)}</code> : '—'}</Row>
+        <Row label="Seed">{lastSeed ? <code style={codeStyle}>{shortSeed(lastSeed)}</code> : ', '}</Row>
         <Row label="Generated">{fmt(generatedAt || save?.savedAt)}</Row>
-        <Row label="Last edited">{fmt(editedAt) || '—'}</Row>
+        <Row label="Last edited">{fmt(editedAt) || ', '}</Row>
         <Row label="Canonized">{fmt(canonizedAt) || 'Draft'}</Row>
-        <Row label="Last export">{fmt(lastExportAt) || '—'}</Row>
-        <Row label="Campaign">{campaignName || '—'}</Row>
+        <Row label="Last export">{fmt(lastExportAt) || ', '}</Row>
+        <Row label="Campaign">{campaignName || ', '}</Row>
       </dl>
     </Card>
   );

@@ -162,7 +162,7 @@ export const RELATIONSHIP_RULE_MATRIX = {
   ],
 };
 
-const TYPE_ALIASES = {
+export const RELATIONSHIP_TYPE_ALIASES = {
   trade: "trade_partner",
   alliance: "allied",
   ally: "allied",
@@ -173,8 +173,10 @@ const TYPE_ALIASES = {
   criminal_corridor: "criminal_network",
 };
 
-const normalizeType = (type) =>
-  TYPE_ALIASES[String(type || "").trim().toLowerCase()] || String(type || "neutral").trim().toLowerCase();
+export const normalizeRelationshipType = (type) =>
+  RELATIONSHIP_TYPE_ALIASES[String(type || "").trim().toLowerCase()] || String(type || "neutral").trim().toLowerCase();
+
+const normalizeType = normalizeRelationshipType;
 
 export function relationshipKeyFromEdge(edge) {
   if (edge?.id) return edge.id;
@@ -190,8 +192,42 @@ export function getRelationshipSettlements(edge) {
   };
 }
 
+export function normalizeRelationshipEdge(edge = {}) {
+  const relationshipType = normalizeRelationshipType(edge.relationshipType || edge.type || edge.relation || "neutral");
+  if (relationshipType !== "client") {
+    return {
+      ...edge,
+      relationshipType,
+      legacyRelationshipType: edge.legacyRelationshipType || null,
+      normalizedDirection: edge.normalizedDirection || null,
+    };
+  }
+  const { from, to } = getRelationshipSettlements(edge);
+  if (!from || !to) {
+    return {
+      ...edge,
+      relationshipType,
+      legacyRelationshipType: edge.legacyRelationshipType || null,
+      normalizedDirection: edge.normalizedDirection || null,
+    };
+  }
+  return {
+    ...edge,
+    id: relationshipKeyFromEdge(edge),
+    from: String(to),
+    to: String(from),
+    relationshipType: "patron",
+    legacyRelationshipType: "client",
+    normalizedDirection: "client_to_patron",
+  };
+}
+
 export function ensureRelationshipState(edge, existing = {}) {
-  const relationshipType = normalizeType(existing.relationshipType || edge?.relationshipType || edge?.type || "neutral");
+  const normalizedEdge = normalizeRelationshipEdge(edge);
+  const rawType = existing.relationshipType || normalizedEdge?.relationshipType || "neutral";
+  const relationshipType = normalizedEdge?.legacyRelationshipType === "client" && normalizeType(rawType) === "client"
+    ? "patron"
+    : normalizeType(rawType);
   const defaults = RELATIONSHIP_DEFAULTS[relationshipType] || RELATIONSHIP_DEFAULTS.neutral;
   const recentIncidents = Array.isArray(existing.recentIncidents) ? existing.recentIncidents.slice(-8) : [];
   const history = Array.isArray(existing.history) ? existing.history.slice(-12) : [];
@@ -210,10 +246,20 @@ export function ensureRelationshipState(edge, existing = {}) {
     pactStrength: clamp01(existing.pactStrength ?? defaults.pactStrength ?? 0),
     recentIncidents,
     history,
+    hierarchyResolutions: Array.isArray(existing.hierarchyResolutions) ? existing.hierarchyResolutions.slice(-6) : [],
     trajectory: existing.trajectory || "stable",
     proposedRelationshipType: existing.proposedRelationshipType || null,
     lastTransitionTick: Number.isFinite(existing.lastTransitionTick) ? existing.lastTransitionTick : null,
     updatedAt: existing.updatedAt || null,
+    overlordWeaknessStreak: Math.max(0, Math.floor(Number(existing.overlordWeaknessStreak) || 0)),
+    posture: existing.posture || null,
+    memoryScore: clamp01(existing.memoryScore ?? 0),
+    dailyLifeWeight: clamp01(existing.dailyLifeWeight ?? 0),
+    postureUpdatedAtTick: Number.isFinite(existing.postureUpdatedAtTick) ? existing.postureUpdatedAtTick : null,
+    postureReasons: Array.isArray(existing.postureReasons) ? existing.postureReasons.slice(0, 4) : [],
+    relationshipMemory: existing.relationshipMemory && typeof existing.relationshipMemory === "object"
+      ? { ...existing.relationshipMemory }
+      : null,
   };
 }
 
@@ -221,7 +267,7 @@ export function ensureRelationshipStatesForGraph(graph = { edges: [] }, existing
   return Object.fromEntries(
     (graph.edges || []).map((edge) => {
       const key = relationshipKeyFromEdge(edge);
-      return [key, ensureRelationshipState(edge, existingStates[key])];
+      return [key, ensureRelationshipState(normalizeRelationshipEdge(edge), existingStates[key])];
     }),
   );
 }
@@ -382,6 +428,56 @@ function settlementStrength(item, pressure = {}) {
   );
 }
 
+function relationshipTypeBetween(snapshot, a, b) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const s = getRelationshipSettlements(edge);
+    const paired = (String(s.from) === String(a) && String(s.to) === String(b))
+      || (String(s.from) === String(b) && String(s.to) === String(a));
+    if (!paired) continue;
+    return ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]).relationshipType;
+  }
+  return null;
+}
+
+function protectorBackingScore(ctx, targetId, attackerId) {
+  const states = ctx.snapshot?.worldState?.relationshipStates || {};
+  let max = 0;
+  for (const rawEdge of ctx.snapshot?.regionalGraph?.edges || ctx.snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const key = relationshipKeyFromEdge(rawEdge);
+    if (key === relationshipKeyFromEdge(ctx.originalEdge || ctx.edge)) continue;
+    const relState = ensureRelationshipState(edge, states[key]);
+    const s = getRelationshipSettlements(edge);
+    let protectorId = null;
+    let score = 0;
+
+    if (relState.relationshipType === "allied" && (String(s.from) === String(targetId) || String(s.to) === String(targetId))) {
+      protectorId = String(s.from) === String(targetId) ? s.to : s.from;
+      score = 0.22 + relState.pactStrength * 0.36 + relState.trust * 0.22;
+    } else if (relState.relationshipType === "trade_partner" && (String(s.from) === String(targetId) || String(s.to) === String(targetId))) {
+      protectorId = String(s.from) === String(targetId) ? s.to : s.from;
+      score = 0.08 + relState.dependency * 0.16 + relState.trust * 0.12;
+    } else if (relState.relationshipType === "patron" && String(s.to) === String(targetId)) {
+      protectorId = s.from;
+      score = 0.28 + relState.leverage * 0.28 + relState.pactStrength * 0.18;
+    } else if (relState.relationshipType === "vassal" && String(s.to) === String(targetId)) {
+      protectorId = s.from;
+      score = 0.38 + relState.leverage * 0.28 + relState.pactStrength * 0.22;
+    }
+
+    if (!protectorId || String(protectorId) === String(attackerId)) continue;
+    const protector = itemFor(ctx.snapshot, protectorId);
+    score += settlementStrength(protector) * 0.16;
+    const protectorToAttacker = relationshipTypeBetween(ctx.snapshot, protectorId, attackerId);
+    if (["allied", "trade_partner", "patron", "vassal"].includes(protectorToAttacker)) score *= 0.48;
+    if (["hostile", "cold_war", "rival"].includes(protectorToAttacker)) score *= 1.18;
+    max = Math.max(max, clamp01(score));
+  }
+  return clamp01(max);
+}
+
 function canSubjugate(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   const source = itemFor(ctx.snapshot, settlements.from);
@@ -393,7 +489,63 @@ function canSubjugate(ctx) {
   if (sourceRank === targetRank && populationFor(source) < populationFor(target) * 0.72) return false;
   const sourceStrength = settlementStrength(source, ctx.sourcePressure);
   const targetStrength = settlementStrength(target, ctx.targetPressure);
-  return sourceStrength >= targetStrength * 0.82;
+  const backing = protectorBackingScore(ctx, settlements.to, settlements.from);
+  return sourceStrength >= (targetStrength + backing * 0.8) * 0.82;
+}
+
+function patronageEligibility(ctx) {
+  const settlements = getRelationshipSettlements(ctx.edge);
+  const source = itemFor(ctx.snapshot, settlements.from);
+  const target = itemFor(ctx.snapshot, settlements.to);
+  if (!source || !target) return { eligible: false, reason: "missing_settlement" };
+  const sourceRank = tierRankFor(source);
+  const targetRank = tierRankFor(target);
+  const sourceStrength = settlementStrength(source, ctx.sourcePressure);
+  const targetStrength = settlementStrength(target, ctx.targetPressure);
+  const sustainedTrade = ctx.relState.tradeBalance > 0.54
+    || ctx.relState.dependency > 0.44
+    || (ctx.relState.history || []).some(item => /trade|route|patron|client|dependency/i.test(`${item.type || ""} ${item.reason || ""}`));
+  const stronger = sourceRank > targetRank || sourceStrength >= targetStrength + 0.14;
+  return {
+    eligible: stronger && sustainedTrade,
+    reason: stronger ? (sustainedTrade ? "eligible" : "needs_sustained_trade") : "source_not_stronger",
+    sourceStrength,
+    targetStrength,
+    sourceRank,
+    targetRank,
+    sustainedTrade,
+  };
+}
+
+function relationshipThirdParties(snapshot, settlementId, types = []) {
+  const typeSet = new Set(types);
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const out = [];
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const key = relationshipKeyFromEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[key]);
+    if (typeSet.size && !typeSet.has(relState.relationshipType)) continue;
+    const s = getRelationshipSettlements(edge);
+    let thirdPartyId = null;
+    if (String(s.from) === String(settlementId)) thirdPartyId = String(s.to);
+    if (String(s.to) === String(settlementId)) thirdPartyId = String(s.from);
+    if (!thirdPartyId) continue;
+    out.push({ relationshipKey: key, thirdPartyId, relationshipType: relState.relationshipType, relState });
+  }
+  return out;
+}
+
+function supplyExposure(snapshot, a, b) {
+  const pair = new Set([String(a), String(b)]);
+  let max = 0;
+  for (const channel of snapshot?.regionalGraph?.channels || []) {
+    if (channel.status !== "confirmed") continue;
+    if (!["trade_dependency", "export_market", "trade_route"].includes(channel.type)) continue;
+    if (!pair.has(String(channel.from)) || !pair.has(String(channel.to))) continue;
+    max = Math.max(max, clamp01(channel.strength ?? channel.severity ?? 0.45));
+  }
+  return max;
 }
 
 function activeRebellionAgainstVassal(snapshot, vassalId) {
@@ -508,6 +660,8 @@ function neutralRules(ctx) {
   }
 
   if (imbalance > 0.42 && relState.dependency > 0.24 && relState.trust < 0.52) {
+    const eligibility = patronageEligibility(ctx);
+    if (eligibility.eligible) {
     candidates.push(
       labelProposal(ctx, "patron", "neutral_to_patronage", {
         ruleId: "neutral_to_patronage",
@@ -521,9 +675,10 @@ function neutralRules(ctx) {
           leverage: clamp01(relState.leverage + 0.06),
           trajectory: "tightening",
         },
-        metadata: { imbalance },
+        metadata: { imbalance, patronageEligibility: eligibility.reason },
       }),
     );
+    }
   }
 
   return candidates;
@@ -553,6 +708,8 @@ function tradePartnerRules(ctx) {
   }
 
   if (dependencyGap > 0.62 && relState.leverage > 0.38) {
+    const eligibility = patronageEligibility(ctx);
+    if (eligibility.eligible) {
     candidates.push(
       labelProposal(ctx, "patron", "trade_to_patron_client", {
         ruleId: "trade_to_patron_client",
@@ -565,8 +722,10 @@ function tradePartnerRules(ctx) {
           resentment: clamp01(relState.resentment + 0.03),
           trajectory: "tightening",
         },
+        metadata: { patronageEligibility: eligibility.reason },
       }),
     );
+    }
   }
 
   if (!hasRecentIncident(relState, "route_disruption", tick) && tradeStress > 0.28) {
@@ -607,9 +766,10 @@ function tradePartnerRules(ctx) {
 }
 
 function alliedRules(ctx) {
-  const { edge, relState, sourcePressure, targetPressure } = ctx;
+  const { edge, relState, sourcePressure, targetPressure, snapshot } = ctx;
   const burden = mean(targetPressure.food, targetPressure.conflict, targetPressure.disease, sourcePressure.conflict);
   const endurance = clamp01(relState.pactStrength + relState.trust * 0.4 - relState.obligationFatigue * 0.45);
+  const settlements = getRelationshipSettlements(edge);
   const candidates = [];
 
   if (burden > 0.24) {
@@ -659,6 +819,37 @@ function alliedRules(ctx) {
     );
   }
 
+  const targetColdWar = relationshipThirdParties(snapshot, settlements.to, ["cold_war"])[0];
+  if (targetColdWar) {
+    const sourceToThird = relationshipTypeBetween(snapshot, settlements.from, targetColdWar.thirdPartyId);
+    const hesitation = ["allied", "trade_partner", "patron", "vassal"].includes(sourceToThird) ? 0.46 : 1;
+    candidates.push(
+      internalDrift(ctx, "ally_cold_war_support", {
+        ruleId: "allied_cold_war_support",
+        severity: clamp01((0.28 + relState.pactStrength * 0.26 + targetColdWar.relState.resentment * 0.18) * hesitation),
+        probability: clamp01((0.08 + relState.trust * 0.14 + relState.pactStrength * 0.16) * hesitation),
+        reasons: [
+          hesitation < 1
+            ? "The ally supports cold-war pressure through sanctions or intelligence, but hesitates because the target is also tied to them."
+            : "The ally supports cold-war pressure with sanctions, intelligence, or proxy aid.",
+          `Cold-war third party: ${targetColdWar.thirdPartyId}.`,
+        ],
+        relationshipPatch: {
+          militaryBurden: clamp01(relState.militaryBurden + 0.04 * hesitation),
+          obligationFatigue: clamp01(relState.obligationFatigue + 0.05 * hesitation),
+          pactStrength: clamp01(relState.pactStrength + 0.015 * hesitation),
+          trajectory: hesitation < 1 ? "cautious_cold_war_support" : "cold_war_support",
+        },
+        metadata: {
+          incidentType: "cold_war_support",
+          thirdPartyId: targetColdWar.thirdPartyId,
+          hesitation,
+          sourceRelationshipToThird: sourceToThird,
+        },
+      }),
+    );
+  }
+
   if (relState.obligationFatigue > 0.52 || (burden > endurance && relState.resentment > 0.22)) {
     candidates.push(
       labelProposal(ctx, "trade_partner", "allied_overburdened", {
@@ -699,6 +890,7 @@ function alliedRules(ctx) {
 function patronRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
   const clientStrain = mean(targetPressure.food, targetPressure.trade, targetPressure.legitimacy);
+  const patronExposure = mean(sourcePressure.economy, sourcePressure.trade);
   const candidates = [];
 
   candidates.push(
@@ -729,6 +921,33 @@ function patronRules(ctx) {
           resentment: clamp01(relState.resentment + 0.025),
         },
         metadata: { incidentType: "patron_intervention" },
+      }),
+    );
+  }
+
+  if (
+    (targetPressure.conflict > 0.46 || targetPressure.trade > 0.52)
+    && patronExposure > 0.36
+    && relState.dependency > 0.5
+    && relState.trust > 0.34
+  ) {
+    candidates.push(
+      labelProposal(ctx, "allied", "patron_protects_investment", {
+        ruleId: "patron_to_allied_interest_protection",
+        severity: 0.38 + Math.max(targetPressure.conflict, targetPressure.trade) * 0.28 + patronExposure * 0.18,
+        probability: 0.06 + relState.dependency * 0.12 + patronExposure * 0.12,
+        reasons: [
+          "The patron's own economy is exposed enough that protecting the client as an ally becomes rational.",
+          "Patronage matures when the patron needs the client's survival more than its concessions.",
+        ],
+        relationshipPatch: {
+          trust: clamp01(relState.trust + 0.07),
+          pactStrength: clamp01(relState.pactStrength + 0.16),
+          leverage: clamp01(relState.leverage - 0.08),
+          resentment: clamp01(relState.resentment - 0.04),
+          trajectory: "protective_alignment",
+        },
+        metadata: { patronExposure },
       }),
     );
   }
@@ -848,7 +1067,8 @@ function vassalRules(ctx) {
   const overlordId = settlements.from;
   const vassalId = settlements.to;
   const vassalStrain = mean(targetPressure.legitimacy, targetPressure.trade, targetPressure.conflict, relState.resentment);
-  const overlordWeakness = mean(sourcePressure.conflict, sourcePressure.legitimacy, sourcePressure.trade);
+  const overlordWeakness = mean(sourcePressure.conflict, sourcePressure.legitimacy, sourcePressure.defense, sourcePressure.economy);
+  const weaknessStreak = Math.max(0, Number(relState.overlordWeaknessStreak) || 0);
   const candidates = [];
 
   candidates.push(
@@ -887,6 +1107,56 @@ function vassalRules(ctx) {
       metadata: { incidentType: "vassal_extraction", overlordSaveId: overlordId, vassalSaveId: vassalId },
     }),
   );
+
+  const overlordColdWar = relationshipThirdParties(ctx.snapshot, overlordId, ["cold_war"])[0];
+  if (overlordColdWar) {
+    candidates.push(
+      internalDrift(ctx, "vassal_cold_war_support", {
+        ruleId: "vassal_cold_war_support",
+        severity: clamp01(0.26 + relState.dependency * 0.22 + overlordColdWar.relState.resentment * 0.2),
+        probability: clamp01(0.08 + relState.leverage * 0.16 + relState.pactStrength * 0.12),
+        reasons: [
+          "A vassal is expected to aid the overlord's cold war with sanctions, scouts, supplies, or legal pressure.",
+          `Cold-war third party: ${overlordColdWar.thirdPartyId}.`,
+        ],
+        relationshipPatch: {
+          obligationFatigue: clamp01(relState.obligationFatigue + 0.06),
+          militaryBurden: clamp01(relState.militaryBurden + 0.04),
+          resentment: clamp01(relState.resentment + 0.025),
+          pactStrength: clamp01(relState.pactStrength + 0.02),
+          trajectory: "cold_war_levy_support",
+        },
+        metadata: {
+          incidentType: "vassal_cold_war_support",
+          overlordSaveId: overlordId,
+          vassalSaveId: vassalId,
+          thirdPartyId: overlordColdWar.thirdPartyId,
+        },
+      }),
+    );
+  }
+
+  if (overlordWeakness > 0.5 || weaknessStreak > 0) {
+    const nextStreak = overlordWeakness > 0.5 ? weaknessStreak + 1 : Math.max(0, weaknessStreak - 1);
+    candidates.push(
+      internalDrift(ctx, "vassal_overlord_weakness_memory", {
+        ruleId: "vassal_overlord_weakness_memory",
+        severity: clamp01(0.18 + overlordWeakness * 0.28 + Math.min(0.24, nextStreak * 0.06)),
+        probability: 1,
+        reasons: [
+          overlordWeakness > 0.5
+            ? "The overlord's weak legitimacy, economy, military, or defenses are becoming a remembered vassalage risk."
+            : "The overlord is recovering, so vassal independence pressure cools gradually.",
+        ],
+        relationshipPatch: {
+          overlordWeaknessStreak: nextStreak,
+          resentment: overlordWeakness > 0.5 ? clamp01(relState.resentment + 0.02) : relState.resentment,
+          trajectory: overlordWeakness > 0.5 ? "overlord_weakness_noted" : "overlord_recovery_noted",
+        },
+        metadata: { incidentType: "overlord_weakness_memory", overlordWeakness, weaknessStreak: nextStreak },
+      }),
+    );
+  }
 
   if (targetPressure.conflict > 0.38 || targetPressure.crime > 0.42) {
     candidates.push(
@@ -931,8 +1201,12 @@ function vassalRules(ctx) {
     );
   }
 
-  if (!rebellionActive && vassalStrain > 0.55) {
-    const severity = clamp01(0.42 + vassalStrain * 0.36 + (1 - relState.trust) * 0.12);
+  const vassalItem = itemFor(ctx.snapshot, vassalId);
+  const overlordItem = itemFor(ctx.snapshot, overlordId);
+  const vassalConfidence = clamp01(settlementStrength(vassalItem, targetPressure) - settlementStrength(overlordItem, sourcePressure) + 0.45);
+  const independencePressure = clamp01(vassalStrain + overlordWeakness * 0.28 + Math.min(0.28, weaknessStreak * 0.07) + vassalConfidence * 0.16);
+  if (!rebellionActive && (vassalStrain > 0.55 || independencePressure > 0.62)) {
+    const severity = clamp01(0.38 + independencePressure * 0.34 + (1 - relState.trust) * 0.1);
     candidates.push({
       id: `candidate.vassal.rebellion.${stablePart(relationshipKeyFromEdge(edge))}.${tick}`,
       type: "stressor",
@@ -942,11 +1216,12 @@ function vassalRules(ctx) {
       relationshipKey: relationshipKeyFromEdge(edge),
       targetSaveId: vassalId,
       severity,
-      probability: clamp01(0.05 + vassalStrain * 0.22 + relState.resentment * 0.12),
+      probability: clamp01(0.04 + independencePressure * 0.2 + relState.resentment * 0.12),
       applyMode: severity >= 0.72 ? "proposal" : "auto",
       headline: `Rebellion may rise in ${itemFor(ctx.snapshot, vassalId)?.name || vassalId}`,
       summary: "Vassal extraction, low legitimacy, and poor defenses create an independence crisis.",
       reasons: [
+        `Independence pressure ${independencePressure.toFixed(2)} with overlord weakness streak ${weaknessStreak}.`,
         `Vassal strain ${vassalStrain.toFixed(2)} with resentment ${relState.resentment.toFixed(2)}.`,
         "A rebellion can end vassalage if it succeeds, but it does not erase prior structural changes.",
       ],
@@ -961,7 +1236,7 @@ function vassalRules(ctx) {
         residualEffects: ["reprisal_memory", "autonomy_cells", "broken_tax_obligations"],
         spreadChannels: ["information_flow", "political_authority", "criminal_corridor"],
       },
-      metadata: { overlordSaveId: overlordId, vassalSaveId: vassalId, relationshipKey: relationshipKeyFromEdge(edge) },
+      metadata: { overlordSaveId: overlordId, vassalSaveId: vassalId, relationshipKey: relationshipKeyFromEdge(edge), overlordWeakness, weaknessStreak, vassalConfidence },
       conflictTags: [`stressor:rebellion:${vassalId}`, `relationship:${relationshipKeyFromEdge(edge)}`],
     });
   }
@@ -1013,6 +1288,10 @@ function vassalRules(ctx) {
 function rivalRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.resentment);
+  const settlements = getRelationshipSettlements(ctx.edge);
+  const sourcePower = settlementStrength(itemFor(ctx.snapshot, settlements.from), sourcePressure);
+  const targetPower = settlementStrength(itemFor(ctx.snapshot, settlements.to), targetPressure);
+  const confidenceGap = sourcePower - targetPower;
   const candidates = [];
 
   candidates.push(
@@ -1063,6 +1342,27 @@ function rivalRules(ctx) {
     );
   }
 
+  if (confidenceGap > 0.22 && relState.resentment > 0.46 && relState.fear < 0.5) {
+    candidates.push(
+      labelProposal(ctx, confidenceGap > 0.36 && relState.resentment > 0.62 ? "hostile" : "cold_war", "rival_power_play", {
+        ruleId: "rival_power_play",
+        severity: clamp01(0.36 + confidenceGap * 0.42 + relState.resentment * 0.24),
+        probability: clamp01(0.05 + confidenceGap * 0.18 + relState.resentment * 0.12),
+        reasons: [
+          "A rival with a stronger economy, military, or tier position grows confident enough to press the contest.",
+          `Power confidence gap ${confidenceGap.toFixed(2)}.`,
+        ],
+        relationshipPatch: {
+          resentment: clamp01(relState.resentment + 0.055),
+          fear: clamp01(relState.fear + 0.045),
+          leverage: clamp01(relState.leverage + 0.04),
+          trajectory: "power_play",
+        },
+        metadata: { confidenceGap },
+      }),
+    );
+  }
+
   if (relState.trust > 0.38 && relState.resentment < 0.38 && Math.max(sourcePressure.conflict, targetPressure.conflict) < 0.24) {
     candidates.push(
       labelProposal(ctx, "trade_partner", "rival_detente", {
@@ -1085,6 +1385,9 @@ function rivalRules(ctx) {
 function coldWarRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.fear, relState.resentment);
+  const tradeStress = mean(sourcePressure.trade, targetPressure.trade);
+  const settlements = getRelationshipSettlements(ctx.edge);
+  const exposure = supplyExposure(ctx.snapshot, settlements.from, settlements.to);
   const candidates = [];
 
   candidates.push(
@@ -1114,6 +1417,40 @@ function coldWarRules(ctx) {
           trajectory: "destabilizing",
         },
         metadata: { incidentType: "proxy_conflict" },
+      }),
+    );
+  }
+
+  if ((exposure > 0.35 || tradeStress > 0.38) && relState.tradeBalance < 0.42) {
+    candidates.push(
+      candidateBase({
+        ...ctx,
+        candidateType: "cold_war_supply_sanctions",
+        ruleId: "cold_war_supply_sanctions",
+        type: "condition",
+        targetSaveId: settlements.to,
+        severity: clamp01(0.3 + Math.max(exposure, tradeStress) * 0.42 + relState.leverage * 0.12),
+        probability: clamp01(0.08 + Math.max(exposure, tradeStress) * 0.2 + relState.resentment * 0.08),
+        reasons: [
+          "Cold-war pressure follows exposed trade and supply channels through inspections, sanctions, and informal embargoes.",
+          exposure > 0 ? `Confirmed supply exposure ${exposure.toFixed(2)}.` : `Trade stress ${tradeStress.toFixed(2)}.`,
+        ],
+        relationshipPatch: {
+          tradeBalance: clamp01(relState.tradeBalance - 0.05),
+          resentment: clamp01(relState.resentment + 0.035),
+          leverage: clamp01(relState.leverage + 0.035),
+          trajectory: "sanctions_pressure",
+        },
+        condition: {
+          archetype: "cold_war_sanctions",
+          label: "Cold-war sanctions",
+          description: "Inspections, sanctions, or informal embargoes are tightening daily trade.",
+          severity: clamp01(0.3 + Math.max(exposure, tradeStress) * 0.42 + relState.leverage * 0.12),
+          source: "world_pulse_relationship",
+          relatedSettlementId: settlements.from,
+          affectedSystems: ["trade_connectivity", "public_legitimacy", "criminal_opportunity"],
+        },
+        metadata: { incidentType: "supply_sanctions", exposure, tradeStress },
       }),
     );
   }
@@ -1158,6 +1495,7 @@ function hostileRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
   const powerGap = Math.abs(sourcePressure.defense - targetPressure.defense) + Math.abs(sourcePressure.economy - targetPressure.economy);
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.fear, relState.resentment);
+  const attackerAttrition = mean(sourcePressure.economy, sourcePressure.defense, sourcePressure.legitimacy, relState.militaryBurden);
   const candidates = [];
 
   candidates.push(
@@ -1222,6 +1560,27 @@ function hostileRules(ctx) {
           leverage: clamp01(relState.leverage + 0.04),
         },
         metadata: { incidentType: "forced_tribute" },
+      }),
+    );
+  }
+
+  if (attackerAttrition > 0.55 && relState.resentment < 0.82) {
+    candidates.push(
+      labelProposal(ctx, "cold_war", "hostile_attrition_deescalation", {
+        ruleId: "hostile_attrition_deescalation",
+        severity: clamp01(0.34 + attackerAttrition * 0.36),
+        probability: clamp01(0.05 + attackerAttrition * 0.18 + relState.trust * 0.08),
+        reasons: [
+          "Open hostility is losing practical support as the stronger side's economy, defenses, legitimacy, or manpower slip.",
+          `Attacker attrition ${attackerAttrition.toFixed(2)}.`,
+        ],
+        relationshipPatch: {
+          trust: clamp01(relState.trust + 0.025),
+          fear: clamp01(relState.fear - 0.035),
+          militaryBurden: clamp01(relState.militaryBurden - 0.04),
+          trajectory: "attrition_deescalation",
+        },
+        metadata: { attackerAttrition },
       }),
     );
   }
@@ -1368,13 +1727,15 @@ export function evaluateRelationshipRules(snapshot, pressureIdx, context = {}) {
 
   return (snapshot?.regionalGraph?.edges || snapshot?.relationships || []).flatMap((edge) => {
     const key = relationshipKeyFromEdge(edge);
-    const relState = ensureRelationshipState(edge, states[key]);
+    const normalizedEdge = normalizeRelationshipEdge(edge);
+    const relState = ensureRelationshipState(normalizedEdge, states[key]);
     const evaluator = RULE_EVALUATORS[relState.relationshipType] || RULE_EVALUATORS.neutral;
-    const settlements = getRelationshipSettlements(edge);
+    const settlements = getRelationshipSettlements(normalizedEdge);
     const sourcePressure = buildPressureSummary(pressureIdx, settlements.from);
     const targetPressure = buildPressureSummary(pressureIdx, settlements.to);
     const ctx = {
-      edge,
+      edge: normalizedEdge,
+      originalEdge: edge,
       relState,
       sourcePressure,
       targetPressure,

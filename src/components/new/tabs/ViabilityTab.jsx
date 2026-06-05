@@ -82,8 +82,8 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
             </div>
             {summaryClean&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}
             <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
-              This tab checks whether your settlement makes logical sense — not whether it&apos;s economically optimised. 
-              A viable settlement can have unexploited resources and unsatisfied demand; what matters is whether the 
+              This tab checks whether your settlement makes logical sense. Not whether it&apos;s economically optimised.
+              A viable settlement can have unexploited resources and unsatisfied demand; what matters is whether the
               pieces fit together plausibly.
             </p>
           </div>
@@ -108,8 +108,8 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5}}>
             This settlement's resilience relies on active magical infrastructure. One or more supply
             chains are magically sustained, or stress conditions are being offset by arcane, divine,
-            or druidic intervention. Loss of magical practitioners — through conflict, plague, or
-            political disruption — would immediately expose critical vulnerabilities.
+            or druidic intervention. Loss of magical practitioners. Through conflict, plague, or
+            political disruption. Would immediately expose critical vulnerabilities.
           </div>
           {(s.economicState?.activeChains||[]).filter(c=>c.magicNote).map((c,i)=>(
             <div key={i} style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,
@@ -197,7 +197,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
       {/* ── WARNINGS ─────────────────────────────────────────────────────── */}
       {stressConsequences.length>0&&<Section title={`⚡ Active Stress Effects (${stressConsequences.length})`} collapsible defaultOpen={true} accent='#6b4c2a'>
         <p style={{fontSize:FS.sm,color:swatch['#5A3E28'],lineHeight:1.5,margin:'0 0 10px',fontStyle:'italic'}}>
-          These are expected consequences of active stress conditions — not structural flaws. A settlement under siege losing supply chain access is working as intended.
+          These are expected consequences of active stress conditions. Not structural flaws. A settlement under siege losing supply chain access is working as intended.
         </p>
         {stressConsequences.map((item,i)=>(
           <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',borderRadius:5,padding:'8px 10px',marginBottom:6}}>

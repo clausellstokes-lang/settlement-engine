@@ -31,8 +31,8 @@ export function Overview({ settlement, narrativeMode, vm }) {
   const o = vm.overview;
   const id = vm.identity;
 
-  const populationFmt = id.population ? id.population.toLocaleString() : '—';
-  const ageFmt = id.age ? `${id.age} yr${id.age === 1 ? '' : 's'}` : '—';
+  const populationFmt = id.population ? id.population.toLocaleString() : ', ';
+  const ageFmt = id.age ? `${id.age} yr${id.age === 1 ? '' : 's'}` : ', ';
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -60,9 +60,9 @@ export function Overview({ settlement, narrativeMode, vm }) {
         stats={[
           { label: 'POPULATION', value: populationFmt, sublabel: id.tier },
           { label: 'AGE',        value: ageFmt, sublabel: id.terrain },
-          { label: 'PROSPERITY', value: cap(o.prosperity) || '—', tone: o.prosperityTone },
-          { label: 'SAFETY',     value: cap(o.safety) || '—', tone: o.safetyTone },
-          { label: 'STABILITY',  value: cap(o.stability) || '—' },
+          { label: 'PROSPERITY', value: cap(o.prosperity) || ', ', tone: o.prosperityTone },
+          { label: 'SAFETY',     value: cap(o.safety) || ', ', tone: o.safetyTone },
+          { label: 'STABILITY',  value: cap(o.stability) || ', ' },
         ]}
       />
 

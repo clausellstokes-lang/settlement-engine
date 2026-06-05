@@ -5,6 +5,7 @@ import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor 
 import { ageRoamingStressors } from './stressors.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
+import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { ensureNpcStates, relaxNpcStates } from './npcAgency.js';
 import { ensureFactionStates, relaxFactionStates, seatNpcsIntoFactions } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
@@ -69,6 +70,30 @@ function compactOutcomeForHistory(outcome = {}) {
   };
 }
 
+function compactImpactDigest(entries = []) {
+  return entries
+    .filter(Boolean)
+    .map(entry => ({
+      id: entry.id,
+      headline: entry.headline || 'World pulse impact',
+      summary: entry.summary || '',
+      kind: entry.kind || 'queued',
+      scope: entry.scope || 'regional',
+      significance: entry.significance || 'notable',
+      score: entry.score ?? 0,
+      impactKind: entry.impactKind || null,
+      channelType: entry.channelType || null,
+      severity: entry.severity ?? null,
+      settlementIds: clone(entry.settlementIds || []),
+      impactIds: clone(entry.impactIds || []),
+      channelIds: clone(entry.channelIds || []),
+      tags: clone((entry.tags || []).slice(0, 8)),
+      reasons: clone((entry.reasons || []).slice(0, 4)),
+    }))
+    .sort((a, b) => (b.score || 0) - (a.score || 0))
+    .slice(0, 18);
+}
+
 function saveId(save) {
   return String(save?.id || save?.settlement?.id || save?.name || 'unknown');
 }
@@ -129,6 +154,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   worldState = relaxFactionStates(worldState);
   // Seat NPCs into their factions so internalSeats reflect who holds power.
   worldState = seatNpcsIntoFactions(worldState);
+  worldState = refreshRelationshipMemory(worldState, snapshot.regionalGraph, snapshot, { currentTick: worldState.tick });
   snapshot = buildWorldSnapshot({ campaign: { ...campaign, worldState }, saves, worldState });
 
   const agedStressors = simulationRules.stressorsEnabled
@@ -214,18 +240,20 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     simulationRules,
   });
 
+  const memoryState = refreshRelationshipMemory(applied.worldState, applied.regionalGraph, postTimeSnapshot, { currentTick: worldState.tick });
   const pulseRecord = {
     id: pulseIdFor(campaign?.id, worldState.tick),
     tick: worldState.tick,
     interval: tickInterval,
     committed: commit,
     createdAt: now,
-    calendar: applied.worldState.calendar,
+    calendar: memoryState.calendar,
     candidateCount: candidates.length + tierResource.candidates.length + structuralCandidates.length,
     selectedCount: selectedForApply.length,
     autoAppliedCount: applied.autoApplied.length,
     proposalCount: applied.proposals.length,
     selectedOutcomes: selectedForApply.slice(0, 24).map(compactOutcomeForHistory),
+    impactDigest: compactImpactDigest(applied.newsEntries),
     resolvedStressors: agedStressors.resolved.map(stressor => ({
       id: stressor.id,
       type: stressor.type,
@@ -238,9 +266,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   };
   // Realm-scope arcs: promote stressors shared across many settlements into
   // named realm-wide Wizard News ("The Great Hunger", "The War").
-  const realmEntries = synthesizeRealmEvents({ worldState: applied.worldState, tick: worldState.tick, now });
+  const realmEntries = synthesizeRealmEvents({ worldState: memoryState, tick: worldState.tick, now });
   const wizardNews = realmEntries.length ? appendWizardNewsEntries(applied.wizardNews, realmEntries) : applied.wizardNews;
-  const finalWorldState = appendPulseHistory(applied.worldState, pulseRecord);
+  const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
 
   return {
     campaignId: campaign?.id,

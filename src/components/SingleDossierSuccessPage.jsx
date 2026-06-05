@@ -121,7 +121,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           fontSize: FS.md, color: BODY, lineHeight: 1.55,
         }}>
           Your purchase went through, but this device doesn’t have the original
-          settlement cached anymore. Check your email — Stripe will have sent a
+          settlement cached anymore. Check your email: Stripe will have sent a
           receipt with the session ID. Forward that to support and we’ll resend
           your dossier.
         </p>
@@ -175,7 +175,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         fontSize: FS.lg, color: BODY, lineHeight: 1.55,
       }}>
         Thanks for backing the work. <strong style={{ fontStyle: 'normal' }}>{settlementName}</strong>{' '}
-        is yours — the download should begin automatically.
+        is yours. The download should begin automatically.
       </p>
 
       {/* Download actions */}

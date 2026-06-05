@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import { TIER_LABELS, catColor } from './design';
-import { Ti, serif, sans, TabIntro } from './Primitives';
+import { serif, sans, TabIntro } from './Primitives';
 import { BODY } from './tabConstants.js';
+import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -29,7 +31,7 @@ function characterSentence(r) {
   const threatNote=threat==='plagued'?' The surrounding region is plagued by monster activity.':threat==='frontier'?' It sits on an active frontier.':'';
   const safetyNote=sl.includes('Dangerous')?' The streets are not safe.':sl.includes('Authoritarian')?(hasArmed?' The garrison controls the streets with an iron hand.':' The strongest armed group enforces community order.'):sl.includes('Criminal Governance')?(hasCrim?' Criminal organizations effectively run the settlement.':''):'' ;
   const ageNote=age?` Founded approximately ${age} years ago.`:'';
-  return `${prosperity.toLowerCase()} ${tierDesc} — a ${tradeDesc}.${ageNote}${threatNote} Power rests with ${ruling.toLowerCase()}; stability: ${stability.toLowerCase().replace(/[()]/g,'')}.${safetyNote}${recentConflict?' '+recentConflict.charAt(0).toUpperCase()+recentConflict.slice(1)+'.':''}`;
+  return `${prosperity.toLowerCase()} ${tierDesc}. A ${tradeDesc}.${ageNote}${threatNote} Power rests with ${ruling.toLowerCase()}; stability: ${stability.toLowerCase().replace(/[()]/g,'')}.${safetyNote}${recentConflict?' '+recentConflict.charAt(0).toUpperCase()+recentConflict.slice(1)+'.':''}`;
 }
 
 // ── Stacked faction power bar ─────────────────────────────────────────────────
@@ -56,7 +58,7 @@ function FactionBar({ factions }) {
         {factions.map((f,i)=>{
           const c=factionColors[i%factionColors.length];
           const mods=(f.modifiers||[]).concat(f.modifier?[f.modifier]:[]);
-          return <div key={i} style={{display:'flex',alignItems:'center',gap:7}}>
+          return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:80}}>
             <div style={{width:10,height:10,borderRadius:2,background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:ink,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{f.faction}</span>
             {mods.slice(0,2).map((mod,j)=>{
@@ -103,14 +105,8 @@ function SummaryTab({ settlement:r }) {
   const _topIssue=via?.issues?.[0];
   const topNPCs=[...(w||[])].sort((a,b)=>(b.power||0)-(a.power||0)).slice(0,6);
   const dp=r.defenseProfile||{};
-
-  // All plot hooks aggregated
-  const hooks=[];
-  (w||[]).forEach(n=>(n.plotHooks||[]).forEach(h=>hooks.push({text:typeof h==='string'?h:h.hook||String(h),source:n.name,icon:''})));
-  (allConflicts||[]).forEach(c=>(c.plotHooks||[]).forEach(h=>hooks.push({text:typeof h==='string'?h:h.hook||String(h),source:c.parties?.join(' vs ')||'Conflict',icon:'️'})));
-  ((eco.safetyProfile?.plotHooks)||[]).forEach(h=>hooks.push({text:typeof h==='string'?h:String(h),source:'Crime & Safety',icon:''}));
-  ((via?.plotHooks)||[]).forEach(v=>hooks.push({text:typeof v==='object'?v.hook||Ti(v):String(v),source:'Economy',icon:''}));
-  const topHooks=hooks.slice(0,6);
+  const allHooks=collectPlotHooks(r);
+  const hookCounts=countPlotHookCategories(allHooks);
 
   // Institution categories
   const instByCat=g.reduce((acc,inst)=>{
@@ -124,14 +120,17 @@ function SummaryTab({ settlement:r }) {
     const lines=[
       `# ${name}`,
       `*${tierLabel} · Pop. ${pop?.toLocaleString()} · ${tradeAccess} · ${hist?.age||'?'} years old*`,
-      stresses.length?'\n**Active Crisis:** '+stresses.map(v=>`${v.label} — ${v.crisisHook}`).join(' | '):'',
+      stresses.length?'\n**Active Crisis:** '+stresses.map(v=>`${v.label} - ${v.crisisHook}`).join(' | '):'',
       r.arrivalScene?`\n> ${r.arrivalScene}`:'',
       `\n**${characterSentence(r)}**`,
       `\n**Power:** ${allFactions.slice(0,3).map(f=>`${f.faction} (${f.power}%)`).join(', ')}. ${ps?.stability||''}`,
-      `**Economy:** ${eco.prosperity||'?'} — ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodBal?.deficit>0?` Food deficit ${foodBal.deficitPercent}%.`:''}`,
+      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodBal?.deficit>0?` Food deficit ${foodBal.deficitPercent}%.`:''}`,
       `**Defense:** ${dp.readiness?.label||'Unknown'}`,
-      `\n**Key NPCs:**`,...topNPCs.map(v=>`- ${v.name} (${v.title}): ${[v.personality?.dominant,v.personality?.flaw].filter(Boolean).join(', ')}. Goal: ${v.goal?.short||'?'}`),
-      `\n**Plot Hooks:**`,...topHooks.map(v=>`- [${v.source}] ${v.text}`),
+      `\n**Key NPCs:**`,...topNPCs.map(v=>{
+        const traits=normalizeNpcTraits(v).filter(t=>t.visibility!=='gm').slice(0,4).map(t=>`${t.label}: ${t.value}`).join('; ');
+        return `- ${v.name} (${v.title||v.role||'NPC'}): ${traits || 'No visible traits listed'}`;
+      }),
+      `\n**Plot Hooks:**`,...allHooks.map(v=>`- [${v.source}] ${v.text}`),
     ].filter(Boolean).join('\n');
     navigator.clipboard?.writeText(lines);
     setCopied(true); setTimeout(()=>setCopied(false),2000);
@@ -201,9 +200,9 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── SITUATION ROW (3 scannable tiles) ───────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
-        <SitTile icon="" label="Power" value={powStab.split(';')[0].split('—')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
-        <SitTile icon="" label="Economy" value={eco.prosperity||'—'} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split('—')[0].trim()}/>
-        <SitTile icon="" label="Defense" value={dp.readiness?.label||'—'} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
+        <SitTile icon="" label="Power" value={powStab.split(';')[0].split(', ')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
+        <SitTile icon="" label="Economy" value={eco.prosperity||', '} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split(', ')[0].trim()}/>
+        <SitTile icon="" label="Defense" value={dp.readiness?.label||', '} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
       </div>
 
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}
@@ -245,9 +244,10 @@ function SummaryTab({ settlement:r }) {
         {topNPCs.length>0
           ?<div style={{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr',gap:'8px 16px'}}>
             {topNPCs.map((v,i)=>{
-              const traits=(Array.isArray(v.personality)?[v.personality[0],v.personality[1]]:[v.personality?.dominant,v.personality?.flaw]).filter(Boolean);
+              const traits=normalizeNpcTraits(v);
+              const visibleTraits=traits.filter(t=>t.visibility!=='gm').slice(0,5);
               const catCol=catColor(v.category)||gold;
-              return <div key={i} style={{display:'flex',gap:8,alignItems:'flex-start',padding:'6px 0',borderBottom:i<topNPCs.length-2||isMobile?'1px solid #f0ead8':'none'}}>
+              return <div id={entityAnchor('npc', v)} key={i} style={{display:'flex',gap:8,alignItems:'flex-start',padding:'6px 0',borderBottom:i<topNPCs.length-2||isMobile?'1px solid #f0ead8':'none',scrollMarginTop:80}}>
                 <div style={{width:3,borderRadius:2,background:catCol,alignSelf:'stretch',flexShrink:0,minHeight:32}}/>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{display:'flex',alignItems:'baseline',gap:5,marginBottom:2,flexWrap:'wrap'}}>
@@ -255,8 +255,8 @@ function SummaryTab({ settlement:r }) {
                     <span style={{fontSize:FS.xxs,color:muted}}>{v.title}</span>
                     {v.influence==='high'&&<span style={{fontSize:FS.micro,color:gold,fontWeight:700}}>●●●</span>}
                   </div>
-                  {traits.length>0&&<div style={{display:'flex',gap:3,flexWrap:'wrap',marginBottom:3}}>
-                    {traits.map((t,j)=><span key={j} style={{fontSize:FS.xxs,color:second,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 4px'}}>{t}</span>)}
+                  {visibleTraits.length>0&&<div style={{display:'flex',gap:3,flexWrap:'wrap',marginBottom:3}}>
+                    {visibleTraits.map((t,j)=><span key={`${t.key}-${j}`} title={t.value} style={{fontSize:FS.xxs,color:second,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 4px'}}>{t.label}: {t.value}</span>)}
                   </div>}
                   {(v.goal?.short||v.goals?.[0])&&<p style={{fontSize:FS.xs,color:swatch.inkMag2,margin:0,lineHeight:1.3}}>
                     <span style={{color:gold,fontWeight:700}}>→ </span>{v.goal?.short||v.goals?.[0]}
@@ -270,22 +270,38 @@ function SummaryTab({ settlement:r }) {
       </div>
 
       {/* ── PLOT HOOKS (collapsible) ───────────────────────────────────────── */}
-      {topHooks.length>0&&<div style={{border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',borderRadius:8,overflow:'hidden',marginBottom:12}}>
+      {allHooks.length>0&&<div style={{border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',borderRadius:8,overflow:'hidden',marginBottom:12}}>
         <button onClick={()=>setHooksOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
-          <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em'}}>Plot Hooks ({topHooks.length})</span>
+          <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em'}}>Plot Hooks ({allHooks.length})</span>
           <span style={{fontSize:FS.xs,color:muted}}>{hooksOpen?'▲':'▼'}</span>
         </button>
         {hooksOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #c8b0e0'}}>
+          <div style={{display:'flex',gap:5,flexWrap:'wrap',marginBottom:10}}>
+            {Object.entries(hookCounts).map(([cat,count])=>{
+              const meta=PLOT_HOOK_CATEGORIES[cat]||PLOT_HOOK_CATEGORIES.tension;
+              return <span key={cat} style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,background:`${meta.color}12`,border:`1px solid ${meta.color}30`,borderRadius:4,padding:'1px 6px'}}>{meta.label} {count}</span>;
+            })}
+          </div>
           <div style={{display:'flex',flexDirection:'column',gap:8}}>
-            {topHooks.map((v,i)=>(
-              <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start'}}>
-                <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1}}>{v.icon}</span>
+            {allHooks.map((v,i)=>{
+              const meta=PLOT_HOOK_CATEGORIES[v.category]||PLOT_HOOK_CATEGORIES.tension;
+              return (
+              <div id={entityAnchor('hook', { id:`${v.category}-${i}`, name:v.text.slice(0,40) })} key={i} style={{display:'flex',gap:10,alignItems:'flex-start',scrollMarginTop:80}}>
+                <span style={{width:4,alignSelf:'stretch',borderRadius:2,background:meta.color,opacity:v.accent?1:0.55,flexShrink:0}}/>
                 <div style={{flex:1,minWidth:0}}>
-                  <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.04em',marginRight:6}}>{v.source}</span>
+                  <span style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,textTransform:'uppercase',letterSpacing:'0.04em',marginRight:6}}>{v.source}</span>
+                  {v.role&&<span style={{fontSize:FS.xxs,color:muted,marginRight:6}}>{v.role}</span>}
+                  {v.sub&&<span style={{fontSize:FS.xxs,color:v.accent?meta.color:muted,fontStyle:v.accent?'normal':'italic'}}>{v.sub}</span>}
                   <span style={{fontSize:FS.md,color:ink,lineHeight:1.5}}>{v.text}</span>
+                  {v.links?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap',marginTop:4}}>
+                    {v.links.slice(0,4).map((link,j)=>{
+                      const anchor=entityAnchor(link.kind, { id:link.id, name:link.label });
+                      return <a key={`${link.kind}-${j}`} href={`#${anchor}`} style={{fontSize:FS.micro,fontWeight:700,color:meta.color,background:`${meta.color}10`,border:`1px solid ${meta.color}25`,borderRadius:3,padding:'1px 5px',textDecoration:'none'}}>{link.label}</a>;
+                    })}
+                  </div>}
                 </div>
               </div>
-            ))}
+            );})}
           </div>
         </div>}
       </div>}
@@ -342,7 +358,7 @@ function SummaryTab({ settlement:r }) {
               <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {instByCat[cat].sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
                   const srcColor=inst.source==='required'?gold:inst.source==='forced'?'#1a5a28':inst.source==='auto-resolved'?'#2a3a7a':'#6b5340';
-                  return <span key={i} style={{fontSize:FS.xs,padding:'2px 8px',borderRadius:4,background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500}}>{inst.name}</span>;
+                  return <span id={entityAnchor('institution', inst)} key={i} style={{fontSize:FS.xs,padding:'2px 8px',borderRadius:4,background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500,scrollMarginTop:80}}>{inst.name}</span>;
                 })}
               </div>
             </div>

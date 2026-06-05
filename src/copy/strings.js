@@ -26,7 +26,7 @@ export const COPY = {
     // competing on the same surfaces). Now one verb per action class.
     // "Draft" is still the artifact noun (draft → canon lifecycle is
     // preserved); only the action verb changed.
-    quickMode:    { title: 'Basic Generate',    cta: 'Forge a Draft',  subtitle: 'Minimal config — set the foundations and go' },
+    quickMode:    { title: 'Basic Generate',    cta: 'Forge a Draft',  subtitle: 'Minimal config. Set the foundations and go.' },
     advancedMode: { title: 'Advanced Generate', cta: 'Forge a Draft',  subtitle: 'Full configuration, step by step' },
     customMode:   { title: 'Custom Generate',   cta: 'Forge a Draft',  subtitle: 'Power-user dashboard with every parameter exposed' },
     regenerate:   { cta: 'Reforge Draft',       confirm: 'Reforge the settlement? All unsaved placements will be lost.' },
@@ -60,7 +60,7 @@ export const COPY = {
   timeline: {
     title:        'Timeline',
     emptyState:   'Apply an in-world event to start the timeline.',
-    undoTooltip:  'Undo this event — restores prior state',
+    undoTooltip:  'Undo this event. Restores prior state.',
   },
 
   ai: {
@@ -76,9 +76,9 @@ export const COPY = {
     primaryCta:   'Export Dossier',
     sheetTitle:   'Export Dossier',
     variants: {
-      draft_brief:     { label: 'Draft Brief',     desc: 'Quick prep doc — no timeline, no canon-only chapters.' },
+      draft_brief:     { label: 'Draft Brief',     desc: 'Quick prep doc. No timeline, no canon-only chapters.' },
       canon_dossier:   { label: 'Canon Dossier',   desc: 'Full campaign-ready document with current state and timeline.' },
-      timeline_packet: { label: 'Timeline Packet', desc: 'Lean recap — cover, current state, and timeline. For reviewing what changed since last session.' },
+      timeline_packet: { label: 'Timeline Packet', desc: 'Lean recap: cover, current state, and timeline. For reviewing what changed since last session.' },
     },
   },
 
@@ -107,7 +107,7 @@ export const COPY = {
       // ── P103 / X-2 — Conversion-arc moments ────────────────────────────
       first_save: {
         headline: 'Save it. Come back tomorrow.',
-        body:     'Your dossier is yours to keep. Free tier holds 3 saves — plenty for a campaign’s first arc.',
+        body:     'Your dossier is yours to keep. Free tier holds 3 saves, plenty for a campaign’s first arc.',
       },
       anon_cap_hit: {
         headline: 'You’ve explored hamlet, village, town.',
@@ -115,31 +115,31 @@ export const COPY = {
       },
       first_pdf_export: {
         headline: 'You just downloaded your first dossier.',
-        body:     'Wanderer gives you 3 exports a month. Cartographer = unlimited, plus cloud sync — phone, laptop, table.',
+        body:     'Wanderer gives you 3 exports a month. Cartographer is unlimited, plus cloud sync: phone, laptop, table.',
       },
       third_save: {
         headline: 'You’re building a campaign.',
         body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, the neighbour network, all six sizes, and full export.',
       },
       regen_burst: {
-        headline: 'Power user ahead.',
-        body:     'Locks, drift, chronicle — Cartographer surfaces the worldbuilder-tier controls. Try the upgrade.',
+        headline: 'You’re pushing the engine.',
+        body:     'Locks, drift, chronicle: Cartographer surfaces the worldbuilder-tier controls.',
       },
       map_clicked: {
         headline: 'World Map unlocks with Cartographer.',
-        body:     'Place settlements, draw routes, surface supply-chain stress — your campaigns become a place.',
+        body:     'Place settlements, draw routes, surface supply-chain stress. Your campaigns become a place.',
       },
       weekly_user: {
         headline: 'Three sessions in two weeks.',
-        body:     'You’re using SettlementForge weekly — Cartographer pays for itself in two.',
+        body:     'You’re using SettlementForge weekly. Cartographer pays for itself in two.',
       },
       welcome_credit: {
-        headline: 'Try the Narrative Layer once — on us.',
+        headline: 'Try the Narrative Layer once, on us.',
         body:     'One credit on every signup. The AI prose pass turns this town’s data into prose your players can hear.',
       },
       founder_eligible: {
         headline: 'You’ve earned this offer.',
-        body:     'Five settlements, neighbours linked, exports shipped. Founder Lifetime = $99, lifetime Cartographer access, seat in the credits.',
+        body:     'Five settlements, neighbours linked, exports shipped. Founder Lifetime is $99: lifetime Cartographer access and a seat in the credits.',
       },
     },
   },
@@ -164,7 +164,7 @@ export const COPY = {
       draft:    'Editable, not yet part of your campaign world.',
       canon:    'Live campaign truth. Changes are logged as events.',
       narrated: 'Narrative refinement layer is present.',
-      raw:      'Raw simulation output — no narrative layer.',
+      raw:      'Raw simulation output. No narrative layer.',
       locked:   'Locked. Preserved through regeneration.',
     },
   },

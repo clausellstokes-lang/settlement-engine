@@ -27,6 +27,10 @@ import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { getAiCostForModel } from '../config/pricing.js';
 import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
 import { verifyAiOverlay } from '../domain/aiOverlayVerifier.js';
+import {
+  buildSettlementRelationshipMemoryContext,
+  buildWorldSnapshot,
+} from '../domain/worldPulse/index.js';
 
 // ── Verifier integration ────────────────────────────────────────────────────
 //
@@ -67,6 +71,31 @@ function logHardViolations(verification, where) {
     `[ai-overlay] ${where}: ${hard.length} hard violation(s) detected`,
     hard.slice(0, 5),
   );
+}
+
+function buildDailyLifeRelationshipMemory(state, saveId) {
+  try {
+    const campaign = state.getCampaignForSettlement?.(saveId);
+    if (!campaign) return null;
+    const worldState = state.getCampaignWorldState?.(campaign.id) || campaign.worldState;
+    const regionalGraph = state.getCampaignRegionalGraph?.(campaign.id) || campaign.regionalGraph;
+    const snapshot = buildWorldSnapshot({
+      campaign: { ...campaign, worldState, regionalGraph },
+      saves: state.savedSettlements || [],
+      worldState,
+      regionalGraph,
+    });
+    return buildSettlementRelationshipMemoryContext({
+      settlementId: saveId,
+      worldState,
+      regionalGraph,
+      snapshot,
+      savedSettlements: state.savedSettlements || [],
+    });
+  } catch (error) {
+    console.warn('[daily-life-memory] failed to build relationship context', error);
+    return null;
+  }
 }
 
 /**
@@ -386,6 +415,7 @@ export const createAiSlice = (set, get) => ({
     const dossierNotes = saveEntry?.aiData?.dossierNotes || {};
     const aiGuidance = typeof dossierNotes.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
     const modelPreference = get().auth?.modelPreference;
+    const relationshipMemoryContext = buildDailyLifeRelationshipMemory(get(), saveId);
     const isRegenerate = !!aiDailyLife;
     const cost = getAiCostForModel('dailyLife', modelPreference);
     const elevated = get().isElevated();
@@ -420,6 +450,7 @@ export const createAiSlice = (set, get) => ({
       const { result, creditsRemaining } = await generateNarrative('dailyLife', settlement, saveId, {
         aiGuidance,
         modelPreference,
+        relationshipMemoryContext,
         onField(fieldName, value, error) {
           if (error) {
             fieldsDone += 1;

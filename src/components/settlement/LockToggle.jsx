@@ -45,8 +45,8 @@ export default function LockToggle({ which, id, label }) {
       type="button"
       onClick={toggle}
       title={label || (isLocked
-        ? 'Locked — preserved through regeneration'
-        : 'Unlocked — may change on regeneration')}
+        ? 'Locked. Preserved through regeneration'
+        : 'Unlocked. May change on regeneration')}
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         width: 22, height: 22, padding: 0,

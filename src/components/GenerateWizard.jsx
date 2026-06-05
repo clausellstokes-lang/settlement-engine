@@ -84,7 +84,7 @@ const STEPS = [
   {
     id: 'institutions',
     label: 'Institutions',
-    hint: 'Force or exclude specific institutions. The generator uses your toggles as hard constraints — forced institutions always appear, excluded ones never do.',
+    hint: 'Force or exclude specific institutions. The generator uses your toggles as hard constraints. Forced institutions always appear, excluded ones never do.',
   },
   {
     id: 'services',
@@ -114,9 +114,9 @@ function ModeSelector({ mode, onModeChange, large = false }) {
   // users see the hero only — these mode cards are gated to
   // signed-in users.
   const modes = [
-    { id: 'basic',    label: 'Basic Generate',    desc: 'One screen — set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
+    { id: 'basic',    label: 'Basic Generate',    desc: 'One screen. Set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
     { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',         Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space. Produces a draft you can refine, save, and canonize.' },
-    { id: 'custom',   label: 'Custom Generate',   desc: 'Power dashboard — every parameter at once', Icon: Sliders,  longDesc: 'Tune every generator parameter on one screen: priorities, resources, stresses, institution/resource/trade-route overrides, and the supply-chain builder. Maximum control for power users.' },
+    { id: 'custom',   label: 'Custom Generate',   desc: 'Power dashboard. Every parameter at once', Icon: Sliders,  longDesc: 'Tune every generator parameter on one screen: priorities, resources, stresses, institution/resource/trade-route overrides, and the supply-chain builder. Maximum control for power users.' },
   ];
 
   return (
@@ -274,7 +274,7 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
         title="We'll save your dossier as soon as you're in."
       >
         <Save size={15} />
-        Save this town — free account →
+        Save this town. Free account →
       </button>
     );
   }
@@ -468,7 +468,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         )}
         {showModePicker && (
           <>
-            <div style={{ textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
+            <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
               Want full control? Use one of the modes below.
             </div>
             <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
@@ -502,7 +502,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
         }}>
           <strong style={{ fontFamily: serif_ }}>Basic Generate</strong>
-          {' — '}Set the foundations and hit Generate. Everything else is randomized.
+          {', '}Set the foundations and hit Generate. Everything else is randomized.
           Switch to <strong>Advanced Generate</strong> for institution toggles, services, and trade dynamics.
         </div>
 
@@ -513,7 +513,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           <div style={{ padding: `${SP.md}px ${SP.lg}px`, background: CARD_HDR, borderBottom: `1px solid ${BORDER2}` }}>
             <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>General Configuration</span>
           </div>
-          <div style={{ padding: `${SP.lg}px 0 0` }}>
+          <div style={{ padding: `${SP.lg}px 0 0`, background: CARD }}>
             <ConfigurationPanel />
           </div>
         </div>
@@ -533,7 +533,8 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         >
           Generate Draft
         </button>
-        <p style={{
+        <p className="sf-readable-strip" style={{
+          alignSelf: 'center',
           marginTop: SP.sm, marginBottom: 0, textAlign: 'center',
           fontSize: FS.sm, color: SECOND, fontFamily: serif_, fontStyle: 'italic',
           lineHeight: 1.5,
@@ -675,7 +676,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             <strong style={{ fontFamily: serif_ }}>
               Step {wizardStep + 1}: {currentStepDef.label}
             </strong>
-            {' — '}{currentStepDef.hint}
+            {', '}{currentStepDef.hint}
           </div>
 
           {/* Current step content. P144 / A-4 — the step-change effect
@@ -688,7 +689,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             tabIndex={-1}
             role="group"
             aria-label={`Step ${wizardStep + 1} of ${STEPS.length}: ${currentStepDef.label}`}
-            style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden', outline: 'none' }}
+            style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden', outline: 'none', background: CARD }}
           >
             <div style={{ padding: `${SP.lg - 2}px ${SP.lg}px`, background: CARD_HDR, borderBottom: `1px solid ${BORDER2}` }}>
               <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 600, color: INK }}>
@@ -777,7 +778,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             {settlement ? 'Regenerate Draft' : 'Generate Draft'}
           </button>
           {!settlement && (
-            <p style={{
+            <p className="sf-readable-strip" style={{
+              display: 'block',
+              marginLeft: 'auto',
+              marginRight: 'auto',
               marginTop: SP.sm, marginBottom: 0, textAlign: 'center',
               fontSize: FS.sm, color: SECOND, fontFamily: serif_, fontStyle: 'italic',
               lineHeight: 1.5,

@@ -91,6 +91,7 @@ describe('Tier 6.8 — aiGrounding bundle exports the contract surface', () => {
     'staticForbiddenRules',
     'defaultGroundingOptions',
     'summarizeGroundingPayload',
+    'sanitizeRelationshipMemoryContext',
   ];
 
   for (const name of REQUIRED_EXPORTS) {

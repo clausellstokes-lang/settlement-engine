@@ -145,6 +145,14 @@ describe('saves — local backend round-trip', () => {
     expect(list[0].id).toBe(id2);
   });
 
+  test('count only includes active local saves', async () => {
+    localStorage.setItem('dnd_settlement_saves', JSON.stringify([
+      { id: 1, name: 'Active', tier: 'village', settlement: {}, accessState: 'active' },
+      { id: 2, name: 'Inactive', tier: 'town', settlement: {}, accessState: 'inactive_plan' },
+    ]));
+    expect(await saves.count()).toBe(1);
+  });
+
   test('writeAll replaces the whole array', async () => {
     await saves.save({ name: 'A', tier: 'village', settlement: {} });
     await saves.writeAll([
@@ -160,21 +168,31 @@ describe('saves — local backend round-trip', () => {
 // ── Test 2: supabase backend (mocked fluent client) ────────────────────
 describe('saves — supabase backend round-trip (mocked)', () => {
   let saves;
-  const mockState = { rows: [], lastInsert: null, lastUpdate: null };
+  const mockState = { rows: [], lastInsert: null, lastUpdate: null, lastRpc: null };
 
   beforeEach(async () => {
     mockState.rows = [];
     mockState.lastInsert = null;
     mockState.lastUpdate = null;
+    mockState.lastRpc = null;
 
     vi.resetModules();
     vi.doMock('../../src/lib/supabase.js', () => {
       // Minimal chainable client mimicking @supabase/supabase-js for the
       // .from('settlements').select(...).order(...) shape used by saves.js.
       const builder = () => {
+        let selectOptions = {};
         const chain = {
-          select: () => chain,
+          select: (_cols, options = {}) => {
+            selectOptions = options || {};
+            return chain;
+          },
           order: () => Promise.resolve({ data: mockState.rows, error: null }),
+          eq: (col, value) => {
+            const rows = mockState.rows.filter(row => row[col] === value);
+            if (selectOptions?.head) return Promise.resolve({ count: rows.length, error: null });
+            return Promise.resolve({ data: rows, error: null });
+          },
           insert: (row) => {
             mockState.lastInsert = row;
             const id = `mock-${mockState.rows.length + 1}`;
@@ -203,6 +221,15 @@ describe('saves — supabase backend round-trip (mocked)', () => {
       return {
         supabase: {
           from: () => builder(),
+          rpc: (fn, args) => {
+            mockState.lastRpc = { fn, args };
+            if (fn === 'reactivate_free_settlement') {
+              const row = mockState.rows.find(r => r.id === args.target_settlement_id);
+              if (row) row.access_state = 'active';
+              return Promise.resolve({ data: { ok: true }, error: null });
+            }
+            return Promise.resolve({ data: null, error: null });
+          },
           auth: {
             getUser: () => Promise.resolve({ data: { user: { id: 'test-user-id' } } }),
           },
@@ -261,6 +288,7 @@ describe('saves — supabase backend round-trip (mocked)', () => {
       seed: 'seed-rt',
       neighbour_links: null,
       ai_data: { summary: 'Pre-cached AI text' },
+      access_state: 'active',
       version_history: [{ id: 'snap-rt', label: 'Round trip', settlement: { name: 'Round Trip' } }],
       campaign_state: {
         phase: 'canon', eventLog: [], systemState: null, locks: {},
@@ -288,6 +316,46 @@ describe('saves — supabase backend round-trip (mocked)', () => {
     expect(e.versionHistory).toEqual([{ id: 'snap-rt', label: 'Round trip', settlement: { name: 'Round Trip' } }]);
     expect(e.campaignState.phase).toBe('canon');
     expect(e.campaignState.canonizedAt).toBe('2026-01-03');
+  });
+
+  test('inactive supabase rows load as retained metadata without settlement payload', async () => {
+    mockState.rows.push({
+      id: 'inactive-1',
+      name: 'Retained Town',
+      tier: 'city',
+      data: { name: 'Retained Town', population: 14000 },
+      config: { settType: 'city' },
+      toggles: { institutionToggles: { x: true } },
+      seed: 'hidden-seed',
+      ai_data: { summary: 'hidden' },
+      access_state: 'inactive_plan',
+      inactive_reason: 'premium_downgrade',
+      inactive_since: '2026-06-05T00:00:00Z',
+      retention_expires_at: '2026-09-05T00:00:00Z',
+      campaign_state: null,
+      version_history: [],
+      updated_at: '2026-06-05T00:00:00Z',
+    });
+
+    const [e] = await saves.list();
+    expect(e.accessState).toBe('inactive_plan');
+    expect(e.settlement).toBeNull();
+    expect(e.config).toBeNull();
+    expect(e.seed).toBeNull();
+    expect(e.retentionExpiresAt).toBe('2026-09-05T00:00:00Z');
+  });
+
+  test('count filters to active supabase rows and reactivation uses the RPC', async () => {
+    mockState.rows.push(
+      { id: 'active-1', access_state: 'active' },
+      { id: 'inactive-1', access_state: 'inactive_plan' },
+    );
+    expect(await saves.count()).toBe(1);
+    await saves.reactivateFreeSettlement('inactive-1');
+    expect(mockState.lastRpc).toEqual({
+      fn: 'reactivate_free_settlement',
+      args: { target_settlement_id: 'inactive-1' },
+    });
   });
 
   test('update sends only the partial fields that changed', async () => {

@@ -23,6 +23,7 @@ const REL_TYPES = [
   { id: 'allied',        label: 'Allied',        color: '#2563eb' },
   { id: 'patron',        label: 'Patron',        color: '#7c3aed' },
   { id: 'client',        label: 'Client',        color: '#7c3aed' },
+  { id: 'vassal',        label: 'Vassal',        color: '#6d28d9' },
   { id: 'rival',         label: 'Rival',         color: '#ea580c' },
   { id: 'cold_war',      label: 'Cold war',      color: '#b91c1c' },
   { id: 'hostile',       label: 'Hostile',       color: '#991b1b' },

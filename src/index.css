@@ -10,13 +10,11 @@
    Page background — the painted pastoral fixed under the whole UI.
    The image lives at /public/parchment-bg.jpg (saved by the user).
    Two stacked backgrounds:
-     1. A cream-tinted linear gradient (top of stack) at 35% opacity —
-        the painting dominates the page, reading like an oil-painted
-        backdrop with UI floating on it. Card surfaces (CARD = #FFFBF5)
-        carry their own opaque background so body text inside cards is
-        unaffected by this opacity choice. Chrome text outside cards
-        remains legible because the painting palette is itself
-        parchment-tinted (no high-contrast intrusions).
+     1. A cream-tinted linear gradient (top of stack) at 72% opacity.
+        The painting remains a texture, but cream now dominates so bare
+        helper text and inline controls do not disappear into roofs,
+        paths, or tree shadows. Card surfaces (CARD = #FFFBF5) carry
+        their own opaque background for longer reading areas.
      2. The painting itself (bottom of stack), fixed and cover-sized so
         scrolling content drifts over a stationary canvas.
    The cream `background-color` is the fallback when the painting hasn't
@@ -29,7 +27,7 @@ body {
   -webkit-text-size-adjust: 100%;
   background-color: #f7f0e4;
   background-image:
-    linear-gradient(rgba(247, 240, 228, 0.35), rgba(247, 240, 228, 0.35)),
+    linear-gradient(rgba(247, 240, 228, 0.72), rgba(247, 240, 228, 0.76)),
     url('/parchment-bg.jpg');
   background-size: cover;
   background-position: center top;
@@ -65,3 +63,24 @@ button {
 /* Tab strip hide scrollbar */
 .tab-strip::-webkit-scrollbar { display: none; }
 .output-tab-btn { -webkit-tap-highlight-color: transparent; }
+
+/* Readability helpers for intentional text-on-page moments. The page
+   painting is decorative; any standalone prose or control strip should
+   have a paper surface instead of relying on whatever part of the image
+   happens to sit behind it. */
+.sf-readable-surface {
+  background: rgba(255, 251, 245, 0.96);
+  border: 1px solid rgba(216, 192, 144, 0.78);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(27, 20, 8, 0.08);
+}
+
+.sf-readable-strip {
+  display: inline-block;
+  max-width: min(100%, 760px);
+  padding: 6px 12px;
+  background: rgba(255, 251, 245, 0.92);
+  border: 1px solid rgba(216, 192, 144, 0.72);
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(27, 20, 8, 0.06);
+}

@@ -6,6 +6,7 @@ import {
   worldAuthoredConditions,
   preserveWorldConditions,
 } from '../../src/domain/worldPulse/index.js';
+import { reconcileSettlementChange } from '../../src/domain/settlementReconciliation.js';
 
 describe('AI chronicle grounding', () => {
   test('builds a PII-free grounding payload for a tick', () => {
@@ -61,5 +62,21 @@ describe('pulse ↔ local reconciliation', () => {
     expect(archetypes).toContain('regional_import_shortage'); // world-authored survives
     expect(archetypes).toContain('corruption_exposed');       // freshly regenerated kept
     expect(archetypes).not.toContain('plague');               // prior LOCAL condition dropped
+  });
+
+  test('reconcileSettlementChange preserves world conditions and records the source', () => {
+    const edited = { name: 'Ashford', activeConditions: [] };
+    const merged = reconcileSettlementChange(edited, prior, {
+      source: 'settlement_editor',
+      changeType: 'institutions',
+      changeLabel: 'manual edit',
+      now: '2026-06-05T12:00:00.000Z',
+    });
+    expect(merged.activeConditions.map(c => c.archetype)).toEqual(['regional_import_shortage']);
+    expect(merged.reconciliationLog.at(-1)).toMatchObject({
+      source: 'settlement_editor',
+      changeType: 'institutions',
+      preservedWorldConditionIds: ['regional_import_shortage'],
+    });
   });
 });

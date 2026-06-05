@@ -190,7 +190,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
                 accent={BLUE}
                 accentBg={BLUE_BG}
                 title="Linked saves"
-                body={`${linkedSaves} ${linkedSaves === 1 ? 'save' : 'saves'} reference this settlement — they may see a flag.`}
+                body={`${linkedSaves} ${linkedSaves === 1 ? 'save' : 'saves'} reference this settlement. They may see a flag.`}
               />
               <div style={{ height: SP.sm }} />
             </>

@@ -138,6 +138,55 @@ describe('dependency discovery', () => {
       && c.status === 'suggested'
     )).toBe(true);
   });
+
+  it('discovers vassal hierarchy channels as suggestions', () => {
+    const subject = save('subject', 'Lowford', {
+      tier: 'village',
+      neighbourNetwork: [{ id: 'capital', neighbourName: 'Stone Crown', relationshipType: 'vassal' }],
+    });
+    const capital = save('capital', 'Stone Crown', { tier: 'city' });
+    const channels = discoverDependencyCandidates(subject, capital);
+
+    expect(channels.some(c =>
+      c.type === 'political_authority'
+      && c.from === 'capital'
+      && c.to === 'subject'
+      && c.relationshipType === 'vassal'
+      && c.status === 'suggested'
+    )).toBe(true);
+    expect(channels.some(c =>
+      c.type === 'tax_obligation'
+      && c.from === 'subject'
+      && c.to === 'capital'
+      && c.relationshipType === 'vassal'
+    )).toBe(true);
+    expect(channels.some(c =>
+      c.type === 'information_flow'
+      && c.relationshipType === 'vassal'
+    )).toBe(true);
+  });
+
+  it('discovers relationship-based information flow for trade partners', () => {
+    const northgate = save('northgate', 'Northgate', {
+      neighbourNetwork: [{ id: 'southmarket', neighbourName: 'Southmarket', relationshipType: 'trade_partner' }],
+    });
+    const southmarket = save('southmarket', 'Southmarket');
+    const channels = discoverDependencyCandidates(northgate, southmarket);
+
+    expect(channels.some(c =>
+      c.type === 'information_flow'
+      && c.from === 'northgate'
+      && c.to === 'southmarket'
+      && c.relationshipType === 'trade_partner'
+      && c.status === 'suggested'
+    )).toBe(true);
+    expect(channels.some(c =>
+      c.type === 'information_flow'
+      && c.from === 'southmarket'
+      && c.to === 'northgate'
+      && c.relationshipType === 'trade_partner'
+    )).toBe(true);
+  });
 });
 
 describe('regional propagation', () => {

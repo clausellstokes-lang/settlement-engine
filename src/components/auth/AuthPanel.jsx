@@ -81,7 +81,7 @@ export default function AuthPanel({
     try {
       const result = await authOAuth(provider);
       if (result?.mock) {
-        setMessage(`OAuth (${provider}) is mocked in local mode — no real sign-in occurred.`);
+        setMessage(`OAuth (${provider}) is mocked in local mode. No real sign-in occurred.`);
       }
       // Real mode: Supabase has navigated away; nothing more to do.
     } catch (e) {

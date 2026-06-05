@@ -58,7 +58,7 @@ export default function LockedDestination({
   body,
   previewImageSrc,
   previewAlt,
-  ctaLabel = 'Upgrade — $6/mo',
+  ctaLabel = 'Upgrade, $6/mo',
   onCta,
   secondaryLink,
   trackEvent,
@@ -92,7 +92,7 @@ export default function LockedDestination({
   return (
     <div
       role="region"
-      aria-label={`${feature} — Cartographer feature locked`}
+      aria-label={`${feature}: Cartographer feature locked`}
       style={{
         maxWidth: 720, margin: '40px auto',
         padding: 32,

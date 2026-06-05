@@ -151,7 +151,7 @@ export default function WelcomeCreditCard({ saveId = null }) {
           margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: BODY,
           lineHeight: 1.55, fontFamily: serif_, fontStyle: 'italic',
         }}>
-          It’ll turn this town’s data into prose your players can hear —
+          It’ll turn this town’s data into prose your players can hear,
           the difference between a sheet and a session.
         </p>
       </div>

@@ -10,6 +10,7 @@ import { deriveCausalState, compareCausalState } from '../causalState.js';
 import { deriveAllSupplyChainStates } from '../supplyChainState.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { normalizeGood, normalizeGoodsList } from './goodsCatalog.js';
+import { TIER_ORDER } from '../../data/constants.js';
 
 const UNHEALTHY_CHAIN_STATUSES = new Set(['strained', 'scarce', 'blocked', 'captured', 'substituted', 'collapsing']);
 
@@ -126,6 +127,7 @@ export function deriveRegionalState(input) {
       id: null,
       name: null,
       tier: null,
+      population: 0,
       exports: [],
       imports: [],
       localProduction: [],
@@ -149,6 +151,7 @@ export function deriveRegionalState(input) {
     settlementId: settlement.id || saveIdOf(input, settlement),
     name: settlement.name || input?.name || null,
     tier: settlement.tier || input?.tier || null,
+    population: Math.max(0, Math.round(Number(settlement.population) || 0)),
     exports: normalizeGoodsList(exportLabels(settlement)),
     imports: normalizeGoodsList(importLabels(settlement)),
     localProduction: normalizeGoodsList(localProductionLabels(settlement)),
@@ -259,6 +262,48 @@ function diffRoute(beforeState, afterState, event) {
   return [];
 }
 
+function tierRank(tier) {
+  const index = TIER_ORDER.indexOf(tier);
+  return index >= 0 ? index : -1;
+}
+
+function diffTier(beforeState, afterState) {
+  if (!beforeState.tier || !afterState.tier || beforeState.tier === afterState.tier) return [];
+  const beforeRank = tierRank(beforeState.tier);
+  const afterRank = tierRank(afterState.tier);
+  const distance = beforeRank >= 0 && afterRank >= 0 ? Math.max(1, Math.abs(afterRank - beforeRank)) : 1;
+  return [{
+    kind: afterRank > beforeRank ? 'tier_promotion' : 'tier_demotion',
+    fromTier: beforeState.tier,
+    toTier: afterState.tier,
+    magnitude: Math.min(1, 0.45 + distance * 0.18),
+    source: 'settlement_tier',
+  }];
+}
+
+function populationKind(beforePopulation, afterPopulation, event) {
+  const candidateType = String(event?.payload?.candidateType || event?.payload?.outcomeType || '').toLowerCase();
+  if (/migration|emigration|refugee/.test(candidateType) || event?.type === 'REFUGEE_WAVE') return 'migration_wave';
+  return afterPopulation > beforePopulation ? 'population_growth' : 'population_loss';
+}
+
+function diffPopulation(beforeState, afterState, event) {
+  const beforePopulation = Math.max(0, Number(beforeState.population) || 0);
+  const afterPopulation = Math.max(0, Number(afterState.population) || 0);
+  const delta = Math.round(afterPopulation - beforePopulation);
+  if (!delta) return [];
+  const threshold = Math.max(10, Math.round(Math.max(1, beforePopulation) * 0.01));
+  if (Math.abs(delta) < threshold) return [];
+  return [{
+    kind: populationKind(beforePopulation, afterPopulation, event),
+    before: beforePopulation,
+    after: afterPopulation,
+    delta,
+    magnitude: Math.min(1, Math.abs(delta) / Math.max(1, beforePopulation * 0.12)),
+    source: 'population',
+  }];
+}
+
 function diffCausal(beforeSettlement, afterSettlement) {
   try {
     const before = deriveCausalState(beforeSettlement);
@@ -347,6 +392,8 @@ export function deriveLocalDelta(beforeInput, afterInput, cause = {}) {
     ...diffGoods('import', beforeState.imports, afterState.imports, 'imports'),
     ...diffGoods('local_production', beforeState.localProduction, afterState.localProduction, 'local_production'),
     ...diffGoods('depleted_good', beforeState.depletedGoods, afterState.depletedGoods, 'depletion'),
+    ...diffTier(beforeState, afterState),
+    ...diffPopulation(beforeState, afterState, cause.event),
     ...diffChains(beforeState, afterState),
     ...diffRoute(beforeState, afterState, cause.event),
     ...diffCausal(beforeSettlement, afterSettlement),

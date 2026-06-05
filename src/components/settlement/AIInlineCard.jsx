@@ -61,7 +61,7 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
         fontFamily: 'system-ui, -apple-system, sans-serif',
         color: swatch.inkMag,
       }}>
-        Polish this draft with AI — costs {creditCost} credit{creditCost === '1' ? '' : 's'},
+        Polish this draft with AI. Costs {creditCost} credit{creditCost === '1' ? '' : 's'},
         streams section by section. Partial failures keep your raw draft intact, and you can
         revert to raw any time.
       </p>

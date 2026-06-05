@@ -89,7 +89,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
         <div style={{ paddingLeft: 8, display: 'flex', flexDirection: 'column', gap: 3 }}>
           <div style={{ fontSize: FS.xxs, color: MUTED, fontStyle: 'italic', marginBottom: 4, padding: '2px 6px',
             background: swatch['#FAF8F4'], borderRadius: 3, border: '1px solid #e8dcc8' }}>
-            These institutions are excluded by default. Click to force-include — contradictions will appear in the Viability tab.
+            These institutions are excluded by default. Click to force-include. Contradictions will appear in the Viability tab.
           </div>
           {Object.entries(institutions).sort(([a],[b])=>a.localeCompare(b)).map(([name, instDef]) => {
             const st = getOutToggleState(name);
@@ -203,10 +203,10 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
     <div
       onClick={handleClick}
       title={
-        reqOverridden           ? 'Force-excluded — click to restore'
-        : isOutOfTier && !req   ? `Out-of-tier (${def.nativeTier || 'other'} tier) — click to force include`
-        : isOutOfTier && req    ? 'Cross-tier forced — click to remove'
-        : def.required          ? 'Required — click to force-exclude'
+        reqOverridden           ? 'Force-excluded. Click to restore'
+        : isOutOfTier && !req   ? `Out-of-tier (${def.nativeTier || 'other'} tier). Click to force include`
+        : isOutOfTier && req    ? 'Cross-tier forced. Click to remove'
+        : def.required          ? 'Required. Click to force-exclude'
         : def.desc
       }
       style={{

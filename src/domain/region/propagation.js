@@ -255,9 +255,12 @@ function waveImpactForChannel(channel, sourceImpact, depth, decay) {
 
 function ruleTradeDependency(channel, localDelta, change) {
   const goods = matchingGoods(channel, change);
-  if (!goods.length) return null;
   if (change.kind === 'export_lost' || change.kind === 'local_production_lost' || change.kind === 'chain_degraded' || change.kind === 'depleted_good_gained') {
+    if (!goods.length) return null;
     return impact(channel, localDelta, change, 'import_shortage', goods);
+  }
+  if (change.kind === 'population_loss' || change.kind === 'tier_demotion') {
+    return impact(channel, localDelta, change, 'import_shortage', channel.goods || [], { severityMultiplier: 0.82 });
   }
   if (change.kind === 'route_cut') {
     return impact(channel, localDelta, change, 'route_disruption', channel.goods || []);
@@ -266,7 +269,7 @@ function ruleTradeDependency(channel, localDelta, change) {
 }
 
 function ruleExportMarket(channel, localDelta, change) {
-  if (change.kind !== 'route_cut' && change.kind !== 'causal_shift') return null;
+  if (!['route_cut', 'causal_shift', 'population_loss', 'tier_demotion'].includes(change.kind)) return null;
   if (change.kind === 'causal_shift' && !['trade_connectivity', 'resourcePressure', 'resilience'].includes(change.variable)) {
     return null;
   }
@@ -275,12 +278,12 @@ function ruleExportMarket(channel, localDelta, change) {
 }
 
 function ruleTradeRoute(channel, localDelta, change) {
-  if (change.kind !== 'route_cut') return null;
+  if (change.kind !== 'route_cut' && change.kind !== 'tier_demotion' && change.kind !== 'population_loss') return null;
   return impact(channel, localDelta, change, 'route_disruption', []);
 }
 
 function rulePoliticalAuthority(channel, localDelta, change) {
-  if (change.kind === 'authority_shock' || change.kind === 'legitimacy_shock') {
+  if (change.kind === 'authority_shock' || change.kind === 'legitimacy_shock' || change.kind === 'tier_demotion') {
     return impact(channel, localDelta, change, 'authority_instability', []);
   }
   if (change.kind === 'causal_shift' && ['public_legitimacy', 'faction_power', 'social_trust'].includes(change.variable)) {
@@ -290,7 +293,7 @@ function rulePoliticalAuthority(channel, localDelta, change) {
 }
 
 function ruleTaxObligation(channel, localDelta, change) {
-  if (change.kind === 'route_cut' || change.kind === 'export_lost' || change.kind === 'chain_degraded') {
+  if (change.kind === 'route_cut' || change.kind === 'export_lost' || change.kind === 'chain_degraded' || change.kind === 'population_loss' || change.kind === 'tier_demotion' || change.kind === 'depleted_good_gained') {
     return impact(channel, localDelta, change, 'tax_revenue_disruption', channel.goods || []);
   }
   if (change.kind === 'causal_shift' && ['merchant_wealth', 'trade_connectivity', 'resourcePressure'].includes(change.variable)) {
@@ -300,7 +303,7 @@ function ruleTaxObligation(channel, localDelta, change) {
 }
 
 function ruleMilitaryProtection(channel, localDelta, change) {
-  if (change.kind === 'security_shock' || change.kind === 'authority_shock') {
+  if (change.kind === 'security_shock' || change.kind === 'authority_shock' || change.kind === 'population_loss' || change.kind === 'tier_demotion') {
     return impact(channel, localDelta, change, 'protection_gap', []);
   }
   if (change.kind === 'causal_shift' && ['defense_readiness', 'resilience', 'externalThreat'].includes(change.variable)) {
@@ -310,7 +313,7 @@ function ruleMilitaryProtection(channel, localDelta, change) {
 }
 
 function ruleWarFront(channel, localDelta, change) {
-  if (change.kind === 'security_shock' || change.kind === 'route_cut') {
+  if (change.kind === 'security_shock' || change.kind === 'route_cut' || change.kind === 'population_loss' || change.kind === 'tier_demotion') {
     return impact(channel, localDelta, change, 'conflict_pressure', []);
   }
   if (eventType(localDelta) === 'RAID_OR_MONSTER_ATTACK' && eventSeverity(localDelta, 0.6) >= 0.35) {
@@ -320,7 +323,7 @@ function ruleWarFront(channel, localDelta, change) {
 }
 
 function ruleServiceDependency(channel, localDelta, change) {
-  if (change.kind === 'health_shock' || change.kind === 'authority_shock') {
+  if (change.kind === 'health_shock' || change.kind === 'authority_shock' || change.kind === 'tier_demotion' || change.kind === 'population_loss') {
     return impact(channel, localDelta, change, 'service_disruption', channel.goods || []);
   }
   return null;
@@ -344,14 +347,14 @@ function ruleCriminalCorridor(channel, localDelta, change) {
 }
 
 function ruleMigrationPressure(channel, localDelta, change) {
-  if (change.kind === 'migration_wave' || change.kind === 'health_shock' || change.kind === 'security_shock') {
+  if (change.kind === 'migration_wave' || change.kind === 'health_shock' || change.kind === 'security_shock' || change.kind === 'population_loss' || change.kind === 'tier_demotion') {
     return impact(channel, localDelta, change, 'migration_pressure', []);
   }
   return null;
 }
 
 function ruleInformationFlow(channel, localDelta, change) {
-  if (['authority_shock', 'legitimacy_shock', 'health_shock', 'security_shock', 'migration_wave'].includes(change.kind)) {
+  if (['authority_shock', 'legitimacy_shock', 'health_shock', 'security_shock', 'migration_wave', 'population_loss', 'population_growth', 'tier_promotion', 'tier_demotion'].includes(change.kind)) {
     return impact(channel, localDelta, change, 'information_shock', []);
   }
   return null;

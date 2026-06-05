@@ -63,7 +63,7 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
       {/* ── Hooks ─────────────────────────────────────────────── */}
       <View style={{ marginBottom: space.sm }}>
         <Text style={{ ...type.label, color: palette.gold, fontSize: pt['9'], marginBottom: 4 }}>
-          USE TONIGHT — HOOKS
+          USE TONIGHT: HOOKS
         </Text>
         {hooks.length === 0 && (
           <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9'] }}>
@@ -186,7 +186,7 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
           <HairRule />
           <View style={{ marginBottom: space.sm }}>
             <Text style={{ ...type.label, color: palette.bad, fontSize: pt['9'], marginBottom: 4 }}>
-              ACTIVE CRISES — KEEP IN MIND
+              ACTIVE CRISES: KEEP IN MIND
             </Text>
             {crises.map((c, i) => (
               <View

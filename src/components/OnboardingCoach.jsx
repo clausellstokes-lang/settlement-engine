@@ -29,13 +29,13 @@ const STEP_CONTENT = [
   {
     id: 'ready',
     title: 'Ready to forge your world',
-    body: 'Hit the Generate button below. Every click produces a new settlement shaped by your config — economy, factions, NPCs, crises.',
+    body: 'Hit the Generate button below. Every click produces a new settlement shaped by your config. Economy, factions, NPCs, crises.',
     highlight: 'generate-button',
   },
   {
     id: 'explore',
-    title: 'Here it is — explore the tabs',
-    body: 'Each tab reveals a different layer: DM Summary, Daily Life, Economics, Power, NPCs, Plot Hooks, and more. Click around.',
+    title: 'Here it is. Explore the tabs',
+    body: 'Each tab reveals a different layer: Summary hooks, Daily Life, Economics, Power, NPCs, History, and more. Click around.',
     highlight: 'output-tabs',
   },
   {

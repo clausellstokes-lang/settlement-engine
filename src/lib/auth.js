@@ -18,6 +18,7 @@
  */
 
 import { supabase, isConfigured } from './supabase.js';
+import { DEFAULT_MODEL_PREFERENCE, normalizeModelPreference } from '../config/pricing.js';
 
 const OWNER_EMAIL = 'clausellstokes@aol.com';
 
@@ -40,12 +41,6 @@ function isOwnerEmail(email) {
   return String(email || '').trim().toLowerCase() === OWNER_EMAIL;
 }
 
-function normalizeModelPreference(value) {
-  return ['claude_best', 'claude_fast', 'chatgpt_best', 'chatgpt_fast'].includes(value)
-    ? value
-    : 'claude_best';
-}
-
 function buildProfileResult(user, data = {}) {
   const owner = isOwnerEmail(user?.email || data?.email);
   return {
@@ -66,7 +61,7 @@ function buildProfileResult(user, data = {}) {
  */
 async function fetchProfileAuth(user) {
   if (!user) {
-    return { tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: 'claude_best' };
+    return { tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE };
   }
   if (!supabase) {
     return buildProfileResult(user, {});
@@ -308,7 +303,7 @@ function supabaseOnAuthChange(callback) {
           profile.modelPreference,
         );
       } else {
-        callback(event, null, null, 'anon', 'user', null, false, null, true, 'claude_best');
+        callback(event, null, null, 'anon', 'user', null, false, null, true, DEFAULT_MODEL_PREFERENCE);
       }
     }
   );
@@ -347,7 +342,7 @@ async function mockSignUp(email, _password) {
     isFounder: false,
     avatarUrl: null,
     emailNotifications: true,
-    modelPreference: 'claude_best',
+    modelPreference: DEFAULT_MODEL_PREFERENCE,
     needsVerification: false,
   };
   mockSaveAuth(result);
@@ -390,7 +385,7 @@ async function mockUpdateProfilePreferences(prefs = {}) {
     ...saved,
     avatarUrl: Object.prototype.hasOwnProperty.call(prefs, 'avatarUrl') ? (prefs.avatarUrl || null) : saved.avatarUrl,
     emailNotifications: Object.prototype.hasOwnProperty.call(prefs, 'emailNotifications') ? prefs.emailNotifications !== false : saved.emailNotifications,
-    modelPreference: Object.prototype.hasOwnProperty.call(prefs, 'modelPreference') ? normalizeModelPreference(prefs.modelPreference) : (saved.modelPreference || 'claude_best'),
+    modelPreference: Object.prototype.hasOwnProperty.call(prefs, 'modelPreference') ? normalizeModelPreference(prefs.modelPreference) : (saved.modelPreference || DEFAULT_MODEL_PREFERENCE),
   };
   mockSaveAuth(next);
   return next;

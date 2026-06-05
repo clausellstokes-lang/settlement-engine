@@ -219,11 +219,13 @@ function GalleryNudge({ onNavigate }) {
   return (
     <div style={{
       padding: SP.lg,
-      borderTop: `1px solid ${BORDER}`,
-      borderBottom: `1px solid ${BORDER}`,
+      background: CARD,
+      border: `1px solid ${BORDER}`,
+      borderRadius: R.lg,
       marginBottom: SP.xxl,
       fontSize: FS.sm, color: BODY,
       fontFamily: sans, lineHeight: 1.55,
+      boxShadow: '0 2px 10px rgba(27,20,8,0.08)',
     }}>
       <strong style={{ color: INK }}>Want to see what comes out?</strong>{' '}
       Every dossier in the <button
@@ -234,7 +236,7 @@ function GalleryNudge({ onNavigate }) {
           color: GOLD, fontFamily: 'inherit', fontSize: 'inherit',
           cursor: 'pointer', textDecoration: 'underline',
         }}
-      >public gallery</button> was simulated by the same engine —
+      >public gallery</button> was simulated by the same engine,
       hand-curated exemplars at the top, community submissions below.
       Click any tile to read the full dossier.
     </div>
@@ -244,7 +246,7 @@ function GalleryNudge({ onNavigate }) {
 // ── vs ChatGPT ─────────────────────────────────────────────────────────────
 function CompareChatGPT({ onNavigate }) {
   useDocumentMeta(
-    'SettlementForge vs ChatGPT — Simulated settlements for DMs',
+    'SettlementForge vs ChatGPT: Simulated settlements for DMs',
     'A side-by-side comparison: SettlementForge simulates settlements from constraints; ChatGPT generates prose from prompts. Different tools, different jobs.'
   );
 
@@ -265,8 +267,8 @@ function CompareChatGPT({ onNavigate }) {
         </p>
         <p>
           SettlementForge is a simulator. The settlement is the only coherent town that satisfies
-          the constraints you set — sliders, terrain, trade route, stress conditions, custom
-          institutions. Every output — factions, NPC secrets, supply chains, food security — is
+          the constraints you set. Sliders, terrain, trade route, stress conditions, custom
+          institutions. Every output. Factions, NPC secrets, supply chains, food security. Is
           <strong> derived from the same simulation state</strong>. The bandit threat in the
           dossier <em>does</em> drive the militia roster, because both read from the same source.
         </p>
@@ -313,7 +315,7 @@ function CompareChatGPT({ onNavigate }) {
         <p>
           ChatGPT is great when you need <em>prose</em> about a thing whose facts you already
           have. Hand it a SettlementForge dossier and ask for read-aloud descriptions, NPC voice
-          samples, faction propaganda — it'll do that well, because the facts are already
+          samples, faction propaganda. It'll do that well, because the facts are already
           coherent and it just needs to write.
         </p>
         <p>
@@ -329,7 +331,7 @@ function CompareChatGPT({ onNavigate }) {
 // ── vs Worldographer ───────────────────────────────────────────────────────
 function CompareWorldographer({ onNavigate }) {
   useDocumentMeta(
-    'SettlementForge vs Worldographer — Maps + simulated settlements',
+    'SettlementForge vs Worldographer: Maps + simulated settlements',
     'SettlementForge complements Worldographer. Worldographer draws your world; SettlementForge simulates the towns inside it.'
   );
 
@@ -338,13 +340,13 @@ function CompareWorldographer({ onNavigate }) {
       <PageTitle
         eyebrow="Comparison"
         title="SettlementForge vs Worldographer"
-        lede="Worldographer is a map editor. SettlementForge is a settlement simulator. They solve different problems — and they're better together than apart."
+        lede="Worldographer is a map editor. SettlementForge is a settlement simulator. They solve different problems. And they're better together than apart."
       />
 
       <section style={{ marginBottom: SP.xxl, fontSize: FS.md, color: BODY, lineHeight: 1.65 }}>
         <p>
           Worldographer (formerly Hexographer) is one of the strongest map-drawing tools in the
-          TTRPG space. Hex grids, terrain layers, kingdom borders, dungeon maps — all the spatial
+          TTRPG space. Hex grids, terrain layers, kingdom borders, dungeon maps. All the spatial
           layout work a DM needs is well-served there.
         </p>
         <p>
@@ -392,7 +394,7 @@ function CompareWorldographer({ onNavigate }) {
 // ── vs Kanka ───────────────────────────────────────────────────────────────
 function CompareKanka({ onNavigate }) {
   useDocumentMeta(
-    'SettlementForge vs Kanka — Generate the wiki, then store it',
+    'SettlementForge vs Kanka: Generate the wiki, then store it',
     'Kanka is a campaign wiki. SettlementForge generates the content that goes in it. Different jobs, same DM.'
   );
 
@@ -413,7 +415,7 @@ function CompareKanka({ onNavigate }) {
         <p>
           What Kanka isn't is a generator. The blank entity page expects you to bring the content.
           For a small recurring location, you might write it yourself. For a settlement that needs
-          factions, institutions, supply chains, and 30+ NPCs — that's where SettlementForge fits.
+          factions, institutions, supply chains, and 30+ NPCs. That's where SettlementForge fits.
           Generate the dossier, export the PDF, paste the bits you want into Kanka.
         </p>
         <p style={{ color: INK, fontStyle: 'italic' }}>
@@ -427,7 +429,7 @@ function CompareKanka({ onNavigate }) {
           sf:    { mark: 'partial', note: 'Saved settlements + canon. No general wiki.' },
           other: { mark: 'yes', note: 'Best-in-class wiki for TTRPG campaigns.' } },
         { feature: 'Generate a settlement from scratch',
-          sf:    { mark: 'yes', note: 'Simulator engine; outputs full dossier in 10–20s.' },
+          sf:    { mark: 'yes', note: 'Simulator engine; outputs full dossier in 10-20s.' },
           other: { mark: 'no',  note: 'Manual entry. Templates exist; no generation.' } },
         { feature: 'Multi-user campaign collaboration',
           sf:    { mark: 'no',  note: 'Single-DM focus; share via gallery / PDF.' },
@@ -440,7 +442,7 @@ function CompareKanka({ onNavigate }) {
           other: { mark: 'yes', note: 'Exports available on paid plans.' } },
         { feature: 'Pricing',
           sf:    { mark: 'yes', note: 'Free tier; $6/mo; $99 Founder.' },
-          other: { mark: 'yes', note: 'Free tier; $5–$25/mo tiers.' } },
+          other: { mark: 'yes', note: 'Free tier; $5-$25/mo tiers.' } },
       ]} />
 
       <ForgeCTA onNavigate={onNavigate} />
@@ -452,7 +454,7 @@ function CompareKanka({ onNavigate }) {
 // ── Compare landing ────────────────────────────────────────────────────────
 function CompareLanding({ onNavigate }) {
   useDocumentMeta(
-    'How SettlementForge compares — vs ChatGPT, Worldographer, Kanka',
+    'How SettlementForge compares vs ChatGPT, Worldographer, Kanka',
     'Side-by-side comparisons of SettlementForge against the tools DMs commonly consider: ChatGPT, Worldographer, and Kanka.'
   );
 
@@ -465,7 +467,7 @@ function CompareLanding({ onNavigate }) {
     {
       view: 'compare-worldographer',
       title: 'vs Worldographer',
-      lede: 'Maps + simulated settlements — better together.',
+      lede: 'Maps + simulated settlements. Better together.',
     },
     {
       view: 'compare-kanka',

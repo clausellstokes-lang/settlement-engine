@@ -36,7 +36,7 @@ const COMPENDIUM_HINTS = Object.freeze({
   },
   'culture': {
     title: 'Culture',
-    body: 'Names, naming patterns, institution flavor, faction archetypes. Drives the prose of the place more than the math — a "germanic" town and a "south-asian" town with identical configs read very differently.',
+    body: 'Names, naming patterns, institution flavor, faction archetypes. Drives the prose of the place more than the math. A "germanic" town and a "south-asian" town with identical configs read very differently.',
     anchor: 'cultures',
   },
   'monster-threat': {

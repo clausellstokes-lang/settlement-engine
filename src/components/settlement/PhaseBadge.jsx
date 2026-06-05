@@ -81,7 +81,7 @@ export default function PhaseBadge() {
         {phase === 'draft' && (
           <button
             onClick={onCanonize}
-            title="Mark as canon — start tracking in-world events on a timeline"
+            title="Mark as canon. Start tracking in-world events on a timeline"
             style={btnStyle(false)}
           >
             <BookMarked size={11} /> Canonize

@@ -6,7 +6,7 @@
  * Colors/styles mirror the legend in WorldMap.jsx:
  *   trade_partner → solid teal
  *   allied        → solid blue
- *   patron/client → dashed purple (with direction dot at midpoint)
+ *   patron/client/vassal → dashed purple (with direction dot at midpoint)
  *   rival         → dotted orange
  *   cold_war      → dotted red
  *   hostile       → thick solid red
@@ -20,6 +20,7 @@ const STYLE = {
   allied:        { color: '#2563eb', width: 2.2, dash: null,    priority: 3 },
   patron:        { color: '#7c3aed', width: 2,   dash: '6 3',   priority: 2, arrow: true  },
   client:        { color: '#7c3aed', width: 2,   dash: '6 3',   priority: 2, arrow: false },
+  vassal:        { color: '#6d28d9', width: 2.3, dash: '8 3',   priority: 3, arrow: true  },
   rival:         { color: '#ea580c', width: 1.8, dash: '2 3',   priority: 1 },
   cold_war:      { color: '#b91c1c', width: 1.8, dash: '1 3',   priority: 1 },
   hostile:       { color: '#991b1b', width: 3,   dash: null,    priority: 4 },
@@ -80,8 +81,8 @@ export default function RelationshipEdges() {
         const toXY = burgXY.get(toBurg);
         if (!toXY) continue;
 
-        // Dedupe symmetric pairs (patron/client kept asymmetric)
-        const pairKey = relType === 'patron' || relType === 'client'
+        // Dedupe symmetric pairs (hierarchical relationships stay asymmetric)
+        const pairKey = relType === 'patron' || relType === 'client' || relType === 'vassal'
           ? `${relType}:${fromId}:${toId}`
           : [String(fromId), String(toId)].sort().join('|') + ':' + relType;
         if (seen.has(pairKey)) continue;

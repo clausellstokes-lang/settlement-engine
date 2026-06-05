@@ -81,6 +81,7 @@ async function getAccessTokenSafe() {
  * @param {Array<string|number>} [opts.pinnedNpcIds] - NPC ids the DM pinned; the server drops them from the `npcs` pass so they round-trip unchanged.
  * @param {string} [opts.aiGuidance] - DM-approved guidance sent to the model. Private DM Notes are never sent.
  * @param {string} [opts.modelPreference] - User model preference key.
+ * @param {object|null} [opts.relationshipMemoryContext] - dailyLife only: compact campaign relationship posture digest.
  * @param {string} [opts.changeType] - progression only: classifyChange key (e.g. 'addStressor')
  * @param {string} [opts.changeLabel] - progression only: human-readable label chronicled with the run
  * @param {object|null} [opts.priorNarrative] - progression only: the previous aiSettlement (refined)
@@ -109,6 +110,9 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   }
   if (typeof opts.modelPreference === 'string' && opts.modelPreference.trim()) {
     body.modelPreference = opts.modelPreference.trim();
+  }
+  if (type === 'dailyLife' && opts.relationshipMemoryContext && typeof opts.relationshipMemoryContext === 'object') {
+    body.relationshipMemoryContext = opts.relationshipMemoryContext;
   }
   if (type === 'progression') {
     body.changeType     = opts.changeType || '';

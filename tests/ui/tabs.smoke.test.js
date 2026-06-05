@@ -24,7 +24,6 @@ import { EconomicsTab }     from '../../src/components/new/tabs/EconomicsTab.jsx
 import { DefenseTab }       from '../../src/components/new/tabs/DefenseTab.jsx';
 import { HistoryTab }       from '../../src/components/new/tabs/HistoryTab.jsx';
 import { NPCsTab }          from '../../src/components/new/tabs/NPCsTab.jsx';
-import { PlotHooksTab }     from '../../src/components/new/tabs/PlotHooksTab.jsx';
 import { PowerTab }         from '../../src/components/new/tabs/PowerTab.jsx';
 import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
 import { ServicesTab }      from '../../src/components/new/tabs/ServicesTab.jsx';
@@ -122,7 +121,6 @@ function smokeTab(label, Component, propsForFull, propsForSparse = { settlement:
 // Simple settlement-prop tabs
 smokeTab('DefenseTab',       DefenseTab,       s => ({ settlement: s }));
 smokeTab('HistoryTab',       HistoryTab,       s => ({ settlement: s }));
-smokeTab('PlotHooksTab',     PlotHooksTab,     s => ({ settlement: s }));
 smokeTab('RelationshipsTab', RelationshipsTab, s => ({ settlement: s }));
 smokeTab('ViabilityTab',     ViabilityTab,     s => ({ settlement: s }));
 smokeTab('DMCompassTab',     DMCompassTab,     s => ({ settlement: s }));

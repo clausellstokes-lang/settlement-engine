@@ -41,7 +41,7 @@ export default function SignInPage() {
   return (
     <AuthPageShell
       title="Welcome back"
-      subtitle="Sign in to keep your work — saves, exports, and larger settlements."
+      subtitle="Sign in to keep your work. Saves, exports, and larger settlements."
       footer={
         <span>
           New here?{' '}

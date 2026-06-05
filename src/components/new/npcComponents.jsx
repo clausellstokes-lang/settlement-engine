@@ -6,6 +6,7 @@ import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
 import { useStore } from '../../store/index.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
+import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
@@ -163,10 +164,8 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const color = catColor(npc.category);
   const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
-  const personality = Array.isArray(npc.personality)
-    ? [npc.personality[0], npc.personality[1]]
-    : [npc.personality?.dominant, npc.personality?.flaw];
-  const traits = personality.filter(Boolean);
+  const traits = normalizeNpcTraits(npc);
+  const publicTraits = traits.filter(t => t.visibility !== 'gm');
 
   // Pin UI is optional. When `onTogglePin` isn't provided (read-only views,
   // unsaved settlements) the icon doesn't render at all. `pinnedIds` is a Set
@@ -178,7 +177,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const pinColor = '#6a2a9a'; // purple — ties visually to the narrative accent.
 
   return (
-    <div style={{
+    <div id={entityAnchor('npc', npc)} style={{
       background:swatch['#FAF8F4'],
       border:`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`,
       borderLeft:`3px solid ${isPinned ? pinColor : color}`,
@@ -202,7 +201,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
             onClick={(e)=>{ e.stopPropagation(); onTogglePin(pinKey); }}
             onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); onTogglePin(pinKey); } }}
             title={isPinned
-              ? 'Pinned — this NPC will not be rewritten by regenerate/progress.'
+              ? 'Pinned. This NPC will not be rewritten by regenerate/progress.'
               : 'Pin this NPC so regenerate/progress leaves it unchanged.'}
             style={{
               display:'inline-flex',alignItems:'center',justifyContent:'center',
@@ -222,9 +221,9 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
       </button>
       {open && (
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
-          {traits.length > 0 && (
+          {publicTraits.length > 0 && (
             <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:6,marginTop:6}}>
-              {traits.map((t,i) => <span key={i} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 5px'}}>{t}</span>)}
+              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 5px'}}>{t.label}: {t.value}</span>)}
             </div>
           )}
           {npc.goal?.short && (

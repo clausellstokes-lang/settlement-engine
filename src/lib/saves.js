@@ -12,6 +12,7 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { normalizeSettlement } from '../domain/normalizeSettlement.js';
+import { ACTIVE_SAVE_STATE, activeSaveCount } from './saveAccess.js';
 
 const LOCAL_KEY = 'dnd_settlement_saves';
 
@@ -106,23 +107,32 @@ function migrateSettlementShape(entry) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, campaign_state, version_history, created_at, updated_at')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
-  return data.map(row => migrateSettlementShape(migrateSaveToV2({
+  return data.map(row => {
+    const accessState = row.access_state || ACTIVE_SAVE_STATE;
+    const usable = accessState === ACTIVE_SAVE_STATE;
+    return migrateSettlementShape(migrateSaveToV2({
     id:        row.id,
     name:      row.name,
     tier:      row.tier,
     timestamp: row.updated_at,
     savedAt:   new Date(row.updated_at).getTime(),
-    settlement: row.data,
-    config:    row.config,
-    ...spreadToggles(row.toggles),
-    seed:      row.seed,
-    aiData:    row.ai_data || {},
+    settlement: usable ? row.data : null,
+    config:    usable ? row.config : null,
+    ...(usable ? spreadToggles(row.toggles) : {}),
+    seed:      usable ? row.seed : null,
+    aiData:    usable ? (row.ai_data || {}) : {},
     campaignState: row.campaign_state || null,
     versionHistory: Array.isArray(row.version_history) ? row.version_history : [],
-  })));
+    accessState,
+    inactiveReason: row.inactive_reason || null,
+    inactiveSince: row.inactive_since || null,
+    retentionExpiresAt: row.retention_expires_at || null,
+    reactivatedFreeAt: row.reactivated_free_at || null,
+  }));
+  });
 }
 
 async function supabaseSave(entry) {
@@ -183,9 +193,18 @@ async function supabaseDelete(id) {
 async function supabaseCount() {
   const { count, error } = await supabase
     .from('settlements')
-    .select('id', { count: 'exact', head: true });
+    .select('id', { count: 'exact', head: true })
+    .eq('access_state', ACTIVE_SAVE_STATE);
   if (error) throw error;
   return count || 0;
+}
+
+async function supabaseReactivateFreeSettlement(id) {
+  const { data, error } = await supabase.rpc('reactivate_free_settlement', {
+    target_settlement_id: id,
+  });
+  if (error) throw error;
+  return data;
 }
 
 // ── Local methods ───────────────────────────────────────────────────────────
@@ -197,7 +216,7 @@ async function localList() {
   // default canonical containers). Cost is trivial — both adapters are
   // pure object spreads — and it makes the rest of the app symmetric
   // with the Supabase path.
-  return localLoad().map(migrateSaveToV2).map(migrateSettlementShape);
+  return localLoad().map(entry => ({ accessState: ACTIVE_SAVE_STATE, ...entry })).map(migrateSaveToV2).map(migrateSettlementShape);
 }
 
 async function localSaveEntry(entry) {
@@ -223,7 +242,23 @@ async function localDelete(id) {
 }
 
 async function localCount() {
-  return localLoad().length;
+  return activeSaveCount(localLoad());
+}
+
+async function localReactivateFreeSettlement(id) {
+  const saves = localLoad();
+  const idx = saves.findIndex(save => String(save.id) === String(id));
+  if (idx === -1) return { ok: false, reason: 'not_found' };
+  saves[idx] = {
+    ...saves[idx],
+    accessState: ACTIVE_SAVE_STATE,
+    inactiveReason: null,
+    inactiveSince: null,
+    retentionExpiresAt: null,
+    reactivatedFreeAt: new Date().toISOString(),
+  };
+  localWrite(saves);
+  return { ok: true };
 }
 
 /** Batch-write the full saves array (local mode only). */
@@ -239,6 +274,7 @@ export const saves = {
   update:   isConfigured ? supabaseUpdate   : localUpdate,
   delete:   isConfigured ? supabaseDelete   : localDelete,
   count:    isConfigured ? supabaseCount    : localCount,
+  reactivateFreeSettlement: isConfigured ? supabaseReactivateFreeSettlement : localReactivateFreeSettlement,
   /** Write entire saves array — only available in local mode. */
   writeAll: isConfigured ? null             : localWriteAll,
   isConfigured,

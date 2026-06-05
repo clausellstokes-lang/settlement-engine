@@ -6,8 +6,11 @@ import {
   deriveWizardNewsEntriesFromGraphChange,
   ensureRegionalGraph,
   propagateRegionalEvent,
+  syncRelationshipChannelBundle,
 } from '../region/index.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge } from './relationshipEvolution.js';
+import { refreshRelationshipMemory } from './relationshipMemory.js';
+import { resolveRelationshipHierarchy } from './relationshipHierarchy.js';
 import { applyNpcPatch } from './npcAgency.js';
 import { applyFactionPatch } from './factionCompetition.js';
 import { proposalIdFor, updateProposalStatus, upsertProposal } from './worldState.js';
@@ -47,9 +50,50 @@ function newsEntryForOutcome(outcome, tick, status = 'applied') {
   };
 }
 
-function applyOutcomeToSettlement(settlement, outcome) {
-  if (!settlement || !outcome?.condition) return settlement;
-  return withActiveCondition(settlement, outcome.condition);
+function affectedSaveIdsForOutcome(outcome) {
+  const ids = new Set();
+  for (const delta of outcome.populationDeltas || []) {
+    if (delta?.saveId) ids.add(String(delta.saveId));
+  }
+  if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch)) {
+    ids.add(String(outcome.targetSaveId));
+  }
+  return [...ids];
+}
+
+function applyOutcomeToSettlement(settlement, outcome, saveId) {
+  if (!settlement || !outcome) return settlement;
+  let next = settlement;
+  if (outcome.populationDeltas?.length) {
+    next = applyPopulationOutcomeToSettlement(next, outcome, saveId);
+  }
+  if (outcome.tierChange && String(outcome.targetSaveId) === String(saveId)) {
+    next = applyTierOutcomeToSettlement(next, outcome);
+  }
+  if (outcome.resourcePatch && String(outcome.targetSaveId) === String(saveId)) {
+    next = applyResourceOutcomeToSettlement(next, outcome);
+  }
+  if (outcome.condition && String(outcome.targetSaveId) === String(saveId)) {
+    next = withActiveCondition(next, outcome.condition);
+  }
+  return next;
+}
+
+function settlementChanged(beforeSettlement, afterSettlement) {
+  if (beforeSettlement === afterSettlement) return false;
+  try {
+    return JSON.stringify(beforeSettlement) !== JSON.stringify(afterSettlement);
+  } catch {
+    return true;
+  }
+}
+
+function saveLike(entry, settlement) {
+  return {
+    id: String(entry.saveId),
+    name: entry.save?.name || settlement?.name || String(entry.saveId),
+    settlement,
+  };
 }
 
 function applyRelationshipLabelToGraph(graph, outcome, now) {
@@ -67,6 +111,12 @@ function applyRelationshipLabelToGraph(graph, outcome, now) {
       };
     }),
   };
+}
+
+function relationshipEdgeForOutcome(graph, outcome) {
+  const key = outcome.proposalPayload?.relationshipKey || outcome.relationshipKey;
+  if (!key) return null;
+  return (graph.edges || []).find(edge => relationshipKeyFromEdge(edge) === key) || null;
 }
 
 /**
@@ -128,41 +178,30 @@ export function applyWorldPulseOutcomes({
       continue;
     }
 
-    const beforeGraph = graph;
-    const target = outcome.targetSaveId ? settlementUpdates.get(String(outcome.targetSaveId)) : null;
-    if (outcome.type === 'population') {
-      for (const delta of outcome.populationDeltas || []) {
-        const entry = settlementUpdates.get(String(delta.saveId));
-        if (!entry) continue;
-        settlementUpdates.set(String(delta.saveId), {
-          ...entry,
-          settlement: applyPopulationOutcomeToSettlement(entry.settlement, outcome, delta.saveId),
-        });
-      }
-    }
-    if (target && outcome.type === 'tier') {
-      settlementUpdates.set(String(outcome.targetSaveId), {
-        ...target,
-        settlement: applyTierOutcomeToSettlement(target.settlement, outcome),
-      });
-    }
-    if (target && outcome.type === 'resource') {
-      settlementUpdates.set(String(outcome.targetSaveId), {
-        ...target,
-        settlement: applyResourceOutcomeToSettlement(target.settlement, outcome),
-      });
-    }
-    if (target && outcome.condition) {
-      const beforeSettlement = target.settlement;
-      const afterSettlement = applyOutcomeToSettlement(beforeSettlement, outcome);
-      settlementUpdates.set(String(outcome.targetSaveId), { ...target, settlement: afterSettlement });
+    for (const saveId of affectedSaveIdsForOutcome(outcome)) {
+      const entry = settlementUpdates.get(String(saveId));
+      if (!entry) continue;
+      const beforeSettlement = entry.settlement;
+      const afterSettlement = applyOutcomeToSettlement(beforeSettlement, outcome, saveId);
+      if (!settlementChanged(beforeSettlement, afterSettlement)) continue;
+      settlementUpdates.set(String(saveId), { ...entry, settlement: afterSettlement });
       if (propagationDepth > 0) {
+        const beforeGraph = graph;
         const propagation = propagateRegionalEvent({
           graph,
-          beforeSettlement,
-          afterSettlement,
-          event: { id: outcome.id, type: 'WORLD_PULSE', targetId: outcome.targetSaveId, payload: { severity: outcome.severity } },
-          activeSettlementId: outcome.targetSaveId,
+          beforeSettlement: saveLike(entry, beforeSettlement),
+          afterSettlement: saveLike(entry, afterSettlement),
+          event: {
+            id: outcome.id,
+            type: 'WORLD_PULSE',
+            targetId: saveId,
+            payload: {
+              severity: outcome.severity,
+              candidateType: outcome.candidateType,
+              outcomeType: outcome.type,
+            },
+          },
+          activeSettlementId: outcome.targetSaveId || saveId,
           visibleSettlementIds: snapshot.settlements.map(item => item.id),
           maxDepth: propagationDepth,
           now,
@@ -175,6 +214,38 @@ export function applyWorldPulseOutcomes({
     if (outcome.relationshipKey && outcome.relationshipPatch) {
       state = applyRelationshipPatch(state, outcome, now);
       graph = applyRelationshipLabelToGraph(graph, outcome, now);
+      if (outcome.proposalPayload?.kind === 'relationship_label_change') {
+        const edge = relationshipEdgeForOutcome(graph, outcome);
+        if (edge) {
+          graph = syncRelationshipChannelBundle(graph, edge, outcome.proposalPayload.toType, {
+            now,
+            status: 'confirmed',
+            outcomeId: outcome.id,
+            relationshipKey: outcome.proposalPayload.relationshipKey,
+            reason: outcome.proposalPayload.reason,
+          });
+          if (outcome.proposalPayload.toType === 'vassal') {
+            const hierarchy = resolveRelationshipHierarchy({
+              worldState: state,
+              regionalGraph: graph,
+              vassalEdge: edge,
+              now,
+              tick,
+            });
+            state = hierarchy.worldState;
+            graph = hierarchy.regionalGraph;
+            for (const change of hierarchy.changes) {
+              graph = syncRelationshipChannelBundle(graph, change.edge, change.toType, {
+                now,
+                status: 'confirmed',
+                outcomeId: outcome.id,
+                relationshipKey: change.relationshipKey,
+                reason: change.reason,
+              });
+            }
+          }
+        }
+      }
     }
     if (outcome.type === 'npc') state = applyNpcPatch(state, outcome);
     if (outcome.type === 'faction') state = applyFactionPatch(state, outcome);
@@ -193,6 +264,7 @@ export function applyWorldPulseOutcomes({
     newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeRegionalAdvance, graph, { tick, createdAt: now }));
   }
   feed = appendWizardNewsEntries(feed, newsEntries);
+  state = refreshRelationshipMemory(state, graph, snapshot, { currentTick: tick });
 
   return {
     worldState: state,

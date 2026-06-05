@@ -800,7 +800,7 @@ export default function ChainBuilder({ embedded = false }) {
           fontSize: FS.xxs, fontWeight: 700, color: SECOND,
           textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.sm,
         }}>
-          Quick Toggle — All Chains
+          Quick Toggle: All Chains
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
           {allChains.map(chain => (
