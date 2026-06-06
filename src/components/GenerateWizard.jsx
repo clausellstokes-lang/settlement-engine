@@ -143,7 +143,7 @@ function ModeSelector({ mode, onModeChange, large = false }) {
               ...(large
                 ? { '--card-bg': backgroundImageUrl(MODE_BACKGROUNDS[id]) }
                 : { background: active ? GOLD_BG : CARD }),
-              border: `2px solid ${active ? GOLD : BORDER2}`,
+              border: `2px solid ${(large || active) ? GOLD : BORDER2}`,
               borderRadius: R.lg,
               cursor: 'pointer',
               textAlign: 'center',
@@ -455,7 +455,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   //     generation (full size ladder). Below the hero we expose the
   //     Basic/Advanced mode picker as the "want more control?" path.
   const showHomeHero = !wizardMode && !settlement;
-  const showModePicker = !wizardMode && !settlement && authTier !== 'anon';
+  // /create shows every path to everyone: instant generation (the hero) plus
+  // the three mode cards (Basic / Advanced / Custom). Previously the cards were
+  // gated to signed-in users; the landing now offers all options regardless of
+  // auth so visitors see the full set the moment they click Create.
+  const showModePicker = !wizardMode && !settlement;
 
   if (!wizardMode && !settlement) {
     return (
@@ -750,9 +754,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 onClick={() => setWizardStep(wizardStep + 1)}
                 style={{
                   display: 'flex', alignItems: 'center', gap: R.md,
-                  padding: `${SP.sm + 2}px ${SP.xl}px`, background: GOLD_BG,
+                  padding: `${SP.sm + 2}px ${SP.xl}px`, background: GOLD,
                   border: `1px solid ${GOLD}`, borderRadius: R.lg, cursor: 'pointer',
-                  fontFamily: sans, fontSize: FS.md, fontWeight: 600, color: GOLD,
+                  fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: swatch.white,
                 }}
               >
                 Next <ChevronRight size={16} />

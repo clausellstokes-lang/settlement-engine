@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, lazy, Suspense, Component } from 'react';
-import {Link2, ChevronLeft, X, FileText, RotateCcw, Loader2, Edit3, Lock, Sparkles} from 'lucide-react';
+import {Link2, ChevronLeft, X, FileText, RotateCcw, Loader2, Edit3, Lock, Share2} from 'lucide-react';
+import ShareToGallery from './ShareToGallery.jsx';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
 // section components. Import lazily on user click so opening a settlement
 // detail view doesn't pay for export machinery up front.
@@ -10,7 +11,6 @@ import { RELATIONSHIP_SELECTIONS } from '../domain/relationships/canonicalRelati
 import { useStore } from '../store/index.js';
 
 const OutputContainer = lazy(() => import('./OutputContainer'));
-import SettlementEditor from './SettlementEditor.jsx';
 import ChroniclePanel from './ChroniclePanel.jsx';
 // Campaign-state engine UI — phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
@@ -23,7 +23,6 @@ import CoherencePanel   from './settlement/CoherencePanel.jsx';
 // Wave 2 audit components: contextual AI, action rail, provenance,
 // export sheet picker. Each is small and additive — they replace
 // scattered chrome with consistent surfaces in the right rail.
-import NextActionRail   from './settlement/NextActionRail.jsx';
 import ProvenanceBlock  from './settlement/ProvenanceBlock.jsx';
 import AIInlineCard     from './settlement/AIInlineCard.jsx';
 import ExportSheet      from './settlement/ExportSheet.jsx';
@@ -528,9 +527,6 @@ export default function SettlementDetail({
               ? <><Lock size={12}/> Edit (Premium)</>
               : (editMode ? <><Edit3 size={12}/> Stop Editing</> : <><Edit3 size={12}/> Edit Dossier</>)}
           </button>
-          <button onClick={()=>setLinking(v=>!v)} style={{display:'flex',alignItems:'center',gap:5,background:linking?'#2a3a7a':CARD,color:linking?'#fff':'#2a3a7a',border:'1px solid #2a3a7a',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:FS.sm,fontWeight:700,fontFamily:sans}}>
-            <Link2 size={13}/> {linking?'Cancel':'Link Neighbour'}
-          </button>
           <button
             disabled={exporting}
             onClick={() => setExportSheetOpen(true)}
@@ -548,16 +544,32 @@ export default function SettlementDetail({
               ? <><Loader2 size={12} style={{animation:'spin 1s linear infinite'}}/> Building PDF…</>
               : <><FileText size={12}/> Export Dossier</>}
           </button>
-          <button
-            onClick={() => { if (saveId) requestNarrative(saveId); }}
-            disabled={!saveId}
-            title="Polish this draft with AI. Costs credits; streams section by section, and your raw draft is preserved."
-            style={{display:'flex',alignItems:'center',gap:5,background:'rgba(90,42,138,0.15)',color:swatch.ai,border:'1px solid rgba(160,100,220,0.45)',borderRadius:5,padding:'5px 12px',cursor:saveId?'pointer':'not-allowed',fontSize:FS.sm,fontWeight:700,fontFamily:sans,opacity:saveId?1:0.6}}
-          >
-            <Sparkles size={13}/> Polish with AI
-          </button>
         </div>
       </div>
+
+      {/* Share to Gallery — publish this saved dossier to the public gallery.
+          Surfaced here in the settlement view; it previously lived only inside
+          the read-only OutputContainer, where it was skipped (so it never
+          appeared in the dossier). Owners only; ShareToGallery self-gates on
+          auth + canonized state and shows its own publish flow. */}
+      {saveId && (
+        <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, padding:'10px 14px', marginBottom:14, background:CARD }}>
+          <div style={{ fontSize:FS.xxs, fontWeight:800, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:8, display:'flex', alignItems:'center', gap:6 }}>
+            <Share2 size={12}/> Share to Gallery
+          </div>
+          <ShareToGallery
+            saveId={saveId}
+            isPublic={liveSaveEntry?.is_public}
+            publicSlug={liveSaveEntry?.public_slug}
+            settlement={detail.settlement}
+            galleryDescription={liveSaveEntry?.gallery_description}
+            galleryImageUrl={liveSaveEntry?.gallery_image_url}
+            galleryImageAlt={liveSaveEntry?.gallery_image_alt}
+            galleryTags={liveSaveEntry?.gallery_tags}
+            campaignState={liveSaveEntry?.campaignState || detail.saveData?.campaignState}
+          />
+        </div>
+      )}
 
       {/* Edit-mode chrome — hidden in the read-only View, revealed by "Edit
           Dossier". State snapshot, AI polish, event composer, next-action rail,
@@ -578,8 +590,10 @@ export default function SettlementDetail({
             SystemStateBar shows the four-dimension health snapshot,
             AIInlineCard prompts for AI polish when not yet narrated,
             CoherencePanel surfaces structural warnings in draft mode,
-            EventComposer lets the DM apply in-world events (writes to
-            timeline in canon mode), Timeline displays the canon log. */}
+            the Make Changes panel (EventComposer) applies in-world events
+            (writes to the timeline in canon mode) and hosts the catalog
+            roster + Tune editor below the change form, Timeline displays
+            the canon log. */}
       <SystemStateBar />
       <AIInlineCard
         settlement={detail.settlement}
@@ -602,43 +616,25 @@ export default function SettlementDetail({
         }}
       />
       <CoherencePanel />
-      <EventComposer />
+      <EventComposer
+        config={detail.config}
+        saveId={detail.saveData?.id}
+        onEdit={onEditSettlement}
+        narrated={narrated}
+        onRegenerateNarrative={handleEditorRegenerate}
+        onProgressNarrative={handleEditorProgress}
+        onRevertToRaw={handleEditorRevert}
+      />
       <Timeline />
       <RegionalImpactInbox
         saveId={detail?.saveData?.id || detail?.id}
         onApplied={handleRegionalImpactApplied}
       />
 
-      {/* Right rail: phase-aware "next best action" + provenance block.
-          Lives below the engine UI rather than as a separate column,
-          to avoid breaking the existing single-column layout. The audit
-          asked for a true side rail; we ship a stacked rail in v1
-          which is structurally identical and delivers most of the win
-          without a layout overhaul. */}
+      {/* Provenance block. The "Next best action" rail was removed: its
+          Canonize / Polish with AI / Export actions are now in the always-
+          visible dossier header, so the rail was pure duplication. */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 12, marginBottom: 12 }}>
-        <NextActionRail
-          settlement={detail.settlement}
-          save={detail.saveData || detail}
-          handlers={{
-            onCanonize: () => useStore.getState().canonize(),
-            onApplyEvent: () => {
-              // Scroll to and focus the EventComposer block. Best-effort:
-              // it's the next visible interactive surface below the rail.
-              const target = document.querySelector('[data-anchor="event-composer"]');
-              if (target?.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            },
-            onPolishAi: () => {
-              const live = useStore.getState();
-              const saveId = detail?.saveData?.id || detail?.id;
-              if (typeof live.requestNarrative === 'function' && saveId) {
-                live.requestNarrative(saveId).catch(e => {
-                  console.warn('[NextActionRail.onPolishAi] requestNarrative failed:', e);
-                });
-              }
-            },
-            onExport: () => setExportSheetOpen(true),
-          }}
-        />
         <ProvenanceBlock save={detail.saveData || detail} />
       </div>
 
@@ -663,7 +659,17 @@ export default function SettlementDetail({
         </div>
       )}
 
-      {linking&&<div style={{marginBottom:14}}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
+      {/* Neighbour links — moved out of the always-visible header into its own
+          card here, under Edit Dossier. The toggle reveals the linking picker;
+          the network list below shows existing links. */}
+      <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden', marginBottom:14 }}>
+        <button onClick={()=>setLinking(v=>!v)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:linking?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
+          <Link2 size={14} color="#2a3a7a"/>
+          <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
+          <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
+        </button>
+        {linking&&<div style={{ padding:'10px 14px', borderTop:`1px solid ${BORDER}` }}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
+      </div>
 
       {network.length>0&&!linking&&<div style={{background:swatch.infoBg,border:'1px solid #c0c8e8',borderRadius:8,padding:'12px 14px',marginBottom:14}}>
         <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
@@ -686,19 +692,10 @@ export default function SettlementDetail({
       {/* ── Network Effects (cascading modifiers) ─────────────────────────── */}
       {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} />}
 
-      {/* ── Settlement Editor (CRUD for institutions, resources, etc.) ────── */}
-      {detail?.settlement && onEditSettlement && (
-        <SettlementEditor
-          settlement={detail.settlement}
-          config={detail.config}
-          saveId={detail.saveData?.id}
-          onEdit={onEditSettlement}
-          narrated={narrated}
-          onRegenerateNarrative={handleEditorRegenerate}
-          onProgressNarrative={handleEditorProgress}
-          onRevertToRaw={handleEditorRevert}
-        />
-      )}
+      {/* The Settlement Editor (catalog roster + Tune priorities) now lives
+          inside the Make Changes panel above, embedded below the change form.
+          It is no longer a separate panel — institution add/remove is owned by
+          that panel's ADD_INSTITUTION / REMOVE_INSTITUTION events. */}
 
       {/* ── Full settlement output ──────────────────────────────────────────── */}
       {/* ── Edit Names ─────────────────────────────────────────────────────── */}

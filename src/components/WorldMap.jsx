@@ -120,9 +120,10 @@ export default function WorldMap({ onNavigate } = {}) {
 
   // Audit recommendation: when a campaign is active, default to canon-
   // only filtering so the map represents the *deployed* world, not
-  // every draft the user is tinkering with. Toggleable via the
-  // toolbar so power users can opt out.
-  const [canonOnlyFilter, setCanonOnlyFilter] = useState(true);
+  // every draft the user is tinkering with. Canon-only is enforced now
+  // (the old toolbar toggle was removed): only canon settlements may be
+  // placed on a campaign map.
+  const canonOnlyFilter = true;
 
   useEffect(() => {
     if (activeCampaignId && !activeCampaign) setActiveCampaign(null);
@@ -274,6 +275,27 @@ export default function WorldMap({ onNavigate } = {}) {
     } catch { return; }
     if (!data?.id) return;
 
+    // Placement gates: a settlement only lands on a campaign map, only if it
+    // is canon, and at most once per map. (Canon used to be a soft toolbar
+    // hint; it is enforced here now.)
+    const live = useStore.getState();
+    let placementReject = null;
+    if (!live.activeCampaignId) {
+      placementReject = 'Select a campaign before placing settlements on the map.';
+    } else {
+      const saveRec = (live.savedSettlements || []).find(s => s.id === data.id);
+      if (saveRec && !isCanonSave(saveRec)) {
+        placementReject = 'Only canon settlements can be placed. Canonize it first.';
+      } else if (Object.values(live.mapState?.placements || {}).some(p => p.settlementId === data.id)) {
+        placementReject = `${data.name || 'That settlement'} is already on this map.`;
+      }
+    }
+    if (placementReject) {
+      // eslint-disable-next-line react-hooks/immutability
+      showToast('info', placementReject);
+      return;
+    }
+
     const iframe = iframeRef.current;
     if (!iframe) return;
     const ifRect = iframe.getBoundingClientRect();
@@ -292,17 +314,20 @@ export default function WorldMap({ onNavigate } = {}) {
     } catch (err) {
       console.warn('[WorldMap] place failed', err);
       // showToast is a store-action setter; called from an async drop
-      // handler (not during render). The immutability rule is over-broad
-      // here — the function is defined during render but only invoked
-      // by user actions.
-      // eslint-disable-next-line react-hooks/immutability
+      // handler (not during render), so the immutability rule doesn't apply.
       showToast('error', `Place failed: ${err.message || err}`);
     }
   }, [setDraggingOver]);
 
   // ── Campaign save/load ────────────────────────────────────────────────
+  // Tracks which campaign (or 'none') the map has been synced to, so the
+  // entry effect below auto-loads a campaign's saved map exactly once per
+  // selection — fixing "reselect doesn't reload" — while an explicit click
+  // (which sets the ref first) doesn't double-load.
+  const autoSyncedRef = useRef(null);
   const handleSelectCampaign = useCallback(async (id) => {
     setCampaignWorkspace('map');
+    autoSyncedRef.current = id || 'none';
     const bridge = bridgeRef.current;
     if (!id) {
       // Deselect → reset everything
@@ -374,6 +399,22 @@ export default function WorldMap({ onNavigate } = {}) {
     }
      
   }, [getCampaignMapState, replaceMapState, resetMapState, setActiveCampaign, activeCampaign, bumpGeometryVersion]);
+
+  // On entry to the map (bridge ready) — and whenever the active campaign
+  // resolves — re-sync the map. With a campaign active, its saved snapshot is
+  // loaded into the fresh FMG bridge, so returning to the map no longer needs
+  // a reselect to repaint. With no campaign, the map is blanked so stray
+  // placements don't linger on a non-campaign world. The autoSyncedRef guard
+  // keeps this to one load per selection; explicit clicks set the ref first.
+  useEffect(() => {
+    if (!bridgeReady) return;
+    // A campaign id with no resolved record yet → wait; don't blank/deselect.
+    if (activeCampaignId && !activeCampaign) return;
+    const id = (activeCampaignId && activeCampaign) ? activeCampaignId : null;
+    const key = id || 'none';
+    if (autoSyncedRef.current === key) return;
+    handleSelectCampaign(id);
+  }, [bridgeReady, activeCampaignId, activeCampaign, handleSelectCampaign]);
 
   const handleSaveMapToCampaign = useCallback(async () => {
     if (!activeCampaignId) return;
@@ -693,17 +734,8 @@ export default function WorldMap({ onNavigate } = {}) {
             >
               <Layers size={13} /> Layers
             </IconButton>
-            {/* Canon-only toggle — defaults ON when a campaign is active. */}
-            <IconButton
-              onClick={() => setCanonOnlyFilter(v => !v)}
-              title={canonOnlyFilter
-                ? 'Showing only canon settlements. Click to also show drafts.'
-                : 'Showing all settlements. Click to limit to canon.'}
-              active={canonOnlyFilter}
-              aria-pressed={canonOnlyFilter}
-            >
-              {canonOnlyFilter ? 'Canon Only' : 'All Phases'}
-            </IconButton>
+            {/* Canon-only is enforced (only canon settlements can be placed),
+                so the former Canon / All Phases toggle was removed. */}
             {/* Island shape picker */}
             {mapTemplates.length > 0 && (
               <>

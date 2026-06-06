@@ -7,12 +7,13 @@
  * Compendium appears with a purple "Custom" badge.
  */
 import { useState, useMemo } from 'react';
-import { Plus, X, ChevronDown, ChevronUp, Sliders, Search } from 'lucide-react';
-import { institutionalCatalog } from '../data/institutionalCatalog.js';
+import { X, ChevronDown, ChevronUp, Sliders } from 'lucide-react';
+import CatalogSearch from './settlement/CatalogPicker.jsx';
+import { buildInstitutionCatalog } from '../domain/institutions/institutionCatalog.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
 import { STRESS_TYPE_MAP } from '../data/stressTypes.js';
 import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, CARD_ALT } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 import { classifyChange } from '../lib/narrativeMutations.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
@@ -46,80 +47,10 @@ function Pill({ label, color=SECOND, onRemove, isCustom }) {
   );
 }
 
-// ── Catalog Search Panel ────────────────────────────────────────────────────
-function CatalogSearch({ items, onAdd, placeholder, categoryFilters }) {
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState('');
-  const [catFilter, setCatFilter] = useState('All');
-
-  const filtered = useMemo(() => {
-    let list = items;
-    if (catFilter !== 'All') list = list.filter(i => i.category === catFilter);
-    if (query) {
-      const q = query.toLowerCase();
-      list = list.filter(i =>
-        (i.name||'').toLowerCase().includes(q) ||
-        (i.desc||i.description||'').toLowerCase().includes(q) ||
-        (i.category||'').toLowerCase().includes(q) ||
-        (i.tags||[]).some(t => (t||'').toLowerCase().includes(q))
-      );
-    }
-    return list.slice(0, 30);
-  }, [items, query, catFilter]);
-
-  if (!open) {
-    return (
-      <button onClick={() => setOpen(true)} style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:'pointer', fontSize:FS.xxs, fontWeight:700, fontFamily:sans, marginTop:6 }}>
-        <Plus size={11}/> Add from catalog ({items.length} available)
-      </button>
-    );
-  }
-
-  return (
-    <div style={{ marginTop:6, border:`1px solid ${BORDER}`, borderRadius:6, background:CARD_ALT, overflow:'hidden' }}>
-      {/* Search bar */}
-      <div style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 8px', borderBottom:`1px solid ${BORDER}` }}>
-        <Search size={11} color={MUTED}/>
-        <input value={query} onChange={e => setQuery(e.target.value)} placeholder={placeholder || 'Search catalog...'} autoFocus style={{ flex:1, border:'none', background:'transparent', fontSize:FS.xs, fontFamily:sans, color:INK, outline:'none' }}/>
-        <button onClick={() => { setOpen(false); setQuery(''); setCatFilter('All'); }} style={{ background:'none', border:'none', cursor:'pointer', color:MUTED, padding:0 }}><X size={12}/></button>
-      </div>
-
-      {/* Category filter pills */}
-      {categoryFilters && categoryFilters.length > 1 && (
-        <div style={{ display:'flex', gap:3, padding:'4px 8px', flexWrap:'wrap', borderBottom:`1px solid ${BORDER}` }}>
-          {['All', ...categoryFilters].map(c => (
-            <button key={c} onClick={() => setCatFilter(c)} style={{ padding:'1px 7px', borderRadius:8, fontSize:FS.micro, fontWeight:catFilter===c?700:500, cursor:'pointer', border:`1px solid ${catFilter===c?GOLD:BORDER}`, background:catFilter===c?GOLD_BG:'transparent', color:catFilter===c?GOLD:SECOND }}>
-              {c}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Results */}
-      <div style={{ maxHeight:200, overflowY:'auto', padding:4 }}>
-        {filtered.length === 0 ? (
-          <div style={{ padding:'8px 6px', fontSize:FS.xxs, color:MUTED, textAlign:'center' }}>No matching items</div>
-        ) : filtered.map(item => (
-          <button key={item.id || item.name} onClick={() => { onAdd(item); }}
-            style={{ width:'100%', display:'flex', alignItems:'flex-start', gap:6, padding:'5px 8px', border:'none', background:'none', cursor:'pointer', borderRadius:4, textAlign:'left', fontFamily:sans }}
-            onMouseEnter={e => e.currentTarget.style.background='#f0ebe0'}
-            onMouseLeave={e => e.currentTarget.style.background='none'}>
-            <div style={{ flex:1, minWidth:0 }}>
-              <div style={{ fontSize:FS.xs, fontWeight:600, color:INK, display:'flex', alignItems:'center', gap:4 }}>
-                {item.name}
-                {item.isCustom && <span style={{ fontSize:FS.nano, fontWeight:800, color:swatch['#7C3AED'], background:'rgba(124,58,237,0.12)', borderRadius:3, padding:'0 4px' }}>Custom</span>}
-              </div>
-              {item.desc && <div style={{ fontSize:FS.micro, color:MUTED, lineHeight:1.3, marginTop:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{item.desc}</div>}
-            </div>
-            {item.category && <span style={{ fontSize:FS.micro, fontWeight:600, color:SECOND, background:`${SECOND}10`, borderRadius:3, padding:'1px 5px', flexShrink:0 }}>{item.category}</span>}
-            {item.alreadyAdded && <span style={{ fontSize:FS.micro, color:MUTED, fontStyle:'italic' }}>Added</span>}
-          </button>
-        ))}
-        {items.length > 30 && !query && <div style={{ padding:'4px 8px', fontSize:FS.micro, color:MUTED, textAlign:'center' }}>Search to see more...</div>}
-      </div>
-    </div>
-  );
-}
+// CatalogSearch now lives in ./settlement/CatalogPicker.jsx, shared with the
+// Make Changes composer (imported above, aliased as CatalogSearch). One
+// implementation so the editor's roster adds and the composer's catalog-backed
+// events can't drift apart.
 
 // ── Priority slider ─────────────────────────────────────────────────────────
 // Drag fires onChange (live visual update); release fires onCommit, which is
@@ -154,6 +85,12 @@ export default function SettlementEditor({
   onRegenerateNarrative,  // async () => void — re-run narrative pipeline
   onProgressNarrative,    // async (changeType, changeLabel) => void — evolve narrative (AI-4)
   onRevertToRaw,          // async () => void — clear narrative, keep raw
+  // Embedded mode: when the Make Changes panel hosts the editor, drop the
+  // outer collapsible chrome and hide Institutions — the composer's
+  // ADD_INSTITUTION / REMOVE_INSTITUTION events own that surface now.
+  // Resources, stressors, trade, and priorities (the "Tune" section) still
+  // render, since those have no event equivalent.
+  embedded = false,
 }) {
   const [open, setOpen] = useState(false);
   const customContent = useStore(s => s.customContent);
@@ -303,39 +240,10 @@ export default function SettlementEditor({
   };
 
   // ── Institutions: FULL catalog across ALL tiers + custom ───────────────
-  const institutionCatalogItems = useMemo(() => {
-    const existing = new Set(institutions.map(i => i.name));
-    const items = [];
-    const seen = new Set();
-
-    // All tiers from built-in catalog
-    for (const [tierKey, tierData] of Object.entries(institutionalCatalog || {})) {
-      for (const [cat, entries] of Object.entries(tierData || {})) {
-        for (const [name, def] of Object.entries(entries || {})) {
-          if (seen.has(name)) continue;
-          seen.add(name);
-          items.push({
-            id: name, name, category: cat, tierKey,
-            desc: def.desc || '', tags: def.tags || [],
-            def, alreadyAdded: existing.has(name),
-          });
-        }
-      }
-    }
-
-    // Custom institutions
-    for (const ci of (customContent.institutions || [])) {
-      if (seen.has(ci.name)) continue;
-      seen.add(ci.name);
-      items.push({
-        id: ci.id, name: ci.name, category: ci.category || 'Custom',
-        desc: ci.description || '', tags: typeof ci.tags === 'string' ? ci.tags.split(',').map(t => t.trim()) : (ci.tags || []),
-        isCustom: true, alreadyAdded: existing.has(ci.name),
-      });
-    }
-
-    return items.filter(i => !i.alreadyAdded).sort((a, b) => a.name.localeCompare(b.name));
-  }, [institutions, customContent.institutions]);
+  const institutionCatalogItems = useMemo(
+    () => buildInstitutionCatalog(institutions, customContent.institutions),
+    [institutions, customContent.institutions],
+  );
 
   const institutionCategories = useMemo(() => [...new Set(institutionCatalogItems.map(i => i.category).filter(Boolean))].sort(), [institutionCatalogItems]);
 
@@ -537,16 +445,18 @@ export default function SettlementEditor({
   const Toggle = open ? ChevronUp : ChevronDown;
 
   return (
-    <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden', marginBottom:14 }}>
-      <button onClick={() => setOpen(!open)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:open?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
-        <Sliders size={14} color={GOLD}/>
-        <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Settlement Editor</span>
-        <span style={{ fontSize:FS.xxs, color:MUTED }}>Institutions, resources, stressors, trade, priorities</span>
-        <Toggle size={13} color={MUTED}/>
-      </button>
+    <div style={{ border: embedded ? 'none' : `1px solid ${BORDER}`, borderRadius: embedded ? 0 : 8, overflow:'hidden', marginBottom: embedded ? 0 : 14 }}>
+      {!embedded && (
+        <button onClick={() => setOpen(!open)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:open?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
+          <Sliders size={14} color={GOLD}/>
+          <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Settlement Editor</span>
+          <span style={{ fontSize:FS.xxs, color:MUTED }}>Institutions, resources, stressors, trade, priorities</span>
+          <Toggle size={13} color={MUTED}/>
+        </button>
+      )}
 
-      {open && (
-        <div style={{ padding:'12px 14px', display:'flex', flexDirection:'column', gap:10 }}>
+      {(embedded || open) && (
+        <div style={{ padding: embedded ? 0 : '12px 14px', display:'flex', flexDirection:'column', gap:10 }}>
 
           {/* Canon-mode reminder. Direct mutations from this editor
               don't appear in the campaign timeline — they're authorial
@@ -570,21 +480,26 @@ export default function SettlementEditor({
               <span style={{ flex:1 }}>
                 Edits here are <strong>corrections</strong>. Typo fixes, renames, cleanup.
                 They don't become timeline events. To record an in-world change with consequences
-                (death, fire, refugees, route cut), use the Event Composer below.
+                (death, fire, refugees, route cut), use the change form above.
               </span>
             </div>
           )}
 
-          {/* Institutions */}
-          <SubSection title="Institutions" count={institutions.length}>
-            <div style={{ display:'flex', flexWrap:'wrap', gap:4, marginBottom:6 }}>
-              {institutions.map((inst, i) => (
-                <Pill key={i} label={`${inst.name} (${inst.category})`} color="#2a5a7a" isCustom={inst.source==='custom'} onRemove={() => removeInstitution(i)}/>
-              ))}
-              {!institutions.length && <span style={{ fontSize:FS.xxs, color:MUTED }}>No institutions</span>}
-            </div>
-            <CatalogSearch items={institutionCatalogItems} onAdd={addInstitution} placeholder="Search institutions..." categoryFilters={institutionCategories}/>
-          </SubSection>
+          {/* Institutions — standalone editor only. When embedded in the Make
+              Changes panel, the composer's ADD_INSTITUTION / REMOVE_INSTITUTION
+              events own institution add/remove (catalog-backed), so showing it
+              here too would be the redundancy we set out to remove. */}
+          {!embedded && (
+            <SubSection title="Institutions" count={institutions.length}>
+              <div style={{ display:'flex', flexWrap:'wrap', gap:4, marginBottom:6 }}>
+                {institutions.map((inst, i) => (
+                  <Pill key={i} label={`${inst.name} (${inst.category})`} color="#2a5a7a" isCustom={inst.source==='custom'} onRemove={() => removeInstitution(i)}/>
+                ))}
+                {!institutions.length && <span style={{ fontSize:FS.xxs, color:MUTED }}>No institutions</span>}
+              </div>
+              <CatalogSearch items={institutionCatalogItems} onAdd={addInstitution} placeholder="Search institutions..." categoryFilters={institutionCategories}/>
+            </SubSection>
+          )}
 
           {/* Resources */}
           <SubSection title="Resources" count={resources.length}>
@@ -670,7 +585,7 @@ export default function SettlementEditor({
         body="This settlement is canon. Choose whether this is a correction or an in-world event."
         choices={[
           { id: 'correction', label: 'Correction', description: 'Apply the edit as cleanup with no timeline entry.' },
-          { id: 'event', label: 'Use Event Composer', description: 'Cancel this edit so you can record consequences as an event.' },
+          { id: 'event', label: 'Record as a change', description: 'Cancel this edit so you can record consequences in the change form.' },
         ]}
         onChoose={handleCanonChoice}
         onCancel={() => setCanonChoice(null)}
