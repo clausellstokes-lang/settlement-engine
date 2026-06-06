@@ -308,6 +308,7 @@ export default function SettlementDetail({
   const [_saved,       _setSaved]      = useState(false);
   const [exporting,   setExporting]   = useState(false); // PDF export spinner
   const [exportSheetOpen, setExportSheetOpen] = useState(false); // variant picker modal
+  const [shareOpen, setShareOpen] = useState(false); // Share to Gallery panel, toggled from the header button
   const [confirmRevertRaw, setConfirmRevertRaw] = useState(false);
   const [pdfError, setPdfError] = useState(null);
 
@@ -544,15 +545,29 @@ export default function SettlementDetail({
               ? <><Loader2 size={12} style={{animation:'spin 1s linear infinite'}}/> Building PDF…</>
               : <><FileText size={12}/> Export Dossier</>}
           </button>
+          {saveId && (
+            <button
+              onClick={() => setShareOpen(v => !v)}
+              title="Publish this dossier to the public gallery, or manage its listing."
+              style={{
+                display:'flex',alignItems:'center',gap:5,
+                background: shareOpen ? '#1f4a6a' : swatch.info,
+                color:swatch.white,border:'none',borderRadius:5,padding:'5px 12px',
+                cursor:'pointer',fontSize:FS.sm,fontWeight:700,fontFamily:sans,
+              }}
+            >
+              <Share2 size={13}/> {shareOpen ? 'Close Gallery' : 'Share to Gallery'}
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Share to Gallery — publish this saved dossier to the public gallery.
-          Surfaced here in the settlement view; it previously lived only inside
-          the read-only OutputContainer, where it was skipped (so it never
-          appeared in the dossier). Owners only; ShareToGallery self-gates on
-          auth + canonized state and shows its own publish flow. */}
-      {saveId && (
+      {/* Share to Gallery — revealed by the header's "Share to Gallery" button
+          (in line with Edit Dossier / Export Dossier). The publish flow has an
+          expandable details form, so the header button toggles this panel
+          rather than living inline in the dense button row. Owners only;
+          ShareToGallery self-gates on auth + canonized state. */}
+      {saveId && shareOpen && (
         <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, padding:'10px 14px', marginBottom:14, background:CARD }}>
           <div style={{ fontSize:FS.xxs, fontWeight:800, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:8, display:'flex', alignItems:'center', gap:6 }}>
             <Share2 size={12}/> Share to Gallery

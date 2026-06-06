@@ -15,6 +15,19 @@
 
 // ── Data extraction ─────────────────────────────────────────────────────────
 
+/**
+ * availableServices is a category-keyed object ({ lodging:[], food:[], … }),
+ * but some older/edge paths hand back a plain array instead. Normalize either
+ * shape into one flat list so callers can slice/map it. An object has no
+ * `.slice`, which is the "(s.availableServices || []).slice is not a function"
+ * crash this guards against in the AI narrative path.
+ */
+export function flattenServices(services) {
+  if (Array.isArray(services)) return services;
+  if (services && typeof services === 'object') return Object.values(services).flat();
+  return [];
+}
+
 function extractFullContext(s) {
   const cfg  = s.config    || {};
   const eco  = s.economicState || {};
@@ -101,7 +114,7 @@ function extractFullContext(s) {
     siegeNarrative:   hist.siegeNarrative || null,
 
     // Services & Resources
-    services:       (s.availableServices || []).slice(0, 8).map(svc => svc.name || svc),
+    services:       flattenServices(s.availableServices).slice(0, 8).map(svc => svc?.name || svc),
     resources:      (s.resourceAnalysis?.nearbyResources || []).slice(0, 5),
     criticalImports: (via.metrics?.criticalImports || []).slice(0, 3),
 

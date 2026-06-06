@@ -25,10 +25,6 @@ const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.j
 // P135 / D-5 — Simulation drawer. Replaces the Simulation tab when
 // `simulationDrawer` flag is on. Self-mounted via a trigger button.
 const SimulationDrawer = lazy(() => import('./dossier/SimulationDrawer.jsx'));
-// P137 / HT-4 — "Copy as AI prompt" button. Self-gated by flag +
-// signed-in tier; reserved as a power-user export so anon users
-// don't see the structured grounding.
-const AIPromptButton = lazy(() => import('./dossier/AIPromptButton.jsx'));
 // P142 / D-6 — Phone-optimized "at the table" view. Mounted only when
 // flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
 // moment the user opens it and never before.
@@ -611,11 +607,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         // not a chrome surface.
         React.createElement(Suspense, { fallback: null },
           React.createElement(SimulationDrawer)
-        ),
-        // P137 / HT-4 — "Copy as AI prompt" power-user export. Self-
-        // gates on flag + signed-in. Anon users see nothing.
-        React.createElement(Suspense, { fallback: null },
-          React.createElement(AIPromptButton, { settlement })
         )
       ),
       // P104 — Welcome credit gift card. Self-gates inside; shown to

@@ -71,9 +71,14 @@ function MetaPill({ children, tone = 'neutral' }) {
   );
 }
 
-function NewsEntry({ entry, compact = false }) {
+function NewsEntry({ entry, compact = false, nameById }) {
   const major = entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR;
   const color = statusColor(entry.kind, major);
+  // Name the settlements this update touches so a reader knows exactly which
+  // places to look into. The ids the feed stores are save ids.
+  const settlementNames = (entry.settlementIds || [])
+    .map(id => nameById?.get(String(id)))
+    .filter(Boolean);
 
   return (
     <article style={{
@@ -141,6 +146,12 @@ function NewsEntry({ entry, compact = false }) {
           marginTop: 8,
           alignItems: 'center',
         }}>
+          {settlementNames.length > 0 && (
+            <MetaPill tone="major">
+              {settlementNames.length > 1 ? 'Settlements' : 'Settlement'}: {settlementNames.slice(0, 3).join(', ')}
+              {settlementNames.length > 3 ? ` +${settlementNames.length - 3}` : ''}
+            </MetaPill>
+          )}
           <MetaPill>Tick {entry.tick}</MetaPill>
           <MetaPill>{human(entry.kind)}</MetaPill>
           <MetaPill>Severity {percent(entry.severity)}</MetaPill>
@@ -195,6 +206,17 @@ export default function WizardNewsPanel({ campaign }) {
   const [chronicleBusy, setChronicleBusy] = useState(false);
   const [chronicleError, setChronicleError] = useState('');
   const chronicles = Array.isArray(campaign?.chronicles) ? campaign.chronicles : [];
+  // Resolve the feed's settlement save ids to names so each item can say which
+  // settlement it concerns.
+  const nameById = useMemo(() => {
+    const map = new Map();
+    for (const save of saves || []) {
+      const id = save?.id || save?.settlement?.id;
+      const nm = save?.name || save?.settlement?.name;
+      if (id && nm) map.set(String(id), nm);
+    }
+    return map;
+  }, [saves]);
 
   async function generateChronicle() {
     if (chronicleBusy || total === 0) return;
@@ -374,7 +396,7 @@ export default function WizardNewsPanel({ campaign }) {
                     Tick {group.tick} · {group.entries.length} major update{group.entries.length === 1 ? '' : 's'}
                   </summary>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 8 }}>
-                    {group.entries.map(entry => <NewsEntry key={entry.id} entry={entry} />)}
+                    {group.entries.map(entry => <NewsEntry key={entry.id} entry={entry} nameById={nameById} />)}
                   </div>
                 </details>
               ))}
@@ -421,7 +443,7 @@ export default function WizardNewsPanel({ campaign }) {
                     Tick {group.tick} · {group.entries.length} notable update{group.entries.length === 1 ? '' : 's'}
                   </summary>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 8 }}>
-                    {group.entries.map(entry => <NewsEntry key={entry.id} entry={entry} compact />)}
+                    {group.entries.map(entry => <NewsEntry key={entry.id} entry={entry} compact nameById={nameById} />)}
                   </div>
                 </details>
               ))}

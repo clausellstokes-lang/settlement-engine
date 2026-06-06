@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Activity, BookMarked, CheckCircle2, Clock3, ShieldAlert, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
@@ -21,6 +21,56 @@ function unique(values = []) {
   return values.filter(Boolean).filter((value, index, arr) => arr.indexOf(value) === index);
 }
 
+// ── Entity resolution ───────────────────────────────────────────────────────
+// Turn the ids the simulation records into the names a reader needs: which
+// settlement, which faction, which institution.
+function nameMapFromSaves(saves = []) {
+  const map = new Map();
+  for (const save of saves || []) {
+    const id = save?.id || save?.settlement?.id;
+    const name = save?.name || save?.settlement?.name;
+    if (id && name) map.set(String(id), name);
+  }
+  return map;
+}
+
+function collectSettlementIds(item = {}) {
+  const ids = [];
+  for (const src of [item, item.outcome || {}, item.proposalPayload || item.outcome?.proposalPayload || {}]) {
+    if (!src || typeof src !== 'object') continue;
+    if (src.settlementId) ids.push(src.settlementId);
+    if (src.targetSaveId) ids.push(src.targetSaveId);
+    if (src.saveId) ids.push(src.saveId);
+    for (const id of src.affectedSettlementIds || []) ids.push(id);
+    for (const id of src.settlementIds || []) ids.push(id);
+    for (const delta of src.populationDeltas || []) if (delta?.saveId) ids.push(delta.saveId);
+  }
+  return unique(ids.map(String));
+}
+
+// The named entities involved in a pulse item, in reader-priority order.
+function involvedEntities(item = {}, nameById = new Map()) {
+  const o = item.outcome || item;
+  const payload = o.proposalPayload || item.proposalPayload || {};
+  const out = [];
+
+  const settlements = unique(collectSettlementIds(item).map(id => nameById.get(String(id))).filter(Boolean));
+  if (settlements.length) {
+    out.push({ label: settlements.length > 1 ? 'Settlements' : 'Settlement', value: settlements.slice(0, 4).join(', ') });
+  }
+
+  const faction = o.factionName || payload.factionName || item.factionName;
+  if (faction) out.push({ label: 'Faction', value: human(faction) });
+
+  const institution = o.metadata?.institutionName || payload.institutionName || o.institutionName || item.institutionName;
+  if (institution) out.push({ label: 'Institution', value: institution });
+
+  const npcRole = payload.roleArchetype || o.metadata?.roleArchetype;
+  if ((o.npcId || item.npcId) && npcRole) out.push({ label: 'NPC role', value: human(npcRole) });
+
+  return out;
+}
+
 function Pill({ children, tone = 'neutral' }) {
   const bg = tone === 'major' ? GOLD_BG : tone === 'good' ? swatch.successBg : CARD_ALT;
   const color = tone === 'major' ? GOLD : tone === 'good' ? GREEN : SECOND;
@@ -41,6 +91,22 @@ function Pill({ children, tone = 'neutral' }) {
       textTransform: 'capitalize',
     }}>
       {children}
+    </span>
+  );
+}
+
+function EntityPill({ label, value }) {
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', minHeight: 22, maxWidth: '100%',
+      padding: '2px 8px', border: `1px solid ${BORDER2}`, borderRadius: 6,
+      background: swatch.infoBg, color: INK,
+      fontFamily: sans, fontSize: FS.xxs, fontWeight: 700,
+    }}>
+      <span style={{ color: MUTED, fontWeight: 900, marginRight: 4, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+        {label}
+      </span>
+      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{value}</span>
     </span>
   );
 }
@@ -71,13 +137,13 @@ function proposalDetails(outcome = {}) {
   return [human(outcome.ruleFamily), human(outcome.ruleId)].filter(Boolean).slice(0, 2);
 }
 
-function outcomeDetails(outcome = {}) {
+function outcomeDetails(outcome = {}, nameById = new Map()) {
   const details = [...proposalDetails(outcome)];
   if (outcome.tierChange) {
     details.push(`${human(outcome.tierChange.fromTier)} -> ${human(outcome.tierChange.toTier)}`);
   }
   if (outcome.populationDeltas?.length) {
-    details.push(...outcome.populationDeltas.slice(0, 3).map(delta => `${delta.saveId}: ${signedNumber(delta.delta)}`));
+    details.push(...outcome.populationDeltas.slice(0, 3).map(delta => `${nameById.get(String(delta.saveId)) || 'Settlement'}: ${signedNumber(delta.delta)}`));
   }
   if (outcome.resourcePatch) {
     details.push(`${human(outcome.resourcePatch.resource)} ${human(outcome.resourcePatch.state)}`);
@@ -91,13 +157,17 @@ function outcomeDetails(outcome = {}) {
   return unique(details).slice(0, 5);
 }
 
-function digestDetails(entry = {}) {
+function digestDetails(entry = {}, nameById = new Map()) {
+  const names = unique((entry.settlementIds || []).map(id => nameById.get(String(id))).filter(Boolean));
+  const settlementDetail = names.length
+    ? `${names.slice(0, 3).join(', ')}${names.length > 3 ? ` +${names.length - 3}` : ''}`
+    : (entry.settlementIds?.length ? `${entry.settlementIds.length} settlement${entry.settlementIds.length === 1 ? '' : 's'}` : null);
   return unique([
     human(entry.scope),
     human(entry.kind),
     human(entry.impactKind),
     human(entry.channelType),
-    entry.settlementIds?.length ? `${entry.settlementIds.length} settlement${entry.settlementIds.length === 1 ? '' : 's'}` : null,
+    settlementDetail,
   ]).slice(0, 5);
 }
 
@@ -105,7 +175,7 @@ function rollIsDeterministic(roll = {}) {
   return !!roll.conflictResolution?.deterministic || (roll.probability >= 1 && roll.roll === 0);
 }
 
-function OutcomeCard({ title, summary, severity, reasons = [], actions = null, tone = 'normal', details = [] }) {
+function OutcomeCard({ title, summary, severity, reasons = [], actions = null, tone = 'normal', details = [], involved = [] }) {
   const major = tone === 'major' || severity >= 0.7;
   return (
     <article style={{
@@ -145,6 +215,11 @@ function OutcomeCard({ title, summary, severity, reasons = [], actions = null, t
           )}
         </div>
       </div>
+      {involved.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+          {involved.map((entity, index) => <EntityPill key={`${entity.label}-${index}`} label={entity.label} value={entity.value} />)}
+        </div>
+      )}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
         <Pill tone={major ? 'major' : 'neutral'}>Severity {percent(severity)}</Pill>
         {details.slice(0, 5).map((detail, index) => <Pill key={`${detail}-${index}`}>{detail}</Pill>)}
@@ -213,6 +288,8 @@ export default function WorldPulsePanel({ campaign }) {
   const [busyProposalId, setBusyProposalId] = useState(null);
   const [canonBusy, setCanonBusy] = useState(false);
   const [actionError, setActionError] = useState(null);
+  const saves = useStore(s => s.savedSettlements);
+  const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
   if (!campaign) return null;
 
   const worldState = campaign.worldState || {};
@@ -395,6 +472,7 @@ export default function WorldPulsePanel({ campaign }) {
                   severity={proposal.severity}
                   reasons={proposal.reasons}
                   details={proposalDetails(proposal.outcome)}
+                  involved={involvedEntities(proposal, nameById)}
                   tone="major"
                   actions={(
                     <>
@@ -442,7 +520,8 @@ export default function WorldPulsePanel({ campaign }) {
                   summary={outcome.summary}
                   severity={outcome.severity}
                   reasons={outcome.reasons}
-                  details={outcomeDetails(outcome)}
+                  details={outcomeDetails(outcome, nameById)}
+                  involved={involvedEntities(outcome, nameById)}
                   tone={outcome.applyMode === 'proposal' ? 'major' : 'normal'}
                 />
               ))}
@@ -453,6 +532,7 @@ export default function WorldPulsePanel({ campaign }) {
                   summary={`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`}
                   severity={stressor.resolutionChance}
                   reasons={['time bounded stressor', human(stressor.type)]}
+                  involved={involvedEntities(stressor, nameById)}
                 />
               ))}
             </div>
@@ -477,7 +557,8 @@ export default function WorldPulsePanel({ campaign }) {
                   summary={entry.summary}
                   severity={entry.severity ?? Math.min(1, (entry.score || 0) / 100)}
                   reasons={entry.reasons}
-                  details={digestDetails(entry)}
+                  details={digestDetails(entry, nameById)}
+                  involved={involvedEntities(entry, nameById)}
                   tone={entry.significance === 'major' ? 'major' : 'normal'}
                 />
               ))}
