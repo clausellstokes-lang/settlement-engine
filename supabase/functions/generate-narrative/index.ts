@@ -1584,11 +1584,51 @@ function getCorsHeaders(req?: Request) {
   };
 }
 
+// ── AI fetch with retry + bounded concurrency ────────────────────────────────
+// The narrative fires many model calls close together (refinement passes,
+// daily-life beats). A burst can exceed the provider's rate / concurrency
+// limit and return 429 (or 529 "overloaded"). Without a retry the pass throws,
+// that section silently falls back to raw, and the dossier shows only the
+// thesis — the "Generate Narrative only writes the identity" bug. Retry
+// transient throttle/overload responses with backoff (honoring Retry-After).
+async function fetchAiWithRetry(url: string, init: RequestInit, maxRetries = 4): Promise<Response> {
+  let res = await fetch(url, init);
+  for (
+    let attempt = 0;
+    !res.ok && attempt < maxRetries && [429, 500, 503, 529].includes(res.status);
+    attempt++
+  ) {
+    const retryAfter = Number(res.headers.get('retry-after'));
+    const backoffMs = Number.isFinite(retryAfter) && retryAfter > 0
+      ? Math.min(15000, retryAfter * 1000)
+      : Math.min(8000, 400 * (2 ** attempt)) + Math.floor(Math.random() * 250);
+    try { await res.text(); } catch { /* drain the body so the socket frees */ }
+    await new Promise(resolve => setTimeout(resolve, backoffMs));
+    res = await fetch(url, init);
+  }
+  return res;
+}
+
+// Run async workers over items with bounded concurrency, so we don't fire
+// every refinement pass at the provider simultaneously and trip its limit.
+async function runWithConcurrency<T>(items: T[], limit: number, worker: (item: T) => Promise<void>): Promise<void> {
+  const queue = items.slice();
+  const size = Math.max(1, Math.min(limit, queue.length));
+  const runners = Array.from({ length: size }, async () => {
+    for (;;) {
+      const next = queue.shift();
+      if (next === undefined) return;
+      await worker(next);
+    }
+  });
+  await Promise.all(runners);
+}
+
 // ── Anthropic call ──────────────────────────────────────────────────────────
 
 async function callAnthropic(prompt: string, maxTokens: number, model: string): Promise<string> {
   if (!ANTHROPIC_API_KEY) throw new Error('Anthropic API key is not configured');
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const res = await fetchAiWithRetry('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -1613,7 +1653,7 @@ async function callAnthropic(prompt: string, maxTokens: number, model: string): 
 
 async function callOpenAI(prompt: string, maxTokens: number, model: string): Promise<string> {
   if (!OPENAI_API_KEY) throw new Error('OpenAI API key is not configured');
-  const res = await fetch('https://api.openai.com/v1/responses', {
+  const res = await fetchAiWithRetry('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -2150,7 +2190,11 @@ serve(async (req) => {
           const skippedFields: string[] = [];
 
           const passCtx: PassContext = { pinnedNpcIds: normalizedPinnedNpcIds };
-          await Promise.all(passEntries.map(async ([key, spec]) => {
+          // Bounded concurrency so the refinement burst doesn't trip the
+          // provider's rate limit and fail every section (leaving only the
+          // thesis). Each call also retries transient 429/overload via
+          // fetchAiWithRetry.
+          await runWithConcurrency(passEntries, 3, async ([key, spec]) => {
             try {
               const payload = spec.extract(settlement, passCtx);
               if (isEmptyPayload(payload)) {
@@ -2197,7 +2241,7 @@ serve(async (req) => {
               console.error(`[generate-narrative] pass '${key}' failed:`, (e as Error).message);
               send({ field: key, error: (e as Error).message });
             }
-          }));
+          });
 
           const aiUsage = aggregateAiUsage(usageTelemetry);
           console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
