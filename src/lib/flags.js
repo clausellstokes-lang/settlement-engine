@@ -73,8 +73,8 @@ export const FLAGS = Object.freeze({
     description: 'P111 / M-3: hover-tooltip during drag with terrain + trade-route context.',
   },
   mapAutosave: {
-    default: false,
-    description: 'P112 / M-5: auto-save map state when a campaign is active.',
+    default: true,
+    description: 'P112 / M-5: auto-save map state into the active campaign (rides the campaign cloud sync, so maps persist per account and across devices). PROMOTED default-on.',
   },
   welcomeBack: {
     default: true,

@@ -46,6 +46,14 @@ const TIER_RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 
 
 /** Roles that bypass all tier restrictions */
 const ELEVATED_ROLES = ['developer', 'admin'];
+
+// Elevated roles (admin / developer) carry a perpetual Cartographer (premium)
+// status: they never pay, and their account reads as Cartographer everywhere
+// `auth.tier` is consulted. Whatever billing tier the profile reports is
+// overridden to 'premium' for these roles.
+function resolveTier(tier, role) {
+  return ELEVATED_ROLES.includes(role) ? 'premium' : (tier || 'free');
+}
 let authUnsubscribe = null;
 
 export const createAuthSlice = (set, get) => ({
@@ -69,7 +77,7 @@ export const createAuthSlice = (set, get) => ({
     set(state => {
       state.auth = {
         user, session,
-        tier: tier || 'free',
+        tier: resolveTier(tier, role),
         role: role || 'user',
         displayName: displayName || null,
         isFounder: Boolean(isFounder),
@@ -122,7 +130,7 @@ export const createAuthSlice = (set, get) => ({
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
-            tier: result.tier, role: result.role || 'user',
+            tier: resolveTier(result.tier, result.role), role: result.role || 'user',
             displayName: result.displayName || null,
             isFounder: Boolean(result.isFounder),
             avatarUrl: result.avatarUrl || null,
@@ -158,7 +166,7 @@ export const createAuthSlice = (set, get) => ({
         }
         set(state => {
           state.auth = {
-            user, session, tier,
+            user, session, tier: resolveTier(tier, role),
             role: role || 'user',
             displayName: displayName || null,
             isFounder: Boolean(isFounder),
@@ -224,7 +232,7 @@ export const createAuthSlice = (set, get) => ({
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
-            tier: result.tier, role: result.role || 'user',
+            tier: resolveTier(result.tier, result.role), role: result.role || 'user',
             displayName: result.displayName || null,
             isFounder: Boolean(result.isFounder),
             avatarUrl: result.avatarUrl || null,

@@ -128,6 +128,29 @@ export default function WorldMap({ onNavigate } = {}) {
     if (activeCampaignId && !activeCampaign) setActiveCampaign(null);
   }, [activeCampaignId, activeCampaign, setActiveCampaign]);
 
+  // P112 / M-5 — Auto-save the working map into the active campaign so it
+  // persists per account and across devices without a manual click. The key
+  // mirrors AutoSaveChip's "dirty" fingerprint (placement ids + layer counts);
+  // the save is debounced and only fires when the live map differs from the
+  // campaign's persisted map (so no save loop, no redundant writes).
+  // saveCampaignMap bumps the campaign's updatedAt, which rides the existing
+  // campaign cloud sync. Gated on the mapAutosave flag + an active campaign.
+  const mapDirtyKey = useStore(s => {
+    const m = s.mapState || {};
+    return `${Object.keys(m.placements || {}).sort().join(',')}|${(m.labels || []).length}|${(m.markers || []).length}|${(m.forests || []).length}`;
+  });
+  useEffect(() => {
+    if (!flag('mapAutosave') || !activeCampaignId) return undefined;
+    const p = activeCampaign?.mapState || {};
+    const persistedKey = `${Object.keys(p.placements || {}).sort().join(',')}|${(p.labels || []).length}|${(p.markers || []).length}|${(p.forests || []).length}`;
+    if (mapDirtyKey === persistedKey) return undefined;
+    const t = setTimeout(() => {
+      try { saveCampaignMap(activeCampaignId, useStore.getState().mapState); }
+      catch { /* autosave is best-effort; the manual Save action remains */ }
+    }, 3500);
+    return () => clearTimeout(t);
+  }, [mapDirtyKey, activeCampaignId, activeCampaign, saveCampaignMap]);
+
   // When a campaign is selected, only its settlements are draggable.
   // Layered: campaign membership first, then canon filter on top.
   const activeSaves = useMemo(() => {
