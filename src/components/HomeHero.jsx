@@ -38,7 +38,7 @@ import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } f
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
 // six-tier ladder. Order matters — the picker renders left-to-right.
 const ANON_SIZES = ['hamlet', 'village', 'town'];
-const ALL_SIZES  = ['thorp', 'hamlet', 'village', 'town', 'city', 'capital'];
+const ALL_SIZES  = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 
 function SizeButton({ value, label, hint, active, onClick, compact = false }) {
   return (

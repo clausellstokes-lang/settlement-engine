@@ -1090,26 +1090,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         />
       )}
 
-      {/* Save current settlement */}
-      <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8, padding:'12px 14px' }}>
-        <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:INK, marginBottom:8 }}>Saved Settlements</div>
-        {settlement && (
-          <div style={{ fontSize:FS.xs, color:MUTED, marginBottom:8, padding:'6px 10px', background:swatch['#F5EDE0'], borderRadius:5, border:`1px solid ${BORDER}`, display:'flex', alignItems:'center', gap:6 }}>
-            <span style={{color:SECOND}}>Current:</span>
-            <span style={{fontWeight:700,color:INK}}>{settlement.name}</span>
-            <span style={{color:MUTED}}>·</span>
-            <span style={{color:SECOND}}>{settlement.tier}</span>
-            {settlement.economicState?.prosperityLevel && <><span style={{color:MUTED}}>·</span><span style={{color:SECOND}}>{settlement.economicState.prosperityLevel}</span></>}
-          </div>
-        )}
-        <div style={{ display:'flex', gap:8, alignItems:'center', flexWrap:'wrap' }}>
-          <button onClick={saveCurrentSettlement} disabled={!settlement||isDuplicate||!canSave||activeSlotsUsed>=(maxSaves||30)} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:(!settlement||isDuplicate||!canSave||activeSlotsUsed>=(maxSaves||30))?'#ccc':GOLD, color:swatch.white, border:'none', borderRadius:5, cursor:(!settlement||isDuplicate||!canSave||activeSlotsUsed>=(maxSaves||30))?'not-allowed':'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans }}>
-            <Save size={13}/> {saved?'Saved!':!canSave?'Sign In to Save':isDuplicate?'Already Saved':activeSlotsUsed>=(maxSaves||30)?'Slots Full':'Save Current Settlement'}
-          </button>
-          <span style={{ fontSize:FS.xs, color:MUTED }}>{activeSlotsUsed}/{maxSaves||30} active slots used{inactiveRetained ? ` · ${inactiveRetained} inactive retained` : ''}</span>
-          {reactivationError && <span style={{ fontSize:FS.xs, color:swatch.danger }}>{reactivationError}</span>}
-        </div>
-      </div>
+      {/* The old "Saved Settlements / Save Current Settlement / N of ∞ slots"
+          block was removed here — saving a fresh draft lives in the generate
+          flow (SaveToLibraryButton on the dossier), and the Settlements tab is
+          just the library list now. */}
 
       {/* New campaign button */}
       {canManageCampaigns && (

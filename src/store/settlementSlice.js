@@ -974,19 +974,50 @@ export const createSettlementSlice = (set, get) => ({
    * event log to an empty timeline starting now and stamps the
    * canonizedAt provenance timestamp.
    */
-  canonize: () => set(state => {
-    state.phase = 'canon';
-    state.eventLog = [];
-    state.canonizedAt = new Date().toISOString();
-  }),
+  canonize: () => {
+    set(state => {
+      state.phase = 'canon';
+      state.eventLog = [];
+      state.canonizedAt = new Date().toISOString();
+    });
+    // Persist so canon sticks across reload and the library reflects it.
+    get().persistActiveSaveLifecycle?.();
+  },
 
   /** Drop back to draft. Useful if the DM wants to keep tinkering before
    *  the campaign actually starts. Discards any prior event log. */
-  uncanonize: () => set(state => {
-    state.phase = 'draft';
-    state.eventLog = [];
-    state.canonizedAt = null;
-  }),
+  uncanonize: () => {
+    set(state => {
+      state.phase = 'draft';
+      state.eventLog = [];
+      state.canonizedAt = null;
+    });
+    get().persistActiveSaveLifecycle?.();
+  },
+
+  /**
+   * Persist the live lifecycle (phase / eventLog / canonizedAt) + settlement
+   * to the active save, so deliberate lifecycle changes (canonize, uncanonize)
+   * survive reload and the library reflects them. Mirrors applyEvent's persist.
+   */
+  persistActiveSaveLifecycle: () => {
+    const s = get();
+    const activeSaveId = s.activeSaveId;
+    if (!activeSaveId || !s.settlement) return;
+    const campaignState = pickleCampaignState(s);
+    const savePartial = {
+      settlement: cloneJson(s.settlement),
+      campaignState,
+      timestamp: new Date().toISOString(),
+    };
+    if (typeof s.updateSavedSettlement === 'function') {
+      s.updateSavedSettlement(activeSaveId, savePartial);
+    }
+    persistSaveUpdate(activeSaveId, {
+      settlement: savePartial.settlement,
+      campaignState: savePartial.campaignState,
+    });
+  },
 
   /** Stamp lastExportAt — called by export flows. Drives the
    *  ProvenanceBlock display. */

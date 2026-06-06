@@ -132,7 +132,7 @@ function collectRecentEvents(saveEntry, settlement) {
     .reverse();
 }
 
-export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false }) {
+export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false }) {
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
@@ -517,8 +517,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // dossier itself is the default landing surface and the simulation
     // metadata is one tap away rather than top-of-page chrome.
     React.createElement('div', { style: { background: 'rgba(255,251,245,0.96)', border: '1px solid #c8b89a', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' } },
-      // Header
-      React.createElement('div', { style: { padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' } },
+      // Header — suppressed via hideHeader in the embedded generate-flow view,
+      // where the wizard's own sticky toolbar already shows name/tier/pop, so
+      // the two dark identity bars collapse into one.
+      hideHeader ? null : React.createElement('div', { style: { padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' } },
         React.createElement('div', { style: { flex: 1, minWidth: 0 } },
           React.createElement('div', { style: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 } },
             (!readOnly && queueEdit) ? React.createElement(EditableInline, {

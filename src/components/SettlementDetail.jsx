@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, lazy, Suspense, Component } from 'react';
-import {Link2, ChevronLeft, X, FileText, RotateCcw, Loader2, Edit3, Lock} from 'lucide-react';
+import {Link2, ChevronLeft, X, FileText, RotateCcw, Loader2, Edit3, Lock, Sparkles} from 'lucide-react';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
 // section components. Import lazily on user click so opening a settlement
 // detail view doesn't pay for export machinery up front.
@@ -528,11 +528,9 @@ export default function SettlementDetail({
               ? <><Lock size={12}/> Edit (Premium)</>
               : (editMode ? <><Edit3 size={12}/> Stop Editing</> : <><Edit3 size={12}/> Edit Dossier</>)}
           </button>
-          {editMode && (<>
           <button onClick={()=>setLinking(v=>!v)} style={{display:'flex',alignItems:'center',gap:5,background:linking?'#2a3a7a':CARD,color:linking?'#fff':'#2a3a7a',border:'1px solid #2a3a7a',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:FS.sm,fontWeight:700,fontFamily:sans}}>
             <Link2 size={13}/> {linking?'Cancel':'Link Neighbour'}
           </button>
-          </>)}
           <button
             disabled={exporting}
             onClick={() => setExportSheetOpen(true)}
@@ -549,6 +547,14 @@ export default function SettlementDetail({
             {exporting
               ? <><Loader2 size={12} style={{animation:'spin 1s linear infinite'}}/> Building PDF…</>
               : <><FileText size={12}/> Export Dossier</>}
+          </button>
+          <button
+            onClick={() => { if (saveId) requestNarrative(saveId); }}
+            disabled={!saveId}
+            title="Polish this draft with AI. Costs credits; streams section by section, and your raw draft is preserved."
+            style={{display:'flex',alignItems:'center',gap:5,background:'rgba(90,42,138,0.15)',color:swatch.ai,border:'1px solid rgba(160,100,220,0.45)',borderRadius:5,padding:'5px 12px',cursor:saveId?'pointer':'not-allowed',fontSize:FS.sm,fontWeight:700,fontFamily:sans,opacity:saveId?1:0.6}}
+          >
+            <Sparkles size={13}/> Polish with AI
           </button>
         </div>
       </div>

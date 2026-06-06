@@ -100,15 +100,6 @@ export default function PipelineReveal({ onComplete }) {
     return () => clearInterval(id);
   }, [steps.length, onComplete]);
 
-  // Esc dismisses (power-user fast-path)
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape') onComplete?.();
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onComplete]);
-
   if (!steps.length) return null;
 
   return (
@@ -116,7 +107,7 @@ export default function PipelineReveal({ onComplete }) {
       role="status"
       aria-live="polite"
       style={{
-        position: 'fixed', inset: 0, zIndex: 9000,
+        position: 'fixed', inset: 0, zIndex: 99999,
         background: INK_DEEP,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontFamily: sans, color: swatch['#C8B098'],
@@ -165,12 +156,6 @@ export default function PipelineReveal({ onComplete }) {
             width: `${Math.min(100, ((activeIndex + 1) / steps.length) * 100)}%`,
             background: GOLD, transition: 'width 0.3s',
           }} />
-        </div>
-        <div style={{
-          marginTop: SP.md, fontSize: FS.xs, color: swatch['#7A6440'],
-          letterSpacing: '0.08em',
-        }}>
-          Press Esc to skip
         </div>
       </div>
     </div>

@@ -94,7 +94,7 @@ export const en = Object.freeze({
       village: 'Village',
       town:    'Town',
       city:    'City',
-      capital: 'Capital',
+      metropolis: 'Metropolis',
     },
     sizeHint: {
       thorp:   'A few households at a crossroads. Barely a dot on the map.',
@@ -102,7 +102,7 @@ export const en = Object.freeze({
       village: 'A market square, a temple, a militia of farmers.',
       town:    'A real economy. Guilds. A jail.',
       city:    'Politics. Districts. Things that go wrong at scale.',
-      capital: 'The seat of something larger than itself.',
+      metropolis: 'The seat of something larger than itself.',
     },
   },
 

@@ -27,6 +27,7 @@ import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { backgroundImageUrl, MODE_BACKGROUNDS } from '../config/pageBackgrounds.js';
+import { ConfirmDialog } from './primitives/Dialog.jsx';
 import HomeHero from './HomeHero.jsx';
 // P128 / H-2 — Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
@@ -312,6 +313,7 @@ function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
 export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Store state
   const settlement    = useStore(s => s.settlement);
+  const activeSaveId  = useStore(s => s.activeSaveId);
   const config        = useStore(s => s.config);
   const wizardStep    = useStore(s => s.wizardStep);
   const wizardMode    = useStore(s => s.wizardMode);
@@ -340,6 +342,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
   const [generateError, setGenerateError] = useState(null);
+  const [pendingExit, setPendingExit] = useState(null); // 'back' | 'new' — RNG unsaved-exit confirm
 
   // Sync showOutput when a new settlement is generated (handles Workshop's own generate button)
   const prevSettlementRef = useRef(null);
@@ -387,17 +390,34 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     }
   }, [generate, clearLoadedFromSave, authTier, onSignIn]);
 
-  /** Navigate back to the wizard, keeping the settlement in memory */
-  const handleBack = useCallback(() => {
-    setShowOutput(false);
-  }, []);
-
-  /** Start fresh — clear the settlement and return to wizard */
-  const handleNewSettlement = useCallback(() => {
+  /**
+   * Exit the generated dossier. `back` returns to the config you generated
+   * from (choices persist in the store; the RNG draft is dropped). `new` goes
+   * all the way to the Create landing (mode picker + instant generation). The
+   * draft is randomized, so a generated-but-unsaved settlement is gated behind
+   * a confirm first — the exact rolled result won't come back.
+   */
+  const doExit = useCallback((kind) => {
+    setPendingExit(null);
     if (clearSettlement) clearSettlement();
     setShowOutput(false);
-    setWizardStep(0);
-  }, [clearSettlement, setWizardStep]);
+    if (kind === 'new') {
+      setWizardMode(null);   // → Create landing: mode picker + instant generation
+      setWizardStep(0);
+    }
+  }, [clearSettlement, setWizardMode, setWizardStep]);
+
+  const requestExit = useCallback((kind) => {
+    // Unsaved + generated → warn before discarding the random draft.
+    if (settlement && !activeSaveId) { setPendingExit(kind); return; }
+    doExit(kind);
+  }, [settlement, activeSaveId, doExit]);
+
+  /** Back — one step, to the config you generated from (choices intact). */
+  const handleBack = useCallback(() => requestExit('back'), [requestExit]);
+
+  /** New — start fresh from the Create landing. */
+  const handleNewSettlement = useCallback(() => requestExit('new'), [requestExit]);
 
   // Onboarding coach step tracking
   const onboardingActive = useStore(s => s.onboardingActive);
@@ -891,7 +911,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
                 toolbar above stays full-width. */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
-              <OutputContainer />
+              <OutputContainer hideHeader />
             </div>
           </Suspense>
 
@@ -911,6 +931,16 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               on the flag; guidance only, so it never competes with the
               canonical Save / Export / New controls above. */}
           <WizardNextSteps />
+
+          <ConfirmDialog
+            open={!!pendingExit}
+            tone="warning"
+            title="Leave this settlement?"
+            body="This settlement hasn't been saved yet. It's randomly generated, so the exact result won't come back, though your configuration is kept so you can regenerate."
+            confirmLabel={pendingExit === 'new' ? 'Discard and start new' : 'Discard and go back'}
+            onConfirm={() => doExit(pendingExit)}
+            onCancel={() => setPendingExit(null)}
+          />
         </>
       )}
 
