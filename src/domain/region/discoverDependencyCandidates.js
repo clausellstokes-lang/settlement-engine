@@ -9,7 +9,7 @@
 import { deriveRegionalState } from './deriveRegionalState.js';
 import { addRegionalChannels, deriveRegionalGraphFromSaves, normalizeChannel } from './graph.js';
 import { goodCriticality, goodsIntersect } from './goodsCatalog.js';
-import { TIER_ORDER } from '../../data/constants.js';
+import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
 
 const TRADE_FRIENDLY_RELATIONSHIPS = new Set([
   'trade_partner',
@@ -32,6 +32,18 @@ function relationBetween(sourceSave, targetSave) {
     || (targetName && (n.neighbourName === targetName || n.name === targetName))
   );
   return link?.relationshipType || link?.type || null;
+}
+
+function linkBetween(sourceSave, targetSave) {
+  const links = sourceSave?.settlement?.neighbourNetwork
+    || sourceSave?.neighbourNetwork
+    || [];
+  const targetId = targetSave?.id || targetSave?.settlement?.id;
+  const targetName = targetSave?.name || targetSave?.settlement?.name;
+  return links.find(n =>
+    (targetId && String(n.id || n.targetId) === String(targetId))
+    || (targetName && (n.neighbourName === targetName || n.name === targetName))
+  ) || null;
 }
 
 function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence = 0.6, explanation }) {
@@ -114,52 +126,21 @@ function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confi
   addTwoWay(out, 'information_flow', overlord, vassal, rel, 0.43, 0.6);
 }
 
-function tierRank(tier) {
-  const idx = TIER_ORDER.indexOf(String(tier || '').toLowerCase());
-  return idx >= 0 ? idx : 0;
-}
-
-function hierarchyScore(state) {
-  const scores = state?.causal?.scores || {};
-  const structural = [
-    scores.economic_output,
-    scores.defense_readiness,
-    scores.public_legitimacy,
-  ].filter(Number.isFinite);
-  const structuralScore = structural.length
-    ? structural.reduce((sum, value) => sum + value, 0) / structural.length / 100
-    : 0.45;
-  const populationScore = Math.min(1, Math.log10(Math.max(1, Number(state?.population) || 1)) / 6);
-  return tierRank(state?.tier) + structuralScore * 0.35 + populationScore * 0.2;
-}
-
-function inferVassalageDirection(from, to) {
-  const fromScore = hierarchyScore(from);
-  const toScore = hierarchyScore(to);
-  if (toScore > fromScore + 0.18) return { overlord: to, vassal: from };
-  return { overlord: from, vassal: to };
-}
-
 function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
   const out = [];
   const sourceRel = relationBetween(sourceSave, targetSave);
   const targetRel = relationBetween(targetSave, sourceSave);
-
-  for (const [rel, from, to] of [
-    [sourceRel, source, target],
-    [targetRel, target, source],
-  ]) {
-    if (!rel) continue;
-    if (rel === 'patron') {
-      // neighbourNetwork is local/display-oriented: "patron" means the
-      // neighbour is this settlement's patron. Channels are stored canonically.
-      addPatronageChannels(out, to, from, rel, 0.62, 0.7);
-    } else if (rel === 'client') {
-      addPatronageChannels(out, to, from, rel, 0.55, 0.6);
-    } else if (rel === 'vassal') {
-      const { overlord, vassal } = inferVassalageDirection(from, to);
-      addVassalageChannels(out, overlord, vassal, rel);
-    }
+  const relationshipLink = linkBetween(sourceSave, targetSave)
+    || linkBetween(targetSave, sourceSave);
+  const canonical = canonicalEdgeForLink(relationshipLink, sourceSave, targetSave);
+  if (canonical?.relationshipType === 'patron') {
+    const patron = String(canonical.from) === String(source.id) ? source : target;
+    const client = patron === source ? target : source;
+    addPatronageChannels(out, patron, client, 'patron', 0.62, 0.7);
+  } else if (canonical?.relationshipType === 'vassal') {
+    const overlord = String(canonical.from) === String(source.id) ? source : target;
+    const vassal = overlord === source ? target : source;
+    addVassalageChannels(out, overlord, vassal, 'vassal');
   }
 
   const rel = sourceRel || targetRel;

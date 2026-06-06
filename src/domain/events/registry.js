@@ -43,7 +43,7 @@
  * Coarse institution classification by name pattern. Replaced by tag
  * lookup once the catalog migrates to structured tags.
  */
-function classifyInstitution(name) {
+export function classifyInstitution(name) {
   const n = String(name || '').toLowerCase();
   if (/granary|mill|silo|storage|warehouse/.test(n))           return 'food_storage';
   if (/temple|cathedral|shrine|monastery|church/.test(n))      return 'religious';
@@ -95,6 +95,7 @@ export const RERUN_KEYS_FOR_EVENT = {
   RESTORE_INSTITUTION:    ['institutions', 'services', 'economicState', 'narrative'],
   IMPAIR_FACTION:         ['powerStructure', 'narrative'],
   RESTORE_FACTION:        ['powerStructure', 'narrative'],
+  ADD_FACTION:            ['powerStructure', 'narrative'],
   // Wave 1 extended events.
   KILL_LEADER:            ['npcs', 'powerStructure', 'institutions', 'narrative'],
   EXPOSE_CORRUPTION:      ['powerStructure', 'institutions', 'economicState', 'narrative'],
@@ -337,6 +338,20 @@ export const EVENT_REGISTRY = {
     targetPrompt: 'Faction name',
     stateDeltas() { return { volatility: -5 }; },
     narrate(event) { return `${labelOf(event.targetId)} recovered.`; },
+  },
+
+  ADD_FACTION: {
+    label: 'Add faction',
+    description: 'A new faction forms or arrives: a guild, cult, syndicate, or noble bloc. A fresh contender for power and influence.',
+    requiresTarget: true,
+    targetPrompt: 'Faction name (e.g. "Dockworkers Guild", "Ashen Hand")',
+    stateDeltas() {
+      // A new organized power center adds friction until the balance settles.
+      return { volatility: 5 };
+    },
+    narrate(event) {
+      return `A new faction, ${labelOf(event.targetId)}, has formed.`;
+    },
   },
 
   // ── Wave 1: extended event surface ──────────────────────────────────────

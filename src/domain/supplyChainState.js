@@ -353,8 +353,7 @@ export function deriveSupplyChainState(chain, settlement) {
     dependency:             chain.dependency,
     // Phase 19: preserve processingInstitutions so the explanation
     // module can match institutions to the chains that use them as
-    // processors. The legacy generator emits this field; we just
-    // didn't carry it forward in the initial Phase 10 derivation.
+    // processors. Earlier derivation code did not carry it forward.
     processingInstitutions: Array.isArray(chain.processingInstitutions)
       ? [...chain.processingInstitutions]
       : [],

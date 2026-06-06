@@ -6,6 +6,7 @@ import {Link2, ChevronLeft, X, FileText, RotateCcw, Loader2, Edit3, Lock} from '
 const generateSettlementPDF = (...args) =>
   import('../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import {getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS} from '../lib/relationshipGraph.js';
+import { RELATIONSHIP_SELECTIONS } from '../domain/relationships/canonicalRelationship.js';
 import { useStore } from '../store/index.js';
 
 const OutputContainer = lazy(() => import('./OutputContainer'));
@@ -158,8 +159,6 @@ class DetailErrorBoundary extends Component {
   }
 }
 
-const REL_TYPES=['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
-
 function LinkNeighbourCard({currentSave, allSaves, onLink}){
   const[selected,setSelected]=useState(null);
   const[relType,setRelType]=useState('neutral');
@@ -186,7 +185,9 @@ function LinkNeighbourCard({currentSave, allSaves, onLink}){
       <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
         <span style={{fontSize:FS.xs,color:SECOND}}>Relationship:</span>
         <select value={relType} onChange={e=>setRelType(e.target.value)} style={{fontSize:FS.xs,padding:'2px 6px',borderRadius:4,border:`1px solid ${BORDER}`,background:CARD,color:INK,fontFamily:sans,cursor:'pointer'}}>
-          {REL_TYPES.map(r=><option key={r} value={r}>{r.replace(/_/g,' ')}</option>)}
+          {RELATIONSHIP_SELECTIONS.map(option => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
         </select>
       </div>
       <div style={{display:'flex',gap:8}}>
@@ -419,6 +420,37 @@ export default function SettlementDetail({
       };
     });
   };
+
+  const handlePdfExport = async (variant) => {
+    if (exporting) return;
+    setPdfError(null);
+    setExporting(true);
+    try {
+      const liveStore = useStore.getState();
+      await generateSettlementPDF(detail.settlement, {
+        aiSettlement, aiDailyLife, narrativeMode: narrated,
+        systemState: liveStore.systemState,
+        eventLog: liveStore.eventLog,
+        phase: liveStore.phase,
+        variant,
+        isFounder: liveStore.isFounder?.() ?? false,
+      });
+      liveStore.markExported?.();
+      if (liveStore.phase === 'canon' && variant !== 'draft_brief') {
+        triggerPricingMoment('first_canon_export', () => {
+          liveStore.setPurchaseModalOpen?.(true);
+        }, { tier: liveStore.auth?.tier });
+      }
+      setExportSheetOpen(false);
+    } catch (err) {
+      console.error('[PDF export] failed:', err);
+      const msg = err?.message || String(err) || 'unknown error';
+      setPdfError(`PDF export failed: ${msg}`);
+    } finally {
+      setExporting(false);
+    }
+  };
+
     return<div>
       {/* Local keyframe so the export-button spinner animates even when
           OutputContainer (which also defines @keyframes spin) isn't mounted. */}
@@ -439,7 +471,7 @@ export default function SettlementDetail({
               ? 'This save has a narrative refinement or daily-life prose layer atop the simulated facts.'
               : 'This save has no narrative layer. The raw simulator output is shown.'}
           />
-          {narrated && (
+          {editMode && narrated && (
             <button
               onClick={handleRevertToRaw}
               title="Clear the narrative refinement and daily-life prose on this save, returning it to the raw simulator output. Chronicle history is preserved."
@@ -496,9 +528,11 @@ export default function SettlementDetail({
               ? <><Lock size={12}/> Edit (Premium)</>
               : (editMode ? <><Edit3 size={12}/> Stop Editing</> : <><Edit3 size={12}/> Edit Dossier</>)}
           </button>
+          {editMode && (<>
           <button onClick={()=>setLinking(v=>!v)} style={{display:'flex',alignItems:'center',gap:5,background:linking?'#2a3a7a':CARD,color:linking?'#fff':'#2a3a7a',border:'1px solid #2a3a7a',borderRadius:5,padding:'5px 12px',cursor:'pointer',fontSize:FS.sm,fontWeight:700,fontFamily:sans}}>
             <Link2 size={13}/> {linking?'Cancel':'Link Neighbour'}
           </button>
+          </>)}
           <button
             disabled={exporting}
             onClick={() => setExportSheetOpen(true)}
@@ -519,6 +553,12 @@ export default function SettlementDetail({
         </div>
       </div>
 
+      {/* Edit-mode chrome — hidden in the read-only View, revealed by "Edit
+          Dossier". State snapshot, AI polish, event composer, next-action rail,
+          provenance, settlement editor, name editing, neighbour links, network
+          effects, and the chronicle live behind this gate so View opens to a
+          clean dossier. */}
+      {editMode && (<>
       <div style={{display:'flex',gap:8,marginBottom:12,alignItems:'center',flexWrap:'wrap'}}>
         <button onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}} style={{padding:'7px 14px',background:swatch.info,color:swatch.white,border:'none',borderRadius:5,cursor:'pointer',fontFamily:sans,fontSize:FS.xs,fontWeight:700}}>
           ↩ Apply Saved Configuration &amp; Regenerate
@@ -609,38 +649,7 @@ export default function SettlementDetail({
         open={exportSheetOpen}
         exporting={exporting}
         onClose={() => setExportSheetOpen(false)}
-        onExport={async (variant) => {
-          if (exporting) return;
-          setPdfError(null);
-          setExporting(true);
-          try {
-            const liveStore = useStore.getState();
-            await generateSettlementPDF(detail.settlement, {
-              aiSettlement, aiDailyLife, narrativeMode: narrated,
-              systemState: liveStore.systemState,
-              eventLog:    liveStore.eventLog,
-              phase:       liveStore.phase,
-              variant,
-              isFounder:   liveStore.isFounder?.() ?? false,
-            });
-            // Stamp the provenance timestamp + tick the onboarding step.
-            liveStore.markExported?.();
-            // Pricing moment: only on the first canon-tier export, since
-            // that's the value moment that earns the upgrade pitch.
-            if (liveStore.phase === 'canon' && variant !== 'draft_brief') {
-              triggerPricingMoment('first_canon_export', () => {
-                liveStore.setPurchaseModalOpen?.(true);
-              }, { tier: liveStore.auth?.tier });
-            }
-            setExportSheetOpen(false);
-          } catch (err) {
-            console.error('[PDF export] failed:', err);
-            const msg = err?.message || String(err) || 'unknown error';
-            setPdfError(`PDF export failed: ${msg}`);
-          } finally {
-            setExporting(false);
-          }
-        }}
+        onExport={handlePdfExport}
       />
       {pdfError && (
         <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
@@ -656,7 +665,7 @@ export default function SettlementDetail({
         </div>
         {network.map((n,i)=>{
           const c=REL_COLORS[n.relationshipType]||SECOND;
-          const rel=(n.relationshipType||'linked').replace(/_/g,' ');
+          const rel=(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ');
           return<div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'4px 0',borderBottom:'1px solid #dde4f8'}}>
             <div style={{width:6,height:6,borderRadius:'50%',background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
@@ -799,6 +808,33 @@ export default function SettlementDetail({
       {/* ── Chronicle: collapsible history log, only surfaced when a save has entries ── */}
       {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (
         <ChroniclePanel entries={chronicleEntries} />
+      )}
+      </>)}
+
+      {!editMode && (
+        <>
+          <ExportSheet
+            open={exportSheetOpen}
+            exporting={exporting}
+            onClose={() => setExportSheetOpen(false)}
+            onExport={handlePdfExport}
+          />
+          {pdfError && (
+            <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
+              {pdfError}
+            </div>
+          )}
+          <SystemStateBar />
+          <div style={{ marginBottom:12 }}>
+            <ProvenanceBlock save={detail.saveData || detail} />
+          </div>
+          {detail?.saveData?.id && (
+            <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} />
+          )}
+          {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (
+            <ChroniclePanel entries={chronicleEntries} />
+          )}
+        </>
       )}
 
       {detail.settlement&&<div style={{marginBottom:12}}>

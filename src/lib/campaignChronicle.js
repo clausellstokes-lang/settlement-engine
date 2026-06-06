@@ -10,8 +10,6 @@
 import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
 import { supabase, isConfigured } from './supabase.js';
 
-const CHRONICLE_URL = import.meta.env.VITE_GENERATE_CHRONICLE_URL;
-
 /**
  * Request a prose chronicle for a campaign tick.
  * @param {Object} args
@@ -28,9 +26,7 @@ export async function requestCampaignChronicle({ campaign, snapshot, tick = null
     tick,
   });
 
-  if (!isConfigured || !CHRONICLE_URL) {
-    // No backend wired — return the grounding so a caller can preview or the
-    // UI can show a "configure VITE_GENERATE_CHRONICLE_URL" hint.
+  if (!isConfigured) {
     return { error: 'chronicle endpoint not configured', grounding };
   }
 
@@ -38,20 +34,15 @@ export async function requestCampaignChronicle({ campaign, snapshot, tick = null
   const token = data?.session?.access_token;
   if (!token) return { error: 'Sign in to generate a chronicle', grounding };
 
-  let resp;
   try {
-    resp = await fetch(CHRONICLE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ grounding }),
+    const { data: body, error } = await supabase.functions.invoke('generate-chronicle', {
+      body: { grounding },
     });
+    if (error) return { error: error.message || 'Chronicle failed', grounding };
+    return { chronicle: body?.chronicle, creditsRemaining: body?.creditsRemaining, grounding };
   } catch (e) {
     return { error: `Network error: ${e?.message || e}`, grounding };
   }
-
-  const body = await resp.json().catch(() => ({}));
-  if (!resp.ok) return { error: body.error || `Chronicle failed (${resp.status})`, grounding };
-  return { chronicle: body.chronicle, creditsRemaining: body.creditsRemaining, grounding };
 }
 
 export { buildChronicleGrounding };

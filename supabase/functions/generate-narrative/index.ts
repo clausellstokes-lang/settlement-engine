@@ -14,7 +14,7 @@
  * Field targets are chosen to match what the UI ACTUALLY RENDERS, not a
  * hypothetical schema. Sources:
  *   - src/components/new/tabs/*Tab.jsx  (render paths)
- *   - src/generators/generateSettlement.js  (generated fields)
+ *   - src/generators/generateSettlementPipeline.js  (generated fields)
  *
  * Daily life is a separate type: 5 parallel Opus calls (dawn → night).
  *

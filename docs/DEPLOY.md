@@ -97,17 +97,16 @@ npx supabase db push
 npx supabase db diff
 ```
 
-**The last migration in tree (`016_version_history.sql`)** adds the
-`version_history` jsonb column to `public.settlements`, giving the
-version-timeline feature (VersionsTab.jsx) a durable, owner-only home
-for per-settlement edit snapshots that survive page reload + device
-switch. It MUST be applied before the version history feature can
-persist anything. Test it ran:
+**The last migration in tree (`024_billing_retention_and_atomic_mutations.sql`)**
+adds replay-safe Stripe grants, campaign/map downgrade retention, the scheduled
+retention purge, Chronicle credit spending, and atomic linked-settlement writes.
+It must be applied before deploying the corresponding functions and client.
+Test its core schema ran:
 
 ```bash
 # Should return one row: version_history | jsonb
 npx supabase db remote sql --query \
-  "select column_name, data_type from information_schema.columns where table_schema = 'public' and table_name = 'settlements' and column_name = 'version_history';"
+  "select column_name, data_type from information_schema.columns where table_schema = 'public' and table_name = 'saved_maps' and column_name = 'access_state';"
 ```
 
 ## Edge function — manual
@@ -128,7 +127,9 @@ Deploy each function:
 ```bash
 npx supabase functions deploy stripe-webhook
 npx supabase functions deploy create-checkout
+npx supabase functions deploy verify-single-dossier --no-verify-jwt
 npx supabase functions deploy generate-narrative
+npx supabase functions deploy generate-chronicle
 npx supabase functions deploy admin-actions
 npx supabase functions deploy send-email
 ```
@@ -137,10 +138,10 @@ Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:
 
 ```
-ANTHROPIC_API_KEY            # for generate-narrative
+ANTHROPIC_API_KEY            # for generate-narrative + generate-chronicle
 RESEND_API_KEY               # for send-email (Resend provider key)
 RESEND_FROM_EMAIL            # for send-email (verified sender address)
-STRIPE_SECRET_KEY            # for stripe-webhook + create-checkout
+STRIPE_SECRET_KEY            # for webhook, checkout, and dossier verification
 STRIPE_WEBHOOK_SECRET        # for stripe-webhook signature verification
 STRIPE_PRICE_CREDITS_25      # per the PRICE_MAP in create-checkout
 STRIPE_PRICE_CREDITS_60
@@ -165,7 +166,8 @@ Webhooks → Add endpoint:
 
 ```
 URL:    https://<your-supabase-project>.supabase.co/functions/v1/stripe-webhook
-Events: checkout.session.completed, customer.subscription.deleted
+Events: checkout.session.completed, invoice.paid,
+        invoice.payment_succeeded, customer.subscription.deleted
 ```
 
 Copy the signing secret into `STRIPE_WEBHOOK_SECRET` (above).

@@ -4,7 +4,7 @@
  * Boosts chain-adjacent institutions after subsumption. Handles airship
  * overrides and re-runs subsumption on the expanded list.
  *
- * Extracted from generateSettlement.js lines 742–785.
+ * Cascade pass for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

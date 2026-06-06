@@ -138,8 +138,14 @@ info "Step 5: Deploying edge functions..."
 npx supabase functions deploy create-checkout --project-ref "$PROJECT_REF" --no-verify-jwt
 ok "Deployed: create-checkout"
 
+npx supabase functions deploy verify-single-dossier --project-ref "$PROJECT_REF" --no-verify-jwt
+ok "Deployed: verify-single-dossier"
+
 npx supabase functions deploy generate-narrative --project-ref "$PROJECT_REF"
 ok "Deployed: generate-narrative"
+
+npx supabase functions deploy generate-chronicle --project-ref "$PROJECT_REF"
+ok "Deployed: generate-chronicle"
 
 npx supabase functions deploy stripe-webhook --project-ref "$PROJECT_REF" --no-verify-jwt
 ok "Deployed: stripe-webhook"
@@ -198,6 +204,8 @@ WEBHOOK_RESULT=$(curl -s https://api.stripe.com/v1/webhook_endpoints \
   -u "$STRIPE_SK:" \
   -d "url=$WEBHOOK_URL" \
   -d "enabled_events[]=checkout.session.completed" \
+  -d "enabled_events[]=invoice.paid" \
+  -d "enabled_events[]=invoice.payment_succeeded" \
   -d "enabled_events[]=customer.subscription.deleted")
 
 WEBHOOK_SECRET=$(echo "$WEBHOOK_RESULT" | grep -o '"secret": *"whsec_[^"]*"' | head -1 | cut -d'"' -f4)
@@ -259,7 +267,7 @@ echo "════════════════════════�
 echo ""
 echo "  Supabase URL:    $SUPABASE_URL"
 echo "  Project ref:     $PROJECT_REF"
-echo "  Edge functions:  3 deployed"
+echo "  Edge functions:  5 deployed"
 echo "  Stripe products: 3 created"
 echo "  Webhook:         $WEBHOOK_URL"
 echo ""

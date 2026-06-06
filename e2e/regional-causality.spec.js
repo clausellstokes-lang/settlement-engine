@@ -197,10 +197,11 @@ test.describe('regional causality campaign UI', () => {
         sessionStorage.clear();
         localStorage.setItem('dnd_settlement_saves', JSON.stringify(saves));
         localStorage.setItem('sf_campaigns', JSON.stringify(campaigns));
+        localStorage.setItem('sf_campaigns:mock-e2e', JSON.stringify(campaigns));
         localStorage.setItem('settlement_mock_auth', JSON.stringify({
           user: { id: 'mock-e2e', email: 'dm@example.test', user_metadata: {} },
           session: { access_token: 'mock-token' },
-          tier: 'free',
+          tier: 'premium',
           role: 'user',
           displayName: 'DM',
           isFounder: false,
@@ -249,19 +250,12 @@ test.describe('regional causality campaign UI', () => {
   test('world map campaign workspace can switch to Wizard News', async ({ page }) => {
     await page.goto('/map');
 
-    await page.waitForFunction(() => window.__store?.getState);
-    await page.evaluate(() => {
-      const state = window.__store.getState();
-      state.setAuth?.(
-        { id: 'mock-e2e', email: 'dm@example.test', user_metadata: {} },
-        { access_token: 'mock-token' },
-        'free',
-        'user',
-        'DM',
-        false,
-      );
-      state.setActiveCampaign?.('camp-regional');
+    const campaignSelect = page.locator('select').filter({
+      has: page.locator('option', { hasText: 'Trade Belt' }),
     });
+    await expect(campaignSelect).toBeVisible();
+    const campaignValue = await campaignSelect.locator('option', { hasText: 'Trade Belt' }).getAttribute('value');
+    await campaignSelect.selectOption(campaignValue);
 
     await page.getByTitle('Show Wizard News').click();
 

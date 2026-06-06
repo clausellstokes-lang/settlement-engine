@@ -59,7 +59,7 @@ import {
 import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { saves as savesService } from '../lib/saves.js';
-import { campaigns as campaignService } from '../lib/campaigns.js';
+import { campaigns as campaignService, isCampaignActive } from '../lib/campaigns.js';
 import {
   forgetCampaignSync,
   mergeCampaignLists,
@@ -223,11 +223,17 @@ function migrateCampaign(camp) {
   if (next.regionalGraph) next.regionalGraph = ensureRegionalGraph(next.regionalGraph);
   next.wizardNews = ensureWizardNewsFeed(next.wizardNews);
   next.worldState = ensureWorldState(next.worldState, next);
+  next.accessState = next.accessState || 'active';
   return next;
 }
 
+function findActiveCampaign(campaigns, campaignId) {
+  const campaign = campaigns.find(item => item.id === campaignId);
+  return isCampaignActive(campaign) ? campaign : null;
+}
+
 function campaignSettlements(state, campaignId) {
-  const c = state.campaigns.find(campaign => campaign.id === campaignId);
+  const c = findActiveCampaign(state.campaigns, campaignId);
   if (!c) return [];
   const ids = new Set(c.settlementIds || []);
   return (state.savedSettlements || []).filter(save => ids.has(save.id));
@@ -387,6 +393,10 @@ export const createCampaignSlice = (set, get) => ({
     }),
 
   createCampaign: (name) => {
+    const current = get();
+    const role = current.auth?.role;
+    const canCreate = current.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
+    if (!canCreate) return null;
     const id = newCampaignId();
     set(state => {
       const campaign = {
@@ -400,6 +410,7 @@ export const createCampaignSlice = (set, get) => ({
         wizardNews: ensureWizardNewsFeed(),
         worldState: ensureWorldState(null, { id, name }),
         collapsed: false,
+        accessState: 'active',
       };
       state.campaigns.unshift(campaign);
       persistCampaignState(state, id);
@@ -409,16 +420,17 @@ export const createCampaignSlice = (set, get) => ({
 
   renameCampaign: (id, name) =>
     set(state => {
-      const c = state.campaigns.find(c => c.id === id);
-      if (c) {
-        c.name = String(name || '').trim() || c.name;
-        c.updatedAt = new Date().toISOString();
-      }
+      const c = findActiveCampaign(state.campaigns, id);
+      if (!c) return;
+      c.name = String(name || '').trim() || c.name;
+      c.updatedAt = new Date().toISOString();
       persistCampaignState(state, id);
     }),
 
   deleteCampaign: (id) =>
     set(state => {
+      const campaign = findActiveCampaign(state.campaigns, id);
+      if (!campaign) return;
       state.campaigns = state.campaigns.filter(c => c.id !== id);
       if (state.activeCampaignId === id) state.activeCampaignId = null;
       deletePersistedCampaignState(state, id);
@@ -426,16 +438,20 @@ export const createCampaignSlice = (set, get) => ({
 
   toggleCampaignCollapsed: (id) =>
     set(state => {
-      const c = state.campaigns.find(c => c.id === id);
-      if (c) c.collapsed = !c.collapsed;
+      const c = findActiveCampaign(state.campaigns, id);
+      if (!c) return;
+      c.collapsed = !c.collapsed;
       persistCampaignState(state, id);
     }),
 
   addToCampaign: (campaignId, settlementId) =>
     set(state => {
+      const target = findActiveCampaign(state.campaigns, campaignId);
+      if (!target) return;
       const now = new Date().toISOString();
       const changedIds = new Set();
       for (const c of state.campaigns) {
+        if (!isCampaignActive(c)) continue;
         const before = c.settlementIds || [];
         const next = before.filter(id => id !== settlementId);
         if (next.length !== before.length) {
@@ -444,23 +460,19 @@ export const createCampaignSlice = (set, get) => ({
           changedIds.add(c.id);
         }
       }
-      const target = state.campaigns.find(c => c.id === campaignId);
-      if (target) {
-        target.settlementIds = Array.isArray(target.settlementIds) ? target.settlementIds : [];
-        if (!target.settlementIds.includes(settlementId)) target.settlementIds.push(settlementId);
-        target.updatedAt = now;
-        changedIds.add(target.id);
-      }
+      target.settlementIds = Array.isArray(target.settlementIds) ? target.settlementIds : [];
+      if (!target.settlementIds.includes(settlementId)) target.settlementIds.push(settlementId);
+      target.updatedAt = now;
+      changedIds.add(target.id);
       persistCampaignState(state, Array.from(changedIds));
     }),
 
   removeFromCampaign: (campaignId, settlementId) =>
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
-      if (c) {
-        c.settlementIds = c.settlementIds.filter(id => id !== settlementId);
-        c.updatedAt = new Date().toISOString();
-      }
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      c.settlementIds = c.settlementIds.filter(id => id !== settlementId);
+      c.updatedAt = new Date().toISOString();
       persistCampaignState(state, campaignId);
     }),
 
@@ -471,7 +483,7 @@ export const createCampaignSlice = (set, get) => ({
    */
   saveCampaignMap: (campaignId, mapStateOverride) =>
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       // Pull a deep-cloneable copy of mapState. Override wins if provided.
       const source = mapStateOverride || state.mapState;
@@ -494,11 +506,10 @@ export const createCampaignSlice = (set, get) => ({
 
   clearCampaignMap: (campaignId) =>
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
-      if (c) {
-        c.mapState = null;
-        c.updatedAt = new Date().toISOString();
-      }
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      c.mapState = null;
+      c.updatedAt = new Date().toISOString();
       persistCampaignState(state, campaignId);
     }),
 
@@ -506,7 +517,7 @@ export const createCampaignSlice = (set, get) => ({
   ensureCampaignRegionalGraph: (campaignId) => {
     let graph = null;
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       c.regionalGraph = ensureRegionalGraph(c.regionalGraph);
       ensureCampaignWizardNews(c);
@@ -525,7 +536,7 @@ export const createCampaignSlice = (set, get) => ({
     const { discover = true } = options;
     let graph = null;
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const saves = campaignSettlements(state, campaignId);
       c.regionalGraph = discover
@@ -546,7 +557,7 @@ export const createCampaignSlice = (set, get) => ({
   setRegionalChannelStatus: (campaignId, channelId, status) => {
     let graph = null;
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       c.regionalGraph = domainSetRegionalChannelStatus(c.regionalGraph, channelId, status);
       ensureCampaignWizardNews(c);
@@ -560,7 +571,7 @@ export const createCampaignSlice = (set, get) => ({
   setRegionalChannelVisibility: (campaignId, channelId, visibility) => {
     let graph = null;
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       c.regionalGraph = domainSetRegionalChannelVisibility(c.regionalGraph, channelId, visibility);
       ensureCampaignWizardNews(c);
@@ -574,7 +585,7 @@ export const createCampaignSlice = (set, get) => ({
   setCampaignRegionalGraph: (campaignId, regionalGraph) => {
     let graph = null;
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
       c.regionalGraph = ensureRegionalGraph(regionalGraph);
@@ -589,7 +600,7 @@ export const createCampaignSlice = (set, get) => ({
   queueCampaignRegionalImpacts: (campaignId, impacts = []) => {
     let graph = null;
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
       c.regionalGraph = queueRegionalImpacts(beforeGraph, impacts);
@@ -604,7 +615,7 @@ export const createCampaignSlice = (set, get) => ({
   setRegionalImpactStatus: (campaignId, impactId, status, patch = {}) => {
     let graph = null;
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
       c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, status, patch);
@@ -623,7 +634,7 @@ export const createCampaignSlice = (set, get) => ({
   advanceCampaignRegionalImpacts: (campaignId, ticks = 1, options = {}) => {
     let graph = null;
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
       c.wizardNews = advanceWizardNewsFeed(c.wizardNews, ticks);
@@ -643,7 +654,7 @@ export const createCampaignSlice = (set, get) => ({
 
   previewCampaignWorldPulse: (campaignId, interval = 'one_month', options = {}) => {
     const state = get();
-    const campaign = state.campaigns.find(c => c.id === campaignId);
+    const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return null;
     const previewCampaign = cloneJson(campaign);
     if (options.simulationRules) {
@@ -664,7 +675,7 @@ export const createCampaignSlice = (set, get) => ({
     let campaignPersist = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       c.worldState = canonizeWorldState(c.worldState, now, c);
       c.updatedAt = now;
@@ -680,7 +691,7 @@ export const createCampaignSlice = (set, get) => ({
     let campaignPersist = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const worldState = ensureWorldState(c.worldState, c);
       c.worldState = {
@@ -705,7 +716,7 @@ export const createCampaignSlice = (set, get) => ({
     let campaignPersist = /** @type {any} */ (null);
     const now = options.now || new Date().toISOString();
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const worldState = ensureWorldState(c.worldState, c);
       if (!worldState.canonizedAt) {
@@ -736,7 +747,7 @@ export const createCampaignSlice = (set, get) => ({
     let campaignPersist = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       result = domainApplyWorldPulseProposal({
         campaign: cloneJson(c),
@@ -766,7 +777,7 @@ export const createCampaignSlice = (set, get) => ({
     let campaignPersist = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       result = domainApplyPartyImpact({
         campaign: cloneJson(c),
@@ -790,7 +801,7 @@ export const createCampaignSlice = (set, get) => ({
     let proposal = /** @type {any} */ (null);
     let campaignPersist = /** @type {any} */ (null);
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const now = new Date().toISOString();
       c.worldState = domainUpdateWorldPulseProposalStatus(
@@ -810,7 +821,7 @@ export const createCampaignSlice = (set, get) => ({
   applyQueuedRegionalImpact: (campaignId, impactId) => {
     let result = /** @type {any} */ (null);
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const graph = ensureRegionalGraph(c.regionalGraph);
       const impact = graph.queuedImpacts.find(i => i.id === impactId);
@@ -875,7 +886,7 @@ export const createCampaignSlice = (set, get) => ({
   resolveRegionalImpact: (campaignId, impactId) => {
     let result = /** @type {any} */ (null);
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const graph = ensureRegionalGraph(c.regionalGraph);
       const impact = graph.queuedImpacts.find(i => i.id === impactId);
@@ -958,54 +969,73 @@ export const createCampaignSlice = (set, get) => ({
   },
 
   getCampaignRegionalGraph: (campaignId) => {
-    const c = get().campaigns.find(c => c.id === campaignId);
+    const c = findActiveCampaign(get().campaigns, campaignId);
     return ensureRegionalGraph(c?.regionalGraph);
   },
 
   getCampaignWizardNews: (campaignId) => {
-    const c = get().campaigns.find(c => c.id === campaignId);
+    const c = findActiveCampaign(get().campaigns, campaignId);
     return ensureWizardNewsFeed(c?.wizardNews);
   },
 
   getCampaignWorldState: (campaignId) => {
-    const c = get().campaigns.find(c => c.id === campaignId);
+    const c = findActiveCampaign(get().campaigns, campaignId);
     return ensureWorldState(c?.worldState, c);
   },
 
   clearCampaignWizardNews: (campaignId) =>
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
+      const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       c.wizardNews = ensureWizardNewsFeed();
       c.updatedAt = new Date().toISOString();
       persistCampaignState(state, campaignId);
     }),
 
+  appendCampaignChronicle: (campaignId, entry) =>
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c || !entry?.prose) return;
+      c.chronicles = [
+        {
+          id: entry.id || `chronicle_${campaignId}_${entry.tick ?? 'latest'}_${Date.now()}`,
+          tick: entry.tick ?? c.wizardNews?.currentTick ?? null,
+          prose: entry.prose,
+          createdAt: entry.createdAt || new Date().toISOString(),
+        },
+        ...(Array.isArray(c.chronicles) ? c.chronicles : []),
+      ].slice(0, 24);
+      c.updatedAt = new Date().toISOString();
+      persistCampaignState(state, campaignId);
+    }),
+
   /** Mark a campaign as the active one (WorldMap uses this to drive reloads) */
   setActiveCampaign: (id) =>
-    set(state => { state.activeCampaignId = id; }),
+    set(state => {
+      const campaign = findActiveCampaign(state.campaigns, id);
+      state.activeCampaignId = id && campaign ? id : null;
+    }),
 
   /**
    * Resolve the campaign's map state to a v2 object (migrating v1 on the fly).
    * Returns null if no mapState is attached.
    */
   getCampaignMapState: (campaignId) => {
-    const c = get().campaigns.find(c => c.id === campaignId);
+    const c = findActiveCampaign(get().campaigns, campaignId);
     if (!c?.mapState) return null;
     return migrateMapState(c.mapState);
   },
 
   getCampaignForSettlement: (settlementId) => {
-    return get().campaigns.find(c => c.settlementIds.includes(settlementId)) || null;
+    return get().campaigns.find(c => isCampaignActive(c) && c.settlementIds.includes(settlementId)) || null;
   },
 
   reorderCampaignSettlements: (campaignId, settlementIds) =>
     set(state => {
-      const c = state.campaigns.find(c => c.id === campaignId);
-      if (c) {
-        c.settlementIds = settlementIds;
-        c.updatedAt = new Date().toISOString();
-      }
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      c.settlementIds = settlementIds;
+      c.updatedAt = new Date().toISOString();
       persistCampaignState(state, campaignId);
     }),
 });

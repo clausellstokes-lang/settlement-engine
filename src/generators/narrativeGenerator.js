@@ -2,7 +2,7 @@
  * narrativeGenerator.js
  * Arrival scenes, pressure sentences, settlement summaries, and coherence notes.
  *
- * Exports consumed by generateSettlement.js:
+ * Exports consumed by the settlement generation pipeline:
  *  - generateSettlementReason  — why the settlement exists (trade/founding reason)
  *  - generatePressureSentence  — one-liner describing the current political pressure
  *  - generateArrivalScene      — vivid first-impression paragraph for DMs

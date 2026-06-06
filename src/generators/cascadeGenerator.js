@@ -1,6 +1,6 @@
 // cascadeGenerator.js — Supply chain cascade pass
 // Gives chain-adjacent institutions a boosted second chance after main generation.
-// Extracted from generateSettlement.js for maintainability.
+// Shared cascade helpers for the settlement generation pipeline.
 
 import { random as _rng } from './rngContext.js';
 import { institutionalCatalog } from '../data/institutionalCatalog.js';

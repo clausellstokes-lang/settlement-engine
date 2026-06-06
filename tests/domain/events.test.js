@@ -68,6 +68,31 @@ describe('event registry', () => {
   });
 });
 
+describe('ADD_FACTION', () => {
+  test('adds a new faction to the power structure', () => {
+    const before = baseSettlement;
+    const { nextSettlement } = applyEvent({
+      settlement: before,
+      systemState: deriveSystemState(before),
+      event: ev({ id: 'evf1', type: 'ADD_FACTION', targetId: 'Dockworkers Guild', payload: {} }),
+    });
+    const factions = nextSettlement.powerStructure?.factions || nextSettlement.factions || [];
+    expect(factions.some(f => /dockworkers guild/i.test(f.name || ''))).toBe(true);
+  });
+
+  test('is idempotent on an existing faction name', () => {
+    const before = baseSettlement;
+    const { nextSettlement } = applyEvent({
+      settlement: before,
+      systemState: deriveSystemState(before),
+      event: ev({ id: 'evf2', type: 'ADD_FACTION', targetId: 'Council', payload: {} }),
+    });
+    const factions = nextSettlement.powerStructure?.factions || [];
+    const councils = factions.filter(f => /^council$/i.test(f.name || ''));
+    expect(councils.length).toBe(1);
+  });
+});
+
 describe('previewEvent', () => {
   test('unknown event type returns a mismatch warning', () => {
     const preview = previewEvent({

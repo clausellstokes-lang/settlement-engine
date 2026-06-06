@@ -110,7 +110,7 @@ serve(async (req) => {
 
   try {
     // Parse request body first so we know whether the product requires auth.
-    const { product } = await req.json();
+    const { product, checkoutToken } = await req.json();
     if (!product || !PRICE_MAP[product]) {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
     }
@@ -120,6 +120,12 @@ serve(async (req) => {
     // to a user_id at delivery time (credit packs, subscriptions,
     // founder seats) so they keep the auth requirement.
     const isAnonymousProduct = product === 'single_dossier';
+    if (
+      isAnonymousProduct
+      && (typeof checkoutToken !== 'string' || checkoutToken.length < 24 || checkoutToken.length > 128)
+    ) {
+      throw new Error('A valid dossier checkout token is required');
+    }
 
     const authHeader = req.headers.get('Authorization');
     let user: { id: string; email?: string | null } | null = null;
@@ -185,13 +191,14 @@ serve(async (req) => {
     const sessionParams: Record<string, unknown> = {
       mode,
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${clientUrl}?checkout=success&product=${product}`,
+      success_url: `${clientUrl}?checkout=success&product=${product}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url:  `${clientUrl}?checkout=cancelled`,
       metadata: {
         supabase_user_id: user?.id ?? '',
         product,
         credits: String(CREDIT_AMOUNTS[product] || 0),
         anonymous: isAnonymousProduct && !user ? 'true' : 'false',
+        checkout_token: isAnonymousProduct ? checkoutToken : '',
       },
     };
     if (stripeCustomerId) {

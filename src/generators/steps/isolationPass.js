@@ -4,7 +4,7 @@
  * Applies teleportation infrastructure for isolated town+ settlements,
  * subsistence mode stripping, and arcane institution safety-net.
  *
- * Extracted from generateSettlement.js lines 787–797, 888–889.
+ * Isolation pass for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

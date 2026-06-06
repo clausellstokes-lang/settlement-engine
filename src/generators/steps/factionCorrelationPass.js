@@ -4,7 +4,7 @@
  * Faction-institution correlation feedback loop + demand imports.
  * Also runs arcane institution strip for no-magic worlds.
  *
- * Extracted from generateSettlement.js lines 851–889.
+ * Faction correlation pass for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

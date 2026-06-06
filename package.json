@@ -7,6 +7,8 @@
     "preview": "vite preview",
     "build": "vite build",
     "validate:data": "node scripts/find-duplicate-keys.js",
+    "validate:edge": "node scripts/validate-edge-functions.mjs",
+    "validate:map": "node scripts/validate-map-fork.mjs",
     "fix:data": "node scripts/fix-duplicate-keys.js",
     "build:edge-shared": "node scripts/build-edge-shared.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.full.json",
@@ -20,7 +22,7 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
-    "check": "npm run validate:data && npm run typecheck && npm run lint && npm run test && npm run build",
+    "check": "npm run validate:data && npm run validate:edge && npm run validate:map && npm run typecheck && npm run lint && npm run test && npm run build",
     "check:quick": "npm run lint && npm run test",
     "prepare": "husky"
   },
@@ -41,7 +43,7 @@
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
     "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/coverage-v8": "^4.1.6",
+    "@vitest/coverage-v8": "^4.1.8",
     "acorn": "^8.16.0",
     "acorn-walk": "^8.3.5",
     "autoprefixer": "^10.4.27",
@@ -57,8 +59,8 @@
     "rollup-plugin-visualizer": "^7.0.1",
     "tailwindcss": "^3.4.19",
     "typescript": "^6.0.3",
-    "vite": "^5.4.21",
-    "vitest": "^4.1.5"
+    "vite": "^7.3.5",
+    "vitest": "^4.1.8"
   },
   "lint-staged": {
     "*.{js,jsx,mjs,cjs}": [

@@ -49,6 +49,27 @@ function spreadToggles(toggles) {
   };
 }
 
+function mutationRow(entry, includeId = true) {
+  const row = {};
+  if (includeId) row.id = entry.id;
+  if (entry.name !== undefined) row.name = entry.name;
+  if (entry.tier !== undefined) row.tier = entry.tier;
+  if (entry.settlement !== undefined) {
+    row.data = entry.settlement;
+    row.neighbour_links = entry.settlement?.neighbourNetwork || null;
+  }
+  if (entry.config !== undefined) row.config = entry.config;
+  if (entry.seed !== undefined) row.seed = entry.seed;
+  if (entry.aiData !== undefined) row.ai_data = entry.aiData;
+  if (entry.campaignState !== undefined) row.campaign_state = entry.campaignState;
+  if (entry.versionHistory !== undefined) {
+    row.version_history = Array.isArray(entry.versionHistory) ? entry.versionHistory : null;
+  }
+  const toggles = bundleToggles(entry);
+  if (toggles) row.toggles = toggles;
+  return row;
+}
+
 // ── Save migration ──────────────────────────────────────────────────────────
 
 /**
@@ -207,6 +228,16 @@ async function supabaseReactivateFreeSettlement(id) {
   return data;
 }
 
+async function supabaseMutateBatch({ updates = [], deletes = [], creates = [] } = {}) {
+  const { data, error } = await supabase.rpc('mutate_settlement_batch', {
+    updates: updates.map(entry => mutationRow(entry)),
+    delete_ids: deletes,
+    creates: creates.map(entry => mutationRow(migrateSaveToV2(entry))),
+  });
+  if (error) throw error;
+  return data;
+}
+
 // ── Local methods ───────────────────────────────────────────────────────────
 
 async function localList() {
@@ -266,6 +297,20 @@ async function localWriteAll(entries) {
   localWrite(entries);
 }
 
+async function localMutateBatch({ updates = [], deletes = [], creates = [] } = {}) {
+  const deleted = new Set(deletes.map(String));
+  const updateMap = new Map(updates.map(entry => [String(entry.id), entry]));
+  const next = localLoad()
+    .filter(entry => !deleted.has(String(entry.id)))
+    .map(entry => {
+      const patch = updateMap.get(String(entry.id));
+      return patch ? { ...entry, ...patch } : entry;
+    });
+  for (const entry of creates) next.unshift({ ...migrateSaveToV2(entry), savedAt: Date.now() });
+  localWrite(next);
+  return updates.length + deletes.length + creates.length;
+}
+
 // ── Exported API ────────────────────────────────────────────────────────────
 
 export const saves = {
@@ -275,6 +320,7 @@ export const saves = {
   delete:   isConfigured ? supabaseDelete   : localDelete,
   count:    isConfigured ? supabaseCount    : localCount,
   reactivateFreeSettlement: isConfigured ? supabaseReactivateFreeSettlement : localReactivateFreeSettlement,
+  mutateBatch: isConfigured ? supabaseMutateBatch : localMutateBatch,
   /** Write entire saves array — only available in local mode. */
   writeAll: isConfigured ? null             : localWriteAll,
   isConfigured,

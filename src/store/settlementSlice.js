@@ -21,7 +21,7 @@
 //
 // `createPRNG` was previously imported here but is only used by the
 // store test (which imports it directly). Removed from this chunk.
-/** @type {?{ engineGenerate:Function, engineRegenNPCs:Function, engineRegenHistory:Function, generateSettlementPipeline:Function, regenNPCsPipeline:Function, regenHistoryPipeline:Function, generateSeed:Function, runPipeline:Function, rerunAffected:Function }} */
+/** @type {?{ generateSettlementPipeline:Function, regenNPCsPipeline:Function, regenHistoryPipeline:Function, generateSeed:Function, runPipeline:Function, rerunAffected:Function }} */
 let _engineModule = null;
 /** @type {?Promise<NonNullable<typeof _engineModule>>} */
 let _enginePromise = null;
@@ -29,15 +29,11 @@ function loadEngine() {
   if (_engineModule) return Promise.resolve(_engineModule);
   if (_enginePromise) return _enginePromise;
   _enginePromise = Promise.all([
-    import('../generators/engine.js'),
     import('../generators/generateSettlementPipeline.js'),
     import('../generators/prng.js'),
     import('../generators/pipeline.js'),
-  ]).then(([eng, pipe, prng, pipeline]) => {
+  ]).then(([pipe, prng, pipeline]) => {
     _engineModule = {
-      engineGenerate:             eng.generateSettlement,
-      engineRegenNPCs:            eng.regenNPCs,
-      engineRegenHistory:         eng.regenHistory,
       generateSettlementPipeline: pipe.generateSettlementPipeline,
       regenNPCsPipeline:          pipe.regenNPCsPipeline,
       regenHistoryPipeline:       pipe.regenHistoryPipeline,
@@ -64,6 +60,7 @@ import { reconcileSettlementChange } from '../domain/settlementReconciliation.js
 import { inferSuccessors }   from '../domain/entities/successors.js';
 import { inferImportance }   from '../domain/entities/npcs.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
+import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
 import {
   applyUserEdit as domainApplyUserEdit,
   revertUserEdit as domainRevertUserEdit,
@@ -196,7 +193,6 @@ export const createSettlementSlice = (set, get) => ({
   activeSaveId:  null,   // save id backing the currently-open detail view
   lastSeed:      null,   // seed from last generation (for replay/determinism)
   lastCtx:       null,   // full pipeline context from last run (for reactive re-runs)
-  usePipeline:   true,   // toggle between legacy and pipeline generator
   // History of pipeline steps run for the currently-displayed settlement.
   // Powers the "How this was simulated" rail. Each entry:
   //   { id, ts, summary }
@@ -443,6 +439,7 @@ export const createSettlementSlice = (set, get) => ({
   systemState:     null,     // SystemState — derived after every generation/event
   eventLog:        [],       // EventLogEntry[] — populated only in canon mode
   pendingPreview:  null,     // EventPreview — set by previewEvent, cleared by apply/dismiss
+  pendingBatchPreview: null, // BatchPreview — set by previewEventBatch, cleared by applyEventBatch/dismiss
 
   // Set by applyEvent when a pillar-tier NPC death just committed.
   // The SuccessorPrompt UI consumes this to ask the DM whether to
@@ -503,22 +500,19 @@ export const createSettlementSlice = (set, get) => ({
 
     const eng = await loadEngine();
 
-    // Use pipeline or legacy generator
-    let result;
-    if (state.usePipeline) {
-      const seed = seedOverride || eng.generateSeed();
+    const seed = seedOverride || eng.generateSeed();
       // Capture the full pipeline context so reactive applyChange/applyEvent
       // can re-run only affected steps with the same seed instead of paying
       // for a full regeneration. Without this, every "what changed?" feature
       // either rerolls the town's identity or fails outright.
-      let capturedCtx = null;
+    let capturedCtx = null;
       // Per-step trace for the "How this was simulated" rail. Each step
       // contributes one entry with a factual summary derived from the
       // accumulated context (e.g. "5 institutions placed"). Errors in
       // the summarizer don't fail the run — they just produce a null
       // summary and the rail falls back to the label.
-      const pipelineHistory = [];
-      result = eng.generateSettlementPipeline(fullConfig, neighbor, {
+    const pipelineHistory = [];
+    const result = eng.generateSettlementPipeline(fullConfig, neighbor, {
         seed,
         onComplete: (ctx) => { capturedCtx = ctx; },
         onStep: (name, ctx /*, patch */) => {
@@ -528,19 +522,19 @@ export const createSettlementSlice = (set, get) => ({
           catch { summary = null; }
           pipelineHistory.push({ id: name, ts: Date.now(), summary });
         },
-      });
+    });
       // Derive the SystemState immediately so the UI never sees a settlement
       // without its accompanying state snapshot. The domain function is
       // pure — no store, no React — and tolerant of partial inputs, so a
       // sparse settlement still produces a usable state.
-      let systemState = null;
-      try {
-        systemState = deriveSystemState(result);
-      } catch (e) {
-        console.warn('[settlementSlice] deriveSystemState failed:', e);
-      }
-      const now = new Date().toISOString();
-      set(state => {
+    let systemState = null;
+    try {
+      systemState = deriveSystemState(result);
+    } catch (e) {
+      console.warn('[settlementSlice] deriveSystemState failed:', e);
+    }
+    const now = new Date().toISOString();
+    set(state => {
         state.settlement = result;
         state.activeSaveId = null;
         state.lastSeed = seed;
@@ -565,30 +559,7 @@ export const createSettlementSlice = (set, get) => ({
         state.generatedAt = now;
         state.editedAt = now;
         state.canonizedAt = null;
-      });
-    } else {
-      // Tier 1.7 — legacy generator path. The pipeline path above
-      // is preferred; this fallback exists for callers that haven't
-      // migrated yet. DEV-only warning so the deprecation is visible
-      // during development without polluting production logs.
-      if (typeof window !== 'undefined' && window?.location?.hostname === 'localhost') {
-        console.warn('[settlementSlice] legacy engineGenerate called — pipeline path is preferred (Tier 1.7).');
-      }
-      result = eng.engineGenerate(fullConfig);
-      set(state => {
-        state.settlement = result;
-        state.activeSaveId = null;
-        state.lastSeed = null;
-        state.lastCtx = null;
-        state.systemState = null;
-        state.aiSettlement = null;
-        state.whatIfPreview = null;
-        state.pendingChange = null;
-        state.pendingPreview = null;
-        state.phase = 'draft';
-        state.eventLog = [];
-      });
-    }
+    });
 
     // Count this anonymous generation against the daily cap. A regeneration
     // (a settlement was already on screen) spends a reroll; the first
@@ -648,14 +619,10 @@ export const createSettlementSlice = (set, get) => ({
     const before = JSON.parse(JSON.stringify(settlement));
 
     if (section === 'npcs') {
-      const parts = state.usePipeline
-        ? eng.regenNPCsPipeline(settlement, cfg)
-        : eng.engineRegenNPCs(settlement, cfg);
+      const parts = eng.regenNPCsPipeline(settlement, cfg);
       set(s => { Object.assign(s.settlement, parts); });
     } else if (section === 'history') {
-      const history = state.usePipeline
-        ? eng.regenHistoryPipeline(settlement, cfg)
-        : eng.engineRegenHistory(settlement, cfg);
+      const history = eng.regenHistoryPipeline(settlement, cfg);
       set(s => { s.settlement.history = history; });
     }
 
@@ -771,38 +738,24 @@ export const createSettlementSlice = (set, get) => ({
 
     const eng = await loadEngine();
 
-    if (state.usePipeline) {
-      const seed = state.lastSeed || eng.generateSeed();
-      let capturedCtx = null;
-      const result = eng.generateSettlementPipeline(fullConfig, state.importedNeighbour, {
+    const seed = state.lastSeed || eng.generateSeed();
+    let capturedCtx = null;
+    const result = eng.generateSettlementPipeline(fullConfig, state.importedNeighbour, {
         seed,
         onComplete: (ctx) => { capturedCtx = ctx; },
-      });
-      let nextSystemState = state.systemState;
-      try { nextSystemState = deriveSystemState(result); } catch (e) {
-        console.warn('[settlementSlice.applyChange] deriveSystemState failed:', e);
-      }
-      set(s => {
+    });
+    let nextSystemState = state.systemState;
+    try { nextSystemState = deriveSystemState(result); } catch (e) {
+      console.warn('[settlementSlice.applyChange] deriveSystemState failed:', e);
+    }
+    set(s => {
         s.settlement     = result;
         s.lastSeed       = seed;       // unchanged unless missing — preserves identity
         s.lastCtx        = capturedCtx;
         s.systemState    = nextSystemState;
         s.pendingChange  = null;
         s.whatIfPreview  = null;
-      });
-    } else {
-      // Tier 1.7 — legacy generator path (same deprecation note as
-      // the primary generate() handler).
-      if (typeof window !== 'undefined' && window?.location?.hostname === 'localhost') {
-        console.warn('[settlementSlice] legacy engineGenerate called from applyPendingChange — pipeline path is preferred (Tier 1.7).');
-      }
-      const result = eng.engineGenerate(fullConfig);
-      set(s => {
-        s.settlement = result;
-        s.pendingChange = null;
-        s.whatIfPreview = null;
-      });
-    }
+    });
   },
 
   dismissChange: () =>
@@ -1225,6 +1178,63 @@ export const createSettlementSlice = (set, get) => ({
   },
 
   dismissPreview: () => set(state => { state.pendingPreview = null; }),
+
+  /**
+   * Preview a batch of staged changes WITHOUT committing. Validates the
+   * cross-references first (a dangling reference blocks the whole batch),
+   * then runs the pure domain batch to compute the combined SystemState
+   * delta + per-change narratives. Result is stashed in pendingBatchPreview
+   * for the staging UI; nothing is mutated or persisted.
+   */
+  previewEventBatch: (events) => {
+    const state = get();
+    if (!state.settlement || !Array.isArray(events) || events.length === 0) return null;
+    const validation = validateBatch(state.settlement, events);
+    const result = computeEventBatch({
+      settlement: state.settlement,
+      systemState: state.systemState,
+      events,
+    });
+    const preview = {
+      events,
+      validation,
+      systemStateDeltas: result.systemStateDeltas,
+      afterSystemState:  result.afterSystemState,
+      perEvent:          result.perEvent,
+      rerunKeys:         result.rerunKeys,
+    };
+    set(s => { s.pendingBatchPreview = preview; });
+    return preview;
+  },
+
+  /**
+   * Commit a batch of staged changes. Validates first; a blocking warning
+   * aborts the WHOLE batch (nothing is applied). Otherwise applies each
+   * change in order through the proven single-event `applyEvent` path, so
+   * succession prompts, persistence, regional propagation, and the timeline
+   * log all behave exactly as they do for one change. Forward references
+   * resolve because each `applyEvent` threads the prior result into the next.
+   */
+  applyEventBatch: (events) => {
+    const state = get();
+    if (!state.settlement || !Array.isArray(events) || events.length === 0) {
+      return { ok: false, warnings: [], logEntries: [] };
+    }
+    const validation = validateBatch(state.settlement, events);
+    if (!validation.ok) {
+      set(s => { s.pendingBatchPreview = { events, validation }; });
+      return { ok: false, warnings: validation.warnings, logEntries: [] };
+    }
+    const logEntries = [];
+    for (const event of events) {
+      const entry = get().applyEvent(event);
+      if (entry) logEntries.push(entry);
+    }
+    set(s => { s.pendingBatchPreview = null; });
+    return { ok: true, warnings: [], logEntries };
+  },
+
+  dismissBatchPreview: () => set(state => { state.pendingBatchPreview = null; }),
 
   /**
    * Undo the most recent canon event. Restores both the systemState

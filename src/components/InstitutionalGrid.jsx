@@ -4,8 +4,8 @@ import ControlsStrip from './ControlsStrip.jsx';
 import { GOLD as gold, INK as ink, MUTED as muted, BORDER as border, sans, FS, swatch, MUTED } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, selectIsManualTier } from '../store/selectors.js';
-// Import from lookups.js directly (not engine.js) — keeps the
-// generator pipeline out of this component's synchronous import graph.
+// Direct catalog imports keep the generator pipeline out of this
+// component's synchronous import graph.
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../generators/lookups.js';
 
 const CAT_COLORS = {

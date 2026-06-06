@@ -3,7 +3,7 @@
  *
  * Injects mirror and opposition factions from neighbour influence.
  *
- * Extracted from generateSettlement.js lines 804–849.
+ * Neighbour-faction step for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

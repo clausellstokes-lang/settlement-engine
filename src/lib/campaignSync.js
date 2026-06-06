@@ -2,8 +2,9 @@
  * campaignSync.js — merge and sync policy for campaign persistence.
  *
  * The store owns UI state; this module owns the dull but important rule:
- * local cache and cloud rows are peers, and loading cloud data must never
- * erase a local-only campaign that has not been uploaded yet.
+ * local cache and cloud rows are peers for campaign content, and loading
+ * cloud data must never erase a local-only campaign that has not been
+ * uploaded yet. Server-owned access and retention fields are authoritative.
  */
 
 function parseTime(value) {
@@ -43,6 +44,16 @@ export function campaignSignature(campaign) {
 
 export function mergeCampaignLists(localCampaigns = [], remoteCampaigns = []) {
   const byId = new Map();
+  const remoteAccess = new Map(
+    (remoteCampaigns || [])
+      .filter(campaign => campaign?.id)
+      .map(campaign => [String(campaign.id), {
+        accessState: campaign.accessState || 'active',
+        inactiveReason: campaign.inactiveReason || null,
+        inactiveSince: campaign.inactiveSince || null,
+        retentionExpiresAt: campaign.retentionExpiresAt || null,
+      }]),
+  );
 
   const add = (campaign, sourceRank) => {
     if (!campaign?.id) return;
@@ -67,7 +78,13 @@ export function mergeCampaignLists(localCampaigns = [], remoteCampaigns = []) {
   for (const campaign of remoteCampaigns || []) add(campaign, 2);
 
   return Array.from(byId.values())
-    .map(entry => entry.campaign)
+    .map(entry => {
+      const campaign = entry.campaign;
+      const authoritativeAccess = remoteAccess.get(String(campaign.id));
+      return authoritativeAccess
+        ? { ...campaign, ...authoritativeAccess }
+        : campaign;
+    })
     .sort((a, b) => {
       const delta = campaignUpdatedAtMs(b) - campaignUpdatedAtMs(a);
       if (delta) return delta;
@@ -100,6 +117,7 @@ export function getCampaignsNeedingSync(campaigns = [], changedId = null) {
   const ids = changedIdSet(changedId);
   return (campaigns || []).filter(campaign => {
     if (!campaign?.id) return false;
+    if ((campaign.accessState || 'active') !== 'active') return false;
     const id = String(campaign.id);
     if (ids && !ids.has(id)) return false;
     return lastSyncedSignatures.get(id) !== campaignSignature(campaign);

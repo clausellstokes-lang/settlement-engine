@@ -29,6 +29,28 @@ describe('campaign sync policy', () => {
     )[0].name).toBe('Local New');
   });
 
+  test('server retention state remains authoritative over fresher cached content', () => {
+    const [merged] = mergeCampaignLists(
+      [{
+        id: 'camp-1',
+        name: 'Local New',
+        updatedAt: '2024-03-03T00:00:00Z',
+        accessState: 'active',
+      }],
+      [{
+        id: 'camp-1',
+        name: 'Remote Old',
+        updatedAt: '2024-03-02T00:00:00Z',
+        accessState: 'inactive_plan',
+        retentionExpiresAt: '2024-06-02T00:00:00Z',
+      }],
+    );
+
+    expect(merged.name).toBe('Local New');
+    expect(merged.accessState).toBe('inactive_plan');
+    expect(merged.retentionExpiresAt).toBe('2024-06-02T00:00:00Z');
+  });
+
   test('sync uploads only records that differ from the primed cloud snapshot', async () => {
     const upserted = [];
     const service = {
@@ -55,6 +77,22 @@ describe('campaign sync policy', () => {
 
     await syncCampaignChanges(campaigns, { service });
     expect(upserted).toEqual(['local-newer', 'local-only']);
+  });
+
+  test('inactive retained campaigns are never backfilled through ordinary sync', async () => {
+    const upserted = [];
+    const service = {
+      isConfigured: true,
+      upsert: async campaign => upserted.push(campaign.id),
+    };
+
+    primeCampaignSync([]);
+    await syncCampaignChanges([
+      { id: 'active', accessState: 'active', updatedAt: '2024-03-01T00:00:00Z' },
+      { id: 'retained', accessState: 'inactive_plan', updatedAt: '2024-03-01T00:00:00Z' },
+    ], { service });
+
+    expect(upserted).toEqual(['active']);
   });
 
   test('changedId narrows sync to the requested campaign', async () => {

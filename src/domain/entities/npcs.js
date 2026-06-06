@@ -181,11 +181,15 @@ export function killNpc(npc, eventId) {
  * Returns the updated NPC plus the inverse impairments that should be
  * applied to the institution (negative-severity impairment = restore).
  */
-export function assignNpcToRole({ npc, institutionId, role, quality, factionAlignment, eventId }) {
+export function assignNpcToRole({ npc, institutionId, role, quality, factionAlignment, importance, influence, eventId }) {
   const updated = createNpc({
     ...npc,
     status: 'active',
     role: role || npc?.role,
+    // Importance + influence come from the role being filled (the role
+    // catalogue / faction seat), falling back to whatever the NPC already had.
+    importance: importance || npc?.importance,
+    influence:  influence ?? npc?.influence,
     linkedInstitutionIds: dedupeIds([...(npc?.linkedInstitutionIds || []), institutionId]),
     linkedFactionIds: factionAlignment
       ? dedupeIds([...(npc?.linkedFactionIds || []), factionAlignment])

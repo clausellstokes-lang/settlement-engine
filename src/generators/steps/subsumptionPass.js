@@ -4,7 +4,7 @@
  * Removes lesser institutions when greater ones are present.
  * 70+ rules (e.g. "banking district" subsumes "money changer").
  *
- * Extracted from generateSettlement.js lines 639–740.
+ * Subsumption pass for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

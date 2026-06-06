@@ -3,10 +3,9 @@
  *
  * Components use: const catalog = useStore(selectCurrentCatalog);
  *
- * Bundle note: this file imports catalog lookups from `generators/lookups.js`
- * (not `engine.js`) so the synchronous first-paint graph does not pull
- * in the generator pipeline. The heavy pipeline is dynamic-imported from
- * settlementSlice's loadEngine().
+ * Bundle note: direct catalog lookups keep the synchronous first-paint graph
+ * independent of the generator pipeline. The pipeline is dynamic-imported
+ * from settlementSlice's loadEngine().
  */
 
 import {

@@ -28,6 +28,12 @@ jobs:
       - name: Validate data
         run: npm run validate:data
 
+      - name: Validate edge functions
+        run: npm run validate:edge
+
+      - name: Validate vendored map JavaScript
+        run: npm run validate:map
+
       # tsc --noEmit against src/domain/. The JSDoc types in the domain
       # layer get validated by tsc; the pipeline output object shapes,
       # impairment dimensions, event types, and faction-response shapes
@@ -47,7 +53,7 @@ jobs:
 
       # Vitest: unit + property-based (fast-check) engine tests, domain +
       # store + lib integration, component/UI smoke, a11y, security, and
-      # edge-function contract tests. ~2,400 tests across ~134 files.
+      # edge-function contract tests. ~2,600 tests across ~170 files.
       - name: Run tests
         run: npm run test
 
@@ -59,3 +65,27 @@ jobs:
       # required gate before a production deploy.
       - name: Build
         run: npm run build
+
+  e2e:
+    name: Chromium end-to-end
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Chromium E2E
+        run: npx playwright test --project=chromium
+
+      - name: Audit mobile pointer targets
+        run: npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari

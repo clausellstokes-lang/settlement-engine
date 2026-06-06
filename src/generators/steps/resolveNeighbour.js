@@ -3,7 +3,7 @@
  *
  * Extracts structured relationship data from the imported neighbour settlement.
  *
- * Extracted from generateSettlement.js lines 431–441.
+ * Neighbour-resolution step for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

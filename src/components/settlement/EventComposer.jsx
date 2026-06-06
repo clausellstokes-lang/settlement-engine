@@ -11,6 +11,9 @@ import { useState } from 'react';
 import { Zap, Flame, Trash2, Plus, MapPinOff, AlertOctagon, X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
+import { inferImportance } from '../../domain/entities/npcs.js';
+import { validateBatch } from '../../domain/events/batch.js';
+import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../domain/roles/roleCatalog.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
 const _TYPE_ICONS = {
@@ -29,6 +32,7 @@ const _TYPE_ICONS = {
 // (the user is naming something new), so they keep the text input.
 const TARGET_ENTITY_BY_EVENT = Object.freeze({
   ADD_INSTITUTION:      null,           // new entity — free text
+  ADD_FACTION:          null,           // new entity — free-text name
   REMOVE_INSTITUTION:   'institutions',
   DAMAGE_INSTITUTION:   'institutions',
   IMPAIR_INSTITUTION:   'institutions',
@@ -36,11 +40,12 @@ const TARGET_ENTITY_BY_EVENT = Object.freeze({
   KILL_NPC:             'npcs',
   ASSIGN_NPC_TO_ROLE:   'npcs',
   IMPAIR_FACTION:       'factions',
-  CHANGE_RULER:         'npcs',         // pick the new ruler from existing NPCs
-  EXPOSE_CORRUPTION:    'factions',     // or instutions; pick factions as the dominant case
+  RESTORE_FACTION:      'factions',     // recover a faction that is currently impaired
+  EXPOSE_CORRUPTION:    'factions',     // or institutions; pick factions as the dominant case
+  RESTORE_INSTITUTION:  'institutions', // recover an institution that is currently impaired
   DEPLETE_RESOURCE:     'resources',
+  RECOVERED_RESOURCE:   'resources',    // recover a resource the campaign already depleted
   CUT_TRADE_ROUTE:      null,           // route names aren't tracked as entities — free text
-  REFUGEE_INFLUX:       null,           // optional source region — free text
 });
 
 /** Build {id, name} options from a dossier collection for the target dropdown. */
@@ -86,6 +91,10 @@ export default function EventComposer() {
   const applyPendingPreview = useStore(s => s.applyPendingPreview);
   const dismissPreview = useStore(s => s.dismissPreview);
   const pendingPreview = useStore(s => s.pendingPreview);
+  const previewBatch   = useStore(s => s.previewEventBatch);
+  const applyBatch     = useStore(s => s.applyEventBatch);
+  const pendingBatchPreview = useStore(s => s.pendingBatchPreview);
+  const dismissBatchPreview = useStore(s => s.dismissBatchPreview);
 
   const [type, setType]         = useState('DAMAGE_INSTITUTION');
   const [target, setTarget]     = useState('');
@@ -99,6 +108,7 @@ export default function EventComposer() {
   const [institutionId, setInstitutionId] = useState('');     // ADD_NPC, ASSIGN_NPC_TO_ROLE
   const [quality, setQuality]       = useState('competent');   // ASSIGN_NPC_TO_ROLE
   const [dimension, setDimension]   = useState('legitimacy');  // IMPAIR_INSTITUTION, IMPAIR_FACTION
+  const [staged, setStaged]         = useState([]);            // batch: staged changes not yet applied
 
   if (!settlement) return null;
   const spec = EVENT_REGISTRY[type];
@@ -113,9 +123,19 @@ export default function EventComposer() {
   function buildEvent() {
     const payload = {};
     if (type === 'DAMAGE_INSTITUTION') payload.severity = severity;
-    if (type === 'ADD_NPC' || type === 'KILL_NPC') {
+    if (type === 'ADD_NPC') {
       payload.importance = importance;
       if (role) payload.role = role;
+    }
+    if (type === 'KILL_NPC') {
+      // Derive the consequence tier from the NPC itself rather than asking the
+      // DM to re-state what the dossier already knows. Both the state math
+      // (registry KILL_NPC.stateDeltas) and the entity mutation read this, so
+      // a pillar's death isn't silently down-graded to "notable".
+      const npc = (settlement.npcs || []).find(
+        n => String(n.id || n.name) === String(target),
+      );
+      if (npc) payload.importance = npc.importance || inferImportance(npc);
     }
     if (type === 'ADD_NPC' && institutionId) {
       payload.linkedInstitutionIds = [institutionId];
@@ -124,6 +144,17 @@ export default function EventComposer() {
       payload.quality = quality;
       if (role)          payload.role = role;
       if (institutionId) payload.institutionId = institutionId;
+      // Importance + influence come from the role the NPC fills (the
+      // institution's role catalogue), not a separate question.
+      const inst = institutionId
+        ? (settlement.institutions || []).find(i => String(i.id || i.name) === String(institutionId))
+        : null;
+      const roleOpts = inst ? rolesForInstitution(inst) : [];
+      const imp = roleOpts.length ? importanceForRole(role, roleOpts) : null;
+      if (imp) {
+        payload.importance = imp;
+        payload.influence  = influenceForImportance(imp);
+      }
     }
     if (type === 'IMPAIR_INSTITUTION' || type === 'IMPAIR_FACTION') {
       payload.dimension = dimension;
@@ -176,9 +207,14 @@ export default function EventComposer() {
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
           <select value={type} onChange={e => { setType(e.target.value); setTarget(''); }} style={selectStyle}>
-            {Object.entries(EVENT_REGISTRY).map(([k, s]) => (
-              <option key={k} value={k}>{s.label}</option>
-            ))}
+            {Object.entries(EVENT_REGISTRY)
+              /* KILL_LEADER folded into KILL_NPC: killing a pillar/ruler NPC is
+                 the leader event, and its consequences derive from that NPC's
+                 own importance. Kept in the registry for back-compat. */
+              .filter(([k]) => k !== 'KILL_LEADER')
+              .map(([k, s]) => (
+                <option key={k} value={k}>{s.label}</option>
+              ))}
           </select>
         </Field>
 
@@ -231,9 +267,9 @@ export default function EventComposer() {
           </Field>
         )}
 
-        {/* NPC events: importance tier shapes propagation magnitude.
-            Pillar = institutional vacuum on death; minor = no engine effect. */}
-        {(type === 'ADD_NPC' || type === 'KILL_NPC') && (
+        {/* ADD_NPC defines a NEW NPC, so its importance is a real choice.
+            KILL_NPC does not ask — it derives from the selected NPC below. */}
+        {type === 'ADD_NPC' && (
           <Field label="Importance" hint={
             importance === 'pillar' ? 'Death creates major consequences' :
             importance === 'key'    ? 'Meaningful effect on linked entity' :
@@ -249,11 +285,59 @@ export default function EventComposer() {
           </Field>
         )}
 
-        {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && (
-          <Field label="Role" hint="e.g. High Priestess, Watch Captain">
-            <input value={role} onChange={e => setRole(e.target.value)} placeholder="optional" style={inputStyle} />
-          </Field>
-        )}
+        {/* KILL_NPC: importance is pulled from the chosen NPC and shown
+            read-only, so the DM sees the consequence tier before applying. */}
+        {type === 'KILL_NPC' && target && (() => {
+          const npc = (settlement.npcs || []).find(
+            n => String(n.id || n.name) === String(target),
+          );
+          if (!npc) return null;
+          const imp = npc.importance || inferImportance(npc);
+          return (
+            <Field label="Importance (from this NPC)" hint={
+              imp === 'pillar' ? 'Pillar. Death shakes the settlement.' :
+              imp === 'key'    ? 'Key. Meaningful effect on linked entity.' :
+              imp === 'notable'? 'Notable. Small modifier on linked entity.' :
+                                 'Minor. No engine effect.'
+            }>
+              <div style={{
+                padding: '4px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm,
+                fontSize: FS.xs, fontFamily: sans, color: INK, minWidth: 180,
+                background: swatch['#FAF8F4'], fontWeight: 700,
+                textTransform: 'capitalize', display: 'flex', alignItems: 'center',
+              }}>
+                {imp}
+              </div>
+            </Field>
+          );
+        })()}
+
+        {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && (() => {
+          // ASSIGN into a known institution: roles come from that institution's
+          // catalogue (you can only fill seats it offers), and importance +
+          // influence derive from the chosen role. ADD_NPC (inventing a person)
+          // and ASSIGN with no institution keep free text.
+          const inst = (type === 'ASSIGN_NPC_TO_ROLE' && institutionId)
+            ? (settlement.institutions || []).find(i => String(i.id || i.name) === String(institutionId))
+            : null;
+          const roleOpts = inst ? rolesForInstitution(inst) : [];
+          if (roleOpts.length > 0) {
+            const derivedImp = importanceForRole(role, roleOpts);
+            return (
+              <Field label="Role" hint={role ? `Importance: ${derivedImp}` : 'Roles available at this institution'}>
+                <select value={role} onChange={e => setRole(e.target.value)} style={selectStyle}>
+                  <option value="">, Pick a role -</option>
+                  {roleOpts.map(r => <option key={r.role} value={r.role}>{r.role}</option>)}
+                </select>
+              </Field>
+            );
+          }
+          return (
+            <Field label="Role" hint="e.g. High Priestess, Watch Captain">
+              <input value={role} onChange={e => setRole(e.target.value)} placeholder="optional" style={inputStyle} />
+            </Field>
+          );
+        })()}
 
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && institutionOptions.length > 0 && (
           <Field label="Institution" hint="link this NPC to an institution">
@@ -337,6 +421,18 @@ export default function EventComposer() {
         <button onClick={onPreview} disabled={!canSubmit} style={primaryBtn(!canSubmit)}>
           Preview
         </button>
+        <button
+          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); }}
+          disabled={!canSubmit}
+          style={{
+            padding: '5px 12px', background: 'transparent', color: GOLD,
+            border: `1px solid ${GOLD}`, borderRadius: R.sm,
+            fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
+            cursor: canSubmit ? 'pointer' : 'not-allowed', opacity: canSubmit ? 1 : 0.5,
+          }}
+        >
+          + Add to batch
+        </button>
         {pendingPreview && (
           <>
             <button onClick={onApply} style={confirmBtn}>
@@ -350,6 +446,19 @@ export default function EventComposer() {
       </div>
 
       {pendingPreview && <PreviewPanel preview={pendingPreview} />}
+
+      {staged.length > 0 && (
+        <BatchCart
+          staged={staged}
+          settlement={settlement}
+          phase={phase}
+          pendingBatchPreview={pendingBatchPreview}
+          onRemove={(i) => setStaged(prev => prev.filter((_, idx) => idx !== i))}
+          onClear={() => { setStaged([]); dismissBatchPreview(); }}
+          onPreview={() => previewBatch(staged)}
+          onApply={() => { const r = applyBatch(staged); if (r?.ok) setStaged([]); }}
+        />
+      )}
     </div>
   );
 }
@@ -414,6 +523,69 @@ function DeltaRow({ d }) {
       <span style={{ color: MUTED, marginLeft: 'auto' }}>
         {d.before} → {d.after}
       </span>
+    </div>
+  );
+}
+
+function labelOfTarget(targetId) {
+  const tail = String(targetId || '').split('.').pop();
+  return tail.replace(/_/g, ' ');
+}
+
+/**
+ * BatchCart — the staging area for "multiple simultaneous changes". Lists the
+ * staged events, surfaces blocking cross-reference warnings live (a change
+ * that targets an entity neither in the settlement nor earlier in the batch),
+ * and offers one Preview + one Apply for the whole set.
+ */
+function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRemove, onClear, onPreview, onApply }) {
+  const validation = validateBatch(settlement, staged);
+  const blocks = (validation.warnings || []).filter(w => w.severity === 'block');
+  return (
+    <div style={{
+      marginTop: SP.sm, padding: SP.sm,
+      background: swatch['#FAF8F4'], border: `1px solid ${GOLD}`, borderRadius: R.sm,
+    }}>
+      <div style={{
+        fontSize: FS.xs, fontWeight: 800, color: MUTED, fontFamily: sans,
+        textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs,
+      }}>
+        Staged changes ({staged.length})
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        {staged.map((e, i) => (
+          <div key={e.id || i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.xs, fontFamily: sans, color: INK }}>
+            <span style={{ fontWeight: 700, minWidth: 16, color: GOLD }}>{i + 1}.</span>
+            <span style={{ flex: 1 }}>
+              {EVENT_REGISTRY[e.type]?.label || e.type}{e.targetId ? `: ${labelOfTarget(e.targetId)}` : ''}
+            </span>
+            <button onClick={() => onRemove(i)} title="Remove" style={{ background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 2, display: 'flex' }}>
+              <X size={12} />
+            </button>
+          </div>
+        ))}
+      </div>
+      {blocks.length > 0 && (
+        <ul style={{ margin: '6px 0 0', paddingLeft: 16, color: swatch.danger, fontSize: FS.xxs, fontFamily: sans }}>
+          {blocks.map((w, i) => <li key={i}>{w.message}</li>)}
+        </ul>
+      )}
+      {pendingBatchPreview?.systemStateDeltas?.length > 0 && (
+        <div style={{ marginTop: 6 }}>
+          {pendingBatchPreview.systemStateDeltas.map((d, i) => <DeltaRow key={i} d={d} />)}
+        </div>
+      )}
+      <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
+        <button onClick={onPreview} style={primaryBtn(false)}>Preview batch</button>
+        <button
+          onClick={onApply}
+          disabled={blocks.length > 0}
+          style={{ ...confirmBtn, opacity: blocks.length > 0 ? 0.5 : 1, cursor: blocks.length > 0 ? 'not-allowed' : 'pointer' }}
+        >
+          <Check size={11} /> {phase === 'canon' ? `Apply ${staged.length} to timeline` : `Apply all (${staged.length})`}
+        </button>
+        <button onClick={onClear} style={cancelBtn}>Clear</button>
+      </div>
     </div>
   );
 }

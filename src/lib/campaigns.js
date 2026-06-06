@@ -13,6 +13,11 @@ const LOCAL_KEY = 'sf_campaigns';
 const LOCAL_KEY_PREFIX = 'sf_campaigns:';
 const MAP_DATA_KIND = 'settlementforge_campaign';
 const MAP_DATA_VERSION = 2;
+export const ACTIVE_CAMPAIGN_STATE = 'active';
+
+export function isCampaignActive(campaign) {
+  return (campaign?.accessState || ACTIVE_CAMPAIGN_STATE) === ACTIVE_CAMPAIGN_STATE;
+}
 
 function scopedLocalKey(ownerId) {
   const owner = String(ownerId || 'anon');
@@ -61,6 +66,10 @@ function campaignFromRow(row) {
       name: payload.name || row.name,
       createdAt: payload.createdAt || row.created_at,
       updatedAt: row.updated_at || payload.updatedAt,
+      accessState: row.access_state || ACTIVE_CAMPAIGN_STATE,
+      inactiveReason: row.inactive_reason || null,
+      inactiveSince: row.inactive_since || null,
+      retentionExpiresAt: row.retention_expires_at || null,
     };
   }
 
@@ -88,6 +97,10 @@ function campaignFromRow(row) {
     wizardNews: null,
     worldState: null,
     collapsed: false,
+    accessState: row.access_state || ACTIVE_CAMPAIGN_STATE,
+    inactiveReason: row.inactive_reason || null,
+    inactiveSince: row.inactive_since || null,
+    retentionExpiresAt: row.retention_expires_at || null,
   };
 }
 
@@ -108,7 +121,7 @@ function rowForCampaign(campaign, userId) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('saved_maps')
-    .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, created_at, updated_at')
+    .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, access_state, inactive_reason, inactive_since, retention_expires_at, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   return (data || []).map(campaignFromRow);

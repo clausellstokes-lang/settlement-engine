@@ -4,7 +4,7 @@
  * Generates NPCs, relationships, NPC faction groups, and links them
  * to power factions. Also generates conflicts.
  *
- * Extracted from generateSettlement.js lines 891–993.
+ * Population step for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

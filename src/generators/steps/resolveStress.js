@@ -3,7 +3,7 @@
  *
  * Generates stress events and threads stress types into effectiveConfig.
  *
- * Extracted from generateSettlement.js lines 412–429.
+ * Stress-resolution step for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

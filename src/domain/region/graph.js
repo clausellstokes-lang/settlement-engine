@@ -8,6 +8,7 @@
  */
 
 import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
+import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
 
 export const REGIONAL_GRAPH_SCHEMA_VERSION = 2;
 
@@ -254,6 +255,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null) {
   const edges = [...existing.edges];
   const nodeIds = new Set(nodes.map(n => n.id));
   const edgeIds = new Set(edges.map(e => e.id));
+  const relationshipKeys = new Set();
 
   for (const save of saves || []) {
     const node = nodeFromSave(save);
@@ -270,14 +272,20 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null) {
       const target = findTargetSave(link, saves);
       const targetId = target?.id || target?.settlement?.id;
       if (!targetId || String(targetId) === String(sourceId)) continue;
+      const canonical = canonicalEdgeForLink(link, save, target);
+      if (!canonical) continue;
+      const relationshipKey = link.linkId
+        || [String(sourceId), String(targetId)].sort().join('::');
+      if (relationshipKeys.has(relationshipKey)) continue;
+      relationshipKeys.add(relationshipKey);
       const edge = normalizeEdge({
-        id: edgeIdFor(sourceId, targetId),
-        from: sourceId,
-        to: targetId,
-        relationshipType: link.relationshipType || link.type || 'other',
+        id: edgeIdFor(canonical.from, canonical.to),
+        from: canonical.from,
+        to: canonical.to,
+        relationshipType: canonical.relationshipType,
         evidence: [{
           source: 'neighbourNetwork',
-          reason: `Linked as ${link.relationshipType || link.type || 'other'}.`,
+          reason: `Linked as ${canonical.relationshipType}.`,
         }],
       });
       if (edge && !edgeIds.has(edge.id)) {

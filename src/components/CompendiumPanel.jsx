@@ -5,7 +5,7 @@ import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {useStore} from '../store/index.js';
 import DeleteConfirmation from './DeleteConfirmation';
 
-import {getInstitutionalCatalog, getFullCatalogWithTierMeta} from '../generators/engine';
+import {getInstitutionalCatalog, getFullCatalogWithTierMeta} from '../generators/lookups.js';
 import EntityPicker from './EntityPicker.jsx';
 import { buildRegistry } from '../lib/customRegistry.js';
 // P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the

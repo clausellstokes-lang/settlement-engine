@@ -150,10 +150,9 @@ These come from the pure-domain layer on read:
 
 ## Field aliases
 
-Some legacy generator paths still write old names. The schema's
-`FIELD_ALIASES` map declares the alias relationships; both
-`normalizeSettlement` and the generators dual-write so consumers see
-the canonical name immediately. Today:
+Imported or older saved data may still contain historical field names. The
+schema's `FIELD_ALIASES` map declares those relationships, and
+`normalizeSettlement` promotes them to the canonical shape. Today:
 
 ```
 stressors ← stress | stresses | stressTypes
@@ -162,9 +161,8 @@ stressors ← stress | stresses | stressTypes
 When adding a new alias, update three places:
 
 1. `FIELD_ALIASES` in `settlement.schema.js`.
-2. Wherever the legacy name is written, also write the canonical
-   name (see `assembleSettlement.js` / `generateSettlement.js` for
-   the dual-write pattern). Tier 1.2.
+2. Write only the canonical name in the generation pipeline, and add any
+   import compatibility to `normalizeSettlement`.
 3. The contract test
    `tests/domain/schemaCanonicalShape.test.js` — add an assertion
    for the new field.

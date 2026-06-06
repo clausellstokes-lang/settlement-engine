@@ -16,15 +16,15 @@
  * Failure modes:
  *   - Supabase not configured (local dev) → button shows but a click
  *     surfaces an inline error rather than 500-ing through Stripe.
- *   - Stash write fails (private mode) → we still call Stripe; the
- *     success page handles the "no stash" path with a support link.
+ *   - Secure token or stash write fails → checkout is stopped before
+ *     redirect so the buyer cannot pay for a dossier we cannot recover.
  */
 
 import { useState } from 'react';
 import { Download, AlertCircle } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout } from '../lib/stripe.js';
-import { stashPendingDossier } from '../lib/pendingDossier.js';
+import { createDossierCheckoutToken, stashPendingDossier } from '../lib/pendingDossier.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
 import { GOLD, sans, SP, R, FS, swatch, RED } from './theme.js';
@@ -45,10 +45,11 @@ export default function BuyThisDossier({ settlement }) {
   async function handleBuy() {
     setBusy(true); setError(null);
     try {
-      // Stash before navigating. Even if it fails (private mode), we
-      // still try checkout — the success page has a recovery path.
-      stashPendingDossier(settlement);
-      await startCheckout('single_dossier');
+      const checkoutToken = createDossierCheckoutToken();
+      if (!stashPendingDossier(settlement, checkoutToken)) {
+        throw new Error('This browser cannot safely retain the dossier through checkout. Enable local storage and try again.');
+      }
+      await startCheckout('single_dossier', { checkoutToken });
       // startCheckout redirects on success, so we only reach this
       // line on failure.
     } catch (e) {

@@ -84,6 +84,9 @@ export function mutateSettlement({ settlement, event, now = null }) {
     case 'RESTORE_FACTION':
       next = restoreFaction(next, stampedEvent);
       break;
+    case 'ADD_FACTION':
+      next = addFaction(next, stampedEvent);
+      break;
 
     // Wave 1 extended events. Each is implemented by reusing primitives:
     // KILL_LEADER is a KILL_NPC with importance forced to 'pillar';
@@ -254,6 +257,43 @@ function restoreFaction(s, event) {
   return replaceFaction(s, faction, restored);
 }
 
+/**
+ * ADD_FACTION — introduce a new faction. Mirrors addInstitution: idempotent
+ * by name (re-adding an existing faction just clears removed/impaired state),
+ * and writes to powerStructure.factions (the canonical location) so the
+ * power-structure rerun and seat logic see it.
+ */
+function addFaction(s, event) {
+  const name = labelFromTarget(event.targetId) || event.payload?.name;
+  if (!name) return s;
+  const psFactions = s.powerStructure?.factions;
+  const flatFactions = s.factions;
+  const list = psFactions || flatFactions || [];
+  const existing = list.find(
+    f => String(f.name || f.faction || '').toLowerCase() === name.toLowerCase(),
+  );
+  if (existing) {
+    return replaceFaction(s, existing, { ...existing, status: 'active', impairments: [] });
+  }
+  const newFaction = {
+    id: `faction.${slugify(name)}`,
+    name,
+    faction: name,
+    status: 'active',
+    description: event.description || '',
+    impairments: [],
+    internalSeats: {},
+    memberNpcIds: [],
+  };
+  if (psFactions) {
+    return { ...s, powerStructure: { ...s.powerStructure, factions: [...psFactions, newFaction] } };
+  }
+  if (flatFactions) {
+    return { ...s, factions: [...flatFactions, newFaction] };
+  }
+  return { ...s, powerStructure: { ...(s.powerStructure || {}), factions: [newFaction] } };
+}
+
 // ── Resource / route mutations ─────────────────────────────────────────────
 
 function depleteResource(s, event) {
@@ -343,6 +383,8 @@ function assignNpcMutation(s, event) {
     role: event.payload?.role,
     quality: event.payload?.quality || 'competent',
     factionAlignment: event.payload?.factionAlignment,
+    importance: event.payload?.importance,
+    influence: event.payload?.influence,
     eventId: event.id,
   });
   // Replace or insert the NPC record

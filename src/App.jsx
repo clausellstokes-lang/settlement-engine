@@ -127,11 +127,13 @@ export default function App() {
   useEffect(() => {
     initAuth();
     initOnboarding();
-    import('./lib/stripe.js').then(({ checkCheckoutResult, fetchCreditBalance }) => {
+    import('./lib/stripe.js').then(async ({ checkCheckoutResult, fetchCreditBalance }) => {
       // Handle Stripe checkout return
       const result = checkCheckoutResult();
       if (result?.status === 'success') {
         if (result.product === 'single_dossier') {
+          const { attachPendingDossierCheckout } = await import('./lib/pendingDossier.js');
+          attachPendingDossierCheckout(result.sessionId);
           // The single-dossier flow needs a full landing page (PDF
           // download + sign-up upsell), not just a toast. Replace so the
           // Stripe-return URL isn't a Back-button trap.

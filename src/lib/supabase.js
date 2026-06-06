@@ -16,10 +16,11 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl  = import.meta.env.VITE_SUPABASE_URL  || '';
 const supabaseAnon = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const forceLocalData = import.meta.env.VITE_E2E_LOCAL_DATA === 'true';
 
 // When env vars are missing, create a dummy client that won't crash but won't connect.
 // This allows local dev without Supabase configured.
-const isConfigured = !!(supabaseUrl && supabaseAnon);
+const isConfigured = !!(supabaseUrl && supabaseAnon) && !forceLocalData;
 
 // No-op cross-tab lock. supabase-js defaults to `navigator.locks` on an
 // exclusive lock named `lock:sb-<project>-auth-token` to serialize token

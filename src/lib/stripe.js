@@ -66,8 +66,9 @@ const PRODUCTS = new Proxy({}, {
 /**
  * Create a Stripe Checkout session and redirect.
  * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
+ * @param {{ checkoutToken?: string }} options
  */
-export async function startCheckout(product) {
+export async function startCheckout(product, options = {}) {
   if (!isConfigured) {
     throw new Error('Supabase not configured — cannot process payments in local mode');
   }
@@ -83,6 +84,10 @@ export async function startCheckout(product) {
   // benefits (subscription, founder seat, credit pack) that need a
   // user_id to bind to.
   const isAnonymousProduct = product === 'single_dossier';
+  const checkoutToken = options.checkoutToken;
+  if (isAnonymousProduct && (typeof checkoutToken !== 'string' || checkoutToken.length < 24)) {
+    throw new Error('A secure dossier checkout token is required');
+  }
 
   const { data: { session } } = await supabase.auth.getSession();
   if (!session && !isAnonymousProduct) {
@@ -90,7 +95,7 @@ export async function startCheckout(product) {
   }
 
   const { data, error } = await supabase.functions.invoke('create-checkout', {
-    body: { product },
+    body: { product, checkoutToken },
   });
 
   if (error) throw new Error(error.message || 'Checkout failed');
@@ -119,12 +124,13 @@ export async function startCustomerPortal() {
 
 /**
  * Check URL params for post-checkout status (called on app mount).
- * Returns { status, product } or null.
+ * Returns { status, product, sessionId } or null.
  */
 export function checkCheckoutResult() {
   const params = new URLSearchParams(window.location.search);
   const checkout = params.get('checkout');
   const product  = params.get('product');
+  const sessionId = params.get('session_id');
 
   if (!checkout) return null;
 
@@ -132,9 +138,28 @@ export function checkCheckoutResult() {
   const url = new URL(window.location.href);
   url.searchParams.delete('checkout');
   url.searchParams.delete('product');
-  window.history.replaceState({}, '', url.pathname);
+  url.searchParams.delete('session_id');
+  window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
 
-  return { status: checkout, product };
+  return { status: checkout, product, sessionId };
+}
+
+/** Verify an anonymous single-dossier payment before releasing the PDF. */
+export async function verifySingleDossierPurchase(sessionId, checkoutToken) {
+  if (!isConfigured) throw new Error('Payments are not configured');
+  if (typeof sessionId !== 'string' || !sessionId.startsWith('cs_')) {
+    throw new Error('Missing checkout session');
+  }
+  if (typeof checkoutToken !== 'string' || checkoutToken.length < 24) {
+    throw new Error('Missing dossier checkout token');
+  }
+
+  const { data, error } = await supabase.functions.invoke('verify-single-dossier', {
+    body: { sessionId, checkoutToken },
+  });
+  if (error) throw new Error(error.message || 'Purchase verification failed');
+  if (!data?.verified) throw new Error(data?.error || 'Purchase could not be verified');
+  return data;
 }
 
 /**

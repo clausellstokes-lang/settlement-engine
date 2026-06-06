@@ -4,7 +4,7 @@
  * Generates economic state, spatial layout, and available services.
  * Threads neighbour economic bias into config.
  *
- * Extracted from generateSettlement.js lines 793–801.
+ * Economy step for the settlement generation pipeline.
  *
  * Tier 4.3: emits structured supply-chain traces after the legacy
  * economic generator finishes. Traces are layered on top via

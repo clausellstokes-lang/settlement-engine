@@ -4,7 +4,7 @@
  * Resolves nearby resources from config — random terrain-compatible selection
  * or manual state map with tier-weighted depletion.
  *
- * Extracted from generateSettlement.js lines 296–386.
+ * Resource-resolution step for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

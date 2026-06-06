@@ -14,7 +14,7 @@ and what the actual unblocker is for each pending item.
 | 9.3  | Vendored Azgaar map artifact maintainability           | 🅿️ Queued     | Needs 3.6 (map bridge contract test) to stay green, plus a Worker boundary refactor |
 | 9.4  | Lint warning cleanup (528 → near-zero)                 | ✅ Closed (P47) | — |
 | 9.5  | Per-step PRNG forking determinism preservation         | ✅ Closed      | Preserved through P63 (legacy quarantine); ongoing vigilance |
-| 9.6  | Engine chunk size budget                               | 🅿️ Queued     | Blocked by 1.7 (retire legacy generator paths). Once the legacy generator is dead, the engine chunk drops naturally |
+| 9.6  | Engine chunk size budget                               | Ready to measure | Legacy generator paths retired; re-measure the current pipeline chunk |
 | 9.7  | vendor-pdf lazy verification                           | ✅ Done (P86)  | Build-time test in `tests/build/vendorPdfLazy.test.js` |
 | 9.8  | Generator file size discipline (split by subsystem)    | 🅿️ Queued     | Blocked by Tier 1 (canonical schema) + Tier 2 (trace layer) — split by causal subsystem, not by syntax |
 | 9.9  | Refund logic ledger consistency audit                  | ✅ Done (P87)  | Audit in `docs/refund-ledger-audit.md` + RPC contract test |
@@ -82,13 +82,9 @@ maintain the bridge contract.
 **What it is.** The `engine` chunk is ~600 kB minified (~187 kB
 gzipped). Loaded on first generation. Could likely be smaller.
 
-**Why queued.** Blocked by Tier 1.7 (quarantine legacy generator). The
-legacy `generateSettlement.js` and its parallel hydration paths still
-live in the engine chunk; until they're retired, optimisation work
-on the engine chunk would have to be replicated when the legacy code
-goes.
-
-**Unblocker.** Finish 1.7 (legacy generator fully off). Then:
+**Current state.** Tier 1.7 is complete: the compatibility generator and
+engine shim have been removed, and generation now has one pipeline path.
+The remaining work is measurement and targeted optimization:
 1. Re-measure engine chunk size — many duplicate utilities may
    collapse naturally.
 2. Identify the next-largest contributors via vite's bundle

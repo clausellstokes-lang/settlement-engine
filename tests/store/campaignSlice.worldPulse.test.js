@@ -13,6 +13,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
   const cached = new Map();
   const clone = value => JSON.parse(JSON.stringify(value));
   return {
+    isCampaignActive: campaign => (campaign?.accessState || 'active') === 'active',
     campaigns: {
       loadCached: vi.fn((ownerId = 'anon') => clone(cached.get(ownerId) || [])),
       cache: vi.fn((campaigns = [], ownerId = 'anon') => {
@@ -124,6 +125,33 @@ describe('campaignSlice world pulse', () => {
     expect(campaign.worldState.pulseHistory).toHaveLength(1);
     expect(campaign.wizardNews.currentTick).toBe(1);
     expect(store.getState().savedSettlements[0].campaignState.worldPulse.lastTick).toBe(1);
+  });
+
+  test('retained inactive campaigns reject ordinary store mutations', async () => {
+    const store = makeStore();
+    store.setState(state => {
+      state.campaigns = [{
+        id: 'retained-campaign',
+        name: 'Retained Realm',
+        accessState: 'inactive_plan',
+        settlementIds: ['ashford'],
+        collapsed: false,
+        regionalGraph: ensureRegionalGraph(),
+        wizardNews: { currentTick: 0, entries: [] },
+        worldState: { rngSeed: 'retained', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      }];
+    });
+
+    store.getState().toggleCampaignCollapsed('retained-campaign');
+    store.getState().renameCampaign('retained-campaign', 'Changed');
+    store.getState().clearCampaignWizardNews('retained-campaign');
+
+    expect(store.getState().previewCampaignWorldPulse('retained-campaign')).toBeNull();
+    expect(store.getState().campaigns[0]).toMatchObject({
+      name: 'Retained Realm',
+      collapsed: false,
+      accessState: 'inactive_plan',
+    });
   });
 
   test('proposal apply and dismiss update world state', async () => {

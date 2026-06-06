@@ -14,8 +14,15 @@ import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
 import { t } from '../copy/index.js';
 import { saves as savesService } from '../lib/saves.js';
+import { isCampaignActive } from '../lib/campaigns.js';
 import { activeSaveCount, inactiveRetentionCount, isPlanInactiveSave, isSaveActive } from '../lib/saveAccess.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
+import {
+  canonicalEdgeForLink,
+  relationshipDefinition,
+  relationshipLinkMetadata,
+  rolesForCanonicalEdge,
+} from '../domain/relationships/canonicalRelationship.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import DeleteConfirmation from './DeleteConfirmation';
@@ -35,7 +42,7 @@ function migrateConfig(config) {
 const NPC_PAIR_CATS = {
   trade_partner:['economy'], allied:['economy','military'], patron:['military','economy'],
   client:['economy'], rival:['economy','military'], cold_war:['military','criminal'],
-  hostile:['military'], neutral:['economy'],
+  hostile:['military'], vassal:['military','economy'], neutral:['economy'],
 };
 const CONTACT_DESC = {
   trade_partner:(a,ar,b,br,bs)=>`${a} (${ar}) maintains trade connections with ${b} (${br}) in ${bs}.`,
@@ -45,6 +52,7 @@ const CONTACT_DESC = {
   rival:        (a,ar,b,br,bs)=>`${a} (${ar}) and ${b} (${br}) of ${bs} are known adversaries competing for the same interests.`,
   cold_war:     (a,ar,b,br,bs)=>`${a} (${ar}) runs quiet intelligence operations against ${b} (${br}) of ${bs}, officially unacknowledged.`,
   hostile:      (a,ar,b,br,bs)=>`${a} (${ar}) and ${b} (${br}) of ${bs} are active enemies.`,
+  vassal:       (a,ar,b,br,bs)=>`${a} (${ar}) coordinates obligations and protection with ${b} (${br}) of ${bs}.`,
   neutral:      (a,ar,b,br,bs)=>`${a} (${ar}) has occasional dealings with ${b} (${br}) in ${bs}.`,
 };
 
@@ -71,6 +79,10 @@ function buildInterSettlementNPCs(settlementA, settlementB, relType, linkId) {
 
 function findSaveByName(saves, name) { return saves.find(s => s.name === name || s.settlement?.name === name) || null; }
 function findSaveById(saves, id) { return saves.find(s => s.id === id) || null; }
+function newSaveId() {
+  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  return `00000000-0000-4000-8000-${Date.now().toString(16).padStart(12, '0').slice(-12)}`;
+}
 
 const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', allied:'#1a5a28', secret_alliance:'#1a5a28', trade_partner:'#a0762a', patron:'#2a3a7a', client:'#2a3a7a', criminal_network:'#5a2a8a' };
 const _REL_TYPES = ['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
@@ -114,7 +126,7 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
               {(s.settlement.neighbourNetwork||[]).slice(0,3).map((n,ni) => {
                 const nc = REL_COLORS[n.relationshipType] || MUTED;
                 return <span key={ni} style={{ fontSize:FS.micro, fontWeight:700, color:nc, background:`${nc}18`, border:`1px solid ${nc}40`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap' }}>
-                  <Link2 size={8} style={{display:'inline',verticalAlign:'middle',marginRight:2}}/>{n.neighbourName||n.name} · {(n.relationshipType||'linked').replace(/_/g,' ')}
+                  <Link2 size={8} style={{display:'inline',verticalAlign:'middle',marginRight:2}}/>{n.neighbourName||n.name} · {(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ')}
                 </span>;
               })}
               {(s.settlement.neighbourNetwork||[]).length > 3 && <span style={{fontSize:FS.micro,color:MUTED}}>+{s.settlement.neighbourNetwork.length - 3} more</span>}
@@ -189,7 +201,13 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
             </button>
           )}
           <button disabled={!active} onClick={() => active && onView(s)} style={{ padding:'4px 10px', background:active ? swatch.infoBg : '#ddd5c8', color:active ? swatch.info : MUTED, border:'1px solid #c0c8e8', borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>View</button>
-          <button onClick={() => setDeleteId(deleteId === s.id ? null : s.id)} style={{ padding:'4px 10px', background:swatch.dangerBg, color:swatch.danger, border:'1px solid #e8c0c0', borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Delete</button>
+          <button
+            disabled={!active}
+            onClick={() => active && setDeleteId(deleteId === s.id ? null : s.id)}
+            style={{ padding:'4px 10px', background:active ? swatch.dangerBg : '#ddd5c8', color:active ? swatch.danger : MUTED, border:'1px solid #e8c0c0', borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}
+          >
+            Delete
+          </button>
         </div>
       </div>
       {deleteId === s.id && (
@@ -207,11 +225,34 @@ function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDelet
 }
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
-function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId }) {
+function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns }) {
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
   const collapsed = campaign.collapsed;
+  const retainedInactive = !isCampaignActive(campaign);
+  const active = !retainedInactive && canManageCampaigns;
+
+  if (!active) {
+    const retainedUntil = campaign.retentionExpiresAt
+      ? new Date(campaign.retentionExpiresAt).toLocaleDateString()
+      : null;
+    return (
+      <div style={{
+        display:'flex', alignItems:'center', gap:8, padding:'12px 14px',
+        background:swatch['#EEE9DF'], border:'1px solid #c9c0b2', borderRadius:8,
+        opacity:0.72, color:MUTED, fontFamily:sans,
+      }}>
+        <FolderOpen size={14}/>
+        <span style={{ flex:1, fontFamily:serif_, fontWeight:700, color:SECOND }}>{campaign.name}</span>
+        <span style={{ fontSize:FS.xxs, fontWeight:700 }}>
+          {retainedInactive
+            ? `Retained inactive${retainedUntil ? ` until ${retainedUntil}` : ''}`
+            : 'Available again with Premium'}
+        </span>
+      </div>
+    );
+  }
 
   // No overflow:hidden on the wrapper — would clip the "move to campaign"
   // popover on cards inside this section. The header's top corners are
@@ -440,6 +481,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const maxSaves = useStore(s => s.maxSaves());
   const canSave = useStore(s => s.canSave());
   const authTier = useStore(s => s.auth.tier);
+  const isElevated = useStore(s => s.isElevated());
   const authUser = useStore(s => s.auth.user);
   const setSavedSettlements = useStore(s => s.setSavedSettlements);
   const applyCosmeticRename = useStore(s => s.applyCosmeticRename);
@@ -449,6 +491,11 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   // Campaign store
   const campaigns = useStore(s => s.campaigns);
+  const canManageCampaigns = authTier === 'premium' || isElevated;
+  const activeCampaigns = useMemo(
+    () => canManageCampaigns ? campaigns.filter(isCampaignActive) : [],
+    [campaigns, canManageCampaigns],
+  );
   const createCampaign = useStore(s => s.createCampaign);
   const renameCampaign = useStore(s => s.renameCampaign);
   const deleteCampaign = useStore(s => s.deleteCampaign);
@@ -568,6 +615,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [showNewCampaign, setShowNewCampaign] = useState(false);
   const [reactivatingId, setReactivatingId] = useState(null);
   const [reactivationError, setReactivationError] = useState('');
+  const [persistenceError, setPersistenceError] = useState('');
 
   const allModifiers = useMemo(() => getAllModifiers(saves), [saves]);
   const activeSlotsUsed = useMemo(() => activeSaveCount(saves), [saves]);
@@ -683,21 +731,26 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     else navigate('settlements');
   }, [detail]);
 
-  const persistBatch = async (updatedSaves, modifiedIds) => {
+  const persistBatch = async (updatedSaves, modifiedIds, options = {}) => {
+    const previousSaves = saves;
     try {
-      if (savesService.writeAll) await savesService.writeAll(updatedSaves);
-      else for (const id of modifiedIds) {
-        const s = updatedSaves.find(x => x.id === id);
-        if (s) {
-          await savesService.update(id, {
-            settlement: s.settlement,
-            config: s.config,
-            campaignState: s.campaignState,
-            versionHistory: s.versionHistory,
-          });
-        }
-      }
-    } catch (e) { console.error('Persist failed:', e); }
+      setPersistenceError('');
+      const updates = modifiedIds
+        .map(id => updatedSaves.find(entry => String(entry.id) === String(id)))
+        .filter(Boolean);
+      await savesService.mutateBatch({
+        updates,
+        deletes: options.deletes || [],
+        creates: options.creates || [],
+      });
+    } catch (e) {
+      console.error('Persist failed:', e);
+      setSaves(previousSaves);
+      const openId = detail?.saveData?.id;
+      const previousDetail = previousSaves.find(entry => String(entry.id) === String(openId));
+      if (openId) setDetail(previousDetail ? { ...previousDetail, saveData: previousDetail } : null);
+      setPersistenceError('That change could not be saved. The library was restored to its previous state.');
+    }
   };
 
   // ── Rename ──────────────────────────────────────────────────────────────
@@ -741,7 +794,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const saveCurrentSettlement = async () => {
     if (!settlement || !canSave) return;
     if (activeSlotsUsed >= (maxSaves || 30)) return;
-    const saveId = Date.now();
+    const saveId = newSaveId();
     // Audit fix: pull the lifecycle data off the global slice and embed
     // it in the save record's `campaignState`. Without this, canonized
     // settlements would lose their phase / eventLog / systemState /
@@ -787,10 +840,33 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       const partnerSave = findSaveByName(currentSaves, nr.name);
       if (partnerSave) {
         const linkId = `link_${saveId}_${partnerSave.id}`;
-        const entryForA = { id:partnerSave.id, linkId, name:partnerSave.name, neighbourName:partnerSave.name, neighbourTier:partnerSave.tier, tier:partnerSave.tier, relationshipType:relType, description:`Generated as ${relType.replace(/_/g,' ')} of ${partnerSave.name}.`, bidirectional:true };
-        const entryForB = { id:saveId, linkId, name:newEntry.name, neighbourName:newEntry.name, neighbourTier:newEntry.tier, tier:newEntry.tier, relationshipType:relType, description:`${newEntry.name} was generated as ${relType.replace(/_/g,' ')} of this settlement.`, bidirectional:true };
-        const { forA: npcForA, forB: npcForB } = buildInterSettlementNPCs(settlement, partnerSave.settlement, relType, linkId);
-        const { forA: conflictForA, forB: conflictForB } = generateCrossSettlementConflicts(settlement, partnerSave.settlement, relType, linkId);
+        const edge = canonicalEdgeForLink(
+          { relationshipType: relType },
+          { ...newEntry, id: saveId },
+          partnerSave,
+        );
+        const roles = rolesForCanonicalEdge(edge, saveId, partnerSave.id);
+        const definition = {
+          relationshipType: edge.relationshipType,
+          from: edge.from,
+          to: edge.to,
+        };
+        const entryForA = {
+          id:partnerSave.id, linkId, name:partnerSave.name, neighbourName:partnerSave.name,
+          neighbourTier:partnerSave.tier, tier:partnerSave.tier,
+          ...relationshipLinkMetadata(definition, roles.sourceRole),
+          description:`Generated with ${roles.sourceRole.replace(/_/g,' ')} standing toward ${partnerSave.name}.`,
+          bidirectional:true,
+        };
+        const entryForB = {
+          id:saveId, linkId, name:newEntry.name, neighbourName:newEntry.name,
+          neighbourTier:newEntry.tier, tier:newEntry.tier,
+          ...relationshipLinkMetadata(definition, roles.targetRole),
+          description:`${newEntry.name} has ${roles.targetRole.replace(/_/g,' ')} standing toward this settlement.`,
+          bidirectional:true,
+        };
+        const { forA: npcForA, forB: npcForB } = buildInterSettlementNPCs(settlement, partnerSave.settlement, edge.relationshipType, linkId);
+        const { forA: conflictForA, forB: conflictForB } = generateCrossSettlementConflicts(settlement, partnerSave.settlement, edge.relationshipType, linkId);
         newEntry.settlement = { ...newEntry.settlement, neighbourNetwork: [entryForA, ...(newEntry.settlement.neighbourNetwork||[]).filter(n=>n.name!==partnerSave.name)], interSettlementRelationships: [...(newEntry.settlement.interSettlementRelationships||[]), ...npcForA, ...conflictForA] };
         currentSaves = currentSaves.map(s => {
           if (s.id !== partnerSave.id) return s;
@@ -802,10 +878,11 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
     const newSaves = [newEntry, ...currentSaves];
     setSaves(newSaves); setSaved(true); setTimeout(() => setSaved(false), 2000);
-    try {
-      await savesService.save(newEntry);
-      if (linkedPartnerSave) await savesService.update(linkedPartnerSave.id, { settlement: linkedPartnerSave.settlement });
-    } catch (e) { console.error('Save failed:', e); }
+    await persistBatch(
+      newSaves,
+      linkedPartnerSave ? [linkedPartnerSave.id] : [],
+      { creates: [newEntry] },
+    );
   };
 
   // ── Delete ──────────────────────────────────────────────────────────────
@@ -823,16 +900,31 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     setSaves(updated); setDeleteId(null);
     if (detail?.saveData?.id === id) setDetail(null);
     const modifiedIds = updated.filter((s, i) => s !== saves.filter(x => x.id !== id)[i]).map(s => s.id);
-    savesService.delete(id).catch(e => console.error('Delete failed:', e));
-    persistBatch(updated, modifiedIds);
+    persistBatch(updated, modifiedIds, { deletes: [id] });
   };
 
   // ── Link ────────────────────────────────────────────────────────────────
   const handleLink = (linkedSave, relType) => {
-    const resolvedRelType = relType || 'neutral';
+    const definition = relationshipDefinition(
+      relType || 'neutral',
+      detail.saveData.id,
+      linkedSave.id,
+    );
+    const resolvedRelType = definition.relationshipType;
     const linkId = `link_${detail.saveData.id}_${linkedSave.id}`;
-    const entryForCurrent = { id:linkedSave.id, linkId, name:linkedSave.name, neighbourName:linkedSave.name, neighbourTier:linkedSave.tier, tier:linkedSave.tier, relationshipType:resolvedRelType, description:`Manually linked as ${resolvedRelType.replace(/_/g,' ')}.`, bidirectional:true };
-    const entryForPartner = { id:detail.saveData.id, linkId, name:detail.settlement.name, neighbourName:detail.settlement.name, neighbourTier:detail.settlement.tier||detail.saveData.tier, tier:detail.saveData.tier, relationshipType:resolvedRelType, description:`${detail.settlement.name} manually linked as ${resolvedRelType.replace(/_/g,' ')}.`, bidirectional:true };
+    const entryForCurrent = {
+      id:linkedSave.id, linkId, name:linkedSave.name, neighbourName:linkedSave.name,
+      neighbourTier:linkedSave.tier, tier:linkedSave.tier,
+      ...relationshipLinkMetadata(definition, definition.sourceRole),
+      description:`Manually linked as ${definition.sourceRole.replace(/_/g,' ')}.`, bidirectional:true,
+    };
+    const entryForPartner = {
+      id:detail.saveData.id, linkId, name:detail.settlement.name,
+      neighbourName:detail.settlement.name,
+      neighbourTier:detail.settlement.tier||detail.saveData.tier, tier:detail.saveData.tier,
+      ...relationshipLinkMetadata(definition, definition.targetRole),
+      description:`${detail.settlement.name} is linked as ${definition.targetRole.replace(/_/g,' ')}.`, bidirectional:true,
+    };
     const { forA: npcForA, forB: npcForB } = buildInterSettlementNPCs(detail.settlement, linkedSave.settlement, resolvedRelType, linkId);
     const { forA: conflictForA, forB: conflictForB } = generateCrossSettlementConflicts(detail.settlement, linkedSave.settlement, resolvedRelType, linkId);
     const network = [...(detail.settlement.neighbourNetwork||[]), entryForCurrent];
@@ -936,9 +1028,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // Derive assigned/unassigned settlement grouping
   const assignedIds = useMemo(() => {
     const ids = new Set();
-    for (const c of campaigns) for (const id of c.settlementIds) ids.add(id);
+    for (const c of activeCampaigns) for (const id of c.settlementIds) ids.add(id);
     return ids;
-  }, [campaigns]);
+  }, [activeCampaigns]);
 
   const unassignedSaves = useMemo(() => saves.filter(s => !assignedIds.has(s.id)), [saves, assignedIds]);
 
@@ -975,6 +1067,14 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // ── List view ───────────────────────────────────────────────────────────
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:12, maxWidth: PAGE_MAX, margin:'0 auto', width:'100%' }}>
+      {persistenceError && (
+        <div role="alert" style={{
+          padding:'9px 12px', background:swatch.dangerBg, color:swatch.danger,
+          border:'1px solid #e8c0c0', borderRadius:6, fontFamily:sans, fontSize:FS.sm,
+        }}>
+          {persistenceError}
+        </div>
+      )}
 
       {/* P108 / E-6 — Library toolbar (search + sort + filter chips). */}
       {saves.length > 0 && (
@@ -1012,7 +1112,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       </div>
 
       {/* New campaign button */}
-      {authTier !== 'anon' && (
+      {canManageCampaigns && (
         <div style={{ display:'flex', gap:8, alignItems:'center' }}>
           {showNewCampaign ? (
             <div style={{ flex:1, display:'flex', gap:6 }}>
@@ -1041,12 +1141,14 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         <>
           {/* Campaign folders */}
           {campaigns.map(campaign => {
-            const campSaves = campaign.settlementIds.map(id => saves.find(s => s.id === id)).filter(Boolean);
+            const campSaves = canManageCampaigns && isCampaignActive(campaign)
+              ? campaign.settlementIds.map(id => saves.find(s => s.id === id)).filter(Boolean)
+              : [];
             return (
               <CampaignFolder key={campaign.id} campaign={campaign} settlements={campSaves}
                 allModifiers={allModifiers} onViewSettlement={onViewSettlement}
                 deleteId={deleteId} setDeleteId={setDeleteId} deleteConfirmed={deleteConfirmed}
-                campaigns={campaigns} addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
+                campaigns={activeCampaigns} addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
                 onDeleteCampaign={deleteCampaign} onRenameCampaign={renameCampaign}
                 toggleCollapsed={toggleCampaignCollapsed}
                 onDiscoverRegional={discoverCampaignRegionalChannels}
@@ -1059,7 +1161,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 onIgnoreAllRegionalImpacts={handleIgnoreAllRegionalImpacts}
                 onReactivate={handleReactivateSave}
                 canReactivate={canReactivateInactive}
-                reactivatingId={reactivatingId}/>
+                reactivatingId={reactivatingId}
+                canManageCampaigns={canManageCampaigns}/>
             );
           })}
 
@@ -1075,7 +1178,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 {unassignedSaves.map(s => (
                   <SettlementCard key={s.id} s={s} allModifiers={allModifiers}
                     onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}
-                    deleteConfirmed={deleteConfirmed} campaigns={campaigns}
+                    deleteConfirmed={deleteConfirmed} campaigns={activeCampaigns}
                     addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
                     currentCampaignId={null}
                     onReactivate={handleReactivateSave}

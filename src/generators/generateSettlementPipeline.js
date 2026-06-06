@@ -5,7 +5,7 @@
  * Same signature, same output, but internally runs through registered steps
  * with seeded PRNG for deterministic generation.
  *
- * Strangler Fig: This coexists with the old generateSettlement.js.
+ * This is the sole settlement generation entry point.
  * Once validated, the old file can be deleted and this becomes the sole entry point.
  */
 

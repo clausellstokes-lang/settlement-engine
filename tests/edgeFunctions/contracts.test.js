@@ -634,12 +634,33 @@ describe('Tier 3.3 — create-checkout metadata wiring (must align with webhook)
     expect(src).toMatch(/credits:\s*String\(CREDIT_AMOUNTS\[product\]/);
   });
 
+  it('binds single-dossier checkout to a one-time token and Stripe session return', () => {
+    expect(src).toMatch(/checkout_token/);
+    expect(src).toMatch(/session_id=\{CHECKOUT_SESSION_ID\}/);
+  });
+
   it('webhook reads exactly the same three metadata fields', () => {
     // If checkout writes supabase_user_id but webhook reads user_id,
     // privilege paths break. Cross-check the wire contract.
     expect(webhookSrc).toMatch(/supabase_user_id/);
     expect(webhookSrc).toMatch(/session\.metadata\?\.\s*product/);
     expect(webhookSrc).toMatch(/session\.metadata\?\.\s*credits/);
+  });
+});
+
+describe('single-dossier payment verification', () => {
+  let src;
+  beforeAll(() => { src = readFunction('verify-single-dossier'); });
+
+  it('retrieves the Stripe session server-side', () => {
+    expect(src).toMatch(/stripe\.checkout\.sessions\.retrieve/);
+  });
+
+  it('requires a complete paid single-dossier session with matching token', () => {
+    expect(src).toMatch(/session\.status\s*===\s*['"]complete['"]/);
+    expect(src).toMatch(/payment_status/);
+    expect(src).toMatch(/metadata\?\.product\s*===\s*['"]single_dossier['"]/);
+    expect(src).toMatch(/metadata\?\.checkout_token\s*===\s*checkoutToken/);
   });
 });
 
@@ -661,7 +682,14 @@ describe('Tier 3.3 — create-checkout CORS handling', () => {
 // Cross-function security
 // ─────────────────────────────────────────────────────────────────────────
 
-const ALL_FUNCTIONS = ['stripe-webhook', 'generate-narrative', 'admin-actions', 'create-checkout'];
+const ALL_FUNCTIONS = [
+  'stripe-webhook',
+  'generate-narrative',
+  'generate-chronicle',
+  'admin-actions',
+  'create-checkout',
+  'verify-single-dossier',
+];
 
 describe('Tier 3.3 — no plaintext secrets committed', () => {
   it('no edge function contains a literal Stripe live key', () => {
@@ -910,7 +938,7 @@ describe('Tier 0.5 — create-checkout metadata population is server-controlled'
     // path is still mandatory for every NON-single_dossier product,
     // and supabase_user_id still comes from the server-verified JWT
     // for any product that does provide auth.
-    const bodyIdx = checkoutSrc.search(/const\s*\{\s*product\s*\}\s*=\s*await\s*req\.json/);
+    const bodyIdx = checkoutSrc.search(/const\s*\{\s*product(?:\s*,\s*checkoutToken)?\s*\}\s*=\s*await\s*req\.json/);
     const authIdx = checkoutSrc.search(/getUser\s*\(/);
     expect(bodyIdx).toBeGreaterThan(0);
     expect(authIdx).toBeGreaterThan(0);
@@ -1003,7 +1031,13 @@ describe('Tier 0.10 — shared bot-guard helper exists', () => {
 describe('Tier 0.10 — every user-facing edge function uses the bot guard', () => {
   // stripe-webhook is INTENTIONALLY excluded: signature verification is
   // the real gate and Stripe's UA matches the allow-list anyway.
-  const FUNCTIONS_WITH_GUARD = ['create-checkout', 'generate-narrative', 'admin-actions'];
+  const FUNCTIONS_WITH_GUARD = [
+    'create-checkout',
+    'verify-single-dossier',
+    'generate-narrative',
+    'generate-chronicle',
+    'admin-actions',
+  ];
 
   for (const name of FUNCTIONS_WITH_GUARD) {
     describe(name, () => {
@@ -1030,8 +1064,10 @@ describe('Tier 0.10 — every user-facing edge function uses the bot guard', () 
         const guardIdx = src.search(/botGuard\s*\(/);
         const authIdx  = src.search(/req\.headers\.get\(\s*['"]Authorization['"]/);
         expect(guardIdx).toBeGreaterThan(0);
-        expect(authIdx).toBeGreaterThan(0);
-        expect(authIdx).toBeGreaterThan(guardIdx);
+        if (name !== 'verify-single-dossier') {
+          expect(authIdx).toBeGreaterThan(0);
+          expect(authIdx).toBeGreaterThan(guardIdx);
+        }
       });
     });
   }

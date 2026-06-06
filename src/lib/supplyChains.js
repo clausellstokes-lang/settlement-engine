@@ -72,10 +72,8 @@ export function buildChainEdges(settlementA, settlementB) {
     if (r && typeof r === 'object') return (r.id || r.name || '').toLowerCase();
     return '';
   };
-  // The canonical location on a generated settlement is
-  // `settlement.config.nearbyResources` (set at generateSettlement.js:1031
-  // when spreading effectiveConfig). Fall back to a handful of other shapes
-  // for custom-edited or imported saves.
+  // The canonical location is `settlement.config.nearbyResources`. Fall back
+  // to a handful of other shapes for custom-edited or imported saves.
   const resListA = settlementA?.config?.nearbyResources
     || settlementA?.nearbyResources
     || settlementA?.resources

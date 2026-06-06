@@ -26,6 +26,7 @@ import { MAP_MODES } from '../store/mapSlice.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans, FS, SP, R, swatch, PARCH_100 } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
+import { isCampaignActive } from '../lib/campaigns.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 
 const MapOverlay     = lazy(() => import('./MapOverlay.jsx'));
@@ -95,7 +96,13 @@ export default function WorldMap({ onNavigate } = {}) {
   const savesLoaded    = useStore(s => s.savedSettlementsLoaded);
   const setSavedSettlements = useStore(s => s.setSavedSettlements);
   const authTier       = useStore(s => s.auth?.tier);
+  const isElevated     = useStore(s => s.isElevated());
   const campaigns      = useStore(s => s.campaigns);
+  const canManageCampaigns = authTier === 'premium' || isElevated;
+  const activeCampaigns = useMemo(
+    () => canManageCampaigns ? campaigns.filter(isCampaignActive) : [],
+    [campaigns, canManageCampaigns],
+  );
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const setActiveCampaign = useStore(s => s.setActiveCampaign);
   const saveCampaignMap   = useStore(s => s.saveCampaignMap);
@@ -104,8 +111,8 @@ export default function WorldMap({ onNavigate } = {}) {
   const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
 
   const activeCampaign = useMemo(
-    () => campaigns.find(c => c.id === activeCampaignId) || null,
-    [campaigns, activeCampaignId],
+    () => activeCampaigns.find(c => c.id === activeCampaignId) || null,
+    [activeCampaigns, activeCampaignId],
   );
   const showingWizardNews = Boolean(activeCampaign && campaignWorkspace === 'news');
   const showingWorldPulse = Boolean(activeCampaign && campaignWorkspace === 'pulse');
@@ -116,6 +123,10 @@ export default function WorldMap({ onNavigate } = {}) {
   // every draft the user is tinkering with. Toggleable via the
   // toolbar so power users can opt out.
   const [canonOnlyFilter, setCanonOnlyFilter] = useState(true);
+
+  useEffect(() => {
+    if (activeCampaignId && !activeCampaign) setActiveCampaign(null);
+  }, [activeCampaignId, activeCampaign, setActiveCampaign]);
 
   // When a campaign is selected, only its settlements are draggable.
   // Layered: campaign membership first, then canon filter on top.
@@ -552,7 +563,7 @@ export default function WorldMap({ onNavigate } = {}) {
         <div style={{ width: 1, height: 24, background: BORDER2 }} />
 
         {/* Campaign controls */}
-        {authTier !== 'anon' && (
+        {canManageCampaigns && (
           <>
             <FolderOpen size={14} color={activeCampaign ? GOLD : MUTED} />
             <select
@@ -566,7 +577,7 @@ export default function WorldMap({ onNavigate } = {}) {
               }}
             >
               <option value="">, No campaign</option>
-              {campaigns.map(c => (
+              {activeCampaigns.map(c => (
                 <option key={c.id} value={c.id}>
                   {c.name}{c.mapState ? ' ●' : ''}
                   {c.settlementIds?.length ? ` (${c.settlementIds.length})` : ''}

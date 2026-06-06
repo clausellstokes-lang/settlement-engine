@@ -15,6 +15,8 @@
  * and computation stays fast even with large networks.
  */
 
+import { localPropagationType } from '../domain/relationships/canonicalRelationship.js';
+
 // ── Effect categories ───────────────────────────────────────────────────────
 
 export const EFFECT_CATEGORIES = [
@@ -43,6 +45,7 @@ export const PROPAGATION_MATRIX = {
   rival:         { economy: -0.3,  safety: -0.3,  supply: -0.2,  political: -0.3,  defensibility: -0.6,  decay: 0.3  },
   cold_war:      { economy: -0.4,  safety: -0.4,  supply: -0.4,  political: -0.4,  defensibility: -0.7,  decay: 0.35 },
   hostile:       { economy: -0.5,  safety: -0.6,  supply: -0.5,  political: -0.5,  defensibility: -0.8,  decay: 0.3  },
+  criminal_network: { economy: 0.2, safety: -0.35, supply: 0.25, political: -0.3, defensibility: -0.2, decay: 0.45 },
 };
 
 const MAX_DEPTH = 3;
@@ -113,7 +116,7 @@ export function buildGraph(savedSettlements) {
   for (const ss of savedSettlements) {
     const network = ss.settlement?.neighbourNetwork || [];
     for (const link of network) {
-      const relType = link.relationshipType || 'neutral';
+      const relType = localPropagationType(link);
       const neighbourName = link.neighbourName || link.name;
 
       // Find the target settlement by matching linkId in other settlements
@@ -362,10 +365,13 @@ export const REL_LABELS = {
   neutral: 'Neutral',
   trade_partner: 'Trade Partner',
   allied: 'Military Ally',
-  patron: 'Overlord',
-  client: 'Vassal',
+  ally: 'Military Ally',
+  patron: 'Patron',
+  client: 'Client',
+  overlord: 'Overlord',
   vassal: 'Vassal State',
   rival: 'Rival',
   cold_war: 'Cold War',
   hostile: 'Hostile',
+  criminal_network: 'Criminal Network',
 };

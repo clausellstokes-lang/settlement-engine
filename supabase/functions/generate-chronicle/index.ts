@@ -68,7 +68,7 @@ serve(async (req) => {
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
 
   const guard = botGuard(req, 'generate-chronicle');
-  if (guard) return guard;
+  if (guard.reject) return guard.reject;
 
   try {
     const authHeader = req.headers.get('Authorization');
@@ -88,16 +88,21 @@ serve(async (req) => {
 
     // Atomic, RLS-enforced credit spend (same path as generate-narrative).
     const { data: spendResult, error: spendErr } = await supabaseUser.rpc('spend_credits', {
-      amount: CHRONICLE_COST,
-      reason: 'chronicle',
+      feature: 'chronicle',
     });
     if (spendErr) return json({ error: spendErr.message || 'Insufficient credits' }, 402);
+    if (!spendResult?.ok) {
+      return json({ error: spendResult?.reason || 'Insufficient credits', balance: spendResult?.balance ?? 0 }, 402);
+    }
     const spendId = spendResult?.spend_id ?? spendResult?.id ?? null;
     const balanceAfter = spendResult?.balance ?? null;
 
     const refund = async (why: string) => {
       if (!spendId) return;
-      await supabaseUser.rpc('refund_credits', { spend_id: spendId, refund_reason: why }).catch(() => {});
+      await supabaseUser.rpc('refund_credits', {
+        spend_ledger_row: spendId,
+        refund_reason: why,
+      }).catch(() => {});
     };
 
     let prose = '';

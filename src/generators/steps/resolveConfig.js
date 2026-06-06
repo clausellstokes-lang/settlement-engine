@@ -4,7 +4,7 @@
  * Resolves tier, population, trade route, terrain, culture, magic level,
  * monster threat, and priority sliders from raw user config.
  *
- * Extracted from generateSettlement.js lines 198–410.
+ * Configuration-resolution step for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

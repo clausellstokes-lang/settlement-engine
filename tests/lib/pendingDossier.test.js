@@ -1,15 +1,12 @@
 /** @vitest-environment jsdom */
-/**
- * tests/lib/pendingDossier.test.js — Pre/post Stripe-redirect stash.
- *
- * The stash is the only thing standing between a paid receipt and an
- * empty dossier, so pin its contract: TTL works, malformed payloads
- * don't crash, storage failures degrade gracefully.
- */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import {
-  stashPendingDossier, readPendingDossier, clearPendingDossier,
+  attachPendingDossierCheckout,
+  clearPendingDossier,
+  createDossierCheckoutToken,
+  readPendingDossier,
+  stashPendingDossier,
 } from '../../src/lib/pendingDossier.js';
 
 beforeEach(() => {
@@ -21,84 +18,97 @@ afterEach(() => {
 });
 
 const SAMPLE = { name: 'Greycairn', tier: 'town', population: 1300 };
+const TOKEN = 'checkout-token-12345678901234567890';
 
 describe('stashPendingDossier()', () => {
-  it('persists a settlement and returns true', () => {
-    expect(stashPendingDossier(SAMPLE)).toBe(true);
+  it('persists a tokenized settlement', () => {
+    expect(stashPendingDossier(SAMPLE, TOKEN)).toBe(true);
     const raw = JSON.parse(window.localStorage.getItem('sf.pendingDossier'));
     expect(raw.settlement.name).toBe('Greycairn');
+    expect(raw.checkoutToken).toBe(TOKEN);
     expect(typeof raw.stashedAt).toBe('number');
   });
 
-  it('returns false for missing input (won\'t wipe an existing stash)', () => {
-    stashPendingDossier(SAMPLE);
-    expect(stashPendingDossier(null)).toBe(false);
+  it('rejects missing settlement or checkout token without wiping the stash', () => {
+    stashPendingDossier(SAMPLE, TOKEN);
+    expect(stashPendingDossier(null, TOKEN)).toBe(false);
+    expect(stashPendingDossier(SAMPLE, '')).toBe(false);
     expect(readPendingDossier()?.settlement.name).toBe('Greycairn');
   });
 
-  it('returns false when storage throws (private mode)', () => {
-    // JSDOM's Storage methods sit on the prototype as non-writable, so
-    // direct assignment is silently ignored. Spy on the prototype so
-    // the override takes effect.
+  it('returns false when storage throws', () => {
     const spy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('Quota');
     });
-    expect(stashPendingDossier(SAMPLE)).toBe(false);
+    expect(stashPendingDossier(SAMPLE, TOKEN)).toBe(false);
     spy.mockRestore();
   });
 });
 
 describe('readPendingDossier()', () => {
-  it('returns null when nothing stored', () => {
+  it('returns null when nothing is stored', () => {
     expect(readPendingDossier()).toBeNull();
   });
 
-  it('round-trips a stash', () => {
-    stashPendingDossier(SAMPLE, 'cs_test_123');
+  it('round-trips a stash with a Stripe session', () => {
+    stashPendingDossier(SAMPLE, TOKEN, 'cs_test_123');
     const got = readPendingDossier();
     expect(got.settlement.name).toBe('Greycairn');
+    expect(got.checkoutToken).toBe(TOKEN);
     expect(got.sessionId).toBe('cs_test_123');
   });
 
-  it('clears stale entries (>1 hour)', () => {
+  it('clears stale entries after one hour', () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2026-05-17T12:00:00'));
-    stashPendingDossier(SAMPLE);
-
+    stashPendingDossier(SAMPLE, TOKEN);
     vi.setSystemTime(new Date('2026-05-17T13:01:00'));
     expect(readPendingDossier()).toBeNull();
     expect(window.localStorage.getItem('sf.pendingDossier')).toBeNull();
   });
 
-  it('keeps entries that are within TTL', () => {
+  it('keeps entries within the TTL', () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2026-05-17T12:00:00'));
-    stashPendingDossier(SAMPLE);
-
+    stashPendingDossier(SAMPLE, TOKEN);
     vi.setSystemTime(new Date('2026-05-17T12:55:00'));
     expect(readPendingDossier()?.settlement.name).toBe('Greycairn');
   });
 
-  it('clears + returns null on malformed JSON', () => {
+  it('clears malformed or pre-token payloads', () => {
     window.localStorage.setItem('sf.pendingDossier', '{not json');
     expect(readPendingDossier()).toBeNull();
-    expect(window.localStorage.getItem('sf.pendingDossier')).toBeNull();
-  });
-
-  it('clears + returns null on missing settlement field', () => {
-    window.localStorage.setItem('sf.pendingDossier', JSON.stringify({ stashedAt: Date.now() }));
+    window.localStorage.setItem('sf.pendingDossier', JSON.stringify({
+      settlement: SAMPLE,
+      stashedAt: Date.now(),
+    }));
     expect(readPendingDossier()).toBeNull();
   });
 });
 
-describe('clearPendingDossier()', () => {
-  it('removes the stash', () => {
-    stashPendingDossier(SAMPLE);
-    clearPendingDossier();
-    expect(window.localStorage.getItem('sf.pendingDossier')).toBeNull();
+describe('checkout binding', () => {
+  it('creates a suitably long one-time token', () => {
+    expect(createDossierCheckoutToken().length).toBeGreaterThanOrEqual(24);
   });
 
-  it('is a no-op when nothing is stashed', () => {
+  it('attaches Stripe session ID to an existing stash', () => {
+    stashPendingDossier(SAMPLE, TOKEN);
+    expect(attachPendingDossierCheckout('cs_test_123')).toBe(true);
+    expect(readPendingDossier()?.sessionId).toBe('cs_test_123');
+  });
+
+  it('rejects invalid Stripe session IDs', () => {
+    stashPendingDossier(SAMPLE, TOKEN);
+    expect(attachPendingDossierCheckout('not-stripe')).toBe(false);
+    expect(readPendingDossier()?.sessionId).toBeNull();
+  });
+});
+
+describe('clearPendingDossier()', () => {
+  it('removes the stash and is safe when empty', () => {
+    stashPendingDossier(SAMPLE, TOKEN);
+    clearPendingDossier();
+    expect(window.localStorage.getItem('sf.pendingDossier')).toBeNull();
     expect(() => clearPendingDossier()).not.toThrow();
   });
 });

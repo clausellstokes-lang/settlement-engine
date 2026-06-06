@@ -71,7 +71,7 @@ export default defineConfig({
   // Boot the Vite dev server for the spec lifetime. If a dev server
   // is already running on PORT, reuse it (interactive dev loop).
   webServer: {
-    command: 'npm run dev',
+    command: 'npm run dev -- --mode e2e',
     url: BASE_URL,
     timeout: 60_000,
     reuseExistingServer: !process.env.CI,

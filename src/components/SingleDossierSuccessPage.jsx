@@ -24,6 +24,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Check, Download, AlertCircle, LogIn, ArrowRight } from 'lucide-react';
 import { readPendingDossier, clearPendingDossier } from '../lib/pendingDossier.js';
+import { verifySingleDossierPurchase } from '../lib/stripe.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
 import { GOLD, INK, BORDER, CARD, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
@@ -35,23 +36,49 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
   const [pending, setPending] = useState(() => readPendingDossier());
   const [downloading, setDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState(null);
+  const [verification, setVerification] = useState(() => (
+    pending?.settlement && pending?.sessionId && pending?.checkoutToken
+      ? { status: 'checking', error: null }
+      : {
+          status: 'failed',
+          error: 'The paid checkout session could not be matched to this dossier.',
+        }
+  ));
   // Ref-based guard avoids the setState-in-effect warning. The auto-
   // download fires exactly once per mount even under React 19 strict-
   // mode double-invocation.
   const autoDownloadedRef = useRef(false);
 
-  // Tier 8.8 / 8.9 — record the purchase event. Fires once when we
-  // have a confirmed pending dossier (i.e. the user really came here
-  // from a successful checkout, not by typing the URL). PAID_AFTER_ANON
-  // attributes back to the anonymous funnel when applicable.
+  useEffect(() => {
+    let cancelled = false;
+    if (!pending?.settlement || !pending?.sessionId || !pending?.checkoutToken) {
+      return undefined;
+    }
+    verifySingleDossierPurchase(pending.sessionId, pending.checkoutToken)
+      .then(() => {
+        if (!cancelled) setVerification({ status: 'verified', error: null });
+      })
+      .catch(error => {
+        if (!cancelled) {
+          setVerification({
+            status: 'failed',
+            error: error.message || 'Purchase verification failed.',
+          });
+        }
+      });
+    return () => { cancelled = true; };
+  }, [pending]);
+
+  // Record the purchase only after Stripe has verified the session.
   const analyticsFiredRef = useRef(false);
   useEffect(() => {
     if (analyticsFiredRef.current) return;
     if (!pending?.settlement) return;
+    if (verification.status !== 'verified') return;
     analyticsFiredRef.current = true;
     track(EVENTS.SINGLE_DOSSIER_PURCHASED, { tier: pending.settlement.tier });
     Funnel.paidAction({ kind: 'single_dossier' });
-  }, [pending]);
+  }, [pending, verification.status]);
 
   // Auto-trigger the download once on mount when we have a stash —
   // the user paid for the PDF, they shouldn't have to hunt for the
@@ -59,26 +86,22 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
   useEffect(() => {
     if (autoDownloadedRef.current) return;
     if (!pending?.settlement) return;
+    if (verification.status !== 'verified') return;
     autoDownloadedRef.current = true;
     handleDownload();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pending]);
+  }, [pending, verification.status]);
 
   async function handleDownload() {
     if (!pending?.settlement) return;
+    if (verification.status !== 'verified') return;
     setDownloading(true); setDownloadError(null);
     try {
       // Lazy import keeps the @react-pdf/renderer chunk out of the
       // initial bundle for users who land on this page from a search
       // engine but never actually trigger a download.
       const { generateSettlementPDF } = await import('../utils/generateSettlementPDF.js');
-      // The single-dossier flow is the canonical anonymous path — these
-      // buyers do not have accounts. The watermark stays out of paid
-      // tier exports (Wanderer/Cartographer/Founder) which use
-      // SettlementDetail's export handler. Founder accounts also pass
-      // their own isFounder flag, which is mutually exclusive with this
-      // anonymous path.
-      await generateSettlementPDF(pending.settlement, { isAnonymous: true });
+      await generateSettlementPDF(pending.settlement, { isAnonymous: false });
     } catch (e) {
       console.error('[SingleDossierSuccess] PDF generation failed:', e);
       setDownloadError(e.message || 'Could not generate the PDF.');
@@ -102,7 +125,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
   // they completed Stripe in one tab and opened the success link in
   // another. We can't show them the dossier (we never had it on this
   // device), so explain and offer recovery.
-  if (!pending?.settlement) {
+  if (!pending?.settlement || verification.status === 'failed') {
     return (
       <div style={{
         maxWidth: 560, margin: `${SP.xxl}px auto`,
@@ -114,16 +137,15 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         <h1 style={{
           margin: `${SP.md}px 0 0`, fontFamily: serif_, fontSize: FS.xxl, color: INK,
         }}>
-          Receipt confirmed
+          We couldn’t verify this dossier
         </h1>
         <p style={{
           margin: `${SP.sm}px auto 0`, maxWidth: 420,
           fontSize: FS.md, color: BODY, lineHeight: 1.55,
         }}>
-          Your purchase went through, but this device doesn’t have the original
-          settlement cached anymore. Check your email: Stripe will have sent a
-          receipt with the session ID. Forward that to support and we’ll resend
-          your dossier.
+          {verification.error || 'This device no longer has the original settlement checkout details.'}
+          {' '}Check your Stripe receipt for the session ID and send it to support
+          so the purchase can be recovered safely.
         </p>
         <a
           href="mailto:clausellstokes@aol.com?subject=Single%20dossier%20recovery"
@@ -143,6 +165,19 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
   }
 
   const settlementName = pending.settlement.name || 'your settlement';
+
+  if (verification.status === 'checking') {
+    return (
+      <div style={{
+        maxWidth: 560, margin: `${SP.xxl}px auto`, padding: `${SP.xxl}px ${SP.xl}px`,
+        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
+        fontFamily: sans, color: INK, textAlign: 'center',
+      }}>
+        <h1 style={{ margin: 0, fontFamily: serif_, fontSize: FS.xxl }}>Confirming your purchase</h1>
+        <p style={{ margin: `${SP.sm}px 0 0`, color: BODY }}>Checking the paid Stripe session before preparing the PDF.</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{
@@ -186,7 +221,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         <button
           type="button"
           onClick={handleDownload}
-          disabled={downloading}
+          disabled={downloading || verification.status !== 'verified'}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: `${SP.md}px ${SP.xl}px`,

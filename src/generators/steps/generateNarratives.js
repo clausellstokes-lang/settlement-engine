@@ -4,7 +4,7 @@
  * Generates settlement reason, resource analysis, economic viability,
  * history, and legacy annotations.
  *
- * Extracted from generateSettlement.js lines 891, 984–1001.
+ * Narrative step for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

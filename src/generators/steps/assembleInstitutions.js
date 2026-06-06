@@ -5,7 +5,7 @@
  * probabilistic generation, out-of-tier forced institutions, and upgrade
  * chain deduplication.
  *
- * Extracted from generateSettlement.js lines 442–625.
+ * Institution assembly step for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';

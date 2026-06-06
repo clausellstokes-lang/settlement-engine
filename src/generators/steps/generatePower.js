@@ -3,7 +3,7 @@
  *
  * Generates power structure (government, factions, legitimacy).
  *
- * Extracted from generateSettlement.js line 802.
+ * Power-structure step for the settlement generation pipeline.
  *
  * Tier 4.1: emits structured faction traces after the legacy power
  * generator finishes. The generator itself is not refactored — the

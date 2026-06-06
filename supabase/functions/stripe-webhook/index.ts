@@ -95,9 +95,10 @@ async function findUserIdForStripeCustomer(
   if (!profile?.id) return null;
 
   if (customerId) {
-    await supabase.from('profiles')
+    const { error } = await supabase.from('profiles')
       .update({ stripe_customer_id: customerId })
       .eq('id', profile.id);
+    if (error) throw new Error(`Stripe customer binding failed: ${error.message}`);
   }
   return { userId: profile.id as string, isFounder: Boolean(profile.is_founder) };
 }
@@ -111,8 +112,7 @@ async function grantMonthlyAllowanceIfNeeded(
     : invoice.customer?.id || null;
   const profile = await findUserIdForStripeCustomer(supabase, customerId, invoice.customer_email || null);
   if (!profile?.userId) {
-    console.error('[stripe-webhook] monthly allowance invoice has no matching profile:', invoice.id);
-    return;
+    throw new Error(`Monthly allowance invoice ${invoice.id} has no matching profile`);
   }
 
   const { data: existing } = await supabase
@@ -193,8 +193,7 @@ serve(async (req) => {
       // supabase_user_id (it doesn't require an account). Everything else
       // does — bail with a log so we get a Stripe dashboard breadcrumb.
       if (!userId && product !== 'single_dossier') {
-        console.error('No supabase_user_id in session metadata');
-        break;
+        throw new Error('No supabase_user_id in session metadata');
       }
 
       if (product === 'premium') {
@@ -203,14 +202,15 @@ serve(async (req) => {
         const { error } = await supabase.auth.admin.updateUserById(userId!, {
           user_metadata: { tier: 'premium' },
         });
-        if (error) console.error('Failed to upgrade user:', error);
+        if (error) throw new Error(`Failed to upgrade user: ${error.message}`);
 
-        await supabase.from('profiles').update({
+        const { error: profileError } = await supabase.from('profiles').update({
           tier: 'premium',
           stripe_customer_id: typeof session.customer === 'string' ? session.customer : session.customer?.id || null,
           premium_downgraded_at: null,
           premium_retention_expires_at: null,
         }).eq('id', userId);
+        if (profileError) throw new Error(`Failed to update premium profile: ${profileError.message}`);
         const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
         if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
         console.log(`User ${userId} upgraded to premium (Cartographer)`);
@@ -223,9 +223,9 @@ serve(async (req) => {
         const { error } = await supabase.auth.admin.updateUserById(userId!, {
           user_metadata: { tier: 'premium', is_founder: true },
         });
-        if (error) console.error('Failed to upgrade user to founder:', error);
+        if (error) throw new Error(`Failed to upgrade user to founder: ${error.message}`);
 
-        await supabase.from('profiles')
+        const { error: profileError } = await supabase.from('profiles')
           .update({
             tier: 'premium',
             is_founder: true,
@@ -234,6 +234,7 @@ serve(async (req) => {
             premium_retention_expires_at: null,
           })
           .eq('id', userId);
+        if (profileError) throw new Error(`Failed to update founder profile: ${profileError.message}`);
         const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
         if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
 
@@ -283,9 +284,12 @@ serve(async (req) => {
         if (downgradeError) {
           throw new Error(`Premium downgrade failed: ${downgradeError.message}`);
         }
-        await supabase.auth.admin.updateUserById(profile.userId, {
+        const { error: authDowngradeError } = await supabase.auth.admin.updateUserById(profile.userId, {
           user_metadata: { tier: 'free' },
         });
+        if (authDowngradeError) {
+          throw new Error(`Auth downgrade failed: ${authDowngradeError.message}`);
+        }
         console.log(`User ${profile.userId} downgraded to free with retention window`);
       }
       break;

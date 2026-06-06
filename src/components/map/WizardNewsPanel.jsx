@@ -1,7 +1,9 @@
-import { AlertTriangle, CheckCircle2, Clock3, Newspaper, RadioTower, ShieldAlert } from 'lucide-react';
-import { useMemo } from 'react';
+import { AlertTriangle, BookOpen, CheckCircle2, Clock3, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
+import { useMemo, useState } from 'react';
 
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
+import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
+import { useStore } from '../../store/index.js';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
 
 function percent(value) {
@@ -187,6 +189,39 @@ export default function WizardNewsPanel({ campaign }) {
   const majorGroups = useMemo(() => groupsFor(summary.major), [summary.major]);
   const notableGroups = useMemo(() => groupsFor(summary.notables), [summary.notables]);
   const total = summary.feed.entries.length;
+  const saves = useStore(state => state.savedSettlements);
+  const appendCampaignChronicle = useStore(state => state.appendCampaignChronicle);
+  const setCreditBalance = useStore(state => state.setCreditBalance);
+  const [chronicleBusy, setChronicleBusy] = useState(false);
+  const [chronicleError, setChronicleError] = useState('');
+  const chronicles = Array.isArray(campaign?.chronicles) ? campaign.chronicles : [];
+
+  async function generateChronicle() {
+    if (chronicleBusy || total === 0) return;
+    setChronicleBusy(true);
+    setChronicleError('');
+    const ids = new Set(campaign?.settlementIds || []);
+    const snapshot = {
+      settlements: saves
+        .filter(save => ids.has(save.id))
+        .map(save => ({ id: save.id, name: save.name, settlement: save.settlement })),
+    };
+    const result = await requestCampaignChronicle({
+      campaign,
+      snapshot,
+      tick: summary.feed.currentTick,
+    });
+    if (result.error || !result.chronicle) {
+      setChronicleError(result.error || 'Chronicle generation failed.');
+    } else {
+      appendCampaignChronicle(campaign.id, {
+        tick: summary.feed.currentTick,
+        prose: result.chronicle,
+      });
+      if (Number.isFinite(result.creditsRemaining)) setCreditBalance(result.creditsRemaining);
+    }
+    setChronicleBusy(false);
+  }
 
   if (!campaign) return null;
 
@@ -249,7 +284,46 @@ export default function WizardNewsPanel({ campaign }) {
             <span>{total} update{total === 1 ? '' : 's'}</span>
           </div>
         </div>
+        <button
+          type="button"
+          onClick={generateChronicle}
+          disabled={chronicleBusy || total === 0}
+          title="Turn this tick's grounded news into a two-credit campaign chronicle"
+          style={{
+            marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '7px 10px', border: `1px solid ${GOLD}`, borderRadius: 6,
+            background: GOLD_BG, color: GOLD, fontFamily: sans, fontSize: FS.xs,
+            fontWeight: 900, cursor: chronicleBusy || total === 0 ? 'not-allowed' : 'pointer',
+            opacity: chronicleBusy || total === 0 ? 0.55 : 1,
+          }}
+        >
+          <Sparkles size={13}/>
+          {chronicleBusy ? 'Writing' : 'Chronicle'}
+        </button>
       </header>
+
+      {(chronicles.length > 0 || chronicleError) && (
+        <div style={{ padding:'12px 16px 0' }}>
+          {chronicleError && (
+            <div role="alert" style={{ color:RED, fontFamily:sans, fontSize:FS.xs, marginBottom:8 }}>
+              {chronicleError}
+            </div>
+          )}
+          {chronicles[0] && (
+            <article style={{
+              border:`1px solid ${BORDER2}`, borderLeft:`3px solid ${GOLD}`,
+              borderRadius:6, background:CARD_ALT, padding:'10px 12px',
+            }}>
+              <div style={{ display:'flex', alignItems:'center', gap:6, color:GOLD, fontFamily:sans, fontSize:FS.xs, fontWeight:900 }}>
+                <BookOpen size={13}/> Chronicle, tick {chronicles[0].tick}
+              </div>
+              <p style={{ margin:'6px 0 0', color:BODY, fontFamily:sans, fontSize:FS.sm, lineHeight:1.55 }}>
+                {chronicles[0].prose}
+              </p>
+            </article>
+          )}
+        </div>
+      )}
 
       <div style={{
         flex: 1,

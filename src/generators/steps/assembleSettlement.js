@@ -5,7 +5,7 @@
  * runs narrative overlays, defense profile, legitimacy patching,
  * and coherence generation.
  *
- * Extracted from generateSettlement.js lines 1003–1071.
+ * Final assembly step for the settlement generation pipeline.
  */
 
 import { registerStep } from '../pipeline.js';
