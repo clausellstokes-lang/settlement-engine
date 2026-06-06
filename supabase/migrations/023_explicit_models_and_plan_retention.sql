@@ -7,6 +7,12 @@ alter table public.profiles
   add column if not exists premium_downgraded_at timestamptz,
   add column if not exists premium_retention_expires_at timestamptz;
 
+-- Drop the stale (claude_best/...) check BEFORE rewriting values: the data
+-- migration must not be blocked by the constraint it is replacing, and any
+-- rows that already carry the new model keys stop tripping the old check.
+alter table public.profiles
+  drop constraint if exists profiles_model_preference_check;
+
 update public.profiles
   set model_preference = case model_preference
     when 'claude_best' then 'anthropic_claude_opus_4_8'
@@ -15,9 +21,6 @@ update public.profiles
     when 'chatgpt_fast' then 'openai_gpt_5_mini'
     else model_preference
   end;
-
-alter table public.profiles
-  drop constraint if exists profiles_model_preference_check;
 
 alter table public.profiles
   add constraint profiles_model_preference_check
