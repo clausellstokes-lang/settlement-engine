@@ -13,7 +13,7 @@
  * Reads all state from the Zustand store — zero props.
  */
 import { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react';
-import { ChevronRight, ChevronLeft, Zap, Settings, ArrowLeft, Save, Sliders } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Zap, Settings, ArrowLeft, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import ConfigurationPanel from './ConfigurationPanel';
@@ -40,9 +40,6 @@ const OutputContainer = lazy(() => import('./OutputContainer'));
 // P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
 // surfaces don't pay for the playback animator).
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
-// Custom mode body — the full power-user dashboard, lazy so basic/advanced
-// don't pay for it. Surfaced as the third generate mode (was a top-level tab).
-const Workshop = lazy(() => import('./Workshop.jsx'));
 
 // "Change mode" back button — shown above the mode-specific UI once a card
 // is picked. Module-scope so React Compiler can memoize without seeing it
@@ -69,7 +66,7 @@ function ChangeModeBar({ mode, onChangeMode }) {
       </button>
       <span style={{ color: MUTED }}>·</span>
       <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
-        {mode === 'basic' ? 'Basic Generate' : mode === 'custom' ? 'Custom Generate' : 'Advanced Generate'}
+        {mode === 'basic' ? 'Basic Generate' : 'Advanced Generate'}
       </span>
     </div>
   );
@@ -103,22 +100,19 @@ const STEPS = [
 // ── Mode selector ────────────────────────────────────────────────────────────
 
 function ModeSelector({ mode, onModeChange, large = false }) {
-  // The wizard exposes three named generation modes:
+  // The wizard exposes two named generation modes:
   //   - Basic    (formerly "Quick"): one-screen config + Generate.
   //     The hero's instant generation routes here under the hood so
   //     a user landing on the wizard sees the same shape.
   //   - Advanced: step-by-step config with institution toggles,
   //     services, and trade dynamics.
-  //   - Custom:   the full Workshop power dashboard — every parameter at
-  //     once, plus the supply-chain builder.
-  // The HomeHero's instant generation is its OWN surface (homepage
-  // card with size-picker chips), not a mode listed here. Anonymous
-  // users see the hero only — these mode cards are gated to
-  // signed-in users.
+  // (Custom Generate / the Workshop was removed.) The HomeHero's instant
+  // generation is its OWN surface (homepage card with size-picker chips),
+  // not a mode listed here. Anonymous users see the hero only — these mode
+  // cards are gated to signed-in users (Basic/Advanced require a free sign-in).
   const modes = [
     { id: 'basic',    label: 'Basic Generate',    desc: 'One screen. Set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
     { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',         Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space. Produces a draft you can refine, save, and canonize.' },
-    { id: 'custom',   label: 'Custom Generate',   desc: 'Power dashboard. Every parameter at once', Icon: Sliders,  longDesc: 'Tune every generator parameter on one screen: priorities, resources, stresses, institution/resource/trade-route overrides, and the supply-chain builder. Maximum control for power users.' },
   ];
 
   return (
@@ -344,7 +338,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const [generateError, setGenerateError] = useState(null);
   const [pendingExit, setPendingExit] = useState(null); // 'back' | 'new' — RNG unsaved-exit confirm
 
-  // Sync showOutput when a new settlement is generated (handles Workshop's own generate button)
+  // Sync showOutput when a new settlement is generated.
   const prevSettlementRef = useRef(null);
   useEffect(() => {
     if (settlement && settlement !== prevSettlementRef.current) {
@@ -455,11 +449,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   //     generation (full size ladder). Below the hero we expose the
   //     Basic/Advanced mode picker as the "want more control?" path.
   const showHomeHero = !wizardMode && !settlement;
-  // /create shows every path to everyone: instant generation (the hero) plus
-  // the three mode cards (Basic / Advanced / Custom). Previously the cards were
-  // gated to signed-in users; the landing now offers all options regardless of
-  // auth so visitors see the full set the moment they click Create.
-  const showModePicker = !wizardMode && !settlement;
+  // /create shows the instant-generation hero to everyone. The Basic / Advanced
+  // mode cards are gated to signed-in users: anonymous visitors get instant
+  // generation (hamlet / village / town) only and must sign in (free) to reach
+  // Basic and Advanced. Custom Generate was removed entirely.
+  const showModePicker = !wizardMode && !settlement && authTier !== 'anon';
 
   if (!wizardMode && !settlement) {
     return (
@@ -501,6 +495,21 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             </div>
             <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
           </>
+        )}
+        {/* Anonymous visitors get instant generation (the hero) only; Basic and
+            Advanced are gated to signed-in users. Surface the (free) path so the
+            gate is discoverable rather than a silently-missing feature. */}
+        {!showModePicker && authTier === 'anon' && (
+          <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
+            Want full control?{' '}
+            <button
+              onClick={onSignIn}
+              style={{ background: 'transparent', border: 'none', padding: 0, color: GOLD, fontWeight: 700, fontFamily: sans, fontSize: FS.sm, cursor: 'pointer', textDecoration: 'underline' }}
+            >
+              Sign in (free)
+            </button>
+            {' '}to unlock Basic &amp; Advanced generation.
+          </div>
         )}
       </div>
     );
@@ -573,19 +582,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     );
   }
 
-  // Custom mode: the full power-user dashboard (Workshop), reached as the
-  // third generate mode. It configures and generates through the same store
-  // path, so the post-generation result view below renders its output.
-  if (wizardMode === 'custom' && !settlement) {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
-        <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
-        <Suspense fallback={<div style={{ padding: SP.xl, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Loading the custom dashboard…</div>}>
-          <Workshop isMobile={isMobile} />
-        </Suspense>
-      </div>
-    );
-  }
+  // (Custom Generate / the Workshop was removed. Anonymous users never reach a
+  // config landing — the hero generates instantly; Basic/Advanced are signed-in
+  // only.)
 
   // Advanced mode: step-by-step wizard.
   const isAdvanced = wizardMode === 'advanced';

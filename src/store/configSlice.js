@@ -67,9 +67,9 @@ export const createConfigSlice = (set, get) => ({
 
   setWizardMode: (mode) =>
     set(state => {
-      // Three real modes: 'basic' (was 'quick'), 'advanced', and 'custom'
-      // (the Workshop power dashboard, surfaced as a Create mode). null
-      // returns to the card picker.
+      // Two real modes: 'basic' (was 'quick') and 'advanced'. (The 'custom'
+      // mode / Workshop power dashboard was removed.) null returns to the
+      // card picker.
       state.wizardMode = mode;
       // Always reset step when mode changes — users expect each mode to start
       // at the beginning.

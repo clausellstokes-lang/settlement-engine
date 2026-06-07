@@ -52,6 +52,25 @@ const TARGET_ENTITY_BY_EVENT = Object.freeze({
   CUT_TRADE_ROUTE:      null,           // route names aren't tracked as entities — free text
 });
 
+// Events the DM cannot hand-author from the Make Changes dropdown. They stay in
+// the registry — and the world engine still produces them via simulation /
+// regional propagation — they're just not one-click authorable here:
+//   - KILL_LEADER folds into KILL_NPC (consequences derive from the NPC).
+//   - REFUGEE_WAVE / PLAGUE / RAID_OR_MONSTER_ATTACK / REMOVED_THREAT /
+//     STARTED_RIOT are authored via Stressors in the Roster below, not as
+//     one-off events — a stressor IS the ongoing condition these represented.
+//   - DAMAGE_INSTITUTION duplicated IMPAIR_INSTITUTION once the severity slider
+//     was hidden, so Impair Institution is the single "weaken it" action.
+const NON_AUTHORABLE_EVENTS = new Set([
+  'KILL_LEADER',
+  'DAMAGE_INSTITUTION',
+  'REFUGEE_WAVE',
+  'PLAGUE',
+  'RAID_OR_MONSTER_ATTACK',
+  'REMOVED_THREAT',
+  'STARTED_RIOT',
+]);
+
 /** Build {id, name} options from a dossier collection for the target dropdown. */
 function buildTargetOptions(settlement, collectionKey) {
   if (!collectionKey || !settlement) return [];
@@ -109,9 +128,8 @@ export default function EventComposer({
   const pendingBatchPreview = useStore(s => s.pendingBatchPreview);
   const dismissBatchPreview = useStore(s => s.dismissBatchPreview);
 
-  const [type, setType]         = useState('DAMAGE_INSTITUTION');
+  const [type, setType]         = useState('ADD_INSTITUTION');
   const [target, setTarget]     = useState('');
-  const [severity, setSeverity] = useState(0.7);
   const [description, setDesc]  = useState('');
   // Per-event payload fields for the new event types. Each is rendered
   // conditionally (only shown when the active event type uses it) so
@@ -120,7 +138,13 @@ export default function EventComposer({
   const [role, setRole]             = useState('');           // ADD_NPC, ASSIGN_NPC_TO_ROLE
   const [institutionId, setInstitutionId] = useState('');     // ADD_NPC, ASSIGN_NPC_TO_ROLE
   const [quality, setQuality]       = useState('competent');   // ASSIGN_NPC_TO_ROLE
-  const [dimension, setDimension]   = useState('legitimacy');  // IMPAIR_INSTITUTION, IMPAIR_FACTION
+  // Severity + axis are intentionally hidden from the DM — the 0-100 "math"
+  // confused more than it clarified. Impair Institution / Impair Faction apply a
+  // standard moderate setback to legitimacy; these values feed buildEvent below.
+  // To re-expose: turn these back into useState and restore the Dimension /
+  // Severity <Field>s that used to live in the form.
+  const severity  = 0.7;        // IMPAIR_INSTITUTION / IMPAIR_FACTION (+ legacy DAMAGE_INSTITUTION)
+  const dimension = 'legitimacy';
   const [staged, setStaged]         = useState([]);            // batch: staged changes not yet applied
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
@@ -243,10 +267,12 @@ export default function EventComposer({
         <Field label="Event">
           <select value={type} onChange={e => { setType(e.target.value); setTarget(''); setAddCategory(''); }} style={selectStyle}>
             {Object.entries(EVENT_REGISTRY)
-              /* KILL_LEADER folded into KILL_NPC: killing a pillar/ruler NPC is
-                 the leader event, and its consequences derive from that NPC's
-                 own importance. Kept in the registry for back-compat. */
-              .filter(([k]) => k !== 'KILL_LEADER')
+              /* Hide non-authorable events from the DM action list (see
+                 NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
+                 equivalent events (authored via the Roster's Stressors), and
+                 Damage Institution (redundant with Impair). All stay in the
+                 registry for back-compat + world-engine simulation. */
+              .filter(([k]) => !NON_AUTHORABLE_EVENTS.has(k))
               .map(([k, s]) => (
                 <option key={k} value={k}>{s.label}</option>
               ))}
@@ -335,16 +361,6 @@ export default function EventComposer({
             </Field>
           );
         })()}
-
-        {type === 'DAMAGE_INSTITUTION' && (
-          <Field label={`Severity ${(severity * 100).toFixed(0)}%`}>
-            <input
-              type="range" min="0.1" max="1" step="0.05"
-              value={severity} onChange={e => setSeverity(Number(e.target.value))}
-              style={{ width: 120 }}
-            />
-          </Field>
-        )}
 
         {/* ADD_NPC defines a NEW NPC, so its importance is a real choice.
             KILL_NPC does not ask — it derives from the selected NPC below. */}
@@ -448,47 +464,9 @@ export default function EventComposer({
         )}
 
         {(type === 'IMPAIR_INSTITUTION' || type === 'IMPAIR_FACTION') && (
-          <>
-            <Field label="Dimension" hint={
-              type === 'IMPAIR_INSTITUTION'
-                ? 'Which axis is impaired'
-                : 'Which faction-side dimension'
-            }>
-              <select value={dimension} onChange={e => setDimension(e.target.value)} style={selectStyle}>
-                {type === 'IMPAIR_INSTITUTION' ? (
-                  <>
-                    <option value="capacity">Capacity</option>
-                    <option value="legitimacy">Legitimacy</option>
-                    <option value="influence">Influence</option>
-                    <option value="wealth">Wealth</option>
-                    <option value="staffing">Staffing</option>
-                    <option value="infrastructure">Infrastructure</option>
-                    <option value="access">Access</option>
-                    <option value="corruption">Corruption</option>
-                  </>
-                ) : (
-                  <>
-                    <option value="leadership">Leadership</option>
-                    <option value="legitimacy">Legitimacy</option>
-                    <option value="wealth">Wealth</option>
-                    <option value="coercive_capacity">Coercive capacity</option>
-                    <option value="membership">Membership</option>
-                    <option value="public_support">Public support</option>
-                    <option value="access">Access</option>
-                    <option value="legal_standing">Legal standing</option>
-                    <option value="internal_unity">Internal unity</option>
-                  </>
-                )}
-              </select>
-            </Field>
-            <Field label={`Severity ${(severity * 100).toFixed(0)}%`}>
-              <input
-                type="range" min="0.1" max="1" step="0.05"
-                value={severity} onChange={e => setSeverity(Number(e.target.value))}
-                style={{ width: 120 }}
-              />
-            </Field>
-          </>
+          <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.85, alignSelf: 'center', maxWidth: 240, lineHeight: 1.4 }}>
+            Applies a standard setback. Pick the target and (optionally) note what happened.
+          </span>
         )}
 
         <Field label="Description" hint="optional">

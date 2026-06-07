@@ -56,10 +56,9 @@ import DevEmailBanner from './components/dev/DevEmailBanner.jsx';
 // can't hammer the user.
 const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
 
-// Top-nav destinations. Gallery sits between Compendium and About. Workshop
-// is no longer a top-level tab — it now lives inside Create as the third
-// generate mode ("Custom Generate"); see GenerateWizard. Pricing stays a
-// header hero link (HERO_LINKS), not a primary destination.
+// Top-nav destinations. Gallery sits between Compendium and About. (Workshop /
+// "Custom Generate" was removed; the /workshop route redirects to Create.)
+// Pricing stays a header hero link (HERO_LINKS), not a primary destination.
 const NAV = [
   { id: 'generate',    label: 'Create',      Icon: MapPin },
   { id: 'settlements', label: 'Settlements', Icon: FolderOpen },
@@ -175,12 +174,11 @@ export default function App() {
   }, [view, authTier, isElevated, authLoading]);
 
   // ── Demoted destinations → redirect to their new homes ────────────────────
-  // Workshop is now Create's "Custom" mode; /compare* is now a section in
+  // Custom Generate (the Workshop) was removed; /compare* is now a section in
   // About. The route entries stay (so the URLs still resolve and old links /
   // SEO keep working), but we bounce them to the new surface.
   useEffect(() => {
     if (view === 'workshop') {
-      useStore.getState().setWizardMode('custom');
       navigate('generate', { replace: true });
     } else if (view.startsWith('compare')) {
       navigate('howto', { replace: true, search: '?tab=compare' });

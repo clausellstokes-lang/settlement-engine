@@ -94,9 +94,8 @@ Auth is **two orthogonal axes**: `tier` (anon / free / premium) × `role`
 `view` ids ⇄ public paths, plus guards (`auth` / `elevated`). `App.jsx` switches
 on `view`; a single `NAV` array (Create · Settlements · World Map · Compendium ·
 Gallery · About) lives in `App.jsx`, with Pricing as a secondary header link
-(`HERO_LINKS`). Two destinations are folded in rather than top-level: **Workshop
-is the "Custom Generate" mode inside Create** (GenerateWizard), and the former
-`/compare` pages are a tab on the **About** page (renamed from "How To Use").
+(`HERO_LINKS`). The former `/compare` pages are a tab on the **About** page
+(renamed from "How To Use"); Workshop / "Custom Generate" was removed entirely.
 `/workshop` and `/compare*` stay as routes that redirect to those surfaces. The
 mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 

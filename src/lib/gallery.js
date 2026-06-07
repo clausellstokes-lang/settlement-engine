@@ -443,7 +443,7 @@ function galleryMetadataPatch(metadata = {}) {
   const tags = Array.isArray(metadata.tags)
     ? metadata.tags
     : String(metadata.tags || '').split(',');
-  return {
+  const patch = {
     gallery_description: description || null,
     gallery_image_url: isSafePublicImageUrl(imageUrl) ? imageUrl : null,
     gallery_image_alt: imageAlt || null,
@@ -453,6 +453,12 @@ function galleryMetadataPatch(metadata = {}) {
       .slice(0, 12),
     gallery_updated_at: new Date().toISOString(),
   };
+  // Owners can opt to publish the AI-narrated dossier instead of the raw
+  // simulation; the public RPC honors this flag (see migration 025).
+  if (metadata.shareNarrated !== undefined) {
+    patch.gallery_share_narrated = metadata.shareNarrated === true;
+  }
+  return patch;
 }
 
 function isSafePublicImageUrl(value) {

@@ -70,9 +70,14 @@ export default function ShareToGallery({
   galleryImageUrl = '',
   galleryImageAlt = '',
   galleryTags = [],
+  galleryShareNarrated = false,
 }) {
   const auth = useStore(s => s.auth);
   const updateSavedSettlement = useStore(s => s.updateSavedSettlement);
+  // The public gallery strips every AI overlay (sanitizePublicSettlement in
+  // lib/gallery.js), so a published dossier is always the RAW simulation. Read
+  // the save's AI data so we can say plainly when the prose won't be included.
+  const liveAiData = useStore(s => (saveId ? (s.savedSettlements || []).find(x => x.id === saveId)?.aiData : null));
 
   const [isPublic, setIsPublic] = useState(Boolean(isPublicProp));
   const [slug, setSlug]         = useState(slugProp || null);
@@ -85,13 +90,40 @@ export default function ShareToGallery({
   const [error, setError]       = useState(null);
   const [copied, setCopied]     = useState(false);
   const [savedDetails, setSavedDetails] = useState(false);
+  // Opt-in: publish the AI-narrated dossier instead of the raw simulation.
+  const [shareNarrated, setShareNarrated] = useState(Boolean(galleryShareNarrated));
   const canonReady = isCampaignCanonized(campaignState);
   const metadata = useMemo(() => ({
     description,
     imageUrl,
     imageAlt,
     tags: tagsInput,
-  }), [description, imageAlt, imageUrl, tagsInput]);
+    shareNarrated,
+  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated]);
+
+  const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
+  const hasDailyLife = !!(liveAiData?.aiDailyLife);
+  const aiKinds = [hasNarrative && 'narrative', hasDailyLife && 'daily-life'].filter(Boolean).join(' and ');
+  // Shown when an AI overlay exists, so the user knows the gallery publishes
+  // the raw simulation, not the narrated version.
+  const aiOverlayNote = aiKinds ? (
+    <div style={{
+      width: '100%', display: 'flex', alignItems: 'flex-start', gap: 6,
+      padding: '7px 9px', marginTop: SP.xs,
+      border: `1px solid ${BORDER2}`, borderRadius: R.md,
+      background: CARD_ALT, color: BODY,
+      fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45,
+    }}>
+      {shareNarrated && hasNarrative
+        ? <Globe size={12} style={{ marginTop: 1, flexShrink: 0, color: GREEN }} />
+        : <Lock size={12} style={{ marginTop: 1, flexShrink: 0, color: MUTED }} />}
+      <span>
+        {shareNarrated && hasNarrative
+          ? <>The gallery will show your <strong>AI-narrated dossier</strong>. Viewers see the refined prose; DM-private content (secrets, hooks, notes) is still removed.</>
+          : <>The gallery shows the <strong>raw simulation</strong>. Your AI {aiKinds} prose stays private and is not included in the public dossier.</>}
+      </span>
+    </div>
+  ) : null;
 
   if (!auth?.user) return null;
   if (!saveId) {
@@ -196,6 +228,22 @@ export default function ShareToGallery({
       background: CARD_ALT,
       marginTop: SP.xs,
     }}>
+      {hasNarrative && (
+        <label style={{
+          display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
+          padding: SP.sm, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+        }}>
+          <input
+            type="checkbox"
+            checked={shareNarrated}
+            onChange={event => setShareNarrated(event.target.checked)}
+            style={{ marginTop: 2, flexShrink: 0 }}
+          />
+          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+            <strong style={{ color: INK }}>Publish the AI-narrated version</strong> instead of the raw simulation. Viewers see your refined prose; DM-private content is still stripped. Save details (or re-share) to apply.
+          </span>
+        </label>
+      )}
       <Field label="Public description">
         <textarea
           value={description}
@@ -365,6 +413,7 @@ export default function ShareToGallery({
             <AlertCircle size={11} /> {error}
           </span>
         )}
+        {aiOverlayNote}
         {detailsForm}
       </div>
     );
@@ -421,6 +470,7 @@ export default function ShareToGallery({
           ? 'Public dossiers appear in the gallery. Your name and email stay private.'
           : 'Canonize this campaign world before sharing the dossier publicly.'}
       </span>
+      {aiOverlayNote}
       {detailsForm}
     </div>
   );
