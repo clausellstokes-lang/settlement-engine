@@ -68,7 +68,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
         <div style={{display:'flex',alignItems:'baseline',gap:12,marginBottom:historicalCharacter?8:0,flexWrap:'wrap'}}>
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3}}>{age} years old</span>
-          {sortedEvents.length>0&&<span style={{fontSize:FS.sm,color:MUTED}}>{sortedEvents.length} recorded events · {currentTensions.length} current tensions</span>}
+          {sortedEvents.length>0&&<span style={{fontSize:FS.sm,color:MUTED}}>{sortedEvents.length} historical events · {currentTensions.length} current tensions</span>}
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>
@@ -93,7 +93,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
 
       {/* ── VISUAL TIMELINE ──────────────────────────────────────────────── */}
       {age>0&&eventsTimeline.length>0&&<div style={{marginBottom:16}}>
-        <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Timeline</div>
+        <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Historical Timeline</div>
         <div style={{position:'relative',height:36,background:swatch['#F0EAD8'],borderRadius:4,overflow:'visible',marginTop:14,marginBottom:20}}>
           {/* Axis line */}
           <div style={{position:'absolute',top:'50%',left:0,right:0,height:2,background:swatch['#D0B880'],transform:'translateY(-50%)'}}/>

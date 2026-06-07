@@ -31,7 +31,7 @@ export default function Timeline() {
         marginBottom: SP.sm,
       }}>
         <Clock size={12} />
-        Timeline
+        Campaign Timeline
         <span style={{ color: MUTED, opacity: 0.7, marginLeft: 6, textTransform: 'none', fontWeight: 400 }}>
           {eventLog.length === 0
             ? 'no events yet'
@@ -44,7 +44,7 @@ export default function Timeline() {
           fontSize: FS.xs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
           padding: SP.sm, textAlign: 'center',
         }}>
-          Apply an in-world event to start the timeline.
+          Apply an in-world event to start the campaign timeline. Founding history lives in the History tab.
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
