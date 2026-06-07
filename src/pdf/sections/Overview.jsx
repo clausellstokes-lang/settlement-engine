@@ -492,12 +492,14 @@ function verdictTone(v) {
 function FoodBalanceBar({ fb }) {
   const prod = finite(fb?.production, 0);
   const need = finite(fb?.need, 0);
+  const rawKnown = prod > 0 || need > 0;
   const max = Math.max(prod, need, 1);
   const prodPct = safePct((prod / max) * 100);
   const needPct = safePct((need / max) * 100);
   return (
     <View>
       <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Food balance</Text>
+      {rawKnown ? (
       <View style={{ marginTop: 2 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
           <Text style={{ ...type.caption, fontSize: pt['7.5'], width: 40 }}>Produced</Text>
@@ -514,6 +516,9 @@ function FoodBalanceBar({ fb }) {
           <Text style={{ ...type.caption, fontSize: pt['7.5'], marginLeft: 4 }}>{smart(need)}</Text>
         </View>
       </View>
+      ) : (
+        <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginTop: 2 }}>Produced / needed: not calculated</Text>
+      )}
       {fb?.deficit > 0 && (
         <Text style={{ ...type.caption, color: palette.bad, fontSize: pt['8'], marginTop: 1 }}>
           Deficit: {smart(fb.deficit)}

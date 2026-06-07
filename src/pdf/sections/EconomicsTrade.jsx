@@ -355,12 +355,17 @@ function FoodBalanceBlock({ fb }) {
   if (!fb) return null;
   const prod = finite(fb.production, 0);
   const need = finite(fb.need, 0);
+  // §1c — produced/needed are only meaningful if at least one is non-zero.
+  // Both zero + a deficit/surplus means the engine didn't compute them; show
+  // "Not calculated" rather than the misleading "PRODUCED 0 / NEEDED 0".
+  const rawKnown = prod > 0 || need > 0;
   const max = Math.max(prod, need, 1);
   const prodPct = safePct((prod / max) * 100);
   const needPct = safePct((need / max) * 100);
   return (
     <View style={{ marginBottom: space.sm }} wrap={false}>
       <View style={{ flexDirection: 'row', gap: 6 }}>
+        {rawKnown ? (<>
         <View style={{ flex: 1 }}>
           <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>PRODUCED</Text>
           <View style={{ height: 5, backgroundColor: swatch['#F0E8D8'], borderRadius: 1, marginTop: 1 }}>
@@ -375,6 +380,12 @@ function FoodBalanceBlock({ fb }) {
           </View>
           <Text style={{ ...type.caption, fontSize: pt['8'], marginTop: 1 }}>{smart(need)}</Text>
         </View>
+        </>) : (
+        <View style={{ flex: 2 }}>
+          <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>PRODUCED / NEEDED</Text>
+          <Text style={{ ...type.caption, fontSize: pt['9'], color: palette.muted, fontStyle: 'italic', marginTop: 2 }}>Not calculated</Text>
+        </View>
+        )}
         {fb.deficit > 0 && (
           <View style={{ flex: 1 }}>
             <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.bad }}>DEFICIT</Text>
