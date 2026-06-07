@@ -25,7 +25,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, smart, label, hookText, finite, safePct, humanize } from '../lib/format.js';
+import { cap, smart, label, hookText, finite, safePct, humanize, safe } from '../lib/format.js';
 
 export function Overview({ settlement, narrativeMode, vm }) {
   const o = vm.overview;
@@ -84,7 +84,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
                   <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['9'], marginRight: 4 }}>
                     {s.label}:
                   </Text>
-                  <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{s.summary}</Text>
+                  <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{safe(s.summary)}</Text>
                 </View>
               )}
               {s.hook && (

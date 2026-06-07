@@ -13,6 +13,7 @@ import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { Section } from '../primitives/Section.jsx';
 import { type, palette } from '../theme.js';
+import { safe } from '../lib/format.js';
 
 export function TableOfContents({ settlement, narrativeMode = false, entries = [] }) {
   return (
@@ -32,9 +33,9 @@ export function TableOfContents({ settlement, narrativeMode = false, entries = [
               <Text style={{ ...type.label_em, color: palette.gold, width: 30 }}>
                 {String(i + 1).padStart(2, '0')}
               </Text>
-              <Text style={{ ...type.body_em, flex: 1, color: palette.ink }}>{entry.title}</Text>
+              <Text style={{ ...type.body_em, flex: 1, color: palette.ink }}>{safe(entry.title)}</Text>
               {entry.note && (
-                <Text style={{ ...type.caption, color: palette.muted }}>{entry.note}</Text>
+                <Text style={{ ...type.caption, color: palette.muted }}>{safe(entry.note)}</Text>
               )}
             </View>
           ))}

@@ -20,7 +20,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, label, smart, humanize, upper } from '../lib/format.js';
+import { cap, label, smart, humanize, upper, safe } from '../lib/format.js';
 
 const SEVERITY_TONE = {
   critical: 'bad', severe: 'bad', high: 'bad',
@@ -272,7 +272,7 @@ function IssueRow({ iss, idx }) {
         </Text>
       )}
       {iss.description && (
-        <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>{iss.description}</Text>
+        <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>{safe(iss.description)}</Text>
       )}
       {iss.suggestedFixes?.length > 0 && (
         <View style={{ marginTop: 3 }}>
