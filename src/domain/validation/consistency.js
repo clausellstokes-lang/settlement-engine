@@ -42,6 +42,14 @@ export function validateDossier(settlement) {
     }
   }
 
+  // §1f — viability wording contradicts the food balance: the verdict claims
+  // self-sufficiency while the food balance shows a deficit.
+  const viabilitySummary = String(settlement?.economicViability?.summary || '');
+  if (/self-sufficient/i.test(viabilitySummary) && (Number(fb?.deficit) || 0) > 0) {
+    blocking.push(record('viability_contradicts_food',
+      `Viability reads "self-sufficient" while the food balance shows a deficit of ${Number(fb.deficit)}.`));
+  }
+
   // §1d — export contradiction: one surface would report no exports while
   // another lists them. economicState.exports (legacy; read by the Current
   // State risk) disagrees with economicState.primaryExports (Economics).

@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   deriveFoodBalance,
   deriveExportPosture,
+  deriveViability,
   deriveDossierViewModel,
 } from '../../../src/domain/display/dossierViewModel.js';
 
@@ -85,5 +86,40 @@ describe('deriveDossierViewModel', () => {
     const vm = deriveDossierViewModel(s);
     expect(vm.foodBalance.display).toBe('Surplus +20');
     expect(vm.exportPosture.status).toBe('limited');
+    expect(vm.viability).toBeTruthy();
+  });
+});
+
+describe('deriveViability (§1f)', () => {
+  it('downgrades "self-sufficient" to strained when there is a food deficit', () => {
+    const r = deriveViability({ economicViability: {
+      viable: true,
+      summary: '✓ VIABLE: Settlement is economically self-sufficient and historically plausible.',
+      metrics: { foodBalance: { deficit: 1215, dailyProduction: 13065, dailyNeed: 14280 } },
+    } });
+    expect(r.verdict).toBe('strained');
+    expect(r.summary).toMatch(/STRAINED/);
+  });
+
+  it('reports critical dependencies when deps exist and food is fine', () => {
+    const r = deriveViability({ economicViability: {
+      viable: true, dependencies: [{}, {}],
+      metrics: { foodBalance: { deficit: 0, surplus: 100, dailyProduction: 200, dailyNeed: 100 } },
+    } });
+    expect(r.verdict).toBe('dependent');
+  });
+
+  it('keeps self-sufficient only when there is no deficit and no dependencies', () => {
+    const r = deriveViability({ economicViability: {
+      viable: true, dependencies: [],
+      metrics: { foodBalance: { deficit: 0, surplus: 100, dailyProduction: 200, dailyNeed: 100 } },
+    } });
+    expect(r.verdict).toBe('self_sufficient');
+  });
+
+  it('keeps a not-viable verdict', () => {
+    const r = deriveViability({ economicViability: { viable: false, summary: '✗ NOT VIABLE: 2 critical issues prevent settlement survival.' } });
+    expect(r.verdict).toBe('not_viable');
+    expect(r.viable).toBe(false);
   });
 });

@@ -34,6 +34,14 @@ const EXPORT_STATUS_LABEL = Object.freeze({
   established:      'Active exports',
 });
 
+const VIABILITY_LABEL = Object.freeze({
+  not_viable:      'Not viable',
+  strained:        'Viable but strained',
+  dependent:       'Viable with critical dependencies',
+  self_sufficient: 'Viable',
+  unknown:         'Unknown',
+});
+
 function fmtInt(n) {
   const v = cleanNum(n);
   return v == null ? null : Math.round(v).toLocaleString('en-US');
@@ -119,9 +127,62 @@ export function deriveExportPosture(settlement) {
  * overlays); food + exports are canonical simulation facts and always read
  * from the base settlement, never an AI clone.
  */
+/**
+ * Viability verdict (§1f). Reconciles the generator's verdict with the food
+ * balance + trade dependencies so the wording never claims "self-sufficient"
+ * while the dossier shows a food deficit. buildConflict() (economicGenerator)
+ * only checks dependency warnings for its "self-sufficient" branch — it
+ * ignores a food deficit — which is the contradiction this corrects.
+ */
+export function deriveViability(settlement) {
+  const v = settlement?.economicViability || {};
+  const rawSummary = v.summary || null;
+
+  if (v.viable === false) {
+    return {
+      viable: false, verdict: 'not_viable', label: VIABILITY_LABEL.not_viable,
+      summary: rawSummary || 'Not viable: critical issues prevent the settlement from surviving.',
+      rawSummary,
+    };
+  }
+  if (v.viable == null && !rawSummary) {
+    return { viable: null, verdict: 'unknown', label: VIABILITY_LABEL.unknown, summary: 'Viability not assessed.', rawSummary };
+  }
+
+  const food = deriveFoodBalance(settlement);
+  const dependencyCount = Array.isArray(v.dependencies) ? v.dependencies.length : 0;
+
+  if (food.deficit > 0) {
+    return {
+      viable: true, verdict: 'strained', label: VIABILITY_LABEL.strained,
+      summary: 'VIABLE BUT STRAINED: historically plausible and institutionally functional, but depends on imports for food security.',
+      rawSummary,
+    };
+  }
+  if (dependencyCount > 0) {
+    return {
+      viable: true, verdict: 'dependent', label: VIABILITY_LABEL.dependent,
+      summary: `VIABLE WITH CRITICAL DEPENDENCIES: the settlement can function, but its survival depends on ${dependencyCount} stable trade ${dependencyCount > 1 ? 'dependencies' : 'dependency'} and protected routes.`,
+      rawSummary,
+    };
+  }
+  return {
+    viable: true, verdict: 'self_sufficient', label: VIABILITY_LABEL.self_sufficient,
+    summary: 'VIABLE: economically self-sufficient and historically plausible.',
+    rawSummary,
+  };
+}
+
+/**
+ * The canonical display model. M0.1 surfaced foodBalance + exportPosture; M0.2
+ * adds viability. The `aiOverlay` option is reserved for later milestones
+ * (prose-field overlays); these are canonical simulation facts and always read
+ * from the base settlement, never an AI clone.
+ */
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {
     foodBalance: deriveFoodBalance(settlement),
     exportPosture: deriveExportPosture(settlement),
+    viability: deriveViability(settlement),
   };
 }
