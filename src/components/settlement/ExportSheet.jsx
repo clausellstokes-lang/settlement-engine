@@ -34,7 +34,7 @@ const VARIANT_ICON = {
  * @param {Object} props
  * @param {boolean} props.open
  * @param {() => void} props.onClose
- * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet') => Promise<void>} props.onExport
+ * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet', useAi?: boolean) => Promise<void>} props.onExport
  * @param {boolean} [props.exporting]
  */
 export default function ExportSheet({ open, onClose, onExport, exporting }) {
@@ -42,6 +42,12 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const suggested = suggestVariant(phase, eventCount);
   const [picked, setPicked] = useState(suggested);
+  // §2a — export source. When an AI narrative overlay exists the user chooses
+  // raw simulation vs AI-enhanced; defaults to AI-enhanced when available.
+  // buildViewModel swaps the dossier body on narrativeMode.
+  const aiSettlement = useStore(s => s.aiSettlement);
+  const hasAi = !!aiSettlement;
+  const [useAi, setUseAi] = useState(hasAi);
 
   if (!open) return null;
 
@@ -81,13 +87,44 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
           ))}
         </div>
 
+        {hasAi && (
+          <div style={{ padding: '0 12px 4px' }}>
+            <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Source</div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'AI-Enhanced' }].map(opt => (
+                <button
+                  key={opt.label}
+                  type="button"
+                  onClick={() => setUseAi(opt.ai)}
+                  aria-pressed={useAi === opt.ai}
+                  style={{
+                    flex: 1, padding: '6px 10px', fontSize: FS.xs, fontWeight: 700,
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
+                    background: useAi === opt.ai ? 'rgba(160,118,42,0.12)' : '#fff',
+                    border: `1px solid ${useAi === opt.ai ? '#a0762a' : '#d2bd96'}`,
+                    borderRadius: 6, cursor: 'pointer',
+                    color: useAi === opt.ai ? swatch['#A0762A'] : swatch.inkMag3,
+                  }}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+            <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
+              {useAi
+                ? 'Exports the AI-narrated dossier — canonical facts are preserved.'
+                : 'Exports the raw simulation. Your AI narrative stays out of this file.'}
+            </div>
+          </div>
+        )}
+
         <footer style={footerStyle}>
           <button type="button" onClick={onClose} style={cancelBtnStyle} disabled={exporting}>
             Cancel
           </button>
           <button
             type="button"
-            onClick={() => onExport(picked)}
+            onClick={() => onExport(picked, useAi)}
             disabled={exporting}
             style={primaryBtnStyle(exporting)}
           >

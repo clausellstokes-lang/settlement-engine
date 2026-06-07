@@ -421,14 +421,14 @@ export default function SettlementDetail({
     });
   };
 
-  const handlePdfExport = async (variant) => {
+  const handlePdfExport = async (variant, useAi = narrated) => {
     if (exporting) return;
     setPdfError(null);
     setExporting(true);
     try {
       const liveStore = useStore.getState();
       await generateSettlementPDF(detail.settlement, {
-        aiSettlement, aiDailyLife, narrativeMode: narrated,
+        aiSettlement, aiDailyLife, narrativeMode: useAi,
         systemState: liveStore.systemState,
         eventLog: liveStore.eventLog,
         phase: liveStore.phase,
