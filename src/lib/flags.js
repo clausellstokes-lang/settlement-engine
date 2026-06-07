@@ -69,8 +69,8 @@ export const FLAGS = Object.freeze({
     description: 'M0.1 / doc §1: route food balance + export posture + viability through the canonical display model (deriveDossierViewModel). PROMOTED default-on; flag retained as soak killswitch.',
   },
   pdfVisualChains: {
-    default: false,
-    description: 'Render PDF supply chains as the web visual node-flow (SupplyChainFlow) instead of flat PROC/OUT/DEP rows. Off until the export layout is verified on a per-tier preview; then promote.',
+    default: true,
+    description: 'Render PDF supply chains as the web visual node-flow (SupplyChainFlow) instead of flat PROC/OUT/DEP rows. PROMOTED default-on; flag retained as killswitch.',
   },
   versionHistory: {
     default: false,

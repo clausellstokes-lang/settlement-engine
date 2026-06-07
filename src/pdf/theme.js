@@ -75,11 +75,16 @@ export const relColors = {
 // the v32 URLs and PDF export broke silently for everyone.)
 Font.register({
   family: 'Lora',
+  // ?v=2 cache-busts the browser's pre-strip copy. The Lora files were re-cut to
+  // drop the broken fi/fl/ff ligature glyphs, but the URL is unchanged — so
+  // without a version bump the browser keeps handing react-pdf the old
+  // (ligating) font and the tofu after "f" persists. Bump this whenever the
+  // Lora binaries change again.
   fonts: [
-    { src: '/fonts/Lora-Regular.ttf',    fontWeight: 400 },
-    { src: '/fonts/Lora-Bold.ttf',       fontWeight: 700 },
-    { src: '/fonts/Lora-Italic.ttf',     fontWeight: 400, fontStyle: 'italic' },
-    { src: '/fonts/Lora-BoldItalic.ttf', fontWeight: 700, fontStyle: 'italic' },
+    { src: '/fonts/Lora-Regular.ttf?v=2',    fontWeight: 400 },
+    { src: '/fonts/Lora-Bold.ttf?v=2',       fontWeight: 700 },
+    { src: '/fonts/Lora-Italic.ttf?v=2',     fontWeight: 400, fontStyle: 'italic' },
+    { src: '/fonts/Lora-BoldItalic.ttf?v=2', fontWeight: 700, fontStyle: 'italic' },
   ],
 });
 
