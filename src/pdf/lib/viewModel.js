@@ -22,7 +22,7 @@
  */
 
 import { flag } from '../../lib/flags.js';
-import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
+import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
 
 const TIER_LABELS = {
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
@@ -86,6 +86,17 @@ function foodCore(viability) {
     surplus:    fb?.surplus ?? null,
     importCoverage: normalizeImportCoverage(fb?.importCoverage),
   };
+}
+
+/**
+ * Viability summary (§1f). Behind canonicalViewModel, the reconciled verdict
+ * from the display model (which never claims "self-sufficient" while the food
+ * balance shows a deficit); otherwise the raw generator summary. The verdict
+ * enum + tone are unchanged — only the prose is reconciled.
+ */
+function viabilitySummaryFor(settlement) {
+  if (flag('canonicalViewModel')) return deriveViability(settlement).summary;
+  return settlement?.economicViability?.summary || null;
 }
 
 const PROSPERITY_TONE = {
@@ -340,7 +351,7 @@ function overviewSlice(active, ai, useAi) {
     safetyTone:         SAFETY_TONE[(safety || '').toLowerCase()] || 'muted',
     viability:          v?.viable,
     viabilityVerdict:   v?.verdict || null,
-    viabilitySummary:   v?.summary || null,
+    viabilitySummary:   viabilitySummaryFor(s),
     stability:          s?.powerStructure?.stability || null,
     stress,
     tensions,
@@ -750,7 +761,7 @@ function viabilitySlice(active) {
     viable:                v.viable,
     verdict:               v?.verdict || (v?.viable === true ? 'viable' : v?.viable === false ? 'notViable' : null),
     verdictTone:           VIABILITY_TONE[(v?.verdict || '').toLowerCase()] || (v?.viable === true ? 'good' : v?.viable === false ? 'bad' : 'muted'),
-    summary:               v.summary || null,
+    summary:               viabilitySummaryFor(s),
     metrics:               v.metrics || {},
     issues:                (v.issues || []).map(iss => ({
       severity: iss?.severity,

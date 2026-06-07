@@ -1,6 +1,8 @@
 import React from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
+import { flag } from '../../../lib/flags.js';
+import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 
 import {isMobile} from '../tabConstants';
 
@@ -12,8 +14,13 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
   const metrics = v.metrics || {};
   const _mobile = isMobile();
 
-  // Strip the "✗ NOT VIABLE: " / "✓ VIABLE: " prefix from summary
-  const summaryClean = (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim();
+  // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
+  // the reconciled verdict from the display model (§1f) — its body only, since
+  // this tab supplies its own coherence badge.
+  const vmViability = flag('canonicalViewModel') ? deriveViability(s) : null;
+  const summaryClean = vmViability
+    ? vmViability.summary.replace(/^[^:]+:\s*/, '').trim()
+    : (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim();
 
   // Stress-consequence issues: expected effects of active stressors (siege, famine, etc.)
   // These are NOT structural problems — they belong in a separate "Active Conditions" section
