@@ -25,6 +25,13 @@ body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
   -webkit-text-size-adjust: 100%;
+  /* Disable OpenType ligature substitution app-wide (inherited). The bundled
+     Lora serif has broken fi/fl/ff ligature glyphs that render as a tofu box
+     after the f in dossier prose; turning ligatures off makes the browser draw
+     the plain letters. The PDF path defuses the same bug separately via noLig.
+     Ligatures are purely cosmetic, so this is invisible apart from the fix. */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0;
   /* Flat parchment fallback. The painting now lives per-view on the
      .page-bg wrapper (see below), set from App.jsx by the current view. */
   background-color: #f7f0e4;
