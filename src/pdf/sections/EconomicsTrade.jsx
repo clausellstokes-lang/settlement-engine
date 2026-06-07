@@ -252,34 +252,42 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
           )}
           {e.shadowEconomy.operations?.length > 0 && (
             <View style={{ marginBottom: 4 }}>
-              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>ACTIVE OPERATIONS</Text>
-              {e.shadowEconomy.operations.map((op, i) => (
-                <View key={`op-${i}`} style={{ marginBottom: 2 }}>
-                  <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.bad }}>
-                    {label(op)}
-                  </Text>
-                  {op?.scope && (
-                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
-                      Scope: {op.scope}{op?.target ? ` · target: ${op.target}` : ''}
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>ECONOMIC OPERATIONS</Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginTop: 2 }}>
+                {e.shadowEconomy.operations.map((op, i) => (
+                  <View
+                    key={`op-${i}`}
+                    style={{
+                      backgroundColor: palette.badBg,
+                      borderWidth: 0.4,
+                      borderColor: palette.bad,
+                      borderRadius: 3,
+                      paddingHorizontal: 6,
+                      paddingVertical: 2,
+                    }}
+                  >
+                    <Text style={{ ...type.body_em, fontSize: pt['8.5'], color: palette.bad }}>
+                      {label(op)}
                     </Text>
-                  )}
-                  {op?.description && (
-                    <EditableText
-                      name={`economics.shadow.op.${i}.description`}
-                      defaultValue={op.description}
-                      style={{ ...type.body, fontSize: pt['8.5'] }}
-                    />
-                  )}
-                </View>
-              ))}
+                    {op?.econ && (
+                      <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted }}>
+                        {op.econ}
+                      </Text>
+                    )}
+                  </View>
+                ))}
+              </View>
             </View>
           )}
           {e.shadowEconomy.criminalChains?.length > 0 && (
-            <BulletList
-              items={e.shadowEconomy.criminalChains}
-              tone="bad"
-              itemRender={(c) => label(c)}
-            />
+            <View>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, marginTop: 2 }}>CRIMINAL SUPPLY CHAINS</Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginTop: 2 }}>
+                {e.shadowEconomy.criminalChains.map((c, i) => (
+                  <Tag key={`cc-${i}`} tone="bad">{label(c)}</Tag>
+                ))}
+              </View>
+            </View>
           )}
         </View>
       )}

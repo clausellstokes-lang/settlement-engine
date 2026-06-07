@@ -188,6 +188,28 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
               )}
             </View>
           )}
+          {d.criminalStructure && (
+            <View
+              wrap={false}
+              style={{
+                padding: 5,
+                marginBottom: 4,
+                backgroundColor: palette.card,
+                borderWidth: 0.4,
+                borderColor: palette.border,
+                borderLeftWidth: 3,
+                borderLeftColor: d.criminalStructure.color,
+                borderRadius: 2,
+              }}
+            >
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.bad, marginBottom: 1 }}>
+                CRIMINAL STRUCTURE · {d.criminalStructure.label}
+              </Text>
+              <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
+                {d.criminalStructure.note}
+              </Text>
+            </View>
+          )}
           {d.crimeTypes?.length > 0 && (
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginBottom: 3 }}>
               {d.crimeTypes.map((ct, i) => (
@@ -197,17 +219,28 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
           )}
           {d.criminalOps?.length > 0 && (
             <View style={{ marginBottom: 4 }}>
-              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>OPERATIONS</Text>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, marginBottom: 2 }}>ACTIVE CRIMINAL OPERATIONS</Text>
               {d.criminalOps.map((op, i) => (
-                <View key={`cop-${i}`} style={{ marginBottom: 2 }}>
-                  <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.bad }}>
+                <View
+                  key={`cop-${i}`}
+                  wrap={false}
+                  style={{
+                    marginBottom: 3,
+                    padding: 4,
+                    backgroundColor: palette.card,
+                    borderWidth: 0.4,
+                    borderColor: palette.border,
+                    borderLeftWidth: 2,
+                    borderLeftColor: palette.bad,
+                    borderRadius: 2,
+                  }}
+                >
+                  <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.bad, marginBottom: 1 }}>
                     {label(op)}
                   </Text>
-                  {(op?.scope || op?.target) && (
-                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
-                      {op?.scope && `Scope: ${op.scope}`}
-                      {op?.scope && op?.target && '  ·  '}
-                      {op?.target && `Target: ${op.target}`}
+                  {op?.note && (
+                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
+                      {op.note}
                     </Text>
                   )}
                 </View>
@@ -248,32 +281,47 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       )}
 
       {/* ── Supporting capabilities ───────────────────────────── */}
-      {Object.values(d.supportingCapabilities).some(Boolean) && (
-        <View style={{ marginTop: space.sm }} wrap={false}>
+      {d.supportingCapabilities?.length > 0 && (
+        <View style={{ marginTop: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             SUPPORTING CAPABILITIES
           </Text>
-          {Object.entries(d.supportingCapabilities).filter(([, v]) => v).map(([key, v]) => (
+          {d.supportingCapabilities.map((sc, i) => (
             <View
-              key={`sc-${key}`}
-              style={{ flexDirection: 'row', marginBottom: 3, alignItems: 'flex-start' }}
+              key={`sc-${i}`}
+              wrap={false}
+              style={{
+                flexDirection: 'row',
+                marginBottom: 3,
+                padding: 4,
+                backgroundColor: palette.card,
+                borderWidth: 0.4,
+                borderColor: palette.border,
+                borderLeftWidth: 2,
+                borderLeftColor: sc.color,
+                borderRadius: 2,
+                alignItems: 'flex-start',
+              }}
             >
-              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, width: 100 }}>
-                {capKey(key)}
-              </Text>
               <View style={{ flex: 1 }}>
-                <Text style={{ ...type.body, fontSize: pt['9'], color: palette.ink }}>
-                  {typeof v === 'string' ? v : (v?.label || cap(v?.level) || ', ')}
+                <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 1 }}>
+                  <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.ink, marginRight: 5 }}>
+                    {sc.label}
+                  </Text>
+                  <Text style={{ ...type.caption, fontSize: pt['8'], color: sc.color, fontWeight: 700 }}>
+                    {sc.status}
+                  </Text>
+                </View>
+                <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
+                  {sc.note}
                 </Text>
-                {typeof v === 'object' && v?.description && (
-                  <EditableText
-                    name={`defense.cap.${key}.description`}
-                    defaultValue={v.description}
-                    style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}
-                  />
-                )}
               </View>
+              {sc.score != null && (
+                <Text style={{ ...type.numeric, fontSize: pt['10'], color: sc.color, marginLeft: 6 }}>
+                  {Math.round(sc.score)}
+                </Text>
+              )}
             </View>
           ))}
         </View>
@@ -302,11 +350,6 @@ function scoreTone(v) {
   if (v >= 70) return 'good';
   if (v >= 40) return 'warn';
   return 'bad';
-}
-
-function capKey(s) {
-  if (!s) return '';
-  return s.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase()).trim();
 }
 
 export default DefenseSecurity;

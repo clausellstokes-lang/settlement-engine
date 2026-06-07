@@ -6,6 +6,7 @@ import {isMobile} from '../tabConstants';
 
 import {buildThreatAssessment} from '../../../generators/defenseGenerator';
 import {NarrativeNote} from '../NarrativeNote';
+import { criminalOpNote, deriveCriminalStructure, deriveSupportingCapabilities } from '../../../domain/display/defenseDisplay.js';
 
 export function DefenseTab({ settlement:r, narrativeNote}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -18,7 +19,6 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const readiness = d.readiness || {label:'Unknown',color:'#9c8068',background:'#faf8f4',border:'#e0d0b0'};
   const inst = d.institutions || {};
   const f = r.economicState?.compound?.inst || {};
-  const tradeAccess = r.config?.tradeRouteAccess || 'road';
   const sp = r.economicState?.safetyProfile || {};
   const ra = r.resourceAnalysis || {};
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
@@ -56,26 +56,9 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const safetyLabel = sp.safetyLabel || '';
   const _bmc         = sp.blackMarketCapture || 0;
 
-  // Classify criminal structure: organized / semi-organized / diffuse / none
-  const allInstNames = (r.institutions||[]).map(i=>(i.name||'').toLowerCase());
-  const hasGuild     = allInstNames.some(n=>n.includes("thieves' guild")||n.includes('thieves guild'));
-  const hasSyndicate = allInstNames.some(n=>n.includes('multiple criminal')||n.includes('underground city')||n.includes('front business'));
-  const hasSemiOrg   = allInstNames.some(n=>n.includes('smuggling')||n.includes('black market')||n.includes('gambling'));
-  const hasDiffuse   = allInstNames.some(n=>n.includes('fence')||n.includes('bandit')||n.includes('outlaw'));
-  const crimStructure = hasGuild||hasSyndicate ? 'organized'
-                      : hasSemiOrg             ? 'semi-organized'
-                      : hasDiffuse             ? 'diffuse'
-                      : null;
-
-  const crimStructureData = {
-    organized:      { label:'Organized Syndicate', color:'#8b1a1a', bg:'#fdf4f4',
-      note:'A structured criminal hierarchy controls what crime is permitted. Predictable rules, a hierarchy to negotiate with. Or cross. Random violence is suppressed because it draws enforcement. The real danger is systematic: protection, extortion, corruption of officials.' },
-    'semi-organized':{ label:'Semi-Organized Networks', color:'#8a3010', bg:'#fdf0e8',
-      note:'Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Multiple factions may be competing. Less predictable than a guild, more structured than street crime.' },
-    diffuse:        { label:'Diffuse Criminal Presence', color:'#7a5010', bg:'#faf8e0',
-      note:'Opportunistic crime without organizational infrastructure. Fences, bandits, and minor operators work independently. Less politically dangerous but harder to suppress. No single node to threaten or buy off.' },
-  };
-  const csd = crimStructure ? crimStructureData[crimStructure] : null;
+  // Criminal structure classification (shared with the PDF viewModel)
+  const csd = deriveCriminalStructure(r);
+  const crimStructure = csd?.key || null;
 
   // Safety severity for UI theming
   const isDangerous  = safetyLabel.includes('Dangerous')||safetyLabel.includes('Desperate');
@@ -98,43 +81,8 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const stressStatus = activeStress ? STRESS_STATUS[activeStress] : null;
   const stressObj    = stresses.find(s=>s?.type===activeStress);
 
-  // Supporting capabilities
-  const econScore = Math.round(scores.economic||0);
-  const caps = [
-    {
-      icon:'', label:'Economic Backing',
-      status: econScore>=65?'Well-funded':econScore>=40?'Adequate':econScore>=25?'Underfunded':'Critical',
-      color: scoreColor(econScore), score: econScore,
-      note: econScore>=65?'Full pay, maintained equipment, reserve capacity.':econScore>=40?'Adequate upkeep, some shortfalls.':econScore>=25?'Irregular pay, worn equipment, morale risk.':'Cannot sustain forces. Systemic breakdown.',
-    },
-    {
-      icon:'', label:'Magical Capability',
-      status: f.hasMagicInst?'Arcane support':'None',
-      color: f.hasMagicInst?'#5a2a8a':'#9c8068', score: scores.magical||0,
-      note: f.hasMagicInst?`${magicDef.slice(0,2).map(m=>m.name).join(', ')}. Detection, wards, counterspell.`:'Conventional defense only. Invisible threats go undetected and unanswered.',
-    },
-    {
-      icon:'', label:'Legal Infrastructure',
-      status: f.hasCourtSystem&&f.hasPrison?'Court + Prison':f.hasCourtSystem?'Court only':f.hasPrison?'Prison only':'None',
-      color: f.hasCourtSystem&&f.hasPrison?'#1a3a5a':f.hasCourtSystem?'#3a5a7a':f.hasPrison?'#7a5a3a':'#9c8068', score:null,
-      note: f.hasCourtSystem&&f.hasPrison?'Full enforcement chain. Arrest, prosecute, detain.':f.hasCourtSystem?'Courts without detention. Fines and exile only.':f.hasPrison?'Detention without process. Arbitrary enforcement.':'No deterrence beyond force.',
-    },
-    {
-      icon:'', label:'Medical Readiness',
-      status: f.hasHospital?'Hospital present':f.hasChurch?'Clergy care':'None',
-      color: f.hasHospital?'#1a5a28':f.hasChurch?'#7a5010':'#8b1a1a', score:null,
-      note: f.hasHospital?'Casualty treatment, outbreak containment, recovery capacity.':f.hasChurch?'Parish care. Basic wound and disease management.':'No dedicated healers. Plague burns unchecked.',
-    },
-    {
-      icon:'', label:'Logistics & Supply',
-      status: f.hasGranary?'Granary present':'No reserves',
-      color: f.hasGranary?'#1a5a28':'#8b1a1a', score:null,
-      note: f.hasGranary?(f.hasPort?'Granary + sea access. Historically the hardest siege posture to break.':tradeAccess==='isolated'?'Granary in isolation. Endurance depends entirely on stored reserves.':'Granary with road supply. Cut the roads, cut the supply.'):(tradeAccess==='port'?'No reserves, but sea supply continues while port is open.':'No food buffer. Any supply disruption becomes a survival crisis within days.'),
-    },
-  ];
-  if (f.hasNavy||f.hasPort) {
-    caps.push({icon:'',label:'Naval Defense',status:f.hasNavy?'Naval force':'Port only',color:f.hasNavy?'#1a3a6a':'#3a5a7a',score:null,note:f.hasNavy?'Naval force controls sea approaches. Amphibious assault requires fleet superiority.':'Port facility but no naval force. Sea approaches are accessible to any vessel.'});
-  }
+  // Supporting capabilities (shared with the PDF viewModel)
+  const caps = deriveSupportingCapabilities(r);
 
   // Defense violations
   const defViolations = (r.structuralViolations||[]).filter(v=>
@@ -270,27 +218,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Active Criminal Operations</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {crimInsts.map((name,i)=>{
-                // Derive context note by institution type
-                const n = name.toLowerCase();
-                const note = n.includes("thieves' guild")||n.includes('thieves guild')
-                  ? 'Controls the criminal hierarchy. Suppresses random crime in exchange for predictable extraction. Deeply embedded in civic life.'
-                  : n.includes('black market')
-                  ? 'Operates a parallel marketplace for contraband, stolen goods, and unlicensed services. Competes directly with legitimate merchants.'
-                  : n.includes('smuggling')
-                  ? 'Moves goods around customs and guild charters. Corrupt officials, unofficial landing points, and false manifests.'
-                  : n.includes('front business')
-                  ? 'Legitimate-looking operations used to launder criminal revenue and provide cover for illegal activities.'
-                  : n.includes('gang')||n.includes('street')
-                  ? 'Controls specific territory through violence. Extorts local businesses. Competes with the watch for street-level authority.'
-                  : n.includes('gambling')
-                  ? 'Operates unlicensed gambling. Revenue funds broader criminal network. Attracts debt spirals and desperation crime.'
-                  : n.includes('underground')
-                  ? 'An entire secondary economy operating below street level. Beyond enforcement reach without extraordinary effort.'
-                  : n.includes('assassin')
-                  ? 'Professional killing for hire. The existence of this market reflects deeply embedded political violence.'
-                  : n.includes('fence')
-                  ? 'Moves stolen goods into legitimate circulation. The fence is the clearinghouse that makes theft economically viable.'
-                  : 'Criminal infrastructure with local territorial or economic influence.';
+                const note = criminalOpNote(name);
                 return (
                   <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #8b1a1a',borderRadius:5,padding:'8px 12px'}}>
                     <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.danger,marginBottom:3}}>{name}</div>

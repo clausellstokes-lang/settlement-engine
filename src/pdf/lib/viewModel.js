@@ -23,6 +23,9 @@
 
 import { flag } from '../../lib/flags.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
+import {
+  criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
+} from '../../domain/display/defenseDisplay.js';
 
 const TIER_LABELS = {
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
@@ -481,6 +484,11 @@ function powerSlice(active) {
   };
 }
 
+// Pull the human resource name off an exploitation chain entry (engine stores
+// it as `rawResource`; tolerate a few legacy shapes + bare strings).
+const exploitName = (c) =>
+  typeof c === 'string' ? c : (c?.rawResource || c?.resource || c?.chainKey || c?.name || '');
+
 function economicsSlice(active) {
   const s = active || {};
   const ec = s?.economicState || {};
@@ -536,12 +544,32 @@ function economicsSlice(active) {
     chains,
     serviceChains:      chains.filter(c => c.isService),
     shadowEconomy: {
-      captureRate: shadow?.captureRate ?? sp?.blackMarketCapture?.score ?? null,
-      operations:  shadow?.operations || s?.criminalOperations || [],
-      criminalChains: shadow?.criminalChains || [],
+      captureRate:
+        shadow?.captureRate ??
+        (typeof sp?.blackMarketCapture === 'number'
+          ? sp.blackMarketCapture
+          : sp?.blackMarketCapture?.score) ??
+        null,
+      // Operations = the safety profile's criminal institutions (same source the
+      // web Economics tab uses), each tagged with its economic role.
+      operations: (sp?.criminalInstitutions || []).map((name) => ({
+        name,
+        econ: criminalOpEcon(name),
+      })),
+      // Criminal supply chains = the criminal-economy category of active chains.
+      criminalChains: (ec?.activeChains || [])
+        .filter((c) => c?.needKey === 'criminal_economy')
+        .map((c) => `${String(c?.chainId || '').replace(/_/g, ' ')} · ${c?.status || 'active'}`.trim()),
       crimeTypes: sp?.crimeTypes || shadow?.crimeTypes || [],
     },
-    resourceExploitation: ra?.exploitation || {},
+    // Normalize exploitation to resource-name arrays the section renders
+    // directly. Engine shape is { fullyExploited, partiallyExploited,
+    // unexploited }, each a chain object whose resource lives in `rawResource`.
+    resourceExploitation: {
+      full:        (ra?.exploitation?.fullyExploited || []).map(exploitName).filter(Boolean),
+      partial:     (ra?.exploitation?.partiallyExploited || []).map(exploitName).filter(Boolean),
+      unexploited: (ra?.exploitation?.unexploited || []).map(exploitName).filter(Boolean),
+    },
     terrainCriticals: ra?.terrainCriticals || [],
   };
 }
@@ -594,9 +622,15 @@ function defenseSlice(active) {
     };
   });
 
-  // Criminal architecture
+  // Criminal architecture. Operations come from the safety profile's criminal
+  // institutions (the source the web Defense tab uses), each carrying an
+  // enforcement note; criminalStructure classifies the overall organization.
   const criminalCapture = s?.powerStructure?.criminalCaptureState || sp?.criminalCapture || null;
-  const criminalOps = s?.criminalOperations || sp?.shadowEconomy?.operations || [];
+  const criminalOps = (sp?.criminalInstitutions || []).map((name) => ({
+    name,
+    note: criminalOpNote(name),
+  }));
+  const criminalStructure = deriveCriminalStructure(s);
   const criminalFaction = (s?.powerStructure?.factions || s?.factions || []).find(f => (f?.category || '').toLowerCase() === 'criminal') || null;
   const orderHooks = sp?.plotHooks || [];
 
@@ -619,18 +653,14 @@ function defenseSlice(active) {
     stress,
     criminalCapture,
     criminalOps,
+    criminalStructure,
     criminalFaction,
     orderHooks,
     publicOrder: s?.publicOrder || null,
     lawEnforcement: s?.lawEnforcement || null,
-    supportingCapabilities: {
-      economicBacking: dp?.economicBacking || null,
-      magicalCapability: dp?.magicalCapability || null,
-      legalSystem: dp?.legalSystem || s?.legalSystem || null,
-      medicalCapability: dp?.medicalCapability || s?.medicalCapability || null,
-      logistics: dp?.logistics || null,
-      navalCapability: dp?.navalCapability || null,
-    },
+    // Computed from defense scores + institution presence, mirroring the web
+    // Defense tab (the engine does not emit these as fields).
+    supportingCapabilities: deriveSupportingCapabilities(s),
     vulnerabilities: dp?.vulnerabilities || s?.defenseVulnerabilities || [],
   };
 }

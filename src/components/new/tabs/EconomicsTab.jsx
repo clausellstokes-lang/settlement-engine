@@ -6,6 +6,7 @@ import {isMobile} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
+import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
 
 // ── Status palette for chain cards ────────────────────────────────────────
 // Module-scope so the object identity is stable across renders (avoids
@@ -475,14 +476,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
               <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Economic Operations</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {crimInsts.map((name,i)=>{
-                  const n = name.toLowerCase();
-                  const econ = n.includes('black market')   ? 'parallel marketplace'
-                             : n.includes('smuggling')      ? 'duty evasion'
-                             : n.includes('gambling')       ? 'unlicensed revenue'
-                             : n.includes('front business') ? 'money laundering'
-                             : n.includes('fence')          ? 'stolen goods market'
-                             : n.includes('thieves')        ? 'protection + extraction'
-                             : 'criminal revenue stream';
+                  const econ = criminalOpEcon(name);
                   return (
                     <div key={i} style={{background:swatch.dangerBg,border:'1px solid #e0b0b0',borderRadius:5,padding:'5px 10px',display:'flex',flexDirection:'column',gap:1}}>
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger}}>{name}</span>
