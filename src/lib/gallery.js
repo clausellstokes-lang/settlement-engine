@@ -14,6 +14,7 @@
  */
 
 import { supabase, isConfigured } from './supabase.js';
+import { toPublicSafe } from '../domain/display/publicSafe.js';
 
 const LIST_PAGE_SIZE = 24;
 const DEFAULT_SORT = 'relevant';
@@ -311,55 +312,9 @@ function sanitizeTile(row) {
   };
 }
 
-const PRIVATE_KEY_RE = /(secret|private|dm|gm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap)/i;
-
-function sanitizePublicValue(value, path = []) {
-  if (Array.isArray(value)) {
-    return value
-      .map(item => sanitizePublicValue(item, path))
-      .filter(item => item !== undefined);
-  }
-  if (!value || typeof value !== 'object') return value;
-
-  const out = {};
-  for (const [key, child] of Object.entries(value)) {
-    const childPath = [...path, key];
-    if (PRIVATE_KEY_RE.test(key)) continue;
-    if (childPath.includes('npcs') && ['goal', 'secret', 'plotHooks', 'relationships'].includes(key)) continue;
-    if (childPath.includes('history') && key === 'currentTensions') {
-      out[key] = sanitizePublicValue(child, childPath);
-      continue;
-    }
-    const sanitized = sanitizePublicValue(child, childPath);
-    if (sanitized !== undefined) out[key] = sanitized;
-  }
-  return out;
-}
-
-function sanitizePublicSettlement(settlement) {
-  const clean = sanitizePublicValue(settlement || {});
-  delete clean.aiData;
-  delete clean.plotHooks;
-  delete clean.dmCompass;
-  delete clean.dossierNotes;
-  delete clean.notes;
-  if (Array.isArray(clean.npcs)) {
-    clean.npcs = clean.npcs.map(npc => ({
-      id: npc.id,
-      name: npc.name,
-      role: npc.role,
-      title: npc.title,
-      category: npc.category,
-      personality: npc.personality,
-      physical: npc.physical,
-      factionAffiliation: npc.factionAffiliation,
-      secondaryAffiliation: npc.secondaryAffiliation,
-      presentation: npc.presentation,
-      influence: npc.influence,
-    })).filter(npc => npc.name || npc.role);
-  }
-  return clean;
-}
+// Public-safe sanitization is consolidated in domain/display/publicSafe.js
+// (toPublicSafe) — a single, named, tested projection of the display spine
+// (doc §1k), mirroring the server's _gallery_sanitize_public_json.
 
 function sanitizeDossier(row) {
   return {
@@ -367,7 +322,7 @@ function sanitizeDossier(row) {
     slug:         row.public_slug,
     name:         row.name,
     tier:         row.tier,
-    settlement:   sanitizePublicSettlement(row.data),
+    settlement:   toPublicSafe(row.data),
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
