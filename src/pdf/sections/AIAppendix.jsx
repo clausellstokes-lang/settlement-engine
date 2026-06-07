@@ -18,7 +18,7 @@ import { Heading } from '../primitives/Heading.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { upper } from '../lib/format.js';
+import { upper, safe } from '../lib/format.js';
 
 export function AIAppendix({ settlement, narrativeMode, vm }) {
   // Defence-in-depth: only render when narrative content actually exists.
@@ -232,9 +232,12 @@ export function AIAppendix({ settlement, narrativeMode, vm }) {
 
 function textOf(item) {
   if (!item) return '';
-  if (typeof item === 'string') return item;
-  return (
-    item.text || item.description || item.summary || item.label || item.title || item.detail || ''
+  // safe() = noLig + null-guard: defuse the Lora f-ligature substitution
+  // (fi/fl/ff render a tofu glyph after the f). AI-narrative prose flows
+  // through here, so it must be defused like the rest of the dossier text.
+  if (typeof item === 'string') return safe(item);
+  return safe(
+    item.text || item.description || item.summary || item.label || item.title || item.detail || '',
   );
 }
 
