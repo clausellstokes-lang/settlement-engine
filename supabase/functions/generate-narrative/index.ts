@@ -1511,23 +1511,23 @@ type FieldCfg = { max_tokens: number; instruction: string };
 
 const DAILY_LIFE_FIELDS: Record<string, FieldCfg> = {
   dawn: {
-    max_tokens: 280,
+    max_tokens: 600,
     instruction: `Write ONE paragraph (4-5 sentences) on DAWN in this settlement. Who wakes first, what's the first sound after the roosters, which fire gets lit. Ground in the settlement's trade and stressors. Present tense. ${HOUSE_STYLE}`,
   },
   morning: {
-    max_tokens: 280,
+    max_tokens: 600,
     instruction: `Write ONE paragraph (4-5 sentences) on the MORNING. Market opening, workers to their posts, children's noise. Name a specific NPC or institution from the data. Present tense. ${HOUSE_STYLE}`,
   },
   midday: {
-    max_tokens: 280,
+    max_tokens: 600,
     instruction: `Write ONE paragraph (4-5 sentences) on MIDDAY. Where people gather to eat, who arrives from the road, what the sun does to tempers. Reference the terrain and trade route specifics. ${HOUSE_STYLE}`,
   },
   evening: {
-    max_tokens: 280,
+    max_tokens: 600,
     instruction: `Write ONE paragraph (4-5 sentences) on the EVENING. The tavern fills, lamps are lit, news travels. Reference a local stressor or tension if present in the data. ${HOUSE_STYLE}`,
   },
   night: {
-    max_tokens: 280,
+    max_tokens: 600,
     instruction: `Write ONE paragraph (4-5 sentences) on the NIGHT. Watch patrols, closed doors, the settlement's overall nighttime mood (quiet? watchful? threatened?). End with a single specific image. ${HOUSE_STYLE}`,
   },
 };

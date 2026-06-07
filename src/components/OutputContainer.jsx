@@ -574,7 +574,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           }, 'Narrative Layer · AI prose pass'),
           React.createElement('div', {
             style: { fontSize: FS.xs, color: '#4A3B22', marginTop: 2, lineHeight: 1.4 }
-          }, 'Refines the simulated dossier into prose your players can hear.')
+          }, narrativeEnabled
+               ? 'Refines the simulated dossier into prose your players can hear.'
+               : 'Save this settlement to your library to refine it into prose your players can hear.')
         ),
         renderNarrativeButtons()
       ),

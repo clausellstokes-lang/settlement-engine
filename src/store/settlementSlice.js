@@ -1336,7 +1336,11 @@ export const createSettlementSlice = (set, get) => ({
     state.lastExportAt   = cs.lastExportAt || null;
     state.pendingPreview = null;
     state.pendingChange  = null;
-    state.aiSettlement   = save.aiSettlement || null;
+    // The refined narrative lives at save.aiData.aiSettlement, not a flat
+    // save.aiSettlement. Reading the wrong path nulled the narrative on every
+    // reload (it ran right after hydrateAiFromSave had loaded it correctly),
+    // while daily life — untouched here — survived. Read aiData first.
+    state.aiSettlement   = save.aiData?.aiSettlement || save.aiSettlement || null;
 
     // SystemState: prefer the persisted snapshot; if absent or stale,
     // re-derive from the settlement so the rail/timeline never crashes.
