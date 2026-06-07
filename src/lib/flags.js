@@ -64,6 +64,10 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P107 / CP-2: Workshop as top-level nav destination. PROMOTED default-on; flag retained as soak killswitch.',
   },
+  canonicalViewModel: {
+    default: false,
+    description: 'M0.1 / doc §1: route food balance + export posture through the canonical display model (deriveDossierViewModel). Off until per-tier verification; then promote default-on (killswitch retained).',
+  },
   versionHistory: {
     default: false,
     description: 'P109 / E-5: per-settlement version timeline + diff + revert. Cartographer-gated.',

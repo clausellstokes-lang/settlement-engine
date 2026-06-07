@@ -21,6 +21,9 @@
  *     — pre-shaped slices.
  */
 
+import { flag } from '../../lib/flags.js';
+import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
+
 const TIER_LABELS = {
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
   town: 'Town', city: 'City', metropolis: 'Metropolis',
@@ -53,6 +56,36 @@ function normalizeImportCoverage(v) {
   if (pct < 0) return 0;
   if (pct > 200) return 200;
   return pct;
+}
+
+/**
+ * Food-balance core fields, shared by the raw + active slices. Behind the
+ * canonicalViewModel flag these come from the display model (which reads the
+ * real dailyProduction/dailyNeed fields and applies the §1c "Not calculated"
+ * fallback); otherwise the legacy shape is preserved verbatim. `viability`
+ * is the economicViability object (not the whole settlement).
+ */
+function foodCore(viability) {
+  const fb = viability?.metrics?.foodBalance || null;
+  if (flag('canonicalViewModel')) {
+    const m = deriveFoodBalance({ economicViability: viability });
+    return {
+      production: m.produced,
+      need:       m.needed,
+      deficit:    m.deficit || null,
+      surplus:    m.surplus || null,
+      importCoverage: m.importCoverage,
+      display:    m.display,
+      detail:     m.detail,
+    };
+  }
+  return {
+    production: fb?.production ?? null,
+    need:       fb?.need ?? null,
+    deficit:    fb?.deficit ?? null,
+    surplus:    fb?.surplus ?? null,
+    importCoverage: normalizeImportCoverage(fb?.importCoverage),
+  };
 }
 
 const PROSPERITY_TONE = {
@@ -313,11 +346,7 @@ function overviewSlice(active, ai, useAi) {
     tensions,
     conflicts,
     foodBalance: {
-      production: s?.economicViability?.metrics?.foodBalance?.production ?? null,
-      need:       s?.economicViability?.metrics?.foodBalance?.need ?? null,
-      deficit:    s?.economicViability?.metrics?.foodBalance?.deficit ?? null,
-      surplus:    s?.economicViability?.metrics?.foodBalance?.surplus ?? null,
-      importCoverage: normalizeImportCoverage(s?.economicViability?.metrics?.foodBalance?.importCoverage),
+      ...foodCore(s?.economicViability),
       summary:    s?.economicViability?.foodSecurity?.summary || s?.economicViability?.metrics?.foodBalance?.summary || null,
     },
     economyOutput:      ec?.compound?.economyOutput ?? null,
@@ -491,11 +520,7 @@ function economicsSlice(active) {
     })),
     viabilityHooks:     v?.plotHooks || [],
     foodBalance: {
-      production: v?.metrics?.foodBalance?.production ?? null,
-      need:       v?.metrics?.foodBalance?.need ?? null,
-      deficit:    v?.metrics?.foodBalance?.deficit ?? null,
-      surplus:    v?.metrics?.foodBalance?.surplus ?? null,
-      importCoverage: normalizeImportCoverage(v?.metrics?.foodBalance?.importCoverage),
+      ...foodCore(v),
       agricultureModifier: v?.metrics?.foodBalance?.agricultureModifier ?? null,
       stressModifier: v?.metrics?.foodBalance?.stressModifier ?? null,
       summary: v?.foodSecurity?.summary || v?.metrics?.foodBalance?.summary || null,

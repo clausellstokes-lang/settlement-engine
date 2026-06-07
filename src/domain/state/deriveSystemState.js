@@ -23,6 +23,8 @@
  */
 
 import { bandFor, clamp01 } from './bands.js';
+import { flag } from '../../lib/flags.js';
+import { deriveExportPosture } from '../display/dossierViewModel.js';
 
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
@@ -90,8 +92,14 @@ function deriveResilience(s) {
     }
   }
 
-  // Export/import diversity — many narrow exports = fragile
-  const exportCount = (econ.exports || []).length;
+  // Export/import diversity — many narrow exports = fragile. The legacy read
+  // here was `econ.exports`, a field economicState doesn't populate (the list
+  // lives at primaryExports), so it always reported "No exports" even when the
+  // dossier listed them (§1d). Behind canonicalViewModel, source the count from
+  // the display model's exportPosture so every surface agrees.
+  const exportCount = flag('canonicalViewModel')
+    ? deriveExportPosture(s).count
+    : (econ.exports || []).length;
   if (exportCount === 0) {
     risks.push('No exports — economic isolation');
   } else if (exportCount >= 5) {
