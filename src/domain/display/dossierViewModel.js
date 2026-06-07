@@ -67,7 +67,7 @@ export function deriveFoodBalance(settlement) {
       display: 'Not calculated',
       detail: 'Produced/Needed: Not calculated',
       surplus: 0, deficit: 0, deficitPercent: null,
-      produced: null, needed: null, importCoverage: null,
+      produced: null, needed: null, importCoverage: null, rawDeficit: null,
     };
   }
   const produced = cleanNum(fb.dailyProduction);
@@ -92,7 +92,11 @@ export function deriveFoodBalance(settlement) {
     deficitPercent: cleanNum(fb.deficitPercent),
     produced: rawKnown ? produced : null,
     needed: rawKnown ? needed : null,
+    // importCoverage is a QUANTITY (lb/day of the gap covered by imports), not a
+    // percent. rawDeficit is the pre-import gap (need − production). The display
+    // layer computes coverage% = importCoverage / rawDeficit, mirroring the web.
     importCoverage: cleanNum(fb.importCoverage),
+    rawDeficit: cleanNum(fb.rawDeficit),
   };
 }
 

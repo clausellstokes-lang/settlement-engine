@@ -30,12 +30,6 @@ const TIER_LABELS = {
 };
 
 /**
- * normalizeImportCoverage — engine emits importCoverage as either a fraction
- * (0.31 = 31%) or already as a percentage (31). Heuristic: if the value is
- * ≤ 5, treat as fraction and scale up. If > 5, assume already percentage.
- * Anything > 200 is clamped to 200 (pathological data should not crash UI).
- */
-/**
  * settlement.stress is sometimes an array, sometimes a single stress
  * object, sometimes null/undefined — depends on which generator path
  * produced the settlement. Normalize to array at every read site so the
@@ -48,16 +42,6 @@ function stressArray(s) {
   return [];
 }
 
-function normalizeImportCoverage(v) {
-  if (v == null) return null;
-  const n = Number(v);
-  if (!Number.isFinite(n)) return null;
-  const pct = n <= 5 ? n * 100 : n;
-  if (pct < 0) return 0;
-  if (pct > 200) return 200;
-  return pct;
-}
-
 /**
  * Food-balance core fields, shared by the raw + active slices. Behind the
  * canonicalViewModel flag these come from the display model (which reads the
@@ -65,6 +49,14 @@ function normalizeImportCoverage(v) {
  * fallback); otherwise the legacy shape is preserved verbatim. `viability`
  * is the economicViability object (not the whole settlement).
  */
+// imports cover this % of the pre-import gap (qty ÷ rawDeficit). Mirrors the web
+// EconomicsTab ("Trade covers X% of gap"). importCoverage is a QUANTITY (lb/day),
+// NOT a percent — printing it directly produced the bogus "imports cover 15929%".
+// Falls back to 100% of the import qty when the gap is unknown.
+function coveragePct(ic, rd) {
+  return ic > 0 ? Math.round((ic / (rd || ic)) * 100) : null;
+}
+
 function foodCore(viability) {
   const fb = viability?.metrics?.foodBalance || null;
   if (flag('canonicalViewModel')) {
@@ -75,6 +67,8 @@ function foodCore(viability) {
       deficit:    m.deficit || null,
       surplus:    m.surplus || null,
       importCoverage: m.importCoverage,
+      rawDeficit: m.rawDeficit,
+      coveragePct: coveragePct(m.importCoverage, m.rawDeficit),
       display:    m.display,
       detail:     m.detail,
     };
@@ -84,7 +78,9 @@ function foodCore(viability) {
     need:       fb?.need ?? null,
     deficit:    fb?.deficit ?? null,
     surplus:    fb?.surplus ?? null,
-    importCoverage: normalizeImportCoverage(fb?.importCoverage),
+    importCoverage: fb?.importCoverage ?? null,
+    rawDeficit: fb?.rawDeficit ?? null,
+    coveragePct: coveragePct(fb?.importCoverage, fb?.rawDeficit),
   };
 }
 

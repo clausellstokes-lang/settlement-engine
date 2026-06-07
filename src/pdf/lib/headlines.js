@@ -80,8 +80,12 @@ export function economicsHeadline(eco) {
   if (prosperity && complexity) bits.push(`${prosperity}, ${complexity.toLowerCase()} economy`);
   else if (prosperity) bits.push(`${prosperity} economy`);
   if (topExport) bits.push(`anchored on ${topExport.toLowerCase()}`);
-  if (fb?.deficit > 0) bits.push(`food deficit: imports cover ${Math.round(fb.importCoverage || 0)}%`);
-  else if (fb?.surplus > 0) bits.push(`food surplus`);
+  if (fb?.deficit > 0) {
+    // importCoverage is a qty; coverage% = qty ÷ pre-import gap (rawDeficit).
+    const ic = fb.importCoverage || 0;
+    const pct = ic > 0 ? Math.round((ic / (fb.rawDeficit || ic)) * 100) : 0;
+    bits.push(`food deficit: imports cover ${pct}% of the gap`);
+  } else if (fb?.surplus > 0) bits.push(`food surplus`);
   if (!bits.length) return null;
   return bits.join(' · ') + '.';
 }
@@ -89,8 +93,11 @@ export function economicsHeadline(eco) {
 export function economicsTone(eco) {
   if (!eco) return 'gold';
   const fb = eco.foodBalance || {};
-  if (fb?.deficit > 0 && (fb?.importCoverage || 0) < 60) return 'bad';
-  if (fb?.deficit > 0) return 'warn';
+  if (fb?.deficit > 0) {
+    const ic = fb.importCoverage || 0;
+    const pct = ic > 0 ? (ic / (fb.rawDeficit || ic)) * 100 : 0;
+    return pct < 60 ? 'bad' : 'warn';
+  }
   return 'gold';
 }
 

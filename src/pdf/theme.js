@@ -90,11 +90,16 @@ Font.register({
 
 Font.register({
   family: 'Nunito',
+  // ?v=2 cache-busts the pre-strip copy, same as Lora above. Nunito *also*
+  // shipped with the `liga` GSUB feature and broken fi/fl/ff glyphs, so every
+  // Nunito label/header/tag/caption in the PDF formed the tofu-after-"f"
+  // artifact — even after Lora was stripped. These files were re-cut to drop
+  // the ligature features (glyphs preserved 1:1). Bump on any Nunito re-cut.
   fonts: [
-    { src: '/fonts/Nunito-Regular.ttf',   fontWeight: 400 },
-    { src: '/fonts/Nunito-Bold.ttf',      fontWeight: 700 },
-    { src: '/fonts/Nunito-ExtraBold.ttf', fontWeight: 800 },
-    { src: '/fonts/Nunito-Italic.ttf',    fontWeight: 400, fontStyle: 'italic' },
+    { src: '/fonts/Nunito-Regular.ttf?v=2',   fontWeight: 400 },
+    { src: '/fonts/Nunito-Bold.ttf?v=2',      fontWeight: 700 },
+    { src: '/fonts/Nunito-ExtraBold.ttf?v=2', fontWeight: 800 },
+    { src: '/fonts/Nunito-Italic.ttf?v=2',    fontWeight: 400, fontStyle: 'italic' },
   ],
 });
 

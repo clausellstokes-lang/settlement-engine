@@ -399,9 +399,9 @@ function FoodBalanceBlock({ fb }) {
           <View style={{ flex: 1 }}>
             <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.bad }}>DEFICIT</Text>
             <Text style={{ ...type.numeric, fontSize: pt['13'], color: palette.bad }}>{smart(fb.deficit)}</Text>
-            {fb.importCoverage != null && (
+            {fb.coveragePct != null && (
               <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
-                imports cover {smart(fb.importCoverage)}%
+                imports cover {fb.coveragePct}% of gap
               </Text>
             )}
           </View>

@@ -522,7 +522,7 @@ function FoodBalanceBar({ fb }) {
       {fb?.deficit > 0 && (
         <Text style={{ ...type.caption, color: palette.bad, fontSize: pt['8'], marginTop: 1 }}>
           Deficit: {smart(fb.deficit)}
-          {fb.importCoverage != null ? ` · imports cover ${smart(fb.importCoverage)}%` : ''}
+          {fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}
         </Text>
       )}
       {fb?.surplus > 0 && (
