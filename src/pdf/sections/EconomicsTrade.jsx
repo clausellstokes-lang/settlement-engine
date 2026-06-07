@@ -23,6 +23,8 @@ import { Pill } from '../primitives/Pill.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, num, smart, label, hookText, finite, safePct } from '../lib/format.js';
+import { flag } from '../../lib/flags.js';
+import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 
 export function EconomicsTrade({ settlement, narrativeMode, vm }) {
   const e = vm.economics;
@@ -157,7 +159,14 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             ECONOMIC FLOWS · {e.chains.length} CHAIN{e.chains.length === 1 ? '' : 'S'}
           </Text>
-          {e.chains.map((c, i) => (
+          {flag('pdfVisualChains') ? (
+            <SupplyChainFlow
+              chains={settlement?.economicState?.activeChains}
+              instNames={(settlement?.institutions || []).map((inst) => inst.name || '')}
+              primaryExports={settlement?.economicState?.primaryExports || []}
+              tier={settlement?.tier}
+            />
+          ) : e.chains.map((c, i) => (
             <StatusCard
               key={`ch-${i}`}
               compact
