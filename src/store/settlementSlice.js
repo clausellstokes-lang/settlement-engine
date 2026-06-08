@@ -519,7 +519,9 @@ export const createSettlementSlice = (set, get) => ({
         // §14 P2 — only expose homebrew that passes its tier gate to this
         // settlement's tier. Fail-open for random/custom/unknown types, so it
         // can correctly gate but never silently drop eligible content.
-        customContent: eligibleCustomContent(state.customContent, { tier: state.config?.settType }),
+        customContent: state.config?.useCustomContent === false
+          ? {}
+          : eligibleCustomContent(state.customContent, { tier: state.config?.settType }),
         onComplete: (ctx) => { capturedCtx = ctx; },
         onStep: (name, ctx /*, patch */) => {
           const meta = metaForStep(name);
@@ -749,7 +751,9 @@ export const createSettlementSlice = (set, get) => ({
     const result = eng.generateSettlementPipeline(fullConfig, state.importedNeighbour, {
         seed,
         // §14 P2 — tier-gate homebrew for this settlement (fail-open; see above).
-        customContent: eligibleCustomContent(state.customContent, { tier: state.config?.settType }),
+        customContent: state.config?.useCustomContent === false
+          ? {}
+          : eligibleCustomContent(state.customContent, { tier: state.config?.settType }),
         onComplete: (ctx) => { capturedCtx = ctx; },
     });
     let nextSystemState = state.systemState;

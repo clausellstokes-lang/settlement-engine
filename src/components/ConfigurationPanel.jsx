@@ -298,6 +298,10 @@ export default function ConfigurationPanel(){
   const updateConfig = useStore(s => s.updateConfig);
   const randomSliderMode = useStore(s => s.randomSliderMode);
   const setRandomSliderMode = useStore(s => s.setRandomSliderMode);
+  // §14b — "Use custom content" toggle: only meaningful for users who can author
+  // custom content and actually have some. Default ON (undefined === on).
+  const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
+  const customCount = useStore(s => (typeof s.getCustomContentCount === 'function' ? s.getCustomContentCount() : 0));
   // ── Isolation + magic constraint flags ──────────────────────────────────
   const magic       = config.priorityMagic || 0;
   const noMagic     = config.magicExists === false || magic === 0;
@@ -314,6 +318,17 @@ export default function ConfigurationPanel(){
         <input type="text" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
         {config.customName&&<div style={{fontSize:FS.xs,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
       </div>
+      {/* §14b — Use custom content toggle (homebrew data layer). Default ON. */}
+      {canUseCustom && customCount > 0 && (() => {
+        const on = config.useCustomContent !== false;
+        return (
+          <label style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,borderRadius:6,background:on?'rgba(124,58,237,0.06)':CARD}}>
+            <input type="checkbox" checked={on} onChange={e=>updateConfig({useCustomContent:e.target.checked})} style={{accentColor:swatch.magic,width:15,height:15,flexShrink:0}}/>
+            <span style={{fontSize:FS.sm,fontWeight:700,color:on?swatch.magic:SECOND,fontFamily:sans}}>✦ Use my custom content</span>
+            <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',textAlign:'right',lineHeight:1.3}}>{customCount} item{customCount===1?'':'s'} · institutions, services, resources, trade, factions, stressors &amp; chains</span>
+          </label>
+        );
+      })()}
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="tier">Population</Lbl>
           <Sel value={blockTownPlus && isTownPlus ? 'village' : config.settType}
