@@ -77,8 +77,11 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
     if (!byName.has(norm(name))) byName.set(norm(name), node);
   };
   for (const inst of toList(cc.institutions)) addNode(inst, 'institution', [...resolveNames(inst.produces), inst.name], resolveNames(inst.requires));
-  for (const svc of toList(cc.services)) addNode(svc, 'service', [svc.name], resolveNames(svc.requires));
-  for (const res of toList(cc.resources)) addNode(res, 'resource', [...toList(res.commodities), res.name], []);
+  // A service requires its providing institution (providedBy), so the chain flows
+  // institution → service even when only the service named the link.
+  for (const svc of toList(cc.services)) addNode(svc, 'service', [svc.name], [...resolveNames(svc.requires), ...resolveNames(svc.providedBy)]);
+  // A resource also "provides" the goods/services it yields (its declared output).
+  for (const res of toList(cc.resources)) addNode(res, 'resource', [...toList(res.commodities), res.name, ...resolveNames(res.yields)], []);
   // A trade good requires its processing institution when it names one (so the
   // chain flows resource → institution → good); otherwise its resources directly.
   for (const good of toList(cc.tradeGoods)) {
@@ -109,6 +112,7 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   };
   for (const inst of toList(cc.institutions)) { toList(inst.produces).forEach(seedRef); toList(inst.requires).forEach(seedRef); }
   for (const svc of toList(cc.services)) { toList(svc.requires).forEach(seedRef); toList(svc.providedBy).forEach(seedRef); }
+  for (const res of toList(cc.resources)) { toList(res.yields).forEach(seedRef); toList(res.enables).forEach(seedRef); }
   for (const good of toList(cc.tradeGoods)) { toList(good.requiredResources).forEach(seedRef); toList(good.requiredInstitution).forEach(seedRef); }
 
   // Thread each good's processing institution as the consumer of its required
@@ -122,6 +126,19 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
     for (const instName of instNames) {
       const inst = byName.get(norm(instName)) || ensureNode(instName, 'institution');
       if (inst) inst.requires = [...new Set([...inst.requires, ...resNames])];
+    }
+  }
+
+  // A resource's declared output (`yields`) is the inverse of a good's
+  // requiredResources: treat "resource yields X" as "X requires this resource"
+  // so the resource → X flow connects regardless of which side declared the link.
+  for (const res of toList(cc.resources)) {
+    const outNames = resolveNames(res.yields);
+    if (!outNames.length) continue;
+    const resName = norm(res.name);
+    for (const outName of outNames) {
+      const node = byName.get(norm(outName)) || ensureNode(outName, 'good');
+      if (node && norm(node.name) !== resName) node.requires = [...new Set([...node.requires, resName])];
     }
   }
 

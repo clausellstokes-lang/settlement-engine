@@ -105,6 +105,31 @@ describe('inferSupplyChains', () => {
     expect(chain.discovered.nodes.map((n) => n.name)).toEqual(['Iron Ore', 'Town Forge', 'Steel Blades']);
   });
 
+  it('threads a service to its providing institution (resource → institution → service via providedBy)', () => {
+    // The service only names its providedBy institution; the link must still
+    // form the institution → service edge (bidirectional discovery).
+    const cc = {
+      resources: [{ name: 'Herb Garden', localUid: 'r1', commodities: 'herbs' }],
+      institutions: [{ name: 'Apothecary', localUid: 'i1', requires: ['herbs'] }],
+      services: [{ name: 'Healing Draughts', localUid: 's1', providedBy: 'Apothecary' }],
+    };
+    const chain = inferSupplyChains(cc, { resolve: idResolve }).find((c) => c.processingInstitutions.includes('Apothecary'));
+    expect(chain).toBeTruthy();
+    expect(chain.discovered.nodes.map((n) => n.name)).toEqual(['Herb Garden', 'Apothecary', 'Healing Draughts']);
+  });
+
+  it('threads a resource’s declared output (yields) even when the good never named the resource', () => {
+    // The good carries no requiredResources; the resource → good link comes
+    // entirely from the resource side (`yields`), proving the link is bidirectional.
+    const cc = {
+      resources: [{ name: 'Dragon Roost', localUid: 'r1', commodities: 'scales', yields: ['Dragonbone Blade'] }],
+      tradeGoods: [{ name: 'Dragonbone Blade', localUid: 'g1' }],
+    };
+    const chain = inferSupplyChains(cc, { resolve: idResolve }).find((c) => c.discovered.nodes.some((n) => n.name === 'Dragonbone Blade'));
+    expect(chain).toBeTruthy();
+    expect(chain.discovered.nodes.map((n) => n.name)).toEqual(['Dragon Roost', 'Dragonbone Blade']);
+  });
+
   it('handles empty / no-edge content without throwing', () => {
     expect(inferSupplyChains({}, { resolve: idResolve })).toEqual([]);
     expect(inferSupplyChains({ institutions: [{ name: 'Lonely Hall', localUid: 'i1' }] }, { resolve: idResolve })).toEqual([]);

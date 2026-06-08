@@ -22,6 +22,7 @@
  */
 
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
+import { INSTITUTION_SERVICES } from '../data/institutionServices.js';
 import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../data/resourceData.js';
 import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
 // Import the pure-data meta map, not the full stressTypes.js. The full
@@ -46,7 +47,8 @@ export const REGISTRY_CATEGORIES = [
 
 /** Map our registry categories to the customContent slice keys (where they
  *  differ - most are 1:1). resourceChains is prebuilt-only for now. services
- *  are custom-only (the engine derives prebuilt services from institutions). */
+ *  carry BOTH: prebuilt entries derived from INSTITUTION_SERVICES (no separate
+ *  catalog — institutions are the source of truth) plus user-created customs. */
 export const CUSTOM_SLICE_KEY_FOR = {
   institutions:   'institutions',
   services:       'services',
@@ -125,6 +127,48 @@ function enumeratePrebuiltInstitutions() {
     }
   }
   return Array.from(out.values());
+}
+
+function enumeratePrebuiltServices() {
+  // Built-in services are NOT a separate hand-authored catalog — they live on
+  // institutions (INSTITUTION_SERVICES: institution → { service → {on,p,desc} }),
+  // which is the single source of truth the generation pipeline reads. We flatten
+  // that map into registry entries so custom-content pickers can reference
+  // built-in services, each tagged with its providing institution — exactly
+  // mirroring how the pipeline presents services-by-institution.
+  //
+  // Deduped by service name (one pickable "Lodging" even though several
+  // institutions offer it); the first provider encountered is the primary, and
+  // additional providers are folded into the subcategory hint as "+N".
+  const out = new Map();
+  for (const [institution, services] of Object.entries(INSTITUTION_SERVICES || {})) {
+    if (!services || typeof services !== 'object') continue;
+    for (const [name, props] of Object.entries(services)) {
+      if (!name) continue;
+      const existing = out.get(name);
+      if (existing) {
+        if (!existing.providers.includes(institution)) existing.providers.push(institution);
+        continue;
+      }
+      out.set(name, {
+        refId: prebuiltRefId('services', name),
+        name,
+        category: 'services',
+        source: 'prebuilt',
+        tags: [],
+        desc: props?.desc || '',
+        providers: [institution],
+        raw: props || {},
+      });
+    }
+  }
+  return Array.from(out.values()).map((e) => {
+    const more = e.providers.length - 1;
+    return {
+      ...e,
+      subcategory: more > 0 ? `${e.providers[0]} +${more}` : e.providers[0],
+    };
+  });
 }
 
 function enumeratePrebuiltResources() {
@@ -260,7 +304,7 @@ function getPrebuiltEntries() {
   if (_prebuiltCache) return _prebuiltCache;
   _prebuiltCache = {
     institutions:   _safeEnum(enumeratePrebuiltInstitutions, 'institutions'),
-    services:       [],  // services are custom-only; prebuilt ones derive from institutions
+    services:       _safeEnum(enumeratePrebuiltServices, 'services'),  // derived from INSTITUTION_SERVICES
     resources:      _safeEnum(enumeratePrebuiltResources, 'resources'),
     stressors:      _safeEnum(enumeratePrebuiltStressors, 'stressors'),
     tradeGoods:     _safeEnum(enumeratePrebuiltTradeGoods, 'tradeGoods'),

@@ -242,7 +242,7 @@ export default function EntityPicker({
           fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
           border: `1px dashed ${BORDER}`, borderRadius: 4,
         }}>
-          No matches in {category}. Add a custom entry first if needed.
+          No matches in {cats.join(' / ') || 'catalog'}. Add a custom entry first if needed.
         </div>
       )}
 

@@ -10,7 +10,7 @@ import DeleteConfirmation from './DeleteConfirmation';
 
 import {getInstitutionalCatalog, getFullCatalogWithTierMeta} from '../generators/lookups.js';
 import EntityPicker from './EntityPicker.jsx';
-import { buildRegistry } from '../lib/customRegistry.js';
+import { buildRegistry, customRefIdFromItem } from '../lib/customRegistry.js';
 // P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
 // global-search index (CP-4) and these tabs render from one source of truth.
 import { ARCHETYPES, REL_TYPES } from '../domain/compendium/catalogData.js';
@@ -226,9 +226,12 @@ function InstitutionsTab({ _config, search }) {
 
 // Per-category schema:
 //   fields:        flat scalar fields rendered in the main form
-//   dependencies:  refId-array fields rendered in the collapsible Dependencies
-//                  section. Each dep field is { key, label, category, single?, hint? }
-//                  where `category` is the registry category to pick from.
+//   dependencies:  refId-array fields rendered in the always-visible Dependencies
+//                  section (it's what wires custom content into generation + chain
+//                  discovery, so it never collapses). Each dep field is
+//                  { key, label, category | categories[], single?, hint? } where
+//                  `category` (or `categories` for a multi-bucket picker, e.g.
+//                  tradeGoods + services) is the registry category to pick from.
 const CUSTOM_CATEGORIES = [
   { key:'institutions', label:'Institutions', Icon:Building2, color:'#1a3a7a',
     fields:['name','category','authority','tags','essential','magical','criminal','defenseRole','foodImpact','satisfies','description','tierMin','tierMax'],
@@ -253,11 +256,9 @@ const CUSTOM_CATEGORIES = [
   { key:'resources',    label:'Resources',    Icon:Package,   color:'#1a5a28',
     fields:['name','category','criticality','foodImpact','commodities','description'],
     dependencies: [
-      { key:'feedsChains', label:'Feeds supply chains', category:'resourceChains',
-        hint:'Chains this resource feeds as a raw input.' },
-      { key:'producedBy',  label:'Produced by',          category:'institutions',
-        hint:'Institutions that extract or generate this resource.' },
-      { key:'enables',     label:'Enables institutions', category:'institutions',
+      { key:'yields',  label:'Output (goods/services)', categories:['tradeGoods','services'],
+        hint:'Goods or services this base resource yields once worked (built-in + custom) — feeds supply-chain discovery as the resource → processor → output flow.' },
+      { key:'enables', label:'Enables institutions', category:'institutions',
         hint:'Institutions whose viability is boosted by access to this resource.' },
     ],
   },
@@ -275,8 +276,8 @@ const CUSTOM_CATEGORIES = [
     dependencies: [
       { key:'requiredInstitution', label:'Required institution',  category:'institutions', single:true,
         hint:'Single institution that must be present for this good to be produced.' },
-      { key:'requiredResources',   label:'Required resources',     categories:['resources','tradeGoods'],
-        hint:'Resources or intermediate goods needed to produce this good.' },
+      { key:'requiredResources',   label:'Required resources',     categories:['resources','tradeGoods','services'],
+        hint:'Resources, intermediate goods, or services needed to produce this good (built-in + custom).' },
     ],
   },
   { key:'factions',     label:'Factions',     Icon:Flag,      color:'#6a1a4a',
@@ -495,14 +496,67 @@ function ReadOnlyCustomContentList({ search }) {
   );
 }
 
+// Maps a dependency field (as stored on ANOTHER custom item) to the relationship
+// verb from THIS item's perspective. Powers the derived reverse-links below:
+// dependencies are stored one-directionally (a service names its `providedBy`
+// institution; a good names its `requiredInstitution`), but we surface the
+// inverse so the institution's own card reflects the services/goods that later
+// pointed at it. This is a derived view — no fragile stored back-writes, so it
+// survives deletes/edits/reorders of either side.
+const REVERSE_VERB = {
+  providedBy:           'Provides',
+  requiredInstitution:  'Produces',
+  produces:             'Produced by',
+  requires:             'Used by',
+  requiredResources:    'Used by',
+  subsumes:             'Subsumed by',
+  enables:              'Enabled by',
+  yields:               'Yielded by',
+  controls:             'Controlled by',
+  rivals:               'Rival of',
+  disablesInstitutions: 'Disabled by',
+  disablesGoods:        'Disabled by',
+};
+const CUSTOM_INK = '#7c3aed';
+const CUSTOM_BG = '#7c3aed12';
+const CUSTOM_BORDER = '#7c3aed40';
+
 /**
  * DependencySummary — read-only inline display of dependency refs on a saved
  * custom item card. Resolves refIds via the registry and surfaces missing
  * targets so the user knows when a delete elsewhere created a dangling link.
+ * Also derives reverse-links (other custom items that point AT this one) so the
+ * relationship reads bidirectionally without storing back-references.
  */
 function DependencySummary({ deps, item }) {
   const customContent = useStore(s => s.customContent);
   const registry = useMemo(() => buildRegistry(customContent), [customContent]);
+
+  // Reverse-links: scan all custom content for items whose dependency refs point
+  // at THIS item, grouped by the inverse verb (e.g. a service with providedBy=X
+  // shows up under "Provides" on institution X's card).
+  const reverseLinks = useMemo(() => {
+    const selfRefId = item ? customRefIdFromItem(item) : null;
+    if (!selfRefId) return [];
+    const groups = new Map(); // verb -> Set<name>
+    for (const cat of CUSTOM_CATEGORIES) {
+      if (!Array.isArray(cat.dependencies)) continue;
+      const list = Array.isArray(customContent?.[cat.key]) ? customContent[cat.key] : [];
+      for (const other of list) {
+        if (!other || customRefIdFromItem(other) === selfRefId) continue;
+        for (const dep of cat.dependencies) {
+          const verb = REVERSE_VERB[dep.key];
+          if (!verb) continue;
+          const raw = other[dep.key];
+          const refs = dep.single ? (raw ? [raw] : []) : (Array.isArray(raw) ? raw : []);
+          if (!refs.includes(selfRefId)) continue;
+          if (!groups.has(verb)) groups.set(verb, new Set());
+          groups.get(verb).add(other.name || '(unnamed)');
+        }
+      }
+    }
+    return [...groups.entries()].map(([verb, names]) => ({ verb, names: [...names] }));
+  }, [item, customContent]);
 
   if (!item || !Array.isArray(deps)) return null;
 
@@ -521,7 +575,7 @@ function DependencySummary({ deps, item }) {
     return { dep, entries };
   }).filter(Boolean);
 
-  if (fields.length === 0) return null;
+  if (fields.length === 0 && reverseLinks.length === 0) return null;
 
   const totalMissing = fields.reduce(
     (sum, f) => sum + f.entries.filter(e => e.missing).length, 0
@@ -562,14 +616,50 @@ function DependencySummary({ deps, item }) {
           {totalMissing} dangling reference{totalMissing===1?'':'s'}. Edit this item to fix.
         </div>
       )}
+      {reverseLinks.length > 0 && (
+        <div style={{ marginTop:5, paddingTop:4, borderTop:`1px dotted ${BOR}` }}>
+          <div style={{
+            fontSize:FS.nano, fontWeight:700, color:MUT, marginBottom:2,
+            textTransform:'uppercase', letterSpacing:'0.05em',
+          }}>
+            Auto-linked from your other custom content
+          </div>
+          {reverseLinks.map(({ verb, names }) => (
+            <div key={verb} style={{ display:'flex', gap:6, alignItems:'flex-start', marginTop:3 }}>
+              <span style={{
+                fontSize:FS.micro, fontWeight:700, color:CUSTOM_INK, minWidth:84, flexShrink:0,
+                textTransform:'uppercase', letterSpacing:'0.04em', paddingTop:2,
+              }}>{verb}</span>
+              <div style={{ display:'flex', flexWrap:'wrap', gap:3, flex:1 }}>
+                {names.map((n, i) => (
+                  <span key={`${verb}-${i}`} style={{
+                    fontSize:FS.micro, fontWeight:700, color:CUSTOM_INK,
+                    background:CUSTOM_BG, border:`1px solid ${CUSTOM_BORDER}`,
+                    borderRadius:8, padding:'1px 5px',
+                  }}>{n}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
+// Human labels for registry category keys, used to build friendly picker
+// placeholders ("Search goods / services…" rather than "Add tradeGoods…").
+const CAT_LABEL = {
+  tradeGoods: 'goods', services: 'services', resources: 'resources',
+  institutions: 'institutions', factions: 'factions', stressors: 'stressors',
+  resourceChains: 'chains',
+};
+
 /**
- * DependenciesSection — collapsible group of EntityPicker rows for the
+ * DependenciesSection — always-visible group of EntityPicker rows for the
  * dependency fields of a custom-content category. Each picker stores
- * refId arrays (or a single refId for `single:true`) on the draft.
+ * refId arrays (or a single refId for `single:true`) on the draft. Never
+ * collapses — this is what wires custom content into generation + discovery.
  */
 function DependenciesSection({ deps, draft, setDraft }) {
   // Always-visible (not collapsible): dependencies are what wire custom content
@@ -611,7 +701,7 @@ function DependenciesSection({ deps, draft, setDraft }) {
               single={!!dep.single}
               value={draft[dep.key] ?? (dep.single ? '' : [])}
               onChange={(next) => setDraft(d => ({ ...d, [dep.key]: next }))}
-              placeholder={`Add ${(dep.categories && dep.categories[0]) || dep.category || 'item'}…`}
+              placeholder={`Search ${(dep.categories || [dep.category]).filter(Boolean).map(c => CAT_LABEL[c] || c).join(' / ') || 'catalog'}…`}
             />
             {dep.hint && (
               <div style={{

@@ -6,21 +6,25 @@
  * historically operated only on prebuilt catalog entries via name-string
  * matching. Custom items added via the Compendium can now declare:
  *
- *   institutions: { produces:        [tradeGoods refId, ...]
- *                   requires:        [resources refId, ...]
- *                   partOfChains:    [resourceChains refId, ...] }
+ *   institutions: { produces:        [tradeGoods | services refId, ...]
+ *                   requires:        [resources | tradeGoods | services refId, ...]
+ *                   subsumes:        [institutions refId, ...] }
  *
- *   resources:    { feedsChains:     [resourceChains refId, ...]
- *                   producedBy:      [institutions refId, ...]
+ *   services:     { providedBy:      institutions refId (single)
+ *                   requires:        [resources | tradeGoods | services refId, ...] }
+ *
+ *   resources:    { yields:          [tradeGoods | services refId, ...]  // declared output
  *                   enables:         [institutions refId, ...] }
+ *                 // legacy: `feedsChains` (resourceChains refId[]) is still read
+ *                 // by chainsFedByResource for grandfathered data, but is no
+ *                 // longer authored — discovery infers chains from yields now.
  *
  *   stressors:    { affects:               [string category, ...]
  *                   disablesInstitutions:  [institutions refId, ...]
  *                   disablesGoods:         [tradeGoods refId, ...] }
  *
  *   tradeGoods:   { requiredInstitution:   institutions refId (single)
- *                   requiredResources:     [resources refId, ...]
- *                   partOfChains:          [resourceChains refId, ...] }
+ *                   requiredResources:     [resources | tradeGoods | services refId, ...] }
  *
  * This module:
  *   1. Builds a registry from a `customContent` blob on demand
