@@ -10,14 +10,14 @@ Object.values(SUPPLY_CHAIN_NEEDS || {}).forEach(cat => {
 });
 
 // ── Status config ─────────────────────────────────────────────────────────────
-const STATUS = {
+export const STATUS = {
   running:     { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',     dot: '●' },
   operational: { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',     dot: '●' },
   vulnerable:  { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable',  dot: '◐' },
   impaired:    { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired',    dot: '○' },
   broken:      { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken',      dot: '✕' },
 };
-const getStatus = s => STATUS[s] || STATUS.vulnerable;
+export const getStatus = s => STATUS[s] || STATUS.vulnerable;
 
 // ── Arrow component ───────────────────────────────────────────────────────────
 const Arrow = ({ color = '#9c8068' }) => (
@@ -87,7 +87,7 @@ const OutputNode = ({ label, isExport }) => (
 );
 
 // ── Single chain row ──────────────────────────────────────────────────────────
-function ChainRow({ chain, instNames, primaryExports, mobile }) {
+export function ChainRow({ chain, instNames, primaryExports, mobile }) {
   const st      = getStatus(chain.status);
   const def     = CHAIN_DEFS[chain.chainId] || {};
   const missing = chain.upstreamMissing || [];

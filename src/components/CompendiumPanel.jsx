@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, HeartHandshake, Flag } from 'lucide-react';
 import { CONTENT_GROUPS, CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES } from '../domain/customContentSchema.js';
+import SupplyChainsManager from './compendium/SupplyChainsManager.jsx';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {useStore} from '../store/index.js';
 import DeleteConfirmation from './DeleteConfirmation';
@@ -288,6 +289,10 @@ const CUSTOM_CATEGORIES = [
         hint:'Factions this one is in conflict with — flagged if both are present.' },
     ],
   },
+  // Supply Chains are DISCOVERED (inferred from the inputs/outputs of the types
+  // above), not hand-authored — this tab renders its own discover/verify
+  // manager (SupplyChainsManager) instead of the generic add form.
+  { key:'supplyChains', label:'Supply Chains', Icon:Link2,   color:'#a0762a', discovered:true },
   // Trade Routes / Power Presets / Defense Presets removed (§14): redundant with
   // the trade-route, government, and defense controls already in the generation
   // config. Supply chains are not hand-authored here either — they're discovered
@@ -785,18 +790,21 @@ function CustomContentManager({ search }) {
         })}
       </div>
 
+      {/* Supply Chains: discovered + verified, not hand-authored — its own manager. */}
+      {activeCat === 'supplyChains' && <SupplyChainsManager />}
+
       {/* Add button */}
-      {!addingNew && !editingId && (
+      {activeCat !== 'supplyChains' && !addingNew && !editingId && (
         <button onClick={() => { setAddingNew(true); setDraft({}); }} style={{ display:'flex', alignItems:'center', gap:5, padding:'6px 12px', background:swatch.magic, color:swatch.white, border:'none', borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans, marginBottom:10 }}>
           <Plus size={12}/> Add Custom {catDef.label.slice(0,-1)}
         </button>
       )}
 
       {/* Add/edit form */}
-      {(addingNew || editingId) && renderForm()}
+      {activeCat !== 'supplyChains' && (addingNew || editingId) && renderForm()}
 
       {/* Items list */}
-      {filtered.length === 0 ? (
+      {activeCat !== 'supplyChains' && (filtered.length === 0 ? (
         <div style={{ padding:'20px 16px', textAlign:'center', fontSize:FS.sm, color:MUT }}>
           No custom {catDef.label.toLowerCase()} yet. Click "Add" to create one.
         </div>
@@ -842,7 +850,7 @@ function CustomContentManager({ search }) {
             </div>
           ))}
         </div>
-      )}
+      ))}
     </div>
   );
 }
