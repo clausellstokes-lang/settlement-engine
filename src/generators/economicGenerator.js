@@ -341,30 +341,14 @@ const buildFactionList = (population, terrain, institutions, config) => {
   }
   // ───────────────────────────────────────────────────────────────────────────
   // §14 — custom food-impacting content present here shifts the food balance the
-  // way a real farm/granary would: each custom PRODUCER (a food institution or
-  // food resource the user added) lifts agricultural output; each custom
-  // CONSUMER raises demand. Counted from the registry by the present custom
-  // items' names — a no-op leaving agriMod/need untouched when the user has no
-  // custom food items, so existing generations stay byte-identical.
-  const tallyFood = (entries, names) => {
-    const present = new Set((names || []).map((n) => String(n).toLowerCase()));
-    let prod = 0;
-    let cons = 0;
-    for (const e of (entries || [])) {
-      if (!present.has(String(e.name).toLowerCase())) continue;
-      const fi = e.raw?.foodImpact;
-      if (fi === 'produces') prod += 1;
-      else if (fi === 'consumes') cons += 1;
-    }
-    return { prod, cons };
-  };
-  const _instFood = tallyFood(
-    _customDeps.registry().listCustom('institutions'),
-    (institutions || []).filter((i) => i.source === 'custom' || i.isCustom).map((i) => i.name),
-  );
-  const _resFood = tallyFood(_customDeps.registry().listCustom('resources'), config?.nearbyResourcesCustom);
-  const customFoodProducers = _instFood.prod + _resFood.prod;
-  const customFoodConsumers = _instFood.cons + _resFood.cons;
+  // way a real farm/granary would: each custom PRODUCER lifts agricultural
+  // output; each custom CONSUMER raises demand. Covers all four types — custom
+  // institutions + resources by their own presence, services by their provider
+  // institution, trade goods by their required institution. A no-op leaving
+  // agriMod/need untouched when the user has no present custom food items, so
+  // existing generations stay byte-identical.
+  const { producers: customFoodProducers, consumers: customFoodConsumers } =
+    _customDeps.foodImpactTally((institutions || []).map((i) => i.name), config?.nearbyResourcesCustom);
   if (customFoodProducers > 0) agriMod += Math.min(customFoodProducers * 0.15, 0.6);
   const effectiveAgri = Math.min(agriCap + agriMod, 2);
 

@@ -300,6 +300,40 @@ export const customDeps = {
     return { supply, goods };
   },
 
+  // ── Food-impact tally (§14) ────────────────────────────────────────────
+  /**
+   * Net food producers vs consumers among the PRESENT custom content, across
+   * all four types: institutions + resources count by their own presence; a
+   * service counts when its providedBy institution is present; a trade good
+   * when its requiredInstitution is present. Returns { producers, consumers }.
+   * @param {string[]} presentInstitutionNames - all institution names present
+   * @param {string[]} presentResourceNames - custom resource names present (config.nearbyResourcesCustom)
+   */
+  foodImpactTally(presentInstitutionNames, presentResourceNames) {
+    const reg = getRegistry();
+    const instSet = new Set((presentInstitutionNames || []).map((n) => String(n).toLowerCase()));
+    const resSet = new Set((presentResourceNames || []).map((n) => String(n).toLowerCase()));
+    let producers = 0;
+    let consumers = 0;
+    const add = (fi) => { if (fi === 'produces') producers += 1; else if (fi === 'consumes') consumers += 1; };
+    const resolveOne = (ref) => (ref ? resolveNameFromRef(Array.isArray(ref) ? ref[0] : ref) : '');
+    for (const e of (reg.listCustom('institutions') || [])) {
+      if (instSet.has(String(e.name).toLowerCase())) add(e.raw?.foodImpact);
+    }
+    for (const e of (reg.listCustom('resources') || [])) {
+      if (resSet.has(String(e.name).toLowerCase())) add(e.raw?.foodImpact);
+    }
+    for (const e of (reg.listCustom('services') || [])) {
+      const prov = resolveOne(e.raw?.providedBy);
+      if (prov && instSet.has(prov.toLowerCase())) add(e.raw?.foodImpact);
+    }
+    for (const e of (reg.listCustom('tradeGoods') || [])) {
+      const req = resolveOne(e.raw?.requiredInstitution);
+      if (req && instSet.has(req.toLowerCase())) add(e.raw?.foodImpact);
+    }
+    return { producers, consumers };
+  },
+
   // ── Confirmed custom supply chains (§14) ───────────────────────────────
   /**
    * The user's CONFIRMED custom supply chains (reviewed + named in the
