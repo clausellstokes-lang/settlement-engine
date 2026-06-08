@@ -159,6 +159,9 @@ function CategoryGrid({ items, catKey }) {
 function InstitutionCard({ inst, idx }) {
   const status = (inst.status || 'healthy').toLowerCase();
   const tone = STATUS_TONE[status] || 'muted';
+  // §14 — custom institutions added by the user. Print equivalent of the web's
+  // shimmering gold row: a gold tint (goldBg) + gold outline + a ✦ marker.
+  const isCustom = String(inst.source || '').toLowerCase() === 'custom';
   const meta = [
     inst.subCategory ? { label: 'TYPE', value: humanize(inst.subCategory) } : null,
     inst.leader ? {
@@ -184,19 +187,24 @@ function InstitutionCard({ inst, idx }) {
     <View
       style={{
         padding: 5,
-        border: `0.4pt solid ${palette.border}`,
+        border: `0.4pt solid ${isCustom ? palette.gold : palette.border}`,
         borderLeft: `2pt solid ${palette[tone] || palette.muted}`,
         borderRadius: 2,
-        backgroundColor: palette.card,
+        backgroundColor: isCustom ? palette.goldBg : palette.card,
         minHeight: 60,
       }}
       wrap={false}
     >
       {/* Title row */}
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
-        <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
-          {inst.name}
-        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
+          <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
+            {inst.name}
+          </Text>
+          {isCustom && (
+            <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>✦</Text>
+          )}
+        </View>
         {status !== 'healthy' && <Pill tone={tone}>{cap(status)}</Pill>}
       </View>
 
