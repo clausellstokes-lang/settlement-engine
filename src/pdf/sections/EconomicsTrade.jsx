@@ -127,6 +127,31 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
+      {/* §14 Phase 3b — cross-settlement trade with the neighbour */}
+      {e.tradeLinks?.length > 0 && (
+        <View style={{ marginBottom: space.sm }} wrap={false}>
+          <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>
+            TRADE WITH NEIGHBOURS
+          </Text>
+          {Object.entries(
+            e.tradeLinks.reduce((acc, l) => {
+              const b = acc[l.partner] = acc[l.partner] || { imports: [], exports: [] };
+              (l.direction === 'import' ? b.imports : b.exports).push(l.good);
+              return acc;
+            }, {}),
+          ).map(([partner, g], i) => (
+            <Text key={`tl-${i}`} style={{ ...type.caption, fontSize: pt['8'], color: palette.second, marginBottom: 1 }}>
+              <Text style={{ ...type.body_em, color: palette.ink }}>{partner}</Text>
+              {g.imports.length > 0 ? `   ← ${g.imports.map(label).join(', ')}` : ''}
+              {g.exports.length > 0 ? `   → ${g.exports.map(label).join(', ')}` : ''}
+            </Text>
+          ))}
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.faint, fontStyle: 'italic', marginTop: 1 }}>
+            ← imported from · → exported to
+          </Text>
+        </View>
+      )}
+
       {/* Critical trade dependencies */}
       {(e.tradeDependencies?.length > 0 || e.criticalImports?.length > 0) && (
         <View style={{ marginBottom: space.sm }}>

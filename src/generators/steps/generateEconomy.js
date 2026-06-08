@@ -22,6 +22,7 @@ import { deriveSupplyChainState } from '../../domain/supplyChainState.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
 import { serviceTypeKeyFromCategory } from '../../domain/customCategories.js';
+import { deriveTradeLinks } from '../../domain/region/tradeLinks.js';
 
 registerStep('generateEconomy', {
   deps: ['isolationPass', 'resolveNeighbour'],
@@ -93,6 +94,14 @@ registerStep('generateEconomy', {
       economicState.customTradeLabels = { exports: customExports, imports: customImports };
     }
   }
+
+  // §14 Phase 3b — good-level cross-settlement trade with the imported neighbour:
+  // record which of this settlement's exports/imports actually flow to/from the
+  // neighbour (canonical good matching) so the dossier can annotate them
+  // ("Raw dragonbone — from Stonehaven"). No-op when there's no neighbour, the
+  // relationship is hostile, or there's no overlap.
+  const tradeLinks = deriveTradeLinks(economicState.primaryExports, economicState.primaryImports, neighbourProfile);
+  if (tradeLinks.length) economicState.tradeLinks = tradeLinks;
 
   const spatialLayout = generateSpatialLayout(tier, institutions, tradeRoute, terrainType);
   const availableServices = generateAvailableServices(

@@ -20,6 +20,10 @@ const FLOW_STATUS = {
   operational:         {label:'○ Operational',        color:'#6b5340', bg:'#faf8f4', border:'#e0d0b0'},
 };
 
+// §14 Phase 3b — trade-direction arrow colours (module-scope const = lint-safe).
+const TRADE_IN_COLOR = '#7a5010';   // ← imported from a neighbour
+const TRADE_OUT_COLOR = '#1a5a28';  // → exported to a neighbour
+
 /**
  * EconomicFlowsSection — extracted from a 150-line IIFE that lived inline
  * in EconomicsTab.jsx. The IIFE pattern violated rules-of-hooks because
@@ -313,6 +317,22 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             }
           </div>
         </div>
+        {/* §14 Phase 3b — cross-settlement trade with the neighbour */}
+        {eco.tradeLinks?.length>0&&(()=>{
+          const byPartner={};
+          for(const l of eco.tradeLinks){const b=byPartner[l.partner]=byPartner[l.partner]||{imports:[],exports:[]};(l.direction==='import'?b.imports:b.exports).push(l.good);}
+          return <div style={{borderTop:'1px solid #e8d8b0',paddingTop:10,marginBottom:eco.localProduction?.length>0?12:0}}>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>↔ Trade with neighbours</div>
+            {Object.entries(byPartner).map(([partner,g],i)=>(
+              <div key={i} style={{fontSize:FS.xs,color:swatch.inkMag2,marginBottom:3,lineHeight:1.5}}>
+                <strong style={{color:swatch.inkMag}}>{partner}</strong>
+                {g.imports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_IN_COLOR,fontWeight:800}}>←</span> {g.imports.join(', ')}</span>}
+                {g.exports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_OUT_COLOR,fontWeight:800}}>→</span> {g.exports.join(', ')}</span>}
+              </div>
+            ))}
+            <div style={{fontSize:FS.micro,color:MUTED,fontStyle:'italic',marginTop:3}}>← imported from · → exported to</div>
+          </div>;
+        })()}
         {/* Local production */}
         {eco.localProduction?.length>0&&<div style={{borderTop:'1px solid #e8d8b0',paddingTop:10}}>
           <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Produced Locally</div>

@@ -536,6 +536,7 @@ function economicsSlice(active) {
     primaryExports:     ec.primaryExports || [],
     primaryImports:     ec.primaryImports || [],
     customTradeLabels:  ec.customTradeLabels || { exports: [], imports: [] },  // §14 — mark these custom
+    tradeLinks:         ec.tradeLinks || [],   // §14 Phase 3b — good-level neighbour trade
     localProduction:    ec.localProduction || [],
     tradeDependencies:  ec.tradeDependencies || [],
     necessityImports:   !!ec.necessityImports,
