@@ -55,6 +55,7 @@ import {
 } from '../domain/pendingEdits.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
+import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
@@ -1187,6 +1188,22 @@ export const createSettlementSlice = (set, get) => ({
       if (result.impacts.length > 0) {
         afterState.setCampaignRegionalGraph(campaign.id, result.graph);
       }
+    }
+
+    // §8 M3b Phase 2 — a party-caused event with a world-scale analog also
+    // ripples through the world engine (active conditions, faction/NPC
+    // world-state, regional propagation, Wizard News) via the party-impact
+    // pipeline. Canon-only (campaign is set only in canon); attribution-only
+    // events map to null and do nothing here. Best-effort + guarded: a linkage
+    // failure must never undo the settlement event that already applied.
+    if (event?.partyCaused && campaign) {
+      try {
+        const action = mapEventToPartyImpact(event, activeSaveId);
+        const record = afterState.recordPartyImpact;
+        if (action && typeof record === 'function') {
+          Promise.resolve(record(campaign.id, action)).catch(() => { /* world ripple is best-effort */ });
+        }
+      } catch { /* linkage is best-effort */ }
     }
     return logEntry;
   },
