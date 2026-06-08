@@ -20,6 +20,7 @@ import { useStore } from '../store/index.js';
 import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
 import { validateDossier } from '../domain/validation/consistency.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
+import CoverImageField from './gallery/CoverImageField.jsx';
 import { GOLD, BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY } from './theme.js';
 
 const MUTED = '#6b5340';
@@ -278,42 +279,32 @@ export default function ShareToGallery({
       <Field label="Public description">
         <GalleryDescriptionEditor value={description} onChange={setDescription} />
       </Field>
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: SP.sm }}>
-        <Field label="Image URL">
-          <input
-            value={imageUrl}
-            onChange={event => setImageUrl(event.target.value)}
-            placeholder="https://..."
-            style={{
-              minHeight: 32,
-              border: `1px solid ${BORDER}`,
-              borderRadius: R.md,
-              background: CARD,
-              color: INK,
-              fontFamily: sans,
-              fontSize: FS.xs,
-              padding: '6px 8px',
-            }}
-          />
-        </Field>
-        <Field label="Image alt">
-          <input
-            value={imageAlt}
-            onChange={event => setImageAlt(event.target.value)}
-            placeholder={settlement?.name ? `Image for ${settlement.name}` : 'Image description'}
-            style={{
-              minHeight: 32,
-              border: `1px solid ${BORDER}`,
-              borderRadius: R.md,
-              background: CARD,
-              color: INK,
-              fontFamily: sans,
-              fontSize: FS.xs,
-              padding: '6px 8px',
-            }}
-          />
-        </Field>
-      </div>
+      <Field label="Cover image">
+        <CoverImageField
+          value={imageUrl}
+          onChange={setImageUrl}
+          ownerId={auth?.user?.id}
+          settlementId={saveId}
+          alt={imageAlt || settlement?.name || ''}
+        />
+      </Field>
+      <Field label="Image alt (description for screen readers)">
+        <input
+          value={imageAlt}
+          onChange={event => setImageAlt(event.target.value)}
+          placeholder={settlement?.name ? `Image for ${settlement.name}` : 'Image description'}
+          style={{
+            minHeight: 32,
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.md,
+            background: CARD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            padding: '6px 8px',
+          }}
+        />
+      </Field>
       <Field label="Gallery tags">
         <input
           value={tagsInput}
