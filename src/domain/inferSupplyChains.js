@@ -49,10 +49,10 @@ const slug = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').re
  * @returns {Array<Object>}  discovered chains (activeChain superset), sorted by chainId
  */
 export function inferSupplyChains(customContent = {}, opts = {}) {
+  let registry = null;
+  try { registry = buildRegistry(customContent || {}); } catch { registry = null; }
   let resolve = opts.resolve;
   if (!resolve) {
-    let registry = null;
-    try { registry = buildRegistry(customContent || {}); } catch { registry = null; }
     resolve = (refId) => {
       const e = registry && registry.resolve ? registry.resolve(refId) : null;
       if (e && e.name) return e.name;
@@ -63,22 +63,67 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
 
   const cc = customContent || {};
   const nodes = [];
+  const byName = new Map();
   const addNode = (item, kind, provides, requires) => {
     const name = item && item.name && String(item.name).trim();
     if (!name) return;
-    nodes.push({
+    const node = {
       uid: String(item.localUid || item.id || `${kind}-${slug(name)}`),
       name, kind,
       provides: [...new Set(provides.filter(Boolean).map(norm))],
       requires: [...new Set(requires.filter(Boolean).map(norm))],
-    });
+    };
+    nodes.push(node);
+    if (!byName.has(norm(name))) byName.set(norm(name), node);
   };
   for (const inst of toList(cc.institutions)) addNode(inst, 'institution', [...resolveNames(inst.produces), inst.name], resolveNames(inst.requires));
   for (const svc of toList(cc.services)) addNode(svc, 'service', [svc.name], resolveNames(svc.requires));
   for (const res of toList(cc.resources)) addNode(res, 'resource', [...toList(res.commodities), res.name], []);
-  // A trade good "requires" its required resources + the institution that makes
-  // it (resolved to that institution's name, which the institution provides).
-  for (const good of toList(cc.tradeGoods)) addNode(good, 'good', [good.name], [...resolveNames(good.requiredResources), ...resolveNames(good.requiredInstitution)]);
+  // A trade good requires its processing institution when it names one (so the
+  // chain flows resource → institution → good); otherwise its resources directly.
+  for (const good of toList(cc.tradeGoods)) {
+    const instNames = resolveNames(good.requiredInstitution);
+    const requires = instNames.length ? instNames : resolveNames(good.requiredResources);
+    addNode(good, 'good', [good.name], requires);
+  }
+
+  // §14 — seed prebuilt nodes for any BUILT-IN item a custom item references, so
+  // a mixed chain assembles end-to-end: a custom good processed by a built-in
+  // mill from a built-in resource renders as one connected resource → mill →
+  // good path instead of the built-in step collapsing to a trade endpoint. The
+  // seeded node provides its own name; the processor pass below gives a built-in
+  // processing institution its inputs.
+  const PREBUILT_KIND = { institutions: 'institution', services: 'service', resources: 'resource', tradeGoods: 'good' };
+  const ensureNode = (name, kind) => {
+    const key = norm(name);
+    if (!name || byName.has(key)) return byName.get(key) || null;
+    const node = { uid: `seed-${kind}-${slug(name)}`, name, kind, provides: [key], requires: [] };
+    nodes.push(node);
+    byName.set(key, node);
+    return node;
+  };
+  const seedRef = (refId) => {
+    if (typeof refId !== 'string' || !refId.startsWith('prebuilt:') || !registry?.resolve) return;
+    const e = registry.resolve(refId);
+    if (e && e.name) ensureNode(e.name, PREBUILT_KIND[e.category] || 'good');
+  };
+  for (const inst of toList(cc.institutions)) { toList(inst.produces).forEach(seedRef); toList(inst.requires).forEach(seedRef); }
+  for (const svc of toList(cc.services)) { toList(svc.requires).forEach(seedRef); toList(svc.providedBy).forEach(seedRef); }
+  for (const good of toList(cc.tradeGoods)) { toList(good.requiredResources).forEach(seedRef); toList(good.requiredInstitution).forEach(seedRef); }
+
+  // Thread each good's processing institution as the consumer of its required
+  // resources: the institution (custom or seeded built-in) gains those resources
+  // as inputs, so the resource → institution → good flow connects.
+  for (const good of toList(cc.tradeGoods)) {
+    const instNames = resolveNames(good.requiredInstitution);
+    if (!instNames.length) continue;
+    const resNames = resolveNames(good.requiredResources).map(norm);
+    for (const r of resNames) ensureNode(r, 'resource');
+    for (const instName of instNames) {
+      const inst = byName.get(norm(instName)) || ensureNode(instName, 'institution');
+      if (inst) inst.requires = [...new Set([...inst.requires, ...resNames])];
+    }
+  }
 
   // Edges: A.provides token matches B.requires token.
   const seenEdge = new Set();

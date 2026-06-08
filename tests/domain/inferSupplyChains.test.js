@@ -82,6 +82,29 @@ describe('inferSupplyChains', () => {
     expect(chain.verification.state).toBe('discovered');
   });
 
+  it('threads a good’s processing institution as a mid-chain node (resource → institution → good)', () => {
+    const cc = {
+      resources: [{ name: 'Clay Pit', localUid: 'r1', commodities: 'clay' }],
+      institutions: [{ name: 'Pottery', localUid: 'i1' }], // plain custom institution, no produces/requires
+      tradeGoods: [{ name: 'Amphora', localUid: 'g1', requiredInstitution: ['Pottery'], requiredResources: ['clay'] }],
+    };
+    const chain = inferSupplyChains(cc, { resolve: idResolve }).find((c) => c.processingInstitutions.includes('Pottery'));
+    expect(chain).toBeTruthy();
+    expect(chain.discovered.nodes.map((n) => n.name)).toEqual(['Clay Pit', 'Pottery', 'Amphora']);
+  });
+
+  it('seeds a referenced (built-in) institution as a mid-chain processor for a mixed chain', () => {
+    // 'Town Forge' is referenced by the good but never defined as custom content —
+    // it stands in for a built-in institution the chain must thread through.
+    const cc = {
+      resources: [{ name: 'Iron Ore', localUid: 'r1', commodities: 'iron ore' }],
+      tradeGoods: [{ name: 'Steel Blades', localUid: 'g1', requiredInstitution: ['Town Forge'], requiredResources: ['iron ore'] }],
+    };
+    const chain = inferSupplyChains(cc, { resolve: idResolve }).find((c) => c.processingInstitutions.includes('Town Forge'));
+    expect(chain).toBeTruthy();
+    expect(chain.discovered.nodes.map((n) => n.name)).toEqual(['Iron Ore', 'Town Forge', 'Steel Blades']);
+  });
+
   it('handles empty / no-edge content without throwing', () => {
     expect(inferSupplyChains({}, { resolve: idResolve })).toEqual([]);
     expect(inferSupplyChains({ institutions: [{ name: 'Lonely Hall', localUid: 'i1' }] }, { resolve: idResolve })).toEqual([]);
