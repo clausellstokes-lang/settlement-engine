@@ -25,6 +25,7 @@ import { flag } from '../../lib/flags.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
 import {
   criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
+  deriveDefenseReadiness, deriveArmedForces,
 } from '../../domain/display/defenseDisplay.js';
 
 const TIER_LABELS = {
@@ -578,49 +579,15 @@ function defenseSlice(active) {
   const s = active || {};
   const dp = s?.defenseProfile || {};
   const sp = s?.economicState?.safetyProfile || {};
-  const threatsRaw = s?.threats || {};
   const stress = stressArray(s);
 
-  // Per-threat detail — pull description and factors. When the engine doesn't
-  // supply a description, synthesize one from score band + threat type so the
-  // section reads like prose rather than just a bare bar.
-  const threats = ['military', 'monster', 'internal', 'economic', 'magical'].map(key => {
-    const t = threatsRaw?.[key] || {};
-    const score = dp?.scores?.[key] ?? t?.score ?? null;
-    return {
-      key,
-      label: cap(key) + ' Threat',
-      score,
-      description: t?.description || synthThreatDescription(key, score, t?.factors),
-      factors: t?.factors || [],
-    };
-  }).filter(t => t.score != null || t.description);
+  // Defense readiness rows (reframed threat assessment) + grouped armed forces,
+  // both shared with the web Defense tab via deriveDefenseReadiness/Forces.
+  const threatReadiness = deriveDefenseReadiness(s);
+  const armedForces = deriveArmedForces(s);
 
   // Active military status override (from stress)
   const militaryStress = stress.find(x => ['siege', 'occupied', 'civilWar'].includes(x?.icon || x?.key));
-
-  // Per-institution detail (only defense-relevant institutions)
-  const allInst = s?.institutions || [];
-  const defInstKeys = ['walls', 'garrison', 'militia', 'watch', 'mercenary', 'charter', 'magicDef'];
-  const defenseInstitutions = defInstKeys.map(key => {
-    const inst = dp?.institutions?.[key];
-    if (!inst) {
-      return { key, label: defLabel(key), present: false };
-    }
-    // Look up the actual institution in the all-institutions array for detail
-    const detailed = allInst.find(i => i?.subCategory === key || i?.key === key) || {};
-    return {
-      key,
-      label: defLabel(key),
-      present: true,
-      name: detailed?.name || inst?.name || defLabel(key),
-      notableUnits: detailed?.notableUnits || inst?.notableUnits || null,
-      loyaltyNote: detailed?.loyaltyNote || inst?.loyaltyNote || null,
-      arcaneCorps: detailed?.arcaneCorps || inst?.arcaneCorps || null,
-      staffing: detailed?.staffing || null,
-      notes: detailed?.notes || null,
-    };
-  });
 
   // Criminal architecture. Operations come from the safety profile's criminal
   // institutions (the source the web Defense tab uses), each carrying an
@@ -637,12 +604,12 @@ function defenseSlice(active) {
   return {
     scores:                dp.scores || {},
     scoreAvg:              avgScore(dp.scores),
-    threats,
+    threatReadiness,
     militaryStress,
     readiness:             dp.readiness || null,
     guardAssessment:       s?.guardAssessment || dp?.guardAssessment || null,
     institutions:          dp.institutions || {},
-    defenseInstitutions,
+    armedForces,
     safetyLabel:           sp.safetyLabel || null,
     safetyRatio:           sp.safetyRatio,
     criminalInstitutions:  sp.criminalInstitutions || [],
@@ -1164,52 +1131,6 @@ function normalizeIncomeSources(arr) {
 }
 
 /**
- * synthThreatDescription — short situational prose for a threat band when the
- * engine doesn't supply one. Each entry is one short sentence to keep the
- * Defense page scannable; factors[] (when present) carries the detail.
- */
-function synthThreatDescription(key, score, factors) {
-  if (score == null) return null;
-  const band = score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low';
-  const T = {
-    military: {
-      high: 'Open hostilities or imminent siege. The garrison stands at full alert.',
-      medium: 'Sustained pressure from rival powers. Patrols are doubled near the gates.',
-      low: 'Quiet borders. Drills, not deployments.',
-    },
-    monster: {
-      high: 'Wilderness predators encroach on outlying farms; bounty boards stay long.',
-      medium: 'Travellers go armed and never alone; livestock losses are routine.',
-      low: 'The countryside is tame enough for solo couriers.',
-    },
-    internal: {
-      high: 'Factional violence is a weekly event; the watch picks sides.',
-      medium: 'Tensions simmer between districts and guilds; disputes turn loud quickly.',
-      low: 'Civic disputes settle at the magistrate, not the alley.',
-    },
-    economic: {
-      high: 'Markets are one bad caravan from collapse; smugglers fill the gaps.',
-      medium: 'Prices swing on rumour; reserves are thin.',
-      low: 'Trade flows steadily and stockpiles cushion shocks.',
-    },
-    magical: {
-      high: 'Wild thaumic surges or hostile casters threaten the wards.',
-      medium: 'The arcane corps fields irregular incidents; wards hold.',
-      low: 'Magical incidents are rare and quietly handled.',
-    },
-  };
-  const base = T[key]?.[band] || null;
-  if (!base) return null;
-  // If factors are present, append the top one as flavor.
-  if (Array.isArray(factors) && factors.length) {
-    const f0 = factors[0];
-    const txt = typeof f0 === 'string' ? f0 : (f0?.text || f0?.label || f0?.description || '');
-    if (txt) return `${base} (${txt})`;
-  }
-  return base;
-}
-
-/**
  * cleanRelationships — drop empty relationship entries (no target name).
  */
 function cleanRelationships(arr) {
@@ -1243,19 +1164,6 @@ function firstSentence(s) {
   const idx = s.search(/[.!?](\s|$)/);
   if (idx === -1) return s;
   return s.slice(0, idx + 1);
-}
-
-function defLabel(key) {
-  return ({
-    walls: 'Walls', garrison: 'Garrison', militia: 'Militia',
-    watch: 'Watch', mercenary: 'Mercenary', charter: 'Charter',
-    magicDef: 'Arcane Corps',
-  })[key] || key;
-}
-
-function cap(s) {
-  if (!s || typeof s !== 'string') return s;
-  return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 export default buildViewModel;

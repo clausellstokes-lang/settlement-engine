@@ -11,6 +11,8 @@
  * as variables.
  */
 
+import { buildThreatAssessment } from '../../generators/defenseGenerator.js';
+
 const scoreColor = (n) =>
   n >= 65 ? '#1a5a28' : n >= 40 ? '#a0762a' : n >= 20 ? '#8a4010' : '#8b1a1a';
 
@@ -146,4 +148,59 @@ export function deriveSupportingCapabilities(settlement) {
     });
   }
   return caps;
+}
+
+const readinessBadge = (n) =>
+  n >= 65 ? 'STRONG' : n >= 40 ? 'ADEQUATE' : n >= 20 ? 'WEAK' : 'CRITICAL';
+
+/**
+ * Defense-readiness rows — the threat assessment reframed as "how ready is the
+ * settlement against each pressure" (higher = better defended). Wraps the
+ * generator's buildThreatAssessment (the assessment prose) with the readiness
+ * score + STRONG/ADEQUATE/WEAK/CRITICAL badge, exactly as the web Defense tab.
+ * Returns [{ label, score, status, statusColor, barColor, assess }].
+ */
+export function deriveDefenseReadiness(settlement) {
+  const r = settlement || {};
+  const scores = r.defenseProfile?.scores || {};
+  const f = r.economicState?.compound?.inst || {};
+  const scoreFor = {
+    'Beasts & Monsters': scores.monster || 0,
+    'Invasion & War': scores.military || 0,
+    'Internal Security': scores.internal || 0,
+    'Economic Survival': scores.economic || 0,
+    'Disasters & Famine':
+      r.economicState?.foodSecurity?.resilienceScore ??
+      Math.round((((scores.economic || 0) * 0.4) + (f.hasGranary ? 60 : 20) + (f.hasHospital ? 70 : f.hasChurch ? 40 : 10)) / 2),
+  };
+  return buildThreatAssessment(r).map((row) => {
+    const score = scoreFor[row.label] ?? 0;
+    return {
+      label: row.label,
+      score,
+      status: readinessBadge(score),
+      statusColor: scoreColor(score),
+      barColor: row.color,
+      assess: row.assess,
+    };
+  });
+}
+
+const dedupByName = (arr) => [...new Map((arr || []).map((m) => [m?.name, m])).values()];
+
+/**
+ * Armed forces grouped the way the web Defense tab presents them: fortifications,
+ * standing forces (garrison + militia + watch, de-duplicated by name),
+ * contracted (mercenary), monster-response charter, and arcane defense. Each
+ * entry is a force object { name, desc, source } from defenseProfile.institutions.
+ */
+export function deriveArmedForces(settlement) {
+  const inst = settlement?.defenseProfile?.institutions || {};
+  return {
+    fortifications: inst.walls || [],
+    standing: dedupByName([...(inst.garrison || []), ...(inst.militia || []), ...(inst.watch || [])]),
+    contracted: inst.mercenary || [],
+    charter: inst.charter || [],
+    arcane: inst.magicDef || [],
+  };
 }

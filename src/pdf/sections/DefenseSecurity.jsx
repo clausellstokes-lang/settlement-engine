@@ -4,8 +4,8 @@
  *
  *   - Active military status override banner (siege/occupied/civil war)
  *   - Readiness banner + score average
- *   - Per-threat ScoreCard with description + factors[]
- *   - Defense institutions detail (notableUnits, loyaltyNote, arcaneCorps)
+ *   - Defense readiness rows (threat assessment reframed: label + bar + badge + prose)
+ *   - Armed forces & fortifications, grouped (fortifications/standing/contracted/charter/arcane)
  *   - Criminal architecture: capture state, operations, criminal faction
  *   - Supporting capabilities (legal/medical/logistics/naval)
  *   - Vulnerabilities list
@@ -16,12 +16,20 @@ import {
   ChapterBand, ChapterHeadline, StatStrip, BulletList, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { defenseHeadline, defenseTone } from '../lib/headlines.js';
-import { ScoreCard } from '../primitives/Visuals.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { cap, smart, label, hookText } from '../lib/format.js';
+
+// Armed-forces groups in render order, mirroring the web Defense tab.
+const FORCE_GROUPS = [
+  { key: 'fortifications', label: 'FORTIFICATIONS', accent: palette.muted },
+  { key: 'standing', label: 'STANDING FORCES', accent: palette.bad },
+  { key: 'contracted', label: 'CONTRACTED FORCES', accent: palette.gold },
+  { key: 'charter', label: 'MONSTER RESPONSE (CHARTER)', accent: palette.cool },
+  { key: 'arcane', label: 'ARCANE DEFENSE', accent: palette.ai },
+];
 
 export function DefenseSecurity({ settlement, narrativeMode, vm }) {
   const d = vm.defense;
@@ -81,74 +89,96 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
-      {/* ── Threat scores with descriptions and factors ──────────── */}
-      <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
+      {/* ── Defense readiness (threat assessment, reframed) ──────── */}
+      <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 1 }}>
         THREAT ASSESSMENT
       </Text>
-      {d.threats.map((t, i) => (
-        <ScoreCard
-          key={`th-${i}`}
-          label={t.label}
-          score={t.score}
-          tone={scoreTone(t.score)}
-          description={t.description}
-          factors={t.factors}
-        />
+      <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
+        Bars show defense readiness against each threat — higher is better.
+      </Text>
+      {d.threatReadiness.map((row, i) => (
+        <View
+          key={`rd-${i}`}
+          wrap={false}
+          style={{
+            marginBottom: 4,
+            padding: 5,
+            backgroundColor: palette.card,
+            borderWidth: 0.4,
+            borderColor: palette.border,
+            borderLeftWidth: 3,
+            borderLeftColor: row.barColor,
+            borderRadius: 2,
+          }}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
+            <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.ink, flex: 1, marginRight: 6 }}>
+              {row.label}
+            </Text>
+            <View style={{ width: 56, height: 4, backgroundColor: palette.border, borderRadius: 2, marginRight: 6, overflow: 'hidden' }}>
+              <View style={{ width: `${Math.max(0, Math.min(100, row.score))}%`, height: '100%', backgroundColor: row.barColor }} />
+            </View>
+            <Text style={{ ...type.pill, fontSize: pt['7.5'], color: row.statusColor }}>
+              {row.status}
+            </Text>
+          </View>
+          <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
+            {row.assess}
+          </Text>
+        </View>
       ))}
 
-      {/* ── Defense institutions ────────────────────────────────── */}
+      {/* ── Armed forces & fortifications ────────────────────────── */}
       <View style={{ marginTop: space.sm }}>
         <HairRule />
         <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-          ARMED FORCES
+          ARMED FORCES & FORTIFICATIONS
         </Text>
-        {d.defenseInstitutions.filter(inst => inst.present).map((inst, _i) => (
-          <View
-            key={`di-${inst.key}`}
-            style={{
-              marginBottom: 4,
-              padding: 5,
-              border: `0.4pt solid ${palette.border}`,
-              borderRadius: 2,
-              backgroundColor: palette.card,
-            }}
-            wrap={false}
-          >
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.ink, flex: 1, marginRight: 6 }}>
-                {inst.name || inst.label}
+        {FORCE_GROUPS.map(group => {
+          const forces = d.armedForces?.[group.key] || [];
+          if (!forces.length) return null;
+          return (
+            <View key={group.key} style={{ marginBottom: 4 }}>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: group.accent, marginBottom: 2 }}>
+                {group.label}
               </Text>
-              <Tag tone="good">PRESENT</Tag>
+              {forces.map((force, i) => (
+                <View
+                  key={`f-${group.key}-${i}`}
+                  wrap={false}
+                  style={{
+                    marginBottom: 3,
+                    padding: 4,
+                    backgroundColor: palette.card,
+                    borderWidth: 0.4,
+                    borderColor: palette.border,
+                    borderLeftWidth: 2,
+                    borderLeftColor: group.accent,
+                    borderRadius: 2,
+                  }}
+                >
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, flex: 1, marginRight: 6 }}>
+                      {force.name}
+                    </Text>
+                    {force.source && force.source !== 'generated' && (
+                      <Tag tone="gold">{force.source === 'required' ? 'REQ' : 'FORCED'}</Tag>
+                    )}
+                  </View>
+                  {force.desc && (
+                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35, marginTop: 1 }}>
+                      {force.desc}
+                    </Text>
+                  )}
+                </View>
+              ))}
             </View>
-            {(inst.notableUnits || inst.loyaltyNote || inst.arcaneCorps || inst.staffing) && (
-              <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2 }}>
-                {[
-                  inst.notableUnits && `Units: ${inst.notableUnits}`,
-                  inst.loyaltyNote && `Loyalty: ${inst.loyaltyNote}`,
-                  inst.arcaneCorps && `Arcane: ${inst.arcaneCorps}`,
-                  inst.staffing && `Staffing: ${inst.staffing}`,
-                ].filter(Boolean).join('  ·  ')}
-              </Text>
-            )}
-            {inst.notes && (
-              <EditableText
-                name={`defense.inst.${inst.key}.notes`}
-                defaultValue={inst.notes}
-                style={{ ...type.body, fontSize: pt['9'] }}
-              />
-            )}
-          </View>
-        ))}
-        {/* Show absent institutions inline */}
-        {d.defenseInstitutions.filter(inst => !inst.present).length > 0 && (
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginTop: 4 }}>
-            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, marginRight: 4 }}>
-              ABSENT:
-            </Text>
-            {d.defenseInstitutions.filter(inst => !inst.present).map(inst => (
-              <Tag key={`absent-${inst.key}`} tone="muted">{inst.label}</Tag>
-            ))}
-          </View>
+          );
+        })}
+        {!FORCE_GROUPS.some(g => (d.armedForces?.[g.key] || []).length) && (
+          <Text style={{ ...type.body, fontSize: pt['9'], color: palette.muted, fontStyle: 'italic' }}>
+            No organized defensive force — defense relies on armed citizens.
+          </Text>
         )}
       </View>
 
