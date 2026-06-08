@@ -567,7 +567,7 @@ export default function SettlementDetail({
                 cursor:'pointer',fontSize:FS.sm,fontWeight:700,fontFamily:sans,
               }}
             >
-              <Share2 size={13}/> {shareOpen ? 'Close Gallery' : 'Share to Gallery'}
+              <Share2 size={13}/> {shareOpen ? 'Close Gallery' : (liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery')}
             </button>
           )}
         </div>
@@ -581,7 +581,7 @@ export default function SettlementDetail({
       {saveId && shareOpen && (
         <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, padding:'10px 14px', marginBottom:14, background:CARD }}>
           <div style={{ fontSize:FS.xxs, fontWeight:800, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:8, display:'flex', alignItems:'center', gap:6 }}>
-            <Share2 size={12}/> Share to Gallery
+            <Share2 size={12}/> {liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery'}
           </div>
           <ShareToGallery
             saveId={saveId}
