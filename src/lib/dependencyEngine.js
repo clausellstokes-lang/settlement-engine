@@ -260,6 +260,46 @@ export const customDeps = {
     return resolveNamesFromRefs(refs);
   },
 
+  // ── Finished-goods demand satisfaction (§14 trade flow) ────────────────
+  /**
+   * Local supply a settlement's PRESENT custom content contributes to a
+   * finished-goods demand category (military/religious/maritime/luxury/
+   * alchemical). A custom institution that declares `satisfies: <category>`
+   * adds supply when it's present; a custom trade good that declares it adds
+   * supply when its `requiredInstitution` is present (and is itself a named
+   * export once local demand is covered). Supply scales with economicWeight.
+   * Returns { supply:number, goods:string[] }. A no-op { supply:0, goods:[] }
+   * when nothing satisfies the category, so the gap math is unchanged.
+   * @param {string} category
+   * @param {Set<string>} presentInstitutionNames - lowercased institution names
+   */
+  finishedGoodsSupply(category, presentInstitutionNames) {
+    const empty = { supply: 0, goods: [] };
+    if (!category) return empty;
+    const present = (name) =>
+      presentInstitutionNames && typeof presentInstitutionNames.has === 'function'
+        ? presentInstitutionNames.has(String(name || '').toLowerCase())
+        : false;
+    const WEIGHT = { minor: 1, moderate: 2, major: 3, backbone: 5 };
+    const reg = getRegistry();
+    let supply = 0;
+    const goods = [];
+    for (const e of (reg.listCustom('institutions') || [])) {
+      if (e.raw?.satisfies !== category) continue;
+      if (!present(e.name)) continue;
+      supply += WEIGHT[e.raw?.economicWeight] || 2;
+    }
+    for (const e of (reg.listCustom('tradeGoods') || [])) {
+      if (e.raw?.satisfies !== category) continue;
+      const reqRef = e.raw?.requiredInstitution;
+      const reqName = reqRef ? resolveNameFromRef(Array.isArray(reqRef) ? reqRef[0] : reqRef) : null;
+      if (reqName && !present(reqName)) continue; // gated good can't be produced
+      supply += WEIGHT[e.raw?.economicWeight] || 2;
+      if (e.name) goods.push(e.name);
+    }
+    return { supply, goods };
+  },
+
   // ── Confirmed custom supply chains (§14) ───────────────────────────────
   /**
    * The user's CONFIRMED custom supply chains (reviewed + named in the

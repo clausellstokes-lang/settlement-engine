@@ -87,6 +87,20 @@ export const FOOD_IMPACT = Object.freeze([
 ]);
 export const FOOD_IMPACT_KEYS = Object.freeze(FOOD_IMPACT.map((f) => f.key));
 
+// §14 — finished-goods demand a custom good/institution can SATISFY. Keys MUST
+// match INSTITUTION_FINISHED_GOODS_DEMAND in src/data/economicData.js so the
+// generator can count the item as local supply for that demand category: it
+// shrinks the matching import (e.g. an institution needing arms buys local
+// Dragonbone Greatswords) and, once local demand is met, exports the surplus.
+export const SATISFIES_CATEGORIES = Object.freeze([
+  { key: 'military',   label: 'Weapons & armour (military)' },
+  { key: 'religious',  label: 'Religious consumables' },
+  { key: 'maritime',   label: 'Maritime supplies' },
+  { key: 'luxury',     label: 'Luxury goods' },
+  { key: 'alchemical', label: 'Alchemical supplies' },
+]);
+export const SATISFIES_KEYS = Object.freeze(SATISFIES_CATEGORIES.map((c) => c.key));
+
 // Settlement tiers, smallest → largest, for tier gates (min/max).
 export const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 

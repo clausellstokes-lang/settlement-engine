@@ -1527,7 +1527,9 @@ function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResour
   const alreadyImporting = (label) => chainImports.some((i) => i.toLowerCase().includes(label.toLowerCase()));
   const alreadyExporting = (label) => chainExports.some((e) => e.toLowerCase().includes(label.toLowerCase()));
 
-  for (const [_category, cfg] of Object.entries(INSTITUTION_FINISHED_GOODS_DEMAND)) {
+  const presentInst = new Set(instNames);
+
+  for (const [category, cfg] of Object.entries(INSTITUTION_FINISHED_GOODS_DEMAND)) {
     // Tier gate
     const minTierIdx = TIER_ORDER.indexOf(cfg.minTier || 'thorp');
     if (tierIdx < minTierIdx) continue;
@@ -1540,10 +1542,19 @@ function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResour
     for (const [keyword, { demand }] of Object.entries(cfg.consumers)) {
       if (hasInst(keyword)) totalDemand += demand;
     }
-    if (totalDemand === 0) continue; // no consuming institutions present
+
+    // §14 — local supply the user's PRESENT custom content contributes to this
+    // demand category (a good/institution declaring `satisfies: <category>`).
+    // Shrinks the import gap (e.g. an institution needing arms buys local
+    // Dragonbone Greatswords); named goods export once local demand is covered.
+    // Empty + inert when the user has no satisfying custom content, so existing
+    // generations stay byte-identical.
+    const customSupply = _customDeps.finishedGoodsSupply?.(category, presentInst) || { supply: 0, goods: [] };
+
+    if (totalDemand === 0 && customSupply.goods.length === 0) continue; // nothing to resolve
 
     // ── Compute local supply from present supplier institutions/resources ──
-    let totalSupply = 0;
+    let totalSupply = customSupply.supply;
     for (const [keyword, { supply }] of Object.entries(cfg.suppliers)) {
       // Some suppliers are resource keys (e.g. 'managed_forest', 'magical_node')
       if (keyword.includes('_')) {
@@ -1562,6 +1573,14 @@ function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResour
       const label = cfg.importLabels[Math.min(labelIdx, cfg.importLabels.length - 1)];
       if (label && !alreadyImporting(label.split(' ')[0])) {
         chainImports.push(label);
+      }
+    }
+
+    // §14 — local custom production meets/exceeds demand → export the surplus
+    // specialty goods (e.g. Dragonbone Greatswords) by name.
+    if (gap <= 0 && customSupply.goods.length) {
+      for (const g of customSupply.goods) {
+        if (!alreadyExporting(g)) chainExports.push(g);
       }
     }
 

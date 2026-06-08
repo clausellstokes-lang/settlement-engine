@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, HeartHandshake, Flag } from 'lucide-react';
-import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT } from '../domain/customContentSchema.js';
+import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, SATISFIES_CATEGORIES } from '../domain/customContentSchema.js';
 import SupplyChainsManager from './compendium/SupplyChainsManager.jsx';
 import CategorySelect from './primitives/CategorySelect.jsx';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
@@ -231,7 +231,7 @@ function InstitutionsTab({ _config, search }) {
 //                  where `category` is the registry category to pick from.
 const CUSTOM_CATEGORIES = [
   { key:'institutions', label:'Institutions', Icon:Building2, color:'#1a3a7a',
-    fields:['name','category','authority','tags','essential','magical','criminal','defenseRole','foodImpact','description','tierMin','tierMax'],
+    fields:['name','category','authority','tags','essential','magical','criminal','defenseRole','foodImpact','satisfies','description','tierMin','tierMax'],
     dependencies: [
       { key:'produces',    label:'Produces (goods/services)', category:'tradeGoods',
         hint:'Trade goods or services this institution generates when present.' },
@@ -273,7 +273,7 @@ const CUSTOM_CATEGORIES = [
     ],
   },
   { key:'tradeGoods',   label:'Trade Goods',  Icon:Coins,     color:'#a0762a',
-    fields:['name','category','criticality','economicWeight','foodImpact','description'],
+    fields:['name','category','criticality','economicWeight','foodImpact','satisfies','description'],
     dependencies: [
       { key:'requiredInstitution', label:'Required institution',  category:'institutions', single:true,
         hint:'Single institution that must be present for this good to be produced.' },
@@ -320,6 +320,7 @@ const FIELD_HINTS = {
   defenseRole:    'Whether and how this strengthens the settlement’s defense.',
   essential:      'Always included when this settlement is generated — like a mill or watch — never rolled probabilistically.',
   foodImpact:     'Whether this raises or drains food security (a farm produces; a large garrison consumes). Moves the deficit.',
+  satisfies:      'Which trade demand this fills — e.g. Dragonbone Greatswords → Weapons & armour. When present it covers that local need (fewer imports) and, on a good, exports as that category once demand is met.',
   criticality:    'How essential this is. Critical things (food, water, timber) cause crises when supply breaks; luxuries don’t.',
   economicWeight: 'How much this reinforces the local economy.',
   magical:        'Turn on if this is arcane or enchanted in nature.',
@@ -703,6 +704,7 @@ function CustomContentManager({ search }) {
       case 'tierMin': return <select {...shared} value={val||''}><option value="">Any tier</option>{TIERS.map(t=><option key={t} value={t}>{t}</option>)}</select>;
       case 'tierMax': return <select {...shared} value={val||''}><option value="">No upper limit</option>{TIERS.map(t=><option key={t} value={t}>{t}</option>)}</select>;
       case 'foodImpact': return <select {...shared} value={val||''}><option value="">No food impact</option>{FOOD_IMPACT.filter(f=>f.key!=='none').map(f=><option key={f.key} value={f.key}>{f.label}</option>)}</select>;
+      case 'satisfies': return <select {...shared} value={val||''}><option value="">Doesn’t satisfy a trade demand</option>{SATISFIES_CATEGORIES.map(c=><option key={c.key} value={c.key}>{c.label}</option>)}</select>;
       case 'authority': return <select {...shared} value={val||''}><option value="">No authority contribution</option>{POWER_AUTHORITIES.map(a=><option key={a.key} value={a.key}>{a.label}</option>)}</select>;
       case 'defenseRole': return <select {...shared} value={val||''}><option value="">No defense role</option>{DEFENSE_ROLES.map(d=><option key={d.key} value={d.key}>{d.label}</option>)}</select>;
       case 'criticality': return <select {...shared} value={val||''}><option value="">Select…</option>{CRITICALITY.map(c=><option key={c.key} value={c.key}>{c.label}</option>)}</select>;
