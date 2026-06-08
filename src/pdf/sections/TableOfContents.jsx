@@ -31,7 +31,7 @@ export function TableOfContents({ settlement, narrativeMode = false, entries = [
               }}
             >
               <Text style={{ ...type.label_em, color: palette.gold, width: 30 }}>
-                {String(i + 1).padStart(2, '0')}
+                {entry.no || String(i + 1).padStart(2, '0')}
               </Text>
               <Text style={{ ...type.body_em, flex: 1, color: palette.ink }}>{safe(entry.title)}</Text>
               {entry.note && (
