@@ -322,7 +322,10 @@ function sanitizeDossier(row) {
     slug:         row.public_slug,
     name:         row.name,
     tier:         row.tier,
-    settlement:   toPublicSafe(row.data),
+    // Owner opt-in: when gallery_share_dm is set, publish the full DM view
+    // unstripped (the server RPC already returns it raw in that case; this keeps
+    // the client defense-in-depth from re-stripping what the owner chose to show).
+    settlement:   toPublicSafe(row.data, { full: row.gallery_share_dm === true }),
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
@@ -412,6 +415,12 @@ function galleryMetadataPatch(metadata = {}) {
   // simulation; the public RPC honors this flag (see migration 025).
   if (metadata.shareNarrated !== undefined) {
     patch.gallery_share_narrated = metadata.shareNarrated === true;
+  }
+  // Owner opt-in: publish the entire DM view (secrets, plot hooks, NPC goals +
+  // relationships, DM notes + compass) unstripped. Off by default; the public
+  // gallery RPC honors this flag (see migration 026).
+  if (metadata.shareDm !== undefined) {
+    patch.gallery_share_dm = metadata.shareDm === true;
   }
   return patch;
 }

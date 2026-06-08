@@ -604,6 +604,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           galleryTags: liveSaveEntry?.gallery_tags,
           campaignState: liveSaveEntry?.campaignState,
           galleryShareNarrated: liveSaveEntry?.gallery_share_narrated,
+          galleryShareDm: liveSaveEntry?.gallery_share_dm,
         }),
         // P135 / D-5 — "How this was simulated" trigger. Lives next to
         // BuyThisDossier so the user finds it as a "more info" affordance,

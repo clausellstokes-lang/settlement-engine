@@ -72,6 +72,7 @@ export default function ShareToGallery({
   galleryImageAlt = '',
   galleryTags = [],
   galleryShareNarrated = false,
+  galleryShareDm = false,
 }) {
   const auth = useStore(s => s.auth);
   const updateSavedSettlement = useStore(s => s.updateSavedSettlement);
@@ -93,6 +94,8 @@ export default function ShareToGallery({
   const [savedDetails, setSavedDetails] = useState(false);
   // Opt-in: publish the AI-narrated dossier instead of the raw simulation.
   const [shareNarrated, setShareNarrated] = useState(Boolean(galleryShareNarrated));
+  // Opt-in: publish the full DM view (secrets, hooks, notes, compass) unstripped.
+  const [shareDm, setShareDm] = useState(Boolean(galleryShareDm));
   const canonReady = isCampaignCanonized(campaignState);
   const metadata = useMemo(() => ({
     description,
@@ -100,7 +103,8 @@ export default function ShareToGallery({
     imageAlt,
     tags: tagsInput,
     shareNarrated,
-  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated]);
+    shareDm,
+  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm]);
 
   const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
   const hasDailyLife = !!(liveAiData?.aiDailyLife);
@@ -248,10 +252,28 @@ export default function ShareToGallery({
             style={{ marginTop: 2, flexShrink: 0 }}
           />
           <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-            <strong style={{ color: INK }}>Publish the AI-narrated version</strong> instead of the raw simulation. Viewers see your refined prose; DM-private content is still stripped. Save details (or re-share) to apply.
+            <strong style={{ color: INK }}>Publish the AI-narrated version</strong> instead of the raw simulation. Viewers see your refined prose; DM-private content is stripped unless you enable the option below. Save details (or re-share) to apply.
           </span>
         </label>
       )}
+      {/* Owner opt-in: expose the full DM-private layer publicly. Off by default. */}
+      <label style={{
+        display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
+        padding: SP.sm, border: `1px solid ${shareDm ? RED : BORDER2}`, borderRadius: R.md, background: CARD,
+      }}>
+        <input
+          type="checkbox"
+          checked={shareDm}
+          onChange={event => setShareDm(event.target.checked)}
+          style={{ marginTop: 2, flexShrink: 0 }}
+        />
+        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: 5 }}>
+          <AlertCircle size={12} style={{ marginTop: 1, flexShrink: 0, color: shareDm ? RED : MUTED }} />
+          <span>
+            <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong> — secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become <strong>publicly visible</strong> to anyone who opens this gallery page. Off by default; save details (or re-share) to apply.
+          </span>
+        </span>
+      </label>
       <Field label="Public description">
         <textarea
           value={description}

@@ -51,8 +51,28 @@ export function sanitizePublicValue(value, path = []) {
  * Project a settlement to its public-safe form. Strips the recursive denylist,
  * drops top-level DM blocks explicitly, and reduces NPCs to a public allowlist
  * (no goal / secret / plotHooks / relationships).
+ *
+ * `options.full` is the owner opt-in (gallery_share_dm): publish the ENTIRE DM
+ * view UNSTRIPPED — secrets, plot hooks, NPC goals/relationships, DM notes +
+ * compass all become public. The owner explicitly chose to expose their own
+ * DM-private content; default (`full=false`) keeps the §1k strip, so every
+ * other surface (anonymous result, pre-publish preview, dossiers that didn't
+ * opt in) is unchanged. The AI-narrative prose stays governed by the separate
+ * `gallery_share_narrated` toggle, so even in full mode we still drop the AI
+ * base blobs defensively. SECURITY: full mode is reachable ONLY when the
+ * gallery row's `gallery_share_dm` is true (set by the owner).
  */
-export function toPublicSafe(settlement) {
+export function toPublicSafe(settlement, { full = false } = {}) {
+  if (full) {
+    let clone;
+    try { clone = structuredClone(settlement || {}); }
+    catch { clone = JSON.parse(JSON.stringify(settlement || {})); }
+    // AI prose blobs are the narrated toggle's domain, not this one.
+    delete clone.aiData;
+    delete clone.aiSettlement;
+    delete clone.aiDailyLife;
+    return clone;
+  }
   const clean = sanitizePublicValue(settlement || {});
   delete clean.aiData;
   delete clean.plotHooks;

@@ -44,3 +44,48 @@ describe('toPublicSafe (§1k)', () => {
     }
   });
 });
+
+describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
+  const dm = () => ({
+    name: 'Foo', tier: 'town',
+    plotHooks: ['the heir is hidden'],
+    dossierNotes: 'my prep notes',
+    dmCompass: { twist: 'the mayor is a doppelganger' },
+    npcs: [{ name: 'Aldric', role: 'Mayor', goal: 'seize power', secret: 'bastard heir', plotHooks: ['blackmail'], relationships: [{ with: 'x' }], influence: 80 }],
+    aiData: { aiSettlement: { x: 1 } }, aiSettlement: { y: 2 }, aiDailyLife: { dawn: 'z' },
+  });
+
+  it('keeps secrets, plot hooks, notes, compass + NPC goal/secret/relationships', () => {
+    const out = toPublicSafe(dm(), { full: true });
+    expect(out.plotHooks).toEqual(['the heir is hidden']);
+    expect(out.dossierNotes).toBe('my prep notes');
+    expect(out.dmCompass).toEqual({ twist: 'the mayor is a doppelganger' });
+    expect(out.npcs[0].goal).toBe('seize power');
+    expect(out.npcs[0].secret).toBe('bastard heir');
+    expect(out.npcs[0].plotHooks).toEqual(['blackmail']);
+    expect(out.npcs[0].relationships).toEqual([{ with: 'x' }]);
+  });
+
+  it('still drops AI base blobs (governed by the separate narrated toggle)', () => {
+    const out = toPublicSafe(dm(), { full: true });
+    expect(out.aiData).toBeUndefined();
+    expect(out.aiSettlement).toBeUndefined();
+    expect(out.aiDailyLife).toBeUndefined();
+  });
+
+  it('default (no option / full:false) still strips DM-private content', () => {
+    const stripped = toPublicSafe(dm());
+    expect(stripped.plotHooks).toBeUndefined();
+    expect(stripped.dossierNotes).toBeUndefined();
+    expect(stripped.dmCompass).toBeUndefined();
+    expect(stripped.npcs[0].secret).toBeUndefined();
+    expect(stripped.npcs[0].goal).toBeUndefined();
+  });
+
+  it('does not mutate the input in full mode', () => {
+    const input = { name: 'X', plotHooks: ['a'], aiData: { x: 1 } };
+    toPublicSafe(input, { full: true });
+    expect(input.plotHooks).toEqual(['a']);
+    expect(input.aiData).toEqual({ x: 1 });
+  });
+});

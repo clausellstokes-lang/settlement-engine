@@ -594,6 +594,7 @@ export default function SettlementDetail({
             galleryTags={liveSaveEntry?.gallery_tags}
             campaignState={liveSaveEntry?.campaignState || detail.saveData?.campaignState}
             galleryShareNarrated={liveSaveEntry?.gallery_share_narrated}
+            galleryShareDm={liveSaveEntry?.gallery_share_dm}
           />
         </div>
       )}

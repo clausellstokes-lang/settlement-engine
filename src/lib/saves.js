@@ -128,7 +128,7 @@ function migrateSettlementShape(entry) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   return data.map(row => {
@@ -146,6 +146,7 @@ async function supabaseList() {
     seed:      usable ? row.seed : null,
     aiData:    usable ? (row.ai_data || {}) : {},
     gallery_share_narrated: row.gallery_share_narrated || false,
+    gallery_share_dm: row.gallery_share_dm || false,
     campaignState: row.campaign_state || null,
     versionHistory: Array.isArray(row.version_history) ? row.version_history : [],
     accessState,
