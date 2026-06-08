@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
-import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, Route, Crown, ShieldAlert, HeartHandshake, Flag } from 'lucide-react';
-import { CONTENT_GROUPS, CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES } from '../domain/customContentSchema.js';
+import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, HeartHandshake, Flag } from 'lucide-react';
+import { CONTENT_GROUPS, CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, CONTENT_TAGS, COMMODITY_TYPES } from '../domain/customContentSchema.js';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {useStore} from '../store/index.js';
 import DeleteConfirmation from './DeleteConfirmation';
@@ -288,12 +288,10 @@ const CUSTOM_CATEGORIES = [
         hint:'Factions this one is in conflict with — flagged if both are present.' },
     ],
   },
-  { key:'tradeRoutes',  label:'Trade Routes', Icon:Route,     color:'#6b5340',
-    fields:['name','source','destination','goods','description'] },
-  { key:'powerPresets', label:'Power Presets', Icon:Crown,     color:'#4a1a6a',
-    fields:['name','governmentType','stability','factionCount','description'] },
-  { key:'defensePresets',label:'Defense Presets',Icon:ShieldAlert,color:'#8a3010',
-    fields:['name','posture','fortification','militiaLevel','description'] },
+  // Trade Routes / Power Presets / Defense Presets removed (§14): redundant with
+  // the trade-route, government, and defense controls already in the generation
+  // config. Supply chains are not hand-authored here either — they're discovered
+  // (see the Supply Chains tab) from entity inputs/outputs.
 ];
 
 const STRESSOR_AFFECT_CATEGORIES = [
@@ -650,6 +648,38 @@ function CustomContentManager({ search }) {
     setAddingNew(false);
   };
 
+  // Multi-select "pill" picker for controlled-vocabulary list fields (tags,
+  // commodities, stressor channels) — selectable, not free text. Stores the
+  // selection as an array; parses a legacy comma-string on read so older
+  // free-text entries still load.
+  const renderPills = (field, options, accent) => {
+    const cur = draft[field];
+    const arr = Array.isArray(cur)
+      ? cur
+      : (typeof cur === 'string' && cur ? cur.split(',').map(s => s.trim()).filter(Boolean) : []);
+    const set = new Set(arr);
+    return (
+      <div style={{ display:'flex', flexWrap:'wrap', gap:4, padding:'4px 0' }}>
+        {options.map(opt => {
+          const on = set.has(opt);
+          return (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => { const next = new Set(set); if (on) next.delete(opt); else next.add(opt); setDraft(d => ({ ...d, [field]: Array.from(next) })); }}
+              style={{
+                padding:'2px 8px', borderRadius:10, fontSize:FS.xxs, fontWeight:700,
+                cursor:'pointer', border:`1px solid ${on?accent:BOR}`,
+                background:on?`${accent}14`:'transparent',
+                color:on?accent:SEC, fontFamily:sans, letterSpacing:'0.03em',
+              }}
+            >{opt}</button>
+          );
+        })}
+      </div>
+    );
+  };
+
   const renderField = (field) => {
     const val = draft[field] || '';
     const shared = { value:val, onChange:e => setDraft(d=>({...d,[field]:e.target.value})), style:{ width:'100%', padding:'5px 8px', border:`1px solid ${BOR}`, borderRadius:4, fontSize:FS.sm, fontFamily:sans, color:INK, outline:'none', background:CARD } };
@@ -695,37 +725,9 @@ function CustomContentManager({ search }) {
       case 'fortification': return <select {...shared} value={val||'none'}>{['none','basic','moderate','heavy','legendary'].map(f=><option key={f} value={f}>{f}</option>)}</select>;
       case 'militiaLevel': return <select {...shared} value={val||'none'}>{['none','volunteer','trained','professional','elite'].map(m=><option key={m} value={m}>{m}</option>)}</select>;
       case 'factionCount': return <input {...shared} type="number" min="1" max="10" placeholder="Number of factions"/>;
-      case 'tags': return <input {...shared} placeholder="Comma-separated tags (e.g. civic, legal, essential)" onChange={e=>setDraft(d=>({...d,tags:e.target.value}))}/>;
-      case 'commodities': return <input {...shared} placeholder="Comma-separated (e.g. iron ore, coal, gemstones)" onChange={e=>setDraft(d=>({...d,commodities:e.target.value}))}/>;
-      case 'goods': return <input {...shared} placeholder="Comma-separated goods traded"/>;
-      case 'affects': {
-        const arr = Array.isArray(val) ? val : (typeof val === 'string' && val ? val.split(',').map(s=>s.trim()) : []);
-        const set = new Set(arr);
-        return (
-          <div style={{ display:'flex', flexWrap:'wrap', gap:4, padding:'4px 0' }}>
-            {STRESSOR_AFFECT_CATEGORIES.map(cat => {
-              const on = set.has(cat);
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => {
-                    const next = new Set(set);
-                    if (on) next.delete(cat); else next.add(cat);
-                    setDraft(d => ({ ...d, affects: Array.from(next) }));
-                  }}
-                  style={{
-                    padding:'2px 8px', borderRadius:10, fontSize:FS.xxs, fontWeight:700,
-                    cursor:'pointer', border:`1px solid ${on?'#8b1a1a':BOR}`,
-                    background:on?'#8b1a1a14':'transparent',
-                    color:on?'#8b1a1a':SEC, fontFamily:sans, letterSpacing:'0.03em',
-                  }}
-                >{cat}</button>
-              );
-            })}
-          </div>
-        );
-      }
+      case 'tags': return renderPills('tags', CONTENT_TAGS, swatch.magic);
+      case 'commodities': return renderPills('commodities', COMMODITY_TYPES, '#1a5a28');
+      case 'affects': return renderPills('affects', STRESSOR_AFFECT_CATEGORIES, '#8b1a1a');
       case 'description': return <textarea {...shared} rows={2} placeholder="Description..." style={{...shared.style, resize:'vertical'}}/>;
       default: return <input {...shared} placeholder={field.charAt(0).toUpperCase()+field.slice(1)}/>;
     }
