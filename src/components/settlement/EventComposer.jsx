@@ -131,6 +131,11 @@ export default function EventComposer({
   const [type, setType]         = useState('ADD_INSTITUTION');
   const [target, setTarget]     = useState('');
   const [description, setDesc]  = useState('');
+  // §8 M3b — "Caused by the party" attribution. Off by default; when set, the
+  // event is tagged party-caused (cause: 'party_action' + partyCaused: true) so
+  // the timeline/Chronicle can distinguish "the table did this" from "the world
+  // did this", and — in a canon campaign — the world engine ripples it (Phase 2).
+  const [partyCaused, setPartyCaused] = useState(false);
   // Per-event payload fields for the new event types. Each is rendered
   // conditionally (only shown when the active event type uses it) so
   // the form stays uncluttered for simple events.
@@ -219,7 +224,10 @@ export default function EventComposer({
       type,
       targetId: target.trim(),
       payload,
-      cause: phase === 'canon' ? 'player_action' : 'authoring',
+      // Party-caused events carry a distinct cause so the timeline/Chronicle and
+      // (in canon campaigns) the world engine can treat them as the table's doing.
+      cause: partyCaused ? 'party_action' : (phase === 'canon' ? 'player_action' : 'authoring'),
+      partyCaused: partyCaused || undefined,
       description: description.trim() || undefined,
     };
   }
@@ -241,6 +249,7 @@ export default function EventComposer({
     }
     setTarget('');
     setDesc('');
+    setPartyCaused(false);
   }
 
   return (
@@ -472,6 +481,26 @@ export default function EventComposer({
         <Field label="Description" hint="optional">
           <input value={description} onChange={e => setDesc(e.target.value)} placeholder="e.g. burned during a brawl" style={inputStyle} />
         </Field>
+
+        {/* §8 M3b — party attribution. A canonical "the party did this" flag. */}
+        <label
+          title="Mark this change as a direct result of the party's actions. In a canon campaign it also ripples through the world."
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6, alignSelf: 'flex-end',
+            padding: '5px 9px', borderRadius: R.sm, cursor: 'pointer',
+            border: `1px solid ${partyCaused ? PARTY : BORDER}`,
+            background: partyCaused ? PARTY_BG : 'transparent',
+            color: partyCaused ? PARTY : MUTED, fontSize: FS.xs, fontFamily: sans, fontWeight: 700,
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={partyCaused}
+            onChange={e => setPartyCaused(e.target.checked)}
+            style={{ margin: 0 }}
+          />
+          Caused by the party
+        </label>
       </div>
 
       <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
@@ -479,7 +508,7 @@ export default function EventComposer({
           Preview
         </button>
         <button
-          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); }}
+          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); }}
           disabled={!canSubmit}
           style={{
             padding: '5px 12px', background: 'transparent', color: GOLD,
@@ -552,11 +581,22 @@ export default function EventComposer({
 function PreviewPanel({ preview }) {
   if (!preview) return null;
   const { deltas, factionResponses, narrativeSummary, warnings } = preview;
+  const partyCaused = !!(preview.event?.partyCaused || preview.event?.cause === 'party_action');
   return (
     <div style={{
       marginTop: SP.sm, padding: SP.sm,
       background: CARD, border: `1px solid ${GOLD}`, borderRadius: R.sm,
     }}>
+      {partyCaused && (
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', gap: 4, marginBottom: 6,
+          padding: '2px 8px', borderRadius: 999,
+          background: PARTY_BG, color: PARTY, border: `1px solid ${PARTY}`,
+          fontSize: FS.xxs, fontFamily: sans, fontWeight: 800, letterSpacing: '0.04em',
+        }}>
+          ⚔ Party-caused
+        </div>
+      )}
       <div style={{ fontSize: FS.sm, fontFamily: sans, color: INK, fontWeight: 700, marginBottom: 4 }}>
         {narrativeSummary || 'Preview'}
       </div>
@@ -685,6 +725,11 @@ function Field({ label, hint, children }) {
     </label>
   );
 }
+
+// Party-attribution accent — a heraldic crimson, distinct from the gold brand
+// accent and the purple AI-narrative tint, so "the party did this" reads clearly.
+const PARTY = '#8a2f4a';
+const PARTY_BG = '#f7ebf0';
 
 const inputStyle = {
   padding: '4px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm,

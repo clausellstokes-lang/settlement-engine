@@ -6,6 +6,11 @@ import {isMobile} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
 
+// Party-attribution accent (matches EventComposer): a heraldic crimson distinct
+// from the gold brand accent and the purple AI tint.
+const PARTY = '#8a2f4a';
+const PARTY_BG = '#f7ebf0';
+
 function formatRecentDate(value) {
   if (!value) return '';
   const date = new Date(value);
@@ -83,6 +88,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
                   {String(event.title||'Recent event').replace(/_/g,' ')}
                 </span>
                 {event.at&&<span style={{fontSize:FS.micro,color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
+                {event.partyCaused&&<span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,borderRadius:3,padding:'0 5px',fontWeight:800}}>⚔ PARTY</span>}
                 {event.severity&&<span style={{fontSize:FS.micro,color:swatch['#5A3010'],background:swatch['#FDF4EC'],borderRadius:3,padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
               </div>
               {event.summary&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{event.summary}</p>}

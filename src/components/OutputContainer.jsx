@@ -106,6 +106,10 @@ function normalizeRecentEvent(event, index) {
   if (!event) return null;
   if (typeof event === 'string') return { id: `event-${index}`, title: event };
   if (typeof event !== 'object') return null;
+  // Timeline items are heterogeneous: raw recent-events, world-pulse events, and
+  // EventLog entries (which nest the authored event under `.event`). Look there
+  // too so the party attribution surfaces regardless of shape.
+  const src = (event.event && typeof event.event === 'object') ? event.event : event;
   const title = event.title || event.label || event.name || event.type || event.kind || 'Recent event';
   const summary = event.summary || event.description || event.detail || event.text || event.note || '';
   const at = event.createdAt || event.created_at || event.timestamp || event.at || event.date || event.when || null;
@@ -115,6 +119,7 @@ function normalizeRecentEvent(event, index) {
     summary,
     at,
     severity: event.severity || event.weight || event.scale || null,
+    partyCaused: !!(event.partyCaused || src.partyCaused || event.cause === 'party_action' || src.cause === 'party_action'),
   };
 }
 
