@@ -233,14 +233,12 @@ const CUSTOM_CATEGORIES = [
   { key:'institutions', label:'Institutions', Icon:Building2, color:'#1a3a7a',
     fields:['name','category','authority','tags','essential','magical','criminal','defenseRole','foodImpact','satisfies','description','tierMin','tierMax'],
     dependencies: [
-      { key:'produces',    label:'Produces (goods/services)', category:'tradeGoods',
+      { key:'produces',    label:'Produces (goods/services)', categories:['tradeGoods','services'],
         hint:'Trade goods or services this institution generates when present.' },
-      { key:'requires',    label:'Requires (inputs)',          category:'resources',
-        hint:'Resources whose absence makes this institution viability-marginal.' },
+      { key:'requires',    label:'Requires (inputs)',          categories:['resources','tradeGoods','services'],
+        hint:'Resources, goods, or services this institution consumes — its absence makes the institution viability-marginal.' },
       { key:'subsumes',    label:'Subsumes (absorbs)',         category:'institutions',
         hint:'Institutions this one represents — when present, the smaller ones aren’t listed separately.' },
-      { key:'partOfChains', label:'Part of supply chains',     category:'resourceChains',
-        hint:'Supply chains this institution participates in.' },
     ],
   },
   { key:'services',     label:'Services',     Icon:HeartHandshake, color:'#0e7c86',
@@ -248,8 +246,8 @@ const CUSTOM_CATEGORIES = [
     dependencies: [
       { key:'providedBy', label:'Provided by (institution)', category:'institutions', single:true,
         hint:'The institution that offers this service (a service is something an institution provides).' },
-      { key:'requires',   label:'Requires (inputs)',          category:'resources',
-        hint:'Resources this service consumes to operate.' },
+      { key:'requires',   label:'Requires (inputs)',          categories:['resources','tradeGoods','services'],
+        hint:'Resources, goods, or services this service consumes to operate.' },
     ],
   },
   { key:'resources',    label:'Resources',    Icon:Package,   color:'#1a5a28',
@@ -277,10 +275,8 @@ const CUSTOM_CATEGORIES = [
     dependencies: [
       { key:'requiredInstitution', label:'Required institution',  category:'institutions', single:true,
         hint:'Single institution that must be present for this good to be produced.' },
-      { key:'requiredResources',   label:'Required resources',     category:'resources',
-        hint:'Resources whose presence is needed to produce this good.' },
-      { key:'partOfChains',        label:'Part of supply chains',  category:'resourceChains',
-        hint:'Chains whose final-product list includes this good.' },
+      { key:'requiredResources',   label:'Required resources',     categories:['resources','tradeGoods'],
+        hint:'Resources or intermediate goods needed to produce this good.' },
     ],
   },
   { key:'factions',     label:'Factions',     Icon:Flag,      color:'#6a1a4a',
@@ -576,7 +572,8 @@ function DependencySummary({ deps, item }) {
  * refId arrays (or a single refId for `single:true`) on the draft.
  */
 function DependenciesSection({ deps, draft, setDraft }) {
-  const [open, setOpen] = useState(true);
+  // Always-visible (not collapsible): dependencies are what wire custom content
+  // into generation + supply-chain discovery, so they shouldn't be hidden.
   const total = deps.reduce((sum, d) => {
     const v = draft[d.key];
     if (d.single) return sum + (v ? 1 : 0);
@@ -584,55 +581,46 @@ function DependenciesSection({ deps, draft, setDraft }) {
   }, 0);
   return (
     <div style={{ marginTop:10, borderTop:`1px dashed ${BOR}`, paddingTop:8 }}>
-      <button
-        type="button"
-        onClick={() => setOpen(o => !o)}
-        style={{
-          display:'flex', alignItems:'center', gap:6, width:'100%',
-          background:'transparent', border:'none', padding:'4px 0',
-          cursor:'pointer', textAlign:'left',
-        }}
-      >
+      <div style={{ display:'flex', alignItems:'center', gap:6, padding:'2px 0', marginBottom:4 }}>
         <span style={{
           fontSize:FS.xs, fontWeight:700, color:swatch.magic,
           textTransform:'uppercase', letterSpacing:'0.05em',
         }}>
           Dependencies {total > 0 && (
             <span style={{
-              marginLeft:6, background:swatch['#7C3AED'], color:swatch['#7C3AED'],
-              borderRadius:8, padding:'1px 6px', fontSize:FS.micro,
+              marginLeft:6, background:'rgba(124,58,237,0.15)', color:swatch.magic,
+              borderRadius:8, padding:'1px 6px', fontSize:FS.micro, fontWeight:800,
             }}>{total}</span>
           )}
         </span>
-        <span style={{ marginLeft:'auto', fontSize:FS.xxs, color:MUT }}>
-          {open ? '▾' : '▸'}
+        <span style={{ marginLeft:'auto', fontSize:FS.micro, color:MUT, fontStyle:'italic' }}>
+          wire this into generation &amp; supply chains
         </span>
-      </button>
-      {open && (
-        <div style={{ display:'flex', flexDirection:'column', gap:8, marginTop:6 }}>
-          {deps.map(dep => (
-            <div key={dep.key}>
-              <label style={{
-                fontSize:FS.xxs, fontWeight:700, color:MUT,
-                textTransform:'uppercase', letterSpacing:'0.04em',
-                display:'block', marginBottom:3,
-              }}>{dep.label}</label>
-              <EntityPicker
-                category={dep.category}
-                single={!!dep.single}
-                value={draft[dep.key] ?? (dep.single ? '' : [])}
-                onChange={(next) => setDraft(d => ({ ...d, [dep.key]: next }))}
-                placeholder={`Add ${dep.category}…`}
-              />
-              {dep.hint && (
-                <div style={{
-                  fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginTop:2,
-                }}>{dep.hint}</div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+      </div>
+      <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+        {deps.map(dep => (
+          <div key={dep.key}>
+            <label style={{
+              fontSize:FS.xxs, fontWeight:700, color:MUT,
+              textTransform:'uppercase', letterSpacing:'0.04em',
+              display:'block', marginBottom:3,
+            }}>{dep.label}</label>
+            <EntityPicker
+              category={dep.category}
+              categories={dep.categories}
+              single={!!dep.single}
+              value={draft[dep.key] ?? (dep.single ? '' : [])}
+              onChange={(next) => setDraft(d => ({ ...d, [dep.key]: next }))}
+              placeholder={`Add ${(dep.categories && dep.categories[0]) || dep.category || 'item'}…`}
+            />
+            {dep.hint && (
+              <div style={{
+                fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginTop:2,
+              }}>{dep.hint}</div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

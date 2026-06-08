@@ -30,12 +30,18 @@ const PURPLE = '#7c3aed';
 
 export default function EntityPicker({
   category,
+  categories,          // optional: list across several registry categories (e.g. goods + services)
   value,
   onChange,
   single = false,
   placeholder = 'Search to add…',
   maxSuggestions = 12,
 }) {
+  // Normalize to an array of registry categories to pull suggestions from.
+  const cats = useMemo(
+    () => (Array.isArray(categories) && categories.length ? categories : (category ? [category] : [])),
+    [categories, category],
+  );
   const customContent = useStore(s => s.customContent);
   const registry = useMemo(() => buildRegistry(customContent), [customContent]);
   const [query, setQuery] = useState('');
@@ -58,7 +64,12 @@ export default function EntityPicker({
   // by the search query.
   const suggestions = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const all = registry.listAll(category) || [];
+    const seen = new Set();
+    const all = cats.flatMap(c => registry.listAll(c) || []).filter(e => {
+      if (seen.has(e.refId)) return false;
+      seen.add(e.refId);
+      return true;
+    });
     const filtered = all.filter(e => {
       if (selectedSet.has(e.refId)) return false;
       if (!q) return true;
@@ -76,7 +87,7 @@ export default function EntityPicker({
       });
     }
     return filtered.slice(0, maxSuggestions);
-  }, [query, registry, category, selectedSet, maxSuggestions]);
+  }, [query, registry, cats, selectedSet, maxSuggestions]);
 
   const emit = (nextRefIds) => {
     if (single) onChange(nextRefIds[0] || '');
