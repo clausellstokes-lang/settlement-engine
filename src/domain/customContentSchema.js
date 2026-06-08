@@ -76,6 +76,17 @@ export const POWER_AUTHORITIES = Object.freeze([
 ]);
 export const POWER_AUTHORITY_KEYS = Object.freeze(POWER_AUTHORITIES.map((a) => a.key));
 
+// Whether an institution / good / service / resource moves the settlement's
+// food balance. Feeds the food-security model (dailyProduction / dailyNeed) so a
+// custom farm actually shrinks the deficit and a luxury-only economy widens it.
+// Distinct from CRITICALITY (how essential a good is); this is supply vs demand.
+export const FOOD_IMPACT = Object.freeze([
+  { key: 'none',     label: 'No food impact' },
+  { key: 'produces', label: 'Produces food — raises supply' },
+  { key: 'consumes', label: 'Consumes food — raises demand' },
+]);
+export const FOOD_IMPACT_KEYS = Object.freeze(FOOD_IMPACT.map((f) => f.key));
+
 // Settlement tiers, smallest → largest, for tier gates (min/max).
 export const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 
