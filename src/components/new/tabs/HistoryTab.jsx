@@ -10,6 +10,10 @@ import {NarrativeNote} from '../NarrativeNote';
 // from the gold brand accent and the purple AI tint.
 const PARTY = '#8a2f4a';
 const PARTY_BG = '#f7ebf0';
+// Chronicle source accents (spec §8 M3c): manual edits in muted gold; world-pulse
+// uses the existing info blue (swatch.info).
+const SRC_EDIT = '#7a5a2a';
+const SRC_EDIT_BG = '#f5ecd8';
 
 function formatRecentDate(value) {
   if (!value) return '';
@@ -78,22 +82,31 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>
 
-      {/* ── RECENT EVENTS ────────────────────────────────────────────────── */}
-      {recentEvents.length>0&&<Section title={`Recent Events (${recentEvents.length})`} collapsible defaultOpen accent={swatch.info}>
+      {/* ── CHRONICLE (spec §8 M3c) ──────────────────────────────────────────
+          Unified feed: manual events + party-caused + world pulse, newest first,
+          each row colored + tagged by source. */}
+      {recentEvents.length>0&&<Section title={`Chronicle (${recentEvents.length})`} collapsible defaultOpen accent={swatch.info}>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
-          {recentEvents.map((event,i)=>(
-            <div key={event.id||i} style={{border:'1px solid #c8d0e8',borderLeft:`3px solid ${swatch.info}`,borderRadius:7,background:swatch['#F4F6FD'],padding:'10px 12px'}}>
+          {recentEvents.map((event,i)=>{
+            const accent = event.source==='party'?PARTY : event.source==='manual'?SRC_EDIT : swatch.info;
+            return (
+            <div key={event.id||i} style={{border:'1px solid #c8d0e8',borderLeft:`3px solid ${accent}`,borderRadius:7,background:swatch['#F4F6FD'],padding:'10px 12px'}}>
               <div style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap',marginBottom:event.summary?4:0}}>
-                <span style={{fontSize:FS.xs,fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.05em'}}>
-                  {String(event.title||'Recent event').replace(/_/g,' ')}
+                <span style={{fontSize:FS.xs,fontWeight:800,color:accent,textTransform:'uppercase',letterSpacing:'0.05em'}}>
+                  {String(event.title||'Event').replace(/_/g,' ')}
                 </span>
                 {event.at&&<span style={{fontSize:FS.micro,color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
-                {event.partyCaused&&<span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,borderRadius:3,padding:'0 5px',fontWeight:800}}>⚔ PARTY</span>}
+                {event.partyCaused
+                  ? <span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,borderRadius:3,padding:'0 5px',fontWeight:800}}>⚔ PARTY</span>
+                  : event.source==='manual'
+                    ? <span title="A change you authored" style={{fontSize:FS.micro,color:SRC_EDIT,background:SRC_EDIT_BG,borderRadius:3,padding:'0 5px',fontWeight:800}}>EDIT</span>
+                    : <span title="The world engine produced this" style={{fontSize:FS.micro,color:swatch.info,background:swatch['#F4F6FD'],borderRadius:3,padding:'0 5px',fontWeight:800}}>WORLD</span>}
                 {event.severity&&<span style={{fontSize:FS.micro,color:swatch['#5A3010'],background:swatch['#FDF4EC'],borderRadius:3,padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
               </div>
               {event.summary&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{event.summary}</p>}
             </div>
-          ))}
+            );
+          })}
         </div>
       </Section>}
 

@@ -13,6 +13,7 @@ import { RegenerationDeltaCard } from './primitives/RegenerationDeltaCard.jsx';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
+import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
@@ -102,39 +103,16 @@ const TABS = [
 ];
 const REROLLABLE = { npcs: 'Reroll NPCs', history: 'Reroll History' };
 
-function normalizeRecentEvent(event, index) {
-  if (!event) return null;
-  if (typeof event === 'string') return { id: `event-${index}`, title: event };
-  if (typeof event !== 'object') return null;
-  // Timeline items are heterogeneous: raw recent-events, world-pulse events, and
-  // EventLog entries (which nest the authored event under `.event`). Look there
-  // too so the party attribution surfaces regardless of shape.
-  const src = (event.event && typeof event.event === 'object') ? event.event : event;
-  const title = event.title || event.label || event.name || event.type || event.kind || 'Recent event';
-  const summary = event.summary || event.description || event.detail || event.text || event.note || '';
-  const at = event.createdAt || event.created_at || event.timestamp || event.at || event.date || event.when || null;
-  return {
-    id: event.id || event.eventId || `event-${index}`,
-    title,
-    summary,
-    at,
-    severity: event.severity || event.weight || event.scale || null,
-    partyCaused: !!(event.partyCaused || src.partyCaused || event.cause === 'party_action' || src.cause === 'party_action'),
-  };
-}
-
 function collectRecentEvents(saveEntry, settlement) {
-  const raw = [
-    ...(Array.isArray(settlement?.recentEvents) ? settlement.recentEvents : []),
-    ...(Array.isArray(saveEntry?.campaignState?.eventLog) ? saveEntry.campaignState.eventLog : []),
-    ...(Array.isArray(saveEntry?.campaignState?.worldPulse?.events) ? saveEntry.campaignState.worldPulse.events : []),
-    ...(Array.isArray(saveEntry?.campaignState?.worldState?.eventLog) ? saveEntry.campaignState.worldState.eventLog : []),
-  ];
-  return raw
-    .map(normalizeRecentEvent)
-    .filter(event => event && (event.title || event.summary))
-    .slice(-8)
-    .reverse();
+  // The unified Chronicle feed (spec §8 M3c): manual events + party-caused +
+  // world-pulse, merged + normalized + sorted newest-first by the shared domain
+  // helper, so screen + any future surface read one source of truth.
+  return buildChronicleFeed({
+    manual:     saveEntry?.campaignState?.eventLog,
+    worldPulse: saveEntry?.campaignState?.worldPulse?.events,
+    worldLog:   saveEntry?.campaignState?.worldState?.eventLog,
+    recent:     settlement?.recentEvents,
+  }, { limit: 40 });
 }
 
 export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false }) {
