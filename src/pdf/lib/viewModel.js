@@ -27,6 +27,7 @@ import {
   criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
   deriveDefenseReadiness, deriveArmedForces,
 } from '../../domain/display/defenseDisplay.js';
+import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 
 const TIER_LABELS = {
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
@@ -687,7 +688,9 @@ function servicesSlice(active) {
     detailed,
     categoryHealth: Object.entries(byCat).map(([cat, h]) => ({ category: cat, ...h })),
     totals,
-    notableAbsences: s?.notableAbsences || s?.viability?.notableAbsences || [],
+    // Computed (expected-for-tier minus available) — the engine doesn't emit
+    // this; the web ServicesTab derives it the same way.
+    notableAbsences: deriveNotableAbsences(s?.tier, s?.availableServices),
   };
 }
 

@@ -40,12 +40,7 @@ export const Ts = {
 };
 
 
-// Expected service categories per tier (used by ServicesTab to flag missing categories)
-export const J0 = {
-  thorp:      ['food'],
-  hamlet:     ['food', 'healing'],
-  village:    ['food', 'healing', 'equipment'],
-  town:       ['food', 'healing', 'equipment', 'information', 'lodging'],
-  city:       ['food', 'healing', 'equipment', 'information', 'lodging', 'legal', 'transport'],
-  metropolis: ['food', 'healing', 'equipment', 'information', 'lodging', 'legal', 'transport', 'entertainment'],
-};
+// Expected service categories per tier (used by ServicesTab to flag missing
+// categories). The map now lives in domain/display/servicesDisplay.js so the PDF
+// derives the same absences from one source; re-exported here as J0 for callers.
+export { EXPECTED_SERVICES_BY_TIER as J0 } from '../../domain/display/servicesDisplay.js';

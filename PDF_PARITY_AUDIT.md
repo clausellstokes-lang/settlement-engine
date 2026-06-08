@@ -1,5 +1,18 @@
 # PDF Parity Audit
 
+> **STATUS — implemented.** This was the research inventory that drove the PDF↔web
+> parity rewrite; the rewrite is complete. Every viewModel slice in
+> `src/pdf/lib/viewModel.js` now surfaces the fields itemised below and the sections
+> render them. The residual issues found afterward were field-mapping bugs — the
+> viewModel reading a field the engine never emits / the web computes — fixed and
+> routed through shared `src/domain/display/*` helpers so screen and print derive
+> from one source: Defense `supportingCapabilities` + threat→readiness + armed
+> forces (`defenseDisplay.js`), Economics criminal ops/shadow economy/resource
+> exploitation + food coverage %, and Services `notableAbsences`
+> (`servicesDisplay.js`). A full slice-by-slice re-audit (all ~16 slices) confirms
+> no remaining "reads-empty" gaps. Keep this doc as the section reference; the gap
+> language below is historical.
+
 Research-only inventory comparing every on-screen tab to its PDF section. Goal: identify what each tab renders, what the PDF currently renders, and the explicit gap to drive a rewrite. Field paths are taken from the actual `settlement.*` shape used in tab code, with conditionals noted.
 
 The PDF data layer is `src/pdf/lib/viewModel.js` — already a slim selector. Many tabs read `settlement.*` directly while the PDF reads `vm.*`, so a large class of gaps can be closed by widening viewModel slices rather than rewriting pages.
