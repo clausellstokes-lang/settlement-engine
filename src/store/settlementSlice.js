@@ -56,6 +56,7 @@ import {
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
+import { eligibleCustomContent } from '../domain/customContentSchema.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
@@ -515,6 +516,10 @@ export const createSettlementSlice = (set, get) => ({
     const pipelineHistory = [];
     const result = eng.generateSettlementPipeline(fullConfig, neighbor, {
         seed,
+        // §14 P2 — only expose homebrew that passes its tier gate to this
+        // settlement's tier. Fail-open for random/custom/unknown types, so it
+        // can correctly gate but never silently drop eligible content.
+        customContent: eligibleCustomContent(state.customContent, { tier: state.config?.settType }),
         onComplete: (ctx) => { capturedCtx = ctx; },
         onStep: (name, ctx /*, patch */) => {
           const meta = metaForStep(name);
@@ -743,6 +748,8 @@ export const createSettlementSlice = (set, get) => ({
     let capturedCtx = null;
     const result = eng.generateSettlementPipeline(fullConfig, state.importedNeighbour, {
         seed,
+        // §14 P2 — tier-gate homebrew for this settlement (fail-open; see above).
+        customContent: eligibleCustomContent(state.customContent, { tier: state.config?.settType }),
         onComplete: (ctx) => { capturedCtx = ctx; },
     });
     let nextSystemState = state.systemState;

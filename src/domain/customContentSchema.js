@@ -105,6 +105,26 @@ export function isCriminal(entity = {}) {
 }
 
 /**
+ * Filter a whole customContent blob to the items eligible for a settlement of
+ * `tier`, honoring each item's tier gate (§14 P2 — gates honored in generation).
+ * Items with no gate pass through, so ungated buckets (resources, stressors, …)
+ * are unaffected. Pure — never mutates the input; returns the blob unchanged
+ * when no tier is given.
+ *
+ * @param {Object|null} customContent
+ * @param {{ tier?: string }} [opts]
+ * @returns {Object|null}
+ */
+export function eligibleCustomContent(customContent, { tier } = {}) {
+  if (!customContent || typeof customContent !== 'object' || !tier) return customContent;
+  const out = {};
+  for (const [bucket, items] of Object.entries(customContent)) {
+    out[bucket] = Array.isArray(items) ? items.filter((it) => passesTierGate(it, tier)) : items;
+  }
+  return out;
+}
+
+/**
  * Does `entity` satisfy its tier gate at the given settlement `tier`?
  * tierMin / tierMax are inclusive; missing gates mean "no bound". Unknown tiers
  * pass (fail-open — never hide content over a typo).

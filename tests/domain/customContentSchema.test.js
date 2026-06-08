@@ -11,6 +11,7 @@ import {
   isMagical,
   isCriminal,
   passesTierGate,
+  eligibleCustomContent,
 } from '../../src/domain/customContentSchema.js';
 
 describe('customContentSchema taxonomies', () => {
@@ -84,5 +85,43 @@ describe('passesTierGate', () => {
 
   it('fails open on an unknown tier value', () => {
     expect(passesTierGate({ tierMin: 'town' }, 'megacity')).toBe(true);
+  });
+});
+
+describe('eligibleCustomContent', () => {
+  const cc = {
+    institutions: [
+      { name: 'Mage College', tierMin: 'city' },
+      { name: 'Granary' },                          // ungated
+      { name: 'Hamlet Shrine', tierMax: 'hamlet' },
+    ],
+    resources: [{ name: 'Iron' }],                  // ungated bucket
+    notAnArray: 'x',                                // untouched
+  };
+
+  it('drops items gated above/below the settlement tier, keeps ungated', () => {
+    const out = eligibleCustomContent(cc, { tier: 'village' });
+    const names = out.institutions.map((i) => i.name);
+    expect(names).toContain('Granary');             // ungated stays
+    expect(names).not.toContain('Mage College');    // tierMin city > village
+    expect(names).not.toContain('Hamlet Shrine');   // tierMax hamlet < village
+    expect(out.resources).toHaveLength(1);          // ungated bucket intact
+    expect(out.notAnArray).toBe('x');               // non-array untouched
+  });
+
+  it('keeps tier-matched gated items', () => {
+    const out = eligibleCustomContent(cc, { tier: 'city' });
+    expect(out.institutions.map((i) => i.name)).toContain('Mage College');
+  });
+
+  it('returns the blob unchanged when no tier is given', () => {
+    expect(eligibleCustomContent(cc, {})).toBe(cc);
+    expect(eligibleCustomContent(null, { tier: 'town' })).toBeNull();
+  });
+
+  it('does not mutate the input', () => {
+    const before = cc.institutions.length;
+    eligibleCustomContent(cc, { tier: 'thorp' });
+    expect(cc.institutions.length).toBe(before);
   });
 });
