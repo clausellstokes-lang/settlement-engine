@@ -3,6 +3,8 @@ import {
   CONTENT_GROUP_KEYS,
   CRITICALITY_KEYS,
   ECONOMIC_WEIGHT_KEYS,
+  DEFENSE_ROLE_KEYS,
+  POWER_AUTHORITY_KEYS,
   TIER_ORDER,
   normalizeTags,
   effectiveTags,
@@ -17,6 +19,8 @@ describe('customContentSchema taxonomies', () => {
     expect(CONTENT_GROUP_KEYS).toContain('criminal');
     expect(CRITICALITY_KEYS).toEqual(['critical', 'important', 'discretionary']);
     expect(ECONOMIC_WEIGHT_KEYS).toContain('backbone');
+    expect(DEFENSE_ROLE_KEYS).toEqual(expect.arrayContaining(['none', 'fortification', 'garrison', 'militia', 'arcane_ward']));
+    expect(POWER_AUTHORITY_KEYS).toEqual(expect.arrayContaining(['religious', 'martial', 'economic', 'criminal']));
     expect(TIER_ORDER[0]).toBe('thorp');
     expect(TIER_ORDER[TIER_ORDER.length - 1]).toBe('metropolis');
   });

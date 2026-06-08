@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, Route, Crown, ShieldAlert, HeartHandshake, Flag } from 'lucide-react';
-import { CONTENT_GROUPS, CRITICALITY, ECONOMIC_WEIGHT } from '../domain/customContentSchema.js';
+import { CONTENT_GROUPS, CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES } from '../domain/customContentSchema.js';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {useStore} from '../store/index.js';
 import DeleteConfirmation from './DeleteConfirmation';
@@ -229,7 +229,7 @@ function InstitutionsTab({ _config, search }) {
 //                  where `category` is the registry category to pick from.
 const CUSTOM_CATEGORIES = [
   { key:'institutions', label:'Institutions', Icon:Building2, color:'#1a3a7a',
-    fields:['name','category','group','tags','magical','criminal','description','tierMin','tierMax'],
+    fields:['name','category','group','authority','tags','magical','criminal','defenseRole','description','tierMin','tierMax'],
     dependencies: [
       { key:'produces',    label:'Produces (goods/services)', category:'tradeGoods',
         hint:'Trade goods or services this institution generates when present.' },
@@ -240,7 +240,7 @@ const CUSTOM_CATEGORIES = [
     ],
   },
   { key:'services',     label:'Services',     Icon:HeartHandshake, color:'#0e7c86',
-    fields:['name','group','criticality','economicWeight','magical','criminal','description','tierMin','tierMax'],
+    fields:['name','group','authority','criticality','economicWeight','magical','criminal','description','tierMin','tierMax'],
     dependencies: [
       { key:'providedBy', label:'Provided by (institution)', category:'institutions', single:true,
         hint:'The institution that offers this service (a service is something an institution provides).' },
@@ -280,7 +280,7 @@ const CUSTOM_CATEGORIES = [
     ],
   },
   { key:'factions',     label:'Factions',     Icon:Flag,      color:'#6a1a4a',
-    fields:['name','group','archetype','agenda','scale','methods','magical','criminal','description','tierMin'],
+    fields:['name','group','authority','archetype','agenda','scale','methods','magical','criminal','defenseRole','description','tierMin'],
     dependencies: [
       { key:'controls',  label:'Controls institutions', category:'institutions',
         hint:'Institutions this faction holds sway over.' },
@@ -311,6 +311,8 @@ const POSTURES = ['peaceful','defensive','aggressive','fortified','guerrilla'];
 // (spec §14: as intuitive as possible). Keyed by field name; missing = no hint.
 const FIELD_HINTS = {
   group:          'Which part of settlement life this belongs to — also where it appears in the dossier.',
+  authority:      'Which power it feeds in the settlement’s leadership — e.g. a temple → religious authority, a garrison → martial.',
+  defenseRole:    'Whether and how this strengthens the settlement’s defense.',
   criticality:    'How essential this is. Critical things (food, water, timber) cause crises when supply breaks; luxuries don’t.',
   economicWeight: 'How much this reinforces the local economy.',
   magical:        'Turn on if this is arcane or enchanted in nature.',
@@ -661,6 +663,8 @@ function CustomContentManager({ search }) {
       case 'tierMin': return <select {...shared} value={val||''}><option value="">Any tier</option>{TIERS.map(t=><option key={t} value={t}>{t}</option>)}</select>;
       case 'tierMax': return <select {...shared} value={val||''}><option value="">No upper limit</option>{TIERS.map(t=><option key={t} value={t}>{t}</option>)}</select>;
       case 'group': return <select {...shared} value={val||''}><option value="">Select group…</option>{CONTENT_GROUPS.map(g=><option key={g.key} value={g.key}>{g.label}</option>)}</select>;
+      case 'authority': return <select {...shared} value={val||''}><option value="">No authority contribution</option>{POWER_AUTHORITIES.map(a=><option key={a.key} value={a.key}>{a.label}</option>)}</select>;
+      case 'defenseRole': return <select {...shared} value={val||''}><option value="">No defense role</option>{DEFENSE_ROLES.map(d=><option key={d.key} value={d.key}>{d.label}</option>)}</select>;
       case 'criticality': return <select {...shared} value={val||''}><option value="">Select…</option>{CRITICALITY.map(c=><option key={c.key} value={c.key}>{c.label}</option>)}</select>;
       case 'economicWeight': return <select {...shared} value={val||''}><option value="">Select…</option>{ECONOMIC_WEIGHT.map(w=><option key={w.key} value={w.key}>{w.label}</option>)}</select>;
       case 'scale': return <select {...shared} value={val||''}><option value="">Select…</option>{['cell','minor','significant','dominant'].map(s=><option key={s} value={s}>{s}</option>)}</select>;

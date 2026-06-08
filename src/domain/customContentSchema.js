@@ -46,6 +46,36 @@ export const ECONOMIC_WEIGHT = Object.freeze([
 ]);
 export const ECONOMIC_WEIGHT_KEYS = Object.freeze(ECONOMIC_WEIGHT.map((w) => w.key));
 
+// How (if at all) an entity contributes to the settlement's defense. Feeds the
+// Defense readiness model in generation (P2): garrisons/militia raise standing
+// forces, fortifications raise the wall rating, arcane wards add magical defense.
+export const DEFENSE_ROLES = Object.freeze([
+  { key: 'none',          label: 'Does not contribute to defense' },
+  { key: 'fortification', label: 'Fortification — walls, towers' },
+  { key: 'garrison',      label: 'Garrison — standing troops' },
+  { key: 'militia',       label: 'Militia — muster of locals' },
+  { key: 'watch',         label: 'Watch — patrol & policing' },
+  { key: 'arcane_ward',   label: 'Arcane wards' },
+  { key: 'logistics',     label: 'Logistics — supply & siege endurance' },
+  { key: 'intelligence',  label: 'Intelligence — scouting & spies' },
+]);
+export const DEFENSE_ROLE_KEYS = Object.freeze(DEFENSE_ROLES.map((d) => d.key));
+
+// Which authority an entity feeds in the power structure (e.g. a temple →
+// religious authority, a garrison → martial). Feeds legitimacy/power generation
+// (P2) so homebrew shifts who actually holds sway.
+export const POWER_AUTHORITIES = Object.freeze([
+  { key: 'religious', label: 'Religious authority' },
+  { key: 'martial',   label: 'Martial authority' },
+  { key: 'economic',  label: 'Economic authority' },
+  { key: 'arcane',    label: 'Arcane authority' },
+  { key: 'civic',     label: 'Civic / legal authority' },
+  { key: 'popular',   label: 'Popular support' },
+  { key: 'noble',     label: 'Noble / dynastic' },
+  { key: 'criminal',  label: 'Criminal influence' },
+]);
+export const POWER_AUTHORITY_KEYS = Object.freeze(POWER_AUTHORITIES.map((a) => a.key));
+
 // Settlement tiers, smallest → largest, for tier gates (min/max).
 export const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 
