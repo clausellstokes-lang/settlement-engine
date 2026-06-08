@@ -535,6 +535,7 @@ function economicsSlice(active) {
     incomeSources:      normalizeIncomeSources(ec.incomeSources || []),
     primaryExports:     ec.primaryExports || [],
     primaryImports:     ec.primaryImports || [],
+    customTradeLabels:  ec.customTradeLabels || { exports: [], imports: [] },  // §14 — mark these custom
     localProduction:    ec.localProduction || [],
     tradeDependencies:  ec.tradeDependencies || [],
     necessityImports:   !!ec.necessityImports,

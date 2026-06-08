@@ -278,7 +278,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Exports</div>
             {eco.primaryExports?.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {eco.primaryExports.map((e,i)=>{const t=e.includes('(transit)');return <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,borderRadius:12,padding:'3px 9px'}}>{e}</span>;})}
+                {eco.primaryExports.map((e,i)=>{const t=e.includes('(transit)');const isCust=(eco.customTradeLabels?.exports||[]).some(x=>x.toLowerCase()===e.toLowerCase());return isCust
+                  ? <span key={i} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}<span style={{fontWeight:800}}>✦</span></span>
+                  : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,borderRadius:12,padding:'3px 9px'}}>{e}</span>;})}
                 {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}> Blue = re-exported transit goods</div>}
               </div>
               :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
@@ -296,7 +298,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
                     const bg    = t?'#fdf0f0':n?'#fdf4f4':'#faf4e8';
                     const bdr   = t?'#e08080':n?'#e8b0b0':'#d8c090';
                     const icon  = t?' ':n?' ':'';
-                    return <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,borderRadius:12,padding:'3px 9px'}}>{imp}{icon}</span>;
+                    const isCust=(eco.customTradeLabels?.imports||[]).some(x=>x.toLowerCase()===imp.toLowerCase());
+                    return isCust
+                      ? <span key={i} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}<span style={{fontWeight:800}}>✦</span></span>
+                      : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,borderRadius:12,padding:'3px 9px'}}>{imp}{icon}</span>;
                   })}
                 {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
                   {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}> Terrain cannot produce</span>}

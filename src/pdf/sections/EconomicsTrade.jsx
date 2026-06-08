@@ -89,7 +89,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               items={e.primaryExports}
               tone="good"
               emptyText="None significant"
-              itemRender={(item) => label(item)}
+              itemRender={(item) => (e.customTradeLabels?.exports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()) ? `${label(item)}  ✦` : label(item)}
             />
           </View>
         }
@@ -100,7 +100,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               items={e.primaryImports}
               tone="warn"
               emptyText="None significant"
-              itemRender={(item) => label(item)}
+              itemRender={(item) => (e.customTradeLabels?.imports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()) ? `${label(item)}  ✦` : label(item)}
             />
           </View>
         }

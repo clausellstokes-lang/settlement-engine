@@ -64,6 +64,34 @@ registerStep('generateEconomy', {
         isCustom: true,
         source: 'custom',
       }));
+
+    // §14 Phase 2 — promote each confirmed chain's trade endpoints into the
+    // REAL export/import lists: a chain output nobody locally consumes is an
+    // export; a required input nobody locally produces is an import. The labels
+    // are tracked in customTradeLabels so the dossier gold-tints those pills.
+    const labelOf = (e) => (typeof e === 'string' ? e : e?.label) || '';
+    const exp = new Set((economicState.primaryExports || []).map((x) => String(x).toLowerCase()));
+    const imp = new Set((economicState.primaryImports || []).map((x) => String(x).toLowerCase()));
+    const customExports = [];
+    const customImports = [];
+    for (const c of confirmedChains) {
+      const te = c.discovered?.tradeEndpoints || {};
+      const exports = Array.isArray(te.exports) ? te.exports.map(labelOf) : (Array.isArray(c.outputs) ? c.outputs : []);
+      const imports = Array.isArray(te.imports) ? te.imports.map(labelOf) : (Array.isArray(c.upstreamMissing) ? c.upstreamMissing : []);
+      for (const l of exports) {
+        const k = String(l || '').toLowerCase();
+        if (l && !exp.has(k)) { exp.add(k); customExports.push(l); }
+      }
+      for (const l of imports) {
+        const k = String(l || '').toLowerCase();
+        if (l && !imp.has(k)) { imp.add(k); customImports.push(l); }
+      }
+    }
+    if (customExports.length) economicState.primaryExports = [...(economicState.primaryExports || []), ...customExports];
+    if (customImports.length) economicState.primaryImports = [...(economicState.primaryImports || []), ...customImports];
+    if (customExports.length || customImports.length) {
+      economicState.customTradeLabels = { exports: customExports, imports: customImports };
+    }
   }
 
   const spatialLayout = generateSpatialLayout(tier, institutions, tradeRoute, terrainType);
