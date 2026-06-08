@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS, swatch, MUTED } from '../../theme.js';
+import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, serif, Section, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -308,11 +308,18 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
                 <div style={{fontSize:FS.xxs,fontWeight:700,color:cc,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>{cat} ({insts.length})</div>
                 <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                   {insts.sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
+                    const isCustom = inst.source==='custom' || inst.isCustom===true;
                     const srcColor={required:'#a0762a',forced:'#2d7a44','auto-resolved':'#2a3a7a'}[inst.source]||'#6b5340';
                     const srcLabel={required:'REQ',forced:'','auto-resolved':'→'}[inst.source];
-                    return <span key={i} style={{fontSize:FS.xs,padding:'2px 8px',borderRadius:4,background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4}}>
+                    const base = {fontSize:FS.xs,padding:'2px 8px',borderRadius:4,color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
+                    const skin = isCustom
+                      ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
+                      : {background:`${srcColor}10`,border:`1px solid ${srcColor}30`};
+                    return <span key={i} title={isCustom?'Your custom content':undefined} style={{...base,...skin}}>
                       {inst.name}
-                      {srcLabel&&<span style={{fontSize:FS.nano,fontWeight:800,color:srcColor,letterSpacing:'0.04em'}}>{srcLabel}</span>}
+                      {isCustom
+                        ? <span style={{fontSize:FS.nano,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
+                        : (srcLabel&&<span style={{fontSize:FS.nano,fontWeight:800,color:srcColor,letterSpacing:'0.04em'}}>{srcLabel}</span>)}
                     </span>;
                   })}
                 </div>
@@ -321,7 +328,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
           </div>
           {/* Legend */}
           <div style={{display:'flex',gap:14,marginTop:10,paddingTop:8,borderTop:'1px solid #f0e8d8',fontSize:FS.xxs,color:MUTED,flexWrap:'wrap'}}>
-            {[['REQ','#a0762a','Historically required'],['','#2d7a44','Force-added by you'],['→','#2a3a7a','Auto-resolved dependency']].map(([lbl,c,desc])=>(
+            {[['REQ','#a0762a','Historically required'],['','#2d7a44','Force-added by you'],['→','#2a3a7a','Auto-resolved dependency'],['✦',GOLD_DEEP,'custom']].map(([lbl,c,desc])=>(
               <span key={lbl}><span style={{color:c,fontWeight:800}}>{lbl}</span> = {desc}</span>
             ))}
           </div>

@@ -178,6 +178,19 @@ export const customDeps = {
     return resolveNamesFromRefs(refs);
   },
 
+  /**
+   * Given an institution NAME, return the institution NAMES it declares it
+   * subsumes (§14) — resolved from its custom `subsumes` refId list. When a
+   * subsumer is present the absorbed institutions aren't listed separately
+   * (assembleInstitutions de-dup). Empty if not custom or none.
+   */
+  subsumedBy(institutionName) {
+    const item = findCustomByName('institutions', institutionName);
+    if (!item) return [];
+    const refs = Array.isArray(item.raw?.subsumes) ? item.raw.subsumes : [];
+    return resolveNamesFromRefs(refs);
+  },
+
   // ── Resource → chain ───────────────────────────────────────────────────
   /**
    * Given a resource NAME (custom), return the engine-facing chain ids

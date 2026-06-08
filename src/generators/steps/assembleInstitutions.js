@@ -16,6 +16,8 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { getBaseChance, checkStructuralValidity } from '../structuralValidator.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
+import { customDeps } from '../../lib/dependencyEngine.js';
+import { passesTierGate } from '../../domain/customContentSchema.js';
 
 // ── Trace helpers (Tier 2.1) ────────────────────────────────────────────────
 // Each successful institution selection emits a structured trace so the
@@ -360,6 +362,38 @@ registerStep('assembleInstitutions', {
     });
   });
 
+  // §14 — inject the user's CUSTOM institutions into generation. The list is
+  // tier-filtered upstream (eligibleCustomContent), but we honour each item's own
+  // gate again defensively. Essential ones always appear; the rest roll a modest
+  // chance. Marked source:'custom' (the dossier tints these gold) and carrying the
+  // real `category` so they land in the right dossier section. Iterated in a
+  // stable name order so the rng rolls are deterministic; when the user has no
+  // custom institutions this loop is a no-op and consumes no rng (zero change to
+  // existing generation).
+  const customInstitutions = (customDeps.registry().listCustom?.('institutions') || [])
+    .slice()
+    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+  for (const entry of customInstitutions) {
+    const item = entry.raw || {};
+    const name = entry.name;
+    if (!name || institutions.some(i => i.name === name)) continue;
+    if (!passesTierGate(item, tier)) continue;
+    const essential = item.essential === true;
+    if (!essential && !rng.chance(0.3)) continue;
+    institutions.push({
+      category: item.category || entry.category || 'Other',
+      name,
+      required: essential,
+      isCustom: true,
+      source: 'custom',
+      tags: Array.isArray(item.tags)
+        ? item.tags
+        : (typeof item.tags === 'string' ? item.tags.split(',').map(s => s.trim()).filter(Boolean) : []),
+      description: item.description || '',
+      localUid: item.localUid || entry.refId,
+    });
+  }
+
   // Dedup upgrade chains
   const presentNames = new Set(institutions.map(i => i.name));
   UPGRADE_CHAINS.forEach(([lesser, greater]) => {
@@ -368,6 +402,16 @@ registerStep('assembleInstitutions', {
       if (idx >= 0) { institutions.splice(idx, 1); presentNames.delete(lesser); }
     }
   });
+
+  // §14 — custom subsumption: a custom institution can declare it `subsumes`
+  // others; when both are present the absorbed one isn't listed separately
+  // (mirrors the UPGRADE_CHAINS de-dup; required institutions are protected).
+  for (const inst of [...institutions]) {
+    for (const absorbedName of customDeps.subsumedBy?.(inst.name) || []) {
+      const idx = institutions.findIndex(i => i.name === absorbedName && i.source !== 'required');
+      if (idx >= 0) { institutions.splice(idx, 1); presentNames.delete(absorbedName); }
+    }
+  }
 
   // Apply toggle exclusions
   for (let i = institutions.length - 1; i >= 0; i--) {

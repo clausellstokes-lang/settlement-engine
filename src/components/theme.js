@@ -26,6 +26,16 @@ import { legacy as L } from '../design/tokens.js';
 export const GOLD     = L.GOLD;
 export const GOLD_B   = L.GOLD_B;
 export const GOLD_BG  = L.GOLD_BG;
+
+// §14 — "sparkling gold" tint marking a dossier row as the user's own custom
+// content (source === 'custom'). A subtle shimmering gold gradient + gold left
+// edge. Merge into a row's style. Keyframes `sf-goldShimmer` live in index.css.
+export const GOLD_TINT = Object.freeze({
+  background: 'linear-gradient(110deg, rgba(255,248,225,0.85) 0%, rgba(253,233,183,0.95) 45%, rgba(255,248,225,0.85) 80%)',
+  backgroundSize: '220% 100%',
+  animation: 'sf-goldShimmer 3.8s ease-in-out infinite',
+  borderColor: L.GOLD,
+});
 export const INK      = L.INK;
 export const INK_DEEP = L.INK_DEEP;
 export const MUTED    = L.MUTED;

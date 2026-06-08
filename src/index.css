@@ -123,3 +123,12 @@ button {
   border-radius: 8px;
   box-shadow: 0 1px 6px rgba(27, 20, 8, 0.06);
 }
+
+/* §14 — sparkling gold shimmer for custom-content dossier rows (GOLD_TINT) */
+@keyframes sf-goldShimmer {
+  0%, 100% { background-position: 0% 0; }
+  50% { background-position: 100% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes sf-goldShimmer { 0%, 100% { background-position: 0% 0; } }
+}
