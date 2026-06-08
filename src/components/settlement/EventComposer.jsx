@@ -151,6 +151,7 @@ export default function EventComposer({
   const severity  = 0.7;        // IMPAIR_INSTITUTION / IMPAIR_FACTION (+ legacy DAMAGE_INSTITUTION)
   const dimension = 'legitimacy';
   const [staged, setStaged]         = useState([]);            // batch: staged changes not yet applied
+  const [destroyConfirm, setDestroyConfirm] = useState('');    // §9c: type-the-name gate for Destroy Settlement
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
 
@@ -237,6 +238,10 @@ export default function EventComposer({
   }
 
   function onApply() {
+    // §9c — Destroy Settlement is drastic + recoverable-only-by-effort, so it
+    // requires typing the settlement name to confirm. Block apply until it matches.
+    const evType = pendingPreview?.event?.type || type;
+    if (evType === 'DESTROY_SETTLEMENT' && destroyConfirm.trim() !== (settlement?.name || '').trim()) return;
     // Audit fix: prefer committing the pending preview (the exact event
     // the user previewed) over building a new event. Falls back to
     // applyEvent(buildEvent()) only if no preview is pending — which
@@ -250,6 +255,7 @@ export default function EventComposer({
     setTarget('');
     setDesc('');
     setPartyCaused(false);
+    setDestroyConfirm('');
   }
 
   return (
@@ -519,16 +525,33 @@ export default function EventComposer({
         >
           + Add to batch
         </button>
-        {pendingPreview && (
-          <>
-            <button onClick={onApply} style={confirmBtn}>
-              <Check size={11} /> {phase === 'canon' ? 'Apply to Timeline' : 'Apply'}
-            </button>
-            <button onClick={dismissPreview} style={cancelBtn}>
-              <X size={11} /> Cancel
-            </button>
-          </>
-        )}
+        {pendingPreview && (() => {
+          const isDestroy = pendingPreview.event?.type === 'DESTROY_SETTLEMENT';
+          const destroyOk = !isDestroy || destroyConfirm.trim() === (settlement?.name || '').trim();
+          return (
+            <>
+              {isDestroy && (
+                <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, borderRadius: R.sm, background: swatch.dangerBg }}>
+                  <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch.danger, marginBottom: 5, lineHeight: 1.4 }}>
+                    ⚠ This destroys {settlement?.name || 'the settlement'} — services go dark, institutions are impaired, and partner relationships sour. Recoverable, but only by deliberate action.
+                  </div>
+                  <input
+                    value={destroyConfirm}
+                    onChange={(e) => setDestroyConfirm(e.target.value)}
+                    placeholder={`Type "${settlement?.name || ''}" to confirm`}
+                    style={{ width: '100%', padding: '5px 8px', border: `1px solid ${swatch.danger}`, borderRadius: 4, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, boxSizing: 'border-box' }}
+                  />
+                </div>
+              )}
+              <button onClick={onApply} disabled={!destroyOk} style={{ ...confirmBtn, ...(isDestroy ? { background: swatch.danger, borderColor: swatch.danger } : {}), opacity: destroyOk ? 1 : 0.5, cursor: destroyOk ? 'pointer' : 'not-allowed' }}>
+                <Check size={11} /> {isDestroy ? 'Destroy settlement' : (phase === 'canon' ? 'Apply to Timeline' : 'Apply')}
+              </button>
+              <button onClick={() => { dismissPreview(); setDestroyConfirm(''); }} style={cancelBtn}>
+                <X size={11} /> Cancel
+              </button>
+            </>
+          );
+        })()}
       </div>
 
       {pendingPreview && <PreviewPanel preview={pendingPreview} />}
