@@ -94,6 +94,22 @@ export async function fetchPublicGallery({
 }
 
 /**
+ * Fetch the signed-in user's OWN published dossiers as gallery tiles (§5 "My
+ * Settlements"). Owner-scoped server-side via list_my_gallery_dossiers
+ * (auth.uid()); no pagination (a user has few). Empty for anon / unconfigured.
+ */
+export async function fetchMyGallery() {
+  if (!isConfigured) return { items: [], hasMore: false, total: 0 };
+  const { data, error } = await supabase.rpc('list_my_gallery_dossiers');
+  if (error) {
+    console.error('[gallery] my-settlements listing failed:', error);
+    return { items: [], hasMore: false, total: 0 };
+  }
+  const rows = data || [];
+  return { items: rows.map(sanitizeTile), hasMore: false, total: rows.length };
+}
+
+/**
  * Fetch the curated gallery — hand-picked exemplary dossiers shown
  * above the community listing. Returns dossiers in their explicit
  * curation order (curated_order asc, nulls last → published_at desc).

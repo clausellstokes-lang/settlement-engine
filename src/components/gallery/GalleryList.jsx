@@ -62,6 +62,7 @@ export default function GalleryList({
   clearFilters,
   voteOn,
   onNavigate,
+  isSignedIn,
 }) {
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, fontFamily: sans, color: INK }}>
@@ -115,6 +116,7 @@ export default function GalleryList({
           onToggleArray={toggleArrayFilter}
           onToggleBool={toggleBoolFilter}
           onClear={clearFilters}
+          isSignedIn={isSignedIn}
         />
         <main style={{ minWidth: 0 }}>
           <GalleryTopbar

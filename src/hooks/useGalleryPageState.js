@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   fetchPublicDossier,
   fetchPublicGallery,
+  fetchMyGallery,
   reportGalleryDossier,
   toggleGalleryVote,
 } from '../lib/gallery.js';
@@ -18,6 +19,10 @@ export const EMPTY_GALLERY_FILTERS = Object.freeze({
   hasImage: false,
   hasComments: false,
   curatedOnly: false,
+  // §5 — "My Settlements": client-only filter that swaps the feed for the
+  // owner-scoped list_my_gallery_dossiers RPC (ignored by the public feed's
+  // server-side filter normalizer, which allowlists keys).
+  mine: false,
 });
 
 const PAGE_SIZE = 24;
@@ -46,12 +51,16 @@ export function useGalleryPageState(routeSlug = null) {
 
   useEffect(() => {
     let cancelled = false;
-    fetchPublicGallery({ page: 0, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery })
+    const mine = !!galleryQuery.filters?.mine;
+    const run = mine
+      ? fetchMyGallery()
+      : fetchPublicGallery({ page: 0, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery });
+    run
       .then(res => {
         if (cancelled) return;
         setItems(res.items);
         setTotal(res.total ?? res.items.length);
-        setHasMore(res.hasMore);
+        setHasMore(mine ? false : res.hasMore);
         setPage(0);
         setListError(null);
       })
@@ -96,6 +105,7 @@ export function useGalleryPageState(routeSlug = null) {
   }, [routeSlug, openDossier]);
 
   const loadMore = useCallback(async () => {
+    if (galleryQuery.filters?.mine) return; // My Settlements returns all at once
     const nextPage = page + 1;
     setListLoading(true);
     try {

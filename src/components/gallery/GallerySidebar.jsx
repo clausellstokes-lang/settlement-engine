@@ -98,7 +98,7 @@ function ToggleRow({ checked, label, onChange }) {
   );
 }
 
-export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onClear }) {
+export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onClear, isSignedIn }) {
   return (
     <aside className="gallery-sidebar-panel" style={{
       display: 'grid',
@@ -136,6 +136,12 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
           </button>
         )}
       </div>
+      {isSignedIn && (
+        <SidebarSection title="Yours">
+          <ToggleRow checked={!!filters.mine} label="My settlements only" onChange={value => onToggleBool('mine', value)} />
+        </SidebarSection>
+      )}
+      {!filters.mine && (<>
       <SidebarSection title="Tier">
         <FilterChips options={TIER_OPTIONS} value={filters.tier} onToggle={option => onToggleArray('tier', option)} />
       </SidebarSection>
@@ -158,6 +164,7 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
           <ToggleRow checked={filters.curatedOnly} label="Curated only" onChange={value => onToggleBool('curatedOnly', value)} />
         </div>
       </SidebarSection>
+      </>)}
     </aside>
   );
 }

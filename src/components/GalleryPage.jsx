@@ -83,6 +83,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
       clearFilters={clearFilters}
       voteOn={voteOn}
       onNavigate={onNavigate}
+      isSignedIn={!!auth?.user}
     />
   );
 }
