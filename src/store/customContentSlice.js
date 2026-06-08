@@ -57,9 +57,12 @@ function flattenLocalContent(ownerId = 'anon') {
 
 const EMPTY = {
   institutions: [],
+  services: [],
   resources: [],
   stressors: [],
   tradeGoods: [],
+  factions: [],
+  supplyChains: [],
   tradeRoutes: [],
   powerPresets: [],
   defensePresets: [],
