@@ -18,6 +18,11 @@ alter table public.settlements
 comment on column public.settlements.gallery_share_dm is
   'When true, the public gallery shows the full DM view (secrets, plot hooks, NPC goals/relationships, DM notes + compass) UNSTRIPPED. Owner opt-in; defaults false.';
 
+-- The return type changes (adds gallery_share_dm), and Postgres won't let
+-- `create or replace` alter an existing function's OUT-parameter row type, so
+-- drop the prior definition (migration 025) first. Idempotent + re-runnable.
+drop function if exists public.get_gallery_dossier(text);
+
 create or replace function public.get_gallery_dossier(dossier_slug text)
 returns table (
   id uuid,
