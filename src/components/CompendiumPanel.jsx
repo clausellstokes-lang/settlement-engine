@@ -333,6 +333,38 @@ const FIELD_HINTS = {
   methods:        'How it pursues its agenda — e.g. bribery, force, diplomacy.',
 };
 
+// §14 — resolve a stored enum key to its human label for the detail view.
+const keyLabel = (list, key) => (list.find((o) => o.key === key)?.label) || key;
+
+/**
+ * CustomItemAttributes — the post-creation "detail sheet" for a saved custom
+ * item, mirroring how the prebuilt catalog surfaces an object's properties.
+ * Renders only the attributes the author actually set, as labelled chips, so a
+ * saved item reads like a real compendium entry rather than just a name + blurb.
+ */
+function CustomItemAttributes({ item }) {
+  const chips = [];
+  if (item.essential === true) chips.push({ label: 'Essential', color: '#1a4a20' });
+  if (item.magical === true) chips.push({ label: 'Magical', color: swatch.magic });
+  if (item.criminal === true) chips.push({ label: 'Criminal', color: '#8b1a1a' });
+  if (item.authority) chips.push({ label: `Authority · ${keyLabel(POWER_AUTHORITIES, item.authority)}`, color: '#1a3a7a' });
+  if (item.defenseRole) chips.push({ label: `Defense · ${keyLabel(DEFENSE_ROLES, item.defenseRole)}`, color: '#8b1a1a' });
+  if (item.criticality) chips.push({ label: keyLabel(CRITICALITY, item.criticality), color: '#a0762a' });
+  if (item.economicWeight) chips.push({ label: keyLabel(ECONOMIC_WEIGHT, item.economicWeight), color: '#1a5a28' });
+  if (item.foodImpact) chips.push({ label: `Food · ${item.foodImpact}`, color: '#7a5010' });
+  if (item.satisfies) chips.push({ label: `Satisfies · ${keyLabel(SATISFIES_CATEGORIES, item.satisfies)}`, color: '#7c3aed' });
+  if (item.archetype) chips.push({ label: `Archetype · ${item.archetype}`, color: '#6a1a4a' });
+  if (item.scale) chips.push({ label: `Scale · ${item.scale}`, color: '#6a1a4a' });
+  if (item.severity) chips.push({ label: `Severity · ${item.severity}`, color: '#8b1a1a' });
+  if (item.tierMin || item.tierMax) chips.push({ label: `Tiers · ${item.tierMin || 'any'}–${item.tierMax || '∞'}`, color: '#6b5340' });
+  if (!chips.length) return null;
+  return (
+    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 6 }}>
+      {chips.map((c, i) => <Tag key={i} label={c.label} color={c.color} />)}
+    </div>
+  );
+}
+
 // ── Premium upsell card (shown to free / anon users in the Custom tab) ─────
 function CustomContentUpsell({ existingCount, isAnon }) {
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
@@ -824,8 +856,8 @@ function CustomContentManager({ search }) {
                 <button onClick={() => setDeleteId(deleteId===item.id?null:item.id)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><Trash2 size={11}/></button>
               </div>
               {item.description && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description}</div>}
+              <CustomItemAttributes item={item} />
               {item.tags && <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>{(typeof item.tags==='string'?item.tags.split(','):item.tags).map((t,i)=><Tag key={i} label={t.trim()} color={MUT}/>)}</div>}
-              {item.tierMin && <div style={{ fontSize:FS.xxs, color:MUT, marginTop:3 }}>Min tier: {item.tierMin}</div>}
               {/* Affects pills (stressors only) */}
               {Array.isArray(item.affects) && item.affects.length > 0 && (
                 <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>
