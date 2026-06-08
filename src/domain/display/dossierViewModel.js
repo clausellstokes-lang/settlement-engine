@@ -66,7 +66,7 @@ export function deriveFoodBalance(settlement) {
       available: false,
       display: 'Not calculated',
       detail: 'Produced/Needed: Not calculated',
-      surplus: 0, deficit: 0, deficitPercent: null,
+      surplus: 0, deficit: 0, deficitPct: null, deficitPercent: null,
       produced: null, needed: null, importCoverage: null, rawDeficit: null,
     };
   }
@@ -76,8 +76,14 @@ export function deriveFoodBalance(settlement) {
   const deficit  = Math.max(cleanNum(fb.deficit, 0), 0);
   const rawKnown = produced != null && needed != null && (produced > 0 || needed > 0);
 
+  // Normalize the residual deficit against need. A raw absolute (e.g. −4096)
+  // looks alarming out of context, but as a share of demand it reads as the
+  // minor shortfall it usually is — most settlements run a little hungry, and
+  // that's the baseline, not a broken settlement. Shown as a % of need.
+  const deficitPct = (needed != null && needed > 0) ? Math.round((deficit / needed) * 100) : null;
+
   let display;
-  if (deficit > 0)      display = `Deficit −${fmtInt(deficit)}`;
+  if (deficit > 0)      display = deficitPct != null ? `Deficit −${fmtInt(deficit)} (${deficitPct}% of need)` : `Deficit −${fmtInt(deficit)}`;
   else if (surplus > 0) display = `Surplus +${fmtInt(surplus)}`;
   else                  display = 'Balanced';
 
@@ -89,6 +95,8 @@ export function deriveFoodBalance(settlement) {
       : 'Produced/Needed: Not calculated',
     surplus,
     deficit,
+    // Residual deficit normalized as a share of daily need (null when unknown).
+    deficitPct,
     deficitPercent: cleanNum(fb.deficitPercent),
     produced: rawKnown ? produced : null,
     needed: rawKnown ? needed : null,

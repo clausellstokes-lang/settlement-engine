@@ -74,10 +74,13 @@ function foodCore(viability) {
       importCoverage: m.importCoverage,
       rawDeficit: m.rawDeficit,
       coveragePct: coveragePct(m.importCoverage, m.rawDeficit),
+      deficitPct: m.deficitPct,
       display:    m.display,
       detail:     m.detail,
     };
   }
+  const legacyNeed = Number(fb?.need) || 0;
+  const legacyDef = Number(fb?.deficit) || 0;
   return {
     production: fb?.production ?? null,
     need:       fb?.need ?? null,
@@ -86,6 +89,7 @@ function foodCore(viability) {
     importCoverage: fb?.importCoverage ?? null,
     rawDeficit: fb?.rawDeficit ?? null,
     coveragePct: coveragePct(fb?.importCoverage, fb?.rawDeficit),
+    deficitPct: legacyNeed > 0 && legacyDef > 0 ? Math.round((legacyDef / legacyNeed) * 100) : null,
   };
 }
 

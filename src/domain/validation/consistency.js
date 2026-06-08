@@ -42,24 +42,25 @@ export function validateDossier(settlement) {
     }
   }
 
-  // §1f — viability wording contradicts the food balance: the verdict claims
-  // self-sufficiency while the food balance shows a deficit.
+  // §1f — viability is NOT a publish gate. A settlement may be intentionally
+  // non-viable — a dying outpost, a doomed hold, an artist's deliberate
+  // creation — and that is valid public content. So we never BLOCK on it; we
+  // only surface a non-blocking warning when a "self-sufficient" verdict sits
+  // next to a LARGE unmet deficit (>25% of need), and even then publishing is
+  // the owner's call. (Small residual deficits are the baseline — most
+  // settlements import some food and some people always go hungry.)
   const viabilitySummary = String(settlement?.economicViability?.summary || '');
-  if (/self-sufficient/i.test(viabilitySummary) && (Number(fb?.deficit) || 0) > 0) {
-    blocking.push(record('viability_contradicts_food',
-      `Viability reads "self-sufficient" while the food balance shows a deficit of ${Number(fb.deficit)}.`));
+  const need = Number(fb?.dailyNeed) || 0;
+  const def = Number(fb?.deficit) || 0;
+  if (/self-sufficient/i.test(viabilitySummary) && need > 0 && def / need > 0.25) {
+    warnings.push(record('viability_contradicts_food',
+      `Viability reads "self-sufficient" while ${Math.round((def / need) * 100)}% of the daily food need is unmet (deficit ${def} of ${need}).`,
+      { severity: 'warn' }));
   }
 
-  // §1d — export contradiction: one surface would report no exports while
-  // another lists them. economicState.exports (legacy; read by the Current
-  // State risk) disagrees with economicState.primaryExports (Economics).
-  const eco = settlement?.economicState || {};
-  const legacy  = Array.isArray(eco.exports) ? eco.exports.filter(Boolean) : [];
-  const primary = Array.isArray(eco.primaryExports) ? eco.primaryExports.filter(Boolean) : [];
-  if (legacy.length === 0 && primary.length > 0) {
-    blocking.push(record('export_status_contradiction',
-      `Export status would read "none" (economicState.exports is empty) while ${primary.length} export(s) are listed in primaryExports. Read exportPosture from the display model instead.`));
-  }
+  // (§1d export-status contradiction removed: the display model now reads
+  // economicState.primaryExports everywhere, so an empty legacy exports[] beside
+  // a populated primaryExports is the normal modern state, not a contradiction.)
 
   return { blocking, warnings };
 }

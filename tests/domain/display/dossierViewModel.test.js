@@ -28,9 +28,10 @@ describe('deriveFoodBalance (§1c)', () => {
     expect(fb.detail).toBe('Produced/Needed: Not calculated');
   });
 
-  it('renders a deficit with the minus sign', () => {
+  it('renders a deficit with the minus sign and normalizes it as a share of need', () => {
     const fb = deriveFoodBalance(withFood({ dailyProduction: 13065, dailyNeed: 14280, surplus: 0, deficit: 1215 }));
-    expect(fb.display).toBe('Deficit −1,215');
+    expect(fb.deficitPct).toBe(9); // 1215 / 14280 ≈ 8.5% → 9%
+    expect(fb.display).toBe('Deficit −1,215 (9% of need)');
   });
 
   it('falls back cleanly when foodBalance is absent', () => {
