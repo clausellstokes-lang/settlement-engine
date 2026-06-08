@@ -99,7 +99,7 @@ export default function AccountFAQ() {
         marginTop: 4, fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
         fontFamily: sans,
       }}>
-        Still stuck? Drop a note via Customer Support below.
+        Still stuck? Reach Customer Support from your Account page.
       </div>
     </div>
   );

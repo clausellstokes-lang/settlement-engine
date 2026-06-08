@@ -28,9 +28,8 @@ const FounderTile = _lazy(() => import('./pricing/FounderTile.jsx'));
 import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, AMBER } from './theme.js';
-// P138 / AC-4 — Inline FAQ accordion. Lazy because the copy strings
-// are a chunky import for users who never expand the section.
-const AccountFAQ = _lazy(() => import('./account/AccountFAQ.jsx'));
+// FAQ relocated to the About page (spec §13); the full accordion (AccountFAQ)
+// is rendered there now, with a slim pointer left on this page.
 
 function Section({ title, icon: Icon, children }) {
   return (
@@ -560,11 +559,17 @@ export default function AccountPage({ onNavigateAdmin }) {
         </_Suspense>
       </Section>
 
-      {/* ── P138 / AC-4 FAQ ──────────────────────────────────────── */}
+      {/* ── FAQ (relocated to the About page, spec §13) ───────────────
+          The Account page is no longer the primary FAQ location; keep a slim
+          pointer to the full FAQ that now lives on the About page. */}
       <Section title="Frequently asked" icon={Headphones}>
-        <_Suspense fallback={null}>
-          <AccountFAQ />
-        </_Suspense>
+        <p style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.55, margin: 0, fontFamily: sans }}>
+          Questions about credits, billing, gallery privacy, or how the simulator relates to AI
+          now live in the{' '}
+          <a href="/how-to?tab=faq" style={{ color: GOLD, fontWeight: 700, textDecoration: 'underline' }}>
+            FAQ on the About page
+          </a>. Account-specific controls — your plan, credit balance, and billing portal — stay here.
+        </p>
       </Section>
 
       {/* ── Customer Support ────────────────────────────────────── */}

@@ -1,28 +1,26 @@
 /**
- * ComparePage.jsx — Tier 8.6 comparison SEO surface.
+ * ComparePage.jsx — comparison SEO surface (category-level).
  *
- * Three sub-pages — SettlementForge vs ChatGPT, vs Worldographer,
- * vs Kanka — each carrying the anti-AI / simulation-first positioning
- * and a comparison table. Plus a landing page that links to all three.
+ * Three sub-pages comparing SettlementForge against tool CATEGORIES rather than
+ * named products (spec §13: no named competitor/tool/creator comparisons) — vs
+ * AI prose generators, vs map-first tools, vs campaign wikis — each carrying the
+ * simulation-first positioning + a comparison table. Plus a landing page.
  *
  * Why these comparisons:
- *   - vs ChatGPT       — captures the "DM trying to get a settlement
- *                        from an LLM" search intent. The page argues
- *                        why a simulator beats a transformer for this
- *                        specific job.
- *   - vs Worldographer — captures DMs who already use Worldographer
- *                        for maps. We're not competing on maps; we're
- *                        complementing them with a settlement layer
- *                        Worldographer doesn't have.
- *   - vs Kanka         — captures campaign-management searchers who
- *                        want a campaign wiki. Same complement angle:
- *                        Kanka stores; we generate.
+ *   - vs AI prose generators — the "DM trying to get a settlement from an LLM"
+ *                        intent. Argues why a simulator beats a prose generator
+ *                        for this specific job.
+ *   - vs map-first tools — DMs who already draw maps elsewhere. We don't compete
+ *                        on maps; we complement them with a settlement layer.
+ *   - vs campaign wikis  — campaign-management searchers who want a wiki. Same
+ *                        complement angle: a wiki stores; we generate.
  *
- * Routing:
+ * Routing (view IDs kept as legacy slugs for inbound-link stability; all
+ * user-visible + meta copy is category-level):
  *   view='compare'              → landing page with three cards
- *   view='compare-chatgpt'      → vs ChatGPT
- *   view='compare-worldographer'→ vs Worldographer
- *   view='compare-kanka'        → vs Kanka
+ *   view='compare-chatgpt'      → vs AI prose generators
+ *   view='compare-worldographer'→ vs map-first tools
+ *   view='compare-kanka'        → vs campaign wikis
  *
  * SEO posture:
  *   - We set document.title + meta description on mount so each page
@@ -243,24 +241,24 @@ function GalleryNudge({ onNavigate }) {
   );
 }
 
-// ── vs ChatGPT ─────────────────────────────────────────────────────────────
+// ── vs AI prose generators ───────────────────────────────────────────────────
 function CompareChatGPT({ onNavigate }) {
   useDocumentMeta(
-    'SettlementForge vs ChatGPT: Simulated settlements for DMs',
-    'A side-by-side comparison: SettlementForge simulates settlements from constraints; ChatGPT generates prose from prompts. Different tools, different jobs.'
+    'SettlementForge vs AI prose generators: Simulated settlements for DMs',
+    'A side-by-side comparison: SettlementForge simulates settlements from constraints; AI prose generators write prose from prompts. Different tools, different jobs.'
   );
 
   return (
     <ComparePageShell>
       <PageTitle
         eyebrow="Comparison"
-        title="SettlementForge vs ChatGPT"
-        lede="Both produce text about a fictional town. Only one of them does it by simulating the town. Here's the difference, and when each tool is the right one."
+        title="SettlementForge vs AI prose generators"
+        lede="Both produce text about a fictional town. Only one of them does it by simulating the town. Here's the difference, and when each kind of tool is the right one."
       />
 
       <section style={{ marginBottom: SP.xxl, fontSize: FS.md, color: BODY, lineHeight: 1.65 }}>
         <p>
-          ChatGPT is a transformer that predicts plausible next tokens. Ask it for a settlement
+          An AI prose generator predicts plausible next words. Ask one for a settlement
           and it writes prose that <em>sounds</em> like a settlement. The output is fluent. It is
           also untethered: the bandit threat the prose introduces in paragraph 3 does not affect
           the militia roster in paragraph 7, because there is no underlying state to affect.
@@ -278,7 +276,7 @@ function CompareChatGPT({ onNavigate }) {
         </p>
       </section>
 
-      <CompareTable otherName="ChatGPT" rows={[
+      <CompareTable otherName="AI prose generators" rows={[
         { feature: 'Settlement state is internally consistent',
           sf:    { mark: 'yes', note: 'Every output derives from one simulation state.' },
           other: { mark: 'no',  note: 'Prose-level only; no state to be consistent against.' } },
@@ -299,7 +297,7 @@ function CompareChatGPT({ onNavigate }) {
           other: { mark: 'partial', note: 'Copy-paste into a doc.' } },
         { feature: 'Pricing',
           sf:    { mark: 'yes', note: 'Free anonymous. Free saved tier. $6/mo Cartographer. $99 Founder.' },
-          other: { mark: 'partial', note: 'ChatGPT subscription; usage rolled into general AI use.' } },
+          other: { mark: 'partial', note: 'Subscription; usage rolled into general AI use.' } },
         { feature: 'AI involvement',
           sf:    { mark: 'partial', note: 'Optional Narrative Refinement only; grounded in simulation.' },
           other: { mark: 'yes', note: 'AI is the engine. No simulation underneath.' } },
@@ -310,63 +308,63 @@ function CompareChatGPT({ onNavigate }) {
 
       <section style={{ marginBottom: SP.xxl, fontSize: FS.md, color: BODY, lineHeight: 1.65 }}>
         <h2 style={{ fontFamily: serif_, fontSize: FS.xxl, color: INK, marginBottom: SP.md }}>
-          When ChatGPT is the right tool
+          When an AI prose generator is the right tool
         </h2>
         <p>
-          ChatGPT is great when you need <em>prose</em> about a thing whose facts you already
-          have. Hand it a SettlementForge dossier and ask for read-aloud descriptions, NPC voice
-          samples, faction propaganda. It'll do that well, because the facts are already
+          A prose generator is great when you need <em>prose</em> about a thing whose facts you
+          already have. Hand it a SettlementForge dossier and ask for read-aloud descriptions, NPC
+          voice samples, faction propaganda. It'll do that well, because the facts are already
           coherent and it just needs to write.
         </p>
         <p>
-          ChatGPT is the wrong tool when you need <em>the facts themselves</em>: who controls the
-          town, why this institution exists and not that one, what happens to faction power when
-          you kill the abbot. Those are simulation questions, not prose questions.
+          A prose generator is the wrong tool when you need <em>the facts themselves</em>: who
+          controls the town, why this institution exists and not that one, what happens to faction
+          power when you kill the abbot. Those are simulation questions, not prose questions.
         </p>
       </section>
     </ComparePageShell>
   );
 }
 
-// ── vs Worldographer ───────────────────────────────────────────────────────
+// ── vs map-first tools ───────────────────────────────────────────────────────
 function CompareWorldographer({ onNavigate }) {
   useDocumentMeta(
-    'SettlementForge vs Worldographer: Maps + simulated settlements',
-    'SettlementForge complements Worldographer. Worldographer draws your world; SettlementForge simulates the towns inside it.'
+    'SettlementForge vs map-first tools: Maps + simulated settlements',
+    'SettlementForge complements map-first tools. They draw your world; SettlementForge simulates the towns inside it.'
   );
 
   return (
     <ComparePageShell>
       <PageTitle
         eyebrow="Comparison"
-        title="SettlementForge vs Worldographer"
-        lede="Worldographer is a map editor. SettlementForge is a settlement simulator. They solve different problems. And they're better together than apart."
+        title="SettlementForge vs map-first tools"
+        lede="A map editor draws where things are. SettlementForge simulates what's inside them. They solve different problems — and they're better together than apart."
       />
 
       <section style={{ marginBottom: SP.xxl, fontSize: FS.md, color: BODY, lineHeight: 1.65 }}>
         <p>
-          Worldographer (formerly Hexographer) is one of the strongest map-drawing tools in the
-          TTRPG space. Hex grids, terrain layers, kingdom borders, dungeon maps. All the spatial
-          layout work a DM needs is well-served there.
+          Map-first tools are among the strongest map-drawing software in the TTRPG space. Hex
+          grids, terrain layers, kingdom borders, dungeon maps. All the spatial layout work a DM
+          needs is well-served there.
         </p>
         <p>
-          What Worldographer doesn't do is tell you what's inside the city your campaign actually
+          What a map tool doesn't do is tell you what's inside the city your campaign actually
           happens in. That's what SettlementForge is for. The hex labeled "Bramblefen" on your
-          map becomes a 14-tab dossier with factions, NPCs, supply chains, stress conditions,
+          map becomes a multi-tab dossier with factions, NPCs, supply chains, stress conditions,
           plot hooks, and an embedded "how it was simulated" rail.
         </p>
         <p style={{ color: INK, fontStyle: 'italic' }}>
-          One workflow that works: draw your kingdom in Worldographer, pick a hex, simulate that
+          One workflow that works: draw your kingdom in a map tool, pick a hex, simulate that
           settlement in SettlementForge, export the PDF, and you've prep'd the session.
         </p>
       </section>
 
-      <CompareTable otherName="Worldographer" rows={[
+      <CompareTable otherName="Map-first tools" rows={[
         { feature: 'Draw / edit hex maps',
           sf:    { mark: 'partial', note: 'World map embed (Azgaar bridge), not a hex editor.' },
           other: { mark: 'yes', note: 'Best-in-class hex + dungeon editing.' } },
         { feature: 'Simulate settlement internals (factions, supply chains)',
-          sf:    { mark: 'yes', note: '14 tabs of simulated detail per town.' },
+          sf:    { mark: 'yes', note: 'Many tabs of simulated detail per town.' },
           other: { mark: 'no',  note: 'Map metadata only.' } },
         { feature: 'NPC roster with private agendas + relationships',
           sf:    { mark: 'yes', note: 'Generated per settlement, linked to institutions.' },
@@ -382,7 +380,7 @@ function CompareWorldographer({ onNavigate }) {
           other: { mark: 'yes', note: 'Map exports as PNG/PDF.' } },
         { feature: 'Pricing',
           sf:    { mark: 'yes', note: 'Free tier; $6/mo Cartographer; $99 Founder Lifetime.' },
-          other: { mark: 'yes', note: 'One-time license.' } },
+          other: { mark: 'yes', note: 'Often a one-time license.' } },
       ]} />
 
       <ForgeCTA onNavigate={onNavigate} />
@@ -391,43 +389,43 @@ function CompareWorldographer({ onNavigate }) {
   );
 }
 
-// ── vs Kanka ───────────────────────────────────────────────────────────────
+// ── vs campaign wikis ─────────────────────────────────────────────────────────
 function CompareKanka({ onNavigate }) {
   useDocumentMeta(
-    'SettlementForge vs Kanka: Generate the wiki, then store it',
-    'Kanka is a campaign wiki. SettlementForge generates the content that goes in it. Different jobs, same DM.'
+    'SettlementForge vs campaign wikis: Generate the content, then store it',
+    'A campaign wiki stores what your players have learned. SettlementForge generates the content that goes in it. Different jobs, same DM.'
   );
 
   return (
     <ComparePageShell>
       <PageTitle
         eyebrow="Comparison"
-        title="SettlementForge vs Kanka"
-        lede="Kanka stores your campaign. SettlementForge generates the towns that fill it. Use both."
+        title="SettlementForge vs campaign wikis"
+        lede="A campaign wiki stores your campaign. SettlementForge generates the towns that fill it. Use both."
       />
 
       <section style={{ marginBottom: SP.xxl, fontSize: FS.md, color: BODY, lineHeight: 1.65 }}>
         <p>
-          Kanka is a campaign-management wiki. It's where you write down everything your players
-          have learned about the world, organize NPCs and quests, and keep notes between sessions.
-          Excellent for the campaign you're already running.
+          A campaign wiki is a campaign-management notebook. It's where you write down everything
+          your players have learned about the world, organize NPCs and quests, and keep notes
+          between sessions. Excellent for the campaign you're already running.
         </p>
         <p>
-          What Kanka isn't is a generator. The blank entity page expects you to bring the content.
+          What a wiki isn't is a generator. The blank entity page expects you to bring the content.
           For a small recurring location, you might write it yourself. For a settlement that needs
           factions, institutions, supply chains, and 30+ NPCs. That's where SettlementForge fits.
-          Generate the dossier, export the PDF, paste the bits you want into Kanka.
+          Generate the dossier, export the PDF, paste the bits you want into your wiki.
         </p>
         <p style={{ color: INK, fontStyle: 'italic' }}>
-          Simulator outputs are JSON-exportable; future versions will offer a direct Kanka import
-          path.
+          Simulator outputs are JSON-exportable, so the dossier drops into whatever campaign wiki
+          you already keep.
         </p>
       </section>
 
-      <CompareTable otherName="Kanka" rows={[
+      <CompareTable otherName="Campaign wikis" rows={[
         { feature: 'Campaign wiki / persistent notes',
           sf:    { mark: 'partial', note: 'Saved settlements + canon. No general wiki.' },
-          other: { mark: 'yes', note: 'Best-in-class wiki for TTRPG campaigns.' } },
+          other: { mark: 'yes', note: 'Best-in-class wikis for TTRPG campaigns.' } },
         { feature: 'Generate a settlement from scratch',
           sf:    { mark: 'yes', note: 'Simulator engine; outputs full dossier in 10-20s.' },
           other: { mark: 'no',  note: 'Manual entry. Templates exist; no generation.' } },
@@ -442,7 +440,7 @@ function CompareKanka({ onNavigate }) {
           other: { mark: 'yes', note: 'Exports available on paid plans.' } },
         { feature: 'Pricing',
           sf:    { mark: 'yes', note: 'Free tier; $6/mo; $99 Founder.' },
-          other: { mark: 'yes', note: 'Free tier; $5-$25/mo tiers.' } },
+          other: { mark: 'yes', note: 'Free tier; low monthly paid tiers.' } },
       ]} />
 
       <ForgeCTA onNavigate={onNavigate} />
@@ -454,25 +452,25 @@ function CompareKanka({ onNavigate }) {
 // ── Compare landing ────────────────────────────────────────────────────────
 function CompareLanding({ onNavigate }) {
   useDocumentMeta(
-    'How SettlementForge compares vs ChatGPT, Worldographer, Kanka',
-    'Side-by-side comparisons of SettlementForge against the tools DMs commonly consider: ChatGPT, Worldographer, and Kanka.'
+    'How SettlementForge compares: AI prose generators, map-first tools, campaign wikis',
+    'Side-by-side comparisons of SettlementForge against the kinds of tools DMs commonly consider: AI prose generators, map-first tools, and campaign wikis.'
   );
 
   const cards = [
     {
       view: 'compare-chatgpt',
-      title: 'vs ChatGPT',
+      title: 'vs AI prose generators',
       lede: 'Why simulated beats prompted for the settlement itself.',
     },
     {
       view: 'compare-worldographer',
-      title: 'vs Worldographer',
+      title: 'vs map-first tools',
       lede: 'Maps + simulated settlements. Better together.',
     },
     {
       view: 'compare-kanka',
-      title: 'vs Kanka',
-      lede: 'Generate the content; let Kanka store it.',
+      title: 'vs campaign wikis',
+      lede: 'Generate the content; let your wiki store it.',
     },
   ];
 

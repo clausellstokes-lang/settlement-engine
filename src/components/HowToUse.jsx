@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { BookOpen, Zap, Star, Cpu, List, Scale } from 'lucide-react';
+import { BookOpen, Zap, Star, Cpu, List, Scale, HelpCircle } from 'lucide-react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, PAGE_MAX, sans, serif_, FS, swatch } from './theme.js';
+import AccountFAQ from './account/AccountFAQ.jsx';
 
 // Responsive multi-column container for card/list-heavy tab content. Uses
 // `column-width` (not a fixed count) so it fills a wide desktop card with as
@@ -18,6 +19,7 @@ const TABS = [
   { id:'phil',   label:'DM Philosophy', Icon: BookOpen },
   { id:'ref',    label:'Reference',     Icon: List },
   { id:'compare',label:'How We Compare',Icon: Scale },
+  { id:'faq',    label:'FAQ',           Icon: HelpCircle },
 ];
 
 function Insight({ title, children }) {
@@ -106,7 +108,7 @@ function QuickTab() {
         button packages the full settlement brief. Economy, power structure, NPC goals and secrets,
         stress conditions, history. As a structured prompt for any external AI tool. Because the
         data is coherent, the AI produces consistent fiction across multiple queries. Hand it to
-        Claude, ChatGPT, or any assistant and ask it anything about the settlement.
+        any AI assistant and ask it anything about the settlement.
       </p>
     </div>
   );
@@ -125,7 +127,7 @@ function QuickTab() {
       </div>
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first. It gives you the one-paragraph version ready for the table.</Step>
       <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and. Where relevant. Legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
-      <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for AI assistants like Claude or ChatGPT.</Step>
+      <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for any AI assistant.</Step>
       <Tip>You don't need to read every tab before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
     </>
   );
@@ -477,25 +479,25 @@ function CompareTab() {
         upfront about what the other tool does well. And where SettlementForge fits alongside
         it rather than against it.
       </p>
-      <Insight title="vs ChatGPT. Simulated, not prompted">
-        ChatGPT writes fluent prose on demand, but it improvises each answer: ask twice and the
-        guard captain's name, the dominant faction, or the town's economy can quietly drift.
-        SettlementForge <strong>simulates</strong> the settlement from interlocking constraints,
-        so every institution, NPC secret, and faction tension is mutually consistent and
-        reproducible. Best of both: generate the coherent brief here, then hand its Narrative AI
-        Prompt to ChatGPT for table-ready prose that stays on-model.
+      <Insight title="vs AI prose generators. Simulated, not prompted">
+        An AI prose generator writes fluent text on demand, but it improvises each answer: ask
+        twice and the guard captain's name, the dominant faction, or the town's economy can quietly
+        drift. SettlementForge <strong>simulates</strong> the settlement from interlocking
+        constraints, so every institution, NPC secret, and faction tension is mutually consistent
+        and reproducible. Best of both: generate the coherent brief here, then hand its Narrative AI
+        Prompt to an AI assistant for table-ready prose that stays on-model.
       </Insight>
-      <Insight title="vs Worldographer. Maps + settlements">
-        Worldographer is a first-class map and hex editor. Terrain, regions, the shape of the
-        world. It doesn't simulate what lives inside a settlement. The two are complementary:
-        draw the map in Worldographer, then populate its towns with SettlementForge's simulated
+      <Insight title="vs map-first tools. Maps + settlements">
+        Map-first tools are first-class map and hex editors. Terrain, regions, the shape of the
+        world. They don't simulate what lives inside a settlement. The two are complementary:
+        draw the map in a map tool, then populate its towns with SettlementForge's simulated
         economies, power structures, and NPCs.
       </Insight>
-      <Insight title="vs Kanka. Generate vs. store">
-        Kanka is an excellent campaign wiki: it organizes and cross-links the lore you already
+      <Insight title="vs campaign wikis. Generate vs. store">
+        A campaign wiki is excellent at organizing and cross-linking the lore you already
         have, but it doesn't generate that lore. Use SettlementForge to <strong>create</strong>
-        coherent settlements and export the brief, then store and interlink them in Kanka as your
-        living campaign bible.
+        coherent settlements and export the brief, then store and interlink them in your wiki as
+        your living campaign bible.
       </Insight>
       <Tip>
         The throughline: SettlementForge owns the <em>generation</em> of mechanically-coherent
@@ -506,12 +508,29 @@ function CompareTab() {
   );
 }
 
+function FaqTab() {
+  return (
+    <div>
+      <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, marginBottom:10 }}>
+        Frequently asked questions
+      </div>
+      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 14px' }}>
+        Credits, billing, gallery privacy, and how the simulator relates to AI. Account-specific
+        controls (your plan, credit balance, billing portal) live on your Account page.
+      </p>
+      <AccountFAQ />
+    </div>
+  );
+}
+
 export default function HowToUse({ standalone=false }) {
-  // Open straight to the comparison section when arriving from a /compare link
-  // (those routes now redirect here with ?tab=compare). Falls back to Quick Start.
+  // Open straight to a requested tab via ?tab= (e.g. /compare links redirect
+  // here with ?tab=compare; the Account page links to ?tab=faq). Falls back to
+  // Quick Start for any unknown value.
   const [activeTab, setActiveTab] = useState(() => {
     try {
-      return new URLSearchParams(window.location.search).get('tab') === 'compare' ? 'compare' : 'quick';
+      const tab = new URLSearchParams(window.location.search).get('tab');
+      return TABS.some(t => t.id === tab) ? tab : 'quick';
     } catch { return 'quick'; }
   });
 
@@ -546,6 +565,7 @@ export default function HowToUse({ standalone=false }) {
           {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}
           {activeTab==='compare' && <CompareTab />}
+          {activeTab==='faq' && <FaqTab />}
         </div>
       </div>
     </div>
@@ -577,6 +597,7 @@ export default function HowToUse({ standalone=false }) {
           {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}
           {activeTab==='compare' && <CompareTab />}
+          {activeTab==='faq' && <FaqTab />}
         </div>
       </>
     </div>

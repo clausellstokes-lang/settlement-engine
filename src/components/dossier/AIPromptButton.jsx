@@ -2,7 +2,7 @@
  * AIPromptButton.jsx — P137 / HT-4: copy this dossier as an AI prompt.
  *
  * Power-user surface. The user has a generated dossier in front of
- * them; they want to feed it into ChatGPT/Claude for a tangential
+ * them; they want to feed it into an AI assistant for a tangential
  * question ("what would a sermon in this town sound like?") without
  * spending a Narrative credit. This button serialises the dossier
  * into the same grounded prompt envelope our edge function uses,
@@ -82,7 +82,7 @@ export default function AIPromptButton({ settlement }) {
     <button
       type="button"
       onClick={handleClick}
-      title="Copy this dossier as a structured prompt to paste into ChatGPT or Claude."
+      title="Copy this dossier as a structured prompt to paste into any AI assistant."
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
         padding: '4px 10px',
