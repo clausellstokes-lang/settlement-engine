@@ -73,7 +73,7 @@ function Entry({ entry }) {
         <View style={{ marginBottom: 3 }}>
           {entry.deltas.slice(0, 4).map((d, i) => (
             <Text key={i} style={{ ...type.body, fontSize: pt['8'], color: palette.ink, lineHeight: 1.4 }}>
-              • {d.explanation} ({d.before}→{d.after})
+              • {d.explanation} ({d.before} » {d.after})
             </Text>
           ))}
         </View>

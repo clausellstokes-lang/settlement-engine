@@ -83,7 +83,7 @@ export function StackedBar({ segments, height = 8, showLabels = true, marginBott
   );
 }
 
-// ── ChainRow: Resource ▶ Inst ▶ Output ──────────────────────────────────────
+// ── ChainRow: Resource » Inst » Output ──────────────────────────────────────
 export function ChainRow({ resource, processing, output, status, tone }) {
   const _statusColor = palette[tone] || palette.gold;
   return (
@@ -100,11 +100,11 @@ export function ChainRow({ resource, processing, output, status, tone }) {
       <Text style={{ ...type.body, color: palette.ink, flex: 1.2, fontSize: pt['9'] }}>
         {resource || ', '}
       </Text>
-      <Text style={{ color: palette.faint, marginHorizontal: 4, fontSize: pt['9'] }}>▶</Text>
+      <Text style={{ color: palette.faint, marginHorizontal: 4, fontSize: pt['9'] }}>»</Text>
       <Text style={{ ...type.body, color: palette.second, flex: 1.5, fontSize: pt['9'] }}>
         {processing || (status === 'unexploited' ? 'unprocessed' : ', ')}
       </Text>
-      <Text style={{ color: palette.faint, marginHorizontal: 4, fontSize: pt['9'] }}>▶</Text>
+      <Text style={{ color: palette.faint, marginHorizontal: 4, fontSize: pt['9'] }}>»</Text>
       <Text style={{ ...type.body, color: palette.second, flex: 1.5, fontSize: pt['9'] }}>
         {output || (status === 'unexploited' ? 'no output' : ', ')}
       </Text>

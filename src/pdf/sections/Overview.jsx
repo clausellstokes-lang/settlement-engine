@@ -89,7 +89,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
               )}
               {s.hook && (
                 <View style={{ flexDirection: 'row', marginTop: 1 }}>
-                  <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>↳</Text>
+                  <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>»</Text>
                   <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], flex: 1 }}>
                     {hookText(s.hook)}
                   </Text>
@@ -199,7 +199,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
                 <View style={{ marginTop: 2 }}>
                   {t.hooks.slice(0, 3).map((h, hi) => (
                     <View key={`th-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['8.5'] }}>↳</Text>
+                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
                       <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
                         {hookText(h)}
                       </Text>
@@ -255,7 +255,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
                 <View style={{ marginTop: 2 }}>
                   {c.hooks.slice(0, 3).map((h, hi) => (
                     <View key={`ch-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['8.5'] }}>↳</Text>
+                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
                       <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
                         {hookText(h)}
                       </Text>

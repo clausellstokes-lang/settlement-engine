@@ -176,7 +176,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
                 <View style={{ marginTop: 2 }}>
                   {t.hooks.map((h, hi) => (
                     <View key={`th-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['8.5'] }}>↳</Text>
+                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
                       <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
                         {hookText(h)}
                       </Text>
@@ -234,7 +234,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
                 <View style={{ marginTop: 2 }}>
                   {c.hooks.map((h, hi) => (
                     <View key={`ch-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['8.5'] }}>↳</Text>
+                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
                       <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
                         {hookText(h)}
                       </Text>

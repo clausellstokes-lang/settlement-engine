@@ -190,7 +190,7 @@ function ChainCard({ chain }) {
     chain.resource ? humanize(label(chain.resource)) : null,
     (chain.processingInstitutions || []).map(humanize).join(' + ') || null,
     (chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null,
-  ].filter(Boolean).join(' \u25b6 ');
+  ].filter(Boolean).join(' \u00bb ');
 
   const meta = [
     chain.needLabel ? { label: 'NEED', value: chain.needLabel } : null,

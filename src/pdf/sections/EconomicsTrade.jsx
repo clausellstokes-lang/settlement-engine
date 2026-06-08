@@ -185,7 +185,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
                   <View style={{ marginTop: 2 }}>
                     {c.hooks.map((h, hi) => (
                       <View key={`chk-${i}-${hi}`} style={{ flexDirection: 'row' }}>
-                        <Text style={{ color: palette.gold, marginRight: 3, fontSize: pt['8'] }}>↳</Text>
+                        <Text style={{ color: palette.gold, marginRight: 3, fontSize: pt['8'] }}>»</Text>
                         <EditableText
                           name={`economics.chain.${i}.hook.${hi}`}
                           defaultValue={hookText(h)}

@@ -153,7 +153,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
               <BulletList
                 items={violations}
                 tone="bad"
-                bullet="✗"
+                bullet="×"
                 itemRender={(s) => label(s) || (typeof s === 'string' ? s : '')}
               />
             </View>
@@ -281,7 +281,7 @@ function IssueRow({ iss, idx }) {
           </Text>
           {iss.suggestedFixes.map((fx, j) => (
             <View key={`fx-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-              <Text style={{ color: palette.good, marginRight: 4, fontSize: pt['8'] }}>↳</Text>
+              <Text style={{ color: palette.good, marginRight: 4, fontSize: pt['8'] }}>»</Text>
               <Text style={{ ...type.body, fontSize: pt['8.5'], flex: 1 }}>
                 {label(fx) || (typeof fx === 'string' ? fx : '')}
               </Text>
