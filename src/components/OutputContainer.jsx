@@ -1,7 +1,7 @@
 import React, { useState, useRef, lazy, Suspense } from 'react';
 import { FS } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote, Sparkles } from 'lucide-react';
+import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote, Sparkles, Drama } from 'lucide-react';
 import { TIER_LABELS } from './new/design';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -12,6 +12,7 @@ import { AiOverlayViolations } from './primitives/AiOverlayViolations.jsx';
 import { RegenerationDeltaCard } from './primitives/RegenerationDeltaCard.jsx';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
+import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
@@ -40,6 +41,7 @@ const SummaryTab = lazy(() => import('./new/SummaryTab'));
 // `summaryMagazineV2` flag in renderTab(); legacy SummaryTab still
 // loads in parallel so toggling the flag is instant.
 const SummaryTabV2 = lazy(() => import('./new/SummaryTabV2.jsx'));
+const PlotHooksTab = lazy(() => import('./new/tabs/PlotHooksTab.jsx'));
 const OverviewTab = lazy(() => import('./new/tabs/OverviewTab'));
 const EconomicsTab = lazy(() => import('./new/tabs/EconomicsTab'));
 const ServicesTab = lazy(() => import('./new/tabs/ServicesTab'));
@@ -55,25 +57,27 @@ const DMCompassTab = lazy(() => import('./new/tabs/DMCompassTab'));
 const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 
 
-// P102 / D-1 — Five thematic group tabs façade. Each group maps to the
-// existing sub-tabs the dossier already renders; this is a navigation
-// layer, not a content change. Flag: `dossierFiveTabs`.
+// P102 / D-1 — Thematic group tabs façade (spec §8: Summary / Systems / World /
+// Notes). Each group maps to the existing sub-tabs the dossier already renders;
+// this is a navigation layer, not a content change. Flag: `dossierFiveTabs`
+// (name retained as the soak killswitch even though the count is now four).
 //
-//   summary  → Summary tab (everything the user reads at the table)
-//   people   → NPCs, Daily Life, Power
+//   summary  → Overview, DM Summary, Plot Hooks, Guidance (spec §8). Plot Hooks
+//              is its own sub-tab (PlotHooksTab); Guidance (DM Compass) is the
+//              AI-narrated layer and only appears when narration produced it.
 //   systems  → Services, Economics, Power, Defense, Resources, Viability
 //   world    → Relationships, Daily Life, NPCs, History, Neighbours
 //   notes    → DM Notes, AI Notes
-//   guidance → DM Compass. Plot hooks live inside Summary.
 //
 // Simulation lives in the drawer trigger near the dossier actions, not in
-// the reading tab strip.
+// the reading tab strip. Sub-tabs the current settlement doesn't render
+// (e.g. dm_compass without narration, plot_hooks with no hooks) are dropped
+// from the strip by the resolver below.
 export const TAB_GROUPS = Object.freeze({
-  summary: { label: 'Summary', tabs: ['overview', 'summary'] },
+  summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability'] },
   world:   { label: 'World',   tabs: ['relationships', 'daily_life', 'npcs', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes'] },
-  guidance:{ label: 'Guidance', tabs: ['dm_compass'] },
 });
 
 const TABS = [
@@ -281,6 +285,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     ))
   ));
 
+  // Plot Hooks sub-tab (spec §8) appears only when the settlement surfaces
+  // structural hooks. Derived from the raw simulation (NPCs/factions/tensions/
+  // economy/safety/history/relationships), so it's independent of narration.
+  const hasPlotHooks = React.useMemo(
+    () => collectPlotHooks(rawSettlement || {}).length > 0,
+    [rawSettlement]
+  );
+
   // P135 / D-5 — The simulation drawer trigger (below the header) is the
   // entry point, so drop the Simulation entry from the tab strip.
   const baseTabs = TABS.filter(t => {
@@ -292,7 +304,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     return true;
   });
   const allTabs = [...baseTabs,
-    ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'DM Compass', Icon: Compass }] : []),
+    // Plot Hooks — a Summary sub-tab (spec §8); shown only when the settlement
+    // actually surfaces structural hooks.
+    ...(hasPlotHooks ? [{ id:'plot_hooks', label:'Plot Hooks', Icon: Drama }] : []),
+    // Guidance (DM Compass) — the AI-narrated layer; only present once narration
+    // produced it, and tinted purple in the strip below.
+    ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance', Icon: Compass }] : []),
     ...(rawSettlement?.neighborRelationship || rawSettlement?.neighbourRelationship || rawSettlement?.neighbourNetwork?.length
       ? [{ id:'neighbours', label:'Neighbours', Icon: MapPin }] : [])
   ];
@@ -354,6 +371,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               : undefined,
           })
         : React.createElement(SummaryTab, { settlement: s });
+      case 'plot_hooks': return React.createElement(PlotHooksTab, { settlement: s });
       case 'daily_life': return React.createElement(DailyLifeTab, { settlement: s, aiSettlement, saveId, onRequestDailyLife: () => requestAiAction('dailyLife') });
       case 'overview':   return React.createElement(OverviewTab, { settlement: s, narrativeNote: null });
       case 'economics':  return React.createElement(EconomicsTab, { settlement: s, narrativeNote: null });
@@ -629,9 +647,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       !readOnly && React.createElement(Suspense, { fallback: null },
         React.createElement(FirstDossierCallouts)
       ),
-      // P102 / D-1 — Five thematic group tab strip. Renders only when
-      // the dossierFiveTabs flag is on. Clicking a group selects its
-      // first sub-tab and filters the strip below.
+      // P102 / D-1 — Thematic group tab strip (Summary / Systems / World /
+      // Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
+      // group selects its first sub-tab and filters the strip below.
       fiveTabsEnabled && React.createElement('div', {
         role: 'tablist',
         'aria-label': 'Dossier sections',
@@ -668,9 +686,18 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         React.createElement('div', { ref: scrollRef, style: { display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', paddingLeft: 28, paddingRight: 28, WebkitOverflowScrolling: 'touch' } },
           tabs.map(({ id, label, Icon }) => {
             const active = selectedTab === id;
+            // Guidance (DM Compass) is the AI-narrated layer — give it a subtle
+            // purple tint so the AI surface reads as distinct from the
+            // simulation tabs.
+            const purple = id === 'dm_compass';
+            const accent = purple ? '#7a3aa8' : '#a0762a';
+            const idle   = purple ? '#7a5a92' : '#6b5340';
+            const bg = active
+              ? (purple ? '#f7f0fa' : '#fffbf5')
+              : (purple ? 'rgba(122,58,168,0.05)' : 'transparent');
             return React.createElement('button', {
               key: id, onClick: () => setActiveTab(id),
-              style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: active ? '#fffbf5' : 'transparent', borderBottom: '2px solid ' + (active ? '#a0762a' : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? '#a0762a' : '#6b5340', fontSize: 9.5, fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }
+              style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? accent : idle, fontSize: 9.5, fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }
             }, React.createElement(Icon, { size: 14 }), label);
           })
         ),

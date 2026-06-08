@@ -28,7 +28,6 @@
 import { useMemo } from 'react';
 import { FS, swatch } from '../theme.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
-import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 
 const GOLD = '#8C6F32';
 const GOLD_ACCENT = '#C9A24C';
@@ -105,10 +104,8 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
     return pressure.replace(accent, '').replace(/\s{2,}/g, ' ').trim();
   }, [pressure, accent]);
 
-  // Structural plot hooks (NPCs, factions/conflicts, tensions, economy,
-  // safety, history, relationships) via domain/dossier/plotHooks — distinct
-  // from the AI "tonight at the table" cards, and available without narration.
-  const plotHooks = useMemo(() => collectPlotHooks(settlement || {}), [settlement]);
+  // Plot hooks moved out to their own Summary sub-tab (PlotHooksTab, spec §8)
+  // so DM Summary and Plot Hooks read as distinct surfaces.
 
   // Deferred null check (after hooks have been registered).
   if (!settlement) {
@@ -312,63 +309,6 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         </aside>
       </div>
 
-      {/* ── Plot hooks (structural) ──────────────────────────────────────
-          Aggregated from NPCs, factions, tensions, economy, safety, history
-          and relationships via domain/dossier/plotHooks. Always available
-          (not gated on the AI narrative layer). */}
-      {plotHooks.length > 0 && (
-        <section style={{ padding: '0 18px 18px' }}>
-          <div style={{
-            fontSize: FS.micro, fontWeight: 800,
-            letterSpacing: '0.14em', textTransform: 'uppercase',
-            color: GOLD, marginBottom: 8,
-          }}>
-            Plot hooks
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {plotHooks.slice(0, 12).map((hook, i) => {
-              const cat = PLOT_HOOK_CATEGORIES[hook.category] || PLOT_HOOK_CATEGORIES.tension;
-              return (
-                <div
-                  key={i}
-                  style={{
-                    padding: '7px 10px',
-                    background: swatch.white,
-                    border: `1px solid ${BORDER}`,
-                    borderLeft: `3px solid ${cat.color}`,
-                    borderRadius: 4,
-                  }}
-                >
-                  <div style={{
-                    display: 'flex', justifyContent: 'space-between',
-                    alignItems: 'baseline', gap: 8,
-                  }}>
-                    <span style={{
-                      fontFamily: serif, fontWeight: 700, fontSize: FS['11.5'],
-                      color: INK, minWidth: 0, overflow: 'hidden',
-                      textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                    }}>
-                      {hook.source}
-                    </span>
-                    <span style={{
-                      fontSize: FS['7.5'], fontWeight: 800,
-                      color: cat.color, letterSpacing: '0.08em', flexShrink: 0,
-                    }}>
-                      {String(cat.label).toUpperCase()}
-                    </span>
-                  </div>
-                  <div style={{
-                    fontSize: FS.xxs, color: BODY,
-                    marginTop: 2, lineHeight: 1.45,
-                  }}>
-                    {hook.text}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
     </div>
   );
 }
