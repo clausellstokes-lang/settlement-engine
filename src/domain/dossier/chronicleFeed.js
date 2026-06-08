@@ -59,9 +59,12 @@ function normalizeEntry(raw, index, source) {
  * @param {Array} [sources.recent]     settlement.recentEvents (historical)
  * @param {Object} [opts]
  * @param {number} [opts.limit=40]     max entries (0 / negative = unlimited)
- * @returns {Array<{id,title,summary,at,severity,partyCaused,source}>}
+ * @param {string|number|Date} [opts.reference] campaign-start / canonization moment;
+ *                                      when given, each dated entry gets a relativeDay
+ *                                      (≥0, starting at zero) + "Day N" relativeLabel.
+ * @returns {Array<{id,title,summary,at,severity,partyCaused,source,relativeDay,relativeLabel}>}
  */
-export function buildChronicleFeed({ manual = [], worldPulse = [], worldLog = [], recent = [] } = {}, { limit = 40 } = {}) {
+export function buildChronicleFeed({ manual = [], worldPulse = [], worldLog = [], recent = [] } = {}, { limit = 40, reference = null } = {}) {
   // Order of collection sets dedupe precedence: a manual/party entry wins over a
   // world-history duplicate of the same id.
   const tagged = [
@@ -84,7 +87,17 @@ export function buildChronicleFeed({ manual = [], worldPulse = [], worldLog = []
   const undated = deduped.filter(e => toTime(e.at) == null);
   const sorted = [...dated, ...undated];
 
-  return (typeof limit === 'number' && limit > 0) ? sorted.slice(0, limit) : sorted;
+  // Relative timing from the campaign-start / canonization reference (spec §8
+  // M3c: "starting at zero"). Day 0 is the reference; entries before it clamp to 0.
+  const refTime = toTime(reference);
+  const DAY_MS = 86400000;
+  const timed = sorted.map((e) => {
+    const t = toTime(e.at);
+    const relativeDay = (refTime != null && t != null) ? Math.max(0, Math.floor((t - refTime) / DAY_MS)) : null;
+    return { ...e, relativeDay, relativeLabel: relativeDay != null ? `Day ${relativeDay}` : null };
+  });
+
+  return (typeof limit === 'number' && limit > 0) ? timed.slice(0, limit) : timed;
 }
 
 function arr(v) {

@@ -72,4 +72,27 @@ describe('buildChronicleFeed', () => {
     expect(buildChronicleFeed()).toEqual([]);
     expect(buildChronicleFeed({})).toEqual([]);
   });
+
+  it('computes relative "Day N" labels from the reference (starting at zero)', () => {
+    const feed = buildChronicleFeed({
+      worldPulse: [
+        { id: 'a', title: 'Canonized', at: '2026-01-01T00:00:00Z' },
+        { id: 'b', title: 'Later', at: '2026-01-13T00:00:00Z' },
+      ],
+    }, { reference: '2026-01-01T00:00:00Z' });
+    const byId = Object.fromEntries(feed.map(e => [e.id, e]));
+    expect(byId.a.relativeDay).toBe(0);
+    expect(byId.a.relativeLabel).toBe('Day 0');
+    expect(byId.b.relativeDay).toBe(12);
+    expect(byId.b.relativeLabel).toBe('Day 12');
+  });
+
+  it('clamps pre-reference entries to Day 0 and leaves undated/no-reference null', () => {
+    const before = buildChronicleFeed({ worldPulse: [{ id: 'x', title: 'Before', at: '2025-12-20' }] }, { reference: '2026-01-01' });
+    expect(before[0].relativeDay).toBe(0);
+    const noRef = buildChronicleFeed({ worldPulse: [{ id: 'y', title: 'Dated', at: '2026-01-01' }] });
+    expect(noRef[0].relativeLabel).toBeNull();
+    const undated = buildChronicleFeed({ worldPulse: [{ id: 'z', title: 'Undated' }] }, { reference: '2026-01-01' });
+    expect(undated[0].relativeLabel).toBeNull();
+  });
 });

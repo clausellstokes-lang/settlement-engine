@@ -82,10 +82,10 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>
 
-      {/* ── CHRONICLE (spec §8 M3c) ──────────────────────────────────────────
-          Unified feed: manual events + party-caused + world pulse, newest first,
-          each row colored + tagged by source. */}
-      {recentEvents.length>0&&<Section title={`Chronicle (${recentEvents.length})`} collapsible defaultOpen accent={swatch.info}>
+      {/* ── RECENT EVENTS (glance) ───────────────────────────────────────────
+          A short recent slice of the feed, source-tagged. The full living-history
+          Chronicle (spec §8 M3c) lives under Notes → Chronicle. */}
+      {recentEvents.length>0&&<Section title={`Recent Events (${recentEvents.length})`} collapsible defaultOpen accent={swatch.info}>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
           {recentEvents.map((event,i)=>{
             const accent = event.source==='party'?PARTY : event.source==='manual'?SRC_EDIT : swatch.info;

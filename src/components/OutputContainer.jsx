@@ -1,7 +1,7 @@
 import React, { useState, useRef, lazy, Suspense } from 'react';
 import { FS } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote, Sparkles, Drama } from 'lucide-react';
+import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText } from 'lucide-react';
 import { TIER_LABELS } from './new/design';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -43,6 +43,7 @@ const SummaryTab = lazy(() => import('./new/SummaryTab'));
 // loads in parallel so toggling the flag is instant.
 const SummaryTabV2 = lazy(() => import('./new/SummaryTabV2.jsx'));
 const PlotHooksTab = lazy(() => import('./new/tabs/PlotHooksTab.jsx'));
+const ChronicleTab = lazy(() => import('./new/tabs/ChronicleTab.jsx'));
 const OverviewTab = lazy(() => import('./new/tabs/OverviewTab'));
 const EconomicsTab = lazy(() => import('./new/tabs/EconomicsTab'));
 const ServicesTab = lazy(() => import('./new/tabs/ServicesTab'));
@@ -68,7 +69,7 @@ const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 //              AI-narrated layer and only appears when narration produced it.
 //   systems  → Services, Economics, Power, Defense, Resources, Viability
 //   world    → Relationships, Daily Life, NPCs, History, Neighbours
-//   notes    → DM Notes, AI Notes
+//   notes    → DM Notes, AI Notes, Chronicle (the living-history feed, §8 M3c)
 //
 // Simulation lives in the drawer trigger near the dossier actions, not in
 // the reading tab strip. Sub-tabs the current settlement doesn't render
@@ -78,7 +79,7 @@ export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability'] },
   world:   { label: 'World',   tabs: ['relationships', 'daily_life', 'npcs', 'history', 'neighbours'] },
-  notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes'] },
+  notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle'] },
 });
 
 const TABS = [
@@ -95,6 +96,7 @@ const TABS = [
   { id: 'npcs',       label: 'NPCs',       Icon: Users },
   { id: 'dm_notes',   label: 'DM Notes',   Icon: StickyNote },
   { id: 'ai_notes',   label: 'AI Notes',   Icon: Sparkles },
+  { id: 'chronicle',  label: 'Chronicle',  Icon: ScrollText },
   // Simulation tab — meta surface. The pipeline rail used to render as
   // an always-on banner above the dossier, but that pushed the actual
   // DM-facing content below the fold. Now it lives as the last tab so
@@ -103,16 +105,22 @@ const TABS = [
 ];
 const REROLLABLE = { npcs: 'Reroll NPCs', history: 'Reroll History' };
 
-function collectRecentEvents(saveEntry, settlement) {
+function chronicleReferenceFor(saveEntry) {
+  const cs = saveEntry?.campaignState;
+  return cs?.worldState?.canonizedAt || cs?.canonizedAt || cs?.startedAt || null;
+}
+
+function collectChronicle(saveEntry, settlement) {
   // The unified Chronicle feed (spec §8 M3c): manual events + party-caused +
-  // world-pulse, merged + normalized + sorted newest-first by the shared domain
-  // helper, so screen + any future surface read one source of truth.
+  // world-pulse, merged + normalized + sorted newest-first and timed relative to
+  // canonization by the shared domain helper, so screen + any future surface
+  // read one source of truth.
   return buildChronicleFeed({
     manual:     saveEntry?.campaignState?.eventLog,
     worldPulse: saveEntry?.campaignState?.worldPulse?.events,
     worldLog:   saveEntry?.campaignState?.worldState?.eventLog,
     recent:     settlement?.recentEvents,
-  }, { limit: 40 });
+  }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
 }
 
 export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false }) {
@@ -200,7 +208,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const activeSettlement = showNarrative ? aiSettlement : rawSettlement;
   const dossierNotes = liveSaveEntry?.aiData?.dossierNotes || null;
   const aiGuidance = typeof dossierNotes?.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
-  const recentEvents = collectRecentEvents(liveSaveEntry, rawSettlement);
+  const chronicle = collectChronicle(liveSaveEntry, rawSettlement);
+  // History tab keeps a short "Recent Events" glance; the full Chronicle lives
+  // under Notes (spec §8 M3c relocation).
+  const recentEvents = chronicle.slice(0, 8);
 
   const executeAiAction = async (kind) => {
     if (kind === 'dailyLife') {
@@ -283,7 +294,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // Notes (DM/AI) are owner-private prep: hidden from the public player
     // view, but shown on saved settlements even though the dossier prose is
     // readOnly (editability is keyed on saveId inside NotesTab, not readOnly).
-    if (playerView && ['summary', 'dm_notes', 'ai_notes'].includes(t.id)) return false;
+    if (playerView && ['summary', 'dm_notes', 'ai_notes', 'chronicle'].includes(t.id)) return false;
     return true;
   });
   const allTabs = [...baseTabs,
@@ -355,6 +366,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           })
         : React.createElement(SummaryTab, { settlement: s });
       case 'plot_hooks': return React.createElement(PlotHooksTab, { settlement: s });
+      case 'chronicle':  return React.createElement(ChronicleTab, { entries: chronicle });
       case 'daily_life': return React.createElement(DailyLifeTab, { settlement: s, aiSettlement, saveId, onRequestDailyLife: () => requestAiAction('dailyLife') });
       case 'overview':   return React.createElement(OverviewTab, { settlement: s, narrativeNote: null });
       case 'economics':  return React.createElement(EconomicsTab, { settlement: s, narrativeNote: null });
