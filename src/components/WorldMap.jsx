@@ -16,7 +16,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import {
   FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, Layers, Loader, Map as MapIcon, Globe, Link as LinkIcon,
-  Newspaper, SlidersHorizontal, Zap,
+  Newspaper, SlidersHorizontal, Zap, HelpCircle,
 } from 'lucide-react';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
@@ -31,6 +31,22 @@ import { ConfirmDialog } from './primitives/Dialog.jsx';
 
 const MapOverlay     = lazy(() => import('./MapOverlay.jsx'));
 const PlacementDetailCard = lazy(() => import('./map/PlacementDetailCard.jsx'));
+import WorldMapTour from './map/WorldMapTour.jsx';
+
+// §16 — guided-help steps. Each spotlights a control by its data-tour anchor;
+// a step whose target isn't on screen (e.g. campaign-only controls) shows a
+// centered card instead of being skipped silently.
+const WORLD_MAP_TOUR_STEPS = [
+  { sel: 'mode',     title: 'Map modes', body: 'Switch between View, Terrain, Annotate, and Routes. Each mode swaps the toolbar below for tools specific to that task.' },
+  { sel: 'map',      title: 'Place & select settlements', body: 'Drag a saved canon settlement from the palette onto the map to place it, then click any placed settlement to select and inspect it.' },
+  { sel: 'campaign', title: 'Campaign', body: 'Pick the campaign this map belongs to. Settlements, relationships, and the World Pulse are all scoped to the active campaign.' },
+  { sel: 'save',     title: 'Save the map', body: 'Save your placements, layers, and viewport to the campaign so the map is exactly as you left it next time.' },
+  { sel: 'layers',   title: 'Layers', body: 'Toggle overlays — relationships, supply chains, labels, biomes, borders — to focus on what matters right now.' },
+  { sel: 'pulse',    title: 'World Pulse', body: 'Advance the realm simulation. Linked settlements ripple events to their neighbours over time.' },
+  { sel: 'news',     title: 'Wizard News', body: 'Read the in-world bulletin of recent realm events — a narrative digest of what the simulation produced.' },
+  { sel: 'help',     title: 'Replay this tour', body: 'You can reopen this walkthrough any time from this ? button. That’s the tour — happy worldbuilding!' },
+];
+
 const AnnotateToolbar = lazy(() => import('./map/AnnotateToolbar.jsx'));
 const TerrainToolbar  = lazy(() => import('./map/TerrainToolbar.jsx'));
 // P132 / M-4 promote — Routes mode contextual toolbar. Lazy because
@@ -61,6 +77,7 @@ export default function WorldMap({ onNavigate } = {}) {
   const [bridgeReady, setBridgeReady] = useState(false);
   const [toast, setToast] = useState(null);
   const [showLayersPanel, setShowLayersPanel] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);   // §16 — guided help walkthrough
   const [mapTemplates, setMapTemplates] = useState([]);
   const [currentTemplate, setCurrentTemplate] = useState('');
   const [campaignWorkspace, setCampaignWorkspace] = useState('map');
@@ -587,7 +604,9 @@ export default function WorldMap({ onNavigate } = {}) {
       }}>
         {/* Mode switcher */}
         {!showingCampaignPanel ? (
-          <ModeSwitch mapMode={mapMode} setMapMode={setMapMode} />
+          <span data-tour="mode" style={{ display: 'inline-flex' }}>
+            <ModeSwitch mapMode={mapMode} setMapMode={setMapMode} />
+          </span>
         ) : showingWizardNews ? (
           <div style={{
             display: 'flex',
@@ -631,6 +650,7 @@ export default function WorldMap({ onNavigate } = {}) {
           <>
             <FolderOpen size={14} color={activeCampaign ? GOLD : MUTED} />
             <select
+              data-tour="campaign"
               value={activeCampaignId || ''}
               onChange={e => handleSelectCampaign(e.target.value || null)}
               style={{
@@ -650,7 +670,7 @@ export default function WorldMap({ onNavigate } = {}) {
             </select>
             {activeCampaignId && (
               <>
-                <IconButton onClick={handleSaveMapToCampaign} title="Save map to campaign" primary>
+                <IconButton data-tour="save" onClick={handleSaveMapToCampaign} title="Save map to campaign" primary>
                   <Save size={13} /> Save
                 </IconButton>
                 <Suspense fallback={null}>
@@ -671,6 +691,7 @@ export default function WorldMap({ onNavigate } = {}) {
                   <MapIcon size={13} /> Map
                 </IconButton>
                 <IconButton
+                  data-tour="pulse"
                   onClick={() => setCampaignWorkspace('pulse')}
                   title="Show World Pulse"
                   active={campaignWorkspace === 'pulse'}
@@ -687,6 +708,7 @@ export default function WorldMap({ onNavigate } = {}) {
                   <SlidersHorizontal size={13} /> Rules
                 </IconButton>
                 <IconButton
+                  data-tour="news"
                   onClick={() => setCampaignWorkspace('news')}
                   title="Show Wizard News"
                   active={campaignWorkspace === 'news'}
@@ -728,11 +750,19 @@ export default function WorldMap({ onNavigate } = {}) {
         {!showingCampaignPanel && (
           <>
             <IconButton
+              data-tour="layers"
               onClick={() => setShowLayersPanel(v => !v)}
               title="Toggle layer visibility"
               active={showLayersPanel}
             >
               <Layers size={13} /> Layers
+            </IconButton>
+            <IconButton
+              data-tour="help"
+              onClick={() => setTourOpen(true)}
+              title="Guided tour of the world map"
+            >
+              <HelpCircle size={13} /> Help
             </IconButton>
             {/* Canon-only is enforced (only canon settlements can be placed),
                 so the former Canon / All Phases toggle was removed. */}
@@ -843,6 +873,7 @@ export default function WorldMap({ onNavigate } = {}) {
         >
           <iframe
             ref={iframeRef}
+            data-tour="map"
             src={FMG_URL}
             title="Fantasy Map"
             style={{
@@ -981,6 +1012,9 @@ export default function WorldMap({ onNavigate } = {}) {
           onClose={() => setShowSimulationRules(false)}
         />
       </Suspense>
+
+      {/* §16 — guided help walkthrough */}
+      <WorldMapTour open={tourOpen} steps={WORLD_MAP_TOUR_STEPS} onClose={() => setTourOpen(false)} />
 
       {/* Spinner animation */}
       <style>{`
