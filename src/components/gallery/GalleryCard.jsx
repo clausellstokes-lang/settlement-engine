@@ -20,6 +20,7 @@ import {
   swatch,
 } from '../theme.js';
 import { formatDate, formatNumber, human, shareGalleryDossier } from './galleryUtils.js';
+import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
 import GalleryImage from './GalleryImage.jsx';
 import VoteButton from './VoteButton.jsx';
 
@@ -133,19 +134,21 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
           {meta.join(' / ')}
         </div>
         {item.description && (
-          <p style={{
-            margin: 0,
-            color: BODY,
-            fontFamily: sans,
-            fontSize: FS.xs,
-            lineHeight: 1.45,
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-          }}>
-            {item.description}
-          </p>
+          <div
+            className="sf-rich"
+            style={{
+              margin: 0,
+              color: BODY,
+              fontFamily: sans,
+              fontSize: FS.xs,
+              lineHeight: 1.45,
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+            dangerouslySetInnerHTML={{ __html: sanitizeGalleryHtml(item.description) }}
+          />
         )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
           {tags.map((tag, index) => (

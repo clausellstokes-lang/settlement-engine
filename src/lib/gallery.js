@@ -411,7 +411,9 @@ function normalizeGalleryFilters(filters = {}) {
 }
 
 function galleryMetadataPatch(metadata = {}) {
-  const description = String(metadata.description || '').trim().slice(0, 1200);
+  // Descriptions are now sanitized rich-text HTML (§4c), so allow more room
+  // than the old plaintext cap; the server/render re-sanitize keeps it safe.
+  const description = String(metadata.description || '').trim().slice(0, 4000);
   const imageUrl = String(metadata.imageUrl || '').trim().slice(0, 1000);
   const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
   const tags = Array.isArray(metadata.tags)

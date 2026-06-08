@@ -19,6 +19,7 @@ import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save } from 
 import { useStore } from '../store/index.js';
 import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
 import { validateDossier } from '../domain/validation/consistency.js';
+import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import { GOLD, BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY } from './theme.js';
 
 const MUTED = '#6b5340';
@@ -275,26 +276,7 @@ export default function ShareToGallery({
         </span>
       </label>
       <Field label="Public description">
-        <textarea
-          value={description}
-          onChange={event => setDescription(event.target.value)}
-          rows={3}
-          maxLength={1200}
-          placeholder="A short public note for DMs browsing the gallery."
-          style={{
-            width: '100%',
-            boxSizing: 'border-box',
-            resize: 'vertical',
-            border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
-            background: CARD,
-            color: INK,
-            fontFamily: sans,
-            fontSize: FS.xs,
-            lineHeight: 1.45,
-            padding: SP.sm,
-          }}
-        />
+        <GalleryDescriptionEditor value={description} onChange={setDescription} />
       </Field>
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: SP.sm }}>
         <Field label="Image URL">

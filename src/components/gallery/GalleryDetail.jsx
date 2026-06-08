@@ -28,6 +28,7 @@ import {
 } from '../theme.js';
 import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier } from './galleryUtils.js';
 import { useStore } from '../../store/index.js';
+import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
 import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
 import GalleryImage from './GalleryImage.jsx';
@@ -154,9 +155,11 @@ export default function GalleryDetail({
               {meta.join(' / ')}
             </div>
             {dossier.description ? (
-              <p style={{ margin: 0, color: BODY, fontFamily: serif_, fontSize: FS.lg, lineHeight: 1.55, fontStyle: 'italic' }}>
-                {dossier.description}
-              </p>
+              <div
+                className="sf-rich"
+                style={{ margin: 0, color: BODY, fontFamily: serif_, fontSize: FS.lg, lineHeight: 1.55 }}
+                dangerouslySetInnerHTML={{ __html: sanitizeGalleryHtml(dossier.description) }}
+              />
             ) : (
               <p style={{ margin: 0, color: MUTED, fontFamily: serif_, fontSize: FS.md, lineHeight: 1.5, fontStyle: 'italic' }}>
                 No public creator description was added.
