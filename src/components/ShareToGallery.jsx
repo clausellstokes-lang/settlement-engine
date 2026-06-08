@@ -18,6 +18,7 @@ import { useMemo, useState } from 'react';
 import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
+import { validateDossier } from '../domain/validation/consistency.js';
 import { GOLD, BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY } from './theme.js';
 
 const MUTED = '#6b5340';
@@ -142,6 +143,13 @@ export default function ShareToGallery({
   async function handlePublish() {
     if (!canonReady) {
       setError('Canonize the campaign world before sharing this dossier publicly.');
+      return;
+    }
+    // Trust gate (feature doc §1b): never publish a dossier whose facts
+    // contradict across surfaces — public content must be internally consistent.
+    const { blocking } = validateDossier(settlement);
+    if (blocking.length > 0) {
+      setError(`Can't publish yet — ${blocking.length} consistency issue${blocking.length === 1 ? '' : 's'} to resolve: ${blocking.map(b => b.description).join(' · ')}`);
       return;
     }
     setBusy(true); setError(null);

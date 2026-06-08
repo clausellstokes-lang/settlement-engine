@@ -8,6 +8,7 @@ const generateSettlementPDF = (...args) =>
   import('../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import {getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS} from '../lib/relationshipGraph.js';
 import { RELATIONSHIP_SELECTIONS } from '../domain/relationships/canonicalRelationship.js';
+import { validateDossier } from '../domain/validation/consistency.js';
 import { useStore } from '../store/index.js';
 
 const OutputContainer = lazy(() => import('./OutputContainer'));
@@ -425,6 +426,16 @@ export default function SettlementDetail({
     if (exporting) return;
     setPdfError(null);
     setExporting(true);
+    // Trust gate (feature doc §1b): log cross-surface contradictions for
+    // debugging. Export is the user's own private doc, so we surface — never
+    // block — on issues (publishing to the public gallery is the hard gate).
+    try {
+      const { blocking } = validateDossier(detail.settlement);
+      if (blocking.length > 0) {
+        console.warn(`[dossier consistency] exporting with ${blocking.length} unresolved issue(s):`,
+          blocking.map(b => b.description));
+      }
+    } catch { /* a validator fault must never break export */ }
     try {
       const liveStore = useStore.getState();
       await generateSettlementPDF(detail.settlement, {
