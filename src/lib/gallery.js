@@ -15,6 +15,7 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { toPublicSafe } from '../domain/display/publicSafe.js';
+import { getDeviceToken } from './deviceToken.js';
 
 const LIST_PAGE_SIZE = 24;
 const DEFAULT_SORT = 'relevant';
@@ -195,7 +196,10 @@ export async function fetchPublicDossier(slug) {
 
 async function bumpPublicView(slug) {
   if (!isConfigured) return;
-  const { error } = await supabase.rpc('bump_public_view', { slug });
+  // Pass the anon device token so the server counts at most one view per
+  // device per day (§6 dedup). Signed-in viewers are deduped by their uid
+  // server-side regardless; the token covers signed-out readers.
+  const { error } = await supabase.rpc('bump_public_view', { slug, viewer_token: getDeviceToken() });
   if (error && import.meta?.env?.DEV) {
     console.warn('[gallery] bump_public_view failed:', error.message);
   }
