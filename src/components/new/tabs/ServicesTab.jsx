@@ -48,6 +48,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
   const searchResults = query ? allServices.filter(s => s.text.includes(query)) : null;
   const missing = (J0[tier] || []).filter(k => !services?.[k]?.length);
   const totalCount = allServices.length;
+  const hasCustom = allServices.some(s => typeof s.svc === 'object' && (s.svc.custom === true || s.svc.source === 'custom'));
 
   // Per-category impairment counts
   const catStats = {};
@@ -237,7 +238,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
         </div>
 
         <p style={{fontSize:FS.xs,color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
-          {totalCount} services · {catOrder.length} categories{totalImpaired>0?` · ${totalImpaired} impaired`:''}
+          {totalCount} services · {catOrder.length} categories{totalImpaired>0?` · ${totalImpaired} impaired`:''}{hasCustom?' · ✦ custom':''}
         </p>
       </>}
     </div>

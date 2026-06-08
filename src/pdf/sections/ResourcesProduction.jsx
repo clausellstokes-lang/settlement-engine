@@ -147,6 +147,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
               hint="consumed locally · export potential reduced"
               tone="bad"
               items={r.nearbyDepleted}
+              customNames={r.nearbyCustom}
             />
           )}
           {r.nearbyAbundant?.length > 0 && (
@@ -155,6 +156,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
               hint="full export potential"
               tone="good"
               items={r.nearbyAbundant}
+              customNames={r.nearbyCustom}
             />
           )}
           {r.availableCommodities?.length > 0 && (
@@ -391,7 +393,8 @@ function ChainGroup({ title, tone, rows }) {
   );
 }
 
-function ResourceRow({ kicker, hint, tone, items }) {
+function ResourceRow({ kicker, hint, tone, items, customNames = [] }) {
+  const customSet = new Set(customNames);
   return (
     <View style={{ marginBottom: 4 }}>
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 1 }}>
@@ -405,9 +408,27 @@ function ResourceRow({ kicker, hint, tone, items }) {
         )}
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3 }}>
-        {items.map((it, i) => (
-          <Tag key={`r-${kicker}-${i}`} tone={tone}>{humanize(label(it))}</Tag>
-        ))}
+        {items.map((it, i) => {
+          // §14 — custom resources render gold with a ✦ marker.
+          if (customSet.has(it)) {
+            return (
+              <View
+                key={`r-${kicker}-${i}`}
+                style={{
+                  flexDirection: 'row', alignItems: 'center',
+                  backgroundColor: palette.goldBg,
+                  border: `0.5pt solid ${palette.gold}`,
+                  borderRadius: 2, paddingHorizontal: 5, paddingVertical: 1,
+                  marginRight: 3, marginBottom: 2,
+                }}
+              >
+                <Text style={{ ...type.pill, fontSize: pt['8'], color: palette.gold }}>{humanize(label(it))}</Text>
+                <Text style={{ fontSize: pt['7.5'], color: palette.gold, marginLeft: 3 }}>✦</Text>
+              </View>
+            );
+          }
+          return <Tag key={`r-${kicker}-${i}`} tone={tone}>{humanize(label(it))}</Tag>;
+        })}
       </View>
     </View>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FS, swatch, MUTED } from '../../theme.js';
+import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {sans, Section, Empty, TabIntro} from '../Primitives';
 
 import {isMobile} from '../tabConstants';
@@ -124,18 +124,23 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           const allRes = [...(r?.config?.nearbyResources || [])].sort();
           const depleted = [...(r?.config?.nearbyResourcesDepleted || [])].sort();
           const abundant = allRes.filter(rk => !depleted.includes(rk));
+          const customSet = new Set(r?.config?.nearbyResourcesCustom || []);
           const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
           return <>
             {depleted.length>0&&<div style={{marginBottom:8}}>
               <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}> DEPLETED. Consumed locally, export potential reduced</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {depleted.map((rk,i)=><span key={i} style={{fontSize:FS.xs,color:swatch['#8B3000'],background:swatch['#FFF3ED'],border:'1px solid #e08040',borderRadius:4,padding:'2px 9px',fontWeight:600}}> {fmtKey(rk)}</span>)}
+                {depleted.map((rk,i)=>customSet.has(rk)
+                  ? <span key={i} style={{fontSize:FS.xs,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:4,padding:'2px 9px',fontWeight:600,display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
+                  : <span key={i} style={{fontSize:FS.xs,color:swatch['#8B3000'],background:swatch['#FFF3ED'],border:'1px solid #e08040',borderRadius:4,padding:'2px 9px',fontWeight:600}}> {fmtKey(rk)}</span>)}
               </div>
             </div>}
             {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
               <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>✦ ABUNDANT. Full export potential</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {abundant.map((rk,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch.successBg,border:'1px solid #88c880',borderRadius:4,padding:'2px 9px'}}>{fmtKey(rk)}</span>)}
+                {abundant.map((rk,i)=>customSet.has(rk)
+                  ? <span key={i} style={{fontSize:FS.xs,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:4,padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
+                  : <span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch.successBg,border:'1px solid #88c880',borderRadius:4,padding:'2px 9px'}}>{fmtKey(rk)}</span>)}
               </div>
             </div>}
             {res.availableResources?.length>0&&<div style={{paddingTop:6,borderTop:'1px solid #e8dcc8'}}>

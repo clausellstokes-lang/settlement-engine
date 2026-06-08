@@ -14,12 +14,44 @@
  * Pure data + selectors; no React/store.
  */
 
-// Built-in categories per type. Institutions/services use the 11 canonical
-// institutionalCatalog second-level keys (Adventuring … Religious); resources +
-// trade goods keep their generation-truth enums.
+// Services group by buyable-service TYPE (the engine's availableServices keys) —
+// the SAME way generated services are grouped in the dossier. The author picks
+// the type at creation and the generator drops the custom service into that
+// bucket, so it lands beside the built-in services of the same type. The stored
+// category is the human label; serviceTypeKeyFromCategory() maps it to the key.
+export const SERVICE_TYPES = Object.freeze([
+  { key: 'food',          label: 'Food & Drink' },
+  { key: 'lodging',       label: 'Lodging' },
+  { key: 'healing',       label: 'Healing' },
+  { key: 'equipment',     label: 'Equipment' },
+  { key: 'information',   label: 'Information' },
+  { key: 'transport',     label: 'Transportation' },
+  { key: 'legal',         label: 'Legal & Financial' },
+  { key: 'employment',    label: 'Employment' },
+  { key: 'entertainment', label: 'Entertainment' },
+  { key: 'magic',         label: 'Magical Services' },
+  { key: 'criminal',      label: 'Criminal Services' },
+]);
+
+const _SVC_KEYS = new Set(SERVICE_TYPES.map((t) => t.key));
+const _SVC_BY_LABEL = new Map(SERVICE_TYPES.map((t) => [t.label.toLowerCase(), t.key]));
+
+/** Map a custom service's category (label OR key) to its availableServices key.
+ *  Returns null for an unrecognized value (caller picks a fallback bucket). */
+export function serviceTypeKeyFromCategory(category) {
+  if (!category) return null;
+  const c = String(category).trim().toLowerCase();
+  if (_SVC_KEYS.has(c)) return c;
+  return _SVC_BY_LABEL.get(c) || null;
+}
+
+// Built-in categories per type. Institutions use the 11 canonical
+// institutionalCatalog second-level keys (Adventuring … Religious); services use
+// the buyable-service TYPE labels (so they group like generated services);
+// resources + trade goods keep their generation-truth enums.
 export const BUILTIN_CATEGORIES = Object.freeze({
   institutions: ['Adventuring', 'Crafts', 'Criminal', 'Defense', 'Economy', 'Entertainment', 'Exotic', 'Government', 'Infrastructure', 'Magic', 'Religious'],
-  services:     ['Adventuring', 'Crafts', 'Criminal', 'Defense', 'Economy', 'Entertainment', 'Exotic', 'Government', 'Infrastructure', 'Magic', 'Religious'],
+  services:     SERVICE_TYPES.map((t) => t.label),
   resources:    ['water', 'land', 'special', 'subterranean'],
   tradeGoods:   ['Agricultural', 'Raw Materials', 'Manufactured', 'Luxury', 'Food/Processed', 'Services'],
 });

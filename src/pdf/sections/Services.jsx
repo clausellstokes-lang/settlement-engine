@@ -161,11 +161,33 @@ function CategoryCard({ cat }) {
         </Text>
       </View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        {cat.items.map((svc, i) => (
-          <Pill key={`svc-${cat.key}-${i}`} tone={tone}>
-            {svcLabel(svc)}
-          </Pill>
-        ))}
+        {cat.items.map((svc, i) => {
+          // §14 — custom services render gold (the print equivalent of the
+          // web's shimmering pill) with a ✦ marker.
+          const isCustom = svc && typeof svc === 'object' && (svc.custom === true || svc.source === 'custom');
+          if (isCustom) {
+            return (
+              <View
+                key={`svc-${cat.key}-${i}`}
+                style={{
+                  flexDirection: 'row', alignItems: 'center',
+                  backgroundColor: palette.goldBg,
+                  border: `0.5pt solid ${palette.gold}`,
+                  borderRadius: 2, paddingHorizontal: 6, paddingVertical: 2,
+                  marginRight: 4, marginBottom: 2,
+                }}
+              >
+                <Text style={{ ...type.pill, fontSize: pt['8.5'], color: palette.gold }}>{svcLabel(svc)}</Text>
+                <Text style={{ fontSize: pt['8'], color: palette.gold, marginLeft: 3 }}>✦</Text>
+              </View>
+            );
+          }
+          return (
+            <Pill key={`svc-${cat.key}-${i}`} tone={tone}>
+              {svcLabel(svc)}
+            </Pill>
+          );
+        })}
       </View>
     </View>
   );

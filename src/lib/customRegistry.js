@@ -37,6 +37,7 @@ import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 
 export const REGISTRY_CATEGORIES = [
   'institutions',
+  'services',
   'resources',
   'stressors',
   'tradeGoods',
@@ -44,9 +45,11 @@ export const REGISTRY_CATEGORIES = [
 ];
 
 /** Map our registry categories to the customContent slice keys (where they
- *  differ - most are 1:1). resourceChains is prebuilt-only for now. */
+ *  differ - most are 1:1). resourceChains is prebuilt-only for now. services
+ *  are custom-only (the engine derives prebuilt services from institutions). */
 export const CUSTOM_SLICE_KEY_FOR = {
   institutions:   'institutions',
+  services:       'services',
   resources:      'resources',
   stressors:      'stressors',
   tradeGoods:     'tradeGoods',
@@ -257,6 +260,7 @@ function getPrebuiltEntries() {
   if (_prebuiltCache) return _prebuiltCache;
   _prebuiltCache = {
     institutions:   _safeEnum(enumeratePrebuiltInstitutions, 'institutions'),
+    services:       [],  // services are custom-only; prebuilt ones derive from institutions
     resources:      _safeEnum(enumeratePrebuiltResources, 'resources'),
     stressors:      _safeEnum(enumeratePrebuiltStressors, 'stressors'),
     tradeGoods:     _safeEnum(enumeratePrebuiltTradeGoods, 'tradeGoods'),
@@ -328,6 +332,7 @@ export function buildRegistry(customContent) {
   const prebuilt = getPrebuiltEntries();
   const custom = {
     institutions:   enumerateCustom('institutions', customContent),
+    services:       enumerateCustom('services', customContent),
     resources:      enumerateCustom('resources', customContent),
     stressors:      enumerateCustom('stressors', customContent),
     tradeGoods:     enumerateCustom('tradeGoods', customContent),

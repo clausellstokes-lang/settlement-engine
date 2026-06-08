@@ -741,6 +741,7 @@ function resourcesSlice(active) {
     nearbyResources:    allNearby,
     nearbyDepleted:     depleted,
     nearbyAbundant:     abundant,
+    nearbyCustom:       cfg.nearbyResourcesCustom || [],   // §14 — gold-tint these
     availableCommodities: ra?.availableResources || s?.availableResources || [],
     exportPotential:    ra?.exportPotential || s?.exportPotential || [],
     priorityNotes:      v?.priorityNotes || [],

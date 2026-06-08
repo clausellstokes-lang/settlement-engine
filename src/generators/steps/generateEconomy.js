@@ -19,12 +19,15 @@ import { generateAvailableServices } from '../servicesGenerator.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 import { deriveSupplyChainState } from '../../domain/supplyChainState.js';
+import { customDeps } from '../../lib/dependencyEngine.js';
+import { passesTierGate } from '../../domain/customContentSchema.js';
+import { serviceTypeKeyFromCategory } from '../../domain/customCategories.js';
 
 registerStep('generateEconomy', {
   deps: ['isolationPass', 'resolveNeighbour'],
   provides: ['economicState', 'spatialLayout', 'availableServices'],
   phase: 'economy',
-}, (ctx) => {
+}, (ctx, rng) => {
   const {
     tier, institutions, tradeRoute, effectiveConfig,
     goodsToggles, servicesToggles,
@@ -45,6 +48,39 @@ registerStep('generateEconomy', {
     tier, institutions, servicesToggles,
     { ...effectiveConfig, _tradeRoute: tradeRoute }
   );
+
+  // §14 — inject the user's CUSTOM services into the buyable-services map.
+  // Mirrors the custom-institution injection (assembleInstitutions): the list is
+  // tier-filtered upstream, we honour each item's gate again defensively;
+  // essential/critical ones always appear, the rest roll a modest chance. A
+  // service is GROUPED by its service TYPE (category → availableServices key) and
+  // PRESENTED BY its provider institution (providedBy refId → name), matching how
+  // generated services are attributed. Marked custom so the dossier tints it
+  // gold. Stable name order keeps rng deterministic; a no-op consuming zero rng
+  // when the user has no custom services.
+  const customServices = (customDeps.registry().listCustom?.('services') || [])
+    .slice()
+    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+  for (const entry of customServices) {
+    const item = entry.raw || {};
+    const name = entry.name;
+    if (!name) continue;
+    if (!passesTierGate(item, tier)) continue;
+    const essential = item.essential === true || item.criticality === 'critical';
+    if (!essential && !rng.chance(0.3)) continue;
+    const typeKey = serviceTypeKeyFromCategory(item.category || entry.category) || 'equipment';
+    const bucket = (availableServices[typeKey] = availableServices[typeKey] || []);
+    if (bucket.some(s => (typeof s === 'string' ? s : s?.name) === name)) continue;
+    const providerRef = Array.isArray(item.providedBy) ? item.providedBy[0] : item.providedBy;
+    const institution = providerRef ? customDeps.resolveInstitutionRequirement(providerRef) : '';
+    bucket.push({
+      name,
+      desc: item.description || '',
+      institution: institution || '',
+      custom: true,
+      source: 'custom',
+    });
+  }
 
   // ── Trace recording (Tier 4.3) ────────────────────────────────────────
   // Emit one trace per active supply chain. Causes describe what

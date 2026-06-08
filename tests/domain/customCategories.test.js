@@ -1,14 +1,37 @@
 import { describe, it, expect } from 'vitest';
-import { BUILTIN_CATEGORIES, selectCustomCategories, categoryOptions } from '../../src/domain/customCategories.js';
+import { BUILTIN_CATEGORIES, SERVICE_TYPES, serviceTypeKeyFromCategory, selectCustomCategories, categoryOptions } from '../../src/domain/customCategories.js';
 
 describe('BUILTIN_CATEGORIES', () => {
-  it('institutions + services use the 11 canonical generation categories', () => {
+  it('institutions use the 11 canonical generation categories', () => {
     expect(BUILTIN_CATEGORIES.institutions).toEqual([
       'Adventuring', 'Crafts', 'Criminal', 'Defense', 'Economy', 'Entertainment',
       'Exotic', 'Government', 'Infrastructure', 'Magic', 'Religious',
     ]);
-    expect(BUILTIN_CATEGORIES.services).toEqual(BUILTIN_CATEGORIES.institutions);
     expect(BUILTIN_CATEGORIES.resources).toEqual(['water', 'land', 'special', 'subterranean']);
+  });
+
+  it('services group by buyable-service TYPE (labels), not institution categories', () => {
+    // §14 — a custom service picks its service type at creation so it groups in
+    // the dossier exactly like a generated service.
+    expect(BUILTIN_CATEGORIES.services).toEqual(SERVICE_TYPES.map((t) => t.label));
+    expect(BUILTIN_CATEGORIES.services).toContain('Food & Drink');
+    expect(BUILTIN_CATEGORIES.services).not.toContain('Crafts'); // institution-only
+  });
+});
+
+describe('serviceTypeKeyFromCategory', () => {
+  it('maps a service-type label to its availableServices key', () => {
+    expect(serviceTypeKeyFromCategory('Food & Drink')).toBe('food');
+    expect(serviceTypeKeyFromCategory('Magical Services')).toBe('magic');
+    expect(serviceTypeKeyFromCategory('Legal & Financial')).toBe('legal');
+  });
+
+  it('accepts a bare key, is case-insensitive, and returns null for unknown', () => {
+    expect(serviceTypeKeyFromCategory('healing')).toBe('healing');
+    expect(serviceTypeKeyFromCategory('FOOD & DRINK')).toBe('food');
+    expect(serviceTypeKeyFromCategory('Crafts')).toBeNull(); // institution category, not a service type
+    expect(serviceTypeKeyFromCategory('')).toBeNull();
+    expect(serviceTypeKeyFromCategory(null)).toBeNull();
   });
 });
 

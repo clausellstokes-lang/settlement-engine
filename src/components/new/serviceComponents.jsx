@@ -1,4 +1,4 @@
-import { FS, swatch } from '../theme.js';
+import { FS, swatch, GOLD_TINT, GOLD_DEEP } from '../theme.js';
 
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
@@ -6,6 +6,9 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   const name  = typeof svc === 'string' ? svc : svc?.name || '';
   const desc  = typeof svc === 'object' ? (svc.desc || '') : '';
   const inst  = typeof svc === 'object' ? (svc.institution || '') : '';
+  // §14 — services the user authored (or produced by a custom institution) carry
+  // a `custom`/`source` flag; the dossier tints their row gold with a ✦ marker.
+  const isCustom = typeof svc === 'object' && (svc.custom === true || svc.source === 'custom');
   const isImp = impaired?.has(name) || impaired?.has(inst);
   const isDeg = !isImp && (degraded?.has(name) || degraded?.has(inst));
   const isVul = !isImp && !isDeg && (vulnerable?.has(name) || vulnerable?.has(inst));
@@ -18,14 +21,17 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   return (
     <div style={{
       display:'flex', alignItems:'flex-start', gap:8, padding:'5px 8px',
-      background: isImp?'#fdf4f4': isDeg?'#fdf8f0': isCriminal?'#1a0808':'#faf8f4',
-      borderLeft:`2px solid ${statusColor||accent}`,
+      ...(isCustom && !isImp && !isDeg
+        ? { ...GOLD_TINT, borderWidth:1, borderStyle:'solid' }
+        : { background: isImp?'#fdf4f4': isDeg?'#fdf8f0': isCriminal?'#1a0808':'#faf8f4',
+            borderLeft:`2px solid ${statusColor||accent}` }),
       borderRadius:4, marginBottom:3,
       opacity: isImp?0.9:1,
     }}>
       <div style={{flex:1,minWidth:0}}>
         <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
           <span style={{fontSize: FS['12.5'],fontWeight:600,color:isCriminal?'#c06060':'#1c1409'}}>{name}</span>
+          {isCustom&&<span style={{fontSize:FS.micro,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em',flexShrink:0}}>✦</span>}
           {statusLabel&&<span style={{fontSize:FS.micro,fontWeight:800,color:statusColor,background:`${statusColor}18`,borderRadius:3,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}
           {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:FS.micro,fontWeight:600,color:swatch.inkMag3,background:swatch['#F0E8D8'],border:'1px solid #c8b89a',borderRadius:3,padding:'0 5px',flexShrink:0}}> {depthLabel}</span>}
         </div>

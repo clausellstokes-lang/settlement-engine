@@ -11,6 +11,8 @@ import { registerStep } from '../pipeline.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { getCompatibleResources, getDefaultResources } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
+import { customDeps } from '../../lib/dependencyEngine.js';
+import { passesTierGate } from '../../domain/customContentSchema.js';
 
 const DEPLETION_PROB = {
   thorp: 0.05, hamlet: 0.10, village: 0.20,
@@ -26,7 +28,7 @@ const RARE_RESOURCES = { 'ancient_ruins': 0.15, 'magical_node': 0.15 };
 
 registerStep('resolveResources', {
   deps: ['resolveConfig'],
-  provides: ['nearbyResources', 'nearbyResourcesDepleted'],
+  provides: ['nearbyResources', 'nearbyResourcesDepleted', 'nearbyResourcesCustom'],
   phase: 'config',
 }, (ctx, rng) => {
   const { tier, tradeRoute, resolvedTerrain, effectiveConfig } = ctx;
@@ -111,16 +113,50 @@ registerStep('resolveResources', {
     }
   }
 
+  // §14 — inject the user's CUSTOM resources into the nearby-resource list.
+  // Mirrors the custom-institution/service injection: tier-gated, essential ones
+  // always appear, the rest roll a modest chance. Custom resources are authored
+  // as present, so they join the abundant set (never auto-depleted). Tracked in
+  // nearbyResourcesCustom so the dossier (web + PDF) can tint them gold. Stable
+  // name order keeps rng deterministic; a no-op consuming zero rng when the user
+  // has no custom resources.
+  const nearbyResourcesCustom = [];
+  const customResources = (customDeps.registry().listCustom?.('resources') || [])
+    .slice()
+    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+  for (const entry of customResources) {
+    const item = entry.raw || {};
+    const name = entry.name;
+    if (!name || nearbyResources.includes(name)) continue;
+    if (!passesTierGate(item, tier)) continue;
+    const essential = item.essential === true || item.criticality === 'critical';
+    if (!essential && !rng.chance(0.3)) continue;
+    nearbyResources = [...nearbyResources, name];
+    nearbyResourcesCustom.push(name);
+    recordTrace(ctx, {
+      targetType: 'resource',
+      targetId:   `resource.${name}`,
+      step:       'resolveResources',
+      result:     'present',
+      causes: [{ source: 'custom', effect: 'authored by you',
+                 reason: `"${name}" is a custom resource you added to the compendium.` }],
+      downstreamEffects: [],
+    });
+  }
+
   // Write back into effectiveConfig for downstream steps
   effectiveConfig.nearbyResources = nearbyResources;
   effectiveConfig.nearbyResourcesDepleted = nearbyResourcesDepleted;
+  effectiveConfig.nearbyResourcesCustom = nearbyResourcesCustom;
 
   // Tier 2.1 — emit one trace per nearby resource so downstream
   // consumers (assembleInstitutions reads these to bias institution
   // selection) and human readers can answer "why is this a fishing
   // town?" / "why does this town have a mine?"
   const depletedSet = new Set(nearbyResourcesDepleted);
+  const customResourceSet = new Set(nearbyResourcesCustom);
   for (const resourceKey of nearbyResources) {
+    if (customResourceSet.has(resourceKey)) continue; // §14: custom resources traced at injection
     const meta = RESOURCE_DATA[resourceKey] || {};
     const depleted = depletedSet.has(resourceKey);
     recordTrace(ctx, {
@@ -148,5 +184,5 @@ registerStep('resolveResources', {
     });
   }
 
-  return { nearbyResources, nearbyResourcesDepleted };
+  return { nearbyResources, nearbyResourcesDepleted, nearbyResourcesCustom };
 });
