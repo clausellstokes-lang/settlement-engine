@@ -73,8 +73,8 @@ export const FLAGS = Object.freeze({
     description: 'Render PDF supply chains as the web visual node-flow (SupplyChainFlow) instead of flat PROC/OUT/DEP rows. PROMOTED default-on; flag retained as killswitch.',
   },
   versionHistory: {
-    default: false,
-    description: 'P109 / E-5: per-settlement version timeline + diff + revert. Cartographer-gated.',
+    default: true,
+    description: 'P109 / E-5: per-settlement version timeline + diff + revert. Cartographer-gated. PROMOTED default-on after revert-mutation soak (P133).',
   },
   mapDropPreview: {
     default: true,
