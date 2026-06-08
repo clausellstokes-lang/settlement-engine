@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, HeartHandshake, Flag } from 'lucide-react';
-import { CONTENT_GROUPS, CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, CONTENT_TAGS, COMMODITY_TYPES } from '../domain/customContentSchema.js';
+import { CONTENT_GROUPS, CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES } from '../domain/customContentSchema.js';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {useStore} from '../store/index.js';
 import DeleteConfirmation from './DeleteConfirmation';
@@ -613,7 +613,12 @@ function CustomContentManager({ search }) {
 
   const catDef = CUSTOM_CATEGORIES.find(c => c.key === activeCat);
   const items = customContent[activeCat] || [];
-  const filtered = search ? items.filter(i => (i.name||'').toLowerCase().includes(search) || (i.description||'').toLowerCase().includes(search)) : items;
+  const filtered = search ? items.filter(i => {
+    const tagStr = Array.isArray(i.tags) ? i.tags.join(' ') : String(i.tags || '');
+    return (i.name||'').toLowerCase().includes(search)
+        || (i.description||'').toLowerCase().includes(search)
+        || tagStr.toLowerCase().includes(search);
+  }) : items;
 
   // ── Premium gate ─────────────────────────────────────────────────────────
   // Free / anon users see an upsell card. If they have grandfathered local
@@ -725,8 +730,8 @@ function CustomContentManager({ search }) {
       case 'fortification': return <select {...shared} value={val||'none'}>{['none','basic','moderate','heavy','legendary'].map(f=><option key={f} value={f}>{f}</option>)}</select>;
       case 'militiaLevel': return <select {...shared} value={val||'none'}>{['none','volunteer','trained','professional','elite'].map(m=><option key={m} value={m}>{m}</option>)}</select>;
       case 'factionCount': return <input {...shared} type="number" min="1" max="10" placeholder="Number of factions"/>;
-      case 'tags': return renderPills('tags', CONTENT_TAGS, swatch.magic);
-      case 'commodities': return renderPills('commodities', COMMODITY_TYPES, '#1a5a28');
+      case 'tags': return <input {...shared} placeholder="Comma-separated keywords (e.g. ancient, foreign, ceremonial) — used for search" onChange={e=>setDraft(d=>({...d,tags:e.target.value}))}/>;
+      case 'commodities': return <input {...shared} placeholder="Comma-separated (e.g. iron ore, coal, gemstones)" onChange={e=>setDraft(d=>({...d,commodities:e.target.value}))}/>;
       case 'affects': return renderPills('affects', STRESSOR_AFFECT_CATEGORIES, '#8b1a1a');
       case 'description': return <textarea {...shared} rows={2} placeholder="Description..." style={{...shared.style, resize:'vertical'}}/>;
       default: return <input {...shared} placeholder={field.charAt(0).toUpperCase()+field.slice(1)}/>;

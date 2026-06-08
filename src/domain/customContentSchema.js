@@ -76,22 +76,6 @@ export const POWER_AUTHORITIES = Object.freeze([
 ]);
 export const POWER_AUTHORITY_KEYS = Object.freeze(POWER_AUTHORITIES.map((a) => a.key));
 
-// Controlled tag vocabulary (selectable, not free text) — descriptors that map
-// onto the same domains as CONTENT_GROUPS, so tags stay meaningful to the
-// generator instead of arbitrary strings.
-export const CONTENT_TAGS = Object.freeze([
-  'essential', 'civic', 'legal', 'administrative', 'sacred', 'arcane',
-  'martial', 'defensive', 'mercantile', 'agricultural', 'industrial', 'craft',
-  'illicit', 'scholarly', 'medical', 'cultural', 'logistical', 'noble',
-]);
-
-// Controlled commodity vocabulary for resources/goods (selectable, not free text).
-export const COMMODITY_TYPES = Object.freeze([
-  'grain', 'livestock', 'fish', 'timber', 'stone', 'ore', 'metal', 'gems',
-  'salt', 'textiles', 'leather', 'spices', 'wine', 'tools', 'weapons',
-  'pottery', 'herbs', 'furs', 'reagents', 'oil',
-]);
-
 // Settlement tiers, smallest → largest, for tier gates (min/max).
 export const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 
