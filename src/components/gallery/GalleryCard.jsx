@@ -1,4 +1,5 @@
-import { Eye, MessageCircle, Sparkles, ThumbsUp } from 'lucide-react';
+import { useState } from 'react';
+import { Check, Eye, MessageCircle, Share2, Sparkles, ThumbsUp } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -18,11 +19,16 @@ import {
   serif_,
   swatch,
 } from '../theme.js';
-import { formatDate, formatNumber, human } from './galleryUtils.js';
+import { formatDate, formatNumber, human, shareGalleryDossier } from './galleryUtils.js';
 import GalleryImage from './GalleryImage.jsx';
 import VoteButton from './VoteButton.jsx';
 
 export default function GalleryCard({ item, onOpen, onVote, voting }) {
+  const [shared, setShared] = useState(false);
+  const onShare = async () => {
+    const r = await shareGalleryDossier({ slug: item.slug, name: item.name });
+    if (r.ok) { setShared(true); setTimeout(() => setShared(false), 1600); }
+  };
   const meta = [
     TIER_LABELS[item.tier] || human(item.tier),
     item.population ? `${formatNumber(item.population)} pop` : null,
@@ -167,6 +173,14 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
             <MessageCircle size={12} /> {formatNumber(item.commentCount)}
           </span>
+          <button
+            type="button"
+            onClick={onShare}
+            title="Share this dossier"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, padding: 0 }}
+          >
+            {shared ? <Check size={12} /> : <Share2 size={12} />} {shared ? 'Copied' : 'Share'}
+          </button>
           <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
             {formatDate(item.updatedAt || item.publishedAt)}
           </span>

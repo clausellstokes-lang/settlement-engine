@@ -76,3 +76,40 @@ export function activeFilterCount(filters = {}) {
     return sum + (value ? 1 : 0);
   }, 0);
 }
+
+/** Public URL for a gallery dossier slug (matches ShareToGallery's link form). */
+export function galleryUrlFor(slug) {
+  const path = `/gallery?slug=${encodeURIComponent(slug || '')}`;
+  if (typeof window === 'undefined') return path;
+  return `${window.location.origin}${path}`;
+}
+
+/**
+ * Share a gallery dossier (§7): Web Share API when available, else copy the
+ * public URL to clipboard. Never throws — returns { ok, method } so callers can
+ * show success/failure feedback. A cancelled native share sheet is { ok:false,
+ * cancelled:true } (not an error to surface).
+ */
+export async function shareGalleryDossier({ slug, name } = {}) {
+  if (!slug) return { ok: false, method: null };
+  const url = galleryUrlFor(slug);
+  const title = name ? `${name} — SettlementForge` : 'SettlementForge dossier';
+  if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+    try {
+      await navigator.share({ title, text: title, url });
+      return { ok: true, method: 'share' };
+    } catch (err) {
+      if (err && err.name === 'AbortError') return { ok: false, method: 'share', cancelled: true };
+      // fall through to clipboard
+    }
+  }
+  if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+    try {
+      await navigator.clipboard.writeText(url);
+      return { ok: true, method: 'copy' };
+    } catch {
+      return { ok: false, method: 'copy' };
+    }
+  }
+  return { ok: false, method: null };
+}

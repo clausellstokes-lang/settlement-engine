@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, Eye, MessageCircle } from 'lucide-react';
+import { Check, ChevronLeft, Eye, MessageCircle, Share2 } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -26,7 +26,7 @@ import {
   sans,
   serif_,
 } from '../theme.js';
-import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human } from './galleryUtils.js';
+import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier } from './galleryUtils.js';
 import GalleryComments from './GalleryComments.jsx';
 import GalleryImage from './GalleryImage.jsx';
 import GalleryMoreByCreator from './GalleryMoreByCreator.jsx';
@@ -63,6 +63,11 @@ export default function GalleryDetail({
   reportBusy,
   auth,
 }) {
+  const [shared, setShared] = React.useState(false);
+  const onShare = async () => {
+    const r = await shareGalleryDossier({ slug: dossier?.slug, name: dossier?.name || dossier?.settlement?.name });
+    if (r.ok) { setShared(true); setTimeout(() => setShared(false), 1600); }
+  };
   if (loading) {
     return (
       <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm, textAlign: 'center' }}>
@@ -138,6 +143,14 @@ export default function GalleryDetail({
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
                 <MessageCircle size={13} /> {formatNumber(dossier.commentCount)} comments
               </span>
+              <button
+                type="button"
+                onClick={onShare}
+                title="Share this dossier"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', color: shared ? GREEN : MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, padding: 0 }}
+              >
+                {shared ? <Check size={13} /> : <Share2 size={13} />} {shared ? 'Link copied' : 'Share'}
+              </button>
               <GalleryReportDialog
                 dossier={dossier}
                 auth={auth}
