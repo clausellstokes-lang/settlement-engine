@@ -201,6 +201,42 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
+      {/* ── Custom supply chains (§14 — user-confirmed in the Compendium) ─── */}
+      {e.customChains?.length > 0 && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            CUSTOM SUPPLY CHAINS · {e.customChains.length}
+          </Text>
+          {e.customChains.map((c, i) => {
+            const flow = [c.resource, ...(c.processingInstitutions || []), ...(c.outputs || [])]
+              .filter(Boolean)
+              .map((n) => label(n) || String(n))
+              .join(' » ');
+            return (
+              <View
+                key={`cc-${i}`}
+                style={{
+                  marginBottom: 3, padding: 5,
+                  backgroundColor: palette.goldBg,
+                  border: `0.5pt solid ${palette.gold}`,
+                  borderRadius: 2,
+                }}
+                wrap={false}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: flow ? 2 : 0 }}>
+                  <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{c.name}</Text>
+                  <Text style={{ color: palette.gold, fontSize: pt['8'], marginLeft: 3 }}>✦</Text>
+                </View>
+                {flow ? (
+                  <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.second }}>{flow}</Text>
+                ) : null}
+              </View>
+            );
+          })}
+        </View>
+      )}
+
       {/* ── Resource exploitation ─────────────────────────────── */}
       {e.resourceExploitation && (e.resourceExploitation.full?.length > 0 || e.resourceExploitation.partial?.length > 0 || e.resourceExploitation.unexploited?.length > 0) && (
         <View style={{ marginTop: space.sm }}>

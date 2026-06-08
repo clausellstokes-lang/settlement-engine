@@ -515,6 +515,15 @@ function economicsSlice(active) {
     isService: c?.isService || c?.kind === 'service',
   }));
 
+  // §14 — confirmed custom supply chains (display-only; separate from the
+  // simulated activeChains so they never feed impairment math).
+  const customChains = (ec?.customChains || []).map(c => ({
+    name: c?.label || c?.name || c?.chainId || 'Custom chain',
+    resource: c?.resource || null,
+    processingInstitutions: c?.processingInstitutions || [],
+    outputs: c?.outputs || [],
+  }));
+
   // Shadow economy
   const shadow = sp?.shadowEconomy || s?.shadowEconomy || {};
 
@@ -548,6 +557,7 @@ function economicsSlice(active) {
     },
     criticalImports:    ra?.imports?.critical || [],
     chains,
+    customChains,
     serviceChains:      chains.filter(c => c.isService),
     shadowEconomy: {
       captureRate:

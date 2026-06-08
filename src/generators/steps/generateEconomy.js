@@ -43,6 +43,29 @@ registerStep('generateEconomy', {
   }
 
   const economicState = generateEconomicState(tier, institutions, tradeRoute, goodsToggles, effectiveConfig);
+
+  // §14 — surface the user's CONFIRMED custom supply chains (reviewed + named in
+  // the Compendium) in the dossier Economics/Trade section. Kept in a SEPARATE
+  // economicState.customChains field — display-only, NOT merged into
+  // activeChains — so they never perturb chain-impairment / depth math. A no-op
+  // (field left unset) when the user has confirmed none.
+  const confirmedChains = customDeps.confirmedSupplyChains?.() || [];
+  if (confirmedChains.length) {
+    economicState.customChains = confirmedChains
+      .slice()
+      .sort((a, b) => String(a.label || a.chainId || '').localeCompare(String(b.label || b.chainId || '')))
+      .map((c) => ({
+        chainId: c.chainId || null,
+        label: c.label || c.chainId || 'Custom chain',
+        status: c.status || 'running',
+        resource: c.resource || null,
+        processingInstitutions: Array.isArray(c.processingInstitutions) ? c.processingInstitutions : [],
+        outputs: Array.isArray(c.outputs) ? c.outputs : [],
+        isCustom: true,
+        source: 'custom',
+      }));
+  }
+
   const spatialLayout = generateSpatialLayout(tier, institutions, tradeRoute, terrainType);
   const availableServices = generateAvailableServices(
     tier, institutions, servicesToggles,

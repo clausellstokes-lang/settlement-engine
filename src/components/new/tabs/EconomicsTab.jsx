@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS, swatch, MUTED } from '../../theme.js';
+import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -382,6 +382,35 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
       {(eco?.activeChains?.length > 0) && (
         <Section title={`Supply Chains (${eco.activeChains.length})`} collapsible defaultOpen={false}>
           <SupplyChainsPanel settlement={s} eco={eco} />
+        </Section>
+      )}
+
+      {/* ── CUSTOM SUPPLY CHAINS (§14 — user-confirmed in the Compendium) ──────── */}
+      {eco?.customChains?.length > 0 && (
+        <Section title={`Custom Supply Chains (${eco.customChains.length})`} collapsible defaultOpen={false}>
+          <div style={{display:'flex',flexDirection:'column',gap:6}}>
+            {eco.customChains.map((c,i)=>{
+              const nodes = [c.resource, ...(c.processingInstitutions||[]), ...((c.outputs||[]).slice(0,3))].filter(Boolean);
+              return (
+                <div key={i} style={{...GOLD_TINT, borderWidth:1, borderStyle:'solid', borderRadius:5, padding:'8px 12px'}}>
+                  <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:nodes.length?4:0,flexWrap:'wrap'}}>
+                    <span style={{fontSize:FS.sm,fontWeight:800,color:swatch.inkMag}}>{c.label}</span>
+                    <span style={{fontSize:FS.micro,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
+                  </div>
+                  {nodes.length>0 && (
+                    <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
+                      {nodes.map((n,j)=>(
+                        <React.Fragment key={j}>
+                          {j>0 && <span style={{fontSize:FS.xxs,color:MUTED}}>→</span>}
+                          <span style={{fontSize:FS.xs,color:swatch.inkMag2,background:'rgba(255,255,255,0.55)',borderRadius:3,padding:'1px 6px',textTransform:'capitalize'}}>{n}</span>
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </Section>
       )}
 

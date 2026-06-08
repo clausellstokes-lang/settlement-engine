@@ -16,6 +16,7 @@
  */
 
 import { customContentService } from '../lib/customContent.js';
+import { migrateCustomContent } from '../domain/customContentMigrations.js';
 
 const LOCAL_KEY = 'sf_custom_content';
 const LOCAL_KEY_PREFIX = 'sf_custom_content:';
@@ -91,7 +92,7 @@ function backfillLocalUids(grouped) {
 
 function loadAll(ownerId = 'anon') {
   const raw = localLoad(ownerId);
-  return backfillLocalUids({ ...EMPTY, ...raw });
+  return backfillLocalUids(migrateCustomContent({ ...EMPTY, ...raw }));
 }
 
 function makeId(prefix) {
@@ -216,7 +217,7 @@ export const createCustomContentSlice = (set, get) => ({
     set(state => { state.customContentLoading = true; state.customContentError = null; });
     try {
       const grouped = await customContentService.list();
-      const merged = backfillLocalUids({ ...EMPTY, ...grouped });
+      const merged = backfillLocalUids(migrateCustomContent({ ...EMPTY, ...grouped }));
       if (ownerIdFromState(get()) !== ownerId) return;
       set(state => {
         state.customContent = merged;

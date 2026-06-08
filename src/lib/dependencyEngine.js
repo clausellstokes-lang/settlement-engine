@@ -260,6 +260,19 @@ export const customDeps = {
     return resolveNamesFromRefs(refs);
   },
 
+  // ── Confirmed custom supply chains (§14) ───────────────────────────────
+  /**
+   * The user's CONFIRMED custom supply chains (reviewed + named in the
+   * Compendium), read from the active customContent. Display-only — surfaced in
+   * the dossier Economics/Trade section; never merged into the simulated
+   * activeChains, so they don't perturb chain-impairment math. Empty when none.
+   */
+  confirmedSupplyChains() {
+    const cc = (_override != null ? _override : _sourceGetter()) || {};
+    const chains = Array.isArray(cc.supplyChains) ? cc.supplyChains : [];
+    return chains.filter((c) => c?.verification?.state === 'confirmed');
+  },
+
   // ── Lower-level escape hatch ───────────────────────────────────────────
   registry() { return getRegistry(); },
 };
