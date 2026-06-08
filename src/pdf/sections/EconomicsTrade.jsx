@@ -89,7 +89,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               items={e.primaryExports}
               tone="good"
               emptyText="None significant"
-              itemRender={(item) => (e.customTradeLabels?.exports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()) ? `${label(item)}  ✦` : label(item)}
+              itemRender={(item) => { const isC = (e.customTradeLabels?.exports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()); const inc = e.customCategoryExports?.[item]; return isC ? `${label(item)}${inc && inc.length ? ` (incl. ${inc.join(', ')})` : ''}  ✦` : label(item); }}
             />
           </View>
         }
@@ -100,7 +100,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               items={e.primaryImports}
               tone="warn"
               emptyText="None significant"
-              itemRender={(item) => (e.customTradeLabels?.imports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()) ? `${label(item)}  ✦` : label(item)}
+              itemRender={(item) => { const isC = (e.customTradeLabels?.imports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()); const inc = e.customCategoryImports?.[item]; return isC ? `${label(item)}${inc && inc.length ? ` (incl. ${inc.join(', ')})` : ''}  ✦` : label(item); }}
             />
           </View>
         }

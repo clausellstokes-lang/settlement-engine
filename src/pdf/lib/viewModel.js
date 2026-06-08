@@ -536,6 +536,8 @@ function economicsSlice(active) {
     primaryExports:     ec.primaryExports || [],
     primaryImports:     ec.primaryImports || [],
     customTradeLabels:  ec.customTradeLabels || { exports: [], imports: [] },  // §14 — mark these custom
+    customCategoryExports: ec.customCategoryExports || {},  // §14 — folded category → [member good names]
+    customCategoryImports: ec.customCategoryImports || {},
     tradeLinks:         ec.tradeLinks || [],   // §14 Phase 3b — good-level neighbour trade
     localProduction:    ec.localProduction || [],
     tradeDependencies:  ec.tradeDependencies || [],

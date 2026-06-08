@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, serif_, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, HeartHandshake, Flag } from 'lucide-react';
-import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, SATISFIES_CATEGORIES } from '../domain/customContentSchema.js';
+import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, TRADE_CATEGORIES, satisfiesOptions } from '../domain/customContentSchema.js';
 import SupplyChainsManager from './compendium/SupplyChainsManager.jsx';
 import CategorySelect from './primitives/CategorySelect.jsx';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
@@ -317,7 +317,7 @@ const FIELD_HINTS = {
   defenseRole:    'Whether and how this strengthens the settlement’s defense.',
   essential:      'Always included when this settlement is generated — like a mill or watch — never rolled probabilistically.',
   foodImpact:     'Whether this raises or drains food security (a farm produces; a large garrison consumes). Moves the deficit.',
-  satisfies:      'Which trade demand this fills — e.g. Dragonbone Greatswords → Weapons & armour. When present it covers that local need (fewer imports) and, on a good, exports as that category once demand is met.',
+  satisfies:      'Trade category this good belongs to — e.g. Dragonbone Greatswords → Weapons & armour. In the Economics tab the good folds into this category line (incl. its name) instead of a separate pill. Demand categories (weapons/religious/maritime/luxury/alchemical) also cover local need + export surplus. Pick “Other” to type your own — it stays available while any item uses it.',
   criticality:    'How essential this is. Critical things (food, water, timber) cause crises when supply breaks; luxuries don’t.',
   economicWeight: 'How much this reinforces the local economy.',
   magical:        'Turn on if this is arcane or enchanted in nature.',
@@ -349,7 +349,7 @@ function CustomItemAttributes({ item }) {
   if (item.criticality) chips.push({ label: keyLabel(CRITICALITY, item.criticality), color: '#a0762a' });
   if (item.economicWeight) chips.push({ label: keyLabel(ECONOMIC_WEIGHT, item.economicWeight), color: '#1a5a28' });
   if (item.foodImpact) chips.push({ label: `Food · ${item.foodImpact}`, color: '#7a5010' });
-  if (item.satisfies) chips.push({ label: `Satisfies · ${keyLabel(SATISFIES_CATEGORIES, item.satisfies)}`, color: '#7c3aed' });
+  if (item.satisfies) chips.push({ label: `Trade category · ${keyLabel(TRADE_CATEGORIES, item.satisfies) || item.satisfies}`, color: '#7c3aed' });
   if (item.archetype) chips.push({ label: `Archetype · ${item.archetype}`, color: '#6a1a4a' });
   if (item.scale) chips.push({ label: `Scale · ${item.scale}`, color: '#6a1a4a' });
   if (item.severity) chips.push({ label: `Severity · ${item.severity}`, color: '#8b1a1a' });
@@ -814,7 +814,7 @@ function CustomContentManager({ search }) {
       case 'tierMin': return <select {...shared} value={val||''}><option value="">Any tier</option>{TIERS.map(t=><option key={t} value={t}>{t}</option>)}</select>;
       case 'tierMax': return <select {...shared} value={val||''}><option value="">No upper limit</option>{TIERS.map(t=><option key={t} value={t}>{t}</option>)}</select>;
       case 'foodImpact': return <select {...shared} value={val||''}><option value="">No food impact</option>{FOOD_IMPACT.filter(f=>f.key!=='none').map(f=><option key={f.key} value={f.key}>{f.label}</option>)}</select>;
-      case 'satisfies': return <select {...shared} value={val||''}><option value="">Doesn’t satisfy a trade demand</option>{SATISFIES_CATEGORIES.map(c=><option key={c.key} value={c.key}>{c.label}</option>)}</select>;
+      case 'satisfies': return <CategorySelect options={satisfiesOptions(customContent)} value={val} onChange={v => setDraft(d => ({ ...d, satisfies: v }))} placeholder="Doesn’t fold into a trade category" newLabel="+ Other category…" style={shared.style} />;
       case 'authority': return <select {...shared} value={val||''}><option value="">No authority contribution</option>{POWER_AUTHORITIES.map(a=><option key={a.key} value={a.key}>{a.label}</option>)}</select>;
       case 'defenseRole': return <select {...shared} value={val||''}><option value="">No defense role</option>{DEFENSE_ROLES.map(d=><option key={d.key} value={d.key}>{d.label}</option>)}</select>;
       case 'criticality': return <select {...shared} value={val||''}><option value="">Select…</option>{CRITICALITY.map(c=><option key={c.key} value={c.key}>{c.label}</option>)}</select>;

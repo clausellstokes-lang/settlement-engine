@@ -22,10 +22,19 @@ const GOLD = '#8C6F32';
 const MUTED = '#9C8068';
 const sans = '"Nunito", system-ui, sans-serif';
 
-export default function CategorySelect({ type, value = '', onChange, customContent, style = {} }) {
+export default function CategorySelect({
+  type, value = '', onChange, customContent, style = {},
+  // Optional overrides so the same picker drives non-`category` fields (e.g.
+  // `satisfies`). `options` supplies the lists directly; builtins may be plain
+  // strings (value===label) or { value, label } pairs (e.g. a key-stored field).
+  options = null, placeholder = 'Select category…', newLabel = '+ New category…',
+}) {
   const [adding, setAdding] = useState(false);
   const [text, setText] = useState('');
-  const { builtins, customs } = categoryOptions(type, customContent);
+  const raw = options || categoryOptions(type, customContent);
+  const asPair = (b) => (typeof b === 'string' ? { value: b, label: b } : b);
+  const builtins = (raw.builtins || []).map(asPair);
+  const customs = (raw.customs || []).map((c) => (typeof c === 'string' ? c : c.value));
 
   if (adding) {
     const commit = () => { const v = text.trim(); setAdding(false); setText(''); if (v) onChange?.(v); };
@@ -45,8 +54,9 @@ export default function CategorySelect({ type, value = '', onChange, customConte
     );
   }
 
-  const isKnownCustom = value && customs.some((c) => c.toLowerCase() === value.toLowerCase());
-  const isBuiltin = value && builtins.some((c) => c.toLowerCase() === value.toLowerCase());
+  const lc = (s) => String(s).toLowerCase();
+  const isKnownCustom = value && customs.some((c) => lc(c) === lc(value));
+  const isBuiltin = value && builtins.some((b) => lc(b.value) === lc(value));
 
   return (
     <select
@@ -54,9 +64,9 @@ export default function CategorySelect({ type, value = '', onChange, customConte
       onChange={(e) => { const v = e.target.value; if (v === NEW) setAdding(true); else onChange?.(v); }}
       style={{ color: INK, ...style }}
     >
-      <option value="">Select category…</option>
+      <option value="">{placeholder}</option>
       <optgroup label="Standard">
-        {builtins.map((c) => <option key={c} value={c}>{c}</option>)}
+        {builtins.map((b) => <option key={b.value} value={b.value}>{b.label}</option>)}
       </optgroup>
       {customs.length > 0 && (
         <optgroup label="Custom">
@@ -65,7 +75,7 @@ export default function CategorySelect({ type, value = '', onChange, customConte
       )}
       {/* A just-typed value not yet reflected in the derived lists. */}
       {value && !isBuiltin && !isKnownCustom && <option value={value}>{value} – Custom</option>}
-      <option value={NEW}>+ New category…</option>
+      <option value={NEW}>{newLabel}</option>
     </select>
   );
 }

@@ -23,6 +23,7 @@ import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
 import { serviceTypeKeyFromCategory } from '../../domain/customCategories.js';
 import { deriveTradeLinks } from '../../domain/region/tradeLinks.js';
+import { foldTradeCategories } from '../../domain/region/foldTradeCategories.js';
 
 registerStep('generateEconomy', {
   deps: ['isolationPass', 'resolveNeighbour'],
@@ -112,6 +113,31 @@ registerStep('generateEconomy', {
     satisfiesOf: (label) => satisfiesIndex.get(String(label).toLowerCase()) || null,
   });
   if (tradeLinks.length) economicState.tradeLinks = tradeLinks;
+
+  // §14 — fold custom-good export/import NAMES into their declared trade category
+  // so the Trade Profile shows one bucket ("Weapons & armour", incl. the good)
+  // rather than a pill per custom good. A good with no `satisfies` stays named;
+  // built-in trade labels are never folded (not in satisfiesIndex). Members ride
+  // along in customCategoryExports/Imports for the dossier "incl. …" + PDF. This
+  // runs AFTER deriveTradeLinks so neighbour bridging still sees the raw names.
+  const priorExp = new Set(((economicState.customTradeLabels?.exports) || []).map((s) => String(s).toLowerCase()));
+  const priorImp = new Set(((economicState.customTradeLabels?.imports) || []).map((s) => String(s).toLowerCase()));
+  const fExp = foldTradeCategories(economicState.primaryExports, satisfiesIndex, priorExp);
+  const fImp = foldTradeCategories(economicState.primaryImports, satisfiesIndex, priorImp);
+  // Only rewrite a list when a good actually folded into a category — keeps vanilla
+  // generations (no custom content) byte-identical (no incidental re-dedupe of
+  // built-in labels). customTradeLabels still tracks any custom labels for tinting.
+  if (Object.keys(fExp.members).length) {
+    economicState.primaryExports = fExp.labels;
+    economicState.customCategoryExports = fExp.members;
+  }
+  if (Object.keys(fImp.members).length) {
+    economicState.primaryImports = fImp.labels;
+    economicState.customCategoryImports = fImp.members;
+  }
+  if (fExp.custom.length || fImp.custom.length) {
+    economicState.customTradeLabels = { exports: fExp.custom, imports: fImp.custom };
+  }
 
   const spatialLayout = generateSpatialLayout(tier, institutions, tradeRoute, terrainType);
   const availableServices = generateAvailableServices(

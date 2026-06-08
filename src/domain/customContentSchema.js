@@ -87,18 +87,59 @@ export const FOOD_IMPACT = Object.freeze([
 ]);
 export const FOOD_IMPACT_KEYS = Object.freeze(FOOD_IMPACT.map((f) => f.key));
 
-// §14 — finished-goods demand a custom good/institution can SATISFY. Keys MUST
-// match INSTITUTION_FINISHED_GOODS_DEMAND in src/data/economicData.js so the
-// generator can count the item as local supply for that demand category: it
-// shrinks the matching import (e.g. an institution needing arms buys local
-// Dragonbone Greatswords) and, once local demand is met, exports the surplus.
-export const SATISFIES_CATEGORIES = Object.freeze([
-  { key: 'military',   label: 'Weapons & armour (military)' },
-  { key: 'religious',  label: 'Religious consumables' },
-  { key: 'maritime',   label: 'Maritime supplies' },
-  { key: 'luxury',     label: 'Luxury goods' },
-  { key: 'alchemical', label: 'Alchemical supplies' },
+// §14 — the unified TRADE-CATEGORY taxonomy a custom good/institution declares via
+// `satisfies`. One list, two kinds:
+//   • demandLive (military…alchemical): keys MUST match INSTITUTION_FINISHED_GOODS_DEMAND
+//     in src/data/economicData.js — the generator counts the item as local supply
+//     for that demand (shrinks the matching import, e.g. an institution needing arms
+//     buys local Dragonbone Greatswords; exports the surplus once demand is met).
+//   • classification (agricultural…food_processed): mirror GOODS_CATEGORIES. No demand
+//     consumer, but a custom good still FOLDS into this category's trade line and
+//     exports as surplus — so the Economics tab shows one bucket, not a pill per good.
+// Free-text ("Other") values are allowed too: they fold under the typed label and
+// persist in the picker as long as some item references them (see satisfiesOptions).
+export const TRADE_CATEGORIES = Object.freeze([
+  { key: 'military',      label: 'Weapons & armour',      demandLive: true },
+  { key: 'religious',     label: 'Religious consumables', demandLive: true },
+  { key: 'maritime',      label: 'Maritime supplies',     demandLive: true },
+  { key: 'luxury',        label: 'Luxury goods',          demandLive: true },
+  { key: 'alchemical',    label: 'Alchemical supplies',   demandLive: true },
+  { key: 'agricultural',  label: 'Agricultural produce' },
+  { key: 'raw_materials', label: 'Raw materials' },
+  { key: 'manufactured',  label: 'Manufactured goods' },
+  { key: 'food_processed', label: 'Processed food' },
 ]);
+const _TRADE_CAT_BY_KEY = new Map(TRADE_CATEGORIES.map((c) => [c.key, c]));
+
+/** Display label for a `satisfies` value: a known category key → its label; a
+ *  free-text ("Other") value → returned as-is by the caller (this returns null). */
+export function tradeCategoryLabelOf(value) {
+  if (!value) return null;
+  return _TRADE_CAT_BY_KEY.get(String(value))?.label || null;
+}
+
+/** Picker options for the `satisfies` field: the unified categories as builtins
+ *  (value=key) + any free-text value currently in use across custom goods/
+ *  institutions (the "Other" escape hatch — persists only while referenced). */
+export function satisfiesOptions(customContent) {
+  const builtins = TRADE_CATEGORIES.map((c) => ({ value: c.key, label: c.label }));
+  const knownKeys = new Set(TRADE_CATEGORIES.map((c) => c.key));
+  const seen = new Map();
+  for (const type of ['institutions', 'tradeGoods']) {
+    for (const item of (customContent?.[type] || [])) {
+      const v = String(item?.satisfies || '').trim();
+      if (!v || knownKeys.has(v)) continue;
+      if (!seen.has(v.toLowerCase())) seen.set(v.toLowerCase(), v);
+    }
+  }
+  return { builtins, customs: [...seen.values()].sort((a, b) => a.localeCompare(b)) };
+}
+
+// Back-compat: the DEMAND subset (the 5 categories that drive
+// INSTITUTION_FINISHED_GOODS_DEMAND). finishedGoodsSupply + the demand engine
+// match against these keys; the classification categories above are display/export
+// buckets only.
+export const SATISFIES_CATEGORIES = Object.freeze(TRADE_CATEGORIES.filter((c) => c.demandLive));
 export const SATISFIES_KEYS = Object.freeze(SATISFIES_CATEGORIES.map((c) => c.key));
 
 // Settlement tiers, smallest → largest, for tier gates (min/max).
