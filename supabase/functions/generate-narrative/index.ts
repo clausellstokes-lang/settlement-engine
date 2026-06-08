@@ -408,11 +408,16 @@ function augmentSummaryWithGrounding(
   }
 }
 
-function buildThesisPrompt(summary: Record<string, unknown>, aiGuidance = ''): string {
+function buildThesisPrompt(
+  summary: Record<string, unknown>,
+  aiGuidance = '',
+  chronicleContext: Record<string, unknown> | null = null,
+): string {
   return `You are the authorial voice of a worldbuilding narrator for tabletop RPGs.
 
 ${THESIS_INSTRUCTION}
 ${guidanceBlock(aiGuidance)}
+${chronicleBlock(chronicleContext)}
 
 Settlement context:
 ${JSON.stringify(summary, null, 2)}`;
@@ -1532,6 +1537,35 @@ const DAILY_LIFE_FIELDS: Record<string, FieldCfg> = {
   },
 };
 
+// §8 M3c — compact Chronicle digest the client sends (recent + party-caused
+// events). Sanitized + length-capped here; used as background grounding only.
+function sanitizeChronicleContext(ctx: unknown): Record<string, unknown> | null {
+  if (!ctx || typeof ctx !== 'object') return null;
+  const items = (ctx as { items?: unknown }).items;
+  if (!Array.isArray(items) || !items.length) return null;
+  const clean = items.slice(0, 12).map((it) => {
+    const o = (it && typeof it === 'object') ? it as Record<string, unknown> : {};
+    return {
+      when: typeof o.when === 'string' ? o.when.slice(0, 40) : null,
+      what: String(o.what ?? '').slice(0, 200),
+      detail: typeof o.detail === 'string' ? o.detail.slice(0, 400) : undefined,
+      source: typeof o.source === 'string' ? o.source.slice(0, 20) : undefined,
+      party: o.party === true,
+    };
+  }).filter((it) => it.what);
+  return clean.length ? { items: clean } : null;
+}
+
+function chronicleBlock(chronicleContext: Record<string, unknown> | null): string {
+  if (!chronicleContext) return '';
+  return `
+
+RECENT CHRONICLE (what has happened here, newest first; "party": true entries are the table's own deeds — weight these heavily):
+${JSON.stringify(chronicleContext, null, 2)}
+
+Let this color the current mood and ongoing situation. Do NOT invent new events beyond this list; reference it only as background that has already happened.`;
+}
+
 function relationshipMemoryBlock(relationshipMemoryContext: Record<string, unknown> | null): string {
   if (!relationshipMemoryContext) return '';
   return `
@@ -1547,10 +1581,12 @@ function buildDailyLifePrompt(
   summary: Record<string, unknown>,
   aiGuidance = '',
   relationshipMemoryContext: Record<string, unknown> | null = null,
+  chronicleContext: Record<string, unknown> | null = null,
 ): string {
   return `You are a worldbuilding narrator for tabletop RPGs. ${instruction}
 ${guidanceBlock(aiGuidance)}
 ${relationshipMemoryBlock(relationshipMemoryContext)}
+${chronicleBlock(chronicleContext)}
 
 Return ONLY the paragraph. No preamble, no markdown, no heading.
 
@@ -1832,6 +1868,7 @@ serve(async (req) => {
       aiGuidance,
       modelPreference,
       relationshipMemoryContext,
+      chronicleContext,
       // Progression-only (AI-4b) — ignored for other types.
       changeType,
       changeLabel,
@@ -1864,6 +1901,10 @@ serve(async (req) => {
     const confirmedAiGuidance = typeof aiGuidance === 'string' ? aiGuidance.trim().slice(0, 4000) : '';
     const confirmedRelationshipMemoryContext = type === 'dailyLife'
       ? sanitizeRelationshipMemoryContext(relationshipMemoryContext)
+      : null;
+    // §8 M3c — Chronicle grounding for the narrative thesis + daily-life passes.
+    const confirmedChronicleContext = (type === 'narrative' || type === 'dailyLife')
+      ? sanitizeChronicleContext(chronicleContext)
       : null;
     const spendFeature = spendFeatureFor(type, selectedModelPreference);
     const cost = CREDIT_COSTS[spendFeature] ?? CREDIT_COSTS[type];
@@ -1995,7 +2036,7 @@ serve(async (req) => {
 
             await Promise.all(entries.map(async ([fieldName, cfg]) => {
               try {
-                const prompt = buildDailyLifePrompt(cfg.instruction, summary, confirmedAiGuidance, confirmedRelationshipMemoryContext);
+                const prompt = buildDailyLifePrompt(cfg.instruction, summary, confirmedAiGuidance, confirmedRelationshipMemoryContext, confirmedChronicleContext);
                 const value = await callModel(prompt, cfg.max_tokens, 'dailyLife', selectedModelPreference, type, usageTelemetry);
                 results[fieldName] = value;
                 send({ field: fieldName, value });
@@ -2163,7 +2204,7 @@ serve(async (req) => {
           let thesis: string;
           try {
             thesis = await callModel(
-              buildThesisPrompt(summary, confirmedAiGuidance),
+              buildThesisPrompt(summary, confirmedAiGuidance, confirmedChronicleContext),
               600,
               'thesis',
               selectedModelPreference,

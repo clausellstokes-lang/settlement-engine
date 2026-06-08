@@ -27,6 +27,7 @@ import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { getAiCostForModel } from '../config/pricing.js';
 import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
 import { verifyAiOverlay } from '../domain/aiOverlayVerifier.js';
+import { buildChronicleFeed, selectChronicleContext } from '../domain/dossier/chronicleFeed.js';
 import {
   buildSettlementRelationshipMemoryContext,
   buildWorldSnapshot,
@@ -71,6 +72,26 @@ function logHardViolations(verification, where) {
     `[ai-overlay] ${where}: ${hard.length} hard violation(s) detected`,
     hard.slice(0, 5),
   );
+}
+
+// §8 M3c — compact, weighted Chronicle context (recent + party-caused events)
+// sent to the AI overlay + Daily Life so prose can reference what's been
+// happening. PII-free; the edge function leans on it as grounding.
+function buildChronicleContextFromSave(saveEntry, settlement) {
+  try {
+    if (!saveEntry) return null;
+    const cs = saveEntry.campaignState || {};
+    const feed = buildChronicleFeed({
+      manual: cs.eventLog,
+      worldPulse: cs.worldPulse?.events,
+      worldLog: cs.worldState?.eventLog,
+      recent: settlement?.recentEvents || saveEntry.settlement?.recentEvents,
+    }, { limit: 40, reference: cs.worldState?.canonizedAt || cs.canonizedAt || null });
+    const items = selectChronicleContext(feed, { limit: 8 });
+    return items.length ? { items } : null;
+  } catch {
+    return null;
+  }
 }
 
 function buildDailyLifeRelationshipMemory(state, saveId) {
@@ -304,6 +325,7 @@ export const createAiSlice = (set, get) => ({
           pinnedNpcIds,
           aiGuidance,
           modelPreference,
+          chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
           onField(fieldName, value, error) {
             // Per-pass error: not fatal. Progress counter still advances so
             // the percentage reflects passes *attempted*, not successful.
@@ -451,6 +473,7 @@ export const createAiSlice = (set, get) => ({
         aiGuidance,
         modelPreference,
         relationshipMemoryContext,
+        chronicleContext: buildChronicleContextFromSave(saveEntry, settlement),
         onField(fieldName, value, error) {
           if (error) {
             fieldsDone += 1;

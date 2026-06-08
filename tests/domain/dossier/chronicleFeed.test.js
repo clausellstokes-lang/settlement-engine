@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildChronicleFeed } from '../../../src/domain/dossier/chronicleFeed.js';
+import { buildChronicleFeed, selectChronicleContext } from '../../../src/domain/dossier/chronicleFeed.js';
 
 describe('buildChronicleFeed', () => {
   it('merges all sources and tags each entry with a source', () => {
@@ -94,5 +94,38 @@ describe('buildChronicleFeed', () => {
     expect(noRef[0].relativeLabel).toBeNull();
     const undated = buildChronicleFeed({ worldPulse: [{ id: 'z', title: 'Undated' }] }, { reference: '2026-01-01' });
     expect(undated[0].relativeLabel).toBeNull();
+  });
+});
+
+describe('selectChronicleContext', () => {
+  const feed = [
+    { id: 'n', title: 'Newest world', source: 'world', partyCaused: false, relativeLabel: 'Day 10' },
+    { id: 'p', title: 'Party deed', source: 'party', partyCaused: true, relativeLabel: 'Day 8', summary: 'The party broke the siege.' },
+    { id: 'e', title: 'An edit', source: 'manual', partyCaused: false, relativeLabel: 'Day 6' },
+    { id: 'o1', title: 'Old 1', source: 'world', partyCaused: false, relativeLabel: 'Day 2' },
+    { id: 'o2', title: 'Old 2', source: 'world', partyCaused: false, relativeLabel: 'Day 1' },
+  ];
+
+  it('returns a compact payload and respects the limit', () => {
+    const ctx = selectChronicleContext(feed, { limit: 3 });
+    expect(ctx).toHaveLength(3);
+    expect(ctx[0]).toHaveProperty('what');
+    expect(ctx[0]).toHaveProperty('when');
+    expect(ctx[0]).toHaveProperty('source');
+  });
+
+  it('keeps party-caused entries even when older (party weighted strongly)', () => {
+    const ctx = selectChronicleContext(feed, { limit: 2 });
+    expect(ctx.some(c => c.party)).toBe(true);
+  });
+
+  it('outputs in chronological (newest-first) order', () => {
+    const ctx = selectChronicleContext(feed, { limit: 5 });
+    expect(ctx.map(c => c.what)).toEqual(['Newest world', 'Party deed', 'An edit', 'Old 1', 'Old 2']);
+  });
+
+  it('handles empty input', () => {
+    expect(selectChronicleContext([])).toEqual([]);
+    expect(selectChronicleContext()).toEqual([]);
   });
 });

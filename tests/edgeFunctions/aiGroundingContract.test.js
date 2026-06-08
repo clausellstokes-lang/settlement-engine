@@ -366,7 +366,7 @@ describe('Tier 6.8 — edge function uses the shared composer at request time', 
     expect(EDGE).toMatch(/relationshipMemoryContext/);
     expect(EDGE).toMatch(/confirmedRelationshipMemoryContext/);
     expect(EDGE).toMatch(/sanitizeRelationshipMemoryContext\(relationshipMemoryContext\)/);
-    expect(EDGE).toMatch(/buildDailyLifePrompt\(cfg\.instruction,\s*summary,\s*confirmedAiGuidance,\s*confirmedRelationshipMemoryContext\)/);
+    expect(EDGE).toMatch(/buildDailyLifePrompt\(cfg\.instruction,\s*summary,\s*confirmedAiGuidance,\s*confirmedRelationshipMemoryContext,\s*confirmedChronicleContext\)/);
   });
 
   it('buildRefinementPrompt receives the dynamicPreservation argument', () => {

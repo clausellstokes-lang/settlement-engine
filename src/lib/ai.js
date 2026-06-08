@@ -82,6 +82,7 @@ async function getAccessTokenSafe() {
  * @param {string} [opts.aiGuidance] - DM-approved guidance sent to the model. Private DM Notes are never sent.
  * @param {string} [opts.modelPreference] - User model preference key.
  * @param {object|null} [opts.relationshipMemoryContext] - dailyLife only: compact campaign relationship posture digest.
+ * @param {object|null} [opts.chronicleContext] - narrative + dailyLife: compact weighted Chronicle digest (recent + party-caused events).
  * @param {string} [opts.changeType] - progression only: classifyChange key (e.g. 'addStressor')
  * @param {string} [opts.changeLabel] - progression only: human-readable label chronicled with the run
  * @param {object|null} [opts.priorNarrative] - progression only: the previous aiSettlement (refined)
@@ -113,6 +114,11 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   }
   if (type === 'dailyLife' && opts.relationshipMemoryContext && typeof opts.relationshipMemoryContext === 'object') {
     body.relationshipMemoryContext = opts.relationshipMemoryContext;
+  }
+  // §8 M3c — weighted Chronicle context (recent + party-caused events) for the
+  // narrative + daily-life passes, so prose can reference what's happened.
+  if ((type === 'narrative' || type === 'dailyLife') && opts.chronicleContext && typeof opts.chronicleContext === 'object') {
+    body.chronicleContext = opts.chronicleContext;
   }
   if (type === 'progression') {
     body.changeType     = opts.changeType || '';

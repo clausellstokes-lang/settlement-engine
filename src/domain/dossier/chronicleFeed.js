@@ -103,3 +103,37 @@ export function buildChronicleFeed({ manual = [], worldPulse = [], worldLog = []
 function arr(v) {
   return Array.isArray(v) ? v : [];
 }
+
+/**
+ * Pick the most grounding-relevant Chronicle entries to feed the AI overlay +
+ * Daily Life regeneration (spec §8 M3c: "feed into AI; recent weighted more
+ * heavily, party-caused weighted strongly").
+ *
+ * Scores each entry by recency (the feed is newest-first, so earlier = newer)
+ * plus a source bonus — party-caused strongest, then manual edits — then returns
+ * the top `limit` in chronological (newest-first) order as a compact, PII-free
+ * payload the prompt can lean on. Pure.
+ *
+ * @param {Array} feed                a buildChronicleFeed result
+ * @param {Object} [opts]
+ * @param {number} [opts.limit=8]
+ * @returns {Array<{when:?string, what:string, detail?:string, source:string, party:boolean}>}
+ */
+export function selectChronicleContext(feed = [], { limit = 8 } = {}) {
+  if (!Array.isArray(feed) || !feed.length) return [];
+  const n = feed.length;
+  const scored = feed.map((e, i) => {
+    const recency = 1 - i / n;                        // 1 (newest) → ~0 (oldest)
+    const bonus = e.partyCaused ? 1.0 : (e.source === 'manual' ? 0.3 : 0);
+    return { i, e, score: recency + bonus };
+  });
+  const top = scored.slice().sort((a, b) => b.score - a.score).slice(0, Math.max(0, limit));
+  top.sort((a, b) => a.i - b.i);                      // back to chronological (newest-first)
+  return top.map(({ e }) => ({
+    when: e.relativeLabel || null,
+    what: e.title,
+    detail: e.summary || undefined,
+    source: e.source,
+    party: !!e.partyCaused,
+  }));
+}
