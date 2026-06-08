@@ -203,6 +203,29 @@ export const EVENT_REGISTRY = {
     },
   },
 
+  // §9b — Settlement Dispute: sours relations with a neighbouring settlement.
+  // Replaces the freetext Cut Trade Route in the DM composer; the relationship
+  // it sets (neutral/rival/cold_war/hostile) drives the severity + the mutation.
+  SETTLEMENT_DISPUTE: {
+    label: 'Settlement dispute',
+    description: 'A dispute sours relations with a neighbouring settlement, downgrading the relationship.',
+    requiresTarget: true,
+    targetPrompt: 'Neighbouring settlement',
+    stateDeltas(event) {
+      const rel = event.payload?.relationshipType || 'rival';
+      const sev = rel === 'hostile' ? 1 : rel === 'cold_war' ? 0.7 : rel === 'rival' ? 0.45 : 0.2;
+      return {
+        volatility:     +Math.round(sev * 14),
+        externalThreat: +Math.round(sev * 12),
+        resilience:     -Math.round(sev * 8),
+      };
+    },
+    narrate(event) {
+      const rel = String(event.payload?.relationshipType || 'rival').replace(/_/g, ' ');
+      return `Relations with ${labelOf(event.targetId)} soured to ${rel}.`;
+    },
+  },
+
   DESTROY_SETTLEMENT: {
     label: 'Destroy settlement',
     description: 'The settlement is destroyed, abandoned, or rendered uninhabitable. Kept as campaign history rather than deleted.',
@@ -472,22 +495,18 @@ export const EVENT_REGISTRY = {
     },
   },
 
+  // §9g — Brokered Alliance: sets the relationship with a neighbouring
+  // settlement to Allied. Volatility settles; mutual defense + trade improve.
   BROKERED_ALLIANCE: {
     label: 'Brokered alliance',
-    description: 'Two factions formalize cooperation. Volatility settles; trade and mutual defense improve.',
-    requiresTarget: false,
-    targetPrompt: 'Optional: between-factions hint (e.g. "Merchants + Council")',
-    stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
-      return {
-        volatility:       -Math.round(sev * 12),
-        resilience:       +Math.round(sev * 8),
-        resourcePressure: -Math.round(sev * 4),
-      };
+    description: 'Formalize an alliance with a neighbouring settlement. Relations become Allied; volatility settles and mutual defense improves.',
+    requiresTarget: true,
+    targetPrompt: 'Neighbouring settlement',
+    stateDeltas() {
+      return { volatility: -7, resilience: +6, resourcePressure: -3 };
     },
     narrate(event) {
-      const which = event.targetId ? ` between ${labelOf(event.targetId)}` : '';
-      return `An alliance${which} was brokered.`;
+      return `An alliance was brokered with ${labelOf(event.targetId)}.`;
     },
   },
 
@@ -509,21 +528,19 @@ export const EVENT_REGISTRY = {
     },
   },
 
+  // §9h — Opened Trade Route: establishes a trade relationship with a
+  // neighbouring settlement (allied / client / patron / trade_partners).
   OPENED_TRADE_ROUTE: {
     label: 'Opened trade route',
-    description: 'A blocked or new trade route is opened. Imports flow, merchant wealth rises, smuggling premiums collapse.',
+    description: 'Open a trade relationship with a neighbouring settlement. Imports flow, merchant wealth rises, smuggling premiums collapse.',
     requiresTarget: true,
-    targetPrompt: 'Trade route name (e.g. "south road", "river quays")',
-    stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.7);
-      return {
-        resilience:       +Math.round(sev * 12),
-        resourcePressure: -Math.round(sev * 10),
-        volatility:       -Math.round(sev * 4),
-      };
+    targetPrompt: 'Neighbouring settlement',
+    stateDeltas() {
+      return { resilience: +9, resourcePressure: -7, volatility: -3 };
     },
     narrate(event) {
-      return `Trade along ${labelOf(event.targetId)} has been opened.`;
+      const rel = String(event.payload?.relationshipType || 'trade_partners').replace(/_/g, ' ');
+      return `A ${rel} trade route with ${labelOf(event.targetId)} has opened.`;
     },
   },
 

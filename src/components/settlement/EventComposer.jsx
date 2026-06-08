@@ -50,6 +50,22 @@ const TARGET_ENTITY_BY_EVENT = Object.freeze({
   DEPLETE_RESOURCE:     'resources',
   RECOVERED_RESOURCE:   'resources',    // recover a resource the campaign already depleted
   CUT_TRADE_ROUTE:      null,           // route names aren't tracked as entities — free text
+  SETTLEMENT_DISPUTE:   'neighbours',   // §9b — pick a linked neighbour
+  BROKERED_ALLIANCE:    'neighbours',   // §9g
+  OPENED_TRADE_ROUTE:   'neighbours',   // §9h
+});
+
+// §9b/§9g/§9h — relationship events target a neighbouring settlement and set a
+// relationship type. The per-event option list drives the relationship dropdown;
+// these events are only offered when the settlement has linked neighbours.
+const RELATIONSHIP_OPTIONS = Object.freeze({
+  SETTLEMENT_DISPUTE: ['neutral', 'rival', 'cold_war', 'hostile'],
+  BROKERED_ALLIANCE:  ['allied'],
+  OPENED_TRADE_ROUTE: ['allied', 'client', 'patron', 'trade_partners'],
+});
+const RELATIONSHIP_LABELS = Object.freeze({
+  neutral: 'Neutral', rival: 'Rival', cold_war: 'Cold War', hostile: 'Hostile',
+  allied: 'Allied', client: 'Client', patron: 'Patron', trade_partners: 'Trade Partners',
 });
 
 // Events the DM cannot hand-author from the Make Changes dropdown. They stay in
@@ -63,6 +79,7 @@ const TARGET_ENTITY_BY_EVENT = Object.freeze({
 //     was hidden, so Impair Institution is the single "weaken it" action.
 const NON_AUTHORABLE_EVENTS = new Set([
   'KILL_LEADER',
+  'CUT_TRADE_ROUTE',          // §9b — replaced by Settlement Dispute (neighbour + relationship)
   'DAMAGE_INSTITUTION',
   'REFUGEE_WAVE',
   'PLAGUE',
@@ -79,6 +96,11 @@ function buildTargetOptions(settlement, collectionKey) {
     case 'institutions': list = settlement.institutions || []; break;
     case 'npcs':         list = settlement.npcs || []; break;
     case 'factions':     list = settlement.powerStructure?.factions || []; break;
+    case 'neighbours':   {
+      const net = settlement.neighbourNetwork || settlement.neighbourLinks || [];
+      list = net.map((l) => ({ id: l.name || l.neighbourName || l.id, name: l.name || l.neighbourName || l.id }));
+      break;
+    }
     case 'resources':    {
       // Nearby resources are stored as keys in nearbyResources (config) and
       // sometimes additionally on settlement.resources. Combine + dedupe.
@@ -152,6 +174,8 @@ export default function EventComposer({
   const dimension = 'legitimacy';
   const [staged, setStaged]         = useState([]);            // batch: staged changes not yet applied
   const [destroyConfirm, setDestroyConfirm] = useState('');    // §9c: type-the-name gate for Destroy Settlement
+  const [relationshipType, setRelationshipType] = useState(''); // §9b/g/h: neighbour relationship for dispute/alliance/trade
+  const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
 
@@ -220,6 +244,9 @@ export default function EventComposer({
       payload.dimension = dimension;
       payload.severity  = severity;
     }
+    if (RELATIONSHIP_OPTIONS[type]) {
+      payload.relationshipType = relationshipType || RELATIONSHIP_OPTIONS[type][0];
+    }
     return {
       id: `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
       type,
@@ -280,14 +307,17 @@ export default function EventComposer({
 
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => { setType(e.target.value); setTarget(''); setAddCategory(''); }} style={selectStyle}>
+          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); }} style={selectStyle}>
             {Object.entries(EVENT_REGISTRY)
               /* Hide non-authorable events from the DM action list (see
                  NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
                  equivalent events (authored via the Roster's Stressors), and
                  Damage Institution (redundant with Impair). All stay in the
-                 registry for back-compat + world-engine simulation. */
+                 registry for back-compat + world-engine simulation.
+                 §9b/g/h — relationship events only appear when the settlement
+                 has linked neighbours to act on. */
               .filter(([k]) => !NON_AUTHORABLE_EVENTS.has(k))
+              .filter(([k]) => !RELATIONSHIP_OPTIONS[k] || hasNeighbours)
               .map(([k, s]) => (
                 <option key={k} value={k}>{s.label}</option>
               ))}
@@ -376,6 +406,15 @@ export default function EventComposer({
             </Field>
           );
         })()}
+
+        {/* §9b/§9g/§9h — relationship type for neighbour-targeted events */}
+        {RELATIONSHIP_OPTIONS[type] && (
+          <Field label="New relationship" hint="Sets this settlement's relationship with the chosen neighbour">
+            <select value={relationshipType || RELATIONSHIP_OPTIONS[type][0]} onChange={e => setRelationshipType(e.target.value)} style={selectStyle}>
+              {RELATIONSHIP_OPTIONS[type].map(r => <option key={r} value={r}>{RELATIONSHIP_LABELS[r] || r}</option>)}
+            </select>
+          </Field>
+        )}
 
         {/* ADD_NPC defines a NEW NPC, so its importance is a real choice.
             KILL_NPC does not ask — it derives from the selected NPC below. */}

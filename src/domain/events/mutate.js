@@ -61,6 +61,11 @@ export function mutateSettlement({ settlement, event, now = null }) {
     case 'CUT_TRADE_ROUTE':
       next = cutTradeRoute(next, stampedEvent);
       break;
+    case 'SETTLEMENT_DISPUTE':
+    case 'BROKERED_ALLIANCE':
+    case 'OPENED_TRADE_ROUTE':
+      next = setNeighbourRelationship(next, stampedEvent);
+      break;
 
     case 'ADD_NPC':
       next = addNpc(next, stampedEvent);
@@ -307,6 +312,34 @@ function depleteResource(s, event) {
       nearbyResourcesState: { ...state, [name]: 'depleted' },
     },
   };
+}
+
+// §9b/§9g/§9h — relationship events set the matched neighbour's
+// relationshipType on this settlement's neighbourNetwork. Brokered Alliance
+// fixes it to 'allied'; Settlement Dispute / Opened Trade Route use the chosen
+// payload type. The change is recorded for world-engine propagation; the
+// reciprocal neighbour link is reconciled by the regional graph that already
+// ingests neighbourNetwork. No-op when the named neighbour isn't linked.
+const ALLIANCE_REL = 'allied';
+function setNeighbourRelationship(s, event) {
+  const targetId = event.targetId;
+  if (!targetId) return s;
+  const relType = event.type === 'BROKERED_ALLIANCE'
+    ? ALLIANCE_REL
+    : (event.payload?.relationshipType || (event.type === 'SETTLEMENT_DISPUTE' ? 'rival' : 'trade_partners'));
+  const network = Array.isArray(s.neighbourNetwork) ? s.neighbourNetwork : [];
+  let touched = false;
+  const next = network.map((link) => {
+    const matches = String(link?.name || '') === String(targetId)
+      || String(link?.neighbourName || '') === String(targetId)
+      || String(link?.id || '') === String(targetId)
+      || String(link?.linkId || '') === String(targetId);
+    if (!matches) return link;
+    touched = true;
+    return { ...link, relationshipType: relType, displayRelationshipType: relType, _relationshipEventId: event.id };
+  });
+  if (!touched) return s;
+  return { ...s, neighbourNetwork: next };
 }
 
 function cutTradeRoute(s, event) {
