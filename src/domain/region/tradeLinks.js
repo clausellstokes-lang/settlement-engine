@@ -14,38 +14,57 @@
  * perturbs a settlement generated without a neighbour.
  */
 import { goodsIntersect } from './goodsCatalog.js';
+import { finishedGoodsCategoryOf } from '../../data/economicData.js';
 
 // Relationships under which the settlements don't openly trade goods.
 const NO_TRADE_RELATIONSHIPS = new Set(['hostile']);
 
 /**
+ * Good-level cross-settlement trade with the imported neighbour. Two matchers:
+ *   1. canonical good id (goodsCatalog) — same good on both sides;
+ *   2. CATEGORY bridge — a finished-goods demand category (military/etc.) we
+ *      supply matches one the neighbour trades, so a specific custom good
+ *      (Dragonbone Greatswords, satisfies:military) fills a neighbour's generic
+ *      "Advanced weapons and armour" demand. Our side's category comes from
+ *      opts.satisfiesOf (a custom good's declared `satisfies`) falling back to
+ *      the label's own category; the neighbour's from its labels.
  * @param {string[]} exportsList - this settlement's primaryExports
  * @param {string[]} importsList - this settlement's primaryImports
  * @param {{name?:string, relationshipType?:string, primaryExports?:string[], primaryImports?:string[], dynamics?:{economyMode?:string}}} neighbourProfile
- * @returns {Array<{good:string, goodId:string, direction:string, partner:string, viaNeighbour:boolean}>}
+ * @param {{satisfiesOf?:(label:string)=>(string|null)}} [opts]
+ * @returns {Array<{good:string, goodId:string, direction:string, partner:string, viaNeighbour:boolean, viaCategory?:boolean}>}
  */
-export function deriveTradeLinks(exportsList, importsList, neighbourProfile) {
+export function deriveTradeLinks(exportsList, importsList, neighbourProfile, opts = {}) {
   const np = neighbourProfile;
   if (!np || !np.name) return [];
   if (NO_TRADE_RELATIONSHIPS.has(np.relationshipType) || np.dynamics?.economyMode === 'suppress') return [];
 
   const links = [];
-  const seen = new Set();
+  const seen = new Set(); // `${direction}:${goodLabelLower}` so the two matchers don't duplicate
 
-  // We import X, the neighbour exports X → we source it from them.
-  for (const m of goodsIntersect(importsList || [], np.primaryExports || [])) {
-    const key = `in:${m.id}`;
-    if (seen.has(key)) continue;
+  const push = (good, goodId, direction, viaCategory) => {
+    const key = `${direction}:${String(good).toLowerCase()}`;
+    if (seen.has(key)) return;
     seen.add(key);
-    links.push({ good: m.sourceLabel, goodId: m.id, direction: 'import', partner: np.name, viaNeighbour: true });
+    links.push({ good, goodId, direction, partner: np.name, viaNeighbour: true, ...(viaCategory ? { viaCategory: true } : {}) });
+  };
+
+  // 1) canonical good id — same good traded both ways.
+  for (const m of goodsIntersect(importsList || [], np.primaryExports || [])) push(m.sourceLabel, m.id, 'import', false);
+  for (const m of goodsIntersect(exportsList || [], np.primaryImports || [])) push(m.sourceLabel, m.id, 'export', false);
+
+  // 2) category bridge — one link per category per direction.
+  const ourCat = (label) => (opts.satisfiesOf && opts.satisfiesOf(label)) || finishedGoodsCategoryOf(label);
+  const neighExportCats = new Set((np.primaryExports || []).map(finishedGoodsCategoryOf).filter(Boolean));
+  const neighImportCats = new Set((np.primaryImports || []).map(finishedGoodsCategoryOf).filter(Boolean));
+  const usedCat = new Set(); // `${direction}:${cat}` — one bridged link per category/direction
+  for (const g of (importsList || [])) {
+    const c = ourCat(g);
+    if (c && neighExportCats.has(c) && !usedCat.has(`import:${c}`)) { usedCat.add(`import:${c}`); push(g, `category.${c}`, 'import', true); }
   }
-
-  // We export X, the neighbour imports X → we sell it to them.
-  for (const m of goodsIntersect(exportsList || [], np.primaryImports || [])) {
-    const key = `out:${m.id}`;
-    if (seen.has(key)) continue;
-    seen.add(key);
-    links.push({ good: m.sourceLabel, goodId: m.id, direction: 'export', partner: np.name, viaNeighbour: true });
+  for (const g of (exportsList || [])) {
+    const c = ourCat(g);
+    if (c && neighImportCats.has(c) && !usedCat.has(`export:${c}`)) { usedCat.add(`export:${c}`); push(g, `category.${c}`, 'export', true); }
   }
 
   return links;

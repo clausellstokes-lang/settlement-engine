@@ -100,7 +100,17 @@ registerStep('generateEconomy', {
   // neighbour (canonical good matching) so the dossier can annotate them
   // ("Raw dragonbone — from Stonehaven"). No-op when there's no neighbour, the
   // relationship is hostile, or there's no overlap.
-  const tradeLinks = deriveTradeLinks(economicState.primaryExports, economicState.primaryImports, neighbourProfile);
+  // Our custom goods/institutions' declared `satisfies` category, so the matcher
+  // can bridge a specific custom good to a neighbour's category-level demand.
+  const satisfiesIndex = new Map();
+  for (const regCat of ['institutions', 'tradeGoods']) {
+    for (const e of (customDeps.registry().listCustom?.(regCat) || [])) {
+      if (e.raw?.satisfies && e.name) satisfiesIndex.set(String(e.name).toLowerCase(), e.raw.satisfies);
+    }
+  }
+  const tradeLinks = deriveTradeLinks(economicState.primaryExports, economicState.primaryImports, neighbourProfile, {
+    satisfiesOf: (label) => satisfiesIndex.get(String(label).toLowerCase()) || null,
+  });
   if (tradeLinks.length) economicState.tradeLinks = tradeLinks;
 
   const spatialLayout = generateSpatialLayout(tier, institutions, tradeRoute, terrainType);

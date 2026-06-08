@@ -47,4 +47,31 @@ describe('deriveTradeLinks', () => {
       name: 'Stonehaven', relationshipType: 'neutral', primaryExports: ['Silk bolts'], primaryImports: ['Exotic spices'],
     })).toEqual([]);
   });
+
+  it('bridges a custom good to a neighbour category demand via satisfiesOf', () => {
+    const links = deriveTradeLinks(['Dragonbone Greatswords'], [], {
+      name: 'Stonehaven', relationshipType: 'trade_partner',
+      primaryExports: [], primaryImports: ['Advanced weapons and armour (bulk contract)'],
+    }, { satisfiesOf: (l) => (l === 'Dragonbone Greatswords' ? 'military' : null) });
+    const link = links.find((l) => l.direction === 'export');
+    expect(link).toBeTruthy();
+    expect(link.viaCategory).toBe(true);
+    expect(link.good).toBe('Dragonbone Greatswords');
+  });
+
+  it('bridges by the label’s own category when no satisfiesOf is given', () => {
+    const links = deriveTradeLinks(['Quality weapons and armour'], [], {
+      name: 'Stonehaven', relationshipType: 'neutral',
+      primaryExports: [], primaryImports: ['Replacement arms and basic equipment'],
+    });
+    expect(links.some((l) => l.direction === 'export' && l.viaCategory)).toBe(true);
+  });
+
+  it('does not double-count a good matched both canonically and by category', () => {
+    // 'Iron' matches canonically; ensure only one export link for it.
+    const links = deriveTradeLinks(['Iron'], [], {
+      name: 'Stonehaven', relationshipType: 'neutral', primaryExports: [], primaryImports: ['Iron'],
+    });
+    expect(links.filter((l) => l.direction === 'export' && l.good.toLowerCase() === 'iron')).toHaveLength(1);
+  });
 });

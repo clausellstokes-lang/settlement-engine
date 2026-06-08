@@ -1081,3 +1081,39 @@ export const INSTITUTION_FINISHED_GOODS_DEMAND = {
     minTier: 'hamlet',
   },
 };
+
+// §14 — map a good LABEL to the finished-goods demand category it belongs to
+// (military / religious / maritime / luxury / alchemical). Matches against each
+// category's importLabels + exportBonus first, then a keyword fallback. Lets the
+// cross-settlement trade matcher bridge a specific good (a neighbour's "Advanced
+// weapons and armour" import) to a category (our Dragonbone Greatswords, which
+// `satisfies: military`). Returns null when nothing matches.
+const _FINISHED_GOODS_CATEGORY_INDEX = (() => {
+  const idx = [];
+  for (const [cat, cfg] of Object.entries(INSTITUTION_FINISHED_GOODS_DEMAND)) {
+    for (const l of (cfg.importLabels || [])) idx.push([cat, String(l).toLowerCase()]);
+    if (cfg.exportBonus) idx.push([cat, String(cfg.exportBonus).toLowerCase()]);
+  }
+  return idx;
+})();
+
+/** @type {Array<[string, RegExp]>} */
+const _FINISHED_GOODS_KEYWORDS = [
+  ['military', /\b(weapon|armou?r|blade|sword|arms|siege|polearm|shield)\b/],
+  ['religious', /\b(incense|ritual|vestment|sacred|votive|candle|reliquary)\b/],
+  ['maritime', /\b(cordage|sailcloth|rope|tar|pitch|naval|rigging|canvas)\b/],
+  ['luxury', /\b(luxur|silk|spice|jewel|gem|fine|perfume|ivory)\b/],
+  ['alchemical', /\b(potion|reagent|alchem|elixir|ink|scribal)\b/],
+];
+
+export function finishedGoodsCategoryOf(label) {
+  if (!label) return null;
+  const s = String(label).toLowerCase();
+  for (const [cat, l] of _FINISHED_GOODS_CATEGORY_INDEX) {
+    if (s.includes(l) || l.includes(s)) return cat;
+  }
+  for (const [cat, re] of _FINISHED_GOODS_KEYWORDS) {
+    if (re.test(s)) return cat;
+  }
+  return null;
+}
