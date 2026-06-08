@@ -27,6 +27,8 @@ import {
   serif_,
 } from '../theme.js';
 import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier } from './galleryUtils.js';
+import { useStore } from '../../store/index.js';
+import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
 import GalleryImage from './GalleryImage.jsx';
 import GalleryMoreByCreator from './GalleryMoreByCreator.jsx';
@@ -68,6 +70,13 @@ export default function GalleryDetail({
     const r = await shareGalleryDossier({ slug: dossier?.slug, name: dossier?.name || dossier?.settlement?.name });
     if (r.ok) { setShared(true); setTimeout(() => setShared(false), 1600); }
   };
+  // §4 — owner controls. The viewer owns this dossier iff one of their saved
+  // settlements is published under this slug (saves carry public_slug). Pure
+  // client; the public dossier itself is anonymized.
+  const savedSettlements = useStore(s => s.savedSettlements);
+  const ownedSave = (auth?.user && dossier?.slug)
+    ? (savedSettlements || []).find(sv => sv.public_slug && sv.public_slug === dossier.slug)
+    : null;
   if (loading) {
     return (
       <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm, textAlign: 'center' }}>
@@ -104,6 +113,29 @@ export default function GalleryDetail({
       </button>
       {actionError && <StatusMessage tone="danger">{actionError}</StatusMessage>}
       {actionNotice && <StatusMessage tone="success">{actionNotice}</StatusMessage>}
+      {ownedSave && (
+        <div style={{ border: `1px solid ${GOLD}`, borderRadius: R.lg, background: CARD_ALT, padding: SP.md, display: 'grid', gap: SP.sm }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            Your gallery listing
+          </div>
+          <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+            This is your published settlement. Edit the listing details (image, description, tags, DM-private visibility) or remove it from the gallery. The public dossier always reflects your current saved settlement.
+          </p>
+          <ShareToGallery
+            saveId={ownedSave.id}
+            isPublic={ownedSave.is_public}
+            publicSlug={ownedSave.public_slug}
+            campaignState={ownedSave.campaignState}
+            settlement={ownedSave.settlement}
+            galleryDescription={ownedSave.gallery_description}
+            galleryImageUrl={ownedSave.gallery_image_url}
+            galleryImageAlt={ownedSave.gallery_image_alt}
+            galleryTags={ownedSave.gallery_tags}
+            galleryShareNarrated={ownedSave.gallery_share_narrated}
+            galleryShareDm={ownedSave.gallery_share_dm}
+          />
+        </div>
+      )}
       <article style={{ overflow: 'hidden', border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD }}>
         <div className="gallery-detail-hero" style={{ display: 'grid', gap: 0 }}>
           <GalleryImage item={dossier} height={310} />

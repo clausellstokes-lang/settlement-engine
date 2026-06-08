@@ -128,7 +128,7 @@ function migrateSettlementShape(entry) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, is_public, public_slug, gallery_description, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   return data.map(row => {
@@ -147,6 +147,12 @@ async function supabaseList() {
     aiData:    usable ? (row.ai_data || {}) : {},
     gallery_share_narrated: row.gallery_share_narrated || false,
     gallery_share_dm: row.gallery_share_dm || false,
+    is_public: row.is_public || false,
+    public_slug: row.public_slug || null,
+    gallery_description: row.gallery_description || '',
+    gallery_image_url: row.gallery_image_url || '',
+    gallery_image_alt: row.gallery_image_alt || '',
+    gallery_tags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
     campaignState: row.campaign_state || null,
     versionHistory: Array.isArray(row.version_history) ? row.version_history : [],
     accessState,
