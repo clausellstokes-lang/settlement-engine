@@ -94,6 +94,7 @@ export default function App() {
   const { view, params, legacy, notFound } = useRoute();
   const setView = navigate;
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showScrollBottom, setShowScrollBottom] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const authTier = useStore(s => s.auth.tier);
@@ -232,9 +233,17 @@ export default function App() {
   }, [onboardingNudge, clearOnboardingNudge]);
 
   useEffect(() => {
-    const onScroll = () => setShowScrollTop(window.scrollY > 400);
+    const onScroll = () => {
+      const y = window.scrollY;
+      const doc = document.documentElement;
+      setShowScrollTop(y > 400);
+      // Show the jump-to-bottom control while there's >400px of page left below.
+      setShowScrollBottom((window.innerHeight + y) < (doc.scrollHeight - 400));
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
   }, []);
 
   // Gate premium-only views
@@ -622,27 +631,34 @@ export default function App() {
         )}
       </div>
 
-      {/* ── Scroll-to-top button ──────────────────────────────── */}
-      {showScrollTop && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          title="Back to top"
-          aria-label="Scroll to top"
-          style={{
+      {/* ── Scroll-to-top / scroll-to-bottom stack ────────────── */}
+      {(showScrollTop || showScrollBottom) && (() => {
+        const btn = {
+          width: 38, height: 38, borderRadius: R.lg,
+          background: 'rgba(28,20,9,0.82)',
+          border: '1px solid rgba(160,118,42,0.5)',
+          color: GOLD, fontSize: FS['16'], cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
+          backdropFilter: 'blur(4px)',
+          transition: 'opacity 0.2s',
+        };
+        return (
+          <div style={{
             position: 'fixed', bottom: isMobile ? 70 : SP.xxl, right: SP.xl, zIndex: 200,
-            width: 38, height: 38, borderRadius: R.lg,
-            background: 'rgba(28,20,9,0.82)',
-            border: '1px solid rgba(160,118,42,0.5)',
-            color: GOLD, fontSize: FS['16'], cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
-            backdropFilter: 'blur(4px)',
-            transition: 'opacity 0.2s',
-          }}
-        >
-          ↑
-        </button>
-      )}
+            display: 'flex', flexDirection: 'column', gap: 8,
+          }}>
+            {showScrollTop && (
+              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                title="Back to top" aria-label="Scroll to top" style={btn}>↑</button>
+            )}
+            {showScrollBottom && (
+              <button onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}
+                title="Jump to bottom" aria-label="Scroll to bottom" style={btn}>↓</button>
+            )}
+          </div>
+        );
+      })()}
 
       {/* ── Auth modal ────────────────────────────────────────── */}
       {authModalOpen && (
