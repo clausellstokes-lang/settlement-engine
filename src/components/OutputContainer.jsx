@@ -164,7 +164,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // durable home on the saved settlement row. readOnly still controls
   // editing affordances (regen, setAi from local-dev mock) independently.
   const narrativeEnabled = isConfigured ? !!saveId : true; // local-dev mock is ungated
-  const aiSettlement = playerView ? null : storeAi;
+  // Read-only surfaces (e.g. a public gallery dossier rendered in DM mode) must
+  // read the narrated layer from the passed settlement, NOT the viewer's store —
+  // otherwise the viewer's own active AI settlement would bleed into the dossier.
+  const aiSettlement = playerView ? null : (readOnly ? (propSettlement?.aiSettlement ?? null) : storeAi);
   const setAiSettlement = readOnly ? null : storeSetAi;
   const onRegenerate = readOnly ? null : storeRegenerate;
   const trackTabExplored = useStore(s => s.trackTabExplored);

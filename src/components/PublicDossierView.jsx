@@ -49,7 +49,7 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
     );
   }
 
-  const { settlement, name, tier, publishedAt, viewCount } = dossier;
+  const { settlement, name, tier, publishedAt, viewCount, shareDm } = dossier;
   const tierLabel = TIER_LABELS[tier] || tier;
 
   return (
@@ -108,8 +108,10 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
         )}
       </header>}
 
-      {/* The dossier itself, in read-only mode. */}
-      <OutputContainer settlement={settlement} readOnly playerView />
+      {/* The dossier itself, read-only. Player view by default (DM content hidden);
+          when the owner opted into "Reveal DM-private content" (shareDm), render in
+          DM mode so secrets, DM notes, the chronicle, etc. are shown. */}
+      <OutputContainer settlement={settlement} readOnly playerView={!shareDm} />
     </article>
   );
 }

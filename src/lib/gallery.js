@@ -346,6 +346,10 @@ function sanitizeDossier(row) {
     // unstripped (the server RPC already returns it raw in that case; this keeps
     // the client defense-in-depth from re-stripping what the owner chose to show).
     settlement:   toPublicSafe(row.data, { full: row.gallery_share_dm === true }),
+    // Owner opted to reveal DM-private content — the public viewer must render in
+    // DM mode (not player view), or the DM tabs/secrets stay hidden despite the
+    // data being present. See PublicDossierView.
+    shareDm:      row.gallery_share_dm === true,
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
