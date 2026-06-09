@@ -50,6 +50,7 @@ import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { tradeRouteSemantics } from './tradeRouteSemantics.js';
+import { canonStressors } from './canonicalAccessors.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -486,7 +487,7 @@ function deriveHousingPressure(s) {
 
   const pop = populationOf(s);
   // Without a real housing dataset, use population×stressors heuristic.
-  const stressors = Array.isArray(s.stressors) ? s.stressors : (Array.isArray(s.stresses) ? s.stresses : []);
+  const stressors = canonStressors(s);
   const refugeeStress = stressors.find(st => /refugee|displaced|influx|migrant/i.test(String(st?.type || st?.name || st)));
   if (refugeeStress) {
     score -= 18;

@@ -26,22 +26,11 @@ import { bandFor, clamp01 } from './bands.js';
 import { flag } from '../../lib/flags.js';
 import { deriveExportPosture } from '../display/dossierViewModel.js';
 import { isIsolatedRoute } from '../tradeRouteSemantics.js';
+import { canonStressors, canonExports, canonImports } from '../canonicalAccessors.js';
 
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
 
-/**
- * Return the first argument that is an Array, else []. Used by the
- * alias-fallback reads below — if `s.stressors` is an object instead
- * of an array (some legacy fixtures wrap it as `{count, items}`),
- * fall through to the next candidate instead of throwing on `.filter`.
- */
-function pickArray(...candidates) {
-  for (const c of candidates) {
-    if (Array.isArray(c)) return c;
-  }
-  return [];
-}
 
 /**
  * @param {Object} settlement — the engine's settlement object
@@ -95,12 +84,12 @@ function deriveResilience(s) {
 
   // Export/import diversity — many narrow exports = fragile. The legacy read
   // here was `econ.exports`, a field economicState doesn't populate (the list
-  // lives at primaryExports), so it always reported "No exports" even when the
-  // dossier listed them (§1d). Behind canonicalViewModel, source the count from
-  // the display model's exportPosture so every surface agrees.
+  // lives at primaryExports). Behind canonicalViewModel, source the count from
+  // the display model's exportPosture; otherwise the canonical accessor
+  // (primaryExports, legacy `exports` fallback) — so every surface agrees.
   const exportCount = flag('canonicalViewModel')
     ? deriveExportPosture(s).count
-    : (econ.exports || []).length;
+    : canonExports(s).length;
   if (exportCount === 0) {
     risks.push('No exports — economic isolation');
   } else if (exportCount >= 5) {
@@ -181,7 +170,7 @@ function deriveVolatility(s) {
   // settlement should still see a consistent count. `pickArray` guards
   // against intermediate consumers that wrap stress in an object
   // ({ count, items, ... }) instead of leaving it as a bare array.
-  const stresses = pickArray(s.stressors, s.stress, s.stresses);
+  const stresses = canonStressors(s);
   if (stresses.length >= 3) {
     value += 8;
     risks.push(`${stresses.length} active stressors`);
@@ -223,7 +212,7 @@ function deriveExternalThreat(s) {
   // Threat-tagged stresses. Same canonical-then-legacy fallback as
   // resilience above; without it, the threat dimension silently zeros
   // out on settlements that only carry the new `stressors` field.
-  const stressList = pickArray(s.stressors, s.stress, s.stresses);
+  const stressList = canonStressors(s);
   const threatStresses = stressList.filter(st => {
     const t = String(st.type || st.name || '').toLowerCase();
     return t.includes('siege') || t.includes('occupation') || t.includes('raid')
@@ -268,7 +257,7 @@ function deriveResourcePressure(s) {
   // isolation check so 'none'/'isolated' (and any future synonym) are treated alike.
   const tradeAccess = s.config?.tradeRouteAccess || 'none';
   const isolatedRoute = isIsolatedRoute(tradeAccess);
-  const imports = (econ.imports || []).length;
+  const imports = canonImports(s).length;
   if (imports >= 4 && isolatedRoute) {
     value += 12;
     risks.push(`${imports} imports needed but no real trade route`);

@@ -53,6 +53,7 @@ import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { tradeRouteSemantics, tradeRouteTier } from './tradeRouteSemantics.js';
+import { canonStressors, canonExports } from './canonicalAccessors.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -395,7 +396,7 @@ function deriveFoodProduction(s, ctx) {
       demand += m; push(demandContributors, cond.id, 'anchor_lost', +m, `${cond.label} pushes everyone onto remaining sources.`);
     }
   }
-  const stressors = Array.isArray(s.stressors) ? s.stressors : (Array.isArray(s.stresses) ? s.stresses : []);
+  const stressors = canonStressors(s);
   if (stressors.some(st => /refugee|migrant|influx/i.test(String(st?.name || st?.type || st)))) {
     demand += 12; push(demandContributors, 'stressors.refugee', 'influx', +12, 'Refugee influx raises food demand.');
   }
@@ -435,11 +436,7 @@ function deriveTransport(s, _ctx) {
   // DEMAND: settlement size + exports
   const pop = populationOf(s);
   if (pop >= 5000) { demand += 10; push(demandContributors, 'population', 'dense', +10, `Population ${pop} moves more goods.`); }
-  // Generation populates `primaryExports`; `exports` is a legacy alias. Read the
-  // canonical field first so export-driven demand isn't silently zeroed (the dossier
-  // already reads primaryExports — this makes the capacity substrate agree).
-  const exports = Array.isArray(s.economicState?.primaryExports) ? s.economicState.primaryExports
-    : (Array.isArray(s.economicState?.exports) ? s.economicState.exports : []);
+  const exports = canonExports(s);
   if (exports.length >= 4) {
     demand += 8; push(demandContributors, 'economicState.exports', 'broad', +8, `${exports.length} exports to move.`);
   } else if (exports.length >= 1) {
@@ -524,11 +521,7 @@ function deriveCraft(s, ctx) {
   if (pop >= 5000) { demand += 12; push(demandContributors, 'population', 'dense', +12, `Population ${pop} consumes more.`); }
   else if (pop >= 1000) { demand += 5; push(demandContributors, 'population', 'moderate', +5, `Population ${pop}.`); }
 
-  // Generation populates `primaryExports`; `exports` is a legacy alias. Read the
-  // canonical field first so export-driven demand isn't silently zeroed (the dossier
-  // already reads primaryExports — this makes the capacity substrate agree).
-  const exports = Array.isArray(s.economicState?.primaryExports) ? s.economicState.primaryExports
-    : (Array.isArray(s.economicState?.exports) ? s.economicState.exports : []);
+  const exports = canonExports(s);
   if (exports.length >= 2) {
     demand += 6; push(demandContributors, 'economicState.exports', 'broad', +6, `${exports.length} exports — sustained output demand.`);
   }

@@ -19,6 +19,7 @@
  */
 
 import { withActiveCondition } from './activeConditions.js';
+import { canonStressors } from './canonicalAccessors.js';
 
 // Ordered stressor (type/name) fragment -> condition archetype. First match wins.
 // Keyed off the canonical archetype vocabulary in activeConditions.js so the
@@ -33,14 +34,6 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   { re: /refugee|migrant|displac|exodus/i,                      archetype: 'regional_migration_pressure' },
   { re: /rebellion|revolt|uprising|insurrection|mutiny/i,       archetype: 'rebellion' },
 ]);
-
-/** Pull the canonical stressor array regardless of which alias the settlement carries. */
-function stressorList(settlement) {
-  if (Array.isArray(settlement?.stressors)) return settlement.stressors;
-  if (Array.isArray(settlement?.stress)) return settlement.stress;
-  if (settlement?.stress && typeof settlement.stress === 'object') return [settlement.stress];
-  return [];
-}
 
 /** @returns {string|null} the condition archetype this stressor promotes to, or null. */
 export function archetypeForStressor(stressor) {
@@ -68,7 +61,7 @@ export function promoteStressorsToConditions(settlement) {
   // the archetype (not the stressor label) so the condition id is stable and the
   // promotion stays idempotent. Order-independent.
   const byArchetype = new Map();
-  for (const stressor of stressorList(settlement)) {
+  for (const stressor of canonStressors(settlement)) {
     const archetype = archetypeForStressor(stressor);
     if (!archetype) continue;
     const severity = typeof stressor?.severity === 'number' ? stressor.severity : null;

@@ -60,10 +60,12 @@ test (the runaway guards) and new invariant tests.
   no longer score neutral. Pinned by tradeRouteSemantics.test + capacityModel.test.
 - [x] **P1.2 — `capacityModel` field reads:** _(shipped)_ reads canonical `primaryExports`
   (was a dead `economicState.exports` read → zeroed demand); legacy alias still honored.
-- [ ] **P1.3 — Canonical boundary:** one `resolveCanonical(settlement)` seam resolving
-  `stress/stresses/stressors`, `imports/primaryImports`, `tradeRouteAccess` once — instead of
-  scattered `pickArray(...)` fallbacks across 100+ readers. Declare the full alias set in the
-  schema.
+- [x] **P1.3 — Canonical boundary:** _(shipped)_ `domain/canonicalAccessors.js`
+  (`canonStressors` / `canonExports` / `canonImports`) is the single resolution point for the
+  stressor + economy-trade-good aliases. Migrated the substrate readers (deriveSystemState,
+  causalState, capacityModel, conditionPromotion) off their duplicated fallbacks — which also
+  caught two more dead reads (deriveSystemState's `econ.exports`/`econ.imports`). Schema notes
+  that nested economy aliases resolve here (FIELD_ALIASES is top-level only).
 - [x] **P1.4 — Reactive partial-rerun: RETIRED.** _(shipped)_ `getAffectedSteps`/`rerunAffected`
   were dead, untested, and buggy (keyed on step-names while callers think in data keys; merge
   order clobbered overrides) — and the wrong abstraction (derived state already recomputes on

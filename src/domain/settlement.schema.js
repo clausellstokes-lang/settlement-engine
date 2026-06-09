@@ -59,6 +59,12 @@ export const FIELD_ALIASES = Object.freeze({
   // once that concept gets normalized.)
 });
 
+// NESTED aliases (under economicState) can't live in the top-level map above —
+// `normalizeSettlement` only rewrites top-level keys. The economy's
+// primaryExports/primaryImports (legacy: exports/imports) are resolved at read
+// time by domain/canonicalAccessors.js (canonExports / canonImports), which is
+// the single boundary the substrate readers go through.
+
 // ── Canonical typedef ───────────────────────────────────────────────────────
 // The eventual target shape. Today's pipeline output is a flatter version of
 // this; `normalizeSettlement()` is the adapter. Update both this typedef and
