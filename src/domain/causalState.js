@@ -405,11 +405,16 @@ function deriveDefenseReadiness(s) {
   const contributors = [];
 
   const def = s.defenseProfile || {};
-  if (typeof def.readinessScore === 'number') {
-    const c = Math.round((def.readinessScore - 50) * 0.6);
+  // Read the persisted numeric readiness (defenseProfile.readiness.score). Was a dead
+  // read of def.readinessScore, which no generator produces — the generator computed
+  // the number then kept only the label, so measured readiness never reached the
+  // substrate. defenseGenerator now persists readiness.score; this consumes it.
+  const readinessScore = def.readiness?.score;
+  if (typeof readinessScore === 'number') {
+    const c = Math.round((readinessScore - 50) * 0.6);
     score += c;
-    push(contributors, 'defenseProfile.readinessScore', 'measured', c,
-      `Defense readiness score: ${def.readinessScore}.`);
+    push(contributors, 'defenseProfile.readiness.score', 'measured', c,
+      `Defense readiness score: ${readinessScore}.`);
   }
   // Wall, garrison, walls present
   if (def.hasWalls === true || /wall|rampart|palisade/i.test(JSON.stringify(def))) {
@@ -506,13 +511,19 @@ function deriveInfrastructureCondition(s) {
   const contributors = [];
 
   const def = s.defenseProfile || {};
-  if (typeof def.infrastructureScore === 'number') {
-    const c = Math.round((def.infrastructureScore - 50) * 0.6);
+  // Anchor infrastructure to the persisted defense scores: military already folds in
+  // walls/fortification-chain health, economic folds in siege logistics, so their mean
+  // is a real "built robustness" signal. Was a dead read of def.infrastructureScore,
+  // which no generator produces — only the institution-count fallback ever ran.
+  const sc = def.scores;
+  if (sc && typeof sc.military === 'number' && typeof sc.economic === 'number') {
+    const infra = (sc.military + sc.economic) / 2;
+    const c = Math.round((infra - 50) * 0.6);
     score += c;
-    push(contributors, 'defenseProfile.infrastructureScore', 'measured', c,
-      `Infrastructure score: ${def.infrastructureScore}.`);
+    push(contributors, 'defenseProfile.scores', 'measured', c,
+      `Fortification + logistics scores imply infrastructure ~${Math.round(infra)}.`);
   } else {
-    // Lacking an explicit score, infer from institution count
+    // No defense profile (un-generated / legacy) — infer from institution count.
     const instCount = Array.isArray(s.institutions) ? s.institutions.length : 0;
     if (instCount >= 15) { score += 10; push(contributors, 'institutions', 'dense', +10, `${instCount} institutions imply robust infrastructure.`); }
     else if (instCount <= 5) { score -= 6; push(contributors, 'institutions', 'thin', -6, `${instCount} institutions imply thin infrastructure.`); }

@@ -172,12 +172,20 @@ test (the runaway guards) and new invariant tests.
     (trade contributor absent when ledger present / present as legacy fallback; generated food supply
     invariant to route tier; a `blocked` chain still strains supply alongside a surplus ledger). The
     last residual food double-count is closed, so the template is clean before replication.
-  - [ ] **Stage 1 — Defense ledger (HIGH; two real dead reads).** `causalState` reads
-    `def.readinessScore` (generator computes readiness then discards the numeric) and
-    `def.infrastructureScore` (NO producer anywhere) — both permanently dead, same class as food's
-    `deficitMonths`. Persist numeric readiness; add `defenseLedger` over the already-persisted
-    `defenseProfile.scores.{military,monster,internal,economic,magical}`; anchor `deriveDefense`,
-    `deriveDefenseReadiness`, `deriveExternalThreat`.
+  - [x] **Stage 1a — Kill the two defense dead reads.** _(shipped)_ `defenseGenerator` now
+    persists the numeric `readiness.score` it previously computed and discarded (additive — all
+    consumers use `.label`/`.color`). `causalState.deriveDefenseReadiness` reads `def.readiness?.score`
+    (was a dead read of the non-existent `def.readinessScore`, with NO fallback — measured readiness
+    never reached the substrate). `deriveInfrastructureCondition` now anchors to the persisted
+    `defenseProfile.scores` (military = walls/fortification-chain health, economic = siege logistics;
+    their mean is a real built-robustness signal) instead of the dead `def.infrastructureScore`,
+    keeping institution-count inference as the legacy fallback. 4 causalState cases pin both
+    directions + that the measured contributors fire + the legacy fallback.
+  - [ ] **Stage 1b — Defense ledger accessor + lens convergence.** Create `src/domain/defenseLedger.js`
+    over `defenseProfile.scores.{military,monster,internal,economic,magical}` + readiness +
+    magicDependency (NEUTRAL defaults, `present:false`), then re-anchor `capacityModel.deriveDefense`
+    (stop the parallel institution/threat re-derivation) and `deriveSystemState.deriveExternalThreat`
+    (read `led.monster` instead of re-deriving from `config.monsterThreat`) onto it.
   - [ ] **Stage 2 — Governance ledger (HIGH; dead legitimacy branch).** `deriveSystemState`
     reads `publicLegitimacy` as a bare number but the producer emits `{score,label,breakdown}`, so
     the volatility legitimacy branch (+12/-8) NEVER fires (one-line `.score` fix). Unify the three

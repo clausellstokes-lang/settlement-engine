@@ -404,7 +404,7 @@ const computeDefenseScores = (
  * @param {{ military, monster, internal, economic, magical }} scores
  * @param {string} threat - Monster threat level
  * @param {string} tier   - Settlement tier
- * @returns {{ label, color, background, border }}
+ * @returns {{ score, label, color, background, border }}
  */
 const computeDefenseReadiness = (scores, threat, tier, magicExists = true) => {
   // Small tiers are cheaper to defend — small bonus that reflects genuine scale
@@ -426,14 +426,22 @@ const computeDefenseReadiness = (scores, threat, tier, magicExists = true) => {
     ? [scores.military, scores.monster, scores.internal, scores.economic, scores.magical]
     : [scores.military, scores.monster, scores.internal, scores.economic];
   const avgScore = Math.round(dims.reduce((a,b)=>a+b,0) / dims.length);
-  const readiness = Math.max(0, avgScore + tierBonus - threatPenalty);
+  // Clamp to [0,100] so the persisted readiness.score is an honest 0-100 metric
+  // (tierBonus can push avgScore past 100 for tiny tiers). Banding is unaffected:
+  // anything >=76 is Fortress either way, so no label changes from the clamp.
+  const readiness = Math.min(100, Math.max(0, avgScore + tierBonus - threatPenalty));
 
-  if (readiness >= 76) return { label: 'Fortress',         color: '#1a4a2a', background: '#f0faf2', border: '#a8d8b0' };
-  if (readiness >= 55) return { label: 'Well-Defended',    color: '#1a3a6a', background: '#f0f4fa', border: '#a8c0d8' };
-  if (readiness >= 38) return { label: 'Defensible',       color: '#5a6a1a', background: '#f4f8ec', border: '#b8d0a8' };
-  if (readiness >= 24) return { label: 'Lightly Defended', color: '#7a5010', background: '#faf6ec', border: '#e0c880' };
-  if (readiness >= 12) return { label: 'Vulnerable',       color: '#8a3010', background: '#fdf8ec', border: '#e8c080' };
-  return                       { label: 'Undefended',      color: '#8b1a1a', background: '#fdf4f4', border: '#e8c0c0' };
+  // Persist the numeric readiness alongside the label. It was previously computed
+  // here and discarded (only the label survived), which left causalState's measured
+  // readiness read permanently dead. Additive: existing consumers use .label/.color.
+  const band =
+    readiness >= 76 ? { label: 'Fortress',         color: '#1a4a2a', background: '#f0faf2', border: '#a8d8b0' } :
+    readiness >= 55 ? { label: 'Well-Defended',    color: '#1a3a6a', background: '#f0f4fa', border: '#a8c0d8' } :
+    readiness >= 38 ? { label: 'Defensible',       color: '#5a6a1a', background: '#f4f8ec', border: '#b8d0a8' } :
+    readiness >= 24 ? { label: 'Lightly Defended', color: '#7a5010', background: '#faf6ec', border: '#e0c880' } :
+    readiness >= 12 ? { label: 'Vulnerable',       color: '#8a3010', background: '#fdf8ec', border: '#e8c080' } :
+                      { label: 'Undefended',       color: '#8b1a1a', background: '#fdf4f4', border: '#e8c0c0' };
+  return { score: readiness, ...band };
 };
 
 // ─── generateDefenseProfile ───────────────────────────────────────────────────

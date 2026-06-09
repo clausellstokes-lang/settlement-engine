@@ -482,3 +482,59 @@ describe('deriveCausalState() — real generated settlement', () => {
     }
   });
 });
+
+// ── P3.3b Stage 1a: the two defense dead reads now reach the substrate ───────
+// defenseGenerator persists readiness.score (numeric); causalState reads it plus
+// the persisted defense scores. Previously def.readinessScore / def.infrastructureScore
+// were read but no generator produced them (dead reads — readiness had no fallback).
+describe('defense_readiness reads the persisted numeric readiness (P3.3b Stage 1a)', () => {
+  const town = (readinessScore) => ({
+    name: 'T', tier: 'town', population: 2000,
+    config: { monsterThreat: 'safe' },
+    defenseProfile: {
+      readiness: { score: readinessScore, label: 'x' },
+      scores: { military: 50, monster: 50, internal: 50, economic: 50, magical: 50 },
+    },
+    powerStructure: { factions: [] }, activeConditions: [],
+  });
+
+  it('a high-readiness fortress scores higher defense_readiness than an undefended town', () => {
+    expect(deriveSystemVariable('defense_readiness', town(90)).score)
+      .toBeGreaterThan(deriveSystemVariable('defense_readiness', town(10)).score);
+  });
+
+  it('the measured-readiness contributor fires (was a dead def.readinessScore read)', () => {
+    const v = deriveSystemVariable('defense_readiness', town(90));
+    expect(v.contributors.some(c => c.source === 'defenseProfile.readiness.score')).toBe(true);
+  });
+});
+
+describe('infrastructure_condition anchors to the persisted defense scores (P3.3b Stage 1a)', () => {
+  const town = (military, economic) => ({
+    name: 'T', tier: 'town', population: 2000,
+    config: {},
+    defenseProfile: {
+      scores: { military, economic, monster: 50, internal: 50, magical: 50 },
+      readiness: { score: 50, label: 'x' },
+    },
+    institutions: [], powerStructure: { factions: [] }, activeConditions: [],
+  });
+
+  it('strong fortifications + logistics raise infrastructure_condition over weak ones', () => {
+    expect(deriveSystemVariable('infrastructure_condition', town(90, 90)).score)
+      .toBeGreaterThan(deriveSystemVariable('infrastructure_condition', town(10, 10)).score);
+  });
+
+  it('the measured contributor fires from defenseProfile.scores (was a dead infrastructureScore read)', () => {
+    const v = deriveSystemVariable('infrastructure_condition', town(90, 90));
+    expect(v.contributors.some(c => c.source === 'defenseProfile.scores')).toBe(true);
+  });
+
+  it('falls back to institution-count inference when no defense profile (legacy save)', () => {
+    const dense = { institutions: Array.from({ length: 16 }, (_, i) => ({ id: `i${i}`, name: `Inst ${i}` })), powerStructure: { factions: [] } };
+    const thin  = { institutions: [{ id: 'i1', name: 'Inst' }], powerStructure: { factions: [] } };
+    const denseV = deriveSystemVariable('infrastructure_condition', dense);
+    expect(denseV.score).toBeGreaterThan(deriveSystemVariable('infrastructure_condition', thin).score);
+    expect(denseV.contributors.some(c => c.source === 'institutions')).toBe(true);
+  });
+});
