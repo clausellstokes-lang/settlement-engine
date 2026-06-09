@@ -52,6 +52,7 @@ import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
+import { tradeRouteSemantics, tradeRouteTier } from './tradeRouteSemantics.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -374,10 +375,12 @@ function deriveFoodProduction(s, ctx) {
     }
   }
 
-  // SUPPLY: trade route imports
-  const trade = s.config?.tradeRouteAccess;
-  if (trade === 'major') {
-    supply += 6; push(supplyContributors, 'config.tradeRouteAccess', 'major', +6, 'Major trade route supplements food.');
+  // SUPPLY: trade route imports. Major-tier routes (crossroads/port) supplement
+  // food; canonical semantics so port/crossroads are no longer mis-read as neutral.
+  const foodTrade = tradeRouteSemantics(s.config?.tradeRouteAccess);
+  if (foodTrade.foodSupply !== 0) {
+    supply += foodTrade.foodSupply;
+    push(supplyContributors, 'config.tradeRouteAccess', foodTrade.tier, foodTrade.foodSupply, 'Strong trade route supplements food.');
   }
 
   // DEMAND: population
@@ -409,14 +412,15 @@ function deriveTransport(s, _ctx) {
   let supply = 45;
   let demand = 50;
 
-  // SUPPLY: trade route access
-  const trade = s.config?.tradeRouteAccess;
-  if (trade === 'major') {
-    supply += 22; push(supplyContributors, 'config.tradeRouteAccess', 'major', +22, 'Major trade route.');
-  } else if (trade === 'minor' || trade === 'standard' || trade === 'road') {
-    supply += 12; push(supplyContributors, 'config.tradeRouteAccess', String(trade), +12, `${trade} trade access.`);
-  } else if (trade === 'none' || trade === 'isolated') {
-    supply -= 15; push(supplyContributors, 'config.tradeRouteAccess', String(trade), -15, 'Isolated from regional transport.');
+  // SUPPLY: trade route access. Canonical semantics so river/crossroads/port get
+  // their proper transport tier instead of falling through to neutral.
+  const transTrade = tradeRouteSemantics(s.config?.tradeRouteAccess);
+  if (transTrade.transport !== 0) {
+    supply += transTrade.transport;
+    push(supplyContributors, 'config.tradeRouteAccess', transTrade.tier, transTrade.transport,
+      transTrade.isolated ? 'Isolated from regional transport.'
+        : transTrade.tier === 'major' ? `Major trade route (${transTrade.value}).`
+        : `${transTrade.value} trade access.`);
   }
 
   // SUPPLY: port / road institutions
@@ -431,7 +435,11 @@ function deriveTransport(s, _ctx) {
   // DEMAND: settlement size + exports
   const pop = populationOf(s);
   if (pop >= 5000) { demand += 10; push(demandContributors, 'population', 'dense', +10, `Population ${pop} moves more goods.`); }
-  const exports = Array.isArray(s.economicState?.exports) ? s.economicState.exports : [];
+  // Generation populates `primaryExports`; `exports` is a legacy alias. Read the
+  // canonical field first so export-driven demand isn't silently zeroed (the dossier
+  // already reads primaryExports — this makes the capacity substrate agree).
+  const exports = Array.isArray(s.economicState?.primaryExports) ? s.economicState.primaryExports
+    : (Array.isArray(s.economicState?.exports) ? s.economicState.exports : []);
   if (exports.length >= 4) {
     demand += 8; push(demandContributors, 'economicState.exports', 'broad', +8, `${exports.length} exports to move.`);
   } else if (exports.length >= 1) {
@@ -503,10 +511,12 @@ function deriveCraft(s, ctx) {
     supply += 6; push(supplyContributors, 'faction.craft', 'power', +6, `Craft faction at power ${craftPower}.`);
   }
 
-  // SUPPLY: trade for raw materials
-  const trade = s.config?.tradeRouteAccess;
-  if (trade === 'major' || trade === 'minor' || trade === 'standard' || trade === 'road') {
-    supply += 4; push(supplyContributors, 'config.tradeRouteAccess', String(trade), +4, 'Trade route supplies raw materials.');
+  // SUPPLY: trade for raw materials. Any connected route (major or standard tier)
+  // supplies raw materials; isolated/unknown contribute nothing. Canonical tier so
+  // river/crossroads/port are no longer mis-read as isolated.
+  const rawTier = tradeRouteTier(s.config?.tradeRouteAccess);
+  if (rawTier === 'major' || rawTier === 'standard') {
+    supply += 4; push(supplyContributors, 'config.tradeRouteAccess', rawTier, +4, 'Trade route supplies raw materials.');
   }
 
   // DEMAND: population + exports
@@ -514,7 +524,11 @@ function deriveCraft(s, ctx) {
   if (pop >= 5000) { demand += 12; push(demandContributors, 'population', 'dense', +12, `Population ${pop} consumes more.`); }
   else if (pop >= 1000) { demand += 5; push(demandContributors, 'population', 'moderate', +5, `Population ${pop}.`); }
 
-  const exports = Array.isArray(s.economicState?.exports) ? s.economicState.exports : [];
+  // Generation populates `primaryExports`; `exports` is a legacy alias. Read the
+  // canonical field first so export-driven demand isn't silently zeroed (the dossier
+  // already reads primaryExports — this makes the capacity substrate agree).
+  const exports = Array.isArray(s.economicState?.primaryExports) ? s.economicState.primaryExports
+    : (Array.isArray(s.economicState?.exports) ? s.economicState.exports : []);
   if (exports.length >= 2) {
     demand += 6; push(demandContributors, 'economicState.exports', 'broad', +6, `${exports.length} exports — sustained output demand.`);
   }

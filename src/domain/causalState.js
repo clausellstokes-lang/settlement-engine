@@ -49,6 +49,7 @@ import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
+import { tradeRouteSemantics } from './tradeRouteSemantics.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -330,11 +331,19 @@ function deriveTradeConnectivity(s) {
   let score = 50;
   const contributors = [];
 
-  // Trade access from generator config
+  // Trade access from generator config. Canonical semantics map EVERY emitted
+  // value (road/river/crossroads/port/coastal/isolated) and the legacy
+  // major/minor/standard/none into a tier + score — so river/crossroads/port no
+  // longer fall through to a neutral 0 (the bug this fixed).
   const trade = s.config?.tradeRouteAccess || s.tradeRouteAccess;
-  if (trade === 'major') { score += 18; push(contributors, 'config.tradeRouteAccess', 'major', +18, 'Settlement sits on a major trade route.'); }
-  else if (trade === 'minor' || trade === 'standard') { score += 8; push(contributors, 'config.tradeRouteAccess', String(trade), +8, `Settlement has ${trade} trade access.`); }
-  else if (trade === 'none' || trade === 'isolated') { score -= 12; push(contributors, 'config.tradeRouteAccess', String(trade), -12, 'Settlement is isolated from regional trade.'); }
+  const tradeSem = tradeRouteSemantics(trade);
+  if (tradeSem.connectivity !== 0) {
+    score += tradeSem.connectivity;
+    push(contributors, 'config.tradeRouteAccess', tradeSem.tier, tradeSem.connectivity,
+      tradeSem.isolated ? 'Settlement is isolated from regional trade.'
+        : tradeSem.tier === 'major' ? `Settlement sits on a major trade route (${trade}).`
+        : `Settlement has ${trade} trade access.`);
+  }
 
   // Trade supply chains
   const chains = deriveAllSupplyChainStates(s);

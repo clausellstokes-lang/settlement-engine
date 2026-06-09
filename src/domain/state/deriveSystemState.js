@@ -25,6 +25,7 @@
 import { bandFor, clamp01 } from './bands.js';
 import { flag } from '../../lib/flags.js';
 import { deriveExportPosture } from '../display/dossierViewModel.js';
+import { isIsolatedRoute } from '../tradeRouteSemantics.js';
 
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
@@ -263,13 +264,15 @@ function deriveResourcePressure(s) {
     risks.push(`${vulnerable} vulnerable supply chain${vulnerable === 1 ? '' : 's'}`);
   }
 
-  // Unmet imports — high import dependency without a real trade route
+  // Unmet imports — high import dependency without a real trade route. Canonical
+  // isolation check so 'none'/'isolated' (and any future synonym) are treated alike.
   const tradeAccess = s.config?.tradeRouteAccess || 'none';
+  const isolatedRoute = isIsolatedRoute(tradeAccess);
   const imports = (econ.imports || []).length;
-  if (imports >= 4 && (tradeAccess === 'none' || tradeAccess === 'isolated')) {
+  if (imports >= 4 && isolatedRoute) {
     value += 12;
     risks.push(`${imports} imports needed but no real trade route`);
-  } else if (imports >= 1 && tradeAccess !== 'none' && tradeAccess !== 'isolated') {
+  } else if (imports >= 1 && !isolatedRoute) {
     drivers.push(`${imports} imports via ${tradeAccess}`);
   }
 

@@ -54,13 +54,12 @@ test (the runaway guards) and new invariant tests.
 
 ## P1 — One vocabulary (consolidation)
 
-- [ ] **P1.1 — `tradeRouteSemantics.js`:** one enum for `road/river/crossroads/port/isolated`
-  with score + import-coverage metadata. Replace the `major/minor/standard` branches in
-  `causalState.js:335-337` and `capacityModel.js`. *Invariant:* every emittable route value
-  yields a distinct, non-neutral score in BOTH `causalState` and `capacityModel`.
-- [ ] **P1.2 — `capacityModel` field reads:** read `primaryExports`/`primaryImports`
-  (currently reads dead `economicState.exports`). *Invariant:* export-driven demand is
-  nonzero for an export-rich settlement.
+- [x] **P1.1 — `tradeRouteSemantics.js`:** _(shipped)_ one canonical tier map for
+  road/river/crossroads/port/coastal/isolated + legacy major/minor/standard/none, feeding
+  causalState connectivity + capacityModel transport/food/raw-materials. river/crossroads/port
+  no longer score neutral. Pinned by tradeRouteSemantics.test + capacityModel.test.
+- [x] **P1.2 — `capacityModel` field reads:** _(shipped)_ reads canonical `primaryExports`
+  (was a dead `economicState.exports` read → zeroed demand); legacy alias still honored.
 - [ ] **P1.3 — Canonical boundary:** one `resolveCanonical(settlement)` seam resolving
   `stress/stresses/stressors`, `imports/primaryImports`, `tradeRouteAccess` once — instead of
   scattered `pickArray(...)` fallbacks across 100+ readers. Declare the full alias set in the

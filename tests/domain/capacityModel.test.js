@@ -458,3 +458,40 @@ describe('deriveAllCapacities() — real generated settlement', () => {
     expect(JSON.stringify(settlement)).toBe(before);
   });
 });
+
+// ── Canonical field + trade-route vocabulary (P1.1 / P1.2) ──────────────────
+describe('capacity model reads the canonical primaryExports field (P1.2)', () => {
+  const withExports = (field, value) => ({
+    name: 'X', tier: 'town', population: 2000,
+    config: { tradeRouteAccess: 'road', monsterThreat: 'safe' },
+    economicState: { prosperity: 'Modest', [field]: value },
+    institutions: [], powerStructure: { factions: [] }, activeConditions: [],
+  });
+  const FIVE = ['grain', 'wool', 'iron', 'cloth', 'ale'];
+
+  it('transport demand rises with primaryExports (was a dead `exports` read)', () => {
+    const none = deriveCapacityProfile('transport', withExports('primaryExports', [])).demand;
+    const rich = deriveCapacityProfile('transport', withExports('primaryExports', FIVE)).demand;
+    expect(rich).toBeGreaterThan(none);
+  });
+
+  it('still honors the legacy `exports` alias', () => {
+    const none = deriveCapacityProfile('transport', withExports('exports', [])).demand;
+    const rich = deriveCapacityProfile('transport', withExports('exports', FIVE)).demand;
+    expect(rich).toBeGreaterThan(none);
+  });
+});
+
+describe('capacity transport supply reflects canonical trade routes (P1.1)', () => {
+  const route = (r) => ({
+    name: 'X', tier: 'town', population: 1500,
+    config: { tradeRouteAccess: r, monsterThreat: 'safe' },
+    economicState: {}, institutions: [], powerStructure: { factions: [] }, activeConditions: [],
+  });
+  it('road/river/crossroads/port all beat isolated on transport supply', () => {
+    const iso = deriveCapacityProfile('transport', route('isolated')).supply;
+    for (const r of ['road', 'river', 'crossroads', 'port']) {
+      expect(deriveCapacityProfile('transport', route(r)).supply, `${r} > isolated`).toBeGreaterThan(iso);
+    }
+  });
+});
