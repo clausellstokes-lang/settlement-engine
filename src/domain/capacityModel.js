@@ -54,6 +54,7 @@ import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { tradeRouteSemantics, tradeRouteTier } from './tradeRouteSemantics.js';
 import { canonStressors, canonExports } from './canonicalAccessors.js';
+import { foodLedger } from './foodLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -382,6 +383,21 @@ function deriveFoodProduction(s, ctx) {
   if (foodTrade.foodSupply !== 0) {
     supply += foodTrade.foodSupply;
     push(supplyContributors, 'config.tradeRouteAccess', foodTrade.tier, foodTrade.foodSupply, 'Strong trade route supplements food.');
+  }
+
+  // SUPPLY: conserved food ledger (P3.2). Anchor this capacity to foodGenerator's
+  // caloric self-sufficiency so the two food lenses point the SAME direction — a
+  // deficit town reads as strained food CAPACITY here, not just on the foodSecurity
+  // label. Retires the "two food models can disagree" gap; banded to the same
+  // thresholds the label + causal/resilience derivers use.
+  const led = foodLedger(s);
+  if (led.present) {
+    if (led.deficitPct > 0) {
+      const m = led.deficitPct > 40 ? 22 : led.deficitPct > 15 ? 12 : 5;
+      supply -= m; push(supplyContributors, 'foodLedger', 'deficit', -m, `${led.deficitPct}% caloric deficit strains food supply.`);
+    } else if (led.surplusPct >= 40) {
+      supply += 8; push(supplyContributors, 'foodLedger', 'surplus', +8, `${led.surplusPct}% caloric surplus eases food supply.`);
+    }
   }
 
   // DEMAND: population

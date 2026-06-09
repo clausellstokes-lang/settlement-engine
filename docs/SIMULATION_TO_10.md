@@ -143,8 +143,19 @@ test (the runaway guards) and new invariant tests.
   food_security (it never did before). Two existing tests that encoded the phantom field were
   reconciled to the real one. Pinned by foodLedger.test (deficit < surplus on both substrates);
   soak/balance held.
-- [ ] **P3.2 — Converge `capacityModel`'s food lens onto the ledger** (retire the two food models).
-- [ ] **P3.3 — Extend the conserved set** (labor/housing/security/healing/throughput).
+- [x] **P3.2 — Converge `capacityModel`'s food lens onto the ledger.** _(shipped)_
+  `deriveFoodProduction` now takes a supply contributor from the conserved ledger
+  (deficitPct strains supply, surplusPct eases it, banded to the foodSecurity thresholds), so
+  the capacity lens agrees in DIRECTION with foodGenerator's caloric self-sufficiency — the
+  "two food models can disagree" gap is retired. Pinned by band-boundary tests; legacy/
+  un-generated saves untouched (present:false gate). Adversarially verified (3 reviewers):
+  the overlap with the existing food-chain contributors is directionally-correct + bounded
+  (clamp floor, no cross-tick feedback → cannot run away).
+- [ ] **P3.3 — Extend the conserved set** (labor/housing/security/healing/throughput) AND
+  resolve the P3.2 overlap: make the ledger the single food-physics source (fold food-chain
+  status into the ledger, or exclude capacityModel's chain contributors when the ledger is
+  present); add a soak case with a real `economicState.foodSecurity` deficit so the loop
+  actually exercises the P3.2 branch.
 - [ ] **North star:** every pressure flows through the one condition substrate + conserved
   ledger; every deriver/lens/trace/AI-overlay consumes them. Consistency architecturally enforced.
 

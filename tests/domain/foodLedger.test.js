@@ -10,6 +10,7 @@ import { describe, it, expect } from 'vitest';
 import { foodLedger } from '../../src/domain/foodLedger.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
+import { deriveCapacityProfile } from '../../src/domain/capacityModel.js';
 
 describe('foodLedger', () => {
   it('reads the canonical quantities off economicState.foodSecurity', () => {
@@ -71,5 +72,24 @@ describe('P3.1 — food deficit moves resilience + causal food_security', () => 
   it('a deep-deficit town has lower causal food_security than a surplus town', () => {
     expect(deriveCausalState(town(DEFICIT)).scores.food_security)
       .toBeLessThan(deriveCausalState(town(SURPLUS)).scores.food_security);
+  });
+
+  // P3.2: the capacity model's food lens now agrees with the ledger direction —
+  // no more "two food models disagreeing".
+  it('a deep-deficit town has lower capacityModel food capacity than a surplus town', () => {
+    const deficit = deriveCapacityProfile('food_production', town(DEFICIT));
+    const surplus = deriveCapacityProfile('food_production', town(SURPLUS));
+    expect(deficit.ratio).toBeLessThan(surplus.ratio);
+  });
+
+  it('food capacity worsens monotonically across the deficit bands (P3.2 boundaries)', () => {
+    const ratio = (fs) => deriveCapacityProfile('food_production', town(fs)).ratio;
+    const severe    = ratio({ deficitPct: 41 }); // -22 supply (>40 band)
+    const importDep = ratio({ deficitPct: 16 }); // -12 (>15 band)
+    const pressured = ratio({ deficitPct: 6 });  //  -5 (>5 band)
+    const surplus   = ratio({ surplusPct: 40 }); //  +8 (>=40 band)
+    expect(severe).toBeLessThan(importDep);
+    expect(importDep).toBeLessThan(pressured);
+    expect(pressured).toBeLessThan(surplus);
   });
 });
