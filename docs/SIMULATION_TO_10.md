@@ -210,9 +210,14 @@ test (the runaway guards) and new invariant tests.
     as food lenses band `deficitPct` differently) — only the READ + null/legacy handling is unified, so
     a legacy bare-number legitimacy now moves every lens. Governing-faction power deliberately left out
     (two distinct notions, not a shared quantity). governanceLedger unit tests + a cross-lens cohesion
-    test. (Housing deferred — no producer exists.) Follow-up (non-blocking, surfaced by verify):
-    `factionProfile.legitimacyFor` (factionProfile.js:185) reads `publicLegitimacy?.score` directly and
-    should also route through `governanceLedger` for full single-source cohesion.
+    test. (Housing deferred — no producer exists.)
+  - [x] **Stage 1c/2c — Cohesion routing complete.** _(shipped)_ Routed the last direct ledger-quantity
+    readers through their accessors for full single-source cohesion: `factionProfile.legitimacyFor`
+    now reads `governanceLedger` (and gains legacy-bare-number support); `causalState.deriveDefenseReadiness`
+    + `deriveInfrastructureCondition` now read `defenseLedger` (readinessScore / military+economic) instead
+    of `s.defenseProfile.*` directly. Behaviour-preserving for generated data (the ledgers return the same
+    persisted values; edge-only leniency toward neutral-50 defaults). The dead `settlement.power.publicLegitimacy`
+    alias path (no producer) is dropped.
   - [x] **Stage 3 — Magic ledger + fix the magicLevel vocabulary mismatch.** _(shipped)_ The real
     bug was sharper than "band-blindness": `getMagicLevel` emits `none/low/medium/high`, but the lenses
     string-matched a STALE vocabulary (`moderate/common/pervasive/rare`) the generator never emits — so

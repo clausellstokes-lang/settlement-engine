@@ -31,6 +31,7 @@
  */
 
 import { factionArchetype, FACTION_ARCHETYPES as FA } from './factionArchetypes.js';
+import { governanceLedger } from './governanceLedger.js';
 
 // Small inline id helper — derives 'faction.<snake_name>' from a faction
 // name. Kept local to this file so the domain layer doesn't import
@@ -182,8 +183,10 @@ function legitimacyFor(faction, settlement) {
   const isGoverning = !!(govName && factionName && govName.toLowerCase().includes(factionName.toLowerCase().split(/[\s/(]/)[0].toLowerCase()))
     || power.governingFactionName === factionName;
 
-  const settlementLeg = power.publicLegitimacy?.score;
-  if (isGoverning && typeof settlementLeg === 'number') return settlementLeg;
+  // Governing faction inherits the settlement's public legitimacy via the conserved
+  // governance ledger (handles the { score } object + legacy bare number uniformly).
+  const gov = governanceLedger(settlement);
+  if (isGoverning && gov.present) return gov.legitimacyScore;
 
   // Non-governing factions: neutral baseline. Future Tier 4.2 work
   // will shift this based on whether the faction is sponsoring relief,

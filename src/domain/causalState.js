@@ -55,6 +55,7 @@ import { foodLedger } from './foodLedger.js';
 import { governanceLedger } from './governanceLedger.js';
 import { magicLedger } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
+import { defenseLedger } from './defenseLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -407,16 +408,13 @@ function deriveDefenseReadiness(s) {
   const contributors = [];
 
   const def = s.defenseProfile || {};
-  // Read the persisted numeric readiness (defenseProfile.readiness.score). Was a dead
-  // read of def.readinessScore, which no generator produces — the generator computed
-  // the number then kept only the label, so measured readiness never reached the
-  // substrate. defenseGenerator now persists readiness.score; this consumes it.
-  const readinessScore = def.readiness?.score;
-  if (typeof readinessScore === 'number') {
-    const c = Math.round((readinessScore - 50) * 0.6);
+  // Read the persisted numeric readiness via the conserved defense ledger.
+  const led = defenseLedger(s);
+  if (led.present) {
+    const c = Math.round((led.readinessScore - 50) * 0.6);
     score += c;
     push(contributors, 'defenseProfile.readiness.score', 'measured', c,
-      `Defense readiness score: ${readinessScore}.`);
+      `Defense readiness score: ${led.readinessScore}.`);
   }
   // Wall, garrison, walls present
   if (def.hasWalls === true || /wall|rampart|palisade/i.test(JSON.stringify(def))) {
@@ -512,14 +510,12 @@ function deriveInfrastructureCondition(s) {
   let score = 50;
   const contributors = [];
 
-  const def = s.defenseProfile || {};
-  // Anchor infrastructure to the persisted defense scores: military already folds in
-  // walls/fortification-chain health, economic folds in siege logistics, so their mean
-  // is a real "built robustness" signal. Was a dead read of def.infrastructureScore,
-  // which no generator produces — only the institution-count fallback ever ran.
-  const sc = def.scores;
-  if (sc && typeof sc.military === 'number' && typeof sc.economic === 'number') {
-    const infra = (sc.military + sc.economic) / 2;
+  // Anchor infrastructure to the persisted defense scores via the conserved defense ledger:
+  // military already folds in walls/fortification-chain health, economic folds in siege
+  // logistics, so their mean is a real "built robustness" signal.
+  const led = defenseLedger(s);
+  if (led.present) {
+    const infra = (led.military + led.economic) / 2;
     const c = Math.round((infra - 50) * 0.6);
     score += c;
     push(contributors, 'defenseProfile.scores', 'measured', c,
