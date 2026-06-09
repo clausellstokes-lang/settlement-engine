@@ -64,6 +64,7 @@ describe('advanceNpcCorruption — per-tick onset + organic exposure', () => {
     expect(minRank).toBeLessThan(3); // demoted
     expect(ousted).toBe(true);       // eventually ousted
     expect(sawTie).toBe(true);       // exposure names the tied criminal institution
+    expect(find(ws, /Greedy Guard/).timesExposed).toBeGreaterThan(0); // scar accrues
   });
 
   it('no criminal institution → no onset (rule)', () => {

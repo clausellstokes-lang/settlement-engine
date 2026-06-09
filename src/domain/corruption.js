@@ -69,9 +69,13 @@ export const CORRUPTION_TUNING = Object.freeze({
   // Generation-time roll for an eligible NPC when a criminal institution exists.
   spawn: { base: 0.10, crime: 0.35, security: 0.20, prosperity: 0.15, min: 0.02, max: 0.60 },
   // Per-(month-equivalent)-tick onset hazard for a clean eligible NPC.
-  onset: { base: 0.04, crime: 0.12, security: 0.08, prosperity: 0.06, min: 0.005, max: 0.25 },
+  // `exposurePenalty`: each PRIOR exposure (organic or DM) makes re-corruption
+  // progressively harder (a burned official is warier + more watched).
+  onset: { base: 0.04, crime: 0.12, security: 0.08, prosperity: 0.06, exposurePenalty: 0.6, min: 0.005, max: 0.25 },
   // Per-tick organic exposure of a corrupt NPC — the self-cleaning counter-force.
-  exposure: { base: 0.05, security: 0.20, prosperity: 0.12, guild: 0.22, visibility: 0.06, min: 0.01, max: 0.50 },
+  // `repeatBoost`: each prior exposure makes re-exposure EASIER (a known repeat
+  // offender draws more scrutiny once they relapse).
+  exposure: { base: 0.05, security: 0.20, prosperity: 0.12, guild: 0.22, visibility: 0.06, repeatBoost: 0.35, min: 0.01, max: 0.50 },
   // Once a corrupt NPC has eroded to 'notable', each further exposure rolls this
   // (very low) chance to be outed entirely + replaced by a fresh NPC.
   outReplaceAtNotable: 0.08,
@@ -96,24 +100,29 @@ export function spawnCorruptionChance({ crime = 0, security = 0.5, prosperity = 
  * Independent per-NPC rolls make the settlement's corrupt FRACTION saturate
  * naturally (corrupt NPCs stop rolling), so no explicit logistic is needed here.
  */
-export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5 } = {}) {
+export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0 } = {}) {
   const t = CORRUPTION_TUNING.onset;
-  const p = t.base + n01(crime) * t.crime - n01(security) * t.security - n01(prosperity) * t.prosperity;
+  let p = t.base + n01(crime) * t.crime - n01(security) * t.security - n01(prosperity) * t.prosperity;
+  // A burned official is warier + more watched: each prior exposure makes
+  // re-corruption progressively harder (diminishing, never zero).
+  p /= 1 + t.exposurePenalty * Math.max(0, priorExposures);
   return clamp(p, t.min, t.max);
 }
 
 /**
  * Per-tick organic exposure probability for a corrupt NPC. Rises with security +
  * prosperity and the NPC's visibility (standing); falls with guild strength.
- * @param {{security?:number, prosperity?:number, guildStrength?:number, visibility?:number}} args
+ * @param {{security?:number, prosperity?:number, guildStrength?:number, visibility?:number, priorExposures?:number}} args
  */
-export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength = 0, visibility = 0.5 } = {}) {
+export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength = 0, visibility = 0.5, priorExposures = 0 } = {}) {
   const t = CORRUPTION_TUNING.exposure;
-  const p = t.base
+  let p = t.base
     + n01(security) * t.security
     + n01(prosperity) * t.prosperity
     - n01(guildStrength) * t.guild
     + n01(visibility) * t.visibility;
+  // A repeat offender draws more scrutiny: each prior exposure makes re-exposure easier.
+  p *= 1 + t.repeatBoost * Math.max(0, priorExposures);
   return clamp(p, t.min, t.max);
 }
 

@@ -55,6 +55,14 @@ describe('corruption — damped probability model', () => {
     expect(noGuild).toBeGreaterThan(bigGuild);
   });
 
+  it('prior exposures make re-corruption HARDER and re-exposure EASIER (the scar)', () => {
+    const climate = { crime: 0.6, security: 0.3, prosperity: 0.3 };
+    expect(onsetHazard({ ...climate, priorExposures: 2 })).toBeLessThan(onsetHazard(climate));
+    expect(onsetHazard({ ...climate, priorExposures: 3 })).toBeLessThan(onsetHazard({ ...climate, priorExposures: 1 }));
+    const exp = { security: 0.6, prosperity: 0.6, guildStrength: 0, visibility: 0.5 };
+    expect(exposureChance({ ...exp, priorExposures: 2 })).toBeGreaterThan(exposureChance(exp));
+  });
+
   it('all probabilities stay within [0,1] for extreme inputs', () => {
     for (const fn of [spawnCorruptionChance, onsetHazard]) {
       const p = fn({ crime: 5, security: -5, prosperity: -5 });

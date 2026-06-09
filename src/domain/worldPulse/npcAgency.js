@@ -194,9 +194,10 @@ export function mirrorCorruptionOntoSettlement(settlement, npcStates, settlement
     const corrupt = !!st.corruption;
     const vector = st.corruptionProfile?.vector || null;
     const ousted = !!st.ousted;
-    if (npc.corrupt === corrupt && npc.corruptionVector === vector && !!npc.ousted === ousted) return npc;
+    const timesExposed = st.timesExposed || 0;
+    if (npc.corrupt === corrupt && npc.corruptionVector === vector && !!npc.ousted === ousted && (npc.timesExposed || 0) === timesExposed) return npc;
     changed = true;
-    return { ...npc, corrupt, corruptionVector: vector, ...(ousted ? { ousted: true } : {}) };
+    return { ...npc, corrupt, corruptionVector: vector, timesExposed, ...(ousted ? { ousted: true } : {}) };
   });
   return changed ? { ...settlement, npcs: nextNpcs } : settlement;
 }
@@ -397,6 +398,7 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         lastActedTick: null,
         lastAction: null,
         corruption: corrupt,
+        timesExposed: npc.timesExposed || 0,
         contextSignature: contextForNpc(snapshot, { settlementId: item.id }).signature,
         contextTier: item.settlement?.tier || 'village',
       };
@@ -458,9 +460,12 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0 } = {
       const local = rng.fork(`corr:${id}:${tick}`);
       const flaw = npcCorruptibleFlaw(npc);
 
+      const priorExposures = s.timesExposed || 0;
+
       if (!s.corruption) {
-        // Onset — only eligible NPCs, and only the corruptible ones turn.
-        if (flaw && local.random() < onsetHazard(climate)) {
+        // Onset — only eligible NPCs, and only the corruptible ones turn. A prior
+        // exposure (organic or DM) makes re-corruption progressively harder.
+        if (flaw && local.random() < onsetHazard({ ...climate, priorExposures })) {
           npcStates[id] = {
             ...s,
             corruption: true,
@@ -471,9 +476,10 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0 } = {
         return;
       }
 
-      // Organic exposure of an already-corrupt NPC.
+      // Organic exposure of an already-corrupt NPC. A repeat offender (prior
+      // exposures) draws more scrutiny once they relapse → easier to re-expose.
       const visibility = (s.dotRank || 1) / 3;
-      const exposeP = exposureChance({ security: climate.security, prosperity: climate.prosperity, guildStrength, visibility });
+      const exposeP = exposureChance({ security: climate.security, prosperity: climate.prosperity, guildStrength, visibility, priorExposures });
       if (local.random() >= exposeP) return;
 
       const homeInstitution = npc.factionAffiliation || npc.factionLink || npc.institutionId || null;
@@ -487,6 +493,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0 } = {
           corruptionProfile: { corrupted: false, vector: null },
           corruptionHeat: 0,
           ousted: true,
+          timesExposed: priorExposures + 1,
         };
         exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'ousted', criminalInstitution, homeInstitution });
       } else {
@@ -496,6 +503,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0 } = {
           dotRank: nextRank,
           factionSeat: roleSeatFor(nextRank),
           corruptionHeat: clamp01((s.corruptionHeat || 0) * 0.7),
+          timesExposed: priorExposures + 1,
         };
         exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'demoted', criminalInstitution, homeInstitution });
       }
