@@ -282,16 +282,29 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
 
   // DM Compass tab is visible only when the narrative layer has produced at
   // least one of its four fields (AI-3a). Unnarrated saves don't need the tab.
-  const hasDMCompass = !!(aiSettlement && (
-    (Array.isArray(aiSettlement.identityMarkers) && aiSettlement.identityMarkers.length) ||
-    (Array.isArray(aiSettlement.frictionPoints)  && aiSettlement.frictionPoints.length)  ||
-    (Array.isArray(aiSettlement.connectionsMap)  && aiSettlement.connectionsMap.length)  ||
-    (aiSettlement.dmCompass && (
-      (Array.isArray(aiSettlement.dmCompass.hooks)    && aiSettlement.dmCompass.hooks.length) ||
-      (Array.isArray(aiSettlement.dmCompass.redFlags) && aiSettlement.dmCompass.redFlags.length) ||
-      (typeof aiSettlement.dmCompass.twist === 'string' && aiSettlement.dmCompass.twist.length)
+  const hasCompass = (o) => !!(o && (
+    (Array.isArray(o.identityMarkers) && o.identityMarkers.length) ||
+    (Array.isArray(o.frictionPoints)  && o.frictionPoints.length)  ||
+    (Array.isArray(o.connectionsMap)  && o.connectionsMap.length)  ||
+    (o.dmCompass && (
+      (Array.isArray(o.dmCompass.hooks)    && o.dmCompass.hooks.length) ||
+      (Array.isArray(o.dmCompass.redFlags) && o.dmCompass.redFlags.length) ||
+      (typeof o.dmCompass.twist === 'string' && o.dmCompass.twist.length)
     ))
   ));
+  // A PUBLIC gallery dossier (read-only, no owning saveId) embeds the AI layer
+  // INTO the published settlement — the server ships the refined clone with the
+  // DM Compass + narrative thesis at the top level, and there's no aiSettlement
+  // overlay to read. So source the Guidance tab (and the narrative lens below)
+  // from the rendered settlement in that case. SAFE BY CONSTRUCTION: this only
+  // ever surfaces what the gallery projection already made public — the Compass
+  // is stripped from the payload unless the owner opted into shareDm, so this can
+  // never reveal more than is already shared.
+  const publicDossier = readOnly && !saveId;
+  const compassSource = hasCompass(aiSettlement)
+    ? aiSettlement
+    : (publicDossier && hasCompass(rawSettlement) ? rawSettlement : null);
+  const hasDMCompass = !!compassSource;
 
   // Plot Hooks sub-tab (spec §8) appears only when the settlement surfaces
   // structural hooks. Derived from the raw simulation (NPCs/factions/tensions/
@@ -397,7 +410,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'history':    return React.createElement(HistoryTab, { settlement: s, narrativeNote: null, recentEvents });
       case 'resources':  return React.createElement(ResourcesTab, { settlement: s, narrativeNote: null });
       case 'viability':  return React.createElement(ViabilityTab, { settlement: s, narrativeNote: null });
-      case 'dm_compass': return React.createElement(DMCompassTab, { settlement: s });
+      case 'dm_compass': return React.createElement(DMCompassTab, { settlement: compassSource || s });
       case 'dm_notes':   return React.createElement(NotesTab, { saveId, notes: dossierNotes, section: 'dm' });
       case 'ai_notes':   return React.createElement(NotesTab, { saveId, notes: dossierNotes, section: 'ai' });
       case 'neighbours':    return React.createElement(RelationshipsTab, { settlement: s, narrativeNote: null, neighboursOnly: true });
@@ -718,11 +731,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         ),
         React.createElement('button', { onClick: () => scroll(1), style: { position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: '#9c8068', padding: '0 8px' } }, React.createElement(ChevronRight, { size: 14 }))
       ),
-      // Unlock hint — shown only when this is an unsaved settlement (Create
-      // page). Replaces the disabled "save to enable" chip that used to live
-      // in the header next to the regen button. Single calm hint, single
-      // place; clicked nowhere.
-      !narrativeEnabled && React.createElement('div', {
+      // Unlock hint — shown only when this is an unsaved settlement in the LIVE
+      // editor (Create page). Never on a read-only surface: a public gallery
+      // dossier or a shared link is not the owner's to "save", so the prompt is
+      // meaningless (and confusing) there. Replaces the old disabled chip.
+      !readOnly && !narrativeEnabled && React.createElement('div', {
         style: {
           padding: '8px 18px',
           borderBottom: '1px solid #e0d0b0',
@@ -753,11 +766,17 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         // surfaces on every tab (it's a session-level concern, not an
         // identity-banner concern).
         (() => {
-          if (!showNarrative || !aiSettlement) return null;
+          // Owner views read the narrative overlay (aiSettlement); a public gallery
+          // dossier embeds the narrative INTO the published settlement, so read the
+          // thesis / per-tab note from the rendered settlement there. Either way
+          // this only surfaces already-published narrative prose (the lens never
+          // appears on an un-narrated dossier — there's no thesis to show).
+          const nsrc = (showNarrative && aiSettlement) ? aiSettlement : (publicDossier ? rawSettlement : null);
+          if (!nsrc) return null;
           const THESIS_TABS = ['summary', 'overview'];
           const NOTE_TABS = ['economics', 'services', 'power', 'defense', 'npcs', 'history', 'resources', 'viability'];
-          const showThesis = THESIS_TABS.includes(selectedTab) && typeof aiSettlement.thesis === 'string' && aiSettlement.thesis.length > 0;
-          const note = NOTE_TABS.includes(selectedTab) ? aiSettlement.narrativeNotes?.[selectedTab] : null;
+          const showThesis = THESIS_TABS.includes(selectedTab) && typeof nsrc.thesis === 'string' && nsrc.thesis.length > 0;
+          const note = NOTE_TABS.includes(selectedTab) ? nsrc.narrativeNotes?.[selectedTab] : null;
           const showNote = typeof note === 'string' && note.length > 0;
           if (!showThesis && !showNote) return null;
 
@@ -776,7 +795,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
                   showThesis ? 'Narrative Layer \u2014 Identity' : 'Narrative Layer \u2014 Lens'
                 ),
                 showThesis
-                  ? aiSettlement.thesis.split(/\n\n+/).map((para, i, arr) =>
+                  ? nsrc.thesis.split(/\n\n+/).map((para, i, arr) =>
                       React.createElement('p', { key: i, style: { margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: 12.5, color: '#2d1f0e', lineHeight: 1.65, fontFamily: 'Georgia, serif' } }, para.trim())
                     )
                   : React.createElement('p', { style: { margin: 0, fontSize: 12.5, color: '#2d1f0e', lineHeight: 1.65, fontFamily: 'Georgia, serif' } }, note)

@@ -111,4 +111,29 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(input.plotHooks).toEqual(['a']);
     expect(input.aiData).toEqual({ x: 1 });
   });
+
+  // The shareNarrated-but-NOT-shareDm gallery path: the server publishes the
+  // FULL refined clone (thesis + DM Compass + narrativeNotes at top level) as the
+  // dossier data, then runs the DEFAULT projection on it. The gallery renders the
+  // narrative lens from this object's `thesis`, so thesis MUST survive while the
+  // DM Compass + per-tab narrative notes MUST be stripped (they're DM-private and
+  // only the shareDm full mode keeps the compass).
+  it('default mode keeps thesis but strips DM Compass + narrativeNotes (narrated-not-DM gallery path)', () => {
+    const narratedClone = {
+      name: 'Refined', tier: 'town',
+      thesis: 'A salt town that forgot its own founding.',
+      identityMarkers: ['brine-stained boardwalks'],
+      frictionPoints: [{ who: 'A vs B', what: 'a feud' }],
+      connectionsMap: [{ from: 'A', to: 'B', nature: 'rivalry' }],
+      dmCompass: { hooks: ['h'], redFlags: ['r'], twist: 't' },
+      narrativeNotes: { economics: 'per-tab prose' },
+    };
+    const out = toPublicSafe(narratedClone); // default mode (full:false)
+    expect(out.thesis).toBe('A salt town that forgot its own founding.');
+    expect(out.identityMarkers).toBeUndefined();
+    expect(out.frictionPoints).toBeUndefined();
+    expect(out.connectionsMap).toBeUndefined();
+    expect(out.dmCompass).toBeUndefined();
+    expect(out.narrativeNotes).toBeUndefined();
+  });
 });
