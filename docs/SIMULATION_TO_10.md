@@ -129,13 +129,20 @@ test (the runaway guards) and new invariant tests.
   botGuard. _(Deferred: splitting the 2,323-line `generate-narrative` — pure maintainability,
   no correctness value; lower priority than the simulation work.)_
 
-## P3 — North star
+## P3 — North star (the conserved ledger) — see docs/P3_CONSERVED_LEDGER.md
 
-- [ ] **P3.1 — One canonical conserved substrate.** `activeConditions` is the single runtime
-  representation of pressure; generation/events/world-pulse/regional all promote into it, and
-  every deriver/lens/trace/AI-overlay consumes it. A conserved food/economy ledger computed
-  once and threaded (retire the two-food-model split). Tags as primary dispatch. The fixed
-  rerun layer powers every edit. Consistency becomes architecturally enforced, not maintained.
+- [~] **P3.0 — Conserved food ledger accessor.** _(shipped)_ `domain/foodLedger.js` is the one
+  read-point for the conserved food quantities foodGenerator already produces (dailyNeed/
+  dailyProduction/foodRatio/deficitPct/surplusPct/storageMonths/importDependency/…). Additive;
+  neutral defaults; pinned by foodLedger.test. Surfaced the confirmed dead-read: causalState +
+  deriveSystemState read `deficitMonths`/`surplusMonths`, which foodGenerator never produces, so
+  the food-deficit contribution is silently neutral.
+- [ ] **P3.1 — Fix the dead food reads** via the ledger (deriveResilience + deriveFoodSecurity
+  read deficitPct/surplusPct/storageMonths). Behavior-changing → soak/systemState/causal gated.
+- [ ] **P3.2 — Converge `capacityModel`'s food lens onto the ledger** (retire the two food models).
+- [ ] **P3.3 — Extend the conserved set** (labor/housing/security/healing/throughput).
+- [ ] **North star:** every pressure flows through the one condition substrate + conserved
+  ledger; every deriver/lens/trace/AI-overlay consumes them. Consistency architecturally enforced.
 
 ---
 
