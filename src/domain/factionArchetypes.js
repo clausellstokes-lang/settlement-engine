@@ -56,7 +56,7 @@ const CATEGORY_MAP = Object.freeze({
 const NAME_RULES = Object.freeze([
   { archetype: A.OCCUPATION, re: /occupation|garrison\s+rule|imperial\s+presence|annex/i },
   { archetype: A.CRIMINAL,   re: /thieves|criminal|smuggl|gang|bandit|syndicate|assassin|shadow|underworld|black\s*market|racket|fence|crime/i },
-  { archetype: A.RELIGIOUS,  re: /temple|church|cathedral|chapel|shrine|monaster|cleric|clergy|priest|cult|holy|faith|abbey|monk|order\s+of\s+the/i },
+  { archetype: A.RELIGIOUS,  re: /temple|church|cathedral|chapel|shrine|monaster|cleric|clerg|priest|cult|holy|faith|abbey|monk|order\s+of\s+the|religious/i },
   { archetype: A.ARCANE,     re: /mage|arcane|wizard|sorcer|alchem|warlock|magister|tower|academy|college|sage/i },
   { archetype: A.MILITARY,   re: /military|militia|guard|watch|soldier|garrison|knight|army|sheriff|sentinel|ranger|warden|war\s+council|captain/i },
   { archetype: A.CRAFT,      re: /craft\s*guild|artisan|crafter/i },

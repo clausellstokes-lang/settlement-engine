@@ -30,6 +30,8 @@
  * so the profile is always well-formed.
  */
 
+import { factionArchetype, FACTION_ARCHETYPES as FA } from './factionArchetypes.js';
+
 // Small inline id helper — derives 'faction.<snake_name>' from a faction
 // name. Kept local to this file so the domain layer doesn't import
 // across into src/lib (which is outside the domain tsconfig include).
@@ -46,38 +48,31 @@ function factionIdFromName(name) {
 }
 
 // ── Archetype detection ──────────────────────────────────────────────────
-// The faction object today has only `faction` (the name) and `desc`.
-// We infer the archetype from name patterns. Order matters: longer /
-// more specific patterns first so "merchant guild" doesn't get caught
-// by the generic "guild" rule.
+// Detection now runs through the ONE canonical detector (domain/factionArchetypes)
+// shared with factionCompetition / factionRoles / factionResponses, so all four
+// layers classify a faction the same way. This local vocabulary folds the canonical
+// archetypes that factionProfile doesn't model (noble/civic → government; labor/
+// outsider → other) onto its own keys; the canonical detector's term set is a
+// superset of the old local rules, so misses like "Bandit Clan" → 'other' are now
+// correctly 'criminal'.
 
-const ARCHETYPE_RULES = [
-  { archetype: 'occupation',  test: /occupation|garrison\s+rule|imperial\s+presence/i },
-  { archetype: 'criminal',    test: /thieves|criminal|smuggl|street\s+gang|underworld|black\s+market/i },
-  { archetype: 'arcane',      test: /arcane|mage|wizard|alchemist|warlock|sorcer/i },
-  { archetype: 'religious',   test: /temple|religious|clerg|priest|monk|abbey|order\s+of\s+the/i },
-  { archetype: 'military',    test: /military|war\s+council|garrison|guard|militia|watch/i },
-  { archetype: 'merchant',    test: /merchant|trade|caravan|broker|guild\s+council|oligarch/i },
-  { archetype: 'craft',       test: /craft\s+guild|artisan|crafter/i },
-  { archetype: 'government',  test: /council|government|reeve|lord|noble|royal|feudal|steward|appointee|democratic|elder/i },
-];
+/** canonical archetype → factionProfile's local archetype vocabulary. */
+const CANONICAL_TO_PROFILE = Object.freeze({
+  [FA.GOVERNMENT]: 'government', [FA.NOBLE]: 'government', [FA.CIVIC]: 'government',
+  [FA.MILITARY]: 'military', [FA.MERCHANT]: 'merchant', [FA.RELIGIOUS]: 'religious',
+  [FA.CRIMINAL]: 'criminal', [FA.ARCANE]: 'arcane', [FA.CRAFT]: 'craft',
+  [FA.OCCUPATION]: 'occupation',
+  [FA.LABOR]: 'other', [FA.OUTSIDER]: 'other', [FA.OTHER]: 'other',
+});
 
 /**
- * Best-effort archetype inference from the faction's display name.
- * Returns one of the canonical archetypes, or 'other' if no rule
- * matches. Cheap regex pass — no fuzzy logic.
+ * Archetype for a faction, in factionProfile's local vocabulary
+ * (occupation/criminal/arcane/religious/military/merchant/craft/government/other).
+ * Delegates detection to the canonical factionArchetype() so every layer agrees.
  */
 export function deriveFactionArchetype(faction) {
   if (!faction) return 'other';
-  // Today's factions: `faction.faction` is the name. Some callers may
-  // have already normalized to `faction.name`. Both supported.
-  const name = typeof faction === 'string'
-    ? faction
-    : (faction.faction || faction.name || '');
-  for (const rule of ARCHETYPE_RULES) {
-    if (rule.test.test(name)) return rule.archetype;
-  }
-  return 'other';
+  return CANONICAL_TO_PROFILE[factionArchetype(faction)] || 'other';
 }
 
 // ── Archetype templates ──────────────────────────────────────────────────

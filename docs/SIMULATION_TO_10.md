@@ -97,8 +97,11 @@ test (the runaway guards) and new invariant tests.
   tripped the legacy matchers). It's the UNION of the four divergent matchers
   (factionCompetition / factionRoles / factionProfile / factionResponses), each of which maps to
   its own output vocabulary (NPC-role keys / responder keys / profile archetypes / competition
-  archetypes). Pinned by factionArchetypes.test. _Next (behavior-converging, soak-gated): wire
-  each of the four consumers to map FROM the canonical archetype instead of re-deriving regexes._
+  archetypes). Pinned by factionArchetypes.test. _Consumer 1 wired:
+  `factionProfile.deriveFactionArchetype` now delegates to the canonical detector (mapping
+  canonical → its local vocab); the convergence surfaced + fixed a missing 'religious' term, and
+  the full faction/magic/district/relationship suites validate equivalence. Next: factionRoles,
+  factionResponses, factionCompetition._
 - [x] **P2.3 — `new Date()` ban: core complete.** _(assessed/shipped)_ The simulation-replay
   path is already deterministic: event `appliedAt` + `mutate`/`applyEvent` thread `now`, and
   `propagation.js` overwrites every impact `createdAt` with the threaded `now` (line ~429).
