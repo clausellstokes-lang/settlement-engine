@@ -8,7 +8,12 @@
  *   get_stats            — System-wide statistics
  *
  * Authorization: Only users with role='developer' or role='admin'
- * in the profiles table can invoke this function.
+ * in the profiles table (or the OWNER_EMAIL identity) can invoke this function.
+ *
+ * Env (optional, both default to the historical behaviour if unset):
+ *   OWNER_EMAIL     — privileged owner-override email (was hardcoded in source).
+ *   ALLOWED_ORIGINS — comma-separated CORS allowlist; when set, replaces the
+ *                     wildcard "*" with a reflected-Origin allowlist.
  */
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
@@ -16,24 +21,38 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+// CORS: when ALLOWED_ORIGINS is configured (comma-separated), restrict to that
+// allowlist and reflect the matching request Origin; otherwise fall back to "*"
+// so existing deployments keep working until the operator sets the env var. The
+// endpoint is independently protected by JWT auth + role gating + botGuard, so
+// the allowlist is defense-in-depth, not the primary access control.
+const ORIGIN_ALLOWLIST = (Deno.env.get("ALLOWED_ORIGINS") || "")
+  .split(",").map((s) => s.trim()).filter(Boolean);
 
-const jsonHeaders = { ...corsHeaders, "Content-Type": "application/json" };
+function corsHeadersFor(req: Request): Record<string, string> {
+  let allowOrigin = "*";
+  if (ORIGIN_ALLOWLIST.length) {
+    const requestOrigin = req.headers.get("Origin") || "";
+    allowOrigin = ORIGIN_ALLOWLIST.includes(requestOrigin)
+      ? requestOrigin
+      : ORIGIN_ALLOWLIST[0];
+  }
+  return {
+    "Access-Control-Allow-Origin": allowOrigin,
+    "Vary": "Origin",
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type",
+  };
+}
+
 const ALLOWED_ROLES = ["user", "developer", "admin"];
 const ALLOWED_TIERS = ["free", "premium"];
 const ALLOWED_METADATA_KEYS = ["role", "tier", "display_name", "is_founder"];
-const OWNER_EMAIL = "clausellstokes@aol.com";
-
-function json(body: Record<string, unknown>, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: jsonHeaders,
-  });
-}
+// Owner-override email — configurable via the OWNER_EMAIL env var so the
+// privileged identity isn't hardcoded in source. Falls back to the historical
+// value so existing deployments are unaffected until the env var is set.
+const OWNER_EMAIL = (Deno.env.get("OWNER_EMAIL") || "clausellstokes@aol.com")
+  .trim().toLowerCase();
 
 function errorMessage(err: unknown) {
   return err instanceof Error ? err.message : String(err);
@@ -97,9 +116,16 @@ function buildProfilePatch(metadata: Record<string, unknown>) {
 }
 
 serve(async (req) => {
+  // CORS + JSON helper are per-request so the allowed Origin can reflect the
+  // caller (when an allowlist is configured).
+  const cors = corsHeadersFor(req);
+  const jsonHeaders = { ...cors, "Content-Type": "application/json" };
+  const json = (body: Record<string, unknown>, status = 200) =>
+    new Response(JSON.stringify(body), { status, headers: jsonHeaders });
+
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders });
+    return new Response("ok", { headers: cors });
   }
 
   // Tier 0.10 — obvious-bot guard. Admin actions are role-gated, but

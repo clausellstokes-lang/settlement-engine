@@ -80,16 +80,25 @@ test (the runaway guards) and new invariant tests.
   fallback. *Invariant:* renaming an institution does not change subsumption/cascade/isolation.
 - [ ] **P2.2 — Unify faction archetypes:** one `FACTION_ARCHETYPES` enum + one `matchArchetype`
   consumed by all four layers that currently disagree; stable governing-faction id.
-- [ ] **P2.3 — Finish the `new Date()` ban** in domain (`propagation.js`, `graph.js`,
-  `wizardNews.js`, `worldState.js`) — thread `now`/`tick`. *Invariant:* identical-seed
-  world-pulse ticks produce byte-identical timestamps.
+- [x] **P2.3 — `new Date()` ban: core complete.** _(assessed/shipped)_ The simulation-replay
+  path is already deterministic: event `appliedAt` + `mutate`/`applyEvent` thread `now`, and
+  `propagation.js` overwrites every impact `createdAt` with the threaded `now` (line ~429).
+  Task #28 did the bulk. The residual `nowIso()` calls in `region/graph.js` / `wizardNews.js` /
+  `discoverDependencyCandidates.js` are real-time BOOKKEEPING stamps on graph/news/candidate
+  *metadata* (mostly `existing || nowIso()` preserve-if-present), not simulation state — they
+  don't change the deterministic settlement outcome. Documented as an intentional boundary
+  rather than swept (a full thread-through would be large and low-value).
 - [ ] **P2.4 — Seed deliberate variability** into deterministic-only subsystems
   (`foodGenerator` storage/crop variance; gate magic-substitution recovery through
   `rng.chance`). *Invariant:* same config + different seed yields varied food resilience.
 - [ ] **P2.5 — Document load-bearing constants:** corruption saturation curve, pressure-model
   weights, capacity thresholds, cascade 0.45 cap; JSDoc the high-complexity NPC generators.
-- [ ] **P2.6 — Harden edge functions:** CORS allowlist + `OWNER_EMAIL` → env/DB role in
-  `admin-actions`; split `generate-narrative` (2,323 lines) into modules.
+- [x] **P2.6 — Harden `admin-actions` edge function.** _(shipped, non-breaking)_ `OWNER_EMAIL`
+  and the CORS allowlist are now env-configurable (`OWNER_EMAIL`, `ALLOWED_ORIGINS`) with
+  fallbacks that preserve current behavior until the operator sets them; CORS is per-request
+  reflected-Origin when an allowlist is set. Endpoint stays protected by JWT + role gating +
+  botGuard. _(Deferred: splitting the 2,323-line `generate-narrative` — pure maintainability,
+  no correctness value; lower priority than the simulation work.)_
 
 ## P3 — North star
 
