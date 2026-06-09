@@ -247,10 +247,16 @@ test (the runaway guards) and new invariant tests.
     Routed all three sites through it. Fully behaviour-preserving: identical regex, identical `.name`
     match, identical counts/banding — so `healing_capacity` (which DOES feed `pressureModel` disease
     pressure) is unchanged and the soak is unmoved.
-  - [ ] **Stage 4b — Anchor healing to `availableServices.healing` (BALANCE-SENSITIVE).** That emitted
-    list is healing SERVICE names (catalog-classified) — a different quantity than the institution-name
-    regex count, so switching the signal basis shifts `healing_capacity` and disease pressure. Needs a
-    calibration + soak pass.
+  - [x] **Stage 4b — Healing services rescue the "absent" penalty.** _(shipped)_ A probe of generated
+    settlements found **~17%** offer healing services (wound care, medical care, relief) but have NO
+    healer-named institution — so they were mis-read as "no healing" (capacity −10, low `healing_capacity`
+    → high disease pressure). Rather than a sweeping recalibration on the noisy service list (it mixes
+    medical with welfare/religious entries), did a **bounded rescue**: a services-only town escapes the
+    harsh absent penalty (capacity +4 instead of −10; causal −2 instead of −10) — informal care isn't
+    "no healing", but reads below a dedicated institution. Only the `healerCount==0 && services>0` case
+    changes; all healer-institution towns unchanged. Added a soak case with `availableServices.healing`
+    (the only one that exercises the branch; baseline has none) — the rescue RELIEVES disease pressure
+    so it moves away from runaway; soak stayed bounded + alive. unit tests + soak.
   - [ ] **Stage 5 — Craft ledger** (persist the discarded `computeFinishedGoodsDemand` physics first).
   - [ ] **Stage 6 — Welfare ledger** (convert the dead `welfareCapacity` write into a real producer).
   - [ ] **Stage 7 — Transport ledger** (emit a `throughputRating`; low priority, no current disagreement).

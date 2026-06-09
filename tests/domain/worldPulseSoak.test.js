@@ -4,6 +4,7 @@ import { advanceCampaignWorld } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { deriveAllActiveConditions } from '../../src/domain/activeConditions.js';
 import { foodLedger } from '../../src/domain/foodLedger.js';
+import { healingLedger } from '../../src/domain/healingLedger.js';
 
 // A long-horizon "soak" test — the feel/balance analog of the generator's
 // distribution test. We advance a small region many ticks and assert the world
@@ -58,6 +59,22 @@ function withFoodDeficit(sv) {
           deficitPct: 50, surplusPct: 0, storageMonths: 1,
           importDependency: 0.6, magicSupplement: 0, resilienceScore: 30,
         },
+      },
+    },
+  };
+}
+
+// Offered healing SERVICES but no healer-named institution (institutions stay []), so
+// healingLedger has healerCount 0 + services > 0 — exactly the P3.3b Stage 4b "services_only"
+// rescue branch. This is the only soak case that exercises it (baseline fixtures have no services).
+function withHealingServices(sv) {
+  return {
+    ...sv,
+    settlement: {
+      ...sv.settlement,
+      economicState: {
+        ...sv.settlement.economicState,
+        availableServices: { healing: ['Basic wound care', 'Medical care (basic)', 'Poor relief'] },
       },
     },
   };
@@ -215,6 +232,89 @@ describe('world pulse — long-horizon soak / balance', () => {
       const led = foodLedger(s.settlement);
       expect(led.present).toBe(true);
       expect(led.deficitPct).toBeGreaterThan(0);
+    }
+  });
+
+  // P3.3b Stage 4b: towns that offer healing SERVICES but have no healer-named institution
+  // exercise the "services_only" rescue. The only soak case that does (baseline has no services).
+  // The rescue RELIEVES disease pressure, so it moves away from runaway — assert still bounded AND
+  // still alive (over-relieving could make the world too quiet), and that services survive the loop.
+  test('40 ticks with healing-services-only towns stays bounded, alive, and exercises the rescue', () => {
+    const ids = ['a', 'b', 'c', 'd', 'e'];
+    const cared = new Set(['b', 'd']); // these offer healing services but no healer institution
+    let saves = ids.map((id, i) => {
+      const sv = save(id, `Town-${id.toUpperCase()}`, i + 1);
+      return cared.has(id) ? withHealingServices(sv) : sv;
+    });
+
+    // Precondition the rescue depends on holds at t0: healerCount 0 but services present.
+    for (const s of saves.filter(s => cared.has(s.id))) {
+      const led = healingLedger(s.settlement);
+      expect(led.healerCount).toBe(0);
+      expect(led.services.length).toBeGreaterThan(0);
+    }
+
+    let campaign = {
+      id: 'soak-care',
+      name: 'Care Region',
+      settlementIds: ids,
+      worldState: { rngSeed: 'soak-care-seed', tick: 0, stressors: [
+        { id: 'world_stressor.siege.a', type: 'siege', severity: 0.8, affectedSettlementIds: ['a'] },
+      ] },
+      regionalGraph: ensureRegionalGraph({
+        channels: [
+          { type: 'trade_dependency', from: 'a', to: 'b', status: 'confirmed' },
+          { type: 'trade_route', from: 'b', to: 'c', status: 'confirmed' },
+          { type: 'military_protection', from: 'c', to: 'd', status: 'confirmed' },
+          { type: 'political_authority', from: 'a', to: 'e', status: 'confirmed' },
+        ],
+      }),
+      wizardNews: { currentTick: 0, entries: [] },
+    };
+
+    const TICKS = 40;
+    let maxStressors = 0;
+    let maxConditionsAnySettlement = 0;
+    let totalAutoApplied = 0;
+
+    for (let i = 0; i < TICKS; i++) {
+      const result = advanceCampaignWorld({
+        campaign,
+        saves,
+        interval: 'one_month',
+        now: `2026-03-01T00:00:${String(i).padStart(2, '0')}.000Z`,
+      });
+      expect(result).not.toBeNull();
+
+      campaign = {
+        ...campaign,
+        worldState: result.worldState,
+        regionalGraph: result.regionalGraph,
+        wizardNews: result.wizardNews,
+      };
+      saves = saves.map(s => {
+        const update = result.settlementUpdates.find(u => String(u.saveId) === String(s.id));
+        return update ? { ...s, settlement: update.settlement } : s;
+      });
+
+      totalAutoApplied += result.autoApplied.length;
+      maxStressors = Math.max(maxStressors, (result.worldState.stressors || []).length);
+      for (const s of saves) {
+        maxConditionsAnySettlement = Math.max(maxConditionsAnySettlement, deriveAllActiveConditions(s.settlement).length);
+      }
+    }
+
+    expect(campaign.worldState.tick).toBe(TICKS);
+    expect(totalAutoApplied).toBeGreaterThan(0); // alive — the rescue must not make the world silent
+    expect(maxStressors).toBeLessThanOrEqual(40);
+    expect(maxConditionsAnySettlement).toBeLessThanOrEqual(30);
+    expect(campaign.worldState.pulseHistory.length).toBeLessThanOrEqual(80);
+
+    // Probative: the healing services survived the loop, so the rescue kept firing.
+    for (const s of saves.filter(s => cared.has(s.id))) {
+      const led = healingLedger(s.settlement);
+      expect(led.healerCount).toBe(0);
+      expect(led.services.length).toBeGreaterThan(0);
     }
   });
 });

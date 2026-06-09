@@ -200,14 +200,21 @@ function deriveHealing(s, ctx) {
   let supply = 40;
   let demand = 50;
 
-  // SUPPLY: healing institutions (canonical classifier via healingLedger).
-  const healers = healingLedger(s).healerCount;
+  // SUPPLY: healing institutions (canonical classifier via healingLedger). When no healer-named
+  // institution exists, offered healing SERVICES (wound care, medical care, relief) still provide
+  // informal care (P3.3b Stage 4b) — so they rescue the harsh "absent" penalty rather than reading
+  // as no healing at all. ~17% of generated settlements offer healing services without a
+  // healer-named institution; they were being mis-read as having zero healing.
+  const heal = healingLedger(s);
+  const healers = heal.healerCount;
   if (healers >= 3) {
     supply += 25; push(supplyContributors, 'institutions', 'broad', +25, `${healers} healing-capable institutions.`);
   } else if (healers >= 1) {
     supply += 12; push(supplyContributors, 'institutions', 'limited', +12, `${healers} healing-capable institution(s).`);
+  } else if (heal.services.length > 0) {
+    supply += 4; push(supplyContributors, 'availableServices.healing', 'services_only', +4, `${heal.services.length} healing service(s) offered without a dedicated institution.`);
   } else {
-    supply -= 10; push(supplyContributors, 'institutions', 'absent', -10, 'No dedicated healing institutions.');
+    supply -= 10; push(supplyContributors, 'institutions', 'absent', -10, 'No dedicated healing institutions or services.');
   }
 
   // SUPPLY: magic level

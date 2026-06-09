@@ -383,11 +383,16 @@ function deriveHealingCapacity(s) {
   const contributors = [];
 
   // Institutions whose names suggest healing capacity (canonical classifier via healingLedger).
-  const healers = healingLedger(s).healerCount;
+  // Offered healing services rescue the harsh "absent" penalty (informal care; P3.3b Stage 4b):
+  // a town providing wound care / medical care / relief is not "no healing", just not robust.
+  const heal = healingLedger(s);
+  const healers = heal.healerCount;
   if (healers >= 3) {
     score += 12; push(contributors, 'institutions', 'broad', +12, `${healers} healing-capable institutions present.`);
   } else if (healers >= 1) {
     score += 6; push(contributors, 'institutions', 'limited', +6, `${healers} healing-capable institution(s).`);
+  } else if (heal.services.length > 0) {
+    score -= 2; push(contributors, 'availableServices.healing', 'services_only', -2, `${heal.services.length} healing service(s) offered, but no dedicated institution.`);
   } else {
     score -= 10; push(contributors, 'institutions', 'absent', -10, 'No dedicated healing institutions found.');
   }

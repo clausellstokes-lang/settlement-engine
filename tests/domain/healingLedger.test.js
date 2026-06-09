@@ -56,3 +56,32 @@ describe('healing lenses count via the canonical ledger (P3.3b Stage 4)', () => 
       .toBeGreaterThan(deriveSystemVariable('healing_capacity', lean).score);
   });
 });
+
+// P3.3b Stage 4b: a town offering healing SERVICES but with no healer-named institution is not
+// "no healing" — the services rescue the harsh absent penalty (informal care), reading above a
+// truly-bare town but below one with a dedicated institution.
+describe('healing services rescue the absent penalty (P3.3b Stage 4b)', () => {
+  const servicesOnly = {
+    name: 'T', tier: 'town', population: 2000, config: { monsterThreat: 'safe' },
+    institutions: [], // no healer-named institution -> healerCount 0
+    economicState: { availableServices: { healing: ['Basic wound care', 'Medical care (basic)', 'Poor relief'] } },
+    powerStructure: { factions: [] }, activeConditions: [],
+  };
+  const bare = town([]); // no institutions, no services
+
+  it('services-only town reads higher healing supply than a truly-bare town', () => {
+    expect(deriveCapacityProfile('healing', servicesOnly).supply)
+      .toBeGreaterThan(deriveCapacityProfile('healing', bare).supply);
+  });
+
+  it('services-only town reads higher causal healing_capacity than a truly-bare town', () => {
+    expect(deriveSystemVariable('healing_capacity', servicesOnly).score)
+      .toBeGreaterThan(deriveSystemVariable('healing_capacity', bare).score);
+  });
+
+  it('but still below a town with a dedicated healing institution', () => {
+    const withInst = town(['Infirmary']);
+    expect(deriveCapacityProfile('healing', servicesOnly).supply)
+      .toBeLessThan(deriveCapacityProfile('healing', withInst).supply);
+  });
+});
