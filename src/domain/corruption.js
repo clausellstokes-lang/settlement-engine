@@ -147,6 +147,42 @@ export function canBeOuted(importance) {
   return importance === 'notable' || importance === 'minor';
 }
 
+// ── Faction capture ladder (Phase 2) ────────────────────────────────────────
+// Reuses the engine's existing criminalCaptureState vocabulary. A faction with
+// corrupt seat-holders climbs toward 'capture'; one that's been cleaned recedes
+// toward 'none'. Higher the corrupt member's seat, the faster it climbs.
+export const CAPTURE_LADDER = Object.freeze(['none', 'adversarial', 'equilibrium', 'corrupted', 'capture']);
+
+/** Step the ladder one rung up (toward capture) or down (toward none). */
+export function advanceCaptureState(state, up) {
+  const i = CAPTURE_LADDER.indexOf(state);
+  const cur = i < 0 ? 0 : i;
+  const next = up ? Math.min(CAPTURE_LADDER.length - 1, cur + 1) : Math.max(0, cur - 1);
+  return CAPTURE_LADDER[next];
+}
+
+export const CAPTURE_TUNING = Object.freeze({
+  advance: { base: 0.05, rank: 0.15, security: 0.08, prosperity: 0.05, min: 0.01, max: 0.40 },
+  recover: { base: 0.04, security: 0.12, prosperity: 0.08, min: 0.02, max: 0.40 },
+});
+
+/** Per-tick chance a faction with a corrupt seat-holder climbs the ladder. The
+ *  corrupt member's seat rank (1=agent..3=leader) drives it; security+prosperity
+ *  damp it. */
+export function captureAdvanceChance({ rank = 1, security = 0.5, prosperity = 0.5 } = {}) {
+  const t = CAPTURE_TUNING.advance;
+  const p = t.base + n01((Number(rank) || 1) / 3) * t.rank - n01(security) * t.security - n01(prosperity) * t.prosperity;
+  return clamp(p, t.min, t.max);
+}
+
+/** Per-tick chance a faction with NO corrupt seat-holders recedes toward 'none'
+ *  — the faction-level self-cleaning, rising with security + prosperity. */
+export function captureRecoverChance({ security = 0.5, prosperity = 0.5 } = {}) {
+  const t = CAPTURE_TUNING.recover;
+  const p = t.base + n01(security) * t.security + n01(prosperity) * t.prosperity;
+  return clamp(p, t.min, t.max);
+}
+
 // ── Settlement → climate adapter ────────────────────────────────────────────
 // Reads the corruption climate off a generated settlement: normalized crime /
 // security / prosperity (0..1), whether a criminal institution is present, and

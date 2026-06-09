@@ -8,6 +8,7 @@ import { ensureAllRelationshipStates, relaxRelationshipStates } from './relation
 import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
 import { applyCorruptionImpairments } from './corruptionImpair.js';
+import { advanceFactionCapture, settlementCaptureState } from './factionCapture.js';
 import { ensureFactionStates, relaxFactionStates, seatNpcsIntoFactions } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
@@ -161,6 +162,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   worldState = corruption.worldState;
   // Seat NPCs into their factions so internalSeats reflect who holds power.
   worldState = seatNpcsIntoFactions(worldState);
+  // §corruption Phase 2 — faction capture: corrupt seat-holders pull their
+  // faction up the criminalCaptureState ladder (faster the higher the seat);
+  // clean factions recede toward 'none'. Runs after seating so seats are current.
+  const factionCapture = advanceFactionCapture(worldState, snapshot, rng.fork('faction-capture'), { tick: worldState.tick });
+  worldState = factionCapture.worldState;
   worldState = refreshRelationshipMemory(worldState, snapshot.regionalGraph, snapshot, { currentTick: worldState.tick });
   snapshot = buildWorldSnapshot({ campaign: { ...campaign, worldState }, saves, worldState });
 
@@ -190,6 +196,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     let s = mirrorCorruptionOntoSettlement(localSettlements.get(sid), worldState.npcStates, String(sid));
     const exps = (corruption.exposures || []).filter((e) => String(e.settlementId) === String(sid));
     if (exps.length) s = applyCorruptionImpairments(s, exps, { now });
+    // §corruption Phase 2 — roll the worst faction capture up to the settlement's
+    // criminalCaptureState (which npcStructure + the dossier already read).
+    const cap = settlementCaptureState(worldState.factionStates, sid);
+    if (s.powerStructure && s.powerStructure.criminalCaptureState !== cap) {
+      s = { ...s, powerStructure: { ...s.powerStructure, criminalCaptureState: cap } };
+    }
     localSettlements.set(sid, s);
   }
 
@@ -285,6 +297,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     corruptionEvents: (corruption.exposures || []).slice(0, 24).map(e => ({
       settlementId: e.settlementId, name: e.name, kind: e.kind,
       criminalInstitution: e.criminalInstitution, homeInstitution: e.homeInstitution,
+    })),
+    factionCaptureEvents: (factionCapture.transitions || []).slice(0, 24).map(t => ({
+      settlementId: t.settlementId, name: t.name, from: t.from, to: t.to,
     })),
   };
   // Realm-scope arcs: promote stressors shared across many settlements into

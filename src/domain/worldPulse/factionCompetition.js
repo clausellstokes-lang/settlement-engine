@@ -151,6 +151,7 @@ export function ensureFactionStates(worldState, snapshot, rng) {
         riskTolerance: 0.22 + local.random() * 0.5,
         momentum: 0,
         exhaustion: 0,
+        captureState: faction.captureState || 'none', // §corruption Phase 2 — criminalCaptureState ladder
         lastActedTick: null,
         recentAction: null,
       };
