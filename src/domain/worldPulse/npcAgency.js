@@ -1,4 +1,7 @@
 import { stablePart } from './worldState.js';
+import {
+  readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
+} from '../corruption.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -307,6 +310,10 @@ export function ensureNpcStates(worldState, snapshot, rng) {
   const npcStates = { ...(worldState.npcStates || {}) };
   for (const item of snapshot.settlements) {
     const npcs = item.settlement?.npcs || [];
+    // Per-settlement corruption climate (criminal presence / crime / security /
+    // prosperity), used as the fallback rule for legacy saves whose NPCs predate
+    // generation-time corruption (no npc.corrupt set).
+    const climate = readCorruptionClimate(item.settlement);
     npcs.forEach((npc, index) => {
       const id = npcId(item.id, npc, index);
       if (npcStates[id]) {
@@ -317,7 +324,24 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         return;
       }
       const local = rng.fork(`npc:${id}`);
-      const corrupt = local.random() < 0.06;
+      // Corruption is decided at generation (corruptionPass sets npc.corrupt +
+      // vector); the world-pulse mirrors it. One rng draw is kept here so a legacy
+      // save's downstream NPC-trait draws keep their positions. No criminal
+      // institution → no corruption (the rule), regardless of personality.
+      const corruptRoll = local.random();
+      const genFlaw = npcCorruptibleFlaw(npc);
+      let corrupt;
+      let corruptVector;
+      if (typeof npc.corrupt === 'boolean') {
+        corrupt = npc.corrupt;
+        corruptVector = corrupt ? (npc.corruptionVector || corruptionVectorForFlaw(genFlaw)) : null;
+      } else if (climate.hasCriminalInst && genFlaw) {
+        corrupt = corruptRoll < spawnCorruptionChance(climate);
+        corruptVector = corrupt ? corruptionVectorForFlaw(genFlaw) : null;
+      } else {
+        corrupt = false;
+        corruptVector = null;
+      }
       const roleArchetype = inferRoleArchetype(npc);
       const roleDef = NPC_ROLE_ARCHETYPES[roleArchetype] || NPC_ROLE_ARCHETYPES.civic;
       const dotRank = dotRankFor(npc);
@@ -339,9 +363,7 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         longGoal: pick(local, GOALS),
         ambition: Math.min(1, Math.max(0.15, notability(npc) + local.random() * 0.18)),
         loyalty: Math.max(0.1, 0.75 - (corrupt ? 0.25 : 0) - local.random() * 0.25),
-        corruptionProfile: corrupt
-          ? { corrupted: true, vector: pick(local, ['greed', 'fanaticism', 'fear', 'hunger_for_status', 'forbidden_patron']) }
-          : { corrupted: false, vector: null },
+        corruptionProfile: { corrupted: corrupt, vector: corruptVector },
         goalProgress: { short: 0, long: 0 },
         rivalryTargets: [],
         momentum: 0,

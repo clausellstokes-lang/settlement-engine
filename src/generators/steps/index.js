@@ -18,5 +18,6 @@ import './generatePower.js';
 import './neighbourFactions.js';
 import './factionCorrelationPass.js';
 import './generatePopulation.js';
+import './corruptionPass.js';
 import './generateNarratives.js';
 import './assembleSettlement.js';

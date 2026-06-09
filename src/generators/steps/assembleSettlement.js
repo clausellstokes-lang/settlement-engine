@@ -29,7 +29,7 @@ const DEFENSE_CONTRIB = {
 };
 
 registerStep('assembleSettlement', {
-  deps: ['generateNarratives', 'generatePopulation'],
+  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass'],
   provides: ['settlement'],
   phase: 'assembly',
 }, (ctx) => {
