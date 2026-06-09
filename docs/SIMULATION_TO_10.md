@@ -151,11 +151,18 @@ test (the runaway guards) and new invariant tests.
   un-generated saves untouched (present:false gate). Adversarially verified (3 reviewers):
   the overlap with the existing food-chain contributors is directionally-correct + bounded
   (clamp floor, no cross-tick feedback → cannot run away).
-- [ ] **P3.3 — Extend the conserved set** (labor/housing/security/healing/throughput) AND
+- [x] **P3.3a — Soak the P3.2 branch.** _(shipped)_ The baseline soak settlements carry no
+  `economicState.foodSecurity`, so `foodLedger(s).present` was false and the P3.2 capacity-ledger
+  branch never ran under the long loop. Added a second soak case (`worldPulseSoak.test.js`) where two
+  towns carry a deep conserved deficit (deficitPct 50): asserts the precondition holds at t0, the
+  famine stays inside the same bounds as the baseline (maxConditions <=30, maxStressors <=40 over 40
+  ticks -> the branch has no runaway cross-tick coupling), and that the conserved deficit survives the
+  whole loop (probative: a vacuous pass would lose foodSecurity and stop firing the branch).
+- [ ] **P3.3b — Extend the conserved set** (labor/housing/security/healing/throughput) AND
   resolve the P3.2 overlap: make the ledger the single food-physics source (fold food-chain
   status into the ledger, or exclude capacityModel's chain contributors when the ledger is
-  present); add a soak case with a real `economicState.foodSecurity` deficit so the loop
-  actually exercises the P3.2 branch.
+  present). The XL remaining lift: each capacity gets its own conserved quantity computed once and
+  threaded, the way food now is.
 - [ ] **North star:** every pressure flows through the one condition substrate + conserved
   ledger; every deriver/lens/trace/AI-overlay consumes them. Consistency architecturally enforced.
 
