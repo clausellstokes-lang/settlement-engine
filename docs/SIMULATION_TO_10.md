@@ -64,11 +64,12 @@ test (the runaway guards) and new invariant tests.
   `stress/stresses/stressors`, `imports/primaryImports`, `tradeRouteAccess` once — instead of
   scattered `pickArray(...)` fallbacks across 100+ readers. Declare the full alias set in the
   schema.
-- [ ] **P1.4 — Reactive partial-rerun: fix or formally retire.** `getAffectedSteps` keys on
-  step-names but callers pass context keys (returns `[]`); `rerunAffected`→`runPipeline`
-  merge order clobbers overrides. Either map changed context-keys→provider-steps and wire
-  into `applyChange`, or delete the dormant landmine. *Invariant:* `getAffectedSteps(['config'])`
-  returns `resolveConfig`'s transitive downstream set.
+- [x] **P1.4 — Reactive partial-rerun: RETIRED.** _(shipped)_ `getAffectedSteps`/`rerunAffected`
+  were dead, untested, and buggy (keyed on step-names while callers think in data keys; merge
+  order clobbered overrides) — and the wrong abstraction (derived state already recomputes on
+  demand; edits do a full same-seed regen). Deleted both + the unused `only`/`ctx` options on
+  `runPipeline` + the dead store-facade wiring; corrected the stale comments. `RERUN_KEYS_FOR_EVENT`
+  kept (batch-preview metadata, independent of the engine).
 
 ## P2 — Elegance, maintainability, RNG, comments, security
 

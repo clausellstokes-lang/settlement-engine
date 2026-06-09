@@ -21,7 +21,7 @@
 //
 // `createPRNG` was previously imported here but is only used by the
 // store test (which imports it directly). Removed from this chunk.
-/** @type {?{ generateSettlementPipeline:Function, regenNPCsPipeline:Function, regenHistoryPipeline:Function, generateSeed:Function, runPipeline:Function, rerunAffected:Function }} */
+/** @type {?{ generateSettlementPipeline:Function, regenNPCsPipeline:Function, regenHistoryPipeline:Function, generateSeed:Function }} */
 let _engineModule = null;
 /** @type {?Promise<NonNullable<typeof _engineModule>>} */
 let _enginePromise = null;
@@ -31,15 +31,12 @@ function loadEngine() {
   _enginePromise = Promise.all([
     import('../generators/generateSettlementPipeline.js'),
     import('../generators/prng.js'),
-    import('../generators/pipeline.js'),
-  ]).then(([pipe, prng, pipeline]) => {
+  ]).then(([pipe, prng]) => {
     _engineModule = {
       generateSettlementPipeline: pipe.generateSettlementPipeline,
       regenNPCsPipeline:          pipe.regenNPCsPipeline,
       regenHistoryPipeline:       pipe.regenHistoryPipeline,
       generateSeed:               prng.generateSeed,
-      runPipeline:                pipeline.runPipeline,
-      rerunAffected:              pipeline.rerunAffected,
     };
     return _engineModule;
   });
@@ -195,7 +192,7 @@ export const createSettlementSlice = (set, get) => ({
   savedSettlementsLoaded: false, // true once hydrated from savesService
   activeSaveId:  null,   // save id backing the currently-open detail view
   lastSeed:      null,   // seed from last generation (for replay/determinism)
-  lastCtx:       null,   // full pipeline context from last run (for reactive re-runs)
+  lastCtx:       null,   // full pipeline context from last run (config recovery for NPC/history regen + pipeline-rail diagnostics)
   // History of pipeline steps run for the currently-displayed settlement.
   // Powers the "How this was simulated" rail. Each entry:
   //   { id, ts, summary }
@@ -726,11 +723,11 @@ export const createSettlementSlice = (set, get) => ({
    * impacted parts move. The only path to a new seed is an explicit
    * regeneration call.
    *
-   * Future work (Week 4b): replace the full re-generation with
-   * `rerunAffected(lastCtx, ...)` so we don't even pay for the
-   * untouched steps. For v1 we keep the same-seed re-run to preserve
-   * the visible-output contract (full settlement returned) and just
-   * fix the determinism bug.
+   * Edits run the WHOLE pipeline under the reused seed — deterministic and
+   * correct, and the only model we keep. A step-level partial-rerun engine was
+   * explored and retired (it was dead, buggy, and the wrong abstraction); the
+   * derived state layer is already recomputed on demand, so a full same-seed
+   * regen plus fresh derivation is both correct and fast enough at this scale.
    */
   applyChange: async () => {
     const state = get();

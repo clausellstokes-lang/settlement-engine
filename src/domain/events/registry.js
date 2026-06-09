@@ -76,11 +76,12 @@ const INSTITUTION_KIND_DELTAS = {
 };
 
 /**
- * Pipeline-step `provides` keys to invalidate when an event of a given
- * type fires. These map onto `getAffectedSteps()` in the pipeline so a
- * reactive rerun touches only the necessary subsystems. Keep the lists
- * tight — over-invalidating costs CPU and risks reshuffling unrelated
- * generated content (which would feel like a regen).
+ * The subsystem keys an event of a given type touches. `batch.js` reads this to
+ * tell the DM which subsystems a batch of events affects (the batch-preview
+ * "affected subsystems" list). Descriptive metadata only — there is no
+ * step-level partial-rerun engine (it was retired); edits do a full same-seed
+ * regen and derived state is recomputed on demand. Keep the lists tight so the
+ * preview reads honestly.
  */
 export const RERUN_KEYS_FOR_EVENT = {
   ADD_INSTITUTION:    ['institutions', 'services', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
