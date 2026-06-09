@@ -9,10 +9,13 @@
  * incrementally based on which factions DMs actually have in their
  * settlements.
  *
- * The detection is name-pattern based (the same pragmatic shortcut
- * the rest of the engine uses). When the catalog gets stable IDs/tags,
- * this becomes a tag lookup without changing the response logic.
+ * Detection now runs through the shared canonical archetype detector
+ * (domain/factionArchetypes), so a faction classifies the same way here as in
+ * factionProfile / factionCompetition / factionRoles. This module just maps the
+ * canonical archetype to its responder key.
  */
+
+import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes.js';
 
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../types.js').FactionResponse} FactionResponse */
@@ -38,31 +41,24 @@ export function generateFactionResponses(settlement, event) {
   return out;
 }
 
+// Canonical archetype → the responder key this module ships. Only these four
+// archetypes produce a response today; every other canonical archetype maps to
+// null (the caller skips it). New archetypes: add a mapping here + a responder in
+// ARCHETYPE_RESPONDERS.
+const CANONICAL_TO_RESPONDER = Object.freeze({
+  [FA.CRIMINAL]:  'thieves_guild',
+  [FA.RELIGIOUS]: 'temple',
+  [FA.MILITARY]:  'watch',
+  [FA.MERCHANT]:  'merchant_guild',
+});
+
 /**
- * Map a faction's name/category to a known archetype.
- *
- * Order matters: more specific patterns are checked first because some
- * factions match multiple loose terms (e.g. "Thieves' Guild" matches
- * both "thieves" and "guild"). The thieves'-guild branch wins.
- *
- * Falls back to `null` for unrecognized factions; the caller skips
- * those (they produce no response). New archetypes are added here +
- * a responder in ARCHETYPE_RESPONDERS.
+ * Map a faction to its responder key via the shared canonical archetype detector,
+ * so faction responses classify factions the same way every other layer does.
+ * Falls back to `null` for archetypes with no responder (the caller skips them).
  */
 function matchArchetype(faction) {
-  const name = String(faction?.name || faction?.faction || '').toLowerCase();
-  const cat  = String(faction?.category || faction?.type || '').toLowerCase();
-  // Criminal / shadow first — "thieves' guild" contains "guild"
-  if (cat === 'criminal' || /thieves|smuggler|shadow|crime|bandit|underworld|assassin/.test(name)) return 'thieves_guild';
-  // Religious — temples, churches, sects, clergy, monastery.
-  // Match `clergy` explicitly because "The Clergy" doesn't share a
-  // root with `cleric` for our regex purposes.
-  if (cat === 'religious' || cat === 'temple' || /temple|church|shrine|monastery|cleric|clergy|priest|cult/.test(name)) return 'temple';
-  // Watch / militia / law enforcement
-  if (cat === 'military' || cat === 'watch' || cat === 'law' || /watch|militia|guard|sheriff|sentinel|ranger|warden/.test(name)) return 'watch';
-  // Merchant — stable trade access, guilds, markets
-  if (cat === 'merchant' || /merchant|guild|trade|bazaar|market/.test(name))    return 'merchant_guild';
-  return null;
+  return CANONICAL_TO_RESPONDER[factionArchetype(faction)] || null;
 }
 
 const ARCHETYPE_RESPONDERS = {

@@ -100,8 +100,9 @@ test (the runaway guards) and new invariant tests.
   archetypes). Pinned by factionArchetypes.test. _Consumer 1 wired:
   `factionProfile.deriveFactionArchetype` now delegates to the canonical detector (mapping
   canonical → its local vocab); the convergence surfaced + fixed a missing 'religious' term, and
-  the full faction/magic/district/relationship suites validate equivalence. Next: factionRoles,
-  factionResponses, factionCompetition._
+  the full faction/magic/district/relationship suites validate equivalence. Consumer 2 wired:
+  `factionResponses.matchArchetype` now maps the canonical archetype to its 4 responder keys
+  (event suites pass). Next: factionRoles, factionCompetition._
 - [x] **P2.3 — `new Date()` ban: core complete.** _(assessed/shipped)_ The simulation-replay
   path is already deterministic: event `appliedAt` + `mutate`/`applyEvent` thread `now`, and
   `propagation.js` overwrites every impact `createdAt` with the threaded `now` (line ~429).
