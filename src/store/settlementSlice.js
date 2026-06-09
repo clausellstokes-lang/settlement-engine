@@ -55,6 +55,7 @@ import {
 } from '../domain/pendingEdits.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
+import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { eligibleCustomContent } from '../domain/customContentSchema.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
@@ -1113,7 +1114,14 @@ export const createSettlementSlice = (set, get) => ({
       changeLabel: event?.targetId || event?.payload?.label || event?.id,
       now: logEntry.appliedAt,
     });
-    nextSystemState = deriveSystemState(nextSettlement);
+    // Re-derive SystemState from the RECONCILED settlement (so reconciliation's
+    // world-condition preservation is reflected) and RE-LAYER the event's authored
+    // deltas — matching the domain pipeline's canonical afterState formula
+    // (deriveSystemState + authored deltas). Previously this re-derived structurally
+    // only, silently discarding the authored-effect surface (e.g. CUT_TRADE_ROUTE's
+    // resilience/resourcePressure/externalThreat deltas), so the persisted afterState
+    // disagreed with the preview the DM was shown. Pinned by the preview==apply invariant.
+    nextSystemState = layerAuthoredDeltas(deriveSystemState(nextSettlement), event, state.settlement);
     logEntry = {
       ...logEntry,
       afterState: nextSystemState,

@@ -22,6 +22,11 @@ import { ensureFactionStructuralNpcs } from '../factionRoles.js';
 // so downstream consumers (save/load, PDF, AI overlay, trace layer)
 // can rely on the canonical contract.
 import { normalizeSettlement } from '../../domain/normalizeSettlement.js';
+// Promote live-crisis stressors (plague/famine/siege/…) into canonical
+// activeConditions so the causal substrate + AI overlay react to a settlement
+// generated mid-crisis — closing the "generated plague town has activeConditions:[]"
+// gap. Pure + deterministic + idempotent.
+import { promoteStressorsToConditions } from '../../domain/conditionPromotion.js';
 
 const DEFENSE_CONTRIB = {
   'Undefended': -10, 'Vulnerable': -5, 'Defensible': 0,
@@ -145,5 +150,8 @@ registerStep('assembleSettlement', {
   // (Zustand store, save layer, PDF, AI overlay) sees a settlement with
   // version stamps and a stable id. The legacy shape is preserved —
   // normalize only adds, never restructures.
-  return { settlement: normalizeSettlement(settlement) };
+  // Normalize first (version stamps, stable id, canonical containers incl. a
+  // defaulted activeConditions: []), THEN promote stressors into conditions so
+  // the crisis is durable substrate state, not just a stressor label.
+  return { settlement: promoteStressorsToConditions(normalizeSettlement(settlement)) };
 });

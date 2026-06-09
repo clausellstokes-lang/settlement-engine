@@ -69,6 +69,33 @@ function applyAuthoredStateDeltas(state, deltas) {
   return next;
 }
 
+/**
+ * Re-layer an event's authored stateDeltas onto a freshly-derived SystemState.
+ *
+ * This is the SAME authored-delta step the pipeline applies internally (step 4),
+ * exposed so a caller that re-derives SystemState from a structurally-mutated
+ * settlement AFTER the pipeline ran (e.g. the store's applyEvent, which runs
+ * reconciliation between mutation and persistence) can preserve the authored
+ * effects instead of silently discarding them. Without this, an event whose
+ * consequence lives only in the registry's authored deltas (e.g. CUT_TRADE_ROUTE
+ * -> resilience -12 / resourcePressure +12 / externalThreat +5) loses that effect
+ * the moment anyone re-derives from the settlement alone.
+ *
+ * Pure; never mutates. Returns `systemState` unchanged if the event has no spec
+ * or no authored deltas.
+ *
+ * @param {SystemState} systemState — a freshly derived SystemState
+ * @param {Event}  event
+ * @param {Object} [settlement] the BEFORE settlement (authored deltas may read it)
+ * @returns {SystemState}
+ */
+export function layerAuthoredDeltas(systemState, event, settlement = null) {
+  const spec = event ? EVENT_REGISTRY[event.type] : null;
+  if (!spec || typeof spec.stateDeltas !== 'function') return systemState;
+  const deltas = /** @type {Function} */ (spec.stateDeltas)(event, settlement) || {};
+  return applyAuthoredStateDeltas(systemState, deltas);
+}
+
 // ── Single shared flow ───────────────────────────────────────────────────
 
 /**

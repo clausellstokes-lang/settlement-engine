@@ -23,6 +23,7 @@ import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entitie
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
+import { withActiveCondition } from '../activeConditions.js';
 
 /** @typedef {import('../types.js').Event} Event */
 
@@ -354,10 +355,18 @@ function cutTradeRoute(s, event) {
   const cutRoutes = Array.isArray(config._cutRoutes) ? [...config._cutRoutes] : [];
   const which = event.targetId || 'primary';
   cutRoutes.push({ name: which, atEventId: event.id, atTimestamp: eventTime(event) });
-  return {
-    ...s,
-    config: { ...config, _cutRoutes: cutRoutes },
-  };
+  const next = { ...s, config: { ...config, _cutRoutes: cutRoutes } };
+  // Promote to a canonical active condition so the causal substrate (which reads
+  // activeConditions by affectedSystems — trade_connectivity / merchant_wealth /
+  // public_legitimacy) reflects the severed route, and the effect SURVIVES
+  // re-derivation and reruns instead of living only in the _cutRoutes annotation.
+  // The annotation is retained because deriveRegionalState still reads it for
+  // regional propagation.
+  return withActiveCondition(next, {
+    archetype: 'trade_route_cut',
+    triggeredAt: { sourceEventType: 'CUT_TRADE_ROUTE', sourceEventTargetId: which },
+    causes: [{ source: 'event', eventId: event.id, detail: `Trade route "${which}" severed.` }],
+  });
 }
 
 // ── NPC mutations ──────────────────────────────────────────────────────────
@@ -559,13 +568,23 @@ function severCorruptionTiesTo(s, institutionName) {
 function refugeeWave(s, event) {
   const config = s.config || {};
   const waves = Array.isArray(config._refugeeWaves) ? [...config._refugeeWaves] : [];
+  const size = event.payload?.size || 'medium';
   waves.push({
-    size: event.payload?.size || 'medium',
+    size,
     fromRegion: event.targetId || null,
     atEventId: event.id,
     atTimestamp: eventTime(event),
   });
-  return { ...s, config: { ...config, _refugeeWaves: waves } };
+  const next = { ...s, config: { ...config, _refugeeWaves: waves } };
+  // Promote to a canonical active condition (food/labor/legitimacy pressure) so the
+  // substrate and AI overlay see the influx, not just the write-only annotation.
+  const severity = size === 'large' ? 0.65 : size === 'small' ? 0.35 : 0.5;
+  return withActiveCondition(next, {
+    archetype: 'regional_migration_pressure',
+    severity,
+    triggeredAt: { sourceEventType: 'REFUGEE_WAVE', sourceEventTargetId: event.targetId || null },
+    causes: [{ source: 'event', eventId: event.id, detail: `A ${size} refugee wave arrived.` }],
+  });
 }
 
 /**
@@ -603,7 +622,15 @@ function plague(s, event) {
       opts: { maxHops: 1 },  // plague strain doesn't cascade as far
     });
   }
-  return next;
+  // Promote to a canonical 'plague' condition (food/healing/legitimacy/labor) so the
+  // outbreak is durable substrate state — the causal layer, AI overlay, and time
+  // progression all read it — not just the write-only _activePlague annotation.
+  return withActiveCondition(next, {
+    archetype: 'plague',
+    severity,
+    triggeredAt: { sourceEventType: 'PLAGUE', sourceEventTargetId: event.targetId || null },
+    causes: [{ source: 'event', eventId: event.id, detail: `Plague outbreak (${annotation.name}).` }],
+  });
 }
 
 /**

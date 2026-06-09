@@ -19,7 +19,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { runEventPipeline, summarizeEventResult } from '../../src/domain/events/eventPipeline.js';
+import { runEventPipeline, summarizeEventResult, layerAuthoredDeltas } from '../../src/domain/events/eventPipeline.js';
 import { previewEvent } from '../../src/domain/events/previewEvent.js';
 import { applyEvent } from '../../src/domain/events/applyEvent.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
@@ -191,6 +191,40 @@ describe('preview/apply drift invariant (Tier 2.2)', () => {
   });
 });
 
+// ── Store recomputation preserves authored deltas (P0.1) ───────────────
+// The store's applyEvent runs reconciliation BETWEEN the pipeline mutation and
+// persistence, then re-derives SystemState. It must re-layer the event's authored
+// deltas (layerAuthoredDeltas) or it silently discards effects like CUT_TRADE_ROUTE's
+// resilience/resourcePressure/externalThreat. These tests pin the store's formula to
+// the pipeline's canonical afterSystemState.
+
+describe('store recomputation preserves authored deltas (P0.1)', () => {
+  it('re-derive + re-layer reproduces the pipeline afterSystemState (CUT_TRADE_ROUTE)', () => {
+    const settlement = baseSettlement();
+    const event = ev({ type: 'CUT_TRADE_ROUTE', targetId: 'south_road' });
+    const result = runEventPipeline(settlement, event);
+    // Mirror the store: re-derive from nextSettlement, then re-layer authored deltas.
+    const storeFormula = layerAuthoredDeltas(deriveSystemState(result.nextSettlement), event, settlement);
+    expect(storeFormula).toEqual(result.afterSystemState);
+  });
+
+  it('the OLD naive re-derive would have dropped the authored deltas', () => {
+    const settlement = baseSettlement();
+    const event = ev({ type: 'CUT_TRADE_ROUTE', targetId: 'south_road' });
+    const result = runEventPipeline(settlement, event);
+    // What the store used to persist (deriveSystemState alone) — proves the fix matters:
+    // CUT_TRADE_ROUTE carries authored deltas, so the naive re-derive differs from canonical.
+    const naive = deriveSystemState(result.nextSettlement);
+    expect(naive).not.toEqual(result.afterSystemState);
+  });
+
+  it('layerAuthoredDeltas is a no-op for events without a spec', () => {
+    const ss = deriveSystemState(baseSettlement());
+    expect(layerAuthoredDeltas(ss, { type: 'NUKE_FROM_ORBIT' }, baseSettlement())).toEqual(ss);
+    expect(layerAuthoredDeltas(ss, null, null)).toEqual(ss);
+  });
+});
+
 // ── Substrate-layer signals ────────────────────────────────────────────
 
 describe('runEventPipeline() — CausalState deltas', () => {
@@ -202,23 +236,23 @@ describe('runEventPipeline() — CausalState deltas', () => {
     expect(Array.isArray(result.causalStateDeltas)).toBe(true);
   });
 
-  it('cutting trade route worsens trade_connectivity', () => {
-    const settlement = {
-      ...baseSettlement(),
-      // Add a trade chain so the substrate sees something to disrupt
-      economicState: {
-        ...baseSettlement().economicState,
-        activeChains: [
-          { needKey: 'food_security', chainId: 'grain_to_bread', label: 'Grain to bread', status: 'operational' },
-          { needKey: 'trade',         chainId: 'imports',        label: 'Imports',        status: 'operational' },
-        ],
-      },
-    };
+  it('cutting trade route promotes a trade_route_cut condition and worsens trade_connectivity (P0.2)', () => {
+    const settlement = baseSettlement();
     const result = runEventPipeline(settlement, ev({ type: 'CUT_TRADE_ROUTE', targetId: 'south_road' }));
-    // At minimum the system state should report the trade impact;
-    // substrate may or may not depending on what the mutation changes
-    // structurally. We just assert the pipeline ran without error.
-    expect(result.afterSystemState).toBeTruthy();
+    // The mutation now promotes the cut into a canonical active condition…
+    const conds = result.nextSettlement.activeConditions || [];
+    expect(conds.some(c => c.archetype === 'trade_route_cut')).toBe(true);
+    // …which the causal substrate reads by affectedSystems, so trade_connectivity drops.
+    expect(result.afterCausalState.scores.trade_connectivity)
+      .toBeLessThan(result.beforeCausalState.scores.trade_connectivity);
+  });
+
+  it('plague promotes a plague condition that lowers healing_capacity (P0.2)', () => {
+    const result = runEventPipeline(baseSettlement(), ev({ type: 'PLAGUE', targetId: 'red_fever', payload: { severity: 0.7 } }));
+    const conds = result.nextSettlement.activeConditions || [];
+    expect(conds.some(c => c.archetype === 'plague')).toBe(true);
+    expect(result.afterCausalState.scores.healing_capacity)
+      .toBeLessThanOrEqual(result.beforeCausalState.scores.healing_capacity);
   });
 
   it('compareCausalState diff sorts by absolute change', () => {
