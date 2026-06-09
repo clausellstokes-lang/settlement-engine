@@ -164,10 +164,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // durable home on the saved settlement row. readOnly still controls
   // editing affordances (regen, setAi from local-dev mock) independently.
   const narrativeEnabled = isConfigured ? !!saveId : true; // local-dev mock is ungated
-  // Read-only surfaces (e.g. a public gallery dossier rendered in DM mode) must
-  // read the narrated layer from the passed settlement, NOT the viewer's store —
-  // otherwise the viewer's own active AI settlement would bleed into the dossier.
-  const aiSettlement = playerView ? null : (readOnly ? (propSettlement?.aiSettlement ?? null) : storeAi);
+  // Only a PUBLIC gallery dossier (read-only AND no saveId) reads the narrated
+  // layer off the passed settlement — it embeds its own (compass-only when shareDm)
+  // and has no store context, so this prevents the viewer's own AI from bleeding
+  // in. Every owner surface (the live editor, and SettlementDetail's read-only
+  // saved view which DOES pass a saveId) keeps reading the store, unchanged.
+  const aiSettlement = playerView
+    ? null
+    : (readOnly && !saveId ? (propSettlement?.aiSettlement ?? null) : storeAi);
   const setAiSettlement = readOnly ? null : storeSetAi;
   const onRegenerate = readOnly ? null : storeRegenerate;
   const trackTabExplored = useStore(s => s.trackTabExplored);
@@ -207,11 +211,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // clone. Otherwise read raw. Refined sections the AI completed show polished
   // prose; sections the AI didn't touch (or passes that failed) show raw data
   // because aiSettlement started as a deep clone of the source.
-  // Never drive the main render from aiSettlement in a read-only surface: a public
-  // shareDm dossier carries only the DM-Compass fields of aiSettlement (a partial
-  // object), used for the Guidance tab alone — rendering the dossier from it would
-  // blank the page. Owner (non-readOnly) narrative view is unchanged.
-  const showNarrative = !readOnly && storeShowNarrative && !!aiSettlement;
+  // A public shareDm dossier carries ONLY the DM-Compass fields of aiSettlement (a
+  // partial object) — used for the Guidance tab alone; rendering the dossier from
+  // it would blank the page. So only drive the main render from aiSettlement when
+  // it's a FULL settlement (has core fields), not the compass-only partial. The
+  // owner's saved-settlement + editor narrative views (full aiSettlement) are
+  // unaffected.
+  const aiIsFullSettlement = !!(aiSettlement && (aiSettlement.name || aiSettlement.npcs || aiSettlement.institutions));
+  const showNarrative = storeShowNarrative && aiIsFullSettlement;
   const activeSettlement = showNarrative ? aiSettlement : rawSettlement;
   const dossierNotes = liveSaveEntry?.aiData?.dossierNotes || null;
   const aiGuidance = typeof dossierNotes?.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
