@@ -190,3 +190,39 @@ describe('purity + real-settlement smoke', () => {
     expect(magicLegalityBands()).toContain(m.legality);
   });
 });
+
+// P3.3b Stage 3b: magicProfile keyed on a stale 6-tier vocabulary, but the generator emits the
+// canonical 4-tier band (none/low/medium/high via getMagicLevel). A generated 'medium'-magic
+// town used to fall through to the 'low' defaults (availability limited, cost extortionate);
+// 'none' showed magic roles as 'occasional'. These pin the canonical bands.
+describe('deriveMagicProfile — canonical generator vocabulary (P3.3b Stage 3b)', () => {
+  const at = (magicLevel) => deriveMagicProfile({ config: { magicLevel }, powerStructure: { factions: [] }, institutions: [] });
+
+  it("'medium' reads as the moderate tier (not the low default)", () => {
+    const m = at('medium');
+    expect(m.availability).toBe('moderate'); // was 'limited' (low default)
+    expect(m.legality).toBe('regulated');    // was 'restricted'
+    expect(m.cost).toBe('costly');            // was 'extortionate'
+  });
+
+  it("'medium' matches the legacy 'moderate' on every facet (canonical == legacy mid-tier)", () => {
+    const med = at('medium');
+    const mod = at('moderate');
+    expect(med.availability).toBe(mod.availability);
+    expect(med.legality).toBe(mod.legality);
+    expect(med.cost).toBe(mod.cost);
+    expect(med.risk).toBe(mod.risk);
+  });
+
+  it("'none' (dead-magic) reads magic roles as absent, not occasional", () => {
+    const m = at('none');
+    expect(m.roles.economic).toBe('absent');
+    expect(m.roles.medical).toBe('absent');
+  });
+
+  it('legacy pervasive/high tiers are unchanged (no 6-tier collapse)', () => {
+    expect(at('pervasive').cost).toBe('cheap');
+    expect(at('pervasive').availability).toBe('pervasive');
+    expect(at('high').availability).toBe('broad');
+  });
+});

@@ -223,10 +223,18 @@ test (the runaway guards) and new invariant tests.
     Routed `deriveMagical` (fixes the medium→0 bug) and `deriveMagicalStability` (behaviour-preserving
     via `band = present ? magicLevel : 'low'`) through it; `magicProfile` now imports the shared arcane
     pattern. Balance-safe: `magical_stability` is NOT read by `pressureModel` (verified) — magic is
-    display/AI-only. magicLedger units + monotonic deriveMagical coverage. Follow-up **Stage 3b**:
-    `magicProfile`'s own `MAGIC_LEVEL_VALUES` lacks `medium`/`none` keys (same vocab bug for its display
-    labels) — route its 5 band-reads through the ledger too, and `resourceTaxonomy.magicLevelScore`
-    (reads `config.magicLevel` directly; flagged by verify).
+    display/AI-only. magicLedger units + monotonic deriveMagical coverage.
+  - [x] **Stage 3b — magicProfile display vocabulary.** _(shipped)_ magicProfile keyed on a stale
+    6-tier vocab (`rare/low/moderate/common/high/pervasive`), but the generator emits the canonical
+    4-tier (`none/low/medium/high`), so a generated `medium`-magic town fell through to the `low`
+    defaults (availability `limited`, legality `restricted`, cost `extortionate`) and `none` showed
+    magic roles as `occasional`. Fixed by EXTENDING magicProfile's vocab (added `medium`/`none` to
+    `MAGIC_LEVEL_VALUES` + the legality/cost branches + the roles absent-check) rather than routing
+    through `magicLedger` — canonicalizing would collapse `pervasive`→`high` and lose the richer
+    6-tier display. Purely additive: legacy vocab + existing tests unchanged. Display-only, balance-safe.
+    4 cases pin `medium`==legacy `moderate`, `none` roles absent, and legacy `pervasive`/`high` intact.
+    (Remaining magicLevel reader `resourceTaxonomy.magicLevelScore` left as-is — a resource-scoring
+    band read, not a display-label bug.)
   - [x] **Stage 4a — Healing classifier dedup.** _(shipped)_ The `HEALING_PATTERN` regex was
     copy-pasted byte-identical in three lenses (capacityModel.deriveHealing, causalState.deriveHealingCapacity,
     magicProfile). Created `src/domain/healingLedger.js` as the single home for the canonical

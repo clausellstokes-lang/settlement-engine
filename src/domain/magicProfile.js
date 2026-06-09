@@ -26,6 +26,10 @@ import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN } from './magicLedger.js';
 import { HEALING_INSTITUTION_PATTERN as HEALING_PATTERN } from './healingLedger.js';
 
 const MAGIC_LEVEL_VALUES = Object.freeze({
+  // Canonical bands the GENERATOR emits (getMagicLevel: 0=none, <=25 low, <=65 medium, else high).
+  none:      { availability: 'rare',       baseRisk: 'low' },
+  medium:    { availability: 'moderate',   baseRisk: 'moderate' },
+  // Legacy / manual vocabulary (6-tier) — preserved so old saves + manual configs are unchanged.
   rare:      { availability: 'rare',       baseRisk: 'low' },
   low:       { availability: 'limited',    baseRisk: 'low' },
   moderate:  { availability: 'moderate',   baseRisk: 'moderate' },
@@ -85,7 +89,7 @@ function deriveLegality(settlement, profiles, contributors) {
   // Default: regulated if magic is moderate+, tolerated if low.
   const magic = settlement.config?.magicLevel || 'low';
   let legality = (magic === 'high' || magic === 'pervasive') ? 'tolerated' :
-                 (magic === 'moderate' || magic === 'common') ? 'regulated' :
+                 (magic === 'moderate' || magic === 'common' || magic === 'medium') ? 'regulated' :
                  'restricted';
 
   if (religious && religious.power >= 40) {
@@ -138,7 +142,7 @@ function deriveCost(settlement, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
   if (magic === 'pervasive')                    { contributors.push({ source: 'config.magicLevel', effect: 'cheap', reason: 'Pervasive magic — services cheap.' }); return 'cheap'; }
   if (magic === 'high' || magic === 'common')   { contributors.push({ source: 'config.magicLevel', effect: 'moderate', reason: 'Magic widespread — services priced moderately.' }); return 'moderate'; }
-  if (magic === 'moderate')                     { contributors.push({ source: 'config.magicLevel', effect: 'costly', reason: 'Moderate magic — services costly.' }); return 'costly'; }
+  if (magic === 'moderate' || magic === 'medium') { contributors.push({ source: 'config.magicLevel', effect: 'costly', reason: 'Moderate magic — services costly.' }); return 'costly'; }
   contributors.push({ source: 'config.magicLevel', effect: 'extortionate', reason: 'Rare magic — services extortionate.' });
   return 'extortionate';
 }
@@ -196,7 +200,7 @@ function deriveRoles(settlement, profiles, capacity, contributors) {
       contributors.push({ source: 'magicProfile', effect: `${name}_common`, reason: `${name} role of magic is regular but not foundational.` });
       return 'common';
     }
-    if (magic !== 'rare' && magic !== 'low') {
+    if (magic !== 'rare' && magic !== 'low' && magic !== 'none') {
       return 'occasional';
     }
     return 'absent';
