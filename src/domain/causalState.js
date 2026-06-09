@@ -54,6 +54,7 @@ import { canonStressors } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
 import { governanceLedger } from './governanceLedger.js';
 import { magicLedger } from './magicLedger.js';
+import { healingLedger } from './healingLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -380,14 +381,12 @@ function deriveHealingCapacity(s) {
   let score = 50;
   const contributors = [];
 
-  // Institutions whose names suggest healing capacity
-  const institutions = Array.isArray(s.institutions) ? s.institutions : [];
-  const HEALING_PATTERN = /(temple|chapel|infirmary|healer|hospice|herbalist|apothecary|shrine)/i;
-  const healers = institutions.filter(i => HEALING_PATTERN.test(i?.name || ''));
-  if (healers.length >= 3) {
-    score += 12; push(contributors, 'institutions', 'broad', +12, `${healers.length} healing-capable institutions present.`);
-  } else if (healers.length >= 1) {
-    score += 6; push(contributors, 'institutions', 'limited', +6, `${healers.length} healing-capable institution(s).`);
+  // Institutions whose names suggest healing capacity (canonical classifier via healingLedger).
+  const healers = healingLedger(s).healerCount;
+  if (healers >= 3) {
+    score += 12; push(contributors, 'institutions', 'broad', +12, `${healers} healing-capable institutions present.`);
+  } else if (healers >= 1) {
+    score += 6; push(contributors, 'institutions', 'limited', +6, `${healers} healing-capable institution(s).`);
   } else {
     score -= 10; push(contributors, 'institutions', 'absent', -10, 'No dedicated healing institutions found.');
   }

@@ -227,8 +227,17 @@ test (the runaway guards) and new invariant tests.
     `magicProfile`'s own `MAGIC_LEVEL_VALUES` lacks `medium`/`none` keys (same vocab bug for its display
     labels) — route its 5 band-reads through the ledger too, and `resourceTaxonomy.magicLevelScore`
     (reads `config.magicLevel` directly; flagged by verify).
-  - [ ] **Stage 4 — Healing ledger** (collapse the triplicated `HEALING_PATTERN`; anchor to the
-    already-emitted `availableServices.healing`).
+  - [x] **Stage 4a — Healing classifier dedup.** _(shipped)_ The `HEALING_PATTERN` regex was
+    copy-pasted byte-identical in three lenses (capacityModel.deriveHealing, causalState.deriveHealingCapacity,
+    magicProfile). Created `src/domain/healingLedger.js` as the single home for the canonical
+    `HEALING_INSTITUTION_PATTERN` + a `healerCount` (it also surfaces `availableServices.healing` for 4b).
+    Routed all three sites through it. Fully behaviour-preserving: identical regex, identical `.name`
+    match, identical counts/banding — so `healing_capacity` (which DOES feed `pressureModel` disease
+    pressure) is unchanged and the soak is unmoved.
+  - [ ] **Stage 4b — Anchor healing to `availableServices.healing` (BALANCE-SENSITIVE).** That emitted
+    list is healing SERVICE names (catalog-classified) — a different quantity than the institution-name
+    regex count, so switching the signal basis shifts `healing_capacity` and disease pressure. Needs a
+    calibration + soak pass.
   - [ ] **Stage 5 — Craft ledger** (persist the discarded `computeFinishedGoodsDemand` physics first).
   - [ ] **Stage 6 — Welfare ledger** (convert the dead `welfareCapacity` write into a real producer).
   - [ ] **Stage 7 — Transport ledger** (emit a `throughputRating`; low priority, no current disagreement).

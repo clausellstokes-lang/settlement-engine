@@ -58,6 +58,7 @@ import { foodLedger } from './foodLedger.js';
 import { defenseLedger } from './defenseLedger.js';
 import { governanceLedger } from './governanceLedger.js';
 import { magicLedger, ARCANE_INSTITUTION_PATTERN } from './magicLedger.js';
+import { healingLedger } from './healingLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -199,13 +200,12 @@ function deriveHealing(s, ctx) {
   let supply = 40;
   let demand = 50;
 
-  // SUPPLY: healing institutions
-  const HEALING_PATTERN = /(temple|chapel|infirmary|healer|hospice|herbalist|apothecary|shrine)/i;
-  const healers = institutionNamesMatching(s, HEALING_PATTERN);
-  if (healers.length >= 3) {
-    supply += 25; push(supplyContributors, 'institutions', 'broad', +25, `${healers.length} healing-capable institutions.`);
-  } else if (healers.length >= 1) {
-    supply += 12; push(supplyContributors, 'institutions', 'limited', +12, `${healers.length} healing-capable institution(s).`);
+  // SUPPLY: healing institutions (canonical classifier via healingLedger).
+  const healers = healingLedger(s).healerCount;
+  if (healers >= 3) {
+    supply += 25; push(supplyContributors, 'institutions', 'broad', +25, `${healers} healing-capable institutions.`);
+  } else if (healers >= 1) {
+    supply += 12; push(supplyContributors, 'institutions', 'limited', +12, `${healers} healing-capable institution(s).`);
   } else {
     supply -= 10; push(supplyContributors, 'institutions', 'absent', -10, 'No dedicated healing institutions.');
   }
