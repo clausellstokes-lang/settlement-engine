@@ -6,7 +6,7 @@ import { ageRoamingStressors } from './stressors.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
-import { ensureNpcStates, relaxNpcStates } from './npcAgency.js';
+import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption } from './npcAgency.js';
 import { ensureFactionStates, relaxFactionStates, seatNpcsIntoFactions } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
@@ -152,6 +152,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   worldState = relaxNpcStates(worldState);
   worldState = relaxRelationshipStates(worldState);
   worldState = relaxFactionStates(worldState);
+  // §corruption Phase 1b — per-tick onset + organic exposure over npcStates.
+  // Clean eligible NPCs turn under crime pressure; corrupt NPCs are exposed
+  // (demoted / ousted) by security + prosperity. Exposure events name the tied
+  // criminal + home institutions for the impairment pass (1b-ii).
+  const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption'), { tick: worldState.tick });
+  worldState = corruption.worldState;
   // Seat NPCs into their factions so internalSeats reflect who holds power.
   worldState = seatNpcsIntoFactions(worldState);
   worldState = refreshRelationshipMemory(worldState, snapshot.regionalGraph, snapshot, { currentTick: worldState.tick });
@@ -263,6 +269,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     })),
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     timeTicks: timeTicks.map(t => ({ saveId: t.saveId, summary: t.tick.summary })),
+    corruptionEvents: (corruption.exposures || []).slice(0, 24).map(e => ({
+      settlementId: e.settlementId, name: e.name, kind: e.kind,
+      criminalInstitution: e.criminalInstitution, homeInstitution: e.homeInstitution,
+    })),
   };
   // Realm-scope arcs: promote stressors shared across many settlements into
   // named realm-wide Wizard News ("The Great Hunger", "The War").

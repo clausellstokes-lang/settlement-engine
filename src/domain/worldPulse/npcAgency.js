@@ -1,6 +1,7 @@
 import { stablePart } from './worldState.js';
 import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
+  onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING,
 } from '../corruption.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
@@ -398,6 +399,86 @@ export function relaxNpcStates(worldState) {
     };
   }
   return { ...worldState, npcStates };
+}
+
+/**
+ * §corruption Phase 1b — per-tick onset + organic exposure over worldState.npcStates.
+ *
+ *  • Onset: a clean, eligible NPC (corruptible flaw) in a settlement with a
+ *    criminal institution turns corrupt at the climate-scaled `onsetHazard`.
+ *  • Organic exposure (no DM): a corrupt NPC is exposed at `exposureChance`
+ *    (rises with security + prosperity + their visibility, falls with guild
+ *    strength) — demoting their standing (dotRank → seat) and cooling their heat.
+ *    Once eroded to the lowest seat, a low `outReplaceAtNotable` roll OUSTS them
+ *    (corruption cleared, flagged `ousted`). Each exposure records an event
+ *    naming the tied criminal + home institutions for the impairment pass (1b-ii).
+ *
+ * Pure transform: reads the snapshot for per-settlement climate + NPC eligibility,
+ * returns a new worldState (updated npcStates) + the exposure events. rng is
+ * forked per (npc, tick) so replays are deterministic. No criminal institution →
+ * no onset/exposure pressure (the rule).
+ *
+ * @returns {{ worldState: object, exposures: Array<object> }}
+ */
+export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0 } = {}) {
+  const npcStates = { ...(worldState.npcStates || {}) };
+  const exposures = [];
+  for (const item of (snapshot?.settlements || [])) {
+    const climate = readCorruptionClimate(item.settlement);
+    if (!climate.hasCriminalInst) continue; // no criminal infrastructure → no pressure
+    const guildStrength = climate.crime; // proxy until Phase 3 wires real guild power
+    const npcs = item.settlement?.npcs || [];
+    npcs.forEach((npc, index) => {
+      const id = npcId(item.id, npc, index);
+      const s = npcStates[id];
+      if (!s) return;
+      const local = rng.fork(`corr:${id}:${tick}`);
+      const flaw = npcCorruptibleFlaw(npc);
+
+      if (!s.corruption) {
+        // Onset — only eligible NPCs, and only the corruptible ones turn.
+        if (flaw && local.random() < onsetHazard(climate)) {
+          npcStates[id] = {
+            ...s,
+            corruption: true,
+            corruptionProfile: { corrupted: true, vector: corruptionVectorForFlaw(flaw) },
+            corruptionHeat: Math.max(0.2, s.corruptionHeat || 0),
+          };
+        }
+        return;
+      }
+
+      // Organic exposure of an already-corrupt NPC.
+      const visibility = (s.dotRank || 1) / 3;
+      const exposeP = exposureChance({ security: climate.security, prosperity: climate.prosperity, guildStrength, visibility });
+      if (local.random() >= exposeP) return;
+
+      const homeInstitution = npc.institutionId || npc.factionAffiliation || npc.factionLink || null;
+      const criminalInstitution = npc.corruptTies?.criminalInstitution || climate.criminalInstitutions[0] || null;
+      const atBottom = (s.dotRank || 1) <= 1;
+
+      if (atBottom && local.random() < CORRUPTION_TUNING.outReplaceAtNotable) {
+        npcStates[id] = {
+          ...s,
+          corruption: false,
+          corruptionProfile: { corrupted: false, vector: null },
+          corruptionHeat: 0,
+          ousted: true,
+        };
+        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'ousted', criminalInstitution, homeInstitution });
+      } else {
+        const nextRank = demoteDotRank(s.dotRank);
+        npcStates[id] = {
+          ...s,
+          dotRank: nextRank,
+          factionSeat: roleSeatFor(nextRank),
+          corruptionHeat: clamp01((s.corruptionHeat || 0) * 0.7),
+        };
+        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'demoted', criminalInstitution, homeInstitution });
+      }
+    });
+  }
+  return { worldState: { ...worldState, npcStates }, exposures };
 }
 
 function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = null) {
