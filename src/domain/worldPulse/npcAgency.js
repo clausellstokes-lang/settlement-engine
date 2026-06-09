@@ -174,8 +174,31 @@ function clamp01(value) {
   return Math.max(0, Math.min(1, n));
 }
 
-function npcId(saveId, npc, index) {
+export function npcId(saveId, npc, index) {
   return `${saveId}:${npc?.id || stablePart(npc?.name || npc?.label || `npc_${index}`)}`;
+}
+
+/**
+ * §corruption Phase 1b-ii — mirror tick-evolved corruption from worldState.npcStates
+ * back onto a settlement's NPCs, so the dossier reflects corruption acquired (or
+ * shed) during world-pulse ticks — not just at generation. Pure + deterministic
+ * (no rng/Date); returns the same settlement reference when nothing changed.
+ */
+export function mirrorCorruptionOntoSettlement(settlement, npcStates, settlementId) {
+  const npcs = settlement?.npcs;
+  if (!Array.isArray(npcs) || !npcStates) return settlement;
+  let changed = false;
+  const nextNpcs = npcs.map((npc, index) => {
+    const st = npcStates[npcId(settlementId, npc, index)];
+    if (!st) return npc;
+    const corrupt = !!st.corruption;
+    const vector = st.corruptionProfile?.vector || null;
+    const ousted = !!st.ousted;
+    if (npc.corrupt === corrupt && npc.corruptionVector === vector && !!npc.ousted === ousted) return npc;
+    changed = true;
+    return { ...npc, corrupt, corruptionVector: vector, ...(ousted ? { ousted: true } : {}) };
+  });
+  return changed ? { ...settlement, npcs: nextNpcs } : settlement;
 }
 
 function pick(rng, arr) {

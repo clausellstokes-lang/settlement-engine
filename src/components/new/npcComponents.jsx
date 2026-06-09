@@ -226,13 +226,20 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 5px'}}>{t.label}: {t.value}</span>)}
             </div>
           )}
-          {npc.corrupt && (
+          {(npc.corrupt || npc.ousted) && (
             <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
-              <span style={{
-                fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.danger,
-                background:'rgba(139,26,26,0.12)',border:'1px solid rgba(139,26,26,0.4)',borderRadius:4,padding:'1px 6px',
-              }}>Compromised</span>
-              {npc.corruptTies?.criminalInstitution && (
+              {npc.corrupt ? (
+                <span style={{
+                  fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.danger,
+                  background:'rgba(139,26,26,0.12)',border:'1px solid rgba(139,26,26,0.4)',borderRadius:4,padding:'1px 6px',
+                }}>Compromised</span>
+              ) : (
+                <span style={{
+                  fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.inkMag3,
+                  background:'rgba(120,90,40,0.12)',border:'1px solid rgba(120,90,40,0.4)',borderRadius:4,padding:'1px 6px',
+                }}>Exposed</span>
+              )}
+              {npc.corrupt && npc.corruptTies?.criminalInstitution && (
                 <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>tied to {npc.corruptTies.criminalInstitution}</span>
               )}
             </div>

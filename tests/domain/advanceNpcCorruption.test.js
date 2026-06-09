@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { ensureNpcStates, advanceNpcCorruption } from '../../src/domain/worldPulse/npcAgency.js';
+import { ensureNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement, npcId } from '../../src/domain/worldPulse/npcAgency.js';
 import { createPRNG } from '../../src/generators/prng.js';
 
 // §corruption Phase 1b — per-tick onset + organic exposure over worldState.npcStates.
@@ -75,6 +75,24 @@ describe('advanceNpcCorruption — per-tick onset + organic exposure', () => {
     const base = createPRNG('noop').fork('corruption');
     for (let t = 0; t < 40; t++) ws = advanceNpcCorruption(ws, snap, base, { tick: t }).worldState;
     expect(Object.values(ws.npcStates).every((s) => s.corruption === false)).toBe(true);
+  });
+
+  it('mirrors tick-corruption onto settlement NPCs for the dossier', () => {
+    const sid = 's1';
+    const settlement = { npcs: [{ name: 'Greedy Guard' }, { name: 'Honest Clerk' }] };
+    const npcStates = {
+      [npcId(sid, settlement.npcs[0], 0)]: { corruption: true, corruptionProfile: { vector: 'greed' } },
+      [npcId(sid, settlement.npcs[1], 1)]: { corruption: false, corruptionProfile: { vector: null }, ousted: true },
+    };
+    const next = mirrorCorruptionOntoSettlement(settlement, npcStates, sid);
+    expect(next.npcs[0].corrupt).toBe(true);
+    expect(next.npcs[0].corruptionVector).toBe('greed');
+    expect(next.npcs[1].corrupt).toBe(false);
+    expect(next.npcs[1].ousted).toBe(true);
+    // unchanged input → same reference (no needless churn)
+    const stable = { npcs: [{ name: 'X', corrupt: false, corruptionVector: null }] };
+    const ns = { [npcId(sid, stable.npcs[0], 0)]: { corruption: false, corruptionProfile: { vector: null } } };
+    expect(mirrorCorruptionOntoSettlement(stable, ns, sid)).toBe(stable);
   });
 
   it('is deterministic — same seed + ticks yields identical states', () => {
