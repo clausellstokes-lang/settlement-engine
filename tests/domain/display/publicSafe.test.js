@@ -50,6 +50,7 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     name: 'Foo', tier: 'town',
     plotHooks: ['the heir is hidden'],
     dossierNotes: 'my prep notes',
+    dmNotes: 'the BBEG is the mayor', notes: 'scratch pad',
     dmCompass: { twist: 'the mayor is a doppelganger' },
     npcs: [{ name: 'Aldric', role: 'Mayor', goal: 'seize power', secret: 'bastard heir', plotHooks: ['blackmail'], relationships: [{ with: 'x' }], influence: 80 }],
     aiData: { aiSettlement: { x: 1 } }, aiDailyLife: { dawn: 'z' },
@@ -59,15 +60,22 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     },
   });
 
-  it('keeps secrets, plot hooks, notes, compass + NPC goal/secret/relationships', () => {
+  it('keeps secrets, plot hooks, compass + NPC goal/secret/relationships', () => {
     const out = toPublicSafe(dm(), { full: true });
     expect(out.plotHooks).toEqual(['the heir is hidden']);
-    expect(out.dossierNotes).toBe('my prep notes');
     expect(out.dmCompass).toEqual({ twist: 'the mayor is a doppelganger' });
     expect(out.npcs[0].goal).toBe('seize power');
     expect(out.npcs[0].secret).toBe('bastard heir');
     expect(out.npcs[0].plotHooks).toEqual(['blackmail']);
     expect(out.npcs[0].relationships).toEqual([{ with: 'x' }]);
+  });
+
+  it('strips DM notes even in full mode — truly confidential, never shared', () => {
+    const out = toPublicSafe(dm(), { full: true });
+    expect(out.dossierNotes).toBeUndefined();
+    expect(out.dmNotes).toBeUndefined();
+    expect(out.notes).toBeUndefined();
+    expect(out.narrativeNotes).toBeUndefined();
   });
 
   it('drops AI prose blobs but keeps ONLY the four DM-Compass fields of aiSettlement', () => {

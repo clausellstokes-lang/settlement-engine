@@ -211,12 +211,11 @@ export default function ShareToGallery({
       });
       setSavedDetails(true);
       setTimeout(() => setSavedDetails(false), 1600);
-      // Contextual reload: only the gallery-detail owner card passes onSaved.
-      // useGalleryPageState fetches the dossier once on mount and never refetches
-      // after a save, so the gallery page is stale (and the owner card can drop)
-      // until you navigate away and back — reloading re-runs that fetch so the
-      // public view reflects the saved choices. The dossier/settlement editor
-      // usages omit onSaved, so saving there never reloads their editor.
+      // Contextual refresh: only the gallery-detail owner card passes onSaved,
+      // which re-fetches the public dossier in place so the live view reflects
+      // the new narrated / DM-visibility choices. (A full page reload would land
+      // on a fresh gallery URL with no saves hydrated, dropping the owner card —
+      // see GalleryDetail.) The dossier/settlement editor usages omit onSaved.
       onSaved?.();
     } catch (e) {
       setError(e.message || 'Gallery details could not be saved');

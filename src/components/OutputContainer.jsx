@@ -309,6 +309,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // view, but shown on saved settlements even though the dossier prose is
     // readOnly (editability is keyed on saveId inside NotesTab, not readOnly).
     if (playerView && ['summary', 'dm_notes', 'ai_notes', 'chronicle'].includes(t.id)) return false;
+    // DM Notes are a private DM scratch space — never surface them on a public /
+    // shared gallery dossier (readOnly with no owning saveId), even in the full
+    // "Reveal DM-private content" view. They're truly confidential to the DM and
+    // are kept only on the owner's own saved-settlement view (readOnly + saveId)
+    // and the live editor (not readOnly).
+    if (t.id === 'dm_notes' && readOnly && !saveId) return false;
     return true;
   });
   const allTabs = [...baseTabs,

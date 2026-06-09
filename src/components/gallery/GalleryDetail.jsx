@@ -134,7 +134,11 @@ export default function GalleryDetail({
             galleryTags={ownedSave.gallery_tags}
             galleryShareNarrated={ownedSave.gallery_share_narrated}
             galleryShareDm={ownedSave.gallery_share_dm}
-            onSaved={() => window.location.reload()}
+            // Re-fetch the dossier in place after a save so the public view
+            // reflects the new narrated / DM-visibility choices — WITHOUT a full
+            // page reload (which would land on a fresh gallery URL where saves
+            // aren't hydrated, dropping this very card until you navigate away).
+            onSaved={() => { if (dossier?.slug) onOpen?.(dossier.slug, { replace: true }); }}
           />
         </div>
       )}

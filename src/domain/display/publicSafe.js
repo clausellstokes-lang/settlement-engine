@@ -70,6 +70,15 @@ export function toPublicSafe(settlement, { full = false } = {}) {
     // AI prose blobs are the narrated toggle's domain, not this one.
     delete clone.aiData;
     delete clone.aiDailyLife;
+    // DM notes are a private DM scratch space — TRULY confidential, never shared
+    // even when the owner reveals the rest of their DM-private content (secrets,
+    // hooks, compass). dossierNotes also lives under aiData (dropped above); these
+    // cover any top-level copy. (Default mode already strips them via the recursive
+    // `note` denylist; full mode skips that, so strip explicitly here.)
+    delete clone.dossierNotes;
+    delete clone.dmNotes;
+    delete clone.notes;
+    delete clone.narrativeNotes;
     // aiSettlement is a full refined-settlement clone — its PROSE is governed by
     // gallery_share_narrated, NOT this toggle. But the DM Compass (which the owner
     // explicitly opted to reveal) lives on it. Preserve ONLY the four DM-Compass

@@ -9,6 +9,7 @@ import {
 } from '../lib/gallery.js';
 import { navigate } from './useRoute.js';
 import { useStore } from '../store/index.js';
+import { saves as savesService } from '../lib/saves.js';
 
 export const EMPTY_GALLERY_FILTERS = Object.freeze({
   tier: [],
@@ -29,6 +30,8 @@ const PAGE_SIZE = 24;
 
 export function useGalleryPageState(routeSlug = null) {
   const auth = useStore(s => s.auth);
+  const savedSettlementsLoaded = useStore(s => s.savedSettlementsLoaded);
+  const setSavedSettlements = useStore(s => s.setSavedSettlements);
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [hasMore, setHasMore] = useState(false);
@@ -72,6 +75,22 @@ export function useGalleryPageState(routeSlug = null) {
       });
     return () => { cancelled = true; };
   }, [galleryQuery]);
+
+  // Hydrate the viewer's own saved settlements so the gallery owner card can
+  // resolve ownership (GalleryDetail matches a save's public_slug to the open
+  // dossier). Otherwise only WorldMap / SettlementsPanel hydrate them, so a
+  // deep-link, refresh, or post-save reload that lands straight on a gallery URL
+  // would leave savedSettlements empty and hide the "Your gallery listing" card
+  // until the user bounced through another page. Idempotent — gated on the
+  // savedSettlementsLoaded flag (same source savesService the other pages use).
+  useEffect(() => {
+    if (savedSettlementsLoaded) return;
+    let cancelled = false;
+    savesService.list()
+      .then(loaded => { if (!cancelled) setSavedSettlements(loaded); })
+      .catch(err => console.error('[gallery] Failed to hydrate saves:', err));
+    return () => { cancelled = true; };
+  }, [savedSettlementsLoaded, setSavedSettlements]);
 
   const openDossier = useCallback(async (slug, options = {}) => {
     if (!slug) return;
