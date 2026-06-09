@@ -366,7 +366,12 @@ function deriveFoodProduction(s, ctx) {
     supply -= 8; push(supplyContributors, 'institutions', 'no_food', -8, 'No dedicated food institutions.');
   }
 
-  // SUPPLY: food supply chains
+  // SUPPLY: food supply chains. INTENTIONALLY ORTHOGONAL to the ledger below, NOT
+  // a duplicate of it: these read ctx.chains, whose status is mutated POST-generation
+  // by applyRegionalPressureToStatus (supplyChainState.js) in response to live
+  // regional_* active conditions. The ledger's deficitPct is frozen at generation
+  // (economicGenerator never recomputes foodSecurity on a world tick), so it cannot
+  // see a mid-campaign route/import shock that these chains do. Do not fold these away.
   const chains = ctx.chains.filter(c => c.needKey === 'food_security');
   for (const c of chains) {
     if (c.status === 'stable') { supply += 6; push(supplyContributors, c.id, 'stable', +6, `${c.name} runs normally.`); }
@@ -375,14 +380,6 @@ function deriveFoodProduction(s, ctx) {
     } else if (c.status !== 'stable') {
       supply -= 6; push(supplyContributors, c.id, c.status, -6, `${c.name} is ${c.status}.`);
     }
-  }
-
-  // SUPPLY: trade route imports. Major-tier routes (crossroads/port) supplement
-  // food; canonical semantics so port/crossroads are no longer mis-read as neutral.
-  const foodTrade = tradeRouteSemantics(s.config?.tradeRouteAccess);
-  if (foodTrade.foodSupply !== 0) {
-    supply += foodTrade.foodSupply;
-    push(supplyContributors, 'config.tradeRouteAccess', foodTrade.tier, foodTrade.foodSupply, 'Strong trade route supplements food.');
   }
 
   // SUPPLY: conserved food ledger (P3.2). Anchor this capacity to foodGenerator's
@@ -397,6 +394,20 @@ function deriveFoodProduction(s, ctx) {
       supply -= m; push(supplyContributors, 'foodLedger', 'deficit', -m, `${led.deficitPct}% caloric deficit strains food supply.`);
     } else if (led.surplusPct >= 40) {
       supply += 8; push(supplyContributors, 'foodLedger', 'surplus', +8, `${led.surplusPct}% caloric surplus eases food supply.`);
+    }
+  }
+
+  // SUPPLY: trade-route imports (FALLBACK ONLY — P3.3b de-dup). Major-tier routes
+  // (crossroads/port) supplement food, but the SAME config.tradeRouteAccess already
+  // drives importCoverageRate inside the ledger's deficitPct (foodGenerator.js: port
+  // 0.70, crossroads 0.60, river 0.50, road 0.35). So when a ledger is present, adding
+  // foodTrade.foodSupply here would double-count the import benefit. Apply it ONLY as a
+  // fallback for un-generated / legacy settlements that carry no foodSecurity to read.
+  if (!led.present) {
+    const foodTrade = tradeRouteSemantics(s.config?.tradeRouteAccess);
+    if (foodTrade.foodSupply !== 0) {
+      supply += foodTrade.foodSupply;
+      push(supplyContributors, 'config.tradeRouteAccess', foodTrade.tier, foodTrade.foodSupply, 'Strong trade route supplements food (no ledger; fallback).');
     }
   }
 

@@ -158,11 +158,39 @@ test (the runaway guards) and new invariant tests.
   famine stays inside the same bounds as the baseline (maxConditions <=30, maxStressors <=40 over 40
   ticks -> the branch has no runaway cross-tick coupling), and that the conserved deficit survives the
   whole loop (probative: a vacuous pass would lose foodSecurity and stop firing the branch).
-- [ ] **P3.3b — Extend the conserved set** (labor/housing/security/healing/throughput) AND
-  resolve the P3.2 overlap: make the ledger the single food-physics source (fold food-chain
-  status into the ledger, or exclude capacityModel's chain contributors when the ledger is
-  present). The XL remaining lift: each capacity gets its own conserved quantity computed once and
-  threaded, the way food now is.
+- **P3.3b — Extend the conserved-ledger pattern beyond food.** A 10-agent mapping workflow
+  diagnosed all 8 remaining capacities + the food-chain overlap, and produced the ranked staged
+  plan below. Key correction it surfaced: the food-chain "double-count" is mostly ORTHOGONAL, not
+  redundant — the chain-status contributors read live post-generation disruption that the
+  generation-frozen `deficitPct` cannot see, so they must stay; only the static trade-route import
+  add was a genuine duplicate of deficitPct's import coverage.
+  - [x] **Stage 0 — Complete the food story (de-dup + capacity-test harness).** _(shipped)_
+    Guarded the trade-route import contributor (`capacityModel.deriveFoodProduction`) with
+    `if (!led.present)` so the import benefit is counted once — by `deficitPct` for generated saves,
+    by `tradeRouteSemantics` only as a fallback for un-generated/legacy ones. Marked the food-chain
+    block intentionally-orthogonal with a comment. Added 4 cases to `tests/domain/capacityModel.test.js`
+    (trade contributor absent when ledger present / present as legacy fallback; generated food supply
+    invariant to route tier; a `blocked` chain still strains supply alongside a surplus ledger). The
+    last residual food double-count is closed, so the template is clean before replication.
+  - [ ] **Stage 1 — Defense ledger (HIGH; two real dead reads).** `causalState` reads
+    `def.readinessScore` (generator computes readiness then discards the numeric) and
+    `def.infrastructureScore` (NO producer anywhere) — both permanently dead, same class as food's
+    `deficitMonths`. Persist numeric readiness; add `defenseLedger` over the already-persisted
+    `defenseProfile.scores.{military,monster,internal,economic,magical}`; anchor `deriveDefense`,
+    `deriveDefenseReadiness`, `deriveExternalThreat`.
+  - [ ] **Stage 2 — Governance ledger (HIGH; dead legitimacy branch).** `deriveSystemState`
+    reads `publicLegitimacy` as a bare number but the producer emits `{score,label,breakdown}`, so
+    the volatility legitimacy branch (+12/-8) NEVER fires (one-line `.score` fix). Unify the three
+    divergent legitimacy transfer functions through one `governanceLedger`. (Housing deferred — no producer.)
+  - [ ] **Stage 3 — Magic ledger** (band-blindness: all 3 magic lenses read the lossy `magicLevel`
+    band, ignore `priorityMagic` granularity + chain magic load).
+  - [ ] **Stage 4 — Healing ledger** (collapse the triplicated `HEALING_PATTERN`; anchor to the
+    already-emitted `availableServices.healing`).
+  - [ ] **Stage 5 — Craft ledger** (persist the discarded `computeFinishedGoodsDemand` physics first).
+  - [ ] **Stage 6 — Welfare ledger** (convert the dead `welfareCapacity` write into a real producer).
+  - [ ] **Stage 7 — Transport ledger** (emit a `throughputRating`; low priority, no current disagreement).
+  - [ ] **Stage 8 — Labor ledger** (heaviest: surface the latent `AGRICULTURAL_WORKFORCE` split the
+    food math already commits; retire the `deriveLabor` vs `deriveLaborCapacity` two-model divergence).
 - [ ] **North star:** every pressure flows through the one condition substrate + conserved
   ledger; every deriver/lens/trace/AI-overlay consumes them. Consistency architecturally enforced.
 

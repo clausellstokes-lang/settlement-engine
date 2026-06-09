@@ -495,3 +495,66 @@ describe('capacity transport supply reflects canonical trade routes (P1.1)', () 
     }
   });
 });
+
+// ── Food trade-import de-dup + chain orthogonality (P3.3b Stage 0) ───────────
+//
+// The import benefit is counted ONCE: config.tradeRouteAccess already drives
+// importCoverageRate inside the conserved ledger's deficitPct (foodGenerator:
+// port 0.70, crossroads 0.60, ...), so capacityModel adds the tradeRouteSemantics
+// food bonus ONLY as a fallback when no ledger is present (un-generated / legacy
+// saves). The food SUPPLY-CHAIN contributors stay ORTHOGONAL — their status is
+// mutated post-generation by regional disruption the frozen ledger cannot see, so
+// they must still fire even when the ledger reads adequate.
+describe('food_production — trade-import de-dup (P3.3b Stage 0)', () => {
+  const TRADE_SRC = 'config.tradeRouteAccess';
+  const generated = (route, foodSecurity, extra = {}) => ({
+    name: 'T', tier: 'town', population: 2000,
+    config: { tradeRouteAccess: route, monsterThreat: 'safe' },
+    institutions: [],
+    economicState: { prosperity: 'Modest', foodSecurity, ...extra },
+    powerStructure: { factions: [] }, activeConditions: [],
+  });
+  const SURPLUS = { deficitPct: 0, surplusPct: 50, foodRatio: 1.5, storageMonths: 6 };
+  const DEFICIT = { deficitPct: 50, surplusPct: 0, foodRatio: 0.5, storageMonths: 1 };
+  const foodProfile = (s) => deriveCapacityProfile('food_production', s);
+
+  it('does NOT add a trade-route import contributor when a ledger is present (counted once)', () => {
+    // A major-tier port that would have double-added +6 food supply; the ledger is
+    // present, so the import benefit lives in deficitPct and the capacity add is suppressed.
+    const prof = foodProfile(generated('port', DEFICIT));
+    expect(prof.supplyContributors.some(c => c.source === TRADE_SRC)).toBe(false);
+  });
+
+  it('DOES add the trade-route contributor as a fallback when no ledger is present (legacy save)', () => {
+    // No economicState.foodSecurity -> foodLedger.present is false -> the fallback fires.
+    const legacy = {
+      name: 'T', tier: 'town', population: 2000,
+      config: { tradeRouteAccess: 'port', monsterThreat: 'safe' },
+      institutions: [], economicState: { prosperity: 'Modest' },
+      powerStructure: { factions: [] }, activeConditions: [],
+    };
+    const trade = foodProfile(legacy).supplyContributors.find(c => c.source === TRADE_SRC);
+    expect(trade).toBeTruthy();
+    expect(trade.delta).toBeGreaterThan(0); // major-tier port supplements food
+  });
+
+  it('a generated town\'s food supply is invariant to route tier (route already inside deficitPct)', () => {
+    // port (major, would-be +6) vs road (standard, +0): with a present ledger the add is
+    // skipped either way, so the two are identical -> the import benefit is not double-counted.
+    expect(foodProfile(generated('port', DEFICIT)).supply)
+      .toBe(foodProfile(generated('road', DEFICIT)).supply);
+  });
+
+  it('a blocked food chain still strains supply even when the ledger reads adequate (orthogonal)', () => {
+    // Adequate ledger (surplus, zero deficit) + a blocked food_security chain injected
+    // post-generation. The chain contributor MUST still fire -> disruption the frozen
+    // ledger cannot see is preserved; folding the chain block away would lose it.
+    const s = generated('road', SURPLUS, {
+      activeChains: [{ chainId: 'grain-import', needKey: 'food_security', name: 'Grain imports', status: 'blocked' }],
+    });
+    const contribs = foodProfile(s).supplyContributors;
+    expect(contribs.some(c => c.effect === 'blocked' && c.delta < 0)).toBe(true);
+    // ...and the ledger's surplus easing ALSO fires -> both lenses contribute independently.
+    expect(contribs.some(c => c.source === 'foodLedger' && c.delta > 0)).toBe(true);
+  });
+});
