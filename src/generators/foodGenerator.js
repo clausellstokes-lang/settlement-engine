@@ -16,6 +16,8 @@
  *   - Economics tab UI
  */
 
+import { getActiveRng } from './rngContext.js';
+
 // ── Constants (match buildFactionList in economicGenerator) ────────────────
 const PER_CAPITA_NEED        = 2;    // lbs/day per person
 const FARMER_PRODUCTION      = 6;    // lbs/day per farming worker
@@ -127,8 +129,16 @@ export function generateFoodSecurity(tier, institutions, config) {
   if (stressOccupied) { consumptionMult *= 1.20; }
 
   const dailyNeed       = population * PER_CAPITA_NEED * consumptionMult;
+  // Seeded crop-fortune variance (±8%): the SAME config yields a slightly
+  // different harvest per seed — good years vs lean years — so re-rolling a
+  // settlement varies its food resilience instead of producing an identical
+  // number. Forked into an ISOLATED sub-stream so it never perturbs other
+  // economy consumers' RNG; deterministic per seed; a flat 1.0 (no jitter) when
+  // no seeded RNG is active (non-pipeline callers stay deterministic).
+  const _cropRng = getActiveRng()?.fork?.('food.cropFortune') || null;
+  const cropFortune = _cropRng ? 1 + (_cropRng.random() * 2 - 1) * 0.08 : 1;
   const dailyProduction = Math.floor(population * AGRICULTURAL_WORKFORCE) * FARMER_PRODUCTION
-                          * effectiveAgri * productionMult / 1.3; // /1.3 = STORAGE_BUFFER constant
+                          * effectiveAgri * productionMult * cropFortune / 1.3; // /1.3 = STORAGE_BUFFER constant
   const rawSurplus      = dailyProduction - dailyNeed;
   const rawDeficit      = Math.max(0, -rawSurplus);
   // Magic trade bypass: isolated settlements with teleportation get import coverage

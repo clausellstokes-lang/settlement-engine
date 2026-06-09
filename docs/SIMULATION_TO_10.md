@@ -88,9 +88,13 @@ test (the runaway guards) and new invariant tests.
   *metadata* (mostly `existing || nowIso()` preserve-if-present), not simulation state — they
   don't change the deterministic settlement outcome. Documented as an intentional boundary
   rather than swept (a full thread-through would be large and low-value).
-- [ ] **P2.4 — Seed deliberate variability** into deterministic-only subsystems
-  (`foodGenerator` storage/crop variance; gate magic-substitution recovery through
-  `rng.chance`). *Invariant:* same config + different seed yields varied food resilience.
+- [x] **P2.4 — Seed crop-fortune variance into `foodGenerator`.** _(shipped)_ A ±8% seeded
+  harvest multiplier (forked into an isolated sub-stream so it never perturbs other economy
+  consumers' RNG) makes the SAME config yield varied food resilience per seed — good years vs
+  lean — while staying deterministic per seed. Pinned by foodVariance.test (varies across
+  seeds with identical config; reproduces per seed; bounded; no-RNG fallback is flat).
+  _(Deferred — owner's call: making magic-substitution recovery probabilistic via `rng.chance`
+  is a balance/design change, not a clear improvement; left as-is pending direction.)_
 - [ ] **P2.5 — Document load-bearing constants:** corruption saturation curve, pressure-model
   weights, capacity thresholds, cascade 0.45 cap; JSDoc the high-complexity NPC generators.
 - [x] **P2.6 — Harden `admin-actions` edge function.** _(shipped, non-breaking)_ `OWNER_EMAIL`
