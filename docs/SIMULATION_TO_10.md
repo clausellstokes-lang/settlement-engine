@@ -84,8 +84,21 @@ test (the runaway guards) and new invariant tests.
   (subsumption/cascade/isolation, foodGenerator, faction roles, causal healing) site-by-site,
   each soak-gated; richer declared catalog tags retire the keyword fallback over time._
   *Invariant target:* renaming an institution does not change subsumption/cascade/isolation.
-- [ ] **P2.2 — Unify faction archetypes:** one `FACTION_ARCHETYPES` enum + one `matchArchetype`
-  consumed by all four layers that currently disagree; stable governing-faction id.
+  _Finding (after investigating the sites): the audit's "46 duplicated name-match sites" is
+  overstated — security detection is already centralized into `inst.has*` flags, subsumption is
+  id-based (not tag-suitable), the healing/food checks are bespoke localized lists (migration
+  relocates without consolidating), and the one genuinely-duplicated institution category
+  (criminal) is migrated. The real duplicated vocabulary turned out to be the FACTION archetype
+  matchers → that's P2.2. So P2.1's high-value consolidation is captured; the resolver remains
+  the primitive for future custom-content recognition._
+- [~] **P2.2 — Unify faction archetypes.** _Foundation shipped._ `domain/factionArchetypes.js`
+  is the one canonical detector — `FACTION_ARCHETYPES` enum + `factionArchetype(faction)`
+  (category-authoritative, name/description fallback, ordering that resolves the overlaps that
+  tripped the legacy matchers). It's the UNION of the four divergent matchers
+  (factionCompetition / factionRoles / factionProfile / factionResponses), each of which maps to
+  its own output vocabulary (NPC-role keys / responder keys / profile archetypes / competition
+  archetypes). Pinned by factionArchetypes.test. _Next (behavior-converging, soak-gated): wire
+  each of the four consumers to map FROM the canonical archetype instead of re-deriving regexes._
 - [x] **P2.3 — `new Date()` ban: core complete.** _(assessed/shipped)_ The simulation-replay
   path is already deterministic: event `appliedAt` + `mutate`/`applyEvent` thread `now`, and
   `propagation.js` overwrites every impact `createdAt` with the threaded `now` (line ~429).
