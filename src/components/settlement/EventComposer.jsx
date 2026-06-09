@@ -16,6 +16,7 @@ import { validateBatch } from '../../domain/events/batch.js';
 import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../domain/roles/roleCatalog.js';
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
+import { institutionHasTag, TAG } from '../../lib/entities.js';
 import CatalogPicker from './CatalogPicker.jsx';
 import SettlementEditor from '../SettlementEditor.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
@@ -42,6 +43,7 @@ const TARGET_ENTITY_BY_EVENT = Object.freeze({
   IMPAIR_INSTITUTION:   'institutions',
   ADD_NPC:              null,           // new entity — free text
   KILL_NPC:             'npcs',
+  IMPOSE_CORRUPTION:    'npcs',          // pick the clean NPC to turn; criminal org picked below
   ASSIGN_NPC_TO_ROLE:   'npcs',
   IMPAIR_FACTION:       'factions',
   RESTORE_FACTION:      'factions',     // recover a faction that is currently impaired
@@ -175,6 +177,7 @@ export default function EventComposer({
   const [staged, setStaged]         = useState([]);            // batch: staged changes not yet applied
   const [destroyConfirm, setDestroyConfirm] = useState('');    // §9c: type-the-name gate for Destroy Settlement
   const [relationshipType, setRelationshipType] = useState(''); // §9b/g/h: neighbour relationship for dispute/alliance/trade
+  const [criminalOrg, setCriminalOrg] = useState('');          // IMPOSE_CORRUPTION: the criminal organization to link the NPC to
   const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
@@ -191,6 +194,16 @@ export default function EventComposer({
     [institutionCatalogItems],
   );
   const factionGroups = useMemo(() => factionCompendium(settlement), [settlement]);
+  // IMPOSE_CORRUPTION — criminal organizations present in the settlement (same CRIMINAL-tag
+  // detector the corruption domain uses, so the picker matches what the engine recognizes).
+  const criminalOrgs = useMemo(
+    () => (settlement?.institutions || [])
+      // Match the domain's isCriminalInstitution exactly (tag/name backfill OR criminal category),
+      // so the picker offers precisely what the handler accepts.
+      .filter(i => institutionHasTag(i, TAG.CRIMINAL) || /criminal/i.test(String(i?.category || '')))
+      .map(i => i.name).filter(Boolean),
+    [settlement?.institutions],
+  );
   const hasEditor = !!onEdit;
 
   if (!settlement) return null;
@@ -246,6 +259,10 @@ export default function EventComposer({
     }
     if (RELATIONSHIP_OPTIONS[type]) {
       payload.relationshipType = relationshipType || RELATIONSHIP_OPTIONS[type][0];
+    }
+    if (type === 'IMPOSE_CORRUPTION') {
+      const org = criminalOrg || criminalOrgs[0];
+      if (org) payload.criminalInstitution = org;
     }
     return {
       id: `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
@@ -307,7 +324,7 @@ export default function EventComposer({
 
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); }} style={selectStyle}>
+          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); }} style={selectStyle}>
             {Object.entries(EVENT_REGISTRY)
               /* Hide non-authorable events from the DM action list (see
                  NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
@@ -406,6 +423,23 @@ export default function EventComposer({
             </Field>
           );
         })()}
+
+        {/* IMPOSE_CORRUPTION — which criminal organization gets its hooks into the NPC */}
+        {type === 'IMPOSE_CORRUPTION' && (
+          criminalOrgs.length > 0 ? (
+            <Field label="Criminal organization" hint="The organization that corrupts the chosen NPC">
+              <select value={criminalOrg || criminalOrgs[0]} onChange={e => setCriminalOrg(e.target.value)} style={selectStyle}>
+                {criminalOrgs.map(o => <option key={o} value={o}>{o}</option>)}
+              </select>
+            </Field>
+          ) : (
+            <Field label="Criminal organization" hint="No criminal organization in this settlement to corrupt through">
+              <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, padding: '6px 0' }}>
+                This settlement has no criminal organization — add one (e.g. a Thieves&rsquo; Guild) before imposing corruption.
+              </div>
+            </Field>
+          )
+        )}
 
         {/* §9b/§9g/§9h — relationship type for neighbour-targeted events */}
         {RELATIONSHIP_OPTIONS[type] && (

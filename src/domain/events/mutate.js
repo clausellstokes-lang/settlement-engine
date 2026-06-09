@@ -24,6 +24,7 @@ import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
 import { withActiveCondition } from '../activeConditions.js';
+import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate } from '../corruption.js';
 
 /** @typedef {import('../types.js').Event} Event */
 
@@ -110,6 +111,9 @@ export function mutateSettlement({ settlement, event, now = null }) {
       break;
     case 'EXPOSE_CORRUPTION':
       next = exposeCorruption(next, stampedEvent);
+      break;
+    case 'IMPOSE_CORRUPTION':
+      next = imposeCorruption(next, stampedEvent);
       break;
     case 'REFUGEE_WAVE':
       next = refugeeWave(next, stampedEvent);
@@ -557,6 +561,35 @@ function severCorruptionTiesTo(s, institutionName) {
     return npc;
   });
   return changed ? { ...s, npcs: nextNpcs } : s;
+}
+
+// §corruption — IMPOSE_CORRUPTION: a DM turns a clean NPC by linking them to a criminal
+// organization in the settlement. We write the EXACT shape the world-pulse corruption loop
+// seeds from — npc.corrupt + corruptionVector + corruptTies.criminalInstitution (npcAgency.js
+// reads these to evolve corruption, advance faction capture from the seat, and gate exposure) —
+// so the corruption is canon + visible + propagates, and EXPOSE_CORRUPTION can later target them.
+// Covert by design: no public legitimacy impairment here (that is the exposure consequence).
+function imposeCorruption(s, event) {
+  const npc = findNpc(s, event.targetId);
+  if (!npc || npc.corrupt) return s; // need a real, not-already-corrupt NPC
+
+  // Resolve the criminal organization: an explicit pick, else the settlement's criminal
+  // institution. With no criminal organization there is nothing to link to — no-op.
+  const orgName = event.payload?.criminalInstitution
+    || readCorruptionClimate(s).criminalInstitutions[0]
+    || null;
+  if (!orgName) return s;
+
+  // Vector derives from the NPC's own corruptible flaw (greed / fear / status / ...), mirroring
+  // the organic onset path; defaults to greed when the NPC has no flagged flaw.
+  const vector = corruptionVectorForFlaw(npcCorruptibleFlaw(npc));
+  const corrupted = {
+    ...npc,
+    corrupt: true,
+    corruptionVector: vector,
+    corruptTies: { ...(npc.corruptTies || {}), criminalInstitution: orgName },
+  };
+  return replaceNpc(s, npc, corrupted);
 }
 
 /**

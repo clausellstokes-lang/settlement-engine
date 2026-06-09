@@ -100,6 +100,7 @@ export const RERUN_KEYS_FOR_EVENT = {
   // Wave 1 extended events.
   KILL_LEADER:            ['npcs', 'powerStructure', 'institutions', 'narrative'],
   EXPOSE_CORRUPTION:      ['powerStructure', 'institutions', 'economicState', 'narrative'],
+  IMPOSE_CORRUPTION:      ['npcs', 'powerStructure', 'narrative'],
   REFUGEE_WAVE:           ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   PLAGUE:                 ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   RAID_OR_MONSTER_ATTACK: ['institutions', 'economicState', 'narrative'],
@@ -413,6 +414,25 @@ export const EVENT_REGISTRY = {
     },
     narrate(event) {
       return `Corruption inside ${labelOf(event.targetId)} has been publicly exposed.`;
+    },
+  },
+
+  IMPOSE_CORRUPTION: {
+    label: 'Impose corruption',
+    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes COVERTLY corrupt and tied to that organization — so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
+    requiresTarget: true,
+    targetPrompt: 'Clean NPC to turn (pick the organization below)',
+    stateDeltas(event) {
+      // Covert — a quieter destabiliser than the public collapse of EXPOSE_CORRUPTION.
+      const sev = Number(event.payload?.severity ?? 0.5);
+      return {
+        resilience: -Math.round(sev * 5),
+        volatility: +Math.round(sev * 8),
+      };
+    },
+    narrate(event) {
+      const org = event.payload?.criminalInstitution;
+      return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''} — corruption takes root in the shadows.`;
     },
   },
 
