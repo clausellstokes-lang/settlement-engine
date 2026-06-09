@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-09T14:55:39.193Z",
+  "generatedAt": "2026-06-09T15:05:48.876Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "e22180993ccfa4ef",
+  "sourceHash": "15aff05fd6caec0e",
   "inputs": [
     "src/data/constants.js",
     "src/domain/activeConditions.js",
@@ -17,6 +17,7 @@
     "src/domain/factionArchetypes.js",
     "src/domain/factionProfile.js",
     "src/domain/foodLedger.js",
+    "src/domain/governanceLedger.js",
     "src/domain/historyBeats.js",
     "src/domain/hookEscalation.js",
     "src/domain/npcProfile.js",

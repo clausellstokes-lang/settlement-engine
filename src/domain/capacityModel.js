@@ -56,6 +56,7 @@ import { tradeRouteSemantics, tradeRouteTier } from './tradeRouteSemantics.js';
 import { canonStressors, canonExports } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
 import { defenseLedger } from './defenseLedger.js';
+import { governanceLedger } from './governanceLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -320,12 +321,12 @@ function deriveAdministrative(s, ctx) {
     supply -= 8; push(supplyContributors, 'institutions', 'no_civic', -8, 'No civic institutions detected.');
   }
 
-  // SUPPLY: legitimacy
-  const leg = s.powerStructure?.publicLegitimacy?.score;
-  if (typeof leg === 'number') {
-    const c = Math.round((leg - 50) * 0.3);
+  // SUPPLY: legitimacy (read via the conserved governance ledger; this lens weights it 0.3).
+  const gov = governanceLedger(s);
+  if (gov.present) {
+    const c = Math.round((gov.legitimacyScore - 50) * 0.3);
     supply += c; push(supplyContributors, 'powerStructure.publicLegitimacy', 'measured', c,
-      `Legitimacy ${leg} contributes ${c >= 0 ? '+' : ''}${c}.`);
+      `Legitimacy ${gov.legitimacyScore} contributes ${c >= 0 ? '+' : ''}${c}.`);
   }
 
   // SUPPLY: governing faction power

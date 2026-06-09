@@ -52,6 +52,7 @@ import { deriveAllNpcProfiles } from './npcProfile.js';
 import { tradeRouteSemantics } from './tradeRouteSemantics.js';
 import { canonStressors } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
+import { governanceLedger } from './governanceLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -229,13 +230,13 @@ function derivePublicLegitimacy(s) {
   let score = 50;
   const contributors = [];
 
-  // Read directly from the legitimacy substrate
-  const leg = s.powerStructure?.publicLegitimacy;
-  if (leg && typeof leg.score === 'number') {
-    // Use the legitimacy score directly — it's already a 0-100 measure.
-    score = leg.score;
-    push(contributors, 'powerStructure.publicLegitimacy', leg.label || 'measured', 0,
-      `Governing legitimacy score: ${leg.score} (${leg.label || 'unbanded'}).`);
+  // Read the conserved legitimacy quantity via the governance ledger. This lens IS
+  // legitimacy, so it uses the score verbatim (other lenses weight it differently).
+  const gov = governanceLedger(s);
+  if (gov.present) {
+    score = gov.legitimacyScore;
+    push(contributors, 'powerStructure.publicLegitimacy', gov.legitimacyLabel || 'measured', 0,
+      `Governing legitimacy score: ${gov.legitimacyScore} (${gov.legitimacyLabel || 'unbanded'}).`);
   }
 
   // Active conditions that affect public_legitimacy (corruption etc.)
@@ -256,14 +257,15 @@ function deriveRulingAuthority(s) {
   let score = 50;
   const contributors = [];
 
-  // Combination of governing legitimacy + governing faction power
-  const leg = s.powerStructure?.publicLegitimacy;
-  if (leg && typeof leg.score === 'number') {
-    const c = Math.round((leg.score - 50) * 0.5);
+  // Combination of governing legitimacy + governing faction power. Legitimacy via the
+  // conserved governance ledger; this lens weights it 0.5.
+  const gov = governanceLedger(s);
+  if (gov.present) {
+    const c = Math.round((gov.legitimacyScore - 50) * 0.5);
     if (c !== 0) {
       score += c;
-      push(contributors, 'powerStructure.publicLegitimacy', leg.label || 'measured', c,
-        `Governing legitimacy ${leg.score} contributes ${c >= 0 ? '+' : ''}${c}.`);
+      push(contributors, 'powerStructure.publicLegitimacy', gov.legitimacyLabel || 'measured', c,
+        `Governing legitimacy ${gov.legitimacyScore} contributes ${c >= 0 ? '+' : ''}${c}.`);
     }
   }
 

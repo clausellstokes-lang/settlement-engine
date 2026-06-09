@@ -200,10 +200,19 @@ test (the runaway guards) and new invariant tests.
     is a display/diff dimension that does NOT feed event/pressure/corruption loops (those use the
     `worldState.volatility` string dial + `causal.scores`), so this is a dossier-accuracy fix with no
     balance-loop risk. 2 systemState cases (object direction + risk; legacy bare-number compat).
-  - [ ] **Stage 2b — Governance ledger.** Unify the divergent legitimacy transfer functions
-    (capacityModel.deriveAdministrative 0.3, causalState.deriveRulingAuthority 0.5,
-    derivePublicLegitimacy verbatim, deriveVolatility thresholds) through one `governanceLedger`
-    accessor. (Housing deferred — no producer exists.)
+  - [x] **Stage 2b — Governance ledger.** _(shipped)_ Created `src/domain/governanceLedger.js`
+    (single read-point over `powerStructure.publicLegitimacy`: `legitimacyScore`, `legitimacyLabel`,
+    `present`; handles the `{score}` object AND a legacy bare number uniformly). Routed all four
+    legitimacy consumers through it — `derivePublicLegitimacy` (verbatim), `deriveRulingAuthority`
+    (×0.5), `capacityModel.deriveAdministrative` (×0.3), `deriveVolatility` (thresholds, replacing the
+    Stage 2a inline normalization). Corrected the plan's "unify the transfer functions": the differing
+    weights are intentionally lens-specific (each lens means something different by legitimacy, exactly
+    as food lenses band `deficitPct` differently) — only the READ + null/legacy handling is unified, so
+    a legacy bare-number legitimacy now moves every lens. Governing-faction power deliberately left out
+    (two distinct notions, not a shared quantity). governanceLedger unit tests + a cross-lens cohesion
+    test. (Housing deferred — no producer exists.) Follow-up (non-blocking, surfaced by verify):
+    `factionProfile.legitimacyFor` (factionProfile.js:185) reads `publicLegitimacy?.score` directly and
+    should also route through `governanceLedger` for full single-source cohesion.
   - [ ] **Stage 3 — Magic ledger** (band-blindness: all 3 magic lenses read the lossy `magicLevel`
     band, ignore `priorityMagic` granularity + chain magic load).
   - [ ] **Stage 4 — Healing ledger** (collapse the triplicated `HEALING_PATTERN`; anchor to the

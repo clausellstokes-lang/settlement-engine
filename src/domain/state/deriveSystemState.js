@@ -28,6 +28,7 @@ import { deriveExportPosture } from '../display/dossierViewModel.js';
 import { isIsolatedRoute } from '../tradeRouteSemantics.js';
 import { canonStressors, canonExports, canonImports } from '../canonicalAccessors.js';
 import { foodLedger } from '../foodLedger.js';
+import { governanceLedger } from '../governanceLedger.js';
 
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
@@ -158,19 +159,15 @@ function deriveVolatility(s) {
     drivers.push('Crime well-suppressed');
   }
 
-  // Public legitimacy — when the rulers are doubted, the place wobbles. The canonical
-  // substrate is powerStructure.publicLegitimacy = { score, label, breakdown }; read
-  // .score. This branch was DEAD: it tested typeof === 'number' against the OBJECT the
-  // generator emits, so low legitimacy never raised volatility. Normalize so the object
-  // (.score), a legacy bare number, and absent all resolve correctly.
-  const legRaw = power.publicLegitimacy ?? safety.publicLegitimacy ?? null;
-  const legitimacy = typeof legRaw === 'number' ? legRaw
-    : (legRaw && typeof legRaw.score === 'number' ? legRaw.score : null);
-  if (typeof legitimacy === 'number') {
-    if (legitimacy <= 30) {
+  // Public legitimacy — when the rulers are doubted, the place wobbles. Read the conserved
+  // quantity via the governance ledger (handles the { score } object + legacy bare number
+  // uniformly); this lens applies destabilisation thresholds rather than a linear transfer.
+  const gov = governanceLedger(s);
+  if (gov.present) {
+    if (gov.legitimacyScore <= 30) {
       value += 12;
       risks.push('Ruling order has lost public legitimacy');
-    } else if (legitimacy >= 70) {
+    } else if (gov.legitimacyScore >= 70) {
       value -= 8;
       drivers.push('Strong public legitimacy');
     }
