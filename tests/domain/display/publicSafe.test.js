@@ -52,7 +52,11 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     dossierNotes: 'my prep notes',
     dmCompass: { twist: 'the mayor is a doppelganger' },
     npcs: [{ name: 'Aldric', role: 'Mayor', goal: 'seize power', secret: 'bastard heir', plotHooks: ['blackmail'], relationships: [{ with: 'x' }], influence: 80 }],
-    aiData: { aiSettlement: { x: 1 } }, aiSettlement: { y: 2 }, aiDailyLife: { dawn: 'z' },
+    aiData: { aiSettlement: { x: 1 } }, aiDailyLife: { dawn: 'z' },
+    aiSettlement: {
+      name: 'Refined Foo', npcs: [{ name: 'Aldric, the refined prose' }], // AI PROSE — must be dropped
+      identityMarkers: ['m1'], frictionPoints: ['f1'], connectionsMap: ['c1'], dmCompass: { hooks: ['h'] }, // DM Compass — kept
+    },
   });
 
   it('keeps secrets, plot hooks, notes, compass + NPC goal/secret/relationships', () => {
@@ -66,11 +70,22 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(out.npcs[0].relationships).toEqual([{ with: 'x' }]);
   });
 
-  it('still drops AI base blobs (governed by the separate narrated toggle)', () => {
+  it('drops AI prose blobs but keeps ONLY the four DM-Compass fields of aiSettlement', () => {
     const out = toPublicSafe(dm(), { full: true });
     expect(out.aiData).toBeUndefined();
-    expect(out.aiSettlement).toBeUndefined();
     expect(out.aiDailyLife).toBeUndefined();
+    // DM Compass preserved (the owner opted to reveal DM-private content)…
+    expect(out.aiSettlement).toEqual({
+      identityMarkers: ['m1'], frictionPoints: ['f1'], connectionsMap: ['c1'], dmCompass: { hooks: ['h'] },
+    });
+    // …but the refined PROSE on aiSettlement (governed by the narrated toggle) is gone.
+    expect(out.aiSettlement.name).toBeUndefined();
+    expect(out.aiSettlement.npcs).toBeUndefined();
+  });
+
+  it('drops aiSettlement entirely when it carries no DM-Compass fields', () => {
+    const out = toPublicSafe({ name: 'X', aiSettlement: { name: 'prose only', npcs: [{}] } }, { full: true });
+    expect(out.aiSettlement).toBeUndefined();
   });
 
   it('default (no option / full:false) still strips DM-private content', () => {

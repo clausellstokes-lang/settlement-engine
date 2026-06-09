@@ -69,8 +69,22 @@ export function toPublicSafe(settlement, { full = false } = {}) {
     catch { clone = JSON.parse(JSON.stringify(settlement || {})); }
     // AI prose blobs are the narrated toggle's domain, not this one.
     delete clone.aiData;
-    delete clone.aiSettlement;
     delete clone.aiDailyLife;
+    // aiSettlement is a full refined-settlement clone — its PROSE is governed by
+    // gallery_share_narrated, NOT this toggle. But the DM Compass (which the owner
+    // explicitly opted to reveal) lives on it. Preserve ONLY the four DM-Compass
+    // fields and drop the refined prose, so full mode surfaces the Guidance tab
+    // without leaking narration. (Consumed read-only for the tab; the main render
+    // never reads this partial object — see OutputContainer showNarrative.)
+    if (clone.aiSettlement && typeof clone.aiSettlement === 'object') {
+      const ai = clone.aiSettlement;
+      const compass = {};
+      for (const k of ['identityMarkers', 'frictionPoints', 'connectionsMap', 'dmCompass']) {
+        if (ai[k] != null) compass[k] = ai[k];
+      }
+      if (Object.keys(compass).length) clone.aiSettlement = compass;
+      else delete clone.aiSettlement;
+    }
     return clone;
   }
   const clean = sanitizePublicValue(settlement || {});

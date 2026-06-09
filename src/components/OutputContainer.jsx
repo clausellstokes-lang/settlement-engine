@@ -207,7 +207,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // clone. Otherwise read raw. Refined sections the AI completed show polished
   // prose; sections the AI didn't touch (or passes that failed) show raw data
   // because aiSettlement started as a deep clone of the source.
-  const showNarrative = storeShowNarrative && !!aiSettlement;
+  // Never drive the main render from aiSettlement in a read-only surface: a public
+  // shareDm dossier carries only the DM-Compass fields of aiSettlement (a partial
+  // object), used for the Guidance tab alone — rendering the dossier from it would
+  // blank the page. Owner (non-readOnly) narrative view is unchanged.
+  const showNarrative = !readOnly && storeShowNarrative && !!aiSettlement;
   const activeSettlement = showNarrative ? aiSettlement : rawSettlement;
   const dossierNotes = liveSaveEntry?.aiData?.dossierNotes || null;
   const aiGuidance = typeof dossierNotes?.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
