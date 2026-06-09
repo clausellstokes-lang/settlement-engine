@@ -158,8 +158,14 @@ function deriveVolatility(s) {
     drivers.push('Crime well-suppressed');
   }
 
-  // Public legitimacy — when the rulers are doubted, the place wobbles
-  const legitimacy = power.publicLegitimacy ?? safety.publicLegitimacy ?? null;
+  // Public legitimacy — when the rulers are doubted, the place wobbles. The canonical
+  // substrate is powerStructure.publicLegitimacy = { score, label, breakdown }; read
+  // .score. This branch was DEAD: it tested typeof === 'number' against the OBJECT the
+  // generator emits, so low legitimacy never raised volatility. Normalize so the object
+  // (.score), a legacy bare number, and absent all resolve correctly.
+  const legRaw = power.publicLegitimacy ?? safety.publicLegitimacy ?? null;
+  const legitimacy = typeof legRaw === 'number' ? legRaw
+    : (legRaw && typeof legRaw.score === 'number' ? legRaw.score : null);
   if (typeof legitimacy === 'number') {
     if (legitimacy <= 30) {
       value += 12;

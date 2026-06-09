@@ -97,6 +97,22 @@ describe('deriveSystemState', () => {
     expect(stormy.volatility.value).toBeGreaterThan(calm.volatility.value);
   });
 
+  // P3.3b Stage 2a: the legitimacy branch read publicLegitimacy as a bare number,
+  // but the generator emits { score, label, ... } — so low legitimacy never raised
+  // volatility. Now reads .score; a doubted ruling order destabilises again.
+  test('low public legitimacy raises volatility; strong legitimacy lowers it', () => {
+    const shaky = deriveSystemState({ powerStructure: { publicLegitimacy: { score: 20 } } });
+    const solid = deriveSystemState({ powerStructure: { publicLegitimacy: { score: 85 } } });
+    expect(shaky.volatility.value).toBeGreaterThan(solid.volatility.value);
+    expect(shaky.volatility.risks.some(r => /legitimacy/i.test(r))).toBe(true);
+  });
+
+  test('legacy bare-number legitimacy still works (backward compatible)', () => {
+    const shaky = deriveSystemState({ powerStructure: { publicLegitimacy: 20 } });
+    const solid = deriveSystemState({ powerStructure: { publicLegitimacy: 85 } });
+    expect(shaky.volatility.value).toBeGreaterThan(solid.volatility.value);
+  });
+
   test('plagued region raises external threat over safe region', () => {
     const safe = deriveSystemState({ config: { monsterThreat: 'civilized' } });
     const plagued = deriveSystemState({ config: { monsterThreat: 'plagued' } });

@@ -186,10 +186,18 @@ test (the runaway guards) and new invariant tests.
     magicDependency (NEUTRAL defaults, `present:false`), then re-anchor `capacityModel.deriveDefense`
     (stop the parallel institution/threat re-derivation) and `deriveSystemState.deriveExternalThreat`
     (read `led.monster` instead of re-deriving from `config.monsterThreat`) onto it.
-  - [ ] **Stage 2 — Governance ledger (HIGH; dead legitimacy branch).** `deriveSystemState`
-    reads `publicLegitimacy` as a bare number but the producer emits `{score,label,breakdown}`, so
-    the volatility legitimacy branch (+12/-8) NEVER fires (one-line `.score` fix). Unify the three
-    divergent legitimacy transfer functions through one `governanceLedger`. (Housing deferred — no producer.)
+  - [x] **Stage 2a — Revive the dead legitimacy branch in `deriveVolatility`.** _(shipped)_
+    It read `publicLegitimacy` as a bare number, but the generator emits `{score,label,breakdown}`,
+    so the branch (low legitimacy → volatility +12 + risk; high → −8 + driver) NEVER fired.
+    Normalized to read `.score` (object), a legacy bare number, or absent — mirroring the 3 consumers
+    that already read `.score` correctly. Adversarial verify established the numeric `system.volatility`
+    is a display/diff dimension that does NOT feed event/pressure/corruption loops (those use the
+    `worldState.volatility` string dial + `causal.scores`), so this is a dossier-accuracy fix with no
+    balance-loop risk. 2 systemState cases (object direction + risk; legacy bare-number compat).
+  - [ ] **Stage 2b — Governance ledger.** Unify the divergent legitimacy transfer functions
+    (capacityModel.deriveAdministrative 0.3, causalState.deriveRulingAuthority 0.5,
+    derivePublicLegitimacy verbatim, deriveVolatility thresholds) through one `governanceLedger`
+    accessor. (Housing deferred — no producer exists.)
   - [ ] **Stage 3 — Magic ledger** (band-blindness: all 3 magic lenses read the lossy `magicLevel`
     band, ignore `priorityMagic` granularity + chain magic load).
   - [ ] **Stage 4 — Healing ledger** (collapse the triplicated `HEALING_PATTERN`; anchor to the
