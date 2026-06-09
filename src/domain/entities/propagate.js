@@ -124,6 +124,10 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
           severity: linkSeverity,
           causeEventId: origin.impairment.causeEventId,
           description: `Propagated from ${node.entityType} "${entityName(working, node.entityType, node.entityId)}" (${node.dimension} → ${propagatedDim}, hop ${node.hops + 1})`,
+          // Inherit the origin's timestamp so propagation stays deterministic when
+          // the caller threads `appliedAt` (required in the world-pulse, which bans
+          // new Date()). Undefined when the origin had none — unchanged behavior.
+          appliedAt: origin.impairment.appliedAt,
         };
 
         working = applyImpairmentToEntity(working, link.targetType, link.targetId, impairment);

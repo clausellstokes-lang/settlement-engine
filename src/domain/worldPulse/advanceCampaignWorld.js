@@ -7,6 +7,7 @@ import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
+import { applyCorruptionImpairments } from './corruptionImpair.js';
 import { ensureFactionStates, relaxFactionStates, seatNpcsIntoFactions } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
@@ -181,11 +182,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   worldState = { ...worldState, settlementTickStates };
 
   // §corruption Phase 1b-ii — mirror tick-evolved corruption back onto each
-  // settlement's NPCs so the dossier reflects corruption gained/shed during ticks
-  // (not just at generation). Flows through settlementMap → settlementUpdates →
-  // persistence. (Institution impairment + replacement NPC land in 1b-ii-b.)
+  // settlement's NPCs (so the dossier reflects corruption gained/shed during
+  // ticks) and apply the scandal impairment from any exposures this tick to the
+  // tied criminal + home institution/faction. Flows through settlementMap →
+  // settlementUpdates → persistence. (Replacement NPC lands in 1b-ii-c.)
   for (const sid of [...localSettlements.keys()]) {
-    localSettlements.set(sid, mirrorCorruptionOntoSettlement(localSettlements.get(sid), worldState.npcStates, String(sid)));
+    let s = mirrorCorruptionOntoSettlement(localSettlements.get(sid), worldState.npcStates, String(sid));
+    const exps = (corruption.exposures || []).filter((e) => String(e.settlementId) === String(sid));
+    if (exps.length) s = applyCorruptionImpairments(s, exps, { now });
+    localSettlements.set(sid, s);
   }
 
   const postTimeSaves = saves.map(save => {

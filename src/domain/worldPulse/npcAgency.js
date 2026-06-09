@@ -476,7 +476,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0 } = {
       const exposeP = exposureChance({ security: climate.security, prosperity: climate.prosperity, guildStrength, visibility });
       if (local.random() >= exposeP) return;
 
-      const homeInstitution = npc.institutionId || npc.factionAffiliation || npc.factionLink || null;
+      const homeInstitution = npc.factionAffiliation || npc.factionLink || npc.institutionId || null;
       const criminalInstitution = npc.corruptTies?.criminalInstitution || climate.criminalInstitutions[0] || null;
       const atBottom = (s.dotRank || 1) <= 1;
 
