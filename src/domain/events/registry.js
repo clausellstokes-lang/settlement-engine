@@ -400,9 +400,9 @@ export const EVENT_REGISTRY = {
 
   EXPOSE_CORRUPTION: {
     label: 'Expose corruption',
-    description: 'A faction or institution is publicly revealed as corrupt. Legitimacy collapses; rival factions exploit the vacuum.',
+    description: 'A corrupt NPC is publicly revealed (or a faction/institution). The NPC is cleaned + scarred, and both the criminal institution they answered to and their home institution are tarnished; legitimacy collapses and rivals exploit the vacuum.',
     requiresTarget: true,
-    targetPrompt: 'Faction or institution name',
+    targetPrompt: 'Corrupt NPC, faction, or institution name',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.7);
       return {

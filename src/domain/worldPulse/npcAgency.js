@@ -342,10 +342,27 @@ export function ensureNpcStates(worldState, snapshot, rng) {
     npcs.forEach((npc, index) => {
       const id = npcId(item.id, npc, index);
       if (npcStates[id]) {
-        if (!npcStates[id].contextSignature) {
-          const context = contextForNpc(snapshot, { settlementId: item.id });
-          npcStates[id] = { ...npcStates[id], contextSignature: context.signature, contextTier: context.tier };
+        let st = npcStates[id];
+        // §corruption Phase 4 — adopt DM/event-driven corruption changes from the
+        // settlement NPC (authoritative between ticks): EXPOSE_CORRUPTION and
+        // criminal-institution removal clear npc.corrupt + bump timesExposed, so
+        // they must stick here instead of being re-mirrored from stale npcState.
+        if (typeof npc.corrupt === 'boolean'
+            && (npc.corrupt !== st.corruption || (npc.timesExposed || 0) !== (st.timesExposed || 0))) {
+          st = {
+            ...st,
+            corruption: npc.corrupt,
+            corruptionProfile: npc.corrupt ? st.corruptionProfile : { corrupted: false, vector: null },
+            corruptionHeat: npc.corrupt ? st.corruptionHeat : 0,
+            timesExposed: Math.max(npc.timesExposed || 0, st.timesExposed || 0),
+            ousted: npc.ousted || st.ousted || false,
+          };
         }
+        if (!st.contextSignature) {
+          const context = contextForNpc(snapshot, { settlementId: item.id });
+          st = { ...st, contextSignature: context.signature, contextTier: context.tier };
+        }
+        npcStates[id] = st;
         return;
       }
       const local = rng.fork(`npc:${id}`);

@@ -96,6 +96,21 @@ describe('advanceNpcCorruption — per-tick onset + organic exposure', () => {
     expect(mirrorCorruptionOntoSettlement(stable, ns, sid)).toBe(stable);
   });
 
+  it('ensureNpcStates reconciles DM/event corruption changes from the settlement (Phase 4)', () => {
+    const s = snapshotWith({ crime: true, secure: false });
+    let ws = ensureNpcStates({ npcStates: {} }, s, createPRNG('rec').fork('init'));
+    for (const id of Object.keys(ws.npcStates)) {
+      if (/Greedy Guard/.test(ws.npcStates[id].name)) ws.npcStates[id] = { ...ws.npcStates[id], corruption: true };
+    }
+    // a DM event (expose / removal) cleaned + scarred the settlement NPC
+    s.settlements[0].settlement.npcs[0].corrupt = false;
+    s.settlements[0].settlement.npcs[0].timesExposed = 1;
+    ws = ensureNpcStates(ws, s, createPRNG('rec2').fork('init'));
+    const guard = find(ws, /Greedy Guard/);
+    expect(guard.corruption).toBe(false); // adopted from the authoritative settlement
+    expect(guard.timesExposed).toBe(1);   // scar carried into worldState
+  });
+
   it('is deterministic — same seed + ticks yields identical states', () => {
     const snap = snapshotWith({ crime: true, secure: false });
     const run = () => {

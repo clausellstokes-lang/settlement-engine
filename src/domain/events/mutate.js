@@ -20,6 +20,7 @@ import {
 } from '../entities/status.js';
 import { propagateImpairment } from '../entities/propagate.js';
 import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entities/npcs.js';
+import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 
 /** @typedef {import('../types.js').Event} Event */
 
@@ -180,6 +181,8 @@ function removeInstitution(s, event) {
       },
     },
   });
+  // §corruption Phase 4 — closing a criminal institution frees the NPCs tied to it.
+  next = severCorruptionTiesTo(next, inst.name);
   return next;
 }
 
@@ -473,6 +476,12 @@ function killLeaderMutation(s, event) {
  * captain hits both the watch institution and the controlling faction.
  */
 function exposeCorruption(s, event) {
+  // §corruption Phase 4 — prefer a corrupt NPC target: clean + scar them and
+  // impair BOTH the tied criminal institution and their home institution/faction
+  // (the same path organic exposure uses). Falls back to faction/institution.
+  const npc = findNpc(s, event.targetId);
+  if (npc && npc.corrupt) return exposeCorruptNpc(s, npc, event);
+
   const severity = Number(event.payload?.severity ?? 0.7);
   const inst    = findInstitution(s, event.targetId);
   const faction = findFaction(s, event.targetId);
@@ -502,6 +511,41 @@ function exposeCorruption(s, event) {
     origin: { entityType: 'faction', entityId: factionIdOf(faction), impairment },
   });
   return next;
+}
+
+// §corruption Phase 4 — DM exposes a specific corrupt NPC: clean + scar them and
+// impair the tied criminal + home institution/faction (shared organic path).
+function exposeCorruptNpc(s, npc, event) {
+  const now = event.timestamp || event.createdAt || null;
+  const exposure = {
+    npcId: npc.id || npc.name,
+    name: npc.name,
+    kind: 'ousted',
+    criminalInstitution: npc.corruptTies?.criminalInstitution || null,
+    homeInstitution: npc.factionAffiliation || npc.factionLink || null,
+  };
+  const next = applyCorruptionImpairments(s, [exposure], { now });
+  const nextNpcs = (next.npcs || []).map((n) => (n === npc
+    ? { ...n, corrupt: false, ousted: true, corruptionVector: null, timesExposed: (n.timesExposed || 0) + 1 }
+    : n));
+  return { ...next, npcs: nextNpcs };
+}
+
+// §corruption Phase 4 — removing/destroying a criminal institution severs the
+// corruption ties of NPCs bound to it: they separate from criminal activity.
+// No-op for a non-criminal institution (no NPC names it as a tie).
+function severCorruptionTiesTo(s, institutionName) {
+  const n = String(institutionName || '').toLowerCase();
+  if (!n) return s;
+  let changed = false;
+  const nextNpcs = (s.npcs || []).map((npc) => {
+    if (npc.corrupt && String(npc.corruptTies?.criminalInstitution || '').toLowerCase() === n) {
+      changed = true;
+      return { ...npc, corrupt: false, corruptionVector: null, ousted: true };
+    }
+    return npc;
+  });
+  return changed ? { ...s, npcs: nextNpcs } : s;
 }
 
 /**
