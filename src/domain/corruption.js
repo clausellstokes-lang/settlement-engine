@@ -18,6 +18,8 @@
  * safetyProfile / economicState / causal scores live with their callers.
  */
 
+import { institutionHasTag, TAG } from '../lib/entities.js';
+
 // ── Eligibility: corruptible flaws → corruption vector ──────────────────────
 // Maps the susceptible NPC personality flaws (from npcData.js negative+neutral)
 // to the engine's corruption vectors {greed, hunger_for_status, fear,
@@ -222,7 +224,6 @@ export function guildEffectiveSecurity(security, strength) {
 // security / prosperity (0..1), whether a criminal institution is present, and
 // the criminal-institution names (for second-relation matching). Defensive — any
 // missing field degrades to a neutral default rather than throwing. No rng/Date.
-const CRIMINAL_NAME_RE = /thieves|criminal|gang|smuggl|fence|black\s*market|underworld|assassin|syndicate|racket/i;
 const PROSPERITY_SCORE = Object.freeze({
   subsistence: 0.0, destitute: 0.0, poor: 0.2, struggling: 0.2, meager: 0.2,
   moderate: 0.4, modest: 0.4, stable: 0.45, comfortable: 0.6,
@@ -237,10 +238,11 @@ function prosperityScore(value) {
 
 function isCriminalInstitution(inst) {
   if (!inst) return false;
-  if (CRIMINAL_NAME_RE.test(String(inst.name || ''))) return true;
-  if (/criminal/i.test(String(inst.category || ''))) return true;
-  const tags = Array.isArray(inst.tags) ? inst.tags : [];
-  return tags.some((t) => /criminal/i.test(String(t)));
+  // Tag dispatch — declared 'criminal' tag OR a criminal name keyword, both
+  // resolved by the centralized institutionTags map (lib/entities) — plus the
+  // category signal. Replaces the local CRIMINAL_NAME_RE (its terms now live in
+  // the one shared keyword map, so a rename can't silently desync this check).
+  return institutionHasTag(inst, TAG.CRIMINAL) || /criminal/i.test(String(inst.category || ''));
 }
 
 /**

@@ -145,7 +145,7 @@ const INSTITUTION_KEYWORD_TAGS = Object.freeze([
   { re: /mill|granary|bakery|brewery|farm|grain|field|fishery|fishing|orchard|pastoral|graz|livestock|dairy|butcher|slaughter/i, tags: [TAG.FOOD, TAG.AGRICULTURE] },
   { re: /mage|wizard|arcane|spellcast|sorcer|conjur|enchant|magus/i,    tags: [TAG.ARCANE, TAG.MAGIC] },
   { re: /library|academy|college|university|scriptorium|school|scholar/i, tags: [TAG.SCHOLARLY, TAG.EDUCATION] },
-  { re: /thieves|smuggl|black ?market|fence|cartel|syndicate|underworld/i, tags: [TAG.CRIMINAL, TAG.ILLICIT, TAG.SMUGGLING] },
+  { re: /thieves|criminal|gang|smuggl|fence|black\s*market|underworld|assassin|syndicate|racket/i, tags: [TAG.CRIMINAL, TAG.ILLICIT, TAG.SMUGGLING] },
   { re: /court|town hall|council|magistrate|chancery|moot|tribunal/i,   tags: [TAG.CIVIC, TAG.PUBLIC_AUTHORITY, TAG.LEGAL] },
   { re: /mine|quarry|lumber|sawmill|logging/i,                          tags: [TAG.RESOURCE_EXTRACTION, TAG.INDUSTRY] },
   { re: /forge|smith|foundry|tannery|tanner|workshop|weaver|potter|mason/i, tags: [TAG.CRAFT, TAG.INDUSTRY] },
