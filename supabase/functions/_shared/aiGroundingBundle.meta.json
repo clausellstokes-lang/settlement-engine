@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-09T14:35:44.326Z",
+  "generatedAt": "2026-06-09T14:55:39.193Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "263f3e847670c53c",
+  "sourceHash": "e22180993ccfa4ef",
   "inputs": [
     "src/data/constants.js",
     "src/domain/activeConditions.js",
@@ -12,6 +12,7 @@
     "src/domain/causalState.js",
     "src/domain/contradictions.js",
     "src/domain/dailyLife.js",
+    "src/domain/defenseLedger.js",
     "src/domain/districtProfile.js",
     "src/domain/factionArchetypes.js",
     "src/domain/factionProfile.js",

@@ -55,6 +55,7 @@ import { deriveAllThreatProfiles } from './threatProfile.js';
 import { tradeRouteSemantics, tradeRouteTier } from './tradeRouteSemantics.js';
 import { canonStressors, canonExports } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
+import { defenseLedger } from './defenseLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -250,21 +251,28 @@ function deriveDefense(s, ctx) {
   let supply = 40;
   let demand = 50;
 
-  // SUPPLY: defenseProfile military score
-  const milScore = s.defenseProfile?.scores?.military;
-  if (typeof milScore === 'number') {
-    const c = Math.round((milScore - 50) * 0.4);
+  // SUPPLY: conserved defense ledger (P3.3b Stage 1b). The measured military dimension
+  // already folds in walls/garrison/militia/watch/mercenary plus terrain and supply-chain
+  // modifiers (defenseGenerator.computeDefenseScores), so it is the single source for
+  // institution-derived defense when a profile is present.
+  const led = defenseLedger(s);
+  if (led.present) {
+    const c = Math.round((led.military - 50) * 0.4);
     supply += c; push(supplyContributors, 'defenseProfile.scores.military', 'measured', c,
-      `Military readiness ${milScore} contributes ${c >= 0 ? '+' : ''}${c}.`);
+      `Military readiness ${led.military} contributes ${c >= 0 ? '+' : ''}${c}.`);
   }
 
-  // SUPPLY: walls / garrison institutions
-  const DEFENSE_PATTERN = /(wall|gate|garrison|watch|barracks|tower|fortress|militia|citadel)/i;
-  const fortifications = institutionNamesMatching(s, DEFENSE_PATTERN);
-  if (fortifications.length >= 2) {
-    supply += 14; push(supplyContributors, 'institutions', 'fortified', +14, `${fortifications.length} defensive institutions.`);
-  } else if (fortifications.length === 1) {
-    supply += 7; push(supplyContributors, 'institutions', 'limited', +7, `One defensive institution.`);
+  // SUPPLY: walls / garrison institutions (FALLBACK ONLY — P3.3b de-dup). The military
+  // score above already counts these institutions for generated settlements, so adding
+  // them again would double-count; apply only for un-generated/legacy saves with no profile.
+  if (!led.present) {
+    const DEFENSE_PATTERN = /(wall|gate|garrison|watch|barracks|tower|fortress|militia|citadel)/i;
+    const fortifications = institutionNamesMatching(s, DEFENSE_PATTERN);
+    if (fortifications.length >= 2) {
+      supply += 14; push(supplyContributors, 'institutions', 'fortified', +14, `${fortifications.length} defensive institutions.`);
+    } else if (fortifications.length === 1) {
+      supply += 7; push(supplyContributors, 'institutions', 'limited', +7, `One defensive institution.`);
+    }
   }
 
   // SUPPLY: military faction power

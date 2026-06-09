@@ -181,11 +181,17 @@ test (the runaway guards) and new invariant tests.
     their mean is a real built-robustness signal) instead of the dead `def.infrastructureScore`,
     keeping institution-count inference as the legacy fallback. 4 causalState cases pin both
     directions + that the measured contributors fire + the legacy fallback.
-  - [ ] **Stage 1b — Defense ledger accessor + lens convergence.** Create `src/domain/defenseLedger.js`
-    over `defenseProfile.scores.{military,monster,internal,economic,magical}` + readiness +
-    magicDependency (NEUTRAL defaults, `present:false`), then re-anchor `capacityModel.deriveDefense`
-    (stop the parallel institution/threat re-derivation) and `deriveSystemState.deriveExternalThreat`
-    (read `led.monster` instead of re-deriving from `config.monsterThreat`) onto it.
+  - [x] **Stage 1b — Defense ledger accessor + deriveDefense de-dup.** _(shipped)_ Created
+    `src/domain/defenseLedger.js` (the reusable template the later stages mirror) over
+    `defenseProfile.scores.{military,monster,internal,economic,magical}` + `readiness.score` +
+    `magicDependency`, NEUTRAL defaults `present:false`. `capacityModel.deriveDefense` now reads the
+    military dimension through it and applies the separate fortification-institution add (+14/+7)
+    ONLY as a fallback when no profile is present — the measured military score already folds in
+    walls/garrison/militia/watch (defenseGenerator.computeDefenseScores), so for generated saves the
+    old add double-counted those institutions (same shape as the Stage 0 food de-dup). 4 capacity
+    cases. **Rejected the plan's `deriveExternalThreat ← led.monster` step as semantically wrong:**
+    external threat is the danger LEVEL (`config.monsterThreat`, the canonical source — not a dead
+    read), whereas `scores.monster` is monster-DEFENSE (opposite polarity); swapping would invert it.
   - [x] **Stage 2a — Revive the dead legitimacy branch in `deriveVolatility`.** _(shipped)_
     It read `publicLegitimacy` as a bare number, but the generator emits `{score,label,breakdown}`,
     so the branch (low legitimacy → volatility +12 + risk; high → −8 + driver) NEVER fired.

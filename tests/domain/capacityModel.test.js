@@ -558,3 +558,48 @@ describe('food_production — trade-import de-dup (P3.3b Stage 0)', () => {
     expect(contribs.some(c => c.source === 'foodLedger' && c.delta > 0)).toBe(true);
   });
 });
+
+// ── Defense ledger de-dup (P3.3b Stage 1b) ───────────────────────────────────
+//
+// defenseProfile.scores.military already folds in walls/garrison/militia/watch
+// (defenseGenerator.computeDefenseScores), so deriveDefense reads that measured score
+// via defenseLedger and re-counts the same institutions ONLY as a fallback when no
+// profile is present -- otherwise it would double-count them.
+describe('defense — institution double-count de-dup (P3.3b Stage 1b)', () => {
+  const withProfile = (military, institutions = []) => ({
+    name: 'T', tier: 'town', population: 2000,
+    config: { monsterThreat: 'safe' },
+    institutions,
+    defenseProfile: {
+      scores: { military, monster: 50, internal: 50, economic: 50, magical: 50 },
+      readiness: { score: 50, label: 'x' },
+    },
+    powerStructure: { factions: [] }, activeConditions: [],
+  });
+  const defense = (s) => deriveCapacityProfile('defense', s);
+  const FORTS = [{ id: 'i1', name: 'Town Watch' }, { id: 'i2', name: 'Garrison Barracks' }];
+
+  it('does NOT re-count fortification institutions when a defense profile is present', () => {
+    const prof = defense(withProfile(60, FORTS));
+    expect(prof.supplyContributors.some(c => c.source === 'institutions')).toBe(false);
+  });
+
+  it('defense supply is invariant to defensive-institution count when a profile is present', () => {
+    // The military score already accounts for them, so toggling the institutions must
+    // not move supply -- proving the double-count is gone.
+    expect(defense(withProfile(60, FORTS)).supply).toBe(defense(withProfile(60, [])).supply);
+  });
+
+  it('the measured military contributor fires from the ledger when present', () => {
+    const prof = defense(withProfile(90, FORTS));
+    expect(prof.supplyContributors.some(c => c.source === 'defenseProfile.scores.military')).toBe(true);
+  });
+
+  it('re-counts fortification institutions as a fallback when NO profile is present (legacy)', () => {
+    const legacy = {
+      name: 'T', tier: 'town', population: 2000, config: { monsterThreat: 'safe' },
+      institutions: FORTS, powerStructure: { factions: [] }, activeConditions: [],
+    };
+    expect(defense(legacy).supplyContributors.some(c => c.source === 'institutions')).toBe(true);
+  });
+});
