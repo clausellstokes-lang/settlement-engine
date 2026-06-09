@@ -17,12 +17,13 @@ const settlement = () => ({
 });
 
 describe('§corruption Phase 4 — EXPOSE_CORRUPTION targets a corrupt NPC', () => {
-  it('cleans + scars the NPC and impairs BOTH the criminal and home institution', () => {
+  it('removes the exposed NPC, installs a clean successor in the seat, impairs BOTH institutions', () => {
     const next = mutateSettlement({ settlement: settlement(), event: { id: 'e1', type: 'EXPOSE_CORRUPTION', targetId: 'Captain Vex' }, now: NOW });
-    const vex = next.npcs.find((n) => n.name === 'Captain Vex');
-    expect(vex.corrupt).toBe(false);
-    expect(vex.ousted).toBe(true);
-    expect(vex.timesExposed).toBe(1); // scar accrues
+    expect(next.npcs.find((n) => n.name === 'Captain Vex')).toBeUndefined(); // removed
+    const successor = next.npcs.find((n) => n.replacedNpc === 'Captain Vex');
+    expect(successor).toBeTruthy();
+    expect(successor.corrupt).toBeFalsy();
+    expect(successor.factionAffiliation).toBe('City Watch'); // inherited the seat
     const guild = next.institutions.find((i) => i.id === 'i1');
     const watch = next.institutions.find((i) => i.id === 'i2');
     expect(guild.impairments?.length).toBeGreaterThan(0); // criminal institution tarnished

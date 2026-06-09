@@ -10,6 +10,7 @@ import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruption
 import { applyCorruptionImpairments } from './corruptionImpair.js';
 import { advanceFactionCapture, settlementCaptureState } from './factionCapture.js';
 import { computeGuildStrengthBy, applyGuildToSettlement } from './thievesGuild.js';
+import { replaceOustedNpcs } from './successorNpc.js';
 import { ensureFactionStates, relaxFactionStates, seatNpcsIntoFactions } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
@@ -214,7 +215,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // legitimacy from the guild's strength, and stamp thievesGuildStrength.
     const gStrength = guildStrengthBy.get(String(sid));
     if (gStrength) s = applyGuildToSettlement(s, gStrength);
+    // §corruption Phase 1b-ii-c — an ousted NPC is replaced by a fresh successor
+    // who inherits their seat in the faction/power.
+    const oustedNames = exps.filter((e) => e.kind === 'ousted').map((e) => e.name);
+    if (oustedNames.length) s = replaceOustedNpcs(s, oustedNames, rng.fork(`replace:${sid}:${worldState.tick}`));
     localSettlements.set(sid, s);
+  }
+
+  // §corruption 1b-ii-c — prune the npcStates of ousted-and-replaced NPCs so the
+  // phantom doesn't keep holding a faction seat after its settlement NPC is gone.
+  const oustedIds = new Set((corruption.exposures || []).filter((e) => e.kind === 'ousted').map((e) => e.npcId));
+  if (oustedIds.size) {
+    const npcStates = { ...worldState.npcStates };
+    let pruned = false;
+    for (const id of oustedIds) { if (npcStates[id]) { delete npcStates[id]; pruned = true; } }
+    if (pruned) worldState = { ...worldState, npcStates };
   }
 
   const postTimeSaves = saves.map(save => {

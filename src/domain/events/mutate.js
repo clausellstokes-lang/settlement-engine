@@ -21,6 +21,8 @@ import {
 import { propagateImpairment } from '../entities/propagate.js';
 import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entities/npcs.js';
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
+import { successorNpc } from '../worldPulse/successorNpc.js';
+import { createPRNG } from '../../generators/prng.js';
 
 /** @typedef {import('../types.js').Event} Event */
 
@@ -513,8 +515,9 @@ function exposeCorruption(s, event) {
   return next;
 }
 
-// §corruption Phase 4 — DM exposes a specific corrupt NPC: clean + scar them and
-// impair the tied criminal + home institution/faction (shared organic path).
+// §corruption Phase 4 + 1b-ii-c — DM exposes a specific corrupt NPC: impair the
+// tied criminal + home institution/faction (shared organic path), then remove the
+// disgraced NPC and install a fresh successor in their seat.
 function exposeCorruptNpc(s, npc, event) {
   const now = event.timestamp || event.createdAt || null;
   const exposure = {
@@ -525,9 +528,8 @@ function exposeCorruptNpc(s, npc, event) {
     homeInstitution: npc.factionAffiliation || npc.factionLink || null,
   };
   const next = applyCorruptionImpairments(s, [exposure], { now });
-  const nextNpcs = (next.npcs || []).map((n) => (n === npc
-    ? { ...n, corrupt: false, ousted: true, corruptionVector: null, timesExposed: (n.timesExposed || 0) + 1 }
-    : n));
+  const rng = createPRNG(`successor:${event.id}:${String(npc.name || '').toLowerCase()}`);
+  const nextNpcs = (next.npcs || []).map((n) => (n === npc ? successorNpc(n, rng) : n));
   return { ...next, npcs: nextNpcs };
 }
 

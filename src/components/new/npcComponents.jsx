@@ -244,6 +244,11 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               )}
             </div>
           )}
+          {npc.replacedNpc && (
+            <div style={{margin:'6px 0',fontSize:FS.xs,color:swatch.inkMag3,fontStyle:'italic'}}>
+              Newly installed — replaced {npc.replacedNpc} after a corruption scandal.
+            </div>
+          )}
           {npc.goal?.short && (
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:'4px 0',lineHeight:1.4}}>
               <span style={{color:swatch['#A0762A'],fontWeight:700}}>→ </span>{npc.goal.short}
