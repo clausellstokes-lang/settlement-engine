@@ -1,4 +1,15 @@
 import { stablePart } from './worldState.js';
+import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes.js';
+
+// Canonical archetype → factionCompetition's local vocabulary (the FACTION_POWER_BASES
+// keys). Folds the archetypes this layer doesn't model: government/other → civic,
+// craft → merchant (economic production), occupation → military (an occupying force).
+const CANONICAL_TO_COMPETITION = Object.freeze({
+  [FA.GOVERNMENT]: 'civic', [FA.NOBLE]: 'noble', [FA.MILITARY]: 'military',
+  [FA.MERCHANT]: 'merchant', [FA.RELIGIOUS]: 'religious', [FA.CRIMINAL]: 'criminal',
+  [FA.ARCANE]: 'arcane', [FA.CRAFT]: 'merchant', [FA.LABOR]: 'labor',
+  [FA.OUTSIDER]: 'outsider', [FA.OCCUPATION]: 'military', [FA.CIVIC]: 'civic', [FA.OTHER]: 'civic',
+});
 
 export const GOVERNMENT_PREFERENCES = Object.freeze([
   'council_rule',
@@ -72,16 +83,10 @@ function factionId(saveId, faction, index) {
 }
 
 function inferFactionArchetype(faction = {}) {
-  const text = `${faction.name || ''} ${faction.faction || ''} ${faction.label || ''} ${faction.type || ''} ${faction.description || ''}`.toLowerCase();
-  if (/noble|lord|baron|house|arist/.test(text)) return 'noble';
-  if (/merchant|guild|trade|bank|market|caravan/.test(text)) return 'merchant';
-  if (/guard|military|militia|soldier|captain|knight|army/.test(text)) return 'military';
-  if (/temple|church|faith|priest|cult|holy|shrine/.test(text)) return 'religious';
-  if (/crime|thief|smuggl|gang|bandit|syndicate|assassin/.test(text)) return 'criminal';
-  if (/mage|arcane|wizard|sage|alchem|college/.test(text)) return 'arcane';
-  if (/labor|worker|farmer|miner|dock|mill|teamster/.test(text)) return 'labor';
-  if (/foreign|outsider|envoy|embassy|patron/.test(text)) return 'outsider';
-  return 'civic';
+  // Delegates to the shared canonical detector so world-pulse classifies a faction
+  // the same way factionProfile / factionResponses / factionRoles do. (The legacy
+  // matcher here ignored faction.category; the canonical detector honors it.)
+  return CANONICAL_TO_COMPETITION[factionArchetype(faction)] || 'civic';
 }
 
 function factionPower(faction = {}, index = 0) {
