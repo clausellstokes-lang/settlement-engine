@@ -134,6 +134,7 @@ export default function GalleryDetail({
             galleryTags={ownedSave.gallery_tags}
             galleryShareNarrated={ownedSave.gallery_share_narrated}
             galleryShareDm={ownedSave.gallery_share_dm}
+            onSaved={() => window.location.reload()}
           />
         </div>
       )}

@@ -75,6 +75,7 @@ export default function ShareToGallery({
   galleryTags = [],
   galleryShareNarrated = false,
   galleryShareDm = false,
+  onSaved = null,
 }) {
   const auth = useStore(s => s.auth);
   const updateSavedSettlement = useStore(s => s.updateSavedSettlement);
@@ -175,6 +176,8 @@ export default function ShareToGallery({
           gallery_image_url: imageUrl,
           gallery_image_alt: imageAlt,
           gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
+          gallery_share_dm: shareDm,
+          gallery_share_narrated: shareNarrated,
         });
       } catch { /* non-fatal */ }
     } catch (e) {
@@ -191,14 +194,30 @@ export default function ShareToGallery({
     setSavedDetails(false);
     try {
       await updateGalleryMetadata(saveId, metadata);
+      // Patch the cached save with EVERY field just persisted — including the two
+      // share toggles, which were previously omitted. This keeps the cached save
+      // truthful for the surfaces that re-render ShareToGallery straight from it
+      // (OutputContainer / SettlementDetail) without waiting for a cloud refetch.
+      // (This patch is NOT what fixed the disappearing gallery card — that card
+      // gates on public_slug, which the Object.assign merge always preserves; the
+      // reload below is what fixes it. This is plain cache hygiene.)
       updateSavedSettlement?.(saveId, {
         gallery_description: description,
         gallery_image_url: imageUrl,
         gallery_image_alt: imageAlt,
         gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
+        gallery_share_dm: shareDm,
+        gallery_share_narrated: shareNarrated,
       });
       setSavedDetails(true);
       setTimeout(() => setSavedDetails(false), 1600);
+      // Contextual reload: only the gallery-detail owner card passes onSaved.
+      // useGalleryPageState fetches the dossier once on mount and never refetches
+      // after a save, so the gallery page is stale (and the owner card can drop)
+      // until you navigate away and back — reloading re-runs that fetch so the
+      // public view reflects the saved choices. The dossier/settlement editor
+      // usages omit onSaved, so saving there never reloads their editor.
+      onSaved?.();
     } catch (e) {
       setError(e.message || 'Gallery details could not be saved');
     } finally {
