@@ -75,9 +75,15 @@ test (the runaway guards) and new invariant tests.
 
 ## P2 — Elegance, maintainability, RNG, comments, security
 
-- [ ] **P2.1 — Tag migration:** stable `id`/`tags`/`provides`/`requires` on
-  institutions/factions/chains; names become display-only; `name.includes(...)` becomes a
-  fallback. *Invariant:* renaming an institution does not change subsumption/cascade/isolation.
+- [~] **P2.1 — Tag migration.** _Foundation shipped._ `lib/entities.institutionTags` /
+  `institutionHasTag` reliably resolve an institution's canonical tags from declared `tags`
+  ∪ a name-keyword backfill — so tag dispatch works for generated, legacy, AND custom
+  institutions (the prerequisite that lets the scattered `name.includes(...)` sites migrate
+  without silently breaking). Centralizes the name-matching into one canonical map. Pinned by
+  institutionTags.test (incl. the custom-weird-name case). _Next: migrate consumers
+  (subsumption/cascade/isolation, foodGenerator, faction roles, causal healing) site-by-site,
+  each soak-gated; richer declared catalog tags retire the keyword fallback over time._
+  *Invariant target:* renaming an institution does not change subsumption/cascade/isolation.
 - [ ] **P2.2 — Unify faction archetypes:** one `FACTION_ARCHETYPES` enum + one `matchArchetype`
   consumed by all four layers that currently disagree; stable governing-faction id.
 - [x] **P2.3 — `new Date()` ban: core complete.** _(assessed/shipped)_ The simulation-replay

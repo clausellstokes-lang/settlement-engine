@@ -123,6 +123,77 @@ export function idOf(entity, prefix = 'entity') {
   return null;
 }
 
+// ── Institution tag resolution (keyword backfill) ───────────────────────────
+// The migration target is "mechanics query institution tags, not names." But
+// `tagsOf` only reads an entity's DECLARED tags — and catalog tags are coarse
+// ('civic', 'religious', 'food') while custom/legacy institutions may carry none.
+// So a name-keyword backfill makes tag dispatch RELIABLE for every institution
+// (generated, legacy, custom) — the prerequisite for converting the scattered
+// `name.includes(...)` sites to `institutionHasTag(...)`. This CENTRALIZES the
+// name-matching into one canonical map instead of 46 ad-hoc call sites; as the
+// catalog gains richer declared tags, the keyword fallback simply stops firing.
+//
+// Each rule maps a name-keyword pattern to the canonical TAG.* values it implies.
+const INSTITUTION_KEYWORD_TAGS = Object.freeze([
+  { re: /watch|guard|garrison|constab|militia|sheriff|patrol|sentinel/i, tags: [TAG.SECURITY, TAG.LAW, TAG.PUBLIC_ORDER] },
+  { re: /barracks|fort|keep|citadel|rampart|armory|armoury/i,           tags: [TAG.MILITARY, TAG.DEFENSE] },
+  { re: /temple|church|cathedral|chapel|shrine|monaster|parish|abbey|sanctuar/i, tags: [TAG.RELIGIOUS, TAG.WELFARE] },
+  { re: /hospital|infirmary|healer|almshouse|hospice|sanatorium/i,      tags: [TAG.HEALING, TAG.WELFARE] },
+  { re: /market|bazaar|exchange|emporium|fair/i,                        tags: [TAG.MARKET, TAG.TRADE, TAG.ECONOMIC] },
+  { re: /guild|caravan|trading|merchant|warehouse|counting house|bank/i, tags: [TAG.TRADE, TAG.ECONOMIC] },
+  { re: /dock|harbor|harbour|wharf|quay|shipyard/i,                     tags: [TAG.TRADE, TAG.TRANSPORT] },
+  { re: /mill|granary|bakery|brewery|farm|grain|field|fishery|fishing|orchard|pastoral|graz|livestock|dairy|butcher|slaughter/i, tags: [TAG.FOOD, TAG.AGRICULTURE] },
+  { re: /mage|wizard|arcane|spellcast|sorcer|conjur|enchant|magus/i,    tags: [TAG.ARCANE, TAG.MAGIC] },
+  { re: /library|academy|college|university|scriptorium|school|scholar/i, tags: [TAG.SCHOLARLY, TAG.EDUCATION] },
+  { re: /thieves|smuggl|black ?market|fence|cartel|syndicate|underworld/i, tags: [TAG.CRIMINAL, TAG.ILLICIT, TAG.SMUGGLING] },
+  { re: /court|town hall|council|magistrate|chancery|moot|tribunal/i,   tags: [TAG.CIVIC, TAG.PUBLIC_AUTHORITY, TAG.LEGAL] },
+  { re: /mine|quarry|lumber|sawmill|logging/i,                          tags: [TAG.RESOURCE_EXTRACTION, TAG.INDUSTRY] },
+  { re: /forge|smith|foundry|tannery|tanner|workshop|weaver|potter|mason/i, tags: [TAG.CRAFT, TAG.INDUSTRY] },
+  { re: /road|bridge|aqueduct|sewer|well|cistern|warehouse/i,           tags: [TAG.INFRASTRUCTURE] },
+]);
+
+/**
+ * The canonical tags for an institution: its DECLARED `tags` unioned with any
+ * implied by its name (keyword backfill). Tolerant of string (name only) or
+ * object inputs. Declared tags come first so existing data is authoritative.
+ *
+ * @param {unknown} inst
+ * @returns {string[]}
+ */
+export function institutionTags(inst) {
+  const declared = tagsOf(inst);
+  const name = typeof inst === 'string'
+    ? inst
+    : (inst && typeof inst === 'object' ? String(/** @type {any} */(inst).name || '') : '');
+  if (!name) return declared;
+  const out = [...declared];
+  for (const { re, tags } of INSTITUTION_KEYWORD_TAGS) {
+    if (re.test(name)) {
+      for (const t of tags) if (!out.includes(t)) out.push(t);
+    }
+  }
+  return out;
+}
+
+/**
+ * Reliable institution tag check: declared tags OR name-keyword backfill. This
+ * is the dispatch primitive the `name.includes(...)` sites should migrate to.
+ * @param {unknown} inst
+ * @param {string} tag  Use a TAG.* constant.
+ * @returns {boolean}
+ */
+export function institutionHasTag(inst, tag) {
+  if (typeof tag !== 'string' || !tag) return false;
+  return institutionTags(inst).includes(tag);
+}
+
+/** True if the institution carries any tag in `group` (declared or backfilled). */
+export function institutionHasAnyTag(inst, group) {
+  if (!Array.isArray(group) || group.length === 0) return false;
+  const tags = institutionTags(inst);
+  return group.some((t) => tags.includes(t));
+}
+
 // ── Convenience queries ────────────────────────────────────────────────────
 // Small wrappers that read as the mechanical question they answer. Cheap
 // to add - every additional question becomes one named function instead
