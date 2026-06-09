@@ -16,6 +16,8 @@
  * Pure data + helper. No React, no store.
  */
 
+import { factionArchetype, FACTION_ARCHETYPES as FA } from '../domain/factionArchetypes.js';
+
 // inferImportance is not used directly here yet — kept on the import
 // graph for future expansion where archetype rules read existing NPC
 // importance to decide whether to skip generation.
@@ -52,25 +54,30 @@ export const FACTION_ROLES = {
   ],
 };
 
+// Canonical archetype → factionRoles' structural-role key. Only these six imply
+// structural NPCs; every other canonical archetype → null (no synthesis), as before.
+// craft → merchant preserves the legacy behavior (a "craft guild" matched merchant
+// via its 'guild' token and got the merchant role-holders).
+const CANONICAL_TO_ROLE = Object.freeze({
+  [FA.CRIMINAL]: 'thieves',
+  [FA.RELIGIOUS]: 'temple',
+  [FA.MILITARY]: 'watch',
+  [FA.MERCHANT]: 'merchant',
+  [FA.CRAFT]:    'merchant',
+  [FA.NOBLE]:    'noble',
+  [FA.ARCANE]:   'arcane',
+});
+
 /**
- * Map a faction record (whatever shape the generator emits) to an
- * archetype key. Same regex vocabulary as `factionResponses.js`
- * matchArchetype so the coupling logic and the response logic stay
- * in step.
+ * Map a faction to its structural-role archetype via the shared canonical detector,
+ * so the structural-NPC coupling classifies factions the same way the response,
+ * profile, and competition layers do. Returns null for archetypes with no roles.
  *
  * @param {Object} faction
  * @returns {keyof typeof FACTION_ROLES | null}
  */
 export function matchFactionArchetype(faction) {
-  const name = String(faction?.name || faction?.faction || '').toLowerCase();
-  const cat  = String(faction?.category || faction?.type || '').toLowerCase();
-  if (cat === 'criminal' || /thieves|smuggler|shadow|crime|bandit|underworld|assassin/.test(name)) return 'thieves';
-  if (cat === 'religious' || cat === 'temple' || /temple|church|shrine|monastery|cleric|clergy|priest|cult/.test(name)) return 'temple';
-  if (cat === 'military' || cat === 'watch' || cat === 'law' || /watch|militia|guard|sheriff|sentinel|ranger|warden/.test(name)) return 'watch';
-  if (cat === 'merchant' || /merchant|trade|bazaar|market/.test(name) || (/guild/.test(name) && !/thieves/.test(name))) return 'merchant';
-  if (cat === 'noble' || /noble|royal|aristocrat|baron|duke/.test(name))                              return 'noble';
-  if (cat === 'arcane' || /mage|wizard|sorcerer|arcane|magister|tower|academy/.test(name))            return 'arcane';
-  return null;
+  return CANONICAL_TO_ROLE[factionArchetype(faction)] || null;
 }
 
 /**

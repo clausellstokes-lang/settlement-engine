@@ -91,7 +91,7 @@ test (the runaway guards) and new invariant tests.
   (criminal) is migrated. The real duplicated vocabulary turned out to be the FACTION archetype
   matchers → that's P2.2. So P2.1's high-value consolidation is captured; the resolver remains
   the primitive for future custom-content recognition._
-- [~] **P2.2 — Unify faction archetypes.** _Foundation shipped._ `domain/factionArchetypes.js`
+- [x] **P2.2 — Unify faction archetypes. COMPLETE.** `domain/factionArchetypes.js`
   is the one canonical detector — `FACTION_ARCHETYPES` enum + `factionArchetype(faction)`
   (category-authoritative, name/description fallback, ordering that resolves the overlaps that
   tripped the legacy matchers). It's the UNION of the four divergent matchers
@@ -102,7 +102,9 @@ test (the runaway guards) and new invariant tests.
   canonical → its local vocab); the convergence surfaced + fixed a missing 'religious' term, and
   the full faction/magic/district/relationship suites validate equivalence. Consumer 2 wired:
   `factionResponses.matchArchetype` now maps the canonical archetype to its 4 responder keys
-  (event suites pass). Next: factionRoles, factionCompetition._
+  (event suites pass). Consumers 3+4 wired: `factionCompetition` (world-pulse — soak/balance
+  held) and `factionRoles` (generation structural NPCs — distribution/NPC suites held). All
+  four matchers now share the one detector; the legacy regex blocks are gone._
 - [x] **P2.3 — `new Date()` ban: core complete.** _(assessed/shipped)_ The simulation-replay
   path is already deterministic: event `appliedAt` + `mutate`/`applyEvent` thread `now`, and
   `propagation.js` overwrites every impact `createdAt` with the threaded `now` (line ~429).
