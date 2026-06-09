@@ -18,9 +18,10 @@
  */
 import {
   readCorruptionClimate, captureAdvanceChance, captureRecoverChance, advanceCaptureState,
+  guildEffectiveSecurity,
 } from '../corruption.js';
 
-export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0 } = {}) {
+export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, guildStrengthBy = null } = {}) {
   const factionStates = { ...(worldState.factionStates || {}) };
   const npcStates = worldState.npcStates || {};
   const climateBy = new Map();
@@ -39,15 +40,19 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0 } = 
       if (st && st.corruption) maxCorruptRank = Math.max(maxCorruptRank, st.dotRank || seat.dotRank || 1);
     }
 
+    // §corruption Phase 3 — guild strength drags effective security down here too.
+    const gs = guildStrengthBy ? guildStrengthBy.get(String(fs.settlementId)) : undefined;
+    const effSecurity = gs != null ? guildEffectiveSecurity(climate.security, gs) : climate.security;
+
     const cur = fs.captureState || 'none';
     const local = rng.fork(`cap:${fid}:${tick}`);
     let next = cur;
     if (maxCorruptRank > 0 && climate.hasCriminalInst) {
-      if (local.random() < captureAdvanceChance({ rank: maxCorruptRank, security: climate.security, prosperity: climate.prosperity })) {
+      if (local.random() < captureAdvanceChance({ rank: maxCorruptRank, security: effSecurity, prosperity: climate.prosperity })) {
         next = advanceCaptureState(cur, true);
       }
     } else if (cur !== 'none') {
-      if (local.random() < captureRecoverChance({ security: climate.security, prosperity: climate.prosperity })) {
+      if (local.random() < captureRecoverChance({ security: effSecurity, prosperity: climate.prosperity })) {
         next = advanceCaptureState(cur, false);
       }
     }

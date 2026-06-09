@@ -9,6 +9,7 @@ import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
 import { applyCorruptionImpairments } from './corruptionImpair.js';
 import { advanceFactionCapture, settlementCaptureState } from './factionCapture.js';
+import { computeGuildStrengthBy, applyGuildToSettlement } from './thievesGuild.js';
 import { ensureFactionStates, relaxFactionStates, seatNpcsIntoFactions } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
@@ -158,15 +159,22 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Clean eligible NPCs turn under crime pressure; corrupt NPCs are exposed
   // (demoted / ousted) by security + prosperity. Exposure events name the tied
   // criminal + home institutions for the impairment pass (1b-ii).
-  const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption'), { tick: worldState.tick });
+  // §corruption Phase 3 — thieves-guild strength from LAST tick's captured
+  // factions; it drags effective security down inside this tick's onset /
+  // exposure / capture rolls (the feedback loop), bounded so it never runs away.
+  let guildStrengthBy = computeGuildStrengthBy(worldState, snapshot);
+  const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption'), { tick: worldState.tick, guildStrengthBy });
   worldState = corruption.worldState;
   // Seat NPCs into their factions so internalSeats reflect who holds power.
   worldState = seatNpcsIntoFactions(worldState);
   // §corruption Phase 2 — faction capture: corrupt seat-holders pull their
   // faction up the criminalCaptureState ladder (faster the higher the seat);
   // clean factions recede toward 'none'. Runs after seating so seats are current.
-  const factionCapture = advanceFactionCapture(worldState, snapshot, rng.fork('faction-capture'), { tick: worldState.tick });
+  const factionCapture = advanceFactionCapture(worldState, snapshot, rng.fork('faction-capture'), { tick: worldState.tick, guildStrengthBy });
   worldState = factionCapture.worldState;
+  // Recompute guild strength from the UPDATED capture states for this tick's
+  // settlement mirror (power floor + legitimacy cap below).
+  guildStrengthBy = computeGuildStrengthBy(worldState, snapshot);
   worldState = refreshRelationshipMemory(worldState, snapshot.regionalGraph, snapshot, { currentTick: worldState.tick });
   snapshot = buildWorldSnapshot({ campaign: { ...campaign, worldState }, saves, worldState });
 
@@ -202,6 +210,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     if (s.powerStructure && s.powerStructure.criminalCaptureState !== cap) {
       s = { ...s, powerStructure: { ...s.powerStructure, criminalCaptureState: cap } };
     }
+    // §corruption Phase 3 — floor the criminal faction's power + hard-cap its
+    // legitimacy from the guild's strength, and stamp thievesGuildStrength.
+    const gStrength = guildStrengthBy.get(String(sid));
+    if (gStrength) s = applyGuildToSettlement(s, gStrength);
     localSettlements.set(sid, s);
   }
 

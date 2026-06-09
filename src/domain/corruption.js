@@ -183,6 +183,40 @@ export function captureRecoverChance({ security = 0.5, prosperity = 0.5 } = {}) 
   return clamp(p, t.min, t.max);
 }
 
+// ── Thieves-guild power loop (Phase 3) ──────────────────────────────────────
+// The guild's strength accrues from the factions it has captured — their POWER
+// and their DIVERSITY — but SATURATES (exp curve) so it can never run away. A
+// stronger guild drags effective security down (the feedback loop) but only by a
+// bounded fraction, and is hard-capped on legitimacy: it can out-rank on power,
+// never on legitimacy.
+export const GUILD_TUNING = Object.freeze({
+  powerRate: 0.9,       // saturation rate for captured-power share → strength
+  diversityFull: 4,     // distinct captured factions for the full diversity bonus
+  securityDrag: 0.5,    // a max-strength guild HALVES effective security (bounded floor)
+  legitimacyCap: 25,    // guild legitimacy is hard-capped here — never legitimate
+  powerFloorBase: 30,   // criminal-faction power floor base…
+  powerFloorRange: 55,  // …+ strength × range (up to ~85 at full strength)
+});
+
+/**
+ * Guild strength (0..1) from the factions it has captured. Saturating in total
+ * captured power (so it asymptotes, never runs away) and lifted by diversity
+ * (crime spread across many factions is harder to root out than one).
+ * @param {{capturedPowers?:number[], distinctArchetypes?:number}} args
+ */
+export function guildStrength({ capturedPowers = [], distinctArchetypes = 0 } = {}) {
+  const totalShare = (Array.isArray(capturedPowers) ? capturedPowers : [])
+    .reduce((a, p) => a + n01((Number(p) || 0) / 100), 0);
+  const base = 1 - Math.exp(-totalShare * GUILD_TUNING.powerRate); // saturating
+  const diversityMult = 0.6 + 0.4 * Math.min(1, (Number(distinctArchetypes) || 0) / GUILD_TUNING.diversityFull);
+  return clamp(base * diversityMult, 0, 1);
+}
+
+/** Effective security after the guild's drag — bounded so it never reaches zero. */
+export function guildEffectiveSecurity(security, strength) {
+  return n01(n01(security) * (1 - n01(strength) * GUILD_TUNING.securityDrag));
+}
+
 // ── Settlement → climate adapter ────────────────────────────────────────────
 // Reads the corruption climate off a generated settlement: normalized crime /
 // security / prosperity (0..1), whether a criminal institution is present, and

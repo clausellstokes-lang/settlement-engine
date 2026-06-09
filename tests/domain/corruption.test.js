@@ -4,6 +4,7 @@ import {
   spawnCorruptionChance, onsetHazard, exposureChance,
   demoteImportance, demoteDotRank, canBeOuted, CORRUPTION_TUNING,
   readCorruptionClimate,
+  guildStrength, guildEffectiveSecurity, GUILD_TUNING,
 } from '../../src/domain/corruption.js';
 
 describe('corruption — eligibility + vectors', () => {
@@ -108,6 +109,24 @@ describe('corruption — settlement climate adapter', () => {
     expect(c.hasCriminalInst).toBe(false);
     expect(c.crime).toBeGreaterThanOrEqual(0);
     expect(c.prosperity).toBe(0.4); // unknown → middling
+  });
+});
+
+describe('corruption — thieves-guild power loop (Phase 3)', () => {
+  it('guild strength rises with captured power + diversity but SATURATES (no runaway)', () => {
+    const low = guildStrength({ capturedPowers: [40], distinctArchetypes: 1 });
+    const more = guildStrength({ capturedPowers: [40, 50, 60], distinctArchetypes: 3 });
+    expect(more).toBeGreaterThan(low);
+    const big = guildStrength({ capturedPowers: [80, 80, 80, 80], distinctArchetypes: 4 });
+    const huge = guildStrength({ capturedPowers: Array(12).fill(90), distinctArchetypes: 4 });
+    expect(huge).toBeLessThanOrEqual(1);              // bounded
+    expect(huge - big).toBeLessThan(big);            // diminishing returns
+  });
+
+  it('guild effective security is dragged down but bounded — never zero', () => {
+    expect(guildEffectiveSecurity(0.8, 0)).toBe(0.8);                       // no guild → unchanged
+    expect(guildEffectiveSecurity(1, 1)).toBeCloseTo(1 - GUILD_TUNING.securityDrag, 5); // halved at max
+    expect(guildEffectiveSecurity(1, 1)).toBeGreaterThan(0);               // never zero
   });
 });
 

@@ -1,7 +1,7 @@
 import { stablePart } from './worldState.js';
 import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
-  onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING,
+  onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
 } from '../corruption.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
@@ -445,13 +445,17 @@ export function relaxNpcStates(worldState) {
  *
  * @returns {{ worldState: object, exposures: Array<object> }}
  */
-export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0 } = {}) {
+export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guildStrengthBy = null } = {}) {
   const npcStates = { ...(worldState.npcStates || {}) };
   const exposures = [];
   for (const item of (snapshot?.settlements || [])) {
     const climate = readCorruptionClimate(item.settlement);
     if (!climate.hasCriminalInst) continue; // no criminal infrastructure → no pressure
-    const guildStrength = climate.crime; // proxy until Phase 3 wires real guild power
+    // §corruption Phase 3 — real thieves-guild strength (if threaded) drags
+    // effective security down (the feedback loop); falls back to the crime proxy.
+    const gs = guildStrengthBy ? guildStrengthBy.get(String(item.id)) : undefined;
+    const guildStr = gs != null ? gs : climate.crime;
+    const effSecurity = gs != null ? guildEffectiveSecurity(climate.security, gs) : climate.security;
     const npcs = item.settlement?.npcs || [];
     npcs.forEach((npc, index) => {
       const id = npcId(item.id, npc, index);
@@ -465,7 +469,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0 } = {
       if (!s.corruption) {
         // Onset — only eligible NPCs, and only the corruptible ones turn. A prior
         // exposure (organic or DM) makes re-corruption progressively harder.
-        if (flaw && local.random() < onsetHazard({ ...climate, priorExposures })) {
+        if (flaw && local.random() < onsetHazard({ crime: climate.crime, security: effSecurity, prosperity: climate.prosperity, priorExposures })) {
           npcStates[id] = {
             ...s,
             corruption: true,
@@ -479,7 +483,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0 } = {
       // Organic exposure of an already-corrupt NPC. A repeat offender (prior
       // exposures) draws more scrutiny once they relapse → easier to re-expose.
       const visibility = (s.dotRank || 1) / 3;
-      const exposeP = exposureChance({ security: climate.security, prosperity: climate.prosperity, guildStrength, visibility, priorExposures });
+      const exposeP = exposureChance({ security: effSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures });
       if (local.random() >= exposeP) return;
 
       const homeInstitution = npc.factionAffiliation || npc.factionLink || npc.institutionId || null;
