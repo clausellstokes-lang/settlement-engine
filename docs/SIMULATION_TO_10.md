@@ -213,8 +213,20 @@ test (the runaway guards) and new invariant tests.
     test. (Housing deferred — no producer exists.) Follow-up (non-blocking, surfaced by verify):
     `factionProfile.legitimacyFor` (factionProfile.js:185) reads `publicLegitimacy?.score` directly and
     should also route through `governanceLedger` for full single-source cohesion.
-  - [ ] **Stage 3 — Magic ledger** (band-blindness: all 3 magic lenses read the lossy `magicLevel`
-    band, ignore `priorityMagic` granularity + chain magic load).
+  - [x] **Stage 3 — Magic ledger + fix the magicLevel vocabulary mismatch.** _(shipped)_ The real
+    bug was sharper than "band-blindness": `getMagicLevel` emits `none/low/medium/high`, but the lenses
+    string-matched a STALE vocabulary (`moderate/common/pervasive/rare`) the generator never emits — so
+    a generated `medium`-magic town (priority 26-65, the widest band) matched nothing in
+    `capacityModel.deriveMagical` and contributed **0** supply instead of its intended +10. Created
+    `src/domain/magicLedger.js` (conserved `priorityMagic` dial + a band canonicalized from the dial /
+    legacy vocab + `magicExists` + `present`) and the single canonical `ARCANE_INSTITUTION_PATTERN`.
+    Routed `deriveMagical` (fixes the medium→0 bug) and `deriveMagicalStability` (behaviour-preserving
+    via `band = present ? magicLevel : 'low'`) through it; `magicProfile` now imports the shared arcane
+    pattern. Balance-safe: `magical_stability` is NOT read by `pressureModel` (verified) — magic is
+    display/AI-only. magicLedger units + monotonic deriveMagical coverage. Follow-up **Stage 3b**:
+    `magicProfile`'s own `MAGIC_LEVEL_VALUES` lacks `medium`/`none` keys (same vocab bug for its display
+    labels) — route its 5 band-reads through the ledger too, and `resourceTaxonomy.magicLevelScore`
+    (reads `config.magicLevel` directly; flagged by verify).
   - [ ] **Stage 4 — Healing ledger** (collapse the triplicated `HEALING_PATTERN`; anchor to the
     already-emitted `availableServices.healing`).
   - [ ] **Stage 5 — Craft ledger** (persist the discarded `computeFinishedGoodsDemand` physics first).

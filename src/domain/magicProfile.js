@@ -22,6 +22,7 @@
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveCapacityProfile } from './capacityModel.js';
+import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN } from './magicLedger.js';
 
 const MAGIC_LEVEL_VALUES = Object.freeze({
   rare:      { availability: 'rare',       baseRisk: 'low' },
@@ -48,7 +49,7 @@ const ROLE_BANDS = Object.freeze([
   'absent', 'occasional', 'common', 'integral',
 ]);
 
-const ARCANE_PATTERN = /(tower|college|conclave|circle|enclave|atheneum|library.*arcane|sanctum)/i;
+// ARCANE_PATTERN now imported from magicLedger (single canonical matcher).
 const HEALING_PATTERN = /(temple|chapel|infirmary|healer|hospice|herbalist|apothecary|shrine)/i;
 
 function institutionsByPattern(s, pattern) {

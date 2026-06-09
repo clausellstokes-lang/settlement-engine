@@ -57,6 +57,7 @@ import { canonStressors, canonExports } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
 import { defenseLedger } from './defenseLedger.js';
 import { governanceLedger } from './governanceLedger.js';
+import { magicLedger, ARCANE_INSTITUTION_PATTERN } from './magicLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -574,18 +575,21 @@ function deriveMagical(s, ctx) {
   let supply = 40;
   let demand = 45;
 
-  // SUPPLY: magic level + arcane institutions + arcane faction
-  const magic = s.config?.magicLevel || 'low';
-  if (magic === 'high' || magic === 'pervasive') {
-    supply += 22; push(supplyContributors, 'config.magicLevel', String(magic), +22, `${magic} magic level supports broad arcane availability.`);
-  } else if (magic === 'moderate' || magic === 'common') {
-    supply += 10; push(supplyContributors, 'config.magicLevel', String(magic), +10, `${magic} magic level.`);
-  } else if (magic === 'low' || magic === 'rare') {
-    supply -= 8; push(supplyContributors, 'config.magicLevel', String(magic), -8, `${magic} magic level limits availability.`);
+  // SUPPLY: magic investment (conserved dial via magicLedger). The band is canonical
+  // (none/low/medium/high), so a 'medium' settlement is no longer silently missed by a
+  // stale 'moderate' string check — it now gets its intended +10 instead of 0.
+  const m = magicLedger(s);
+  if (m.present) {
+    if (m.magicLevel === 'high') {
+      supply += 22; push(supplyContributors, 'config.priorityMagic', 'high', +22, `High magic investment (${m.priorityMagic}) supports broad arcane availability.`);
+    } else if (m.magicLevel === 'medium') {
+      supply += 10; push(supplyContributors, 'config.priorityMagic', 'medium', +10, `Moderate magic investment (${m.priorityMagic}).`);
+    } else {
+      supply -= 8; push(supplyContributors, 'config.priorityMagic', m.magicLevel, -8, `${m.magicLevel} magic investment limits availability.`);
+    }
   }
 
-  const ARCANE_PATTERN = /(tower|sanctum|college|conclave|circle|guild.*mage|enclave|atheneum|library.*arcane)/i;
-  const arcane = institutionNamesMatching(s, ARCANE_PATTERN);
+  const arcane = institutionNamesMatching(s, ARCANE_INSTITUTION_PATTERN);
   if (arcane.length >= 1) {
     supply += 10; push(supplyContributors, 'institutions', 'arcane', +10, `${arcane.length} arcane institution(s).`);
   }

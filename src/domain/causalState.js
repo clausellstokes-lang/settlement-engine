@@ -53,6 +53,7 @@ import { tradeRouteSemantics } from './tradeRouteSemantics.js';
 import { canonStressors } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
 import { governanceLedger } from './governanceLedger.js';
+import { magicLedger } from './magicLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -538,9 +539,13 @@ function deriveMagicalStability(s) {
   let score = 50;
   const contributors = [];
 
-  const magic = s.config?.magicLevel || s.magicLevel || 'low';
-  if (magic === 'high' || magic === 'pervasive') { score += 10; push(contributors, 'config.magicLevel', String(magic), +10, `${magic} magic level supports arcane stability.`); }
-  else if (magic === 'low' || magic === 'rare') { score -= 5; push(contributors, 'config.magicLevel', String(magic), -5, `${magic} magic level limits arcane resilience.`); }
+  // Read via the conserved magic ledger (canonical band vocabulary). Behaviour-preserving:
+  // an un-generated settlement keeps the old 'low' default; 'medium'/'none' stay neutral for
+  // stability exactly as before, while high lifts and low limits it.
+  const m = magicLedger(s);
+  const band = m.present ? m.magicLevel : 'low';
+  if (band === 'high') { score += 10; push(contributors, 'config.priorityMagic', 'high', +10, `High magic investment supports arcane stability.`); }
+  else if (band === 'low') { score -= 5; push(contributors, 'config.priorityMagic', 'low', -5, `Low magic investment limits arcane resilience.`); }
 
   // Arcane factions present?
   const profiles = deriveAllFactionProfiles(s);
