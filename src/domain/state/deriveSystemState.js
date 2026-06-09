@@ -27,6 +27,7 @@ import { flag } from '../../lib/flags.js';
 import { deriveExportPosture } from '../display/dossierViewModel.js';
 import { isIsolatedRoute } from '../tradeRouteSemantics.js';
 import { canonStressors, canonExports, canonImports } from '../canonicalAccessors.js';
+import { foodLedger } from '../foodLedger.js';
 
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
@@ -70,15 +71,20 @@ function deriveResilience(s) {
     drivers.push('Modest prosperity');
   }
 
-  // Food security
-  const foodSec = econ.foodSecurity || s.foodSecurity || null;
-  if (foodSec) {
-    if (foodSec.deficitMonths > 0) {
-      value -= Math.min(20, foodSec.deficitMonths * 4);
-      risks.push(`${foodSec.deficitMonths}-month food deficit`);
-    } else if (foodSec.surplusMonths >= 3) {
+  // Food security, via the conserved ledger. The old code read `deficitMonths`/
+  // `surplusMonths` — fields foodGenerator never produces — so this penalty was
+  // silently dead (a famine town's resilience never dropped for it). The ledger
+  // reads the real quantities (deficitPct/surplusPct), banded to align with the
+  // foodSecurity label thresholds.
+  const food = foodLedger(s);
+  if (food.present) {
+    if (food.deficitPct > 0) {
+      const penalty = food.deficitPct > 40 ? 20 : food.deficitPct > 15 ? 12 : food.deficitPct > 5 ? 6 : 3;
+      value -= penalty;
+      risks.push(`${food.deficitPct}% food deficit`);
+    } else if (food.surplusPct >= 40) {
       value += 8;
-      drivers.push(`${foodSec.surplusMonths}-month food surplus`);
+      drivers.push(`${food.surplusPct}% food surplus`);
     }
   }
 

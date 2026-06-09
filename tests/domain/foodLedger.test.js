@@ -8,6 +8,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { foodLedger } from '../../src/domain/foodLedger.js';
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
+import { deriveCausalState } from '../../src/domain/causalState.js';
 
 describe('foodLedger', () => {
   it('reads the canonical quantities off economicState.foodSecurity', () => {
@@ -47,5 +49,27 @@ describe('foodLedger', () => {
     expect(led.deficitPct).toBe(0);
     expect(led.foodRatio).toBe(1);
     expect(led.present).toBe(true);
+  });
+});
+
+// ── P3.1: food deficit now moves the substrate (was a dead deficitMonths read) ──
+describe('P3.1 — food deficit moves resilience + causal food_security', () => {
+  const town = (foodSecurity) => ({
+    name: 'T', tier: 'town', population: 2000,
+    config: { tradeRouteAccess: 'road', monsterThreat: 'safe' },
+    economicState: { prosperity: 'Modest', foodSecurity },
+    powerStructure: { factions: [] }, activeConditions: [],
+  });
+  const DEFICIT = { deficitPct: 50, surplusPct: 0, foodRatio: 0.5, storageMonths: 1 };
+  const SURPLUS = { deficitPct: 0, surplusPct: 50, foodRatio: 1.5, storageMonths: 6 };
+
+  it('a deep-deficit town has lower resilience than a surplus town', () => {
+    expect(deriveSystemState(town(DEFICIT)).resilience.value)
+      .toBeLessThan(deriveSystemState(town(SURPLUS)).resilience.value);
+  });
+
+  it('a deep-deficit town has lower causal food_security than a surplus town', () => {
+    expect(deriveCausalState(town(DEFICIT)).scores.food_security)
+      .toBeLessThan(deriveCausalState(town(SURPLUS)).scores.food_security);
   });
 });

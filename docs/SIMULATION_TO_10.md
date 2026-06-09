@@ -137,8 +137,12 @@ test (the runaway guards) and new invariant tests.
   neutral defaults; pinned by foodLedger.test. Surfaced the confirmed dead-read: causalState +
   deriveSystemState read `deficitMonths`/`surplusMonths`, which foodGenerator never produces, so
   the food-deficit contribution is silently neutral.
-- [ ] **P3.1 — Fix the dead food reads** via the ledger (deriveResilience + deriveFoodSecurity
-  read deficitPct/surplusPct/storageMonths). Behavior-changing → soak/systemState/causal gated.
+- [x] **P3.1 — Fix the dead food reads.** _(shipped)_ deriveResilience + deriveFoodSecurity now
+  read the conserved ledger's real fields (deficitPct/surplusPct), banded to the foodSecurity
+  label thresholds — so a famine town's food crisis actually lowers resilience + causal
+  food_security (it never did before). Two existing tests that encoded the phantom field were
+  reconciled to the real one. Pinned by foodLedger.test (deficit < surplus on both substrates);
+  soak/balance held.
 - [ ] **P3.2 — Converge `capacityModel`'s food lens onto the ledger** (retire the two food models).
 - [ ] **P3.3 — Extend the conserved set** (labor/housing/security/healing/throughput).
 - [ ] **North star:** every pressure flows through the one condition substrate + conserved

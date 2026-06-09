@@ -76,10 +76,10 @@ describe('deriveSystemState', () => {
 
   test('food deficit lowers resilience', () => {
     const fed = deriveSystemState({
-      economicState: { foodSecurity: { surplusMonths: 4 } },
+      economicState: { foodSecurity: { surplusPct: 50 } },
     });
     const starving = deriveSystemState({
-      economicState: { foodSecurity: { deficitMonths: 3 } },
+      economicState: { foodSecurity: { deficitPct: 30 } },
     });
     expect(fed.resilience.value).toBeGreaterThan(starving.resilience.value);
   });

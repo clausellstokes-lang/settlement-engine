@@ -132,7 +132,7 @@ describe('deriveSystemVariable()', () => {
         activeChains: [
           { needKey: 'food_security', chainId: 'x', label: 'x', status: 'collapsing' },
         ],
-        foodSecurity: { deficitMonths: 6 },
+        foodSecurity: { deficitPct: 60 },
       },
     };
     const v = deriveSystemVariable('food_security', s);
@@ -173,10 +173,10 @@ describe('food_security derivation', () => {
 
   it('honors generator-emitted food-security band hints', () => {
     const surplus = deriveSystemVariable('food_security', {
-      economicState: { foodSecurity: { surplusMonths: 6 } },
+      economicState: { foodSecurity: { surplusPct: 50 } },
     });
     const deficit = deriveSystemVariable('food_security', {
-      economicState: { foodSecurity: { deficitMonths: 3 } },
+      economicState: { foodSecurity: { deficitPct: 30 } },
     });
     expect(surplus.score).toBeGreaterThan(deficit.score);
   });

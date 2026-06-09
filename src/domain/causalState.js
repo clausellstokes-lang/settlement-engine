@@ -51,6 +51,7 @@ import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { tradeRouteSemantics } from './tradeRouteSemantics.js';
 import { canonStressors } from './canonicalAccessors.js';
+import { foodLedger } from './foodLedger.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -184,15 +185,18 @@ function deriveFoodSecurity(s) {
     push(contributors, cond.id, 'pressure', -magnitude, `${cond.label} taxes food security.`);
   }
 
-  // Legacy food-security band hints from the generator
-  const fs = s.economicState?.foodSecurity || s.foodSecurity;
-  if (fs) {
-    if (typeof fs.surplusMonths === 'number' && fs.surplusMonths >= 3) {
-      score += 5; push(contributors, 'economicState.foodSecurity', 'surplus', +5, `${fs.surplusMonths}-month grain surplus.`);
+  // Generator food band, via the conserved ledger. The old code read
+  // `surplusMonths`/`deficitMonths` — fields foodGenerator never produces — so this
+  // contribution was silently dead. The ledger reads the real quantities
+  // (surplusPct/deficitPct), so a food deficit now actually lowers food_security.
+  const food = foodLedger(s);
+  if (food.present) {
+    if (food.surplusPct >= 40) {
+      score += 5; push(contributors, 'economicState.foodSecurity', 'surplus', +5, `${food.surplusPct}% grain surplus.`);
     }
-    if (typeof fs.deficitMonths === 'number' && fs.deficitMonths > 0) {
-      const d = Math.min(15, fs.deficitMonths * 4);
-      score -= d; push(contributors, 'economicState.foodSecurity', 'deficit', -d, `${fs.deficitMonths}-month food deficit.`);
+    if (food.deficitPct > 0) {
+      const d = food.deficitPct > 40 ? 15 : food.deficitPct > 15 ? 10 : 5;
+      score -= d; push(contributors, 'economicState.foodSecurity', 'deficit', -d, `${food.deficitPct}% food deficit.`);
     }
   }
 
