@@ -63,6 +63,15 @@ export function mutateSettlement({ settlement, event, now = null }) {
     case 'DEPLETE_RESOURCE':
       next = depleteResource(next, stampedEvent);
       break;
+    case 'RECOVERED_RESOURCE':
+      next = recoveredResource(next, stampedEvent);
+      break;
+    case 'REMOVED_THREAT':
+      next = removedThreat(next, stampedEvent);
+      break;
+    case 'STARTED_RIOT':
+      next = startedRiot(next, stampedEvent);
+      break;
     case 'CUT_TRADE_ROUTE':
       next = cutTradeRoute(next, stampedEvent);
       break;
@@ -150,6 +159,39 @@ function destroySettlement(s, event) {
   };
 }
 
+// A FOOD ANCHOR is the load-bearing food infrastructure the food_anchor_lost
+// template names (granary, mill, fishery) — losing one is a settlement-level food
+// crisis, not just a closed shop. Sawmills/lumber mills cut wood, not flour.
+function isFoodAnchorInstitution(inst) {
+  const n = String(inst?.name || '').toLowerCase();
+  if (!n) return false;
+  // 'fisher|fishing' catches Fisher's landing + Fishing community (production)
+  // without matching Fish market / Fishmonger (retail — losing a shop is not a
+  // settlement-level food crisis).
+  if (/(granar|fisher|fishing|silo)/.test(n)) return true;
+  return n.includes('mill') && !n.includes('sawmill') && !n.includes('lumber');
+}
+
+// Promote the food_anchor_lost condition when a food anchor is destroyed or
+// crippled. These archetypes had rich consumers (capacity, causal, daily life,
+// districts, threats) but NO producer — destroying the granary updated faction
+// edges yet never raised the food crisis those consumers were waiting for.
+function withFoodAnchorLostIfAnchor(next, inst, event, severity) {
+  if (!isFoodAnchorInstitution(inst)) return next;
+  // Outright REMOVAL is the ceiling (0.8); damage/impairment clamps strictly below
+  // it (0.5..0.75) so a badly burned granary can never read as a WORSE food crisis
+  // than a granary that no longer exists.
+  const sev = event.type === 'REMOVE_INSTITUTION'
+    ? 0.8
+    : Math.max(0.5, Math.min(0.75, severity));
+  return withActiveCondition(next, {
+    archetype: 'food_anchor_lost',
+    severity: sev,
+    triggeredAt: { sourceEventType: event.type, sourceEventTargetId: idOf(inst) },
+    causes: [{ source: 'event', eventId: event.id, detail: `${inst.name} is out of action — the settlement's food supply lost an anchor.` }],
+  });
+}
+
 function damageInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
   if (!inst) return s;
@@ -165,6 +207,7 @@ function damageInstitution(s, event) {
     settlement: next,
     origin: { entityType: 'institution', entityId: idOf(inst), impairment },
   });
+  if (severity >= 0.6) next = withFoodAnchorLostIfAnchor(next, inst, event, severity);
   return next;
 }
 
@@ -190,6 +233,8 @@ function removeInstitution(s, event) {
   });
   // §corruption Phase 4 — closing a criminal institution frees the NPCs tied to it.
   next = severCorruptionTiesTo(next, inst.name);
+  // Losing a food anchor entirely is the canonical food_anchor_lost crisis.
+  next = withFoodAnchorLostIfAnchor(next, inst, event, 0.7);
   return next;
 }
 
@@ -228,6 +273,11 @@ function impairInstitution(s, event) {
     settlement: next,
     origin: { entityType: 'institution', entityId: idOf(inst), impairment },
   });
+  // Only a PHYSICAL (capacity) impairment can break a food anchor — a legitimacy
+  // scandal at the mill doesn't stop the grindstones.
+  if (impairment.severity >= 0.6 && impairment.type === 'capacity') {
+    next = withFoodAnchorLostIfAnchor(next, inst, event, impairment.severity);
+  }
   return next;
 }
 
@@ -312,16 +362,88 @@ function addFaction(s, event) {
 // ── Resource / route mutations ─────────────────────────────────────────────
 
 function depleteResource(s, event) {
-  const name = labelFromTarget(event.targetId);
+  // Write the CANONICAL underscore key (the format config.nearbyResources and the
+  // target picker use) AND the nearbyResourcesDepleted array the economy/food
+  // generators read. The old version wrote only a de-slugged display label
+  // ('grain fields') that no generator consumed — the DM-facing event moved a
+  // display dial and nothing else.
   const config = s.config || {};
+  const key = slugify(event.targetId);
+  if (!key) return s;
   const state = config.nearbyResourcesState || {};
+  const depleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
   return {
     ...s,
     config: {
       ...config,
-      nearbyResourcesState: { ...state, [name]: 'depleted' },
+      nearbyResourcesState: { ...state, [key]: 'depleted' },
+      nearbyResourcesDepleted: depleted.includes(key) ? depleted : [...depleted, key],
     },
   };
+}
+
+// RECOVERED_RESOURCE — the inverse: clear BOTH depletion formats so chains, exports,
+// food, and resource pressure all see the recovery. (Previously a registry no-op: the
+// depleted set was never cleared, so a recovered resource stayed depleted forever.)
+function recoveredResource(s, event) {
+  const config = s.config || {};
+  const raw = String(event.targetId || '');
+  const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
+  const state = { ...(config.nearbyResourcesState || {}) };
+  for (const k of keys) if (state[k] === 'depleted') state[k] = 'allow';
+  const depleted = (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k));
+  return {
+    ...s,
+    config: { ...config, nearbyResourcesState: state, nearbyResourcesDepleted: depleted },
+  };
+}
+
+// REMOVED_THREAT — the party neutralized an active threat. Removes the matching
+// stressor from whichever container carries it (canonical `stressors`, legacy
+// `stress`/`stresses`), and when the removed threat was a SIEGE promotes the
+// siege_lifted recovery condition — previously a registry no-op, leaving the
+// siege_lifted consumer tree (defense/food/legitimacy/trade recovery) dead.
+function removedThreat(s, event) {
+  const label = labelFromTarget(event.targetId).toLowerCase();
+  let next = { ...s };
+  let removed = null;
+  for (const key of ['stressors', 'stress', 'stresses']) {
+    const arr = Array.isArray(next[key]) ? next[key] : null;
+    if (!arr || !label) continue;
+    const idx = arr.findIndex(st => `${st?.name || ''} ${st?.type || ''}`.toLowerCase().includes(label));
+    if (idx >= 0) {
+      removed = arr[idx];
+      next = { ...next, [key]: arr.filter((_, i) => i !== idx) };
+      break;
+    }
+  }
+  const threatText = `${removed?.name || ''} ${removed?.type || ''} ${label}`.toLowerCase();
+  if (/siege/.test(threatText)) {
+    next = withActiveCondition(next, {
+      archetype: 'siege_lifted',
+      triggeredAt: { sourceEventType: 'REMOVED_THREAT', sourceEventTargetId: event.targetId || 'siege' },
+      causes: [{ source: 'event', eventId: event.id, detail: 'The siege is broken; the settlement begins to recover.' }],
+    });
+  }
+  return next;
+}
+
+// STARTED_RIOT — durable aftermath via the generic residual archetype with an
+// explicit riot framing (no new archetype invented; the provided affectedSystems
+// override the residual template per deriveActiveCondition precedence).
+function startedRiot(s, event) {
+  const severity = Number(event.payload?.severity ?? 0.6);
+  const where = event.targetId ? ` in ${labelFromTarget(event.targetId)}` : '';
+  return withActiveCondition(s, {
+    archetype: 'stressor_residual',
+    label: 'Riot aftermath',
+    description: `Public disorder${where} leaves tensions, damage, and scores to settle.`,
+    severity: Math.min(0.8, 0.3 + severity * 0.5),
+    status: 'easing',
+    affectedSystems: ['public_legitimacy', 'social_trust', 'criminal_opportunity'],
+    triggeredAt: { sourceEventType: 'STARTED_RIOT', sourceEventTargetId: event.targetId || 'riot' },
+    causes: [{ source: 'event', eventId: event.id, detail: 'A riot broke out and ran its course.' }],
+  });
 }
 
 // §9b/§9g/§9h — relationship events set the matched neighbour's
@@ -510,13 +632,24 @@ function exposeCorruption(s, event) {
     description: event.description || `Corruption inside ${target.name} was exposed publicly.`,
   });
 
+  // The scandal becomes a durable condition: corruption_exposed is read by
+  // ruling_authority (its ONLY condition reaction), administrative capacity,
+  // daily life, districts, and threats — but no event ever produced it, so the
+  // whole consumer tree was dead and the scandal vanished on re-derivation.
+  const scandal = (next) => withActiveCondition(next, {
+    archetype: 'corruption_exposed',
+    severity,
+    triggeredAt: { sourceEventType: 'EXPOSE_CORRUPTION', sourceEventTargetId: event.targetId },
+    causes: [{ source: 'event', eventId: event.id, detail: `Corruption inside ${target.name} was exposed publicly.` }],
+  });
+
   if (inst) {
     let next = replaceInstitution(s, inst, withImpairment(inst, impairment));
     next = propagateImpairment({
       settlement: next,
       origin: { entityType: 'institution', entityId: idOf(inst), impairment },
     });
-    return next;
+    return scandal(next);
   }
 
   // Faction case
@@ -525,7 +658,7 @@ function exposeCorruption(s, event) {
     settlement: next,
     origin: { entityType: 'faction', entityId: factionIdOf(faction), impairment },
   });
-  return next;
+  return scandal(next);
 }
 
 // §corruption Phase 4 + 1b-ii-c — DM exposes a specific corrupt NPC: impair the
@@ -543,7 +676,13 @@ function exposeCorruptNpc(s, npc, event) {
   const next = applyCorruptionImpairments(s, [exposure], { now });
   const rng = createPRNG(`successor:${event.id}:${String(npc.name || '').toLowerCase()}`);
   const nextNpcs = (next.npcs || []).map((n) => (n === npc ? successorNpc(n, rng) : n));
-  return { ...next, npcs: nextNpcs };
+  // The NPC scandal is also a durable corruption_exposed condition (see exposeCorruption).
+  return withActiveCondition({ ...next, npcs: nextNpcs }, {
+    archetype: 'corruption_exposed',
+    severity: Number(event.payload?.severity ?? 0.7),
+    triggeredAt: { sourceEventType: 'EXPOSE_CORRUPTION', sourceEventTargetId: npc.id || npc.name },
+    causes: [{ source: 'event', eventId: event.id, detail: `${npc.name} was publicly exposed as corrupt and ousted.` }],
+  });
 }
 
 // §corruption Phase 4 — removing/destroying a criminal institution severs the

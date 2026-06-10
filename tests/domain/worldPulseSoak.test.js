@@ -5,7 +5,7 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { deriveAllActiveConditions } from '../../src/domain/activeConditions.js';
 import { foodLedger } from '../../src/domain/foodLedger.js';
 import { healingLedger } from '../../src/domain/healingLedger.js';
-import { readCorruptionClimate } from '../../src/domain/corruption.js';
+import { npcCorruptibleFlaw, readCorruptionClimate } from '../../src/domain/corruption.js';
 
 // A long-horizon "soak" test — the feel/balance analog of the generator's
 // distribution test. We advance a small region many ticks and assert the world
@@ -336,16 +336,19 @@ describe('world pulse — long-horizon soak / balance', () => {
           { id: `guild_${sv.id}`, name: "Thieves' Guild", category: 'criminal' },
           { id: `market_${sv.id}`, name: 'Market square' },
         ],
-        npcs: sv.settlement.npcs.map(n => ({ ...n, flaws: ['greedy'] })),
+        npcs: sv.settlement.npcs.map(n => ({ ...n, flaw: 'greedy' })),
       },
     });
     let saves = ids.map((id, i) => withUnderworld(save(id, `Town-${id.toUpperCase()}`, i + 1)));
 
     // Precondition the corruption loop depends on actually holds at t0: a criminal
-    // institution is present (the climate gate) and the NPCs carry corruptible flaws.
+    // institution is present (the climate gate) and EVERY fixture NPC is eligible
+    // through the same function the engine uses. (An earlier revision set a plural
+    // `flaws` array the engine never reads — eligibility silently failed and the
+    // guard passed vacuously. Asserting via npcCorruptibleFlaw closes that hole.)
     for (const s of saves) {
       expect(readCorruptionClimate(s.settlement).hasCriminalInst).toBe(true);
-      expect(s.settlement.npcs.every(n => n.flaws.includes('greedy'))).toBe(true);
+      for (const n of s.settlement.npcs) expect(npcCorruptibleFlaw(n)).toBe('greedy');
     }
 
     let campaign = {
@@ -368,6 +371,7 @@ describe('world pulse — long-horizon soak / balance', () => {
     let maxStressors = 0;
     let maxConditionsAnySettlement = 0;
     let totalAutoApplied = 0;
+    const everCorrupt = new Set(); // npcState ids that were corrupt at ANY tick
 
     for (let i = 0; i < TICKS; i++) {
       const result = advanceCampaignWorld({
@@ -394,6 +398,9 @@ describe('world pulse — long-horizon soak / balance', () => {
       for (const s of saves) {
         maxConditionsAnySettlement = Math.max(maxConditionsAnySettlement, deriveAllActiveConditions(s.settlement).length);
       }
+      for (const [id, st] of Object.entries(result.worldState.npcStates || {})) {
+        if (st.corruption) everCorrupt.add(id);
+      }
     }
 
     // Same bounds as the baseline soak — the underworld must not destabilise them.
@@ -403,10 +410,13 @@ describe('world pulse — long-horizon soak / balance', () => {
     expect(maxConditionsAnySettlement).toBeLessThanOrEqual(30);
     expect(campaign.worldState.pulseHistory.length).toBeLessThanOrEqual(80);
 
-    // Probative: the corruption loop actually RAN — npc states were tracked for our
-    // NPCs (a vacuous pass would leave npcStates empty, the pre-fix behaviour).
+    // Probative: the corruption loop actually RAN. npcStates being non-empty is NOT
+    // enough — ensureNpcStates tracks every NPC whether or not corruption is live —
+    // so the guard also requires that at least one NPC turned corrupt during the
+    // soak. If this fails, eligibility short-circuited and the case is vacuous again.
     const npcStates = campaign.worldState.npcStates || {};
     expect(Object.keys(npcStates).length).toBeGreaterThan(0);
+    expect(everCorrupt.size).toBeGreaterThan(0);
 
     // The damping guard itself: corruption must not saturate. A runaway pegs every
     // NPC corrupt within 40 ticks; the damped loop stabilises below that.

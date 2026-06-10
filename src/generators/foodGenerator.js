@@ -31,7 +31,16 @@ const TERRAIN_AGRI = {
 
 export function generateFoodSecurity(tier, institutions, config) {
   const instNames     = (institutions || []).map(i => (i.name||'').toLowerCase());
-  const resources     = config.nearbyResources || [];
+  // Depleted resources stop feeding the food math (a depleted fishing ground no
+  // longer counts as fishing). Reads BOTH depletion formats the DEPLETE_RESOURCE
+  // event maintains; inert (identical output) when nothing is depleted.
+  const _depletedRes  = new Set([
+    ...(config.nearbyResourcesDepleted || []),
+    ...Object.entries(config.nearbyResourcesState || {})
+      .filter(([, v]) => v === 'depleted')
+      .map(([k]) => k),
+  ]);
+  const resources     = (config.nearbyResources || []).filter(r => !_depletedRes.has(r));
   const route         = config.tradeRouteAccess || 'road';
   const terrain       = config.terrainType || 'plains';
   const _threat        = config.monsterThreat || 'heartland';
