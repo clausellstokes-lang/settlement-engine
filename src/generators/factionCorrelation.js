@@ -104,6 +104,30 @@ export function applyFactionInstitutionBoosts(
   const existingNames = new Set(
     existingInstitutions.map(i => (i.name || '').toLowerCase())
   );
+  // Exact names + exclusive groups already seated — a faction pull must not
+  // seat a second member of an exclusive group (same contract as cascade).
+  const existingExact = new Set(existingInstitutions.map(i => i.name));
+  const takenGroups   = new Set(existingInstitutions.map(i => i.exclusiveGroup).filter(Boolean));
+  const TIER_ORD      = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+  const tierIdx       = TIER_ORD.indexOf(tier);
+  const tradeRoute    = config?.tradeRouteAccess || null;
+  const terrainType   = config?.terrainType || null;
+
+  // Same exclusion semantics as assembleInstitutions' toggle sweep — toggles
+  // are keyed `${tier}::${category}::${name}` (or legacy underscore form) and
+  // valued {allow, require, forceExclude}. A DM's explicit exclusion survives
+  // the faction pull; a dominant faction must not resurrect it. The bare-name
+  // string/boolean forms are kept for legacy callers.
+  const toggleExcluded = (name, cat) => {
+    const toggle = institutionToggles[`${tier}::${cat}::${name}`]
+                || institutionToggles[`${tier}_${cat}_${name}`]
+                || institutionToggles[`all::${cat}::${name}`]
+                || institutionToggles[`all_${cat}_${name}`]
+                || institutionToggles[name];
+    if (!toggle) return false;
+    if (toggle === 'exclude' || toggle === false) return true;
+    return toggle.forceExclude === true || toggle.allow === false;
+  };
 
   const tierCatalog = institutionalCatalog[tier] || {};
   const additions   = [];
@@ -118,9 +142,11 @@ export function applyFactionInstitutionBoosts(
       if (additions.length >= cap) break;
 
       const catInsts = tierCatalog[catalogCat] || {};
-      // Check category toggle
-      const catKey = `${tier}_${catalogCat}`;
-      if (categoryToggles[catKey] === false) continue;
+      // Check category toggle (both keying vocabularies in circulation)
+      if (categoryToggles[`${tier}_${catalogCat}`]  === false) continue;
+      if (categoryToggles[`${tier}::${catalogCat}`] === false) continue;
+      if (categoryToggles[`all_${catalogCat}`]      === false) continue;
+      if (categoryToggles[`all::${catalogCat}`]     === false) continue;
 
       // When magic doesn't exist in the world, skip the entire Magic catalog category
       if (config?.magicExists === false && catalogCat === 'Magic') continue;
@@ -129,8 +155,20 @@ export function applyFactionInstitutionBoosts(
       const eligible = Object.entries(catInsts)
         .filter(([name]) => !existingNames.has(name.toLowerCase()))
         .filter(([name, def]) => {
-          const toggle = institutionToggles[name];
-          if (toggle === 'exclude' || toggle === false) return false;
+          if (toggleExcluded(name, catalogCat)) return false;
+          // Geography/exclusivity gates — same contract as assemble/cascade:
+          // a dominant faction cannot legalise an institution the settlement's
+          // trade route, terrain, tier floor, or exclusive-group seating refused.
+          if (def.minTier && TIER_ORD.indexOf(def.minTier) > tierIdx) return false;
+          if (tradeRoute && def.tradeRouteRequired) {
+            const routeOk   = def.tradeRouteRequired.includes(tradeRoute);
+            const terrainOk = !!(terrainType && def.terrainAccess?.includes(terrainType));
+            if (!routeOk && !terrainOk) return false;
+          }
+          if (tradeRoute && def.forbiddenTradeRoutes?.includes(tradeRoute)) return false;
+          if (terrainType && def.terrainRequired && !def.terrainRequired.includes(terrainType)) return false;
+          if (def.exclusiveGroup && takenGroups.has(def.exclusiveGroup)) return false;
+          if (def.exclusionConditions?.some(ex => existingExact.has(ex))) return false;
           // Skip arcane-tagged institutions when magic doesn't exist
           if (config?.magicExists === false) {
             const n = name.toLowerCase();
@@ -143,30 +181,38 @@ export function applyFactionInstitutionBoosts(
 
       if (eligible.length === 0) continue;
 
-      // Sort by baseChance descending — boost most likely candidates first
-      eligible.sort((a, b) => (b[1].p || 0.5) - (a[1].p || 0.5));
+      // Sort by baseChance descending — boost most likely candidates first.
+      // Catalog probability field is `baseChance`; the catalog defines no `p`
+      // field, so any other read silently collapses all rarity to a constant.
+      eligible.sort((a, b) => (b[1].baseChance || 0) - (a[1].baseChance || 0));
 
       for (const [name, def] of eligible) {
         if (additions.length >= cap) break;
 
-        // Boost multiplier: strong faction gets 1.5x, mild gets 1.2x
+        // Boost multiplier: strong faction gets 1.3x, mild gets 1.1x —
+        // a dampened nudge on the institution's REAL catalog rarity, run
+        // through the same config-aware getBaseChance the assemble path uses.
         const multiplier = boost.strength === 'strong' ? 1.3 : 1.1;
         const boostedChance = getBaseChance(
-          (def.p || 0.5) * multiplier,
+          (def.baseChance || 0) * multiplier,
           catalogCat, name, config, null, {}
         );
 
         if (chance(Math.min(boostedChance, 0.85))) {
+          // Carry the full catalog def (desc/tags/priorityCategory/...) like
+          // the assemble + cascade paths do — downstream passes classify by
+          // tags, and metadata stubs are invisible to tag-keyed consumers.
           additions.push({
-            name,
             category: catalogCat,
+            name,
+            ...def,
             tier,
             source: 'faction_boost',
             factionSource: boost.factionName,
-            p: def.p || 0.5,
-            desc: def.desc || '',
           });
           existingNames.add(name.toLowerCase());
+          existingExact.add(name);
+          if (def.exclusiveGroup) takenGroups.add(def.exclusiveGroup);
         }
       }
     }

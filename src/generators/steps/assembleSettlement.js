@@ -33,7 +33,9 @@ import { promoteStressorsToConditions } from '../../domain/conditionPromotion.js
 import { DEFENSE_CONTRIB } from '../factionDynamics.js';
 
 registerStep('assembleSettlement', {
-  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass'],
+  // structuralValidationPass provides ctx.structural — the coherence receipt
+  // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
+  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
   provides: ['settlement'],
   phase: 'assembly',
 }, (ctx) => {

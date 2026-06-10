@@ -1,16 +1,26 @@
 /**
  * Step 12: factionCorrelationPass
  *
- * Faction-institution correlation feedback loop + demand imports.
- * Also runs arcane institution strip for no-magic worlds.
+ * Faction-institution correlation feedback loop. A dominant non-governing
+ * faction can pull one signature institution onto the roster; the pull is
+ * followed by the SAME subsumption + upgrade-ladder collapse the cascade
+ * pass applies, so a faction can never seat a lesser alongside its greater.
+ * Also runs the arcane institution strip for no-magic worlds.
  *
- * Faction correlation pass for the settlement generation pipeline.
+ * Ordering note (Wave 4b): this pass genuinely needs powerStructure (faction
+ * powers derive from the economy via generatePower), so it cannot run before
+ * generateEconomy. Instead it records whether it changed the roster
+ * (_rosterChangedAfterEconomy); economyReconcilePass then re-derives the
+ * economy/services/spatial from the FINAL roster so faction-pulled
+ * institutions join chains, income, and services. Demand imports moved to
+ * economyReconcilePass for the same reason.
  */
 
 import { registerStep } from '../pipeline.js';
 import { deriveFactionBoosts, applyFactionInstitutionBoosts } from '../factionCorrelation.js';
-import { computeDemandImports } from '../demandProfile.js';
 import { stripArcaneInstitutions } from '../isolationGenerator.js';
+import { applySubsumption } from './subsumptionPass.js';
+import { collapseUpgradeChains } from './assembleInstitutions.js';
 import { recordTrace } from '../../domain/trace.js';
 
 function instId(name) {
@@ -25,26 +35,12 @@ registerStep('factionCorrelationPass', {
   const {
     institutions, tier, effectiveConfig,
     institutionToggles, categoryToggles,
-    powerStructure, economicState,
+    powerStructure,
   } = ctx;
 
-  // Demand imports — faction purchasing power + culture shapes imports
-  const _hasMagicTrade = institutions.some(i => /teleport|airship|planar/i.test(i.name));
-  if (effectiveConfig.tradeRouteAccess !== 'isolated' || _hasMagicTrade) {
-    const demandImports = computeDemandImports(
-      powerStructure?.factions || [],
-      effectiveConfig.culture,
-      economicState.activeChains || [],
-      tier,
-      economicState.primaryImports || []
-    );
-    if (demandImports.length > 0) {
-      economicState.primaryImports = [
-        ...(economicState.primaryImports || []),
-        ...demandImports,
-      ].slice(0, 10);
-    }
-  }
+  // Snapshot so economyReconcilePass knows whether the economy (computed at
+  // step 9 from the pre-pull roster) must be re-derived.
+  const beforeRoster = institutions.map(i => i.name);
 
   // Faction-institution correlation loop
   const factionBoosts = deriveFactionBoosts(powerStructure?.factions || [], tier);
@@ -61,7 +57,8 @@ registerStep('factionCorrelationPass', {
       // root cause is a sociopolitical fit rather than a base roll.
       for (const add of /** @type {Array<any>} */ (boostAdditions)) {
         const triggerFaction = add.boostedBy || add.factionTrigger ||
-          (factionBoosts[0]?.faction?.faction || 'a dominant faction');
+          add.factionSource ||
+          (factionBoosts[0]?.factionName || 'a dominant faction');
         recordTrace(ctx, {
           targetType: 'institution',
           targetId:   instId(add.name),
@@ -71,6 +68,30 @@ registerStep('factionCorrelationPass', {
             { source: `faction.${String(triggerFaction).toLowerCase().replace(/\s+/g, '_')}`,
               effect: 'pulled in',
               reason: `${triggerFaction} had enough power + the right archetype to demand "${add.name}" as an institutional ally.` },
+          ],
+        });
+      }
+
+      // Re-run subsumption on the expanded list — a faction pull must obey
+      // the same redundancy rules as every other addition path (a faction
+      // pulling "Mages' guild" absorbs an existing "Wizard's tower"; a pulled
+      // lesser is absorbed by an existing greater). MUST go through the
+      // shared guarded matcher.
+      applySubsumption(institutions, ctx, {
+        step: 'factionCorrelationPass', result: 'subsumed_after_faction_pull',
+      });
+
+      // ...and the UPGRADE_CHAINS ladder the assembly + cascade already
+      // collapsed — without this a pull can re-list a lesser scale tier.
+      for (const removedName of collapseUpgradeChains(institutions)) {
+        recordTrace(ctx, {
+          targetType: 'institution',
+          targetId:   instId(removedName),
+          step:       'factionCorrelationPass',
+          result:     'upgrade_collapsed_after_faction_pull',
+          causes: [
+            { source: 'factionInstitutionBoost', effect: 'collapsed',
+              reason: `"${removedName}" sits below an upgraded form already on the roster; the larger institution covers it.` },
           ],
         });
       }
@@ -97,5 +118,9 @@ registerStep('factionCorrelationPass', {
     }
   }
 
-  return {};
+  const afterRoster = institutions.map(i => i.name);
+  const rosterChanged = beforeRoster.length !== afterRoster.length
+    || beforeRoster.some((n, i) => n !== afterRoster[i]);
+
+  return { _rosterChangedAfterEconomy: rosterChanged };
 });

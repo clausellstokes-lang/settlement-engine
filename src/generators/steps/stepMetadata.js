@@ -73,6 +73,14 @@ export const STEP_METADATA = Object.freeze({
     description: 'Detach institutions that lost their dependencies (a smith with no fuel becomes a husk).',
     summary: () => null,
   },
+  stressConfirmPass: {
+    label: 'Confirm stressors',
+    description: 'Re-weight emergent stressors against the real roster — walls suppress sieges, granaries suppress famine.',
+    summary: (ctx) => {
+      const n = Array.isArray(ctx.stressTypes) ? ctx.stressTypes.length : 0;
+      return n ? `${n} stressor${n === 1 ? '' : 's'} confirmed` : 'No stressors survived confirmation';
+    },
+  },
   generateEconomy: {
     label: 'Build economy + supply chains',
     description: 'Compute prices, supply chains, prosperity band, and visible economic frictions.',
@@ -100,6 +108,19 @@ export const STEP_METADATA = Object.freeze({
     summary: (ctx) => {
       const t = ctx.tensions?.length || ctx.history?.currentTensions?.length || 0;
       return t ? `${t} live tension${t === 1 ? '' : 's'}` : null;
+    },
+  },
+  economyReconcilePass: {
+    label: 'Reconcile economy with final roster',
+    description: 'Re-derive chains, services, and spatial placement so faction-pulled institutions join the economy.',
+    summary: (ctx) => ctx._rosterChangedAfterEconomy ? 'Economy re-derived for the final roster' : 'Roster unchanged — economy confirmed',
+  },
+  structuralValidationPass: {
+    label: 'Validate structure',
+    description: 'Check the FINAL roster for tier, dependency, and access contradictions — the coherence receipt.',
+    summary: (ctx) => {
+      const v = ctx.structural?.violations?.length || 0;
+      return v ? `${v} structural finding${v === 1 ? '' : 's'}` : 'No structural findings';
     },
   },
   generatePopulation: {

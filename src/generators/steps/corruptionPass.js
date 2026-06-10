@@ -33,7 +33,9 @@ function thievesGuildName(criminalInstitutions) {
 }
 
 registerStep('corruptionPass', {
-  deps: ['generatePopulation', 'generateEconomy'],
+  // economyReconcilePass (not generateEconomy): the corruption climate reads
+  // economicState, which the reconcile step may replace after the faction pull.
+  deps: ['generatePopulation', 'economyReconcilePass'],
   provides: [],
   phase: 'population',
 }, (ctx, rng) => {

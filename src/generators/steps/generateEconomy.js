@@ -1,42 +1,50 @@
 /**
  * Step 9: generateEconomy
  *
- * Generates economic state, spatial layout, and available services.
- * Threads neighbour economic bias into config.
+ * Generates the PROVISIONAL economic state (chains, income, exports/imports,
+ * prosperity) from the pre-faction-pull roster, and threads neighbour
+ * economic bias into config.
  *
  * Economy step for the settlement generation pipeline.
  *
+ * Ordering note (Wave 4b): generatePower consumes economicState (prosperity
+ * drives merchant-faction naming/caps and public legitimacy), and the
+ * faction-institution pull consumes powerStructure — so the economy MUST be
+ * computed once before factions exist. When factionCorrelationPass later
+ * changes the roster, economyReconcilePass re-runs computeEconomyState on
+ * the FINAL roster and replaces ctx.economicState (a damped one-iteration
+ * fixpoint: power keeps the provisional economy it was derived from).
+ * Services, spatial layout, and supply-chain traces are derived in
+ * economyReconcilePass so they always describe the final roster.
+ *
  * Tier 4.3: emits structured supply-chain traces after the legacy
- * economic generator finishes. Traces are layered on top via
- * deriveSupplyChainState — same Strangler Fig pattern Phase 7 + 9
- * established. The generator itself is not refactored.
+ * economic generator finishes (now from economyReconcilePass). Traces are
+ * layered on top via deriveSupplyChainState — same Strangler Fig pattern
+ * Phase 7 + 9 established. The generator itself is not refactored.
  */
 
 import { registerStep } from '../pipeline.js';
 import { generateEconomicState } from '../economicGenerator.js';
-import { generateSpatialLayout } from '../spatialGenerator.js';
-import { generateAvailableServices } from '../servicesGenerator.js';
-import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 import { deriveSupplyChainState } from '../../domain/supplyChainState.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
-import { passesTierGate } from '../../domain/customContentSchema.js';
-import { serviceTypeKeyFromCategory } from '../../domain/customCategories.js';
 import { deriveTradeLinks } from '../../domain/region/tradeLinks.js';
 import { foldTradeCategories } from '../../domain/region/foldTradeCategories.js';
 
-registerStep('generateEconomy', {
-  deps: ['isolationPass', 'resolveNeighbour'],
-  provides: ['economicState', 'spatialLayout', 'availableServices'],
-  phase: 'economy',
-}, (ctx, rng) => {
+/**
+ * computeEconomyState — the full economicState derivation (legacy generator
+ * + §14 custom-chain promotion + neighbour trade links + category folding).
+ *
+ * Pure w.r.t. ctx except: threads neighbour bias into effectiveConfig
+ * (idempotent) and consumes the ACTIVE step rng (via rngContext) inside
+ * generateEconomicState. Exported so economyReconcilePass can re-derive the
+ * economy from the post-faction-pull roster with identical semantics.
+ */
+export function computeEconomyState(ctx) {
   const {
     tier, institutions, tradeRoute, effectiveConfig,
-    goodsToggles, servicesToggles,
-    neighbourEconBias, neighbourProfile,
+    goodsToggles, neighbourEconBias, neighbourProfile,
   } = ctx;
-
-  const terrainType = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);
 
   // Thread neighbour economic bias
   if (neighbourEconBias && Object.keys(neighbourEconBias).length > 0) {
@@ -139,57 +147,24 @@ registerStep('generateEconomy', {
     economicState.customTradeLabels = { exports: fExp.custom, imports: fImp.custom };
   }
 
-  const spatialLayout = generateSpatialLayout(tier, institutions, tradeRoute, terrainType);
-  const availableServices = generateAvailableServices(
-    tier, institutions, servicesToggles,
-    { ...effectiveConfig, _tradeRoute: tradeRoute }
-  );
+  return economicState;
+}
 
-  // §14 — inject the user's CUSTOM services into the buyable-services map.
-  // Mirrors the custom-institution injection (assembleInstitutions): the list is
-  // tier-filtered upstream, we honour each item's gate again defensively;
-  // essential/critical ones always appear, the rest roll a modest chance. A
-  // service is GROUPED by its service TYPE (category → availableServices key) and
-  // PRESENTED BY its provider institution (providedBy refId → name), matching how
-  // generated services are attributed. Marked custom so the dossier tints it
-  // gold. Stable name order keeps rng deterministic; a no-op consuming zero rng
-  // when the user has no custom services.
-  const customServices = (customDeps.registry().listCustom?.('services') || [])
-    .slice()
-    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
-  for (const entry of customServices) {
-    const item = entry.raw || {};
-    const name = entry.name;
-    if (!name) continue;
-    if (!passesTierGate(item, tier)) continue;
-    const essential = item.essential === true || item.criticality === 'critical';
-    if (!essential && !rng.chance(0.3)) continue;
-    const typeKey = serviceTypeKeyFromCategory(item.category || entry.category) || 'equipment';
-    const bucket = (availableServices[typeKey] = availableServices[typeKey] || []);
-    if (bucket.some(s => (typeof s === 'string' ? s : s?.name) === name)) continue;
-    const providerRef = Array.isArray(item.providedBy) ? item.providedBy[0] : item.providedBy;
-    const institution = providerRef ? customDeps.resolveInstitutionRequirement(providerRef) : '';
-    bucket.push({
-      name,
-      desc: item.description || '',
-      institution: institution || '',
-      custom: true,
-      source: 'custom',
-    });
-  }
-
-  // ── Trace recording (Tier 4.3) ────────────────────────────────────────
-  // Emit one trace per active supply chain. Causes describe what
-  // activated the chain (resource availability, processing institution,
-  // upstream chain); downstream describes which subsystems the chain
-  // status feeds into. Status remap (operational → stable, vulnerable
-  // → strained, impaired → scarce) happens in deriveSupplyChainState.
-  //
-  // Disrupted chains (anything except 'stable') emit different
-  // downstream targets — stable chains reinforce trade/food/etc.;
-  // disrupted chains erode the same subsystems. This is the seed of
-  // Tier 2.4's unified causal state model.
-
+/**
+ * emitChainTraces — one structured trace per active supply chain (Tier 4.3).
+ *
+ * Causes describe what activated the chain (resource availability,
+ * processing institution, upstream chain); downstream describes which
+ * subsystems the chain status feeds into. Status remap (operational →
+ * stable, vulnerable → strained, impaired → scarce) happens in
+ * deriveSupplyChainState.
+ *
+ * Disrupted chains (anything except 'stable') emit different downstream
+ * targets — stable chains reinforce trade/food/etc.; disrupted chains erode
+ * the same subsystems. Called from economyReconcilePass so the receipts
+ * describe the FINAL economy, not the provisional pre-faction-pull one.
+ */
+export function emitChainTraces(ctx, economicState, tier, step = 'economyReconcilePass') {
   const chains = economicState?.activeChains || [];
   for (const chain of chains) {
     const state = deriveSupplyChainState(chain);
@@ -265,12 +240,18 @@ registerStep('generateEconomy', {
     recordTrace(ctx, {
       targetType: 'supply_chain',
       targetId:   state.id,
-      step:       'generateEconomy',
+      step,
       result:     state.status,
       causes,
       downstreamEffects,
     });
   }
+}
 
-  return { economicState, spatialLayout, availableServices };
+registerStep('generateEconomy', {
+  deps: ['stressConfirmPass', 'resolveNeighbour'],
+  provides: ['economicState'],
+  phase: 'economy',
+}, (ctx) => {
+  return { economicState: computeEconomyState(ctx) };
 });

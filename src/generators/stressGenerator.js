@@ -50,13 +50,18 @@ const buildStressEntry = (settlementName, stressType, stressData) => ({
  *  - Nearby resources
  *  - Institution presence
  *
+ * Exported for stressConfirmPass: resolveStress rolls against an EMPTY
+ * institution list (institutions assemble two steps later), so the confirm
+ * pass re-evaluates this with the real roster and uses the modified /
+ * unmodified ratio to decide whether an emergent stressor survives.
+ *
  * @param {string} stressType
  * @param {string} tier
  * @param {Object} config
  * @param {Array}  institutions
  * @returns {number} Adjusted probability (0–0.35)
  */
-const buildStressContext = (stressType, tier, config, institutions) => {
+export const buildStressContext = (stressType, tier, config, institutions) => {
   let prob = STRESS_TYPE_MAP[stressType].probability;
 
   const threat    = config.monsterThreat    || 'frontier';

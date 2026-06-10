@@ -18,7 +18,9 @@ import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 
 registerStep('generateNarratives', {
-  deps: ['generatePopulation', 'generateEconomy'],
+  // economyReconcilePass (not generateEconomy): narratives must read the
+  // FINAL economicState, after the faction-pull reconciliation.
+  deps: ['generatePopulation', 'economyReconcilePass'],
   provides: ['settlementReason', 'resourceAnalysis', 'economicViability', 'history'],
   phase: 'narrative',
 }, (ctx) => {
@@ -30,11 +32,16 @@ registerStep('generateNarratives', {
   const terrainT = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);
   const allowedResources = TERRAIN_DATA[terrainT]?.allowedResources?.slice(0, 7) || [];
 
-  const settlementReason = generateSettlementReason(tier, tradeRoute, null, effectiveConfig);
   const resourceAnalysis = generateResourceAnalysis(terrainT, allowedResources, [], institutions, effectiveConfig);
+  // Viability first: settlementReason is deficit-aware — an isolated settlement
+  // with a food shortfall must not claim self-sufficiency.
   const economicViability = generateEconomicViability(
     { tier, population, institutions, economicState, config: { ...effectiveConfig } },
     terrainT, allowedResources
+  );
+  const settlementReason = generateSettlementReason(
+    tier, tradeRoute, null, effectiveConfig,
+    economicViability?.metrics?.foodBalance || null
   );
   const history = generateHistory(tier, effectiveConfig, institutions, economicViability, economicState, powerStructure);
 

@@ -13,7 +13,7 @@ import { TIER_ORDER } from '../../data/constants.js';
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
-import { getBaseChance, checkStructuralValidity } from '../structuralValidator.js';
+import { getBaseChance } from '../structuralValidator.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
@@ -192,7 +192,7 @@ export function collapseUpgradeChains(institutions) {
 
 registerStep('assembleInstitutions', {
   deps: ['resolveConfig', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
-  provides: ['institutions', 'catalogForTier', 'structural'],
+  provides: ['institutions', 'catalogForTier'],
   phase: 'institutions',
 }, (ctx, rng) => {
   const {
@@ -452,17 +452,9 @@ registerStep('assembleInstitutions', {
     }
   }
 
-  // Structural validation
-  const _preDerivedMagicTrade = ctx.townPlus && tradeRoute === 'isolated'
-    && effectiveConfig.magicExists !== false;
-  const structural = checkStructuralValidity(institutions, {
-    tier, tradeRouteAccess: tradeRoute, magicLevel: ctx.magicLevel,
-    monsterThreat: ctx.threat,
-    priorityMilitary: effectiveConfig.priorityMilitary,
-    priorityMagic: effectiveConfig.priorityMagic,
-    nearbyResources: effectiveConfig.nearbyResources,
-    _magicTradeOnly: effectiveConfig._magicTradeOnly || _preDerivedMagicTrade,
-  });
-
-  return { institutions, catalogForTier, structural };
+  // Structural validation moved to structuralValidationPass (Wave 4b): it
+  // must run AFTER the last roster mutation (subsumption / cascade /
+  // isolation / factionCorrelation) or the coherence receipt describes a
+  // roster that no longer exists.
+  return { institutions, catalogForTier };
 });

@@ -87,10 +87,12 @@ describe('Tier 2.1 — every wired pipeline step actually emits traces', () => {
     'resolveStress',
     'assembleInstitutions',
     // The "deactivation" passes (subsumption / cascade / isolation /
-    // factionCorrelation) only fire traces when something actually
-    // happens in them; we don't hard-require those in every config.
-    // generateEconomy + generatePower are present on every town+.
-    'generateEconomy',
+    // stressConfirm / factionCorrelation) only fire traces when something
+    // actually happens in them; we don't hard-require those in every config.
+    // economyReconcilePass (supply-chain receipts — Wave 4b moved them out
+    // of generateEconomy so they describe the final roster) + generatePower
+    // are present on every town+.
+    'economyReconcilePass',
     'generatePower',
   ];
 
@@ -165,8 +167,9 @@ describe('Tier 2.1 — query helpers work on real traces', () => {
     const VALID_STEPS = new Set([
       'resolveConfig', 'resolveResources', 'resolveStress', 'resolveNeighbour',
       'assembleInstitutions', 'subsumptionPass', 'cascadePass', 'isolationPass',
-      'generateEconomy', 'generatePower', 'neighbourFactions',
-      'factionCorrelationPass', 'generatePopulation', 'generateNarratives',
+      'stressConfirmPass', 'generateEconomy', 'generatePower', 'neighbourFactions',
+      'factionCorrelationPass', 'economyReconcilePass', 'structuralValidationPass',
+      'generatePopulation', 'generateNarratives',
       'assembleSettlement', 'stepMetadata',
     ]);
     for (const t of traces) {

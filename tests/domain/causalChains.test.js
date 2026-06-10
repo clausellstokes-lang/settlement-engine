@@ -266,13 +266,16 @@ describe('faction traces emerge from generatePower', () => {
 
 // ── Supply-chain traces (Tier 4.3) ──────────────────────────────────────
 
-describe('supply-chain traces emerge from generateEconomy', () => {
+describe('supply-chain traces emerge from economyReconcilePass', () => {
+  // Wave 4b: chain traces moved from generateEconomy to economyReconcilePass
+  // so the receipts describe the FINAL economy (post faction-pull), not the
+  // provisional pre-pull one.
   it('a town settlement emits at least one supply-chain trace', () => {
     const s = gen({ settType: 'town', culture: 'germanic' });
     const chainTraces = tracesByType(s, 'supply_chain');
     expect(chainTraces.length).toBeGreaterThan(0);
     for (const t of chainTraces) {
-      expect(t.step).toBe('generateEconomy');
+      expect(t.step).toBe('economyReconcilePass');
       expect(t.targetId).toMatch(/^chain\./);
     }
   });
