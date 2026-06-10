@@ -27,7 +27,7 @@ function supportScore(pressureIdx, settlementId) {
   return clamp01(1 - (food * 0.22 + conflict * 0.24 + trade * 0.2 + legitimacy * 0.2 + disease * 0.14));
 }
 
-function entriesForTier(tier) {
+export function entriesForTier(tier) {
   const tierCatalog = institutionalCatalog[tier] || {};
   const entries = [];
   for (const [category, group] of Object.entries(tierCatalog)) {
@@ -42,7 +42,7 @@ function requiredInstitutionsForTier(tier) {
   return entriesForTier(tier).filter(entry => entry.spec.required);
 }
 
-function catalogEntryByName(name) {
+export function catalogEntryByName(name) {
   const needle = String(name || '').toLowerCase();
   for (const tier of TIER_ORDER) {
     const found = entriesForTier(tier).find(entry => entry.name.toLowerCase() === needle);
@@ -51,7 +51,7 @@ function catalogEntryByName(name) {
   return null;
 }
 
-function existingInstitutionNames(settlement) {
+export function existingInstitutionNames(settlement) {
   return new Set((settlement?.institutions || [])
     .filter(inst => inst?.status !== 'removed' && !inst?._worldPulseInactive)
     .map(inst => String(inst.name || '').toLowerCase()));
@@ -374,16 +374,48 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
   const institutionFates = [];
 
   if (direction === 'promotion') {
-    const additions = promotionAdditions(settlement, toTier).map(entry => {
+    // A required institution may already exist as an inactive remnant (e.g.
+    // closed by the institution lifecycle during a lean stretch, or left
+    // behind by an earlier demotion) — promotionAdditions cannot see those
+    // because existingInstitutionNames excludes them. Reactivate the remnant
+    // instead of appending a same-name duplicate.
+    const additions = promotionAdditions(settlement, toTier);
+    const reactivated = new Set();
+    institutions = institutions.map(inst => {
+      const match = additions.find(entry => entry.name.toLowerCase() === String(inst?.name || '').toLowerCase());
+      if (!match || !(inst.status === 'removed' || inst._worldPulseInactive)) return inst;
+      reactivated.add(match.name.toLowerCase());
       institutionFates.push({
-        name: entry.name,
-        category: entry.category,
-        fate: 'added',
+        name: inst.name,
+        category: inst.category || match.category,
+        fate: 'reactivated',
         tier: toTier,
       });
-      return newInstitution(entry, toTier, outcome);
+      return {
+        ...inst,
+        status: 'active',
+        impairments: [],
+        _worldPulseInactive: false,
+        _worldPulseEconomyClosed: false,
+        worldPulseFate: null,
+        required: true,
+        requiredForTier: toTier,
+        _worldPulseTierAdded: true,
+        createdByWorldPulseOutcomeId: inst.createdByWorldPulseOutcomeId || outcome?.id || null,
+      };
     });
-    institutions = [...institutions, ...additions];
+    const fresh = additions
+      .filter(entry => !reactivated.has(entry.name.toLowerCase()))
+      .map(entry => {
+        institutionFates.push({
+          name: entry.name,
+          category: entry.category,
+          fate: 'added',
+          tier: toTier,
+        });
+        return newInstitution(entry, toTier, outcome);
+      });
+    institutions = [...institutions, ...fresh];
   } else {
     institutions = institutions.map(inst => {
       if (!shouldRemoveForDemotion(inst, toTier)) return inst;

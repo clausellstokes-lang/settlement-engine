@@ -44,9 +44,27 @@ registerStep('resolveConfig', {
 }, (ctx, rng) => {
   const config = ctx.config || {};
 
+  // Priority sliders: when the UI's "Random" slider mode is on
+  // (config._randomizePriorities, threaded by generateSettlement), roll each
+  // priority per generation — deterministic per seed, fresh per regenerate
+  // (the wizard mints a new seed each click). The rolls are NEVER written
+  // back into the stored UI config: persisting resolved randoms is exactly
+  // the bug that pinned 'random' enum settings to their first roll. Guarded
+  // so the flag-off path draws no rng (existing seeds reproduce bit-for-bit).
+  const rolledPriorities = config._randomizePriorities === true
+    ? {
+        priorityEconomy: rng.randInt(5, 95),
+        priorityMilitary: rng.randInt(5, 95),
+        priorityReligion: rng.randInt(5, 95),
+        priorityCriminal: rng.randInt(5, 95),
+        priorityMagic: rng.randInt(5, 95),
+      }
+    : null;
+  const basePriorityMagic = rolledPriorities ? rolledPriorities.priorityMagic : config.priorityMagic;
+
   // Magic priority
   const priorityMagicEffective = config.magicExists === false
-    ? 0 : (config.priorityMagic ?? 50);
+    ? 0 : (basePriorityMagic ?? 50);
 
   // Extract toggles
   const institutionToggles = config._institutionToggles || {};
@@ -65,7 +83,7 @@ registerStep('resolveConfig', {
     ? config.population
     : rng.randInt(popRange.min, popRange.max);
 
-  const noMagic  = config.magicExists === false || (config.priorityMagic || 0) === 0;
+  const noMagic  = config.magicExists === false || (basePriorityMagic || 0) === 0;
   const townPlus = TOWN_PLUS_TIERS.includes(tier);
 
   // Random terrain
@@ -120,7 +138,8 @@ registerStep('resolveConfig', {
   const terrainType = getTerrainType(tradeRoute, resolvedTerrain || config.terrainOverride || null);
 
   // Military floor for plagued settlements
-  const militaryFloor = threat === 'plagued' && (config.priorityMilitary ?? 50) < 25 ? 25 : null;
+  const militaryFloor = threat === 'plagued'
+    && ((rolledPriorities?.priorityMilitary ?? config.priorityMilitary) ?? 50) < 25 ? 25 : null;
 
   const effectiveConfig = {
     priorityEconomy:  50,
@@ -128,6 +147,7 @@ registerStep('resolveConfig', {
     priorityReligion: 50,
     priorityCriminal: 50,
     ...config,
+    ...(rolledPriorities || {}),
     tier,
     priorityMagic: priorityMagicEffective,
     tradeRouteAccess: tradeRoute,

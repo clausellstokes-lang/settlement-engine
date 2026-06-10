@@ -43,6 +43,7 @@ const TOGGLES = [
   ['tradeFlowsEnabled', 'Trade flows'],
   ['resourceDriftEnabled', 'Resources'],
   ['tierDriftEnabled', 'Promotion/demotion'],
+  ['institutionLifecycleEnabled', 'Institution lifecycle'],
   ['majorChangesRequireProposal', 'Major proposals'],
 ];
 

@@ -81,6 +81,12 @@ registerStep('assembleSettlement', {
     stress,
     stressors: stress,
     config: { ...effectiveConfig },
+    // The RAW pre-resolution config, sentinels intact ('random',
+    // 'random_culture', …). `config` above holds the RESOLVED choices for
+    // this generation; treating it as a generation input is what pinned
+    // random settings to their first roll. Save/load and applyChange flows
+    // read _config first so 'random' stays random across regenerations.
+    _config: { ...config },
   };
 
   // Narrative overlays

@@ -11,11 +11,14 @@ import {
 import { applyRelationshipPatch, relationshipKeyFromEdge } from './relationshipEvolution.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { resolveRelationshipHierarchy } from './relationshipHierarchy.js';
-import { applyNpcPatch } from './npcAgency.js';
+import { applyNpcPatch, npcId } from './npcAgency.js';
+import { windDownSponsoredStressors } from './stressorDynamics.js';
+import { npcCorruptibleFlaw, corruptionVectorForFlaw } from '../corruption.js';
 import { applyFactionPatch } from './factionCompetition.js';
 import { proposalIdFor, updateProposalStatus, upsertProposal } from './worldState.js';
 import { applyPopulationOutcomeToSettlement } from './populationDynamics.js';
 import { applyResourceOutcomeToSettlement, applyTierOutcomeToSettlement } from './tierResourceDynamics.js';
+import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
 
 function clone(value) {
@@ -55,7 +58,7 @@ function affectedSaveIdsForOutcome(outcome) {
   for (const delta of outcome.populationDeltas || []) {
     if (delta?.saveId) ids.add(String(delta.saveId));
   }
-  if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch)) {
+  if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch || outcome.institutionPatch)) {
     ids.add(String(outcome.targetSaveId));
   }
   return [...ids];
@@ -72,6 +75,9 @@ function applyOutcomeToSettlement(settlement, outcome, saveId) {
   }
   if (outcome.resourcePatch && String(outcome.targetSaveId) === String(saveId)) {
     next = applyResourceOutcomeToSettlement(next, outcome);
+  }
+  if (outcome.institutionPatch && String(outcome.targetSaveId) === String(saveId)) {
+    next = applyInstitutionLifecycleOutcome(next, outcome);
   }
   if (outcome.condition && String(outcome.targetSaveId) === String(saveId)) {
     next = withActiveCondition(next, outcome.condition);
@@ -117,6 +123,69 @@ function relationshipEdgeForOutcome(graph, outcome) {
   const key = outcome.proposalPayload?.relationshipKey || outcome.relationshipKey;
   if (!key) return null;
   return (graph.edges || []).find(edge => relationshipKeyFromEdge(edge) === key) || null;
+}
+
+const IMPORTANCE_RANK = Object.freeze({ pillar: 3, key: 2, notable: 1 });
+
+/**
+ * A betrayal stressor's birth seeds the traitor its variant implies — ONE
+ * corrupted NPC, dependent on already-existing factors: there must be an
+ * NPC with a corruptible flaw to turn (no flaw, no traitor). Unlike the
+ * organic corruption loop this does NOT require a criminal institution —
+ * the patron is the foreign sponsor (or the conspiracy itself), recorded on
+ * corruptTies.foreignPatron. Deterministic pick: most notable eligible NPC,
+ * name as tiebreak. Covert by design: no news entry — the DM finds the
+ * corrupt flag in the dossier, the table finds it the hard way.
+ */
+function seedBetrayalTraitor({ state, settlementUpdates, saveId, originContext, now }) {
+  const sid = String(saveId || '');
+  const entry = settlementUpdates.get(sid);
+  const npcs = entry?.settlement?.npcs;
+  if (!Array.isArray(npcs) || !npcs.length) return state;
+  const eligible = npcs
+    .map((npc, index) => ({ npc, index, flaw: npcCorruptibleFlaw(npc) }))
+    .filter(c => c.flaw && c.npc.corrupt !== true && !c.npc.ousted);
+  if (!eligible.length) return state;
+  // Codepoint tiebreak, NOT localeCompare: this sort decides WHICH NPC turns
+  // traitor, and default-locale collation can reorder accented names across
+  // machines, breaking replay determinism.
+  eligible.sort((a, b) => {
+    const rank = (IMPORTANCE_RANK[b.npc.importance] || 0) - (IMPORTANCE_RANK[a.npc.importance] || 0);
+    if (rank) return rank;
+    const an = String(a.npc.name || '');
+    const bn = String(b.npc.name || '');
+    return an < bn ? -1 : an > bn ? 1 : 0;
+  });
+  const chosen = eligible[0];
+  const foreign = ['foreign_sponsored', 'abandoned_agent'].includes(originContext.variant);
+  const vector = foreign ? 'forbidden_patron' : corruptionVectorForFlaw(chosen.flaw);
+  const corruptTies = {
+    criminalInstitution: null,
+    thievesGuild: null,
+    foreignPatron: originContext.sponsorSettlementId || originContext.formerSponsorSettlementId || null,
+    conspiracy: originContext.variant,
+  };
+  const nextNpcs = npcs.map((npc, index) => (index === chosen.index
+    ? { ...npc, corrupt: true, corruptionVector: vector, corruptTies }
+    : npc));
+  settlementUpdates.set(sid, { ...entry, settlement: { ...entry.settlement, npcs: nextNpcs } });
+  // Mirror into npcStates immediately so the same-tick world view agrees
+  // (ensureNpcStates treats the settlement boolean as authoritative anyway).
+  const id = npcId(sid, chosen.npc, chosen.index);
+  const st = state.npcStates?.[id];
+  if (!st) return state;
+  return {
+    ...state,
+    npcStates: {
+      ...state.npcStates,
+      [id]: {
+        ...st,
+        corruption: true,
+        corruptionProfile: { corrupted: true, vector },
+        corruptionHeat: Math.max(st.corruptionHeat || 0, 0.3),
+      },
+    },
+  };
 }
 
 /**
@@ -212,6 +281,10 @@ export function applyWorldPulseOutcomes({
     }
 
     if (outcome.relationshipKey && outcome.relationshipPatch) {
+      // Capture the pre-change label: the wind-down handshake below needs to
+      // know the edge WAS hostile before this outcome rewrote it.
+      const beforeEdge = relationshipEdgeForOutcome(graph, outcome);
+      const beforeType = beforeEdge ? String(beforeEdge.relationshipType || beforeEdge.type || '') : null;
       state = applyRelationshipPatch(state, outcome, now);
       graph = applyRelationshipLabelToGraph(graph, outcome, now);
       if (outcome.proposalPayload?.kind === 'relationship_label_change') {
@@ -245,6 +318,39 @@ export function applyWorldPulseOutcomes({
             }
           }
         }
+        // Wars end when the WAR ends: a hostile edge de-escalating winds down
+        // the siege/wartime/betrayal stressors that hostility sponsored,
+        // instead of leaving them to bleed out at 0.02/tick while the former
+        // belligerents trade politely.
+        if (beforeType === 'hostile' && outcome.proposalPayload.toType !== 'hostile') {
+          const wind = windDownSponsoredStressors(state, beforeEdge || edge, {
+            tick,
+            now,
+            toType: outcome.proposalPayload.toType,
+          });
+          state = wind.worldState;
+          for (const stressor of wind.woundDown) {
+            newsEntries.push({
+              id: `wizard_news.${tick}.wind_down.${stressor.id}`,
+              tick,
+              scope: 'regional',
+              significance: 'notable',
+              score: 52,
+              headline: `${stressor.label} winds down`,
+              summary: 'The hostility that drove it has ended; the pressure is collapsing.',
+              kind: 'applied',
+              impactKind: 'stressor_wind_down',
+              channelType: null,
+              severity: stressor.severity,
+              settlementIds: stressor.affectedSettlementIds || [],
+              impactIds: [],
+              channelIds: [],
+              sourceEventId: outcome.id,
+              tags: ['world_pulse', 'stressor', 'wind_down'],
+              reasons: ['The sponsoring relationship de-escalated.'],
+            });
+          }
+        }
       }
     }
     if (outcome.type === 'npc') state = applyNpcPatch(state, outcome);
@@ -253,6 +359,19 @@ export function applyWorldPulseOutcomes({
       const byId = new Map((state.stressors || []).map(stressor => [stressor.id, stressor]));
       byId.set(outcome.stressor.id, { ...outcome.stressor, createdAt: now, updatedAt: now });
       state = { ...state, stressors: [...byId.values()] };
+      // A betrayal's birth seeds the traitor its variant implies (one corrupt
+      // NPC, gated on an existing corruptible flaw — no flaw, no traitor).
+      if (outcome.stressor.type === 'betrayal'
+          && String(outcome.candidateType || '').startsWith('stressor_birth')
+          && outcome.stressor.originContext) {
+        state = seedBetrayalTraitor({
+          state,
+          settlementUpdates,
+          saveId: outcome.targetSaveId,
+          originContext: outcome.stressor.originContext,
+          now,
+        });
+      }
     }
     autoApplied.push(outcome);
     newsEntries.push(newsEntryForOutcome(outcome, tick, 'applied'));
@@ -296,7 +415,9 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
   };
   const result = applyWorldPulseOutcomes({
     snapshot,
-    worldState: updateProposalStatus(campaign.worldState, proposalId, 'applied', { appliedAt: now }),
+    // updatedAt threaded explicitly: updateProposalStatus falls back to the
+    // wall clock for it, which would break replay-identical worldState.
+    worldState: updateProposalStatus(campaign.worldState, proposalId, 'applied', { appliedAt: now, updatedAt: now }),
     regionalGraph: campaign.regionalGraph,
     wizardNews: campaign.wizardNews,
     settlementMap,
@@ -307,6 +428,6 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
     advanceRegionalImpacts: false,
     simulationRules: campaign.worldState?.simulationRules,
   });
-  result.worldState = updateProposalStatus(result.worldState, proposalId, 'applied', { appliedAt: now });
+  result.worldState = updateProposalStatus(result.worldState, proposalId, 'applied', { appliedAt: now, updatedAt: now });
   return result;
 }

@@ -513,7 +513,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   const onLoad = (data) => {
     if (data && !isSaveActive(data)) return;
-    if (data.config) updateConfig(migrateConfig(data.config));
+    // Prefer the settlement's RAW pre-resolution config (random sentinels
+    // intact) over the save's stored config: legacy saves only carry the
+    // RESOLVED config, which pinned 'random' settings to their first roll
+    // after "Apply Saved Configuration & Regenerate".
+    const rawConfig = data.settlement?._config || data.config;
+    if (rawConfig) updateConfig(migrateConfig(rawConfig));
     if (data.institutionToggles) setInstitutionToggles(data.institutionToggles);
     if (data.categoryToggles) setCategoryToggles(data.categoryToggles);
     if (data.goodsToggles) setGoodsToggles(data.goodsToggles);

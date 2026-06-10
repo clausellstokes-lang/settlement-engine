@@ -11,6 +11,7 @@
  */
 import { withImpairment } from '../entities/status.js';
 import { propagateImpairment } from '../entities/propagate.js';
+import { readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
 
 const norm = (s) => String(s || '').trim().toLowerCase();
 const nameOf = (x) => x?.name || x?.faction || '';
@@ -78,6 +79,85 @@ export function applyCorruptionImpairments(settlement, exposures, { now } = {}) 
     if (e.homeInstitution) {
       next = impairByName(next, e.homeInstitution, { ...base, causeEventId: `corruption:${e.npcId}:${e.kind}:home`, description: `${e.name}'s corruption scandal tarnished ${e.homeInstitution}.` });
     }
+    // An OUSTING makes the institution's corruption public record: a
+    // 'corruption' impairment (long-dormant vocabulary in entities/status.js,
+    // emitted nowhere until now). The duality loop reads it back — the
+    // revealed institution drags onset security AND raises exposure
+    // visibility for anyone still corrupt inside it.
+    if (e.kind === 'ousted' && e.homeInstitution) {
+      next = impairByName(next, e.homeInstitution, {
+        type: 'corruption',
+        severity: 0.45,
+        causeEventId: `corruption:${e.npcId}:ousted:institutional`,
+        appliedAt: now,
+        description: `${e.name}'s network inside ${e.homeInstitution} is now public knowledge.`,
+      });
+    }
   }
   return next;
+}
+
+// ── Organic institutional reform ─────────────────────────────────────────
+// The counterpart to the scandal: a corruption-impaired institution whose
+// corrupt insiders have all been ousted (or were never tracked) gets a
+// per-tick, security/prosperity-scaled chance to clean house — the purge
+// worked, the auditors finish, the new captain's appointment sticks.
+// Without this, 'revealed' was a PERMANENT state: the patronage drag and
+// exposure-proximity penalties never lifted. An institution still harboring
+// an unexposed corrupt NPC cannot reform — the rot is still inside.
+
+export const REFORM_TUNING = Object.freeze({
+  base: 0.05, security: 0.15, prosperity: 0.05, min: 0.02, max: 0.35,
+});
+
+export function reformChance({ security = 0.4, prosperity = 0.4 } = {}) {
+  const p = REFORM_TUNING.base + security * REFORM_TUNING.security + prosperity * REFORM_TUNING.prosperity;
+  return Math.max(REFORM_TUNING.min, Math.min(REFORM_TUNING.max, p));
+}
+
+function hasCorruptionImpairment(inst) {
+  return (inst?.impairments || []).some((i) => i?.type === 'corruption');
+}
+
+function harborsCorruptInsider(settlement, instName) {
+  const n = norm(instName);
+  for (const npc of settlement?.npcs || []) {
+    if (npc?.corrupt !== true || npc?.ousted) continue;
+    const home = norm(npcHomeInstitution(npc));
+    if (home && (home === n || home.includes(n) || n.includes(home))) return true;
+  }
+  return false;
+}
+
+function withoutCorruptionImpairments(inst) {
+  const filtered = (inst.impairments || []).filter((i) => i?.type !== 'corruption');
+  const status = filtered.length === 0 && inst.status === 'impaired' ? 'active' : inst.status;
+  return { ...inst, impairments: filtered, status };
+}
+
+/**
+ * Roll reform for every corruption-impaired institution in a settlement.
+ * Deterministic via the threaded rng (fork per institution name).
+ *
+ * @param {object} settlement
+ * @param {{fork: (key: string) => {random: () => number}}} rng
+ * @returns {{settlement: object, reformed: Array<{name: string}>}}
+ */
+export function advanceInstitutionReform(settlement, rng) {
+  const institutions = settlement?.institutions;
+  if (!Array.isArray(institutions) || !institutions.some(hasCorruptionImpairment)) {
+    return { settlement, reformed: [] };
+  }
+  const climate = readCorruptionClimate(settlement);
+  const chance = reformChance(climate);
+  const reformed = [];
+  const nextInstitutions = institutions.map((inst) => {
+    if (!hasCorruptionImpairment(inst)) return inst;
+    if (harborsCorruptInsider(settlement, inst.name)) return inst; // rot still inside
+    if (rng.fork(`reform:${norm(inst.name)}`).random() >= chance) return inst;
+    reformed.push({ name: inst.name });
+    return withoutCorruptionImpairments(inst);
+  });
+  if (!reformed.length) return { settlement, reformed };
+  return { settlement: { ...settlement, institutions: nextInstitutions }, reformed };
 }

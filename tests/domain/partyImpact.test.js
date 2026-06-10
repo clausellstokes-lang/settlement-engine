@@ -69,13 +69,46 @@ describe('party impact — the table changes the world', () => {
     });
 
     expect(result).not.toBeNull();
-    // The siege is gone from world state.
-    expect((result.worldState.stressors || []).some(s => s.id === 'world_stressor.siege.a')).toBe(false);
+    // The siege is no longer ACTIVE — it survives only as a residual echo
+    // (recent memory) that fades over the following ticks.
+    const survivor = (result.worldState.stressors || []).find(s => s.id === 'world_stressor.siege.a');
+    expect(survivor?.status).toBe('residual');
+    expect(survivor?.memoryStrength).toBeGreaterThan(0);
     // Ashford now carries the residual aftereffects as an active condition.
     const ashford = result.settlementUpdates.find(u => String(u.saveId) === 'a');
     expect(ashford.settlement.activeConditions.some(c => c.archetype === 'stressor_residual')).toBe(true);
     // Wizard News records it as party-sourced.
     expect(result.wizardNews.entries.some(e => (e.tags || []).includes('party_stressor_residual') || (e.impactKind || '').startsWith('party'))).toBe(true);
+  });
+
+  test('name_attacker attributes a siege to a non-settlement force', () => {
+    const result = applyPartyImpact({
+      campaign: campaign(),
+      saves: SAVES,
+      action: {
+        kind: 'name_attacker',
+        stressorId: 'world_stressor.siege.a',
+        attackerLabel: 'The Red Fang warband',
+        label: 'Scouts identify the besiegers',
+      },
+      now: NOW,
+    });
+    expect(result).not.toBeNull();
+    const siege = result.worldState.stressors.find(s => s.id === 'world_stressor.siege.a');
+    expect(siege.originContext.attackerLabel).toBe('The Red Fang warband');
+    expect(siege.originContext.attackerSettlementId).toBeNull();
+    // The naming is chronicle-visible.
+    expect(result.wizardNews.entries.some(e => /Red Fang/.test(e.summary || ''))).toBe(true);
+  });
+
+  test('name_attacker on an unknown stressor id affects nothing', () => {
+    const result = applyPartyImpact({
+      campaign: campaign(),
+      saves: SAVES,
+      action: { kind: 'name_attacker', stressorId: 'world_stressor.nope', attackerLabel: 'Ghosts' },
+      now: NOW,
+    });
+    expect(result).toBeNull();
   });
 
   test('broker_relationship de-escalates the type and softens the vector', () => {

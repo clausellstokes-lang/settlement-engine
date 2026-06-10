@@ -44,7 +44,17 @@ export function buildChronicleGrounding({ wizardNews, worldState, snapshot, tick
   const stressors = (worldState?.stressors || [])
     .filter(s => ACTIVE_STAGES.has(s.lifecycleStage || 'active'))
     .slice(0, 12)
-    .map(s => ({ type: s.type, label: s.label, severity: s.severity, affected: s.affectedSettlementIds || [] }));
+    .map(s => ({
+      type: s.type,
+      label: s.label,
+      severity: s.severity,
+      affected: s.affectedSettlementIds || [],
+      // Spawn-variant context: who is behind it (nullable until the DM names
+      // a non-settlement force) and the table-facing hooks the variant implies.
+      ...(s.originContext?.variant ? { variant: s.originContext.variant } : {}),
+      ...(s.originContext?.attackerLabel ? { attacker: s.originContext.attackerLabel } : {}),
+      ...(s.originContext?.hooks?.length ? { hooks: s.originContext.hooks.slice(0, 2) } : {}),
+    }));
 
   return {
     tick: latestTick,

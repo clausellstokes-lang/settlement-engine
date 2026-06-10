@@ -127,6 +127,19 @@ describe('RESOURCE_TO_CHAINS joins', () => {
   });
 });
 
+describe('chain id uniqueness', () => {
+  it('inner chain ids are globally unique across need groups', () => {
+    // raw_extraction used to carry two 'shipbuilding' chains (river + coastal).
+    // Every inner-id-keyed join — computeActiveChains' chainById last-wins map,
+    // CHAIN_DEPS, upstreamChains, the lifecycle's chainCatalogEntries — silently
+    // aliased them, and both resolved to the same persisted stable id.
+    const counts = new Map();
+    for (const chain of allChains) counts.set(chain.id, (counts.get(chain.id) || 0) + 1);
+    const dups = [...counts.entries()].filter(([, n]) => n > 1).map(([id]) => id);
+    expect(dups).toEqual([]);
+  });
+});
+
 describe('chain processor joins (activation gate resolvability)', () => {
   it('every chain that declares processors has >=1 resolvable at a tier >= minTier', () => {
     // Chains with EMPTY processor lists (spices_dyes, silk_luxury_textiles,
@@ -203,6 +216,16 @@ describe('DM-visible activation behavior (computeActiveChains)', () => {
   it('a city with a Major hospital runs the Hospital & Surgery chain', () => {
     const chains = computeActiveChains(inst('Major hospital'), [], 'city', 'road');
     expect(chains.some(c => c.needKey === 'healing_medicine' && c.chainId === 'hospital')).toBe(true);
+  });
+
+  it('coastal timber runs the coastal shipbuilding chain, not the river variant', () => {
+    const chains = computeActiveChains(inst('Shipyard'), ['shipbuilding_timber'], 'town', 'port');
+    const coastal = chains.find(c => c.chainId === 'coastal_shipbuilding');
+    expect(coastal).toBeTruthy();
+    expect(coastal.activatedByResource).toBe(true);
+    expect(coastal.status).toBe('running');
+    // The river variant needs its own processors (boatyards) and resource gate.
+    expect(chains.some(c => c.chainId === 'shipbuilding')).toBe(false);
   });
 
   it('terrain resources flag their dedicated chains as running (not merely operational)', () => {

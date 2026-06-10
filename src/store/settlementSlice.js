@@ -495,6 +495,10 @@ export const createSettlementSlice = (set, get) => ({
       _categoryToggles:    categoryToggles,
       _goodsToggles:       goodsToggles,
       _servicesToggles:    servicesToggles,
+      // "Random" slider mode: resolveConfig rolls the priorities per
+      // generation (fresh seed per regenerate) instead of silently using
+      // flat 50s — and never writes the rolls back into the stored config.
+      ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
       ...(neighbor ? { _importedNeighbor: neighbor } : {}),
     };
 
@@ -735,7 +739,11 @@ export const createSettlementSlice = (set, get) => ({
     if (!pendingChange) return;
 
     const fullConfig = {
-      ...(state.settlement?.config || state.config),
+      // Prefer the RAW pre-resolution config (sentinels intact) so the
+      // resolved choices stop propagating generation after generation.
+      // Behavior-preserving for what-if edits: the same lastSeed below
+      // re-resolves any 'random' sentinel to the identical value.
+      ...(state.settlement?._config || state.settlement?.config || state.config),
       _institutionToggles: pendingChange.overrides.institutionToggles || state.institutionToggles,
       _categoryToggles:    state.categoryToggles,
       _goodsToggles:       state.goodsToggles,

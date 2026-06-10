@@ -8,7 +8,7 @@ const FOOD_CHAIN_IDS = [
   'fishing', 'river_fishing', 'hunting',
   'brewing', 'beekeeping_wax', 'animal_husbandry',
 ];
-const TIMBER_CHAIN_IDS = ['timber', 'shipbuilding', 'reed_marsh', 'bowyer_fletcher'];
+const TIMBER_CHAIN_IDS = ['timber', 'shipbuilding', 'coastal_shipbuilding', 'reed_marsh', 'bowyer_fletcher'];
 const HEAL_CHAIN_IDS   = ['herbalism', 'hospital', 'divine_healing'];
 const EXTRACT_CHAIN_IDS = ['iron', 'smelting', 'petty_mining', 'stone', 'clay', 'fuel'];
 

@@ -28,11 +28,15 @@ const DISPLACEMENT_STRESSORS = new Set([
 ]);
 const MIGRATION_CHANNELS = ['migration_pressure', 'trade_route', 'political_authority'];
 const TRADE_CRISIS = /trade_route_cut|export_market|famine|import_shortage|food_anchor/;
+// Echoes (status 'residual') keep their resolution-time severity for memory
+// purposes — nobody flees a siege that was BROKEN last month.
+const ACTIVE_FLOW_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 
 function populationFlows(snapshot, tick) {
   const graph = snapshot.regionalGraph;
   const out = [];
   for (const s of snapshot.worldState?.stressors || []) {
+    if (!ACTIVE_FLOW_STAGES.has(s.lifecycleStage || 'active')) continue;
     if (!DISPLACEMENT_STRESSORS.has(s.type) || (s.severity || 0) < 0.6) continue;
     const affected = new Set((s.affectedSettlementIds || []).map(String));
     for (const sourceId of affected) {

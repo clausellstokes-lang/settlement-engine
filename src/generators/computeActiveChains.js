@@ -250,6 +250,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     leather_goods:    ['leather','livestock','hunting'],
     bowyer_fletcher:  ['timber'],
     shipbuilding:     ['timber'],
+    coastal_shipbuilding: ['timber'],
     beekeeping_wax:   ['forage'],
     precious_metals_mining: ['fuel'],
     caravan_trade:    ['animal_husbandry','grain'],

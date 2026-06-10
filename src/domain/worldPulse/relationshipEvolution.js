@@ -552,7 +552,7 @@ function activeRebellionAgainstVassal(snapshot, vassalId) {
   return (snapshot?.worldState?.stressors || []).some(stressor =>
     stressor?.type === "rebellion"
     && (stressor.affectedSettlementIds || []).map(String).includes(String(vassalId))
-    && !["resolved", "dormant"].includes(stressor.status),
+    && !["resolved", "dormant", "residual"].includes(stressor.status),
   );
 }
 

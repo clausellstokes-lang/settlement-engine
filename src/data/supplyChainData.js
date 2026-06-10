@@ -344,7 +344,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         minTier: 'town',
       },
       {
-        id: 'shipbuilding',
+        id: 'coastal_shipbuilding',
         label: 'Shipbuilding and Timber',
         resource: 'Coastal Timber',
         resourceIcon: '',
@@ -1550,7 +1550,7 @@ export const RESOURCE_TO_CHAINS = {
     'manufacturing.bowyer_fletcher',
     'raw_extraction.petty_mining',
   ],
-  shipbuilding_timber: ['raw_extraction.timber', 'raw_extraction.shipbuilding'],
+  shipbuilding_timber: ['raw_extraction.timber', 'raw_extraction.coastal_shipbuilding'],
   fishing_grounds: ['food_security.fish', 'food_security.fishing'],
   river_fish: ['food_security.fish', 'food_security.river_fishing'],
   river_mills: [

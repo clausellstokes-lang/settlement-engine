@@ -2,6 +2,7 @@ import { stablePart } from './worldState.js';
 import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
+  patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
 } from '../corruption.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
@@ -467,12 +468,25 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
   const exposures = [];
   for (const item of (snapshot?.settlements || [])) {
     const climate = readCorruptionClimate(item.settlement);
-    if (!climate.hasCriminalInst) continue; // no criminal infrastructure → no pressure
+    // ONSET requires criminal infrastructure (the rule) — but EXPOSURE must
+    // run regardless: betrayal-seeded conspirators (whose patron is a foreign
+    // sponsor, not a local guild) would otherwise be permanently immune to
+    // discovery in any settlement without a criminal institution, and each
+    // betrayal re-ignition would monotonically corrupt one more NPC.
+    const onsetEnabled = climate.hasCriminalInst;
     // §corruption Phase 3 — real thieves-guild strength (if threaded) drags
     // effective security down (the feedback loop); falls back to the crime proxy.
     const gs = guildStrengthBy ? guildStrengthBy.get(String(item.id)) : undefined;
     const guildStr = gs != null ? gs : climate.crime;
     const effSecurity = gs != null ? guildEffectiveSecurity(climate.security, gs) : climate.security;
+    // §corruption duality — patronage drag (onset side only): a compromised
+    // watch/court shields NEW recruits. Exposure deliberately reads RAW
+    // security instead: the guild's shielding is already priced into
+    // exposureChance's -guildStrength term, and a strong watch keeps catching
+    // people even while parts of it are bought.
+    const patronage = patronageSecurityDrag(item.settlement);
+    const onsetSecurity = clamp01(effSecurity * (1 - patronage.drag));
+    const exposureSecurity = climate.security;
     const npcs = item.settlement?.npcs || [];
     npcs.forEach((npc, index) => {
       const id = npcId(item.id, npc, index);
@@ -484,9 +498,10 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       const priorExposures = s.timesExposed || 0;
 
       if (!s.corruption) {
-        // Onset — only eligible NPCs, and only the corruptible ones turn. A prior
-        // exposure (organic or DM) makes re-corruption progressively harder.
-        if (flaw && local.random() < onsetHazard({ crime: climate.crime, security: effSecurity, prosperity: climate.prosperity, priorExposures })) {
+        // Onset — only eligible NPCs, only the corruptible ones turn, and only
+        // where criminal infrastructure exists. A prior exposure (organic or
+        // DM) makes re-corruption progressively harder.
+        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures })) {
           npcStates[id] = {
             ...s,
             corruption: true,
@@ -499,8 +514,16 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
 
       // Organic exposure of an already-corrupt NPC. A repeat offender (prior
       // exposures) draws more scrutiny once they relapse → easier to re-expose.
-      const visibility = (s.dotRank || 1) / 3;
-      const exposeP = exposureChance({ security: effSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures });
+      // Proximity: an NPC homed in a PUBLICLY corrupt institution (corruption
+      // impairment on record) sits where the investigators are already circling.
+      const home = npcHomeInstitution(npc);
+      const proximity = home && patronage.revealed.some(name => {
+        const a = String(name).toLowerCase();
+        const b = String(home).toLowerCase();
+        return a === b || a.includes(b) || b.includes(a);
+      }) ? PATRONAGE_TUNING.proximityVisibilityBonus : 0;
+      const visibility = Math.min(1, (s.dotRank || 1) / 3 + proximity);
+      const exposeP = exposureChance({ security: exposureSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures });
       if (local.random() >= exposeP) return;
 
       const homeInstitution = npc.factionAffiliation || npc.factionLink || npc.institutionId || null;

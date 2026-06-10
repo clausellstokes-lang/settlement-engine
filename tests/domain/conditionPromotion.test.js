@@ -83,3 +83,38 @@ describe('promoteStressorsToConditions (P0.3)', () => {
     expect(promoteStressorsToConditions(s)).toBe(s);
   });
 });
+
+describe('every generation stress type promotes (gap closure)', () => {
+  // Before these rules, six of the fifteen generation stress types (and three
+  // regex near-misses: wartime, mass_migration, insurgency) never produced an
+  // activeCondition — the crisis was pure flavor text to the substrate.
+  const EXPECTED = {
+    under_siege: 'war_pressure',
+    famine: 'famine',
+    plague_onset: 'plague',
+    occupied: 'vassal_extraction',
+    politically_fractured: 'regional_authority_instability',
+    indebted: 'regional_tax_revenue_disruption',
+    recently_betrayed: 'faction_challenge',
+    infiltrated: 'regional_criminal_pressure',
+    succession_void: 'dominant_npc_removed',
+    monster_pressure: 'war_pressure',
+    insurgency: 'rebellion',
+    religious_conversion: 'regional_religious_pressure',
+    slave_revolt: 'rebellion',
+    wartime: 'war_pressure',
+    mass_migration: 'regional_migration_pressure',
+  };
+
+  for (const [type, archetype] of Object.entries(EXPECTED)) {
+    it(`${type} -> ${archetype}`, () => {
+      expect(archetypeForStressor({ type, name: type.replace(/_/g, ' ') })).toBe(archetype);
+    });
+  }
+
+  it('a recently betrayed settlement now feeds the causal substrate', () => {
+    const s = settlementWith([{ type: 'recently_betrayed', name: 'Aftermath of Betrayal', severity: 0.6 }]);
+    const conds = promoteStressorsToConditions(s).activeConditions || [];
+    expect(conds.some(c => c.archetype === 'faction_challenge')).toBe(true);
+  });
+});

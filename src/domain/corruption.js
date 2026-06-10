@@ -275,3 +275,87 @@ export function readCorruptionClimate(settlement) {
     criminalInstitutions,
   };
 }
+
+// ── Corrupted-institution duality (patronage vs exposure) ───────────────────
+// A corrupted security institution cuts BOTH ways:
+//   • Patronage (onset side): criminals with a stooge in the watch operate
+//     more freely — effective security is dragged down for ONSET suppression.
+//   • Exposure (discovery side): organic exposure reads RAW security — a
+//     strong watch keeps catching people even while parts of it are bought
+//     (the guild's shielding is already priced into exposureChance's
+//     -guildStrength term; passing dragged security in double-dipped it).
+// Net dynamic: high security + corrupted institution = a purge state — fewer
+// NEW corruptions than a lawless town, but a steady drum of scandals.
+// Low security + corrupted institution = quiet rot toward capture.
+
+export const SECURITY_INSTITUTION_RE = /(watch|garrison|constab|guard|magistrate|court|barracks)/i;
+
+export const PATRONAGE_TUNING = Object.freeze({
+  dragPerInstitution: 0.15,      // each compromised security institution…
+  maxDrag: 0.3,                  // …capped well above the floor (security never zeroes)
+  proximityVisibilityBonus: 0.25, // investigators circle a PUBLICLY corrupt institution
+});
+
+function nameMatches(a, b) {
+  const x = String(a || '').trim().toLowerCase();
+  const y = String(b || '').trim().toLowerCase();
+  if (!x || !y) return false;
+  return x === y || x.includes(y) || y.includes(x);
+}
+
+/** The home-institution fields the exposure path reads, in the same order. */
+export function npcHomeInstitution(npc) {
+  return npc?.factionAffiliation || npc?.factionLink || npc?.institutionId || null;
+}
+
+/**
+ * Which of the settlement's security institutions are compromised, and how.
+ *   covert   — an unexposed corrupt NPC is homed there (the hidden stooge);
+ *              drags onset security, invisible to the public.
+ *   revealed — the institution carries a 'corruption' impairment (a scandal
+ *              made it public); drags onset security AND raises the exposure
+ *              visibility of anyone still corrupt inside it.
+ *
+ * @param {object} settlement
+ * @returns {{covert: string[], revealed: string[]}}
+ */
+export function compromisedSecurityInstitutions(settlement) {
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const securityInstitutions = institutions
+    .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
+  if (!securityInstitutions.length) return { covert: [], revealed: [] };
+
+  const revealed = new Set();
+  for (const inst of securityInstitutions) {
+    if ((inst.impairments || []).some((imp) => imp?.type === 'corruption')) revealed.add(inst.name);
+  }
+
+  const covert = new Set();
+  for (const npc of settlement?.npcs || []) {
+    if (npc?.corrupt !== true || npc?.ousted) continue;
+    const home = npcHomeInstitution(npc);
+    if (!home) continue;
+    const match = securityInstitutions.find((inst) => nameMatches(inst.name, home));
+    if (match && !revealed.has(match.name)) covert.add(match.name);
+  }
+
+  return { covert: [...covert], revealed: [...revealed] };
+}
+
+/**
+ * The patronage drag corrupted security institutions exert on ONSET-side
+ * effective security (covert + revealed both count: a bought watch shields
+ * recruits whether or not the town knows it's bought).
+ *
+ * @param {object} settlement
+ * @returns {{drag: number, covert: string[], revealed: string[]}}
+ */
+export function patronageSecurityDrag(settlement) {
+  const { covert, revealed } = compromisedSecurityInstitutions(settlement);
+  const count = covert.length + revealed.length;
+  return {
+    drag: Math.min(PATRONAGE_TUNING.maxDrag, count * PATRONAGE_TUNING.dragPerInstitution),
+    covert,
+    revealed,
+  };
+}

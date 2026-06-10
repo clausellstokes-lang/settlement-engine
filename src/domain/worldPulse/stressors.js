@@ -1,6 +1,7 @@
 import { stablePart } from './worldState.js';
 import { activeChannelsFrom, REGIONAL_CHANNEL_TYPES } from '../region/index.js';
 import { normalizeSimulationRules } from './simulationRules.js';
+import { counterforceAssessment, synergyAssessment, interpretStressorOrigin } from './stressorDynamics.js';
 
 // The stressor catalog was authored with a looser channel vocabulary than the
 // canonical regional taxonomy (region/graph.js). Map the divergent names onto
@@ -270,10 +271,29 @@ export function normalizeStressor(stressor = {}) {
       : [stressor.originSettlementId].filter(Boolean).map(String),
     residualEffects: Array.isArray(stressor.residualEffects) ? [...stressor.residualEffects] : [...(defaults.residualEffects || [])],
     resolutionRules: stressor.resolutionRules || defaults.resolutionRules || {},
+    // Diagnostic snapshots of the last counterforce / synergy assessments
+    // (explainability surface for the dossier and tests; recomputed every
+    // aging tick).
+    counterforce: stressor.counterforce || null,
+    synergy: stressor.synergy || null,
+    // Birth-time interpretation: which variant of this stressor type the
+    // context produced (foreign_sponsored / internal_conspiracy / ...).
+    // attackerSettlementId / attackerLabel inside stay null until known —
+    // a siege's attacker may be a goblin warband with no settlement at all.
+    originContext: stressor.originContext || null,
+    // Echo bookkeeping: peakSeverity tracks the worst this crisis got (it
+    // sets how loud the echo is); memoryStrength only exists on echoes
+    // (status 'residual') and decays each tick with a ~6-tick half-life.
+    peakSeverity: Math.max(
+      clamp01(stressor.peakSeverity ?? 0),
+      clamp01(stressor.severity ?? 0.45),
+    ),
+    memoryStrength: stressor.memoryStrength == null ? null : clamp01(stressor.memoryStrength),
     status: stressor.status || 'active',
     lifecycleStage: stressor.lifecycleStage || null,
     resolutionChance: stressor.resolutionChance,
     resolutionRoll: stressor.resolutionRoll,
+    resolutionReason: stressor.resolutionReason || null,
     resolvedAt: stressor.resolvedAt || null,
     // Determinism: no wall-clock fallback. Timestamps are null until the
     // orchestrator stamps `now` when the stressor is persisted (applyWorldPulse
@@ -287,23 +307,34 @@ export function normalizeStressor(stressor = {}) {
   };
 }
 
-function resolutionChance(stressor, snapshot) {
+function resolutionChance(stressor, snapshot, assessment = undefined) {
   const policy = STRESSOR_POLICIES[stressor.durationPolicy] || STRESSOR_POLICIES.episodic;
   let chance = policy.baseResolutionChance + Math.max(0, stressor.age - 1) * 0.04;
-  if (stressor.type === 'disease_outbreak') {
-    const affected = (stressor.affectedSettlementIds || [])
-      .map(id => snapshot.byId?.get?.(String(id)))
-      .filter(Boolean);
-    const healing = affected.length
-      ? affected.reduce((sum, item) => sum + (item.causal?.scores?.healing_capacity ?? 50), 0) / affected.length
-      : 50;
-    chance += healing >= 65 ? 0.12 : healing < 35 ? -0.08 : 0;
-  }
+  // Counterforces: settlement strength shifts the recovery hazard both ways.
+  // Generalizes the old hard-coded disease_outbreak healing_capacity check —
+  // every catalog type now names its own strengths (stressorDynamics.js).
+  const cf = assessment === undefined ? counterforceAssessment(stressor, snapshot) : assessment;
+  if (cf) chance += cf.resolutionDelta;
   if (stressor.type === 'market_shock' && stressor.age >= 1) chance += 0.12;
   if (stressor.type === 'betrayal' && stressor.age >= 1) chance += 0.16;
   if (policy.maxAge != null && stressor.age >= policy.maxAge) chance += 0.25;
   if (stressor.durationPolicy === 'structural' && stressor.severity >= 0.5) chance *= 0.35;
   return clamp01(chance);
+}
+
+// The catalog's affectedSystems were authored with a looser vocabulary than
+// causalState.SYSTEM_VARIABLES — faction_stability / law_order / tax_revenue
+// are not real causal variables, so residual conditions carrying them silently
+// no-op'd against the substrate. Map them onto the nearest real variable at
+// emission time (catalog keeps its semantic names).
+const CAUSAL_SYSTEM_ALIASES = Object.freeze({
+  faction_stability: 'faction_power',
+  law_order: 'criminal_opportunity', // lawless interregnum -> opportunists move in
+  tax_revenue: 'trade_connectivity',
+});
+
+function canonicalAffectedSystems(systems = []) {
+  return [...new Set(systems.map(name => CAUSAL_SYSTEM_ALIASES[name] || name))];
 }
 
 function residualOutcome(stressor, tick) {
@@ -334,10 +365,42 @@ function residualOutcome(stressor, tick) {
       status: 'easing',
       duration: { elapsedTicks: 0, expiresAtTicks: 6 },
       triggeredAt: { tick, sourceEventType: 'WORLD_STRESSOR_RESOLVED', sourceEventTargetId: stressor.id },
-      affectedSystems: defaults.affectedSystems || ['labor_capacity', 'public_legitimacy', 'social_trust'],
+      affectedSystems: canonicalAffectedSystems(defaults.affectedSystems || ['labor_capacity', 'public_legitimacy', 'social_trust']),
       causes: [{ source: stressor.id, effect: 'residual_aftereffect', reason: 'The active stressor resolved naturally.' }],
     },
   }));
+}
+
+// Echoes fade on a ~6-tick half-life; below this floor they graduate out of
+// the world state entirely (Phase 5 hands graduates to the chronicle/history).
+const ECHO_HALF_LIFE_TICKS = 6;
+const ECHO_DECAY_FACTOR = Math.pow(0.5, 1 / ECHO_HALF_LIFE_TICKS);
+const ECHO_GRADUATION_FLOOR = 0.1;
+
+function echoOf(resolvedStressor, now) {
+  return normalizeStressor({
+    ...resolvedStressor,
+    // Canonical id (type + origin), even when the live stressor carried a
+    // decorated id (e.g. rebellion births suffix the tick): echoes of the
+    // same crisis at the same origin must coalesce, and a re-ignition must
+    // overwrite the echo via the byId upsert instead of stacking beside it.
+    id: idFor({
+      type: resolvedStressor.type,
+      originSettlementId: resolvedStressor.originSettlementId
+        || (resolvedStressor.affectedSettlementIds || [])[0]
+        || null,
+    }),
+    status: 'residual',
+    lifecycleStage: 'residual',
+    // The echo is as loud as the crisis ended OR half as loud as its worst
+    // moment, whichever is greater — a famine that once peaked at 0.9 is not
+    // forgotten just because it limped out at 0.08.
+    memoryStrength: Math.max(
+      resolvedStressor.severity ?? 0,
+      (resolvedStressor.peakSeverity ?? resolvedStressor.severity ?? 0) * 0.5,
+    ),
+    updatedAt: now || resolvedStressor.updatedAt,
+  });
 }
 
 export function ageRoamingStressors(stressors = [], snapshot, rng, options = {}) {
@@ -345,23 +408,87 @@ export function ageRoamingStressors(stressors = [], snapshot, rng, options = {})
   const active = [];
   const resolved = [];
   const residualOutcomes = [];
+  const graduated = [];
+  // Normalize the whole list up front: synergy assessment needs every
+  // co-located companion (including echoes) visible while aging each one.
+  const normalizedAll = (stressors || []).map(normalizeStressor);
 
-  for (const raw of stressors || []) {
-    const stressor = normalizeStressor(raw);
+  for (const stressor of normalizedAll) {
+    // Echoes — resolved crises still in living memory. No pressure, no
+    // conditions; they fade by half-life, feed the spawn interpreter and
+    // reduced-weight synergies meanwhile, then graduate into history.
+    if (stressor.status === 'residual') {
+      const memoryStrength = clamp01((stressor.memoryStrength ?? 0) * ECHO_DECAY_FACTOR);
+      if (memoryStrength < ECHO_GRADUATION_FLOOR) {
+        graduated.push(normalizeStressor({
+          ...stressor,
+          status: 'dormant',
+          lifecycleStage: 'dormant',
+          memoryStrength,
+          updatedAt: options.now || stressor.updatedAt,
+        }));
+        continue;
+      }
+      active.push(normalizeStressor({
+        ...stressor,
+        age: stressor.age + 1,
+        memoryStrength,
+        updatedAt: options.now || stressor.updatedAt,
+      }));
+      continue;
+    }
     if (!['active', 'emerging', 'peaking', 'easing'].includes(stressor.status) && stressor.lifecycleStage !== 'active') {
       active.push(stressor);
       continue;
     }
+    // Counterforces scale the decay step as well as the resolution roll —
+    // the decay lever is what lets STRUCTURAL stressors actually break:
+    // they are categorically un-resolvable while severity >= 0.25, so a
+    // chance bonus alone would never end a siege.
+    const assessment = counterforceAssessment(stressor, snapshot);
+    // Synergies: co-located companions drag (or block) recovery. They
+    // compose with counterforces multiplicatively on decay, additively on
+    // the resolution chance, with global clamps on the combined result.
+    const synergy = synergyAssessment(stressor, normalizedAll);
+    const combinedDecayMult = Math.max(0.4, Math.min(2.5,
+      (assessment?.decayMultiplier ?? 1) * (synergy?.decayMult ?? 1)));
+    const effectiveDecay = clamp01(stressor.decayRate * combinedDecayMult);
+    // A resolution-blocked stressor holds its ground instead of decaying into
+    // a zombie: a blockade famine cannot drop below 0.25 (or below where it
+    // already was) while the siege stands — the scarcity is the blockade.
+    const blockFloor = synergy?.blocksResolution === true
+      ? Math.min(0.25, stressor.severity)
+      : 0;
     const aged = normalizeStressor({
       ...stressor,
       age: stressor.age + 1,
-      severity: clamp01(stressor.severity - stressor.decayRate),
+      // lifecycleStage is recomputed from the aged severity/age (passing the
+      // stale stage through froze 'emerging'/'peaking' forever).
+      lifecycleStage: null,
+      severity: Math.max(blockFloor, clamp01(stressor.severity - effectiveDecay)),
+      counterforce: assessment
+        ? {
+            score: Math.round(assessment.score * 100) / 100,
+            resolutionDelta: Math.round(assessment.resolutionDelta * 1000) / 1000,
+            decayMultiplier: Math.round(assessment.decayMultiplier * 100) / 100,
+            floorsMet: assessment.floorsMet,
+          }
+        : null,
+      synergy: synergy
+        ? {
+            companions: synergy.companions,
+            decayMult: Math.round(synergy.decayMult * 100) / 100,
+            resolutionDelta: Math.round(synergy.resolutionDelta * 1000) / 1000,
+            blocksResolution: synergy.blocksResolution,
+          }
+        : null,
       updatedAt: options.now || new Date().toISOString(),
     });
-    const chance = resolutionChance(aged, snapshot);
+    const chance = clamp01(resolutionChance(aged, snapshot, assessment) + (synergy?.resolutionDelta ?? 0));
     const roll = rng.random();
     const structuralStillActive = aged.durationPolicy === 'structural' && aged.severity >= 0.25;
-    if (!structuralStillActive && (roll <= chance || aged.severity <= 0.08)) {
+    const blockedBySynergy = synergy?.blocksResolution === true;
+    if (!blockedBySynergy && !structuralStillActive && (roll <= chance || aged.severity <= 0.08)) {
       const done = normalizeStressor({
         ...aged,
         status: 'resolved',
@@ -372,12 +499,15 @@ export function ageRoamingStressors(stressors = [], snapshot, rng, options = {})
       });
       resolved.push(done);
       residualOutcomes.push(...residualOutcome(done, tick));
+      // The crisis is over; its echo begins. Same stable id, so a re-ignition
+      // of the same type at the same origin simply overwrites the echo.
+      active.push(echoOf(done, options.now));
     } else {
       active.push(normalizeStressor({ ...aged, resolutionRoll: roll, resolutionChance: chance }));
     }
   }
 
-  return { stressors: active, resolved, residualOutcomes };
+  return { stressors: active, resolved, residualOutcomes, graduated };
 }
 
 /**
@@ -400,6 +530,19 @@ export function resolveStressorById(stressors = [], stressorId, opts = {}) {
     const stressor = normalizeStressor(raw);
     if (stressor.id !== stressorId) { remaining.push(stressor); continue; }
     found = true;
+    // Directed resolution of an ECHO is a dismissal: the table decided the
+    // memory no longer matters. Drop it — no residuals, no echo-of-an-echo.
+    if (stressor.status === 'residual') {
+      resolved.push(normalizeStressor({
+        ...stressor,
+        status: 'dormant',
+        lifecycleStage: 'dormant',
+        resolvedAt: now || stressor.updatedAt,
+        resolutionReason: reason,
+        updatedAt: now || stressor.updatedAt,
+      }));
+      continue;
+    }
     const done = normalizeStressor({
       ...stressor,
       status: 'resolved',
@@ -410,6 +553,9 @@ export function resolveStressorById(stressors = [], stressorId, opts = {}) {
     });
     resolved.push(done);
     if (emitResidual) residualOutcomes.push(...residualOutcome(done, tick));
+    // Party-broken crises echo too — "the siege the party lifted" is exactly
+    // the kind of recent memory the table keeps talking about.
+    remaining.push(echoOf(done, now));
   }
   return { stressors: remaining, resolved, residualOutcomes, found };
 }
@@ -446,14 +592,23 @@ function stressorTypesForPressure(pressure) {
     .map(([type]) => type);
 }
 
-function candidateForTypeAndPressure(type, pressure, tick) {
+function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
+  const { snapshot = null, echo = null } = extras;
   const defaults = catalogFor(type);
   const targetSaveId = String(pressure.settlementId);
+  // Re-ignition: a warm echo of the same crisis relights at partial strength —
+  // the grudge / the weakened granaries / the unfilled graves are still there.
+  const reignitionBoost = echo ? clamp01(echo.memoryStrength ?? 0) * 0.3 : 0;
+  const severity = clamp01(pressure.score + reignitionBoost);
+  const originContext = snapshot
+    ? interpretStressorOrigin(type, targetSaveId, snapshot, tick)
+    : null;
   const stressor = normalizeStressor({
     type,
     originSettlementId: targetSaveId,
-    severity: pressure.score,
+    severity,
     affectedSettlementIds: [targetSaveId],
+    originContext,
   });
   const major = pressure.score >= 0.78 || ['occupation', 'slave_revolt', 'siege'].includes(type);
   return {
@@ -463,7 +618,7 @@ function candidateForTypeAndPressure(type, pressure, tick) {
     ruleId: `stressor_birth_${type}`,
     ruleFamily: 'stressor',
     targetSaveId,
-    severity: pressure.score,
+    severity,
     probability: Math.min(0.5, Math.max(0.07, pressure.score * 0.34)),
     applyMode: major ? 'proposal' : 'auto',
     headline: `${stressor.label} may emerge`,
@@ -471,6 +626,8 @@ function candidateForTypeAndPressure(type, pressure, tick) {
     reasons: [
       ...pressure.reasons,
       `${defaults.label} birth gate passed at ${pressure.score.toFixed(2)} pressure.`,
+      ...(echo ? [`Re-ignition: the last ${stressor.label.toLowerCase()} is still in living memory (echo ${(echo.memoryStrength ?? 0).toFixed(2)}).`] : []),
+      ...(originContext?.reason ? [originContext.reason] : []),
     ],
     stressor,
     metadata: {
@@ -478,6 +635,7 @@ function candidateForTypeAndPressure(type, pressure, tick) {
       durationPolicy: stressor.durationPolicy,
       spreadChannels: stressor.spreadChannels,
       residualEffects: stressor.residualEffects,
+      ...(originContext ? { originVariant: originContext.variant } : {}),
     },
     conflictTags: [`stressor:${type}:${targetSaveId}`, `settlement:${targetSaveId}:stressor_birth`],
   };
@@ -490,13 +648,64 @@ export function stressorCandidateForPressure(pressure, tick) {
   return candidateForTypeAndPressure(type, pressure, tick);
 }
 
+const INACTIVE_STATUSES = new Set(['resolved', 'dormant', 'residual']);
+
 function existingStressorKeys(stressors = []) {
   const keys = new Set();
   for (const raw of stressors) {
     const stressor = normalizeStressor(raw);
+    // Echoes do NOT block rebirth — a resolved famine in living memory is
+    // exactly what a re-ignited famine overwrites (same stable id).
+    if (INACTIVE_STATUSES.has(stressor.status)) continue;
     for (const id of stressor.affectedSettlementIds || []) keys.add(`${stressor.type}:${id}`);
   }
   return keys;
+}
+
+function echoIndex(stressors = []) {
+  const index = new Map();
+  for (const raw of stressors) {
+    const stressor = normalizeStressor(raw);
+    if (stressor.status !== 'residual') continue;
+    for (const id of stressor.affectedSettlementIds || []) {
+      const key = `${stressor.type}:${id}`;
+      const prev = index.get(key);
+      if (!prev || (stressor.memoryStrength ?? 0) > (prev.memoryStrength ?? 0)) index.set(key, stressor);
+    }
+  }
+  return index;
+}
+
+/**
+ * Name (or rename) the force behind a stressor. The attacker is nullable by
+ * design: a siege may be pressed by a hostile settlement (auto-stamped at
+ * birth) or by a force with no settlement base at all — a goblin warband, a
+ * mercenary company — which only the DM can name.
+ *
+ * @param {any[]} stressors
+ * @param {string} stressorId
+ * @param {{ attackerSettlementId?: string|null, attackerLabel?: string|null }} attacker
+ * @param {{ now?: string }} [opts]
+ */
+export function setStressorAttacker(stressors = [], stressorId, attacker = {}, opts = {}) {
+  const { now = null } = opts;
+  let changed = null;
+  const next = (stressors || []).map(raw => {
+    const stressor = normalizeStressor(raw);
+    if (stressor.id !== stressorId) return stressor;
+    changed = normalizeStressor({
+      ...stressor,
+      originContext: {
+        variant: 'unattributed',
+        ...(stressor.originContext || {}),
+        attackerSettlementId: attacker.attackerSettlementId ?? stressor.originContext?.attackerSettlementId ?? null,
+        attackerLabel: attacker.attackerLabel ?? stressor.originContext?.attackerLabel ?? null,
+      },
+      updatedAt: now || stressor.updatedAt,
+    });
+    return changed;
+  });
+  return { stressors: next, changed };
 }
 
 function spreadTargetsFor(snapshot, stressor) {
@@ -524,13 +733,17 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
   const rules = normalizeSimulationRules(context.simulationRules || snapshot?.worldState?.simulationRules);
   const currentStressors = (snapshot?.worldState?.stressors || []).map(normalizeStressor);
   const existingKeys = existingStressorKeys(currentStressors);
+  const echoes = echoIndex(currentStressors);
   const candidates = [];
 
   for (const pressure of pressures) {
     for (const type of stressorTypesForPressure(pressure)) {
       const targetKey = `${type}:${pressure.settlementId}`;
       if (existingKeys.has(targetKey)) continue;
-      candidates.push(candidateForTypeAndPressure(type, pressure, tick));
+      candidates.push(candidateForTypeAndPressure(type, pressure, tick, {
+        snapshot,
+        echo: echoes.get(targetKey) || null,
+      }));
     }
   }
 

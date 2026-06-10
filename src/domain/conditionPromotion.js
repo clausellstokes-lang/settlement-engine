@@ -29,10 +29,24 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   { re: /plague|disease|pox|fever|outbreak|pestilence/i,        archetype: 'plague' },
   { re: /famine|starv|drought|crop failure|food shortage|blight/i, archetype: 'famine' },
   { re: /siege|besieg|blockad/i,                                archetype: 'war_pressure' },
-  { re: /\bwar\b|warfront|invasion|incursion|hostilit/i,        archetype: 'war_pressure' },
+  // 'wartime' needs its own token: \bwar\b never matches it (no word boundary
+  // before the 't'), so wartime settlements silently skipped promotion.
+  { re: /\bwar\b|wartime|warfront|invasion|incursion|hostilit/i, archetype: 'war_pressure' },
   { re: /occupation|occupied|vassal|tribute|annex/i,            archetype: 'vassal_extraction' },
-  { re: /refugee|migrant|displac|exodus/i,                      archetype: 'regional_migration_pressure' },
-  { re: /rebellion|revolt|uprising|insurrection|mutiny/i,       archetype: 'rebellion' },
+  // 'migration' added: /migrant/ does not match 'mass_migration'.
+  { re: /refugee|migrant|migration|displac|exodus/i,            archetype: 'regional_migration_pressure' },
+  // 'insurgen' added: 'insurgency' matched none of the rebellion tokens.
+  { re: /rebellion|revolt|uprising|insurrection|insurgen|mutiny/i, archetype: 'rebellion' },
+  // The previously-unpromoted generation stress types. Without these rules a
+  // settlement generated 'recently_betrayed' (or indebted, infiltrated, ...)
+  // carried the crisis as pure narrative — nothing fed the causal substrate.
+  { re: /betray/i,                                              archetype: 'faction_challenge' },
+  { re: /indebted|debt spiral|debt crisis/i,                    archetype: 'regional_tax_revenue_disruption' },
+  { re: /infiltrat/i,                                           archetype: 'regional_criminal_pressure' },
+  { re: /fractur/i,                                             archetype: 'regional_authority_instability' },
+  { re: /succession/i,                                          archetype: 'dominant_npc_removed' },
+  { re: /monster|raider/i,                                      archetype: 'war_pressure' },
+  { re: /religious conversion|religious_conversion|schism|heres/i, archetype: 'regional_religious_pressure' },
 ]);
 
 /** @returns {string|null} the condition archetype this stressor promotes to, or null. */

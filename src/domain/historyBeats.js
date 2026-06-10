@@ -209,10 +209,13 @@ function deriveRecentDisruption(settlement) {
   // severity ≥ major. Falls back to legacyAnnotations[0] if no recent
   // major events. Falls back to null if neither is present.
   const events = settlement?.history?.historicalEvents || [];
+  // Number.isFinite, not truthiness: campaign-era events carry yearsAgo 0
+  // (they ARE the recent disruption) and `0 || Infinity` silently excluded
+  // every one of them.
   const recent = events
     .filter(e => severityScore(e.severity) >= SEVERITY_RANK.major)
-    .filter(e => (e.yearsAgo || Infinity) <= 30)
-    .sort((a, b) => (a.yearsAgo || 0) - (b.yearsAgo || 0));
+    .filter(e => (Number.isFinite(e.yearsAgo) ? e.yearsAgo : Infinity) <= 30)
+    .sort((a, b) => (Number.isFinite(a.yearsAgo) ? a.yearsAgo : 0) - (Number.isFinite(b.yearsAgo) ? b.yearsAgo : 0));
 
   if (recent.length > 0) {
     const top = recent[0];

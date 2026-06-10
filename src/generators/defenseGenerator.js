@@ -226,6 +226,9 @@ const computeDefenseScores = (
   // ── Economic resilience score ───────────────────────────────────────────────
   // Primary driver: food storage months (from foodSecurity system)
   // Secondary: medical, market access, financial capacity
+  // Storage/institutions/routes provide CAPACITY; econOutput multiplicatively
+  // gates the ability to mobilize it (see econHealthMult below) — a destitute
+  // town does not get "Strong economic base" for owning a granary building.
   const foodSec = config._foodSecurity;
   const storageMonths = foodSec?.storageMonths ?? (inst.hasGranary ? 4 : 1);
   // Storage → score: 0mo=0, 1mo=10, 3mo=25, 6mo=45, 12mo=70 (diminishing returns)
@@ -241,6 +244,16 @@ const computeDefenseScores = (
   // Alchemy extends granary effective capacity (preservation, food extension)
   if (hasAlchemy && inst.hasGranary) economic += 8;
   economic = Math.min(100, economic); // re-cap after alchemy bonus
+  // Economic-health gate: a struggling economy cannot fund crisis logistics.
+  // The additive stack above is almost entirely wealth-independent (storage
+  // months + flat institution/route bonuses), so a destitute famine port
+  // could still score ~70 "Strong economic base". Identity (×1.0) at
+  // econOutput >= 50 — healthy economies are bit-for-bit unchanged; linear
+  // down to ×0.45 at 0 (physical grain in a granary retains value even when
+  // the treasury is empty — never zero it). Applied BEFORE stress penalties
+  // so their tuned absolute magnitudes keep their meaning.
+  const econHealthMult = Math.min(1, 0.45 + (econOutput / 50) * 0.55);
+  economic = Math.round(economic * econHealthMult);
 
   // ── Magical defense score ───────────────────────────────────────────────────
   // Driven by computeEffectiveMagicPresence — same source of truth as Daily Life and Power tabs.
@@ -268,7 +281,16 @@ const computeDefenseScores = (
     if (hasDivine)      magical = Math.min(100, magical + Math.round(relPri * 0.12)); // divine healing, morale
     if (hasDruid)       magical = Math.min(100, magical + 6);  // nature warding, terrain knowledge
     if (hasArcaneGuild) magical = Math.min(100, magical + 8);  // organized wards, counterspells
-    magical = Math.round(magical);
+    // Wire the (previously dead) magInfluence parameter: it is the slider
+    // AFTER economy/crime degradation (priorityHelpers getInstFlags), so a
+    // destitute, crime-ridden city's underfunded and compromised practitioners
+    // drag arcane defense down — same gate shape as the economic dimension.
+    if (magPri > 0) {
+      const magHealthMult = Math.min(1, Math.max(0.45, magInfluence / Math.max(1, magPri)));
+      magical = Math.round(magical * magHealthMult);
+    } else {
+      magical = Math.round(magical);
+    }
   }
 
   // ── Stress penalties ────────────────────────────────────────────────────────
@@ -296,10 +318,14 @@ const computeDefenseScores = (
     let econPenalty  = 20;
     let milPenalty   = 10;
     let intPenalty   = 20;
+    // Starving militias patrol less: famine previously left MONSTER defense
+    // untouched — a qualitative miss (the watch on the bandit road eats too).
+    let monsterPenalty = 8;
     // Druid: highest food substitution (65% recovery)
     if (hasDruid && magPri >= 30) {
       econPenalty = Math.round(econPenalty * 0.4); // -20 → -8
       milPenalty  = Math.round(milPenalty  * 0.5); // -10 → -5
+      monsterPenalty = Math.round(monsterPenalty * 0.5); // wardens keep patrols fed
     }
     // Divine: Create Food and Water, Bless crops
     if (hasDivine) {
@@ -315,6 +341,7 @@ const computeDefenseScores = (
     economic = Math.max(0, economic - econPenalty);
     military = Math.max(0, military - milPenalty);
     internal = Math.max(0, internal - intPenalty);
+    monster  = Math.max(0, monster - monsterPenalty);
   }
 
   if (hasStress('occupied')) {

@@ -20,6 +20,7 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   tradeFlowsEnabled: true,
   resourceDriftEnabled: true,
   tierDriftEnabled: true,
+  institutionLifecycleEnabled: true,
   majorChangesRequireProposal: true,
   migrationMode: 'roll',
 });
@@ -79,6 +80,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'tradeFlowsEnabled',
   'resourceDriftEnabled',
   'tierDriftEnabled',
+  'institutionLifecycleEnabled',
   'majorChangesRequireProposal',
 ]);
 

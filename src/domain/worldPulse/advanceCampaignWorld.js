@@ -1,13 +1,17 @@
 import { createPRNG } from '../../generators/prng.js';
 import { advanceTime } from '../timeProgression.js';
+import { withActiveCondition } from '../activeConditions.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
 import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor } from './worldState.js';
 import { ageRoamingStressors } from './stressors.js';
+import { recordWarResolutionIncidents } from './stressorDynamics.js';
+import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
+import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
-import { applyCorruptionImpairments } from './corruptionImpair.js';
+import { applyCorruptionImpairments, advanceInstitutionReform } from './corruptionImpair.js';
 import { advanceFactionCapture, settlementCaptureState } from './factionCapture.js';
 import { computeGuildStrengthBy, applyGuildToSettlement } from './thievesGuild.js';
 import { replaceOustedNpcs } from './successorNpc.js';
@@ -18,6 +22,7 @@ import { synthesizeRealmEvents } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
+import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 
 function clone(value) {
@@ -59,6 +64,7 @@ function compactOutcomeForHistory(outcome = {}) {
     populationDeltas: clone(outcome.populationDeltas || null),
     tierChange: clone(outcome.tierChange || null),
     resourcePatch: clone(outcome.resourcePatch || null),
+    institutionPatch: clone(outcome.institutionPatch || null),
     proposalPayload: clone(outcome.proposalPayload || null),
     npcPatch: compactNpcPatch(outcome.npcPatch),
     relationshipPatch: clone(outcome.relationshipPatch || null),
@@ -181,8 +187,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
 
   const agedStressors = simulationRules.stressorsEnabled
     ? ageRoamingStressors(worldState.stressors, snapshot, rng.fork('stressors'), { tick: worldState.tick, now })
-    : { stressors: worldState.stressors || [], resolved: [], residualOutcomes: [] };
+    : { stressors: worldState.stressors || [], resolved: [], residualOutcomes: [], graduated: [] };
   worldState = { ...worldState, stressors: agedStressors.stressors };
+  // The mirror of the wind-down handshake: a sponsored war-stressor resolving
+  // writes an incident back onto the relationship edge, feeding the
+  // relationship memory layer.
+  if (agedStressors.resolved.length) {
+    worldState = recordWarResolutionIncidents(worldState, snapshot.regionalGraph, agedStressors.resolved, worldState.tick);
+  }
 
   const localSettlements = new Map();
   const settlementTickStates = { ...(worldState.settlementTickStates || {}) };
@@ -190,21 +202,72 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   for (const item of snapshot.settlements) {
     const previousTickState = settlementTickStates[item.id] || null;
     const result = advanceTime(item.settlement, { interval: tickInterval, previousTickState });
-    localSettlements.set(String(item.id), result.newSettlement);
-    settlementTickStates[item.id] = result.nextTickState;
+    // The granary moves: surplus fills it, deficits draw it down (rationed),
+    // mild hardship tithes into it, an active siege/occupation cuts the
+    // import share of need, and a campaign-emergent famine cuts production —
+    // blockades and crop failures both literally eat the stores.
+    const stocked = advanceFoodStockpile(result.newSettlement, {
+      interval: tickInterval,
+      tick: worldState.tick,
+      blockade: blockadeFor(worldState.stressors, item.id),
+      famine: famineFor(worldState.stressors, item.id),
+    });
+    localSettlements.set(String(item.id), stocked.settlement);
+    // Merge rather than replace: advanceTime only returns { clockStages }, but
+    // this entry also carries cross-tick drift streaks (tierDrift,
+    // economyDrift) written by later evaluators — a wholesale assignment wiped
+    // them every pulse, so streak-gated candidates could never fire.
+    settlementTickStates[item.id] = { ...(previousTickState || {}), ...result.nextTickState };
     timeTicks.push({ saveId: item.id, tick: result.tick });
   }
+  // Prune tick-state for settlements no longer in the campaign: stale entries
+  // would serialize forever, and a REUSED save id must not inherit a dead
+  // settlement's drift streaks. Deterministic — derived purely from the snapshot.
+  const liveTickStateIds = new Set(snapshot.settlements.map(item => String(item.id)));
+  for (const key of Object.keys(settlementTickStates)) {
+    if (!liveTickStateIds.has(key)) delete settlementTickStates[key];
+  }
   worldState = { ...worldState, settlementTickStates };
+  // Echoes that faded below living memory this tick graduate into each
+  // affected settlement's PERMANENT history (the record historyBeats reads) —
+  // campaign events finally become "the defining crisis" / "recent disruption".
+  if (agedStressors.graduated?.length) {
+    recordGraduationsIntoHistory(localSettlements, agedStressors.graduated, worldState.tick);
+  }
 
   // §corruption Phase 1b-ii — mirror tick-evolved corruption back onto each
   // settlement's NPCs (so the dossier reflects corruption gained/shed during
   // ticks) and apply the scandal impairment from any exposures this tick to the
   // tied criminal + home institution/faction. Flows through settlementMap →
   // settlementUpdates → persistence. (Replacement NPC lands in 1b-ii-c.)
+  const reformEvents = [];
   for (const sid of [...localSettlements.keys()]) {
     let s = mirrorCorruptionOntoSettlement(localSettlements.get(sid), worldState.npcStates, String(sid));
     const exps = (corruption.exposures || []).filter((e) => String(e.settlementId) === String(sid));
     if (exps.length) s = applyCorruptionImpairments(s, exps, { now });
+    // §corruption duality — organic reform: a corruption-impaired institution
+    // whose corrupt insiders are gone gets a security-scaled chance to clean
+    // house, lifting the patronage drag and the proximity penalty. Runs
+    // BEFORE this tick's impairments would matter (next tick reads them).
+    const reform = advanceInstitutionReform(s, rng.fork(`reform:${sid}:${worldState.tick}`));
+    if (reform.reformed.length) {
+      s = reform.settlement;
+      for (const r of reform.reformed) {
+        reformEvents.push({ settlementId: String(sid), name: r.name, kind: 'institution_reformed', criminalInstitution: null, homeInstitution: r.name });
+      }
+    }
+    // §corruption duality — an OUSTING is a public scandal: it enters the
+    // causal loop as a corruption_exposed condition (ruling_authority and
+    // legitimacy take the hit), not just a status annotation.
+    const oustedExps = exps.filter((e) => e.kind === 'ousted');
+    if (oustedExps.length) {
+      s = withActiveCondition(s, {
+        archetype: 'corruption_exposed',
+        severity: Math.min(0.8, 0.4 + oustedExps.length * 0.1),
+        triggeredAt: { tick: worldState.tick, sourceEventType: 'ORGANIC_CORRUPTION_EXPOSURE', sourceEventTargetId: oustedExps[0].npcId },
+        causes: oustedExps.map((e) => ({ source: e.npcId, effect: 'corruption_scandal', reason: `${e.name} was publicly ousted for corruption.` })),
+      });
+    }
     // §corruption Phase 2 — roll the worst faction capture up to the settlement's
     // criminalCaptureState (which npcStructure + the dossier already read).
     const cap = settlementCaptureState(worldState.factionStates, sid);
@@ -247,6 +310,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     simulationRules,
   });
   worldState = tierResource.worldState;
+  // Institution lifecycle — economic growth/decline of supply-chain
+  // institutions, gated on the economyDrift streaks tracked alongside
+  // tierDrift. Candidates flow through rollCandidates like tier/resource drift.
+  const instLifecycle = evaluateInstitutionLifecycle(worldState, postTimeSnapshot, pIndex, {
+    tick: worldState.tick,
+    interval: tickInterval,
+    simulationRules,
+  });
+  worldState = instLifecycle.worldState;
   const structuralCandidates = evaluatePopulationDynamics(postTimeSnapshot, pIndex, {
     tick: worldState.tick,
     interval: tickInterval,
@@ -259,7 +331,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     interval: tickInterval,
     simulationRules,
   });
-  const stochasticCandidates = [...candidates, ...tierResource.candidates];
+  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates];
   const { selected, rollExplanations } = rollCandidates(
     [...agedStressors.residualOutcomes, ...stochasticCandidates],
     rng.fork('candidate-rolls'),
@@ -306,7 +378,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     committed: commit,
     createdAt: now,
     calendar: memoryState.calendar,
-    candidateCount: candidates.length + tierResource.candidates.length + structuralCandidates.length,
+    candidateCount: candidates.length + tierResource.candidates.length + instLifecycle.candidates.length + structuralCandidates.length,
     selectedCount: selectedForApply.length,
     autoAppliedCount: applied.autoApplied.length,
     proposalCount: applied.proposals.length,
@@ -319,9 +391,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       resolutionChance: stressor.resolutionChance,
       resolutionRoll: stressor.resolutionRoll,
     })),
+    graduatedStressors: (agedStressors.graduated || []).map(stressor => ({
+      id: stressor.id,
+      type: stressor.type,
+      label: stressor.label,
+    })),
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     timeTicks: timeTicks.map(t => ({ saveId: t.saveId, summary: t.tick.summary })),
-    corruptionEvents: (corruption.exposures || []).slice(0, 24).map(e => ({
+    corruptionEvents: [...(corruption.exposures || []), ...reformEvents].slice(0, 24).map(e => ({
       settlementId: e.settlementId, name: e.name, kind: e.kind,
       criminalInstitution: e.criminalInstitution, homeInstitution: e.homeInstitution,
     })),
@@ -330,9 +407,30 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     })),
   };
   // Realm-scope arcs: promote stressors shared across many settlements into
-  // named realm-wide Wizard News ("The Great Hunger", "The War").
-  const realmEntries = synthesizeRealmEvents({ worldState: memoryState, tick: worldState.tick, now });
-  const wizardNews = realmEntries.length ? appendWizardNewsEntries(applied.wizardNews, realmEntries) : applied.wizardNews;
+  // named realm-wide Wizard News ("The Great Hunger", "The War"), plus the
+  // aftermath record — resolutions ("X has passed") and echo graduations
+  // ("X passes into history") both land in the chronicle feed.
+  // Arc entries (realm + compound) re-derive every tick while the condition
+  // holds; throttle re-emission so a 30-tick famine arc doesn't flood the
+  // capped feed with 30 near-identical headlines. Re-emit when membership
+  // changes or after the cooldown lapses (keeps long arcs visible).
+  const ARC_REEMIT_COOLDOWN_TICKS = 6;
+  const isFreshArcEntry = (entry) => {
+    if (!['realm', 'compound'].includes(entry.kind)) return true;
+    const recent = (applied.wizardNews?.entries || []).slice(-80);
+    return !recent.some(e =>
+      e.impactKind === entry.impactKind
+      && JSON.stringify((e.settlementIds || []).slice().sort()) === JSON.stringify((entry.settlementIds || []).slice().sort())
+      && worldState.tick - (e.tick ?? -Infinity) < ARC_REEMIT_COOLDOWN_TICKS);
+  };
+  const realmEntries = synthesizeRealmEvents({ worldState: memoryState, tick: worldState.tick, now })
+    .filter(isFreshArcEntry);
+  const aftermathEntries = [
+    ...aftermathNewsEntries(agedStressors.resolved, worldState.tick, now),
+    ...graduationNewsEntries(agedStressors.graduated || [], worldState.tick, now),
+  ];
+  const newsToAppend = [...aftermathEntries, ...realmEntries];
+  const wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend) : applied.wizardNews;
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
 
   return {
@@ -347,7 +445,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       ...update,
       settlement: clone(update.settlement),
     })),
-    candidates: [...structuralCandidates, ...candidates, ...tierResource.candidates],
+    candidates: [...structuralCandidates, ...candidates, ...tierResource.candidates, ...instLifecycle.candidates],
     selected: selectedForApply,
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     autoApplied: applied.autoApplied,

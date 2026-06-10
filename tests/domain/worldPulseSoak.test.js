@@ -6,6 +6,14 @@ import { deriveAllActiveConditions } from '../../src/domain/activeConditions.js'
 import { foodLedger } from '../../src/domain/foodLedger.js';
 import { healingLedger } from '../../src/domain/healingLedger.js';
 import { npcCorruptibleFlaw, readCorruptionClimate } from '../../src/domain/corruption.js';
+import { deriveCausalState } from '../../src/domain/causalState.js';
+import {
+  economyHealthScore,
+  classifyEconomyDirection,
+  detectInstitutionGaps,
+  isClosableInstitution,
+} from '../../src/domain/worldPulse/institutionLifecycle.js';
+import { catalogEntryByName } from '../../src/domain/worldPulse/tierResourceDynamics.js';
 
 // A long-horizon "soak" test — the feel/balance analog of the generator's
 // distribution test. We advance a small region many ticks and assert the world
@@ -335,8 +343,17 @@ describe('world pulse — long-horizon soak / balance', () => {
           ...sv.settlement.institutions,
           { id: `guild_${sv.id}`, name: "Thieves' Guild", category: 'criminal' },
           { id: `market_${sv.id}`, name: 'Market square' },
+          // A security institution + a watch-homed NPC: exercises the
+          // corruption-duality loop (patronage onset drag, raw-security
+          // exposure, proximity after an oust impairs the watch) under the
+          // same 40-tick damping guard.
+          { id: `watch_${sv.id}`, name: 'Town Watch' },
         ],
-        npcs: sv.settlement.npcs.map(n => ({ ...n, flaw: 'greedy' })),
+        npcs: sv.settlement.npcs.map((n, i) => ({
+          ...n,
+          flaw: 'greedy',
+          ...(i === 0 ? { factionAffiliation: 'Town Watch' } : {}),
+        })),
       },
     });
     let saves = ids.map((id, i) => withUnderworld(save(id, `Town-${id.toUpperCase()}`, i + 1)));
@@ -424,5 +441,267 @@ describe('world pulse — long-horizon soak / balance', () => {
     const corruptCount = allNpcs.filter(n => n.corrupt === true).length;
     expect(allNpcs.length).toBeGreaterThan(0);
     expect(corruptCount).toBeLessThan(allNpcs.length); // not total corruption
+  });
+
+  // Institution-lifecycle GROWTH guard. The baseline fixtures (institutions: [],
+  // neutral causal scores) keep the lifecycle gate shut, so this case decorates
+  // every town into a verifiably booming economy with a known missing
+  // supply-chain step (smithy + iron deposits, no mine) and asserts the loop
+  // both RAN (anti-vacuity: at least one institution was built) and stayed
+  // BOUNDED (no settlement sprawls without limit).
+  test('40 ticks of stable prosperity grows missing supply-chain institutions without sprawl', () => {
+    const ids = ['a', 'b', 'c', 'd', 'e'];
+    const withBoomEconomy = (sv) => ({
+      ...sv,
+      settlement: {
+        ...sv.settlement,
+        population: 4000,
+        config: { ...sv.settlement.config, tradeRouteAccess: 'crossroads', priorityEconomy: 60, nearbyResources: ['iron_deposits'] },
+        institutions: [
+          'Market square', 'Weekly market', 'Blacksmiths (3-10)', 'Town granary', 'Craft guilds (5-15)',
+          'Town watch', 'Town hall', 'Mill', 'Farmland', 'Parish church', 'Carpenters (5-15)', 'Bakehouse',
+          'Tavern', 'Inn', 'Stables', 'Warehouse district',
+        ].map(name => ({ name, category: 'Civic' })),
+        economicState: {
+          ...sv.settlement.economicState,
+          prosperity: 'Prosperous',
+          primaryExports: ['Quality tools and weapons', 'Grain surplus'],
+          primaryImports: [],
+          foodSecurity: {
+            dailyNeed: 4200, dailyProduction: 6800, foodRatio: 1.62,
+            deficitPct: 0, surplusPct: 45, storageMonths: 6,
+            importDependency: 0.05, magicSupplement: 0, resilienceScore: 82,
+          },
+          activeChains: [
+            { needKey: 'food_security', chainId: 'grain', label: 'Grain & Bread', status: 'running', processingInstitutions: ['Mill'], outputs: ['Baked goods', 'Grain surplus'], exportable: true, upstreamChains: [] },
+            { needKey: 'food_security', chainId: 'livestock', label: 'Livestock', status: 'operational', processingInstitutions: ['Farmland'], outputs: ['Meat'], exportable: true, upstreamChains: [] },
+            { needKey: 'food_security', chainId: 'fish', label: 'Fish & Waterways', status: 'running', processingInstitutions: ['Market square'], outputs: ['Preserved fish'], exportable: true, upstreamChains: [] },
+          ],
+        },
+        powerStructure: { ...sv.settlement.powerStructure, publicLegitimacy: { score: 74, label: 'Approved' } },
+      },
+    });
+    let saves = ids.map((id, i) => withBoomEconomy(save(id, `Boom-${id.toUpperCase()}`, i + 1)));
+
+    // t0 preconditions through the engine's OWN functions (the anti-vacuity
+    // lesson from the corruption guard): every town must classify as
+    // 'prosperous' AND carry a detectable supply-chain gap, or the case is
+    // silently asserting nothing.
+    for (const s of saves) {
+      const health = economyHealthScore(deriveCausalState(s.settlement).scores);
+      expect(classifyEconomyDirection(health)).toBe('prosperous');
+      const gaps = detectInstitutionGaps(s.settlement);
+      expect(gaps.length).toBeGreaterThan(0);
+      expect(gaps[0].name.toLowerCase()).toContain('mine'); // the smithy/ore/no-mine gap
+    }
+
+    let campaign = {
+      id: 'soak-growth',
+      name: 'Boom Region',
+      settlementIds: ids,
+      worldState: { rngSeed: 'soak-growth-seed', tick: 0, stressors: [] },
+      regionalGraph: ensureRegionalGraph({
+        channels: [
+          { type: 'trade_dependency', from: 'a', to: 'b', status: 'confirmed' },
+          { type: 'trade_route', from: 'b', to: 'c', status: 'confirmed' },
+          { type: 'military_protection', from: 'c', to: 'd', status: 'confirmed' },
+          { type: 'political_authority', from: 'a', to: 'e', status: 'confirmed' },
+        ],
+      }),
+      wizardNews: { currentTick: 0, entries: [] },
+    };
+
+    const TICKS = 40;
+    const startCounts = new Map(saves.map(s => [s.id, s.settlement.institutions.length]));
+    let maxStressors = 0;
+    let maxConditionsAnySettlement = 0;
+    let totalAutoApplied = 0;
+    const everBuilt = new Set(); // `${saveId}:${name}` for every lifecycle-built institution
+
+    for (let i = 0; i < TICKS; i++) {
+      const result = advanceCampaignWorld({
+        campaign,
+        saves,
+        interval: 'one_month',
+        now: `2026-05-01T00:00:${String(i).padStart(2, '0')}.000Z`,
+      });
+      expect(result).not.toBeNull();
+
+      campaign = {
+        ...campaign,
+        worldState: result.worldState,
+        regionalGraph: result.regionalGraph,
+        wizardNews: result.wizardNews,
+      };
+      saves = saves.map(s => {
+        const update = result.settlementUpdates.find(u => String(u.saveId) === String(s.id));
+        return update ? { ...s, settlement: update.settlement } : s;
+      });
+
+      totalAutoApplied += result.autoApplied.length;
+      maxStressors = Math.max(maxStressors, (result.worldState.stressors || []).length);
+      for (const s of saves) {
+        maxConditionsAnySettlement = Math.max(maxConditionsAnySettlement, deriveAllActiveConditions(s.settlement).length);
+        for (const inst of s.settlement.institutions || []) {
+          if (inst._worldPulseEconomyBuilt && inst.status === 'active') everBuilt.add(`${s.id}:${inst.name}`);
+        }
+      }
+    }
+
+    // Shared world bounds — growth must not destabilise the soak invariants.
+    expect(campaign.worldState.tick).toBe(TICKS);
+    expect(totalAutoApplied).toBeGreaterThan(0);
+    expect(maxStressors).toBeLessThanOrEqual(40);
+    expect(maxConditionsAnySettlement).toBeLessThanOrEqual(30);
+    expect(campaign.worldState.pulseHistory.length).toBeLessThanOrEqual(80);
+
+    // Probative: the lifecycle actually built something across the run.
+    expect(everBuilt.size).toBeGreaterThan(0);
+
+    // Every built institution must carry an exact catalog name (all economic
+    // joins are name-keyed) and never be a criminal-economy step.
+    for (const key of everBuilt) {
+      const name = key.split(':').slice(1).join(':');
+      expect(catalogEntryByName(name)).not.toBeNull();
+      expect(/thieves|smuggl|black market|gang|fence/i.test(name)).toBe(false);
+    }
+
+    // The damping guard itself: growth saturates. No settlement may sprawl
+    // beyond a plausible band over 40 prosperous months.
+    for (const s of saves) {
+      const active = (s.settlement.institutions || []).filter(inst => inst.status !== 'removed' && !inst._worldPulseInactive);
+      expect(active.length).toBeLessThanOrEqual((startCounts.get(s.id) || 0) + 8);
+    }
+  });
+
+  // Institution-lifecycle CLOSURE guard. Decorates every town into a verifiably
+  // distressed economy with a roster of closable institutions (one impaired —
+  // it must be squeezed out first) plus a required granary that must SURVIVE.
+  // Asserts the loop ran (at least one closure), closures stay uncommon, and
+  // decline never hollows a settlement out (no closure cascade).
+  test('40 ticks of stable decline closes low-necessity institutions rarely and never the required ones', () => {
+    const ids = ['a', 'b', 'c', 'd', 'e'];
+    const withBustEconomy = (sv) => ({
+      ...sv,
+      settlement: {
+        ...sv.settlement,
+        population: 1500,
+        config: { ...sv.settlement.config, tradeRouteAccess: 'isolated', priorityEconomy: 10 },
+        institutions: [
+          { name: 'Town granary', category: 'Storage', required: true },
+          { name: 'Bathhouse', category: 'Services', impairments: [{ type: 'capacity', severity: 0.6, causeEventId: 'soak:seed' }] },
+          { name: 'Gambling den', category: 'Entertainment' },
+          { name: 'Shrine', category: 'Religious' },
+        ],
+        economicState: {
+          ...sv.settlement.economicState,
+          prosperity: 'Struggling',
+          primaryExports: [],
+          primaryImports: ['Bulk grain and foodstuffs', 'Iron ore'],
+          foodSecurity: {
+            dailyNeed: 4200, dailyProduction: 2100, foodRatio: 0.5,
+            deficitPct: 50, surplusPct: 0, storageMonths: 1,
+            importDependency: 0.6, magicSupplement: 0, resilienceScore: 22,
+          },
+        },
+        defenseProfile: { scores: { military: 14, monster: 20, internal: 18, economic: 12, magical: 5 }, readinessScore: 14 },
+        powerStructure: { ...sv.settlement.powerStructure, publicLegitimacy: { score: 24, label: 'Legitimacy Crisis' } },
+      },
+    });
+    let saves = ids.map((id, i) => withBustEconomy(save(id, `Bust-${id.toUpperCase()}`, i + 1)));
+
+    // t0 preconditions via the engine's own functions: every town classifies
+    // as 'declining' and has at least one closable institution, while the
+    // granary is correctly recognised as never-closable.
+    for (const s of saves) {
+      const health = economyHealthScore(deriveCausalState(s.settlement).scores);
+      expect(classifyEconomyDirection(health)).toBe('declining');
+      const closable = s.settlement.institutions.filter(isClosableInstitution);
+      expect(closable.length).toBeGreaterThan(0);
+      expect(isClosableInstitution(s.settlement.institutions[0])).toBe(false); // the required granary
+    }
+
+    let campaign = {
+      id: 'soak-closure',
+      name: 'Bust Region',
+      settlementIds: ids,
+      worldState: { rngSeed: 'soak-closure-seed', tick: 0, stressors: [] },
+      regionalGraph: ensureRegionalGraph({
+        channels: [
+          { type: 'trade_dependency', from: 'a', to: 'b', status: 'confirmed' },
+          { type: 'trade_route', from: 'b', to: 'c', status: 'confirmed' },
+          { type: 'military_protection', from: 'c', to: 'd', status: 'confirmed' },
+          { type: 'political_authority', from: 'a', to: 'e', status: 'confirmed' },
+        ],
+      }),
+      wizardNews: { currentTick: 0, entries: [] },
+    };
+
+    const TICKS = 40;
+    let maxStressors = 0;
+    let maxConditionsAnySettlement = 0;
+    let totalAutoApplied = 0;
+    const everClosed = new Set(); // `${saveId}:${name}` for every lifecycle closure
+
+    for (let i = 0; i < TICKS; i++) {
+      const result = advanceCampaignWorld({
+        campaign,
+        saves,
+        interval: 'one_month',
+        now: `2026-06-01T00:00:${String(i).padStart(2, '0')}.000Z`,
+      });
+      expect(result).not.toBeNull();
+
+      campaign = {
+        ...campaign,
+        worldState: result.worldState,
+        regionalGraph: result.regionalGraph,
+        wizardNews: result.wizardNews,
+      };
+      saves = saves.map(s => {
+        const update = result.settlementUpdates.find(u => String(u.saveId) === String(s.id));
+        return update ? { ...s, settlement: update.settlement } : s;
+      });
+
+      totalAutoApplied += result.autoApplied.length;
+      maxStressors = Math.max(maxStressors, (result.worldState.stressors || []).length);
+      for (const s of saves) {
+        maxConditionsAnySettlement = Math.max(maxConditionsAnySettlement, deriveAllActiveConditions(s.settlement).length);
+        for (const inst of s.settlement.institutions || []) {
+          if (inst._worldPulseEconomyClosed) everClosed.add(`${s.id}:${inst.name}`);
+        }
+      }
+    }
+
+    // Shared world bounds.
+    expect(campaign.worldState.tick).toBe(TICKS);
+    expect(totalAutoApplied).toBeGreaterThan(0);
+    expect(maxStressors).toBeLessThanOrEqual(40);
+    expect(maxConditionsAnySettlement).toBeLessThanOrEqual(30);
+    expect(campaign.worldState.pulseHistory.length).toBeLessThanOrEqual(80);
+
+    // Probative: at least one closure actually happened — without it the
+    // damping assertions below are vacuous.
+    expect(everClosed.size).toBeGreaterThan(0);
+
+    // Plausible but UNCOMMON: across 5 towns × 40 distressed months the
+    // closures stay a trickle, not a cascade.
+    expect(everClosed.size).toBeLessThanOrEqual(10);
+
+    for (const s of saves) {
+      const insts = s.settlement.institutions || [];
+      // The required granary survives every decline, in every settlement.
+      const granary = insts.find(inst => inst.name === 'Town granary');
+      expect(granary).toBeTruthy();
+      expect(granary.status === 'remnant' || granary.status === 'removed').toBe(false);
+      expect(granary._worldPulseEconomyClosed).toBeUndefined();
+      // No hollow-out: something beyond the granary is still standing.
+      const active = insts.filter(inst => inst.status !== 'removed' && !inst._worldPulseInactive);
+      expect(active.length).toBeGreaterThanOrEqual(2);
+      // Necessity ordering: any town that lost institutions lost the impaired
+      // zero-contribution Bathhouse first — it is always the most vulnerable.
+      const closedHere = [...everClosed].filter(key => key.startsWith(`${s.id}:`));
+      if (closedHere.length) expect(closedHere).toContain(`${s.id}:Bathhouse`);
+    }
   });
 });

@@ -175,6 +175,88 @@ function rollIsDeterministic(roll = {}) {
   return !!roll.conflictResolution?.deterministic || (roll.probability >= 1 && roll.roll === 0);
 }
 
+// ── Live stressors & echoes ─────────────────────────────────────────────────
+// worldState.stressors carries both ACTIVE crises and residual ECHOES
+// (resolved-but-remembered). The cards surface the new dynamics: why a crisis
+// is resolving fast or slow (counterforce), what it's entangled with
+// (synergies), and who is behind it (origin variant / attacker — nullable by
+// design until the DM names the force).
+
+const ACTIVE_UI_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
+
+function stressorDetails(stressor = {}) {
+  const details = [human(stressor.lifecycleStage || 'active'), human(stressor.durationPolicy)];
+  const cf = stressor.counterforce;
+  if (cf && Number.isFinite(cf.score)) {
+    const trend = cf.score > 0.55 ? 'recovering fast' : cf.score < 0.45 ? 'wallowing' : 'holding';
+    details.push(`resilience ${percent(cf.score)} — ${trend}${cf.floorsMet === false ? ' (a pillar is missing)' : ''}`);
+  }
+  if (stressor.synergy?.companions?.length) {
+    details.push(`entangled with ${stressor.synergy.companions.slice(0, 2).map(human).join(', ')}`);
+  }
+  if (stressor.synergy?.blocksResolution) details.push('cannot lift while blocked');
+  if (stressor.originContext?.variant) details.push(human(stressor.originContext.variant));
+  return unique(details).slice(0, 5);
+}
+
+const WAR_SHAPED_TYPES = new Set(['siege', 'wartime', 'occupation', 'monster_raider_pressure']);
+
+function stressorSummary(stressor = {}) {
+  const parts = [];
+  if (stressor.originContext?.reason) parts.push(stressor.originContext.reason);
+  const hooks = stressor.originContext?.hooks || [];
+  if (hooks.length) parts.push(`Hooks: ${hooks.slice(0, 2).join(' • ')}`);
+  return parts.join(' — ');
+}
+
+// Inline affordance for the nullable-attacker design: a war-shaped stressor
+// with no named force gets a one-line input so the DM can attribute it to a
+// settlement-less force ("The Red Fang warband") right from the card.
+function NameAttackerControl({ stressor, onName, busy }) {
+  const [value, setValue] = useState('');
+  return (
+    <div style={{ display: 'flex', gap: 6, alignItems: 'center', width: '100%' }}>
+      <input
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        placeholder="Name the attacking force…"
+        aria-label={`Name the force behind ${stressor.label || human(stressor.type)}`}
+        style={{
+          flex: 1, minWidth: 0, minHeight: 30, padding: '5px 9px',
+          border: `1px solid ${BORDER2}`, borderRadius: 6,
+          background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs,
+        }}
+      />
+      <SmallButton
+        tone="good"
+        title="Name attacker"
+        disabled={busy || !value.trim()}
+        onClick={() => onName(value.trim())}
+      >
+        Name
+      </SmallButton>
+    </div>
+  );
+}
+
+function attackerEntity(stressor = {}, nameById = new Map()) {
+  const ctx = stressor.originContext;
+  if (!ctx) return null;
+  if (ctx.attackerLabel) return { label: 'Attacker', value: ctx.attackerLabel };
+  if (ctx.attackerSettlementId) {
+    return { label: 'Attacker', value: nameById.get(String(ctx.attackerSettlementId)) || String(ctx.attackerSettlementId) };
+  }
+  if (ctx.sponsorSettlementId) {
+    return { label: 'Sponsor', value: nameById.get(String(ctx.sponsorSettlementId)) || String(ctx.sponsorSettlementId) };
+  }
+  if (ctx.formerSponsorSettlementId) {
+    return { label: 'Former sponsor', value: nameById.get(String(ctx.formerSponsorSettlementId)) || String(ctx.formerSponsorSettlementId) };
+  }
+  // A war-shaped stressor with no named force: the DM can name it later.
+  if (['declared_war', 'unattributed'].includes(ctx.variant)) return { label: 'Attacker', value: 'unnamed' };
+  return null;
+}
+
 function OutcomeCard({ title, summary, severity, reasons = [], actions = null, tone = 'normal', details = [], involved = [] }) {
   const major = tone === 'major' || severity >= 0.7;
   return (
@@ -285,6 +367,8 @@ export default function WorldPulsePanel({ campaign }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
+  const recordPartyImpact = useStore(s => s.recordPartyImpact);
+  const [namingStressorId, setNamingStressorId] = useState(null);
   const [busyProposalId, setBusyProposalId] = useState(null);
   const [canonBusy, setCanonBusy] = useState(false);
   const [actionError, setActionError] = useState(null);
@@ -301,6 +385,9 @@ export default function WorldPulsePanel({ campaign }) {
   const appliedOutcomes = latestPulse?.selectedOutcomes || [];
   const impactDigest = latestPulse?.impactDigest || [];
   const selected = latestPulse?.selectedCount || 0;
+  const liveStressors = worldState.stressors || [];
+  const activeStressors = liveStressors.filter(s => ACTIVE_UI_STAGES.has(s.lifecycleStage || 'active'));
+  const echoes = liveStressors.filter(s => s.status === 'residual');
 
   const runProposalAction = async (proposalId, action) => {
     if (busyProposalId) return;
@@ -494,6 +581,71 @@ export default function WorldPulsePanel({ campaign }) {
                       </SmallButton>
                     </>
                   )}
+                />
+              ))}
+            </div>
+          )}
+        </Section>
+
+        <Section title="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
+          {activeStressors.length + echoes.length === 0 ? (
+            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+              No active stressors. The realm is quiet — for now.
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {activeStressors.map(stressor => {
+                const attacker = attackerEntity(stressor, nameById);
+                const unnamed = WAR_SHAPED_TYPES.has(stressor.type)
+                  && !stressor.originContext?.attackerLabel
+                  && !stressor.originContext?.attackerSettlementId;
+                const nameThisAttacker = async (label) => {
+                  if (!recordPartyImpact || namingStressorId) return;
+                  setNamingStressorId(stressor.id);
+                  setActionError(null);
+                  try {
+                    await recordPartyImpact(campaign.id, {
+                      kind: 'name_attacker',
+                      stressorId: stressor.id,
+                      attackerLabel: label,
+                      label: `Named the force behind ${stressor.label || human(stressor.type)}`,
+                    });
+                  } catch (err) {
+                    setActionError(`Naming failed: ${err?.message || err}`);
+                  } finally {
+                    setNamingStressorId(null);
+                  }
+                };
+                return (
+                  <OutcomeCard
+                    key={stressor.id}
+                    title={stressor.label || human(stressor.type)}
+                    summary={stressorSummary(stressor)}
+                    severity={stressor.severity}
+                    details={stressorDetails(stressor)}
+                    involved={[
+                      ...involvedEntities(stressor, nameById),
+                      ...(attacker ? [attacker] : []),
+                    ]}
+                    tone={stressor.severity >= 0.72 ? 'major' : 'normal'}
+                    actions={unnamed && recordPartyImpact ? (
+                      <NameAttackerControl
+                        stressor={stressor}
+                        busy={!!namingStressorId}
+                        onName={nameThisAttacker}
+                      />
+                    ) : null}
+                  />
+                );
+              })}
+              {echoes.map(stressor => (
+                <OutcomeCard
+                  key={`echo-${stressor.id}`}
+                  title={`${stressor.label || human(stressor.type)} — in living memory`}
+                  summary="Resolved, not forgotten: this echo still colors new events and can re-ignite while warm."
+                  severity={stressor.memoryStrength ?? 0}
+                  details={[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}
+                  involved={involvedEntities(stressor, nameById)}
                 />
               ))}
             </div>

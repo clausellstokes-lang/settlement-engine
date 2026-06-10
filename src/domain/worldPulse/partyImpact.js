@@ -26,7 +26,7 @@
 
 import { ensureWorldState, stablePart } from './worldState.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
-import { resolveStressorById, adjustStressorSeverityById } from './stressors.js';
+import { resolveStressorById, adjustStressorSeverityById, setStressorAttacker } from './stressors.js';
 import { ensureRelationshipState } from './relationshipEvolution.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { deriveAllActiveConditions, deriveActiveCondition } from '../activeConditions.js';
@@ -42,6 +42,7 @@ export const PARTY_IMPACT_KINDS = Object.freeze({
   resolve_stressor:    { targets: ['stressorId'],               defaultMagnitude: 1.0,  label: 'Resolve a crisis', note: 'The party ended an active stressor (broke the siege, cured the plague).' },
   ease_stressor:       { targets: ['stressorId'],               defaultMagnitude: 0.4,  label: 'Ease a crisis',    note: 'The party blunted but did not end a stressor.' },
   worsen_stressor:     { targets: ['stressorId'],               defaultMagnitude: 0.4,  label: 'Worsen a crisis',  note: 'The party (or their failure) deepened a stressor.' },
+  name_attacker:       { targets: ['stressorId'],               defaultMagnitude: 0.3,  label: 'Name the attacker', note: 'The DM identifies the force behind a war-shaped stressor — another settlement, or a force with no settlement at all (a goblin warband, a mercenary company).' },
   broker_relationship: { targets: ['relationshipKey'],          defaultMagnitude: 0.6,  label: 'Broker peace',     note: 'The party de-escalated a relationship between two settlements.' },
   inflame_relationship:{ targets: ['relationshipKey'],          defaultMagnitude: 0.6,  label: 'Inflame a feud',   note: 'The party escalated a relationship between two settlements.' },
   clear_condition:     { targets: ['settlementId', 'condition'],defaultMagnitude: 1.0,  label: 'Resolve a condition', note: 'The party removed an active condition from a settlement.' },
@@ -128,6 +129,36 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
       for (const residual of residualOutcomes) {
         outcomes.push({ ...residual, partySourced: true, candidateType: 'party_stressor_residual', reasons: partyReasons(action, residual.reasons || []) });
       }
+      break;
+    }
+
+    case 'name_attacker': {
+      // Attacker identity is nullable by design (a siege may have no
+      // settlement-shaped attacker); this is the DM's hook for filling it in.
+      const { stressors, changed } = setStressorAttacker(state.stressors, action.stressorId, {
+        attackerSettlementId: action.attackerSettlementId ?? null,
+        attackerLabel: action.attackerLabel ?? null,
+      }, { now });
+      if (!changed) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
+      nextState = { ...state, stressors };
+      const attackerName = action.attackerLabel
+        || (action.attackerSettlementId ? String(action.attackerSettlementId) : null);
+      // The naming is table-facing knowledge — record it in the chronicle.
+      outcomes.push(baseOutcome(action, kind, {
+        type: 'narrative',
+        targetSaveId: changed.originSettlementId || changed.affectedSettlementIds?.[0] || null,
+        severity: 0.3,
+        headline: action.label || `The force behind ${changed.label.toLowerCase()} is named`,
+        summary: attackerName
+          ? `${changed.label} is now attributed to ${attackerName}.`
+          : `${changed.label}'s attacker attribution was cleared.`,
+        metadata: {
+          stressorId: changed.id,
+          attackerSettlementId: changed.originContext?.attackerSettlementId || null,
+          attackerLabel: changed.originContext?.attackerLabel || null,
+        },
+        reasons: [`Attribution set on ${changed.label.toLowerCase()}.`],
+      }));
       break;
     }
 

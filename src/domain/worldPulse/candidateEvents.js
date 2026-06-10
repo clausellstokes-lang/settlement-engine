@@ -224,10 +224,18 @@ export function rollCandidates(candidates = [], rng, options = {}) {
   let proposalCount = 0;
 
   for (const candidate of candidates) {
-    if (candidate.applyMode === 'auto' && autoCount >= maxAuto) continue;
+    // Probability-1 candidates are GUARANTEED consequences (e.g. the residual
+    // aftermath a resolved stressor leaves behind), not stochastic events.
+    // They neither consume nor respect the auto budget (a mass-resolution
+    // tick must not silently drop aftermaths), and volatility never scales
+    // them — volatility scales uncertainty, not certainties.
+    const guaranteed = (candidate.probability ?? 0) >= 1;
+    if (candidate.applyMode === 'auto' && autoCount >= maxAuto && !guaranteed) continue;
     if (candidate.applyMode === 'proposal' && proposalCount >= maxProposals) continue;
     const roll = rng.random();
-    const probability = Math.max(0, Math.min(1, (candidate.probability ?? 0) * volatility));
+    const probability = guaranteed
+      ? 1
+      : Math.max(0, Math.min(1, (candidate.probability ?? 0) * volatility));
     const passed = roll <= probability;
     const explanation = {
       candidateId: candidate.id,
@@ -251,7 +259,7 @@ export function rollCandidates(candidates = [], rng, options = {}) {
     if (!passed) continue;
     selected.push({ ...candidate, roll });
     if (candidate.applyMode === 'proposal') proposalCount += 1;
-    else autoCount += 1;
+    else if (!guaranteed) autoCount += 1;
   }
 
   return { selected, rollExplanations };

@@ -83,7 +83,11 @@ describe('world pulse domain', () => {
     }], snapshot, { random: () => 0 }, { tick: 8, now: '2026-01-01T00:00:00.000Z' });
 
     expect(result.resolved).toHaveLength(1);
-    expect(result.stressors).toHaveLength(0);
+    // The crisis is over but not forgotten: resolution leaves a residual
+    // ECHO in the stressor list (recent memory), not a hard drop.
+    expect(result.stressors).toHaveLength(1);
+    expect(result.stressors[0].status).toBe('residual');
+    expect(result.stressors[0].memoryStrength).toBeGreaterThan(0);
     expect(result.residualOutcomes[0].condition.archetype).toBe('stressor_residual');
     expect(result.residualOutcomes[0].probability).toBe(1);
   });
