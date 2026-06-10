@@ -19,8 +19,14 @@
 /**
  * Canonical healing-institution classifier. Single source of truth for "what name reads as a
  * healing-capable institution" across every healing lens.
+ *
+ * Must cover the institutionalCatalog medical vocabulary: 'Small hospital' / 'Major hospital' /
+ * 'Hospital network' ('hospital' is not a substring of 'hospice'), 'Almshouse', and the monastic
+ * houses ('monaster' is the shared stem of 'Monastery or friary', 'Multiple monasteries', and
+ * 'Major monasteries (5-10)').
  */
-export const HEALING_INSTITUTION_PATTERN = /(temple|chapel|infirmary|healer|hospice|herbalist|apothecary|shrine)/i;
+export const HEALING_INSTITUTION_PATTERN =
+  /(temple|chapel|infirmary|healer|hospice|herbalist|apothecary|shrine|hospital|monaster|almshouse)/i;
 
 /**
  * @typedef {Object} HealingLedger

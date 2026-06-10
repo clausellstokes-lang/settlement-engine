@@ -1,6 +1,10 @@
 // economicData.js — Trade dependency lookup table
 // Extracted from generateEconomicState (was inline anonymous block)
 // Maps institution/service name → { resources, label, detail, svcs }
+//
+// CONSTRAINT: keys are looked up by EXACT institution name
+// (TRADE_DEPENDENCY_NEEDS[inst.name] in economicGenerator), so every key must
+// be an exact institutionalCatalog.js name — enforced by tests/joins/goods.test.js.
 
 export const TRADE_DEPENDENCY_NEEDS = {
       "Access to external mill": {
@@ -169,20 +173,6 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "lodging"
         ]
       },
-      "Hospitality district": {
-        resources: [
-          "grain_fields",
-          "fertile_floodplain"
-        ],
-        label: "Grain",
-        detail: "grain for metropolitan hospitality",
-        svcs: [
-          "meals",
-          "ale",
-          "lodging",
-          "entertainment"
-        ]
-      },
       "Resident smith (part-time)": {
         resources: [
           "iron_deposits",
@@ -226,7 +216,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "jewellery"
         ]
       },
-      "Specialist craftsmen quarters": {
+      "Craft guilds (100-150+)": {
         resources: [
           "iron_deposits",
           "coal_deposits",
@@ -321,21 +311,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "riot control"
         ]
       },
-      "Professional guard (hundreds)": {
-        resources: [
-          "iron_deposits",
-          "grain_fields",
-          "coal_deposits"
-        ],
-        label: "Iron + grain + fuel",
-        detail: "iron for equipment, grain for provisioning, fuel for forges",
-        svcs: [
-          "metropolitan policing",
-          "armed response",
-          "gate control"
-        ]
-      },
-      "Mercenary company HQ": {
+      "Free company hall": {
         resources: [
           "iron_deposits",
           "grain_fields"
@@ -395,19 +371,6 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "city defence",
           "siege resistance",
           "gate control"
-        ]
-      },
-      "Inner citadel": {
-        resources: [
-          "stone_quarry",
-          "iron_deposits"
-        ],
-        label: "Stone + iron",
-        detail: "stone and iron for citadel construction",
-        svcs: [
-          "last-resort defence",
-          "command post",
-          "treasury protection"
         ]
       },
       Citadel: {
@@ -488,18 +451,18 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "dock repair"
         ]
       },
-            "Navy (if coastal)": {
+      Shipyard: {
         resources: [
           "shipbuilding_timber",
           "managed_forest",
           "iron_deposits"
         ],
         label: "Timber + iron",
-        detail: "timber and iron for warship construction",
+        detail: "timber and iron for ship construction",
         svcs: [
-          "naval defence",
-          "warship repair",
-          "maritime patrol"
+          "ship construction",
+          "ship repair",
+          "vessel fitting"
         ]
       },
       "Printing house": {
@@ -527,7 +490,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "archival access"
         ]
       },
-      "Sage/library": {
+      "Sage's quarter": {
         resources: [
           "managed_forest"
         ],
@@ -713,18 +676,6 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "spell development"
         ]
       },
-      "Multiple wizard towers": {
-        resources: [
-          "magical_node"
-        ],
-        label: "Magical ley lines",
-        detail: "arcane energy for multiple towers",
-        svcs: [
-          "high-level spellcasting",
-          "magical research",
-          "teleportation"
-        ]
-      },
       "Teleportation circle": {
         resources: [
           "magical_node"
@@ -772,7 +723,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "letters of credit"
         ]
       },
-      "Stock exchange (early)": {
+      "Caravan masters' exchange": {
         resources: [
           "precious_metals",
           "crossroads_position"
@@ -780,9 +731,9 @@ export const TRADE_DEPENDENCY_NEEDS = {
         label: "Capital + trade access",
         detail: "precious metals and trade access for exchange operations",
         svcs: [
-          "equity investment",
-          "commodity futures",
-          "capital markets"
+          "caravan finance",
+          "commodity contracts",
+          "freight brokerage"
         ]
       },
       "Money changers": {
@@ -888,7 +839,7 @@ export const TRADE_DEPENDENCY_NEEDS = {
           "trade finance"
         ]
       },
-      "Major port": {
+      "Harbour master's office": {
         resources: [
           "fishing_grounds",
           "river_fish",
@@ -898,10 +849,9 @@ export const TRADE_DEPENDENCY_NEEDS = {
         label: "Fishing + timber",
         detail: "fishing grounds and timber for port operations",
         svcs: [
-          "fish market",
           "large vessel berthing",
           "cargo handling",
-          "ship repair"
+          "port administration"
         ]
       }
     };

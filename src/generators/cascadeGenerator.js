@@ -50,7 +50,11 @@ function _cascadeBoost(dir, dist) {
   return 1.0;
 }
 
-function applyCascadeInstitutions(institutions, tier) {
+function applyCascadeInstitutions(institutions, tier, opts = {}) {
+  // tradeRoute/terrainType gate cascade candidates exactly like the assemble
+  // path. When a caller omits them (headless/unit use) the gates are
+  // permissive — there is no settlement geography to violate.
+  const { tradeRoute = null, terrainType = null } = opts;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
   const tierIdx   = TIER_ORD.indexOf(tier);
   const mk        = n => n.toLowerCase().slice(0, 16);
@@ -58,6 +62,11 @@ function applyCascadeInstitutions(institutions, tier) {
 
   // What's already present (match keys)
   const existingMKs = new Set(institutions.map(i => mk(i.name)));
+  // Exact names + exclusive groups already seated on the roster — the
+  // cascade may only re-roll institutions the settlement could still
+  // legally generate.
+  const existingNames = new Set(institutions.map(i => i.name));
+  const takenGroups   = new Set(institutions.map(i => i.exclusiveGroup).filter(Boolean));
 
   // Collect max boost per target match-key
   const boosts = {};
@@ -107,15 +116,37 @@ function applyCascadeInstitutions(institutions, tier) {
         if (existingMKs.has(nameMK))  return; // already present
         if (added.some(a => mk(a.name) === nameMK)) return; // already cascade-added
 
-        const baseChance   = data.p || 0;
-        // Cap cascade chance at 0.65 — can't guarantee an institution appears
+        // Geography/exclusivity gates — same contract as assembleInstitutions:
+        // a cascade boost cannot legalise an institution the settlement's
+        // trade route, terrain, or exclusive-group seating would have refused.
+        if (tradeRoute && data.tradeRouteRequired) {
+          const routeOk   = data.tradeRouteRequired.includes(tradeRoute);
+          const terrainOk = !!(terrainType && data.terrainAccess?.includes(terrainType));
+          if (!routeOk && !terrainOk) return;
+        }
+        if (tradeRoute && data.forbiddenTradeRoutes?.includes(tradeRoute)) return;
+        if (terrainType && data.terrainRequired && !data.terrainRequired.includes(terrainType)) return;
+        if (data.exclusiveGroup && takenGroups.has(data.exclusiveGroup)) return;
+        if (data.exclusionConditions?.some(ex => existingNames.has(ex))) return;
+
+        // Catalog probability field is `baseChance` — institutionalCatalog
+        // defines no `p` field, so any other read silently yields 0.
+        const baseChance   = data.baseChance || 0;
         // Cap: cascade gives a second chance but can't guarantee appearances
         // Lower cap means cascades supplement rather than dominate generation
         const cascadeChance = Math.min(baseChance * boost, 0.45);
         if (added.length >= cascadeCap) return; // cap reached
         if (_rng() < cascadeChance) {
-          added.push({ name, category: cat, tier: t, cascadeAdded: true, cascadeBoost: boost });
+          // Carry the full catalog def (desc/tags/priorityCategory/...) like
+          // the assemble path does — downstream passes classify by tags, and
+          // the subsistence strip treats untagged institutions as trade.
+          added.push({
+            name, category: cat, tier: t, ...data,
+            source: 'cascade', cascadeAdded: true, cascadeBoost: boost,
+          });
           existingMKs.add(nameMK); // prevent re-rolling the same target
+          existingNames.add(name);
+          if (data.exclusiveGroup) takenGroups.add(data.exclusiveGroup);
         }
       });
     });

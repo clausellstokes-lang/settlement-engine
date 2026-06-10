@@ -908,7 +908,16 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: [],
-        processingInstitutions: ['Almshouse', 'Foundling home'],
+        // The dedicated medical institutions must run this chain (catalog names:
+        // 'Small hospital' town, 'Major hospital' city, 'Hospital network' metropolis);
+        // almshouse/foundling home are the charitable-care co-processors.
+        processingInstitutions: [
+          'Small hospital',
+          'Major hospital',
+          'Hospital network',
+          'Almshouse',
+          'Foundling home',
+        ],
         intermediateGoods: [],
         outputs: ['Medical treatment', 'Surgery', 'Quarantine', 'Medical training'],
         services: ['healing'],
@@ -922,9 +931,18 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Hot springs',
         resourceIcon: '',
         rawInputs: ['Healing waters (bottled)'],
-        processingInstitutions: ['Foundling home'],
+        // Divine healing is clergy work — the religious institutions that exist in the
+        // catalog at village+ ('Multiple/Major monasteries' are the city/metropolis forms).
+        processingInstitutions: [
+          'Parish church',
+          'Cathedral',
+          'Monastery',
+          'Multiple monasteries',
+          'Major monasteries',
+        ],
         intermediateGoods: [],
-        outputs: ['Medical care (basic)', 'Spellcasting (1st-3rd level)', "Mages' guild"],
+        // Outputs are goods/services only — institution names live in processingInstitutions.
+        outputs: ['Medical care (basic)', 'Spellcasting (1st-3rd level)'],
         services: ['healing', 'magic'],
         exportable: false,
         entrepot: false,
@@ -1013,7 +1031,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Magical ley line node',
         resourceIcon: '️',
         rawInputs: ['Arcane reagents', 'Medicinal herbs', 'Monster components'],
-        processingInstitutions: ['Alchemist', 'Hedge wizard', 'Wizard Tower'],
+        // Catalog spelling is "Wizard's tower" — the processor match is a substring
+        // over real institution names, so the apostrophe form is required.
+        processingInstitutions: ['Alchemist', 'Hedge wizard', "Wizard's tower"],
         intermediateGoods: ['Alchemical reagents'],
         outputs: ['Potions and elixirs', 'Alchemical reagents', 'Alchemical products'],
         services: ['magic', 'healing'],
@@ -1029,14 +1049,13 @@ export const SUPPLY_CHAIN_NEEDS = {
         rawInputs: [],
         processingInstitutions: ["Wizard's tower", "Mages' guild", "Mages' district", 'Hedge wizard'],
         intermediateGoods: [],
+        // Outputs are goods/services only — institution names live in processingInstitutions.
         outputs: [
           'Spellcasting (1st-3rd level)',
           'Magical identification',
           'Enchanting services',
-          "Wizard's tower",
           'Spellcasting (1st-8th level)',
           'Teleportation',
-          "Mages' guild",
         ],
         services: ['magic'],
         exportable: true,
@@ -1094,10 +1113,24 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'parish',
         label: 'Parish & Faith',
-        resource: 'Ancient grove',
+        // No resource gate: faith is institution-borne. (ancient_grove still flags this
+        // chain 'running' via RESOURCE_TO_CHAINS where a grove is present.)
+        resource: null,
         resourceIcon: '️',
-        rawInputs: ['Sacred wood', 'Ritual components', 'Pilgrim donations'],
-        processingInstitutions: ['Almshouse', 'Foundling home'],
+        rawInputs: ['Ritual components', 'Pilgrim donations'],
+        // The chain belongs to the churches; almshouse/foundling home are the church-run
+        // poor-relief co-processors. 'Parish church' also matches the tier variants
+        // ('Access to parish church', 'Parish churches (2-5/10-30/50-100+)').
+        processingInstitutions: [
+          'Parish church',
+          'Cathedral',
+          'Monastery',
+          'Multiple monasteries',
+          'Major monasteries',
+          'Wayside shrine',
+          'Almshouse',
+          'Foundling home',
+        ],
         intermediateGoods: [],
         outputs: [
           'Religious services',
@@ -1119,7 +1152,15 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '️',
         rawInputs: [],
-        processingInstitutions: ['Workhouse', 'Public bathhouse'],
+        // Law is produced by courts and civic halls (catalog: 'Courthouse'/'Town hall' at
+        // town, 'City hall'/'Multiple courthouses' at city, 'Multiple court buildings' at
+        // metropolis). 'Courthouse' also matches 'Multiple courthouses'.
+        processingInstitutions: [
+          'Courthouse',
+          'Town hall',
+          'City hall',
+          'Multiple court buildings',
+        ],
         intermediateGoods: [],
         outputs: ['Civil disputes', 'Criminal trials', 'Notary services', 'Legal services'],
         services: ['legal'],
@@ -1133,7 +1174,15 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Hot springs',
         resourceIcon: '️',
         rawInputs: ['Healing waters (bottled)', 'Pilgrim donations'],
-        processingInstitutions: ['Almshouse'],
+        // Pilgrims travel to the holy houses; the almshouse is the hostel co-processor.
+        processingInstitutions: [
+          'Parish church',
+          'Cathedral',
+          'Monastery',
+          'Multiple monasteries',
+          'Major monasteries',
+          'Almshouse',
+        ],
         intermediateGoods: [],
         outputs: ['Religious services', 'Hospitality for travellers', 'Poor relief'],
         services: ['healing', 'lodging'],
@@ -1476,6 +1525,7 @@ export const RESOURCE_TO_CHAINS = {
     'food_security.livestock',
     'food_security.brewing',
     'food_security.animal_husbandry',
+    'raw_extraction.floodplain_agriculture',
   ],
   grazing_land: [
     'food_security.livestock',
@@ -1504,12 +1554,17 @@ export const RESOURCE_TO_CHAINS = {
   fishing_grounds: ['food_security.fish', 'food_security.fishing'],
   river_fish: ['food_security.fish', 'food_security.river_fishing'],
   river_mills: [
+    'raw_extraction.river_milling',
     'manufacturing.food_processing',
     'manufacturing.textiles',
     'manufacturing.textile_finishing',
     'manufacturing.ceramics_brick',
   ],
-  deep_harbour: ['trade_entrepot.warehouse_logistics', 'trade_entrepot.transit_finance'],
+  deep_harbour: [
+    'raw_extraction.harbour_trade',
+    'trade_entrepot.warehouse_logistics',
+    'trade_entrepot.transit_finance',
+  ],
   stone_quarry: ['raw_extraction.stone', 'raw_extraction.petty_mining', 'defense_security.fortification'],
   iron_deposits: [
     'raw_extraction.iron',
@@ -1528,7 +1583,7 @@ export const RESOURCE_TO_CHAINS = {
   river_clay: ['manufacturing.ceramics_brick', 'raw_extraction.clay'],
   foraging_areas: [
     'food_security.forage',
-    'food_security.beekeeping_wax',
+    'manufacturing.beekeeping_wax',
     'healing_medicine.herbalism',
     'arcane_magical.alchemy',
   ],
@@ -1536,16 +1591,22 @@ export const RESOURCE_TO_CHAINS = {
     'religion_civic.parish',
     'healing_medicine.herbalism',
     'food_security.forage',
-    'food_security.beekeeping_wax',
+    'manufacturing.beekeeping_wax',
   ],
   marshlands: ['food_security.forage', 'raw_extraction.reed_marsh', 'raw_extraction.fuel'],
   crossroads_position: [
+    'trade_entrepot.crossroads_trade',
     'trade_entrepot.warehouse_logistics',
     'trade_entrepot.transit_finance',
     'trade_entrepot.spices_dyes',
     'trade_entrepot.caravan_trade',
   ],
-  defended_pass: ['trade_entrepot.warehouse_logistics', 'trade_entrepot.caravan_trade', 'defense_security.garrison'],
+  defended_pass: [
+    'trade_entrepot.mountain_pass_trade',
+    'trade_entrepot.warehouse_logistics',
+    'trade_entrepot.caravan_trade',
+    'defense_security.garrison',
+  ],
   ancient_ruins: [
     'knowledge_information.scholarship',
     'knowledge_information.intelligence',
@@ -1555,14 +1616,37 @@ export const RESOURCE_TO_CHAINS = {
   magical_node: ['arcane_magical.alchemy', 'arcane_magical.spellcasting', 'arcane_magical.magical_goods'],
 
   // ── Desert resources ──────────────────────────────────────────────
-  oasis_water: ['trade_entrepot.caravan_trade', 'raw_extraction.clay'],
-  date_palms: ['agricultural.food_processing', 'agricultural.brewing'],
-  glass_sand: ['manufacturing.glass_print'],
-  desert_salt: ['agricultural.food_processing', 'trade_entrepot.spices_dyes'],
-  camel_herds: ['trade_entrepot.caravan_trade', 'agricultural.livestock'],
+  // Every id below must be a real `${needKey}.${chainId}` in SUPPLY_CHAIN_NEEDS
+  // (there is no 'agricultural' or 'services' need group) — tests/joins/chains.test.js
+  // pins this. Each terrain resource lists its dedicated terrain chain first.
+  oasis_water: ['raw_extraction.oasis_agriculture', 'trade_entrepot.caravan_trade'],
+  date_palms: [
+    'raw_extraction.date_palm_harvest',
+    'manufacturing.food_processing',
+    'food_security.brewing',
+  ],
+  glass_sand: ['raw_extraction.desert_glasswork', 'manufacturing.glass_print'],
+  desert_salt: [
+    'food_security.salt',
+    'manufacturing.food_processing',
+    'trade_entrepot.spices_dyes',
+  ],
+  camel_herds: [
+    'trade_entrepot.camel_caravan',
+    'trade_entrepot.caravan_trade',
+    'food_security.livestock',
+  ],
 
   // ── Mountain resources ─────────────────────────────────────────────
-  alpine_pasture: ['agricultural.livestock', 'agricultural.textiles'],
-  mountain_timber: ['raw_extraction.timber', 'raw_extraction.fuel'],
-  hot_springs_mineral: ['arcane_magical.alchemy', 'services.hospital'],
+  alpine_pasture: [
+    'raw_extraction.alpine_wool',
+    'food_security.livestock',
+    'manufacturing.textiles',
+  ],
+  mountain_timber: [
+    'raw_extraction.mountain_timber_harvest',
+    'raw_extraction.timber',
+    'raw_extraction.fuel',
+  ],
+  hot_springs_mineral: ['arcane_magical.alchemy', 'healing_medicine.hospital'],
 };

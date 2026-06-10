@@ -21,13 +21,15 @@ registerStep('cascadePass', {
   provides: [],
   phase: 'institutions',
 }, (ctx, rng) => {
-  const { institutions, tier, tradeRoute } = ctx;
+  // terrainType comes from resolveConfig — the cascade re-rolls catalog
+  // entries, so it must honour the same geography gates as assemble.
+  const { institutions, tier, tradeRoute, terrainType } = ctx;
 
   // Snapshot the pre-cascade name set so we can identify what the
   // cascade added (and therefore needs traces explaining why).
   const preCascadeNames = new Set(institutions.map(i => (i.name || '').toLowerCase()));
 
-  const cascadeAdditions = applyCascadeInstitutions(institutions, tier);
+  const cascadeAdditions = applyCascadeInstitutions(institutions, tier, { tradeRoute, terrainType });
   if (cascadeAdditions.length > 0) {
     institutions.push(...cascadeAdditions);
 
@@ -52,38 +54,6 @@ registerStep('cascadePass', {
         downstreamEffects: Array.isArray(add.tags)
           ? add.tags.slice(0, 3).map(t => ({ target: `tag.${t}`, effect: 'reinforced' }))
           : [],
-      });
-    }
-
-    // Airship override: if airship docking exists, maritime institutions are permitted
-    const hasAirship = institutions.some(i =>
-      (i.name || '').toLowerCase().includes('airship')
-    );
-    if (hasAirship && tradeRoute !== 'port' && tradeRoute !== 'river') {
-      const MARITIME_INSTS = [
-        { category: 'Economy', name: 'Docks/port facilities',
-          desc: 'Airship-era dock facilities handling both aerial and surface freight.',
-          tags: ['port','trade'], priorityCategory: 'economy', baseChance: 0.75 },
-        { category: 'Economy', name: "Harbour master's office",
-          desc: 'Regulates port and airship traffic, assigns berths, collects anchorage fees.',
-          tags: ['law_enforcement','port'], priorityCategory: 'military', baseChance: 0.65 },
-      ];
-      const existingNames = new Set(institutions.map(i => i.name));
-      MARITIME_INSTS.forEach(inst => {
-        if (!existingNames.has(inst.name) && rng.chance(inst.baseChance)) {
-          institutions.push({ ...inst, source: 'generated' });
-          // Trace the airship-triggered maritime additions.
-          recordTrace(ctx, {
-            targetType: 'institution',
-            targetId:   instId(inst.name),
-            step:       'cascadePass',
-            result:     'airship_triggered',
-            causes: [
-              { source: 'institution.airship', effect: 'enables maritime',
-                reason: `Airship docking is on the roster, so "${inst.name}" is permitted even without a port/river trade route.` },
-            ],
-          });
-        }
       });
     }
 
@@ -115,6 +85,44 @@ registerStep('cascadePass', {
         }
       }
       [...toRemove].sort((a, b) => b - a).forEach(idx => institutions.splice(idx, 1));
+    });
+  }
+
+  // Airship override: if airship docking exists, maritime institutions are
+  // permitted regardless of trade route. Airship docking is rolled in main
+  // generation — independent of whether the cascade added anything — so this
+  // must NOT sit inside the cascade-additions guard. It must also run AFTER
+  // the post-cascade re-subsumption: the "harbour master's office" rule
+  // absorbs 'docks/port facilities', and for an aerial port those are
+  // complementary infrastructure, not a scale ladder.
+  const hasAirship = institutions.some(i =>
+    (i.name || '').toLowerCase().includes('airship')
+  );
+  if (hasAirship && tradeRoute !== 'port' && tradeRoute !== 'river') {
+    const MARITIME_INSTS = [
+      { category: 'Economy', name: 'Docks/port facilities',
+        desc: 'Airship-era dock facilities handling both aerial and surface freight.',
+        tags: ['port','trade'], priorityCategory: 'economy', baseChance: 0.75 },
+      { category: 'Economy', name: "Harbour master's office",
+        desc: 'Regulates port and airship traffic, assigns berths, collects anchorage fees.',
+        tags: ['law_enforcement','port'], priorityCategory: 'military', baseChance: 0.65 },
+    ];
+    const existingNames = new Set(institutions.map(i => i.name));
+    MARITIME_INSTS.forEach(inst => {
+      if (!existingNames.has(inst.name) && rng.chance(inst.baseChance)) {
+        institutions.push({ ...inst, source: 'generated' });
+        // Trace the airship-triggered maritime additions.
+        recordTrace(ctx, {
+          targetType: 'institution',
+          targetId:   instId(inst.name),
+          step:       'cascadePass',
+          result:     'airship_triggered',
+          causes: [
+            { source: 'institution.airship', effect: 'enables maritime',
+              reason: `Airship docking is on the roster, so "${inst.name}" is permitted even without a port/river trade route.` },
+          ],
+        });
+      }
     });
   }
 

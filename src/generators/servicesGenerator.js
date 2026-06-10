@@ -801,58 +801,47 @@ function _customProducedServices(institutionName, tier, opts = {}) {
 }
 
 // getServicesForInstitution
+// Key resolution precedence: a dedicated INSTITUTION_SERVICES entry (exact
+// name, case-insensitive) always wins; LOCALE_SERVICE_OVERRIDES only redirects
+// institutions with NO dedicated entry; the token-overlap fuzzy match is the
+// last resort. All paths share one roll block so toggle objects (allow/force),
+// guaranteed p>=1 services, and requiredTradeRoute gates apply uniformly
+// regardless of how the key was resolved.
 const getServicesForInstitution = (r, s, o = {}) => {
   const d = Object.keys(INSTITUTION_SERVICES),
     l = LOCALE_SERVICE_OVERRIDES[r.toLowerCase()];
   // Custom-content extension: any services declared via `produces` augment
   // (or, for unknown custom institutions, replace) the prebuilt service set.
   const _customServices = _customProducedServices(r, s, o);
-  // Exact match first — avoids fuzzy collision between e.g. "Contract killer" and "Contract Killer"
-  // Case-insensitive lookup: find the canonical key even if caller passes wrong case
-  const _exactKey = !l && Object.keys(INSTITUTION_SERVICES).find((k) => k.toLowerCase() === r.toLowerCase());
-  if (_exactKey) {
-    const p = INSTITUTION_SERVICES[_exactKey],
-      b = SERVICE_TIER_CHANCE[s] || 0.5,
-      k = [];
-    const f = Object.entries(p).sort((C, T) => T[1].p - C[1].p);
-    f.forEach(([C, T]) => {
-      const M = `${r}_service_${C}`,
-        A = `${r}_service_${C}`;
-      const S = o[M] !== void 0 ? o[M] : o[A] !== void 0 ? o[A] : T.on;
-      if (!S) return;
-      if (_rng() < (T.p || 0.5) * b) k.push({ name: C, desc: T.desc || '', p: T.p || 0.5 });
-    });
-    // Augment with custom-declared produced services (avoid name collision)
-    for (const cs of _customServices) {
-      if (!k.some(x => x.name === cs.name)) k.push(cs);
-    }
-    return k;
-  }
-  const m = r
-    .toLowerCase()
-    .split(/[\s'(),/-]+/)
-    .filter((C) => C.length > 2);
-  let h = null,
-    g = 0;
-  for (const C of d) {
-    const T = C.toLowerCase()
+  const _exactKey = d.find((k) => k.toLowerCase() === r.toLowerCase());
+  let w = _exactKey || (l && INSTITUTION_SERVICES[l] ? l : null);
+  if (!w) {
+    const m = r
+      .toLowerCase()
       .split(/[\s'(),/-]+/)
-      .filter((v) => v.length > 2);
-    let M = 0;
-    for (const v of T)
-      for (const j of m)
-        j === v ? (M += 2) : ((v.length > 3 && j.startsWith(v)) || (j.length > 4 && v.startsWith(j))) && (M += 1);
-    const A = M / (T.length * 2),
-      S = h
-        ? h
-            .toLowerCase()
-            .split(/[\s'(),/-]+/)
-            .filter((v) => v.length > 2).length
-        : 1,
-      y = g / (S * 2);
-    (M > g || (M === g && M > 0 && A > y)) && ((g = M), (h = C));
+      .filter((C) => C.length > 2);
+    let h = null,
+      g = 0;
+    for (const C of d) {
+      const T = C.toLowerCase()
+        .split(/[\s'(),/-]+/)
+        .filter((v) => v.length > 2);
+      let M = 0;
+      for (const v of T)
+        for (const j of m)
+          j === v ? (M += 2) : ((v.length > 3 && j.startsWith(v)) || (j.length > 4 && v.startsWith(j))) && (M += 1);
+      const A = M / (T.length * 2),
+        S = h
+          ? h
+              .toLowerCase()
+              .split(/[\s'(),/-]+/)
+              .filter((v) => v.length > 2).length
+          : 1,
+        y = g / (S * 2);
+      (M > g || (M === g && M > 0 && A > y)) && ((g = M), (h = C));
+    }
+    w = g > 0 ? h : null;
   }
-  const w = l && INSTITUTION_SERVICES[l] ? l : g > 0 ? h : null;
   if (!w) {
     // No prebuilt service mapping, but custom institution may declare its own.
     return _customServices;
@@ -896,7 +885,7 @@ const getServicesForInstitution = (r, s, o = {}) => {
         svcKey: w,
       });
   }
-  // Augment fuzzy-matched results with custom-declared produced services
+  // Augment matched results with custom-declared produced services
   for (const cs of _customServices) {
     if (!k.some(x => x.name === cs.name)) k.push(cs);
   }
@@ -1194,7 +1183,6 @@ const INSTITUTION_DEFAULT_CATEGORY = {
 const SERVICE_CATEGORY_MAP = {
   'Arcane services (illicit)': 'criminal',
   'Contraband transport': 'criminal',
-  'Defence services': 'criminal',
   'Discreet meeting venues': 'criminal',
   'Fence (word of mouth)': 'criminal',
   'Hired muscle': 'criminal',
@@ -1211,6 +1199,9 @@ const SERVICE_CATEGORY_MAP = {
   'Combat training': 'employment',
   'Contract board': 'employment',
   'Debt enforcement': 'employment',
+  // Garrison wall/gate patrol — legitimate defence work like 'Armed patrol'/
+  // 'Watch rotation'; must never sit behind the criminal crime-scaled gate.
+  'Defence services': 'employment',
   'Dungeon clearance': 'employment',
   'Emergency muster': 'employment',
   'Garrison contract': 'employment',
@@ -1453,6 +1444,30 @@ const SERVICE_CATEGORY_MAP = {
   Stabling: 'transport',
   'Stabling (long-term)': 'transport',
   'Vessel hire': 'transport',
+};
+
+// Criminal-institution vocabulary — shared by the crime-scaled service gate
+// and the synthetic informal-crime fallback so the two stay in sync.
+const _CRIMINAL_INST_KW = [
+  'thieves',
+  'black market',
+  'smuggl',
+  'street gang',
+  'front business',
+  'assassin',
+  'gambling den',
+  'underground',
+  'red light',
+  'criminal faction',
+];
+// The crime-scaled gate models ILLICIT supply tracking criminal presence.
+// It only applies to services offered by criminal institutions: a legitimate
+// provider's services (garrison patrols, a tavern back room) must not vanish
+// because the settlement is lawful — the institution already exists.
+const _isCriminalProvider = (inst) => {
+  if ((inst.category || '').toLowerCase() === 'criminal') return true;
+  const n = (inst.name || '').toLowerCase();
+  return _CRIMINAL_INST_KW.some((kw) => n.includes(kw));
 };
 
 // generateAvailableServices
@@ -1952,7 +1967,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         const v = getServiceTierInfo(S.name, A.name, d, s),
           j = h(S.name, A.name); // Skip magic-category services in no-magic worlds
         if (j === 'magic' && _noMagicSvcs) return;
-        (j === 'criminal' && _rng() > Math.min(1, (m / 100) * 1.5)) ||
+        (j === 'criminal' && _isCriminalProvider(A) && _rng() > Math.min(1, (m / 100) * 1.5)) ||
           ((S.p || 1) < 1 && v < 1 && _rng() > v) ||
           (l[j] &&
             l[j].push({
@@ -1964,18 +1979,7 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
     });
     const p = s.some((A) => {
         const S = (A.name || '').toLowerCase();
-        return (
-          S.includes('thieves') ||
-          S.includes('black market') ||
-          S.includes('smuggl') ||
-          S.includes('street gang') ||
-          S.includes('front business') ||
-          S.includes('assassin') ||
-          S.includes('gambling den') ||
-          S.includes('underground') ||
-          S.includes('red light') ||
-          S.includes('criminal faction')
-        );
+        return _CRIMINAL_INST_KW.some((kw) => S.includes(kw));
       }),
       b = getInstFlags(d, s).militaryEffective / Math.max(8, m);
     !p &&
