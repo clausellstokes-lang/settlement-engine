@@ -138,17 +138,20 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
             describe={d => d.label || d.field}
             detail={d => formatBandChange(d.before, d.after)}
           />
+          {/* Ripple entries (compareCausalState) carry bandBefore/bandAfter;
+              capacity entries (compareCapacityStates) nest the band under
+              before/after objects. Fall back across spellings either way. */}
           <Section title="Ripple effects"
             items={delta.rippleEffects}
             color={COLORS.ripple}
             describe={d => d.variable || d.label}
-            detail={d => formatBandChange(d.beforeBand, d.afterBand)}
+            detail={d => formatBandChange(d.bandBefore ?? d.beforeBand, d.bandAfter ?? d.afterBand)}
           />
           <Section title="Capacity shifts"
             items={delta.capacityShifts}
             color={COLORS.capacity}
             describe={d => d.capacity || d.label}
-            detail={d => formatBandChange(d.beforeBand, d.afterBand)}
+            detail={d => formatBandChange(d.before?.band ?? d.beforeBand, d.after?.band ?? d.afterBand)}
           />
           <Section title="Daily-life shifts"
             items={delta.dailyLifeShifts}

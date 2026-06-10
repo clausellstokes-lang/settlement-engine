@@ -37,6 +37,23 @@ export const getMagicLevel = (priority = 50) =>
   : priority <= 65  ? 'medium'
   : 'high';
 
+// Canonical prosperity tiers — the vocabulary economicGenerator emits. ('Subsistence'
+// is an internal base label remapped to Struggling/Poor before emission; it is kept
+// here for tolerance toward legacy or hand-written saves.) Consumers
+// that grade on prosperity (deriveResilience, corruption climate, faction dynamics)
+// must rank via this list, not hand-typed string matches: the resilience dial spent
+// a long time crediting only the extremes because it matched a vocabulary
+// ('Modest') the generator never produced.
+export const PROSPERITY_TIERS = Object.freeze([
+  'Subsistence', 'Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy',
+]);
+
+/** Rank a prosperity label 0..6 (Subsistence..Wealthy); -1 for unknown. Accepts {tier} objects. */
+export const prosperityRank = (prosperity) => {
+  const label = typeof prosperity === 'string' ? prosperity : prosperity?.tier;
+  return PROSPERITY_TIERS.indexOf(label);
+};
+
 // Note: `chance`, `pick`, `randInt` used to be re-exported here from
 // `../generators/rngContext.js`. That created a circular import between
 // the `data` and `engine` build chunks (`data → engine → data`), which

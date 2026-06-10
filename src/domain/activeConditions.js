@@ -111,10 +111,15 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'easing',
     defaultSeverity: 0.3,
   },
+  // Note (merchant_wealth retirement): 'merchant_wealth' was tagged across these
+  // templates but was never a SYSTEM_VARIABLE and no deriver read it — the tag
+  // implied an economic consequence that never landed. Economic bite now routes
+  // through trade_connectivity (a real variable); tolerant matchers elsewhere still
+  // accept legacy saved conditions that carry the old tag.
   trade_route_cut: {
     label: 'Trade route severed',
     description: 'A primary trade route is no longer passable.',
-    affectedSystems: ['trade_connectivity', 'merchant_wealth', 'public_legitimacy'],
+    affectedSystems: ['trade_connectivity', 'public_legitimacy'],
     defaultExpiresAtTicks: 9,
     defaultStatus: 'stable',
     defaultSeverity: 0.5,
@@ -138,7 +143,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   regional_route_disruption: {
     label: 'Regional route disruption',
     description: 'A connected trade route is transmitting regional disruption.',
-    affectedSystems: ['trade_connectivity', 'merchant_wealth', 'public_legitimacy'],
+    affectedSystems: ['trade_connectivity', 'public_legitimacy'],
     defaultExpiresAtTicks: 7,
     defaultStatus: 'stable',
     defaultSeverity: 0.5,
@@ -154,7 +159,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   regional_tax_revenue_disruption: {
     label: 'Regional revenue disruption',
     description: 'A tributary or client settlement can no longer reliably meet obligations.',
-    affectedSystems: ['merchant_wealth', 'faction_power', 'public_legitimacy'],
+    affectedSystems: ['trade_connectivity', 'faction_power', 'public_legitimacy'],
     defaultExpiresAtTicks: 6,
     defaultStatus: 'stable',
     defaultSeverity: 0.45,
@@ -170,8 +175,19 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   regional_service_disruption: {
     label: 'Regional service disruption',
     description: 'A settlement that provides regional services is under strain.',
-    affectedSystems: ['healing_capacity', 'merchant_wealth', 'public_legitimacy'],
+    affectedSystems: ['healing_capacity', 'trade_connectivity', 'public_legitimacy'],
     defaultExpiresAtTicks: 6,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.45,
+  },
+  cold_war_sanctions: {
+    label: 'Cold-war sanctions',
+    description: 'Inspections, sanctions, or informal embargoes are tightening daily trade.',
+    affectedSystems: ['trade_connectivity', 'public_legitimacy', 'criminal_opportunity'],
+    // Was the lone template-less (and therefore IMMORTAL) condition: with no
+    // defaultExpiresAtTicks it pressured trade/legitimacy/crime forever, even after
+    // the cold war thawed. Eight ticks matches its regional siblings.
+    defaultExpiresAtTicks: 8,
     defaultStatus: 'stable',
     defaultSeverity: 0.45,
   },
@@ -202,7 +218,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   regional_criminal_pressure: {
     label: 'Regional criminal pressure',
     description: 'A criminal corridor is transmitting opportunism or instability.',
-    affectedSystems: ['criminal_opportunity', 'social_trust', 'merchant_wealth'],
+    affectedSystems: ['criminal_opportunity', 'social_trust', 'trade_connectivity'],
     defaultExpiresAtTicks: 6,
     defaultStatus: 'worsening',
     defaultSeverity: 0.45,
@@ -242,7 +258,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   siege_lifted: {
     label: 'Siege lifted',
     description: 'A siege has ended; the settlement is recovering.',
-    affectedSystems: ['defense_readiness', 'food_security', 'public_legitimacy', 'merchant_wealth'],
+    affectedSystems: ['defense_readiness', 'food_security', 'public_legitimacy', 'trade_connectivity'],
     defaultExpiresAtTicks: 6,
     defaultStatus: 'easing',
     defaultSeverity: 0.3,

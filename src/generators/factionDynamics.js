@@ -39,13 +39,18 @@ function safetyContrib(label) {
   return 0;
 }
 
-// Defense readiness label → ±10
-const DEFENSE_CONTRIB = {
-  'Undefended':       -10,
-  'Vulnerable':        -5,
-  'Defensible':         0,
-  'Well-Defended':     +7,
-  'Fortress':         +10,
+// Defense readiness label → ±10. Exported as the SINGLE canonical map —
+// assembleSettlement's legitimacy patch consumes this same table (it used to
+// carry a stale local copy that lacked 'Lightly Defended', so the patch
+// actively reverted that band's contribution to 0 on generated settlements).
+export const DEFENSE_CONTRIB = {
+  'Undefended':        -10,
+  'Vulnerable':         -5,
+  'Lightly Defended':   -2,  // readiness 24-37 — was missing, so the most common
+                             // marginal band silently contributed 0 (same as Defensible)
+  'Defensible':          0,
+  'Well-Defended':      +7,
+  'Fortress':          +10,
 };
 
 // Food security label → ±10

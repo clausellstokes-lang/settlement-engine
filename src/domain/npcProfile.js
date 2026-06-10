@@ -39,6 +39,14 @@ const CATEGORY_TO_ARCHETYPE = Object.freeze({
   arcane:     'arcane',
   occupation: 'occupation',
   other:      'other',
+  // The vocabulary npcGenerator ACTUALLY emits — without these aliases every
+  // crafts/magic/noble NPC fell to the generic 'other' templates, so a Guild
+  // Archmage read as "almost no structural ripple" (the magicLevel-scores-0 bug
+  // class, on the NPC surface).
+  crafts:     'craft',
+  magic:      'arcane',
+  noble:      'government',
+  nobility:   'government',
 });
 
 function archetypeFromCategory(category) {

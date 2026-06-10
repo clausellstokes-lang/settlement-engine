@@ -29,6 +29,7 @@ import { isIsolatedRoute } from '../tradeRouteSemantics.js';
 import { canonStressors, canonExports, canonImports } from '../canonicalAccessors.js';
 import { foodLedger } from '../foodLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
+import { prosperityRank } from '../../data/constants.js';
 
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').StateDimension} StateDimension */
@@ -59,17 +60,28 @@ function deriveResilience(s) {
   const drivers = [];
   const risks = [];
 
-  // Prosperity is a strong signal — pulled directly from economicState if present
+  // Prosperity is a strong signal — graded across the CANONICAL tier vocabulary
+  // (constants.PROSPERITY_TIERS). The old code matched 'Wealthy/Prosperous' and
+  // 'Subsistence/Struggling' plus a 'Modest' the generator never emits, so the three
+  // most common middle tiers (Poor/Moderate/Comfortable) contributed ZERO resilience
+  // signal — the headline shock-absorption dial ignored most towns' economies.
   const econ = s.economicState || {};
   const prosperity = econ.prosperity?.tier || econ.prosperity || null;
-  if (prosperity === 'Wealthy' || prosperity === 'Prosperous') {
+  const pRank = prosperityRank(prosperity);
+  if (pRank >= 5) {            // Prosperous, Wealthy
     value += 15;
     drivers.push(`Settlement is ${String(prosperity).toLowerCase()}`);
-  } else if (prosperity === 'Subsistence' || prosperity === 'Struggling') {
+  } else if (pRank === 4) {    // Comfortable
+    value += 8;
+    drivers.push('Comfortable prosperity cushions shocks');
+  } else if (pRank === 3) {    // Moderate
+    drivers.push('Moderate prosperity');
+  } else if (pRank === 2) {    // Poor
+    value -= 8;
+    risks.push('Poverty leaves little buffer');
+  } else if (pRank >= 0) {     // Struggling, Subsistence
     value -= 15;
     risks.push(`Settlement is ${String(prosperity).toLowerCase()}`);
-  } else if (prosperity === 'Modest') {
-    drivers.push('Modest prosperity');
   }
 
   // Food security, via the conserved ledger. The old code read `deficitMonths`/

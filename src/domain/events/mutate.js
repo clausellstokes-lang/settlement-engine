@@ -361,8 +361,8 @@ function cutTradeRoute(s, event) {
   cutRoutes.push({ name: which, atEventId: event.id, atTimestamp: eventTime(event) });
   const next = { ...s, config: { ...config, _cutRoutes: cutRoutes } };
   // Promote to a canonical active condition so the causal substrate (which reads
-  // activeConditions by affectedSystems — trade_connectivity / merchant_wealth /
-  // public_legitimacy) reflects the severed route, and the effect SURVIVES
+  // activeConditions by affectedSystems — trade_connectivity / public_legitimacy)
+  // reflects the severed route, and the effect SURVIVES
   // re-derivation and reruns instead of living only in the _cutRoutes annotation.
   // The annotation is retained because deriveRegionalState still reads it for
   // regional propagation.

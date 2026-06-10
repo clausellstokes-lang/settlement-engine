@@ -610,10 +610,16 @@ const DERIVERS = Object.freeze({
 
 function finalizeVariable(name, raw, contributors) {
   const score = Math.max(0, Math.min(100, Math.round(raw)));
+  // Band off the polarity-ADJUSTED score. criminal_opportunity is the lone
+  // lower-is-better variable: a high score means rampant crime, which must read
+  // as a problem band (strained/critical), not "surplus"/Abundant. The raw score
+  // is kept as-is — pressureModel and the delta renderers handle polarity via
+  // variablePolarity() themselves; only the qualitative band flips here.
+  const banded = variablePolarity(name) === 'lower_is_better' ? 100 - score : score;
   return {
     variable: name,
     score,
-    band: causalBand(score),
+    band: causalBand(banded),
     contributors,
   };
 }

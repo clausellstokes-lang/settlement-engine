@@ -296,7 +296,7 @@ function ruleTaxObligation(channel, localDelta, change) {
   if (change.kind === 'route_cut' || change.kind === 'export_lost' || change.kind === 'chain_degraded' || change.kind === 'population_loss' || change.kind === 'tier_demotion' || change.kind === 'depleted_good_gained') {
     return impact(channel, localDelta, change, 'tax_revenue_disruption', channel.goods || []);
   }
-  if (change.kind === 'causal_shift' && ['merchant_wealth', 'trade_connectivity', 'resourcePressure'].includes(change.variable)) {
+  if (change.kind === 'causal_shift' && ['trade_connectivity', 'resourcePressure'].includes(change.variable)) {
     return impact(channel, localDelta, change, 'tax_revenue_disruption', channel.goods || []);
   }
   return null;
@@ -340,7 +340,7 @@ function ruleCriminalCorridor(channel, localDelta, change) {
   if (change.kind === 'legitimacy_shock' || change.kind === 'security_shock') {
     return impact(channel, localDelta, change, 'criminal_pressure', []);
   }
-  if (change.kind === 'causal_shift' && ['criminal_opportunity', 'social_trust', 'merchant_wealth'].includes(change.variable)) {
+  if (change.kind === 'causal_shift' && ['criminal_opportunity', 'social_trust'].includes(change.variable)) {
     return impact(channel, localDelta, change, 'criminal_pressure', []);
   }
   return null;
@@ -511,19 +511,19 @@ function affectedSystemsForImpact(impactItem) {
     return ['trade_connectivity', 'faction_power', 'public_legitimacy'];
   }
   if (impactItem.kind === 'route_disruption') {
-    return ['trade_connectivity', 'merchant_wealth', 'public_legitimacy'];
+    return ['trade_connectivity', 'public_legitimacy'];
   }
   if (impactItem.kind === 'authority_instability') {
     return ['public_legitimacy', 'faction_power', 'social_trust'];
   }
   if (impactItem.kind === 'tax_revenue_disruption') {
-    return ['merchant_wealth', 'faction_power', 'public_legitimacy'];
+    return ['trade_connectivity', 'faction_power', 'public_legitimacy'];
   }
   if (impactItem.kind === 'protection_gap') {
     return ['defense_readiness', 'trade_connectivity', 'public_legitimacy'];
   }
   if (impactItem.kind === 'service_disruption') {
-    return ['healing_capacity', 'merchant_wealth', 'public_legitimacy'];
+    return ['healing_capacity', 'trade_connectivity', 'public_legitimacy'];
   }
   if (impactItem.kind === 'conflict_pressure') {
     return ['defense_readiness', 'trade_connectivity', 'public_legitimacy'];
@@ -535,7 +535,7 @@ function affectedSystemsForImpact(impactItem) {
     return ['public_legitimacy', 'social_trust', 'faction_power'];
   }
   if (impactItem.kind === 'criminal_pressure') {
-    return ['criminal_opportunity', 'social_trust', 'merchant_wealth'];
+    return ['criminal_opportunity', 'social_trust', 'trade_connectivity'];
   }
   if (impactItem.kind === 'religious_pressure') {
     return ['public_legitimacy', 'social_trust', 'healing_capacity'];

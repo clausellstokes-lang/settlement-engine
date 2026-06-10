@@ -231,7 +231,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const lawRef     = inst.hasGarrison ? 'garrison and watch' : inst.hasWatch ? 'city watch' : inst.hasMilitia ? 'militia' : 'law enforcement';
     const wallNote   = inst.hasWalls ? ' Walls and controlled entry points reinforce the guard\'s ability to monitor movement.' : '';
     const charNote   = inst.hasCharterHall ? " The adventurers' charter hall handles threats the watch cannot." : '';
-    const threatNote = threat === 'embattled' ? ' The constant monster threat keeps the guard exceptionally well-drilled and alert.' : '';
+    // Canonical threat vocabulary is heartland/frontier/plagued ('embattled' was never emitted).
+    const threatNote = threat === 'plagued' ? ' The constant monster threat keeps the guard exceptionally well-drilled and alert.' : '';
     safetyDesc = `Effective ${lawRef} and low criminal activity make this among the safest settlements in the region. ` +
       `Visitors can move freely at all hours.${wallNote}${charNote}${threatNote}`;
   } else if (effectiveSafety >= 2) {

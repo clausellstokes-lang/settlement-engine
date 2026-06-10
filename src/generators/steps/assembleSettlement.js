@@ -27,11 +27,10 @@ import { normalizeSettlement } from '../../domain/normalizeSettlement.js';
 // generated mid-crisis — closing the "generated plague town has activeConditions:[]"
 // gap. Pure + deterministic + idempotent.
 import { promoteStressorsToConditions } from '../../domain/conditionPromotion.js';
-
-const DEFENSE_CONTRIB = {
-  'Undefended': -10, 'Vulnerable': -5, 'Defensible': 0,
-  'Well-Defended': 7, 'Fortress': 10,
-};
+// The canonical defense-readiness -> legitimacy table. This file used to carry a
+// stale local copy that LACKED 'Lightly Defended', so the real-label patch below
+// reverted that band's provisional contribution to 0 on every generated settlement.
+import { DEFENSE_CONTRIB } from '../factionDynamics.js';
 
 registerStep('assembleSettlement', {
   deps: ['generateNarratives', 'generatePopulation', 'corruptionPass'],

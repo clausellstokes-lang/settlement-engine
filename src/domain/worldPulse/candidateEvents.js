@@ -69,7 +69,12 @@ function pressureConditionCandidate(pressure, tick) {
       status: pressure.score >= 0.7 ? 'worsening' : 'stable',
       duration: { elapsedTicks: 0, expiresAtTicks: pressure.score >= 0.75 ? 10 : 6 },
       triggeredAt: { tick, sourceEventType: 'WORLD_PULSE_PRESSURE', sourceEventTargetId: pressure.settlementId },
-      affectedSystems: ['public_legitimacy', 'trade_connectivity'],
+      // affectedSystems intentionally OMITTED: deriveActiveCondition falls back to the
+      // per-archetype catalog template (famine -> food_security + labor_capacity, plague ->
+      // healing_capacity, crime -> criminal_opportunity, ...). A hard-coded
+      // ['public_legitimacy','trade_connectivity'] here used to override that for EVERY
+      // pressure kind, so an emergent famine never lowered food_security and the loop's
+      // organic feedback misrouted — the single most damaging wiring bug in the audit.
       causes: pressure.reasons.map(reason => ({ source: 'world_pulse', effect: pressure.kind, reason })),
     },
     metadata: {

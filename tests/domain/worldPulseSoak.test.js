@@ -5,6 +5,7 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { deriveAllActiveConditions } from '../../src/domain/activeConditions.js';
 import { foodLedger } from '../../src/domain/foodLedger.js';
 import { healingLedger } from '../../src/domain/healingLedger.js';
+import { readCorruptionClimate } from '../../src/domain/corruption.js';
 
 // A long-horizon "soak" test — the feel/balance analog of the generator's
 // distribution test. We advance a small region many ticks and assert the world
@@ -316,5 +317,102 @@ describe('world pulse — long-horizon soak / balance', () => {
       expect(led.healerCount).toBe(0);
       expect(led.services.length).toBeGreaterThan(0);
     }
+  });
+
+  // Corruption runaway guard. memory/corruption-system.md names this soak as THE guard
+  // for the damped NPC/faction/thieves-guild loop, but the baseline fixtures carry
+  // institutions: [] and no corruptible flaws — so every corruption/capture path
+  // short-circuited and the guard exercised ZERO corruption iterations across 40 ticks.
+  // This case gives every town a criminal institution + corruptible NPCs so the loop
+  // actually runs, then asserts the damping holds (no total corruption, world bounded).
+  test('40 ticks with a criminal underworld stays bounded and corruption does not run away', () => {
+    const ids = ['a', 'b', 'c', 'd', 'e'];
+    const withUnderworld = (sv) => ({
+      ...sv,
+      settlement: {
+        ...sv.settlement,
+        institutions: [
+          ...sv.settlement.institutions,
+          { id: `guild_${sv.id}`, name: "Thieves' Guild", category: 'criminal' },
+          { id: `market_${sv.id}`, name: 'Market square' },
+        ],
+        npcs: sv.settlement.npcs.map(n => ({ ...n, flaws: ['greedy'] })),
+      },
+    });
+    let saves = ids.map((id, i) => withUnderworld(save(id, `Town-${id.toUpperCase()}`, i + 1)));
+
+    // Precondition the corruption loop depends on actually holds at t0: a criminal
+    // institution is present (the climate gate) and the NPCs carry corruptible flaws.
+    for (const s of saves) {
+      expect(readCorruptionClimate(s.settlement).hasCriminalInst).toBe(true);
+      expect(s.settlement.npcs.every(n => n.flaws.includes('greedy'))).toBe(true);
+    }
+
+    let campaign = {
+      id: 'soak-underworld',
+      name: 'Underworld Region',
+      settlementIds: ids,
+      worldState: { rngSeed: 'soak-underworld-seed', tick: 0, stressors: [] },
+      regionalGraph: ensureRegionalGraph({
+        channels: [
+          { type: 'trade_dependency', from: 'a', to: 'b', status: 'confirmed' },
+          { type: 'trade_route', from: 'b', to: 'c', status: 'confirmed' },
+          { type: 'military_protection', from: 'c', to: 'd', status: 'confirmed' },
+          { type: 'political_authority', from: 'a', to: 'e', status: 'confirmed' },
+        ],
+      }),
+      wizardNews: { currentTick: 0, entries: [] },
+    };
+
+    const TICKS = 40;
+    let maxStressors = 0;
+    let maxConditionsAnySettlement = 0;
+    let totalAutoApplied = 0;
+
+    for (let i = 0; i < TICKS; i++) {
+      const result = advanceCampaignWorld({
+        campaign,
+        saves,
+        interval: 'one_month',
+        now: `2026-03-01T00:00:${String(i).padStart(2, '0')}.000Z`,
+      });
+      expect(result).not.toBeNull();
+
+      campaign = {
+        ...campaign,
+        worldState: result.worldState,
+        regionalGraph: result.regionalGraph,
+        wizardNews: result.wizardNews,
+      };
+      saves = saves.map(s => {
+        const update = result.settlementUpdates.find(u => String(u.saveId) === String(s.id));
+        return update ? { ...s, settlement: update.settlement } : s;
+      });
+
+      totalAutoApplied += result.autoApplied.length;
+      maxStressors = Math.max(maxStressors, (result.worldState.stressors || []).length);
+      for (const s of saves) {
+        maxConditionsAnySettlement = Math.max(maxConditionsAnySettlement, deriveAllActiveConditions(s.settlement).length);
+      }
+    }
+
+    // Same bounds as the baseline soak — the underworld must not destabilise them.
+    expect(campaign.worldState.tick).toBe(TICKS);
+    expect(totalAutoApplied).toBeGreaterThan(0);
+    expect(maxStressors).toBeLessThanOrEqual(40);
+    expect(maxConditionsAnySettlement).toBeLessThanOrEqual(30);
+    expect(campaign.worldState.pulseHistory.length).toBeLessThanOrEqual(80);
+
+    // Probative: the corruption loop actually RAN — npc states were tracked for our
+    // NPCs (a vacuous pass would leave npcStates empty, the pre-fix behaviour).
+    const npcStates = campaign.worldState.npcStates || {};
+    expect(Object.keys(npcStates).length).toBeGreaterThan(0);
+
+    // The damping guard itself: corruption must not saturate. A runaway pegs every
+    // NPC corrupt within 40 ticks; the damped loop stabilises below that.
+    const allNpcs = saves.flatMap(s => s.settlement.npcs || []);
+    const corruptCount = allNpcs.filter(n => n.corrupt === true).length;
+    expect(allNpcs.length).toBeGreaterThan(0);
+    expect(corruptCount).toBeLessThan(allNpcs.length); // not total corruption
   });
 });

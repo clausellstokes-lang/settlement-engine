@@ -1852,7 +1852,10 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
                       : ke('monster_pressure') &&
                         (Me.toLowerCase().includes('tense') ||
                           (Me = 'Tense (monster pressure from surrounding region)')),
-    (Gt === 'embattled' || Gt === 'high') &&
+    // Canonical threat vocabulary is heartland/frontier/plagued — the old
+    // 'embattled'/'high' literals were never emitted, so a plagued settlement
+    // never received its monster-threat governance annotation.
+    Gt === 'plagued' &&
       (Me = [
         'tense',
         'unstable',
