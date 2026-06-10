@@ -1643,7 +1643,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           percentage: 18,
           desc: 'Annual licensing fees and fines levied by guild oversight.',
         }),
-    hasInst('major port') && tradeRoute === 'port'
+    // Port Duties keys on port institutions the catalog actually generates:
+    // 'Docks/port facilities', "Harbour master's office", 'Shipyard'.
+    // 'docks/port' (not bare 'dock') so 'Airship docking' never reads as a
+    // harbour; 'shipyard' must not match 'River boatyard'.
+    hasInst('docks/port', 'harbour master', 'shipyard') && tradeRoute === 'port'
       ? incomeBuild.push({
           source: 'Port Duties',
           percentage: 35,

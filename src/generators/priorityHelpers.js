@@ -20,6 +20,12 @@ export const getPriorities = (config = {}) => ({
 const hasAny = (nameList, keywords) =>
   keywords.some(k => nameList.some(n => n.includes(k)));
 
+// Real port infrastructure only — word-bounded so 'Barge and river transport
+// company' and 'Teleportation circle' never read as harbours, and 'Airship
+// docking' never reads as docks. Matches 'Docks/port facilities',
+// "Harbour master's office", 'Shipyard' (and Major port/Navy if ever cataloged).
+const PORT_INFRA_RE = /\b(?:port|docks?|harbou?r|shipyard|navy)\b/;
+
 /**
  * Classify a settlement's institution list into boolean presence flags.
  * All comparisons are lowercase; call this once and pass the result around.
@@ -46,7 +52,7 @@ const getInstitutionNames = (institutions = []) => {
     hasMerchantGuild: hasAny(names, ['merchant guild','merchant oligarchy']),
     hasBank:          hasAny(names, ['bank','money changer','counting','stock exchange']),
     hasWarehouse:     hasAny(names, ['warehouse']),
-    hasPort:          hasAny(names, ['port','dock','major port','navy']),
+    hasPort:          names.some(n => PORT_INFRA_RE.test(n)),
     hasNavy:          hasAny(names, ['navy','major port']),
     hasGranary:       hasAny(names, ['granar']),
     hasHospital:      hasAny(names, ['hospital','monastery','healer','friary']),

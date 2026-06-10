@@ -9,7 +9,7 @@
 
 import { registerStep } from '../pipeline.js';
 import { applyCascadeInstitutions } from '../cascadeGenerator.js';
-import { SUBSUMPTION_RULES } from './subsumptionPass.js';
+import { applySubsumption } from './subsumptionPass.js';
 import { collapseUpgradeChains } from './assembleInstitutions.js';
 import { recordTrace } from '../../domain/trace.js';
 
@@ -58,35 +58,11 @@ registerStep('cascadePass', {
       });
     }
 
-    // Re-run subsumption on expanded list — emit "subsumed" traces for
-    // anything the post-cascade dedup removes. Same shape as
-    // subsumptionPass's primary emission.
-    SUBSUMPTION_RULES.forEach(({ greater, lesser }) => {
-      const names = institutions.map(i => i.name.toLowerCase());
-      const hasGreater = names.some(n => n.includes(greater.toLowerCase()));
-      if (!hasGreater) return;
-      const toRemove = [];
-      institutions.forEach((inst, idx) => {
-        if (lesser.some(l => inst.name.toLowerCase().includes(l.toLowerCase())))
-          toRemove.push(idx);
-      });
-      for (const idx of toRemove) {
-        const inst = institutions[idx];
-        if (inst) {
-          recordTrace(ctx, {
-            targetType: 'institution',
-            targetId:   instId(inst.name),
-            step:       'cascadePass',
-            result:     'subsumed_after_cascade',
-            causes: [
-              { source: instId(greater), effect: 'absorbed',
-                reason: `Cascade-added "${inst.name}" was immediately absorbed by larger "${greater}".` },
-            ],
-          });
-        }
-      }
-      [...toRemove].sort((a, b) => b - a).forEach(idx => institutions.splice(idx, 1));
-    });
+    // Re-run subsumption on the expanded list — emit "subsumed_after_cascade"
+    // traces for anything the post-cascade dedup removes. MUST go through the
+    // shared guarded matcher: the rules table is only safe under exact lesser
+    // matching, self-exclusion, and required/forced/custom protection.
+    applySubsumption(institutions, ctx, { step: 'cascadePass', result: 'subsumed_after_cascade' });
 
     // The cascade must also obey the UPGRADE_CHAINS ladder assembly already
     // collapsed — the cascade tables are chain-adjacency, not scale-aware, so
@@ -111,10 +87,9 @@ registerStep('cascadePass', {
   // Airship override: if airship docking exists, maritime institutions are
   // permitted regardless of trade route. Airship docking is rolled in main
   // generation — independent of whether the cascade added anything — so this
-  // must NOT sit inside the cascade-additions guard. It must also run AFTER
-  // the post-cascade re-subsumption: the "harbour master's office" rule
-  // absorbs 'docks/port facilities', and for an aerial port those are
-  // complementary infrastructure, not a scale ladder.
+  // must NOT sit inside the cascade-additions guard. Docks and the harbour
+  // master's office are complementary infrastructure, not a scale ladder; no
+  // subsumption rule may collapse one into the other.
   const hasAirship = institutions.some(i =>
     (i.name || '').toLowerCase().includes('airship')
   );

@@ -180,7 +180,13 @@ function legitimacyFor(faction, settlement) {
 
   const factionName = typeof faction === 'string' ? faction : (faction.faction || faction.name || '');
   const govName = power.governingName || '';
-  const isGoverning = !!(govName && factionName && govName.toLowerCase().includes(factionName.toLowerCase().split(/[\s/(]/)[0].toLowerCase()))
+  // Exact comparison only: governingName is now reliably written as the governing
+  // roster faction's exact name, and the old first-token substring match mis-assigned
+  // governing legitimacy in ~26% of settlements (a non-governing "Merchant Guilds"
+  // matched a "Merchant League" government; "Noble Families" matched every
+  // "Noble Governorship"). The roster isGoverning flag wins when present.
+  const isGoverning = (typeof faction === 'object' && faction?.isGoverning === true)
+    || !!(govName && factionName && govName.toLowerCase() === factionName.toLowerCase())
     || power.governingFactionName === factionName;
 
   // Governing faction inherits the settlement's public legitimacy via the conserved

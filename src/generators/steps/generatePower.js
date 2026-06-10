@@ -24,12 +24,14 @@ registerStep('generatePower', {
 }, (ctx) => {
   const {
     tier, economicState, effectiveConfig, institutions,
-    neighbourGovBias, neighbourFacBias,
   } = ctx;
 
+  // Note: neighbour faction influence is consumed by the separate
+  // neighbourFactions step (ctx.neighbourFacBias); generatePowerStructure
+  // itself reads no neighbour bias, so none is threaded into its config.
   const powerStructure = generatePowerStructure(
     tier, economicState, null,
-    { ...effectiveConfig, _neighbourGovBias: neighbourGovBias, _neighbourFacBias: neighbourFacBias },
+    { ...effectiveConfig },
     institutions
   );
 
@@ -41,15 +43,15 @@ registerStep('generatePower', {
   // + resource bands so the trace carries the meaningful classification.
 
   const factionsList = powerStructure?.factions || [];
-  const governingName = powerStructure?.governingName || null;
 
   for (const f of factionsList) {
     const profile = deriveFactionProfile(f, { powerStructure });
     if (!profile) continue;
 
-    const isGoverning = governingName
-      && f.faction
-      && governingName.toLowerCase().includes(f.faction.toLowerCase().split(/[\s/(]/)[0].toLowerCase());
+    // The generator marks the governing entry directly; name-matching
+    // against powerStructure.governingName would readmit substring false
+    // positives (e.g. Merchant Guilds under a Merchant oligarchy).
+    const isGoverning = f.isGoverning === true;
 
     const causes = [];
     causes.push({

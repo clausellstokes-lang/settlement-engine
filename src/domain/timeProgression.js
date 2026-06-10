@@ -184,12 +184,15 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
     // ONLY when this faction is the governing faction (legitimacy on
     // the settlement is the governing faction's legitimacy).
     if (typeof deltas.legitimacy === 'number' && cloned.powerStructure?.publicLegitimacy) {
+      // Exact comparison: governingName is the governing roster faction's exact
+      // name; the old first-token substring match misrouted a faction-targeted
+      // legitimacy delta into settlement legitimacy for ~26% of rosters
+      // (e.g. "Merchant Guilds" deltas hitting a "Merchant League" government).
       const governingName = cloned.powerStructure?.governingName || '';
-      const isGoverning = governingName
-        && faction.faction
-        && governingName.toLowerCase().includes(
-          faction.faction.toLowerCase().split(/[\s/(]/)[0]
-        );
+      const isGoverning = (faction.isGoverning === true)
+        || (governingName
+          && faction.faction
+          && governingName.toLowerCase() === faction.faction.toLowerCase());
       if (isGoverning) {
         cloned.powerStructure.publicLegitimacy = applyLegitimacyDelta(
           cloned.powerStructure.publicLegitimacy,

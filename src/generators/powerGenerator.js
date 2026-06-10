@@ -2203,6 +2203,11 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
 
   return {
     factions: p,
+    // Canonical "who governs" name. Sim consumers (factionProfile legitimacy
+    // inheritance, ruling_authority governing-faction power, hook escalation,
+    // simulation spine, world-event legitimacy deltas) key off this field;
+    // it must always name the faction entry that carries isGoverning.
+    governingName: (p.find((N) => N.isGoverning) || {}).faction || null,
     stability: Me,
     recentConflict: We,
     publicLegitimacy,

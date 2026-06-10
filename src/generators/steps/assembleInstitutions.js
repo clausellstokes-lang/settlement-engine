@@ -135,6 +135,10 @@ function getResourceMultiplier(instTags, instName, nearbyResources, instModifier
 // Exported: cascadePass must apply the SAME collapse after its additions, or the
 // cascade re-adds the lesser member of a ladder assembly just collapsed (a city
 // listing both "Town hall" and "City hall").
+// Pairs must be scale tiers of the SAME function. Complementary infrastructure
+// (e.g. Docks/port facilities vs Warehouse district) must never be paired:
+// 'Warehouse district' is required:true at city tier, so such a pair would
+// deterministically delete the other member from every city roster.
 export const UPGRADE_CHAINS = [
   ["Parish church","Parish churches (2-5)"],["Parish church","Parish churches (10-30)"],
   ["Parish churches (2-5)","Parish churches (10-30)"],["Wayside shrine","Parish church"],
@@ -149,7 +153,7 @@ export const UPGRADE_CHAINS = [
   ["Traveling hedge wizard","Hedge wizard"],["Alchemist shop","Alchemist quarter"],
   ["Wizard's tower","Mages' guild"],["Town granary","City granaries"],
   ["Town hall","City hall"],["Blacksmith","Blacksmiths (3-10)"],
-  ["Carpenter","Carpenters (5-15)"],["Docks/port facilities","Warehouse district"],
+  ["Carpenter","Carpenters (5-15)"],
   ["Carriers' hiring hall","Carriers' guild"],["Carriers' guild","Caravan masters' exchange"],
   ["Carriers' hiring hall","Caravan masters' exchange"],["Small prison/stocks","Large prison"],
   ["Courthouse","Multiple courthouses"],["Craft guilds (5-15)","Craft guilds (30-80)"],

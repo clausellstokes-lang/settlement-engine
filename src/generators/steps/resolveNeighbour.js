@@ -10,14 +10,13 @@ import { registerStep } from '../pipeline.js';
 import {
   extractNeighbourProfile,
   getNeighbourEconomicBias,
-  getNeighbourGovernmentBias,
   getNeighbourFactionBias,
 } from '../neighbourGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 
 registerStep('resolveNeighbour', {
   deps: ['resolveConfig'],
-  provides: ['neighbourProfile', 'neighbourEconBias', 'neighbourGovBias', 'neighbourFacBias', 'rawNeighbour'],
+  provides: ['neighbourProfile', 'neighbourEconBias', 'neighbourFacBias', 'rawNeighbour'],
   phase: 'config',
 }, (ctx) => {
   const config = ctx.config || {};
@@ -29,7 +28,10 @@ registerStep('resolveNeighbour', {
     ? extractNeighbourProfile(rawNeighbour, relType)
     : null;
   const neighbourEconBias = getNeighbourEconomicBias(neighbourProfile);
-  const neighbourGovBias  = getNeighbourGovernmentBias(neighbourProfile);
+  // Government-type bias was computed and plumbed here for years but no
+  // generator ever read it — the receipt below claimed an influence that
+  // never existed. The neighbour's real power-structure influence is the
+  // faction mirroring done by the neighbourFactions step (neighbourFacBias).
   const neighbourFacBias  = getNeighbourFactionBias(neighbourProfile);
 
   // Only emit a trace when an actual neighbour was bound — a missing
@@ -46,11 +48,10 @@ registerStep('resolveNeighbour', {
       }],
       downstreamEffects: [
         { target: 'economicState',  effect: 'neighbour econ bias applied' },
-        { target: 'powerStructure', effect: 'neighbour gov bias applied' },
         { target: 'factions',       effect: 'neighbour faction bias applied' },
       ],
     });
   }
 
-  return { neighbourProfile, neighbourEconBias, neighbourGovBias, neighbourFacBias, rawNeighbour };
+  return { neighbourProfile, neighbourEconBias, neighbourFacBias, rawNeighbour };
 });

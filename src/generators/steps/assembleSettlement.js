@@ -80,6 +80,12 @@ registerStep('assembleSettlement', {
     // without going through the adapter.
     stress,
     stressors: stress,
+    // RESOLVED effectiveConfig snapshot — carries derived keys (stressTypes,
+    // _magicTradeOnly, tier, …) that display/validator/sim readers depend on.
+    // It is NEVER a valid generation input: applyChange regenerates from
+    // _config below, and its legacy fallback strips the derived keys
+    // (store/settlementSlice.js DERIVED_CONFIG_KEYS) so emergent stress
+    // can't echo back in as user-forced stress.
     config: { ...effectiveConfig },
     // The RAW pre-resolution config, sentinels intact ('random',
     // 'random_culture', …). `config` above holds the RESOLVED choices for

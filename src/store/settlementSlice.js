@@ -77,6 +77,36 @@ import { activeSaveCount } from '../lib/saveAccess.js';
 
 const MAX_VERSION_HISTORY = 50;
 
+// ── Derived-config strip ────────────────────────────────────────────────
+// settlement.config is the RESOLVED effectiveConfig snapshot: pipeline steps
+// write purely-derived keys onto it (resolveStress → stressType/stressTypes/
+// intendedStressTypes/_population; isolationGenerator → _magicTradeOnly;
+// generateEconomy → _neighbourEconBias; resolveConfig → tier/magicLevel/
+// terrainType). Display and sim consumers read those keys from
+// settlement.config, so they must stay there — but they must NOT re-enter
+// the pipeline as user input: emergent stress would be re-rolled as
+// user-forced stress (with a false "selected by user config" receipt) and
+// stale isolation/economy flags would outlive their causes.
+// settlement._config (the raw pre-resolution config) is the preferred
+// regeneration input; this strip protects the fallback for settlements
+// persisted before _config existed. Overwritten-in-place keys (floored
+// priorityMilitary, magicExists-zeroed priorityMagic, resolved route/threat/
+// culture) are NOT stripped here — their raw values are unrecoverable from
+// the snapshot and are restored via the _config path instead.
+export const DERIVED_CONFIG_KEYS = Object.freeze([
+  'stressType', 'stressTypes', 'intendedStressTypes',
+  '_magicTradeOnly', '_neighbourEconBias', '_neighbourEconMode', '_isolationInfraType',
+  '_population',
+  'tier', 'magicLevel', 'terrainType',
+]);
+
+export function stripDerivedConfigKeys(config) {
+  if (!config || typeof config !== 'object') return config;
+  const out = { ...config };
+  for (const key of DERIVED_CONFIG_KEYS) delete out[key];
+  return out;
+}
+
 function cloneJson(value) {
   if (value === undefined || value === null) return value;
   return JSON.parse(JSON.stringify(value));
@@ -743,7 +773,12 @@ export const createSettlementSlice = (set, get) => ({
       // resolved choices stop propagating generation after generation.
       // Behavior-preserving for what-if edits: the same lastSeed below
       // re-resolves any 'random' sentinel to the identical value.
-      ...(state.settlement?._config || state.settlement?.config || state.config),
+      // The settlement.config fallback (pre-_config saves) is the resolved
+      // snapshot — strip its derived keys so emergent stress / stale
+      // isolation flags don't come back as forced input.
+      ...(state.settlement?._config
+        || stripDerivedConfigKeys(state.settlement?.config)
+        || state.config),
       _institutionToggles: pendingChange.overrides.institutionToggles || state.institutionToggles,
       _categoryToggles:    state.categoryToggles,
       _goodsToggles:       state.goodsToggles,

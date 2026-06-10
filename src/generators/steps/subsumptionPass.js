@@ -1,8 +1,8 @@
 /**
  * Step 6: subsumptionPass
  *
- * Removes lesser institutions when greater ones are present.
- * 70+ rules (e.g. "banking district" subsumes "money changer").
+ * Removes lesser institutions when greater ones are present
+ * (e.g. "banking district" subsumes "money changers").
  *
  * Subsumption pass for the settlement generation pipeline.
  */
@@ -14,20 +14,30 @@ function instId(name) {
   return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
 }
 
+// Rules collapse same-function scale ladders ONLY (a bigger version of the
+// same trade replaces the smaller one). Constraints the table must hold:
+//   - No rule may let a downstream consumer absorb its upstream producer
+//     (smelter/charcoal burner, merchant guild/salt works, butchers/shepherd,
+//     harbour master/docks): producers feeding a processor ARE the supply
+//     chain — removing them deactivates the chains and export gates keyed on
+//     their names. Cross-function adjacency belongs to the cascade pass,
+//     which adds institutions instead of removing them.
+//   - Lessers are matched by EXACT name (case-insensitive) against the
+//     catalog vocabulary; every lesser must be a real catalog name.
+//   - A greater must never equal one of its own lessers.
 const SUBSUMPTION_RULES = [
-  { greater: 'banking district',            lesser: ['banking house', 'money changer', 'money changers'] },
-  { greater: 'banking houses',              lesser: ['money changers', 'money changer'] },
+  { greater: 'banking district',            lesser: ['banking houses', 'money changers'] },
+  { greater: 'banking houses',              lesser: ['money changers'] },
   { greater: 'mages\' guild',               lesser: ['wizard\'s tower', 'alchemist shop'] },
-  { greater: 'mages district',              lesser: ['wizard\'s tower', 'mages\' guild', 'alchemist shop', 'alchemist quarter'] },
+  { greater: 'mages\' district',            lesser: ['wizard\'s tower', 'mages\' guild', 'alchemist shop', 'alchemist quarter'] },
   { greater: 'academy of magic',            lesser: ['wizard\'s tower', 'mages\' guild'] },
-  { greater: 'multiple adventurers\' guild', lesser: ['adventurers\' charter hall', 'hireling hall', 'adventurers\' guild chapter'] },
+  { greater: 'multiple adventurers\' guild', lesser: ['adventurers\' charter hall', 'hireling hall'] },
   { greater: 'adventurers\' guild',          lesser: ['adventurers\' charter hall', 'hireling hall'] },
   { greater: 'cathedral',                   lesser: ['parish church', 'priest (resident)', 'wayside shrine'] },
   { greater: 'major hospital',              lesser: ['small hospital'] },
   { greater: 'professional city watch',     lesser: ['town watch', 'citizen militia'] },
   { greater: 'multiple courthouses',        lesser: ['courthouse'] },
   { greater: 'major port',                  lesser: ['docks/port facilities', 'river boatyard', 'river ferry'] },
-  { greater: 'university',                  lesser: ['academy of magic'] },
   { greater: 'craft guilds (30-80)',         lesser: ['craft guilds (5-15)'] },
   { greater: 'craft guilds (100-150+)',      lesser: ['craft guilds (30-80)', 'craft guilds (5-15)'] },
   { greater: 'merchant guilds (15-40)',      lesser: ['merchant guilds (3-8)'] },
@@ -35,19 +45,16 @@ const SUBSUMPTION_RULES = [
   { greater: 'thieves\' guild chapter',      lesser: ['fence (word of mouth)', 'local fence', 'bandit affiliate'] },
   { greater: 'black market',                lesser: ['fence (word of mouth)', 'local fence'] },
   { greater: 'brewery',                     lesser: ['brewer'] },
-  { greater: 'tanner (established)',        lesser: ['tannery'] },
   { greater: "cobbler's guild",             lesser: ['cobbler'] },
   { greater: "tailor's guild",              lesser: ['tailor'] },
   { greater: 'mint (official)',             lesser: ['mint', 'assay office'] },
-  { greater: 'smelter',                     lesser: ['charcoal burner'] },
   { greater: 'stable district',             lesser: ['stable master', 'stable yard'] },
   { greater: 'fish market',                 lesser: ['fishmonger'] },
   { greater: "furrier's district",          lesser: ['tannery'] },
   { greater: "assassins' guild",            lesser: ['contract killer', 'hired blades'] },
   { greater: "thieves' guild (powerful)",   lesser: ["thieves' guild chapter", 'black market bazaar', 'contract killer'] },
   { greater: 'auction house',              lesser: ['slave market'] },
-  { greater: "harbour master's office",    lesser: ['docks/port facilities'] },
-  { greater: 'gladiatorial school',        lesser: ['pit fights'] },
+  { greater: 'gladiatorial school',        lesser: ['fighting pits'] },
   { greater: 'printing house',             lesser: ['village scribe'] },
   { greater: 'great library',              lesser: ['village scribe', 'printing house'] },
   { greater: 'banking houses',             lesser: ['pawnbroker'] },
@@ -57,21 +64,27 @@ const SUBSUMPTION_RULES = [
   { greater: "caravan masters' exchange",    lesser: ["caravaneer's post", 'waystation', 'pack animal trader'] },
   { greater: "caravaneer's post",            lesser: ['waystation', 'pack animal trader'] },
   { greater: 'international trade center',  lesser: ["caravan masters' exchange", "caravaneer's post"] },
-  { greater: 'stone quarry',                lesser: ['stone quarry (hamlet)'] },
-  { greater: 'smelter',                     lesser: ['mine (open cast)'] },
   { greater: 'luxury goods quarter',        lesser: ['jeweller'] },
   { greater: 'specialized metalworkers',    lesser: ['jeweller'] },
-  { greater: "butchers (3-8)",              lesser: ['dairy farmer', 'shepherd'] },
-  { greater: 'craft guilds (5-15)',         lesser: ['dairy farmer'] },
-  { greater: 'merchant guilds (3-8)',       lesser: ['salt works'] },
-  { greater: 'brewery',                     lesser: ['vintner'] },
-  { greater: 'merchant guilds (3-8)',       lesser: ['vintner'] },
 ];
 
 // Exported for re-use in cascadePass
 export { SUBSUMPTION_RULES };
 
-function applySubsumption(institutions, ctx = null) {
+// Institutions a subsumption rule may never delete. Tier-required entries,
+// DM force-toggles, and user-authored customs are contract with the DM —
+// subsumption only collapses redundancy among *generated* institutions.
+const PROTECTED_SOURCES = new Set(['required', 'forced', 'custom']);
+
+function isProtectedInstitution(inst) {
+  return inst?.required === true || PROTECTED_SOURCES.has(inst?.source);
+}
+
+// `trace` lets re-subsumption sites (cascadePass) keep their own step/result
+// labels while sharing this one guarded matcher — the rules table must never
+// be applied through a second matcher with different protection semantics.
+function applySubsumption(institutions, ctx = null, trace = {}) {
+  const { step: traceStep = 'subsumptionPass', result: traceResult = 'subsumed' } = trace;
   const names = institutions.map(i => i.name.toLowerCase());
   const toRemove = new Set();
   // Track which `greater` triggered each removal so the trace can name
@@ -79,14 +92,26 @@ function applySubsumption(institutions, ctx = null) {
   // "subsumed."
   const subsumedBy = new Map();
   SUBSUMPTION_RULES.forEach(({ greater, lesser }) => {
-    const hasGreater = names.some(n => n.includes(greater.toLowerCase()));
-    if (!hasGreater) return;
+    const g = greater.toLowerCase();
+    // Greaters match by substring so tier-suffixed catalog variants count
+    // ("Cathedral (10,000+ only)" satisfies greater 'cathedral'). The
+    // matched indices are immune to this rule's removals: an institution
+    // can never be subsumed into itself.
+    const greaterIdxs = new Set();
+    names.forEach((n, idx) => { if (n.includes(g)) greaterIdxs.add(idx); });
+    if (greaterIdxs.size === 0) return;
     lesser.forEach(l => {
+      const lc = l.toLowerCase();
       institutions.forEach((inst, idx) => {
-        if (inst.name.toLowerCase().includes(l.toLowerCase())) {
-          toRemove.add(idx);
-          if (!subsumedBy.has(idx)) subsumedBy.set(idx, greater);
-        }
+        // Lessers match by EXACT name: substring matching also caught the
+        // greater itself ("Brewery" contains 'brewer') and independent
+        // scale variants ("Parish churches (10-30)" contains 'parish
+        // church'), deleting institutions the rule never meant.
+        if (names[idx] !== lc) return;
+        if (greaterIdxs.has(idx)) return;
+        if (isProtectedInstitution(inst)) return;
+        toRemove.add(idx);
+        if (!subsumedBy.has(idx)) subsumedBy.set(idx, greater);
       });
     });
   });
@@ -102,8 +127,8 @@ function applySubsumption(institutions, ctx = null) {
       recordTrace(ctx, {
         targetType: 'institution',
         targetId:   instId(inst.name),
-        step:       'subsumptionPass',
-        result:     'subsumed',
+        step:       traceStep,
+        result:     traceResult,
         causes: [
           { source: instId(greaterName || 'unknown'),
             effect: 'absorbed',
@@ -113,7 +138,8 @@ function applySubsumption(institutions, ctx = null) {
     }
   }
 
-  [...toRemove].sort((a, b) => b - a).forEach(idx => institutions.splice(idx, 1));
+  const removedNames = [...toRemove].sort((a, b) => b - a).map(idx => institutions.splice(idx, 1)[0].name);
+  return removedNames;
 }
 
 registerStep('subsumptionPass', {
@@ -121,8 +147,8 @@ registerStep('subsumptionPass', {
   provides: [], // mutates institutions in place
   phase: 'institutions',
 }, (ctx) => {
-  applySubsumption(ctx.institutions, ctx);
+  ctx._subsumed = applySubsumption(ctx.institutions, ctx);
   return {};
 });
 
-export { applySubsumption };
+export { applySubsumption, isProtectedInstitution };
