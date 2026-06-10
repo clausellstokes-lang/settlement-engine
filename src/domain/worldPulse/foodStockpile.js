@@ -130,8 +130,8 @@ export function famineFor(worldStateStressors = [], settlementId) {
  * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any }} [options]
  * @returns {{ settlement: Object, changed: boolean,
  *            summary: { storageMonths: number, effectiveDeficitPct: number,
- *                       reliefPct: number, tithed: boolean, blockaded: boolean,
- *                       famished: boolean } | null }}
+ *                       resilienceScore: number, reliefPct: number, tithed: boolean,
+ *                       blockaded: boolean, famished: boolean } | null }}
  */
 export function advanceFoodStockpile(settlement, { interval = 'one_month', tick = 0, blockade = null, famine = null } = {}) {
   const ledger = foodLedger(settlement);
