@@ -132,7 +132,10 @@ function getResourceMultiplier(instTags, instName, nearbyResources, instModifier
   return Math.min(multiplier, 5);
 }
 
-const UPGRADE_CHAINS = [
+// Exported: cascadePass must apply the SAME collapse after its additions, or the
+// cascade re-adds the lesser member of a ladder assembly just collapsed (a city
+// listing both "Town hall" and "City hall").
+export const UPGRADE_CHAINS = [
   ["Parish church","Parish churches (2-5)"],["Parish church","Parish churches (10-30)"],
   ["Parish churches (2-5)","Parish churches (10-30)"],["Wayside shrine","Parish church"],
   ["Water source","Multiple water sources"],["Citizen militia","Town watch"],
@@ -158,6 +161,30 @@ const UPGRADE_CHAINS = [
   ["Bowyer & fletcher","Bowyers & fletchers (guild)"],["Small hospital","Major hospital"],
   ["Slave market","Slave market district"],
 ];
+
+/**
+ * Collapse upgrade ladders in place: when both members of an UPGRADE_CHAINS pair
+ * are present, the lesser is removed (required institutions protected). Used by
+ * the main assembly AND by cascadePass after cascade additions — both rosters
+ * must obey the same ladder or the dossier lists contradictory scale tiers.
+ *
+ * @returns {string[]} the names removed (for trace emission by callers that trace).
+ */
+export function collapseUpgradeChains(institutions) {
+  const removed = [];
+  const presentNames = new Set(institutions.map(i => i.name));
+  UPGRADE_CHAINS.forEach(([lesser, greater]) => {
+    if (presentNames.has(lesser) && presentNames.has(greater)) {
+      const idx = institutions.findIndex(i => i.name === lesser && i.source !== 'required');
+      if (idx >= 0) {
+        institutions.splice(idx, 1);
+        presentNames.delete(lesser);
+        removed.push(lesser);
+      }
+    }
+  });
+  return removed;
+}
 
 registerStep('assembleInstitutions', {
   deps: ['resolveConfig', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
@@ -395,13 +422,8 @@ registerStep('assembleInstitutions', {
   }
 
   // Dedup upgrade chains
+  collapseUpgradeChains(institutions);
   const presentNames = new Set(institutions.map(i => i.name));
-  UPGRADE_CHAINS.forEach(([lesser, greater]) => {
-    if (presentNames.has(lesser) && presentNames.has(greater)) {
-      const idx = institutions.findIndex(i => i.name === lesser && i.source !== 'required');
-      if (idx >= 0) { institutions.splice(idx, 1); presentNames.delete(lesser); }
-    }
-  });
 
   // §14 — custom subsumption: a custom institution can declare it `subsumes`
   // others; when both are present the absorbed one isn't listed separately

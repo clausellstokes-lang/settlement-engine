@@ -10,6 +10,7 @@
 import { registerStep } from '../pipeline.js';
 import { applyCascadeInstitutions } from '../cascadeGenerator.js';
 import { SUBSUMPTION_RULES } from './subsumptionPass.js';
+import { collapseUpgradeChains } from './assembleInstitutions.js';
 import { recordTrace } from '../../domain/trace.js';
 
 function instId(name) {
@@ -23,13 +24,13 @@ registerStep('cascadePass', {
 }, (ctx, rng) => {
   // terrainType comes from resolveConfig — the cascade re-rolls catalog
   // entries, so it must honour the same geography gates as assemble.
-  const { institutions, tier, tradeRoute, terrainType } = ctx;
+  const { institutions, tier, tradeRoute, terrainType, institutionToggles } = ctx;
 
   // Snapshot the pre-cascade name set so we can identify what the
   // cascade added (and therefore needs traces explaining why).
   const preCascadeNames = new Set(institutions.map(i => (i.name || '').toLowerCase()));
 
-  const cascadeAdditions = applyCascadeInstitutions(institutions, tier, { tradeRoute, terrainType });
+  const cascadeAdditions = applyCascadeInstitutions(institutions, tier, { tradeRoute, terrainType, institutionToggles });
   if (cascadeAdditions.length > 0) {
     institutions.push(...cascadeAdditions);
 
@@ -86,6 +87,25 @@ registerStep('cascadePass', {
       }
       [...toRemove].sort((a, b) => b - a).forEach(idx => institutions.splice(idx, 1));
     });
+
+    // The cascade must also obey the UPGRADE_CHAINS ladder assembly already
+    // collapsed — the cascade tables are chain-adjacency, not scale-aware, so
+    // without this a cascade routinely re-adds the LESSER member of a ladder
+    // (a city listing both "Town hall" and "City hall"). Runs BEFORE the
+    // airship override below: the docks/warehouse pair in the ladder must not
+    // eat the override's aerial docks.
+    for (const removedName of collapseUpgradeChains(institutions)) {
+      recordTrace(ctx, {
+        targetType: 'institution',
+        targetId:   instId(removedName),
+        step:       'cascadePass',
+        result:     'upgrade_collapsed_after_cascade',
+        causes: [
+          { source: 'supplyChainCascade', effect: 'collapsed',
+            reason: `Cascade-added "${removedName}" sits below an upgraded form already on the roster; the larger institution covers it.` },
+        ],
+      });
+    }
   }
 
   // Airship override: if airship docking exists, maritime institutions are

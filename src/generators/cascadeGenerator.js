@@ -54,9 +54,22 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
   // tradeRoute/terrainType gate cascade candidates exactly like the assemble
   // path. When a caller omits them (headless/unit use) the gates are
   // permissive — there is no settlement geography to violate.
-  const { tradeRoute = null, terrainType = null } = opts;
+  const { tradeRoute = null, terrainType = null, institutionToggles = null } = opts;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
   const tierIdx   = TIER_ORD.indexOf(tier);
+  // Same exclusion semantics as assembleInstitutions' toggle sweep (cascade
+  // candidates are never required/forced, so only the exclude side applies).
+  const toggleExcluded = (name, cat, catalogTier) => {
+    if (!institutionToggles) return false;
+    const toggle = institutionToggles[`${tier}::${cat}::${name}`]
+                || institutionToggles[`${tier}_${cat}_${name}`]
+                || institutionToggles[`${catalogTier}::${cat}::${name}`]
+                || institutionToggles[`${catalogTier}_${cat}_${name}`]
+                || institutionToggles[`all::${cat}::${name}`]
+                || institutionToggles[`all_${cat}_${name}`];
+    if (!toggle) return false;
+    return toggle.forceExclude === true || toggle.allow === false;
+  };
   const mk        = n => n.toLowerCase().slice(0, 16);
   const cascadeMap = getCascadeMap();
 
@@ -127,7 +140,13 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
         if (tradeRoute && data.forbiddenTradeRoutes?.includes(tradeRoute)) return;
         if (terrainType && data.terrainRequired && !data.terrainRequired.includes(terrainType)) return;
         if (data.exclusiveGroup && takenGroups.has(data.exclusiveGroup)) return;
-        if (data.exclusionConditions?.some(ex => existingNames.has(ex))) return;
+        if (data.exclusionConditions?.some(ex => existingNames.has(ex)) ) return;
+        // minTier floor: a catalog entry can sit in a lower tier's catalog while
+        // declaring a higher floor — the cascade must not seat it below that floor.
+        if (data.minTier && TIER_ORD.indexOf(data.minTier) > tierIdx) return;
+        // User toggles: a DM's explicit exclusion survives the cascade — the
+        // second-chance roll must not resurrect what the user turned off.
+        if (toggleExcluded(name, cat, t)) return;
 
         // Catalog probability field is `baseChance` — institutionalCatalog
         // defines no `p` field, so any other read silently yields 0.

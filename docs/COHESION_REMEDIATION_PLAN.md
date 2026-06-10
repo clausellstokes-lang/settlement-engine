@@ -1,5 +1,13 @@
 # Cohesion Remediation Plan — unified fix program
 
+> **Progress.** Wave 1 _(shipped, `6ee69e8`)_ — all ten sim-wiring fixes + 21 pin tests; verify instrumented the
+> new famine feedback and proved it damped (gain < 1, fixed point ~0.61). Wave 2 _(shipped, `3da02f5`)_ — producers
+> for all dead consequence trees + 19 tests; verify fold-ins (fishing-community match, removal-as-ceiling, impair
+> dimension gate). Wave 3 _(committed `0482584`; push pending a parallel in-flight work stream)_ — four parallel
+> slices: cascade resurrected, services precedence inverted (220→40 override rows), goods/dependency keys repaired,
+> chains/resources/processors re-pointed + healing pattern extended; the `tests/joins/` harness (Wave 0) landed
+> with 47+ join assertions across the four slices. Waves 4–6 next; Wave 7 awaits owner sign-off.
+
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.
 - `docs/GENERATION_COHERENCE_AUDIT.md` — generation side + cross-domain mappings (institutions ↔ services ↔ goods ↔ chains ↔ resources, subsumption, magic-as-supplement, config→sim trace). 282 findings across 12 analysts; mapping-matrix verdict **5.5/10** (coverage near-exhaustive on paper; join cleanliness fails on unvalidated free-string matching at virtually every join).

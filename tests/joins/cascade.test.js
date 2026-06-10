@@ -242,3 +242,63 @@ describe('behavior: seeded generation produces cascade output', () => {
     expect(maritimeHit).toBeTruthy();
   });
 });
+
+// ── Verify fold-ins: the cascade obeys the ladders, floors, and the DM's toggles ──
+import { UPGRADE_CHAINS } from '../../src/generators/steps/assembleInstitutions.js';
+
+describe('behavior: cascade additions cannot contradict the roster', () => {
+  const gen = (config, seed) =>
+    generateSettlementPipeline(config, null, { seed, customContent: {} });
+
+  test('no upgrade-chain pair coexists after generation (cities listed Town hall + City hall before)', () => {
+    // Covers the verifier's offending seeds plus a tier spread.
+    const cases = [
+      ['viol-city-1', { settType: 'city', culture: 'germanic' }],
+      ['viol-city-9', { settType: 'city', culture: 'germanic' }],
+      ['viol-town-1', { settType: 'town', culture: 'germanic' }],
+      ['viol-town-7', { settType: 'town', culture: 'germanic' }],
+      ['viol-metro-1', { settType: 'metropolis', culture: 'germanic' }],
+      ['viol-village-1', { settType: 'village', culture: 'germanic' }],
+    ];
+    for (const [seed, cfg] of cases) {
+      const names = new Set(gen(cfg, seed).institutions.map((i) => i.name));
+      for (const [lesser, greater] of UPGRADE_CHAINS) {
+        expect(names.has(lesser) && names.has(greater), `${seed}: "${lesser}" + "${greater}" coexist`).toBe(false);
+      }
+    }
+  });
+
+  test('a DM exclude-toggle survives the cascade (no resurrection of excluded institutions)', () => {
+    // Force the cascade roll to always pass, give it an adjacency source, and
+    // exclude a target via toggle: the toggle must win.
+    setActiveRng({ random: () => 0, chance: () => true, fork: () => ({ random: () => 0, chance: () => true }) });
+    try {
+      const roster = [{ name: 'Smelter', category: 'Crafts', exclusiveGroup: null }];
+      const unrestricted = applyCascadeInstitutions([...roster], 'city', {});
+      expect(unrestricted.length).toBeGreaterThan(0);
+      const target = unrestricted[0];
+      const toggles = { [`city::${target.category}::${target.name}`]: { allow: false } };
+      const gated = applyCascadeInstitutions([...roster], 'city', { institutionToggles: toggles });
+      expect(gated.some((a) => a.name === target.name)).toBe(false);
+    } finally {
+      clearActiveRng();
+    }
+  });
+
+  test('minTier floors hold: no cascade addition sits below its declared floor', () => {
+    setActiveRng({ random: () => 0, chance: () => true, fork: () => ({ random: () => 0, chance: () => true }) });
+    try {
+      const TIER_ORD = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+      for (const tier of ['village', 'town', 'city']) {
+        const roster = [{ name: 'Smelter', category: 'Crafts' }, { name: 'Mill', category: 'Essential' }];
+        for (const add of applyCascadeInstitutions([...roster], tier, {})) {
+          if (add.minTier) {
+            expect(TIER_ORD.indexOf(add.minTier)).toBeLessThanOrEqual(TIER_ORD.indexOf(tier));
+          }
+        }
+      }
+    } finally {
+      clearActiveRng();
+    }
+  });
+});
