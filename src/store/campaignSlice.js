@@ -53,6 +53,7 @@ import {
   canonizeWorldState,
   ensureWorldState,
   normalizeSimulationRules,
+  normalizeStressor,
   previewCampaignWorldPulse as domainPreviewCampaignWorldPulse,
   updateProposalStatus as domainUpdateWorldPulseProposalStatus,
 } from '../domain/worldPulse/index.js';
@@ -580,6 +581,33 @@ export const createCampaignSlice = (set, get) => ({
       persistCampaignState(state, campaignId);
     });
     return graph;
+  },
+
+  /**
+   * Register an authored stressor as a ROAMING world-pulse stressor. The
+   * APPLY_STRESSOR canon event bridges here (settlementSlice.applyEvent) so
+   * an authored crisis doesn't just sit on the dossier — the world pulse
+   * ages it: decay, counterforces, synergies, spread, echoes, aftermath.
+   * Upserts by stable stressor id (same byId pattern applyWorldPulse uses),
+   * so re-applying the same crisis at the same settlement overwrites rather
+   * than stacks.
+   */
+  injectCampaignStressor: (campaignId, stressor) => {
+    let injected = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const worldState = ensureWorldState(c.worldState, c);
+      const normalized = normalizeStressor({ ...stressor, createdAt: now, updatedAt: now });
+      const byId = new Map((worldState.stressors || []).map(s => [s.id, s]));
+      byId.set(normalized.id, normalized);
+      c.worldState = { ...worldState, stressors: [...byId.values()] };
+      c.updatedAt = now;
+      injected = normalized;
+      persistCampaignState(state, campaignId);
+    });
+    return injected;
   },
 
   setCampaignRegionalGraph: (campaignId, regionalGraph) => {

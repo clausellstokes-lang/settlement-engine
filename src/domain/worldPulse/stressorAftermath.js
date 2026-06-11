@@ -32,6 +32,7 @@ const HISTORY_EVENT_TYPE = Object.freeze({
   betrayal: 'corruption_scandal',
   political_fracture: 'succession_crisis',
   succession_void: 'leadership_vacuum',
+  coup_detat: 'succession_crisis',
   insurgency: 'guild_conflict',
   rebellion: 'guild_conflict',
   slave_revolt: 'population_friction',

@@ -34,6 +34,7 @@
  */
 
 import { foodLedger } from '../foodLedger.js';
+import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, Number.isFinite(v) ? v : lo));
 const round1 = v => Math.round(v * 10) / 10;
@@ -126,6 +127,11 @@ export function famineFor(worldStateStressors = [], settlementId) {
 /**
  * Advance the settlement's food stockpile one tick.
  *
+ * When the settlement carries a persisted defenseProfile.scores.disaster
+ * (the gated resilience the display surfaces prefer), the live re-grade is
+ * written back through the same gate so the 'Disasters & Famine' row moves
+ * with the granary instead of freezing at the generation value.
+ *
  * @param {Object} settlement
  * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any }} [options]
  * @returns {{ settlement: Object, changed: boolean,
@@ -163,7 +169,32 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   // suffering both (the Starving City) drains twice as fast.
   const blockaded = !!blockade;
   const famished = !!famine;
-  const blockadePct = blockaded ? clamp(ledger.importDependency, 0, 1) * 100 : 0;
+  // Magical transport vs the blockade: a teleportation circle is point-to-
+  // point — the besieger cannot interdict it; an airship dock keeps flying
+  // but impaired against countermeasures. Either way the channel carries at
+  // most its own throughput from the shared ladder (FOOD_IMPORT_RATES) —
+  // generation's model — so a port metropolis importing 58% of need still
+  // starves on the overflow above what a circle can move. Channel resolution
+  // prefers the generator's verdict (foodSecurity.magicTradeChannel) and
+  // falls back to the institution-name sniff for saves generated on an open
+  // route or before the field existed; both paths are gated on magicExists —
+  // a no-magic world's legacy circle is masonry, not a channel. The mode is
+  // recorded in the stockpile bookkeeping so the dossier can say WHY the
+  // blockade did or didn't bite.
+  const _instNames = (settlement?.institutions || []).map(i => String(i?.name || '').toLowerCase());
+  const _hasTeleportCircle = _instNames.some(n =>
+    n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional'));
+  const _hasAirshipDock = _instNames.some(n => n.includes('airship'));
+  const _magicOn = settlement?.config?.magicExists !== false;
+  const blockadeBypass = !blockaded || !_magicOn ? null
+    : (fs.magicTradeChannel
+      ?? (_hasTeleportCircle ? 'teleport' : _hasAirshipDock ? 'airship' : null));
+  const _channelShare = blockadeBypass === 'teleport' ? FOOD_IMPORT_RATES.teleport
+    : blockadeBypass === 'airship' ? FOOD_IMPORT_RATES.airshipBesieged
+    : 0;
+  const blockadePct = blockaded
+    ? Math.max(0, clamp(ledger.importDependency, 0, 1) - _channelShare) * 100
+    : 0;
   const faminePct = famished
     ? clamp(famine.severity ?? 0, 0, 1) * T.famineDeficitScale
     : 0;
@@ -193,6 +224,21 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   // on top of the structural remainder (diversity, imports, adequacy).
   const resilienceScore = Math.round(clamp(resilienceRest + resilienceStorageComponent(storage), 0, 100));
 
+  // Disaster writeback: defenseGenerator persists scores.disaster as the
+  // GATED resilience (resilienceScore × economicGates.disaster), and the
+  // display surfaces prefer it — so the live re-grade must move it too or
+  // the 'Disasters & Famine' row stays frozen at the generation value while
+  // a siege eats the granary. Legacy saves without a persisted disaster
+  // score never gain one (their displays correctly fall through to live
+  // resilience). The persisted gate is 2dp-rounded, so the first recompute
+  // can shift the score by ±1 against the generated value — intended.
+  const _frozenDisaster = settlement.defenseProfile?.scores?.disaster;
+  const _disasterGate = settlement.defenseProfile?.economicGates?.disaster;
+  const nextDisaster = Number.isFinite(_frozenDisaster)
+    ? Math.round(clamp(resilienceScore, 0, 100) * (Number.isFinite(_disasterGate) ? _disasterGate : 1))
+    : undefined;
+  const _disasterMoved = nextDisaster !== undefined && nextDisaster !== _frozenDisaster;
+
   const nextFoodSecurity = {
     ...fs,
     storageMonths: round2(storage),
@@ -207,14 +253,26 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
       reliefPct: round1(reliefPct),
       tithed,
       blockaded,
+      blockadeBypass,
       famished,
       lastTick: tick,
     },
   };
 
+  // Bookkeeping transitions count as change too (NOT lastTick — that moves
+  // every tick by definition): a siege lifting under full bypass must flip
+  // blockaded/blockadeBypass off even when the numbers held still, or the
+  // stockpile's "why" record lies to whatever reads it next.
+  const _flagsMoved = !!fs.stockpile && (
+    fs.stockpile.blockaded !== blockaded
+    || (fs.stockpile.blockadeBypass ?? null) !== blockadeBypass
+    || fs.stockpile.famished !== famished
+  );
   const changed = nextFoodSecurity.storageMonths !== fs.storageMonths
     || nextFoodSecurity.deficitPct !== fs.deficitPct
     || nextFoodSecurity.resilienceScore !== fs.resilienceScore
+    || _disasterMoved
+    || _flagsMoved
     || !fs.stockpile;
   if (!changed) return { settlement, changed: false, summary: null };
 
@@ -222,6 +280,14 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
     settlement: {
       ...settlement,
       economicState: { ...settlement.economicState, foodSecurity: nextFoodSecurity },
+      // Spread defenseProfile/scores immutably ONLY when the gated disaster
+      // score actually moved — unchanged ticks keep reference identity.
+      ...(_disasterMoved ? {
+        defenseProfile: {
+          ...settlement.defenseProfile,
+          scores: { ...settlement.defenseProfile.scores, disaster: nextDisaster },
+        },
+      } : {}),
     },
     changed: true,
     summary: {

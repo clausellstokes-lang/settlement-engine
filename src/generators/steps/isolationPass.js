@@ -11,6 +11,7 @@ import { registerStep } from '../pipeline.js';
 import {
   applyTeleportationInfrastructure,
   applySubsistenceMode,
+  cullPlanarWithoutCircle,
   // stripArcaneInstitutions is called from factionCorrelationPass, not
   // here — but the import path remained as a stale `_`-prefixed unused
   // reference that didn't match the actual export name (no underscore).
@@ -76,6 +77,23 @@ registerStep('isolationPass', {
         ],
       });
     }
+  }
+
+  // Planar traders / Planar embassy require a teleportation circle — runs
+  // AFTER applyTeleportationInfrastructure so a forced isolation circle
+  // counts. factionCorrelationPass re-applies the same cull after faction
+  // pulls (the only later roster-addition path).
+  for (const name of cullPlanarWithoutCircle(institutions)) {
+    recordTrace(ctx, {
+      targetType: 'institution',
+      targetId:   instId(name),
+      step:       'isolationPass',
+      result:     'requires_teleportation_circle',
+      causes: [
+        { source: instId('Teleportation circle'), effect: 'missing prerequisite',
+          reason: `"${name}" trades with other planes through a permanent teleportation circle — no circle exists here, so the institution cannot operate.` },
+      ],
+    });
   }
 
   // Note: stripArcaneInstitutions runs later in the original (line 889, after faction correlation).

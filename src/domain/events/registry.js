@@ -111,6 +111,9 @@ export const RERUN_KEYS_FOR_EVENT = {
   OPENED_TRADE_ROUTE:     ['activeChains', 'foodSecurity', 'economicState', 'narrative'],
   RECOVERED_RESOURCE:     ['resources', 'activeChains', 'economicState', 'narrative'],
   DESTROY_SETTLEMENT:     ['economicState', 'powerStructure', 'narrative'],
+  // Coup d'état wave — authored crises + transfers of the governing seat.
+  APPLY_STRESSOR:         ['powerStructure', 'economicState', 'narrative'],
+  CHANGE_RULING_POWER:    ['powerStructure', 'npcs', 'narrative'],
 };
 
 /**
@@ -579,6 +582,54 @@ export const EVENT_REGISTRY = {
     },
     narrate(event) {
       return `The ${labelOf(event.targetId)} has been recovered.`;
+    },
+  },
+
+  // ── Coup d'état wave ─────────────────────────────────────────────────────
+
+  APPLY_STRESSOR: {
+    label: 'Apply stressor',
+    description: 'An active crisis grips the settlement — pick any stressor from the full catalog, including your custom ones. Logged as an in-world onset; the matching condition feeds the causal substrate, and in a canon campaign it also becomes a roaming world-pulse stressor.',
+    requiresTarget: true,
+    targetPrompt: 'Stressor (from the catalog)',
+    stateDeltas(event) {
+      const sev = Number(event.payload?.severity ?? 0.6);
+      const type = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
+      const external = /siege|occup|wartime|war\b|monster|raider/.test(type);
+      const scarcity = /famine|market|indebt|debt|migration/.test(type);
+      return {
+        resilience:       -Math.round(sev * 12),
+        volatility:       +Math.round(sev * 12),
+        ...(external ? { externalThreat:   +Math.round(sev * 16) } : {}),
+        ...(scarcity ? { resourcePressure: +Math.round(sev * 12) } : {}),
+      };
+    },
+    narrate(event) {
+      const label = event.payload?.label || labelOf(event.targetId);
+      return `${label} grips the settlement.`;
+    },
+  },
+
+  CHANGE_RULING_POWER: {
+    label: 'Change ruling power',
+    description: "Hand the government to a different authoritative power — coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
+    requiresTarget: true,
+    targetPrompt: 'Faction that takes power',
+    stateDeltas(event) {
+      const cause = event.payload?.cause || 'coup';
+      const map = {
+        coup:        { volatility: +18, resilience: -8 },
+        conquest:    { volatility: +20, resilience: -12, externalThreat: +10 },
+        election:    { volatility: +6,  resilience: +2 },
+        succession:  { volatility: +8,  resilience: -2 },
+        appointment: { volatility: +6,  resilience: -2 },
+      };
+      return map[cause] || map.coup;
+    },
+    narrate(event, settlement) {
+      const cause = event.payload?.cause || 'coup';
+      const where = settlement?.name ? ` in ${settlement.name}` : '';
+      return `${labelOf(event.targetId)} took power${where} by ${cause}.`;
     },
   },
 };

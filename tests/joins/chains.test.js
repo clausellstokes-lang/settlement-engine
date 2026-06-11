@@ -141,16 +141,39 @@ describe('chain id uniqueness', () => {
 });
 
 describe('chain processor joins (activation gate resolvability)', () => {
-  it('every chain that declares processors has >=1 resolvable at a tier >= minTier', () => {
-    // Chains with EMPTY processor lists (spices_dyes, silk_luxury_textiles,
-    // transit_finance, luxury_goods, magical_goods, planar, smuggling) are a
-    // separate audit finding owned by another slice; this rule guards the lists
-    // that exist from referencing institutions the catalog never generates.
+  it('no chain has an empty processor list (a dead chain that can never activate)', () => {
+    // computeActiveChains returns early on zero processor matches, so [] means
+    // the chain can never run. The last empty lists (luxury_goods, spices_dyes,
+    // silk_luxury_textiles, transit_finance, smuggling — and magical_goods/
+    // planar before them) were filled from the catalog; none may regress.
+    const dead = allChains
+      .filter(c => (c.processingInstitutions || []).length === 0)
+      .map(c => c.fullId);
+    expect(dead).toEqual([]);
+  });
+
+  it('every chain has >=1 processor resolvable at a tier >= minTier', () => {
     const unresolvable = allChains
-      .filter(c => (c.processingInstitutions || []).length > 0)
       .filter(c => !hasResolvableProcessorAtOrAbove(c))
       .map(c => c.fullId);
     expect(unresolvable).toEqual([]);
+  });
+
+  it('the formerly-dead entrepôt/luxury/criminal chains resolve against the catalog', () => {
+    const revived = [
+      'manufacturing.luxury_goods',
+      'trade_entrepot.spices_dyes',
+      'trade_entrepot.silk_luxury_textiles',
+      'trade_entrepot.transit_finance',
+      'criminal_economy.smuggling',
+      'arcane_magical.magical_goods',
+      'arcane_magical.planar',
+    ];
+    for (const fullId of revived) {
+      const chain = allChains.find(c => c.fullId === fullId);
+      expect(chain, fullId).toBeTruthy();
+      expect(hasResolvableProcessorAtOrAbove(chain), fullId).toBe(true);
+    }
   });
 
   it('the re-pointed civic/religious/healing chains resolve against the catalog', () => {
@@ -226,6 +249,52 @@ describe('DM-visible activation behavior (computeActiveChains)', () => {
     expect(coastal.status).toBe('running');
     // The river variant needs its own processors (boatyards) and resource gate.
     expect(chains.some(c => c.chainId === 'shipbuilding')).toBe(false);
+  });
+
+  it('a crossroads town with Money changers runs Letters of Credit & Finance', () => {
+    const chains = computeActiveChains(inst('Money changers'), [], 'town', 'crossroads');
+    expect(chains.some(c => c.chainId === 'transit_finance')).toBe(true);
+  });
+
+  it('a port city with a Luxury goods quarter runs the silk and spice entrepôt chains', () => {
+    const chains = computeActiveChains(inst('Luxury goods quarter'), [], 'city', 'port');
+    expect(chains.some(c => c.chainId === 'silk_luxury_textiles')).toBe(true);
+    expect(chains.some(c => c.chainId === 'spices_dyes')).toBe(true);
+  });
+
+  it('entrepôt-only chains stay off hub-less roads even with the institutions present', () => {
+    const chains = computeActiveChains(inst('Luxury goods quarter', 'Money changers'), [], 'city', 'road');
+    expect(chains.some(c => c.chainId === 'silk_luxury_textiles')).toBe(false);
+    expect(chains.some(c => c.chainId === 'transit_finance')).toBe(false);
+  });
+
+  it('a city on precious metal veins with Specialized metalworkers runs Luxury Goods', () => {
+    const chains = computeActiveChains(inst('Specialized metalworkers'), ['precious_metals'], 'city', 'road');
+    const lux = chains.find(c => c.chainId === 'luxury_goods');
+    expect(lux).toBeTruthy();
+    expect(lux.activatedByResource).toBe(true);
+  });
+
+  it('smuggling is the dark entrepôt: a fence runs it at a crossroads, not on a dead-end road', () => {
+    const crossroads = computeActiveChains(inst('Local fence'), [], 'thorp', 'crossroads');
+    expect(crossroads.some(c => c.chainId === 'smuggling')).toBe(true);
+    const road = computeActiveChains(inst('Local fence'), [], 'thorp', 'road');
+    expect(road.some(c => c.chainId === 'smuggling')).toBe(false);
+  });
+
+  it('a settlement with Planar traders but NO circle/airship does not run Planar Trade', () => {
+    // /planar/ matched the chain's own processors, so a metropolis that lost
+    // its Teleportation circle mid-campaign kept 'Planar Trade running' with
+    // no transit channel at all (the generation-time cull never re-runs).
+    const chains = computeActiveChains(inst('Planar traders', 'Planar embassy'), [], 'metropolis', 'isolated');
+    expect(chains.some(c => c.chainId === 'planar')).toBe(false);
+  });
+
+  it('the same settlement WITH a Teleportation circle (or airship dock) runs Planar Trade', () => {
+    const circle = computeActiveChains(inst('Planar traders', 'Teleportation circle'), [], 'metropolis', 'isolated');
+    expect(circle.some(c => c.chainId === 'planar')).toBe(true);
+    const airship = computeActiveChains(inst('Planar traders', 'Airship docking (high magic)'), [], 'metropolis', 'isolated');
+    expect(airship.some(c => c.chainId === 'planar')).toBe(true);
   });
 
   it('terrain resources flag their dedicated chains as running (not merely operational)', () => {

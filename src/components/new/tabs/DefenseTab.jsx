@@ -6,7 +6,7 @@ import {isMobile} from '../tabConstants';
 
 import {buildThreatAssessment} from '../../../generators/defenseGenerator';
 import {NarrativeNote} from '../NarrativeNote';
-import { criminalOpNote, deriveCriminalStructure, deriveSupportingCapabilities } from '../../../domain/display/defenseDisplay.js';
+import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities } from '../../../domain/display/defenseDisplay.js';
 
 export function DefenseTab({ settlement:r, narrativeNote}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -36,8 +36,13 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
     'Invasion & War': scores.military||0,
     'Internal Security': scores.internal||0,
     'Economic Survival': scores.economic||0,
-    'Disasters & Famine': r.economicState?.foodSecurity?.resilienceScore ?? Math.round(((scores.economic||0)*0.4+(f.hasGranary?60:20)+(f.hasHospital?70:f.hasChurch?40:10))/2),
+    'Disasters & Famine': scores.disaster ?? r.economicState?.foodSecurity?.resilienceScore ?? Math.round(((scores.economic||0)*0.4+(f.hasGranary?60:20)+(f.hasHospital?70:f.hasChurch?40:10))/2),
   };
+  // Funding attribution per readiness row (economicGates consumer) — an
+  // underfunded gate explains a lower bar instead of leaving it silent.
+  const fundingNotes = Object.fromEntries(
+    deriveDefenseReadiness(r).filter(row=>row.fundingNote).map(row=>[row.label,row.fundingNote])
+  );
 
   // Military forces grouped
   const walls = inst.walls || [];
@@ -161,6 +166,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
                 </div>
                 {isExp&&<div style={{padding:'0 12px 10px 12px',borderTop:`1px solid ${color}25`}}>
                   <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.6,margin:'8px 0 0'}}>{assess}</p>
+                  {fundingNotes[label]&&<p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'5px 0 0',lineHeight:1.4}}>{fundingNotes[label]}</p>}
                 </div>}
               </div>
             );

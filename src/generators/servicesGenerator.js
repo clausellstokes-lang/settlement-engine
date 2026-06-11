@@ -383,10 +383,10 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
       ? null
       : l
         ? hasTeleportationInfra(o, s)
-          ? `Food deficit of ${Math.round(r)}% is covered through magical supply chains — teleportation imports are reliable but extraordinarily expensive. Any disruption to the magical infrastructure means immediate food crisis.`
+          ? `Food deficit of ${Math.round(r)}% persists even with magical supply lines — teleportation imports are reliable but extraordinarily expensive, rationed to necessities rather than plenty, and dependent on the circle's own upkeep. Any disruption to the magical infrastructure means immediate food crisis.`
           : r > 40
-            ? `Food deficit of ${Math.round(r)}% with no external trade — this settlement cannot feed itself and has no mechanism to import what SEVERITY lacks. Starvation or mass emigration is the long-term outcome without change.`
-            : `Food deficit of ${Math.round(r)}% with no external trade route — entirely dependent on local production. A poor harvest means genuine hunger.`
+            ? `Food deficit of ${Math.round(r)}% far outstrips the trickle of sanctioned caravans and minor routes that reach this isolated settlement. Starvation or mass emigration is the long-term outcome without change.`
+            : `Food deficit of ${Math.round(r)}% with no major trade route — local production carries the burden, topped up only by expensive, irregular caravans on minor routes. A poor harvest means genuine hunger.`
         : d === 'very_high' || d === 'high'
           ? `Food deficit of ${Math.round(r)}% is covered through active grain imports — merchant networks ensure supply chain resilience.`
           : d === 'low'
@@ -1444,6 +1444,17 @@ const SERVICE_CATEGORY_MAP = {
   Stabling: 'transport',
   'Stabling (long-term)': 'transport',
   'Vessel hire': 'transport',
+  // Magical/large-scale transit is transport first and foremost. Without
+  // these, the heuristic classifier filed them under magic (teleport/planar
+  // keywords, airship-dock institution default) or legal ('cargo loading'),
+  // so a metropolis with a Teleportation circle or airship dock still showed
+  // "Transportation" under NOTABLE ABSENCES. No-magic worlds are unaffected:
+  // these providers are filtered at the institution level (ARCANE_INST_KW).
+  'Long-distance teleportation': 'transport',
+  'Planar transit': 'transport',
+  'Airship berths': 'transport',
+  'Passenger boarding': 'transport',
+  'Cargo loading': 'transport',
 };
 
 // Criminal-institution vocabulary — shared by the crime-scaled service gate
@@ -1967,14 +1978,31 @@ export const generateAvailableServices = (r, s, o = {}, d = {}) => {
         const v = getServiceTierInfo(S.name, A.name, d, s),
           j = h(S.name, A.name); // Skip magic-category services in no-magic worlds
         if (j === 'magic' && _noMagicSvcs) return;
-        (j === 'criminal' && _isCriminalProvider(A) && _rng() > Math.min(1, (m / 100) * 1.5)) ||
-          ((S.p || 1) < 1 && v < 1 && _rng() > v) ||
-          (l[j] &&
-            l[j].push({
+        // Same short-circuit order as the old `a || b || push` chain so the
+        // seeded _rng() call sequence (and thus generation output) is stable.
+        if (
+          !(j === 'criminal' && _isCriminalProvider(A) && _rng() > Math.min(1, (m / 100) * 1.5)) &&
+          !((S.p || 1) < 1 && v < 1 && _rng() > v) &&
+          l[j]
+        ) {
+          l[j].push({
+            name: S.name,
+            desc: S.desc,
+            institution: A.name,
+          });
+          // Cross-list, don't move: inn/tavern food lines ('Food and drink
+          // (all grades)', 'Basic provisions') belong on the lodging page,
+          // but the settlement genuinely HAS food — without a `food` entry,
+          // deriveNotableAbsences flagged "Food & Drink" as a notable absence
+          // while the lodging list advertised food two lines up.
+          if (j === 'lodging' && /food|drink|provision|meal/i.test(S.name)) {
+            l.food.push({
               name: S.name,
               desc: S.desc,
               institution: A.name,
-            }));
+            });
+          }
+        }
       });
     });
     const p = s.some((A) => {

@@ -64,7 +64,8 @@
  *           | 'KILL_LEADER' | 'EXPOSE_CORRUPTION' | 'REFUGEE_WAVE'
  *           | 'PLAGUE' | 'RAID_OR_MONSTER_ATTACK'
  *           | 'REMOVED_THREAT' | 'BROKERED_ALLIANCE' | 'STARTED_RIOT'
- *           | 'OPENED_TRADE_ROUTE' | 'RECOVERED_RESOURCE' | 'DESTROY_SETTLEMENT'} EventType
+ *           | 'OPENED_TRADE_ROUTE' | 'RECOVERED_RESOURCE' | 'DESTROY_SETTLEMENT'
+ *           | 'APPLY_STRESSOR' | 'CHANGE_RULING_POWER'} EventType
  *
  * The full canonical event vocabulary across both shipping waves.
  *   Foundation (v1):      ADD/REMOVE/DAMAGE_INSTITUTION, DEPLETE_RESOURCE, CUT_TRADE_ROUTE
@@ -72,6 +73,7 @@
  *   Impairment (v2):      IMPAIR/RESTORE_INSTITUTION, IMPAIR/RESTORE_FACTION
  *   Extended (Wave 2+):   KILL_LEADER, EXPOSE_CORRUPTION, REFUGEE_WAVE, PLAGUE, RAID_OR_MONSTER_ATTACK
  *   Player intervention (Phase 24): REMOVED_THREAT, BROKERED_ALLIANCE, STARTED_RIOT, OPENED_TRADE_ROUTE, RECOVERED_RESOURCE, DESTROY_SETTLEMENT
+ *   Coup d'état wave:     APPLY_STRESSOR (authored crisis onset, full catalog + custom), CHANGE_RULING_POWER (user-permissioned transfer of the governing seat)
  *
  * When adding a new event: add the literal here, add the spec in
  * events/registry.js, add the rerun-keys mapping, add the mutation

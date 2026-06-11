@@ -425,22 +425,34 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
   const newScore = Math.max(seed.min, Math.min(seed.max, seed.base + (50 - oldScore) * seed.oldPull));
   const publicLegitimacy = rebandLegitimacy(oldLegitimacy, newScore);
 
-  // Re-key relationships that referenced the old government label, then add
-  // the "power behind the seat" edge and (coup) grudge edges for the losers.
+  // Re-key relationships that referenced the old government label. Any edge
+  // that now connects the seat to its new power-behind CONVERTS to symbiotic
+  // (whatever friction it carried died with the old order); the (coup) losers
+  // get grudge edges.
+  const winnerName = nameOf(winner);
+  const symbioticNarrative = `${winnerName} is the power behind the ${toGovernment.toLowerCase()} — the seat answers to them now.`;
+  let pairedWithWinner = false;
   const renamedRelationships = (ps.factionRelationships || []).map(rel => {
     if (!Array.isArray(rel?.pair)) return rel;
-    if (!rel.pair.includes(fromGovernment)) return rel;
-    return { ...rel, pair: rel.pair.map(n => (n === fromGovernment ? toGovernment : n)) };
+    const pair = rel.pair.includes(fromGovernment)
+      ? rel.pair.map(n => (n === fromGovernment ? toGovernment : n))
+      : rel.pair;
+    const next = pair === rel.pair ? rel : { ...rel, pair };
+    if (pair.includes(toGovernment) && pair.includes(winnerName)) {
+      pairedWithWinner = true;
+      return { ...next, type: 'symbiotic', direction: 'stable', narrative: symbioticNarrative };
+    }
+    return next;
   });
   const extraRelationships = [];
   const havePair = (a, b) => renamedRelationships.concat(extraRelationships)
     .some(rel => Array.isArray(rel?.pair) && rel.pair.includes(a) && rel.pair.includes(b));
-  if (!havePair(toGovernment, nameOf(winner)) && toGovernment !== nameOf(winner)) {
+  if (!pairedWithWinner && toGovernment !== winnerName) {
     extraRelationships.push({
-      pair: [toGovernment, nameOf(winner)],
+      pair: [toGovernment, winnerName],
       type: 'symbiotic',
       direction: 'stable',
-      narrative: `${nameOf(winner)} is the power behind the ${toGovernment.toLowerCase()} — the seat answers to them now.`,
+      narrative: symbioticNarrative,
     });
   }
   for (const loser of losers) {

@@ -63,7 +63,7 @@ registerStep('generateNarratives', {
       result: 'authored',
       causes: [{
         source: `tier.${tier} + tradeRoute.${tradeRoute}`,
-        reason: `Founding rationale derived from settlement size and trade access.`,
+        reason: `Founding rationale derived from settlement size, trade access, and food balance.`,
       }],
       downstreamEffects: [
         { target: 'history', effect: 'founding context' },

@@ -20,6 +20,7 @@ import { applyPopulationOutcomeToSettlement } from './populationDynamics.js';
 import { applyResourceOutcomeToSettlement, applyTierOutcomeToSettlement } from './tierResourceDynamics.js';
 import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
+import { transferRulingPower } from '../rulingPower.js';
 
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
@@ -58,7 +59,7 @@ function affectedSaveIdsForOutcome(outcome) {
   for (const delta of outcome.populationDeltas || []) {
     if (delta?.saveId) ids.add(String(delta.saveId));
   }
-  if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch || outcome.institutionPatch)) {
+  if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch || outcome.institutionPatch || outcome.powerTransfer)) {
     ids.add(String(outcome.targetSaveId));
   }
   return [...ids];
@@ -78,6 +79,19 @@ function applyOutcomeToSettlement(settlement, outcome, saveId) {
   }
   if (outcome.institutionPatch && String(outcome.targetSaveId) === String(saveId)) {
     next = applyInstitutionLifecycleOutcome(next, outcome);
+  }
+  // A coup verdict (or any future power_transfer outcome) reshapes the
+  // governing seat through the same domain path the CHANGE_RULING_POWER
+  // canon event uses. A transfer that no longer applies (the named faction
+  // is gone, or already governs) safely no-ops; the condition below still
+  // records the turmoil.
+  if (outcome.powerTransfer && String(outcome.targetSaveId) === String(saveId)) {
+    const result = transferRulingPower(next, outcome.powerTransfer.toPowerName, {
+      cause: outcome.powerTransfer.cause || 'coup',
+      tick: outcome.powerTransfer.tick ?? null,
+      losers: outcome.powerTransfer.losers || [],
+    });
+    if (!result.error) next = result.settlement;
   }
   if (outcome.condition && String(outcome.targetSaveId) === String(saveId)) {
     next = withActiveCondition(next, outcome.condition);

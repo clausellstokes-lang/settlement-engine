@@ -17,6 +17,7 @@
  */
 
 import { getActiveRng } from './rngContext.js';
+import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
 
 // ── Constants (match buildFactionList in economicGenerator) ────────────────
 const PER_CAPITA_NEED        = 2;    // lbs/day per person
@@ -69,10 +70,15 @@ export function generateFoodSecurity(tier, institutions, config) {
   const hasDivine         = hasInst('cathedral', 'monastery', 'great cathedral', 'parish church');
   const hasArcane         = hasInst('mage', 'wizard', 'arcane', 'spellcasting');
 
-  // ── Teleportation check (used in chains AND importCoverageRate) ─────────────
-  const hasTeleport = instNames.some(n =>
-    n.includes('teleportation') || n.includes('airship') || n.includes('planar')
+  // ── Magical transport check (used in chains AND importCoverageRate) ────────
+  // Circles and airships are NOT interchangeable: a teleportation circle is
+  // point-to-point and a blockade cannot touch it; an airship must fly over
+  // the besieger and lands a fraction of its open-sky throughput.
+  const hasTeleportCircle = instNames.some(n =>
+    n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional')
   );
+  const hasAirshipDock = instNames.some(n => n.includes('airship'));
+  const hasTeleport = hasTeleportCircle || hasAirshipDock;
 
   // ── Source chain diversity ────────────────────────────────────────────────
   // Each independent chain is a fallback when others fail.
@@ -97,7 +103,12 @@ export function generateFoodSecurity(tier, institutions, config) {
 
   // ── Import dependency ─────────────────────────────────────────────────────
   // How much of caloric needs can the settlement import, and does it need to?
-  const importCapacity = { isolated:0, road:0.20, river:0.28, crossroads:0.42, port:0.58 }[route] ?? 0.15;
+  // Isolated settlements still receive a trickle through minor routes and
+  // sanctioned caravans (0.05); magical transport raises the ceiling to its
+  // capped, expensive rate. This nonzero dependency is what lets a siege
+  // bite an isolated settlement's granary at tick time (foodStockpile).
+  const _isolatedImportCapacity = hasTeleport && magicExists ? FOOD_IMPORT_RATES.teleport : 0.05;
+  const importCapacity = { isolated:_isolatedImportCapacity, road:0.20, river:0.28, crossroads:0.42, port:0.58 }[route] ?? 0.15;
   const tierImportNeed = { thorp:0, hamlet:0, village:0.05, town:0.20, city:0.38, metropolis:0.52 }[tier] ?? 0;
   const importDependency = Math.min(importCapacity, tierImportNeed + (hasMarket ? 0.04 : 0));
   const importPct        = Math.round(importDependency * 100);
@@ -150,16 +161,31 @@ export function generateFoodSecurity(tier, institutions, config) {
                           * effectiveAgri * productionMult * cropFortune / 1.3; // /1.3 = STORAGE_BUFFER constant
   const rawSurplus      = dailyProduction - dailyNeed;
   const rawDeficit      = Math.max(0, -rawSurplus);
-  // Magic trade bypass: isolated settlements with teleportation get import coverage
-  // at ~road level — real but expensive; extraordinary cost is reflected in lower coverage
-  // than a physical road (0.35), but still meaningful food security.
+  // Magic trade bypass: isolated settlements with magical transport get import
+  // coverage below road level (0.35) — real but expensive, rationed to what is
+  // necessary. The channel has its own supply chain: without an arcane
+  // maintainer on the roster, throughput halves. Under siege a teleportation
+  // circle is untouchable (blockades cannot interdict point-to-point transit);
+  // an airship-only settlement runs the blockade at half its magical rate; and
+  // the minor-route trickle (sanctioned caravans, pilgrimage traffic, protected
+  // convoys) that every isolated town+ otherwise receives is severed entirely.
+  // Rates come from the shared channel ladder (data/foodImportRates.js).
   const hasMagicTradeImport = effectiveRoute === 'isolated' && hasTeleport && config.magicExists !== false;
+  const _hasArcaneMaintainer = hasArcane || hasInst('alchemist', 'academy');
+  const _maintainerMult = _hasArcaneMaintainer ? 1 : 0.5;
+  const _magicTradeRate = !hasMagicTradeImport ? 0
+    : hasTeleportCircle ? FOOD_IMPORT_RATES.teleport
+    : (stressSiege ? FOOD_IMPORT_RATES.airshipBesieged : FOOD_IMPORT_RATES.airship); // airship-only: impaired blockade-running under siege
+  const _minorRouteRate = (route === 'isolated' && !stressSiege)
+    ? (['town','city','metropolis'].includes(tier) ? FOOD_IMPORT_RATES.minorRoutes
+      : tier === 'village' ? FOOD_IMPORT_RATES.minorRoutesVillage : 0)
+    : 0;
   // Terrain-aware import coverage: mountain/desert settlements structurally
   // depend on food imports — they import more efficiently (specialized trade infrastructure)
   const _isLowAgriTerrain = ['mountain','desert','hills'].includes(config.terrainType || '');
   const _terrainImportBoost = _isLowAgriTerrain && effectiveRoute !== 'isolated' ? 0.15 : 0;
-  const importCoverageRate = hasMagicTradeImport     ? 0.30  // magic trade: real but expensive
-                           : effectiveRoute === 'isolated'   ? 0
+  const importCoverageRate = effectiveRoute === 'isolated'
+                           ? Math.max(_magicTradeRate * _maintainerMult, _minorRouteRate)
                            : effectiveRoute === 'port'       ? 0.70
                            : effectiveRoute === 'crossroads' ? 0.60
                            : effectiveRoute === 'river'      ? 0.50
@@ -290,6 +316,9 @@ export function generateFoodSecurity(tier, institutions, config) {
     importPct,
     importDependency,
     importNote,
+    // Which magical channel (if any) carries isolated/besieged imports —
+    // 'teleport' is blockade-proof, 'airship' runs blockades impaired.
+    magicTradeChannel: hasMagicTradeImport ? (hasTeleportCircle ? 'teleport' : 'airship') : null,
 
     // Magic
     magicSupplement: Math.round(magicSupplement * 100),  // as % of pressure

@@ -398,6 +398,45 @@ describe('Tier 3.3 — generate-narrative AI invariants', () => {
   });
 });
 
+describe('Tier 3.3 — generate-narrative grounding fidelity', () => {
+  let src;
+  beforeAll(() => { src = readFunction('generate-narrative'); });
+
+  it('summarizeFoodSituation counts magicFoodOffset in coverage (druid-fed hamlets are covered)', () => {
+    // The magical provision lives in fb.magicFoodOffset, not importCoverage —
+    // counting only importCoverage reported an uncovered deficit the
+    // preservation rules then forced the model to repeat against the dossier.
+    expect(src).toMatch(/fb\.importCoverage\s*\?\?\s*0/);
+    expect(src).toMatch(/fb\.magicFoodOffset\s*\?\?\s*0/);
+    expect(src).toMatch(/importCover\s*\+\s*magicCover/);
+  });
+
+  it('summarizeFoodSituation branches on the residual deficit, not the pre-import rawDeficit', () => {
+    // max(rawDeficit, deficit) is the pre-import gap; aiLayer and the dossier
+    // both report the residual + explicit coverage attribution.
+    expect(src).not.toMatch(/Math\.max\(\s*fb\.rawDeficit/);
+    expect(src).toMatch(/const deficit = fb\.deficit \?\? 0/);
+  });
+
+  it('mentions magic in the food line when the offset contributes', () => {
+    expect(src).toMatch(/magicCover > 0 \? ' and magic' : ''/);
+  });
+
+  it('still reports import/magic dependence when the residual deficit is fully covered', () => {
+    expect(src).toMatch(/food needs met, but only with imports/);
+  });
+
+  it('reads powerStructure.government as the string the generator writes (object .type as legacy fallback)', () => {
+    // powerGenerator/rulingPower persist powerStructure.government as a
+    // STRING; ps.government?.type alone yielded undefined forever.
+    expect(src).toMatch(/typeof ps\.government === ['"]string['"]\s*\?\s*ps\.government\s*:\s*ps\.government\?\.type/);
+  });
+
+  it('governing faction read tolerates the .faction key shape powerGenerator emits', () => {
+    expect(src).toMatch(/governing\?\.name \|\| governing\?\.faction \|\| null/);
+  });
+});
+
 // ─────────────────────────────────────────────────────────────────────────
 // admin-actions
 // ─────────────────────────────────────────────────────────────────────────

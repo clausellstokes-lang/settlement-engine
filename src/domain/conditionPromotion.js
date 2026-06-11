@@ -18,7 +18,7 @@
  * replaces by stable id, so re-running promotion never duplicates a condition.
  */
 
-import { withActiveCondition } from './activeConditions.js';
+import { withActiveCondition, withoutActiveCondition } from './activeConditions.js';
 import { canonStressors } from './canonicalAccessors.js';
 
 // Ordered stressor (type/name) fragment -> condition archetype. First match wins.
@@ -47,6 +47,15 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   { re: /succession/i,                                          archetype: 'dominant_npc_removed' },
   { re: /monster|raider/i,                                      archetype: 'war_pressure' },
   { re: /religious conversion|religious_conversion|schism|heres/i, archetype: 'regional_religious_pressure' },
+  // World-pulse-only types, now authorable via the APPLY_STRESSOR event —
+  // without these rules an authored market shock / criminal corridor / coup
+  // would carry no causal-substrate consequence at all.
+  { re: /market[\s_]?shock|price (collapse|crash)|trade collapse/i, archetype: 'regional_export_market_loss' },
+  { re: /criminal[\s_]?corridor|smuggling (ring|route)|racket/i, archetype: 'regional_criminal_pressure' },
+  // A coup ATTEMPT in progress is a faction maneuvering for the seat; the
+  // verdict's own conditions (coup_suppressed / government_overthrown) are
+  // produced by the world-pulse contest, not by this promotion.
+  { re: /coup|putsch/i,                                         archetype: 'faction_challenge' },
 ]);
 
 /** @returns {string|null} the condition archetype this stressor promotes to, or null. */
@@ -63,10 +72,19 @@ export function archetypeForStressor(stressor) {
  * Return a new settlement with an activeCondition for every live-crisis stressor.
  * No-op (returns the input) when there are no promotable stressors.
  *
+ * `origin` carries authored-event provenance for the ONE archetype the event's
+ * stressor maps to: { sourceEventType, eventId, detail, archetype }. Without it
+ * (every generation-time caller) the stamps say GENERATION — which was a lie
+ * for DM-authored stressors: the explanation surface claimed the settlement was
+ * generated mid-crisis the DM authored this session, and the event id was lost.
+ * Scoped by `archetype` so re-promoting the settlement's OTHER stressors never
+ * re-attributes their conditions to the new event.
+ *
  * @param {Object} settlement
+ * @param {{sourceEventType: string, eventId: string, detail?: string, archetype: string}} [origin]
  * @returns {Object}
  */
-export function promoteStressorsToConditions(settlement) {
+export function promoteStressorsToConditions(settlement, origin = null) {
   if (!settlement) return settlement;
   // Collapse to ONE condition per archetype, keeping the highest severity. Two
   // distinct stressors that map to the same archetype (e.g. "plague" + "fever
@@ -87,13 +105,34 @@ export function promoteStressorsToConditions(settlement) {
   }
   let next = settlement;
   for (const [archetype, { severity, label }] of byArchetype) {
+    const authored = origin != null && origin.archetype === archetype;
+    // An authored onset touches ONLY its own archetype. Re-emitting the
+    // container's other archetypes here would mint GENERATION-stamped twins
+    // beside event-stamped conditions (different derived ids — duplication)
+    // and rewind evolved conditions to tick zero via replace-by-id (clock
+    // reset). Their conditions already exist from their own promotion.
+    if (origin != null && !authored) continue;
+    if (authored) {
+      // The authored onset owns this crisis now: drop any prior condition of
+      // the same archetype (a generation-stamped twin carries a different id,
+      // so withActiveCondition's replace-by-id alone would leave both standing
+      // and double-penalize the same affectedSystems).
+      for (const cond of next.activeConditions || []) {
+        if (cond?.archetype === archetype && cond?.id) next = withoutActiveCondition(next, cond.id);
+      }
+    }
     next = withActiveCondition(next, {
       archetype,
       // Carry the strongest stressor severity when present; else the catalog
       // default (deriveActiveCondition fills it from the archetype template).
       severity: severity == null ? undefined : severity,
-      triggeredAt: { sourceEventType: 'GENERATION', sourceEventTargetId: archetype },
-      causes: [{ source: 'generation', detail: `Settlement generated under stressor "${label}".` }],
+      triggeredAt: {
+        sourceEventType: authored ? origin.sourceEventType : 'GENERATION',
+        sourceEventTargetId: archetype,
+      },
+      causes: authored
+        ? [{ source: 'event', eventId: origin.eventId, detail: origin.detail || `${label} began.` }]
+        : [{ source: 'generation', detail: `Settlement generated under stressor "${label}".` }],
     });
   }
   return next;

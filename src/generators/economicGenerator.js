@@ -19,6 +19,7 @@ import { TRADE_DEPENDENCY_NEEDS, INSTITUTION_FINISHED_GOODS_DEMAND } from '../da
 export { HISTORY_EVENTS } from '../data/historyData.js';
 
 import { SEVERITY, TIER_ORDER } from '../data/constants.js';
+import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
 import { generateFoodSecurity } from './foodGenerator.js';
 import { TERRAIN_DATA } from '../data/geographyData.js';
 import { INDUSTRY_WATER_NEEDS, RESOURCE_DATA } from '../data/resourceData.js';
@@ -26,6 +27,7 @@ import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 import { GOODS_MODIFIERS_BY_TIER, COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES } from '../data/tradeGoodsData.js';
 import { evaluateWaterDependency } from './helpers.js';
 import { SERVICE_TIER_DATA } from './servicesGenerator.js';
+import { subsumeTradeGoods, reconcileTradeLists } from '../domain/region/goodsCatalog.js';
 // ─── Economic helper functions ──────────────────────────────
 import {
   computeActiveChains,
@@ -45,6 +47,10 @@ const ECONOMIC_CONSTANTS = {
   AGRICULTURAL_WORKFORCE: 0.4,
   STORAGE_BUFFER: 1.3,
 };
+
+// Food-deficit import coverage channel ladder: FOOD_IMPORT_RATES (imported
+// from data/foodImportRates.js) — single source of truth shared with
+// foodGenerator and the tick-time stockpile (domain/worldPulse/foodStockpile).
 
 // WATER_ROUTES
 const WATER_ROUTES = ['coastal', 'riverside'];
@@ -388,20 +394,41 @@ const buildFactionList = (population, terrain, institutions, config) => {
   const rawDeficit = Math.abs(Math.min(surplus, 0));
   const _rawDeficitPct = adjustedNeed > 0 ? (rawDeficit / adjustedNeed) * 100 : 0;
 
-  // Import coverage: if trade route is active and food imports exist, imports cover part of deficit
-  // effectiveRoute already declared above (uses routeOverride if present)
-  const canImportFood = effectiveRoute !== 'isolated' && rawDeficit > 0;
-  const foodImportTerms = ['grain', 'food', 'fish', 'livestock', 'dairy', 'bread', 'meat', 'provision', 'flour'];
-  const _hasNecessityFood =
-    canImportFood &&
-    (config?.nearbyResources || []).length >= 0 &&
-    foodImportTerms.some((_t) =>
-      instNames.some((n) => n.includes('granary') || n.includes('market') || n.includes('inn'))
-    );
-  // Trade route food coverage: port/crossroads can cover more deficit than road
-  const importCoverageRate = !canImportFood
+  // Import coverage: trade routes, magical transport, and minor-route
+  // channels each cover part of the deficit. Magical transport is capped and
+  // expensive — a teleportation circle moves what is rationed and necessary,
+  // never bulk plenty (sub-road rate), and it has its own supply chain:
+  // without an arcane maintainer institution its throughput halves. Airships
+  // can run a blockade where caravans cannot, but against sustained
+  // countermeasures they land a fraction of what open routes carry.
+  const _magicOn = config?.magicExists !== false;
+  const _siegeIsolation = routeOverride === 'isolated';
+  const _hasTeleportCircle = _magicOn && instNames.some(
+    (n) => n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional')
+  );
+  const _hasAirshipDock = _magicOn && instNames.some((n) => n.includes('airship'));
+  const _hasArcaneMaintainer = instNames.some(
+    (n) => ['wizard', 'mage', 'alchemist', 'academy', 'arcane'].some((k) => n.includes(k))
+  );
+  const _maintainerMult = _hasArcaneMaintainer ? 1 : 0.5;
+  const _magicTradeRate = _hasTeleportCircle
+    ? FOOD_IMPORT_RATES.teleport
+    : _hasAirshipDock
+      ? (_siegeIsolation ? FOOD_IMPORT_RATES.airshipBesieged : FOOD_IMPORT_RATES.airship)
+      : 0;
+  // Even isolated settlements receive expensive, irregular, politically
+  // controlled imports — minor routes, sanctioned caravans, pilgrimage
+  // traffic, protected convoys. Nothing major, and a siege severs them.
+  const _tierForTrade = config?.tier || config?.settType || 'village';
+  const _minorRouteRate = _siegeIsolation
     ? 0
-    : effectiveRoute === 'port'
+    : ['town', 'city', 'metropolis'].includes(_tierForTrade)
+      ? FOOD_IMPORT_RATES.minorRoutes
+      : _tierForTrade === 'village'
+        ? FOOD_IMPORT_RATES.minorRoutesVillage
+        : 0;
+  const importCoverageRate = effectiveRoute !== 'isolated'
+    ? (effectiveRoute === 'port'
       ? 0.7
       : effectiveRoute === 'crossroads'
         ? 0.6
@@ -409,8 +436,17 @@ const buildFactionList = (population, terrain, institutions, config) => {
           ? 0.5
           : effectiveRoute === 'road'
             ? 0.35
-            : 0;
-  const importCoverage = Math.round(rawDeficit * importCoverageRate);
+            : 0)
+    : Math.max(_magicTradeRate * _maintainerMult, _minorRouteRate);
+  const canImportFood = importCoverageRate > 0 && rawDeficit > 0;
+  const importCoverage = canImportFood ? Math.round(rawDeficit * importCoverageRate) : 0;
+  const importChannel = !canImportFood
+    ? null
+    : effectiveRoute !== 'isolated'
+      ? `${effectiveRoute} trade`
+      : _magicTradeRate * _maintainerMult >= _minorRouteRate
+        ? (_hasTeleportCircle ? 'teleportation circle' : _siegeIsolation ? 'airship runs (impaired by siege)' : 'airship traffic')
+        : 'minor routes and sanctioned caravans';
 
   // Magic food offset: druid/divine/arcane can supplement food production
   // Only applies when magic is active and relevant institutions exist
@@ -573,6 +609,11 @@ const buildFactionList = (population, terrain, institutions, config) => {
       stressModifier: productionMult < 1 ? productionMult : undefined,
       importCoverage: importCoverage > 0 ? Math.round(importCoverage) : undefined,
       rawDeficit: rawDeficit > deficit ? Math.round(rawDeficit) : undefined,
+      // Attribution: which channel carries the imports, and how much of the
+      // gap magic closes. Without these the dossier shows a deficit smaller
+      // than needed-minus-produced with no visible explanation.
+      importChannel: importChannel || undefined,
+      magicFoodOffset: magicFoodOffset > 0 ? Math.round(magicFoodOffset) : undefined,
       // Surface the magic-source note alongside its offset so callers
       // can attribute the food contribution (Druidic / Divine / Arcane).
       // Conditional inclusion keeps the field shape unchanged when no
@@ -589,10 +630,10 @@ const _generateTradeScore = (deficitPercent, config = {}, institutions = []) => 
   if (deficitPercent <= 0) return null;
   if (isIsolated) {
     if (hasTeleportationInfra(institutions, config))
-      return `Food deficit of ${Math.round(deficitPercent)}% is covered through magical supply chains — teleportation imports are reliable but extraordinarily expensive. Any disruption to the magical infrastructure means immediate food crisis.`;
+      return `Food deficit of ${Math.round(deficitPercent)}% persists even with magical supply lines — teleportation imports are reliable but extraordinarily expensive, rationed to necessities rather than plenty, and dependent on the circle's own upkeep. Any disruption to the magical infrastructure means immediate food crisis.`;
     if (deficitPercent > 40)
-      return `Food deficit of ${Math.round(deficitPercent)}% with no external trade — this settlement cannot feed itself and has no mechanism to import what it lacks. Starvation or mass emigration is the long-term outcome without change.`;
-    return `Food deficit of ${Math.round(deficitPercent)}% with no external trade route — entirely dependent on local production. A poor harvest means genuine hunger.`;
+      return `Food deficit of ${Math.round(deficitPercent)}% far outstrips the trickle of sanctioned caravans and minor routes that reach this isolated settlement. Starvation or mass emigration is the long-term outcome without change.`;
+    return `Food deficit of ${Math.round(deficitPercent)}% with no major trade route — local production carries the burden, topped up only by expensive, irregular caravans on minor routes. A poor harvest means genuine hunger.`;
   }
   if (econCategory === 'very_high' || econCategory === 'high')
     return `Food deficit of ${Math.round(deficitPercent)}% is covered through active grain imports — merchant networks ensure supply chain resilience.`;
@@ -2286,6 +2327,27 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         }
       }
     }
+  }
+
+  // ── Trade-goods subsumption ──────────────────────────────────────────────
+  // Several label vocabularies feed re/q (chain outputs, tier structural
+  // imports, necessity imports, depleted-resource labels, demand-gap labels)
+  // and dedupe only on exact strings — so "Grain" and "Bulk grain and
+  // foodstuffs" coexist. Collapse each list to one entry per canonical good,
+  // then drop exports the settlement simultaneously imports (transit
+  // re-exports excepted). Runs after every writer above; economyReconcilePass
+  // re-applies it after later passes append imports (factionCorrelationPass's
+  // applySubsumption is INSTITUTION subsumption, not this).
+  const _subImports = subsumeTradeGoods(q);
+  q.length = 0;
+  _subImports.forEach((g) => q.push(g));
+  const _subExports = reconcileTradeLists(subsumeTradeGoods(re), q);
+  re.length = 0;
+  _subExports.forEach((g) => re.push(g));
+  if (v.localProduction) {
+    const _subLocal = subsumeTradeGoods(v.localProduction);
+    v.localProduction.length = 0;
+    _subLocal.forEach((g) => v.localProduction.push(g));
   }
 
   // Sort income sources by percentage desc, then alphabetically — must be LAST

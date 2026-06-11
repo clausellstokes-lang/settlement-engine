@@ -29,13 +29,41 @@
 import { registerStep } from '../pipeline.js';
 import { computeEconomyState, emitChainTraces } from './generateEconomy.js';
 import { computeDemandImports } from '../demandProfile.js';
-import { subsumeTradeGoods } from '../../domain/region/goodsCatalog.js';
+import { subsumeTradeGoods, reconcileTradeLists } from '../../domain/region/goodsCatalog.js';
 import { generateSpatialLayout } from '../spatialGenerator.js';
 import { generateAvailableServices } from '../servicesGenerator.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
 import { serviceTypeKeyFromCategory } from '../../domain/customCategories.js';
+
+/**
+ * Final trade-list normalization (exported for focused tests). Re-applies
+ * trade-goods subsumption: demand imports carry faction-flavoured labels that
+ * can re-introduce a canonical duplicate past the pass inside
+ * generateEconomicState, and the §14 custom merge (step 9) appends raw user
+ * labels. Custom labels stay opaque — renaming them would orphan the
+ * dossier's gold tint, which matches them by exact label; customTradeLabels
+ * is the §14 {exports, imports} OBJECT, flattened into one opaque set.
+ * Then re-runs export/import reconciliation so a demand import that
+ * canonicalizes to a surviving export cannot reinstate the contradiction the
+ * generator already resolved ("(transit)" re-exports stay spared inside
+ * reconcileTradeLists). Mutates economicState in place.
+ */
+export function finalizeTradeLists(economicState) {
+  const _customLabels = economicState.customTradeLabels || {};
+  const _opaqueLabels = new Set(
+    [...(_customLabels.exports || []), ...(_customLabels.imports || [])]
+      .map((l) => String(l).toLowerCase())
+  );
+  economicState.primaryImports = subsumeTradeGoods(
+    economicState.primaryImports || [], { opaque: _opaqueLabels }
+  );
+  economicState.primaryExports = reconcileTradeLists(
+    subsumeTradeGoods(economicState.primaryExports || [], { opaque: _opaqueLabels }),
+    economicState.primaryImports
+  );
+}
 
 registerStep('economyReconcilePass', {
   deps: ['factionCorrelationPass'],
@@ -71,20 +99,9 @@ registerStep('economyReconcilePass', {
     }
   }
 
-  // Re-apply trade-goods subsumption: demand imports carry faction-flavoured
-  // labels that can re-introduce a canonical duplicate past the pass inside
-  // generateEconomicState, and the §14 custom merge (step 9) appends raw user
-  // labels. Custom labels stay opaque — renaming them would orphan the
-  // dossier's gold tint, which matches them by exact label.
-  const _opaqueLabels = new Set(
-    (economicState.customTradeLabels || []).map((l) => String(l).toLowerCase())
-  );
-  economicState.primaryImports = subsumeTradeGoods(
-    economicState.primaryImports || [], { opaque: _opaqueLabels }
-  );
-  economicState.primaryExports = subsumeTradeGoods(
-    economicState.primaryExports || [], { opaque: _opaqueLabels }
-  );
+  // Re-apply subsumption + export/import reconciliation to the final lists
+  // (see finalizeTradeLists above for why both are needed here).
+  finalizeTradeLists(economicState);
 
   // ── 3. Spatial layout + services from the FINAL roster ──────────────────
   const terrainType = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);

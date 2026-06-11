@@ -125,6 +125,29 @@ export function applySubsistenceMode(institutions, tier, tradeRoute, effectiveCo
   }
 }
 
+// ─── 2b. Planar institutions require a teleportation circle ───────────────────
+// Planar traders and the Planar embassy exist BECAUSE goods and envoys arrive
+// through a permanent circle; without one there is no channel for extraplanar
+// commerce or contact. Removal-based enforcement (the GATE_FEATURES validator
+// entry only reports). DM contract institutions (required/forced/custom) are
+// spared — the validator flags those instead of deleting them.
+export function cullPlanarWithoutCircle(institutions) {
+  const hasCircle = institutions.some(
+    (inst) => (inst.name || '').toLowerCase().includes('teleportation circle')
+  );
+  if (hasCircle) return [];
+  const removed = [];
+  for (let i = institutions.length - 1; i >= 0; i--) {
+    const inst = institutions[i];
+    const n = (inst.name || '').toLowerCase();
+    if (!n.includes('planar trader') && !n.includes('planar embassy')) continue;
+    if (inst.required === true || inst.source === 'forced' || inst.source === 'custom' || inst.forcedByIsolation) continue;
+    removed.push(inst.name);
+    institutions.splice(i, 1);
+  }
+  return removed;
+}
+
 // ─── 3. Safety-net arcane strip (magicExists===false) ─────────────────────────
 export function stripArcaneInstitutions(institutions, effectiveConfig) {
   if (effectiveConfig.magicExists === false) {

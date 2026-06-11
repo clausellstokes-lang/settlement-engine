@@ -30,6 +30,7 @@
 import { foodLedger } from '../foodLedger.js';
 import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
+import { coupContenders } from '../rulingPower.js';
 
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
@@ -274,6 +275,22 @@ export const STRESSOR_COUNTERFORCES = Object.freeze({
     ],
     decayBoost: 1.0,
   },
+  coup_detat: {
+    // The seat's own strengths resist the plot: standing authority, public
+    // legitimacy, social cohesion, and a loyal security apparatus. A strong
+    // ruler reaches the VERDICT faster (resolution = the verdict arriving);
+    // the verdict itself re-reads these strengths through the contest model
+    // in rulingPower.js, so strength tells twice — once on timing, once on
+    // the hold probability.
+    sources: [
+      { kind: 'causal', key: 'ruling_authority', weight: 0.35 },
+      { kind: 'governance', key: 'legitimacy', weight: 0.3 },
+      { kind: 'causal', key: 'social_trust', weight: 0.2 },
+      { kind: 'institution', key: 'security', weight: 0.15 },
+    ],
+    maxResolutionBonus: 0.15,
+    decayBoost: 1.0,
+  },
   wartime: {
     sources: [
       { kind: 'causal', key: 'defense_readiness', weight: 0.35 },
@@ -409,6 +426,17 @@ export const STRESSOR_SYNERGIES = Object.freeze({
   },
   criminal_corridor: {
     infiltration: { decayMult: 0.75, note: 'embedded agents keep the corridor open' },
+  },
+  coup_detat: {
+    succession_void: { decayMult: 0.7, resolutionDelta: -0.05, note: 'an empty line of succession invites the knives' },
+    political_fracture: { decayMult: 0.75, resolutionDelta: -0.04, note: 'a paralyzed council cannot rally a defense' },
+    rebellion: { decayMult: 0.8, note: 'the streets are already burning — the palace is distracted' },
+  },
+  political_fracture: {
+    coup_detat: { decayMult: 0.8, note: 'the coup deepens the constitutional void' },
+  },
+  rebellion: {
+    coup_detat: { decayMult: 0.85, note: 'the palace fights itself instead of the streets' },
   },
 });
 
@@ -565,6 +593,30 @@ export const VARIANT_HOOKS = Object.freeze({
     'The resistance needs runners, smugglers, and someone who can reach the old garrison.',
     'Collaborators and patriots eat at the same tables.',
   ],
+  palace_coup: [
+    'Invitations to a private dinner are circulating — the guest list is the conspiracy.',
+    'The seals on three official letters do not match the hands that signed them.',
+  ],
+  barracks_coup: [
+    'The garrison drilled at midnight without orders — or with orders no one admits giving.',
+    'Officers loyal to the seat are being reassigned to the walls, one by one.',
+  ],
+  merchant_cabal: [
+    'Credit has quietly dried up for anyone aligned with the ruling seat.',
+    'A warehouse that never opens has started taking night deliveries.',
+  ],
+  temple_putsch: [
+    'The sermons have changed: obedience to unworthy rulers is suddenly a live question.',
+    'Sanctuary has been promised to anyone who "acts according to conscience".',
+  ],
+  arcane_ascendancy: [
+    'Wards around the council hall failed twice this tenday. The casters shrug.',
+    'Someone is scrying the seat of power — and wants it known.',
+  ],
+  council_schism: [
+    'A rump session voted itself emergency powers while the chamber stood half empty.',
+    'Two officials now claim the same seal, the same office, and the same tax.',
+  ],
 });
 
 /**
@@ -654,8 +706,53 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
     }
   }
 
+  if (type === 'coup_detat') {
+    const entry = snapshot?.byId?.get?.(String(settlementId));
+    const contest = coupContenders(entry?.settlement);
+    const leading = contest.challengers[0] || null;
+    const variant = (leading && COUP_VARIANT_BY_ARCHETYPE[leading.archetype]) || 'palace_coup';
+    // A hostile neighbor bankrolling the plot is sponsorship, not a separate
+    // variant — the conspiracy's CHARACTER comes from who leads it.
+    const hostiles = hostileNeighborsOf(snapshot, settlementId);
+    const sponsor = hostiles.length ? hostiles[0].otherId : null;
+    return {
+      variant,
+      sponsorSettlementId: sponsor,
+      attackerSettlementId: null,
+      attackerLabel: null,
+      interpretedAtTick: tick,
+      // Birth-time field snapshot — NARRATIVE only. The verdict recomputes
+      // contenders from live state (the whole point of the brewing window is
+      // that party/user action can change the field before the knives move).
+      contenders: contest.challengers.map(c => ({
+        name: c.name, archetype: c.archetype, power: c.power, weight: c.weight,
+      })),
+      incumbent: { ...contest.incumbent },
+      reason: [
+        leading
+          ? `${leading.name} leads the conspiracy; the field: ${contest.challengers.map(c => c.name).join(', ')}.`
+          : 'The conspiracy is still choosing its champion.',
+        contest.incumbent.gated
+          ? `${contest.incumbent.name || 'The seat'} can still present a case (weight ${contest.incumbent.amplifiedWeight} at ×${contest.incumbent.govMultiplier} legitimacy).`
+          : `${contest.incumbent.name || 'The seat'}'s amplified standing no longer ranks among the top three powers — its case will not even be heard.`,
+        ...(sponsor ? ['Foreign coin moves beneath it — a hostile neighbor is bankrolling the plot.'] : []),
+      ].join(' '),
+    };
+  }
+
   return null;
 }
+
+// Which conspiracy a coup reads as, by the leading challenger's archetype.
+const COUP_VARIANT_BY_ARCHETYPE = Object.freeze({
+  military: 'barracks_coup',
+  merchant: 'merchant_cabal',
+  religious: 'temple_putsch',
+  noble: 'palace_coup',
+  arcane: 'arcane_ascendancy',
+  government: 'council_schism',
+  civic: 'council_schism',
+});
 
 /**
  * A hostile relationship de-escalated: wind down the war-shaped stressors it

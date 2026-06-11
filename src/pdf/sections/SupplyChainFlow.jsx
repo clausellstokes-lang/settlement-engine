@@ -16,6 +16,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, pt } from '../theme.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
+import { exactGoodId } from '../../domain/region/goodsCatalog.js';
 import { safe } from '../lib/format.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
@@ -73,12 +74,22 @@ function ChainRow({ chain, instNames, primaryExports }) {
     present: instNames.some((n) => n.toLowerCase().includes(String(name).toLowerCase().split(/[\s(]/)[0])),
   }));
 
-  const outputs = (chain.outputs || def.outputs || []).slice(0, 3).map((o) => ({
-    label: o,
-    isExport: isExportable && (primaryExports || []).some((ex) =>
-      ex.toLowerCase().includes(String(o).toLowerCase().split(' ')[0]) ||
-      String(o).toLowerCase().includes(ex.toLowerCase().split(' ')[0])),
-  }));
+  // Canonical good id first, substring fallback — the same predicate as the
+  // web SupplyChainsPanel, or the PDF badge disagrees with the screen when
+  // subsumption keeps a different alias spelling as the surviving export.
+  const exportIds = new Set((primaryExports || []).map(exactGoodId).filter(Boolean));
+  const outputs = (chain.outputs || def.outputs || []).slice(0, 3).map((o) => {
+    const oid = exactGoodId(o);
+    return {
+      label: o,
+      isExport: isExportable && (
+        (oid != null && exportIds.has(oid)) ||
+        (primaryExports || []).some((ex) =>
+          ex.toLowerCase().includes(String(o).toLowerCase().split(' ')[0]) ||
+          String(o).toLowerCase().includes(ex.toLowerCase().split(' ')[0]))
+      ),
+    };
+  });
 
   const importedUpstream = missing.map((uid) => CHAIN_DEFS[uid]?.label || uid);
 

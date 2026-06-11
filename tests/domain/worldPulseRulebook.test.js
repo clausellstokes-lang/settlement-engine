@@ -165,6 +165,24 @@ describe('World Pulse rulebook expansion', () => {
       score: 0.92,
       reasons: [`high ${kind}`],
     }));
+    // The coup_detat birth is politics-gated: it needs the settlement entry
+    // itself (legitimacy Contested-or-worse, a governing seat, at least one
+    // non-criminal challenger with real power). Every other type births from
+    // pressure alone.
+    const oakmere = {
+      name: 'Oakmere',
+      tier: 'town',
+      powerStructure: {
+        governingName: 'Town Council',
+        publicLegitimacy: { score: 22, label: 'Legitimacy Crisis', govMultiplier: 0.6 },
+        factions: [
+          { faction: 'Town Council', power: 24, category: 'government', isGoverning: true },
+          { faction: 'The Garrison', power: 30, category: 'military' },
+          { faction: 'Merchant Guilds', power: 26, category: 'economy' },
+          { faction: 'Thieves Guild', power: 28, category: 'criminal' },
+        ],
+      },
+    };
     const snapshot = {
       worldState: {
         tick: 5,
@@ -182,6 +200,9 @@ describe('World Pulse rulebook expansion', () => {
         // never propagate), not an arbitrary edge.
         channels: [{ type: 'trade_route', from: 'ashford', to: 'briar', status: 'confirmed' }],
       },
+      byId: new Map([
+        ['oakmere', { settlement: oakmere, causal: { scores: { ruling_authority: 18 } } }],
+      ]),
     };
 
     const candidates = evaluateStressorRules(snapshot, pressureIndex(pressureRows), { tick: 6, pressures: pressureRows });

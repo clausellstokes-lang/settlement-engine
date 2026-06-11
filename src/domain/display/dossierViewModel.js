@@ -68,6 +68,7 @@ export function deriveFoodBalance(settlement) {
       detail: 'Produced/Needed: Not calculated',
       surplus: 0, deficit: 0, deficitPct: null, deficitPercent: null,
       produced: null, needed: null, importCoverage: null, rawDeficit: null,
+      importChannel: null, magicFoodOffset: null, magicFoodNote: null,
     };
   }
   const produced = cleanNum(fb.dailyProduction);
@@ -105,6 +106,12 @@ export function deriveFoodBalance(settlement) {
     // layer computes coverage% = importCoverage / rawDeficit, mirroring the web.
     importCoverage: cleanNum(fb.importCoverage),
     rawDeficit: cleanNum(fb.rawDeficit),
+    // Attribution: which channel carries the imports (e.g. 'teleportation
+    // circle', 'minor routes and sanctioned caravans') and how much of the
+    // gap magic closes — lets displays explain deficit < (needed − produced).
+    importChannel: fb.importChannel || null,
+    magicFoodOffset: cleanNum(fb.magicFoodOffset),
+    magicFoodNote: fb.magicFoodNote || null,
   };
 }
 
@@ -165,9 +172,40 @@ export function deriveViability(settlement) {
   const dependencyCount = Array.isArray(v.dependencies) ? v.dependencies.length : 0;
 
   if (food.deficit > 0) {
+    // "Depends on imports" must match what the import channel actually is:
+    // an isolated settlement with 0% coverage survives on stores and local
+    // production, not on imports it does not receive (the Yunwan bug).
+    const access = settlement?.economicViability?.metrics?.tradeAccess
+                || settlement?.config?.tradeRouteAccess
+                || 'unknown';
+    const covered = (food.importCoverage || 0) > 0;
+    let foodClause = 'depends on imports for food security';
+    if (access === 'isolated') {
+      const channel = food.importChannel === 'teleportation circle'
+        ? 'the teleportation circle'
+        : food.importChannel;
+      // "Magical provision" is only honest when magic actually closes part
+      // of the gap (magicFoodOffset > 0) — a mundane caravan trickle in a
+      // magicExists:false world must not read as magically fed.
+      const magicFed = (food.magicFoodOffset || 0) > 0;
+      if (covered) {
+        // Legacy saves carry importCoverage without importChannel — the
+        // imports are real (Economics shows the coverage), the route just
+        // wasn't recorded. Channel-agnostic wording, never the
+        // "no meaningful import channel" clause.
+        const through = channel || 'trade imports';
+        foodClause = magicFed
+          ? `feeds itself through ${through}, magical provision, and stored reserves`
+          : `feeds itself through ${through} and stored reserves`;
+      } else {
+        foodClause = magicFed
+          ? 'survives on local production, magical provision, and stored reserves — no meaningful import channel reaches it'
+          : 'survives on local production and stored reserves — no meaningful import channel reaches it';
+      }
+    }
     return {
       viable: true, verdict: 'strained', label: VIABILITY_LABEL.strained,
-      summary: 'VIABLE BUT STRAINED: historically plausible and institutionally functional, but depends on imports for food security.',
+      summary: `VIABLE BUT STRAINED: historically plausible and institutionally functional, but ${foodClause}.`,
       rawSummary,
     };
   }

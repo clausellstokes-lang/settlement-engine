@@ -2,6 +2,7 @@ import { stablePart } from './worldState.js';
 import { activeChannelsFrom, REGIONAL_CHANNEL_TYPES } from '../region/index.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { counterforceAssessment, synergyAssessment, interpretStressorOrigin } from './stressorDynamics.js';
+import { coupContenders } from '../rulingPower.js';
 
 // The stressor catalog was authored with a looser channel vocabulary than the
 // canonical regional taxonomy (region/graph.js). Map the divergent names onto
@@ -41,6 +42,44 @@ export const STRESSOR_LIFECYCLE_STAGES = Object.freeze([
   'residual',
   'dormant',
 ]);
+
+// ── Coup spawn gate ────────────────────────────────────────────────────────
+// A coup is the one stressor whose birth is gated on settlement POLITICS
+// rather than raw pressure alone: it needs an exposed seat (legitimacy
+// Contested or worse — rare at Contested, likely at Crisis), a governing
+// authority weak enough to move against, no occupier already governing at
+// spearpoint, and at least one non-criminal faction with the muscle to act
+// (criminal factions never vie openly — the capture ladder is their path).
+// Returns null to block the birth, or { probabilityMult, reasons } to allow
+// it with the politics-scaled odds.
+function coupSpawnGate(snapshot, pressure) {
+  const sid = String(pressure.settlementId);
+  const entry = snapshot?.byId?.get?.(sid);
+  const settlement = entry?.settlement;
+  if (!settlement) return null; // gated births require political context
+  const legitimacy = settlement.powerStructure?.publicLegitimacy;
+  const score = Number.isFinite(legitimacy?.score) ? legitimacy.score : 50;
+  if (score >= 45) return null; // Tolerated or better — nobody moves
+  const occupied = (snapshot?.worldState?.stressors || []).some(s =>
+    s?.type === 'occupation'
+    && !INACTIVE_STATUSES.has(s?.status)
+    && (s.affectedSettlementIds || []).map(String).includes(sid));
+  if (occupied) return null; // the occupier IS the authority — no seat to seize
+  const { challengers } = coupContenders(settlement);
+  if (!challengers.length) return null;
+  const ra = entry?.causal?.scores?.ruling_authority;
+  const authority = Number.isFinite(ra) ? ra : 50;
+  const bandMult = score < 30 ? 1 : 0.35; // rare at Contested, likely at Crisis
+  const authorityMult = authority < 15 ? 1.5 : authority < 30 ? 1.2 : authority < 50 ? 1 : 0.6;
+  return {
+    probabilityMult: bandMult * authorityMult,
+    reasons: [
+      `Legitimacy stands at ${Math.round(score)} (${legitimacy?.label || 'Contested'}) — the seat is exposed.`,
+      `Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'} (ruling authority ${Math.round(authority)}).`,
+      `Factions with the power to move: ${challengers.map(c => c.name).join(', ')}.`,
+    ],
+  };
+}
 
 export const STRESSOR_CATALOG = Object.freeze({
   siege: {
@@ -214,6 +253,21 @@ export const STRESSOR_CATALOG = Object.freeze({
     residualEffects: ['arcane_fear', 'mutated_landmarks', 'ritual_debt'],
     affectedSystems: ['public_legitimacy', 'healing_capacity', 'social_trust'],
   },
+  coup_detat: {
+    label: "Coup d'état",
+    durationPolicy: 'episodic',
+    pressureKinds: ['legitimacy'],
+    birthThreshold: 0.6,
+    spreadChannels: [], // a coup is a palace affair — it never spreads
+    residualEffects: ['purge_fear', 'loyalty_tests', 'broken_oaths'],
+    affectedSystems: ['public_legitimacy', 'faction_stability', 'social_trust'],
+    // Unlike every other type, the coup's birth is politics-gated (see
+    // coupSpawnGate) and its RESOLUTION is a verdict, not an ending: when it
+    // resolves during a pulse, worldPulse/coup.js runs the contest among the
+    // top-3 non-criminal powers vs the legitimacy-amplified incumbent and
+    // emits either a coup_suppressed condition or a power_transfer outcome.
+    spawnGate: coupSpawnGate,
+  },
 });
 
 function clamp01(value) {
@@ -317,6 +371,12 @@ function resolutionChance(stressor, snapshot, assessment = undefined) {
   if (cf) chance += cf.resolutionDelta;
   if (stressor.type === 'market_shock' && stressor.age >= 1) chance += 0.12;
   if (stressor.type === 'betrayal' && stressor.age >= 1) chance += 0.16;
+  // A coup brews for ~2-3 ticks (the party's window to shore up — or gut —
+  // the ruler's case), then the verdict forces itself: conspiracies cannot
+  // hold their nerve forever. Resolution here IS the verdict trigger
+  // (worldPulse/coup.js decides who actually ends up on the seat).
+  if (stressor.type === 'coup_detat' && stressor.age >= 2) chance += 0.3;
+  if (stressor.type === 'coup_detat' && stressor.age >= 4) chance += 0.6;
   if (policy.maxAge != null && stressor.age >= policy.maxAge) chance += 0.25;
   if (stressor.durationPolicy === 'structural' && stressor.severity >= 0.5) chance *= 0.35;
   return clamp01(chance);
@@ -593,7 +653,7 @@ function stressorTypesForPressure(pressure) {
 }
 
 function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
-  const { snapshot = null, echo = null } = extras;
+  const { snapshot = null, echo = null, gate = null } = extras;
   const defaults = catalogFor(type);
   const targetSaveId = String(pressure.settlementId);
   // Re-ignition: a warm echo of the same crisis relights at partial strength —
@@ -610,7 +670,10 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
     affectedSettlementIds: [targetSaveId],
     originContext,
   });
-  const major = pressure.score >= 0.78 || ['occupation', 'slave_revolt', 'siege'].includes(type);
+  const major = pressure.score >= 0.78 || ['occupation', 'slave_revolt', 'siege', 'coup_detat'].includes(type);
+  // Spawn-gated types scale their birth odds by the gate's politics read
+  // (e.g. a coup is rare at Contested legitimacy, likely at Crisis).
+  const gateMult = Number.isFinite(gate?.probabilityMult) ? gate.probabilityMult : 1;
   return {
     id: `candidate.stressor.${stablePart(type)}.${stablePart(targetSaveId)}.${tick}`,
     type: 'stressor',
@@ -619,13 +682,14 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
     ruleFamily: 'stressor',
     targetSaveId,
     severity,
-    probability: Math.min(0.5, Math.max(0.07, pressure.score * 0.34)),
+    probability: Math.min(0.6, Math.max(0.02, Math.min(0.5, Math.max(0.07, pressure.score * 0.34)) * gateMult)),
     applyMode: major ? 'proposal' : 'auto',
     headline: `${stressor.label} may emerge`,
     summary: `${pressure.settlementName} has enough ${pressure.label.toLowerCase()} for ${stressor.label.toLowerCase()} to become a realm stressor.`,
     reasons: [
       ...pressure.reasons,
       `${defaults.label} birth gate passed at ${pressure.score.toFixed(2)} pressure.`,
+      ...(gate?.reasons || []),
       ...(echo ? [`Re-ignition: the last ${stressor.label.toLowerCase()} is still in living memory (echo ${(echo.memoryStrength ?? 0).toFixed(2)}).`] : []),
       ...(originContext?.reason ? [originContext.reason] : []),
     ],
@@ -643,7 +707,9 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
 
 export function stressorCandidateForPressure(pressure, tick) {
   if (!pressure || pressure.score < 0.56) return null;
-  const type = stressorTypesForPressure(pressure)[0];
+  // Spawn-gated types (coup_detat) need the world snapshot to read their
+  // politics; this snapshot-less path conservatively skips them.
+  const type = stressorTypesForPressure(pressure).filter(t => !catalogFor(t).spawnGate)[0];
   if (!type) return null;
   return candidateForTypeAndPressure(type, pressure, tick);
 }
@@ -740,9 +806,15 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
     for (const type of stressorTypesForPressure(pressure)) {
       const targetKey = `${type}:${pressure.settlementId}`;
       if (existingKeys.has(targetKey)) continue;
+      // Politics-gated births (coup_detat): the gate can block the spawn
+      // entirely or scale its odds; its reasons land on the candidate.
+      const spawnGate = catalogFor(type).spawnGate;
+      const gate = spawnGate ? spawnGate(snapshot, pressure) : null;
+      if (spawnGate && !gate) continue;
       candidates.push(candidateForTypeAndPressure(type, pressure, tick, {
         snapshot,
         echo: echoes.get(targetKey) || null,
+        gate,
       }));
     }
   }

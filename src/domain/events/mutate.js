@@ -25,6 +25,9 @@ import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate } from '../corruption.js';
+import { archetypeForStressor, promoteStressorsToConditions } from '../conditionPromotion.js';
+import { transferRulingPower } from '../rulingPower.js';
+import { STRESSOR_CATALOG } from '../worldPulse/stressors.js';
 
 /** @typedef {import('../types.js').Event} Event */
 
@@ -132,6 +135,13 @@ export function mutateSettlement({ settlement, event, now = null }) {
       break;
     case 'RAID_OR_MONSTER_ATTACK':
       next = raidOrMonsterAttack(next, stampedEvent);
+      break;
+
+    case 'APPLY_STRESSOR':
+      next = applyStressor(next, stampedEvent);
+      break;
+    case 'CHANGE_RULING_POWER':
+      next = changeRulingPower(next, stampedEvent);
       break;
 
     default:
@@ -840,6 +850,127 @@ function raidOrMonsterAttack(s, event) {
     }
   }
   return next;
+}
+
+// ── Coup d'état wave handlers ──────────────────────────────────────────────
+
+// Loose catalog alias map mirrored from stressors.js canonicalAffectedSystems
+// (kept tiny + local: importing the private helper would mean exporting it
+// just for this fallback path).
+const STRESSOR_SYSTEM_ALIASES = Object.freeze({
+  faction_stability: 'faction_power',
+  law_order: 'criminal_opportunity',
+  tax_revenue: 'trade_connectivity',
+});
+
+/**
+ * APPLY_STRESSOR — an authored crisis ONSET. Two writes:
+ *   1. the stress entry lands in the settlement's stress container (the same
+ *      shape the Roster's add-stressor correction uses), so the dossier and
+ *      the generation-era stress consumers see it;
+ *   2. the engine consequence: the SAME promotion channel generation uses
+ *      (conditionPromotion) maps the stressor to its condition archetype.
+ *      Types with no promotion rule (custom stressors, exotic catalog types)
+ *      fall back to a generic custom_crisis condition carrying the world-pulse
+ *      catalog's affectedSystems where known.
+ * The roaming world-pulse registration (canon campaigns) happens at the store
+ * layer — the settlement mutation stays campaign-agnostic.
+ */
+function applyStressor(s, event) {
+  const type = String(event.payload?.stressorType || event.targetId || '').trim();
+  if (!type) return s;
+  const label = event.payload?.label || labelFromTarget(type);
+  const severity = Math.max(0, Math.min(1, Number(event.payload?.severity ?? 0.6)));
+
+  // First existing stress container wins (same probe removedThreat uses);
+  // a settlement with none gets the editor's canonical `stress` array.
+  const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(s[k])) || 'stress';
+  const list = Array.isArray(s[containerKey]) ? s[containerKey] : [];
+  // Match by type; the display-name fallback only rescues legacy entries
+  // that never recorded one — matching a TYPED entry by label would let a
+  // custom stressor labeled 'Famine' overwrite the famine entry's type and
+  // detach it from every type-keyed consumer (pulse twin, picker filter).
+  const existingIdx = list.findIndex(st =>
+    String(st?.type || '').toLowerCase() === type.toLowerCase()
+    || (!st?.type && String(st?.name || '').toLowerCase() === label.toLowerCase()));
+  const entry = {
+    type,
+    name: label,
+    label,
+    severity,
+    description: event.description || (existingIdx === -1 ? '' : list[existingIdx]?.description || ''),
+    source: 'event',
+    addedByEventId: event.id,
+    ...(event.payload?.isCustom ? { isCustom: true } : {}),
+  };
+  // Upsert, not keep-old: re-authoring an existing stressor type refreshes the
+  // local entry to the NEW authored severity/label/source. The roaming twin
+  // (settlementSlice -> injectCampaignStressor) already upserts at the new
+  // severity; keeping the old local entry made the representations disagree.
+  const next = existingIdx === -1
+    ? { ...s, [containerKey]: [...list, entry] }
+    : { ...s, [containerKey]: list.map((st, i) => (i === existingIdx ? { ...st, ...entry } : st)) };
+
+  const archetype = archetypeForStressor(entry);
+  if (archetype) {
+    // The richer path: famine -> famine, plague -> plague, coup -> faction
+    // challenge, ... (idempotent; collapses per archetype). The origin carries
+    // the AUTHORED provenance — without it the promotion stamped GENERATION
+    // and dropped the event id (the provenance lie this wave fixed).
+    return promoteStressorsToConditions(next, {
+      sourceEventType: 'APPLY_STRESSOR',
+      eventId: event.id,
+      detail: `${label} began.`,
+      archetype,
+    });
+  }
+  const catalogSystems = (STRESSOR_CATALOG[type]?.affectedSystems || [])
+    .map(sys => STRESSOR_SYSTEM_ALIASES[sys] || sys);
+  return withActiveCondition(next, {
+    archetype: 'custom_crisis',
+    label,
+    description: event.description || `${label} grips the settlement.`,
+    severity,
+    ...(catalogSystems.length ? { affectedSystems: [...new Set(catalogSystems)] } : {}),
+    triggeredAt: { sourceEventType: 'APPLY_STRESSOR', sourceEventTargetId: type },
+    causes: [{ source: 'event', eventId: event.id, detail: `${label} began.` }],
+  });
+}
+
+/**
+ * CHANGE_RULING_POWER — the DM hands the government to a different
+ * authoritative power. Same domain path the coup verdict uses
+ * (rulingPower.transferRulingPower): the governing body persists, reshaped
+ * to the new power's preferred government type; legitimacy reseeds by cause.
+ * A transfer that can't apply (unknown faction, already governing) is a
+ * settlement no-op — but the registry's state deltas (volatility +18, ...)
+ * AND its narration ('X took power by coup') still land in the canon
+ * timeline: the pipeline computes both from the BEFORE settlement and has no
+ * veto channel from mutation handlers (mutateSettlement returns only the
+ * settlement). Until such a seam exists the guard is upstream — batch staging
+ * hard-validates the faction ref (batch.js eventConsumes) and the composer
+ * only offers real factions.
+ */
+function changeRulingPower(s, event) {
+  const cause = event.payload?.cause || 'coup';
+  // Try the raw target first (the picker passes the faction name verbatim);
+  // fall back to the de-slugged form for "faction.some_name" style ids.
+  let result = transferRulingPower(s, event.targetId, { cause });
+  if (result.error === 'faction_not_found') {
+    result = transferRulingPower(s, labelFromTarget(event.targetId), { cause });
+  }
+  if (result.error) return s;
+  const severityByCause = { coup: 0.55, conquest: 0.65, election: 0.25, succession: 0.3, appointment: 0.3 };
+  return withActiveCondition(result.settlement, {
+    archetype: 'government_overthrown',
+    severity: severityByCause[cause] ?? 0.5,
+    triggeredAt: { sourceEventType: 'CHANGE_RULING_POWER', sourceEventTargetId: event.targetId },
+    causes: [{
+      source: 'event',
+      eventId: event.id,
+      detail: `${result.transfer.authorityName} took power by ${cause}; the government now sits as a ${result.transfer.toGovernment.toLowerCase()}.`,
+    }],
+  });
 }
 
 // ── Lookups + identity helpers ─────────────────────────────────────────────

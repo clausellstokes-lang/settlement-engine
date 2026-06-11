@@ -153,16 +153,30 @@ export function deriveSupportingCapabilities(settlement) {
 const readinessBadge = (n) =>
   n >= 65 ? 'STRONG' : n >= 40 ? 'ADEQUATE' : n >= 20 ? 'WEAK' : 'CRITICAL';
 
+// Which defenseProfile.economicGates key funds each readiness row, and what
+// the underfunded expense is called in the funding note.
+const READINESS_GATE_FOR = Object.freeze({
+  'Beasts & Monsters': ['monster', 'patrol provisioning'],
+  'Invasion & War': ['military', 'garrison pay'],
+  'Internal Security': ['internal', 'watch and court funding'],
+  'Economic Survival': ['economic', 'crisis logistics'],
+  'Disasters & Famine': ['disaster', 'relief funding'],
+});
+
 /**
  * Defense-readiness rows — the threat assessment reframed as "how ready is the
  * settlement against each pressure" (higher = better defended). Wraps the
  * generator's buildThreatAssessment (the assessment prose) with the readiness
  * score + STRONG/ADEQUATE/WEAK/CRITICAL badge, exactly as the web Defense tab.
- * Returns [{ label, score, status, statusColor, barColor, assess }].
+ * When the row's economic-upkeep gate (defenseProfile.economicGates) sits
+ * below ×1.0, fundingNote attributes the shortfall ("Upkeep underfunded —
+ * garrison pay at 60%") instead of leaving a silently lower bar.
+ * Returns [{ label, score, status, statusColor, barColor, assess, fundingNote }].
  */
 export function deriveDefenseReadiness(settlement) {
   const r = settlement || {};
   const scores = r.defenseProfile?.scores || {};
+  const gates = r.defenseProfile?.economicGates || {};
   const f = r.economicState?.compound?.inst || {};
   const scoreFor = {
     'Beasts & Monsters': scores.monster || 0,
@@ -170,11 +184,17 @@ export function deriveDefenseReadiness(settlement) {
     'Internal Security': scores.internal || 0,
     'Economic Survival': scores.economic || 0,
     'Disasters & Famine':
+      scores.disaster ??
       r.economicState?.foodSecurity?.resilienceScore ??
       Math.round((((scores.economic || 0) * 0.4) + (f.hasGranary ? 60 : 20) + (f.hasHospital ? 70 : f.hasChurch ? 40 : 10)) / 2),
   };
   return buildThreatAssessment(r).map((row) => {
     const score = scoreFor[row.label] ?? 0;
+    const [gateKey, expense] = READINESS_GATE_FOR[row.label] || [];
+    const gate = gateKey ? gates[gateKey] : undefined;
+    const fundingNote = Number.isFinite(gate) && gate < 1
+      ? `Upkeep underfunded — ${expense} at ${Math.round(gate * 100)}%`
+      : null;
     return {
       label: row.label,
       score,
@@ -182,6 +202,7 @@ export function deriveDefenseReadiness(settlement) {
       statusColor: scoreColor(score),
       barColor: row.color,
       assess: row.assess,
+      fundingNote,
     };
   });
 }

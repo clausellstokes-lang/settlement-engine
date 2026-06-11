@@ -260,7 +260,9 @@ const PRESERVATION_RULES = `STRICT FACT PRESERVATION:
 - Do not invent new NPCs, factions, institutions, or events.
 - Do not contradict any source fact.
 - You MAY restructure sentences, improve rhythm, add sensory texture, and tie details to the thesis.
-- If a source string is already concrete and specific, you may lightly polish or leave it alone — a non-change is better than drift.`;
+- If a source string is already concrete and specific, you may lightly polish or leave it alone — a non-change is better than drift.
+- NEVER describe the settlement as self-sufficient, fully self-sustaining, or feeding itself when the context records a food deficit or critical food imports — the gap is a fact; write around it, not over it.
+- Do NOT invent water infrastructure (wharves, docks, harbours, boats, sea charts, sailors) unless the context lists port or river access.`;
 
 // Tier 6.8 — settlement-specific preservation lines composed from the
 // shared aiGrounding contract. Adds explicit "MUST PRESERVE" lines for
@@ -304,6 +306,40 @@ Return ONLY the identity statement. No preamble, no markdown, no headings. Plain
 
 // ── Settlement summary ──────────────────────────────────────────────────────
 
+/**
+ * One-line food fact for the prompt context. Without it the model has no
+ * ledger to check its prose against and "isolated" drifts into "feeds
+ * itself entirely" — even when the engine recorded a 45% shortfall.
+ */
+function summarizeFoodSituation(s: Record<string, any>): string {
+  const fb = s.economicViability?.metrics?.foodBalance;
+  // 'unknown', not 'road': the dossier uses the same word for a missing
+  // config, and asserting a road for a legacy save would be invented terrain.
+  const access = s.config?.tradeRouteAccess || 'unknown';
+  if (!fb) return `food situation unrecorded (trade access: ${access})`;
+  // Coverage counts BOTH mundane imports and the magical food offset —
+  // druid-fed hamlets carry their provision in magicFoodOffset, and
+  // counting only importCoverage reported an uncovered deficit that the
+  // preservation rules then forced the model to repeat against the dossier.
+  const importCover = fb.importCoverage ?? 0;
+  const magicCover = fb.magicFoodOffset ?? 0;
+  const totalCover = importCover + magicCover;
+  // Residual deficit (after imports/magic), matching aiLayer and the dossier
+  // display — rawDeficit is the pre-import gap and overstates the shortfall
+  // once the coverage is attributed explicitly below.
+  const deficit = fb.deficit ?? 0;
+  if (deficit > 0) {
+    const covered = totalCover > 0
+      ? `; imports${magicCover > 0 ? ' and magic' : ''} cover ${Math.round(totalCover)} units/day${magicCover > 0 ? ` (${Math.round(magicCover)} magical)` : ''}`
+      : '';
+    return `food deficit: produces ${fb.dailyProduction ?? '?'} of ${fb.dailyNeed ?? '?'} daily units needed${covered} (trade access: ${access})`;
+  }
+  if (totalCover > 0) {
+    return `food needs met, but only with imports${magicCover > 0 ? ' and magic' : ''} covering ${Math.round(totalCover)} units/day (trade access: ${access})`;
+  }
+  return `food self-sufficient (trade access: ${access})`;
+}
+
 function summarizeSettlement(settlement: Record<string, unknown>): Record<string, unknown> {
   const s = settlement as Record<string, any>;
   const ps = s.powerStructure || {};
@@ -319,12 +355,18 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
     culture: s.config?.culture,
     tradeRouteAccess: s.config?.tradeRouteAccess,
     monsterThreat: s.config?.monsterThreat,
+    foodSituation: summarizeFoodSituation(s),
     prosperity: s.economicViability?.summary || null,
     safetyLabel: s.economicState?.safetyProfile?.safetyLabel || null,
     defenseReadiness: s.defenseProfile?.readiness?.label || null,
     government: {
-      type: ps.government?.type,
-      governingFaction: governing?.name || null,
+      // The generator persists powerStructure.government as a STRING (the
+      // governing entry's name doubles as the government type); legacy saves
+      // may still carry the object shape with .type.
+      type: typeof ps.government === 'string' ? ps.government : ps.government?.type,
+      // Faction entries key the name under .faction (powerGenerator); .name
+      // is the legacy/alternate shape.
+      governingFaction: governing?.name || governing?.faction || null,
     },
     factions: factions.slice(0, 6).map((f: any) => ({
       name: f?.name || f?.faction,

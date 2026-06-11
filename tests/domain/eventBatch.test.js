@@ -88,6 +88,31 @@ describe('validateBatch', () => {
     ];
     expect(validateBatch(base, batch).ok).toBe(false);
   });
+
+  test('CHANGE_RULING_POWER: the faction taking power is a hard ref', () => {
+    expect(eventConsumes(ev('CHANGE_RULING_POWER', { targetId: 'Council' }))).toEqual([
+      { kind: 'faction', ref: 'Council' },
+    ]);
+    // An existing faction passes; a transfer to a nonexistent faction blocks
+    // (the underlying transferRulingPower would silently no-op while the
+    // registry deltas still landed).
+    expect(validateBatch(base, [
+      ev('CHANGE_RULING_POWER', { targetId: 'Council', payload: { cause: 'coup' } }),
+    ]).ok).toBe(true);
+    const { ok, warnings } = validateBatch(base, [
+      ev('CHANGE_RULING_POWER', { targetId: 'No Such Power', payload: { cause: 'coup' } }),
+    ]);
+    expect(ok).toBe(false);
+    expect(warnings.some(w => w.severity === 'block')).toBe(true);
+  });
+
+  test('CHANGE_RULING_POWER resolves a faction added earlier in the same batch', () => {
+    const batch = [
+      ev('ADD_FACTION', { targetId: 'Dockhands' }),
+      ev('CHANGE_RULING_POWER', { targetId: 'Dockhands', payload: { cause: 'coup' } }),
+    ];
+    expect(validateBatch(base, batch).ok).toBe(true);
+  });
 });
 
 describe('applyEventBatch', () => {

@@ -16,6 +16,12 @@ import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, pt } from '../theme.js';
 import { humanize } from '../lib/format.js';
 
+// NPC ages are usually descriptive strings ('mid-forties'); only append the
+// 'y' suffix when the age is purely numeric.
+function ageLabel(age) {
+  return /^\d+$/.test(String(age)) ? `${age}y` : age;
+}
+
 function powerTone(p) {
   if (p == null) return 'muted';
   if (p >= 80) return 'bad';
@@ -53,7 +59,7 @@ function NPCRow({ npc }) {
         )}
         {(npc.race || npc.gender || npc.age) && (
           <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}>
-            {[npc.race && humanize(npc.race), npc.gender && humanize(npc.gender), npc.age && `${npc.age}y`]
+            {[npc.race && humanize(npc.race), npc.gender && humanize(npc.gender), npc.age && ageLabel(npc.age)]
               .filter(Boolean).join(' · ')}
           </Text>
         )}

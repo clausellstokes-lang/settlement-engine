@@ -5,8 +5,10 @@ import { buildWorldSnapshot } from './worldSnapshot.js';
 import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor } from './worldState.js';
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
+import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
 import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
+import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
@@ -68,6 +70,7 @@ function compactOutcomeForHistory(outcome = {}) {
     proposalPayload: clone(outcome.proposalPayload || null),
     npcPatch: compactNpcPatch(outcome.npcPatch),
     relationshipPatch: clone(outcome.relationshipPatch || null),
+    powerTransfer: clone(outcome.powerTransfer || null),
     stressor: outcome.stressor
       ? {
           id: outcome.stressor.id,
@@ -195,6 +198,19 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   if (agedStressors.resolved.length) {
     worldState = recordWarResolutionIncidents(worldState, snapshot.regionalGraph, agedStressors.resolved, worldState.tick);
   }
+  // Coup verdicts: a coup_detat RESOLVING is the verdict moment. The contest
+  // (rulingPower) runs against live settlement state and yields deterministic
+  // outcomes — a coup_suppressed condition, or a power_transfer (proposal when
+  // the governing faction is locked). The coup's generic residual outcome is
+  // dropped below; the verdict's own condition carries the aftermath.
+  const coupOutcomes = simulationRules.stressorsEnabled
+    ? coupVerdictOutcomes({
+        resolved: agedStressors.resolved,
+        snapshot,
+        rng: rng.fork('coup-verdict'),
+        tick: worldState.tick,
+      })
+    : [];
 
   const localSettlements = new Map();
   const settlementTickStates = { ...(worldState.settlementTickStates || {}) };
@@ -204,15 +220,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     const result = advanceTime(item.settlement, { interval: tickInterval, previousTickState });
     // The granary moves: surplus fills it, deficits draw it down (rationed),
     // mild hardship tithes into it, an active siege/occupation cuts the
-    // import share of need, and a campaign-emergent famine cuts production —
+    // import share of need (magical transport relieves the cut only up to its
+    // channel throughput — teleport 0.30 of need, besieged airship 0.15, per
+    // FOOD_IMPORT_RATES), and a campaign-emergent famine cuts production —
     // blockades and crop failures both literally eat the stores.
+    const blockade = blockadeFor(worldState.stressors, item.id);
     const stocked = advanceFoodStockpile(result.newSettlement, {
       interval: tickInterval,
       tick: worldState.tick,
-      blockade: blockadeFor(worldState.stressors, item.id),
+      blockade,
       famine: famineFor(worldState.stressors, item.id),
     });
-    localSettlements.set(String(item.id), stocked.settlement);
+    // Siege vs the airship dock: blockade-running impairs the dock itself —
+    // a visible 'access' impairment while the siege grips, lifted when it ends.
+    const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now });
+    localSettlements.set(String(item.id), sieged);
     // Merge rather than replace: advanceTime only returns { clockStages }, but
     // this entry also carries cross-tick drift streaks (tierDrift,
     // economyDrift) written by later evaluators — a wholesale assignment wiped
@@ -333,11 +355,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   });
   const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates];
   const { selected, rollExplanations } = rollCandidates(
-    [...agedStressors.residualOutcomes, ...stochasticCandidates],
+    [...agedStressors.residualOutcomes.filter(o => !isCoupResidualOutcome(o)), ...stochasticCandidates],
     rng.fork('candidate-rolls'),
     { maxAuto: 7, maxProposals: 5, volatility: volatilityMultiplier(worldState.volatility) },
   );
-  const deterministicExplanations = structuralCandidates.map(candidate => ({
+  const deterministicExplanations = [...coupOutcomes, ...structuralCandidates].map(candidate => ({
     candidateId: candidate.id,
     candidateType: candidate.candidateType,
     ruleId: candidate.ruleId || null,
@@ -355,7 +377,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     proposalPayload: candidate.proposalPayload || null,
     conflictResolution: { selected: true, deterministic: true },
   }));
-  const selectedForApply = [...structuralCandidates, ...selected];
+  const selectedForApply = [...coupOutcomes, ...structuralCandidates, ...selected];
 
   const settlementMap = buildSettlementMap(postTimeSnapshot, localSettlements);
   const applied = applyWorldPulseOutcomes({
@@ -378,7 +400,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     committed: commit,
     createdAt: now,
     calendar: memoryState.calendar,
-    candidateCount: candidates.length + tierResource.candidates.length + instLifecycle.candidates.length + structuralCandidates.length,
+    candidateCount: candidates.length + tierResource.candidates.length + instLifecycle.candidates.length + structuralCandidates.length + coupOutcomes.length,
     selectedCount: selectedForApply.length,
     autoAppliedCount: applied.autoApplied.length,
     proposalCount: applied.proposals.length,
@@ -445,7 +467,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       ...update,
       settlement: clone(update.settlement),
     })),
-    candidates: [...structuralCandidates, ...candidates, ...tierResource.candidates, ...instLifecycle.candidates],
+    candidates: [...coupOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...instLifecycle.candidates],
     selected: selectedForApply,
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     autoApplied: applied.autoApplied,

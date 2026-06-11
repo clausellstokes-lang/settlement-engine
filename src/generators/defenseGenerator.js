@@ -75,7 +75,7 @@ const getDefenseInstitutions = (institutions) => {
  * @param {Object} config        - Settlement config
  * @param {string} tier          - Settlement tier
  * @param {Array}  stressTypes   - Active stress type strings
- * @returns {{ military, monster, internal, economic, magical }}
+ * @returns {{ military, monster, internal, economic, magical, magicDependency, traditions, economicGates }}
  */
 const computeDefenseScores = (
   inst, milEffective, crimEffective, econOutput, magInfluence, relInfluence,
@@ -184,12 +184,24 @@ const computeDefenseScores = (
   military = Math.min(100, military + Math.round(milEffective * (hasAnyDefense ? 0.35 : 0.06)));
   // Apply terrain multiplier — natural chokepoints, elevation, approach restriction
   military = Math.min(100, Math.round(military * terrainMilMult));
+  // Economic-upkeep gate (garrison wages, wall maintenance): paid defenses
+  // degrade when the economy cannot fund them. Same shape as econHealthMult —
+  // identity (×1.0) at econOutput >= 50, linear to the floor at 0 — applied
+  // BEFORE stress penalties so their tuned magnitudes keep meaning. Floor 0.6:
+  // built walls keep standing and unpaid soldiers desert slowly, never
+  // instantly. The community baseline (armed households, terrain alarm) is
+  // unpaid and exempt — only the funded portion above it is gated.
+  const milUpkeepMult = Math.min(1, 0.6 + (econOutput / 50) * 0.4);
+  if (hasAnyDefense && milUpkeepMult < 1) {
+    military = Math.round(communityMilBase + Math.max(0, military - communityMilBase) * milUpkeepMult);
+  }
 
   // ── Monster score ───────────────────────────────────────────────────────────
   let monster = 0;
   // Threat-level baseline even at thorp tier — pitchforks and communal watch
   if (threat === 'plagued')  monster += 8;
   else if (threat === 'frontier') monster += 4;
+  const monsterThreatBase = monster;
   if (inst.hasCharterHall) monster += 35;
   if (inst.hasGarrison)    monster += 20;
   if (inst.hasWalls)       monster += 20;
@@ -202,6 +214,21 @@ const computeDefenseScores = (
   if (hasDivine)  monsterMagicBonus += 18; // Turn Undead — highest vs undead/fiends
   if (hasDruid)   monsterMagicBonus += 12; // beast lore, tracking
   monster = Math.min(100, monster + Math.min(35, monsterMagicBonus));
+  // Economic-upkeep gate (patrol provisioning, bounty purses, charter-hall
+  // retainers): monster coverage costs coin to keep in the field. Floor 0.7 —
+  // higher than the military gate because bounty work partly self-funds.
+  // Identity at econOutput >= 50, applied before stress penalties. The unpaid
+  // portion — the threat-level communal baseline plus the volunteer
+  // traditions (divine clergy, druidic wardens) — is exempt, the same rule
+  // the military/internal gates apply to their community baselines; arcane
+  // response stays gated (retained practitioners cost coin). When the +35
+  // tradition cap binds, the paid arcane share is assumed cut first.
+  const monsterUnpaidBase = monsterThreatBase
+    + Math.min(Math.min(35, monsterMagicBonus), (hasDivine ? 18 : 0) + (hasDruid ? 12 : 0));
+  const monsterUpkeepMult = Math.min(1, 0.7 + (econOutput / 50) * 0.3);
+  if (monsterUpkeepMult < 1) {
+    monster = Math.round(monsterUnpaidBase + Math.max(0, monster - monsterUnpaidBase) * monsterUpkeepMult);
+  }
   if (threat === 'plagued') monster = Math.max(0, monster - 15);
 
   // ── Internal order score ────────────────────────────────────────────────────
@@ -221,6 +248,15 @@ const computeDefenseScores = (
 
   const hasLawInfra = inst.hasCourtSystem || inst.hasPrison || inst.hasGarrison || inst.hasWatch;
   internal = Math.min(100, internal + Math.round(milEffective * (hasLawInfra ? 0.25 : 0.04)));
+  // Economic-upkeep gate (watch wages, court and gaol funding): paid order
+  // institutions degrade unfunded. Floor 0.65; identity at econOutput >= 50.
+  // Community self-policing (the small-tier baseline) is unpaid and exempt.
+  // Applied BEFORE the crime subtraction — a poor settlement's weakened watch
+  // must not also dilute the crime pressure it faces.
+  const internalUpkeepMult = Math.min(1, 0.65 + (econOutput / 50) * 0.35);
+  if (hasLawInfra && internalUpkeepMult < 1) {
+    internal = Math.round(communityIntBase + Math.max(0, internal - communityIntBase) * internalUpkeepMult);
+  }
   internal = Math.max(0, internal - Math.round(crimEffective * 0.4));
 
   // ── Economic resilience score ───────────────────────────────────────────────
@@ -419,6 +455,17 @@ const computeDefenseScores = (
     traditions: {
       hasArcane, hasArcaneGuild, hasDivine, hasDruid, hasAlchemy,
     },
+    // Attribution for the economics→defense coupling: ×1.0 means fully
+    // funded; below 1.0 the dossier/AI can explain "underfunded garrison"
+    // instead of silently lower bars. military/internal are recorded only
+    // when their gate has a paid stack to bite (hasAnyDefense/hasLawInfra) —
+    // a hamlet with no paid defenses reports no military gate at all.
+    economicGates: {
+      ...(hasAnyDefense ? { military: Math.round(milUpkeepMult * 100) / 100 } : {}),
+      monster: Math.round(monsterUpkeepMult * 100) / 100,
+      ...(hasLawInfra ? { internal: Math.round(internalUpkeepMult * 100) / 100 } : {}),
+      economic: Math.round(econHealthMult * 100) / 100,
+    },
   });
 };
 
@@ -476,7 +523,7 @@ const computeDefenseReadiness = (scores, threat, tier, magicExists = true) => {
  * Assemble the complete defense profile for a settlement.
  *
  * @param {Object} settlement - Full settlement object
- * @returns {{ scores:any, readiness:any, institutions:any, magicDependency:boolean, traditions:Object, chainModifiers:Object }}
+ * @returns {{ scores:any, readiness:any, institutions:any, magicDependency:boolean, traditions:Object, chainModifiers:Object, economicGates:Object }}
  */
 export function generateDefenseProfile(settlement) {
   const config       = settlement.config       || {};
@@ -536,10 +583,24 @@ export function generateDefenseProfile(settlement) {
   // Food processing chain impaired = -8 economic defense (siege logistics strained)
   if (foodProcChain && foodProcChain.status === 'impaired') chainEconBonus -= 8;
 
+  // Disasters & Famine: the dossier row reads foodSecurity.resilienceScore,
+  // which carries no economic term — but disaster and famine RESPONSE costs
+  // money (relief purchases, granary logistics, work crews). Persist a gated
+  // disaster score (floor 0.55, identity at econOutput >= 50, same shape as
+  // the other upkeep gates); display layers prefer it over raw resilience.
+  const _econOut = Math.round(instFlags.economyOutput);
+  const disasterGate = Math.min(1, 0.55 + (_econOut / 50) * 0.45);
+  const _resilience = foodSecurity?.resilienceScore;
+  const disaster = Number.isFinite(_resilience)
+    ? Math.round(Math.max(0, Math.min(100, _resilience)) * disasterGate)
+    : undefined;
+
+  const { economicGates: econGates = {}, ...scoreFields } = scores;
   const finalScores = /** @type {any} */ ({
-    ...scores,
+    ...scoreFields,
     military: Math.min(100, Math.max(0, scores.military + chainMilBonus)),
     economic: Math.min(100, Math.max(0, scores.economic + chainEconBonus)),
+    ...(disaster !== undefined ? { disaster } : {}),
   });
   const finalReadiness = computeDefenseReadiness(
     finalScores,
@@ -558,6 +619,12 @@ export function generateDefenseProfile(settlement) {
     chainModifiers: {
       military: chainMilBonus,
       economic: chainEconBonus,
+    },
+    // ×1.0 = fully funded; below 1.0 the dossier/AI can say "underfunded
+    // garrison" / "no purse for famine relief" instead of silently lower bars.
+    economicGates: {
+      ...econGates,
+      ...(disaster !== undefined ? { disaster: Math.round(disasterGate * 100) / 100 } : {}),
     },
   };
 }

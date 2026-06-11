@@ -62,8 +62,15 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     });
   }
 
-  // Waterfront district
-  if (has('port') || has('Dock')) {
+  // Waterfront district — only for genuine dock institutions on a water route.
+  // The old gate was `has('port') || has('Dock')`, a case-sensitive substring:
+  // 'Teleportation circle' and 'Barge and river transport company' both contain
+  // 'port', so isolated settlements grew phantom wharves. Real dock institutions
+  // ("Docks/port facilities", "Major Port", "Harbour master's office", "Shipyard")
+  // are access-gated to port/river in spatialData.js — mirror that here by
+  // requiring both a dock-specific name and a water trade route.
+  const isDockInstitution = (n) => /docks\/port|major port|harbou?r|shipyard|wharf/i.test(n);
+  if (instNames.some(isDockInstitution) && ['port', 'river'].includes(tradeRoute)) {
     quarters.push({
       name:      'Waterfront District',
       location:  'Along river/coast',

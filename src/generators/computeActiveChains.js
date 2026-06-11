@@ -122,8 +122,21 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       const resourceAvailable = !chain.resource; // chains without a resource requirement are always available
 
       // Entrepôt boost: crossroads/port settlements can run entrepôt chains
-      // even without local resource, as long as they have the logistics institutions
-      const isEntrepotRoute = ['crossroads', 'port', 'river'].includes(tradeRoute);
+      // even without local resource, as long as they have the logistics institutions.
+      // For ARCANE chains only, magical transit (teleportation circle / planar /
+      // airship infrastructure) counts as the hub route: planar goods arrive
+      // through the circle, not down a road — an isolated teleport metropolis
+      // IS the entrepôt for them. Mundane transit goods still need real roads.
+      // A chain's own processors cannot vouch for its transit: 'Planar traders'
+      // match /planar/, so without this exclusion the planar chain kept itself
+      // running after the settlement lost its Teleportation circle mid-campaign.
+      const isOwnProcessor = (n) => chain.processingInstitutions.some(p =>
+        n.includes(p.toLowerCase().slice(0, 12)));
+      const hasMagicTransit = instNames.some(n =>
+        (n.includes('teleportation') || n.includes('planar') || n.includes('airship')) &&
+        !isOwnProcessor(n));
+      const isEntrepotRoute = ['crossroads', 'port', 'river'].includes(tradeRoute)
+        || (isArcaneChain && hasMagicTransit);
 
       // Substitution: if primary resource missing, check if a substitute covers the gap
       const substitutes = chain.resourceSubstitutes || [];

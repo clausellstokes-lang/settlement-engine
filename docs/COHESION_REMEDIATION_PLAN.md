@@ -6,7 +6,15 @@
 > dimension gate). Wave 3 _(committed `0482584`; push pending a parallel in-flight work stream)_ — four parallel
 > slices: cascade resurrected, services precedence inverted (220→40 override rows), goods/dependency keys repaired,
 > chains/resources/processors re-pointed + healing pattern extended; the `tests/joins/` harness (Wave 0) landed
-> with 47+ join assertions across the four slices. Waves 4–6 next; Wave 7 awaits owner sign-off.
+> with 47+ join assertions across the four slices. Wave 4a/4b _(committed `113c1a6`/`f0e7dc3`)_ — roster
+> integrity + ordering trio. **Side-stream wave (2026-06-11)** — coup d'état lifecycle (politics-gated stressor,
+> verdicts, power transfers, APPLY_STRESSOR/CHANGE_RULING_POWER authoring + roaming-stressor bridge), magical
+> transport vs blockades (channel-throughput-capped bypass, airship impairment stamping, planar gating), trade-goods
+> subsumption (exact-alias-only merging; canonical-id display predicates), defense economic-upkeep gates with a LIVE
+> per-tick disaster writeback (the readiness row finally moves), plus grounding-honesty fold-ins from Wave 6 #1
+> (food self-sufficiency, stability-label, surplus-%, crimeTypes joins). Partially advances Wave 5 #3/#4 and
+> Wave 6 #1; the world-pulse power-transfer write-back grazes Wave 7's owner-gated dossier write-back item.
+> Waves 5–6 remainder next; Wave 7 awaits owner sign-off.
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.

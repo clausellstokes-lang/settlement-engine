@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import { isMobile } from './tabConstants';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
+import { exactGoodId } from '../../domain/region/goodsCatalog.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────
 const CHAIN_DEFS = {};
@@ -99,14 +100,24 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
     present: instNames.some(n => n.toLowerCase().includes(name.toLowerCase().split(/[\s(]/)[0])),
   }));
 
-  // Outputs: match against primaryExports
-  const outputs = (chain.outputs || def.outputs || []).slice(0, 2).map(o => ({
-    label: o,
-    isExport: isExportable && (primaryExports || []).some(ex =>
-      ex.toLowerCase().includes(o.toLowerCase().split(' ')[0]) ||
-      o.toLowerCase().includes(ex.toLowerCase().split(' ')[0])
-    ),
-  }));
+  // Outputs: match against primaryExports — canonical good id first
+  // (subsumption renames within a good: 'Boots and shoes' can survive as
+  // 'Leather goods', which the first-word check below can't see), then the
+  // substring check as the fallback for custom/unrecognized labels.
+  const exportIds = new Set((primaryExports || []).map(exactGoodId).filter(Boolean));
+  const outputs = (chain.outputs || def.outputs || []).slice(0, 2).map(o => {
+    const oid = exactGoodId(o);
+    return {
+      label: o,
+      isExport: isExportable && (
+        (oid != null && exportIds.has(oid)) ||
+        (primaryExports || []).some(ex =>
+          ex.toLowerCase().includes(o.toLowerCase().split(' ')[0]) ||
+          o.toLowerCase().includes(ex.toLowerCase().split(' ')[0])
+        )
+      ),
+    };
+  });
   const hasExport = outputs.some(o => o.isExport) || (isExportable && !outputs.length);
 
   // Upstream imports needed

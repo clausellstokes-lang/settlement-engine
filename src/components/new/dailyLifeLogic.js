@@ -1,6 +1,7 @@
 // dailyLifeLogic.js — Pure data extraction and prompt-building for DailyLifeTab.
 import { TIER_LABELS } from './design';
 import { computeEffectiveMagicPresence } from '../../generators/priorityHelpers.js';
+import { formatStability } from '../../generators/aiLayer.js';
 
 
 export function extractSettlementContext(s) {
@@ -23,6 +24,8 @@ export function extractSettlementContext(s) {
   const govFaction    = governing?.faction   || null;
   const govCat        = governing?.category  || null;
   const govPower      = governing?.power     || null;
+  // powerStructure.stability is a LABEL ('Tense (external threat)'), not a
+  // 0-100 score — same trap aiLayer fixed; formatStability handles both.
   const stability     = ps.stability         ?? 50;
   const conflicts     = ps.conflicts         || [];
   const tensions      = hist.currentTensions || [];
@@ -49,7 +52,9 @@ export function extractSettlementContext(s) {
     safetyRatioRaw >= 0.5 ? 18 : 8
   ));
   const safetyLabelFromProfile = (sp.safetyLabel || '').split('—')[0].trim() || null;
-  const crimeTypes  = sp.crimeTypes || [];
+  // safetyProfile.crimeTypes entries are {type, desc} objects — joining them
+  // raw printed '[object Object]' into the prompt (same trap aiLayer fixed).
+  const crimeTypes  = (sp.crimeTypes || []).map(ct => ct?.type || ct).filter(Boolean);
   const criminalInsts = insts.filter(i => i.category === 'Criminal').map(i => i.name);
   const watchExists = instNames.some(n => /watch|guard|constable|patrol/i.test(n));
   const garrisonExists = instNames.some(n => /garrison|barracks|soldier|knight/i.test(n));
@@ -220,7 +225,7 @@ export function buildPrompt(ctx) {
   } else {
     lines.push(`No clear governing faction — power is contested or absent`);
   }
-  lines.push(`Political stability: ${ctx.stability}/100`);
+  lines.push(`Political stability: ${formatStability(ctx.stability)}`);
   if (ctx.conflicts.length) lines.push(`Active conflicts: ${ctx.conflicts.join('; ')}`);
   if (ctx.tensions.length)  lines.push(`Current tensions: ${ctx.tensions.join('; ')}`);
 

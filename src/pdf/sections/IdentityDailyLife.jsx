@@ -29,17 +29,18 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
   const a = id.anchor || {};
   const accent = narrativeMode ? palette.ai : palette.gold;
 
+  const founded = foundingLabel(id.founding);
   const idRows = [
     { label: 'Name',          value: id.name },
-    { label: 'Tier',          value: id.tier || ', ' },
-    { label: 'Population',    value: id.population ? id.population.toLocaleString() : ', ' },
+    { label: 'Tier',          value: id.tier || '—' },
+    { label: 'Population',    value: id.population ? id.population.toLocaleString() : '—' },
     id.dominantRace   ? { label: 'Dominant Race', value: humanize(id.dominantRace) } : null,
     id.terrain        ? { label: 'Terrain',       value: humanize(id.terrain) } : null,
     id.layout         ? { label: 'Layout',        value: humanize(id.layout) } : null,
     id.age != null    ? { label: 'Age',           value: `${id.age} years` } : null,
     id.governmentType ? { label: 'Government',    value: humanize(id.governmentType) } : null,
     id.tradeAccess    ? { label: 'Trade Access',  value: humanize(id.tradeAccess) } : null,
-    id.founding       ? { label: 'Founded',       value: foundingLabel(id.founding) } : null,
+    founded           ? { label: 'Founded',       value: founded } : null,
   ].filter(Boolean);
 
   return (
@@ -259,10 +260,14 @@ function QuarterCard({ q, idx }) {
   );
 }
 
+// The engine founding object (narrativeGenerator genArrivalDetail) carries
+// {age, reason, foundedBy, initialChallenge, overcoming, stressNote} — no
+// summary/event/label — so fall through to foundedBy/reason and let the
+// caller omit the row entirely when nothing usable exists.
 function foundingLabel(f) {
-  if (!f) return ', ';
+  if (!f) return null;
   if (typeof f === 'string') return f;
-  return f.summary || f.event || f.label || ', ';
+  return f.summary || f.event || f.label || f.foundedBy || f.reason || null;
 }
 
 export default IdentityDailyLife;

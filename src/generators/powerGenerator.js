@@ -2208,6 +2208,11 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
     // simulation spine, world-event legitimacy deltas) key off this field;
     // it must always name the faction entry that carries isGoverning.
     governingName: (p.find((N) => N.isGoverning) || {}).faction || null,
+    // The government TYPE, persisted explicitly. At generation it equals
+    // governingName (the governing entry's name doubles as the government
+    // type); a transfer of power (domain/rulingPower.js) keeps both in step
+    // while previousGovernments records what the seat used to be.
+    government: (p.find((N) => N.isGoverning) || {}).faction || null,
     stability: Me,
     recentConflict: We,
     publicLegitimacy,

@@ -124,3 +124,51 @@ describe('deriveViability (§1f)', () => {
     expect(r.viable).toBe(false);
   });
 });
+
+describe('deriveViability — isolated import-channel wording matrix', () => {
+  // Isolated settlement with a residual deficit; the foodBalance fields vary
+  // per case. 'magical provision' must be gated on magicFoodOffset > 0 — an
+  // isolated village in a magicExists:false world covered by minor caravan
+  // routes must NOT be described as magically fed.
+  const isolated = (fb) => ({
+    economicViability: {
+      viable: true,
+      metrics: { foodBalance: { deficit: 500, dailyProduction: 1000, dailyNeed: 1500, ...fb } },
+    },
+    config: { tradeRouteAccess: 'isolated' },
+  });
+
+  it('covered + channel + magic offset names the channel AND magical provision', () => {
+    const r = deriveViability(isolated({ importCoverage: 300, importChannel: 'teleportation circle', magicFoodOffset: 200 }));
+    expect(r.verdict).toBe('strained');
+    expect(r.summary).toMatch(/feeds itself through the teleportation circle, magical provision, and stored reserves/);
+  });
+
+  it('covered + channel WITHOUT magic offset never claims magical provision', () => {
+    const r = deriveViability(isolated({ importCoverage: 60, importChannel: 'minor routes and sanctioned caravans' }));
+    expect(r.summary).toMatch(/feeds itself through minor routes and sanctioned caravans and stored reserves/);
+    expect(r.summary).not.toMatch(/magical provision/);
+  });
+
+  it('legacy covered + no channel reads as generic trade imports, not "no import channel"', () => {
+    // Pre-wave saves carry importCoverage without importChannel — the imports
+    // are real (EconomicsTab shows 'Trade covers N% of gap'), so the clause
+    // must not deny them.
+    const r = deriveViability(isolated({ importCoverage: 120 }));
+    expect(r.summary).toMatch(/feeds itself through trade imports and stored reserves/);
+    expect(r.summary).not.toMatch(/no meaningful import channel/);
+    expect(r.summary).not.toMatch(/magical provision/);
+  });
+
+  it('genuinely uncovered keeps the no-import-channel clause', () => {
+    const r = deriveViability(isolated({}));
+    expect(r.summary).toMatch(/survives on local production and stored reserves — no meaningful import channel reaches it/);
+  });
+
+  it('uncovered but magic-fed credits magical provision alongside local production', () => {
+    // Isolated hamlets can have importCoverage 0 with a druidic offset —
+    // magic supplements local production without any import channel.
+    const r = deriveViability(isolated({ magicFoodOffset: 200 }));
+    expect(r.summary).toMatch(/survives on local production, magical provision, and stored reserves — no meaningful import channel reaches it/);
+  });
+});

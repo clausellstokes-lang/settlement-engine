@@ -48,7 +48,7 @@ function StatCell({ label, value, sub, tone = 'gold' }) {
           lineHeight: 1.05,
         }}
       >
-        {value || ', '}
+        {value === 0 || value ? value : '—'}
       </Text>
       {sub && (
         <Text

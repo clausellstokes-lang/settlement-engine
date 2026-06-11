@@ -305,6 +305,21 @@ export async function resolveGalleryReport(reportId, status = 'resolved', note =
 // keeps unit-test fixtures and older local databases from leaking fields
 // if a response shape drifts.
 
+// powerStructure.governmentType is never written by the generator — the
+// engine persists powerStructure.government as a STRING (the governing
+// entry's name doubles as the government type), with governingName as the
+// canonical "who governs" field. Legacy rows may carry an object with .type.
+// Walk the shapes that actually exist before the legacy top-level fallbacks.
+function readGovernmentType(data) {
+  const ps = data?.powerStructure || {};
+  return ps.governmentType
+    || (typeof ps.government === 'string' ? ps.government : ps.government?.type)
+    || ps.governingName
+    || data?.government?.type
+    || data?.governmentType
+    || '';
+}
+
 function sanitizeTile(row) {
   const data = row.data || {};
   return {
@@ -322,7 +337,7 @@ function sanitizeTile(row) {
     tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
     population:   Number(row.population ?? data.population) || null,
     terrain:      row.terrain || data?.config?.terrain || data?.geography?.terrain || data?.terrain || '',
-    governmentType: row.government_type || data?.powerStructure?.governmentType || data?.government?.type || data?.governmentType || '',
+    governmentType: row.government_type || readGovernmentType(data),
     magicLevel:   row.magic_level || data?.config?.magicLevel || data?.magicLevel || '',
     stability:    row.stability || data?.viability?.stability || data?.systemState?.stability || data?.stability || '',
     primaryResource: row.primary_resource || data?.config?.nearbyResources?.[0] || data?.nearbyResources?.[0] || '',

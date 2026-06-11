@@ -34,6 +34,20 @@ const FORCE_GROUPS = [
 export function DefenseSecurity({ settlement, narrativeMode, vm }) {
   const d = vm.defense;
 
+  // Criminal capture arrives as a ladder string ('none' → 'adversarial' →
+  // 'equilibrium' → 'corrupted' → 'capture') on powerStructure.criminalCaptureState,
+  // not an object — drop the card at 'none', otherwise pair the state with the
+  // same safetyProfile.blackMarketCapture % the economics page renders.
+  const captureState = typeof d.criminalCapture === 'string'
+    ? (d.criminalCapture === 'none' ? null : d.criminalCapture)
+    : (d.criminalCapture?.label || d.criminalCapture?.classification || null);
+  const captureScore = typeof d.blackMarketCapture === 'number'
+    ? d.blackMarketCapture
+    : d.blackMarketCapture?.score ?? null;
+  const captureDesc = typeof d.criminalCapture === 'object'
+    ? d.criminalCapture?.description || null
+    : null;
+
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
@@ -66,9 +80,9 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       {/* ── Readiness strip ──────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'READINESS', value: d.readiness?.label || ', ' },
+          { label: 'READINESS', value: d.readiness?.label },
           { label: 'SCORE AVG', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
-          { label: 'SAFETY', value: cap(d.safetyLabel) || ', ' },
+          { label: 'SAFETY', value: cap(d.safetyLabel) },
           { label: 'WATCH:POP', value: smart(d.safetyRatio) },
           { label: 'FOOD RES.', value: smart(d.foodResilience) },
         ]}
@@ -183,13 +197,13 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       </View>
 
       {/* ── Criminal architecture ─────────────────────────────── */}
-      {(d.criminalCapture || d.criminalOps?.length > 0 || d.crimeTypes?.length > 0) && (
+      {(captureState || d.criminalOps?.length > 0 || d.crimeTypes?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             CRIMINAL ARCHITECTURE
           </Text>
-          {d.criminalCapture && (
+          {captureState && (
             <View
               style={{
                 padding: 5,
@@ -202,16 +216,16 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
             >
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10'], flex: 1, marginRight: 6 }}>
-                  {cap(d.criminalCapture.label || d.criminalCapture.classification) || 'Criminal capture'}
+                  Criminal capture · {cap(captureState)}
                 </Text>
-                {d.criminalCapture.score != null && (
-                  <Pill tone="bad">{d.criminalCapture.score}</Pill>
+                {captureScore != null && (
+                  <Pill tone="bad">{`${captureScore}%`}</Pill>
                 )}
               </View>
-              {d.criminalCapture.description && (
+              {captureDesc && (
                 <EditableProse
                   name="defense.criminalCapture.description"
-                  defaultValue={d.criminalCapture.description}
+                  defaultValue={captureDesc}
                   lines={1}
                   style={{ ...type.body, fontSize: pt['9'] }}
                 />

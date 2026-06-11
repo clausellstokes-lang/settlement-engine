@@ -230,7 +230,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
                   <View style={{ flex: 1 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
                       <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, flex: 1 }}>
-                        {humanize(e?.product || e?.good || e?.name) || ', '}
+                        {humanize(e?.product || e?.good || e?.name) || '—'}
                       </Text>
                       <Tag tone={tone}>{cap(e?.value || 'Medium')}</Tag>
                     </View>

@@ -55,6 +55,7 @@ import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { eligibleCustomContent } from '../domain/customContentSchema.js';
+import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
@@ -1247,6 +1248,32 @@ export const createSettlementSlice = (set, get) => ({
       if (result.impacts.length > 0) {
         afterState.setCampaignRegionalGraph(campaign.id, result.graph);
       }
+    }
+
+    // Coup wave — an authored APPLY_STRESSOR in a canon campaign ALSO
+    // registers the crisis as a roaming world-pulse stressor, so the pulse
+    // ages it (decay, counterforces, synergies, echoes) instead of it living
+    // only on the dossier. Best-effort + guarded: the settlement event
+    // already applied. The roaming type comes from the picker's alias map
+    // (under_siege -> siege, ...); a custom stressor with no roaming analog
+    // registers under its own key (normalizeStressor tolerates unknown types).
+    if (event?.type === 'APPLY_STRESSOR' && campaign) {
+      try {
+        const inject = afterState.injectCampaignStressor;
+        if (typeof inject === 'function') {
+          const authoredType = String(event.payload?.stressorType || event.targetId || '').trim();
+          const roamingType = pulseTypeForStressorKey(authoredType) || authoredType;
+          if (roamingType) {
+            inject(campaign.id, {
+              type: roamingType,
+              label: event.payload?.label || undefined,
+              originSettlementId: String(activeSaveId),
+              affectedSettlementIds: [String(activeSaveId)],
+              severity: Number(event.payload?.severity ?? 0.6),
+            });
+          }
+        }
+      } catch { /* world registration is best-effort */ }
     }
 
     // §8 M3b Phase 2 — a party-caused event with a world-scale analog also

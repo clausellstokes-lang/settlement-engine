@@ -143,6 +143,40 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
     expect(Object.keys(items[0])).not.toContain('user_id');
   });
 
+  it('reads governmentType from the string powerStructure.government the engine writes', async () => {
+    // powerStructure.governmentType is never written by the generator —
+    // government is a STRING (the governing entry's name doubles as the
+    // government type). The old read left every tile's governmentType ''.
+    supabase.rpc.mockResolvedValueOnce({
+      data: [{
+        id: '2', public_slug: 's2', name: 'Veilport', tier: 'city',
+        data: { powerStructure: { government: 'Merchant council', governingName: 'Merchant council' } },
+        total_count: 1,
+      }],
+      error: null,
+    });
+    const { items } = await fetchPublicGallery({ page: 0 });
+    expect(items[0].governmentType).toBe('Merchant council');
+  });
+
+  it('falls through legacy object .type, then governingName, then top-level fields', async () => {
+    supabase.rpc.mockResolvedValueOnce({
+      data: [
+        { id: '3', public_slug: 's3', name: 'A', tier: 'town',
+          data: { powerStructure: { government: { type: 'feudal' } } }, total_count: 3 },
+        { id: '4', public_slug: 's4', name: 'B', tier: 'town',
+          data: { powerStructure: { governingName: 'Town moot' } }, total_count: 3 },
+        { id: '5', public_slug: 's5', name: 'C', tier: 'town',
+          data: { government: { type: 'theocracy' } }, total_count: 3 },
+      ],
+      error: null,
+    });
+    const { items } = await fetchPublicGallery({ page: 0 });
+    expect(items[0].governmentType).toBe('feudal');
+    expect(items[1].governmentType).toBe('Town moot');
+    expect(items[2].governmentType).toBe('theocracy');
+  });
+
   it('returns empty when supabase is not configured', async () => {
     vi.doMock('../../src/lib/supabase.js', () => ({
       supabase: {}, isConfigured: false,

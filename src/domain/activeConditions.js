@@ -103,6 +103,22 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.55,
   },
+  government_overthrown: {
+    label: 'Government overthrown',
+    description: 'The ruling power has just changed hands; authority is being rebuilt under new masters.',
+    affectedSystems: ['ruling_authority', 'public_legitimacy', 'social_trust'],
+    defaultExpiresAtTicks: 6,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.55,
+  },
+  coup_suppressed: {
+    label: 'Coup suppressed',
+    description: 'An attempted seizure of power failed; purges, loyalty tests, and settling of scores follow.',
+    affectedSystems: ['social_trust', 'faction_power', 'public_legitimacy'],
+    defaultExpiresAtTicks: 5,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.45,
+  },
   stressor_residual: {
     label: 'Stressor aftereffects',
     description: 'A resolved crisis still leaves social, economic, or institutional scars.',
@@ -110,6 +126,18 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultExpiresAtTicks: 6,
     defaultStatus: 'easing',
     defaultSeverity: 0.3,
+  },
+  // The ONSET counterpart of stressor_residual: an authored crisis (custom or
+  // otherwise unmapped stressor type from the APPLY_STRESSOR event) that has
+  // no richer archetype to promote into. Callers override label / description
+  // / affectedSystems from the stressor itself.
+  custom_crisis: {
+    label: 'Crisis',
+    description: 'An authored crisis grips the settlement.',
+    affectedSystems: ['public_legitimacy', 'social_trust'],
+    defaultExpiresAtTicks: 8,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.5,
   },
   // Note (merchant_wealth retirement): 'merchant_wealth' was tagged across these
   // templates but was never a SYSTEM_VARIABLE and no deriver read it — the tag

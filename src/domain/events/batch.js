@@ -111,6 +111,11 @@ export function eventConsumes(event) {
     case 'RAID_OR_MONSTER_ATTACK':
       if (p.damagedInstitutionId) refs.push({ kind: 'institution', ref: p.damagedInstitutionId });
       break;
+    case 'CHANGE_RULING_POWER':
+      // The faction taking power must exist — transferRulingPower silently
+      // no-ops on an unknown faction while the registry deltas still land.
+      if (targetId) refs.push({ kind: 'faction', ref: targetId });
+      break;
     default:
       break;
   }

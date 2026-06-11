@@ -634,7 +634,12 @@ function defenseSlice(active) {
     criminalInstitutions:  sp.criminalInstitutions || [],
     crimeTypes:            sp.crimeTypes || [],
     blackMarketCapture:    sp.blackMarketCapture || null,
-    foodResilience:        s?.economicViability?.foodSecurity?.resilienceScore,
+    // foodSecurity lives on economicState (economicGenerator), not
+    // economicViability; prefer the defense profile's disaster score when the
+    // generator persists one, keep the old path for legacy saves.
+    foodResilience:        s?.defenseProfile?.scores?.disaster ??
+                           s?.economicState?.foodSecurity?.resilienceScore ??
+                           s?.economicViability?.foodSecurity?.resilienceScore ?? null,
     tradeAccess:           s?.config?.tradeRouteAccess || null,
     stress,
     criminalCapture,
@@ -718,19 +723,28 @@ function resourcesSlice(active) {
   const v = s?.economicViability || {};
   const cfg = s?.config || {};
 
-  // Convert exploitation lists into chain-flow rows
+  // Convert exploitation lists into chain-flow rows. Engine keys are
+  // { fullyExploited, partiallyExploited, unexploited } (resourceGenerator
+  // evaluateInstitutions); fall back to the display key for legacy saves.
+  // Entries are RESOURCE_CHAINS objects — resource in `rawResource`,
+  // processing in `processingInstitutions[]`, outputs in `finalProducts[]`.
   const exp = ra?.exploitation || {};
+  const EXP_KEYS = { full: 'fullyExploited', partial: 'partiallyExploited', unexploited: 'unexploited' };
   const chainRows = [];
-  for (const which of ['full', 'partial', 'unexploited']) {
-    for (const item of (exp?.[which] || [])) {
+  for (const [which, engineKey] of Object.entries(EXP_KEYS)) {
+    for (const item of (exp?.[engineKey] || exp?.[which] || [])) {
       if (typeof item === 'string') {
-        chainRows.push({ resource: item, status: which, processing: null, output: null });
+        if (item) chainRows.push({ resource: item, status: which, processing: null, output: null });
       } else if (item) {
+        const resource = item?.rawResource || item?.resource || item?.chainKey || item?.name || '';
+        if (!resource) continue;
         chainRows.push({
-          resource: item?.resource || item?.name || '',
+          resource,
           status: which,
-          processing: item?.processing || item?.institution || null,
-          output: item?.output || item?.product || null,
+          processing: item?.processing || item?.institution ||
+                      (item?.processingInstitutions || []).join(', ') || null,
+          output: item?.output || item?.product ||
+                  (item?.finalProducts || item?.outputs || []).join(', ') || null,
           chainStatus: item?.chainStatus || null,
           quality: item?.quality || null,
           accessibility: item?.accessibility || null,

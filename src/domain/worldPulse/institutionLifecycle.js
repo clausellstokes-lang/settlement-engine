@@ -36,6 +36,7 @@ import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';
 import { computeActiveChains } from '../../generators/computeActiveChains.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import { stablePart } from './worldState.js';
+import { exactGoodId } from '../region/goodsCatalog.js';
 import { normalizeSimulationRules, intensityMultiplier } from './simulationRules.js';
 import { entriesForTier, catalogEntryByName, existingInstitutionNames } from './tierResourceDynamics.js';
 
@@ -442,14 +443,21 @@ export function institutionContribution(settlement, inst, precomputedChains = nu
   if (!settlement || !inst) return 0;
   const chains = precomputedChains || deriveLifecycleChains(settlement);
   const weights = INSTITUTION_LIFECYCLE_TUNING.contribution;
-  const exportsText = (settlement?.economicState?.primaryExports || []).join(' ');
+  const exportsList = settlement?.economicState?.primaryExports || [];
+  const exportsText = exportsList.join(' ');
+  // Canonical good ids alongside the token check: subsumption renames within
+  // a good ('Boots and shoes' surviving as 'Leather goods') share no >=4-char
+  // token, but the id still matches — the closure shield must not drop its
+  // exportAnchor weight over a label spelling.
+  const exportIds = new Set(exportsList.map(exactGoodId).filter(Boolean));
   let score = 0;
   const memberOf = chains.filter(chain =>
     (chain.processingInstitutions || []).some(p => PROCESSOR_MATCH(inst.name, p)));
   if (memberOf.length) {
     score += weights.chainProcessor;
-    const anchorsExports = exportsText && memberOf.some(chain =>
-      tokenOverlap(`${(chain.outputs || []).join(' ')} ${chain.label || ''} ${chain.resource || ''}`, exportsText));
+    const anchorsExports = memberOf.some(chain =>
+      (chain.outputs || []).some(o => { const id = exactGoodId(o); return id != null && exportIds.has(id); }) ||
+      (exportsText && tokenOverlap(`${(chain.outputs || []).join(' ')} ${chain.label || ''} ${chain.resource || ''}`, exportsText)));
     if (anchorsExports) score += weights.exportAnchor;
     if (memberOf.some(chain => chain.needKey === 'food_security')) score += weights.foodAnchor;
   }

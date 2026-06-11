@@ -28,7 +28,28 @@ export function flattenServices(services) {
   return [];
 }
 
-function extractFullContext(s) {
+/**
+ * powerStructure.stability is a LABEL ('Stable', 'Ordered (strong military
+ * presence)', 'Tense (external threat)', 'Unstable — criminal governance', …;
+ * powerGenerator's vocabulary), not a 0-100 score. Rendering it as
+ * `${label}/100` produced 'Tense (external threat)/100', and `>= 60` against
+ * a string is always false — every settlement's power note claimed contested
+ * authority. Branch on the label head; numbers (older saves) keep the old
+ * threshold.
+ */
+const ORDERED_STABILITY_RE = /^(stable|ordered|enforced|rigid)\b/i;
+
+export function isOrderedStability(stability) {
+  if (typeof stability === 'number') return stability >= 60;
+  return typeof stability === 'string' && ORDERED_STABILITY_RE.test(stability.trim());
+}
+
+export function formatStability(stability) {
+  if (typeof stability === 'number') return `${stability}/100`;
+  return stability || 'unrecorded';
+}
+
+export function extractFullContext(s) {
   const cfg  = s.config    || {};
   const eco  = s.economicState || {};
   const via  = s.economicViability || {};
@@ -53,11 +74,25 @@ function extractFullContext(s) {
   }, {});
 
   const fb = via.metrics?.foodBalance;
+  // Missing data must stay neutral — defaulting to 'food self-sufficient'
+  // let the AI assert self-sufficiency for settlements with no food ledger.
+  // fb.surplus is an ABSOLUTE lb/day quantity (economicGenerator), not a
+  // percent — derive the percent from dailyNeed; the deficit branch already
+  // carries a real percent in deficitPercent. Coverage (mundane imports +
+  // magical offset) is attributed explicitly, matching generate-narrative's
+  // summarizeFoodSituation.
+  const foodCover = (fb?.importCoverage || 0) + (fb?.magicFoodOffset || 0);
+  const coverNote = foodCover > 0
+    ? ` (imports${(fb?.magicFoodOffset || 0) > 0 ? '/magic' : ''} cover ${Math.round(foodCover)} lb/day)`
+    : '';
+  const surplusPct = fb?.dailyNeed > 0 ? Math.round(((fb.surplus || 0) / fb.dailyNeed) * 100) : null;
   const foodSituation = fb
     ? (fb.deficit
-      ? `${Math.round(fb.deficitPercent || 0)}% food deficit`
-      : `${Math.round(fb.surplus || 0)}% food surplus`)
-    : 'food self-sufficient';
+      ? `${Math.round(fb.deficitPercent || 0)}% food deficit${coverNote}`
+      : (surplusPct != null
+        ? `${surplusPct}% food surplus${coverNote}`
+        : `food surplus of ${Math.round(fb.surplus || 0)} lb/day${coverNote}`))
+    : 'food situation unrecorded';
 
   return {
     // Identity
@@ -84,7 +119,9 @@ function extractFullContext(s) {
     // Safety
     safetyLabel:  sp.safetyLabel || null,
     safetyScore:  Math.round(scores.internal ?? 50),
-    crimeTypes:   sp.crimeTypes?.slice(0, 4) || [],
+    // crimeTypes entries are { type, desc } objects (safetyProfile) —
+    // joining them raw rendered '[object Object]' in the prompt.
+    crimeTypes:   (sp.crimeTypes || []).slice(0, 4).map(c => c?.type || c).filter(Boolean),
     criminalInsts: (instByCat.Criminal || []).slice(0, 3),
 
     // Defense
@@ -96,7 +133,7 @@ function extractFullContext(s) {
     // Power
     governing:    governing ? `${governing.faction} (${governing.power}%)` : 'none',
     govCat:       governing?.category || null,
-    stability:    ps.stability ?? 50,
+    stability:    ps.stability ?? null,
     factionCount: factions.length,
     factions:     factions.slice(0, 5).map(f => `${f.faction} (${f.power}%)`),
     conflicts:    conflicts.slice(0, 3).map(c => c.description || c.type).filter(Boolean),
@@ -143,7 +180,7 @@ function extractFullContext(s) {
 
 // ── Prompt builder ──────────────────────────────────────────────────────────
 
-function buildAiLayerPrompt(ctx) {
+export function buildAiLayerPrompt(ctx) {
   const lines = [];
 
   lines.push('SETTLEMENT DATA');
@@ -157,7 +194,7 @@ function buildAiLayerPrompt(ctx) {
 
   lines.push('\nPOWER & GOVERNANCE');
   lines.push(`Governing: ${ctx.governing}${ctx.govCat ? ` [${ctx.govCat}]` : ''}`);
-  lines.push(`Political stability: ${ctx.stability}/100`);
+  lines.push(`Political stability: ${formatStability(ctx.stability)}`);
   lines.push(`Factions (${ctx.factionCount}): ${ctx.factions.join('; ')}`);
   if (ctx.conflicts.length) lines.push(`Conflicts: ${ctx.conflicts.join('; ')}`);
   if (ctx.tensions.length)  lines.push(`Current tensions: ${ctx.tensions.join('; ')}`);
@@ -276,7 +313,7 @@ function buildLocalNotes(ctx) {
     overview: `${ctx.name} is best read through its central balance: ${ctx.viabilitySummary || 'the settlement keeps functioning, but not without tradeoffs'}. The important table-facing question is who benefits from that balance and who absorbs the cost.`,
     economics: `The economic picture turns on ${ctx.foodSituation || 'food supply'} and ${joinList(ctx.chains, 'local production')}. Shortages and trade dependencies should show up as prices, favors, and pressure on marginal households.`,
     services: `The service mix points to who the settlement is built to serve. ${joinList(ctx.services.slice(0, 5), 'Basic civic services')} define the visible public life, while any absence at this tier is a useful adventure hook.`,
-    power: `${ctx.governing || 'No single faction'} sets the political texture. Stability at ${ctx.stability}/100 means authority should feel ${ctx.stability >= 60 ? 'recognizable and procedural' : 'personal, contested, and frequently renegotiated'}.`,
+    power: `${ctx.governing || 'No single faction'} sets the political texture. Stability of '${formatStability(ctx.stability)}' means authority should feel ${isOrderedStability(ctx.stability) ? 'recognizable and procedural' : 'personal, contested, and frequently renegotiated'}.`,
     defense: `Defense is ${ctx.defense || 'uneven'}. Use that as a lived detail: gates, watches, drills, avoided roads, or the simple fact that some people know exactly where to run.`,
     npcs: `Key figures should personify systems rather than merely decorate them. ${joinList(ctx.keyNPCs, 'Local notables')} are strongest when each one reveals a pressure point in economy, power, faith, or safety.`,
     history: `The past matters because it explains what people think is normal. ${ctx.historicalChar || 'The settlement history'} should color how residents interpret every current threat or opportunity.`,

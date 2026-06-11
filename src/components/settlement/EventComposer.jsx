@@ -16,6 +16,8 @@ import { validateBatch } from '../../domain/events/batch.js';
 import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../domain/roles/roleCatalog.js';
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
+import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
+import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import CatalogPicker from './CatalogPicker.jsx';
 import SettlementEditor from '../SettlementEditor.jsx';
@@ -178,6 +180,9 @@ export default function EventComposer({
   const [destroyConfirm, setDestroyConfirm] = useState('');    // §9c: type-the-name gate for Destroy Settlement
   const [relationshipType, setRelationshipType] = useState(''); // §9b/g/h: neighbour relationship for dispute/alliance/trade
   const [criminalOrg, setCriminalOrg] = useState('');          // IMPOSE_CORRUPTION: the criminal organization to link the NPC to
+  const [stressorPick, setStressorPick] = useState(null);     // APPLY_STRESSOR: the picked catalog item
+  const [stressorSeverity, setStressorSeverity] = useState('moderate'); // APPLY_STRESSOR: word-banded severity
+  const [powerCause, setPowerCause] = useState('coup');       // CHANGE_RULING_POWER: how power changes hands
   const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
@@ -194,6 +199,21 @@ export default function EventComposer({
     [institutionCatalogItems],
   );
   const factionGroups = useMemo(() => factionCompendium(settlement), [settlement]);
+  // APPLY_STRESSOR — the FULL stressor vocabulary: generation types +
+  // campaign-only types (rebellion, market shock, criminal corridor, magical
+  // instability, coup d'état) + the user's custom stressors, deduped.
+  const stressorPickerItems = useMemo(() => buildStressorPickerItems(
+    settlement?.stressors || settlement?.stress || settlement?.stresses || [],
+    customContent?.stressors || [],
+  ), [settlement?.stressors, settlement?.stress, settlement?.stresses, customContent?.stressors]);
+  // CHANGE_RULING_POWER — every faction except the one already on the seat.
+  const rulingPowerOptions = useMemo(() => {
+    const governing = governingFactionOf(settlement);
+    return (settlement?.powerStructure?.factions || [])
+      .filter(f => f && f !== governing)
+      .map(f => ({ id: String(f.faction || f.name || ''), name: String(f.faction || f.name || '') }))
+      .filter(o => o.id);
+  }, [settlement]);
   // IMPOSE_CORRUPTION — criminal organizations present in the settlement (same CRIMINAL-tag
   // detector the corruption domain uses, so the picker matches what the engine recognizes).
   const criminalOrgs = useMemo(
@@ -264,6 +284,15 @@ export default function EventComposer({
       const org = criminalOrg || criminalOrgs[0];
       if (org) payload.criminalInstitution = org;
     }
+    if (type === 'APPLY_STRESSOR') {
+      payload.stressorType = stressorPick?.key || target.trim();
+      payload.label = stressorPick?.name || labelOfTarget(target);
+      payload.severity = STRESSOR_SEVERITY_VALUES[stressorSeverity] ?? 0.6;
+      if (stressorPick?.isCustom) payload.isCustom = true;
+    }
+    if (type === 'CHANGE_RULING_POWER') {
+      payload.cause = powerCause || 'coup';
+    }
     return {
       id: `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
       type,
@@ -324,7 +353,7 @@ export default function EventComposer({
 
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); }} style={selectStyle}>
+          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setStressorSeverity('moderate'); setPowerCause('coup'); }} style={selectStyle}>
             {Object.entries(EVENT_REGISTRY)
               /* Hide non-authorable events from the DM action list (see
                  NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
@@ -364,6 +393,43 @@ export default function EventComposer({
                   categoryFilters={institutionCategories}
                   triggerLabel={target ? 'Pick a different institution' : undefined}
                 />
+              </Field>
+            );
+          }
+          if (type === 'APPLY_STRESSOR') {
+            return (
+              <Field label="Stressor" hint={target ? `Applying: ${stressorPick?.name || target}` : 'Pick from the full catalog (incl. custom)'}>
+                {target && (
+                  <div style={pickedChipStyle}>
+                    <span>{stressorPick?.name || target}</span>
+                    <button onClick={() => { setTarget(''); setStressorPick(null); }} title="Clear" style={chipClearBtn}><X size={11} /></button>
+                  </div>
+                )}
+                <CatalogPicker
+                  closeOnPick
+                  items={stressorPickerItems}
+                  onAdd={(item) => { setTarget(item.key); setStressorPick(item); }}
+                  placeholder="Search stressors..."
+                  categoryFilters={['Settlement', 'Campaign', 'Custom']}
+                  triggerLabel={target ? 'Pick a different stressor' : undefined}
+                />
+              </Field>
+            );
+          }
+          if (type === 'CHANGE_RULING_POWER') {
+            return (
+              <Field label="New ruling power" hint={spec?.targetPrompt}>
+                <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
+                  <option value="">, Pick a faction -</option>
+                  {rulingPowerOptions.map(o => (
+                    <option key={o.id} value={o.id}>{o.name}</option>
+                  ))}
+                </select>
+                {rulingPowerOptions.length === 0 && (
+                  <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
+                    No other faction holds power here — add a faction first.
+                  </span>
+                )}
               </Field>
             );
           }
@@ -439,6 +505,38 @@ export default function EventComposer({
               </div>
             </Field>
           )
+        )}
+
+        {/* APPLY_STRESSOR — word-banded severity (no 0-100 math at the table) */}
+        {type === 'APPLY_STRESSOR' && (
+          <Field label="Severity" hint={
+            stressorSeverity === 'severe' ? 'A defining crisis — expect cascades' :
+            stressorSeverity === 'minor'  ? 'A pressure, not yet a catastrophe'   :
+                                            'A serious, active crisis'
+          }>
+            <select value={stressorSeverity} onChange={e => setStressorSeverity(e.target.value)} style={selectStyle}>
+              <option value="minor">Minor</option>
+              <option value="moderate">Moderate</option>
+              <option value="severe">Severe</option>
+            </select>
+          </Field>
+        )}
+
+        {/* CHANGE_RULING_POWER — how power changes hands shapes the aftermath */}
+        {type === 'CHANGE_RULING_POWER' && (
+          <Field label="How" hint={
+            powerCause === 'election'   ? 'A fresh mandate — legitimacy starts warmer' :
+            powerCause === 'conquest'   ? 'Imposed from outside — legitimacy starts cold' :
+            powerCause === 'succession' ? 'The line held; the household reorders' :
+            powerCause === 'appointment'? 'Installed by a higher authority' :
+                                          'Seized by force — loyalties re-sworn at swordpoint'
+          }>
+            <select value={powerCause} onChange={e => setPowerCause(e.target.value)} style={selectStyle}>
+              {RULING_POWER_CAUSES.map(c => (
+                <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>
+              ))}
+            </select>
+          </Field>
         )}
 
         {/* §9b/§9g/§9h — relationship type for neighbour-targeted events */}
@@ -826,6 +924,10 @@ function Field({ label, hint, children }) {
 // accent and the purple AI-narrative tint, so "the party did this" reads clearly.
 const PARTY = '#8a2f4a';
 const PARTY_BG = '#f7ebf0';
+
+// APPLY_STRESSOR severity words → engine severity. Words at the table,
+// numbers in the engine (same posture as the hidden impair sliders).
+const STRESSOR_SEVERITY_VALUES = Object.freeze({ minor: 0.35, moderate: 0.6, severe: 0.85 });
 
 const inputStyle = {
   padding: '4px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm,

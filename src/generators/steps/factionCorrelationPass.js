@@ -18,7 +18,7 @@
 
 import { registerStep } from '../pipeline.js';
 import { deriveFactionBoosts, applyFactionInstitutionBoosts } from '../factionCorrelation.js';
-import { stripArcaneInstitutions } from '../isolationGenerator.js';
+import { stripArcaneInstitutions, cullPlanarWithoutCircle } from '../isolationGenerator.js';
 import { applySubsumption } from './subsumptionPass.js';
 import { collapseUpgradeChains } from './assembleInstitutions.js';
 import { recordTrace } from '../../domain/trace.js';
@@ -80,6 +80,22 @@ registerStep('factionCorrelationPass', {
       applySubsumption(institutions, ctx, {
         step: 'factionCorrelationPass', result: 'subsumed_after_faction_pull',
       });
+
+      // A faction pull can seat a planar institution on a roster with no
+      // teleportation circle — re-apply the same prerequisite cull
+      // isolationPass ran.
+      for (const removedName of cullPlanarWithoutCircle(institutions)) {
+        recordTrace(ctx, {
+          targetType: 'institution',
+          targetId:   instId(removedName),
+          step:       'factionCorrelationPass',
+          result:     'requires_teleportation_circle',
+          causes: [
+            { source: instId('Teleportation circle'), effect: 'missing prerequisite',
+              reason: `"${removedName}" trades with other planes through a permanent teleportation circle — no circle exists here, so the institution cannot operate.` },
+          ],
+        });
+      }
 
       // ...and the UPGRADE_CHAINS ladder the assembly + cascade already
       // collapsed — without this a pull can re-list a lesser scale tier.

@@ -10,6 +10,12 @@
  * Plus the coupling and bookkeeping rules:
  *   • an active siege cuts the import share of need, so the blockade eats
  *     the granary tick over tick;
+ *   • magical transport bypasses the blockade only up to its own channel
+ *     throughput (the shared FOOD_IMPORT_RATES ladder) — the import share
+ *     above it still starves;
+ *   • the persisted, gated defense 'disaster' score is re-graded through
+ *     the same gate whenever live resilience moves (the readiness row
+ *     un-freezes);
  *   • relief never compounds — the structural deficit is re-derived from
  *     the stashed base every tick;
  *   • settlements without a generated food ledger are untouched.
@@ -25,6 +31,7 @@ import {
 } from '../../src/domain/worldPulse/foodStockpile.js';
 import { advanceCampaignWorld } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
 
 function settlementWith({ foodSecurity, institutions = [], tier = 'town' } = {}) {
   return {
@@ -148,6 +155,128 @@ describe('advanceFoodStockpile()', () => {
     expect(result.changed).toBe(false);
     expect(result.settlement).toBe(s);
   });
+
+  test('a teleportation circle bypasses the blockade: imports keep flowing', () => {
+    const blockade = { id: 'siege.x', type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
+    const base = {
+      // Balanced economy; the import share (30% of need) sits WITHIN the
+      // circle's 0.30 channel throughput, so the bypass is total.
+      foodSecurity: { deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.3 },
+    };
+    let cur = settlementWith({ ...base, institutions: [GRANARY, { name: 'Teleportation circle' }] });
+    for (let tick = 1; tick <= 4; tick++) {
+      cur = advanceFoodStockpile(cur, { interval: 'one_month', tick, blockade }).settlement || cur;
+    }
+    const fs = cur.economicState.foodSecurity;
+    // The circle is point-to-point — the import share is untouched, so the
+    // granary holds (deficit 0, nothing to ration) while the siege grips.
+    expect(fs.storageMonths).toBeCloseTo(4, 1);
+    expect(fs.stockpile.blockaded).toBe(true);
+    expect(fs.stockpile.blockadeBypass).toBe('teleport');
+  });
+
+  test('a lifting siege refreshes the bookkeeping flags even when the numbers held still', () => {
+    const blockade = { id: 'siege.x', type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
+    const base = {
+      foodSecurity: { deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.3 },
+    };
+    // Full teleport bypass: the siege never moves a number, only the flags.
+    let cur = settlementWith({ ...base, institutions: [GRANARY, { name: 'Teleportation circle' }] });
+    cur = advanceFoodStockpile(cur, { interval: 'one_month', tick: 1, blockade }).settlement;
+    expect(cur.economicState.foodSecurity.stockpile.blockaded).toBe(true);
+    // The siege lifts; storage/deficit/resilience are all unchanged, but the
+    // stockpile's "why" record must not keep claiming an active blockade.
+    const lifted = advanceFoodStockpile(cur, { interval: 'one_month', tick: 2 });
+    expect(lifted.changed).toBe(true);
+    expect(lifted.settlement.economicState.foodSecurity.stockpile.blockaded).toBe(false);
+    expect(lifted.settlement.economicState.foodSecurity.stockpile.blockadeBypass).toBeNull();
+    // And once the record agrees with the world again, ticks go back to no-ops.
+    const settled = advanceFoodStockpile(lifted.settlement, { interval: 'one_month', tick: 3 });
+    expect(settled.changed).toBe(false);
+    expect(settled.settlement).toBe(lifted.settlement);
+  });
+
+  test('the bypass is capped at channel throughput: a port town with a circle starves on the overflow', () => {
+    const blockade = { id: 'siege.x', type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
+    // Port-grade import dependency (0.58) far exceeds what a circle can move
+    // (0.30): the siege bites the 28% overflow — generation's own channel
+    // model, not a free pass for owning the right masonry.
+    const mk = (institutions) => settlementWith({
+      institutions,
+      foodSecurity: { deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.58 },
+    });
+    const run = (start) => {
+      let cur = start;
+      for (let tick = 1; tick <= 3; tick++) {
+        cur = advanceFoodStockpile(cur, { interval: 'one_month', tick, blockade }).settlement || cur;
+      }
+      return cur.economicState.foodSecurity;
+    };
+    const circle = run(mk([GRANARY, { name: 'Teleportation circle' }]));
+    const noBypass = run(mk([GRANARY]));
+    expect(circle.stockpile.blockadeBypass).toBe('teleport');
+    // Stores STILL drain — slower than with no channel, but never held flat.
+    expect(circle.storageMonths).toBeLessThan(4);
+    expect(circle.storageMonths).toBeGreaterThan(noBypass.storageMonths);
+  });
+
+  test("a no-magic world's legacy circle is masonry: no bypass at all", () => {
+    const blockade = { id: 'siege.x', type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
+    const mk = (institutions, config) => ({
+      ...settlementWith({
+        institutions,
+        foodSecurity: { deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.3 },
+      }),
+      ...(config ? { config } : {}),
+    });
+    const tickOnce = (s) => advanceFoodStockpile(s, { interval: 'one_month', tick: 1, blockade })
+      .settlement.economicState.foodSecurity;
+    const noMagic = tickOnce(mk([GRANARY, { name: 'Teleportation circle' }], { magicExists: false }));
+    const noCircle = tickOnce(mk([GRANARY]));
+    expect(noMagic.stockpile.blockadeBypass).toBeNull();
+    // Drains exactly like a settlement with no magical transport.
+    expect(noMagic.storageMonths).toBe(noCircle.storageMonths);
+  });
+
+  test("the generator's channel verdict (magicTradeChannel) is preferred over the name sniff", () => {
+    const blockade = { id: 'siege.x', type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
+    // No recognisable institution name — only the persisted channel field.
+    const s = settlementWith({
+      institutions: [GRANARY, { name: 'The Whispering Arch' }],
+      foodSecurity: {
+        deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.3,
+        magicTradeChannel: 'teleport',
+      },
+    });
+    const fs = advanceFoodStockpile(s, { interval: 'one_month', tick: 1, blockade })
+      .settlement.economicState.foodSecurity;
+    expect(fs.stockpile.blockadeBypass).toBe('teleport');
+    expect(fs.storageMonths).toBeCloseTo(4, 1);
+  });
+
+  test('an airship dock runs the blockade impaired: slower drain than no bypass at all', () => {
+    const blockade = { id: 'siege.x', type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
+    const mk = (institutions) => settlementWith({
+      institutions,
+      foodSecurity: { deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.4 },
+    });
+    const run = (start) => {
+      let cur = start;
+      for (let tick = 1; tick <= 4; tick++) {
+        cur = advanceFoodStockpile(cur, { interval: 'one_month', tick, blockade }).settlement || cur;
+      }
+      return cur.economicState.foodSecurity;
+    };
+    const airship = run(mk([GRANARY, { name: 'Airship docking (high magic)' }]));
+    const noBypass = run(mk([GRANARY]));
+    // The dock lands at most its besieged throughput (0.15 of need): stores
+    // still drain, but strictly slower than a settlement with no magical
+    // transport at all.
+    expect(airship.storageMonths).toBeLessThan(4);
+    expect(airship.storageMonths).toBeGreaterThan(noBypass.storageMonths);
+    expect(airship.stockpile.blockadeBypass).toBe('airship');
+    expect(noBypass.stockpile.blockadeBypass).toBeNull();
+  });
 });
 
 describe('live resilienceScore (the report card is re-graded)', () => {
@@ -193,6 +322,94 @@ describe('live resilienceScore (the report card is re-graded)', () => {
     }
     expect(cur.economicState.foodSecurity.storageMonths).toBeGreaterThan(1);
     expect(cur.economicState.foodSecurity.resilienceScore).toBeGreaterThan(start);
+  });
+});
+
+describe('disaster writeback (the readiness row finally moves)', () => {
+  const blockade = { type: 'siege', severity: 0.9, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
+  const famine = { type: 'famine', severity: 1, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
+  // Settlement as it leaves generation: healthy granary, persisted gated
+  // scores.disaster (resilience 80 × gate 0.9 = 72).
+  const mk = (defenseProfile) => ({
+    ...settlementWith({
+      institutions: [GRANARY],
+      foodSecurity: {
+        dailyNeed: 2500, dailyProduction: 2400, foodRatio: 0.96,
+        deficitPct: 4, surplusPct: 0, storageMonths: 5,
+        importDependency: 0.5, resilienceScore: 80,
+      },
+    }),
+    config: { tradeRouteAccess: 'road' },
+    defenseProfile,
+  });
+
+  test('a siege+famine drain re-grades scores.disaster through the persisted gate — and the dossier row moves', () => {
+    let cur = mk({
+      scores: { military: 50, internal: 50, monster: 50, economic: 50, disaster: 72 },
+      economicGates: { disaster: 0.9 },
+      institutions: {},
+    });
+    const rowBefore = deriveDefenseReadiness(cur).find(r => r.label === 'Disasters & Famine');
+    expect(rowBefore.score).toBe(72);
+    for (let tick = 1; tick <= 12; tick++) {
+      cur = advanceFoodStockpile(cur, { interval: 'one_month', tick, blockade, famine }).settlement || cur;
+    }
+    const fs = cur.economicState.foodSecurity;
+    expect(fs.resilienceScore).toBeLessThan(80);
+    // The persisted score IS the gated live resilience now, not the freeze.
+    expect(cur.defenseProfile.scores.disaster).toBe(Math.round(fs.resilienceScore * 0.9));
+    const rowAfter = deriveDefenseReadiness(cur).find(r => r.label === 'Disasters & Famine');
+    expect(rowAfter.score).toBe(cur.defenseProfile.scores.disaster);
+    expect(rowAfter.score).toBeLessThan(rowBefore.score);
+    // Untouched defense fields survive the immutable spread.
+    expect(cur.defenseProfile.scores.military).toBe(50);
+    expect(cur.defenseProfile.economicGates.disaster).toBe(0.9);
+  });
+
+  test('an unchanged tick keeps object identity AND the defenseProfile reference', () => {
+    const start = mk({
+      scores: { military: 50, internal: 50, monster: 50, economic: 50, disaster: 72 },
+      economicGates: { disaster: 0.9 },
+      institutions: {},
+    });
+    const first = advanceFoodStockpile(start, { interval: 'one_month', tick: 1 });
+    // First touch stashes the stockpile bookkeeping, but the granary did not
+    // move and the gated score matches: defenseProfile keeps its reference.
+    expect(first.changed).toBe(true);
+    expect(first.settlement.defenseProfile).toBe(start.defenseProfile);
+    expect(first.settlement.defenseProfile.scores.disaster).toBe(72);
+    const second = advanceFoodStockpile(first.settlement, { interval: 'one_month', tick: 2 });
+    expect(second.changed).toBe(false);
+    expect(second.settlement).toBe(first.settlement);
+  });
+
+  test('legacy saves without a persisted disaster score never gain one', () => {
+    const defenseProfile = {
+      scores: { military: 50, internal: 50, monster: 50, economic: 50 },
+      institutions: {},
+    };
+    let cur = mk(defenseProfile);
+    for (let tick = 1; tick <= 6; tick++) {
+      cur = advanceFoodStockpile(cur, { interval: 'one_month', tick, blockade, famine }).settlement || cur;
+    }
+    expect(cur.economicState.foodSecurity.resilienceScore).toBeLessThan(80);
+    expect(cur.defenseProfile.scores.disaster).toBeUndefined();
+    expect(cur.defenseProfile).toBe(defenseProfile);
+    // No persisted score, no writeback: the display layers correctly fall
+    // through to the live resilience instead.
+    const row = deriveDefenseReadiness(cur).find(r => r.label === 'Disasters & Famine');
+    expect(row.score).toBe(cur.economicState.foodSecurity.resilienceScore);
+  });
+
+  test('a persisted score without a persisted gate re-grades ungated (×1)', () => {
+    let cur = mk({
+      scores: { military: 50, internal: 50, monster: 50, economic: 50, disaster: 80 },
+      institutions: {},
+    });
+    for (let tick = 1; tick <= 6; tick++) {
+      cur = advanceFoodStockpile(cur, { interval: 'one_month', tick, blockade, famine }).settlement || cur;
+    }
+    expect(cur.defenseProfile.scores.disaster).toBe(cur.economicState.foodSecurity.resilienceScore);
   });
 });
 

@@ -10,6 +10,7 @@ import { useState, useMemo } from 'react';
 import { X, ChevronDown, ChevronUp, Sliders } from 'lucide-react';
 import CatalogSearch from './settlement/CatalogPicker.jsx';
 import { buildInstitutionCatalog } from '../domain/institutions/institutionCatalog.js';
+import { buildStressorPickerItems } from '../domain/stressorPicker.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
 import { STRESS_TYPE_MAP } from '../data/stressTypes.js';
 import { EXPORT_GOODS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
@@ -296,19 +297,14 @@ export default function SettlementEditor({
     );
   };
 
-  // ── Stressors: full catalog + custom ──────────────────────────────────────
-  const stressCatalogItems = useMemo(() => {
-    const existing = new Set(stresses.map(s => s.type));
-    const items = Object.entries(STRESS_TYPE_MAP)
-      .filter(([key]) => !existing.has(key))
-      .map(([key, def]) => ({ id: key, name: def.label || key, key, desc: def.crisisHook || def.viabilityNote || '' }));
-
-    for (const cs of (customContent.stressors || [])) {
-      if (existing.has(cs.name)) continue;
-      items.push({ id: cs.id, name: cs.name, key: cs.name, desc: cs.description || '', isCustom: true, severity: cs.severity });
-    }
-    return items.sort((a, b) => a.name.localeCompare(b.name));
-  }, [stresses, customContent.stressors]);
+  // ── Stressors: the UNIFIED catalog (domain/stressorPicker.js) ─────────────
+  // Generation types + the campaign-only types that used to be unpickable
+  // here (rebellion, market shock, criminal corridor, magical instability,
+  // coup d'état) + the user's custom stressors.
+  const stressCatalogItems = useMemo(
+    () => buildStressorPickerItems(stresses, customContent.stressors || []),
+    [stresses, customContent.stressors],
+  );
 
   const addStress = (item) => {
     const def = STRESS_TYPE_MAP[item.key];
@@ -517,8 +513,11 @@ export default function SettlementEditor({
           <SubSection title="Stressors" count={stresses.length}>
             <div style={{ display:'flex', flexWrap:'wrap', gap:4, marginBottom:6 }}>
               {stresses.map((s, i) => {
+                // Campaign-only and custom types aren't in STRESS_TYPE_MAP — fall
+                // back to the entry's own stored label (addStress and the
+                // APPLY_STRESSOR event both store one) before raw snake_case.
                 const def = STRESS_TYPE_MAP[s.type];
-                return <Pill key={i} label={def?.label || s.type} color={def?.colour || '#8b1a1a'} isCustom={s.isCustom} onRemove={() => removeStress(i)}/>;
+                return <Pill key={i} label={def?.label || s.label || s.name || s.type} color={def?.colour || '#8b1a1a'} isCustom={s.isCustom} onRemove={() => removeStress(i)}/>;
               })}
               {!stresses.length && <span style={{ fontSize:FS.xxs, color:MUTED }}>No active stressors</span>}
             </div>

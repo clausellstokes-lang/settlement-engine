@@ -172,6 +172,23 @@ describe('institutionLifecycle — necessity ordering inputs', () => {
     expect(bathScore).toBe(0);
   });
 
+  it('export anchoring survives a subsumption rename within the same canonical good', () => {
+    // Subsumption can keep 'Leather goods' as the surviving export label while
+    // the chain's output reads 'Boots and shoes' — no >=4-char token overlap,
+    // but the same canonical good. The closure shield must still see the anchor.
+    const town = smithyTown({
+      economicState: { primaryExports: ['Leather goods'], primaryImports: [] },
+    });
+    const tanningChain = {
+      chainId: 'tanning', label: 'Tanning', resource: 'livestock',
+      processingInstitutions: ['Tannery'],
+      outputs: ['Boots and shoes'],
+    };
+    const w = INSTITUTION_LIFECYCLE_TUNING.contribution;
+    const score = institutionContribution(town, { name: 'Tannery', category: 'Crafts' }, [tanningChain]);
+    expect(score).toBeGreaterThanOrEqual(w.chainProcessor + w.exportAnchor);
+  });
+
   it('food-anchor shielding is for FOOD: a sawmill is not a granary', () => {
     const town = smithyTown();
     // 'Sawmill' contains 'mill' but cuts wood, not flour (the events path

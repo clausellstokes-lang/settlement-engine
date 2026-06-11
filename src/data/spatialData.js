@@ -575,14 +575,13 @@ export const GATE_FEATURES = {
   },
   "Planar embassy": {
     minTier: "metropolis",
-    requires: ["Teleportation circle", "Academy of magic"],
-    reason: "Stable planar contact requires permanent teleportation infrastructure."
+    requires: ["Teleportation circle"],
+    reason: "Stable planar contact requires a permanent teleportation circle — no circle, no embassy."
   },
   "Planar traders": {
     minTier: "metropolis",
-    suggestionOnly: true,
-    requires: ["Planar embassy", "International trade center"],
-    reason: "Planar traders without a formal embassy or trade center — extraplanar commerce is possible but operates outside official channels."
+    requires: ["Teleportation circle"],
+    reason: "Extraplanar commerce arrives through a permanent teleportation circle — no circle, no planar trade."
   },
   "Dragon resident": {
     minTier: "metropolis",

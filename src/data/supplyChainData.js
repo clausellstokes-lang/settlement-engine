@@ -531,7 +531,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Precious metal veins',
         resourceIcon: '',
         rawInputs: ['Precious metals', 'Gemstones', 'Fine textiles'],
-        processingInstitutions: [],
+        // Was [] — an empty processor list means computeActiveChains can
+        // never activate the chain. Luxury manufacture is city-catalog work:
+        // 'Specialized metalworkers' (armorers, swordsmiths, jewelers) make
+        // the goods, the 'Luxury goods quarter' moves them.
+        processingInstitutions: ['Specialized metalworkers', 'Luxury goods quarter'],
         intermediateGoods: ['Fine metalwork and jewelry', 'Fine textiles'],
         outputs: [
           'Luxury manufactured goods',
@@ -648,7 +652,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: ['Rare spices and dyes'],
-        processingInstitutions: [],
+        // Was [] — the chain could never activate. Entrepôt redistribution is
+        // merchant work: the guild houses and luxury quarter take the markup
+        // on goods produced in distant lands ('Annual fair' also matches the
+        // city's 'Major annual fairs' under the fuzzy gate).
+        processingInstitutions: ['Merchant guilds (3-8)', 'Merchant guilds (15-40)', 'Luxury goods quarter', 'Annual fair'],
         intermediateGoods: ['Rare spices and dyes'],
         outputs: ['Rare spices and exotic dyes'],
         services: [],
@@ -664,7 +672,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: ['Fine textiles', 'Luxury textiles'],
-        processingInstitutions: [],
+        // Was [] — the chain could never activate. Silk import/distribution
+        // runs through the luxury-trade institutions: the city's quarter
+        // ('Silks, spices, precious goods') and merchant guilds, with the
+        // metropolis' international trade center above them.
+        processingInstitutions: ['Luxury goods quarter', 'Merchant guilds (15-40)', 'International trade center'],
         intermediateGoods: ['Fine textiles', 'Luxury textiles'],
         outputs: ['Fine textiles', 'Luxury manufactured goods'],
         services: [],
@@ -681,7 +693,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: [],
-        processingInstitutions: [],
+        // Was [] — the chain could never activate. The catalog's banking
+        // ladder: 'Money changers' (town) → 'Banking houses' (city) →
+        // 'Banking district' (metropolis).
+        processingInstitutions: ['Money changers', 'Banking houses', 'Banking district'],
         intermediateGoods: ['Financial services', 'International banking services'],
         outputs: ['Financial services', 'International banking services'],
         services: ['legal'],
@@ -964,7 +979,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '️',
         rawInputs: [],
-        processingInstitutions: ['Great library', 'Cartographers guild', 'Message Network'],
+        processingInstitutions: ['Great library', "Cartographer's guild", 'Message Network'],
         intermediateGoods: [],
         outputs: ['News and information', 'Maps and charts'],
         services: ['information'],
@@ -1068,7 +1083,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Magical ley line node',
         resourceIcon: '️',
         rawInputs: ['Arcane reagents', 'Extraplanar goods'],
-        processingInstitutions: [],
+        // Was [] — an empty processor list means computeActiveChains can
+        // never activate the chain (it returns early with no match).
+        processingInstitutions: ['Enchanting quarter', 'Magic item consignment', 'Academy of magic', "Mages' district"],
         intermediateGoods: ['Arcane scribing'],
         outputs: [
           'Magical item market',
@@ -1089,8 +1106,12 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Planar Trade',
         resource: null,
         resourceIcon: '',
-        rawInputs: ['Extraplanar goods'],
-        processingInstitutions: [],
+        rawInputs: ['Extraplanar goods', 'Arcane reagents'],
+        // Was [] — the chain could never activate. Planar commerce is the
+        // teleportation circle's own supply chain: traders and the embassy
+        // process what arrives through it (both are culled at generation
+        // when no circle exists), and the circle itself consumes reagents.
+        processingInstitutions: ['Planar traders', 'Planar embassy'],
         intermediateGoods: ['Extraplanar goods'],
         outputs: ['Extraplanar goods', 'Planar travel information', 'Diplomatic access'],
         services: ['magic', 'information'],
@@ -1259,7 +1280,17 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: ['Contraband goods'],
-        processingInstitutions: [],
+        // Was [] — the chain could never activate. The criminal catalog has a
+        // smuggling ladder ('Smuggling waypoint' hamlet → 'Smuggling network'
+        // village → 'Smuggling operation' town); the thorp-level fence and
+        // outlaw shelter are the smallest links (outputs include 'Safe houses').
+        processingInstitutions: [
+          'Local fence',
+          'Outlaw shelter',
+          'Smuggling waypoint',
+          'Smuggling network',
+          'Smuggling operation',
+        ],
         intermediateGoods: ['Contraband goods'],
         outputs: ['Contraband goods', 'Import/export bypass', 'Safe houses'],
         services: ['criminal'],

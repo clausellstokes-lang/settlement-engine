@@ -941,11 +941,24 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs) => {
  * @param {string} route       - Trade route access string
  * @param {Object} neighbor    - Neighbor settlement (unused, kept for compat)
  * @param {Object} _config
+ * @param {Object} [foodBalance] - Optional economicViability.metrics.foodBalance
+ *                                 ({ dailyNeed, dailyProduction, deficit, rawDeficit, … }).
+ *                                 When it records a meaningful deficit, the isolated
+ *                                 wording acknowledges the gap instead of seeding the
+ *                                 AI pass with a self-sufficiency claim.
  * @returns {string[]} Array of reason strings (shown as bullet list)
  */
-export const generateSettlementReason = (tier, route, neighbor, _config = {}) => {
+export const generateSettlementReason = (tier, route, neighbor, _config = {}, foodBalance = null) => {
   const lines = [];
   const _routeHooks = TERRAIN_NARRATIVE_HOOKS[route] || TERRAIN_NARRATIVE_HOOKS.isolated;
+
+  // Meaningful food deficit? rawDeficit is the pre-import gap (need − production);
+  // deficit is the residual after imports/magic. Either one signals the settlement
+  // does not feed itself. Treated as meaningful above 5% of daily need so rounding
+  // noise can't flip the founding narrative.
+  const gap  = foodBalance ? Math.max(foodBalance.rawDeficit ?? 0, foodBalance.deficit ?? 0) : 0;
+  const need = foodBalance?.dailyNeed ?? foodBalance?.need ?? 0;
+  const hasFoodDeficit = gap > 0 && (need <= 0 || gap / need >= 0.05);
 
   // Primary settlement reason
   let reason;
@@ -956,7 +969,9 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}) =>
   } else if (route === 'river') {
     reason = 'Built along the river — water access shapes every economic decision.';
   } else if (route === 'isolated') {
-    reason = 'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.';
+    reason = hasFoodDeficit
+      ? 'Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensively — through magical transport, sanctioned caravans, and minor routes — or not at all.'
+      : 'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.';
   } else {
     reason = 'Established along a road route — trade flows in, goods flow out, people pass through.';
   }
@@ -969,7 +984,9 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}) =>
     );
   } else if (tier === 'city') {
     lines.push(
-      'Large enough to produce what it consumes and consume what it produces. External trade amplifies rather than sustains.',
+      hasFoodDeficit
+        ? 'Large enough that its appetites outrun its fields — what the city consumes, it cannot fully produce.'
+        : 'Large enough to produce what it consumes and consume what it produces. External trade amplifies rather than sustains.',
     );
   } else if (['thorp', 'hamlet'].includes(tier)) {
     lines.push('Small enough that every household knows its purpose. Surplus, if any, is modest.');

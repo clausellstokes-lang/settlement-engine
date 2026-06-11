@@ -31,7 +31,8 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'food',
     criticality: 0.95,
-    aliases: ['bulk grain', 'bulk grain and foodstuffs', 'grain and malt', 'wheat', 'barley', 'foodstuffs'],
+    aliases: ['bulk grain', 'bulk grain and foodstuffs', 'grain and malt', 'wheat', 'barley', 'foodstuffs',
+      'grain surplus', 'grain export', 'agricultural surplus', 'agricultural produce', 'surplus food', 'bulk food exports'],
   },
   flour: {
     id: 'flour',
@@ -55,7 +56,7 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'food',
     criticality: 0.78,
-    aliases: ['livestock', 'dairy products', 'meat', 'hides and meat', 'livestock and dairy'],
+    aliases: ['livestock', 'dairy products', 'meat', 'hides and meat', 'livestock and dairy', 'raw hides and animal products'],
   },
   provisions: {
     id: 'provisions',
@@ -63,7 +64,7 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'food',
     criticality: 0.84,
-    aliases: ['preserved provisions', 'salted meat', 'bread', 'rations', 'food preserves'],
+    aliases: ['preserved provisions', 'salted meat', 'bread', 'rations', 'food preserves', 'preserved foods', 'salted provisions'],
   },
   salt: {
     id: 'salt',
@@ -71,7 +72,7 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'food',
     criticality: 0.72,
-    aliases: ['salt', 'desert salt', 'salt flats'],
+    aliases: ['salt', 'desert salt', 'salt flats', 'sea salt', 'rock salt', 'salt blocks', 'evaporated salt', 'salt for preservation'],
   },
   timber: {
     id: 'timber',
@@ -79,7 +80,7 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'raw_material',
     criticality: 0.62,
-    aliases: ['timber', 'milled timber', 'milled lumber', 'hardwood beams', 'shipbuilding timber', 'lumber'],
+    aliases: ['timber', 'milled timber', 'milled lumber', 'hardwood beams', 'shipbuilding timber', 'lumber', 'structural timber', 'hewn timber'],
   },
   stone: {
     id: 'stone',
@@ -87,7 +88,7 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'raw_material',
     criticality: 0.5,
-    aliases: ['stone', 'cut stone', 'dressed stone', 'masonry', 'building materials', 'marble', 'granite'],
+    aliases: ['stone', 'cut stone', 'dressed stone', 'masonry', 'building materials', 'marble', 'granite', 'cut stone and masonry', 'quarried stone'],
   },
   clay: {
     id: 'clay',
@@ -95,7 +96,7 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'raw_material',
     criticality: 0.38,
-    aliases: ['clay', 'clay and ceramics materials', 'fired brick', 'pottery and ceramics', 'roof tiles'],
+    aliases: ['clay', 'clay and ceramics materials', 'fired brick', 'pottery and ceramics', 'roof tiles', 'clay and raw materials'],
   },
   iron: {
     id: 'iron',
@@ -103,7 +104,7 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'raw_material',
     criticality: 0.72,
-    aliases: ['iron', 'iron ore', 'refined iron', 'iron ore (local mines exhausted)', 'basic metalwork'],
+    aliases: ['iron', 'iron ore', 'refined iron', 'iron ore (local mines exhausted)', 'basic metalwork', 'refined iron and metalwork', 'metal ore', 'metal goods'],
   },
   fuel: {
     id: 'fuel',
@@ -111,7 +112,7 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'fuel',
     criticality: 0.68,
-    aliases: ['fuel', 'charcoal', 'charcoal and fuel', 'coal', 'peat', 'firewood'],
+    aliases: ['fuel', 'charcoal', 'charcoal and fuel', 'coal', 'peat', 'firewood', 'fuel wood', 'peat fuel', 'coal and fuel'],
   },
   textiles: {
     id: 'textiles',
@@ -119,7 +120,7 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'finished_good',
     criticality: 0.46,
-    aliases: ['textiles', 'wool', 'cloth', 'fulled cloth', 'luxury textiles', 'silk', 'linen'],
+    aliases: ['textiles', 'wool', 'cloth', 'fulled cloth', 'luxury textiles', 'silk', 'linen', 'raw cloth', 'raw wool and hides', 'quality cloth'],
   },
   leather: {
     id: 'leather',
@@ -143,7 +144,24 @@ export const GOOD_CATALOG = Object.freeze({
     kind: 'good',
     category: 'luxury',
     criticality: 0.28,
-    aliases: ['luxury goods', 'jewellery', 'jewelry', 'cut gemstones', 'gems', 'spices', 'exotic goods'],
+    aliases: ['luxury goods', 'jewellery', 'jewelry', 'cut gemstones', 'gems', 'spices', 'exotic goods',
+      'luxury textiles and exotic goods', 'luxury imports', 'luxury'],
+  },
+  furs: {
+    id: 'furs',
+    label: 'Furs and pelts',
+    kind: 'good',
+    category: 'raw_material',
+    criticality: 0.4,
+    aliases: ['furs', 'pelts', 'furs and pelts', 'raw furs and pelts', 'quality furs', 'fur garments'],
+  },
+  raw_materials: {
+    id: 'raw_materials',
+    label: 'Bulk raw materials',
+    kind: 'good',
+    category: 'raw_material',
+    criticality: 0.55,
+    aliases: ['raw materials', 'bulk raw materials', 'bulk raw materials and agricultural goods', 'industrial inputs'],
   },
   arcane_reagents: {
     id: 'arcane_reagents',
@@ -303,6 +321,29 @@ function fuzzyMatch(label) {
   return bestScore >= 0.42 ? best : null;
 }
 
+// Exact-alias resolution for subsumption/reconciliation: a catalog entry only
+// when the (annotation-stripped) label is a VERBATIM id/label/alias hit.
+// normalizeGood's fuzzy fallback is right for the regional graph ("does this
+// prose roughly mean grain?") but wrong as a merge key — token overlap calls
+// "Baked goods" iron (via "metal goods") and "Smoked seafood" salt (via "sea
+// salt"), and merging on a guess erases real exports.
+function exactCatalogEntry(label) {
+  const key = comparable(label);
+  return (key && ALIAS_INDEX.get(key)) || null;
+}
+
+/**
+ * Exact-alias canonical good id for a trade label, or null when the label is
+ * unrecognized, a service, or only fuzzy-matchable. The safe COMPARISON key
+ * for display predicates: subsumption renames within a canonical good
+ * ('Boots and shoes' surviving as 'Leather goods') stay matchable by id where
+ * first-word/substring text checks snap.
+ */
+export function exactGoodId(label) {
+  const entry = exactCatalogEntry(label);
+  return entry && entry.kind === 'good' ? entry.id : null;
+}
+
 /**
  * Convert any label/object into a canonical regional good/service entry.
  */
@@ -349,6 +390,99 @@ export function normalizeGoodsList(values = []) {
     out.push(good);
   }
   return out;
+}
+
+const ANNOTATION_RE = /\([^)]*\)/;
+
+// Within one canonical-id group, the surviving label is the one that carries
+// the most information: an annotated label ("(local fields depleted)",
+// "(transit)") explains why the entry exists and drives display pills; the
+// catalog's own label ("Grain") beats catch-all phrasings ("Bulk grain and
+// foodstuffs"); shorter beats longer; first-seen breaks ties.
+function preferTradeLabel(a, b, entry) {
+  // '(transit)' outranks every other annotation: reconcileTradeLists spares
+  // transit re-exports by that marker, so a merge that erased it ("Refined
+  // iron (transit) (taxed by occupation)" losing to the shorter "Iron ore
+  // (taxed by occupation)") would hand the survivor to the import
+  // contradiction check it was supposed to be spared from.
+  const aTransit = /\(transit\)/i.test(a);
+  const bTransit = /\(transit\)/i.test(b);
+  if (aTransit !== bTransit) return aTransit ? a : b;
+  const aAnn = ANNOTATION_RE.test(a);
+  const bAnn = ANNOTATION_RE.test(b);
+  if (aAnn !== bAnn) return aAnn ? a : b;
+  if (entry && !entry.custom) {
+    const canon = comparable(entry.label);
+    const aCanon = comparable(a) === canon;
+    const bCanon = comparable(b) === canon;
+    if (aCanon !== bCanon) return aCanon ? a : b;
+  }
+  if (a.length !== b.length) return a.length < b.length ? a : b;
+  return a;
+}
+
+/**
+ * Collapse generic/specific duplicates inside one trade-goods list
+ * ("Grain" + "Bulk grain and foodstuffs" + "Grain and malt" → "Grain")
+ * while preserving order and annotated labels.
+ *
+ * Only catalog GOODS merge across different spellings, and only on an EXACT
+ * alias hit — a fuzzy token-overlap match is a guess, not an identity, so a
+ * fuzzy-only label stays verbatim like an unrecognized one. Services
+ * collapse only on identical text: "Spellcasting (1st-3rd level)" and
+ * "Magical identification" both canonicalize to arcane_services, but they
+ * are genuinely distinct exports — merging them would erase real variety.
+ * Unrecognized labels get the same identical-text-only rule, annotations
+ * included ("Healing crystals (raw)" never merges with "Healing crystals
+ * (cut)").
+ *
+ * opts.opaque — Set of lowercased labels that must never merge or be
+ * renamed (user-authored custom trade goods; the dossier's gold tint
+ * matches them by exact label).
+ */
+export function subsumeTradeGoods(labels = [], opts = {}) {
+  const opaque = opts.opaque || null;
+  const list = Array.isArray(labels) ? labels : [labels];
+  const groups = new Map();
+  const order = [];
+  for (const raw of list) {
+    if (raw == null || raw === '') continue;
+    const label = String(raw);
+    const isOpaque = opaque ? opaque.has(label.toLowerCase()) : false;
+    const good = isOpaque ? null : exactCatalogEntry(label);
+    const mergeable = !!good && good.kind === 'good';
+    const key = mergeable ? good.id : `raw.${label.toLowerCase()}`;
+    const existing = groups.get(key);
+    if (!existing) {
+      groups.set(key, { label, entry: mergeable ? good : null });
+      order.push(key);
+    } else {
+      existing.label = preferTradeLabel(existing.label, label, existing.entry);
+    }
+  }
+  return order.map(key => groups.get(key).label);
+}
+
+/**
+ * Drop exports that the settlement simultaneously imports (same canonical
+ * good): "Grain surplus" exported beside a "Bulk grain and foodstuffs"
+ * import is a contradiction, not an economy. Transit re-exports are spared —
+ * importing a good and re-selling it onward is what an entrepôt does.
+ * Matching is exact-alias only: a fuzzy resemblance is not a contradiction,
+ * and dropping an export on a guess erases a real economy line.
+ */
+export function reconcileTradeLists(exports = [], imports = []) {
+  const importIds = new Set();
+  for (const label of imports) {
+    const good = exactCatalogEntry(label);
+    if (good && good.kind === 'good') importIds.add(good.id);
+  }
+  return exports.filter(label => {
+    if (/\(transit\)/i.test(String(label))) return true;
+    const good = exactCatalogEntry(label);
+    if (!good || good.kind !== 'good') return true;
+    return !importIds.has(good.id);
+  });
 }
 
 export function goodCriticality(goodOrId) {
