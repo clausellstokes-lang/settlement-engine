@@ -385,6 +385,17 @@ export function ensureNpcStates(worldState, snapshot, rng) {
             ousted: npc.ousted || st.ousted || false,
           };
         }
+        // Editor roster wave — adopt a DM/event-driven importance change
+        // (PROMOTE_NPC / DEMOTE_NPC swap npc.importance) into dotRank +
+        // factionSeat, same "authoritative between ticks" posture as the
+        // corruption adoption above. Guarded by the adoptedImportance marker:
+        // adoption fires only when the SETTLEMENT side changed, so a sim-side
+        // seek_promotion's raised dotRank is not clobbered back every tick by
+        // an unchanged npc.importance.
+        if (typeof npc.importance === 'string' && npc.importance !== st.adoptedImportance) {
+          const dotRank = dotRankFor(npc);
+          st = { ...st, dotRank, factionSeat: roleSeatFor(dotRank), adoptedImportance: npc.importance };
+        }
         if (!st.contextSignature) {
           const context = contextForNpc(snapshot, { settlementId: item.id });
           st = { ...st, contextSignature: context.signature, contextTier: context.tier };
@@ -422,6 +433,9 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         factionId: factionIdFor(npc, item, index),
         factionSeat: roleSeatFor(dotRank),
         dotRank,
+        // Marker for the editor promote/demote adoption above: dotRank was
+        // seeded from THIS importance, so only a later change re-adopts.
+        adoptedImportance: typeof npc.importance === 'string' ? npc.importance : null,
         influenceBasis: [...roleDef.influenceBasis],
         alignment: corrupt ? `corrupted_${pick(local, ALIGNMENTS)}` : pick(local, ALIGNMENTS),
         ideal: corrupt ? `corrupted_${pick(local, IDEALS)}` : pick(local, IDEALS),

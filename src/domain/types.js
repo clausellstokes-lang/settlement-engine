@@ -65,7 +65,10 @@
  *           | 'PLAGUE' | 'RAID_OR_MONSTER_ATTACK'
  *           | 'REMOVED_THREAT' | 'BROKERED_ALLIANCE' | 'STARTED_RIOT'
  *           | 'OPENED_TRADE_ROUTE' | 'RECOVERED_RESOURCE' | 'DESTROY_SETTLEMENT'
- *           | 'APPLY_STRESSOR' | 'CHANGE_RULING_POWER'} EventType
+ *           | 'APPLY_STRESSOR' | 'CHANGE_RULING_POWER'
+ *           | 'RESOLVE_STRESSOR' | 'ADD_TRADE_GOOD' | 'REMOVE_TRADE_GOOD'
+ *           | 'ADD_RESOURCE' | 'REMOVE_RESOURCE'
+ *           | 'PROMOTE_NPC' | 'DEMOTE_NPC'} EventType
  *
  * The full canonical event vocabulary across both shipping waves.
  *   Foundation (v1):      ADD/REMOVE/DAMAGE_INSTITUTION, DEPLETE_RESOURCE, CUT_TRADE_ROUTE
@@ -74,6 +77,10 @@
  *   Extended (Wave 2+):   KILL_LEADER, EXPOSE_CORRUPTION, REFUGEE_WAVE, PLAGUE, RAID_OR_MONSTER_ATTACK
  *   Player intervention (Phase 24): REMOVED_THREAT, BROKERED_ALLIANCE, STARTED_RIOT, OPENED_TRADE_ROUTE, RECOVERED_RESOURCE, DESTROY_SETTLEMENT
  *   Coup d'état wave:     APPLY_STRESSOR (authored crisis onset, full catalog + custom), CHANGE_RULING_POWER (user-permissioned transfer of the governing seat)
+ *   Editor roster wave:   RESOLVE_STRESSOR (authored crisis wind-down, the inverse of APPLY_STRESSOR),
+ *                         ADD/REMOVE_TRADE_GOOD (export/import/transit labels, incl. entrepôt suffixing),
+ *                         ADD/REMOVE_RESOURCE (nearby-resource roster, dual-format config writes),
+ *                         PROMOTE/DEMOTE_NPC (same-faction influence/position swap; polarity is narrative)
  *
  * When adding a new event: add the literal here, add the spec in
  * events/registry.js, add the rerun-keys mapping, add the mutation

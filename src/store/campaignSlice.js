@@ -55,8 +55,12 @@ import {
   normalizeSimulationRules,
   normalizeStressor,
   previewCampaignWorldPulse as domainPreviewCampaignWorldPulse,
+  proposalIdFor,
+  resolveStressorById,
   updateProposalStatus as domainUpdateWorldPulseProposalStatus,
+  upsertProposal,
 } from '../domain/worldPulse/index.js';
+import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
 import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { saves as savesService } from '../lib/saves.js';
@@ -628,6 +632,66 @@ export const createCampaignSlice = (set, get) => ({
       persistCampaignState(state, campaignId);
     });
     return injected;
+  },
+
+  /**
+   * Resolve the ROAMING twin of an authored stressor. The RESOLVE_STRESSOR
+   * canon event bridges here (settlementSlice.applyEvent), mirroring
+   * injectCampaignStressor: the authored type is alias-mapped through
+   * pulseTypeForStressorKey, the matching ACTIVE stressor affecting the
+   * settlement resolves through the same directed path the party-impact hook
+   * uses (resolveStressorById — no roll, echo retained), and its residual
+   * aftermath is queued as pending world-pulse proposals (the outcome shape
+   * applyWorldPulseProposal already consumes) rather than silently written
+   * onto saves. `now` is threaded from the caller's minted timestamp so the
+   * apply stamps one instant everywhere.
+   */
+  resolveCampaignStressor: (campaignId, { type, settlementId, now = null } = {}) => {
+    let resolved = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const stamp = now || new Date().toISOString();
+      const worldState = ensureWorldState(c.worldState, c);
+      const roamingType = pulseTypeForStressorKey(type) || type;
+      if (!roamingType) return;
+      const sid = String(settlementId || '');
+      const match = (worldState.stressors || [])
+        .map(raw => normalizeStressor(raw))
+        .find(st => st.status === 'active'
+          && String(st.type).toLowerCase() === String(roamingType).toLowerCase()
+          && (String(st.originSettlementId || '') === sid
+            || (st.affectedSettlementIds || []).map(String).includes(sid)));
+      if (!match) return;
+      const tick = Math.max(0, Math.floor(Number(worldState.tick) || 0));
+      const result = resolveStressorById(worldState.stressors, match.id, {
+        tick,
+        now: stamp,
+        reason: 'Resolved by DM authoring',
+        emitResidual: true,
+      });
+      if (!result.found) return;
+      let nextWorldState = { ...worldState, stressors: result.stressors };
+      for (const outcome of result.residualOutcomes) {
+        nextWorldState = upsertProposal(nextWorldState, {
+          id: proposalIdFor(outcome, tick),
+          status: 'pending',
+          createdAt: stamp,
+          updatedAt: stamp,
+          tick,
+          outcome: cloneJson(outcome),
+          headline: outcome.headline,
+          summary: outcome.summary,
+          severity: outcome.severity,
+          reasons: outcome.reasons || [],
+        });
+      }
+      c.worldState = nextWorldState;
+      c.updatedAt = stamp;
+      resolved = result.resolved[0] || null;
+      persistCampaignState(state, campaignId);
+    });
+    return resolved;
   },
 
   setCampaignRegionalGraph: (campaignId, regionalGraph) => {

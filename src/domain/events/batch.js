@@ -41,6 +41,7 @@ const PRODUCES_KIND = Object.freeze({
   ADD_INSTITUTION: 'institution',
   ADD_NPC:         'npc',
   ADD_FACTION:     'faction',
+  ADD_RESOURCE:    'resource',
 });
 
 /**
@@ -106,6 +107,7 @@ export function eventConsumes(event) {
       break;
     case 'DEPLETE_RESOURCE':
     case 'RECOVERED_RESOURCE':
+    case 'REMOVE_RESOURCE':
       if (targetId) refs.push({ kind: 'resource', ref: targetId });
       break;
     case 'RAID_OR_MONSTER_ATTACK':
@@ -115,6 +117,13 @@ export function eventConsumes(event) {
       // The faction taking power must exist — transferRulingPower silently
       // no-ops on an unknown faction while the registry deltas still land.
       if (targetId) refs.push({ kind: 'faction', ref: targetId });
+      break;
+    case 'PROMOTE_NPC':
+    case 'DEMOTE_NPC':
+      // BOTH sides of the standing swap are hard refs — the mutation silently
+      // no-ops when either is missing while the registry deltas still land.
+      if (targetId) refs.push({ kind: 'npc', ref: targetId });
+      if (p.swapWithNpcId) refs.push({ kind: 'npc', ref: p.swapWithNpcId });
       break;
     default:
       break;

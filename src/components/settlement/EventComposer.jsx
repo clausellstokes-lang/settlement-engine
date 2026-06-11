@@ -18,6 +18,9 @@ import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
 import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
+import { canonExports, canonImports } from '../../domain/canonicalAccessors.js';
+import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
+import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import CatalogPicker from './CatalogPicker.jsx';
 import SettlementEditor from '../SettlementEditor.jsx';
@@ -57,6 +60,14 @@ const TARGET_ENTITY_BY_EVENT = Object.freeze({
   SETTLEMENT_DISPUTE:   'neighbours',   // §9b — pick a linked neighbour
   BROKERED_ALLIANCE:    'neighbours',   // §9g
   OPENED_TRADE_ROUTE:   'neighbours',   // §9h
+  // Editor roster wave.
+  RESOLVE_STRESSOR:     'stressors',    // pick one of the settlement's current stressors
+  ADD_TRADE_GOOD:       null,           // new label — free text + datalist suggestions below
+  REMOVE_TRADE_GOOD:    'tradeGoods',   // union of exports / imports / transit
+  ADD_RESOURCE:         null,           // catalog select + custom name (custom UI below)
+  REMOVE_RESOURCE:      'resources',
+  PROMOTE_NPC:          null,           // faction-grouped NPC pair picker (custom UI below)
+  DEMOTE_NPC:           null,
 });
 
 // §9b/§9g/§9h — relationship events target a neighbouring settlement and set a
@@ -114,6 +125,30 @@ function buildTargetOptions(settlement, collectionKey) {
         name: r.name || r.id || r.key,
       }));
       list = [...fromList, ...fromConfig];
+      break;
+    }
+    case 'stressors':    {
+      // First existing stress container wins — the same probe the
+      // applyStressor / resolveStressor mutations use.
+      const key = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(settlement[k]));
+      list = (key ? settlement[key] : []).filter(Boolean).map(st => ({
+        id: st.type || st.name || st.label,
+        name: st.label || st.name || st.type,
+      }));
+      break;
+    }
+    case 'tradeGoods':   {
+      // Union of the canonical export/import lists + transit, tolerant of
+      // legacy {name, good} object entries the Roster editor writes.
+      const ec = settlement.economicState || {};
+      const labels = [
+        ...canonExports(settlement),
+        ...canonImports(settlement),
+        ...(Array.isArray(ec.transit) ? ec.transit : []),
+      ]
+        .map(e => (typeof e === 'string' ? e : e?.name || e?.good || ''))
+        .filter(Boolean);
+      list = labels.map(l => ({ id: l, name: l }));
       break;
     }
     default: return [];
@@ -183,6 +218,10 @@ export default function EventComposer({
   const [stressorPick, setStressorPick] = useState(null);     // APPLY_STRESSOR: the picked catalog item
   const [stressorSeverity, setStressorSeverity] = useState('moderate'); // APPLY_STRESSOR: word-banded severity
   const [powerCause, setPowerCause] = useState('coup');       // CHANGE_RULING_POWER: how power changes hands
+  const [tradeDirection, setTradeDirection] = useState('export'); // ADD_TRADE_GOOD: export | import
+  const [tradeEntrepot, setTradeEntrepot] = useState(false);   // ADD_TRADE_GOOD: transit through the warehouses
+  const [customResourceName, setCustomResourceName] = useState(''); // ADD_RESOURCE: free-text custom name
+  const [swapWithNpcId, setSwapWithNpcId] = useState('');      // PROMOTE_NPC / DEMOTE_NPC: the same-faction counterpart
   const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
@@ -214,6 +253,40 @@ export default function EventComposer({
       .map(f => ({ id: String(f.faction || f.name || ''), name: String(f.faction || f.name || '') }))
       .filter(o => o.id);
   }, [settlement]);
+  // ADD_TRADE_GOOD — datalist suggestions: every catalogued export label
+  // across all tiers (free text still wins; the label is the storage format).
+  const tradeGoodSuggestions = useMemo(() => {
+    const names = new Set();
+    for (const tierGoods of Object.values(EXPORT_GOODS_BY_TIER || {})) {
+      for (const name of Object.keys(tierGoods || {})) names.add(name);
+    }
+    return [...names].sort((a, b) => a.localeCompare(b));
+  }, []);
+  // ADD_RESOURCE — catalog entries not already worked nearby. Shows the
+  // label, stores the underscore key (the config format).
+  const resourceCatalogOptions = useMemo(() => {
+    const present = new Set(settlement?.config?.nearbyResources || []);
+    return Object.entries(RESOURCE_DATA)
+      .filter(([key]) => !present.has(key))
+      .map(([key, def]) => ({ id: key, name: def.label || key }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [settlement?.config?.nearbyResources]);
+  // PROMOTE_NPC / DEMOTE_NPC — NPCs grouped by faction affiliation, keeping
+  // only factions with at least two members (the swap needs a counterpart).
+  const npcSwapGroups = useMemo(() => {
+    const byFaction = new Map();
+    for (const npc of settlement?.npcs || []) {
+      const faction = npc?.factionAffiliation;
+      if (!faction || !npc?.name) continue;
+      if (!byFaction.has(faction)) byFaction.set(faction, []);
+      byFaction.get(faction).push({ id: String(npc.id || npc.name), name: npc.name });
+    }
+    return [...byFaction.entries()]
+      .filter(([, npcs]) => npcs.length >= 2)
+      .map(([faction, npcs]) => ({ faction, npcs }))
+      .sort((a, b) => a.faction.localeCompare(b.faction));
+  }, [settlement?.npcs]);
+  const hasSwapPairs = npcSwapGroups.length > 0;
   // IMPOSE_CORRUPTION — criminal organizations present in the settlement (same CRIMINAL-tag
   // detector the corruption domain uses, so the picker matches what the engine recognizes).
   const criminalOrgs = useMemo(
@@ -229,7 +302,13 @@ export default function EventComposer({
   if (!settlement) return null;
   const spec = EVENT_REGISTRY[type];
   const needsTarget = !!spec?.requiresTarget;
-  const canSubmit   = !needsTarget || target.trim().length > 0;
+  // ADD_RESOURCE's "Custom resource…" option holds the real target in the
+  // companion text input; the swap events also need their counterpart picked.
+  const effectiveTarget = type === 'ADD_RESOURCE' && target === CUSTOM_RESOURCE_OPTION
+    ? customResourceName
+    : target;
+  const canSubmit = (!needsTarget || effectiveTarget.trim().length > 0)
+    && !((type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') && !swapWithNpcId);
 
   // Derive a sensible institution list for the institution-pickers.
   const institutionOptions = (settlement.institutions || [])
@@ -293,10 +372,26 @@ export default function EventComposer({
     if (type === 'CHANGE_RULING_POWER') {
       payload.cause = powerCause || 'coup';
     }
+    if (type === 'RESOLVE_STRESSOR') {
+      payload.stressorType = target.trim();
+      const opt = buildTargetOptions(settlement, 'stressors').find(o => o.id === target);
+      if (opt) payload.label = opt.name;
+    }
+    if (type === 'ADD_TRADE_GOOD') {
+      payload.direction = tradeDirection;
+      payload.entrepot = tradeDirection === 'export' && tradeEntrepot;
+      payload.label = target.trim();
+    }
+    if (type === 'ADD_RESOURCE' && target === CUSTOM_RESOURCE_OPTION) {
+      payload.isCustom = true;
+    }
+    if (type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') {
+      payload.swapWithNpcId = swapWithNpcId;
+    }
     return {
       id: `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
       type,
-      targetId: target.trim(),
+      targetId: effectiveTarget.trim(),
       payload,
       // Party-caused events carry a distinct cause so the timeline/Chronicle and
       // (in canon campaigns) the world engine can treat them as the table's doing.
@@ -329,6 +424,8 @@ export default function EventComposer({
     setDesc('');
     setPartyCaused(false);
     setDestroyConfirm('');
+    setSwapWithNpcId('');
+    setCustomResourceName('');
   }
 
   return (
@@ -353,7 +450,7 @@ export default function EventComposer({
 
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setStressorSeverity('moderate'); setPowerCause('coup'); }} style={selectStyle}>
+          <select value={type} onChange={e => { const v = e.target.value; setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm(''); setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || ''); setCriminalOrg(''); setStressorPick(null); setStressorSeverity('moderate'); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false); setCustomResourceName(''); setSwapWithNpcId(''); }} style={selectStyle}>
             {Object.entries(EVENT_REGISTRY)
               /* Hide non-authorable events from the DM action list (see
                  NON_AUTHORABLE_EVENTS): the folded leader event, the stressor-
@@ -364,6 +461,9 @@ export default function EventComposer({
                  has linked neighbours to act on. */
               .filter(([k]) => !NON_AUTHORABLE_EVENTS.has(k))
               .filter(([k]) => !RELATIONSHIP_OPTIONS[k] || hasNeighbours)
+              /* The standing swap needs two NPCs in one faction — hide the
+                 promote/demote events when no faction has a pair to swap. */
+              .filter(([k]) => !['PROMOTE_NPC', 'DEMOTE_NPC'].includes(k) || hasSwapPairs)
               .map(([k, s]) => (
                 <option key={k} value={k}>{s.label}</option>
               ))}
@@ -452,6 +552,91 @@ export default function EventComposer({
               </Field>
             );
           }
+          // ADD_TRADE_GOOD — free text with catalog suggestions; the label is
+          // the storage format, so anything typed is a valid good.
+          if (type === 'ADD_TRADE_GOOD') {
+            return (
+              <Field label="Good" hint={spec?.targetPrompt}>
+                <input
+                  list="event-trade-good-suggestions"
+                  value={target}
+                  onChange={e => setTarget(e.target.value)}
+                  placeholder="Type a label or pick a suggestion"
+                  style={inputStyle}
+                />
+                <datalist id="event-trade-good-suggestions">
+                  {tradeGoodSuggestions.map(n => <option key={n} value={n} />)}
+                </datalist>
+              </Field>
+            );
+          }
+          // ADD_RESOURCE — catalog select (label shown, underscore key stored)
+          // plus a "Custom resource…" escape hatch with a free-text name.
+          if (type === 'ADD_RESOURCE') {
+            return (
+              <Field label="Resource" hint={target === CUSTOM_RESOURCE_OPTION ? 'Name the custom resource' : spec?.targetPrompt}>
+                <select
+                  value={target}
+                  onChange={e => { setTarget(e.target.value); setCustomResourceName(''); }}
+                  style={selectStyle}
+                >
+                  <option value="">, Pick a resource -</option>
+                  {resourceCatalogOptions.map(o => (
+                    <option key={o.id} value={o.id}>{o.name}</option>
+                  ))}
+                  <option value={CUSTOM_RESOURCE_OPTION}>Custom resource…</option>
+                </select>
+                {target === CUSTOM_RESOURCE_OPTION && (
+                  <input
+                    value={customResourceName}
+                    onChange={e => setCustomResourceName(e.target.value)}
+                    placeholder='e.g. "Moonpetal grove"'
+                    style={{ ...inputStyle, marginTop: 4 }}
+                  />
+                )}
+              </Field>
+            );
+          }
+          // PROMOTE_NPC / DEMOTE_NPC — pick the NPC (grouped by faction), then
+          // the same-faction counterpart they swap standing with.
+          if (type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') {
+            const pickedGroup = npcSwapGroups.find(g => g.npcs.some(n => n.id === target));
+            const counterparts = pickedGroup ? pickedGroup.npcs.filter(n => n.id !== target) : [];
+            return (
+              <>
+                <Field label="NPC" hint={spec?.targetPrompt}>
+                  <select
+                    value={target}
+                    onChange={e => { setTarget(e.target.value); setSwapWithNpcId(''); }}
+                    style={selectStyle}
+                  >
+                    <option value="">, Pick an NPC -</option>
+                    {npcSwapGroups.map(g => (
+                      <optgroup key={g.faction} label={g.faction}>
+                        {g.npcs.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
+                      </optgroup>
+                    ))}
+                  </select>
+                </Field>
+                <Field
+                  label={type === 'PROMOTE_NPC' ? 'Displaces' : 'Displaced by'}
+                  hint="Same faction — the two swap standing"
+                >
+                  <select
+                    value={swapWithNpcId}
+                    onChange={e => setSwapWithNpcId(e.target.value)}
+                    style={selectStyle}
+                    disabled={!target}
+                  >
+                    <option value="">, Pick the counterpart -</option>
+                    {counterparts.map(n => (
+                      <option key={n.id} value={n.id}>{n.name}</option>
+                    ))}
+                  </select>
+                </Field>
+              </>
+            );
+          }
           // Code-review fix: source the target from existing dossier
           // entities rather than asking the user to type a name that
           // must match. Falls back to a text input for ADD_* events
@@ -505,6 +690,32 @@ export default function EventComposer({
               </div>
             </Field>
           )
+        )}
+
+        {/* ADD_TRADE_GOOD — direction, plus entrepôt handling for exports */}
+        {type === 'ADD_TRADE_GOOD' && (
+          <Field label="Direction" hint={tradeDirection === 'import' ? 'The settlement buys this in' : 'The settlement sells this outward'}>
+            <select
+              value={tradeDirection}
+              onChange={e => { setTradeDirection(e.target.value); if (e.target.value !== 'export') setTradeEntrepot(false); }}
+              style={selectStyle}
+            >
+              <option value="export">Export</option>
+              <option value="import">Import</option>
+            </select>
+          </Field>
+        )}
+        {type === 'ADD_TRADE_GOOD' && tradeDirection === 'export' && (
+          <Field label="Handling" hint={tradeEntrepot ? 'Re-exported through the warehouses — listed as "(transit)"' : 'Produced locally'}>
+            <select
+              value={tradeEntrepot ? 'transit' : 'local'}
+              onChange={e => setTradeEntrepot(e.target.value === 'transit')}
+              style={selectStyle}
+            >
+              <option value="local">Local production</option>
+              <option value="transit">Entrepôt transit</option>
+            </select>
+          </Field>
         )}
 
         {/* APPLY_STRESSOR — word-banded severity (no 0-100 math at the table) */}
@@ -685,7 +896,7 @@ export default function EventComposer({
           Preview
         </button>
         <button
-          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); }}
+          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); }}
           disabled={!canSubmit}
           style={{
             padding: '5px 12px', background: 'transparent', color: GOLD,
@@ -928,6 +1139,10 @@ const PARTY_BG = '#f7ebf0';
 // APPLY_STRESSOR severity words → engine severity. Words at the table,
 // numbers in the engine (same posture as the hidden impair sliders).
 const STRESSOR_SEVERITY_VALUES = Object.freeze({ minor: 0.35, moderate: 0.6, severe: 0.85 });
+
+// ADD_RESOURCE — sentinel select value for "name a custom resource"; the real
+// target comes from the companion text input while this is picked.
+const CUSTOM_RESOURCE_OPTION = '__custom_resource__';
 
 const inputStyle = {
   padding: '4px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm,

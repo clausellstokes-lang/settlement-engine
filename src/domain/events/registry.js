@@ -114,6 +114,14 @@ export const RERUN_KEYS_FOR_EVENT = {
   // Coup d'état wave — authored crises + transfers of the governing seat.
   APPLY_STRESSOR:         ['powerStructure', 'economicState', 'narrative'],
   CHANGE_RULING_POWER:    ['powerStructure', 'npcs', 'narrative'],
+  // Editor roster wave — the Roster's add/remove vocabulary as first-class canon events.
+  RESOLVE_STRESSOR:       ['powerStructure', 'economicState', 'narrative'],
+  ADD_TRADE_GOOD:         ['economicState', 'narrative'],
+  REMOVE_TRADE_GOOD:      ['economicState', 'narrative'],
+  ADD_RESOURCE:           ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
+  REMOVE_RESOURCE:        ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
+  PROMOTE_NPC:            ['npcs', 'powerStructure', 'narrative'],
+  DEMOTE_NPC:             ['npcs', 'powerStructure', 'narrative'],
 };
 
 /**
@@ -630,6 +638,147 @@ export const EVENT_REGISTRY = {
       const cause = event.payload?.cause || 'coup';
       const where = settlement?.name ? ` in ${settlement.name}` : '';
       return `${labelOf(event.targetId)} took power${where} by ${cause}.`;
+    },
+  },
+
+  // ── Editor roster wave ───────────────────────────────────────────────────
+  // The Roster's add/remove vocabulary promoted to first-class canon events:
+  // crisis wind-down, trade-good roster, resource roster, and a same-faction
+  // NPC standing swap. Each is the timeline-writing twin of a correction the
+  // Roster already performs silently.
+
+  RESOLVE_STRESSOR: {
+    label: 'Remove stressor',
+    description: 'An active crisis ends — pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
+    requiresTarget: true,
+    targetPrompt: 'Stressor currently gripping the settlement',
+    stateDeltas(event, settlement) {
+      // The inverse of APPLY_STRESSOR, scaled by the REMOVED entry's recorded
+      // severity (the registry computes from the BEFORE settlement, so the
+      // entry is still present here). Word-banded legacy severities ('medium')
+      // fall through to the 0.5 default.
+      const type = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
+      const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(settlement?.[k]));
+      const entry = containerKey
+        ? settlement[containerKey].find(st =>
+            String(st?.type || '').toLowerCase() === type
+            || String(st?.name || '').toLowerCase() === type)
+        : null;
+      const rawSev = Number(entry?.severity ?? event.payload?.severity);
+      const sev = Number.isFinite(rawSev) ? Math.max(0, Math.min(1, rawSev)) : 0.5;
+      const external = /siege|occup|wartime|war\b|monster|raider/.test(type);
+      const scarcity = /famine|market|indebt|debt|migration/.test(type);
+      return {
+        resilience:       +Math.round(sev * 12),
+        volatility:       -Math.round(sev * 12),
+        ...(external ? { externalThreat:   -Math.round(sev * 16) } : {}),
+        ...(scarcity ? { resourcePressure: -Math.round(sev * 12) } : {}),
+      };
+    },
+    narrate(event) {
+      const label = event.payload?.label || labelOf(event.targetId);
+      return `${label} no longer grips the settlement.`;
+    },
+  },
+
+  ADD_TRADE_GOOD: {
+    label: 'Add trade good',
+    description: 'A new good enters the settlement\'s trade profile — exported, imported, or (for an entrepôt) re-exported in transit through its warehouses.',
+    requiresTarget: true,
+    targetPrompt: 'Good label (e.g. "Salted fish", "Rare spices")',
+    stateDeltas(event) {
+      // A new import eases material pressure; a new export firms up the
+      // economic base. Small numbers — one good is a dial, not a shock.
+      return event.payload?.direction === 'import'
+        ? { resourcePressure: -5, resilience: +2 }
+        : { resilience: +4 };
+    },
+    narrate(event) {
+      const label = event.payload?.label || labelOf(event.targetId);
+      if (event.payload?.entrepot) return `${label} now moves through the settlement's warehouses in transit.`;
+      return event.payload?.direction === 'import'
+        ? `The settlement now imports ${label}.`
+        : `The settlement now exports ${label}.`;
+    },
+  },
+
+  REMOVE_TRADE_GOOD: {
+    label: 'Remove trade good',
+    description: 'A good drops out of the settlement\'s trade profile — the market moved on, the supplier dried up, or the route no longer carries it.',
+    requiresTarget: true,
+    targetPrompt: 'Trade good to remove',
+    stateDeltas() {
+      // The inverse dial of ADD_TRADE_GOOD's export case; direction isn't
+      // known at removal (the label is stripped from every list it sits in).
+      return { resilience: -4, resourcePressure: +3 };
+    },
+    narrate(event) {
+      return `${labelOf(event.targetId)} no longer moves through the settlement's markets.`;
+    },
+  },
+
+  ADD_RESOURCE: {
+    label: 'Add resource',
+    description: 'A new resource node is discovered or opened nearby — a vein struck, fields cleared, grounds claimed. Supply chains can activate on the next rederivation.',
+    requiresTarget: true,
+    targetPrompt: 'Resource (from the catalog, or a custom name)',
+    stateDeltas() {
+      // The counterpart of DEPLETE_RESOURCE's flat hit, slightly damped —
+      // discovering a node helps less suddenly than losing one hurts.
+      return { resilience: +8, resourcePressure: -10 };
+    },
+    narrate(event) {
+      const label = event.payload?.label || labelOf(event.targetId);
+      return `${label} is now worked near the settlement.`;
+    },
+  },
+
+  REMOVE_RESOURCE: {
+    label: 'Remove resource',
+    description: 'A resource node is lost outright — claimed by another power, rendered unreachable, or struck from the map. Harsher than depletion: nothing is left to recover.',
+    requiresTarget: true,
+    targetPrompt: 'Nearby resource to remove',
+    stateDeltas() {
+      // Same flat shock as DEPLETE_RESOURCE — the chains read the same loss.
+      return { resilience: -10, resourcePressure: +18 };
+    },
+    narrate(event) {
+      return `${labelOf(event.targetId)} is gone — no longer worked, no longer counted on.`;
+    },
+  },
+
+  PROMOTE_NPC: {
+    label: 'Promote NPC',
+    description: 'An NPC rises within their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction. The peer is displaced downward.',
+    requiresTarget: true,
+    targetPrompt: 'NPC who rises',
+    stateDeltas() {
+      // A reshuffle inside one faction: friction, not crisis.
+      return { volatility: +3 };
+    },
+    narrate(event, settlement) {
+      const npc = (settlement?.npcs || []).find(n =>
+        String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
+      const name = npc?.name || labelOf(event.targetId);
+      const faction = npc?.factionAffiliation || 'their faction';
+      return `${name} rises within ${faction}, displacing a rival on the way up.`;
+    },
+  },
+
+  DEMOTE_NPC: {
+    label: 'Demote NPC',
+    description: 'An NPC is pushed down the ranks of their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction who steps over them.',
+    requiresTarget: true,
+    targetPrompt: 'NPC who falls',
+    stateDeltas() {
+      return { volatility: +3 };
+    },
+    narrate(event, settlement) {
+      const npc = (settlement?.npcs || []).find(n =>
+        String(n.id || '') === String(event.targetId) || String(n.name || '') === String(event.targetId));
+      const name = npc?.name || labelOf(event.targetId);
+      const faction = npc?.factionAffiliation || 'their faction';
+      return `${name} is pushed down the ranks of ${faction}.`;
     },
   },
 };

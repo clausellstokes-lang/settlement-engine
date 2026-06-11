@@ -28,6 +28,7 @@ import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate } fr
 import { archetypeForStressor, promoteStressorsToConditions } from '../conditionPromotion.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { STRESSOR_CATALOG } from '../worldPulse/stressors.js';
+import { RESOURCE_DATA } from '../../data/resourceData.js';
 
 /** @typedef {import('../types.js').Event} Event */
 
@@ -142,6 +143,27 @@ export function mutateSettlement({ settlement, event, now = null }) {
       break;
     case 'CHANGE_RULING_POWER':
       next = changeRulingPower(next, stampedEvent);
+      break;
+
+    // Editor roster wave.
+    case 'RESOLVE_STRESSOR':
+      next = resolveStressor(next, stampedEvent);
+      break;
+    case 'ADD_TRADE_GOOD':
+      next = addTradeGood(next, stampedEvent);
+      break;
+    case 'REMOVE_TRADE_GOOD':
+      next = removeTradeGood(next, stampedEvent);
+      break;
+    case 'ADD_RESOURCE':
+      next = addResource(next, stampedEvent);
+      break;
+    case 'REMOVE_RESOURCE':
+      next = removeResource(next, stampedEvent);
+      break;
+    case 'PROMOTE_NPC':
+    case 'DEMOTE_NPC':
+      next = swapNpcStanding(next, stampedEvent);
       break;
 
     default:
@@ -978,6 +1000,252 @@ function changeRulingPower(s, event) {
       detail: `${result.transfer.authorityName} took power by ${cause}; the government now sits as a ${result.transfer.toGovernment.toLowerCase()}.`,
     }],
   });
+}
+
+// ── Editor roster wave handlers ────────────────────────────────────────────
+
+/**
+ * RESOLVE_STRESSOR — the inverse of APPLY_STRESSOR: an authored crisis ENDS.
+ * Removes the matching stress entry (same container probe applyStressor uses)
+ * and winds down the conditions that crisis promoted — both the directly
+ * stamped one (triggeredAt.sourceEventTargetId === the stressor type, the
+ * custom_crisis path) and the archetype the type promotes to (the
+ * conditionPromotion path). Wind-down is 'easing' + a near-term expiry rather
+ * than outright removal, so the substrate sees a crisis trailing off instead
+ * of vanishing without trace; the resolution carries event provenance on the
+ * condition's causes. A target with no matching entry is a settlement no-op
+ * (registry deltas still land — guard upstream, same posture as
+ * changeRulingPower). The roaming world-pulse twin resolves at the store
+ * layer (settlementSlice → resolveCampaignStressor), mirroring the inject
+ * bridge.
+ */
+function resolveStressor(s, event) {
+  const type = String(event.payload?.stressorType || event.targetId || '').trim();
+  if (!type) return s;
+  const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(s[k]));
+  if (!containerKey) return s;
+  const list = s[containerKey];
+  // Type OR display-name match, case-insensitive — the picker passes the
+  // entry's type when it has one, its name for legacy untyped entries.
+  const idx = list.findIndex(st =>
+    String(st?.type || '').toLowerCase() === type.toLowerCase()
+    || String(st?.name || '').toLowerCase() === type.toLowerCase());
+  if (idx === -1) return s;
+  const removed = list[idx];
+  const label = event.payload?.label || removed?.label || removed?.name || labelFromTarget(type);
+  let next = { ...s, [containerKey]: list.filter((_, i) => i !== idx) };
+
+  // Wind down what the crisis promoted. Matching mirrors applyStressor's two
+  // write paths: the direct stamp (custom_crisis / authored onset) and the
+  // promotion archetype. No clearing precedent exists in this module, so the
+  // wind-down sets status 'easing' with a short remaining duration (the
+  // documented fallback) instead of deleting evolved state outright.
+  const archetype = archetypeForStressor(removed) || archetypeForStressor({ type });
+  const matchesCrisis = (c) => {
+    if (!c) return false;
+    const stamped = String(c.triggeredAt?.sourceEventTargetId || '').toLowerCase() === type.toLowerCase();
+    return stamped || (archetype != null && c.archetype === archetype);
+  };
+  let wound = false;
+  const conditions = (next.activeConditions || []).map((c) => {
+    if (!matchesCrisis(c)) return c;
+    wound = true;
+    const elapsed = Number(c.duration?.elapsedTicks) || 0;
+    const cap = c.duration?.expiresAtTicks;
+    return {
+      ...c,
+      status: 'easing',
+      duration: {
+        ...(c.duration || {}),
+        elapsedTicks: elapsed,
+        // Trail off within ~2 ticks; never EXTEND a condition already closer
+        // to expiry than that.
+        expiresAtTicks: typeof cap === 'number' ? Math.min(cap, elapsed + 2) : elapsed + 2,
+      },
+      causes: [
+        ...(Array.isArray(c.causes) ? c.causes : []),
+        { source: 'event', eventId: event.id, detail: `${label} was resolved.` },
+      ],
+    };
+  });
+  if (wound) next = { ...next, activeConditions: conditions };
+  return next;
+}
+
+/** Display label for a trade-good list entry (strings + legacy {name, good} objects). */
+function tradeGoodLabel(entry) {
+  if (typeof entry === 'string') return entry;
+  return String(entry?.name || entry?.good || '');
+}
+
+/**
+ * ADD_TRADE_GOOD — append a good label to the canonical trade lists. Exports
+ * flagged entrepôt take the literal '<label> (transit)' suffixed form the
+ * chain deriver emits AND land in economicState.transit (the un-suffixed
+ * label, matching getTradeModifiers' transit shape). Dedupe is
+ * case-insensitive across string and legacy object entries. economicState
+ * only: re-derivation rebuilds from config, and no config-level custom
+ * trade-good input exists (generateEconomy's customTradeLabels is derived
+ * from Compendium-confirmed chains, not a config field) — same survival
+ * posture as the Roster's silent trade edits.
+ */
+function addTradeGood(s, event) {
+  const label = String(event.payload?.label || event.targetId || '').trim();
+  if (!label) return s;
+  const direction = event.payload?.direction === 'import' ? 'import' : 'export';
+  const entrepot = direction === 'export' && !!event.payload?.entrepot;
+  const ec = s.economicState || {};
+  const listKey = direction === 'import' ? 'primaryImports' : 'primaryExports';
+  const list = Array.isArray(ec[listKey]) ? ec[listKey] : [];
+  const written = entrepot ? `${label} (transit)` : label;
+  const has = (arr, l) => arr.some(e => tradeGoodLabel(e).toLowerCase() === l.toLowerCase());
+
+  let nextEc = ec;
+  if (!has(list, written)) nextEc = { ...nextEc, [listKey]: [...list, written] };
+  if (entrepot) {
+    const transit = Array.isArray(nextEc.transit) ? nextEc.transit : [];
+    if (!has(transit, label)) nextEc = { ...nextEc, transit: [...transit, label] };
+  }
+  if (nextEc === ec) return s;
+  return { ...s, economicState: nextEc };
+}
+
+/**
+ * REMOVE_TRADE_GOOD — strip a good label (case-insensitive, with and without
+ * the ' (transit)' suffix) from every list it can sit in: the canonical
+ * primaryExports/primaryImports, transit, and the legacy exports/imports
+ * aliases (canonExports falls back to them on old saves). No matching label
+ * anywhere → no-op.
+ */
+function removeTradeGood(s, event) {
+  const raw = String(event.payload?.label || event.targetId || '').trim();
+  if (!raw) return s;
+  const base = raw.replace(/\s*\(transit\)\s*$/i, '').trim();
+  const targets = new Set([raw, base, `${base} (transit)`].map(l => l.toLowerCase()));
+  const ec = s.economicState || {};
+  let changed = false;
+  const nextEc = { ...ec };
+  for (const key of ['primaryExports', 'primaryImports', 'transit', 'exports', 'imports']) {
+    const list = ec[key];
+    if (!Array.isArray(list)) continue;
+    const filtered = list.filter(e => !targets.has(tradeGoodLabel(e).toLowerCase()));
+    if (filtered.length !== list.length) {
+      changed = true;
+      nextEc[key] = filtered;
+    }
+  }
+  if (!changed) return s;
+  return { ...s, economicState: nextEc };
+}
+
+/**
+ * ADD_RESOURCE — open a new resource node. Mirrors depleteResource's
+ * dual-format discipline: write BOTH config.nearbyResources (the roster the
+ * generators and the target picker read) and config.nearbyResourcesState
+ * (the manual-mode map). Catalog targets store the canonical underscore key;
+ * names with no catalog entry are custom resources — stored verbatim (the
+ * resolveResources convention) and also recorded in nearbyResourcesCustom so
+ * the dossier gold-tints them. Re-adding a depleted node clears the
+ * depletion record — the two formats must keep agreeing.
+ */
+function addResource(s, event) {
+  const raw = String(event.targetId || '').trim();
+  if (!raw) return s;
+  const slug = slugify(raw);
+  const catalogKey = RESOURCE_DATA[raw] ? raw : (RESOURCE_DATA[slug] ? slug : null);
+  const key = catalogKey || raw;
+  const config = s.config || {};
+  const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
+  const custom = Array.isArray(config.nearbyResourcesCustom) ? config.nearbyResourcesCustom : [];
+  const state = config.nearbyResourcesState || {};
+  const depleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
+  return {
+    ...s,
+    config: {
+      ...config,
+      nearbyResources: nearby.includes(key) ? nearby : [...nearby, key],
+      nearbyResourcesState: { ...state, [key]: 'allow' },
+      nearbyResourcesDepleted: depleted.filter(k => k !== key),
+      ...(catalogKey
+        ? {}
+        : { nearbyResourcesCustom: custom.includes(key) ? custom : [...custom, key] }),
+    },
+  };
+}
+
+/**
+ * REMOVE_RESOURCE — strike a resource node from the roster entirely (the
+ * harsher cousin of DEPLETE_RESOURCE: nothing left to recover). Clears every
+ * config surface that names it — nearbyResources, nearbyResourcesCustom, the
+ * nearbyResourcesState entry, and nearbyResourcesDepleted — matching raw,
+ * slugified, and de-slugged forms the way recoveredResource does.
+ */
+function removeResource(s, event) {
+  const raw = String(event.targetId || '').trim();
+  if (!raw) return s;
+  const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
+  const config = s.config || {};
+  const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
+  if (!nearby.some(k => keys.has(k))) return s;
+  const state = { ...(config.nearbyResourcesState || {}) };
+  for (const k of keys) delete state[k];
+  return {
+    ...s,
+    config: {
+      ...config,
+      nearbyResources: nearby.filter(k => !keys.has(k)),
+      nearbyResourcesCustom: (config.nearbyResourcesCustom || []).filter(k => !keys.has(k)),
+      nearbyResourcesState: state,
+      nearbyResourcesDepleted: (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k)),
+    },
+  };
+}
+
+// The settlement-NPC standing fields the swap exchanges. Everything else on
+// each NPC (personality, goals, secrets, corruption, ...) is preserved.
+const NPC_STANDING_FIELDS = Object.freeze(['importance', 'influence', 'structuralRank']);
+
+/**
+ * PROMOTE_NPC / DEMOTE_NPC — one shared handler; the polarity is narrative.
+ * The target and the chosen same-faction peer SWAP standing (importance,
+ * influence, structuralRank — both the dossier's structural vocabulary and
+ * KILL_NPC's severity input). Also stamps npc.factionId on both with the
+ * shared faction's stable form when missing: the sim's factionIdFor reads
+ * factionId/faction/affiliation but NOT the generator's factionAffiliation,
+ * so without the stamp the world pulse round-robins the pair into arbitrary
+ * factions. The sim adopts the new importance into dotRank/factionSeat via
+ * the npcAgency adoption seam (ensureNpcStates' adoptedImportance marker).
+ * Missing target or peer → settlement no-op (batch staging hard-validates
+ * both refs; the composer only offers real same-faction pairs).
+ */
+function swapNpcStanding(s, event) {
+  const a = findNpc(s, event.targetId);
+  const b = findNpc(s, event.payload?.swapWithNpcId || event.payload?.swapWithName);
+  if (!a || !b || a === b) return s;
+
+  const carryStanding = (from, onto) => {
+    const next = { ...onto };
+    for (const field of NPC_STANDING_FIELDS) {
+      if (field in from || field in onto) next[field] = from[field];
+    }
+    return next;
+  };
+  let nextA = carryStanding(b, a);
+  let nextB = carryStanding(a, b);
+
+  // The shared faction's stable id — prefer the real power-faction record's
+  // id over the display name so the stamp survives renames.
+  const affiliation = a.factionAffiliation || b.factionAffiliation || null;
+  if (affiliation) {
+    const faction = findFaction(s, affiliation);
+    const stableId = faction ? factionIdOf(faction) : affiliation;
+    if (!nextA.factionId) nextA = { ...nextA, factionId: stableId };
+    if (!nextB.factionId) nextB = { ...nextB, factionId: stableId };
+  }
+
+  let next = replaceNpc(s, a, nextA);
+  next = replaceNpc(next, b, nextB);
+  return next;
 }
 
 // ── Lookups + identity helpers ─────────────────────────────────────────────

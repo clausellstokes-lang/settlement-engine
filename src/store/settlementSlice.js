@@ -1282,6 +1282,28 @@ export const createSettlementSlice = (set, get) => ({
       } catch { /* world registration is best-effort */ }
     }
 
+    // Editor roster wave — the inverse bridge: resolving an authored stressor
+    // in a canon campaign ALSO resolves the matching roaming world-pulse twin
+    // (the one the inject bridge above registered), so the pulse stops aging
+    // a crisis the DM already ended and its residual aftermath is queued.
+    // Same best-effort + guarded posture; thread this apply's minted
+    // timestamp so the resolution stamps no wall-clock time of its own.
+    if (event?.type === 'RESOLVE_STRESSOR' && campaign) {
+      try {
+        const resolve = afterState.resolveCampaignStressor;
+        if (typeof resolve === 'function') {
+          const authoredType = String(event.payload?.stressorType || event.targetId || '').trim();
+          if (authoredType) {
+            resolve(campaign.id, {
+              type: authoredType,
+              settlementId: String(activeSaveId),
+              now: afterState.editedAt,
+            });
+          }
+        }
+      } catch { /* world resolution is best-effort */ }
+    }
+
     // §8 M3b Phase 2 — a party-caused event with a world-scale analog also
     // ripples through the world engine (active conditions, faction/NPC
     // world-state, regional propagation, Wizard News) via the party-impact

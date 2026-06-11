@@ -113,6 +113,43 @@ describe('validateBatch', () => {
     ];
     expect(validateBatch(base, batch).ok).toBe(true);
   });
+
+  test('PROMOTE_NPC / DEMOTE_NPC: BOTH sides of the standing swap are hard refs', () => {
+    expect(eventConsumes(ev('PROMOTE_NPC', {
+      targetId: 'npc.miller',
+      payload: { swapWithNpcId: 'npc.reeve' },
+    }))).toEqual([
+      { kind: 'npc', ref: 'npc.miller' },
+      { kind: 'npc', ref: 'npc.reeve' },
+    ]);
+    // The mutation silently no-ops on a missing counterpart while the
+    // registry deltas still land — staging must block it.
+    const { ok, warnings } = validateBatch(base, [
+      ev('DEMOTE_NPC', { targetId: 'npc.miller', payload: { swapWithNpcId: 'npc.reeve' } }),
+    ]);
+    expect(ok).toBe(false);
+    expect(warnings.some(w => w.severity === 'block')).toBe(true);
+    // A counterpart added earlier in the batch resolves.
+    expect(validateBatch(base, [
+      ev('ADD_NPC', { targetId: 'The Reeve', payload: { importance: 'notable' } }),
+      ev('PROMOTE_NPC', { targetId: 'The Reeve', payload: { swapWithNpcId: 'npc.miller' } }),
+    ]).ok).toBe(true);
+  });
+
+  test('REMOVE_RESOURCE consumes the resource; ADD_RESOURCE earlier in the batch satisfies it', () => {
+    expect(eventConsumes(ev('REMOVE_RESOURCE', { targetId: 'iron vein' }))).toEqual([
+      { kind: 'resource', ref: 'iron vein' },
+    ]);
+    // Present in config.nearbyResources → passes.
+    expect(validateBatch(base, [ev('REMOVE_RESOURCE', { targetId: 'iron vein' })]).ok).toBe(true);
+    // Unknown node blocks.
+    expect(validateBatch(base, [ev('REMOVE_RESOURCE', { targetId: 'silver_lode' })]).ok).toBe(false);
+    // ADD_RESOURCE produces the node for later events in the same batch.
+    expect(validateBatch(base, [
+      ev('ADD_RESOURCE', { targetId: 'silver_lode' }),
+      ev('REMOVE_RESOURCE', { targetId: 'silver_lode' }),
+    ]).ok).toBe(true);
+  });
 });
 
 describe('applyEventBatch', () => {

@@ -216,3 +216,72 @@ describe('APPLY_STRESSOR → roaming world-pulse registration', () => {
     expect((store.getState().settlement.stress || []).some(s => s.type === 'under_siege')).toBe(true);
   });
 });
+
+// Editor roster wave — the INVERSE bridge: an authored RESOLVE_STRESSOR on a
+// canon settlement resolves the roaming twin through the same directed path
+// the party-impact hook uses (resolveStressorById), leaving the echo under the
+// stable id and queueing the residual aftermath as pending world-pulse
+// proposals. Draft settlements touch nothing in the world.
+describe('RESOLVE_STRESSOR → roaming twin resolution', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  function resolveStressorEvent(store, { id, type, label }) {
+    return store.getState().applyEvent({
+      id,
+      type: 'RESOLVE_STRESSOR',
+      targetId: type,
+      payload: { stressorType: type, label },
+      cause: 'player_action',
+    });
+  }
+
+  test('resolving an authored stressor ends the roaming twin with residuals', () => {
+    const store = seedStore(makeStore(), 'canon');
+    applyStressorEvent(store, { id: 'ev-res-1a', type: 'under_siege', label: 'Under Siege', severity: 0.8 });
+    resolveStressorEvent(store, { id: 'ev-res-1b', type: 'under_siege', label: 'Under Siege' });
+
+    const ws = store.getState().campaigns[0].worldState;
+    // No active crisis remains; the echo lingers under the SAME stable id
+    // (a re-ignition overwrites it instead of stacking beside it).
+    expect((ws.stressors || []).filter(s => s.status === 'active')).toHaveLength(0);
+    const echo = (ws.stressors || []).find(s => s.id === 'world_stressor.siege.ashford');
+    expect(echo?.status).toBe('residual');
+    // The residual aftermath is queued as a pending proposal carrying the
+    // stressor_residual condition (the shape applyWorldPulseProposal consumes).
+    const residuals = (ws.proposals || []).filter(p =>
+      p.status === 'pending' && p.outcome?.condition?.archetype === 'stressor_residual');
+    expect(residuals).toHaveLength(1);
+    expect(residuals[0].outcome.targetSaveId).toBe('ashford');
+    // And the settlement-side entry is gone — both representations agree.
+    expect((store.getState().settlement.stress || []).some(s => s.type === 'under_siege')).toBe(false);
+  });
+
+  test('resolving an unregistered type leaves the world untouched', () => {
+    const store = seedStore(makeStore(), 'canon');
+    applyStressorEvent(store, { id: 'ev-res-2a', type: 'under_siege', label: 'Under Siege', severity: 0.8 });
+    resolveStressorEvent(store, { id: 'ev-res-2b', type: 'famine', label: 'Famine' });
+
+    const ws = store.getState().campaigns[0].worldState;
+    expect((ws.stressors || []).filter(s => s.status === 'active')).toHaveLength(1);
+    expect(ws.proposals || []).toHaveLength(0);
+  });
+
+  test('a draft (non-canon) settlement resolves nothing in the world', () => {
+    const store = seedStore(makeStore(), 'draft');
+    // Seed the roaming stressor directly (the inject bridge is canon-only).
+    store.getState().injectCampaignStressor('camp-1', {
+      type: 'siege',
+      originSettlementId: 'ashford',
+      affectedSettlementIds: ['ashford'],
+      severity: 0.8,
+    });
+    resolveStressorEvent(store, { id: 'ev-res-3', type: 'under_siege', label: 'Under Siege' });
+
+    const ws = store.getState().campaigns[0].worldState;
+    expect((ws.stressors || []).filter(s => s.status === 'active')).toHaveLength(1);
+    expect(ws.proposals || []).toHaveLength(0);
+  });
+});

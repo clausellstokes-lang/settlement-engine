@@ -139,6 +139,23 @@ function respondAsMerchantGuild(faction, event, _settlement) {
         hookSeed: `Two guild houses are now openly bidding for any party willing to source a substitute supply.`,
       };
 
+    // Editor roster wave — trade goods are squarely the guild's charter.
+    case 'ADD_TRADE_GOOD':
+      return {
+        factionId: id, factionName: name,
+        stance: 'opportunity',
+        response: event.payload?.entrepot
+          ? `${name} moves to control the new transit trade — warehouse leases, brokerage fees, and a quiet word with the customs clerks.`
+          : `${name} maneuvers for first position on the new ${labelOf(event.targetId).toLowerCase()} trade, courting the producers before outside buyers arrive.`,
+      };
+
+    case 'REMOVE_TRADE_GOOD':
+      return {
+        factionId: id, factionName: name,
+        stance: 'threat',
+        response: `${name} writes off contracts tied to ${labelOf(event.targetId).toLowerCase()} and presses members to call in debts before the loss spreads.`,
+      };
+
     case 'ADD_INSTITUTION':
       if (classifyInstitutionTarget(event.targetId) === 'religious') {
         return {
