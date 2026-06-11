@@ -22,10 +22,15 @@
 > `998a7fd`)_ — rediscovery curation preservation, same-shock dedupe, ghost-impact reconciliation,
 > honest tick stamps (+27 pins). R4 _(shipped, `ff3d108`)_ — byte-identical replay, saves-order
 > independence, eventLog cap + projection diet, calendar/flows/memory/faction hygiene, channel-creatable
-> invariant (+43 pins). R3 remains — gated on the in-flight chip work (foodStockpile consumer for spread
-> attenuation) and the owner-decision queue: relationship directionality (H16), vassal cascade as
-> proposal+news (H15), REL_DYNAMICS wire-or-delete (H13/H14), dormant-channel re-confirm semantics,
-> service_dependency/migration_pressure discovery rules, vassal_extraction pressure class.
+> invariant (+43 pins). R3 _(shipped, `cf186d7`; chips landed `d725c98`)_ — relationship fairness on
+> state-stamped seniority, vassal cascade news+proposal disclosure, neighbour-seam write-back +
+> canonical labels, REL_DYNAMICS wired, per-target spread attenuation, suggested-only discovery for the
+> last two channel types — UNCREATABLE allowlist now empty (+59 pins; the wave's three verify-caught
+> consumer defects fixed pre-commit). **The regional program (R1–R4) is COMPLETE** — the audit's
+> confirmed criticals/highs are all closed. Follow-up triage parked: three pre-existing
+> direction-locked rules (hostile_attrition_deescalation, allied_conflict_obligation,
+> cold_war_supply_sanctions), attribution-only orientation flips, inferred-edge wall-clock stamp.
+> Cohesion Waves 5–6 remainder next; Waves 7–8 owner-gated.
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.
