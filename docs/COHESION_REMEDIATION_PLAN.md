@@ -20,8 +20,12 @@
 > `docs/REGIONAL_ENGINE_AUDIT.md` — the paid inter-settlement layer, owner-prioritized) joined the
 > program below. R1 _(shipped, `ca80f9f`)_ — all eight truth-critical fixes (+46 pins). R2 _(shipped,
 > `998a7fd`)_ — rediscovery curation preservation, same-shock dedupe, ghost-impact reconciliation,
-> honest tick stamps (+27 pins). R4 next (R3 awaits the in-flight chip work + an owner call on
-> relationship directionality).
+> honest tick stamps (+27 pins). R4 _(shipped, `ff3d108`)_ — byte-identical replay, saves-order
+> independence, eventLog cap + projection diet, calendar/flows/memory/faction hygiene, channel-creatable
+> invariant (+43 pins). R3 remains — gated on the in-flight chip work (foodStockpile consumer for spread
+> attenuation) and the owner-decision queue: relationship directionality (H16), vassal cascade as
+> proposal+news (H15), REL_DYNAMICS wire-or-delete (H13/H14), dormant-channel re-confirm semantics,
+> service_dependency/migration_pressure discovery rules, vassal_extraction pressure class.
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.
