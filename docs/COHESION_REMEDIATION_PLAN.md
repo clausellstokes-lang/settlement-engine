@@ -30,7 +30,14 @@
 > confirmed criticals/highs are all closed. Follow-up triage parked: three pre-existing
 > direction-locked rules (hostile_attrition_deescalation, allied_conflict_obligation,
 > cold_war_supply_sanctions), attribution-only orientation flips, inferred-edge wall-clock stamp.
-> Cohesion Waves 5–6 remainder next; Waves 7–8 owner-gated.
+> **Wave 5 shipped** (`68afc36`, 2026-06-11): canonical status seam (substituted/blocked + note
+> carry), needKey/NEED_HEURISTICS vocabulary, dead-magic leaks sealed (divine food, magicProfile,
+> deriveMagical, hasTeleportationInfra), promotion label matching + new stress-type rules, severity
+> dynamics (owner-tunable exported drift table) + derived capacity trajectory with the honest
+> 'absent' band — adversarially verified, zero must-fix. Wave 6 + the Stressor Wave are in flight
+> in a PARALLEL session (its commits `3cf0cd4`/`2773749`/`7cf5589`/`1a3734c`); the aiGrounding
+> bundle regen, push, and edge redeploy are deferred until that stream lands (its dirty files are
+> bundle inputs and its in-flight hunks carry the five open typecheck errors). Waves 7–8 owner-gated.
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.
