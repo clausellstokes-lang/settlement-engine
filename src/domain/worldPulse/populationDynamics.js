@@ -1,4 +1,5 @@
 import { activeChannelsFrom } from '../region/index.js';
+import { canonicalRelationshipLabel } from '../region/graph.js';
 import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 
@@ -89,13 +90,56 @@ function destinationScore(item, pressureIdx) {
   return safety * 0.3 + food * 0.3 + trade * 0.22 + legitimacy * 0.18;
 }
 
+// Refugees follow their relationships, not just the pressure map: allies and
+// the overlord/vassal road take far more of a column than a border under
+// cold war, and almost nobody flees INTO a hostile city. Multiplies the
+// pressure-based destination score (so a hostile neighbour usually falls
+// under the 0.35 admission bar entirely).
+const RELATIONSHIP_DISPERSAL_WEIGHTS = Object.freeze({
+  allied: 1.5,
+  vassal: 1.35,
+  patron: 1.35,
+  trade_partner: 1.25,
+  rival: 0.7,
+  cold_war: 0.45,
+  hostile: 0.15,
+});
+
+// H12 shim mirrored from stressorDynamics.relationshipTypeOf: legacy saves
+// carry the plural 'trade_partners'; read it as the canonical singular.
+function edgeLabel(edge) {
+  return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
+}
+
+function relationshipWeight(snapshot, sourceId, destId) {
+  const a = String(sourceId);
+  const b = String(destId);
+  const weights = [];
+  for (const edge of snapshot?.regionalGraph?.edges || []) {
+    const from = String(edge?.from || edge?.source || '');
+    const to = String(edge?.to || edge?.target || '');
+    if (!((from === a && to === b) || (from === b && to === a))) continue;
+    const weight = RELATIONSHIP_DISPERSAL_WEIGHTS[edgeLabel(edge)];
+    if (weight != null) weights.push(weight);
+  }
+  if (!weights.length) return 1;
+  // Hostility outranks friendship on the same pair: nobody marches refugees
+  // into a city they are at war with just because a trade edge also exists.
+  const worst = Math.min(...weights);
+  return worst < 1 ? worst : Math.max(...weights);
+}
+
 function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, tick }) {
   const chosenMode = mode === 'roll' ? migrationChoice(sourceId, tick) : mode;
   if (chosenMode === 'void') return { mode: chosenMode, deltas: [] };
 
+  // One weighted scorer everywhere: admission filter, ranking, and split
+  // weights all see the same relationship-adjusted desirability.
+  const weightedScore = item =>
+    destinationScore(item, pressureIdx) * relationshipWeight(snapshot, sourceId, item.id);
   const destinations = candidateDestinations(snapshot, sourceId)
-    .filter(item => destinationScore(item, pressureIdx) >= 0.35)
-    .sort((a, b) => destinationScore(b, pressureIdx) - destinationScore(a, pressureIdx));
+    .filter(item => weightedScore(item) >= 0.35)
+    .sort((a, b) => weightedScore(b) - weightedScore(a));
   if (!destinations.length) return { mode: 'void', deltas: [] };
 
   if (chosenMode === 'concentrated') {
@@ -106,13 +150,13 @@ function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, t
   }
 
   const top = destinations.slice(0, 4);
-  const totalWeight = top.reduce((sum, item) => sum + Math.max(0.1, destinationScore(item, pressureIdx)), 0);
+  const totalWeight = top.reduce((sum, item) => sum + Math.max(0.1, weightedScore(item)), 0);
   let assigned = 0;
   const deltas = top.map((item, index) => {
     const last = index === top.length - 1;
     const delta = last
       ? migrants - assigned
-      : Math.max(1, Math.round(migrants * (Math.max(0.1, destinationScore(item, pressureIdx)) / totalWeight)));
+      : Math.max(1, Math.round(migrants * (Math.max(0.1, weightedScore(item)) / totalWeight)));
     assigned += delta;
     return { saveId: item.id, delta, reason: 'Displaced population disperses through regional links.' };
   }).filter(d => d.delta > 0);
