@@ -196,8 +196,11 @@ function candidate(raw) {
  * - trade_dependency supplier -> dependent
  * - export_market buyer/market -> exporter
  * - trade_route one route endpoint -> the other endpoint
+ *
+ * Pass options.now for deterministic discoveredAt/updatedAt stamps (replay
+ * must be byte-identical); the wall clock is the fallback ONLY when absent.
  */
-export function discoverDependencyCandidates(sourceSave, targetSave) {
+export function discoverDependencyCandidates(sourceSave, targetSave, options = {}) {
   const source = deriveRegionalState(sourceSave);
   const target = deriveRegionalState(targetSave);
   if (!source.id || !target.id || source.id === target.id) return [];
@@ -290,15 +293,21 @@ export function discoverDependencyCandidates(sourceSave, targetSave) {
 
   out.push(...discoverRelationshipChannels(sourceSave, targetSave, source, target));
 
-  return out.filter(Boolean);
+  // Deterministic timestamp: same idiom as deriveRegionalImpacts — stamp the
+  // threaded `now` over candidate()'s wall-clock default when provided.
+  const candidates = out.filter(Boolean);
+  if (options.now) {
+    return candidates.map(channel => ({ ...channel, discoveredAt: options.now, updatedAt: options.now }));
+  }
+  return candidates;
 }
 
-export function discoverCampaignDependencyCandidates(saves = []) {
+export function discoverCampaignDependencyCandidates(saves = [], options = {}) {
   const out = [];
   const seen = new Set();
   for (let i = 0; i < saves.length; i++) {
     for (let j = i + 1; j < saves.length; j++) {
-      for (const channel of discoverDependencyCandidates(saves[i], saves[j])) {
+      for (const channel of discoverDependencyCandidates(saves[i], saves[j], options)) {
         if (seen.has(channel.id)) continue;
         seen.add(channel.id);
         out.push(channel);
@@ -308,8 +317,8 @@ export function discoverCampaignDependencyCandidates(saves = []) {
   return out;
 }
 
-export function deriveGraphWithDiscoveredCandidates(saves = [], existingGraph = null) {
-  const graph = deriveRegionalGraphFromSaves(saves, existingGraph);
-  const candidates = discoverCampaignDependencyCandidates(saves);
-  return addRegionalChannels(graph, candidates);
+export function deriveGraphWithDiscoveredCandidates(saves = [], existingGraph = null, options = {}) {
+  const graph = deriveRegionalGraphFromSaves(saves, existingGraph, options);
+  const candidates = discoverCampaignDependencyCandidates(saves, options);
+  return addRegionalChannels(graph, candidates, options);
 }

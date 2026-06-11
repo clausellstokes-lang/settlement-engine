@@ -112,6 +112,11 @@ function buildDailyLifeRelationshipMemory(state, saveId) {
       regionalGraph,
       snapshot,
       savedSettlements: state.savedSettlements || [],
+      // Read the posture/memoryScore the pulse persisted onto each
+      // relationshipState (stamped by refreshRelationshipMemory) instead of
+      // recomputing live; legacy saves without the stamp fall back to the
+      // live derivation inside buildRelationshipPostures.
+      preferPersisted: true,
     });
   } catch (error) {
     console.warn('[daily-life-memory] failed to build relationship context', error);

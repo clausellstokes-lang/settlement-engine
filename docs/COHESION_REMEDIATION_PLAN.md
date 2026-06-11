@@ -18,7 +18,10 @@
 > entity ids, frozen/live + producer/consumer manifests, crisis-triple sync) proposed below
 > under the same sign-off gate. **Regional waves R1–R4** (2026-06-11, from
 > `docs/REGIONAL_ENGINE_AUDIT.md` — the paid inter-settlement layer, owner-prioritized) joined the
-> program below; R1 is in flight.
+> program below. R1 _(shipped, `ca80f9f`)_ — all eight truth-critical fixes (+46 pins). R2 _(shipped,
+> `998a7fd`)_ — rediscovery curation preservation, same-shock dedupe, ghost-impact reconciliation,
+> honest tick stamps (+27 pins). R4 next (R3 awaits the in-flight chip work + an owner call on
+> relationship directionality).
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.

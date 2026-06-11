@@ -8,7 +8,6 @@
 import { deriveAllActiveConditions } from '../activeConditions.js';
 import { deriveCausalState, compareCausalState } from '../causalState.js';
 import { deriveAllSupplyChainStates } from '../supplyChainState.js';
-import { deriveSystemState } from '../state/deriveSystemState.js';
 import { normalizeGood, normalizeGoodsList } from './goodsCatalog.js';
 import { TIER_ORDER } from '../../data/constants.js';
 
@@ -93,18 +92,6 @@ function localProductionLabels(settlement) {
   ];
 }
 
-function serviceLabels(settlement) {
-  const econ = economicOf(settlement);
-  const services = Array.isArray(econ.institutionalServices) ? econ.institutionalServices : [];
-  const labels = [];
-  for (const service of services) {
-    if (service.output) labels.push(service.output);
-    if (service.exportLabel) labels.push(service.exportLabel);
-    if (service.label) labels.push(service.label);
-  }
-  return labels;
-}
-
 function resourceDepletionState(settlement) {
   const state = settlement?.config?.nearbyResourcesState || {};
   const depleted = [];
@@ -119,6 +106,14 @@ function resourceDepletionState(settlement) {
 
 /**
  * Derive a compact, stable regional read model from a settlement or save.
+ *
+ * R4/H18 projection diet: the former `services`, `unhealthyChains`,
+ * `activeConditions`, `causal`, and `systemState` fields had ZERO consumers
+ * (deriveLocalDelta diffs `activeChains` directly and diffCausal re-derives
+ * causal state from the raw settlements; discovery reads exports/imports/
+ * route; graph nodes read id/name/tier; world-pulse readers consume
+ * buildWorldSnapshot items, not this projection) — and they were embedded
+ * twice per event-log record. Dropped; re-add only with a real reader.
  */
 export function deriveRegionalState(input) {
   const settlement = settlementFromSave(input);
@@ -131,20 +126,11 @@ export function deriveRegionalState(input) {
       exports: [],
       imports: [],
       localProduction: [],
-      services: [],
       activeChains: [],
-      unhealthyChains: [],
-      activeConditions: [],
       route: { access: 'none', open: false, cut: false, cutRoutes: [], conditionCuts: [] },
       depletedGoods: [],
-      causal: { bands: {}, scores: {} },
-      systemState: null,
     };
   }
-
-  const activeChains = deriveAllSupplyChainStates(settlement);
-  const unhealthyChains = activeChains.filter(c => UNHEALTHY_CHAIN_STATUSES.has(c.status));
-  const causal = deriveCausalState(settlement);
 
   return {
     id: saveIdOf(input, settlement),
@@ -155,17 +141,9 @@ export function deriveRegionalState(input) {
     exports: normalizeGoodsList(exportLabels(settlement)),
     imports: normalizeGoodsList(importLabels(settlement)),
     localProduction: normalizeGoodsList(localProductionLabels(settlement)),
-    services: normalizeGoodsList(serviceLabels(settlement)),
-    activeChains,
-    unhealthyChains,
-    activeConditions: deriveAllActiveConditions(settlement),
+    activeChains: deriveAllSupplyChainStates(settlement),
     route: tradeRouteState(settlement, input),
     depletedGoods: resourceDepletionState(settlement),
-    causal: {
-      bands: { ...(causal.bands || {}) },
-      scores: { ...(causal.scores || {}) },
-    },
-    systemState: deriveSystemState(settlement),
   };
 }
 

@@ -128,28 +128,64 @@ function memoryEntry(raw, currentTick, fallbackType) {
 
 function collectRelationshipMemories({ worldState, relationshipKey, relState, currentTick }) {
   const out = [];
-  for (const incident of relState.recentIncidents || []) {
-    const entry = memoryEntry(incident, currentTick, 'recent_incident');
-    if (entry) out.push(entry);
-  }
-  for (const item of relState.history || []) {
-    const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_history');
-    if (entry) out.push(entry);
-  }
-  for (const item of relState.hierarchyResolutions || []) {
-    const entry = memoryEntry({ severity: 0.74, ...item }, currentTick, 'hierarchy_resolution');
-    if (entry) out.push(entry);
-  }
+  // One world event lands in up to THREE stores: applyRelationshipPatch writes
+  // a recentIncidents row AND (for label changes) a history row, while the
+  // pulse record keeps the outcome itself in pulseHistory.selectedOutcomes —
+  // and a hierarchy resolution writes incident + history + hierarchyResolutions
+  // in one call. Each event must score ONCE (double/triple-counting saturated
+  // memoryScore — one modest incident read as an escalating rivalry). The
+  // pulse outcome claims its identities first because it alone carries BOTH
+  // the incident identity (metadata.incidentType || candidateType — exactly
+  // what applyRelationshipPatch persists on the incident row) and the label
+  // payload (a label change also claims tick + 'label_proposal_applied', the
+  // history row's type; the exclusive `label:` conflict tag guarantees at most
+  // one label change per relationship per tick, so the pair is unambiguous).
+  // The per-relationship stores then fill in only events the pulse window no
+  // longer covers (party incidents, war resolutions, truncated history).
+  const seen = new Set();
+  const keyFor = (tick, type) => (Number.isFinite(tick) && type ? `${tick}:${type}` : null);
+  const add = (entry, keys) => {
+    if (!entry) return;
+    const valid = keys.filter(Boolean);
+    if (valid.some(key => seen.has(key))) return;
+    for (const key of valid) seen.add(key);
+    out.push(entry);
+  };
+
   for (const pulse of worldState?.pulseHistory || []) {
     const pulseTick = Number.isFinite(pulse?.tick) ? pulse.tick : null;
     for (const outcome of pulse?.selectedOutcomes || []) {
       if (outcome?.relationshipKey !== relationshipKey) continue;
+      const tick = Number.isFinite(outcome?.tick) ? outcome.tick : pulseTick;
+      const incidentType = outcome?.metadata?.incidentType || outcome?.candidateType;
       const entry = memoryEntry({
         ...outcome,
-        tick: Number.isFinite(outcome?.tick) ? outcome.tick : pulseTick,
+        tick,
+        // Carry the incident-level type so the kept entry reads like the
+        // incident row it supersedes ('raid'), not the outcome family
+        // ('relationship').
+        type: incidentType || outcome?.type,
       }, currentTick, outcome?.candidateType || 'pulse_outcome');
-      if (entry) out.push(entry);
+      add(entry, [
+        keyFor(tick, incidentType),
+        outcome?.proposalPayload?.kind === 'relationship_label_change' ? keyFor(tick, 'label_proposal_applied') : null,
+      ]);
     }
+  }
+  for (const incident of relState.recentIncidents || []) {
+    const entry = memoryEntry(incident, currentTick, 'recent_incident');
+    add(entry, [keyFor(incident?.tick, incident?.type)]);
+  }
+  // hierarchyResolutions before history: both stores carry the SAME
+  // 'hierarchy_resolution' row, and the dedicated store's entry (severity
+  // default 0.74) is the richer record when the incident buffer evicted it.
+  for (const item of relState.hierarchyResolutions || []) {
+    const entry = memoryEntry({ severity: 0.74, ...item }, currentTick, 'hierarchy_resolution');
+    add(entry, [keyFor(item?.tick, item?.type || 'hierarchy_resolution')]);
+  }
+  for (const item of relState.history || []) {
+    const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_history');
+    add(entry, [keyFor(item?.tick, item?.type)]);
   }
   return out.sort((a, b) => b.score - a.score).slice(0, 8);
 }
@@ -240,10 +276,44 @@ function practicalEffects(type, posture) {
   return ['Regional politics stays mostly background noise today.'];
 }
 
+// Read side of the persisted posture family. refreshRelationshipMemory stamps
+// a `relationshipMemory` blob onto every relationshipState each pulse; when a
+// reader opts in (preferPersisted), the blob is rehydrated into a posture row
+// instead of recomputing — that read is what earns the field family its
+// persistence. Returns null (recompute fallback) for legacy saves that predate
+// the stamp or carry an unrecognizable posture.
+function persistedPostureRow(relState, edge, relationshipKey, from, to) {
+  const blob = relState?.relationshipMemory;
+  if (!blob || typeof blob !== 'object') return null;
+  if (!POSTURE_LABELS[blob.posture]) return null;
+  if (!Number.isFinite(blob.score) || !Number.isFinite(blob.dailyLifeWeight)) return null;
+  const type = relState.relationshipType;
+  return {
+    relationshipKey,
+    from: String(from),
+    to: String(to),
+    relationshipType: type,
+    legacyRelationshipType: edge.legacyRelationshipType || null,
+    posture: blob.posture,
+    postureLabel: blob.postureLabel || POSTURE_LABELS[blob.posture],
+    memoryScore: round2(clamp01(blob.score)),
+    dailyLifeWeight: round2(clamp01(blob.dailyLifeWeight)),
+    asymmetry: round2(blob.asymmetry ?? 0),
+    flowProfile: blob.flowProfile || flowProfile(type, relState),
+    recentMemory: Array.isArray(blob.recentMemory) ? blob.recentMemory : [],
+    reasons: Array.isArray(blob.reasons) && blob.reasons.length
+      ? blob.reasons
+      : [`${titleForType(type)} relationship posture restored from the campaign record.`],
+    practicalEffects: practicalEffects(type, blob.posture),
+    edge,
+    persisted: true,
+  };
+}
+
 /**
- * @param {{ worldState?: any, regionalGraph?: any, snapshot?: any, currentTick?: number|null }} [args]
+ * @param {{ worldState?: any, regionalGraph?: any, snapshot?: any, currentTick?: number|null, preferPersisted?: boolean }} [args]
  */
-export function buildRelationshipPostures({ worldState = {}, regionalGraph = {}, snapshot = null, currentTick = null } = {}) {
+export function buildRelationshipPostures({ worldState = {}, regionalGraph = {}, snapshot = null, currentTick = null, preferPersisted = false } = {}) {
   const tick = Number.isFinite(currentTick) ? currentTick : Number(worldState?.tick) || 0;
   const states = worldState?.relationshipStates || {};
   const edges = regionalGraph?.edges || snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
@@ -255,6 +325,13 @@ export function buildRelationshipPostures({ worldState = {}, regionalGraph = {},
     const relState = ensureRelationshipState(edge, states[relationshipKey]);
     const { from, to } = getRelationshipSettlements(edge);
     if (!from || !to) continue;
+    if (preferPersisted) {
+      const persisted = persistedPostureRow(relState, edge, relationshipKey, from, to);
+      if (persisted) {
+        postures.push(persisted);
+        continue;
+      }
+    }
     const memories = collectRelationshipMemories({ worldState, relationshipKey, relState, currentTick: tick });
     const memoryScore = clamp01(memories.reduce((sum, item) => sum + item.score, 0));
     const type = relState.relationshipType;
@@ -405,6 +482,7 @@ export function sanitizeRelationshipMemoryContext(context, {
  *   savedSettlements?: any[],
  *   maxRelationships?: number,
  *   maxMemories?: number,
+ *   preferPersisted?: boolean,
  * }} [args]
  */
 export function buildSettlementRelationshipMemoryContext({
@@ -415,6 +493,7 @@ export function buildSettlementRelationshipMemoryContext({
   savedSettlements = [],
   maxRelationships = RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS,
   maxMemories = RELATIONSHIP_MEMORY_MAX_CONTEXT_MEMORIES,
+  preferPersisted = false,
 } = {}) {
   if (!settlementId) return null;
   const id = String(settlementId);
@@ -423,6 +502,7 @@ export function buildSettlementRelationshipMemoryContext({
     regionalGraph,
     snapshot,
     currentTick: worldState?.tick,
+    preferPersisted,
   }).filter(posture => posture.from === id || posture.to === id);
 
   if (!postures.length) return null;

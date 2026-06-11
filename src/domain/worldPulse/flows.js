@@ -18,9 +18,24 @@
 
 import { activeChannelsFrom } from '../region/index.js';
 import { deriveActiveCondition } from '../activeConditions.js';
+import { normalizeSimulationRules } from './simulationRules.js';
 import { stablePart } from './worldState.js';
 
 const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+
+// Proposal gates the flow formulas can actually REACH (the old severity>=0.72
+// gate was unreachable by construction: migration severity caps at 0.6 and
+// trade at 0.7, so every transfer auto-applied). Both gates consult
+// simulationRules.majorChangesRequireProposal like the other candidate
+// families (populationDynamics / tierResourceDynamics); rules-off keeps the
+// legacy always-auto behavior.
+//  • Migration: the transfer fraction ramps 0.04→0.12 of the SOURCE population
+//    across stressor severity 0.6→1.0. A transfer of >=8% (severity >= 0.8,
+//    the top of the displacement band) is a major change.
+const MIGRATION_PROPOSAL_FRACTION = 0.08;
+//  • Trade: severity = 0.4 + strength*0.3 (max 0.7). >=0.62 means a
+//    trade-dependency at strength >= ~0.73 failing — a hard dependency, major.
+const TRADE_PROPOSAL_SEVERITY = 0.62;
 
 const DISPLACEMENT_STRESSORS = new Set([
   'famine', 'siege', 'plague', 'disease_outbreak', 'occupation', 'wartime',
@@ -32,7 +47,7 @@ const TRADE_CRISIS = /trade_route_cut|export_market|famine|import_shortage|food_
 // purposes — nobody flees a siege that was BROKEN last month.
 const ACTIVE_FLOW_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 
-function populationFlows(snapshot, tick) {
+function populationFlows(snapshot, tick, requireProposal) {
   const graph = snapshot.regionalGraph;
   const out = [];
   for (const s of snapshot.worldState?.stressors || []) {
@@ -61,7 +76,7 @@ function populationFlows(snapshot, tick) {
           targetSaveId: destId,
           severity,
           probability: Math.min(0.45, 0.1 + s.severity * 0.3),
-          applyMode: severity >= 0.72 ? 'proposal' : 'auto',
+          applyMode: requireProposal && fraction >= MIGRATION_PROPOSAL_FRACTION ? 'proposal' : 'auto',
           headline: `Refugees from ${source?.name || sourceId} reach ${dest?.name || destId}`,
           summary: `~${refugees} people flee ${human} in ${source?.name || sourceId} toward ${dest?.name || destId}.`,
           reasons: [
@@ -88,7 +103,7 @@ function populationFlows(snapshot, tick) {
   return out;
 }
 
-function tradeScarcityFlows(snapshot, tick) {
+function tradeScarcityFlows(snapshot, tick, requireProposal) {
   const graph = snapshot.regionalGraph;
   const out = [];
   for (const item of snapshot.settlements || []) {
@@ -110,7 +125,7 @@ function tradeScarcityFlows(snapshot, tick) {
         targetSaveId: destId,
         severity,
         probability: Math.min(0.4, 0.12 + severity * 0.28),
-        applyMode: severity >= 0.72 ? 'proposal' : 'auto',
+        applyMode: requireProposal && severity >= TRADE_PROPOSAL_SEVERITY ? 'proposal' : 'auto',
         headline: `Supply from ${item.name || supplierId} fails ${dest?.name || destId}`,
         summary: `${item.name || supplierId} can no longer meet its trade obligation; prices climb in ${dest?.name || destId}.`,
         reasons: [
@@ -135,9 +150,11 @@ function tradeScarcityFlows(snapshot, tick) {
 /**
  * Derive population + trade-scarcity flow candidates for a snapshot.
  * @param {any} snapshot
- * @param {{ tick?: number }} [options]
+ * @param {{ tick?: number, simulationRules?: any }} [options]
  */
-export function deriveFlowCandidates(snapshot, { tick = 0 } = {}) {
+export function deriveFlowCandidates(snapshot, { tick = 0, simulationRules = undefined } = {}) {
   if (!snapshot?.regionalGraph) return [];
-  return [...populationFlows(snapshot, tick), ...tradeScarcityFlows(snapshot, tick)];
+  const rules = normalizeSimulationRules(simulationRules ?? snapshot?.worldState?.simulationRules);
+  const requireProposal = rules.majorChangesRequireProposal;
+  return [...populationFlows(snapshot, tick, requireProposal), ...tradeScarcityFlows(snapshot, tick, requireProposal)];
 }

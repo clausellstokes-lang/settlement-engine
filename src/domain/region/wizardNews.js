@@ -233,7 +233,9 @@ function tagList(impact, transition) {
   ]);
 }
 
-function normalizeEntry(entry) {
+// Deterministic timestamps: callers thread options.now so replay stamps no
+// wall-clock time; the wall clock is the fallback ONLY when not provided.
+function normalizeEntry(entry, options = {}) {
   if (!entry?.id) return null;
   const severity = clamp01(entry.severity);
   const score = Math.max(0, Math.round(finiteNumber(entry.score, severity * 70)));
@@ -244,7 +246,7 @@ function normalizeEntry(entry) {
   return {
     schemaVersion: WIZARD_NEWS_SCHEMA_VERSION,
     id: String(entry.id),
-    createdAt: entry.createdAt || nowIso(),
+    createdAt: entry.createdAt || options.now || nowIso(),
     tick: Math.max(0, Math.floor(finiteNumber(entry.tick, 0))),
     scope: entry.scope || 'regional',
     significance,
@@ -272,25 +274,25 @@ function sortEntries(entries) {
   });
 }
 
-export function ensureWizardNewsFeed(feed = {}) {
+export function ensureWizardNewsFeed(feed = {}, options = {}) {
   const entries = Array.isArray(feed?.entries)
-    ? feed.entries.map(normalizeEntry).filter(Boolean)
+    ? feed.entries.map(entry => normalizeEntry(entry, options)).filter(Boolean)
     : [];
   return {
     schemaVersion: WIZARD_NEWS_SCHEMA_VERSION,
     currentTick: Math.max(0, Math.floor(finiteNumber(feed?.currentTick, 0))),
     entries: sortEntries(entries).slice(0, MAX_ENTRIES),
-    updatedAt: feed?.updatedAt || nowIso(),
+    updatedAt: feed?.updatedAt || options.now || nowIso(),
   };
 }
 
-export function advanceWizardNewsFeed(feed = {}, ticks = 1) {
-  const current = ensureWizardNewsFeed(feed);
+export function advanceWizardNewsFeed(feed = {}, ticks = 1, options = {}) {
+  const current = ensureWizardNewsFeed(feed, options);
   const amount = Math.max(1, Math.floor(finiteNumber(ticks, 1)));
   return {
     ...current,
     currentTick: current.currentTick + amount,
-    updatedAt: nowIso(),
+    updatedAt: options.now || nowIso(),
   };
 }
 
@@ -303,7 +305,7 @@ export function createWizardNewsEntryFromImpact(impact, options = {}) {
   const channels = channelMap(graph);
   const event = options.event || eventForImpact(graph, impact.id);
   const { significance, score, reasons } = significanceForImpact(impact, transition);
-  const createdAt = options.createdAt || nowIso();
+  const createdAt = options.createdAt || options.now || nowIso();
 
   return normalizeEntry({
     id: `wizard_news.${tick}.${transition}.${impact.id}`,
@@ -333,7 +335,7 @@ export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGr
   const beforeById = new Map(before.queuedImpacts.map(impact => [impact.id, impact]));
   const entries = [];
   const tick = Math.max(0, Math.floor(finiteNumber(options.tick, 0)));
-  const createdAt = options.createdAt || nowIso();
+  const createdAt = options.createdAt || options.now || nowIso();
 
   for (const impact of after.queuedImpacts) {
     const previous = beforeById.get(impact.id);
@@ -365,17 +367,17 @@ export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGr
 }
 
 export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
-  const current = ensureWizardNewsFeed(feed);
+  const current = ensureWizardNewsFeed(feed, options);
   const byId = new Map(current.entries.map(entry => [entry.id, entry]));
   for (const raw of entries || []) {
-    const entry = normalizeEntry(raw);
+    const entry = normalizeEntry(raw, options);
     if (!entry) continue;
     byId.set(entry.id, { ...(byId.get(entry.id) || {}), ...entry });
   }
   return {
     ...current,
     entries: sortEntries([...byId.values()]).slice(0, options.maxEntries || MAX_ENTRIES),
-    updatedAt: entries?.length ? nowIso() : current.updatedAt,
+    updatedAt: entries?.length ? (options.now || nowIso()) : current.updatedAt,
   };
 }
 

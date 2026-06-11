@@ -4,13 +4,24 @@ Findings + plan from the deep review of `src/domain/worldPulse/`. The engine's
 architecture is sound (deterministic, explainable, DM-canon, bounded); this is
 refinement, coherence-closing, and depth — not a redirect.
 
-**Implemented & tested this pass (lint-clean, 1,436 domain+store tests green):**
-Phase 0 (party hook), Phase 1 (1a channels + confirmed gating, 1b determinism,
-1c NPC↔faction seats), Phase 2 (2a volatility dial, 2b mean-reversion, 2c goal
-culmination, 2d realm events + relationship→pressure feedback), Phase 3 (soak
-test), Phase 4a *grounding half*, and Phase 4c reconciliation utility.
-**Remaining (your backend/UI lane or large subsystem):** Phase 4a edge function,
-Phase 4b economy/population flows, Phase 4d chronicle UI.
+**Status refresh (2026-06-11, verified against code + suites by the regional
+audit — see `docs/REGIONAL_ENGINE_AUDIT.md`):** every phase below is
+**implemented, wired, and tested green** except 4d. That includes the items the
+sections still mark [next]: 1a (canonicalSpreadChannel + confirmed-only
+spreadTargetsFor, pinned by `stressorChannels.test.js`), 1b (now threaded
+through the orchestrators; the graph/news helper residue was closed by Regional
+wave R4), 1c (internalSeats populated, `factionCompetition.js`), 2a
+(volatility dial, `worldPulseVolatility.test.js`), 2b (mean-reversion relax
+passes), 2c (goal culmination, `npcGoalCulmination.test.js`), 2d
+(`realmEvents.js` + pressure feedback), 3a (`worldPulseSoak.test.js`), 4b
+(`flows.js` + `populationDynamics.js`, `flows.test.js`), 4c (`reconcile.js`,
+`chronicleAndReconcile.test.js`), and 4a end-to-end (the
+`generate-chronicle` edge function exists in-repo with the client hook and
+credit cost). Full domain+store suite at refresh time: 2,029+ tests green.
+**Genuinely remaining:** Phase 4d (NPC/relationship chronicle UI — the data is
+captured; no surface reads `relationshipState.history`/`recentIncidents`).
+Section bodies below are kept for design rationale; trust this block and the
+audit for status.
 
 Status legend: **[done]** landed + tested · **[next]** domain work, behavior-
 changing (needs reconciliation against the pinned worldPulse/regional test

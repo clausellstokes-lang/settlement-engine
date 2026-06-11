@@ -713,6 +713,19 @@ export function applyRegionalImpact(settlement, impactItem, options = {}) {
   return withActiveCondition(base, condition);
 }
 
+// Event-log diet (H18): keep every typed scalar a change carries (kind,
+// source, magnitude, variable, tiers, deltas, ...) but slim the two object
+// embeds — a good is identified by id/label, a chain by id/resource/status.
+// Nothing re-derives from a logged change; this is the DM-facing audit trail.
+function slimChange(change) {
+  const { good, chain, ...rest } = change || {};
+  return {
+    ...rest,
+    ...(good ? { good: { id: good.id, label: good.label } } : {}),
+    ...(chain ? { chain: { id: chain.id, resource: chain.resource ?? null, status: chain.status ?? null } } : {}),
+  };
+}
+
 /**
  * Pure regional propagation for one before/after local event.
  *
@@ -758,16 +771,20 @@ export function propagateRegionalEvent(args = {}) {
     }),
   }));
 
+  // H18: the appended record is an audit row, not cold storage — event
+  // metadata plus the typed changes list. The full localDelta (embedding two
+  // complete before/after settlement projections, ~4.4KB+ per canon event)
+  // had zero readers and persisted to localStorage/cloud on every change.
   let nextGraph = appendRegionalEvent(current, {
     id: `regional_event.${idPart(localDelta.id)}`,
     recordedAt: now || undefined,
     sourceSettlementId: localDelta.sourceSettlementId,
     sourceSettlementName: localDelta.sourceSettlementName,
     sourceEvent: event ? { id: event.id || null, type: event.type || null, targetId: event.targetId || null } : null,
-    localDelta,
+    changes: (localDelta.changes || []).map(slimChange),
     impactIds: impacts.map(i => i.id),
-  });
-  nextGraph = queueRegionalImpacts(nextGraph, impacts);
+  }, { now });
+  nextGraph = queueRegionalImpacts(nextGraph, impacts, { now });
 
   return {
     graph: nextGraph,

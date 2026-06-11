@@ -54,6 +54,7 @@ export function buildRegionalMapOverlay({
   const graph = ensureRegionalGraph(campaign?.regionalGraph);
   const points = pointBySettlement(placements);
   const nodeNames = new Map(graph.nodes.map(node => [String(node.id), node.name]));
+  const channelsById = new Map(graph.channels.map(channel => [String(channel.id), channel]));
   const channelTypeSet = Array.isArray(channelTypes)
     ? new Set(channelTypes)
     : null;
@@ -77,9 +78,24 @@ export function buildRegionalMapOverlay({
     }))
     .filter(channel => channel.fromPoint && channel.toPoint);
 
+  // An impact marker inherits its owning channel's visibility: a concealed
+  // (hidden/gm) channel must not leak through its impacts' markers and
+  // causality tooltips when that visibility tier is toggled off. Orphan
+  // impacts (channel no longer in the graph — legacy saves, pruned channels)
+  // fail OPEN and keep projecting: hiding them would silently erase real
+  // queued pressure from old campaigns with no channel left to re-show it.
+  const impactVisible = impact => {
+    const channel = channelsById.get(String(impact.channelId));
+    if (!channel) return true;
+    if (!includeHidden && channel.visibility === 'hidden') return false;
+    if (!includeGm && channel.visibility === 'gm') return false;
+    return true;
+  };
+
   const impacts = graph.queuedImpacts
     .filter(impact => !impactStatusSet || impactStatusSet.has(impact.status))
     .filter(impact => (impact.severity || 0) >= severityFloor)
+    .filter(impactVisible)
     .map(impact => ({
       ...impact,
       point: points.get(String(impact.targetSettlementId)),

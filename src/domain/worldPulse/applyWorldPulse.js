@@ -238,7 +238,7 @@ export function applyWorldPulseOutcomes({
   // worldState.tick is the authoritative clock: SYNC currentTick to it (not
   // +1) so a manual impact-advance press cannot permanently skew which tick
   // this pulse's entries (all stamped with `tick`) group and ground under.
-  let feed = ensureWizardNewsFeed(wizardNews || snapshot.campaign?.wizardNews);
+  let feed = ensureWizardNewsFeed(wizardNews || snapshot.campaign?.wizardNews, { now });
   if (advanceNewsTick) {
     feed = {
       ...feed,
@@ -257,7 +257,7 @@ export function applyWorldPulseOutcomes({
   // advanceRegionalImpacts:false for the same reason).
   if (shouldAdvanceRegionalImpacts && propagationDepth > 0) {
     const beforeRegionalAdvance = graph;
-    graph = advanceRegionalImpacts(graph, 1, { currentTick: tick });
+    graph = advanceRegionalImpacts(graph, 1, { currentTick: tick, now });
     newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeRegionalAdvance, graph, { tick, createdAt: now }));
   }
 
@@ -430,14 +430,16 @@ export function applyWorldPulseOutcomes({
       const conditionId = impact.conditionId || legacyRegionalConditionId(impact);
       const conditions = Array.isArray(entry.settlement.activeConditions) ? entry.settlement.activeConditions : [];
       if (conditions.some(condition => condition?.id === conditionId)) continue;
-      graph = setRegionalImpactStatus(graph, impact.id, 'resolved', { resolvedAt: now });
+      // R4: now threads through to updatedAt too, not just resolvedAt —
+      // replay stamps no wall-clock time anywhere on the reconciled row.
+      graph = setRegionalImpactStatus(graph, impact.id, 'resolved', { resolvedAt: now }, { now });
     }
     if (graph !== beforeReconcile) {
       newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeReconcile, graph, { tick, createdAt: now }));
     }
   }
 
-  feed = appendWizardNewsEntries(feed, newsEntries);
+  feed = appendWizardNewsEntries(feed, newsEntries, { now });
   state = refreshRelationshipMemory(state, graph, snapshot, { currentTick: tick });
 
   return {

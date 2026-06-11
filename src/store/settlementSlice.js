@@ -1244,6 +1244,10 @@ export const createSettlementSlice = (set, get) => ({
         visibleSettlementIds: visibleSettlementIdsForCampaign(afterState, campaign),
         maxDepth: 2,
         waveDecay: 0.45,
+        // Reuse this apply's editedAt stamp: the canon path threads `now`
+        // so propagation stamps no wall-clock time of its own (replay
+        // byte-identical — same args, same graph, to the byte).
+        now: afterState.editedAt,
       });
       if (result.impacts.length > 0) {
         afterState.setCampaignRegionalGraph(campaign.id, result.graph);

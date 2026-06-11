@@ -545,7 +545,11 @@ export function ageRoamingStressors(stressors = [], snapshot, rng, options = {})
       updatedAt: options.now || new Date().toISOString(),
     });
     const chance = clamp01(resolutionChance(aged, snapshot, assessment) + (synergy?.resolutionDelta ?? 0));
-    const roll = rng.random();
+    // Order independence: the resolution roll forks on the STRESSOR'S ID, not
+    // a shared stream consumed in list order — reordering the persisted list
+    // (or the saves array that feeds it) cannot change which crises resolve.
+    // Stubs without fork() (the constant-roll test harnesses) fall back.
+    const roll = typeof rng.fork === 'function' ? rng.fork(`age:${aged.id}`).random() : rng.random();
     const structuralStillActive = aged.durationPolicy === 'structural' && aged.severity >= 0.25;
     const blockedBySynergy = synergy?.blocksResolution === true;
     if (!blockedBySynergy && !structuralStillActive && (roll <= chance || aged.severity <= 0.08)) {

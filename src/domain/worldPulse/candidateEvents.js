@@ -93,6 +93,19 @@ function candidateIdentity(candidate) {
   ].join(':');
 }
 
+// Stable identity for ordering and rng forks. Candidate ids embed settlement /
+// relationship / faction ids and the tick — never the candidate's POSITION in
+// the saves array — so sorting and rolling by this key is order-independent.
+function stableCandidateKey(candidate) {
+  return String(candidate.id || candidateIdentity(candidate));
+}
+
+function compareStableKeys(a, b) {
+  const keyA = stableCandidateKey(a);
+  const keyB = stableCandidateKey(b);
+  return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
+}
+
 function exclusiveTags(candidate) {
   return (candidate.conflictTags || []).filter(tag =>
     /^label:/.test(tag)
@@ -120,10 +133,13 @@ export function resolveCandidateConflicts(candidates = [], budgets = {}) {
     if (!previous || (candidate.severity || 0) > (previous.severity || 0)) deduped.set(key, candidate);
   }
 
+  // Severity ties break by the candidate's stable key, never by insertion
+  // order (= saves-array order): the same campaign with its saves reversed
+  // must select the same winners under the per-settlement/per-kind budgets.
   const sorted = [...deduped.values()].sort((a, b) => {
     const modeA = a.applyMode === 'proposal' ? 0.02 : 0;
     const modeB = b.applyMode === 'proposal' ? 0.02 : 0;
-    return (b.severity + modeB) - (a.severity + modeA);
+    return ((b.severity + modeB) - (a.severity + modeA)) || compareStableKeys(a, b);
   });
 
   const selected = [];
@@ -161,7 +177,7 @@ export function resolveCandidateConflicts(candidates = [], budgets = {}) {
     if (candidate.proposalPayload?.kind === 'npc_action') npcProposalCount += 1;
   }
 
-  return selected.sort((a, b) => b.severity - a.severity);
+  return selected.sort((a, b) => (b.severity - a.severity) || compareStableKeys(a, b));
 }
 
 export function evaluateWorldPulseRules(snapshot, context = {}) {
@@ -191,7 +207,7 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
     candidates.push(...evaluateFactionRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
   }
   if (!['off', 'local'].includes(rules.propagationMode) && (rules.migrationFlowsEnabled || rules.tradeFlowsEnabled)) {
-    candidates.push(...deriveFlowCandidates(snapshot, { tick }).filter(candidate => {
+    candidates.push(...deriveFlowCandidates(snapshot, { tick, simulationRules: rules }).filter(candidate => {
       if (candidate.metadata?.flowKind === 'population') return rules.migrationFlowsEnabled;
       if (candidate.metadata?.flowKind === 'trade') return rules.tradeFlowsEnabled;
       return true;
@@ -213,6 +229,17 @@ export function generateWorldPulseCandidates({ pressures = [], relationshipCandi
   return resolveCandidateConflicts(candidates);
 }
 
+// Order independence: each candidate's roll is drawn from an rng forked on the
+// candidate's IDENTITY (mirroring npcAgency's `npc:${id}` and the orchestrator's
+// `reform:${sid}:${tick}` forks), never from a shared stream consumed in
+// iteration order — reordering the saves array can no longer reshuffle which
+// candidates pass. Test stubs without fork() fall back to the shared stream
+// (the constant-roll stubs in the suites are position-independent anyway).
+function candidateRoll(rng, candidate) {
+  if (typeof rng.fork !== 'function') return rng.random();
+  return rng.fork(`roll:${stableCandidateKey(candidate)}`).random();
+}
+
 export function rollCandidates(candidates = [], rng, options = {}) {
   const maxAuto = options.maxAuto ?? 6;
   const maxProposals = options.maxProposals ?? 5;
@@ -232,7 +259,7 @@ export function rollCandidates(candidates = [], rng, options = {}) {
     const guaranteed = (candidate.probability ?? 0) >= 1;
     if (candidate.applyMode === 'auto' && autoCount >= maxAuto && !guaranteed) continue;
     if (candidate.applyMode === 'proposal' && proposalCount >= maxProposals) continue;
-    const roll = rng.random();
+    const roll = candidateRoll(rng, candidate);
     const probability = guaranteed
       ? 1
       : Math.max(0, Math.min(1, (candidate.probability ?? 0) * volatility));

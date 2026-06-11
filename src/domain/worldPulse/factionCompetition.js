@@ -174,6 +174,87 @@ export function ensureFactionStates(worldState, snapshot, rng) {
   return { ...worldState, factionStates };
 }
 
+// Grace window before a roster-absent faction state is pruned: long enough to
+// survive a transient roster hiccup (a save that briefly fails to surface its
+// factions), short enough that a coup-renamed ghost doesn't haunt the capture
+// rollup and rivals[] lists for a season.
+export const FACTION_STATE_PRUNE_GRACE_TICKS = 3;
+
+/**
+ * Prune faction states whose faction no longer exists on its settlement's
+ * roster (faction ids are name-keyed, so a coup-renamed governing faction
+ * leaves a permanent ghost that settlementCaptureState still scans and
+ * rivals[] still references). Mirrors the settlementTickStates pruning in
+ * advanceCampaignWorld, with two deliberate differences:
+ *  • a grace window (missingSinceTick, FACTION_STATE_PRUNE_GRACE_TICKS) so a
+ *    transient absence doesn't amnesia faction history;
+ *  • a captureState floor — a state above 'none' on a LIVE settlement is an
+ *    active capture arc and survives pruning until the arc recedes (a ghost
+ *    whose settlement left the campaign gets no floor: a reused save id must
+ *    not inherit a dead settlement's arc).
+ * Pruned ids are also stripped from surviving rivals[] lists (ensureFactionStates
+ * refills an emptied list from the live roster on the next pulse). Identity
+ * no-op when nothing changes. Deterministic — derived purely from the snapshot.
+ */
+export function pruneFactionStates(worldState, snapshot, { tick = 0, graceTicks = FACTION_STATE_PRUNE_GRACE_TICKS } = {}) {
+  const states = worldState?.factionStates || {};
+  const ids = Object.keys(states);
+  if (!ids.length) return worldState;
+
+  const liveFactionIds = new Set();
+  const liveSettlementIds = new Set();
+  for (const item of snapshot?.settlements || []) {
+    liveSettlementIds.add(String(item.id));
+    settlementFactions(item).forEach((faction, index) => {
+      liveFactionIds.add(factionId(item.id, faction, index));
+    });
+  }
+
+  let changed = false;
+  const prunedIds = new Set();
+  const next = {};
+  for (const [fid, state] of Object.entries(states)) {
+    if (liveFactionIds.has(fid)) {
+      // Back on (or still on) the roster: clear any absence stamp.
+      if (state.missingSinceTick != null) {
+        const { missingSinceTick: _gone, ...rest } = state;
+        next[fid] = rest;
+        changed = true;
+      } else {
+        next[fid] = state;
+      }
+      continue;
+    }
+    const since = Number.isFinite(state.missingSinceTick) ? state.missingSinceTick : tick;
+    if (tick - since >= graceTicks) {
+      const settlementLive = liveSettlementIds.has(String(state.settlementId));
+      const activeCaptureArc = settlementLive && (state.captureState || 'none') !== 'none';
+      if (!activeCaptureArc) {
+        prunedIds.add(fid);
+        changed = true;
+        continue;
+      }
+    }
+    if (state.missingSinceTick === since) {
+      next[fid] = state;
+    } else {
+      next[fid] = { ...state, missingSinceTick: since };
+      changed = true;
+    }
+  }
+
+  if (prunedIds.size) {
+    for (const [fid, state] of Object.entries(next)) {
+      const rivals = state.rivals || [];
+      const kept = rivals.filter(rid => !prunedIds.has(rid));
+      if (kept.length !== rivals.length) next[fid] = { ...state, rivals: kept };
+    }
+  }
+
+  if (!changed) return worldState;
+  return { ...worldState, factionStates: next };
+}
+
 // Per-tick mean-reversion for faction momentum (exhaustion already self-limits
 // upward; this relaxes the build-up of momentum on quiet ticks).
 export function relaxFactionStates(worldState) {

@@ -186,8 +186,12 @@ describe('World Pulse expansion systems', () => {
       simulationRules: snapshot.worldState.simulationRules,
     });
 
+    // R4/H18 reconcile: the event-log record carries the typed changes list
+    // directly (`event.changes`) instead of the full embedded localDelta with
+    // its before/after settlement projections. Same semantic pin: the log
+    // records that a population_loss change drove this propagation.
     expect(result.regionalGraph.eventLog.some(event =>
-      event.localDelta?.changes?.some(change => change.kind === 'population_loss')
+      event.changes?.some(change => change.kind === 'population_loss')
     )).toBe(true);
     expect(result.regionalGraph.queuedImpacts.some(impact =>
       impact.kind === 'import_shortage' && impact.targetSettlementId === 'b'
@@ -307,7 +311,13 @@ describe('World Pulse expansion systems', () => {
       worldState: {
         tick: 3,
         stressors: [{ id: 'stressor.famine.a', type: 'famine', severity: 0.9, affectedSettlementIds: ['a'] }],
-        simulationRules: normalizeSimulationRules({ propagationMode: 'first_order' }),
+        // Reconciled with R4's reachable flow proposal gate: a severity-0.9
+        // famine uproots 10% of the source — a MAJOR transfer that routes to
+        // 'proposal' under default rules (the old 0.72 gate was unreachable
+        // and silently auto-applied it). This test pins the populationDelta
+        // plumbing through APPLY, so the gate is off here; flows.test.js pins
+        // the gate itself.
+        simulationRules: normalizeSimulationRules({ propagationMode: 'first_order', majorChangesRequireProposal: false }),
       },
       regionalGraph: addRegionalChannels(null, [{ type: 'migration_pressure', from: 'a', to: 'b', status: 'confirmed', strength: 0.9 }]),
       settlements: [source, dest],

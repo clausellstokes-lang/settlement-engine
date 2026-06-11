@@ -206,7 +206,9 @@ function appendWizardNewsForGraphChange(campaign, beforeGraph, afterGraph, optio
     tick: feed.currentTick,
     ...options,
   });
-  campaign.wizardNews = appendWizardNewsEntries(feed, entries);
+  // Reuse the action's timestamp (threaded as createdAt) so one store action
+  // stamps one instant everywhere instead of several wall-clock reads.
+  campaign.wizardNews = appendWizardNewsEntries(feed, entries, { now: options.createdAt });
 }
 
 function ensureCampaignWizardNews(campaign) {
@@ -554,12 +556,13 @@ export const createCampaignSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
+      const now = new Date().toISOString();
       const saves = campaignSettlements(state, campaignId);
       c.regionalGraph = discover
-        ? deriveGraphWithDiscoveredCandidates(saves, c.regionalGraph)
-        : deriveRegionalGraphFromSaves(saves, c.regionalGraph);
+        ? deriveGraphWithDiscoveredCandidates(saves, c.regionalGraph, { now })
+        : deriveRegionalGraphFromSaves(saves, c.regionalGraph, { now });
       ensureCampaignWizardNews(c);
-      c.updatedAt = new Date().toISOString();
+      c.updatedAt = now;
       graph = c.regionalGraph;
       persistCampaignState(state, campaignId);
     });
@@ -575,9 +578,10 @@ export const createCampaignSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      c.regionalGraph = domainSetRegionalChannelStatus(c.regionalGraph, channelId, status);
+      const now = new Date().toISOString();
+      c.regionalGraph = domainSetRegionalChannelStatus(c.regionalGraph, channelId, status, { now });
       ensureCampaignWizardNews(c);
-      c.updatedAt = new Date().toISOString();
+      c.updatedAt = now;
       graph = c.regionalGraph;
       persistCampaignState(state, campaignId);
     });
@@ -589,9 +593,10 @@ export const createCampaignSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      c.regionalGraph = domainSetRegionalChannelVisibility(c.regionalGraph, channelId, visibility);
+      const now = new Date().toISOString();
+      c.regionalGraph = domainSetRegionalChannelVisibility(c.regionalGraph, channelId, visibility, { now });
       ensureCampaignWizardNews(c);
-      c.updatedAt = new Date().toISOString();
+      c.updatedAt = now;
       graph = c.regionalGraph;
       persistCampaignState(state, campaignId);
     });
@@ -630,10 +635,11 @@ export const createCampaignSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
+      const now = new Date().toISOString();
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
       c.regionalGraph = ensureRegionalGraph(regionalGraph);
-      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph);
-      c.updatedAt = new Date().toISOString();
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
+      c.updatedAt = now;
       graph = c.regionalGraph;
       persistCampaignState(state, campaignId);
     });
@@ -645,10 +651,11 @@ export const createCampaignSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
+      const now = new Date().toISOString();
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
-      c.regionalGraph = queueRegionalImpacts(beforeGraph, impacts);
-      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph);
-      c.updatedAt = new Date().toISOString();
+      c.regionalGraph = queueRegionalImpacts(beforeGraph, impacts, { now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
+      c.updatedAt = now;
       graph = c.regionalGraph;
       persistCampaignState(state, campaignId);
     });
@@ -660,10 +667,11 @@ export const createCampaignSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
+      const now = new Date().toISOString();
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
-      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, status, patch);
-      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph);
-      c.updatedAt = new Date().toISOString();
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, status, patch, { now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
+      c.updatedAt = now;
       graph = c.regionalGraph;
       persistCampaignState(state, campaignId);
     });
@@ -679,16 +687,19 @@ export const createCampaignSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
+      const now = options.now || new Date().toISOString();
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
-      c.wizardNews = advanceWizardNewsFeed(c.wizardNews, ticks);
+      c.wizardNews = advanceWizardNewsFeed(c.wizardNews, ticks, { now });
       c.regionalGraph = advanceRegionalImpacts(beforeGraph, ticks, {
         ...options,
         currentTick: c.wizardNews.currentTick,
+        now,
       });
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, {
         tick: c.wizardNews.currentTick,
+        createdAt: now,
       });
-      c.updatedAt = new Date().toISOString();
+      c.updatedAt = now;
       graph = c.regionalGraph;
       persistCampaignState(state, campaignId);
     });
@@ -907,7 +918,7 @@ export const createCampaignSlice = (set, get) => ({
       }
 
       const beforeGraph = graph;
-      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'applied', { appliedAt: now });
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'applied', { appliedAt: now }, { now });
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
       c.updatedAt = now;
       persistCampaignState(state, campaignId);
@@ -971,7 +982,7 @@ export const createCampaignSlice = (set, get) => ({
       }
 
       const beforeGraph = graph;
-      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'resolved', { resolvedAt: now });
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'resolved', { resolvedAt: now }, { now });
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
       c.updatedAt = now;
       persistCampaignState(state, campaignId);

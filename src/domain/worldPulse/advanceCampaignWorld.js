@@ -11,13 +11,12 @@ import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js
 import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
-import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
 import { applyCorruptionImpairments, advanceInstitutionReform } from './corruptionImpair.js';
 import { advanceFactionCapture, settlementCaptureState } from './factionCapture.js';
 import { computeGuildStrengthBy, applyGuildToSettlement } from './thievesGuild.js';
 import { replaceOustedNpcs } from './successorNpc.js';
-import { ensureFactionStates, relaxFactionStates, seatNpcsIntoFactions } from './factionCompetition.js';
+import { ensureFactionStates, pruneFactionStates, relaxFactionStates, seatNpcsIntoFactions } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { synthesizeRealmEvents } from './realmEvents.js';
@@ -160,6 +159,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   worldState = ensureAllRelationshipStates(worldState, snapshot);
   worldState = ensureNpcStates(worldState, snapshot, rng.fork('npc-state'));
   worldState = ensureFactionStates(worldState, snapshot, rng.fork('faction-state'));
+  // Ghost hygiene: faction ids are name-keyed, so a coup-renamed governing
+  // faction strands its old state forever (the capture rollup keeps scanning
+  // it; rivals[] keeps pointing at it). Prune states absent from the roster
+  // for FACTION_STATE_PRUNE_GRACE_TICKS, preserving live capture arcs.
+  worldState = pruneFactionStates(worldState, snapshot, { tick: worldState.tick });
   // Mean-reversion: relax momentum / heat / resentment toward baseline each
   // tick so quiet periods cool the world down instead of ratcheting it up.
   worldState = relaxNpcStates(worldState);
@@ -185,7 +189,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Recompute guild strength from the UPDATED capture states for this tick's
   // settlement mirror (power floor + legitimacy cap below).
   guildStrengthBy = computeGuildStrengthBy(worldState, snapshot);
-  worldState = refreshRelationshipMemory(worldState, snapshot.regionalGraph, snapshot, { currentTick: worldState.tick });
+  // Posture/memory stamping happens ONCE per pulse, inside
+  // applyWorldPulseOutcomes (after this tick's outcomes have landed). The
+  // pre-aging refresh that used to live here wrote values nothing read before
+  // they were superseded in the same pulse.
   snapshot = buildWorldSnapshot({ campaign: { ...campaign, worldState }, saves, worldState });
 
   const agedStressors = simulationRules.stressorsEnabled
@@ -392,7 +399,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     simulationRules,
   });
 
-  const memoryState = refreshRelationshipMemory(applied.worldState, applied.regionalGraph, postTimeSnapshot, { currentTick: worldState.tick });
+  // applied.worldState already carries this tick's posture/memory stamp:
+  // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
+  // inputs this duplicate call used to re-derive byte-identically).
+  const memoryState = applied.worldState;
   const pulseRecord = {
     id: pulseIdFor(campaign?.id, worldState.tick),
     tick: worldState.tick,

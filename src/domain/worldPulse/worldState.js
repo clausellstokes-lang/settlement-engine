@@ -12,7 +12,13 @@ const INTERVAL_MONTHS = Object.freeze({
   one_year: 12,
 });
 
-const SEASONS = ['winter', 'spring', 'summer', 'autumn'];
+// Months 1-3 are SPRING — createDefaultWorldState seeds {month:1, season:'spring'}
+// and that seeded default is the documented intent. (The array used to start at
+// winter, so the very first tick flipped a fresh campaign spring->winter and the
+// pressure model's +0.08 winter food bias skewed early famines.) Mid-campaign
+// saves shift their season LABEL one step on the next tick; pressure bias is now
+// consistent with the label.
+const SEASONS = ['spring', 'summer', 'autumn', 'winter'];
 
 function finite(value, fallback = 0) {
   return Number.isFinite(value) ? value : fallback;
