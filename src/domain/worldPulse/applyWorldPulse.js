@@ -5,7 +5,9 @@ import {
   deriveWizardNewsEntriesFromGraphChange,
   ensureRegionalGraph,
   ensureWizardNewsFeed,
+  legacyRegionalConditionId,
   propagateRegionalEvent,
+  setRegionalImpactStatus,
   syncRelationshipChannelBundle,
 } from '../region/index.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge } from './relationshipEvolution.js';
@@ -407,6 +409,32 @@ export function applyWorldPulseOutcomes({
     }
     autoApplied.push(outcome);
     newsEntries.push(newsEntryForOutcome(outcome, tick, 'applied'));
+  }
+
+  // Ghost applied impacts: a materialized regional condition expires locally
+  // (time progression drops it), but the impact row stayed 'applied' forever —
+  // map markers, inbox Resolve buttons, and the feed kept asserting pressure
+  // that no longer exists. Now that this tick's settlement updates are final,
+  // an 'applied' impact whose TARGET is in this pulse and whose condition is
+  // gone flips to 'resolved' (the derivation below emits the resolved entry,
+  // so the DM reads the pressure easing instead of resolving a ghost).
+  // Targets absent from this pulse's saves are left alone — absence from the
+  // pulse is not evidence of expiry. Pulse-only: party/proposal injections
+  // pass advanceRegionalImpacts:false and never reconcile.
+  if (shouldAdvanceRegionalImpacts) {
+    const beforeReconcile = graph;
+    for (const impact of beforeReconcile.queuedImpacts) {
+      if (impact.status !== 'applied') continue;
+      const entry = settlementUpdates.get(String(impact.targetSettlementId));
+      if (!entry?.settlement) continue;
+      const conditionId = impact.conditionId || legacyRegionalConditionId(impact);
+      const conditions = Array.isArray(entry.settlement.activeConditions) ? entry.settlement.activeConditions : [];
+      if (conditions.some(condition => condition?.id === conditionId)) continue;
+      graph = setRegionalImpactStatus(graph, impact.id, 'resolved', { resolvedAt: now });
+    }
+    if (graph !== beforeReconcile) {
+      newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeReconcile, graph, { tick, createdAt: now }));
+    }
   }
 
   feed = appendWizardNewsEntries(feed, newsEntries);

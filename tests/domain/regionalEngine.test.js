@@ -448,6 +448,51 @@ describe('regional condition ids (collision-free + legacy resolve)', () => {
     expect(migrated.activeConditions).toHaveLength(1);
     expect(migrated.activeConditions[0].id).toBe(conditionFromRegionalImpact(a).id);
   });
+
+  it('re-queuing a re-derived impact does not stamp a fresh conditionId onto an applied legacy row', () => {
+    const [a] = twoLongImpacts();
+    const { conditionId, ...legacyImpact } = a;
+    expect(conditionId).toBeTruthy();
+    // Pre-fix save: the applied row carries no conditionId; its materialized
+    // condition sits under the legacy truncated id.
+    let graph = queueRegionalImpacts(null, [legacyImpact]);
+    graph = setRegionalImpactStatus(graph, legacyImpact.id, 'applied');
+    const settlement = applyRegionalImpact(save('buyer', 'Millcross').settlement, legacyImpact);
+    expect(settlement.activeConditions[0].id).toBe(legacyConditionId(a));
+
+    // A post-fix pulse re-derives the same impact, now stamped with the hashed id.
+    const requeued = queueRegionalImpacts(graph, [{ ...a, status: 'queued' }]);
+    const row = requeued.queuedImpacts.find(i => i.id === a.id);
+    expect(row.status).toBe('applied');
+    expect(row.conditionId).toBeUndefined();
+    // Resolve re-derives the condition from the stored row — the legacy
+    // fallback must still find the materialized condition.
+    const resolved = withoutActiveCondition(settlement, conditionFromRegionalImpact(row).id);
+    expect(resolved.activeConditions).toHaveLength(0);
+  });
+
+  it('keeps a resolved row\'s stored conditionId when a re-derivation disagrees', () => {
+    const [a] = twoLongImpacts();
+    let graph = queueRegionalImpacts(null, [{ ...a, status: 'queued' }]);
+    graph = setRegionalImpactStatus(graph, a.id, 'resolved');
+    const requeued = queueRegionalImpacts(graph, [
+      { ...a, status: 'queued', conditionId: 'condition.regional_import_shortage.someone_else' },
+    ]);
+    const row = requeued.queuedImpacts.find(i => i.id === a.id);
+    expect(row.status).toBe('resolved');
+    expect(row.conditionId).toBe(a.conditionId);
+  });
+
+  it('lets an ignored row adopt the fresh conditionId on re-queue', () => {
+    const [a] = twoLongImpacts();
+    const { conditionId: _absent, ...legacyImpact } = a;
+    let graph = queueRegionalImpacts(null, [legacyImpact]);
+    graph = setRegionalImpactStatus(graph, a.id, 'ignored');
+    const requeued = queueRegionalImpacts(graph, [{ ...a, status: 'queued' }]);
+    const row = requeued.queuedImpacts.find(i => i.id === a.id);
+    expect(row.status).toBe('ignored');
+    expect(row.conditionId).toBe(a.conditionId);
+  });
 });
 
 describe('graph channel merge', () => {
@@ -464,6 +509,85 @@ describe('graph channel merge', () => {
     graph = addRegionalChannels(graph, [{ ...raw, status: 'suggested', strength: 0.1 }]);
     expect(graph.channels[0].id).toBe(confirmed.id);
     expect(graph.channels[0].status).toBe('confirmed');
+  });
+
+  // H1 — discovery refreshes measurements, never curation: every prior
+  // status is sticky against re-added candidates, not just 'confirmed'.
+  it('keeps a DM-disabled channel disabled when discovery re-adds it', () => {
+    const raw = {
+      type: 'trade_dependency',
+      from: 'a',
+      to: 'b',
+      goods: normalizeGoodsList(['Grain']),
+    };
+    let graph = addRegionalChannels(null, [raw]);
+    graph = setRegionalChannelStatus(graph, graph.channels[0].id, 'disabled');
+    graph = addRegionalChannels(graph, [{ ...raw, strength: 0.9 }]);
+    expect(graph.channels[0].status).toBe('disabled');
+    expect(graph.channels[0].strength).toBe(0.9);
+  });
+
+  it('keeps an engine-dormant channel dormant when discovery re-adds it', () => {
+    const raw = {
+      type: 'trade_dependency',
+      from: 'a',
+      to: 'b',
+      goods: normalizeGoodsList(['Grain']),
+    };
+    let graph = addRegionalChannels(null, [raw]);
+    graph = setRegionalChannelStatus(graph, graph.channels[0].id, 'dormant');
+    graph = addRegionalChannels(graph, [{ ...raw, strength: 0.9 }]);
+    expect(graph.channels[0].status).toBe('dormant');
+  });
+
+  // H2 — the confirmed-preservation branch used to rebuild the channel from
+  // the NEW candidate: hidden visibility flipped back to the type default,
+  // and discoveredAt was re-stamped from the wall clock, rewriting history.
+  it('refreshes measurements but never curation on a confirmed hidden channel', () => {
+    const discoveredAt = '2026-01-05T00:00:00.000Z';
+    const confirmedAt = '2026-01-06T00:00:00.000Z';
+    const raw = {
+      type: 'trade_dependency',
+      from: 'a',
+      to: 'b',
+      goods: normalizeGoodsList(['Grain']),
+      status: 'confirmed',
+      strength: 0.4,
+      discoveredAt,
+      confirmedAt,
+      evidence: [{ source: 'dm', reason: 'Canonized at the table.' }],
+    };
+    let graph = addRegionalChannels(null, [raw]);
+    graph = setRegionalChannelVisibility(graph, graph.channels[0].id, 'hidden');
+
+    // Discovery re-derives the candidate: born suggested, fresh wall-clock
+    // discoveredAt, no confirmedAt, new measurements.
+    graph = addRegionalChannels(graph, [{
+      type: 'trade_dependency',
+      from: 'a',
+      to: 'b',
+      goods: normalizeGoodsList(['Grain']),
+      strength: 0.9,
+      evidence: [{ source: 'exports/imports', reason: 'Fresh discovery pass.' }],
+    }]);
+
+    const channel = graph.channels[0];
+    expect(channel.status).toBe('confirmed');
+    expect(channel.visibility).toBe('hidden');
+    expect(channel.discoveredAt).toBe(discoveredAt);
+    expect(channel.confirmedAt).toBe(confirmedAt);
+    expect(channel.strength).toBe(0.9);
+    expect(channel.evidence).toEqual([{ source: 'exports/imports', reason: 'Fresh discovery pass.' }]);
+  });
+
+  it('still adds a brand-new discovered candidate as suggested', () => {
+    const graph = addRegionalChannels(null, [{
+      type: 'trade_dependency',
+      from: 'a',
+      to: 'b',
+      goods: normalizeGoodsList(['Grain']),
+    }]);
+    expect(graph.channels[0].status).toBe('suggested');
   });
 
   it('migrates regional graphs to schema v2 with channel visibility defaults', () => {

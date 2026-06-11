@@ -215,6 +215,19 @@ function ensureCampaignWizardNews(campaign) {
   return campaign.wizardNews;
 }
 
+// The honest clock for stamping a regionally-applied condition's
+// triggeredAt.tick: a canonized world's authoritative worldState.tick,
+// otherwise the impact-aging feed clock (pulses resync the two, so the
+// feed clock is the best available pre-canon source).
+function campaignClockTick(campaign) {
+  if (!campaign) return 0;
+  if (campaign.worldState?.canonizedAt) {
+    const tick = Number(campaign.worldState.tick);
+    if (Number.isFinite(tick)) return Math.max(0, Math.floor(tick));
+  }
+  return ensureWizardNewsFeed(campaign.wizardNews).currentTick;
+}
+
 /** Migrate a single campaign object to the current schema */
 function migrateCampaign(camp) {
   if (!camp || typeof camp !== 'object') return camp;
@@ -530,8 +543,10 @@ export const createCampaignSlice = (set, get) => ({
   },
 
   /**
-   * Rebuild the structural graph from campaign settlements. Existing confirmed
-   * channels are preserved; optional discovery adds suggested P0 channels.
+   * Rebuild the structural graph from campaign settlements. Existing channel
+   * curation (status — confirmed/dormant/disabled all sticky — visibility,
+   * confirmedAt, original discoveredAt) is preserved; discovery only refreshes
+   * measurements and adds suggested P0 channels for new pairs.
    */
   rebuildCampaignRegionalGraph: (campaignId, options = {}) => {
     const { discover = true } = options;
@@ -861,7 +876,11 @@ export const createCampaignSlice = (set, get) => ({
       if (saveIdx === -1) return;
 
       const save = state.savedSettlements[saveIdx];
-      const nextSettlement = applyRegionalImpact(save.settlement, impact);
+      // No options meant conditionFromRegionalImpact fell back to tick 0:
+      // every regionally-applied condition claimed triggeredAt.tick 0
+      // forever. Stamp the campaign clock instead (batch apply reuses this
+      // action per impact, so it inherits the stamp).
+      const nextSettlement = applyRegionalImpact(save.settlement, impact, { tick: campaignClockTick(c) });
       if (!nextSettlement) return;
 
       const now = new Date().toISOString();

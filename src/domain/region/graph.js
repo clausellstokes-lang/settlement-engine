@@ -306,6 +306,15 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null) {
   });
 }
 
+/**
+ * Merge candidate channels into the graph. Discovery refreshes measurements,
+ * never curation: an existing channel keeps its status (suggested, confirmed,
+ * dormant, and disabled are all sticky), visibility, confirmedAt, and original
+ * discoveredAt, while the candidate refreshes the measurement fields
+ * (strength, confidence, goods, evidence, explanation). Only a brand-new
+ * channel takes the candidate's status (discovery candidates are born
+ * 'suggested').
+ */
 export function addRegionalChannels(graph, channels = []) {
   const current = ensureRegionalGraph(graph || {});
   const byId = new Map(current.channels.map(c => [c.id, c]));
@@ -313,10 +322,22 @@ export function addRegionalChannels(graph, channels = []) {
     const channel = normalizeChannel(raw);
     if (!channel) continue;
     const prev = byId.get(channel.id);
-    if (prev?.status === 'confirmed' && channel.status !== 'confirmed') {
-      byId.set(channel.id, { ...channel, status: 'confirmed', confirmedAt: prev.confirmedAt, updatedAt: nowIso() });
+    if (prev) {
+      byId.set(channel.id, {
+        ...prev,
+        ...channel,
+        status: prev.status,
+        visibility: prev.visibility,
+        discoveredAt: prev.discoveredAt,
+        confirmedAt: prev.confirmedAt,
+        // Provenance only upgrades: a candidate without relationship
+        // provenance must not orphan a relationship-generated channel.
+        relationshipType: channel.relationshipType || prev.relationshipType || null,
+        relationshipKey: channel.relationshipKey || prev.relationshipKey || null,
+        updatedAt: nowIso(),
+      });
     } else {
-      byId.set(channel.id, { ...(prev || {}), ...channel, updatedAt: nowIso() });
+      byId.set(channel.id, { ...channel, updatedAt: nowIso() });
     }
   }
   return ensureRegionalGraph({ ...current, channels: [...byId.values()], updatedAt: nowIso() });
@@ -508,6 +529,14 @@ export function queueRegionalImpacts(graph, impacts = []) {
       merged.ignoredAt = previous.ignoredAt;
       merged.expiredAt = previous.expiredAt;
       merged.resolvedAt = previous.resolvedAt;
+    }
+    // An applied/resolved row's conditionId is load-bearing: its materialized
+    // condition may live under the legacy truncated id (pre-hash rows carry no
+    // conditionId at all). A re-derivation must not stamp the fresh hashed id
+    // over it, or resolve would miss the real condition.
+    if (previous && ['applied', 'resolved'].includes(previous.status)) {
+      if ('conditionId' in previous) merged.conditionId = previous.conditionId;
+      else delete merged.conditionId;
     }
     byId.set(normalized.id, merged);
   }

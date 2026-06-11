@@ -122,6 +122,82 @@ describe('campaignSlice regional impact lifecycle', () => {
     )).toBe(true);
   });
 
+  test('applying an impact stamps the condition with the canonized world tick, not 0', () => {
+    const store = makeStore();
+    const impact = {
+      id: 'regional_impact.tick7',
+      kind: 'import_shortage',
+      sourceSettlementId: 'supplier',
+      targetSettlementId: 'buyer',
+      channelId: 'channel.trade_dependency.supplier.buyer.grain',
+      channelType: 'trade_dependency',
+      goods: normalizeGoodsList(['Bulk grain and foodstuffs']),
+      severity: 0.6,
+      status: 'queued',
+      sourceChange: { kind: 'export_lost' },
+      explanation: 'Granary Ford can no longer reliably supply grain.',
+    };
+
+    store.setState(state => {
+      state.savedSettlements = [{
+        id: 'buyer',
+        name: 'Millcross',
+        tier: 'town',
+        settlement: settlement('Millcross'),
+        campaignState: { phase: 'canon', eventLog: [], systemState: null, locks: {} },
+      }];
+      state.campaigns = [{
+        id: 'camp-1',
+        name: 'Trade Belt',
+        settlementIds: ['supplier', 'buyer'],
+        worldState: { tick: 7, canonizedAt: '2026-06-01T00:00:00.000Z' },
+        regionalGraph: ensureRegionalGraph({ queuedImpacts: [impact] }),
+      }];
+    });
+
+    store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
+    const condition = store.getState().savedSettlements[0].settlement.activeConditions[0];
+    expect(condition.triggeredAt.tick).toBe(7);
+  });
+
+  test('without a canonized world the feed clock stamps the condition', () => {
+    const store = makeStore();
+    const impact = {
+      id: 'regional_impact.feedtick',
+      kind: 'import_shortage',
+      sourceSettlementId: 'supplier',
+      targetSettlementId: 'buyer',
+      channelId: 'channel.trade_dependency.supplier.buyer.grain',
+      channelType: 'trade_dependency',
+      goods: normalizeGoodsList(['Bulk grain and foodstuffs']),
+      severity: 0.6,
+      status: 'queued',
+      sourceChange: { kind: 'export_lost' },
+      explanation: 'Granary Ford can no longer reliably supply grain.',
+    };
+
+    store.setState(state => {
+      state.savedSettlements = [{
+        id: 'buyer',
+        name: 'Millcross',
+        tier: 'town',
+        settlement: settlement('Millcross'),
+        campaignState: { phase: 'canon', eventLog: [], systemState: null, locks: {} },
+      }];
+      state.campaigns = [{
+        id: 'camp-1',
+        name: 'Trade Belt',
+        settlementIds: ['supplier', 'buyer'],
+        wizardNews: { currentTick: 3, entries: [] },
+        regionalGraph: ensureRegionalGraph({ queuedImpacts: [impact] }),
+      }];
+    });
+
+    store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
+    const condition = store.getState().savedSettlements[0].settlement.activeConditions[0];
+    expect(condition.triggeredAt.tick).toBe(3);
+  });
+
   test('batch actions apply or ignore every queued regional impact', () => {
     const store = makeStore();
     const impacts = ['one', 'two'].map(id => ({

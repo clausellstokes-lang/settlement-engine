@@ -398,6 +398,28 @@ function impactForChannel(channel, localDelta, change) {
   return null;
 }
 
+// R2 medium: a same-id collision keeps the STRONGEST impact, not the first
+// derived. Two rules can mint one impact id in a single propagation (e.g.
+// population_loss and tier_demotion through one trade_dependency channel both
+// produce import_shortage over the same goods — the id carries no change
+// kind), and the fixed channel x change iteration order let the weaker
+// derivation shadow the stronger one. Returns the surviving impact plus the
+// one it displaced (if any) so the wave loop can keep its frontier honest.
+function admitStrongest(out, byId, next) {
+  const existing = byId.get(next.id);
+  if (!existing) {
+    byId.set(next.id, next);
+    out.push(next);
+    return { kept: next, displaced: null };
+  }
+  if ((next.severity || 0) <= (existing.severity || 0)) {
+    return { kept: existing, displaced: null };
+  }
+  byId.set(next.id, next);
+  out[out.indexOf(existing)] = next;
+  return { kept: next, displaced: existing };
+}
+
 export function deriveRegionalImpacts(localDelta, graph, options = {}) {
   if (!localDelta?.sourceSettlementId) return [];
   const current = ensureRegionalGraph(graph || {});
@@ -407,13 +429,11 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
     types: options.types || [...REGIONAL_RULE_TYPES],
   });
   const out = [];
-  const seen = new Set();
+  const byId = new Map();
   for (const channel of channels) {
     for (const change of localDelta.changes || []) {
       const next = impactForChannel(channel, localDelta, change);
-      if (!next || seen.has(next.id)) continue;
-      seen.add(next.id);
-      out.push(next);
+      if (next) admitStrongest(out, byId, next);
     }
   }
   const maxDepth = Math.max(0, Math.floor(Number.isFinite(options.maxDepth) ? options.maxDepth : 1));
@@ -428,10 +448,18 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
       });
       for (const channel of waveChannels) {
         const next = waveImpactForChannel(channel, sourceImpact, depth, waveDecay);
-        if (!next || seen.has(next.id)) continue;
-        seen.add(next.id);
-        out.push(next);
-        nextFrontier.push(next);
+        if (!next) continue;
+        const { kept, displaced } = admitStrongest(out, byId, next);
+        if (kept !== next) continue;
+        if (displaced) {
+          // Wave ids embed their depth, so a displaced same-id impact was
+          // minted in THIS depth pass — swap it in the pending frontier.
+          const at = nextFrontier.indexOf(displaced);
+          if (at >= 0) nextFrontier[at] = next;
+          else nextFrontier.push(next);
+        } else {
+          nextFrontier.push(next);
+        }
       }
     }
     frontier = nextFrontier;
@@ -440,6 +468,65 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
   // than wall-clock, so a replay is byte-identical (falls back to each impact's
   // own createdAt when `now` isn't threaded).
   if (now) for (const item of out) item.createdAt = now;
+  return out;
+}
+
+// H7: one local shock must queue ONE impact per (target, kind, source event).
+// A single canon event at a supplier with confirmed trade_dependency AND
+// trade_route (or export_market) channels toward the same target — or a
+// direct impact plus a wave echo — derived several same-kind impacts for one
+// target, and the apply path materializes one condition per impact, so a
+// single shock stacked (post-R1 the condition ids are guaranteed distinct,
+// which made the stacking worse, not better). Every impact in one
+// propagation descends from the same source event (one localDelta), so the
+// fold key is (target, kind): the strongest severity wins, goods lists
+// merge, and the folded channels stay visible on the kept impact so the DM
+// still sees every causal path. DIFFERENT kinds from one event (an
+// import_shortage and a route_disruption) are distinct consequences and both
+// queue. Identity no-op when nothing folds.
+export function foldSameShockImpacts(impacts = []) {
+  const groups = new Map();
+  for (const impactItem of impacts) {
+    const key = `${impactItem.targetSettlementId}:${impactItem.kind}`;
+    const group = groups.get(key);
+    if (group) group.push(impactItem);
+    else groups.set(key, [impactItem]);
+  }
+  if (groups.size === impacts.length) return impacts;
+  const out = [];
+  for (const group of groups.values()) {
+    if (group.length === 1) {
+      out.push(group[0]);
+      continue;
+    }
+    let winner = group[0];
+    for (const candidate of group) {
+      if ((candidate.severity || 0) > (winner.severity || 0)) winner = candidate;
+    }
+    const folded = group.filter(item => item !== winner);
+    const goods = (winner.goods || []).map(g => ({ ...g }));
+    for (const item of folded) {
+      for (const good of item.goods || []) {
+        if (!goods.some(g => g.id === good.id)) goods.push({ ...good });
+      }
+    }
+    const foldedChannels = [
+      ...(winner.foldedChannels || []),
+      ...folded.map(item => ({
+        impactId: item.id,
+        channelId: item.channelId,
+        channelType: item.channelType,
+        severity: item.severity,
+      })),
+    ];
+    const channelText = [...new Set(folded.map(item => String(item.channelType || 'unknown').replace(/_/g, ' ')))].join(', ');
+    out.push({
+      ...winner,
+      goods,
+      foldedChannels,
+      explanation: `${winner.explanation} The same shock also pressed through ${channelText}.`,
+    });
+  }
   return out;
 }
 
@@ -567,8 +654,9 @@ function regionalConditionId(impactItem) {
 
 // Pre-fix derivation, kept verbatim: impacts stored in saves before the hash
 // fix carry no conditionId, and their materialized conditions sit under this
-// truncated id — resolve must keep finding them.
-function legacyRegionalConditionId(impactItem) {
+// truncated id — resolve must keep finding them. Exported (R2) for
+// applied-impact reconciliation; the derivation itself is unchanged.
+export function legacyRegionalConditionId(impactItem) {
   return `condition.${archetypeForImpact(impactItem)}.${idPart(impactItem.id)}`;
 }
 
@@ -655,7 +743,10 @@ export function propagateRegionalEvent(args = {}) {
   } = args;
   const current = ensureRegionalGraph(graph || {});
   const localDelta = deriveLocalDelta(beforeSettlement, afterSettlement, { event });
-  const impacts = deriveRegionalImpacts(localDelta, current, { includeSuggested, maxDepth, waveDecay, now });
+  const derived = deriveRegionalImpacts(localDelta, current, { includeSuggested, maxDepth, waveDecay, now });
+  // H7: fold same-shock duplicates before anything downstream sees them — the
+  // queue, the event log, and the bundles all record the folded set.
+  const impacts = foldSameShockImpacts(derived);
   const bundles = aggregateImpactBundles(impacts);
   const focusDecisions = bundles.map(bundle => ({
     bundleId: bundle.id,
