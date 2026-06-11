@@ -394,6 +394,12 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
   const settlementTickStates = { ...(worldState?.settlementTickStates || {}) };
   const candidates = [];
   const driftBySettlement = {};
+  // Tier candidate ids are tick-suffixed, so an unresolved tier proposal would
+  // gain a duplicate every eligible tick: one pending tier proposal per
+  // settlement. Streak tracking continues so a resolved proposal re-emits.
+  const pendingTierProposals = new Set((worldState?.proposals || [])
+    .filter(proposal => proposal?.status === 'pending' && proposal?.outcome?.tierChange?.saveId != null)
+    .map(proposal => String(proposal.outcome.tierChange.saveId)));
 
   for (const item of snapshot?.settlements || []) {
     const previous = settlementTickStates[item.id] || {};
@@ -408,7 +414,7 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
         lastEvaluatedTick: tick,
       };
       const candidate = tierCandidate(item, tierDrift, tick);
-      if (candidate) candidates.push(candidate);
+      if (candidate && !pendingTierProposals.has(String(item.id))) candidates.push(candidate);
     }
     settlementTickStates[item.id] = {
       ...previous,
@@ -431,6 +437,12 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
 export function applyTierOutcomeToSettlement(settlement, outcome) {
   if (!settlement || !outcome?.tierChange) return settlement;
   const { fromTier, toTier, direction } = outcome.tierChange;
+  // Self-contained re-verify (same contract as applyInstitutionLifecycleOutcome):
+  // proposals re-apply this from the stored outcome, possibly many ticks after
+  // the candidate fired. A stale fromTier must not rewind the tier — that runs
+  // roster surgery in the wrong direction and writes a bogus tierHistory entry.
+  const currentTier = settlement.tier || popToTier(settlement.population || 0);
+  if (currentTier !== fromTier) return settlement;
   let institutions = Array.isArray(settlement.institutions) ? [...settlement.institutions] : [];
   const institutionFates = [];
 

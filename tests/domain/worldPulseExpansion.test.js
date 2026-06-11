@@ -106,6 +106,55 @@ describe('World Pulse expansion systems', () => {
     expect(updated.get('b').population).toBeGreaterThan(800);
   });
 
+  test('siege_lifted is recovery: growth bonus, never the emigration gate; an active siege still declines', () => {
+    // H6 pin: the post-siege RECOVERY condition used to substring-match
+    // /siege/ — breaking a siege flipped the settlement into deterministic
+    // mass emigration. Same pressures for all three settlements; only the
+    // condition archetype differs.
+    const lifted = item('lifted', settlement('Liftedholm', {
+      population: 2000,
+      activeConditions: [{ archetype: 'siege_lifted' }],
+    }));
+    const besieged = item('siege', settlement('Siegegard', {
+      population: 2000,
+      activeConditions: [{ archetype: 'war_pressure' }],
+    }));
+    const authored = item('custom', settlement('Customvale', {
+      population: 2000,
+      activeConditions: [{ archetype: 'custom_crisis', affectedSystems: ['food_security'] }],
+    }));
+    const snapshot = {
+      worldState: { tick: 3, simulationRules: normalizeSimulationRules() },
+      regionalGraph: { channels: [], edges: [] },
+      settlements: [lifted, besieged, authored],
+      byId: new Map([['lifted', lifted], ['siege', besieged], ['custom', authored]]),
+    };
+    const pressures = pressureIndex(['lifted', 'siege', 'custom'].flatMap(settlementId => [
+      { settlementId, kind: 'food', score: 0.95 },
+      { settlementId, kind: 'conflict', score: 0.9 },
+      { settlementId, kind: 'disease', score: 0.65 },
+      { settlementId, kind: 'trade', score: 0.8 },
+      { settlementId, kind: 'legitimacy', score: 0.7 },
+    ]));
+
+    const candidates = evaluatePopulationDynamics(snapshot, pressures, { tick: 4, interval: 'one_year' });
+
+    // Recovery: the +0.002 bonus lands and the gate never fires.
+    const liftedCandidate = candidates.find(candidate => candidate.targetSaveId === 'lifted');
+    expect(liftedCandidate?.candidateType).toBe('population_growth');
+    expect(candidates.some(candidate => candidate.targetSaveId === 'lifted' && candidate.candidateType === 'population_emigration')).toBe(false);
+
+    // An ACTIVE siege-class archetype still drives decline into the gate.
+    const siegeCandidate = candidates.find(candidate => candidate.targetSaveId === 'siege');
+    expect(siegeCandidate?.candidateType).toBe('population_emigration');
+    expect(siegeCandidate.populationDeltas.find(delta => delta.saveId === 'siege').delta).toBeLessThan(0);
+
+    // DM-authored custom_crisis contributes via its affectedSystems.
+    const customCandidate = candidates.find(candidate => candidate.targetSaveId === 'custom');
+    expect(customCandidate?.candidateType).toBe('population_decline');
+    expect(customCandidate.populationDeltas.find(delta => delta.saveId === 'custom').delta).toBeLessThan(0);
+  });
+
   test('structural population outcomes propagate through confirmed regional channels', () => {
     const source = item('a', settlement('Ashford', { population: 2000 }));
     const dest = item('b', settlement('Briarwatch', { population: 800 }));

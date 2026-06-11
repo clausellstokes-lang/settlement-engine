@@ -858,7 +858,12 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
       for (const targetSaveId of spreadTargetsFor(snapshot, stressor).slice(0, 3)) {
         const targetKey = `${stressor.type}:${targetSaveId}`;
         if (existingKeys.has(targetKey)) continue;
-        const spreadSeverity = clamp01(stressor.severity * 0.72);
+        // The upserted stressor is ONE shared record: the spread target joins
+        // affectedSettlementIds and is simulated at the record's full severity.
+        // The candidate/news/roll surfaces must report THAT severity — the old
+        // decayed 0.72× display number was never persisted (max() always kept
+        // the origin severity). Per-target attenuation (a severity map read by
+        // foodStockpile/pressure consumers) is the R3 follow-up.
         candidates.push({
           id: `candidate.stressor.spread.${stablePart(stressor.id)}.${stablePart(targetSaveId)}.${tick}`,
           type: 'stressor',
@@ -867,18 +872,17 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
           ruleFamily: 'stressor',
           targetSaveId,
           affectedSettlementIds: [...new Set([...(stressor.affectedSettlementIds || []), targetSaveId])],
-          severity: spreadSeverity,
+          severity: stressor.severity,
           probability: Math.min(0.34, 0.05 + stressor.severity * 0.22),
-          applyMode: spreadSeverity >= 0.78 ? 'proposal' : 'auto',
+          applyMode: stressor.severity >= 0.78 ? 'proposal' : 'auto',
           headline: `${stressor.label} may spread`,
-          summary: `${stressor.label} can move through ${stressor.spreadChannels.slice(0, 2).join(' and ').replace(/_/g, ' ')} channels.`,
+          summary: `${stressor.label} can move at full strength through ${stressor.spreadChannels.slice(0, 2).join(' and ').replace(/_/g, ' ')} channels.`,
           reasons: [
             `${stressor.label} is active at severity ${stressor.severity.toFixed(2)}.`,
-            `A plausible spread channel reaches another settlement.`,
+            `A plausible spread channel reaches another settlement; the shared crisis arrives undiminished.`,
           ],
           stressor: normalizeStressor({
             ...stressor,
-            severity: Math.max(stressor.severity, spreadSeverity),
             affectedSettlementIds: [...new Set([...(stressor.affectedSettlementIds || []), targetSaveId])],
           }),
           metadata: {

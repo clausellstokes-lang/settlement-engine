@@ -8,6 +8,7 @@ import {
   advanceRegionalImpacts,
   appendWizardNewsEntries,
   applyRegionalImpact,
+  conditionFromRegionalImpact,
   deriveGraphWithDiscoveredCandidates,
   deriveLocalDelta,
   deriveRegionalImpacts,
@@ -29,7 +30,7 @@ import {
   summarizeWizardNews,
   WIZARD_NEWS_SIGNIFICANCE,
 } from '../../src/domain/region/index.js';
-import { findActiveCondition } from '../../src/domain/activeConditions.js';
+import { findActiveCondition, withoutActiveCondition } from '../../src/domain/activeConditions.js';
 
 function save(id, name, settlement = {}) {
   return {
@@ -336,6 +337,116 @@ describe('regional propagation', () => {
     expect(wave?.kind).toBe('route_disruption');
     expect(wave.waveDepth).toBe(1);
     expect(wave.severity).toBeLessThan(direct.severity);
+  });
+});
+
+// C1 — condition ids minted from impact ids must be collision-free even though
+// the readable idPart() prefix truncates at 80 chars (impact ids embed
+// event.channel.kind.goods and routinely exceed that). Pre-fix saves hold
+// impacts without a conditionId whose conditions sit under the truncated
+// legacy id; the resolve path (re-derive condition, remove by id — mirrors
+// campaignSlice.resolveRegionalImpact) must keep finding those.
+describe('regional condition ids (collision-free + legacy resolve)', () => {
+  // Long enough that idPart()'s 80-char cap cuts the condition suffix before
+  // the channel/kind/goods parts — the legacy collision zone.
+  const LONG_EVENT_ID = `evt_${'x'.repeat(90)}`;
+
+  function legacyIdPart(value) {
+    return String(value || 'unknown')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '_')
+      .replace(/^_+|_+$/g, '')
+      .slice(0, 80) || 'unknown';
+  }
+
+  function legacyConditionId(impact) {
+    return `condition.regional_import_shortage.${legacyIdPart(impact.id)}`;
+  }
+
+  function longDelta() {
+    return {
+      id: 'delta.supplier.long',
+      sourceSettlementId: 'supplier',
+      sourceSettlementName: 'Granary Ford',
+      cause: { event: { id: LONG_EVENT_ID, type: 'TIER_CHANGE' } },
+      changes: [{ kind: 'tier_demotion', magnitude: 0.8, source: 'settlement_tier' }],
+    };
+  }
+
+  function twoLongImpacts() {
+    const graph = addRegionalChannels(null, [
+      { type: 'trade_dependency', from: 'supplier', to: 'buyer', goods: normalizeGoodsList(['Grain']), status: 'confirmed', strength: 1, confidence: 1 },
+      { type: 'trade_dependency', from: 'supplier', to: 'buyer', goods: normalizeGoodsList(['Iron ore']), status: 'confirmed', strength: 1, confidence: 1 },
+    ]);
+    const impacts = deriveRegionalImpacts(longDelta(), graph);
+    expect(impacts).toHaveLength(2);
+    return impacts;
+  }
+
+  it('mints distinct condition ids for impacts whose ids differ only beyond char 80', () => {
+    const [a, b] = twoLongImpacts();
+    expect(a.id).not.toBe(b.id);
+    // Premise: the legacy truncated derivation collides on this pair.
+    expect(legacyConditionId(a)).toBe(legacyConditionId(b));
+    expect(conditionFromRegionalImpact(a).id).not.toBe(conditionFromRegionalImpact(b).id);
+  });
+
+  it('keeps condition ids identical across re-derivations of the same impact', () => {
+    const first = twoLongImpacts().map(i => conditionFromRegionalImpact(i).id);
+    const second = twoLongImpacts().map(i => conditionFromRegionalImpact(i).id);
+    expect(second).toEqual(first);
+  });
+
+  it('stamps every minted impact (direct and wave) with the condition id resolve re-derives', () => {
+    const goods = normalizeGoodsList(['Grain']);
+    const graph = addRegionalChannels(null, [
+      { type: 'trade_dependency', from: 'supplier', to: 'buyer', goods, status: 'confirmed', strength: 1, confidence: 1 },
+      { type: 'trade_route', from: 'buyer', to: 'market', goods, status: 'confirmed', strength: 0.8, confidence: 1 },
+    ]);
+    const impacts = deriveRegionalImpacts(longDelta(), graph, { maxDepth: 1, waveDecay: 0.5 });
+    expect(impacts.length).toBeGreaterThan(1);
+    for (const impactItem of impacts) {
+      expect(impactItem.conditionId).toBeTruthy();
+      expect(conditionFromRegionalImpact(impactItem).id).toBe(impactItem.conditionId);
+    }
+  });
+
+  it('re-applying the same impact replaces its condition instead of duplicating it', () => {
+    const [a] = twoLongImpacts();
+    const settlement = save('buyer', 'Millcross').settlement;
+    const twice = applyRegionalImpact(applyRegionalImpact(settlement, a), a);
+    expect(twice.activeConditions).toHaveLength(1);
+    expect(twice.activeConditions[0].id).toBe(conditionFromRegionalImpact(a).id);
+  });
+
+  it('resolving one impact removes ONLY its condition, not the colliding-prefix sibling', () => {
+    const [a, b] = twoLongImpacts();
+    const settlement = save('buyer', 'Millcross').settlement;
+    const applied = applyRegionalImpact(applyRegionalImpact(settlement, a), b);
+    expect(applied.activeConditions).toHaveLength(2);
+    const resolved = withoutActiveCondition(applied, conditionFromRegionalImpact(a).id);
+    expect(resolved.activeConditions).toHaveLength(1);
+    expect(resolved.activeConditions[0].id).toBe(conditionFromRegionalImpact(b).id);
+  });
+
+  it('a condition materialized under the legacy truncated id still resolves', () => {
+    const [a] = twoLongImpacts();
+    // Pre-fix saves stored impacts without a conditionId.
+    const { conditionId, ...legacyImpact } = a;
+    expect(conditionId).toBeTruthy();
+    const settlement = applyRegionalImpact(save('buyer', 'Millcross').settlement, legacyImpact);
+    expect(settlement.activeConditions[0].id).toBe(legacyConditionId(a));
+    const resolved = withoutActiveCondition(settlement, conditionFromRegionalImpact(legacyImpact).id);
+    expect(resolved.activeConditions).toHaveLength(0);
+  });
+
+  it('re-applying with the hashed id migrates a legacy-id condition instead of duplicating it', () => {
+    const [a] = twoLongImpacts();
+    const { conditionId: _ignored, ...legacyImpact } = a;
+    const legacyApplied = applyRegionalImpact(save('buyer', 'Millcross').settlement, legacyImpact);
+    const migrated = applyRegionalImpact(legacyApplied, a);
+    expect(migrated.activeConditions).toHaveLength(1);
+    expect(migrated.activeConditions[0].id).toBe(conditionFromRegionalImpact(a).id);
   });
 });
 

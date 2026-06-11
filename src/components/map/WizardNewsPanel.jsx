@@ -206,6 +206,13 @@ export default function WizardNewsPanel({ campaign }) {
   const [chronicleBusy, setChronicleBusy] = useState(false);
   const [chronicleError, setChronicleError] = useState('');
   const chronicles = Array.isArray(campaign?.chronicles) ? campaign.chronicles : [];
+  // Ground the chronicle on the latest tick that HAS entries: the feed clock
+  // (currentTick) can sit ahead of the newest entry after manual impact
+  // advances, and a paid generation must never run on an empty window.
+  const latestEntryTick = useMemo(
+    () => summary.feed.entries.reduce((max, entry) => Math.max(max, entry.tick || 0), 0),
+    [summary.feed.entries],
+  );
   // Resolve the feed's settlement save ids to names so each item can say which
   // settlement it concerns.
   const nameById = useMemo(() => {
@@ -231,13 +238,13 @@ export default function WizardNewsPanel({ campaign }) {
     const result = await requestCampaignChronicle({
       campaign,
       snapshot,
-      tick: summary.feed.currentTick,
+      tick: latestEntryTick,
     });
     if (result.error || !result.chronicle) {
       setChronicleError(result.error || 'Chronicle generation failed.');
     } else {
       appendCampaignChronicle(campaign.id, {
-        tick: summary.feed.currentTick,
+        tick: latestEntryTick,
         prose: result.chronicle,
       });
       if (Number.isFinite(result.creditsRemaining)) setCreditBalance(result.creditsRemaining);

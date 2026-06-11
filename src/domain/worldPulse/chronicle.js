@@ -26,9 +26,14 @@ const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
  */
 export function buildChronicleGrounding({ wizardNews, worldState, snapshot, tick = null, lookback = 1 } = {}) {
   const allEntries = Array.isArray(wizardNews?.entries) ? wizardNews.entries : [];
+  // Default window: the latest tick that HAS entries — the feed clock can sit
+  // ahead of the newest entry (manual impact advances, entry-less pulses),
+  // which would ground the paid chronicle on an empty window.
   const latestTick = tick != null
     ? tick
-    : allEntries.reduce((max, e) => Math.max(max, e.tick || 0), worldState?.tick ?? 0);
+    : allEntries.length
+      ? allEntries.reduce((max, e) => Math.max(max, e.tick || 0), 0)
+      : (worldState?.tick ?? 0);
   const minTick = tick != null ? tick : latestTick - Math.max(0, lookback - 1);
 
   const entries = allEntries.filter(e => (e.tick ?? 0) >= minTick && (e.tick ?? 0) <= latestTick);

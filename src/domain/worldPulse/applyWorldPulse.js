@@ -1,10 +1,10 @@
 import { withActiveCondition } from '../activeConditions.js';
 import {
   advanceRegionalImpacts,
-  advanceWizardNewsFeed,
   appendWizardNewsEntries,
   deriveWizardNewsEntriesFromGraphChange,
   ensureRegionalGraph,
+  ensureWizardNewsFeed,
   propagateRegionalEvent,
   syncRelationshipChannelBundle,
 } from '../region/index.js';
@@ -233,13 +233,31 @@ export function applyWorldPulseOutcomes({
   let state = worldState;
   const rules = normalizeSimulationRules(simulationRules || worldState?.simulationRules || snapshot?.worldState?.simulationRules);
   const propagationDepth = propagationDepthForRules(rules);
-  let feed = !advanceNewsTick
-    ? (wizardNews || snapshot.campaign?.wizardNews)
-    : advanceWizardNewsFeed(wizardNews || snapshot.campaign?.wizardNews, 1);
+  // worldState.tick is the authoritative clock: SYNC currentTick to it (not
+  // +1) so a manual impact-advance press cannot permanently skew which tick
+  // this pulse's entries (all stamped with `tick`) group and ground under.
+  let feed = ensureWizardNewsFeed(wizardNews || snapshot.campaign?.wizardNews);
+  if (advanceNewsTick) {
+    feed = {
+      ...feed,
+      currentTick: Number.isFinite(tick) ? Math.max(0, Math.floor(tick)) : feed.currentTick + 1,
+    };
+  }
   const settlementUpdates = new Map(settlementMap ? [...settlementMap.entries()] : []);
   const autoApplied = [];
   const proposals = [];
   const newsEntries = [];
+
+  // Time advances BEFORE this tick's propagation queues: the previous pulse's
+  // delayed impacts mature now, while impacts the loop below queues stay
+  // un-aged until the NEXT pulse — delayTicks:1 means "next tick", never
+  // "later this same tick" (the party/proposal paths already pass
+  // advanceRegionalImpacts:false for the same reason).
+  if (shouldAdvanceRegionalImpacts && propagationDepth > 0) {
+    const beforeRegionalAdvance = graph;
+    graph = advanceRegionalImpacts(graph, 1, { currentTick: tick });
+    newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeRegionalAdvance, graph, { tick, createdAt: now }));
+  }
 
   for (const outcome of outcomes) {
     if (outcome.applyMode === 'proposal') {
@@ -391,11 +409,6 @@ export function applyWorldPulseOutcomes({
     newsEntries.push(newsEntryForOutcome(outcome, tick, 'applied'));
   }
 
-  if (shouldAdvanceRegionalImpacts && propagationDepth > 0) {
-    const beforeRegionalAdvance = graph;
-    graph = advanceRegionalImpacts(graph, 1, { currentTick: tick });
-    newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeRegionalAdvance, graph, { tick, createdAt: now }));
-  }
   feed = appendWizardNewsEntries(feed, newsEntries);
   state = refreshRelationshipMemory(state, graph, snapshot, { currentTick: tick });
 

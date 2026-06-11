@@ -15,7 +15,7 @@ import {
   queueRegionalImpacts,
 } from './graph.js';
 import { goodCriticality } from './goodsCatalog.js';
-import { withActiveCondition } from '../activeConditions.js';
+import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
 
 const REGIONAL_RULE_TYPES = new Set([
   'trade_dependency',
@@ -44,6 +44,15 @@ function idPart(value) {
     .replace(/[^a-z0-9]+/g, '_')
     .replace(/^_+|_+$/g, '')
     .slice(0, 80) || 'unknown';
+}
+
+// Same 6-char base36 digest idiom as activeConditions.js (conditionIdFromArchetype) —
+// deterministic, input-only, so re-derivations of the same id always agree.
+function shortHash(value) {
+  const s = String(value);
+  let h = 0;
+  for (let i = 0; i < s.length; i += 1) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  return Math.abs(h).toString(36).slice(0, 6);
 }
 
 function maxGoodCriticality(goods = []) {
@@ -99,8 +108,10 @@ function severityFor(channel, change, goods = [], multiplier = 1) {
 function impact(channel, localDelta, change, kind, goods, detail = {}) {
   const severity = detail.severity ?? severityFor(channel, change, goods, detail.severityMultiplier ?? 1);
   if (severity < 0.08) return null;
+  const id = impactId(channel, localDelta, kind, goods);
   return {
-    id: impactId(channel, localDelta, kind, goods),
+    id,
+    conditionId: regionalConditionId({ id, kind }),
     kind,
     sourceSettlementId: channel.from,
     sourceSettlementName: localDelta.sourceSettlementName,
@@ -224,8 +235,10 @@ function waveImpactForChannel(channel, sourceImpact, depth, decay) {
   const severity = clamp01((sourceImpact.severity || 0) * clamp01(channel.strength ?? 0.5) * decay);
   if (severity < 0.08) return null;
   const nextPath = [...path, String(channel.to)];
+  const id = waveImpactId(channel, sourceImpact, depth, kind, goods);
   return {
-    id: waveImpactId(channel, sourceImpact, depth, kind, goods),
+    id,
+    conditionId: regionalConditionId({ id, kind }),
     kind,
     sourceSettlementId: channel.from,
     sourceSettlementName: sourceImpact.targetSettlementName || sourceImpact.targetSettlementId || channel.from,
@@ -543,6 +556,22 @@ function affectedSystemsForImpact(impactItem) {
   return ['trade_connectivity'];
 }
 
+// C1: idPart() caps at 80 chars and impact ids (event.channel.kind.goods)
+// routinely exceed that, so two distinct impacts could mint ONE condition id —
+// the second apply replaced the first's condition and resolving either
+// stripped the other's effect. The minted conditionId keeps the readable
+// prefix but appends a hash of the FULL impact id.
+function regionalConditionId(impactItem) {
+  return `condition.${archetypeForImpact(impactItem)}.${idPart(impactItem.id)}_${shortHash(impactItem.id)}`;
+}
+
+// Pre-fix derivation, kept verbatim: impacts stored in saves before the hash
+// fix carry no conditionId, and their materialized conditions sit under this
+// truncated id — resolve must keep finding them.
+function legacyRegionalConditionId(impactItem) {
+  return `condition.${archetypeForImpact(impactItem)}.${idPart(impactItem.id)}`;
+}
+
 export function conditionFromRegionalImpact(impactItem, options = {}) {
   const goods = impactItem.goods?.length ? impactItem.goods.map(g => g.label).join(', ') : null;
   const label =
@@ -560,7 +589,7 @@ export function conditionFromRegionalImpact(impactItem, options = {}) {
     impactItem.kind === 'religious_pressure' ? 'Regional religious pressure' :
     'Regional pressure';
   return {
-    id: `condition.${archetypeForImpact(impactItem)}.${idPart(impactItem.id)}`,
+    id: impactItem.conditionId || legacyRegionalConditionId(impactItem),
     archetype: archetypeForImpact(impactItem),
     label,
     description: impactItem.explanation,
@@ -586,7 +615,14 @@ export function conditionFromRegionalImpact(impactItem, options = {}) {
 
 export function applyRegionalImpact(settlement, impactItem, options = {}) {
   if (!settlement || !impactItem) return settlement;
-  return withActiveCondition(settlement, conditionFromRegionalImpact(impactItem, options));
+  const condition = conditionFromRegionalImpact(impactItem, options);
+  // Re-applying an impact whose condition was materialized under the legacy
+  // truncated id must migrate it, not leave a duplicate beside the hashed id.
+  const legacyId = legacyRegionalConditionId(impactItem);
+  const base = condition.id === legacyId
+    ? settlement
+    : withoutActiveCondition(settlement, legacyId);
+  return withActiveCondition(base, condition);
 }
 
 /**

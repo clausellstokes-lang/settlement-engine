@@ -16,7 +16,9 @@
 > Wave 6 #1; the world-pulse power-transfer write-back grazes Wave 7's owner-gated dossier write-back item.
 > Waves 5–6 remainder next; Wave 7 awaits owner sign-off; Wave 8 (structural prevention —
 > entity ids, frozen/live + producer/consumer manifests, crisis-triple sync) proposed below
-> under the same sign-off gate.
+> under the same sign-off gate. **Regional waves R1–R4** (2026-06-11, from
+> `docs/REGIONAL_ENGINE_AUDIT.md` — the paid inter-settlement layer, owner-prioritized) joined the
+> program below; R1 is in flight.
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.
@@ -164,6 +166,54 @@ currently depends on generator call ORDER — servicesGenerator had to be restru
 per-subsystem forks would make refactors safe), and a **convergence audit** of the stockpile
 dynamics (the tithe/drawdown see-saw shows the discrete-time branches lack hysteresis; soak
 verifies boundedness, not convergence).
+
+## Regional waves R1–R4 — the paid inter-settlement layer (added 2026-06-11)
+
+Source: `docs/REGIONAL_ENGINE_AUDIT.md` — eight-dimension adversarially-verified review of
+`src/domain/region/`, the world-pulse cross-settlement layer, the gen→sim neighbour seam, and the
+DM-facing regional surfaces. 23 of 24 critical/high findings confirmed by probe (3 critical).
+Architecture verdict 8/10 (confirmed-channels-only, terminal statuses, bounded waves, conservation
+all hold); truthfulness 5.5/10 — the local simulator's bug classes recur at the regional seams.
+Owner priority: this layer is the paid feature. Same method as every wave: fix + pin → gate →
+adversarial verify (the soak and the regional suites are load-bearing here).
+
+**R1 — Truth-critical (the paid surfaces stop lying).** Condition-id collision (C1,
+`propagation.js` 80-char truncation — resolve strips a sibling impact's effect); tier-proposal
+apply guard (C2, `tierResourceDynamics.js` — mirror `applyInstitutionLifecycleOutcome`'s
+re-verify-current-state contract); single coherent tick clock + chronicle grounded on the tick
+that has the entries (C3, `campaignSlice`/`applyWorldPulse`/`chronicle`/`WizardNewsPanel`);
+realm-arc throttle reads the right end of the feed (H17, `slice(0,80)`); pulse ages queued
+impacts BEFORE queueing this tick's propagation (H9); stressor-spread severity reported
+truthfully (H8 — per-target attenuation deferred to R3: its consumer, foodStockpile, is in
+flight elsewhere); pressure and population condition-matching by archetype id, never prose (H5
+'Warehouse collapse'≠war, H6 siege_lifted≠siege).
+
+**R2 — Rediscovery & lifecycle integrity.** Discover merges preserve ALL DM-set channel fields
+and non-confirmed statuses (H1/H2); same-shock dedupe across channel types + keep-strongest on
+id collision (H7 + medium); applied impacts reconcile when their materialized condition expires
+locally; `triggeredAt.tick` stamped from the feed tick on apply.
+
+**R3 — The neighbour seam & relationship fairness.** `trade_partners` label canonicalized
+engine-wide (H12); pulse↔`neighbourNetwork` write-back so dossier/threats/AI stop asserting
+stale labels (H11); edge `relationshipType` refreshes on rebuild (H10); REL_DYNAMICS either
+wired (its `dyn.*`/`militaryBias` keys are dead on both halves, H13/H14) or deleted honestly;
+symmetric-relationship direction fairness (H16); vassal hierarchy cascade becomes proposal +
+Wizard News (H15); spread severity per-target attenuation lands here WITH its foodStockpile
+consumer; alias drift (`war`/`enemy`/`ally`) unified through RELATIONSHIP_TYPE_ALIASES.
+
+**R4 — Bounds, determinism, hygiene, invariants.** Cap/archive `regionalGraph.eventLog` and stop
+embedding projections nobody reads (the five dead `deriveRegionalState` fields go with it, H18);
+thread `now` through graph/news helpers (replay byte-identical for real); per-settlement rng
+forks for candidate rolls; calendar season fix; flows proposal gate made reachable; uncreatable
+channel types get discovery rules or leave the enum; memory double-count + write-only
+posture fields; factionState pruning; refresh the stale `world-pulse-roadmap.md` statuses; new
+invariants — every channel type creatable, clock-sync pin, same-tick delay pin, impact-visibility
+pin, mediums triage from the audit.
+
+Sequencing: R1 immediately (no overlap with in-flight chip work); R2 next (pure region/);
+R3 needs a short owner conversation on intended relationship directionality and touches the
+in-flight foodStockpile consumer — schedule after the chips land; R4 closes the loop and feeds
+Wave 8's manifest items.
 
 ---
 

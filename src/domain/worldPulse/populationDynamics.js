@@ -27,14 +27,30 @@ function conditionsFor(item) {
   return item?.activeConditions || item?.settlement?.activeConditions || [];
 }
 
-function conditionText(item) {
-  return conditionsFor(item)
-    .map(c => `${c.archetype || ''} ${c.label || ''} ${c.description || ''}`.toLowerCase())
-    .join(' ');
-}
+// Conditions classify by archetype id ONLY (the activeConditions.js catalog) —
+// prose matching made the siege_lifted RECOVERY condition read as an active
+// siege, flipping a freshly broken siege into deterministic mass emigration
+// with a self-contradicting explanation. DM-authored custom_crisis conditions
+// carry catalog affectedSystems instead of a mapped archetype, so they
+// contribute through that systems signal.
+const INFLUX_ARCHETYPES = new Set(['regional_migration_pressure']);
+const FOOD_CRISIS_ARCHETYPES = new Set(['famine', 'food_anchor_lost', 'regional_import_shortage']);
+const DISEASE_CRISIS_ARCHETYPES = new Set(['plague']);
+const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure']);
+const BURDEN_ARCHETYPES = new Set(['alliance_burden', 'regional_protection_gap']);
+// siege_lifted belongs HERE and only here: it is the post-siege recovery bonus.
+const RECOVERY_ARCHETYPES = new Set(['siege_lifted', 'stressor_residual']);
+// One crisis-flight class feeds both the severe classifier and the
+// mass-emigration gate; recovery archetypes are deliberately absent.
+const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'regional_migration_pressure']);
 
-function hasCondition(item, pattern) {
-  return pattern.test(conditionText(item));
+function hasConditionSignal(item, archetypes, systems = []) {
+  return conditionsFor(item).some(c => {
+    if (!c) return false;
+    if (archetypes.has(c.archetype)) return true;
+    return c.archetype === 'custom_crisis'
+      && (c.affectedSystems || []).some(s => systems.includes(s));
+  });
 }
 
 function intervalMagnitude(interval) {
@@ -115,12 +131,12 @@ function populationPressureRate(item, pressureIdx, rules) {
   const stability = 1 - ((food * 0.26) + (disease * 0.2) + (conflict * 0.22) + (trade * 0.14) + (legitimacy * 0.12) + (crime * 0.06));
   let monthlyRate = 0.0018 + (stability - 0.5) * 0.012;
 
-  if (hasCondition(item, /regional_migration_pressure|refugee|migration/)) monthlyRate += 0.012;
-  if (hasCondition(item, /famine|food_anchor|import_shortage/)) monthlyRate -= 0.013;
-  if (hasCondition(item, /plague|disease/)) monthlyRate -= 0.02;
-  if (hasCondition(item, /war|siege|occupation|raid|monster/)) monthlyRate -= 0.016;
-  if (hasCondition(item, /alliance_burden|regional_protection_gap/)) monthlyRate -= 0.006;
-  if (hasCondition(item, /siege_lifted|stressor_residual/)) monthlyRate += 0.002;
+  if (hasConditionSignal(item, INFLUX_ARCHETYPES)) monthlyRate += 0.012;
+  if (hasConditionSignal(item, FOOD_CRISIS_ARCHETYPES, ['food_security'])) monthlyRate -= 0.013;
+  if (hasConditionSignal(item, DISEASE_CRISIS_ARCHETYPES, ['healing_capacity'])) monthlyRate -= 0.02;
+  if (hasConditionSignal(item, WAR_CRISIS_ARCHETYPES, ['defense_readiness'])) monthlyRate -= 0.016;
+  if (hasConditionSignal(item, BURDEN_ARCHETYPES)) monthlyRate -= 0.006;
+  if (hasConditionSignal(item, RECOVERY_ARCHETYPES)) monthlyRate += 0.002;
 
   return monthlyRate * intensityMultiplier(rules);
 }
@@ -130,7 +146,7 @@ function deltaForSettlement(item, pressureIdx, interval, rules) {
   if (pop <= 0) return null;
   const magnitude = intervalMagnitude(interval);
   const rate = populationPressureRate(item, pressureIdx, rules);
-  const severe = Math.abs(rate) >= 0.025 || hasCondition(item, /famine|plague|siege|occupation|mass_migration/);
+  const severe = Math.abs(rate) >= 0.025 || hasConditionSignal(item, CRISIS_FLIGHT_ARCHETYPES);
   const cap = pop * (severe ? 0.18 : 0.055) * intensityMultiplier(rules);
   const rawDelta = Math.round(pop * rate * magnitude);
   const delta = Math.round(clamp(rawDelta, -cap, cap));
@@ -145,7 +161,7 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
   const sourceId = String(item.id);
   const abs = Math.abs(delta);
   const massThreshold = Math.max(25, Math.round(pop * 0.025));
-  const isMassEmigration = delta < 0 && abs >= massThreshold && (severe || hasCondition(item, /migration|famine|war|siege|occupation|plague/));
+  const isMassEmigration = delta < 0 && abs >= massThreshold && (severe || hasConditionSignal(item, CRISIS_FLIGHT_ARCHETYPES));
   const populationDeltas = [{ saveId: sourceId, delta, reason: delta > 0 ? 'Organic growth from favorable conditions.' : 'Population loss from cumulative settlement pressure.' }];
   let transferMode = null;
   let migrants = 0;

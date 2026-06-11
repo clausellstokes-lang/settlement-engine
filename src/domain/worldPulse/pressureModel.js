@@ -10,10 +10,33 @@ function pressureFromScore(score, invert = true) {
   return invert ? clamp01((70 - value) / 70) : clamp01(value / 100);
 }
 
-function hasCondition(item, pattern) {
-  return (item.activeConditions || []).some(c =>
-    pattern.test(`${c.archetype || ''} ${c.label || ''} ${c.description || ''}`.toLowerCase())
-  );
+// ── Condition → pressure matching ────────────────────────────────────────────
+// Conditions classify by archetype id ONLY (the activeConditions.js catalog) —
+// label/description prose must never score (a 'Warehouse collapse' label must
+// not read as war pressure; 'siege_lifted' is recovery, not siege). DM-authored
+// custom_crisis conditions carry catalog affectedSystems instead of a mapped
+// archetype, so they contribute through that systems signal.
+const FOOD_ARCHETYPES = new Set(['famine', 'food_anchor_lost', 'regional_import_shortage', 'regional_migration_pressure']);
+const SUPPLIER_FOOD_CRISIS_ARCHETYPES = new Set(['famine', 'food_anchor_lost', 'regional_import_shortage']);
+const DISEASE_ARCHETYPES = new Set(['plague', 'regional_migration_pressure']);
+const CONFLICT_ARCHETYPES = new Set(['war_pressure', 'regional_conflict_pressure', 'regional_protection_gap']);
+// Trade and economy share one commerce class: every route/market/tax archetype.
+const TRADE_ARCHETYPES = new Set(['trade_route_cut', 'regional_route_disruption', 'regional_export_market_loss', 'regional_tax_revenue_disruption', 'regional_import_shortage', 'cold_war_sanctions']);
+const LEGITIMACY_ARCHETYPES = new Set(['regional_authority_instability', 'corruption_exposed', 'dominant_npc_removed', 'regional_information_shock', 'regional_religious_pressure', 'government_overthrown']);
+const DEFENSE_ARCHETYPES = new Set(['war_pressure', 'regional_conflict_pressure', 'regional_protection_gap', 'rebellion']);
+const CRIME_ARCHETYPES = new Set(['regional_criminal_pressure', 'trade_route_cut', 'regional_route_disruption', 'famine', 'plague']);
+
+// Returns the deduped archetype ids that matched — reason strings must name
+// the real matched archetypes, never a fabricated classification.
+function matchedConditionArchetypes(item, archetypes, systems = []) {
+  const matched = [];
+  for (const c of item.activeConditions || []) {
+    if (!c) continue;
+    if (archetypes.has(c.archetype)) matched.push(c.archetype);
+    else if (c.archetype === 'custom_crisis'
+      && (c.affectedSystems || []).some(s => systems.includes(s))) matched.push('custom_crisis');
+  }
+  return [...new Set(matched)];
 }
 
 function countChannels(snapshot, settlementId, types = []) {
@@ -58,7 +81,7 @@ function supplierInFoodCrisis(snapshot, settlementId) {
     c.status === 'confirmed' && c.type === 'trade_dependency' && String(c.to) === String(settlementId));
   for (const c of channels) {
     const supplier = snapshot.byId?.get?.(String(c.from));
-    if (supplier && hasCondition(supplier, /famine|import_shortage|food_anchor/)) return true;
+    if (supplier && matchedConditionArchetypes(supplier, SUPPLIER_FOOD_CRISIS_ARCHETYPES, ['food_security']).length) return true;
   }
   return false;
 }
@@ -79,9 +102,10 @@ export function deriveSettlementPressures(snapshot) {
       food += 0.08;
       foodReasons.push('winter raises food pressure');
     }
-    if (hasCondition(item, /import_shortage|food_anchor|famine|migration/)) {
+    const foodConditions = matchedConditionArchetypes(item, FOOD_ARCHETYPES, ['food_security']);
+    if (foodConditions.length) {
       food += 0.18;
-      foodReasons.push('existing food or migration condition');
+      foodReasons.push(`active condition: ${foodConditions.join(', ')}`);
     }
     if (countChannels(snapshot, item.id, ['trade_dependency']) > 0 && scores.trade_connectivity < 45) {
       food += 0.08;
@@ -95,9 +119,10 @@ export function deriveSettlementPressures(snapshot) {
 
     const diseaseReasons = [];
     let disease = pressureFromScore(scores.healing_capacity);
-    if (hasCondition(item, /migration|plague|disease/)) {
+    const diseaseConditions = matchedConditionArchetypes(item, DISEASE_ARCHETYPES, ['healing_capacity']);
+    if (diseaseConditions.length) {
       disease += 0.14;
-      diseaseReasons.push('migration or disease condition');
+      diseaseReasons.push(`active condition: ${diseaseConditions.join(', ')}`);
     }
     if ((scores.housing_pressure ?? 70) < 45) {
       disease += 0.08;
@@ -107,9 +132,10 @@ export function deriveSettlementPressures(snapshot) {
 
     const conflictReasons = [];
     let conflict = pressureFromScore(scores.defense_readiness);
-    if (hasCondition(item, /conflict|protection_gap|war|siege|occupation/)) {
+    const conflictConditions = matchedConditionArchetypes(item, CONFLICT_ARCHETYPES, ['defense_readiness']);
+    if (conflictConditions.length) {
       conflict += 0.18;
-      conflictReasons.push('active conflict or protection pressure');
+      conflictReasons.push(`active condition: ${conflictConditions.join(', ')}`);
     }
     if (countChannels(snapshot, item.id, ['war_front', 'military_protection']) > 0) {
       conflict += 0.08;
@@ -133,9 +159,10 @@ export function deriveSettlementPressures(snapshot) {
 
     const tradeReasons = [];
     let trade = pressureFromScore(scores.trade_connectivity);
-    if (hasCondition(item, /route|export_market|tax_revenue|import_shortage/)) {
+    const tradeConditions = matchedConditionArchetypes(item, TRADE_ARCHETYPES, ['trade_connectivity']);
+    if (tradeConditions.length) {
       trade += 0.16;
-      tradeReasons.push('route or market condition');
+      tradeReasons.push(`active condition: ${tradeConditions.join(', ')}`);
     }
     out.push({ ...base, kind: 'trade', label: 'Trade pressure', score: clamp01(trade), reasons: tradeReasons });
 
@@ -147,9 +174,10 @@ export function deriveSettlementPressures(snapshot) {
       + (scores.food_security ?? 50)
     ) / 4);
     let economy = pressureFromScore(economyScore);
-    if (hasCondition(item, /tax_revenue|economic|debt|market|export_market|import_shortage|route/)) {
+    const economyConditions = matchedConditionArchetypes(item, TRADE_ARCHETYPES, ['trade_connectivity']);
+    if (economyConditions.length) {
       economy += 0.14;
-      economyReasons.push('market, debt, route, or tax condition');
+      economyReasons.push(`active condition: ${economyConditions.join(', ')}`);
     }
     if ((scores.criminal_opportunity ?? 50) > 65) {
       economy += 0.06;
@@ -159,9 +187,10 @@ export function deriveSettlementPressures(snapshot) {
 
     const legitimacyReasons = [];
     let legitimacy = pressureFromScore(scores.public_legitimacy);
-    if (hasCondition(item, /authority|corruption|leadership|information|religious/)) {
+    const legitimacyConditions = matchedConditionArchetypes(item, LEGITIMACY_ARCHETYPES, ['public_legitimacy', 'ruling_authority']);
+    if (legitimacyConditions.length) {
       legitimacy += 0.16;
-      legitimacyReasons.push('authority or trust condition');
+      legitimacyReasons.push(`active condition: ${legitimacyConditions.join(', ')}`);
     }
     out.push({ ...base, kind: 'legitimacy', label: 'Legitimacy pressure', score: clamp01(legitimacy), reasons: legitimacyReasons });
 
@@ -172,9 +201,10 @@ export function deriveSettlementPressures(snapshot) {
       + (scores.labor_capacity ?? 50)
     ) / 3);
     let defense = pressureFromScore(defenseScore);
-    if (hasCondition(item, /war|siege|occupation|protection_gap|raid|defense|insurgency/)) {
+    const defenseConditions = matchedConditionArchetypes(item, DEFENSE_ARCHETYPES, ['defense_readiness']);
+    if (defenseConditions.length) {
       defense += 0.16;
-      defenseReasons.push('military or protection condition');
+      defenseReasons.push(`active condition: ${defenseConditions.join(', ')}`);
     }
     if (countChannels(snapshot, item.id, ['war_front']) > 0) {
       defense += 0.08;
@@ -184,9 +214,10 @@ export function deriveSettlementPressures(snapshot) {
 
     const crimeReasons = [];
     let crime = pressureFromScore(scores.criminal_opportunity, false);
-    if (hasCondition(item, /criminal|route|famine|plague/)) {
+    const crimeConditions = matchedConditionArchetypes(item, CRIME_ARCHETYPES, ['criminal_opportunity']);
+    if (crimeConditions.length) {
       crime += 0.12;
-      crimeReasons.push('criminal opportunity condition');
+      crimeReasons.push(`active condition: ${crimeConditions.join(', ')}`);
     }
     out.push({ ...base, kind: 'crime', label: 'Criminal pressure', score: clamp01(crime), reasons: crimeReasons });
   }

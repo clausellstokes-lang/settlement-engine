@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  applyTierOutcomeToSettlement,
   evaluateTierResourceDynamics,
   resourceEconomicRole,
 } from '../../src/domain/worldPulse/tierResourceDynamics.js';
@@ -106,5 +107,105 @@ describe('evaluateTierResourceDynamics — economic role feeds the drift logic',
 
     expect(recoveries.some(candidate => candidate.targetSaveId === 'exporter')).toBe(false);
     expect(recoveries.some(candidate => candidate.targetSaveId === 'bystander')).toBe(true);
+  });
+});
+
+// Pin: tier candidates re-emit every eligible tick with tick-suffixed ids, so
+// worldState.proposals can hold a tier proposal whose fromTier the settlement
+// has since left. Accepting it must not rewind the tier (wrong-direction
+// roster surgery, bogus tierHistory) — applyTierOutcomeToSettlement re-verifies
+// against the CURRENT settlement, same contract as
+// applyInstitutionLifecycleOutcome.
+
+describe('applyTierOutcomeToSettlement — apply-time tier re-verify', () => {
+  function tierOutcome(fromTier, toTier, direction) {
+    return {
+      id: `candidate.tier.${direction}.a.4`,
+      tierChange: { saveId: 'a', fromTier, toTier, direction },
+    };
+  }
+
+  it('applies when the settlement still holds the proposal fromTier', () => {
+    const town = settlement('Ashford', { tier: 'town', population: 4700 });
+    const next = applyTierOutcomeToSettlement(town, tierOutcome('town', 'city', 'promotion'));
+
+    expect(next).not.toBe(town);
+    expect(next.tier).toBe('city');
+    expect(next.config.tier).toBe('city');
+    expect(next.tierHistory.at(-1)).toMatchObject({ fromTier: 'town', toTier: 'city', direction: 'promotion' });
+  });
+
+  it('no-ops with object identity when the tier moved on since the proposal', () => {
+    const city = settlement('Ashford', {
+      tier: 'city',
+      population: 9000,
+      institutions: [{ id: 'institution.grand_market', name: 'Grand Market', category: 'trade', status: 'active', requiredForTier: 'city', _worldPulseTierAdded: true }],
+      tierHistory: [{ fromTier: 'town', toTier: 'city', direction: 'promotion' }],
+    });
+
+    const next = applyTierOutcomeToSettlement(city, tierOutcome('village', 'town', 'promotion'));
+
+    expect(next).toBe(city);
+    expect(next.tier).toBe('city');
+    expect(next.tierHistory).toHaveLength(1);
+    expect(next.institutions[0].status).toBe('active');
+  });
+
+  it('stale demotions no-op the same way — no roster surgery, no history entry', () => {
+    const town = settlement('Ashford', {
+      tier: 'town',
+      institutions: [{ id: 'institution.grand_market', name: 'Grand Market', category: 'trade', status: 'active', requiredForTier: 'city', _worldPulseTierAdded: true }],
+    });
+
+    expect(applyTierOutcomeToSettlement(town, tierOutcome('city', 'town', 'demotion'))).toBe(town);
+  });
+
+  it('resolves an implicit tier from population before comparing', () => {
+    const implicit = settlement('Ashford', { tier: undefined, population: 4700 });
+
+    expect(applyTierOutcomeToSettlement(implicit, tierOutcome('town', 'city', 'promotion')).tier).toBe('city');
+    expect(applyTierOutcomeToSettlement(implicit, tierOutcome('village', 'town', 'promotion'))).toBe(implicit);
+  });
+});
+
+describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => {
+  function promotionWorldState(proposals = []) {
+    return {
+      tick: 8,
+      settlementTickStates: { a: { tierDrift: { direction: 'promotion', toTier: 'city', streak: 4 } } },
+      proposals,
+    };
+  }
+
+  function promotionSnapshot() {
+    return { settlements: [item('a', settlement('Ashford', { tier: 'town', population: 4700 }), 0)] };
+  }
+
+  function pendingTierProposal(status = 'pending') {
+    return {
+      id: 'world_proposal.8.tier.a.candidate-tier-promotion-a-8',
+      status,
+      outcome: { type: 'tier', targetSaveId: 'a', tierChange: { saveId: 'a', fromTier: 'town', toTier: 'city', direction: 'promotion' } },
+    };
+  }
+
+  it('emits a tier candidate when no tier proposal is pending for the settlement', () => {
+    const result = evaluateTierResourceDynamics(promotionWorldState([]), promotionSnapshot(), undefined, { tick: 9 });
+
+    expect(result.candidates.some(candidate => candidate.candidateType === 'tier_promotion')).toBe(true);
+  });
+
+  it('skips re-emitting while a pending tier proposal already targets the settlement', () => {
+    const result = evaluateTierResourceDynamics(promotionWorldState([pendingTierProposal()]), promotionSnapshot(), undefined, { tick: 9 });
+
+    expect(result.candidates.some(candidate => candidate.candidateType === 'tier_promotion')).toBe(false);
+    // Streak tracking is not suppressed — a resolved proposal re-emits next tick.
+    expect(result.worldState.settlementTickStates.a.tierDrift.streak).toBe(5);
+  });
+
+  it('resumes emitting once the proposal is resolved', () => {
+    const result = evaluateTierResourceDynamics(promotionWorldState([pendingTierProposal('applied')]), promotionSnapshot(), undefined, { tick: 9 });
+
+    expect(result.candidates.some(candidate => candidate.candidateType === 'tier_promotion')).toBe(true);
   });
 });

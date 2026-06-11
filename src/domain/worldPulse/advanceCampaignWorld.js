@@ -439,11 +439,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const ARC_REEMIT_COOLDOWN_TICKS = 6;
   const isFreshArcEntry = (entry) => {
     if (!['realm', 'compound'].includes(entry.kind)) return true;
-    const recent = (applied.wizardNews?.entries || []).slice(-80);
+    // The feed is newest-first, so the cooldown window must be a tick filter —
+    // a tail slice would inspect the OLDEST entries once the feed exceeds it.
+    const recent = (applied.wizardNews?.entries || [])
+      .filter(e => worldState.tick - (e.tick ?? -Infinity) < ARC_REEMIT_COOLDOWN_TICKS);
     return !recent.some(e =>
       e.impactKind === entry.impactKind
-      && JSON.stringify((e.settlementIds || []).slice().sort()) === JSON.stringify((entry.settlementIds || []).slice().sort())
-      && worldState.tick - (e.tick ?? -Infinity) < ARC_REEMIT_COOLDOWN_TICKS);
+      && JSON.stringify((e.settlementIds || []).slice().sort()) === JSON.stringify((entry.settlementIds || []).slice().sort()));
   };
   const realmEntries = synthesizeRealmEvents({ worldState: memoryState, tick: worldState.tick, now })
     .filter(isFreshArcEntry);
