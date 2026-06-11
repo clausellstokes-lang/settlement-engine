@@ -34,10 +34,24 @@
 > carry), needKey/NEED_HEURISTICS vocabulary, dead-magic leaks sealed (divine food, magicProfile,
 > deriveMagical, hasTeleportationInfra), promotion label matching + new stress-type rules, severity
 > dynamics (owner-tunable exported drift table) + derived capacity trajectory with the honest
-> 'absent' band — adversarially verified, zero must-fix. Wave 6 + the Stressor Wave are in flight
-> in a PARALLEL session (its commits `3cf0cd4`/`2773749`/`7cf5589`/`1a3734c`); the aiGrounding
-> bundle regen, push, and edge redeploy are deferred until that stream lands (its dirty files are
-> bundle inputs and its in-flight hunks carry the five open typecheck errors). Waves 7–8 owner-gated.
+> 'absent' band — adversarially verified, zero must-fix. **Wave 6 shipped** (`147e03f`, 2026-06-11):
+> grounding dead reads closed (conflicts seam dual-write feeds the edge reader; live siblings for
+> incomeSources/criticalImports/plotHooks; arrival tables re-wired; surplus-% on both surfaces),
+> silent-override receipts incl. the false floor claim, two-band separation (diagnosticLines),
+> explanation provenance honesty, five-canonical-lens gating, content-verified dead-code purge
+> (−466 lines, joins/deadCode guard), NPC-profile corruption truth (publicSafe allowlist pinned,
+> denylist not grown). aiGrounding bundle regenerated (hash `84713010e6962fd7`) — owner redeploys.
+> **The owner-directed Stressor Wave also shipped** (`3cf0cd4` + review fixes `48a350d`; design in
+> `docs/STRESSOR_WAVE_DESIGN.md`): catalog-wide organic birth gates (stressorGates.js — the coup
+> gate generalized; reasons land on candidates), the wandering `magic_deadzone`, slave_revolt
+> folded out of organic births into rebellion variants, resolution receipts (resolutionContext +
+> counterforce sourceBreakdown), new/accelerating synergies, betrayal purge saturation, balance
+> probe `tmp_stressor_wave_probe.mjs` (bounds hold, distribution diversifies organically). With
+> it: relationship-weighted migration dispersal (`2773749`), the editor roster wave — RESOLVE_STRESSOR
+> with the roaming bridge, trade goods ± entrepôt, resources, NPC standing swaps with sim adoption
+> (`7cf5589`), and provenance gated to edit chrome (`1a3734c`). Six-lens adversarial review run;
+> five findings fixed+pinned, three deferred with rationale (two spun off as follow-up tasks).
+> **Only Waves 7–8 remain, owner-gated.** Push + edge redeploy: owner.
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.
