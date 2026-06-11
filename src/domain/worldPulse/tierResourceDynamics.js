@@ -1,5 +1,8 @@
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { POPULATION_RANGES, TIER_ORDER, popToTier, tierAtLeast } from '../../data/constants.js';
+import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../data/supplyChainData.js';
+import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { exactGoodId } from '../region/goodsCatalog.js';
 import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
@@ -243,12 +246,70 @@ function textMatchesResource(text, resource) {
   return [...resourceTokens].some(token => haystack.includes(token));
 }
 
-function resourceEconomicRole(settlement, resource) {
+// Mirror of goodsCatalog's comparable(): annotation-stripped, alnum-only form
+// so 'River fish (taxed by occupation)' compares equal to 'River fish'.
+function comparableLabel(value) {
+  return String(value || '')
+    .replace(/\([^)]*\)/g, ' ')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Resource key → the trade labels its economy actually prints on the ledger:
+// RESOURCE_DATA tradeGoods plus every good along the chains the resource feeds
+// (raw inputs, intermediates, outputs — deriveExportsFromChains exports raw
+// forms and processed outputs alike, and substitution can run a sibling chain
+// like river_fishing off 'Fishing grounds'). The key's own words
+// ('fishing_grounds') rarely appear in those labels ('River fish', 'Raw wool'),
+// which is why a token match alone called canonically-exported resources
+// local-only. Static data, so resolved once per resource key.
+const resourceGoodsVocabularyCache = new Map();
+function resourceGoodsVocabulary(resource) {
+  const key = String(resource || '');
+  const cached = resourceGoodsVocabularyCache.get(key);
+  if (cached) return cached;
+  const goods = new Set(RESOURCE_DATA[key]?.tradeGoods || []);
+  for (const composite of RESOURCE_TO_CHAINS[key] || []) {
+    const [needKey, ...innerParts] = String(composite).split('.');
+    const chain = (SUPPLY_CHAIN_NEEDS[needKey]?.chains || []).find(c => c.id === innerParts.join('.'));
+    if (!chain) continue;
+    for (const good of chain.rawInputs || []) goods.add(good);
+    for (const good of chain.intermediateGoods || []) goods.add(good);
+    for (const good of chain.outputs || []) goods.add(good);
+  }
+  const vocabulary = {
+    labels: new Set([...goods].map(comparableLabel).filter(Boolean)),
+    ids: new Set([...goods].map(exactGoodId).filter(Boolean)),
+  };
+  resourceGoodsVocabularyCache.set(key, vocabulary);
+  return vocabulary;
+}
+
+function tradeListMatchesResource(labels, resource) {
+  const vocabulary = resourceGoodsVocabulary(resource);
+  return (labels || []).some(label => {
+    const id = exactGoodId(label);
+    if (id != null && vocabulary.ids.has(id)) return true;
+    return vocabulary.labels.has(comparableLabel(label));
+  });
+}
+
+/** Exported for pin tests: classification feeds depletion trade-load and the
+ *  primary-export recovery block, so mislabeling an exported resource as
+ *  local-only underweights it in the drift logic. */
+export function resourceEconomicRole(settlement, resource) {
   const economicState = settlement?.economicState || {};
-  const exportsText = (economicState.primaryExports || []).join(' ');
-  const importsText = (economicState.primaryImports || []).join(' ');
-  const exportAnchor = textMatchesResource(exportsText, resource);
-  const importDependency = textMatchesResource(importsText, resource);
+  const exportsList = economicState.primaryExports || [];
+  const importsList = economicState.primaryImports || [];
+  // Canonical goods vocabulary first (verbatim chain labels + exact good ids,
+  // which survive subsumption renames); token match stays as the fallback for
+  // custom labels that mention the resource by name.
+  const exportAnchor = tradeListMatchesResource(exportsList, resource)
+    || textMatchesResource(exportsList.join(' '), resource);
+  const importDependency = tradeListMatchesResource(importsList, resource)
+    || textMatchesResource(importsList.join(' '), resource);
   if (exportAnchor && importDependency) return 'export_and_import';
   if (exportAnchor) return 'primary_export';
   if (importDependency) return 'primary_import';
