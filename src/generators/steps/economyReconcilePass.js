@@ -27,7 +27,7 @@
  */
 
 import { registerStep } from '../pipeline.js';
-import { computeEconomyState, emitChainTraces } from './generateEconomy.js';
+import { computeEconomyState, emitChainTraces, applyCustomTradeGoodsConfig } from './generateEconomy.js';
 import { computeDemandImports } from '../demandProfile.js';
 import { subsumeTradeGoods, reconcileTradeLists } from '../../domain/region/goodsCatalog.js';
 import { generateSpatialLayout } from '../spatialGenerator.js';
@@ -48,9 +48,15 @@ import { serviceTypeKeyFromCategory } from '../../domain/customCategories.js';
  * Then re-runs export/import reconciliation so a demand import that
  * canonicalizes to a surviving export cannot reinstate the contradiction the
  * generator already resolved ("(transit)" re-exports stay spared inside
- * reconcileTradeLists). Mutates economicState in place.
+ * reconcileTradeLists). When the config carries editor-authored trade goods
+ * (config.customTradeGoods), they are re-applied between subsumption and
+ * reconciliation: a demand import can reintroduce a removed label, and the
+ * 10-import cap can cut an authored one — this is the final say. Authored
+ * goods still face reconciliation afterwards, so an authored catalog export
+ * loses to a real import contradiction the same way a derived one does.
+ * Mutates economicState in place.
  */
-export function finalizeTradeLists(economicState) {
+export function finalizeTradeLists(economicState, customTradeGoods = null) {
   const _customLabels = economicState.customTradeLabels || {};
   const _opaqueLabels = new Set(
     [...(_customLabels.exports || []), ...(_customLabels.imports || [])]
@@ -59,8 +65,12 @@ export function finalizeTradeLists(economicState) {
   economicState.primaryImports = subsumeTradeGoods(
     economicState.primaryImports || [], { opaque: _opaqueLabels }
   );
+  economicState.primaryExports = subsumeTradeGoods(
+    economicState.primaryExports || [], { opaque: _opaqueLabels }
+  );
+  if (customTradeGoods) applyCustomTradeGoodsConfig(economicState, customTradeGoods);
   economicState.primaryExports = reconcileTradeLists(
-    subsumeTradeGoods(economicState.primaryExports || [], { opaque: _opaqueLabels }),
+    economicState.primaryExports,
     economicState.primaryImports
   );
 }
@@ -101,7 +111,7 @@ registerStep('economyReconcilePass', {
 
   // Re-apply subsumption + export/import reconciliation to the final lists
   // (see finalizeTradeLists above for why both are needed here).
-  finalizeTradeLists(economicState);
+  finalizeTradeLists(economicState, effectiveConfig.customTradeGoods || null);
 
   // ── 3. Spatial layout + services from the FINAL roster ──────────────────
   const terrainType = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);

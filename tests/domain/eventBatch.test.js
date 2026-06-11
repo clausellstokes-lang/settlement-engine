@@ -136,6 +136,92 @@ describe('validateBatch', () => {
     ]).ok).toBe(true);
   });
 
+  test('RESOLVE_STRESSOR: the target is a hard ref against entry OR record OR condition', () => {
+    expect(eventConsumes(ev('RESOLVE_STRESSOR', { targetId: 'famine' }))).toEqual([
+      { kind: 'stressor', ref: 'famine' },
+    ]);
+    // payload.stressorType wins over targetId — resolveStressor's own precedence.
+    expect(eventConsumes(ev('RESOLVE_STRESSOR', {
+      targetId: 'x', payload: { stressorType: 'famine' },
+    }))).toEqual([{ kind: 'stressor', ref: 'famine' }]);
+
+    // Free text matching nothing blocks — previously it sailed through (no
+    // consumes case) and the mutation no-opped while the deltas landed.
+    const { ok, warnings } = validateBatch(base, [
+      ev('RESOLVE_STRESSOR', { targetId: 'war is over' }),
+    ]);
+    expect(ok).toBe(false);
+    expect(warnings.some(w => w.severity === 'block')).toBe(true);
+
+    // (a) a live ARRAY stress entry passes, by type or by name.
+    const arrayStress = { ...base, stressors: [{ type: 'famine', name: 'Famine', severity: 0.6 }] };
+    expect(validateBatch(arrayStress, [ev('RESOLVE_STRESSOR', { targetId: 'famine' })]).ok).toBe(true);
+    expect(validateBatch(arrayStress, [ev('RESOLVE_STRESSOR', { targetId: 'Famine' })]).ok).toBe(true);
+
+    // (a) the bare-object container pipeline settlements carry passes too —
+    // assembleSettlement dual-writes the single rolled stressor un-wrapped.
+    const bare = { type: 'wartime', name: 'Wartime', severity: 0.5 };
+    const bareStress = { ...base, stress: bare, stressors: bare };
+    expect(validateBatch(bareStress, [ev('RESOLVE_STRESSOR', { targetId: 'wartime' })]).ok).toBe(true);
+  });
+
+  test('RESOLVE_STRESSOR: a recorded event condition passes with NO live entry (the regen bridge)', () => {
+    // After a what-if regeneration the stress entry is re-rolled away while
+    // the promoted condition survives via config.eventConditions — requiring
+    // a live entry would block the exact resolve the bridge exists for.
+    const recorded = {
+      ...base,
+      config: {
+        ...base.config,
+        eventConditions: [{
+          archetype: 'custom_crisis',
+          triggeredAt: { sourceEventType: 'APPLY_STRESSOR', sourceEventTargetId: 'dragon_tax' },
+          causes: [{ source: 'event', eventId: 'ev-onset' }],
+        }],
+      },
+    };
+    expect(validateBatch(recorded, [ev('RESOLVE_STRESSOR', { targetId: 'dragon_tax' })]).ok).toBe(true);
+    expect(validateBatch(recorded, [ev('RESOLVE_STRESSOR', { targetId: 'tithe_of_teeth' })]).ok).toBe(false);
+  });
+
+  test('RESOLVE_STRESSOR: free text resolves through the archetype bridge against a LOCAL condition only', () => {
+    const warCondition = (causes) => ({
+      ...base,
+      activeConditions: [{
+        id: 'condition.war_pressure.x',
+        archetype: 'war_pressure',
+        triggeredAt: { sourceEventType: 'GENERATION', sourceEventTargetId: 'war_pressure' },
+        causes,
+      }],
+    });
+    // "war is over" → archetypeForStressor → war_pressure: the mutation DOES
+    // wind the local condition down, so validation passes.
+    const local = warCondition([{ source: 'generation', detail: 'Generated at war.' }]);
+    expect(validateBatch(local, [ev('RESOLVE_STRESSOR', { targetId: 'war is over' })]).ok).toBe(true);
+    // A campaign-owned condition (origin cause = a regional channel) is NOT
+    // resolvable locally — resolveStressor refuses it, so staging blocks.
+    const campaign = warCondition([{ source: 'channel.x', detail: 'Regional war pressure.' }]);
+    expect(validateBatch(campaign, [ev('RESOLVE_STRESSOR', { targetId: 'war is over' })]).ok).toBe(false);
+  });
+
+  test('RESOLVE_STRESSOR resolves a stressor applied earlier in the same batch', () => {
+    expect(validateBatch(base, [
+      ev('APPLY_STRESSOR', { targetId: 'dragon_tax', payload: { stressorType: 'dragon_tax', label: 'Dragon Tax', isCustom: true } }),
+      ev('RESOLVE_STRESSOR', { targetId: 'dragon_tax' }),
+    ]).ok).toBe(true);
+    // The archetype bridge works in-batch too: the applied famine registers
+    // its promotion archetype, so equivalent free text resolves against it.
+    expect(validateBatch(base, [
+      ev('APPLY_STRESSOR', { targetId: 'famine', payload: { stressorType: 'famine', label: 'Famine' } }),
+      ev('RESOLVE_STRESSOR', { targetId: 'crop failure' }),
+    ]).ok).toBe(true);
+    // Order still matters — resolving BEFORE the apply blocks.
+    expect(validateBatch(base, [
+      ev('RESOLVE_STRESSOR', { targetId: 'dragon_tax' }),
+      ev('APPLY_STRESSOR', { targetId: 'dragon_tax', payload: { stressorType: 'dragon_tax', label: 'Dragon Tax', isCustom: true } }),
+    ]).ok).toBe(false);
+  });
+
   test('REMOVE_RESOURCE consumes the resource; ADD_RESOURCE earlier in the batch satisfies it', () => {
     expect(eventConsumes(ev('REMOVE_RESOURCE', { targetId: 'iron vein' }))).toEqual([
       { kind: 'resource', ref: 'iron vein' },

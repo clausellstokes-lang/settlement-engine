@@ -12,6 +12,7 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { getCompatibleResources, getDefaultResources } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
+import { slugify } from '../../lib/customRegistry.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
 
 const DEPLETION_PROB = {
@@ -34,6 +35,22 @@ registerStep('resolveResources', {
   const { tier, tradeRoute, resolvedTerrain, effectiveConfig } = ctx;
   const config = ctx.config || {};
   const depletionProb = DEPLETION_PROB[tier] ?? 0.25;
+
+  // Editor event deltas (config.resourceEdits — ADD/REMOVE/DEPLETE/
+  // RECOVERED_RESOURCE in domain/events/mutate.js record them alongside
+  // their live config writes, dual-written into _config so applyChange
+  // feeds them back here). Parsed up front; applied as an overlay AFTER the
+  // mode rolls and the §14 injection below. Slug-equivalent matching is the
+  // events' own tolerance: catalog keys are slugs already, custom names are
+  // verbatim ('Moonpetal grove').
+  const resourceEdits = config.resourceEdits || {};
+  const editsAdded = Array.isArray(resourceEdits.added) ? resourceEdits.added : [];
+  const editsRemoved = Array.isArray(resourceEdits.removed) ? resourceEdits.removed : [];
+  const editsDepleted = Array.isArray(resourceEdits.depleted) ? resourceEdits.depleted : [];
+  const editsRecovered = Array.isArray(resourceEdits.recovered) ? resourceEdits.recovered : [];
+  const slugOf = k => slugify(String(k || ''));
+  const editsDepletedSlugs = new Set(editsDepleted.map(slugOf).filter(Boolean));
+  const eventAddedKeys = new Set();
 
   let nearbyResources;
   let nearbyResourcesDepleted = config.nearbyResourcesDepleted || [];
@@ -120,7 +137,7 @@ registerStep('resolveResources', {
   // nearbyResourcesCustom so the dossier (web + PDF) can tint them gold. Stable
   // name order keeps rng deterministic; a no-op consuming zero rng when the user
   // has no custom resources.
-  const nearbyResourcesCustom = [];
+  let nearbyResourcesCustom = [];
   const customResources = (customDeps.registry().listCustom?.('resources') || [])
     .slice()
     .sort((a, b) => String(a.name).localeCompare(String(b.name)));
@@ -144,6 +161,63 @@ registerStep('resolveResources', {
     });
   }
 
+  // ── Editor event overlay (config.resourceEdits) ──────────────────────────
+  // Re-apply the authored roster deltas on top of whatever the mode above
+  // produced — this is what lets a resource edit survive a full regeneration:
+  // random mode re-rolls the roster and depletion from the same seed
+  // (resurrecting whatever the event changed), and manual mode re-rolls
+  // 'allow' depletion. Runs after the rolls and the §14 injection, consuming
+  // NO rng — a config without edits generates byte-identically.
+  if (editsAdded.length || editsRemoved.length || editsDepleted.length || editsRecovered.length) {
+    const toSlugSet = list => new Set(list.map(slugOf).filter(Boolean));
+    const removedSet = toSlugSet(editsRemoved);
+    const addedSet = toSlugSet(editsAdded.map(e => e?.key));
+    const recoveredSet = toSlugSet(editsRecovered);
+
+    // 1. Removals suppress rolled/injected nodes (and their gold tint).
+    nearbyResources = nearbyResources.filter(k => !removedSet.has(slugOf(k)));
+    nearbyResourcesCustom = nearbyResourcesCustom.filter(k => !removedSet.has(slugOf(k)));
+
+    // 2. Authored adds re-join the roster; custom ones re-tint gold. A key
+    // the mode already produced keeps its natural presence (and trace).
+    for (const entry of editsAdded) {
+      const key = String(entry?.key || '');
+      if (!key || removedSet.has(slugOf(key))) continue;
+      if (!nearbyResources.some(k => k === key || slugOf(k) === slugOf(key))) {
+        nearbyResources = [...nearbyResources, key];
+        eventAddedKeys.add(key);
+        recordTrace(ctx, {
+          targetType: 'resource',
+          targetId:   `resource.${key}`,
+          step:       'resolveResources',
+          result:     'present',
+          causes: [{ source: 'event', effect: 'added by editor event',
+                     reason: `"${key}" was opened with an ADD_RESOURCE event.` }],
+          downstreamEffects: [],
+        });
+      }
+      if (entry?.custom && !nearbyResourcesCustom.includes(key)) {
+        nearbyResourcesCustom.push(key);
+      }
+    }
+
+    // 3. Depletion overlay: an added/re-opened node starts open, recovered
+    // nodes are forced out, then event-depleted nodes forced in — in that
+    // order, so a DEPLETE recorded after a re-ADD still lands. (The mutate
+    // handlers keep the four lists mutually agreeing; the order here is the
+    // defensive mirror.)
+    const rosterKeyFor = k => nearbyResources.find(r => r === k || slugOf(r) === slugOf(k)) || k;
+    nearbyResourcesDepleted = nearbyResourcesDepleted.filter(k =>
+      !removedSet.has(slugOf(k)) && !addedSet.has(slugOf(k)) && !recoveredSet.has(slugOf(k)));
+    for (const k of editsDepleted) {
+      const key = rosterKeyFor(String(k || ''));
+      if (!key || removedSet.has(slugOf(key))) continue;
+      if (!nearbyResourcesDepleted.some(d => d === key || slugOf(d) === slugOf(key))) {
+        nearbyResourcesDepleted = [...nearbyResourcesDepleted, key];
+      }
+    }
+  }
+
   // Write back into effectiveConfig for downstream steps
   effectiveConfig.nearbyResources = nearbyResources;
   effectiveConfig.nearbyResourcesDepleted = nearbyResourcesDepleted;
@@ -157,6 +231,7 @@ registerStep('resolveResources', {
   const customResourceSet = new Set(nearbyResourcesCustom);
   for (const resourceKey of nearbyResources) {
     if (customResourceSet.has(resourceKey)) continue; // §14: custom resources traced at injection
+    if (eventAddedKeys.has(resourceKey)) continue;    // edit overlay: traced at re-add
     const meta = RESOURCE_DATA[resourceKey] || {};
     const depleted = depletedSet.has(resourceKey);
     recordTrace(ctx, {
@@ -171,8 +246,11 @@ registerStep('resolveResources', {
           : { source: 'terrainCompatibility', effect: 'permitted',
               reason: `"${resourceKey}" is compatible with this settlement's trade route + terrain combination.` },
         depleted
-          ? { source: `tier.${tier}`, effect: 'depletion roll passed',
-              reason: `Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.` }
+          ? (editsDepletedSlugs.has(slugOf(resourceKey))
+            ? { source: 'event', effect: 'depleted by editor event',
+                reason: `A DEPLETE_RESOURCE event marked "${resourceKey}" as depleted.` }
+            : { source: `tier.${tier}`, effect: 'depletion roll passed',
+                reason: `Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.` })
           : null,
       ].filter(Boolean),
       downstreamEffects: Array.isArray(meta.instBoosts) || (meta.instBoosts && typeof meta.instBoosts === 'object')

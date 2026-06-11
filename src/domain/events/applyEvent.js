@@ -12,6 +12,7 @@
 
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { runEventPipeline } from './eventPipeline.js';
+import { captureEventUndoSnapshot } from './undoEvent.js';
 
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../types.js').SystemState} SystemState */
@@ -31,6 +32,13 @@ export function applyEvent({ settlement, systemState, event, now = null }) {
   const appliedAt = timedEvent?.timestamp || timedEvent?.createdAt || now || new Date().toISOString();
   const result = runEventPipeline(settlement, event, { now: appliedAt });
 
+  // Pre-event snapshot of the authored records whose writes aren't exactly
+  // reversible from provenance (resource / trade-good / stressor events —
+  // see undoEvent.js). Everything else an event writes carries event-id
+  // provenance and is scrubbed by it on undo; for these the snapshot is the
+  // only exact way back. Null for every other event type.
+  const undo = captureEventUndoSnapshot(settlement, event);
+
   const logEntry = /** @type {EventLogEntry} */ ({
     event,
     appliedAt,
@@ -44,6 +52,7 @@ export function applyEvent({ settlement, systemState, event, now = null }) {
     // 4-dim delta, so the timeline UI / AI overlay can read either.
     causalStateDeltas: result.causalStateDeltas,
     factionRelationshipDeltas: result.factionRelationshipDeltas,
+    ...(undo ? { undo } : {}),
   });
 
   return {

@@ -125,6 +125,9 @@
  *  @property {string} narrativeSummary       short DM-facing summary
  *  @property {Array<Object>=} causalStateDeltas          Phase 18 substrate-layer diff
  *  @property {Array<Object>=} factionRelationshipDeltas  Phase 14 structured faction deltas
+ *  @property {Object=} undo  pre-event snapshot of the provenance-free authored
+ *                            records (undoEvent.captureEventUndoSnapshot);
+ *                            undoLastEvent restores from it — resource/trade events only
  */
 
 /** @typedef {Object} CoherenceWarning

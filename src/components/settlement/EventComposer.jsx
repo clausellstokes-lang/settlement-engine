@@ -18,7 +18,7 @@ import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
 import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
-import { canonExports, canonImports } from '../../domain/canonicalAccessors.js';
+import { canonExports, canonImports, canonStressors } from '../../domain/canonicalAccessors.js';
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
@@ -127,10 +127,13 @@ function buildTargetOptions(settlement, collectionKey) {
       break;
     }
     case 'stressors':    {
-      // First existing stress container wins — the same probe the
-      // applyStressor / resolveStressor mutations use.
-      const key = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(settlement[k]));
-      list = (key ? settlement[key] : []).filter(Boolean).map(st => ({
+      // canonStressors covers the mutation's full probe: the array containers
+      // AND the bare-object shape pipeline settlements carry (assembleSettlement
+      // dual-writes the single rolled stressor as a bare object under stress +
+      // stressors). The old Array.isArray-only probe returned [] for every
+      // pipeline-generated settlement, so Resolve Stressor fell back to free
+      // text instead of offering the live crisis.
+      list = canonStressors(settlement).filter(Boolean).map(st => ({
         id: st.type || st.name || st.label,
         name: st.label || st.name || st.type,
       }));

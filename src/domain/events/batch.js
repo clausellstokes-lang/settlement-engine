@@ -31,6 +31,8 @@ import { mutateSettlement } from './mutate.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { compareSystemState } from '../state/compareSystemState.js';
 import { clamp01, bandFor } from '../state/bands.js';
+import { archetypeForStressor } from '../conditionPromotion.js';
+import { canonStressors } from '../canonicalAccessors.js';
 
 /** @typedef {import('../types.js').Event} Event */
 
@@ -55,6 +57,17 @@ const PRODUCES_KIND = Object.freeze({
  * @returns {Array<{kind:string, id?:string, name?:string}>}
  */
 export function eventProduces(event) {
+  // APPLY_STRESSOR mints a stress entry (and the condition it promotes to),
+  // so a later RESOLVE_STRESSOR in the same batch can target it — by type or
+  // label (exact), or through the archetype bridge nsHas runs for free text.
+  if (event?.type === 'APPLY_STRESSOR') {
+    const type = String(event.payload?.stressorType || event.targetId || '').trim();
+    if (!type) return [];
+    const refs = [{ kind: 'stressor', id: type, name: event.payload?.label || labelFromTarget(type) }];
+    const archetype = archetypeForStressor({ type, label: event.payload?.label });
+    if (archetype) refs.push({ kind: 'stressorArchetype', id: archetype, name: archetype });
+    return refs;
+  }
   const kind = PRODUCES_KIND[event?.type];
   if (!kind) return [];
   const name = labelFromTarget(event?.targetId) || event?.payload?.name || '';
@@ -125,6 +138,19 @@ export function eventConsumes(event) {
       if (targetId) refs.push({ kind: 'npc', ref: targetId });
       if (p.swapWithNpcId) refs.push({ kind: 'npc', ref: p.swapWithNpcId });
       break;
+    case 'RESOLVE_STRESSOR': {
+      // The target must resolve against SOMETHING resolveStressor can wind
+      // down — a live stress entry, a recorded event condition, or a live
+      // locally-owned condition (by stamp or archetype; see nsHas) — else the
+      // mutation silently no-ops while the registry deltas still land, the
+      // same hole CHANGE_RULING_POWER's faction ref closes. A live entry
+      // alone is deliberately NOT required: the entry is a derivation output
+      // a regeneration re-rolls away, while the promoted condition survives
+      // via config.eventConditions and stays resolvable by type.
+      const type = String(p.stressorType || targetId || '').trim();
+      if (type) refs.push({ kind: 'stressor', ref: type });
+      break;
+    }
     default:
       break;
   }
@@ -274,6 +300,8 @@ function initNamespace(s) {
     faction:     new Set(),
     npc:         new Set(),
     resource:    new Set(),
+    stressor:    new Set(),
+    stressorArchetype: new Set(),
   };
   for (const i of s?.institutions || []) { ns.institution.add(lc(i.id)); ns.institution.add(lc(i.name)); }
   const factions = s?.powerStructure?.factions || s?.factions || [];
@@ -281,6 +309,32 @@ function initNamespace(s) {
   for (const n of s?.npcs || []) { ns.npc.add(lc(n.id)); ns.npc.add(lc(n.name)); }
   for (const k of s?.config?.nearbyResources || []) ns.resource.add(lc(k));
   for (const r of s?.resources || []) { ns.resource.add(lc(r.id || r.key || r.name)); ns.resource.add(lc(r.name)); }
+  // RESOLVE_STRESSOR targets — a mirror of resolveStressor's own matching.
+  // Live stress entries match by type or name (canonStressors reads the array
+  // containers AND the bare-object shape pipeline settlements carry).
+  // Conditions match by their stamp (triggeredAt.sourceEventTargetId) here,
+  // or by archetype via ns.stressorArchetype (nsHas runs the promotion rule
+  // on the ref). Recorded config.eventConditions count alongside the live
+  // array because the stress entry is a derivation output a regeneration
+  // re-rolls away while the condition survives via the record. Campaign-owned
+  // conditions (origin cause = a regional channel / the world pulse) are
+  // excluded — resolveStressor refuses to wind them down.
+  for (const st of canonStressors(s)) {
+    ns.stressor.add(lc(st?.type));
+    ns.stressor.add(lc(st?.name));
+  }
+  const recorded = [
+    ...(Array.isArray(s?.config?.eventConditions) ? s.config.eventConditions : []),
+    ...(Array.isArray(s?._config?.eventConditions) ? s._config.eventConditions : []),
+  ];
+  const locallyOwned = (c) => {
+    const origin = String(c?.causes?.[0]?.source ?? '');
+    return origin === '' || origin === 'event' || origin === 'generation';
+  };
+  for (const c of [...(s?.activeConditions || []).filter(locallyOwned), ...recorded]) {
+    ns.stressor.add(lc(c?.triggeredAt?.sourceEventTargetId));
+    ns.stressorArchetype.add(lc(c?.archetype));
+  }
   for (const set of Object.values(ns)) set.delete('');
   return ns;
 }
@@ -291,6 +345,18 @@ function nsHas(ns, kind, ref) {
   const label = lc(labelFromTarget(ref));
   if (kind === 'factionOrInstitution') {
     return ns.faction.has(r) || ns.institution.has(r) || ns.faction.has(label) || ns.institution.has(label);
+  }
+  if (kind === 'stressor') {
+    // Exact lowercased entry/stamp match first — the picker path. Free text
+    // reaches the mutation's archetype bridge instead: text whose
+    // archetypeForStressor rule matches a locally-owned (or recorded)
+    // condition's archetype resolves ("the war is over" → war_pressure), and
+    // text matching neither blocks. No labelFromTarget fallback here —
+    // resolveStressor compares verbatim lowercase, so a de-slugged near-miss
+    // would validate a target the mutation then no-ops on.
+    if (ns.stressor.has(r)) return true;
+    const archetype = archetypeForStressor({ type: ref });
+    return archetype != null && ns.stressorArchetype.has(lc(archetype));
   }
   const set = ns[kind];
   if (!set) return true; // unknown kind — don't block

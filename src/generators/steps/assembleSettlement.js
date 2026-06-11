@@ -26,7 +26,7 @@ import { normalizeSettlement } from '../../domain/normalizeSettlement.js';
 // activeConditions so the causal substrate + AI overlay react to a settlement
 // generated mid-crisis — closing the "generated plague town has activeConditions:[]"
 // gap. Pure + deterministic + idempotent.
-import { promoteStressorsToConditions } from '../../domain/conditionPromotion.js';
+import { promoteStressorsToConditions, reapplyEventConditions } from '../../domain/conditionPromotion.js';
 // The canonical defense-readiness -> legitimacy table. This file used to carry a
 // stale local copy that LACKED 'Lightly Defended', so the real-label patch below
 // reverted that band's provisional contribution to 0 on every generated settlement.
@@ -169,6 +169,11 @@ registerStep('assembleSettlement', {
   // normalize only adds, never restructures.
   // Normalize first (version stamps, stable id, canonical containers incl. a
   // defaulted activeConditions: []), THEN promote stressors into conditions so
-  // the crisis is durable substrate state, not just a stressor label.
-  return { settlement: promoteStressorsToConditions(normalizeSettlement(settlement)) };
+  // the crisis is durable substrate state, not just a stressor label, THEN
+  // re-promote the event-authored conditions recorded in
+  // config.eventConditions — the authored record (mutate.js dual-writes it to
+  // config + _config) that keeps a what-if regeneration from erasing what the
+  // DM's events did. Order matters: re-promotion dedupes against the
+  // GENERATION-stamped twins the stressor promotion just minted.
+  return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
 });

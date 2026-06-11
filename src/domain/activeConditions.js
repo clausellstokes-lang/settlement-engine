@@ -463,6 +463,65 @@ export function withoutActiveCondition(settlement, conditionId) {
   return { ...settlement, activeConditions: next };
 }
 
+// ── Event-condition persistence (config.eventConditions) ────────────────
+// settlement.activeConditions is a derivation OUTPUT: a full regeneration
+// (applyChange / Regenerate Draft rebuild the pipeline input from the raw
+// _config) replaces the settlement wholesale, and assembleSettlement only
+// re-promotes stressor-derived conditions — so every condition an EVENT
+// promoted (trade_route_cut, plague, siege_lifted, …) silently vanished on
+// the first what-if. config.eventConditions is the authored record that
+// closes the loop (the customTradeGoods / resourceEdits architecture):
+// dual-written to config AND _config, re-promoted by the pipeline
+// (conditionPromotion.reapplyEventConditions) after the stressor promotion.
+//
+// The record is a PROJECTION of the live event-sourced conditions, not a
+// frozen onset ledger: every lifecycle chokepoint that moves them re-syncs
+// it — mutateSettlement (onsets AND the RESOLVE_STRESSOR wind-down), the
+// tick helper (elapsed/severity drift carries across a regeneration), and
+// the expiry helper (an expired crisis must NOT resurrect on regeneration).
+
+/**
+ * True when a condition was promoted by an authored event — the
+ * mutate.js withActiveCondition sites and the APPLY_STRESSOR promotion all
+ * stamp a cause with source 'event'. Generation ('generation'), world-pulse
+ * ('world_pulse' / entity ids), and regional (channel ids) conditions are
+ * deliberately excluded: generation re-derives its own, and world/regional
+ * conditions belong to the campaign layer (worldPulse/reconcile.js).
+ */
+export function isEventSourcedCondition(condition) {
+  return Array.isArray(condition?.causes)
+    && condition.causes.some(c => c?.source === 'event');
+}
+
+/**
+ * Project the live event-sourced conditions into config.eventConditions and
+ * mirror the record into the raw _config (withCustomTradeGoods' discipline —
+ * applyChange regenerates from _config first). Identity-preserving: returns
+ * the input settlement untouched when there is nothing to record and no
+ * stale record to update, so no-op events and plain settlements stay
+ * byte-identical.
+ */
+export function withEventConditionsSynced(settlement) {
+  if (!settlement || typeof settlement !== 'object') return settlement;
+  const live = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
+  const projected = live.filter(isEventSourcedCondition);
+  const config = (settlement.config && typeof settlement.config === 'object') ? settlement.config : null;
+  const raw = (settlement._config && typeof settlement._config === 'object') ? settlement._config : null;
+  const hasRecord = !!(config && 'eventConditions' in config) || !!(raw && 'eventConditions' in raw);
+  if (!projected.length && !hasRecord) return settlement;
+  // Both record copies hold canonical-shape conditions written by this same
+  // projection (stable key order), so a JSON comparison is a reliable
+  // already-in-sync check.
+  const synced = (rec) => JSON.stringify(rec) === JSON.stringify(projected);
+  if ((config ? synced(config.eventConditions) : !projected.length)
+    && (raw ? synced(raw.eventConditions) : true)) {
+    return settlement;
+  }
+  const next = { ...settlement, config: { ...(settlement.config || {}), eventConditions: projected } };
+  if (raw) next._config = { ...raw, eventConditions: projected };
+  return next;
+}
+
 /**
  * Advance every condition's elapsedTicks by the interval-scaled amount.
  * Mirrors the Phase 15 INTERVAL_SCALES so a per-week tick adds 0.25 to
@@ -548,7 +607,10 @@ export function withTickedConditionDurations(settlement, interval) {
     };
   });
 
-  return { ...settlement, activeConditions: next };
+  // Keep the authored record following the aging conditions, so a
+  // regeneration restores a four-month-old plague at four months, not at
+  // tick zero.
+  return withEventConditionsSynced({ ...settlement, activeConditions: next });
 }
 
 /**
@@ -577,7 +639,10 @@ export function withExpiredConditionsRemoved(settlement) {
 
   if (expired.length === 0) return { settlement, expired: [] };
   return {
-    settlement: { ...settlement, activeConditions: keep },
+    // Re-sync the authored record so an expired event condition is dropped
+    // from config/_config too — otherwise the next regeneration would
+    // resurrect a crisis that already ran its course.
+    settlement: withEventConditionsSynced({ ...settlement, activeConditions: keep }),
     expired,
   };
 }

@@ -11,6 +11,10 @@
  *   - the trade-good entrepôt '(transit)' suffix + transit list write;
  *   - the dual-format resource config writes (nearbyResources +
  *     nearbyResourcesState, custom names in nearbyResourcesCustom);
+ *   - DEPLETE/RECOVERED_RESOURCE key agreement: catalog targets use the
+ *     underscore key, custom targets keep their VERBATIM name (the
+ *     resolveResources/addResource convention every consumer compares
+ *     against), and the deplete → recover round-trip is clean;
  *   - the NPC standing swap (fields swapped, others preserved, factionId
  *     stamped with the stable faction form);
  *   - the npcAgency adoption seam (adopts a CHANGED importance once; does
@@ -366,6 +370,183 @@ describe('mutateSettlement — ADD_RESOURCE / REMOVE_RESOURCE', () => {
       now: NOW,
     });
     expect(next.config).toEqual(settlement.config);
+  });
+});
+
+describe('mutateSettlement — DEPLETE_RESOURCE / RECOVERED_RESOURCE key agreement', () => {
+  // A roster holding one catalog resource (underscore key) and one custom
+  // resource (verbatim name — the resolveResources/addResource convention).
+  const mixedConfig = () => ({
+    nearbyResources: ['fishing_grounds', 'Moonpetal grove'],
+    nearbyResourcesCustom: ['Moonpetal grove'],
+  });
+
+  test('catalog targets still write the canonical underscore key', () => {
+    const next = mutateSettlement({
+      settlement: deepFreeze(fixture({ config: mixedConfig() })),
+      event: ev('DEPLETE_RESOURCE', { targetId: 'fishing_grounds' }),
+      now: NOW,
+    });
+    expect(next.config.nearbyResourcesDepleted).toEqual(['fishing_grounds']);
+    expect(next.config.nearbyResourcesState.fishing_grounds).toBe('depleted');
+  });
+
+  test('custom targets keep the VERBATIM key, so verbatim-comparing consumers see the depletion', () => {
+    const next = mutateSettlement({
+      settlement: deepFreeze(fixture({ config: mixedConfig() })),
+      event: ev('DEPLETE_RESOURCE', { targetId: 'Moonpetal grove' }),
+      now: NOW,
+    });
+    expect(next.config.nearbyResourcesDepleted).toEqual(['Moonpetal grove']);
+    expect(next.config.nearbyResourcesState['Moonpetal grove']).toBe('depleted');
+    // The intersection every consumer computes (economy chains, food,
+    // resource pressure, the dossier): depleted ∩ nearbyResources, verbatim.
+    const depletedSet = new Set(next.config.nearbyResourcesDepleted);
+    expect(next.config.nearbyResources.filter(k => depletedSet.has(k))).toEqual(['Moonpetal grove']);
+  });
+
+  test('a slug-form target resolves back to the verbatim roster entry', () => {
+    const next = mutateSettlement({
+      settlement: fixture({ config: mixedConfig() }),
+      event: ev('DEPLETE_RESOURCE', { targetId: 'moonpetal_grove' }),
+      now: NOW,
+    });
+    expect(next.config.nearbyResourcesDepleted).toEqual(['Moonpetal grove']);
+    expect(next.config.nearbyResourcesState['Moonpetal grove']).toBe('depleted');
+  });
+
+  test('custom deplete → recover round-trips clean', () => {
+    const depleted = mutateSettlement({
+      settlement: fixture({ config: mixedConfig() }),
+      event: ev('DEPLETE_RESOURCE', { targetId: 'Moonpetal grove' }),
+      now: NOW,
+    });
+    const recovered = mutateSettlement({
+      settlement: deepFreeze(depleted),
+      event: ev('RECOVERED_RESOURCE', { targetId: 'Moonpetal grove' }),
+      now: NOW,
+    });
+    expect(recovered.config.nearbyResourcesDepleted).toEqual([]);
+    expect(recovered.config.nearbyResourcesState['Moonpetal grove']).toBe('allow');
+  });
+
+  test('re-ADD of a custom resource clears a legacy slug-form depletion record', () => {
+    const settlement = fixture({
+      config: {
+        nearbyResources: ['Moonpetal grove'],
+        nearbyResourcesCustom: ['Moonpetal grove'],
+        nearbyResourcesState: { moonpetal_grove: 'depleted' },
+        nearbyResourcesDepleted: ['moonpetal_grove'], // the old slugify bug's key form
+      },
+    });
+    const next = mutateSettlement({
+      settlement,
+      event: ev('ADD_RESOURCE', { targetId: 'Moonpetal grove', payload: { isCustom: true } }),
+      now: NOW,
+    });
+    expect(next.config.nearbyResourcesDepleted).toEqual([]);
+    expect(next.config.nearbyResources).toEqual(['Moonpetal grove']);
+    expect(next.config.nearbyResourcesState['Moonpetal grove']).toBe('allow');
+  });
+});
+
+describe('mutateSettlement — resourceEdits delta record (the regeneration input)', () => {
+  // The four resource events ALSO record their deltas in config.resourceEdits,
+  // dual-written to _config when present (withCustomTradeGoods' discipline):
+  // applyChange regenerates from the raw _config, where resolveResources
+  // re-rolls the live keys wholesale — the deltas are the input that survives.
+  // The regeneration round trip itself is pinned in tests/joins/resourceEdits.test.js.
+  const withRaw = (config) => fixture({ config, _config: { settType: 'town' } });
+
+  test('DEPLETE records depleted and clears the key from recovered; mirrored into _config', () => {
+    const settlement = withRaw({
+      nearbyResources: ['fishing_grounds'],
+      resourceEdits: { added: [], removed: [], depleted: [], recovered: ['fishing_grounds'] },
+    });
+    const next = mutateSettlement({
+      settlement: deepFreeze(settlement),
+      event: ev('DEPLETE_RESOURCE', { targetId: 'fishing_grounds' }),
+      now: NOW,
+    });
+    expect(next.config.resourceEdits.depleted).toEqual(['fishing_grounds']);
+    expect(next.config.resourceEdits.recovered).toEqual([]);
+    expect(next._config.resourceEdits).toEqual(next.config.resourceEdits);
+    // The LIVE keys stay out of _config — they are derivation outputs, and
+    // mirroring them would plant stale rolls into the raw input.
+    expect(next._config.nearbyResourcesDepleted).toBeUndefined();
+  });
+
+  test('RECOVERED records recovered (even when nothing was depleted live) and clears depleted', () => {
+    const settlement = withRaw({
+      nearbyResources: ['fishing_grounds'],
+      resourceEdits: { added: [], removed: [], depleted: ['fishing_grounds'], recovered: [] },
+    });
+    const next = mutateSettlement({
+      settlement: deepFreeze(settlement),
+      event: ev('RECOVERED_RESOURCE', { targetId: 'fishing_grounds' }),
+      now: NOW,
+    });
+    expect(next.config.resourceEdits.depleted).toEqual([]);
+    expect(next.config.resourceEdits.recovered).toEqual(['fishing_grounds']);
+    expect(next._config.resourceEdits).toEqual(next.config.resourceEdits);
+  });
+
+  test('ADD records { key, custom } and clears the removed suppression + depletion records', () => {
+    const settlement = withRaw({
+      resourceEdits: { added: [], removed: ['Moonpetal grove'], depleted: ['moonpetal_grove'], recovered: [] },
+    });
+    const next = mutateSettlement({
+      settlement: deepFreeze(settlement),
+      event: ev('ADD_RESOURCE', { targetId: 'Moonpetal grove' }),
+      now: NOW,
+    });
+    // Slug-equivalent clears: the legacy slug-form depletion record goes too.
+    expect(next.config.resourceEdits).toEqual({
+      added: [{ key: 'Moonpetal grove', custom: true }],
+      removed: [], depleted: [], recovered: [],
+    });
+    expect(next._config.resourceEdits).toEqual(next.config.resourceEdits);
+  });
+
+  test('REMOVE records the struck roster forms and strikes them from every other list', () => {
+    const settlement = withRaw({
+      nearbyResources: ['fishing_grounds', 'Moonpetal grove'],
+      nearbyResourcesCustom: ['Moonpetal grove'],
+      resourceEdits: {
+        added: [{ key: 'Moonpetal grove', custom: true }],
+        removed: [], depleted: ['Moonpetal grove'], recovered: ['fishing_grounds'],
+      },
+    });
+    const next = mutateSettlement({
+      settlement: deepFreeze(settlement),
+      event: ev('REMOVE_RESOURCE', { targetId: 'Moonpetal grove' }),
+      now: NOW,
+    });
+    expect(next.config.resourceEdits).toEqual({
+      added: [], removed: ['Moonpetal grove'], depleted: [], recovered: ['fishing_grounds'],
+    });
+    expect(next._config.resourceEdits).toEqual(next.config.resourceEdits);
+  });
+
+  test('without _config (pre-_config saves) the record lands on config alone', () => {
+    const next = mutateSettlement({
+      settlement: deepFreeze(fixture({ config: { nearbyResources: ['fishing_grounds'] } })),
+      event: ev('DEPLETE_RESOURCE', { targetId: 'fishing_grounds' }),
+      now: NOW,
+    });
+    expect(next.config.resourceEdits.depleted).toEqual(['fishing_grounds']);
+    expect(next._config).toBeUndefined();
+  });
+
+  test('CUT_TRADE_ROUTE mirrors the _cutRoutes annotation into _config (deriveRegionalState reads it post-regen)', () => {
+    const next = mutateSettlement({
+      settlement: deepFreeze(withRaw({})),
+      event: ev('CUT_TRADE_ROUTE', { targetId: 'river route' }),
+      now: NOW,
+    });
+    expect(next.config._cutRoutes).toHaveLength(1);
+    expect(next.config._cutRoutes[0].name).toBe('river route');
+    expect(next._config._cutRoutes).toEqual(next.config._cutRoutes);
   });
 });
 

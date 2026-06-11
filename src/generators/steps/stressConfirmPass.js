@@ -34,6 +34,7 @@
 import { registerStep } from '../pipeline.js';
 import { buildStressContext } from '../stressGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
+import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 
 // Per-type suppressor keywords mirroring buildStressContext's institution
 // flags — used ONLY to name the suppressing institutions in the trace.
@@ -74,6 +75,11 @@ registerStep('stressConfirmPass', {
   const forced = new Set([
     ...(effectiveConfig.intendedStressTypes || []),
     ...(config.selectedStressesRandom === false ? (config.selectedStresses || []) : []),
+    // Authored APPLY_STRESSOR entries re-applied by resolveStress's
+    // stressorEdits overlay — the same contract as user-forced stress:
+    // never dropped. (Also load-bearing for CUSTOM authored types, which
+    // have no STRESS_TYPE_MAP row for the re-weighting below to index.)
+    ...((config.stressorEdits?.added || []).map(e => e?.type).filter(Boolean)),
   ]);
 
   const kept = [];
@@ -122,9 +128,12 @@ registerStep('stressConfirmPass', {
 
   if (dropped === 0) return {};
 
-  const stressTypes = kept.map(e => e.type);
   // Keep the same effectiveConfig threading contract resolveStress set up,
   // so every downstream config.stressTypes reader sees the confirmed set.
+  // Catalog types only — a custom authored entry (config.stressorEdits)
+  // rides the container, never the stressType/stressTypes channel
+  // (resolveStress's overlay applies the same filter).
+  const stressTypes = kept.map(e => e?.type).filter(t => t && STRESS_TYPE_MAP[t]);
   effectiveConfig.stressType  = stressTypes[0] || null;
   effectiveConfig.stressTypes = stressTypes;
 

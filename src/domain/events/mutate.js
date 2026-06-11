@@ -23,7 +23,7 @@ import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entitie
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
-import { withActiveCondition } from '../activeConditions.js';
+import { withActiveCondition, withoutActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate } from '../corruption.js';
 import { archetypeForStressor, promoteStressorsToConditions } from '../conditionPromotion.js';
 import { transferRulingPower } from '../rulingPower.js';
@@ -171,7 +171,12 @@ export function mutateSettlement({ settlement, event, now = null }) {
       // applies through applyEvent's normal path.
       break;
   }
-  return next;
+  // One projection chokepoint for the whole switch: whatever event-sourced
+  // conditions the handler promoted, wound down, or left alone, the authored
+  // config.eventConditions record (dual-written to _config — the
+  // customTradeGoods / resourceEdits discipline) follows. This is what lets
+  // a full regeneration re-promote them instead of silently dropping them.
+  return withEventConditionsSynced(next);
 }
 
 // ── Institution mutations ──────────────────────────────────────────────────
@@ -393,25 +398,97 @@ function addFaction(s, event) {
 
 // ── Resource / route mutations ─────────────────────────────────────────────
 
+/**
+ * Resolve an event target against the resource roster, returning the key
+ * form the roster actually holds. Catalog entries live in
+ * config.nearbyResources as underscore keys, so the slug is canonical for
+ * them; CUSTOM resources are stored VERBATIM ('Moonpetal grove' — the
+ * resolveResources / addResource convention), and every consumer (economy
+ * chains, food, resource pressure, the dossier) compares depletion against
+ * that verbatim name. An unconditional slugify wrote 'moonpetal_grove' for a
+ * custom node, a key no reader matched — depleting a custom resource was
+ * invisible. Verbatim match wins, then a slug-equivalent roster entry, then
+ * the slug itself (catalog fallback).
+ */
+function resolveRosterKey(config, raw) {
+  const slug = slugify(raw);
+  const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
+  const custom = Array.isArray(config.nearbyResourcesCustom) ? config.nearbyResourcesCustom : [];
+  const rosterMatch = nearby.includes(raw) || custom.includes(raw)
+    ? raw
+    : (slug ? [...nearby, ...custom].find(k => slugify(k) === slug) : undefined);
+  return rosterMatch || slug;
+}
+
+// Slug-equivalent key comparison — the same tolerance the handlers' live
+// filters use ('moonpetal_grove' ≡ 'Moonpetal grove'). Empty slugs never match.
+function slugEq(a, b) {
+  if (a === b) return true;
+  const sa = slugify(a);
+  return !!sa && sa === slugify(b);
+}
+
+/**
+ * Normalized view of config.resourceEdits — the EDITOR-authored resource
+ * roster deltas the generation re-applies (resolveResources' edit overlay):
+ *   { added }     [{ key, custom }] nodes opened by ADD_RESOURCE (custom →
+ *                 verbatim name, re-tinted gold on regeneration);
+ *   { removed }   keys struck by REMOVE_RESOURCE — a suppression list, so
+ *                 removing a GENERATOR-rolled node stays gone across regens;
+ *   { depleted }  keys DEPLETE_RESOURCE forces into the depleted set;
+ *   { recovered } keys RECOVERED_RESOURCE forces OUT of it — without this a
+ *                 same-seed regen re-rolls the original depletion right back.
+ * The handlers keep the four lists mutually agreeing (an ADD clears the
+ * key's removed/depleted records, a DEPLETE clears its recovered record, …).
+ */
+function resourceEditsOf(config) {
+  const re = config?.resourceEdits || {};
+  return {
+    added: Array.isArray(re.added) ? re.added : [],
+    removed: Array.isArray(re.removed) ? re.removed : [],
+    depleted: Array.isArray(re.depleted) ? re.depleted : [],
+    recovered: Array.isArray(re.recovered) ? re.recovered : [],
+  };
+}
+
+/**
+ * Write a resource event's two formats: the LIVE keys (nearbyResources /
+ * nearbyResourcesState / nearbyResourcesDepleted / nearbyResourcesCustom —
+ * the resolved snapshot every consumer reads NOW) go to config only, and the
+ * authored resourceEdits delta record goes to BOTH config and _config when
+ * present — withCustomTradeGoods' discipline. applyChange regenerates from
+ * the raw _config first, and resolveResources re-applies the deltas there;
+ * the live keys are derivation OUTPUTS (random mode re-rolls them wholesale),
+ * so mirroring them would plant stale results into the raw input — the
+ * deltas are the part that must survive. (resourceEdits is genuine user
+ * input, deliberately NOT in settlementSlice's DERIVED_CONFIG_KEYS strip.)
+ */
+function withResourceEdits(s, livePatch, resourceEdits) {
+  const next = { ...s, config: { ...(s.config || {}), ...livePatch, resourceEdits } };
+  if (s._config && typeof s._config === 'object') {
+    next._config = { ...s._config, resourceEdits };
+  }
+  return next;
+}
+
 function depleteResource(s, event) {
-  // Write the CANONICAL underscore key (the format config.nearbyResources and the
-  // target picker use) AND the nearbyResourcesDepleted array the economy/food
-  // generators read. The old version wrote only a de-slugged display label
-  // ('grain fields') that no generator consumed — the DM-facing event moved a
-  // display dial and nothing else.
   const config = s.config || {};
-  const key = slugify(event.targetId);
+  const raw = String(event.targetId || '').trim();
+  // Write the key form the roster actually holds (resolveRosterKey) into the
+  // nearbyResourcesDepleted array the economy/food generators read.
+  const key = resolveRosterKey(config, raw);
   if (!key) return s;
   const state = config.nearbyResourcesState || {};
   const depleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
-  return {
-    ...s,
-    config: {
-      ...config,
-      nearbyResourcesState: { ...state, [key]: 'depleted' },
-      nearbyResourcesDepleted: depleted.includes(key) ? depleted : [...depleted, key],
-    },
-  };
+  const edits = resourceEditsOf(config);
+  return withResourceEdits(s, {
+    nearbyResourcesState: { ...state, [key]: 'depleted' },
+    nearbyResourcesDepleted: depleted.includes(key) ? depleted : [...depleted, key],
+  }, {
+    ...edits,
+    depleted: edits.depleted.some(k => slugEq(k, key)) ? edits.depleted : [...edits.depleted, key],
+    recovered: edits.recovered.filter(k => !slugEq(k, key)),
+  });
 }
 
 // RECOVERED_RESOURCE — the inverse: clear BOTH depletion formats so chains, exports,
@@ -419,15 +496,26 @@ function depleteResource(s, event) {
 // depleted set was never cleared, so a recovered resource stayed depleted forever.)
 function recoveredResource(s, event) {
   const config = s.config || {};
-  const raw = String(event.targetId || '');
+  const raw = String(event.targetId || '').trim();
   const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
+  if (!keys.size) return s;
   const state = { ...(config.nearbyResourcesState || {}) };
   for (const k of keys) if (state[k] === 'depleted') state[k] = 'allow';
   const depleted = (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k));
-  return {
-    ...s,
-    config: { ...config, nearbyResourcesState: state, nearbyResourcesDepleted: depleted },
-  };
+  // Recorded under the roster-resolved form — the key a regenerated roster
+  // holds. Recorded even when nothing was depleted LIVE: in random mode the
+  // depletion may exist only in the re-roll, and the recovered record is
+  // what forces it out there.
+  const key = resolveRosterKey(config, raw);
+  const edits = resourceEditsOf(config);
+  return withResourceEdits(s, {
+    nearbyResourcesState: state,
+    nearbyResourcesDepleted: depleted,
+  }, {
+    ...edits,
+    depleted: edits.depleted.filter(k => !slugEq(k, key)),
+    recovered: edits.recovered.some(k => slugEq(k, key)) ? edits.recovered : [...edits.recovered, key],
+  });
 }
 
 // REMOVED_THREAT — the party neutralized an active threat. Removes the matching
@@ -521,6 +609,14 @@ function cutTradeRoute(s, event) {
   const which = event.targetId || 'primary';
   cutRoutes.push({ name: which, atEventId: event.id, atTimestamp: eventTime(event) });
   const next = { ...s, config: { ...config, _cutRoutes: cutRoutes } };
+  // Mirror the annotation into the raw _config (withCustomTradeGoods'
+  // discipline): applyChange regenerates from _config first, and the
+  // pipeline's effectiveConfig spreads unknown keys through, so this is what
+  // keeps _cutRoutes — and deriveRegionalState's read of it — alive across a
+  // full regeneration.
+  if (s._config && typeof s._config === 'object') {
+    next._config = { ...s._config, _cutRoutes: cutRoutes };
+  }
   // Promote to a canonical active condition so the causal substrate (which reads
   // activeConditions by affectedSystems — trade_connectivity / public_legitimacy)
   // reflects the severed route, and the effect SURVIVES
@@ -771,6 +867,30 @@ function imposeCorruption(s, event) {
 }
 
 /**
+ * Authored-beats-generation at EVENT time, for the two direct producers
+ * whose archetypes generation can also mint (plague,
+ * regional_migration_pressure — see STRESSOR_ARCHETYPE_RULES). The authored
+ * onset owns the crisis NOW, not only after the next regeneration: without
+ * this the live settlement carried BOTH conditions (double-penalizing the
+ * same affectedSystems) until reapplyEventConditions collapsed them on
+ * regeneration — a no-edit regeneration silently changed the substrate.
+ * Mirrors promoteStressorsToConditions' authored path and
+ * reapplyEventConditions' targeting: GENERATION-stamped twins only,
+ * world/regional conditions untouched.
+ */
+function withoutGenerationTwin(s, archetype) {
+  let next = s;
+  for (const cond of next.activeConditions || []) {
+    if (cond?.archetype === archetype
+      && cond?.id
+      && cond?.triggeredAt?.sourceEventType === 'GENERATION') {
+      next = withoutActiveCondition(next, cond.id);
+    }
+  }
+  return next;
+}
+
+/**
  * REFUGEE_WAVE — population shift annotation. Records the wave on the
  * settlement so downstream pipeline reruns and the foodSecurity model
  * can consume it. Coarse for v1; future versions will derive specific
@@ -787,10 +907,16 @@ function refugeeWave(s, event) {
     atTimestamp: eventTime(event),
   });
   const next = { ...s, config: { ...config, _refugeeWaves: waves } };
+  // Mirror into the raw _config (cutTradeRoute's _cutRoutes discipline):
+  // applyChange regenerates from _config first, so a config-only annotation
+  // died on the first what-if regeneration.
+  if (s._config && typeof s._config === 'object') {
+    next._config = { ...s._config, _refugeeWaves: waves };
+  }
   // Promote to a canonical active condition (food/labor/legitimacy pressure) so the
   // substrate and AI overlay see the influx, not just the write-only annotation.
   const severity = size === 'large' ? 0.65 : size === 'small' ? 0.35 : 0.5;
-  return withActiveCondition(next, {
+  return withActiveCondition(withoutGenerationTwin(next, 'regional_migration_pressure'), {
     archetype: 'regional_migration_pressure',
     severity,
     triggeredAt: { sourceEventType: 'REFUGEE_WAVE', sourceEventTargetId: event.targetId || null },
@@ -816,6 +942,11 @@ function plague(s, event) {
     ...s,
     config: { ...config, _activePlague: annotation },
   };
+  // Mirror into the raw _config (cutTradeRoute's _cutRoutes discipline) so
+  // the annotation survives a _config-based regeneration.
+  if (s._config && typeof s._config === 'object') {
+    next._config = { ...s._config, _activePlague: annotation };
+  }
   // Apply a capacity impairment to any healing-tagged institution so
   // the simulation reflects the strain.
   const healing = (next.institutions || []).filter(i => /hospital|temple|infirm|healer/i.test(i.name || ''));
@@ -836,7 +967,7 @@ function plague(s, event) {
   // Promote to a canonical 'plague' condition (food/healing/legitimacy/labor) so the
   // outbreak is durable substrate state — the causal layer, AI overlay, and time
   // progression all read it — not just the write-only _activePlague annotation.
-  return withActiveCondition(next, {
+  return withActiveCondition(withoutGenerationTwin(next, 'plague'), {
     archetype: 'plague',
     severity,
     triggeredAt: { sourceEventType: 'PLAGUE', sourceEventTargetId: event.targetId || null },
@@ -860,6 +991,11 @@ function raidOrMonsterAttack(s, event) {
     atTimestamp: eventTime(event),
   });
   let next = { ...s, config: { ...config, _raidHistory: raids } };
+  // Mirror into the raw _config (cutTradeRoute's _cutRoutes discipline) so
+  // the annotation survives a _config-based regeneration.
+  if (s._config && typeof s._config === 'object') {
+    next._config = { ...s._config, _raidHistory: raids };
+  }
 
   // Optional: damage a named institution if the payload specifies it.
   if (event.payload?.damagedInstitutionId) {
@@ -892,12 +1028,63 @@ const STRESSOR_SYSTEM_ALIASES = Object.freeze({
   tax_revenue: 'trade_connectivity',
 });
 
+// Case-insensitive stressor-type comparison — the same tolerance the
+// container upserts and resolveStressor's matchesEntry use.
+const stressTypeEq = (a, b) => String(a || '').toLowerCase() === String(b || '').toLowerCase();
+
 /**
- * APPLY_STRESSOR — an authored crisis ONSET. Two writes:
+ * Normalized view of config.stressorEdits — the EDITOR-authored stressor
+ * deltas the generation re-applies (resolveStress's post-roll overlay —
+ * resourceEdits' architecture):
+ *   { added }    full stress entries authored by APPLY_STRESSOR, re-applied
+ *                verbatim (upsert by type) so the authored stressor — not
+ *                just its promoted condition — survives a regeneration. The
+ *                stress ENTRY is a derivation output the pipeline re-rolls
+ *                from config; without the record it vanished on the first
+ *                applyChange while the condition survived via
+ *                config.eventConditions, and the dossier showed a crisis
+ *                with no stressor behind it;
+ *   { resolved } stressor types RESOLVE_STRESSOR ended — a suppression list,
+ *                so resolving a CONFIG-FORCED stressor (selectedStresses /
+ *                stressType) stays resolved across regens instead of the
+ *                re-rolled twin re-minting a fresh GENERATION condition once
+ *                the eased config.eventConditions record expires.
+ * The handlers keep the two lists mutually agreeing (an APPLY clears the
+ * type's resolved record; a RESOLVE strikes the type's added entry).
+ */
+function stressorEditsOf(config) {
+  const se = config?.stressorEdits || {};
+  return {
+    added: Array.isArray(se.added) ? se.added : [],
+    resolved: Array.isArray(se.resolved) ? se.resolved : [],
+  };
+}
+
+/**
+ * Dual-write a stressorEdits update to BOTH config and _config (when
+ * present) — withCustomTradeGoods' discipline; see that helper for why.
+ * (stressorEdits is genuine user input, deliberately NOT in
+ * settlementSlice's DERIVED_CONFIG_KEYS strip.)
+ */
+function withStressorEdits(s, stressorEdits) {
+  const next = { ...s, config: { ...(s.config || {}), stressorEdits } };
+  if (s._config && typeof s._config === 'object') {
+    next._config = { ...s._config, stressorEdits };
+  }
+  return next;
+}
+
+/**
+ * APPLY_STRESSOR — an authored crisis ONSET. Three writes:
  *   1. the stress entry lands in the settlement's stress container (the same
  *      shape the Roster's add-stressor correction uses), so the dossier and
  *      the generation-era stress consumers see it;
- *   2. the engine consequence: the SAME promotion channel generation uses
+ *   2. the SAME entry is recorded in config.stressorEdits.added (dual-written
+ *      to _config), because the live container is a derivation output a
+ *      regeneration re-rolls from config — resolveStress's post-roll overlay
+ *      re-applies the record so the authored stressor survives applyChange
+ *      alongside the condition below;
+ *   3. the engine consequence: the SAME promotion channel generation uses
  *      (conditionPromotion) maps the stressor to its condition archetype.
  *      Types with no promotion rule (custom stressors, exotic catalog types)
  *      fall back to a generic custom_crisis condition carrying the world-pulse
@@ -911,10 +1098,19 @@ function applyStressor(s, event) {
   const label = event.payload?.label || labelFromTarget(type);
   const severity = Math.max(0, Math.min(1, Number(event.payload?.severity ?? 0.6)));
 
-  // First existing stress container wins (same probe removedThreat uses);
-  // a settlement with none gets the editor's canonical `stress` array.
-  const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(s[k])) || 'stress';
-  const list = Array.isArray(s[containerKey]) ? s[containerKey] : [];
+  // First existing ARRAY container wins (same probe removedThreat uses).
+  // Pipeline settlements carry a SINGLE stressor as a bare object,
+  // dual-written under stress + stressors (assembleSettlement) — the old
+  // `|| 'stress'` fallback CLOBBERED that object with a fresh one-entry
+  // array under `stress` and left the stale twin under `stressors`. Lift
+  // the object(s) into the working list and write the merged array back to
+  // EVERY key that held one; a settlement with no container at all gets the
+  // editor's canonical `stress` array.
+  const arrayKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(s[k]));
+  const objectKeys = arrayKey ? [] : ['stressors', 'stress', 'stresses']
+    .filter(k => s[k] && typeof s[k] === 'object');
+  const writeKeys = arrayKey ? [arrayKey] : objectKeys.length ? objectKeys : ['stress'];
+  const list = arrayKey ? s[arrayKey] : [...new Set(objectKeys.map(k => s[k]))];
   // Match by type; the display-name fallback only rescues legacy entries
   // that never recorded one — matching a TYPED entry by label would let a
   // custom stressor labeled 'Famine' overwrite the famine entry's type and
@@ -936,9 +1132,28 @@ function applyStressor(s, event) {
   // local entry to the NEW authored severity/label/source. The roaming twin
   // (settlementSlice -> injectCampaignStressor) already upserts at the new
   // severity; keeping the old local entry made the representations disagree.
-  const next = existingIdx === -1
-    ? { ...s, [containerKey]: [...list, entry] }
-    : { ...s, [containerKey]: list.map((st, i) => (i === existingIdx ? { ...st, ...entry } : st)) };
+  const merged = existingIdx === -1
+    ? [...list, entry]
+    : list.map((st, i) => (i === existingIdx ? { ...st, ...entry } : st));
+  let next = { ...s };
+  for (const k of writeKeys) next[k] = merged;
+
+  // The authored onset is ALSO recorded in config.stressorEdits (dual-written
+  // to _config — the resourceEdits discipline; see stressorEditsOf). The
+  // stress entry above is a derivation output a regeneration re-rolls from
+  // config; resolveStress re-applies the record as a post-roll overlay so
+  // the dossier keeps showing the stressor behind the surviving condition.
+  // Upsert by type (re-authoring refreshes the record the way the live
+  // upsert refreshes the entry); clearing the type's `resolved` suppression
+  // lets a re-authored crisis return after a RESOLVE_STRESSOR.
+  const edits = stressorEditsOf(s.config);
+  const recordIdx = edits.added.findIndex(e => stressTypeEq(e?.type, type));
+  next = withStressorEdits(next, {
+    added: recordIdx === -1
+      ? [...edits.added, entry]
+      : edits.added.map((e, i) => (i === recordIdx ? entry : e)),
+    resolved: edits.resolved.filter(t => !stressTypeEq(t, type)),
+  });
 
   const archetype = archetypeForStressor(entry);
   if (archetype) {
@@ -1013,27 +1228,55 @@ function changeRulingPower(s, event) {
  * conditionPromotion path). Wind-down is 'easing' + a near-term expiry rather
  * than outright removal, so the substrate sees a crisis trailing off instead
  * of vanishing without trace; the resolution carries event provenance on the
- * condition's causes. A target with no matching entry is a settlement no-op
- * (registry deltas still land — guard upstream, same posture as
- * changeRulingPower). The roaming world-pulse twin resolves at the store
- * layer (settlementSlice → resolveCampaignStressor), mirroring the inject
- * bridge.
+ * condition's causes. The wind-down does NOT require a live stress entry: on
+ * a legacy save regenerated before config.stressorEdits existed, the entry
+ * was re-rolled away while the promoted condition survived via
+ * config.eventConditions — resolving by type still finds it. The resolution
+ * is itself recorded in config.stressorEdits (strike the type's added entry,
+ * suppress the type) so a resolved CONFIG-FORCED stressor stays resolved
+ * across regenerations. A target matching neither an entry nor a condition is a
+ * settlement no-op (registry deltas still land — guard upstream, same
+ * posture as changeRulingPower: batch staging hard-validates the target
+ * against entry/record/condition (batch.js eventConsumes, kind 'stressor')
+ * and the composer's picker offers the live stressors). The roaming
+ * world-pulse twin resolves at
+ * the store layer (settlementSlice → resolveCampaignStressor), mirroring the
+ * inject bridge.
  */
 function resolveStressor(s, event) {
   const type = String(event.payload?.stressorType || event.targetId || '').trim();
   if (!type) return s;
-  const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(s[k]));
-  if (!containerKey) return s;
-  const list = s[containerKey];
   // Type OR display-name match, case-insensitive — the picker passes the
   // entry's type when it has one, its name for legacy untyped entries.
-  const idx = list.findIndex(st =>
+  const matchesEntry = (st) =>
     String(st?.type || '').toLowerCase() === type.toLowerCase()
-    || String(st?.name || '').toLowerCase() === type.toLowerCase());
-  if (idx === -1) return s;
-  const removed = list[idx];
+    || String(st?.name || '').toLowerCase() === type.toLowerCase();
+  const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(s[k]));
+  const list = containerKey ? s[containerKey] : [];
+  const idx = list.findIndex(matchesEntry);
+  // A missing array entry is NOT a full no-op anymore: the stress entry is a
+  // derivation output that a regeneration re-rolls away, while the promoted
+  // condition survives via config.eventConditions — so the condition must
+  // stay resolvable after a what-if. No matching entry AND no matching
+  // condition below → settlement no-op, same posture as before.
+  let removed = idx === -1 ? null : list[idx];
+  let next = removed ? { ...s, [containerKey]: list.filter((_, i) => i !== idx) } : s;
+  if (!removed) {
+    // Pipeline settlements carry a SINGLE stressor as a bare object,
+    // dual-written under stress + stressors (assembleSettlement) — the array
+    // probe above never sees it, which made resolving a GENERATOR-rolled
+    // crisis a stressor no-op (an easing condition beside a still-raging
+    // stressor). Match and clear that shape too; nulling the keys mirrors
+    // the no-stress generated shape.
+    const objectKeys = ['stressors', 'stress', 'stresses'].filter(k =>
+      s[k] && typeof s[k] === 'object' && !Array.isArray(s[k]) && matchesEntry(s[k]));
+    if (objectKeys.length) {
+      removed = s[objectKeys[0]];
+      next = { ...s };
+      for (const k of objectKeys) next[k] = null;
+    }
+  }
   const label = event.payload?.label || removed?.label || removed?.name || labelFromTarget(type);
-  let next = { ...s, [containerKey]: list.filter((_, i) => i !== idx) };
 
   // Wind down what the crisis promoted. Matching mirrors applyStressor's two
   // write paths: the direct stamp (custom_crisis / authored onset) and the
@@ -1041,8 +1284,21 @@ function resolveStressor(s, event) {
   // wind-down sets status 'easing' with a short remaining duration (the
   // documented fallback) instead of deleting evolved state outright.
   const archetype = archetypeForStressor(removed) || archetypeForStressor({ type });
+  // Local RESOLVE_STRESSOR never winds down a CAMPAIGN-owned condition: one
+  // whose ORIGIN cause is a regional channel or the world pulse belongs to
+  // that layer (it resolves through its own UI/twin and is preserved across
+  // local edits by preserveWorldConditions). Winding it here would stamp an
+  // event cause onto it, recruiting it into config.eventConditions — and the
+  // record would resurrect it after the campaign layer resolved it. Origin =
+  // the FIRST cause: onsets write their provenance first; later causes are
+  // appended receipts. Event- and generation-born conditions (and bare
+  // legacy ones with no causes) are local and stay resolvable.
+  const locallyOwned = (c) => {
+    const origin = String(c?.causes?.[0]?.source ?? '');
+    return origin === '' || origin === 'event' || origin === 'generation';
+  };
   const matchesCrisis = (c) => {
-    if (!c) return false;
+    if (!c || !locallyOwned(c)) return false;
     const stamped = String(c.triggeredAt?.sourceEventTargetId || '').toLowerCase() === type.toLowerCase();
     return stamped || (archetype != null && c.archetype === archetype);
   };
@@ -1069,6 +1325,26 @@ function resolveStressor(s, event) {
     };
   });
   if (wound) next = { ...next, activeConditions: conditions };
+  // Record the resolution in config.stressorEdits (dual-written to _config):
+  // strike the type's authored `added` entry so the overlay stops re-applying
+  // it, and add the type to the `resolved` suppression list so a
+  // CONFIG-FORCED stressor (selectedStresses / stressType) stays resolved
+  // across regenerations — without it the re-rolled stressor re-minted a
+  // fresh GENERATION condition ~2 ticks after the eased
+  // config.eventConditions record expired. A no-match resolve records
+  // nothing — the settlement no-op posture above.
+  if (removed || wound) {
+    const resolvedType = String(removed?.type || type);
+    const edits = stressorEditsOf(next.config);
+    const added = edits.added.filter(e => !stressTypeEq(e?.type, resolvedType));
+    const alreadyResolved = edits.resolved.some(t => stressTypeEq(t, resolvedType));
+    if (added.length !== edits.added.length || !alreadyResolved) {
+      next = withStressorEdits(next, {
+        added,
+        resolved: alreadyResolved ? edits.resolved : [...edits.resolved, resolvedType],
+      });
+    }
+  }
   return next;
 }
 
@@ -1079,15 +1355,50 @@ function tradeGoodLabel(entry) {
 }
 
 /**
+ * Normalized view of config.customTradeGoods — the EDITOR-authored trade-good
+ * input the economy derivation consumes (generateEconomy's
+ * applyCustomTradeGoodsConfig): { exports, imports } plain labels,
+ * { transit } entrepôt goods, { removed } the suppression list that keeps a
+ * removal of a generator-derived good gone across regenerations.
+ */
+function customTradeGoodsOf(config) {
+  const ctg = config?.customTradeGoods || {};
+  return {
+    exports: Array.isArray(ctg.exports) ? ctg.exports : [],
+    imports: Array.isArray(ctg.imports) ? ctg.imports : [],
+    transit: Array.isArray(ctg.transit) ? ctg.transit : [],
+    removed: Array.isArray(ctg.removed) ? ctg.removed : [],
+  };
+}
+
+/**
+ * Write a customTradeGoods update to BOTH config and _config (when present).
+ * applyChange regenerates from the raw _config first and only falls back to
+ * the stripped config snapshot — an authored good recorded in just one of
+ * them would survive one regeneration path and vanish on the other.
+ * (customTradeGoods is genuine user input, deliberately NOT in
+ * settlementSlice's DERIVED_CONFIG_KEYS strip.)
+ */
+function withCustomTradeGoods(s, customTradeGoods) {
+  const next = { ...s, config: { ...(s.config || {}), customTradeGoods } };
+  if (s._config && typeof s._config === 'object') {
+    next._config = { ...s._config, customTradeGoods };
+  }
+  return next;
+}
+
+/**
  * ADD_TRADE_GOOD — append a good label to the canonical trade lists. Exports
  * flagged entrepôt take the literal '<label> (transit)' suffixed form the
  * chain deriver emits AND land in economicState.transit (the un-suffixed
  * label, matching getTradeModifiers' transit shape). Dedupe is
- * case-insensitive across string and legacy object entries. economicState
- * only: re-derivation rebuilds from config, and no config-level custom
- * trade-good input exists (generateEconomy's customTradeLabels is derived
- * from Compendium-confirmed chains, not a config field) — same survival
- * posture as the Roster's silent trade edits.
+ * case-insensitive across string and legacy object entries.
+ *
+ * Dual-format discipline (depleteResource's): the live economicState write
+ * makes the good visible NOW; the config.customTradeGoods write is the input
+ * the economy derivation re-applies, so the authored good survives a full
+ * regeneration. Re-adding a removed good clears its suppression entry — the
+ * two formats must keep agreeing.
  */
 function addTradeGood(s, event) {
   const label = String(event.payload?.label || event.targetId || '').trim();
@@ -1106,8 +1417,23 @@ function addTradeGood(s, event) {
     const transit = Array.isArray(nextEc.transit) ? nextEc.transit : [];
     if (!has(transit, label)) nextEc = { ...nextEc, transit: [...transit, label] };
   }
-  if (nextEc === ec) return s;
-  return { ...s, economicState: nextEc };
+
+  const ctg = customTradeGoodsOf(s.config);
+  const bucket = entrepot ? 'transit' : (direction === 'import' ? 'imports' : 'exports');
+  const inBucket = ctg[bucket].some(l => String(l).toLowerCase() === label.toLowerCase());
+  const removed = ctg.removed.filter(l => String(l).toLowerCase() !== label.toLowerCase());
+  const configChanged = !inBucket || removed.length !== ctg.removed.length;
+
+  if (nextEc === ec && !configChanged) return s;
+  let next = nextEc === ec ? s : { ...s, economicState: nextEc };
+  if (configChanged) {
+    next = withCustomTradeGoods(next, {
+      ...ctg,
+      [bucket]: inBucket ? ctg[bucket] : [...ctg[bucket], label],
+      removed,
+    });
+  }
+  return next;
 }
 
 /**
@@ -1115,7 +1441,12 @@ function addTradeGood(s, event) {
  * the ' (transit)' suffix) from every list it can sit in: the canonical
  * primaryExports/primaryImports, transit, and the legacy exports/imports
  * aliases (canonExports falls back to them on old saves). No matching label
- * anywhere → no-op.
+ * anywhere (economicState or the authored config lists) → no-op.
+ *
+ * Dual-format discipline: alongside the live strip, the label is struck from
+ * every config.customTradeGoods authored list AND recorded in its `removed`
+ * suppression list, so a removal — even of a generator-derived good — stays
+ * gone across a full regeneration.
  */
 function removeTradeGood(s, event) {
   const raw = String(event.payload?.label || event.targetId || '').trim();
@@ -1134,8 +1465,27 @@ function removeTradeGood(s, event) {
       nextEc[key] = filtered;
     }
   }
-  if (!changed) return s;
-  return { ...s, economicState: nextEc };
+
+  const ctg = customTradeGoodsOf(s.config);
+  const strike = (arr) => arr.filter(l => !targets.has(String(l).toLowerCase()));
+  const struck = {
+    exports: strike(ctg.exports),
+    imports: strike(ctg.imports),
+    transit: strike(ctg.transit),
+  };
+  const configChanged =
+    struck.exports.length !== ctg.exports.length ||
+    struck.imports.length !== ctg.imports.length ||
+    struck.transit.length !== ctg.transit.length;
+
+  if (!changed && !configChanged) return s;
+  let next = changed ? { ...s, economicState: nextEc } : s;
+  const alreadyRemoved = ctg.removed.some(l => String(l).toLowerCase() === base.toLowerCase());
+  next = withCustomTradeGoods(next, {
+    ...struck,
+    removed: alreadyRemoved ? ctg.removed : [...ctg.removed, base],
+  });
+  return next;
 }
 
 /**
@@ -1159,18 +1509,26 @@ function addResource(s, event) {
   const custom = Array.isArray(config.nearbyResourcesCustom) ? config.nearbyResourcesCustom : [];
   const state = config.nearbyResourcesState || {};
   const depleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
-  return {
-    ...s,
-    config: {
-      ...config,
-      nearbyResources: nearby.includes(key) ? nearby : [...nearby, key],
-      nearbyResourcesState: { ...state, [key]: 'allow' },
-      nearbyResourcesDepleted: depleted.filter(k => k !== key),
-      ...(catalogKey
-        ? {}
-        : { nearbyResourcesCustom: custom.includes(key) ? custom : [...custom, key] }),
-    },
-  };
+  const edits = resourceEditsOf(config);
+  return withResourceEdits(s, {
+    nearbyResources: nearby.includes(key) ? nearby : [...nearby, key],
+    nearbyResourcesState: { ...state, [key]: 'allow' },
+    // Slug-equivalent filter: also clears the legacy slug-form record the
+    // old depleteResource wrote for custom resources ('moonpetal_grove').
+    nearbyResourcesDepleted: depleted.filter(k => k !== key && slugify(k) !== slug),
+    ...(catalogKey
+      ? {}
+      : { nearbyResourcesCustom: custom.includes(key) ? custom : [...custom, key] }),
+  }, {
+    ...edits,
+    // An opened node starts open: clear the key's removed suppression AND
+    // its depleted record (mirrors the live nearbyResourcesDepleted filter).
+    added: edits.added.some(e => slugEq(String(e?.key || ''), key))
+      ? edits.added
+      : [...edits.added, { key, custom: !catalogKey }],
+    removed: edits.removed.filter(k => !slugEq(k, key)),
+    depleted: edits.depleted.filter(k => !slugEq(k, key)),
+  });
 }
 
 /**
@@ -1189,16 +1547,23 @@ function removeResource(s, event) {
   if (!nearby.some(k => keys.has(k))) return s;
   const state = { ...(config.nearbyResourcesState || {}) };
   for (const k of keys) delete state[k];
-  return {
-    ...s,
-    config: {
-      ...config,
-      nearbyResources: nearby.filter(k => !keys.has(k)),
-      nearbyResourcesCustom: (config.nearbyResourcesCustom || []).filter(k => !keys.has(k)),
-      nearbyResourcesState: state,
-      nearbyResourcesDepleted: (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k)),
-    },
-  };
+  // The roster forms actually struck — what the suppression list must name
+  // so a regenerated roster (same key forms) drops them again.
+  const struckKeys = nearby.filter(k => keys.has(k));
+  const hitsStruck = k => struckKeys.some(sk => slugEq(k, sk));
+  const edits = resourceEditsOf(config);
+  return withResourceEdits(s, {
+    nearbyResources: nearby.filter(k => !keys.has(k)),
+    nearbyResourcesCustom: (config.nearbyResourcesCustom || []).filter(k => !keys.has(k)),
+    nearbyResourcesState: state,
+    nearbyResourcesDepleted: (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k)),
+  }, {
+    ...edits,
+    added: edits.added.filter(e => !hitsStruck(String(e?.key || ''))),
+    removed: [...edits.removed, ...struckKeys.filter(k => !edits.removed.some(r => slugEq(r, k)))],
+    depleted: edits.depleted.filter(k => !hitsStruck(k)),
+    recovered: edits.recovered.filter(k => !hitsStruck(k)),
+  });
 }
 
 // The settlement-NPC standing fields the swap exchanges. Everything else on

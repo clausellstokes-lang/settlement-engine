@@ -18,7 +18,7 @@
  * replaces by stable id, so re-running promotion never duplicates a condition.
  */
 
-import { withActiveCondition, withoutActiveCondition } from './activeConditions.js';
+import { deriveActiveCondition, withActiveCondition, withoutActiveCondition } from './activeConditions.js';
 import { canonStressors } from './canonicalAccessors.js';
 
 // Ordered stressor (type/name) fragment -> condition archetype. First match wins.
@@ -139,6 +139,47 @@ export function promoteStressorsToConditions(settlement, origin = null) {
         ? [{ source: 'event', eventId: origin.eventId, detail: origin.detail || `${label} began.` }]
         : [{ source: 'generation', detail: `Settlement generated under stressor "${label}".` }],
     });
+  }
+  return next;
+}
+
+/**
+ * Re-promote the EVENT-authored conditions recorded in
+ * config.eventConditions onto a freshly generated settlement. The record is
+ * the projection mutate.js / the aging helpers keep in sync
+ * (activeConditions.withEventConditionsSynced): a full regeneration rebuilds
+ * the settlement from the raw _config and would otherwise drop every
+ * condition an event promoted — the same input-survives-regeneration seam
+ * resourceEdits and customTradeGoods close for config-level edits.
+ *
+ * Runs AFTER promoteStressorsToConditions. Entries are re-applied verbatim
+ * (deriveActiveCondition is idempotent), so evolved state — elapsed ticks,
+ * drifted severity, a RESOLVE_STRESSOR wind-down to 'easing' — survives the
+ * regeneration instead of restarting at the authored onset. For each entry,
+ * a GENERATION-stamped condition of the same archetype (re-promoted from the
+ * re-rolled stressors) is dropped first: the authored event owns that crisis
+ * (the same authored-beats-generation rule the origin path above applies),
+ * and the twin carries a different derived id, so replace-by-id alone would
+ * leave both standing and double-penalize the same affectedSystems. Distinct
+ * event conditions of one archetype (two severed routes) keep their distinct
+ * ids and all survive. Pure, deterministic, consumes no rng — a config
+ * without the record generates byte-identically.
+ */
+export function reapplyEventConditions(settlement) {
+  const record = settlement?.config?.eventConditions ?? settlement?._config?.eventConditions;
+  if (!Array.isArray(record) || record.length === 0) return settlement;
+  let next = settlement;
+  for (const entry of record) {
+    const condition = deriveActiveCondition(entry);
+    if (!condition) continue;
+    for (const cond of next.activeConditions || []) {
+      if (cond?.archetype === condition.archetype
+        && cond?.id !== condition.id
+        && cond?.triggeredAt?.sourceEventType === 'GENERATION') {
+        next = withoutActiveCondition(next, cond.id);
+      }
+    }
+    next = withActiveCondition(next, condition);
   }
   return next;
 }

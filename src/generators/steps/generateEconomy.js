@@ -32,6 +32,84 @@ import { deriveTradeLinks } from '../../domain/region/tradeLinks.js';
 import { foldTradeCategories } from '../../domain/region/foldTradeCategories.js';
 
 /**
+ * applyCustomTradeGoodsConfig — fold the EDITOR-authored trade-good input
+ * (config.customTradeGoods, written by ADD/REMOVE_TRADE_GOOD in
+ * domain/events/mutate.js alongside their live economicState writes) into
+ * the derived lists, so authored goods survive a full regeneration.
+ *
+ *   { exports, imports }  plain labels appended with case-insensitive dedupe;
+ *   { transit }           entrepôt goods — the literal '<label> (transit)'
+ *                         export form AND the un-suffixed transit entry
+ *                         (getTradeModifiers' shape), matching the event's
+ *                         live write;
+ *   { removed }           suppression list — base labels stripped from every
+ *                         list, with or without the '(transit)' suffix, so a
+ *                         removal of a GENERATOR-derived good stays gone too.
+ *
+ * Removals run first and win over adds (the events keep the two in
+ * agreement; this is the defensive order). Labels this call actually
+ * APPENDS are merged into customTradeLabels so the dossier gold-tints them
+ * and finalizeTradeLists treats them as opaque (never merged/renamed) — a
+ * label the generator already derived keeps its vanilla treatment.
+ * Idempotent, and a strict no-op (lists untouched) when the config carries
+ * no entries — vanilla generations stay byte-identical. Re-applied by
+ * finalizeTradeLists because demand imports can reintroduce a removed label
+ * and the 10-import cap can cut an authored one.
+ */
+export function applyCustomTradeGoodsConfig(economicState, customTradeGoods) {
+  const ctg = customTradeGoods || {};
+  const exportsIn = Array.isArray(ctg.exports) ? ctg.exports : [];
+  const importsIn = Array.isArray(ctg.imports) ? ctg.imports : [];
+  const transitIn = Array.isArray(ctg.transit) ? ctg.transit : [];
+  const removedIn = Array.isArray(ctg.removed) ? ctg.removed : [];
+  if (!exportsIn.length && !importsIn.length && !transitIn.length && !removedIn.length) return;
+
+  const labelOf = (e) => (typeof e === 'string' ? e : String(e?.name || e?.good || e?.label || ''));
+  const baseOf = (l) => String(l).replace(/\s*\(transit\)\s*$/i, '').trim().toLowerCase();
+  const removed = new Set(removedIn.map(baseOf));
+
+  if (removed.size) {
+    const keep = (list) => list.filter((e) => !removed.has(baseOf(labelOf(e))));
+    economicState.primaryExports = keep(economicState.primaryExports || []);
+    economicState.primaryImports = keep(economicState.primaryImports || []);
+    if (Array.isArray(economicState.transit)) economicState.transit = keep(economicState.transit);
+  }
+
+  const customExp = [];
+  const customImp = [];
+  const ensure = (listKey, written, custom) => {
+    const list = Array.isArray(economicState[listKey]) ? economicState[listKey] : [];
+    const k = String(written).toLowerCase();
+    if (list.some((e) => labelOf(e).toLowerCase() === k)) return;
+    economicState[listKey] = [...list, written];
+    if (custom) custom.push(written);
+  };
+  for (const l of exportsIn) {
+    if (l && !removed.has(baseOf(l))) ensure('primaryExports', String(l), customExp);
+  }
+  for (const l of importsIn) {
+    if (l && !removed.has(baseOf(l))) ensure('primaryImports', String(l), customImp);
+  }
+  for (const l of transitIn) {
+    if (!l || removed.has(baseOf(l))) continue;
+    ensure('primaryExports', `${l} (transit)`, customExp);
+    ensure('transit', String(l), null);
+  }
+
+  if (customExp.length || customImp.length) {
+    const cur = economicState.customTradeLabels || {};
+    const merge = (a, b) => {
+      const seen = new Set((a || []).map((x) => String(x).toLowerCase()));
+      return [...(a || []), ...b.filter((x) => !seen.has(String(x).toLowerCase()))];
+    };
+    economicState.customTradeLabels = {
+      exports: merge(cur.exports, customExp),
+      imports: merge(cur.imports, customImp),
+    };
+  }
+}
+
+/**
  * computeEconomyState — the full economicState derivation (legacy generator
  * + §14 custom-chain promotion + neighbour trade links + category folding).
  *
@@ -103,6 +181,13 @@ export function computeEconomyState(ctx) {
       economicState.customTradeLabels = { exports: customExports, imports: customImports };
     }
   }
+
+  // Editor-authored trade goods (config.customTradeGoods — ADD/REMOVE_TRADE_GOOD
+  // write it alongside their live economicState edits) join the lists HERE:
+  // after the chain-derived trade endpoints, before neighbour links + category
+  // folding, so authored goods participate in both and removals suppress
+  // derived labels before anything downstream can see them.
+  applyCustomTradeGoodsConfig(economicState, effectiveConfig.customTradeGoods);
 
   // §14 Phase 3b — good-level cross-settlement trade with the imported neighbour:
   // record which of this settlement's exports/imports actually flow to/from the

@@ -52,6 +52,7 @@ import {
 } from '../domain/pendingEdits.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
+import { scrubUndoneEvent } from '../domain/events/undoEvent.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { eligibleCustomContent } from '../domain/customContentSchema.js';
@@ -566,19 +567,30 @@ export const createSettlementSlice = (set, get) => ({
           pipelineHistory.push({ id: name, ts: Date.now(), summary });
         },
     });
+      // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
+      // authored conditions survive a local regeneration — a reroll replaces
+      // the town, not the campaign layer's crises. No-op on a first
+      // generation (no prior settlement). EVENT-authored conditions are
+      // deliberately NOT carried here: they ride config.eventConditions, so
+      // they survive only when the generation input actually records them.
+    const reconciled = reconcileSettlementChange(result, state.settlement, {
+      source: 'regenerate',
+      changeType: 'GENERATE_SETTLEMENT',
+      changeLabel: result?.name,
+    });
       // Derive the SystemState immediately so the UI never sees a settlement
       // without its accompanying state snapshot. The domain function is
       // pure — no store, no React — and tolerant of partial inputs, so a
       // sparse settlement still produces a usable state.
     let systemState = null;
     try {
-      systemState = deriveSystemState(result);
+      systemState = deriveSystemState(reconciled);
     } catch (e) {
       console.warn('[settlementSlice] deriveSystemState failed:', e);
     }
     const now = new Date().toISOString();
     set(state => {
-        state.settlement = result;
+        state.settlement = reconciled;
         state.activeSaveId = null;
         state.lastSeed = seed;
         state.lastCtx = capturedCtx;
@@ -612,7 +624,7 @@ export const createSettlementSlice = (set, get) => ({
       else incrementAnonFull();
     }
 
-    return result;
+    return reconciled;
   },
 
   setSettlement: (settlement) =>
@@ -696,12 +708,32 @@ export const createSettlementSlice = (set, get) => ({
    */
   proposeChange: (type, payload) => {
     const state = get();
-    const { settlement, _lastSeed, lastCtx } = state;
+    const { settlement } = state;
     if (!settlement) return;
 
-    // Build the config overrides for this change type
+    // Build the config overrides for this change type. Stressor what-ifs
+    // carry a config DELTA under overrides.config (selectedStresses /
+    // selectedStressesRandom, occasionally stressorEdits) — never a whole
+    // config object: applyChange layers these keys over the raw _config it
+    // rebuilds, and spreading the resolved settlement.config snapshot here
+    // would smuggle derived keys (stressTypes, _magicTradeOnly, …) back in
+    // as generation input.
     let changedKeys = [];
     let overrides = {};
+
+    // The stressor set the engine ACTUALLY produced (resolveStress →
+    // stressConfirmPass thread it into the resolved config snapshot). This
+    // — not the raw selectedStresses pool — is the base a stressor what-if
+    // edits: under random mode the raw pool is empty, so a pool-based add
+    // would erase every emergent stressor as a side effect, and a
+    // pool-based remove would erase ALL of them (empty pool +
+    // random:false ⇒ generateStress returns null). Promoting the visible
+    // set into the pinned pool is a deliberate user act (the
+    // ConfigurationPanel's un-random toggle does the same), not a silent
+    // derived-config echo.
+    const effectiveStressTypes = () =>
+      settlement.config?.stressTypes
+        || (settlement.config?.stressType ? [settlement.config.stressType] : []);
 
     switch (type) {
       case 'addInstitution': {
@@ -719,21 +751,41 @@ export const createSettlementSlice = (set, get) => ({
         changedKeys = ['institutionToggles'];
         break;
       }
-      case 'addStressor':
-        overrides = {
-          config: {
-            ...(lastCtx?.config || settlement.config || {}),
-            selectedStresses: [...(settlement.config?.selectedStresses || []), payload.stressType],
-            selectedStressesRandom: false,
-          },
+      case 'addStressor': {
+        const effective = effectiveStressTypes();
+        const config = {
+          selectedStresses: effective.includes(payload.stressType)
+            ? [...effective]
+            : [...effective, payload.stressType],
+          selectedStressesRandom: false,
         };
+        // A RESOLVE_STRESSOR event suppresses config-forced re-rolls of its
+        // type (resolveStress's stressorEdits.resolved filter). An explicit
+        // re-add supersedes that suppression — without clearing it, this
+        // what-if would pin the type into the pool and the overlay would
+        // filter it right back out, a silent no-op. Raw-first read mirrors
+        // applyChange's merge base.
+        const edits = (settlement._config || settlement.config || {}).stressorEdits;
+        const resolved = Array.isArray(edits?.resolved) ? edits.resolved : [];
+        const lower = (v) => String(v || '').toLowerCase();
+        if (resolved.some(r => lower(r) === lower(payload.stressType))) {
+          config.stressorEdits = {
+            ...edits,
+            resolved: resolved.filter(r => lower(r) !== lower(payload.stressType)),
+          };
+        }
+        overrides = { config };
         changedKeys = ['config'];
         break;
+      }
       case 'removeStressor':
+        // Event-authored stressors (config.stressorEdits.added) are NOT
+        // touched here: the overlay re-applies them post-roll, and ending
+        // one belongs to the event channel (RESOLVE_STRESSOR), not a config
+        // what-if.
         overrides = {
           config: {
-            ...(lastCtx?.config || settlement.config || {}),
-            selectedStresses: (settlement.config?.selectedStresses || []).filter(s => s !== payload.stressType),
+            selectedStresses: effectiveStressTypes().filter(t => t !== payload.stressType),
             selectedStressesRandom: false,
           },
         };
@@ -782,6 +834,12 @@ export const createSettlementSlice = (set, get) => ({
       ...(state.settlement?._config
         || stripDerivedConfigKeys(state.settlement?.config)
         || state.config),
+      // Stressor what-ifs ride a config DELTA (proposeChange builds only
+      // the keys that change: selectedStresses / selectedStressesRandom,
+      // occasionally stressorEdits) layered over the raw base so the
+      // proposed change wins. Institution what-ifs keep their own
+      // toggles channel below.
+      ...(pendingChange.overrides.config || {}),
       _institutionToggles: pendingChange.overrides.institutionToggles || state.institutionToggles,
       _categoryToggles:    state.categoryToggles,
       _goodsToggles:       state.goodsToggles,
@@ -800,12 +858,23 @@ export const createSettlementSlice = (set, get) => ({
           : eligibleCustomContent(state.customContent, { tier: state.config?.settType }),
         onComplete: (ctx) => { capturedCtx = ctx; },
     });
+    // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
+    // authored conditions survive a local regeneration. EVENT-authored ones
+    // already ride through config.eventConditions (reapplyEventConditions, and
+    // isWorldAuthoredCondition disclaims them so they aren't carried twice) —
+    // without this reconcile, the same what-if click kept the DM's authored
+    // crises but silently erased every pulse/party/regional one.
+    const reconciled = reconcileSettlementChange(result, state.settlement, {
+      source: 'what_if_change',
+      changeType: pendingChange.type,
+      changeLabel: pendingChange.payload?.name || pendingChange.payload?.stressType,
+    });
     let nextSystemState = state.systemState;
-    try { nextSystemState = deriveSystemState(result); } catch (e) {
+    try { nextSystemState = deriveSystemState(reconciled); } catch (e) {
       console.warn('[settlementSlice.applyChange] deriveSystemState failed:', e);
     }
     set(s => {
-        s.settlement     = result;
+        s.settlement     = reconciled;
         s.lastSeed       = seed;       // unchanged unless missing — preserves identity
         s.lastCtx        = capturedCtx;
         s.systemState    = nextSystemState;
@@ -1399,34 +1468,62 @@ export const createSettlementSlice = (set, get) => ({
   dismissBatchPreview: () => set(state => { state.pendingBatchPreview = null; }),
 
   /**
-   * Undo the most recent canon event. Restores both the systemState
-   * and the entity-level mutations the event produced — every
-   * impairment carries its causeEventId, so we can scrub them out
-   * cleanly without rebuilding the settlement from scratch.
+   * Undo the most recent canon event. Restores the systemState and scrubs
+   * every settlement artifact the event left behind: impairments (each
+   * carries its causeEventId), the activeCondition the event promoted, and
+   * the authored records it dual-wrote into config/_config — eventConditions
+   * / resourceEdits / customTradeGoods / stressorEdits / _cutRoutes plus the
+   * annotation ledgers and stress entries (domain/events/undoEvent.js). The record
+   * scrub matters because regeneration deliberately RE-APPLIES those records
+   * (reapplyEventConditions, resolveResources, generateEconomy): without it
+   * an undone PLAGUE re-promoted its condition on every what-if, permanently.
    *
-   * This works for impairment-shaped events. Removal events
-   * (REMOVE_INSTITUTION setting status='removed') aren't reversed
-   * automatically yet — those need an explicit RESTORE_INSTITUTION
-   * follow-up event. The architecture supports finer-grained undo
-   * once removal events also stamp their causeEventId for reversal.
+   * Removal events (REMOVE_INSTITUTION setting status='removed') reverse via
+   * the removedByEventId stamp in stripImpairmentsForEvent; resource/trade
+   * records restore from the pre-event snapshot applyEvent stamped on the
+   * log entry (legacy entries without one keep today's leave-it behavior).
    */
-  undoLastEvent: () => set(state => {
-    if (state.phase !== 'canon' || state.eventLog.length === 0) return;
-    const popped = state.eventLog.pop();
-    state.systemState = popped.beforeState;
-    const eventId = popped.event?.id;
-    if (!eventId || !state.settlement) return;
-    // Walk every entity list and strip impairments tagged with this event.
-    state.settlement.institutions = (state.settlement.institutions || []).map(stripImpairmentsForEvent(eventId));
-    if (state.settlement.factions) {
-      state.settlement.factions = state.settlement.factions.map(stripImpairmentsForEvent(eventId));
+  undoLastEvent: () => {
+    if (get().phase !== 'canon' || get().eventLog.length === 0) return;
+    set(state => {
+      const popped = state.eventLog.pop();
+      state.systemState = popped.beforeState;
+      const eventId = popped.event?.id;
+      if (!eventId || !state.settlement) return;
+      // Walk every entity list and strip impairments tagged with this event.
+      state.settlement.institutions = (state.settlement.institutions || []).map(stripImpairmentsForEvent(eventId));
+      if (state.settlement.factions) {
+        state.settlement.factions = state.settlement.factions.map(stripImpairmentsForEvent(eventId));
+      }
+      if (state.settlement.powerStructure?.factions) {
+        state.settlement.powerStructure.factions =
+          state.settlement.powerStructure.factions.map(stripImpairmentsForEvent(eventId));
+      }
+      state.settlement.npcs = (state.settlement.npcs || []).map(stripImpairmentsForEvent(eventId));
+      // Conditions + authored config/_config records + provenance-stamped
+      // annotations, finishing with the eventConditions re-sync.
+      state.settlement = scrubUndoneEvent(state.settlement, popped);
+      state.editedAt = new Date().toISOString();
+    });
+    // Persist the undo to the active save. applyEvent persisted the event,
+    // so leaving the save untouched would resurrect the undone event — log
+    // entry, condition, and records — on the next reload.
+    const afterState = get();
+    if (afterState.activeSaveId && afterState.settlement) {
+      const savePartial = {
+        settlement: cloneJson(afterState.settlement),
+        campaignState: pickleCampaignState(afterState),
+        timestamp: afterState.editedAt,
+      };
+      if (typeof afterState.updateSavedSettlement === 'function') {
+        afterState.updateSavedSettlement(afterState.activeSaveId, savePartial);
+      }
+      persistSaveUpdate(afterState.activeSaveId, {
+        settlement: savePartial.settlement,
+        campaignState: savePartial.campaignState,
+      });
     }
-    if (state.settlement.powerStructure?.factions) {
-      state.settlement.powerStructure.factions =
-        state.settlement.powerStructure.factions.map(stripImpairmentsForEvent(eventId));
-    }
-    state.settlement.npcs = (state.settlement.npcs || []).map(stripImpairmentsForEvent(eventId));
-  }),
+  },
 
   /** Force a re-derivation of systemState from the current settlement.
    *  Useful after an out-of-band edit that mutates settlement directly. */

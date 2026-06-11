@@ -20,11 +20,16 @@ export function reconcileSettlementChange(nextSettlement, priorSettlement, optio
     changeLabel: compactLabel(options.changeLabel),
     preservedWorldConditionIds: carried,
   };
+  // A regeneration rebuilds the settlement from config, which carries no
+  // receipts trail — fall back to the prior settlement's so chained what-ifs
+  // accumulate entries instead of each erasing the last. An event-mutated
+  // settlement inherits the trail by spread, so the fallback never
+  // double-counts on the applyEvent path.
+  const trail = Array.isArray(reconciled.reconciliationLog)
+    ? reconciled.reconciliationLog
+    : (Array.isArray(priorSettlement.reconciliationLog) ? priorSettlement.reconciliationLog : []);
   return {
     ...reconciled,
-    reconciliationLog: [
-      ...(Array.isArray(reconciled.reconciliationLog) ? reconciled.reconciliationLog.slice(-19) : []),
-      entry,
-    ],
+    reconciliationLog: [...trail.slice(-19), entry],
   };
 }

@@ -29,7 +29,7 @@ import { buildWorldSnapshot } from './worldSnapshot.js';
 import { resolveStressorById, adjustStressorSeverityById, setStressorAttacker } from './stressors.js';
 import { ensureRelationshipState } from './relationshipEvolution.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
-import { deriveAllActiveConditions, deriveActiveCondition } from '../activeConditions.js';
+import { deriveAllActiveConditions, deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
 
 const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
 
@@ -218,7 +218,11 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
       const cleared = existing
         ? { ...settlement, activeConditions: all.filter(c => c.id !== existing.id) }
         : { ...settlement, activeConditions: all };
-      settlementOverrides.set(String(action.settlementId), cleared);
+      // Clearing an EVENT-promoted condition must also drop it from the
+      // authored config.eventConditions record (dual-written to _config) —
+      // otherwise the next regeneration re-promotes the crisis the party just
+      // resolved. Identity-preserving for non-event clears.
+      settlementOverrides.set(String(action.settlementId), withEventConditionsSynced(cleared));
       // Optional recovery condition (e.g. a lifted siege leaves a recovering town).
       if (action.recoveryArchetype) {
         outcomes.push(baseOutcome(action, kind, {

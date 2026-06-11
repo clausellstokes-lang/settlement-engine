@@ -13,14 +13,22 @@
  * to re-attach them.
  */
 
-import { deriveAllActiveConditions, withActiveCondition } from '../activeConditions.js';
+import { deriveAllActiveConditions, isEventSourcedCondition, withActiveCondition } from '../activeConditions.js';
 
 const WORLD_CONDITION_SOURCE_PREFIXES = Object.freeze(['WORLD_PULSE', 'WORLD_STRESSOR', 'PARTY_ACTION', 'REGIONAL']);
 
 /** True when a condition was authored by the regional pulse / party action. */
 export function isWorldAuthoredCondition(condition) {
-  // `regional_*` archetypes are produced exclusively by the regional engine
-  // (propagation.js / flows.js); a local generation never emits them. This is
+  // EVENT-promoted conditions are never world-authored — they survive
+  // regeneration through their own seam (config.eventConditions →
+  // reapplyEventConditions), and carrying them here would CLOBBER evolved
+  // state by id (a RESOLVE_STRESSOR wind-down replaced with the stale prior
+  // copy on the very next applyEvent reconcile). Must run BEFORE the
+  // archetype check below: REFUGEE_WAVE and APPLY_STRESSOR legitimately
+  // promote `regional_*` archetypes with event provenance.
+  if (isEventSourcedCondition(condition)) return false;
+  // `regional_*` archetypes are otherwise produced by the regional engine
+  // (propagation.js / flows.js). This is
   // the reliable signal — propagation stamps `sourceEventType` as the change
   // kind (route_cut, regional_wave, …) and `causes[].source` as the channel
   // id, neither of which carries a world/party prefix.
