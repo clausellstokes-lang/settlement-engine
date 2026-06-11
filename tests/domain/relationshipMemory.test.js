@@ -213,6 +213,92 @@ describe('relationship memory and posture', () => {
     expect(postures[0].memoryScore).toBeCloseTo(0.57, 2);
   });
 
+  // Triage pin (S3 deferred): a 'proposal'-mode outcome in pulseHistory is a
+  // QUESTION the pulse asked, not an event — pending and dismissed proposals
+  // must score nothing.
+  test('a selected-but-rejected label proposal contributes zero memoryScore', () => {
+    const graph = { edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'rival' }] };
+    const outcome = {
+      id: 'candidate.relationship.rival_to_cold_war_or_hostile.edge.a.b.6',
+      type: 'relationship',
+      candidateType: 'rival_to_cold_war_or_hostile',
+      relationshipKey: 'edge.a.b',
+      severity: 0.8,
+      applyMode: 'proposal',
+      proposalPayload: { kind: 'relationship_label_change', fromType: 'rival', toType: 'cold_war' },
+    };
+    const worldState = {
+      tick: 6,
+      relationshipStates: { 'edge.a.b': { relationshipType: 'rival', resentment: 0.3 } },
+      pulseHistory: [{ tick: 6, selectedOutcomes: [outcome] }],
+      // The DM dismissed it — no apply ever ran, no incident row exists.
+      proposals: [{ id: 'world_proposal.6.relationship.edge.a.b', status: 'dismissed', outcome }],
+    };
+
+    const postures = buildRelationshipPostures({ worldState, regionalGraph: graph, currentTick: 6 });
+    expect(postures[0].memoryScore).toBe(0);
+    expect(postures[0].recentMemory).toHaveLength(0);
+    expect(postures[0].posture).toBe('managed_rivalry'); // quiet, not escalating
+
+    // Still pending (no proposals row resolution at all): same — zero.
+    const pending = buildRelationshipPostures({
+      worldState: { ...worldState, proposals: [{ id: 'world_proposal.6.relationship.edge.a.b', status: 'pending', outcome }] },
+      regionalGraph: graph,
+      currentTick: 6,
+    });
+    expect(pending[0].memoryScore).toBe(0);
+  });
+
+  test('an accepted proposal scores once via either applied marker', () => {
+    const graph = { edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'rival' }] };
+    const outcome = {
+      id: 'candidate.relationship.rival_to_cold_war_or_hostile.edge.a.b.6',
+      type: 'relationship',
+      candidateType: 'rival_to_cold_war_or_hostile',
+      relationshipKey: 'edge.a.b',
+      severity: 0.8,
+      applyMode: 'proposal',
+      proposalPayload: { kind: 'relationship_label_change', fromType: 'rival', toType: 'cold_war' },
+    };
+    const base = {
+      tick: 7,
+      pulseHistory: [{ tick: 6, selectedOutcomes: [outcome] }],
+    };
+
+    // Marker 1 (the common case): acceptance wrote the outcomeId-stamped
+    // incident row (R3) — the pulse row scores, the incident dedupes.
+    const viaIncident = buildRelationshipPostures({
+      worldState: {
+        ...base,
+        relationshipStates: {
+          'edge.a.b': {
+            relationshipType: 'rival',
+            recentIncidents: [{ tick: 7, type: 'rival_to_cold_war_or_hostile', severity: 0.8, outcomeId: outcome.id }],
+          },
+        },
+      },
+      regionalGraph: graph,
+      currentTick: 7,
+    });
+    expect(viaIncident[0].recentMemory).toHaveLength(1);
+    // One event, decayed one tick from selection: 0.8 * 0.5^(1/4).
+    expect(viaIncident[0].memoryScore).toBeCloseTo(0.67, 2);
+
+    // Marker 2 (incident buffer evicted): the proposal row itself records
+    // status 'applied' and admits the pulse outcome.
+    const viaProposal = buildRelationshipPostures({
+      worldState: {
+        ...base,
+        relationshipStates: { 'edge.a.b': { relationshipType: 'rival' } },
+        proposals: [{ id: 'world_proposal.6.relationship.edge.a.b', status: 'applied', outcome }],
+      },
+      regionalGraph: graph,
+      currentTick: 7,
+    });
+    expect(viaProposal[0].recentMemory).toHaveLength(1);
+    expect(viaProposal[0].memoryScore).toBeCloseTo(0.67, 2);
+  });
+
   // H16 pin: a subjugation that crowned the edge's authored 'to' side stamps
   // the roles onto the state — postures present the overlord at 'from', so
   // direction summaries stay truthful. Without the stamp the edge keeps its

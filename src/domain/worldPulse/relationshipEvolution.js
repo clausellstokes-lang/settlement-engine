@@ -451,6 +451,14 @@ const labelProposal = (ctx, toType, candidateType, details) => {
 
 const internalDrift = (ctx, candidateType, details) => candidateBase({ ...ctx, ...details, candidateType });
 
+// PAIR-STABLE attribution for genuinely mutual drifts (an arms race, a thaw,
+// a shared border incident): news/inbox rows land on the lower-sorted
+// settlement id, so attribution never flips with edge authoring order.
+const pairStableId = (edge) => {
+  const s = getRelationshipSettlements(edge);
+  return String(s.from) <= String(s.to) ? String(s.from) : String(s.to);
+};
+
 const hasRecentIncident = (relState, type, tick, cooldown = 2) =>
   (relState.recentIncidents || []).some((incident) => incident.type === type && tick - (incident.tick || 0) <= cooldown);
 
@@ -675,7 +683,10 @@ function sharedHostileThird(snapshot, a, b) {
     if (String(s.from) === String(b)) hostileToB.add(String(s.to));
     if (String(s.to) === String(b)) hostileToB.add(String(s.from));
   }
-  return [...hostileToA].find(id => hostileToB.has(id)) || null;
+  // Lowest-sorted shared enemy: iterating A's set followed B's edge-list
+  // insertion order, so reversed authoring of the a/b edge could surface a
+  // DIFFERENT common enemy when several exist.
+  return [...hostileToA].filter(id => hostileToB.has(id)).sort()[0] || null;
 }
 
 function sharedEnemyAllianceCandidate(ctx) {
@@ -688,6 +699,7 @@ function sharedEnemyAllianceCandidate(ctx) {
   if (trustGate < 0.22) return null;
   return labelProposal(ctx, "allied", "shared_enemy_alliance", {
     ruleId: "shared_enemy_alliance",
+    targetSaveId: pairStableId(ctx.edge),
     severity: clamp01(0.42 + trustGate * 0.24 + Math.max(ctx.sourcePressure.conflict, ctx.targetPressure.conflict) * 0.22),
     probability: clamp01(0.08 + trustGate * 0.16 + Math.max(ctx.sourcePressure.conflict, ctx.targetPressure.conflict) * 0.14),
     reasons: [
@@ -714,6 +726,7 @@ function neutralRules(ctx) {
     candidates.push(
       labelProposal(ctx, "trade_partner", "neutral_to_trade_partner", {
         ruleId: "neutral_to_trade_partner",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.25 + relState.trust * 0.28 + combinedTrade * 0.16,
         probability: 0.12 + relState.trust * 0.18 + combinedTrade * 0.08,
         reasons: [
@@ -732,6 +745,7 @@ function neutralRules(ctx) {
     candidates.push(
       labelProposal(ctx, "rival", "neutral_to_rival", {
         ruleId: "neutral_to_rival",
+        targetSaveId: pairStableId(ctx.edge),
         severity: Math.max(0.34, combinedConflict, relState.resentment),
         probability: 0.1 + combinedConflict * 0.18 + relState.resentment * 0.14,
         reasons: [
@@ -751,6 +765,7 @@ function neutralRules(ctx) {
     candidates.push(
       internalDrift(ctx, "neutral_border_incident", {
         ruleId: "neutral_border_incident",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.18 + combinedConflict * 0.34,
         probability: 0.12 + combinedConflict * 0.2,
         reasons: ["Local pressure creates a minor incident between neutral settlements."],
@@ -803,6 +818,7 @@ function tradePartnerRules(ctx) {
     candidates.push(
       labelProposal(ctx, "allied", "trade_to_allied", {
         ruleId: "trade_to_allied",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.4 + relState.trust * 0.28,
         probability: 0.1 + relState.trust * 0.18 + relState.tradeBalance * 0.08,
         reasons: ["Long stable trade and high trust create a plausible alliance offer."],
@@ -843,6 +859,7 @@ function tradePartnerRules(ctx) {
     candidates.push(
       internalDrift(ctx, "trade_route_disruption", {
         ruleId: "trade_route_disruption",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.24 + tradeStress * 0.45,
         probability: 0.14 + tradeStress * 0.22,
         reasons: ["Trade pressure disrupts routes and introduces resentment or leverage."],
@@ -861,6 +878,7 @@ function tradePartnerRules(ctx) {
     candidates.push(
       internalDrift(ctx, "trade_smuggling_pressure", {
         ruleId: "trade_smuggling_pressure",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.22 + tradeStress * 0.38,
         probability: 0.08 + tradeStress * 0.22,
         reasons: ["Disrupted or unequal trade opens space for smugglers and informal markets."],
@@ -926,37 +944,65 @@ function alliedRules(ctx) {
     );
   }
 
-  if (targetPressure.conflict > 0.45 || targetPressure.hostility > 0.45) {
+  // H16 triage: the obligation gate reads BOTH allies — whichever side is
+  // under conflict/hostility pressure pulls the OTHER into the obligation,
+  // never the authored 'to'. When both qualify, the harder-pressed side is
+  // the one mirrored; an exact tie breaks on the sorted pair.
+  const fromThreat = Math.max(sourcePressure.conflict, sourcePressure.hostility);
+  const toThreat = Math.max(targetPressure.conflict, targetPressure.hostility);
+  if (fromThreat > 0.45 || toThreat > 0.45) {
+    const toIsPressured = fromThreat === toThreat
+      ? String(settlements.to) <= String(settlements.from)
+      : toThreat > fromThreat;
+    const pressuredId = String(toIsPressured ? settlements.to : settlements.from);
+    const obligatedId = String(toIsPressured ? settlements.from : settlements.to);
     candidates.push(
       internalDrift(ctx, "ally_conflict_mirror", {
         ruleId: "allied_conflict_obligation",
-        severity: 0.28 + Math.max(targetPressure.conflict, targetPressure.hostility) * 0.48,
+        targetSaveId: obligatedId,
+        severity: 0.28 + Math.max(fromThreat, toThreat) * 0.48,
         probability: 0.1 + relState.pactStrength * 0.22 + relState.trust * 0.12,
-        reasons: ["An ally faces a gated obligation to mirror hostility or cold-war pressure."],
+        reasons: ["An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner."],
         relationshipPatch: {
           militaryBurden: clamp01(relState.militaryBurden + 0.08),
           obligationFatigue: clamp01(relState.obligationFatigue + 0.06),
           trajectory: "committed",
         },
-        metadata: { incidentType: "conflict_obligation" },
+        metadata: { incidentType: "conflict_obligation", obligatedSaveId: obligatedId, pressuredSaveId: pressuredId },
       }),
     );
   }
 
-  const targetColdWar = relationshipThirdParties(snapshot, settlements.to, ["cold_war"])[0];
-  if (targetColdWar) {
-    const sourceToThird = relationshipTypeBetween(snapshot, settlements.from, targetColdWar.thirdPartyId);
-    const hesitation = ["allied", "trade_partner", "patron", "vassal"].includes(sourceToThird) ? 0.46 : 1;
+  // H16 triage: EITHER ally may be the one fighting a cold war — the other
+  // side is the supporter, whichever way the save authored the edge. When
+  // both allies have cold-war fronts the higher-resentment front is supported
+  // first; an exact tie breaks on the sorted pair.
+  const fromColdWar = relationshipThirdParties(snapshot, settlements.from, ["cold_war"])[0];
+  const toColdWar = relationshipThirdParties(snapshot, settlements.to, ["cold_war"])[0];
+  let supportedColdWar = fromColdWar || toColdWar;
+  let supportedAllyId = String(fromColdWar ? settlements.from : settlements.to);
+  if (fromColdWar && toColdWar) {
+    const supportTo = fromColdWar.relState.resentment === toColdWar.relState.resentment
+      ? String(settlements.to) <= String(settlements.from)
+      : toColdWar.relState.resentment > fromColdWar.relState.resentment;
+    supportedColdWar = supportTo ? toColdWar : fromColdWar;
+    supportedAllyId = String(supportTo ? settlements.to : settlements.from);
+  }
+  if (supportedColdWar) {
+    const supportingAllyId = String(supportedAllyId === String(settlements.from) ? settlements.to : settlements.from);
+    const supporterToThird = relationshipTypeBetween(snapshot, supportingAllyId, supportedColdWar.thirdPartyId);
+    const hesitation = ["allied", "trade_partner", "patron", "vassal"].includes(supporterToThird) ? 0.46 : 1;
     candidates.push(
       internalDrift(ctx, "ally_cold_war_support", {
         ruleId: "allied_cold_war_support",
-        severity: clamp01((0.28 + relState.pactStrength * 0.26 + targetColdWar.relState.resentment * 0.18) * hesitation),
+        targetSaveId: supportingAllyId,
+        severity: clamp01((0.28 + relState.pactStrength * 0.26 + supportedColdWar.relState.resentment * 0.18) * hesitation),
         probability: clamp01((0.08 + relState.trust * 0.14 + relState.pactStrength * 0.16) * hesitation),
         reasons: [
           hesitation < 1
             ? "The ally supports cold-war pressure through sanctions or intelligence, but hesitates because the target is also tied to them."
             : "The ally supports cold-war pressure with sanctions, intelligence, or proxy aid.",
-          `Cold-war third party: ${targetColdWar.thirdPartyId}.`,
+          `Cold-war third party: ${supportedColdWar.thirdPartyId}.`,
         ],
         relationshipPatch: {
           militaryBurden: clamp01(relState.militaryBurden + 0.04 * hesitation),
@@ -966,9 +1012,11 @@ function alliedRules(ctx) {
         },
         metadata: {
           incidentType: "cold_war_support",
-          thirdPartyId: targetColdWar.thirdPartyId,
+          thirdPartyId: supportedColdWar.thirdPartyId,
           hesitation,
-          sourceRelationshipToThird: sourceToThird,
+          sourceRelationshipToThird: supporterToThird,
+          supporterSaveId: supportingAllyId,
+          supportedSaveId: supportedAllyId,
         },
       }),
     );
@@ -978,6 +1026,8 @@ function alliedRules(ctx) {
     candidates.push(
       labelProposal(ctx, "trade_partner", "allied_overburdened", {
         ruleId: "allied_overburdened",
+        // The cooling is attributed to the side carrying the cost.
+        targetSaveId: supporterId,
         severity: 0.42 + relState.obligationFatigue * 0.32 + Math.max(0, burden - endurance) * 0.35,
         probability: 0.08 + relState.obligationFatigue * 0.24 + Math.max(0, burden - endurance) * 0.2,
         reasons: ["The alliance is past its endurance limit and may cool into a conditional partnership."],
@@ -995,6 +1045,7 @@ function alliedRules(ctx) {
     candidates.push(
       internalDrift(ctx, "allied_shared_recovery", {
         ruleId: "allied_shared_recovery",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.16 + relState.obligationFatigue * 0.2,
         probability: 0.12 + relState.trust * 0.14,
         reasons: ["A quiet interval lets an alliance recover from prior aid strain."],
@@ -1430,12 +1481,17 @@ function rivalRules(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   const sourcePower = settlementStrength(itemFor(ctx.snapshot, settlements.from), sourcePressure);
   const targetPower = settlementStrength(itemFor(ctx.snapshot, settlements.to), targetPressure);
-  const confidenceGap = sourcePower - targetPower;
+  // H16 triage: the CONFIDENT side of a power play is whichever rival is
+  // stronger by state, never the authored 'from'. The gate requires a real
+  // gap, so there is no tie case to fork.
+  const confidenceGap = Math.abs(sourcePower - targetPower);
+  const confidentId = String(sourcePower >= targetPower ? settlements.from : settlements.to);
   const candidates = [];
 
   candidates.push(
     internalDrift(ctx, "rival_arms_race", {
       ruleId: "rival_arms_race",
+      targetSaveId: pairStableId(ctx.edge),
       severity: 0.2 + conflictStress * 0.32 + relState.fear * 0.14,
       probability: 0.1 + conflictStress * 0.18,
       reasons: ["Rivals tend to answer pressure with defensive spending, prestige contests, or arms buildup."],
@@ -1452,6 +1508,7 @@ function rivalRules(ctx) {
     candidates.push(
       internalDrift(ctx, "rival_sabotage", {
         ruleId: "rival_sabotage",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.26 + relState.resentment * 0.36 + Math.max(sourcePressure.trade, targetPressure.trade) * 0.18,
         probability: 0.08 + relState.resentment * 0.18,
         reasons: ["Economic competition and resentment create sabotage, undercutting, or prestige attacks."],
@@ -1469,6 +1526,7 @@ function rivalRules(ctx) {
     candidates.push(
       labelProposal(ctx, "cold_war", "rival_to_cold_war_or_hostile", {
         ruleId: "rival_to_cold_war_or_hostile",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.44 + conflictStress * 0.35,
         probability: 0.07 + conflictStress * 0.2,
         reasons: ["Sustained rivalry can harden into cold-war posture when incidents accumulate."],
@@ -1485,6 +1543,7 @@ function rivalRules(ctx) {
     candidates.push(
       labelProposal(ctx, confidenceGap > 0.36 && relState.resentment > 0.62 ? "hostile" : "cold_war", "rival_power_play", {
         ruleId: "rival_power_play",
+        targetSaveId: confidentId,
         severity: clamp01(0.36 + confidenceGap * 0.42 + relState.resentment * 0.24),
         probability: clamp01(0.05 + confidenceGap * 0.18 + relState.resentment * 0.12),
         reasons: [
@@ -1497,7 +1556,7 @@ function rivalRules(ctx) {
           leverage: clamp01(relState.leverage + 0.04),
           trajectory: "power_play",
         },
-        metadata: { confidenceGap },
+        metadata: { confidenceGap, confidentSaveId: confidentId },
       }),
     );
   }
@@ -1506,6 +1565,7 @@ function rivalRules(ctx) {
     candidates.push(
       labelProposal(ctx, "trade_partner", "rival_detente", {
         ruleId: "rival_detente",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.28 + relState.trust * 0.24,
         probability: 0.06 + relState.trust * 0.14,
         reasons: ["A quiet rivalry can thaw into transactional trade when resentment is low."],
@@ -1532,6 +1592,7 @@ function coldWarRules(ctx) {
   candidates.push(
     internalDrift(ctx, "cold_war_espionage", {
       ruleId: "cold_war_espionage",
+      targetSaveId: pairStableId(ctx.edge),
       severity: 0.22 + conflictStress * 0.34,
       probability: 0.12 + conflictStress * 0.18,
       reasons: ["Cold-war relationships generate espionage, infiltration, and information shocks."],
@@ -1544,9 +1605,16 @@ function coldWarRules(ctx) {
   );
 
   if (sourcePressure.legitimacy > 0.35 || targetPressure.legitimacy > 0.35) {
+    // The proxy opening is in whichever settlement's legitimacy is weaker by
+    // state; an exact tie breaks on the sorted pair.
+    const fromDestabilized = sourcePressure.legitimacy === targetPressure.legitimacy
+      ? String(settlements.from) <= String(settlements.to)
+      : sourcePressure.legitimacy > targetPressure.legitimacy;
+    const destabilizedId = String(fromDestabilized ? settlements.from : settlements.to);
     candidates.push(
       internalDrift(ctx, "cold_war_proxy_conflict", {
         ruleId: "cold_war_proxy_conflict",
+        targetSaveId: destabilizedId,
         severity: 0.3 + Math.max(sourcePressure.legitimacy, targetPressure.legitimacy) * 0.38,
         probability: 0.08 + conflictStress * 0.16,
         reasons: ["Weak legitimacy gives cold-war rivals a proxy faction opening."],
@@ -1555,23 +1623,35 @@ function coldWarRules(ctx) {
           resentment: clamp01(relState.resentment + 0.04),
           trajectory: "destabilizing",
         },
-        metadata: { incidentType: "proxy_conflict" },
+        metadata: { incidentType: "proxy_conflict", destabilizedSaveId: destabilizedId },
       }),
     );
   }
 
   if ((exposure > 0.35 || tradeStress > 0.38) && relState.tradeBalance < 0.42) {
+    // H16 triage: the sanction CONDITION lands on the economically weaker
+    // side by STATE (higher economy/trade strain = more dependent on the
+    // exposed supply line); the other side imposes. An exact tie breaks on
+    // the sorted pair — never on which side the save authored at 'from'.
+    const fromStrain = mean(sourcePressure.economy, sourcePressure.trade);
+    const toStrain = mean(targetPressure.economy, targetPressure.trade);
+    const fromSanctioned = fromStrain === toStrain
+      ? String(settlements.from) <= String(settlements.to)
+      : fromStrain > toStrain;
+    const sanctionedId = String(fromSanctioned ? settlements.from : settlements.to);
+    const imposerId = String(fromSanctioned ? settlements.to : settlements.from);
     candidates.push(
       candidateBase({
         ...ctx,
         candidateType: "cold_war_supply_sanctions",
         ruleId: "cold_war_supply_sanctions",
         type: "condition",
-        targetSaveId: settlements.to,
+        targetSaveId: sanctionedId,
         severity: clamp01(0.3 + Math.max(exposure, tradeStress) * 0.42 + relState.leverage * 0.12),
         probability: clamp01(0.08 + Math.max(exposure, tradeStress) * 0.2 + relState.resentment * 0.08),
         reasons: [
           "Cold-war pressure follows exposed trade and supply channels through inspections, sanctions, and informal embargoes.",
+          `${itemFor(ctx.snapshot, imposerId)?.name || imposerId} squeezes the strained economy of ${itemFor(ctx.snapshot, sanctionedId)?.name || sanctionedId}.`,
           exposure > 0 ? `Confirmed supply exposure ${exposure.toFixed(2)}.` : `Trade stress ${tradeStress.toFixed(2)}.`,
         ],
         relationshipPatch: {
@@ -1586,10 +1666,10 @@ function coldWarRules(ctx) {
           description: "Inspections, sanctions, or informal embargoes are tightening daily trade.",
           severity: clamp01(0.3 + Math.max(exposure, tradeStress) * 0.42 + relState.leverage * 0.12),
           source: "world_pulse_relationship",
-          relatedSettlementId: settlements.from,
+          relatedSettlementId: imposerId,
           affectedSystems: ["trade_connectivity", "public_legitimacy", "criminal_opportunity"],
         },
-        metadata: { incidentType: "supply_sanctions", exposure, tradeStress },
+        metadata: { incidentType: "supply_sanctions", exposure, tradeStress, imposerSaveId: imposerId, sanctionedSaveId: sanctionedId },
       }),
     );
   }
@@ -1598,6 +1678,7 @@ function coldWarRules(ctx) {
     candidates.push(
       labelProposal(ctx, "hostile", "cold_war_escalation", {
         ruleId: "cold_war_escalation",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.5 + conflictStress * 0.32,
         probability: 0.06 + conflictStress * 0.18,
         reasons: ["Cold-war incidents have accumulated enough pressure to risk open hostility."],
@@ -1614,6 +1695,7 @@ function coldWarRules(ctx) {
     candidates.push(
       labelProposal(ctx, "rival", "cold_war_thaw", {
         ruleId: "cold_war_thaw",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.26 + relState.trust * 0.2,
         probability: 0.05 + relState.trust * 0.12,
         reasons: ["A quiet cold war can thaw back into rivalry when immediate threat fades."],
@@ -1639,7 +1721,6 @@ function hostileRules(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   const powerGap = Math.abs(sourcePressure.defense - targetPressure.defense) + Math.abs(sourcePressure.economy - targetPressure.economy);
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.fear, relState.resentment);
-  const attackerAttrition = mean(sourcePressure.economy, sourcePressure.defense, sourcePressure.legitimacy, relState.militaryBurden);
   const candidates = [];
 
   // H16: either side of a war can raid. The aggressor is the stronger side by
@@ -1654,6 +1735,11 @@ function hostileRules(ctx) {
     aggressorId = hash01(`raid.${pair[0]}.${pair[1]}.${ctx.tick}`) < 0.5 ? pair[0] : pair[1];
   }
   const victimId = aggressorId === String(settlements.from) ? String(settlements.to) : String(settlements.from);
+  // H16 triage: attrition is read on the AGGRESSOR — the same state-decided
+  // side the raid uses — never on the authored 'from'. High economy/defense/
+  // legitimacy pressure on the attacking side saps support for the war.
+  const aggressorPressure = aggressorId === String(settlements.from) ? sourcePressure : targetPressure;
+  const attackerAttrition = mean(aggressorPressure.economy, aggressorPressure.defense, aggressorPressure.legitimacy, relState.militaryBurden);
 
   candidates.push(
     candidateBase({
@@ -1760,10 +1846,11 @@ function hostileRules(ctx) {
     candidates.push(
       labelProposal(ctx, "cold_war", "hostile_attrition_deescalation", {
         ruleId: "hostile_attrition_deescalation",
+        targetSaveId: aggressorId,
         severity: clamp01(0.34 + attackerAttrition * 0.36),
         probability: clamp01(0.05 + attackerAttrition * 0.18 + relState.trust * 0.08),
         reasons: [
-          "Open hostility is losing practical support as the stronger side's economy, defenses, legitimacy, or manpower slip.",
+          `Open hostility is losing practical support as the economy, defenses, legitimacy, or manpower of ${itemFor(ctx.snapshot, aggressorId)?.name || aggressorId} — the aggressing side — slip.`,
           `Attacker attrition ${attackerAttrition.toFixed(2)}.`,
         ],
         relationshipPatch: {
@@ -1772,7 +1859,7 @@ function hostileRules(ctx) {
           militaryBurden: clamp01(relState.militaryBurden - 0.04),
           trajectory: "attrition_deescalation",
         },
-        metadata: { attackerAttrition },
+        metadata: { attackerAttrition, aggressorSaveId: aggressorId },
       }),
     );
   }
@@ -1781,6 +1868,7 @@ function hostileRules(ctx) {
     candidates.push(
       labelProposal(ctx, "cold_war", "hostile_truce", {
         ruleId: "hostile_truce",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.3 + relState.trust * 0.22,
         probability: 0.05 + relState.trust * 0.12,
         reasons: ["Exhaustion or quiet borders can downgrade open hostility into cold-war posture."],
@@ -1799,6 +1887,7 @@ function hostileRules(ctx) {
 
 function criminalNetworkRules(ctx) {
   const { relState, sourcePressure, targetPressure, tick } = ctx;
+  const settlements = getRelationshipSettlements(ctx.edge);
   const crimePressure = mean(sourcePressure.crime, targetPressure.crime);
   const tradeStress = mean(sourcePressure.trade, targetPressure.trade);
   const legitimacyStress = mean(sourcePressure.legitimacy, targetPressure.legitimacy);
@@ -1809,6 +1898,7 @@ function criminalNetworkRules(ctx) {
     candidates.push(
       internalDrift(ctx, "criminal_smuggling_expands", {
         ruleId: "criminal_smuggling_expands",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.24 + Math.max(crimePressure, tradeStress) * 0.38,
         probability: 0.1 + crimePressure * 0.18 + tradeStress * 0.12,
         reasons: [
@@ -1826,9 +1916,16 @@ function criminalNetworkRules(ctx) {
   }
 
   if (!hasRecentIncident(relState, "protection_racket", tick) && (legitimacyStress > 0.38 || relState.fear > 0.48)) {
+    // The racket is sold where legitimacy is weaker by state; an exact tie
+    // (or a purely fear-gated firing) breaks on the sorted pair.
+    const fromRacketed = sourcePressure.legitimacy === targetPressure.legitimacy
+      ? String(settlements.from) <= String(settlements.to)
+      : sourcePressure.legitimacy > targetPressure.legitimacy;
+    const racketedSaveId = String(fromRacketed ? settlements.from : settlements.to);
     candidates.push(
       internalDrift(ctx, "criminal_protection_racket", {
         ruleId: "criminal_protection_racket",
+        targetSaveId: racketedSaveId,
         severity: 0.26 + Math.max(legitimacyStress, relState.fear) * 0.36,
         probability: 0.08 + legitimacyStress * 0.16 + relState.fear * 0.12,
         reasons: [
@@ -1840,7 +1937,7 @@ function criminalNetworkRules(ctx) {
           resentment: clamp01(relState.resentment + 0.035),
           trajectory: "coercive",
         },
-        metadata: { incidentType: "protection_racket" },
+        metadata: { incidentType: "protection_racket", racketedSaveId },
       }),
     );
   }
@@ -1849,6 +1946,7 @@ function criminalNetworkRules(ctx) {
     candidates.push(
       labelProposal(ctx, "cold_war", "criminal_to_cold_war", {
         ruleId: "criminal_to_cold_war",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.36 + conflictStress * 0.28 + relState.resentment * 0.14,
         probability: 0.06 + conflictStress * 0.16 + relState.fear * 0.1,
         reasons: [
@@ -1867,6 +1965,7 @@ function criminalNetworkRules(ctx) {
     candidates.push(
       labelProposal(ctx, "trade_partner", "criminal_legitimizes_trade", {
         ruleId: "criminal_legitimizes_trade",
+        targetSaveId: pairStableId(ctx.edge),
         severity: 0.28 + relState.trust * 0.24,
         probability: 0.05 + relState.trust * 0.12,
         reasons: [

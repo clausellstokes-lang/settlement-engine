@@ -422,8 +422,8 @@ function admitStrongest(out, byId, next) {
 
 export function deriveRegionalImpacts(localDelta, graph, options = {}) {
   if (!localDelta?.sourceSettlementId) return [];
-  const current = ensureRegionalGraph(graph || {});
   const now = options.now ?? null;
+  const current = ensureRegionalGraph(graph || {}, { now });
   const channels = activeChannelsFrom(graph, localDelta.sourceSettlementId, {
     includeSuggested: !!options.includeSuggested,
     types: options.types || [...REGIONAL_RULE_TYPES],
@@ -754,7 +754,7 @@ export function propagateRegionalEvent(args = {}) {
     waveDecay = 0.45,
     now = null,
   } = args;
-  const current = ensureRegionalGraph(graph || {});
+  const current = ensureRegionalGraph(graph || {}, { now });
   const localDelta = deriveLocalDelta(beforeSettlement, afterSettlement, { event });
   const derived = deriveRegionalImpacts(localDelta, current, { includeSuggested, maxDepth, waveDecay, now });
   // H7: fold same-shock duplicates before anything downstream sees them — the

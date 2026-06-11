@@ -219,17 +219,57 @@ describe('relationship dynamics rulebook', () => {
     expect(candidates.some(c => c.ruleId === 'rival_power_play')).toBe(true);
   });
 
-  test('hostility can de-escalate to cold war when attrition is too high', () => {
-    const snap = snapshot({
-      edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'hostile' }],
-      states: { 'edge.a.b': { relationshipType: 'hostile', resentment: 0.64, fear: 0.62, trust: 0.12, militaryBurden: 0.7 } },
-    });
-
-    const candidates = evaluateRelationshipRules(snap, pressureIndex(pressureRows(['a', 'b'], {
+  // Reconciled with the regional triage wave: attrition is read on the
+  // AGGRESSOR (the state-decided stronger side the raid uses), not on the
+  // authored 'from'. The old fixture left both sides at equal tier/pop, so
+  // the strained side was actually the WEAKER one and the old rule measured
+  // the victim. Now the strained city is genuinely the aggressor, and both
+  // authoring orientations report the same de-escalation about it.
+  test('hostility de-escalates when the AGGRESSOR bleeds, whichever way the edge is authored', () => {
+    const pressures = pressureIndex(pressureRows(['a', 'b'], {
       a: { economy: 0.8, defense: 0.75, legitimacy: 0.72 },
-    })), { tick: 9 });
+    }));
+    const items = {
+      a: item('a', { tier: 'city', population: 18000 }),
+      b: item('b', { tier: 'village', population: 500 }),
+    };
+    const attritionFor = (edge) => evaluateRelationshipRules(snapshot({
+      edges: [edge],
+      states: { [edge.id]: { relationshipType: 'hostile', resentment: 0.64, fear: 0.62, trust: 0.12, militaryBurden: 0.7 } },
+      items,
+    }), pressures, { tick: 9 }).find(c => c.ruleId === 'hostile_attrition_deescalation');
 
-    expect(candidates.some(c => c.ruleId === 'hostile_attrition_deescalation')).toBe(true);
+    for (const edge of [
+      { id: 'edge.pair', from: 'a', to: 'b', relationshipType: 'hostile' },
+      { id: 'edge.pair', from: 'b', to: 'a', relationshipType: 'hostile' },
+    ]) {
+      const attrition = attritionFor(edge);
+      expect(attrition).toBeTruthy();
+      // 'a' is the stronger side (the aggressor) AND the strained one.
+      expect(attrition.targetSaveId).toBe('a');
+      expect(attrition.metadata).toMatchObject({ aggressorSaveId: 'a' });
+      expect(attrition.metadata.attackerAttrition).toBeCloseTo((0.8 + 0.75 + 0.72 + 0.7) / 4, 10);
+      // The DM prose names the aggressing side, not whichever side was
+      // authored at 'from'.
+      expect(attrition.reasons[0]).toContain('the aggressing side');
+    }
+
+    // When only the WEAKER side is strained, there is no attrition story to
+    // tell about the aggressor — the rule stays silent in both orientations.
+    const weakSideStrained = pressureIndex(pressureRows(['a', 'b'], {
+      b: { economy: 0.8, defense: 0.75, legitimacy: 0.72 },
+    }));
+    for (const edge of [
+      { id: 'edge.pair', from: 'a', to: 'b', relationshipType: 'hostile' },
+      { id: 'edge.pair', from: 'b', to: 'a', relationshipType: 'hostile' },
+    ]) {
+      const candidates = evaluateRelationshipRules(snapshot({
+        edges: [edge],
+        states: { [edge.id]: { relationshipType: 'hostile', resentment: 0.64, fear: 0.62, trust: 0.12, militaryBurden: 0.2 } },
+        items,
+      }), weakSideStrained, { tick: 9 });
+      expect(candidates.some(c => c.ruleId === 'hostile_attrition_deescalation')).toBe(false);
+    }
   });
 
   test('protector backing can block otherwise plausible subjugation into vassalage', () => {
@@ -476,5 +516,93 @@ describe('relationship dynamics rulebook', () => {
       patronSaveId: null,
       clientSaveId: null,
     });
+  });
+
+  // Regional triage pin: the conflict obligation reads BOTH allies — the
+  // UNPRESSURED side bears the obligation toward the PRESSURED one, whichever
+  // side the save authored at 'from'. Pre-fix the gate only saw the authored
+  // 'to' (the largest residual: 607/400-world divergences).
+  test('the conflict obligation binds the unpressured ally toward the pressured one, either way authored', () => {
+    const pressures = pressureIndex(pressureRows(['a', 'b'], {
+      b: { conflict: 0.8, hostility: 0.6 },
+    }));
+    const obligationFor = (edge, idx) => evaluateRelationshipRules(snapshot({
+      edges: [edge],
+      states: { [edge.id]: { relationshipType: 'allied', trust: 0.74, pactStrength: 0.7 } },
+    }), idx, { tick: 9 }).find(c => c.ruleId === 'allied_conflict_obligation');
+
+    for (const edge of [
+      { id: 'edge.pair', from: 'a', to: 'b', relationshipType: 'allied' },
+      { id: 'edge.pair', from: 'b', to: 'a', relationshipType: 'allied' },
+    ]) {
+      const obligation = obligationFor(edge, pressures);
+      expect(obligation).toBeTruthy();
+      // 'b' is under conflict pressure: calm 'a' carries the obligation.
+      expect(obligation.targetSaveId).toBe('a');
+      expect(obligation.metadata).toMatchObject({ obligatedSaveId: 'a', pressuredSaveId: 'b' });
+      expect(obligation.severity).toBeCloseTo(0.28 + 0.8 * 0.48, 10);
+    }
+
+    // Both pressured at exactly the same level: the tie resolves on the
+    // stable sorted pair — identical sides in both orientations.
+    const bothPressured = pressureIndex(pressureRows(['a', 'b'], {
+      a: { conflict: 0.8 },
+      b: { conflict: 0.8 },
+    }));
+    const tieForward = obligationFor({ id: 'edge.pair', from: 'a', to: 'b', relationshipType: 'allied' }, bothPressured);
+    const tieReversed = obligationFor({ id: 'edge.pair', from: 'b', to: 'a', relationshipType: 'allied' }, bothPressured);
+    expect(tieForward).toBeTruthy();
+    expect(tieForward.metadata.pressuredSaveId).toBe(tieReversed.metadata.pressuredSaveId);
+    expect(tieForward.targetSaveId).toBe(tieReversed.targetSaveId);
+  });
+
+  // Regional triage pin: the sanction CONDITION lands on the economically
+  // weaker side by STATE; the imposing side is named in metadata and in the
+  // condition's relatedSettlementId. Pre-fix it landed on the authored 'to'.
+  test('cold-war sanctions squeeze the weaker economy whichever side the save authored first', () => {
+    const pressures = pressureIndex(pressureRows(['a', 'b'], {
+      a: { economy: 0.7, trade: 0.6 },
+      b: { economy: 0.1, trade: 0.2 },
+    }));
+    for (const edge of [
+      { id: 'edge.pair', from: 'a', to: 'b', relationshipType: 'cold_war' },
+      { id: 'edge.pair', from: 'b', to: 'a', relationshipType: 'cold_war' },
+    ]) {
+      const sanctions = evaluateRelationshipRules(snapshot({
+        edges: [edge],
+        states: { [edge.id]: { relationshipType: 'cold_war', resentment: 0.72, fear: 0.6, tradeBalance: 0.18, leverage: 0.48 } },
+        channels: [{ id: 'ch.pair', type: 'trade_dependency', from: 'a', to: 'b', status: 'confirmed', strength: 0.76 }],
+      }), pressures, { tick: 9 }).find(c => c.ruleId === 'cold_war_supply_sanctions');
+
+      expect(sanctions).toBeTruthy();
+      // 'a' carries the strained economy: it takes the condition; 'b' imposes.
+      expect(sanctions.targetSaveId).toBe('a');
+      expect(sanctions.condition).toMatchObject({ archetype: 'cold_war_sanctions', relatedSettlementId: 'b' });
+      expect(sanctions.metadata).toMatchObject({ imposerSaveId: 'b', sanctionedSaveId: 'a' });
+      expect(sanctions.reasons.join(' ')).toContain('b squeezes the strained economy of a');
+    }
+  });
+
+  // Regional triage pin: genuinely mutual drifts attribute PAIR-STABLY — the
+  // news row lands on the same settlement in both orientations (pre-fix,
+  // cold_war_espionage flipped 400/400 and rival_arms_race 394/400).
+  test('mutual drifts (espionage, arms race) never flip attribution with authoring order', () => {
+    const pressures = pressureIndex(pressureRows(['a', 'b'], {
+      a: { conflict: 0.5 },
+      b: { conflict: 0.5 },
+    }));
+    const driftFor = (type, ruleId, edge) => evaluateRelationshipRules(snapshot({
+      edges: [edge],
+      states: { [edge.id]: { relationshipType: type, resentment: 0.6, fear: 0.5 } },
+    }), pressures, { tick: 9 }).find(c => c.ruleId === ruleId);
+
+    for (const [type, ruleId] of [['cold_war', 'cold_war_espionage'], ['rival', 'rival_arms_race']]) {
+      const forward = driftFor(type, ruleId, { id: 'edge.pair', from: 'a', to: 'b', relationshipType: type });
+      const reversed = driftFor(type, ruleId, { id: 'edge.pair', from: 'b', to: 'a', relationshipType: type });
+      expect(forward).toBeTruthy();
+      expect(forward.targetSaveId).toBe('a');
+      expect(reversed.targetSaveId).toBe('a');
+      expect(reversed.severity).toBe(forward.severity);
+    }
   });
 });

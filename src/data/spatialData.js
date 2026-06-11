@@ -15,6 +15,7 @@ export const INSTITUTION_SPATIAL = [
   {
     institution: "Docks/port facilities",
     requiredAccess: ["port", "river"],
+    exception: "Airship docking (high magic)",
     reason: "Dock facilities require navigable water — ocean coast or navigable river."
   },
   {

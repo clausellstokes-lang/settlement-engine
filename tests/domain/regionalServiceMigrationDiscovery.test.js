@@ -5,9 +5,12 @@
  *
  * Pins:
  *   • service_dependency — suggested provider -> dependent only when the
- *     provider shows real healing capacity (2+ healing-capable institutions,
- *     canonical classifier), the dependent genuinely lacks it, and a
- *     route/trade link connects them; confidence 0.5, born 'suggested';
+ *     provider shows real healing capacity (2+ healing-capable institutions
+ *     per the canonical classifier, of which at least one is an
+ *     INSTITUTIONAL-grade anchor — hospital/monastery/temple class; triage
+ *     wave: two wayside shrines no longer read as a regional service hub),
+ *     the dependent genuinely lacks it, and a route/trade link connects
+ *     them; confidence 0.5, born 'suggested', evidence names the anchor;
  *   • migration_pressure — suggested along the trade-route link when the
  *     poles are unbalanced (tier gap >= 2 OR ~4x population), direction
  *     smaller -> larger (people flow toward the bigger pole); confidence
@@ -85,6 +88,30 @@ describe('service_dependency discovery (R3, suggested-only)', () => {
     expect(channels[0].confidence).toBeCloseTo(0.5, 10);
     expect(channels[0].strength).toBeGreaterThan(0);
     expect(channels[0].strength).toBeLessThanOrEqual(0.5);
+    // The evidence prose names the institutional anchor, not just a count.
+    const instEvidence = channels[0].evidence.find(e => e.source === 'institutions');
+    expect(instEvidence.reason).toContain('Major hospital');
+  });
+
+  it('an institutional anchor plus a wayside healer qualifies (hospital + shrine)', () => {
+    const [provider, dependent] = tradeLinked('anchored', 'Anchorage', 'bare', 'Barewick', {
+      institutions: [{ name: 'Small hospital' }, { name: 'Wayside shrine' }],
+    });
+    const channels = discoverDependencyCandidates(provider, dependent)
+      .filter(c => c.type === 'service_dependency');
+
+    expect(channels).toHaveLength(1);
+    expect(channels[0].from).toBe('anchored');
+    expect(channels[0].to).toBe('bare');
+    const instEvidence = channels[0].evidence.find(e => e.source === 'institutions');
+    expect(instEvidence.reason).toContain('Small hospital');
+  });
+
+  it('two wayside shrines are healing-capable but NOT a regional service hub (no institutional anchor)', () => {
+    const [provider, dependent] = tradeLinked('shrines', 'Shrineholt', 'bare', 'Barewick', {
+      institutions: [{ name: 'Wayside shrine' }, { name: 'Roadside shrine' }],
+    });
+    expect(discoverDependencyCandidates(provider, dependent).filter(c => c.type === 'service_dependency')).toEqual([]);
   });
 
   it('does NOT suggest when the dependent has its own healing, the provider is a lone shrine, or no trade link exists', () => {

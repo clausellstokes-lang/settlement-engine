@@ -101,6 +101,55 @@ describe('byte-identical replay (the audit probe)', () => {
     }
   });
 
+  it('ensureRegionalGraph stamps minted channel_inferred edges with the threaded now, never the wall clock', () => {
+    // ensure MINTS state: a channel whose pair has no edge gets an inferred
+    // edge. That mint was the one record in a now-threaded apply still
+    // reading the wall clock.
+    const channels = [{
+      type: 'political_authority',
+      from: 'v',
+      to: 'o',
+      status: 'confirmed',
+      discoveredAt: '2026-05-01T00:00:00.000Z',
+      confirmedAt: '2026-05-01T00:00:00.000Z',
+      updatedAt: '2026-05-01T00:00:00.000Z',
+    }];
+    const graph = ensureRegionalGraph({ channels }, { now: NOW });
+    const inferred = graph.edges.find(edge => edge.relationshipType === 'channel_inferred');
+    expect(inferred).toBeTruthy();
+    expect(inferred.id).toBe('edge.v.o');
+    expect(inferred.updatedAt).toBe(NOW);
+    expect(graph.updatedAt).toBe(NOW);
+    expect(JSON.stringify(graph)).not.toContain(T_FIXTURE.toISOString());
+
+    // API compatibility: without now, the wall clock still fills the mint.
+    const fallback = ensureRegionalGraph({ channels });
+    expect(fallback.edges.find(edge => edge.relationshipType === 'channel_inferred').updatedAt)
+      .toBe(T_FIXTURE.toISOString());
+  });
+
+  it('ensureRegionalGraph of a raw timestampless graph replays JSON-identical across a moved clock', () => {
+    // The triage pin: EVERY normalize* default stamp (node/edge/channel
+    // discoveredAt/updatedAt, the minted channel_inferred edge, the graph
+    // updatedAt) honours the threaded now — a raw graph with no timestamps
+    // anywhere is the maximal exercise of the fallback paths.
+    const raw = () => ({
+      nodes: [{ id: 'v', name: 'Ashford' }, { id: 'o', name: 'Crownhold' }],
+      channels: [{ type: 'political_authority', from: 'v', to: 'o', status: 'confirmed' }],
+    });
+
+    const first = ensureRegionalGraph(raw(), { now: NOW });
+    vi.setSystemTime(T_DRIFTED); // the clock moves; a replay must not see it
+    const second = ensureRegionalGraph(raw(), { now: NOW });
+
+    expect(JSON.stringify(second)).toBe(JSON.stringify(first));
+    // The synthesized edge and the raw channel both carry the threaded now.
+    expect(first.edges.find(edge => edge.relationshipType === 'channel_inferred').updatedAt).toBe(NOW);
+    expect(first.channels[0].discoveredAt).toBe(NOW);
+    expect(JSON.stringify(first)).not.toContain(T_FIXTURE.toISOString());
+    expect(JSON.stringify(second)).not.toContain(T_DRIFTED.toISOString());
+  });
+
   it('graph helpers stamp the threaded now, never the wall clock', () => {
     const impact = {
       id: 'regional_impact.threading',
@@ -256,5 +305,66 @@ describe('pulse path stamps no wall-clock time when now is threaded', () => {
     expect(row.resolvedAt).toBe(NOW);
     expect(row.updatedAt).toBe(NOW);
     expect(JSON.stringify(result.regionalGraph)).not.toContain('2026-08-15');
+  });
+
+  it('a subjugation apply mints its inferred edges with the pulse now and replays byte-identical', () => {
+    // The audit's concrete leak: the vassal bundle mints channels for the
+    // overlord->vassal pair, which has no edge — ensureRegionalGraph used to
+    // stamp that channel_inferred edge with the wall clock while every other
+    // updatedAt honoured the threaded now.
+    const baseline = '2026-05-01T00:00:00.000Z';
+    const outcome = {
+      id: 'candidate.relationship.hostile_occupation_pressure.edge.v.o.4',
+      type: 'relationship',
+      candidateType: 'hostile_occupation_pressure',
+      relationshipKey: 'edge.v.o',
+      severity: 0.86,
+      applyMode: 'auto',
+      headline: 'hostile becomes vassal',
+      summary: 'Crownhold presses Ashford into vassalage.',
+      relationshipPatch: { proposedRelationshipType: 'vassal', overlordSaveId: 'o', vassalSaveId: 'v' },
+      proposalPayload: { kind: 'relationship_label_change', relationshipKey: 'edge.v.o', fromType: 'hostile', toType: 'vassal', reason: 'Crownhold conquers Ashford.' },
+    };
+    const run = () => applyWorldPulseOutcomes({
+      snapshot: { regionalGraph: null, settlements: [], campaign: {} },
+      worldState: {
+        tick: 4,
+        relationshipStates: {
+          'edge.v.o': { relationshipType: 'hostile', resentment: 0.9, fear: 0.8 },
+        },
+      },
+      regionalGraph: {
+        nodes: [
+          { id: 'o', name: 'Crownhold', updatedAt: baseline },
+          { id: 'v', name: 'Ashford', updatedAt: baseline },
+        ],
+        edges: [{ id: 'edge.v.o', from: 'v', to: 'o', relationshipType: 'hostile', updatedAt: baseline }],
+        channels: [],
+        updatedAt: baseline,
+      },
+      wizardNews: { currentTick: 4, entries: [], updatedAt: baseline },
+      settlementMap: new Map(),
+      outcomes: [outcome],
+      tick: 4,
+      now: NOW,
+    });
+
+    const first = run();
+
+    expect(first.regionalGraph.edges.find(edge => edge.id === 'edge.v.o').relationshipType).toBe('vassal');
+    const inferred = first.regionalGraph.edges.filter(edge => edge.relationshipType === 'channel_inferred');
+    expect(inferred.length).toBeGreaterThan(0);
+    for (const edge of inferred) expect(edge.updatedAt).toBe(NOW);
+    expect(first.regionalGraph.channels.length).toBeGreaterThan(0);
+    for (const channel of first.regionalGraph.channels) {
+      expect(channel.discoveredAt).toBe(NOW);
+      expect(channel.updatedAt).toBe(NOW);
+    }
+    // Nothing anywhere in the apply output carries the drifted wall clock.
+    expect(JSON.stringify(first.regionalGraph)).not.toContain('2026-08-15');
+
+    vi.setSystemTime(new Date('2026-10-01T07:00:00.000Z')); // the clock moves; a replay must not see it
+    const second = run();
+    expect(JSON.stringify(second.regionalGraph)).toBe(JSON.stringify(first.regionalGraph));
   });
 });

@@ -158,10 +158,28 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
     out.push(entry);
   };
 
+  // Honest memory (S3): a 'proposal'-mode outcome in pulseHistory is a
+  // QUESTION the pulse asked, not an event that happened — pending and
+  // dismissed proposals must score nothing. Application is recorded twice:
+  // accepting stamps the proposal row 'applied' (worldState.proposals), and
+  // the apply-time writes stamp the outcome id onto every incident/history/
+  // hierarchy row (R3). Either marker admits the outcome; auto outcomes
+  // applied at selection and need no marker.
+  const appliedMarkers = new Set();
+  for (const proposal of worldState?.proposals || []) {
+    if (proposal?.status === 'applied' && proposal?.outcome?.id) appliedMarkers.add(proposal.outcome.id);
+  }
+  for (const store of [relState.recentIncidents, relState.hierarchyResolutions, relState.history]) {
+    for (const row of store || []) {
+      if (row?.outcomeId) appliedMarkers.add(row.outcomeId);
+    }
+  }
+
   for (const pulse of worldState?.pulseHistory || []) {
     const pulseTick = Number.isFinite(pulse?.tick) ? pulse.tick : null;
     for (const outcome of pulse?.selectedOutcomes || []) {
       if (outcome?.relationshipKey !== relationshipKey) continue;
+      if (outcome?.applyMode === 'proposal' && !appliedMarkers.has(outcome?.id)) continue;
       const tick = Number.isFinite(outcome?.tick) ? outcome.tick : pulseTick;
       const incidentType = outcome?.metadata?.incidentType || outcome?.candidateType;
       const entry = memoryEntry({

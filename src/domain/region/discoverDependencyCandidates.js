@@ -198,21 +198,34 @@ function candidate(raw) {
 // Deliberately conservative and low-confidence — the DM confirm gate is the
 // safety; nothing here (or anywhere) auto-confirms them.
 
+// Institutional-grade healing anchors — the hospital/monastic/temple-of-
+// healing class of the canonical classifier vocabulary
+// (HEALING_INSTITUTION_PATTERN in healingLedger.js). Shrines, chapels,
+// herbalists, and the rest of the wayside vocabulary are healing-capable but
+// none of them anchors a regional service hub on its own.
+const INSTITUTIONAL_HEALING_PATTERN = /(hospital|monaster|temple)/i;
+
 /**
  * Healing/service capacity, read from the raw save's institutions via the
  * canonical classifier (healingLedger) — the regional projection dropped its
  * dead `services` field in R4/H18 and it must NOT come back without a real
  * reader; discovery reads the raw save the same way relationBetween reads the
- * raw neighbourNetwork. A lone shrine is not a regional service hub: a
- * provider needs two-plus healing-capable institutions, and a dependent only
- * counts as lacking when it carries an institutions array yet has neither a
- * healing institution nor an offered healing service.
+ * raw neighbourNetwork. A lone shrine is not a regional service hub — and
+ * neither are two of them: a provider needs two-plus healing-capable
+ * institutions of which at least one is institutional-grade (hospital/
+ * monastery/temple class), and a dependent only counts as lacking when it
+ * carries an institutions array yet has neither a healing institution nor an
+ * offered healing service.
  */
 function healingCapacityOf(save) {
-  const ledger = healingLedger(settlementFromSave(save) || {});
+  const settlement = settlementFromSave(save) || {};
+  const ledger = healingLedger(settlement);
+  const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
+  const anchor = institutions.find(i => INSTITUTIONAL_HEALING_PATTERN.test(String(i?.name || '')));
   return {
     healerCount: ledger.healerCount,
-    provider: ledger.healerCount >= 2,
+    anchorName: anchor ? String(anchor.name) : null,
+    provider: ledger.healerCount >= 2 && !!anchor,
     lacking: ledger.present && ledger.healerCount === 0 && ledger.services.length === 0,
   };
 }
@@ -346,7 +359,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
         confidence: 0.5,
         goods: [],
         evidence: [
-          { source: 'institutions', reason: `${provider.name} has ${capacity.healerCount} healing-capable institutions; ${dependent.name} has none.` },
+          { source: 'institutions', reason: `${provider.name} anchors its ${capacity.healerCount} healing-capable institutions on ${capacity.anchorName}; ${dependent.name} has none.` },
           { source: 'route_state', reason: `An open trade link makes ${provider.name}'s services reachable.` },
         ],
         explanation: `${dependent.name} likely relies on ${provider.name} for healing and temple services.`,

@@ -295,8 +295,8 @@ function applyWorldPulseResultToState(state, campaign, result, now) {
   }
 
   campaign.worldState = ensureWorldState(result.worldState, campaign);
-  campaign.regionalGraph = ensureRegionalGraph(result.regionalGraph);
-  campaign.wizardNews = ensureWizardNewsFeed(result.wizardNews);
+  campaign.regionalGraph = ensureRegionalGraph(result.regionalGraph, { now });
+  campaign.wizardNews = ensureWizardNewsFeed(result.wizardNews, { now });
   campaign.updatedAt = now;
   return persistUpdates;
 }

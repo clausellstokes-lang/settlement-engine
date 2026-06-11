@@ -24,6 +24,7 @@ import { UPGRADE_CHAINS, collapseUpgradeChains } from '../../src/generators/step
 import { generateEconomicState } from '../../src/generators/economicGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { checkStructuralValidity } from '../../src/generators/structuralValidator.js';
 import { clearActiveRng, setActiveRng } from '../../src/generators/rngContext.js';
 
 const PORT_INFRA = ['Docks/port facilities', "Harbour master's office", 'Shipyard'];
@@ -155,6 +156,46 @@ describe('behavior: hasPort means real port infrastructure', () => {
   });
 });
 
+// ── Behavior: the airship exception to the docks water-access rule ───────────
+
+describe('behavior: airship docking exempts docks from the water-access check', () => {
+  // cascadePass's airship override deliberately adds 'Docks/port facilities'
+  // ("aerial and surface freight") to non-water routes, so the validator's
+  // INSTITUTION_SPATIAL check must not flag the institution the generator
+  // just added. The exemption keys on airship presence: landlocked docks
+  // WITHOUT airships are still a genuine violation.
+  const accessViolations = (instNames, route) =>
+    checkStructuralValidity(
+      instNames.map((name) => ({ name })),
+      { tier: 'metropolis', tradeRouteAccess: route },
+    ).violations
+      .filter((v) => v.type === 'access_violation')
+      .map((v) => v.institution);
+
+  test('isolated docks with airship docking raise no water-access violation', () => {
+    const av = accessViolations(
+      ['Docks/port facilities', 'Airship docking (high magic)'],
+      'isolated',
+    );
+    expect(av).not.toContain('Docks/port facilities');
+  });
+
+  test('isolated docks without airship docking still violate', () => {
+    expect(accessViolations(['Docks/port facilities'], 'isolated')).toContain(
+      'Docks/port facilities',
+    );
+  });
+
+  test('the exception is narrow: Major port stays water-gated even with airships', () => {
+    const av = accessViolations(
+      ['Major port', 'Docks/port facilities', 'Airship docking (high magic)'],
+      'isolated',
+    );
+    expect(av).toContain('Major port');
+    expect(av).not.toContain('Docks/port facilities');
+  });
+});
+
 // ── Golden settlements: seeded pipeline truths a DM can see ──────────────────
 
 describe('golden: seeded port settlements across tiers', () => {
@@ -185,6 +226,25 @@ describe('golden: seeded port settlements across tiers', () => {
     expect(PORT_INFRA.some((p) => names.has(p))).toBe(true);
     const income = s.economicState.incomeSources.map((i) => i.source);
     expect(income).toContain('Port Duties');
+  });
+
+  test('isolated high-magic metropolis with airship-added docks gets a clean access receipt', () => {
+    // Seed verified to roll 'Airship docking (high magic)' AND have the
+    // cascadePass airship override add 'Docks/port facilities' despite the
+    // isolated route — exactly the roster that used to trip the spurious
+    // "Dock facilities require navigable water" viability warning.
+    const s = gen(
+      {
+        settType: 'metropolis', culture: 'germanic', terrain: 'mountains',
+        tradeRouteAccess: 'isolated', magicLevel: 'high', priorityMagic: 90,
+      },
+      'airship-exception-0',
+    );
+    const names = new Set(s.institutions.map((i) => i.name));
+    expect(names.has('Airship docking (high magic)')).toBe(true);
+    expect(names.has('Docks/port facilities')).toBe(true);
+    const av = s.structuralViolations.filter((v) => v.type === 'access_violation');
+    expect(av).toEqual([]);
   });
 
   test('river-route city with a barge company does not read as a port', () => {

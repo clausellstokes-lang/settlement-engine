@@ -18,7 +18,7 @@ import {
   withCampaignHistoryEvent,
   recordGraduationsIntoHistory,
 } from '../../src/domain/worldPulse/stressorAftermath.js';
-import { advanceCampaignWorld } from '../../src/domain/worldPulse/index.js';
+import { advanceCampaignWorld, resolveStressorById } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -112,6 +112,39 @@ describe('news entries', () => {
     expect(written).toBe(2);
     expect(local.get('a').history.historicalEvents[0].campaignEra).toBe(true);
     expect(local.get('b').history.historicalEvents[0].campaignEra).toBe(true);
+  });
+});
+
+// Triage pin (T3 deferred): residuals scale per target through
+// effectiveStressorSeverity — a spread target's residual scar matches the
+// attenuated severity it actually experienced, not the record's origin
+// severity. Settlements the crisis never reached get no residual at all.
+describe('truthful aftermath: per-target residual severity', () => {
+  test('origin residual > spread-target residual for an attenuated spread; unaffected settlements get nothing', () => {
+    const { residualOutcomes, resolved } = resolveStressorById([{
+      id: 'world_stressor.famine.origin',
+      type: 'famine',
+      severity: 0.8,
+      age: 3,
+      status: 'active',
+      originSettlementId: 'origin',
+      affectedSettlementIds: ['origin', 'spread'],
+      // The R3 spread stamp: 'spread' experienced the famine attenuated.
+      severityBySettlement: { spread: 0.4 },
+    }], 'world_stressor.famine.origin', { tick: 9, now: NOW });
+
+    expect(resolved).toHaveLength(1);
+    // Exactly the affected settlements — nobody else scars.
+    expect(residualOutcomes.map(o => o.targetSaveId).sort()).toEqual(['origin', 'spread']);
+
+    const origin = residualOutcomes.find(o => o.targetSaveId === 'origin');
+    const spread = residualOutcomes.find(o => o.targetSaveId === 'spread');
+    expect(origin.severity).toBeCloseTo(0.8 * 0.45, 5);
+    expect(spread.severity).toBeCloseTo(0.4 * 0.45, 5);
+    expect(origin.severity).toBeGreaterThan(spread.severity);
+    // The emitted condition carries the same per-target severity.
+    expect(origin.condition.severity).toBeCloseTo(0.8 * 0.45, 5);
+    expect(spread.condition.severity).toBeCloseTo(0.4 * 0.45, 5);
   });
 });
 

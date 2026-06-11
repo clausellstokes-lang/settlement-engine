@@ -436,35 +436,42 @@ function canonicalAffectedSystems(systems = []) {
 function residualOutcome(stressor, tick) {
   const targetIds = stressor.affectedSettlementIds || [];
   const defaults = catalogFor(stressor.type);
-  return targetIds.map(targetSaveId => ({
-    id: `world_outcome.residual.${stablePart(stressor.id)}.${stablePart(targetSaveId)}`,
-    type: 'condition',
-    candidateType: 'stressor_residual',
-    ruleId: `stressor_${stressor.type}_residual`,
-    ruleFamily: 'stressor',
-    applyMode: 'auto',
-    probability: 1,
-    targetSaveId,
-    severity: Math.max(0.15, stressor.severity * 0.45),
-    score: Math.round(stressor.severity * 45),
-    headline: `${stressor.label} leaves aftereffects`,
-    summary: `${stressor.label} is no longer the active crisis, but its consequences remain visible.`,
-    reasons: [
-      'A time-bounded stressor resolved.',
-      `Residual effects remain: ${stressor.residualEffects.slice(0, 3).join(', ').replace(/_/g, ' ')}.`,
-    ],
-    condition: {
-      archetype: 'stressor_residual',
-      label: `${stressor.label} aftereffects`,
-      description: `${stressor.label} has eased, leaving ${stressor.residualEffects.slice(0, 3).join(', ').replace(/_/g, ' ')}.`,
-      severity: Math.max(0.15, stressor.severity * 0.45),
-      status: 'easing',
-      duration: { elapsedTicks: 0, expiresAtTicks: 6 },
-      triggeredAt: { tick, sourceEventType: 'WORLD_STRESSOR_RESOLVED', sourceEventTargetId: stressor.id },
-      affectedSystems: canonicalAffectedSystems(defaults.affectedSystems || ['labor_capacity', 'public_legitimacy', 'social_trust']),
-      causes: [{ source: stressor.id, effect: 'residual_aftereffect', reason: 'The active stressor resolved naturally.' }],
-    },
-  }));
+  return targetIds.map(targetSaveId => {
+    // Truthful aftermath (T3): the residual scar matches what THIS settlement
+    // actually experienced — a spread target's attenuated severity (the
+    // severityBySettlement stamp), not the record's origin severity.
+    const experienced = effectiveStressorSeverity(stressor, targetSaveId);
+    const residualSeverity = Math.max(0.15, experienced * 0.45);
+    return {
+      id: `world_outcome.residual.${stablePart(stressor.id)}.${stablePart(targetSaveId)}`,
+      type: 'condition',
+      candidateType: 'stressor_residual',
+      ruleId: `stressor_${stressor.type}_residual`,
+      ruleFamily: 'stressor',
+      applyMode: 'auto',
+      probability: 1,
+      targetSaveId,
+      severity: residualSeverity,
+      score: Math.round(experienced * 45),
+      headline: `${stressor.label} leaves aftereffects`,
+      summary: `${stressor.label} is no longer the active crisis, but its consequences remain visible.`,
+      reasons: [
+        'A time-bounded stressor resolved.',
+        `Residual effects remain: ${stressor.residualEffects.slice(0, 3).join(', ').replace(/_/g, ' ')}.`,
+      ],
+      condition: {
+        archetype: 'stressor_residual',
+        label: `${stressor.label} aftereffects`,
+        description: `${stressor.label} has eased, leaving ${stressor.residualEffects.slice(0, 3).join(', ').replace(/_/g, ' ')}.`,
+        severity: residualSeverity,
+        status: 'easing',
+        duration: { elapsedTicks: 0, expiresAtTicks: 6 },
+        triggeredAt: { tick, sourceEventType: 'WORLD_STRESSOR_RESOLVED', sourceEventTargetId: stressor.id },
+        affectedSystems: canonicalAffectedSystems(defaults.affectedSystems || ['labor_capacity', 'public_legitimacy', 'social_trust']),
+        causes: [{ source: stressor.id, effect: 'residual_aftereffect', reason: 'The active stressor resolved naturally.' }],
+      },
+    };
+  });
 }
 
 // Echoes fade on a ~6-tick half-life; below this floor they graduate out of

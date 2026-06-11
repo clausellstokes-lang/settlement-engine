@@ -72,6 +72,19 @@ describe('institution-name integrity (string-coupling guard)', () => {
     expect([...orphans].sort()).toEqual([]);
   });
 
+  it('every INSTITUTION_SPATIAL exception names a defined institution', () => {
+    // `exception` exempts an entry from its access check when the named
+    // institution is on the roster (structuralValidator). It joins by exact
+    // string, so a rename on either side silently disables the exemption.
+    const orphans = [];
+    for (const entry of INSTITUTION_SPATIAL) {
+      if (entry?.exception && !isDefined(entry.exception)) {
+        orphans.push(`${entry.exception}  <- exception on "${entry.institution}"`);
+      }
+    }
+    expect(orphans).toEqual([]);
+  });
+
   it('every GATE_FEATURES requirement resolves, except documented pre-existing bugs', () => {
     const orphans = new Set();
     for (const [feature, def] of Object.entries(GATE_FEATURES)) {

@@ -347,7 +347,7 @@ export function applyWorldPulseOutcomes({
   advanceRegionalImpacts: shouldAdvanceRegionalImpacts = true,
   simulationRules = null,
 } = {}) {
-  let graph = ensureRegionalGraph(regionalGraph || snapshot.regionalGraph);
+  let graph = ensureRegionalGraph(regionalGraph || snapshot.regionalGraph, { now });
   let state = worldState;
   const rules = normalizeSimulationRules(simulationRules || worldState?.simulationRules || snapshot?.worldState?.simulationRules);
   const propagationDepth = propagationDepthForRules(rules);
@@ -543,7 +543,11 @@ export function applyWorldPulseOutcomes({
     if (outcome.type === 'faction') state = applyFactionPatch(state, outcome);
     if (outcome.type === 'stressor' && outcome.stressor) {
       const byId = new Map((state.stressors || []).map(stressor => [stressor.id, stressor]));
-      byId.set(outcome.stressor.id, { ...outcome.stressor, createdAt: now, updatedAt: now });
+      // Birth time is sacred: escalation/spread re-upserts the same record,
+      // so the FIRST createdAt wins (the crisis was born once) while
+      // updatedAt moves with every touch.
+      const prior = byId.get(outcome.stressor.id);
+      byId.set(outcome.stressor.id, { ...outcome.stressor, createdAt: prior?.createdAt || now, updatedAt: now });
       state = { ...state, stressors: [...byId.values()] };
       // A betrayal's birth seeds the traitor its variant implies (one corrupt
       // NPC, gated on an existing corruptible flaw — no flaw, no traitor).
@@ -618,7 +622,7 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
   const settlementMap = new Map((saves || []).map(save => [String(save.id || save.settlement?.id), { saveId: String(save.id || save.settlement?.id), save, settlement: save.settlement || save }]));
   const snapshot = {
     campaign,
-    regionalGraph: ensureRegionalGraph(campaign?.regionalGraph),
+    regionalGraph: ensureRegionalGraph(campaign?.regionalGraph, { now }),
     settlements: [...settlementMap.values()].map(item => ({ id: item.saveId, settlement: item.settlement, name: item.settlement?.name || item.save?.name || item.saveId })),
   };
   const result = applyWorldPulseOutcomes({

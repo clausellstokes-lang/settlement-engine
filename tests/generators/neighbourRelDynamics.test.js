@@ -78,6 +78,7 @@ const CONSUMER_FILES = [
   'institutionProbability.js',
   'neighbourGenerator.js',
   path.join('steps', 'generateEconomy.js'),
+  path.join('steps', 'resolveNeighbour.js'),
   path.join('..', 'domain', 'region', 'tradeLinks.js'),
 ];
 
