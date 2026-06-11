@@ -76,6 +76,11 @@ export const CAPACITY_NAMES = Object.freeze([
 
 export const CAPACITY_BANDS = Object.freeze([
   'surplus', 'adequate', 'strained', 'critical', 'collapsed',
+  // Out-of-band: supply AND demand are both zero — the capacity does not
+  // exist here and nothing asks for it (today: 'magical' in a
+  // magicExists:false world, matching magicProfile's 'absent' vocabulary).
+  // Not a strain level: strained/critical/collapsed filters exclude it.
+  'absent',
 ]);
 
 const CAPACITY_LABEL = Object.freeze({
@@ -579,6 +584,17 @@ function deriveCraft(s, ctx) {
 function deriveMagical(s, ctx) {
   const supplyContributors = [];
   const demandContributors = [];
+
+  // Dead-magic guard (W5#3): in a magicExists:false world there is no arcane
+  // supply and nothing demands one — mirror magicLedger zeroing the dial
+  // (effective priorityMagic 0). Zero both sides so the composer bands this
+  // 'absent' instead of pretending a 40/45 near-adequate arcane capacity.
+  if (s?.config?.magicExists === false) {
+    push(supplyContributors, 'config.magicExists', 'absent', 0,
+      'Magic does not function in this world; no arcane capacity exists or is demanded.');
+    return { supply: 0, demand: 0, supplyContributors, demandContributors };
+  }
+
   let supply = 40;
   let demand = 45;
 
@@ -634,18 +650,43 @@ const DERIVERS = Object.freeze({
   magical:           deriveMagical,
 });
 
-function finalizeCapacity(name, supply, demand, supplyContributors, demandContributors) {
-  const ratio = demand <= 0 ? 2.0 : supply / demand;
+// Trajectory (W5#5): a capacity's trajectory follows the WORST status among
+// the active conditions that actually fed it — derivers push condition-driven
+// contributor rows with source = condition.id, so the join is exact.
+// Precedence worsening > easing > stable: a capacity dragged by a worsening
+// condition trends 'worsening'; one whose condition pressures are ALL easing
+// trends 'improving'; anything else (no condition input, or mixed
+// easing/stable) holds 'stable'. Vocabulary matches the CapacityProfile
+// typedef ('improving' | 'stable' | 'worsening').
+function conditionTrajectory(conditions, supplyContributors, demandContributors) {
+  if (!Array.isArray(conditions) || conditions.length === 0) return 'stable';
+  const sources = new Set([
+    ...supplyContributors.map(c => c.source),
+    ...demandContributors.map(c => c.source),
+  ]);
+  const fed = conditions.filter(c => sources.has(c.id));
+  if (fed.length === 0) return 'stable';
+  if (fed.some(c => c.status === 'worsening')) return 'worsening';
+  if (fed.every(c => c.status === 'easing')) return 'improving';
+  return 'stable';
+}
+
+function finalizeCapacity(name, supply, demand, supplyContributors, demandContributors, conditions = []) {
+  // 0/0 is not a ratio story: the capacity simply is not present (today:
+  // magical in a dead-magic world). Band it 'absent' instead of letting the
+  // zero-demand guard below read as a phantom surplus.
+  const absent = supply <= 0 && demand <= 0;
+  const ratio = absent ? 0 : demand <= 0 ? 2.0 : supply / demand;
   return {
     capacity: name,
     label: CAPACITY_LABEL[name] || name,
     supply,
     demand,
     ratio: Math.round(ratio * 100) / 100,
-    band: capacityBand(ratio),
+    band: absent ? 'absent' : capacityBand(ratio),
     supplyContributors,
     demandContributors,
-    trajectory: 'stable', // future: track tick-over-tick movement
+    trajectory: conditionTrajectory(conditions, supplyContributors, demandContributors),
   };
 }
 
@@ -674,7 +715,7 @@ export function deriveCapacityProfile(name, settlement) {
   if (!settlement) return finalizeCapacity(name, 50, 50, [], []);
   const ctx = buildContext(settlement);
   const { supply, demand, supplyContributors, demandContributors } = DERIVERS[name](settlement, ctx);
-  return finalizeCapacity(name, supply, demand, supplyContributors, demandContributors);
+  return finalizeCapacity(name, supply, demand, supplyContributors, demandContributors, ctx.conditions);
 }
 
 /**
@@ -685,7 +726,7 @@ export function deriveCapacityProfile(name, settlement) {
  *   capacities: { [name]: CapacityProfile },
  *   bands: { [name]: CapacityBand },
  *   ratios: { [name]: number },
- *   summary: { surplus, adequate, strained, critical, collapsed },
+ *   summary: { surplus, adequate, strained, critical, collapsed, absent },
  * }
  */
 export function deriveAllCapacities(settlement) {
@@ -702,7 +743,7 @@ export function deriveAllCapacities(settlement) {
       capacities: empty,
       bands,
       ratios,
-      summary: { surplus: [], adequate: [...CAPACITY_NAMES], strained: [], critical: [], collapsed: [] },
+      summary: { surplus: [], adequate: [...CAPACITY_NAMES], strained: [], critical: [], collapsed: [], absent: [] },
     };
   }
 
@@ -710,11 +751,11 @@ export function deriveAllCapacities(settlement) {
   const capacities = {};
   const bands = {};
   const ratios = {};
-  const summary = { surplus: [], adequate: [], strained: [], critical: [], collapsed: [] };
+  const summary = { surplus: [], adequate: [], strained: [], critical: [], collapsed: [], absent: [] };
 
   for (const name of CAPACITY_NAMES) {
     const { supply, demand, supplyContributors, demandContributors } = DERIVERS[name](settlement, ctx);
-    const profile = finalizeCapacity(name, supply, demand, supplyContributors, demandContributors);
+    const profile = finalizeCapacity(name, supply, demand, supplyContributors, demandContributors, ctx.conditions);
     capacities[name] = profile;
     bands[name] = profile.band;
     ratios[name] = profile.ratio;
@@ -728,7 +769,7 @@ export function deriveAllCapacities(settlement) {
 
 /** Count capacities at each band. */
 export function capacityBreakdown(settlement) {
-  const out = { surplus: 0, adequate: 0, strained: 0, critical: 0, collapsed: 0 };
+  const out = { surplus: 0, adequate: 0, strained: 0, critical: 0, collapsed: 0, absent: 0 };
   const state = deriveAllCapacities(settlement);
   for (const name of CAPACITY_NAMES) {
     const band = state.bands[name];

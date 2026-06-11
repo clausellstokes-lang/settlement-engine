@@ -36,6 +36,17 @@ describe('archetypeForStressor', () => {
     expect(archetypeForStressor({ type: 'economic_slump' })).toBeNull();
     expect(archetypeForStressor({})).toBeNull();
   });
+
+  // Wave 5 #4: world-pulse stressors carry their display text as `label`
+  // (stressors.js normalizeStressor), not `name` — the match text skipped
+  // it, so a label-only crisis silently never promoted.
+  it('matches on stressor.label (the world-pulse field)', () => {
+    expect(archetypeForStressor({ label: 'Mass migration from the southlands' }))
+      .toBe('regional_migration_pressure');
+    expect(archetypeForStressor({ type: 'regional_pressure', label: 'Plague spreading along the river' }))
+      .toBe('plague');
+    expect(archetypeForStressor({ label: 'Petty squabbles at the market' })).toBeNull();
+  });
 });
 
 describe('promoteStressorsToConditions (P0.3)', () => {
@@ -81,6 +92,15 @@ describe('promoteStressorsToConditions (P0.3)', () => {
   it('is a no-op for a settlement with no promotable stressors', () => {
     const s = settlementWith([]);
     expect(promoteStressorsToConditions(s)).toBe(s);
+  });
+
+  it('promotes a label-only world-pulse stressor and uses the label for display', () => {
+    const s = settlementWith([{ type: 'mass_migration', label: 'Columns of refugees on the king\'s road', severity: 0.6 }]);
+    const conds = promoteStressorsToConditions(s).activeConditions || [];
+    const cond = conds.find(c => c.archetype === 'regional_migration_pressure');
+    expect(cond).toBeTruthy();
+    // The generation cause cites the human-readable label, not the bare type token.
+    expect(cond.causes.some(c => String(c.detail).includes('Columns of refugees on the king\'s road'))).toBe(true);
   });
 });
 

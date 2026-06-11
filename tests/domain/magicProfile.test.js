@@ -226,3 +226,71 @@ describe('deriveMagicProfile — canonical generator vocabulary (P3.3b Stage 3b)
     expect(at('high').availability).toBe('broad');
   });
 });
+
+// Wave 5 #3 (dead-magic leaks): deriveMagicProfile fabricated a full availability/
+// cost/risk envelope for magicExists:false worlds — a no-magic campaign read
+// "Availability: rare. Cost: extortionate." as if magic merely happened to be
+// scarce. The profile now says magic is absent, even when legacy magicLevel
+// bands, sliders, or arcane institutions survive on the record.
+describe('deriveMagicProfile — dead-magic world is honest (Wave 5 #3)', () => {
+  const deadMagicCity = {
+    config: { magicExists: false, magicLevel: 'pervasive', priorityMagic: 90 },
+    institutions: [{ name: "Wizard's Tower" }, { name: 'Cathedral' }],
+    powerStructure: { factions: [{ faction: 'Arcane Conclave', power: 70 }] },
+  };
+
+  it('reports magic as absent instead of fabricating an envelope', () => {
+    const m = deriveMagicProfile(deadMagicCity);
+    expect(m.magicExists).toBe(false);
+    expect(m.availability).toBe('absent');
+    expect(m.legality).toBe('absent');
+    expect(m.cost).toBe('absent');
+    expect(m.risk).toBe('absent');
+    expect(m.roles).toEqual({
+      economic: 'absent', military: 'absent', medical: 'absent', infrastructure: 'absent',
+    });
+    expect(m.institutionalControl).toBe('unregulated');
+    expect(m.religiousAcceptance).toBe('indifferent');
+  });
+
+  it('the contributor names the no-magic world as the cause', () => {
+    const m = deriveMagicProfile(deadMagicCity);
+    expect(m.contributors).toHaveLength(1);
+    expect(m.contributors[0].source).toBe('config.magicExists');
+  });
+
+  it('absent facets still come from the canonical band exports', () => {
+    const m = deriveMagicProfile(deadMagicCity);
+    expect(magicAvailabilityBands()).toContain(m.availability);
+    expect(magicLegalityBands()).toContain(m.legality);
+    expect(magicRiskBands()).toContain(m.risk);
+    for (const r of Object.values(m.roles)) expect(magicRoleBands()).toContain(r);
+  });
+
+  it('summarizeMagic stays well-formed for a dead-magic world', () => {
+    const lines = summarizeMagic(deadMagicCity);
+    expect(lines).toHaveLength(6);
+    expect(lines[0]).toBe('Availability: absent.');
+  });
+
+  it('a magic-enabled profile carries magicExists:true and unchanged facets', () => {
+    const m = deriveMagicProfile({ config: { magicLevel: 'medium' }, powerStructure: { factions: [] }, institutions: [] });
+    expect(m.magicExists).toBe(true);
+    expect(m.availability).toBe('moderate'); // medium tier facets unchanged by the guard
+    expect(m.legality).toBe('regulated');
+    expect(m.cost).toBe('costly');
+  });
+
+  it("'absent' floors are unreachable by band stepping — only the dead-magic short circuit assigns them", () => {
+    // Strong religious faction pulls legality DOWN one band from the 'restricted'
+    // baseline: the floor of the lived-world scale is 'forbidden', never 'absent'.
+    const m = deriveMagicProfile({
+      config: { magicLevel: 'low' },
+      powerStructure: { factions: [{ faction: 'Religious Authorities', power: 60 }] },
+      institutions: [],
+    });
+    expect(m.legality).toBe('forbidden');
+    expect(m.availability).not.toBe('absent');
+    expect(m.risk).not.toBe('absent');
+  });
+});

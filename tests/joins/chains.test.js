@@ -22,6 +22,7 @@ import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { computeActiveChains } from '../../src/generators/computeActiveChains.js';
 import { healingLedger, HEALING_INSTITUTION_PATTERN } from '../../src/domain/healingLedger.js';
 import { deriveSystemVariable } from '../../src/domain/causalState.js';
+import { NEED_HEURISTICS } from '../../src/domain/supplyChainState.js';
 
 const TIER_ORDER = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 
@@ -149,6 +150,57 @@ describe('RESOURCE_TO_CHAINS joins', () => {
     for (const [resourceKey, chainRef] of expected) {
       expect(RESOURCE_TO_CHAINS[resourceKey], resourceKey).toContain(chainRef);
     }
+  });
+});
+
+describe('NEED_HEURISTICS joins (beneficiary/victim vocabulary, Wave 5 #2)', () => {
+  // chain.needKey only ever carries SUPPLY_CHAIN_NEEDS group keys. The
+  // heuristic table once keyed 'trade'/'arcane'/'energy' — no such groups —
+  // so inferBeneficiaries/inferVictims silently returned the generic
+  // ['settlement residents'] for 8 of the 11 groups.
+  it('every NEED_HEURISTICS key is a real SUPPLY_CHAIN_NEEDS group', () => {
+    const groups = new Set(Object.keys(SUPPLY_CHAIN_NEEDS));
+    const orphans = Object.keys(NEED_HEURISTICS).filter(k => !groups.has(k));
+    expect(orphans).toEqual([]);
+  });
+
+  it('every SUPPLY_CHAIN_NEEDS group has a heuristic entry (no generic fallback in play)', () => {
+    const missing = Object.keys(SUPPLY_CHAIN_NEEDS).filter(k => !NEED_HEURISTICS[k]);
+    expect(missing).toEqual([]);
+  });
+
+  it('every entry carries non-empty beneficiaries, victims, and a failure consequence', () => {
+    for (const [key, h] of Object.entries(NEED_HEURISTICS)) {
+      expect(h.beneficiaries.length, key).toBeGreaterThan(0);
+      expect(h.victims.length, key).toBeGreaterThan(0);
+      expect(typeof h.failureConsequence, key).toBe('string');
+      expect(h.failureConsequence.length, key).toBeGreaterThan(0);
+    }
+  });
+
+  it("deriveTradeConnectivity's chain filter matches a real SUPPLY_CHAIN_NEEDS group", () => {
+    // causalState.js filters activeChains by needKey before scoring trade
+    // connectivity. The filter once keyed 'trade' — no such group — so the
+    // whole trade-chain block was dead code (Wave 5 #2). One stable chain
+    // per REAL group must surface at least one chain contributor, whichever
+    // group key the filter reads.
+    const s = {
+      tier: 'town',
+      population: 2000,
+      config: { tradeRouteAccess: 'road' },
+      economicState: {
+        activeChains: Object.keys(SUPPLY_CHAIN_NEEDS).map(needKey => ({
+          needKey,
+          chainId: `probe_${needKey}`,
+          label: `${needKey} probe`,
+          status: 'operational',
+        })),
+      },
+      activeConditions: [],
+    };
+    const out = deriveSystemVariable('trade_connectivity', s);
+    const chainContributors = out.contributors.filter(c => String(c.source).startsWith('chain.'));
+    expect(chainContributors.length).toBeGreaterThan(0);
   });
 });
 

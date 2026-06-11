@@ -355,9 +355,11 @@ function deriveTradeConnectivity(s) {
         : `Settlement has ${trade} trade access.`);
   }
 
-  // Trade supply chains
+  // Trade supply chains. The real need-group key is 'trade_entrepot'
+  // (supplyChainData.js) — the old 'trade' filter matched nothing, so
+  // trade chains never fed connectivity at all (Cohesion Wave 5 #2).
   const chains = deriveAllSupplyChainStates(s);
-  const tradeChains = chains.filter(c => c.needKey === 'trade');
+  const tradeChains = chains.filter(c => c.needKey === 'trade_entrepot');
   for (const c of tradeChains) {
     if (c.status === 'stable') { score += 5; push(contributors, c.id, 'stable', +5, `${c.name} runs normally.`); }
     else if (c.status !== 'stable') {
@@ -502,7 +504,9 @@ function deriveHousingPressure(s) {
   const pop = populationOf(s);
   // Without a real housing dataset, use population×stressors heuristic.
   const stressors = canonStressors(s);
-  const refugeeStress = stressors.find(st => /refugee|displaced|influx|migrant/i.test(String(st?.type || st?.name || st)));
+  // 'migration' added: /migrant/ does not substring-match 'mass_migration',
+  // so the generation stress type never registered as housing pressure.
+  const refugeeStress = stressors.find(st => /refugee|displaced|influx|migrant|migration/i.test(String(st?.type || st?.name || st)));
   if (refugeeStress) {
     score -= 18;
     push(contributors, 'stressors.refugee', 'influx', -18, 'Refugee influx strains available housing.');

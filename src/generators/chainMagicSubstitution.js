@@ -22,6 +22,11 @@ const TIER_ORDER_MAGIC = ['thorp','hamlet','village','town','city','metropolis']
  * @param {string} tier          - settlement tier
  */
 export function applyMagicSubstitution(activeChains, traditions, magicPriority, tier) {
+  // Dead-magic guard: at magic 0 (resolveConfig zeroes the dial when
+  // config.magicExists === false) no tradition can substitute — druid groves,
+  // blessed granaries, divine healing, and Fabricate are all magic. Internal so
+  // every caller is covered regardless of how it built `traditions`.
+  if (!(magicPriority > 0)) return;
   const tierIdxMC = TIER_ORDER_MAGIC.indexOf(tier);
 
   activeChains.forEach(chain => {

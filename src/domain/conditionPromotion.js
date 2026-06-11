@@ -60,7 +60,10 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
 
 /** @returns {string|null} the condition archetype this stressor promotes to, or null. */
 export function archetypeForStressor(stressor) {
-  const text = `${stressor?.type || ''} ${stressor?.name || ''}`.trim();
+  // `.label` included: world-pulse stressors carry their display text as
+  // `label` (stressors.js normalizeStressor), not `name` — a label-only
+  // stressor silently skipped promotion.
+  const text = `${stressor?.type || ''} ${stressor?.name || ''} ${stressor?.label || ''}`.trim();
   if (!text) return null;
   for (const { re, archetype } of STRESSOR_ARCHETYPE_RULES) {
     if (re.test(text)) return archetype;
@@ -97,7 +100,9 @@ export function promoteStressorsToConditions(settlement, origin = null) {
     const archetype = archetypeForStressor(stressor);
     if (!archetype) continue;
     const severity = typeof stressor?.severity === 'number' ? stressor.severity : null;
-    const label = stressor?.name || stressor?.type || archetype;
+    // `.label` preferred over the raw type token for the same world-pulse
+    // shape — a label-only stressor used to display as its bare archetype.
+    const label = stressor?.name || stressor?.label || stressor?.type || archetype;
     const prev = byArchetype.get(archetype);
     if (!prev || (severity != null && (prev.severity == null || severity > prev.severity))) {
       byArchetype.set(archetype, { severity, label });

@@ -59,8 +59,11 @@ describe('CAPACITY_NAMES', () => {
 });
 
 describe('CAPACITY_BANDS', () => {
-  it('shares the 5-band vocabulary with Phase 17 substrate', () => {
-    expect(CAPACITY_BANDS).toEqual(['surplus', 'adequate', 'strained', 'critical', 'collapsed']);
+  it('shares the 5-band vocabulary with Phase 17 substrate, plus the out-of-band absent (W5)', () => {
+    // Reconciled pin (W5#3): 'absent' is the honest read for a capacity with
+    // zero supply AND zero demand (a dead-magic world's magical capacity) —
+    // it is deliberately NOT a strain level.
+    expect(CAPACITY_BANDS).toEqual(['surplus', 'adequate', 'strained', 'critical', 'collapsed', 'absent']);
   });
 });
 
@@ -261,6 +264,133 @@ describe('religious_welfare capacity behavior', () => {
       activeConditions: [{ archetype: 'plague', severity: 0.6 }],
     });
     expect(plagued.demand).toBeGreaterThan(baseline.demand);
+  });
+});
+
+// ── Trajectory from contributing condition status (W5#5) ──────────────
+//
+// Before this wave trajectory was hard-coded 'stable' ("future: track
+// tick-over-tick movement") while condition status was written everywhere
+// and consumed for dynamics nowhere. Trajectory now follows the WORST
+// status among the conditions that actually fed the capacity (matched by
+// contributor source = condition.id): worsening > easing > stable.
+
+describe('capacity trajectory — derived from contributing condition status (W5#5)', () => {
+  const healing = (conditions) => deriveCapacityProfile('healing', {
+    population: 2000,
+    institutions: [{ id: 'i1', name: 'Temple of Light' }],
+    activeConditions: conditions,
+  });
+
+  it('a capacity dragged by a worsening condition trends worsening', () => {
+    const p = healing([{ archetype: 'plague', severity: 0.6, status: 'worsening' }]);
+    expect(p.trajectory).toBe('worsening');
+  });
+
+  it('a capacity whose condition pressures are all easing trends improving', () => {
+    const p = healing([{ archetype: 'plague', severity: 0.6, status: 'easing' }]);
+    expect(p.trajectory).toBe('improving');
+  });
+
+  it('a stable condition holds the capacity stable', () => {
+    const p = healing([{ archetype: 'plague', severity: 0.6, status: 'stable' }]);
+    expect(p.trajectory).toBe('stable');
+  });
+
+  it('no-condition capacities stay stable', () => {
+    expect(healing([]).trajectory).toBe('stable');
+    expect(deriveCapacityProfile('labor', null).trajectory).toBe('stable');
+  });
+
+  it('only conditions that actually fed the capacity count', () => {
+    // corruption_exposed feeds administrative, not healing — a worsening
+    // scandal must not drag healing's trajectory.
+    const conditions = [{ archetype: 'corruption_exposed', severity: 0.6, status: 'worsening' }];
+    expect(healing(conditions).trajectory).toBe('stable');
+    const admin = deriveCapacityProfile('administrative', {
+      population: 2000, activeConditions: conditions,
+    });
+    expect(admin.trajectory).toBe('worsening');
+  });
+
+  it('worsening outranks easing when both feed the same capacity', () => {
+    // Labor is fed by plague AND food_anchor_lost.
+    const p = deriveCapacityProfile('labor', {
+      population: 2000,
+      activeConditions: [
+        { archetype: 'plague', severity: 0.6, status: 'worsening' },
+        { archetype: 'food_anchor_lost', severity: 0.5, status: 'easing' },
+      ],
+    });
+    expect(p.trajectory).toBe('worsening');
+  });
+
+  it('mixed easing + stable pressures read stable, not improving', () => {
+    const p = deriveCapacityProfile('labor', {
+      population: 2000,
+      activeConditions: [
+        { archetype: 'plague', severity: 0.6, status: 'easing' },
+        { archetype: 'food_anchor_lost', severity: 0.5, status: 'stable' },
+      ],
+    });
+    expect(p.trajectory).toBe('stable');
+  });
+});
+
+// ── Dead-magic guard on deriveMagical (W5#3) ───────────────────────────
+//
+// magicLedger zeroes the dial in a magicExists:false world; deriveMagical's
+// 40/45 baseline and threat-demand loop previously had no such guard, so a
+// no-magic campaign still derived a near-adequate (or 'strained') arcane
+// capacity. The guard zeroes both sides and the composer bands 0/0 'absent'
+// (matching magicProfile's dead-magic vocabulary).
+
+describe('magical capacity — dead-magic world derives zero demand and an absent band (W5#3)', () => {
+  // A dead-magic world that still carries every legacy magic surface the
+  // deriver reads: dial, band, an arcane institution, an arcane faction, and
+  // a stressor that infers a cult threat (the threat-demand loop's input).
+  const deadWorld = {
+    name: 'Mundane', tier: 'town', population: 2000,
+    config: { magicExists: false, priorityMagic: 60, magicLevel: 'high' },
+    institutions: [{ id: 'i1', name: "Wizard's Tower" }],
+    powerStructure: { factions: [] },
+    stressors: [{ name: 'Hidden cult gathering in the hills', severity: 0.8 }],
+    activeConditions: [],
+  };
+  const liveWorld = { ...deadWorld, config: { ...deadWorld.config, magicExists: true } };
+
+  it('derives zero supply, zero magical demand, and the absent band', () => {
+    const p = deriveCapacityProfile('magical', deadWorld);
+    expect(p.supply).toBe(0);
+    expect(p.demand).toBe(0);
+    expect(p.band).toBe('absent');
+    expect(p.demandContributors).toEqual([]);
+  });
+
+  it('emits an honest config.magicExists receipt instead of magic contributors', () => {
+    const p = deriveCapacityProfile('magical', deadWorld);
+    expect(p.supplyContributors).toHaveLength(1);
+    expect(p.supplyContributors[0]).toMatchObject({ source: 'config.magicExists', effect: 'absent', delta: 0 });
+  });
+
+  it('the same fixture with magic functioning still derives the live baseline (threat loop included)', () => {
+    const p = deriveCapacityProfile('magical', liveWorld);
+    expect(p.supply).toBeGreaterThan(0);
+    expect(p.demand).toBeGreaterThan(45); // baseline 45 + cult threat demand
+    expect(p.band).not.toBe('absent');
+  });
+
+  it('deriveAllCapacities buckets it under summary.absent, never under strain filters', () => {
+    const state = deriveAllCapacities(deadWorld);
+    expect(state.bands.magical).toBe('absent');
+    expect(state.summary.absent).toEqual(['magical']);
+    expect(strainedCapacities(deadWorld)).not.toContain('magical');
+  });
+
+  it('capacityBreakdown counts the absent capacity (all 9 still accounted for)', () => {
+    const breakdown = capacityBreakdown(deadWorld);
+    expect(breakdown.absent).toBe(1);
+    expect(Object.values(breakdown).reduce((a, b) => a + b, 0)).toBe(9);
   });
 });
 

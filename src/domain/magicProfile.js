@@ -38,16 +38,19 @@ const MAGIC_LEVEL_VALUES = Object.freeze({
   pervasive: { availability: 'pervasive',  baseRisk: 'high' },
 });
 
+// 'absent' is the dead-magic floor (config.magicExists === false): magic does not
+// function in the world, so there is nothing to band. Only the dead-magic short
+// circuit assigns it — up/down band steps never reach it.
 const AVAILABILITY_BANDS = Object.freeze([
-  'rare', 'limited', 'moderate', 'common', 'broad', 'pervasive',
+  'absent', 'rare', 'limited', 'moderate', 'common', 'broad', 'pervasive',
 ]);
 
 const LEGALITY_BANDS = Object.freeze([
-  'forbidden', 'restricted', 'regulated', 'tolerated', 'celebrated',
+  'absent', 'forbidden', 'restricted', 'regulated', 'tolerated', 'celebrated',
 ]);
 
 const RISK_BANDS = Object.freeze([
-  'low', 'moderate', 'elevated', 'high', 'extreme',
+  'absent', 'low', 'moderate', 'elevated', 'high', 'extreme',
 ]);
 
 const ROLE_BANDS = Object.freeze([
@@ -238,12 +241,36 @@ function downBand(bands, current, steps) {
  */
 export function deriveMagicProfile(settlement) {
   if (!settlement) return null;
+
+  // Dead-magic world (config.magicExists === false): magic does not function,
+  // so there is no availability/cost/risk envelope to fabricate — even if a
+  // legacy magicLevel band, slider, or 'Wizard's Tower' survives on the record.
+  // Say so honestly instead of profiling a system that does not exist.
+  if (settlement.config?.magicExists === false) {
+    return {
+      magicExists: false,
+      availability: 'absent',
+      legality: 'absent',
+      institutionalControl: 'unregulated',
+      cost: 'absent',
+      risk: 'absent',
+      religiousAcceptance: 'indifferent',
+      roles: { economic: 'absent', military: 'absent', medical: 'absent', infrastructure: 'absent' },
+      contributors: [{
+        source: 'config.magicExists',
+        effect: 'no_magic',
+        reason: 'Magic does not function in this world — no availability, legality, cost, or risk to profile.',
+      }],
+    };
+  }
+
   const profiles = deriveAllFactionProfiles(settlement);
   const causal = deriveCausalState(settlement);
   const capacity = deriveCapacityProfile('magical', settlement);
   const contributors = [];
 
   return {
+    magicExists:          true,
     availability:         deriveAvailability(settlement, contributors),
     legality:             deriveLegality(settlement, profiles, contributors),
     institutionalControl: deriveInstitutionalControl(settlement, profiles, contributors),

@@ -741,8 +741,9 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string}                  label
  * @property {number}                  supply          0..100.
  * @property {number}                  demand          0..100.
- * @property {number}                  ratio           supply / demand.
- * @property {CausalBand}              band            Derived from ratio.
+ * @property {number}                  ratio           supply / demand (0 for an 'absent' capacity).
+ * @property {CausalBand | 'absent'}   band            Derived from ratio; 'absent' = the capacity
+ *                                                     does not exist in this world (dead-magic).
  * @property {CapacityContributor[]}   supplyContributors
  * @property {CapacityContributor[]}   demandContributors
  * @property {'improving' | 'stable' | 'worsening'} trajectory

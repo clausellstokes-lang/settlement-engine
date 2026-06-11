@@ -468,6 +468,13 @@ export function withoutActiveCondition(settlement, conditionId) {
  * Mirrors the Phase 15 INTERVAL_SCALES so a per-week tick adds 0.25 to
  * elapsed; per-month adds 1.0; per-year adds 6.0.
  *
+ * Also applies the W5#5 severity dynamics: the status written on the
+ * condition nudges severity per tick (worsening climbs toward 1, easing
+ * falls toward the 0.05 floor, anything else holds flat), and a condition
+ * inside the pre-expiry window ramps toward easing instead of
+ * flat-then-cliff. The severityBand is recomputed to match the nudged
+ * severity.
+ *
  * @param {Object} settlement
  * @param {string} interval    'one_week' | 'one_month' | 'one_season' | 'one_year'
  * @returns {Object} new settlement
@@ -479,6 +486,32 @@ const INTERVAL_TICK_INCREMENTS = Object.freeze({
   one_year:   6.00,
 });
 
+// Severity dynamics (W5#5): the status written on the condition drives a
+// small, bounded, deterministic per-tick severity drift — a written
+// 'worsening' climbs, a written 'easing' falls, anything else ('stable',
+// legacy 'active', or no status at all) holds flat. The drift reads the
+// raw status on purpose: canonical defaulting must not invent motion for
+// a condition that never claimed a direction. Worsening clamps at 1;
+// easing floors at 0.05. Every consumer re-reads conditions on
+// derivation, so the drift flows to the causal scan, capacities, and AI
+// grounding without further wiring.
+// Exported so pins derive expectations from the live values — these are
+// TUNING numbers (owner-adjustable); tests must follow them, not freeze them.
+export const SEVERITY_DRIFT_PER_TICK = Object.freeze({
+  worsening: +0.04,
+  easing:    -0.06,
+});
+const WORSENING_SEVERITY_CEILING = 1;
+const EASING_SEVERITY_FLOOR = 0.05;
+
+// Within this many ticks of expiresAtTicks a condition winds down — its
+// status is forced to 'easing' for the nudge, so severity ramps down —
+// instead of holding severity flat until the removal cliff. Expiry itself
+// is untouched: duration-based removal in withExpiredConditionsRemoved
+// drops it exactly as before, and the ramp never extends (or resurrects)
+// a condition's life.
+const EXPIRY_EASING_WINDOW_TICKS = 2;
+
 export function withTickedConditionDurations(settlement, interval) {
   if (!settlement) return settlement;
   const existing = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
@@ -489,11 +522,28 @@ export function withTickedConditionDurations(settlement, interval) {
   const next = existing.map(c => {
     const canonical = deriveActiveCondition(c);
     if (!canonical) return c;
+    const elapsedTicks = canonical.duration.elapsedTicks + increment;
+
+    const cap = canonical.duration.expiresAtTicks;
+    const windingDown = typeof cap === 'number'
+      && (cap - elapsedTicks) <= EXPIRY_EASING_WINDOW_TICKS;
+    const driftStatus = windingDown ? 'easing' : c.status;
+    const driftPerTick = SEVERITY_DRIFT_PER_TICK[driftStatus] ?? 0;
+    let severity = canonical.severity;
+    if (driftPerTick > 0) {
+      severity = Math.min(WORSENING_SEVERITY_CEILING, severity + driftPerTick * increment);
+    } else if (driftPerTick < 0) {
+      severity = Math.max(EASING_SEVERITY_FLOOR, severity + driftPerTick * increment);
+    }
+
     return {
       ...canonical,
+      severity,
+      severityBand: severityBand(severity),
+      status: windingDown ? 'easing' : canonical.status,
       duration: {
         ...canonical.duration,
-        elapsedTicks: canonical.duration.elapsedTicks + increment,
+        elapsedTicks,
       },
     };
   });

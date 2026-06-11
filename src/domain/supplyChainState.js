@@ -10,7 +10,9 @@
  *     processingInstitutions, outputs, services, resource,
  *     exportable, entrepot, activatedByResource,
  *     substituteActive, resourceDepleted, dependency?,
- *     status: 'operational' | 'running' | 'entrepot' | 'vulnerable' | 'impaired',
+ *     status: 'operational' | 'running' | 'entrepot' | 'vulnerable' | 'impaired'
+ *           | 'magically_sustained' | 'unexploited',
+ *     magicNote?, upstreamNote?,
  *   }
  *
  * The roadmap target carries a richer state envelope:
@@ -50,16 +52,25 @@ import { deriveAllActiveConditions } from './activeConditions.js';
 //   collapsing  — chain is failing under multiple compounding pressures
 //
 // The current generator only emits a subset of these states; the
-// remaining states (`blocked`, `captured`, `collapsing`) become
-// reachable when Tier 4.2 event-driven faction logic and Tier 2.3
-// active conditions land.
+// remaining states (`captured`, `collapsing`) become reachable when
+// Tier 4.2 event-driven faction logic and Tier 2.3 active conditions
+// land.
+//
+// Magic-as-supplement is load-bearing (Cohesion Wave 5 #1): a druid-
+// propped depleted chain used to canonicalize to 'stable' via the
+// unknown-status fallthrough — fully healthy to sim, AI, and receipts —
+// while the purpose-built 'substituted' status had no producer. Same
+// for 'unexploited' (the isolated-subsistence trade shutdown), which
+// scored as 'stable' instead of 'blocked'.
 
 const LEGACY_TO_CANONICAL = Object.freeze({
-  operational: 'stable',
-  running:     'stable',
-  entrepot:    'stable',     // pass-through trade is its own stable state
-  vulnerable:  'strained',
-  impaired:    'scarce',
+  operational:         'stable',
+  running:             'stable',
+  entrepot:            'stable',     // pass-through trade is its own stable state
+  vulnerable:          'strained',
+  impaired:            'scarce',
+  magically_sustained: 'substituted', // chain runs on magical supplement, not health
+  unexploited:         'blocked',     // trade chain shut off (no route to exploit it)
 });
 
 const CANONICAL_STATUSES = new Set([
@@ -103,37 +114,69 @@ function chainIdFromShape(chain) {
 // these as first-class fields; we provide reasonable defaults so the
 // scaffolding is usable today. Custom user content + Tier 4.2 event
 // consequences can override per chain in future iterations.
+//
+// Keys mirror the SUPPLY_CHAIN_NEEDS groups in data/supplyChainData.js
+// 1:1 — the only vocabulary chain.needKey ever carries. The table once
+// keyed 'trade'/'arcane'/'energy' (no such groups), so 8 of 11 groups
+// fell through to the generic ['settlement residents'] default. The
+// joins harness (tests/joins/chains.test.js) pins the alignment in
+// both directions.
 
-const NEED_HEURISTICS = Object.freeze({
+export const NEED_HEURISTICS = Object.freeze({
   food_security: {
     beneficiaries: ['common population', 'grain merchants', 'temple relief'],
     victims:       ['the poor', 'casual labor', 'children'],
     failureConsequence: 'bread prices climb; relief queues lengthen; legitimacy strains.',
-  },
-  manufacturing: {
-    beneficiaries: ['craft guilds', 'merchants'],
-    victims:       ['unaffiliated craftsmen', 'consumers reliant on local goods'],
-    failureConsequence: 'craft prices rise; export revenue drops; guild authority weakens.',
   },
   raw_extraction: {
     beneficiaries: ['mine owners', 'craft buyers'],
     victims:       ['miners and quarry workers', 'downstream manufacturers'],
     failureConsequence: 'raw inputs run short; downstream chains feel the squeeze first.',
   },
-  trade: {
+  manufacturing: {
+    beneficiaries: ['craft guilds', 'merchants'],
+    victims:       ['unaffiliated craftsmen', 'consumers reliant on local goods'],
+    failureConsequence: 'craft prices rise; export revenue drops; guild authority weakens.',
+  },
+  trade_entrepot: {
     beneficiaries: ['merchants', 'tax base', 'cosmopolitan residents'],
     victims:       ['the isolated', 'specialty-good consumers'],
     failureConsequence: 'imports vanish; smuggling rises; merchant influence shifts.',
   },
-  energy: {
-    beneficiaries: ['homes', 'crafts requiring fuel', 'smiths'],
-    victims:       ['the poor in winter', 'fuel-dependent crafts'],
-    failureConsequence: 'winter hardship; smithy output falls; charcoal prices rise.',
+  defense_security: {
+    beneficiaries: ['the garrison', 'merchants under escort', 'property owners'],
+    victims:       ['outlying farmsteads', 'unescorted travelers', 'the undefended poor'],
+    failureConsequence: 'patrols thin; raids go unanswered; protection money changes hands.',
   },
-  arcane: {
+  healing_medicine: {
+    beneficiaries: ['the sick and injured', 'midwives and healers', 'temple infirmaries'],
+    victims:       ['plague-struck households', 'the old and the very young', 'laborers who cannot afford lost days'],
+    failureConsequence: 'wounds fester; remedies run short; outbreaks spread unchecked.',
+  },
+  knowledge_information: {
+    beneficiaries: ['scribes and clerks', 'merchant houses', 'scholars and students'],
+    victims:       ['litigants without records', 'apprentices mid-training', 'anyone awaiting news'],
+    failureConsequence: 'records lapse; contracts go undrafted; rumor replaces news.',
+  },
+  arcane_magical: {
     beneficiaries: ['arcane orders', 'wealthy clients'],
     victims:       ['those dependent on magical services'],
     failureConsequence: 'magical services lapse; alchemical supplies dry up.',
+  },
+  religion_civic: {
+    beneficiaries: ['the faithful', 'temple charities', 'the civic order'],
+    victims:       ['the poor who rely on alms', 'those awaiting rites and burials'],
+    failureConsequence: 'rites go unperformed; alms dry up; legitimacy loses its blessing.',
+  },
+  entertainment_culture: {
+    beneficiaries: ['taverners and performers', 'festival traders', 'common morale'],
+    victims:       ['performers without patronage', 'inns reliant on travelers'],
+    failureConsequence: 'festivals lapse; taverns empty; tempers shorten without release.',
+  },
+  criminal_economy: {
+    beneficiaries: ['fences and smugglers', 'buyers outside the law', 'officials on the take'],
+    victims:       ['honest traders undercut', 'debtors in deep', "the watch's credibility"],
+    failureConsequence: 'rackets fragment; rivals fight over the remains; violence spills into the streets.',
   },
 });
 
@@ -228,6 +271,13 @@ function applyRegionalPressureToStatus(baseStatus, regionalPressures) {
   const maxSeverity = Math.max(...regionalPressures.map(p => p.severity || 0));
   const severeCount = regionalPressures.filter(p => (p.severity || 0) >= 0.55).length;
 
+  // 'blocked' and 'substituted' gained real producers in Wave 5 #1
+  // (unexploited / magically_sustained). Judgment call: a blocked chain
+  // is already offline, so pressure cannot make it scarcer — it only
+  // compounds into 'collapsing', same as captured/collapsing; a
+  // substituted chain holds on its magical prop until pressure is
+  // severe (>= 0.75), past which the supplement stops covering and the
+  // chain reads 'scarce'.
   if (baseStatus === 'blocked' || baseStatus === 'captured' || baseStatus === 'collapsing') {
     return severeCount >= 2 ? 'collapsing' : baseStatus;
   }
@@ -351,6 +401,13 @@ export function deriveSupplyChainState(chain, settlement) {
     substituteActive:       chain.substituteActive,
     resourceDepleted:       chain.resourceDepleted,
     dependency:             chain.dependency,
+    // Wave 5 #1: the magic-substitution and upstream-dependency passes
+    // explain WHY a chain is substituted/strained (chainMagicSubstitution.js
+    // writes magicNote, computeActiveChains.js writes upstreamNote). The
+    // derivation used to drop both, so the canonical surface asserted a
+    // status with no receipt.
+    magicNote:              chain.magicNote,
+    upstreamNote:           chain.upstreamNote,
     // Phase 19: preserve processingInstitutions so the explanation
     // module can match institutions to the chains that use them as
     // processors. Earlier derivation code did not carry it forward.

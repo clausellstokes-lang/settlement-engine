@@ -2209,7 +2209,9 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     tradeRoute,
     H,
     depletedResources,
-    config.priorityMagic ?? 50
+    // Effective magic dial: a dead-magic world is 0 regardless of the slider
+    // (mirrors magicLedger) — gates druid/divine/arcane/alchemy substitution.
+    config.magicExists === false ? 0 : (config.priorityMagic ?? 50)
   );
   const chainStresses = (config.stressTypes || []).concat(config.intendedStressTypes || []);
   const chainExports = deriveExportsFromChains(

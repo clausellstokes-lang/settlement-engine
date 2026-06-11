@@ -67,7 +67,14 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
 
   const traditions = {
     druid:   magicPriority >= 30 && hasTradition("druid circle","grove shrine","elder grove","warden's lodge","sacred grove"),
-    divine:  hasTradition("cathedral","monastery","great cathedral","parish church","friary") &&
+    // Divine PROVISION is supernatural — it needs a world where magic functions,
+    // not just a church. resolveConfig zeroes the magic dial when
+    // config.magicExists === false, so magicPriority > 0 is the world's magic
+    // signal here: religion without magic still exists, but temple charity does
+    // not magically refill granaries ('Temple granaries blessed' stays out of
+    // no-magic campaigns). Any magic-enabled world (dial >= 1) is unchanged.
+    divine:  magicPriority > 0 &&
+             hasTradition("cathedral","monastery","great cathedral","parish church","friary") &&
              // religionInfluence check not available here, use institution presence as proxy
              hasTradition("priest","cathedral","monastery","friary","great cathedral"),
     arcane:  magicPriority >= 35 && hasTradition("wizard","mages","arcane","enchant","spellcasting","academy of magic"),

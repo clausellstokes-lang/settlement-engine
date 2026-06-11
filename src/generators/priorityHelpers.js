@@ -76,7 +76,8 @@ const getInstitutionNames = (institutions = []) => {
 
 /**
  * True if the settlement has a teleportation/planar institution AND magic
- * priority is high enough (≥ 66) to actually maintain it.
+ * functions in the world (config.magicExists !== false). See
+ * hasTeleportationInfra below.
  *
  * @param {Array<{name:string}>} institutions
  * @param {Object} config
@@ -176,6 +177,11 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
 };
 
 export const hasTeleportationInfra = (institutions = [], config = {}) => {
+  // Dead-magic world: a legacy 'Teleportation circle' on the roster is inert
+  // masonry — no magic, no magical trade. Checked BEFORE _magicTradeOnly so a
+  // stale injected flag can never resurrect magical transit in a no-magic
+  // campaign. Internal guard: call sites no longer need to re-check magicExists.
+  if (config?.magicExists === false) return false;
   // _magicTradeOnly flag is set by isolationGenerator after injection, or pre-derived
   // by generateSettlement before the structural validator runs — trust it explicitly.
   if (config?._magicTradeOnly === true) return true;

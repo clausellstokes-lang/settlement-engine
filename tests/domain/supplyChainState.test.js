@@ -41,11 +41,16 @@ function flourChain(over = {}) {
 
 describe('canonicalSupplyChainStatus()', () => {
   it.each([
-    ['operational', 'stable'],
-    ['running',     'stable'],
-    ['entrepot',    'stable'],
-    ['vulnerable',  'strained'],
-    ['impaired',    'scarce'],
+    ['operational',         'stable'],
+    ['running',             'stable'],
+    ['entrepot',            'stable'],
+    ['vulnerable',          'strained'],
+    ['impaired',            'scarce'],
+    // Wave 5 #1: these two used to fall through to 'stable' — a druid-
+    // propped depleted chain scored fully healthy, and the isolated-
+    // subsistence trade shutdown read as a running chain.
+    ['magically_sustained', 'substituted'],
+    ['unexploited',         'blocked'],
   ])('legacy "%s" → canonical "%s"', (legacy, canonical) => {
     expect(canonicalSupplyChainStatus(legacy)).toBe(canonical);
   });
@@ -117,6 +122,21 @@ describe('deriveSupplyChainState()', () => {
     expect(craft.failureConsequences).toMatch(/craft|export|guild/);
   });
 
+  it('the re-aligned need groups get real vocabulary, not the generic fallback', () => {
+    // NEED_HEURISTICS used to key 'trade'/'arcane'/'energy' — no such
+    // need groups exist, so trade_entrepot, arcane_magical, and the other
+    // six real groups all fell through to ['settlement residents'].
+    for (const needKey of [
+      'trade_entrepot', 'defense_security', 'healing_medicine',
+      'knowledge_information', 'arcane_magical', 'religion_civic',
+      'entertainment_culture', 'criminal_economy',
+    ]) {
+      const out = deriveSupplyChainState(flourChain({ needKey }));
+      expect(out.beneficiaries, needKey).not.toEqual(['settlement residents']);
+      expect(out.victims, needKey).not.toEqual(['settlement residents']);
+    }
+  });
+
   it('falls back gracefully when needKey is unknown', () => {
     const out = deriveSupplyChainState(flourChain({ needKey: 'mystery' }));
     expect(out.beneficiaries.length).toBeGreaterThan(0);
@@ -168,6 +188,111 @@ describe('deriveSupplyChainState()', () => {
     expect(out.status).toBe('scarce');
     expect(out.regionalPressures).toHaveLength(1);
     expect(out.failureConsequences).toMatch(/Regional pressure/);
+  });
+});
+
+// ── Magic-as-supplement seam (Wave 5 #1) ────────────────────────────────
+// chainMagicSubstitution.js writes status 'magically_sustained' + magicNote;
+// economicGenerator writes 'unexploited' on shut-off trade chains;
+// computeActiveChains writes upstreamNote on stressed downstreams. The
+// derivation must surface all three — not flatten them into 'stable'.
+
+describe('magic-as-supplement / blocked-chain seam', () => {
+  it('a magically_sustained chain canonicalizes to "substituted" carrying its magicNote', () => {
+    const out = deriveSupplyChainState(flourChain({
+      status: 'magically_sustained',
+      resourceDepleted: true,
+      magicNote: 'Druidic cultivation supplements depleted farmland',
+    }));
+    expect(out.status).toBe('substituted');
+    expect(out.magicNote).toBe('Druidic cultivation supplements depleted farmland');
+  });
+
+  it('an unexploited chain canonicalizes to "blocked"', () => {
+    const out = deriveSupplyChainState(flourChain({
+      needKey: 'trade_entrepot',
+      chainId: 'crossroads_trade',
+      status: 'unexploited',
+      entrepot: true,
+    }));
+    expect(out.status).toBe('blocked');
+  });
+
+  it('carries upstreamNote through for stressed downstream chains', () => {
+    const out = deriveSupplyChainState(flourChain({
+      status: 'vulnerable',
+      upstreamNote: 'Upstream supply chain impaired — grain disrupted',
+    }));
+    expect(out.status).toBe('strained');
+    expect(out.upstreamNote).toBe('Upstream supply chain impaired — grain disrupted');
+  });
+
+  it('legacyStatus keeps the RAW strings for the legacy-shape UI/PDF readers', () => {
+    // EconomicsTab / SupplyChainsPanel / SupplyChainFlow filter on the raw
+    // 'magically_sustained' / 'unexploited' strings; the canonical remap
+    // must not strand them.
+    expect(deriveSupplyChainState(flourChain({ status: 'magically_sustained' })).legacyStatus)
+      .toBe('magically_sustained');
+    expect(deriveSupplyChainState(flourChain({ status: 'unexploited' })).legacyStatus)
+      .toBe('unexploited');
+  });
+
+  it('re-deriving a substituted chain is idempotent (status and note survive)', () => {
+    const once = deriveSupplyChainState(flourChain({
+      status: 'magically_sustained',
+      magicNote: 'Temple granaries blessed; divine provision fills the gap',
+    }));
+    const twice = deriveSupplyChainState(once);
+    expect(twice.status).toBe('substituted');
+    expect(twice.legacyStatus).toBe('magically_sustained');
+    expect(twice.magicNote).toBe(once.magicNote);
+  });
+
+  it('severe regional pressure degrades a substituted chain to scarce', () => {
+    // The pre-existing 'substituted' regional handling finally has a
+    // producer; pin the consumer side of the seam too.
+    const settlement = {
+      activeConditions: [{
+        id: 'condition.regional_import_shortage.grain',
+        archetype: 'regional_import_shortage',
+        label: 'Regional import shortage: grain',
+        description: 'A regional supplier can no longer meet grain needs.',
+        severity: 0.8,
+        status: 'worsening',
+        affectedSystems: ['food_security'],
+      }],
+    };
+    const out = deriveSupplyChainState(
+      flourChain({ status: 'magically_sustained', magicNote: 'Druidic cultivation supplements depleted farmland' }),
+      settlement,
+    );
+    expect(out.status).toBe('scarce');
+    expect(out.magicNote).toBeTruthy(); // the receipt survives the degradation
+  });
+
+  it('counts substituted and blocked chains in the status breakdown', () => {
+    const settlement = {
+      economicState: {
+        activeChains: [
+          flourChain({ status: 'magically_sustained', chainId: 'a' }),
+          flourChain({ status: 'unexploited',         chainId: 'b' }),
+          flourChain({ status: 'operational',         chainId: 'c' }),
+        ],
+      },
+    };
+    const breakdown = supplyChainStatusBreakdown(settlement);
+    expect(breakdown.substituted).toBe(1);
+    expect(breakdown.blocked).toBe(1);
+    expect(breakdown.stable).toBe(1);
+  });
+
+  it('a druid-propped chain now reads as disrupted, not fully healthy', () => {
+    const settlement = {
+      economicState: {
+        activeChains: [flourChain({ status: 'magically_sustained', resourceDepleted: true })],
+      },
+    };
+    expect(hasDisruptedChains(settlement)).toBe(true);
   });
 });
 

@@ -313,6 +313,168 @@ describe('withTickedConditionDurations()', () => {
   });
 });
 
+// ── withTickedConditionDurations — severity dynamics (W5#5) ────────────
+//
+// Status was written everywhere and consumed for dynamics nowhere; severity
+// sat flat until the expiry cliff. Now the status written on the condition
+// nudges severity per tick (worsening +0.04/tick clamped at 1, easing
+// −0.06/tick floored at 0.05, everything else flat) and the last 2 ticks
+// before expiresAtTicks force the easing nudge so the condition winds down
+// instead of flat-then-cliff. Expiry timing itself is untouched.
+
+describe('withTickedConditionDurations() — severity dynamics (W5#5)', () => {
+  const tick = (s, interval = 'one_month') => withTickedConditionDurations(s, interval);
+  const sev = (s) => s.activeConditions[0].severity;
+
+  it('a worsening condition climbs by 0.04 per tick', () => {
+    // Plague defaults: status worsening, severity 0.6, expires at 12.
+    const s0 = { activeConditions: [deriveActiveCondition({ archetype: 'plague' })] };
+    const s1 = tick(s0);
+    const s2 = tick(s1);
+    expect(sev(s1)).toBeCloseTo(0.64);
+    expect(sev(s2)).toBeCloseTo(0.68);
+  });
+
+  it('an easing condition decays by 0.06 per tick', () => {
+    // corruption_exposed defaults: status easing, severity 0.5, expires at 6.
+    const s0 = { activeConditions: [deriveActiveCondition({ archetype: 'corruption_exposed' })] };
+    const s1 = tick(s0);
+    expect(sev(s1)).toBeCloseTo(0.44);
+  });
+
+  it('a stable condition holds severity exactly', () => {
+    // trade_route_cut defaults: status stable, severity 0.5, expires at 9.
+    const s0 = { activeConditions: [deriveActiveCondition({ archetype: 'trade_route_cut' })] };
+    expect(sev(tick(s0))).toBe(0.5);
+  });
+
+  it('a no-status condition holds severity — canonical defaulting must not invent motion', () => {
+    // Raw partial, never derived: no status written. Plague's template
+    // defaults to 'worsening', so this pins that the drift reads the
+    // status as written, not the canonical default.
+    const s0 = { activeConditions: [{
+      archetype: 'plague', severity: 0.6,
+      duration: { elapsedTicks: 0, expiresAtTicks: 12 },
+    }] };
+    const s1 = tick(s0);
+    expect(sev(s1)).toBe(0.6);
+    expect(s1.activeConditions[0].duration.elapsedTicks).toBe(1);
+  });
+
+  it("a legacy 'active' status holds severity — flat is correct for non-directional statuses", () => {
+    const s0 = { activeConditions: [{
+      archetype: 'plague', severity: 0.6, status: 'active',
+      duration: { elapsedTicks: 0, expiresAtTicks: 12 },
+    }] };
+    expect(sev(tick(s0))).toBe(0.6);
+  });
+
+  it('drift scales with the interval (week 0.25x, year 6x)', () => {
+    const s0 = { activeConditions: [deriveActiveCondition({ archetype: 'plague', severity: 0.6 })] };
+    expect(sev(tick(s0, 'one_week'))).toBeCloseTo(0.6 + 0.04 * 0.25);
+    expect(sev(tick(s0, 'one_year'))).toBeCloseTo(0.6 + 0.04 * 6.0);
+  });
+
+  it('worsening clamps at 1', () => {
+    const hot = { activeConditions: [deriveActiveCondition({
+      archetype: 'plague', severity: 0.99, status: 'worsening',
+      duration: { elapsedTicks: 0, expiresAtTicks: 12 },
+    })] };
+    expect(sev(tick(hot))).toBe(1);
+  });
+
+  it('easing floors at 0.05 and holds there', () => {
+    const cold = { activeConditions: [deriveActiveCondition({
+      archetype: 'corruption_exposed', severity: 0.08, status: 'easing',
+      duration: { elapsedTicks: 0, expiresAtTicks: 12 },
+    })] };
+    const c1 = tick(cold);
+    expect(sev(c1)).toBe(0.05);
+    expect(sev(tick(c1))).toBe(0.05);
+  });
+
+  it('severityBand is recomputed from the nudged severity', () => {
+    const s0 = { activeConditions: [deriveActiveCondition({
+      archetype: 'plague', severity: 0.73, status: 'worsening',
+      duration: { elapsedTicks: 0, expiresAtTicks: 12 },
+    })] };
+    const s1 = tick(s0);
+    expect(sev(s1)).toBeCloseTo(0.77);
+    expect(s1.activeConditions[0].severityBand).toBe('critical');
+  });
+
+  it('within 2 ticks of expiry the condition ramps toward easing instead of flat-then-cliff', () => {
+    const s0 = { activeConditions: [deriveActiveCondition({
+      archetype: 'plague', severity: 0.6, status: 'worsening',
+      duration: { elapsedTicks: 9, expiresAtTicks: 12 },
+    })] };
+    const s1 = tick(s0); // elapsed 10, remaining 2 → wind-down
+    expect(sev(s1)).toBeCloseTo(0.54);
+    expect(s1.activeConditions[0].status).toBe('easing');
+  });
+
+  it('the wind-down boundary is exact: remaining 2.25 still worsens, remaining 2 eases', () => {
+    const s0 = { activeConditions: [deriveActiveCondition({
+      archetype: 'plague', severity: 0.6, status: 'worsening',
+      duration: { elapsedTicks: 9.5, expiresAtTicks: 12 },
+    })] };
+    const s1 = tick(s0, 'one_week'); // elapsed 9.75, remaining 2.25 → still worsening
+    expect(s1.activeConditions[0].status).toBe('worsening');
+    expect(sev(s1)).toBeCloseTo(0.61);
+    const s2 = tick(s1, 'one_week'); // elapsed 10, remaining 2 → wind-down
+    expect(s2.activeConditions[0].status).toBe('easing');
+    expect(sev(s2)).toBeCloseTo(0.595);
+  });
+
+  it('outside the wind-down window a worsening condition still worsens', () => {
+    const s0 = { activeConditions: [deriveActiveCondition({
+      archetype: 'plague', severity: 0.6, status: 'worsening',
+      duration: { elapsedTicks: 8, expiresAtTicks: 12 },
+    })] };
+    const s1 = tick(s0); // elapsed 9, remaining 3 → no wind-down yet
+    expect(sev(s1)).toBeCloseTo(0.64);
+    expect(s1.activeConditions[0].status).toBe('worsening');
+  });
+
+  it('a null-expiry condition never winds down — it drifts by status alone', () => {
+    const s0 = { activeConditions: [deriveActiveCondition({
+      archetype: 'unknown_thing', severity: 0.5, status: 'worsening',
+      duration: { elapsedTicks: 99, expiresAtTicks: null },
+    })] };
+    const s1 = tick(s0);
+    expect(sev(s1)).toBeCloseTo(0.54);
+    expect(s1.activeConditions[0].status).toBe('worsening');
+  });
+
+  it('the nudge never resurrects an expired condition — expiry drops exactly as before', () => {
+    const s0 = { activeConditions: [deriveActiveCondition({
+      archetype: 'plague', severity: 0.6,
+      duration: { elapsedTicks: 11, expiresAtTicks: 12 },
+    })] };
+    const { settlement, expired } = withExpiredConditionsRemoved(tick(s0));
+    expect(settlement.activeConditions).toHaveLength(0);
+    expect(expired).toHaveLength(1);
+  });
+
+  it('every field other than severity, band, status, and elapsed is preserved verbatim', () => {
+    const c0 = deriveActiveCondition({
+      archetype: 'plague', severity: 0.6, status: 'worsening',
+      duration: { elapsedTicks: 0, expiresAtTicks: 12 },
+      causes: ['caravan from the delta'],
+    });
+    const s1 = tick({ activeConditions: [c0] });
+    const c1 = s1.activeConditions[0];
+    expect(c1.id).toBe(c0.id);
+    expect(c1.label).toBe(c0.label);
+    expect(c1.description).toBe(c0.description);
+    expect(c1.archetype).toBe(c0.archetype);
+    expect(c1.affectedSystems).toEqual(c0.affectedSystems);
+    expect(c1.causes).toEqual(c0.causes);
+    expect(c1.triggeredAt).toEqual(c0.triggeredAt);
+    expect(c1.duration.expiresAtTicks).toBe(c0.duration.expiresAtTicks);
+  });
+});
+
 // ── withExpiredConditionsRemoved ───────────────────────────────────────
 
 describe('withExpiredConditionsRemoved()', () => {

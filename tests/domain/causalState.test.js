@@ -257,6 +257,83 @@ describe('trade_connectivity derivation', () => {
     });
     expect(cut.score).toBeLessThan(flowing.score);
   });
+
+  // Wave 5 #2: the chain filter keyed 'trade' but the real need-group key
+  // is 'trade_entrepot' — the whole trade-chain block was dead, so these
+  // contributions are NEW relative to every score derived before the fix.
+  const tradeChain = (over = {}) => ({
+    needKey: 'trade_entrepot',
+    needLabel: 'Trade & entrepôt',
+    chainId: 'crossroads_trade',
+    label: 'Crossroads trade',
+    entrepot: true,
+    status: 'entrepot',
+    processingInstitutions: ['Caravanserai'],
+    ...over,
+  });
+
+  it('a stable trade_entrepot chain contributes +5 (the formerly dead block is live)', () => {
+    const base = deriveSystemVariable('trade_connectivity', {
+      config: { tradeRouteAccess: 'road' },
+      economicState: { activeChains: [] },
+    });
+    const withChain = deriveSystemVariable('trade_connectivity', {
+      config: { tradeRouteAccess: 'road' },
+      economicState: { activeChains: [tradeChain()] },
+    });
+    expect(withChain.score).toBe(base.score + 5);
+    const contributor = withChain.contributors.find(c => c.source === 'chain.trade_entrepot.crossroads_trade');
+    expect(contributor).toBeTruthy();
+    expect(contributor.delta).toBe(5);
+  });
+
+  it('a blocked (legacy "unexploited") trade chain costs -18', () => {
+    const base = deriveSystemVariable('trade_connectivity', {
+      config: { tradeRouteAccess: 'road' },
+      economicState: { activeChains: [] },
+    });
+    const blocked = deriveSystemVariable('trade_connectivity', {
+      config: { tradeRouteAccess: 'road' },
+      economicState: { activeChains: [tradeChain({ status: 'unexploited' })] },
+    });
+    expect(blocked.score).toBe(base.score - 18);
+  });
+
+  it('a strained trade chain costs -8', () => {
+    const base = deriveSystemVariable('trade_connectivity', {
+      config: { tradeRouteAccess: 'road' },
+      economicState: { activeChains: [] },
+    });
+    const strained = deriveSystemVariable('trade_connectivity', {
+      config: { tradeRouteAccess: 'road' },
+      economicState: { activeChains: [tradeChain({ status: 'vulnerable' })] },
+    });
+    expect(strained.score).toBe(base.score - 8);
+  });
+});
+
+describe('housing_pressure derivation', () => {
+  // Wave 5 #4: /migrant/ does not substring-match 'mass_migration', so the
+  // generation stress type never registered as housing pressure (the score
+  // is inverted: lower = more pressure).
+  it('a mass_migration stressor strains housing', () => {
+    const calm = deriveSystemVariable('housing_pressure', { population: 1800, stressors: [] });
+    const influx = deriveSystemVariable('housing_pressure', {
+      population: 1800,
+      stressors: [{ type: 'mass_migration', name: 'Mass Migration', severity: 0.6 }],
+    });
+    expect(influx.score).toBeLessThan(calm.score);
+    expect(influx.contributors.some(c => c.source === 'stressors.refugee')).toBe(true);
+  });
+
+  it('a refugee_influx stressor still strains housing (no regression)', () => {
+    const calm = deriveSystemVariable('housing_pressure', { population: 1800, stressors: [] });
+    const influx = deriveSystemVariable('housing_pressure', {
+      population: 1800,
+      stressors: [{ type: 'refugee_influx', name: 'Refugee Influx' }],
+    });
+    expect(influx.score).toBeLessThan(calm.score);
+  });
 });
 
 describe('healing_capacity derivation', () => {
