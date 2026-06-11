@@ -8,7 +8,7 @@
  */
 
 import { useState, useMemo } from 'react';
-import { Zap, Flame, Trash2, Plus, MapPinOff, AlertOctagon, X, Check, Sliders } from 'lucide-react';
+import { Zap, Flame, Trash2, Plus, MapPinOff, AlertOctagon, X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
 import { inferImportance } from '../../domain/entities/npcs.js';
@@ -23,7 +23,6 @@ import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import CatalogPicker from './CatalogPicker.jsx';
-import SettlementEditor from '../SettlementEditor.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
 const _TYPE_ICONS = {
@@ -167,16 +166,7 @@ function buildTargetOptions(settlement, collectionKey) {
   return out;
 }
 
-export default function EventComposer({
-  // Editor props — when present, the Make Changes panel embeds the Settlement
-  // Editor (catalog roster + the "Tune" priorities section) below the change
-  // form. Absent (a draft-only context) → just the change form renders.
-  config, saveId, onEdit,
-  narrated = false,
-  onRegenerateNarrative,
-  onProgressNarrative,
-  onRevertToRaw,
-} = {}) {
+export default function EventComposer() {
   const phase     = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
   const previewEvent = useStore(s => s.previewEvent);
@@ -297,7 +287,6 @@ export default function EventComposer({
       .map(i => i.name).filter(Boolean),
     [settlement?.institutions],
   );
-  const hasEditor = !!onEdit;
 
   if (!settlement) return null;
   const spec = EVENT_REGISTRY[type];
@@ -951,34 +940,16 @@ export default function EventComposer({
         />
       )}
 
-      {/* Roster & Tune — the former Settlement Editor, embedded. Catalog
-          add/remove for resources, stressors, and trade goods, plus the
-          generation-priority sliders. Institutions are intentionally absent:
-          the ADD_INSTITUTION / REMOVE_INSTITUTION events above own that, so
-          there's one place to add an institution, not two. These edits are
-          authorial corrections — they don't write a timeline entry. */}
-      {hasEditor && (
-        <div style={{ marginTop: SP.sm, borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm }}>
-          <div style={{
-            fontSize: FS.xs, fontWeight: 800, fontFamily: sans, color: MUTED,
-            letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: SP.xs,
-            display: 'flex', alignItems: 'center', gap: 6,
-          }}>
-            <Sliders size={12} /> Roster &amp; Tune
-          </div>
-          <SettlementEditor
-            embedded
-            settlement={settlement}
-            config={config}
-            saveId={saveId}
-            onEdit={onEdit}
-            narrated={narrated}
-            onRegenerateNarrative={onRegenerateNarrative}
-            onProgressNarrative={onProgressNarrative}
-            onRevertToRaw={onRevertToRaw}
-          />
-        </div>
-      )}
+      {/* Roster & Tune was removed (owner decision, 2026-06-11): its four
+          sections were redundant — or worse — next to the event catalog.
+          Stressors wrote bare stress entries (no condition, no roaming twin),
+          Resources wrote resourceAnalysis.availableResources (a surface the
+          chains never read; the events write the real config keys), Trade
+          Goods duplicated the ADD/REMOVE_TRADE_GOOD events without
+          provenance, and post-generation priority re-tuning is premise
+          editing that canon changes should not do (the pre-generation
+          sliders live on in the Configuration panel). Institutions made the
+          same exit earlier: one place to author a change, not two. */}
     </div>
   );
 }

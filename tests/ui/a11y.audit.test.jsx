@@ -45,45 +45,9 @@ vi.mock('../../src/lib/auth.js', () => ({
 
 afterEach(cleanup);
 
-// ── Dialog/modal a11y ───────────────────────────────────────────────────────
-// Modal dialogs must announce themselves as a dialog, declare modality so
-// screen readers know to trap, and reference their heading via labelledby.
-
-describe('Tier 7.17 — Modal dialog a11y', () => {
-  test('NarrativeDriftModal exposes role=dialog + aria-modal', async () => {
-    const NarrativeDriftModal = (await import('../../src/components/NarrativeDriftModal.jsx')).default;
-    const { container } = render(
-      <NarrativeDriftModal
-        open={true}
-        changeLabel="Test change"
-        changeClass="structural"
-        onRegenerate={() => {}}
-        onCancel={() => {}}
-        onRevert={() => {}}
-      />,
-    );
-    const dialog = container.querySelector('[role="dialog"]');
-    expect(dialog).not.toBeNull();
-    expect(dialog.getAttribute('aria-modal')).toBe('true');
-  });
-
-  test('NarrativeDriftModal cancel button has aria-label', async () => {
-    const NarrativeDriftModal = (await import('../../src/components/NarrativeDriftModal.jsx')).default;
-    const { container } = render(
-      <NarrativeDriftModal
-        open={true}
-        changeLabel="Test"
-        changeClass="structural"
-        onRegenerate={() => {}}
-        onCancel={() => {}}
-        onRevert={() => {}}
-      />,
-    );
-    // The cancel button (top right X) has aria-label="Cancel".
-    const cancelBtn = container.querySelector('[aria-label]');
-    expect(cancelBtn).not.toBeNull();
-  });
-});
+// (The NarrativeDriftModal dialog-a11y cases were removed with the modal
+// itself — its only consumer, the Roster & Tune correction editor, was
+// retired in favour of the event catalog.)
 
 // ── Primitive a11y ──────────────────────────────────────────────────────────
 // The design-system primitives all carry an explicit ARIA role and/or label.
@@ -123,25 +87,3 @@ describe('Tier 7.17 — Primitive a11y contracts', () => {
   });
 });
 
-// ── Inline accessible-name patterns ────────────────────────────────────────
-// Catches the most-common a11y bug: an icon-only button with no aria-label
-// and no visible text. Scoped to the components we audited.
-
-describe('Tier 7.17 — Icon-only button accessibility', () => {
-  test('NarrativeDriftModal close button has aria-label', async () => {
-    const NarrativeDriftModal = (await import('../../src/components/NarrativeDriftModal.jsx')).default;
-    const { container } = render(
-      <NarrativeDriftModal
-        open={true}
-        changeLabel="Test"
-        changeClass="structural"
-        onRegenerate={() => {}}
-        onCancel={() => {}}
-        onRevert={() => {}}
-      />,
-    );
-    // The X button uses aria-label="Cancel" from copy/en.js
-    const ariaButtons = container.querySelectorAll('button[aria-label]');
-    expect(ariaButtons.length).toBeGreaterThanOrEqual(1);
-  });
-});

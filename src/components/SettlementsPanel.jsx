@@ -16,7 +16,6 @@ import { t } from '../copy/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { activeSaveCount, inactiveRetentionCount, isPlanInactiveSave, isSaveActive } from '../lib/saveAccess.js';
-import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import {
   canonicalEdgeForLink,
   relationshipDefinition,
@@ -972,31 +971,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     persistBatch(updatedSaves, modifiedIds);
   };
 
-  // ── Edit settlement ─────────────────────────────────────────────────────
-  const onEditSettlement = (id, patch) => {
-    const updatedSaves = saves.map(s => {
-      if (s.id !== id) return s;
-      const merged = { ...s };
-      if (patch.settlement) {
-        merged.settlement = { ...s.settlement };
-        for (const [k, v] of Object.entries(patch.settlement)) {
-          if (v && typeof v === 'object' && !Array.isArray(v)) merged.settlement[k] = { ...(s.settlement[k] || {}), ...v };
-          else merged.settlement[k] = v;
-        }
-        merged.settlement = reconcileSettlementChange(merged.settlement, s.settlement, {
-          source: 'settlement_editor',
-          changeType: Object.keys(patch.settlement).join(','),
-          changeLabel: 'manual edit',
-        });
-      }
-      if (patch.config) merged.config = { ...(s.config || {}), ...patch.config };
-      return merged;
-    });
-    setSaves(updatedSaves);
-    const updatedEntry = updatedSaves.find(s => s.id === id);
-    if (updatedEntry) setDetail(d => ({ ...d, ...updatedEntry, saveData: updatedEntry }));
-    persistBatch(updatedSaves, [id]);
-  };
+  // (The direct-edit path — onEditSettlement, feeding the Roster & Tune
+  // correction editor — was removed with that editor: every settlement
+  // change now goes through the event catalog, which reconciles via the
+  // store's applyEvent path instead.)
 
   // ── Campaign helpers ────────────────────────────────────────────────────
   const handleCreateCampaign = () => {
@@ -1065,7 +1043,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       linking={linking} setLinking={setLinking}
       editNamesOpen={editNamesOpen} setEditNamesOpen={setEditNamesOpen}
       handleLink={handleLink} removeNeighbour={removeNeighbour}
-      applyRename={applyRename} onLoad={onLoad} onEditSettlement={onEditSettlement}
+      applyRename={applyRename} onLoad={onLoad}
     />;
   }
 

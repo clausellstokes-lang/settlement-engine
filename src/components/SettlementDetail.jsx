@@ -301,7 +301,7 @@ export default function SettlementDetail({
   linking, setLinking,
   editNamesOpen, setEditNamesOpen,
   handleLink, removeNeighbour, applyRename,
-  onLoad, onEditSettlement,
+  onLoad,
 }) {
   const network=detail.settlement.neighbourNetwork||[];
   const [editingName, setEditingName] = useState(null);  // {type,id,oldName}
@@ -321,8 +321,6 @@ export default function SettlementDetail({
   const hydrateAiFromSave = useStore(s => s.hydrateAiFromSave);
   const revertCurrentToRaw = useStore(s => s.revertCurrentToRaw);
   const clearAiSettlement = useStore(s => s.clearAiSettlement);
-  const requestNarrative = useStore(s => s.requestNarrative);
-  const requestProgression = useStore(s => s.requestProgression);
   const aiSettlement = useStore(s => s.aiSettlement);
   const aiDailyLife  = useStore(s => s.aiDailyLife);
   const narrated = !!(aiSettlement || aiDailyLife);
@@ -345,21 +343,6 @@ export default function SettlementDetail({
   // list updates after each generate / revert without remounting the view.
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
   const chronicleEntries = liveSaveEntry?.aiData?.chronicle;
-
-  // Drift resolutions for the SettlementEditor — invoked from the drift modal
-  // after a structural/seismic edit is applied. `requestNarrative` re-runs the
-  // full narrative pipeline against the (now-mutated) save; `requestProgression`
-  // evolves the existing narrative using the change diff (AI-4);
-  // `revertCurrentToRaw` clears the narrative entirely.
-  const handleEditorRegenerate = async () => {
-    if (saveId) await requestNarrative(saveId);
-  };
-  const handleEditorProgress = async (changeType, changeLabel) => {
-    if (saveId) await requestProgression(saveId, { changeType, changeLabel });
-  };
-  const handleEditorRevert = async () => {
-    if (saveId) await revertCurrentToRaw(saveId);
-  };
 
   useEffect(() => {
     if (detail?.saveData) {
@@ -619,9 +602,10 @@ export default function SettlementDetail({
             AIInlineCard prompts for AI polish when not yet narrated,
             CoherencePanel surfaces structural warnings in draft mode,
             the Make Changes panel (EventComposer) applies in-world events
-            (writes to the timeline in canon mode) and hosts the catalog
-            roster + Tune editor below the change form, Timeline displays
-            the canon log. */}
+            (writes to the timeline in canon mode; the Roster & Tune
+            correction editor it once hosted was removed — every change
+            goes through the event catalog now), Timeline displays the
+            canon log. */}
       <SystemStateBar />
       <AIInlineCard
         settlement={detail.settlement}
@@ -644,15 +628,7 @@ export default function SettlementDetail({
         }}
       />
       <CoherencePanel />
-      <EventComposer
-        config={detail.config}
-        saveId={detail.saveData?.id}
-        onEdit={onEditSettlement}
-        narrated={narrated}
-        onRegenerateNarrative={handleEditorRegenerate}
-        onProgressNarrative={handleEditorProgress}
-        onRevertToRaw={handleEditorRevert}
-      />
+      <EventComposer />
       <Timeline />
       <RegionalImpactInbox
         saveId={detail?.saveData?.id || detail?.id}
