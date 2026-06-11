@@ -93,6 +93,7 @@ const REALM_LABELS = Object.freeze({
   criminal_corridor: 'The Crime Wave',
   religious_conversion_fracture: 'The Schism',
   magical_instability: 'The Arcane Turmoil',
+  magic_deadzone: 'The Great Silence',
 });
 
 const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);

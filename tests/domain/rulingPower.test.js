@@ -11,6 +11,7 @@ import {
 import { coupVerdictOutcomes } from '../../src/domain/worldPulse/coup.js';
 import { STRESSOR_CATALOG, evaluateStressorRules } from '../../src/domain/worldPulse/stressors.js';
 import { STRESSOR_COUNTERFORCES, STRESSOR_SYNERGIES } from '../../src/domain/worldPulse/stressorDynamics.js';
+import { STRESSOR_SPAWN_GATES } from '../../src/domain/worldPulse/stressorGates.js';
 
 // Deterministic rng stub: returns the queued values in order, then repeats
 // the last one. Lets a test choose which side of pHold the roll lands on.
@@ -191,7 +192,10 @@ describe('coup_detat catalog integration', () => {
     expect(STRESSOR_CATALOG.coup_detat).toBeTruthy();
     expect(STRESSOR_CATALOG.coup_detat.durationPolicy).toBe('episodic');
     expect(STRESSOR_CATALOG.coup_detat.spreadChannels).toEqual([]);
-    expect(typeof STRESSOR_CATALOG.coup_detat.spawnGate).toBe('function');
+    // The gate moved with the catalog-wide generalization: every type's
+    // birth gate now lives in stressorGates.js (the coup was the prototype).
+    expect(typeof STRESSOR_SPAWN_GATES.coup_detat).toBe('function');
+    expect(STRESSOR_SPAWN_GATES.coup_detat.requiresSnapshot).toBe(true);
     expect(STRESSOR_COUNTERFORCES.coup_detat).toBeTruthy();
     expect(STRESSOR_SYNERGIES.coup_detat.succession_void).toBeTruthy();
     expect(STRESSOR_SYNERGIES.political_fracture.coup_detat).toBeTruthy();

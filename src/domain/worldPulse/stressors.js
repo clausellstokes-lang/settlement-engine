@@ -2,7 +2,7 @@ import { stablePart } from './worldState.js';
 import { activeChannelsFrom, REGIONAL_CHANNEL_TYPES } from '../region/index.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { counterforceAssessment, synergyAssessment, interpretStressorOrigin } from './stressorDynamics.js';
-import { coupContenders } from '../rulingPower.js';
+import { STRESSOR_SPAWN_GATES } from './stressorGates.js';
 
 // The stressor catalog was authored with a looser channel vocabulary than the
 // canonical regional taxonomy (region/graph.js). Map the divergent names onto
@@ -43,43 +43,15 @@ export const STRESSOR_LIFECYCLE_STAGES = Object.freeze([
   'dormant',
 ]);
 
-// ── Coup spawn gate ────────────────────────────────────────────────────────
-// A coup is the one stressor whose birth is gated on settlement POLITICS
-// rather than raw pressure alone: it needs an exposed seat (legitimacy
-// Contested or worse — rare at Contested, likely at Crisis), a governing
-// authority weak enough to move against, no occupier already governing at
-// spearpoint, and at least one non-criminal faction with the muscle to act
-// (criminal factions never vie openly — the capture ladder is their path).
-// Returns null to block the birth, or { probabilityMult, reasons } to allow
-// it with the politics-scaled odds.
-function coupSpawnGate(snapshot, pressure) {
-  const sid = String(pressure.settlementId);
-  const entry = snapshot?.byId?.get?.(sid);
-  const settlement = entry?.settlement;
-  if (!settlement) return null; // gated births require political context
-  const legitimacy = settlement.powerStructure?.publicLegitimacy;
-  const score = Number.isFinite(legitimacy?.score) ? legitimacy.score : 50;
-  if (score >= 45) return null; // Tolerated or better — nobody moves
-  const occupied = (snapshot?.worldState?.stressors || []).some(s =>
-    s?.type === 'occupation'
-    && !INACTIVE_STATUSES.has(s?.status)
-    && (s.affectedSettlementIds || []).map(String).includes(sid));
-  if (occupied) return null; // the occupier IS the authority — no seat to seize
-  const { challengers } = coupContenders(settlement);
-  if (!challengers.length) return null;
-  const ra = entry?.causal?.scores?.ruling_authority;
-  const authority = Number.isFinite(ra) ? ra : 50;
-  const bandMult = score < 30 ? 1 : 0.35; // rare at Contested, likely at Crisis
-  const authorityMult = authority < 15 ? 1.5 : authority < 30 ? 1.2 : authority < 50 ? 1 : 0.6;
-  return {
-    probabilityMult: bandMult * authorityMult,
-    reasons: [
-      `Legitimacy stands at ${Math.round(score)} (${legitimacy?.label || 'Contested'}) — the seat is exposed.`,
-      `Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'} (ruling authority ${Math.round(authority)}).`,
-      `Factions with the power to move: ${challengers.map(c => c.name).join(', ')}.`,
-    ],
-  };
-}
+// ── Spawn gates ────────────────────────────────────────────────────────────
+// Every birth is gated on ORGANIC CONTEXT, not raw pressure alone. The
+// per-type gates live in stressorGates.js — the coup's politics gate (which
+// used to live here) was the prototype; the catalog-wide model reads the same
+// source vocabulary the counterforces read, inverted: the weaknesses that
+// invite a crisis are the strengths that end one. A gate returns null to
+// BLOCK the birth (context contradicts the story) or { probabilityMult,
+// reasons } to scale its odds; the reasons land on the candidate so the
+// dossier can explain why THIS crisis emerged HERE.
 
 export const STRESSOR_CATALOG = Object.freeze({
   siege: {
@@ -198,6 +170,12 @@ export const STRESSOR_CATALOG = Object.freeze({
     spreadChannels: ['labor_dependency', 'criminal_corridor', 'information_network'],
     residualEffects: ['manumission_pressure', 'reprisal_fear', 'labor_reordering'],
     affectedSystems: ['labor_capacity', 'public_legitimacy', 'defense_readiness'],
+    // Folded out of ORGANIC births only (the sim has no slavery substrate to
+    // make the claim honestly — organic uprisings birth as `rebellion`, with
+    // a `servile_uprising` variant when the labor context fits). The entry
+    // stays: legacy saves keep aging/normalizing, the generation vocabulary
+    // (19 files) is untouched, and the DM can still author one deliberately.
+    deprecated: true,
   },
   rebellion: {
     label: 'Rebellion pressure',
@@ -261,12 +239,28 @@ export const STRESSOR_CATALOG = Object.freeze({
     spreadChannels: [], // a coup is a palace affair — it never spreads
     residualEffects: ['purge_fear', 'loyalty_tests', 'broken_oaths'],
     affectedSystems: ['public_legitimacy', 'faction_stability', 'social_trust'],
-    // Unlike every other type, the coup's birth is politics-gated (see
-    // coupSpawnGate) and its RESOLUTION is a verdict, not an ending: when it
-    // resolves during a pulse, worldPulse/coup.js runs the contest among the
-    // top-3 non-criminal powers vs the legitimacy-amplified incumbent and
-    // emits either a coup_suppressed condition or a power_transfer outcome.
-    spawnGate: coupSpawnGate,
+    // The coup's RESOLUTION is a verdict, not an ending: when it resolves
+    // during a pulse, worldPulse/coup.js runs the contest among the top-3
+    // non-criminal powers vs the legitimacy-amplified incumbent and emits
+    // either a coup_suppressed condition or a power_transfer outcome. (Its
+    // politics-gated birth lives with every other gate in stressorGates.js.)
+  },
+  magic_deadzone: {
+    label: 'Magic deadzone',
+    durationPolicy: 'episodic',
+    pressureKinds: ['legitimacy', 'trade', 'disease'],
+    birthThreshold: 0.6,
+    spreadChannels: ['arcane_network', 'information_network'],
+    residualEffects: ['scorched_leylines', 'hedge_wizard_exodus', 'mundane_adaptation'],
+    affectedSystems: ['healing_capacity', 'trade_connectivity', 'public_legitimacy'],
+    // The inverse of magical_instability — absence, not wildness (the two are
+    // mutually exclusive at birth, both directions; see stressorGates.js).
+    // Birth is hard-gated to settlements where magic is load-bearing.
+    // The zone WANDERS: each aging tick it may creep to one connected
+    // neighbour and, past its footprint cap, vacate its oldest ground (which
+    // gets a one-time "the silence lifts" residual). Movement forks the rng
+    // on the stressor id, so it is order-independent and replay-stable.
+    wander: { chance: 0.35, maxFootprint: 2, channels: ['information_flow', 'trade_route'] },
   },
 });
 
@@ -360,7 +354,9 @@ export function normalizeStressor(stressor = {}) {
       ? [...new Set(stressor.affectedSettlementIds.map(String))]
       : [stressor.originSettlementId].filter(Boolean).map(String),
     residualEffects: Array.isArray(stressor.residualEffects) ? [...stressor.residualEffects] : [...(defaults.residualEffects || [])],
-    resolutionRules: stressor.resolutionRules || defaults.resolutionRules || {},
+    // (resolutionRules was a dormant host field — written as {} on every
+    // persisted stressor, read by nothing. Deleted; counterforce profiles in
+    // stressorDynamics.js are the real resolution model.)
     // Diagnostic snapshots of the last counterforce / synergy assessments
     // (explainability surface for the dossier and tests; recomputed every
     // aging tick).
@@ -384,6 +380,10 @@ export function normalizeStressor(stressor = {}) {
     resolutionChance: stressor.resolutionChance,
     resolutionRoll: stressor.resolutionRoll,
     resolutionReason: stressor.resolutionReason || null,
+    // Resolution receipt: WHY the crisis ended — counterforce score, the
+    // named strengths that led recovery, the companions it outlasted, and a
+    // one-line narrative. Stamped at resolution time (rolled or directed).
+    resolutionContext: stressor.resolutionContext || null,
     resolvedAt: stressor.resolvedAt || null,
     // Determinism: no wall-clock fallback. Timestamps are null until the
     // orchestrator stamps `now` when the stressor is persisted (applyWorldPulse
@@ -458,6 +458,9 @@ function residualOutcome(stressor, tick) {
       reasons: [
         'A time-bounded stressor resolved.',
         `Residual effects remain: ${stressor.residualEffects.slice(0, 3).join(', ').replace(/_/g, ' ')}.`,
+        // The resolution receipt: why the crisis ended (counterforce-led
+        // recovery, what it outlasted) — same explainability bar as births.
+        ...(stressor.resolutionContext?.narrative ? [stressor.resolutionContext.narrative] : []),
       ],
       condition: {
         archetype: 'stressor_residual',
@@ -472,6 +475,118 @@ function residualOutcome(stressor, tick) {
       },
     };
   });
+}
+
+/**
+ * The resolution receipt — why a crisis ended, in the same explainable terms
+ * the rest of the engine uses. Built from the live counterforce assessment
+ * (its per-source breakdown names the strengths that led the recovery) and
+ * the synergy table (the companions it ended despite).
+ */
+function resolutionContextFor(stressor, assessment, synergy) {
+  const leadingSources = (assessment?.sourceBreakdown || [])
+    .filter(source => source.value >= 0.6)
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 3)
+    .map(source => ({ source: source.label, value: Math.round(source.value * 100) / 100 }));
+  const companions = synergy?.companions || [];
+  const narrative = [
+    leadingSources.length
+      ? `Recovery led by ${leadingSources.map(s => `${s.source} (${s.value})`).join(', ')}.`
+      : 'The crisis ran its course.',
+    companions.length
+      ? `It ended despite the drag of ${companions.join(', ').replace(/_/g, ' ')}.`
+      : null,
+  ].filter(Boolean).join(' ');
+  return {
+    counterforceScore: assessment ? Math.round(assessment.score * 100) / 100 : null,
+    leadingSources,
+    synergyCompanions: companions,
+    narrative,
+  };
+}
+
+// ── Wandering stressors ────────────────────────────────────────────────────
+// A catalog type with `wander` (magic_deadzone today) MOVES instead of merely
+// spreading: each aging tick it may creep to one connected neighbour and,
+// past its footprint cap, vacate its oldest ground. The vacated settlement
+// gets a one-time easing residual ("the silence lifts; the ground it starved
+// recovers slowly"). The roll forks on the stressor id (order-independent);
+// arrivals experience full record severity (the zone IS there — unlike a
+// spread, nothing is attenuated by distance).
+
+function wanderDepartureOutcome(stressor, vacatedSaveId, tick) {
+  const defaults = catalogFor(stressor.type);
+  const residualSeverity = Math.max(0.15, effectiveStressorSeverity(stressor, vacatedSaveId) * 0.45);
+  return {
+    id: `world_outcome.wander.${stablePart(stressor.id)}.${stablePart(vacatedSaveId)}.${tick}`,
+    type: 'condition',
+    candidateType: 'stressor_residual',
+    ruleId: `stressor_${stressor.type}_wander_departure`,
+    ruleFamily: 'stressor',
+    applyMode: 'auto',
+    probability: 1,
+    targetSaveId: vacatedSaveId,
+    severity: residualSeverity,
+    score: Math.round(residualSeverity * 60),
+    headline: `${stressor.label} drifts on`,
+    summary: `${stressor.label} has moved to other ground; what it starved here recovers slowly.`,
+    reasons: [
+      'A wandering stressor vacated this settlement.',
+      `Residual effects remain: ${stressor.residualEffects.slice(0, 3).join(', ').replace(/_/g, ' ')}.`,
+    ],
+    condition: {
+      archetype: 'stressor_residual',
+      label: `${stressor.label} aftermath`,
+      description: `${stressor.label} has drifted on, leaving ${stressor.residualEffects.slice(0, 2).join(', ').replace(/_/g, ' ')}; recovery comes slowly.`,
+      severity: residualSeverity,
+      status: 'easing',
+      duration: { elapsedTicks: 0, expiresAtTicks: 6 },
+      triggeredAt: { tick, sourceEventType: 'WORLD_STRESSOR_MOVED', sourceEventTargetId: stressor.id },
+      affectedSystems: canonicalAffectedSystems(defaults.affectedSystems || ['public_legitimacy']),
+      causes: [{ source: stressor.id, effect: 'wander_departure', reason: 'The wandering stressor moved to other ground.' }],
+    },
+  };
+}
+
+function wanderStep(stressor, wander, snapshot, rng, tick, now) {
+  const graph = snapshot?.regionalGraph;
+  if (!graph) return { stressor, vacatedOutcomes: [] };
+  const fork = typeof rng.fork === 'function' ? rng.fork(`wander:${stressor.id}`) : rng;
+  if (fork.random() > (wander.chance ?? 0.35)) return { stressor, vacatedOutcomes: [] };
+  const affected = (stressor.affectedSettlementIds || []).map(String);
+  const targets = new Set();
+  for (const sourceId of affected) {
+    for (const channel of activeChannelsFrom(graph, sourceId, { types: wander.channels || [] })) {
+      const to = String(channel.to);
+      if (to && !affected.includes(to)) targets.add(to);
+    }
+  }
+  if (!targets.size) return { stressor, vacatedOutcomes: [] };
+  // Plain codepoint sort + forked pick: deterministic and order-independent.
+  const sorted = [...targets].sort();
+  const pick = sorted[Math.min(sorted.length - 1, Math.floor(fork.random() * sorted.length))];
+  const nextAffected = [...affected, pick];
+  const severityBySettlement = { ...(stressor.severityBySettlement || {}) };
+  delete severityBySettlement[pick]; // arrivals feel the zone at full strength
+  const vacatedOutcomes = [];
+  while (nextAffected.length > Math.max(1, wander.maxFootprint ?? 2)) {
+    const vacated = nextAffected.shift();
+    delete severityBySettlement[vacated];
+    vacatedOutcomes.push(wanderDepartureOutcome(stressor, vacated, tick));
+  }
+  return {
+    stressor: normalizeStressor({
+      ...stressor,
+      // originSettlementId stays the BIRTH origin (the stable id embeds it);
+      // the live footprint is affectedSettlementIds, which is what every
+      // consumer (counterforces, effects, the dossier) actually reads.
+      affectedSettlementIds: nextAffected,
+      severityBySettlement: Object.keys(severityBySettlement).length ? severityBySettlement : null,
+      updatedAt: now || stressor.updatedAt,
+    }),
+    vacatedOutcomes,
+  };
 }
 
 // Echoes fade on a ~6-tick half-life; below this floor they graduate out of
@@ -585,7 +700,9 @@ export function ageRoamingStressors(stressors = [], snapshot, rng, options = {})
             blocksResolution: synergy.blocksResolution,
           }
         : null,
-      updatedAt: options.now || new Date().toISOString(),
+      // No wall-clock fallback: the orchestrator always threads `now`; a
+      // caller that omits it keeps the prior stamp (replay-identical).
+      updatedAt: options.now || stressor.updatedAt,
     });
     const chance = clamp01(resolutionChance(aged, snapshot, assessment) + (synergy?.resolutionDelta ?? 0));
     // Order independence: the resolution roll forks on the STRESSOR'S ID, not
@@ -600,9 +717,12 @@ export function ageRoamingStressors(stressors = [], snapshot, rng, options = {})
         ...aged,
         status: 'resolved',
         lifecycleStage: 'resolved',
-        resolvedAt: options.now || new Date().toISOString(),
+        resolvedAt: options.now || aged.updatedAt,
         resolutionRoll: roll,
         resolutionChance: chance,
+        // The receipt: why it ended, in the same terms births explain
+        // themselves with (the live per-source counterforce breakdown).
+        resolutionContext: resolutionContextFor(aged, assessment, synergy),
       });
       resolved.push(done);
       residualOutcomes.push(...residualOutcome(done, tick));
@@ -610,7 +730,16 @@ export function ageRoamingStressors(stressors = [], snapshot, rng, options = {})
       // of the same type at the same origin simply overwrites the echo.
       active.push(echoOf(done, options.now));
     } else {
-      active.push(normalizeStressor({ ...aged, resolutionRoll: roll, resolutionChance: chance }));
+      let survivor = normalizeStressor({ ...aged, resolutionRoll: roll, resolutionChance: chance });
+      // Wandering types (magic_deadzone) may creep to a neighbour and vacate
+      // their oldest ground — the departure emits an easing residual there.
+      const wander = catalogFor(survivor.type).wander;
+      if (wander) {
+        const moved = wanderStep(survivor, wander, snapshot, rng, tick, options.now);
+        survivor = moved.stressor;
+        residualOutcomes.push(...moved.vacatedOutcomes);
+      }
+      active.push(survivor);
     }
   }
 
@@ -656,6 +785,14 @@ export function resolveStressorById(stressors = [], stressorId, opts = {}) {
       lifecycleStage: 'resolved',
       resolvedAt: now || stressor.updatedAt,
       resolutionReason: reason,
+      // Directed resolutions have no live assessment; the receipt carries the
+      // stated reason plus the last aging tick's stored diagnostics.
+      resolutionContext: {
+        counterforceScore: stressor.counterforce?.score ?? null,
+        leadingSources: [],
+        synergyCompanions: stressor.synergy?.companions || [],
+        narrative: reason,
+      },
       updatedAt: now || stressor.updatedAt,
     });
     resolved.push(done);
@@ -695,6 +832,9 @@ export function adjustStressorSeverityById(stressors = [], stressorId, delta, op
 
 function stressorTypesForPressure(pressure) {
   return Object.entries(STRESSOR_CATALOG)
+    // Deprecated types (slave_revolt) never birth organically — they remain
+    // in the catalog only for legacy saves and deliberate DM authoring.
+    .filter(([, rule]) => !rule.deprecated)
     .filter(([, rule]) => (rule.pressureKinds || []).includes(pressure.kind) && pressure.score >= rule.birthThreshold)
     .map(([type]) => type);
 }
@@ -717,7 +857,7 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
     affectedSettlementIds: [targetSaveId],
     originContext,
   });
-  const major = pressure.score >= 0.78 || ['occupation', 'slave_revolt', 'siege', 'coup_detat'].includes(type);
+  const major = pressure.score >= 0.78 || ['occupation', 'magic_deadzone', 'siege', 'coup_detat'].includes(type);
   // Spawn-gated types scale their birth odds by the gate's politics read
   // (e.g. a coup is rare at Contested legitimacy, likely at Crisis).
   const gateMult = Number.isFinite(gate?.probabilityMult) ? gate.probabilityMult : 1;
@@ -754,9 +894,10 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
 
 export function stressorCandidateForPressure(pressure, tick) {
   if (!pressure || pressure.score < 0.56) return null;
-  // Spawn-gated types (coup_detat) need the world snapshot to read their
-  // politics; this snapshot-less path conservatively skips them.
-  const type = stressorTypesForPressure(pressure).filter(t => !catalogFor(t).spawnGate)[0];
+  // Gates that can hard-block need the world snapshot to read their context;
+  // this snapshot-less path conservatively skips those types (the coup always
+  // behaved so). Gradient-only gates are simply not applied here.
+  const type = stressorTypesForPressure(pressure).filter(t => !STRESSOR_SPAWN_GATES[t]?.requiresSnapshot)[0];
   if (!type) return null;
   return candidateForTypeAndPressure(type, pressure, tick);
 }
@@ -858,10 +999,10 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
     for (const type of stressorTypesForPressure(pressure)) {
       const targetKey = `${type}:${pressure.settlementId}`;
       if (existingKeys.has(targetKey)) continue;
-      // Politics-gated births (coup_detat): the gate can block the spawn
+      // Organic birth gates (stressorGates.js): the gate can block the spawn
       // entirely or scale its odds; its reasons land on the candidate.
-      const spawnGate = catalogFor(type).spawnGate;
-      const gate = spawnGate ? spawnGate(snapshot, pressure) : null;
+      const spawnGate = STRESSOR_SPAWN_GATES[type];
+      const gate = spawnGate ? spawnGate(snapshot, pressure, { tick }) : null;
       if (spawnGate && !gate) continue;
       candidates.push(candidateForTypeAndPressure(type, pressure, tick, {
         snapshot,

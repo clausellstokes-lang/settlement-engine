@@ -39,6 +39,7 @@ const HISTORY_EVENT_TYPE = Object.freeze({
   mass_migration: 'population_friction',
   religious_conversion_fracture: 'religious_tension',
   magical_instability: 'magical_controversy',
+  magic_deadzone: 'magical_controversy',
   disease_outbreak: 'population_friction',
 });
 

@@ -52,7 +52,7 @@ const INSTITUTION_CLASSES = Object.freeze({
   finance: /(bank|counting|mint|exchange|guildhall)/i,
 });
 
-function institutionClassValue(settlement, className) {
+export function institutionClassValue(settlement, className) {
   const re = INSTITUTION_CLASSES[className];
   if (!re) return 0;
   const count = (settlement?.institutions || [])
@@ -66,7 +66,7 @@ function edgesTouching(snapshot, settlementId) {
   return edges.filter(e => String(e?.from) === id || String(e?.to) === id);
 }
 
-function relationshipTypeOf(edge) {
+export function relationshipTypeOf(edge) {
   // H12 shim: legacy saves carry the plural 'trade_partners' the old
   // trade-route event wrote; read it as the canonical singular.
   return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
@@ -121,6 +121,17 @@ function sourceValue(source, entry, snapshot, settlementId) {
         const count = edgesTouching(snapshot, settlementId)
           .filter(e => ['trade_partner', 'allied'].includes(relationshipTypeOf(e))).length;
         return Math.min(1, count / 2);
+      }
+      if (source.key === 'arcane_relief') {
+        // External arcane help reaching INTO a smothered settlement: an
+        // incoming information channel from a neighbour whose own arcane
+        // institutions still function. One capable neighbour = full credit.
+        const capable = incomingChannels(snapshot, settlementId, 'information_flow')
+          .some(channel => {
+            const neighbor = snapshot?.byId?.get?.(String(channel?.from))?.settlement;
+            return institutionClassValue(neighbor, 'arcane') > 0;
+          });
+        return capable ? 1 : 0;
       }
       return 0;
     }
@@ -335,12 +346,45 @@ export const STRESSOR_COUNTERFORCES = Object.freeze({
       { kind: 'institution', key: 'arcane', weight: 0.4 },
     ],
   },
+  magic_deadzone: {
+    // The zone smothers LOCAL magic, so recovery leans on the outside: an
+    // arcane-capable neighbour reaching in along information channels, the
+    // local arcane institutions' ritual knowledge (hobbled, not ignorant),
+    // and plain administrative adaptation while the silence holds.
+    sources: [
+      { kind: 'ally', key: 'arcane_relief', weight: 0.4 },
+      { kind: 'institution', key: 'arcane', weight: 0.35 },
+      { kind: 'institution', key: 'admin', weight: 0.25 },
+    ],
+    maxResolutionBonus: 0.15,
+    decayBoost: 1.0,
+  },
 });
 
 // Floors missed -> the score is capped at NEUTRAL: partial strength never
 // punishes, it just doesn't accelerate. (A cap below 0.5 would turn "strong
 // in two of three legs" into a penalty, which reads as nonsense at the table.)
 const FLOOR_MISS_CAP = 0.5;
+
+// Human names for counterforce sources — the resolution receipt prints these
+// ("Recovery led by stored food (0.83), trade connectivity (0.71)").
+const SOURCE_LABELS = Object.freeze({
+  'food:resilience': 'food resilience',
+  'food:storage': 'stored food',
+  'food:deficitInverse': 'production balance',
+  'healing:redundancy': 'healer redundancy',
+  'governance:legitimacy': 'public legitimacy',
+  'ally:military_protection': 'allied military protection',
+  'ally:trade_partner': 'trade partnerships',
+  'ally:arcane_relief': 'external arcane relief',
+});
+
+function sourceLabel(source) {
+  const direct = SOURCE_LABELS[`${source.kind}:${source.key}`];
+  if (direct) return direct;
+  if (source.kind === 'institution') return `${source.key} institutions`;
+  return String(source.key || source.kind).replace(/_/g, ' ');
+}
 
 /**
  * Evaluate a stressor's counterforce against its affected settlements.
@@ -362,21 +406,32 @@ export function counterforceAssessment(stressor, snapshot) {
 
   let scoreSum = 0;
   let floorsMet = true;
+  const perSource = profile.sources.map(() => 0);
   for (const { id, entry } of entries) {
     let weighted = 0;
     let weightTotal = 0;
-    for (const source of profile.sources) {
+    profile.sources.forEach((source, idx) => {
       const value = sourceValue(source, entry, snapshot, id);
       weighted += value * source.weight;
       weightTotal += source.weight;
+      perSource[idx] += value;
       if (source.floor != null && value < source.floor) floorsMet = false;
-    }
+    });
     scoreSum += weightTotal > 0 ? weighted / weightTotal : 0.5;
   }
   const rawScore = clamp01(scoreSum / entries.length);
   const score = effects.requireAllFloors && !floorsMet
     ? Math.min(rawScore, FLOOR_MISS_CAP)
     : rawScore;
+  // Per-source breakdown (averaged across the footprint): names the
+  // strengths behind the score — the resolution receipt reads this.
+  const sourceBreakdown = profile.sources.map((source, idx) => ({
+    kind: source.kind,
+    key: source.key || null,
+    label: sourceLabel(source),
+    value: clamp01(perSource[idx] / entries.length),
+    weight: source.weight,
+  }));
 
   // Centered at 0.5: neutral settlements leave the baseline untouched.
   const centered = (score - 0.5) * 2; // -1..1
@@ -390,7 +445,7 @@ export function counterforceAssessment(stressor, snapshot) {
   // belongs mostly to the resolution-chance penalty, not the decay lever.
   const decayMultiplier = Math.max(0.7, Math.min(2.5, 1 + centered * effects.decayBoost));
 
-  return { score, floorsMet, resolutionDelta, decayMultiplier, profile: effects };
+  return { score, floorsMet, resolutionDelta, decayMultiplier, sourceBreakdown, profile: effects };
 }
 
 // ── Synergies: co-located stressors interact ─────────────────────────────
@@ -407,9 +462,16 @@ export const STRESSOR_SYNERGIES = Object.freeze({
     disease_outbreak: { decayMult: 0.6, resolutionDelta: -0.05, note: 'the sick cannot work the fields' },
     siege: { blocksResolution: true, note: 'the blockade stands — no relief can arrive' },
   },
+  siege: {
+    wartime: { decayMult: 0.8, resolutionDelta: -0.04, note: 'the wider war keeps the besiegers supplied' },
+  },
+  wartime: {
+    siege: { decayMult: 0.85, note: 'an active siege keeps the realm mobilized' },
+  },
   disease_outbreak: {
     famine: { decayMult: 0.6, resolutionDelta: -0.05, note: 'the hungry sicken faster' },
     mass_migration: { decayMult: 0.75, note: 'crowded camps spread contagion' },
+    magic_deadzone: { decayMult: 0.8, note: "the healers' magic is gone — only poultices remain" },
   },
   mass_migration: {
     famine: { decayMult: 0.8, note: 'hunger keeps people on the roads' },
@@ -417,12 +479,22 @@ export const STRESSOR_SYNERGIES = Object.freeze({
   },
   market_shock: {
     indebtedness: { decayMult: 0.7, resolutionDelta: -0.04, note: 'creditors call their debts into the panic' },
+    magic_deadzone: { decayMult: 0.85, note: 'the teleport commerce is dark; carts cannot replace it overnight' },
   },
   indebtedness: {
     market_shock: { decayMult: 0.7, resolutionDelta: -0.04, note: 'the crash makes every debt unpayable' },
   },
   insurgency: {
     occupation: { decayMult: 0.6, resolutionDelta: -0.06, note: 'occupation feeds the resistance' },
+  },
+  occupation: {
+    // The first ACCELERATING synergy: a live resistance bleeds the garrison —
+    // the occupation ends sooner, not later. (decayMult > 1 composes through
+    // the same weighting; the combined clamp in stressors.js still applies.)
+    insurgency: { decayMult: 1.25, resolutionDelta: 0.04, note: 'the resistance bleeds the garrison white' },
+  },
+  religious_conversion_fracture: {
+    occupation: { decayMult: 0.75, resolutionDelta: -0.04, note: "the occupier sponsors the new faith — the schism has a patron" },
   },
   infiltration: {
     criminal_corridor: { decayMult: 0.75, note: 'the corridor shelters the network' },
@@ -498,7 +570,9 @@ export function synergyAssessment(stressor, allStressors = []) {
   if (!companions.length) return null;
   return {
     decayMult: Math.max(0.4, decayMult),
-    resolutionDelta: Math.max(-0.12, resolutionDelta),
+    // Clamped both ways: stacked drags can never make a crisis unkillable,
+    // and stacked accelerants (insurgency vs occupation) can never force one.
+    resolutionDelta: Math.min(0.12, Math.max(-0.12, resolutionDelta)),
     blocksResolution,
     companions,
   };
@@ -520,7 +594,7 @@ export function synergyAssessment(stressor, allStressors = []) {
 const HOSTILE_RANK = Object.freeze({ hostile: 3, cold_war: 2, rival: 1 });
 const MEMORY_LOOKBACK_TICKS = 12;
 
-function hostileNeighborsOf(snapshot, settlementId) {
+export function hostileNeighborsOf(snapshot, settlementId) {
   const id = String(settlementId);
   const out = [];
   for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
@@ -543,7 +617,7 @@ function hostileNeighborsOf(snapshot, settlementId) {
  * histories for a recent hostile -> something-else label transition touching
  * this settlement. Returns the most recent within the lookback, or null.
  */
-function recentHostileMemory(snapshot, settlementId, currentTick) {
+export function recentHostileMemory(snapshot, settlementId, currentTick) {
   const id = String(settlementId);
   const states = snapshot?.worldState?.relationshipStates || {};
   let best = null;
@@ -619,6 +693,26 @@ export const VARIANT_HOOKS = Object.freeze({
   council_schism: [
     'A rump session voted itself emergency powers while the chamber stood half empty.',
     'Two officials now claim the same seal, the same office, and the same tax.',
+  ],
+  popular_revolt: [
+    'The market square empties at the same hour every evening — somewhere, people are meeting.',
+    'A list of grievances was nailed to the courthouse door. Nobody has dared remove it.',
+  ],
+  servile_uprising: [
+    'Work songs in the fields have changed — the overseers do not understand the new words.',
+    'Manumission papers, real and forged, are changing hands at night.',
+  ],
+  tax_revolt: [
+    'The collectors now travel in pairs, then in fours, and last week not at all.',
+    'A ledger of every levy taken these ten years is being read aloud in taverns.',
+  ],
+  arcane_burnout: [
+    'Where the surge burned hottest, candles now gutter and wards lie cold.',
+    'The mages who fled the instability will not return — they say the ground itself is spent.',
+  ],
+  leyline_silence: [
+    'No omen, no surge, no warning — the magic simply stopped answering.',
+    'Hedge wizards are leaving quietly; the ones who stay have started learning herbcraft.',
   ],
 });
 
@@ -707,6 +801,62 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
         reason: 'Born under occupation: this is a resistance, not a mere revolt.',
       };
     }
+  }
+
+  if (type === 'rebellion') {
+    // Which uprising this is. The servile variant carries the folded
+    // slave_revolt story (organic births route here now); the tax revolt
+    // reads the debt/crash context; the rest is the classic popular revolt.
+    const id = String(settlementId);
+    const entry = snapshot?.byId?.get?.(id);
+    const stressorsNow = snapshot?.worldState?.stressors || [];
+    const activeHere = t => stressorsNow.some(s =>
+      s?.type === t
+      && !['resolved', 'dormant', 'residual'].includes(s.status)
+      && (s.affectedSettlementIds || []).map(String).includes(id));
+    const labor = entry?.causal?.scores?.labor_capacity;
+    const legit = entry?.causal?.scores?.public_legitimacy;
+    const laborStrained = (Number.isFinite(labor) ? labor : 50) < 35;
+    const legitBroken = (Number.isFinite(legit) ? legit : 50) < 40;
+    const base = { attackerSettlementId: null, attackerLabel: null, sponsorSettlementId: null, interpretedAtTick: tick };
+    if (laborStrained && legitBroken) {
+      return {
+        ...base,
+        variant: 'servile_uprising',
+        reason: 'Bound and broken labor rises against the masters who hold it.',
+      };
+    }
+    if (activeHere('indebtedness') || activeHere('market_shock')) {
+      return {
+        ...base,
+        variant: 'tax_revolt',
+        reason: 'The levies of a drowning treasury finally broke the commons.',
+      };
+    }
+    return {
+      ...base,
+      variant: 'popular_revolt',
+      reason: 'The streets rose on their own — no faction owns this yet.',
+    };
+  }
+
+  if (type === 'magic_deadzone') {
+    const id = String(settlementId);
+    const burnout = (snapshot?.worldState?.stressors || []).some(s =>
+      s?.type === 'magical_instability'
+      && s?.status === 'residual'
+      && (s.memoryStrength ?? 0) > 0.15
+      && (s.affectedSettlementIds || []).map(String).includes(id));
+    return {
+      variant: burnout ? 'arcane_burnout' : 'leyline_silence',
+      attackerSettlementId: null,
+      attackerLabel: null,
+      sponsorSettlementId: null,
+      interpretedAtTick: tick,
+      reason: burnout
+        ? 'The wild surge burned out and left dead ground behind it.'
+        : 'The leylines have simply gone quiet — no one yet knows why.',
+    };
   }
 
   if (type === 'coup_detat') {

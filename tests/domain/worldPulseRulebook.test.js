@@ -165,13 +165,17 @@ describe('World Pulse rulebook expansion', () => {
       score: 0.92,
       reasons: [`high ${kind}`],
     }));
-    // The coup_detat birth is politics-gated: it needs the settlement entry
-    // itself (legitimacy Contested-or-worse, a governing seat, at least one
-    // non-criminal challenger with real power). Every other type births from
-    // pressure alone.
+    // Every birth is gated on ORGANIC CONTEXT now (stressorGates.js), so the
+    // fixture provides each blocking gate its story: a hostile neighbour (an
+    // occupier-in-waiting, a war sponsor), broken legitimacy with a governing
+    // seat and non-criminal challengers (the coup), and a magic-dependent
+    // arcane settlement (magical_instability + magic_deadzone). Deprecated
+    // types (slave_revolt) are deliberately UN-birthable — pinned below.
     const oakmere = {
       name: 'Oakmere',
       tier: 'town',
+      config: { magicExists: true, priorityMagic: 70 },
+      institutions: [{ name: 'Arcane College', category: 'Magic' }],
       powerStructure: {
         governingName: 'Town Council',
         publicLegitimacy: { score: 22, label: 'Legitimacy Crisis', govMultiplier: 0.6 },
@@ -199,6 +203,8 @@ describe('World Pulse rulebook expansion', () => {
         // Spread now requires a CONFIRMED channel (design: suggested channels
         // never propagate), not an arbitrary edge.
         channels: [{ type: 'trade_route', from: 'ashford', to: 'briar', status: 'confirmed' }],
+        // The hostile neighbour gives the war-shaped gates their occupier.
+        edges: [{ id: 'edge.oakmere.rivermeet', from: 'oakmere', to: 'rivermeet', relationshipType: 'hostile' }],
       },
       byId: new Map([
         ['oakmere', { settlement: oakmere, causal: { scores: { ruling_authority: 18 } } }],
@@ -207,9 +213,13 @@ describe('World Pulse rulebook expansion', () => {
 
     const candidates = evaluateStressorRules(snapshot, pressureIndex(pressureRows), { tick: 6, pressures: pressureRows });
 
-    for (const type of Object.keys(STRESSOR_CATALOG)) {
+    for (const [type, rule] of Object.entries(STRESSOR_CATALOG)) {
+      if (rule.deprecated) continue;
       expect(candidates.some(candidate => candidate.candidateType === `stressor_birth_${type}`)).toBe(true);
     }
+    // The fold: slave_revolt never births organically (rebellion carries the
+    // servile_uprising variant); the catalog entry stays for legacy saves.
+    expect(candidates.some(candidate => candidate.candidateType === 'stressor_birth_slave_revolt')).toBe(false);
     expect(candidates.some(candidate => candidate.candidateType === 'stressor_spread_disease_outbreak')).toBe(true);
   });
 
