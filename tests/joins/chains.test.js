@@ -59,6 +59,31 @@ const hasResolvableProcessorAtOrAbove = (chain) => {
   );
 };
 
+// ── Baseline generability at a tier (mirrors assembleInstitutions.js:212-226) ──
+// A settlement of tier T draws ONLY from institutionalCatalog[T] — metropolis
+// merges the city section in (assembleInstitutions.js:213-214) — and an entry
+// carrying its own minTier above T is skipped (line 226). DM "require" toggles
+// can force out-of-tier entries, but a chain's minTier should be honest under
+// baseline generation, not rescued by override.
+const namesAvailableAtTier = (tier) => {
+  const sections = tier === 'metropolis'
+    ? [institutionalCatalog.city || {}, institutionalCatalog.metropolis || {}]
+    : [institutionalCatalog[tier] || {}];
+  const tierIdx = TIER_ORDER.indexOf(tier);
+  return sections.flatMap(section =>
+    Object.values(section).flatMap(group =>
+      Object.entries(group)
+        .filter(([, spec]) => tierIdx >= TIER_ORDER.indexOf(spec?.minTier || 'thorp'))
+        .map(([name]) => name.toLowerCase()),
+    ),
+  );
+};
+
+const resolvesAtOwnMinTier = (chain) => {
+  const pool = namesAvailableAtTier(chain.minTier || 'thorp');
+  return (chain.processingInstitutions || []).some(p => pool.some(n => processorMatches(n, p)));
+};
+
 // Replica of the private resourceLabelToKey in computeActiveChains.js:13-23
 // (fuzzy word overlap from chain.resource label to RESOURCE_DATA key). Used to
 // assert the reverse index agrees with runnability's label resolution.
@@ -203,6 +228,18 @@ describe('chain processor joins (activation gate resolvability)', () => {
     expect(procs('healing_medicine.divine_healing')).toContain('Monastery');
   });
 
+  it('the magical_goods processors are catalog names, not spatialData service names', () => {
+    // The first refill used 'Enchanting quarter' / 'Magic item consignment' —
+    // spatialData.js SERVICE vocabulary, not institutionalCatalog entries — so
+    // the chain passed the >=1-resolvable rule (via its metropolis processors)
+    // while its town minTier stayed a dead letter for three tiers.
+    const procs = allChains.find(c => c.fullId === 'arcane_magical.magical_goods').processingInstitutions;
+    expect(procs).toContain("Wizard's tower");
+    expect(procs).toContain("Enchanter's shop");
+    expect(procs).not.toContain('Enchanting quarter');
+    expect(procs).not.toContain('Magic item consignment');
+  });
+
   it('chain outputs are goods/services, never institution names', () => {
     const leaks = [];
     for (const chain of allChains) {
@@ -212,6 +249,37 @@ describe('chain processor joins (activation gate resolvability)', () => {
     }
     // "Wizard's tower" / "Mages' guild" used to leak from spellcasting/divine_healing.
     expect(leaks).toEqual([]);
+  });
+});
+
+describe('chain minTier honesty (gate opens where a processor can be generated)', () => {
+  // The magical_goods shape this pins: minTier 'town', but every processor that
+  // resolved against the catalog lived in the metropolis section — the tier gate
+  // opened three tiers before the chain could ever activate, and the
+  // >=1-resolvable-at-SOME-tier assertion above cannot see that gap.
+  //
+  // The original 18-entry worklist (chains whose declared minTier sat below the
+  // tier where any processor could be generated) was cleared by re-pointing
+  // processors at lower-tier catalog names — plus raising garrison/law_governance
+  // to 'town' and herbalism to 'village', where the catalog's first real standing
+  // force / courthouse / herbalist lives. The list stays so the exact-equality
+  // assertion refuses ANY new gap.
+  const KNOWN_MINTIER_GAPS = [];
+
+  it('every chain outside the known-gap list has >=1 processor generable at its own minTier', () => {
+    const gaps = allChains.filter(c => !resolvesAtOwnMinTier(c)).map(c => c.fullId).sort();
+    expect(gaps).toEqual(KNOWN_MINTIER_GAPS);
+  });
+
+  it('the arcane chains ladder honestly: magical_goods from town, planar at metropolis', () => {
+    const magical = allChains.find(c => c.fullId === 'arcane_magical.magical_goods');
+    expect(magical.minTier).toBe('town');
+    expect(resolvesAtOwnMinTier(magical)).toBe(true); // "Wizard's tower" is town-catalog
+    const planar = allChains.find(c => c.fullId === 'arcane_magical.planar');
+    // 'Planar traders' carries minTier:'metropolis' in the city section and
+    // 'Planar embassy' is metropolis-section, so 'city' was a dead gate.
+    expect(planar.minTier).toBe('metropolis');
+    expect(resolvesAtOwnMinTier(planar)).toBe(true);
   });
 });
 
@@ -280,6 +348,18 @@ describe('DM-visible activation behavior (computeActiveChains)', () => {
     expect(crossroads.some(c => c.chainId === 'smuggling')).toBe(true);
     const road = computeActiveChains(inst('Local fence'), [], 'thorp', 'road');
     expect(road.some(c => c.chainId === 'smuggling')).toBe(false);
+  });
+
+  it("a town wizard's tower on a ley line node runs Magical Items & Enchanting", () => {
+    const chains = computeActiveChains(inst("Wizard's tower"), ['magical_node'], 'town', 'road');
+    const goods = chains.find(c => c.chainId === 'magical_goods');
+    expect(goods).toBeTruthy();
+    expect(goods.activatedByResource).toBe(true);
+    expect(goods.status).toBe('running');
+    // Without the node (and no entrepôt route or magic transit), the tower
+    // alone does not conjure a magic-item market.
+    const bare = computeActiveChains(inst("Wizard's tower"), [], 'town', 'road');
+    expect(bare.some(c => c.chainId === 'magical_goods')).toBe(false);
   });
 
   it('a settlement with Planar traders but NO circle/airship does not run Planar Trade', () => {

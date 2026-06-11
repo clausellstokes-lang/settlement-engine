@@ -18,7 +18,14 @@
  *      rationed: release targets the 'Pressured' band rather than zero, and
  *      never spends more than half the remaining stores in one tick, so a
  *      12-month state granary is a multi-tick story arc, not a one-tick
- *      eraser.
+ *      eraser. Under a MILD deficit (the tithe's own regime) the drawdown
+ *      stops at the tithe floor — the security reserve the tithe exists to
+ *      protect is never raided to calm a hardship the tithe deems survivable.
+ *      That asymmetry is the hysteresis that gives the tithe/drawdown handoff
+ *      a fixed point: without it, the tithe pushes stores past the floor, the
+ *      drawdown raids them back below it, and the pair alternates forever.
+ *      A severe deficit breaks the floor protection exactly as it stops the
+ *      tithe.
  *
  * Sieges/occupations couple in: an active blockade cuts the import share of
  *  need, which lands on the effective deficit — so a siege literally eats
@@ -210,10 +217,17 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
     storage = Math.min(cap, storage + months * (T.reserveTithePct / 100));
     effectiveDeficit = clamp(effectiveDeficit + T.reserveTithePct, 0, 95);
   } else if (effectiveDeficit > T.rationFloorPct && storage > 0) {
-    // 3. Drawdown: rationed release toward the 'Pressured' band.
+    // 3. Drawdown: rationed release toward the 'Pressured' band. A MILD
+    // deficit may only spend stores ABOVE the tithe floor (the security
+    // reserve stays sacred — see header, behavior 3); this is what lets the
+    // tithe/drawdown handoff converge instead of alternating across the
+    // floor forever. A severe deficit releases from the full stores.
+    const releasable = effectiveDeficit < T.reserveTitheDeficitCap
+      ? Math.max(0, storage - T.reserveTitheFloorMonths)
+      : storage;
     const targetRelief = effectiveDeficit - T.rationFloorPct;          // % of need to cover
     const cost = (targetRelief / 100) * months;                        // months of food it costs
-    const available = storage * T.maxReleaseFraction;
+    const available = releasable * T.maxReleaseFraction;
     const spend = Math.min(cost, available);
     reliefPct = months > 0 ? (spend / months) * 100 : 0;
     storage -= spend;

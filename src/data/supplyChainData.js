@@ -88,7 +88,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Foraging areas',
         resourceIcon: '',
         rawInputs: ['Foraged goods', 'Honey and beeswax', 'Eggs'],
-        processingInstitutions: ['Elder Grove Council'],
+        // 'Elder Grove Council' alone (town) gated this thorp chain three tiers
+        // high. The smallholding ladder: 'Subsistence farming' (thorp/hamlet) →
+        // 'Beekeeper' (village — the honey-and-wax output) → the Council (town).
+        processingInstitutions: ['Subsistence farming', 'Beekeeper', 'Elder Grove Council'],
         intermediateGoods: ['Honey and beeswax', 'Foraged goods'],
         outputs: ['Honey and beeswax', 'Foraged goods'],
         services: ['food'],
@@ -166,7 +169,17 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Grazing land',
         resourceIcon: '',
         rawInputs: ['Livestock', 'Working animals'],
-        processingInstitutions: ['Merchant guilds (3-8)', 'Merchant guilds (15-40)'],
+        // Merchant guilds first generate at town — three tiers above this hamlet
+        // chain. The animal-trade ladder below them: 'Pack animal trader'/'Stable
+        // yard' (hamlet) → 'Stable master' (village) → 'Beast trainers' (town).
+        processingInstitutions: [
+          'Pack animal trader',
+          'Stable yard',
+          'Stable master',
+          'Beast trainers',
+          'Merchant guilds (3-8)',
+          'Merchant guilds (15-40)',
+        ],
         intermediateGoods: ['Trained horses', 'Draft animals'],
         outputs: ['Cavalry mounts', 'Draft horses', 'Working animals', 'Hunting dogs', 'Trained falcons'],
         services: ['transport', 'employment'],
@@ -281,7 +294,19 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Marshlands',
         resourceIcon: '',
         rawInputs: ['Reeds and thatch', 'Peat fuel', 'Waterfowl'],
-        processingInstitutions: ['Fishmonger', 'Chandler', 'Ropemaker', 'Merchant guilds (3-8)'],
+        // Fishmonger (village) and chandler/ropemaker (town) left this hamlet
+        // chain dead at its own tier. The marsh trades that generate low:
+        // 'Peat cutter' (hamlet) → 'Thatcher'/'Wildfowler' (village — the
+        // reeds-and-waterfowl outputs).
+        processingInstitutions: [
+          'Peat cutter',
+          'Thatcher',
+          'Wildfowler',
+          'Fishmonger',
+          'Chandler',
+          'Ropemaker',
+          'Merchant guilds (3-8)',
+        ],
         intermediateGoods: ['Dried reeds', 'Peat blocks'],
         outputs: ['Reeds and thatch', 'Peat fuel', 'Waterfowl', 'Basket goods'],
         services: ['equipment'],
@@ -427,7 +452,16 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Date Palms and Orchards',
         resourceIcon: '',
         rawInputs: ['Dates', 'Palm products'],
-        processingInstitutions: ['Farmland', 'Market square', "Caravaneer's post"],
+        // 'Farmland' (village) and the market/caravaneer pair (town) left this
+        // hamlet chain dead at its own tier: 'Subsistence farming' (thorp/hamlet)
+        // grows the palms, 'Caravanserai' (hamlet/village) moves the dates.
+        processingInstitutions: [
+          'Subsistence farming',
+          'Farmland',
+          'Caravanserai',
+          'Market square',
+          "Caravaneer's post",
+        ],
         intermediateGoods: ['Dried dates', 'Palm oil', 'Woven palm goods'],
         outputs: ['Date export', 'Palm sugar', 'Preserved fruit'],
         services: ['food', 'trade'],
@@ -485,7 +519,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Hunting grounds',
         resourceIcon: '',
         rawInputs: ['Furs and pelts', 'Raw wool and hides'],
-        processingInstitutions: ['Tanner (established)', "Cobbler's guild", "Furrier's district"],
+        // Tanner/cobbler guild are town-catalog; 'Tannery' is the village form
+        // that opens this village chain at its own tier (leather_goods already
+        // lists it).
+        processingInstitutions: ['Tannery', 'Tanner (established)', "Cobbler's guild", "Furrier's district"],
         intermediateGoods: ['Raw wool and hides'],
         outputs: ['Leather goods', 'Guild-manufactured goods'],
         services: ['equipment'],
@@ -585,7 +622,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Grazing land',
         resourceIcon: '',
         rawInputs: ['Raw wool', 'Processed textiles', 'Dyes'],
-        processingInstitutions: ["Tailor's guild", 'Shepherd'],
+        // "Tailor's guild" is town-catalog and 'Shepherd' (hamlet-only) produces
+        // raw wool, not finished cloth. The village finishing trades: 'Tailor',
+        // 'Fuller', 'Dyer' ('Tailor' also matches the town guild under the
+        // 12-char prefix).
+        processingInstitutions: ['Tailor', 'Fuller', 'Dyer', "Tailor's guild"],
         intermediateGoods: ['Fulled cloth', 'Dyed cloth', 'Finished cloth'],
         outputs: ['Finished clothing', 'Dyed cloth', 'Tailored garments', 'Livery and uniforms'],
         services: ['equipment'],
@@ -628,7 +669,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Wild foraging areas',
         resourceIcon: '',
         rawInputs: ['Wild honey', 'Beeswax'],
-        processingInstitutions: ['Apothecary (established)'],
+        // 'Apothecary (established)' is town-catalog — this village chain has its
+        // own villager: 'Beekeeper'. 'Chandler' (town) takes the candles-and-wax
+        // output; the apothecary keeps the medicinal honey.
+        processingInstitutions: ['Beekeeper', 'Chandler', 'Apothecary (established)'],
         intermediateGoods: ['Refined beeswax', 'Honey'],
         outputs: ['Wild honey', 'Candles and wax', 'Mead', 'Medicinal honey'],
         services: ['food'],
@@ -762,7 +806,14 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: ['Pack animals', 'Trade goods', 'Provisions'],
+        // The caravaneer/carrier institutions all first generate at town, one
+        // tier above this village chain. Its village-and-below links:
+        // 'Caravanserai' (hamlet/village), 'Waystation' (village), 'Pack animal
+        // trader' (hamlet).
         processingInstitutions: [
+          'Caravanserai',
+          'Waystation',
+          'Pack animal trader',
           "Caravaneer's post",
           "Caravan masters' exchange",
           "Carriers' guild",
@@ -832,13 +883,19 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: ['Quality tools and weapons', 'Advanced weapons and armor'],
-        processingInstitutions: ['Garrison', 'Barracks (town)', 'City guard district'],
+        // Was ['Garrison', 'Barracks (town)', 'City guard district'] at minTier
+        // 'hamlet' — 'Barracks (town)'/'City guard district' match no catalog
+        // name at any tier, and nothing standing generates below town (hamlets
+        // field a Citizen militia, not a garrison). The catalog ladder:
+        // 'Barracks'/'Town watch' (town) → 'Garrison'/'Professional city watch'
+        // (city) → 'Multiple garrisons' (metropolis, via the 'Garrison' prefix).
+        processingInstitutions: ['Barracks', 'Town watch', 'Garrison', 'Professional city watch'],
         intermediateGoods: [],
         outputs: ['Defence services', 'Weapons training'],
         services: [],
         exportable: false,
         entrepot: false,
-        minTier: 'hamlet',
+        minTier: 'town',
       },
       {
         id: 'fortification',
@@ -847,7 +904,13 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Stone quarry',
         resourceIcon: '',
         rawInputs: ['Quarried stone', 'Building materials'],
-        processingInstitutions: ['City wall district', 'Citadel', 'Town fortifications'],
+        // Was ['City wall district', 'Citadel', 'Town fortifications'] — the
+        // first and last match no catalog name at any tier, so only a Citadel
+        // (city) could ever run this hamlet-gated chain. The defensive-works
+        // ladder: 'Palisade' (thorp; the prefix also matches 'Palisade or
+        // earthworks' at hamlet/village) → 'Town walls' (town) → 'City walls
+        // and gates'/'Citadel' (city).
+        processingInstitutions: ['Palisade', 'Town walls', 'City walls and gates', 'Citadel'],
         intermediateGoods: [],
         outputs: [],
         services: [],
@@ -904,9 +967,14 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: 'Wild foraging areas',
         resourceIcon: '',
         rawInputs: ['Medicinal herbs', 'Alchemical reagents', 'Wild honey'],
+        // Was the town/city apothecary forms + warden/grove under minTier
+        // 'thorp' — the catalog generates no herbalist below village. 'Apothecary'
+        // (village; the prefix also matches the town '(established)' and city
+        // 'district' forms) and 'Midwife' (village) open the chain where
+        // remedies first exist; minTier moves to match.
         processingInstitutions: [
-          'Apothecary (established)',
-          'Apothecary district',
+          'Apothecary',
+          'Midwife',
           "Warden's Lodge",
           'Elder Grove Council',
         ],
@@ -915,7 +983,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         services: ['healing'],
         exportable: true,
         entrepot: false,
-        minTier: 'thorp',
+        minTier: 'village',
       },
       {
         id: 'hospital',
@@ -1008,7 +1076,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '️',
         rawInputs: [],
-        processingInstitutions: ["Sage's quarter"],
+        // "Sage's quarter" first generates at city — a dead town gate. 'Post
+        // relay station' (town) carries the long-distance-messages output at
+        // this chain's own tier.
+        processingInstitutions: ['Post relay station', "Sage's quarter"],
         intermediateGoods: [],
         outputs: ['Information brokerage', 'Long-distance messages', 'Intelligence services', 'Divination and scrying'],
         services: ['information'],
@@ -1084,8 +1155,13 @@ export const SUPPLY_CHAIN_NEEDS = {
         resourceIcon: '️',
         rawInputs: ['Arcane reagents', 'Extraplanar goods'],
         // Was [] — an empty processor list means computeActiveChains can
-        // never activate the chain (it returns early with no match).
-        processingInstitutions: ['Enchanting quarter', 'Magic item consignment', 'Academy of magic', "Mages' district"],
+        // never activate the chain (it returns early with no match). The first
+        // refill used 'Enchanting quarter'/'Magic item consignment' — spatialData
+        // SERVICE names, not institutionalCatalog entries — so with minTier 'town'
+        // the chain still could not activate before metropolis. The catalog's
+        // enchanting ladder: "Wizard's tower" (town) → "Enchanter's shop" /
+        // 'Scroll scribe' (city) → 'Academy of magic' / "Mages' district" (metropolis).
+        processingInstitutions: ["Wizard's tower", "Enchanter's shop", 'Scroll scribe', 'Academy of magic', "Mages' district"],
         intermediateGoods: ['Arcane scribing'],
         outputs: [
           'Magical item market',
@@ -1119,7 +1195,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         entrepot: true,
         entrepotNote:
           'Planar goods are extreme-value entrepôt items. Only metropolis-level settlements can support the infrastructure.',
-        minTier: 'city',
+        // Was 'city' — but 'Planar traders' carries its own minTier:'metropolis'
+        // gate in the catalog and 'Planar embassy' lives in the metropolis
+        // section, so no city settlement can generate a processor. metropolis
+        // matches the entrepotNote above.
+        minTier: 'metropolis',
       },
     ],
   },
@@ -1187,7 +1267,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         services: ['legal'],
         exportable: false,
         entrepot: false,
-        minTier: 'hamlet',
+        // Was 'hamlet' — courts first generate at town, and hamlet/village
+        // dispute-settling (headman, reeve, steward) is social order, not this
+        // formal law economy. The gate opens where a courthouse can exist.
+        minTier: 'town',
       },
       {
         id: 'pilgrimage',
@@ -1228,7 +1311,18 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: [],
-        processingInstitutions: ['Inns and taverns (district)', 'Public bathhouse'],
+        // The district (city) and bathhouse (town) left this hamlet chain dead
+        // for two tiers. The hospitality ladder: 'Alehouse'/'Wayside inn'
+        // (hamlet) → "Travelers' inn" (village) → 'Taverns (5-20)'/'Public
+        // bathhouse' (town) → the district (city).
+        processingInstitutions: [
+          'Alehouse',
+          'Wayside inn',
+          "Travelers' inn",
+          'Taverns (5-20)',
+          'Inns and taverns (district)',
+          'Public bathhouse',
+        ],
         intermediateGoods: [],
         outputs: ['Lodging', 'Meals and drink', 'Stabling', 'Message relay', 'Hiring hall', 'Gambling'],
         services: ['food', 'lodging', 'employment'],
@@ -1242,7 +1336,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: [],
-        processingInstitutions: ['Theater', 'Bardic college', 'Inn/Tavern District'],
+        // 'Inn/Tavern District' is servicesData SERVICE vocabulary, not a catalog
+        // name (the magical_goods trap). 'Theater'/'Bardic college' are
+        // city-catalog ('Theater' matches 'Theaters'/'Multiple theaters');
+        // 'Traveling performers' (town) opens the chain at its own tier.
+        processingInstitutions: ['Traveling performers', 'Theater', 'Bardic college'],
         intermediateGoods: [],
         outputs: ['Performances', 'Music and song', 'Musical education', 'Magical entertainment'],
         services: ['entertainment'],
@@ -1306,7 +1404,17 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '️',
         rawInputs: [],
-        processingInstitutions: ["Thieves' guild (powerful)"],
+        // The powerful guild first generates at city — a dead thorp gate. The
+        // fencing ladder runs the market below it: 'Local fence' (thorp) →
+        // 'Fence (word of mouth)' (hamlet/village) → 'Front businesses' (town)
+        // → 'Black market' itself (city).
+        processingInstitutions: [
+          'Local fence',
+          'Fence (word of mouth)',
+          'Front businesses',
+          'Black market',
+          "Thieves' guild (powerful)",
+        ],
         intermediateGoods: [],
         outputs: ['Contraband goods', 'Forged documents', 'Fencing stolen goods', 'Illegal services'],
         services: ['criminal'],
@@ -1320,7 +1428,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '️',
         rawInputs: [],
-        processingInstitutions: ["Thieves' guild (powerful)"],
+        // The powerful guild first generates at city, one tier above this town
+        // chain. 'Street gang' (town) is organised crime's entry rung; the
+        // guild's 12-char prefix also matches the city's "Thieves' guild chapter".
+        processingInstitutions: ['Street gang', "Thieves' guild (powerful)"],
         intermediateGoods: [],
         outputs: [
           'Information brokerage',
@@ -1340,7 +1451,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: ['War captives', 'Debt bondage'],
-        processingInstitutions: ['Workhouse'],
+        // 'Workhouse' first generates at city, one tier above this town chain.
+        // 'Slave market' (town; the prefix also matches the city's 'Slave
+        // market district') is the trade's own institution.
+        processingInstitutions: ['Slave market', 'Workhouse'],
         intermediateGoods: ['Bond papers', 'Slave registration'],
         outputs: ['Forced labour services', 'Domestic servants', 'Agricultural labour', 'Mine labour'],
         services: ['employment'],

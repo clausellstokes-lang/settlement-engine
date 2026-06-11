@@ -266,11 +266,30 @@ function dominantRelationshipContext(snapshot, settlementId) {
   return 'local';
 }
 
+// Crisis classification is by archetype id ONLY (the activeConditions.js
+// catalog) — label prose must never branch goals: 'siege_lifted' is recovery,
+// not siege, and a DM label like 'War festival' is not war. DM-authored
+// custom_crisis conditions carry catalog affectedSystems instead of a mapped
+// archetype, so they signal crisis through those systems.
+const CRISIS_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'rebellion']);
+const CRISIS_SYSTEMS = ['food_security', 'healing_capacity', 'defense_readiness'];
+
+function isCrisisCondition(c) {
+  if (!c) return false;
+  if (CRISIS_ARCHETYPES.has(c.archetype)) return true;
+  return c.archetype === 'custom_crisis'
+    && (c.affectedSystems || []).some(s => CRISIS_SYSTEMS.includes(s));
+}
+
 function contextForNpc(snapshot, state) {
   const item = settlementForState(snapshot, state);
   const tier = item?.settlement?.tier || 'village';
-  const conditions = (item?.activeConditions || [])
-    .map(c => c.archetype || c.label || '')
+  const active = item?.activeConditions || [];
+  // The signature carries archetype ids only — a condition without an
+  // archetype is dropped rather than falling back to label, so a cosmetic
+  // label edit can never re-trigger a goal rebranch.
+  const conditions = active
+    .map(c => (typeof c?.archetype === 'string' ? c.archetype : ''))
     .filter(Boolean)
     .sort()
     .slice(0, 3);
@@ -278,6 +297,7 @@ function contextForNpc(snapshot, state) {
   return {
     tier,
     conditions,
+    crisis: active.some(isCrisisCondition),
     relationship,
     signature: `${tier}|${relationship}|${conditions.join(',')}`,
   };
@@ -293,7 +313,6 @@ function tierDirection(previousTier, nextTier) {
 
 function branchedGoals(state, context) {
   const dir = tierDirection(state.contextTier, context.tier);
-  const conditionText = context.conditions.join(' ');
   if (context.relationship === 'vassal') {
     if (['dissident', 'military', 'civic'].includes(state.roleArchetype)) {
       return { shortGoal: 'organize_autonomy', longGoal: 'break_vassalage' };
@@ -303,7 +322,7 @@ function branchedGoals(state, context) {
   if (context.relationship === 'overlord') {
     return { shortGoal: 'secure_tribute', longGoal: 'expand_influence' };
   }
-  if (/famine|plague|disease|war|siege|rebellion/.test(conditionText)) {
+  if (context.crisis) {
     if (['healer', 'religious', 'labor_resource'].includes(state.roleArchetype)) {
       return { shortGoal: 'protect_followers', longGoal: 'restore_order' };
     }

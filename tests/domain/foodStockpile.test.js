@@ -129,6 +129,60 @@ describe('advanceFoodStockpile()', () => {
     expect(fs.storageMonths).toBeCloseTo(3.5, 2);
   });
 
+  test('mild deficit at the tithe floor converges: changed goes false within a dozen ticks', () => {
+    // The old non-converging regime: a mild structural deficit (<25) with
+    // stores hovering at the 1-month tithe floor alternated forever — tithe
+    // pushes stores past the floor (deficit +3), drawdown raids them back
+    // below it (deficit →5), repeat. That meant a settlement object rewrite
+    // every tick and a ±1 flicker on the gated disaster score. The floor
+    // protection on mild drawdowns gives the handoff a fixed point.
+    let cur = settlementWith({
+      institutions: [GRANARY],
+      foodSecurity: { deficitPct: 24, surplusPct: 0, storageMonths: 0.95, importDependency: 0.2 },
+    });
+    let settledAt = null;
+    for (let tick = 1; tick <= 12; tick++) {
+      const result = advanceFoodStockpile(cur, { interval: 'one_month', tick });
+      if (!result.changed) {
+        expect(result.settlement).toBe(cur); // no-op identity contract holds at the fixed point
+        settledAt = tick;
+        break;
+      }
+      cur = result.settlement;
+    }
+    expect(settledAt).not.toBeNull();
+    const fs = cur.economicState.foodSecurity;
+    // The fixed point: stores rest at the security floor, the table carries
+    // the structural deficit — no perpetual tithe bump, no oscillation.
+    expect(fs.storageMonths).toBeGreaterThanOrEqual(STOCKPILE_TUNING.reserveTitheFloorMonths - 0.01);
+    expect(fs.storageMonths).toBeLessThanOrEqual(STOCKPILE_TUNING.reserveTitheFloorMonths + 0.05);
+    expect(fs.deficitPct).toBeLessThanOrEqual(24);
+    expect(fs.deficitPct).toBeGreaterThan(STOCKPILE_TUNING.rationFloorPct);
+    // And it stays settled.
+    const again = advanceFoodStockpile(cur, { interval: 'one_month', tick: settledAt + 1 });
+    expect(again.changed).toBe(false);
+    expect(again.settlement).toBe(cur);
+  });
+
+  test('a mild deficit drains stores only down to the tithe floor; a severe one raids below it', () => {
+    const mk = (deficitPct) => settlementWith({
+      institutions: [GRANARY],
+      foodSecurity: { deficitPct, surplusPct: 0, storageMonths: 2, importDependency: 0.2 },
+    });
+    const run = (start) => {
+      let cur = start;
+      for (let tick = 1; tick <= 30; tick++) {
+        cur = advanceFoodStockpile(cur, { interval: 'one_month', tick }).settlement || cur;
+      }
+      return cur.economicState.foodSecurity;
+    };
+    // Mild (20 < reserveTitheDeficitCap): the security reserve is sacred.
+    expect(run(mk(20)).storageMonths)
+      .toBeGreaterThanOrEqual(STOCKPILE_TUNING.reserveTitheFloorMonths - 0.01);
+    // Severe (40): the floor protection breaks, the granary empties out.
+    expect(run(mk(40)).storageMonths).toBeLessThan(STOCKPILE_TUNING.reserveTitheFloorMonths);
+  });
+
   test('a blockade cuts imports: the siege eats the granary tick over tick', () => {
     const blockade = { type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
     let cur = settlementWith({
