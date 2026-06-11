@@ -855,12 +855,11 @@ export default function SettlementDetail({
               {pdfError}
             </div>
           )}
-          {/* SystemStateBar (the raw "Settlement State" engine snapshot) is
-              edit-only — it renders inside the editMode block above. View mode
-              opens to the polished dossier (OutputContainer) with no raw state. */}
-          <div style={{ marginBottom:12 }}>
-            <ProvenanceBlock save={detail.saveData || detail} />
-          </div>
+          {/* SystemStateBar (the raw "Settlement State" engine snapshot) and
+              the Provenance card (seed / timestamps / campaign link) are
+              edit-only — they render inside the editMode block above. View
+              mode opens to the polished dossier (OutputContainer) with no
+              raw state or bookkeeping. */}
           {detail?.saveData?.id && (
             <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} />
           )}
