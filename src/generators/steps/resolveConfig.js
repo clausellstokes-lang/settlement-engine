@@ -219,6 +219,26 @@ registerStep('resolveConfig', {
     });
   }
 
+  // The isolated→road rewrite above also fires on an EXPLICIT
+  // tradeRouteAccess:'isolated' (no routePool) — that path used to rewrite
+  // the user's choice with no trace at all. Mirror the rolled-pool trace
+  // shape so the override always leaves a receipt.
+  if (!routePool && tradeRoute !== rawRoute) {
+    recordTrace(ctx, {
+      targetType: 'condition',
+      targetId: `tradeRoute.${tradeRoute}`,
+      step: 'resolveConfig',
+      result: 'overridden',
+      causes: [{
+        source: `config.tradeRouteAccess=${rawRoute}`,
+        reason: `Explicit 'isolated' chosen, but town-plus + no-magic forces road access.`,
+      }],
+      downstreamEffects: [
+        { target: 'economicViability', effect: 'trade-access input' },
+      ],
+    });
+  }
+
   if (config.monsterThreat === 'random_threat') {
     recordTrace(ctx, {
       targetType: 'threat',
@@ -231,7 +251,30 @@ registerStep('resolveConfig', {
       }],
       downstreamEffects: [
         { target: 'defenseProfile', effect: 'threat-tier input' },
-        ...(threat === 'plagued' ? [{ target: 'priorityMilitary', effect: 'floored to 25' }] : []),
+        // Only claim the floor when it actually bound — this used to assert
+        // 'floored to 25' for every plagued roll, even when the user's
+        // priorityMilitary was already ≥ 25 and nothing changed.
+        ...(militaryFloor ? [{ target: 'priorityMilitary', effect: 'floored to 25' }] : []),
+      ],
+    });
+  }
+
+  // The plagued military floor (above) also fires on an EXPLICIT
+  // monsterThreat choice ('plagued', or 'high' which normalizes to it) —
+  // that path used to floor the user's priority silently. Same trace shape
+  // as the rolled path; emitted only when the floor actually bound.
+  if (config.monsterThreat !== 'random_threat' && militaryFloor) {
+    recordTrace(ctx, {
+      targetType: 'threat',
+      targetId: `monsterThreat.${threat}`,
+      step: 'resolveConfig',
+      result: 'overridden',
+      causes: [{
+        source: `config.monsterThreat=${config.monsterThreat}`,
+        reason: 'Explicit plagued-tier threat with priorityMilitary below 25 — a settlement under that pressure cannot field less than a skeleton garrison.',
+      }],
+      downstreamEffects: [
+        { target: 'priorityMilitary', effect: 'floored to 25' },
       ],
     });
   }

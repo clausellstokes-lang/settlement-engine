@@ -377,6 +377,18 @@ export function deriveNpcProfile(npc, settlement) {
       npc.goal?.short,
     ),
 
+    // Corruption truth — mirror the raw fields the corruption pass writes at
+    // generation (corruptionPass.js) and the world-pulse sim mirrors back per
+    // tick (npcAgency.js#mirrorCorruptionOntoSettlement). The dossier card
+    // already renders the raw flags; the structured profile must tell the
+    // same story instead of presenting a compromised/ousted NPC as a clean
+    // incumbent. `corrupt` stays tri-state: explicit false is a generation
+    // verdict, null means a legacy save the corruption pass never judged.
+    corrupt:          npc.corrupt ?? null,
+    corruptionVector: npc.corruptionVector || null,
+    timesExposed:     npc.timesExposed || 0,
+    ousted:           npc.ousted === true,
+
     // Tier 4.5 structured fields — leverage / vulnerability from template,
     // augmented with the NPC's own secret stakes / plot hooks.
     leverage:        [...template.leverage],

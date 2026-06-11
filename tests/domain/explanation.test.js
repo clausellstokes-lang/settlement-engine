@@ -19,6 +19,8 @@
  *       duration.
  *     * explainEscalationClock reads Phase 11 trigger + stages.
  *     * explainSystemVariable reads Phase 17 contributors as causes.
+ *     * explainCapacity (W6#3) describes substrate variables as sibling
+ *       readers of the shared ledgers — never as fed by the capacity.
  *   - entityCatalog enumerates every explainable entity on a settlement.
  *   - Pure: no settlement mutation.
  *   - Real-settlement integration: city-tier generated settlement
@@ -39,6 +41,7 @@ import {
   explainEscalationClock,
   explainHistoryBeat,
   explainSystemVariable,
+  explainCapacity,
   entityCatalog,
   relatedTraces,
 } from '../../src/domain/explanation.js';
@@ -419,6 +422,47 @@ describe('explainSystemVariable()', () => {
     const env = explainSystemVariable(fixtureSettlement(), 'mystery_variable');
     expect(env.entityType).toBe('system_variable');
     expect(env.causes).toEqual([]);
+  });
+});
+
+// ── explainCapacity — W6#3 honest provenance ───────────────────────────
+//
+// causalState never imports capacityModel: capacity lenses and substrate
+// variables are parallel readers of the same conserved ledgers. The
+// envelope must describe that sibling relationship — never claim the
+// capacity feeds the substrate.
+
+describe('explainCapacity() — sibling provenance', () => {
+  it('describes the substrate variable as a sibling reader, not a feed', () => {
+    const env = explainCapacity(fixtureSettlement(), 'capacity.food_production');
+    expect(env.downstreamEffects.length).toBeGreaterThan(0);
+    const row = env.downstreamEffects.find(e => e.target === 'food_security');
+    expect(row).toBeTruthy();
+    expect(row.effect).toBe('sibling_reader');
+    expect(row.reason).toMatch(/same conserved ledgers/i);
+    expect(row.reason).toMatch(/neither feeds the other/i);
+  });
+
+  it('never emits the retired feeds_substrate effect for any capacity', () => {
+    const s = fixtureSettlement();
+    for (const name of ['labor', 'healing', 'defense', 'food_production', 'transport', 'magical', 'religious_welfare', 'administrative', 'craft']) {
+      const env = explainCapacity(s, name);
+      expect(JSON.stringify(env), `${name} envelope claims feeds_substrate`).not.toMatch(/feeds_substrate/);
+      for (const e of env.downstreamEffects) {
+        expect(e.effect, `${name} → ${e.target}`).toBe('sibling_reader');
+      }
+    }
+  });
+
+  it('ifRemoved no longer claims downstream variables lose their input', () => {
+    const env = explainCapacity(fixtureSettlement(), 'defense');
+    expect(env.ifRemoved.consequences.join(' ')).not.toMatch(/lose their structural input/i);
+    expect(env.ifRemoved.consequences.join(' ')).toMatch(/do not follow/i);
+  });
+
+  it('still surfaces the sibling variable as a system_variable reference', () => {
+    const env = explainCapacity(fixtureSettlement(), 'transport');
+    expect(env.references.some(r => r.id === 'var.trade_connectivity' && r.type === 'system_variable')).toBe(true);
   });
 });
 

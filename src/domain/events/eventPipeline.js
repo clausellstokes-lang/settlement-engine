@@ -246,9 +246,21 @@ export function runEventPipeline(settlement, event, options = {}) {
 /**
  * High-level summary of an event pipeline result. Useful for the
  * "what just happened" UI surface and Tier 6.1 AI grounding.
+ *
+ * Two-band separation (W6#2): the display bands
+ * (Stable/Strained/Vulnerable/Critical) and the causal-substrate bands
+ * (surplus/adequate/strained/critical/collapsed) share words at
+ * incompatible thresholds, so concatenating both delta families into
+ * one list read as one vocabulary contradicting itself. `lines` is the
+ * DM-facing summary — warnings, narrative, and the display-band
+ * systemStateDeltas only. The substrate's causalStateDeltas ship
+ * separately in `diagnosticLines` for internal/debug surfaces; nothing
+ * DM-facing should render them.
  */
 export function summarizeEventResult(result) {
-  if (!result) return { lines: [], systemDeltaCount: 0, causalDeltaCount: 0 };
+  if (!result) {
+    return { lines: [], diagnosticLines: [], systemDeltaCount: 0, causalDeltaCount: 0, factionDeltaCount: 0 };
+  }
   const lines = [];
   if (result.warnings?.length) {
     for (const w of result.warnings) lines.push(`⚠ ${w.message}`);
@@ -257,11 +269,13 @@ export function summarizeEventResult(result) {
   for (const d of result.systemStateDeltas || []) {
     lines.push(d.explanation || `${d.key} changed by ${d.change}`);
   }
+  const diagnosticLines = [];
   for (const d of result.causalStateDeltas || []) {
-    lines.push(d.explanation || `${d.variable} changed by ${d.change}`);
+    diagnosticLines.push(d.explanation || `${d.variable} changed by ${d.change}`);
   }
   return {
     lines,
+    diagnosticLines,
     systemDeltaCount: (result.systemStateDeltas || []).length,
     causalDeltaCount: (result.causalStateDeltas || []).length,
     factionDeltaCount: (result.factionRelationshipDeltas || []).length,

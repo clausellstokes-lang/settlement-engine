@@ -14,8 +14,10 @@ import {
   buildAiLayerPrompt,
   isOrderedStability,
   formatStability,
+  normalizePlotHook,
   runAiLayer,
 } from '../../src/generators/aiLayer.js';
+import { extractSettlementContext, buildPrompt } from '../../src/components/new/dailyLifeLogic.js';
 
 describe('flattenServices (AI context normalizer)', () => {
   test('flattens the category-keyed object shape into one list', () => {
@@ -185,5 +187,159 @@ describe('crimeTypes (objects joined by .type, not [object Object])', () => {
       economicState: { safetyProfile: { crimeTypes: ['Smuggling'] } },
     }));
     expect(ctx.crimeTypes).toEqual(['Smuggling']);
+  });
+});
+
+// ── Phantom-read regressions (Wave 6 #1 remainder) ───────────────────────────
+// Four prompt fields read addresses nothing writes: powerStructure.conflicts
+// (conflicts are top-level), via.incomeSources (live on economicState),
+// via.metrics.criticalImports (live as economicState.necessityImports), and
+// settlement.plotHooks (live on economicViability + history events). Each
+// rendered empty/zero for every settlement ever generated.
+
+describe('conflicts (top-level write, was read at powerStructure.conflicts)', () => {
+  const conflictFixture = [
+    { type: 'faction_rivalry', description: 'Guild and temple contest the grain tithe' },
+    { type: 'succession', description: 'Two heirs claim the same seat' },
+  ];
+
+  test('reads the top-level conflicts the assembler actually writes', () => {
+    const ctx = extractFullContext(baseSettlement({
+      conflicts: conflictFixture,
+      powerStructure: { factions: [] }, // no ps.conflicts — the historical shape
+    }));
+    expect(ctx.conflicts).toEqual([
+      'Guild and temple contest the grain tithe',
+      'Two heirs claim the same seat',
+    ]);
+    expect(buildAiLayerPrompt(ctx)).toContain('Conflicts: Guild and temple contest the grain tithe');
+  });
+
+  test('powerStructure.conflicts still works (dual-written / edge shapes)', () => {
+    const ctx = extractFullContext(baseSettlement({
+      powerStructure: { factions: [], conflicts: conflictFixture },
+    }));
+    expect(ctx.conflicts).toHaveLength(2);
+  });
+
+  test('dailyLifeLogic reads the same seam', () => {
+    const ctx = extractSettlementContext(baseSettlement({
+      conflicts: conflictFixture,
+      powerStructure: { factions: [] },
+    }));
+    expect(ctx.conflicts).toEqual([
+      'Guild and temple contest the grain tithe',
+      'Two heirs claim the same seat',
+    ]);
+  });
+});
+
+describe('incomeSources (live on economicState, not the viability report)', () => {
+  test('counts economicState.incomeSources', () => {
+    const ctx = extractFullContext(baseSettlement({
+      economicState: { incomeSources: [
+        { source: 'Agriculture', percentage: 60 },
+        { source: 'Crafts', percentage: 25 },
+        { source: 'Trade', percentage: 15 },
+      ] },
+    }));
+    expect(ctx.incomeSources).toBe(3);
+    expect(buildAiLayerPrompt(ctx)).toContain('Income sources: 3');
+  });
+
+  test('legacy via.incomeSources fallback still counts', () => {
+    const ctx = extractFullContext(baseSettlement({
+      economicViability: { incomeSources: [{ source: 'Agriculture' }] },
+    }));
+    expect(ctx.incomeSources).toBe(1);
+  });
+});
+
+describe('criticalImports (live as economicState.necessityImports)', () => {
+  test('reads necessityImports and caps at 3', () => {
+    const ctx = extractFullContext(baseSettlement({
+      economicState: { necessityImports: ['Grain', 'Salt', 'Iron (weapons)', 'Medicinal herbs'] },
+    }));
+    expect(ctx.criticalImports).toEqual(['Grain', 'Salt', 'Iron (weapons)']);
+    expect(buildAiLayerPrompt(ctx)).toContain('Critical imports: Grain, Salt, Iron (weapons)');
+  });
+
+  test('absent ledger stays empty (no phantom default)', () => {
+    expect(extractFullContext(baseSettlement()).criticalImports).toEqual([]);
+  });
+});
+
+describe('plotHooks (merged from economicViability + history events)', () => {
+  test('merges viability { hook } objects and history strings, deduped, capped at 4', () => {
+    const ctx = extractFullContext(baseSettlement({
+      economicViability: { plotHooks: [
+        { category: 'Trade Disruption', hook: ' PLOT HOOK: The road trade route is cut off. Famine threatens within weeks.', severity: 'high' },
+        { category: 'Trade Politics', hook: ' PLOT HOOK: Price of grain spikes due to poor harvest elsewhere.', severity: 'medium' },
+      ] },
+      history: { historicalEvents: [
+        { name: 'The Grain Riots', plotHooks: ['Someone is poisoning the ruler slowly — and the physician knows'] },
+        { name: 'Old Fire', plotHooks: ['Someone is poisoning the ruler slowly — and the physician knows'] }, // duplicate
+        { name: 'The Schism', plotHooks: ['A relic claimed by both sides has resurfaced', 'The reformist leader is being blackmailed'] },
+      ] },
+    }));
+    expect(ctx.plotHooks).toEqual([
+      'The road trade route is cut off. Famine threatens within weeks.',
+      'Price of grain spikes due to poor harvest elsewhere.',
+      'Someone is poisoning the ruler slowly — and the physician knows',
+      'A relic claimed by both sides has resurfaced',
+    ]);
+    const prompt = buildAiLayerPrompt(ctx);
+    expect(prompt).toContain('EMERGING PLOT HOOKS');
+    expect(prompt).toContain('- The road trade route is cut off.');
+    expect(prompt).not.toContain('[object Object]');
+  });
+
+  test('normalizePlotHook strips the PLOT HOOK marker and tolerates junk', () => {
+    expect(normalizePlotHook(' PLOT HOOK: The route is cut off.')).toBe('The route is cut off.');
+    expect(normalizePlotHook({ hook: 'plot hook: lowercase marker too' })).toBe('lowercase marker too');
+    expect(normalizePlotHook({ text: 'legacy text shape' })).toBe('legacy text shape');
+    expect(normalizePlotHook('A hook with no marker')).toBe('A hook with no marker');
+    expect(normalizePlotHook(null)).toBe('');
+    expect(normalizePlotHook({ category: 'x' })).toBe('');
+  });
+
+  test('no hooks anywhere → empty, and the prompt omits the section', () => {
+    const ctx = extractFullContext(baseSettlement());
+    expect(ctx.plotHooks).toEqual([]);
+    expect(buildAiLayerPrompt(ctx)).not.toContain('EMERGING PLOT HOOKS');
+  });
+});
+
+// ── dailyLifeLogic surplus % (the '1200% above need' class) ──────────────────
+
+describe('dailyLifeLogic food surplus is a percent of dailyNeed', () => {
+  test('absolute lb/day surplus converts to a percent and renders sanely', () => {
+    const ctx = extractSettlementContext(baseSettlement({
+      economicViability: { metrics: { foodBalance: { dailyNeed: 1000, surplus: 400, deficit: 0 } } },
+    }));
+    expect(ctx.foodSurplus).toBe(40);
+    expect(buildPrompt(ctx)).toContain('Food: surplus (40% above need)');
+  });
+
+  test('a big absolute surplus no longer reads as a four-digit percent', () => {
+    const ctx = extractSettlementContext(baseSettlement({
+      economicViability: { metrics: { foodBalance: { dailyNeed: 70000, surplus: 84120, deficit: 0 } } },
+    }));
+    expect(ctx.foodSurplus).toBe(120);
+  });
+
+  test('no dailyNeed → no invented percent (0 reads as self-sufficient)', () => {
+    const ctx = extractSettlementContext(baseSettlement({
+      economicViability: { metrics: { foodBalance: { surplus: 84120, deficit: 0 } } },
+    }));
+    expect(ctx.foodSurplus).toBe(0);
+  });
+
+  test('deficit path is untouched', () => {
+    const ctx = extractSettlementContext(baseSettlement({
+      economicViability: { metrics: { foodBalance: { dailyNeed: 1000, deficit: 100, deficitPercent: 10 } } },
+    }));
+    expect(ctx.foodDeficit).toBe(10);
+    expect(ctx.foodSurplus).toBe(0);
   });
 });

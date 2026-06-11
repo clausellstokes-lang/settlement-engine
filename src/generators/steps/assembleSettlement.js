@@ -66,7 +66,11 @@ registerStep('assembleSettlement', {
     economicState,
     spatialLayout,
     availableServices,
-    powerStructure,
+    // Seam fix: conflicts are generated top-level (below) but several readers
+    // — aiLayer, dailyLifeLogic, and the generate-narrative edge function the
+    // owner deploys separately — expect powerStructure.conflicts. Dual-write
+    // so both addresses are live.
+    powerStructure: powerStructure ? { ...powerStructure, conflicts: powerStructure.conflicts ?? conflicts ?? [] } : powerStructure,
     settlementReason,
     npcs,
     relationships,

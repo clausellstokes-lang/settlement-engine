@@ -81,6 +81,30 @@ function collectUserEditsSummary(settlement) {
   }));
 }
 
+// ── Canonical capacity lenses ────────────────────────────────────────────
+//
+// Owner decision (W6#4): the AI payload exposes ONLY the five canonical
+// capacity lenses — the plan's food/defense/governance/magic/healing.
+// labor/craft/transport are declared noise (and religious_welfare is not
+// one of the five); handing the AI all nine bands invited it to narrate
+// shortfalls in lenses the product treats as internal.
+
+const CANONICAL_CAPACITY_LENSES = Object.freeze([
+  'food_production',
+  'defense',
+  'administrative', // the governance lens
+  'healing',
+  'magical',
+]);
+
+function canonicalCapacityBands(bands) {
+  const out = {};
+  for (const name of CANONICAL_CAPACITY_LENSES) {
+    if (bands && bands[name] !== undefined) out[name] = bands[name];
+  }
+  return out;
+}
+
 // ── Defaults ─────────────────────────────────────────────────────────────
 
 const DEFAULT_OPTIONS = Object.freeze({
@@ -252,7 +276,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
 
     bands: {
       substrate: { ...causal.bands },
-      capacities: { ...capacities.bands },
+      capacities: canonicalCapacityBands(capacities.bands),
     },
 
     // Tier 6.6: user-edited prose lives verbatim in `userEdits` so the

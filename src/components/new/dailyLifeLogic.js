@@ -27,7 +27,10 @@ export function extractSettlementContext(s) {
   // powerStructure.stability is a LABEL ('Tense (external threat)'), not a
   // 0-100 score — same trap aiLayer fixed; formatStability handles both.
   const stability     = ps.stability         ?? 50;
-  const conflicts     = ps.conflicts         || [];
+  // Conflicts are written TOP-LEVEL by assembleSettlement (which now also
+  // dual-writes them onto powerStructure) — reading only ps.conflicts kept
+  // this prompt conflict-blind (same phantom read aiLayer fixed).
+  const conflicts     = s.conflicts || ps.conflicts || [];
   const tensions      = hist.currentTensions || [];
 
   const instNames = insts.map(i => (i.name || '').toLowerCase());
@@ -39,7 +42,14 @@ export function extractSettlementContext(s) {
   // Food
   const fb = via.metrics?.foodBalance;
   const foodDeficit = fb?.deficit ? fb.deficitPercent || 0 : 0;
-  const foodSurplus = fb && !fb.deficit ? (fb.surplus || 0) : 0;
+  // fb.surplus is an ABSOLUTE lb/day quantity (economicGenerator), not a
+  // percent — rendering it raw produced the '1200% above need' prompt class
+  // (same trap aiLayer fixed). Derive the percent from dailyNeed; without a
+  // dailyNeed there is no honest percent, so stay at 0 (reads as 'roughly
+  // self-sufficient' downstream rather than inventing a number).
+  const foodSurplus = fb && !fb.deficit && fb.dailyNeed > 0
+    ? Math.round(((fb.surplus || 0) / fb.dailyNeed) * 100)
+    : 0;
 
   // Safety — use safetyProfile (same source as OverviewTab)
   const safetyRatioRaw = sp.safetyRatio ?? 1.0;
@@ -109,7 +119,9 @@ export function extractSettlementContext(s) {
     govCat,
     govPower,
     stability,
-    conflicts: conflicts.slice(0, 3).map(c => c.description || c.type).filter(Boolean),
+    // Conflict entries are { parties, issue, stakes, desc, … } (powerGenerator's
+    // generateConflicts) — description/type exist only on legacy/edge shapes.
+    conflicts: conflicts.slice(0, 3).map(c => c.desc || c.description || c.issue || c.type).filter(Boolean),
     tensions: tensions.slice(0, 3).map(t => t.title || t.type).filter(Boolean),
     foodDeficit,
     foodSurplus,

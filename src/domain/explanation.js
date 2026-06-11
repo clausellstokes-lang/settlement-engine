@@ -804,41 +804,35 @@ export function explainCapacity(settlement, capacityRef) {
 
   /** @type {Array<{target: string, effect: string, reason: string, step?: string}>} */
   const downstreamEffects = [];
-  // Capacity outcomes drive substrate variables. Surface a few canonical reads.
+  // Honest provenance (W6#3): capacities do NOT feed the substrate.
+  // causalState derives its variables from the conserved ledgers
+  // directly and never imports capacityModel — capacity and substrate
+  // are parallel readers of the same ledgers. Surface the substrate
+  // variable that shares this lens's inputs as a SIBLING, so a DM
+  // doesn't edit the capacity profile expecting the variable to follow.
+  const sibling = (target, label) => downstreamEffects.push({
+    target,
+    effect: 'sibling_reader',
+    reason: `${label} reads the same conserved ledgers as this capacity lens; neither feeds the other.`,
+  });
   switch (name) {
-    case 'labor':
-      downstreamEffects.push({ target: 'labor_capacity', effect: 'feeds_substrate', reason: 'Labor capacity reads from this profile.' });
-      break;
-    case 'healing':
-      downstreamEffects.push({ target: 'healing_capacity', effect: 'feeds_substrate', reason: 'Healing capacity reads from this profile.' });
-      break;
-    case 'defense':
-      downstreamEffects.push({ target: 'defense_readiness', effect: 'feeds_substrate', reason: 'Defense readiness reads from this profile.' });
-      break;
-    case 'food_production':
-      downstreamEffects.push({ target: 'food_security', effect: 'feeds_substrate', reason: 'Food security reads from this profile.' });
-      break;
-    case 'transport':
-      downstreamEffects.push({ target: 'trade_connectivity', effect: 'feeds_substrate', reason: 'Trade connectivity reads from this profile.' });
-      break;
-    case 'magical':
-      downstreamEffects.push({ target: 'magical_stability', effect: 'feeds_substrate', reason: 'Magical stability reads from this profile.' });
-      break;
-    case 'religious_welfare':
-      downstreamEffects.push({ target: 'religious_authority', effect: 'feeds_substrate', reason: 'Religious authority reads from this profile.' });
-      break;
-    case 'administrative':
-      downstreamEffects.push({ target: 'ruling_authority', effect: 'feeds_substrate', reason: 'Ruling authority reads from this profile.' });
-      break;
+    case 'labor':             sibling('labor_capacity', 'Labor capacity'); break;
+    case 'healing':           sibling('healing_capacity', 'Healing capacity'); break;
+    case 'defense':           sibling('defense_readiness', 'Defense readiness'); break;
+    case 'food_production':   sibling('food_security', 'Food security'); break;
+    case 'transport':         sibling('trade_connectivity', 'Trade connectivity'); break;
+    case 'magical':           sibling('magical_stability', 'Magical stability'); break;
+    case 'religious_welfare': sibling('religious_authority', 'Religious authority'); break;
+    case 'administrative':    sibling('ruling_authority', 'Ruling authority'); break;
     default:
-      // craft has no direct substrate variable yet
+      // craft has no sibling substrate variable yet
       break;
   }
 
   const ifRemoved = {
     consequences: [
       `${profile.label} capacity (currently ${profile.band}, supply ${profile.supply} vs demand ${profile.demand}) collapses;`
-      + ` downstream system variables lose their structural input.`,
+      + ` sibling system variables keep reading the shared ledgers and do not follow this profile.`,
     ],
   };
 

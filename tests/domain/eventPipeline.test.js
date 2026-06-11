@@ -16,6 +16,10 @@
  *     (e.g. damaging a granary should worsen food_security).
  *   - Faction relationship deltas come from Phase 14.
  *   - summarizeEventResult emits non-empty lines for a non-trivial event.
+ *   - W6#2 two-band separation: the DM-facing `lines` carry only
+ *     warnings + narrative + display-band systemStateDeltas; the
+ *     causal-substrate deltas (surplus/adequate/.../collapsed
+ *     vocabulary) live in `diagnosticLines`, never in `lines`.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -285,8 +289,10 @@ describe('summarizeEventResult()', () => {
   it('returns empty defaults for nullish input', () => {
     const s = summarizeEventResult(null);
     expect(s.lines).toEqual([]);
+    expect(s.diagnosticLines).toEqual([]);
     expect(s.systemDeltaCount).toBe(0);
     expect(s.causalDeltaCount).toBe(0);
+    expect(s.factionDeltaCount).toBe(0);
   });
 
   it('emits lines for a non-trivial event', () => {
@@ -302,6 +308,45 @@ describe('summarizeEventResult()', () => {
     expect(s.systemDeltaCount).toBe(result.systemStateDeltas.length);
     expect(s.causalDeltaCount).toBe(result.causalStateDeltas.length);
     expect(s.factionDeltaCount).toBe(result.factionRelationshipDeltas.length);
+  });
+
+  // ── W6#2 two-band separation pins ────────────────────────────────────
+
+  it('routes causal-substrate deltas to diagnosticLines, never lines', () => {
+    const result = {
+      warnings: [],
+      narrativeSummary: 'The granary burns.',
+      systemStateDeltas: [
+        { key: 'stability', change: -8, explanation: 'Stability fell noticeably (Stable → Strained)' },
+      ],
+      causalStateDeltas: [
+        { variable: 'food_security', change: -12, explanation: 'Food security fell sharply (adequate → collapsed) — pressure increased' },
+      ],
+      factionRelationshipDeltas: [],
+    };
+    const s = summarizeEventResult(result);
+    expect(s.lines).toEqual([
+      'The granary burns.',
+      'Stability fell noticeably (Stable → Strained)',
+    ]);
+    expect(s.diagnosticLines).toEqual([
+      'Food security fell sharply (adequate → collapsed) — pressure increased',
+    ]);
+  });
+
+  it('DM-facing lines contain no substrate-band vocabulary on a real event', () => {
+    const result = runEventPipeline(baseSettlement(), ev());
+    const s = summarizeEventResult(result);
+    // The words unique to the causal-band vocabulary must never reach
+    // the DM panel (display bands are Stable/Strained/Vulnerable/Critical).
+    expect(s.lines.join('\n')).not.toMatch(/\b(surplus|adequate|collapsed)\b/);
+    // And no causal explanation may leak into the DM list verbatim.
+    for (const d of result.causalStateDeltas) {
+      const text = d.explanation || `${d.variable} changed by ${d.change}`;
+      expect(s.lines).not.toContain(text);
+      expect(s.diagnosticLines).toContain(text);
+    }
+    expect(s.diagnosticLines.length).toBe(result.causalStateDeltas.length);
   });
 });
 

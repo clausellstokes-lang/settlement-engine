@@ -14,6 +14,7 @@ import {
   npcArchetypeBreakdown,
   dominantNpcRemovalImpact,
 } from '../../src/domain/npcProfile.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 
 // ── Sample NPCs ─────────────────────────────────────────────────────────
 
@@ -175,6 +176,50 @@ describe('deriveNpcProfile()', () => {
     const b = deriveNpcProfile(militaryCaptain());
     expect(b.leverage).not.toContain('mutate me');
     expect(b.vulnerabilities).not.toContain('mutate me too');
+  });
+});
+
+// ── Corruption truth (cohesion wave 6#6) ────────────────────────────────
+// The corruption pass + world-pulse mirror write corrupt / corruptionVector /
+// timesExposed / ousted onto raw NPCs, and the dossier card renders them raw.
+// The structured profile must carry the same four fields — and they must
+// never reach the public-safe projection (the npc allowlist excludes them).
+
+describe('corruption truth fields', () => {
+  it('carries corrupt / corruptionVector / timesExposed / ousted from the raw NPC', () => {
+    const profile = deriveNpcProfile(militaryCaptain({
+      corrupt: true, corruptionVector: 'greed', timesExposed: 2, ousted: true,
+    }));
+    expect(profile.corrupt).toBe(true);
+    expect(profile.corruptionVector).toBe('greed');
+    expect(profile.timesExposed).toBe(2);
+    expect(profile.ousted).toBe(true);
+  });
+
+  it('preserves an explicit generation-time corrupt:false verdict', () => {
+    const profile = deriveNpcProfile(militaryCaptain({ corrupt: false }));
+    expect(profile.corrupt).toBe(false);
+    expect(profile.corruptionVector).toBeNull();
+    expect(profile.timesExposed).toBe(0);
+    expect(profile.ousted).toBe(false);
+  });
+
+  it('a legacy save the corruption pass never judged stays tri-state null', () => {
+    const profile = deriveNpcProfile(militaryCaptain()); // fixture carries no corruption fields
+    expect(profile.corrupt).toBeNull();
+    expect(profile.corruptionVector).toBeNull();
+    expect(profile.timesExposed).toBe(0);
+    expect(profile.ousted).toBe(false);
+  });
+
+  it('publicSafe: raw corruption fields never reach the public npc allowlist', () => {
+    const out = toPublicSafe({
+      npcs: [militaryCaptain({ corrupt: true, corruptionVector: 'greed', timesExposed: 2, ousted: true })],
+    });
+    expect(out.npcs).toHaveLength(1);
+    for (const k of ['corrupt', 'corruptionVector', 'timesExposed', 'ousted']) {
+      expect(out.npcs[0][k]).toBeUndefined();
+    }
   });
 });
 

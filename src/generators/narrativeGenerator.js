@@ -149,8 +149,11 @@ const buildStressProfile = (events, _tier, _config) => {
 /**
  * Return a string describing the current state of tensions, possibly informed
  * by the settlement's historical events.
+ *
+ * Exported for the grounding pin tests; production access stays via
+ * generateCoherence (which nulls the non-string pass-through returns).
  */
-const generateSiegeCapability = (historicalEvents, currentTensions, age) => {
+export const generateSiegeCapability = (historicalEvents, currentTensions, age) => {
   if (!historicalEvents || historicalEvents.length === 0) return currentTensions;
 
   const recentEvents = historicalEvents.slice(0, 3).filter(e => e.yearsAgo < Math.max(30, age * 0.3));
@@ -163,7 +166,17 @@ const generateSiegeCapability = (historicalEvents, currentTensions, age) => {
   const recent = recentEvents[0];
   if (!recent?.name) return currentTensions;
 
-  return `The ${recent.name} is still present in living memory — ${currentTensions || 'its effects shape current decisions'}.`;
+  // currentTensions is an ARRAY of tension objects ({ type, description, … },
+  // historyGenerator) — interpolating it raw printed '[object Object]' (or a
+  // comma-spliced blob), and the `|| fallback` never fired because an empty
+  // array is truthy. Use the PRIMARY (first) tension's prose; fall back when
+  // the array is empty.
+  const tensionList = Array.isArray(currentTensions) ? currentTensions : [currentTensions];
+  const primaryTension = tensionList
+    .map(t => (typeof t === 'string' ? t : t?.title || t?.description || t?.type))
+    .find(Boolean);
+
+  return `The ${recent.name} is still present in living memory — ${primaryTension || 'its effects shape current decisions'}.`;
 };
 
 // ─── STRESS_DESCS ─────────────────────────────────────────────────────────────
@@ -1050,6 +1063,27 @@ export const generatePressureSentence = settlement => {
 
 // ─── generateArrivalScene ─────────────────────────────────────────────────────
 /**
+ * ARRIVAL_SCENES is keyed by SCENE (market/river/smoke/guild/ordinary), not
+ * by route — indexing it with the raw route meant only 'river' ever hit and
+ * every other settlement opened on the bare '… comes into view.' fallback.
+ * Deterministic route → scene mapping:
+ *   crossroads             → market  (roads converge on the market square)
+ *   port / river           → river   (working-waterfront approach)
+ *   isolated/mountain_pass → smoke   (you see the smoke long before the buildings)
+ *   road + anything else   → ordinary (the default in generateArrivalScene)
+ * 'guild' has no route that implies it; it stays reserved for a future
+ * craft-economy key. Exported so the joins harness can assert the mapping
+ * lands on real ARRIVAL_SCENES keys.
+ */
+export const ROUTE_TO_SCENE = Object.freeze({
+  crossroads: 'market',
+  port: 'river',
+  river: 'river',
+  isolated: 'smoke',
+  mountain_pass: 'smoke',
+});
+
+/**
  * Generate the arrival scene text shown at the top of the Overview tab.
  * Combines a stress-specific vignette (or generic arrival) with an
  * architectural detail and landmark description.
@@ -1057,7 +1091,7 @@ export const generatePressureSentence = settlement => {
 export const generateArrivalScene = settlement => {
   if (!settlement) return null;
 
-  const { name, tier, config = {}, institutions = [], stress, economicState = {} } = settlement;
+  const { name, tier, config = {}, institutions = [], stress } = settlement;
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
   const primaryStress = stresses.length
@@ -1086,11 +1120,12 @@ export const generateArrivalScene = settlement => {
 
   // Try stress-specific vignette first
   let openingLine;
+  const sceneKey = ROUTE_TO_SCENE[route] || 'ordinary';
   if (primaryStress && STRESS_DESCS[primaryStress]) {
     openingLine = pickRandom2(STRESS_DESCS[primaryStress])(name);
-  } else if (ARRIVAL_SCENES[route]) {
-    // Generic route-based arrival
-    const template = pickRandom2(ARRIVAL_SCENES[route]);
+  } else if (ARRIVAL_SCENES[sceneKey]) {
+    // Generic route-based arrival, via the route → scene mapping above
+    const template = pickRandom2(ARRIVAL_SCENES[sceneKey]);
     openingLine = typeof template === 'function' ? template(name, tier) : template;
   } else {
     openingLine = `${name} comes into view.`;
@@ -1102,12 +1137,15 @@ export const generateArrivalScene = settlement => {
   // Landmark from institution presence
   const landmarkNote = checkInstCompat(institutions, tier, magicPriority);
 
-  // Addon (trade commodity note, prosperity note, etc.)
+  // Route-flavour addon. ARRIVAL_ADDONS is keyed by ROUTE (port/river/
+  // crossroads/road/isolated) but was indexed by economicState.tradeCommodity
+  // — a field nothing writes on economicState (historyGenerator computes
+  // tradeCommodity into history context only), so addons never fired. Index
+  // by route; templates take (name, tier). mountain_pass has no addon pool
+  // yet — the ?.length guard keeps that honest.
   let addon = null;
-  if (ARRIVAL_ADDONS && economicState.tradeCommodity) {
-    const addonPool = ARRIVAL_ADDONS[economicState.tradeCommodity];
-    if (addonPool?.length) addon = pickRandom2(addonPool)(name);
-  }
+  const addonPool = ARRIVAL_ADDONS?.[route];
+  if (addonPool?.length) addon = pickRandom2(addonPool)(name, tier);
 
   const parts = [openingLine, architecturalNote, landmarkNote, addon].filter(Boolean);
   return parts.join(' ');

@@ -128,17 +128,24 @@ function deriveFoodCulture(s, ctx) {
   return slot('food_culture', text, 'capacity.food_production + supply chains', refs);
 }
 
+// Owner decision (W6#4): labor/craft/transport are noise lenses — this
+// slot no longer reads or cites them. Dawn work re-anchors on the
+// canonical food_production + defense lenses (what the first hours of
+// the day are FOR: bread and walls); the guild/merchant flavor the
+// craft band used to gate now keys off faction power alone.
 function deriveDawnWork(s, ctx) {
   const refs = [];
-  const labor = ctx.capacities.capacities.labor;
-  const craft = ctx.capacities.capacities.craft;
+  const food = ctx.capacities.capacities.food_production;
+  const defense = ctx.capacities.capacities.defense;
   const dominantCraftPower = ctx.profiles.find(p => p.archetype === 'craft')?.power || 0;
   const dominantMerchantPower = ctx.profiles.find(p => p.archetype === 'merchant')?.power || 0;
 
   let text;
-  if (labor.band === 'collapsed' || labor.band === 'critical') {
-    text = 'The streets are quieter than they should be — too few hands, too many tasks.';
-  } else if (craft.band === 'surplus' && dominantCraftPower >= 25) {
+  if (food.band === 'critical' || food.band === 'collapsed') {
+    text = 'Dawn work is the search for food — foragers leave before light, and the granary queue forms before the ovens are warm.';
+  } else if (defense.band === 'critical' || defense.band === 'collapsed') {
+    text = 'The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.';
+  } else if (dominantCraftPower >= 25) {
     text = 'Smithy fires light before sunrise; guild-callers move from shop to shop, and apprentices haul water before the bell.';
   } else if (dominantMerchantPower >= 30) {
     text = 'Merchant caravans roll before light; porters and apprentices queue at the warehouses, and dawn brings the smell of woodsmoke and grain.';
@@ -146,10 +153,10 @@ function deriveDawnWork(s, ctx) {
     text = 'Bakers light their ovens first, then the smiths; the watch changes as the gates open.';
   }
 
-  refs.push({ id: 'capacity.labor', label: 'Labor', type: 'capacity' });
-  refs.push({ id: 'capacity.craft', label: 'Craft', type: 'capacity' });
+  refs.push({ id: 'capacity.food_production', label: 'Food production', type: 'capacity' });
+  refs.push({ id: 'capacity.defense', label: 'Defense', type: 'capacity' });
 
-  return slot('dawn_work', text, 'capacity.labor + capacity.craft + dominant faction', refs);
+  return slot('dawn_work', text, 'capacity.food_production + capacity.defense + dominant faction', refs);
 }
 
 function deriveGatheringPlaces(s, _ctx) {

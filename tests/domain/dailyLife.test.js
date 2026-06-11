@@ -102,18 +102,52 @@ describe('food_culture behavior', () => {
 });
 
 describe('dawn_work behavior', () => {
-  it('changes tone when labor is critical', () => {
-    const collapsed = deriveDailyLifeSlot('dawn_work', {
-      population: 100,
-      activeConditions: [{ archetype: 'plague', severity: 1.0 }],
+  // W6#4 owner decision: labor/craft/transport are noise lenses. The
+  // slot anchors on the canonical food_production + defense lenses.
+  it('changes tone when food production is critical', () => {
+    const starving = deriveDailyLifeSlot('dawn_work', {
+      population: 5000,
+      institutions: [],
+      activeConditions: [{ archetype: 'food_anchor_lost', severity: 1.0 }],
     });
-    expect(collapsed.text.toLowerCase()).toMatch(/(quieter|too few|hands)/);
+    expect(starving.text.toLowerCase()).toMatch(/(forager|granary queue|search for food)/);
   });
 
-  it('always references both labor and craft capacities', () => {
+  it('changes tone when defense is critical', () => {
+    const besieged = deriveDailyLifeSlot('dawn_work', {
+      population: 100,
+      institutions: [
+        { id: 'i1', name: 'Town Granary' },
+        { id: 'i2', name: 'River Mill' },
+        { id: 'i3', name: 'Fisheries' },
+      ],
+      config: { monsterThreat: 'plagued' },
+    });
+    expect(besieged.text.toLowerCase()).toMatch(/(walls|watch musters|rounds)/);
+  });
+
+  it('keys the guild flavor off craft faction power alone', () => {
+    const guildTown = deriveDailyLifeSlot('dawn_work', {
+      population: 2000,
+      institutions: [
+        { id: 'i1', name: 'Town Granary' },
+        { id: 'i2', name: 'River Mill' },
+        { id: 'i3', name: 'Fisheries' },
+      ],
+      powerStructure: {
+        factions: [{ id: 'faction.artisans', faction: "Artisans' Guild", name: "Artisans' Guild", power: 60 }],
+      },
+    });
+    expect(guildTown.text.toLowerCase()).toMatch(/(smithy|guild-callers)/);
+  });
+
+  it('references the canonical food_production + defense lenses, never labor/craft', () => {
     const s = deriveDailyLifeSlot('dawn_work', { population: 2000 });
-    expect(s.references.some(r => r.id === 'capacity.labor')).toBe(true);
-    expect(s.references.some(r => r.id === 'capacity.craft')).toBe(true);
+    expect(s.references.some(r => r.id === 'capacity.food_production')).toBe(true);
+    expect(s.references.some(r => r.id === 'capacity.defense')).toBe(true);
+    expect(s.references.some(r => r.id === 'capacity.labor')).toBe(false);
+    expect(s.references.some(r => r.id === 'capacity.craft')).toBe(false);
+    expect(s.source).not.toMatch(/capacity\.(labor|craft)/);
   });
 });
 
@@ -321,6 +355,15 @@ describe('deriveDailyLife()', () => {
     for (const line of life.summary) {
       expect(line).toMatch(/:.*/);
       expect(line.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('no slot cites a noise lens (W6#4: labor/craft/transport)', () => {
+    const life = deriveDailyLife({ population: 2000, config: { monsterThreat: 'plagued' } });
+    for (const key of DAILY_LIFE_SLOTS) {
+      for (const ref of life.slots[key].references) {
+        expect(ref.id, `${key} cites ${ref.id}`).not.toMatch(/^capacity\.(labor|craft|transport)$/);
+      }
     }
   });
 });

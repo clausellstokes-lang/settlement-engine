@@ -29,6 +29,20 @@ export function flattenServices(services) {
 }
 
 /**
+ * Plot hooks arrive in three shapes: economicViability.plotHooks entries are
+ * { category, hook, severity } objects whose hook text carries a literal
+ * ' PLOT HOOK: ' marker (redundant under the prompt's EMERGING PLOT HOOKS
+ * header), history event hooks are plain strings, and the legacy top-level
+ * settlement.plotHooks (never written today) used { text } / string. Reduce
+ * all of them to clean prompt-ready text; non-strings normalize to ''.
+ */
+export function normalizePlotHook(h) {
+  const text = typeof h === 'string' ? h : (h?.hook ?? h?.text ?? '');
+  if (typeof text !== 'string') return '';
+  return text.replace(/^\s*PLOT HOOK:\s*/i, '').trim();
+}
+
+/**
  * powerStructure.stability is a LABEL ('Stable', 'Ordered (strong military
  * presence)', 'Tense (external threat)', 'Unstable — criminal governance', …;
  * powerGenerator's vocabulary), not a 0-100 score. Rendering it as
@@ -65,7 +79,11 @@ export function extractFullContext(s) {
   const scores = dp.scores || {};
   const factions = ps.factions || [];
   const governing = factions.find(f => f.isGoverning);
-  const conflicts = ps.conflicts || [];
+  // Conflicts are written TOP-LEVEL by assembleSettlement (which now also
+  // dual-writes them onto powerStructure); reading only ps.conflicts meant
+  // every settlement looked conflict-free to the prompt. Prefer the live
+  // top-level write, keep ps.conflicts for the dual-written/edge shapes.
+  const conflicts = s.conflicts || ps.conflicts || [];
   const tensions  = hist.currentTensions || [];
   const instNames = insts.map(i => i.name);
   const instByCat = insts.reduce((acc, i) => {
@@ -110,7 +128,10 @@ export function extractFullContext(s) {
     prosperity:   via.summary?.split('—')[0]?.trim() || null,
     econScore:    Math.round(eco.compound?.economyOutput ?? scores.economic ?? 50),
     chains:       chains.map(c => `${c.label || c.chainId} (${c.status || 'ok'})`).slice(0, 8),
-    incomeSources: via.incomeSources?.length || 0,
+    // incomeSources live on economicState (economicGenerator's return), NOT
+    // on the viability report — via.incomeSources never exists, so this
+    // always rendered 'Income sources: 0'. via kept as a legacy fallback.
+    incomeSources: (eco.incomeSources || via.incomeSources)?.length || 0,
     foodSituation,
     tradeDeps:    eco.tradeDependencies
       ?.filter(d => d.severity === 'critical')
@@ -136,7 +157,9 @@ export function extractFullContext(s) {
     stability:    ps.stability ?? null,
     factionCount: factions.length,
     factions:     factions.slice(0, 5).map(f => `${f.faction} (${f.power}%)`),
-    conflicts:    conflicts.slice(0, 3).map(c => c.description || c.type).filter(Boolean),
+    // Conflict entries are { parties, issue, stakes, desc, … } (powerGenerator's
+    // generateConflicts) — description/type exist only on legacy/edge shapes.
+    conflicts:    conflicts.slice(0, 3).map(c => c.desc || c.description || c.issue || c.type).filter(Boolean),
     tensions:     tensions.slice(0, 3).map(t => t.title || t.type).filter(Boolean),
 
     // NPCs
@@ -153,7 +176,12 @@ export function extractFullContext(s) {
     // Services & Resources
     services:       flattenServices(s.availableServices).slice(0, 8).map(svc => svc?.name || svc),
     resources:      (s.resourceAnalysis?.nearbyResources || []).slice(0, 5),
-    criticalImports: (via.metrics?.criticalImports || []).slice(0, 3),
+    // via.metrics has no criticalImports key (only foodBalance/tradeAccess/
+    // counts) — the live critical-imports source is economicState.
+    // necessityImports: plain strings ('Grain', 'Salt', …), stress-augmented
+    // by economicGenerator (siege/famine push Grain+Salt, plague pushes
+    // Medicinal herbs). via.metrics kept as a legacy fallback.
+    criticalImports: (eco.necessityImports || via.metrics?.criticalImports || []).slice(0, 3),
 
     // Viability
     viable:       via.viable,
@@ -171,7 +199,16 @@ export function extractFullContext(s) {
     craftsInsts:  (instByCat.Crafts || []).slice(0, 4),
     defenseInsts: (instByCat.Defense || []).slice(0, 3),
     religionInsts:(instByCat.Religious || []).slice(0, 3),
-    plotHooks:    (s.plotHooks || []).slice(0, 4).map(h => h.text || h),
+    // settlement.plotHooks is never written — the live hooks are
+    // economicViability.plotHooks ({ category, hook, severity } objects) and
+    // the per-event history.historicalEvents[].plotHooks (strings). Merge
+    // both (top-level kept as a legacy fallback), normalize to plain text,
+    // dedupe, and cap at 4 to keep the prompt budget where it was.
+    plotHooks:    [...new Set([
+      ...(via.plotHooks || []),
+      ...(hist.historicalEvents || []).flatMap(e => e?.plotHooks || []),
+      ...(s.plotHooks || []),
+    ].map(normalizePlotHook).filter(Boolean))].slice(0, 4),
 
     // Spatial
     quarters:     (s.spatialLayout?.quarters || []).map(q => q.name).slice(0, 6),
