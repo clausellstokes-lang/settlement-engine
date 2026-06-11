@@ -4,6 +4,7 @@
 
 import {TIER_ORDER} from '../data/constants.js';
 import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
+import {ECONOMY_MODE_MARKET_MULT} from './neighbourGenerator.js';
 
 const getPriorityModifiers = (tier, goodsToggles = {}) => {
   const tierGoods = GOODS_MODIFIERS_BY_TIER[tier] || {};
@@ -216,34 +217,29 @@ export const getBaseChance = (
         chance *= 0.4;
       }
 
-      // Defense / military
+      // H13/H14 join repair (R3): this branch used to read dyn.defense/
+      // dyn.market/dyn.craft/dyn.criminal/dyn.espionage/dyn.government —
+      // keys REL_DYNAMICS never defined — so every relationship type
+      // multiplied by the same 1.0 and the picker's promised effect was a
+      // no-op. It now reads ONLY keys the table defines (militaryBias,
+      // economyMode); the craft/criminal/government reads are gone because
+      // the table carries no magnitudes for those axes (they were identity
+      // no-ops, and inventing numbers for them is redesign, not wiring).
+
+      // Defense / military — a hostile neighbour militarizes (militaryBias
+      // 0.5 → ×1.5), an allied one barely (0.05 → ×1.05), trade/neutral not
+      // at all (0 → ×1.0).
       if (cat.includes('defense') || cat.includes('military') ||
           inst.includes('garrison') || inst.includes('barracks') ||
           inst.includes('fortif') || inst.includes('guard')) {
-        chance *= (dyn.defense || 1.0) * (0.7 + (profile.militaryStrength || 0.5) * 0.6);
+        chance *= (1 + (dyn.militaryBias || 0)) * (0.7 + (profile.militaryStrength || 0.5) * 0.6);
       }
 
-      // Market / economy
+      // Market / economy — trade orientation flows through economyMode
+      // (complement ×1.4, dependent ×1.6, compete ×1.2, suppress ×0.4).
       if (cat.includes('economy') || inst.includes('market') ||
           inst.includes('guild') || inst.includes('merchant')) {
-        chance *= (dyn.market || 1.0) * (0.8 + (profile.economicStrength || 0.5) * 0.4);
-      }
-
-      // Craft
-      if (cat.includes('craft') || inst.includes('workshop') || inst.includes('smith') ||
-          inst.includes('weaver') || inst.includes('tanner')) {
-        chance *= (dyn.craft || 1.0);
-      }
-
-      // Criminal / espionage
-      if (cat.includes('criminal') || inst.includes('thieves') || inst.includes('smuggl')) {
-        chance *= (dyn.criminal || 1.0) * (dyn.espionage || 1.0);
-      }
-
-      // Government / administration
-      if (cat.includes('government') || cat.includes('administration') ||
-          inst.includes('council') || inst.includes('court')) {
-        chance *= (dyn.government || 1.0);
+        chance *= (ECONOMY_MODE_MARKET_MULT[dyn.economyMode] ?? 1.0) * (0.8 + (profile.economicStrength || 0.5) * 0.4);
       }
 
     } else {

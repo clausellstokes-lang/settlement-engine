@@ -43,6 +43,55 @@ describe('inter-settlement flows', () => {
     expect(trade.condition.archetype).toBe('regional_import_shortage');
   });
 
+  // H8 follow-through (R3): migration reads each source's EFFECTIVE severity
+  // (severityBySettlement) — a spread target displaces fewer refugees than
+  // the origin, and one attenuated below the displacement band displaces none.
+  test('a spread-target source displaces fewer refugees than the origin', () => {
+    const spreadSnapshot = (spreadEntry) => ({
+      worldState: {
+        tick: 5,
+        stressors: [{
+          id: 'world_stressor.famine.a',
+          type: 'famine',
+          severity: 0.9,
+          affectedSettlementIds: ['a', 's'],
+          severityBySettlement: { s: spreadEntry },
+        }],
+      },
+      regionalGraph: ensureRegionalGraph({ channels: [
+        { type: 'migration_pressure', from: 'a', to: 'b', status: 'confirmed' },
+        { type: 'migration_pressure', from: 's', to: 'b', status: 'confirmed' },
+      ] }),
+      byId: new Map([
+        ['a', { id: 'a', name: 'Ashford', settlement: { population: 2000 }, activeConditions: [] }],
+        ['s', { id: 's', name: 'Spreadton', settlement: { population: 2000 }, activeConditions: [] }],
+        ['b', { id: 'b', name: 'Briar', settlement: { population: 1500 }, activeConditions: [] }],
+      ]),
+      settlements: [
+        { id: 'a', name: 'Ashford', activeConditions: [], causal: { scores: {} } },
+        { id: 's', name: 'Spreadton', activeConditions: [], causal: { scores: {} } },
+        { id: 'b', name: 'Briar', activeConditions: [], causal: { scores: {} } },
+      ],
+    });
+
+    // Spread target experiences 0.65 against the origin's 0.9 — same
+    // population, fewer refugees, lower condition severity.
+    const flows = deriveFlowCandidates(spreadSnapshot(0.65), { tick: 5 });
+    const fromOrigin = flows.find(f => f.candidateType === 'flow_migration' && f.metadata.from === 'a');
+    const fromSpread = flows.find(f => f.candidateType === 'flow_migration' && f.metadata.from === 's');
+    expect(fromOrigin).toBeTruthy();
+    expect(fromSpread).toBeTruthy();
+    expect(fromSpread.metadata.populationDelta).toBeLessThan(fromOrigin.metadata.populationDelta);
+    expect(fromSpread.severity).toBeLessThan(fromOrigin.severity);
+
+    // Attenuated below the 0.6 displacement band: the spread target
+    // displaces nobody while the origin still does.
+    const below = deriveFlowCandidates(spreadSnapshot(0.45), { tick: 5 })
+      .filter(f => f.candidateType === 'flow_migration');
+    expect(below.some(f => f.metadata.from === 'a')).toBe(true);
+    expect(below.some(f => f.metadata.from === 's')).toBe(false);
+  });
+
   test('no flows without confirmed channels', () => {
     const snapshot = {
       worldState: { tick: 5, stressors: [{ id: 's', type: 'famine', severity: 0.8, affectedSettlementIds: ['a'] }] },

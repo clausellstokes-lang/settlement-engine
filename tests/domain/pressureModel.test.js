@@ -79,6 +79,21 @@ describe('pressure model — condition matching by archetype id', () => {
     expect(idx.get('trustCrisis', 'food').score).toBeCloseTo(idx.get('bare', 'food').score, 10);
   });
 
+  test('vassal_extraction is commerce, not war: trade/economy pressure rises, conflict stays flat', () => {
+    // R3 decision: tribute drains wealth — the vassal_extraction archetype
+    // joins the economy/trade pressure class and must never read as conflict.
+    const idx = indexFor([item('bare'), item('vassal', [{ archetype: 'vassal_extraction' }])]);
+
+    expect(idx.get('vassal', 'trade').score).toBeCloseTo(idx.get('bare', 'trade').score + 0.16, 10);
+    expect(idx.get('vassal', 'economy').score).toBeCloseTo(idx.get('bare', 'economy').score + 0.14, 10);
+    // The reason strings name the real archetype.
+    expect(idx.get('vassal', 'trade').reasons.join(' ')).toContain('vassal_extraction');
+    expect(idx.get('vassal', 'economy').reasons.join(' ')).toContain('vassal_extraction');
+    // Zero conflict (and defense) pressure: tribute is not a war.
+    expect(idx.get('vassal', 'conflict').score).toBeCloseTo(idx.get('bare', 'conflict').score, 10);
+    expect(idx.get('vassal', 'defense').score).toBeCloseTo(idx.get('bare', 'defense').score, 10);
+  });
+
   test('a trade-dependency supplier is in a food crisis only by archetype', () => {
     const supplier = item('s', [{ archetype: 'famine' }]);
     const proseSupplier = item('p', [{

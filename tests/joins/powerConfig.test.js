@@ -238,6 +238,14 @@ describe('config echo: applyChange-style rebuild does not re-feed derived state'
     for (const key of DERIVED_CONFIG_KEYS) {
       expect(stripped[key], `${key} is derived and must be stripped`).toBeUndefined();
     }
+    // H14 (R3): resolveNeighbour writes neighborRelationship into the
+    // resolved config snapshot — the fixture has no neighbour, so pin the
+    // strip on a config that carries the seam key explicitly.
+    const withNeighbour = stripDerivedConfigKeys({
+      ...s.config,
+      neighborRelationship: { neighborName: 'Probeholm', relationshipType: 'hostile' },
+    });
+    expect(withNeighbour.neighborRelationship).toBeUndefined();
     // User-facing vocabulary survives the legacy fallback.
     expect(stripped.settType).toBe('city');
     expect(stripped.culture).toBe('germanic');

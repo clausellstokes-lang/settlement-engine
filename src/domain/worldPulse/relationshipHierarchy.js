@@ -1,4 +1,4 @@
-import { ensureRelationshipState, getRelationshipSettlements, relationshipKeyFromEdge } from './relationshipEvolution.js';
+import { ensureRelationshipState, getRelationshipSettlements, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
 
 const HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
 const POSITIVE_TYPES = new Set(['allied', 'trade_partner', 'patron', 'client']);
@@ -112,28 +112,13 @@ function updateGraphEdge(edge, toType, now) {
   };
 }
 
-/**
- * @param {{ worldState?: any, regionalGraph?: any, vassalEdge?: any, now?: string, tick?: number }} [args]
- */
-export function resolveRelationshipHierarchy(args = {}) {
-  const { worldState, regionalGraph, vassalEdge, now, tick } = args;
-  if (!worldState || !regionalGraph || !vassalEdge) {
-    return { worldState, regionalGraph, changes: [] };
-  }
-  const { from: overlordId, to: vassalId } = getRelationshipSettlements(vassalEdge);
-  if (!overlordId || !vassalId) {
-    return { worldState, regionalGraph, changes: [] };
-  }
-
+// Shared cascade scan: every third-party edge of the vassal whose label the
+// hierarchy would rewrite, decided against the CURRENT states. Pure read —
+// both the resolve (apply) and the preview (proposal prose) walk this list.
+function cascadeTargets({ worldState, regionalGraph, vassalEdge, overlordId, vassalId, vassalState }) {
   const causeRelationshipKey = relationshipKeyFromEdge(vassalEdge);
-  const vassalState = ensureRelationshipState(vassalEdge, worldState.relationshipStates?.[causeRelationshipKey]);
-  if (vassalState.relationshipType !== 'vassal') {
-    return { worldState, regionalGraph, changes: [] };
-  }
-
-  const states = { ...(worldState.relationshipStates || {}) };
-  let edges = regionalGraph.edges || [];
-  const changes = [];
+  const states = worldState.relationshipStates || {};
+  const targets = [];
 
   for (const edge of regionalGraph.edges || []) {
     const key = relationshipKeyFromEdge(edge);
@@ -154,6 +139,69 @@ export function resolveRelationshipHierarchy(args = {}) {
     const decision = hierarchyDecision({ currentType, overlordType, vassalState });
     if (!decision || decision.toType === currentType) continue;
 
+    targets.push({ key, edge, currentType, decision, thirdPartyId: String(thirdPartyId) });
+  }
+  return targets;
+}
+
+/**
+ * H15 preview — the realignments the cascade WILL execute once this vassal
+ * edge applies. Called at proposal-authoring time (the edge is still hostile,
+ * so no vassal-state gate) with the projected post-apply vassal state, so the
+ * proposal summary tells the DM the full consequence before accepting. Pure
+ * read: no states or edges are touched.
+ * @param {{ worldState?: any, regionalGraph?: any, vassalEdge?: any, overlordId?: string, vassalId?: string, vassalState?: any }} [args]
+ * @returns {Array<{ edgeKey: string, fromType: string, toType: string, reason: string, thirdPartyId: string }>}
+ */
+export function previewRelationshipHierarchyCascade(args = {}) {
+  const { worldState, regionalGraph, vassalEdge } = args;
+  if (!worldState || !regionalGraph || !vassalEdge) return [];
+  const settlements = getRelationshipSettlements(vassalEdge);
+  if (!settlements.from || !settlements.to) return [];
+  const causeRelationshipKey = relationshipKeyFromEdge(vassalEdge);
+  const currentState = ensureRelationshipState(vassalEdge, worldState.relationshipStates?.[causeRelationshipKey]);
+  const vassalState = args.vassalState || currentState;
+  const fallbackRoles = relationshipRoles(vassalEdge, currentState);
+  const overlordId = String(args.overlordId || fallbackRoles.seniorId);
+  const vassalId = String(args.vassalId || fallbackRoles.juniorId);
+  return cascadeTargets({ worldState, regionalGraph, vassalEdge, overlordId, vassalId, vassalState })
+    .map(target => ({
+      edgeKey: target.key,
+      fromType: target.currentType,
+      toType: target.decision.toType,
+      reason: target.decision.reason,
+      thirdPartyId: target.thirdPartyId,
+    }));
+}
+
+/**
+ * @param {{ worldState?: any, regionalGraph?: any, vassalEdge?: any, now?: string, tick?: number }} [args]
+ */
+export function resolveRelationshipHierarchy(args = {}) {
+  const { worldState, regionalGraph, vassalEdge, now, tick } = args;
+  if (!worldState || !regionalGraph || !vassalEdge) {
+    return { worldState, regionalGraph, changes: [], cascadeChanges: [] };
+  }
+  const settlements = getRelationshipSettlements(vassalEdge);
+  if (!settlements.from || !settlements.to) {
+    return { worldState, regionalGraph, changes: [], cascadeChanges: [] };
+  }
+
+  const causeRelationshipKey = relationshipKeyFromEdge(vassalEdge);
+  const vassalState = ensureRelationshipState(vassalEdge, worldState.relationshipStates?.[causeRelationshipKey]);
+  if (vassalState.relationshipType !== 'vassal') {
+    return { worldState, regionalGraph, changes: [], cascadeChanges: [] };
+  }
+  // H16: the overlord may be state-stamped onto the relationship (subjugation
+  // by the authored 'to' side) rather than sitting at the edge's 'from'.
+  const { seniorId: overlordId, juniorId: vassalId } = relationshipRoles(vassalEdge, vassalState);
+
+  const states = { ...(worldState.relationshipStates || {}) };
+  let edges = regionalGraph.edges || [];
+  const changes = [];
+
+  for (const target of cascadeTargets({ worldState, regionalGraph, vassalEdge, overlordId, vassalId, vassalState })) {
+    const { key, edge, currentType, decision, thirdPartyId } = target;
     const updatedState = updateRelationshipState({
       state: { relationshipStates: states },
       edge,
@@ -190,5 +238,13 @@ export function resolveRelationshipHierarchy(args = {}) {
     worldState: { ...worldState, relationshipStates: states },
     regionalGraph: { ...regionalGraph, edges },
     changes,
+    // H15 coordination shape for the applyWorldPulse news wiring (T2): one
+    // entry per flipped third-party edge, with truthful from/to labels.
+    cascadeChanges: changes.map(change => ({
+      edgeKey: change.relationshipKey,
+      fromType: change.fromType,
+      toType: change.toType,
+      reason: change.reason,
+    })),
   };
 }

@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+  applyRelationshipPatch,
   buildRelationshipPostures,
   buildSettlementRelationshipMemoryContext,
   ensureRelationshipStatesForGraph,
@@ -179,6 +180,70 @@ describe('relationship memory and posture', () => {
     const postures = buildRelationshipPostures({ worldState, regionalGraph: graph, currentTick: 7 });
     expect(postures[0].recentMemory.filter(m => m.tick === 7)).toHaveLength(1);
     expect(postures[0].memoryScore).toBeCloseTo(0.6, 2);
+  });
+
+  // R3 pin (R4 handoff, lag case): a label proposal SELECTED at tick T but
+  // ACCEPTED at tick T' lands its incident/history rows at T' while the pulse
+  // record sits at T — the tick+type join cannot pair them. The apply stamps
+  // the outcome id onto every row it writes and the dedupe joins on it first.
+  test('a label proposal selected at tick T and accepted at tick T-prime scores once', () => {
+    const graph = { edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'hostile' }] };
+    const outcome = {
+      id: 'candidate.relationship.hostile_occupation_pressure.edge.a.b.5',
+      type: 'relationship',
+      candidateType: 'hostile_occupation_pressure',
+      relationshipKey: 'edge.a.b',
+      severity: 0.8,
+      relationshipPatch: { proposedRelationshipType: 'vassal' },
+      proposalPayload: { kind: 'relationship_label_change', fromType: 'hostile', toType: 'vassal', reason: 'Conquest becomes formal vassalage.' },
+    };
+    // Selected at tick 5: the pulse records the outcome while it waits.
+    let worldState = {
+      tick: 7,
+      relationshipStates: { 'edge.a.b': { relationshipType: 'hostile' } },
+      pulseHistory: [{ tick: 5, selectedOutcomes: [outcome] }],
+    };
+    // Accepted at tick 7: the apply writes incident + history rows at T'.
+    worldState = applyRelationshipPatch(worldState, outcome, '2026-01-01T00:00:00.000Z');
+
+    const postures = buildRelationshipPostures({ worldState, regionalGraph: graph, currentTick: 7 });
+    const eventEntries = postures[0].recentMemory.filter(m => m.tick === 5 || m.tick === 7);
+    expect(eventEntries).toHaveLength(1);
+    // One event, decayed two ticks: 0.8 * 0.5^(2/4), not triple-counted.
+    expect(postures[0].memoryScore).toBeCloseTo(0.57, 2);
+  });
+
+  // H16 pin: a subjugation that crowned the edge's authored 'to' side stamps
+  // the roles onto the state — postures present the overlord at 'from', so
+  // direction summaries stay truthful. Without the stamp the edge keeps its
+  // strict authored direction.
+  test('a state-stamped reversed vassalage presents the overlord first', () => {
+    const graph = { edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'vassal' }] };
+    const worldState = {
+      tick: 2,
+      relationshipStates: {
+        'edge.a.b': { relationshipType: 'vassal', overlordSaveId: 'b', vassalSaveId: 'a' },
+      },
+      pulseHistory: [],
+    };
+
+    const postures = buildRelationshipPostures({ worldState, regionalGraph: graph, currentTick: 2 });
+    expect(postures[0]).toMatchObject({ relationshipKey: 'edge.a.b', from: 'b', to: 'a', relationshipType: 'vassal' });
+
+    const context = buildSettlementRelationshipMemoryContext({
+      settlementId: 'a',
+      worldState,
+      regionalGraph: graph,
+    });
+    expect(context.relationships[0].direction).toBe('vassal_to_overlord');
+
+    // No stamp -> strict authored direction.
+    const unstamped = buildRelationshipPostures({
+      worldState: { tick: 2, relationshipStates: { 'edge.a.b': { relationshipType: 'vassal' } }, pulseHistory: [] },
+      regionalGraph: graph,
+      currentTick: 2,
+    });
+    expect(unstamped[0]).toMatchObject({ from: 'a', to: 'b' });
   });
 
   test('a hierarchy resolution (incident + history + hierarchyResolutions) scores once', () => {

@@ -28,15 +28,22 @@ const GOV_ANTITHESIS = {
 
 // ── Relationship dynamics table ───────────────────────────────────────────────
 // Defines how each relationship type biases generation axes.
-// Values are multipliers applied to base institution chances.
-
-// ── Relationship dynamics table ───────────────────────────────────────────────
-// Defines how each relationship type biases generation axes.
 // economyMode: how we relate economically to the neighbour
 //   'complement' = fill their gaps, 'compete' = mirror their exports,
 //   'dependent' = produce what they need, 'suppress' = minimal trade, 'independent' = neutral
-// govMirrorW / govAntithesisW: probability weights for mirroring or opposing their government type
-const REL_DYNAMICS = {
+// govMirrorW / govAntithesisW: probability weights for mirroring or opposing
+//   the neighbour's dominant power structure (consumed by the faction
+//   mirror/oppose rolls in the neighbourFactions step)
+// militaryBias: additive militarization bias 0..0.5 — defense/military
+//   institution chances multiply by (1 + militaryBias)
+//
+// VOCABULARY CONTRACT (H13/H14, R3): these four keys are the ONLY dyn.* keys
+// any consumer may read. The original join snapped exactly here — the
+// institution-probability path read dyn.defense/market/craft/criminal/
+// espionage/government, keys this table never defined, so every relationship
+// multiplied by the same 1.0. tests/generators/neighbourRelDynamics.test.js
+// pins reads ⊆ definitions so the join cannot re-snap.
+export const REL_DYNAMICS = {
   neutral: {
     economyMode:      'independent',
     govMirrorW:       0.05,
@@ -86,6 +93,24 @@ const REL_DYNAMICS = {
     militaryBias:     0.50,
   },
 };
+
+// ── Economy mode → market-institution multiplier ──────────────────────────────
+// The H13 join repair (R3 decision: WIRE the existing table, do not redesign
+// it). institutionProbability's market/economy branch used to read dyn.market —
+// a key REL_DYNAMICS never defined — so every relationship multiplied market
+// odds by 1.0. The table's economy magnitudes already live in
+// getNeighbourEconomicBias below; this map routes each mode's existing figure
+// into market/guild/merchant institution chances: 'complement' reuses its 1.4
+// import-opportunity boost, 'dependent' its 1.6 produce-what-they-need boost,
+// 'compete' its 1.2 import-capture figure, 'suppress' its 0.4 minimal-trade
+// cut, 'independent' is the identity.
+export const ECONOMY_MODE_MARKET_MULT = Object.freeze({
+  complement:  1.4,
+  compete:     1.2,
+  dependent:   1.6,
+  suppress:    0.4,
+  independent: 1.0,
+});
 
 // ── Extract neighbour profile from settlement object ──────────────────────────
 export function extractNeighbourProfile(neighbour, relationshipType = 'neutral') {
@@ -253,11 +278,18 @@ export function getNeighbourFactionBias(neighbourProfile) {
     .filter((v, i, a) => a.indexOf(v) === i)
     .filter(t => !dominantFactionTypes.includes(t));
 
+  // H13 join repair: this used to read dynamics.factionMirrorW/.factionOpposeW —
+  // keys REL_DYNAMICS never defined — so every relationship rolled the same
+  // 0.1/0.05 faction-mirror odds. The table's existing mirror/antithesis
+  // magnitudes (govMirrorW/govAntithesisW: "probability weights for mirroring
+  // or opposing their power structure") now flow: allied mirrors at 0.20 and
+  // barely opposes (0.02); hostile barely mirrors (0.02) and breeds
+  // resistance factions at 0.40.
   return {
     mirrorFactions:  dominantFactionTypes,
     opposeFactions,
-    mirrorWeight:    dynamics.factionMirrorW || 0.1,
-    opposeWeight:    dynamics.factionOpposeW  || 0.05,
+    mirrorWeight:    dynamics.govMirrorW     ?? 0.1,
+    opposeWeight:    dynamics.govAntithesisW ?? 0.05,
   };
 }
 

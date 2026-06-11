@@ -479,6 +479,20 @@ describe('blockadeFor()', () => {
     expect(blockadeFor([{ ...siege, lifecycleStage: 'residual', status: 'residual' }], 'a')).toBeNull();
     expect(blockadeFor([{ ...siege, severity: 0.2 }], 'a')).toBeNull();
   });
+
+  test('a spread target reads the ATTENUATED severity — including the gate (H8)', () => {
+    const spreadSiege = {
+      ...siege,
+      affectedSettlementIds: ['a', 'b', 'c'],
+      severityBySettlement: { b: 0.576, c: 0.3 },
+    };
+    // Origin: full severity, identity intact.
+    expect(blockadeFor([spreadSiege], 'a')).toBe(spreadSiege);
+    // Spread target: the carried severity is the one THIS settlement feels.
+    expect(blockadeFor([spreadSiege], 'b').severity).toBeCloseTo(0.576, 10);
+    // A spread attenuated below the 0.4 gate no longer blockades at all.
+    expect(blockadeFor([spreadSiege], 'c')).toBeNull();
+  });
 });
 
 describe('famine eats the granary (the siege pattern, applied to crop failure)', () => {
@@ -521,6 +535,41 @@ describe('famine eats the granary (the siege pattern, applied to crop failure)',
     const { settlement } = advanceFoodStockpile(empty, { interval: 'one_month', tick: 1, famine });
     expect(settlement.economicState.foodSecurity.deficitPct)
       .toBeCloseTo(0.8 * STOCKPILE_TUNING.famineDeficitScale, 1);
+  });
+
+  test('a spread famine drains the TARGET\'s granary slower than the origin\'s (H8)', () => {
+    // One shared famine record: origin 'a' at 0.8, spread to 'b' stamped at
+    // the attenuated 0.8 × 0.72 = 0.576. famineFor hands each settlement the
+    // severity IT experiences, so the same granary drains at two speeds.
+    const spreadFamine = {
+      ...famine,
+      affectedSettlementIds: ['a', 'b'],
+      severityBySettlement: { b: 0.576 },
+    };
+    const mk = () => settlementWith({
+      institutions: [GRANARY],
+      foodSecurity: { deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.1 },
+    });
+    const run = (saveId) => {
+      let cur = mk();
+      for (let tick = 1; tick <= 3; tick++) {
+        cur = advanceFoodStockpile(cur, {
+          interval: 'one_month', tick,
+          famine: famineFor([spreadFamine], saveId),
+        }).settlement || cur;
+      }
+      return cur.economicState.foodSecurity;
+    };
+    const origin = run('a');
+    const target = run('b');
+    // Both drain (the spread famine is real food pressure at the target)…
+    expect(origin.storageMonths).toBeLessThan(4);
+    expect(target.storageMonths).toBeLessThan(4);
+    // …but the target, attenuated, strictly slower.
+    expect(target.storageMonths).toBeGreaterThan(origin.storageMonths);
+    // famineFor carried the per-settlement effective severities.
+    expect(famineFor([spreadFamine], 'a').severity).toBeCloseTo(0.8, 10);
+    expect(famineFor([spreadFamine], 'b').severity).toBeCloseTo(0.576, 10);
   });
 
   test('siege + famine (the Starving City) drains faster than either alone', () => {

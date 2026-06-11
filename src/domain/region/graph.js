@@ -73,6 +73,20 @@ function nowIso() {
   return new Date().toISOString();
 }
 
+// H12: the paid 'Opened Trade Route' event historically wrote the PLURAL
+// label 'trade_partners', which no other subsystem recognizes (channel
+// bundles minted 0 channels from it, discovery confidence dropped). The
+// producer now writes the canonical 'trade_partner'; this shim heals LEGACY
+// saves wherever link/edge labels enter the regional layer.
+const LEGACY_RELATIONSHIP_LABEL_ALIASES = Object.freeze({
+  trade_partners: 'trade_partner',
+});
+
+export function canonicalRelationshipLabel(label) {
+  const raw = String(label || '').trim();
+  return LEGACY_RELATIONSHIP_LABEL_ALIASES[raw.toLowerCase()] || raw;
+}
+
 export function stablePart(value) {
   return String(value || 'unknown')
     .toLowerCase()
@@ -266,7 +280,13 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
   const nodes = [...existing.nodes];
   const edges = [...existing.edges];
   const nodeIds = new Set(nodes.map(n => n.id));
-  const edgeIds = new Set(edges.map(e => e.id));
+  const edgesById = new Map(edges.map(e => [e.id, e]));
+  const pairKeyFor = (a, b) => [String(a), String(b)].sort().join('::');
+  const edgesByPair = new Map();
+  for (const e of edges) {
+    const key = pairKeyFor(e.from, e.to);
+    if (!edgesByPair.has(key)) edgesByPair.set(key, e);
+  }
   const relationshipKeys = new Set();
 
   for (const save of saves || []) {
@@ -286,24 +306,53 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
       if (!targetId || String(targetId) === String(sourceId)) continue;
       const canonical = canonicalEdgeForLink(link, save, target);
       if (!canonical) continue;
+      const liveType = canonicalRelationshipLabel(canonical.relationshipType);
       const relationshipKey = link.linkId
         || [String(sourceId), String(targetId)].sort().join('::');
       if (relationshipKeys.has(relationshipKey)) continue;
       relationshipKeys.add(relationshipKey);
+      const existingEdge = edgesById.get(edgeIdFor(canonical.from, canonical.to))
+        || edgesByPair.get(pairKeyFor(canonical.from, canonical.to));
+      if (existingEdge) {
+        // H10: the saves' neighbourNetwork is the canonical relationship
+        // source — a rebuild refreshes the edge's relationshipType from the
+        // live link instead of freezing the first build forever. Pulse-
+        // authored label changes stay authoritative between rebuilds because
+        // the pulse writes them back to the links (H11): both sources
+        // converge. Orientation stays as authored (the pulse's own label
+        // updates do the same). Identity no-op when the label is unchanged;
+        // edges for pairs no longer linked are preserved as-is.
+        if (liveType && existingEdge.relationshipType !== liveType) {
+          const refreshed = {
+            ...existingEdge,
+            relationshipType: liveType,
+            evidence: [
+              ...(existingEdge.evidence || []).filter(item => item?.source !== 'neighbourNetwork'),
+              { source: 'neighbourNetwork', reason: `Linked as ${liveType}.` },
+            ],
+            updatedAt: now || nowIso(),
+          };
+          edges[edges.indexOf(existingEdge)] = refreshed;
+          edgesById.set(refreshed.id, refreshed);
+          edgesByPair.set(pairKeyFor(refreshed.from, refreshed.to), refreshed);
+        }
+        continue;
+      }
       const edge = normalizeEdge({
         id: edgeIdFor(canonical.from, canonical.to),
         from: canonical.from,
         to: canonical.to,
-        relationshipType: canonical.relationshipType,
+        relationshipType: liveType,
         evidence: [{
           source: 'neighbourNetwork',
-          reason: `Linked as ${canonical.relationshipType}.`,
+          reason: `Linked as ${liveType}.`,
         }],
         updatedAt: now || undefined,
       });
-      if (edge && !edgeIds.has(edge.id)) {
+      if (edge) {
         edges.push(edge);
-        edgeIds.add(edge.id);
+        edgesById.set(edge.id, edge);
+        edgesByPair.set(pairKeyFor(edge.from, edge.to), edge);
       }
     }
   }
@@ -398,7 +447,8 @@ export function relationshipChannelBundle(edge, relationshipType, options = {}) 
   if (!edge?.from || !edge?.to || !relationshipType) return [];
   let from = String(edge.from);
   let to = String(edge.to);
-  let rel = String(relationshipType);
+  // Legacy plural 'trade_partners' still mints the full trade bundle (H12).
+  let rel = canonicalRelationshipLabel(relationshipType);
   if (rel === 'client') {
     [from, to] = [to, from];
     rel = 'patron';
@@ -463,9 +513,29 @@ export function syncRelationshipChannelBundle(graph, edge, relationshipType, opt
     || (String(channel.from) === to && String(channel.to) === from);
   const now = options.now || nowIso();
   const channels = current.channels.map(channel => {
+    if (nextIds.has(channel.id)) {
+      // A relationship label CHANGE is curation, not discovery: when the
+      // bundle re-establishes channels for a re-warmed relationship, its OWN
+      // channel ids re-confirm out of dormancy. DM 'disabled' is never
+      // overridden, and plain Discover still resurrects nothing
+      // (addRegionalChannels keeps every prior status sticky).
+      if (channel.status !== 'dormant') return channel;
+      return {
+        ...channel,
+        status: 'confirmed',
+        confirmedAt: channel.confirmedAt || now,
+        updatedAt: now,
+        evidence: [
+          ...(channel.evidence || []),
+          { source: 'relationship_label', reason: `Re-confirmed after relationship became ${String(relationshipType).replace(/_/g, ' ')}.` },
+        ],
+      };
+    }
     const relationshipGenerated = channel.relationshipKey === relationshipKey
       || (samePair(channel) && (channel.evidence || []).some(item => item.source === 'relationship_label'));
-    if (!relationshipGenerated || nextIds.has(channel.id)) return channel;
+    // DM 'disabled' survives label changes outright — were it parked as
+    // dormant here, a later re-establishment would re-confirm it.
+    if (!relationshipGenerated || channel.status === 'disabled') return channel;
     return {
       ...channel,
       status: 'dormant',

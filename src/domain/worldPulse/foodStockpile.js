@@ -41,6 +41,7 @@
  */
 
 import { foodLedger } from '../foodLedger.js';
+import { effectiveStressorSeverity } from './stressors.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, Number.isFinite(v) ? v : lo));
@@ -104,14 +105,25 @@ export function storageCapacityMonths(settlement) {
   return round1(has('mill') ? base * 1.25 : base);
 }
 
-/** The active blockade (siege/occupation) gripping a settlement, if any. */
+/**
+ * The active blockade (siege/occupation) gripping a settlement, if any.
+ * `severity` on the returned object is the EFFECTIVE severity for THIS
+ * settlement (a spread target carries an attenuated entry in the stressor's
+ * severityBySettlement map, H8) — the gate and the drain math both run on
+ * the severity the settlement actually experiences. Origins (full severity)
+ * return the stressor record itself, identity intact.
+ */
 export function blockadeFor(worldStateStressors = [], settlementId) {
   const sid = String(settlementId);
-  return (worldStateStressors || []).find(s =>
-    BLOCKADE_TYPES.has(s?.type)
-    && ACTIVE_STAGES.has(s.lifecycleStage || 'active')
-    && (s.severity ?? 0) >= STOCKPILE_TUNING.blockadeSeverityGate
-    && (s.affectedSettlementIds || []).map(String).includes(sid)) || null;
+  for (const s of worldStateStressors || []) {
+    if (!BLOCKADE_TYPES.has(s?.type)) continue;
+    if (!ACTIVE_STAGES.has(s.lifecycleStage || 'active')) continue;
+    if (!(s.affectedSettlementIds || []).map(String).includes(sid)) continue;
+    const severity = effectiveStressorSeverity(s, sid);
+    if (severity < STOCKPILE_TUNING.blockadeSeverityGate) continue;
+    return severity === s.severity ? s : { ...s, severity };
+  }
+  return null;
 }
 
 /**
@@ -121,14 +133,22 @@ export function blockadeFor(worldStateStressors = [], settlementId) {
  * multiplies production ×0.35), so reading conditions here would double-count.
  * The roaming famine stressor is never generation-baked — it is exactly the
  * famine that arrives during play, which the frozen ledger knows nothing about.
+ *
+ * As with blockadeFor, the returned `severity` is the EFFECTIVE severity for
+ * THIS settlement (spread targets are attenuated via severityBySettlement),
+ * so a spread famine drains the target's granary slower than the origin's.
  */
 export function famineFor(worldStateStressors = [], settlementId) {
   const sid = String(settlementId);
-  return (worldStateStressors || []).find(s =>
-    s?.type === 'famine'
-    && ACTIVE_STAGES.has(s.lifecycleStage || 'active')
-    && (s.severity ?? 0) >= STOCKPILE_TUNING.famineSeverityGate
-    && (s.affectedSettlementIds || []).map(String).includes(sid)) || null;
+  for (const s of worldStateStressors || []) {
+    if (s?.type !== 'famine') continue;
+    if (!ACTIVE_STAGES.has(s.lifecycleStage || 'active')) continue;
+    if (!(s.affectedSettlementIds || []).map(String).includes(sid)) continue;
+    const severity = effectiveStressorSeverity(s, sid);
+    if (severity < STOCKPILE_TUNING.famineSeverityGate) continue;
+    return severity === s.severity ? s : { ...s, severity };
+  }
+  return null;
 }
 
 /**

@@ -29,6 +29,18 @@ describe('§9 relationship events', () => {
     expect(relOf(next, 'Irontown')).toBe('patron');
   });
 
+  // H12 — the canonical label is the SINGULAR 'trade_partner'; the plural the
+  // event historically wrote is recognized by no other subsystem.
+  it('OPENED_TRADE_ROUTE defaults to the canonical trade_partner label', () => {
+    const next = mutateSettlement({ settlement: base(), event: { id: 'e5', type: 'OPENED_TRADE_ROUTE', targetId: 'Stonehaven', payload: {} } });
+    expect(relOf(next, 'Stonehaven')).toBe('trade_partner');
+  });
+
+  it('OPENED_TRADE_ROUTE normalizes the legacy plural payload the composer still offers', () => {
+    const next = mutateSettlement({ settlement: base(), event: { id: 'e6', type: 'OPENED_TRADE_ROUTE', targetId: 'Irontown', payload: { relationshipType: 'trade_partners' } } });
+    expect(relOf(next, 'Irontown')).toBe('trade_partner');
+  });
+
   it('is a no-op when the named neighbour is not linked', () => {
     const s = base();
     const next = mutateSettlement({ settlement: s, event: { id: 'e4', type: 'SETTLEMENT_DISPUTE', targetId: 'Nowhere', payload: { relationshipType: 'rival' } } });

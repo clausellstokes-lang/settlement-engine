@@ -463,12 +463,19 @@ function startedRiot(s, event) {
 // reciprocal neighbour link is reconciled by the regional graph that already
 // ingests neighbourNetwork. No-op when the named neighbour isn't linked.
 const ALLIANCE_REL = 'allied';
+// H12: the canonical label is the SINGULAR 'trade_partner' — the plural this
+// event historically wrote is recognized by no other subsystem (channel
+// bundles minted 0 channels from it). Composer payloads still carry the
+// plural, so normalize at the write chokepoint. (Kept tiny + local: the
+// regional layer's canonicalRelationshipLabel covers the read side.)
+const LEGACY_REL_ALIASES = { trade_partners: 'trade_partner' };
+const canonicalRelType = rel => LEGACY_REL_ALIASES[String(rel || '').toLowerCase()] || rel;
 function setNeighbourRelationship(s, event) {
   const targetId = event.targetId;
   if (!targetId) return s;
   const relType = event.type === 'BROKERED_ALLIANCE'
     ? ALLIANCE_REL
-    : (event.payload?.relationshipType || (event.type === 'SETTLEMENT_DISPUTE' ? 'rival' : 'trade_partners'));
+    : canonicalRelType(event.payload?.relationshipType || (event.type === 'SETTLEMENT_DISPUTE' ? 'rival' : 'trade_partner'));
   const network = Array.isArray(s.neighbourNetwork) ? s.neighbourNetwork : [];
   let touched = false;
   const next = network.map((link) => {

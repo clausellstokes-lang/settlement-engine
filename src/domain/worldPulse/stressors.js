@@ -275,6 +275,38 @@ function clamp01(value) {
   return Math.max(0, Math.min(1, n));
 }
 
+// ── Spread attenuation (H8) ────────────────────────────────────────────────
+// A spread target experiences the shared stressor at the SOURCE's effective
+// severity × 0.72 (the original design intent — R1 only made the old cosmetic
+// number honest; R3 makes it real), floored so spreads stay meaningful.
+// The per-settlement map is stamped at spread time; origin settlements are
+// absent from it (= full severity), and aging/resolution ignore it — the
+// record's lifecycle stays origin-driven.
+const SPREAD_ATTENUATION = 0.72;
+const SPREAD_SEVERITY_FLOOR = 0.2;
+
+function normalizeSeverityMap(map) {
+  if (!map || typeof map !== 'object') return null;
+  const out = {};
+  for (const [saveId, value] of Object.entries(map)) {
+    if (Number.isFinite(value)) out[String(saveId)] = clamp01(value);
+  }
+  return Object.keys(out).length ? out : null;
+}
+
+/**
+ * The severity a specific settlement actually experiences. Spread targets
+ * carry an attenuated entry in `stressor.severityBySettlement`; origins are
+ * absent from the map and feel the record's full severity. Map entries are
+ * stamped at spread time and never re-aged, so the record's CURRENT severity
+ * caps them — a spread never bites harder than the crisis does at its origin.
+ */
+export function effectiveStressorSeverity(stressor, saveId) {
+  const recorded = clamp01(stressor?.severity ?? 0);
+  const entry = stressor?.severityBySettlement?.[String(saveId)];
+  return Number.isFinite(entry) ? Math.min(recorded, clamp01(entry)) : recorded;
+}
+
 function idFor(stressor) {
   return stressor.id || [
     'world_stressor',
@@ -316,6 +348,10 @@ export function normalizeStressor(stressor = {}) {
     originSettlementId: stressor.originSettlementId || null,
     originRegion: stressor.originRegion || null,
     severity: clamp01(stressor.severity ?? 0.45),
+    // Per-target spread attenuation (H8): the severity each spread target
+    // actually experiences. Origins are absent (= full severity). Stamped at
+    // spread time, preserved verbatim here — aging/resolution ignore it.
+    severityBySettlement: normalizeSeverityMap(stressor.severityBySettlement),
     age: Math.max(0, Number.isFinite(stressor.age) ? stressor.age : 0),
     durationPolicy,
     decayRate: clamp01(stressor.decayRate ?? STRESSOR_POLICIES[durationPolicy]?.decay ?? 0.08),
@@ -784,17 +820,22 @@ function spreadTargetsFor(snapshot, stressor) {
   const affected = new Set((stressor.affectedSettlementIds || []).map(String));
   const types = [...new Set((stressor.spreadChannels || []).map(canonicalSpreadChannel).filter(Boolean))];
   if (!types.length) return [];
-  const targets = [];
   // Confirmed, directed channels only — suggested channels never propagate
   // (design principle). A crisis flows outward from each affected settlement
-  // along its outgoing channels of a matching type.
+  // along its outgoing channels of a matching type. Each target keeps the
+  // strongest EFFECTIVE severity among the sources that reach it: a spread
+  // from a spread target attenuates again (from the source's experienced
+  // severity), never from the record's origin severity.
+  const targets = new Map();
   for (const sourceId of affected) {
+    const sourceSeverity = effectiveStressorSeverity(stressor, sourceId);
     for (const channel of activeChannelsFrom(graph, sourceId, { types })) {
       const to = String(channel.to);
-      if (to && !affected.has(to)) targets.push(to);
+      if (!to || affected.has(to)) continue;
+      targets.set(to, Math.max(targets.get(to) ?? 0, sourceSeverity));
     }
   }
-  return [...new Set(targets)];
+  return [...targets.entries()].map(([targetSaveId, sourceSeverity]) => ({ targetSaveId, sourceSeverity }));
 }
 
 export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
@@ -859,15 +900,16 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
     }
 
     if (stressor.severity > 0.42 && !['off', 'local'].includes(rules.propagationMode)) {
-      for (const targetSaveId of spreadTargetsFor(snapshot, stressor).slice(0, 3)) {
+      for (const { targetSaveId, sourceSeverity } of spreadTargetsFor(snapshot, stressor).slice(0, 3)) {
         const targetKey = `${stressor.type}:${targetSaveId}`;
         if (existingKeys.has(targetKey)) continue;
-        // The upserted stressor is ONE shared record: the spread target joins
-        // affectedSettlementIds and is simulated at the record's full severity.
-        // The candidate/news/roll surfaces must report THAT severity — the old
-        // decayed 0.72× display number was never persisted (max() always kept
-        // the origin severity). Per-target attenuation (a severity map read by
-        // foodStockpile/pressure consumers) is the R3 follow-up.
+        // True per-target attenuation (H8, landed in R3): the spread target
+        // joins the ONE shared record, but experiences it at the source's
+        // effective severity × 0.72 (floored), stamped into the record's
+        // severityBySettlement map. The record's own severity — and its whole
+        // lifecycle — stays origin-driven; consumers (foodStockpile, pressure
+        // surfaces, the dossier) read through effectiveStressorSeverity.
+        const spreadSeverity = Math.max(SPREAD_SEVERITY_FLOOR, clamp01(sourceSeverity * SPREAD_ATTENUATION));
         candidates.push({
           id: `candidate.stressor.spread.${stablePart(stressor.id)}.${stablePart(targetSaveId)}.${tick}`,
           type: 'stressor',
@@ -876,18 +918,26 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
           ruleFamily: 'stressor',
           targetSaveId,
           affectedSettlementIds: [...new Set([...(stressor.affectedSettlementIds || []), targetSaveId])],
-          severity: stressor.severity,
+          severity: spreadSeverity,
           probability: Math.min(0.34, 0.05 + stressor.severity * 0.22),
+          // The proposal gate stays on the RECORD severity: a 0.78+ crisis
+          // spreading is a major change even though it arrives attenuated
+          // (gating on the attenuated number would make the gate unreachable:
+          // 0.78 / 0.72 > 1).
           applyMode: stressor.severity >= 0.78 ? 'proposal' : 'auto',
           headline: `${stressor.label} may spread`,
-          summary: `${stressor.label} can move at full strength through ${stressor.spreadChannels.slice(0, 2).join(' and ').replace(/_/g, ' ')} channels.`,
+          summary: `${stressor.label} can spread through ${stressor.spreadChannels.slice(0, 2).join(' and ').replace(/_/g, ' ')} channels, arriving attenuated at severity ${spreadSeverity.toFixed(2)}.`,
           reasons: [
             `${stressor.label} is active at severity ${stressor.severity.toFixed(2)}.`,
-            `A plausible spread channel reaches another settlement; the shared crisis arrives undiminished.`,
+            `A plausible spread channel reaches another settlement; the crisis arrives attenuated to ${spreadSeverity.toFixed(2)} there.`,
           ],
           stressor: normalizeStressor({
             ...stressor,
             affectedSettlementIds: [...new Set([...(stressor.affectedSettlementIds || []), targetSaveId])],
+            severityBySettlement: {
+              ...(stressor.severityBySettlement || {}),
+              [targetSaveId]: spreadSeverity,
+            },
           }),
           metadata: {
             lifecycleStage: stressor.lifecycleStage,

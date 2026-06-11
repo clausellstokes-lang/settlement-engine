@@ -470,12 +470,17 @@ describe('World Pulse expansion systems', () => {
     ];
     const pressures = pressureIndex(pressureRows);
 
-    const impossible = evaluateRelationshipRules({
+    const weakAtFrom = evaluateRelationshipRules({
       worldState: { tick: 1, relationshipStates: { 'edge.h.c': { relationshipType: 'hostile', resentment: 0.9, fear: 0.8 } } },
       regionalGraph: { edges: [{ id: 'edge.h.c', from: 'h', to: 'c', relationshipType: 'hostile' }] },
       byId: new Map([['h', weakSource], ['c', cityTarget]]),
     }, pressures, { tick: 2 });
-    expect(impossible.some(candidate => candidate.ruleId === 'hostile_occupation_pressure')).toBe(false);
+    // Reconciled with H16 (R3 decided): the hamlet still cannot subjugate the
+    // city — the tier gate binds per DIRECTION — but the stronger side now
+    // qualifies regardless of which side the save authored at 'from', so this
+    // pair produces a city-led candidate instead of nothing.
+    const reversedConquest = weakAtFrom.find(candidate => candidate.ruleId === 'hostile_occupation_pressure');
+    expect(reversedConquest?.relationshipPatch).toMatchObject({ overlordSaveId: 'c', vassalSaveId: 'h' });
 
     const plausible = evaluateRelationshipRules({
       worldState: { tick: 1, relationshipStates: { 'edge.o.v': { relationshipType: 'hostile', resentment: 0.9, fear: 0.8 } } },

@@ -6,10 +6,12 @@
  * campaign truth only after the DM confirms them.
  */
 
-import { deriveRegionalState } from './deriveRegionalState.js';
+import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
 import { addRegionalChannels, deriveRegionalGraphFromSaves, normalizeChannel } from './graph.js';
 import { goodCriticality, goodsIntersect } from './goodsCatalog.js';
 import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
+import { healingLedger } from '../healingLedger.js';
+import { TIER_ORDER } from '../../data/constants.js';
 
 const TRADE_FRIENDLY_RELATIONSHIPS = new Set([
   'trade_partner',
@@ -191,11 +193,42 @@ function candidate(raw) {
   });
 }
 
+// ── R3 decision (2026-06-11): SUGGESTED-only heuristics for the two formerly
+// uncreatable channel types (service_dependency, migration_pressure).
+// Deliberately conservative and low-confidence — the DM confirm gate is the
+// safety; nothing here (or anywhere) auto-confirms them.
+
+/**
+ * Healing/service capacity, read from the raw save's institutions via the
+ * canonical classifier (healingLedger) — the regional projection dropped its
+ * dead `services` field in R4/H18 and it must NOT come back without a real
+ * reader; discovery reads the raw save the same way relationBetween reads the
+ * raw neighbourNetwork. A lone shrine is not a regional service hub: a
+ * provider needs two-plus healing-capable institutions, and a dependent only
+ * counts as lacking when it carries an institutions array yet has neither a
+ * healing institution nor an offered healing service.
+ */
+function healingCapacityOf(save) {
+  const ledger = healingLedger(settlementFromSave(save) || {});
+  return {
+    healerCount: ledger.healerCount,
+    provider: ledger.healerCount >= 2,
+    lacking: ledger.present && ledger.healerCount === 0 && ledger.services.length === 0,
+  };
+}
+
+function tierRankOf(tier) {
+  const rank = TIER_ORDER.indexOf(tier);
+  return rank >= 0 ? rank : null;
+}
+
 /**
  * Discover channels between two saves. Direction is significant:
  * - trade_dependency supplier -> dependent
  * - export_market buyer/market -> exporter
  * - trade_route one route endpoint -> the other endpoint
+ * - service_dependency service provider -> dependent (R3, suggested-only)
+ * - migration_pressure smaller pole -> bigger pole (R3, suggested-only)
  *
  * Pass options.now for deterministic discoveredAt/updatedAt stamps (replay
  * must be byte-identical); the wall clock is the fallback ONLY when absent.
@@ -272,7 +305,10 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
   const bothHaveRoutes = source.route.open && target.route.open;
   const friendly = !rel || TRADE_FRIENDLY_RELATIONSHIPS.has(rel);
   const hasTradeEvidence = !!rel || sourceExportsTargetImports.length > 0 || targetExportsSourceImports.length > 0;
-  if (bothHaveRoutes && friendly && hasTradeEvidence) {
+  // The exact predicate under which a trade_route is suggested below — the
+  // R3 service/migration heuristics ride the same route/trade link.
+  const routeTradeLink = bothHaveRoutes && friendly && hasTradeEvidence;
+  if (routeTradeLink) {
     const routeStrength = rel === 'trade_partner' ? 0.72 : rel === 'allied' || rel === 'ally' ? 0.6 : 0.45;
     for (const [from, to] of [[source, target], [target, source]]) {
       out.push(candidate({
@@ -287,6 +323,68 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
           rel ? { source: 'neighbourNetwork', reason: `Relationship is ${rel}.` } : null,
         ].filter(Boolean),
         explanation: `${from.name} and ${to.name} can transmit route shocks through trade access.`,
+      }));
+    }
+  }
+
+  // R3: service_dependency — provider -> dependent when the provider has real
+  // healing/service capacity the dependent lacks, and the route/trade link
+  // above makes the service reachable. Born suggested, never auto-confirmed.
+  if (routeTradeLink) {
+    const sourceHealing = healingCapacityOf(sourceSave);
+    const targetHealing = healingCapacityOf(targetSave);
+    for (const [provider, dependent, capacity, need] of [
+      [source, target, sourceHealing, targetHealing],
+      [target, source, targetHealing, sourceHealing],
+    ]) {
+      if (!capacity.provider || !need.lacking) continue;
+      out.push(candidate({
+        type: 'service_dependency',
+        from: provider.id,
+        to: dependent.id,
+        strength: 0.45,
+        confidence: 0.5,
+        goods: [],
+        evidence: [
+          { source: 'institutions', reason: `${provider.name} has ${capacity.healerCount} healing-capable institutions; ${dependent.name} has none.` },
+          { source: 'route_state', reason: `An open trade link makes ${provider.name}'s services reachable.` },
+        ],
+        explanation: `${dependent.name} likely relies on ${provider.name} for healing and temple services.`,
+      }));
+    }
+  }
+
+  // R3: migration_pressure — along the same suggested trade route when the
+  // poles are unbalanced (tier gap >= 2 or population ratio >= 4x). People
+  // flow toward the bigger pole, so the channel runs smaller -> larger: a
+  // crisis at the small end (health/security shock, population loss) sends
+  // migration pressure to the big end. Born suggested, never auto-confirmed.
+  if (routeTradeLink) {
+    const sourceRank = tierRankOf(source.tier);
+    const targetRank = tierRankOf(target.tier);
+    const tierGap = sourceRank !== null && targetRank !== null ? Math.abs(sourceRank - targetRank) : 0;
+    const populations = [source.population || 0, target.population || 0];
+    const populationRatio = Math.min(...populations) > 0 ? Math.max(...populations) / Math.min(...populations) : 0;
+    if (tierGap >= 2 || populationRatio >= 4) {
+      const sourceIsLarger = sourceRank !== null && targetRank !== null && sourceRank !== targetRank
+        ? sourceRank > targetRank
+        : populations[0] >= populations[1];
+      const smaller = sourceIsLarger ? target : source;
+      const larger = sourceIsLarger ? source : target;
+      out.push(candidate({
+        type: 'migration_pressure',
+        from: smaller.id,
+        to: larger.id,
+        strength: 0.4,
+        confidence: 0.45,
+        goods: [],
+        evidence: [
+          tierGap >= 2
+            ? { source: 'settlement_tier', reason: `${larger.name} (${larger.tier}) outranks ${smaller.name} (${smaller.tier}) by ${tierGap} tiers.` }
+            : { source: 'population', reason: `${larger.name} holds roughly ${Math.round(populationRatio)}x the population of ${smaller.name}.` },
+          { source: 'route_state', reason: `The trade link between them gives migrants a path.` },
+        ],
+        explanation: `People under pressure in ${smaller.name} are likely to drift toward ${larger.name}.`,
       }));
     }
   }

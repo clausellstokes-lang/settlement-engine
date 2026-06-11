@@ -92,3 +92,63 @@ describe('NPC goal branching classifies by condition archetype, not label prose'
     expect(rebranch).toBeNull();
   });
 });
+
+// H16 pin (R3 must-fix): dominantRelationshipContext resolves vassal/overlord
+// from the STATE's seniority stamps, never raw edge orientation. Under a
+// pulse-driven subjugation stamped overlord='o' on an edge AUTHORED v->o, the
+// conquered village's NPCs plot autonomy and the conqueror's NPCs consolidate
+// — pre-fix the roles were swapped and conqueror NPCs got break_vassalage.
+
+describe('NPC vassalage context follows the seniority stamps (H16)', () => {
+  function vassalageRebranches(edge, relState) {
+    const mk = (id, name, npcName) => ({
+      id,
+      name,
+      settlement: { name, tier: 'town', population: 1500, npcs: [{ name: npcName }] },
+      activeConditions: [],
+    });
+    const captain = (npcId, settlementId, name) => npcState({
+      npcId, settlementId, name, roleArchetype: 'military',
+      contextSignature: 'stale|stale|', contextTier: 'town',
+    });
+    const snapshot = {
+      worldState: {
+        tick: 4,
+        relationshipStates: { [edge.id]: relState },
+        npcStates: {
+          'npc.o.0': captain('npc.o.0', 'o', 'Captain Orla'),
+          'npc.v.0': captain('npc.v.0', 'v', 'Captain Vex'),
+        },
+      },
+      regionalGraph: { edges: [edge] },
+      settlements: [mk('o', 'Overcity', 'Captain Orla'), mk('v', 'Vasthorp', 'Captain Vex')],
+    };
+    const candidates = evaluateNpcRules(snapshot, pressureIndex([]), { tick: 5 });
+    return Object.fromEntries(candidates
+      .filter(c => c.candidateType === 'npc_goal_rebranch')
+      .map(c => [c.targetSaveId, { shortGoal: c.npcPatch.shortGoal, longGoal: c.npcPatch.longGoal }]));
+  }
+
+  test('reversed-stamped vassalage: the stamped vassal organizes autonomy, the stamped overlord consolidates', () => {
+    const reversed = vassalageRebranches(
+      { id: 'edge.pair', from: 'v', to: 'o', relationshipType: 'vassal' },
+      { relationshipType: 'vassal', overlordSaveId: 'o', vassalSaveId: 'v' },
+    );
+    expect(reversed.v).toEqual({ shortGoal: 'organize_autonomy', longGoal: 'break_vassalage' });
+    expect(reversed.o).not.toEqual({ shortGoal: 'organize_autonomy', longGoal: 'break_vassalage' });
+
+    // Forward authoring of the same stamped world branches identically…
+    const forward = vassalageRebranches(
+      { id: 'edge.pair', from: 'o', to: 'v', relationshipType: 'vassal' },
+      { relationshipType: 'vassal', overlordSaveId: 'o', vassalSaveId: 'v' },
+    );
+    expect(forward).toEqual(reversed);
+
+    // …and an UNSTAMPED (DM-authored) vassal edge keeps strict edge direction.
+    const dmAuthored = vassalageRebranches(
+      { id: 'edge.pair', from: 'o', to: 'v', relationshipType: 'vassal' },
+      { relationshipType: 'vassal' },
+    );
+    expect(dmAuthored).toEqual(forward);
+  });
+});

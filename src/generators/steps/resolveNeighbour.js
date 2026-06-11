@@ -34,6 +34,20 @@ registerStep('resolveNeighbour', {
   // faction mirroring done by the neighbourFactions step (neighbourFacBias).
   const neighbourFacBias  = getNeighbourFactionBias(neighbourProfile);
 
+  // H14 (R3): config.neighborRelationship was read by getInstFlags (the
+  // military/economy effective-score modifiers) and generateHistory (the
+  // external-threat/trade-dispute tensions) but NEVER written — the
+  // hostile-neighbour militarization path was dead on this half. Thread it
+  // into effectiveConfig in place, the same way generateEconomy threads
+  // _neighbourEconBias. No-neighbour generations leave the key absent, so
+  // the default path is untouched (identity).
+  if (rawNeighbour && ctx.effectiveConfig) {
+    ctx.effectiveConfig.neighborRelationship = {
+      neighborName: rawNeighbour.name || null,
+      relationshipType: relType,
+    };
+  }
+
   // Only emit a trace when an actual neighbour was bound — a missing
   // neighbour is a non-decision and would just be noise in the rail.
   if (rawNeighbour && neighbourProfile) {
@@ -49,6 +63,8 @@ registerStep('resolveNeighbour', {
       downstreamEffects: [
         { target: 'economicState',  effect: 'neighbour econ bias applied' },
         { target: 'factions',       effect: 'neighbour faction bias applied' },
+        { target: 'institutions',   effect: 'relationship dynamics shift defense/market odds' },
+        { target: 'effectiveScores', effect: 'relationship modifies military/economy scores' },
       ],
     });
   }

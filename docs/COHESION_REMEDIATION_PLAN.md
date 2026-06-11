@@ -208,6 +208,22 @@ symmetric-relationship direction fairness (H16); vassal hierarchy cascade become
 Wizard News (H15); spread severity per-target attenuation lands here WITH its foodStockpile
 consumer; alias drift (`war`/`enemy`/`ally`) unified through RELATIONSHIP_TYPE_ALIASES.
 
+> **R3 decisions (delegated to the agent 2026-06-11; each vetoable, all favor DM agency +
+> explainability):** H16 — symmetric relationships act on STATE (strength/posture), not edge
+> authoring order; both sides of a war can raid, the stronger side can subjugate/patronize.
+> H15 — the vassal cascade stays (politically coherent) but every flipped third-party edge emits
+> Wizard News, and under `majorChangesRequireProposal` the cascade rides the vassalage proposal
+> with full disclosure of the realignment. H13/H14 — REL_DYNAMICS is WIRED, not deleted: the
+> snapped key join is repaired so the table's existing magnitudes flow (the picker already
+> promises this effect to the user); distribution shifts pinned. Dormant bundle channels —
+> relationship label changes are CURATION: `syncRelationshipChannelBundle` re-confirms its own
+> bundle channel ids on re-establishment; Discover stays measurement-only. `service_dependency`
+> + `migration_pressure` — conservative, low-confidence, SUGGESTED-only discovery heuristics
+> (the confirm gate is the safety); the UNCREATABLE allowlist shrinks to empty.
+> `vassal_extraction` joins the economy/trade pressure class (tribute drains wealth, it is not
+> war). Spread attenuation — per-target severity map consumed by foodStockpile/pressure boosts;
+> the news reports the attenuated number it now truthfully persists.
+
 **R4 — Bounds, determinism, hygiene, invariants.** Cap/archive `regionalGraph.eventLog` and stop
 embedding projections nobody reads (the five dead `deriveRegionalState` fields go with it, H18);
 thread `now` through graph/news helpers (replay byte-identical for real); per-settlement rng

@@ -27,19 +27,16 @@ import {
 
 const NOW = '2026-06-11T12:00:00.000Z';
 
-// OWNER DECISION (R4, recorded — see docs/REGIONAL_ENGINE_AUDIT.md
-// "uncreatable channel types" and the R4 wave entry in
-// docs/COHESION_REMEDIATION_PLAN.md): service_dependency and
-// migration_pressure have no creation path — neither discovery heuristics
-// nor relationship bundles ever mint them, which leaves the
-// service_disruption impact kind and the regional_service_disruption
-// condition archetype dead vocabulary end-to-end. Inventing discovery
-// heuristics for them is genuinely new simulation behavior and is parked as
-// an owner item; until the owner rules, they live here so the gap is visible.
-const UNCREATABLE = Object.freeze([
-  'service_dependency',
-  'migration_pressure',
-]);
+// OWNER DECISION (R3, 2026-06-11 — see the "R3 decisions" blockquote in
+// docs/COHESION_REMEDIATION_PLAN.md): the R4 parking of service_dependency
+// and migration_pressure is resolved. Both gained conservative, low-
+// confidence, SUGGESTED-only discovery heuristics (the DM confirm gate is
+// the safety) — service_dependency when a provider has real healing capacity
+// a route/trade-linked dependent lacks; migration_pressure along a trade
+// route between unbalanced poles (tier gap >= 2 or ~4x population). The
+// allowlist is therefore EMPTY: the invariant now proves all 13 channel
+// types creatable, and any future enum member must ship with a creator.
+const UNCREATABLE = Object.freeze([]);
 
 // Every relationship label either creator understands, including both
 // directions of patronage and the alias spellings.
@@ -63,7 +60,7 @@ function save(id, name, settlement = {}) {
       name,
       tier: settlement.tier || 'town',
       config: { tradeRouteAccess: 'road', ...(settlement.config || {}) },
-      institutions: [],
+      institutions: settlement.institutions || [],
       economicState: {
         primaryExports: [],
         primaryImports: [],
@@ -91,6 +88,21 @@ function discoveredTypes() {
     neighbourNetwork: [{ id: 'supplier', neighbourName: 'Granary Ford', relationshipType: 'trade_partner' }],
   });
   for (const channel of discoverDependencyCandidates(supplier, buyer)) types.add(channel.type);
+
+  // Unbalanced healing pair (R3): a city with real healing capacity trade-
+  // linked to a village that lacks it, two tiers down — exercises
+  // service_dependency (city -> village) and migration_pressure
+  // (village -> city) in one pair.
+  const sanctum = save('sanctum', 'Sanctum Reach', {
+    tier: 'city',
+    institutions: [{ name: 'Major hospital' }, { name: 'Temple of the Dawn' }],
+    neighbourNetwork: [{ id: 'fringe', neighbourName: 'Fringewick', relationshipType: 'trade_partner' }],
+  });
+  const fringe = save('fringe', 'Fringewick', {
+    tier: 'village',
+    neighbourNetwork: [{ id: 'sanctum', neighbourName: 'Sanctum Reach', relationshipType: 'trade_partner' }],
+  });
+  for (const channel of discoverDependencyCandidates(sanctum, fringe)) types.add(channel.type);
 
   // One pair per relationship label discovery understands.
   for (const rel of RELATIONSHIP_LABELS) {

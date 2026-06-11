@@ -31,6 +31,7 @@ import { foodLedger } from '../foodLedger.js';
 import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { coupContenders } from '../rulingPower.js';
+import { canonicalRelationshipLabel } from '../region/graph.js';
 
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
@@ -66,7 +67,9 @@ function edgesTouching(snapshot, settlementId) {
 }
 
 function relationshipTypeOf(edge) {
-  return String(edge?.relationshipType || edge?.type || '').toLowerCase();
+  // H12 shim: legacy saves carry the plural 'trade_partners' the old
+  // trade-route event wrote; read it as the canonical singular.
+  return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
 }
 
 function incomingChannels(snapshot, settlementId, channelType) {

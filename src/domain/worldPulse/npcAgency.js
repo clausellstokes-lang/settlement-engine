@@ -1,4 +1,5 @@
 import { stablePart } from './worldState.js';
+import { relationshipRoles } from './relationshipEvolution.js';
 import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
@@ -259,7 +260,13 @@ function dominantRelationshipContext(snapshot, settlementId) {
     if (from !== sid && to !== sid) continue;
     const key = edge.id || `rel.${from}.${to}`;
     const rel = states[key]?.relationshipType || edge.relationshipType || edge.type || 'neutral';
-    if (rel === 'vassal') return to === sid ? 'vassal' : 'overlord';
+    if (rel === 'vassal') {
+      // H16: a pulse-driven subjugation may have crowned the authored 'to'
+      // side as overlord — resolve roles state-first, never raw orientation,
+      // or the conqueror's NPCs plot to break their own vassalage.
+      const { juniorId } = relationshipRoles(edge, states[key]);
+      return juniorId === sid ? 'vassal' : 'overlord';
+    }
     if (rel === 'hostile' || rel === 'cold_war') return rel;
     if (rel === 'allied') return 'allied';
   }

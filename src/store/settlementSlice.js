@@ -83,7 +83,8 @@ const MAX_VERSION_HISTORY = 50;
 // write purely-derived keys onto it (resolveStress → stressType/stressTypes/
 // intendedStressTypes/_population; isolationGenerator → _magicTradeOnly;
 // generateEconomy → _neighbourEconBias; resolveConfig → tier/magicLevel/
-// terrainType). Display and sim consumers read those keys from
+// terrainType; resolveNeighbour → neighborRelationship). Display and sim
+// consumers read those keys from
 // settlement.config, so they must stay there — but they must NOT re-enter
 // the pipeline as user input: emergent stress would be re-rolled as
 // user-forced stress (with a false "selected by user config" receipt) and
@@ -99,6 +100,7 @@ export const DERIVED_CONFIG_KEYS = Object.freeze([
   '_magicTradeOnly', '_neighbourEconBias', '_neighbourEconMode', '_isolationInfraType',
   '_population',
   'tier', 'magicLevel', 'terrainType',
+  'neighborRelationship',
 ]);
 
 export function stripDerivedConfigKeys(config) {

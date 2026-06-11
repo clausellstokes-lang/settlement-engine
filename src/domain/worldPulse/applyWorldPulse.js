@@ -10,7 +10,7 @@ import {
   setRegionalImpactStatus,
   syncRelationshipChannelBundle,
 } from '../region/index.js';
-import { applyRelationshipPatch, relationshipKeyFromEdge } from './relationshipEvolution.js';
+import { applyRelationshipPatch, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { resolveRelationshipHierarchy } from './relationshipHierarchy.js';
 import { applyNpcPatch, npcId } from './npcAgency.js';
@@ -23,6 +23,7 @@ import { applyResourceOutcomeToSettlement, applyTierOutcomeToSettlement } from '
 import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
 import { transferRulingPower } from '../rulingPower.js';
+import { rolesForCanonicalEdge } from '../relationships/canonicalRelationship.js';
 
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
@@ -141,6 +142,121 @@ function relationshipEdgeForOutcome(graph, outcome) {
   return (graph.edges || []).find(edge => relationshipKeyFromEdge(edge) === key) || null;
 }
 
+/**
+ * H16: relationshipChannelBundle and the neighbourNetwork writeback both read
+ * raw edge orientation ('edge.from is the patron/overlord'), but a
+ * pulse-driven subjugation may have crowned the authored 'to' side via the
+ * seniority stamps on relationship state. When relationshipRoles reports the
+ * senior side at 'to', hand consumers a transient role-oriented copy of the
+ * edge — from/to (and the directional aliases) swapped, stored edge id kept —
+ * so channels and dossiers assert the real hierarchy. Symmetric labels and
+ * unstamped (DM-authored) hierarchy edges resolve as not-reversed and pass
+ * through untouched.
+ */
+function roleOrientedEdge(edge, relState) {
+  if (!edge || !relationshipRoles(edge, relState).reversed) return edge;
+  const oriented = { ...edge };
+  for (const [senior, junior] of [['from', 'to'], ['source', 'target'], ['a', 'b'], ['settlementAId', 'settlementBId']]) {
+    if (edge[senior] === undefined && edge[junior] === undefined) continue;
+    oriented[senior] = edge[junior];
+    oriented[junior] = edge[senior];
+  }
+  return oriented;
+}
+
+/**
+ * H11: a pulse relationship label outcome is canonical relationship state
+ * (DM-approved, or auto per the campaign's rules) — write it through to BOTH
+ * settlements' neighbourNetwork links so the dossier, threat profile, PDF,
+ * and AI grounding stop asserting the label the pulse already changed.
+ * Conditions-over-mutation does not apply: the label IS the relationship
+ * state, not a derived effect. Both ends must be saved settlements in this
+ * pulse; a pair with an un-saved end leaves neighbourNetwork untouched (we
+ * cannot reconcile the reciprocal link of a settlement we are not carrying).
+ */
+function writeRelationshipLabelToNeighbourNetworks({ settlementUpdates, edge, toType, tick }) {
+  if (!edge?.from || !edge?.to || !toType) return;
+  const fromId = String(edge.from);
+  const toId = String(edge.to);
+  const fromEntry = settlementUpdates.get(fromId);
+  const toEntry = settlementUpdates.get(toId);
+  if (!fromEntry?.settlement || !toEntry?.settlement) return;
+  const labelled = { ...edge, relationshipType: toType };
+  const ends = [
+    { selfId: fromId, otherId: toId, otherEntry: toEntry },
+    { selfId: toId, otherId: fromId, otherEntry: fromEntry },
+  ];
+  for (const { selfId, otherId, otherEntry } of ends) {
+    const entry = settlementUpdates.get(selfId);
+    const network = Array.isArray(entry.settlement?.neighbourNetwork) ? entry.settlement.neighbourNetwork : [];
+    if (!network.length) continue;
+    const otherName = otherEntry.save?.name || otherEntry.settlement?.name || null;
+    const role = rolesForCanonicalEdge(labelled, selfId).sourceRole;
+    let touched = false;
+    const next = network.map(link => {
+      const matches = String(link?.id || '') === otherId
+        || String(link?.targetId || '') === otherId
+        || String(link?.settlementId || '') === otherId
+        || (otherName != null && (String(link?.neighbourName || '') === String(otherName) || String(link?.name || '') === String(otherName)));
+      if (!matches) return link;
+      const unchanged = link.relationshipType === toType
+        && String(link.relationshipFrom || '') === fromId
+        && String(link.relationshipTo || '') === toId
+        && link.localRelationshipRole === role
+        && link.displayRelationshipType === role;
+      if (unchanged) return link; // identity no-op
+      touched = true;
+      return {
+        ...link,
+        relationshipType: toType,
+        relationshipFrom: fromId,
+        relationshipTo: toId,
+        localRelationshipRole: role,
+        displayRelationshipType: role,
+        // Provenance: the dossier shows WHO last asserted this label.
+        updatedByPulse: Number.isFinite(tick) ? tick : null,
+      };
+    });
+    if (touched) {
+      settlementUpdates.set(selfId, { ...entry, settlement: { ...entry.settlement, neighbourNetwork: next } });
+    }
+  }
+}
+
+/**
+ * H15 decision: every third-party edge the vassalage hierarchy cascade flips
+ * emits Wizard News — the realignment is major campaign politics, not a
+ * silent field rewrite. One entry per flipped edge, naming both settlements
+ * and the flip.
+ */
+function cascadeNewsEntry({ cascade, edge, nameFor, outcome, tick }) {
+  const edgeKey = cascade.edgeKey || cascade.relationshipKey;
+  const fromName = nameFor(edge?.from);
+  const toName = nameFor(edge?.to);
+  const fromLabel = String(cascade.fromType || 'linked').replace(/_/g, ' ');
+  const toLabel = String(cascade.toType || 'linked').replace(/_/g, ' ');
+  const hostile = cascade.toType === 'hostile';
+  return {
+    id: `wizard_news.${tick}.hierarchy_cascade.${edgeKey}`,
+    tick,
+    scope: 'regional',
+    significance: hostile ? 'major' : 'notable',
+    score: hostile ? 72 : 56,
+    headline: `${fromName} and ${toName}: ${fromLabel} becomes ${toLabel}`,
+    summary: cascade.reason || 'The new vassalage realigns the relationship.',
+    kind: 'applied',
+    impactKind: 'hierarchy_cascade',
+    channelType: null,
+    severity: hostile ? 0.74 : 0.58,
+    settlementIds: [edge?.from, edge?.to].filter(Boolean).map(String),
+    impactIds: [],
+    channelIds: [],
+    sourceEventId: outcome.id,
+    tags: ['world_pulse', 'relationship', 'hierarchy_cascade'],
+    reasons: [cascade.reason].filter(Boolean),
+  };
+}
+
 const IMPORTANCE_RANK = Object.freeze({ pillar: 3, key: 2, notable: 1 });
 
 /**
@@ -153,7 +269,7 @@ const IMPORTANCE_RANK = Object.freeze({ pillar: 3, key: 2, notable: 1 });
  * name as tiebreak. Covert by design: no news entry — the DM finds the
  * corrupt flag in the dossier, the table finds it the hard way.
  */
-function seedBetrayalTraitor({ state, settlementUpdates, saveId, originContext, now }) {
+function seedBetrayalTraitor({ state, settlementUpdates, saveId, originContext }) {
   const sid = String(saveId || '');
   const entry = settlementUpdates.get(sid);
   const npcs = entry?.settlement?.npcs;
@@ -324,12 +440,21 @@ export function applyWorldPulseOutcomes({
       if (outcome.proposalPayload?.kind === 'relationship_label_change') {
         const edge = relationshipEdgeForOutcome(graph, outcome);
         if (edge) {
-          graph = syncRelationshipChannelBundle(graph, edge, outcome.proposalPayload.toType, {
+          // H16: both consumers below treat edge.from as the senior side —
+          // resolve the JUST-PATCHED state's seniority stamps first.
+          const orientedEdge = roleOrientedEdge(edge, state.relationshipStates?.[outcome.relationshipKey]);
+          graph = syncRelationshipChannelBundle(graph, orientedEdge, outcome.proposalPayload.toType, {
             now,
             status: 'confirmed',
             outcomeId: outcome.id,
             relationshipKey: outcome.proposalPayload.relationshipKey,
             reason: outcome.proposalPayload.reason,
+          });
+          writeRelationshipLabelToNeighbourNetworks({
+            settlementUpdates,
+            edge: orientedEdge,
+            toType: outcome.proposalPayload.toType,
+            tick,
           });
           if (outcome.proposalPayload.toType === 'vassal') {
             const hierarchy = resolveRelationshipHierarchy({
@@ -342,13 +467,40 @@ export function applyWorldPulseOutcomes({
             state = hierarchy.worldState;
             graph = hierarchy.regionalGraph;
             for (const change of hierarchy.changes) {
-              graph = syncRelationshipChannelBundle(graph, change.edge, change.toType, {
+              const orientedChangeEdge = roleOrientedEdge(change.edge, state.relationshipStates?.[change.relationshipKey]);
+              graph = syncRelationshipChannelBundle(graph, orientedChangeEdge, change.toType, {
                 now,
                 status: 'confirmed',
                 outcomeId: outcome.id,
                 relationshipKey: change.relationshipKey,
                 reason: change.reason,
               });
+              writeRelationshipLabelToNeighbourNetworks({
+                settlementUpdates,
+                edge: orientedChangeEdge,
+                toType: change.toType,
+                tick,
+              });
+            }
+            // H15: every flipped third-party edge emits Wizard News (one
+            // entry per cascade change, naming both settlements + the flip).
+            const settlementNameById = new Map((snapshot.settlements || [])
+              .map(item => [String(item.id), item.name || item.settlement?.name || String(item.id)]));
+            const nameFor = id => settlementNameById.get(String(id)) || String(id ?? 'unknown');
+            // T1's cascadeChanges shape and the legacy hierarchy.changes shape
+            // share fromType/toType/reason but key the edge differently — the
+            // union defeats the checker, so normalize through `any` here.
+            const cascades = /** @type {any[]} */ (
+              Array.isArray(hierarchy.cascadeChanges) && hierarchy.cascadeChanges.length
+                ? hierarchy.cascadeChanges
+                : hierarchy.changes
+            );
+            for (const cascade of cascades) {
+              const edgeKey = cascade.edgeKey || cascade.relationshipKey;
+              const cascadeEdge = cascade.edge
+                || (graph.edges || []).find(item => relationshipKeyFromEdge(item) === edgeKey)
+                || null;
+              newsEntries.push(cascadeNewsEntry({ cascade, edge: cascadeEdge, nameFor, outcome, tick }));
             }
           }
         }
@@ -403,7 +555,6 @@ export function applyWorldPulseOutcomes({
           settlementUpdates,
           saveId: outcome.targetSaveId,
           originContext: outcome.stressor.originContext,
-          now,
         });
       }
     }

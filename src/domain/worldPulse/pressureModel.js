@@ -20,8 +20,10 @@ const FOOD_ARCHETYPES = new Set(['famine', 'food_anchor_lost', 'regional_import_
 const SUPPLIER_FOOD_CRISIS_ARCHETYPES = new Set(['famine', 'food_anchor_lost', 'regional_import_shortage']);
 const DISEASE_ARCHETYPES = new Set(['plague', 'regional_migration_pressure']);
 const CONFLICT_ARCHETYPES = new Set(['war_pressure', 'regional_conflict_pressure', 'regional_protection_gap']);
-// Trade and economy share one commerce class: every route/market/tax archetype.
-const TRADE_ARCHETYPES = new Set(['trade_route_cut', 'regional_route_disruption', 'regional_export_market_loss', 'regional_tax_revenue_disruption', 'regional_import_shortage', 'cold_war_sanctions']);
+// Trade and economy share one commerce class: every route/market/tax archetype,
+// plus vassal_extraction — tribute drains wealth (R3 decision: it is NOT war,
+// so it must never read as conflict/defense pressure).
+const TRADE_ARCHETYPES = new Set(['trade_route_cut', 'regional_route_disruption', 'regional_export_market_loss', 'regional_tax_revenue_disruption', 'regional_import_shortage', 'cold_war_sanctions', 'vassal_extraction']);
 const LEGITIMACY_ARCHETYPES = new Set(['regional_authority_instability', 'corruption_exposed', 'dominant_npc_removed', 'regional_information_shock', 'regional_religious_pressure', 'government_overthrown']);
 const DEFENSE_ARCHETYPES = new Set(['war_pressure', 'regional_conflict_pressure', 'regional_protection_gap', 'rebellion']);
 const CRIME_ARCHETYPES = new Set(['regional_criminal_pressure', 'trade_route_cut', 'regional_route_disruption', 'famine', 'plague']);

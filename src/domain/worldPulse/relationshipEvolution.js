@@ -1,9 +1,30 @@
 import { TIER_ORDER } from '../../data/constants.js';
+import { previewRelationshipHierarchyCascade } from './relationshipHierarchy.js';
 
 const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
 
 const stablePart = (value) =>
   String(value || "unknown").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+
+// Deterministic 0..1 fork keyed on identity text (FNV-1a + avalanche). Used
+// ONLY to break genuine state ties (e.g. which side of a perfectly symmetric
+// war raids this tick) — keyed on the SORTED pair + tick so the result is
+// identical whichever side the save happened to author at 'from'. The fmix32
+// finalizer matters: without it, single-character tick changes barely move
+// the high bits and one side raids for ten straight ticks.
+function hash01(text) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < text.length; i += 1) {
+    h ^= text.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return (h >>> 0) / 4294967296;
+}
 
 const RELATIONSHIP_DEFAULTS = {
   neutral: {
@@ -192,6 +213,29 @@ export function getRelationshipSettlements(edge) {
   };
 }
 
+/**
+ * H16 — directional roles for hierarchical labels. Edges are one-per-pair and
+ * for relationships that BEGAN symmetric the from/to orientation is a pure
+ * authoring artifact (save iteration order), so a pulse-driven subjugation or
+ * patronage stamps the chosen senior side onto the relationship STATE
+ * (overlordSaveId / patronSaveId). Readers resolve direction state-first; a
+ * DM-authored vassal/patron edge carries no stamp and keeps its strict edge
+ * direction (from = overlord/patron).
+ */
+export function relationshipRoles(edge, relState) {
+  const { from, to } = getRelationshipSettlements(edge);
+  const fromId = String(from);
+  const toId = String(to);
+  const type = relState?.relationshipType;
+  const stamped = type === "vassal" ? relState?.overlordSaveId : type === "patron" ? relState?.patronSaveId : null;
+  if (stamped != null && (String(stamped) === fromId || String(stamped) === toId)) {
+    const seniorId = String(stamped);
+    const juniorId = seniorId === fromId ? toId : fromId;
+    return { seniorId, juniorId, reversed: seniorId !== fromId };
+  }
+  return { seniorId: fromId, juniorId: toId, reversed: false };
+}
+
 export function normalizeRelationshipEdge(edge = {}) {
   const relationshipType = normalizeRelationshipType(edge.relationshipType || edge.type || edge.relation || "neutral");
   if (relationshipType !== "client") {
@@ -257,6 +301,13 @@ export function ensureRelationshipState(edge, existing = {}) {
     dailyLifeWeight: clamp01(existing.dailyLifeWeight ?? 0),
     postureUpdatedAtTick: Number.isFinite(existing.postureUpdatedAtTick) ? existing.postureUpdatedAtTick : null,
     postureReasons: Array.isArray(existing.postureReasons) ? existing.postureReasons.slice(0, 4) : [],
+    // H16: direction stamps for hierarchy labels born from symmetric edges
+    // (the subjugating/patronizing side may be the authored 'to'). Null on
+    // DM-authored hierarchy edges, which keep strict edge direction.
+    overlordSaveId: existing.overlordSaveId != null ? String(existing.overlordSaveId) : null,
+    vassalSaveId: existing.vassalSaveId != null ? String(existing.vassalSaveId) : null,
+    patronSaveId: existing.patronSaveId != null ? String(existing.patronSaveId) : null,
+    clientSaveId: existing.clientSaveId != null ? String(existing.clientSaveId) : null,
     relationshipMemory: existing.relationshipMemory && typeof existing.relationshipMemory === "object"
       ? { ...existing.relationshipMemory }
       : null,
@@ -324,6 +375,7 @@ const candidateBase = ({
   severity,
   probability,
   reasons,
+  summary,
   applyMode = "auto",
   relationshipPatch = {},
   proposalPayload,
@@ -350,7 +402,7 @@ const candidateBase = ({
     headline: toType
       ? `${relState.relationshipType.replace(/_/g, " ")} may become ${toType.replace(/_/g, " ")}`
       : `${relState.relationshipType.replace(/_/g, " ")} relationship may shift`,
-    summary: reasons?.[0] || "Relationship pressure creates a world pulse outcome.",
+    summary: summary || reasons?.[0] || "Relationship pressure creates a world pulse outcome.",
     reasons,
     relationshipPatch,
     proposalPayload,
@@ -459,12 +511,16 @@ function protectorBackingScore(ctx, targetId, attackerId) {
     } else if (relState.relationshipType === "trade_partner" && (String(s.from) === String(targetId) || String(s.to) === String(targetId))) {
       protectorId = String(s.from) === String(targetId) ? s.to : s.from;
       score = 0.08 + relState.dependency * 0.16 + relState.trust * 0.12;
-    } else if (relState.relationshipType === "patron" && String(s.to) === String(targetId)) {
-      protectorId = s.from;
-      score = 0.28 + relState.leverage * 0.28 + relState.pactStrength * 0.18;
-    } else if (relState.relationshipType === "vassal" && String(s.to) === String(targetId)) {
-      protectorId = s.from;
-      score = 0.38 + relState.leverage * 0.28 + relState.pactStrength * 0.22;
+    } else if (relState.relationshipType === "patron" || relState.relationshipType === "vassal") {
+      // H16: the protecting senior party resolves state-first, not by raw
+      // edge orientation (a subjugation may have crowned the authored 'to').
+      const roles = relationshipRoles(edge, relState);
+      if (roles.juniorId === String(targetId)) {
+        protectorId = roles.seniorId;
+        score = relState.relationshipType === "vassal"
+          ? 0.38 + relState.leverage * 0.28 + relState.pactStrength * 0.22
+          : 0.28 + relState.leverage * 0.28 + relState.pactStrength * 0.18;
+      }
     }
 
     if (!protectorId || String(protectorId) === String(attackerId)) continue;
@@ -478,30 +534,54 @@ function protectorBackingScore(ctx, targetId, attackerId) {
   return clamp01(max);
 }
 
-function canSubjugate(ctx) {
-  const settlements = getRelationshipSettlements(ctx.edge);
-  const source = itemFor(ctx.snapshot, settlements.from);
-  const target = itemFor(ctx.snapshot, settlements.to);
-  if (!source || !target) return false;
+function canSubjugateDirection(ctx, { overlordId, vassalId, overlordPressure, vassalPressure }) {
+  const source = itemFor(ctx.snapshot, overlordId);
+  const target = itemFor(ctx.snapshot, vassalId);
+  if (!source || !target) return null;
   const sourceRank = tierRankFor(source);
   const targetRank = tierRankFor(target);
-  if (sourceRank < targetRank) return false;
-  if (sourceRank === targetRank && populationFor(source) < populationFor(target) * 0.72) return false;
-  const sourceStrength = settlementStrength(source, ctx.sourcePressure);
-  const targetStrength = settlementStrength(target, ctx.targetPressure);
-  const backing = protectorBackingScore(ctx, settlements.to, settlements.from);
-  return sourceStrength >= (targetStrength + backing * 0.8) * 0.82;
+  if (sourceRank < targetRank) return null;
+  if (sourceRank === targetRank && populationFor(source) < populationFor(target) * 0.72) return null;
+  const sourceStrength = settlementStrength(source, overlordPressure);
+  const targetStrength = settlementStrength(target, vassalPressure);
+  const backing = protectorBackingScore(ctx, vassalId, overlordId);
+  if (sourceStrength < (targetStrength + backing * 0.8) * 0.82) return null;
+  return { overlordId: String(overlordId), vassalId: String(vassalId), strength: sourceStrength };
 }
 
-function patronageEligibility(ctx) {
+// H16: subjugation is decided by STATE — the stronger side qualifies no matter
+// which side the save authored at 'from'. Both directions run the original
+// math; if both qualify the stronger side leads, with the settlement id as a
+// stable, orientation-independent tiebreak.
+function subjugationDirection(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
-  const source = itemFor(ctx.snapshot, settlements.from);
-  const target = itemFor(ctx.snapshot, settlements.to);
+  const forward = canSubjugateDirection(ctx, {
+    overlordId: settlements.from,
+    vassalId: settlements.to,
+    overlordPressure: ctx.sourcePressure,
+    vassalPressure: ctx.targetPressure,
+  });
+  const reverse = canSubjugateDirection(ctx, {
+    overlordId: settlements.to,
+    vassalId: settlements.from,
+    overlordPressure: ctx.targetPressure,
+    vassalPressure: ctx.sourcePressure,
+  });
+  if (forward && reverse) {
+    if (forward.strength !== reverse.strength) return forward.strength > reverse.strength ? forward : reverse;
+    return forward.overlordId <= reverse.overlordId ? forward : reverse;
+  }
+  return forward || reverse || null;
+}
+
+function patronageEligibilityDirection(ctx, { patronId, clientId, patronPressure, clientPressure }) {
+  const source = itemFor(ctx.snapshot, patronId);
+  const target = itemFor(ctx.snapshot, clientId);
   if (!source || !target) return { eligible: false, reason: "missing_settlement" };
   const sourceRank = tierRankFor(source);
   const targetRank = tierRankFor(target);
-  const sourceStrength = settlementStrength(source, ctx.sourcePressure);
-  const targetStrength = settlementStrength(target, ctx.targetPressure);
+  const sourceStrength = settlementStrength(source, patronPressure);
+  const targetStrength = settlementStrength(target, clientPressure);
   const sustainedTrade = ctx.relState.tradeBalance > 0.54
     || ctx.relState.dependency > 0.44
     || (ctx.relState.history || []).some(item => /trade|route|patron|client|dependency/i.test(`${item.type || ""} ${item.reason || ""}`));
@@ -509,12 +589,37 @@ function patronageEligibility(ctx) {
   return {
     eligible: stronger && sustainedTrade,
     reason: stronger ? (sustainedTrade ? "eligible" : "needs_sustained_trade") : "source_not_stronger",
+    patronSaveId: String(patronId),
+    clientSaveId: String(clientId),
     sourceStrength,
     targetStrength,
     sourceRank,
     targetRank,
     sustainedTrade,
   };
+}
+
+// H16: patronage forms from the STRONGER side regardless of edge orientation;
+// same math both ways, stronger patron wins a double-qualify, id tiebreak.
+function patronageEligibility(ctx) {
+  const settlements = getRelationshipSettlements(ctx.edge);
+  const forward = patronageEligibilityDirection(ctx, {
+    patronId: settlements.from,
+    clientId: settlements.to,
+    patronPressure: ctx.sourcePressure,
+    clientPressure: ctx.targetPressure,
+  });
+  const reverse = patronageEligibilityDirection(ctx, {
+    patronId: settlements.to,
+    clientId: settlements.from,
+    patronPressure: ctx.targetPressure,
+    clientPressure: ctx.sourcePressure,
+  });
+  if (forward.eligible && reverse.eligible) {
+    if (forward.sourceStrength !== reverse.sourceStrength) return forward.sourceStrength > reverse.sourceStrength ? forward : reverse;
+    return forward.patronSaveId <= reverse.patronSaveId ? forward : reverse;
+  }
+  return forward.eligible ? forward : reverse.eligible ? reverse : forward;
 }
 
 function relationshipThirdParties(snapshot, settlementId, types = []) {
@@ -670,12 +775,15 @@ function neutralRules(ctx) {
         reasons: [
           "A power imbalance gives one side an opening to formalize patronage instead of equal diplomacy.",
         ],
+        targetSaveId: eligibility.clientSaveId,
         relationshipPatch: {
           dependency: clamp01(relState.dependency + 0.06),
           leverage: clamp01(relState.leverage + 0.06),
+          patronSaveId: eligibility.patronSaveId,
+          clientSaveId: eligibility.clientSaveId,
           trajectory: "tightening",
         },
-        metadata: { imbalance, patronageEligibility: eligibility.reason },
+        metadata: { imbalance, patronageEligibility: eligibility.reason, patronSaveId: eligibility.patronSaveId, clientSaveId: eligibility.clientSaveId },
       }),
     );
     }
@@ -716,13 +824,16 @@ function tradePartnerRules(ctx) {
         severity: 0.36 + dependencyGap * 0.32,
         probability: 0.08 + dependencyGap * 0.16 + relState.leverage * 0.12,
         reasons: ["Unequal trade creates leverage for a patron/client relationship."],
+        targetSaveId: eligibility.clientSaveId,
         relationshipPatch: {
           dependency: clamp01(relState.dependency + 0.07),
           leverage: clamp01(relState.leverage + 0.07),
           resentment: clamp01(relState.resentment + 0.03),
+          patronSaveId: eligibility.patronSaveId,
+          clientSaveId: eligibility.clientSaveId,
           trajectory: "tightening",
         },
-        metadata: { patronageEligibility: eligibility.reason },
+        metadata: { patronageEligibility: eligibility.reason, patronSaveId: eligibility.patronSaveId, clientSaveId: eligibility.clientSaveId },
       }),
     );
     }
@@ -767,9 +878,22 @@ function tradePartnerRules(ctx) {
 
 function alliedRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure, snapshot } = ctx;
-  const burden = mean(targetPressure.food, targetPressure.conflict, targetPressure.disease, sourcePressure.conflict);
-  const endurance = clamp01(relState.pactStrength + relState.trust * 0.4 - relState.obligationFatigue * 0.45);
   const settlements = getRelationshipSettlements(edge);
+  // H16: the alliance burden lands on the side actually carrying the support
+  // cost. Each direction is scored with the original formula (the partner's
+  // food/conflict/disease strain plus the supporter's own conflict exposure)
+  // and the heavier direction wins; ties break on settlement id, so the
+  // outcome never depends on which side the save authored at 'from'.
+  const burdenOnFrom = mean(targetPressure.food, targetPressure.conflict, targetPressure.disease, sourcePressure.conflict);
+  const burdenOnTo = mean(sourcePressure.food, sourcePressure.conflict, sourcePressure.disease, targetPressure.conflict);
+  const fromSupports = burdenOnFrom === burdenOnTo
+    ? String(settlements.from) <= String(settlements.to)
+    : burdenOnFrom > burdenOnTo;
+  const supporterId = String(fromSupports ? settlements.from : settlements.to);
+  const supportedId = String(fromSupports ? settlements.to : settlements.from);
+  const supportedConflict = fromSupports ? targetPressure.conflict : sourcePressure.conflict;
+  const burden = fromSupports ? burdenOnFrom : burdenOnTo;
+  const endurance = clamp01(relState.pactStrength + relState.trust * 0.4 - relState.obligationFatigue * 0.45);
   const candidates = [];
 
   if (burden > 0.24) {
@@ -779,7 +903,7 @@ function alliedRules(ctx) {
         candidateType: "ally_burden",
         ruleId: "allied_aid_buffer",
         type: "condition",
-        targetSaveId: getRelationshipSettlements(edge).from,
+        targetSaveId: supporterId,
         severity: Math.min(0.74, burden * 0.72),
         probability: 0.18 + relState.trust * 0.18 + relState.pactStrength * 0.16,
         reasons: [
@@ -788,16 +912,16 @@ function alliedRules(ctx) {
         ],
         relationshipPatch: {
           aidBurden: clamp01(relState.aidBurden + burden * 0.12),
-          militaryBurden: clamp01(relState.militaryBurden + targetPressure.conflict * 0.1),
+          militaryBurden: clamp01(relState.militaryBurden + supportedConflict * 0.1),
           obligationFatigue: clamp01(relState.obligationFatigue + burden * 0.08),
         },
         condition: {
           archetype: "alliance_burden",
           severity: Math.min(0.74, burden * 0.72),
           source: "world_pulse_relationship",
-          relatedSettlementId: getRelationshipSettlements(edge).to,
+          relatedSettlementId: supportedId,
         },
-        metadata: { endurance, burden },
+        metadata: { endurance, burden, supporterSaveId: supporterId, supportedSaveId: supportedId },
       }),
     );
   }
@@ -888,14 +1012,22 @@ function alliedRules(ctx) {
 }
 
 function patronRules(ctx) {
-  const { relState, sourcePressure, targetPressure } = ctx;
-  const clientStrain = mean(targetPressure.food, targetPressure.trade, targetPressure.legitimacy);
-  const patronExposure = mean(sourcePressure.economy, sourcePressure.trade);
+  const { edge, relState, sourcePressure, targetPressure } = ctx;
+  // H16: a pulse-driven patronage may have crowned the edge's authored 'to'
+  // side as the patron — roles and the per-side pressures follow the STATE
+  // stamp, like vassalRules. A DM-authored patron edge has no stamp and
+  // keeps strict edge direction (from = patron).
+  const { seniorId: patronId, reversed } = relationshipRoles(edge, relState);
+  const patronPressure = reversed ? targetPressure : sourcePressure;
+  const clientPressure = reversed ? sourcePressure : targetPressure;
+  const clientStrain = mean(clientPressure.food, clientPressure.trade, clientPressure.legitimacy);
+  const patronExposure = mean(patronPressure.economy, patronPressure.trade);
   const candidates = [];
 
   candidates.push(
     internalDrift(ctx, "patron_extracts_tribute", {
       ruleId: "patron_extracts_tribute",
+      targetSaveId: patronId,
       severity: 0.18 + relState.leverage * 0.32 + relState.dependency * 0.18,
       probability: 0.12 + relState.leverage * 0.18,
       reasons: ["Patronage creates recurring extraction, protection demands, and law influence."],
@@ -908,11 +1040,12 @@ function patronRules(ctx) {
     }),
   );
 
-  if (targetPressure.conflict > 0.36 || targetPressure.crime > 0.42) {
+  if (clientPressure.conflict > 0.36 || clientPressure.crime > 0.42) {
     candidates.push(
       internalDrift(ctx, "patron_intervenes", {
         ruleId: "patron_intervenes",
-        severity: 0.28 + Math.max(targetPressure.conflict, targetPressure.crime) * 0.44,
+        targetSaveId: patronId,
+        severity: 0.28 + Math.max(clientPressure.conflict, clientPressure.crime) * 0.44,
         probability: 0.1 + relState.pactStrength * 0.2 + relState.leverage * 0.08,
         reasons: ["A patron has incentive to intervene when client instability threatens tribute or influence."],
         relationshipPatch: {
@@ -926,7 +1059,7 @@ function patronRules(ctx) {
   }
 
   if (
-    (targetPressure.conflict > 0.46 || targetPressure.trade > 0.52)
+    (clientPressure.conflict > 0.46 || clientPressure.trade > 0.52)
     && patronExposure > 0.36
     && relState.dependency > 0.5
     && relState.trust > 0.34
@@ -934,7 +1067,8 @@ function patronRules(ctx) {
     candidates.push(
       labelProposal(ctx, "allied", "patron_protects_investment", {
         ruleId: "patron_to_allied_interest_protection",
-        severity: 0.38 + Math.max(targetPressure.conflict, targetPressure.trade) * 0.28 + patronExposure * 0.18,
+        targetSaveId: patronId,
+        severity: 0.38 + Math.max(clientPressure.conflict, clientPressure.trade) * 0.28 + patronExposure * 0.18,
         probability: 0.06 + relState.dependency * 0.12 + patronExposure * 0.12,
         reasons: [
           "The patron's own economy is exposed enough that protecting the client as an ally becomes rational.",
@@ -956,6 +1090,7 @@ function patronRules(ctx) {
     candidates.push(
       labelProposal(ctx, "hostile", "patron_overreach", {
         ruleId: "patron_overreach",
+        targetSaveId: patronId,
         severity: 0.48 + clientStrain * 0.32 + relState.resentment * 0.18,
         probability: 0.07 + clientStrain * 0.2 + relState.resentment * 0.16,
         reasons: ["Extraction during crisis can turn patronage into open hostility."],
@@ -968,11 +1103,12 @@ function patronRules(ctx) {
     );
   }
 
-  if (sourcePressure.conflict > 0.55 && relState.dependency > 0.62) {
+  if (patronPressure.conflict > 0.55 && relState.dependency > 0.62) {
     candidates.push(
       internalDrift(ctx, "patron_forces_alignment", {
         ruleId: "patron_forces_alignment",
-        severity: 0.36 + sourcePressure.conflict * 0.32,
+        targetSaveId: patronId,
+        severity: 0.36 + patronPressure.conflict * 0.32,
         probability: 0.08 + relState.leverage * 0.18,
         reasons: ["A strained patron may demand client troops, supplies, or legal concessions."],
         relationshipPatch: {
@@ -1063,11 +1199,14 @@ function clientRules(ctx) {
 
 function vassalRules(ctx) {
   const { edge, relState, sourcePressure, targetPressure, tick } = ctx;
-  const settlements = getRelationshipSettlements(edge);
-  const overlordId = settlements.from;
-  const vassalId = settlements.to;
-  const vassalStrain = mean(targetPressure.legitimacy, targetPressure.trade, targetPressure.conflict, relState.resentment);
-  const overlordWeakness = mean(sourcePressure.conflict, sourcePressure.legitimacy, sourcePressure.defense, sourcePressure.economy);
+  // H16: a subjugation may have crowned the edge's authored 'to' side as the
+  // overlord — roles and the per-side pressures follow the STATE stamp. A
+  // DM-authored vassal edge has no stamp and keeps strict edge direction.
+  const { seniorId: overlordId, juniorId: vassalId, reversed } = relationshipRoles(edge, relState);
+  const overlordPressure = reversed ? targetPressure : sourcePressure;
+  const vassalPressure = reversed ? sourcePressure : targetPressure;
+  const vassalStrain = mean(vassalPressure.legitimacy, vassalPressure.trade, vassalPressure.conflict, relState.resentment);
+  const overlordWeakness = mean(overlordPressure.conflict, overlordPressure.legitimacy, overlordPressure.defense, overlordPressure.economy);
   const weaknessStreak = Math.max(0, Number(relState.overlordWeaknessStreak) || 0);
   const candidates = [];
 
@@ -1158,11 +1297,11 @@ function vassalRules(ctx) {
     );
   }
 
-  if (targetPressure.conflict > 0.38 || targetPressure.crime > 0.42) {
+  if (vassalPressure.conflict > 0.38 || vassalPressure.crime > 0.42) {
     candidates.push(
       internalDrift(ctx, "vassal_protection_burden", {
         ruleId: "vassal_protection_burden",
-        severity: clamp01(0.26 + Math.max(targetPressure.conflict, targetPressure.crime) * 0.4),
+        severity: clamp01(0.26 + Math.max(vassalPressure.conflict, vassalPressure.crime) * 0.4),
         probability: 0.1 + relState.pactStrength * 0.16,
         reasons: ["The overlord has incentive to protect the vassal, but protection deepens obligation and dependence."],
         relationshipPatch: {
@@ -1203,7 +1342,7 @@ function vassalRules(ctx) {
 
   const vassalItem = itemFor(ctx.snapshot, vassalId);
   const overlordItem = itemFor(ctx.snapshot, overlordId);
-  const vassalConfidence = clamp01(settlementStrength(vassalItem, targetPressure) - settlementStrength(overlordItem, sourcePressure) + 0.45);
+  const vassalConfidence = clamp01(settlementStrength(vassalItem, vassalPressure) - settlementStrength(overlordItem, overlordPressure) + 0.45);
   const independencePressure = clamp01(vassalStrain + overlordWeakness * 0.28 + Math.min(0.28, weaknessStreak * 0.07) + vassalConfidence * 0.16);
   if (!rebellionActive && (vassalStrain > 0.55 || independencePressure > 0.62)) {
     const severity = clamp01(0.38 + independencePressure * 0.34 + (1 - relState.trust) * 0.1);
@@ -1491,19 +1630,37 @@ function coldWarRules(ctx) {
   return candidates;
 }
 
+// Strength gaps below this are a genuine tie: the raid aggressor forks
+// deterministically on pair identity + tick instead of edge orientation.
+const RAID_STRENGTH_TIE = 0.04;
+
 function hostileRules(ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
+  const settlements = getRelationshipSettlements(ctx.edge);
   const powerGap = Math.abs(sourcePressure.defense - targetPressure.defense) + Math.abs(sourcePressure.economy - targetPressure.economy);
   const conflictStress = mean(sourcePressure.conflict, targetPressure.conflict, relState.fear, relState.resentment);
   const attackerAttrition = mean(sourcePressure.economy, sourcePressure.defense, sourcePressure.legitimacy, relState.militaryBurden);
   const candidates = [];
+
+  // H16: either side of a war can raid. The aggressor is the stronger side by
+  // STATE; a genuine strength tie forks on pair identity + tick, so a
+  // symmetric war raids in both directions across ticks and never depends on
+  // which side the save authored at 'from'.
+  const fromStrength = settlementStrength(itemFor(ctx.snapshot, settlements.from), sourcePressure);
+  const toStrength = settlementStrength(itemFor(ctx.snapshot, settlements.to), targetPressure);
+  let aggressorId = fromStrength > toStrength ? String(settlements.from) : String(settlements.to);
+  if (Math.abs(fromStrength - toStrength) <= RAID_STRENGTH_TIE) {
+    const pair = [String(settlements.from), String(settlements.to)].sort();
+    aggressorId = hash01(`raid.${pair[0]}.${pair[1]}.${ctx.tick}`) < 0.5 ? pair[0] : pair[1];
+  }
+  const victimId = aggressorId === String(settlements.from) ? String(settlements.to) : String(settlements.from);
 
   candidates.push(
     candidateBase({
       ...ctx,
       candidateType: "hostile_raid",
       ruleId: "hostile_raid",
-      targetSaveId: getRelationshipSettlements(ctx.edge).to,
+      targetSaveId: victimId,
       severity: 0.28 + conflictStress * 0.36,
       probability: 0.1 + conflictStress * 0.18,
       reasons: ["Hostile neighbors create raid, blockade, or intimidation pressure."],
@@ -1516,50 +1673,85 @@ function hostileRules(ctx) {
         archetype: "war_pressure",
         severity: 0.28 + conflictStress * 0.36,
         source: "world_pulse_relationship",
-        relatedSettlementId: getRelationshipSettlements(ctx.edge).from,
+        relatedSettlementId: aggressorId,
       },
-      metadata: { incidentType: "raid" },
+      metadata: { incidentType: "raid", aggressorSaveId: aggressorId, victimSaveId: victimId },
     }),
   );
 
-  if (powerGap > 0.48 && conflictStress > 0.55 && canSubjugate(ctx)) {
+  // H16: the STRONGER side qualifies to subjugate regardless of orientation.
+  const subjugation = powerGap > 0.48 && conflictStress > 0.55 ? subjugationDirection(ctx) : null;
+  if (subjugation) {
+    const patchValues = {
+      dependency: clamp01(relState.dependency + 0.08),
+      fear: clamp01(relState.fear + 0.08),
+      leverage: clamp01(relState.leverage + 0.08),
+      trust: clamp01(relState.trust - 0.02),
+    };
+    // H15: the vassal cascade must be visible BEFORE the DM accepts — preview
+    // the third-party realignments against the projected post-apply vassal
+    // state and put them in the proposal summary.
+    const cascadePreview = previewRelationshipHierarchyCascade({
+      worldState: ctx.snapshot?.worldState,
+      regionalGraph: ctx.snapshot?.regionalGraph,
+      vassalEdge: ctx.originalEdge || ctx.edge,
+      overlordId: subjugation.overlordId,
+      vassalId: subjugation.vassalId,
+      vassalState: { ...relState, ...patchValues, relationshipType: "vassal" },
+    });
+    const nameOf = (id) => itemFor(ctx.snapshot, id)?.name || id;
+    const baseReason = "A hostile imbalance can create occupation, tribute, or forced vassalage pressure.";
+    const realignmentSummary = cascadePreview.length
+      ? ` Accepting also realigns ${cascadePreview.length} third-party relationship${cascadePreview.length > 1 ? "s" : ""}: ${cascadePreview
+        .map(change => `${nameOf(change.thirdPartyId)} ${change.fromType.replace(/_/g, " ")} becomes ${change.toType.replace(/_/g, " ")}`)
+        .join("; ")}.`
+      : "";
     candidates.push(
       labelProposal(ctx, "vassal", "hostile_occupation_pressure", {
         ruleId: "hostile_occupation_pressure",
         severity: 0.52 + powerGap * 0.24 + conflictStress * 0.22,
         probability: 0.04 + powerGap * 0.14 + conflictStress * 0.12,
-        reasons: ["A hostile imbalance can create occupation, tribute, or forced vassalage pressure."],
+        summary: `${baseReason}${realignmentSummary}`,
+        reasons: [
+          baseReason,
+          ...cascadePreview.map(change =>
+            `Realignment on acceptance: ${nameOf(change.thirdPartyId)} shifts ${change.fromType.replace(/_/g, " ")} to ${change.toType.replace(/_/g, " ")} (${change.reason})`),
+        ],
+        targetSaveId: subjugation.vassalId,
         relationshipPatch: {
-          dependency: clamp01(relState.dependency + 0.08),
-          fear: clamp01(relState.fear + 0.08),
-          leverage: clamp01(relState.leverage + 0.08),
-          trust: clamp01(relState.trust - 0.02),
-          overlordSaveId: getRelationshipSettlements(ctx.edge).from,
-          vassalSaveId: getRelationshipSettlements(ctx.edge).to,
+          ...patchValues,
+          overlordSaveId: subjugation.overlordId,
+          vassalSaveId: subjugation.vassalId,
           trajectory: "subjugating",
         },
         metadata: {
           powerGap,
-          overlordSaveId: getRelationshipSettlements(ctx.edge).from,
-          vassalSaveId: getRelationshipSettlements(ctx.edge).to,
+          overlordSaveId: subjugation.overlordId,
+          vassalSaveId: subjugation.vassalId,
         },
       }),
     );
   }
 
-  if (relState.leverage > 0.45 && sourcePressure.economy > targetPressure.economy) {
+  // H16: the dominant side extracts — economic pressure is read per side
+  // (higher pressure = the weaker economy), not by authoring orientation.
+  if (relState.leverage > 0.45 && sourcePressure.economy !== targetPressure.economy) {
+    const fromDominant = sourcePressure.economy < targetPressure.economy;
+    const extractorId = String(fromDominant ? settlements.from : settlements.to);
+    const tributeVictimId = String(fromDominant ? settlements.to : settlements.from);
     candidates.push(
       internalDrift(ctx, "hostile_forced_tribute", {
         ruleId: "hostile_forced_tribute",
+        targetSaveId: tributeVictimId,
         severity: 0.32 + relState.leverage * 0.35,
         probability: 0.06 + relState.leverage * 0.16,
-        reasons: ["A hostile stronger side may demand tribute before outright occupation."],
+        reasons: ["The economically dominant hostile side may demand tribute before outright occupation."],
         relationshipPatch: {
           resentment: clamp01(relState.resentment + 0.05),
           dependency: clamp01(relState.dependency + 0.04),
           leverage: clamp01(relState.leverage + 0.04),
         },
-        metadata: { incidentType: "forced_tribute" },
+        metadata: { incidentType: "forced_tribute", extractorSaveId: extractorId, victimSaveId: tributeVictimId },
       }),
     );
   }
@@ -1761,6 +1953,11 @@ export function applyRelationshipPatch(worldState, outcome, now) {
     ? {
         tick: worldState.tick,
         type: "label_proposal_applied",
+        // The outcome id rides every row this apply writes: a proposal
+        // selected at tick T but accepted at T' lands its incident/history
+        // rows at T', and relationship memory dedupes by outcome id first —
+        // the pulseHistory record at T already scored this event.
+        outcomeId: outcome.id || null,
         fromType: outcome.proposalPayload.fromType,
         toType: outcome.proposalPayload.toType,
         reason: outcome.proposalPayload.reason,
@@ -1772,6 +1969,18 @@ export function applyRelationshipPatch(worldState, outcome, now) {
     patch.relationshipType = outcome.proposalPayload.toType;
     patch.proposedRelationshipType = null;
     patch.lastTransitionTick = worldState.tick;
+    // H16: seniority stamps are only meaningful for the label that minted
+    // them — a transition away from vassal/patron clears them so a later
+    // re-subjugation can never inherit a stale senior side. A patch that
+    // explicitly re-stamps (the subjugation itself) wins.
+    if (outcome.proposalPayload.toType !== "vassal") {
+      if (patch.overlordSaveId === undefined) patch.overlordSaveId = null;
+      if (patch.vassalSaveId === undefined) patch.vassalSaveId = null;
+    }
+    if (outcome.proposalPayload.toType !== "patron") {
+      if (patch.patronSaveId === undefined) patch.patronSaveId = null;
+      if (patch.clientSaveId === undefined) patch.clientSaveId = null;
+    }
   }
 
   const updated = {
@@ -1794,6 +2003,7 @@ export function applyRelationshipPatch(worldState, outcome, now) {
         tick: worldState.tick,
         type: outcome.metadata?.incidentType || outcome.candidateType,
         severity: outcome.severity,
+        outcomeId: outcome.id || null,
       },
     ],
     history: historyEntry ? [...(current.history || []).slice(-11), historyEntry] : current.history || [],

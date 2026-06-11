@@ -19,6 +19,7 @@
 import { activeChannelsFrom } from '../region/index.js';
 import { deriveActiveCondition } from '../activeConditions.js';
 import { normalizeSimulationRules } from './simulationRules.js';
+import { effectiveStressorSeverity } from './stressors.js';
 import { stablePart } from './worldState.js';
 
 const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
@@ -30,8 +31,9 @@ const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
 // families (populationDynamics / tierResourceDynamics); rules-off keeps the
 // legacy always-auto behavior.
 //  • Migration: the transfer fraction ramps 0.04→0.12 of the SOURCE population
-//    across stressor severity 0.6→1.0. A transfer of >=8% (severity >= 0.8,
-//    the top of the displacement band) is a major change.
+//    across the source's EFFECTIVE severity 0.6→1.0 (spread targets carry an
+//    attenuated severityBySettlement entry). A transfer of >=8% (severity
+//    >= 0.8, the top of the displacement band) is a major change.
 const MIGRATION_PROPOSAL_FRACTION = 0.08;
 //  • Trade: severity = 0.4 + strength*0.3 (max 0.7). >=0.62 means a
 //    trade-dependency at strength >= ~0.73 failing — a hard dependency, major.
@@ -55,6 +57,12 @@ function populationFlows(snapshot, tick, requireProposal) {
     if (!DISPLACEMENT_STRESSORS.has(s.type) || (s.severity || 0) < 0.6) continue;
     const affected = new Set((s.affectedSettlementIds || []).map(String));
     for (const sourceId of affected) {
+      // Spread targets experience the shared record at their ATTENUATED
+      // severity (severityBySettlement, H8) — refugees scale with what this
+      // source actually suffers, not the origin's full crisis. An attenuated
+      // source below the displacement band displaces nobody.
+      const sourceSeverity = effectiveStressorSeverity(s, sourceId);
+      if (sourceSeverity < 0.6) continue;
       const source = snapshot.byId?.get?.(sourceId);
       const sourcePop = source?.settlement?.population || 0;
       for (const channel of activeChannelsFrom(graph, sourceId, { types: MIGRATION_CHANNELS })) {
@@ -62,10 +70,10 @@ function populationFlows(snapshot, tick, requireProposal) {
         if (affected.has(destId)) continue;
         const dest = snapshot.byId?.get?.(destId);
         if (!dest) continue;
-        const fraction = Math.min(0.12, 0.04 + (s.severity - 0.6) * 0.2);
+        const fraction = Math.min(0.12, 0.04 + (sourceSeverity - 0.6) * 0.2);
         const refugees = Math.round(sourcePop * fraction);
         if (refugees <= 0) continue;
-        const severity = clamp01(0.3 + s.severity * 0.3);
+        const severity = clamp01(0.3 + sourceSeverity * 0.3);
         const human = String(s.type).replace(/_/g, ' ');
         out.push({
           id: `candidate.flow.migration.${stablePart(s.id)}.${stablePart(destId)}.${tick}`,
@@ -75,12 +83,12 @@ function populationFlows(snapshot, tick, requireProposal) {
           ruleFamily: 'flow',
           targetSaveId: destId,
           severity,
-          probability: Math.min(0.45, 0.1 + s.severity * 0.3),
+          probability: Math.min(0.45, 0.1 + sourceSeverity * 0.3),
           applyMode: requireProposal && fraction >= MIGRATION_PROPOSAL_FRACTION ? 'proposal' : 'auto',
           headline: `Refugees from ${source?.name || sourceId} reach ${dest?.name || destId}`,
           summary: `~${refugees} people flee ${human} in ${source?.name || sourceId} toward ${dest?.name || destId}.`,
           reasons: [
-            `A severe ${human} (${s.severity.toFixed(2)}) is displacing people.`,
+            `A severe ${human} (${sourceSeverity.toFixed(2)}) is displacing people.`,
             `A confirmed ${channel.type.replace(/_/g, ' ')} channel carries them.`,
           ],
           condition: deriveActiveCondition({

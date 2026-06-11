@@ -4,6 +4,7 @@ import {
   getRelationshipSettlements,
   normalizeRelationshipEdge,
   relationshipKeyFromEdge,
+  relationshipRoles,
 } from './relationshipEvolution.js';
 
 export const RELATIONSHIP_MEMORY_HALF_LIFE_TICKS = 4;
@@ -140,10 +141,15 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
   // payload (a label change also claims tick + 'label_proposal_applied', the
   // history row's type; the exclusive `label:` conflict tag guarantees at most
   // one label change per relationship per tick, so the pair is unambiguous).
+  // The tick+type join breaks for the LAG case — a label proposal selected at
+  // tick T but accepted at T' writes its incident/history rows at T' — so
+  // applyRelationshipPatch stamps the outcome id onto those rows and the
+  // outcome id joins FIRST, regardless of which tick the rows landed on.
   // The per-relationship stores then fill in only events the pulse window no
   // longer covers (party incidents, war resolutions, truncated history).
   const seen = new Set();
   const keyFor = (tick, type) => (Number.isFinite(tick) && type ? `${tick}:${type}` : null);
+  const outcomeKeyFor = (id) => (id ? `outcome:${id}` : null);
   const add = (entry, keys) => {
     if (!entry) return;
     const valid = keys.filter(Boolean);
@@ -167,6 +173,7 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
         type: incidentType || outcome?.type,
       }, currentTick, outcome?.candidateType || 'pulse_outcome');
       add(entry, [
+        outcomeKeyFor(outcome?.id),
         keyFor(tick, incidentType),
         outcome?.proposalPayload?.kind === 'relationship_label_change' ? keyFor(tick, 'label_proposal_applied') : null,
       ]);
@@ -174,18 +181,18 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
   }
   for (const incident of relState.recentIncidents || []) {
     const entry = memoryEntry(incident, currentTick, 'recent_incident');
-    add(entry, [keyFor(incident?.tick, incident?.type)]);
+    add(entry, [outcomeKeyFor(incident?.outcomeId), keyFor(incident?.tick, incident?.type)]);
   }
   // hierarchyResolutions before history: both stores carry the SAME
   // 'hierarchy_resolution' row, and the dedicated store's entry (severity
   // default 0.74) is the richer record when the incident buffer evicted it.
   for (const item of relState.hierarchyResolutions || []) {
     const entry = memoryEntry({ severity: 0.74, ...item }, currentTick, 'hierarchy_resolution');
-    add(entry, [keyFor(item?.tick, item?.type || 'hierarchy_resolution')]);
+    add(entry, [outcomeKeyFor(item?.outcomeId), keyFor(item?.tick, item?.type || 'hierarchy_resolution')]);
   }
   for (const item of relState.history || []) {
     const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_history');
-    add(entry, [keyFor(item?.tick, item?.type)]);
+    add(entry, [outcomeKeyFor(item?.outcomeId), keyFor(item?.tick, item?.type)]);
   }
   return out.sort((a, b) => b.score - a.score).slice(0, 8);
 }
@@ -323,8 +330,14 @@ export function buildRelationshipPostures({ worldState = {}, regionalGraph = {},
     const relationshipKey = relationshipKeyFromEdge(rawEdge);
     const edge = normalizeRelationshipEdge(rawEdge);
     const relState = ensureRelationshipState(edge, states[relationshipKey]);
-    const { from, to } = getRelationshipSettlements(edge);
-    if (!from || !to) continue;
+    const rawSettlements = getRelationshipSettlements(edge);
+    if (!rawSettlements.from || !rawSettlements.to) continue;
+    // H16: when a subjugation/patronage crowned the edge's authored 'to' side
+    // the senior party is stamped on the STATE — present senior-first like
+    // every other hierarchy edge so direction summaries stay truthful.
+    const roles = relationshipRoles(edge, relState);
+    const from = roles.reversed ? roles.seniorId : String(rawSettlements.from);
+    const to = roles.reversed ? roles.juniorId : String(rawSettlements.to);
     if (preferPersisted) {
       const persisted = persistedPostureRow(relState, edge, relationshipKey, from, to);
       if (persisted) {
