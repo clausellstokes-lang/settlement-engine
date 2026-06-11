@@ -645,6 +645,9 @@ export const createCampaignSlice = (set, get) => ({
    * applyWorldPulseProposal already consumes) rather than silently written
    * onto saves. `now` is threaded from the caller's minted timestamp so the
    * apply stamps one instant everywhere.
+   *
+   * @param {string} campaignId
+   * @param {{ type?: string, settlementId?: string|number, now?: string|null }} [args]
    */
   resolveCampaignStressor: (campaignId, { type, settlementId, now = null } = {}) => {
     let resolved = null;

@@ -392,7 +392,12 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         // adoption fires only when the SETTLEMENT side changed, so a sim-side
         // seek_promotion's raised dotRank is not clobbered back every tick by
         // an unchanged npc.importance.
-        if (typeof npc.importance === 'string' && npc.importance !== st.adoptedImportance) {
+        if (typeof npc.importance === 'string' && st.adoptedImportance === undefined) {
+          // Legacy npcState predating the marker: seed it WITHOUT adopting —
+          // re-deriving dotRank here would clobber a sim-evolved promotion
+          // (seek_promotion) once on every pre-existing save at upgrade time.
+          st = { ...st, adoptedImportance: npc.importance };
+        } else if (typeof npc.importance === 'string' && npc.importance !== st.adoptedImportance) {
           const dotRank = dotRankFor(npc);
           st = { ...st, dotRank, factionSeat: roleSeatFor(dotRank), adoptedImportance: npc.importance };
         }

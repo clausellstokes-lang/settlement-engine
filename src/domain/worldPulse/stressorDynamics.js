@@ -392,7 +392,9 @@ function sourceLabel(source) {
  * @param {any} stressor          normalized stressor ({ type, affectedSettlementIds })
  * @param {any} snapshot          world snapshot ({ byId, regionalGraph })
  * @returns {{ score: number, floorsMet: boolean, resolutionDelta: number,
- *            decayMultiplier: number, profile: any } | null}
+ *            decayMultiplier: number, profile: any,
+ *            sourceBreakdown: Array<{ kind: string, key: string|null,
+ *              label: string, value: number, weight: number }> } | null}
  *          null when the type has no counterforce profile (unknown types).
  */
 export function counterforceAssessment(stressor, snapshot) {

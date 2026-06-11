@@ -250,7 +250,11 @@ export const STRESSOR_CATALOG = Object.freeze({
     durationPolicy: 'episodic',
     pressureKinds: ['legitimacy', 'trade', 'disease'],
     birthThreshold: 0.6,
-    spreadChannels: ['arcane_network', 'information_network'],
+    // A deadzone does not SPREAD — it MOVES (the wander mechanic below).
+    // Giving it spread channels too would grow the footprint past the wander
+    // cap at attenuated severity, contradicting the zone's whole nature: you
+    // are either inside the silence at full strength or outside it.
+    spreadChannels: [],
     residualEffects: ['scorched_leylines', 'hedge_wizard_exodus', 'mundane_adaptation'],
     affectedSystems: ['healing_capacity', 'trade_connectivity', 'public_legitimacy'],
     // The inverse of magical_instability — absence, not wildness (the two are
@@ -834,7 +838,7 @@ function stressorTypesForPressure(pressure) {
   return Object.entries(STRESSOR_CATALOG)
     // Deprecated types (slave_revolt) never birth organically — they remain
     // in the catalog only for legacy saves and deliberate DM authoring.
-    .filter(([, rule]) => !rule.deprecated)
+    .filter(([, rule]) => !('deprecated' in rule && rule.deprecated))
     .filter(([, rule]) => (rule.pressureKinds || []).includes(pressure.kind) && pressure.score >= rule.birthThreshold)
     .map(([type]) => type);
 }
@@ -995,10 +999,18 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
   const echoes = echoIndex(currentStressors);
   const candidates = [];
 
+  // A WANDERED stressor has drifted off its birth origin: its stable id
+  // still embeds that origin, so a fresh birth there would mint the SAME id
+  // and the byId upsert would silently clobber the live record elsewhere.
+  // Block any birth whose id collides with an active record.
+  const activeIds = new Set(
+    currentStressors.filter(s => !INACTIVE_STATUSES.has(s.status)).map(s => s.id));
+
   for (const pressure of pressures) {
     for (const type of stressorTypesForPressure(pressure)) {
       const targetKey = `${type}:${pressure.settlementId}`;
       if (existingKeys.has(targetKey)) continue;
+      if (activeIds.has(idFor({ type, originSettlementId: String(pressure.settlementId) }))) continue;
       // Organic birth gates (stressorGates.js): the gate can block the spawn
       // entirely or scale its odds; its reasons land on the candidate.
       const spawnGate = STRESSOR_SPAWN_GATES[type];

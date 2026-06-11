@@ -1219,9 +1219,21 @@ const NPC_STANDING_FIELDS = Object.freeze(['importance', 'influence', 'structura
  * both refs; the composer only offers real same-faction pairs).
  */
 function swapNpcStanding(s, event) {
+  // Empty refs must never reach findNpc: '' loose-matches the first NPC
+  // whose id is null (String(null || '') === ''), silently swapping with a
+  // bystander instead of no-opping.
+  const peerRef = event.payload?.swapWithNpcId || event.payload?.swapWithName;
+  if (!event.targetId || !peerRef) return s;
   const a = findNpc(s, event.targetId);
-  const b = findNpc(s, event.payload?.swapWithNpcId || event.payload?.swapWithName);
+  const b = findNpc(s, peerRef);
   if (!a || !b || a === b) return s;
+  // Standing swaps stay inside ONE faction (the owner's design). If both
+  // NPCs declare an affiliation and they differ, this is a mis-targeted
+  // event — no-op rather than mis-stamp a foreign factionId onto the peer.
+  if (a.factionAffiliation && b.factionAffiliation
+    && String(a.factionAffiliation).toLowerCase() !== String(b.factionAffiliation).toLowerCase()) {
+    return s;
+  }
 
   const carryStanding = (from, onto) => {
     const next = { ...onto };

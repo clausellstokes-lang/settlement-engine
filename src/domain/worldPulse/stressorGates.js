@@ -199,7 +199,7 @@ function strongestHostile(snapshot, sid) {
   return hostiles.length ? hostiles[0] : null;
 }
 
-function hostileFactor(snapshot, sid, { hostileMult, coldWarMult }) {
+function hostileFactor(snapshot, sid, { hostileMult, coldWarMult = null }) {
   const top = strongestHostile(snapshot, sid);
   if (!top) return null;
   if (top.type === 'hostile') {

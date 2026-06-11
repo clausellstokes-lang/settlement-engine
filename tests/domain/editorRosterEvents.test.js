@@ -440,6 +440,30 @@ describe('mutateSettlement — PROMOTE_NPC / DEMOTE_NPC standing swap', () => {
     });
     expect(self.npcs).toEqual(settlement.npcs);
   });
+
+  test('an EMPTY counterpart ref no-ops even when an id-less NPC could loose-match it', () => {
+    // Review fix: findNpc('') matches the first NPC whose id is null
+    // (String(null || '') === '') — the guard must fire before the lookup.
+    const settlement = roster();
+    settlement.npcs.push({ id: null, name: '', importance: 'pillar', factionAffiliation: 'The Garrison' });
+    const next = mutateSettlement({
+      settlement,
+      event: ev('PROMOTE_NPC', { targetId: 'npc_2', payload: {} }),
+      now: NOW,
+    });
+    expect(next.npcs).toEqual(settlement.npcs);
+  });
+
+  test('a cross-faction pair is a settlement no-op (standing swaps stay inside one faction)', () => {
+    const settlement = roster();
+    settlement.npcs[1] = { ...settlement.npcs[1], factionAffiliation: 'Temple Wardens' };
+    const next = mutateSettlement({
+      settlement,
+      event: ev('PROMOTE_NPC', { targetId: 'npc_2', payload: { swapWithNpcId: 'npc_1' } }),
+      now: NOW,
+    });
+    expect(next.npcs).toEqual(settlement.npcs);
+  });
 });
 
 describe('npcAgency — importance adoption (ensureNpcStates)', () => {
@@ -495,5 +519,28 @@ describe('npcAgency — importance adoption (ensureNpcStates)', () => {
     };
     ws = ensureNpcStates(ws, snapshotFor(after), createPRNG('seed-b4').fork('init'));
     expect(ws.npcStates[id].dotRank).toBe(2);
+  });
+
+  test('a LEGACY npcState (no marker) seeds the marker without adopting — sim promotions survive the upgrade', () => {
+    // Review fix: pre-existing saves carry npcStates with no
+    // adoptedImportance; the first ensure after the upgrade must not
+    // re-derive dotRank from settlement importance (that would demote a
+    // sim-promoted NPC exactly once, silently).
+    const npcs = [{ id: 'npc_1', name: 'Mara', importance: 'notable' }];
+    const id = npcId('s1', npcs[0], 0);
+    let ws = ensureNpcStates({ npcStates: {} }, snapshotFor(npcs), createPRNG('seed-c').fork('init'));
+    // Simulate the legacy shape: the sim promoted Mara, and the state
+    // predates the marker entirely.
+    const { adoptedImportance, ...legacy } = ws.npcStates[id];
+    ws = { npcStates: { [id]: { ...legacy, dotRank: 3, factionSeat: 'leader_champion' } } };
+
+    ws = ensureNpcStates(ws, snapshotFor(npcs), createPRNG('seed-c2').fork('init'));
+    expect(ws.npcStates[id].dotRank).toBe(3); // promotion survives
+    expect(ws.npcStates[id].adoptedImportance).toBe('notable'); // marker seeded
+
+    // From here the seam behaves normally: a real settlement-side change adopts.
+    const demoted = [{ id: 'npc_1', name: 'Mara', importance: 'minor' }];
+    ws = ensureNpcStates(ws, snapshotFor(demoted), createPRNG('seed-c3').fork('init'));
+    expect(ws.npcStates[id].dotRank).toBe(1);
   });
 });

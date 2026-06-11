@@ -47,6 +47,9 @@ describe('magic_deadzone', () => {
     const entry = STRESSOR_CATALOG.magic_deadzone;
     expect(entry.durationPolicy).toBe('episodic');
     expect(entry.wander).toMatchObject({ maxFootprint: 2 });
+    // Review fix: a deadzone MOVES, it does not also spread — spread would
+    // grow the footprint past the wander cap at attenuated severity.
+    expect(entry.spreadChannels).toEqual([]);
 
     const pressures = [{
       settlementId: 'oak', settlementName: 'Oak', kind: 'legitimacy',
@@ -109,6 +112,32 @@ describe('magic_deadzone', () => {
     const run = list => ageRoamingStressors(list, snapshot, wanderingRng, { tick: 1, now: '2026-02-01T00:00:00.000Z' })
       .stressors.find(s => s.type === 'magic_deadzone').affectedSettlementIds;
     expect(run([deadzone(['a']), other])).toEqual(run([other, deadzone(['a'])]));
+  });
+
+  test('a rebirth at the vacated origin cannot clobber the wandered record (stable-id collision block)', () => {
+    // Review fix: the wandered zone's id still embeds its BIRTH origin; a
+    // fresh birth there would mint the SAME id and the byId upsert would
+    // silently replace the live record at its new footprint.
+    const wandered = {
+      id: 'world_stressor.magic_deadzone.oak',
+      type: 'magic_deadzone',
+      status: 'active',
+      severity: 0.6,
+      originSettlementId: 'oak',
+      affectedSettlementIds: ['b', 'c'], // drifted off its origin
+    };
+    const pressures = [{
+      settlementId: 'oak', settlementName: 'Oak', kind: 'legitimacy',
+      label: 'Legitimacy pressure', score: 0.7, reasons: ['unrest'],
+    }];
+    const snapshot = {
+      worldState: { tick: 6, stressors: [wandered] },
+      regionalGraph: { edges: [], channels: [] },
+      byId: new Map([['oak', { settlement: arcaneTown('Oak'), causal: { scores: {} } }]]),
+    };
+    const births = evaluateStressorRules(snapshot, pressureIndex(pressures), { tick: 6, pressures })
+      .filter(c => c.candidateType === 'stressor_birth_magic_deadzone');
+    expect(births).toHaveLength(0);
   });
 
   test('no graph, no movement — and a footprint with no outgoing channels stays put', () => {
