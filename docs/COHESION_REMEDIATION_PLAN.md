@@ -14,7 +14,9 @@
 > per-tick disaster writeback (the readiness row finally moves), plus grounding-honesty fold-ins from Wave 6 #1
 > (food self-sufficiency, stability-label, surplus-%, crimeTypes joins). Partially advances Wave 5 #3/#4 and
 > Wave 6 #1; the world-pulse power-transfer write-back grazes Wave 7's owner-gated dossier write-back item.
-> Waves 5–6 remainder next; Wave 7 awaits owner sign-off.
+> Waves 5–6 remainder next; Wave 7 awaits owner sign-off; Wave 8 (structural prevention —
+> entity ids, frozen/live + producer/consumer manifests, crisis-triple sync) proposed below
+> under the same sign-off gate.
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.
@@ -119,6 +121,50 @@ Built incrementally: Wave 0 lands the skeleton + assertions for currently-health
 - **`magical_stability` crisis archetype + housing/refugee condition path + monsterThreat→legitimacy term** — modeling additions, each S/M, flagged as genuinely *new* causal links rather than repairs.
 - **Raw-config / effectiveConfig full split** (`settlement.config` vs `settlement.effectiveConfig`; `applyChange` regenerates from raw) — the complete cure for derived-state-as-input; touches persistence shape + the store, L effort. Wave 4's strip-keys fix removes the acute damage first.
 
+## Wave 8 — Structural prevention (proposed 2026-06-11; owner sign-off required, like Wave 7)
+
+Waves 1–6 fix every *found* instance and the harness pins each one dead — but the bug classes
+themselves can regrow at any seam the harness doesn't watch. The coup-wave completion proved the
+point twice in one session: a fresh fuzzy-merge defect (goods subsumption) and a fresh frozen-field
+defect (`scores.disaster`) both appeared in NEW code, written under the program's own discipline.
+These four items are the root-cause cures. Each is program-scale (the ledger-refactor precedent
+applies: stage it, gate it, let the tests enforce the thesis).
+
+1. **Entity identity: ids join, labels display.** The string-join disease's root cure. Today
+   institutions, goods, chains, services, and exports join on display-label text (`slice(0,12)`
+   substring processor matching, `/airship/i` sniffs, first-word export badges) — every wave has
+   killed instances; nothing stops the next feature from writing a new one. Generalize the
+   `exactGoodId` pattern (goodsCatalog.js): generation writes canonical ids ALONGSIDE labels
+   (goods already have them; institutions get catalog ids; chains already carry `chainId`), joins
+   flip to id-first with label-fallback for legacy saves, and a lint/harness rule rejects new
+   label-joins at known seams. Touches persistence shape — L effort, staged by entity kind
+   (goods → institutions → services).
+2. **Frozen-vs-live field manifest.** Nothing marks which generation-written fields are
+   snapshots and which the pulse must keep live — the disaster-freeze class (`scores.disaster`
+   froze for two days of work; the rest of `defenseProfile.scores`, `magicTradeChannel`, and
+   `economicGates` are still snapshots a long campaign will eventually contradict). Declare per
+   field: `snapshot` (display may NOT prefer it over a live sibling) or `live` (must name its
+   pulse writeback producer); a manifest-walking test enforces both directions. M effort, and it
+   converts a multi-agent-audit bug class into a failing unit test.
+3. **Producer/consumer manifest (dead-field CI).** The "written for the dossier, read by
+   nothing" class (`blockadeBypass` today; `economicGates` until 1fd128e; Wave 6 #1's six dead
+   reads). A registry of engine-written DM-facing fields with their intended consumers; the gate
+   fails on writes with no reader and reads with no writer. S/M effort; mostly mechanical once
+   the field list is enumerated from the two audits.
+4. **Crisis-triple sync by construction.** One authored crisis lives in three representations —
+   stress entry, roaming world-pulse stressor, promoted condition — kept in agreement by upsert
+   conventions (severity drift and the resolution asymmetry were both found in the seam: the
+   roaming twin resolves, the local entry and dossier never do). Route the lifecycle through one
+   transition function (onset/escalate/resolve updates all three, or explicitly documents the
+   DM-owned exception). M effort; resolves the owner decision deferred at `mutate.js`
+   (applyStressor) and `stressorAftermath.js`.
+
+Also worth a look while in there, smaller: **seeded-RNG stream isolation** (same-seed stability
+currently depends on generator call ORDER — servicesGenerator had to be restructured around it;
+per-subsystem forks would make refactors safe), and a **convergence audit** of the stockpile
+dynamics (the tithe/drawdown see-saw shows the discrete-time branches lack hysteresis; soak
+verifies boundedness, not convergence).
+
 ---
 
 ## Sequencing rationale
@@ -126,3 +172,9 @@ Built incrementally: Wave 0 lands the skeleton + assertions for currently-health
 Waves 1–2 are pure sim-side wiring (small, independent, immediately deployable — the "quiet lies" stop first). Waves 3–4 are generation data hygiene, ordered so data-table fixes (3) land before the roster-mutation passes that consume them (4). Wave 5 repairs the adapters *between* the two halves — done after both sides are individually honest. Wave 6 fixes what the DM reads last, when the data underneath is finally true. The join harness (Wave 0 + per-fix assertions) is the enforcement layer that keeps all of it from regressing — the same tests-enforce-the-thesis methodology that made the ledger refactor stick.
 
 Estimated shape: ~6 deploys, each gated + verified; Waves 1–3 are dominated by S-effort fixes, Wave 4 carries the heaviest behavioral change (roster integrity), Waves 5–6 close the loop.
+
+Wave 8 sits deliberately last: it is prevention, not repair, and its items pay off most once the
+instance inventory (Waves 5–6) is cleared — retrofitting ids or manifests onto known-lying data
+would enshrine the lies. Wave 8 #2/#3 (the manifests) can start any time after Wave 6 with no
+persistence impact; #1 and #4 want the same owner conversation as Wave 7 since they touch save
+shape and DM-facing crisis semantics.
