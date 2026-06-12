@@ -224,6 +224,33 @@ export function deriveViability(settlement) {
   };
 }
 
+/**
+ * Blockade relief (Wave 8 — blockadeBypass gains its reader). The stockpile
+ * bookkeeping (economicState.foodSecurity.stockpile, written every pulse by
+ * advanceFoodStockpile) records whether a blockade currently grips the
+ * settlement and which magical channel, if any, runs it. This is the display
+ * read of that record: the dossier's food/viability surface can finally say
+ * WHY the siege did or didn't bite instead of leaving the granary math
+ * unexplained. Settlements the pulse has never touched (no stockpile record)
+ * report available:false and say nothing. The prose field is named `display`
+ * (the view-model idiom) — NOT `note`, which the publicSafe denylist strips.
+ */
+export function deriveBlockadeRelief(settlement) {
+  const sp = settlement?.economicState?.foodSecurity?.stockpile || null;
+  if (!sp) return { available: false, blockaded: false, bypass: null, display: null };
+  const blockaded = !!sp.blockaded;
+  const bypass = sp.blockadeBypass || null;
+  let display = null;
+  if (blockaded) {
+    display = bypass === 'teleport'
+      ? "Supplies arrive by teleportation circle despite the siege — up to the circle's throughput."
+      : bypass === 'airship'
+        ? 'Airships run the blockade — imports continue, impaired by siege countermeasures.'
+        : 'The blockade is biting: no magical channel runs it, and the import share of need goes unmet.';
+  }
+  return { available: true, blockaded, bypass, display };
+}
+
 const MAGIC_ROLE_LABEL = Object.freeze({
   economic:       'Economic',
   military:       'Military',
@@ -262,9 +289,10 @@ export function deriveMagicPosture(settlement) {
 
 /**
  * The canonical display model. M0.1 surfaced foodBalance + exportPosture; M0.2
- * adds viability; Wave 7 adds the magic posture. The `aiOverlay` option is
- * reserved for later milestones (prose-field overlays); these are canonical
- * simulation facts and always read from the base settlement, never an AI clone.
+ * adds viability; Wave 7 adds the magic posture; Wave 8 adds blockade relief.
+ * The `aiOverlay` option is reserved for later milestones (prose-field
+ * overlays); these are canonical simulation facts and always read from the
+ * base settlement, never an AI clone.
  */
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {
@@ -272,5 +300,6 @@ export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = nul
     exportPosture: deriveExportPosture(settlement),
     viability: deriveViability(settlement),
     magic: deriveMagicPosture(settlement),
+    blockade: deriveBlockadeRelief(settlement),
   };
 }

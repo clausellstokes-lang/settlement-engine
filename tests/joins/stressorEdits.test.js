@@ -35,6 +35,7 @@
 import { describe, test, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
+import { withOrganicStressorResolution } from '../../src/domain/worldPulse/stressorAftermath.js';
 import { canonStressors } from '../../src/domain/canonicalAccessors.js';
 import {
   withTickedConditionDurations,
@@ -75,6 +76,15 @@ const FAMINE_SEED = 'ec-famine-1';
 // object container) and promotes the war_pressure condition — the hardest
 // resolution case: the same seed re-rolls that exact stressor back.
 const ORG_SEED = 'org-7';
+
+const SIEGE_CFG = {
+  ...BASE_CFG,
+  selectedStressesRandom: false,
+  selectedStresses: ['under_siege'],
+};
+// Probed: this seed + forced siege generates the single under_siege stressor
+// (bare object dual-write) with ONE GENERATION-stamped war_pressure condition.
+const SIEGE_SEED = 'ec-siege-1';
 
 /** Exactly how settlementSlice.applyChange rebuilds the next run's input. */
 const buildNextConfig = (settlement) => ({
@@ -268,6 +278,39 @@ describe('join: resolving a CONFIG-FORCED stressor sticks across regenerations (
     const s3 = gen(buildNextConfig(resolved), SEED);
     expect(stressorOf(s3, 'famine')).toEqual([]);
     expect(condOf(s3, 'famine')[0].status).toBe('easing');
+  });
+
+  test('an ENTRY-LESS organic wind-down suppresses the gen-vocabulary re-mint (a siege twin ends under_siege)', () => {
+    // The vocabulary seam: the twin roams as 'siege' (pulse vocabulary) while
+    // the config-forced re-roll mints 'under_siege' (generation vocabulary).
+    // With a live entry, removed.type carries the gen key into the record —
+    // but on a legacy save whose entry was re-rolled away before
+    // config.stressorEdits existed, the wind-down used to record only
+    // candidates[0] ('siege'), and the forced crisis re-minted on the next
+    // regeneration despite the world ending it. The record now spans every
+    // candidate alias.
+    const s1 = gen(SIEGE_CFG, SIEGE_SEED);
+    expect(stressorOf(s1, 'under_siege')).toHaveLength(1);
+    expect(condOf(s1, 'war_pressure')).toHaveLength(1);
+
+    // The legacy entry-less shape: containers re-rolled away, condition live.
+    const entryless = { ...s1, stress: null, stressors: null };
+    const resolved = withOrganicStressorResolution(entryless, [{
+      id: 'world_stressor.siege.a', type: 'siege', label: 'Under Siege',
+      status: 'resolved', severity: 0.05,
+      originSettlementId: 'a', affectedSettlementIds: ['a'],
+    }], 'a');
+    expect(resolved).not.toBe(entryless);
+    expect(condOf(resolved, 'war_pressure')[0].status).toBe('easing');
+    // BOTH vocabularies land in the suppression list — the pulse type the
+    // twin roamed under AND the gen key the re-roll would mint.
+    expect(resolved.config.stressorEdits.resolved).toEqual(['siege', 'under_siege']);
+    expect(resolved._config.stressorEdits).toEqual(resolved.config.stressorEdits);
+
+    const s2 = gen(buildNextConfig(resolved), SIEGE_SEED);
+    expect(stressorOf(s2, 'under_siege')).toEqual([]);
+    expect(condOf(s2, 'war_pressure')).toEqual([]);
+    expect(s2.config.stressTypes).toEqual([]);
   });
 });
 

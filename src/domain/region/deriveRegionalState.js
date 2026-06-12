@@ -380,6 +380,10 @@ export function deriveLocalDelta(beforeInput, afterInput, cause = {}) {
 
   const sourceSettlementId = afterState.id || beforeState.id;
   const causeId = cause.event?.id || cause.event?.type || cause.reason || 'manual';
+  // Wave 8 (producer/consumer manifest): the former `hasRegionalSignal`
+  // boolean was write-only — every consumer thresholds `changes` magnitudes
+  // itself. Removed as a dead write; tombstoned in fieldManifest.js so it
+  // cannot quietly return without a reader.
   return {
     id: `local_delta.${sourceSettlementId || 'unknown'}.${String(causeId).replace(/[^a-zA-Z0-9_.-]+/g, '_')}`,
     sourceSettlementId,
@@ -388,6 +392,5 @@ export function deriveLocalDelta(beforeInput, afterInput, cause = {}) {
     before: beforeState,
     after: afterState,
     changes,
-    hasRegionalSignal: changes.some(c => c.magnitude >= 0.3),
   };
 }

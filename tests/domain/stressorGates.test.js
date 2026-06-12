@@ -148,6 +148,18 @@ describe('organic birth gates', () => {
     expect(signals.length).toBeGreaterThanOrEqual(3);
   });
 
+  test('the trade signal derives the channel LIVE-FIRST (the field-manifest contract), verdict as no-signal fallback', () => {
+    // A custom-renamed circle sniffs as nothing — the generation verdict
+    // still speaks for it through resolveBlockadeBypassChannel, never as a
+    // raw read of foodSecurity.magicTradeChannel.
+    const signals = magicDependenceSignals({
+      config: { magicExists: true, priorityMagic: 40 },
+      institutions: [{ name: 'The Whispering Arch' }],
+      economicState: { foodSecurity: { magicTradeChannel: 'teleport' } },
+    });
+    expect(signals).toContain('trade arrives by teleport or airship');
+  });
+
   test('uprisings split by context: rebellion is domestic, insurgency is the occupied form', () => {
     const rebellion = STRESSOR_SPAWN_GATES.rebellion;
     const insurgency = STRESSOR_SPAWN_GATES.insurgency;

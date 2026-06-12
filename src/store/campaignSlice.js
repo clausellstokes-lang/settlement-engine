@@ -61,6 +61,7 @@ import {
   upsertProposal,
 } from '../domain/worldPulse/index.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
+import { withOrganicStressorResolution } from '../domain/worldPulse/stressorAftermath.js';
 import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { saves as savesService } from '../lib/saves.js';
@@ -262,6 +263,18 @@ function campaignSettlements(state, campaignId) {
 function applyWorldPulseResultToState(state, campaign, result, now) {
   const persistUpdates = [];
   const updates = Array.isArray(result?.settlementUpdates) ? result.settlementUpdates : [];
+  // Crisis-triple sync (Wave 8 #4 — the asymmetry the D-wave deferred, owner
+  // decision: SYNC IT): roaming stressors the pulse resolved ORGANICALLY
+  // wind down their origin settlement's local representations — the stress
+  // entry, the promoted condition (eased per the event-resolution
+  // semantics), and the stressorEdits suppression — through the same
+  // lifecycle the RESOLVE_STRESSOR event uses, applied here through the
+  // pulse's settlementUpdates mechanism BEFORE systemState derives, so the
+  // dossier stops showing a crisis the world already ended. Only the pulse
+  // result carries resolvedStressors; proposal/party results pass through
+  // untouched. Deterministic; identity no-op for settlements with no local
+  // match (most pulse-born crises never had one).
+  const resolvedRoaming = Array.isArray(result?.resolvedStressors) ? result.resolvedStressors : [];
   for (const update of updates) {
     const saveIdx = state.savedSettlements.findIndex(save =>
       String(save.id) === String(update.saveId)
@@ -269,7 +282,10 @@ function applyWorldPulseResultToState(state, campaign, result, now) {
     if (saveIdx === -1) continue;
 
     const save = state.savedSettlements[saveIdx];
-    const nextSettlement = update.settlement || save.settlement;
+    let nextSettlement = update.settlement || save.settlement;
+    if (resolvedRoaming.length && nextSettlement) {
+      nextSettlement = withOrganicStressorResolution(nextSettlement, resolvedRoaming, save.id);
+    }
     let systemState = save.campaignState?.systemState || null;
     try {
       systemState = deriveSystemState(nextSettlement);
@@ -698,30 +714,38 @@ export const createCampaignSlice = (set, get) => ({
   },
 
   /**
-   * The two stressor bridges' INVERSE, for undoLastEvent: put the roaming
-   * twin back the way it was before the undone event's bridge touched it.
+   * The crisis twin directive's INVERSE, for undoLastEvent: put the roaming
+   * twin back the way it was before the undone event's directive touched it.
+   * The caller passes the declarative withdrawal crisisLifecycle.crisisWithdraw
+   * composed from the popped log entry ({ action, type, twin }); the legacy
+   * eventType vocabulary is still accepted for older callers.
    *
-   * APPLY_STRESSOR undone — the inject bridge upserted the twin: withdraw
-   * it, but ONLY while it still looks bridge-born and unevolved (active,
-   * originating here, not spread beyond this settlement). Once the pulse has
-   * spread it the crisis has a life of its own — leave it and say so on the
-   * console rather than silently rewrite world history. When the pre-event
-   * snapshot (`twin`, stamped on logEntry.undo by applyEvent) holds an
-   * earlier stressor the upsert overwrote, that copy is restored instead.
+   * 'withdraw' (onset undone) — the inject directive upserted the twin:
+   * withdraw it, but ONLY while it still looks directive-born and unevolved
+   * (active, originating here, not spread beyond this settlement). Once the
+   * pulse has spread it the crisis has a life of its own — leave it and say
+   * so on the console rather than silently rewrite world history. When the
+   * pre-event snapshot (`twin`, stamped on logEntry.undo by applyEvent)
+   * holds an earlier stressor the upsert overwrote, that copy is restored
+   * instead.
    *
-   * RESOLVE_STRESSOR undone — the resolve bridge resolved the twin into an
-   * echo and queued its residual aftermath: restore the snapshotted
+   * 'restore' (resolution undone) — the resolve directive resolved the twin
+   * into an echo and queued its residual aftermath: restore the snapshotted
    * pre-resolution twin over the echo (same stable id) and drop the still-
    * PENDING residual proposals that resolution queued. No snapshot (a legacy
    * log entry) → nothing restorable; a re-ignited ACTIVE stressor already
    * under the id is left alone.
    *
    * @param {string} campaignId
-   * @param {{ eventType?: string, type?: string, settlementId?: string|number, twin?: Object|null }} [args]
+   * @param {{ action?: 'withdraw'|'restore', eventType?: string, type?: string, settlementId?: string|number, twin?: Object|null }} [args]
    * @returns {boolean} whether the world state changed
    */
-  undoCampaignStressorBridge: (campaignId, { eventType, type, settlementId, twin = null } = {}) => {
+  undoCampaignStressorBridge: (campaignId, { action, eventType, type, settlementId, twin = null } = {}) => {
     let changed = false;
+    const act = action
+      || (eventType === 'APPLY_STRESSOR' ? 'withdraw'
+        : eventType === 'RESOLVE_STRESSOR' ? 'restore'
+          : null);
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -733,7 +757,7 @@ export const createCampaignSlice = (set, get) => ({
       const stressors = (worldState.stressors || []).map(raw => normalizeStressor(raw));
       const sameType = st => String(st.type).toLowerCase() === String(roamingType).toLowerCase();
 
-      if (eventType === 'APPLY_STRESSOR') {
+      if (act === 'withdraw') {
         const current = stressors.find(st => st.status === 'active'
           && sameType(st)
           && String(st.originSettlementId || '') === sid);
@@ -747,7 +771,7 @@ export const createCampaignSlice = (set, get) => ({
           ...worldState,
           stressors: twin ? [...remaining, normalizeStressor(cloneJson(twin))] : remaining,
         };
-      } else if (eventType === 'RESOLVE_STRESSOR') {
+      } else if (act === 'restore') {
         if (!twin) {
           console.debug(`[campaignSlice] undo could not un-resolve the roaming ${roamingType} twin at ${sid} — the log entry predates the twin snapshot.`);
           return;

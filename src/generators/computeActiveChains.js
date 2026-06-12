@@ -7,6 +7,62 @@ import {SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS} from '../data/supplyChainData.js
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
 import {RESOURCE_DATA} from '../data/resourceData.js';
 import {customDeps} from '../lib/dependencyEngine.js';
+import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
+
+// ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
+// chain.processingInstitutions patterns are static data written for the fuzzy
+// 12-char-prefix matcher below. Each pattern is resolved ONCE (memoized) to
+// the SET of catalog ids whose names the fuzzy matcher accepts; thereafter
+// stamped institutions (inst.catalogId, assembleInstitutions) compare by id —
+// exact and rename-proof. Because the id-set is BUILT from the fuzzy matcher,
+// the id path selects EXACTLY the institutions the fuzzy path selected for
+// generated rosters (pinned in tests/joins/institutionIdentity.test.js); the
+// known false matches ('Mill' pattern → 'Access to external mill') are frozen
+// as-is, not silently changed. Institutions WITHOUT a catalogId (legacy saves,
+// custom/DM content, cascade additions) keep the original fuzzy name match.
+
+const fuzzyProcessorMatch = (lowerName, pattern) =>
+  lowerName.includes(String(pattern || '').toLowerCase().slice(0, 12));
+
+const ALL_CATALOG_NAMES = (() => {
+  const names = new Set();
+  for (const tierCatalog of Object.values(institutionalCatalog)) {
+    for (const group of Object.values(tierCatalog)) {
+      for (const name of Object.keys(group)) names.add(name);
+    }
+  }
+  return [...names];
+})();
+
+const _patternIdSets = new Map();
+
+/** Catalog-id set a processor pattern resolves to under the legacy fuzzy matcher. */
+export function processorPatternIdSet(pattern) {
+  const key = String(pattern || '');
+  let set = _patternIdSets.get(key);
+  if (!set) {
+    set = new Set();
+    for (const name of ALL_CATALOG_NAMES) {
+      if (fuzzyProcessorMatch(name.toLowerCase(), key)) {
+        const id = catalogIdForName(name);
+        if (id) set.add(id);
+      }
+    }
+    _patternIdSets.set(key, set);
+  }
+  return set;
+}
+
+/**
+ * Does this settlement institution process this chain pattern?
+ * Id-first when the institution is stamped; legacy fuzzy name match otherwise.
+ * The shared join for every chain-processor site (institutionLifecycle's
+ * PROCESSOR_MATCH included) — new joins must use this, not name.includes().
+ */
+export function institutionMatchesProcessor(inst, pattern) {
+  if (inst?.catalogId) return processorPatternIdSet(pattern).has(inst.catalogId);
+  return fuzzyProcessorMatch(String(inst?.name || '').toLowerCase(), pattern);
+}
 
 // Map resource labels → RESOURCE_DATA keys for matching
 // Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words
@@ -47,6 +103,7 @@ const _INCOME_TO_CHAINS = {
 };
 
 export function computeActiveChains(institutions = [], resources = [], tier = 'village', tradeRoute = 'road', tradeDependencies = [], depletedResources = [], magicPriority = 50) {
+  const insts = institutions.filter(Boolean);
   const instNames = institutions.map(i => (i.name || '').toLowerCase());
 
   // Helper: does this settlement have an institution matching any of the names?
@@ -118,8 +175,9 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       if (isArcaneChain && magicPriority === 0) return;
 
       // Check institution presence — chain is active if settlement has ≥1 processor
+      // (id-first for stamped institutions, legacy fuzzy match for the rest)
       const matchedInsts = chain.processingInstitutions.filter(p =>
-        instNames.some(n => n.includes(p.toLowerCase().slice(0, 12)))
+        insts.some(i => institutionMatchesProcessor(i, p))
       );
       if (matchedInsts.length === 0) return;
 
@@ -137,11 +195,13 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // A chain's own processors cannot vouch for its transit: 'Planar traders'
       // match /planar/, so without this exclusion the planar chain kept itself
       // running after the settlement lost its Teleportation circle mid-campaign.
-      const isOwnProcessor = (n) => chain.processingInstitutions.some(p =>
-        n.includes(p.toLowerCase().slice(0, 12)));
-      const hasMagicTransit = instNames.some(n =>
-        (n.includes('teleportation') || n.includes('planar') || n.includes('airship')) &&
-        !isOwnProcessor(n));
+      const isOwnProcessor = (i) => chain.processingInstitutions.some(p =>
+        institutionMatchesProcessor(i, p));
+      const hasMagicTransit = insts.some(i => {
+        const n = String(i.name || '').toLowerCase();
+        return (n.includes('teleportation') || n.includes('planar') || n.includes('airship')) &&
+          !isOwnProcessor(i);
+      });
       const isEntrepotRoute = ['crossroads', 'port', 'river'].includes(tradeRoute)
         || (isArcaneChain && hasMagicTransit);
 

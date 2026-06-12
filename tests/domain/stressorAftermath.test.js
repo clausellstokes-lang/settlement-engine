@@ -16,10 +16,12 @@ import {
   aftermathNewsEntries,
   graduationNewsEntries,
   withCampaignHistoryEvent,
+  withOrganicStressorResolution,
   recordGraduationsIntoHistory,
 } from '../../src/domain/worldPulse/stressorAftermath.js';
 import { advanceCampaignWorld, resolveStressorById } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { mutateSettlement } from '../../src/domain/events/mutate.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 
@@ -112,6 +114,95 @@ describe('news entries', () => {
     expect(written).toBe(2);
     expect(local.get('a').history.historicalEvents[0].campaignEra).toBe(true);
     expect(local.get('b').history.historicalEvents[0].campaignEra).toBe(true);
+  });
+});
+
+// Wave 8 #4 — the resolution asymmetry, synced (owner decision 2026-06-11):
+// an ORGANIC world-pulse resolution winds down the origin settlement's local
+// crisis representations through the crisis lifecycle — the same settlement
+// half RESOLVE_STRESSOR uses. The candidate vocabulary spans the twin's
+// pulse type AND its generation aliases (a local 'under_siege' entry, a
+// roaming 'siege' twin).
+describe('withOrganicStressorResolution()', () => {
+  const authored = () => mutateSettlement({
+    settlement: {
+      name: 'Ashford',
+      config: {},
+      institutions: [],
+      npcs: [],
+      activeConditions: [],
+    },
+    event: {
+      id: 'ev-onset', type: 'APPLY_STRESSOR', targetId: 'under_siege',
+      payload: { stressorType: 'under_siege', label: 'Under Siege', severity: 0.8 },
+      cause: 'player_action',
+    },
+    now: NOW,
+  });
+
+  const resolvedTwin = (patch = {}) => ({
+    id: 'world_stressor.siege.ashford',
+    type: 'siege', // the PULSE vocabulary — the alias of the local under_siege
+    label: 'Under Siege',
+    status: 'resolved',
+    severity: 0.05,
+    originSettlementId: 'ashford',
+    affectedSettlementIds: ['ashford'],
+    ...patch,
+  });
+
+  test('the origin winds down: entry removed, condition eased with a world_pulse receipt, suppression recorded', () => {
+    const next = withOrganicStressorResolution(authored(), [resolvedTwin()], 'ashford');
+    expect((next.stress || []).some(st => st?.type === 'under_siege')).toBe(false);
+    const cond = (next.activeConditions || []).find(c => c.archetype === 'war_pressure');
+    expect(cond.status).toBe('easing');
+    expect(cond.causes.at(-1)).toMatchObject({ source: 'world_pulse' });
+    // The suppression spans BOTH vocabularies — the gen key the config-forced
+    // re-roll would mint AND the pulse type the twin roamed under — so the
+    // crisis stays resolved across regenerations even when the wind-down ran
+    // entry-less (the regen suppression matches gen vocabulary only).
+    expect(next.config.stressorEdits).toEqual({ added: [], resolved: ['under_siege', 'siege'] });
+    // The eased event-promoted condition's record follows (the projection).
+    expect(next.config.eventConditions.find(c => c.archetype === 'war_pressure').status).toBe('easing');
+  });
+
+  test('identity no-ops: a non-origin settlement and an unrelated type are untouched', () => {
+    const s = authored();
+    expect(withOrganicStressorResolution(s, [resolvedTwin()], 'briar')).toBe(s);
+    expect(withOrganicStressorResolution(
+      s,
+      [resolvedTwin({ id: 'world_stressor.famine.ashford', type: 'famine', label: 'Famine' })],
+      'ashford',
+    )).toBe(s);
+  });
+
+  test('the ownership gate holds on the ORGANIC path: a campaign-owned condition is untouched while the entry still winds down', () => {
+    // The same gate RESOLVE_STRESSOR is pinned on (eventConditions.test.js):
+    // a condition whose ORIGIN cause is a regional channel belongs to the
+    // campaign layer even when its archetype collides with the local crisis.
+    // An organic wind-down stamping a world_pulse receipt onto it would
+    // desync it from the layer that owns its resolution.
+    const planted = {
+      id: 'condition.war_pressure.chan99',
+      archetype: 'war_pressure',
+      severity: 0.5,
+      status: 'worsening',
+      triggeredAt: { tick: 4, sourceEventType: 'regional_wave', sourceEventTargetId: 'channel.x' },
+      duration: { elapsedTicks: 0, expiresAtTicks: 8 },
+      causes: [{ source: 'channel.x', detail: 'A neighbouring war is spilling over.' }],
+    };
+    const s = authored();
+    const desynced = { ...s, activeConditions: [...s.activeConditions, planted] };
+    const next = withOrganicStressorResolution(desynced, [resolvedTwin()], 'ashford');
+    // The local entry still winds down…
+    expect((next.stress || []).some(st => st?.type === 'under_siege')).toBe(false);
+    // …and the EVENT-born condition eases…
+    const eventBorn = next.activeConditions.find(c => c.archetype === 'war_pressure' && c.id !== planted.id);
+    expect(eventBorn.status).toBe('easing');
+    // …but the campaign-owned twin keeps its reference: no easing, no
+    // world_pulse receipt, no recruitment into the eventConditions record.
+    expect(next.activeConditions.find(c => c.id === planted.id)).toBe(planted);
+    expect((next.config.eventConditions || []).some(c => c.id === planted.id)).toBe(false);
   });
 });
 

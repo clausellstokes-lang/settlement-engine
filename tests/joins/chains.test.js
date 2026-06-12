@@ -18,8 +18,8 @@
 import { describe, it, expect } from 'vitest';
 import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../src/data/supplyChainData.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
-import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
-import { computeActiveChains } from '../../src/generators/computeActiveChains.js';
+import { institutionalCatalog, catalogIdForName } from '../../src/data/institutionalCatalog.js';
+import { computeActiveChains, processorPatternIdSet } from '../../src/generators/computeActiveChains.js';
 import { healingLedger, HEALING_INSTITUTION_PATTERN } from '../../src/domain/healingLedger.js';
 import { deriveSystemVariable } from '../../src/domain/causalState.js';
 import { NEED_HEURISTICS } from '../../src/domain/supplyChainState.js';
@@ -290,6 +290,37 @@ describe('chain processor joins (activation gate resolvability)', () => {
     expect(procs).toContain("Enchanter's shop");
     expect(procs).not.toContain('Enchanting quarter');
     expect(procs).not.toContain('Magic item consignment');
+  });
+
+  it('every chain resolves through the id mapping too (Wave 8: the id path cannot go dark)', () => {
+    // processorPatternIdSet is the pattern→catalog-id mapping the id-first
+    // join compares against (built once from the fuzzy matcher). A chain all
+    // of whose patterns resolve to EMPTY id sets would be invisible to every
+    // stamped (generated) roster even if the fuzzy fallback still fires for
+    // legacy saves — the id-path twin of the >=1-resolvable-processor rule.
+    const dark = allChains
+      .filter(c => !(c.processingInstitutions || []).some(p => processorPatternIdSet(p).size > 0))
+      .map(c => c.fullId);
+    expect(dark).toEqual([]);
+  });
+
+  it('the id mapping agrees with the fuzzy matcher pattern-by-pattern (same-tier ground truth)', () => {
+    // For every chain pattern, the id set must contain EXACTLY the catalog
+    // names the harness's fuzzy replica accepts — the mapping is frozen to
+    // the matcher, never hand-tuned.
+    const disagreements = [];
+    const allPatterns = [...new Set(allChains.flatMap(c => c.processingInstitutions || []))];
+    for (const pattern of allPatterns) {
+      const expected = [...allCatalogNames]
+        .filter(n => processorMatches(n.toLowerCase(), pattern))
+        .map(catalogIdForName)
+        .sort();
+      const actual = [...processorPatternIdSet(pattern)].sort();
+      if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+        disagreements.push(`${pattern}: ids ${actual.join(',')} != fuzzy ${expected.join(',')}`);
+      }
+    }
+    expect(disagreements).toEqual([]);
   });
 
   it('chain outputs are goods/services, never institution names', () => {

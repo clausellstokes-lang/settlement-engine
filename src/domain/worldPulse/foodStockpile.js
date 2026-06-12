@@ -72,6 +72,64 @@ export const STOCKPILE_TUNING = Object.freeze({
 const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 const BLOCKADE_TYPES = new Set(['siege', 'occupation']);
 
+// ── Blockade bypass channel — LIVE-FIRST (Wave 8 frozen-vs-live) ─────────
+// Magical transport vs the blockade: a teleportation circle is point-to-
+// point — the besieger cannot interdict it; an airship dock keeps flying
+// but impaired against countermeasures. Either way the channel carries at
+// most its own throughput from the shared ladder (FOOD_IMPORT_RATES) —
+// generation's model — so a port metropolis importing 58% of need still
+// starves on the overflow above what a circle can move.
+//
+// Resolution is LIVE-FIRST: the institutions standing TODAY decide the
+// channel — a circle destroyed mid-campaign must not keep feeding a
+// besieged city on the strength of a generation-time verdict. The
+// generator's verdict (foodSecurity.magicTradeChannel) survives as
+// FALLBACK ONLY when the roster carries no name signal either way (legacy
+// saves and custom-renamed institutions: 'The Whispering Arch' sniffs as
+// nothing, but the verdict knows it was minted over a circle). A roster
+// whose only sniffable transport lies removed/destroyed — or pulse-closed
+// (institutionLifecycle stamps status 'remnant' + _worldPulseInactive on
+// economic closures, and circles/docks ARE closable) — is a NEGATIVE
+// signal: the verdict is NOT consulted — the next blockade takes the full
+// cut. An IMPAIRED dock still counts as standing (blockadeTransport.js
+// stamps airships impaired during sieges by design; the throughput cut is
+// already priced as airshipBesieged). Both paths stay gated on
+// magicExists — a no-magic world's circle is masonry, not a channel.
+
+const TRANSPORT_DOWN_STATUSES = new Set(['removed', 'destroyed', 'remnant']);
+// The engine's canonical standing predicate (institutionLifecycle's
+// activeInstitutions): removed/destroyed status OR the pulse-inactive flag.
+const transportIsDown = (inst) =>
+  TRANSPORT_DOWN_STATUSES.has(inst?.status) || inst?._worldPulseInactive === true;
+
+function transportChannelOf(inst) {
+  const n = String(inst?.name || '').toLowerCase();
+  if (n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional')) return 'teleport';
+  if (n.includes('airship')) return 'airship';
+  return null;
+}
+
+/** The magical import channel that can run a blockade, or null. Live-first;
+ *  see the block comment above for the verdict-fallback contract. */
+export function resolveBlockadeBypassChannel(settlement) {
+  if (settlement?.config?.magicExists === false) return null;
+  let sawTransportSignal = false;
+  let standingAirship = false;
+  for (const inst of settlement?.institutions || []) {
+    const channel = transportChannelOf(inst);
+    if (!channel) continue;
+    sawTransportSignal = true;
+    if (transportIsDown(inst)) continue;
+    // A standing circle outranks a dock (higher throughput, blockade-proof).
+    if (channel === 'teleport') return 'teleport';
+    standingAirship = true;
+  }
+  if (standingAirship) return 'airship';
+  if (sawTransportSignal) return null; // it stood once and fell — full cut
+  const verdict = settlement?.economicState?.foodSecurity?.magicTradeChannel;
+  return verdict === 'teleport' || verdict === 'airship' ? verdict : null;
+}
+
 // ── Live resilience ──────────────────────────────────────────────────────
 // resilienceScore is a generation-time composite (foodGenerator): storage
 // months (up to ~35 pts) + source diversity (30) + import independence (15)
@@ -196,26 +254,11 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   // suffering both (the Starving City) drains twice as fast.
   const blockaded = !!blockade;
   const famished = !!famine;
-  // Magical transport vs the blockade: a teleportation circle is point-to-
-  // point — the besieger cannot interdict it; an airship dock keeps flying
-  // but impaired against countermeasures. Either way the channel carries at
-  // most its own throughput from the shared ladder (FOOD_IMPORT_RATES) —
-  // generation's model — so a port metropolis importing 58% of need still
-  // starves on the overflow above what a circle can move. Channel resolution
-  // prefers the generator's verdict (foodSecurity.magicTradeChannel) and
-  // falls back to the institution-name sniff for saves generated on an open
-  // route or before the field existed; both paths are gated on magicExists —
-  // a no-magic world's legacy circle is masonry, not a channel. The mode is
+  // Magical transport vs the blockade — resolved LIVE-FIRST from the
+  // standing roster (see resolveBlockadeBypassChannel). The mode is
   // recorded in the stockpile bookkeeping so the dossier can say WHY the
-  // blockade did or didn't bite.
-  const _instNames = (settlement?.institutions || []).map(i => String(i?.name || '').toLowerCase());
-  const _hasTeleportCircle = _instNames.some(n =>
-    n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional'));
-  const _hasAirshipDock = _instNames.some(n => n.includes('airship'));
-  const _magicOn = settlement?.config?.magicExists !== false;
-  const blockadeBypass = !blockaded || !_magicOn ? null
-    : (fs.magicTradeChannel
-      ?? (_hasTeleportCircle ? 'teleport' : _hasAirshipDock ? 'airship' : null));
+  // blockade did or didn't bite (deriveBlockadeRelief reads it).
+  const blockadeBypass = blockaded ? resolveBlockadeBypassChannel(settlement) : null;
   const _channelShare = blockadeBypass === 'teleport' ? FOOD_IMPORT_RATES.teleport
     : blockadeBypass === 'airship' ? FOOD_IMPORT_RATES.airshipBesieged
     : 0;

@@ -2348,3 +2348,59 @@ export const institutionalCatalog = {
 };
 
 const INSTITUTION_CATALOG = institutionalCatalog;
+
+// ── Catalog identity (Cohesion Wave 8 — structural prevention) ───────────────
+// Every catalog entry has a stable id: the deterministic slug of its canonical
+// name. Entries appearing at multiple tiers under the SAME name share the id
+// (same name → same slug); distinct entries ('Merchant guilds (3-8)' vs
+// 'Merchant guilds (15-40)') get distinct ids. The id is the JOIN key that
+// replaces identity-by-label: institutions stamped with catalogId
+// (assembleInstitutions) are matched by id, and only unstamped content
+// (legacy saves, custom/DM institutions) falls back to name matching.
+
+/** Deterministic slug of a canonical institution name. */
+export function slugifyInstitutionName(name) {
+  return String(name)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+
+// normalized name → id. Collision-checked at module load: two DIFFERENT
+// canonical names must never slug to the same id, or id-joins would alias
+// them the way the old 12-char-prefix matcher did.
+function buildCatalogIdIndex() {
+  const byName = new Map();
+  const nameForId = new Map();
+  for (const tierCatalog of Object.values(institutionalCatalog)) {
+    for (const group of Object.values(tierCatalog)) {
+      for (const name of Object.keys(group)) {
+        const key = name.toLowerCase();
+        if (byName.has(key)) continue; // same name at another tier shares the id
+        const id = slugifyInstitutionName(name);
+        const holder = nameForId.get(id);
+        if (holder && holder !== key) {
+          throw new Error(
+            `institutionalCatalog id collision: "${name}" and "${holder}" both slug to "${id}" — rename one`,
+          );
+        }
+        nameForId.set(id, key);
+        byName.set(key, id);
+      }
+    }
+  }
+  return byName;
+}
+
+const CATALOG_ID_BY_NAME = buildCatalogIdIndex();
+
+/**
+ * Stable catalog id for an institution name — EXACT normalized (lowercase,
+ * trimmed) lookup, no fuzzy matching. Returns null for unknown names: custom
+ * and DM-authored institutions carry no catalogId, and every id-first join
+ * falls back to the legacy name matcher for them.
+ */
+export function catalogIdForName(name) {
+  if (name == null) return null;
+  return CATALOG_ID_BY_NAME.get(String(name).trim().toLowerCase()) ?? null;
+}

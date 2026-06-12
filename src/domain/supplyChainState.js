@@ -12,7 +12,7 @@
  *     substituteActive, resourceDepleted, dependency?,
  *     status: 'operational' | 'running' | 'entrepot' | 'vulnerable' | 'impaired'
  *           | 'magically_sustained' | 'unexploited',
- *     magicNote?, upstreamNote?,
+ *     magicNote?, magicRecovery?, upstreamNote?,
  *   }
  *
  * The roadmap target carries a richer state envelope:
@@ -405,8 +405,11 @@ export function deriveSupplyChainState(chain, settlement) {
     // explain WHY a chain is substituted/strained (chainMagicSubstitution.js
     // writes magicNote, computeActiveChains.js writes upstreamNote). The
     // derivation used to drop both, so the canonical surface asserted a
-    // status with no receipt.
+    // status with no receipt. Wave 8 carries magicRecovery too (the W1
+    // deferred note): the substitution MAGNITUDE rides with its note, so a
+    // 25% prop and a 70% rescue stop being indistinguishable downstream.
     magicNote:              chain.magicNote,
+    magicRecovery:          chain.magicRecovery,
     upstreamNote:           chain.upstreamNote,
     // Phase 19: preserve processingInstitutions so the explanation
     // module can match institutions to the chains that use them as

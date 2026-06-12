@@ -208,6 +208,22 @@ describe('magic-as-supplement / blocked-chain seam', () => {
     expect(out.magicNote).toBe('Druidic cultivation supplements depleted farmland');
   });
 
+  it('carries magicRecovery alongside magicNote (Wave 8 — the W1 deferred magnitude)', () => {
+    // chainMagicSubstitution writes the recovery FRACTION with its note; the
+    // derivation used to drop it, leaving a 25% prop and a 70% rescue
+    // indistinguishable on the canonical envelope.
+    const out = deriveSupplyChainState(flourChain({
+      status: 'magically_sustained',
+      magicNote: 'Druidic cultivation supplements depleted farmland',
+      magicRecovery: 0.65,
+    }));
+    expect(out.magicRecovery).toBe(0.65);
+    // Idempotent: re-deriving the derived shape keeps the magnitude.
+    expect(deriveSupplyChainState(out).magicRecovery).toBe(0.65);
+    // Chains without a substitution carry no phantom magnitude.
+    expect(deriveSupplyChainState(flourChain()).magicRecovery).toBeUndefined();
+  });
+
   it('an unexploited chain canonicalizes to "blocked"', () => {
     const out = deriveSupplyChainState(flourChain({
       needKey: 'trade_entrepot',

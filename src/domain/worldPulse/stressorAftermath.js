@@ -1,9 +1,9 @@
 /**
- * domain/worldPulse/stressorAftermath.js — aftermath is RECORDED, twice.
+ * domain/worldPulse/stressorAftermath.js — aftermath is RECORDED, three ways.
  *
  * The echo ladder is: active → resolved (echo, status 'residual', decaying
  * memoryStrength) → graduated (dropped from worldState.stressors). This
- * module makes both transitions leave a record the table can actually find:
+ * module makes the transitions leave records the table can actually find:
  *
  *   1. CHRONICLE — resolution and graduation each emit a Wizard-News entry
  *      (the feed the dossier Chronicle and the AI grounding already read).
@@ -12,9 +12,15 @@
  *      historyBeats derives "defining crisis" / "recent disruption" from.
  *      Until now that record was frozen at generation — campaign events
  *      could never become history.
+ *   3. ORIGIN SYNC (Wave 8 #4) — an ORGANIC resolution winds down the
+ *      origin settlement's local crisis representations through the crisis
+ *      lifecycle (withOrganicStressorResolution below), so the dossier
+ *      stops showing a stressor the world already ended.
  *
  * Pure + deterministic; timestamps are threaded in, never minted.
  */
+
+import { resolveCrisisLocally } from '../crisisLifecycle.js';
 
 // Stressor type -> the history event-type vocabulary the generators already
 // use (historyData EVENT_TYPE_NAMES). Unmapped types fall back to
@@ -158,6 +164,34 @@ export function withCampaignHistoryEvent(settlement, echo, tick) {
     nextEvents = nextEvents.filter(e => e !== oldest);
   }
   return { ...settlement, history: { ...history, historicalEvents: nextEvents } };
+}
+
+/**
+ * Settlement-side wind-down for roaming stressors the pulse resolved
+ * ORGANICALLY (decay, counterforces, a coup verdict) — the resolution
+ * asymmetry the D-wave deferred as an owner decision, now decided: SYNC IT.
+ * The roaming twin used to resolve while the origin settlement's stress
+ * entry raged on and its promoted condition never eased; this routes the
+ * SAME settlement half the RESOLVE_STRESSOR event uses
+ * (crisisLifecycle.resolveCrisisLocally: entry removed, condition eased
+ * with a world_pulse receipt, stressorEdits suppression recorded) onto the
+ * ORIGIN settlement of each resolved twin. Spread targets carry no local
+ * entry — their scars arrive through the residual proposals instead.
+ * Deterministic; identity no-op when nothing local matches (the common case
+ * for pulse-born crises).
+ *
+ * @param {Object} settlement          a settlementUpdates settlement
+ * @param {Array}  resolvedStressors   the pulse result's resolved twins
+ * @param {string|number} saveId       the settlement's save id
+ * @returns {Object} new settlement (same reference when untouched)
+ */
+export function withOrganicStressorResolution(settlement, resolvedStressors = [], saveId) {
+  let next = settlement;
+  for (const twin of resolvedStressors) {
+    if (String(twin?.originSettlementId || '') !== String(saveId)) continue;
+    next = resolveCrisisLocally(next, twin);
+  }
+  return next;
 }
 
 /**

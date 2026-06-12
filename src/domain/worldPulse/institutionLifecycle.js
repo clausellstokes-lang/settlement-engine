@@ -33,7 +33,7 @@
 import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../data/supplyChainData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';
-import { computeActiveChains } from '../../generators/computeActiveChains.js';
+import { computeActiveChains, institutionMatchesProcessor } from '../../generators/computeActiveChains.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import { stablePart } from './worldState.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
@@ -424,8 +424,9 @@ function tokenOverlap(a, b) {
   return tokens.some(t => haystack.includes(t));
 }
 
-const PROCESSOR_MATCH = (instName, pattern) =>
-  String(instName || '').toLowerCase().includes(String(pattern || '').toLowerCase().slice(0, 12));
+// Wave 8: the 12-char-prefix PROCESSOR_MATCH moved into the shared id-first
+// join (institutionMatchesProcessor) — stamped institutions compare by
+// catalogId, unstamped ones keep the legacy fuzzy name match.
 
 const FOOD_ANCHOR_RE = /granary|mill|farm|fishery|fishing|bakehouse|brewery|orchard|pasture/;
 // Sawmills / lumber mills cut wood, not flour — the same carve-out the events
@@ -452,7 +453,7 @@ export function institutionContribution(settlement, inst, precomputedChains = nu
   const exportIds = new Set(exportsList.map(exactGoodId).filter(Boolean));
   let score = 0;
   const memberOf = chains.filter(chain =>
-    (chain.processingInstitutions || []).some(p => PROCESSOR_MATCH(inst.name, p)));
+    (chain.processingInstitutions || []).some(p => institutionMatchesProcessor(inst, p)));
   if (memberOf.length) {
     score += weights.chainProcessor;
     const anchorsExports = memberOf.some(chain =>

@@ -10,7 +10,7 @@
 
 import { registerStep } from '../pipeline.js';
 import { TIER_ORDER } from '../../data/constants.js';
-import { institutionalCatalog } from '../../data/institutionalCatalog.js';
+import { institutionalCatalog, catalogIdForName } from '../../data/institutionalCatalog.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { getBaseChance } from '../structuralValidator.js';
@@ -450,6 +450,18 @@ registerStep('assembleInstitutions', {
     if (toggle.forceExclude === true || (toggle.allow === false && !inst.required && !toggle.require && inst.source !== 'forced')) {
       institutions.splice(i, 1);
     }
+  }
+
+  // Wave 8 — stamp catalog identity on every catalog-derived institution.
+  // Pure name→id lookup: consumes no rng, changes no other field, so
+  // same-seed output is byte-identical except the new catalogId fields
+  // (pinned by tests/joins/institutionIdentity.test.js). Custom/DM
+  // institutions carry no catalogId; every id-first join falls back to the
+  // legacy name matcher for them (and for legacy saves).
+  for (const inst of /** @type {any[]} */ (institutions)) {
+    if (inst.isCustom || inst.source === 'custom') continue;
+    const catalogId = catalogIdForName(inst.name);
+    if (catalogId) inst.catalogId = catalogId;
   }
 
   // Structural validation moved to structuralValidationPass (Wave 4b): it

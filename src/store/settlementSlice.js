@@ -56,8 +56,12 @@ import { scrubUndoneEvent } from '../domain/events/undoEvent.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { eligibleCustomContent } from '../domain/customContentSchema.js';
-import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
-import { normalizeStressor } from '../domain/worldPulse/stressors.js';
+import {
+  CRISIS_EVENT_TYPES,
+  crisisTwinFor,
+  crisisWithdraw,
+  twinDirectiveForEvent,
+} from '../domain/crisisLifecycle.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
@@ -144,29 +148,6 @@ function visibleSettlementIdsForCampaign(state, campaign) {
   return Object.values(placements)
     .map(p => p?.settlementId)
     .filter(Boolean);
-}
-
-/**
- * The roaming campaign twin a stressor event's bridge is about to touch —
- * matched exactly the way resolveCampaignStressor matches (alias-mapped
- * type, ACTIVE, affecting this save), read from the PRE-event campaign so
- * applyEvent can stamp it onto logEntry.undo and undoLastEvent can restore
- * it (campaignSlice.undoCampaignStressorBridge). Returns the raw stored
- * record (cloned), or null when no active twin exists yet.
- */
-function campaignStressorTwinFor(campaign, event, saveId) {
-  const authoredType = String(event?.payload?.stressorType || event?.targetId || '').trim();
-  const roamingType = pulseTypeForStressorKey(authoredType) || authoredType;
-  if (!roamingType) return null;
-  const sid = String(saveId || '');
-  const raw = (campaign?.worldState?.stressors || []).find(st => {
-    const n = normalizeStressor(st);
-    return n.status === 'active'
-      && String(n.type).toLowerCase() === String(roamingType).toLowerCase()
-      && (String(n.originSettlementId || '') === sid
-        || (n.affectedSettlementIds || []).map(String).includes(sid));
-  });
-  return raw ? cloneJson(raw) : null;
 }
 
 // ── Per-entity-kind nested array resolver ──────────────────────────────
@@ -1270,17 +1251,19 @@ export const createSettlementSlice = (set, get) => ({
       ...logEntry,
       afterState: nextSystemState,
     };
-    // Undo seam for the roaming-stressor bridges below: snapshot the
-    // campaign twin BEFORE the bridge upserts/resolves it (logEntry.undo is
-    // the established snapshot home). Without this, undoing an
-    // APPLY_STRESSOR that overwrote an earlier twin loses that copy, and
-    // undoing a RESOLVE_STRESSOR has no pre-resolution lifecycle to restore.
-    if (campaign && (event?.type === 'APPLY_STRESSOR' || event?.type === 'RESOLVE_STRESSOR')) {
+    // Undo seam for the crisis twin directive below: snapshot the campaign
+    // twin BEFORE the directive upserts/resolves it (logEntry.undo is the
+    // established snapshot home; crisisWithdraw composes the restore from
+    // it). Without this, undoing an onset that overwrote an earlier twin
+    // loses that copy, and undoing a resolution has no pre-resolution
+    // lifecycle to restore. Gated on the lifecycle's own event registry so
+    // a new crisis event type gets its snapshot by construction.
+    if (campaign && CRISIS_EVENT_TYPES.includes(event?.type)) {
       logEntry = {
         ...logEntry,
         undo: {
           ...(logEntry.undo || {}),
-          campaignTwin: campaignStressorTwinFor(campaign, event, activeSaveId),
+          campaignTwin: crisisTwinFor(campaign.worldState?.stressors, event, activeSaveId),
         },
       };
     }
@@ -1371,52 +1354,37 @@ export const createSettlementSlice = (set, get) => ({
       }
     }
 
-    // Coup wave — an authored APPLY_STRESSOR in a canon campaign ALSO
-    // registers the crisis as a roaming world-pulse stressor, so the pulse
-    // ages it (decay, counterforces, synergies, echoes) instead of it living
-    // only on the dossier. Best-effort + guarded: the settlement event
-    // already applied. The roaming type comes from the picker's alias map
-    // (under_siege -> siege, ...); a custom stressor with no roaming analog
-    // registers under its own key (normalizeStressor tolerates unknown types).
-    if (event?.type === 'APPLY_STRESSOR' && campaign) {
+    // Crisis lifecycle — the roaming-twin half of an authored crisis event
+    // (Wave 8 #4). The DOMAIN names the transition (crisisLifecycle's
+    // twinDirectiveForEvent: 'inject' on onset/escalate so the pulse ages the
+    // crisis — decay, counterforces, synergies, echoes — instead of it living
+    // only on the dossier; 'resolve' on resolution so the pulse stops aging a
+    // crisis the DM already ended and its residual aftermath is queued). This
+    // consumer is the ONE place the store obeys it — a new crisis event type
+    // registered in the lifecycle cannot forget its twin, because the
+    // directive lands here by construction instead of in a per-event bridge.
+    // Canon-only (campaign is set only in canon); best-effort + guarded: the
+    // settlement event already applied. The resolution threads this apply's
+    // minted timestamp so it stamps no wall-clock time of its own.
+    const twinDirective = campaign ? twinDirectiveForEvent(event) : null;
+    if (twinDirective) {
       try {
-        const inject = afterState.injectCampaignStressor;
-        if (typeof inject === 'function') {
-          const authoredType = String(event.payload?.stressorType || event.targetId || '').trim();
-          const roamingType = pulseTypeForStressorKey(authoredType) || authoredType;
-          if (roamingType) {
-            inject(campaign.id, {
-              type: roamingType,
-              label: event.payload?.label || undefined,
-              originSettlementId: String(activeSaveId),
-              affectedSettlementIds: [String(activeSaveId)],
-              severity: Number(event.payload?.severity ?? 0.6),
-            });
-          }
+        if (twinDirective.action === 'inject'
+          && typeof afterState.injectCampaignStressor === 'function') {
+          afterState.injectCampaignStressor(campaign.id, {
+            ...twinDirective.stressor,
+            originSettlementId: String(activeSaveId),
+            affectedSettlementIds: [String(activeSaveId)],
+          });
+        } else if (twinDirective.action === 'resolve'
+          && typeof afterState.resolveCampaignStressor === 'function') {
+          afterState.resolveCampaignStressor(campaign.id, {
+            type: twinDirective.type,
+            settlementId: String(activeSaveId),
+            now: afterState.editedAt,
+          });
         }
-      } catch { /* world registration is best-effort */ }
-    }
-
-    // Editor roster wave — the inverse bridge: resolving an authored stressor
-    // in a canon campaign ALSO resolves the matching roaming world-pulse twin
-    // (the one the inject bridge above registered), so the pulse stops aging
-    // a crisis the DM already ended and its residual aftermath is queued.
-    // Same best-effort + guarded posture; thread this apply's minted
-    // timestamp so the resolution stamps no wall-clock time of its own.
-    if (event?.type === 'RESOLVE_STRESSOR' && campaign) {
-      try {
-        const resolve = afterState.resolveCampaignStressor;
-        if (typeof resolve === 'function') {
-          const authoredType = String(event.payload?.stressorType || event.targetId || '').trim();
-          if (authoredType) {
-            resolve(campaign.id, {
-              type: authoredType,
-              settlementId: String(activeSaveId),
-              now: afterState.editedAt,
-            });
-          }
-        }
-      } catch { /* world resolution is best-effort */ }
+      } catch { /* the world half is best-effort */ }
     }
 
     // §8 M3b Phase 2 — a party-caused event with a world-scale analog also
@@ -1572,17 +1540,18 @@ export const createSettlementSlice = (set, get) => ({
         campaignState: savePartial.campaignState,
       });
     }
-    // The roaming-stressor bridges' inverse (canon-only — this action already
-    // gates on canon, mirroring the forward bridges in applyEvent): undoing
-    // an APPLY_STRESSOR must withdraw the twin the inject bridge registered,
-    // or the pulse keeps aging a crisis the timeline no longer contains;
-    // undoing a RESOLVE_STRESSOR must un-resolve the twin from the
-    // logEntry.undo snapshot, or it stays an echo while the local condition
-    // un-eases. The spread/re-ignited guards and the legacy-entry fallback
-    // live in campaignSlice.undoCampaignStressorBridge. Same best-effort +
-    // guarded posture as the forward bridges.
-    const undoneType = undoneEntry?.event?.type;
-    if (undoneType === 'APPLY_STRESSOR' || undoneType === 'RESOLVE_STRESSOR') {
+    // The crisis twin directive's inverse (canon-only — this action already
+    // gates on canon, mirroring the forward consumer in applyEvent): the
+    // lifecycle composes the withdrawal from the popped entry
+    // (crisisLifecycle.crisisWithdraw — 'withdraw' pulls the twin the onset
+    // injected, or the pulse keeps aging a crisis the timeline no longer
+    // contains; 'restore' un-resolves the twin from the logEntry.undo
+    // snapshot, or it stays an echo while the local condition un-eases).
+    // The spread/re-ignited guards and the legacy-entry fallback live in
+    // campaignSlice.undoCampaignStressorBridge. Same best-effort + guarded
+    // posture as the forward consumer.
+    const withdrawDirective = crisisWithdraw(undoneEntry);
+    if (withdrawDirective) {
       try {
         const saveId = afterState.activeSaveId;
         const campaign = saveId
@@ -1591,10 +1560,8 @@ export const createSettlementSlice = (set, get) => ({
         const undoBridge = afterState.undoCampaignStressorBridge;
         if (campaign && typeof undoBridge === 'function') {
           undoBridge(campaign.id, {
-            eventType: undoneType,
-            type: String(undoneEntry.event.payload?.stressorType || undoneEntry.event.targetId || '').trim(),
+            ...withdrawDirective,
             settlementId: String(saveId),
-            twin: undoneEntry.undo?.campaignTwin ?? null,
           });
         }
       } catch { /* world reconciliation is best-effort */ }

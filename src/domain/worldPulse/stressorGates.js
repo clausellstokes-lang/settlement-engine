@@ -32,6 +32,7 @@ import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { magicLedger, ARCANE_INSTITUTION_PATTERN } from '../magicLedger.js';
 import { coupContenders } from '../rulingPower.js';
+import { resolveBlockadeBypassChannel } from './foodStockpile.js';
 import {
   institutionClassValue,
   relationshipTypeOf,
@@ -182,7 +183,11 @@ export function magicDependenceSignals(settlement) {
   if (chains.some(c => c?.status === 'magically_sustained' || c?.magicNote)) {
     signals.push('supply chains run on magical substitution');
   }
-  const magicTrade = settlement?.economicState?.foodSecurity?.magicTradeChannel
+  // Live-first (the field-manifest contract): the channel is derived from
+  // the standing roster, verdict as fallback — never the raw generation
+  // verdict alone. The roster sniff stays OR'd in: a transport that exists
+  // at all marks magic-borne trade as load-bearing for the deadzone story.
+  const magicTrade = !!resolveBlockadeBypassChannel(settlement)
     || settlement?.config?._magicTradeOnly === true
     || institutions.some(inst => /teleportation|planar|extradimensional|airship/i.test(String(inst?.name || '')));
   if (magicTrade) signals.push('trade arrives by teleport or airship');

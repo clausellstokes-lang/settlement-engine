@@ -4,6 +4,7 @@ import {
   deriveExportPosture,
   deriveViability,
   deriveMagicPosture,
+  deriveBlockadeRelief,
   deriveDossierViewModel,
 } from '../../../src/domain/display/dossierViewModel.js';
 import { sanitizePublicValue, PRIVATE_KEY_RE } from '../../../src/domain/display/publicSafe.js';
@@ -238,5 +239,65 @@ describe('deriveViability — isolated import-channel wording matrix', () => {
     // magic supplements local production without any import channel.
     const r = deriveViability(isolated({ magicFoodOffset: 200 }));
     expect(r.summary).toMatch(/survives on local production, magical provision, and stored reserves — no meaningful import channel reaches it/);
+  });
+});
+
+describe('deriveBlockadeRelief (Wave 8 — blockadeBypass gains its reader)', () => {
+  // The stockpile bookkeeping advanceFoodStockpile writes each pulse; this
+  // derivation is the dossier read that says WHY the siege did or didn't bite.
+  const withStockpile = (stockpile) => ({
+    economicState: { foodSecurity: { deficitPct: 0, storageMonths: 4, stockpile } },
+  });
+
+  it('a teleport bypass explains why the siege is not biting — capped at the channel, not a free pass', () => {
+    const b = deriveBlockadeRelief(withStockpile({ blockaded: true, blockadeBypass: 'teleport' }));
+    expect(b).toEqual({
+      available: true, blockaded: true, bypass: 'teleport',
+      // The throughput caveat is load-bearing: the bypass carries at most the
+      // circle's FOOD_IMPORT_RATES share — a port city still starves on the
+      // overflow, and the prose must not promise otherwise.
+      display: "Supplies arrive by teleportation circle despite the siege — up to the circle's throughput.",
+    });
+  });
+
+  it('an airship bypass reads as impaired relief, not a free pass', () => {
+    const b = deriveBlockadeRelief(withStockpile({ blockaded: true, blockadeBypass: 'airship' }));
+    expect(b.bypass).toBe('airship');
+    expect(b.display).toMatch(/Airships run the blockade/);
+    expect(b.display).toMatch(/impaired/);
+  });
+
+  it('no channel: the display says the blockade is biting', () => {
+    const b = deriveBlockadeRelief(withStockpile({ blockaded: true, blockadeBypass: null }));
+    expect(b.blockaded).toBe(true);
+    expect(b.bypass).toBeNull();
+    expect(b.display).toMatch(/blockade is biting/);
+    expect(b.display).toMatch(/import share of need goes unmet/);
+  });
+
+  it('no active blockade: the record is available but says nothing', () => {
+    const b = deriveBlockadeRelief(withStockpile({ blockaded: false, blockadeBypass: null }));
+    expect(b).toEqual({ available: true, blockaded: false, bypass: null, display: null });
+  });
+
+  it('settlements the pulse never touched degrade gracefully (no stockpile record)', () => {
+    expect(deriveBlockadeRelief({ economicState: { foodSecurity: {} } }))
+      .toEqual({ available: false, blockaded: false, bypass: null, display: null });
+    expect(deriveBlockadeRelief(null))
+      .toEqual({ available: false, blockaded: false, bypass: null, display: null });
+  });
+
+  it('is wired into the canonical view model', () => {
+    const s = withStockpile({ blockaded: true, blockadeBypass: 'teleport' });
+    const vm = deriveDossierViewModel(s);
+    expect(vm.blockade).toEqual(deriveBlockadeRelief(s));
+  });
+
+  it('every field survives the public-safe projection (denylist check)', () => {
+    const b = deriveBlockadeRelief(withStockpile({ blockaded: true, blockadeBypass: 'teleport' }));
+    expect(sanitizePublicValue({ blockade: b })).toEqual({ blockade: b });
+    for (const key of Object.keys(b)) {
+      expect(PRIVATE_KEY_RE.test(key), `field name "${key}" trips the publicSafe denylist`).toBe(false);
+    }
   });
 });

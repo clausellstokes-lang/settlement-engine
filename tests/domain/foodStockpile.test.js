@@ -13,6 +13,11 @@
  *   • magical transport bypasses the blockade only up to its own channel
  *     throughput (the shared FOOD_IMPORT_RATES ladder) — the import share
  *     above it still starves;
+ *   • the bypass channel resolves LIVE-FIRST (Wave 8 frozen-vs-live): the
+ *     standing roster decides; the generation verdict is fallback ONLY for
+ *     rosters with no name signal, and a destroyed — or pulse-closed
+ *     (remnant/_worldPulseInactive) — circle is a NEGATIVE signal: the next
+ *     blockade takes the full cut;
  *   • the persisted, gated defense 'disaster' score is re-graded through
  *     the same gate whenever live resilience moves (the readiness row
  *     un-freezes);
@@ -26,6 +31,7 @@ import {
   advanceFoodStockpile,
   blockadeFor,
   famineFor,
+  resolveBlockadeBypassChannel,
   storageCapacityMonths,
   STOCKPILE_TUNING,
 } from '../../src/domain/worldPulse/foodStockpile.js';
@@ -292,9 +298,11 @@ describe('advanceFoodStockpile()', () => {
     expect(noMagic.storageMonths).toBe(noCircle.storageMonths);
   });
 
-  test("the generator's channel verdict (magicTradeChannel) is preferred over the name sniff", () => {
+  test("the generator's verdict (magicTradeChannel) is the FALLBACK for rosters with no name signal — legacy/custom-renamed circles keep working", () => {
     const blockade = { id: 'siege.x', type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
     // No recognisable institution name — only the persisted channel field.
+    // (Wave 8 flipped resolution live-first; this is the no-signal-either-way
+    // branch where the verdict still speaks for the renamed masonry.)
     const s = settlementWith({
       institutions: [GRANARY, { name: 'The Whispering Arch' }],
       foodSecurity: {
@@ -306,6 +314,83 @@ describe('advanceFoodStockpile()', () => {
       .settlement.economicState.foodSecurity;
     expect(fs.stockpile.blockadeBypass).toBe('teleport');
     expect(fs.storageMonths).toBeCloseTo(4, 1);
+  });
+
+  test('a circle destroyed or pulse-closed mid-campaign stops feeding the city: the next blockade takes the full cut', () => {
+    const blockade = { id: 'siege.x', type: 'siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['a'] };
+    // The verdict still says 'teleport' — generation cannot know the campaign
+    // tore the circle down. The roster carries the NEGATIVE signal (the
+    // sniffable transport stands removed/destroyed — or pulse-closed:
+    // institutionLifecycle stamps status 'remnant' + _worldPulseInactive on
+    // economic closures, the engine's canonical down predicate), so the
+    // verdict is not consulted and no fallback channel survives.
+    const mk = (circlePatch) => settlementWith({
+      institutions: [GRANARY, { name: 'Teleportation circle', ...(circlePatch || {}) }],
+      foodSecurity: {
+        deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.3,
+        magicTradeChannel: 'teleport',
+      },
+    });
+    const tickOnce = (s) => advanceFoodStockpile(s, { interval: 'one_month', tick: 1, blockade })
+      .settlement.economicState.foodSecurity;
+    const noCircle = tickOnce(settlementWith({
+      institutions: [GRANARY],
+      foodSecurity: { deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.3 },
+    }));
+    for (const patch of [
+      { status: 'removed' },
+      { status: 'destroyed' },
+      { status: 'remnant' },
+      { status: 'remnant', _worldPulseInactive: true }, // the lifecycle's closure stamp
+      { _worldPulseInactive: true },                    // the flag alone is DOWN too
+    ]) {
+      const fallen = tickOnce(mk(patch));
+      expect(fallen.stockpile.blockadeBypass, JSON.stringify(patch)).toBeNull();
+      // Drains exactly like a settlement that never had magical transport.
+      expect(fallen.storageMonths, JSON.stringify(patch)).toBe(noCircle.storageMonths);
+    }
+    // Control: the same circle STANDING keeps the full bypass.
+    expect(tickOnce(mk(null)).stockpile.blockadeBypass).toBe('teleport');
+  });
+
+  test('live-first: a circle built mid-campaign outranks a stale airship verdict', () => {
+    const s = settlementWith({
+      institutions: [GRANARY, { name: 'Teleportation circle' }],
+      foodSecurity: {
+        deficitPct: 0, surplusPct: 0, storageMonths: 4, importDependency: 0.3,
+        magicTradeChannel: 'airship', // generation only saw the dock
+      },
+    });
+    expect(resolveBlockadeBypassChannel(s)).toBe('teleport');
+  });
+
+  test('resolveBlockadeBypassChannel: the three roster-signal regimes, all gated on magicExists', () => {
+    const mk = (institutions, foodSecurity = {}, config = undefined) => ({
+      ...settlementWith({ institutions, foodSecurity: { deficitPct: 0, ...foodSecurity } }),
+      ...(config ? { config } : {}),
+    });
+    // Standing transport: live signal wins, no verdict needed.
+    expect(resolveBlockadeBypassChannel(mk([{ name: 'Airship docking tower' }]))).toBe('airship');
+    // An impaired dock still stands (blockadeTransport stamps airships
+    // impaired during sieges BY DESIGN — the cut is priced as throughput).
+    expect(resolveBlockadeBypassChannel(mk([{ name: 'Airship docking tower', status: 'impaired' }]))).toBe('airship');
+    // Negative signal: the only transport lies removed — verdict ignored.
+    expect(resolveBlockadeBypassChannel(
+      mk([{ name: 'Airship docking tower', status: 'removed' }], { magicTradeChannel: 'airship' }),
+    )).toBeNull();
+    // A pulse-closed remnant is DOWN the same way (circles/docks are
+    // closable; institutionLifecycle's standing predicate excludes both).
+    expect(resolveBlockadeBypassChannel(
+      mk([{ name: 'Airship docking tower', status: 'remnant', _worldPulseInactive: true }], { magicTradeChannel: 'airship' }),
+    )).toBeNull();
+    // No signal either way: the verdict speaks (legacy/custom names).
+    expect(resolveBlockadeBypassChannel(mk([{ name: 'The Whispering Arch' }], { magicTradeChannel: 'airship' }))).toBe('airship');
+    // Garbage verdicts never mint a channel.
+    expect(resolveBlockadeBypassChannel(mk([], { magicTradeChannel: 'gateway' }))).toBeNull();
+    // Dead-magic world: everything is masonry.
+    expect(resolveBlockadeBypassChannel(
+      mk([{ name: 'Teleportation circle' }], { magicTradeChannel: 'teleport' }, { magicExists: false }),
+    )).toBeNull();
   });
 
   test('an airship dock runs the blockade impaired: slower drain than no bypass at all', () => {
