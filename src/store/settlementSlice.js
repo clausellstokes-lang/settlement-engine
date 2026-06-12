@@ -57,6 +57,7 @@ import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { eligibleCustomContent } from '../domain/customContentSchema.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
+import { normalizeStressor } from '../domain/worldPulse/stressors.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { inferSuccessors }   from '../domain/entities/successors.js';
@@ -143,6 +144,29 @@ function visibleSettlementIdsForCampaign(state, campaign) {
   return Object.values(placements)
     .map(p => p?.settlementId)
     .filter(Boolean);
+}
+
+/**
+ * The roaming campaign twin a stressor event's bridge is about to touch —
+ * matched exactly the way resolveCampaignStressor matches (alias-mapped
+ * type, ACTIVE, affecting this save), read from the PRE-event campaign so
+ * applyEvent can stamp it onto logEntry.undo and undoLastEvent can restore
+ * it (campaignSlice.undoCampaignStressorBridge). Returns the raw stored
+ * record (cloned), or null when no active twin exists yet.
+ */
+function campaignStressorTwinFor(campaign, event, saveId) {
+  const authoredType = String(event?.payload?.stressorType || event?.targetId || '').trim();
+  const roamingType = pulseTypeForStressorKey(authoredType) || authoredType;
+  if (!roamingType) return null;
+  const sid = String(saveId || '');
+  const raw = (campaign?.worldState?.stressors || []).find(st => {
+    const n = normalizeStressor(st);
+    return n.status === 'active'
+      && String(n.type).toLowerCase() === String(roamingType).toLowerCase()
+      && (String(n.originSettlementId || '') === sid
+        || (n.affectedSettlementIds || []).map(String).includes(sid));
+  });
+  return raw ? cloneJson(raw) : null;
 }
 
 // ── Per-entity-kind nested array resolver ──────────────────────────────
@@ -573,11 +597,19 @@ export const createSettlementSlice = (set, get) => ({
       // generation (no prior settlement). EVENT-authored conditions are
       // deliberately NOT carried here: they ride config.eventConditions, so
       // they survive only when the generation input actually records them.
-    const reconciled = reconcileSettlementChange(result, state.settlement, {
-      source: 'regenerate',
-      changeType: 'GENERATE_SETTLEMENT',
-      changeLabel: result?.name,
-    });
+      // Identity guard: the carry is only for a reroll OF the on-screen
+      // working draft. When a SAVED settlement is on screen (activeSaveId
+      // set), this generation mints a brand-new town (activeSaveId resets
+      // below; the save keeps its own settlement and crises) — carrying the
+      // old save's world/party conditions onto the new identity would clone
+      // the campaign layer onto an unrelated town.
+    const reconciled = state.activeSaveId
+      ? result
+      : reconcileSettlementChange(result, state.settlement, {
+          source: 'regenerate',
+          changeType: 'GENERATE_SETTLEMENT',
+          changeLabel: result?.name,
+        });
       // Derive the SystemState immediately so the UI never sees a settlement
       // without its accompanying state snapshot. The domain function is
       // pure — no store, no React — and tolerant of partial inputs, so a
@@ -1238,6 +1270,20 @@ export const createSettlementSlice = (set, get) => ({
       ...logEntry,
       afterState: nextSystemState,
     };
+    // Undo seam for the roaming-stressor bridges below: snapshot the
+    // campaign twin BEFORE the bridge upserts/resolves it (logEntry.undo is
+    // the established snapshot home). Without this, undoing an
+    // APPLY_STRESSOR that overwrote an earlier twin loses that copy, and
+    // undoing a RESOLVE_STRESSOR has no pre-resolution lifecycle to restore.
+    if (campaign && (event?.type === 'APPLY_STRESSOR' || event?.type === 'RESOLVE_STRESSOR')) {
+      logEntry = {
+        ...logEntry,
+        undo: {
+          ...(logEntry.undo || {}),
+          campaignTwin: campaignStressorTwinFor(campaign, event, activeSaveId),
+        },
+      };
+    }
 
     // Successor detection: when a pillar-tier NPC dies, surface the
     // engine's ranked successor list to the UI so the DM doesn't have
@@ -1485,6 +1531,9 @@ export const createSettlementSlice = (set, get) => ({
    */
   undoLastEvent: () => {
     if (get().phase !== 'canon' || get().eventLog.length === 0) return;
+    // Read the entry about to be popped while it is still in state — the
+    // roaming-twin reconcile below needs its event + undo snapshot.
+    const undoneEntry = get().eventLog[get().eventLog.length - 1];
     set(state => {
       const popped = state.eventLog.pop();
       state.systemState = popped.beforeState;
@@ -1522,6 +1571,33 @@ export const createSettlementSlice = (set, get) => ({
         settlement: savePartial.settlement,
         campaignState: savePartial.campaignState,
       });
+    }
+    // The roaming-stressor bridges' inverse (canon-only — this action already
+    // gates on canon, mirroring the forward bridges in applyEvent): undoing
+    // an APPLY_STRESSOR must withdraw the twin the inject bridge registered,
+    // or the pulse keeps aging a crisis the timeline no longer contains;
+    // undoing a RESOLVE_STRESSOR must un-resolve the twin from the
+    // logEntry.undo snapshot, or it stays an echo while the local condition
+    // un-eases. The spread/re-ignited guards and the legacy-entry fallback
+    // live in campaignSlice.undoCampaignStressorBridge. Same best-effort +
+    // guarded posture as the forward bridges.
+    const undoneType = undoneEntry?.event?.type;
+    if (undoneType === 'APPLY_STRESSOR' || undoneType === 'RESOLVE_STRESSOR') {
+      try {
+        const saveId = afterState.activeSaveId;
+        const campaign = saveId
+          ? (afterState.campaigns || []).find(c => (c.settlementIds || []).map(String).includes(String(saveId)))
+          : null;
+        const undoBridge = afterState.undoCampaignStressorBridge;
+        if (campaign && typeof undoBridge === 'function') {
+          undoBridge(campaign.id, {
+            eventType: undoneType,
+            type: String(undoneEntry.event.payload?.stressorType || undoneEntry.event.targetId || '').trim(),
+            settlementId: String(saveId),
+            twin: undoneEntry.undo?.campaignTwin ?? null,
+          });
+        }
+      } catch { /* world reconciliation is best-effort */ }
     }
   },
 

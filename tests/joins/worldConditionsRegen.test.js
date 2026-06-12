@@ -16,8 +16,11 @@
  * These tests boot the REAL zustand store (the settlementSlice.test.js
  * harness) so they pin the wiring, not just the domain composition:
  *   - applyChange must thread reconcileSettlementChange(result, prior);
- *   - generateSettlement must do the same on a reroll, and stay silent on a
- *     first generation (no prior settlement → no reconciliationLog);
+ *   - generateSettlement must do the same on a reroll of the WORKING DRAFT,
+ *     and stay silent on a first generation (no prior settlement → no
+ *     reconciliationLog) — and on a brand-new generation while a SAVED
+ *     settlement is on screen (activeSaveId set): the new town is a new
+ *     identity, and the save keeps its own crises;
  *   - carried world conditions must NOT duplicate event conditions:
  *     isWorldAuthoredCondition disclaims event-sourced conditions, which
  *     survive through their own seam (config.eventConditions).
@@ -221,5 +224,29 @@ describe('join: generateSettlement (reroll) preserves world conditions', () => {
     const result = await store.getState().generateSettlement('wc-fresh-1');
     expect(result).toBeTruthy();
     expect('reconciliationLog' in store.getState().settlement).toBe(false);
+  });
+
+  test('a brand-new generation while a SAVED settlement is loaded carries NOTHING (identity guard)', async () => {
+    const store = makeStore();
+    store.setState(s => {
+      s.settlement = hydratedSettlement();
+      // The on-screen settlement belongs to a save — generating now mints a
+      // NEW town (activeSaveId resets), not a reroll of that save.
+      s.activeSaveId = 'old-canon-save';
+      s.lastSeed = SEED;
+    });
+
+    const returned = await store.getState().generateSettlement('wc-new-town-1');
+    expect(returned).toBeTruthy();
+    expect(store.getState().activeSaveId).toBeNull();
+
+    const after = store.getState().settlement;
+    // The old save's campaign-layer crises stay with the save — none of them
+    // were cloned onto the unrelated new town.
+    expect(condOf(after, 'famine')).toEqual([]);
+    expect(condOf(after, 'regional_route_disruption')).toEqual([]);
+    expect(condOf(after, 'trade_route_cut')).toEqual([]);
+    // A fresh identity starts with no reconciliation trail at all.
+    expect('reconciliationLog' in after).toBe(false);
   });
 });

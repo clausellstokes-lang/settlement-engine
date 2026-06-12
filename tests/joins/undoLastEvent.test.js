@@ -28,11 +28,41 @@
  * the Timeline Undo button calls exactly this action.
  */
 
-import { describe, test, expect } from 'vitest';
+import { beforeEach, describe, test, expect, vi } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
+// Mocks for the campaign-twin describe below (hoisted file-wide; the
+// settlement-only harnesses never reach these modules) — the
+// settlementSlice.stressorBridge.test.js setup.
+vi.mock('../../src/lib/saves.js', () => ({
+  saves: {
+    update: vi.fn(() => Promise.resolve()),
+    isConfigured: false,
+  },
+}));
+
+vi.mock('../../src/lib/campaigns.js', () => {
+  const cached = new Map();
+  const clone = value => JSON.parse(JSON.stringify(value));
+  return {
+    isCampaignActive: campaign => (campaign?.accessState || 'active') === 'active',
+    campaigns: {
+      loadCached: vi.fn((ownerId = 'anon') => clone(cached.get(ownerId) || [])),
+      cache: vi.fn((campaigns = [], ownerId = 'anon') => {
+        cached.set(ownerId, clone(campaigns));
+      }),
+      list: vi.fn(() => Promise.resolve([])),
+      upsert: vi.fn(campaign => Promise.resolve(campaign?.id)),
+      delete: vi.fn(() => Promise.resolve()),
+      isConfigured: false,
+    },
+  };
+});
+
 import { createSettlementSlice, stripDerivedConfigKeys } from '../../src/store/settlementSlice.js';
+import { createCampaignSlice } from '../../src/store/campaignSlice.js';
+import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const gen = (config, seed) =>
@@ -357,5 +387,182 @@ describe('join: undo of DESTROY_SETTLEMENT revives the settlement', () => {
     expect(revived.destroyedByEventId).toBeUndefined();
     expect('_destroyed' in revived.config).toBe(false);
     expect('_destroyedByEventId' in revived.config).toBe(false);
+  });
+});
+
+// ── The roaming-stressor bridges' inverse ────────────────────────────────
+// applyEvent's canon bridges register/resolve a campaign twin
+// (injectCampaignStressor / resolveCampaignStressor). The undo scrubbed
+// every LOCAL artifact but never touched that twin: undoing APPLY_STRESSOR
+// left the pulse aging a crisis the timeline no longer contained, and
+// undoing RESOLVE_STRESSOR left the twin a resolved echo while the local
+// condition un-eased. undoLastEvent now mirrors the bridges through
+// campaignSlice.undoCampaignStressorBridge, restoring from the campaignTwin
+// snapshot applyEvent stamps onto logEntry.undo. Harness mirrors
+// settlementSlice.stressorBridge.test.js (real campaignSlice, mocked libs).
+
+function installLocalStorage() {
+  const data = new Map();
+  globalThis.localStorage = {
+    getItem: key => data.get(String(key)) ?? null,
+    setItem: (key, value) => { data.set(String(key), String(value)); },
+    removeItem: key => { data.delete(String(key)); },
+    clear: () => { data.clear(); },
+  };
+}
+
+function makeCampaignStore() {
+  return create(immer((...a) => ({
+    ...stubSlice(...a),
+    ...createCampaignSlice(...a),
+    ...createSettlementSlice(...a),
+  })));
+}
+
+function campaignFixture() {
+  return {
+    tier: 'town',
+    name: 'Ashford',
+    population: 2000,
+    config: { monsterThreat: 'safe', tradeRouteAccess: 'road' },
+    institutions: [
+      { id: 'institution.granary', name: 'Granary', category: 'civic', status: 'active' },
+    ],
+    economicState: { primaryExports: [], primaryImports: [] },
+    powerStructure: { factions: [{ id: 'faction.council', name: 'Council' }], conflicts: [] },
+    npcs: [],
+    activeConditions: [],
+  };
+}
+
+function seedCampaignStore(store, phase = 'canon') {
+  const save = {
+    id: 'ashford',
+    name: 'Ashford',
+    tier: 'town',
+    settlement: campaignFixture(),
+    seed: 'undo-bridge-seed',
+    campaignState: {
+      phase,
+      eventLog: [],
+      systemState: null,
+      locks: {},
+      generatedAt: '2026-01-01T00:00:00.000Z',
+      editedAt: '2026-01-01T00:00:00.000Z',
+      canonizedAt: phase === 'canon' ? '2026-01-01T00:00:00.000Z' : null,
+      lastExportAt: null,
+    },
+  };
+  store.setState(state => {
+    state.savedSettlements = [save];
+    state.campaigns = [{
+      id: 'camp-1',
+      name: 'Realm',
+      settlementIds: ['ashford'],
+      regionalGraph: ensureRegionalGraph(),
+      wizardNews: { currentTick: 0, entries: [] },
+      worldState: { rngSeed: 'undo-bridge-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+    }];
+  });
+  store.getState().hydrateFromSave(save);
+  return store;
+}
+
+function applyStressorEvent(store, { id, type, label, severity }) {
+  return store.getState().applyEvent({
+    id,
+    type: 'APPLY_STRESSOR',
+    targetId: type,
+    payload: { stressorType: type, label, severity },
+    cause: 'player_action',
+  });
+}
+
+describe('join: undo reconciles the roaming campaign twin (the bridge inverse)', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  const twinsOf = (store) =>
+    (store.getState().campaigns[0].worldState.stressors || []);
+
+  test('undo of APPLY_STRESSOR withdraws the twin; a chained undo restores the overwritten copy first', () => {
+    const store = seedCampaignStore(makeCampaignStore(), 'canon');
+    applyStressorEvent(store, { id: 'ev-undo-1a', type: 'under_siege', label: 'Under Siege', severity: 0.8 });
+    applyStressorEvent(store, { id: 'ev-undo-1b', type: 'under_siege', label: 'Under Siege', severity: 0.4 });
+    expect(twinsOf(store)).toHaveLength(1);
+    expect(twinsOf(store)[0].severity).toBe(0.4);
+
+    // Undo the re-author: the upsert-overwrote twin returns from the
+    // logEntry.undo snapshot — not a removal, not the 0.4 copy.
+    store.getState().undoLastEvent();
+    expect(twinsOf(store)).toHaveLength(1);
+    expect(twinsOf(store)[0]).toMatchObject({
+      id: 'world_stressor.siege.ashford',
+      severity: 0.8,
+      status: 'active',
+    });
+
+    // Undo the onset: no twin existed before it — withdrawn entirely, so
+    // the pulse stops aging a crisis the timeline no longer contains.
+    store.getState().undoLastEvent();
+    expect(twinsOf(store)).toHaveLength(0);
+    expect(store.getState().eventLog).toEqual([]);
+  });
+
+  test('a twin the pulse has SPREAD is left in place (world history stands)', () => {
+    const store = seedCampaignStore(makeCampaignStore(), 'canon');
+    applyStressorEvent(store, { id: 'ev-undo-2', type: 'under_siege', label: 'Under Siege', severity: 0.8 });
+    store.setState(s => {
+      const twin = s.campaigns[0].worldState.stressors[0];
+      twin.affectedSettlementIds = [...(twin.affectedSettlementIds || []), 'far-town'];
+    });
+
+    store.getState().undoLastEvent();
+    // The local timeline scrub still ran…
+    expect(store.getState().eventLog).toEqual([]);
+    // …but the crisis has a life of its own now — the twin survives.
+    expect(twinsOf(store)).toHaveLength(1);
+    expect(twinsOf(store)[0].affectedSettlementIds).toContain('far-town');
+  });
+
+  test('undo of RESOLVE_STRESSOR un-resolves the twin and drops its queued aftermath', () => {
+    const store = seedCampaignStore(makeCampaignStore(), 'canon');
+    applyStressorEvent(store, { id: 'ev-undo-3a', type: 'under_siege', label: 'Under Siege', severity: 0.8 });
+    store.getState().applyEvent(ev('RESOLVE_STRESSOR', {
+      id: 'ev-undo-3b', targetId: 'under_siege',
+      payload: { stressorType: 'under_siege', label: 'Under Siege' },
+    }));
+    const resolved = store.getState().campaigns[0].worldState;
+    expect((resolved.stressors || []).filter(s => s.status === 'active')).toHaveLength(0);
+    expect((resolved.proposals || []).filter(p => p.status === 'pending')).toHaveLength(1);
+
+    store.getState().undoLastEvent();
+    const after = store.getState().campaigns[0].worldState;
+    const twins = (after.stressors || []).filter(s => s.id === 'world_stressor.siege.ashford');
+    // The echo is gone; the pre-resolution ACTIVE twin is back verbatim…
+    expect(twins).toHaveLength(1);
+    expect(twins[0].status).toBe('active');
+    expect(twins[0].severity).toBe(0.8);
+    // …and the aftermath of a resolution that no longer happened is no
+    // longer pending.
+    expect((after.proposals || []).filter(p => p.status === 'pending')).toHaveLength(0);
+  });
+
+  test('the non-canon path stays a no-op — a draft undo touches no world state', () => {
+    const store = seedCampaignStore(makeCampaignStore(), 'draft');
+    store.getState().injectCampaignStressor('camp-1', {
+      type: 'siege', originSettlementId: 'ashford',
+      affectedSettlementIds: ['ashford'], severity: 0.8,
+    });
+    applyStressorEvent(store, { id: 'ev-undo-4', type: 'under_siege', label: 'Under Siege', severity: 0.6 });
+
+    store.getState().undoLastEvent();
+    // Draft never logged, so there is nothing to undo — the world twin
+    // (seeded directly above) and the draft edit both stand.
+    expect(twinsOf(store)).toHaveLength(1);
+    expect(twinsOf(store)[0].severity).toBe(0.8);
+    expect((store.getState().settlement.stress || []).some(st => st.type === 'under_siege')).toBe(true);
   });
 });

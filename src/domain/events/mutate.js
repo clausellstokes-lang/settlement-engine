@@ -1032,6 +1032,14 @@ const STRESSOR_SYSTEM_ALIASES = Object.freeze({
 // container upserts and resolveStressor's matchesEntry use.
 const stressTypeEq = (a, b) => String(a || '').toLowerCase() === String(b || '').toLowerCase();
 
+// Content identity for a bare-object stress entry — type, falling back to
+// display name for legacy untyped entries; an entry with neither falls back
+// to the object itself (reference identity). assembleSettlement dual-writes
+// the SAME object under stress + stressors, but a JSON save/load round-trip
+// breaks the aliasing — two content-identical twins that reference dedupe
+// (Set) counted as distinct entries.
+const stressEntryIdentity = (st) => String(st?.type || st?.name || '').toLowerCase() || st;
+
 /**
  * Normalized view of config.stressorEdits — the EDITOR-authored stressor
  * deltas the generation re-applies (resolveStress's post-roll overlay —
@@ -1110,7 +1118,12 @@ function applyStressor(s, event) {
   const objectKeys = arrayKey ? [] : ['stressors', 'stress', 'stresses']
     .filter(k => s[k] && typeof s[k] === 'object');
   const writeKeys = arrayKey ? [arrayKey] : objectKeys.length ? objectKeys : ['stress'];
-  const list = arrayKey ? s[arrayKey] : [...new Set(objectKeys.map(k => s[k]))];
+  // Lift by CONTENT identity, not reference: a round-tripped settlement holds
+  // content-identical twins under stress + stressors, and the old Set dedupe
+  // kept both — upserting a DUPLICATE entry into every container key.
+  const lifted = objectKeys.map(k => s[k]);
+  const list = arrayKey ? s[arrayKey] : lifted.filter((st, i) =>
+    lifted.findIndex(o => stressEntryIdentity(o) === stressEntryIdentity(st)) === i);
   // Match by type; the display-name fallback only rescues legacy entries
   // that never recorded one — matching a TYPED entry by label would let a
   // custom stressor labeled 'Famine' overwrite the famine entry's type and
@@ -1251,16 +1264,25 @@ function resolveStressor(s, event) {
   const matchesEntry = (st) =>
     String(st?.type || '').toLowerCase() === type.toLowerCase()
     || String(st?.name || '').toLowerCase() === type.toLowerCase();
-  const containerKey = ['stressors', 'stress', 'stresses'].find(k => Array.isArray(s[k]));
-  const list = containerKey ? s[containerKey] : [];
-  const idx = list.findIndex(matchesEntry);
+  // EVERY array container is cleared, not just the first: applyStressor
+  // writes the merged array to each key that held the bare object
+  // (stress + stressors), and a JSON round-trip breaks their aliasing — the
+  // old first-key-only removal left a stale twin raging under the other key.
+  const arrayKeys = ['stressors', 'stress', 'stresses'].filter(k => Array.isArray(s[k]));
   // A missing array entry is NOT a full no-op anymore: the stress entry is a
   // derivation output that a regeneration re-rolls away, while the promoted
   // condition survives via config.eventConditions — so the condition must
   // stay resolvable after a what-if. No matching entry AND no matching
   // condition below → settlement no-op, same posture as before.
-  let removed = idx === -1 ? null : list[idx];
-  let next = removed ? { ...s, [containerKey]: list.filter((_, i) => i !== idx) } : s;
+  let removed = null;
+  let next = s;
+  for (const containerKey of arrayKeys) {
+    const list = s[containerKey];
+    const idx = list.findIndex(matchesEntry);
+    if (idx === -1) continue;
+    removed = removed || list[idx];
+    next = { ...next, [containerKey]: list.filter((_, i) => i !== idx) };
+  }
   if (!removed) {
     // Pipeline settlements carry a SINGLE stressor as a bare object,
     // dual-written under stress + stressors (assembleSettlement) — the array

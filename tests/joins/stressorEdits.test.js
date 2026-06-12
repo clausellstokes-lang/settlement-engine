@@ -314,6 +314,58 @@ describe('join: the bare-object container clobber is fixed', () => {
     expect(next.stress.map(st => st.type).sort()).toEqual(['famine', 'under_siege']);
     expect(next.stressors).toEqual(next.stress);
   });
+
+  test('a JSON round-trip breaks the dual-write aliasing — APPLY still upserts ONE entry per key', () => {
+    // Save/load: the same bare object becomes two content-identical twins.
+    const f1 = JSON.parse(JSON.stringify(gen(FAMINE_CFG, FAMINE_SEED)));
+    expect(f1.stress).not.toBe(f1.stressors);
+    expect(f1.stress).toEqual(f1.stressors);
+
+    // A NEW type beside the round-tripped single: reference dedupe lifted
+    // BOTH famine twins into the working list, writing a duplicate famine
+    // to both keys. Content-identity dedupe keeps exactly one per type.
+    const next = mutate(f1, ev('APPLY_STRESSOR', {
+      id: 'ev-siege', targetId: 'under_siege',
+      payload: { stressorType: 'under_siege', label: 'Under siege', severity: 0.6 },
+    }));
+    for (const key of ['stress', 'stressors']) {
+      expect(next[key].map(st => st.type).sort()).toEqual(['famine', 'under_siege']);
+    }
+
+    // Re-authoring the SAME type upserts the first twin and must not keep
+    // the stale second one beside it.
+    const reauthored = mutate(f1, ev('APPLY_STRESSOR', {
+      id: 'ev-up', targetId: 'famine',
+      payload: { stressorType: 'famine', label: 'Famine', severity: 0.9 },
+    }));
+    for (const key of ['stress', 'stressors']) {
+      expect(reauthored[key].map(st => st.type)).toEqual(['famine']);
+      expect(reauthored[key][0].severity).toBe(0.9);
+    }
+  });
+
+  test('…and RESOLVE clears the entry from EVERY container key, not just the first', () => {
+    const f1 = JSON.parse(JSON.stringify(gen(FAMINE_CFG, FAMINE_SEED)));
+    const next = mutate(f1, ev('APPLY_STRESSOR', {
+      id: 'ev-siege', targetId: 'under_siege',
+      payload: { stressorType: 'under_siege', label: 'Under siege', severity: 0.6 },
+    }));
+    // Round-trip AGAIN so stress and stressors are separate arrays — the old
+    // resolve filtered only the first array key and left the other stale.
+    const saved = JSON.parse(JSON.stringify(next));
+    expect(saved.stress).not.toBe(saved.stressors);
+
+    const resolved = mutate(saved, ev('RESOLVE_STRESSOR', { id: 'ev-lift', targetId: 'under_siege' }));
+    for (const key of ['stress', 'stressors']) {
+      expect(resolved[key].map(st => st.type)).toEqual(['famine']);
+    }
+
+    // The round-tripped bare-object shape resolves everywhere too (the
+    // matchesEntry object path already cleared every key by content).
+    const objResolved = mutate(f1, ev('RESOLVE_STRESSOR', { id: 'ev-end', targetId: 'famine' }));
+    expect(objResolved.stress).toBeNull();
+    expect(objResolved.stressors).toBeNull();
+  });
 });
 
 describe('join: the overlay consumes no rng and the slice strip never eats the key', () => {

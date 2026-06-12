@@ -697,6 +697,88 @@ export const createCampaignSlice = (set, get) => ({
     return resolved;
   },
 
+  /**
+   * The two stressor bridges' INVERSE, for undoLastEvent: put the roaming
+   * twin back the way it was before the undone event's bridge touched it.
+   *
+   * APPLY_STRESSOR undone — the inject bridge upserted the twin: withdraw
+   * it, but ONLY while it still looks bridge-born and unevolved (active,
+   * originating here, not spread beyond this settlement). Once the pulse has
+   * spread it the crisis has a life of its own — leave it and say so on the
+   * console rather than silently rewrite world history. When the pre-event
+   * snapshot (`twin`, stamped on logEntry.undo by applyEvent) holds an
+   * earlier stressor the upsert overwrote, that copy is restored instead.
+   *
+   * RESOLVE_STRESSOR undone — the resolve bridge resolved the twin into an
+   * echo and queued its residual aftermath: restore the snapshotted
+   * pre-resolution twin over the echo (same stable id) and drop the still-
+   * PENDING residual proposals that resolution queued. No snapshot (a legacy
+   * log entry) → nothing restorable; a re-ignited ACTIVE stressor already
+   * under the id is left alone.
+   *
+   * @param {string} campaignId
+   * @param {{ eventType?: string, type?: string, settlementId?: string|number, twin?: Object|null }} [args]
+   * @returns {boolean} whether the world state changed
+   */
+  undoCampaignStressorBridge: (campaignId, { eventType, type, settlementId, twin = null } = {}) => {
+    let changed = false;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const worldState = ensureWorldState(c.worldState, c);
+      const roamingType = pulseTypeForStressorKey(type) || type;
+      if (!roamingType) return;
+      const sid = String(settlementId || '');
+      const stressors = (worldState.stressors || []).map(raw => normalizeStressor(raw));
+      const sameType = st => String(st.type).toLowerCase() === String(roamingType).toLowerCase();
+
+      if (eventType === 'APPLY_STRESSOR') {
+        const current = stressors.find(st => st.status === 'active'
+          && sameType(st)
+          && String(st.originSettlementId || '') === sid);
+        if (!current) return;
+        if ((current.affectedSettlementIds || []).map(String).some(id => id !== sid)) {
+          console.debug(`[campaignSlice] undo left roaming stressor ${current.id} in place — the pulse has spread it beyond ${sid}.`);
+          return;
+        }
+        const remaining = stressors.filter(st => st.id !== current.id);
+        c.worldState = {
+          ...worldState,
+          stressors: twin ? [...remaining, normalizeStressor(cloneJson(twin))] : remaining,
+        };
+      } else if (eventType === 'RESOLVE_STRESSOR') {
+        if (!twin) {
+          console.debug(`[campaignSlice] undo could not un-resolve the roaming ${roamingType} twin at ${sid} — the log entry predates the twin snapshot.`);
+          return;
+        }
+        const restored = normalizeStressor(cloneJson(twin));
+        const occupant = stressors.find(st => st.id === restored.id);
+        if (occupant && occupant.status === 'active') {
+          console.debug(`[campaignSlice] undo left roaming stressor ${occupant.id} in place — it re-ignited after the undone resolution.`);
+          return;
+        }
+        // Replace the echo (same stable id — echoOf coalesces on it) with the
+        // pre-resolution twin, and drop the resolution's queued aftermath:
+        // residualOutcome stamps the twin's id on the proposal's condition.
+        c.worldState = {
+          ...worldState,
+          stressors: [...stressors.filter(st => !(st.id === restored.id
+            || (st.status === 'residual' && sameType(st) && String(st.originSettlementId || '') === sid))), restored],
+          proposals: (worldState.proposals || []).filter(p => !(p.status === 'pending'
+            && p.outcome?.candidateType === 'stressor_residual'
+            && String(p.outcome?.condition?.triggeredAt?.sourceEventTargetId || '') === restored.id)),
+        };
+      } else {
+        return;
+      }
+      c.updatedAt = now;
+      changed = true;
+      persistCampaignState(state, campaignId);
+    });
+    return changed;
+  },
+
   setCampaignRegionalGraph: (campaignId, regionalGraph) => {
     let graph = null;
     set(state => {
