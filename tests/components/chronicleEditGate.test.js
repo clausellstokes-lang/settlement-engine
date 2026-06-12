@@ -99,3 +99,36 @@ describe('ChroniclePanel user-facing copy says "Narrative Chronicles"', () => {
     expect(bare).toHaveLength(renamed.length);
   });
 });
+
+describe('NetworkEffectsPanel is exclusively Edit Dossier chrome (owner, 2026-06-12)', () => {
+  // Same two-render-sites history as ChroniclePanel/ProvenanceBlock: the
+  // panel rendered inside the editMode chrome AND in the read-only View.
+  // The read-only site was removed; these pins hold the gate. The panel is
+  // module-local to SettlementDetail.jsx (defined and rendered in one file),
+  // so the render-site scan is scoped to that file.
+  const networkSite = () => /<NetworkEffectsPanel\b/g;
+
+  test('exactly one render site, inside the editMode gate', () => {
+    const source = readFileSync(DETAIL_PATH, 'utf8');
+
+    const sites = [...source.matchAll(networkSite())];
+    expect(sites).toHaveLength(1);
+
+    const editOpen = source.indexOf(EDIT_GATE_OPEN);
+    const editClose = source.indexOf(EDIT_GATE_CLOSE, editOpen);
+    expect(editOpen).toBeGreaterThan(-1);
+    expect(editClose).toBeGreaterThan(editOpen);
+
+    const siteIdx = sites[0].index;
+    expect(siteIdx).toBeGreaterThan(editOpen);
+    expect(siteIdx).toBeLessThan(editClose);
+  });
+
+  test('the read-only View block contains no NetworkEffectsPanel', () => {
+    const source = readFileSync(DETAIL_PATH, 'utf8');
+
+    const readOpen = source.indexOf(READ_GATE_OPEN);
+    expect(readOpen).toBeGreaterThan(-1);
+    expect(source.slice(readOpen)).not.toMatch(networkSite());
+  });
+});
