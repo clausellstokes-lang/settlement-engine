@@ -66,8 +66,19 @@
 > fixed at the data (tier-plausible top-3, never slave markets in a thorp; root cause was a
 > null-resource fuzzy overmatch). Adversarially verified; five must-fix findings fixed+pinned
 > pre-commit. The regen-survival hotfix (`c8a5801`) landed the same day: content-identity dedupe,
-> undo reaches the roaming twin, new-generation carry guard. **Only Wave 8 remains** (structural
-> prevention — entity ids, frozen/live + producer/consumer manifests, crisis-triple sync).
+> undo reaches the roaming twin, new-generation carry guard. **Wave 8 SHIPPED** (`37a1017`):
+> institutions onto catalog ids at the two load-bearing joins (provably fuzzy-equivalent, rename-
+> proof, legacy fallback) with the 131-site label-join habitat FROZEN only-shrinks
+> (`tests/joins/labelJoins.test.js`); `src/domain/fieldManifest.js` — frozen-vs-live (13 families)
+> + producer/consumer (11 fields) manifests walked by CI, built by resolving the offenders
+> (magicTradeChannel live-first incl. pulse-closed remnants, blockadeBypass's promised dossier
+> reader, hasRegionalSignal tombstoned, magicRecovery carried); crisis-triple sync by construction
+> (`src/domain/crisisLifecycle.js` — one transition vocabulary, declarative twin directives,
+> organic pulse resolutions wind down the local crisis in both vocabularies, 9-cell agreement
+> matrix + only-shrinks trio-writer scans). **THE PROGRAM IS COMPLETE.** What remains is a
+> conversion roadmap (the frozen inventories shrink deliberately), an owner balance queue (the
+> pinned 'Mill' false matches, magicRecovery's mechanical consumer, unstamped cascade/event-built
+> institutions), and feature land.
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.
