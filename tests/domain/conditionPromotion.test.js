@@ -138,3 +138,78 @@ describe('every generation stress type promotes (gap closure)', () => {
     expect(conds.some(c => c.archetype === 'faction_challenge')).toBe(true);
   });
 });
+
+// Wave 7 #3a: /fractur/ preceded the religious rule, so the religious type
+// 'religious_conversion_fracture' promoted as regional_authority_instability —
+// a religious crisis registering as pure political instability. The religious
+// family now wins for religious types; the political family is unchanged.
+describe('religious family outranks the /fractur/ shadow (Wave 7)', () => {
+  it('religious_conversion_fracture promotes to regional_religious_pressure', () => {
+    expect(archetypeForStressor({ type: 'religious_conversion_fracture', name: 'Religious conversion fracture' }))
+      .toBe('regional_religious_pressure');
+  });
+
+  it('political_fracture still promotes to regional_authority_instability', () => {
+    expect(archetypeForStressor({ type: 'political_fracture', name: 'Political fracture' }))
+      .toBe('regional_authority_instability');
+  });
+});
+
+// Wave 7 #2a: the magical crisis family had NO promotion target — a settlement
+// under magical_instability or the wandering magic_deadzone carried the crisis
+// as pure narrative; the substrate's magical_stability variable never heard it.
+describe('magical crisis family promotes to magical_instability (Wave 7)', () => {
+  it('maps both family members (and the world-pulse labels)', () => {
+    expect(archetypeForStressor({ type: 'magical_instability' })).toBe('magical_instability');
+    expect(archetypeForStressor({ type: 'magic_deadzone' })).toBe('magical_instability');
+    expect(archetypeForStressor({ label: 'Magical instability' })).toBe('magical_instability');
+    expect(archetypeForStressor({ label: 'Magic deadzone' })).toBe('magical_instability');
+  });
+
+  it('the arcane alternatives accept snake_case like the rest of the family', () => {
+    // Regression: the rule used a literal space for /arcane (surge|storm|collapse)/
+    // while its siblings used [\s_]? — snake_case 'arcane_surge' fell through
+    // to the custom_crisis fallback instead of promoting.
+    expect(archetypeForStressor({ type: 'arcane_surge' })).toBe('magical_instability');
+    expect(archetypeForStressor({ type: 'arcane_storm' })).toBe('magical_instability');
+    expect(archetypeForStressor({ label: 'Arcane collapse' })).toBe('magical_instability');
+  });
+
+  it('a deadzone stressor lowers magical_stability in the substrate after promotion', () => {
+    const s = settlementWith([{ type: 'magic_deadzone', label: 'Magic deadzone', severity: 0.7 }]);
+    const before = deriveCausalState(s).scores.magical_stability;
+    const after = deriveCausalState(promoteStressorsToConditions(s)).scores.magical_stability;
+    expect(after).toBeLessThan(before);
+  });
+});
+
+// Wave 7 #3b: occupation -> vassal_extraction is honest for BOTH faces of an
+// occupation. R3 classified the condition as TRADE pressure at the pulse layer,
+// but the condition's affectedSystems carry trade_connectivity AND
+// defense_readiness — so the causal substrate (which the pulse layer's
+// conflict/defense pressures read via the scores) registers economic
+// extraction and military strain end to end from the one promotion.
+describe('an occupied settlement registers BOTH extraction and military pressure (Wave 7)', () => {
+  it('promotes occupation to vassal_extraction with both systems tagged', () => {
+    const s = settlementWith([{ type: 'occupied', name: 'Under Occupation', severity: 0.6 }]);
+    const cond = (promoteStressorsToConditions(s).activeConditions || [])
+      .find(c => c.archetype === 'vassal_extraction');
+    expect(cond).toBeTruthy();
+    expect(cond.affectedSystems).toContain('trade_connectivity');
+    expect(cond.affectedSystems).toContain('defense_readiness');
+  });
+
+  it('trade_connectivity AND defense_readiness both fall, attributed to the condition', () => {
+    const s = settlementWith([{ type: 'occupied', name: 'Under Occupation', severity: 0.6 }]);
+    const occupied = promoteStressorsToConditions(s);
+    const before = deriveCausalState(s).scores;
+    const after = deriveCausalState(occupied).scores;
+    expect(after.trade_connectivity).toBeLessThan(before.trade_connectivity);
+    expect(after.defense_readiness).toBeLessThan(before.defense_readiness);
+    // Receipts name the real source on both variables.
+    const vars = deriveCausalState(occupied).variables;
+    const condId = occupied.activeConditions.find(c => c.archetype === 'vassal_extraction').id;
+    expect(vars.trade_connectivity.contributors.some(c => c.source === condId)).toBe(true);
+    expect(vars.defense_readiness.contributors.some(c => c.source === condId)).toBe(true);
+  });
+});

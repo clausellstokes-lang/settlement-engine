@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-11T22:56:19.687Z",
+  "generatedAt": "2026-06-12T02:07:31.409Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "cfe8af8e5199b552",
+  "sourceHash": "a66de2223611e8fb",
   "inputs": [
     "src/data/constants.js",
     "src/domain/activeConditions.js",
@@ -22,6 +22,7 @@
     "src/domain/historyBeats.js",
     "src/domain/hookEscalation.js",
     "src/domain/magicLedger.js",
+    "src/domain/magicProfile.js",
     "src/domain/npcProfile.js",
     "src/domain/regionalGraph.js",
     "src/domain/simulationSpine.js",

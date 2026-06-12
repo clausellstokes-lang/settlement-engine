@@ -231,7 +231,12 @@ describe('mutateSettlement — APPLY_STRESSOR', () => {
     expect((next.stress || []).find(st => st.type === 'famine').severity).toBe(0.5);
   });
 
-  test('unmapped types fall back to a custom_crisis condition with catalog systems', () => {
+  // Pin reconciled (Wave 7 #2a): magical_instability was this test's example
+  // of an UNMAPPED type — it now promotes to its own archetype (the deadzone/
+  // instability family finally reaches the substrate's magical_stability), and
+  // with it every world-pulse catalog type maps. The custom_crisis fallback
+  // remains pinned below via an uncatalogued authored type.
+  test('magical_instability promotes to its own archetype (formerly the custom_crisis example)', () => {
     const next = mutateSettlement({
       settlement: settlementFixture(),
       event: {
@@ -241,13 +246,30 @@ describe('mutateSettlement — APPLY_STRESSOR', () => {
       },
       now: '2026-06-10T00:00:00.000Z',
     });
+    const condition = (next.activeConditions || []).find(c => c.archetype === 'magical_instability');
+    expect(condition).toBeTruthy();
+    expect(condition.affectedSystems).toEqual(
+      expect.arrayContaining(['magical_stability', 'healing_capacity', 'public_legitimacy']),
+    );
+    expect((next.activeConditions || []).some(c => c.archetype === 'custom_crisis')).toBe(false);
+  });
+
+  test('unmapped uncatalogued types still fall back to a custom_crisis condition', () => {
+    const next = mutateSettlement({
+      settlement: settlementFixture(),
+      event: {
+        id: 'ev2b', type: 'APPLY_STRESSOR', targetId: 'shadow_curse',
+        payload: { stressorType: 'shadow_curse', label: 'Shadow curse', severity: 0.6, isCustom: true },
+        cause: 'player_action',
+      },
+      now: '2026-06-10T00:00:00.000Z',
+    });
     const condition = (next.activeConditions || []).find(c => c.archetype === 'custom_crisis');
     expect(condition).toBeTruthy();
-    // Carries the world-pulse catalog's systems for the type (not the
-    // custom_crisis defaults): magical_instability pressures healing too.
-    expect(condition.affectedSystems).toEqual(
-      expect.arrayContaining(['public_legitimacy', 'healing_capacity', 'social_trust']),
-    );
+    // No world-pulse catalog entry to borrow systems from — the
+    // custom_crisis defaults apply.
+    expect(condition.affectedSystems).toEqual(['public_legitimacy', 'social_trust']);
+    expect(condition.severity).toBe(0.6);
   });
 
   test('re-applying the same stressor does not stack entries', () => {

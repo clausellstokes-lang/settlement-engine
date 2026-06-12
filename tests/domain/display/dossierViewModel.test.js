@@ -3,8 +3,10 @@ import {
   deriveFoodBalance,
   deriveExportPosture,
   deriveViability,
+  deriveMagicPosture,
   deriveDossierViewModel,
 } from '../../../src/domain/display/dossierViewModel.js';
+import { sanitizePublicValue, PRIVATE_KEY_RE } from '../../../src/domain/display/publicSafe.js';
 
 const withFood = (fb) => ({ economicViability: { metrics: { foodBalance: fb } } });
 const withEco  = (economicState, extra = {}) => ({ economicState, ...extra });
@@ -88,6 +90,72 @@ describe('deriveDossierViewModel', () => {
     expect(vm.foodBalance.display).toBe('Surplus +20');
     expect(vm.exportPosture.status).toBe('limited');
     expect(vm.viability).toBeTruthy();
+  });
+});
+
+describe('deriveMagicPosture (Wave 7 — MagicProfile surfaced)', () => {
+  const magicTown = {
+    config: { magicLevel: 'medium' },
+    powerStructure: { factions: [] },
+    institutions: [],
+  };
+  const deadMagicTown = {
+    config: { magicExists: false, magicLevel: 'pervasive' },
+    institutions: [{ name: "Wizard's Tower" }],
+    powerStructure: { factions: [{ faction: 'Arcane Conclave', power: 70 }] },
+  };
+
+  it('renders the Tier 4.8 bands for a magic world', () => {
+    const m = deriveMagicPosture(magicTown);
+    expect(m.available).toBe(true);
+    expect(m.magicExists).toBe(true);
+    expect(m.availability).toBe('moderate');
+    expect(m.legality).toBe('regulated');
+    expect(m.cost).toBe('costly');
+    expect(m.risk).toBeTruthy();
+    expect(m.display).toBe('Availability moderate — regulated, costly services, moderate risk');
+  });
+
+  it('emits the four role lines', () => {
+    const m = deriveMagicPosture(magicTown);
+    expect(m.roleLines).toHaveLength(4);
+    expect(m.roleLines[0]).toMatch(/^Economic role: /);
+    expect(m.roleLines).toContain(`Military role: ${m.roles.military}`);
+  });
+
+  it('keeps the honest absent shape for a dead-magic world', () => {
+    const m = deriveMagicPosture(deadMagicTown);
+    expect(m.magicExists).toBe(false);
+    expect(m.availability).toBe('absent');
+    expect(m.cost).toBe('absent');
+    expect(m.risk).toBe('absent');
+    expect(m.display).toBe('Magic does not function in this world');
+    expect(m.roles).toEqual({
+      economic: 'absent', military: 'absent', medical: 'absent', infrastructure: 'absent',
+    });
+  });
+
+  it('falls back cleanly for a nullish settlement', () => {
+    const m = deriveMagicPosture(null);
+    expect(m.available).toBe(false);
+    expect(m.display).toBe('Not assessed');
+  });
+
+  it('is wired into the canonical view model', () => {
+    const vm = deriveDossierViewModel(magicTown);
+    expect(vm.magic).toEqual(deriveMagicPosture(magicTown));
+  });
+
+  it('every new field survives the public-safe projection (denylist check)', () => {
+    for (const town of [magicTown, deadMagicTown]) {
+      const m = deriveMagicPosture(town);
+      expect(sanitizePublicValue({ magic: m })).toEqual({ magic: m });
+      const keys = (obj) => Object.entries(obj).flatMap(([k, v]) =>
+        v && typeof v === 'object' ? [k, ...keys(v)] : [k]);
+      for (const key of keys(m)) {
+        expect(PRIVATE_KEY_RE.test(key), `field name "${key}" trips the publicSafe denylist`).toBe(false);
+      }
+    }
   });
 });
 

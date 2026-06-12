@@ -13,10 +13,16 @@ import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
 import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
 import { applyCorruptionImpairments, advanceInstitutionReform } from './corruptionImpair.js';
-import { advanceFactionCapture, settlementCaptureState } from './factionCapture.js';
+import {
+  advanceFactionCapture, settlementCaptureState,
+  captureTransitionNewsEntries, recordCaptureTransitionsIntoHistory,
+} from './factionCapture.js';
 import { computeGuildStrengthBy, applyGuildToSettlement } from './thievesGuild.js';
 import { replaceOustedNpcs } from './successorNpc.js';
-import { ensureFactionStates, pruneFactionStates, relaxFactionStates, seatNpcsIntoFactions } from './factionCompetition.js';
+import {
+  ensureFactionStates, pruneFactionStates, relaxFactionStates, seatNpcsIntoFactions,
+  projectFactionStatesOntoSettlement,
+} from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { synthesizeRealmEvents } from './realmEvents.js';
@@ -314,6 +320,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     localSettlements.set(sid, s);
   }
 
+  // Wave 7 #3 — a faction crossing into/out of full 'capture' is permanent
+  // settlement history (the record historyBeats reads), like a stressor echo
+  // graduating. The Wizard-News side of the same transitions lands below with
+  // the aftermath entries.
+  if (factionCapture.transitions.length) {
+    recordCaptureTransitionsIntoHistory(localSettlements, factionCapture.transitions, worldState.tick);
+  }
+
   // §corruption 1b-ii-c — prune the npcStates of ousted-and-replaced NPCs so the
   // phantom doesn't keep holding a faction seat after its settlement NPC is gone.
   const oustedIds = new Set((corruption.exposures || []).filter((e) => e.kind === 'ousted').map((e) => e.npcId));
@@ -403,6 +417,19 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
   const memoryState = applied.worldState;
+  // Wave 7 #2 — the dossier stops lying: project the per-faction live state
+  // (capture rung, momentum band, rivals, institution control) onto each
+  // settlement's powerStructure.factions. Seam choice: HERE, after
+  // applyWorldPulseOutcomes, not inside applyWorldPulse — the projection must
+  // read the post-outcome factionStates (this tick's factionPatches and
+  // capture transitions included), and this file owns the pulse sequencing.
+  // Identity no-op per settlement: an untouched roster keeps its reference.
+  const settlementUpdates = applied.settlementUpdates.map(update => {
+    const projected = projectFactionStatesOntoSettlement(
+      update.settlement, memoryState.factionStates, update.saveId, { tick: worldState.tick },
+    );
+    return projected === update.settlement ? update : { ...update, settlement: projected };
+  });
   const pulseRecord = {
     id: pulseIdFor(campaign?.id, worldState.tick),
     tick: worldState.tick,
@@ -463,7 +490,17 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     ...aftermathNewsEntries(agedStressors.resolved, worldState.tick, now),
     ...graduationNewsEntries(agedStressors.graduated || [], worldState.tick, now),
   ];
-  const newsToAppend = [...aftermathEntries, ...realmEntries];
+  // Wave 7 #3 — capture transitions reach the DM: the factionCaptureEvents
+  // pulseRecord rollup above was consumed by nobody, so a faction falling to
+  // (or breaking from) the underworld never surfaced in the Chronicle.
+  const settlementNameFor = (id) => {
+    const entry = settlementMap.get(String(id));
+    return entry?.save?.name || entry?.settlement?.name || String(id);
+  };
+  const captureNewsEntries = captureTransitionNewsEntries(
+    factionCapture.transitions, settlementNameFor, worldState.tick, now,
+  );
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...realmEntries];
   const wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend) : applied.wizardNews;
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
 
@@ -475,7 +512,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     worldState: finalWorldState,
     regionalGraph: applied.regionalGraph,
     wizardNews,
-    settlementUpdates: applied.settlementUpdates.map(update => ({
+    settlementUpdates: settlementUpdates.map(update => ({
       ...update,
       settlement: clone(update.settlement),
     })),

@@ -139,6 +139,21 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.5,
   },
+  // Wave 7: the magical crisis family (magical_instability / magic_deadzone
+  // world-pulse stressors) finally promotes — before this archetype a town
+  // generated (or struck) mid-arcane-crisis carried it as pure narrative and
+  // the substrate's magical_stability variable never heard about it. One
+  // archetype covers both family members (wild surge and dead silence): the
+  // lived consequences band the same way — magical healing degrades, the
+  // public grows uneasy, and the arcane substrate itself is destabilized.
+  magical_instability: {
+    label: 'Magical instability',
+    description: 'Magic in the settlement is misbehaving — surging wild, failing, or fallen silent.',
+    affectedSystems: ['magical_stability', 'healing_capacity', 'public_legitimacy'],
+    defaultExpiresAtTicks: 7,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.5,
+  },
   // Note (merchant_wealth retirement): 'merchant_wealth' was tagged across these
   // templates but was never a SYSTEM_VARIABLE and no deriver read it — the tag
   // implied an economic consequence that never landed. Economic bite now routes
@@ -230,7 +245,11 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   regional_migration_pressure: {
     label: 'Regional migration pressure',
     description: 'A nearby shock is pushing people across the regional network.',
-    affectedSystems: ['food_security', 'labor_capacity', 'public_legitimacy'],
+    // housing_pressure declared (Wave 7): deriveHousingPressure reads this
+    // condition through the affectedSystems contract like every other
+    // deriver — the explanation/AI surfaces must list every system the
+    // substrate actually charges.
+    affectedSystems: ['food_security', 'labor_capacity', 'public_legitimacy', 'housing_pressure'],
     defaultExpiresAtTicks: 8,
     defaultStatus: 'worsening',
     defaultSeverity: 0.5,

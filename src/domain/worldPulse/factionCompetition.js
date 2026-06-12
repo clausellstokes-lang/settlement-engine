@@ -292,6 +292,98 @@ export function seatNpcsIntoFactions(worldState) {
   return { ...worldState, factionStates };
 }
 
+// Momentum (0..1) → the qualitative band the dossier shows. Bands, not the raw
+// scalar: momentum mean-reverts ×0.85 every tick, so projecting the number
+// would dirty every settlement on every pulse; the band only moves when the
+// faction's posture genuinely changes.
+const MOMENTUM_BANDS = Object.freeze([
+  { min: 0.55, band: 'surging' },
+  { min: 0.3, band: 'mobilized' },
+  { min: 0.12, band: 'stirring' },
+  { min: -Infinity, band: 'quiet' },
+]);
+
+export function factionMomentumBand(momentum) {
+  const m = Number.isFinite(momentum) ? momentum : 0;
+  return MOMENTUM_BANDS.find(b => m >= b.min).band;
+}
+
+function sameStringList(a, b) {
+  const left = Array.isArray(a) ? a : [];
+  const right = Array.isArray(b) ? b : [];
+  return left.length === right.length && left.every((v, i) => String(v) === String(right[i]));
+}
+
+/**
+ * Wave 7 #2 — the dossier stops lying: project each faction's LIVE state
+ * (worldState.factionStates) onto the settlement's powerStructure.factions
+ * roster, which until now stayed generation-frozen while the pulse moved
+ * capture rungs, momentum, rivalries, and institution control around it.
+ *
+ * Projected per roster entry (minimal additive fields, no reshaping):
+ *   • captureState   — the §corruption Phase 2 rung (ensureFactionStates
+ *                      already reads this field back, so the loop closes)
+ *   • momentumBand   — qualitative band of live momentum (see above)
+ *   • rivals         — live rival faction NAMES (ids resolved via states)
+ *   • controlledInstitutions / suppressedInstitutions — institution ids
+ *
+ * Live faction POWER is deliberately NOT projected: factionStates carry no
+ * power scalar — the roster IS the live power source (competition normalizes
+ * from it each tick; power transfers and the guild floor already write it).
+ *
+ * Discipline matches the R3 neighbourNetwork write-back: identity no-op when
+ * nothing moved (same settlement reference back), per-entry identity, and an
+ * updatedByPulse provenance stamp only on entries that actually changed.
+ * Quiet/empty live state is not materialized onto entries that never carried
+ * the field — a fresh campaign's first pulse must not dirty every roster
+ * with 'none'/'quiet'/[] noise.
+ */
+export function projectFactionStatesOntoSettlement(settlement, factionStates, settlementId, { tick = 0 } = {}) {
+  const factions = settlement?.powerStructure?.factions;
+  if (!Array.isArray(factions) || !factions.length) return settlement;
+  const states = factionStates || {};
+  let touched = false;
+  const next = factions.map((faction, index) => {
+    const state = states[factionId(settlementId, faction, index)];
+    if (!state) return faction;
+    const patch = {};
+
+    const captureState = state.captureState || 'none';
+    if (faction.captureState != null || captureState !== 'none') {
+      if (faction.captureState !== captureState) patch.captureState = captureState;
+    }
+
+    const band = factionMomentumBand(state.momentum);
+    if (faction.momentumBand != null || band !== 'quiet') {
+      if (faction.momentumBand !== band) patch.momentumBand = band;
+    }
+
+    const rivals = (state.rivals || []).map(rid => states[rid]?.name).filter(Boolean);
+    if (faction.rivals != null || rivals.length) {
+      if (!sameStringList(faction.rivals, rivals)) patch.rivals = rivals;
+    }
+
+    const controlled = state.controlledInstitutions || [];
+    if (faction.controlledInstitutions != null || controlled.length) {
+      if (!sameStringList(faction.controlledInstitutions, controlled)) patch.controlledInstitutions = [...controlled];
+    }
+
+    const suppressed = state.suppressedInstitutions || [];
+    if (faction.suppressedInstitutions != null || suppressed.length) {
+      if (!sameStringList(faction.suppressedInstitutions, suppressed)) patch.suppressedInstitutions = [...suppressed];
+    }
+
+    if (!Object.keys(patch).length) return faction; // identity no-op
+    touched = true;
+    return { ...faction, ...patch, updatedByPulse: tick };
+  });
+  if (!touched) return settlement;
+  return {
+    ...settlement,
+    powerStructure: { ...settlement.powerStructure, factions: next },
+  };
+}
+
 function pressure(pressureIdx, settlementId, kind) {
   return pressureIdx.get?.(settlementId, kind)?.score || 0;
 }

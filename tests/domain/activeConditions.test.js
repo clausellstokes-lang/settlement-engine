@@ -576,6 +576,29 @@ describe('supportedConditionArchetypes()', () => {
     expect(set.has('dominant_npc_removed')).toBe(true);
     expect(set.has('siege_lifted')).toBe(true);
   });
+
+  // Wave 7: the magical crisis family (magical_instability / magic_deadzone
+  // stressors) promotes into this archetype — the first condition that can
+  // reach the substrate's magical_stability variable.
+  it('contains the Wave 7 magical_instability archetype tagging magical_stability', () => {
+    expect(supportedConditionArchetypes()).toContain('magical_instability');
+    const t = conditionArchetypeTemplate('magical_instability');
+    expect(t.affectedSystems).toContain('magical_stability');
+    expect(t.affectedSystems).toContain('healing_capacity');
+  });
+
+  // Wave 7: deriveHousingPressure charges this condition through the
+  // affectedSystems contract (like every other deriver), so the template
+  // must DECLARE housing_pressure — otherwise the explanation/AI surfaces
+  // list food/labor/legitimacy while the substrate quietly shows a housing
+  // contributor.
+  it('regional_migration_pressure declares housing_pressure among its affectedSystems', () => {
+    const t = conditionArchetypeTemplate('regional_migration_pressure');
+    expect(t.affectedSystems).toContain('housing_pressure');
+    expect(t.affectedSystems).toContain('food_security');
+    expect(t.affectedSystems).toContain('labor_capacity');
+    expect(t.affectedSystems).toContain('public_legitimacy');
+  });
 });
 
 describe('conditionArchetypeTemplate()', () => {

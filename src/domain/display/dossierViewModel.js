@@ -24,6 +24,7 @@
  */
 
 import { cleanNum } from './placeholders.js';
+import { deriveMagicProfile } from '../magicProfile.js';
 
 const EXPORT_STATUS_LABEL = Object.freeze({
   none:             'No exports — economic isolation',
@@ -223,16 +224,53 @@ export function deriveViability(settlement) {
   };
 }
 
+const MAGIC_ROLE_LABEL = Object.freeze({
+  economic:       'Economic',
+  military:       'Military',
+  medical:        'Medical',
+  infrastructure: 'Infrastructure',
+});
+
+/**
+ * Magic posture (Wave 7 — MagicProfile surfaced). One read of the Tier 4.8
+ * profile for every display surface: the availability/legality/cost/risk
+ * bands plus the four role lines. Dead-magic worlds (config.magicExists ===
+ * false) keep the profile's honest 'absent' shape — the dossier must never
+ * price a magic economy that does not exist.
+ */
+export function deriveMagicPosture(settlement) {
+  const m = deriveMagicProfile(settlement);
+  if (!m) {
+    return { available: false, magicExists: null, display: 'Not assessed', roles: null, roleLines: [] };
+  }
+  return {
+    available: true,
+    magicExists: m.magicExists !== false,
+    availability: m.availability,
+    legality: m.legality,
+    institutionalControl: m.institutionalControl,
+    cost: m.cost,
+    risk: m.risk,
+    religiousAcceptance: m.religiousAcceptance,
+    roles: { ...m.roles },
+    display: m.magicExists === false
+      ? 'Magic does not function in this world'
+      : `Availability ${m.availability} — ${m.legality}, ${m.cost} services, ${m.risk} risk`,
+    roleLines: Object.entries(m.roles).map(([role, band]) => `${MAGIC_ROLE_LABEL[role] || role} role: ${band}`),
+  };
+}
+
 /**
  * The canonical display model. M0.1 surfaced foodBalance + exportPosture; M0.2
- * adds viability. The `aiOverlay` option is reserved for later milestones
- * (prose-field overlays); these are canonical simulation facts and always read
- * from the base settlement, never an AI clone.
+ * adds viability; Wave 7 adds the magic posture. The `aiOverlay` option is
+ * reserved for later milestones (prose-field overlays); these are canonical
+ * simulation facts and always read from the base settlement, never an AI clone.
  */
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {
     foodBalance: deriveFoodBalance(settlement),
     exportPosture: deriveExportPosture(settlement),
     viability: deriveViability(settlement),
+    magic: deriveMagicPosture(settlement),
   };
 }

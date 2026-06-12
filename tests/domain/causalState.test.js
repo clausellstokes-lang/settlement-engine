@@ -334,6 +334,118 @@ describe('housing_pressure derivation', () => {
     });
     expect(influx.score).toBeLessThan(calm.score);
   });
+
+  // Wave 7 #2b: migration that arrives as a CONDITION (regional spread /
+  // authored migration event) carried no housing consequence — the deriver
+  // read stressor regexes only. The condition path is modest (severity*12 vs
+  // the stressor's flat 18) and yields to the stressor when both are present:
+  // promotion mints the same archetype FROM that stressor, so counting both
+  // would double-penalize one crisis. The scan is gated on the affectedSystems
+  // contract (the regional_migration_pressure template declares
+  // housing_pressure), not on the archetype name — what the explanation/AI
+  // surfaces list is exactly what the substrate charges.
+  it('a regional_migration_pressure condition strains housing modestly', () => {
+    const calm = deriveSystemVariable('housing_pressure', { population: 1800, stressors: [] });
+    const wave = deriveSystemVariable('housing_pressure', {
+      population: 1800,
+      stressors: [],
+      activeConditions: [{ archetype: 'regional_migration_pressure', severity: 0.5 }],
+    });
+    expect(wave.score).toBeLessThan(calm.score);
+    expect(calm.score - wave.score).toBeLessThan(18); // modest: below the stressor term
+    expect(wave.contributors.some(c => /^condition\.regional_migration_pressure\./.test(c.source))).toBe(true);
+  });
+
+  it('a condition that does not declare housing_pressure contributes nothing', () => {
+    const calm = deriveSystemVariable('housing_pressure', { population: 1800, stressors: [] });
+    const shock = deriveSystemVariable('housing_pressure', {
+      population: 1800,
+      stressors: [],
+      // regional_information_shock affects legitimacy/trust/factions — no
+      // housing_pressure in its affectedSystems, so the scan skips it.
+      activeConditions: [{ archetype: 'regional_information_shock', severity: 0.9 }],
+    });
+    expect(shock.score).toBe(calm.score);
+  });
+
+  it('stressor + promoted condition together never double-count the crisis', () => {
+    const stressorOnly = deriveSystemVariable('housing_pressure', {
+      population: 1800,
+      stressors: [{ type: 'mass_migration', name: 'Mass Migration', severity: 0.6 }],
+    });
+    const both = deriveSystemVariable('housing_pressure', {
+      population: 1800,
+      stressors: [{ type: 'mass_migration', name: 'Mass Migration', severity: 0.6 }],
+      activeConditions: [{ archetype: 'regional_migration_pressure', severity: 0.6 }],
+    });
+    expect(both.score).toBe(stressorOnly.score);
+    expect(both.contributors.filter(c => c.effect === 'influx')).toHaveLength(1);
+  });
+});
+
+describe('magical_stability derivation (Wave 7)', () => {
+  // The magical_instability condition archetype (promoted from the
+  // magical_instability / magic_deadzone stressor family) is the first
+  // condition able to reach magical_stability — pin the scan.
+  it('drops under a magical_instability condition, attributed to the condition', () => {
+    const calm = deriveSystemVariable('magical_stability', {
+      config: { magicLevel: 'medium' }, activeConditions: [],
+    });
+    const unstable = deriveSystemVariable('magical_stability', {
+      config: { magicLevel: 'medium' },
+      activeConditions: [{ archetype: 'magical_instability', severity: 0.7 }],
+    });
+    expect(unstable.score).toBeLessThan(calm.score);
+    expect(unstable.contributors.some(c => /^condition\.magical_instability\./.test(c.source))).toBe(true);
+  });
+
+  it('ignores conditions that do not tag magical_stability', () => {
+    const base = deriveSystemVariable('magical_stability', {
+      config: { magicLevel: 'medium' }, activeConditions: [],
+    });
+    const plagued = deriveSystemVariable('magical_stability', {
+      config: { magicLevel: 'medium' },
+      activeConditions: [{ archetype: 'plague', severity: 0.9 }],
+    });
+    expect(plagued.score).toBe(base.score);
+  });
+});
+
+describe('public_legitimacy — monsterThreat term (Wave 7)', () => {
+  const town = (monsterThreat, readinessScore) => ({
+    name: 'T', tier: 'town', population: 2000,
+    config: { monsterThreat },
+    defenseProfile: {
+      readiness: { score: readinessScore, label: 'x' },
+      scores: { military: 50, monster: 50, internal: 50, economic: 50, magical: 50 },
+    },
+    powerStructure: { publicLegitimacy: { score: 60, label: 'Approved' }, factions: [] },
+    activeConditions: [],
+  });
+
+  it('plagued threat over a weak defense pays a small legitimacy price', () => {
+    const weak = deriveSystemVariable('public_legitimacy', town('plagued', 20));
+    const safe = deriveSystemVariable('public_legitimacy', town('safe', 20));
+    expect(weak.score).toBeLessThan(safe.score);
+    const term = weak.contributors.find(c => c.source === 'config.monsterThreat');
+    expect(term).toBeTruthy();
+    expect(term.reason).toMatch(/cannot protect/);
+  });
+
+  it('a strong garrison under the same threat pays nothing (protection delivered)', () => {
+    const strong = deriveSystemVariable('public_legitimacy', town('plagued', 80));
+    const safe = deriveSystemVariable('public_legitimacy', town('safe', 80));
+    expect(strong.score).toBe(safe.score);
+    expect(strong.contributors.some(c => c.source === 'config.monsterThreat')).toBe(false);
+  });
+
+  it('no measured defense profile means no penalty (legacy saves unchanged)', () => {
+    const legacy = deriveSystemVariable('public_legitimacy', {
+      config: { monsterThreat: 'plagued' },
+      powerStructure: { publicLegitimacy: { score: 60, label: 'Approved' }, factions: [] },
+    });
+    expect(legacy.contributors.some(c => c.source === 'config.monsterThreat')).toBe(false);
+  });
 });
 
 describe('healing_capacity derivation', () => {

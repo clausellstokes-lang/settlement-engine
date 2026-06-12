@@ -146,26 +146,58 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
  * Classify the criminal faction's relationship with formal power structures.
  * Three inflection points based on criminal power vs enforcement capacity.
  *
+ * Wave 7 #1 — birth-scale reconciliation with the play-time capture ladder
+ * (domain/corruption.js CAPTURE_LADDER, same vocabulary):
+ *  • The criminal finder EXCLUDES the governing seat. 'Corrupt Council' /
+ *    'Shadow Senate' carry category 'criminal' (the 'Corrupt'/'Shadow'
+ *    keywords), so the old finder compared the government against ITSELF —
+ *    ratio exactly 1.0, which read 'corrupted' whenever safety was low,
+ *    an artifact rather than a classification.
+ *  • A criminal-flavoured GOVERNMENT is classified deliberately instead:
+ *    the council is purchased at birth → at least 'corrupted'. Those names
+ *    only mint when criminal is the dominant priority (>65), so ordinary
+ *    settlements can't reach this branch.
+ *  • Gates are calibrated to what the mint actually produces (criminal
+ *    power ≈ 12×criminalEffective/50, ceiling ~24 before legitimacy
+ *    multipliers ~31 after, vs governing ~26-61): deeply criminal births
+ *    read equilibrium/corrupted; full capture — the underworld overtopping
+ *    even its purchased government with enforcement broken — stays
+ *    extraordinary (the play-time ladder is how a campaign gets there).
+ *
  * @param {Array}  factions   - faction array
  * @param {number} safetyRatio
  * @param {Object} _instFlags
  * @returns {'none'|'adversarial'|'equilibrium'|'corrupted'|'capture'}
  */
 export function computeCriminalCaptureState(factions, safetyRatio, _instFlags) {
-  const crim = factions.find(f => f.category === 'criminal' || f.faction?.toLowerCase().includes('thiev'));
-  if (!crim || crim.power < 5) return 'none';
+  const isCrim = f => f.category === 'criminal' || f.faction?.toLowerCase().includes('thiev');
+  const crim = factions.find(f => !f.isGoverning && isCrim(f));
+  const gov  = factions.find(f => f.isGoverning);
+  const govPurchased = !!(gov && isCrim(gov));
+  if (!crim || crim.power < 5) {
+    // No independent underworld faction, but the government itself is
+    // criminal-flavoured: the purchase happened before the founding charter
+    // was dry. Enforcement still has to be compromised for it to matter.
+    return govPurchased && safetyRatio < 0.65 ? 'corrupted' : 'none';
+  }
 
   const mil  = factions.find(f => f.faction?.toLowerCase().includes('military') || f.faction?.toLowerCase().includes('guard'));
-  const gov  = factions.find(f => f.isGoverning);
   const crimP = crim.power;
   const milP  = mil?.power  || 0;
   const govP  = gov?.power  || 1;
 
-  // Capture: criminal power dominates both governance and enforcement
-  if (crimP > govP * 1.1 && safetyRatio < 0.4) return 'capture';
+  // Capture: a REAL underworld (crimP ≥ 24 needs the legitimacy/stress
+  // multipliers on top of a maxed criminal mint) DOMINATES a still-standing
+  // government (govP ≥ 15 — a single-digit government is a power vacuum,
+  // not a capture: there is nothing left to wear as a front), with
+  // enforcement broken. Measured ~1-2% across 90-criminal-priority seed
+  // sweeps (380 seeds); ordinary sweeps read 0.
+  if (crimP > govP * 1.5 && crimP >= 24 && govP >= 15 && safetyRatio < 0.35) return 'capture';
 
-  // Corrupted: criminal has purchased enforcement cooperation
-  if (crimP > govP * 0.7 && safetyRatio < 0.65 && milP > 0)  return 'corrupted';
+  // Corrupted: the council is purchased — born criminal-flavoured, or the
+  // underworld's weight approaches the government's with enforcement bought.
+  if (govPurchased && safetyRatio < 0.65) return 'corrupted';
+  if (crimP > govP * 0.8 && safetyRatio < 0.55 && milP > 0)  return 'corrupted';
 
   // Equilibrium: criminal coexists with enforcement — tacit tolerance
   if (crimP > govP * 0.4 && safetyRatio < 0.9)  return 'equilibrium';

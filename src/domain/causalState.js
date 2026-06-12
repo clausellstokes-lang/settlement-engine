@@ -253,6 +253,19 @@ function derivePublicLegitimacy(s) {
       `${cond.label} ${direction > 0 ? 'lifts' : 'erodes'} public legitimacy.`);
   }
 
+  // Wave 7: a monster-plagued region indicts the crown only when the garrison
+  // visibly cannot answer it — plagued threat over a weak measured defense
+  // reads as "the crown cannot protect us." Small and conservative; a strong
+  // garrison under the same threat pays nothing (protection delivered).
+  if (s.config?.monsterThreat === 'plagued') {
+    const led = defenseLedger(s);
+    if (led.present && led.readinessScore < 40) {
+      score -= 6;
+      push(contributors, 'config.monsterThreat', 'unprotected', -6,
+        `Monsters plague the region and defense readiness is ${led.readinessScore} — the crown cannot protect its people.`);
+    }
+  }
+
   return { score, contributors };
 }
 
@@ -510,6 +523,22 @@ function deriveHousingPressure(s) {
   if (refugeeStress) {
     score -= 18;
     push(contributors, 'stressors.refugee', 'influx', -18, 'Refugee influx strains available housing.');
+  } else {
+    // Wave 7: migration that arrives as a CONDITION — a regional spread or an
+    // authored migration event produces regional_migration_pressure without
+    // any local stressor — must still press housing, modestly (a default-
+    // severity wave reads -6 against the local stressor's -18). Skipped when
+    // the stressor registered above: promotion mints this same archetype from
+    // that stressor, and counting both would double-penalize one crisis.
+    // Filtered on the affectedSystems contract like every other deriver, so
+    // the explanation/AI surfaces list exactly what the substrate charges.
+    for (const cond of deriveAllActiveConditions(s)) {
+      if (!cond.affectedSystems.includes('housing_pressure')) continue;
+      const magnitude = Math.round(cond.severity * 12);
+      if (magnitude === 0) continue;
+      score -= magnitude;
+      push(contributors, cond.id, 'influx', -magnitude, `${cond.label} pushes arrivals into limited housing.`);
+    }
   }
   if (pop >= 5000) { score -= 4; push(contributors, 'population', 'dense', -4, `Population ${pop} pushes housing demand.`); }
   return { score, contributors };
@@ -557,6 +586,18 @@ function deriveMagicalStability(s) {
   if (arcane) {
     score += 5;
     push(contributors, arcane.id, 'arcane_present', +5, `${arcane.name} provides arcane oversight.`);
+  }
+
+  // Active conditions that affect magical_stability (Wave 7: the
+  // magical_instability archetype the deadzone/instability stressor family
+  // promotes to). Until this scan, magical_stability was the one substrate
+  // variable no condition could reach.
+  for (const cond of deriveAllActiveConditions(s)) {
+    if (!cond.affectedSystems.includes('magical_stability')) continue;
+    const magnitude = Math.round(cond.severity * 15);
+    if (magnitude === 0) continue;
+    score -= magnitude;
+    push(contributors, cond.id, 'destabilized', -magnitude, `${cond.label} destabilizes the local weave.`);
   }
 
   return { score, contributors };

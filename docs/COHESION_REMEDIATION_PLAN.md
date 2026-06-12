@@ -51,7 +51,23 @@
 > with the roaming bridge, trade goods ± entrepôt, resources, NPC standing swaps with sim adoption
 > (`7cf5589`), and provenance gated to edit chrome (`1a3734c`). Six-lens adversarial review run;
 > five findings fixed+pinned, three deferred with rationale (two spun off as follow-up tasks).
-> **Only Waves 7–8 remain, owner-gated.** Push + edge redeploy: owner.
+> **Wave 7 SHIPPED** (owner-authorized 2026-06-11 EOD): faction power substrate reconciled
+> (birth-scale capture calibrated to the mint — ordinary ~0, criminal-heavy contested/influenced
+> the norm, full capture ~2%; the criminal-flavoured-government self-comparison artifact fixed;
+> birth rungs seed the play-time ladder), per-faction live state projected onto
+> powerStructure.factions with provenance (the dossier faction panel stops lying mid-campaign),
+> capture transitions reach Wizard News + permanent history; MagicProfile SURFACED (dossier magic
+> section + AI grounding `magic` section — the 305-line orphan finally has consumers); new causal
+> links (magical_instability archetype + promotion for the deadzone family, migration conditions
+> feed housing pressure via the affectedSystems contract, plagued-threat + weak defense pays a
+> receipted legitimacy price); Wizard News curated (metronome suppression with actor-aware keys,
+> party actions always emit, applied entries state FACTS not 'may'-hedges, NPC posturing capped at
+> notable) — the paid chronicle now grounds on signal; economicViability incomplete-chain junk
+> fixed at the data (tier-plausible top-3, never slave markets in a thorp; root cause was a
+> null-resource fuzzy overmatch). Adversarially verified; five must-fix findings fixed+pinned
+> pre-commit. The regen-survival hotfix (`c8a5801`) landed the same day: content-identity dedupe,
+> undo reaches the roaming twin, new-generation carry guard. **Only Wave 8 remains** (structural
+> prevention — entity ids, frozen/live + producer/consumer manifests, crisis-triple sync).
 
 **Sources.** Two comprehensive multi-agent audits, both persisted and verified against source:
 - `docs/SIMULATION_LOGIC_AUDIT.md` — simulation side (causal substrate, world-pulse loop, capacities, corruption, conditions, display). 82 findings; cohesion verdict **7/10**.

@@ -13,6 +13,7 @@
  *       substrate,      P17 — variable → band
  *       capacities,     P21 — capacity → band
  *     },
+ *     magic,            T4.8 — availability/legality/cost/risk + role bands
  *     factions,         P9 — wants/fears/leverage/vulnerabilities
  *     chains,           P10 — status / controller / beneficiaries / victims
  *     conditions,       P16 — archetype / severity / affected systems
@@ -47,6 +48,7 @@
 
 import { deriveSimulationSpine } from './simulationSpine.js';
 import { deriveCausalState } from './causalState.js';
+import { deriveMagicProfile } from './magicProfile.js';
 import { deriveAllCapacities } from './capacityModel.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
@@ -103,6 +105,30 @@ function canonicalCapacityBands(bands) {
     if (bands && bands[name] !== undefined) out[name] = bands[name];
   }
   return out;
+}
+
+// ── Magic grounding facets ───────────────────────────────────────────────
+//
+// Wave 7 (MagicProfile surfaced): the AI narrates spellcasters, healers, and
+// arcane services constantly — without these facets it invents the magic
+// economy. BANDS ONLY, no contributor prose: the payload carries the same
+// structured facets the dossier renders (display/dossierViewModel.js), so
+// both surfaces ground on the one Tier 4.8 derivation. Dead-magic worlds
+// carry magicExists:false with the profile's honest 'absent' bands (W5#3).
+
+function magicGroundingFacets(settlement) {
+  const m = deriveMagicProfile(settlement);
+  if (!m) return null;
+  return {
+    magicExists: m.magicExists !== false,
+    availability: m.availability,
+    legality: m.legality,
+    institutionalControl: m.institutionalControl,
+    cost: m.cost,
+    risk: m.risk,
+    religiousAcceptance: m.religiousAcceptance,
+    roles: { ...m.roles },
+  };
 }
 
 // ── Defaults ─────────────────────────────────────────────────────────────
@@ -234,6 +260,7 @@ export function buildAiGroundingPayload(settlement, options = {}) {
       identity: null,
       spine: null,
       bands: { substrate: {}, capacities: {} },
+      magic: null,
       userEdits: [],
       factions: [],
       chains: [],
@@ -278,6 +305,8 @@ export function buildAiGroundingPayload(settlement, options = {}) {
       substrate: { ...causal.bands },
       capacities: canonicalCapacityBands(capacities.bands),
     },
+
+    magic: magicGroundingFacets(settlement),
 
     // Tier 6.6: user-edited prose lives verbatim in `userEdits` so the
     // AI sees the values it must preserve. The structured profile

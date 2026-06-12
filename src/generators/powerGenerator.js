@@ -2188,6 +2188,18 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
 
   const safetyRatio = instFlags?.inst ? instFlags.militaryEffective / Math.max(8, instFlags.criminalEffective) : 1.0;
   const criminalCaptureState = computeCriminalCaptureState(p, safetyRatio, instFlags.inst || {});
+  // Wave 7 #1 — birth seeds the play-time ladder: a settlement born at
+  // equilibrium+ stamps the rung onto the GOVERNING faction entry, which
+  // ensureFactionStates reads (faction.captureState) when it mints the
+  // §corruption Phase 2 faction state. Without the stamp, the first pulse's
+  // settlementCaptureState rollup (worst faction rung, all born 'none')
+  // would silently reset the dossier's criminalCaptureState to 'none'.
+  // 'adversarial' is not seeded — it asserts enforcement is WINNING, i.e.
+  // no faction is on a capture arc.
+  if (['equilibrium', 'corrupted', 'capture'].includes(criminalCaptureState)) {
+    const govEntry = p.find((N) => N.isGoverning);
+    if (govEntry && !govEntry.captureState) govEntry.captureState = criminalCaptureState;
+  }
   const stressTypesArr = config?.stressTypes || (config?.stressType ? [config.stressType] : []);
   const factionRelationships = computeFactionRelationships(
     p,

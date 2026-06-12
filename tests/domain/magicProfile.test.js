@@ -227,6 +227,27 @@ describe('deriveMagicProfile — canonical generator vocabulary (P3.3b Stage 3b)
   });
 });
 
+// Wave 7 wiring: a magical_instability condition (the deadzone/instability
+// stressor family's promotion target) lowers the substrate's magical_stability,
+// which this profile already reads — so the crisis now raises magical risk
+// without any new plumbing here.
+describe('deriveMagicProfile — magical_instability condition raises risk (Wave 7)', () => {
+  const at = (activeConditions) => deriveMagicProfile({
+    config: { magicLevel: 'medium' },
+    powerStructure: { factions: [] },
+    institutions: [],
+    activeConditions,
+  });
+
+  it('risk climbs one band when the condition strains magical_stability', () => {
+    const calm = at([]);
+    const unstable = at([{ archetype: 'magical_instability', severity: 0.8 }]);
+    const bands = magicRiskBands();
+    expect(bands.indexOf(unstable.risk)).toBeGreaterThan(bands.indexOf(calm.risk));
+    expect(unstable.contributors.some(c => c.source === 'var.magical_stability')).toBe(true);
+  });
+});
+
 // Wave 5 #3 (dead-magic leaks): deriveMagicProfile fabricated a full availability/
 // cost/risk envelope for magicExists:false worlds — a no-magic campaign read
 // "Availability: rare. Cost: extortionate." as if magic merely happened to be

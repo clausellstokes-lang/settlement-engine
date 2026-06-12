@@ -34,15 +34,87 @@ function clamp01(value) {
   return Math.max(0, Math.min(1, n));
 }
 
+// ── Feed curation (Wave 7) ──────────────────────────────────────────────────
+// The feed is what the DM reads and what the paid chronicle grounds on; the
+// outcome LEDGER is the autoApplied return (→ pulseHistory.selectedOutcomes
+// upstream). Curation below shapes only the FEED — the ledger keeps everything.
+
+// Facts, not hypotheticals: candidate headlines hedge ('X may grow') because
+// the candidate hasn't happened yet. Once an outcome APPLIES, its entry must
+// state what happened. Generators may hand an explicit outcome.appliedHeadline;
+// otherwise the KNOWN hedge patterns below are de-hedged conservatively.
+// Unknown phrasings pass through untouched — better an honest hedge than an
+// invented fact. (Known untransformed stragglers, left as-is on purpose: a
+// whole CLASS comes from factionCompetition's generic headline builder
+// — `${name} may ${candidateType.replace(/^faction_/,'')...}` — which yields
+// 'X may exhaustion', 'X may rival power contest', 'X may government
+// challenge', and whatever future faction_* candidateTypes are added; they
+// are already ungrammatical at the source and keep their candidate phrasing.)
+/** @type {Array<[RegExp, string]>} */
+const APPLIED_HEADLINE_REWRITES = [
+  // population / tier / resource / institution drift
+  [/\bmay grow\b/, 'grows'],
+  [/\bmay fall\b/, 'falls'],
+  [/\bmay rise\b/, 'rises'],
+  // Resource subjects are routinely plural ('grain fields', 'salt flats'),
+  // so the replacements must be number-invariant: no 'is'/'recovers'.
+  [/\bmay recover\b/, 'recovering'],
+  [/\bmay be depleted\b/, 'depleted'],
+  [/\bmay raise a\b/, 'raises a'],
+  [/\bmay close its doors\b/, 'closes its doors'],
+  // pressure conditions / stressors / relationships
+  [/\bmay take hold\b/, 'takes hold'],
+  [/\bmay emerge\b/, 'emerges'],
+  [/\bmay intensify\b/, 'intensifies'],
+  [/\bmay spread\b/, 'spreads'],
+  // 'may become X' / 'relationship may shift': relationshipEvolution's
+  // candidateBase builds these for every relationship candidate, including
+  // auto-applied drift — live patterns, not leftovers.
+  [/\bmay become\b/, 'becomes'],
+  [/\bmay shift\b/, 'shifts'],
+  // NPC action families (npcAgency.js NPC_ACTION_FAMILIES, exhaustively)
+  [/\bmay protect\b/, 'protects'],
+  [/\bmay exploit\b/, 'exploits'],
+  [/\bmay reform\b/, 'reforms'],
+  [/\bmay suppress\b/, 'suppresses'],
+  [/\bmay bargain\b/, 'bargains'],
+  [/\bmay defect\b/, 'defects'],
+  [/\bmay expose\b/, 'exposes'],
+  [/\bmay hoard\b/, 'hoards'],
+  [/\bmay mobilize\b/, 'mobilizes'],
+  [/\bmay sabotage\b/, 'sabotages'],
+  [/\bmay seek promotion\b/, 'seeks promotion'],
+  [/\bmay undermine rival\b/, 'undermines rival'],
+];
+
+function appliedHeadlineFor(outcome) {
+  if (outcome.appliedHeadline) return outcome.appliedHeadline;
+  const headline = outcome.headline || '';
+  for (const [pattern, replacement] of APPLIED_HEADLINE_REWRITES) {
+    if (pattern.test(headline)) return headline.replace(pattern, replacement);
+  }
+  return headline;
+}
+
 function newsEntryForOutcome(outcome, tick, status = 'applied') {
-  const major = outcome.applyMode === 'proposal' || outcome.severity >= 0.72 || (outcome.affectedSettlementIds || []).length >= 3;
+  const scope = (outcome.affectedSettlementIds || []).length >= 3 ? 'realm' : outcome.relationshipKey ? 'regional' : 'settlement';
+  let major = outcome.applyMode === 'proposal' || outcome.severity >= 0.72 || (outcome.affectedSettlementIds || []).length >= 3;
+  // Significance honesty: NPC micro-posturing (npc_* candidateTypes at
+  // settlement scope, below the severity bar) never exceeds 'notable' — a
+  // courtier's manoeuvre is not 'major' just because it routes as a proposal.
+  // Capture/tier/power transitions are not npc_* and keep their 'major'.
+  if (major && scope === 'settlement'
+      && String(outcome.candidateType || '').startsWith('npc_')
+      && clamp01(outcome.severity) < 0.72) {
+    major = false;
+  }
   return {
     id: `wizard_news.${tick}.world_pulse.${status}.${outcome.id}`,
     tick,
-    scope: (outcome.affectedSettlementIds || []).length >= 3 ? 'realm' : outcome.relationshipKey ? 'regional' : 'settlement',
+    scope,
     significance: major ? 'major' : 'notable',
     score: Math.round(clamp01(outcome.severity) * 80) + (major ? 18 : 0),
-    headline: outcome.headline || 'World pulse update',
+    headline: (status === 'proposal' ? outcome.headline : appliedHeadlineFor(outcome)) || 'World pulse update',
     summary: outcome.summary || '',
     kind: status === 'proposal' ? 'queued' : 'applied',
     impactKind: outcome.candidateType || outcome.type,
@@ -55,6 +127,62 @@ function newsEntryForOutcome(outcome, tick, status = 'applied') {
     tags: ['world_pulse', outcome.type, outcome.candidateType, status].filter(Boolean),
     reasons: outcome.reasons || [],
   };
+}
+
+// Metronome suppression: a drift-only outcome re-telling the SAME story for
+// the same (settlement, candidateType) with materially identical reasons
+// within the cooldown does not re-emit a feed entry — the probe measured
+// 8-13 entries/tick dominated by NPC posturing and a population_growth
+// metronome, flushing major arcs out of the 240-cap feed. Cooldown reuses the
+// R1 realm-arc idiom: tick-based, because the feed is newest-first (a tail
+// slice would inspect the OLDEST entries once the feed exceeds the window).
+const DRIFT_REEMIT_COOLDOWN_TICKS = 6;
+
+// State CHANGES always emit. Any discrete transition marker — stressor
+// birth/escalation/resolution, tier/power/resource/institution change,
+// condition onset, relationship shift, proposal routing, multi-settlement
+// migration (propagation) — exempts the outcome from suppression. Drift-only
+// is what remains: pure npc/faction posturing patches and single-settlement
+// population drift.
+function isDriftOnlyOutcome(outcome) {
+  // Party-sourced outcomes are deliberate DM action, never drift: every
+  // outcome partyImpact.js builds is stamped partySourced, and a repeated
+  // bolster/undermine/empower is the table acting twice — both must land in
+  // the feed, or the world changes silently under the DM's own hands.
+  if (outcome.partySourced) return false;
+  if (outcome.tierChange || outcome.powerTransfer || outcome.resourcePatch
+      || outcome.institutionPatch || outcome.condition || outcome.stressor
+      || outcome.relationshipKey || outcome.relationshipPatch
+      || outcome.proposalPayload) {
+    return false;
+  }
+  return (outcome.populationDeltas || []).length <= 1;
+}
+
+function curationReasonsKey(reasons) {
+  return JSON.stringify([...new Set((reasons || []).filter(Boolean).map(String))]);
+}
+
+function curationSettlementsKey(settlementIds) {
+  return JSON.stringify([...new Set((settlementIds || []).map(String))].sort());
+}
+
+function isMetronomeRepeat(entry, priorEntries, tick) {
+  const idsKey = curationSettlementsKey(entry.settlementIds);
+  const reasonsKey = curationReasonsKey(entry.reasons);
+  // The headline is part of the repeat key: without it the suppression is
+  // actor-blind — 'Priest Bram protects' was swallowed as a repeat of
+  // 'Reeve Alda protects' (same impactKind/settlement, and families like
+  // faction_exhaustion carry a constant reasons string). Different actors
+  // always differ in the headline; the population/resource/faction-SELF
+  // metronomes keep constant headlines, so intended suppression survives.
+  return priorEntries.some(prior =>
+    prior.kind === 'applied'
+    && tick - (prior.tick ?? -Infinity) < DRIFT_REEMIT_COOLDOWN_TICKS
+    && prior.impactKind === entry.impactKind
+    && prior.headline === entry.headline
+    && curationSettlementsKey(prior.settlementIds) === idsKey
+    && curationReasonsKey(prior.reasons) === reasonsKey);
 }
 
 function affectedSaveIdsForOutcome(outcome) {
@@ -563,7 +691,13 @@ export function applyWorldPulseOutcomes({
       }
     }
     autoApplied.push(outcome);
-    newsEntries.push(newsEntryForOutcome(outcome, tick, 'applied'));
+    // FEED curation only: autoApplied above (and pulseHistory.selectedOutcomes
+    // built from the selected set upstream) records every outcome regardless.
+    const appliedEntry = newsEntryForOutcome(outcome, tick, 'applied');
+    if (!isDriftOnlyOutcome(outcome)
+        || !isMetronomeRepeat(appliedEntry, [...feed.entries, ...newsEntries], tick)) {
+      newsEntries.push(appliedEntry);
+    }
   }
 
   // Ghost applied impacts: a materialized regional condition expires locally

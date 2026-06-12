@@ -760,6 +760,7 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {Object} identity            id / name / tier / seed / versions / canon breakdown.
  * @property {Object} spine               7-line SimulationSpine.
  * @property {{substrate: Object, capacities: Object}} bands  Phase 17 + Phase 21 band maps.
+ * @property {Object|null} magic           Tier 4.8 magic facets (magicExists, availability/legality/cost/risk + role bands); null only on the no-settlement envelope.
  * @property {Array<{kind: string, entityIndex: number, label: string, path: string, value: string, editedAt: string|null}>} userEdits  Tier 6.6 — verbatim user-authored prose the AI must preserve.
  * @property {FactionProfile[]} factions  Phase 9.
  * @property {SupplyChainState[]} chains  Phase 10.
@@ -772,6 +773,7 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {DailyLifeEnvelope} dailyLife  Phase 22 (8 slots).
  * @property {DistrictProfile[]} districts  Phase 29.
  * @property {RegionalGraph} region       Phase 30.
+ * @property {Object|null} relationshipMemory  Sanitized world-pulse relationship-memory context (background regional posture for Daily Life); null when no context is threaded.
  * @property {Object} constraints         { forbidden[], lockedEntities[], userDirection }.
  */
 

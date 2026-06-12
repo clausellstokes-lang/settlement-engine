@@ -32,6 +32,13 @@ import {
   staticForbiddenRules,
 } from '../../src/domain/aiGrounding.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import {
+  magicAvailabilityBands,
+  magicLegalityBands,
+  magicRiskBands,
+  magicRoleBands,
+} from '../../src/domain/magicProfile.js';
+import { sanitizePublicValue, PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
 
 // ── Fixture ──────────────────────────────────────────────────────────
 
@@ -110,10 +117,10 @@ describe('defaultGroundingOptions()', () => {
 // ── Envelope shape ───────────────────────────────────────────────────
 
 describe('buildAiGroundingPayload() — envelope shape', () => {
-  it('returns the canonical 16-section envelope', () => {
+  it('returns the canonical 17-section envelope', () => {
     const p = buildAiGroundingPayload(fixture());
     for (const section of [
-      'identity', 'spine', 'bands', 'factions', 'chains', 'conditions',
+      'identity', 'spine', 'bands', 'magic', 'factions', 'chains', 'conditions',
       'threats', 'npcs', 'history', 'hooks', 'contradictions',
       'dailyLife', 'districts', 'region', 'relationshipMemory', 'constraints',
     ]) {
@@ -189,9 +196,60 @@ describe('buildAiGroundingPayload() — envelope shape', () => {
     expect(p.factions).toEqual([]);
     expect(p.chains).toEqual([]);
     expect(p.threats).toEqual([]);
+    expect(p.magic).toBeNull();
     expect(p.relationshipMemory).toBeNull();
     expect(p.constraints.forbidden.length).toBeGreaterThan(0);
     expect(p.constraints.lockedEntities).toEqual([]);
+  });
+});
+
+// ── Magic grounding (Wave 7 — MagicProfile surfaced) ──────────────────
+
+describe('buildAiGroundingPayload() — magic section', () => {
+  it('carries the Tier 4.8 bands so AI narrative grounds on the same magic reality', () => {
+    const p = buildAiGroundingPayload({ ...fixture(), config: { ...fixture().config, magicLevel: 'medium' } });
+    expect(p.magic.magicExists).toBe(true);
+    expect(magicAvailabilityBands()).toContain(p.magic.availability);
+    expect(magicLegalityBands()).toContain(p.magic.legality);
+    expect(magicRiskBands()).toContain(p.magic.risk);
+    for (const band of Object.values(p.magic.roles)) {
+      expect(magicRoleBands()).toContain(band);
+    }
+    expect(typeof p.magic.cost).toBe('string');
+    expect(typeof p.magic.institutionalControl).toBe('string');
+    expect(typeof p.magic.religiousAcceptance).toBe('string');
+  });
+
+  it('carries bands ONLY — no contributor prose enters the payload', () => {
+    const p = buildAiGroundingPayload(fixture());
+    expect(p.magic).not.toHaveProperty('contributors');
+    for (const value of Object.values(p.magic)) {
+      // every facet is a band string or the roles band map — never free prose
+      expect(['string', 'boolean', 'object']).toContain(typeof value);
+    }
+  });
+
+  it('a dead-magic world grounds as honestly absent', () => {
+    const p = buildAiGroundingPayload({
+      ...fixture(),
+      config: { ...fixture().config, magicExists: false, magicLevel: 'pervasive' },
+    });
+    expect(p.magic.magicExists).toBe(false);
+    expect(p.magic.availability).toBe('absent');
+    expect(p.magic.cost).toBe('absent');
+    expect(p.magic.roles).toEqual({
+      economic: 'absent', military: 'absent', medical: 'absent', infrastructure: 'absent',
+    });
+  });
+
+  it('every magic field name survives the public-safe projection (denylist only grows)', () => {
+    const p = buildAiGroundingPayload(fixture());
+    expect(sanitizePublicValue({ magic: p.magic })).toEqual({ magic: p.magic });
+    const keys = (obj) => Object.entries(obj).flatMap(([k, v]) =>
+      v && typeof v === 'object' ? [k, ...keys(v)] : [k]);
+    for (const key of keys(p.magic)) {
+      expect(PRIVATE_KEY_RE.test(key), `field name "${key}" trips the publicSafe denylist`).toBe(false);
+    }
   });
 });
 

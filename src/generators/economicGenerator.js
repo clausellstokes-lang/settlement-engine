@@ -19,6 +19,7 @@ import { TRADE_DEPENDENCY_NEEDS, INSTITUTION_FINISHED_GOODS_DEMAND } from '../da
 export { HISTORY_EVENTS } from '../data/historyData.js';
 
 import { SEVERITY, TIER_ORDER } from '../data/constants.js';
+import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
 import { generateFoodSecurity } from './foodGenerator.js';
 import { TERRAIN_DATA } from '../data/geographyData.js';
@@ -55,6 +56,46 @@ const ECONOMIC_CONSTANTS = {
 // WATER_ROUTES
 const WATER_ROUTES = ['coastal', 'riverside'];
 
+// Tier-plausible institution availability — the SAME model assembleInstitutions
+// uses: a settlement of tier T draws only from institutionalCatalog[T]
+// (metropolis merges the city section in), and an entry whose own minTier sits
+// above T is skipped. Viability suggestions may only name institutions the
+// settlement could actually generate at its tier — a thorp's grain gap reads
+// "Mill", never a hundred-item catalog dump with slave markets in it.
+const tierCatalogNameCache = new Map();
+const catalogNamesAvailableAtTier = (tier) => {
+  const t = TIER_ORDER.includes(tier) ? tier : 'village';
+  if (tierCatalogNameCache.has(t)) return tierCatalogNameCache.get(t);
+  const sections = t === 'metropolis'
+    ? [institutionalCatalog.city || {}, institutionalCatalog.metropolis || {}]
+    : [institutionalCatalog[t] || {}];
+  const tierIdx = TIER_ORDER.indexOf(t);
+  const names = sections.flatMap((section) =>
+    Object.values(section).flatMap((group) =>
+      Object.entries(group)
+        .filter(([, spec]) => tierIdx >= TIER_ORDER.indexOf(spec?.minTier || 'thorp'))
+        .map(([name]) => name.toLowerCase())
+    )
+  );
+  tierCatalogNameCache.set(t, names);
+  return names;
+};
+
+// Same fuzzy matcher the chain-activation gate uses (computeActiveChains): an
+// institution name matches a processor pattern when it CONTAINS the pattern
+// lowercased and truncated to 12 chars.
+const matchesProcessor = (instName, processor) => {
+  const pattern = String(processor || '').toLowerCase().slice(0, 12);
+  return pattern.length > 0 && String(instName || '').toLowerCase().includes(pattern);
+};
+
+const processorAvailableAtTier = (processor, tier) =>
+  catalogNamesAvailableAtTier(tier).some((n) => matchesProcessor(n, processor));
+
+// Cap chain suggestions at a readable count: top 3 by relevance (the matching
+// chains' own processor ordering — canonical processors lead each chain list).
+const MAX_CHAIN_SUGGESTIONS = 3;
+
 // buildConflict
 const buildConflict = (isViable, issues, warnings, plotHooks) => {
   const criticalCount = issues.filter((i) => i.severity === SEVERITY.CRITICAL).length;
@@ -74,38 +115,52 @@ const computeFactionPowers = (institutions, terrain, nearbyResources, config = {
   const warnings = [];
   const suggestions = [];
 
+  const tier = config?.tier || config?.settType || 'village';
+
   nearbyResources.forEach((resource) => {
-    // Find chains associated with this resource using SUPPLY_CHAIN_NEEDS
+    // Find chains associated with this resource using SUPPLY_CHAIN_NEEDS.
+    // A null chain.resource must NEVER match: `includes(''.slice(0, 8))` is
+    // `includes('')` — true for every string — which used to pull every
+    // resource-less chain (organised crime, the slave trade, …) into EVERY
+    // resource's suggestion union (~100 "missing" institutions for a thorp).
     const matchingChains = SUPPLY_CHAIN_GROUPS
       .flatMap((need) => need.chains)
       .filter(
         (c) =>
           c.processingInstitutions.length > 0 &&
-          (c.resource?.toLowerCase().includes(resource.toLowerCase().slice(0, 8)) ||
-            resource.toLowerCase().includes((c.resource || '').toLowerCase().slice(0, 8)))
+          c.resource &&
+          (c.resource.toLowerCase().includes(resource.toLowerCase().slice(0, 8)) ||
+            resource.toLowerCase().includes(c.resource.toLowerCase().slice(0, 8)))
       );
     if (matchingChains.length === 0) return;
-    const chain = { processingInstitutions: matchingChains.flatMap((c) => c.processingInstitutions) };
+    const allProcessors = [...new Set(matchingChains.flatMap((c) => c.processingInstitutions))];
+    // Suggestions name only TIER-PLAUSIBLE processors (see
+    // catalogNamesAvailableAtTier above), capped at a readable count.
+    const reachable = allProcessors.filter((name) => processorAvailableAtTier(name, tier));
 
+    // Presence via the SAME matcher the activation gate uses — an institution
+    // the gate counts as a live processor must never be suggested as missing.
     const processingInsts = institutions.filter((i) =>
-      chain.processingInstitutions.some((name) => i.name.includes(name))
+      allProcessors.some((name) => matchesProcessor(i.name, name))
     );
 
-    if (processingInsts.length === 0) {
+    if (processingInsts.length === 0 && reachable.length > 0) {
       suggestions.push({
         category: 'Resource Chain',
         title: `Opportunity: process ${resource}`,
-        description: `${resource} is available locally. Add ${chain.processingInstitutions.join(' or ')} to unlock higher-value exports.`,
+        description: `${resource} is available locally. Add ${reachable.slice(0, MAX_CHAIN_SUGGESTIONS).join(' or ')} to unlock higher-value exports.`,
       });
-    } else if (processingInsts.length < chain.processingInstitutions.length) {
-      const missing = (chain.processingInstitutions || []).filter(
-        (name) => !institutions.some((i) => i.name.includes(name))
-      );
+    } else if (processingInsts.length > 0) {
+      const missing = reachable
+        .filter((name) => !institutions.some((i) => matchesProcessor(i.name, name)))
+        .slice(0, MAX_CHAIN_SUGGESTIONS);
+      if (missing.length === 0) return; // complete for its tier — no junk gap
+      const outputs = [...new Set(matchingChains.flatMap((c) => c.outputs || []))].slice(0, 4);
       suggestions.push({
         category: 'Resource Chain',
         title: `Incomplete chain: ${resource}`,
-        description: `Processing ${resource} but missing ${(missing || []).join(', ')} for the full chain.`,
-        impact: `Exports intermediate goods instead of final products (${(chain.outputs || []).map((o) => o.label || o).join(', ') || 'finished goods'}). Lower profit margins.`,
+        description: `Processing ${resource} but missing ${missing.join(', ')} for the full chain.`,
+        impact: `Exports intermediate goods instead of final products (${outputs.map((o) => o.label || o).join(', ') || 'finished goods'}). Lower profit margins.`,
         suggestedFixes: [`Add ${missing.join(' and ')} to complete the production chain`],
       });
     }

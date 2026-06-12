@@ -32,6 +32,16 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   // 'wartime' needs its own token: \bwar\b never matches it (no word boundary
   // before the 't'), so wartime settlements silently skipped promotion.
   { re: /\bwar\b|wartime|warfront|invasion|incursion|hostilit/i, archetype: 'war_pressure' },
+  // Occupation -> vassal_extraction is VERIFIED honest for both faces of an
+  // occupation (Wave 7): the condition's affectedSystems carry trade_connectivity
+  // AND defense_readiness, so the substrate registers economic extraction and
+  // military strain from the one condition; the pulse layer's conflict/defense
+  // pressures read those substrate scores, so the war side flows end to end.
+  // R3's TRADE_ARCHETYPES classification (pressureModel.js) only governs the
+  // flat condition-bonus there — re-pointing the condition at war_pressure
+  // would instead LOSE the extraction face. The stressor's pressureKinds
+  // ['conflict','legitimacy'] are an input gate (what feeds its birth/growth),
+  // not its output, so they were never the war-side carrier.
   { re: /occupation|occupied|vassal|tribute|annex/i,            archetype: 'vassal_extraction' },
   // 'migration' added: /migrant/ does not match 'mass_migration'.
   { re: /refugee|migrant|migration|displac|exodus/i,            archetype: 'regional_migration_pressure' },
@@ -43,15 +53,23 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   { re: /betray/i,                                              archetype: 'faction_challenge' },
   { re: /indebted|debt spiral|debt crisis/i,                    archetype: 'regional_tax_revenue_disruption' },
   { re: /infiltrat/i,                                           archetype: 'regional_criminal_pressure' },
+  // Religious family must outrank the /fractur/ rule below: first match wins,
+  // so 'religious_conversion_fracture' used to fall to the fracture rule and
+  // promote as regional_authority_instability — a religious crisis registering
+  // as pure political instability. Religious types are religious first.
+  { re: /religious conversion|religious_conversion|schism|heres/i, archetype: 'regional_religious_pressure' },
   { re: /fractur/i,                                             archetype: 'regional_authority_instability' },
   { re: /succession/i,                                          archetype: 'dominant_npc_removed' },
   { re: /monster|raider/i,                                      archetype: 'war_pressure' },
-  { re: /religious conversion|religious_conversion|schism|heres/i, archetype: 'regional_religious_pressure' },
   // World-pulse-only types, now authorable via the APPLY_STRESSOR event —
   // without these rules an authored market shock / criminal corridor / coup
   // would carry no causal-substrate consequence at all.
   { re: /market[\s_]?shock|price (collapse|crash)|trade collapse/i, archetype: 'regional_export_market_loss' },
   { re: /criminal[\s_]?corridor|smuggling (ring|route)|racket/i, archetype: 'regional_criminal_pressure' },
+  // The magical crisis family (stressor wave): magical_instability and the
+  // wandering magic_deadzone carried no promotion target at all — an arcane
+  // crisis never reached the substrate's magical_stability variable.
+  { re: /magical[\s_]?instability|magic[\s_]?deadzone|wild[\s_]?magic|arcane[\s_]?(surge|storm|collapse)/i, archetype: 'magical_instability' },
   // A coup ATTEMPT in progress is a faction maneuvering for the seat; the
   // verdict's own conditions (coup_suppressed / government_overthrown) are
   // produced by the world-pulse contest, not by this promotion.

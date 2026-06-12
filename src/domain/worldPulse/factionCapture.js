@@ -80,3 +80,146 @@ export function settlementCaptureState(factionStates, settlementId) {
   }
   return LADDER[worst];
 }
+
+// ── Wave 7 #3 — capture transitions reach the DM ────────────────────────────
+// advanceFactionCapture's transitions were recorded in the pulseRecord
+// (factionCaptureEvents) and consumed by NOBODY: the underworld could capture
+// the City Watch and the DM would never hear of it. The two builders below
+// follow the stressorAftermath idiom — a Wizard-News entry for the Chronicle
+// feed, and a permanent settlement.history.historicalEvents stamp for the
+// transitions that cross into/out of full 'capture'.
+
+const CAPTURED_RUNGS = new Set(['corrupted', 'capture']);
+
+function newsworthyTransition(t) {
+  // The institutional-corruption boundary and above: rung moves wholly below
+  // 'corrupted' (none ↔ adversarial ↔ equilibrium) are posture, not news.
+  return CAPTURED_RUNGS.has(t.to) || CAPTURED_RUNGS.has(t.from);
+}
+
+function transitionHeadline(t, settlementName) {
+  if (t.to === 'capture') return `${t.name} of ${settlementName} falls under criminal control`;
+  if (t.from === 'capture') return `${t.name} of ${settlementName} breaks the underworld's grip`;
+  if (t.to === 'corrupted') return `${t.name} of ${settlementName} is compromised by the underworld`;
+  return `${t.name} of ${settlementName} pushes the underworld back`;
+}
+
+function transitionSummary(t, settlementName) {
+  if (t.to === 'capture') {
+    return `${t.name} now answers to criminal interests; its formal authority in ${settlementName} is a front.`;
+  }
+  if (t.from === 'capture') {
+    return `${t.name} is no longer run by criminal interests, though arrangements linger (${t.to.replace(/_/g, ' ')}).`;
+  }
+  if (t.to === 'corrupted') {
+    return `Criminal interests hold systematic arrangements inside ${t.name}; decisions in ${settlementName} are being purchased.`;
+  }
+  return `${t.name} has loosened the underworld's arrangements (now ${t.to.replace(/_/g, ' ')}).`;
+}
+
+/**
+ * Wizard-News entries for this tick's faction-capture transitions. Factual
+ * headlines; 'major' significance for full capture and liberation (crossing
+ * the 'capture' rung), 'notable' for the corrupted boundary. Pure;
+ * timestamps threaded, never minted.
+ *
+ * @param {Array}    transitions  from advanceFactionCapture
+ * @param {Function} nameFor      settlementId → display name
+ * @param {number}   tick
+ * @param {string}   [now]
+ */
+export function captureTransitionNewsEntries(transitions = [], nameFor = id => String(id), tick = 0, now = null) {
+  const LADDER = ['none', 'adversarial', 'equilibrium', 'corrupted', 'capture'];
+  return transitions.filter(newsworthyTransition).map(t => {
+    const major = t.to === 'capture' || t.from === 'capture';
+    const settlementName = nameFor(t.settlementId);
+    return {
+      id: `wizard_news.${tick}.faction_capture.${t.factionId}`,
+      tick,
+      scope: 'settlement',
+      significance: major ? 'major' : 'notable',
+      score: major ? 74 : 52,
+      headline: transitionHeadline(t, settlementName),
+      summary: transitionSummary(t, settlementName),
+      kind: 'applied',
+      impactKind: 'faction_capture',
+      channelType: null,
+      severity: Math.max(0, LADDER.indexOf(t.to)) / (LADDER.length - 1),
+      settlementIds: [String(t.settlementId)],
+      impactIds: [],
+      channelIds: [],
+      sourceEventId: t.factionId,
+      tags: ['world_pulse', 'faction', 'capture', t.to],
+      reasons: [`${t.name} moved ${t.from.replace(/_/g, ' ')} → ${t.to.replace(/_/g, ' ')} on the capture ladder.`],
+      createdAt: now,
+    };
+  });
+}
+
+const MAX_CAMPAIGN_HISTORY_EVENTS = 20;
+
+/**
+ * Stamp a full-capture transition (into or out of 'capture') into the
+ * settlement's permanent history — the historicalEvents record historyBeats
+ * derives "defining crisis" / "recent disruption" from, same vocabulary and
+ * caps as stressorAftermath's graduation stamp. Idempotent per
+ * (faction, tick). Returns the same reference when nothing changed.
+ */
+export function withCaptureHistoryEvent(settlement, transition, tick) {
+  if (!settlement || !transition) return settlement;
+  const fell = transition.to === 'capture';
+  if (!fell && transition.from !== 'capture') return settlement;
+  const history = settlement.history || {};
+  const events = Array.isArray(history.historicalEvents) ? history.historicalEvents : [];
+  const eventId = `campaign.faction_capture.${transition.factionId}.${tick}`;
+  if (events.some(e => e?.campaignEventId === eventId)) return settlement;
+
+  const event = {
+    campaignEventId: eventId,
+    campaignEra: true,
+    tick,
+    yearsAgo: 0,
+    name: fell ? `The Capture of ${transition.name}` : `The Liberation of ${transition.name}`,
+    type: 'corruption_scandal',
+    description: fell
+      ? `${transition.name} fell under criminal control during the campaign — its formal authority became a front for the underworld.`
+      : `${transition.name} broke from criminal control during the campaign, though the arrangements it operated under are remembered.`,
+    severity: fell ? 'major' : 'moderate',
+    lastingEffects: fell
+      ? ['institutional corruption', 'selective enforcement']
+      : ['lingering criminal arrangements'],
+    plotHooks: [],
+    anchored: true,
+  };
+
+  const campaignEvents = events.filter(e => e?.campaignEra);
+  let nextEvents = [...events, event];
+  if (campaignEvents.length + 1 > MAX_CAMPAIGN_HISTORY_EVENTS) {
+    // Drop the OLDEST campaign-era entry (generation history is never pruned).
+    const oldest = campaignEvents
+      .slice()
+      .sort((a, b) => (a.tick ?? 0) - (b.tick ?? 0))[0];
+    nextEvents = nextEvents.filter(e => e !== oldest);
+  }
+  return { ...settlement, history: { ...history, historicalEvents: nextEvents } };
+}
+
+/**
+ * Apply capture history to every affected settlement in a local map
+ * (advanceCampaignWorld's settlement working set). Mirrors
+ * recordGraduationsIntoHistory. Returns the count of settlements written.
+ */
+export function recordCaptureTransitionsIntoHistory(localSettlements, transitions = [], tick = 0) {
+  let written = 0;
+  for (const transition of transitions) {
+    const key = String(transition.settlementId);
+    const settlement = localSettlements.get(key);
+    if (!settlement) continue;
+    const next = withCaptureHistoryEvent(settlement, transition, tick);
+    if (next !== settlement) {
+      localSettlements.set(key, next);
+      written += 1;
+    }
+  }
+  return written;
+}
