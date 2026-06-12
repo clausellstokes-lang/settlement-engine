@@ -1,4 +1,5 @@
 import { FS, swatch, GOLD_TINT, GOLD_DEEP } from '../theme.js';
+import { truncateAtWord } from '../../lib/text.js';
 
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
@@ -41,7 +42,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
           const r=depReasons.get(name)||depReasons.get(inst);
           return <p style={{fontSize:FS.xxs,color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>
              Needs <strong>{r.resource}</strong>
-            {r.impact&&<span style={{fontStyle:'italic',marginLeft:4}}>{r.impact.slice(0,70)}{r.impact.length>70?'…':''}</span>}
+            {r.impact&&<span style={{fontStyle:'italic',marginLeft:4}}>{truncateAtWord(r.impact, 70)}</span>}
           </p>;
         })()}
       </div>

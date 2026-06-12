@@ -351,6 +351,49 @@ function sanitizeTile(row) {
 // (toPublicSafe) — a single, named, tested projection of the display spine
 // (doc §1k), mirroring the server's _gallery_sanitize_public_json.
 
+// ── Public chronicle allowlist ──────────────────────────────────────────────
+// The get_gallery_dossier RPC ships the event chronicle as a SEPARATE,
+// server-projected column (migration 032) — per-entry allowlist of the keys
+// below. It must NOT route through toPublicSafe: its /chronicle/i denylist
+// would strip it (correctly — chronicle keys INSIDE the settlement data stay
+// private). Instead we re-apply the same allowlist here, defense in depth, so
+// a drifted or malicious row can never smuggle extra keys (raw EventLogEntries
+// carry before/after state snapshots, faction reactions with adventure seeds,
+// and rollback blobs that must never ship). Mirrors _gallery_chronicle_entry.
+const CHRONICLE_ENTRY_KEYS = Object.freeze(['id', 'appliedAt', 'timestamp', 'narrativeSummary', 'cause', 'partyCaused']);
+const CHRONICLE_EVENT_KEYS = Object.freeze(['id', 'type', 'cause', 'partyCaused']);
+const CHRONICLE_LIMIT = 50;
+
+// Only scalar values survive — an object smuggled into an allowlisted key
+// (e.g. narrativeSummary) is dropped, not serialized.
+function chronicleScalar(value) {
+  const t = typeof value;
+  return (t === 'string' || t === 'number' || t === 'boolean') ? value : undefined;
+}
+
+function sanitizeChronicleEntry(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+  const out = {};
+  for (const key of CHRONICLE_ENTRY_KEYS) {
+    const value = chronicleScalar(raw[key]);
+    if (value !== undefined) out[key] = value;
+  }
+  if (raw.event && typeof raw.event === 'object' && !Array.isArray(raw.event)) {
+    const event = {};
+    for (const key of CHRONICLE_EVENT_KEYS) {
+      const value = chronicleScalar(raw.event[key]);
+      if (value !== undefined) event[key] = value;
+    }
+    if (Object.keys(event).length) out.event = event;
+  }
+  return Object.keys(out).length ? out : null;
+}
+
+function sanitizeChronicle(entries) {
+  if (!Array.isArray(entries)) return [];
+  return entries.map(sanitizeChronicleEntry).filter(Boolean).slice(-CHRONICLE_LIMIT);
+}
+
 function sanitizeDossier(row) {
   return {
     id:           row.id,
@@ -361,6 +404,9 @@ function sanitizeDossier(row) {
     // unstripped (the server RPC already returns it raw in that case; this keeps
     // the client defense-in-depth from re-stripping what the owner chose to show).
     settlement:   toPublicSafe(row.data, { full: row.gallery_share_dm === true }),
+    // The event chronicle (separate allowlisted column, migration 032) —
+    // deliberately NOT routed through toPublicSafe; see sanitizeChronicle.
+    chronicle:    sanitizeChronicle(row.chronicle),
     // Owner opted to reveal DM-private content — the public viewer must render in
     // DM mode (not player view), or the DM tabs/secrets stay hidden despite the
     // data being present. See PublicDossierView.

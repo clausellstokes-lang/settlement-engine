@@ -40,7 +40,7 @@ Defined at `src/lib/analytics.js:48-106`. All keep their names and remain `essen
 `edit_mode_toggled`, `edit_pending_queued`, `edit_cascade_previewed`, `edit_committed`,
 `edit_reverted`, `workshop_opened`, `workshop_locked_shown`, `map_routes_mode_entered`,
 `map_drop_preview_shown`, `return_visit_detected`, `welcome_back_open_clicked`,
-`founder_tile_shown`, `founder_tile_clicked`, `help_popover_opened`, `ai_prompt_copied`,
+`founder_tile_shown`, `founder_tile_clicked`, `help_popover_opened`,
 `compendium_search`.
 
 Six of these gain **extended props** (non-breaking — additive only); see §3 Editing and §9 Library.

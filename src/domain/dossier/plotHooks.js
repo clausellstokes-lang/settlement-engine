@@ -94,7 +94,9 @@ export function collectPlotHooks(settlement = {}) {
     (tension.plotHooks || []).forEach((hook) => push(hooks, {
       text: textForHook(hook),
       source: label,
-      role: typeof tension.description === 'string' ? tension.description.slice(0, 80) : '',
+      // Full description — tension prose runs ~95 chars and the role renders
+      // small/muted; a hard slice left mid-word fragments ('…resist investi').
+      role: typeof tension.description === 'string' ? tension.description : '',
       category: 'tension',
       priority: 7,
     }));

@@ -435,6 +435,13 @@ export default function ShareToGallery({
           </span>
         )}
         {aiOverlayNote}
+        {/* Chronicle disclosure must also reach owners who published BEFORE
+            the public chronicle existed — the gallery projects it at read
+            time, so their event log is visible retroactively. */}
+        <span style={{ flexBasis: '100%', fontSize: FS.xs, color: INK, opacity: 0.75 }}>
+          Your settlement's event chronicle (event titles and summaries) is publicly
+          visible on the gallery page. Unshare to remove it.
+        </span>
         {detailsForm}
       </div>
     );
@@ -488,7 +495,7 @@ export default function ShareToGallery({
         fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
       }}>
         {canonReady
-          ? 'Public dossiers appear in the gallery. Your name and email stay private.'
+          ? "Public dossiers appear in the gallery. Your name and email stay private. Your settlement's event chronicle (event titles and summaries) is publicly visible on the gallery page."
           : 'Canonize this campaign world before sharing the dossier publicly.'}
       </span>
       {aiOverlayNote}

@@ -2,7 +2,8 @@
  * ChroniclePanel — Per-settlement AI narrative history log.
  *
  * Reads a saved settlement's `ai_data.chronicle` array (newest-first) and
- * renders a collapsible section above the settlement tabs. Each entry
+ * renders a collapsible "Narrative Chronicles" section above the settlement
+ * tabs. Each entry
  * captures one narrative event — initial generation, regenerate, progression,
  * or revert — with its thesis preserved.
  *
@@ -137,7 +138,7 @@ function FullEntryModal({ entry, onClose }) {
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS['18'], fontWeight: 600, color: swatch['#C49A3C'] }}>
-              Chronicle Entry
+              Narrative Chronicle Entry
             </div>
             <div style={{ display: 'flex', gap: 6, marginTop: 4, alignItems: 'center', flexWrap: 'wrap' }}>
               <Chip color={meta.color} Icon={meta.Icon} filled>{meta.label}</Chip>
@@ -299,7 +300,7 @@ export default function ChroniclePanel({ entries }) {
       >
         <History size={14} color="#6a2a9a" />
         <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS['14'], fontWeight: 600, color: INK, flex: 1 }}>
-          Chronicle {list.length > 0 ? `(${list.length})` : ''}
+          Narrative Chronicles {list.length > 0 ? `(${list.length})` : ''}
         </span>
         {list.length > 0 && (
           <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: 'Nunito, sans-serif' }}>
@@ -313,7 +314,7 @@ export default function ChroniclePanel({ entries }) {
         <div style={{ padding: '12px 14px', background: swatch['#FAF8F4'], maxHeight: 420, overflowY: 'auto' }}>
           {list.length === 0 ? (
             <div style={{ padding: '18px 0', textAlign: 'center', color: MUTED, fontSize: FS.sm, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-              No chronicle entries yet. Generate a narrative to start the log.
+              No narrative chronicle entries yet. Generate a narrative to start the log.
             </div>
           ) : (
             list.map((e) => (

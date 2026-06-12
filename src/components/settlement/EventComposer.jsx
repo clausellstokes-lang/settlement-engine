@@ -1,10 +1,12 @@
 /**
- * EventComposer — Pick an event, see preview, confirm/cancel.
+ * EventComposer — Pick an event, optionally preview, then apply.
  *
  * Available in both phases. In draft mode the same engine runs but
  * nothing is logged ("see what would happen"). In canon mode applying
  * adds a timeline entry. The store handlers gate the log persistence;
- * this UI is identical in both modes.
+ * this UI is identical in both modes. Preview is a look-ahead, not a
+ * gate — Apply is always offered. On a narrated save, a successful
+ * apply raises the StaleNarrativeModal (the prose no longer matches).
  */
 
 import { useState, useMemo } from 'react';
@@ -23,6 +25,7 @@ import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import CatalogPicker from './CatalogPicker.jsx';
+import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
 const _TYPE_ICONS = {
@@ -181,6 +184,11 @@ export default function EventComposer() {
   const applyBatch     = useStore(s => s.applyEventBatch);
   const pendingBatchPreview = useStore(s => s.pendingBatchPreview);
   const dismissBatchPreview = useStore(s => s.dismissBatchPreview);
+  // Staleness wiring: a committed change on a NARRATED save makes the AI
+  // prose out of date, so a successful apply raises StaleNarrativeModal.
+  // Boolean selector — the narrative blobs are large and we only need "is
+  // there one". Nothing can go stale on a raw (never-narrated) save.
+  const narrated = useStore(s => !!(s.aiSettlement || s.aiDailyLife));
 
   const [type, setType]         = useState('ADD_INSTITUTION');
   const [target, setTarget]     = useState('');
@@ -215,6 +223,7 @@ export default function EventComposer() {
   const [tradeEntrepot, setTradeEntrepot] = useState(false);   // ADD_TRADE_GOOD: transit through the warehouses
   const [customResourceName, setCustomResourceName] = useState(''); // ADD_RESOURCE: free-text custom name
   const [swapWithNpcId, setSwapWithNpcId] = useState('');      // PROMOTE_NPC / DEMOTE_NPC: the same-faction counterpart
+  const [staleNotice, setStaleNotice] = useState(null);        // post-apply "narrative is now stale" modal: null | { label }
   const hasNeighbours = (settlement?.neighbourNetwork?.length || settlement?.neighbourLinks?.length || 0) > 0;
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
   const customContent = useStore(s => s.customContent);
@@ -403,21 +412,26 @@ export default function EventComposer() {
     const evType = pendingPreview?.event?.type || type;
     if (evType === 'DESTROY_SETTLEMENT' && destroyConfirm.trim() !== (settlement?.name || '').trim()) return;
     // Audit fix: prefer committing the pending preview (the exact event
-    // the user previewed) over building a new event. Falls back to
-    // applyEvent(buildEvent()) only if no preview is pending — which
-    // shouldn't happen in normal flow because the Apply button is only
-    // visible after a preview.
-    if (pendingPreview?.event) {
-      applyPendingPreview();
-    } else {
-      applyEvent(buildEvent());
-    }
+    // the user previewed) over building a new event. Apply no longer
+    // requires a preview (preview is an optional look-ahead, not a gate),
+    // so applyEvent(buildEvent()) is the normal path whenever the user
+    // applies directly.
+    const entry = pendingPreview?.event
+      ? applyPendingPreview()
+      : applyEvent(buildEvent());
     setTarget('');
     setDesc('');
     setPartyCaused(false);
     setDestroyConfirm('');
     setSwapWithNpcId('');
     setCustomResourceName('');
+    // Post-apply staleness notice: the event committed (and stays committed
+    // regardless of what the modal answers) — on a narrated save the AI
+    // prose was written against the previous state, so offer regenerate /
+    // continue-with-raw. Raw saves have nothing to go stale.
+    if (entry && narrated) {
+      setStaleNotice({ label: EVENT_REGISTRY[evType]?.label || evType });
+    }
   }
 
   return (
@@ -436,7 +450,7 @@ export default function EventComposer() {
       </div>
       <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: -2, marginBottom: SP.sm, lineHeight: 1.4 }}>
         {phase === 'canon'
-          ? "In-world events write to the campaign timeline. The Roster and Tune edits below are corrections, with no timeline entry."
+          ? 'In-world events write to the campaign timeline.'
           : 'Draft: nothing is logged yet. Stage changes and preview their effect before you canonize.'}
       </div>
 
@@ -887,21 +901,16 @@ export default function EventComposer() {
         <button onClick={onPreview} disabled={!canSubmit} style={primaryBtn(!canSubmit)}>
           Preview
         </button>
-        <button
-          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); }}
-          disabled={!canSubmit}
-          style={{
-            padding: '5px 12px', background: 'transparent', color: GOLD,
-            border: `1px solid ${GOLD}`, borderRadius: R.sm,
-            fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
-            cursor: canSubmit ? 'pointer' : 'not-allowed', opacity: canSubmit ? 1 : 0.5,
-          }}
-        >
-          + Add to batch
-        </button>
-        {pendingPreview && (() => {
-          const isDestroy = pendingPreview.event?.type === 'DESTROY_SETTLEMENT';
+        {(() => {
+          // Apply is always offered — preview is an optional look-ahead, not
+          // a gate. With a preview pending, Apply commits exactly the
+          // previewed event (audit invariant); without one it applies the
+          // form as built, so it honors the same canSubmit rule as Preview.
+          // The Destroy confirm gate follows the event that would actually
+          // apply (the previewed one if pending, else the picked type).
+          const isDestroy = (pendingPreview?.event?.type || type) === 'DESTROY_SETTLEMENT';
           const destroyOk = !isDestroy || destroyConfirm.trim() === (settlement?.name || '').trim();
+          const applyOk = destroyOk && (pendingPreview ? true : canSubmit);
           return (
             <>
               {isDestroy && (
@@ -917,15 +926,29 @@ export default function EventComposer() {
                   />
                 </div>
               )}
-              <button onClick={onApply} disabled={!destroyOk} style={{ ...confirmBtn, ...(isDestroy ? { background: swatch.danger, borderColor: swatch.danger } : {}), opacity: destroyOk ? 1 : 0.5, cursor: destroyOk ? 'pointer' : 'not-allowed' }}>
+              <button onClick={onApply} disabled={!applyOk} style={{ ...confirmBtn, ...(isDestroy ? { background: swatch.danger, borderColor: swatch.danger } : {}), opacity: applyOk ? 1 : 0.5, cursor: applyOk ? 'pointer' : 'not-allowed' }}>
                 <Check size={11} /> {isDestroy ? 'Destroy settlement' : (phase === 'canon' ? 'Apply to Timeline' : 'Apply')}
               </button>
-              <button onClick={() => { dismissPreview(); setDestroyConfirm(''); }} style={cancelBtn}>
-                <X size={11} /> Cancel
-              </button>
+              {pendingPreview && (
+                <button onClick={() => { dismissPreview(); setDestroyConfirm(''); }} style={cancelBtn}>
+                  <X size={11} /> Cancel
+                </button>
+              )}
             </>
           );
         })()}
+        <button
+          onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); }}
+          disabled={!canSubmit}
+          style={{
+            padding: '5px 12px', background: 'transparent', color: GOLD,
+            border: `1px solid ${GOLD}`, borderRadius: R.sm,
+            fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
+            cursor: canSubmit ? 'pointer' : 'not-allowed', opacity: canSubmit ? 1 : 0.5,
+          }}
+        >
+          + Add to batch
+        </button>
       </div>
 
       {pendingPreview && <PreviewPanel preview={pendingPreview} />}
@@ -939,9 +962,23 @@ export default function EventComposer() {
           onRemove={(i) => setStaged(prev => prev.filter((_, idx) => idx !== i))}
           onClear={() => { setStaged([]); dismissBatchPreview(); }}
           onPreview={() => previewBatch(staged)}
-          onApply={() => { const r = applyBatch(staged); if (r?.ok) setStaged([]); }}
+          onApply={() => {
+            const r = applyBatch(staged);
+            if (r?.ok) {
+              // One staleness notice for the whole batch — the modal fires
+              // once per apply click, never once per staged event.
+              if (narrated) setStaleNotice({ label: `${staged.length} changes` });
+              setStaged([]);
+            }
+          }}
         />
       )}
+
+      <StaleNarrativeModal
+        open={!!staleNotice}
+        changeLabel={staleNotice?.label}
+        onClose={() => setStaleNotice(null)}
+      />
 
       {/* Roster & Tune was removed (owner decision, 2026-06-11): its four
           sections were redundant — or worse — next to the event catalog.

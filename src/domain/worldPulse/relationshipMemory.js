@@ -1,4 +1,5 @@
 import { TIER_ORDER } from '../../data/constants.js';
+import { truncateAtWord } from '../../lib/text.js';
 import {
   ensureRelationshipState,
   getRelationshipSettlements,
@@ -52,7 +53,9 @@ const POSTURE_LABELS = Object.freeze({
 
 function clipText(value, max = 220) {
   const text = String(value || '').replace(/\s+/g, ' ').trim();
-  return text.length > max ? `${text.slice(0, max - 1).trim()}...` : text;
+  // Word-boundary truncation — a hard slice left mid-word fragments in
+  // persisted memory summaries and AI context payloads.
+  return truncateAtWord(text, max, '...');
 }
 
 function titleForType(type) {

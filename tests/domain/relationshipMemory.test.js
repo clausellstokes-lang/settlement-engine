@@ -7,6 +7,7 @@ import {
   ensureRelationshipStatesForGraph,
   pressureIndex,
   relationshipMemoryWeight,
+  sanitizeRelationshipMemoryContext,
   deriveSettlementPressures,
 } from '../../src/domain/worldPulse/index.js';
 
@@ -114,6 +115,35 @@ describe('relationship memory and posture', () => {
     expect(context.relationships[0].otherSettlementName).toBe('Crownhold');
     expect(context.relationships[0].summary).toMatch(/hostility|war-exhaustion|Crownhold/i);
     expect(JSON.stringify(context)).not.toMatch(/dailyLifeWeight|memoryScore|weight/);
+  });
+
+  // Clip honesty pin: context prose is clipped at WORD boundaries. The old
+  // clipText hard-sliced at max-1 chars, shipping mid-word fragments into
+  // persisted memory summaries and AI context payloads.
+  test('sanitized context clips long prose at a word boundary, never mid-word', () => {
+    const longSummary = 'The caravan raids of the early spring season strained patrols. '.repeat(5).trim();
+    expect(longSummary.length).toBeGreaterThan(240);
+
+    const context = sanitizeRelationshipMemoryContext({
+      settlementId: 'a',
+      relationships: [{
+        otherSettlementId: 'b',
+        otherSettlementName: 'Briarwatch',
+        relationshipType: 'rival',
+        posture: 'managed rivalry posture',
+        direction: 'outgoing',
+        summary: longSummary,
+        practicalEffects: [],
+        recentMemory: [],
+      }],
+    });
+
+    const summary = context.relationships[0].summary;
+    expect(summary.endsWith('...')).toBe(true);
+    expect(summary.length).toBeLessThanOrEqual(240);
+    const body = summary.slice(0, -3);
+    expect(longSummary.startsWith(body)).toBe(true);
+    expect(longSummary[body.length]).toBe(' ');
   });
 
   // R4 pin: one world event scores ONCE. The same applied outcome lands in

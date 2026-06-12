@@ -324,7 +324,11 @@ export const en = Object.freeze({
     backToList:   'Back to gallery',
   },
 
-  // ── Narrative drift modal (gate for structural edits on narrated saves) ─
+  // ── Narrative drift modal — RETIRED. Its consumer (NarrativeDriftModal,
+  //    the pre-apply gate for the Roster & Tune editor) was deleted in
+  //    86fffff; the keys stay only because tests/copy/copy.test.js pins
+  //    them. Drop this block together with that test's narrativeDrift
+  //    cases. The post-apply replacement lives under `staleNarrative`. ─────
   narrativeDrift: {
     headingSeismic:    'This is a big change.',
     headingStructural: 'This change will drift the narrative.',
@@ -338,6 +342,20 @@ export const en = Object.freeze({
     revertBody:        'Clear the narrative and show raw data. No credits. Chronicle history is preserved.',
     cancelLabel:       'Cancel without applying',
     ariaCancel:        'Cancel',
+  },
+
+  // ── Stale narrative modal (post-apply: the prose no longer matches) ─────
+  // Fires AFTER an event or batch has committed on a narrated save. The
+  // change is already applied and stays applied — there is no cancel, only
+  // "re-run the narrative now" or "carry on with the raw simulation".
+  staleNarrative: {
+    heading:         'The narrative is now out of date.',
+    body:            'Your change is applied. The AI narrative on this save was written against the previous state — its prose doesn’t know about what just happened.',
+    regenerateTitle: 'Regenerate narrative',
+    regenerateBody:  'Re-run the narrative against the new state. Spends {cost} credits.',
+    continueTitle:   'Continue with raw simulation',
+    continueBody:    'No credits spent. The dossier shows the raw simulation until you regenerate later.',
+    ariaClose:       'Close',
   },
 
   // ── Purchase modal (credit packs + single dossier) ──────────────────────

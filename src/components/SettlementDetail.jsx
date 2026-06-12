@@ -831,16 +831,13 @@ export default function SettlementDetail({
               {pdfError}
             </div>
           )}
-          {/* SystemStateBar (the raw "Settlement State" engine snapshot) and
-              the Provenance card (seed / timestamps / campaign link) are
-              edit-only — they render inside the editMode block above. View
-              mode opens to the polished dossier (OutputContainer) with no
-              raw state or bookkeeping. */}
+          {/* SystemStateBar (the raw "Settlement State" engine snapshot),
+              the Provenance card (seed / timestamps / campaign link), and
+              the Narrative Chronicles log are edit-only — they render inside
+              the editMode block above. View mode opens to the polished
+              dossier (OutputContainer) with no raw state or bookkeeping. */}
           {detail?.saveData?.id && (
             <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} />
-          )}
-          {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (
-            <ChroniclePanel entries={chronicleEntries} />
           )}
         </>
       )}

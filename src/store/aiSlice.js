@@ -26,6 +26,7 @@ import { applyRenameToAiData } from '../lib/narrativeMutations.js';
 import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { getAiCostForModel } from '../config/pricing.js';
 import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
+import { isCanonSave } from '../domain/campaign/canon.js';
 import { verifyAiOverlay } from '../domain/aiOverlayVerifier.js';
 import { buildChronicleFeed, selectChronicleContext } from '../domain/dossier/chronicleFeed.js';
 import {
@@ -718,6 +719,11 @@ export const createAiSlice = (set, get) => ({
    * succeeded from the user's perspective; only cross-session history is
    * at risk.
    *
+   * Pre-canon regenerations are NOT recorded (owner decision, 2026-06-11):
+   * before canonization a regenerate is exploratory churn, not history.
+   * Owner scoped this to regenerations only — 'initial', 'progression',
+   * and 'revert' keep recording regardless of phase.
+   *
    * @param {string} saveId
    * @param {object} opts
    * @param {'initial'|'regenerate'|'progression'|'revert'} opts.reason
@@ -729,6 +735,11 @@ export const createAiSlice = (set, get) => ({
     const state = get();
     const entry = state.savedSettlements.find(s => s.id === saveId);
     if (!entry) return;
+
+    // Canon gate — regenerations only start chronicling after the save is
+    // canonized. canonize() persists campaignState to the save immediately
+    // (persistActiveSaveLifecycle), so the entry read above is never stale.
+    if (reason === 'regenerate' && !isCanonSave(entry)) return;
 
     const limit = state.isElevated?.() ? CHRONICLE_LIMITS.elevated
                 : state.isPremium?.()  ? CHRONICLE_LIMITS.premium

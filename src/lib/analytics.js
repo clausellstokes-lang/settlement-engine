@@ -102,7 +102,6 @@ export const EVENTS = Object.freeze({
   FOUNDER_TILE_SHOWN:             'founder_tile_shown',        // X-8
   FOUNDER_TILE_CLICKED:           'founder_tile_clicked',      // X-8
   HELP_POPOVER_OPENED:            'help_popover_opened',       // CP-1
-  AI_PROMPT_COPIED:               'ai_prompt_copied',          // HT-4
   COMPENDIUM_SEARCH:              'compendium_search',         // CP-4
 });
 

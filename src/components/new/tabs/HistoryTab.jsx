@@ -58,13 +58,14 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
   const recencyLabel = yrs => yrs<=10?'Recent':yrs<=30?'Living memory':yrs<=80?'Last century':yrs<=200?'Ancient':'Deep history';
   const recencyColor = yrs => yrs<=10?'#8b1a1a':yrs<=30?'#a0762a':yrs<=80?'#5a6a1a':yrs<=200?'#2a4a7a':'#5a2a8a';
 
-  // Build event title from type + description snippet
+  // Build event card text: the event's own name is the title (falling back to
+  // the type label), and the description renders IN FULL — it is the card's
+  // only body and runs at most ~117 chars, so truncation only ever hid prose.
   const eventTitle = (evt) => {
     const ec = ALL_EC[evt.type] || ALL_EC.political;
-    const descShort = typeof evt.description === 'string'
-      ? evt.description.slice(0,55) + (evt.description.length>55?'…':'')
-      : '';
-    return {label: ec.label, desc: descShort};
+    const name = typeof evt.name === 'string' && evt.name.trim() ? evt.name.trim() : ec.label;
+    const desc = typeof evt.description === 'string' ? evt.description : '';
+    return {label: ec.label, name, desc};
   };
 
   return (
@@ -251,7 +252,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
           {sortedEvents.map((evt,i)=>{
             const ec = ALL_EC[evt.type] || ALL_EC.political;
             const sev = typeof evt.severity==='string'&&evt.severity.length>2 ? evt.severity : null;
-            const {label:typeLabel, desc} = eventTitle(evt);
+            const {label:typeLabel, name:evtName, desc} = eventTitle(evt);
             const isAnchored = !!evt.anchored;
             const isExp = expandedEvent===i;
             const yrsColor = recencyColor(evt.yearsAgo||0);
@@ -272,8 +273,9 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
                 <div style={{padding:'10px 14px'}}>
                   <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:4,flexWrap:'wrap'}}>
                     <div style={{flex:1,minWidth:120}}>
-                      <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',marginBottom:2}}>
-                        <span style={{fontSize:FS.xs,fontWeight:700,color:ec.color,textTransform:'uppercase',letterSpacing:'0.04em'}}>{typeLabel}</span>
+                      <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',marginBottom:2}}>
+                        <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{evtName}</span>
+                        {evtName!==typeLabel&&<span style={{fontSize:FS.xs,fontWeight:700,color:ec.color,textTransform:'uppercase',letterSpacing:'0.04em'}}>{typeLabel}</span>}
                         {sev&&<span style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,borderRadius:3,padding:'0 5px'}}>{sev}</span>}
                       </div>
                       <p style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.45,margin:0}}>{desc}</p>

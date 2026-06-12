@@ -42,12 +42,46 @@ vi.mock('../../src/lib/supabase.js', () => ({
 vi.mock('../../src/lib/auth.js', () => ({
   auth: { signInWithEmail: vi.fn(), signUpWithEmail: vi.fn(), signOut: vi.fn() },
 }));
+// StaleNarrativeModal reads the store (activeSaveId + requestNarrative); a
+// selector-over-plain-object stub keeps the real zustand store out of the
+// a11y render. FounderBadge tolerates it via `s.isFounder?.() ?? false`.
+vi.mock('../../src/store/index.js', () => ({
+  useStore: (selector) => selector({
+    activeSaveId: 'save-1',
+    requestNarrative: vi.fn(),
+  }),
+}));
 
 afterEach(cleanup);
 
-// (The NarrativeDriftModal dialog-a11y cases were removed with the modal
-// itself — its only consumer, the Roster & Tune correction editor, was
-// retired in favour of the event catalog.)
+// ── Dialog/modal a11y ───────────────────────────────────────────────────────
+// Modal dialogs must announce themselves as a dialog, declare modality so
+// screen readers know to trap, and give their icon-only close button an
+// accessible name. (NarrativeDriftModal's cases moved here onto its
+// successor, StaleNarrativeModal, when Roster & Tune was retired.)
+
+describe('Tier 7.17 — Modal dialog a11y', () => {
+  test('StaleNarrativeModal exposes role=dialog + aria-modal', async () => {
+    const StaleNarrativeModal = (await import('../../src/components/StaleNarrativeModal.jsx')).default;
+    const { container } = render(
+      <StaleNarrativeModal open={true} changeLabel="Test change" onClose={() => {}} />,
+    );
+    const dialog = container.querySelector('[role="dialog"]');
+    expect(dialog).not.toBeNull();
+    expect(dialog.getAttribute('aria-modal')).toBe('true');
+  });
+
+  test('StaleNarrativeModal close button has aria-label', async () => {
+    const StaleNarrativeModal = (await import('../../src/components/StaleNarrativeModal.jsx')).default;
+    const { container } = render(
+      <StaleNarrativeModal open={true} changeLabel="Test" onClose={() => {}} />,
+    );
+    // The close button (top right X) is icon-only — it must carry an
+    // aria-label (copy key staleNarrative.ariaClose).
+    const ariaButtons = container.querySelectorAll('button[aria-label]');
+    expect(ariaButtons.length).toBeGreaterThanOrEqual(1);
+  });
+});
 
 // ── Primitive a11y ──────────────────────────────────────────────────────────
 // The design-system primitives all carry an explicit ARIA role and/or label.

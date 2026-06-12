@@ -7,6 +7,7 @@ import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, se
 // Direct catalog imports keep the generator pipeline out of this
 // component's synchronous import graph.
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../generators/lookups.js';
+import { truncateAtWord } from '../lib/text.js';
 
 const CAT_COLORS = {
   Essential:      '#1a4a20',
@@ -128,7 +129,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                   </div>
                   {instDef.desc && (
                     <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: 1, lineHeight: 1.4 }}>
-                      {instDef.desc.slice(0, 80)}{instDef.desc.length > 80 ? '…' : ''}
+                      {truncateAtWord(instDef.desc, 80)}
                     </div>
                   )}
                 </div>

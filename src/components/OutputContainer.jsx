@@ -69,7 +69,11 @@ const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 //              AI-narrated layer and only appears when narration produced it.
 //   systems  → Services, Economics, Power, Defense, Resources, Viability
 //   world    → Relationships, Daily Life, NPCs, History, Neighbours
-//   notes    → DM Notes, AI Notes, Chronicle (the living-history feed, §8 M3c)
+//   notes    → DM Notes, AI Notes, Chronicle (the living-history feed, §8 M3c).
+//              DM/AI notes are owner-private; the Chronicle is the one Notes
+//              sub-tab that also renders on public gallery dossiers, fed by
+//              the RPC's allowlisted `chronicle` column (migration 032)
+//              through the publicChronicle prop.
 //
 // Simulation lives in the drawer trigger near the dossier actions, not in
 // the reading tab strip. Sub-tabs the current settlement doesn't render
@@ -110,20 +114,28 @@ function chronicleReferenceFor(saveEntry) {
   return cs?.worldState?.canonizedAt || cs?.canonizedAt || cs?.startedAt || null;
 }
 
-function collectChronicle(saveEntry, settlement) {
+export function collectChronicle(saveEntry, settlement, publicChronicle = null) {
   // The unified Chronicle feed (spec §8 M3c): manual events + party-caused +
   // world-pulse, merged + normalized + sorted newest-first and timed relative to
   // canonization by the shared domain helper, so screen + any future surface
   // read one source of truth.
+  //
+  // A PUBLIC gallery dossier has no saved campaignState — the gallery RPC
+  // projects an allowlisted copy of the eventLog into its own `chronicle`
+  // column (migration 032; re-filtered client-side in gallery.js), threaded
+  // here as publicChronicle and fed through the same manual-source
+  // normalization. It is consulted ONLY when there is no save entry at all;
+  // owner surfaces (live editor, saved view) never pass it, so the owner feed
+  // is byte-for-byte what it was before.
   return buildChronicleFeed({
-    manual:     saveEntry?.campaignState?.eventLog,
+    manual:     saveEntry ? saveEntry.campaignState?.eventLog : publicChronicle,
     worldPulse: saveEntry?.campaignState?.worldPulse?.events,
     worldLog:   saveEntry?.campaignState?.worldState?.eventLog,
     recent:     settlement?.recentEvents,
   }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
 }
 
-export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false }) {
+export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null }) {
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
@@ -222,7 +234,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const activeSettlement = showNarrative ? aiSettlement : rawSettlement;
   const dossierNotes = liveSaveEntry?.aiData?.dossierNotes || null;
   const aiGuidance = typeof dossierNotes?.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
-  const chronicle = collectChronicle(liveSaveEntry, rawSettlement);
+  const chronicle = collectChronicle(liveSaveEntry, rawSettlement, publicChronicle);
   // History tab keeps a short "Recent Events" glance; the full Chronicle lives
   // under Notes (spec §8 M3c relocation).
   const recentEvents = chronicle.slice(0, 8);
@@ -321,7 +333,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // Notes (DM/AI) are owner-private prep: hidden from the public player
     // view, but shown on saved settlements even though the dossier prose is
     // readOnly (editability is keyed on saveId inside NotesTab, not readOnly).
-    if (playerView && ['summary', 'dm_notes', 'ai_notes', 'chronicle'].includes(t.id)) return false;
+    // The Chronicle is NOT private — event titles + summaries ship publicly
+    // through the gallery RPC's allowlisted `chronicle` column (migration 032,
+    // disclosed in the share flow) — so it stays visible in the player view.
+    if (playerView && ['summary', 'dm_notes', 'ai_notes'].includes(t.id)) return false;
     // DM Notes are a private DM scratch space — never surface them on a public /
     // shared gallery dossier (readOnly with no owning saveId), even in the full
     // "Reveal DM-private content" view. They're truly confidential to the DM and
@@ -867,9 +882,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     React.createElement(ConfirmDialog, {
       open: !!pendingAiAction,
       tone: 'warning',
-      title: 'Send AI guidance?',
-      body: 'The AI Guidance note from Notes will be sent with this generation. DM Notes stay private and are not included.',
-      confirmLabel: 'Send guidance',
+      title: 'Send campaign context?',
+      body: 'Your Campaign Context from Notes will be woven into the narration as established lore. Settlement facts still take precedence. DM Notes stay private and are not included.',
+      confirmLabel: 'Send context',
       cancelLabel: 'Cancel',
       onConfirm: confirmGuidedAiAction,
       onCancel: () => setPendingAiAction(null),

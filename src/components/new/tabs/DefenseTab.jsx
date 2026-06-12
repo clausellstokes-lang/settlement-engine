@@ -7,6 +7,7 @@ import {isMobile} from '../tabConstants';
 import {buildThreatAssessment} from '../../../generators/defenseGenerator';
 import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities } from '../../../domain/display/defenseDisplay.js';
+import { truncateAtWord } from '../../../lib/text.js';
 
 export function DefenseTab({ settlement:r, narrativeNote}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -257,7 +258,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
               {crimeTypes.map((ct,i)=>(
                 <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderRadius:5,padding:'7px 10px'}}>
                   <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag2,marginBottom:2}}>{ct.type}</div>
-                  <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{ct.desc?.slice(0,200)}{ct.desc?.length>200?'…':''}</div>
+                  <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(ct.desc, 200)}</div>
                 </div>
               ))}
             </div>

@@ -49,7 +49,7 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
     );
   }
 
-  const { settlement, name, tier, publishedAt, viewCount, shareDm } = dossier;
+  const { settlement, name, tier, publishedAt, viewCount, shareDm, chronicle } = dossier;
   const tierLabel = TIER_LABELS[tier] || tier;
 
   return (
@@ -110,8 +110,12 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
 
       {/* The dossier itself, read-only. Player view by default (DM content hidden);
           when the owner opted into "Reveal DM-private content" (shareDm), render in
-          DM mode so secrets, DM notes, the chronicle, etc. are shown. */}
-      <OutputContainer settlement={settlement} readOnly playerView={!shareDm} />
+          DM mode so secrets, NPC goals, the DM Compass, etc. are shown. The event
+          Chronicle renders in BOTH modes: a public dossier has no saved
+          campaignState to read the eventLog from, so the gallery RPC ships an
+          allowlisted projection (titles + summaries; migration 032) as its own
+          column, threaded here as publicChronicle. */}
+      <OutputContainer settlement={settlement} readOnly playerView={!shareDm} publicChronicle={chronicle} />
     </article>
   );
 }

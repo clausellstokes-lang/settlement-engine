@@ -15,6 +15,7 @@
 import { jsPDF } from 'jspdf';
 import { autoLayout } from './graphLayout.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
+import { truncateAtWord } from '../lib/text.js';
 
 // ── Page geometry ──────────────────────────────────────────────────────────────
 const PW = 210, PH = 297;
@@ -73,11 +74,17 @@ function wrap(d,text,maxW,fontSize) {
   d.setFontSize(fontSize);
   return d.splitTextToSize(s(text),maxW);
 }
+// Word-boundary truncation (shared helper); '...' because s() strips U+2026.
 function truncate(text, maxChars) {
-  const t = s(text);
-  if (t.length <= maxChars) return t;
-  const cut = t.slice(0, maxChars - 1).replace(/\s\S*$/, '');
-  return (cut||t.slice(0,maxChars-1)) + '...';
+  return truncateAtWord(s(text), maxChars, '...');
+}
+// A silent `lines.slice(0, n)` hides that prose continues — keep at most
+// `maxLines` lines and mark the final kept line when the clamp actually cut.
+function clampLines(lines, maxLines) {
+  if (lines.length <= maxLines) return lines;
+  const kept = lines.slice(0, maxLines);
+  if (kept.length) kept[kept.length - 1] += '...';
+  return kept;
 }
 
 // Section header bar
@@ -145,7 +152,7 @@ function buildCover(d, campaign, settlements) {
     d.setFont('helvetica','normal'); d.setFontSize(10); st(d, BROWN);
     const descLines = wrap(d, campaign.description, CW - 40, 10);
     let dy = ty + 14;
-    for (const line of descLines.slice(0, 6)) {
+    for (const line of clampLines(descLines, 6)) {
       d.text(line, centerX, dy, { align: 'center' });
       dy += 5;
     }
@@ -575,7 +582,7 @@ function buildDigest(d, campaignName, settlements, pageN) {
     d.setFont('helvetica','normal'); d.setFontSize(7); st(d, INK);
     const ovLines = wrap(d, overview, colW - 6, 7);
     let ly = bodyY + 5;
-    for (const line of ovLines.slice(0, 3)) {
+    for (const line of clampLines(ovLines, 3)) {
       d.text(line, L_X, ly);
       ly += 3;
     }
@@ -591,7 +598,7 @@ function buildDigest(d, campaignName, settlements, pageN) {
         d.setFont('helvetica','italic'); d.setFontSize(7); st(d, INK);
         const hLines = wrap(d, hook, colW - 6, 7);
         let hy = ly + 7;
-        for (const line of hLines.slice(0, 3)) {
+        for (const line of clampLines(hLines, 3)) {
           d.text(line, L_X, hy);
           hy += 3;
         }

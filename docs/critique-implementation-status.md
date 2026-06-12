@@ -107,7 +107,7 @@ the follow-on. See the wave sections below.
 
 | Phase | Critique | Status | Notes |
 |---|---|---|---|
-| P137 | HT-4 — Copy as AI prompt | **shipped** | "Copy as AI prompt" button serialises the grounded prompt envelope for paste into ChatGPT/Claude; signed-in only. Flag: `aiPromptCopy`. |
+| P137 | HT-4 — Copy as AI prompt | **removed** | Button removed (2026-06-11). The component was never wired into the dossier view, and its serializer stringified the section object to "[object Object]" — copied prompts were broken. Component, test, and `AI_PROMPT_COPIED` analytics event deleted. |
 | P138 | AC-4 — Account FAQ | **shipped** | Inline FAQ accordion on the Account page (six common Qs: credit grant, cancel, refunds, founder, gallery privacy, AI-vs-sim). Flag: `accountFaq`. |
 | P139 | CP-4 — Compendium global search | **shipped** | Type-ahead above the Compendium tabs — match every section (tiers, archetypes, routes, stresses, relationships) and jump to the owning tab. Closes the P127 search gap. Flag: `compendiumGlobalSearch`. |
 | P139 | CP-3 — Compendium readability | **shipped** | Constrains catalog content to a readable max-width column instead of edge-to-edge sprawl on wide pages. Closes the P127 readability gap. Flag: `compendiumReadability`. |
