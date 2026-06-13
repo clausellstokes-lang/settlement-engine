@@ -120,8 +120,13 @@ export function applySubsistenceMode(institutions, tier, tradeRoute, effectiveCo
     if (isTradeInst(institutions[i])) institutions.splice(i, 1);
   }
 
+  // Isolated subsistence settlements risk famine. Roll it into the real stress
+  // set so the downstream stressConfirmPass weighs it against the roster
+  // (granaries/food institutions suppress it) — the old `_isolationFoodStress`
+  // flag was stamped on the institutions array and read by nothing.
   if (chance(0.35) && !effectiveConfig.stressTypes?.includes('famine')) {
-    institutions._isolationFoodStress = true;
+    if (!Array.isArray(effectiveConfig.stressTypes)) effectiveConfig.stressTypes = [];
+    effectiveConfig.stressTypes.push('famine');
   }
 }
 
