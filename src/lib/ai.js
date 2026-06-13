@@ -160,6 +160,7 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   let partialFailure = false;
   let failedFields = [];
   let succeededFields = [];
+  let sawDone = false;
 
   // Support nested field paths like "powerStructure.factions"
   const setPath = (target, path, value) => {
@@ -172,6 +173,47 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     ref[keys[keys.length - 1]] = value;
   };
 
+  const handleMessage = (msg) => {
+    // Status / phase events (progress hints for the UI)
+    if (msg.status) {
+      try { opts.onStatus?.(msg); } catch (_) { /* UI error should not break stream */ }
+      return;
+    }
+
+    // Terminal error (function-level, e.g. thesis failed or all passes failed)
+    if (msg.error && !msg.field) {
+      fatalError = new Error(msg.error);
+      return;
+    }
+
+    // Per-field error — NOT fatal. Server keeps raw data for failed passes;
+    // notify the UI but keep reading so the stream drains and we get `done`.
+    if (msg.field && msg.error) {
+      try { opts.onField?.(msg.field, null, msg.error); } catch (_) { /* UI error */ }
+      return;
+    }
+
+    // Per-field success — progressive UI update (supports dotted paths)
+    if (msg.field) {
+      setPath(result, msg.field, msg.value);
+      try { opts.onField?.(msg.field, msg.value); } catch (_) { /* UI error should not break stream */ }
+      return;
+    }
+
+    // Final success line — the server's `result` is authoritative
+    if (msg.done) {
+      sawDone = true;
+      if (msg.result && typeof msg.result === 'object') {
+        result = msg.result;
+      }
+      if (typeof msg.creditsRemaining === 'number') creditsRemaining = msg.creditsRemaining;
+      if (msg.type) finalType = msg.type;
+      if (typeof msg.partialFailure === 'boolean') partialFailure = msg.partialFailure;
+      if (Array.isArray(msg.failedFields)) failedFields = msg.failedFields;
+      if (Array.isArray(msg.succeededFields)) succeededFields = msg.succeededFields;
+    }
+  };
+
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
@@ -182,51 +224,26 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       const line = buffer.slice(0, newlineIdx).trim();
       buffer = buffer.slice(newlineIdx + 1);
       if (!line) continue;
-
       let msg;
       try { msg = JSON.parse(line); } catch { continue; }
-
-      // Status / phase events (progress hints for the UI)
-      if (msg.status) {
-        try { opts.onStatus?.(msg); } catch (_) { /* UI error should not break stream */ }
-        continue;
-      }
-
-      // Terminal error (function-level, e.g. thesis failed or all passes failed)
-      if (msg.error && !msg.field) {
-        fatalError = new Error(msg.error);
-        continue;
-      }
-
-      // Per-field error — NOT fatal. Server keeps raw data for failed passes;
-      // notify the UI but keep reading so the stream drains and we get `done`.
-      if (msg.field && msg.error) {
-        try { opts.onField?.(msg.field, null, msg.error); } catch (_) { /* UI error */ }
-        continue;
-      }
-
-      // Per-field success — progressive UI update (supports dotted paths)
-      if (msg.field) {
-        setPath(result, msg.field, msg.value);
-        try { opts.onField?.(msg.field, msg.value); } catch (_) { /* UI error should not break stream */ }
-        continue;
-      }
-
-      // Final success line — the server's `result` is authoritative
-      if (msg.done) {
-        if (msg.result && typeof msg.result === 'object') {
-          result = msg.result;
-        }
-        if (typeof msg.creditsRemaining === 'number') creditsRemaining = msg.creditsRemaining;
-        if (msg.type) finalType = msg.type;
-        if (typeof msg.partialFailure === 'boolean') partialFailure = msg.partialFailure;
-        if (Array.isArray(msg.failedFields)) failedFields = msg.failedFields;
-        if (Array.isArray(msg.succeededFields)) succeededFields = msg.succeededFields;
-      }
+      handleMessage(msg);
     }
   }
 
+  // Flush any final line that wasn't newline-terminated — the `done` marker is
+  // often the last line and may arrive without a trailing newline.
+  const tail = buffer.trim();
+  if (tail) {
+    try { handleMessage(JSON.parse(tail)); } catch { /* unparseable tail = truncation */ }
+  }
+
   if (fatalError) throw fatalError;
+  // A stream that never delivered a terminal `done` was truncated mid-flight.
+  // Surface it so the caller retries instead of persisting a partial (but
+  // credit-charged) generation as if it were complete.
+  if (!sawDone) {
+    throw new Error('AI generation ended without a completion marker (truncated response) — please retry.');
+  }
   return { result, creditsRemaining, type: finalType, partialFailure, failedFields, succeededFields };
 }
 

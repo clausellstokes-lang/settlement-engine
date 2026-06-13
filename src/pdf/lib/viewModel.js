@@ -48,6 +48,19 @@ function stressArray(s) {
 }
 
 /**
+ * Coerce a prose value that may be a string, a {primary, ...} object, or an
+ * array into a single string safe to hand to <Text> (which throws / garbles on
+ * objects). Mirrors historySlice's settlementReason handling.
+ */
+function coerceProse(v) {
+  if (v == null) return null;
+  if (typeof v === 'string') return v;
+  if (Array.isArray(v)) return v.filter(Boolean).join('\n') || null;
+  if (typeof v === 'object') return v.primary || null;
+  return String(v);
+}
+
+/**
  * Food-balance core fields, shared by the raw + active slices. Behind the
  * canonicalViewModel flag these come from the display model (which reads the
  * real dailyProduction/dailyNeed fields and applies the §1c "Not calculated"
@@ -79,17 +92,21 @@ function foodCore(viability) {
       detail:     m.detail,
     };
   }
-  const legacyNeed = Number(fb?.need) || 0;
+  // The engine emits dailyProduction/dailyNeed; the old .production/.need reads
+  // left the flag-off PDF showing "Not calculated" and losing the deficit %.
+  const prod = fb?.dailyProduction ?? fb?.production ?? null;
+  const need = fb?.dailyNeed ?? fb?.need ?? null;
+  const legacyNeed = Number(need) || 0;
   const legacyDef = Number(fb?.deficit) || 0;
   return {
-    production: fb?.production ?? null,
-    need:       fb?.need ?? null,
+    production: prod,
+    need,
     deficit:    fb?.deficit ?? null,
     surplus:    fb?.surplus ?? null,
     importCoverage: fb?.importCoverage ?? null,
     rawDeficit: fb?.rawDeficit ?? null,
     coveragePct: coveragePct(fb?.importCoverage, fb?.rawDeficit),
-    deficitPct: legacyNeed > 0 && legacyDef > 0 ? Math.round((legacyDef / legacyNeed) * 100) : null,
+    deficitPct: fb?.deficitPercent ?? (legacyNeed > 0 && legacyDef > 0 ? Math.round((legacyDef / legacyNeed) * 100) : null),
   };
 }
 
@@ -276,7 +293,8 @@ function identitySlice(s) {
     founding:       s?.history?.founding || null,
     quarters:       (s?.spatialLayout?.quarters || []).map(q => ({
       name: q?.name || 'Quarter',
-      description: q?.description || null,
+      // engine field is `desc`; the old `description`-only read printed nothing.
+      description: q?.desc || q?.description || null,
       landmarks: q?.landmarks || [],
     })),
     // Anchor facts (mirror DailyLifeTab anchor panel)
@@ -381,10 +399,12 @@ function overviewSlice(active, ai, useAi) {
     categoryDistribution,
     quarters:          (s?.spatialLayout?.quarters || []).map(q => ({
       name: q?.name || 'Quarter',
-      description: q?.description || null,
+      description: q?.desc || q?.description || null,
       landmarks: q?.landmarks || [],
     })),
-    settlementReason:   s?.settlementReason || null,
+    // Coerce: settlementReason can be an object ({primary,...}); handing that raw
+    // to <Text> crashes/garbles the whole export.
+    settlementReason:   coerceProse(s?.settlementReason),
     history: {
       foundedBy:          s?.history?.founding?.foundedBy || s?.history?.foundedBy || null,
       initialChallenge:   s?.history?.founding?.initialChallenge || s?.history?.initialChallenge || null,
@@ -400,8 +420,10 @@ function overviewSlice(active, ai, useAi) {
       terrainCriticals:  ra?.terrainCriticals || [],
       nearbyResources:   ra?.nearbyResources || [],
     },
-    coherenceNotes:    v?.coherenceNotes || [],
-    structuralSuggestions: v?.structuralSuggestions || [],
+    // coherenceNotes/structuralSuggestions live at the settlement root, not on
+    // economicViability — the old v?.* reads were always empty in the PDF.
+    coherenceNotes:    s?.coherenceNotes || v?.coherenceNotes || [],
+    structuralSuggestions: s?.structuralSuggestions || v?.structuralSuggestions || [],
     warnings:          s?.warnings || [],
   };
 }
@@ -481,7 +503,12 @@ function powerSlice(active) {
     stability:       s?.powerStructure?.stability || null,
     recentConflict:  s?.powerStructure?.recentConflict || null,
     legitimacy:      s?.powerStructure?.publicLegitimacy || null,
-    legitimacyBreakdown: s?.powerStructure?.publicLegitimacy?.breakdown || [],
+    // The engine emits breakdown as an object map ({ factor: delta }); normalize
+    // to the stable array the section iterates.
+    legitimacyBreakdown: Array.isArray(s?.powerStructure?.publicLegitimacy?.breakdown)
+      ? s.powerStructure.publicLegitimacy.breakdown
+      : Object.entries(s?.powerStructure?.publicLegitimacy?.breakdown || {})
+          .map(([key, delta]) => ({ key, delta })),
     governanceFractured: !!s?.powerStructure?.publicLegitimacy?.governanceFractured,
     criminalCapture: s?.powerStructure?.criminalCaptureState || null,
     governmentType:  s?.powerStructure?.governmentType || s?.governmentType || null,
@@ -605,8 +632,9 @@ function defenseSlice(active) {
   const threatReadiness = deriveDefenseReadiness(s);
   const armedForces = deriveArmedForces(s);
 
-  // Active military status override (from stress)
-  const militaryStress = stress.find(x => ['siege', 'occupied', 'civilWar'].includes(x?.icon || x?.key));
+  // Active military status override (from stress). Match on the stressor TYPE the
+  // engine emits, not icon/key sentinels that never held these values.
+  const militaryStress = stress.find(x => ['under_siege', 'occupied', 'wartime', 'insurgency'].includes(x?.type));
 
   // Criminal architecture. Operations come from the safety profile's criminal
   // institutions (the source the web Defense tab uses), each carrying an
@@ -653,6 +681,9 @@ function defenseSlice(active) {
     // Defense tab (the engine does not emit these as fields).
     supportingCapabilities: deriveSupportingCapabilities(s),
     vulnerabilities: dp?.vulnerabilities || s?.defenseVulnerabilities || [],
+    // Surfaced for defenseHeadline (it reads def.magicDependency).
+    magicDependency: !!dp?.magicDependency,
+    magicalCapability: dp?.magicalCapability || null,
   };
 }
 
@@ -771,13 +802,24 @@ function resourcesSlice(active) {
     nearbyAbundant:     abundant,
     nearbyCustom:       cfg.nearbyResourcesCustom || [],   // §14 — gold-tint these
     availableCommodities: ra?.availableResources || s?.availableResources || [],
-    exportPotential:    ra?.exportPotential || s?.exportPotential || [],
-    priorityNotes:      v?.priorityNotes || [],
-    structuralGaps:     ra?.structuralGaps || s?.structuralGaps || [],
+    // resourceAnalysis emits exports/gaps/priorityNotes (resourceGenerator); the
+    // old exportPotential/structuralGaps/v.priorityNotes reads never resolved.
+    exportPotential:    ra?.exports || ra?.exportPotential || s?.exportPotential || [],
+    priorityNotes:      ra?.priorityNotes || v?.priorityNotes || [],
+    structuralGaps:     ra?.gaps || ra?.structuralGaps || s?.structuralGaps || [],
     terrainEffects:     ra?.terrainEffects || s?.terrainEffects || ra?.featureEffects || [],
     terrainCriticals:   ra?.terrainCriticals || [],
     terrainAdvantages:  ra?.terrainAdvantages || [],
   };
+}
+
+// Arcane supply chains (mirrors computeActiveChains' arcane detection) — the
+// PDF Viability chapter renders these as "magically sustained" tags.
+const ARCANE_CHAIN_IDS = ['alchemy', 'spellcasting', 'magical_goods', 'planar'];
+function isArcaneChain(ch) {
+  const id = String(ch?.chainId || ch?.id || '').toLowerCase();
+  const label = String(ch?.label || '').toLowerCase();
+  return ARCANE_CHAIN_IDS.some(a => id.includes(a)) || /arcane|magic|spell/.test(label);
 }
 
 function viabilitySlice(active) {
@@ -786,28 +828,38 @@ function viabilitySlice(active) {
   const dp = s?.defenseProfile || {};
   const stress = stressArray(s);
 
+  // The engine doesn't emit stressConsequences / byDesignContradictions /
+  // activeMagicChains directly — derive them the same way the web ViabilityTab
+  // does, and exclude the special-typed issues from the main list so they don't
+  // render twice (they get their own PDF sections).
+  const stressConsequences = [...(v.issues || []), ...(v.warnings || [])].filter(i => i?.type === 'stress_consequence');
+  const byDesignContradictions = (v.issues || []).filter(i => i?.severity === 'by_design');
+  const activeMagicChains = (s?.economicState?.activeChains || []).filter(isArcaneChain);
+
   return {
     viable:                v.viable,
     verdict:               v?.verdict || (v?.viable === true ? 'viable' : v?.viable === false ? 'notViable' : null),
     verdictTone:           VIABILITY_TONE[(v?.verdict || '').toLowerCase()] || (v?.viable === true ? 'good' : v?.viable === false ? 'bad' : 'muted'),
     summary:               viabilitySummaryFor(s),
     metrics:               v.metrics || {},
-    issues:                (v.issues || []).map(iss => ({
-      severity: iss?.severity,
-      title: iss?.title,
-      description: iss?.description,
-      institution: iss?.institution,
-      priorityNote: iss?.priorityNote,
-      suggestedFixes: iss?.suggestedFixes || [],
-    })),
-    criticalIssues:        v?.criticalIssues || (v?.issues || []).filter(i => (i?.severity || '').toLowerCase() === 'critical'),
+    issues:                (v.issues || [])
+      .filter(iss => iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence')
+      .map(iss => ({
+        severity: iss?.severity,
+        title: iss?.title,
+        description: iss?.description,
+        institution: iss?.institution,
+        priorityNote: iss?.priorityNote,
+        suggestedFixes: iss?.suggestedFixes || [],
+      })),
+    criticalIssues:        v?.criticalIssues || (v?.issues || []).filter(i => (i?.severity || '').toLowerCase() === 'critical' && i?.type !== 'stress_consequence'),
     warnings:              [...(v?.warnings || []), ...(s?.warnings || [])],
     structuralViolations:  s?.structuralViolations || [],
     stress:                stress.map(x => ({ label: x?.label || x?.icon, summary: x?.summary, hook: x?.crisisHook })),
-    stressConsequences:    v?.stressConsequences || [],
+    stressConsequences:    v?.stressConsequences?.length ? v.stressConsequences : stressConsequences,
     magicDependency:       !!dp?.magicDependency,
-    activeMagicChains:     v?.activeMagicChains || [],
-    byDesignContradictions: v?.byDesignContradictions || [],
+    activeMagicChains:     v?.activeMagicChains?.length ? v.activeMagicChains : activeMagicChains,
+    byDesignContradictions: v?.byDesignContradictions?.length ? v.byDesignContradictions : byDesignContradictions,
   };
 }
 

@@ -246,7 +246,12 @@ export const createCustomContentSlice = (set, get) => ({
     const flag = migrationFlag(ownerId);
     if (localStorage.getItem(flag) === '1') return;
 
-    const items = flattenLocalContent(ownerId);
+    // Grandfathered custom content lives in the ANON bucket (created before sign-in);
+    // content authored while signed-in-but-pre-cloud lives in the owner bucket.
+    // Read both so grandfathered items actually reach the cloud.
+    const anonItems = flattenLocalContent('anon');
+    const ownerItems = ownerId === 'anon' ? [] : flattenLocalContent(ownerId);
+    const items = [...anonItems, ...ownerItems];
     if (!items.length) {
       localStorage.setItem(flag, '1');
       return;

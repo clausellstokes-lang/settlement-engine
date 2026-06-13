@@ -176,9 +176,9 @@ export function AIAppendix({ settlement, narrativeMode, vm }) {
                   {String(i + 1).padStart(2, '0')}
                 </Text>
                 <View style={{ flex: 1 }}>
-                  {fp.parties && (
+                  {(fp.who || fp.parties) && (
                     <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'], marginBottom: 1 }}>
-                      {(Array.isArray(fp.parties) ? fp.parties.join(' ↔ ') : String(fp.parties)).toUpperCase()}
+                      {(() => { const p = fp.who || fp.parties; return (Array.isArray(p) ? p.join(' ↔ ') : String(p)).toUpperCase(); })()}
                     </Text>
                   )}
                   <Text style={type.body}>{textOf(fp)}</Text>
@@ -216,9 +216,9 @@ export function AIAppendix({ settlement, narrativeMode, vm }) {
                 <Text style={{ ...type.body_em, color: palette.ink, width: 130 }}>
                   {endpointOf(c.to || c.target || c.b)}
                 </Text>
-                {c.note && (
+                {(c.via || c.note) && (
                   <Text style={{ ...type.caption, color: palette.muted, flex: 1, marginLeft: 8 }}>
-                    {c.note}
+                    {c.via ? `via ${c.via}` : c.note}
                   </Text>
                 )}
               </View>
@@ -237,7 +237,7 @@ function textOf(item) {
   // through here, so it must be defused like the rest of the dossier text.
   if (typeof item === 'string') return safe(item);
   return safe(
-    item.text || item.description || item.summary || item.label || item.title || item.detail || '',
+    item.text || item.what || item.description || item.summary || item.label || item.title || item.detail || '',
   );
 }
 
@@ -249,7 +249,9 @@ function endpointOf(e) {
 
 function relationshipOf(c) {
   if (!c) return 'LINK';
-  return (c.relationship || c.type || c.kind || 'LINK').toUpperCase();
+  // Canonical connection shape is { nature, via }; the old reads never resolved
+  // so every edge labelled 'LINK'.
+  return String(c.nature || c.relationship || c.type || c.kind || 'LINK').toUpperCase();
 }
 
 export default AIAppendix;

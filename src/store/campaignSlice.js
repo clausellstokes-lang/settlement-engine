@@ -153,9 +153,10 @@ function isUuid(value) {
 
 function persistSaveUpdate(saveId, partial) {
   if (!saveId || !partial) return;
+  // Swallow-and-warn (mirrors settlementSlice): several callers fire-and-forget,
+  // so a rethrow here produced unhandled promise rejections on save failure.
   return savesService.update(saveId, partial).catch(e => {
     console.warn('[campaignSlice] save update failed', e);
-    throw e;
   });
 }
 
@@ -400,6 +401,9 @@ export const createCampaignSlice = (set, get) => ({
     if (!campaignService.isConfigured) return Promise.resolve(cached);
     return campaignService.list()
       .then(remote => {
+        // Stale-owner guard: a sign-out/sign-in completing mid-flight would
+        // otherwise write the previous user's campaigns into state/cache.
+        if (campaignCacheOwner(get()) !== ownerId) return get().campaigns;
         const migratedRemote = remote.map(migrateCampaign);
         primeCampaignSync(migratedRemote);
         const merged = mergeCampaignLists(cached, migratedRemote);

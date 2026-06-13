@@ -17,14 +17,15 @@
  * Storage shape:
  *   { settlement, checkoutToken, stashedAt, sessionId? }
  *
- * Sessions older than 1 hour are treated as stale and cleared on read.
- * That's enough time for a normal Stripe checkout, and short enough
- * that a re-loaded tab from yesterday doesn't surprise the user with
- * an old dossier.
+ * Sessions older than the TTL are treated as stale and cleared on read.
+ * The TTL must be at least as long as a Stripe Checkout session lives
+ * (default ~24h) — a shorter window (the old 1 hour) silently destroyed
+ * the stash of a user who paid and returned later, handing them a receipt
+ * for an empty dossier.
  */
 
 const KEY = 'sf.pendingDossier';
-const TTL_MS = 60 * 60 * 1000; // 1 hour
+const TTL_MS = 24 * 60 * 60 * 1000; // 24 hours — matches Stripe's session lifetime
 
 /**
  * Stash the current settlement for retrieval after Stripe checkout.
