@@ -302,15 +302,19 @@ const generateStabilityScore = (population, terrain, institutions, config, foodB
     }
   }
 
-  // Viability trade issues flagged by economic state
-  if (config?.mustImport) {
-    config.mustImport.forEach((resource) => {
+  // Viability trade issues flagged by economic state. The terrain's mustImport list
+  // (TERRAIN_DATA, e.g. coastal grain/timber) is the live source here — config never
+  // carries mustImport. Needles must be lowercase to match the lowercased name, and
+  // the grain branch excludes sawmills ('sawmill'.includes('mill') is true).
+  const mustImport = terrain?.mustImport || config?.mustImport;
+  if (mustImport) {
+    mustImport.forEach((resource) => {
       const hasProcessor = institutions.some((i) => {
         const n = (i.name || '').toLowerCase();
         return (
-          (resource.toLowerCase().includes('grain') && n.includes('Mill')) ||
-          (resource.toLowerCase().includes('timber') && n.includes('Sawmill')) ||
-          (resource.toLowerCase().includes('metal') && (n.includes('Smith') || n.includes('Smelter')))
+          (resource.toLowerCase().includes('grain') && n.includes('mill') && !n.includes('sawmill')) ||
+          (resource.toLowerCase().includes('timber') && n.includes('sawmill')) ||
+          (resource.toLowerCase().includes('metal') && (n.includes('smith') || n.includes('smelter')))
         );
       });
       if (hasProcessor) {
@@ -1160,7 +1164,7 @@ const generateEconomicNarrative = (prosperity, config = {}, institutions = []) =
   let idx = BASE[prosperity] !== undefined ? BASE[prosperity] : 2;
   // Subsistence isolated settlements can still struggle further — 35% chance of Struggling
   if (prosperity === 'Subsistence') {
-    idx = _rng() < 0.4 ? 0 : _rng() < 0.5 ? 0 : 1; // 40% Struggling, ~30% Poor, ~30% luckier
+    idx = _rng() < 0.4 ? 0 : _rng() < 0.5 ? 1 : 2; // 40% Struggling, 30% Poor, 30% luckier
     idx = Math.max(0, Math.min(1, idx)); // cap at Poor — subsistence can never be Moderate+
   }
   // Economy output adjustments — calibrated for truly random sliders (5-95 uniform)
@@ -1749,7 +1753,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           percentage: 35,
           desc: 'Import and export taxes, anchorage fees, and customs inspection on all cargo.',
         })
-      : hasInst('dock', 'port facilit') &&
+      : hasInst('docks/port', 'port facilit') &&
         tradeRoute === 'river' &&
         incomeBuild.push({
           source: 'River Tolls',
@@ -2016,7 +2020,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           source: 'Wool & Textile Trade',
           percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
           desc: X('grazing_land')
-            ? 'Local flocks provide raw wool; weavers and fullers convert SEVERITY to cloth sold across the region.'
+            ? 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.'
             : 'Wool bought from pastoral regions and processed locally — value-add trade dependent on consistent supply.',
         }),
       (X('iron_deposit', 'coal_deposit', 'precious_metal') ||
@@ -2577,8 +2581,19 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
 // generateEconomicViability
 export // sortBySeverity
 const sortBySeverity = (r) => {
-  const s = { [SEVERITY.CRITICAL]: 0, [SEVERITY.IMPLAUSIBLE]: 1, [SEVERITY.DEPENDENCY]: 2, [SEVERITY.INEFFICIENCY]: 3 };
-  return r.sort((o, d) => s[o.severity] - s[d.severity]);
+  // generateEconomicViability also pushes raw 'warning'/'note' severities (see the
+  // viability warnings/notes below), which were missing here and produced NaN
+  // comparisons that left the list in an arbitrary order. Rank them explicitly and
+  // default any unknown severity to the end so the comparator is always consistent.
+  const s = {
+    [SEVERITY.CRITICAL]: 0,
+    [SEVERITY.IMPLAUSIBLE]: 1,
+    [SEVERITY.DEPENDENCY]: 2,
+    warning: 3,
+    [SEVERITY.INEFFICIENCY]: 4,
+    note: 5,
+  };
+  return r.sort((o, d) => (s[o.severity] ?? 9) - (s[d.severity] ?? 9));
 };
 export const generateEconomicViability = (settlement, terrainType = null, nearbyResources = []) => {
   const issues = [];

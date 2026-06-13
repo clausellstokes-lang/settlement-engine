@@ -217,6 +217,9 @@ const buildHistoryContext = (config, institutions = [], economicState = null, po
     tradeRouteAccess: route,
     magicLevel,
     monsterThreat: threat || 'frontier',
+    // resolveResources writes the resolved resource list back to config.nearbyResources;
+    // surface it so the resource-anchored history events below are reachable.
+    nearbyResources: config.nearbyResources || [],
     primaryExports: exports,
     incomeSources: (economicState?.incomeSources || []).map(s => s.source),
     prosperity: economicState?.prosperity || 'Modest',
@@ -860,12 +863,16 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     if (usedNames.has(tmplName)) continue;
     usedNames.add(tmplName);
 
-    // Spread event across the age timeline
+    // Spread event across the age timeline. Clamp the bounds so a young (custom-age)
+    // settlement never produces events older than itself — randInt(5, <5) used to
+    // invert and yield negative timeline years for ages 1-4.
     const fraction = i / eventCount;
     const nextFraction = (i + 1) / eventCount;
     const minYearsAgo = Math.floor(age * fraction);
     const maxYearsAgo = Math.floor(age * nextFraction);
-    const yearsAgo = randInt(Math.max(minYearsAgo, 5), maxYearsAgo);
+    const loYearsAgo = Math.min(Math.max(minYearsAgo, 5), age);
+    const hiYearsAgo = Math.max(loYearsAgo, maxYearsAgo);
+    const yearsAgo = Math.min(age, randInt(loYearsAgo, hiYearsAgo));
 
     // Build context tokens
     const contextTokens = context ? generateTradeNarrative2(cat, context) : {};
@@ -879,38 +886,49 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
 
   if (!context) return events.sort((a, b) => a.yearsAgo - b.yearsAgo);
 
-  // Anchor events to specific settlement-appropriate narratives
-  const anchored = [...events].sort((a, b) => a.yearsAgo - b.yearsAgo);
+  // Anchor events to settlement-appropriate narratives. Iterate a timeline-ordered
+  // copy but write each replacement back to the event's REAL slot in `events`. The
+  // previous version wrote events[idx] using an index into a differently-sorted copy,
+  // which scrambled the timeline and lost/duplicated events; and for categories with
+  // no anchor it fell back to re-rendering the already-rendered events[idx], so
+  // pick() turned that event's string severity into a single character. Every
+  // category the main loop can emit now maps to a real template; an unmapped one
+  // keeps its original event rather than the corrupting fallback.
+  const ANCHOR_TYPE_MAP = {
+    economic: 'economic_disparity',
+    political: 'succession_crisis',
+    disaster: 'external_threat',
+    religious: 'religious_tension',
+    magical: 'magical_controversy',
+    occupation_infiltration: 'infiltration_fear',
+    exile_return: 'occupation_legacy',
+    demographic: 'population_friction',
+  };
+  const anchoredOrder = [...events].sort((a, b) => a.yearsAgo - b.yearsAgo);
   const anchoredTypes = new Set();
 
-  anchored.forEach((event, idx) => {
+  anchoredOrder.forEach((event) => {
     const cat = event.type;
     if (anchoredTypes.has(cat)) return;
+    anchoredTypes.add(cat);
 
     const contextTokens = generateTradeNarrative2(cat, context) || {};
     if (_rng() < 0.6) {
-      const anchored = generateEventNarrative(
-        HISTORICAL_EVENTS_DATA.find(e => {
-          const typeMap = {
-            economic: 'economic_disparity',
-            political: 'succession_crisis',
-            disaster: 'external_threat',
-            religious: 'religious_tension',
-            magical: 'magical_controversy',
-          };
-          return e.type === typeMap[cat];
-        }) || events[idx],
-        event.yearsAgo,
-        contextTokens,
-      );
-      if (anchored) {
-        anchored.type = cat;
-        anchored.anchored = true;
-        events[idx] = anchored;
+      const anchorType = ANCHOR_TYPE_MAP[cat];
+      const tmpl = anchorType ? HISTORICAL_EVENTS_DATA.find(e => e.type === anchorType) : null;
+      if (!tmpl) return; // no settlement-appropriate anchor — keep the original event
+      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens);
+      if (replacement) {
+        replacement.type = cat;
+        replacement.anchored = true;
+        const realIdx = events.indexOf(event);
+        if (realIdx !== -1) events[realIdx] = replacement;
       }
     }
-    anchoredTypes.add(cat);
   });
+
+  // Re-sort: anchor replacements preserve yearsAgo, but keep the timeline canonical.
+  events.sort((a, b) => (b.yearsAgo || 0) - (a.yearsAgo || 0));
 
   // Add resource-specific historical events based on nearby resources
   const nearbyResources = context.nearbyResources || [];
@@ -997,6 +1015,10 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
 
   if (resourceEvents.length > 0 && events.length < 7) {
     const chosen = resourceEvents[Math.floor(_rng() * resourceEvents.length)];
+    // Resource events are authored with an array severity (like a template); collapse
+    // it to a single rendered string so downstream consumers (e.g. historyBeats
+    // severityScore) see the same shape as generateEventNarrative output.
+    if (Array.isArray(chosen.severity)) chosen.severity = pick(chosen.severity);
     // Strip plot hooks from ancient resource events (same ≤80y rule)
     if ((chosen.yearsAgo || 0) > 80) chosen.plotHooks = [];
     events.push(chosen);

@@ -83,7 +83,10 @@ registerStep('resolveConfig', {
     ? config.population
     : rng.randInt(popRange.min, popRange.max);
 
-  const noMagic  = config.magicExists === false || (basePriorityMagic || 0) === 0;
+  // Derive noMagic from the already-resolved effective priority so the two can't
+  // drift: previously an absent priorityMagic counted as 0 here (noMagic=true) while
+  // priorityMagicEffective defaulted to 50, giving contradictory magic signals.
+  const noMagic  = priorityMagicEffective === 0;
   const townPlus = TOWN_PLUS_TIERS.includes(tier);
 
   // Random terrain

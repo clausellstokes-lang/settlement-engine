@@ -29,8 +29,20 @@ registerStep('generatePower', {
   // Note: neighbour faction influence is consumed by the separate
   // neighbourFactions step (ctx.neighbourFacBias); generatePowerStructure
   // itself reads no neighbour bias, so none is threaded into its config.
+  //
+  // The 3rd arg (tradeRoute) drives the hostile-neighbour stability band and the
+  // "Ongoing tensions with {neighbour}" recentConflict line. resolveNeighbour writes
+  // effectiveConfig.neighborRelationship = { neighborName, relationshipType } when a
+  // neighbour is bound. Pass it ONLY for adversarial relationships — the recentConflict
+  // branch fires for ANY truthy value, so an allied/trade_partner neighbour must be
+  // passed as null to avoid a false "ongoing tensions" claim.
+  const neighbourRel = effectiveConfig.neighborRelationship;
+  const ADVERSARIAL_REL = new Set(['hostile_rival', 'Hostile rival', 'cold_war', 'Cold war', 'tense']);
+  const tradeRouteArg = neighbourRel && ADVERSARIAL_REL.has(neighbourRel.relationshipType)
+    ? neighbourRel
+    : null;
   const powerStructure = generatePowerStructure(
-    tier, economicState, null,
+    tier, economicState, tradeRouteArg,
     { ...effectiveConfig },
     institutions
   );

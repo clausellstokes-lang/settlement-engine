@@ -233,7 +233,11 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
         (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill')
       );
       const hasExternalMill = instNames.some(n => n.includes('access to external mill'));
-      const externalMillOnly = hasExternalMill && !hasLocalMill;
+      // The banalité lockout is a MILLING concern — scope it to mill-processed chains
+      // (the grain chain), not every active chain. Otherwise a hamlet with "Access to
+      // external mill" had its livestock, fish, timber, etc. exports all suppressed.
+      const isMillChain = (chain.processingInstitutions || []).some(p => /\bmill/i.test(p));
+      const externalMillOnly = isMillChain && hasExternalMill && !hasLocalMill;
       const effectiveExportable = externalMillOnly ? false : chain.exportable;
       const externalMillNote = externalMillOnly
         ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +

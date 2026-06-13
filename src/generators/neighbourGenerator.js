@@ -128,12 +128,19 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
   // Active supply chain IDs
   const activeChains    = econ.activeChains    || [];
 
-  // Prosperity → economic strength 0–1
+  // Prosperity → economic strength 0–1. The engine emits the prosperity *label*
+  // on econ.prosperity (economicGenerator emits `prosperity`, not `prosperityLevel`);
+  // keep prosperityLevel as a legacy fallback. The canonical band order is
+  // Struggling(lowest)→Poor→Moderate→Comfortable→Prosperous→Wealthy; Subsistence and
+  // the legacy Modest/Affluent/Thriving/Impoverished labels are kept as aliases.
   const PROSPERITY_RANK = {
-    'Subsistence':0.05,'Poor':0.2,'Struggling':0.3,'Modest':0.45,
-    'Moderate':0.55,'Comfortable':0.65,'Prosperous':0.75,'Wealthy':0.85,'Affluent':1.0,
+    'Subsistence':0.05,'Impoverished':0.1,'Struggling':0.1,'Poor':0.25,'Modest':0.4,
+    'Moderate':0.5,'Comfortable':0.65,'Prosperous':0.8,'Thriving':0.9,'Wealthy':0.95,'Affluent':1.0,
   };
-  const economicStrength = PROSPERITY_RANK[econ.prosperityLevel] ?? 0.5;
+  const prosperityLabel =
+    typeof econ.prosperity === 'string' ? econ.prosperity
+      : econ.prosperity?.level || econ.prosperityLevel;
+  const economicStrength = PROSPERITY_RANK[prosperityLabel] ?? 0.5;
 
   // Military strength from config priority
   const militaryStrength = ((config.priorityMilitary ?? 50) / 100);

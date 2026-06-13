@@ -76,7 +76,12 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
  * Uses the pipeline's generatePopulation step in isolation.
  */
 export function regenNPCsPipeline(settlement, config) {
-  const npcs = generateNPCs({ tier: settlement.tier, institutions: settlement.institutions || [] }, config.culture || 'germanic', config);
+  const npcs = generateNPCs({
+    tier: settlement.tier,
+    institutions: settlement.institutions || [],
+    powerStructure: settlement.powerStructure,
+    economicState: settlement.economicState,
+  }, config.culture || 'germanic', config);
   const relationships = generateRelationships(npcs, config, settlement.institutions || []);
   const factions = generateFactions(npcs, relationships);
 

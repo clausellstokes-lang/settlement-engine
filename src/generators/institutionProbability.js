@@ -31,6 +31,16 @@ export const getBaseChance = (
   const inst = name.toLowerCase();
   let chance = baseChance;
 
+  // Resolve the real tier. config.settType may be the sentinel 'random'/'custom'
+  // (DEFAULT_CONFIG.settType is 'random'), in which case resolveConfig has already
+  // written the resolved tier to config.tier. Prefer config.tier so tier-scaled
+  // logic below isn't silently keyed off a sentinel — mirrors the tier-first
+  // pattern in economicGenerator.js. Drops the old 'custom'→'village'/'town'
+  // hardcodes: popToTier resolved the true tier into config.tier.
+  const resolvedTier =
+    config.tier ||
+    (TIER_ORDER.includes(config.settType) ? config.settType : null);
+
   // ── Priority-based category multipliers ───────────────────────────────────
 
   // Economy institutions scale with economy priority
@@ -77,7 +87,7 @@ export const getBaseChance = (
     // Small settlements need magic priority well above average to sustain arcane institutions
     const tierMagicPenalty = {
       thorp: 0.15, hamlet: 0.25, village: 0.40, town: 0.75, city: 1.0, metropolis: 1.0
-    }[config.settType || config.tier || 'town'] ?? 0.75;
+    }[resolvedTier || 'town'] ?? 0.75;
     chance *= magicMult * tierMagicPenalty;
 
     // Druid/nature institutions: boost on natural routes, but not excluded from others
@@ -131,7 +141,7 @@ export const getBaseChance = (
   // detect the infrastructure and downgrade from critical to warning.
   const isHighMagicIsolated = config.tradeRouteAccess === 'isolated' &&
     (config.priorityMagic || 0) >= 70 &&
-    ['town','city','metropolis'].includes(config.settType || config.tier || '');
+    ['town','city','metropolis'].includes(resolvedTier || '');
   if (isHighMagicIsolated &&
       (inst.includes('teleportation') || inst.includes('planar') || inst.includes('airship'))) {
     chance = Math.min(1, chance * 4); // 4× boost for isolation-solving magic infra
@@ -208,7 +218,7 @@ export const getBaseChance = (
     const profile = neighbor.dynamics ? neighbor : null; // neighbourProfile has .dynamics
     if (profile) {
       const dyn = profile.dynamics || {};
-      const ownTier    = config.settType === 'custom' ? 'village' : (config.settType || 'village');
+      const ownTier    = resolvedTier || 'village';
       const tierDiff   = TIER_ORDER.indexOf(ownTier) - TIER_ORDER.indexOf(profile.tier || 'village');
 
       // Tier-based government suppression (patron is much larger)
@@ -245,7 +255,7 @@ export const getBaseChance = (
     } else {
       // Legacy path: raw neighbour object (old format)
       const neighborTier = neighbor.tier || 'village';
-      const ownTier      = config.settType === 'custom' ? 'village' : (config.settType || 'village');
+      const ownTier      = resolvedTier || 'village';
       const tierDiff     = TIER_ORDER.indexOf(ownTier) - TIER_ORDER.indexOf(neighborTier);
       const relType      = (neighbor?.relationshipType || neighbor?.neighborRelationship?.relationshipType || '').toLowerCase();
       if (tierDiff < -1 && (cat.includes('government') || inst.includes('court'))) chance *= 0.4;
@@ -257,7 +267,7 @@ export const getBaseChance = (
 
   // ── Goods-toggle penalties ────────────────────────────────────────────────
   const modifiers = getPriorityModifiers(
-    config.settType === 'custom' ? 'town' : (config.settType || 'town'),
+    resolvedTier || 'town',
     goodsToggles
   );
   Object.entries(modifiers).forEach(([keyword, multiplier]) => {

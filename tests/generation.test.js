@@ -112,7 +112,7 @@ describe('snapshot shape', () => {
         "hasSpatial": true,
         "hookCount": 0,
         "institutionCount": 37,
-        "npcCount": 4,
+        "npcCount": 6,
         "populationBucket": "100-1000",
         "stressCount": 0,
         "tier": "village",
