@@ -159,6 +159,15 @@ export default function App() {
     }
   }, [authLoading, authTier, authUserId, loadCampaigns]);
 
+  // Refresh the credit balance on auth transitions (in-session sign-in/out).
+  // The mount-only fetch above left a user who signed in after load with a stale
+  // balance — blocking AI actions and pushing the purchase modal despite credits.
+  useEffect(() => {
+    if (authLoading) return;
+    import('./lib/stripe.js').then(({ fetchCreditBalance }) =>
+      fetchCreditBalance().then(bal => setCreditBalance(bal)));
+  }, [authLoading, authUserId, setCreditBalance]);
+
   // ── Auth guards ─────────────────────────────────────────────────────────
   // Gated routes redirect once the session has resolved. 'auth' views bounce
   // anonymous visitors to /signin carrying ?next= (so they return to the

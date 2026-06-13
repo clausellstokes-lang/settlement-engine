@@ -120,7 +120,15 @@ export function useGalleryPageState(routeSlug = null) {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
-    if (slug) void Promise.resolve().then(() => openDossier(slug, { replace: true }));
+    if (slug) {
+      void Promise.resolve().then(() => openDossier(slug, { replace: true }));
+      return;
+    }
+    // No slug in the route (e.g. browser Back from /gallery/:slug → /gallery):
+    // close the open dossier so the view matches the URL.
+    setActiveSlug(null);
+    setDossier(null);
+    setDossierError(null);
   }, [routeSlug, openDossier]);
 
   const loadMore = useCallback(async () => {

@@ -22,7 +22,7 @@ function formatRecentDate(value) {
   return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
+export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onReroll}) {
   const [expandedEvent, setExpandedEvent] = useState(null);
   if (!r?.history) return <Empty message="No historical data available."/>;
   const h = r.history;
@@ -79,6 +79,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = []}) {
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3}}>{age} years old</span>
           {sortedEvents.length>0&&<span style={{fontSize:FS.sm,color:MUTED}}>{sortedEvents.length} historical events · {currentTensions.length} current tensions</span>}
+          {onReroll&&<button onClick={onReroll} style={{marginLeft:'auto',fontSize:FS.xs,fontWeight:700,color:swatch['#A0762A'],background:swatch['#F7F0E4'],border:'1px solid #c8b89a',borderRadius:5,padding:'5px 12px',cursor:'pointer',flexShrink:0}}>↺ Reroll</button>}
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>

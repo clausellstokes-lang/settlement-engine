@@ -74,7 +74,12 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
     out = out.filter(s => !isCanonSave(s) && savePhase(s) === 'draft');
   }
   if (filters.hasNeighbours) {
-    out = out.filter(s => Array.isArray(s.neighbourLinks) && s.neighbourLinks.length > 0);
+    // The neighbour list lives at settlement.neighbourNetwork (mirrored to the
+    // Supabase row's neighbour_links); the old top-level save.neighbourLinks
+    // field never exists, so this chip always returned nothing.
+    out = out.filter(s =>
+      (s.settlement?.neighbourNetwork?.length > 0) ||
+      (Array.isArray(s.neighbour_links) && s.neighbour_links.length > 0));
   }
   if (filters.hasPendingEdits) {
     out = out.filter(s => s.campaignState?.editedAt && s.campaignState?.editedAt !== s.campaignState?.canonizedAt);

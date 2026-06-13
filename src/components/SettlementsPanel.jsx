@@ -1008,15 +1008,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     ignoreAllQueuedRegionalImpacts(campaignId);
   }, [ignoreAllQueuedRegionalImpacts]);
 
-  // Derive assigned/unassigned settlement grouping
-  const assignedIds = useMemo(() => {
-    const ids = new Set();
-    for (const c of activeCampaigns) for (const id of c.settlementIds) ids.add(id);
-    return ids;
-  }, [activeCampaigns]);
-
-  const unassignedSaves = useMemo(() => saves.filter(s => !assignedIds.has(s.id)), [saves, assignedIds]);
-
   // P108 / E-6 — Library search + sort + filter state. Self-contained
   // here; LibraryToolbar is a controlled component. The filter pipeline
   // (applyLibraryFilters) is a pure function over the saves array.
@@ -1030,6 +1021,22 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       filters: libraryFilters,
     });
   }, [saves, libraryQuery, librarySort, libraryFilters]);
+  // Set of save ids surviving the active query/filter — the rendered collections
+  // below intersect with this so the toolbar isn't inert.
+  const filteredIds = useMemo(() => new Set(filteredSaves.map(s => s.id)), [filteredSaves]);
+
+  // Derive assigned/unassigned settlement grouping (from the FILTERED set so the
+  // search/sort/filter UI actually changes what renders).
+  const assignedIds = useMemo(() => {
+    const ids = new Set();
+    for (const c of activeCampaigns) for (const id of c.settlementIds) ids.add(id);
+    return ids;
+  }, [activeCampaigns]);
+
+  const unassignedSaves = useMemo(
+    () => filteredSaves.filter(s => !assignedIds.has(s.id)),
+    [filteredSaves, assignedIds],
+  );
 
   const onViewSettlement = (s) => {
     if (!isSaveActive(s)) return;
@@ -1109,7 +1116,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           {/* Campaign folders */}
           {campaigns.map(campaign => {
             const campSaves = canManageCampaigns && isCampaignActive(campaign)
-              ? campaign.settlementIds.map(id => saves.find(s => s.id === id)).filter(Boolean)
+              ? campaign.settlementIds.map(id => saves.find(s => s.id === id))
+                  .filter(Boolean).filter(s => filteredIds.has(s.id))
               : [];
             return (
               <CampaignFolder key={campaign.id} campaign={campaign} settlements={campSaves}

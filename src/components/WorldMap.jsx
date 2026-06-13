@@ -510,8 +510,10 @@ export default function WorldMap({ onNavigate } = {}) {
     if (!bridge?.isReady) return;
     let msg = 'Regenerate the world? All unsaved placements will be lost.';
     if (flag('mapAutosave')) {
-      const placedCount = (useStore.getState().mapPlacements || []).length;
-      const labelCount = (useStore.getState().mapLabels || []).length;
+      // Placements/labels live under mapState; the old top-level mapPlacements/
+      // mapLabels keys don't exist, so the loss-count warning never fired.
+      const placedCount = Object.keys(useStore.getState().mapState.placements || {}).length;
+      const labelCount = (useStore.getState().mapState.labels || []).length;
       if (placedCount || labelCount) {
         msg = `Regenerate the world? You'll lose ${placedCount} placement${placedCount === 1 ? '' : 's'}` +
               (labelCount ? ` and ${labelCount} label${labelCount === 1 ? '' : 's'}` : '') +
@@ -556,12 +558,10 @@ export default function WorldMap({ onNavigate } = {}) {
         // ⌘S = save, ⌘Z handled by store actions (if registered)
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') {
           e.preventDefault();
-          // ⌘S — save map. The actual save handler lives elsewhere in
-          // this component (handleSaveMapToCampaign); we look it up
-          // from the store as a fallback when the local closure
-          // doesn't have it in scope.
-          const fn = useStore.getState().saveMapToCampaign;
-          if (typeof fn === 'function') fn();
+          // ⌘S — save map. Call the component's own handler; the previously
+          // referenced store action `saveMapToCampaign` does not exist, so this
+          // silently no-op'd while suppressing the browser's Save dialog.
+          handleSaveMapToCampaign();
         }
         return;
       }
@@ -576,8 +576,8 @@ export default function WorldMap({ onNavigate } = {}) {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-   
-  }, [setMapMode, handleFit]);
+
+  }, [setMapMode, handleFit, handleSaveMapToCampaign]);
 
   // ── Toasts ─────────────────────────────────────────────────────────────
   const toastTimerRef = useRef(null);
@@ -660,7 +660,7 @@ export default function WorldMap({ onNavigate } = {}) {
                 cursor: 'pointer', minWidth: 180,
               }}
             >
-              <option value="">, No campaign</option>
+              <option value="">— No campaign</option>
               {activeCampaigns.map(c => (
                 <option key={c.id} value={c.id}>
                   {c.name}{c.mapState ? ' ●' : ''}

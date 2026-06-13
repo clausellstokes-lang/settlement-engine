@@ -71,11 +71,10 @@ export function useReturnVisit() {
 
   const lastSettlement = useMemo(() => {
     if (!Array.isArray(savedSettlements) || savedSettlements.length === 0) return null;
-    const ranked = [...savedSettlements].sort((a, b) => {
-      const aTs = Number(a.campaignState?.editedAt || a.savedAt || 0);
-      const bTs = Number(b.campaignState?.editedAt || b.savedAt || 0);
-      return bTs - aTs;
-    });
+    // editedAt is an ISO string and savedAt is epoch millis — Number(ISO) is NaN,
+    // which made the comparator return NaN and the "welcome back" pick arbitrary.
+    const tsOf = (x) => Date.parse(x.campaignState?.editedAt) || Number(x.savedAt) || 0;
+    const ranked = [...savedSettlements].sort((a, b) => tsOf(b) - tsOf(a));
     return ranked[0] || null;
   }, [savedSettlements]);
 

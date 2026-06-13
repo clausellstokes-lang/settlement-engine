@@ -942,7 +942,9 @@ function CustomContentManager({ search }) {
                   {item.affects.map((a, i) => (
                     <span key={i} style={{
                       fontSize:FS.micro, fontWeight:700, color:swatch.danger,
-                      background:swatch.danger, border:'1px solid #8b1a1a44',
+                      // Translucent danger fill — was solid swatch.danger on
+                      // swatch.danger text, rendering the label invisible.
+                      background:`${swatch.danger}14`, border:'1px solid #8b1a1a44',
                       borderRadius:8, padding:'1px 6px',
                       textTransform:'uppercase', letterSpacing:'0.04em',
                     }}>{a}</span>

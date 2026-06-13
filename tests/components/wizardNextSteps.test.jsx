@@ -15,7 +15,7 @@ vi.mock('../../src/store/index.js', () => {
   const data = {
     settlement: { tier: 'Village' },
     canSave: () => false,
-    auth: { tier: 'wanderer' },
+    auth: { tier: 'anon' },
   };
   function useStore(selector) { return selector(data); }
   useStore.getState = () => data;
@@ -31,7 +31,7 @@ describe('WizardNextSteps — W-4 post-generate guide', () => {
     useStore.__set({
       settlement: { tier: 'Village' },
       canSave: () => false,
-      auth: { tier: 'wanderer' },
+      auth: { tier: 'anon' },
     });
   });
   afterEach(() => cleanup());
@@ -58,7 +58,7 @@ describe('WizardNextSteps — W-4 post-generate guide', () => {
   });
 
   it('shows the library save framing for signed-in users who can save', () => {
-    useStore.__set({ canSave: () => true, auth: { tier: 'cartographer' } });
+    useStore.__set({ canSave: () => true, auth: { tier: 'premium' } });
     render(<WizardNextSteps />);
     expect(screen.getByText(/Save it to your library/i)).toBeTruthy();
   });

@@ -422,7 +422,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'power':      return React.createElement(PowerTab, { powerStructure: s.powerStructure, settlement: s, narrativeNote: null });
       case 'defense':    return React.createElement(DefenseTab, { settlement: s, narrativeNote: null });
       case 'npcs':       return React.createElement(NPCsTab, { npcs: s.npcs, settlement: s, onRerollNPCs: onRegenerate ? () => onRegenerate('npcs') : null, narrativeNote: null, pinnedIds, onTogglePin });
-      case 'history':    return React.createElement(HistoryTab, { settlement: s, narrativeNote: null, recentEvents });
+      case 'history':    return React.createElement(HistoryTab, { settlement: s, narrativeNote: null, recentEvents, onReroll: onRegenerate ? () => onRegenerate('history') : null });
       case 'resources':  return React.createElement(ResourcesTab, { settlement: s, narrativeNote: null });
       case 'viability':  return React.createElement(ViabilityTab, { settlement: s, narrativeNote: null });
       case 'dm_compass': return React.createElement(DMCompassTab, { settlement: compassSource || s });
@@ -443,7 +443,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // Header chips read from the raw settlement — mechanical facts shouldn't
   // change between views.
   const settlement = rawSettlement;
-  const stressObj = settlement.stress
+  // Optional chaining: the null-settlement early-exit is deliberately deferred to
+  // after all hooks (line ~567), so this runs even when settlement is null.
+  const stressObj = settlement?.stress
     ? (Array.isArray(settlement.stress) ? settlement.stress[0] : settlement.stress) : null;
 
   // ── Button group state ─────────────────────────────────────────────────────

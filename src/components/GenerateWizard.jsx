@@ -689,8 +689,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         </div>
       )}
 
-      {/* Step indicator + hint (advanced mode, pre-generation) */}
-      {isAdvanced && !settlement && (
+      {/* Step indicator + hint (advanced mode, pre-generation). Bounded to real
+          steps — at wizardStep === STEPS.length the "Ready to Generate" state owns
+          the view (WizardCloseout below), so this block must not render a ghost
+          "Step N+1" banner with empty content and duplicate nav. */}
+      {isAdvanced && !settlement && wizardStep < STEPS.length && (
         <>
           <StepIndicator currentStep={wizardStep} totalSteps={STEPS.length} />
 
