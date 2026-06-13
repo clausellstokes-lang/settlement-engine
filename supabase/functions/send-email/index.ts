@@ -157,7 +157,15 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
 };
 
 // Templates that don't require an authenticated caller. These accept
-// `recipient` in the request body. Per-IP bot guard still applies.
+// `recipient` in the request body.
+//
+// SECURITY NOTE: only the per-request botGuard applies here — there is NO
+// per-IP / per-recipient RATE LIMIT (botGuard blocks obvious bots, it does not
+// throttle). cap_warning is therefore an unauthenticated mailer to an arbitrary
+// recipient. The blast radius is bounded (a single fixed-content "you hit your
+// cap" template, no caller-supplied body), but a real fix needs a rate limiter
+// backed by a table/KV, or a short-lived signed token minted by the generation
+// endpoint that actually hit the cap. Do NOT add free-text templates here.
 const ANON_OK_TEMPLATES = new Set(["cap_warning"]);
 
 function interpolate(str: string, vars: Record<string, unknown>): string {

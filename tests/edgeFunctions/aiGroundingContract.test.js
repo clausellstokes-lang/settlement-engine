@@ -359,7 +359,9 @@ describe('Tier 6.8 — edge function uses the shared composer at request time', 
   });
 
   it('the request handler computes a per-call dynamicPreservation block', () => {
-    expect(EDGE).toMatch(/const dynamicPreservation = preservationBlockFor\(settlement\)/);
+    // Assigned (not `const`-declared) because the pre-stream construction is now
+    // wrapped in a refund-capable try/catch — see the spend-before-refund fix.
+    expect(EDGE).toMatch(/dynamicPreservation = preservationBlockFor\(settlement\)/);
   });
 
   it('daily life sanitizes optional relationship memory before prompt use', () => {

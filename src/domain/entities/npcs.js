@@ -43,6 +43,8 @@
  *  @property {string=} removedByEventId
  *  @property {string=} notes                  free-form DM annotation
  *  @property {string=} generatedAs            'pipeline'|'faction_structural' — provenance marker
+ *  @property {(string|number)=} _idSeed       input-only: disambiguates the auto-generated
+ *                                             id (e.g. the originating event id); not persisted
  */
 
 const IMPORTANCE_WEIGHT = {

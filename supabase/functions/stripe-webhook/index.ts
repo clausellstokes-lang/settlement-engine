@@ -174,7 +174,11 @@ serve(async (req) => {
   let event: Stripe.Event;
   try {
     const body = await req.text();
-    event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+    // Deno has no synchronous crypto: the sync constructEvent throws at runtime in
+    // Edge Functions. Use the async verifier with the SubtleCrypto provider.
+    event = await stripe.webhooks.constructEventAsync(
+      body, signature, webhookSecret, undefined, Stripe.createSubtleCryptoProvider(),
+    );
   } catch (err) {
     console.error('Webhook signature verification failed:', err);
     return new Response('Invalid signature', { status: 400 });

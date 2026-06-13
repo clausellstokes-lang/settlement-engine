@@ -375,6 +375,18 @@ deno_version = 2
 # [edge_runtime.secrets]
 # secret_key = "env(SECRET_VALUE)"
 
+# Functions that must NOT have the platform JWT gate. Stripe posts a signature,
+# not a Supabase JWT — with verify_jwt on (the default), the platform rejects the
+# webhook before signature verification and payments never credit. Pinning it here
+# means the flag can't be forgotten on `supabase functions deploy`.
+[functions.stripe-webhook]
+verify_jwt = false
+
+# Anonymous (no user JWT) single-dossier verification — relies on the Stripe
+# session id, not auth.
+[functions.verify-single-dossier]
+verify_jwt = false
+
 [analytics]
 enabled = true
 port = 54327

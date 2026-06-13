@@ -234,6 +234,9 @@ serve(async (req) => {
         const rawSearch = typeof metadata?.search === "string"
           ? metadata.search.trim()
           : "";
+        // Strip PostgREST logical-filter metacharacters so caller-supplied search
+        // can't break out of the .or() expression (commas/parens/operator tokens).
+        const search = rawSearch.replace(/[,()*\\]/g, " ").trim();
 
         let query = adminClient
           .from("profiles")
@@ -241,8 +244,8 @@ serve(async (req) => {
           .order("created_at", { ascending: false })
           .limit(100);
 
-        if (rawSearch) {
-          query = query.or(`email.ilike.%${rawSearch}%,display_name.ilike.%${rawSearch}%`);
+        if (search) {
+          query = query.or(`email.ilike.%${search}%,display_name.ilike.%${search}%`);
         }
 
         const { data, error } = await query;
