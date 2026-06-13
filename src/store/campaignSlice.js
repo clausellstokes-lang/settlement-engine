@@ -70,6 +70,7 @@ import {
   forgetCampaignSync,
   mergeCampaignLists,
   primeCampaignSync,
+  reconcileTombstones,
   syncCampaignChanges,
 } from '../lib/campaignSync.js';
 
@@ -124,6 +125,10 @@ function deletePersistedCampaign(id, campaigns, ownerId = 'anon') {
   localWrite(snapshot, ownerId);
   forgetCampaignSync(id);
   if (!campaignService.isConfigured) return;
+  // Record a deletion tombstone BEFORE the async cloud delete. mergeCampaignLists
+  // reads it (at list()-resolve time) so an in-flight load or a stale cache copy
+  // can't resurrect the campaign while the cloud delete is still propagating.
+  campaignService.recordTombstone(id, ownerId);
   campaignService.delete(id).catch(e => {
     console.warn('[campaignSlice] campaign cloud delete failed', e);
   });
@@ -406,7 +411,15 @@ export const createCampaignSlice = (set, get) => ({
         if (campaignCacheOwner(get()) !== ownerId) return get().campaigns;
         const migratedRemote = remote.map(migrateCampaign);
         primeCampaignSync(migratedRemote);
-        const merged = mergeCampaignLists(cached, migratedRemote);
+        // Read tombstones HERE (at list()-resolve), not at load start: a delete
+        // that ran while list() was in flight has by now written its tombstone,
+        // and that is exactly the same-device race we must not lose to.
+        const tombstones = campaignService.loadTombstones(ownerId);
+        const merged = mergeCampaignLists(cached, migratedRemote, { tombstones });
+        const prunedTombstones = reconcileTombstones(tombstones, migratedRemote);
+        if (prunedTombstones.length !== tombstones.length) {
+          campaignService.writeTombstones(prunedTombstones, ownerId);
+        }
         set(state => {
           state.campaigns = merged;
           state.campaignsLoaded = true;
@@ -451,6 +464,11 @@ export const createCampaignSlice = (set, get) => ({
         worldState: ensureWorldState(null, { id, name }),
         collapsed: false,
         accessState: 'active',
+        // Never-synced marker: this campaign lives only on this device until a
+        // cloud upsert confirms it. mergeCampaignLists keeps a local-only
+        // campaign (absent from remote) only while this is truthy, and clears
+        // it to false once the cloud confirms the row — see campaignSync.js.
+        pendingSync: true,
       };
       state.campaigns.unshift(campaign);
       persistCampaignState(state, id);

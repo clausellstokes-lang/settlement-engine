@@ -111,7 +111,16 @@ function makeLocalUid() {
   return `lu_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
 }
 
-export const createCustomContentSlice = (set, get) => ({
+export const createCustomContentSlice = (set, get) => {
+  // localId → Promise<cloudId|null>. add() round-trips to the cloud to mint the
+  // real uuid; an update/delete issued before that resolves must wait for the
+  // id instead of targeting the throwaway local id — otherwise the cloud op
+  // silently no-ops (the row has a different id) and the item resurrects on the
+  // next cloud load. The map is per-store (closed over here, not module-global)
+  // so concurrent stores in tests don't share pending state.
+  const pendingAdds = new Map();
+
+  return {
   // ── State ──────────────────────────────────────────────────────────────────
   customContent: loadAll('anon'),
   customContentLoading: false,
@@ -141,19 +150,34 @@ export const createCustomContentSlice = (set, get) => ({
     });
     // Cloud write (premium / elevated only)
     if (get().canUseCustomContent?.() && customContentService.isConfigured) {
-      customContentService.add(category, entry).then(saved => {
-        // Replace local id with cloud id so subsequent updates target the right row
+      const localId = entry.id;
+      const addPromise = customContentService.add(category, entry).then(saved => {
+        // Adopt the cloud id + server timestamps but PRESERVE any field edits
+        // made locally while add() was in flight (an updateCustomItem chained
+        // on this promise pushes those to the cloud). A wholesale replace with
+        // `saved` would clobber them, both locally and on the chained update.
         set(state => {
-          const idx = state.customContent[category].findIndex(x => x.id === entry.id);
+          const idx = state.customContent[category].findIndex(x => x.id === localId);
           if (idx !== -1) {
-            state.customContent[category][idx] = saved;
+            const local = state.customContent[category][idx];
+            state.customContent[category][idx] = {
+              ...local,
+              id: saved.id,
+              createdAt: saved.createdAt ?? local.createdAt,
+              updatedAt: saved.updatedAt ?? local.updatedAt,
+            };
             localWrite(state.customContent, ownerIdFromState(state));
           }
         });
+        return saved.id;
       }).catch(err => {
         console.error('customContent.add failed:', err);
         set(state => { state.customContentError = err.message; });
+        return null;
+      }).finally(() => {
+        pendingAdds.delete(localId);
       });
+      pendingAdds.set(localId, addPromise);
     }
   },
 
@@ -167,15 +191,33 @@ export const createCustomContentSlice = (set, get) => ({
         localWrite(state.customContent, ownerIdFromState(state));
       }
     });
-    if (get().canUseCustomContent?.() && customContentService.isConfigured) {
-      // Send the updated full item (cloud stores the whole jsonb body)
-      const updated = get().customContent[category].find(x => x.id === id);
-      if (updated) {
-        customContentService.update(id, updated).catch(err => {
-          console.error('customContent.update failed:', err);
-          set(state => { state.customContentError = err.message; });
-        });
-      }
+    if (!(get().canUseCustomContent?.() && customContentService.isConfigured)) return;
+
+    const pending = pendingAdds.get(id);
+    if (pending) {
+      // add() hasn't resolved — chain on the real cloud id and send whatever
+      // the body looks like by then (the local id will have been swapped to
+      // the cloud id). If the row was deleted meanwhile, the delete chain owns
+      // removal, so skip.
+      pending.then(cloudId => {
+        if (!cloudId) return;
+        const latest = get().customContent[category].find(x => x.id === cloudId);
+        if (!latest) return;
+        return customContentService.update(cloudId, latest);
+      }).catch(err => {
+        console.error('customContent.update failed:', err);
+        set(state => { state.customContentError = err.message; });
+      });
+      return;
+    }
+
+    // Send the updated full item (cloud stores the whole jsonb body)
+    const updated = get().customContent[category].find(x => x.id === id);
+    if (updated) {
+      customContentService.update(id, updated).catch(err => {
+        console.error('customContent.update failed:', err);
+        set(state => { state.customContentError = err.message; });
+      });
     }
   },
 
@@ -185,12 +227,27 @@ export const createCustomContentSlice = (set, get) => ({
       state.customContent[category] = state.customContent[category].filter(x => x.id !== id);
       localWrite(state.customContent, ownerIdFromState(state));
     });
-    if (get().canUseCustomContent?.() && customContentService.isConfigured) {
-      customContentService.delete(id).catch(err => {
+    if (!(get().canUseCustomContent?.() && customContentService.isConfigured)) return;
+
+    const pending = pendingAdds.get(id);
+    if (pending) {
+      // add() hasn't resolved — defer the cloud delete until it returns the
+      // real id, then delete THAT row. Deleting the local id would no-op and
+      // leave the freshly-added cloud row to resurrect on the next load.
+      pending.then(cloudId => {
+        if (!cloudId) return;
+        return customContentService.delete(cloudId);
+      }).catch(err => {
         console.error('customContent.delete failed:', err);
         set(state => { state.customContentError = err.message; });
       });
+      return;
     }
+
+    customContentService.delete(id).catch(err => {
+      console.error('customContent.delete failed:', err);
+      set(state => { state.customContentError = err.message; });
+    });
   },
 
   /** Get all items in a category. */
@@ -286,4 +343,5 @@ export const createCustomContentSlice = (set, get) => ({
       state.customContentError = null;
     });
   },
-});
+  };
+};
