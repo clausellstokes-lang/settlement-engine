@@ -117,7 +117,12 @@ export function withImpairment(entity, impairment) {
   const filtered = prev.filter(i => !(i.type === impairment.type && i.causeEventId === impairment.causeEventId));
   return {
     ...entity,
-    impairments: [...filtered, { ...impairment, appliedAt: impairment.appliedAt || new Date().toISOString() }],
+    // Do NOT default appliedAt to wall-clock: this runs inside the pure, seeded
+    // event pipeline and a Date.now() here embedded nondeterministic timestamps
+    // into settlement state. Callers with a deterministic clock pass appliedAt
+    // explicitly (e.g. world-pulse `now`); the rest carry causeEventId for
+    // provenance and the event log records the authoritative timestamp.
+    impairments: [...filtered, { ...impairment, appliedAt: impairment.appliedAt ?? null }],
     // Auto-bump status to impaired if it was active, but never override
     // a removed/destroyed/vacant set explicitly.
     status: (entity.status === STATUS_REMOVED ||

@@ -640,6 +640,7 @@ function addNpc(s, event) {
     linkedFactionIds:     event.payload?.linkedFactionIds || [],
     influence:            event.payload?.influence,
     legitimacyContribution: event.payload?.legitimacyContribution,
+    _idSeed: event.id, // deterministic, event-scoped id (avoids same-name collisions)
   });
   return { ...s, npcs: [...(s.npcs || []), npc] };
 }
@@ -1381,7 +1382,10 @@ function findInstitution(s, target) {
 }
 
 function findFaction(s, target) {
-  const list = s.factions || s.powerStructure?.factions || [];
+  // Generated settlements carry their factions on powerStructure.factions (every
+  // reader and replaceFaction's write target use it); s.factions is often an empty
+  // legacy array. Search the union so faction-targeted events don't silently no-op.
+  const list = [...(s.powerStructure?.factions || []), ...(s.factions || [])];
   const t = String(target || '').toLowerCase();
   return list.find(f =>
     String(f.id || '').toLowerCase() === t ||

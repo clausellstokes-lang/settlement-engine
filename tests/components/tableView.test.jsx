@@ -24,8 +24,10 @@ const fixture = () => ({
   economicState: { prosperity: { tier: 'struggling' } },
   pressureSentence: 'The reeve runs a quiet skim and the harvest is failing.',
   stressors: [{ label: 'Failing harvest' }],
-  npcs: [{ name: 'Maren', role: 'Reeve', importance: 'major', secret: 'skims the tithe' }],
-  plotHooks: [{ title: 'The Salt Debt', tier: 'A', body: 'A caravan master calls in a favor.' }],
+  // Real generator shapes: NPC secret is an object; plot hooks come from the
+  // collectPlotHooks sources (here, a conflict), not a phantom settlement.plotHooks.
+  npcs: [{ name: 'Maren', role: 'Reeve', power: 9, secret: { what: 'skims the tithe' } }],
+  conflicts: [{ parties: ['The Salt Debt'], intensity: 'high', plotHooks: ['A caravan master calls in a favor.'] }],
 });
 
 describe('TableView', () => {

@@ -107,6 +107,7 @@ export const RERUN_KEYS_FOR_EVENT = {
   // Phase 24 / Tier 4.11 — player intervention events
   REMOVED_THREAT:         ['economicState', 'powerStructure', 'narrative'],
   BROKERED_ALLIANCE:      ['powerStructure', 'narrative'],
+  SETTLEMENT_DISPUTE:     ['powerStructure', 'narrative'],
   STARTED_RIOT:           ['powerStructure', 'economicState', 'narrative'],
   OPENED_TRADE_ROUTE:     ['activeChains', 'foodSecurity', 'economicState', 'narrative'],
   RECOVERED_RESOURCE:     ['resources', 'activeChains', 'economicState', 'narrative'],

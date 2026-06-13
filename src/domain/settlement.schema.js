@@ -54,7 +54,12 @@ export const GENERATOR_VERSION  = '0.9.0';
 // `normalizeSettlement()` reads from any alias, writes to the canonical key.
 
 export const FIELD_ALIASES = Object.freeze({
-  stressors:      ['stress', 'stresses', 'stressTypes'],
+  // stressTypes is deliberately NOT an alias of stressors: it holds type STRINGS,
+  // not stressor objects (type/name/severity). canonicalAccessors.canonStressors
+  // excludes it for the same reason; including it here let normalizeSettlement
+  // write a string[] into the canonical `stressors` field when only stressTypes
+  // was present, corrupting object-expecting substrate readers.
+  stressors:      ['stress', 'stresses'],
   // (Future entries: e.g. `neighbors: ['neighbours', 'neighborRelationship']`
   // once that concept gets normalized.)
 });

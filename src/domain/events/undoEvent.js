@@ -72,6 +72,21 @@ const SNAPSHOT_ECONOMIC_KEYS = Object.freeze({
   REMOVE_TRADE_GOOD: TRADE_ECONOMIC_KEYS,
 });
 
+// Top-level settlement subtrees whose event writes are NOT exactly reversible
+// from provenance, so the pre-event copy is the only way back:
+//  - CHANGE_RULING_POWER rewrites the whole powerStructure (factions,
+//    publicLegitimacy, governingName/government, relationships); scrubbing only
+//    the condition left the entire government transfer in place.
+//  - The relationship events overwrite a neighbourNetwork link's relationshipType
+//    (the _relationshipEventId stamp they wrote was read nowhere), so undo never
+//    reverted them.
+const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
+  CHANGE_RULING_POWER: Object.freeze(['powerStructure']),
+  BROKERED_ALLIANCE:   Object.freeze(['neighbourNetwork']),
+  SETTLEMENT_DISPUTE:  Object.freeze(['neighbourNetwork']),
+  OPENED_TRADE_ROUTE:  Object.freeze(['neighbourNetwork']),
+});
+
 // The dual-written record keys mirrored into the raw _config. The handlers
 // write config and _config in lockstep, so the pre-event config copy IS the
 // pre-event _config copy — one snapshot restores both.
@@ -104,11 +119,15 @@ function snapshotKeys(source, keys) {
  * @returns {Object|null}
  */
 export function captureEventUndoSnapshot(settlement, event) {
+  if (!settlement) return null;
   const configKeys = SNAPSHOT_CONFIG_KEYS[event?.type];
-  if (!configKeys || !settlement) return null;
-  const snapshot = { config: snapshotKeys(settlement.config, configKeys) };
-  const economicKeys = SNAPSHOT_ECONOMIC_KEYS[event.type];
+  const settlementKeys = SNAPSHOT_SETTLEMENT_KEYS[event?.type];
+  if (!configKeys && !settlementKeys) return null;
+  const snapshot = {};
+  if (configKeys) snapshot.config = snapshotKeys(settlement.config, configKeys);
+  const economicKeys = SNAPSHOT_ECONOMIC_KEYS[event?.type];
   if (economicKeys) snapshot.economicState = snapshotKeys(settlement.economicState, economicKeys);
+  if (settlementKeys) snapshot.settlement = snapshotKeys(settlement, settlementKeys);
   return snapshot;
 }
 
@@ -143,6 +162,13 @@ function restoreSnapshottedRecords(s, snapshot) {
   }
   if (snapshot.economicState) {
     next = { ...next, economicState: restoreKeys(next.economicState, snapshot.economicState) };
+  }
+  if (snapshot.settlement) {
+    // Restore top-level subtrees (powerStructure / neighbourNetwork) to their
+    // exact pre-event copy. restoreKeys deletes a key absent pre-event and
+    // restores a present one, so an undone settlement matches one that never
+    // saw the event.
+    next = restoreKeys(next, snapshot.settlement);
   }
   return next;
 }
