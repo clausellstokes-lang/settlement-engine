@@ -41,6 +41,7 @@
  *  @property {string[]=} serviceContribution  e.g. ["healing", "charity", "funerary_rites"]
  *  @property {string[]=} potentialSuccessors  npc ids the engine pre-suggests on death
  *  @property {string=} removedByEventId
+ *  @property {string=} createdByEventId       event that created this NPC (ADD_NPC); undo drops it
  *  @property {string=} notes                  free-form DM annotation
  *  @property {string=} generatedAs            'pipeline'|'faction_structural' — provenance marker
  *  @property {(string|number)=} _idSeed       input-only: disambiguates the auto-generated
