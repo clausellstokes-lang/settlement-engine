@@ -109,6 +109,39 @@ function migrateSaveToV2(entry) {
 }
 
 /**
+ * Derive the settlement's own neighbourNetwork entry from its generated
+ * `neighborRelationship` if it isn't already represented. The only code that did
+ * this lived in SettlementsPanel.saveCurrentSettlement, which is now dead — so
+ * settlements saved via the canonical path (SaveToLibraryButton / the
+ * save-settlement auth intent) lost their neighbour link. Pure + idempotent
+ * (guarded by name), so it's safe on every save and re-read.
+ *
+ * NOTE: the *bidirectional* partner back-link (updating the neighbour's own save
+ * row) is NOT done here — that needs a multi-row write the single-save path can't
+ * perform; it's tracked separately.
+ */
+function withNeighbourNetworkFromRelationship(settlement) {
+  if (!settlement) return settlement;
+  const nr = settlement.neighborRelationship;
+  if (!nr?.name) return settlement;
+  const net = settlement.neighbourNetwork || [];
+  if (net.some(n => n.name === nr.name)) return settlement;
+  return {
+    ...settlement,
+    neighbourNetwork: [{
+      id: `generated_${String(nr.name).replace(/\s+/g, '_')}`,
+      name: nr.name,
+      neighbourName: nr.name,
+      neighbourTier: nr.tier || '',
+      tier: nr.tier || '',
+      relationshipType: nr.relationshipType || 'neutral',
+      description: `Generated as ${(nr.relationshipType || 'neutral').replace(/_/g, ' ')} of this settlement.`,
+      fromGeneration: true,
+    }, ...net],
+  };
+}
+
+/**
  * Run the canonical-shape adapter on the embedded settlement of a save
  * entry. Save entries themselves are a separate envelope (id, name,
  * timestamp, campaignState, etc.); the settlement object lives at
@@ -169,15 +202,16 @@ async function supabaseSave(entry) {
   if (!user) throw new Error('Not authenticated');
 
   const v2 = migrateSaveToV2(entry);
+  const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
   const row = {
     user_id:         user.id,
     name:            v2.name,
     tier:            v2.tier,
-    data:            v2.settlement,
+    data:            settlement,
     config:          v2.config || null,
     toggles:         bundleToggles(v2),
     seed:            v2.seed || null,
-    neighbour_links: v2.settlement?.neighbourNetwork || null,
+    neighbour_links: settlement?.neighbourNetwork || null,
     ai_data:         v2.aiData || {},
     campaign_state:  v2.campaignState || null,
     version_history: Array.isArray(v2.versionHistory) ? v2.versionHistory : null,
@@ -260,9 +294,10 @@ async function localList() {
 
 async function localSaveEntry(entry) {
   const v2 = migrateSaveToV2(entry);
+  const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
   const saves = localLoad();
   const id = v2.id || Date.now();
-  saves.unshift({ ...v2, id, savedAt: Date.now() });
+  saves.unshift({ ...v2, settlement, id, savedAt: Date.now() });
   localWrite(saves);
   return id;
 }
