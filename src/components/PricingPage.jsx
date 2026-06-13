@@ -280,8 +280,11 @@ export default function PricingPage({ onNavigate }) {
 
   function ctaFor(tier) {
     if (tier.key === 'wanderer') {
+      // 'Current plan' only for the actual free-tier user — a paying/founder/
+      // elevated user is NOT on Wanderer, so they get the normal CTA.
+      const onWanderer = authTier === 'free' && !isElevated && !isFounder;
       return {
-        label: authTier === 'anon' ? t('pricing.tiers.wanderer.cta') : 'Current plan',
+        label: onWanderer ? 'Current plan' : t('pricing.tiers.wanderer.cta'),
         onCta: () => onNavigate?.('generate'),
       };
     }
@@ -368,7 +371,7 @@ export default function PricingPage({ onNavigate }) {
               tier={tier}
               ctaLabel={cta.label}
               onCta={cta.onCta}
-              loading={loading === (tier.key === 'founder' ? 'founder_lifetime' : 'premium')}
+              loading={loading === (tier.key === 'founder' ? 'founder_lifetime' : tier.key === 'cartographer' ? 'premium' : null)}
               emphasised={tier.key === 'cartographer'}
               founderSeatsRemaining={tier.key === 'founder' ? founderSeatsRemaining : undefined}
               audienceLine={audienceLineFor(tier.key)}

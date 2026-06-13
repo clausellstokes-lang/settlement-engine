@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
   fetchPublicDossier,
@@ -52,15 +52,22 @@ export function useGalleryPageState(routeSlug = null) {
 
   const galleryQuery = useMemo(() => ({ sort, search, filters }), [sort, search, filters]);
 
+  // Generation token: bumped on every query change so an in-flight loadMore
+  // (which isn't bound to this effect's lifecycle) can detect a stale query and
+  // bail instead of appending stale-query pages onto a fresh result set.
+  const queryGenRef = useRef(0);
+
   useEffect(() => {
     let cancelled = false;
+    const gen = ++queryGenRef.current;
+    setListLoading(true); // show the spinner immediately on a query change
     const mine = !!galleryQuery.filters?.mine;
     const run = mine
       ? fetchMyGallery()
       : fetchPublicGallery({ page: 0, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery });
     run
       .then(res => {
-        if (cancelled) return;
+        if (cancelled || queryGenRef.current !== gen) return;
         setItems(res.items);
         setTotal(res.total ?? res.items.length);
         setHasMore(mine ? false : res.hasMore);
@@ -68,10 +75,10 @@ export function useGalleryPageState(routeSlug = null) {
         setListError(null);
       })
       .catch(err => {
-        if (!cancelled) setListError(err?.message || String(err));
+        if (!cancelled && queryGenRef.current === gen) setListError(err?.message || String(err));
       })
       .finally(() => {
-        if (!cancelled) setListLoading(false);
+        if (!cancelled && queryGenRef.current === gen) setListLoading(false);
       });
     return () => { cancelled = true; };
   }, [galleryQuery]);
@@ -134,17 +141,21 @@ export function useGalleryPageState(routeSlug = null) {
   const loadMore = useCallback(async () => {
     if (galleryQuery.filters?.mine) return; // My Settlements returns all at once
     const nextPage = page + 1;
+    const gen = queryGenRef.current; // snapshot the query generation
     setListLoading(true);
     try {
       const res = await fetchPublicGallery({ page: nextPage, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery });
+      // The query changed mid-flight — discard this page rather than appending
+      // it onto a now-unrelated result set.
+      if (queryGenRef.current !== gen) return;
       setItems(prev => [...prev, ...res.items]);
       setTotal(res.total ?? total);
       setHasMore(res.hasMore);
       setPage(nextPage);
     } catch (err) {
-      setListError(err?.message || String(err));
+      if (queryGenRef.current === gen) setListError(err?.message || String(err));
     } finally {
-      setListLoading(false);
+      if (queryGenRef.current === gen) setListLoading(false);
     }
   }, [galleryQuery, page, total]);
 
