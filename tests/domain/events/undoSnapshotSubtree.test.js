@@ -78,4 +78,24 @@ describe('undo restores top-level settlement subtrees', () => {
     // …and undo restored the entire pre-event powerStructure subtree.
     expect(undone.powerStructure).toEqual(before.powerStructure);
   });
+
+  it('drops an ADD_NPC-created NPC on undo', () => {
+    const before = { name: 'Oakmere', npcs: [{ id: 'npc.existing', name: 'Aldric', role: 'Mayor' }] };
+    const event = { id: 'e4', type: 'ADD_NPC', targetId: 'Brenna the Fence', payload: { role: 'Fence' } };
+    const { after, undone } = applyThenUndo(before, event);
+
+    // The NPC was added (stamped createdByEventId)…
+    expect(after.npcs.length).toBe(2);
+    expect(after.npcs.some(n => n.createdByEventId === 'e4')).toBe(true);
+    // …and undo removed exactly it, leaving the original roster.
+    expect(undone.npcs.map(n => n.id)).toEqual(['npc.existing']);
+  });
+
+  it('drops an ADD_INSTITUTION-created institution on undo', () => {
+    const before = { name: 'Oakmere', institutions: [{ id: 'institution.granary', name: 'Granary' }] };
+    const event = { id: 'e5', type: 'ADD_INSTITUTION', targetId: 'Thieves Guild' };
+    const { after, undone } = applyThenUndo(before, event);
+    expect(after.institutions.length).toBe(2);
+    expect(undone.institutions.map(i => i.id)).toEqual(['institution.granary']);
+  });
 });

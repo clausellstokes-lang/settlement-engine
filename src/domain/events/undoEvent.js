@@ -85,6 +85,10 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   BROKERED_ALLIANCE:   Object.freeze(['neighbourNetwork']),
   SETTLEMENT_DISPUTE:  Object.freeze(['neighbourNetwork']),
   OPENED_TRADE_ROUTE:  Object.freeze(['neighbourNetwork']),
+  // EXPOSE_CORRUPTION irreversibly swaps in a successor NPC and impairs the tied
+  // institution/faction with SYNTHETIC causeEventIds the impairment-strip can't
+  // reach — snapshot the affected subtrees so undo restores them exactly.
+  EXPOSE_CORRUPTION:   Object.freeze(['npcs', 'institutions', 'powerStructure', 'factions']),
 });
 
 // The dual-written record keys mirrored into the raw _config. The handlers
@@ -311,12 +315,39 @@ function withoutEventDestruction(s, eventId) {
   return next;
 }
 
+/**
+ * Drop entities the popped event CREATED — ADD_NPC / ADD_INSTITUTION /
+ * ADD_FACTION stamp createdByEventId on the new record (mirroring the
+ * destroyedByEventId/removedByEventId idiom). Without this, an added entity
+ * survived its own undo. Re-add of a pre-existing entity (the idempotent
+ * un-remove branch) carries no createdByEventId, so it is left intact.
+ */
+function withoutEventCreations(s, eventId) {
+  let next = s;
+  const dropCreated = (arr) => arr.filter(e => e?.createdByEventId !== eventId);
+  if (Array.isArray(next.npcs) && next.npcs.some(n => n?.createdByEventId === eventId)) {
+    next = { ...next, npcs: dropCreated(next.npcs) };
+  }
+  if (Array.isArray(next.institutions) && next.institutions.some(i => i?.createdByEventId === eventId)) {
+    next = { ...next, institutions: dropCreated(next.institutions) };
+  }
+  const psFactions = next.powerStructure?.factions;
+  if (Array.isArray(psFactions) && psFactions.some(f => f?.createdByEventId === eventId)) {
+    next = { ...next, powerStructure: { ...next.powerStructure, factions: dropCreated(psFactions) } };
+  }
+  if (Array.isArray(next.factions) && next.factions.some(f => f?.createdByEventId === eventId)) {
+    next = { ...next, factions: dropCreated(next.factions) };
+  }
+  return next;
+}
+
 // ── Entry point ───────────────────────────────────────────────────────────
 
 /**
  * Scrub everything the popped event wrote that outlives its systemState
  * delta: promoted conditions, appended condition receipts, stress entries,
- * annotation ledgers, destruction stamps, and the snapshotted records.
+ * annotation ledgers, destruction stamps, created entities, and the
+ * snapshotted records.
  * Finishes with withEventConditionsSynced so config.eventConditions (and
  * its _config mirror) stops naming the undone event — without that re-sync,
  * reapplyEventConditions re-promoted the ghost on every regeneration.
@@ -333,6 +364,7 @@ export function scrubUndoneEvent(settlement, logEntry) {
   next = withoutEventStressEntries(next, eventId);
   next = withoutEventAnnotations(next, eventId);
   next = withoutEventDestruction(next, eventId);
+  next = withoutEventCreations(next, eventId);
   next = restoreSnapshottedRecords(next, logEntry.undo);
   return withEventConditionsSynced(next);
 }

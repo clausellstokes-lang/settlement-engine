@@ -291,6 +291,7 @@ function addInstitution(s, event) {
     status: 'active',
     description: event.description || '',
     plotHooks: [],
+    createdByEventId: event.id, // so undo can drop the institution this event created
   };
   return { ...s, institutions: [...list, newInst] };
 }
@@ -385,6 +386,7 @@ function addFaction(s, event) {
     impairments: [],
     internalSeats: {},
     memberNpcIds: [],
+    createdByEventId: event.id, // so undo can drop the faction this event created
   };
   if (psFactions) {
     return { ...s, powerStructure: { ...s.powerStructure, factions: [...psFactions, newFaction] } };
@@ -642,6 +644,7 @@ function addNpc(s, event) {
     legitimacyContribution: event.payload?.legitimacyContribution,
     _idSeed: event.id, // deterministic, event-scoped id (avoids same-name collisions)
   });
+  npc.createdByEventId = event.id; // so undo can drop the NPC this event created
   return { ...s, npcs: [...(s.npcs || []), npc] };
 }
 
