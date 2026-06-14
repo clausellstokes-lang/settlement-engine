@@ -33,7 +33,12 @@ serve(async req => {
 
   try {
     const { sessionId, checkoutToken } = await req.json();
-    if (typeof sessionId !== 'string' || !/^cs_(test_|live_)?[A-Za-z0-9]+$/.test(sessionId)) {
+    // Bound the length before the charset check: a real Stripe checkout session
+    // id is well under 100 chars, so cap generously. Without this the
+    // `[A-Za-z0-9]+` pattern would accept a multi-megabyte string and still
+    // forward it to Stripe — cheap to reject here, wasteful to send.
+    if (typeof sessionId !== 'string' || sessionId.length > 200
+      || !/^cs_(test_|live_)?[A-Za-z0-9]+$/.test(sessionId)) {
       throw new Error('Invalid checkout session');
     }
     if (typeof checkoutToken !== 'string' || checkoutToken.length < 24 || checkoutToken.length > 128) {
