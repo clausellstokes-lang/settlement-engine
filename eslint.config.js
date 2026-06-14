@@ -25,6 +25,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 import visualBudget from './scripts/eslint-plugin-visual-budget.js';
 import analytics from './scripts/eslint-plugin-analytics.js';
+import jsxHygiene from './scripts/eslint-plugin-jsx-hygiene.js';
 
 // eslint-plugin-react doesn't yet support ESLint 10's flat-config
 // resolver (throws on contextOrFilename.getFilename). We drop it and
@@ -60,6 +61,7 @@ export default [
       'react-hooks': reactHooks,
       'visual-budget': visualBudget,
       'analytics': analytics,
+      'jsx-hygiene': jsxHygiene,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -69,6 +71,10 @@ export default [
       'no-dupe-keys': 'error',
       'no-dupe-args': 'error',
       'no-duplicate-case': 'error',
+      // Duplicate JSX props (esbuild silently keeps the last) — eslint-plugin-
+      // react's jsx-no-duplicate-props isn't loadable on ESLint 10, so this is
+      // the local equivalent. Error: a dropped prop is a real bug.
+      'jsx-hygiene/no-duplicate-jsx-props': 'error',
       'no-fallthrough': 'error',
       'no-self-assign': 'error',
       'no-unreachable': 'error',

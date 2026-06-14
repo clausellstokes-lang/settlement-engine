@@ -48,11 +48,11 @@ function corsHeadersFor(req: Request): Record<string, string> {
 const ALLOWED_ROLES = ["user", "developer", "admin"];
 const ALLOWED_TIERS = ["free", "premium"];
 const ALLOWED_METADATA_KEYS = ["role", "tier", "display_name", "is_founder"];
-// Owner-override email — configurable via the OWNER_EMAIL env var so the
-// privileged identity isn't hardcoded in source. Falls back to the historical
-// value so existing deployments are unaffected until the env var is set.
-const OWNER_EMAIL = (Deno.env.get("OWNER_EMAIL") || "clausellstokes@aol.com")
-  .trim().toLowerCase();
+// Owner-override email — configurable via the OWNER_EMAIL env var ONLY. No
+// hardcoded fallback: a missing env var FAILS CLOSED (owner override disabled,
+// access falls back to profiles.role), never fails privileged. Deployments that
+// want the override must set OWNER_EMAIL explicitly.
+const OWNER_EMAIL = (Deno.env.get("OWNER_EMAIL") || "").trim().toLowerCase();
 
 function errorMessage(err: unknown) {
   return err instanceof Error ? err.message : String(err);
@@ -170,10 +170,12 @@ serve(async (req) => {
     const callerEmail = String(callingUser.email || callerProfile?.email || "")
       .trim()
       .toLowerCase();
-    if (
-      callerEmail !== OWNER_EMAIL &&
-      (!callerProfile || !["developer", "admin"].includes(callerProfile.role))
-    ) {
+    // Owner override applies ONLY when OWNER_EMAIL is configured AND matches —
+    // an empty OWNER_EMAIL can never match (so an empty caller email can't
+    // accidentally equal an empty owner email and bypass the role gate).
+    const ownerOverride = OWNER_EMAIL !== "" && callerEmail === OWNER_EMAIL;
+    const hasElevatedRole = !!callerProfile && ["developer", "admin"].includes(callerProfile.role);
+    if (!ownerOverride && !hasElevatedRole) {
       return json({ error: "Insufficient privileges" }, 403);
     }
 

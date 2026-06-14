@@ -20,7 +20,13 @@
 import { supabase, isConfigured } from './supabase.js';
 import { DEFAULT_MODEL_PREFERENCE, normalizeModelPreference } from '../config/pricing.js';
 
-const OWNER_EMAIL = 'clausellstokes@aol.com';
+// Owner-override email for CLIENT-SIDE admin-UI gating only — never a security
+// boundary (the server re-validates every privileged action via admin-actions +
+// RLS + profiles.role). Configurable via VITE_OWNER_EMAIL, empty by default so
+// no personal address is hardcoded in the shipped bundle. When unset the owner
+// still gets admin UI through their server-set profiles.role; this is purely a
+// convenience shortcut. Fail-closed: empty env grants no one the shortcut.
+const OWNER_EMAIL = String(import.meta.env.VITE_OWNER_EMAIL || '').trim().toLowerCase();
 
 /** Resolve display name from user metadata. */
 function resolveDisplayName(user) {
@@ -38,6 +44,7 @@ function normalizeRole(value) {
 }
 
 function isOwnerEmail(email) {
+  if (!OWNER_EMAIL) return false; // fail-closed: no configured owner → no shortcut
   return String(email || '').trim().toLowerCase() === OWNER_EMAIL;
 }
 
