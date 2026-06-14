@@ -224,6 +224,105 @@ const stripImpairmentsForEvent = (eventId) => (entity) => {
   return next;
 };
 
+/**
+ * Successor detection for applyEvent: when a pillar-tier NPC dies, surface the
+ * engine's ranked successor list so the DM doesn't have to invent a replacement
+ * from scratch. The prompt is informational and dismissible; it does not block
+ * other UI flow. Pure — reads the PRE-mutation settlement (the source of truth
+ * for "who was alive and linked to whom"; the post-mutation copy already shows
+ * the NPC as removed/dead). Returns null when no prompt is warranted.
+ */
+function computePendingSuccession(settlement, event) {
+  if (event?.type !== 'KILL_NPC') return null;
+  const outgoing = (settlement.npcs || []).find(n =>
+    (n.id && n.id === event.targetId) ||
+    (n.name && n.name.toLowerCase() === String(event.targetId || '').toLowerCase()),
+  );
+  const importance = event.payload?.importance || (outgoing ? inferImportance(outgoing) : 'notable');
+  if (importance !== 'pillar' || !outgoing) return null;
+  return {
+    outgoingNpcId:   outgoing.id || outgoing.name,
+    outgoingNpcName: outgoing.name || 'Unknown',
+    outgoingRole:    outgoing.role || '',
+    linkedInstitutionIds: outgoing.linkedInstitutionIds || [],
+    suggestedSuccessorIds: inferSuccessors({ outgoing, settlement, limit: 3 }),
+    originEventId:   event.id,
+  };
+}
+
+/**
+ * The world-ripple half of applyEvent: AFTER the settlement event has committed
+ * and persisted, propagate it into the campaign's world engine. Three best-
+ * effort, canon-only consumers (campaign is set only in canon), each guarded so
+ * a linkage failure can never undo the settlement event that already applied:
+ *   1. Regional propagation — the change ripples to visible neighbours.
+ *   2. Crisis lifecycle — the DOMAIN names the transition (twinDirectiveForEvent:
+ *      'inject' on onset/escalate so the pulse ages the crisis; 'resolve' on
+ *      resolution so the pulse stops aging one the DM already ended). This is the
+ *      ONE place the store obeys it, so a new crisis event type cannot forget its
+ *      twin — the directive lands here by construction, not in a per-event bridge.
+ *   3. Party impact — a party-caused event with a world-scale analog also ripples
+ *      through the party-impact pipeline (active conditions, faction/NPC world
+ *      state, regional propagation, Wizard News).
+ * Timestamps reuse this apply's editedAt stamp so propagation stamps no
+ * wall-clock time of its own (replay is byte-identical — same args, same graph).
+ */
+function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState }) {
+  if (campaign && beforeEnvelope && typeof afterState.setCampaignRegionalGraph === 'function') {
+    const afterEnvelope = saveEnvelopeFor(
+      activeSaveId,
+      beforeSave,
+      afterState.settlement,
+      afterCampaignState || beforeSave?.campaignState,
+    );
+    const result = propagateRegionalEvent({
+      graph: campaign.regionalGraph,
+      beforeSettlement: beforeEnvelope,
+      afterSettlement: afterEnvelope,
+      event,
+      activeSettlementId: activeSaveId,
+      visibleSettlementIds: visibleSettlementIdsForCampaign(afterState, campaign),
+      maxDepth: 2,
+      waveDecay: 0.45,
+      now: afterState.editedAt,
+    });
+    if (result.impacts.length > 0) {
+      afterState.setCampaignRegionalGraph(campaign.id, result.graph);
+    }
+  }
+
+  const twinDirective = campaign ? twinDirectiveForEvent(event) : null;
+  if (twinDirective) {
+    try {
+      if (twinDirective.action === 'inject'
+        && typeof afterState.injectCampaignStressor === 'function') {
+        afterState.injectCampaignStressor(campaign.id, {
+          ...twinDirective.stressor,
+          originSettlementId: String(activeSaveId),
+          affectedSettlementIds: [String(activeSaveId)],
+        });
+      } else if (twinDirective.action === 'resolve'
+        && typeof afterState.resolveCampaignStressor === 'function') {
+        afterState.resolveCampaignStressor(campaign.id, {
+          type: twinDirective.type,
+          settlementId: String(activeSaveId),
+          now: afterState.editedAt,
+        });
+      }
+    } catch { /* the world half is best-effort */ }
+  }
+
+  if (event?.partyCaused && campaign) {
+    try {
+      const action = mapEventToPartyImpact(event, activeSaveId);
+      const record = afterState.recordPartyImpact;
+      if (action && typeof record === 'function') {
+        Promise.resolve(record(campaign.id, action)).catch(() => { /* world ripple is best-effort */ });
+      }
+    } catch { /* linkage is best-effort */ }
+  }
+}
+
 export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   settlement:    null,   // current generated settlement object
@@ -1280,32 +1379,9 @@ export const createSettlementSlice = (set, get) => ({
       };
     }
 
-    // Successor detection: when a pillar-tier NPC dies, surface the
-    // engine's ranked successor list to the UI so the DM doesn't have
-    // to invent a replacement from scratch. The prompt is informational
-    // and dismissible; it does not block other UI flow. The original
-    // pre-mutation settlement is the source of truth for "who was alive
-    // and linked to whom" because the post-mutation copy already shows
-    // the dead NPC as removed/dead.
-    let pendingSuccession = null;
-    if (event?.type === 'KILL_NPC') {
-      const outgoing = (state.settlement.npcs || []).find(n =>
-        (n.id && n.id === event.targetId) ||
-        (n.name && n.name.toLowerCase() === String(event.targetId || '').toLowerCase()),
-      );
-      const importance = event.payload?.importance || (outgoing ? inferImportance(outgoing) : 'notable');
-      if (importance === 'pillar' && outgoing) {
-        const suggestedIds = inferSuccessors({ outgoing, settlement: state.settlement, limit: 3 });
-        pendingSuccession = {
-          outgoingNpcId:   outgoing.id || outgoing.name,
-          outgoingNpcName: outgoing.name || 'Unknown',
-          outgoingRole:    outgoing.role || '',
-          linkedInstitutionIds: outgoing.linkedInstitutionIds || [],
-          suggestedSuccessorIds: suggestedIds,
-          originEventId:   event.id,
-        };
-      }
-    }
+    // Successor detection (pure; see computePendingSuccession): a dead
+    // pillar-tier NPC surfaces a ranked, dismissible successor prompt for the DM.
+    const pendingSuccession = computePendingSuccession(state.settlement, event);
 
     set(s => {
       s.settlement     = nextSettlement;
@@ -1340,80 +1416,11 @@ export const createSettlementSlice = (set, get) => ({
       });
     }
 
-    if (campaign && beforeEnvelope && typeof afterState.setCampaignRegionalGraph === 'function') {
-      const afterEnvelope = saveEnvelopeFor(
-        activeSaveId,
-        beforeSave,
-        afterState.settlement,
-        afterCampaignState || beforeSave?.campaignState,
-      );
-      const result = propagateRegionalEvent({
-        graph: campaign.regionalGraph,
-        beforeSettlement: beforeEnvelope,
-        afterSettlement: afterEnvelope,
-        event,
-        activeSettlementId: activeSaveId,
-        visibleSettlementIds: visibleSettlementIdsForCampaign(afterState, campaign),
-        maxDepth: 2,
-        waveDecay: 0.45,
-        // Reuse this apply's editedAt stamp: the canon path threads `now`
-        // so propagation stamps no wall-clock time of its own (replay
-        // byte-identical — same args, same graph, to the byte).
-        now: afterState.editedAt,
-      });
-      if (result.impacts.length > 0) {
-        afterState.setCampaignRegionalGraph(campaign.id, result.graph);
-      }
-    }
+    // Propagate the committed event into the campaign world engine — regional
+    // graph, crisis-lifecycle twin, party-impact pipeline. See the helper for
+    // the per-consumer rationale; all canon-only and best-effort + guarded.
+    rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState });
 
-    // Crisis lifecycle — the roaming-twin half of an authored crisis event
-    // (Wave 8 #4). The DOMAIN names the transition (crisisLifecycle's
-    // twinDirectiveForEvent: 'inject' on onset/escalate so the pulse ages the
-    // crisis — decay, counterforces, synergies, echoes — instead of it living
-    // only on the dossier; 'resolve' on resolution so the pulse stops aging a
-    // crisis the DM already ended and its residual aftermath is queued). This
-    // consumer is the ONE place the store obeys it — a new crisis event type
-    // registered in the lifecycle cannot forget its twin, because the
-    // directive lands here by construction instead of in a per-event bridge.
-    // Canon-only (campaign is set only in canon); best-effort + guarded: the
-    // settlement event already applied. The resolution threads this apply's
-    // minted timestamp so it stamps no wall-clock time of its own.
-    const twinDirective = campaign ? twinDirectiveForEvent(event) : null;
-    if (twinDirective) {
-      try {
-        if (twinDirective.action === 'inject'
-          && typeof afterState.injectCampaignStressor === 'function') {
-          afterState.injectCampaignStressor(campaign.id, {
-            ...twinDirective.stressor,
-            originSettlementId: String(activeSaveId),
-            affectedSettlementIds: [String(activeSaveId)],
-          });
-        } else if (twinDirective.action === 'resolve'
-          && typeof afterState.resolveCampaignStressor === 'function') {
-          afterState.resolveCampaignStressor(campaign.id, {
-            type: twinDirective.type,
-            settlementId: String(activeSaveId),
-            now: afterState.editedAt,
-          });
-        }
-      } catch { /* the world half is best-effort */ }
-    }
-
-    // §8 M3b Phase 2 — a party-caused event with a world-scale analog also
-    // ripples through the world engine (active conditions, faction/NPC
-    // world-state, regional propagation, Wizard News) via the party-impact
-    // pipeline. Canon-only (campaign is set only in canon); attribution-only
-    // events map to null and do nothing here. Best-effort + guarded: a linkage
-    // failure must never undo the settlement event that already applied.
-    if (event?.partyCaused && campaign) {
-      try {
-        const action = mapEventToPartyImpact(event, activeSaveId);
-        const record = afterState.recordPartyImpact;
-        if (action && typeof record === 'function') {
-          Promise.resolve(record(campaign.id, action)).catch(() => { /* world ripple is best-effort */ });
-        }
-      } catch { /* linkage is best-effort */ }
-    }
     return logEntry;
   },
 
