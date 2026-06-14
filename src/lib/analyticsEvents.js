@@ -1,0 +1,193 @@
+/**
+ * analyticsEvents.js — pure event registry (no transport, no side effects).
+ *
+ * Extracted from analytics.js so the edge ingest function can validate against
+ * the SAME frozen contract (via the generated bundle, see
+ * scripts/build-edge-shared.mjs). analytics.js re-exports EVENTS so all existing
+ * call sites and the `funnel-event-contract` ESLint rule are untouched.
+ *
+ * Three things live here:
+ *   - EVENTS       — frozen { CONSTANT: 'snake_case_name' } registry.
+ *   - EVENT_CLASS  — parallel { CONSTANT: 'essential' | 'research' } map. Drives
+ *                    consent gating: research-class events are never built or
+ *                    mirrored without explicit opt-in (see consent.js).
+ *   - EVENTS_REV   — bumped when the contract shape changes (stamped on rows).
+ *
+ * Event-name contract: ^[a-z][a-z0-9_]{2,63}$ (enforced in the edge fn + a test).
+ */
+
+import { EDIT_KINDS } from '../domain/pendingEdits.js';
+
+export { EDIT_KINDS };
+
+/** Contract revision — bump on a breaking shape change. */
+export const EVENTS_REV = 1;
+
+export const EVENTS = Object.freeze({
+  // ── Tier 8.8 — minimum 4-event funnel ─────────────────────────────────
+  HOMEPAGE_VIEW:                  'homepage_view',
+  ANONYMOUS_GENERATION_COMPLETED: 'anonymous_generation_completed',
+  SIGNUP_AFTER_ANON:              'signup_after_anon',
+  PAID_AFTER_ANON:                'paid_after_anon',
+
+  // ── Tier 8.9 — full schema ─────────────────────────────────────────────
+  ANONYMOUS_GENERATION_STARTED:   'anonymous_generation_started',
+  DOSSIER_PREVIEW_VIEWED:         'dossier_preview_viewed',
+  HOW_SIMULATED_OPENED:           'how_simulated_opened',
+  SIGNUP_GATE_SEEN:               'signup_gate_seen',
+  SIGNUP_STARTED:                 'signup_started',
+  SIGNUP_COMPLETED:               'signup_completed',
+  SETTLEMENT_SAVED:               'settlement_saved',
+  PDF_EXPORT_CLICKED:             'pdf_export_clicked',
+  SINGLE_DOSSIER_CHECKOUT_STARTED:'single_dossier_checkout_started',
+  SINGLE_DOSSIER_PURCHASED:       'single_dossier_purchased',
+  PREMIUM_MODAL_SEEN:             'premium_modal_seen',
+  PREMIUM_CHECKOUT_STARTED:       'premium_checkout_started',
+  PREMIUM_PURCHASED:              'premium_purchased',
+  AI_NARRATIVE_CLICKED:           'ai_narrative_clicked',
+  AI_NARRATIVE_COMPLETED:         'ai_narrative_completed',
+  CREDITS_EXHAUSTED:              'credits_exhausted',
+  NEIGHBOR_PREVIEW_CLICKED:       'neighbor_preview_clicked',
+  UPGRADE_AFTER_NEIGHBOR_CLICKED: 'upgrade_after_neighbor_clicked',
+
+  // ── P100 / Pillar C — critique-implementation expansion ────────────────
+  WOW_REVEAL_SHOWN:               'wow_reveal_shown',
+  WOW_REVEAL_COMPLETED:           'wow_reveal_completed',
+  SAVE_BUTTON_CLICKED:            'save_button_clicked',
+  SAVE_SIGNUP_INTENT_OPENED:      'save_signup_intent_opened',
+  SAVE_SIGNUP_INTENT_FULFILLED:   'save_signup_intent_fulfilled',
+  PRICING_MOMENT_SHOWN:           'pricing_moment_shown',
+  PRICING_MOMENT_CLICKED:         'pricing_moment_clicked',
+  PRICING_MOMENT_DISMISSED:       'pricing_moment_dismissed',
+  WELCOME_CREDIT_GRANTED:         'welcome_credit_granted',
+  WELCOME_CREDIT_SPENT:           'welcome_credit_spent',
+  ANON_CAP_UNLOCK_SHOWN:          'anon_cap_unlock_shown',
+  LOCKED_DESTINATION_SHOWN:       'locked_destination_shown',
+  DOSSIER_GROUP_TAB_CLICKED:      'dossier_group_tab_clicked',
+  SIMULATION_DRAWER_OPENED:       'simulation_drawer_opened',
+  EDIT_MODE_TOGGLED:              'edit_mode_toggled',
+  EDIT_PENDING_QUEUED:            'edit_pending_queued',
+  EDIT_CASCADE_PREVIEWED:         'edit_cascade_previewed',
+  EDIT_COMMITTED:                 'edit_committed',
+  EDIT_REVERTED:                  'edit_reverted',
+  WORKSHOP_OPENED:                'workshop_opened',
+  WORKSHOP_LOCKED_SHOWN:          'workshop_locked_shown',
+  MAP_ROUTES_MODE_ENTERED:        'map_routes_mode_entered',
+  MAP_DROP_PREVIEW_SHOWN:         'map_drop_preview_shown',
+  RETURN_VISIT_DETECTED:          'return_visit_detected',
+  WELCOME_BACK_OPEN_CLICKED:      'welcome_back_open_clicked',
+  FOUNDER_TILE_SHOWN:             'founder_tile_shown',
+  FOUNDER_TILE_CLICKED:           'founder_tile_clicked',
+  HELP_POPOVER_OPENED:            'help_popover_opened',
+  COMPENDIUM_SEARCH:              'compendium_search',
+
+  // ── v2 taxonomy: generation ────────────────────────────────────────────
+  GENERATION_STARTED:             'generation_started',
+  GENERATION_COMPLETED:           'generation_completed',
+  GENERATION_FAILED:              'generation_failed',
+  GENERATION_STEP_TIMINGS:        'generation_step_timings',     // research
+  WIZARD_STEP_VIEWED:             'wizard_step_viewed',
+  WIZARD_ABANDONED:               'wizard_abandoned',
+  REGENERATION_TRIGGERED:         'regeneration_triggered',
+
+  // ── v2: dossier reading ────────────────────────────────────────────────
+  DOSSIER_TAB_VIEWED:             'dossier_tab_viewed',
+  DOSSIER_SECTION_DWELL:          'dossier_section_dwell',
+  DOSSIER_READ_SESSION_SUMMARY:   'dossier_read_session_summary',
+  CAUSAL_EXPLANATION_OPENED:      'causal_explanation_opened',
+  PIPELINE_RAIL_STEP_INSPECTED:   'pipeline_rail_step_inspected',
+  COMPENDIUM_ENTRY_OPENED:        'compendium_entry_opened',
+  NPC_PINNED:                     'npc_pinned',
+
+  // ── v2: editing ────────────────────────────────────────────────────────
+  EDIT_DROPPED:                   'edit_dropped',
+  CANON_PHASE_CHANGED:            'canon_phase_changed',
+  CANON_EDIT_CHOICE_MADE:         'canon_edit_choice_made',
+  NARRATIVE_DRIFT_MODAL_SHOWN:    'narrative_drift_modal_shown',
+  NARRATIVE_DRIFT_DECISION:       'narrative_drift_decision',
+  VERSION_RESTORED:               'version_restored',
+
+  // ── v2: ai ─────────────────────────────────────────────────────────────
+  AI_GENERATION_STARTED:          'ai_generation_started',
+  AI_GENERATION_COMPLETED:        'ai_generation_completed',
+  AI_GENERATION_FAILED:           'ai_generation_failed',
+  AI_VERIFIER_REPORT:             'ai_verifier_report',
+  NARRATIVE_VIEW_TOGGLED:         'narrative_view_toggled',
+  AI_NARRATIVE_STALE_DETECTED:    'ai_narrative_stale_detected',
+  CREDITS_SPENT:                  'credits_spent',
+
+  // ── v2: campaign / world pulse ─────────────────────────────────────────
+  WORLD_PULSE_PREVIEWED:          'world_pulse_previewed',
+  WORLD_PULSE_ADVANCED:           'world_pulse_advanced',
+  WORLD_PULSE_BLOCKED:            'world_pulse_blocked',
+  WORLD_CANONIZED:                'world_canonized',
+  WORLD_PULSE_PROPOSAL_APPLIED:   'world_pulse_proposal_applied',
+  PARTY_IMPACT_RECORDED:          'party_impact_recorded',
+  WORLD_STRESSOR_TRANSITIONS:     'world_stressor_transitions',  // research
+  WIZARD_NEWS_PANEL_OPENED:       'wizard_news_panel_opened',
+  SIMULATION_RULES_UPDATED:       'simulation_rules_updated',
+  CHRONICLE_GENERATED:            'chronicle_generated',
+
+  // ── v2: regional graph ─────────────────────────────────────────────────
+  REGIONAL_CHANNEL_STATUS_CHANGED:'regional_channel_status_changed',
+  REGIONAL_IMPACT_QUEUED:         'regional_impact_queued',
+  REGIONAL_IMPACT_STATUS_CHANGED: 'regional_impact_status_changed',
+  REGIONAL_GRAPH_SNAPSHOT:        'regional_graph_snapshot',     // research
+  NEIGHBOUR_GENERATED:            'neighbour_generated',
+  NEIGHBOUR_LINKED:               'neighbour_linked',
+
+  // ── v2: map ────────────────────────────────────────────────────────────
+  MAP_OPENED:                     'map_opened',
+  MAP_PLACEMENT_ADDED:            'map_placement_added',
+  MAP_PLACEMENT_REMOVED:          'map_placement_removed',
+  MAP_ROUTE_DRAWN:                'map_route_drawn',
+  MAP_SAVED:                      'map_saved',
+
+  // ── v2: sharing / export ───────────────────────────────────────────────
+  PDF_EXPORT_COMPLETED:           'pdf_export_completed',
+  GALLERY_PUBLISHED:              'gallery_published',
+  GALLERY_UNPUBLISHED:            'gallery_unpublished',
+  GALLERY_DOSSIER_VIEWED:         'gallery_dossier_viewed',
+  GALLERY_ENGAGEMENT:             'gallery_engagement',
+
+  // ── v2: library / revisit ──────────────────────────────────────────────
+  SETTLEMENT_REOPENED:            'settlement_reopened',
+  SETTLEMENT_DELETED:             'settlement_deleted',
+  LIBRARY_VIEWED:                 'library_viewed',
+  SESSION_STARTED:                'session_started',
+
+  // ── v2: research / consent ─────────────────────────────────────────────
+  SETTLEMENT_FINGERPRINT_CAPTURED:'settlement_fingerprint_captured',  // research
+  CONSENT_UPDATED:                'consent_updated',
+});
+
+/**
+ * The four research-class events (doc §8). Everything else is essential.
+ * Research-class events require explicit `research` consent: they are never
+ * built client-side without it, never mirrored to a third-party provider, and
+ * clamped again server-side.
+ */
+export const RESEARCH_EVENT_KEYS = Object.freeze([
+  'GENERATION_STEP_TIMINGS',
+  'WORLD_STRESSOR_TRANSITIONS',
+  'REGIONAL_GRAPH_SNAPSHOT',
+  'SETTLEMENT_FINGERPRINT_CAPTURED',
+]);
+
+const _research = new Set(RESEARCH_EVENT_KEYS);
+
+/** { CONSTANT: 'essential' | 'research' } — keys are 1:1 with EVENTS (test-pinned). */
+export const EVENT_CLASS = Object.freeze(
+  Object.fromEntries(Object.keys(EVENTS).map(k => [k, _research.has(k) ? 'research' : 'essential'])),
+);
+
+/** Resolve the class for an event NAME ('homepage_view') or CONSTANT. */
+export function classForEvent(eventName) {
+  for (const [k, v] of Object.entries(EVENTS)) {
+    if (v === eventName) return EVENT_CLASS[k];
+  }
+  return EVENT_CLASS[eventName] || null; // allow passing the CONSTANT directly
+}
+
+/** Validate an event name against the wire contract. */
+export const EVENT_NAME_RE = /^[a-z][a-z0-9_]{2,63}$/;
