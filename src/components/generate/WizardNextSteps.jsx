@@ -20,10 +20,23 @@
  * builder is exported so it can be unit-tested without a DOM.
  */
 
+import { useState } from 'react';
 import { useStore } from '../../store/index.js';
 import {
   GOLD, GOLD_BG, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, R,
 } from '../theme.js';
+
+// Persistent "Got it" dismiss — once the user closes the What's-next guide it
+// stays closed for them (mirrors the first-dossier callout popup pattern).
+const DISMISS_KEY = 'sf:dismissed_whats_next';
+function isWhatsNextDismissed() {
+  try { return typeof localStorage !== 'undefined' && localStorage.getItem(DISMISS_KEY) === '1'; }
+  catch { return false; }
+}
+function markWhatsNextDismissed() {
+  try { if (typeof localStorage !== 'undefined') localStorage.setItem(DISMISS_KEY, '1'); }
+  catch { /* storage unavailable — accept ephemeral dismiss */ }
+}
 
 /** The save step's framing depends on whether the user can save yet. */
 function saveStep({ canSave, signedIn }) {
@@ -94,7 +107,11 @@ export default function WizardNextSteps() {
   const canSave    = useStore(s => s.canSave());
   const authTier   = useStore(s => s.auth?.tier);
 
+  const [dismissed, setDismissed] = useState(isWhatsNextDismissed);
+  const handleDismiss = () => { markWhatsNextDismissed(); setDismissed(true); };
+
   if (!settlement) return null;
+  if (dismissed) return null;
 
   // auth tier is 'anon' | 'free' | 'premium' — 'wanderer' is a pricing key, never
   // an auth tier, so the old check treated every signed-in user as anonymous.
@@ -115,15 +132,29 @@ export default function WizardNextSteps() {
       <div style={{
         padding: `${SP.sm + 1}px ${SP.lg}px`, background: CARD_HDR,
         borderBottom: `1px solid ${BORDER}`,
+        display: 'flex', alignItems: 'baseline', gap: SP.sm,
       }}>
         <span style={{
           fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK,
         }}>
           What&rsquo;s next
         </span>
-        <span style={{ fontSize: FS.xs, color: MUTED, marginLeft: SP.sm }}>
+        <span style={{ fontSize: FS.xs, color: MUTED, flex: 1, minWidth: 0 }}>
           {guide.headline}
         </span>
+        <button
+          type="button"
+          onClick={handleDismiss}
+          aria-label="Dismiss what's next"
+          title="Got it"
+          style={{
+            flexShrink: 0, background: 'transparent', border: 'none',
+            color: MUTED, cursor: 'pointer', fontFamily: sans,
+            fontSize: FS.xs, fontWeight: 700, padding: '2px 6px', lineHeight: 1,
+          }}
+        >
+          Got it ×
+        </button>
       </div>
 
       <ol style={{
