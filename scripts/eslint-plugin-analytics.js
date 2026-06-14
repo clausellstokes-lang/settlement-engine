@@ -117,5 +117,71 @@ export default {
         };
       },
     },
+
+    'analytics-props-hygiene': {
+      meta: {
+        type: 'problem',
+        docs: {
+          description:
+            'Analytics props must be coarse (enums/bands/counts/booleans/hashes) — never names, prose, secrets, or whole domain objects.',
+        },
+        schema: [],
+        messages: {
+          bannedKey:
+            'Analytics prop "{{key}}" is forbidden — it carries free text/PII. Props must be coarse (enums, bands, counts, booleans, hashes), never names or prose.',
+          bannedSpread:
+            'Spreading "{{name}}" into analytics props can leak names/prose/secrets — pick explicit coarse fields instead.',
+        },
+      },
+      create(context) {
+        const BANNED_KEYS = new Set(['name', 'newName', 'text', 'prose', 'secret', 'description', 'notes', 'email', 'body', 'label']);
+        const BANNED_SPREADS = new Set(['settlement', 'npc', 'save', 'faction', 'institution', 'aiData', 'aiSettlement']);
+        let trackLocal = null;
+        let funnelLocal = null;
+
+        function checkPropsArg(node) {
+          const arg = node.arguments[1];
+          if (!arg || arg.type !== 'ObjectExpression') return;
+          for (const prop of arg.properties) {
+            if (prop.type === 'SpreadElement') {
+              const id = prop.argument;
+              if (id?.type === 'Identifier' && BANNED_SPREADS.has(id.name)) {
+                context.report({ node: prop, messageId: 'bannedSpread', data: { name: id.name } });
+              }
+              continue;
+            }
+            if (prop.type !== 'Property' || prop.computed) continue;
+            const key = prop.key.type === 'Identifier' ? prop.key.name
+              : (prop.key.type === 'Literal' ? String(prop.key.value) : null);
+            if (key && BANNED_KEYS.has(key)) {
+              context.report({ node: prop.key, messageId: 'bannedKey', data: { key } });
+            }
+          }
+        }
+
+        return {
+          ImportDeclaration(node) {
+            if (typeof node.source.value !== 'string') return;
+            if (!ANALYTICS_SOURCE.test(node.source.value)) return;
+            for (const spec of node.specifiers) {
+              if (spec.type !== 'ImportSpecifier') continue;
+              if (spec.imported?.name === 'track') trackLocal = spec.local.name;
+              if (spec.imported?.name === 'Funnel') funnelLocal = spec.local.name;
+            }
+          },
+          CallExpression(node) {
+            const callee = node.callee;
+            if (
+              funnelLocal && callee.type === 'MemberExpression' && !callee.computed
+              && callee.object.type === 'Identifier' && callee.object.name === funnelLocal
+              && callee.property.type === 'Identifier' && callee.property.name === 'track'
+            ) { checkPropsArg(node); return; }
+            if (trackLocal && callee.type === 'Identifier' && callee.name === trackLocal) {
+              checkPropsArg(node);
+            }
+          },
+        };
+      },
+    },
   },
 };

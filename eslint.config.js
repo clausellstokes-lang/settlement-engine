@@ -129,6 +129,8 @@ export default [
       // site already complies — there is no legacy debt to migrate, so
       // the contract can be enforced hard from day one.
       'analytics/funnel-event-contract': 'error',
+      // Props must be coarse — never names/prose/secrets or whole domain objects.
+      'analytics/analytics-props-hygiene': 'error',
     },
   },
 
