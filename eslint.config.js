@@ -21,6 +21,7 @@
 
 import js from '@eslint/js';
 import reactHooks from 'eslint-plugin-react-hooks';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 import visualBudget from './scripts/eslint-plugin-visual-budget.js';
 import analytics from './scripts/eslint-plugin-analytics.js';
@@ -152,6 +153,21 @@ export default [
         },
       ],
     },
+  },
+
+  // ── Accessibility (jsx-a11y) — WARN-only drift surface ───────────────────────
+  // The component/PDF JSX layer is excluded from tsc and had no a11y linting, so
+  // accessibility gaps accumulated invisibly. Add the recommended jsx-a11y rules
+  // at WARN (not error): the gate doesn't run --max-warnings 0, so this surfaces
+  // existing + new a11y issues for incremental cleanup without blocking work or
+  // requiring a big-bang burn-down. Promote to error once the count reaches zero
+  // (mirrors how the visual-budget rules were hardened).
+  {
+    files: ['src/**/*.jsx'],
+    plugins: { 'jsx-a11y': jsxA11y },
+    rules: Object.fromEntries(
+      Object.keys(jsxA11y.flatConfigs.recommended.rules).map(rule => [rule, 'warn']),
+    ),
   },
 
   // Data tables: arrow functions are written with uniform signatures

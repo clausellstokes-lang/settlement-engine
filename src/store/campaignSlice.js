@@ -186,6 +186,19 @@ async function persistSaveUpdates(updates = []) {
   }
 }
 
+/**
+ * Shared persist tail for the world-pulse mutators (advanceCampaignWorld /
+ * applyWorldPulseProposal / recordPartyImpact): flush the per-save updates, then
+ * sync the campaign snapshot. Both awaits run only when the mutator produced
+ * state. Failures inside persistSaveUpdates surface via campaignSyncError (see
+ * persistSaveUpdate). Centralizing the pattern keeps the three call sites honest.
+ */
+async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId }) {
+  if (!(result && campaignPersist)) return;
+  await persistSaveUpdates(persistUpdates);
+  await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+}
+
 function clearCampaignSyncBookkeeping() {
   primeCampaignSync([]);
 }
@@ -1007,10 +1020,7 @@ export const createCampaignSlice = (set, get) => {
       campaignPersist = cacheCampaignState(state);
     });
 
-    if (result && campaignPersist) {
-      await persistSaveUpdates(persistUpdates);
-      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
-    }
+    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
     return result;
   },
 
@@ -1033,10 +1043,7 @@ export const createCampaignSlice = (set, get) => {
       campaignPersist = cacheCampaignState(state);
     });
 
-    if (result && campaignPersist) {
-      await persistSaveUpdates(persistUpdates);
-      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
-    }
+    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
     return result;
   },
 
@@ -1063,10 +1070,7 @@ export const createCampaignSlice = (set, get) => {
       campaignPersist = cacheCampaignState(state);
     });
 
-    if (result && campaignPersist) {
-      await persistSaveUpdates(persistUpdates);
-      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
-    }
+    await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
     return result;
   },
 
