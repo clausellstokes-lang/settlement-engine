@@ -174,9 +174,8 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
 
       {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
       {/* Unsaved settlements (Create page) get a slim inline hint instead of
-          a disabled teaser button. The user already saw this hint above the
-          tab strip too — repeating it here in tab-context makes the connection
-          to "Daily Life" specifically. */}
+          a disabled teaser button — tab-contextual, so it explains what saving
+          unlocks for "Daily Life" specifically. */}
       {!dailyLifeEnabled ? (
         <div
           style={{
