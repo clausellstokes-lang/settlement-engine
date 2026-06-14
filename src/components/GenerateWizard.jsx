@@ -16,6 +16,7 @@ import { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react'
 import { ChevronRight, ChevronLeft, Zap, Settings, ArrowLeft, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { saves as savesService } from '../lib/saves.js';
+import { track, EVENTS } from '../lib/analytics.js';
 import ConfigurationPanel from './ConfigurationPanel';
 import InstitutionalGrid from './InstitutionalGrid';
 import ServicesTogglePanel from './ServicesTogglePanel';
@@ -96,6 +97,22 @@ const STEPS = [
     hint: 'Control which goods your settlement exports and imports. These feed into supply chains, economic viability, and cross-settlement trade dependencies.',
   },
 ];
+
+// Stable step id for analytics. Past the last real step the advanced wizard
+// shows the "Ready to Generate" close-out, which has no STEPS entry — give it
+// its own coarse id so wizard_step_viewed / wizard_abandoned stay meaningful.
+const stepIdFor = (index) => STEPS[index]?.id || 'closeout';
+
+// duration → coarse dwell band (taxonomy §Banding vocabularies). Derived
+// inline so the analytics prop stays coarse (no raw millisecond values).
+const dwellBand = (ms) => {
+  if (ms < 5000) return 'lt_5s';
+  if (ms < 15000) return '5_15s';
+  if (ms < 60000) return '15_60s';
+  if (ms < 300000) return '1_5m';
+  if (ms < 1800000) return '5_30m';
+  return 'gt_30m';
+};
 
 // ── Mode selector ────────────────────────────────────────────────────────────
 
@@ -338,6 +355,18 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const [generateError, setGenerateError] = useState(null);
   const [pendingExit, setPendingExit] = useState(null); // 'back' | 'new' — RNG unsaved-exit confirm
 
+  // ── Analytics: wizard-funnel session bookkeeping ─────────────────────────
+  // Plain refs so they never trigger renders. `generatedThisSession` flips
+  // true the first time the user fires Generate, suppressing wizard_abandoned.
+  // `visitedSteps` accumulates the distinct step ids seen; `wizardMountAt`
+  // anchors the dwell band for abandonment. All fire-and-forget, additive.
+  const generatedThisSession = useRef(false);
+  const visitedSteps = useRef(new Set());
+  // Stamped in the mount effect below (not during render — Date.now() is
+  // impure) so the dwell band in wizard_abandoned measures from first mount.
+  const wizardMountAt = useRef(0);
+  const lastViewedStep = useRef(null);
+
   // Sync showOutput when a new settlement is generated.
   const prevSettlementRef = useRef(null);
   useEffect(() => {
@@ -364,6 +393,64 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     prevWizardStepRef.current = wizardStep;
   }, [wizardStep, wizardMode, settlement]);
 
+  // Analytics: wizard_step_viewed. Fires on each step transition in the
+  // advanced, pre-generation wizard (the only mode with multiple steps).
+  // Additive + fire-and-forget; never touches navigation. Direction is
+  // derived from the previous step seen by THIS effect so it tracks the
+  // step the user actually lands on (including the close-out at STEPS.length).
+  const prevAnalyticsStepRef = useRef(null);
+  useEffect(() => {
+    if (wizardMode !== 'advanced' || settlement) return;
+    const prev = prevAnalyticsStepRef.current;
+    if (prev === wizardStep) return;
+    const stepId = stepIdFor(wizardStep);
+    try {
+      track(EVENTS.WIZARD_STEP_VIEWED, {
+        step_id: stepId,
+        step_index: wizardStep,
+        mode: 'advanced',
+        direction: prev == null ? 'next' : (wizardStep >= prev ? 'next' : 'back'),
+      });
+    } catch { /* analytics must never affect the wizard */ }
+    visitedSteps.current.add(stepId);
+    lastViewedStep.current = stepId;
+    prevAnalyticsStepRef.current = wizardStep;
+  }, [wizardStep, wizardMode, settlement]);
+
+  // Analytics: wizard_abandoned. Fires once on pagehide OR unmount when the
+  // user left the wizard without generating this session. Mount-only effect
+  // (refs hold the live session state) so it registers/cleans the listener
+  // exactly once. Self-deduped via `fired` so pagehide-then-unmount can't
+  // double-count. Additive + fire-and-forget.
+  useEffect(() => {
+    wizardMountAt.current = Date.now();
+    let fired = false;
+    const emitAbandon = () => {
+      if (fired) return;
+      if (generatedThisSession.current) return;
+      // Nothing meaningful to report if the wizard was never really entered.
+      if (visitedSteps.current.size === 0 && lastViewedStep.current == null) return;
+      fired = true;
+      try {
+        track(EVENTS.WIZARD_ABANDONED, {
+          last_step_id: lastViewedStep.current || 'closeout',
+          steps_visited_count: visitedSteps.current.size,
+          dwell_ms_band: dwellBand(Date.now() - wizardMountAt.current),
+        });
+      } catch { /* analytics must never throw */ }
+    };
+    const onPageHide = () => emitAbandon();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('pagehide', onPageHide);
+    }
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('pagehide', onPageHide);
+      }
+      emitAbandon();
+    };
+  }, []);
+
   const handleGenerate = useCallback(() => {
     // Tier 7.2 — anonymous daily cap. Regeneration counts against the same
     // 3/day allowance as the first generation (enforced in the store), so
@@ -374,6 +461,32 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       return;
     }
     setGenerateError(null);
+    // Analytics (additive, fire-and-forget): generation_started. Read coarse
+    // config enums + toggle counts from a fresh store snapshot so we never
+    // add a render-triggering subscription. Mark the session as having
+    // generated so wizard_abandoned won't fire on unmount.
+    generatedThisSession.current = true;
+    try {
+      const st = useStore.getState();
+      const cfg = st.config || {};
+      const inst = st.institutionToggles || {};
+      let forced = 0, excluded = 0;
+      for (const v of Object.values(inst)) {
+        if (v?.require) forced++;
+        if (v?.forceExclude) excluded++;
+      }
+      track(EVENTS.GENERATION_STARTED, {
+        mode: st.wizardMode || 'basic',
+        tier: cfg.settType,
+        culture: cfg.culture,
+        trade_route_access: cfg.tradeRouteAccess,
+        monster_threat: cfg.monsterThreat,
+        magic_exists: !!cfg.magicExists,
+        forced_institution_count: forced,
+        excluded_institution_count: excluded,
+        has_trade_overrides: Object.keys(st.goodsToggles || {}).length > 0,
+      });
+    } catch { /* analytics must never affect generation */ }
     try {
       generate();
       clearLoadedFromSave();

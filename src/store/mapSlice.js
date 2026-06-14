@@ -13,6 +13,9 @@
  * terrain mode support.
  */
 
+import { track, EVENTS } from '../lib/analytics.js';
+import { computeRoadEdges } from '../lib/roadNetwork.js';
+
 export const MAP_MODES = {
   VIEW: 'view',
   TERRAIN: 'terrain',
@@ -231,20 +234,69 @@ export const createMapSlice = (set, get) => ({
   }),
 
   // ── Placements (settlement drops) ─────────────────────────────────────────
-  addPlacement: ({ burgId, settlementId, x, y, cellId }) => set(state => {
-    snapshotForUndo(state, 'place settlement');
-    state.mapState.placements[burgId] = {
-      settlementId,
-      x, y,
-      cellId: cellId ?? null,
-      placedAt: new Date().toISOString(),
-    };
-  }),
+  addPlacement: ({ burgId, settlementId, x, y, cellId, via }) => {
+    // Route count BEFORE the add — used only to detect whether this placement
+    // brought a new derived road edge into being (the MAP_ROUTE_DRAWN proxy).
+    let routeCountBefore = 0;
+    try {
+      const prev = get();
+      routeCountBefore = computeRoadEdges(prev.savedSettlements, prev.mapState.placements).length;
+    } catch { /* analytics-only; never block the placement */ }
 
-  removePlacementLocal: (burgId) => set(state => {
-    snapshotForUndo(state, 'remove placement');
-    delete state.mapState.placements[burgId];
-  }),
+    set(state => {
+      snapshotForUndo(state, 'place settlement');
+      state.mapState.placements[burgId] = {
+        settlementId,
+        x, y,
+        cellId: cellId ?? null,
+        placedAt: new Date().toISOString(),
+      };
+    });
+
+    // Fire-and-forget analytics — coarse counts only, NEVER coordinates.
+    try {
+      const next = get();
+      const placementCountAfter = Object.keys(next.mapState.placements || {}).length;
+      // Tier of the just-placed settlement, derived inline as a coarse enum.
+      const save = settlementId
+        ? (next.savedSettlements || []).find(s => String(s?.id) === String(settlementId))
+        : null;
+      const tier = save?.settlement?.tier || save?.tier || 'unknown';
+      track(EVENTS.MAP_PLACEMENT_ADDED, {
+        placement_count_after: placementCountAfter,
+        tier,
+        via: via === 'picker' ? 'picker' : 'drop',
+      });
+
+      // MAP_ROUTE_DRAWN — routes are derived (computeRoadEdges), not hand-drawn;
+      // a placement that grows the road graph is the natural "a route appeared"
+      // moment. Only fire when the edge count strictly increases.
+      const edges = computeRoadEdges(next.savedSettlements, next.mapState.placements);
+      if (edges.length > routeCountBefore) {
+        // Did this add link two settlement-backed placements (vs an empty burg)?
+        const linksTwoPlaced = edges.some(e => {
+          const a = next.mapState.placements[e.fromBurgId];
+          const b = next.mapState.placements[e.toBurgId];
+          return !!(a?.settlementId && b?.settlementId);
+        });
+        track(EVENTS.MAP_ROUTE_DRAWN, {
+          route_count_after: edges.length,
+          links_two_placed_settlements: linksTwoPlaced,
+        });
+      }
+    } catch { /* analytics is best-effort; never affect placement behavior */ }
+  },
+
+  removePlacementLocal: (burgId) => {
+    set(state => {
+      snapshotForUndo(state, 'remove placement');
+      delete state.mapState.placements[burgId];
+    });
+    try {
+      const placementCountAfter = Object.keys(get().mapState.placements || {}).length;
+      track(EVENTS.MAP_PLACEMENT_REMOVED, { placement_count_after: placementCountAfter });
+    } catch { /* analytics is best-effort */ }
+  },
 
   // Update x/y (and optionally cellId) for an existing placement. Used by
   // drag-to-move on the selected map icon.

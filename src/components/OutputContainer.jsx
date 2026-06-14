@@ -1,4 +1,4 @@
-import React, { useState, useRef, lazy, Suspense } from 'react';
+import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { FS } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
 import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText } from 'lucide-react';
@@ -12,6 +12,7 @@ import { AiOverlayViolations } from './primitives/AiOverlayViolations.jsx';
 import { RegenerationDeltaCard } from './primitives/RegenerationDeltaCard.jsx';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
+import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
@@ -109,6 +110,18 @@ const TABS = [
 ];
 const REROLLABLE = { npcs: 'Reroll NPCs', history: 'Reroll History' };
 
+// Coarse dwell-time banding (taxonomy §"Banding vocabularies": dwell_ms_band).
+// Derived inline so no raw durations ever leave the client.
+function dwellMsBand(ms) {
+  const n = Number(ms) || 0;
+  if (n < 5000) return 'lt_5s';
+  if (n < 15000) return '5_15s';
+  if (n < 60000) return '15_60s';
+  if (n < 300000) return '1_5m';
+  if (n < 1800000) return '5_30m';
+  return 'gt_30m';
+}
+
 function chronicleReferenceFor(saveEntry) {
   const cs = saveEntry?.campaignState;
   return cs?.worldState?.canonizedAt || cs?.canonizedAt || cs?.startedAt || null;
@@ -195,7 +208,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const tableViewOpen = useStore(s => s.userPrefs?.tableViewOpen);
   const setUserPref = useStore(s => s.setUserPref);
   const [activeTab, _setActiveTab] = useState('overview');
-  const setActiveTab = (id) => {
+  // Analytics: how the next resolved tab came to be selected. A direct tab-strip
+  // click reports 'tab_click', a group click 'group_click'; the resolver falling
+  // back to a different tab (or the initial mount) reports 'auto_select'. Read +
+  // cleared by the DOSSIER_TAB_VIEWED effect below. Additive — never affects flow.
+  const pendingTabViaRef = useRef('auto_select');
+  const setActiveTab = (id, via = 'tab_click') => {
+    pendingTabViaRef.current = via;
     _setActiveTab(id);
     if (!readOnly && trackTabExplored) trackTabExplored();
   };
@@ -384,7 +403,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     const group = TAB_GROUPS[gid];
     if (group && group.tabs[0] && selectedTab !== group.tabs[0]) {
       const firstAvailable = group.tabs.find(tid => allTabs.some(t => t.id === tid));
-      if (firstAvailable) setActiveTab(firstAvailable);
+      if (firstAvailable) setActiveTab(firstAvailable, 'group_click');
     }
     Funnel.track(EVENTS.DOSSIER_GROUP_TAB_CLICKED, { group: gid });
   };
@@ -401,6 +420,75 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     : allTabs;
 
   const scroll = (dir) => scrollRef.current?.scrollBy({ left: dir * 120, behavior: 'smooth' });
+
+  // ── Dossier-reading analytics (taxonomy §2; additive, fire-and-forget) ──────
+  // Coarse props only: tab/group enums, narrative-mode enum, dwell bands, counts.
+  // No names, no prose, no whole settlement — derived inline below.
+  const dossierContentRef = useRef(null);
+  // Narrative lens the reader is currently in. showNarrative is the resolved
+  // "AI clone is the source" flag computed above.
+  const narrativeMode = showNarrative ? 'ai' : 'raw';
+  // Stable getters for inside the dwell/unmount effects so they don't churn the
+  // effect deps. Refs mirror the latest render values, written in an effect so
+  // the assignment is a committed side effect, never a during-render mutation.
+  const tabGroupRef = useRef(tabToGroup);
+  const narrativeModeRef = useRef(narrativeMode);
+  useEffect(() => { tabGroupRef.current = tabToGroup; }, [tabToGroup]);
+  useEffect(() => { narrativeModeRef.current = narrativeMode; }, [narrativeMode]);
+
+  // Per-mount reading aggregator — drives DOSSIER_READ_SESSION_SUMMARY. Holds
+  // only coarse aggregate state (a Set of viewed tab ids + the deepest-dwelt
+  // tab), never any content.
+  const readSessionRef = useRef({ tabsViewed: new Set(), deepestDwellTabId: null, deepestDwellMs: -1 });
+
+  // DOSSIER_TAB_VIEWED — fire once per resolved-tab change. `selectedTab` is the
+  // resolver's output (handles auto-fallback), so this also covers auto_select.
+  useEffect(() => {
+    if (!selectedTab) return;
+    const via = pendingTabViaRef.current || 'auto_select';
+    pendingTabViaRef.current = 'auto_select';
+    readSessionRef.current.tabsViewed.add(selectedTab);
+    Funnel.track(EVENTS.DOSSIER_TAB_VIEWED, {
+      tab_id: selectedTab,
+      group: tabGroupRef.current[selectedTab] || 'summary',
+      via,
+      narrative_mode: narrativeModeRef.current,
+    });
+  }, [selectedTab]);
+
+  // DOSSIER_SECTION_DWELL — fired once per tab activation by the hook when the
+  // content has been ≥50% visible + foreground for ≥2s. Coarse band only.
+  useSectionDwell(dossierContentRef, selectedTab, (dwellMs) => {
+    const agg = readSessionRef.current;
+    if (dwellMs > agg.deepestDwellMs) {
+      agg.deepestDwellMs = dwellMs;
+      agg.deepestDwellTabId = selectedTab;
+    }
+    Funnel.track(EVENTS.DOSSIER_SECTION_DWELL, {
+      tab_id: selectedTab,
+      group: tabGroupRef.current[selectedTab] || 'summary',
+      dwell_ms_band: dwellMsBand(dwellMs),
+      narrative_mode: narrativeModeRef.current,
+    });
+  });
+
+  // DOSSIER_READ_SESSION_SUMMARY — on unmount (page leave) and when the dossier
+  // switches to a different settlement (the reading session ends either way).
+  // saveId / settlement identity in the dep array re-runs the cleanup at the
+  // boundary, emitting the summary for the session that just closed.
+  const readSessionSubject = saveId || rawSettlement?.id || null;
+  useEffect(() => {
+    const agg = { tabsViewed: new Set(), deepestDwellTabId: null, deepestDwellMs: -1 };
+    readSessionRef.current = agg;
+    return () => {
+      const tabsViewedCount = agg.tabsViewed.size;
+      if (tabsViewedCount === 0) return; // nothing read — skip an empty summary
+      Funnel.track(EVENTS.DOSSIER_READ_SESSION_SUMMARY, {
+        tabs_viewed_count: tabsViewedCount,
+        deepest_dwell_tab_id: agg.deepestDwellTabId || undefined,
+      });
+    };
+  }, [readSessionSubject]);
 
   const renderTab = () => {
     const s = activeSettlement;
@@ -901,7 +989,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               style: { padding: 32, textAlign: 'center', color: '#9c8068',
                        fontFamily: 'Nunito,sans-serif', fontSize: FS.md }
             }, 'Loading\u2026') },
-          React.createElement('div', { style: { opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' } },
+          React.createElement('div', { ref: dossierContentRef, style: { opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' } },
             renderTab()
           )
         ),

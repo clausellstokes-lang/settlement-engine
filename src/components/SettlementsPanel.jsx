@@ -1,6 +1,9 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, ArrowRight, Edit3, Check, X, Map as MapIcon, FileText, GitBranch, Unlock} from 'lucide-react';
 
+import { track, EVENTS } from '../lib/analytics.js';
+import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
+
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
 import {getAllModifiers, EFFECT_CATEGORIES, fmtMod} from '../lib/relationshipGraph.js';
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
@@ -41,6 +44,46 @@ function migrateConfig(config) {
 // remove-neighbour handlers below still build links by hand, so they keep this
 // small lookup.
 function findSaveById(saves, id) { return saves.find(s => s.id === id) || null; }
+
+// ── Analytics banding (coarse, privacy-safe) ─────────────────────────────────
+// Counts → buckets so library/revisit events never carry raw cardinality.
+function saveCountBand(n) {
+  const c = Number(n) || 0;
+  if (c === 0) return 'zero';
+  if (c <= 2) return '1_2';
+  if (c <= 5) return '3_5';
+  if (c <= 10) return '6_10';
+  return 'gt_10';
+}
+// Day-gap band vocabulary (taxonomy §Banding): same_day · 1_3d · 4_7d · 8_30d · gt_30d.
+function dayGapBand(fromMs) {
+  const n = Number(fromMs);
+  if (!Number.isFinite(n) || n <= 0) return 'unknown';
+  const days = (Date.now() - n) / (24 * 60 * 60 * 1000);
+  if (days < 0) return 'unknown';
+  if (days <= 1) return 'same_day';
+  if (days <= 3) return '1_3d';
+  if (days <= 7) return '4_7d';
+  if (days <= 30) return '8_30d';
+  return 'gt_30d';
+}
+// Canon phase enum off a save's campaignState (defaults to 'draft' for legacy saves).
+function canonPhaseOf(save) {
+  const p = save?.campaignState?.phase;
+  return typeof p === 'string' ? p : 'draft';
+}
+// Best available "last edited" epoch ms for a save (campaignState.editedAt → savedAt).
+function lastEditedMs(save) {
+  const edited = save?.campaignState?.editedAt;
+  if (edited) { const t = Date.parse(edited); if (Number.isFinite(t)) return t; }
+  if (Number.isFinite(save?.savedAt)) return save.savedAt;
+  if (save?.timestamp) { const t = Date.parse(save.timestamp); if (Number.isFinite(t)) return t; }
+  return 0;
+}
+function hasAiData(save) {
+  const ai = save?.aiData;
+  return !!ai && typeof ai === 'object' && Object.keys(ai).length > 0;
+}
 
 const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', allied:'#1a5a28', secret_alliance:'#1a5a28', trade_partner:'#a0762a', patron:'#2a3a7a', client:'#2a3a7a', criminal_network:'#5a2a8a' };
 const _REL_TYPES = ['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
@@ -590,6 +633,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       .catch(e => { console.error('Failed to load saves:', e); setSavesLoading(false); });
   }, [setSaves]);
 
+  // LIBRARY_VIEWED — once per session, after saves have loaded so the count
+  // band is accurate. useFunnelEvent fires on the false→true transition and
+  // self-dedupes per session; payload resolves at fire time. Fire-and-forget.
+  useFunnelEvent(
+    EVENTS.LIBRARY_VIEWED,
+    !savesLoading,
+    () => ({ save_count_band: saveCountBand(saves.length), campaign_count: campaigns.length }),
+  );
+
   const handleReactivateSave = async (save) => {
     if (!save?.id || !canReactivateInactive) {
       setReactivationError('Choose an inactive settlement after freeing one of your three free slots.');
@@ -747,6 +799,16 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // ── Delete ──────────────────────────────────────────────────────────────
   const deleteConfirmed = (id) => {
     const deletedSave = saves.find(s => s.id === id);
+    // SETTLEMENT_DELETED — fired at the confirmed delete, before the save
+    // leaves local state. Coarse enums/bands/booleans only.
+    if (deletedSave) {
+      track(EVENTS.SETTLEMENT_DELETED, {
+        canon_phase: canonPhaseOf(deletedSave),
+        age_days_band: dayGapBand(lastEditedMs(deletedSave)),
+        had_ai_data: hasAiData(deletedSave),
+        was_published: !!deletedSave.is_public,
+      });
+    }
     const deletedNet = deletedSave?.settlement?.neighbourNetwork || [];
     let updated = saves.filter(s => s.id !== id).map(s => {
       const wasLinked = deletedNet.some(n => n.id === s.id || n.linkId);
@@ -895,6 +957,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   const onViewSettlement = (s) => {
     if (!isSaveActive(s)) return;
+    // SETTLEMENT_REOPENED — the revisit-gap event. Fired at the explicit
+    // library open. Coarse props only; never throws / affects control flow.
+    track(EVENTS.SETTLEMENT_REOPENED, {
+      days_since_edited_band: dayGapBand(lastEditedMs(s)),
+      canon_phase: canonPhaseOf(s),
+      has_ai_data: hasAiData(s),
+      save_count_band: saveCountBand(saves.length),
+      via: 'library',
+    });
     setDetail({ ...s, saveData: s });
   };
 

@@ -19,10 +19,11 @@ import {
   Newspaper, SlidersHorizontal, Zap, HelpCircle,
 } from 'lucide-react';
 import { flag } from '../lib/flags.js';
-import { Funnel, EVENTS } from '../lib/analytics.js';
+import { Funnel, EVENTS, track } from '../lib/analytics.js';
 import { useStore } from '../store/index.js';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
 import { MAP_MODES } from '../store/mapSlice.js';
+import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans, FS, SP, R, swatch, PARCH_100 } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
@@ -216,6 +217,7 @@ export default function WorldMap({ onNavigate } = {}) {
           settlementId: data.settlementId,
           x: data.x, y: data.y,
           cellId: data.cellId,
+          via: 'drop',
         });
       }
     });
@@ -242,6 +244,22 @@ export default function WorldMap({ onNavigate } = {}) {
   useEffect(() => {
     setMapLoading(true);
   }, [setMapLoading]);
+
+  // ── Analytics: MAP_OPENED on mount (fire-and-forget, once) ─────────────
+  // Coarse counts only — no coordinates, no names. Read from the live store
+  // so the effect can run exactly once without depending on slice churn.
+  useEffect(() => {
+    try {
+      const s = useStore.getState();
+      const placementCount = Object.keys(s.mapState?.placements || {}).length;
+      const routeCount = computeRoadEdges(s.savedSettlements, s.mapState?.placements).length;
+      track(EVENTS.MAP_OPENED, {
+        placement_count: placementCount,
+        route_count: routeCount,
+        has_campaign: !!s.activeCampaignId,
+      });
+    } catch { /* analytics is best-effort; never block mount */ }
+  }, []);
 
   // ── Native FMG layer toggles ─────────────────────────────────────────
   // Subscribe to the native-layer flags and push each into the iframe so
@@ -448,9 +466,21 @@ export default function WorldMap({ onNavigate } = {}) {
       // Store the blob on the map slice
       const seed = useStore.getState().mapState.seed;
       setMapSnapshot(snapshot, seed);
+      // Whether the campaign already had a persisted map (this save updates it
+      // vs. creates it). Read before the write so it reflects prior state.
+      const isUpdate = !!activeCampaign?.mapState;
       // Persist the whole map state (including placements, labels, etc.) into campaign
       saveCampaignMap(activeCampaignId, useStore.getState().mapState);
       const placementCount = Object.keys(useStore.getState().mapState.placements || {}).length;
+      // Fire-and-forget analytics — coarse counts only, no coordinates/names.
+      try {
+        const live = useStore.getState();
+        track(EVENTS.MAP_SAVED, {
+          placement_count: placementCount,
+          route_count: computeRoadEdges(live.savedSettlements, live.mapState.placements).length,
+          is_update: isUpdate,
+        });
+      } catch { /* analytics is best-effort */ }
       showToast('success', `Saved ${placementCount} placement(s) to ${activeCampaign?.name}`);
     } catch (err) {
       console.warn('[WorldMap] save snapshot failed', err);

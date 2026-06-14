@@ -14,6 +14,11 @@
  */
 
 import { getActiveAiCosts, getAiCost, getAiCostForModel } from '../config/pricing.js';
+import { track, EVENTS } from '../lib/analytics.js';
+
+/** Coarse band for a credit balance (analytics only — never a control-flow input). */
+const creditsRemainingBand = (n) =>
+  n <= 0 ? 'zero' : n <= 5 ? '1_5' : n <= 20 ? '6_20' : 'gt_20';
 
 /**
  * Compatibility export. New code should call `getActiveAiCosts()` from
@@ -64,6 +69,13 @@ export const createCreditsSlice = (set, get) => ({
         feature,
         timestamp: Date.now(),
       });
+    });
+
+    // Analytics: credit-burn shape at the spend chokepoint (fire-and-forget).
+    track(EVENTS.CREDITS_SPENT, {
+      action_type: feature,
+      cost: amount,
+      remaining_band: creditsRemainingBand(creditBalance - amount),
     });
     return true;
   },

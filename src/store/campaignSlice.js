@@ -73,8 +73,45 @@ import {
   reconcileTombstones,
   syncCampaignChanges,
 } from '../lib/campaignSync.js';
+import { track, EVENTS } from '../lib/analytics.js';
+import { captureFingerprint } from '../lib/researchCapture.js';
 
 const SCHEMA_VERSION = 2;
+
+/**
+ * Coarse, behavior-free analytics derivations for this slice. Each is a small
+ * pure helper that returns enums/counts/bands only — never names/prose/domain
+ * objects — so the additive track() calls stay fire-and-forget and lint-clean
+ * (analytics-props-hygiene). Wrapped at the call site is unnecessary because
+ * track() itself never throws.
+ */
+
+/** Count stressors in a world-state snapshot that were created at a given tick. */
+function countNewStressorsAtTick(worldState, tick) {
+  const stressors = Array.isArray(worldState?.stressors) ? worldState.stressors : [];
+  if (!Number.isFinite(tick)) return 0;
+  let count = 0;
+  for (const s of stressors) {
+    if (Number(s?.createdTick ?? s?.onsetTick ?? s?.tick) === tick) count++;
+  }
+  return count;
+}
+
+/** Unique, sorted channel-type enums from an array of regional impacts. */
+function channelTypesFromImpacts(impacts) {
+  const set = new Set();
+  for (const impact of Array.isArray(impacts) ? impacts : []) {
+    const t = impact?.channelType;
+    if (typeof t === 'string' && t) set.add(t);
+  }
+  return [...set].sort();
+}
+
+/** The coarse type enum for a world-pulse proposal (candidate/outcome kind). */
+function proposalTypeOf(proposal) {
+  const o = proposal?.outcome || {};
+  return o.candidateType || o.type || proposal?.type || 'unknown';
+}
 
 function campaignCacheOwner(state) {
   return state?.auth?.user?.id ? String(state.auth.user.id) : 'anon';
@@ -654,16 +691,27 @@ export const createCampaignSlice = (set, get) => {
 
   setRegionalChannelStatus: (campaignId, channelId, status) => {
     let graph = null;
+    let channelEvent = null;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const now = new Date().toISOString();
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      const before = (beforeGraph.channels || []).find(ch => ch.id === channelId);
+      if (before) {
+        channelEvent = {
+          channel_type: before.type || 'unknown',
+          from_status: before.status || 'unknown',
+          to_status: status,
+        };
+      }
       c.regionalGraph = domainSetRegionalChannelStatus(c.regionalGraph, channelId, status, { now });
       ensureCampaignWizardNews(c);
       c.updatedAt = now;
       graph = c.regionalGraph;
       persistCampaignState(state, campaignId);
     });
+    if (channelEvent) track(EVENTS.REGIONAL_CHANNEL_STATUS_CHANGED, channelEvent);
     return graph;
   },
 
@@ -880,6 +928,7 @@ export const createCampaignSlice = (set, get) => {
 
   queueCampaignRegionalImpacts: (campaignId, impacts = []) => {
     let graph = null;
+    let queued = false;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -889,24 +938,35 @@ export const createCampaignSlice = (set, get) => {
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
       c.updatedAt = now;
       graph = c.regionalGraph;
+      queued = true;
       persistCampaignState(state, campaignId);
     });
+    if (queued) {
+      track(EVENTS.REGIONAL_IMPACT_QUEUED, {
+        count: Array.isArray(impacts) ? impacts.length : 0,
+        channel_types: channelTypesFromImpacts(impacts),
+      });
+    }
     return graph;
   },
 
   setRegionalImpactStatus: (campaignId, impactId, status, patch = {}) => {
     let graph = null;
+    let impactEvent = null;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const now = new Date().toISOString();
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      const impact = (beforeGraph.queuedImpacts || []).find(i => i.id === impactId);
+      if (impact) impactEvent = { to_status: status, channel_type: impact.channelType || 'unknown' };
       c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, status, patch, { now });
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
       c.updatedAt = now;
       graph = c.regionalGraph;
       persistCampaignState(state, campaignId);
     });
+    if (impactEvent) track(EVENTS.REGIONAL_IMPACT_STATUS_CHANGED, impactEvent);
     return graph;
   },
 
@@ -949,25 +1009,35 @@ export const createCampaignSlice = (set, get) => {
         simulationRules: normalizeSimulationRules(options.simulationRules),
       };
     }
-    return domainPreviewCampaignWorldPulse({
+    const settlements = campaignSettlements(state, campaignId);
+    const preview = domainPreviewCampaignWorldPulse({
       campaign: previewCampaign,
-      saves: cloneJson(campaignSettlements(state, campaignId)),
+      saves: cloneJson(settlements),
       interval,
       now: options.now,
     });
+    track(EVENTS.WORLD_PULSE_PREVIEWED, {
+      interval,
+      settlement_count: settlements.length,
+      proposal_count: Array.isArray(preview?.proposals) ? preview.proposals.length : 0,
+    });
+    return preview;
   },
 
   canonizeCampaignWorld: async (campaignId) => {
     let campaignPersist = /** @type {any} */ (null);
+    let settlementCount = 0;
     const now = new Date().toISOString();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
+      settlementCount = campaignSettlements(state, campaignId).length;
       c.worldState = canonizeWorldState(c.worldState, now, c);
       c.updatedAt = now;
       campaignPersist = cacheCampaignState(state);
     });
     if (campaignPersist) {
+      track(EVENTS.WORLD_CANONIZED, { settlement_count: settlementCount });
       await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     }
     return campaignPersist?.snapshot?.find(c => c.id === campaignId)?.worldState || null;
@@ -991,6 +1061,9 @@ export const createCampaignSlice = (set, get) => {
       campaignPersist = cacheCampaignState(state);
     });
     if (campaignPersist) {
+      track(EVENTS.SIMULATION_RULES_UPDATED, {
+        changed_keys: Object.keys(patch || {}).sort(),
+      });
       await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     }
     return campaignPersist?.snapshot?.find(c => c.id === campaignId)?.worldState?.simulationRules || null;
@@ -1000,6 +1073,9 @@ export const createCampaignSlice = (set, get) => {
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
+    /** Saves to fingerprint after a successful pulse (cap 5). Collected inside
+     *  set() but used after, so the snapshot reflects post-apply settlements. */
+    let fingerprintSaves = [];
     const now = options.now || new Date().toISOString();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
@@ -1018,7 +1094,35 @@ export const createCampaignSlice = (set, get) => {
       if (!result) return;
       persistUpdates = applyWorldPulseResultToState(state, c, result, now);
       campaignPersist = cacheCampaignState(state);
+      // Collect the affected saves (post-apply) for the research fingerprint,
+      // capped at 5 per pulse so a large constellation doesn't flood capture.
+      const affectedIds = (Array.isArray(result.settlementUpdates) ? result.settlementUpdates : [])
+        .map(u => String(u.saveId));
+      const affected = new Set(affectedIds);
+      fingerprintSaves = (state.savedSettlements || [])
+        .filter(save => affected.has(String(save.id)))
+        .slice(0, 5)
+        .map(save => ({ id: save.id, settlement: cloneJson(save.settlement), save: { id: save.id, campaignState: cloneJson(save.campaignState) } }));
     });
+
+    // Fire-and-forget analytics — additive, after state has settled.
+    if (result && result.ok === false && result.reason === 'world_not_canonized') {
+      track(EVENTS.WORLD_PULSE_BLOCKED, { reason: 'world_not_canonized' });
+    } else if (result && campaignPersist) {
+      track(EVENTS.WORLD_PULSE_ADVANCED, {
+        interval: result.interval || interval,
+        tick_after: Number.isFinite(result.tick) ? result.tick : null,
+        events_applied_count: Array.isArray(result.autoApplied) ? result.autoApplied.length : 0,
+        new_stressor_count: countNewStressorsAtTick(result.worldState, result.tick),
+        resolved_stressor_count: Array.isArray(result.resolvedStressors) ? result.resolvedStressors.length : 0,
+      });
+      for (const entry of fingerprintSaves) {
+        captureFingerprint('pulse_advanced', entry.settlement, {
+          save: entry.save,
+          settlementUuid: String(entry.id),
+        });
+      }
+    }
 
     await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
     return result;
@@ -1028,10 +1132,14 @@ export const createCampaignSlice = (set, get) => {
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
+    let proposalType = 'unknown';
     const now = new Date().toISOString();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
+      // Read-only lookup of the to-be-applied proposal for its coarse type enum.
+      const proposal = (c.worldState?.proposals || []).find(p => p.id === proposalId);
+      proposalType = proposalTypeOf(proposal);
       result = domainApplyWorldPulseProposal({
         campaign: cloneJson(c),
         saves: cloneJson(campaignSettlements(state, campaignId)),
@@ -1043,6 +1151,9 @@ export const createCampaignSlice = (set, get) => {
       campaignPersist = cacheCampaignState(state);
     });
 
+    if (result && campaignPersist) {
+      track(EVENTS.WORLD_PULSE_PROPOSAL_APPLIED, { proposal_type: proposalType });
+    }
     await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
     return result;
   },
@@ -1070,6 +1181,9 @@ export const createCampaignSlice = (set, get) => {
       campaignPersist = cacheCampaignState(state);
     });
 
+    if (result && campaignPersist) {
+      track(EVENTS.PARTY_IMPACT_RECORDED, { action_type: action?.kind || 'unknown' });
+    }
     await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
     return result;
   },
@@ -1273,22 +1387,31 @@ export const createCampaignSlice = (set, get) => {
       persistCampaignState(state, campaignId);
     }),
 
-  appendCampaignChronicle: (campaignId, entry) =>
+  appendCampaignChronicle: (campaignId, entry) => {
+    let chronicleCount = null;
+    let chronicleTick = null;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c || !entry?.prose) return;
+      const tick = entry.tick ?? c.wizardNews?.currentTick ?? null;
       c.chronicles = [
         {
           id: entry.id || `chronicle_${campaignId}_${entry.tick ?? 'latest'}_${Date.now()}`,
-          tick: entry.tick ?? c.wizardNews?.currentTick ?? null,
+          tick,
           prose: entry.prose,
           createdAt: entry.createdAt || new Date().toISOString(),
         },
         ...(Array.isArray(c.chronicles) ? c.chronicles : []),
       ].slice(0, 24);
       c.updatedAt = new Date().toISOString();
+      chronicleCount = c.chronicles.length;
+      chronicleTick = Number.isFinite(tick) ? tick : null;
       persistCampaignState(state, campaignId);
-    }),
+    });
+    if (chronicleCount !== null) {
+      track(EVENTS.CHRONICLE_GENERATED, { entry_count_after: chronicleCount, tick: chronicleTick });
+    }
+  },
 
   /** Mark a campaign as the active one (WorldMap uses this to drive reloads) */
   setActiveCampaign: (id) =>

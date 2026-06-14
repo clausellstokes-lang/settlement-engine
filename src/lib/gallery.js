@@ -16,6 +16,7 @@
 import { supabase, isConfigured } from './supabase.js';
 import { toPublicSafe } from '../domain/display/publicSafe.js';
 import { getDeviceToken } from './deviceToken.js';
+import { track, EVENTS } from './analytics.js';
 
 const LIST_PAGE_SIZE = 24;
 const DEFAULT_SORT = 'relevant';
@@ -45,6 +46,16 @@ export async function publishSettlement(settlementId, metadata = null) {
   }
   const { data, error } = await supabase.rpc('publish_settlement', { target_id: settlementId });
   if (error) throw new Error(error.message || 'Publish failed');
+  // GALLERY_PUBLISHED — fire-and-forget on success. Only props derivable at
+  // this API layer: image presence + narrated-share opt-in (from the metadata
+  // the caller passed). tier / canon_phase aren't available here without
+  // changing the signature, so they're intentionally omitted.
+  try {
+    track(EVENTS.GALLERY_PUBLISHED, {
+      has_image: !!(metadata && String(metadata.imageUrl || '').trim()),
+      share_narrated: metadata?.shareNarrated === true,
+    });
+  } catch { /* analytics never affects publish */ }
   return data; // slug string
 }
 
@@ -53,6 +64,7 @@ export async function unpublishSettlement(settlementId) {
   if (!isConfigured) throw new Error('Supabase not configured');
   const { error } = await supabase.rpc('unpublish_settlement', { target_id: settlementId });
   if (error) throw new Error(error.message || 'Unpublish failed');
+  try { track(EVENTS.GALLERY_UNPUBLISHED, {}); } catch { /* never affects unpublish */ }
 }
 
 export async function updateGalleryMetadata(settlementId, metadata = {}) {
@@ -222,6 +234,7 @@ export async function toggleGalleryVote(settlementId) {
   if (!isConfigured) throw new Error('Supabase not configured');
   const { data, error } = await supabase.rpc('toggle_gallery_vote', { target_settlement_id: settlementId });
   if (error) throw new Error(error.message || 'Vote failed');
+  try { track(EVENTS.GALLERY_ENGAGEMENT, { action: 'vote' }); } catch { /* never affects vote */ }
   const row = Array.isArray(data) ? data[0] : data;
   return { netVotes: Math.max(0, Number(row?.net_votes) || 0), voted: !!row?.voted };
 }
@@ -258,6 +271,7 @@ export async function addGalleryComment(settlementId, body) {
     comment_body: body,
   });
   if (error) throw new Error(error.message || 'Comment failed');
+  try { track(EVENTS.GALLERY_ENGAGEMENT, { action: 'comment' }); } catch { /* never affects comment */ }
   return data;
 }
 
@@ -276,6 +290,7 @@ export async function reportGalleryDossier(settlementId, reason = 'other', body 
     report_body: body,
   });
   if (error) throw new Error(error.message || 'Report failed');
+  try { track(EVENTS.GALLERY_ENGAGEMENT, { action: 'report' }); } catch { /* never affects report */ }
   return data;
 }
 

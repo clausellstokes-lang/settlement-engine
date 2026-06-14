@@ -383,9 +383,16 @@ export const createSettlementSlice = (set, get) => ({
       state.pendingEditsClock = clock;
       state.pendingEditsQueue = _pe_appendEdit(state.pendingEditsQueue || [], edit);
     });
-    // Analytics — once per queued edit
+    // Analytics — once per queued edit. Read coarse context AFTER the append so
+    // queue_depth_after reflects the new active depth. Fire-and-forget.
+    const canonPhase = get().phase;
+    const queueDepthAfter = _pe_activeEdits(get().pendingEditsQueue || []).length;
     import('../lib/analytics.js').then(({ Funnel, EVENTS }) => {
-      Funnel.track(EVENTS.EDIT_PENDING_QUEUED, { kind });
+      Funnel.track(EVENTS.EDIT_PENDING_QUEUED, {
+        kind,
+        canon_phase: canonPhase,
+        queue_depth_after: queueDepthAfter,
+      });
     }).catch(() => {});
     return edit;
   },
@@ -395,13 +402,23 @@ export const createSettlementSlice = (set, get) => ({
     set(state => {
       state.pendingEditsQueue = _pe_revertEdit(state.pendingEditsQueue || [], editId);
     });
+    // Analytics — fire-and-forget; reverting one queued edit.
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.EDIT_REVERTED, { count: 1, scope: 'single' });
+    }).catch(() => {});
   },
 
   /** Discard the entire queue without applying. */
   revertPendingEdits: () => {
+    // Count the active edits being discarded BEFORE clearing, for analytics.
+    const droppedCount = _pe_activeEdits(get().pendingEditsQueue || []).length;
     set(state => {
       state.pendingEditsQueue = [];
     });
+    // Analytics — fire-and-forget; whole-queue discard.
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.EDIT_REVERTED, { count: droppedCount, scope: 'all' });
+    }).catch(() => {});
   },
 
   /** Apply the queue against the live settlement. Each edit dispatches
@@ -453,6 +470,44 @@ export const createSettlementSlice = (set, get) => ({
         fn({ kind: 'auto-commit', label: `Edits: ${labels}` });
       }
     } catch (_e) { /* silent — snapshot failure shouldn't undo the commit */ }
+
+    // Analytics — fire-and-forget. Band the committed edits into coarse
+    // structural / rename / prose counts (same kind groupings as previewCascade).
+    let structuralCount = 0;
+    let renameCount = 0;
+    let proseCount = 0;
+    for (const e of active) {
+      switch (e.kind) {
+        case 'add-institution':
+        case 'remove-institution':
+        case 'add-resource':
+        case 'remove-resource':
+        case 'add-stressor':
+        case 'remove-stressor':
+          structuralCount += 1;
+          break;
+        case 'rename-npc':
+        case 'rename-faction':
+        case 'rename-settlement':
+          renameCount += 1;
+          break;
+        case 'edit-prose':
+          proseCount += 1;
+          break;
+        default:
+          break;
+      }
+    }
+    const canonPhase = get().phase;
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.EDIT_COMMITTED, {
+        count: active.length,
+        structural_count: structuralCount,
+        rename_count: renameCount,
+        prose_count: proseCount,
+        canon_phase: canonPhase,
+      });
+    }).catch(() => {});
   },
 
   // ── P133 / E-5 · Version history mutations ──────────────────────────
@@ -654,7 +709,9 @@ export const createSettlementSlice = (set, get) => ({
       // the summarizer don't fail the run — they just produce a null
       // summary and the rail falls back to the label.
     const pipelineHistory = [];
-    const result = eng.generateSettlementPipeline(fullConfig, neighbor, {
+    let result;
+    try {
+      result = eng.generateSettlementPipeline(fullConfig, neighbor, {
         seed,
         // §14 P2 — only expose homebrew that passes its tier gate to this
         // settlement's tier. Fail-open for random/custom/unknown types, so it
@@ -670,7 +727,18 @@ export const createSettlementSlice = (set, get) => ({
           catch { summary = null; }
           pipelineHistory.push({ id: name, ts: Date.now(), summary });
         },
-    });
+      });
+    } catch (genErr) {
+      // Analytics — fire-and-forget GENERATION_FAILED, then re-throw so the
+      // existing propagation behaviour is unchanged (additive only).
+      import('../lib/analytics.js').then(({ track, EVENTS }) => {
+        track(EVENTS.GENERATION_FAILED, {
+          error_kind: 'exception',
+          step_name: pipelineHistory.length ? pipelineHistory[pipelineHistory.length - 1].id : undefined,
+        });
+      }).catch(() => {});
+      throw genErr;
+    }
       // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
       // authored conditions survive a local regeneration — a reroll replaces
       // the town, not the campaign layer's crises. No-op on a first
@@ -736,6 +804,22 @@ export const createSettlementSlice = (set, get) => ({
       else incrementAnonFull();
     }
 
+    // Analytics — fire-and-forget, never affects the return. GENERATION_COMPLETED
+    // carries the reduced (enum/count-only) fingerprint; fires alongside (not
+    // replacing) the component-layer anonymous_generation_completed. When this
+    // run replaced an on-screen draft it is also a re-roll, so REGENERATION_TRIGGERED
+    // fires with regen_mode 'full' (this action does a fresh whole-pipeline roll).
+    Promise.all([
+      import('../lib/analytics.js'),
+      import('../lib/structuralFingerprint.js'),
+    ]).then(([{ track, EVENTS }, { extractReducedFingerprint }]) => {
+      const reduced = extractReducedFingerprint(reconciled) || {};
+      track(EVENTS.GENERATION_COMPLETED, { ...reduced });
+      if (hadSettlement) {
+        track(EVENTS.REGENERATION_TRIGGERED, { regen_mode: 'full' });
+      }
+    }).catch(() => {});
+
     return reconciled;
   },
 
@@ -780,6 +864,12 @@ export const createSettlementSlice = (set, get) => ({
     }
     const cfg = settlement.config || config;
     const eng = await loadEngine();
+
+    // Analytics — fire-and-forget. A section regen re-rolls one subsystem
+    // under the existing config (so config is, by construction, unchanged).
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.REGENERATION_TRIGGERED, { regen_mode: section, config_changed: false });
+    }).catch(() => {});
 
     // Capture the pre-regen snapshot before mutation so the delta
     // composer has a clean `before` reference.
@@ -1025,12 +1115,18 @@ export const createSettlementSlice = (set, get) => ({
     const wasFirstSave = activeCount === 0;
     const wasThirdSave = activeCount === 2 && max === 3;
 
+    // Lift the new save id + campaignState out of the set() so the
+    // research-capture below can address the freshly-saved record by id.
+    // Same id shape and value as before — purely a hoist, no behaviour change.
+    const newSaveId = `local_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    const newCampaignState = pickleCampaignState(state);
+
     set(s => {
       s.savedSettlements.push({
         ...settlement,
         savedAt: Date.now(),
-        id: `local_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-        campaignState: pickleCampaignState(state),
+        id: newSaveId,
+        campaignState: newCampaignState,
       });
     });
 
@@ -1046,6 +1142,17 @@ export const createSettlementSlice = (set, get) => ({
         }, { tier: state.auth?.tier });
       }).catch(() => { /* never block a save */ });
     }
+
+    // Analytics — fire-and-forget structural snapshot at the 'saved' moment.
+    // captureFingerprint skips silently without a stable uuid (local ids) or
+    // consent; it never throws and never affects the save's return.
+    import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
+      captureFingerprint('saved', settlement, {
+        save: { ...settlement, id: newSaveId, campaignState: newCampaignState },
+        settlementUuid: newSaveId,
+      });
+    }).catch(() => {});
+
     return true;
   },
 
@@ -1224,6 +1331,7 @@ export const createSettlementSlice = (set, get) => ({
    * canonizedAt provenance timestamp.
    */
   canonize: () => {
+    const fromPhase = get().phase;
     set(state => {
       state.phase = 'canon';
       state.eventLog = [];
@@ -1231,17 +1339,38 @@ export const createSettlementSlice = (set, get) => ({
     });
     // Persist so canon sticks across reload and the library reflects it.
     get().persistActiveSaveLifecycle?.();
+    // Analytics — fire-and-forget. CANON_PHASE_CHANGED records the transition;
+    // captureFingerprint('canonized') snapshots the structural shape at canon
+    // (skips silently without a stable settlement uuid / consent).
+    const after = get();
+    const activeSaveId = after.activeSaveId || null;
+    const save = activeSaveId
+      ? after.savedSettlements.find(s => String(s.id) === String(activeSaveId))
+      : null;
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'canon' });
+    }).catch(() => {});
+    if (after.settlement && activeSaveId) {
+      import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
+        captureFingerprint('canonized', after.settlement, { save, settlementUuid: activeSaveId });
+      }).catch(() => {});
+    }
   },
 
   /** Drop back to draft. Useful if the DM wants to keep tinkering before
    *  the campaign actually starts. Discards any prior event log. */
   uncanonize: () => {
+    const fromPhase = get().phase;
     set(state => {
       state.phase = 'draft';
       state.eventLog = [];
       state.canonizedAt = null;
     });
     get().persistActiveSaveLifecycle?.();
+    // Analytics — fire-and-forget; the canon→draft transition.
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'draft' });
+    }).catch(() => {});
   },
 
   /**
