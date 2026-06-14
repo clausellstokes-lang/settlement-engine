@@ -95,30 +95,15 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
     expect(body).toMatch(/amount\s*>\s*\d{4,}/);  // looks for `if amount > 10000` etc.
   });
 
-  // ── Money-math SAFETY CLAUSES (static) ──────────────────────────────────────
-  // The audit flagged that the credit math is asserted statically, never run
-  // against Postgres (execution tests need `supabase test db` + Docker). These
-  // raise the static floor from "signature exists" to "the actual double-spend
-  // and double-refund guards are present", so a regression that strips them
-  // fails CI even without a DB.
-  const spendBody  = sql.match(/create\s+or\s+replace\s+function\s+public\.spend_credits[\s\S]*?\$\$;/i)?.[0] || '';
+  // ── Money-math SAFETY CLAUSES (static, refund/admin only) ───────────────────
+  // The audit flagged that the credit math is asserted statically, never run.
+  // These raise the static floor for the RPCs whose CURRENT definition lives in
+  // 009 (refund_credits, admin_grant_credits). NOTE: spend_credits is NOT here
+  // — its net-current body is the ledger-allocation rewrite in migration 024,
+  // not 009's counter version, so asserting 009's body would test dead SQL.
+  // spend_credits (plus refund/grant) are now EXECUTED end-to-end against the
+  // real net-current SQL in tests/security/creditLedger.pglite.test.js.
   const refundBody = sql.match(/create\s+or\s+replace\s+function\s+public\.refund_credits[\s\S]*?\$\$;/i)?.[0] || '';
-
-  it('spend_credits debits via an atomic compare-and-decrement (no TOCTOU overspend)', () => {
-    expect(spendBody).toBeTruthy();
-    // Race protection is a SINGLE update that subtracts and guards balance in
-    // the same statement — two concurrent spends can't both pass `credits >=`.
-    expect(spendBody).toMatch(/update\s+public\.profiles[\s\S]*?set\s+credits\s*=\s*credits\s*-\s*cost/i);
-    expect(spendBody).toMatch(/where[\s\S]*?credits\s*>=\s*cost/i);
-    // And it rejects an overspend instead of going negative.
-    expect(spendBody).toMatch(/insufficient_funds/i);
-  });
-
-  it('spend_credits never assigns a recomputed balance back (TOCTOU vector)', () => {
-    // A `set credits = <number|var>` (vs `credits - cost` arithmetic) would
-    // clobber concurrent writes. The only legal write is the arithmetic one.
-    expect(spendBody).not.toMatch(/set\s+credits\s*=\s*(remaining|cost|\d+|\$\d+)\b/i);
-  });
 
   it('refund_credits is idempotent — refuses to refund the same spend twice', () => {
     expect(refundBody).toBeTruthy();
