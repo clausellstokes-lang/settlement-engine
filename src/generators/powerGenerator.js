@@ -84,108 +84,133 @@ const _RELATIONSHIP_TYPES = {
 
 // ─── Inlined cross-module helpers (cycle-free) ─────────────
 
-// getTierConstraints
-const getTierConstraints = (r, s, o, d) => {
-  const l = (k) => s.some((f) => f.includes(k)),
-    m = ['thorp', 'hamlet', 'village'].includes(o),
-    h = l('garrison')
+// getTierConstraints — rewrite generic faction phrasing in `text` to match
+// the settlement's actual institutions and tier.
+//   text                  — narrative string to rewrite
+//   instNames             — lowercased institution names present
+//   tier                  — settlement tier
+//   governingBodyOverride — explicit governing-body label, else derived from tier
+const getTierConstraints = (text, instNames, tier, governingBodyOverride) => {
+  const hasInst = (keyword) => instNames.some((name) => name.includes(keyword)),
+    isSmall = ['thorp', 'hamlet', 'village'].includes(tier),
+    guardLabel = hasInst('garrison')
       ? 'the garrison'
-      : l('barracks')
+      : hasInst('barracks')
         ? 'the barracks guard'
-        : l('professional guard')
+        : hasInst('professional guard')
           ? 'the professional guard'
-          : l('city watch') || l('town watch')
+          : hasInst('city watch') || hasInst('town watch')
             ? 'the watch'
-            : l('militia')
+            : hasInst('militia')
               ? 'the militia'
-              : l('mercenary')
+              : hasInst('mercenary')
                 ? 'the mercenary company'
-                : m
+                : isSmall
                   ? 'the able-bodied'
                   : 'the guard',
-    g =
-      d ||
-      (m
-        ? o === 'thorp'
+    councilLabel =
+      governingBodyOverride ||
+      (isSmall
+        ? tier === 'thorp'
           ? 'the household heads'
           : 'the village elders'
-        : o === 'town'
+        : tier === 'town'
           ? 'the town council'
-          : o === 'city'
+          : tier === 'city'
             ? 'the city council'
-            : o === 'metropolis'
+            : tier === 'metropolis'
               ? 'the grand council'
               : 'the council'),
-    w = l('merchant') || l('guild') || l('market') ? 'the merchants' : m ? 'the wealthiest household' : 'the traders',
-    p = l('hospital')
+    merchantLabel =
+      hasInst('merchant') || hasInst('guild') || hasInst('market')
+        ? 'the merchants'
+        : isSmall
+          ? 'the wealthiest household'
+          : 'the traders',
+    healerLabel = hasInst('hospital')
       ? 'the hospital staff'
-      : l('monastery') || l('friary')
+      : hasInst('monastery') || hasInst('friary')
         ? 'the monastery brothers'
-        : l('healer')
+        : hasInst('healer')
           ? 'the healers'
-          : l('church') || l('cathedral') || l('parish')
+          : hasInst('church') || hasInst('cathedral') || hasInst('parish')
             ? 'the clergy'
-            : m
+            : isSmall
               ? 'the local herbalist'
               : 'the healers',
-    b =
-      l('city watch') || l('town watch')
+    watchLabel =
+      hasInst('city watch') || hasInst('town watch')
         ? 'the watch'
-        : l('garrison') || l('guard')
+        : hasInst('garrison') || hasInst('guard')
           ? 'the guard'
-          : l('militia')
+          : hasInst('militia')
             ? 'the militia'
-            : m
+            : isSmall
               ? 'the neighbours'
               : 'the guard';
-  return r
-    .replace(/\bthe garrison commander\b/gi, h.replace(/^the /, 'the ') + "'s commander")
-    .replace(/\bthe garrison\b/gi, h)
-    .replace(/\bthe public watch\b/gi, b)
-    .replace(/\bthe watch\b/gi, b)
-    .replace(/\bthe council\b/gi, g)
-    .replace(/\ba council\b/gi, g)
-    .replace(/\bcouncil meetings\b/gi, g.replace(/^the /, '') + ' meetings')
-    .replace(/\binside the council\b/gi, 'inside ' + g)
-    .replace(/\bthe grain merchants\b/gi, w)
-    .replace(/\bgrain merchants\b/gi, w)
-    .replace(/\btwo healers\b/gi, 'two ' + p.replace(/^the /, ''))
-    .replace(/\bthe healers\b/gi, p)
+  return text
+    .replace(/\bthe garrison commander\b/gi, guardLabel.replace(/^the /, 'the ') + "'s commander")
+    .replace(/\bthe garrison\b/gi, guardLabel)
+    .replace(/\bthe public watch\b/gi, watchLabel)
+    .replace(/\bthe watch\b/gi, watchLabel)
+    .replace(/\bthe council\b/gi, councilLabel)
+    .replace(/\ba council\b/gi, councilLabel)
+    .replace(/\bcouncil meetings\b/gi, councilLabel.replace(/^the /, '') + ' meetings')
+    .replace(/\binside the council\b/gi, 'inside ' + councilLabel)
+    .replace(/\bthe grain merchants\b/gi, merchantLabel)
+    .replace(/\bgrain merchants\b/gi, merchantLabel)
+    .replace(/\btwo healers\b/gi, 'two ' + healerLabel.replace(/^the /, ''))
+    .replace(/\bthe healers\b/gi, healerLabel)
     .replace(
       /\bthe mages' quarter\b/gi,
-      l('wizard') || l('mage') || l('alchemist') ? "the mages' quarter" : 'the arcane practitioners'
+      hasInst('wizard') || hasInst('mage') || hasInst('alchemist') ? "the mages' quarter" : 'the arcane practitioners'
     );
 };
 
 // ─── Private helpers (auto-extracted) ────────────────────
 
 // computeRelTension
-// generateEconomicScore
-const generateEconomicScore = (r, s, o, d, l) => {
-  const m = (d == null ? void 0 : d._govFacName) || '',
-    h =
-      m.includes('Feudal') || m.includes('Steward') || m.includes('Manor') || m.includes('Noble') || m.includes('Lord'),
-    g = m.includes('Church') || m.includes('Theocrat') || m.includes('Clergy') || m.includes('Bishop'),
-    w = h ? "the lord's next court hearing" : g ? 'the next chapter assembly' : 'the next council session',
-    p = [
-      `A neutral figure is being pressured by both ${r.name} and ${s.name} to take a side before ${w}.`,
+// generateEconomicScore — build up to 3 plot hooks for a conflict between two
+// factions, given the institution flags and stress flags.
+//   factionA, factionB — the two opposing factions
+//   conflict           — the conflict-issue object (unused here)
+//   instFlags          — institution flags (gov faction name, criminal score)
+//   stressFlags        — active stress flags
+const generateEconomicScore = (factionA, factionB, conflict, instFlags, stressFlags) => {
+  const govFacName = (instFlags == null ? void 0 : instFlags._govFacName) || '',
+    isFeudal =
+      govFacName.includes('Feudal') ||
+      govFacName.includes('Steward') ||
+      govFacName.includes('Manor') ||
+      govFacName.includes('Noble') ||
+      govFacName.includes('Lord'),
+    isChurch =
+      govFacName.includes('Church') ||
+      govFacName.includes('Theocrat') ||
+      govFacName.includes('Clergy') ||
+      govFacName.includes('Bishop'),
+    arbitrationVenue = isFeudal
+      ? "the lord's next court hearing"
+      : isChurch
+        ? 'the next chapter assembly'
+        : 'the next council session',
+    hooks = [
+      `A neutral figure is being pressured by both ${factionA.name} and ${factionB.name} to take a side before ${arbitrationVenue}.`,
       'Evidence has surfaced suggesting a third party is deliberately escalating the tension between the two factions.',
     ];
-  return (
-    l.merchantCriminalBlur &&
-      p.push(
-        'The dispute is complicated by the fact that key members of both factions share business interests that neither wants exposed during arbitration.'
-      ),
-    l.stateCrime &&
-      p.push(
-        "One faction has been using official authority to harass the other's members. The harassment is technically legal."
-      ),
-    d.criminalEffective > 55 &&
-      p.push(
-        'Someone is offering to resolve the conflict "permanently" for a price. Both factions have received the offer. Neither has refused yet.'
-      ),
-    p.slice(0, 3)
-  );
+  if (stressFlags.merchantCriminalBlur)
+    hooks.push(
+      'The dispute is complicated by the fact that key members of both factions share business interests that neither wants exposed during arbitration.'
+    );
+  if (stressFlags.stateCrime)
+    hooks.push(
+      "One faction has been using official authority to harass the other's members. The harassment is technically legal."
+    );
+  if (instFlags.criminalEffective > 55)
+    hooks.push(
+      'Someone is offering to resolve the conflict "permanently" for a price. Both factions have received the offer. Neither has refused yet.'
+    );
+  return hooks.slice(0, 3);
 };
 
 // random01
@@ -204,77 +229,84 @@ const STRESS_FLAVOR = {
   monster_pressure: ['patron_client', 'debtor_creditor'],
 };
 
-// STRESS_RUMORS
+// STRESS_RUMORS — each renders a rumour phrasing from a relationship object
 const STRESS_RUMORS = [
-  (r) => {
-    var s;
-    return `${r.npc1Name} and ${r.npc2Name} are connected by something neither discusses openly — ${((s = r.description.split('—')[1]) == null ? void 0 : s.trim()) || r.tension}`;
+  (rel) => {
+    var detail;
+    return `${rel.npc1Name} and ${rel.npc2Name} are connected by something neither discusses openly — ${((detail = rel.description.split('—')[1]) == null ? void 0 : detail.trim()) || rel.tension}`;
   },
-  (r) =>
-    `${r.npc1Name}'s relationship with ${r.npc2Name} is more complicated than their public roles suggest. ${r.tension}`,
-  (r) => {
-    var s;
-    return `There is a ${((s = r.typeName) == null ? void 0 : s.toLowerCase()) || 'significant'} between ${r.npc1Name} and ${r.npc2Name}. ${r.tension}`;
+  (rel) =>
+    `${rel.npc1Name}'s relationship with ${rel.npc2Name} is more complicated than their public roles suggest. ${rel.tension}`,
+  (rel) => {
+    var typeName;
+    return `There is a ${((typeName = rel.typeName) == null ? void 0 : typeName.toLowerCase()) || 'significant'} between ${rel.npc1Name} and ${rel.npc2Name}. ${rel.tension}`;
   },
-  (r) => r.tension,
+  (rel) => rel.tension,
 ];
 
-// pickFactionName (local)
-const pickFactionName = (r) => {
-  var o;
-  const s = {};
+// pickFactionName (local) — pick the most common member category among `members`
+const pickFactionName = (members) => {
+  var topEntry;
+  const categoryCounts = {};
+  members.forEach((member) => {
+    categoryCounts[member.category] = (categoryCounts[member.category] || 0) + 1;
+  });
   return (
-    r.forEach((d) => {
-      s[d.category] = (s[d.category] || 0) + 1;
-    }),
-    ((o = Object.entries(s).sort((d, l) => l[1] - d[1])[0]) == null ? void 0 : o[0]) || 'other'
+    ((topEntry = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])[0]) == null ? void 0 : topEntry[0]) ||
+    'other'
   );
 };
 
-export const computeRelTension = (r, s, o, d) => {
-  const l = [r.category, s.category].sort().join('_'),
-    m = r.power - s.power;
-  if (o.merchantCriminalBlur && l.includes('economy') && l.includes('criminal'))
+export const computeRelTension = (factionA, factionB, stressFlags, instFlags) => {
+  const categoryPair = [factionA.category, factionB.category].sort().join('_'),
+    powerDiff = factionA.power - factionB.power;
+  if (stressFlags.merchantCriminalBlur && categoryPair.includes('economy') && categoryPair.includes('criminal'))
     return _rng() < 0.6 ? STRESS_ECONOMIC_EFFECTS.econ_crim_blur : STRESS_ECONOMIC_EFFECTS.econ_crim_exploitation;
-  if (o.stateCrime && l.includes('military') && l.includes('criminal'))
+  if (stressFlags.stateCrime && categoryPair.includes('military') && categoryPair.includes('criminal'))
     return STRESS_ECONOMIC_EFFECTS.mil_crim_corruption;
-  if (!o.stateCrime && l.includes('military') && l.includes('criminal'))
-    return d.militaryEffective > d.criminalEffective
+  if (!stressFlags.stateCrime && categoryPair.includes('military') && categoryPair.includes('criminal'))
+    return instFlags.militaryEffective > instFlags.criminalEffective
       ? STRESS_ECONOMIC_EFFECTS.mil_crim_suppression
       : STRESS_ECONOMIC_EFFECTS.mil_crim_corruption;
-  if (o.merchantArmy && l.includes('economy') && l.includes('military'))
+  if (stressFlags.merchantArmy && categoryPair.includes('economy') && categoryPair.includes('military'))
     return STRESS_ECONOMIC_EFFECTS.econ_mil_contract;
-  if (o.crusaderSynthesis && l.includes('religious') && l.includes('military'))
+  if (stressFlags.crusaderSynthesis && categoryPair.includes('religious') && categoryPair.includes('military'))
     return STRESS_ECONOMIC_EFFECTS.rel_mil_crusader;
-  if (o.religiousFraud && l.includes('religious') && l.includes('criminal'))
+  if (stressFlags.religiousFraud && categoryPair.includes('religious') && categoryPair.includes('criminal'))
     return STRESS_ECONOMIC_EFFECTS.rel_crim_fraud;
-  if (o.arcaneBlackMarket && l.includes('magic') && l.includes('criminal'))
+  if (stressFlags.arcaneBlackMarket && categoryPair.includes('magic') && categoryPair.includes('criminal'))
     return STRESS_ECONOMIC_EFFECTS.mag_crim_market;
-  if (l.includes('government') && l.includes('economy') && d.economyOutput > 65)
+  if (categoryPair.includes('government') && categoryPair.includes('economy') && instFlags.economyOutput > 65)
     return STRESS_ECONOMIC_EFFECTS.gov_econ_dependence;
-  if (l.includes('government') && l.includes('military')) {
-    const _r = _rng();
-    return _r < 0.35
+  if (categoryPair.includes('government') && categoryPair.includes('military')) {
+    const roll = _rng();
+    return roll < 0.35
       ? STRESS_ECONOMIC_EFFECTS.gov_mil_friction
-      : _r < 0.6
+      : roll < 0.6
         ? STRESS_ECONOMIC_EFFECTS.wary_alliance
-        : _r < 0.8
+        : roll < 0.8
           ? STRESS_ECONOMIC_EFFECTS.genuine_respect
           : STRESS_ECONOMIC_EFFECTS.peer_rivalry;
   }
-  if (Math.abs(m) >= 4) return _rng() < 0.5 ? STRESS_ECONOMIC_EFFECTS.mentor_legacy : STRESS_ECONOMIC_EFFECTS.old_debt;
-  const h = (M) => {
-      const A = M.personality;
-      return A ? (Array.isArray(A) ? A.join(' ') : [A.dominant, A.flaw, A.modifier].filter(Boolean).join(' ')) : '';
+  if (Math.abs(powerDiff) >= 4)
+    return _rng() < 0.5 ? STRESS_ECONOMIC_EFFECTS.mentor_legacy : STRESS_ECONOMIC_EFFECTS.old_debt;
+  const getPersonality = (faction) => {
+      const personality = faction.personality;
+      return personality
+        ? Array.isArray(personality)
+          ? personality.join(' ')
+          : [personality.dominant, personality.flaw, personality.modifier].filter(Boolean).join(' ')
+        : '';
     },
-    g = h(r),
-    w = h(s),
-    p = g.includes('arrogant') && w.includes('arrogant'),
-    b = g.includes('greedy') && w.includes('greedy'),
-    k = g.includes('pragmatic') || w.includes('pragmatic');
-  if (p || b || (r.category === s.category && _rng() < 0.2)) return STRESS_ECONOMIC_EFFECTS.peer_rivalry;
-  if (k) return STRESS_ECONOMIC_EFFECTS.mutual_leverage;
-  const f = [
+    personalityA = getPersonality(factionA),
+    personalityB = getPersonality(factionB),
+    bothArrogant = personalityA.includes('arrogant') && personalityB.includes('arrogant'),
+    bothGreedy = personalityA.includes('greedy') && personalityB.includes('greedy'),
+    eitherPragmatic = personalityA.includes('pragmatic') || personalityB.includes('pragmatic');
+  if (bothArrogant || bothGreedy || (factionA.category === factionB.category && _rng() < 0.2))
+    return STRESS_ECONOMIC_EFFECTS.peer_rivalry;
+  if (eitherPragmatic) return STRESS_ECONOMIC_EFFECTS.mutual_leverage;
+  const weightedArchetypes = [
       {
         archetype: STRESS_ECONOMIC_EFFECTS.wary_alliance,
         weight: 2,
@@ -297,7 +329,7 @@ export const computeRelTension = (r, s, o, d) => {
       },
       {
         archetype: STRESS_ECONOMIC_EFFECTS.bitter_history,
-        weight: 0.8 * (d.criminalEffective / 50),
+        weight: 0.8 * (instFlags.criminalEffective / 50),
       },
       {
         archetype: STRESS_ECONOMIC_EFFECTS.family_complication,
@@ -308,164 +340,161 @@ export const computeRelTension = (r, s, o, d) => {
         weight: 0.8,
       },
     ],
-    C = f.reduce((M, A) => M + A.weight, 0);
-  let T = _rng() * C;
-  for (const { archetype: M, weight: A } of f) if (((T -= A), T <= 0)) return M;
+    totalWeight = weightedArchetypes.reduce((sum, entry) => sum + entry.weight, 0);
+  let roll = _rng() * totalWeight;
+  for (const { archetype, weight } of weightedArchetypes) {
+    roll -= weight;
+    if (roll <= 0) return archetype;
+  }
   return STRESS_ECONOMIC_EFFECTS.wary_alliance;
 };
 
-// genSuccessionNarr
-export const genSuccessionNarr = (r) => {
-  var o, d, l, m;
-  const s = [];
-  return (
-    r.topTension === 'succession_crisis' &&
-      s.push(
-        `${r.name}'s ruler is ageing and the succession is contested; ${r.topFaction || 'the dominant faction'} has already positioned for the transition.`
-      ),
-    r.topTension === 'corruption_scandal' &&
-      s.push(
-        `Evidence of corruption in ${r.govFaction || 'the council'} has surfaced; ${r.topNPCName ? r.topNPCName + ', the ' + r.topNPCRole + ',' : 'the most senior official'} is part of the answer and part of the problem.`
-      ),
-    r.topTension === 'outside_debt' &&
-      s.push(
-        `${r.name}'s debt obligations are becoming visible in its decisions; the creditor hasn't moved yet, but the calculation of when to move is being made.`
-      ),
-    r.topTension === 'infiltration_fear' &&
-      s.push(
-        `Rumours of enemy agents in ${r.name} have made the settlement paranoid in ways that are being exploited by at least one of the factions paranoia is supposed to protect against.`
-      ),
-    !r.isViable &&
-      r.viabilityIssues?.length > 0 &&
-      s.push(
-        `${r.name} has a structural problem it hasn't solved — ${((o = r.viabilityIssues[0].message) == null ? void 0 : o.toLowerCase()) || 'an economic vulnerability'} — that will eventually force a decision.`
-      ),
-    r.hasNeighborConflict &&
-      r.neighbor &&
-      s.push(
-        `The relationship with ${r.neighbor} has deteriorated to the point where ${r.name}'s ${r.topNPCRole || 'leadership'} is making decisions with one eye on what conflict would cost.`
-      ),
-    (r.prosperity === 'Wealthy' || r.prosperity === 'Thriving') &&
-      s.push(
-        `${r.name} is prosperous enough that the real conflicts are about who controls the surplus — ${r.topFaction || 'the dominant faction'} has the most and wants more.`
-      ),
-    r.prosperity === 'Poor' &&
-      s.push(
-        `${r.name} is poor enough that every resource decision is a political one; ${r.govFaction || 'the council'} and ${r.topFaction || 'the merchant class'} disagree about who bears the cost.`
-      ),
-    r.commodity &&
-      r.isCrossroads &&
-      s.push(
-        `${r.name} sits where trade roads cross; its ${r.commodity} trade moves through it in both directions, and whoever controls the tariff controls the settlement's revenue — a fact not lost on ${r.topFaction || 'the guilds'}.`
-      ),
-    r.commodity &&
-      r.isPort &&
-      s.push(
-        `${r.name}'s port handles more ${r.commodity} than the official records show; the gap between what arrives and what is taxed is understood by ${r.topFaction || 'the merchant class'} and the guard alike.`
-      ),
-    (((d = r.stability) != null && d.includes('Unstable')) ||
-      ((l = r.stability) != null && l.includes('Fractured')) ||
-      ((m = r.stability) != null && m.includes('Volatile'))) &&
-      s.push(
-        `${r.name} looks stable from the outside; the relationship between ${r.topFaction || 'the dominant faction'} and ${r.govFaction || 'the council'} is more contested than it appears.`
-      ),
-    r.topTension === 'economic_disparity' &&
-      s.push(
-        `The wealth gap in ${r.name} has become a fact of daily life — ${r.topFaction || 'the merchant class'} controls the surplus and ${r.govFaction || 'the council'} cannot or will not force redistribution. Resentment is structural now, not episodic.`
-      ),
-    r.topTension === 'religious_tension' &&
-      s.push(
-        `Two versions of faith are competing in ${r.name}; both claim legitimacy and both have the ear of someone powerful. ${r.govFaction || 'The council'} has avoided taking sides so far, which means both factions resent it equally.`
-      ),
-    r.topTension === 'guild_conflict' &&
-      s.push(
-        `The guild dispute in ${r.name} is not about craft standards — it is about who controls access to the market. ${r.topFaction || 'The dominant guild'} has held the advantage long enough that the challengers have stopped playing by guild rules.`
-      ),
-    r.topTension === 'external_threat' &&
-      r.neighbor &&
-      s.push(
-        `${r.name} is watching ${r.neighbor} and does not like what it sees. ${r.govFaction || 'The council'} and ${r.milForce || 'the garrison'} disagree about what to do about it, and that disagreement is now public.`
-      ),
-    r.topTension === 'external_threat' &&
-      !r.neighbor &&
-      s.push(
-        `The threat approaching ${r.name} is not yet visible to most residents. ${r.topNPCName || 'The most senior figure'} knows the intelligence and has not shared it. The decision about when to share it — and how — is the real crisis.`
-      ),
-    r.topTension === 'resource_scarcity' &&
-      r.commodity &&
-      s.push(
-        `${r.name}'s ${r.commodity} supply is tighter than the official position acknowledges. ${r.topFaction || 'The merchant class'} knows the real numbers. ${r.govFaction || 'The council'} has been told a different version.`
-      ),
-    r.topTension === 'resource_scarcity' &&
-      !r.commodity &&
-      s.push(
-        `Something essential in ${r.name} is running short — food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${r.govFaction || 'The council'} controls the allocation.`
-      ),
-    r.topTension === 'crime_wave' &&
-      s.push(
-        `${r.name}'s criminal problem has grown past the point ${r.milForce || 'the guard'} can contain through normal enforcement. The question is whether ${r.govFaction || 'the council'} brings in more force, negotiates, or finds a scapegoat. Someone powerful benefits from each option.`
-      ),
-    r.topTension === 'magical_controversy' &&
-      s.push(
-        `Magic in ${r.name} has done something recently that people cannot agree on how to interpret. ${r.govFaction || 'The council'} is being pressured to regulate — by people who disagree about what regulation means.`
-      ),
-    r.topTension === 'generational_divide' &&
-      s.push(
-        `In ${r.name} the older residents and the younger ones are not arguing about the same things. The older generation thinks the argument is about values; the younger thinks it is about access. Both are right.`
-      ),
-    r.topTension === 'occupation_legacy' &&
-      s.push(
-        `${r.name} carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets, the same market, the same ${r.govFaction || 'council'}. The official position is that this is resolved.`
-      ),
-    r.topTension === 'disputed_land' &&
-      s.push(
-        `A land dispute in ${r.name} that was dormant is now active — someone filed a claim, or found a document, or simply started pressing. ${r.govFaction || 'The council'} has delayed ruling because there is no outcome that does not cost them something.`
-      ),
-    r.topTension === 'population_friction' &&
-      s.push(
-        `${r.name} is absorbing people it did not plan for, or losing people it expected to keep. Either way, the settlement's social assumptions no longer match its actual composition, and ${r.govFaction || 'the council'} is governing for the settlement that used to exist.`
-      ),
-    r.topTension === 'leadership_vacuum' &&
-      s.push(
-        `${r.name} has not had a strong authority since ${r.topNPCName || 'the last leader'} left or died. The pretense of normal governance is maintained. Every decision of consequence is being deferred or made informally by ${r.topFaction || 'the faction with the most to gain'}.`
-      ),
-    s.push(
-      `The most important thing happening in ${r.name} right now is happening below the surface — ${r.topNPCName ? r.topNPCName + ', the ' + r.topNPCRole + ',' : 'the most senior figure'} knows it and isn't discussing it.`
-    ),
-    s
+// genSuccessionNarr — build a list of narrative sentences from a settlement
+// context object `ctx`, each gated on a tension/state condition.
+export const genSuccessionNarr = (ctx) => {
+  var issueMessage, stabilityUnstable, stabilityFractured, stabilityVolatile;
+  const narratives = [];
+  if (ctx.topTension === 'succession_crisis')
+    narratives.push(
+      `${ctx.name}'s ruler is ageing and the succession is contested; ${ctx.topFaction || 'the dominant faction'} has already positioned for the transition.`
+    );
+  if (ctx.topTension === 'corruption_scandal')
+    narratives.push(
+      `Evidence of corruption in ${ctx.govFaction || 'the council'} has surfaced; ${ctx.topNPCName ? ctx.topNPCName + ', the ' + ctx.topNPCRole + ',' : 'the most senior official'} is part of the answer and part of the problem.`
+    );
+  if (ctx.topTension === 'outside_debt')
+    narratives.push(
+      `${ctx.name}'s debt obligations are becoming visible in its decisions; the creditor hasn't moved yet, but the calculation of when to move is being made.`
+    );
+  if (ctx.topTension === 'infiltration_fear')
+    narratives.push(
+      `Rumours of enemy agents in ${ctx.name} have made the settlement paranoid in ways that are being exploited by at least one of the factions paranoia is supposed to protect against.`
+    );
+  if (!ctx.isViable && ctx.viabilityIssues?.length > 0)
+    narratives.push(
+      `${ctx.name} has a structural problem it hasn't solved — ${((issueMessage = ctx.viabilityIssues[0].message) == null ? void 0 : issueMessage.toLowerCase()) || 'an economic vulnerability'} — that will eventually force a decision.`
+    );
+  if (ctx.hasNeighborConflict && ctx.neighbor)
+    narratives.push(
+      `The relationship with ${ctx.neighbor} has deteriorated to the point where ${ctx.name}'s ${ctx.topNPCRole || 'leadership'} is making decisions with one eye on what conflict would cost.`
+    );
+  if (ctx.prosperity === 'Wealthy' || ctx.prosperity === 'Thriving')
+    narratives.push(
+      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus — ${ctx.topFaction || 'the dominant faction'} has the most and wants more.`
+    );
+  if (ctx.prosperity === 'Poor')
+    narratives.push(
+      `${ctx.name} is poor enough that every resource decision is a political one; ${ctx.govFaction || 'the council'} and ${ctx.topFaction || 'the merchant class'} disagree about who bears the cost.`
+    );
+  if (ctx.commodity && ctx.isCrossroads)
+    narratives.push(
+      `${ctx.name} sits where trade roads cross; its ${ctx.commodity} trade moves through it in both directions, and whoever controls the tariff controls the settlement's revenue — a fact not lost on ${ctx.topFaction || 'the guilds'}.`
+    );
+  if (ctx.commodity && ctx.isPort)
+    narratives.push(
+      `${ctx.name}'s port handles more ${ctx.commodity} than the official records show; the gap between what arrives and what is taxed is understood by ${ctx.topFaction || 'the merchant class'} and the guard alike.`
+    );
+  if (
+    ((stabilityUnstable = ctx.stability) != null && stabilityUnstable.includes('Unstable')) ||
+    ((stabilityFractured = ctx.stability) != null && stabilityFractured.includes('Fractured')) ||
+    ((stabilityVolatile = ctx.stability) != null && stabilityVolatile.includes('Volatile'))
+  )
+    narratives.push(
+      `${ctx.name} looks stable from the outside; the relationship between ${ctx.topFaction || 'the dominant faction'} and ${ctx.govFaction || 'the council'} is more contested than it appears.`
+    );
+  if (ctx.topTension === 'economic_disparity')
+    narratives.push(
+      `The wealth gap in ${ctx.name} has become a fact of daily life — ${ctx.topFaction || 'the merchant class'} controls the surplus and ${ctx.govFaction || 'the council'} cannot or will not force redistribution. Resentment is structural now, not episodic.`
+    );
+  if (ctx.topTension === 'religious_tension')
+    narratives.push(
+      `Two versions of faith are competing in ${ctx.name}; both claim legitimacy and both have the ear of someone powerful. ${ctx.govFaction || 'The council'} has avoided taking sides so far, which means both factions resent it equally.`
+    );
+  if (ctx.topTension === 'guild_conflict')
+    narratives.push(
+      `The guild dispute in ${ctx.name} is not about craft standards — it is about who controls access to the market. ${ctx.topFaction || 'The dominant guild'} has held the advantage long enough that the challengers have stopped playing by guild rules.`
+    );
+  if (ctx.topTension === 'external_threat' && ctx.neighbor)
+    narratives.push(
+      `${ctx.name} is watching ${ctx.neighbor} and does not like what it sees. ${ctx.govFaction || 'The council'} and ${ctx.milForce || 'the garrison'} disagree about what to do about it, and that disagreement is now public.`
+    );
+  if (ctx.topTension === 'external_threat' && !ctx.neighbor)
+    narratives.push(
+      `The threat approaching ${ctx.name} is not yet visible to most residents. ${ctx.topNPCName || 'The most senior figure'} knows the intelligence and has not shared it. The decision about when to share it — and how — is the real crisis.`
+    );
+  if (ctx.topTension === 'resource_scarcity' && ctx.commodity)
+    narratives.push(
+      `${ctx.name}'s ${ctx.commodity} supply is tighter than the official position acknowledges. ${ctx.topFaction || 'The merchant class'} knows the real numbers. ${ctx.govFaction || 'The council'} has been told a different version.`
+    );
+  if (ctx.topTension === 'resource_scarcity' && !ctx.commodity)
+    narratives.push(
+      `Something essential in ${ctx.name} is running short — food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${ctx.govFaction || 'The council'} controls the allocation.`
+    );
+  if (ctx.topTension === 'crime_wave')
+    narratives.push(
+      `${ctx.name}'s criminal problem has grown past the point ${ctx.milForce || 'the guard'} can contain through normal enforcement. The question is whether ${ctx.govFaction || 'the council'} brings in more force, negotiates, or finds a scapegoat. Someone powerful benefits from each option.`
+    );
+  if (ctx.topTension === 'magical_controversy')
+    narratives.push(
+      `Magic in ${ctx.name} has done something recently that people cannot agree on how to interpret. ${ctx.govFaction || 'The council'} is being pressured to regulate — by people who disagree about what regulation means.`
+    );
+  if (ctx.topTension === 'generational_divide')
+    narratives.push(
+      `In ${ctx.name} the older residents and the younger ones are not arguing about the same things. The older generation thinks the argument is about values; the younger thinks it is about access. Both are right.`
+    );
+  if (ctx.topTension === 'occupation_legacy')
+    narratives.push(
+      `${ctx.name} carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets, the same market, the same ${ctx.govFaction || 'council'}. The official position is that this is resolved.`
+    );
+  if (ctx.topTension === 'disputed_land')
+    narratives.push(
+      `A land dispute in ${ctx.name} that was dormant is now active — someone filed a claim, or found a document, or simply started pressing. ${ctx.govFaction || 'The council'} has delayed ruling because there is no outcome that does not cost them something.`
+    );
+  if (ctx.topTension === 'population_friction')
+    narratives.push(
+      `${ctx.name} is absorbing people it did not plan for, or losing people it expected to keep. Either way, the settlement's social assumptions no longer match its actual composition, and ${ctx.govFaction || 'the council'} is governing for the settlement that used to exist.`
+    );
+  if (ctx.topTension === 'leadership_vacuum')
+    narratives.push(
+      `${ctx.name} has not had a strong authority since ${ctx.topNPCName || 'the last leader'} left or died. The pretense of normal governance is maintained. Every decision of consequence is being deferred or made informally by ${ctx.topFaction || 'the faction with the most to gain'}.`
+    );
+  narratives.push(
+    `The most important thing happening in ${ctx.name} right now is happening below the surface — ${ctx.topNPCName ? ctx.topNPCName + ', the ' + ctx.topNPCRole + ',' : 'the most senior figure'} knows it and isn't discussing it.`
   );
+  return narratives;
 };
 
-// genRelNarrative
-export const genRelNarrative = (r) => {
-  var p, b;
-  const { relationships: s = [], stress: o, config: _d = {} } = r;
-  if (!s.length || random01(0.4)) return null;
-  const l = ((p = (o ? (Array.isArray(o) ? o : [o]) : [])[0]) == null ? void 0 : p.type) || null,
-    m = l ? STRESS_FLAVOR[l] || [] : [],
-    h = s.map((k) => {
-      let f = _rng() * 0.5;
-      return (
-        m.includes(k.type) && (f += 2),
-        k.flagDriven && (f += 1),
-        k.tension && k.tension.length > 30 && (f += 0.5),
-        {
-          r: k,
-          score: f,
-        }
-      );
+// genRelNarrative — pick the most salient relationship and render a rumour for it
+export const genRelNarrative = (input) => {
+  var firstStress, topScored;
+  const { relationships = [], stress, config: _config = {} } = input;
+  if (!relationships.length || random01(0.4)) return null;
+  const primaryStressType =
+      ((firstStress = (stress ? (Array.isArray(stress) ? stress : [stress]) : [])[0]) == null
+        ? void 0
+        : firstStress.type) || null,
+    flavorTypes = primaryStressType ? STRESS_FLAVOR[primaryStressType] || [] : [],
+    scored = relationships.map((rel) => {
+      let score = _rng() * 0.5;
+      if (flavorTypes.includes(rel.type)) score += 2;
+      if (rel.flagDriven) score += 1;
+      if (rel.tension && rel.tension.length > 30) score += 0.5;
+      return {
+        r: rel,
+        score,
+      };
     });
-  h.sort((k, f) => f.score - k.score);
-  const g = (b = h[0]) == null ? void 0 : b.r;
-  if (!g) return null;
-  const w = pickRandom2(STRESS_RUMORS)(g);
+  scored.sort((a, b) => b.score - a.score);
+  const topRel = (topScored = scored[0]) == null ? void 0 : topScored.r;
+  if (!topRel) return null;
+  const phrasing = pickRandom2(STRESS_RUMORS)(topRel);
   return {
-    npc1: g.npc1Name,
-    npc2: g.npc2Name,
-    type: g.typeName,
-    phrasing: w,
-    full: g.description,
-    tension: g.tension,
+    npc1: topRel.npc1Name,
+    npc2: topRel.npc2Name,
+    type: topRel.typeName,
+    phrasing,
+    full: topRel.description,
+    tension: topRel.tension,
   };
 };
 
@@ -601,7 +630,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
     instFlags = getInstFlags(config, institutions),
     stressFlags = getStressFlags(config, institutions),
     p = /** @type {Array<any>} */ ([]),
-    b = tier === 'metropolis' || tier === 'metropolis' ? 35 : tier === 'city' ? 33 : tier === 'town' ? 31 : 30,
+    b = tier === 'metropolis' ? 35 : tier === 'city' ? 33 : tier === 'town' ? 31 : 30,
     k = Math.round(25 * priorityToMultiplier(instFlags.economyOutput)),
     f = Math.round(23 * priorityToMultiplier(instFlags.militaryEffective)),
     C = Math.round(22 * priorityToMultiplier(instFlags.religionInfluence)),
@@ -2233,65 +2262,68 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
   };
 };
 
-// generateFactions
-export const generateFactions = (r, s) => {
-  if (!(r != null && r.length)) return [];
-  const o = new Map(r.map((m) => [m.id, new Set()]));
-  s.forEach((m) => {
-    var h, g;
-    ['ally', 'political', 'patron_client', 'respect'].includes(m.type) &&
-      ((h = o.get(m.npc1Id)) == null || h.add(m.npc2Id), (g = o.get(m.npc2Id)) == null || g.add(m.npc1Id));
+// generateFactions — group NPCs into factions by connected components of
+// positive relationships (ally / political / patron_client / respect).
+export const generateFactions = (npcs, relationships) => {
+  if (!(npcs != null && npcs.length)) return [];
+  // Undirected adjacency: npc id → set of positively-connected npc ids
+  const adjacency = new Map(npcs.map((npc) => [npc.id, new Set()]));
+  relationships.forEach((rel) => {
+    var set1, set2;
+    if (['ally', 'political', 'patron_client', 'respect'].includes(rel.type)) {
+      (set1 = adjacency.get(rel.npc1Id)) == null || set1.add(rel.npc2Id);
+      (set2 = adjacency.get(rel.npc2Id)) == null || set2.add(rel.npc1Id);
+    }
   });
-  const d = new Set(),
-    l = [];
-  return (
-    r.forEach((m) => {
-      var w;
-      if (d.has(m.id)) return;
-      const h = [],
-        g = [m.id];
-      for (; g.length; ) {
-        const p = g.shift();
-        if (d.has(p)) continue;
-        d.add(p);
-        const b = r.find((k) => k.id === p);
-        (b && h.push(b),
-          (w = o.get(p)) == null ||
-            w.forEach((k) => {
-              d.has(k) || g.push(k);
-            }));
-      }
-      if (h.length >= 1) {
-        const p = pickFactionName(h),
-          b = FACTION_DESCRIPTORS[p] || FACTION_DESCRIPTORS.other;
-        (() => {
-          const usedNames = new Set(l.map((f) => f.name));
-          let chosenName = pick(b);
-          // Retry up to 5 times to avoid duplicate faction names
-          for (let attempt = 0; attempt < 5 && usedNames.has(chosenName); attempt++) {
-            chosenName = pick(b);
-          }
-          // If still duplicate after retries, append a distinguishing suffix
-          if (usedNames.has(chosenName)) {
-            const suffixes = ['Inner Circle', 'Bloc', 'Alliance', 'Faction', 'Assembly'];
-            chosenName = chosenName + ' ' + pick(suffixes);
-          }
-          l.push({ name: chosenName, members: h, dominantCategory: p });
-        })();
-      }
-    }),
-    l.sort((m, h) => h.members.length - m.members.length)
-  );
+  const visited = new Set(),
+    factions = [];
+  npcs.forEach((npc) => {
+    var neighbors;
+    if (visited.has(npc.id)) return;
+    const members = [],
+      queue = [npc.id];
+    while (queue.length) {
+      const currentId = queue.shift();
+      if (visited.has(currentId)) continue;
+      visited.add(currentId);
+      const memberNpc = npcs.find((n) => n.id === currentId);
+      if (memberNpc) members.push(memberNpc);
+      (neighbors = adjacency.get(currentId)) == null ||
+        neighbors.forEach((neighborId) => {
+          if (!visited.has(neighborId)) queue.push(neighborId);
+        });
+    }
+    if (members.length >= 1) {
+      const dominantCategory = pickFactionName(members),
+        descriptors = FACTION_DESCRIPTORS[dominantCategory] || FACTION_DESCRIPTORS.other;
+      (() => {
+        const usedNames = new Set(factions.map((f) => f.name));
+        let chosenName = pick(descriptors);
+        // Retry up to 5 times to avoid duplicate faction names
+        for (let attempt = 0; attempt < 5 && usedNames.has(chosenName); attempt++) {
+          chosenName = pick(descriptors);
+        }
+        // If still duplicate after retries, append a distinguishing suffix
+        if (usedNames.has(chosenName)) {
+          const suffixes = ['Inner Circle', 'Bloc', 'Alliance', 'Faction', 'Assembly'];
+          chosenName = chosenName + ' ' + pick(suffixes);
+        }
+        factions.push({ name: chosenName, members, dominantCategory });
+      })();
+    }
+  });
+  return factions.sort((a, b) => b.members.length - a.members.length);
 };
 
-// generateConflicts
-export const generateConflicts = (r, s, o = {}, d = []) => {
-  if (r.length < 2) return [];
-  const l = getInstFlags(o, d),
-    m = getStressFlags(o, d),
-    h = [],
-    g = Math.min(randInt(1, 3), Math.floor(r.length / 2)),
-    w = [
+// generateConflicts — produce inter-faction conflicts from rivalries/enmities.
+//   factions, relationships, config, institutions
+export const generateConflicts = (factions, relationships, config = {}, institutions = []) => {
+  if (factions.length < 2) return [];
+  const instFlags = getInstFlags(config, institutions),
+    stressFlags = getStressFlags(config, institutions),
+    conflicts = [],
+    conflictCount = Math.min(randInt(1, 3), Math.floor(factions.length / 2)),
+    issueTemplates = [
       {
         issue: 'Control of the market licensing process',
         stakes: 'Commercial supremacy',
@@ -2343,9 +2375,9 @@ export const generateConflicts = (r, s, o = {}, d = []) => {
         flag: null,
       },
     ],
-    p = o.stressTypes || (o.stressType ? [o.stressType] : []);
-  (p.includes('wartime') &&
-    w.push(
+    stressTypes = config.stressTypes || (config.stressType ? [config.stressType] : []);
+  if (stressTypes.includes('wartime'))
+    issueTemplates.push(
       {
         issue: 'Rights to a lucrative war supply contract',
         stakes: 'Economic windfall',
@@ -2361,101 +2393,101 @@ export const generateConflicts = (r, s, o = {}, d = []) => {
         stakes: 'Political leverage',
         flag: null,
       }
-    ),
-    p.includes('insurgency') &&
-      w.push(
-        {
-          issue: 'Legitimacy of the current governing authority',
-          stakes: 'Political survival',
-          flag: null,
-        },
-        {
-          issue: 'Whether to open back-channel negotiations with the insurgency',
-          stakes: 'Settlement stability',
-          flag: null,
-        },
-        {
-          issue: 'Control of the intelligence on insurgent cells',
-          stakes: 'Operational advantage',
-          flag: null,
-        }
-      ),
-    p.includes('mass_migration') &&
-      w.push(
-        {
-          issue: 'Allocation of housing and resources between established residents and newcomers',
-          stakes: 'Social cohesion',
-          flag: null,
-        },
-        {
-          issue: 'Control of the documentation and registration process for new arrivals',
-          stakes: 'Legal and financial leverage',
-          flag: null,
-        }
-      ),
-    p.includes('religious_conversion') &&
-      w.push(
-        {
-          issue: "Custody of the settlement's religious records and property",
-          stakes: 'Institutional legitimacy',
-          flag: null,
-        },
-        {
-          issue: 'Whether the governing authority should formally declare a religious allegiance',
-          stakes: 'Political and legal authority',
-          flag: null,
-        }
-      ),
-    p.includes('slave_revolt') &&
-      w.push(
-        {
-          issue: 'Whether to suppress, contain, or negotiate with the revolt leadership',
-          stakes: 'Settlement order and precedent',
-          flag: null,
-        },
-        {
-          issue: 'Accountability for the conditions that produced the revolt',
-          stakes: 'Political survival',
-          flag: null,
-        },
-        {
-          issue: 'Control of the escape routes and networks supporting the revolt',
-          stakes: 'Security and leverage',
-          flag: null,
-        }
-      ),
-    p.includes('occupied') &&
-      w.push({
-        issue: 'Degree of collaboration with the occupying authority',
-        stakes: 'Survival vs dignity',
+    );
+  if (stressTypes.includes('insurgency'))
+    issueTemplates.push(
+      {
+        issue: 'Legitimacy of the current governing authority',
+        stakes: 'Political survival',
         flag: null,
-      }),
-    p.includes('famine') &&
-      w.push({
-        issue: 'Control of the remaining grain stores',
-        stakes: 'Survival',
+      },
+      {
+        issue: 'Whether to open back-channel negotiations with the insurgency',
+        stakes: 'Settlement stability',
         flag: null,
-      }));
-  for (let b = 0; b < g && b < r.length - 1; b++) {
-    const k = r[b],
-      f = r[b + 1],
-      C = s.filter((S) => {
-        const y = k.members.some((j) => j.id === S.npc1Id || j.id === S.npc2Id),
-          v = f.members.some((j) => j.id === S.npc1Id || j.id === S.npc2Id);
-        return y && v && ['rival', 'enemy'].includes(S.type);
+      },
+      {
+        issue: 'Control of the intelligence on insurgent cells',
+        stakes: 'Operational advantage',
+        flag: null,
+      }
+    );
+  if (stressTypes.includes('mass_migration'))
+    issueTemplates.push(
+      {
+        issue: 'Allocation of housing and resources between established residents and newcomers',
+        stakes: 'Social cohesion',
+        flag: null,
+      },
+      {
+        issue: 'Control of the documentation and registration process for new arrivals',
+        stakes: 'Legal and financial leverage',
+        flag: null,
+      }
+    );
+  if (stressTypes.includes('religious_conversion'))
+    issueTemplates.push(
+      {
+        issue: "Custody of the settlement's religious records and property",
+        stakes: 'Institutional legitimacy',
+        flag: null,
+      },
+      {
+        issue: 'Whether the governing authority should formally declare a religious allegiance',
+        stakes: 'Political and legal authority',
+        flag: null,
+      }
+    );
+  if (stressTypes.includes('slave_revolt'))
+    issueTemplates.push(
+      {
+        issue: 'Whether to suppress, contain, or negotiate with the revolt leadership',
+        stakes: 'Settlement order and precedent',
+        flag: null,
+      },
+      {
+        issue: 'Accountability for the conditions that produced the revolt',
+        stakes: 'Political survival',
+        flag: null,
+      },
+      {
+        issue: 'Control of the escape routes and networks supporting the revolt',
+        stakes: 'Security and leverage',
+        flag: null,
+      }
+    );
+  if (stressTypes.includes('occupied'))
+    issueTemplates.push({
+      issue: 'Degree of collaboration with the occupying authority',
+      stakes: 'Survival vs dignity',
+      flag: null,
+    });
+  if (stressTypes.includes('famine'))
+    issueTemplates.push({
+      issue: 'Control of the remaining grain stores',
+      stakes: 'Survival',
+      flag: null,
+    });
+  for (let i = 0; i < conflictCount && i < factions.length - 1; i++) {
+    const factionA = factions[i],
+      factionB = factions[i + 1],
+      rivalries = relationships.filter((rel) => {
+        const inA = factionA.members.some((member) => member.id === rel.npc1Id || member.id === rel.npc2Id),
+          inB = factionB.members.some((member) => member.id === rel.npc1Id || member.id === rel.npc2Id);
+        return inA && inB && ['rival', 'enemy'].includes(rel.type);
       });
-    if (C.length === 0 && _rng() < 0.4) continue;
-    const T = w.filter((S) => !S.flag || m[S.flag]),
-      M = pick(T.length ? T : w),
-      A = C.length > 1 ? 'high' : C.length === 1 ? 'moderate' : 'low';
-    h.push({
-      parties: [k.name, f.name],
-      issue: M.issue,
-      stakes: M.stakes,
-      intensity: A,
-      desc: `${k.name} and ${f.name} are in ${A} conflict over ${M.issue.toLowerCase()}. The stakes are ${M.stakes.toLowerCase()}.`,
-      plotHooks: generateEconomicScore(k, f, M, l, m),
+    if (rivalries.length === 0 && _rng() < 0.4) continue;
+    const applicableTemplates = issueTemplates.filter((tmpl) => !tmpl.flag || stressFlags[tmpl.flag]),
+      chosen = pick(applicableTemplates.length ? applicableTemplates : issueTemplates),
+      intensity = rivalries.length > 1 ? 'high' : rivalries.length === 1 ? 'moderate' : 'low';
+    conflicts.push({
+      parties: [factionA.name, factionB.name],
+      issue: chosen.issue,
+      stakes: chosen.stakes,
+      intensity,
+      desc: `${factionA.name} and ${factionB.name} are in ${intensity} conflict over ${chosen.issue.toLowerCase()}. The stakes are ${chosen.stakes.toLowerCase()}.`,
+      plotHooks: generateEconomicScore(factionA, factionB, chosen, instFlags, stressFlags),
     });
   }
-  return h;
+  return conflicts;
 };

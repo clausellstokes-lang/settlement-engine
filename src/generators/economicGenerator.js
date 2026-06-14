@@ -945,15 +945,13 @@ const getInstitutionEconomicBonus = (nearbyResources = [], institutions = []) =>
 };
 
 // getCommoditiesForResources
-const getCommoditiesForResources = (r = []) => {
-  const s = new Set();
-  return (
-    r.forEach((o) => {
-      const d = RESOURCE_DATA[o];
-      d && d.commodities.forEach((l) => s.add(l));
-    }),
-    [...s]
-  );
+const getCommoditiesForResources = (resources = []) => {
+  const commodities = new Set();
+  resources.forEach((resource) => {
+    const resourceData = RESOURCE_DATA[resource];
+    resourceData && resourceData.commodities.forEach((commodity) => commodities.add(commodity));
+  });
+  return [...commodities];
 };
 
 // computeIncomeStreams
@@ -1035,37 +1033,36 @@ const getInstitutionServices = (tier, route, localProduction, institutions = [],
 };
 
 // getTradeModifiers
-const getTradeModifiers = (r, s = []) => {
-  const o = s.map((d) => (d.name || '').toLowerCase());
+const getTradeModifiers = (route, institutions = []) => {
+  const instNames = institutions.map((inst) => (inst.name || '').toLowerCase());
   return (
-    r === 'crossroads' ||
-    (r === 'port' && o.some((d) => d.includes('international trade') || d.includes('warehouse district')))
+    route === 'crossroads' ||
+    (route === 'port' && instNames.some((name) => name.includes('international trade') || name.includes('warehouse district')))
   );
 };
 
 // getHistoryModifiers
-const getHistoryModifiers = (r, s = [], o = {}) => {
-  const d = SERVICE_TIER_DATA[r] || {},
-    l = [];
-  return (
-    Object.entries(d).forEach(([m, h]) => {
-      const g = `${r}_export_${m}`;
-      // Custom-content extension: resolve `requiredInstitution` if it's a
-      // refId. For prebuilt entries it's a plain name → passthrough.
-      const reqInst = h.requiredInstitution
-        ? _customDeps.resolveInstitutionRequirement(h.requiredInstitution)
-        : '';
-      (o[g] !== void 0 ? o[g] : h.on) &&
-        ((reqInst &&
-          !s.some((w) => w.name === reqInst || w.name.includes(reqInst))) ||
-          (_rng() < h.p && l.push(m)));
-    }),
-    l
-  );
+const getHistoryModifiers = (tier, institutions = [], goodsToggles = {}) => {
+  const tierData = SERVICE_TIER_DATA[tier] || {};
+  const exports = [];
+  Object.entries(tierData).forEach(([goodName, spec]) => {
+    const toggleKey = `${tier}_export_${goodName}`;
+    // Custom-content extension: resolve `requiredInstitution` if it's a
+    // refId. For prebuilt entries it's a plain name → passthrough.
+    const reqInst = spec.requiredInstitution
+      ? _customDeps.resolveInstitutionRequirement(spec.requiredInstitution)
+      : '';
+    (goodsToggles[toggleKey] !== void 0 ? goodsToggles[toggleKey] : spec.on) &&
+      ((reqInst &&
+        !institutions.some((inst) => inst.name === reqInst || inst.name.includes(reqInst))) ||
+        (_rng() < spec.p && exports.push(goodName)));
+  });
+  return exports;
 };
 
 // isSaltPreserved
-export const isSaltPreserved = (r) => SALT_PRESERVATIVES.some((s) => (r || '').toLowerCase().includes(s));
+export const isSaltPreserved = (goodName) =>
+  SALT_PRESERVATIVES.some((keyword) => (goodName || '').toLowerCase().includes(keyword));
 const hasEconomicKeyword = isSaltPreserved;
 
 // SALT_PRESERVATIVES
@@ -1073,9 +1070,9 @@ const SALT_PRESERVATIVES = ['preserv', 'salted', 'pickled', 'cured', 'smoked', '
 
 // UPGRADE_CHAINS
 
-export const priorityToCategory = (r = 50) => {
-  const s = r ?? 50;
-  return s <= 15 ? 'very_low' : s <= 35 ? 'low' : s <= 65 ? 'medium' : s <= 85 ? 'high' : 'very_high';
+export const priorityToCategory = (priority = 50) => {
+  const value = priority ?? 50;
+  return value <= 15 ? 'very_low' : value <= 35 ? 'low' : value <= 65 ? 'medium' : value <= 85 ? 'high' : 'very_high';
 };
 
 // computeEconomicViability
@@ -1248,23 +1245,21 @@ const generateTradeIncomeStreams = (tier, institutions = [], route = 'road', goo
 };
 
 // getGoodsModifiers
-const getGoodsModifiers = (r, s = [], o = {}) => {
-  const d = GOODS_MODIFIERS_BY_TIER[r] || {},
-    l = [];
-  return (
-    Object.entries(d).forEach(([m, h]) => {
-      const g = `${r}_export_${m}`;
-      // Custom-content extension: resolve `requiredInstitution` refIds
-      const reqInst = h.requiredInstitution
-        ? _customDeps.resolveInstitutionRequirement(h.requiredInstitution)
-        : '';
-      (o[g] !== void 0 ? o[g] : h.on) &&
-        ((reqInst &&
-          !s.some((w) => w.name === reqInst || w.name.includes(reqInst))) ||
-          (_rng() < h.p && l.push(m)));
-    }),
-    l
-  );
+const getGoodsModifiers = (tier, institutions = [], goodsToggles = {}) => {
+  const tierData = GOODS_MODIFIERS_BY_TIER[tier] || {};
+  const exports = [];
+  Object.entries(tierData).forEach(([goodName, spec]) => {
+    const toggleKey = `${tier}_export_${goodName}`;
+    // Custom-content extension: resolve `requiredInstitution` refIds
+    const reqInst = spec.requiredInstitution
+      ? _customDeps.resolveInstitutionRequirement(spec.requiredInstitution)
+      : '';
+    (goodsToggles[toggleKey] !== void 0 ? goodsToggles[toggleKey] : spec.on) &&
+      ((reqInst &&
+        !institutions.some((inst) => inst.name === reqInst || inst.name.includes(reqInst))) ||
+        (_rng() < spec.p && exports.push(goodName)));
+  });
+  return exports;
 };
 
 // UPGRADE_GOODS_BY_TIER — goods available as upgrades per tier
@@ -1774,7 +1769,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         }),
     getTradeRouteFeatures(tier))
   ) {
-    const ee = tier === 'metropolis' || tier === 'metropolis' ? 18 : tier === 'city' ? 14 : 10;
+    const ee = tier === 'metropolis' ? 18 : tier === 'city' ? 14 : 10;
     incomeBuild.push({
       source: 'Property Rents',
       percentage: ee,
@@ -2549,28 +2544,28 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       activeChains: activeChains,
       foodSecurity: _foodSec,
       economicComplexity: (function () {
-        var ee = incomeNormalized.length,
-          E = re.length,
-          _ = hasInst('market', 'trading', 'merchant', 'guild');
+        var incomeSourceCount = incomeNormalized.length,
+          exportCount = re.length,
+          hasMarketInst = hasInst('market', 'trading', 'merchant', 'guild');
         return tier === 'metropolis' || tier === 'city'
-          ? ee >= 9
+          ? incomeSourceCount >= 9
             ? 'Highly diversified — multiple major revenue streams'
-            : ee >= 6
+            : incomeSourceCount >= 6
               ? 'Diversified — broad institutional economic base'
               : 'Concentrated — fewer revenue streams than scale suggests'
           : tier === 'town'
-            ? _ && ee >= 6
+            ? hasMarketInst && incomeSourceCount >= 6
               ? 'Diversified market economy'
-              : ee >= 4
+              : incomeSourceCount >= 4
                 ? 'Specialized production and trade'
                 : 'Limited — narrow economic base for this scale'
             : tier === 'village'
-              ? _
+              ? hasMarketInst
                 ? 'Mixed subsistence and market'
-                : E >= 4
+                : exportCount >= 4
                   ? 'Agricultural surplus with trade links'
                   : 'Subsistence with minor surplus'
-              : E >= 3
+              : exportCount >= 3
                 ? 'Subsistence with surplus'
                 : 'Subsistence — survival economy';
       })(),

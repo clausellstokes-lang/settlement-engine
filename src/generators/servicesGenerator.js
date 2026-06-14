@@ -24,75 +24,88 @@ import { INSTITUTION_SERVICES } from '../data/tradeGoodsData.js';
 // ─── Inlined cross-module helpers (cycle-free) ─────────────
 
 // getTierConstraints
-const _getTierConstraints = (r, s, o, d) => {
-  const l = (k) => s.some((f) => f.includes(k)),
-    m = ['thorp', 'hamlet', 'village'].includes(o),
-    h = l('garrison')
+// Rewrites generic authority/provider phrases in a narrative string (`text`)
+// so they name the bodies that actually exist in this settlement, inferred
+// from its institution/stress flags, settlement tier, and an optional
+// explicit government label.
+//   text         — narrative string to rewrite
+//   flags        — array of flag strings (institution/stress markers)
+//   tier         — settlement tier ('thorp' | 'hamlet' | ... | 'metropolis')
+//   governmentOverride — explicit governing-body label, if any
+const _getTierConstraints = (text, flags, tier, governmentOverride) => {
+  const hasFlag = (keyword) => flags.some((flag) => flag.includes(keyword)),
+    isSmallSettlement = ['thorp', 'hamlet', 'village'].includes(tier),
+    garrisonLabel = hasFlag('garrison')
       ? 'the garrison'
-      : l('barracks')
+      : hasFlag('barracks')
         ? 'the barracks guard'
-        : l('professional guard')
+        : hasFlag('professional guard')
           ? 'the professional guard'
-          : l('city watch') || l('town watch')
+          : hasFlag('city watch') || hasFlag('town watch')
             ? 'the watch'
-            : l('militia')
+            : hasFlag('militia')
               ? 'the militia'
-              : l('mercenary')
+              : hasFlag('mercenary')
                 ? 'the mercenary company'
-                : m
+                : isSmallSettlement
                   ? 'the able-bodied'
                   : 'the guard',
-    g =
-      d ||
-      (m
-        ? o === 'thorp'
+    governmentLabel =
+      governmentOverride ||
+      (isSmallSettlement
+        ? tier === 'thorp'
           ? 'the household heads'
           : 'the village elders'
-        : o === 'town'
+        : tier === 'town'
           ? 'the town council'
-          : o === 'city'
+          : tier === 'city'
             ? 'the city council'
-            : o === 'metropolis'
+            : tier === 'metropolis'
               ? 'the grand council'
               : 'the council'),
-    w = l('merchant') || l('guild') || l('market') ? 'the merchants' : m ? 'the wealthiest household' : 'the traders',
-    p = l('hospital')
+    merchantsLabel =
+      hasFlag('merchant') || hasFlag('guild') || hasFlag('market')
+        ? 'the merchants'
+        : isSmallSettlement
+          ? 'the wealthiest household'
+          : 'the traders',
+    healersLabel = hasFlag('hospital')
       ? 'the hospital staff'
-      : l('monastery') || l('friary')
+      : hasFlag('monastery') || hasFlag('friary')
         ? 'the monastery brothers'
-        : l('healer')
+        : hasFlag('healer')
           ? 'the healers'
-          : l('church') || l('cathedral') || l('parish')
+          : hasFlag('church') || hasFlag('cathedral') || hasFlag('parish')
             ? 'the clergy'
-            : m
+            : isSmallSettlement
               ? 'the local herbalist'
               : 'the healers',
-    b =
-      l('city watch') || l('town watch')
+    watchLabel =
+      hasFlag('city watch') || hasFlag('town watch')
         ? 'the watch'
-        : l('garrison') || l('guard')
+        : hasFlag('garrison') || hasFlag('guard')
           ? 'the guard'
-          : l('militia')
+          : hasFlag('militia')
             ? 'the militia'
-            : m
+            : isSmallSettlement
               ? 'the neighbours'
               : 'the guard';
-  return r
-    .replace(/\bthe garrison commander\b/gi, h.replace(/^the /, 'the ') + "'s commander")
-    .replace(/\bthe garrison\b/gi, h)
-    .replace(/\bthe public watch\b/gi, b)
-    .replace(/\bthe watch\b/gi, b)
-    .replace(/\bthe council\b/gi, g)
-    .replace(/\ba council\b/gi, g)
-    .replace(/\bcouncil meetings\b/gi, g.replace(/^the /, '') + ' meetings')
-    .replace(/\binside the council\b/gi, 'inside ' + g)
-    .replace(/\bthe grain merchants\b/gi, w)
-    .replace(/\bgrain merchants\b/gi, w)
-    .replace(/\btwo healers\b/gi, 'two ' + p.replace(/^the /, ''))
-    .replace(/\bthe healers\b/gi, p)
+  return text
+    .replace(/\bthe garrison commander\b/gi, garrisonLabel.replace(/^the /, 'the ') + "'s commander")
+    .replace(/\bthe garrison\b/gi, garrisonLabel)
+    .replace(/\bthe public watch\b/gi, watchLabel)
+    .replace(/\bthe watch\b/gi, watchLabel)
+    .replace(/\bthe council\b/gi, governmentLabel)
+    .replace(/\ba council\b/gi, governmentLabel)
+    .replace(/\bcouncil meetings\b/gi, governmentLabel.replace(/^the /, '') + ' meetings')
+    .replace(/\binside the council\b/gi, 'inside ' + governmentLabel)
+    .replace(/\bthe grain merchants\b/gi, merchantsLabel)
+    .replace(/\bgrain merchants\b/gi, merchantsLabel)
+    .replace(/\btwo healers\b/gi, 'two ' + healersLabel.replace(/^the /, ''))
+    .replace(/\bthe healers\b/gi, healersLabel)
     .replace(
       /\bthe mages' quarter\b/gi,
-      l('wizard') || l('mage') || l('alchemist') ? "the mages' quarter" : 'the arcane practitioners'
+      hasFlag('wizard') || hasFlag('mage') || hasFlag('alchemist') ? "the mages' quarter" : 'the arcane practitioners'
     );
 };
 
@@ -100,147 +113,166 @@ const _getTierConstraints = (r, s, o, d) => {
 import { LOCALE_SERVICE_OVERRIDES } from '../data/servicesData.js';
 
 // getServiceTierInfo
-const getServiceTierInfo = (r, s, o = {}, d = []) => {
-    getPriorities(o);
-    const l = (r || '').toLowerCase(),
-      m = (s || '').toLowerCase(),
-      h = getInstFlags(o, d);
-    return l.includes('patrol') ||
-      l.includes('escort') ||
-      l.includes('garrison') ||
-      l.includes('military') ||
-      l.includes('guard') ||
-      l.includes('training yard') ||
-      l.includes('company contract') ||
-      l.includes('specialist warrior') ||
-      l.includes('hired muscle') ||
-      l.includes('siege') ||
-      l.includes('scouting') ||
-      m.includes('garrison') ||
-      m.includes('mercenary')
-      ? priorityToMultiplier(h.militaryEffective)
-      : l.includes('religious') ||
-          l.includes('sanctuary') ||
-          l.includes('poor relief') ||
-          l.includes('prayer') ||
-          l.includes('ritual') ||
-          l.includes('spiritual') ||
-          l.includes('hospitality (pilgrim') ||
-          l.includes('safe passage letters') ||
-          m.includes('church') ||
-          m.includes('temple') ||
-          m.includes('cathedral') ||
-          m.includes('monastery') ||
-          m.includes('parish')
-        ? priorityToMultiplier(h.religionInfluence)
-        : l.includes('spell') ||
-            l.includes('magic') ||
-            l.includes('scroll') ||
-            l.includes('enchant') ||
-            l.includes('arcane') ||
-            l.includes('planar') ||
-            l.includes('identification') ||
-            l.includes('curse') ||
-            l.includes('divination') ||
-            l.includes('magical') ||
-            l.includes('cantrip') ||
-            l.includes('prophetic') ||
-            l.includes('dream') ||
-            l.includes('memory retrieval') ||
-            m.includes('wizard') ||
-            m.includes('mage') ||
-            m.includes('alchemist') ||
-            m.includes('enchant') ||
-            m.includes('hedge')
-          ? priorityToMultiplier(h.magicInfluence)
-          : l.includes('gambling') ||
-              l.includes('fence') ||
-              l.includes('unofficial') ||
-              l.includes('black market') ||
-              l.includes('smuggl') ||
-              m.includes('thieves') ||
-              m.includes('criminal') ||
-              m.includes('underground')
-            ? priorityToMultiplier(h.criminalEffective)
-            : l.includes('price') ||
-                l.includes('trade') ||
-                l.includes('market') ||
-                l.includes('guild') ||
-                l.includes('money') ||
-                l.includes('loan') ||
-                l.includes('deposit') ||
-                l.includes('credit') ||
-                l.includes('insurance') ||
-                l.includes('wealth') ||
-                l.includes('financing') ||
-                l.includes('banking') ||
-                l.includes('currency') ||
-                l.includes('apprenticeship') ||
-                l.includes('certification') ||
-                l.includes('arbitration') ||
-                l.includes('quality control') ||
-                l.includes('regulation') ||
-                m.includes('bank') ||
-                m.includes('guild') ||
-                m.includes('market') ||
-                m.includes('merchant')
-              ? priorityToMultiplier(h.economyOutput)
+const getServiceTierInfo = (serviceName, institutionName, settlement = {}, institutions = []) => {
+    getPriorities(settlement);
+    const svc = (serviceName || '').toLowerCase(),
+      inst = (institutionName || '').toLowerCase(),
+      flags = getInstFlags(settlement, institutions);
+    return svc.includes('patrol') ||
+      svc.includes('escort') ||
+      svc.includes('garrison') ||
+      svc.includes('military') ||
+      svc.includes('guard') ||
+      svc.includes('training yard') ||
+      svc.includes('company contract') ||
+      svc.includes('specialist warrior') ||
+      svc.includes('hired muscle') ||
+      svc.includes('siege') ||
+      svc.includes('scouting') ||
+      inst.includes('garrison') ||
+      inst.includes('mercenary')
+      ? priorityToMultiplier(flags.militaryEffective)
+      : svc.includes('religious') ||
+          svc.includes('sanctuary') ||
+          svc.includes('poor relief') ||
+          svc.includes('prayer') ||
+          svc.includes('ritual') ||
+          svc.includes('spiritual') ||
+          svc.includes('hospitality (pilgrim') ||
+          svc.includes('safe passage letters') ||
+          inst.includes('church') ||
+          inst.includes('temple') ||
+          inst.includes('cathedral') ||
+          inst.includes('monastery') ||
+          inst.includes('parish')
+        ? priorityToMultiplier(flags.religionInfluence)
+        : svc.includes('spell') ||
+            svc.includes('magic') ||
+            svc.includes('scroll') ||
+            svc.includes('enchant') ||
+            svc.includes('arcane') ||
+            svc.includes('planar') ||
+            svc.includes('identification') ||
+            svc.includes('curse') ||
+            svc.includes('divination') ||
+            svc.includes('magical') ||
+            svc.includes('cantrip') ||
+            svc.includes('prophetic') ||
+            svc.includes('dream') ||
+            svc.includes('memory retrieval') ||
+            inst.includes('wizard') ||
+            inst.includes('mage') ||
+            inst.includes('alchemist') ||
+            inst.includes('enchant') ||
+            inst.includes('hedge')
+          ? priorityToMultiplier(flags.magicInfluence)
+          : svc.includes('gambling') ||
+              svc.includes('fence') ||
+              svc.includes('unofficial') ||
+              svc.includes('black market') ||
+              svc.includes('smuggl') ||
+              inst.includes('thieves') ||
+              inst.includes('criminal') ||
+              inst.includes('underground')
+            ? priorityToMultiplier(flags.criminalEffective)
+            : svc.includes('price') ||
+                svc.includes('trade') ||
+                svc.includes('market') ||
+                svc.includes('guild') ||
+                svc.includes('money') ||
+                svc.includes('loan') ||
+                svc.includes('deposit') ||
+                svc.includes('credit') ||
+                svc.includes('insurance') ||
+                svc.includes('wealth') ||
+                svc.includes('financing') ||
+                svc.includes('banking') ||
+                svc.includes('currency') ||
+                svc.includes('apprenticeship') ||
+                svc.includes('certification') ||
+                svc.includes('arbitration') ||
+                svc.includes('quality control') ||
+                svc.includes('regulation') ||
+                inst.includes('bank') ||
+                inst.includes('guild') ||
+                inst.includes('market') ||
+                inst.includes('merchant')
+              ? priorityToMultiplier(flags.economyOutput)
               : 1;
   },
-  _Sv = (r, s = {}, o = []) => {
-    var f;
-    const d = getInstFlags(s, o),
-      l = d.economyOutput,
-      m = (f = s.stressTypes) != null && f.length ? s.stressTypes : s.stressType ? [s.stressType] : [],
-      h = m[0] || null,
-      g = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'],
-      w = { Poor: 1, Moderate: 2, Prosperous: 4, Wealthy: 5 };
-    let p = w[r] !== void 0 ? w[r] : 2;
-    l >= 80
-      ? (p = Math.min(5, p + 1))
-      : l >= 65
-        ? (p = Math.min(5, p))
-        : l < 20
-          ? (p = Math.max(0, p - 2))
-          : l < 32 && (p = Math.max(0, p - 1));
-    const b = { thorp: 1, hamlet: 1, village: 1 }[s.settType || s.tier || ''] || 0;
-    (b > 0 && (p = Math.max(b, p)), d.criminalEffective >= 65 && (p = Math.max(0, p - 1)));
-    const k = m.length ? m : h ? [h] : [];
-    return (
-      k.includes('under_siege') && (p = Math.max(0, Math.min(p, 0))),
-      k.includes('famine') && (p = Math.max(0, Math.min(p, 0))),
-      k.includes('occupied') && (p = Math.max(0, Math.min(p, 1))),
-      k.includes('indebted') && (p = Math.max(0, p - 1)),
-      k.includes('politically_fractured') && (p = Math.max(0, p - 1)),
-      k.includes('plague_onset') && (p = Math.max(0, p - 1)),
-      k.includes('recently_betrayed') && (p = Math.max(0, p - 1)),
-      k.includes('monster_pressure') && (p = Math.max(0, p - 1)),
-      k.includes('insurgency') && (p = Math.max(0, p - 1)),
-      k.includes('wartime') && (p = Math.max(0, p - 1)),
-      k.includes('mass_migration') && (p = Math.max(0, p - 1)),
-      k.includes('religious_conversion') && (p = Math.max(0, p - 1)),
-      g[Math.min(5, Math.max(0, p))]
-    );
+  // Derive a settlement's displayed wealth-tier label from its base wealth
+  // level, economy strength, settlement size, and active stress conditions.
+  //   wealthLevel  — base wealth descriptor ('Poor' | 'Moderate' | ...)
+  //   settlement   — settlement object (stress types, tier)
+  //   institutions — institution array (for institution flags)
+  _Sv = (wealthLevel, settlement = {}, institutions = []) => {
+    var stressTypesTmp;
+    const flags = getInstFlags(settlement, institutions),
+      economyOutput = flags.economyOutput,
+      stressTypes =
+        (stressTypesTmp = settlement.stressTypes) != null && stressTypesTmp.length
+          ? settlement.stressTypes
+          : settlement.stressType
+            ? [settlement.stressType]
+            : [],
+      primaryStress = stressTypes[0] || null,
+      wealthLadder = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'],
+      baseTierByWealth = { Poor: 1, Moderate: 2, Prosperous: 4, Wealthy: 5 };
+    let tierIndex = baseTierByWealth[wealthLevel] !== void 0 ? baseTierByWealth[wealthLevel] : 2;
+    economyOutput >= 80
+      ? (tierIndex = Math.min(5, tierIndex + 1))
+      : economyOutput >= 65
+        ? (tierIndex = Math.min(5, tierIndex))
+        : economyOutput < 20
+          ? (tierIndex = Math.max(0, tierIndex - 2))
+          : economyOutput < 32 && (tierIndex = Math.max(0, tierIndex - 1));
+    const smallSettlementFloor = { thorp: 1, hamlet: 1, village: 1 }[settlement.settType || settlement.tier || ''] || 0;
+    if (smallSettlementFloor > 0) tierIndex = Math.max(smallSettlementFloor, tierIndex);
+    if (flags.criminalEffective >= 65) tierIndex = Math.max(0, tierIndex - 1);
+    const effectiveStress = stressTypes.length ? stressTypes : primaryStress ? [primaryStress] : [];
+    if (effectiveStress.includes('under_siege')) tierIndex = Math.max(0, Math.min(tierIndex, 0));
+    if (effectiveStress.includes('famine')) tierIndex = Math.max(0, Math.min(tierIndex, 0));
+    if (effectiveStress.includes('occupied')) tierIndex = Math.max(0, Math.min(tierIndex, 1));
+    if (effectiveStress.includes('indebted')) tierIndex = Math.max(0, tierIndex - 1);
+    if (effectiveStress.includes('politically_fractured')) tierIndex = Math.max(0, tierIndex - 1);
+    if (effectiveStress.includes('plague_onset')) tierIndex = Math.max(0, tierIndex - 1);
+    if (effectiveStress.includes('recently_betrayed')) tierIndex = Math.max(0, tierIndex - 1);
+    if (effectiveStress.includes('monster_pressure')) tierIndex = Math.max(0, tierIndex - 1);
+    if (effectiveStress.includes('insurgency')) tierIndex = Math.max(0, tierIndex - 1);
+    if (effectiveStress.includes('wartime')) tierIndex = Math.max(0, tierIndex - 1);
+    if (effectiveStress.includes('mass_migration')) tierIndex = Math.max(0, tierIndex - 1);
+    if (effectiveStress.includes('religious_conversion')) tierIndex = Math.max(0, tierIndex - 1);
+    return wealthLadder[Math.min(5, Math.max(0, tierIndex))];
   },
-  _generateSafetyNarrative2 = (r = {}, s = []) => {
-    var b;
-    const o = getInstFlags(r, s),
-      d = getStressFlags(r, s),
-      l = r.monsterThreat || 'frontier',
-      m = l === 'plagued' ? 1.6 : l === 'heartland' ? 0.6 : 1,
-      h = (b = r.stressTypes) != null && b.length ? r.stressTypes : r.stressType ? [r.stressType] : [],
-      g = h[0] || null,
-      w = {
-        economic: 1.3 * priorityToMultiplier(o.economyOutput),
-        political: 1.2 * (0.5 + 0.5 * priorityToMultiplier(Math.max(o.militaryEffective, o.criminalEffective))),
-        disaster: 1 * (0.6 + 0.4 * priorityToMultiplier(o.militaryEffective)) * (d.stateCrime ? 1.4 : 1) * m,
-        religious: 1 * priorityToMultiplier(o.religionInfluence) * (d.crusaderSynthesis ? 1.5 : 1),
-        magical: 0.8 * priorityToMultiplier(o.magicInfluence) * (d.heresySuppression ? 0.4 : 1),
+  // Build weighted danger-theme scores for the safety narrative, then amplify
+  // them according to the settlement's active stress conditions.
+  //   settlement   — settlement object (monster threat, stress types)
+  //   institutions — institution array (for flags)
+  _generateSafetyNarrative2 = (settlement = {}, institutions = []) => {
+    var stressTypesTmp;
+    const flags = getInstFlags(settlement, institutions),
+      stressFlags = getStressFlags(settlement, institutions),
+      monsterThreat = settlement.monsterThreat || 'frontier',
+      threatMultiplier = monsterThreat === 'plagued' ? 1.6 : monsterThreat === 'heartland' ? 0.6 : 1,
+      stressTypes =
+        (stressTypesTmp = settlement.stressTypes) != null && stressTypesTmp.length
+          ? settlement.stressTypes
+          : settlement.stressType
+            ? [settlement.stressType]
+            : [],
+      primaryStress = stressTypes[0] || null,
+      themeWeights = {
+        economic: 1.3 * priorityToMultiplier(flags.economyOutput),
+        political: 1.2 * (0.5 + 0.5 * priorityToMultiplier(Math.max(flags.militaryEffective, flags.criminalEffective))),
+        disaster:
+          1 * (0.6 + 0.4 * priorityToMultiplier(flags.militaryEffective)) * (stressFlags.stateCrime ? 1.4 : 1) * threatMultiplier,
+        religious: 1 * priorityToMultiplier(flags.religionInfluence) * (stressFlags.crusaderSynthesis ? 1.5 : 1),
+        magical: 0.8 * priorityToMultiplier(flags.magicInfluence) * (stressFlags.heresySuppression ? 0.4 : 1),
         occupation_infiltration: 0.7,
         exile_return: 0.6,
         demographic: 0.6,
       },
-      p = {
+      stressModifiers = {
         under_siege: { disaster: 2.5, political: 1.5 },
         famine: { disaster: 2, economic: 1.8 },
         occupied: { occupation_infiltration: 3, political: 2 },
@@ -252,34 +284,41 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
         succession_void: { political: 3, exile_return: 2 },
         monster_pressure: { disaster: 2, political: 1.3 },
       };
-    return (
-      (h.length ? h : g ? [g] : []).forEach((k) => {
-        const f = p[k] || {};
-        Object.entries(f).forEach(([C, T]) => {
-          w[C] !== void 0 && (w[C] *= T);
-        });
-      }),
-      w
-    );
+    (stressTypes.length ? stressTypes : primaryStress ? [primaryStress] : []).forEach((stress) => {
+      const modifiers = stressModifiers[stress] || {};
+      Object.entries(modifiers).forEach(([theme, factor]) => {
+        themeWeights[theme] !== void 0 && (themeWeights[theme] *= factor);
+      });
+    });
+    return themeWeights;
   },
-  _jv = (r = {}, s = []) => {
-    var w;
-    const o = getInstFlags(r, s),
-      d = getStressFlags(r, s),
-      l = r.monsterThreat || 'frontier',
-      m = l === 'plagued' ? 1.4 : l === 'heartland' ? 0.75 : 1,
-      h = ((w = r.stressTypes) != null && w.length ? r.stressTypes : r.stressType ? [r.stressType] : [])[0] || null,
-      g = {
+  // Build weighted control-domain scores (who holds power) for the settlement,
+  // amplified by the single primary stress condition if any.
+  //   settlement   — settlement object (monster threat, stress types)
+  //   institutions — institution array (for flags)
+  _jv = (settlement = {}, institutions = []) => {
+    var stressTypesTmp;
+    const flags = getInstFlags(settlement, institutions),
+      stressFlags = getStressFlags(settlement, institutions),
+      monsterThreat = settlement.monsterThreat || 'frontier',
+      threatMultiplier = monsterThreat === 'plagued' ? 1.4 : monsterThreat === 'heartland' ? 0.75 : 1,
+      primaryStress =
+        ((stressTypesTmp = settlement.stressTypes) != null && stressTypesTmp.length
+          ? settlement.stressTypes
+          : settlement.stressType
+            ? [settlement.stressType]
+            : [])[0] || null,
+      domainWeights = {
         government: 1,
-        religious: priorityToMultiplier(o.religionInfluence) * (d.crusaderSynthesis ? 1.3 : 1),
-        military: priorityToMultiplier(o.militaryEffective) * (d.crusaderSynthesis ? 1.3 : 1) * m,
-        economy: priorityToMultiplier(o.economyOutput) * (d.theocraticEconomy ? 0.5 : 1),
-        criminal: priorityToMultiplier(o.criminalEffective) * (d.stateCrime ? 0.4 : 1),
-        magic: priorityToMultiplier(o.magicInfluence) * (d.heresySuppression ? 0.25 : 1),
+        religious: priorityToMultiplier(flags.religionInfluence) * (stressFlags.crusaderSynthesis ? 1.3 : 1),
+        military: priorityToMultiplier(flags.militaryEffective) * (stressFlags.crusaderSynthesis ? 1.3 : 1) * threatMultiplier,
+        economy: priorityToMultiplier(flags.economyOutput) * (stressFlags.theocraticEconomy ? 0.5 : 1),
+        criminal: priorityToMultiplier(flags.criminalEffective) * (stressFlags.stateCrime ? 0.4 : 1),
+        magic: priorityToMultiplier(flags.magicInfluence) * (stressFlags.heresySuppression ? 0.25 : 1),
         other: 1,
       };
-    if (h) {
-      const p =
+    if (primaryStress) {
+      const modifiers =
         {
           under_siege: { military: 2.5, government: 1.5, criminal: 0.5 },
           famine: { religious: 1.8, economy: 1.5, other: 1.5 },
@@ -291,28 +330,33 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
           plague_onset: { religious: 2.5, other: 1.8, military: 0.7 },
           succession_void: { government: 2.5, military: 1.5, criminal: 1.3 },
           monster_pressure: { military: 2, other: 1.3, economy: 0.8 },
-        }[h] || {};
-      Object.entries(p).forEach(([b, k]) => {
-        g[b] !== void 0 && (g[b] *= k);
+        }[primaryStress] || {};
+      Object.entries(modifiers).forEach(([domain, factor]) => {
+        domainWeights[domain] !== void 0 && (domainWeights[domain] *= factor);
       });
     }
-    return g;
+    return domainWeights;
   },
-  _Av = (r = {}, _s = 'town', o = []) => {
-    var k;
-    const d = getInstFlags(r, o),
-      l = getStressFlags(r, o),
-      m = priorityToCategory(d.economyOutput),
-      h = priorityToCategory(d.criminalEffective),
-      g = (r == null ? void 0 : r.tradeRouteAccess) || 'road',
-      w = g === 'isolated',
-      p =
-        (k = r == null ? void 0 : r.stressTypes) != null && k.length
-          ? r.stressTypes
-          : r != null && r.stressType
-            ? [r.stressType]
+  // Produce a prose description of the settlement's economy, prioritising any
+  // overriding stress condition, then isolation, then baseline economy/crime.
+  //   settlement   — settlement object (trade route access, stress, tier)
+  //   _s           — unused (kept for call-site arity)
+  //   institutions — institution array (for flags)
+  _Av = (settlement = {}, _s = 'town', institutions = []) => {
+    var stressTypesTmp;
+    const flags = getInstFlags(settlement, institutions),
+      stressFlags = getStressFlags(settlement, institutions),
+      economyCategory = priorityToCategory(flags.economyOutput),
+      criminalCategory = priorityToCategory(flags.criminalEffective),
+      tradeRouteAccess = (settlement == null ? void 0 : settlement.tradeRouteAccess) || 'road',
+      isIsolated = tradeRouteAccess === 'isolated',
+      stressTypes =
+        (stressTypesTmp = settlement == null ? void 0 : settlement.stressTypes) != null && stressTypesTmp.length
+          ? settlement.stressTypes
+          : settlement != null && settlement.stressType
+            ? [settlement.stressType]
             : [],
-      b = p.length
+      primaryStress = stressTypes.length
         ? [
             'under_siege',
             'occupied',
@@ -329,94 +373,106 @@ const getServiceTierInfo = (r, s, o = {}, d = []) => {
             'wartime',
             'religious_conversion',
             'slave_revolt',
-          ].find((f) => p.includes(f)) || p[0]
+          ].find((stress) => stressTypes.includes(stress)) || stressTypes[0]
         : null;
-    if (b === 'under_siege')
+    if (primaryStress === 'under_siege')
       return 'All normal economic activity is suspended. Markets are closed, merchant caravans have stopped arriving, and whatever currency existed is being redirected toward survival. The only economic question is the arithmetic of remaining supplies.';
-    if (b === 'famine')
+    if (primaryStress === 'famine')
       return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense — prices are simply at levels that exclude most of the population.';
-    if (b === 'occupied')
-      return `Revenue flows outward to the occupying authority via ${g === 'port' ? 'maritime levies' : 'road tolls and seizure powers'} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one.`;
-    if (b === 'indebted')
+    if (primaryStress === 'occupied')
+      return `Revenue flows outward to the occupying authority via ${tradeRouteAccess === 'port' ? 'maritime levies' : 'road tolls and seizure powers'} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one.`;
+    if (primaryStress === 'indebted')
       return "Debt service obligations consume a meaningful share of revenue before any local investment is possible. The creditor's representative has effective veto power over fiscal decisions. Economic activity continues but its fruits are partly spoken for before they are earned.";
-    if (b === 'plague_onset')
+    if (primaryStress === 'plague_onset')
       return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if SEVERITY weren't compounded by the medical crisis — as SEVERITY is, each problem is making the other worse.";
-    if (b === 'politically_fractured')
+    if (primaryStress === 'politically_fractured')
       return 'Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but SEVERITY is slower and more expensive than SEVERITY should be.';
-    if (w) {
-      const f = getTradeRouteFeatures((r == null ? void 0 : r.tier) || (r == null ? void 0 : r.settType) || 'village'),
-        C = hasTeleportationInfra(o, r);
-      return f && !C
+    if (isIsolated) {
+      const hasTradeRouteFeatures = getTradeRouteFeatures(
+          (settlement == null ? void 0 : settlement.tier) || (settlement == null ? void 0 : settlement.settType) || 'village'
+        ),
+        hasTeleport = hasTeleportationInfra(institutions, settlement);
+      return hasTradeRouteFeatures && !hasTeleport
         ? 'This settlement is too large to survive in true isolation. Without trade routes, specialist goods cannot be sourced, surpluses cannot be sold, and population density cannot be sustained. The economy is structurally broken.'
-        : f && C
+        : hasTradeRouteFeatures && hasTeleport
           ? 'Trade flows through magical channels — teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.'
-          : l.stateCrime
+          : stressFlags.stateCrime
             ? 'Internal production is suppressed by institutional extraction — what little surplus exists flows upward rather than into communal welfare.'
-            : m === 'very_high' || m === 'high'
+            : economyCategory === 'very_high' || economyCategory === 'high'
               ? 'Despite isolation, internal production is well-organised — skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.'
-              : m === 'low' || m === 'very_low'
+              : economyCategory === 'low' || economyCategory === 'very_low'
                 ? 'The settlement struggles to sustain itself without outside trade. Resources are tightly rationed and growth is impossible.'
                 : 'The settlement meets its own needs without external trade, though surpluses are modest and specialist goods are unavailable.';
     }
-    return l.theocraticEconomy
+    return stressFlags.theocraticEconomy
       ? 'The church controls most economic activity — land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.'
-      : l.merchantCriminalBlur
+      : stressFlags.merchantCriminalBlur
         ? 'Commerce is vigorous and the distinction between legitimate trade and criminal enterprise is largely academic. The wealthiest operators play both sides.'
-        : l.stateCrime
+        : stressFlags.stateCrime
           ? 'The official economy appears functional. The reality is that institutional extraction — confiscations, forced sales, and selective taxation — suppresses productive activity.'
-          : m === 'very_high'
+          : economyCategory === 'very_high'
             ? 'Commerce is the lifeblood of this settlement — markets are active at all hours and guild influence reaches every trade.'
-            : m === 'high'
+            : economyCategory === 'high'
               ? 'Trade is vigorous and the guilds are well-organized, generating steady civic revenue.'
-              : m === 'low'
+              : economyCategory === 'low'
                 ? 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.'
-                : m === 'very_low'
+                : economyCategory === 'very_low'
                   ? 'The economy is barely functional — barter replaces coin and few outsiders bother to trade here.'
-                  : h === 'high' || h === 'very_high'
+                  : criminalCategory === 'high' || criminalCategory === 'very_high'
                     ? 'Official commerce is moderate but a thriving shadow economy undercuts legitimate trade.'
                     : 'Trade proceeds at an ordinary pace for a settlement of this size.';
   },
-  _generateTradeScore = (r, s = {}, o = []) => {
-    const d = priorityToCategory(getInstFlags(s, o).economyOutput),
-      l = ((s == null ? void 0 : s.tradeRouteAccess) || 'road') === 'isolated';
-    return r <= 0
+  // Narrate a food deficit percentage (`deficitPct`) in light of trade access
+  // and economy strength. Returns null when there is no deficit.
+  //   deficitPct   — deficit as a percentage of daily need
+  //   settlement   — settlement object (trade route access)
+  //   institutions — institution array (for flags)
+  _generateTradeScore = (deficitPct, settlement = {}, institutions = []) => {
+    const economyCategory = priorityToCategory(getInstFlags(settlement, institutions).economyOutput),
+      isIsolated = ((settlement == null ? void 0 : settlement.tradeRouteAccess) || 'road') === 'isolated';
+    return deficitPct <= 0
       ? null
-      : l
-        ? hasTeleportationInfra(o, s)
-          ? `Food deficit of ${Math.round(r)}% persists even with magical supply lines — teleportation imports are reliable but extraordinarily expensive, rationed to necessities rather than plenty, and dependent on the circle's own upkeep. Any disruption to the magical infrastructure means immediate food crisis.`
-          : r > 40
-            ? `Food deficit of ${Math.round(r)}% far outstrips the trickle of sanctioned caravans and minor routes that reach this isolated settlement. Starvation or mass emigration is the long-term outcome without change.`
-            : `Food deficit of ${Math.round(r)}% with no major trade route — local production carries the burden, topped up only by expensive, irregular caravans on minor routes. A poor harvest means genuine hunger.`
-        : d === 'very_high' || d === 'high'
-          ? `Food deficit of ${Math.round(r)}% is covered through active grain imports — merchant networks ensure supply chain resilience.`
-          : d === 'low'
-            ? `Food deficit of ${Math.round(r)}% is a genuine vulnerability — limited trade capacity means shortages are only one poor harvest away.`
-            : d === 'very_low'
-              ? `Food deficit of ${Math.round(r)}% is a chronic crisis — without meaningful trade, famine is a recurring threat.`
+      : isIsolated
+        ? hasTeleportationInfra(institutions, settlement)
+          ? `Food deficit of ${Math.round(deficitPct)}% persists even with magical supply lines — teleportation imports are reliable but extraordinarily expensive, rationed to necessities rather than plenty, and dependent on the circle's own upkeep. Any disruption to the magical infrastructure means immediate food crisis.`
+          : deficitPct > 40
+            ? `Food deficit of ${Math.round(deficitPct)}% far outstrips the trickle of sanctioned caravans and minor routes that reach this isolated settlement. Starvation or mass emigration is the long-term outcome without change.`
+            : `Food deficit of ${Math.round(deficitPct)}% with no major trade route — local production carries the burden, topped up only by expensive, irregular caravans on minor routes. A poor harvest means genuine hunger.`
+        : economyCategory === 'very_high' || economyCategory === 'high'
+          ? `Food deficit of ${Math.round(deficitPct)}% is covered through active grain imports — merchant networks ensure supply chain resilience.`
+          : economyCategory === 'low'
+            ? `Food deficit of ${Math.round(deficitPct)}% is a genuine vulnerability — limited trade capacity means shortages are only one poor harvest away.`
+            : economyCategory === 'very_low'
+              ? `Food deficit of ${Math.round(deficitPct)}% is a chronic crisis — without meaningful trade, famine is a recurring threat.`
               : null;
   },
-  _Rv = (r, s = {}, o = []) => {
-    if (!r) return null;
-    const { dailyNeed: d, deficit: l, surplus: m } = r;
-    if (d === void 0 || isNaN(d)) return null;
-    const h = priorityToCategory(getInstFlags(s, o).economyOutput);
-    if (l > 0) {
-      const g = Math.round((l / d) * 100);
-      return ((s == null ? void 0 : s.tradeRouteAccess) || 'road') === 'isolated'
-        ? hasTeleportationInfra(o, s)
-          ? `Food deficit of ${g}% managed through magical supply chains — teleportation imports fill the gap at great cost. Magical infrastructure failure means immediate famine.`
-          : `Food deficit of ${g}% with no trade access — the settlement cannot import what SEVERITY lacks. This is a structural survival problem.`
-        : h === 'very_high' || h === 'high'
-          ? `Food deficit of ${g}% is actively managed through trade — merchant networks provide reliable grain imports, but the cost is a permanent economic drag.`
-          : h === 'low' || h === 'very_low'
-            ? `Food deficit of ${g}% is a genuine crisis — without strong trade infrastructure, the settlement teeters on the edge of seasonal famine.`
-            : `Food deficit of ${g}% requires consistent grain imports. Any disruption to supply becomes a survival threat.`;
+  // Narrate a settlement's food balance (deficit, surplus, or rough balance),
+  // factoring trade access and economy strength for the deficit case.
+  //   foodBalance  — { dailyNeed, deficit, surplus }
+  //   settlement   — settlement object (trade route access)
+  //   institutions — institution array (for flags)
+  _Rv = (foodBalance, settlement = {}, institutions = []) => {
+    if (!foodBalance) return null;
+    const { dailyNeed, deficit, surplus } = foodBalance;
+    if (dailyNeed === void 0 || isNaN(dailyNeed)) return null;
+    const economyCategory = priorityToCategory(getInstFlags(settlement, institutions).economyOutput);
+    if (deficit > 0) {
+      const pct = Math.round((deficit / dailyNeed) * 100);
+      return ((settlement == null ? void 0 : settlement.tradeRouteAccess) || 'road') === 'isolated'
+        ? hasTeleportationInfra(institutions, settlement)
+          ? `Food deficit of ${pct}% managed through magical supply chains — teleportation imports fill the gap at great cost. Magical infrastructure failure means immediate famine.`
+          : `Food deficit of ${pct}% with no trade access — the settlement cannot import what SEVERITY lacks. This is a structural survival problem.`
+        : economyCategory === 'very_high' || economyCategory === 'high'
+          ? `Food deficit of ${pct}% is actively managed through trade — merchant networks provide reliable grain imports, but the cost is a permanent economic drag.`
+          : economyCategory === 'low' || economyCategory === 'very_low'
+            ? `Food deficit of ${pct}% is a genuine crisis — without strong trade infrastructure, the settlement teeters on the edge of seasonal famine.`
+            : `Food deficit of ${pct}% requires consistent grain imports. Any disruption to supply becomes a survival threat.`;
     }
-    if (m > 0) {
-      const g = Math.round((m / d) * 100);
-      return g > 50
-        ? `Agricultural surplus of ${g}% above daily needs — this settlement is a net grain exporter and could weather a poor harvest.`
-        : `Modest food surplus of ${g}% — sufficient buffer against a bad harvest, with some grain available for trade.`;
+    if (surplus > 0) {
+      const pct = Math.round((surplus / dailyNeed) * 100);
+      return pct > 50
+        ? `Agricultural surplus of ${pct}% above daily needs — this settlement is a net grain exporter and could weather a poor harvest.`
+        : `Modest food surplus of ${pct}% — sufficient buffer against a bad harvest, with some grain available for trade.`;
     }
     return 'Food production is in rough balance with population needs — no significant surplus or deficit.';
   };
