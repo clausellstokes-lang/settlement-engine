@@ -17,7 +17,22 @@
  * the right column doesn't outgrow the left.
  */
 
+import { collectPlotHooks } from '../dossier/plotHooks.js';
+import { deriveAllSupplyChainStates } from '../supplyChainState.js';
+
 const MAX_ENTRIES = 6;
+
+// Supply-chain statuses that represent a genuine, table-visible disruption
+// (vs. merely 'strained'/'substituted', which still function).
+const DISRUPTED_STATUSES = new Set(['blocked', 'collapsing', 'scarce', 'captured']);
+
+const INFLUENCE_RANK = { high: 0, moderate: 1, low: 2 };
+
+/** Read an NPC secret regardless of shape — generators emit { what, stakes }. */
+function npcSecretText(npc) {
+  if (!npc?.secret) return '';
+  return typeof npc.secret === 'string' ? npc.secret : (npc.secret.what || '');
+}
 
 /** @typedef {{ kind: 'NPC'|'HOOK'|'TWIST'|'RED', title: string, body: string }} TableEntry */
 
@@ -32,18 +47,21 @@ export function tonightAtTheTable(settlement) {
   const out = [];
 
   // ── Top NPCs ─────────────────────────────────────────────────────────
-  // Prefer the governing NPC + one with a secret. Fall back to the
-  // first two NPCs by importance.
+  // Rank by the fields generators actually emit: power (desc), then
+  // influence band. The old `importance` vocabulary matched nothing.
   const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
   const ranked = [...npcs].sort((a, b) => {
-    const order = { major: 0, primary: 0, minor: 1, supporting: 1 };
-    return (order[a.importance] ?? 2) - (order[b.importance] ?? 2);
+    const pw = (b.power || 0) - (a.power || 0);
+    if (pw !== 0) return pw;
+    return (INFLUENCE_RANK[a.influence] ?? 3) - (INFLUENCE_RANK[b.influence] ?? 3);
   });
   for (const npc of ranked.slice(0, 2)) {
     const role = (npc.role || npc.title || '').toLowerCase();
-    const trait = npc.secret
-      ? `secret: ${truncate(npc.secret, 80)}`
-      : (npc.want ? `wants: ${truncate(npc.want, 80)}` : (role || 'major NPC'));
+    const secret = npcSecretText(npc);
+    const want = npc.goal?.short || npc.want || '';
+    const trait = secret
+      ? `secret: ${truncate(secret, 80)}`
+      : (want ? `wants: ${truncate(want, 80)}` : (role || 'major NPC'));
     out.push({
       kind: 'NPC',
       title: npc.name || 'Unnamed NPC',
@@ -52,53 +70,50 @@ export function tonightAtTheTable(settlement) {
   }
 
   // ── Top hooks ────────────────────────────────────────────────────────
-  // Take Tier-A hooks first (most urgent), then fill from the rest.
-  const hooks = Array.isArray(settlement.plotHooks)
-    ? settlement.plotHooks
-    : Array.isArray(settlement.hooks) ? settlement.hooks : [];
-  const rankedHooks = [...hooks].sort((a, b) => {
-    const order = { A: 0, B: 1, C: 2 };
-    return (order[a.tier] ?? 3) - (order[b.tier] ?? 3);
-  });
+  // Source from the canonical plot-hook collector (the settlement carries no
+  // plotHooks/hooks array of its own) and rank by numeric priority desc.
+  const hooks = collectPlotHooks(settlement);
+  const rankedHooks = [...hooks].sort((a, b) => (b.priority || 0) - (a.priority || 0));
   for (const hook of rankedHooks.slice(0, 2)) {
     out.push({
       kind: 'HOOK',
-      title: hook.title || hook.headline || 'Unnamed hook',
-      body:  truncate(hook.body || hook.summary || '', 120),
+      title: hook.source || hook.role || 'Plot hook',
+      body:  truncate(hook.text || '', 120),
     });
   }
 
   // ── Twist ────────────────────────────────────────────────────────────
   // A legacyAnnotation tying past to present, OR the secret on a major
-  // NPC we haven't already surfaced (typically the canonical "the
-  // librarian breaks first" beat).
+  // NPC we haven't already surfaced.
   const annotations = settlement.history?.legacyAnnotations || [];
-  if (annotations.length > 0) {
-    const a = annotations[0];
+  const annotation = annotations[0];
+  if (annotation?.annotation) {
     out.push({
       kind: 'TWIST',
-      title: a.title || a.label || 'The hidden thread',
-      body:  truncate(a.body || a.summary || '', 120),
+      title: annotation.eventName || 'The hidden thread',
+      body:  truncate(annotation.annotation, 120),
     });
-  } else if (ranked.length > 2 && ranked[2]?.secret) {
+  } else if (ranked.length > 2 && npcSecretText(ranked[2])) {
     out.push({
       kind: 'TWIST',
       title: ranked[2].name,
-      body:  truncate(ranked[2].secret, 120),
+      body:  truncate(npcSecretText(ranked[2]), 120),
     });
   }
 
   // ── Red flag ─────────────────────────────────────────────────────────
-  // A "don't mention" derived from a failing supply chain. The
-  // critique's canonical example: "Don't mention salt — NPCs go cold.
-  // Reason: routes broken."
-  const failures = settlement.supplyChainState?.failures || [];
-  if (failures.length > 0) {
-    const f = failures[0];
+  // A "don't mention" derived live from a disrupted supply chain — the
+  // settlement carries no supplyChainState.failures array of its own.
+  const disrupted = deriveAllSupplyChainStates(settlement)
+    .filter(c => DISRUPTED_STATUSES.has(c.status));
+  if (disrupted.length > 0) {
+    const f = disrupted[0];
+    const good = f.needLabel || f.name || 'the supply';
+    const reason = f.failureConsequences || 'broken supply chain.';
     out.push({
       kind: 'RED',
-      title: `Don't mention ${f.good || 'the supply'}`,
-      body:  `NPCs go cold mid-sentence. Reason: ${f.reason || 'broken supply chain.'}`,
+      title: `Don't mention ${good}`,
+      body:  truncate(`NPCs go cold mid-sentence. Reason: ${reason}`, 160),
     });
   }
 

@@ -17,11 +17,10 @@ import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { activeSaveCount, inactiveRetentionCount, isPlanInactiveSave, isSaveActive } from '../lib/saveAccess.js';
 import {
-  canonicalEdgeForLink,
   relationshipDefinition,
   relationshipLinkMetadata,
-  rolesForCanonicalEdge,
 } from '../domain/relationships/canonicalRelationship.js';
+import { buildInterSettlementNPCs } from '../domain/relationships/neighbourBackLink.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import DeleteConfirmation from './DeleteConfirmation';
@@ -37,51 +36,11 @@ function migrateConfig(config) {
   return c;
 }
 
-// ── NPC pairing helpers ────────────────────────────────────────────────────
-const NPC_PAIR_CATS = {
-  trade_partner:['economy'], allied:['economy','military'], patron:['military','economy'],
-  client:['economy'], rival:['economy','military'], cold_war:['military','criminal'],
-  hostile:['military'], vassal:['military','economy'], neutral:['economy'],
-};
-const CONTACT_DESC = {
-  trade_partner:(a,ar,b,br,bs)=>`${a} (${ar}) maintains trade connections with ${b} (${br}) in ${bs}.`,
-  allied:       (a,ar,b,br,bs)=>`${a} (${ar}) coordinates with ${b} (${br}) of ${bs} on matters of mutual defense and policy.`,
-  patron:       (a,ar,b,br,bs)=>`${a} (${ar}) reports to ${b} (${br}) of ${bs}, who exercises oversight authority.`,
-  client:       (a,ar,b,br,bs)=>`${a} (${ar}) supplies goods and services to ${b} (${br}) in ${bs}.`,
-  rival:        (a,ar,b,br,bs)=>`${a} (${ar}) and ${b} (${br}) of ${bs} are known adversaries competing for the same interests.`,
-  cold_war:     (a,ar,b,br,bs)=>`${a} (${ar}) runs quiet intelligence operations against ${b} (${br}) of ${bs}, officially unacknowledged.`,
-  hostile:      (a,ar,b,br,bs)=>`${a} (${ar}) and ${b} (${br}) of ${bs} are active enemies.`,
-  vassal:       (a,ar,b,br,bs)=>`${a} (${ar}) coordinates obligations and protection with ${b} (${br}) of ${bs}.`,
-  neutral:      (a,ar,b,br,bs)=>`${a} (${ar}) has occasional dealings with ${b} (${br}) in ${bs}.`,
-};
-
-function buildInterSettlementNPCs(settlementA, settlementB, relType, linkId) {
-  const cats = NPC_PAIR_CATS[relType] || ['economy'];
-  const descFn = CONTACT_DESC[relType] || CONTACT_DESC.neutral;
-  let npcsA = (settlementA.npcs||[]).filter(n => cats.includes((n.category||'').toLowerCase()));
-  let npcsB = (settlementB.npcs||[]).filter(n => cats.includes((n.category||'').toLowerCase()));
-  if (!npcsA.length) npcsA = (settlementA.npcs||[]).slice(0, 3);
-  if (!npcsB.length) npcsB = (settlementB.npcs||[]).slice(0, 3);
-  if (!npcsA.length || !npcsB.length) return { forA:[], forB:[] };
-  const pairs = [];
-  const maxPairs = Math.min(npcsA.length, npcsB.length, 2);
-  const usedB = new Set();
-  for (let i = 0; i < maxPairs; i++) {
-    const a = npcsA[i];
-    const b = npcsB.find(n => !usedB.has(n.id) && n.category === a.category) || npcsB.find(n => !usedB.has(n.id));
-    if (!b) break; usedB.add(b.id); pairs.push({ a, b });
-  }
-  const forA = pairs.map(({a,b}) => ({ linkId, npcId:a.id, npcName:a.name, npcRole:a.role, partnerName:b.name, partnerRole:b.role, partnerSettlement:settlementB.name, relType, description:descFn(a.name,a.role,b.name,b.role,settlementB.name) }));
-  const forB = pairs.map(({a,b}) => ({ linkId, npcId:b.id, npcName:b.name, npcRole:b.role, partnerName:a.name, partnerRole:a.role, partnerSettlement:settlementA.name, relType, description:descFn(b.name,b.role,a.name,a.role,settlementA.name) }));
-  return { forA, forB };
-}
-
-function findSaveByName(saves, name) { return saves.find(s => s.name === name || s.settlement?.name === name) || null; }
+// buildInterSettlementNPCs (shared with the canonical save flow) is imported
+// from domain/relationships/neighbourBackLink.js. The manual-link and
+// remove-neighbour handlers below still build links by hand, so they keep this
+// small lookup.
 function findSaveById(saves, id) { return saves.find(s => s.id === id) || null; }
-function newSaveId() {
-  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
-  return `00000000-0000-4000-8000-${Date.now().toString(16).padStart(12, '0').slice(-12)}`;
-}
 
 const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', allied:'#1a5a28', secret_alliance:'#1a5a28', trade_partner:'#a0762a', patron:'#2a3a7a', client:'#2a3a7a', criminal_network:'#5a2a8a' };
 const _REL_TYPES = ['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
@@ -464,12 +423,6 @@ function SampleDashboard({ onFork, forkingId }) {
 // ── Main Panel ──────────────────────────────────────────────────────────────
 
 export default function SettlementsPanel({ onNavigate, routeId }) {
-  const settlement = useStore(s => s.settlement);
-  const config = useStore(s => s.config);
-  const institutionToggles = useStore(s => s.institutionToggles);
-  const categoryToggles = useStore(s => s.categoryToggles);
-  const goodsToggles = useStore(s => s.goodsToggles);
-  const servicesToggles = useStore(s => s.servicesToggles);
   const updateConfig = useStore(s => s.updateConfig);
   const setInstitutionToggles = useStore(s => s.setInstitutionToggles);
   const setCategoryToggles = useStore(s => s.setCategoryToggles);
@@ -609,7 +562,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     );
   }, []);
   const [savesLoading, setSavesLoading] = useState(true);
-  const [saved, setSaved] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [detail, setDetail] = useState(null);
   const [linking, setLinking] = useState(false);
@@ -792,103 +744,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     }
   };
 
-  const isDuplicate = settlement && saves.some(s => isSaveActive(s) && s.name === settlement.name && s.tier === settlement.tier && (s.settlement?.institutions||[]).length === (settlement.institutions||[]).length);
-
-  // ── Save current ────────────────────────────────────────────────────────
-  const saveCurrentSettlement = async () => {
-    if (!settlement || !canSave) return;
-    if (activeSlotsUsed >= (maxSaves || 30)) return;
-    const saveId = newSaveId();
-    // Audit fix: pull the lifecycle data off the global slice and embed
-    // it in the save record's `campaignState`. Without this, canonized
-    // settlements would lose their phase / eventLog / systemState /
-    // canonizedAt on every reload — the CRIT bug from the audit list.
-    const live = useStore.getState();
-    const campaignState = {
-      phase:        live.phase || 'draft',
-      eventLog:     live.eventLog || [],
-      systemState:  live.systemState || null,
-      locks:        live.locks || {},
-      generatedAt:  live.generatedAt || null,
-      editedAt:     new Date().toISOString(),
-      canonizedAt:  live.canonizedAt || null,
-      lastExportAt: live.lastExportAt || null,
-      narrativeDrift: null,
-      exportState:  null,
-    };
-    const newEntry = {
-      id: saveId, name: settlement.name, tier: settlement.tier,
-      timestamp: new Date().toISOString(),
-      settlement, config,
-      institutionToggles, categoryToggles,
-      goodsToggles: goodsToggles||{}, servicesToggles: servicesToggles||{},
-      campaignState,
-    };
-
-    // Migrate neighborRelationship → neighbourNetwork
-    const nr_raw = newEntry.settlement.neighborRelationship;
-    if (nr_raw?.name) {
-      const existingNet = newEntry.settlement.neighbourNetwork || [];
-      if (!existingNet.some(n => n.name === nr_raw.name)) {
-        newEntry.settlement = { ...newEntry.settlement, neighbourNetwork: [{ id:`generated_${nr_raw.name.replace(/\s+/g,'_')}`, name:nr_raw.name, neighbourName:nr_raw.name, neighbourTier:nr_raw.tier||'', tier:nr_raw.tier||'', relationshipType:nr_raw.relationshipType||'neutral', description:`Generated as ${(nr_raw.relationshipType||'neutral').replace(/_/g,' ')} of this settlement.`, fromGeneration:true }, ...existingNet] };
-      }
-    }
-
-    let currentSaves = [...saves];
-    let linkedPartnerSave = null;
-
-    // Bidirectional linking
-    const nr = settlement.neighborRelationship;
-    if (nr?.name) {
-      const relType = nr.relationshipType || 'neutral';
-      const partnerSave = findSaveByName(currentSaves, nr.name);
-      if (partnerSave) {
-        const linkId = `link_${saveId}_${partnerSave.id}`;
-        const edge = canonicalEdgeForLink(
-          { relationshipType: relType },
-          { ...newEntry, id: saveId },
-          partnerSave,
-        );
-        const roles = rolesForCanonicalEdge(edge, saveId, partnerSave.id);
-        const definition = {
-          relationshipType: edge.relationshipType,
-          from: edge.from,
-          to: edge.to,
-        };
-        const entryForA = {
-          id:partnerSave.id, linkId, name:partnerSave.name, neighbourName:partnerSave.name,
-          neighbourTier:partnerSave.tier, tier:partnerSave.tier,
-          ...relationshipLinkMetadata(definition, roles.sourceRole),
-          description:`Generated with ${roles.sourceRole.replace(/_/g,' ')} standing toward ${partnerSave.name}.`,
-          bidirectional:true,
-        };
-        const entryForB = {
-          id:saveId, linkId, name:newEntry.name, neighbourName:newEntry.name,
-          neighbourTier:newEntry.tier, tier:newEntry.tier,
-          ...relationshipLinkMetadata(definition, roles.targetRole),
-          description:`${newEntry.name} has ${roles.targetRole.replace(/_/g,' ')} standing toward this settlement.`,
-          bidirectional:true,
-        };
-        const { forA: npcForA, forB: npcForB } = buildInterSettlementNPCs(settlement, partnerSave.settlement, edge.relationshipType, linkId);
-        const { forA: conflictForA, forB: conflictForB } = generateCrossSettlementConflicts(settlement, partnerSave.settlement, edge.relationshipType, linkId);
-        newEntry.settlement = { ...newEntry.settlement, neighbourNetwork: [entryForA, ...(newEntry.settlement.neighbourNetwork||[]).filter(n=>n.name!==partnerSave.name)], interSettlementRelationships: [...(newEntry.settlement.interSettlementRelationships||[]), ...npcForA, ...conflictForA] };
-        currentSaves = currentSaves.map(s => {
-          if (s.id !== partnerSave.id) return s;
-          return { ...s, settlement: { ...s.settlement, neighbourNetwork: [entryForB, ...(s.settlement?.neighbourNetwork||[]).filter(n=>n.id!==saveId)], interSettlementRelationships: [...(s.settlement?.interSettlementRelationships||[]).filter(r=>r.linkId!==linkId), ...npcForB, ...conflictForB] } };
-        });
-        linkedPartnerSave = findSaveById(currentSaves, partnerSave.id);
-      }
-    }
-
-    const newSaves = [newEntry, ...currentSaves];
-    setSaves(newSaves); setSaved(true); setTimeout(() => setSaved(false), 2000);
-    await persistBatch(
-      newSaves,
-      linkedPartnerSave ? [linkedPartnerSave.id] : [],
-      { creates: [newEntry] },
-    );
-  };
-
   // ── Delete ──────────────────────────────────────────────────────────────
   const deleteConfirmed = (id) => {
     const deletedSave = saves.find(s => s.id === id);
@@ -1008,15 +863,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     ignoreAllQueuedRegionalImpacts(campaignId);
   }, [ignoreAllQueuedRegionalImpacts]);
 
-  // Derive assigned/unassigned settlement grouping
-  const assignedIds = useMemo(() => {
-    const ids = new Set();
-    for (const c of activeCampaigns) for (const id of c.settlementIds) ids.add(id);
-    return ids;
-  }, [activeCampaigns]);
-
-  const unassignedSaves = useMemo(() => saves.filter(s => !assignedIds.has(s.id)), [saves, assignedIds]);
-
   // P108 / E-6 — Library search + sort + filter state. Self-contained
   // here; LibraryToolbar is a controlled component. The filter pipeline
   // (applyLibraryFilters) is a pure function over the saves array.
@@ -1030,6 +876,22 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       filters: libraryFilters,
     });
   }, [saves, libraryQuery, librarySort, libraryFilters]);
+  // Set of save ids surviving the active query/filter — the rendered collections
+  // below intersect with this so the toolbar isn't inert.
+  const filteredIds = useMemo(() => new Set(filteredSaves.map(s => s.id)), [filteredSaves]);
+
+  // Derive assigned/unassigned settlement grouping (from the FILTERED set so the
+  // search/sort/filter UI actually changes what renders).
+  const assignedIds = useMemo(() => {
+    const ids = new Set();
+    for (const c of activeCampaigns) for (const id of c.settlementIds) ids.add(id);
+    return ids;
+  }, [activeCampaigns]);
+
+  const unassignedSaves = useMemo(
+    () => filteredSaves.filter(s => !assignedIds.has(s.id)),
+    [filteredSaves, assignedIds],
+  );
 
   const onViewSettlement = (s) => {
     if (!isSaveActive(s)) return;
@@ -1109,7 +971,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           {/* Campaign folders */}
           {campaigns.map(campaign => {
             const campSaves = canManageCampaigns && isCampaignActive(campaign)
-              ? campaign.settlementIds.map(id => saves.find(s => s.id === id)).filter(Boolean)
+              ? campaign.settlementIds.map(id => saves.find(s => s.id === id))
+                  .filter(Boolean).filter(s => filteredIds.has(s.id))
               : [];
             return (
               <CampaignFolder key={campaign.id} campaign={campaign} settlements={campSaves}

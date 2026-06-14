@@ -50,10 +50,12 @@ export function powerHeadline(power, _identity) {
 
   if (!govType && !top) return null;
   const bits = [];
-  if (top?.faction) bits.push(`${top.faction}${govType ? ` (${govType.toLowerCase()})` : ''} governs`);
+  // powerSlice factions expose `.name` (mapped from f.faction); the old `.faction`
+  // reads were always undefined so the headline never named the governing body.
+  if (top?.name) bits.push(`${top.name}${govType ? ` (${govType.toLowerCase()})` : ''} governs`);
   else if (govType) bits.push(`${govType} rule`);
-  if (challenger?.faction && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
-    bits.push(`with ${challenger.faction} pressing close behind`);
+  if (challenger?.name && challenger?.power && top?.power && challenger.power >= top.power * 0.7) {
+    bits.push(`with ${challenger.name} pressing close behind`);
   } else if (factions.length > 2) {
     bits.push(`${factions.length - 1} other faction${factions.length - 1 === 1 ? '' : 's'} compete for influence`);
   }
@@ -143,12 +145,14 @@ export function servicesHeadline(services) {
 // ── Resources ──────────────────────────────────────────────────────────────
 export function resourcesHeadline(resources) {
   if (!resources) return null;
-  const exports = resources.primaryExports || [];
-  const imports = resources.primaryImports || [];
-  if (!exports.length && !imports.length) return null;
+  // The resources slice exposes exportPotential + nearbyDepleted, not the
+  // primaryExports/primaryImports that live on the economics slice.
+  const exports = resources.exportPotential || resources.primaryExports || [];
+  const depleted = resources.nearbyDepleted || [];
+  if (!exports.length && !depleted.length) return null;
   const bits = [];
   if (exports.length) bits.push(`Exports ${exports.slice(0, 2).map(e => labelOf(e).toLowerCase()).join(', ')}`);
-  if (imports.length) bits.push(`reliant on imported ${imports.slice(0, 2).map(e => labelOf(e).toLowerCase()).join(', ')}`);
+  if (depleted.length) bits.push(`${depleted.length} depleted resource${depleted.length === 1 ? '' : 's'}`);
   return bits.join('; ') + '.';
 }
 
@@ -215,7 +219,14 @@ export function hooksHeadline(hooks) {
 // ── Relationships ──────────────────────────────────────────────────────────
 export function relationshipsHeadline(rel) {
   if (!rel) return null;
-  const list = rel.all || rel.relationships || [];
-  if (!list.length) return null;
-  return `${list.length} external relationship${list.length === 1 ? '' : 's'} on file.`;
+  // The relationships slice exposes `neighbours` (external) + `internal`, not the
+  // `all`/`relationships` the old code read.
+  const neighbours = rel.neighbours || [];
+  const internal = rel.internal || rel.relationships || rel.all || [];
+  const total = neighbours.length + internal.length;
+  if (!total) return null;
+  const bits = [];
+  if (neighbours.length) bits.push(`${neighbours.length} neighbour link${neighbours.length === 1 ? '' : 's'}`);
+  if (internal.length) bits.push(`${internal.length} internal tie${internal.length === 1 ? '' : 's'}`);
+  return bits.join(', ') + ' on file.';
 }

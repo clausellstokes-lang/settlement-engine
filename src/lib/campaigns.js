@@ -11,6 +11,8 @@ import { supabase, isConfigured } from './supabase.js';
 
 const LOCAL_KEY = 'sf_campaigns';
 const LOCAL_KEY_PREFIX = 'sf_campaigns:';
+const TOMBSTONE_KEY = 'sf_campaign_tombstones';
+const TOMBSTONE_KEY_PREFIX = 'sf_campaign_tombstones:';
 const MAP_DATA_KIND = 'settlementforge_campaign';
 const MAP_DATA_VERSION = 2;
 export const ACTIVE_CAMPAIGN_STATE = 'active';
@@ -40,6 +42,40 @@ function localWrite(campaigns, ownerId = 'anon') {
 
 function localClear(ownerId = 'anon') {
   localStorage.removeItem(scopedLocalKey(ownerId));
+}
+
+// ── Deletion tombstones ──────────────────────────────────────────────────────
+// A per-owner local record of campaigns this device deleted. mergeCampaignLists
+// consumes these so a stale cache copy (or an in-flight list() that resolves
+// after the delete) can't merge a just-removed campaign back in. Always local —
+// the cloud row is hard-deleted; the tombstone only guards this device until the
+// delete propagates and is then pruned by reconcileTombstones.
+
+function scopedTombstoneKey(ownerId) {
+  const owner = String(ownerId || 'anon');
+  if (owner === 'anon') return TOMBSTONE_KEY;
+  return `${TOMBSTONE_KEY_PREFIX}${owner.replace(/[^a-zA-Z0-9_-]/g, '_')}`;
+}
+
+function loadTombstones(ownerId = 'anon') {
+  try {
+    const raw = JSON.parse(localStorage.getItem(scopedTombstoneKey(ownerId)) || '[]');
+    return Array.isArray(raw) ? raw.filter(entry => entry?.id != null) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeTombstones(tombstones, ownerId = 'anon') {
+  localStorage.setItem(scopedTombstoneKey(ownerId), JSON.stringify(tombstones || []));
+}
+
+function recordTombstone(id, ownerId = 'anon') {
+  if (id == null) return;
+  const key = String(id);
+  const next = loadTombstones(ownerId).filter(entry => String(entry.id) !== key);
+  next.push({ id: key, deletedAt: new Date().toISOString() });
+  writeTombstones(next, ownerId);
 }
 
 function isUuid(value) {
@@ -181,5 +217,9 @@ export const campaigns = {
   cache: localWrite,
   loadCached: localLoad,
   clearCache: localClear,
+  // Deletion tombstones (always local, owner-scoped — see above).
+  loadTombstones,
+  writeTombstones,
+  recordTombstone,
   isConfigured,
 };

@@ -194,20 +194,27 @@ function CategoryCard({ cat }) {
 }
 
 function ChainCard({ chain }) {
-  const tone = chain.resourceDepleted
+  // Honor the chain's own disruption status first — the card used to label
+  // trade-impaired/vulnerable chains 'Active', contradicting the web panel.
+  const status = String(chain.status || '').toLowerCase();
+  const tone = status === 'impaired' || status === 'blocked' || status === 'collapsing' || chain.resourceDepleted
     ? 'bad'
-    : chain.substituteActive
+    : status === 'vulnerable' || status === 'strained' || status === 'scarce' || chain.substituteActive
       ? 'warn'
       : chain.entrepot
         ? 'cool'
         : 'good';
-  const statusLabel = chain.resourceDepleted
-    ? 'Resource Depleted'
-    : chain.substituteActive
-      ? 'On Substitute'
-      : chain.entrepot
-        ? 'Entrepôt'
-        : 'Active';
+  const statusLabel = status === 'impaired' || status === 'blocked' || status === 'collapsing'
+    ? 'Impaired'
+    : status === 'vulnerable' || status === 'strained' || status === 'scarce'
+      ? 'Vulnerable'
+      : chain.resourceDepleted
+        ? 'Resource Depleted'
+        : chain.substituteActive
+          ? 'On Substitute'
+          : chain.entrepot
+            ? 'Entrepôt'
+            : 'Active';
   const flow = [
     chain.resource ? humanize(label(chain.resource)) : null,
     (chain.processingInstitutions || []).map(humanize).join(' + ') || null,

@@ -163,10 +163,10 @@ export const buildStressContext = (stressType, tier, config, institutions) => {
   }
 
   // ── Monster pressure (timber boosts — forests hide monsters) ─────────────
+  // Walls/military suppression is already applied in the shared under_siege/
+  // monster_pressure block above; only the timber boost is unique here.
   if (stressType === 'monster_pressure') {
     if (hasTimber)   prob *= 1.3;
-    if (hasWalls)    prob *= 0.6;
-    if (hasMilitary) prob *= 0.7;
   }
 
   return Math.min(prob, 0.35);

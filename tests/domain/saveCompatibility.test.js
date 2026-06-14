@@ -178,9 +178,14 @@ describe('stress / stresses / stressTypes all resolve to canonical stressors', (
     expect(out.stressors).toEqual(['plague', 'cut_route']);
   });
 
-  it('legacy `stressTypes` (array) resolves', () => {
+  it('legacy `stressTypes` (type strings) is NOT promoted into object-shaped stressors', () => {
+    // stressTypes holds TYPE STRINGS, not stressor objects, so it is deliberately
+    // not a stressors alias (canonicalAccessors excludes it too). Promoting it would
+    // put strings where substrate readers expect {type,name,severity} objects.
     const out = normalizeSettlement(FIXTURES[2].raw);
-    expect(out.stressors).toEqual(['drought']);
+    expect(out.stressors).toBeUndefined();
+    // The value is still preserved on the output for type-string consumers.
+    expect(out.stressTypes).toEqual(['drought']);
   });
 
   it('canonical `stressors` passes through', () => {

@@ -51,7 +51,10 @@ function readStored() {
   if (typeof sessionStorage !== 'undefined') {
     try {
       const raw = sessionStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : null;
+      // Fall back to the in-memory store when sessionStorage has nothing — a
+      // prior write may have failed (locked-down browser) but read succeeds, in
+      // which case the intent only lives in memory.
+      return raw ? JSON.parse(raw) : _memoryStore;
     } catch { /* fall through */ }
   }
   return _memoryStore;
@@ -61,6 +64,7 @@ function writeStored(value) {
   if (typeof sessionStorage !== 'undefined') {
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+      _memoryStore = null; // keep the two stores coherent on success
       return;
     } catch { /* fall through */ }
   }

@@ -96,7 +96,9 @@ export default function WizardNextSteps() {
 
   if (!settlement) return null;
 
-  const signedIn = !!authTier && authTier !== 'wanderer';
+  // auth tier is 'anon' | 'free' | 'premium' — 'wanderer' is a pricing key, never
+  // an auth tier, so the old check treated every signed-in user as anonymous.
+  const signedIn = !!authTier && authTier !== 'anon';
   const guide = buildNextSteps({ settlement, canSave, signedIn });
 
   return (

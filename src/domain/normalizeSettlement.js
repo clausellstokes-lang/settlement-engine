@@ -123,7 +123,11 @@ export function normalizeSettlement(settlement) {
   const out = { ...settlement };
 
   // ── 1. Version stamps ─────────────────────────────────────────────────
-  if (out.schemaVersion     == null) out.schemaVersion     = SCHEMA_VERSION;
+  // Do NOT pre-stamp schemaVersion: a versionless legacy save must enter the
+  // migration chain at version 0 (currentVersion() treats missing/null as 0) so
+  // every from:0 migration runs. The chain assigns the final schemaVersion in
+  // step 5; stamping it here would make migrateSettlementToLatest skip all
+  // migrations. simulation/generator versions are unrelated to migrations.
   if (out.simulationVersion == null) out.simulationVersion = SIMULATION_VERSION;
   if (out.generatorVersion  == null) out.generatorVersion  = GENERATOR_VERSION;
 

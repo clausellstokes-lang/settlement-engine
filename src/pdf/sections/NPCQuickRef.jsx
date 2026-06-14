@@ -22,11 +22,13 @@ function ageLabel(age) {
   return /^\d+$/.test(String(age)) ? `${age}y` : age;
 }
 
+// NPC power is a 1-10 scale (generateNPCGoal: high 8-10, mid 4-7, low 1-3).
+// The old 40/60/80 thresholds were 0-100 and never tinted anything.
 function powerTone(p) {
   if (p == null) return 'muted';
-  if (p >= 80) return 'bad';
-  if (p >= 60) return 'warn';
-  if (p >= 40) return 'gold';
+  if (p >= 8) return 'bad';
+  if (p >= 6) return 'warn';
+  if (p >= 4) return 'gold';
   return 'muted';
 }
 

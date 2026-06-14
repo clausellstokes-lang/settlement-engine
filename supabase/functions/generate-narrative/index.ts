@@ -2032,17 +2032,33 @@ serve(async (req) => {
 
     // Tier 6.8 — augment the bespoke summary with the structured
     // grounding envelope so the AI sees locked entities + user edits.
-    const baseSummary = augmentSummaryWithGrounding(
-      settlement as Record<string, unknown>,
-      summarizeSettlement(settlement as Record<string, unknown>),
-    );
-    const summary = confirmedRelationshipMemoryContext
-      ? { ...baseSummary, relationshipMemory: confirmedRelationshipMemoryContext }
-      : baseSummary;
-    // Per-call preservation block — adds settlement-specific MUST
-    // PRESERVE lines on top of the static PRESERVATION_RULES. Threaded
-    // into refinement-pass prompt building below.
-    const dynamicPreservation = preservationBlockFor(settlement);
+    // The credit spend already committed (line ~2006) but the refund closure
+    // below is only reachable once the stream starts — so wrap the pre-stream
+    // construction and refund (service-role) before re-throwing, otherwise a
+    // throw here leaves the user charged with no refund.
+    let summary: Record<string, unknown>;
+    let dynamicPreservation: string;
+    try {
+      const baseSummary = augmentSummaryWithGrounding(
+        settlement as Record<string, unknown>,
+        summarizeSettlement(settlement as Record<string, unknown>),
+      );
+      summary = confirmedRelationshipMemoryContext
+        ? { ...baseSummary, relationshipMemory: confirmedRelationshipMemoryContext }
+        : baseSummary;
+      // Per-call preservation block — adds settlement-specific MUST
+      // PRESERVE lines on top of the static PRESERVATION_RULES. Threaded
+      // into refinement-pass prompt building below.
+      dynamicPreservation = preservationBlockFor(settlement);
+    } catch (e) {
+      if (!isElevated && spendId) {
+        await supabaseAdmin.rpc('refund_credits', {
+          spend_ledger_row: spendId,
+          refund_reason: 'pre-stream setup failed',
+        }).catch(() => {});
+      }
+      throw e;
+    }
     // Optional debug spine. The summarizer is exposed for future
     // logging hooks (e.g. "what went into the prompt for save X?")
     // without changing the wire format.
@@ -2073,7 +2089,11 @@ serve(async (req) => {
             return;
           }
           try {
-            const { error: refundErr } = await supabaseUser.rpc('refund_credits', {
+            // Refund via the SERVICE-ROLE client: refund_credits is granted only
+            // to service_role (migration 033) so a user can't self-refund a
+            // SUCCESSFUL spend for free generations. The server reaches this path
+            // only on genuine generation failure.
+            const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
               spend_ledger_row: spendId,
               refund_reason: 'generation failed mid-stream',
             });

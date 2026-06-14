@@ -14,6 +14,9 @@ export const GOODS_CATEGORIES = {
   LUXURY: "luxury",
   SERVICES: "services",
   FOOD_PROCESSED: "food_processed",
+  // Restricted/illicit trade (e.g. slave-market goods). Referenced by the
+  // slave-trade records below; was undefined, leaving their category undefined.
+  TRADE: "trade",
 };
 
 /**
@@ -132,7 +135,7 @@ export const EXPORT_GOODS_BY_TIER = {
       p: 0.15,
       on: false,
       desc: "Human beings bought and sold as property. War captives, debt slaves, and trafficked persons. High value, restricted to settlements with slave markets.",
-      requiresInstitution: "Slave market",
+      requiredInstitution: "Slave market",
     },
     "Guild-manufactured goods": {
       category: GOODS_CATEGORIES.MANUFACTURED,
@@ -204,7 +207,7 @@ export const EXPORT_GOODS_BY_TIER = {
       p: 0.2,
       on: false,
       desc: "Large-scale slave trade through licensed markets. War captives, imports from slave-taking regions, debt bondage.",
-      requiresInstitution: "Slave market district",
+      requiredInstitution: "Slave market district",
     },
     "Luxury manufactured goods": {
       category: GOODS_CATEGORIES.LUXURY,

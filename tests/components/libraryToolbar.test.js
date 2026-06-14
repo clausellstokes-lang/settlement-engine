@@ -13,20 +13,17 @@ const fixtures = [
   {
     id: 's1', name: 'Hightower\'s Reach', tier: 'town',
     savedAt: 1700000000000,
-    settlement: { name: 'Hightower\'s Reach', npcs: [{ name: 'Velda Marsh' }], factions: [{ faction: 'Salt Guild' }], phase: 'canon' },
-    neighbourLinks: [{ targetId: 's2', relType: 'rival' }],
+    settlement: { name: 'Hightower\'s Reach', npcs: [{ name: 'Velda Marsh' }], factions: [{ faction: 'Salt Guild' }], phase: 'canon', neighbourNetwork: [{ name: 'Greymoor', relationshipType: 'rival' }] },
   },
   {
     id: 's2', name: 'Greymoor', tier: 'city',
     savedAt: 1700001000000,
-    settlement: { name: 'Greymoor', npcs: [{ name: 'Lord Aldric' }], phase: 'draft' },
-    neighbourLinks: [],
+    settlement: { name: 'Greymoor', npcs: [{ name: 'Lord Aldric' }], phase: 'draft', neighbourNetwork: [] },
   },
   {
     id: 's3', name: 'Stonebrook', tier: 'hamlet',
     savedAt: 1700002000000,
-    settlement: { name: 'Stonebrook', phase: 'canon' },
-    neighbourLinks: [{ targetId: 's1', relType: 'trade' }],
+    settlement: { name: 'Stonebrook', phase: 'canon', neighbourNetwork: [{ name: 'Hightower\'s Reach', relationshipType: 'trade_partner' }] },
   },
 ];
 

@@ -100,11 +100,14 @@ export function useReaderAudience() {
   const narrateCount = useStore(s => s.lifetimeNarrateCount || 0);
   const hasUsedNeighbours = useStore(s => {
     const saves = s.savedSettlements || [];
-    return saves.some(x => Array.isArray(x.neighbourLinks) && x.neighbourLinks.length > 0);
+    // neighbours live at settlement.neighbourNetwork, not a top-level save field.
+    return saves.some(x => x.settlement?.neighbourNetwork?.length > 0);
   });
   const hasUsedLocks = useStore(s => {
     const saves = s.savedSettlements || [];
-    return saves.some(x => Array.isArray(x.locks) && x.locks.length > 0);
+    // locks are a campaignState map, not a root-level array.
+    return saves.some(x => x.campaignState?.locks
+      && Object.values(x.campaignState.locks).some(Boolean));
   });
 
   return useMemo(

@@ -72,6 +72,25 @@ const SNAPSHOT_ECONOMIC_KEYS = Object.freeze({
   REMOVE_TRADE_GOOD: TRADE_ECONOMIC_KEYS,
 });
 
+// Top-level settlement subtrees whose event writes are NOT exactly reversible
+// from provenance, so the pre-event copy is the only way back:
+//  - CHANGE_RULING_POWER rewrites the whole powerStructure (factions,
+//    publicLegitimacy, governingName/government, relationships); scrubbing only
+//    the condition left the entire government transfer in place.
+//  - The relationship events overwrite a neighbourNetwork link's relationshipType
+//    (the _relationshipEventId stamp they wrote was read nowhere), so undo never
+//    reverted them.
+const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
+  CHANGE_RULING_POWER: Object.freeze(['powerStructure']),
+  BROKERED_ALLIANCE:   Object.freeze(['neighbourNetwork']),
+  SETTLEMENT_DISPUTE:  Object.freeze(['neighbourNetwork']),
+  OPENED_TRADE_ROUTE:  Object.freeze(['neighbourNetwork']),
+  // EXPOSE_CORRUPTION irreversibly swaps in a successor NPC and impairs the tied
+  // institution/faction with SYNTHETIC causeEventIds the impairment-strip can't
+  // reach — snapshot the affected subtrees so undo restores them exactly.
+  EXPOSE_CORRUPTION:   Object.freeze(['npcs', 'institutions', 'powerStructure', 'factions']),
+});
+
 // The dual-written record keys mirrored into the raw _config. The handlers
 // write config and _config in lockstep, so the pre-event config copy IS the
 // pre-event _config copy — one snapshot restores both.
@@ -104,11 +123,15 @@ function snapshotKeys(source, keys) {
  * @returns {Object|null}
  */
 export function captureEventUndoSnapshot(settlement, event) {
+  if (!settlement) return null;
   const configKeys = SNAPSHOT_CONFIG_KEYS[event?.type];
-  if (!configKeys || !settlement) return null;
-  const snapshot = { config: snapshotKeys(settlement.config, configKeys) };
-  const economicKeys = SNAPSHOT_ECONOMIC_KEYS[event.type];
+  const settlementKeys = SNAPSHOT_SETTLEMENT_KEYS[event?.type];
+  if (!configKeys && !settlementKeys) return null;
+  const snapshot = {};
+  if (configKeys) snapshot.config = snapshotKeys(settlement.config, configKeys);
+  const economicKeys = SNAPSHOT_ECONOMIC_KEYS[event?.type];
   if (economicKeys) snapshot.economicState = snapshotKeys(settlement.economicState, economicKeys);
+  if (settlementKeys) snapshot.settlement = snapshotKeys(settlement, settlementKeys);
   return snapshot;
 }
 
@@ -143,6 +166,13 @@ function restoreSnapshottedRecords(s, snapshot) {
   }
   if (snapshot.economicState) {
     next = { ...next, economicState: restoreKeys(next.economicState, snapshot.economicState) };
+  }
+  if (snapshot.settlement) {
+    // Restore top-level subtrees (powerStructure / neighbourNetwork) to their
+    // exact pre-event copy. restoreKeys deletes a key absent pre-event and
+    // restores a present one, so an undone settlement matches one that never
+    // saw the event.
+    next = restoreKeys(next, snapshot.settlement);
   }
   return next;
 }
@@ -285,12 +315,39 @@ function withoutEventDestruction(s, eventId) {
   return next;
 }
 
+/**
+ * Drop entities the popped event CREATED — ADD_NPC / ADD_INSTITUTION /
+ * ADD_FACTION stamp createdByEventId on the new record (mirroring the
+ * destroyedByEventId/removedByEventId idiom). Without this, an added entity
+ * survived its own undo. Re-add of a pre-existing entity (the idempotent
+ * un-remove branch) carries no createdByEventId, so it is left intact.
+ */
+function withoutEventCreations(s, eventId) {
+  let next = s;
+  const dropCreated = (arr) => arr.filter(e => e?.createdByEventId !== eventId);
+  if (Array.isArray(next.npcs) && next.npcs.some(n => n?.createdByEventId === eventId)) {
+    next = { ...next, npcs: dropCreated(next.npcs) };
+  }
+  if (Array.isArray(next.institutions) && next.institutions.some(i => i?.createdByEventId === eventId)) {
+    next = { ...next, institutions: dropCreated(next.institutions) };
+  }
+  const psFactions = next.powerStructure?.factions;
+  if (Array.isArray(psFactions) && psFactions.some(f => f?.createdByEventId === eventId)) {
+    next = { ...next, powerStructure: { ...next.powerStructure, factions: dropCreated(psFactions) } };
+  }
+  if (Array.isArray(next.factions) && next.factions.some(f => f?.createdByEventId === eventId)) {
+    next = { ...next, factions: dropCreated(next.factions) };
+  }
+  return next;
+}
+
 // ── Entry point ───────────────────────────────────────────────────────────
 
 /**
  * Scrub everything the popped event wrote that outlives its systemState
  * delta: promoted conditions, appended condition receipts, stress entries,
- * annotation ledgers, destruction stamps, and the snapshotted records.
+ * annotation ledgers, destruction stamps, created entities, and the
+ * snapshotted records.
  * Finishes with withEventConditionsSynced so config.eventConditions (and
  * its _config mirror) stops naming the undone event — without that re-sync,
  * reapplyEventConditions re-promoted the ghost on every regeneration.
@@ -307,6 +364,7 @@ export function scrubUndoneEvent(settlement, logEntry) {
   next = withoutEventStressEntries(next, eventId);
   next = withoutEventAnnotations(next, eventId);
   next = withoutEventDestruction(next, eventId);
+  next = withoutEventCreations(next, eventId);
   next = restoreSnapshottedRecords(next, logEntry.undo);
   return withEventConditionsSynced(next);
 }

@@ -1086,7 +1086,7 @@ describe('Tier 0.5 — stripe-webhook trust boundary order', () => {
   beforeAll(() => { webhookSrc = readFunction('stripe-webhook'); });
 
   it('constructEvent (signature verification) runs before any session.metadata read', () => {
-    const constructIdx = webhookSrc.search(/constructEvent\s*\(/);
+    const constructIdx = webhookSrc.search(/constructEvent(Async)?\s*\(/);
     // Look for the specific metadata read pattern used by the case
     // statements — `session.metadata?.<key>`. The doc block earlier in
     // the file references `session.metadata` but does NOT read it; the
@@ -1104,7 +1104,7 @@ describe('Tier 0.5 — stripe-webhook trust boundary order', () => {
 
   it('verifies signature with the STRIPE_WEBHOOK_SECRET env var', () => {
     expect(webhookSrc).toMatch(/STRIPE_WEBHOOK_SECRET/);
-    expect(webhookSrc).toMatch(/constructEvent\([\s\S]{0,80}signature/);
+    expect(webhookSrc).toMatch(/constructEvent(Async)?\([\s\S]{0,80}signature/);
   });
 
   it('failed signature verification short-circuits with 400 (no metadata read)', () => {
@@ -1283,7 +1283,7 @@ describe('Tier 0.10 — stripe-webhook is correctly exempt from the bot guard', 
   });
 
   it('still verifies the request via constructEvent', () => {
-    expect(webhookSrc).toMatch(/constructEvent\s*\(/);
+    expect(webhookSrc).toMatch(/constructEvent(Async)?\s*\(/);
   });
 });
 

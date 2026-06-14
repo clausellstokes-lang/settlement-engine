@@ -1,13 +1,21 @@
 {
   "//": [
     "Full-tree tsconfig — extends the baseline (tsconfig.json) and includes the",
-    "whole src logic tree (domain/store/lib/hooks/generators/components/pdf).",
+    "non-JSX src logic tree (domain/store/lib/hooks/generators + pdf .js).",
     "",
     "This IS the gate's typecheck config: `npm run typecheck` (and therefore",
-    "`npm run check`) run `tsc --noEmit -p tsconfig.full.json`, currently at",
-    "ZERO errors. The old domain-only punch-list closed, so the gate switched",
-    "from tsconfig.json to here; `npm run typecheck:domain` keeps the fast",
-    "domain-only check.",
+    "`npm run check`) run `tsc --noEmit -p tsconfig.full.json`, at ZERO errors.",
+    "`npm run typecheck:domain` keeps the fast domain-only check.",
+    "",
+    "JSX (src/components/**/*.jsx and src/pdf/**/*.jsx) is DELIBERATELY NOT in",
+    "this tsc gate. A previous include used the brace glob",
+    "`src/components/**/*.{js,jsx}` which tsc does NOT expand — so components were",
+    "silently unchecked. Including the JSX for real surfaces ~650 pre-existing",
+    "inferred-prop errors (JSX-in-JS without prop-types), which is its own",
+    "remediation project. Until that lands, JSX is covered by ESLint + the Vite",
+    "build (onwarn promotes unresolved named imports to errors) + the test suite,",
+    "NOT by tsc. Do not re-add a brace glob here — it reads as coverage that",
+    "isn't there.",
     "",
     "Don't include `tests/` — the test files use vitest globals + JSX in JS",
     "and would need their own includes/types config to typecheck cleanly."
@@ -22,7 +30,6 @@
     "src/lib/**/*.js",
     "src/hooks/**/*.js",
     "src/generators/**/*.js",
-    "src/components/**/*.{js,jsx}",
     "src/pdf/**/*.js"
   ],
   "exclude": [

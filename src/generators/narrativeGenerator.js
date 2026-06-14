@@ -1016,7 +1016,6 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
 export const generatePressureSentence = settlement => {
   if (!settlement) return null;
   const detail = genPressureDetail(settlement);
-  const summary = genSettSummary(settlement);
 
   // Stress → pressure sentence
   // PRESSURE_SENTENCES entries may be functions (r => [...]) or plain arrays.
@@ -1031,9 +1030,12 @@ export const generatePressureSentence = settlement => {
     }
   }
 
-  // Succession narrative
-  if (summary.stability?.includes('Unstable') || summary.stability?.includes('Fractured')) {
-    const succNarr = genSuccessionNarr(summary);
+  // Succession narrative. genSuccessionNarr reads name/topTension/topFaction/
+  // govFaction/topNPC*/viabilityIssues/neighbor/commodity/stability etc. — the
+  // genSettSummary shape carried almost none of those, so the branches never fired.
+  // detail (genPressureDetail) provides all of them, including the same stability.
+  if (detail.stability?.includes('Unstable') || detail.stability?.includes('Fractured')) {
+    const succNarr = genSuccessionNarr(detail);
     if (succNarr?.length) return succNarr[0];
   }
 

@@ -27,10 +27,16 @@ describe('Tier 1.2 — schema aliases are documented', () => {
     expect(FIELD_ALIASES).toHaveProperty('stressors');
   });
 
-  it('stressors alias group covers every legacy name (stress / stresses / stressTypes)', () => {
+  it('stressors alias group covers the object-shaped legacy names (stress / stresses)', () => {
     expect(FIELD_ALIASES.stressors).toContain('stress');
     expect(FIELD_ALIASES.stressors).toContain('stresses');
-    expect(FIELD_ALIASES.stressors).toContain('stressTypes');
+  });
+
+  it('stressTypes is NOT a stressors alias — it holds type strings, not stressor objects', () => {
+    // Aliasing it would let normalizeSettlement write a string[] into the
+    // canonical `stressors` field; canonicalAccessors.canonStressors excludes it
+    // for the same reason.
+    expect(FIELD_ALIASES.stressors).not.toContain('stressTypes');
   });
 });
 

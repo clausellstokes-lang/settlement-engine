@@ -58,20 +58,20 @@ describe('readPendingDossier()', () => {
     expect(got.sessionId).toBe('cs_test_123');
   });
 
-  it('clears stale entries after one hour', () => {
+  it('clears stale entries after the 24h TTL', () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2026-05-17T12:00:00'));
     stashPendingDossier(SAMPLE, TOKEN);
-    vi.setSystemTime(new Date('2026-05-17T13:01:00'));
+    vi.setSystemTime(new Date('2026-05-18T12:01:00')); // > 24h later
     expect(readPendingDossier()).toBeNull();
     expect(window.localStorage.getItem('sf.pendingDossier')).toBeNull();
   });
 
-  it('keeps entries within the TTL', () => {
+  it('keeps entries within the TTL (Stripe can take hours)', () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2026-05-17T12:00:00'));
     stashPendingDossier(SAMPLE, TOKEN);
-    vi.setSystemTime(new Date('2026-05-17T12:55:00'));
+    vi.setSystemTime(new Date('2026-05-17T15:00:00')); // 3h later — still valid
     expect(readPendingDossier()?.settlement.name).toBe('Greycairn');
   });
 

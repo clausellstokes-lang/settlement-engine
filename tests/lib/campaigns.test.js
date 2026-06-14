@@ -43,4 +43,28 @@ describe('campaign persistence service', () => {
     expect(campaigns.loadCached('user_b')).toEqual([expect.objectContaining({ id: 'b' })]);
     expect(campaigns.loadCached()).toEqual([expect.objectContaining({ id: 'anon' })]);
   });
+
+  test('recordTombstone appends a per-owner, deduped deletion record', () => {
+    campaigns.recordTombstone('camp-1', 'user_a');
+    campaigns.recordTombstone('camp-2', 'user_a');
+    campaigns.recordTombstone('camp-1', 'user_a'); // re-delete: keep one, freshest
+
+    const tombs = campaigns.loadTombstones('user_a');
+    expect(tombs.map(t => t.id).sort()).toEqual(['camp-1', 'camp-2']);
+    expect(tombs.every(t => typeof t.deletedAt === 'string')).toBe(true);
+  });
+
+  test('tombstones are scoped by owner id and default to empty', () => {
+    campaigns.recordTombstone('only-a', 'user_a');
+
+    expect(campaigns.loadTombstones('user_a').map(t => t.id)).toEqual(['only-a']);
+    expect(campaigns.loadTombstones('user_b')).toEqual([]);
+    expect(campaigns.loadTombstones()).toEqual([]);
+  });
+
+  test('writeTombstones replaces the stored list', () => {
+    campaigns.recordTombstone('camp-1', 'user_a');
+    campaigns.writeTombstones([{ id: 'kept', deletedAt: '2024-01-01T00:00:00Z' }], 'user_a');
+    expect(campaigns.loadTombstones('user_a').map(t => t.id)).toEqual(['kept']);
+  });
 });

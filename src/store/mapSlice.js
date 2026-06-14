@@ -105,6 +105,19 @@ function freshMapState() {
   };
 }
 
+// Snapshot the current mapState onto the undo stack before a mutating annotate/
+// placement action, so the AnnotateToolbar Undo/Redo buttons actually work
+// (pushMapUndo was never called from anywhere). Operates on the immer draft.
+function snapshotForUndo(state, action) {
+  state.mapUndoStack.push({
+    action,
+    snapshot: JSON.parse(JSON.stringify(state.mapState)),
+    timestamp: Date.now(),
+  });
+  if (state.mapUndoStack.length > 30) state.mapUndoStack.shift();
+  state.mapRedoStack = [];
+}
+
 export const createMapSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   // Runtime (non-persisted) iframe bridge state
@@ -219,6 +232,7 @@ export const createMapSlice = (set, get) => ({
 
   // ── Placements (settlement drops) ─────────────────────────────────────────
   addPlacement: ({ burgId, settlementId, x, y, cellId }) => set(state => {
+    snapshotForUndo(state, 'place settlement');
     state.mapState.placements[burgId] = {
       settlementId,
       x, y,
@@ -228,6 +242,7 @@ export const createMapSlice = (set, get) => ({
   }),
 
   removePlacementLocal: (burgId) => set(state => {
+    snapshotForUndo(state, 'remove placement');
     delete state.mapState.placements[burgId];
   }),
 
@@ -246,11 +261,13 @@ export const createMapSlice = (set, get) => ({
   }),
 
   clearAllPlacementsLocal: () => set(state => {
+    snapshotForUndo(state, 'clear placements');
     state.mapState.placements = {};
   }),
 
   // ── Labels ────────────────────────────────────────────────────────────────
   addLabel: ({ x, y, text = 'Label', fontSize, color, fontFamily, rotation = 0 }) => set(state => {
+    snapshotForUndo(state, 'add label');
     const opts = state.annotateOptions;
     state.mapState.labels.push({
       id: `lbl_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
@@ -268,11 +285,13 @@ export const createMapSlice = (set, get) => ({
   }),
 
   deleteLabel: (id) => set(state => {
+    snapshotForUndo(state, 'delete label');
     state.mapState.labels = state.mapState.labels.filter(l => l.id !== id);
   }),
 
   // ── Markers ───────────────────────────────────────────────────────────────
   addMarker: ({ x, y, icon, color, title = '', note = '' }) => set(state => {
+    snapshotForUndo(state, 'add marker');
     const opts = state.annotateOptions;
     state.mapState.markers.push({
       id: `mrk_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
@@ -289,11 +308,13 @@ export const createMapSlice = (set, get) => ({
   }),
 
   deleteMarker: (id) => set(state => {
+    snapshotForUndo(state, 'delete marker');
     state.mapState.markers = state.mapState.markers.filter(m => m.id !== id);
   }),
 
   // ── Forests ───────────────────────────────────────────────────────────────
   addForest: ({ x, y, radius, density, treeStyle }) => set(state => {
+    snapshotForUndo(state, 'add forest');
     const opts = state.annotateOptions;
     state.mapState.forests.push({
       id: `fst_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
@@ -310,6 +331,7 @@ export const createMapSlice = (set, get) => ({
   }),
 
   deleteForest: (id) => set(state => {
+    snapshotForUndo(state, 'delete forest');
     state.mapState.forests = state.mapState.forests.filter(f => f.id !== id);
   }),
 
@@ -355,6 +377,10 @@ export const createMapSlice = (set, get) => ({
     state.mapState = freshMapState();
     state.selectedBurgId = null;
     state.selectedAnnotationId = null;
+    // Also clear settlement selection/hover — a campaign deselect left these
+    // pointing at the now-gone settlement.
+    state.selectedSettlementId = null;
+    state.hoveredSettlementId = null;
   }),
 
   // ── Undo/redo (coarse — snapshot-per-action) ──────────────────────────────

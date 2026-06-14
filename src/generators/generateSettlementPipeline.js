@@ -10,6 +10,7 @@
  */
 
 import { createPRNG, generateSeed } from './prng.js';
+import { setActiveRng, clearActiveRng } from './rngContext.js';
 import { runPipeline } from './pipeline.js';
 import { generateNPCs, generateRelationships } from './npcGenerator.js';
 import { generateFactions, generateConflicts } from './powerGenerator.js';
@@ -74,39 +75,70 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
 /**
  * Re-generate NPCs for an existing settlement.
  * Uses the pipeline's generatePopulation step in isolation.
+ *
+ * Runs under a seeded PRNG: the underlying generators draw from the active RNG
+ * and SILENTLY fall back to Math.random() when none is set — so a bare regen was
+ * non-deterministic and unreproducible. `options.seed` lets a caller reproduce a
+ * prior reroll; omitting it mints a fresh seed (a real reroll). The seed used is
+ * returned on `_regenSeed` so the caller can persist it for replay.
+ *
+ * @param {Object} settlement
+ * @param {Object} config
+ * @param {{ seed?: string }} [options]
  */
-export function regenNPCsPipeline(settlement, config) {
-  const npcs = generateNPCs({ tier: settlement.tier, institutions: settlement.institutions || [] }, config.culture || 'germanic', config);
-  const relationships = generateRelationships(npcs, config, settlement.institutions || []);
-  const factions = generateFactions(npcs, relationships);
+export function regenNPCsPipeline(settlement, config, options = {}) {
+  const seed = options.seed || generateSeed();
+  setActiveRng(createPRNG(seed));
+  try {
+    const npcs = generateNPCs({
+      tier: settlement.tier,
+      institutions: settlement.institutions || [],
+      powerStructure: settlement.powerStructure,
+      economicState: settlement.economicState,
+    }, config.culture || 'germanic', config);
+    const relationships = generateRelationships(npcs, config, settlement.institutions || []);
+    const factions = generateFactions(npcs, relationships);
 
-  // Re-link to existing power factions
-  const existingPF = settlement.powerStructure?.factions || [];
-  const pfByCategory = existingPF.reduce((acc, pf) => {
-    const cat = pf.category || 'other';
-    if (!acc[cat] || pf.power > acc[cat].power) acc[cat] = pf;
-    return acc;
-  }, {});
-  factions.forEach(fg => {
-    const cat = fg.dominantCategory || 'other';
-    const matched = pfByCategory[cat];
-    if (matched) {
-      fg.powerFactionName = matched.faction;
-      fg.powerFactionPower = matched.power;
-      fg.powerFactionCat = matched.category;
-    }
-  });
+    // Re-link to existing power factions
+    const existingPF = settlement.powerStructure?.factions || [];
+    const pfByCategory = existingPF.reduce((acc, pf) => {
+      const cat = pf.category || 'other';
+      if (!acc[cat] || pf.power > acc[cat].power) acc[cat] = pf;
+      return acc;
+    }, {});
+    factions.forEach(fg => {
+      const cat = fg.dominantCategory || 'other';
+      const matched = pfByCategory[cat];
+      if (matched) {
+        fg.powerFactionName = matched.faction;
+        fg.powerFactionPower = matched.power;
+        fg.powerFactionCat = matched.category;
+      }
+    });
 
-  const conflicts = generateConflicts(factions, relationships, config, settlement.institutions || []);
-  return { npcs, relationships, factions, conflicts };
+    const conflicts = generateConflicts(factions, relationships, config, settlement.institutions || []);
+    return { npcs, relationships, factions, conflicts, _regenSeed: seed };
+  } finally {
+    clearActiveRng();
+  }
 }
 
 /**
- * Re-generate history for an existing settlement.
+ * Re-generate history for an existing settlement. Seeded like regenNPCsPipeline.
+ *
+ * @param {Object} settlement
+ * @param {Object} config
+ * @param {{ seed?: string }} [options]
  */
-export function regenHistoryPipeline(settlement, config) {
-  return generateHistory(
-    settlement.tier, config, settlement.institutions || [],
-    settlement.economicViability, settlement.economicState, settlement.powerStructure
-  );
+export function regenHistoryPipeline(settlement, config, options = {}) {
+  const seed = options.seed || generateSeed();
+  setActiveRng(createPRNG(seed));
+  try {
+    return generateHistory(
+      settlement.tier, config, settlement.institutions || [],
+      settlement.economicViability, settlement.economicState, settlement.powerStructure
+    );
+  } finally {
+    clearActiveRng();
+  }
 }

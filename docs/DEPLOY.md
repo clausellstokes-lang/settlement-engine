@@ -125,8 +125,9 @@ npm test -- tests/edgeFunctions/aiGroundingBundle.freshness.test.js
 Deploy each function:
 
 ```bash
-npx supabase functions deploy stripe-webhook
+npx supabase functions deploy stripe-webhook --no-verify-jwt   # Stripe posts a signature, NOT a JWT (also pinned in config.toml)
 npx supabase functions deploy create-checkout
+npx supabase functions deploy create-customer-portal           # "Manage subscription" billing portal
 npx supabase functions deploy verify-single-dossier --no-verify-jwt
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle

@@ -138,6 +138,9 @@ info "Step 5: Deploying edge functions..."
 npx supabase functions deploy create-checkout --project-ref "$PROJECT_REF" --no-verify-jwt
 ok "Deployed: create-checkout"
 
+npx supabase functions deploy create-customer-portal --project-ref "$PROJECT_REF"
+ok "Deployed: create-customer-portal"
+
 npx supabase functions deploy verify-single-dossier --project-ref "$PROJECT_REF" --no-verify-jwt
 ok "Deployed: verify-single-dossier"
 
@@ -149,6 +152,12 @@ ok "Deployed: generate-chronicle"
 
 npx supabase functions deploy stripe-webhook --project-ref "$PROJECT_REF" --no-verify-jwt
 ok "Deployed: stripe-webhook"
+
+npx supabase functions deploy admin-actions --project-ref "$PROJECT_REF"
+ok "Deployed: admin-actions"
+
+npx supabase functions deploy send-email --project-ref "$PROJECT_REF"
+ok "Deployed: send-email"
 
 # ── Step 6: Stripe setup ───────────────────────────────────────────────────
 
@@ -230,6 +239,13 @@ echo ""
 read -rp "  Client URL [https://settlementforge.com]: " CLIENT_URL
 CLIENT_URL="${CLIENT_URL:-https://settlementforge.com}"
 
+# Resend (send-email function). Optional — leave blank to skip the email lifecycle.
+read -rp "  Resend API key (RESEND_API_KEY) [skip]: " RESEND_KEY
+read -rp "  Resend from-address (RESEND_FROM_EMAIL) [skip]: " RESEND_FROM
+
+# NOTE: SUPABASE_SERVICE_ROLE_KEY / SUPABASE_URL / SUPABASE_ANON_KEY are RESERVED —
+# Supabase injects them into every edge function automatically and rejects setting
+# them via `secrets set`. Do not add them here.
 npx supabase secrets set \
   --project-ref "$PROJECT_REF" \
   STRIPE_SECRET_KEY="$STRIPE_SK" \
@@ -238,8 +254,13 @@ npx supabase secrets set \
   STRIPE_PRICE_CREDITS_50="$CREDITS_50" \
   STRIPE_PRICE_PREMIUM="$PREMIUM" \
   ANTHROPIC_API_KEY="$ANTHROPIC_KEY" \
-  CLIENT_URL="$CLIENT_URL" \
-  SUPABASE_SERVICE_ROLE_KEY="$SERVICE_ROLE_KEY"
+  CLIENT_URL="$CLIENT_URL"
+
+if [ -n "$RESEND_KEY" ]; then
+  npx supabase secrets set --project-ref "$PROJECT_REF" \
+    RESEND_API_KEY="$RESEND_KEY" RESEND_FROM_EMAIL="$RESEND_FROM"
+  ok "Resend secrets configured"
+fi
 
 ok "All secrets configured"
 

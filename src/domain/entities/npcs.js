@@ -41,8 +41,11 @@
  *  @property {string[]=} serviceContribution  e.g. ["healing", "charity", "funerary_rites"]
  *  @property {string[]=} potentialSuccessors  npc ids the engine pre-suggests on death
  *  @property {string=} removedByEventId
+ *  @property {string=} createdByEventId       event that created this NPC (ADD_NPC); undo drops it
  *  @property {string=} notes                  free-form DM annotation
  *  @property {string=} generatedAs            'pipeline'|'faction_structural' — provenance marker
+ *  @property {(string|number)=} _idSeed       input-only: disambiguates the auto-generated
+ *                                             id (e.g. the originating event id); not persisted
  */
 
 const IMPORTANCE_WEIGHT = {
@@ -84,7 +87,12 @@ export function importanceWeight(npc) {
  * @returns {NpcStructural}
  */
 export function createNpc(input = {}) {
-  const id = input.id || `npc.${slugify(input.name || 'unnamed')}_${shortRand()}`;
+  // Auto-id deterministically from the NPC's identity (and an optional _idSeed the
+  // caller can pass — e.g. the originating event id — to disambiguate same-named NPCs).
+  const idSeed = input._idSeed != null
+    ? String(input._idSeed)
+    : [input.name, input.role, ...(input.linkedFactionIds || []), ...(input.linkedInstitutionIds || [])].join('|');
+  const id = input.id || `npc.${slugify(input.name || 'unnamed')}_${shortHash(idSeed)}`;
   return {
     id,
     name: input.name || 'Unnamed',
@@ -246,8 +254,13 @@ function slugify(s) {
     .slice(0, 32) || 'npc';
 }
 
-function shortRand() {
-  return Math.random().toString(36).slice(2, 7);
+// Deterministic short hash (djb2). createNpc runs inside the pure, seeded event
+// pipeline — Math.random() here broke seed-replayability of stored settlements.
+function shortHash(s) {
+  let h = 0;
+  const str = String(s);
+  for (let i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+  return Math.abs(h).toString(36).slice(0, 6).padStart(5, '0');
 }
 
 function dedupeIds(arr) {

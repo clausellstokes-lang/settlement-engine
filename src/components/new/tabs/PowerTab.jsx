@@ -150,7 +150,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
       </div>
 
       {/* ── POWER DISTRIBUTION ───────────────────────────────────────────── */}
-      <Section title={`Power Distribution${pf.length} Factions`} collapsible defaultOpen>
+      <Section title={`Power Distribution · ${pf.length} Factions`} collapsible defaultOpen>
         {/* Stacked bar */}
         <div style={{display:'flex',height:22,borderRadius:5,overflow:'hidden',marginBottom:12,gap:1}}>
           {pf.map((f,i) => {

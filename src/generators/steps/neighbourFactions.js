@@ -10,6 +10,17 @@ import { registerStep } from '../pipeline.js';
 import { getMirrorFactionLabel, getOpposeFactionLabel } from '../neighbourGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 
+// Mirror applyLegitimacyMultipliers' label bands (factionDynamics.js) — injected
+// neighbour factions are added AFTER that pass runs (in generatePower), so they
+// must self-label or PowerTab/PDF show a blank powerLabel + missing rawPower.
+function powerLabelFor(power) {
+  return power >= 35 ? 'Dominant'
+       : power >= 25 ? 'Strong'
+       : power >= 18 ? 'Significant'
+       : power >= 10 ? 'Minor'
+       : 'Suppressed';
+}
+
 registerStep('neighbourFactions', {
   deps: ['generatePower', 'resolveNeighbour'],
   provides: [],
@@ -19,6 +30,7 @@ registerStep('neighbourFactions', {
 
   if (!neighbourFacBias || !powerStructure?.factions?.length) return {};
 
+  const initialCount = powerStructure.factions.length;
   const existingTypes = new Set(
     powerStructure.factions.map(f => (f.category || f.type || '').toLowerCase())
   );
@@ -30,10 +42,13 @@ registerStep('neighbourFactions', {
     if (!existingTypes.has(fType) && rng.chance(mirrorWeight)) {
       const mirrorLabel = getMirrorFactionLabel(fType, relType, neighbourProfile?.name);
       if (mirrorLabel) {
+        const power = rng.randInt(10, 30);
         powerStructure.factions.push({
           faction:       mirrorLabel,
           category:      fType,
-          power:         rng.randInt(10, 30),
+          power,
+          rawPower:      power,
+          powerLabel:    powerLabelFor(power),
           desc:          `${mirrorLabel} — presence from ${neighbourProfile.name} (${neighbourProfile.relationshipType.replace(/_/g,' ')}).`,
           source:        'neighbour_mirror',
           neighbourName: neighbourProfile.name,
@@ -63,10 +78,13 @@ registerStep('neighbourFactions', {
     if (!existingTypes.has(fType) && rng.chance(opposeWeight)) {
       const opposeLabel = getOpposeFactionLabel(fType, relType, neighbourProfile?.name);
       if (opposeLabel) {
+        const power = rng.randInt(8, 26);
         powerStructure.factions.push({
           faction:       opposeLabel,
           category:      fType,
-          power:         rng.randInt(8, 26),
+          power,
+          rawPower:      power,
+          powerLabel:    powerLabelFor(power),
           desc:          `${opposeLabel} — formed in reaction to ${neighbourProfile.name}'s influence.`,
           source:        'neighbour_opposition',
           neighbourName: neighbourProfile.name,
@@ -89,6 +107,12 @@ registerStep('neighbourFactions', {
         });
       }
     }
+  }
+
+  // Re-sort by effective power so injected factions take their real rank rather
+  // than always trailing the list (matches applyLegitimacyMultipliers' final order).
+  if (powerStructure.factions.length > initialCount) {
+    powerStructure.factions.sort((a, b) => (b.power || 0) - (a.power || 0));
   }
 
   return {};

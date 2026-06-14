@@ -306,6 +306,9 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
               <EditableText
                 name="cover.campaign"
                 defaultValue=""
+                showField
+                hideIfEmpty={false}
+                fallback="—"
                 style={{ ...type.cover_meta, color: palette.muted }}
               />
             </View>

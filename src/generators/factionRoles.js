@@ -134,11 +134,18 @@ export function ensureFactionStructuralNpcs(settlement) {
   for (const faction of factions) {
     const structural = generateFactionStructuralNpcs(faction, settlement.institutions || []);
     for (const proposed of structural) {
+      const proposedFactionKeys = proposed.linkedFactionIds.map(id => String(id).toLowerCase());
       const alreadyExists = existingNpcs.some(npc => {
-        // Same role + same faction linkage = treat as the same person
-        const sameRole = String(npc.role || '').toLowerCase() === String(proposed.role || '').toLowerCase();
-        const sameFaction = (npc.linkedFactionIds || []).some(id => proposed.linkedFactionIds.includes(id));
-        return sameRole && sameFaction;
+        // Same role (whitespace/punctuation-insensitive, so 'Guild Master' ===
+        // 'Guildmaster') + same faction = treat as the same person.
+        const sameRole = normalizeRoleKey(npc.role) === normalizeRoleKey(proposed.role);
+        if (!sameRole) return false;
+        // Pipeline NPCs link to their faction via factionAffiliation (display
+        // name), NOT linkedFactionIds — checking only ids meant the dedup never
+        // matched a generated NPC, so structural seat-holders always duplicated.
+        const byId = (npc.linkedFactionIds || []).some(id => proposedFactionKeys.includes(String(id).toLowerCase()));
+        const byAffiliation = proposedFactionKeys.includes(String(npc.factionAffiliation || '').toLowerCase());
+        return byId || byAffiliation;
       });
       if (!alreadyExists) additions.push(proposed);
     }
@@ -154,6 +161,12 @@ function slug(s) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '_')
     .replace(/^_+|_+$/g, '');
+}
+
+// Collapse role strings to a comparison key insensitive to whitespace and
+// punctuation so 'Guild Master' and 'Guildmaster' dedup as the same role.
+function normalizeRoleKey(s) {
+  return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
 /**

@@ -24,13 +24,15 @@ export const STEP_METADATA = Object.freeze({
   resolveConfig: {
     label: 'Resolve configuration',
     description: 'Apply user choices (size, terrain, culture, trade access) and fill in defaults.',
-    summary: (ctx) => ctx.config?.tier ? `Target size: ${ctx.config.tier}` : null,
+    // resolveConfig provides ctx.tier (the resolved tier); ctx.config is the raw
+    // input whose .tier is the unresolved sentinel in random/custom mode.
+    summary: (ctx) => ctx.tier ? `Target size: ${ctx.tier}` : null,
   },
   resolveResources: {
     label: 'Pick local resources',
     description: 'Decide which natural resources the land yields, based on terrain and trade.',
     summary: (ctx) => {
-      const rs = ctx.resources?.local?.length;
+      const rs = ctx.nearbyResources?.length || 0;
       return rs ? `${rs} local resource${rs === 1 ? '' : 's'} chosen` : null;
     },
   },
@@ -38,14 +40,22 @@ export const STEP_METADATA = Object.freeze({
     label: 'Determine stressors',
     description: 'Roll the active stressors (plague, drought, raid pressure, etc.) that shape this run.',
     summary: (ctx) => {
-      const ss = ctx.stressors?.active?.length || 0;
+      // resolveStress provides ctx.stressTypes (catalog types) + ctx.stress (the
+      // container, which also carries custom authored stressors).
+      const ss = Array.isArray(ctx.stressTypes) ? ctx.stressTypes.length
+               : Array.isArray(ctx.stress) ? ctx.stress.length
+               : (ctx.stress ? 1 : 0);
       return ss ? `${ss} active stressor${ss === 1 ? '' : 's'}` : 'No active stressors';
     },
   },
   resolveNeighbour: {
     label: 'Link neighbour',
     description: 'If a neighbouring settlement was provided, weave its facts into this one.',
-    summary: (ctx) => ctx.importedNeighbour ? `Linked to ${ctx.importedNeighbour.name}` : 'No neighbour',
+    // resolveNeighbour provides ctx.neighbourProfile / ctx.rawNeighbour, not importedNeighbour.
+    summary: (ctx) => {
+      const name = ctx.neighbourProfile?.name || ctx.rawNeighbour?.name;
+      return name ? `Linked to ${name}` : 'No neighbour';
+    },
   },
   assembleInstitutions: {
     label: 'Assemble institutions',
@@ -84,16 +94,18 @@ export const STEP_METADATA = Object.freeze({
   generateEconomy: {
     label: 'Build economy + supply chains',
     description: 'Compute prices, supply chains, prosperity band, and visible economic frictions.',
+    // generateEconomy provides ctx.economicState; the prosperity label is .prosperity.
     summary: (ctx) => {
-      const band = ctx.economy?.prosperityBand;
+      const band = ctx.economicState?.prosperity;
       return band ? `Prosperity: ${band}` : null;
     },
   },
   generatePower: {
     label: 'Form factions',
     description: 'Define the political factions, their stake, and what they’d each like to happen next.',
+    // generatePower provides ctx.powerStructure.
     summary: (ctx) => {
-      const n = ctx.power?.factions?.length || ctx.factions?.length || 0;
+      const n = ctx.powerStructure?.factions?.length || 0;
       return n ? `${n} faction${n === 1 ? '' : 's'} formed` : null;
     },
   },
@@ -105,10 +117,11 @@ export const STEP_METADATA = Object.freeze({
   factionCorrelationPass: {
     label: 'Correlate tensions',
     description: 'Compute who is allied, who is at odds, and which tensions are about to boil.',
-    summary: (ctx) => {
-      const t = ctx.tensions?.length || ctx.history?.currentTensions?.length || 0;
-      return t ? `${t} live tension${t === 1 ? '' : 's'}` : null;
-    },
+    // This pass derives faction-boost institutions; tensions/history don't exist
+    // yet (they come from generateNarratives). Report whether it changed the roster.
+    summary: (ctx) => ctx._rosterChangedAfterEconomy
+      ? 'Faction pressure reshaped the roster'
+      : null,
   },
   economyReconcilePass: {
     label: 'Reconcile economy with final roster',
@@ -129,6 +142,14 @@ export const STEP_METADATA = Object.freeze({
     summary: (ctx) => {
       const n = ctx.npcs?.length || 0;
       return n ? `${n} NPC${n === 1 ? '' : 's'} named` : null;
+    },
+  },
+  corruptionPass: {
+    label: 'Seed corruption',
+    description: 'Where a criminal institution exists, roll which flawed NPCs were already corrupted at generation.',
+    summary: (ctx) => {
+      const n = (ctx.npcs || []).filter(npc => npc?.corrupt === true).length;
+      return n ? `${n} corrupted figure${n === 1 ? '' : 's'}` : 'No corruption climate';
     },
   },
   generateNarratives: {

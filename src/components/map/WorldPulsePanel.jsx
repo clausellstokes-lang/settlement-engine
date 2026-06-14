@@ -378,7 +378,8 @@ export default function WorldPulsePanel({ campaign }) {
 
   const worldState = campaign.worldState || {};
   const pending = (worldState.proposals || []).filter(proposal => proposal.status === 'pending');
-  const latestPulse = (worldState.pulseHistory || [])[worldState.pulseHistory.length - 1] || null;
+  const pulseHistory = worldState.pulseHistory || [];
+  const latestPulse = pulseHistory[pulseHistory.length - 1] || null;
   const rules = worldState.simulationRules || {};
   const rolls = latestPulse?.rollExplanations || [];
   const resolved = latestPulse?.resolvedStressors || [];

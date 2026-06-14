@@ -159,6 +159,15 @@ export default function App() {
     }
   }, [authLoading, authTier, authUserId, loadCampaigns]);
 
+  // Refresh the credit balance on auth transitions (in-session sign-in/out).
+  // The mount-only fetch above left a user who signed in after load with a stale
+  // balance — blocking AI actions and pushing the purchase modal despite credits.
+  useEffect(() => {
+    if (authLoading) return;
+    import('./lib/stripe.js').then(({ fetchCreditBalance }) =>
+      fetchCreditBalance().then(bal => setCreditBalance(bal)));
+  }, [authLoading, authUserId, setCreditBalance]);
+
   // ── Auth guards ─────────────────────────────────────────────────────────
   // Gated routes redirect once the session has resolved. 'auth' views bounce
   // anonymous visitors to /signin carrying ?next= (so they return to the
@@ -267,6 +276,16 @@ export default function App() {
     if (item.id === 'map' && authTier === 'anon') return false;
     return true;
   });
+
+  // Mobile bottom nav: pick the slots from an EXPLICIT priority order rather than
+  // slicing the desktop NAV order — otherwise inserting/reordering a NAV item
+  // silently evicts whatever falls past the slice (this is how About, then Gallery,
+  // got dropped). About lives in the account menu on mobile, so it ranks last.
+  const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'map', 'gallery', 'compendium', 'howto'];
+  const mobileNav = MOBILE_NAV_PRIORITY
+    .map(id => visibleNav.find(item => item.id === id))
+    .filter(Boolean)
+    .slice(0, _readFlag('mobileSingleChrome') ? 4 : 5);
 
   const headerStyle = {
     background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
@@ -575,7 +594,7 @@ export default function App() {
             boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
             paddingBottom: 'env(safe-area-inset-bottom)',
           }}>
-            {visibleNav.slice(0, _readFlag('mobileSingleChrome') ? 4 : 5).map(({ id, label, Icon }) => {
+            {mobileNav.map(({ id, label, Icon }) => {
               const active = view === id;
               return (
                 <button

@@ -234,6 +234,11 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
       });
       continue;
     }
+    // Capture the pre-mutation settlement so authored deltas are computed against
+    // the state the event acts ON (eventPipeline's contract). Computing them from
+    // the already-mutated `working` drifted severity-derived deltas (e.g. a
+    // RESOLVE_STRESSOR reading the stressor it just removed).
+    const before = working;
     // Entity mutation, threaded into the next event.
     working = mutateSettlement({ settlement: working, event, now });
 
@@ -241,7 +246,7 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
     // Cast: spec.stateDeltas is typed 1-arg in the registry typedef but
     // accepts an optional settlement (every spec honors it), as in eventPipeline.
     const deltas = (typeof spec.stateDeltas === 'function'
-      ? /** @type {Function} */ (spec.stateDeltas)(event, working)
+      ? /** @type {Function} */ (spec.stateDeltas)(event, before)
       : {}) || {};
     for (const [k, v] of Object.entries(deltas)) {
       summedStateDeltas[k] = (summedStateDeltas[k] || 0) + (Number(v) || 0);

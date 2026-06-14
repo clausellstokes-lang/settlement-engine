@@ -57,14 +57,16 @@ const generateNPCGoal = role => {
 };
 
 // generateSingleNPC
-const generateSingleNPC = (role, namingTier, category, culture, tier, config = {}) => {
+const generateSingleNPC = (role, namingTier, category, culture, tier, config = {}, institutions = []) => {
   const gender = _rng() > 0.5 ? 'male' : 'female';
   const fullName = pickFirst(culture, gender, true, tier);
   const lastName = pickLast(culture, namingTier || culture);
   const religion = generateReligionType();
   const appearance = generateNPCAppearance(category);
   const goal = generateNPCRelType(role, category, config);
-  const secret = generateFactionLeader(category, config);
+  // institutions drives generateFactionLeader's secret-type weighting (criminal/
+  // magic/religion presence). Without it the weighting was stuck in "absent" mode.
+  const secret = generateFactionLeader(category, config, institutions);
   const title1 = generateCharacterTitle(category, config);
   const title2 = _rng() > 0.5 ? generateCharacterTitle(category, config) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
@@ -195,9 +197,14 @@ const pickFirst = (culture = 'germanic', gender = 'male', withSurname = true, ti
 };
 
 const pickLast = (r = 'germanic', s = 'mayor') => {
-  var o;
   const culture = resolveNameCulture(r);
-  return ((o = (NAMING_DATA[culture] || NAMING_DATA.germanic).titles) == null ? void 0 : o[s]) || s;
+  const titles = (NAMING_DATA[culture] || NAMING_DATA.germanic).titles;
+  const title = titles?.[s];
+  if (title) return title;
+  // Backstop: many role keys (elder, owner, noble, steward, knight, guild_master…)
+  // have no entry in the per-culture titles map. Humanize the key rather than leaking
+  // the raw lowercase lookup key into the UI ("elder" → "Elder").
+  return s.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 };
 
 const filterByGuild = (institutions, culture, tier, config = {}) => {
@@ -208,7 +215,7 @@ const filterByGuild = (institutions, culture, tier, config = {}) => {
   if (!guildInsts.length) return null;
   const guild = pick(guildInsts);
   const guildName = guild.name.replace(/\s*\(.*?\)/, '').replace(/s'?\s*guild$/i, "s'");
-  const npc = generateSingleNPC('Guild Master', culture, 'economy', culture, tier, config);
+  const npc = generateSingleNPC('Guild Master', culture, 'economy', culture, tier, config, institutions);
   npc.title = `${pickLast(culture, 'guild_master')} of ${guildName}`;
   npc.institution = guild.name;
   return npc;
@@ -889,7 +896,14 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
     ['master glassblower', craftsFaction],
     ['craft guild', craftsFaction],
     ['journeyman overseer', craftsFaction],
-  ].filter(([, f]) => f != null); // drop entries where no matching faction exists
+  ]
+    .filter(([, f]) => f != null) // drop entries where no matching faction exists
+    // Match most-specific keyword first: the map is grouped by faction for
+    // readability, but a plain first-match loop let generic substrings shadow
+    // specific roles — 'lord' (gov) caught 'lord of the manor' and 'crime lord',
+    // 'official' caught 'corrupt official', 'council' caught 'Shadow Council Leader'.
+    // Sorting by keyword length descending makes the longest match win.
+    .sort((a, b) => b[0].length - a[0].length);
 
   const stressType = config?.stressType || null;
 
@@ -1443,13 +1457,13 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
     const route = config.tradeRouteAccess || 'road';
     const terrain = config.terrainType || 'plains';
     const insts = (settlement.institutions || []).map(i => (i.name || '').toLowerCase());
-    if (insts.some(n => n.includes('fishing'))) return 'Fisher';
+    if (insts.some(n => n.includes('fishing'))) return 'Fisherman';
     if (insts.some(n => n.includes('woodcutter'))) return 'Woodcutter';
     if (insts.some(n => n.includes('shepherd'))) return 'Shepherd';
-    if (route === 'port' || terrain === 'coastal') return 'Fisher';
+    if (route === 'port' || terrain === 'coastal') return 'Fisherman';
     if (terrain === 'forest' || route === 'isolated') return 'Woodcutter';
     if (terrain === 'plains' || terrain === 'hills') return 'Shepherd';
-    if (route === 'river' || terrain === 'riverside') return 'Fisher';
+    if (route === 'river' || terrain === 'riverside') return 'Fisherman';
     return 'Miller';
   })();
 
@@ -1465,7 +1479,7 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   // Stress-driven additional mandatory roles
   const STRESS_MANDATORY_ROLES = {
     under_siege: ['Garrison Commander', 'Guard Captain'],
-    famine: ['Healer', 'Merchant Guild Master'],
+    famine: ['Healer', 'Guild Master'],
     occupied: ['Corrupt Official'],
     politically_fractured: ['Council Member', 'Council Member'],
     indebted: ['Moneylender'],
@@ -1478,7 +1492,14 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
 
   const tierRoles = TIER_MANDATORY_ROLES[tier] || [];
   const stressRoles = (primaryStress && STRESS_MANDATORY_ROLES[primaryStress]) || [];
-  const mandatoryRoles = [...new Set([...tierRoles, ...stressRoles])];
+  // Dedup tier roles, and drop stress roles already supplied by the tier (e.g.
+  // under_siege's 'Guard Captain' when the tier already mandates one), but PRESERVE
+  // intentional duplicates within a stress list — politically_fractured deliberately
+  // wants two rival 'Council Member's, which a flat Set used to collapse to one.
+  const tierRolesU = [...new Set(tierRoles)];
+  const tierRoleSet = new Set(tierRolesU);
+  const stressContribution = stressRoles.filter(r => !tierRoleSet.has(r));
+  const mandatoryRoles = [...tierRolesU, ...stressContribution];
 
   // Build config context for NPC generation
   const npcConfig = {
@@ -1492,7 +1513,7 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   mandatoryRoles.forEach(role => {
     const candidate = candidates.find(c => c.role === role);
     if (candidate && npcs.length < targetCount) {
-      npcs.push(generateSingleNPC(candidate.role, candidate.title, candidate.category, culture, tier, npcConfig));
+      npcs.push(generateSingleNPC(candidate.role, candidate.title, candidate.category, culture, tier, npcConfig, institutions));
     }
   });
 
@@ -1520,7 +1541,7 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
     }
     if (!chosen) chosen = remainingCandidates[0];
 
-    npcs.push(generateSingleNPC(chosen.role, chosen.title, chosen.category, culture, tier, npcConfig));
+    npcs.push(generateSingleNPC(chosen.role, chosen.title, chosen.category, culture, tier, npcConfig, institutions));
     usedRoles.add(chosen.role);
     remainingCandidates.splice(remainingCandidates.indexOf(chosen), 1);
   }

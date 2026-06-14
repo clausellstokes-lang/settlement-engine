@@ -79,6 +79,12 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_ANON_KEY')!,
       { global: { headers: { Authorization: authHeader } } },
     );
+    // Service-role client for the refund path: refund_credits is granted only to
+    // service_role (migration 033), so users can't self-refund successful spends.
+    const supabaseAdmin = createClient(
+      Deno.env.get('SUPABASE_URL')!,
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+    );
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) return json({ error: 'Unauthorized' }, 401);
 
@@ -96,10 +102,14 @@ serve(async (req) => {
     }
     const spendId = spendResult?.spend_id ?? spendResult?.id ?? null;
     const balanceAfter = spendResult?.balance ?? null;
+    const isElevated = Boolean(spendResult?.elevated);
 
     const refund = async (why: string) => {
       if (!spendId) return;
-      await supabaseUser.rpc('refund_credits', {
+      // Elevated (dev/admin) spends aren't real debits — refunding them would
+      // mint phantom credits (mirrors generate-narrative's guard).
+      if (isElevated) return;
+      await supabaseAdmin.rpc('refund_credits', {
         spend_ledger_row: spendId,
         refund_reason: why,
       }).catch(() => {});

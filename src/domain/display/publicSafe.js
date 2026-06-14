@@ -21,7 +21,13 @@
  */
 
 // Recursive key denylist. Any object key matching this is dropped entirely.
-export const PRIVATE_KEY_RE = /(secret|private|dm|gm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap)/i;
+// The `dm`/`gm` alternations use a word boundary (\bdm/\bgm) so they match the
+// real DM-private keys (dmNotes, dmCompass, dmNote, and any future dm*/gm* key)
+// WITHOUT the bare-substring over-match that previously stripped legitimate keys
+// like `landmarks`, `admin`, `administrative`, and `isAdmin` from public output.
+// NOTE: the server's authoritative _gallery_sanitize_public_json carries the same
+// over-match and needs a matching SQL migration (Postgres uses \y for boundaries).
+export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap)/i;
 
 /** Recursively strip denied keys; preserves history.currentTensions. */
 export function sanitizePublicValue(value, path = []) {

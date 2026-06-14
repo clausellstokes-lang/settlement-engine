@@ -12,9 +12,17 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { normalizeSettlement } from '../domain/normalizeSettlement.js';
-import { ACTIVE_SAVE_STATE, activeSaveCount } from './saveAccess.js';
+import { ACTIVE_SAVE_STATE, activeSaveCount, isSaveActive } from './saveAccess.js';
+import { buildNeighbourBackLink } from '../domain/relationships/neighbourBackLink.js';
 
 const LOCAL_KEY = 'dnd_settlement_saves';
+
+/** Generate a client-side UUID for saves we must reference before insert
+ *  (the bidirectional link embeds the new save's id in both rows). */
+function newSaveId() {
+  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  return `00000000-0000-4000-8000-${Date.now().toString(16).padStart(12, '0').slice(-12)}`;
+}
 
 // ── Local storage helpers ───────────────────────────────────────────────────
 
@@ -109,6 +117,39 @@ function migrateSaveToV2(entry) {
 }
 
 /**
+ * Derive the settlement's own neighbourNetwork entry from its generated
+ * `neighborRelationship` if it isn't already represented. The only code that did
+ * this lived in SettlementsPanel.saveCurrentSettlement, which is now dead — so
+ * settlements saved via the canonical path (SaveToLibraryButton / the
+ * save-settlement auth intent) lost their neighbour link. Pure + idempotent
+ * (guarded by name), so it's safe on every save and re-read.
+ *
+ * NOTE: this only derives *this* settlement's own entry. The *bidirectional*
+ * partner back-link (updating the neighbour's own save row) is a multi-row write
+ * handled by the save methods below via buildNeighbourBackLink + a batch write.
+ */
+function withNeighbourNetworkFromRelationship(settlement) {
+  if (!settlement) return settlement;
+  const nr = settlement.neighborRelationship;
+  if (!nr?.name) return settlement;
+  const net = settlement.neighbourNetwork || [];
+  if (net.some(n => n.name === nr.name)) return settlement;
+  return {
+    ...settlement,
+    neighbourNetwork: [{
+      id: `generated_${String(nr.name).replace(/\s+/g, '_')}`,
+      name: nr.name,
+      neighbourName: nr.name,
+      neighbourTier: nr.tier || '',
+      tier: nr.tier || '',
+      relationshipType: nr.relationshipType || 'neutral',
+      description: `Generated as ${(nr.relationshipType || 'neutral').replace(/_/g, ' ')} of this settlement.`,
+      fromGeneration: true,
+    }, ...net],
+  };
+}
+
+/**
  * Run the canonical-shape adapter on the embedded settlement of a save
  * entry. Save entries themselves are a separate envelope (id, name,
  * timestamp, campaignState, etc.); the settlement object lives at
@@ -169,15 +210,35 @@ async function supabaseSave(entry) {
   if (!user) throw new Error('Not authenticated');
 
   const v2 = migrateSaveToV2(entry);
+  const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
+
+  // Bidirectional neighbour link: if this settlement was generated against an
+  // existing save, both rows must reference each other. That needs a multi-row
+  // write, so we pre-mint the id, compute both sides, and create+update
+  // atomically via the batch RPC. Skipped (single insert) when there's no
+  // generated neighbour or no matching active partner.
+  if (settlement?.neighborRelationship?.name) {
+    const saveId = newSaveId();
+    const existing = (await supabaseList()).filter(isSaveActive);
+    const link = buildNeighbourBackLink({ ...v2, id: saveId, settlement }, existing);
+    if (link) {
+      await supabaseMutateBatch({
+        creates: [{ ...v2, id: saveId, settlement: link.settlement }],
+        updates: [{ id: link.partner.id, settlement: link.partner.settlement }],
+      });
+      return saveId;
+    }
+  }
+
   const row = {
     user_id:         user.id,
     name:            v2.name,
     tier:            v2.tier,
-    data:            v2.settlement,
+    data:            settlement,
     config:          v2.config || null,
     toggles:         bundleToggles(v2),
     seed:            v2.seed || null,
-    neighbour_links: v2.settlement?.neighbourNetwork || null,
+    neighbour_links: settlement?.neighbourNetwork || null,
     ai_data:         v2.aiData || {},
     campaign_state:  v2.campaignState || null,
     version_history: Array.isArray(v2.versionHistory) ? v2.versionHistory : null,
@@ -260,9 +321,27 @@ async function localList() {
 
 async function localSaveEntry(entry) {
   const v2 = migrateSaveToV2(entry);
+  const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
   const saves = localLoad();
   const id = v2.id || Date.now();
-  saves.unshift({ ...v2, id, savedAt: Date.now() });
+
+  // Bidirectional neighbour link (see supabaseSave): when the named neighbour
+  // already exists as an active save, write the reciprocal back-link onto the
+  // partner row alongside the new save.
+  if (settlement?.neighborRelationship?.name) {
+    const existing = saves.filter(isSaveActive);
+    const link = buildNeighbourBackLink({ ...v2, id, settlement }, existing);
+    if (link) {
+      const next = saves.map(s => String(s.id) === String(link.partner.id)
+        ? { ...s, settlement: link.partner.settlement }
+        : s);
+      next.unshift({ ...v2, settlement: link.settlement, id, savedAt: Date.now() });
+      localWrite(next);
+      return id;
+    }
+  }
+
+  saves.unshift({ ...v2, settlement, id, savedAt: Date.now() });
   localWrite(saves);
   return id;
 }

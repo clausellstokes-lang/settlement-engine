@@ -28,9 +28,13 @@ registerStep('generatePopulation', {
   provides: ['npcs', 'relationships', 'factions', 'conflicts'],
   phase: 'population',
 }, (ctx, rng) => {
-  const { tier, institutions, culture, effectiveConfig, powerStructure } = ctx;
+  const { tier, institutions, culture, effectiveConfig, powerStructure, economicState } = ctx;
 
-  const npcs = generateNPCs({ tier, institutions }, culture, effectiveConfig);
+  // generateNPCs reads settlement.powerStructure (noble roles) and
+  // settlement.economicState (goal commodity/faction tokens). This step depends on
+  // generatePower, so both are present on ctx — pass them through or those branches
+  // silently fall back.
+  const npcs = generateNPCs({ tier, institutions, powerStructure, economicState }, culture, effectiveConfig);
   const relationships = generateRelationships(npcs, effectiveConfig, institutions);
   const factions = generateFactions(npcs, relationships);
 

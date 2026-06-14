@@ -427,23 +427,24 @@ function buildNPCConnections(d, campaignName, settlements, pageN) {
   let y = MT;
   y = secBar(d, y, 'Cross-Settlement NPC Contacts', INK);
 
-  // Gather interSettlementNpcs across all saves
+  // Gather cross-settlement NPC links. The real source is the settlement-level
+  // interSettlementRelationships array (written by SettlementsPanel's bidirectional
+  // linking) — the old per-NPC npc.interSettlementNpcs field is never produced.
   const connections = [];
   for (const save of settlements) {
-    const npcs = save.settlement?.npcs || [];
-    for (const npc of npcs) {
-      const isn = npc.interSettlementNpcs || [];
-      for (const entry of isn) {
-        connections.push({
-          home: save.name || save.settlement?.name,
-          npc:  npc.name,
-          role: npc.role,
-          partnerSettlement: entry.partnerSettlement,
-          partnerName: entry.partnerName,
-          partnerRole: entry.partnerRole,
-          relType: entry.relType || 'neutral',
-        });
-      }
+    const isr = save.settlement?.interSettlementRelationships || [];
+    for (const entry of isr) {
+      // skip faction-only links; this table is NPC contacts
+      if (!entry.npcName && !entry.partnerName) continue;
+      connections.push({
+        home: save.name || save.settlement?.name,
+        npc:  entry.npcName,
+        role: entry.npcRole,
+        partnerSettlement: entry.partnerSettlement,
+        partnerName: entry.partnerName,
+        partnerRole: entry.partnerRole,
+        relType: entry.relType || 'neutral',
+      });
     }
   }
 
@@ -578,7 +579,10 @@ function buildDigest(d, campaignName, settlements, pageN) {
     d.text('OVERVIEW', L_X, bodyY);
     hline(d, L_X, bodyY + 1, L_X + colW - 6, TAN, 0.2);
 
-    const overview = s(st_.characterSummary || st_.description || st_.overview || '');
+    // Real settlement fields — characterSummary/description/overview were never
+    // produced, so the OVERVIEW block was always blank.
+    const reason = typeof st_.settlementReason === 'string' ? st_.settlementReason : st_.settlementReason?.primary;
+    const overview = s(st_.history?.historicalCharacter || st_.arrivalScene || st_.pressureSentence || reason || '');
     d.setFont('helvetica','normal'); d.setFontSize(7); st(d, INK);
     const ovLines = wrap(d, overview, colW - 6, 7);
     let ly = bodyY + 5;

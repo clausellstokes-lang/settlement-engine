@@ -941,6 +941,13 @@ export const HISTORY_EVENTS = {
       goalCategories: ["personal", "protection"],
     },
     {
+      role: "Woodcutter",
+      title: "owner",
+      priority: 3,
+      minTier: "thorp",
+      goalCategories: ["personal", "protection"],
+    },
+    {
       role: "Blacksmith",
       title: "master",
       priority: 6,

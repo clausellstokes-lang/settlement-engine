@@ -45,8 +45,8 @@ export default function FounderTile() {
     let cancelled = false;
     (async () => {
       try {
-        const { getFounderSeatsRemaining } = await import('../../lib/founderSeats.js');
-        const n = await getFounderSeatsRemaining();
+        const { fetchFounderSeatsRemaining } = await import('../../lib/founderSeats.js');
+        const n = await fetchFounderSeatsRemaining();
         if (!cancelled) setSeatsRemaining(typeof n === 'number' ? n : null);
       } catch { /* RPC unavailable; stay null */ }
     })();

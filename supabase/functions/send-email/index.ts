@@ -12,9 +12,11 @@
  *     This prevents a malicious client from spamming arbitrary
  *     addresses via the welcome/save/etc. paths.
  *   - cap_warning accepts an explicit `recipient` payload because
- *     anonymous users (who hit the cap) have no auth.uid(); we
- *     still apply a per-IP rate limit via botGuard to keep this
- *     from becoming a spam relay.
+ *     anonymous users (who hit the cap) have no auth.uid(). To keep
+ *     this from becoming a spam relay it is gated by a real per-IP
+ *     AND per-recipient rate limit (consume_email_rate_limit, migration
+ *     034) checked via the service-role client before dispatch, on top
+ *     of the per-request botGuard.
  *
  * Templates: inlined here (kept in sync with src/lib/emailTemplates.js
  * — the client tests assert key parity). Edge function can't import
@@ -157,8 +159,29 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
 };
 
 // Templates that don't require an authenticated caller. These accept
-// `recipient` in the request body. Per-IP bot guard still applies.
+// `recipient` in the request body.
+//
+// SECURITY NOTE: cap_warning is an unauthenticated mailer to a caller-supplied
+// recipient, so it is defended in depth:
+//   1. botGuard rejects obvious bots (does NOT throttle — that's why it alone
+//      was insufficient).
+//   2. consume_email_rate_limit (migration 034) enforces a real fixed-window
+//      per-IP AND per-recipient limit via the service-role client BEFORE any
+//      send. A caller over either limit gets 429 and no email leaves.
+// The blast radius is also bounded by design: a single fixed-content "you hit
+// your cap" template with no caller-supplied body. Do NOT add free-text
+// templates here, and do NOT add a template to this set without a rate-limit
+// path of its own.
 const ANON_OK_TEMPLATES = new Set(["cap_warning"]);
+
+// Rate-limit defaults for the anonymous path. Kept in the function (not the DB
+// signature defaults) so the policy is visible at the call site; passed
+// explicitly to consume_email_rate_limit.
+const ANON_RATE_LIMIT = {
+  windowSeconds:  3600, // 1 hour
+  ipLimit:        5,    // sends per IP per window
+  recipientLimit: 3,    // sends per recipient address per window
+} as const;
 
 function interpolate(str: string, vars: Record<string, unknown>): string {
   return str.replace(/\{(\w+)\}/g, (m, name) =>
@@ -193,6 +216,53 @@ async function sendViaResend(opts: {
   return res.json();
 }
 
+/**
+ * Consume one unit of the anonymous-path rate limit for (ip, recipient).
+ *
+ * Returns `{ ok: true }` when the caller is under both limits and the send may
+ * proceed, or `{ ok: false, reason }` otherwise. FAILS CLOSED: if the limiter
+ * is unreachable or misconfigured (missing service-role key, RPC error) we do
+ * NOT send. cap_warning is non-critical by design, so the safe failure for a
+ * spam-relay control is to drop the email rather than relay it unthrottled.
+ */
+async function consumeAnonRateLimit(
+  ip: string,
+  recipient: string,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (!supabaseUrl || !serviceKey) {
+    console.error("[send-email] rate limiter unavailable: SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY not set");
+    return { ok: false, reason: "rate_limit_unavailable" };
+  }
+
+  const admin = createClient(supabaseUrl, serviceKey);
+  const { data, error } = await admin.rpc("consume_email_rate_limit", {
+    p_ip: ip,
+    p_recipient: recipient,
+    p_window_seconds: ANON_RATE_LIMIT.windowSeconds,
+    p_ip_limit: ANON_RATE_LIMIT.ipLimit,
+    p_recipient_limit: ANON_RATE_LIMIT.recipientLimit,
+  });
+
+  if (error || !data) {
+    // RPC failed or returned nothing — a limiter malfunction, not a caller
+    // over their limit. Fail closed.
+    console.error("[send-email] rate limiter error:", error?.message ?? "no data returned");
+    return { ok: false, reason: "rate_limit_unavailable" };
+  }
+  if (data.allowed !== true) {
+    // Over limit on IP and/or recipient. Log enough to spot abuse spikes in
+    // the function logs without a separate pipeline.
+    console.warn(
+      `[send-email] cap_warning rate-limited ip=${ip} ` +
+      `ip_count=${data.ip_count} recipient_count=${data.recipient_count}`,
+    );
+    return { ok: false, reason: "rate_limited" };
+  }
+  return { ok: true };
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -200,6 +270,7 @@ serve(async (req) => {
 
   const guard = botGuard(req, "send-email");
   if (guard.reject) return guard.reject;
+  const { ip } = guard.meta;
 
   try {
     const { template, payload = {}, recipient = null } = await req.json();
@@ -223,6 +294,20 @@ serve(async (req) => {
         return new Response(
           JSON.stringify({ ok: false, reason: "bad_recipient" }),
           { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      // Real rate limit (per-IP AND per-recipient) before this unauthenticated
+      // path can dispatch. botGuard above only blocks obvious bots; this is the
+      // throttle that keeps cap_warning from becoming a spam relay. Consumed
+      // here (not after a successful send) so a caller can't probe for free.
+      const limit = await consumeAnonRateLimit(ip, recipient);
+      if (!limit.ok) {
+        // 429 for an over-limit caller; 503 when the limiter itself is down
+        // (fail-closed — see consumeAnonRateLimit). Either way, no email sent.
+        const status = limit.reason === "rate_limited" ? 429 : 503;
+        return new Response(
+          JSON.stringify({ ok: false, reason: limit.reason }),
+          { status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
       to = recipient;
