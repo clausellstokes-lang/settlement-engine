@@ -405,14 +405,20 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const renderTab = () => {
     const s = activeSettlement;
     switch (selectedTab) {
-      case 'summary':    return flag('summaryMagazineV2')
-        ? React.createElement(SummaryTabV2, {
-            settlement: s,
-            onOpenTableView: flag('tableView')
-              ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
-              : undefined,
-          })
-        : React.createElement(SummaryTab, { settlement: s });
+      case 'summary':    return React.createElement(React.Fragment, null,
+        // First-dossier teaching callouts now live inside the DM summary (was a
+        // top-of-dossier banner above every tab). Self-gates inside.
+        !readOnly && React.createElement(Suspense, { fallback: null },
+          React.createElement(FirstDossierCallouts)),
+        flag('summaryMagazineV2')
+          ? React.createElement(SummaryTabV2, {
+              settlement: s,
+              onOpenTableView: flag('tableView')
+                ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
+                : undefined,
+            })
+          : React.createElement(SummaryTab, { settlement: s }),
+      );
       case 'plot_hooks': return React.createElement(PlotHooksTab, { settlement: s });
       case 'chronicle':  return React.createElement(ChronicleTab, { entries: chronicle });
       case 'daily_life': return React.createElement(DailyLifeTab, { settlement: s, aiSettlement, saveId, onRequestDailyLife: () => requestAiAction('dailyLife') });
@@ -687,11 +693,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       !readOnly && React.createElement(Suspense, { fallback: null },
         React.createElement(PendingChangesBar)
       ),
-      // P130 / O-2 — First-dossier teaching callouts. Self-gates inside;
-      // shown to first-time signed-in users on their first generation.
-      !readOnly && React.createElement(Suspense, { fallback: null },
-        React.createElement(FirstDossierCallouts)
-      ),
+      // P130 / O-2 — First-dossier teaching callouts now render INSIDE the
+      // Summary tab (the DM summary), not as a banner above every tab — see
+      // renderTab's 'summary' case.
       // P102 / D-1 — Thematic group tab strip (Summary / Systems / World /
       // Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
       // group selects its first sub-tab and filters the strip below.
