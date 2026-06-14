@@ -125,6 +125,35 @@ export default [
     },
   },
 
+  // ── Determinism guard — no raw non-determinism in the seeded pipeline ──────
+  // Generators must draw randomness through rngContext (random/pick/chance/…)
+  // so a settlement replays byte-exact from its stored seed. A bare
+  // Math.random(), Date.now(), or new Date() in generator logic is a silent
+  // determinism leak the gate could not see before (rngContext's fallback
+  // converts it into invisible non-reproducibility). Errors here, so a new
+  // leak fails CI. prng.js (the documented sole non-determinism entry, for
+  // seed minting) and rngContext.js (the fallback itself) are exempt.
+  {
+    files: ['src/generators/**/*.js'],
+    ignores: ['src/generators/prng.js', 'src/generators/rngContext.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          message: 'Determinism: use random()/pick()/chance()/randInt() from rngContext.js, not Math.random() — a raw draw breaks same-seed replay.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Determinism: Date.now() is non-reproducible in the seeded pipeline. Thread a timestamp in instead.',
+        },
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Determinism: new Date() reads wall-clock time and breaks same-seed replay. Construct from an explicit value.',
+        },
+      ],
+    },
+  },
+
   // Data tables: arrow functions are written with uniform signatures
   // (e.g. `(r, s) => ...`) even when an individual entry only uses one
   // parameter. The shape is intentional — it lets callers invoke any

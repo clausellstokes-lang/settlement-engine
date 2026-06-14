@@ -1038,8 +1038,20 @@ export const createSettlementSlice = (set, get) => ({
 
   renameFaction: (factionIndex, newName) =>
     set(state => {
-      if (!state.settlement?.factions?.[factionIndex]) return;
-      state.settlement.factions[factionIndex].name = newName;
+      // Canonical factions live on powerStructure.factions; settlement.factions
+      // is a usually-empty legacy mirror. The old code only saw the mirror, so
+      // a rename silently no-opped on every generated settlement. Resolve the
+      // canonical list first, falling back to the legacy array.
+      const list = state.settlement?.powerStructure?.factions?.length
+        ? state.settlement.powerStructure.factions
+        : state.settlement?.factions;
+      const fac = list?.[factionIndex];
+      if (!fac) return;
+      // Faction records label on `.faction` (generated) or `.name` (edited/
+      // legacy); keep both in sync so every reader (findFaction checks both)
+      // sees the new name.
+      fac.name = newName;
+      if ('faction' in fac) fac.faction = newName;
     }),
 
   // ── User-edited prose (Tier 5.4) ─────────────────────────────────────────

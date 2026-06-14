@@ -417,3 +417,35 @@ describe('settlementSlice — active save regional integration', () => {
     expect(campaign.regionalGraph.queuedImpacts.some(i => i.targetSettlementId === 'buyer')).toBe(true);
   });
 });
+
+describe('settlementSlice — renameFaction (canonical powerStructure path)', () => {
+  let store;
+  beforeEach(() => {
+    store = makeStore();
+    store.setState(s => { s.settlement = fixture(); });
+  });
+
+  test('renames a faction on powerStructure.factions (was a silent no-op on the empty legacy mirror)', () => {
+    // The fixture has factions on powerStructure.factions and no top-level
+    // settlement.factions — the exact shape the old code could not rename.
+    store.getState().renameFaction(0, 'High Council');
+    const factions = store.getState().settlement.powerStructure.factions;
+    expect(factions[0].name).toBe('High Council');
+    expect(factions[1].name).toBe('Merchants'); // sibling untouched
+  });
+
+  test('keeps .faction and .name in sync when the record labels on .faction', () => {
+    store.setState(s => {
+      s.settlement.powerStructure.factions = [{ id: 'f1', faction: 'Old Guild', name: 'Old Guild' }];
+    });
+    store.getState().renameFaction(0, 'New Guild');
+    const f = store.getState().settlement.powerStructure.factions[0];
+    expect(f.faction).toBe('New Guild');
+    expect(f.name).toBe('New Guild');
+  });
+
+  test('out-of-range index is a safe no-op', () => {
+    expect(() => store.getState().renameFaction(99, 'X')).not.toThrow();
+    expect(store.getState().settlement.powerStructure.factions[0].name).toBe('Council');
+  });
+});
