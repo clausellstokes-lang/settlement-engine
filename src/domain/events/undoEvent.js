@@ -80,6 +80,14 @@ const SNAPSHOT_ECONOMIC_KEYS = Object.freeze({
 //  - The relationship events overwrite a neighbourNetwork link's relationshipType
 //    (the _relationshipEventId stamp they wrote was read nowhere), so undo never
 //    reverted them.
+// The NPC/institution/faction graph an event can rewrite without leaving a
+// scrubbable provenance trail. Factions live on powerStructure.factions but
+// replaceFaction falls back to the legacy s.factions, so both are snapshotted.
+const ENTITY_GRAPH_KEYS = Object.freeze(['npcs', 'institutions', 'powerStructure', 'factions']);
+// Roster-only events that mutate NPC records in place (no impairment
+// propagation, no condition) — only the npcs subtree needs the pre-event copy.
+const NPC_ROSTER_KEYS = Object.freeze(['npcs']);
+
 const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   CHANGE_RULING_POWER: Object.freeze(['powerStructure']),
   BROKERED_ALLIANCE:   Object.freeze(['neighbourNetwork']),
@@ -88,7 +96,26 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   // EXPOSE_CORRUPTION irreversibly swaps in a successor NPC and impairs the tied
   // institution/faction with SYNTHETIC causeEventIds the impairment-strip can't
   // reach — snapshot the affected subtrees so undo restores them exactly.
-  EXPOSE_CORRUPTION:   Object.freeze(['npcs', 'institutions', 'powerStructure', 'factions']),
+  EXPOSE_CORRUPTION:   ENTITY_GRAPH_KEYS,
+  // The rest of the NPC/corruption family had the SAME gap — they write durable
+  // entity state with neither provenance nor a snapshot, so undo left it in
+  // place and the divergence compounded through world-pulse on later ticks:
+  //  - IMPOSE_CORRUPTION turns a clean NPC (corrupt/corruptionVector/corruptTies);
+  //  - PROMOTE_NPC / DEMOTE_NPC swap two NPCs' standing (importance/influence/
+  //    structuralRank) and stamp factionId — all in-place npc edits;
+  //  - KILL_NPC / KILL_LEADER mark the NPC dead and propagate staffing
+  //    impairments onto linked institutions and factions;
+  //  - REMOVE_INSTITUTION closes the institution AND severs the corruption ties
+  //    (corrupt:false / ousted) of NPCs bound to it, plus propagates impairments.
+  // killNpc/removeInstitution stamp removedByEventId but nothing un-deads/
+  // un-removes by it, and status 'dead'/'removed' is not the 'impaired' the
+  // strip resets — so the snapshot is the only exact way back.
+  IMPOSE_CORRUPTION:   NPC_ROSTER_KEYS,
+  PROMOTE_NPC:         NPC_ROSTER_KEYS,
+  DEMOTE_NPC:          NPC_ROSTER_KEYS,
+  KILL_NPC:            ENTITY_GRAPH_KEYS,
+  KILL_LEADER:         ENTITY_GRAPH_KEYS,
+  REMOVE_INSTITUTION:  ENTITY_GRAPH_KEYS,
 });
 
 // The dual-written record keys mirrored into the raw _config. The handlers
