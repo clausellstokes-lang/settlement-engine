@@ -156,12 +156,23 @@ function isUuid(value) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || ''));
 }
 
+// Set by createCampaignSlice so these module-scoped helpers can report a failed
+// cloud save into store state (the UI then warns the user). Module-level because
+// persistSaveUpdate is shared across many fire-and-forget call sites.
+let _reportPersistFailure = null;
+
 function persistSaveUpdate(saveId, partial) {
-  if (!saveId || !partial) return;
-  // Swallow-and-warn (mirrors settlementSlice): several callers fire-and-forget,
-  // so a rethrow here produced unhandled promise rejections on save failure.
-  return savesService.update(saveId, partial).catch(e => {
+  if (!saveId || !partial) return Promise.resolve(true);
+  // Still must not rethrow — several callers fire-and-forget, and a rejection
+  // here produced unhandled promise rejections. But the failure is no longer
+  // SILENT: it used to leave the user seeing success while Supabase drifted from
+  // local state (surfacing later as a settlement that "reverts" on reload). Now
+  // it reports to the store so the UI can warn. Returns true/false so awaited
+  // batch callers can react too.
+  return savesService.update(saveId, partial).then(() => true).catch(e => {
     console.warn('[campaignSlice] save update failed', e);
+    try { _reportPersistFailure?.(e); } catch { /* reporting must never throw */ }
+    return false;
   });
 }
 
@@ -387,12 +398,25 @@ function migrateMapState(ms) {
   };
 }
 
-export const createCampaignSlice = (set, get) => ({
+export const createCampaignSlice = (set, get) => {
+  // Route module-scoped persist failures into store state so the UI can warn the
+  // user instead of silently losing a cloud save.
+  _reportPersistFailure = () => set(state => {
+    state.campaignSyncError = 'Some campaign changes could not be saved to the cloud. '
+      + 'They are applied locally but may not persist — check your connection, then reopen the campaign to confirm.';
+  });
+
+  return {
   // ── State ──────────────────────────────────────────────────────────────────
   campaigns: [],
   campaignsLoaded: false,
   /** The currently-loaded campaign id (null if none) — used by WorldMap */
   activeCampaignId: null,
+  /** Set when a cloud save of campaign/save state fails; surfaced as a banner.
+   *  null when the last persist succeeded (or was cleared by the user). */
+  campaignSyncError: null,
+  /** Dismiss the cloud-sync warning banner. */
+  clearCampaignSyncError: () => set(state => { state.campaignSyncError = null; }),
 
   // ── Actions ────────────────────────────────────────────────────────────────
 
@@ -1291,4 +1315,5 @@ export const createCampaignSlice = (set, get) => ({
       c.updatedAt = new Date().toISOString();
       persistCampaignState(state, campaignId);
     }),
-});
+  };
+};

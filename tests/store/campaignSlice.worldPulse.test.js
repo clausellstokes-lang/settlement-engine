@@ -29,6 +29,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
 
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { saves } from '../../src/lib/saves.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -212,5 +213,43 @@ describe('campaignSlice world pulse', () => {
 
     const dismissed = await store.getState().dismissWorldPulseProposal('camp-1', 'world_proposal.dismiss');
     expect(dismissed.status).toBe('dismissed');
+  });
+
+  test('a failed cloud save surfaces campaignSyncError instead of swallowing it', async () => {
+    const store = makeStore();
+    store.setState(state => {
+      state.savedSettlements = [{
+        id: 'ashford',
+        name: 'Ashford',
+        phase: 'canon',
+        settlement: settlement('Ashford'),
+        campaignState: { phase: 'canon', eventLog: [], locks: {} },
+      }];
+      state.campaigns = [{
+        id: 'camp-1',
+        name: 'Realm',
+        settlementIds: ['ashford'],
+        regionalGraph: ensureRegionalGraph(),
+        wizardNews: { currentTick: 0, entries: [] },
+        worldState: { rngSeed: 'store-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      }];
+    });
+
+    expect(store.getState().campaignSyncError).toBeNull();
+
+    // The next cloud save fails. advanceCampaignWorld must still apply locally
+    // (fire-and-forget — no throw), but the failure is now recorded for the UI
+    // rather than vanishing into a console.warn.
+    saves.update.mockRejectedValueOnce(new Error('network down'));
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
+
+    expect(saves.update).toHaveBeenCalled();
+    expect(store.getState().campaignSyncError).toBeTruthy();
+    // Local state still advanced — the change isn't lost, just unsynced.
+    expect(store.getState().campaigns[0].worldState.tick).toBe(1);
+
+    // The user can dismiss the warning.
+    store.getState().clearCampaignSyncError();
+    expect(store.getState().campaignSyncError).toBeNull();
   });
 });

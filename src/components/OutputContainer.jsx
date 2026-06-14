@@ -702,6 +702,24 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       fiveTabsEnabled && React.createElement('div', {
         role: 'tablist',
         'aria-label': 'Dossier sections',
+        onKeyDown: (e) => {
+          const ids = visibleGroupEntries.map(([gid]) => gid);
+          const i = ids.indexOf(selectedGroup);
+          if (i < 0) return;
+          let j;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % ids.length;
+          else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + ids.length) % ids.length;
+          else if (e.key === 'Home') j = 0;
+          else if (e.key === 'End') j = ids.length - 1;
+          else return;
+          e.preventDefault();
+          handleGroupClick(ids[j]);
+          if (typeof requestAnimationFrame !== 'undefined') {
+            requestAnimationFrame(() => {
+              try { document.getElementById('sf-group-' + ids[j])?.focus(); } catch { /* no-op */ }
+            });
+          }
+        },
         style: {
           display: 'flex', gap: 2, padding: 4,
           background: '#f7f0e4', borderBottom: '1px solid #e0d0b0',
@@ -711,8 +729,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           const active = selectedGroup === gid;
           return React.createElement('button', {
             key: gid,
+            id: 'sf-group-' + gid,
             role: 'tab',
             'aria-selected': active,
+            tabIndex: active ? 0 : -1,
             onClick: () => handleGroupClick(gid),
             style: {
               flex: 1, padding: '8px 6px',
@@ -732,7 +752,33 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // Tab strip
       React.createElement('div', { 'data-onboard-highlight': onboardingActive && onboardingStep === 2 ? 'true' : undefined, style: { position: 'relative', borderBottom: '1px solid #e0d0b0', background: '#f7f0e4' } },
         React.createElement('button', { onClick: () => scroll(-1), style: { position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: '#9c8068', padding: '0 8px' } }, React.createElement(ChevronLeft, { size: 14 })),
-        React.createElement('div', { ref: scrollRef, style: { display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', paddingLeft: 28, paddingRight: 28, WebkitOverflowScrolling: 'touch' } },
+        React.createElement('div', {
+          ref: scrollRef,
+          role: 'tablist',
+          'aria-label': 'Dossier tabs',
+          // WAI-ARIA tabs keyboard pattern: arrows move between tabs (with
+          // roving tabIndex below, only the active tab is in the tab order, so
+          // Tab enters the strip once and arrows navigate within it). Home/End
+          // jump to the ends. Focus follows selection.
+          onKeyDown: (e) => {
+            const i = tabs.findIndex(t => t.id === selectedTab);
+            if (i < 0) return;
+            let j;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % tabs.length;
+            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+            else if (e.key === 'Home') j = 0;
+            else if (e.key === 'End') j = tabs.length - 1;
+            else return;
+            e.preventDefault();
+            const target = tabs[j];
+            setActiveTab(target.id);
+            if (typeof requestAnimationFrame !== 'undefined') {
+              requestAnimationFrame(() => {
+                try { document.getElementById('sf-tab-' + target.id)?.focus(); } catch { /* no-op */ }
+              });
+            }
+          },
+          style: { display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', paddingLeft: 28, paddingRight: 28, WebkitOverflowScrolling: 'touch' } },
           tabs.map(({ id, label, Icon }) => {
             const active = selectedTab === id;
             // Guidance (DM Compass) is the AI-narrated layer — give it a subtle
@@ -746,6 +792,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               : (purple ? 'rgba(122,58,168,0.05)' : 'transparent');
             return React.createElement('button', {
               key: id, onClick: () => setActiveTab(id),
+              id: 'sf-tab-' + id,
+              role: 'tab',
+              'aria-selected': active,
+              // Roving tabIndex: only the selected tab is tabbable; the rest are
+              // reached via the arrow-key handler on the tablist.
+              tabIndex: active ? 0 : -1,
               style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? accent : idle, fontSize: 9.5, fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }
             }, React.createElement(Icon, { size: 14 }), label);
           })
