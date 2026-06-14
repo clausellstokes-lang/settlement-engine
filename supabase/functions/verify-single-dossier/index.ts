@@ -1,8 +1,40 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
-import { botGuard } from '../_shared/requestMeta.ts';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
+
+/**
+ * Per-IP fixed-window rate check (consume_dossier_verify_rate_limit, migration
+ * 035) so a well-formed-but-fake session id can't be used to amplify Stripe API
+ * calls. FAILS OPEN by design: any limiter problem (missing env, RPC error,
+ * throw) returns true and the request proceeds — a limiter outage must never
+ * block a legitimate buyer from confirming their purchase. Returns false ONLY
+ * when the RPC explicitly reports the caller is over the limit.
+ */
+async function withinRateLimit(req: Request): Promise<boolean> {
+  try {
+    const url = Deno.env.get('SUPABASE_URL');
+    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    if (!url || !serviceKey) {
+      console.warn('[verify-single-dossier] rate limiter unavailable (SUPABASE_URL/SERVICE_ROLE_KEY unset); proceeding open');
+      return true;
+    }
+    const admin = createClient(url, serviceKey);
+    const { data, error } = await admin.rpc('consume_dossier_verify_rate_limit', {
+      p_ip: readRequestMeta(req).ip,
+    });
+    if (error || !data) {
+      console.warn('[verify-single-dossier] rate limiter error; proceeding open:', error?.message ?? 'no data');
+      return true;
+    }
+    return data.allowed !== false;
+  } catch (e) {
+    console.warn('[verify-single-dossier] rate limiter threw; proceeding open:', e);
+    return true;
+  }
+}
 
 function corsHeaders(req: Request) {
   const configured = Deno.env.get('CLIENT_URL') || '';
@@ -43,6 +75,15 @@ serve(async req => {
     }
     if (typeof checkoutToken !== 'string' || checkoutToken.length < 24 || checkoutToken.length > 128) {
       throw new Error('Invalid checkout token');
+    }
+
+    // Throttle BEFORE hitting Stripe (input validation above is free; the
+    // Stripe call is the amplifiable cost). Fail-open — see withinRateLimit.
+    if (!(await withinRateLimit(req))) {
+      return new Response(
+        JSON.stringify({ verified: false, error: 'Too many verification attempts. Please wait a moment and try again.' }),
+        { status: 429, headers: { ...headers, 'Content-Type': 'application/json' } },
+      );
     }
 
     const session = await stripe.checkout.sessions.retrieve(sessionId);
