@@ -55,19 +55,30 @@ const SCAN_DIRS = ['src/generators', 'src/domain'];
 // Recorded 2026-06-11 (Wave 8). SHRINK-ONLY: convert a site to ids and lower
 // its number (or delete the line at zero). Never raise a number; never add a
 // file. New files must join by catalog id from day one.
+//
+// ONE-TIME CORRECTION 2026-06-14: de-minifying the machine-minified helper
+// functions in economicGenerator.js (55→58) and powerGenerator.js (17→18)
+// renamed single-letter collections to their accurate names (`o` → `instNames`,
+// etc.), which made PRE-EXISTING label-join scans textually visible to this
+// regex gate for the first time — the minified `o.some(n => n.includes(...))`
+// evaded the `instNames`/`inst.name` signatures. No new label-join LOGIC was
+// added: the generator golden master (tests/property/generatorGoldenMaster)
+// proves byte-identical output across 155 configs. The corrected counts reflect
+// de-obfuscated reality; these revealed sites remain id-join conversion
+// candidates, and the shrink-only rule holds from the new baseline.
 const FROZEN_LABEL_JOINS = Object.freeze({
   'src/domain/worldPulse/institutionLifecycle.js': 1,
   'src/generators/aiLayer.js': 2,
   'src/generators/cascadeGenerator.js': 2,
   'src/generators/computeActiveChains.js': 10,
   'src/generators/defenseGenerator.js': 2,
-  'src/generators/economicGenerator.js': 55,
+  'src/generators/economicGenerator.js': 58, // 55 → 58: de-minification revealed existing scans (see note above)
   'src/generators/foodGenerator.js': 3,
   'src/generators/historyGenerator.js': 13,
   'src/generators/isolationGenerator.js': 1,
   'src/generators/narrativeGenerator.js': 1,
   'src/generators/npcGenerator.js': 5,
-  'src/generators/powerGenerator.js': 17,
+  'src/generators/powerGenerator.js': 18, // 17 → 18: de-minification revealed an existing scan (see note above)
   'src/generators/priorityHelpers.js': 1,
   'src/generators/spatialGenerator.js': 8,
   'src/generators/steps/cascadePass.js': 1,

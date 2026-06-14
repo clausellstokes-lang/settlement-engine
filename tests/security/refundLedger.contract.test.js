@@ -94,6 +94,35 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
     const body = section[0];
     expect(body).toMatch(/amount\s*>\s*\d{4,}/);  // looks for `if amount > 10000` etc.
   });
+
+  // ── Money-math SAFETY CLAUSES (static, refund/admin only) ───────────────────
+  // The audit flagged that the credit math is asserted statically, never run.
+  // These raise the static floor for the RPCs whose CURRENT definition lives in
+  // 009 (refund_credits, admin_grant_credits). NOTE: spend_credits is NOT here
+  // — its net-current body is the ledger-allocation rewrite in migration 024,
+  // not 009's counter version, so asserting 009's body would test dead SQL.
+  // spend_credits (plus refund/grant) are now EXECUTED end-to-end against the
+  // real net-current SQL in tests/security/creditLedger.pglite.test.js.
+  const refundBody = sql.match(/create\s+or\s+replace\s+function\s+public\.refund_credits[\s\S]*?\$\$;/i)?.[0] || '';
+
+  it('refund_credits is idempotent — refuses to refund the same spend twice', () => {
+    expect(refundBody).toBeTruthy();
+    // Must look for an existing refund grant correlated to this spend and bail,
+    // so a retried/duplicated refund can't double-credit the account.
+    expect(refundBody).toMatch(/exists\s*\(/i);
+    expect(refundBody).toMatch(/refund_of/i);
+    expect(refundBody).toMatch(/already\s+refunded/i);
+  });
+
+  it('refund_credits validates the target is a spend row and authorizes the caller', () => {
+    expect(refundBody).toMatch(/kind\s*(<>|!=)\s*'spend'/i);        // can't refund a non-spend
+    expect(refundBody).toMatch(/current_user_is_privileged/i);      // owner-or-admin only
+    expect(refundBody).toMatch(/not\s+authorized/i);
+  });
+
+  it('refund_credits credits back via arithmetic, never a stored snapshot', () => {
+    expect(refundBody).toMatch(/credits\s*=\s*credits\s*\+\s*spend_row\.amount/i);
+  });
 });
 
 describe('Tier 9.9 — audit doc is in the repo', () => {

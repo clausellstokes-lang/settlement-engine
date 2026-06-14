@@ -98,6 +98,20 @@ describe('pipeline (property-based)', () => {
     }), { numRuns: 15 });
   });
 
+  test('same seed produces a DEEP-identical settlement (full-JSON determinism)', () => {
+    // The fingerprint test above compares only 5 scalars — it would pass even
+    // if names drifted, arrays reordered, or a stray Math.random()/Date.now()
+    // crept into a deep field. This asserts the ENTIRE serialized settlement is
+    // byte-identical across two same-seed runs, so fine-grained non-determinism
+    // can no longer slip past CI. (The settlement is persisted as JSON, so
+    // JSON.stringify equality is the real reproducibility contract.)
+    fc.assert(fc.property(configArb, (config) => {
+      const a = gen(config, { seed: SEED });
+      const b = gen(config, { seed: SEED });
+      expect(JSON.stringify(a)).toBe(JSON.stringify(b));
+    }), { numRuns: 15 });
+  });
+
   test('different seeds usually produce different fingerprints (seed sensitivity)', () => {
     // Catches the failure mode where someone accidentally bypasses the
     // PRNG and uses Math.random() (or a hardcoded value). We expect that

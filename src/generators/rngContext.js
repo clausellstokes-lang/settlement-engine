@@ -29,33 +29,62 @@ export function getActiveRng() {
   return _activeRng;
 }
 
+// Tests and a few legacy paths legitimately call these helpers with no active
+// RNG, so the Math.random() fallback must stay. But when it fires DURING what
+// is meant to be a seeded run it silently ships a settlement whose stored seed
+// no longer replays — the determinism footgun the audit flagged. Make it loud
+// OUTSIDE of tests: one warning per process, so a real leak surfaces in dev/
+// preview while the test suite (which uses the fallback by design) stays quiet.
+// Pair with the ESLint ban on raw Math.random() in src/generators.
+// Reach process via globalThis (cast to any): this file is in the tsc gate as
+// browser code with no @types/node, so a bare `process` reference would not
+// type-check. Undefined in the browser (warn fires in dev there); 'test' under
+// vitest (warn stays quiet for the fallback-by-design test suite).
+const _isTestEnv =
+  /** @type {any} */ (globalThis)?.process?.env?.NODE_ENV === 'test';
+let _warnedNoActiveRng = false;
+
+/** 0..1 random float, from the seeded PRNG if active, else a noisy fallback. */
+function _roll() {
+  if (_activeRng) return _activeRng.random();
+  if (!_warnedNoActiveRng && !_isTestEnv) {
+    _warnedNoActiveRng = true;
+    console.warn(
+      '[rngContext] a PRNG helper was called with no active seeded RNG — '
+      + 'falling back to Math.random(). The result is NOT reproducible from its '
+      + 'seed; ensure setActiveRng() wraps the generation that called this.',
+    );
+  }
+  return Math.random();
+}
+
 // ── Drop-in replacements for Math.random-based helpers ──────────────────────
 
 /** 0..1 random float. Uses seeded PRNG if active, else Math.random. */
 export function random() {
-  return _activeRng ? _activeRng.random() : Math.random();
+  return _roll();
 }
 
 /** True with probability p. */
 export function chance(p) {
-  return (_activeRng ? _activeRng.random() : Math.random()) < p;
+  return _roll() < p;
 }
 
 /** Pick a random element from an array. */
 export function pick(arr) {
   if (!arr || arr.length === 0) return undefined;
-  return arr[Math.floor((_activeRng ? _activeRng.random() : Math.random()) * arr.length)];
+  return arr[Math.floor(_roll() * arr.length)];
 }
 
 /** Random integer in [min, max] inclusive. */
 export function randInt(min, max) {
-  return Math.floor((_activeRng ? _activeRng.random() : Math.random()) * (max - min + 1)) + min;
+  return Math.floor(_roll() * (max - min + 1)) + min;
 }
 
 /** Fisher-Yates shuffle in place. Returns the array. */
 export function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor((_activeRng ? _activeRng.random() : Math.random()) * (i + 1));
+    const j = Math.floor(_roll() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
@@ -64,7 +93,7 @@ export function shuffle(arr) {
 /** Weighted random pick. items[i] has weight weights[i]. */
 export function weightedPick(items, weights) {
   const total = weights.reduce((s, w) => s + w, 0);
-  let roll = (_activeRng ? _activeRng.random() : Math.random()) * total;
+  let roll = _roll() * total;
   for (let i = 0; i < items.length; i++) {
     roll -= weights[i];
     if (roll <= 0) return items[i];

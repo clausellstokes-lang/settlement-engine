@@ -26,6 +26,7 @@ import { titleForView, guardForView, viewToPath } from './lib/routes.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
+import CampaignSyncBanner from './components/CampaignSyncBanner.jsx';
 
 // Lazy-loaded views
 const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
@@ -299,6 +300,7 @@ export default function App() {
 
   return (
     <>
+      <CampaignSyncBanner />
       <div
         className={`parchment-bg page-bg${pageBg.isFlow ? ' is-flow' : ''}`}
         style={{ '--page-bg': pageBg.url, position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}

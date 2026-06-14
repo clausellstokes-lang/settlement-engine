@@ -21,6 +21,7 @@
 
 import js from '@eslint/js';
 import reactHooks from 'eslint-plugin-react-hooks';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 import visualBudget from './scripts/eslint-plugin-visual-budget.js';
 import analytics from './scripts/eslint-plugin-analytics.js';
@@ -123,6 +124,50 @@ export default [
       // the contract can be enforced hard from day one.
       'analytics/funnel-event-contract': 'error',
     },
+  },
+
+  // ── Determinism guard — no raw non-determinism in the seeded pipeline ──────
+  // Generators must draw randomness through rngContext (random/pick/chance/…)
+  // so a settlement replays byte-exact from its stored seed. A bare
+  // Math.random(), Date.now(), or new Date() in generator logic is a silent
+  // determinism leak the gate could not see before (rngContext's fallback
+  // converts it into invisible non-reproducibility). Errors here, so a new
+  // leak fails CI. prng.js (the documented sole non-determinism entry, for
+  // seed minting) and rngContext.js (the fallback itself) are exempt.
+  {
+    files: ['src/generators/**/*.js'],
+    ignores: ['src/generators/prng.js', 'src/generators/rngContext.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          message: 'Determinism: use random()/pick()/chance()/randInt() from rngContext.js, not Math.random() — a raw draw breaks same-seed replay.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Determinism: Date.now() is non-reproducible in the seeded pipeline. Thread a timestamp in instead.',
+        },
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Determinism: new Date() reads wall-clock time and breaks same-seed replay. Construct from an explicit value.',
+        },
+      ],
+    },
+  },
+
+  // ── Accessibility (jsx-a11y) — WARN-only drift surface ───────────────────────
+  // The component/PDF JSX layer is excluded from tsc and had no a11y linting, so
+  // accessibility gaps accumulated invisibly. Add the recommended jsx-a11y rules
+  // at WARN (not error): the gate doesn't run --max-warnings 0, so this surfaces
+  // existing + new a11y issues for incremental cleanup without blocking work or
+  // requiring a big-bang burn-down. Promote to error once the count reaches zero
+  // (mirrors how the visual-budget rules were hardened).
+  {
+    files: ['src/**/*.jsx'],
+    plugins: { 'jsx-a11y': jsxA11y },
+    rules: Object.fromEntries(
+      Object.keys(jsxA11y.flatConfigs.recommended.rules).map(rule => [rule, 'warn']),
+    ),
   },
 
   // Data tables: arrow functions are written with uniform signatures
