@@ -180,12 +180,37 @@ serve(async (req) => {
     }
 
     // Parse the request body
-    const { action, userId, metadata, credits, reason } = await req.json();
+    const { action, userId, metadata, credits, reason, dashboard, from: fromDate, to: toDate } = await req.json();
     const auditReason = typeof reason === "string" && reason.trim()
       ? reason.trim()
       : null;
 
     switch (action) {
+      // Read-only analytics dashboards (migration 038 report_* functions). The
+      // privilege gate above already enforced developer/admin/owner. The edge
+      // function assembles NO SQL — it only dispatches to a fixed report fn.
+      case "get_analytics_dashboard": {
+        const REPORT_FNS: Record<string, string> = {
+          funnel: "report_funnel",
+          preferences: "report_preferences",
+          edit_heatmap: "report_edit_heatmap",
+          ai_usage: "report_ai_usage",
+          retention: "report_retention",
+        };
+        const fn = typeof dashboard === "string" ? REPORT_FNS[dashboard] : undefined;
+        if (!fn) return json({ error: "Unknown dashboard" }, 400);
+        const today = new Date().toISOString().slice(0, 10);
+        const monthAgo = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+        const args = fn === "report_retention"
+          ? {}
+          : {
+            p_from: typeof fromDate === "string" ? fromDate : monthAgo,
+            p_to: typeof toDate === "string" ? toDate : today,
+          };
+        const { data, error } = await adminClient.rpc(fn, args);
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, dashboard, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
       case "update_user_metadata": {
         if (!userId || !metadata) {
           return json({ error: "Missing userId or metadata" }, 400);
