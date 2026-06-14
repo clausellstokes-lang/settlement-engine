@@ -16,6 +16,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import {
   EVENTS, track, Funnel, markAnonGenerated, hasPriorAnonGeneration,
 } from '../../src/lib/analytics.js';
+import { setConsent } from '../../src/lib/consent.js';
 
 let providerCalls;
 let originalProvider;
@@ -33,6 +34,12 @@ beforeEach(() => {
     localStorage.clear();
     sessionStorage.clear();
   } catch { /* ignore */ }
+  // track() now gates on consent + DNT (consent.js). Establish a clean baseline
+  // so these provider-dispatch assertions don't inherit DNT/consent state a
+  // prior file in the same worker may have left set. (The DNT test below sets it
+  // deliberately and the others assume telemetry is allowed.)
+  try { Object.defineProperty(navigator, 'doNotTrack', { value: null, configurable: true }); } catch { /* ignore */ }
+  setConsent({ essential: true, research: true });
 });
 
 afterEach(() => {

@@ -7,6 +7,9 @@ import './styles/a11y.css';
 import { useStore } from './store';
 import { emitCssTokens } from './design/tokens.js';
 import { installAnalyticsProvider } from './lib/analyticsProvider.js';
+import { installAnalyticsQueue } from './lib/analyticsQueue.js';
+import { track, EVENTS } from './lib/analytics.js';
+import { returnVisitBand, stampVisit } from './lib/session.js';
 import { reportError, installGlobalErrorHandlers } from './lib/errorReporter.js';
 
 // Emit design tokens as CSS custom properties on :root so stylesheets and
@@ -22,6 +25,24 @@ emitCssTokens();
 // paid_after_anon) flow straight through to whichever provider was
 // installed.
 installAnalyticsProvider();
+
+// First-party analytics sink: restore any spilled queue + install flush-on-leave
+// handlers, then open the session. Fire-and-forget; no-op if Supabase is
+// unconfigured (the queue self-disables) or DNT/opt-out silences telemetry.
+installAnalyticsQueue();
+{
+  const rv = returnVisitBand();
+  let entry = 'other';
+  try {
+    const p = (typeof location !== 'undefined' ? location.pathname : '') || '/';
+    entry = p === '/' ? 'home'
+      : p.startsWith('/dossier') || p.startsWith('/s/') ? 'dossier'
+        : p.startsWith('/gallery') ? 'gallery'
+          : p.startsWith('/pricing') ? 'pricing' : 'other';
+  } catch { /* default */ }
+  track(EVENTS.SESSION_STARTED, { is_return: rv.is_return, days_since_last_visit_band: rv.days_since_last_visit_band, auth_state: 'anon', entry_route_kind: entry });
+  stampVisit();
+}
 
 // Production error reporting: window-level errors + unhandled rejections.
 // No-op network unless VITE_ERROR_REPORT_URL is set; always logs locally.

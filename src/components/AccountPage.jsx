@@ -27,6 +27,7 @@ import { lazy as _lazy, Suspense as _Suspense } from 'react';
 const FounderTile = _lazy(() => import('./pricing/FounderTile.jsx'));
 import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
+import PrivacySettings from './PrivacySettings.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, AMBER } from './theme.js';
 // FAQ relocated to the About page (spec §13); the full accordion (AccountFAQ)
 // is rendered there now, with a slim pointer left on this page.
@@ -668,6 +669,9 @@ export default function AccountPage({ onNavigateAdmin }) {
           <ChevronRight size={20} color={MUTED} />
         </button>
       )}
+
+      {/* Privacy & data consent (P/§3) */}
+      <PrivacySettings />
 
       {/* Sign out */}
       <button
