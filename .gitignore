@@ -24,3 +24,4 @@ playwright-report/
 playwright/.cache/
 
 .claude/tmp-digests/
+sim-report.json
