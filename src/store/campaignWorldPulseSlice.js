@@ -54,6 +54,19 @@ import {
 // Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth).
 const PULSE_UNDO_CAP = 10;
 
+// ── Cross-slice contract ──────────────────────────────────────────────────
+// All 14 slices share ONE Immer store, so coupling is by shared state on the
+// draft + get() method calls — not imports. This slice's contract:
+//
+// OWNS state:   pulseUndoStack (session-scoped; not persisted).
+// PROVIDES (read via get() by other slices): recordPartyImpact — called by
+//   settlementSlice.rippleEventThroughWorld on a party-caused canon event.
+//   (advanceCampaignWorld → get().recordPartyImpact is a SAME-slice call.)
+// CONSUMES shared state, owned elsewhere, read/written on the draft:
+//   • campaigns                      — campaignSlice
+//   • savedSettlements + the live active view (activeSaveId, settlement,
+//     systemState, eventLog, phase, editedAt) — settlementSlice
+// The pulse drain/apply/snapshot mechanics live in campaignPulseHelpers.js.
 export const createCampaignWorldPulseSlice = (set, get) => ({
   // Campaign-clock (Phase C2): session-scoped stack of pre-pulse snapshots, one
   // per advance, capped PER campaign. NOT persisted — a reload clears it.

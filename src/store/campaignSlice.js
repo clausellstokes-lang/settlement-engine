@@ -139,6 +139,22 @@ function migrateMapState(ms) {
   };
 }
 
+// ── Cross-slice contract ──────────────────────────────────────────────────
+// All 14 slices share ONE Immer store, so coupling is by shared state on the
+// draft + get() method calls — not imports. campaignSlice is the campaign
+// orchestrator after the WS4 split (regional → campaignRegionalSlice, world-pulse
+// → campaignWorldPulseSlice):
+//
+// OWNS state:   campaigns, campaignsLoaded, activeCampaignId, campaignSyncError —
+//   `campaigns` is the shared root the regional + world-pulse slices read/write.
+// PROVIDES (read via get() by other slices): the settlement-clock bridge
+//   isSettlementClockBound, getCampaignForSettlement, queueSettlementEvent,
+//   cancelQueuedEvent — consumed by settlementSlice when an event is applied to a
+//   clock-bound member; plus campaign CRUD, gallery import, campaign map state,
+//   and the wizard-news getters.
+// CONSUMES shared state: savedSettlements — owned by settlementSlice.
+// Persistence/pure utils live in campaignSliceShared.js; pulse/state-application
+// helpers in campaignPulseHelpers.js.
 export const createCampaignSlice = (set, get) => {
   // Route module-scoped persist failures (in campaignSliceShared) into store
   // state so the UI can warn the user instead of silently losing a cloud save.

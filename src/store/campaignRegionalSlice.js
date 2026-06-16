@@ -48,6 +48,22 @@ import {
 import { track, EVENTS } from '../lib/analytics.js';
 import { extractRegionalImpactDecision, extractRegionalChannelChange } from '../lib/regionalFingerprint.js';
 
+// ── Cross-slice contract ──────────────────────────────────────────────────
+// All 14 slices share ONE Immer store, so coupling is by shared state on the
+// draft + get() method calls — not imports. This slice's contract:
+//
+// PROVIDES (read via get() by other slices): setCampaignRegionalGraph,
+//   injectCampaignStressor, resolveCampaignStressor — driven by
+//   settlementSlice.rippleEventThroughWorld on canon edits; the crisisTripleSync
+//   TWIN_ACTION_FILES pin enforces those three are referenced only here + by that
+//   one consumer. undoCampaignStressorBridge is called by settlementSlice's
+//   undoLastEvent. The rest of the regional surface is consumed by UI components.
+// CONSUMES shared state, owned elsewhere, read/written on the draft:
+//   • campaigns                      — campaignSlice
+//   • savedSettlements + the live active view (activeSaveId, settlement,
+//     systemState, editedAt) — settlementSlice
+// Intra-slice fan-out (ignore/applyAll → get().setRegionalImpactStatus etc.) is
+// SAME-slice. Graph/news mechanics live in campaignPulseHelpers.js + domain/region.
 export const createCampaignRegionalSlice = (set, get) => ({
   /** Ensure a campaign has the current regional graph envelope. */
   ensureCampaignRegionalGraph: (campaignId) => {
