@@ -31,7 +31,7 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
              Was the only gate-typechecked layer; the gate now covers the full tree.
-store/       Zustand slices (12) — the single client state container.
+store/       Zustand slices (13) — the single client state container.
 components/   React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs) +
              new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ + auth/.
@@ -74,7 +74,7 @@ saves when the shape changes.
 
 ## State (`store/index.js`)
 
-One Zustand store composed from 12 slices, with `immer + persist +
+One Zustand store composed from 13 slices, with `immer + persist +
 subscribeWithSelector + devtools`. **`persist.partialize` deliberately persists
 only lightweight, user-owned data (config + toggles)** — never the large
 generated settlement object. `onRehydrate` resets the wizard to the mode picker.

@@ -34,6 +34,7 @@ import { createNeighbourSlice }  from './neighbourSlice.js';
 import { createMapSlice }        from './mapSlice.js';
 import { createCreditsSlice }      from './creditsSlice.js';
 import { createCampaignSlice }     from './campaignSlice.js';
+import { createCampaignRegionalSlice } from './campaignRegionalSlice.js';
 import { createCustomContentSlice } from './customContentSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
@@ -54,6 +55,7 @@ export const useStore = create(
           ...createMapSlice(set, get),
           ...createCreditsSlice(set, get),
           ...createCampaignSlice(set, get),
+          ...createCampaignRegionalSlice(set, get),
           ...createCustomContentSlice(set, get),
           ...createOnboardingSlice(set, get),
           ...createUiSlice(set, get),

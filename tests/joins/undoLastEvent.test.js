@@ -62,6 +62,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
 
 import { createSettlementSlice, stripDerivedConfigKeys } from '../../src/store/settlementSlice.js';
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
+import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
@@ -415,6 +416,7 @@ function makeCampaignStore() {
   return create(immer((...a) => ({
     ...stubSlice(...a),
     ...createCampaignSlice(...a),
+    ...createCampaignRegionalSlice(...a),
     ...createSettlementSlice(...a),
   })));
 }

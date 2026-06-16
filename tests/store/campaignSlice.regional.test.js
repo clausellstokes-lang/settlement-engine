@@ -16,6 +16,7 @@ vi.mock('../../src/lib/saves.js', () => ({
 }));
 
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
+import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
 import { ensureRegionalGraph, normalizeGoodsList } from '../../src/domain/region/index.js';
 import { findActiveCondition } from '../../src/domain/activeConditions.js';
 import { saves } from '../../src/lib/saves.js'; // the mocked module (for failure injection)
@@ -44,7 +45,7 @@ const stubSlice = () => ({
 });
 
 function makeStore() {
-  return create(immer((...a) => ({ ...stubSlice(...a), ...createCampaignSlice(...a) })));
+  return create(immer((...a) => ({ ...stubSlice(...a), ...createCampaignSlice(...a), ...createCampaignRegionalSlice(...a) })));
 }
 
 function settlement(name) {

@@ -69,6 +69,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
+import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { canonStressors } from '../../src/domain/canonicalAccessors.js';
 import { archetypeForStressor, promoteStressorsToConditions } from '../../src/domain/conditionPromotion.js';
@@ -107,6 +108,7 @@ function makeStore() {
   return create(immer((...a) => ({
     ...stubSlice(...a),
     ...createCampaignSlice(...a),
+    ...createCampaignRegionalSlice(...a),
     ...createSettlementSlice(...a),
   })));
 }
@@ -565,8 +567,8 @@ const STRESSOR_EDITS_FILES = Object.freeze([
 
 // (c) The roaming-twin store actions:
 const TWIN_ACTION_FILES = Object.freeze([
-  'store/campaignSlice.js',   // the action definitions
-  'store/settlementSlice.js', // the ONE directive consumer (+ undo withdraw)
+  'store/campaignRegionalSlice.js', // the action definitions (WS4: extracted from campaignSlice)
+  'store/settlementSlice.js',       // the ONE directive consumer (+ undo withdraw)
 ]);
 
 describe('source scan — the trio is written only through the lifecycle', () => {

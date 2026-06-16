@@ -36,6 +36,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
 });
 
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
+import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
 function installLocalStorage() {
@@ -62,7 +63,7 @@ const stubSlice = () => ({
 });
 
 function makeStore() {
-  return create(immer((...a) => ({ ...stubSlice(...a), ...createCampaignSlice(...a) })));
+  return create(immer((...a) => ({ ...stubSlice(...a), ...createCampaignSlice(...a), ...createCampaignRegionalSlice(...a) })));
 }
 
 function settlement(name) {
