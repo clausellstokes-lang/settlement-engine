@@ -12,6 +12,74 @@ the distance between what that infrastructure *could* enforce and what it *curre
 building more, but by closing that gap — making every claim the code makes about itself mechanically true, and
 making every external seam fail visibly instead of silently.
 
+## Reconciliation with the "path to 10/10" critique
+
+A second external review proposed an 18-point path to 10/10. Read against the **actual code**, it
+is highly complementary to this program but was partly written **without full repo knowledge** —
+roughly a third of its asks are already built. The two reviews divide cleanly and completely:
+
+- **The 10/10 critique supplies the *destination architecture + product/process layers*:** a North
+  Star (typed commands → causal receipts → durable sync → contract-tested boundaries → shared view
+  models), plus simulation eval fixtures, product E2E, performance budgets, a merge-gate operating
+  standard, and second-engineer docs.
+- **This A+ program supplies the *enforcement discipline, the verified current wounds, and the
+  sequencing/pins that stop gains from rotting*.**
+
+**Combined truth:** the North Star is the *target*; the enforcement spine is *how you reach it
+without it silently regressing* — and the real combined backlog is **smaller than 18 items**,
+because ~7 are already done and the rest mostly fold into the tracks below.
+
+### North Star (adopted)
+> *A deterministic settlement-simulation platform where every user action becomes a typed command,
+> every command emits causal receipts, every mutation persists through a durable sync path, every
+> public/private boundary is contract-tested, and every major UI/export surface renders from shared
+> view models.*
+
+This program's six principles are the **mechanism** for that vision: *one source per fact* → shared
+view models; *fail-visible never fail-silent* → durable sync; *the gate is the product* + *claims
+carry their enforcement* → contract-tested boundaries. Crucially — both reviews agree **do not
+rewrite**; the architecture below is reached *incrementally, behind pins*, never as a big-bang CQRS
+port.
+
+### Disposition of all 18 points (verified against current code)
+
+| # | Ask | Verified state | Disposition |
+|---|---|---|---|
+| 1 | Live risk register | ✅ **already built** — `docs/RISK_REGISTER.md` (has status/severity/files/decision; lacks owner+test cols) | Already satisfied; add Owner (defer — bus-factor-one) + Test columns later |
+| 2 | Typed command layer | ❌ missing (only store actions; bespoke return shapes) | **Adapt, don't CQRS** — standardize one action-result *envelope*; reach commands incrementally (Track K) |
+| 3 | Durable outbox | ❌ missing (scattered fire-and-forget + `campaignSyncError` banner) | Cheap slice now (the Phase-0 `persistSaveUpdate` unify); full outbox = later structural bet (Track K) |
+| 4 | First-class causal receipts | ◐ partial — `trace.js` / `explanation.js` / `causalState` already are the receipt foundation | **Unify the receipt *type***; reject "absent" — don't rebuild (Track K) |
+| 5 | Runtime boundary validation (8 seams) | ◐ mixed — gallery + event-command **already validated**; save/campaign/PDF partial; AI-payload/world-pulse are low-untrust internal | Targeted guards at *untrusted* seams only (no blanket zod — clashes with the deliberate tolerant-coerce design) |
+| 5b | *(new find)* `validateDossier` exists but is **unwired** from publish/export | ❌ a real claim-vs-enforcement gap | **ADOPT — Phase 0 quick win** (wire it into ShareToGallery + PDF export; cheap, on-theme) |
+| 6 | Net-state backend tests | ◐ partial — credit-ledger + refunds **already pglite-executed**; 5 behaviors still grep-only | Already roadmapped (`enforcement.6`); execute the remaining 5 (RLS, gallery-privacy, webhook idempotency, save-limits, admin-actions) |
+| 7 | Payment artifact recovery | ❌ missing (single-dossier recovery is localStorage-only) | **ADOPT (scoped)** — real user-hostile failure (paid, empty dossier on another device) |
+| 8 | Warnings → 0 | ◐ partial — exactly 15 warnings; the named files are correct | Fold into the UI/lint closeout (Phase 3) |
+| 9 | CI performance budgets | ❌ missing (only `chunkSizeWarningLimit`) | **Promote `RISK_REGISTER` R6** from Optional → a Phase-1 spine step |
+| 10 | Decompose 7 largest files | ◐ partial — most already targeted | **Add `generate-narrative/index.ts`, `aiSlice.js`, `viewModel.js`** to the decomposition tracks; fix the stale roadmap line counts |
+| 11 | Unify screen/PDF/public view models | ◐ partial — screen↔PDF is Track G; the **gallery/public projection** is the under-covered third surface | Adopt Track G + **extend the shared model to the public projection** |
+| 12 | Simulation eval fixtures | ❌ missing | **ADOPT — high value** (catches the "sim quietly lies to the DM" class `SIMULATION_LOGIC_AUDIT.md` documents) → new Track I |
+| 13 | Product E2E (Playwright) | ◐ partial — Playwright **is wired with 4 specs** (premise "doesn't exist" is wrong) | Adopt the *missing journeys* only (PDF export, signup-intent save, gallery publish, checkout recovery, mobile) |
+| 14 | Ruthless UX hierarchy | ◐ partial — first screen mostly done (HomeHero + OnboardingCoach) | = `PRODUCT_COHERENCE.md` gaps; consolidate the *deeper* surfaces (two-canon, four consequence vocabularies) |
+| 15 | Semantic map | ◐ partial — map is **already semantic-first** (typed relationships, supply chains, crisis severity) | Mostly satisfied; **reject the "cartographic beauty" premise** |
+| 16 | AI discipline (evals + drift) | ◐ partial — prose-renderer + verifier reports **already exist** | **ADOPT net-new**: prompt/output evals + drift-rate tracking → new Track J |
+| 17 | Second-engineer docs (7 guides) | ◐ partial — schema guide done; security/persistence/add-subsystem scattered; glossary/command-lifecycle/add-dossier-field missing | Cheap cross-links now; net-new guides **deferred** until a second contributor (bus-factor-one) |
+| 18 | Operating standard (merge gate) | ❌ missing **+ premise gap** — there's no PR/branch-protection process to attach a checklist to | Prerequisite = **STEP 0** (CI-gate + PR flow); *then* adopt the per-change test-type checklist (Phase-1 spine) |
+
+### What the critique genuinely *adds* (folded into the phases)
+
+- **Phase 0 (+):** wire `validateDossier` into publish/PDF-export (5b — closes a real claim-gap, the program's central theme); fix the stale decomposition line-counts (10).
+- **Phase 1 spine (+):** CI **performance budget** check (9 / R6); the **operating-standard merge checklist** as the human-readable companion to STEP 0's CI gate (18).
+- **Phase 2 — three new tracks + extensions:**
+  - **Track I — Simulation eval fixtures (12):** a corpus of canonical settlements (famine village, corrupt trade town, magical metropolis, raided hamlet, blockaded port, religious capital, resource-collapse mine) asserting expected pressures/hooks/roles/trade/world-pulse/receipt-quality. The semantic complement to the property tests.
+  - **Track J — AI discipline (16):** prompt/output evals + drift-rate tracking on top of the existing verifier reports; keep AI a renderer, never a canonical-fact source without explicit approval.
+  - **Track K — Architecture toward the North Star (2 / 3 / 4), incremental:** (a) standardize ONE action-result envelope `{before, after, domainChanges, persistenceOps, analyticsEvent, receipts, userMessage}` over existing actions — gets commands' *benefits* with no rewrite; (b) **unify the receipt type** on `trace.js`/`explanation.js`; (c) evolve the Phase-0 `persistSaveUpdate` unify into a **durable outbox** (queue + retry + reconcile UI). Each step pinned; none a big-bang.
+  - **Extensions:** add `generate-narrative`/`aiSlice`/`viewModel.js` to the decomposition tracks (10); extend the shared view model to the **gallery public projection** (11); add the missing **E2E journeys** (13); targeted runtime guards at the untrusted cloud-read/import seams (5).
+- **Phase 3 (+):** second-engineer docs — cross-link the scattered material now; author the glossary / command-lifecycle / add-a-dossier-field guides when onboarding becomes real (17).
+
+### What to explicitly *not* do (verified already-done or over-build)
+
+Rebuild the risk register (done); blanket-validate every boundary with zod (clashes with the intentional tolerant-coerce design + adds an avoided dep); chase "prettier maps" (already semantic); claim "no E2E exists" (4 specs are wired); a full 9-command CQRS layer *now* (over-build against the shared "do not rewrite" thesis — reach it incrementally via Track K); a per-risk Owner column (bus-factor-one makes it noise until a second contributor exists).
+
 ## The bar: current → A+
 
 | Area | Now | A+ when… |
