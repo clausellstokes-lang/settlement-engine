@@ -25,6 +25,8 @@ const FLUSH_INTERVAL_MS = 30_000;
 const MAX_RECORDS = 300;          // drop-oldest beyond this
 const MAX_ATTEMPTS = 5;
 const BACKOFF_MS = [1_000, 4_000, 16_000, 60_000, 60_000];
+const MAX_ENVELOPE_BYTES = 256 * 1024; // ingest payload ceiling — force-drain to fit, never no-op
+const MAX_RECORD_BYTES = 64 * 1024;    // reject a single oversize research record at enqueue
 
 let _events = [];     // [{ event, props, ts, subjectId?, _class }]
 let _edits = [];      // research-plane edit rows
@@ -32,6 +34,7 @@ let _snapshots = [];  // research-plane snapshot rows
 let _pulseEffects = []; // research-plane world-pulse per-effect mutation rows
 let _droppedCount = 0;
 let _attempt = 0;
+let _inFlight = false; // guards against overlapping flushes (interval + size-trigger + retry)
 let _intervalStarted = false;
 let _ring = [];       // DEV ring buffer for the debug overlay (last 100)
 
@@ -97,6 +100,33 @@ function capQueue() {
   }
 }
 
+/** Bytes of a record's JSON (0 if unserializable). */
+function recordBytes(r) {
+  try { return JSON.stringify(r).length; } catch { return 0; }
+}
+
+/**
+ * Drop the single largest queued record across all planes. Returns true if one was
+ * dropped. Used by flush() to force an oversize envelope under the byte ceiling
+ * instead of the old no-op early-return, which could permanently wedge the queue
+ * (record COUNT under MAX_RECORDS but byte SIZE over the limit → flush returned
+ * forever and nothing — including research data — ever delivered).
+ */
+function dropLargestRecord() {
+  const lanes = [_events, _pulseEffects, _edits, _snapshots];
+  let best = null;
+  for (const arr of lanes) {
+    for (let i = 0; i < arr.length; i++) {
+      const size = recordBytes(arr[i]);
+      if (!best || size > best.size) best = { arr, idx: i, size };
+    }
+  }
+  if (!best) return false;
+  best.arr.splice(best.idx, 1);
+  _droppedCount += 1;
+  return true;
+}
+
 // ── Consent purge (research revoked → drop research-plane records) ────────────
 function purgeRevoked() {
   const c = getConsent();
@@ -122,19 +152,25 @@ export function enqueueEvent(event, props, opts = {}) {
 /** Enqueue a research-plane edit row (already redacted). */
 export function enqueueEdit(row) {
   if (!isConfigured) return;
-  _edits.push({ ...row, ts: row.ts || nowMs(), consentTier: 'research' });
+  const rec = { ...row, ts: row.ts || nowMs(), consentTier: 'research' };
+  if (recordBytes(rec) > MAX_RECORD_BYTES) { _droppedCount += 1; return; } // reject oversize at the source
+  _edits.push(rec);
   capQueue(); scheduleSpill(); maybeFlush();
 }
 /** Enqueue a structural snapshot (hot + optional structural). */
 export function enqueueSnapshot(row) {
   if (!isConfigured) return;
-  _snapshots.push({ ...row, ts: row.ts || nowMs() });
+  const rec = { ...row, ts: row.ts || nowMs() };
+  if (recordBytes(rec) > MAX_RECORD_BYTES) { _droppedCount += 1; return; }
+  _snapshots.push(rec);
   capQueue(); scheduleSpill();
 }
 /** Enqueue a world-pulse per-effect mutation row (research-plane, redacted). */
 export function enqueuePulseEffect(row) {
   if (!isConfigured) return;
-  _pulseEffects.push({ ...row, ts: row.ts || nowMs(), consentTier: 'research' });
+  const rec = { ...row, ts: row.ts || nowMs(), consentTier: 'research' };
+  if (recordBytes(rec) > MAX_RECORD_BYTES) { _droppedCount += 1; return; }
+  _pulseEffects.push(rec);
   capQueue(); scheduleSpill();
 }
 
@@ -170,13 +206,24 @@ function buildEnvelope() {
 export function flush({ beacon = false } = {}) {
   try {
     if (!isConfigured) return;
+    // In-flight guard: a fetch already in flight will drain on success; a second
+    // concurrent flush (interval / size-trigger / retry) would double-POST the same
+    // batch and desync the backoff counter. Beacon is the last-chance leave path and
+    // is always allowed (it can't observe the fetch promise anyway).
+    if (_inFlight && !beacon) return;
     purgeRevoked();
     if (!_events.length && !_edits.length && !_snapshots.length && !_pulseEffects.length) return;
     const url = ingestUrl();
     if (!url) return;
-    const envelope = buildEnvelope();
-    const body = JSON.stringify(envelope);
-    if (body.length > 256 * 1024) { capQueue(); return; } // safety; capQueue keeps us bounded
+
+    // Force-drain to fit the envelope ceiling: drop the largest record and rebuild
+    // until under the limit (never the old no-op early-return that could wedge the
+    // queue forever). Bounded by MAX_RECORDS, and rare given the per-record cap.
+    let body = JSON.stringify(buildEnvelope());
+    while (body.length > MAX_ENVELOPE_BYTES && dropLargestRecord()) {
+      body = JSON.stringify(buildEnvelope());
+    }
+    if (body.length > MAX_ENVELOPE_BYTES) return; // nothing left to drop yet still over — give up this pass
 
     // Snapshot what we're sending so a concurrent enqueue isn't lost on success.
     const sentCounts = { e: _events.length, d: _edits.length, s: _snapshots.length, p: _pulseEffects.length };
@@ -187,13 +234,15 @@ export function flush({ beacon = false } = {}) {
       return;
     }
     if (typeof fetch === 'undefined') return;
+    _inFlight = true;
     fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, keepalive: true })
       .then(res => {
+        _inFlight = false;
         if (res && res.ok) { _attempt = 0; drain(sentCounts); }
         else { scheduleRetry(); }
       })
-      .catch(() => scheduleRetry());
-  } catch { /* never throw */ }
+      .catch(() => { _inFlight = false; scheduleRetry(); });
+  } catch { _inFlight = false; /* never throw, never wedge the guard */ }
 }
 
 function drain(sent) {
@@ -245,6 +294,6 @@ export function debugSnapshot() {
 
 /** Test seam: reset module state. */
 export function __resetQueueForTests() {
-  _events = []; _edits = []; _snapshots = []; _pulseEffects = []; _droppedCount = 0; _attempt = 0; _ring = [];
+  _events = []; _edits = []; _snapshots = []; _pulseEffects = []; _droppedCount = 0; _attempt = 0; _inFlight = false; _ring = [];
   clearSpill();
 }
