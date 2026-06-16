@@ -61,11 +61,14 @@ export default function TableView({ settlement, onClose }) {
   const prosperity = settlement?.economicState?.prosperity?.tier || '';
 
   return (
+    // Backdrop click/Enter/Space closes the modal; role="dialog" is required for modal semantics so it can't become a native button.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       role="dialog"
       aria-modal="true"
       aria-label={`Table view: ${settlement?.name || 'settlement'}`}
       onClick={onClose}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose?.(); }}
       style={{
         position: 'fixed', inset: 0, zIndex: 1100,
         background: 'rgba(12,8,4,0.72)',
@@ -73,8 +76,11 @@ export default function TableView({ settlement, onClose }) {
         padding: 12,
       }}
     >
+      {/* Handlers only stopPropagation to keep clicks/keys inside the panel from closing the backdrop; the panel is not itself interactive. */}
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
         style={{
           width: '100%', maxWidth: 380,
           height: '100%', maxHeight: 760,

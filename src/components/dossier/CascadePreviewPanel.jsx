@@ -84,18 +84,22 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
     : 'No structural changes.';
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- overlay backdrop: click/key here is dismiss-only; Escape also closes (see useEffect above)
     <div
       role="dialog"
       aria-label="Cascade preview"
       onClick={onClose}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose?.(); }}
       style={{
         position: 'fixed', inset: 0, zIndex: 9100,
         background: 'rgba(24,20,16,0.5)',
         backdropFilter: 'blur(4px)',
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- panel container: handlers only stop backdrop click/key from bubbling, not an interactive control */}
       <aside
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
         style={{
           position: 'absolute', right: 0, top: 0, bottom: 0,
           width: 'min(400px, 100vw)',

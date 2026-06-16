@@ -115,7 +115,11 @@ function FullEntryModal({ entry, onClose }) {
 
   return (
     <div
+      role="button"
+      tabIndex={0}
+      aria-label="Close chronicle entry"
       onClick={onClose}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(0,0,0,0.55)',
@@ -124,7 +128,11 @@ function FullEntryModal({ entry, onClose }) {
       }}
     >
       <div
+        role="button"
+        tabIndex={0}
+        aria-label="Chronicle entry details"
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
         style={{
           background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
           width: '100%', maxWidth: 720, maxHeight: '85vh', display: 'flex', flexDirection: 'column',

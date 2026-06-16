@@ -138,9 +138,10 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
               </button>
             </header>
             <div style={{ display: 'grid', gap: SP.md, padding: SP.lg }}>
-              <label style={{ display: 'grid', gap: 6, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+              <label htmlFor="gallery-report-reason" style={{ display: 'grid', gap: 6, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
                 Reason
                 <select
+                  id="gallery-report-reason"
                   value={reason}
                   onChange={event => setReason(event.target.value)}
                   style={{
@@ -157,9 +158,11 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
                   {REPORT_REASON_OPTIONS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
                 </select>
               </label>
-              <label style={{ display: 'grid', gap: 6, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+              <label htmlFor="gallery-report-notes" style={{ display: 'grid', gap: 6, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
                 Notes
                 <textarea
+                  id="gallery-report-notes"
+                  aria-label="Notes"
                   value={body}
                   onChange={event => setBody(event.target.value)}
                   maxLength={2000}

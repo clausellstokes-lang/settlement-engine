@@ -104,12 +104,16 @@ export default function SuccessorPrompt() {
   }
 
   return (
+    // Backdrop-dismiss on the dialog wrapper is a redundant convenience;
+    // keyboard users dismiss via the labelled IconButton or footer button.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="succession-title"
       style={overlayStyle}
       onClick={(e) => { if (e.target === e.currentTarget) dismiss(); }}
+      onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) dismiss(); }}
     >
       <div style={sheetStyle}>
         <header style={headerStyle}>

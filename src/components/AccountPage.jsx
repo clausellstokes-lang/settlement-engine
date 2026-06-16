@@ -274,6 +274,7 @@ export default function AccountPage({ onNavigateAdmin }) {
               {editingName ? (
                 <>
                   <input
+                    aria-label="Display name"
                     value={nameInput}
                     onChange={e => setNameInput(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && handleSaveName()}
@@ -283,6 +284,7 @@ export default function AccountPage({ onNavigateAdmin }) {
                       fontSize: FS.lg, fontFamily: serif_, fontWeight: 600,
                       outline: 'none',
                     }}
+                    // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the inline name editor when it opens
                     autoFocus
                   />
                   <button onClick={handleSaveName} disabled={nameSaving}
@@ -320,26 +322,31 @@ export default function AccountPage({ onNavigateAdmin }) {
               {profileError}
             </div>
           )}
-          <label style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
+          <label htmlFor="account-avatar-url" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
             Avatar URL
             <input
+              id="account-avatar-url"
+              aria-label="Avatar URL"
               value={avatarInput}
               onChange={e => setAvatarInput(e.target.value)}
               placeholder="https://..."
               style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
             />
           </label>
-          <label style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, color: SECOND, fontWeight: 700 }}>
+          <label htmlFor="account-email-notifications" style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, color: SECOND, fontWeight: 700 }}>
             <input
+              id="account-email-notifications"
+              aria-label="Email notifications"
               type="checkbox"
               checked={emailNotifications}
               onChange={e => setEmailNotifications(e.target.checked)}
             />
             <Mail size={14} color={GOLD} /> Email notifications
           </label>
-          <label style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
+          <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> AI model preference</span>
             <select
+              id="account-model-preference"
               value={modelPreference}
               onChange={e => setModelPreference(e.target.value)}
               style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD }}
@@ -613,6 +620,7 @@ export default function AccountPage({ onNavigateAdmin }) {
             )}
 
             <input
+              aria-label="Subject"
               type="text" placeholder="Subject"
               value={supportSubject} onChange={e => setSupportSubject(e.target.value)}
               style={{
@@ -622,6 +630,7 @@ export default function AccountPage({ onNavigateAdmin }) {
               }}
             />
             <textarea
+              aria-label="Describe your issue or question"
               placeholder="Describe your issue or question..."
               value={supportMessage} onChange={e => setSupportMessage(e.target.value)}
               rows={4}

@@ -49,6 +49,10 @@ export default function PurchaseModal({ onClose }) {
   return (
     <div
       onClick={onClose}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
+      role="button"
+      tabIndex={0}
+      aria-label={t('common.close')}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(0,0,0,0.6)',
@@ -56,8 +60,10 @@ export default function PurchaseModal({ onClose }) {
         backdropFilter: 'blur(4px)',
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only stop propagation to the backdrop, not real interactivity */}
       <div
         onClick={e => e.stopPropagation()}
+        onKeyDown={e => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="purchase-modal-title"

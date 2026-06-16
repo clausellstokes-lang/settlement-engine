@@ -98,6 +98,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
         <div style={{position:'relative'}}>
           <span style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',color:MUTED,fontSize: FS['14']}}></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
+            aria-label="Search services"
             placeholder='Search services, "healing", "horse", "fence", "wizard"…'
             style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',borderRadius:6,fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
           {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize: FS['18'],color:MUTED,lineHeight:1,padding:0}}>×</button>}
@@ -139,10 +140,17 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 const borderColor = hasImp?'#e8a0a0':hasDeg?'#e0b050':'#c8d8a0';
                 const bg = hasImp?'#fdf4f4':hasDeg?'#fdf8e8':'#f4faf0';
                 return (
-                  <div key={cat} style={{background:bg,border:`1px solid ${borderColor}`,borderLeft:`3px solid ${hasImp?'#c0392b':hasDeg?'#b8860b':meta.accent}`,borderRadius:5,padding:'6px 10px',cursor:'pointer'}}
+                  <div key={cat} role="button" tabIndex={0} style={{background:bg,border:`1px solid ${borderColor}`,borderLeft:`3px solid ${hasImp?'#c0392b':hasDeg?'#b8860b':meta.accent}`,borderRadius:5,padding:'6px 10px',cursor:'pointer'}}
                     onClick={()=>{
                       setOpenCats(prev=>({...prev,[cat]:true}));
                       setTimeout(()=>{const el=document.getElementById('svc-cat-'+cat);el&&el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+                    }}
+                    onKeyDown={e=>{
+                      if(e.key==='Enter'||e.key===' '){
+                        e.preventDefault();
+                        setOpenCats(prev=>({...prev,[cat]:true}));
+                        setTimeout(()=>{const el=document.getElementById('svc-cat-'+cat);el&&el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+                      }
                     }}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
                       <span style={{fontSize:FS.md}}>{meta.icon}</span>

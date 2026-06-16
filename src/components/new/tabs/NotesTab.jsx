@@ -89,6 +89,7 @@ export default function NotesTab({ saveId, notes, section }) {
               DM Notes
             </div>
             <textarea
+              aria-label="DM Notes"
               value={dmNotes}
               onChange={e => setDmNotes(e.target.value)}
               placeholder="Private prep, table rulings, secrets, reminders."
@@ -103,6 +104,7 @@ export default function NotesTab({ saveId, notes, section }) {
               Campaign Context
             </div>
             <textarea
+              aria-label="Campaign Context"
               value={aiGuidance}
               onChange={e => setAiGuidance(e.target.value)}
               placeholder="How does this settlement fit your campaign? e.g. an orc warband hold with a militarized culture; the baron here owes the party a debt..."

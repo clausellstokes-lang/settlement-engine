@@ -1,4 +1,5 @@
 import { SlidersHorizontal, X } from 'lucide-react';
+import { useId } from 'react';
 
 import { TIER_LABELS } from '../new/design.js';
 import {
@@ -81,8 +82,9 @@ function FilterChips({ options, value = [], onToggle }) {
 }
 
 function ToggleRow({ checked, label, onChange }) {
+  const inputId = useId();
   return (
-    <label style={{
+    <label htmlFor={inputId} style={{
       display: 'flex',
       alignItems: 'center',
       gap: 8,
@@ -92,7 +94,7 @@ function ToggleRow({ checked, label, onChange }) {
       fontWeight: 850,
       cursor: 'pointer',
     }}>
-      <input type="checkbox" checked={checked} onChange={event => onChange(event.target.checked)} />
+      <input id={inputId} type="checkbox" aria-label={label} checked={checked} onChange={event => onChange(event.target.checked)} />
       <span>{label}</span>
     </label>
   );

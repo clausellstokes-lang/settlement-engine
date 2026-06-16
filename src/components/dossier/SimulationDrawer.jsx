@@ -87,7 +87,13 @@ export default function SimulationDrawer() {
         <>
           {/* Scrim */}
           <div
+            role="button"
+            tabIndex={0}
+            aria-label="Close"
             onClick={() => setOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') setOpen(false);
+            }}
             style={{
               position: 'fixed', inset: 0,
               background: 'rgba(0,0,0,0.45)',

@@ -64,7 +64,8 @@ export default function CatalogPicker({
       {/* Search bar */}
       <div style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 8px', borderBottom:`1px solid ${BORDER}` }}>
         <Search size={11} color={MUTED}/>
-        <input value={query} onChange={e => setQuery(e.target.value)} placeholder={placeholder || 'Search catalog...'} autoFocus style={{ flex:1, border:'none', background:'transparent', fontSize:FS.xs, fontFamily:sans, color:INK, outline:'none' }}/>
+        {/* eslint-disable-next-line jsx-a11y/no-autofocus -- focus the search field when the picker panel expands */}
+        <input value={query} onChange={e => setQuery(e.target.value)} placeholder={placeholder || 'Search catalog...'} aria-label={placeholder || 'Search catalog'} autoFocus style={{ flex:1, border:'none', background:'transparent', fontSize:FS.xs, fontFamily:sans, color:INK, outline:'none' }}/>
         <button onClick={collapse} style={{ background:'none', border:'none', cursor:'pointer', color:MUTED, padding:0 }}><X size={12}/></button>
       </div>
 

@@ -124,6 +124,7 @@ export default function LibraryToolbar({
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          aria-label="Search settlements, NPCs, and factions"
           placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'} + NPCs + factions…`}
           style={{
             flex: 1, border: 'none', outline: 'none',
@@ -146,7 +147,7 @@ export default function LibraryToolbar({
       </div>
 
       {/* Sort */}
-      <label style={{
+      <label htmlFor="library-sort" style={{
         display: 'inline-flex', alignItems: 'center', gap: SP.xs,
         padding: '4px 8px',
         background: swatch.white,
@@ -156,6 +157,7 @@ export default function LibraryToolbar({
       }}>
         <span style={{ color: MUTED, fontWeight: 700 }}>Sort:</span>
         <select
+          id="library-sort"
           value={sort}
           onChange={(e) => setSort(e.target.value)}
           style={{

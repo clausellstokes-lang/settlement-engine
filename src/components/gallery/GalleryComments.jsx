@@ -99,6 +99,7 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
             rows={4}
             maxLength={2000}
             placeholder="Add a public comment"
+            aria-label="Add a public comment"
             style={{
               width: '100%',
               boxSizing: 'border-box',

@@ -154,8 +154,9 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
             const badgeColor = scoreColor(sc);
             const isExp = expandedThreat===i;
             return (
-              <div key={i} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,borderRadius:6,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
-                onClick={()=>setExpandedThreat(isExp?null:i)}>
+              <div key={i} role="button" tabIndex={0} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,borderRadius:6,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
+                onClick={()=>setExpandedThreat(isExp?null:i)}
+                onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
                 <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px'}}>
                   <span style={{fontSize: FS['14'],flexShrink:0,lineHeight:1}}>{icon}</span>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>

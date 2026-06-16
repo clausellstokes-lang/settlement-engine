@@ -43,6 +43,7 @@ export default function ControlsStrip({
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder={placeholder}
+            aria-label={placeholder}
             style={{ width: '100%', padding: '5px 8px 5px 24px', border: `1px solid ${BORDER}`, borderRadius: 5, fontSize: FS['11.5'], background: `rgba(250,248,244,0.97)`, color: INK, boxSizing: 'border-box', fontFamily: sans }}
           />
           {search && (

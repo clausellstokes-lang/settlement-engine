@@ -1053,6 +1053,9 @@ export default function WorldMap({ onNavigate } = {}) {
         </div>
 
         {/* Map container */}
+        {/* a11y: passive drag-and-drop target (settlements are dragged from the
+            palette); no keyboard-clickable widget semantics apply to the map shell. */}
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
         <div
           ref={mapContainerRef}
           onDragOver={handleDragOver}
@@ -1140,6 +1143,9 @@ export default function WorldMap({ onNavigate } = {}) {
                   iteration can hover-follow the cursor with live FMG
                   cell data. */}
               {flag('mapDropPreview') && (
+                // a11y: presentational hint card (pointerEvents:'none'); the
+                // onMouseEnter is fire-and-forget analytics, not a user control.
+                // eslint-disable-next-line jsx-a11y/no-static-element-interactions
                 <div
                   onMouseEnter={() => {
                     Funnel.track(EVENTS.MAP_DROP_PREVIEW_SHOWN);

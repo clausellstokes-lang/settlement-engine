@@ -97,6 +97,8 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
                 if (e.key === 'Escape') setLinkOpen(false);
               }}
               placeholder="https://…"
+              aria-label="Link URL"
+              // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the URL field when the link popover opens so the user can type immediately
               autoFocus
               style={{ width: 150, border: `1px solid ${BORDER2}`, borderRadius: R.sm, padding: '2px 6px', fontFamily: sans, fontSize: FS.xxs, color: INK }}
             />

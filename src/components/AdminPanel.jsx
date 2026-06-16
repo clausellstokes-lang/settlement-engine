@@ -169,9 +169,10 @@ function UserRow({ user, onUpdate }) {
       <div style={{ flex: 1, minWidth: 60, textAlign: 'right' }}>
         {editing === 'credits' ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 2, justifyContent: 'flex-end' }}>
-            <input type="number" value={editValue} onChange={e => setEditValue(e.target.value)}
+            <input type="number" aria-label="Credits" value={editValue} onChange={e => setEditValue(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && saveEdit()}
               style={{ width: 60, fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}`, textAlign: 'right' }}
+              // eslint-disable-next-line jsx-a11y/no-autofocus -- inline edit field should focus on open
               autoFocus />
             <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
               <Check size={12} />
@@ -331,7 +332,7 @@ export default function AdminPanel({ onBack }) {
         }}>
           <Search size={14} color={MUTED} />
           <input
-            type="text" placeholder="Search users by email or name..."
+            type="text" aria-label="Search users by email or name" placeholder="Search users by email or name..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && fetchUsers()}

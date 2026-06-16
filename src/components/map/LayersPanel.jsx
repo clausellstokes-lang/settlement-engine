@@ -173,7 +173,9 @@ export default function LayersPanel({ onClose }) {
                 onClick={() => toggleRegionalImpactStatus(status)}
               />
             ))}
-            <label style={{
+            <label
+              htmlFor="regional-min-severity"
+              style={{
               display: 'flex',
               alignItems: 'center',
               gap: SP.xs,
@@ -185,7 +187,9 @@ export default function LayersPanel({ onClose }) {
             }}>
               Severity
               <input
+                id="regional-min-severity"
                 type="range"
+                aria-label="Minimum severity"
                 min="0"
                 max="0.8"
                 step="0.1"
@@ -241,8 +245,12 @@ export default function LayersPanel({ onClose }) {
 }
 
 function LayerToggle({ label, checked, onChange }) {
+  const inputId = `layer-toggle-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
   return (
-    <label style={{
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only apply decorative hover styling to this label-for-checkbox; no interactive behavior added
+    <label
+      htmlFor={inputId}
+      style={{
       display: 'flex', alignItems: 'center', gap: SP.xs,
       padding: `${SP.xs}px ${SP.sm}px`,
       cursor: 'pointer', userSelect: 'none',
@@ -253,7 +261,9 @@ function LayerToggle({ label, checked, onChange }) {
       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
     >
       <input
+        id={inputId}
         type="checkbox"
+        aria-label={label}
         checked={checked}
         onChange={onChange}
         style={{ accentColor: GOLD, cursor: 'pointer' }}

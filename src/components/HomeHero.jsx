@@ -314,13 +314,13 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                 fontSize: FS.xs, color: swatch.inkMag3, fontStyle: 'italic',
               }}>
                 or just take this one{' '}
-                <a
-                  href="#"
+                <button
+                  type="button"
                   onClick={(e) => { e.preventDefault(); document.querySelector('[data-buy-this-dossier]')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  style={{ color: GOLD_DEEP, fontWeight: 700, fontStyle: 'normal' }}
+                  style={{ color: GOLD_DEEP, fontWeight: 700, fontStyle: 'normal', background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer', textDecoration: 'underline' }}
                 >
                   buy the dossier for $2.99 ↓
-                </a>
+                </button>
               </div>
             </div>
             <AnonTierTeaser onSignIn={onSignIn} />

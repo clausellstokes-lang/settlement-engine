@@ -110,6 +110,7 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }
     <input
       type={type}
       placeholder={placeholder}
+      aria-label={placeholder}
       value={value}
       onChange={e => onChange(e.target.value)}
       onKeyDown={onKeyDown}
@@ -125,14 +126,17 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }
 }
 
 export function Checkbox({ checked, onChange, label }) {
+  const id = `checkbox-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
   return (
-    <label style={{
+    <label htmlFor={id} style={{
       display: 'flex', alignItems: 'center', gap: SP.sm,
       cursor: 'pointer', fontSize: FS.sm, color: SECOND,
       fontFamily: sans, userSelect: 'none',
     }}>
       <input
+        id={id}
         type="checkbox"
+        aria-label={label}
         checked={checked}
         onChange={e => onChange(e.target.checked)}
         style={{ accentColor: GOLD, width: 16, height: 16, cursor: 'pointer' }}

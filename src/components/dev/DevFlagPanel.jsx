@@ -134,9 +134,11 @@ export default function DevFlagPanel() {
         {flagNames.map(name => {
           const value = flag(name);
           const overridden = readIsOverridden(name);
+          const inputId = `dev-flag-${name}`;
           return (
             <label
               key={name}
+              htmlFor={inputId}
               style={{
                 display: 'grid',
                 gridTemplateColumns: '36px 1fr auto',
@@ -148,8 +150,10 @@ export default function DevFlagPanel() {
               }}
             >
               <input
+                id={inputId}
                 type="checkbox"
                 checked={value}
+                aria-label={`Toggle ${name} flag`}
                 onChange={e => setOverrideWithNotify(name, e.target.checked)}
                 style={{ marginTop: 2, accentColor: '#c9a24c', width: 18, height: 18, cursor: 'pointer' }}
               />

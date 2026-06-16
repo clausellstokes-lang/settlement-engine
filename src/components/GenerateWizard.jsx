@@ -167,7 +167,19 @@ function ModeSelector({ mode, onModeChange, large = false }) {
               e.currentTarget.style.boxShadow = '0 8px 24px rgba(160,118,42,0.25)';
               e.currentTarget.style.borderColor = GOLD;
             }}
+            onFocus={e => {
+              if (!large) return;
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(160,118,42,0.25)';
+              e.currentTarget.style.borderColor = GOLD;
+            }}
             onMouseOut={e => {
+              if (!large) return;
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(28,20,9,0.08)';
+              e.currentTarget.style.borderColor = active ? GOLD : BORDER2;
+            }}
+            onBlur={e => {
               if (!large) return;
               e.currentTarget.style.transform = 'translateY(0)';
               e.currentTarget.style.boxShadow = '0 4px 16px rgba(28,20,9,0.08)';
@@ -916,7 +928,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               transition: 'opacity 0.15s, transform 0.1s',
             }}
             onMouseOver={e => e.currentTarget.style.opacity = '0.92'}
+            onFocus={e => e.currentTarget.style.opacity = '0.92'}
             onMouseOut={e => e.currentTarget.style.opacity = '1'}
+            onBlur={e => e.currentTarget.style.opacity = '1'}
           >
             {settlement ? 'Regenerate Draft' : 'Generate Draft'}
           </button>

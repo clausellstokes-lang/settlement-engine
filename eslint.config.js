@@ -163,18 +163,20 @@ export default [
     },
   },
 
-  // ── Accessibility (jsx-a11y) — WARN-only drift surface ───────────────────────
+  // ── Accessibility (jsx-a11y) — ERROR (hardened 2026-06) ──────────────────────
   // The component/PDF JSX layer is excluded from tsc and had no a11y linting, so
-  // accessibility gaps accumulated invisibly. Add the recommended jsx-a11y rules
-  // at WARN (not error): the gate doesn't run --max-warnings 0, so this surfaces
-  // existing + new a11y issues for incremental cleanup without blocking work or
-  // requiring a big-bang burn-down. Promote to error once the count reaches zero
-  // (mirrors how the visual-budget rules were hardened).
+  // accessibility gaps accumulated invisibly. These started at WARN for an
+  // incremental cleanup; once the recommended-rule count reached zero (WS3
+  // burn-down across 55 files) they were promoted to ERROR so regressions block
+  // the gate — mirroring how the visual-budget rules were hardened. A handful of
+  // genuinely-intentional cases (focus-on-open inline editors, the deprecated
+  // label-has-for vs label-has-associated-control split) carry justified
+  // per-line eslint-disable comments.
   {
     files: ['src/**/*.jsx'],
     plugins: { 'jsx-a11y': jsxA11y },
     rules: Object.fromEntries(
-      Object.keys(jsxA11y.flatConfigs.recommended.rules).map(rule => [rule, 'warn']),
+      Object.keys(jsxA11y.flatConfigs.recommended.rules).map(rule => [rule, 'error']),
     ),
   },
 

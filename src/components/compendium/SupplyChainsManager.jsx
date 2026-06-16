@@ -121,6 +121,7 @@ export default function SupplyChainsManager() {
               <ChainRow chain={chain} instNames={instNames} primaryExports={exportsOf(chain)} />
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
                 <input
+                  aria-label="Name this chain"
                   value={names[chain.chainId] ?? ''}
                   onChange={(e) => setNames((d) => ({ ...d, [chain.chainId]: e.target.value }))}
                   placeholder={`Name this chain (e.g. ${chain.label})`}

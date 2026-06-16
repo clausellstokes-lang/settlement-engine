@@ -61,12 +61,16 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
   }));
 
   return (
+    // Modal overlay: backdrop click/keydown dismisses. Keeping role="dialog"
+    // (vs button) is the correct a11y semantics, so this rule can't be satisfied.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="export-sheet-title"
       style={overlayStyle}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      onKeyDown={(e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) onClose(); }}
     >
       <div style={sheetStyle}>
         <header style={headerStyle}>

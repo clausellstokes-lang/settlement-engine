@@ -94,6 +94,7 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
                 {label}
               </span>
               <input type="range"
+                aria-label={label}
                 min={5} max={95}
                 value={Math.max(5,val)}
                 onChange={e=>updateConfig({[key]:Number(e.target.value)})}
@@ -315,15 +316,15 @@ export default function ConfigurationPanel(){
     <div style={{padding:'0 16px 14px'}}>
       <div style={{marginBottom:12}}>
         <Lbl>Settlement Name (optional)</Lbl>
-        <input type="text" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
+        <input type="text" aria-label="Settlement Name (optional)" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
         {config.customName&&<div style={{fontSize:FS.xs,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
       </div>
       {/* §14b — Use custom content toggle (homebrew data layer). Default ON. */}
       {canUseCustom && customCount > 0 && (() => {
         const on = config.useCustomContent !== false;
         return (
-          <label style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,borderRadius:6,background:on?'rgba(124,58,237,0.06)':CARD}}>
-            <input type="checkbox" checked={on} onChange={e=>updateConfig({useCustomContent:e.target.checked})} style={{accentColor:swatch.magic,width:15,height:15,flexShrink:0}}/>
+          <label htmlFor="useCustomContent" style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,borderRadius:6,background:on?'rgba(124,58,237,0.06)':CARD}}>
+            <input id="useCustomContent" aria-label="Use my custom content" type="checkbox" checked={on} onChange={e=>updateConfig({useCustomContent:e.target.checked})} style={{accentColor:swatch.magic,width:15,height:15,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:700,color:on?swatch.magic:SECOND,fontFamily:sans}}>✦ Use my custom content</span>
             <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',textAlign:'right',lineHeight:1.3}}>{customCount} item{customCount===1?'':'s'} · institutions, services, resources, trade, factions, stressors &amp; chains</span>
           </label>
@@ -402,7 +403,7 @@ export default function ConfigurationPanel(){
           </Sel>
         </div>
       </div>
-      {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
+      {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" aria-label="Custom Population" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="culture">Culture</Lbl>
           <Sel value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
@@ -431,6 +432,7 @@ export default function ConfigurationPanel(){
           {config.settlementAgeMode==='custom'&&(
             <input
               type="number"
+              aria-label="Custom years"
               min={0}
               max={5000}
               value={config.settlementAgeYears||0}

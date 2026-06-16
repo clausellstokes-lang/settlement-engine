@@ -743,7 +743,9 @@ export default function SettlementDetail({
                   </span>
                   {isEditing
                     ? <><input
+                        // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the inline rename field the user just opened
                         autoFocus
+                        aria-label={`Rename NPC ${npc.name}`}
                         value={editDraft}
                         onChange={e=>setEditDraft(e.target.value)}
                         onKeyDown={e=>{
@@ -789,7 +791,9 @@ export default function SettlementDetail({
                   </span>
                   {isEditing
                     ? <><input
+                        // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the inline rename field the user just opened
                         autoFocus
+                        aria-label={`Rename faction ${fac.name}`}
                         value={editDraft}
                         onChange={e=>setEditDraft(e.target.value)}
                         onKeyDown={e=>{

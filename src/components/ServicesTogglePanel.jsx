@@ -37,7 +37,8 @@ function ServiceCard({ svcName, def, toggled, onCycle }) {
   const labelColor = isForced ? GOLD : MUTED;
 
   return (
-    <div onClick={onCycle} style={{
+    <div onClick={onCycle} role="button" tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onCycle(); }} style={{
       display:'flex', alignItems:'flex-start', gap:8,
       padding:'6px 12px 6px 10px',
       background:bg, borderLeft, borderBottom:'1px solid #f0e8d8',

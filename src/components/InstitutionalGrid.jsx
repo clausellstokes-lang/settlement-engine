@@ -97,7 +97,10 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
             const isForced = st.require;
             return (
               <div key={name}
+                role="button"
+                tabIndex={0}
                 onClick={() => handleToggle(name, instDef)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle(name, instDef); } }}
                 style={{
                   display: 'flex', alignItems: 'flex-start', gap: 8,
                   padding: '5px 8px', borderRadius: 5, cursor: 'pointer',
@@ -202,7 +205,10 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
 
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={handleClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(e); } }}
       title={
         reqOverridden           ? 'Force-excluded. Click to restore'
         : isOutOfTier && !req   ? `Out-of-tier (${def.nativeTier || 'other'} tier). Click to force include`

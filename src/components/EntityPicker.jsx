@@ -184,6 +184,7 @@ export default function EntityPicker({
             onFocus={() => setFocused(true)}
             onBlur={() => setTimeout(() => setFocused(false), 150)}
             placeholder={placeholder}
+            aria-label={placeholder}
             style={{
               flex: 1, border: 'none', outline: 'none', background: 'transparent',
               fontFamily: sans, fontSize: FS.sm, color: INK,

@@ -114,7 +114,7 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
           </button>
         </div>
         {error && <ErrorLine text={error} />}
-        <input ref={inputRef} type="file" accept="image/*" onChange={onPick} style={{ display: 'none' }} />
+        <input ref={inputRef} type="file" accept="image/*" onChange={onPick} aria-label="Choose a cover image file" style={{ display: 'none' }} />
       </div>
     );
   }
@@ -143,7 +143,7 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
         <span style={{ color: MUTED }}>You’ll crop it to a landscape cover. JPEG, PNG, WebP, or GIF · up to 8&nbsp;MB.</span>
       </div>
       {error && <ErrorLine text={error} />}
-      <input ref={inputRef} type="file" accept="image/*" onChange={onPick} style={{ display: 'none' }} />
+      <input ref={inputRef} type="file" accept="image/*" onChange={onPick} aria-label="Choose a cover image file" style={{ display: 'none' }} />
     </div>
   );
 }

@@ -269,8 +269,9 @@ function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement,
         <FolderOpen size={14} color={GOLD}/>
         {editing ? (
           <div style={{ flex:1, display:'flex', alignItems:'center', gap:4 }}>
-            <input value={editDraft} onChange={e => setEditDraft(e.target.value)}
+            <input value={editDraft} onChange={e => setEditDraft(e.target.value)} aria-label="Campaign name"
               onKeyDown={e => { if (e.key === 'Enter') { onRenameCampaign(campaign.id, editDraft); setEditing(false); } if (e.key === 'Escape') setEditing(false); }}
+              // eslint-disable-next-line jsx-a11y/no-autofocus -- inline rename field appears on user action; focus lets them type the new name immediately
               style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, borderRadius:3, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
             <button onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} style={{ background:'none', border:'none', color:swatch['#2A7A2A'], cursor:'pointer' }}><Check size={12}/></button>
             <button onClick={() => setEditing(false)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer' }}><X size={12}/></button>
@@ -1022,8 +1023,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         <div style={{ display:'flex', gap:8, alignItems:'center' }}>
           {showNewCampaign ? (
             <div style={{ flex:1, display:'flex', gap:6 }}>
-              <input value={newCampaignName} onChange={e => setNewCampaignName(e.target.value)}
+              <input value={newCampaignName} onChange={e => setNewCampaignName(e.target.value)} aria-label="Campaign name"
                 onKeyDown={e => { if (e.key === 'Enter') handleCreateCampaign(); if (e.key === 'Escape') setShowNewCampaign(false); }}
+                // eslint-disable-next-line jsx-a11y/no-autofocus -- new-campaign field appears on user action; focus lets them type the name immediately
                 placeholder="Campaign name..." autoFocus
                 style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, borderRadius:5, fontSize:FS.sm, fontFamily:sans, outline:'none' }}/>
               <button onClick={handleCreateCampaign} disabled={!newCampaignName.trim()} style={{ padding:'6px 12px', background:newCampaignName.trim()?GOLD:'#ccc', color:swatch.white, border:'none', borderRadius:5, cursor:newCampaignName.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Create</button>

@@ -158,8 +158,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             const c   = FACTION_COLORS[i % FACTION_COLORS.length];
             return (
               <div key={i} title={`${f.faction}: ${pct}% (power ${f.power})`}
+                role="button" tabIndex={0} aria-label={`${f.faction}: ${pct}% (power ${f.power})`}
                 style={{flex:pct,background:c,display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden',cursor:'pointer'}}
-                onClick={() => setExpandedFaction(expandedFaction===i ? null : i)}>
+                onClick={() => setExpandedFaction(expandedFaction===i ? null : i)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedFaction(expandedFaction===i ? null : i); } }}>
                 {pct > 8 && <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,userSelect:'none'}}>{pct}%</span>}
               </div>
             );
@@ -183,7 +185,13 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                   cursor:f.desc?'pointer':'default',
                   border: f.legitimacyCrisis ? '1px solid #e8c0c0' : '1px solid transparent',
                 }}
-                  onClick={() => f.desc && setExpandedFaction(isExp ? null : i)}>
+                  {...(f.desc ? {
+                    role: 'button',
+                    tabIndex: 0,
+                    'aria-label': `${f.faction} faction details`,
+                    onClick: () => setExpandedFaction(isExp ? null : i),
+                    onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedFaction(isExp ? null : i); } },
+                  } : {})}>
                   <div style={{width:11,height:11,borderRadius:2,background:c,flexShrink:0}}/>
                   {f.isGoverning && <span style={{fontSize:FS.xs,color:c,flexShrink:0}}></span>}
                   {f.legitimacyCrisis && <span style={{fontSize:FS.xxs,color:swatch.danger,flexShrink:0}}>⚠</span>}

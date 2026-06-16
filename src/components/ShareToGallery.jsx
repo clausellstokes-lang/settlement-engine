@@ -52,9 +52,10 @@ function suggestedTagsFor(settlement = {}) {
   ].filter(Boolean).slice(0, 6);
 }
 
-function Field({ label, children }) {
+function Field({ label, htmlFor, children }) {
   return (
-    <label style={{ display: 'grid', gap: 4, minWidth: 0 }}>
+    // eslint-disable-next-line jsx-a11y/label-has-for -- generic wrapper; association is via the htmlFor prop wired at each call site, which the static rule can't verify.
+    <label htmlFor={htmlFor} style={{ display: 'grid', gap: 4, minWidth: 0 }}>
       <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         {label}
       </span>
@@ -261,12 +262,14 @@ export default function ShareToGallery({
       marginTop: SP.xs,
     }}>
       {hasNarrative && (
-        <label style={{
+        <label htmlFor="share-to-gallery-narrated" style={{
           display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
           padding: SP.sm, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
         }}>
           <input
+            id="share-to-gallery-narrated"
             type="checkbox"
+            aria-label="Publish the AI-narrated version"
             checked={shareNarrated}
             onChange={event => setShareNarrated(event.target.checked)}
             style={{ marginTop: 2, flexShrink: 0 }}
@@ -277,12 +280,14 @@ export default function ShareToGallery({
         </label>
       )}
       {/* Owner opt-in: expose the full DM-private layer publicly. Off by default. */}
-      <label style={{
+      <label htmlFor="share-to-gallery-dm" style={{
         display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
         padding: SP.sm, border: `1px solid ${shareDm ? RED : BORDER2}`, borderRadius: R.md, background: CARD,
       }}>
         <input
+          id="share-to-gallery-dm"
           type="checkbox"
+          aria-label="Reveal DM-private content"
           checked={shareDm}
           onChange={event => setShareDm(event.target.checked)}
           style={{ marginTop: 2, flexShrink: 0 }}
@@ -306,8 +311,10 @@ export default function ShareToGallery({
           alt={imageAlt || settlement?.name || ''}
         />
       </Field>
-      <Field label="Image alt (description for screen readers)">
+      <Field label="Image alt (description for screen readers)" htmlFor="share-to-gallery-image-alt">
         <input
+          id="share-to-gallery-image-alt"
+          aria-label="Image alt (description for screen readers)"
           value={imageAlt}
           onChange={event => setImageAlt(event.target.value)}
           placeholder={settlement?.name ? `Image for ${settlement.name}` : 'Image description'}
@@ -323,8 +330,10 @@ export default function ShareToGallery({
           }}
         />
       </Field>
-      <Field label="Gallery tags">
+      <Field label="Gallery tags" htmlFor="share-to-gallery-tags">
         <input
+          id="share-to-gallery-tags"
+          aria-label="Gallery tags"
           value={tagsInput}
           onChange={event => setTagsInput(event.target.value)}
           placeholder="frontier, high magic, unstable"

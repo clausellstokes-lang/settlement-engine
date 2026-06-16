@@ -64,7 +64,7 @@ function NPCRelCard({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}
   const [open,setOpen]=useState(false);
   return (
     <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,borderRadius:7,overflow:'hidden',marginBottom:10}}>
-      <button onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+      <button aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>
@@ -90,7 +90,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
   const [open,setOpen]=useState(false);
   return (
     <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,borderRadius:7,overflow:'hidden',marginBottom:10}}>
-      <button onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+      <button aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>

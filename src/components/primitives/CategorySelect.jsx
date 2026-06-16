@@ -41,7 +41,9 @@ export default function CategorySelect({
     return (
       <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
         <input
+          // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the just-revealed inline name field
           autoFocus
+          aria-label="New category name"
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); commit(); } if (e.key === 'Escape') { setAdding(false); setText(''); } }}

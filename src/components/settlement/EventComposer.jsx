@@ -570,10 +570,11 @@ export default function EventComposer() {
                   value={target}
                   onChange={e => setTarget(e.target.value)}
                   placeholder="Type a label or pick a suggestion"
+                  aria-label="Good"
                   style={inputStyle}
                 />
                 <datalist id="event-trade-good-suggestions">
-                  {tradeGoodSuggestions.map(n => <option key={n} value={n} />)}
+                  {tradeGoodSuggestions.map(n => <option key={n} value={n} aria-label={n} />)}
                 </datalist>
               </Field>
             );
@@ -599,6 +600,7 @@ export default function EventComposer() {
                     value={customResourceName}
                     onChange={e => setCustomResourceName(e.target.value)}
                     placeholder='e.g. "Moonpetal grove"'
+                    aria-label="Custom resource name"
                     style={{ ...inputStyle, marginTop: 4 }}
                   />
                 )}
@@ -677,6 +679,7 @@ export default function EventComposer() {
                 value={target}
                 onChange={e => setTarget(e.target.value)}
                 placeholder={spec?.targetPrompt || 'optional'}
+                aria-label="Target"
                 style={inputStyle}
               />
             </Field>
@@ -834,7 +837,7 @@ export default function EventComposer() {
           }
           return (
             <Field label="Role" hint="e.g. High Priestess, Watch Captain">
-              <input value={role} onChange={e => setRole(e.target.value)} placeholder="optional" style={inputStyle} />
+              <input value={role} onChange={e => setRole(e.target.value)} placeholder="optional" aria-label="Role" style={inputStyle} />
             </Field>
           );
         })()}
@@ -875,11 +878,12 @@ export default function EventComposer() {
         )}
 
         <Field label="Description" hint="optional">
-          <input value={description} onChange={e => setDesc(e.target.value)} placeholder="e.g. burned during a brawl" style={inputStyle} />
+          <input value={description} onChange={e => setDesc(e.target.value)} placeholder="e.g. burned during a brawl" aria-label="Description" style={inputStyle} />
         </Field>
 
         {/* §8 M3b — party attribution. A canonical "the party did this" flag. */}
         <label
+          htmlFor="event-party-caused"
           title="Mark this change as a direct result of the party's actions. In a canon campaign it also ripples through the world."
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 6, alignSelf: 'flex-end',
@@ -890,9 +894,11 @@ export default function EventComposer() {
           }}
         >
           <input
+            id="event-party-caused"
             type="checkbox"
             checked={partyCaused}
             onChange={e => setPartyCaused(e.target.checked)}
+            aria-label="Caused by the party"
             style={{ margin: 0 }}
           />
           Caused by the party
@@ -924,6 +930,7 @@ export default function EventComposer() {
                     value={destroyConfirm}
                     onChange={(e) => setDestroyConfirm(e.target.value)}
                     placeholder={`Type "${settlement?.name || ''}" to confirm`}
+                    aria-label="Type the settlement name to confirm destruction"
                     style={{ width: '100%', padding: '5px 8px', border: `1px solid ${swatch.danger}`, borderRadius: 4, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, boxSizing: 'border-box' }}
                   />
                 </div>
@@ -1137,6 +1144,11 @@ function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRemove, o
 
 function Field({ label, hint, children }) {
   return (
+    // The control is implicitly associated by nesting inside this <label>, which
+    // is a valid accessible label association; a static htmlFor can't be used on a
+    // reusable wrapper without colliding ids, so the htmlFor half of label-has-for
+    // is intentionally waived here.
+    // eslint-disable-next-line jsx-a11y/label-has-for
     <label style={{ display: 'flex', flexDirection: 'column', gap: 2, fontSize: FS.xxs, fontFamily: sans, color: MUTED }}>
       {label}
       {children}

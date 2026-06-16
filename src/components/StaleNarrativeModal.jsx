@@ -44,8 +44,9 @@ export default function StaleNarrativeModal({
 
   return (
     <div
-      role="dialog"
-      aria-modal="true"
+      role="button"
+      tabIndex={0}
+      aria-label={t('staleNarrative.ariaClose')}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(12,8,4,0.58)', backdropFilter: 'blur(3px)',
@@ -53,9 +54,14 @@ export default function StaleNarrativeModal({
         padding: 18,
       }}
       onClick={onClose}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only stop propagation to the backdrop, not real interactivity */}
       <div
+        role="dialog"
+        aria-modal="true"
         onClick={e => e.stopPropagation()}
+        onKeyDown={e => e.stopPropagation()}
         style={{
           background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
           boxShadow: ELEV[3],

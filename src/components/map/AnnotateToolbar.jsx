@@ -69,6 +69,7 @@ export default function AnnotateToolbar() {
             type="range" min={8} max={48} step={1}
             value={opts.labelSize}
             onChange={e => setOpt('labelSize', Number(e.target.value))}
+            aria-label="Size"
             style={{ width: 90, accentColor: GOLD }}
           />
           <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 18 }}>{opts.labelSize}</span>
@@ -90,6 +91,7 @@ export default function AnnotateToolbar() {
             type="color"
             value={opts.labelColor}
             onChange={e => setOpt('labelColor', e.target.value)}
+            aria-label="Color"
             style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}
           />
         </>
@@ -113,6 +115,7 @@ export default function AnnotateToolbar() {
             type="color"
             value={opts.markerColor}
             onChange={e => setOpt('markerColor', e.target.value)}
+            aria-label="Color"
             style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}
           />
         </>

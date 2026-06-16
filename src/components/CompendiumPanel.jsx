@@ -690,19 +690,22 @@ function DependenciesSection({ deps, draft, setDraft }) {
       <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
         {deps.map(dep => (
           <div key={dep.key}>
-            <label style={{
+            {/* eslint-disable-next-line jsx-a11y/label-has-for -- deprecated rule; label nests the EntityPicker control + has htmlFor, but the static nesting check can't see through the component. label-has-associated-control passes. */}
+            <label htmlFor={`ccm-dep-${dep.key}`} style={{
               fontSize:FS.xxs, fontWeight:700, color:MUT,
               textTransform:'uppercase', letterSpacing:'0.04em',
               display:'block', marginBottom:3,
-            }}>{dep.label}</label>
-            <EntityPicker
-              category={dep.category}
-              categories={dep.categories}
-              single={!!dep.single}
-              value={draft[dep.key] ?? (dep.single ? '' : [])}
-              onChange={(next) => setDraft(d => ({ ...d, [dep.key]: next }))}
-              placeholder={`Search ${(dep.categories || [dep.category]).filter(Boolean).map(c => CAT_LABEL[c] || c).join(' / ') || 'catalog'}…`}
-            />
+            }}>
+              {dep.label}
+              <EntityPicker
+                category={dep.category}
+                categories={dep.categories}
+                single={!!dep.single}
+                value={draft[dep.key] ?? (dep.single ? '' : [])}
+                onChange={(next) => setDraft(d => ({ ...d, [dep.key]: next }))}
+                placeholder={`Search ${(dep.categories || [dep.category]).filter(Boolean).map(c => CAT_LABEL[c] || c).join(' / ') || 'catalog'}…`}
+              />
+            </label>
             {dep.hint && (
               <div style={{
                 fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginTop:2,
@@ -807,7 +810,7 @@ function CustomContentManager({ search }) {
 
   const renderField = (field) => {
     const val = draft[field] || '';
-    const shared = { value:val, onChange:e => setDraft(d=>({...d,[field]:e.target.value})), style:{ width:'100%', padding:'5px 8px', border:`1px solid ${BOR}`, borderRadius:4, fontSize:FS.sm, fontFamily:sans, color:INK, outline:'none', background:CARD } };
+    const shared = { id:`ccm-field-${field}`, value:val, onChange:e => setDraft(d=>({...d,[field]:e.target.value})), style:{ width:'100%', padding:'5px 8px', border:`1px solid ${BOR}`, borderRadius:4, fontSize:FS.sm, fontFamily:sans, color:INK, outline:'none', background:CARD } };
 
     switch(field) {
       case 'category': return <CategorySelect type={activeCat} value={val} customContent={customContent} onChange={v => setDraft(d => ({ ...d, category: v }))} style={shared.style} />;
@@ -865,8 +868,11 @@ function CustomContentManager({ search }) {
       <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
         {catDef.fields.map(f => (
           <div key={f}>
-            <label style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em' }}>{f.replace(/([A-Z])/g,' $1')}</label>
-            {renderField(f)}
+            {/* eslint-disable-next-line jsx-a11y/label-has-for -- deprecated rule; label nests the renderField control + has matching htmlFor, but the static nesting check can't see through renderField(). label-has-associated-control passes. */}
+            <label htmlFor={`ccm-field-${f}`} style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em' }}>
+              {f.replace(/([A-Z])/g,' $1')}
+              {renderField(f)}
+            </label>
             {FIELD_HINTS[f] && <div style={{ fontSize:FS.micro, color:MUT, fontStyle:'italic', marginTop:2, lineHeight:1.4 }}>{FIELD_HINTS[f]}</div>}
           </div>
         ))}
@@ -1131,7 +1137,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
             </div>
             <div style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 14px', borderTop:`1px solid ${BOR}` }}>
               <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
-              <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
+              <input aria-label="Search catalog" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
               {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:FS.md, padding:0 }}>x</button>}
             </div>
           </div>
@@ -1146,7 +1152,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
           {/* Custom content search */}
           <div style={{ display:'flex', alignItems:'center', gap:8, padding:'8px 14px', background:PARCH, borderBottom:`1px solid ${BOR}` }}>
             <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
-            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
+            <input aria-label="Search custom content" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
             {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:FS.md, padding:0 }}>x</button>}
           </div>
           <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>

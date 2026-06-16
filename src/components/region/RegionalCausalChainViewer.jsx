@@ -105,10 +105,12 @@ export default function RegionalCausalChainViewer({
           <option value="all">All sources</option>
           {model.sources.map(([id, name]) => <option key={id} value={id}>{name}</option>)}
         </select>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 5, marginLeft: 'auto', fontSize: FS.micro, color: MUTED, fontFamily: sans }}>
+        <label htmlFor="regional-causal-chain-severity" style={{ display: 'flex', alignItems: 'center', gap: 5, marginLeft: 'auto', fontSize: FS.micro, color: MUTED, fontFamily: sans }}>
           Severity
           <input
+            id="regional-causal-chain-severity"
             type="range"
+            aria-label="Minimum severity"
             min="0"
             max="0.8"
             step="0.1"

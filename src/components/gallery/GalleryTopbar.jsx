@@ -21,10 +21,12 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
       alignItems: 'center',
       marginBottom: SP.md,
     }}>
-      <label style={{ position: 'relative', minWidth: 0 }}>
+      <label htmlFor="gallery-search" style={{ position: 'relative', minWidth: 0 }}>
         <Search size={15} color={MUTED} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)' }} />
         <input
+          id="gallery-search"
           type="search"
+          aria-label="Search settlements"
           value={search}
           onChange={event => setSearch(event.target.value)}
           placeholder="Search settlements"

@@ -721,7 +721,10 @@ export default function App() {
           ever become a problem, route them through a separate channel. */}
       {onboardingNudge && (
         <div
+          role="button"
+          tabIndex={0}
           onClick={clearOnboardingNudge}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') clearOnboardingNudge(); }}
           style={{
             position: 'fixed',
             bottom: isMobile ? 92 : SP.xxl,

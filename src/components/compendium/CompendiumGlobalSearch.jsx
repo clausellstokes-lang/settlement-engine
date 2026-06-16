@@ -128,7 +128,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
       </div>
 
       {showDropdown && (
-        <ul
+        <div
           id="compendium-search-results"
           role="listbox"
           style={{
@@ -142,7 +142,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           {results.map((r, i) => {
             const color = CAT_COLOR[r.category] || GOLD;
             return (
-              <li key={r.id} role="option" aria-selected={i === active}>
+              <div key={r.id} role="option" aria-selected={i === active} aria-label={`${r.term} (${r.category})`}>
                 <button
                   type="button"
                   onMouseEnter={() => setActive(i)}
@@ -167,10 +167,10 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                     {r.category}
                   </span>
                 </button>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
       )}
 
       {showEmpty && (

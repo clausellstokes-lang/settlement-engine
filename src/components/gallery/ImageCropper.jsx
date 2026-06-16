@@ -155,6 +155,7 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           userSelect: 'none',
         }}
       >
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- onLoad is a resource-load lifecycle event (reads naturalWidth/Height to drive crop geometry), not a user interaction */}
         <img
           ref={imgRef}
           src={src}

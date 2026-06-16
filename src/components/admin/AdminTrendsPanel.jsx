@@ -23,7 +23,7 @@
  * supabase/migrations/040_analytics_trends.sql — that SQL is the security
  * boundary; an out-of-set key simply RAISES and the card shows the error.
  */
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo, useId } from 'react';
 import { supabase } from '../../lib/supabase.js';
 import {
   GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH,
@@ -132,10 +132,12 @@ const Empty = ({ msg = 'No data in range.' }) => (
 );
 
 function Select({ value, onChange, options, label }) {
+  const selectId = useId();
   return (
-    <label style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, fontFamily: sans, fontSize: FS.xs, color: SECOND }}>
+    <label htmlFor={selectId} style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, fontFamily: sans, fontSize: FS.xs, color: SECOND }}>
       {label && <span style={{ color: MUTED }}>{label}</span>}
       <select
+        id={selectId}
         value={value} onChange={(e) => onChange(e.target.value)}
         style={{
           fontFamily: sans, fontSize: FS.xs, color: INK, background: CARD, cursor: 'pointer',
@@ -349,7 +351,7 @@ function Heatmap({ rows }) {
       <table style={{ borderCollapse: 'collapse', fontFamily: sans, fontSize: FS.xxs }}>
         <thead>
           <tr>
-            <th style={{ padding: SP.xs }} />
+            <th aria-label="row versus column" style={{ padding: SP.xs }} />
             {colKeys.map((c) => (
               <th key={c} style={{ padding: SP.xs, color: MUTED, fontWeight: 600, textAlign: 'center', maxWidth: 64, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={c}>{c}</th>
             ))}
