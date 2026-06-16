@@ -13,22 +13,22 @@
  * the crisis-twin directive, and the crisisTripleSync structural pins assert
  * that the twin actions are referenced from settlementSlice itself.
  */
-import { saves as savesService } from '../lib/saves.js';
 import { inferSuccessors } from '../domain/entities/successors.js';
 import { inferImportance } from '../domain/entities/npcs.js';
+
+// A+ P0.1: persistSaveUpdate is UNIFIED. The canon settlement path (applyEvent,
+// undoLastEvent, recordSnapshot, revertToSnapshot, destroySavedSettlement) imports
+// persistSaveUpdate from here; re-exporting the single failure-reporting impl from
+// campaignSliceShared means those writes report cloud-save failures into
+// campaignSyncError (the CampaignSyncBanner) instead of silently console.warn-ing
+// and drifting from Supabase. There must be exactly ONE persistSaveUpdate definition.
+export { persistSaveUpdate } from './campaignSliceShared.js';
 
 const MAX_VERSION_HISTORY = 50;
 
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
   return JSON.parse(JSON.stringify(value));
-}
-
-export function persistSaveUpdate(saveId, partial) {
-  if (!saveId || !partial) return;
-  savesService.update(saveId, partial).catch(e => {
-    console.warn('[settlementSlice] save update failed', e);
-  });
 }
 
 export function cappedVersionHistory(history) {

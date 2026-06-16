@@ -159,8 +159,10 @@ export const createCampaignSlice = (set, get) => {
   // Route module-scoped persist failures (in campaignSliceShared) into store
   // state so the UI can warn the user instead of silently losing a cloud save.
   initPersistFailureReporter(() => set(state => {
-    state.campaignSyncError = 'Some campaign changes could not be saved to the cloud. '
-      + 'They are applied locally but may not persist — check your connection, then reopen the campaign to confirm.';
+    // Covers BOTH campaign saves and (since A+ P0.1 unified persistSaveUpdate) the
+    // canon settlement path — applied-locally-but-not-persisted, surfaced via the banner.
+    state.campaignSyncError = 'Some changes could not be saved to the cloud. '
+      + 'They are applied locally but may not persist — check your connection, then reload to confirm.';
   }));
 
   return {
