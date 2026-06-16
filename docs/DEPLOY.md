@@ -9,8 +9,8 @@ commands run with your Supabase + Stripe credentials.
 
 After pushing to `origin/master`:
 
-1. **CI**: `.github/workflows/ci.yml` runs the check gate (validate-data →
-   typecheck → lint → ~2,400 tests → build). Watch:
+1. **CI**: `.github/workflows/ci.yml` runs the check gate (validate data/edge/map
+   → typecheck → lint → ~4,480 tests → build). Watch:
    <https://github.com/clausellstokes-lang/settlement-engine/actions>
 
 2. **Vercel auto-deploy**: triggers on push to master. `vercel.json`
@@ -97,16 +97,23 @@ npx supabase db push
 npx supabase db diff
 ```
 
-**The last migration in tree (`024_billing_retention_and_atomic_mutations.sql`)**
-adds replay-safe Stripe grants, campaign/map downgrade retention, the scheduled
-retention purge, Chronicle credit spending, and atomic linked-settlement writes.
-It must be applied before deploying the corresponding functions and client.
-Test its core schema ran:
+**The current tree runs through `046_gallery_map_with_campaign.sql`.** A production
+DB that predates the analytics / map / gallery work needs the whole **036 → 046**
+set applied, in order:
+
+- `036`–`040` — analytics core, settlement snapshots, rollups, cron, trends
+- `041` — system-mutation capture
+- `042`–`043` — regional NPC reports + regional propagation report
+- `044` — map-backdrop storage (bucket + RLS)
+- `045`–`046` — gallery maps + map-with-campaign share
+
+`db push` applies every pending migration on top of the current schema; they must
+ALL land before deploying the corresponding functions and client. Confirm what is
+applied vs pending (don't assume):
 
 ```bash
-# Should return one row: version_history | jsonb
-npx supabase db remote sql --query \
-  "select column_name, data_type from information_schema.columns where table_schema = 'public' and table_name = 'saved_maps' and column_name = 'access_state';"
+npx supabase migration list   # applied (local + remote) vs pending
+npx supabase db diff          # an empty diff means remote schema matches the tree
 ```
 
 ## Edge function — manual
@@ -133,7 +140,13 @@ npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
 npx supabase functions deploy admin-actions
 npx supabase functions deploy send-email
+npx supabase functions deploy ingest-events       # analytics event sink (verify_jwt default — client sends anon JWT)
+npx supabase functions deploy analytics-export    # admin analytics/trends read API
 ```
+
+(Only `stripe-webhook` and `verify-single-dossier` set `verify_jwt = false` in
+`config.toml`; everything else keeps JWT verification on, so they deploy with no
+flag. There are 10 functions total — deploy all of them on a first cutover.)
 
 Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:
