@@ -31,6 +31,20 @@ import { enqueueEvent } from './analyticsQueue.js';
 
 export { EVENTS, EVENT_CLASS };
 
+// Per-event dev breadcrumb gate: ON in real dev, OFF under the test runner.
+// This console.info fires on EVERY successful track(), and track() is reached
+// through fire-and-forget dynamic imports (settlementSlice's edit/generation/
+// regional hooks). Vitest runs in DEV mode (import.meta.env.DEV === true), so
+// those late-resolving breadcrumbs landed during worker teardown and tripped
+// vitest's "Closing rpc while onUserConsoleLog was pending" race — an
+// intermittent, cross-file gate failure with no real test impact. Suppressing
+// just this high-frequency breadcrumb under test removes the race and the noise;
+// the error-path warns below stay on plain DEV so their tests still observe them
+// (they only fire on edge cases that the fire-and-forget paths never hit).
+const DEV_LOG = !!import.meta?.env?.DEV
+  && import.meta?.env?.MODE !== 'test'
+  && !(/** @type {any} */ (globalThis)?.process?.env?.VITEST);
+
 // ── Anon-prior tracking (drives SIGNUP_AFTER_ANON / PAID_AFTER_ANON) ───────
 const ANON_GENERATED_FLAG = 'sf_anon_generated_v1';
 
@@ -75,7 +89,7 @@ async function sendToProvider(event, props) {
     }
     return;
   }
-  if (import.meta?.env?.DEV) console.info(`[analytics] ${event}`, props);
+  if (DEV_LOG) console.info(`[analytics] ${event}`, props);
 }
 
 // ── Public API ─────────────────────────────────────────────────────────────
