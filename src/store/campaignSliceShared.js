@@ -8,7 +8,7 @@
  * surface. The module never imports campaignSlice, so there is no cycle.
  */
 import { saves as savesService } from '../lib/saves.js';
-import { campaigns as campaignService } from '../lib/campaigns.js';
+import { campaigns as campaignService, isCampaignActive } from '../lib/campaigns.js';
 import {
   forgetCampaignSync,
   primeCampaignSync,
@@ -18,6 +18,49 @@ import {
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
   return JSON.parse(JSON.stringify(value));
+}
+
+/** Unique, sorted channel-type enums from an array of regional impacts. */
+export function channelTypesFromImpacts(impacts) {
+  const set = new Set();
+  for (const impact of Array.isArray(impacts) ? impacts : []) {
+    const t = impact?.channelType;
+    if (typeof t === 'string' && t) set.add(t);
+  }
+  return [...set].sort();
+}
+
+export function newCampaignId() {
+  try {
+    if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  } catch {
+    // Fallback below.
+  }
+  // RFC-4122 v4-SHAPED fallback for browsers without crypto.randomUUID. It MUST
+  // satisfy isUuid(): a non-UUID id churns identity — migrateCampaign remints it
+  // and rowForCampaign omits a non-UUID id on upsert, so every reload mints a
+  // fresh duplicate cloud row. Random-filled (not timestamp-only) to stay
+  // collision-resistant under rapid creation.
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, ch => {
+    const r = (Math.random() * 16) | 0;
+    return (ch === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+  });
+}
+
+export function isUuid(value) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || ''));
+}
+
+export function findActiveCampaign(campaigns, campaignId) {
+  const campaign = campaigns.find(item => item.id === campaignId);
+  return isCampaignActive(campaign) ? campaign : null;
+}
+
+export function campaignSettlements(state, campaignId) {
+  const c = findActiveCampaign(state.campaigns, campaignId);
+  if (!c) return [];
+  const ids = new Set(c.settlementIds || []);
+  return (state.savedSettlements || []).filter(save => ids.has(save.id));
 }
 
 export function campaignCacheOwner(state) {
