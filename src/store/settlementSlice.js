@@ -64,8 +64,6 @@ import {
 } from '../domain/crisisLifecycle.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
-import { inferSuccessors }   from '../domain/entities/successors.js';
-import { inferImportance }   from '../domain/entities/npcs.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
 import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
 import {
@@ -79,10 +77,13 @@ import {
 // Workshop, sample fork — counts against the same 3/day allowance. The
 // cap used to live only in HomeHero, which let regeneration bypass it.
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
-import { saves as savesService } from '../lib/saves.js';
 import { activeSaveCount } from '../lib/saveAccess.js';
-
-const MAX_VERSION_HISTORY = 50;
+// WS4 decomposition — pure/leaf helpers extracted to a sibling.
+import {
+  cloneJson, persistSaveUpdate, cappedVersionHistory, saveEnvelopeFor,
+  visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
+  stripImpairmentsForEvent, computePendingSuccession,
+} from './settlementSliceHelpers.js';
 
 // ── Derived-config strip ────────────────────────────────────────────────
 // settlement.config is the RESOLVED effectiveConfig snapshot: pipeline steps
@@ -114,140 +115,6 @@ export function stripDerivedConfigKeys(config) {
   const out = { ...config };
   for (const key of DERIVED_CONFIG_KEYS) delete out[key];
   return out;
-}
-
-function cloneJson(value) {
-  if (value === undefined || value === null) return value;
-  return JSON.parse(JSON.stringify(value));
-}
-
-function persistSaveUpdate(saveId, partial) {
-  if (!saveId || !partial) return;
-  savesService.update(saveId, partial).catch(e => {
-    console.warn('[settlementSlice] save update failed', e);
-  });
-}
-
-function cappedVersionHistory(history) {
-  return Array.isArray(history) ? history.slice(-MAX_VERSION_HISTORY) : [];
-}
-
-function saveEnvelopeFor(saveId, save, settlement, campaignState) {
-  return {
-    ...(save || {}),
-    id: saveId || save?.id || settlement?.id || null,
-    name: save?.name || settlement?.name || 'Untitled Settlement',
-    tier: save?.tier || settlement?.tier || 'unknown',
-    settlement,
-    campaignState: campaignState || save?.campaignState || null,
-  };
-}
-
-function visibleSettlementIdsForCampaign(state, campaign) {
-  const placements = campaign?.mapState?.placements || state.mapState?.placements || {};
-  return Object.values(placements)
-    .map(p => p?.settlementId)
-    .filter(Boolean);
-}
-
-// ── Per-entity-kind nested array resolver ──────────────────────────────
-//
-// Mirrors the layout used by domain/userEdits.js#walkUserEdits and
-// aiOverlayVerifier#locateEntity. Centralized so a future schema move
-// (e.g. factions out of powerStructure) touches one map, not three.
-const ENTITY_ARRAY_PATH_BY_KIND = Object.freeze({
-  npc:             ['npcs'],
-  institution:     ['institutions'],
-  faction:         ['powerStructure', 'factions'],
-  conflict:        ['powerStructure', 'conflicts'],
-  hook:            ['hooks'],
-  plotHook:        ['plotHooks'],
-  condition:       ['activeConditions'],
-  supplyChain:     ['supplyChains'],
-  historicalEvent: ['history', 'historicalEvents'],
-  currentTension:  ['history', 'currentTensions'],
-});
-
-function _resolveEntity(settlement, kind, entityIndex) {
-  if (kind === 'settlement') return settlement;
-  const segs = ENTITY_ARRAY_PATH_BY_KIND[kind];
-  if (!segs) return null;
-  let ref = settlement;
-  for (const seg of segs) {
-    if (ref == null || typeof ref !== 'object') return null;
-    ref = ref[seg];
-  }
-  if (!Array.isArray(ref)) return null;
-  return ref[entityIndex] || null;
-}
-
-/**
- * Build a `campaignState` snapshot from the live slice for persistence
- * into a save record. Centralizing the shape means the round-trip
- * (save → reload → hydrateFromSave) is symmetric and a single edit
- * keeps both sides in step.
- */
-function pickleCampaignState(state) {
-  return {
-    phase:         state.phase || 'draft',
-    eventLog:      Array.isArray(state.eventLog) ? [...state.eventLog] : [],
-    systemState:   state.systemState ? JSON.parse(JSON.stringify(state.systemState)) : null,
-    locks:         state.locks ? { ...state.locks } : {},
-    generatedAt:   state.generatedAt || null,
-    editedAt:      new Date().toISOString(),
-    canonizedAt:   state.canonizedAt || null,
-    lastExportAt:  state.lastExportAt || null,
-    narrativeDrift: null,
-    exportState:   null,
-  };
-}
-
-/**
- * Curried predicate-flavored helper for undoLastEvent: returns a map
- * function that strips any impairment whose causeEventId matches the
- * supplied event id, and resets `status` to 'active' if no impairments
- * remain. Centralizing here keeps the undo logic consistent across
- * institution, faction, and npc entity lists.
- */
-const stripImpairmentsForEvent = (eventId) => (entity) => {
-  if (!entity) return entity;
-  const impairments = (entity.impairments || []).filter(i => i.causeEventId !== eventId);
-  const next = { ...entity, impairments };
-  // If undo also reversed a removal/destruction caused by the same
-  // event, restore status. We track removedByEventId on entities for this.
-  if (entity.removedByEventId === eventId) {
-    next.status = 'active';
-    delete next.removedByEventId;
-  } else if (entity.status === 'impaired' && impairments.length === 0) {
-    next.status = 'active';
-  }
-  return next;
-};
-
-/**
- * Successor detection for applyEvent: when a pillar-tier NPC dies, surface the
- * engine's ranked successor list so the DM doesn't have to invent a replacement
- * from scratch. The prompt is informational and dismissible; it does not block
- * other UI flow. Pure — reads the PRE-mutation settlement (the source of truth
- * for "who was alive and linked to whom"; the post-mutation copy already shows
- * the NPC as removed/dead). Returns null when no prompt is warranted.
- */
-function computePendingSuccession(settlement, event) {
-  if (event?.type !== 'KILL_NPC') return null;
-  const outgoing = (settlement.npcs || []).find(n =>
-    (n.id && n.id === event.targetId) ||
-    (n.name && n.name.toLowerCase() === String(event.targetId || '').toLowerCase()),
-  );
-  const importance = event.payload?.importance || (outgoing ? inferImportance(outgoing) : 'notable');
-  if (importance !== 'pillar' || !outgoing) return null;
-  return {
-    outgoingNpcId:   outgoing.id || outgoing.name,
-    outgoingNpcName: outgoing.name || 'Unknown',
-    outgoingRole:    outgoing.role || '',
-    linkedInstitutionIds: outgoing.linkedInstitutionIds || [],
-    suggestedSuccessorIds: inferSuccessors({ outgoing, settlement, limit: 3 }),
-    originEventId:   event.id,
-  };
 }
 
 /**
