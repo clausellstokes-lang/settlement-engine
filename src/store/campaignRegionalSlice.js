@@ -18,9 +18,13 @@ import {
   advanceWizardNewsFeed,
   applyRegionalImpact,
   conditionFromRegionalImpact,
+  deriveGraphWithDiscoveredCandidates,
+  deriveRegionalGraphFromSaves,
   ensureRegionalGraph,
   isRegionalImpactAvailable,
   queueRegionalImpacts,
+  setRegionalChannelStatus as domainSetRegionalChannelStatus,
+  setRegionalChannelVisibility as domainSetRegionalChannelVisibility,
   setRegionalImpactStatus as domainSetRegionalImpactStatus,
 } from '../domain/region/index.js';
 import {
@@ -35,16 +39,97 @@ import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import {
   cloneJson, persistCampaignState, persistSaveUpdate,
-  channelTypesFromImpacts, findActiveCampaign,
+  channelTypesFromImpacts, findActiveCampaign, campaignSettlements,
 } from './campaignSliceShared.js';
 import {
   campaignStateForRegionalImpact, appendWizardNewsForGraphChange,
-  campaignClockTick,
+  ensureCampaignWizardNews, campaignClockTick,
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
-import { extractRegionalImpactDecision } from '../lib/regionalFingerprint.js';
+import { extractRegionalImpactDecision, extractRegionalChannelChange } from '../lib/regionalFingerprint.js';
 
 export const createCampaignRegionalSlice = (set, get) => ({
+  /** Ensure a campaign has the current regional graph envelope. */
+  ensureCampaignRegionalGraph: (campaignId) => {
+    let graph = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      c.regionalGraph = ensureRegionalGraph(c.regionalGraph);
+      ensureCampaignWizardNews(c);
+      c.updatedAt = new Date().toISOString();
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    return graph;
+  },
+
+  /**
+   * Rebuild the structural graph from campaign settlements. Existing channel
+   * curation (status — confirmed/dormant/disabled all sticky — visibility,
+   * confirmedAt, original discoveredAt) is preserved; discovery only refreshes
+   * measurements and adds suggested P0 channels for new pairs.
+   */
+  rebuildCampaignRegionalGraph: (campaignId, options = {}) => {
+    const { discover = true } = options;
+    let graph = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const saves = campaignSettlements(state, campaignId);
+      c.regionalGraph = discover
+        ? deriveGraphWithDiscoveredCandidates(saves, c.regionalGraph, { now })
+        : deriveRegionalGraphFromSaves(saves, c.regionalGraph, { now });
+      ensureCampaignWizardNews(c);
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    return graph;
+  },
+
+  discoverCampaignRegionalChannels: (campaignId) => {
+    return get().rebuildCampaignRegionalGraph(campaignId, { discover: true });
+  },
+
+  setRegionalChannelStatus: (campaignId, channelId, status) => {
+    let graph = null;
+    let channelEvent = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      const before = (beforeGraph.channels || []).find(ch => ch.id === channelId);
+      // Build telemetry from the draft INSIDE set() (the channel proxy is revoked
+      // after set returns). was_dm_action: this action is DM-initiated curation.
+      if (before) channelEvent = extractRegionalChannelChange(before, before.status, status, true);
+      c.regionalGraph = domainSetRegionalChannelStatus(c.regionalGraph, channelId, status, { now });
+      ensureCampaignWizardNews(c);
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    if (channelEvent) track(EVENTS.REGIONAL_CHANNEL_STATUS_CHANGED, channelEvent);
+    return graph;
+  },
+
+  setRegionalChannelVisibility: (campaignId, channelId, visibility) => {
+    let graph = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const now = new Date().toISOString();
+      c.regionalGraph = domainSetRegionalChannelVisibility(c.regionalGraph, channelId, visibility, { now });
+      ensureCampaignWizardNews(c);
+      c.updatedAt = now;
+      graph = c.regionalGraph;
+      persistCampaignState(state, campaignId);
+    });
+    return graph;
+  },
+
   /**
    * Register an authored stressor as a ROAMING world-pulse stressor. The
    * APPLY_STRESSOR canon event bridges here (settlementSlice.applyEvent) so
