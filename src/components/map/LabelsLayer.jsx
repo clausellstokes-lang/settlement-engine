@@ -30,6 +30,7 @@ function Label({ label, onEditLabel }) {
   const selectedId    = useStore(s => s.selectedAnnotationId);
   const setSelected   = useStore(s => s.setSelectedAnnotationId);
   const updateLabel   = useStore(s => s.updateLabel);
+  const pushMapUndo   = useStore(s => s.pushMapUndo);
   const _deleteLabel   = useStore(s => s.deleteLabel);
 
   const dragRef = useRef(null);
@@ -67,7 +68,10 @@ function Label({ label, onEditLabel }) {
     if (!dragRef.current) return;
     const pt = eventToMap(e);
     if (!pt) return;
-    dragRef.current.moved = true;
+    if (!dragRef.current.moved) {
+      dragRef.current.moved = true;
+      pushMapUndo('move label'); // snapshot ONCE per drag, on the first real move
+    }
     updateLabel(label.id, {
       x: pt.x - dragRef.current.grabDx,
       y: pt.y - dragRef.current.grabDy,

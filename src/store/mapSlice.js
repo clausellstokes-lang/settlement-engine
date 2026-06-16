@@ -115,13 +115,34 @@ function freshMapState() {
   };
 }
 
-// Snapshot the current mapState onto the undo stack before a mutating annotate/
-// placement action, so the AnnotateToolbar Undo/Redo buttons actually work
-// (pushMapUndo was never called from anywhere). Operates on the immer draft.
+// The annotate/placement undo stack only needs the MUTABLE sub-slices — NOT the
+// heavy fmgSnapshot geography blob (often ~1MB+), the custom backdrop, layer
+// toggles, or the camera viewport. Snapshotting the whole mapState cloned that
+// blob on every label/marker/forest op (F6), and restoring it wrongly reverted
+// geography + camera on undo. We snapshot + restore only these keys.
+const MAP_UNDO_KEYS = ['placements', 'labels', 'markers', 'forests'];
+
+function snapshotAnnotations(mapState) {
+  const snap = {};
+  for (const k of MAP_UNDO_KEYS) {
+    snap[k] = JSON.parse(JSON.stringify(mapState[k] ?? (k === 'placements' ? {} : [])));
+  }
+  return snap;
+}
+
+function restoreAnnotations(mapState, snap) {
+  for (const k of MAP_UNDO_KEYS) {
+    if (snap[k] !== undefined) mapState[k] = JSON.parse(JSON.stringify(snap[k]));
+  }
+}
+
+// Snapshot the current annotation/placement sub-slices onto the undo stack
+// before a mutating annotate/placement action, so the AnnotateToolbar Undo/Redo
+// buttons work. Operates on the immer draft.
 function snapshotForUndo(state, action) {
   state.mapUndoStack.push({
     action,
-    snapshot: JSON.parse(JSON.stringify(state.mapState)),
+    snapshot: snapshotAnnotations(state.mapState),
     timestamp: Date.now(),
   });
   if (state.mapUndoStack.length > 30) state.mapUndoStack.shift();
@@ -481,17 +502,12 @@ export const createMapSlice = (set, get) => ({
     state.hoveredSettlementId = null;
   }),
 
-  // ── Undo/redo (coarse — snapshot-per-action) ──────────────────────────────
+  // ── Undo/redo (per-action snapshot of annotation/placement sub-slices) ─────
+  // Public action: components call this ONCE at drag-start (move/edit, which
+  // otherwise mutate per-pointermove and would flood the stack) so the whole
+  // drag collapses to a single undo entry.
   pushMapUndo: (action) => set(state => {
-    state.mapUndoStack.push({
-      action,
-      snapshot: JSON.parse(JSON.stringify(state.mapState)),
-      timestamp: Date.now(),
-    });
-    // Cap at 30 entries
-    if (state.mapUndoStack.length > 30) state.mapUndoStack.shift();
-    // Any new action invalidates redo
-    state.mapRedoStack = [];
+    snapshotForUndo(state, action);
   }),
 
   mapUndo: () => set(state => {
@@ -499,10 +515,12 @@ export const createMapSlice = (set, get) => ({
     if (!entry) return;
     state.mapRedoStack.push({
       action: entry.action,
-      snapshot: JSON.parse(JSON.stringify(state.mapState)),
+      snapshot: snapshotAnnotations(state.mapState),
       timestamp: Date.now(),
     });
-    state.mapState = entry.snapshot;
+    // Restore ONLY the annotation/placement sub-slices — geography (fmgSnapshot),
+    // layers, backdrop, and camera are left as they are.
+    restoreAnnotations(state.mapState, entry.snapshot);
   }),
 
   mapRedo: () => set(state => {
@@ -510,10 +528,10 @@ export const createMapSlice = (set, get) => ({
     if (!entry) return;
     state.mapUndoStack.push({
       action: entry.action,
-      snapshot: JSON.parse(JSON.stringify(state.mapState)),
+      snapshot: snapshotAnnotations(state.mapState),
       timestamp: Date.now(),
     });
-    state.mapState = entry.snapshot;
+    restoreAnnotations(state.mapState, entry.snapshot);
   }),
 
   // ── Derived selectors (also exposed on store/selectors.js) ────────────────

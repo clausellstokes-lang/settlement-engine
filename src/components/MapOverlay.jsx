@@ -40,6 +40,7 @@ export default function MapOverlay({ bridge, transformOut }) {
   const isDraggingOver = useStore(s => s.isDraggingOver);
   const updateLabel = useStore(s => s.updateLabel);
   const updateMarker = useStore(s => s.updateMarker);
+  const pushMapUndo = useStore(s => s.pushMapUndo);
   // Custom image backdrop (Project 1): when set, this overlay IS the whole map —
   // it renders the image inside the transformed <g> and OWNS pan/zoom (there is
   // no FMG iframe / bridge viewport to mirror).
@@ -317,9 +318,15 @@ export default function MapOverlay({ bridge, transformOut }) {
         confirmLabel="Save"
         onConfirm={(value) => {
           if (editDialog?.kind === 'marker') {
-            if (value !== editDialog.item.title) updateMarker(editDialog.item.id, { title: value });
+            if (value !== editDialog.item.title) {
+              pushMapUndo('edit marker'); // snapshot so the text edit is undoable
+              updateMarker(editDialog.item.id, { title: value });
+            }
           } else if (editDialog?.kind === 'label') {
-            if (value !== editDialog.item.text) updateLabel(editDialog.item.id, { text: value });
+            if (value !== editDialog.item.text) {
+              pushMapUndo('edit label');
+              updateLabel(editDialog.item.id, { text: value });
+            }
           }
           setEditDialog(null);
         }}
