@@ -70,6 +70,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
+import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { canonStressors } from '../../src/domain/canonicalAccessors.js';
 import { archetypeForStressor, promoteStressorsToConditions } from '../../src/domain/conditionPromotion.js';
@@ -109,6 +110,7 @@ function makeStore() {
     ...stubSlice(...a),
     ...createCampaignSlice(...a),
     ...createCampaignRegionalSlice(...a),
+    ...createCampaignWorldPulseSlice(...a),
     ...createSettlementSlice(...a),
   })));
 }
