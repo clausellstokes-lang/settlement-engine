@@ -69,12 +69,18 @@ import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { saves as savesService } from '../lib/saves.js';
 import { campaigns as campaignService, isCampaignActive } from '../lib/campaigns.js';
 import {
-  forgetCampaignSync,
   mergeCampaignLists,
   primeCampaignSync,
   reconcileTombstones,
   syncCampaignChanges,
 } from '../lib/campaignSync.js';
+// WS4 decomposition — pure utils + persistence helpers extracted to a sibling.
+import {
+  cloneJson, campaignCacheOwner, localWrite, persistCampaigns, persistCampaignState,
+  cacheCampaignState, syncCampaignSnapshot, deletePersistedCampaign, deletePersistedCampaignState,
+  clearCampaignSyncBookkeeping, persistSaveUpdate, persistSaveUpdates, flushWorldPulsePersist,
+  initPersistFailureReporter,
+} from './campaignSliceShared.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
 import { getConsent } from '../lib/consent.js';
@@ -108,71 +114,8 @@ function channelTypesFromImpacts(impacts) {
   return [...set].sort();
 }
 
-function campaignCacheOwner(state) {
-  return state?.auth?.user?.id ? String(state.auth.user.id) : 'anon';
-}
-
 function localLoad(ownerId = 'anon') {
   return campaignService.loadCached(ownerId).map(migrateCampaign);
-}
-
-function localWrite(campaigns, ownerId = 'anon') {
-  try {
-    campaignService.cache(campaigns, ownerId);
-  } catch (e) {
-    // Likely quota exceeded — FMG snapshots can be large (~1MB). The caller
-    // should already have warned via canSaveSnapshot(); log and continue.
-    console.warn('[campaignSlice] localStorage write failed', e);
-  }
-}
-
-function persistCampaigns(campaigns, changedId = null, ownerId = 'anon', options = {}) {
-  const snapshot = cloneJson(campaigns) || [];
-  localWrite(snapshot, ownerId);
-  const sync = syncCampaignChanges(snapshot, { service: campaignService, changedId });
-  if (options.strict) return sync;
-  sync.catch(e => {
-    console.warn('[campaignSlice] campaign cloud sync failed', e);
-  });
-  return sync;
-}
-
-function persistCampaignState(state, changedId = null, options = {}) {
-  return persistCampaigns(state.campaigns, changedId, campaignCacheOwner(state), options);
-}
-
-function cacheCampaignState(state) {
-  const ownerId = campaignCacheOwner(state);
-  const snapshot = cloneJson(state.campaigns) || [];
-  localWrite(snapshot, ownerId);
-  return { ownerId, snapshot };
-}
-
-function syncCampaignSnapshot(snapshot, changedId) {
-  return syncCampaignChanges(snapshot, { service: campaignService, changedId });
-}
-
-function deletePersistedCampaign(id, campaigns, ownerId = 'anon') {
-  const snapshot = cloneJson(campaigns) || [];
-  localWrite(snapshot, ownerId);
-  forgetCampaignSync(id);
-  if (!campaignService.isConfigured) return;
-  // Record a deletion tombstone BEFORE the async cloud delete. mergeCampaignLists
-  // reads it (at list()-resolve time) so an in-flight load or a stale cache copy
-  // can't resurrect the campaign while the cloud delete is still propagating.
-  campaignService.recordTombstone(id, ownerId);
-  campaignService.delete(id).catch(e => {
-    console.warn('[campaignSlice] campaign cloud delete failed', e);
-  });
-}
-
-function deletePersistedCampaignState(state, id) {
-  return deletePersistedCampaign(id, state.campaigns, campaignCacheOwner(state));
-}
-
-function cloneJson(value) {
-  if (value === undefined || value === null) return value;
-  return JSON.parse(JSON.stringify(value));
 }
 
 function newCampaignId() {
@@ -194,53 +137,6 @@ function newCampaignId() {
 
 function isUuid(value) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || ''));
-}
-
-// Set by createCampaignSlice so these module-scoped helpers can report a failed
-// cloud save into store state (the UI then warns the user). Module-level because
-// persistSaveUpdate is shared across many fire-and-forget call sites.
-let _reportPersistFailure = null;
-
-function persistSaveUpdate(saveId, partial) {
-  if (!saveId || !partial) return Promise.resolve(true);
-  // Still must not rethrow — several callers fire-and-forget, and a rejection
-  // here produced unhandled promise rejections. But the failure is no longer
-  // SILENT: it used to leave the user seeing success while Supabase drifted from
-  // local state (surfacing later as a settlement that "reverts" on reload). Now
-  // it reports to the store so the UI can warn. Returns true/false so awaited
-  // batch callers can react too.
-  return savesService.update(saveId, partial).then(() => true).catch(e => {
-    console.warn('[campaignSlice] save update failed', e);
-    try { _reportPersistFailure?.(e); } catch { /* reporting must never throw */ }
-    return false;
-  });
-}
-
-async function persistSaveUpdates(updates = []) {
-  for (const update of updates) {
-    await persistSaveUpdate(update.saveId, {
-      settlement: update.settlement,
-      campaignState: update.campaignState,
-      versionHistory: update.versionHistory,
-    });
-  }
-}
-
-/**
- * Shared persist tail for the world-pulse mutators (advanceCampaignWorld /
- * applyWorldPulseProposal / recordPartyImpact): flush the per-save updates, then
- * sync the campaign snapshot. Both awaits run only when the mutator produced
- * state. Failures inside persistSaveUpdates surface via campaignSyncError (see
- * persistSaveUpdate). Centralizing the pattern keeps the three call sites honest.
- */
-async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId }) {
-  if (!(result && campaignPersist)) return;
-  await persistSaveUpdates(persistUpdates);
-  await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
-}
-
-function clearCampaignSyncBookkeeping() {
-  primeCampaignSync([]);
 }
 
 function campaignStateForRegionalImpact(state, save, systemState, now) {
@@ -608,12 +504,12 @@ function migrateMapState(ms) {
 }
 
 export const createCampaignSlice = (set, get) => {
-  // Route module-scoped persist failures into store state so the UI can warn the
-  // user instead of silently losing a cloud save.
-  _reportPersistFailure = () => set(state => {
+  // Route module-scoped persist failures (in campaignSliceShared) into store
+  // state so the UI can warn the user instead of silently losing a cloud save.
+  initPersistFailureReporter(() => set(state => {
     state.campaignSyncError = 'Some campaign changes could not be saved to the cloud. '
       + 'They are applied locally but may not persist — check your connection, then reopen the campaign to confirm.';
-  });
+  }));
 
   return {
   // ── State ──────────────────────────────────────────────────────────────────
