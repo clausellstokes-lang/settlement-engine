@@ -37,12 +37,81 @@ const isConfigured = !!(supabaseUrl && supabaseAnon) && !forceLocalData;
 // refresh attempts — one wins, the other sees a fresh token on retry.
 const noopLock = async (_name, _acquireTimeout, fn) => await fn();
 
+// ── "Remember me off" → genuinely non-persistent session ─────────────────────
+//
+// Bug this fixes: signing in with persistSession:true + storage:localStorage and
+// then deleting the token once afterward did NOT work — autoRefreshToken rewrites
+// the refreshed token straight back into localStorage, so closing the browser and
+// reopening silently logged the user back in.
+//
+// Fix: ONE client with a custom storage ADAPTER that routes the auth token to
+// sessionStorage (cleared on browser/tab close) when "remember me" is off, and
+// localStorage otherwise. Because every write — including auto-refresh — goes
+// through the adapter, a session-only token never lands in localStorage. The
+// choice is recorded in sessionStorage (SESSION_ONLY_FLAG) so it survives in-tab
+// reloads but NOT a browser restart, which is exactly the desired scope.
+const SESSION_ONLY_FLAG = 'sf_session_only';
+
+const isSessionOnly = () => {
+  try { return sessionStorage.getItem(SESSION_ONLY_FLAG) === '1'; } catch { return false; }
+};
+
+// supabase-js writes the auth token under `sb-<ref>-auth-token` (and chunked
+// `.0/.1/...` variants for large tokens). It only ever calls setItem on save —
+// never removeItem on a mode switch — so we must purge the OTHER store's token
+// ourselves, or it survives to resurrect the session later.
+function purgeAuthTokens(store) {
+  try {
+    for (let i = store.length - 1; i >= 0; i--) {
+      const k = store.key(i);
+      if (k && k.startsWith('sb-') && k.includes('-auth-token')) store.removeItem(k);
+    }
+  } catch { /* ignore */ }
+}
+
+/**
+ * Call BEFORE sign-in. rememberMe=false routes the session to sessionStorage.
+ * CRITICAL: also purge the OTHER store's token. Without this, a returning user
+ * who signed in remember-ON (token in localStorage) then signs in remember-OFF
+ * leaves the stale localStorage token behind — and after a restart (the
+ * sessionStorage flag gone) the adapter reads localStorage and resurrects the
+ * session, defeating "remember me off".
+ */
+export function setSessionPersistence(rememberMe) {
+  try {
+    if (rememberMe) {
+      sessionStorage.removeItem(SESSION_ONLY_FLAG);
+      purgeAuthTokens(sessionStorage); // drop any leftover session-only token
+    } else {
+      sessionStorage.setItem(SESSION_ONLY_FLAG, '1');
+      purgeAuthTokens(localStorage);   // the load-bearing half — see above
+    }
+  } catch { /* storage unavailable — falls back to the localStorage default */ }
+}
+
+const authStorageAdapter = {
+  getItem: (key) => {
+    try { return (isSessionOnly() ? sessionStorage : localStorage).getItem(key); }
+    catch { return null; }
+  },
+  setItem: (key, value) => {
+    try { (isSessionOnly() ? sessionStorage : localStorage).setItem(key, value); }
+    catch { /* ignore */ }
+  },
+  removeItem: (key) => {
+    // Clear from BOTH so a mode switch / sign-out never strands a live token.
+    try { localStorage.removeItem(key); } catch { /* ignore */ }
+    try { sessionStorage.removeItem(key); } catch { /* ignore */ }
+  },
+};
+
 export const supabase = isConfigured
   ? createClient(supabaseUrl, supabaseAnon, {
       auth: {
         autoRefreshToken: true,
         persistSession: true,
         detectSessionInUrl: true,
+        storage: authStorageAdapter,
         lock: noopLock,
       },
     })

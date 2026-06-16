@@ -285,10 +285,33 @@ export const createCustomContentSlice = (set, get) => {
       localWrite(get().customContent, ownerId);
     } catch (err) {
       console.error('loadCustomContentFromCloud failed:', err);
-      set(state => {
-        state.customContentLoading = false;
-        state.customContentError = err.message;
-      });
+      // Offline / cloud-unreachable: fall back to the owner-scoped local mirror
+      // written on a prior successful sync, so a signed-in user keeps their
+      // custom content offline instead of seeing nothing. Guard on the same
+      // owner; show the stale-but-available content with no error.
+      let restored = false;
+      try {
+        if (ownerIdFromState(get()) === ownerId) {
+          const mirror = localLoad(ownerId);
+          if (mirror && Object.keys(mirror).length > 0) {
+            const merged = backfillLocalUids(migrateCustomContent({ ...EMPTY, ...mirror }));
+            set(state => {
+              state.customContent = merged;
+              state.customContentLoading = false;
+              state.customContentError = null;
+            });
+            restored = true;
+          }
+        }
+      } catch (mirrorErr) {
+        console.warn('custom-content local mirror restore failed:', mirrorErr);
+      }
+      if (!restored) {
+        set(state => {
+          state.customContentLoading = false;
+          state.customContentError = err.message;
+        });
+      }
     }
   },
 

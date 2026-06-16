@@ -2,13 +2,23 @@
  * tests/store/campaignSlice.regional.test.js
  */
 
-import { beforeEach, describe, expect, test } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
+
+// applyQueuedRegionalImpact now AWAITS the settlement save before marking the
+// campaign impact applied (F2 — ordered writes prevent split truth). So the
+// durable save must succeed for the apply to complete; stub it (matching
+// campaignSlice.worldPulse.test.js). Without this the gate correctly refuses to
+// mark applied when the (unconfigured) save layer fails.
+vi.mock('../../src/lib/saves.js', () => ({
+  saves: { update: vi.fn(() => Promise.resolve(true)), isConfigured: false },
+}));
 
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { ensureRegionalGraph, normalizeGoodsList } from '../../src/domain/region/index.js';
 import { findActiveCondition } from '../../src/domain/activeConditions.js';
+import { saves } from '../../src/lib/saves.js'; // the mocked module (for failure injection)
 
 function installLocalStorage() {
   const data = new Map();
@@ -58,7 +68,7 @@ describe('campaignSlice regional impact lifecycle', () => {
     localStorage.removeItem('dnd_settlement_saves');
   });
 
-  test('applyQueuedRegionalImpact materializes a condition and marks the impact applied', () => {
+  test('applyQueuedRegionalImpact materializes a condition and marks the impact applied', async () => {
     const store = makeStore();
     const impact = {
       id: 'regional_impact.test',
@@ -98,7 +108,7 @@ describe('campaignSlice regional impact lifecycle', () => {
       }];
     });
 
-    const result = store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
+    const result = await store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
     const saved = store.getState().savedSettlements[0];
     const graphImpact = store.getState().campaigns[0].regionalGraph.queuedImpacts[0];
 
@@ -122,7 +132,45 @@ describe('campaignSlice regional impact lifecycle', () => {
     )).toBe(true);
   });
 
-  test('applying an impact stamps the condition with the canonized world tick, not 0', () => {
+  test('F2: a failed settlement save leaves the campaign impact QUEUED (no split truth)', async () => {
+    const store = makeStore();
+    const impact = {
+      id: 'regional_impact.failsave',
+      kind: 'import_shortage',
+      sourceSettlementId: 'supplier',
+      targetSettlementId: 'buyer',
+      channelId: 'channel.trade_dependency.supplier.buyer.grain',
+      channelType: 'trade_dependency',
+      goods: normalizeGoodsList(['Bulk grain and foodstuffs']),
+      severity: 0.6,
+      status: 'queued',
+      sourceChange: { kind: 'export_lost' },
+      explanation: 'Granary Ford can no longer reliably supply grain.',
+    };
+    store.setState(state => {
+      state.savedSettlements = [{
+        id: 'buyer', name: 'Millcross', tier: 'town',
+        settlement: settlement('Millcross'),
+        campaignState: { phase: 'canon', eventLog: [], systemState: null, locks: {} },
+      }];
+      state.campaigns = [{
+        id: 'camp-1', name: 'Trade Belt', settlementIds: ['supplier', 'buyer'],
+        regionalGraph: ensureRegionalGraph({ queuedImpacts: [impact] }),
+      }];
+    });
+
+    // The settlement cloud save fails on this apply.
+    saves.update.mockRejectedValueOnce(new Error('network down'));
+    const result = await store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
+
+    // The campaign must NOT advertise the impact applied when the settlement
+    // never persisted — the two stay in agreement (both un-applied in the cloud),
+    // so a reload can't show "applied" without the condition.
+    expect(result).toBeNull();
+    expect(store.getState().campaigns[0].regionalGraph.queuedImpacts[0].status).toBe('queued');
+  });
+
+  test('applying an impact stamps the condition with the canonized world tick, not 0', async () => {
     const store = makeStore();
     const impact = {
       id: 'regional_impact.tick7',
@@ -155,12 +203,12 @@ describe('campaignSlice regional impact lifecycle', () => {
       }];
     });
 
-    store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
+    await store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
     const condition = store.getState().savedSettlements[0].settlement.activeConditions[0];
     expect(condition.triggeredAt.tick).toBe(7);
   });
 
-  test('without a canonized world the feed clock stamps the condition', () => {
+  test('without a canonized world the feed clock stamps the condition', async () => {
     const store = makeStore();
     const impact = {
       id: 'regional_impact.feedtick',
@@ -193,12 +241,12 @@ describe('campaignSlice regional impact lifecycle', () => {
       }];
     });
 
-    store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
+    await store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
     const condition = store.getState().savedSettlements[0].settlement.activeConditions[0];
     expect(condition.triggeredAt.tick).toBe(3);
   });
 
-  test('batch actions apply or ignore every queued regional impact', () => {
+  test('batch actions apply or ignore every queued regional impact', async () => {
     const store = makeStore();
     const impacts = ['one', 'two'].map(id => ({
       id: `regional_impact.${id}`,
@@ -230,7 +278,7 @@ describe('campaignSlice regional impact lifecycle', () => {
       }];
     });
 
-    const results = store.getState().applyAllQueuedRegionalImpacts('camp-1');
+    const results = await store.getState().applyAllQueuedRegionalImpacts('camp-1');
     expect(results).toHaveLength(2);
     expect(store.getState().campaigns[0].regionalGraph.queuedImpacts.every(i => i.status === 'applied')).toBe(true);
 
@@ -281,7 +329,7 @@ describe('campaignSlice regional impact lifecycle', () => {
   // into every domain helper it calls — the graph, the impact row, the news
   // entry, and the campaign all carry the same instant instead of several
   // separate wall-clock reads.
-  test('applyQueuedRegionalImpact stamps one instant everywhere', () => {
+  test('applyQueuedRegionalImpact stamps one instant everywhere', async () => {
     const store = makeStore();
     const impact = {
       id: 'regional_impact.one_instant',
@@ -314,7 +362,7 @@ describe('campaignSlice regional impact lifecycle', () => {
       }];
     });
 
-    store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
+    await store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
     const campaign = store.getState().campaigns[0];
     const instant = campaign.updatedAt;
     const row = campaign.regionalGraph.queuedImpacts[0];

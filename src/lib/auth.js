@@ -17,7 +17,7 @@
  *   (set via profiles.role only; user_metadata is not trusted)
  */
 
-import { supabase, isConfigured } from './supabase.js';
+import { supabase, isConfigured, setSessionPersistence } from './supabase.js';
 import { DEFAULT_MODEL_PREFERENCE, normalizeModelPreference } from '../config/pricing.js';
 
 // Owner-override email for CLIENT-SIDE admin-UI gating only — never a security
@@ -115,18 +115,14 @@ async function supabaseSignUp(email, password) {
 }
 
 async function supabaseSignIn(email, password, rememberMe = true) {
-  // When rememberMe is false, we still sign in but will clear persistence after
+  // Route persistence BEFORE sign-in so the token (and every auto-refresh after)
+  // is written to the correct store: sessionStorage when "remember me" is off
+  // (cleared on browser close), localStorage otherwise. This replaces the old
+  // one-time localStorage delete, which auto-refresh silently undid.
+  setSessionPersistence(rememberMe);
+
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw error;
-
-  // If rememberMe is false, set session persistence to memory-only
-  if (!rememberMe) {
-    // Session will exist for this page load only
-    try {
-      // Remove persisted session so it won't survive a page reload
-      localStorage.removeItem(`sb-${new URL(import.meta.env.VITE_SUPABASE_URL).hostname.split('.')[0]}-auth-token`);
-    } catch { /* ignore */ }
-  }
 
   const profile = await fetchProfileAuth(data.user);
   return authPayload(data.user, data.session, profile);

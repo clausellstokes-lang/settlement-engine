@@ -181,7 +181,15 @@ function newCampaignId() {
   } catch {
     // Fallback below.
   }
-  return `camp_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  // RFC-4122 v4-SHAPED fallback for browsers without crypto.randomUUID. It MUST
+  // satisfy isUuid(): a non-UUID id churns identity — migrateCampaign remints it
+  // and rowForCampaign omits a non-UUID id on upsert, so every reload mints a
+  // fresh duplicate cloud row. Random-filled (not timestamp-only) to stay
+  // collision-resistant under rapid creation.
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, ch => {
+    const r = (Math.random() * 16) | 0;
+    return (ch === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+  });
 }
 
 function isUuid(value) {
@@ -1613,18 +1621,27 @@ export const createCampaignSlice = (set, get) => {
     return proposal;
   },
 
-  applyQueuedRegionalImpact: (campaignId, impactId) => {
-    let result = /** @type {any} */ (null);
-    let impactDecision = /** @type {any} */ (null);
+  applyQueuedRegionalImpact: async (campaignId, impactId) => {
+    // ORDERED writes to prevent split truth (F2): the settlement is the source
+    // of truth for the condition, so the campaign graph must NOT advertise the
+    // impact 'applied' until that settlement is durably saved. Previously both
+    // writes were fire-and-forget and unordered, so a settlement-save failure
+    // after the campaign synced left a reload showing "applied" with no
+    // condition — permanently (the applied status blocks re-apply). We now never
+    // mark applied until the settlement save succeeds, so there is nothing to
+    // roll back.
+    let prepared = /** @type {any} */ (null);
+    // Phase 1 — apply the impact to the settlement LOCALLY (optimistic), capture
+    // a clone for the durable write, but leave the campaign graph 'queued'.
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const graph = ensureRegionalGraph(c.regionalGraph);
       const impact = graph.queuedImpacts.find(i => i.id === impactId);
       if (!impact || !isRegionalImpactAvailable(impact)) return;
-      // DM accepting a cross-settlement impact — the regional permission moment,
-      // previously uncaptured. Flatten the draft impact before set() revokes it.
-      impactDecision = extractRegionalImpactDecision(impact, 'applied', true);
+      // DM accepting a cross-settlement impact — the regional permission moment.
+      // Flatten the draft impact before set() revokes it.
+      const impactDecision = extractRegionalImpactDecision(impact, 'applied', true);
 
       const saveIdx = state.savedSettlements.findIndex(save =>
         String(save.id) === String(impact.targetSettlementId)
@@ -1632,10 +1649,8 @@ export const createCampaignSlice = (set, get) => {
       if (saveIdx === -1) return;
 
       const save = state.savedSettlements[saveIdx];
-      // No options meant conditionFromRegionalImpact fell back to tick 0:
-      // every regionally-applied condition claimed triggeredAt.tick 0
-      // forever. Stamp the campaign clock instead (batch apply reuses this
-      // action per impact, so it inherits the stamp).
+      // Stamp the campaign clock (batch apply reuses this action per impact, so
+      // it inherits the stamp).
       const nextSettlement = applyRegionalImpact(save.settlement, impact, { tick: campaignClockTick(c) });
       if (!nextSettlement) return;
 
@@ -1648,13 +1663,7 @@ export const createCampaignSlice = (set, get) => {
       }
 
       const campaignState = campaignStateForRegionalImpact(state, save, systemState, now);
-      const nextSave = {
-        ...save,
-        settlement: nextSettlement,
-        campaignState,
-        timestamp: now,
-      };
-      state.savedSettlements[saveIdx] = nextSave;
+      state.savedSettlements[saveIdx] = { ...save, settlement: nextSettlement, campaignState, timestamp: now };
 
       if (state.activeSaveId && String(state.activeSaveId) === String(save.id)) {
         state.settlement = nextSettlement;
@@ -1662,27 +1671,58 @@ export const createCampaignSlice = (set, get) => {
         state.editedAt = now;
       }
 
-      const beforeGraph = graph;
-      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'applied', { appliedAt: now }, { now });
-      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
-      c.updatedAt = now;
-      persistCampaignState(state, campaignId);
-
-      result = {
+      prepared = {
         saveId: save.id,
         settlement: cloneJson(nextSettlement),
         campaignState: cloneJson(campaignState),
-        timestamp: now,
         impact: cloneJson(impact),
+        now,
+        impactDecision,
       };
     });
 
-    if (result) {
-      persistSaveUpdate(result.saveId, {
-        settlement: result.settlement,
-        campaignState: result.campaignState,
-      });
-      if (impactDecision) track(EVENTS.REGIONAL_IMPACT_STATUS_CHANGED, impactDecision);
+    if (!prepared) return null;
+
+    // Phase 2 — persist the SETTLEMENT first and AWAIT it. persistSaveUpdate
+    // resolves false (never throws) and reports via campaignSyncError on failure.
+    const settlementSaved = await persistSaveUpdate(prepared.saveId, {
+      settlement: prepared.settlement,
+      campaignState: prepared.campaignState,
+    });
+    if (!settlementSaved) {
+      // Settlement never reached the cloud — leave the campaign impact 'queued'
+      // so the two agree on reload. The local optimistic condition reconciles on
+      // the next successful save / re-apply (idempotent). Failure already surfaced
+      // via campaignSyncError.
+      return null;
+    }
+
+    // Phase 3 — settlement is durable: NOW mark the campaign graph applied + sync.
+    let result = /** @type {any} */ (null);
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      // Guard against a concurrent change between phases: only mark applied if the
+      // impact is STILL queued. If a concurrent Ignore (or any status change)
+      // landed during the awaited save, don't clobber it back to 'applied' — the
+      // settlement is already saved with the condition; the DM's decision wins.
+      if (!beforeGraph.queuedImpacts.find(i => i.id === impactId && i.status === 'queued')) return;
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'applied', { appliedAt: prepared.now }, { now: prepared.now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: prepared.now });
+      c.updatedAt = prepared.now;
+      persistCampaignState(state, campaignId);
+      result = {
+        saveId: prepared.saveId,
+        settlement: prepared.settlement,
+        campaignState: prepared.campaignState,
+        timestamp: prepared.now,
+        impact: prepared.impact,
+      };
+    });
+
+    if (result && prepared.impactDecision) {
+      track(EVENTS.REGIONAL_IMPACT_STATUS_CHANGED, prepared.impactDecision);
     }
     return result;
   },
@@ -1753,14 +1793,19 @@ export const createCampaignSlice = (set, get) => {
     return result;
   },
 
-  applyAllQueuedRegionalImpacts: (campaignId) => {
+  applyAllQueuedRegionalImpacts: async (campaignId) => {
     const graph = get().getCampaignRegionalGraph(campaignId);
     const ids = graph.queuedImpacts
       .filter(impact => isRegionalImpactAvailable(impact))
       .map(impact => impact.id);
-    return ids
-      .map(id => get().applyQueuedRegionalImpact(campaignId, id))
-      .filter(Boolean);
+    // Sequential await — each impact's settlement save completes (and its campaign
+    // mark) before the next, keeping the ordered-write guarantee per impact.
+    const results = [];
+    for (const id of ids) {
+      const r = await get().applyQueuedRegionalImpact(campaignId, id);
+      if (r) results.push(r);
+    }
+    return results;
   },
 
   ignoreAllQueuedRegionalImpacts: (campaignId) => {

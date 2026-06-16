@@ -152,20 +152,28 @@ describe('Tier 8.8 — Funnel helpers', () => {
   });
 
   it('signupCompleted fires SIGNUP_AFTER_ANON only when anon-prior is true', async () => {
-    // SHA-256 hashing is async; both Funnel.signupCompleted dispatches
-    // fire as separate microtasks and may resolve in either order.
-    // Assert SET membership rather than array order — the contract is
-    // "these events fire", not "in this exact sequence."
+    // SHA-256 hashing is async; both Funnel.signupCompleted dispatches fire as
+    // separate microtasks and may resolve in either order. POLL for the expected
+    // events rather than a fixed sleep — a fixed wait flakes under full-suite load
+    // when the async hash + microtask chain runs long. Assert SET membership
+    // (the contract is "these events fire", not "in this exact sequence").
+    const eventSet = () => new Set(providerCalls.map(c => c.event));
+    const waitForCount = async (n, timeout = 1000) => {
+      const start = Date.now();
+      while (providerCalls.length < n && Date.now() - start < timeout) {
+        await new Promise(r => setTimeout(r, 5));
+      }
+    };
+
     Funnel.signupCompleted({ userId: 'u1' });
-    await new Promise(r => setTimeout(r, 10));
-    expect(new Set(providerCalls.map(c => c.event))).toEqual(new Set(['signup_completed']));
+    await waitForCount(1);
+    expect(eventSet()).toEqual(new Set(['signup_completed']));
     // Now mark anon and try again.
     markAnonGenerated();
     providerCalls.length = 0;
     Funnel.signupCompleted({ userId: 'u2' });
-    await new Promise(r => setTimeout(r, 10));
-    expect(new Set(providerCalls.map(c => c.event)))
-      .toEqual(new Set(['signup_completed', 'signup_after_anon']));
+    await waitForCount(2);
+    expect(eventSet()).toEqual(new Set(['signup_completed', 'signup_after_anon']));
   });
 
   it('paidAction fires PAID_AFTER_ANON only when anon-prior is true', () => {

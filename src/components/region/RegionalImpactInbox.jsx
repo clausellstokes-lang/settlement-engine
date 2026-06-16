@@ -52,8 +52,12 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
 
   if (!context || (!context.incoming.length && !context.outgoingEvents.length)) return null;
 
-  const handleApply = (impactId) => {
-    const result = applyQueuedRegionalImpact(context.campaign.id, impactId);
+  const handleApply = async (impactId) => {
+    // applyQueuedRegionalImpact is async now (it awaits the settlement save before
+    // marking the campaign applied — F2). The store updates the live settlement
+    // optimistically in phase 1; onApplied refreshes this detail's local copy
+    // once the durable write confirms.
+    const result = await applyQueuedRegionalImpact(context.campaign.id, impactId);
     if (result && String(result.saveId) === String(saveId)) onApplied?.(result);
   };
 
