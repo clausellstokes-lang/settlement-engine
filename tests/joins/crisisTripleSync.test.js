@@ -598,8 +598,9 @@ describe('source scan — the trio is written only through the lifecycle', () =>
     expect(codeOf('store/settlementSlice.js')).toMatch(/\btwinDirectiveForEvent\(/);
     expect(codeOf('store/settlementSlice.js')).toMatch(/\bcrisisWithdraw\(/);
     expect(codeOf('store/settlementSlice.js')).toMatch(/\bcrisisTwinFor\(/);
-    // …and the pulse's organic resolutions reach the origin settlement.
-    expect(codeOf('store/campaignSlice.js')).toMatch(/\bwithOrganicStressorResolution\(/);
+    // …and the pulse's organic resolutions reach the origin settlement
+    // (applyWorldPulseResultToState was extracted to campaignPulseHelpers in WS4).
+    expect(codeOf('store/campaignPulseHelpers.js')).toMatch(/\bwithOrganicStressorResolution\(/);
     expect(codeOf('domain/worldPulse/stressorAftermath.js')).toMatch(/\bresolveCrisisLocally\(/);
   });
 });
