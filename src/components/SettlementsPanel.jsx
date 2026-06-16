@@ -764,6 +764,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // ── Rename ──────────────────────────────────────────────────────────────
   const applyRename = (type, id, oldName, newName) => {
     if (!newName.trim() || newName.trim() === oldName) return;
+    // Campaign-clock identity lock (defense in depth): NPC + faction names freeze
+    // once the owning settlement is canonized. The detail view hides the rename
+    // affordance, but guard the persisting mutation itself so no future caller
+    // can rename a canon settlement's NPCs/factions. Settlement-name renames and
+    // the draft phase are unaffected.
+    if ((type === 'npc' || type === 'faction') && canonPhaseOf(detail?.saveData) === 'canon') return;
     const trimmed = newName.trim();
     const saveId = detail?.saveData?.id;
     let updatedSaves = saves.map(s => {

@@ -79,6 +79,51 @@ export async function updateGalleryMetadata(settlementId, metadata = {}) {
   return patch;
 }
 
+// ── Map gallery (Project 2) ──────────────────────────────────────────────────
+// Maps publish from saved_maps (the campaign row). All public reads go through
+// SECURITY DEFINER RPCs (migration 045). campaignId IS the saved_maps row id for
+// cloud-synced campaigns; a local-only (non-uuid) campaign must sync first.
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/** Publish a campaign's map to the gallery. kind: 'map' (blank canvas) | 'map_with_campaign'. */
+export async function shareMap(campaignId, { kind = 'map', description = '', tags = null } = {}) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  if (!UUID_RE.test(String(campaignId || ''))) throw new Error('Save this campaign to the cloud before sharing its map.');
+  const { data, error } = await supabase.rpc('publish_map', {
+    target_id: campaignId,
+    p_kind: kind === 'map_with_campaign' ? 'map_with_campaign' : 'map',
+    p_description: description ? String(description).slice(0, 500) : null,
+    p_tags: Array.isArray(tags) && tags.length ? tags.slice(0, 12) : null,
+  });
+  if (error) throw new Error(error.message || 'Map share failed');
+  try { track(EVENTS.GALLERY_PUBLISHED, { kind }); } catch { /* analytics never affects publish */ }
+  return data; // slug
+}
+
+export async function unshareMap(campaignId) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  const { error } = await supabase.rpc('unpublish_map', { target_id: campaignId });
+  if (error) throw new Error(error.message || 'Map unshare failed');
+  try { track(EVENTS.GALLERY_UNPUBLISHED, { kind: 'map' }); } catch { /* never affects unshare */ }
+}
+
+/** Browse public maps (anonymized tiles). */
+export async function fetchGalleryMaps({ page = 0, pageSize = 24 } = {}) {
+  if (!isConfigured) return { items: [] };
+  const { data, error } = await supabase.rpc('list_gallery_maps', { p_page: page, p_page_size: pageSize });
+  if (error) throw new Error(error.message || 'Could not load shared maps');
+  return { items: Array.isArray(data) ? data : [] };
+}
+
+/** Fetch one public map payload (blank-canvas backdrop in Phase 1). */
+export async function fetchGalleryMap(slug) {
+  if (!isConfigured || !slug) return null;
+  const { data, error } = await supabase.rpc('get_gallery_map', { p_slug: slug });
+  if (error) throw new Error(error.message || 'Could not load that map');
+  return data || null;
+}
+
 /**
  * Fetch the public gallery listing.
  *

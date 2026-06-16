@@ -33,13 +33,18 @@ import PlacementsLayer   from './map/PlacementsLayer.jsx';
 import { MAP_MODES }     from '../store/mapSlice.js';
 import { TextInputDialog } from './primitives/Dialog.jsx';
 
-export default function MapOverlay({ bridge }) {
+export default function MapOverlay({ bridge, transformOut }) {
   const mapMode       = useStore(s => s.mapMode);
   const annotateTool  = useStore(s => s.annotateTool);
   const layers        = useStore(s => s.mapState.layers);
   const isDraggingOver = useStore(s => s.isDraggingOver);
   const updateLabel = useStore(s => s.updateLabel);
   const updateMarker = useStore(s => s.updateMarker);
+  // Custom image backdrop (Project 1): when set, this overlay IS the whole map —
+  // it renders the image inside the transformed <g> and OWNS pan/zoom (there is
+  // no FMG iframe / bridge viewport to mirror).
+  const customBackdrop = useStore(s => s.mapState.customBackdrop);
+  const imageMode = !!customBackdrop?.imageUrl;
 
   const wrapperRef = useRef(null);
   const gRef = useRef(null);
@@ -56,7 +61,7 @@ export default function MapOverlay({ bridge }) {
 
   // ── Viewport sync ────────────────────────────────────────────────────
   useEffect(() => {
-    if (!bridge) return;
+    if (!bridge || imageMode) return; // image mode owns its own pan/zoom below
 
     const applyViewport = (vp) => {
       if (!vp || typeof vp !== 'object') return;
@@ -91,7 +96,81 @@ export default function MapOverlay({ bridge }) {
       .catch(() => {});
 
     return () => { off?.(); };
-  }, [bridge]);
+  }, [bridge, imageMode]);
+
+  // ── Image-mode pan/zoom (self-owned; no FMG to mirror) ────────────────
+  const fittedRef = useRef(null); // imageUrl we've already fit, so we don't re-fit on every tick
+  useEffect(() => {
+    if (!imageMode) return;
+    const el = wrapperRef.current;
+    if (!el) return;
+    const W = size.width || el.getBoundingClientRect().width || 1;
+    const H = size.height || el.getBoundingClientRect().height || 1;
+    const imgW = Number(customBackdrop.w) || W;
+    const imgH = Number(customBackdrop.h) || H;
+
+    const applyT = (t) => {
+      transformRef.current = { ...transformRef.current, ...t, width: W, height: H };
+      if (transformOut) transformOut.current = transformRef.current; // live read for the drop handler
+      const { tx, ty, scale } = transformRef.current;
+      if (gRef.current) gRef.current.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
+      schedulePersist(tx, ty, scale, W, H);
+    };
+
+    // Initial fit: contain the image, centered — once per image (or reuse a
+    // meaningful persisted viewport so a reloaded campaign keeps its camera).
+    // Require a real layout box: if the overlay mounts before the flex column has
+    // sized (W/H ≈ 0→1), DON'T commit fittedRef, so a later ResizeObserver run
+    // performs the real fit instead of locking in a degenerate camera.
+    if (W > 1 && H > 1 && fittedRef.current !== customBackdrop.imageUrl) {
+      fittedRef.current = customBackdrop.imageUrl;
+      const persisted = useStore.getState().mapState.viewport;
+      // Only restore a camera that was saved IN image mode (same coordinate
+      // space). A fresh import reset the viewport, so this falls through to fit.
+      if (persisted && persisted.mode === 'image' && persisted.scale && persisted.width) {
+        const scale = persisted.scale;
+        applyT({ scale, tx: W / 2 - (persisted.cx || 0) * scale, ty: H / 2 - (persisted.cy || 0) * scale });
+      } else {
+        const scale = Math.min(W / imgW, H / imgH) || 1;
+        applyT({ scale, tx: (W - imgW * scale) / 2, ty: (H - imgH * scale) / 2 });
+      }
+    }
+
+    // Only pan when the gesture starts on the background/image, not on a
+    // placement icon or annotation (those manage their own pointer handling).
+    const isBackground = (target) => target === el || target.tagName === 'svg' || target.tagName === 'image';
+    let panning = false; let lastX = 0; let lastY = 0;
+    const onDown = (e) => {
+      if (e.button !== 0 || !isBackground(e.target)) return;
+      panning = true; lastX = e.clientX; lastY = e.clientY;
+      try { el.setPointerCapture?.(e.pointerId); } catch { /* ignore */ }
+    };
+    const onMove = (e) => {
+      if (!panning) return;
+      applyT({ tx: transformRef.current.tx + (e.clientX - lastX), ty: transformRef.current.ty + (e.clientY - lastY) });
+      lastX = e.clientX; lastY = e.clientY;
+    };
+    const onUp = () => { panning = false; };
+    const onWheel = (e) => {
+      e.preventDefault();
+      const rect = el.getBoundingClientRect();
+      const cx = e.clientX - rect.left; const cy = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.1 : 1 / 1.1;
+      const next = Math.max(0.1, Math.min(8, transformRef.current.scale * factor));
+      const k = next / transformRef.current.scale;
+      applyT({ scale: next, tx: cx - (cx - transformRef.current.tx) * k, ty: cy - (cy - transformRef.current.ty) * k });
+    };
+    el.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      el.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      el.removeEventListener('wheel', onWheel);
+    };
+  }, [imageMode, customBackdrop?.imageUrl, customBackdrop?.w, customBackdrop?.h, size.width, size.height]);
 
   // ── Wrapper size sync (drives viewBox) ──────────────────────────────
   // Watch the wrapper's rendered rect via ResizeObserver. Toggling the
@@ -138,8 +217,10 @@ export default function MapOverlay({ bridge }) {
   const wrapperStyle = {
     position: 'absolute',
     inset: 0,
-    pointerEvents: overlayInteractive ? 'auto' : 'none',
+    // Image mode: the overlay IS the map, so it must capture pan/zoom + drops.
+    pointerEvents: (overlayInteractive || imageMode) ? 'auto' : 'none',
     zIndex: 5,  // above iframe, below DOM toolbars
+    cursor: imageMode && !overlayInteractive ? 'grab' : undefined,
   };
 
   const svgStyle = {
@@ -202,10 +283,24 @@ export default function MapOverlay({ bridge }) {
           />
         )}
 
-        {/* Content group — transformed to match FMG's d3 zoom */}
+        {/* Content group — transformed to match FMG's d3 zoom (image mode: a
+            self-owned pan/zoom transform). The custom backdrop is the bottom
+            child so all app layers sit on top of it and pan/zoom together. */}
         <g ref={gRef}>
+          {imageMode && (
+            <image
+              href={customBackdrop.imageUrl}
+              x={0} y={0}
+              width={Number(customBackdrop.w) || undefined}
+              height={Number(customBackdrop.h) || undefined}
+              preserveAspectRatio="xMidYMid meet"
+              style={{ pointerEvents: 'none' }}
+            />
+          )}
           {layers.forests       && <ForestsLayer />}
-          {layers.roads         && <RoadsLayer bridge={bridge} />}
+          {/* Geography-derived charted trails need FMG pack.cells — omitted in
+              image mode (relationship/chain straight-line edges still render). */}
+          {layers.roads && !imageMode && <RoadsLayer bridge={bridge} />}
           {layers.chains        && <ChainEdges />}
           {layers.relationships && <RelationshipEdges />}
           <RegionalCausalityLayer />

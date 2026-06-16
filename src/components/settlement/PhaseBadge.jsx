@@ -11,7 +11,7 @@
  */
 
 import { useState } from 'react';
-import { Edit3, BookMarked, RotateCcw } from 'lucide-react';
+import { Edit3, BookMarked, RotateCcw, Lock } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { GOLD, GOLD_BG, INK, sans, FS, R } from '../theme.js';
@@ -27,6 +27,11 @@ export default function PhaseBadge() {
   const canonize  = useStore(s => s.canonize);
   const uncanonize = useStore(s => s.uncanonize);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
+  // Campaign-clock (Phase C3): a settlement bound to a canonized campaign world
+  // can't be individually reset — its lifecycle is the world-map clock's now.
+  const activeSaveId = useStore(s => s.activeSaveId);
+  const clockBound = useStore(s =>
+    typeof s.isSettlementClockBound === 'function' && s.isSettlementClockBound(activeSaveId));
   const [confirmAction, setConfirmAction] = useState(null);
 
   const c = COLORS[phase] || COLORS.draft;
@@ -87,7 +92,7 @@ export default function PhaseBadge() {
             <BookMarked size={11} /> Canonize
           </button>
         )}
-        {phase === 'canon' && (
+        {phase === 'canon' && !clockBound && (
           <button
             onClick={onReset}
             title="Reset to draft and clear the event timeline"
@@ -95,6 +100,20 @@ export default function PhaseBadge() {
           >
             <RotateCcw size={11} /> Reset
           </button>
+        )}
+        {phase === 'canon' && clockBound && (
+          <span
+            title="On the world-map clock — reset is at the map level (undo a World Pulse). The settlement can't be individually reset to draft."
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 4,
+              padding: '3px 8px',
+              background: GOLD_BG, color: INK,
+              border: `1px solid ${GOLD}`, borderRadius: R.sm,
+              fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
+            }}
+          >
+            <Lock size={10} /> Clock-bound
+          </span>
         )}
       </div>
       <ConfirmDialog

@@ -20,6 +20,7 @@ import PhaseBadge       from './settlement/PhaseBadge.jsx';
 import SystemStateBar   from './settlement/SystemStateBar.jsx';
 import EventComposer    from './settlement/EventComposer.jsx';
 import Timeline         from './settlement/Timeline.jsx';
+import PendingIntentions from './settlement/PendingIntentions.jsx';
 import CoherencePanel   from './settlement/CoherencePanel.jsx';
 // Wave 2 audit components: contextual AI, action rail, provenance,
 // export sheet picker. Each is small and additive — they replace
@@ -325,6 +326,11 @@ export default function SettlementDetail({
   const aiDailyLife  = useStore(s => s.aiDailyLife);
   const narrated = !!(aiSettlement || aiDailyLife);
 
+  // Campaign-clock identity lock: NPC + faction names freeze once the settlement
+  // is canonized. The store hydrates `phase` from the opened save, so the live
+  // store value tracks this detail view. Renames are a draft-only affordance.
+  const isCanonLocked = useStore(s => s.phase) === 'canon';
+
   // Tier 5.4 — premium-gated manual editing. The edit toggle lives on
   // the store so per-tab EditableText components can read it without
   // prop threading. Non-premium users see a greyed-out button that
@@ -380,6 +386,8 @@ export default function SettlementDetail({
 
   // Wrapper: call parent applyRename then clear local edit state
   const handleApplyRename = (type, id, oldName, newName) => {
+    // Names freeze at canonization — guard even though the affordance is hidden.
+    if (isCanonLocked && (type === 'npc' || type === 'faction')) return;
     applyRename(type, id, oldName, newName);
     setEditingName(null);
     setEditDraft('');
@@ -629,6 +637,7 @@ export default function SettlementDetail({
       />
       <CoherencePanel />
       <EventComposer />
+      <PendingIntentions />
       <Timeline />
       <RegionalImpactInbox
         saveId={detail?.saveData?.id || detail?.id}
@@ -714,6 +723,12 @@ export default function SettlementDetail({
           <span style={{fontSize:FS.xs,color:MUTED,marginLeft:4}}>{editNamesOpen?'▲':'▼'}</span>
         </button>
         {editNamesOpen&&<div style={{padding:'10px 14px',background:CARD,borderTop:`1px solid ${BORDER}`}}>
+        {isCanonLocked ? (
+          <div style={{fontSize:FS.xs,color:MUTED,fontStyle:'italic',lineHeight:1.6}}>
+            🔒 NPC and faction names are locked once this settlement is canonized.
+            Reset it to draft (Phase badge above) if you need to rename them.
+          </div>
+        ) : (<>
 
           {/* NPCs */}
           {(detail.settlement.npcs||[]).length>0&&<>
@@ -809,6 +824,8 @@ export default function SettlementDetail({
             Renaming updates this settlement's JSON export and any linked neighbour references.
             Press Enter or click Save to confirm. Escape to cancel.
           </p>
+        </>
+        )}
         </div>}
       </div>}
 

@@ -55,6 +55,16 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 const uuidOrNull = (v: unknown) => (typeof v === 'string' && UUID_RE.test(v) ? v : null);
 const strShort = (v: unknown) => (typeof v === 'string' && v.length <= 64 ? v : null);
 const tsOrNull = (v: unknown) => (typeof v === 'number' && isFinite(v) ? new Date(v).toISOString() : null);
+// numOrNull preserves 0 (defense scores / counts can legitimately be 0 — the
+// older `Number(x) || null` idiom silently dropped them).
+const numOrNull = (v: unknown) => {
+  const n = typeof v === 'number' ? v : (typeof v === 'string' && v.trim() !== '' ? Number(v) : NaN);
+  return isFinite(n) ? n : null;
+};
+const boolOrNull = (v: unknown) => (typeof v === 'boolean' ? v : null);
+/** Sanitize a text[] hot column: short strings only, capped. */
+const strArr = (v: unknown) =>
+  Array.isArray(v) ? v.filter((x) => typeof x === 'string' && x.length <= 64).slice(0, 64) : null;
 
 /** Server-side prose backstop: drop string props longer than 64 chars. */
 function stripProps(props: unknown): Record<string, unknown> {
@@ -149,7 +159,7 @@ serve(async (req: Request) => {
   const sessionId = uuidOrNull(body.sessionId);
   const country = (req.headers.get('cf-ipcountry') || req.headers.get('x-vercel-ip-country') || '').slice(0, 2).toUpperCase() || null;
   const eventsRev = Number(body.eventsRev) || 1;
-  const accepted = { events: 0, edits: 0, snapshots: 0 };
+  const accepted = { events: 0, edits: 0, snapshots: 0, pulseEffects: 0 };
   const rejected: Array<{ seq: unknown; reason: string }> = [];
 
   // ── Events ──────────────────────────────────────────────────────────────────
@@ -178,11 +188,24 @@ serve(async (req: Request) => {
       if (!KNOWN_EDIT_KINDS.has(ed?.kind)) { rejected.push({ seq: ed?.seq, reason: 'unknown_kind' }); continue; }
       const su = uuidOrNull(ed.settlementUuid);
       if (!su) { rejected.push({ seq: ed?.seq, reason: 'invalid_settlement' }); continue; }
+      // Server-side allowlist (mirrors the events-plane stripProps backstop):
+      // RECONSTRUCT payload_redacted + cascade from only the known enum/count
+      // keys so a hostile/buggy client on this public --no-verify-jwt sink cannot
+      // land edit prose (newName/value/summaryLines) in edit_events.
+      const pr = (ed.payloadRedacted && typeof ed.payloadRedacted === 'object') ? ed.payloadRedacted : {};
+      const cas = (ed.cascade && typeof ed.cascade === 'object') ? ed.cascade : null;
+      const casDown = (cas && typeof cas.downstream === 'object') ? cas.downstream : {};
       editRows.push({
         actor_id: actorId, session_id: sessionId, settlement_uuid: su, snapshot_id: null,
         kind: ed.kind, target_kind: strShort(ed.targetKind),
-        payload_redacted: (ed.payloadRedacted && typeof ed.payloadRedacted === 'object') ? ed.payloadRedacted : {},
-        cascade: (ed.cascade && typeof ed.cascade === 'object') ? ed.cascade : null,
+        payload_redacted: { target_kind: strShort(pr.target_kind), change_tier: strShort(pr.change_tier) },
+        cascade: cas ? {
+          narrative_impact: strShort(cas.narrative_impact),
+          downstream: {
+            npcs: numOrNull(casDown.npcs), hooks: numOrNull(casDown.hooks),
+            factions: numOrNull(casDown.factions), linked_saves: numOrNull(casDown.linked_saves),
+          },
+        } : null,
         edit_seq: Number(ed.editSeq) || 0, reverted: ed.reverted === true,
         client_ts: tsOrNull(ed.ts), batch_id: batchId, seq: Number(ed.seq) || (1000 + editRows.length),
       });
@@ -205,16 +228,52 @@ serve(async (req: Request) => {
     snapRows.push({
       actor_id: actorId, session_id: sessionId, settlement_uuid: su, capture_point: cp, consent_tier: tier,
       tier: strShort(hot.tier), population_band: strShort(hot.population_band), prosperity: strShort(hot.prosperity),
-      faction_count: Number(hot.faction_count) || null, institution_count: Number(hot.institution_count) || null,
-      npc_count: Number(hot.npc_count) || null, condition_count: Number(hot.condition_count) || null,
-      stressor_count: Number(hot.stressor_count) || null, campaign_phase: strShort(hot.campaign_phase),
+      faction_count: numOrNull(hot.faction_count), institution_count: numOrNull(hot.institution_count),
+      npc_count: numOrNull(hot.npc_count), condition_count: numOrNull(hot.condition_count),
+      stressor_count: numOrNull(hot.stressor_count), campaign_phase: strShort(hot.campaign_phase),
       narrative_mode: strShort(hot.narrative_mode),
+      // Previously-dropped 037 columns — now written (research-tier hot fields).
+      food_resilience: numOrNull(hot.food_resilience), legitimacy: numOrNull(hot.legitimacy),
+      defense_military: numOrNull(hot.defense_military), defense_monster: numOrNull(hot.defense_monster),
+      defense_internal: numOrNull(hot.defense_internal), defense_economic: numOrNull(hot.defense_economic),
+      defense_magical: numOrNull(hot.defense_magical),
+      condition_archetypes: strArr(hot.condition_archetypes),
+      schema_version: strShort(hot.schema_version), generator_version: strShort(hot.generator_version),
+      seed: tier === 'research' ? strShort(hot.seed) : null,
+      // variance grouping key (essential — a non-personal hash)
+      config_signature: strShort(hot.config_signature), used_random_sentinels: boolOrNull(hot.used_random_sentinels),
       structural, fingerprint_hash: s.fingerprintHash.slice(0, 64),
     });
   }
   if (snapRows.length) {
     const { error } = await admin.from('settlement_snapshots').upsert(snapRows, { onConflict: 'settlement_uuid,capture_point,fingerprint_hash', ignoreDuplicates: true });
     if (!error) accepted.snapshots = snapRows.length;
+  }
+
+  // ── World-pulse effect ledger (research plane only; allowlist re-validated) ──
+  if (tier === 'research') {
+    const peRows: Record<string, unknown>[] = [];
+    const pulseEffects = Array.isArray(body.pulseEffects) ? body.pulseEffects.slice(0, 60) : [];
+    for (const p of pulseEffects) {
+      if (!p || typeof p !== 'object') { rejected.push({ seq: p?.seq, reason: 'invalid_pulse_effect' }); continue; }
+      peRows.push({
+        actor_id: actorId, session_id: sessionId, settlement_uuid: uuidOrNull(p.settlement_uuid),
+        tick: numOrNull(p.tick), interval: strShort(p.interval),
+        effect_kind: strShort(p.effect_kind), subject_kind: strShort(p.subject_kind),
+        candidate_type: strShort(p.candidate_type), rule_family: strShort(p.rule_family),
+        stressor_type: strShort(p.stressor_type), genesis: strShort(p.genesis),
+        apply_mode: strShort(p.apply_mode), was_proposal: boolOrNull(p.was_proposal),
+        severity_band: strShort(p.severity_band), probability_band: strShort(p.probability_band),
+        population_delta_band: strShort(p.population_delta_band), tier_direction: strShort(p.tier_direction),
+        affected_settlement_count: numOrNull(p.affected_settlement_count),
+        consent_tier: 'research', app_version: strShort(body.appVersion),
+        client_ts: tsOrNull(p.ts), batch_id: batchId, seq: Number(p.seq) || (3000 + peRows.length),
+      });
+    }
+    if (peRows.length) {
+      const { error } = await admin.from('world_pulse_effects').upsert(peRows, { onConflict: 'batch_id,seq', ignoreDuplicates: true });
+      if (!error) accepted.pulseEffects = peRows.length;
+    }
   }
 
   return json({ accepted, rejected }, 202, headers);

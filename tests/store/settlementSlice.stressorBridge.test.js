@@ -145,7 +145,13 @@ function seedStore(store, phase = 'canon') {
       settlementIds: ['ashford'],
       regionalGraph: ensureRegionalGraph(),
       wizardNews: { currentTick: 0, entries: [] },
-      worldState: { rngSeed: 'bridge-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      // The IMMEDIATE applyEvent→world bridge fires on settlement-canon +
+      // membership; it never required world canonization. Keep the world
+      // un-canonized so this settlement stays non-clock-bound and its events
+      // resolve at author time. (Once the WORLD is canonized the settlement is
+      // clock-bound and events queue to the pulse — the drain-time injection is
+      // covered in tests/joins/campaignClockQueue.test.js.)
+      worldState: { rngSeed: 'bridge-seed', tick: 0, canonizedAt: null },
     }];
   });
   store.getState().hydrateFromSave(save);

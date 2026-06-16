@@ -93,6 +93,13 @@ function freshMapState() {
     // FMG geography snapshot (base64 blob, nullable if not yet captured)
     fmgSnapshot: null,
     seed: null,
+    // Custom image backdrop (premium). When set, the map renders this image
+    // instead of the FMG terrain and suppresses heightmap/biome tools + the
+    // geography-derived charted trails. { imageUrl, w, h } | null.
+    // Placements in image mode are stored in image-PIXEL space (0..w, 0..h) —
+    // the same <g>-space as the backdrop <image> — so every existing overlay
+    // layer renders them unchanged (the <g> transform handles display scaling).
+    customBackdrop: null,
     // Settlement burgs placed on the map: burgId -> { settlementId, x, y, cellId, placedAt }
     placements: {},
     // User-added text labels
@@ -220,7 +227,10 @@ export const createMapSlice = (set, get) => ({
 
   // ── Viewport ──────────────────────────────────────────────────────────────
   setMapViewport: (vp) => set(state => {
-    state.mapState.viewport = { ...state.mapState.viewport, ...vp };
+    // Tag the camera with its coordinate space so restore paths (image-mode
+    // initial-fit, FMG reload) never reuse a viewport from the other mode.
+    const mode = state.mapState.customBackdrop?.imageUrl ? 'image' : 'fmg';
+    state.mapState.viewport = { ...state.mapState.viewport, ...vp, mode };
   }),
 
   // ── Layer toggles ─────────────────────────────────────────────────────────
@@ -301,6 +311,12 @@ export const createMapSlice = (set, get) => ({
   // Update x/y (and optionally cellId) for an existing placement. Used by
   // drag-to-move on the selected map icon.
   updatePlacement: (burgId, patch) => set(state => {
+    // Placement move-lock (campaign-clock): once the active campaign's world is
+    // canonized, placed settlements can no longer be moved. Adding new ones is
+    // still allowed (addPlacement is ungated). The UI also disables the drag
+    // affordance; this is the authoritative backstop (incl. autosave paths).
+    const camp = state.campaigns?.find(c => c.id === state.activeCampaignId);
+    if (camp?.worldState?.canonizedAt) return;
     const p = state.mapState.placements[burgId];
     if (!p) return;
     if (typeof patch?.x === 'number') p.x = patch.x;
@@ -393,6 +409,35 @@ export const createMapSlice = (set, get) => ({
     if (seed != null) state.mapState.seed = seed;
   }),
 
+  // ── Custom image backdrop (premium) ───────────────────────────────────────
+  /**
+   * Switch the map to a custom image backdrop. Non-destructive: the FMG
+   * snapshot is left intact so clearMapBackdrop restores terrain mode. Bumps
+   * geometryVersion so derived layers (roads) recompute and skip A*.
+   * @param {{imageUrl:string,w:number,h:number}} backdrop
+   */
+  setMapBackdrop: (backdrop) => set(state => {
+    if (!backdrop || !backdrop.imageUrl) return;
+    state.mapState.customBackdrop = {
+      imageUrl: backdrop.imageUrl,
+      w: Number(backdrop.w) || 0,
+      h: Number(backdrop.h) || 0,
+    };
+    // CRITICAL: the camera viewport is mode-specific (FMG map-pixels vs image
+    // pixels). Reset on the FMG→image switch so a stale FMG-space camera can't
+    // place the backdrop off-screen; the overlay then contain-fits the image.
+    state.mapState.viewport = { ...DEFAULT_VIEWPORT };
+    state.geometryVersion = (state.geometryVersion || 0) + 1;
+  }),
+
+  /** Drop back to FMG terrain mode (keeps any existing fmgSnapshot). */
+  clearMapBackdrop: () => set(state => {
+    state.mapState.customBackdrop = null;
+    // Drop the image-space camera so it can't be pushed into FMG d3.zoom on reload.
+    state.mapState.viewport = { ...DEFAULT_VIEWPORT };
+    state.geometryVersion = (state.geometryVersion || 0) + 1;
+  }),
+
   /**
    * Bump the geometry-version counter. Called by WorldMap.jsx after a fresh
    * FMG snapshot has been loaded, the world has been regenerated, or the
@@ -421,6 +466,7 @@ export const createMapSlice = (set, get) => ({
       labels:   next.labels   || [],
       markers:  next.markers  || [],
       forests:  next.forests  || [],
+      customBackdrop: next.customBackdrop || null, // older campaigns → null (FMG mode)
     };
   }),
 

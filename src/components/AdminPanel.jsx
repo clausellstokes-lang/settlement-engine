@@ -9,12 +9,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   Users, Shield, Zap, Search, ChevronLeft,
-  Check, X, AlertCircle, RefreshCw, Crown, Flag, BarChart3,
+  Check, X, AlertCircle, RefreshCw, Crown, Flag, BarChart3, TrendingUp,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
 import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
+import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
 
 function Section({ title, icon: Icon, children, actions }) {
@@ -374,6 +375,10 @@ export default function AdminPanel({ onBack }) {
 
       <Section title="Gallery Reports" icon={Flag}>
         <GalleryModerationPanel />
+      </Section>
+
+      <Section title="Usage Trends" icon={TrendingUp}>
+        <AdminTrendsPanel />
       </Section>
 
       <Section title="Analytics" icon={BarChart3}>

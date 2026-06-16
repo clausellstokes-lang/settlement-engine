@@ -20,8 +20,17 @@ import { EDIT_KINDS } from '../domain/pendingEdits.js';
 
 export { EDIT_KINDS };
 
-/** Contract revision — bump on a breaking shape change. */
-export const EVENTS_REV = 1;
+/** Contract revision — bump on a breaking shape change.
+ *  rev 2: system-mutation capture — enriched world_pulse_advanced / proposal /
+ *  party / simulation-rules props, world_pulse_proposal_dismissed, the activated
+ *  world_stressor_transitions emit, generation config_signature, and the new
+ *  pulseEffects research lane (world_pulse_effects table).
+ *  rev 3: regional/NPC capture — regional_arc_emerged, activated
+ *  neighbour_linked + regional_graph_snapshot, enriched regional_impact /
+ *  channel-status props, NPC distributions in the structural fingerprint.
+ *  rev 4: regional_propagation_applied (the cross-settlement ripple moment).
+ *  rev 5: gallery_imported (a shared map / map-with-campaign cloned into a library). */
+export const EVENTS_REV = 5;
 
 export const EVENTS = Object.freeze({
   // ── Tier 8.8 — minimum 4-event funnel ─────────────────────────────────
@@ -122,6 +131,7 @@ export const EVENTS = Object.freeze({
   WORLD_PULSE_BLOCKED:            'world_pulse_blocked',
   WORLD_CANONIZED:                'world_canonized',
   WORLD_PULSE_PROPOSAL_APPLIED:   'world_pulse_proposal_applied',
+  WORLD_PULSE_PROPOSAL_DISMISSED: 'world_pulse_proposal_dismissed',
   PARTY_IMPACT_RECORDED:          'party_impact_recorded',
   WORLD_STRESSOR_TRANSITIONS:     'world_stressor_transitions',  // research
   WIZARD_NEWS_PANEL_OPENED:       'wizard_news_panel_opened',
@@ -133,6 +143,8 @@ export const EVENTS = Object.freeze({
   REGIONAL_IMPACT_QUEUED:         'regional_impact_queued',
   REGIONAL_IMPACT_STATUS_CHANGED: 'regional_impact_status_changed',
   REGIONAL_GRAPH_SNAPSHOT:        'regional_graph_snapshot',     // research
+  REGIONAL_ARC_EMERGED:           'regional_arc_emerged',
+  REGIONAL_PROPAGATION_APPLIED:   'regional_propagation_applied',
   NEIGHBOUR_GENERATED:            'neighbour_generated',
   NEIGHBOUR_LINKED:               'neighbour_linked',
 
@@ -149,6 +161,7 @@ export const EVENTS = Object.freeze({
   GALLERY_UNPUBLISHED:            'gallery_unpublished',
   GALLERY_DOSSIER_VIEWED:         'gallery_dossier_viewed',
   GALLERY_ENGAGEMENT:             'gallery_engagement',
+  GALLERY_IMPORTED:               'gallery_imported',
 
   // ── v2: library / revisit ──────────────────────────────────────────────
   SETTLEMENT_REOPENED:            'settlement_reopened',

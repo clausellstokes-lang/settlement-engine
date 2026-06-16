@@ -4,6 +4,10 @@ export const WORLD_STATE_SCHEMA_VERSION = 1;
 
 const MAX_HISTORY = 80;
 const MAX_PROPOSALS = 80;
+// Player-authored intentions awaiting the next world-pulse tick (campaign-clock).
+// Generous cap — these drain every advance; the bound only guards a pathological
+// campaign that queues for hundreds of intentions without ever advancing time.
+const MAX_PENDING = 400;
 
 const INTERVAL_MONTHS = Object.freeze({
   one_week: 0.25,
@@ -62,6 +66,9 @@ export function createDefaultWorldState(campaign = {}) {
     proposals: [],
     pulseHistory: [],
     settlementTickStates: {},
+    // Campaign-clock: player events/edits authored on clock-bound member
+    // settlements queue here and resolve simultaneously at the next pulse tick.
+    pendingEvents: [],
   };
 }
 
@@ -92,6 +99,7 @@ export function ensureWorldState(raw = {}, campaign = {}) {
     proposals: cloneArray(raw?.proposals).slice(-MAX_PROPOSALS),
     pulseHistory: cloneArray(raw?.pulseHistory).slice(-MAX_HISTORY),
     settlementTickStates: cloneObject(raw?.settlementTickStates),
+    pendingEvents: cloneArray(raw?.pendingEvents).slice(-MAX_PENDING),
   };
 }
 

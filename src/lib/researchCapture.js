@@ -23,6 +23,8 @@ import {
   extractReducedFingerprint,
   extractSettlementFingerprint,
   computeFingerprintHash,
+  computeConfigSignature,
+  usedRandomSentinels,
 } from './structuralFingerprint.js';
 
 const CAPTURE_POINTS = new Set(['generated', 'saved', 'canonized', 'exported', 'ai_polished', 'pulse_advanced']);
@@ -32,11 +34,11 @@ const _prevHash = new Map();
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-function hotColumns(reduced, save) {
+function hotColumns(reduced, save, full) {
   if (!reduced) return {};
   const cs = save?.campaignState || {};
   const ai = save?.aiData || save?.ai_data;
-  return {
+  const hot = {
     tier: reduced.tier,
     population_band: reduced.population_band,
     prosperity: reduced.prosperity,
@@ -48,6 +50,28 @@ function hotColumns(reduced, save) {
     campaign_phase: typeof cs.phase === 'string' ? cs.phase : undefined,
     narrative_mode: ai && typeof ai === 'object' ? ai.narrativeMode : undefined,
   };
+  // Research-tier hot columns: the 037 table declares dedicated columns for
+  // these (defense scores, legitimacy, food, archetypes, lineage) but they were
+  // never populated — the extractor only surfaces them in the FULL fingerprint.
+  if (full && typeof full === 'object') {
+    const d = full.defense?.scores || {};
+    Object.assign(hot, {
+      food_resilience: full.economy?.food_resilience,
+      legitimacy: full.power?.legitimacy_score,
+      defense_military: d.military,
+      defense_monster: d.monster,
+      defense_internal: d.internal,
+      defense_economic: d.economic,
+      defense_magical: d.magical,
+      condition_archetypes: Array.isArray(full.conditions)
+        ? full.conditions.map(c => c?.archetype).filter(Boolean)
+        : undefined,
+      schema_version: full.schemaVersion,
+      generator_version: full.generatorVersion,
+      seed: full.seed, // research-tier only (the full fingerprint already gates it)
+    });
+  }
+  return hot;
 }
 
 /**
@@ -59,6 +83,9 @@ function hotColumns(reduced, save) {
  * @param {Object} [opts]
  * @param {Object} [opts.save]            the save envelope (for lifecycle/ai fields)
  * @param {string} [opts.settlementUuid]  stable uuid (save id / settlement id)
+ * @param {{ npcStates?: Object }} [opts.worldState]  campaign sim-state (NPC
+ *        evolution), filtered to this settlement in the extractor; absent for
+ *        pre-pulse moments.
  */
 export function captureFingerprint(moment, settlement, opts = {}) {
   try {
@@ -73,13 +100,25 @@ export function captureFingerprint(moment, settlement, opts = {}) {
     if (!settlementUuid) return; // snapshots require a stable subject
 
     const reduced = extractReducedFingerprint(settlement);
-    const full = consent.research ? extractSettlementFingerprint(settlement, save) : null;
+    // opts.worldState carries the campaign's live npcStates (NPC sim-evolution),
+    // filtered to this settlement inside the extractor; absent for pre-pulse moments.
+    const full = consent.research
+      ? extractSettlementFingerprint(settlement, save, { npcStates: opts.worldState?.npcStates, settlementUuid })
+      : null;
 
-    computeFingerprintHash(full || reduced).then(fingerprintHash => {
+    Promise.all([
+      computeFingerprintHash(full || reduced),
+      computeConfigSignature(settlement.config),
+    ]).then(([fingerprintHash, configSignature]) => {
       enqueueSnapshot({
         settlementUuid,
         capturePoint: moment,
-        hot: hotColumns(reduced, save),
+        hot: {
+          ...hotColumns(reduced, save, full),
+          // deterministic, seed-independent grouping key (a hash — non-personal).
+          config_signature: configSignature,
+          used_random_sentinels: usedRandomSentinels(settlement.config),
+        },
         structural: full || undefined,   // research-tier only; clamped again server-side
         fingerprintHash,
       });

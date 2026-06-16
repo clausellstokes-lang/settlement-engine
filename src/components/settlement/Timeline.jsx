@@ -16,6 +16,11 @@ export default function Timeline() {
   const phase    = useStore(s => s.phase);
   const eventLog = useStore(s => s.eventLog);
   const undoLastEvent = useStore(s => s.undoLastEvent);
+  // Campaign-clock (Phase C3): once this settlement is bound to a canonized
+  // campaign world, its individual undo moves up to the world-map (pulse) level.
+  const activeSaveId = useStore(s => s.activeSaveId);
+  const clockBound = useStore(s =>
+    typeof s.isSettlementClockBound === 'function' && s.isSettlementClockBound(activeSaveId));
 
   if (phase !== 'canon') return null;
 
@@ -39,6 +44,16 @@ export default function Timeline() {
         </span>
       </div>
 
+      {clockBound && (
+        <div style={{
+          fontSize: FS.xxs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
+          lineHeight: 1.5, marginBottom: SP.sm,
+        }}>
+          On the world-map clock — events resolve together at each World Pulse, and
+          undo lives at the map level (“Undo last advance”).
+        </div>
+      )}
+
       {eventLog.length === 0 ? (
         <div style={{
           fontSize: FS.xs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
@@ -52,7 +67,7 @@ export default function Timeline() {
             const realIdx = eventLog.length - 1 - i;
             const isLatest = realIdx === eventLog.length - 1;
             return (
-              <Entry key={`${entry.appliedAt}-${i}`} entry={entry} isLatest={isLatest} onUndo={undoLastEvent} />
+              <Entry key={`${entry.appliedAt}-${i}`} entry={entry} isLatest={isLatest && !clockBound} onUndo={undoLastEvent} />
             );
           })}
         </div>

@@ -35,6 +35,13 @@ export default function PlacementsLayer({ transformRef }) {
   const setSelectedBurg       = useStore(s => s.setSelectedBurgId);
   const setSelectedSettlement = useStore(s => s.setSelectedSettlementId);
   const updatePlacement       = useStore(s => s.updatePlacement);
+  // Placement move-lock: once the active campaign's world is canonized, placed
+  // settlements are frozen in place (adding is still allowed elsewhere). We
+  // disable drag-to-move here; updatePlacement is the store-level backstop.
+  const mapCanonized = useStore(s => {
+    const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
+    return !!camp?.worldState?.canonizedAt;
+  });
 
   // Drag-to-move state for the currently-selected placement.
   // Holds { burgId, pointerId, origin:{sx,sy}, startPt:{x,y} } during drag.
@@ -94,6 +101,8 @@ export default function PlacementsLayer({ transformRef }) {
   }
 
   function handleDragPointerDown(e, it) {
+    // Frozen on a canonized map — selection still works, but no move.
+    if (mapCanonized) return;
     // Only drag if this icon is already selected — avoids hijacking a fresh
     // click on a non-selected icon (which should just select it).
     const isSelected =
@@ -158,7 +167,7 @@ export default function PlacementsLayer({ transformRef }) {
               selected={isSelected}
               scale={scale}
               label={it.name}
-              cursor={isSelected ? 'grab' : 'pointer'}
+              cursor={isSelected && !mapCanonized ? 'grab' : 'pointer'}
               onClick={(e) => {
                 // Suppress the click that fires at pointerup after a drag.
                 if (dragRef.current && dragRef.current.moved) return;

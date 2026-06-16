@@ -61,6 +61,8 @@ import {
   upsertProposal,
 } from '../domain/worldPulse/index.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
+import { drainQueuedEvents } from '../domain/events/drainQueuedEvents.js';
+import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { withOrganicStressorResolution } from '../domain/worldPulse/stressorAftermath.js';
 import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
@@ -75,6 +77,16 @@ import {
 } from '../lib/campaignSync.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
+import { getConsent } from '../lib/consent.js';
+import { enqueuePulseEffect } from '../lib/analyticsQueue.js';
+import {
+  extractPulseSummary, extractPulseEffects, extractStressorTransitions,
+  extractProposalDecision, extractPartyImpact, extractSimulationRules,
+} from '../lib/pulseFingerprint.js';
+import {
+  extractRegionalGraphSnapshot, extractRegionalImpactDecision,
+  extractRegionalChannelChange, extractRegionalArcs, extractRegionalPropagation,
+} from '../lib/regionalFingerprint.js';
 
 const SCHEMA_VERSION = 2;
 
@@ -86,17 +98,6 @@ const SCHEMA_VERSION = 2;
  * track() itself never throws.
  */
 
-/** Count stressors in a world-state snapshot that were created at a given tick. */
-function countNewStressorsAtTick(worldState, tick) {
-  const stressors = Array.isArray(worldState?.stressors) ? worldState.stressors : [];
-  if (!Number.isFinite(tick)) return 0;
-  let count = 0;
-  for (const s of stressors) {
-    if (Number(s?.createdTick ?? s?.onsetTick ?? s?.tick) === tick) count++;
-  }
-  return count;
-}
-
 /** Unique, sorted channel-type enums from an array of regional impacts. */
 function channelTypesFromImpacts(impacts) {
   const set = new Set();
@@ -105,12 +106,6 @@ function channelTypesFromImpacts(impacts) {
     if (typeof t === 'string' && t) set.add(t);
   }
   return [...set].sort();
-}
-
-/** The coarse type enum for a world-pulse proposal (candidate/outcome kind). */
-function proposalTypeOf(proposal) {
-  const o = proposal?.outcome || {};
-  return o.candidateType || o.type || proposal?.type || 'unknown';
 }
 
 function campaignCacheOwner(state) {
@@ -327,7 +322,7 @@ function campaignSettlements(state, campaignId) {
   return (state.savedSettlements || []).filter(save => ids.has(save.id));
 }
 
-function applyWorldPulseResultToState(state, campaign, result, now) {
+function applyWorldPulseResultToState(state, campaign, result, now, authoredEventBySave = null) {
   const persistUpdates = [];
   const updates = Array.isArray(result?.settlementUpdates) ? result.settlementUpdates : [];
   // Crisis-triple sync (Wave 8 #4 — the asymmetry the D-wave deferred, owner
@@ -359,6 +354,21 @@ function applyWorldPulseResultToState(state, campaign, result, now) {
     } catch (e) {
       console.warn('[campaignSlice] deriveSystemState failed for world pulse', e);
     }
+    // Campaign-clock #4: a drained queued event's authored systemState deltas
+    // (which deriveSystemState alone cannot reproduce — e.g. CUT_TRADE_ROUTE's
+    // resilience/resourcePressure/externalThreat) are re-layered ONCE onto the
+    // post-pulse derive for that save, so the dossier matches the eventLog entry
+    // recorded for this tick. Drained saves only; null for proposal/party paths
+    // and non-drained members, so their systemState is unaffected. They decay
+    // next tick (no drained event → bare derive), mirroring the immediate path.
+    const authoredEvent = authoredEventBySave && authoredEventBySave.get(String(update.saveId));
+    if (authoredEvent && systemState) {
+      try {
+        systemState = layerAuthoredDeltas(systemState, authoredEvent, nextSettlement);
+      } catch (e) {
+        console.warn('[campaignSlice] re-layering queued authored deltas failed', e);
+      }
+    }
     const campaignState = campaignStateForWorldPulse(state, save, systemState, now, result);
     const nextSave = {
       ...save,
@@ -386,6 +396,147 @@ function applyWorldPulseResultToState(state, campaign, result, now) {
   campaign.wizardNews = ensureWizardNewsFeed(result.wizardNews, { now });
   campaign.updatedAt = now;
   return persistUpdates;
+}
+
+// Campaign-clock (Phase C2): how many pre-pulse snapshots the in-memory undo
+// stack retains across all campaigns. Each snapshot clones every member
+// settlement, so the cap bounds session memory; a handful of undo steps per
+// campaign is ample for "take back the last advance(s)".
+const PULSE_UNDO_CAP = 10;
+
+/**
+ * Campaign-clock (Phase C2): capture the campaign's full pre-pulse state so the
+ * next advance can be reversed. Pure read — returns a deep-cloned snapshot
+ * (campaign world + every member save + the live active settlement view) without
+ * mutating anything. The caller pushes it onto pulseUndoStack only after the
+ * pulse is confirmed.
+ */
+function capturePulseSnapshot(state, campaign, now) {
+  const memberSaves = campaignSettlements(state, campaign.id);
+  return {
+    campaignId: campaign.id,
+    now,
+    tick: campaign.worldState?.tick ?? 0,
+    worldState: cloneJson(campaign.worldState),
+    regionalGraph: cloneJson(campaign.regionalGraph),
+    wizardNews: cloneJson(campaign.wizardNews),
+    saves: memberSaves.map(s => ({
+      id: s.id,
+      settlement: cloneJson(s.settlement),
+      campaignState: cloneJson(s.campaignState),
+    })),
+    active: state.activeSaveId
+      ? {
+          saveId: String(state.activeSaveId),
+          settlement: cloneJson(state.settlement),
+          systemState: cloneJson(state.systemState),
+          eventLog: cloneJson(state.eventLog),
+          phase: state.phase,
+        }
+      : null,
+  };
+}
+
+/**
+ * Campaign-clock (Phase C1): drain the campaign's queued player intentions into
+ * its member settlements BEFORE the organic pulse, so they resolve
+ * simultaneously at this tick. Mutates the draft `state` (savedSettlements +
+ * the live settlement/eventLog when the active save is among the drained) and
+ * returns the next worldState (crisis twins injected into stressors, queue
+ * cleared) plus the touched saveIds. The caller writes the returned worldState
+ * onto the draft campaign so the pulse's cloneJson(campaign) carries it.
+ */
+function drainCampaignQueueIntoState(state, campaign, worldState, now) {
+  const queue = worldState.pendingEvents || [];
+  if (!queue.length) return { worldState, touched: [] };
+
+  const memberSaves = campaignSettlements(state, campaign.id);
+  const { updates, twinDirectives, partyImpacts } = drainQueuedEvents({
+    queue,
+    saves: memberSaves,
+    now,
+    tick: worldState.tick ?? null,
+  });
+
+  const touched = [];
+  // saveId → the last drained event, so the pulse write can re-layer its
+  // authored systemState deltas onto the post-pulse derive (see #4 fix).
+  const authoredEventBySave = new Map();
+  for (const u of updates) {
+    const idx = state.savedSettlements.findIndex(s => String(s.id) === String(u.saveId));
+    if (idx === -1) continue;
+    const save = state.savedSettlements[idx];
+    state.savedSettlements[idx] = {
+      ...save,
+      settlement: u.settlement,
+      campaignState: { ...(save.campaignState || {}), eventLog: u.eventLog, systemState: u.systemState },
+    };
+    if (state.activeSaveId && String(state.activeSaveId) === String(u.saveId)) {
+      state.settlement = u.settlement;
+      state.systemState = u.systemState;
+      state.eventLog = u.eventLog;
+    }
+    if (u.authoredEvent) authoredEventBySave.set(String(u.saveId), u.authoredEvent);
+    touched.push(String(u.saveId));
+  }
+
+  // Apply crisis-twin directives to the world — the same forward path
+  // settlementSlice.rippleEventThroughWorld uses for immediate events — so the
+  // pulse ages/propagates roaming crises that a queued event spawned this tick.
+  // Thread the whole worldState (not just stressors) so a queued RESOLVE can
+  // upsert its residual-aftermath proposals exactly as resolveCampaignStressor
+  // does for the immediate path.
+  let ws = {
+    ...worldState,
+    stressors: Array.isArray(worldState.stressors) ? [...worldState.stressors] : [],
+  };
+  const tick = Math.max(0, Math.floor(Number(worldState.tick) || 0));
+  for (const d of twinDirectives) {
+    if (d.action === 'inject' && d.stressor) {
+      const normalized = normalizeStressor({
+        ...d.stressor,
+        originSettlementId: d.originSettlementId,
+        affectedSettlementIds: [d.originSettlementId],
+        createdAt: now,
+        updatedAt: now,
+      });
+      const byId = new Map((ws.stressors || []).map(s => [s.id, s]));
+      byId.set(normalized.id, normalized);
+      ws = { ...ws, stressors: [...byId.values()] };
+    } else if (d.action === 'resolve' && d.type) {
+      const roamingType = pulseTypeForStressorKey(d.type) || d.type;
+      const match = (ws.stressors || [])
+        .map(raw => normalizeStressor(raw))
+        .find(st => st.status === 'active'
+          && String(st.type).toLowerCase() === String(roamingType).toLowerCase()
+          && (String(st.originSettlementId || '') === d.originSettlementId
+            || (st.affectedSettlementIds || []).map(String).includes(d.originSettlementId)));
+      if (match) {
+        const r = resolveStressorById(ws.stressors, match.id, {
+          tick, now, reason: 'Resolved by DM authoring (queued)', emitResidual: true,
+        });
+        if (r.found) {
+          ws = { ...ws, stressors: r.stressors };
+          for (const outcome of (r.residualOutcomes || [])) {
+            ws = upsertProposal(ws, {
+              id: proposalIdFor(outcome, tick),
+              status: 'pending',
+              createdAt: now,
+              updatedAt: now,
+              tick,
+              outcome: cloneJson(outcome),
+              headline: outcome.headline,
+              summary: outcome.summary,
+              severity: outcome.severity,
+              reasons: outcome.reasons || [],
+            });
+          }
+        }
+      }
+    }
+  }
+
+  return { worldState: { ...ws, pendingEvents: [] }, touched, partyImpacts, authoredEventBySave };
 }
 
 /** Migrate a single campaign mapState to v2 */
@@ -462,6 +613,12 @@ export const createCampaignSlice = (set, get) => {
   campaignsLoaded: false,
   /** The currently-loaded campaign id (null if none) — used by WorldMap */
   activeCampaignId: null,
+  /** Campaign-clock (Phase C2): in-memory pre-pulse snapshot stack for multi-step
+   *  "undo last advance". Each entry { campaignId, worldState, regionalGraph,
+   *  wizardNews, saves[], active } captures the state BEFORE a world-pulse tick.
+   *  Session-scoped (not persisted), mirroring mapUndoStack — heavy snapshots
+   *  shouldn't bloat the campaign row; a reload starts a fresh history. */
+  pulseUndoStack: [],
   /** Set when a cloud save of campaign/save state fails; surfaced as a banner.
    *  null when the last persist succeeded (or was cleared by the user). */
   campaignSyncError: null,
@@ -550,6 +707,156 @@ export const createCampaignSlice = (set, get) => {
     return id;
   },
 
+  // Project 2: import a shared MAP from the gallery into a NEW premium campaign.
+  // Phase 1 = blank canvas (backdrop only — no placements/settlements), so there
+  // are no settlement ids to remap. The backdrop image is COPIED into the
+  // importer's own storage so it survives the sharer deleting theirs.
+  importGalleryMap: async (slug) => {
+    const st = get();
+    const role = st.auth?.role;
+    const canCreate = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
+    if (!canCreate) throw new Error('Importing maps is a premium feature.');
+
+    const { fetchGalleryMap } = await import('../lib/gallery.js');
+    const shared = await fetchGalleryMap(slug);
+    if (!shared) throw new Error('That shared map is no longer available.');
+    const backdrop = shared.backdrop || {};
+
+    const mapState = { schemaVersion: 2, placements: {}, labels: [], markers: [], forests: [] };
+    if (backdrop.customBackdrop?.imageUrl) {
+      let imageUrl = backdrop.customBackdrop.imageUrl;
+      const ownerId = st.auth?.user?.id;
+      try {
+        const { uploadMapBackdrop } = await import('../lib/imageUpload.js');
+        const resp = await fetch(imageUrl);
+        const blob = await resp.blob();
+        if (ownerId && blob?.size) {
+          const up = await uploadMapBackdrop(blob, { ownerId, campaignId: 'imported', contentType: blob.type });
+          imageUrl = up.url;
+        }
+      } catch { /* fall back to referencing the shared public URL */ }
+      mapState.customBackdrop = {
+        imageUrl,
+        w: Number(backdrop.customBackdrop.w) || 0,
+        h: Number(backdrop.customBackdrop.h) || 0,
+      };
+    } else if (backdrop.fmgSnapshot) {
+      mapState.fmgSnapshot = backdrop.fmgSnapshot;
+      mapState.seed = backdrop.seed ?? null;
+    } else {
+      throw new Error('That shared map has no backdrop to import.');
+    }
+
+    const newId = get().createCampaign(shared.name ? `${shared.name} (imported)` : 'Imported map');
+    if (!newId) throw new Error('Could not create a campaign for the imported map.');
+    get().saveCampaignMap(newId, mapState);
+    try { track(EVENTS.GALLERY_IMPORTED, { kind: 'map' }); } catch { /* analytics never affects import */ }
+    return newId;
+  },
+
+  // Project 2, Phase 2: import a shared MAP + CAMPAIGN. Clones each member
+  // settlement into the importer's own cloud saves (fresh ids), then builds a new
+  // campaign whose settlementIds + placements are REMAPPED to the clones. The
+  // server already returned public-safe dossiers (no worldState/regionalGraph),
+  // so the importer's campaign starts with a fresh world; the only id-remap
+  // surface is settlementIds + placements[].settlementId.
+  importGalleryMapWithCampaign: async (slug) => {
+    const st = get();
+    const role = st.auth?.role;
+    const canCreate = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
+    if (!canCreate) throw new Error('Importing campaigns is a premium feature.');
+
+    const { fetchGalleryMap } = await import('../lib/gallery.js');
+    const payload = await fetchGalleryMap(slug);
+    if (!payload) throw new Error('That shared campaign is no longer available.');
+    if (payload.kind !== 'map_with_campaign') return get().importGalleryMap(slug); // not a campaign share
+
+    const members = Array.isArray(payload.members) ? payload.members : [];
+    const sharedMap = (payload.mapState && typeof payload.mapState === 'object') ? payload.mapState : {};
+
+    // Slot pre-flight (premium = unlimited in practice; defensive for future tiers).
+    const max = (typeof st.maxSaves === 'function') ? st.maxSaves() : Infinity;
+    const activeNow = (st.savedSettlements || []).length;
+    if (Number.isFinite(max) && activeNow + members.length > max) {
+      throw new Error(`Not enough save slots: this campaign needs ${members.length} settlement slot(s).`);
+    }
+
+    // Clone each member into the importer's cloud saves; build oldId → newId.
+    const idMap = {};
+    const newEntries = [];
+    try {
+      for (const m of members) {
+        const src = (m.settlement && typeof m.settlement === 'object') ? m.settlement : {};
+        const entry = {
+          name: m.name || src.name || 'Imported settlement',
+          tier: m.tier || src.tier,
+          // Strip ALL cross-settlement refs from the clone: neighbourNetwork AND
+          // neighborRelationship/interSettlementRelationships — the latter would
+          // re-trigger supabaseSave's bidirectional back-link path (keyed on
+          // settlement.neighborRelationship.name), wiring the clone into the
+          // IMPORTER's unrelated saves. Forcing the simple-insert path is correct.
+          settlement: { ...src, neighbourNetwork: [], neighborRelationship: null, interSettlementRelationships: [] },
+          config: src.config || null,
+          seed: src._seed || src.config?._seed || null,
+          aiData: {},
+          campaignState: { phase: 'canon', eventLog: [] },
+          versionHistory: [],
+        };
+         
+        // save-limit trigger + id assignment stay deterministic.
+        const newSaveId = await savesService.save(entry);
+        idMap[String(m.old_id)] = newSaveId;
+        newEntries.push({ ...entry, id: newSaveId, savedAt: Date.now() });
+      }
+    } catch (err) {
+      // Roll back clones already inserted so a partial import doesn't orphan saves.
+      for (const oid of Object.values(idMap)) {
+        try { await savesService.delete(oid); } catch { /* best-effort cleanup */ }
+      }
+      throw new Error('Import failed while copying settlements; partial copies were rolled back.', { cause: err });
+    }
+    set(state => { for (const e of newEntries) state.savedSettlements.push(e); });
+
+    // Build the imported map: backdrop (copy image) + REMAPPED placements only.
+    const mapState = { schemaVersion: 2, placements: {}, labels: [], markers: [], forests: [] };
+    const sb = sharedMap.customBackdrop;
+    if (sb?.imageUrl) {
+      let imageUrl = sb.imageUrl;
+      const ownerId = st.auth?.user?.id;
+      try {
+        const { uploadMapBackdrop } = await import('../lib/imageUpload.js');
+        const resp = await fetch(imageUrl); const blob = await resp.blob();
+        if (ownerId && blob?.size) {
+          const up = await uploadMapBackdrop(blob, { ownerId, campaignId: 'imported', contentType: blob.type });
+          imageUrl = up.url;
+        }
+      } catch { /* fall back to the shared public URL */ }
+      mapState.customBackdrop = { imageUrl, w: Number(sb.w) || 0, h: Number(sb.h) || 0 };
+    } else if (sharedMap.fmgSnapshot) {
+      mapState.fmgSnapshot = sharedMap.fmgSnapshot;
+      mapState.seed = sharedMap.seed ?? null;
+    }
+    const srcPlacements = (sharedMap.placements && typeof sharedMap.placements === 'object') ? sharedMap.placements : {};
+    for (const [burgId, p] of Object.entries(srcPlacements)) {
+      const newSid = idMap[String(p?.settlementId)];
+      if (!newSid) continue; // drop placements whose member wasn't imported
+      mapState.placements[burgId] = { ...p, settlementId: newSid };
+    }
+    mapState.labels = Array.isArray(sharedMap.labels) ? sharedMap.labels : [];
+    mapState.markers = Array.isArray(sharedMap.markers) ? sharedMap.markers : [];
+    mapState.forests = Array.isArray(sharedMap.forests) ? sharedMap.forests : [];
+
+    const campaignId = get().createCampaign(payload.name ? `${payload.name} (imported)` : 'Imported campaign');
+    if (!campaignId) throw new Error('Could not create the imported campaign.');
+    set(state => {
+      const c = state.campaigns.find(x => x.id === campaignId);
+      if (c) c.settlementIds = Object.values(idMap);
+    });
+    get().saveCampaignMap(campaignId, mapState);
+    try { track(EVENTS.GALLERY_IMPORTED, { kind: 'map_with_campaign', member_count: members.length }); } catch { /* analytics never affects import */ }
+    return campaignId;
+  },
+
   renameCampaign: (id, name) =>
     set(state => {
       const c = findActiveCampaign(state.campaigns, id);
@@ -604,6 +911,16 @@ export const createCampaignSlice = (set, get) => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       c.settlementIds = c.settlementIds.filter(id => id !== settlementId);
+      // Campaign-clock: drop any queued intentions the departing settlement had,
+      // at the deliberate moment of removal — otherwise they'd be silently
+      // destroyed at the next tick (the drain only acts on current members).
+      if (c.worldState?.pendingEvents?.length) {
+        const sid = String(settlementId);
+        const kept = c.worldState.pendingEvents.filter(e => String(e.saveId) !== sid);
+        if (kept.length !== c.worldState.pendingEvents.length) {
+          c.worldState = { ...c.worldState, pendingEvents: kept };
+        }
+      }
       c.updatedAt = new Date().toISOString();
       persistCampaignState(state, campaignId);
     }),
@@ -624,6 +941,7 @@ export const createCampaignSlice = (set, get) => {
         schemaVersion: SCHEMA_VERSION,
         fmgSnapshot: clean.fmgSnapshot || null,
         seed:        clean.seed ?? null,
+        customBackdrop: clean.customBackdrop || null, // persist custom image maps
         placements:  clean.placements || {},
         labels:      clean.labels || [],
         markers:     clean.markers || [],
@@ -698,13 +1016,9 @@ export const createCampaignSlice = (set, get) => {
       const now = new Date().toISOString();
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
       const before = (beforeGraph.channels || []).find(ch => ch.id === channelId);
-      if (before) {
-        channelEvent = {
-          channel_type: before.type || 'unknown',
-          from_status: before.status || 'unknown',
-          to_status: status,
-        };
-      }
+      // Build telemetry from the draft INSIDE set() (the channel proxy is revoked
+      // after set returns). was_dm_action: this action is DM-initiated curation.
+      if (before) channelEvent = extractRegionalChannelChange(before, before.status, status, true);
       c.regionalGraph = domainSetRegionalChannelStatus(c.regionalGraph, channelId, status, { now });
       ensureCampaignWizardNews(c);
       c.updatedAt = now;
@@ -950,7 +1264,7 @@ export const createCampaignSlice = (set, get) => {
     return graph;
   },
 
-  setRegionalImpactStatus: (campaignId, impactId, status, patch = {}) => {
+  setRegionalImpactStatus: (campaignId, impactId, status, patch = {}, opts = {}) => {
     let graph = null;
     let impactEvent = null;
     set(state => {
@@ -959,7 +1273,9 @@ export const createCampaignSlice = (set, get) => {
       const now = new Date().toISOString();
       const beforeGraph = ensureRegionalGraph(c.regionalGraph);
       const impact = (beforeGraph.queuedImpacts || []).find(i => i.id === impactId);
-      if (impact) impactEvent = { to_status: status, channel_type: impact.channelType || 'unknown' };
+      // Flatten the draft impact to plain telemetry INSIDE set(); was_dm_action
+      // defaults true (this action is DM-initiated unless a caller says otherwise).
+      if (impact) impactEvent = extractRegionalImpactDecision(impact, status, opts.wasDmAction !== false);
       c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, status, patch, { now });
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
       c.updatedAt = now;
@@ -1027,17 +1343,21 @@ export const createCampaignSlice = (set, get) => {
   canonizeCampaignWorld: async (campaignId) => {
     let campaignPersist = /** @type {any} */ (null);
     let settlementCount = 0;
+    let regionalSnapshot = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       settlementCount = campaignSettlements(state, campaignId).length;
       c.worldState = canonizeWorldState(c.worldState, now, c);
+      // Compute the regional-topology snapshot while the graph draft is live.
+      regionalSnapshot = extractRegionalGraphSnapshot(c.regionalGraph);
       c.updatedAt = now;
       campaignPersist = cacheCampaignState(state);
     });
     if (campaignPersist) {
       track(EVENTS.WORLD_CANONIZED, { settlement_count: settlementCount });
+      if (regionalSnapshot) track(EVENTS.REGIONAL_GRAPH_SNAPSHOT, regionalSnapshot);
       await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     }
     return campaignPersist?.snapshot?.find(c => c.id === campaignId)?.worldState || null;
@@ -1045,25 +1365,26 @@ export const createCampaignSlice = (set, get) => {
 
   updateCampaignSimulationRules: async (campaignId, patch = {}) => {
     let campaignPersist = /** @type {any} */ (null);
+    let normalizedRules = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const worldState = ensureWorldState(c.worldState, c);
-      c.worldState = {
-        ...worldState,
-        simulationRules: normalizeSimulationRules({
-          ...(worldState.simulationRules || {}),
-          ...(patch || {}),
-        }),
-      };
+      // Build the plain rules object first so the telemetry read below is NOT an
+      // Immer draft proxy (which would be revoked once set() returns).
+      normalizedRules = normalizeSimulationRules({
+        ...(worldState.simulationRules || {}),
+        ...(patch || {}),
+      });
+      c.worldState = { ...worldState, simulationRules: normalizedRules };
       c.updatedAt = now;
       campaignPersist = cacheCampaignState(state);
     });
     if (campaignPersist) {
-      track(EVENTS.SIMULATION_RULES_UPDATED, {
-        changed_keys: Object.keys(patch || {}).sort(),
-      });
+      // Emit the rule VALUES, not just the changed keys — this is the join from
+      // simulation config to every subsequent pulse outcome (variance per config).
+      track(EVENTS.SIMULATION_RULES_UPDATED, extractSimulationRules(normalizedRules, Object.keys(patch || {})));
       await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     }
     return campaignPersist?.snapshot?.find(c => c.id === campaignId)?.worldState?.simulationRules || null;
@@ -1076,6 +1397,16 @@ export const createCampaignSlice = (set, get) => {
     /** Saves to fingerprint after a successful pulse (cap 5). Collected inside
      *  set() but used after, so the snapshot reflects post-apply settlements. */
     let fingerprintSaves = [];
+    /** The campaign's live NPC sim-state (cloned plain inside set), so the
+     *  fingerprint can surface per-settlement NPC goal/role evolution. */
+    let campaignNpcStates = /** @type {any} */ (null);
+    /** Queued-impact ids present BEFORE this pulse, so we can diff out the new
+     *  cross-settlement propagation impacts this pulse produced. */
+    let priorQueuedIds = /** @type {Set<string>} */ (null);
+    /** Party-impact actions surfaced by draining party-caused queued events —
+     *  replayed through recordPartyImpact AFTER the pulse (mirroring the
+     *  immediate path's rippleEventThroughWorld party branch). */
+    let drainedPartyImpacts = [];
     const now = options.now || new Date().toISOString();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
@@ -1085,6 +1416,20 @@ export const createCampaignSlice = (set, get) => {
         result = { ok: false, reason: 'world_not_canonized' };
         return;
       }
+      // Campaign-clock C2: snapshot the full pre-pulse state (campaign world +
+      // every member save + the live active view) BEFORE anything mutates, so
+      // the advance can be reversed by undoLastPulse. Pushed to the stack only
+      // after the pulse is confirmed below.
+      const preSnapshot = capturePulseSnapshot(state, c, now);
+      // Campaign-clock C1: drain queued player intentions into the member
+      // settlements (and inject any crisis twins into worldState) BEFORE the
+      // organic pulse, so every settlement's events resolve simultaneously at
+      // this tick and the pulse simulates the post-intervention world. The
+      // augmented worldState is written onto the draft campaign so the pulse's
+      // cloneJson(c) carries the injected stressors + the cleared queue.
+      const drained = drainCampaignQueueIntoState(state, c, worldState, now);
+      c.worldState = drained.worldState;
+      drainedPartyImpacts = drained.partyImpacts || [];
       result = domainAdvanceCampaignWorld({
         campaign: cloneJson(c),
         saves: cloneJson(campaignSettlements(state, campaignId)),
@@ -1092,7 +1437,22 @@ export const createCampaignSlice = (set, get) => {
         now,
       });
       if (!result) return;
-      persistUpdates = applyWorldPulseResultToState(state, c, result, now);
+      // The pulse landed — retain the pre-pulse snapshot for multi-step undo.
+      // Cap PER campaign so churn in one campaign can't evict another's history:
+      // drop only this campaign's oldest snapshot when it exceeds the cap.
+      {
+        const next = [...(state.pulseUndoStack || []), preSnapshot];
+        const mineCount = next.reduce((n, s) => n + (s.campaignId === campaignId ? 1 : 0), 0);
+        if (mineCount > PULSE_UNDO_CAP) {
+          const oldestIdx = next.findIndex(s => s.campaignId === campaignId);
+          if (oldestIdx !== -1) next.splice(oldestIdx, 1);
+        }
+        state.pulseUndoStack = next;
+      }
+      // Snapshot the pre-pulse queued-impact ids (primitive Set — safe to read
+      // outside set) so we can isolate this pulse's NEW propagation impacts.
+      priorQueuedIds = new Set((c.regionalGraph?.queuedImpacts || []).map(i => String(i.id)));
+      persistUpdates = applyWorldPulseResultToState(state, c, result, now, drained.authoredEventBySave);
       campaignPersist = cacheCampaignState(state);
       // Collect the affected saves (post-apply) for the research fingerprint,
       // capped at 5 per pulse so a large constellation doesn't flood capture.
@@ -1103,28 +1463,59 @@ export const createCampaignSlice = (set, get) => {
         .filter(save => affected.has(String(save.id)))
         .slice(0, 5)
         .map(save => ({ id: save.id, settlement: cloneJson(save.settlement), save: { id: save.id, campaignState: cloneJson(save.campaignState) } }));
+      campaignNpcStates = cloneJson(c.worldState?.npcStates) || null;
     });
 
     // Fire-and-forget analytics — additive, after state has settled.
     if (result && result.ok === false && result.reason === 'world_not_canonized') {
       track(EVENTS.WORLD_PULSE_BLOCKED, { reason: 'world_not_canonized' });
     } else if (result && campaignPersist) {
+      // Enriched per-effect-family summary (fixes the always-0 new_stressor_count
+      // bug; events_applied_count retained for back-compat with existing reads).
       track(EVENTS.WORLD_PULSE_ADVANCED, {
-        interval: result.interval || interval,
-        tick_after: Number.isFinite(result.tick) ? result.tick : null,
+        ...extractPulseSummary(result, interval),
         events_applied_count: Array.isArray(result.autoApplied) ? result.autoApplied.length : 0,
-        new_stressor_count: countNewStressorsAtTick(result.worldState, result.tick),
-        resolved_stressor_count: Array.isArray(result.resolvedStressors) ? result.resolvedStressors.length : 0,
       });
+      // Per-type stressor transitions (research-class; gated inside track()).
+      track(EVENTS.WORLD_STRESSOR_TRANSITIONS, extractStressorTransitions(result));
+      // Exhaustive per-effect mutation ledger → world_pulse_effects (research only).
+      if (getConsent().research) {
+        const { rows } = extractPulseEffects(result);
+        for (const row of rows) enqueuePulseEffect(row);
+      }
+      // Regional structure snapshot (research) + realm/compound arc emergence.
+      const regionalSnapshot = extractRegionalGraphSnapshot(result.regionalGraph);
+      if (regionalSnapshot) track(EVENTS.REGIONAL_GRAPH_SNAPSHOT, regionalSnapshot);
+      const arcs = extractRegionalArcs(result);
+      if (arcs.length) track(EVENTS.REGIONAL_ARC_EMERGED, { tick: Number.isFinite(result.tick) ? result.tick : null, arc_count: arcs.length, arcs });
+      // Cross-settlement propagation that occurred during this pulse — the NEW
+      // queued impacts (diffed against the pre-pulse graph).
+      if (result.regionalGraph && priorQueuedIds) {
+        const newImpacts = (result.regionalGraph.queuedImpacts || []).filter(i => !priorQueuedIds.has(String(i.id)));
+        const prop = extractRegionalPropagation({ impacts: newImpacts, genesis: 'world_pulse' });
+        if (prop) track(EVENTS.REGIONAL_PROPAGATION_APPLIED, prop);
+      }
       for (const entry of fingerprintSaves) {
         captureFingerprint('pulse_advanced', entry.settlement, {
           save: entry.save,
           settlementUuid: String(entry.id),
+          worldState: campaignNpcStates ? { npcStates: campaignNpcStates } : undefined,
         });
       }
     }
 
     await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    // Replay party-caused queued events through the party-impact pipeline — the
+    // drain surfaced them; this mirrors the immediate path's rippleEventThroughWorld
+    // party branch (faction/NPC world state, condition resolution, Wizard News).
+    // Best-effort: the world half never blocks the advance, and the pre-pulse
+    // snapshot already covers these for undo (they land after the snapshot).
+    if (result && result.ok !== false && drainedPartyImpacts.length
+        && typeof get().recordPartyImpact === 'function') {
+      for (const pi of drainedPartyImpacts) {
+        try { await get().recordPartyImpact(campaignId, pi.action); } catch { /* best-effort */ }
+      }
+    }
     return result;
   },
 
@@ -1132,14 +1523,16 @@ export const createCampaignSlice = (set, get) => {
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
-    let proposalType = 'unknown';
+    let appliedDecision = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      // Read-only lookup of the to-be-applied proposal for its coarse type enum.
-      const proposal = (c.worldState?.proposals || []).find(p => p.id === proposalId);
-      proposalType = proposalTypeOf(proposal);
+      // Build the decision telemetry INSIDE set() — the proposal is an Immer
+      // draft proxy that is revoked once set() returns; the extractor flattens
+      // it to a plain enum/band object that survives.
+      const proposal = (c.worldState?.proposals || []).find(p => p.id === proposalId) || null;
+      appliedDecision = extractProposalDecision(proposal, 'applied');
       result = domainApplyWorldPulseProposal({
         campaign: cloneJson(c),
         saves: cloneJson(campaignSettlements(state, campaignId)),
@@ -1152,7 +1545,7 @@ export const createCampaignSlice = (set, get) => {
     });
 
     if (result && campaignPersist) {
-      track(EVENTS.WORLD_PULSE_PROPOSAL_APPLIED, { proposal_type: proposalType });
+      track(EVENTS.WORLD_PULSE_PROPOSAL_APPLIED, appliedDecision);
     }
     await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
     return result;
@@ -1182,7 +1575,10 @@ export const createCampaignSlice = (set, get) => {
     });
 
     if (result && campaignPersist) {
-      track(EVENTS.PARTY_IMPACT_RECORDED, { action_type: action?.kind || 'unknown' });
+      track(EVENTS.PARTY_IMPACT_RECORDED, {
+        action_type: action?.kind || 'unknown', // retained for back-compat
+        ...extractPartyImpact(action, result),
+      });
     }
     await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
     return result;
@@ -1190,6 +1586,7 @@ export const createCampaignSlice = (set, get) => {
 
   dismissWorldPulseProposal: async (campaignId, proposalId) => {
     let proposal = /** @type {any} */ (null);
+    let dismissDecision = /** @type {any} */ (null);
     let campaignPersist = /** @type {any} */ (null);
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
@@ -1202,21 +1599,32 @@ export const createCampaignSlice = (set, get) => {
         { dismissedAt: now },
       );
       proposal = c.worldState.proposals.find(item => item.id === proposalId) || null;
+      // Flatten the draft proxy to plain telemetry before set() revokes it.
+      dismissDecision = proposal ? extractProposalDecision(proposal, 'dismissed') : null;
       c.updatedAt = now;
       campaignPersist = cacheCampaignState(state);
     });
-    if (proposal && campaignPersist) await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+    if (dismissDecision && campaignPersist) {
+      // The BLOCK half of the permission flow — previously emitted nothing, so
+      // accept-vs-block ratio (what DMs let in vs reject) was unmeasurable.
+      track(EVENTS.WORLD_PULSE_PROPOSAL_DISMISSED, dismissDecision);
+      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+    }
     return proposal;
   },
 
   applyQueuedRegionalImpact: (campaignId, impactId) => {
     let result = /** @type {any} */ (null);
+    let impactDecision = /** @type {any} */ (null);
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const graph = ensureRegionalGraph(c.regionalGraph);
       const impact = graph.queuedImpacts.find(i => i.id === impactId);
       if (!impact || !isRegionalImpactAvailable(impact)) return;
+      // DM accepting a cross-settlement impact — the regional permission moment,
+      // previously uncaptured. Flatten the draft impact before set() revokes it.
+      impactDecision = extractRegionalImpactDecision(impact, 'applied', true);
 
       const saveIdx = state.savedSettlements.findIndex(save =>
         String(save.id) === String(impact.targetSettlementId)
@@ -1274,6 +1682,7 @@ export const createCampaignSlice = (set, get) => {
         settlement: result.settlement,
         campaignState: result.campaignState,
       });
+      if (impactDecision) track(EVENTS.REGIONAL_IMPACT_STATUS_CHANGED, impactDecision);
     }
     return result;
   },
@@ -1338,6 +1747,8 @@ export const createCampaignSlice = (set, get) => {
         settlement: result.settlement,
         campaignState: result.campaignState,
       });
+      // result.impact is a cloneJson (plain, not a revoked draft) — safe to read.
+      track(EVENTS.REGIONAL_IMPACT_STATUS_CHANGED, extractRegionalImpactDecision(result.impact, 'resolved', true));
     }
     return result;
   },
@@ -1432,6 +1843,166 @@ export const createCampaignSlice = (set, get) => {
 
   getCampaignForSettlement: (settlementId) => {
     return get().campaigns.find(c => isCampaignActive(c) && c.settlementIds.includes(settlementId)) || null;
+  },
+
+  // ── Campaign clock (Phase C) ────────────────────────────────────────────
+  //
+  // The world map IS the campaign clock. A settlement bound to a CANONIZED
+  // campaign world surrenders its independent timeline: its events queue and
+  // resolve simultaneously at each world-pulse advance, and its individual
+  // undo/reset move up to the world-map (pulse) level.
+
+  /**
+   * Is this settlement bound to the world-map clock? True when it is a member
+   * of a campaign whose world is CANONIZED. Canon-only by product decision:
+   * map placement is NOT required (the world pulse already simulates every
+   * canon member). Matches applyEvent's String-normalized membership scan, not
+   * the exact-match getCampaignForSettlement, so number/string id mixes resolve.
+   */
+  isSettlementClockBound: (settlementId) => {
+    if (settlementId == null) return false;
+    const sid = String(settlementId);
+    const c = get().campaigns.find(
+      x => isCampaignActive(x) && (x.settlementIds || []).map(String).includes(sid),
+    );
+    return !!(c && c.worldState?.canonizedAt);
+  },
+
+  /**
+   * Queue a player event as a pending intention on the settlement's clock-bound
+   * campaign. It resolves simultaneously with every other member at the next
+   * world-pulse advance (drainQueuedEvents). Returns null (no-op) when the
+   * settlement is not clock-bound — callers fall through to the immediate path.
+   */
+  queueSettlementEvent: (settlementId, event) => {
+    if (settlementId == null || !event) return null;
+    const sid = String(settlementId);
+    const campaign = get().campaigns.find(
+      x => isCampaignActive(x) && (x.settlementIds || []).map(String).includes(sid),
+    );
+    if (!campaign || !campaign.worldState?.canonizedAt) return null;
+    const now = new Date().toISOString();
+    let added = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaign.id);
+      if (!c) return;
+      const worldState = ensureWorldState(c.worldState, c);
+      // Stable, collision-resistant id — keyed on the per-call timestamp, NOT
+      // queue length (which decreases after a cancel and could then collide).
+      const queueId = `pe_${sid}_${event.id || event.type || 'evt'}_${now}`;
+      const entry = { queueId, saveId: sid, event: cloneJson(event), queuedAt: now };
+      c.worldState = { ...worldState, pendingEvents: [...(worldState.pendingEvents || []), entry] };
+      c.updatedAt = now;
+      added = { queued: true, queueId, campaignId: c.id };
+      persistCampaignState(state, c.id);
+    });
+    return added;
+  },
+
+  /** Cancel a queued intention before the next tick resolves it. */
+  cancelQueuedEvent: (campaignId, queueId) => {
+    let removed = false;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c?.worldState) return;
+      const before = c.worldState.pendingEvents || [];
+      const after = before.filter(e => e.queueId !== queueId);
+      if (after.length === before.length) return;
+      c.worldState = { ...c.worldState, pendingEvents: after };
+      c.updatedAt = new Date().toISOString();
+      removed = true;
+      persistCampaignState(state, campaignId);
+    });
+    return removed;
+  },
+
+  /** Campaign-clock (Phase C2): is there a pre-pulse snapshot to undo for this
+   *  campaign this session? Drives the "Undo last advance" affordance. */
+  canUndoLastPulse: (campaignId) =>
+    (get().pulseUndoStack || []).some(s => s.campaignId === campaignId),
+
+  /**
+   * Campaign-clock (Phase C2): reverse the most recent world-pulse advance for
+   * this campaign, restoring the campaign world + every member settlement (and
+   * the live active view) from the pre-pulse snapshot. Multi-step — each call
+   * pops one snapshot, so repeated calls walk back tick by tick. Returns true if
+   * an advance was undone. Session-scoped: a reload clears the stack.
+   */
+  undoLastPulse: async (campaignId) => {
+    const persistUpdates = [];
+    let campaignPersist = null;
+    let didUndo = false;
+    set(state => {
+      const stack = state.pulseUndoStack || [];
+      let idx = -1;
+      for (let i = stack.length - 1; i >= 0; i--) {
+        if (stack[i].campaignId === campaignId) { idx = i; break; }
+      }
+      if (idx === -1) return;
+      const snap = stack[idx];
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const stamp = new Date().toISOString();
+      // Restore the campaign world (world state, regional graph, wizard news).
+      c.worldState = ensureWorldState(snap.worldState, c);
+      c.regionalGraph = ensureRegionalGraph(snap.regionalGraph, { now: stamp });
+      c.wizardNews = ensureWizardNewsFeed(snap.wizardNews, { now: stamp });
+      c.updatedAt = stamp;
+      // Restore each member save to its pre-pulse settlement + campaignState —
+      // but only members that still belong to this campaign (a save detached
+      // since the advance must not be silently reverted).
+      const memberIds = new Set((c.settlementIds || []).map(String));
+      for (const s of snap.saves || []) {
+        if (!memberIds.has(String(s.id))) continue;
+        const sidx = state.savedSettlements.findIndex(x => String(x.id) === String(s.id));
+        if (sidx === -1) continue;
+        const restoredSettlement = cloneJson(s.settlement);
+        const restoredCampaignState = cloneJson(s.campaignState);
+        state.savedSettlements[sidx] = {
+          ...state.savedSettlements[sidx],
+          settlement: restoredSettlement,
+          campaignState: restoredCampaignState,
+          timestamp: stamp,
+        };
+        persistUpdates.push({
+          saveId: s.id,
+          settlement: cloneJson(restoredSettlement),
+          campaignState: cloneJson(restoredCampaignState),
+        });
+      }
+      // Re-hydrate the LIVE active view to whichever member is open now — so the
+      // on-screen settlement reflects the reverted state even if the DM switched
+      // members (or the open member isn't the one captured at advance time)
+      // between advancing and undoing. If no member of THIS campaign is open,
+      // the live view is left untouched (a different campaign's settlement, or
+      // a closed detail view, must not be clobbered).
+      if (state.activeSaveId != null) {
+        if (snap.active && String(state.activeSaveId) === snap.active.saveId) {
+          // Same member that was open at advance time — restore its view verbatim.
+          state.settlement = cloneJson(snap.active.settlement);
+          state.systemState = cloneJson(snap.active.systemState);
+          state.eventLog = cloneJson(snap.active.eventLog);
+          state.phase = snap.active.phase;
+          state.editedAt = stamp;
+        } else {
+          const activeSnap = (snap.saves || []).find(s => String(s.id) === String(state.activeSaveId));
+          if (activeSnap && memberIds.has(String(activeSnap.id))) {
+            const cs = activeSnap.campaignState || {};
+            state.settlement = cloneJson(activeSnap.settlement);
+            state.systemState = cs.systemState != null ? cloneJson(cs.systemState) : null;
+            state.eventLog = Array.isArray(cs.eventLog) ? cloneJson(cs.eventLog) : [];
+            state.phase = cs.phase || state.phase;
+            state.editedAt = stamp;
+          }
+        }
+      }
+      // Pop just this snapshot — multi-step undo walks back one tick per call.
+      state.pulseUndoStack = stack.filter((_, i) => i !== idx);
+      campaignPersist = cacheCampaignState(state);
+      didUndo = true;
+    });
+    await flushWorldPulsePersist({ result: didUndo, campaignPersist, persistUpdates, campaignId });
+    return didUndo;
   },
 
   reorderCampaignSettlements: (campaignId, settlementIds) =>

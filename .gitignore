@@ -25,3 +25,4 @@ playwright/.cache/
 
 .claude/tmp-digests/
 sim-report.json
+deep-profile.json

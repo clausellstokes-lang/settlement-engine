@@ -29,6 +29,7 @@ const BACKOFF_MS = [1_000, 4_000, 16_000, 60_000, 60_000];
 let _events = [];     // [{ event, props, ts, subjectId?, _class }]
 let _edits = [];      // research-plane edit rows
 let _snapshots = [];  // research-plane snapshot rows
+let _pulseEffects = []; // research-plane world-pulse per-effect mutation rows
 let _droppedCount = 0;
 let _attempt = 0;
 let _intervalStarted = false;
@@ -61,7 +62,7 @@ function scheduleSpill() {
     _spillTimer = null;
     try {
       localStorage.setItem(SPILL_KEY, JSON.stringify({
-        events: _events, edits: _edits, snapshots: _snapshots, dropped: _droppedCount,
+        events: _events, edits: _edits, snapshots: _snapshots, pulseEffects: _pulseEffects, dropped: _droppedCount,
       }));
     } catch { /* quota — accept loss */ }
   }, 1_000);
@@ -75,6 +76,7 @@ function restoreSpill() {
     if (Array.isArray(d?.events)) _events = d.events.concat(_events);
     if (Array.isArray(d?.edits)) _edits = d.edits.concat(_edits);
     if (Array.isArray(d?.snapshots)) _snapshots = d.snapshots.concat(_snapshots);
+    if (Array.isArray(d?.pulseEffects)) _pulseEffects = d.pulseEffects.concat(_pulseEffects);
     _droppedCount += Number(d?.dropped) || 0;
     capQueue();
   } catch { /* ignore malformed spill */ }
@@ -84,10 +86,11 @@ function clearSpill() {
 }
 
 function capQueue() {
-  const total = () => _events.length + _edits.length + _snapshots.length;
+  const total = () => _events.length + _edits.length + _snapshots.length + _pulseEffects.length;
   while (total() > MAX_RECORDS) {
     // drop-oldest across the combined backlog (events first — they're cheapest)
     if (_events.length) _events.shift();
+    else if (_pulseEffects.length) _pulseEffects.shift();
     else if (_edits.length) _edits.shift();
     else _snapshots.shift();
     _droppedCount += 1;
@@ -101,9 +104,10 @@ function purgeRevoked() {
     _events = _events.filter(e => e._class !== 'research');
     _edits = [];
     _snapshots = _snapshots.filter(s => s.consentTier !== 'research');
+    _pulseEffects = [];
   }
   if (!c.essential) { // full opt-out / DNT → nothing first-party either
-    _events = []; _edits = []; _snapshots = [];
+    _events = []; _edits = []; _snapshots = []; _pulseEffects = [];
   }
 }
 
@@ -127,9 +131,15 @@ export function enqueueSnapshot(row) {
   _snapshots.push({ ...row, ts: row.ts || nowMs() });
   capQueue(); scheduleSpill();
 }
+/** Enqueue a world-pulse per-effect mutation row (research-plane, redacted). */
+export function enqueuePulseEffect(row) {
+  if (!isConfigured) return;
+  _pulseEffects.push({ ...row, ts: row.ts || nowMs(), consentTier: 'research' });
+  capQueue(); scheduleSpill();
+}
 
 function maybeFlush() {
-  if (_events.length + _edits.length + _snapshots.length >= FLUSH_SIZE) flush();
+  if (_events.length + _edits.length + _snapshots.length + _pulseEffects.length >= FLUSH_SIZE) flush();
   startInterval();
 }
 
@@ -152,6 +162,7 @@ function buildEnvelope() {
     events: _events.map((e, i) => ({ seq: i, event: e.event, ts: e.ts, props: e.props, subjectId: e.subjectId })),
     edits: _edits.map((e, i) => ({ seq: 1000 + i, ...e })),
     snapshots: _snapshots.map((s, i) => ({ seq: 2000 + i, ...s })),
+    pulseEffects: _pulseEffects.map((p, i) => ({ seq: 3000 + i, ...p })),
   };
 }
 
@@ -160,7 +171,7 @@ export function flush({ beacon = false } = {}) {
   try {
     if (!isConfigured) return;
     purgeRevoked();
-    if (!_events.length && !_edits.length && !_snapshots.length) return;
+    if (!_events.length && !_edits.length && !_snapshots.length && !_pulseEffects.length) return;
     const url = ingestUrl();
     if (!url) return;
     const envelope = buildEnvelope();
@@ -168,7 +179,7 @@ export function flush({ beacon = false } = {}) {
     if (body.length > 256 * 1024) { capQueue(); return; } // safety; capQueue keeps us bounded
 
     // Snapshot what we're sending so a concurrent enqueue isn't lost on success.
-    const sentCounts = { e: _events.length, d: _edits.length, s: _snapshots.length };
+    const sentCounts = { e: _events.length, d: _edits.length, s: _snapshots.length, p: _pulseEffects.length };
 
     if (beacon && typeof navigator !== 'undefined' && navigator.sendBeacon) {
       const ok = navigator.sendBeacon(url, new Blob([body], { type: 'application/json' }));
@@ -189,8 +200,9 @@ function drain(sent) {
   _events.splice(0, sent.e);
   _edits.splice(0, sent.d);
   _snapshots.splice(0, sent.s);
+  _pulseEffects.splice(0, sent.p || 0);
   _droppedCount = 0;
-  if (!_events.length && !_edits.length && !_snapshots.length) clearSpill();
+  if (!_events.length && !_edits.length && !_snapshots.length && !_pulseEffects.length) clearSpill();
   else scheduleSpill();
 }
 
@@ -225,7 +237,7 @@ function pushRing(entry) {
 export function debugSnapshot() {
   return {
     ring: _ring.slice(),
-    depth: _events.length + _edits.length + _snapshots.length,
+    depth: _events.length + _edits.length + _snapshots.length + _pulseEffects.length,
     dropped: _droppedCount,
     configured: isConfigured,
   };
@@ -233,6 +245,6 @@ export function debugSnapshot() {
 
 /** Test seam: reset module state. */
 export function __resetQueueForTests() {
-  _events = []; _edits = []; _snapshots = []; _droppedCount = 0; _attempt = 0; _ring = [];
+  _events = []; _edits = []; _snapshots = []; _pulseEffects = []; _droppedCount = 0; _attempt = 0; _ring = [];
   clearSpill();
 }

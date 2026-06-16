@@ -61,6 +61,61 @@ function countByCategory(list, field) {
   return out;
 }
 
+/** Counts grouped by an arbitrary key accessor (numeric keys → strings). */
+function countBy(list, keyFn) {
+  const out = {};
+  for (const item of arr(list)) {
+    let k = keyFn(item);
+    if (k == null) continue;
+    k = typeof k === 'string' ? (k.length <= 48 ? k : null) : String(k);
+    if (k == null) continue;
+    out[k] = (out[k] || 0) + 1;
+  }
+  return out;
+}
+
+/**
+ * NPC goal/role/evolution distributions — generation-time roster (settlement.npcs)
+ * plus the campaign sim-state (save.campaignState.worldState.npcStates), which
+ * carries the enum GOALS / role archetypes / dot-rank / faction seat that evolve
+ * over world pulses. ALL enum/count distributions — never names, goal prose, or
+ * personality. The sim-state block only appears once a campaign has pulsed.
+ */
+function npcDistributions(settlement, save, opts = {}) {
+  const npcs = arr(settlement?.npcs);
+  // npcStates live on the CAMPAIGN worldState (passed via opts), not on a per-save
+  // campaignState — the old save.campaignState.worldState path was always empty.
+  const statesObj = opts.npcStates || save?.campaignState?.worldState?.npcStates;
+  let states = statesObj && typeof statesObj === 'object' ? Object.values(statesObj) : [];
+  // Filter to THIS settlement's NPCs so a per-settlement snapshot doesn't fold in
+  // the whole campaign's sim-state (npcState records carry settlementId).
+  if (opts.settlementUuid != null) {
+    const sid = String(opts.settlementUuid);
+    states = states.filter(s => String(s?.settlementId) === sid);
+  }
+  const block = {
+    category_dist: countByCategory(npcs, 'category'),
+    influence_dist: countByCategory(npcs, 'influence'),
+    structural_rank_dist: countByCategory(npcs, 'structuralRank'),
+    corrupt_count: npcs.filter(n => n?.corrupt).length,
+  };
+  if (states.length) {
+    block.role_archetype_dist = countByCategory(states, 'roleArchetype');
+    block.dotrank_dist = countBy(states, s => s?.dotRank);
+    block.seat_dist = countByCategory(states, 'factionSeat');
+    const goalDist = {};
+    for (const s of states) {
+      for (const g of [s?.shortGoal, s?.longGoal]) {
+        const k = str(g);
+        if (k) goalDist[k] = (goalDist[k] || 0) + 1;
+      }
+    }
+    block.goal_dist = goalDist;
+    block.ousted_count = states.filter(s => s?.ousted).length;
+  }
+  return block;
+}
+
 // ── Causal: scores + bands ONLY (contributors carry text — dropped) ──────────
 function causalDigest(settlement) {
   let derived;
@@ -100,7 +155,7 @@ export function extractReducedFingerprint(settlement) {
 }
 
 // ── Full fingerprint — RESEARCH (structural arrays, still no prose/names) ─────
-export function extractSettlementFingerprint(settlement, save = null) {
+export function extractSettlementFingerprint(settlement, save = null, opts = {}) {
   if (!settlement || typeof settlement !== 'object') return null;
   const cfg = settlement.config || {};
   const eco = settlement.economicState || {};
@@ -163,6 +218,9 @@ export function extractSettlementFingerprint(settlement, save = null) {
     institutions_by_category: countByCategory(settlement.institutions, 'category'),
     npc_count: arr(settlement.npcs).length,
     npc_importance_dist: countByCategory(settlement.npcs, 'importance'),
+    // npc goals + evolution (generation-time roster + sim-state from the
+    // campaign world; all enum/count distributions, never names/goal-prose)
+    npc: npcDistributions(settlement, save, opts),
     relationship_count: arr(settlement.relationships).length,
     hook_count: arr(settlement.plotHooks || settlement.hooks).length,
     service_count: arr(settlement.services).length,
@@ -191,6 +249,111 @@ export function extractSettlementFingerprint(settlement, save = null) {
     }
   }
   return fp;
+}
+
+// ── Generation variance: config signature + stressor genesis ─────────────────
+// The variance question ("hold config constant, vary seed, measure the spread")
+// needs a deterministic, SEED-INDEPENDENT key to GROUP BY. Nothing produced one:
+// computeFingerprintHash hashes OUTPUT (seed-dependent). computeConfigSignature
+// hashes the resolved-INTENT config (sentinels intact, _seed excluded), so two
+// generations differing only by seed share a signature.
+
+/** Sorted truthy keys of a toggle map (handles string- or object-valued maps). */
+function toggleKeys(map, pred) {
+  if (!map || typeof map !== 'object') return [];
+  return Object.keys(map)
+    .filter(k => pred(map[k]))
+    .sort();
+}
+
+/** The canonical, enum/flag-only projection of config INTENT (pre-hash). */
+function configProjection(config) {
+  const cfg = config || {};
+  const inst = cfg._institutionToggles || cfg.institutionToggles || {};
+  const isRequire = (v) => v === 'require' || v === true || v?.require === true;
+  const isExclude = (v) => v === 'exclude' || v === 'forceExclude' || v?.forceExclude === true || v?.exclude === true;
+  const stresses = [
+    ...arr(cfg.selectedStresses),
+    ...arr(cfg.stressTypes),
+    ...(cfg.stressType ? [cfg.stressType] : []),
+  ].map(str).filter(Boolean);
+  return {
+    settType: str(cfg.settType),
+    culture: str(cfg.culture),
+    terrainType: str(cfg.terrainType) || str(cfg.terrainOverride),
+    tradeRouteAccess: str(cfg.tradeRouteAccess),
+    monsterThreat: str(cfg.monsterThreat),
+    magicExists: !!cfg.magicExists,
+    magicLevel: str(cfg.magicLevel),
+    // priorities collapse to the literal 'random' when the slider mode rolls
+    // them per-generation — so a randomized-priority config has ONE signature.
+    priorities: cfg._randomizePriorities
+      ? 'random'
+      : {
+          economy: num(cfg.priorityEconomy), military: num(cfg.priorityMilitary),
+          religion: num(cfg.priorityReligion), criminal: num(cfg.priorityCriminal),
+          magic: num(cfg.priorityMagic),
+        },
+    nearbyResourcesRandom: cfg.nearbyResourcesRandom !== false,
+    forcedInstitutions: toggleKeys(inst, isRequire),
+    excludedInstitutions: toggleKeys(inst, isExclude),
+    categoryToggles: toggleKeys(cfg._categoryToggles || cfg.categoryToggles, Boolean),
+    goodsToggles: toggleKeys(cfg._goodsToggles || cfg.goodsToggles, Boolean),
+    servicesToggles: toggleKeys(cfg._servicesToggles || cfg.servicesToggles, Boolean),
+    intendedStresses: [...new Set(stresses)].sort(),
+    selectedStressesRandom: cfg.selectedStressesRandom !== false,
+    neighbourPresent: !!(cfg._importedNeighbor || cfg._neighbourRelType || cfg.importedNeighbour),
+    neighbourRel: str(cfg._neighbourRelType),
+    customContent: cfg.useCustomContent !== false,
+  };
+}
+
+/**
+ * Deterministic, seed-independent config signature (16-hex). The raw projection
+ * (which may name catalog institutions as toggle keys) is HASHED, so the emitted
+ * value carries no names/prose — only a grouping key.
+ */
+export async function computeConfigSignature(config) {
+  return computeFingerprintHash(configProjection(config));
+}
+
+/** True when any identity axis was left to chance (a moving-target generation). */
+export function usedRandomSentinels(config) {
+  const cfg = config || {};
+  const rolled = (v) => typeof v === 'string' && (v === 'random' || v.startsWith('random'));
+  return !!(
+    cfg._randomizePriorities ||
+    cfg.nearbyResourcesRandom !== false ||
+    rolled(cfg.settType) || rolled(cfg.culture) || rolled(cfg.terrainType) ||
+    rolled(cfg.tradeRouteAccess) || rolled(cfg.monsterThreat) || rolled(cfg.magicLevel)
+  );
+}
+
+/**
+ * Per-type stressor GENESIS at generation, derived from the in-object
+ * simulationTrace (already records applied/emergent/declined/suppressed). Maps
+ * each stressor TYPE → genesis enum. Non-personal: types are catalog ids; the
+ * trace's reason prose is dropped.
+ */
+export function extractStressorGenesis(settlement) {
+  const trace = arr(settlement?.simulationTrace);
+  const out = {};
+  for (const t of trace) {
+    if (t?.targetType !== 'stressor') continue;
+    const m = str(t.targetId)?.match(/^stressor\.(.+)$/);
+    const type = m && m[1] && m[1].length <= 48 ? m[1] : null;
+    if (!type) continue;
+    const result = str(t.result);
+    const source = str(arr(t.causes)[0]?.source);
+    let genesis;
+    if (result === 'emergent') genesis = 'generation';
+    else if (result === 'declined') genesis = 'declined';
+    else if (result === 'suppressed_by_institutions') genesis = 'suppressed';
+    else if (result === 'applied') genesis = source === 'event' ? 'user_forced_post_gen' : 'user_forced_pre_gen';
+    else continue;
+    out[type] = genesis; // last write wins; an applied type overrides an earlier declined trace
+  }
+  return out;
 }
 
 // ── Stable stringify + hash ──────────────────────────────────────────────────

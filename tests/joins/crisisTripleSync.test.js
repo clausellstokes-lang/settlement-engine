@@ -141,7 +141,13 @@ function generationFixture() {
   });
 }
 
-function seedStore(store, phase, settlement = fixture()) {
+// worldCanon defaults FALSE: the immediate authored crisis bridge fires on
+// settlement-canon + membership and never required world canonization. Leaving
+// the WORLD un-canonized keeps the settlement non-clock-bound, so authored
+// events resolve at author time (the pre-world-canon path these triple-sync
+// transitions cover). Pass worldCanon:true only where a real pulse must run —
+// there the settlement is clock-bound and onsets QUEUE then drain at the tick.
+function seedStore(store, phase, settlement = fixture(), { worldCanon = false } = {}) {
   const save = {
     id: SAVE_ID,
     name: 'Ashford',
@@ -167,7 +173,7 @@ function seedStore(store, phase, settlement = fixture()) {
       settlementIds: [SAVE_ID],
       regionalGraph: ensureRegionalGraph(),
       wizardNews: { currentTick: 0, entries: [] },
-      worldState: { rngSeed: 'triple-sync-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      worldState: { rngSeed: 'triple-sync-seed', tick: 0, canonizedAt: worldCanon ? '2026-01-01T00:00:00.000Z' : null },
     }];
   });
   store.getState().hydrateFromSave(save);
@@ -351,7 +357,10 @@ describe('canon: every transition keeps the triple agreeing', () => {
   // mechanism. Before this, the dossier kept showing a crisis the world had
   // already ended.
   test('PULSE-born: organic resolution reaches the origin settlement end-to-end', async () => {
-    const store = seedStore(makeStore(), 'canon');
+    // Real pulse → the WORLD is canonized, so this settlement is clock-bound:
+    // the DM's onset QUEUES and the first advance drains it into the local pair.
+    const store = seedStore(makeStore(), 'canon', fixture(), { worldCanon: true });
+    const NOW2 = '2026-07-11T12:00:00.000Z';
 
     // Organic birth proxy: the pulse registered a roaming famine at Ashford.
     store.getState().injectCampaignStressor('camp-1', {
@@ -368,25 +377,30 @@ describe('canon: every transition keeps the triple agreeing', () => {
     expect(t.conds).toEqual([]);
     expect(t.activeTwins).toHaveLength(1);
 
-    // The DM escalates it locally — the onset directive upserts the SAME
-    // stable twin (no stacking) and the local pair appears. Severity kept
-    // LOW so the local entry's pressure cannot organically re-birth a fresh
-    // famine in the same tick the old one resolves (the snapshot is built
-    // before the wind-down lands — a real one-tick overlap, not the bug).
+    // The DM escalates it locally. Clock-bound → the onset queues; the first
+    // advance DRAINS it, upserting the SAME stable twin (no stacking) at the
+    // authored severity and projecting the local pair. Severity kept LOW so
+    // the local entry's pressure cannot organically re-birth a fresh famine.
     onset(store, { id: 'ev-esc', severity: 0.2 });
+    expect((store.getState().campaigns[0].worldState.pendingEvents || [])).toHaveLength(1);
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: NOW });
     t = triple(store);
-    expectCoreAgreement(t);
-    expect(t.entries[0].severity).toBe(0.2);
+    // The drain landed the local pair + the stable twin. The pulse legitimately
+    // nudges a freshly-applied severity by a tick, so exact agreement is only
+    // asserted post-resolution below (the test's real subject).
+    expect(t.entries).toHaveLength(1);
+    expect(t.entries[0].type).toBe('famine');
     expect(t.activeTwins).toHaveLength(1);
-    expect(t.activeTwins[0]).toMatchObject({ id: 'world_stressor.famine.ashford', severity: 0.2 });
+    expect(t.activeTwins[0].id).toBe('world_stressor.famine.ashford');
 
-    // Force the twin resolution-ripe, then run the REAL store pulse.
+    // Force the twin resolution-ripe, then run a SECOND store pulse — organic
+    // resolution winds the local pair down through settlementUpdates.
     store.setState(s => {
       const twin = s.campaigns[0].worldState.stressors.find(st => st.type === 'famine');
       twin.severity = 0.05;
       twin.age = 8;
     });
-    const result = await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: NOW });
+    const result = await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: NOW2 });
     expect((result.resolvedStressors || []).some(st => st.type === 'famine')).toBe(true);
 
     // The origin settlement followed the world: entry gone, condition easing

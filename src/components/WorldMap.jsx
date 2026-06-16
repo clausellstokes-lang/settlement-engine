@@ -16,7 +16,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import {
   FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, Layers, Loader, Map as MapIcon, Globe, Link as LinkIcon,
-  Newspaper, SlidersHorizontal, Zap, HelpCircle,
+  Newspaper, SlidersHorizontal, Zap, HelpCircle, Image as ImageIcon, X as XIcon, Share2, Undo2,
 } from 'lucide-react';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
@@ -74,6 +74,10 @@ export default function WorldMap({ onNavigate } = {}) {
   // ── Refs & local state ────────────────────────────────────────────────
   const iframeRef = useRef(null);
   const mapContainerRef = useRef(null);
+  // Live overlay transform {tx,ty,scale,width,height} — written by MapOverlay in
+  // image mode so the drop handler can inverse-project screen→image coords
+  // without waiting on the debounced viewport persist.
+  const overlayTransformRef = useRef(null);
   const bridgeRef = useRef(null);
   const [bridgeReady, setBridgeReady] = useState(false);
   const [toast, setToast] = useState(null);
@@ -86,6 +90,8 @@ export default function WorldMap({ onNavigate } = {}) {
   const [worldPulseBusy, setWorldPulseBusy] = useState(false);
   const [showSimulationRules, setShowSimulationRules] = useState(false);
   const [regenerateConfirm, setRegenerateConfirm] = useState(null);
+  // Confirm shown when saving a canonized map — placed settlements can't move.
+  const [mapSaveConfirm, setMapSaveConfirm] = useState(false);
 
   // ── Store selectors ───────────────────────────────────────────────────
   const mapMode       = useStore(s => s.mapMode);
@@ -109,6 +115,13 @@ export default function WorldMap({ onNavigate } = {}) {
   const setMapSnapshot  = useStore(s => s.setMapSnapshot);
   const bumpGeometryVersion = useStore(s => s.bumpGeometryVersion);
   const placements      = useStore(s => s.mapState.placements);
+  // Custom image backdrop (Project 1, premium). When set, the FMG iframe is not
+  // mounted — MapOverlay renders the image + owns pan/zoom — and terrain tools +
+  // geography-charted trails are suppressed.
+  const customBackdrop  = useStore(s => s.mapState.customBackdrop);
+  const setMapBackdrop  = useStore(s => s.setMapBackdrop);
+  const clearMapBackdrop = useStore(s => s.clearMapBackdrop);
+  const imageMode       = !!customBackdrop?.imageUrl;
 
   const saves          = useStore(s => s.savedSettlements);
   const savesLoaded    = useStore(s => s.savedSettlementsLoaded);
@@ -127,6 +140,10 @@ export default function WorldMap({ onNavigate } = {}) {
   const clearCampaignMap  = useStore(s => s.clearCampaignMap);
   const getCampaignMapState = useStore(s => s.getCampaignMapState);
   const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
+  // Campaign-clock (Phase C2/C3): multi-step undo of the last World Pulse.
+  const undoLastPulse = useStore(s => s.undoLastPulse);
+  const canUndoPulse = useStore(s =>
+    !!activeCampaignId && (s.pulseUndoStack || []).some(e => e.campaignId === activeCampaignId));
 
   const activeCampaign = useMemo(
     () => activeCampaigns.find(c => c.id === activeCampaignId) || null,
@@ -156,12 +173,12 @@ export default function WorldMap({ onNavigate } = {}) {
   // campaign cloud sync. Gated on the mapAutosave flag + an active campaign.
   const mapDirtyKey = useStore(s => {
     const m = s.mapState || {};
-    return `${Object.keys(m.placements || {}).sort().join(',')}|${(m.labels || []).length}|${(m.markers || []).length}|${(m.forests || []).length}`;
+    return `${Object.keys(m.placements || {}).sort().join(',')}|${(m.labels || []).length}|${(m.markers || []).length}|${(m.forests || []).length}|${m.customBackdrop?.imageUrl || ''}`;
   });
   useEffect(() => {
     if (!flag('mapAutosave') || !activeCampaignId) return undefined;
     const p = activeCampaign?.mapState || {};
-    const persistedKey = `${Object.keys(p.placements || {}).sort().join(',')}|${(p.labels || []).length}|${(p.markers || []).length}|${(p.forests || []).length}`;
+    const persistedKey = `${Object.keys(p.placements || {}).sort().join(',')}|${(p.labels || []).length}|${(p.markers || []).length}|${(p.forests || []).length}|${p.customBackdrop?.imageUrl || ''}`;
     if (mapDirtyKey === persistedKey) return undefined;
     const t = setTimeout(() => {
       try { saveCampaignMap(activeCampaignId, useStore.getState().mapState); }
@@ -331,6 +348,21 @@ export default function WorldMap({ onNavigate } = {}) {
       return;
     }
 
+    // Image-mode drop: no iframe/bridge — inverse-project the screen point
+    // through the live overlay transform into image-pixel coords, then place
+    // directly. Placements live in the same <g>-space as the backdrop image.
+    if (live.mapState?.customBackdrop?.imageUrl) {
+      const container = mapContainerRef.current;
+      const t = overlayTransformRef.current;
+      if (!container || !t || !t.scale) return;
+      const rect = container.getBoundingClientRect();
+      const imgX = (e.clientX - rect.left - t.tx) / t.scale;
+      const imgY = (e.clientY - rect.top - t.ty) / t.scale;
+      const burgId = `sf_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+      addPlacement({ burgId, settlementId: data.id, x: imgX, y: imgY, via: 'drop' });
+      return;
+    }
+
     const iframe = iframeRef.current;
     if (!iframe) return;
     const ifRect = iframe.getBoundingClientRect();
@@ -409,8 +441,9 @@ export default function WorldMap({ onNavigate } = {}) {
           await bridge.clearAllPlacements();
           showToast('info', 'Campaign has no saved map snapshot');
         }
-        // Restore viewport
-        if (ms.viewport && ms.viewport.scale) {
+        // Restore viewport — but never feed an IMAGE-space camera into FMG's
+        // d3.zoom (the two modes share one viewport field; the mode tag guards it).
+        if (ms.viewport && ms.viewport.scale && ms.viewport.mode !== 'image') {
           try {
             await bridge.setViewport({
               cx: ms.viewport.cx,
@@ -451,7 +484,7 @@ export default function WorldMap({ onNavigate } = {}) {
     handleSelectCampaign(id);
   }, [bridgeReady, activeCampaignId, activeCampaign, handleSelectCampaign]);
 
-  const handleSaveMapToCampaign = useCallback(async () => {
+  const performSaveMap = useCallback(async () => {
     if (!activeCampaignId) return;
     const bridge = bridgeRef.current;
     if (!bridge?.isReady) {
@@ -488,6 +521,17 @@ export default function WorldMap({ onNavigate } = {}) {
     }
   }, [activeCampaignId, activeCampaign, saveCampaignMap, setMapSnapshot]);
 
+  // Save entry point. On a canonized map, first confirm that placed settlements
+  // can't be moved (newly added ones still save in place); otherwise save directly.
+  const handleSaveMapToCampaign = useCallback(async () => {
+    if (!activeCampaignId) return;
+    if (activeCampaign?.worldState?.canonizedAt) {
+      setMapSaveConfirm(true);
+      return;
+    }
+    await performSaveMap();
+  }, [activeCampaignId, activeCampaign, performSaveMap]);
+
   const handleClearMapFromCampaign = useCallback(() => {
     if (!activeCampaignId) return;
     clearCampaignMap(activeCampaignId);
@@ -516,6 +560,23 @@ export default function WorldMap({ onNavigate } = {}) {
       setWorldPulseBusy(false);
     }
   }, [activeCampaignId, advanceCampaignWorld, worldPulseBusy, worldPulseInterval]);
+
+  // Campaign-clock: reverse the most recent World Pulse for this campaign,
+  // restoring the pre-pulse world + every member settlement. Multi-step — the
+  // button stays available while snapshots remain (capped, session-scoped).
+  const handleUndoRealm = useCallback(async () => {
+    if (!activeCampaignId || worldPulseBusy) return;
+    setWorldPulseBusy(true);
+    try {
+      const ok = await undoLastPulse(activeCampaignId);
+      showToast(ok ? 'success' : 'info', ok ? 'Reverted the last realm advance' : 'Nothing to undo');
+    } catch (err) {
+      console.warn('[WorldMap] undo advance failed', err);
+      showToast('error', `Undo failed: ${err.message || err}`);
+    } finally {
+      setWorldPulseBusy(false);
+    }
+  }, [activeCampaignId, undoLastPulse, worldPulseBusy]);
 
   // ── Template selection ─────────────────────────────────────────────────
   const handleTemplateChange = useCallback(async (templateId) => {
@@ -574,6 +635,77 @@ export default function WorldMap({ onNavigate } = {}) {
     if (!bridge?.isReady) return;
     try { await bridge.fitMap(); } catch (e) {}
   }, []);
+
+  // ── Custom map image (Project 1, premium) ─────────────────────────────
+  // Pick → validate → downscale (≤4096px) → upload to Supabase Storage → set
+  // the campaign's customBackdrop. Premium + active-campaign gated at the call
+  // site (the control only renders for canManageCampaigns + activeCampaignId).
+  const handleImportImage = useCallback(() => {
+    if (!activeCampaignId) { showToast('info', 'Select a campaign before importing a map image.'); return; }
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/png,image/jpeg,image/webp';
+    input.onchange = async () => {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      try {
+        const { validateImageFile, downscaleImageFile, uploadMapBackdrop } = await import('../lib/imageUpload.js');
+        const v = validateImageFile(file);
+        if (!v.ok) { showToast('error', v.error); return; }
+        const ownerId = useStore.getState().auth?.user?.id;
+        if (!ownerId) { showToast('error', 'Sign in to import a map image.'); return; }
+        showToast('info', 'Processing image…');
+        const prevUrl = useStore.getState().mapState.customBackdrop?.imageUrl || null;
+        const { blob, w, h, type } = await downscaleImageFile(file, 4096);
+        const { url } = await uploadMapBackdrop(blob, { ownerId, campaignId: activeCampaignId, contentType: type });
+        setMapBackdrop({ imageUrl: url, w, h });
+        // Best-effort: delete the replaced object so re-imports don't orphan storage.
+        if (prevUrl && prevUrl !== url) {
+          import('../lib/imageUpload.js').then(({ removeMapBackdrop }) => removeMapBackdrop(prevUrl)).catch(() => {});
+        }
+        showToast('success', 'Custom map imported.');
+      } catch (err) {
+        showToast('error', err?.message || 'Map import failed.');
+      }
+    };
+    input.click();
+  }, [activeCampaignId, setMapBackdrop]);
+
+  const handleClearImage = useCallback(() => {
+    const url = useStore.getState().mapState.customBackdrop?.imageUrl;
+    clearMapBackdrop();
+    if (url) import('../lib/imageUpload.js').then(({ removeMapBackdrop }) => removeMapBackdrop(url)).catch(() => {});
+    showToast('info', 'Reverted to generated terrain.');
+  }, [clearMapBackdrop]);
+
+  // ── Share map to the gallery (Project 2, blank canvas) ────────────────
+  const [sharingMap, setSharingMap] = useState(false);
+  const handleShareMap = useCallback(async (kind = 'map') => {
+    if (!activeCampaignId) { showToast('info', 'Select a campaign to share its map.'); return; }
+    setSharingMap(true);
+    try {
+      // Persist the latest map AND await its cloud upsert before publishing —
+      // publish_map only flips gallery flags and reads whatever map_data is
+      // already in the saved_maps row, so the row must exist + carry the current
+      // mapState first (a fresh campaign hasn't synced yet → otherwise the RPC
+      // 404s, and an edited one would publish a stale backdrop).
+      saveCampaignMap(activeCampaignId, useStore.getState().mapState);
+      const camp = useStore.getState().campaigns.find(c => c.id === activeCampaignId);
+      if (camp) {
+        const { campaigns: campaignService } = await import('../lib/campaigns.js');
+        await campaignService.upsert(camp);
+      }
+      const { shareMap } = await import('../lib/gallery.js');
+      await shareMap(activeCampaignId, { kind });
+      showToast('success', kind === 'map_with_campaign'
+        ? 'Map + settlements shared to the gallery.'
+        : 'Map shared to the gallery as a reusable blank canvas.');
+    } catch (err) {
+      showToast('error', err?.message || 'Map share failed.');
+    } finally {
+      setSharingMap(false);
+    }
+  }, [activeCampaignId, saveCampaignMap]);
 
   // ── P112 / M-8 — Worldbuilder keymap ──────────────────────────────────
   // P (place) / T (terrain) / A (annotate) / R (routes) switch modes;
@@ -635,7 +767,7 @@ export default function WorldMap({ onNavigate } = {}) {
         {/* Mode switcher */}
         {!showingCampaignPanel ? (
           <span data-tour="mode" style={{ display: 'inline-flex' }}>
-            <ModeSwitch mapMode={mapMode} setMapMode={setMapMode} />
+            <ModeSwitch mapMode={mapMode} setMapMode={setMapMode} imageMode={imageMode} />
           </span>
         ) : showingWizardNews ? (
           <div style={{
@@ -770,6 +902,15 @@ export default function WorldMap({ onNavigate } = {}) {
                 >
                   <Zap size={13} /> {worldPulseBusy ? 'Advancing' : 'Advance Realm'}
                 </IconButton>
+                {canUndoPulse && (
+                  <IconButton
+                    onClick={handleUndoRealm}
+                    title="Undo the last realm advance — restores the pre-pulse world and every settlement"
+                    disabled={worldPulseBusy}
+                  >
+                    <Undo2 size={13} /> Undo Advance
+                  </IconButton>
+                )}
               </>
             )}
             <div style={{ width: 1, height: 24, background: BORDER2 }} />
@@ -796,8 +937,31 @@ export default function WorldMap({ onNavigate } = {}) {
             </IconButton>
             {/* Canon-only is enforced (only canon settlements can be placed),
                 so the former Canon / All Phases toggle was removed. */}
-            {/* Island shape picker */}
-            {mapTemplates.length > 0 && (
+            {/* Custom map image (premium + active campaign). Import enters image
+                mode; Clear reverts to generated terrain. */}
+            {canManageCampaigns && activeCampaignId && (
+              imageMode ? (
+                <IconButton onClick={handleClearImage} title="Revert to generated terrain">
+                  <XIcon size={13} /> Clear Image
+                </IconButton>
+              ) : (
+                <IconButton onClick={handleImportImage} title="Import a custom image to use as the map">
+                  <ImageIcon size={13} /> Import Image
+                </IconButton>
+              )
+            )}
+            {canManageCampaigns && activeCampaignId && (
+              <IconButton onClick={() => handleShareMap('map')} disabled={sharingMap} title="Share this map to the gallery as a reusable blank canvas">
+                <Share2 size={13} /> {sharingMap ? 'Sharing…' : 'Share Map'}
+              </IconButton>
+            )}
+            {canManageCampaigns && activeCampaignId && (activeCampaign?.settlementIds?.length > 0) && (
+              <IconButton onClick={() => handleShareMap('map_with_campaign')} disabled={sharingMap} title="Share this map WITH its settlements (public-safe dossiers)">
+                <Share2 size={13} /> Share + Settlements
+              </IconButton>
+            )}
+            {/* Island shape picker — terrain generation, hidden in image mode */}
+            {!imageMode && mapTemplates.length > 0 && (
               <>
                 <Globe size={14} color={MUTED} />
                 <select
@@ -823,9 +987,11 @@ export default function WorldMap({ onNavigate } = {}) {
             <IconButton onClick={handleFit} title="Fit entire map in view">
               <MapIcon size={13} /> Fit
             </IconButton>
-            <IconButton onClick={handleRegenerate} title="Regenerate a new world">
-              <RefreshCw size={13} /> Regenerate
-            </IconButton>
+            {!imageMode && (
+              <IconButton onClick={handleRegenerate} title="Regenerate a new world">
+                <RefreshCw size={13} /> Regenerate
+              </IconButton>
+            )}
           </>
         )}
 
@@ -848,10 +1014,11 @@ export default function WorldMap({ onNavigate } = {}) {
       {!showingCampaignPanel && mapMode === MAP_MODES.ANNOTATE && (
         <Suspense fallback={null}><AnnotateToolbar /></Suspense>
       )}
-      {!showingCampaignPanel && mapMode === MAP_MODES.TERRAIN && (
+      {/* Terrain + Routes toolbars are FMG-only (need pack.cells); suppressed in image mode. */}
+      {!showingCampaignPanel && !imageMode && mapMode === MAP_MODES.TERRAIN && (
         <Suspense fallback={null}><TerrainToolbar bridgeRef={bridgeRef} /></Suspense>
       )}
-      {!showingCampaignPanel && mapMode === MAP_MODES.ROUTES && (
+      {!showingCampaignPanel && !imageMode && mapMode === MAP_MODES.ROUTES && (
         <Suspense fallback={null}><RoutesToolbar /></Suspense>
       )}
 
@@ -901,31 +1068,32 @@ export default function WorldMap({ onNavigate } = {}) {
             minHeight: 0,
           }}
         >
-          <iframe
-            ref={iframeRef}
-            data-tour="map"
-            src={FMG_URL}
-            title="Fantasy Map"
-            style={{
-              width: '100%',
-              height: '100%',
-              border: 'none',
-              display: 'block',
-              pointerEvents: mapMode === MAP_MODES.ANNOTATE ? 'none' : 'auto',
-            }}
-          />
-          {bridgeReady && (
+          {/* Custom image backdrop mode skips FMG entirely — MapOverlay renders
+              the image + owns pan/zoom. Otherwise the FMG iframe is the bottom plane. */}
+          {!imageMode && (
+            <iframe
+              ref={iframeRef}
+              data-tour="map"
+              src={FMG_URL}
+              title="Fantasy Map"
+              style={{
+                width: '100%',
+                height: '100%',
+                border: 'none',
+                display: 'block',
+                pointerEvents: mapMode === MAP_MODES.ANNOTATE ? 'none' : 'auto',
+              }}
+            />
+          )}
+          {(bridgeReady || imageMode) && (
             <Suspense fallback={null}>
               {/* bridgeRef.current is read during render to pass into the overlay.
                   Strictly a react-hooks/refs violation, but the bridge is
                   constructed once during the bridge-init effect and never
-                  reassigned for the lifetime of this WorldMap instance.
-                  Fix-it-properly path: lift bridge into useState alongside
-                  bridgeReady, so the prop is state-driven. Deferred — bridge
-                  is non-serializable and state-storing it triggers some Zustand
-                  immer warnings we'd need to silence. */}
+                  reassigned for the lifetime of this WorldMap instance. In image
+                  mode there is no bridge (the overlay self-drives). */}
               {/* eslint-disable-next-line react-hooks/refs */}
-              <MapOverlay bridge={bridgeRef.current} />
+              <MapOverlay bridge={imageMode ? null : bridgeRef.current} transformOut={overlayTransformRef} />
             </Suspense>
           )}
           <Suspense fallback={null}>
@@ -944,7 +1112,7 @@ export default function WorldMap({ onNavigate } = {}) {
           <Suspense fallback={null}>
             <QuickInspector />
           </Suspense>
-          {!mapReady && (
+          {!mapReady && !imageMode && (
             <div style={{
               position: 'absolute', inset: 0, display: 'flex',
               alignItems: 'center', justifyContent: 'center',
@@ -1035,6 +1203,15 @@ export default function WorldMap({ onNavigate } = {}) {
         onCancel={() => setRegenerateConfirm(null)}
       />
 
+      <ConfirmDialog
+        open={mapSaveConfirm}
+        title="Save canonized map?"
+        body="This campaign's world is canonized, so placed settlements can no longer be moved. Any settlements you've newly added will be saved where they sit. Continue?"
+        confirmLabel="Save map"
+        onConfirm={() => { setMapSaveConfirm(false); performSaveMap(); }}
+        onCancel={() => setMapSaveConfirm(false)}
+      />
+
       <Suspense fallback={null}>
         <SimulationRulesDialog
           open={showSimulationRules}
@@ -1057,17 +1234,19 @@ export default function WorldMap({ onNavigate } = {}) {
 
 // ── Subcomponents ────────────────────────────────────────────────────────
 
-function ModeSwitch({ mapMode, setMapMode }) {
+function ModeSwitch({ mapMode, setMapMode, imageMode }) {
   // P110 / M-4 — Routes mode appended to the mode pill group. The
   // existing mode pill is already segmented; this is one more entry.
   // Click promotes relationship/road/supply-chain layers to primary
   // content and fires MAP_ROUTES_MODE_ENTERED analytics.
+  // Image-mode maps have no FMG geometry, so Terrain (heightmap/biome editor)
+  // and Routes (geography-charted trails) are omitted.
   const modes = [
     { id: MAP_MODES.VIEW,     label: 'View',     Icon: Eye },
     { id: MAP_MODES.TERRAIN,  label: 'Terrain',  Icon: Mountain },
     { id: MAP_MODES.ANNOTATE, label: 'Annotate', Icon: PenTool },
     { id: MAP_MODES.ROUTES,   label: 'Routes',   Icon: LinkIcon },
-  ];
+  ].filter(m => !imageMode || (m.id !== MAP_MODES.TERRAIN && m.id !== MAP_MODES.ROUTES));
   const handleClick = (id) => {
     setMapMode(id);
     if (id === MAP_MODES.ROUTES) {

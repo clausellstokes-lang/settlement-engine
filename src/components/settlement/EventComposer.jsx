@@ -428,8 +428,10 @@ export default function EventComposer() {
     // Post-apply staleness notice: the event committed (and stays committed
     // regardless of what the modal answers) — on a narrated save the AI
     // prose was written against the previous state, so offer regenerate /
-    // continue-with-raw. Raw saves have nothing to go stale.
-    if (entry && narrated) {
+    // continue-with-raw. Raw saves have nothing to go stale. A clock-bound
+    // settlement only QUEUED the event (entry.queued) — nothing changed yet,
+    // so the narrative isn't stale until the next World Pulse resolves it.
+    if (entry && !entry.queued && narrated) {
       setStaleNotice({ label: EVENT_REGISTRY[evType]?.label || evType });
     }
   }
@@ -966,8 +968,9 @@ export default function EventComposer() {
             const r = applyBatch(staged);
             if (r?.ok) {
               // One staleness notice for the whole batch — the modal fires
-              // once per apply click, never once per staged event.
-              if (narrated) setStaleNotice({ label: `${staged.length} changes` });
+              // once per apply click, never once per staged event. Skip it when
+              // the batch only queued (clock-bound): nothing changed yet.
+              if (narrated && !r.queuedOnly) setStaleNotice({ label: `${staged.length} changes` });
               setStaged([]);
             }
           }}

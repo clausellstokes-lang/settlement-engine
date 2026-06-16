@@ -17,6 +17,7 @@ import { autoLayout } from './graphLayout.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
 import { truncateAtWord } from '../lib/text.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import { captureFingerprint } from '../lib/researchCapture.js';
 
 /** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
 function durationBand(ms) {
@@ -797,5 +798,13 @@ export function generateCampaignPDF(campaign, allSaves) {
       narrative_mode: false,
       duration_band: durationBand(Date.now() - startedAt),
     });
+    // Per-settlement 'exported' structural snapshots — the campaign export is a
+    // real lifecycle moment for each member settlement, same as a single-PDF
+    // export. captureFingerprint silently skips uuid-less (unsaved) members.
+    for (const save of settlements) {
+      if (save?.settlement && save?.id) {
+        captureFingerprint('exported', save.settlement, { settlementUuid: String(save.id), save });
+      }
+    }
   } catch { /* analytics never breaks export */ }
 }

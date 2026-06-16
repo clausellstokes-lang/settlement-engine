@@ -6,6 +6,8 @@
  * relationship type, and cross-settlement link data.
  */
 
+import { track, EVENTS } from '../lib/analytics.js';
+
 export const RELATIONSHIP_TYPES = [
   { id: 'neutral',       label: 'Neutral',       color: '#888' },
   { id: 'trade_partner', label: 'Trade Partner',  color: '#2a7a2a' },
@@ -41,18 +43,30 @@ export const createNeighbourSlice = (set, get) => ({
       state.config._neighbourRelType = relType;
     }),
 
-  addNeighbourLink: (link) =>
-    set(state => { state.neighbourNetwork.push(link); }),
+  addNeighbourLink: (link) => {
+    set(state => { state.neighbourNetwork.push(link); });
+    // Non-personal: relationship enum + network size + a contacts-present flag.
+    track(EVENTS.NEIGHBOUR_LINKED, {
+      action: 'add',
+      relationship_type: typeof link?.relType === 'string' ? link.relType : 'unknown',
+      network_size_after: get().neighbourNetwork.length,
+      has_npc_contacts: Array.isArray(link?.npcContacts) && link.npcContacts.length > 0,
+    });
+  },
 
-  removeNeighbourLink: (settlementId) =>
+  removeNeighbourLink: (settlementId) => {
     set(state => {
       state.neighbourNetwork = state.neighbourNetwork.filter(
         l => l.settlementId !== settlementId
       );
-    }),
+    });
+    track(EVENTS.NEIGHBOUR_LINKED, { action: 'remove', network_size_after: get().neighbourNetwork.length });
+  },
 
-  setNeighbourNetwork: (network) =>
-    set(state => { state.neighbourNetwork = network; }),
+  setNeighbourNetwork: (network) => {
+    set(state => { state.neighbourNetwork = network; });
+    track(EVENTS.NEIGHBOUR_LINKED, { action: 'set', network_size_after: get().neighbourNetwork.length });
+  },
 
   /** Import a neighbour from direct JSON (for the Neighbour System tab). */
   handleImportDirect: (json) => {

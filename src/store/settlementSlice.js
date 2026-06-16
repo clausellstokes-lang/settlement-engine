@@ -288,6 +288,18 @@ function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, 
     });
     if (result.impacts.length > 0) {
       afterState.setCampaignRegionalGraph(campaign.id, result.graph);
+      // The canon-edit cross-settlement propagation moment — this path fired NO
+      // analytics. result is a plain domain return; emit the redacted summary.
+      Promise.all([
+        import('../lib/analytics.js'),
+        import('../lib/regionalFingerprint.js'),
+      ]).then(([{ track, EVENTS }, { extractRegionalPropagation }]) => {
+        const p = extractRegionalPropagation({
+          impacts: result.impacts, changes: result.localDelta?.changes,
+          genesis: 'canon_edit', maxDepth: 2,
+        });
+        if (p) track(EVENTS.REGIONAL_PROPAGATION_APPLIED, p);
+      }).catch(() => {});
     }
   }
 
@@ -377,6 +389,11 @@ export const createSettlementSlice = (set, get) => ({
   /** Add an edit to the queue. Returns the edit so the caller can
    *  reference its id (e.g. for an undo-this-edit affordance). */
   queueEdit: (kind, payload) => {
+    // Campaign-clock identity lock: reject (rather than queue) NPC/faction
+    // renames once the settlement is canonized — names are frozen post-canon.
+    if (get().phase === 'canon' && (kind === 'rename-npc' || kind === 'rename-faction')) {
+      return null;
+    }
     const clock = (get().pendingEditsClock || 0) + 1;
     const edit = _pe_buildEdit(kind, payload, clock);
     set(state => {
@@ -508,6 +525,25 @@ export const createSettlementSlice = (set, get) => ({
         canon_phase: canonPhase,
       });
     }).catch(() => {});
+
+    // Research plane (edit_events) — feed the long-built but previously-unfed
+    // edit ledger. Saved settlements only (a stable uuid is required), research
+    // consent gated, payloads redacted to enum/count only (never edit prose).
+    const editUuid = state.activeSaveId;
+    if (editUuid) {
+      const preSettlement = state.settlement; // Immer-immutable pre-commit ref
+      Promise.all([
+        import('../lib/consent.js'),
+        import('../lib/analyticsQueue.js'),
+        import('../lib/editFingerprint.js'),
+        import('../domain/pendingEdits.js'),
+      ]).then(([{ getConsent }, { enqueueEdit }, { extractEditRows }, { previewCascade }]) => {
+        if (!getConsent().research) return;
+        let cascade = null;
+        try { cascade = previewCascade(preSettlement, queue); } catch { /* coarse cascade is best-effort */ }
+        for (const row of extractEditRows(active, { settlementUuid: editUuid, cascade })) enqueueEdit(row);
+      }).catch(() => {});
+    }
   },
 
   // ── P133 / E-5 · Version history mutations ──────────────────────────
@@ -709,6 +745,7 @@ export const createSettlementSlice = (set, get) => ({
       // the summarizer don't fail the run — they just produce a null
       // summary and the rail falls back to the label.
     const pipelineHistory = [];
+    const genStart = (typeof performance !== 'undefined' ? performance.now() : Date.now());
     let result;
     try {
       result = eng.generateSettlementPipeline(fullConfig, neighbor, {
@@ -739,6 +776,7 @@ export const createSettlementSlice = (set, get) => ({
       }).catch(() => {});
       throw genErr;
     }
+    const generationMs = Math.round((typeof performance !== 'undefined' ? performance.now() : Date.now()) - genStart);
       // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
       // authored conditions survive a local regeneration — a reroll replaces
       // the town, not the campaign layer's crises. No-op on a first
@@ -812,11 +850,42 @@ export const createSettlementSlice = (set, get) => ({
     Promise.all([
       import('../lib/analytics.js'),
       import('../lib/structuralFingerprint.js'),
-    ]).then(([{ track, EVENTS }, { extractReducedFingerprint }]) => {
+      import('../lib/regionalFingerprint.js'),
+    ]).then(async ([{ track, EVENTS }, fp, { extractNeighbourGenerated }]) => {
+      const { extractReducedFingerprint, computeFingerprintHash, computeConfigSignature, usedRandomSentinels, extractStressorGenesis, band5 } = fp;
       const reduced = extractReducedFingerprint(reconciled) || {};
-      track(EVENTS.GENERATION_COMPLETED, { ...reduced });
+      const power = reconciled?.powerStructure || {};
+      // The variance grouping key (config_signature) + an output identity hash
+      // (content_hash) are async (SubtleCrypto); resolve them, but never let a
+      // hashing hiccup drop the event.
+      let config_signature; let content_hash;
+      try { config_signature = await computeConfigSignature(fullConfig); } catch { /* omit */ }
+      try { content_hash = await computeFingerprintHash(reduced); } catch { /* omit */ }
+      track(EVENTS.GENERATION_COMPLETED, {
+        ...reduced,
+        config_signature,
+        content_hash,
+        used_random_sentinels: usedRandomSentinels(fullConfig),
+        is_regeneration: hadSettlement,
+        duration_ms: generationMs,
+        conflict_count: Array.isArray(power.conflicts) ? power.conflicts.length : 0,
+        relationship_count: Array.isArray(reconciled?.relationships) ? reconciled.relationships.length : 0,
+        service_count: Array.isArray(reconciled?.services) ? reconciled.services.length : 0,
+        hook_count: Array.isArray(reconciled?.plotHooks || reconciled?.hooks) ? (reconciled.plotHooks || reconciled.hooks).length : 0,
+        legitimacy_band: band5(power.publicLegitimacy?.score),
+        defense_readiness: reconciled?.defenseProfile?.readiness?.label,
+        neighbour_present: !!(neighbor || reconciled?.neighborRelationship),
+        neighbour_relationship_type: reconciled?.neighborRelationship?.relationshipType || fullConfig._neighbourRelType,
+        custom_content_active: fullConfig.useCustomContent !== false,
+        // per-type stressor genesis (forced-pre / emergent / post-gen / suppressed)
+        stressor_genesis: extractStressorGenesis(reconciled),
+      });
+      // Activate the dead neighbour_generated event: the generation-time
+      // neighbour bias (which axes it shifted), only when a neighbour was bound.
+      const neigh = extractNeighbourGenerated(reconciled);
+      if (neigh) track(EVENTS.NEIGHBOUR_GENERATED, neigh);
       if (hadSettlement) {
-        track(EVENTS.REGENERATION_TRIGGERED, { regen_mode: 'full' });
+        track(EVENTS.REGENERATION_TRIGGERED, { regen_mode: 'full', config_signature });
       }
     }).catch(() => {});
 
@@ -1238,12 +1307,17 @@ export const createSettlementSlice = (set, get) => ({
   // ── NPC / Faction renaming ─────────────────────────────────────────────────
   renameNPC: (npcIndex, newName) =>
     set(state => {
+      // Campaign-clock identity lock: NPC names freeze at canonization. Renames
+      // are a draft-only affordance (the UI hides them post-canon; guard here too).
+      if (state.phase === 'canon') return;
       if (!state.settlement?.npcs?.[npcIndex]) return;
       state.settlement.npcs[npcIndex].name = newName;
     }),
 
   renameFaction: (factionIndex, newName) =>
     set(state => {
+      // Campaign-clock identity lock: faction names freeze at canonization.
+      if (state.phase === 'canon') return;
       // Canonical factions live on powerStructure.factions; settlement.factions
       // is a usually-empty legacy mirror. The old code only saw the mirror, so
       // a rename silently no-opped on every generated settlement. Resolve the
@@ -1458,6 +1532,20 @@ export const createSettlementSlice = (set, get) => ({
     const state = get();
     if (!state.settlement) return null;
     const activeSaveId = state.activeSaveId || null;
+    // Campaign-clock (Phase C1): a settlement bound to a CANONIZED campaign
+    // world surrenders its independent timeline. Its events don't resolve now —
+    // they queue as pending intentions and resolve simultaneously with every
+    // other member at the next world-pulse advance (drainQueuedEvents). Only in
+    // canon; draft edits stay authorial and immediate.
+    if (activeSaveId && state.phase === 'canon'
+        && typeof state.isSettlementClockBound === 'function'
+        && state.isSettlementClockBound(activeSaveId)) {
+      const queued = state.queueSettlementEvent(activeSaveId, event);
+      if (queued) {
+        set(s => { s.pendingPreview = null; s.pendingBatchPreview = null; });
+        return queued;
+      }
+    }
     const beforeSave = activeSaveId
       ? state.savedSettlements.find(save => String(save.id) === String(activeSaveId))
       : null;
@@ -1624,7 +1712,11 @@ export const createSettlementSlice = (set, get) => ({
       if (entry) logEntries.push(entry);
     }
     set(s => { s.pendingBatchPreview = null; });
-    return { ok: true, warnings: [], logEntries };
+    // Campaign-clock: on a clock-bound settlement every event only QUEUED (the
+    // markers carry `queued:true`); nothing mutated, so callers should not raise
+    // the stale-narrative notice.
+    const queuedOnly = logEntries.length > 0 && logEntries.every(e => e?.queued);
+    return { ok: true, warnings: [], logEntries, queuedOnly };
   },
 
   dismissBatchPreview: () => set(state => { state.pendingBatchPreview = null; }),

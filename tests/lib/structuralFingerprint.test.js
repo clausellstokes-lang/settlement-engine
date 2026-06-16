@@ -63,7 +63,19 @@ const settlement = {
 };
 
 const save = {
-  campaignState: { phase: 'canon', eventLog: [{ event: { id: 'e1' } }] },
+  campaignState: {
+    phase: 'canon',
+    eventLog: [{ event: { id: 'e1' } }],
+    // NPC sim-state (campaign worldState) — exercises npcDistributions' evolution
+    // block. The block reads ONLY the enum fields; the name/personality/secret
+    // here MUST NOT leak (they are in SENSITIVE).
+    worldState: {
+      npcStates: {
+        n1: { settlementId: 's-test', roleArchetype: 'heir', dotRank: 2, factionSeat: 'lieutenant_operator', shortGoal: 'secure_office', longGoal: 'expand_influence', ousted: true, name: 'Seraphina Voss', personality: 'paranoid and cunning', secret: 'poisoned the late mayor' },
+        n2: { settlementId: 's-test', roleArchetype: 'criminal', dotRank: 1, factionSeat: 'agent_protege', shortGoal: 'profit_from_change', longGoal: 'control_institution', ousted: false },
+      },
+    },
+  },
   versionHistory: [{ id: 'v1' }],
   aiData: { aiSettlement: { thesis: 'A town built on buried secrets' }, aiDailyLife: null, narrativeMode: 'raw' },
 };
@@ -102,6 +114,26 @@ describe('structuralFingerprint — redaction canary', () => {
     expect(fp.lifecycle.phase).toBe('canon');
     expect(fp.ai.has_narrative).toBe(true);
     expect(Object.keys(fp.causal.bands).length).toBeGreaterThan(0);
+  });
+
+  it('the NPC sim-state evolution distributions populate (enums only, no prose)', () => {
+    const fp = extractSettlementFingerprint(settlement, save);
+    // generation-roster sub-block (settlement.npcs)
+    expect(fp.npc.corrupt_count).toBe(0);
+    // sim-state evolution sub-block (campaign worldState.npcStates)
+    expect(fp.npc.role_archetype_dist).toEqual({ heir: 1, criminal: 1 });
+    expect(fp.npc.seat_dist).toEqual({ lieutenant_operator: 1, agent_protege: 1 });
+    expect(fp.npc.dotrank_dist).toEqual({ 1: 1, 2: 1 });
+    expect(fp.npc.goal_dist).toMatchObject({ secure_office: 1, expand_influence: 1, profit_from_change: 1, control_institution: 1 });
+    expect(fp.npc.ousted_count).toBe(1);
+  });
+
+  it('npcDistributions filters sim-state to the requested settlement', () => {
+    const states = save.campaignState.worldState.npcStates;
+    const only = extractSettlementFingerprint(settlement, save, { npcStates: states, settlementUuid: 's-test' });
+    expect(only.npc.role_archetype_dist).toEqual({ heir: 1, criminal: 1 });
+    const none = extractSettlementFingerprint(settlement, save, { npcStates: states, settlementUuid: 'other-settlement' });
+    expect(none.npc.role_archetype_dist).toBeUndefined(); // no states for this settlement → evolution block omitted
   });
 
   it('the reduced fingerprint carries the essential enums + counts', () => {
