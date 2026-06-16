@@ -65,8 +65,12 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
     ignoreQueuedRegionalImpact(context.campaign.id, impactId);
   };
 
-  const handleResolve = (impactId) => {
-    const result = resolveRegionalImpact(context.campaign.id, impactId);
+  const handleResolve = async (impactId) => {
+    // resolveRegionalImpact is async now (it awaits the condition-removed settlement
+    // save before marking the campaign 'resolved' — F2). Phase 1 updates the live
+    // settlement optimistically; onApplied refreshes this detail once the durable
+    // write confirms.
+    const result = await resolveRegionalImpact(context.campaign.id, impactId);
     if (result && String(result.saveId) === String(saveId)) onApplied?.(result);
   };
 

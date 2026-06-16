@@ -522,8 +522,18 @@ export const createCampaignRegionalSlice = (set, get) => ({
     return result;
   },
 
-  resolveRegionalImpact: (campaignId, impactId) => {
-    let result = /** @type {any} */ (null);
+  resolveRegionalImpact: async (campaignId, impactId) => {
+    // ORDERED writes to prevent split truth (F2, mirroring applyQueuedRegionalImpact):
+    // the settlement is the source of truth for the condition. Resolving REMOVES the
+    // active condition, so the campaign graph must NOT advertise the impact 'resolved'
+    // until that condition-removed settlement is durably saved. Previously the graph
+    // flipped to 'resolved' synchronously while the settlement save was fire-and-forget,
+    // so a save failure left a reload showing 'resolved' with the condition STILL present
+    // — permanently (the resolved status blocks re-resolve). We now never mark resolved
+    // until the settlement save succeeds, so there is nothing to roll back.
+    let prepared = /** @type {any} */ (null);
+    // Phase 1 — remove the condition from the settlement LOCALLY (optimistic), capture
+    // a clone for the durable write, but leave the campaign graph impact 'applied'.
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -548,13 +558,7 @@ export const createCampaignRegionalSlice = (set, get) => ({
       }
 
       const campaignState = campaignStateForRegionalImpact(state, save, systemState, now);
-      const nextSave = {
-        ...save,
-        settlement: nextSettlement,
-        campaignState,
-        timestamp: now,
-      };
-      state.savedSettlements[saveIdx] = nextSave;
+      state.savedSettlements[saveIdx] = { ...save, settlement: nextSettlement, campaignState, timestamp: now };
 
       if (state.activeSaveId && String(state.activeSaveId) === String(save.id)) {
         state.settlement = nextSettlement;
@@ -562,26 +566,57 @@ export const createCampaignRegionalSlice = (set, get) => ({
         state.editedAt = now;
       }
 
-      const beforeGraph = graph;
-      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'resolved', { resolvedAt: now }, { now });
-      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
-      c.updatedAt = now;
-      persistCampaignState(state, campaignId);
-
-      result = {
+      prepared = {
         saveId: save.id,
         settlement: cloneJson(nextSettlement),
         campaignState: cloneJson(campaignState),
-        timestamp: now,
         impact: cloneJson(impact),
+        now,
+      };
+    });
+
+    if (!prepared) return null;
+
+    // Phase 2 — persist the SETTLEMENT first and AWAIT it. persistSaveUpdate
+    // resolves false (never throws) and reports via campaignSyncError on failure.
+    const settlementSaved = await persistSaveUpdate(prepared.saveId, {
+      settlement: prepared.settlement,
+      campaignState: prepared.campaignState,
+    });
+    if (!settlementSaved) {
+      // The condition-removed settlement never reached the cloud — leave the campaign
+      // impact 'applied' so the two agree on reload (cloud still carries the condition,
+      // graph still 'applied'). The local optimistic removal reconciles on the next
+      // successful save / re-resolve (idempotent). Failure already surfaced via
+      // campaignSyncError.
+      return null;
+    }
+
+    // Phase 3 — settlement is durable: NOW mark the campaign graph resolved + sync.
+    let result = /** @type {any} */ (null);
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      // Guard against a concurrent change between phases: only mark resolved if the
+      // impact is STILL applied. If a concurrent status change landed during the
+      // awaited save, don't clobber it — the settlement is already saved without the
+      // condition; the latest decision wins.
+      if (!beforeGraph.queuedImpacts.find(i => i.id === impactId && i.status === 'applied')) return;
+      c.regionalGraph = domainSetRegionalImpactStatus(beforeGraph, impactId, 'resolved', { resolvedAt: prepared.now }, { now: prepared.now });
+      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: prepared.now });
+      c.updatedAt = prepared.now;
+      persistCampaignState(state, campaignId);
+      result = {
+        saveId: prepared.saveId,
+        settlement: prepared.settlement,
+        campaignState: prepared.campaignState,
+        timestamp: prepared.now,
+        impact: prepared.impact,
       };
     });
 
     if (result) {
-      persistSaveUpdate(result.saveId, {
-        settlement: result.settlement,
-        campaignState: result.campaignState,
-      });
       // result.impact is a cloneJson (plain, not a revoked draft) — safe to read.
       track(EVENTS.REGIONAL_IMPACT_STATUS_CHANGED, extractRegionalImpactDecision(result.impact, 'resolved', true));
     }

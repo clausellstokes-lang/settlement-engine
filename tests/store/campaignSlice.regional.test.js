@@ -121,7 +121,7 @@ describe('campaignSlice regional impact lifecycle', () => {
       entry.kind === 'applied' && entry.impactIds.includes(impact.id)
     )).toBe(true);
 
-    const resolved = store.getState().resolveRegionalImpact('camp-1', impact.id);
+    const resolved = await store.getState().resolveRegionalImpact('camp-1', impact.id);
     const resolvedSave = store.getState().savedSettlements[0];
     const resolvedImpact = store.getState().campaigns[0].regionalGraph.queuedImpacts[0];
 
@@ -169,6 +169,48 @@ describe('campaignSlice regional impact lifecycle', () => {
     // so a reload can't show "applied" without the condition.
     expect(result).toBeNull();
     expect(store.getState().campaigns[0].regionalGraph.queuedImpacts[0].status).toBe('queued');
+  });
+
+  test('R1: a failed settlement save on RESOLVE leaves the campaign impact APPLIED (no split truth)', async () => {
+    const store = makeStore();
+    const impact = {
+      id: 'regional_impact.resolvefail',
+      kind: 'import_shortage',
+      sourceSettlementId: 'supplier',
+      targetSettlementId: 'buyer',
+      channelId: 'channel.trade_dependency.supplier.buyer.grain',
+      channelType: 'trade_dependency',
+      goods: normalizeGoodsList(['Bulk grain and foodstuffs']),
+      severity: 0.6,
+      status: 'queued',
+      sourceChange: { kind: 'export_lost' },
+      explanation: 'Granary Ford can no longer reliably supply grain.',
+    };
+    store.setState(state => {
+      state.savedSettlements = [{
+        id: 'buyer', name: 'Millcross', tier: 'town',
+        settlement: settlement('Millcross'),
+        campaignState: { phase: 'canon', eventLog: [], systemState: null, locks: {} },
+      }];
+      state.campaigns = [{
+        id: 'camp-1', name: 'Trade Belt', settlementIds: ['supplier', 'buyer'],
+        regionalGraph: ensureRegionalGraph({ queuedImpacts: [impact] }),
+      }];
+    });
+
+    // Apply succeeds (default mock resolves true) → impact is 'applied' with the condition.
+    await store.getState().applyQueuedRegionalImpact('camp-1', impact.id);
+    expect(store.getState().campaigns[0].regionalGraph.queuedImpacts[0].status).toBe('applied');
+
+    // Now the RESOLVE settlement save fails. The campaign must NOT advertise the
+    // impact 'resolved' when the condition-removed settlement never persisted — else
+    // a reload shows "resolved" with the condition still present (resolved blocks
+    // re-resolve). It stays 'applied' so the two agree in the cloud.
+    saves.update.mockRejectedValueOnce(new Error('network down'));
+    const resolved = await store.getState().resolveRegionalImpact('camp-1', impact.id);
+
+    expect(resolved).toBeNull();
+    expect(store.getState().campaigns[0].regionalGraph.queuedImpacts[0].status).toBe('applied');
   });
 
   test('applying an impact stamps the condition with the canonized world tick, not 0', async () => {
