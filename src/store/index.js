@@ -1,19 +1,21 @@
 /**
- * store/index.js — Unified Zustand store with 12 slices.
+ * store/index.js — Unified Zustand store with 14 slices.
  *
  * Slices:
- *   auth          – user session, tier (anon / free / premium), permissions
- *   config        – settlement configuration, tier-gated by auth
- *   toggles       – institution / service / goods toggles
- *   settlement    – current + saved settlements, reactive-update state
- *   ai            – narrative layer, daily-life, generation state
- *   neighbour     – neighbour links, imported neighbour, cross-settlement effects
- *   map           – Fantasy World Map bridge state, selected burg, supply-chain overlays
- *   credits       – credit balance, transaction history
- *   campaign      – campaign folders + per-settlement campaign state
- *   customContent – user-authored institutions / resources / trade routes
- *   onboarding    – first-run coaching + nudge state
- *   ui            – cross-cutting UI flags (modals, wizard step / mode)
+ *   auth              – user session, tier (anon / free / premium), permissions
+ *   config            – settlement configuration, tier-gated by auth
+ *   toggles           – institution / service / goods toggles
+ *   settlement        – current + saved settlements, reactive-update state
+ *   ai                – narrative layer, daily-life, generation state
+ *   neighbour         – neighbour links, imported neighbour, cross-settlement effects
+ *   map               – Fantasy World Map bridge state, selected burg, supply-chain overlays
+ *   credits           – credit balance, transaction history
+ *   campaign          – campaign folders + per-settlement campaign state, settlement-clock bridge
+ *   campaignRegional  – campaign regional graph + channels + cross-settlement impacts/stressors
+ *   campaignWorldPulse– campaign world-pulse simulation (preview/advance/proposals/undo)
+ *   customContent     – user-authored institutions / resources / trade routes
+ *   onboarding        – first-run coaching + nudge state
+ *   ui                – cross-cutting UI flags (modals, wizard step / mode)
  *
  * Usage:
  *   import { useStore } from '../store';
