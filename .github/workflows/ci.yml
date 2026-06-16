@@ -22,6 +22,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # A+ P0.4: fail the gate on a HIGH+ vulnerability in a PRODUCTION dependency
+      # (e.g. the dompurify advisory behind the gallery XSS floor). Dev-only
+      # advisories (esbuild/vite dev server) are excluded via --omit=dev and tracked
+      # separately — they require a breaking major bump.
+      - name: Audit production dependencies
+        run: npm audit --audit-level=high --omit=dev
+
       # Fail fast on data corruption: duplicate object keys silently
       # overwrite earlier definitions in JS, so a regression here would
       # quietly distort the simulation outputs without breaking the build.
