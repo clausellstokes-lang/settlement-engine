@@ -159,7 +159,14 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
 
   it('handles single_dossier without requiring a user account', () => {
     expect(src).toMatch(/product\s*===\s*['"]single_dossier['"]/);
-    expect(src).toMatch(/single_dossier[\s\S]{0,500}(no account|no supabase_user_id|customer_email)/i);
+    expect(src).toMatch(/single_dossier[\s\S]{0,500}(no account|no supabase_user_id)/i);
+  });
+
+  it('never logs customer PII (A+ P0.2 — no customer_email in any console.* call)', () => {
+    // The session id reconciles to the email inside Stripe; the email must not
+    // land in the function log sink. Pins the redaction so it cannot regress.
+    expect(src).not.toMatch(/console\.[a-z]+\([^)]*customer_email/);
+    expect(src).not.toMatch(/email=\$\{[^}]*customer_email/);
   });
 
   it('handles bare credit pack purchase (credits > 0)', () => {
