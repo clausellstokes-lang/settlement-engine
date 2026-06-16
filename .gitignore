@@ -26,3 +26,9 @@ playwright/.cache/
 .claude/tmp-digests/
 sim-report.json
 deep-profile.json
+
+# A+ P0.6: fence throwaway audit/probe scripts out of the repo root
+/_audit*.mjs
+/tmp_*.mjs
+/audit_matrix.mjs
+/reformat.cjs
