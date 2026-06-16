@@ -233,11 +233,18 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
         (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill')
       );
       const hasExternalMill = instNames.some(n => n.includes('access to external mill'));
-      // The banalité lockout is a MILLING concern — scope it to mill-processed chains
-      // (the grain chain), not every active chain. Otherwise a hamlet with "Access to
-      // external mill" had its livestock, fish, timber, etc. exports all suppressed.
-      const isMillChain = (chain.processingInstitutions || []).some(p => /\bmill/i.test(p));
-      const externalMillOnly = isMillChain && hasExternalMill && !hasLocalMill;
+      // The banalité lockout applies ONLY to a chain whose processing happens at an
+      // EXTERNAL mill — i.e. the chain itself lists "Access to external mill" as a
+      // processing option (today, only the grain chain). A prior fix scoped on
+      // /\bmill/i over processingInstitutions, which still over-matched any chain that
+      // merely uses a LOCAL 'Mills (2-5)'/'Sawmill' — e.g. floodplain_agriculture and
+      // river_milling — wrongly suppressing their exports and stamping the grain-specific
+      // banalité note on a non-grain chain. Keying off external-mill support is the exact
+      // mechanism and stays correct if a future chain genuinely supports external milling.
+      const supportsExternalMill = (chain.processingInstitutions || []).some(p =>
+        /access to external mill/i.test(p)
+      );
+      const externalMillOnly = supportsExternalMill && hasExternalMill && !hasLocalMill;
       const effectiveExportable = externalMillOnly ? false : chain.exportable;
       const externalMillNote = externalMillOnly
         ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +
