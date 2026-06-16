@@ -23,10 +23,9 @@
  */
 
 import { bandFor, clamp01 } from './bands.js';
-import { flag } from '../../lib/flags.js';
 import { deriveExportPosture } from '../display/dossierViewModel.js';
 import { isIsolatedRoute } from '../tradeRouteSemantics.js';
-import { canonStressors, canonExports, canonImports } from '../canonicalAccessors.js';
+import { canonStressors, canonImports } from '../canonicalAccessors.js';
 import { foodLedger } from '../foodLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { prosperityRank } from '../../data/constants.js';
@@ -101,14 +100,12 @@ function deriveResilience(s) {
     }
   }
 
-  // Export/import diversity — many narrow exports = fragile. The legacy read
-  // here was `econ.exports`, a field economicState doesn't populate (the list
-  // lives at primaryExports). Behind canonicalViewModel, source the count from
-  // the display model's exportPosture; otherwise the canonical accessor
-  // (primaryExports, legacy `exports` fallback) — so every surface agrees.
-  const exportCount = flag('canonicalViewModel')
-    ? deriveExportPosture(s).count
-    : canonExports(s).length;
+  // Export/import diversity — many narrow exports = fragile. Source the count
+  // from the display model's exportPosture (canonicalViewModel was PROMOTED
+  // default-on; the legacy `canonExports(s).length` branch was reachable only via
+  // a flag override — a URL/localStorage/env read inside an otherwise-pure domain
+  // function. Removed so deriveSystemState is a pure function of `s` alone.)
+  const exportCount = deriveExportPosture(s).count;
   if (exportCount === 0) {
     risks.push('No exports — economic isolation');
   } else if (exportCount >= 5) {

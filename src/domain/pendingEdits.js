@@ -49,6 +49,18 @@ export const EDIT_KINDS = Object.freeze([
 
 const _editKindSet = new Set(EDIT_KINDS);
 
+// Deterministic short discriminator (FNV-1a). The edit id must be stable for the
+// same (kind, payload, clock) because the edit queue is PERSISTED — Math.random
+// here put non-determinism into persisted state and broke replay/idempotency.
+function shortHash(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h.toString(36).padStart(7, '0').slice(0, 6);
+}
+
 // ── Construction ──────────────────────────────────────────────────────
 
 /** Build a new pending-edit. Pure; no side effects. */
@@ -57,7 +69,7 @@ export function buildEdit(kind, payload, clock = 0) {
     throw new Error(`pendingEdits: unknown kind "${kind}"`);
   }
   return Object.freeze({
-    id: `edit_${clock}_${Math.random().toString(36).slice(2, 8)}`,
+    id: `edit_${clock}_${shortHash(`${kind}:${JSON.stringify(payload || {})}:${clock}`)}`,
     kind,
     payload: Object.freeze({ ...(payload || {}) }),
     ts: clock,
