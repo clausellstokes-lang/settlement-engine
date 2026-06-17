@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FS, BODY, swatch, MUTED } from '../theme.js';
 import { t } from '../../copy/index.js';
+import Button from '../primitives/Button.jsx';
 
 export const serif = { fontFamily: 'Crimson Text, Georgia, serif' };
 export const sans  = { fontFamily: 'Nunito, sans-serif' };
@@ -46,15 +47,21 @@ export function Collapsible({ title, defaultOpen = true, children }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div style={{ marginBottom: 14, border: '1px solid #e0d0b0', borderRadius: 7, overflow: 'hidden' }}>
-      <button type="button" aria-expanded={open} onClick={() => setOpen(v => !v)} style={{
-        width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '9px 13px', background: open ? '#f5ede0' : '#faf8f4', border: 'none',
-        cursor: 'pointer', textAlign: 'left', borderBottom: open ? '1px solid #e0d0b0' : 'none',
-        WebkitTapHighlightColor: 'transparent',
-      }}>
+      <Button
+        variant="secondary"
+        aria-expanded={open}
+        onClick={() => setOpen(v => !v)}
+        fullWidth
+        style={{
+          justifyContent: 'space-between',
+          padding: '9px 13px', background: open ? '#f5ede0' : '#faf8f4', border: 'none',
+          textAlign: 'left', borderBottom: open ? '1px solid #e0d0b0' : 'none',
+          borderRadius: 0, fontWeight: 600, WebkitTapHighlightColor: 'transparent',
+        }}
+      >
         <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.lg, fontWeight: 600, color: swatch.inkMag }}>{title}</span>
         <span style={{ fontSize: FS.xs, color: MUTED, fontWeight: 600 }}>{open ? '\u25b2' : '\u25bc'}</span>
-      </button>
+      </Button>
       {open && <div style={{ padding: '12px 13px', background: swatch['#FAF8F4'] }}>{children}</div>}
     </div>
   );
@@ -70,15 +77,21 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
     const titleColor = accent || '#1c1409';
     return (
       <div style={{ marginBottom: 16, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', borderRadius: 7, overflow: 'hidden' }}>
-        <button type="button" aria-expanded={open} onClick={() => setOpen(v => !v)} style={{
-          width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '9px 13px', background: headerBg, border: 'none',
-          cursor: 'pointer', textAlign: 'left', borderBottom: open ? `1px solid ${borderColor}` : 'none',
-          WebkitTapHighlightColor: 'transparent',
-        }}>
+        <Button
+          variant="secondary"
+          aria-expanded={open}
+          onClick={() => setOpen(v => !v)}
+          fullWidth
+          style={{
+            justifyContent: 'space-between',
+            padding: '9px 13px', background: headerBg, border: 'none',
+            textAlign: 'left', borderBottom: open ? `1px solid ${borderColor}` : 'none',
+            borderRadius: 0, fontWeight: 600, WebkitTapHighlightColor: 'transparent',
+          }}
+        >
           <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.lg, fontWeight: 600, color: titleColor }}>{title}</span>
           <span style={{ fontSize: FS.sm, color: MUTED }}>{open ? '\u25b2' : '\u25bc'}</span>
-        </button>
+        </Button>
         {open && <div style={{ padding: '12px 13px', background: swatch['#FAF8F4'] }}>{children}</div>}
       </div>
     );

@@ -19,7 +19,9 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { FS, ELEV, PARCH_100, GOLD_DEEP, INK, GOLD, swatch } from '../theme.js';
+import { HelpCircle } from 'lucide-react';
+import { FS, ELEV, PARCH_100, INK, GOLD, swatch } from '../theme.js';
+import IconButton from '../primitives/IconButton.jsx';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 
@@ -93,22 +95,14 @@ export default function HelpPopover({ topic, label = 'Help' }) {
 
   return (
     <span ref={ref} style={{ position: 'relative', display: 'inline-block' }}>
-      <button
-        type="button"
+      <IconButton
+        Icon={HelpCircle}
+        label={`${label}: ${content?.title || topic}`}
         onClick={handleToggle}
-        aria-label={`${label}: ${content?.title || topic}`}
+        tone="default"
+        size="sm"
         aria-expanded={open}
-        style={{
-          width: 16, height: 16, borderRadius: '50%',
-          background: PARCH_100,
-          color: GOLD_DEEP,
-          border: '1px solid #D8C588',
-          fontSize: FS.xxs, fontWeight: 700,
-          cursor: 'help',
-          padding: 0, lineHeight: 1,
-          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        }}
-      >?</button>
+      />
       {open && (
         <div
           role="tooltip"

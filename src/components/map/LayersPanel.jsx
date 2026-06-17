@@ -13,6 +13,7 @@
  */
 
 import { X, Check } from 'lucide-react';
+import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
@@ -273,24 +274,26 @@ function LayerToggle({ label, checked, onChange }) {
 
 function FilterChip({ label, color, active, onClick }) {
   return (
-    <button
-      type="button"
+    <Button
+      variant={active ? 'primary' : 'secondary'}
+      size="sm"
       onClick={onClick}
       aria-pressed={active}
       style={{
-        display: 'inline-flex', alignItems: 'center', gap: 4,
+        gap: 4,
         padding: '3px 8px',
         margin: '2px 3px 2px 0',
+        minHeight: undefined,
         background: active ? color : 'transparent',
         color: active ? '#fff' : INK,
         border: `1px solid ${color}`,
         borderRadius: 12,
         fontSize: FS.xxs, fontWeight: 700, fontFamily: sans,
-        cursor: 'pointer',
+        boxShadow: 'none',
       }}
     >
       {active && <Check size={9} />}
       {label}
-    </button>
+    </Button>
   );
 }

@@ -17,9 +17,11 @@
  */
 
 import { useState, useSyncExternalStore } from 'react';
+import { X } from 'lucide-react';
 import { FS, swatch, GOLD, PARCH, VIOLET, VIOLET_BG, BODY } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 const STORAGE_KEY = 'flag.__devPanelOpen';
 
@@ -77,8 +79,9 @@ export default function DevFlagPanel() {
 
   if (!open) {
     return (
-      <button
-        type="button"
+      <Button
+        variant="secondary"
+        size="sm"
         data-pt-allow-small="1"
         onClick={toggleOpen}
         title="Open feature flag panel (DEV only)"
@@ -87,12 +90,11 @@ export default function DevFlagPanel() {
           padding: '6px 10px',
           background: swatch.inkMag, color: GOLD,
           border: '1px solid #c9a24c', borderRadius: 6,
-          cursor: 'pointer',
           boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
         }}
       >
         ⚑ flags
-      </button>
+      </Button>
     );
   }
 
@@ -119,15 +121,13 @@ export default function DevFlagPanel() {
         <span style={{ fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: FS.xs }}>
           ⚑ Feature flags (DEV)
         </span>
-        <button
-          type="button"
+        <IconButton
+          Icon={X}
+          label="Close flag panel"
+          tone="ghost"
+          size="sm"
           onClick={toggleOpen}
-          aria-label="Close flag panel"
-          style={{
-            background: 'transparent', border: 'none',
-            color: GOLD, cursor: 'pointer', fontSize: FS['14'], lineHeight: 1,
-          }}
-        >×</button>
+        />
       </div>
 
       {/* Flag rows */}

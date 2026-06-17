@@ -15,16 +15,17 @@ export default function SettlementDetailEditNames({
 }) {
   return (
       settlement&&<div style={{marginBottom:14,border:`1px solid ${BORDER}`,borderRadius:8,overflow:'hidden'}}>
-        <button type="button" onClick={()=>{setEditNamesOpen(v=>!v);setEditingName(null);setEditDraft('');}}
-          aria-expanded={editNamesOpen}
-          style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'10px 14px',
-            background:editNamesOpen?'#f5ede0':CARD,border:'none',cursor:'pointer',textAlign:'left'}}>
+        <Button variant="secondary" fullWidth
+          onClick={()=>{setEditNamesOpen(v=>!v);setEditingName(null);setEditDraft('');}}
+          aria-expanded={editNamesOpen} aria-pressed={editNamesOpen}
+          style={{justifyContent:'flex-start',gap:8,padding:'10px 14px',borderRadius:0,
+            background:editNamesOpen?'#f5ede0':CARD,border:'none',boxShadow:'none',fontWeight:600,textAlign:'left'}}>
           <span style={{fontFamily:serif_,fontSize:FS.md,fontWeight:600,color:INK,flex:1}}>
             Edit Names
           </span>
           <span style={{fontSize:FS.xxs,color:MUTED}}>NPC &amp; faction names only</span>
           <span style={{fontSize:FS.xs,color:MUTED,marginLeft:4}}>{editNamesOpen?'▲':'▼'}</span>
-        </button>
+        </Button>
         {editNamesOpen&&<div style={{padding:'10px 14px',background:CARD,borderTop:`1px solid ${BORDER}`}}>
         {isCanonLocked ? (
           <div style={{fontSize:FS.xs,color:MUTED,fontStyle:'italic',lineHeight:1.6}}>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {Link2, Clock, FolderOpen, ArrowRight, GitBranch, Unlock} from 'lucide-react';
 
 import { EFFECT_CATEGORIES, fmtMod } from '../../lib/relationshipGraph.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, FS, swatch } from '../theme.js';
 import { isPlanInactiveSave, isSaveActive } from '../../lib/saveAccess.js';
 import Button from '../primitives/Button.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
@@ -96,16 +96,19 @@ export function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, s
             {moveOpen && (
               <div style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, borderRadius:6, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:160, padding:4 }}>
                 {currentCampaignId && (
-                  <button type="button" onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:swatch.danger, fontFamily:sans, borderRadius:3 }}
-                    onMouseEnter={e => e.target.style.background='#fdf4f4'} onMouseLeave={e => e.target.style.background='none'}>
+                  <Button variant="danger" fullWidth onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMoveOpen(false); }}
+                    style={{ justifyContent:'flex-start', textAlign:'left', padding:'5px 8px', border:'none', background:'none', minHeight:0, fontSize:FS.xs, color:swatch.danger, fontWeight:400, borderRadius:3 }}
+                    onMouseEnter={e => e.currentTarget.style.background='#fdf4f4'} onMouseLeave={e => e.currentTarget.style.background='none'}>
                     Remove from campaign
-                  </button>
+                  </Button>
                 )}
                 {campaigns.map(c => c.id === currentCampaignId ? null : (
-                  <button type="button" key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:INK, fontFamily:sans, borderRadius:3, display:'flex', alignItems:'center', gap:4 }}
-                    onMouseEnter={e => e.target.style.background='#f5ede0'} onMouseLeave={e => e.target.style.background='none'}>
-                    <FolderOpen size={10} color={GOLD}/> {c.name}
-                  </button>
+                  <Button variant="secondary" fullWidth key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMoveOpen(false); }}
+                    icon={<FolderOpen size={10} color={GOLD}/>}
+                    style={{ justifyContent:'flex-start', textAlign:'left', padding:'5px 8px', border:'none', background:'none', minHeight:0, gap:4, fontSize:FS.xs, color:INK, fontWeight:400, borderRadius:3 }}
+                    onMouseEnter={e => e.currentTarget.style.background='#f5ede0'} onMouseLeave={e => e.currentTarget.style.background='none'}>
+                    {c.name}
+                  </Button>
                 ))}
                 {campaigns.length === 0 && <div style={{ padding:'5px 8px', fontSize:FS.xxs, color:MUTED }}>No campaigns yet</div>}
               </div>

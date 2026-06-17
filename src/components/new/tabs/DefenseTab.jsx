@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import {serif, Section, TabIntro} from '../Primitives';
+import Button from '../../primitives/Button.jsx';
 
 import {isMobile} from '../tabConstants';
 
@@ -280,7 +281,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
       {/* ── ARMED FORCES & FORTIFICATIONS ───────────────────────────────── */}
       <div style={{marginBottom:14}}>
-        <button type="button" aria-expanded={showForces} onClick={()=>setShowForces(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 0',background:'none',border:'none',borderBottom:'1px solid #e0d0b0',cursor:'pointer',marginBottom:showForces?10:0,WebkitTapHighlightColor:'transparent'}}>
+        <Button variant="ghost" fullWidth aria-expanded={showForces} onClick={()=>setShowForces(v=>!v)} style={{justifyContent:'space-between',padding:'8px 0',borderColor:'transparent',borderBottom:'1px solid #e0d0b0',borderRadius:0,marginBottom:showForces?10:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{...serif,fontSize: FS['16'],fontWeight:600,color:swatch.inkMag}}>
             Armed Forces & Fortifications
             <span style={{fontSize:FS.sm,fontWeight:400,color:MUTED,marginLeft:8}}>
@@ -292,7 +293,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
             </span>
           </span>
           <span style={{fontSize:FS.xs,color:MUTED}}>{showForces?'▲':'▼'}</span>
-        </button>
+        </Button>
 
         {showForces&&<div>
           {walls.length>0&&<div style={{marginBottom:10}}>

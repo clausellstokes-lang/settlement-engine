@@ -124,14 +124,15 @@ function UserRow({ user, onUpdate }) {
             <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
           </div>
         ) : (
-          <button type="button" onClick={() => startEdit('role', user.role)}
+          <Button variant="ghost" size="sm" onClick={() => startEdit('role', user.role)}
             style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontSize: FS.xxs, fontWeight: 700, color: user.role === 'developer' ? '#7c3aed' : user.role === 'admin' ? '#dc2626' : MUTED,
-              textTransform: 'uppercase', padding: 0,
+              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
+              fontSize: FS.xxs, fontWeight: 700,
+              color: user.role === 'developer' ? '#7c3aed' : user.role === 'admin' ? '#dc2626' : MUTED,
+              textTransform: 'uppercase',
             }}>
             {user.role || 'user'}
-          </button>
+          </Button>
         )}
       </div>
 
@@ -148,14 +149,15 @@ function UserRow({ user, onUpdate }) {
             <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
           </div>
         ) : (
-          <button type="button" onClick={() => startEdit('tier', user.tier || 'free')}
+          <Button variant="ghost" size="sm" onClick={() => startEdit('tier', user.tier || 'free')}
             style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontSize: FS.xxs, fontWeight: 600, color: user.tier === 'premium' ? '#2a7a2a' : GOLD,
-              textTransform: 'uppercase', padding: 0,
+              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
+              fontSize: FS.xxs, fontWeight: 600,
+              color: user.tier === 'premium' ? '#2a7a2a' : GOLD,
+              textTransform: 'uppercase',
             }}>
             {user.tier || 'free'}
-          </button>
+          </Button>
         )}
       </div>
 
@@ -172,13 +174,14 @@ function UserRow({ user, onUpdate }) {
             <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
           </div>
         ) : (
-          <button type="button" onClick={() => startEdit('credits', user.credits)}
+          <Button variant="ghost" size="sm" onClick={() => startEdit('credits', user.credits)}
+            icon={<Zap size={11} />}
             style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontSize: FS.sm, fontWeight: 700, color: swatch['#7C3AED'], padding: 0,
+              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
+              fontSize: FS.sm, fontWeight: 700, color: swatch['#7C3AED'],
             }}>
-            <Zap size={11} style={{ verticalAlign: 'middle' }} /> {user.credits ?? 0}
-          </button>
+            {user.credits ?? 0}
+          </Button>
         )}
       </div>
     </div>

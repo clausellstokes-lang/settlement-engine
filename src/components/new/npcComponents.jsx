@@ -59,33 +59,6 @@ export function NPCCategoryGroup({category, label, group, impFilter, search, rel
 }
 
 
-// eslint-disable-next-line no-unused-vars -- legacy NPCRelCard; NPCRelCard2 is the live export
-function NPCRelCard({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
-  const [open,setOpen]=useState(false);
-  return (
-    <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,borderRadius:7,overflow:'hidden',marginBottom:10}}>
-      <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
-        <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
-          <div style={{flex:1}}>
-            <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>
-              <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Name}</span>
-              <span style={{fontSize:FS.micro,fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
-              <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
-              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],borderRadius:3,padding:'1px 6px'}}>◆ EMERGENT</span>}
-            </div>
-            <div style={{fontSize:FS.xs,color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
-          </div>
-          <span style={{fontSize:FS.xs,color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
-        </div>
-      </button>
-      {open&&<div style={{padding:'10px 14px',background:'rgba(250,248,244,0.97)',borderTop:`1px solid ${style.border}`}}>
-        <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}>{rel.description}</p>
-        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',borderRadius:5,padding:'7px 10px',fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5}}> {rel.tension}</div>}
-      </div>}
-    </div>
-  );
-}
-
 export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
   const [open,setOpen]=useState(false);
   return (

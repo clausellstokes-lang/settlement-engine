@@ -30,7 +30,7 @@ import { describe, expect, test } from 'vitest';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // Committed max raw-button occurrence count — lower it as buttons migrate onto
 // the primitive; never raise it. (Splitting files does NOT change this number.)
-const BUTTON_BUDGET = 84;
+const BUTTON_BUDGET = 50;
 
 const BUTTON_FILE_RE = /<button[\s/>]/;
 const BUTTON_OCC_RE = /<button[\s/>]/g;

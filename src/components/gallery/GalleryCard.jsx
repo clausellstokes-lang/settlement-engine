@@ -108,16 +108,18 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
         </div>
       </button>
       <div style={{ padding: SP.md, display: 'grid', gap: 8 }}>
-        <button
-          type="button"
+        <Button
+          variant="ghost"
           onClick={() => onOpen(item.slug)}
           style={{
+            display: 'block',
             border: 'none',
             padding: 0,
+            minHeight: 0,
             background: 'transparent',
             textAlign: 'left',
             color: INK,
-            cursor: 'pointer',
+            whiteSpace: 'normal',
           }}
         >
           <h3 style={{
@@ -131,7 +133,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
           }}>
             {item.name || t('gallery.untitled')}
           </h3>
-        </button>
+        </Button>
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
           {meta.join(' / ')}
         </div>

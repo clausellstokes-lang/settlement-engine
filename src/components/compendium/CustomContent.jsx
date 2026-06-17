@@ -349,17 +349,20 @@ export function CustomContentManager({ search }) {
         {options.map(opt => {
           const on = set.has(opt);
           return (
-            <button
+            <Button
               key={opt}
-              type="button"
+              variant={on ? 'gold' : 'secondary'}
+              size="sm"
+              aria-pressed={on}
               onClick={() => { const next = new Set(set); if (on) next.delete(opt); else next.add(opt); setDraft(d => ({ ...d, [field]: Array.from(next) })); }}
               style={{
-                padding:'2px 8px', borderRadius:10, fontSize:FS.xxs, fontWeight:700,
-                cursor:'pointer', border:`1px solid ${on?accent:BOR}`,
+                padding:'2px 8px', borderRadius:10, fontSize:FS.xxs, minHeight:0,
+                letterSpacing:'0.03em',
+                border:`1px solid ${on?accent:BOR}`,
                 background:on?`${accent}14`:'transparent',
-                color:on?accent:SEC, fontFamily:sans, letterSpacing:'0.03em',
+                color:on?accent:SEC,
               }}
-            >{opt}</button>
+            >{opt}</Button>
           );
         })}
       </div>
@@ -388,19 +391,15 @@ export function CustomContentManager({ search }) {
         const accent = field === 'essential' ? '#1a4a20' : field === 'magical' ? swatch.magic : '#8b1a1a';
         const lbl = field === 'essential' ? 'Essential' : field === 'magical' ? 'Magical' : 'Criminal';
         return (
-          <button
-            type="button"
-            onClick={() => setDraft(d => ({ ...d, [field]: !on }))}
+          <Button
+            variant={on ? 'gold' : 'secondary'}
+            size="sm"
             aria-pressed={on}
-            style={{
-              display:'inline-flex', alignItems:'center', gap:6, padding:'4px 12px', borderRadius:14,
-              fontSize:FS.xs, fontWeight:700, cursor:'pointer', fontFamily:sans,
-              border:`1px solid ${on ? accent : BOR}`, background:on ? `${accent}14` : 'transparent',
-              color:on ? accent : SEC,
-            }}
+            onClick={() => setDraft(d => ({ ...d, [field]: !on }))}
+            style={on ? { border:`1px solid ${accent}`, background:`${accent}14`, color:accent } : undefined}
           >
             {on ? '✓ ' : ''}{lbl}
-          </button>
+          </Button>
         );
       }
       case 'severity': return <select {...shared} value={val||'moderate'}>{SEVERITY_LEVELS.map(s=><option key={s} value={s}>{s}</option>)}</select>;

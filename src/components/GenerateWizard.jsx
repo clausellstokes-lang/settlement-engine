@@ -388,14 +388,15 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           </div>
         </div>
 
-        <button
-          type="button"
+        <Button
+          variant="primary"
+          fullWidth
           onClick={handleGenerate}
           data-onboard-highlight={onboardingActive && onboardingStep === 1 ? 'true' : undefined}
           style={{
-            width: '100%', padding: isMobile ? `${SP.xl}px 0` : `${SP.xl - 2}px 0`,
+            padding: isMobile ? `${SP.xl}px 0` : `${SP.xl - 2}px 0`,
             background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-            color: swatch.white, border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
+            color: swatch.white, border: 'none', borderRadius: R.lg + 2,
             fontFamily: serif_,
             fontSize: isMobile ? 22 : FS.xxl, fontWeight: 600, letterSpacing: '0.02em',
             boxShadow: '0 4px 20px rgba(160,118,42,0.45)',
@@ -403,7 +404,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           }}
         >
           Generate Draft
-        </button>
+        </Button>
         <p className="sf-readable-strip" style={{
           alignSelf: 'center',
           marginTop: SP.sm, marginBottom: 0, textAlign: 'center',
@@ -552,13 +553,14 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           advanced mode after final step, or any mode with existing settlement. */}
       {(settlement || (isAdvanced && wizardStep >= STEPS.length)) && (
         <div>
-          <button
-            type="button"
+          <Button
+            variant="primary"
+            fullWidth
             onClick={handleGenerate}
             style={{
-              width: '100%', padding: isMobile ? `${SP.lg}px 0` : `${SP.lg - 2}px 0`,
+              padding: isMobile ? `${SP.lg}px 0` : `${SP.lg - 2}px 0`,
               background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-              color: swatch.white, border: 'none', borderRadius: R.lg + 2, cursor: 'pointer',
+              color: swatch.white, border: 'none', borderRadius: R.lg + 2,
               fontFamily: serif_,
               fontSize: isMobile ? FS.xxl : FS.xxl - 1, fontWeight: 600, letterSpacing: '0.02em',
               boxShadow: '0 3px 14px rgba(160,118,42,0.45)',
@@ -570,7 +572,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             onBlur={e => e.currentTarget.style.opacity = '1'}
           >
             {settlement ? 'Regenerate Draft' : 'Generate Draft'}
-          </button>
+          </Button>
           {!settlement && (
             <p className="sf-readable-strip" style={{
               display: 'block',

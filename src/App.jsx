@@ -332,21 +332,21 @@ export default function App() {
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.sm,
             paddingTop: 'calc(env(safe-area-inset-top) + 8px)',
           }}>
-            <button
-              type="button"
+            <Button
+              variant="ghost"
               onClick={() => setView('generate')}
               aria-label="SettlementForge home"
+              icon={<MapIcon size={18} color={GOLD} />}
               style={{
-                display: 'flex', alignItems: 'center', gap: SP.xs,
+                gap: SP.xs,
                 minHeight: 44,
-                background: 'none', border: 'none', padding: `0 ${SP.xs}px`, cursor: 'pointer',
+                padding: `0 ${SP.xs}px`,
               }}
             >
-              <MapIcon size={18} color={GOLD} />
               <span style={{ fontSize: FS.lg, fontWeight: 700, color: GOLD, fontFamily: serif_, letterSpacing: '0.02em', textTransform: 'lowercase' }}>
                 SettlementForge
               </span>
-            </button>
+            </Button>
 
             <AccountMenu
               compact
@@ -645,11 +645,10 @@ export default function App() {
       {/* ── Scroll-to-top / scroll-to-bottom stack ────────────── */}
       {(showScrollTop || showScrollBottom) && (() => {
         const btn = {
-          width: 38, height: 38, borderRadius: R.lg,
+          width: 38, height: 38, minHeight: 38, borderRadius: R.lg,
           background: 'rgba(28,20,9,0.82)',
           border: '1px solid rgba(160,118,42,0.5)',
-          color: GOLD, fontSize: FS['16'], cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          color: GOLD, fontSize: FS['16'],
           boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
           backdropFilter: 'blur(4px)',
           transition: 'opacity 0.2s',
@@ -660,12 +659,12 @@ export default function App() {
             display: 'flex', flexDirection: 'column', gap: 8,
           }}>
             {showScrollTop && (
-              <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                title="Back to top" aria-label="Scroll to top" style={btn}>↑</button>
+              <Button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                title="Back to top" aria-label="Scroll to top" style={btn}>↑</Button>
             )}
             {showScrollBottom && (
-              <button type="button" onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}
-                title="Jump to bottom" aria-label="Scroll to bottom" style={btn}>↓</button>
+              <Button onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}
+                title="Jump to bottom" aria-label="Scroll to bottom" style={btn}>↓</Button>
             )}
           </div>
         );

@@ -272,10 +272,9 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── PLOT HOOKS (collapsible) ───────────────────────────────────────── */}
       {allHooks.length>0&&<div style={{border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',borderRadius:8,overflow:'hidden',marginBottom:12}}>
-        <button type="button" aria-expanded={hooksOpen} onClick={()=>setHooksOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <Button variant="ghost" aria-expanded={hooksOpen} aria-pressed={hooksOpen} onClick={()=>setHooksOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:FS.xs,color:muted}}>{hooksOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em'}}>Plot Hooks ({allHooks.length})</span>
-          <span style={{fontSize:FS.xs,color:muted}}>{hooksOpen?'▲':'▼'}</span>
-        </button>
+        </Button>
         {hooksOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #c8b0e0'}}>
           <div style={{display:'flex',gap:5,flexWrap:'wrap',marginBottom:10}}>
             {Object.entries(hookCounts).map(([cat,count])=>{
@@ -309,10 +308,9 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── SETTING accordion ─────────────────────────────────────────────── */}
       {(firstQuarter||spatial?.layout||hist?.historicalCharacter||Array.isArray(reason))&&<div style={{border:'1px solid #c8d8b0',borderRadius:8,overflow:'hidden',marginBottom:10}}>
-        <button type="button" aria-expanded={settingOpen} onClick={()=>setSettingOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:settingOpen?'#edf5e8':'#f4faf0',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <Button variant="ghost" aria-expanded={settingOpen} aria-pressed={settingOpen} onClick={()=>setSettingOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:FS.xs,color:muted}}>{settingOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:settingOpen?'#edf5e8':'#f4faf0',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#1A4A2A'],textTransform:'uppercase',letterSpacing:'0.06em'}}>Setting & Context</span>
-          <span style={{fontSize:FS.xs,color:muted}}>{settingOpen?'▲':'▼'}</span>
-        </button>
+        </Button>
         {settingOpen&&<div style={{padding:'12px 14px',borderTop:'1px solid #c8d8b0'}}>
           {/* Layout + historical character */}
           {(spatial?.layout||hist?.historicalCharacter)&&<div style={{display:'flex',gap:16,flexWrap:'wrap',marginBottom:8}}>

@@ -101,20 +101,22 @@ export default function RoutesToolbar() {
         {REL_TYPES.map(rt => {
           const active = activeFilter.includes(rt.id);
           return (
-            <button
+            <Button
               key={rt.id}
-              type="button"
+              variant="ghost"
+              size="sm"
+              aria-pressed={active}
               onClick={() => toggleRelType(rt.id)}
               title={`Toggle ${rt.label} edges`}
               style={{
-                display: 'inline-flex', alignItems: 'center', gap: 4,
+                gap: 4,
+                minHeight: 'auto',
                 padding: '3px 8px',
                 background: active ? `${rt.color}1A` : 'transparent',
                 border: `1px solid ${active ? rt.color : BORDER2}`,
                 borderRadius: R.sm,
                 color: active ? INK : SECOND,
-                fontSize: FS.xs, fontWeight: active ? 700 : 500,
-                cursor: 'pointer', fontFamily: sans,
+                fontWeight: active ? 700 : 500,
               }}
             >
               <span style={{
@@ -123,7 +125,7 @@ export default function RoutesToolbar() {
                 opacity: active ? 1 : 0.45,
               }} />
               {rt.label}
-            </button>
+            </Button>
           );
         })}
         <Button

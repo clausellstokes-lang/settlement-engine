@@ -129,7 +129,7 @@ function StressPanel({config,updateConfig}){
       </div>
     </div>
     {!isRandom&&<div style={{display:'flex',flexDirection:'column',gap:4,maxHeight:200,overflowY:'auto'}}>
-      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<button key={key} type="button" aria-pressed={on} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 8px',borderRadius:4,cursor:'pointer',textAlign:'left',border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent',fontFamily:sans}}><span style={{fontSize: FS['14'],flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</button>;})}
+      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<Button key={key} variant={on?'gold':'secondary'} size="sm" aria-pressed={on} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',justifyContent:'flex-start',gap:8,padding:'5px 8px',borderRadius:4,textAlign:'left',minHeight:'auto',whiteSpace:'normal',fontWeight:400,border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent'}}><span style={{fontSize: FS['14'],flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</Button>;})}
     </div>}
   </div>;
 }
@@ -226,25 +226,25 @@ function NearbyResourcesPanel({config,updateConfig}){
             if(!r.compatible && !selected.includes(r.key) && !isRandom) {
               const incompatTip = (r.incompatibleReason||'Not compatible with current access') + '. Click to force include anyway';
               return(
-                <button key={r.key} type="button"
+                <Button key={r.key} variant="ghost" size="sm"
                   onClick={()=>cycleResourceState(r.key)}
                   title={incompatTip}
-                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,border:'1px dashed #c8b8a0',
-                    background:'transparent',color:MUTED,fontFamily:sans,opacity:0.45,cursor:'pointer'}}>
+                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',fontWeight:400,border:'1px dashed #c8b8a0',
+                    background:'transparent',color:MUTED,opacity:0.45}}>
                   {r.name||r.key.replace(/_/g,' ')}
-                </button>);
+                </Button>);
             }
 
             if (isRandom) {
               // RANDOM MODE: all in pool — clearly shown as included/active
               return(
-                <button key={r.key} type="button" disabled
+                <Button key={r.key} variant="gold" size="sm" disabled
                   title={`In random pool. Eligible for this generation. Actual selection happens at generation time based on route and terrain.`}
-                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,
+                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',opacity:1,
                     border:`1px solid #c8a84a`,background:`rgba(160,118,42,0.08)`,color:`#8a6020`,
-                    fontFamily:sans,cursor:'default',userSelect:'none',fontWeight:600}}>
+                    cursor:'default',userSelect:'none',fontWeight:600}}>
                   {r.name||r.key.replace(/_/g,' ')}
-                </button>);
+                </Button>);
             }
 
             // MANUAL MODE — single card cycles through all four states
@@ -266,13 +266,13 @@ function NearbyResourcesPanel({config,updateConfig}){
               : {border:`1px solid ${STATE_BORDER[st]}`,background:STATE_BG[st],
                  color:STATE_COLORS[st],fontWeight:700};
             return(
-              <button key={r.key} type="button" onClick={()=>cycleResourceState(r.key)} title={tip}
-                style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,cursor:'pointer',
-                  fontFamily:sans,WebkitTapHighlightColor:'transparent',userSelect:'none',
+              <Button key={r.key} variant="secondary" size="sm" onClick={()=>cycleResourceState(r.key)} title={tip}
+                style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',
+                  WebkitTapHighlightColor:'transparent',userSelect:'none',
                   transition:'all 0.1s',...btnStyle}}>
                 {!isOff&&st!=='allow'&&<span style={{fontSize:FS.micro,marginRight:3,opacity:0.85}}>{STATE_LABELS[st].split(' ')[0]}</span>}
                 {r.name||r.key.replace(/_/g,' ')}
-              </button>);
+              </Button>);
           })}
         </div>
       </div>)}
