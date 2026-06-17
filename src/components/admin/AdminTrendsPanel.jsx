@@ -35,6 +35,7 @@ import {
 import {
   Empty, Select, Card, Kpi, MultiLineChart, StackedBarChart, BarList, Heatmap, MiniTable,
 } from './AdminTrendsCharts.jsx';
+import Button from '../primitives/Button.jsx';
 
 // ── catalog (mirrors the 040 allowlists) ─────────────────────────────────────
 const GRANULARITIES = ['day', 'week', 'month', 'quarter', 'year'];
@@ -262,11 +263,7 @@ export default function AdminTrendsPanel() {
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
           <div role="group" aria-label="Quick range" style={{ display: 'flex', gap: 2 }}>
             {PRESETS.map((p) => (
-              <button key={p.key} type="button" onClick={() => applyPreset(p)} style={{
-                fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, cursor: 'pointer',
-                padding: `${SP.xs}px ${SP.sm}px`, border: `1px solid ${BORDER}`, borderRadius: R.sm,
-                background: 'transparent', color: SECOND,
-              }}>{p.label}</button>
+              <Button key={p.key} variant="ghost" size="sm" onClick={() => applyPreset(p)}>{p.label}</Button>
             ))}
           </div>
           <input type="date" value={from} max={to} onChange={(e) => setFrom(e.target.value)} aria-label="From"
@@ -275,11 +272,7 @@ export default function AdminTrendsPanel() {
           <input type="date" value={to} min={from} max={todayIso()} onChange={(e) => setTo(e.target.value)} aria-label="To"
             style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
           <Select label="by" value={granularity} onChange={setGranularity} options={GRANULARITIES.map((g) => ({ key: g, label: g }))} />
-          <button type="button" onClick={load} disabled={loading} style={{
-            fontFamily: sans, fontSize: FS.xs, fontWeight: 700, cursor: loading ? 'default' : 'pointer',
-            padding: `${SP.xs}px ${SP.md}px`, border: `1px solid ${GOLD}`, borderRadius: R.md,
-            background: GOLD_BG, color: INK, opacity: loading ? 0.6 : 1,
-          }}>{loading ? 'Loading…' : 'Refresh'}</button>
+          <Button variant="gold" size="sm" onClick={load} busy={loading}>{loading ? 'Loading…' : 'Refresh'}</Button>
         </div>
       </div>
       {refreshedAt && <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginTop: 4 }}>refreshed {new Date(refreshedAt).toLocaleString()}</div>}
@@ -318,10 +311,7 @@ export default function AdminTrendsPanel() {
               {TREND_METRICS.map((m) => {
                 const on = activeMetrics.includes(m.key);
                 return (
-                  <button key={m.key} type="button" onClick={() => toggleMetric(m.key)} style={{
-                    fontFamily: sans, fontSize: FS.pico, cursor: 'pointer', padding: '2px 6px', borderRadius: R.sm,
-                    border: `1px solid ${on ? GOLD : BORDER}`, background: on ? GOLD_BG : 'transparent', color: on ? INK : MUTED,
-                  }}>{m.label}</button>
+                  <Button key={m.key} variant={on ? 'gold' : 'ghost'} size="sm" aria-pressed={on} onClick={() => toggleMetric(m.key)}>{m.label}</Button>
                 );
               })}
             </div>

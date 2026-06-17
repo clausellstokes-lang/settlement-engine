@@ -18,7 +18,9 @@ import {
   cropRectFromTransform,
   outputSize,
 } from './cropGeometry.js';
-import { BORDER, BORDER2, CARD, CARD_ALT, INK, BODY, GOLD, MUTED, sans, FS, R, SP } from '../theme.js';
+import { BORDER2, CARD_ALT, GOLD, MUTED, R, SP } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 const MAX_ZOOM = 4;
 const ZOOM_STEPS = 0.01;
@@ -195,44 +197,36 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           aria-label="Zoom"
           style={{ flex: 1, accentColor: GOLD, cursor: 'pointer' }}
         />
-        <button
-          type="button"
+        <IconButton
+          Icon={RotateCcw}
+          label="Reset zoom and position"
           onClick={reset}
-          title="Reset zoom & position"
-          aria-label="Reset zoom and position"
-          style={iconBtn}
-        >
-          <RotateCcw size={13} />
-        </button>
+          tone="default"
+          size="md"
+        />
       </div>
 
       <div style={{ display: 'flex', gap: SP.sm, justifyContent: 'flex-end' }}>
-        <button type="button" onClick={onCancel} disabled={busy} style={ghostBtn}>
-          <X size={13} /> Cancel
-        </button>
-        <button type="button" onClick={commit} disabled={busy || !natural} style={goldBtn(busy)}>
-          <Check size={13} /> {busy ? 'Uploading…' : 'Apply crop'}
-        </button>
+        <Button
+          variant="ghost"
+          size="sm"
+          icon={<X size={13} />}
+          onClick={onCancel}
+          disabled={busy}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="gold"
+          size="sm"
+          icon={<Check size={13} />}
+          onClick={commit}
+          busy={busy}
+          disabled={!natural}
+        >
+          {busy ? 'Uploading…' : 'Apply crop'}
+        </Button>
       </div>
     </div>
   );
 }
-
-const iconBtn = {
-  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-  width: 28, height: 28, border: `1px solid ${BORDER2}`, borderRadius: R.sm,
-  background: CARD, color: INK, cursor: 'pointer', flexShrink: 0,
-};
-
-const ghostBtn = {
-  display: 'inline-flex', alignItems: 'center', gap: 5,
-  padding: '5px 10px', border: `1px solid ${BORDER}`, borderRadius: R.md,
-  background: 'transparent', color: BODY, fontFamily: sans, fontSize: FS.xs, cursor: 'pointer',
-};
-
-const goldBtn = (busy) => ({
-  display: 'inline-flex', alignItems: 'center', gap: 5,
-  padding: '5px 11px', border: `1px solid ${GOLD}`, borderRadius: R.md,
-  background: CARD, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 850,
-  cursor: busy ? 'wait' : 'pointer',
-});

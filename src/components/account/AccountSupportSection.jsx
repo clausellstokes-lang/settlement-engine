@@ -9,6 +9,7 @@
 import { Headphones, Check } from 'lucide-react';
 import { GOLD, SECOND, BORDER, sans, SP, R, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
+import Button from '../primitives/Button.jsx';
 
 export default function AccountSupportSection({
   auth,
@@ -32,14 +33,14 @@ export default function AccountSupportSection({
           <div style={{ fontSize: FS.sm, color: swatch['#4A8A60'], marginTop: SP.xs }}>
             We'll get back to you at {auth.user.email}
           </div>
-          <button onClick={() => setSupportSent(false)}
-            style={{
-              marginTop: SP.md, padding: `${SP.sm}px ${SP.lg}px`,
-              background: GOLD, color: swatch.white, border: 'none',
-              borderRadius: R.md, cursor: 'pointer', fontSize: FS.sm, fontWeight: 600,
-            }}>
+          <Button
+            variant="primary"
+            size="md"
+            onClick={() => setSupportSent(false)}
+            style={{ marginTop: SP.md }}
+          >
             Send Another Message
-          </button>
+          </Button>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
@@ -79,18 +80,16 @@ export default function AccountSupportSection({
               resize: 'vertical', boxSizing: 'border-box',
             }}
           />
-          <button
+          <Button
+            variant="primary"
+            size="lg"
+            fullWidth
+            busy={supportSending}
             onClick={handleSendSupport}
             disabled={supportSending || !supportSubject.trim() || !supportMessage.trim()}
-            style={{
-              padding: `${SP.md}px 0`, background: GOLD, color: swatch.white,
-              border: 'none', borderRadius: R.lg, cursor: 'pointer',
-              fontSize: FS.md, fontWeight: 700, fontFamily: sans,
-              opacity: supportSending ? 0.6 : 1,
-            }}
           >
             {supportSending ? 'Sending...' : 'Send Message'}
-          </button>
+          </Button>
         </div>
       )}
     </Section>

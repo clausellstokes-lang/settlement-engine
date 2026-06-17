@@ -24,7 +24,8 @@ import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { EVENTS } from '../../lib/analytics.js';
 import LockedDestination from '../primitives/LockedDestination.jsx';
-import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 const VIOLET = swatch['#7B4FCF'];
 const GREEN = swatch['#4A7A3A'];
@@ -247,43 +248,32 @@ export default function VersionsTab({ save }) {
                         <span style={{ fontSize: FS.xs, color: AMBER, fontWeight: 700 }}>
                           Confirm? Reverting creates a new snapshot first.
                         </span>
-                        <button
+                        <Button
                           type="button"
+                          variant="warning"
+                          size="sm"
                           onClick={() => handleRevert(e.id)}
-                          style={{
-                            padding: '3px 9px', fontSize: FS.xs, fontWeight: 700,
-                            background: AMBER, color: swatch.white, border: 'none',
-                            borderRadius: R.sm, cursor: 'pointer',
-                          }}
                         >
                           Revert
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                           type="button"
+                          variant="ghost"
+                          size="sm"
                           onClick={() => setConfirmRevert(null)}
-                          style={{
-                            padding: '3px 9px', fontSize: FS.xs, color: MUTED,
-                            background: 'transparent', border: 'none',
-                            cursor: 'pointer',
-                          }}
                         >
                           Cancel
-                        </button>
+                        </Button>
                       </div>
                     ) : (
-                      <button
+                      <Button
                         type="button"
+                        variant="secondary"
+                        size="sm"
                         onClick={() => setConfirmRevert(e.id)}
-                        style={{
-                          padding: '3px 9px', fontSize: FS.xs, fontWeight: 700,
-                          background: 'transparent',
-                          border: `1px solid ${BORDER}`,
-                          borderRadius: R.sm, color: BODY,
-                          cursor: 'pointer', fontFamily: sans,
-                        }}
                       >
                         Revert to this snapshot
-                      </button>
+                      </Button>
                     )}
                   </div>
                 )}

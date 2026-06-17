@@ -17,7 +17,9 @@
  */
 import { Sparkles, X } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { GOLD, GOLD_BG, INK, SECOND, sans, serif_, SP, R, FS, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, SECOND, sans, serif_, SP, R, FS } from './theme.js';
+import Button from './primitives/Button.jsx';
+import IconButton from './primitives/IconButton.jsx';
 
 const STEP_CONTENT = [
   {
@@ -137,49 +139,25 @@ export default function OnboardingCoach() {
           </div>
 
           {isFinalStep && (
-            <button
+            <Button
+              variant="primary"
+              size="md"
               onClick={completeOnboarding}
-              style={{
-                marginTop: SP.md,
-                padding: `${SP.sm}px ${SP.xl}px`,
-                background: GOLD,
-                border: 'none',
-                borderRadius: R.md,
-                color: swatch.white,
-                fontSize: FS.sm,
-                fontWeight: 700,
-                fontFamily: sans,
-                cursor: 'pointer',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                boxShadow: '0 2px 8px rgba(160,118,42,0.3)',
-              }}
+              style={{ marginTop: SP.md }}
             >
               Finish tour
-            </button>
+            </Button>
           )}
         </div>
 
-        <button
+        <IconButton
+          Icon={X}
+          label="Dismiss onboarding"
+          tone="ghost"
+          size="lg"
           onClick={completeOnboarding}
-          title="Dismiss tour"
-          aria-label="Dismiss onboarding"
-          style={{
-            width: 28,
-            height: 28,
-            border: 'none',
-            background: 'transparent',
-            color: SECOND,
-            cursor: 'pointer',
-            borderRadius: R.sm,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-          }}
-        >
-          <X size={16} />
-        </button>
+          style={{ flexShrink: 0 }}
+        />
       </div>
     </>
   );

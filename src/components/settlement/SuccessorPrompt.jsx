@@ -26,6 +26,7 @@ import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
+import Button from '../primitives/Button.jsx';
 
 export default function SuccessorPrompt() {
   const pending  = useStore(s => s.pendingSuccession);
@@ -178,15 +179,26 @@ export default function SuccessorPrompt() {
             </div>
           )}
 
-          <button type="button" onClick={pickNew} style={newBtnStyle}>
-            <UserPlus size={13} aria-hidden="true" /> Appoint someone new
-          </button>
+          <Button
+            variant="primary"
+            size="sm"
+            fullWidth
+            onClick={pickNew}
+            icon={<UserPlus size={13} aria-hidden="true" />}
+          >
+            Appoint someone new
+          </Button>
         </div>
 
         <footer style={footerStyle}>
-          <button type="button" onClick={dismiss} style={dismissBtnStyle}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={dismiss}
+            style={{ textDecoration: 'underline', color: MUTED, fontSize: FS.xxs }}
+          >
             Leave the role vacant
-          </button>
+          </Button>
         </footer>
       </div>
     </div>
@@ -228,22 +240,8 @@ const successorBtnStyle = {
   cursor: 'pointer', textAlign: 'left',
   fontFamily: sans,
 };
-const newBtnStyle = {
-  display: 'inline-flex', alignItems: 'center', gap: 6,
-  padding: '6px 12px', width: '100%', justifyContent: 'center',
-  background: GOLD, color: '#fff',
-  border: 'none', borderRadius: R.sm,
-  fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
-  cursor: 'pointer',
-};
 const footerStyle = {
   padding: '8px 12px',
   borderTop: `1px solid ${BORDER}`,
   display: 'flex', justifyContent: 'center',
-};
-const dismissBtnStyle = {
-  background: 'none', border: 'none',
-  fontSize: FS.xxs, color: MUTED, fontFamily: sans,
-  cursor: 'pointer',
-  textDecoration: 'underline',
 };

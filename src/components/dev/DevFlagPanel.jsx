@@ -19,6 +19,7 @@
 import { useState, useSyncExternalStore } from 'react';
 import { FS, swatch, GOLD, PARCH, VIOLET, VIOLET_BG, BODY } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
+import Button from '../primitives/Button.jsx';
 
 const STORAGE_KEY = 'flag.__devPanelOpen';
 
@@ -181,20 +182,15 @@ export default function DevFlagPanel() {
                 </div>
               </div>
               {overridden && (
-                <button
-                  type="button"
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={(e) => { e.preventDefault(); setOverrideWithNotify(name, null); }}
                   title="Clear override (revert to default)"
-                  style={{
-                    fontSize: FS.xxs,
-                    background: 'transparent', border: '1px solid #6b5340',
-                    color: swatch.inkMag3, borderRadius: 4,
-                    padding: '2px 6px', cursor: 'pointer',
-                    alignSelf: 'center',
-                  }}
+                  style={{ alignSelf: 'center' }}
                 >
                   clear
-                </button>
+                </Button>
               )}
             </label>
           );

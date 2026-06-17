@@ -25,6 +25,7 @@ import { X, Search, AlertTriangle } from 'lucide-react';
 import { useStore } from '../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from './theme.js';
 import { buildRegistry } from '../lib/customRegistry.js';
+import IconButton from './primitives/IconButton.jsx';
 
 const PURPLE = swatch['#7C3AED'];
 
@@ -149,19 +150,13 @@ export default function EntityPicker({
                     borderRadius: 4, padding: '0 3px',
                   }}>CUSTOM</span>
                 )}
-                <button
-                  type="button"
+                <IconButton
+                  Icon={X}
+                  label="Remove"
                   onClick={() => removeRef(refId)}
-                  aria-label="Remove"
-                  style={{
-                    background: 'transparent', border: 'none',
-                    color: accent, cursor: 'pointer', padding: 0,
-                    display: 'flex', alignItems: 'center',
-                  }}
-                  title="Remove"
-                >
-                  <X size={10} />
-                </button>
+                  tone="ghost"
+                  size="sm"
+                />
               </span>
             );
           })}

@@ -12,7 +12,8 @@
  * centered card. No manual memoization — the React Compiler handles it.
  */
 import { useEffect, useState } from 'react';
-import { GOLD, INK, BODY, CARD, BORDER, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, BODY, CARD, BORDER, sans, FS, SP, R } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 const DONE_KEY = 'sf_worldmap_tour_done';
 const PAD = 6;
@@ -99,26 +100,13 @@ export default function WorldMapTour({ open, steps = [], onClose }) {
         <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK, marginBottom: 6 }}>{step.title}</div>
         <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, margin: `0 0 ${SP.md}px` }}>{step.body}</p>
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-          <button type="button" onClick={finish} style={linkBtn}>Skip tour</button>
+          <Button variant="ghost" size="sm" onClick={finish}>Skip tour</Button>
           <div style={{ marginLeft: 'auto', display: 'flex', gap: SP.sm }}>
-            {i > 0 && <button type="button" onClick={() => setI((n) => Math.max(0, n - 1))} style={ghostBtn}>Back</button>}
-            <button type="button" onClick={onNext} style={goldBtn}>{last ? 'Done' : 'Next'}</button>
+            {i > 0 && <Button variant="secondary" size="md" onClick={() => setI((n) => Math.max(0, n - 1))}>Back</Button>}
+            <Button variant="primary" size="md" onClick={onNext}>{last ? 'Done' : 'Next'}</Button>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-const goldBtn = {
-  padding: `${SP.xs}px ${SP.md}px`, background: GOLD, color: swatch.white, border: 'none',
-  borderRadius: R.sm, fontSize: FS.sm, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
-};
-const ghostBtn = {
-  padding: `${SP.xs}px ${SP.md}px`, background: 'transparent', color: BODY,
-  border: `1px solid ${BORDER}`, borderRadius: R.sm, fontSize: FS.sm, fontWeight: 600, fontFamily: sans, cursor: 'pointer',
-};
-const linkBtn = {
-  padding: 0, background: 'none', border: 'none', color: BODY, opacity: 0.7,
-  fontSize: FS.xs, fontFamily: sans, cursor: 'pointer', textDecoration: 'underline',
-};

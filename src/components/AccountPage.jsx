@@ -20,8 +20,9 @@ import { supabase } from '../lib/supabase.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 import { activeSaveCount, inactiveRetentionCount } from '../lib/saveAccess.js';
 import PrivacySettings from './PrivacySettings.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, SP, R, swatch } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, SP, R } from './theme.js';
 import Section from './account/AccountSection.jsx';
+import Button from './primitives/Button.jsx';
 import AccountProfileSection from './account/AccountProfileSection.jsx';
 import AccountSubscriptionSection from './account/AccountSubscriptionSection.jsx';
 import AccountSupportSection from './account/AccountSupportSection.jsx';
@@ -260,6 +261,7 @@ export default function AccountPage({ onNavigateAdmin }) {
       {/* ── Developer / Admin Panel link ────────────────────────── */}
       {isElevated && onNavigateAdmin && (
         <button
+          type="button"
           onClick={onNavigateAdmin}
           style={{
             display: 'flex', alignItems: 'center', gap: SP.md,
@@ -283,18 +285,9 @@ export default function AccountPage({ onNavigateAdmin }) {
       <PrivacySettings />
 
       {/* Sign out */}
-      <button
-        onClick={authSignOut}
-        style={{
-          padding: `${SP.md}px 0`,
-          background: swatch.dangerBg, color: swatch.danger,
-          border: '1px solid rgba(139,26,26,0.35)',
-          borderRadius: R.lg, cursor: 'pointer',
-          fontSize: FS.md, fontWeight: 700, fontFamily: sans,
-        }}
-      >
+      <Button variant="danger" size="lg" fullWidth onClick={authSignOut}>
         Sign Out
-      </button>
+      </Button>
     </div>
   );
 }

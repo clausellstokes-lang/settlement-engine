@@ -8,7 +8,10 @@
  * and handler arrives via props; state stays in the parent wizard.
  */
 
-import { swatch, BORDER, CARD_HDR, sans, SP, FS, SECOND } from '../theme.js';
+import { X } from 'lucide-react';
+import { swatch, BORDER, CARD_HDR, SP, FS } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 export function WizardChipRow({
   wizardMode,
@@ -25,17 +28,13 @@ export function WizardChipRow({
       flexWrap: 'wrap', fontSize: FS.xs,
     }}>
       {wizardMode === 'advanced' && (
-        <button
+        <Button
+          variant="secondary"
+          size="sm"
           onClick={() => setWizardMode('basic')}
-          style={{
-            padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
-            background: swatch.white, border: `1px solid ${BORDER}`,
-            borderRadius: 12, color: SECOND,
-            cursor: 'pointer', fontFamily: sans,
-          }}
         >
           Switch to Basic →
-        </button>
+        </Button>
       )}
       {loadedFromSave && (
         <span style={{
@@ -45,15 +44,13 @@ export function WizardChipRow({
           display: 'inline-flex', alignItems: 'center', gap: 4,
         }}>
           📋 {loadedFromSave.name}
-          <button
+          <IconButton
+            Icon={X}
+            label="Clear loaded config"
+            tone="ghost"
+            size="sm"
             onClick={clearLoadedFromSave}
-            style={{
-              background: 'transparent', border: 'none',
-              color: swatch['#5A3A00'], cursor: 'pointer', padding: 0,
-              fontSize: FS.xs, fontWeight: 700,
-            }}
-            aria-label="Clear loaded config"
-          >×</button>
+          />
         </span>
       )}
       {importedNeighbour && (
@@ -64,15 +61,13 @@ export function WizardChipRow({
           display: 'inline-flex', alignItems: 'center', gap: 4,
         }}>
           🌐 {importedNeighbour.name}
-          <button
+          <IconButton
+            Icon={X}
+            label="Clear neighbour"
+            tone="ghost"
+            size="sm"
             onClick={clearNeighbour}
-            style={{
-              background: 'transparent', border: 'none',
-              color: swatch.success, cursor: 'pointer', padding: 0,
-              fontSize: FS.xs, fontWeight: 700,
-            }}
-            aria-label="Clear neighbour"
-          >×</button>
+          />
         </span>
       )}
     </div>

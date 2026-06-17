@@ -14,6 +14,7 @@ import { isConfigured } from '../../lib/supabase.js';
 import { t } from '../../copy/index.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, R, FS, swatch, AMBER } from '../theme.js';
 import Section from './AccountSection.jsx';
+import Button from '../primitives/Button.jsx';
 // P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('../pricing/FounderTile.jsx'));
@@ -133,22 +134,15 @@ export default function AccountSubscriptionSection({
 
       {auth.tier === 'premium' && !isElevated && (
         <div style={{ marginTop: SP.lg }}>
-          <button
-            type="button"
+          <Button
+            variant="secondary"
+            size="md"
+            icon={<CreditCard size={15} />}
             onClick={handleManageBilling}
             disabled={portalBusy || !isConfigured}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: SP.sm,
-              padding: `${SP.sm}px ${SP.lg}px`,
-              background: CARD, color: GOLD,
-              border: `1px solid ${GOLD}`, borderRadius: R.lg,
-              cursor: portalBusy ? 'wait' : 'pointer',
-              fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-              opacity: portalBusy ? 0.65 : 1,
-            }}
           >
-            <CreditCard size={15} /> {portalBusy ? 'Opening portal...' : 'Manage subscription'}
-          </button>
+            {portalBusy ? 'Opening portal...' : 'Manage subscription'}
+          </Button>
         </div>
       )}
 
@@ -187,7 +181,7 @@ export default function AccountSubscriptionSection({
                 ? '#2a7a2a'
                 : p.tier === 'value' ? GOLD : SECOND;
               return (
-                <button key={key} onClick={() => handlePurchase(key)}
+                <button key={key} type="button" onClick={() => handlePurchase(key)}
                   disabled={purchasing || !isConfigured}
                   style={{
                     flex: 1, padding: `${SP.md}px ${SP.sm}px`,

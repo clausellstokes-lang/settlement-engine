@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link2 } from 'lucide-react';
 import { RELATIONSHIP_SELECTIONS } from '../../domain/relationships/canonicalRelationship.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme';
+import Button from '../primitives/Button.jsx';
 
 export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
   const[selected,setSelected]=useState(null);
@@ -17,7 +18,7 @@ export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
       <Link2 size={12}/> Link as Neighbour
     </div>
     <div style={{display:'flex',flexDirection:'column',gap:6,marginBottom:8}}>
-      {others.map(s=><button key={s.id} onClick={()=>setSelected(selected?.id===s.id?null:s)} style={{display:'flex',alignItems:'center',gap:8,padding:'7px 10px',borderRadius:5,border:`1px solid ${selected?.id===s.id?'#2a3a7a':BORDER}`,background:selected?.id===s.id?'#e8eeff':CARD,cursor:'pointer',textAlign:'left',fontFamily:sans}}>
+      {others.map(s=><button type="button" key={s.id} aria-pressed={selected?.id===s.id} onClick={()=>setSelected(selected?.id===s.id?null:s)} style={{display:'flex',alignItems:'center',gap:8,padding:'7px 10px',borderRadius:5,border:`1px solid ${selected?.id===s.id?'#2a3a7a':BORDER}`,background:selected?.id===s.id?'#e8eeff':CARD,cursor:'pointer',textAlign:'left',fontFamily:sans}}>
         <span style={{flex:1,fontSize:FS.sm,fontWeight:600,color:INK}}>{s.name}</span>
         <span style={{fontSize:FS.xxs,color:MUTED}}>{s.tier}</span>
       </button>)}
@@ -35,8 +36,8 @@ export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
         </select>
       </div>
       <div style={{display:'flex',gap:8}}>
-        <button onClick={()=>onLink(selected,relType)} style={{padding:'4px 12px',borderRadius:4,background:swatch.info,color:swatch.white,border:'none',cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>Confirm</button>
-        <button onClick={()=>setSelected(null)} style={{padding:'4px 10px',borderRadius:4,background:CARD,color:SECOND,border:`1px solid ${BORDER}`,cursor:'pointer',fontSize:FS.xs,fontFamily:sans}}>Cancel</button>
+        <Button variant="info" size="sm" onClick={()=>onLink(selected,relType)}>Confirm</Button>
+        <Button variant="secondary" size="sm" onClick={()=>setSelected(null)}>Cancel</Button>
       </div>
     </div>}
   </div>;

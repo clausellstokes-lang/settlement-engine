@@ -1,5 +1,6 @@
 import { FS, swatch } from '../theme.js';
 import { Eye, EyeOff, RefreshCw } from 'lucide-react';
+import Button from '../primitives/Button.jsx';
 
 // ── Button group state ─────────────────────────────────────────────────────
 // Three distinct buttons replace the old single action so view-toggling
@@ -40,19 +41,15 @@ export default function DossierNarrativeButtons({
     if (!aiSettlement && !aiLoading) {
       return (
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
-          <button
+          <Button
+            variant="ai"
+            size="sm"
             onClick={runNarrativeLayer}
             title="Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement. Uses credits."
-            style={{
-              ...btnBase,
-              background: 'rgba(90,42,138,0.2)',
-              border: '1px solid rgba(160,100,220,0.35)',
-              color: swatch['#C8A0F0'],
-            }}
+            icon={<span style={{ fontSize: FS.xs }}>{'\u2726'}</span>}
           >
-            <span style={{ fontSize: FS.xs }}>{'\u2726'}</span>
             {`Generate Narrative${costLabel}`}
-          </button>
+          </Button>
           {aiError && (
             <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
               {' '}{aiError}
@@ -91,48 +88,30 @@ export default function DossierNarrativeButtons({
     return (
       <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
         {/* Toggle view button — free action */}
-        <button
+        <Button
+          variant={inNarrativeView ? 'gold' : 'ai'}
+          size="sm"
           onClick={() => setShowNarrative(!inNarrativeView)}
           disabled={regenerating}
           title={inNarrativeView
             ? 'Switch to the raw generated data (no AI polish). No credits used.'
             : 'Switch to the AI-refined view. No credits used.'}
-          style={{
-            ...btnBase,
-            background: inNarrativeView
-              ? 'rgba(156,128,104,0.2)'
-              : 'linear-gradient(135deg, #4a1a7a, #6a2a9a)',
-            border: inNarrativeView
-              ? '1px solid rgba(156,128,104,0.35)'
-              : '1px solid rgba(160,100,220,0.6)',
-            color: inNarrativeView ? '#c8b89a' : swatch['#F0D8FF'],
-            opacity: regenerating ? 0.5 : 1,
-            cursor: regenerating ? 'default' : 'pointer',
-          }}
+          icon={inNarrativeView ? <EyeOff size={12} /> : <Eye size={12} />}
         >
-          {inNarrativeView
-            ? <EyeOff size={12} />
-            : <Eye size={12} />}
           {inNarrativeView ? 'View Raw Simulation' : 'View Narrative'}
-        </button>
+        </Button>
         {/* Regenerate button — spends credits */}
-        <button
+        <Button
+          variant="ai"
+          size="sm"
           onClick={runNarrativeLayer}
           disabled={regenerating}
+          busy={regenerating}
           title={`Regenerate the Narrative Layer from the simulator output. Spends ${getCost('narrative')} credits.`}
-          style={{
-            ...btnBase,
-            background: regenerating ? 'rgba(90,42,138,0.3)' : 'rgba(90,42,138,0.2)',
-            border: '1px solid rgba(160,100,220,0.35)',
-            color: regenerating ? 'rgba(200,160,240,0.6)' : swatch['#C8A0F0'],
-            cursor: regenerating ? 'default' : 'pointer',
-          }}
+          icon={<RefreshCw size={12} />}
         >
-          {regenerating
-            ? <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>{'\u21ba'}</span>
-            : <RefreshCw size={12} />}
           {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
-        </button>
+        </Button>
         {aiError && (
           <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
             {' '}{aiError}

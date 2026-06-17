@@ -17,9 +17,12 @@
  */
 
 import { useEffect, useMemo } from 'react';
+import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { previewCascade } from '../../domain/pendingEdits.js';
-import { sans, serif_, FS, SP, R, swatch, PARCH, MUTED, GOLD_DEEP } from '../theme.js';
+import { sans, serif_, FS, SP, R, swatch, PARCH, GOLD_DEEP } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 const VIOLET = swatch['#7B4FCF'];
 const VIOLET_BG = swatch['#EBE2FA'];
@@ -121,16 +124,13 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
           }}>
             Cascade preview
           </h2>
-          <button
-            type="button"
+          <IconButton
+            Icon={X}
+            label="Close"
             onClick={onClose}
-            aria-label="Close"
-            style={{
-              background: 'transparent', border: 'none',
-              fontSize: FS.xxl, color: MUTED, cursor: 'pointer',
-              padding: 0, lineHeight: 1,
-            }}
-          >×</button>
+            tone="ghost"
+            size="lg"
+          />
         </header>
 
         <div style={{ flex: 1, overflow: 'auto', padding: SP.lg }}>
@@ -217,33 +217,19 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
           borderTop: `1px solid ${BORDER}`,
           display: 'flex', gap: SP.sm,
         }}>
-          <button
-            type="button"
+          <Button
+            variant="primary"
             onClick={onCommit}
-            style={{
-              flex: 1, padding: `${SP.sm}px ${SP.md}px`,
-              background: GOLD_DEEP, color: swatch.white,
-              border: 'none', borderRadius: R.sm,
-              fontWeight: 700, cursor: 'pointer',
-              fontFamily: sans, fontSize: FS.sm,
-            }}
+            style={{ flex: 1 }}
           >
             Apply
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="secondary"
             onClick={onClose}
-            style={{
-              padding: `${SP.sm}px ${SP.md}px`,
-              background: swatch.white, color: swatch['#3A2F18'],
-              border: `1px solid ${BORDER}`,
-              borderRadius: R.sm,
-              fontWeight: 600, cursor: 'pointer',
-              fontFamily: sans, fontSize: FS.sm,
-            }}
           >
             Cancel
-          </button>
+          </Button>
         </footer>
       </aside>
     </div>

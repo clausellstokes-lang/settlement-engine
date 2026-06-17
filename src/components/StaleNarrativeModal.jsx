@@ -23,6 +23,7 @@ import { useStore } from '../store/index.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { t } from '../copy/index.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, ELEV, swatch } from './theme.js';
+import IconButton from './primitives/IconButton.jsx';
 
 const PURPLE = swatch['#6A2A9A'];
 const PURPLE_BG = 'rgba(90,42,138,0.08)';
@@ -85,13 +86,13 @@ export default function StaleNarrativeModal({
               {changeLabel}
             </div>
           </div>
-          <button
+          <IconButton
+            Icon={X}
+            label={t('staleNarrative.ariaClose')}
             onClick={onClose}
-            aria-label={t('staleNarrative.ariaClose')}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 4, display: 'flex' }}
-          >
-            <X size={14} />
-          </button>
+            tone="ghost"
+            size="md"
+          />
         </div>
 
         {/* Body */}
@@ -103,8 +104,11 @@ export default function StaleNarrativeModal({
 
         {/* Options — exactly two. The change stays applied either way. */}
         <div style={{ padding: '0 18px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {/* Regenerate */}
+          {/* Regenerate — bespoke option card (leading icon + stacked title/body
+              rows, left-aligned); the Button primitive's centered single-line
+              layout can't express it, so it stays raw. */}
           <button
+            type="button"
             onClick={onRegenerate}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,
@@ -124,8 +128,10 @@ export default function StaleNarrativeModal({
             </div>
           </button>
 
-          {/* Continue with raw simulation */}
+          {/* Continue with raw simulation — bespoke option card (same stacked
+              title/body layout as Regenerate); kept raw for the same reason. */}
           <button
+            type="button"
             onClick={onClose}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,

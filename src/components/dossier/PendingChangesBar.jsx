@@ -20,8 +20,9 @@ import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { hasPending, activeEdits } from '../../domain/pendingEdits.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { sans, FS, SP, R, swatch, GOLD_DEEP, MUTED } from '../theme.js';
+import { sans, FS, SP, R, swatch } from '../theme.js';
 import CascadePreviewPanel from './CascadePreviewPanel.jsx';
+import Button from '../primitives/Button.jsx';
 
 const AMBER = swatch['#D08020'];
 const AMBER_BG = swatch['#FBEAD0'];
@@ -98,51 +99,15 @@ export default function PendingChangesBar() {
             · {summary}
           </span>
         )}
-        <button
-          type="button"
-          onClick={onPreview}
-          style={{
-            background: 'transparent',
-            border: 'none',
-            color: GOLD_DEEP,
-            fontWeight: 700,
-            cursor: 'pointer',
-            padding: 0,
-            fontFamily: sans, fontSize: FS.xs,
-          }}
-        >
+        <Button variant="ghost" size="sm" onClick={onPreview}>
           Preview cascade →
-        </button>
-        <button
-          type="button"
-          onClick={onCommit}
-          style={{
-            background: GOLD_DEEP,
-            color: swatch.white,
-            border: 'none',
-            borderRadius: R.sm,
-            padding: '4px 10px',
-            fontWeight: 700,
-            cursor: 'pointer',
-            fontFamily: sans, fontSize: FS.xs,
-          }}
-        >
+        </Button>
+        <Button variant="primary" size="sm" onClick={onCommit}>
           Commit
-        </button>
-        <button
-          type="button"
-          onClick={onRevert}
-          style={{
-            background: 'transparent',
-            border: 'none',
-            color: MUTED,
-            cursor: 'pointer',
-            padding: 0,
-            fontFamily: sans, fontSize: FS.xs,
-          }}
-        >
+        </Button>
+        <Button variant="ghost" size="sm" onClick={onRevert}>
           Revert
-        </button>
+        </Button>
       </div>
 
       {previewOpen && (

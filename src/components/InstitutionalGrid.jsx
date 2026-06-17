@@ -61,6 +61,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
   return (
     <div style={{ marginBottom: 6 }}>
       <button
+        type="button"
         onClick={() => setOpen(o => !o)}
         style={{
           width: '100%', display: 'flex', alignItems: 'center', gap: 8,
@@ -290,6 +291,7 @@ function CategorySection({ category, institutions, tier, toggles, onToggle, isEn
     <div style={{ borderBottom: `1px solid ${border}` }}>
       {/* Category header */}
       <button
+        type="button"
         onClick={() => setCollapsed(c => !c)}
         style={{
           width: '100%', display: 'flex', alignItems: 'center', gap: 8,

@@ -6,7 +6,7 @@ import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
 
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
 import {getAllModifiers} from '../lib/relationshipGraph.js';
-import { GOLD, MUTED, SECOND, BORDER, CARD, sans, FS, swatch, PAGE_MAX } from './theme.js';
+import { MUTED, BORDER, sans, FS, swatch, PAGE_MAX } from './theme.js';
 import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
@@ -25,6 +25,7 @@ import { migrateConfig, findSaveById, saveCountBand, dayGapBand, canonPhaseOf, l
 import { SettlementCard } from './settlements/SettlementCard.jsx';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
+import Button from './primitives/Button.jsx';
 
 // ── Main Panel ──────────────────────────────────────────────────────────────
 
@@ -590,13 +591,13 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 // eslint-disable-next-line jsx-a11y/no-autofocus -- new-campaign field appears on user action; focus lets them type the name immediately
                 placeholder="Campaign name..." autoFocus
                 style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, borderRadius:5, fontSize:FS.sm, fontFamily:sans, outline:'none' }}/>
-              <button onClick={handleCreateCampaign} disabled={!newCampaignName.trim()} style={{ padding:'6px 12px', background:newCampaignName.trim()?GOLD:'#ccc', color:swatch.white, border:'none', borderRadius:5, cursor:newCampaignName.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Create</button>
-              <button onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }} style={{ padding:'6px 10px', background:CARD, color:SECOND, border:`1px solid ${BORDER}`, borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontFamily:sans }}>Cancel</button>
+              <Button variant="primary" size="sm" onClick={handleCreateCampaign} disabled={!newCampaignName.trim()}>Create</Button>
+              <Button variant="secondary" size="sm" onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }}>Cancel</Button>
             </div>
           ) : (
-            <button onClick={() => setShowNewCampaign(true)} style={{ display:'flex', alignItems:'center', gap:6, padding:'7px 14px', background:CARD, color:GOLD, border:`1px solid rgba(160,118,42,0.55)`, borderRadius:6, cursor:'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans, boxShadow:'0 1px 6px rgba(27,20,8,0.08)' }}>
-              <FolderPlus size={14}/> New Campaign
-            </button>
+            <Button variant="gold" size="md" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>}>
+              New Campaign
+            </Button>
           )}
         </div>
       )}
