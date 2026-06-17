@@ -24,6 +24,7 @@ function powerLabelFor(power) {
 registerStep('neighbourFactions', {
   deps: ['generatePower', 'resolveNeighbour'],
   provides: [],
+  mutates: ['powerStructure'], // mirrors neighbour-derived factions into powerStructure.factions in place when a neighbour is bound (A+ P1.7)
   phase: 'power',
 }, (ctx, rng) => {
   const { neighbourFacBias, neighbourProfile, powerStructure } = ctx;
