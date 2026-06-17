@@ -192,6 +192,8 @@ export function getStepMeta() {
       name,
       deps: step.deps || [],
       provides: step.provides || [],
+      mutates: step.mutates || [],
+      scratch: step.scratch || [],
       phase: step.phase || 'unknown',
     });
   }
