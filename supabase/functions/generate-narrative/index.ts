@@ -31,6 +31,7 @@
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { shouldRefundOnFailure } from './refundPolicy.ts';
 // Tier 6.8 — bundled aiGrounding contract. Pre-built by
 // `scripts/build-edge-shared.mjs`. Freshness enforced by
 // tests/edgeFunctions/aiGroundingBundle.freshness.test.js.
@@ -2169,7 +2170,9 @@ serve(async (req) => {
             }));
 
             if (firstError) {
-              await refund();
+              // dailyLife has no thesis — any of its atomic paragraphs failing is
+              // fatal, so the policy refunds (shouldRefundOnFailure('dailyLifeField')).
+              if (shouldRefundOnFailure('dailyLifeField')) await refund();
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
               send({ error: (firstError as Error).message, refunded: !isElevated, aiUsage });
@@ -2224,7 +2227,7 @@ serve(async (req) => {
                 usageTelemetry,
               );
             } catch (e) {
-              await refund();
+              if (shouldRefundOnFailure('thesis')) await refund();
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
               send({ error: `Progression thesis failed: ${(e as Error).message}`, refunded: !isElevated, aiUsage });
@@ -2334,7 +2337,7 @@ serve(async (req) => {
               usageTelemetry,
             );
           } catch (e) {
-            await refund();
+            if (shouldRefundOnFailure('thesis')) await refund();
             const aiUsage = aggregateAiUsage(usageTelemetry);
             console.warn('[generate-narrative] ai_usage_failed', JSON.stringify(aiUsage));
             send({ error: `Thesis generation failed: ${(e as Error).message}`, refunded: !isElevated, aiUsage });
