@@ -184,12 +184,12 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 
 ## Parallel tracks (run concurrently behind the Phase-1 spine)
 
-### Track A — Domain purity & inverse-proof (owner: domain)
-- Quick-win domain leak removals (flag, two Math.random sites) [critical/S + high/S x2]
-- Widen determinism eslint guard to src/domain/** [critical/M] (after the leaks are removed)
-- Pin undo true-inverse with a whole-object round-trip across the full EVENT_REGISTRY [high/M]
-- Close the preview≡apply gap on projected nextSettlement with now-threading [medium/M]
-- Turn on tsc strictness for the domain (tsconfig.domain-strict.json) and add it to `check` [medium/L]
+### Track A — Domain purity & inverse-proof (owner: domain) — ✅ COMPLETE
+- ✅ Quick-win domain leak removals (flag, two Math.random sites) — done in P0.5
+- ✅ Widen determinism eslint guard to src/domain/** — done in P1.2
+- ✅ Pin undo true-inverse with a whole-object round-trip across the full EVENT_REGISTRY — domain.5 (bae1285); FOUND + fixed 4 real undo gaps (ASSIGN_NPC_TO_ROLE, RESTORE_INSTITUTION, RESTORE_FACTION, REMOVED_THREAT not snapshot-backed)
+- ✅ Close the preview≡apply gap on projected nextSettlement with now-threading — domain.6 (40eb1a9); apply path now pure of (settlement, event, now), store threads the wall-clock
+- ✅ Turn on tsc strictness for the domain — domain.7 (5881cb8); shipped as a per-file regression-blocking RATCHET (4649-error baseline, gate-wired) — full burn-down to zero is the tracked worklist (XL, ~133 files)
 
 ### Track B — Generators data-flow integrity (owner: generators)
 - Declare step reads/mutates/scratch contracts + enforce in runPipeline [critical/M x2]
