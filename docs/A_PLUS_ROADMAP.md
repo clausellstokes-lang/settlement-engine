@@ -202,11 +202,11 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 ### Track C — UI decomposition (owner: frontend) — 🟡 in progress
 - ✅ max-lines ratchet (components-core.1) — done in P1.4; ✅ zero-inline-object-selector (Step 9) — done in P1.5
 - ✅ OutputContainer.jsx -> JSX [critical/XL] — components-core.2 (createElement→JSX, swatch-tokenized, preview-verified, ~zero visual change; file now under the design-system gate)
-- ⬜ Decompose WorldMap.jsx into hooks + shell, resolve the :387 exhaustive-deps warning [high/XL]
-- ⬜ EventComposer.jsx -> reducer + form-config table (~35 useState -> <=3) [high/XL]
-- ⬜ GenerateWizard.jsx -> per-step components + useWizard hook [high/XL]
-- ⬜ Split SettlementsPanel.jsx + CompendiumPanel.jsx by internal seams [high/L]
-- ⬜ Add render/smoke tests as the lock-in harness for every decomposition [high/L] — PREREQUISITE for the four decompositions above; each decomposition is a behavior-preserving refactor to land behind its smoke test + preview verification
+- ⬜ Decompose WorldMap.jsx into hooks + shell, resolve the :387 exhaustive-deps warning [high/XL] — REMAINING (behavioral hook extraction; needs interactive map preview)
+- ⬜ EventComposer.jsx -> reducer + form-config table (~35 useState -> <=3) [high/XL] — REMAINING (behavioral reducer conversion)
+- ⬜ GenerateWizard.jsx -> per-step components + useWizard hook [high/XL] — REMAINING (sub-component moves + step-machine hook)
+- ✅ Split SettlementsPanel.jsx + CompendiumPanel.jsx by internal seams [high/L] — components-core.6a (SettlementsPanel 1104→517) + 6b (CompendiumPanel 1165→229; CustomContent split <600). Both behavior-preserving, smoke-tested, gate-green.
+- 🟡 Add render/smoke tests as the lock-in harness for every decomposition [high/L] — established the pattern (tests/ui/settlementsPanel.smoke + compendiumPanel.smoke); extend to the three XL components as each is decomposed.
 
 ### Track D — Design system & a11y (owner: design; can run alongside UI decomposition but coordinate on touched files)
 - Strengthen no-raw-color to inspect all literals + ban local hex consts (the ratchet) [critical/M]
