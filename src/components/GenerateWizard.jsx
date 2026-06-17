@@ -13,7 +13,7 @@
  * Reads all state from the Zustand store — zero props.
  */
 import { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react';
-import { ChevronRight, ChevronLeft, Zap, ArrowLeft } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import ConfigurationPanel from './ConfigurationPanel';
@@ -22,21 +22,19 @@ import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
 import WizardCloseout from './generate/WizardCloseout.jsx';
 import WizardNextSteps from './generate/WizardNextSteps.jsx';
-import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
-import HomeHero from './HomeHero.jsx';
 import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
 import { ModeSelector } from './generate/ModeSelector.jsx';
 import { StepIndicator } from './generate/StepIndicator.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
-// P128 / H-2 — Sample dossier proof card. Self-gates on flag +
-// anonymous + no settlement yet; renders nothing once any of those
-// flip. Mounted directly below HomeHero so anon visitors see proof of
-// the moat without scrolling.
-const HomeSampleDossier = lazy(() => import('./home/HomeSampleDossier.jsx'));
+import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
+import { WizardChipRow } from './generate/WizardChipRow.jsx';
+import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
+import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
 
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
@@ -336,61 +334,16 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
   if (!wizardMode && !settlement) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: 860, margin: '0 auto', padding: `${SP.xl}px 0` }}>
-        {showHomeHero && (
-          <>
-            <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
-            <Suspense fallback={null}>
-              <HomeSampleDossier />
-            </Suspense>
-          </>
-        )}
-        {!showHomeHero && (
-          <div style={{ textAlign: 'center', padding: `${SP.md}px 0` }}>
-            <h2 style={{
-              fontFamily: serif_,
-              fontSize: isMobile ? FS.xxl : 32,
-              fontWeight: 700,
-              color: INK,
-              margin: 0,
-              marginBottom: SP.sm,
-            }}>
-              Create a Settlement
-            </h2>
-            <p style={{
-              fontFamily: sans,
-              fontSize: FS.md,
-              color: MUTED,
-              margin: 0,
-            }}>
-              Choose a generation mode to get started.
-            </p>
-          </div>
-        )}
-        {showModePicker && (
-          <>
-            <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
-              Want full control? Use one of the modes below.
-            </div>
-            <ModeSelector mode={wizardMode} onModeChange={setWizardMode} large />
-          </>
-        )}
-        {/* Anonymous visitors get instant generation (the hero) only; Basic and
-            Advanced are gated to signed-in users. Surface the (free) path so the
-            gate is discoverable rather than a silently-missing feature. */}
-        {!showModePicker && authTier === 'anon' && (
-          <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
-            Want full control?{' '}
-            <button
-              onClick={onSignIn}
-              style={{ background: 'transparent', border: 'none', padding: 0, color: GOLD, fontWeight: 700, fontFamily: sans, fontSize: FS.sm, cursor: 'pointer', textDecoration: 'underline' }}
-            >
-              Sign in (free)
-            </button>
-            {' '}to unlock Basic &amp; Advanced generation.
-          </div>
-        )}
-      </div>
+      <WizardEmptyState
+        showHomeHero={showHomeHero}
+        showModePicker={showModePicker}
+        isMobile={isMobile}
+        wizardMode={wizardMode}
+        setWizardMode={setWizardMode}
+        authTier={authTier}
+        onSignIn={onSignIn}
+        onNavigate={onNavigate}
+      />
     );
   }
 
@@ -486,86 +439,24 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           chip, a neighbour-active chip. All three were previously full
           banner rows; now they fit in one. */}
       {chromeDiet && !settlement && (
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: SP.sm,
-          padding: `${SP.xs}px ${SP.sm}px`,
-          flexWrap: 'wrap', fontSize: FS.xs,
-        }}>
-          {wizardMode === 'advanced' && (
-            <button
-              onClick={() => setWizardMode('basic')}
-              style={{
-                padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
-                background: swatch.white, border: `1px solid ${BORDER}`,
-                borderRadius: 12, color: SECOND,
-                cursor: 'pointer', fontFamily: sans,
-              }}
-            >
-              Switch to Basic →
-            </button>
-          )}
-          {loadedFromSave && (
-            <span style={{
-              padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
-              background: CARD_HDR, border: `1px solid ${BORDER}`,
-              borderRadius: 12, color: swatch['#5A3A00'],
-              display: 'inline-flex', alignItems: 'center', gap: 4,
-            }}>
-              📋 {loadedFromSave.name}
-              <button
-                onClick={clearLoadedFromSave}
-                style={{
-                  background: 'transparent', border: 'none',
-                  color: swatch['#5A3A00'], cursor: 'pointer', padding: 0,
-                  fontSize: FS.xs, fontWeight: 700,
-                }}
-                aria-label="Clear loaded config"
-              >×</button>
-            </span>
-          )}
-          {importedNeighbour && (
-            <span style={{
-              padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,
-              background: swatch['#E2EEDB'], border: '1px solid #4a8a60',
-              borderRadius: 12, color: swatch.success,
-              display: 'inline-flex', alignItems: 'center', gap: 4,
-            }}>
-              🌐 {importedNeighbour.name}
-              <button
-                onClick={clearNeighbour}
-                style={{
-                  background: 'transparent', border: 'none',
-                  color: swatch.success, cursor: 'pointer', padding: 0,
-                  fontSize: FS.xs, fontWeight: 700,
-                }}
-                aria-label="Clear neighbour"
-              >×</button>
-            </span>
-          )}
-        </div>
+        <WizardChipRow
+          wizardMode={wizardMode}
+          setWizardMode={setWizardMode}
+          loadedFromSave={loadedFromSave}
+          clearLoadedFromSave={clearLoadedFromSave}
+          importedNeighbour={importedNeighbour}
+          clearNeighbour={clearNeighbour}
+        />
       )}
 
       {/* Banners — only when the chrome diet is off (legacy path) */}
-      {!chromeDiet && loadedFromSave && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: swatch['#FDF8EE'], border: '2px solid #b8860b', borderRadius: 8, padding: '10px 14px' }}>
-          <span style={{ fontSize: FS['16'], flexShrink: 0 }}>&#128203;</span>
-          <div style={{ flex: 1 }}>
-            <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch['#5A3A00'] }}>Config loaded: {loadedFromSave.name}</span>
-            {loadedFromSave.tier && <span style={{ fontSize: FS.sm, color: swatch['#8A6020'], marginLeft: 8 }}>{loadedFromSave.tier}</span>}
-          </div>
-          <button onClick={clearLoadedFromSave} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(184,134,11,0.15)', border: '1px solid #b8860b', color: swatch['#5A3A00'], cursor: 'pointer', fontSize: FS['16'], fontWeight: 700 }}>&times;</button>
-        </div>
-      )}
-
-      {!chromeDiet && importedNeighbour && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: swatch.successBg, border: '2px solid #4a8a60', borderRadius: 8, padding: '10px 14px' }}>
-          <span style={{ fontSize: FS['16'] }}>&#127760;</span>
-          <div style={{ flex: 1 }}>
-            <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.success }}>Neighbour active: {importedNeighbour.name}</span>
-            <span style={{ fontSize: FS.sm, color: swatch['#4A8A60'], marginLeft: 8 }}>{importedNeighbour.tier}</span>
-          </div>
-          <button onClick={clearNeighbour} style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(74,138,96,0.15)', border: '1px solid #4a8a60', color: swatch.success, cursor: 'pointer', fontSize: FS['16'], fontWeight: 700 }}>&times;</button>
-        </div>
+      {!chromeDiet && (
+        <WizardLoadedBanners
+          loadedFromSave={loadedFromSave}
+          clearLoadedFromSave={clearLoadedFromSave}
+          importedNeighbour={importedNeighbour}
+          clearNeighbour={clearNeighbour}
+        />
       )}
 
       {/* Step indicator + hint (advanced mode, pre-generation). Bounded to real
@@ -733,65 +624,12 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       {settlement && showOutput && !pipelineRevealActive && (
         <>
           {/* ── Back navigation toolbar ──────────────────────────── */}
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: SP.md,
-            padding: `${SP.md}px ${SP.lg}px`,
-            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-            borderRadius: R.lg,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
-            position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
-          }}>
-            <button
-              onClick={handleBack}
-              style={{
-                display: 'flex', alignItems: 'center', gap: SP.xs,
-                padding: `${SP.sm}px ${SP.md}px`,
-                background: 'rgba(160,118,42,0.15)',
-                border: `1px solid rgba(160,118,42,0.3)`,
-                borderRadius: R.md, cursor: 'pointer',
-                color: GOLD, fontSize: FS.sm, fontWeight: 600, fontFamily: sans,
-              }}
-              title="Back to configuration"
-            >
-              <ArrowLeft size={14} /> Back
-            </button>
-
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{
-                fontSize: FS.lg, fontWeight: 700, fontFamily: serif_,
-                color: GOLD, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-              }}>
-                {settlement.name || 'Untitled Settlement'}
-              </div>
-              <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                {settlement.tier || 'Settlement'} &middot; Pop. {settlement.population?.toLocaleString?.() || '?'}
-              </div>
-            </div>
-
-            {/* Save UX consolidation (code-review fix): there was a
-                second, smaller save button here that called
-                savesService.save directly with no error toast, no
-                "saved" feedback, and no canSave server-side gate.
-                Removed — the SaveToLibraryButton lower in the page
-                is the single canonical save action. Two save buttons
-                pointing at the same outcome was confusing and meant
-                users frequently clicked the worse one. */}
-            <div style={{ display: 'flex', gap: SP.xs }}>
-              <button
-                onClick={handleNewSettlement}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: SP.xs,
-                  padding: `${SP.sm}px ${SP.md}px`,
-                  background: GOLD,
-                  border: 'none',
-                  borderRadius: R.md, cursor: 'pointer',
-                  color: swatch.white, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-                }}
-              >
-                <Zap size={14} /> New
-              </button>
-            </div>
-          </div>
+          <WizardOutputToolbar
+            settlement={settlement}
+            isMobile={isMobile}
+            handleBack={handleBack}
+            handleNewSettlement={handleNewSettlement}
+          />
 
           <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
             {/* P139 — cap the dossier body to the shared page width so it

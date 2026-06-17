@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { FS, swatch } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText } from 'lucide-react';
-import { TIER_LABELS } from './new/design';
+import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
 import PipelineRail from './PipelineRail.jsx';
@@ -34,8 +33,13 @@ const SimulationDrawer = lazy(() => import('./dossier/SimulationDrawer.jsx'));
 const TableView = lazy(() => import('./TableView.jsx'));
 // P131 / E-1 — Click-to-edit settlement name in the header.
 // The pencil reveals on hover; commit queues a rename-settlement
-// edit through the pending-edits drawer (E-2).
-import EditableInline from './primitives/EditableInline.jsx';
+// edit through the pending-edits drawer (E-2). The editable name now
+// lives inside DossierHeaderRow, which imports EditableInline directly.
+import DossierNarrativeButtons from './dossier/DossierNarrativeButtons.jsx';
+import DossierHeaderRow from './dossier/DossierHeaderRow.jsx';
+import DossierNarrativeBanner from './dossier/DossierNarrativeBanner.jsx';
+import DossierTabStrip from './dossier/DossierTabStrip.jsx';
+import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
@@ -548,128 +552,21 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // ── Button group state ─────────────────────────────────────────────────────
   // Three distinct buttons replace the old single action so view-toggling
   // can't accidentally spend credits.
-  const renderNarrativeButtons = () => {
-    // Unsaved settlements: render nothing here. The AI-enrichment affordance
-    // moved to a slim hint line below the tab strip so the header stays
-    // focused on what the user just generated. This avoids a teaser button
-    // that can't actually fire.
-    if (!narrativeEnabled) return null;
-
-    const costLabel = isConfigured ? ` (${getCost('narrative')} credits)` : '';
-    const btnBase = {
-      display: 'flex', alignItems: 'center', gap: 6,
-      padding: '6px 14px', borderRadius: 20,
-      fontSize: FS.xs, fontWeight: 800,
-      fontFamily: 'Nunito, sans-serif', letterSpacing: '0.04em',
-      transition: 'all 0.2s', whiteSpace: 'nowrap',
-      cursor: 'pointer',
-    };
-
-    // State 1: no narrative yet → single generate button
-    if (!aiSettlement && !aiLoading) {
-      return (
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
-          <button
-            onClick={runNarrativeLayer}
-            title="Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement. Uses credits."
-            style={{
-              ...btnBase,
-              background: 'rgba(90,42,138,0.2)',
-              border: '1px solid rgba(160,100,220,0.35)',
-              color: swatch['#C8A0F0'],
-            }}
-          >
-            <span style={{ fontSize: FS.xs }}>{'\u2726'}</span>
-            {`Generate Narrative${costLabel}`}
-          </button>
-          {aiError && (
-            <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
-              {' '}{aiError}
-            </div>
-          )}
-        </div>
-      );
-    }
-
-    // State 2: loading (first-time) → progress chip
-    if (aiLoading && !aiRegenerating) {
-      return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <div
-            style={{
-              ...btnBase,
-              background: 'rgba(90,42,138,0.3)',
-              border: '1px solid rgba(160,100,220,0.35)',
-              color: 'rgba(200,160,240,0.8)',
-              cursor: 'default',
-            }}
-          >
-            <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>{'\u2726'}</span>
-            {displayProgress || 'Weaving\u2026'}
-          </div>
-        </div>
-      );
-    }
-
-    // State 3 or 4: narrative exists → toggle + regenerate pair
-    // (Includes the aiLoading && aiRegenerating case — buttons appear but the
-    // Regenerate one is disabled while the new narrative is brewing.)
-    const inNarrativeView = storeShowNarrative;
-    const regenerating = aiLoading && aiRegenerating;
-
-    return (
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
-        {/* Toggle view button — free action */}
-        <button
-          onClick={() => setShowNarrative(!inNarrativeView)}
-          disabled={regenerating}
-          title={inNarrativeView
-            ? 'Switch to the raw generated data (no AI polish). No credits used.'
-            : 'Switch to the AI-refined view. No credits used.'}
-          style={{
-            ...btnBase,
-            background: inNarrativeView
-              ? 'rgba(156,128,104,0.2)'
-              : 'linear-gradient(135deg, #4a1a7a, #6a2a9a)',
-            border: inNarrativeView
-              ? '1px solid rgba(156,128,104,0.35)'
-              : '1px solid rgba(160,100,220,0.6)',
-            color: inNarrativeView ? '#c8b89a' : swatch['#F0D8FF'],
-            opacity: regenerating ? 0.5 : 1,
-            cursor: regenerating ? 'default' : 'pointer',
-          }}
-        >
-          {inNarrativeView
-            ? <EyeOff size={12} />
-            : <Eye size={12} />}
-          {inNarrativeView ? 'View Raw Simulation' : 'View Narrative'}
-        </button>
-        {/* Regenerate button — spends credits */}
-        <button
-          onClick={runNarrativeLayer}
-          disabled={regenerating}
-          title={`Regenerate the Narrative Layer from the simulator output. Spends ${getCost('narrative')} credits.`}
-          style={{
-            ...btnBase,
-            background: regenerating ? 'rgba(90,42,138,0.3)' : 'rgba(90,42,138,0.2)',
-            border: '1px solid rgba(160,100,220,0.35)',
-            color: regenerating ? 'rgba(200,160,240,0.6)' : swatch['#C8A0F0'],
-            cursor: regenerating ? 'default' : 'pointer',
-          }}
-        >
-          {regenerating
-            ? <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>{'\u21ba'}</span>
-            : <RefreshCw size={12} />}
-          {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
-        </button>
-        {aiError && (
-          <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
-            {' '}{aiError}
-          </div>
-        )}
-      </div>
-    );
-  };
+  const renderNarrativeButtons = () => (
+    <DossierNarrativeButtons
+      narrativeEnabled={narrativeEnabled}
+      isConfigured={isConfigured}
+      getCost={getCost}
+      aiSettlement={aiSettlement}
+      aiLoading={aiLoading}
+      aiRegenerating={aiRegenerating}
+      aiError={aiError}
+      displayProgress={displayProgress}
+      storeShowNarrative={storeShowNarrative}
+      setShowNarrative={setShowNarrative}
+      runNarrativeLayer={runNarrativeLayer}
+    />
+  );
 
   // Deferred null check (see comment near the top of this component).
   // All hooks are now committed; safe to early-exit.
@@ -688,49 +585,17 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             where the wizard's own sticky toolbar already shows name/tier/pop, so
             the two dark identity bars collapse into one. */}
         {hideHeader ? null : (
-          <div style={{ padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: swatch['#C49A3C'], lineHeight: 1.1 }}>
-                {(!readOnly && queueEdit) ? (
-                  <EditableInline
-                    value={settlement.name || ''}
-                    ariaLabel="Edit settlement name"
-                    textStyle={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: swatch['#C49A3C'], lineHeight: 1.1 }}
-                    trackEvent={EVENTS.EDIT_PENDING_QUEUED}
-                    provenance={{ kind: 'rename-settlement', entityId: saveId || 'unsaved' }}
-                    onCommit={(newName) => {
-                      queueEdit('rename-settlement', { newName });
-                    }}
-                  />
-                ) : settlement.name}
-              </div>
-              <div style={{ display: 'flex', gap: 8, marginTop: 5, flexWrap: 'wrap', alignItems: 'center' }}>
-                <span style={{ fontSize: FS.sm, color: swatch.mutedBrown, textTransform: 'capitalize', fontWeight: 600 }}>{TIER_LABELS[settlement.tier] || settlement.tier}</span>
-                <span style={{ fontSize: FS.sm, color: swatch.inkMag3 }}>{'\u00b7'}</span>
-                <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{settlement.population?.toLocaleString() + ' pop.'}</span>
-                {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{settlement.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
-                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? '#c87060' : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{settlement.config.monsterThreat === 'plagued' ? ' Embattled' : ' Frontier'}</span>}
-                {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}
-              </div>
-            </div>
-            {REROLLABLE[selectedTab] && onRegenerate && (
-              <button
-                onClick={() => onRegenerate(selectedTab)}
-                style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 14px', borderRadius: 5, background: 'rgba(196,154,60,0.15)', border: '1px solid rgba(196,154,60,0.3)', color: swatch['#C49A3C'], fontSize: FS.sm, fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }}
-              >
-                <RefreshCw size={12} />{' '}{REROLLABLE[selectedTab]}
-              </button>
-            )}
-            {/* ── AI Narrative Layer button group ──────────────────────────────────
-                P121 / D-4 — When `narrativeLayerStrip` flag is on, the
-                narrative buttons move out of the header into a labeled strip
-                below (rendered further down). The header remains lean. When
-                the flag is off, the legacy header-button cluster renders.
-                readOnly exception: the strip below is suppressed in readOnly
-                (SettlementDetail's saved-dossier view), so keep the header
-                buttons there or the free View Narrative/Raw toggle vanishes. */}
-            {(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
-          </div>
+          <DossierHeaderRow
+            readOnly={readOnly}
+            queueEdit={queueEdit}
+            settlement={settlement}
+            saveId={saveId}
+            stressObj={stressObj}
+            selectedTab={selectedTab}
+            onRegenerate={onRegenerate}
+            REROLLABLE={REROLLABLE}
+            narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
+          />
         )}
         {/* P121 — Labeled narrative-layer strip. Below the header, above
             the tab strip. Lives in its own card with title + cost pill +
@@ -818,120 +683,22 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
             group selects its first sub-tab and filters the strip below. */}
         {fiveTabsEnabled && (
-          // eslint-disable-next-line jsx-a11y/interactive-supports-focus -- roving tabIndex lives on the child tabs (WAI-ARIA tabs pattern); the tablist container forwards arrow keys but is not itself a focus stop
-          <div
-            role="tablist"
-            aria-label="Dossier sections"
-            onKeyDown={(e) => {
-              const ids = visibleGroupEntries.map(([gid]) => gid);
-              const i = ids.indexOf(selectedGroup);
-              if (i < 0) return;
-              let j;
-              if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % ids.length;
-              else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + ids.length) % ids.length;
-              else if (e.key === 'Home') j = 0;
-              else if (e.key === 'End') j = ids.length - 1;
-              else return;
-              e.preventDefault();
-              handleGroupClick(ids[j]);
-              if (typeof requestAnimationFrame !== 'undefined') {
-                requestAnimationFrame(() => {
-                  try { document.getElementById('sf-group-' + ids[j])?.focus(); } catch { /* no-op */ }
-                });
-              }
-            }}
-            style={{
-              display: 'flex', gap: 2, padding: 4,
-              background: swatch['#F7F0E4'], borderBottom: '1px solid #e0d0b0',
-            }}
-          >
-            {visibleGroupEntries.map(([gid, group]) => {
-              const active = selectedGroup === gid;
-              return (
-                <button
-                  key={gid}
-                  id={'sf-group-' + gid}
-                  role="tab"
-                  aria-selected={active}
-                  tabIndex={active ? 0 : -1}
-                  onClick={() => handleGroupClick(gid)}
-                  style={{
-                    flex: 1, padding: '8px 6px',
-                    background: active ? 'rgba(201,162,76,0.10)' : 'transparent',
-                    border: active ? '1px solid rgba(201,162,76,0.40)' : '1px solid transparent',
-                    borderRadius: 3,
-                    fontSize: FS.sm,
-                    fontWeight: active ? 700 : 500,
-                    color: active ? '#8C6F32' : '#6B5340',
-                    fontFamily: 'Nunito, sans-serif',
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                  }}
-                >{group.label}</button>
-              );
-            })}
-          </div>
+          <DossierGroupTabStrip
+            visibleGroupEntries={visibleGroupEntries}
+            selectedGroup={selectedGroup}
+            handleGroupClick={handleGroupClick}
+          />
         )}
         {/* Tab strip */}
-        <div data-onboard-highlight={onboardingActive && onboardingStep === 2 ? 'true' : undefined} style={{ position: 'relative', borderBottom: '1px solid #e0d0b0', background: swatch['#F7F0E4'] }}>
-          <button onClick={() => scroll(-1)} aria-label="Scroll tabs left" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronLeft size={14} /></button>
-          {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus -- roving tabIndex lives on the child tabs (WAI-ARIA tabs pattern); the tablist container forwards arrow keys but is not itself a focus stop */}
-          <div
-            ref={scrollRef}
-            role="tablist"
-            aria-label="Dossier tabs"
-            // WAI-ARIA tabs keyboard pattern: arrows move between tabs (with
-            // roving tabIndex below, only the active tab is in the tab order, so
-            // Tab enters the strip once and arrows navigate within it). Home/End
-            // jump to the ends. Focus follows selection.
-            onKeyDown={(e) => {
-              const i = tabs.findIndex(t => t.id === selectedTab);
-              if (i < 0) return;
-              let j;
-              if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % tabs.length;
-              else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
-              else if (e.key === 'Home') j = 0;
-              else if (e.key === 'End') j = tabs.length - 1;
-              else return;
-              e.preventDefault();
-              const target = tabs[j];
-              setActiveTab(target.id);
-              if (typeof requestAnimationFrame !== 'undefined') {
-                requestAnimationFrame(() => {
-                  try { document.getElementById('sf-tab-' + target.id)?.focus(); } catch { /* no-op */ }
-                });
-              }
-            }}
-            style={{ display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', paddingLeft: 28, paddingRight: 28, WebkitOverflowScrolling: 'touch' }}
-          >
-            {tabs.map(({ id, label, Icon }) => {
-              const active = selectedTab === id;
-              // Guidance (DM Compass) is the AI-narrated layer — give it a subtle
-              // purple tint so the AI surface reads as distinct from the
-              // simulation tabs.
-              const purple = id === 'dm_compass';
-              const accent = purple ? '#7a3aa8' : '#a0762a';
-              const idle   = purple ? '#7a5a92' : swatch.inkMag3;
-              const bg = active
-                ? (purple ? '#f7f0fa' : '#fffbf5')
-                : (purple ? 'rgba(122,58,168,0.05)' : 'transparent');
-              return (
-                <button
-                  key={id}
-                  onClick={() => setActiveTab(id)}
-                  id={'sf-tab-' + id}
-                  role="tab"
-                  aria-selected={active}
-                  // Roving tabIndex: only the selected tab is tabbable; the rest are
-                  // reached via the arrow-key handler on the tablist.
-                  tabIndex={active ? 0 : -1}
-                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? accent : idle, fontSize: FS.xxs, fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
-                ><Icon size={14} />{label}</button>
-              );
-            })}
-          </div>
-          <button onClick={() => scroll(1)} aria-label="Scroll tabs right" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronRight size={14} /></button>
-        </div>
+        <DossierTabStrip
+          onboardingActive={onboardingActive}
+          onboardingStep={onboardingStep}
+          scroll={scroll}
+          scrollRef={scrollRef}
+          tabs={tabs}
+          selectedTab={selectedTab}
+          setActiveTab={setActiveTab}
+        />
         {/* Content — dimmed overlay during regenerate so the user sees "something is changing" */}
         <div style={{ position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' }}>
           {/* ── Banners above tab content ────────────────────────────────────────
@@ -946,46 +713,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               The partial-failure notice was lifted out of the thesis block so it
               surfaces on every tab (it's a session-level concern, not an
               identity-banner concern). */}
-          {(() => {
-          // Owner views read the narrative overlay (aiSettlement); a public gallery
-          // dossier embeds the narrative INTO the published settlement, so read the
-          // thesis / per-tab note from the rendered settlement there. Either way
-          // this only surfaces already-published narrative prose (the lens never
-          // appears on an un-narrated dossier — there's no thesis to show).
-          const nsrc = (showNarrative && aiSettlement) ? aiSettlement : (publicDossier ? rawSettlement : null);
-          if (!nsrc) return null;
-          const THESIS_TABS = ['summary', 'overview'];
-          const NOTE_TABS = ['economics', 'services', 'power', 'defense', 'npcs', 'history', 'resources', 'viability'];
-          const showThesis = THESIS_TABS.includes(selectedTab) && typeof nsrc.thesis === 'string' && nsrc.thesis.length > 0;
-          const note = NOTE_TABS.includes(selectedTab) ? nsrc.narrativeNotes?.[selectedTab] : null;
-          const showNote = typeof note === 'string' && note.length > 0;
-          if (!showThesis && !showNote) return null;
-
-          return (
-            <div
-              style={{
-                padding: '12px 18px',
-                borderBottom: '1px solid rgba(160,100,220,0.2)',
-                background: 'linear-gradient(135deg, rgba(74,26,122,0.06), rgba(106,42,154,0.04))',
-                opacity: aiRegenerating ? 0.55 : 1,
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                <span style={{ fontSize: FS.md, flexShrink: 0, marginTop: 2, color: swatch['#8A50B0'] }}>{'\u2726'}</span>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A50B0'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
-                    {showThesis ? 'Narrative Layer \u2014 Identity' : 'Narrative Layer \u2014 Lens'}
-                  </div>
-                  {showThesis
-                    ? nsrc.thesis.split(/\n\n+/).map((para, i, arr) => (
-                        <p key={i} style={{ margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>{para.trim()}</p>
-                      ))
-                    : <p style={{ margin: 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>{note}</p>}
-                </div>
-              </div>
-            </div>
-          );
-        })()}
+          <DossierNarrativeBanner
+            showNarrative={showNarrative}
+            aiSettlement={aiSettlement}
+            publicDossier={publicDossier}
+            rawSettlement={rawSettlement}
+            selectedTab={selectedTab}
+            aiRegenerating={aiRegenerating}
+          />
           {/* Partial-refinement notice — independent of which tab is active. */}
           {showNarrative && storeAiPartialFailure && storeAiPartialFailure.failedFields?.length > 0 && (
             <div
