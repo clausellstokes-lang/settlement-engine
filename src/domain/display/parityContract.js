@@ -78,6 +78,10 @@ export const SHARED_FIELDS = Object.freeze([
   // is per-surface (web RGB scale vs PDF palette) and exempt; only the label is shared.
   { fact: 'prosperity.label', canonPath: 'prosperity.label', vmPaths: ['overview.prosperity'] },
   { fact: 'safety.label',     canonPath: 'safety.label',     vmPaths: ['overview.safety'] },
+  // Defense readiness + average defense score, and the top export (pdf.4).
+  { fact: 'defense.readinessLabel', canonPath: 'defense.readinessLabel', vmPaths: ['summary.situation.defense.readiness'] },
+  { fact: 'defense.scoreAvg',       canonPath: 'defense.scoreAvg',       vmPaths: ['summary.situation.defense.scoreAvg', 'defense.scoreAvg'] },
+  { fact: 'topExport.label',        canonPath: 'topExport.label',        vmPaths: ['summary.situation.economy.topExport'] },
 ]);
 
 export const PARITY_EXEMPT = Object.freeze([

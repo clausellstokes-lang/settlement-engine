@@ -332,6 +332,34 @@ export function deriveSafetyPosture(settlement) {
   return { label: settlement?.economicState?.safetyProfile?.safetyLabel || null };
 }
 
+/**
+ * Defense posture (§overview/defense) — the readiness label + average defense
+ * score BOTH surfaces render. scoreAvg mirrors the PDF avgScore helper exactly
+ * (rounded mean of the numeric score values); the parity pin guards the two copies
+ * against future drift.
+ * @param {any} settlement
+ * @returns {{ readinessLabel: string | null, scoreAvg: number | null }}
+ */
+export function deriveDefensePosture(settlement) {
+  const dp = settlement?.defenseProfile || {};
+  const vals = Object.values(dp.scores || {}).filter((v) => typeof v === 'number');
+  const scoreAvg = vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length) : null;
+  return { readinessLabel: dp.readiness?.label || null, scoreAvg };
+}
+
+/**
+ * Top export label (§summary) — labelOfThing(primaryExports[0]); mirrors the PDF
+ * labelOfThing helper exactly (the good/name/label of the first primary export).
+ * @param {any} settlement
+ * @returns {{ label: string }}
+ */
+export function deriveTopExport(settlement) {
+  const item = settlement?.economicState?.primaryExports?.[0];
+  if (!item) return { label: '' };
+  if (typeof item === 'string') return { label: item };
+  return { label: item.good || item.name || item.label || '' };
+}
+
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {
     foodBalance: deriveFoodBalance(settlement),
@@ -342,5 +370,7 @@ export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = nul
     headcounts: deriveHeadcounts(settlement),
     prosperity: deriveProsperityPosture(settlement),
     safety: deriveSafetyPosture(settlement),
+    defense: deriveDefensePosture(settlement),
+    topExport: deriveTopExport(settlement),
   };
 }
