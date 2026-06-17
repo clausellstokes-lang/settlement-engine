@@ -13,13 +13,13 @@
 import { useState } from 'react';
 
 import { categoryOptions } from '../../domain/customCategories.js';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 
 const NEW = '__new__';
-const BORDER = '#d8c8a8';
-const INK = '#1B1408';
-const GOLD = '#8C6F32';
-const MUTED = '#9C8068';
+const BORDER = swatch['#D8C8A8'];
+const INK = swatch['#1B1408'];
+const GOLD = swatch['#8C6F32'];
+const MUTED = swatch['#9C8068'];
 const sans = '"Nunito", system-ui, sans-serif';
 
 export default function CategorySelect({

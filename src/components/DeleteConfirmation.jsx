@@ -11,7 +11,7 @@ import { CARD, SECOND, BORDER, sans, FS, swatch } from './theme.js';
 // a future contrast tweak is one edit. (We don't import from tabConstants
 // because that's a tabs-only concern; this component is reused outside
 // the tab system.)
-const BODY = '#6b5340';
+const BODY = swatch['#6B5340'];
 
 export default function DeleteConfirmation({ entityName, details, onConfirm, onCancel }) {
   return (

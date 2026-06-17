@@ -28,9 +28,9 @@ import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 
 const DISMISS_KEY_PREFIX = 'sf:dismissed_callouts:';
-const GREEN = '#4A7A3A';
-const VIOLET = '#7B4FCF';
-const AMBER = '#D08020';
+const GREEN = swatch['#4A7A3A'];
+const VIOLET = swatch['#7B4FCF'];
+const AMBER = swatch['#D08020'];
 const sans = '"Nunito", system-ui, sans-serif';
 
 const CALLOUTS = [

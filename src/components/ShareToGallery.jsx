@@ -21,10 +21,10 @@ import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '.
 import { validateDossier } from '../domain/validation/consistency.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
-import { GOLD, BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY } from './theme.js';
+import { GOLD, BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
 
-const MUTED = '#6b5340';
-const _BODY  = '#4A3B22';
+const MUTED = swatch['#6B5340'];
+const _BODY  = swatch['#4A3B22'];
 
 function publicUrlFor(slug) {
   const path = `/gallery?slug=${encodeURIComponent(slug)}`;

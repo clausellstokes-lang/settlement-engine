@@ -24,7 +24,7 @@ import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { t } from '../copy/index.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, ELEV, swatch } from './theme.js';
 
-const PURPLE = '#6a2a9a';
+const PURPLE = swatch['#6A2A9A'];
 const PURPLE_BG = 'rgba(90,42,138,0.08)';
 
 export default function StaleNarrativeModal({

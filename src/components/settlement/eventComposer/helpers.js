@@ -6,13 +6,14 @@
  */
 
 import { canonExports, canonImports, canonStressors } from '../../../domain/canonicalAccessors.js';
+import { swatch } from '../../theme.js';
 
 // Party-attribution accent — a heraldic crimson, distinct from the gold brand
 // accent and the purple AI-narrative tint, so "the party did this" reads clearly.
 // Shared by EventComposer (the "Caused by the party" toggle) and PreviewPanel
 // (the "Party-caused" badge), so the hex is declared in one place.
-export const PARTY = '#8a2f4a';
-export const PARTY_BG = '#f7ebf0';
+export const PARTY = swatch['#8A2F4A'];
+export const PARTY_BG = swatch['#F7EBF0'];
 
 /** Build {id, name} options from a dossier collection for the target dropdown. */
 export function buildTargetOptions(settlement, collectionKey) {

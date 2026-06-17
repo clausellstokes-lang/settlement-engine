@@ -17,13 +17,13 @@ import { inferSupplyChains } from '../../domain/inferSupplyChains.js';
 import { ChainRow } from '../new/SupplyChainsPanel.jsx';
 import { FS, swatch } from '../theme.js';
 
-const INK = '#1B1408';
-const BODY = '#3A2F18';
-const MUTED = '#9C8068';
-const BORDER = '#E8D9B0';
-const GREEN = '#1a5a28';
-const RED = '#8b1a1a';
-const AMBER = '#8a5010';
+const INK = swatch['#1B1408'];
+const BODY = swatch['#3A2F18'];
+const MUTED = swatch['#9C8068'];
+const BORDER = swatch['#E8D9B0'];
+const GREEN = swatch['#1A5A28'];
+const RED = swatch['#8B1A1A'];
+const AMBER = swatch['#8A5010'];
 const sans = '"Nunito", system-ui, sans-serif';
 
 function btn(color, bg) {

@@ -174,7 +174,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const pinKey = npcPinKey(npc);
   const pinAvailable = typeof onTogglePin === 'function' && pinKey != null;
   const isPinned = pinAvailable && pinnedIds instanceof Set && pinnedIds.has(pinKey);
-  const pinColor = '#6a2a9a'; // purple — ties visually to the narrative accent.
+  const pinColor = swatch['#6A2A9A']; // purple — ties visually to the narrative accent.
 
   return (
     <div id={entityAnchor('npc', npc)} style={{

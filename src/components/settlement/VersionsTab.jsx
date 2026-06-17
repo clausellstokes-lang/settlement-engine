@@ -26,9 +26,9 @@ import { EVENTS } from '../../lib/analytics.js';
 import LockedDestination from '../primitives/LockedDestination.jsx';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 
-const VIOLET = '#7B4FCF';
-const GREEN = '#4A7A3A';
-const AMBER = '#D08020';
+const VIOLET = swatch['#7B4FCF'];
+const GREEN = swatch['#4A7A3A'];
+const AMBER = swatch['#D08020'];
 
 function formatTs(ts) {
   if (!ts) return ', ';

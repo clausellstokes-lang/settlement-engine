@@ -21,11 +21,11 @@ import { FS, swatch } from '../theme.js';
 import { Plus, Minus } from 'lucide-react';
 import { t } from '../../copy/index.js';
 
-const GOLD = '#8C6F32';
-const INK = '#1B1408';
-const BODY = '#3A2F18';
-const MUTED = '#9C8068';
-const BORDER = '#E8D9B0';
+const GOLD = swatch['#8C6F32'];
+const INK = swatch['#1B1408'];
+const BODY = swatch['#3A2F18'];
+const MUTED = swatch['#9C8068'];
+const BORDER = swatch['#E8D9B0'];
 const sans = '"Nunito", system-ui, sans-serif';
 
 // Question keys — t() will resolve `${key}.q` and `${key}.a` from the

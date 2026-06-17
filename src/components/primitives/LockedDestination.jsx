@@ -25,15 +25,15 @@ import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { Funnel } from '../../lib/analytics.js';
 
-const PARCH = '#FBF5E6';
-const PARCH_GRAD_HI = '#FCF6E7';
-const VIOLET = '#7B4FCF';
-const VIOLET_DIM = '#EBE2FA80';
-const GOLD = '#C9A24C';
-const INK = '#1B1408';
-const BODY = '#4A3B22';
-const MUTED = '#9C8068';
-const BORDER = '#E8D9B0';
+const PARCH = swatch['#FBF5E6'];
+const PARCH_GRAD_HI = swatch['#FCF6E7'];
+const VIOLET = swatch['#7B4FCF'];
+const VIOLET_DIM = swatch['#EBE2FA80'];
+const GOLD = swatch['#C9A24C'];
+const INK = swatch['#1B1408'];
+const BODY = swatch['#4A3B22'];
+const MUTED = swatch['#9C8068'];
+const BORDER = swatch['#E8D9B0'];
 
 const sans = '"Nunito", system-ui, sans-serif';
 const serif = '"Crimson Text", Georgia, serif';

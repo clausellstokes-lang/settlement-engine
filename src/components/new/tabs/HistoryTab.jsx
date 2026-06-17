@@ -8,12 +8,12 @@ import {NarrativeNote} from '../NarrativeNote';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
-const PARTY = '#8a2f4a';
-const PARTY_BG = '#f7ebf0';
+const PARTY = swatch['#8A2F4A'];
+const PARTY_BG = swatch['#F7EBF0'];
 // Chronicle source accents (spec §8 M3c): manual edits in muted gold; world-pulse
 // uses the existing info blue (swatch.info).
-const SRC_EDIT = '#7a5a2a';
-const SRC_EDIT_BG = '#f5ecd8';
+const SRC_EDIT = swatch['#7A5A2A'];
+const SRC_EDIT_BG = swatch['#F5ECD8'];
 
 function formatRecentDate(value) {
   if (!value) return '';

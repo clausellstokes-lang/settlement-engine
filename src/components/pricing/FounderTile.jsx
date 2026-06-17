@@ -27,10 +27,10 @@ import { startCheckout } from '../../lib/stripe.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { INK, sans, serif_, FS, SP, R, swatch } from '../theme.js';
 
-const GOLD_500 = '#C9A24C';
-const GOLD_400 = '#D9B566';
-const INK_900 = '#1B1408';
-const INK_800 = '#2C2210';
+const GOLD_500 = swatch['#C9A24C'];
+const GOLD_400 = swatch['#D9B566'];
+const INK_900 = swatch['#1B1408'];
+const INK_800 = swatch['#2C2210'];
 
 export default function FounderTile() {
   const audience = useReaderAudience();

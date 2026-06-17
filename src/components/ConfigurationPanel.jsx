@@ -6,7 +6,7 @@ import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } fro
 import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 
-const PARCHMENT='#f7f0e4';
+const PARCHMENT=swatch['#F7F0E4'];
 
 const ARCHETYPES=[
   {key:'balanced',name:'Balanced',desc:'No dominant characteristic',threat:'frontier',e:50,m:50,mg:50,r:50,c:50},

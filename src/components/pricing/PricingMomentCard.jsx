@@ -25,7 +25,7 @@ import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { GOLD, INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED } from '../theme.js';
 
-const VIOLET = '#7B4FCF';
+const VIOLET = swatch['#7B4FCF'];
 
 // Reasons that want the violet (Cartographer / Founder upgrade) accent
 // rather than the gold (tier-unlock / signup) accent. Anything not in

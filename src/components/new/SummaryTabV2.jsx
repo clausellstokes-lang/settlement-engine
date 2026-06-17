@@ -29,19 +29,19 @@ import { useMemo } from 'react';
 import { FS, swatch } from '../theme.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 
-const GOLD = '#8C6F32';
-const GOLD_ACCENT = '#C9A24C';
-const INK = '#1B1408';
-const INK_DEEP = '#2C2210';
-const BODY = '#3A2F18';
-const MUTED = '#9C8068';
-const PARCH = '#FBF5E6';
-const BORDER = '#E8D9B0';
+const GOLD = swatch['#8C6F32'];
+const GOLD_ACCENT = swatch['#C9A24C'];
+const INK = swatch['#1B1408'];
+const INK_DEEP = swatch['#2C2210'];
+const BODY = swatch['#3A2F18'];
+const MUTED = swatch['#9C8068'];
+const PARCH = swatch['#FBF5E6'];
+const BORDER = swatch['#E8D9B0'];
 
-const GREEN = '#4A7A3A';
-const VIOLET = '#7B4FCF';
-const AMBER = '#D08020';
-const RED = '#A23434';
+const GREEN = swatch['#4A7A3A'];
+const VIOLET = swatch['#7B4FCF'];
+const AMBER = swatch['#D08020'];
+const RED = swatch['#A23434'];
 
 const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';

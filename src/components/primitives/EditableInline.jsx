@@ -44,8 +44,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FS, RED, swatch } from '../theme.js';
 
-const GOLD = '#C9A24C';
-const GOLD_DIM = '#D9B566';
+const GOLD = swatch['#C9A24C'];
+const GOLD_DIM = swatch['#D9B566'];
 
 /**
  * @typedef {Object} EditableInlineProps

@@ -15,7 +15,7 @@ import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const BASELINE_CEILING = 43; // committed max — lower it as files are cleaned; never raise it
+const BASELINE_CEILING = 0; // committed max — lower it as files are cleaned; never raise it
 
 const FORK_RE = /(?:const|let|var)\s+[A-Za-z_$][\w$]*\s*=\s*['"]#[0-9a-fA-F]{3,8}['"]/;
 const isTokenSource = (rel) => /(?:design\/tokens|components\/theme)\b|src\/design\//.test(rel);

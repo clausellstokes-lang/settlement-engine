@@ -7,8 +7,8 @@ import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
 
-const INK = '#1c1409', MUTED = '#9c8068', SECOND = '#6b5340',
-      BORDER = '#e0d0b0', GOLD = '#a0762a', PARCH = '#fdf8f0', _CARD = '#fffbf5';
+const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
+      BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
 
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 

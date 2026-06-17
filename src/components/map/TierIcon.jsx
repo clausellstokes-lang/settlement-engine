@@ -1,3 +1,4 @@
+import { swatch } from '../theme.js';
 /**
  * TierIcon — pure SVG glyph for a settlement placement.
  *
@@ -24,10 +25,10 @@ export function tierFor(settlement) {
   return TIER_FROM_POP(settlement.population);
 }
 
-const STROKE  = '#1c1409';
-const FILL    = '#a0762a';   // brown/gold body
-const FILL_HI = '#d4a445';   // capital gold
-const HALO    = '#fbbf24';   // selected halo
+const STROKE  = swatch['#1C1409'];
+const FILL    = swatch['#A0762A'];   // brown/gold body
+const FILL_HI = swatch['#D4A445'];   // capital gold
+const HALO    = swatch['#FBBF24'];   // selected halo
 
 /**
  * Renders the inner icon shape for a tier, in a coord system where (0,0)

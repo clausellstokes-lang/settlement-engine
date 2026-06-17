@@ -25,15 +25,15 @@
  */
 
 import { useMemo } from 'react';
-import { FS, VIOLET } from '../theme.js';
+import { FS, VIOLET, swatch } from '../theme.js';
 import { useStore } from '../../store';
 
-const GOLD = '#C9A24C';
-const INK = '#1B1408';
-const BODY = '#3A2F18';
-const MUTED = '#9C8068';
-const BORDER = '#E8D9B0';
-const PARCH = '#FBF5E6';
+const GOLD = swatch['#C9A24C'];
+const INK = swatch['#1B1408'];
+const BODY = swatch['#3A2F18'];
+const MUTED = swatch['#9C8068'];
+const BORDER = swatch['#E8D9B0'];
+const PARCH = swatch['#FBF5E6'];
 const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
 

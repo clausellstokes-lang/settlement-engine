@@ -23,9 +23,9 @@ import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { sans, FS, SP, R, swatch, GOLD_DEEP, MUTED } from '../theme.js';
 import CascadePreviewPanel from './CascadePreviewPanel.jsx';
 
-const AMBER = '#D08020';
-const AMBER_BG = '#FBEAD0';
-const INK = '#1B1408';
+const AMBER = swatch['#D08020'];
+const AMBER_BG = swatch['#FBEAD0'];
+const INK = swatch['#1B1408'];
 
 export default function PendingChangesBar() {
   const enabled = flag('inlineEdit');

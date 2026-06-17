@@ -21,9 +21,9 @@ import { FS, swatch } from './theme.js';
 import { BookOpen, History, RotateCcw, Sparkles, Zap, X } from 'lucide-react';
 
 // ── Visual tokens, aligned with SettlementDetail / Primitives ────────────────
-const BORDER = '#e0d0b0';
-const INK    = '#1c1409';
-const MUTED  = '#9c8068';
+const BORDER = swatch['#E0D0B0'];
+const INK    = swatch['#1C1409'];
+const MUTED  = swatch['#9C8068'];
 const CARD   = 'rgba(255,251,245,0.96)';
 
 const REASON_META = {

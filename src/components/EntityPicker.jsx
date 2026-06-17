@@ -26,7 +26,7 @@ import { useStore } from '../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from './theme.js';
 import { buildRegistry } from '../lib/customRegistry.js';
 
-const PURPLE = '#7c3aed';
+const PURPLE = swatch['#7C3AED'];
 
 export default function EntityPicker({
   category,

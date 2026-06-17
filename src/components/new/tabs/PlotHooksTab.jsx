@@ -14,9 +14,9 @@ import { Section, Empty } from '../Primitives';
 import { FS, swatch } from '../../theme.js';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../../domain/dossier/plotHooks.js';
 
-const INK = '#1B1408';
-const BODY = '#3A2F18';
-const BORDER = '#E8D9B0';
+const INK = swatch['#1B1408'];
+const BODY = swatch['#3A2F18'];
+const BORDER = swatch['#E8D9B0'];
 const SERIF = 'Crimson Text, Georgia, serif';
 
 export default function PlotHooksTab({ settlement }) {

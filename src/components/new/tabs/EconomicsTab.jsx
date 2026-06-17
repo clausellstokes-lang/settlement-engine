@@ -21,8 +21,8 @@ const FLOW_STATUS = {
 };
 
 // §14 Phase 3b — trade-direction arrow colours (module-scope const = lint-safe).
-const TRADE_IN_COLOR = '#7a5010';   // ← imported from a neighbour
-const TRADE_OUT_COLOR = '#1a5a28';  // → exported to a neighbour
+const TRADE_IN_COLOR = swatch['#7A5010'];   // ← imported from a neighbour
+const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
 
 /**
  * EconomicFlowsSection — extracted from a 150-line IIFE that lived inline

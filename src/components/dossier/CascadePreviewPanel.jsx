@@ -21,18 +21,18 @@ import { useStore } from '../../store/index.js';
 import { previewCascade } from '../../domain/pendingEdits.js';
 import { sans, serif_, FS, SP, R, swatch, PARCH, MUTED, GOLD_DEEP } from '../theme.js';
 
-const VIOLET = '#7B4FCF';
-const VIOLET_BG = '#EBE2FA';
-const AMBER = '#D08020';
-const AMBER_BG = '#FBEAD0';
-const GREEN = '#4A7A3A';
-const GREEN_BG = '#E2EEDB';
-const BLUE = '#2A5A7A';
-const BLUE_BG = '#E0E8F0';
-const RED = '#A23434';
-const RED_BG = '#F4DEDE';
-const INK = '#1B1408';
-const BORDER = '#E8D9B0';
+const VIOLET = swatch['#7B4FCF'];
+const VIOLET_BG = swatch['#EBE2FA'];
+const AMBER = swatch['#D08020'];
+const AMBER_BG = swatch['#FBEAD0'];
+const GREEN = swatch['#4A7A3A'];
+const GREEN_BG = swatch['#E2EEDB'];
+const BLUE = swatch['#2A5A7A'];
+const BLUE_BG = swatch['#E0E8F0'];
+const RED = swatch['#A23434'];
+const RED_BG = swatch['#F4DEDE'];
+const INK = swatch['#1B1408'];
+const BORDER = swatch['#E8D9B0'];
 
 function ImpactRow({ accent, accentBg, title, body }) {
   return (

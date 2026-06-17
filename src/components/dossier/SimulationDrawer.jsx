@@ -27,12 +27,12 @@ import { Funnel, EVENTS } from '../../lib/analytics.js';
 
 const PipelineRail = lazy(() => import('../PipelineRail.jsx'));
 
-const GOLD = '#8C6F32';
-const INK = '#1B1408';
-const BODY = '#3A2F18';
-const MUTED = '#9C8068';
-const PARCH = '#FBF5E6';
-const BORDER = '#E8D9B0';
+const GOLD = swatch['#8C6F32'];
+const INK = swatch['#1B1408'];
+const BODY = swatch['#3A2F18'];
+const MUTED = swatch['#9C8068'];
+const PARCH = swatch['#FBF5E6'];
+const BORDER = swatch['#E8D9B0'];
 const sans = '"Nunito", system-ui, sans-serif';
 
 /**

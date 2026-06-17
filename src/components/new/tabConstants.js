@@ -1,13 +1,14 @@
+import { swatch } from '../theme.js';
 // Shared constants for all tab components
 
 export const isMobile = () => window.innerWidth < 640;
 
 // ── Tier 7.19 — BODY token (sweep across components) ─────────────────────────
-// The tabs historically used a per-file `const second='#6b5340'` for body
+// The tabs historically used a per-file `const second=swatch['#6B5340']` for body
 // copy. Centralising it here means a future contrast adjustment is one edit,
 // not 13. The hex value matches the existing ink-mid brown so the visual
 // is identical to what the per-file constants were already rendering.
-export const BODY = '#6b5340';
+export const BODY = swatch['#6B5340'];
 export const PROSPERITY_COLORS = {Poverty:'#8b1a1a',Impoverished:'#8b1a1a',Struggling:'#8a4010',Poor:'#8a4010',Moderate:'#7a5010',Modest:'#7a5010',Comfortable:'#1a5a28',Prosperous:'#1a4a2a',Wealthy:'#1a5a28',Thriving:'#0a3a18'};
 export const EVENT_COLORS = {disaster:{color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0',label:'Disaster'},political:{color:'#1a3a7a',bg:'#f4f6fd',border:'#c0cce8',label:'Political'},economic:{color:'#a0762a',bg:'#faf6ec',border:'#e0d0a0',label:'Economic'},religious:{color:'#5a2a8a',bg:'#f8f4fd',border:'#d0b8e8',label:'Religious'},magical:{color:'#2a5a8a',bg:'#f4f8fd',border:'#b8cce8',label:'Magical'}};
 export const SEV_COLORS = {minor:'#6b5340',major:'#a0762a',catastrophic:'#8b1a1a'};

@@ -25,8 +25,8 @@ import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED } from '../theme.js';
 
-const VIOLET = '#7B4FCF';
-const VIOLET_BG = '#EBE2FA';
+const VIOLET = swatch['#7B4FCF'];
+const VIOLET_BG = swatch['#EBE2FA'];
 
 const DISMISS_KEY = 'sf.welcomeCredit.dismissed';
 

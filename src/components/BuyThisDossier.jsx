@@ -29,7 +29,7 @@ import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
 import { GOLD, sans, SP, R, FS, swatch, RED } from './theme.js';
 
-const MUTED = '#6b5340';
+const MUTED = swatch['#6B5340'];
 
 export default function BuyThisDossier({ settlement }) {
   const authTier = useStore(s => s.auth.tier);

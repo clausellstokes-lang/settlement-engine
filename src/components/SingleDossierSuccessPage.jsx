@@ -29,8 +29,8 @@ import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
 import { GOLD, INK, BORDER, CARD, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
 
-const MUTED = '#6b5340';
-const BODY  = '#4A3B22';
+const MUTED = swatch['#6B5340'];
+const BODY  = swatch['#4A3B22'];
 
 export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }) {
   const [pending, setPending] = useState(() => readPendingDossier());

@@ -13,11 +13,11 @@
 import { Section, Empty } from '../Primitives';
 import { FS, swatch, MUTED } from '../../theme.js';
 
-const PARTY = '#8a2f4a';
-const PARTY_BG = '#f7ebf0';
-const SRC_EDIT = '#7a5a2a';
-const SRC_EDIT_BG = '#f5ecd8';
-const ROW_BORDER = '#c8d0e8';
+const PARTY = swatch['#8A2F4A'];
+const PARTY_BG = swatch['#F7EBF0'];
+const SRC_EDIT = swatch['#7A5A2A'];
+const SRC_EDIT_BG = swatch['#F5ECD8'];
+const ROW_BORDER = swatch['#C8D0E8'];
 
 function chip(color, bg) {
   return { fontSize: FS.micro, color, background: bg, border: `1px solid ${color}`, borderRadius: 3, padding: '0 5px', fontWeight: 800 };

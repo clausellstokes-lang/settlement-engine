@@ -4,10 +4,10 @@ import { useStore } from '../../../store/index.js';
 import { FS, swatch } from '../../theme.js';
 import { sans, TabIntro } from '../Primitives';
 
-const BORDER = '#e0d0b0';
-const INK = '#1c1409';
-const SECOND = '#6b5340';
-const GOLD = '#a0762a';
+const BORDER = swatch['#E0D0B0'];
+const INK = swatch['#1C1409'];
+const SECOND = swatch['#6B5340'];
+const GOLD = swatch['#A0762A'];
 
 /**
  * NotesTab — owner-private prep notes for a settlement.

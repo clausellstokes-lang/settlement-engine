@@ -26,9 +26,9 @@ const REVERSE_VERB = {
   disablesInstitutions: 'Disabled by',
   disablesGoods:        'Disabled by',
 };
-const CUSTOM_INK = '#7c3aed';
-const CUSTOM_BG = '#7c3aed12';
-const CUSTOM_BORDER = '#7c3aed40';
+const CUSTOM_INK = swatch['#7C3AED'];
+const CUSTOM_BG = swatch['#7C3AED12'];
+const CUSTOM_BORDER = swatch['#7C3AED40'];
 
 /**
  * DependencySummary — read-only inline display of dependency refs on a saved

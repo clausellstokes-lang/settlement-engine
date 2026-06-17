@@ -23,13 +23,13 @@
  */
 
 import { useEffect, useMemo, useState } from 'react';
-import { FS } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store';
 
-const GOLD = '#C9A24C';
-const AMBER = '#D08020';
-const VIOLET = '#7B4FCF';
-const MUTED = '#9C8068';
+const GOLD = swatch['#C9A24C'];
+const AMBER = swatch['#D08020'];
+const VIOLET = swatch['#7B4FCF'];
+const MUTED = swatch['#9C8068'];
 const sans = '"Nunito", system-ui, sans-serif';
 
 function formatRelative(savedAt) {

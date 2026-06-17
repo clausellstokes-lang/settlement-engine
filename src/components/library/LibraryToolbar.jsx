@@ -18,11 +18,11 @@
 import { sans, FS, SP, R, swatch } from '../theme.js';
 import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
 
-const BORDER = '#E8D9B0';
-const PARCH = '#FBF5E6';
-const INK = '#1B1408';
-const MUTED = '#9C8068';
-const GOLD = '#C9A24C';
+const BORDER = swatch['#E8D9B0'];
+const PARCH = swatch['#FBF5E6'];
+const INK = swatch['#1B1408'];
+const MUTED = swatch['#9C8068'];
+const GOLD = swatch['#C9A24C'];
 const GOLD_BG = 'rgba(201,162,76,0.10)';
 
 /** Sort options. Stable keys; renames break callers. */
