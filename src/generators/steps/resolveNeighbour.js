@@ -24,6 +24,7 @@ const SCORE_SHIFTING_RELTYPES = ['hostile', 'rival', 'cold_war', 'tense', 'allie
 
 registerStep('resolveNeighbour', {
   deps: ['resolveConfig'],
+  reads: ['effectiveConfig'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['neighbourProfile', 'neighbourEconBias', 'neighbourFacBias', 'rawNeighbour'],
   mutates: ['effectiveConfig'], // threads neighborRelationship onto effectiveConfig in place when a neighbour is bound (H14 / A+ P1.7)
   phase: 'config',

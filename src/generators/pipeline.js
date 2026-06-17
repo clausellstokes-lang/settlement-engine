@@ -75,6 +75,7 @@ const _steps = new Map();
  * @param {Object}   meta     — Step metadata
  * @param {string[]} meta.deps     — Names of steps this one reads from
  * @param {string[]} meta.provides — Context keys this step writes via its returned patch
+ * @param {string[]} [meta.reads]   - Ctx keys this step CONSUMES that another step produces (A+ generators.3 data-flow contract; strict mode asserts each is present before the step runs)
  * @param {string[]} [meta.mutates] - Existing ctx keys this step mutates IN PLACE (A+ P1.7 data-flow contract)
  * @param {string[]} [meta.scratch] - Internal/flag ctx keys this step sets (declared so strict mode stays quiet)
  * @param {string}   [meta.phase]  - Logical phase grouping (for UI/debugging)
@@ -155,6 +156,19 @@ export function runPipeline(initialContext, rng, options = {}) {
     const stepRng = rng.fork(name);
     // Strict mode (A+ P1.7): snapshot before so we can detect undeclared writes.
     const before = (strict || onStrictViolation) ? _snapshotCtx(ctx) : null;
+    // Strict mode (A+ generators.3): every declared `reads` key must already be
+    // present in ctx — i.e. a prior step produced it. A read of a not-yet-produced
+    // key means the run order is wrong (a step is scheduled before its producer).
+    if (before) {
+      const missing = (step.reads || []).filter(k => !(k in ctx));
+      if (missing.length) {
+        if (onStrictViolation) onStrictViolation({ step: name, kind: 'read', keys: missing });
+        else throw new Error(
+          `Pipeline strict: step "${name}" reads ctx key(s) [${missing.join(', ')}] not yet produced — `
+          + 'the run order schedules it before a producer of those keys (fix deps or the reads declaration).',
+        );
+      }
+    }
     // Set the global PRNG context so sub-generators (chance/pick/randInt)
     // automatically use the seeded PRNG instead of Math.random()
     setActiveRng(stepRng);
@@ -192,6 +206,7 @@ export function getStepMeta() {
       name,
       deps: step.deps || [],
       provides: step.provides || [],
+      reads: step.reads || [],
       mutates: step.mutates || [],
       scratch: step.scratch || [],
       phase: step.phase || 'unknown',

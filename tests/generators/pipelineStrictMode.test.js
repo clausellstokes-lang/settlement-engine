@@ -65,4 +65,21 @@ describe('runPipeline strict mode — undeclared-write detector', () => {
     expect(() => runPipeline({}, rng(), { onStrictViolation: (v) => seen.push(v) })).not.toThrow();
     expect(seen).toEqual([{ step: 'rogue', keys: ['sneaky'] }]);
   });
+
+  // ── reads-availability (A+ generators.3) ──
+  it('throws when a step declares a read of a key no prior step produced', () => {
+    registerStep('reader', { deps: [], provides: [], reads: ['absent'] }, () => ({}));
+    expect(() => runPipeline({}, rng(), { strict: true })).toThrow(/reads ctx key\(s\) \[absent\] not yet produced/);
+  });
+
+  it('passes when the read key was produced by an earlier step', () => {
+    registerStep('producer', { deps: [], provides: ['k'] }, () => ({ k: 1 }));
+    registerStep('consumer', { deps: ['producer'], provides: [], reads: ['k'] }, (ctx) => { void ctx.k; return {}; });
+    expect(() => runPipeline({}, rng(), { strict: true })).not.toThrow();
+  });
+
+  it('passes when the read key is supplied by the initial context', () => {
+    registerStep('reader', { deps: [], provides: [], reads: ['config'] }, (ctx) => { void ctx.config; return {}; });
+    expect(() => runPipeline({ config: {} }, rng(), { strict: true })).not.toThrow();
+  });
 });

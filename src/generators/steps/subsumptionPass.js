@@ -144,6 +144,7 @@ function applySubsumption(institutions, ctx = null, trace = {}) {
 
 registerStep('subsumptionPass', {
   deps: ['assembleInstitutions'],
+  reads: ['institutions'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
   mutates: ['institutions'], // subsumes/merges roster entries in place (A+ P1.7)
   scratch: ['_subsumed'],     // sets a flag recording what was subsumed

@@ -26,6 +26,7 @@ function instId(name) {
 
 registerStep('isolationPass', {
   deps: ['cascadePass'],
+  reads: ['catalogForTier', 'effectiveConfig', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
   mutates: ['institutions', 'effectiveConfig', 'stressTypes'], // prunes the roster + stamps isolation flags / stress on effectiveConfig+stressTypes in place (A+ P1.7)
   phase: 'institutions',

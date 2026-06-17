@@ -34,6 +34,7 @@ const CULTURES = [
 
 registerStep('resolveConfig', {
   deps: [],
+  reads: [], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [
     'tier', 'population', 'tradeRoute', 'terrainType', 'resolvedTerrain',
     'culture', 'magicLevel', 'threat', 'priorityMagicEffective',

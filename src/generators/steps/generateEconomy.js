@@ -335,6 +335,7 @@ export function emitChainTraces(ctx, economicState, tier, step = 'economyReconci
 
 registerStep('generateEconomy', {
   deps: ['stressConfirmPass', 'resolveNeighbour'],
+  reads: ['effectiveConfig', 'goodsToggles', 'institutions', 'neighbourEconBias', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['economicState'],
   mutates: ['effectiveConfig'], // threads _neighbourEconBias/_neighbourEconMode onto effectiveConfig in place when a neighbour is bound (A+ P1.7)
   phase: 'economy',

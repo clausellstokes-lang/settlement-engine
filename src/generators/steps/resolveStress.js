@@ -13,6 +13,7 @@ import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 
 registerStep('resolveStress', {
   deps: ['resolveConfig', 'resolveResources'],
+  reads: ['effectiveConfig'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['stress', 'stressTypes'],
   mutates: ['effectiveConfig'], // stamps derived stress keys onto effectiveConfig (A+ P1.7)
   phase: 'config',

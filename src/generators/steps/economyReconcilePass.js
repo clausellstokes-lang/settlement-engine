@@ -77,6 +77,7 @@ export function finalizeTradeLists(economicState, customTradeGoods = null) {
 
 registerStep('economyReconcilePass', {
   deps: ['factionCorrelationPass'],
+  reads: ['economicState'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['economicState', 'spatialLayout', 'availableServices'],
   phase: 'economy',
 }, (ctx, rng) => {

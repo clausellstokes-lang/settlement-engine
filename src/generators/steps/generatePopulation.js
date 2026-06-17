@@ -25,6 +25,7 @@ const FACTION_ATTRACTION = {
 
 registerStep('generatePopulation', {
   deps: ['factionCorrelationPass', 'generatePower'],
+  reads: ['culture', 'economicState', 'effectiveConfig', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['npcs', 'relationships', 'factions', 'conflicts'],
   phase: 'population',
 }, (ctx, rng) => {
