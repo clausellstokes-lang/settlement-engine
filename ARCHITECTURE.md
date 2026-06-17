@@ -33,7 +33,10 @@ domain/      Pure business logic that ISN'T generation: causal state, events,
              Was the only gate-typechecked layer; the gate now covers the full tree. <!-- @enforced-by tsconfig.full.json -->
 store/       Zustand slices (14) — the single client state container.
 components/   React UI. Inline-styled, token-driven. Large feature panels +
-             primitives/ (accessible Dialog/Button/Toast, no native dialogs) +
+             primitives/ (accessible Dialog/Button/Toast, no native dialogs;
+             raw <button> outside primitives/ is forbidden for new files —
+             @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js,
+             existing 118 files burning down) +
              new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ + auth/.
 pdf/         PDF generation: sections/ + primitives/ + lib/viewModel.js.
 lib/         Services + glue: saves (Supabase+localStorage), analytics, flags,

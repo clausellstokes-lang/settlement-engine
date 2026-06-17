@@ -11,7 +11,19 @@
  *   attributes are compared, namespace-aware (`xml:lang`).
  *
  * Used by eslint.config.js as a local plugin. Dependency-free.
+ *
+ * no-raw-button (A+ enforcement.5) — disallow the raw `<button>` JSX element
+ *   outside src/components/primitives/. A real Button/IconButton primitive exists
+ *   (focus-ring, disabled state, min target size, token variants), but raw
+ *   <button> elements re-implement those by hand and silently drift. Files that
+ *   currently fork are grandfathered in scripts/.raw-button-baseline.json so the
+ *   rule is ERROR for NEW files immediately while the existing debt burns down;
+ *   the baseline is pinned to only ever shrink (tests/lint/rawButtonBaseline).
  */
+
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, relative } from 'node:path';
 
 function attrKey(name) {
   if (!name) return null;
@@ -20,6 +32,19 @@ function attrKey(name) {
   }
   return name.name; // JSXIdentifier
 }
+
+// Repo root = parent of scripts/. The raw-button baseline grandfathers files that
+// currently use raw <button>; new files must use the Button/IconButton primitive.
+const _REPO_ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
+let _rawButtonBaseline = new Set();
+try {
+  _rawButtonBaseline = new Set(
+    JSON.parse(readFileSync(join(_REPO_ROOT, 'scripts/.raw-button-baseline.json'), 'utf8')),
+  );
+} catch { /* no baseline file → empty set; every raw button errors, surfacing the gap */ }
+// The primitives ARE the canonical raw-<button> implementations.
+const _isPrimitive = (rel) => /^src\/components\/primitives\//.test(rel);
+const _relPath = (abs) => relative(_REPO_ROOT, abs || '').replace(/\\/g, '/');
 
 export default {
   rules: {
@@ -89,6 +114,33 @@ export default {
               context.report({ node: body, messageId: 'inline', data: { kind: 'object' } });
             } else if (body.type === 'ArrayExpression') {
               context.report({ node: body, messageId: 'inline', data: { kind: 'array' } });
+            }
+          },
+        };
+      },
+    },
+
+    'no-raw-button': {
+      meta: {
+        type: 'suggestion',
+        docs: {
+          description:
+            'Disallow the raw <button> JSX element outside primitives/. Use the Button or IconButton primitive so focus-ring, disabled state, target size, and token variants are guaranteed.',
+        },
+        schema: [],
+        messages: {
+          rawButton:
+            'Raw <button> — use the Button or IconButton primitive (src/components/primitives/) so focus-ring, disabled state, min target size, and token variants are guaranteed. New raw buttons are not allowed; existing ones are tracked in .raw-button-baseline.json for burn-down.',
+        },
+      },
+      create(context) {
+        const rel = _relPath(context.filename);
+        // The primitives themselves and grandfathered files are exempt.
+        if (_isPrimitive(rel) || _rawButtonBaseline.has(rel)) return {};
+        return {
+          JSXOpeningElement(node) {
+            if (node.name?.type === 'JSXIdentifier' && node.name.name === 'button') {
+              context.report({ node, messageId: 'rawButton' });
             }
           },
         };

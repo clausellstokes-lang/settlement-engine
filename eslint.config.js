@@ -241,6 +241,19 @@ export default [
     rules: { 'visual-budget/no-forked-color-const': 'error' },
   },
 
+  // ── A+ enforcement.5 — raw <button> guard ───────────────────────────────────
+  // A real Button/IconButton primitive exists, but raw <button> elements outside
+  // primitives/ re-implement focus-ring/disabled/target-size/variants by hand.
+  // Files that currently fork are grandfathered in scripts/.raw-button-baseline.json
+  // (burn-down worklist); a NEW raw button in any non-baselined file errors. The
+  // baseline cannot grow (pinned to monotone shrink).
+  // @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js
+  {
+    files: ['src/**/*.jsx'],
+    plugins: { 'jsx-hygiene': jsxHygiene },
+    rules: { 'jsx-hygiene/no-raw-button': 'error' },
+  },
+
   // Data tables: arrow functions are written with uniform signatures
   // (e.g. `(r, s) => ...`) even when an individual entry only uses one
   // parameter. The shape is intentional — it lets callers invoke any
