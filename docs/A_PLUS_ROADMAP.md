@@ -155,7 +155,7 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 - Coverage floor on money/security globs + retire redundant regex-over-source contracts (each replaced by a named execution test) [Testing medium/M + low/M]
 - Codify pseudonymous ID/IP logging policy + lock fingerprint-privacy regression pin [Backend low/S + Lib low/S]
 - Golden-fixture render snapshot + register PDF parity in fieldManifest [PDF medium/M + medium/S]
-- Final mutation-check sweep: deliberately revert one fix per area in a scratch branch and confirm `check` goes red for each — proving the spine now holds the weight the docs claim
+- ✅ Final mutation-check sweep DONE — `scripts/mutation-sweep.sh` injects a deliberate regression per spine area, runs only the gate step that should catch it, asserts RED, and reverts via git. Result: **8/8 CAUGHT, 0 MISSED** across determinism (domain wall-clock + generators Math.random), data-layer purity, dual-axis category governance, orphan-tag coverage, PDF view-model parity, the @enforced-by meta-pin, and the whole-object undo inverse. The spine holds the weight the docs claim.
 
 ## Quick wins (low effort, high value — start here)
 
