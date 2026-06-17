@@ -24,12 +24,13 @@ import { random as _rng } from './rngContext.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 
 import {
-  PRESSURE_SENTENCES,
   ARRIVAL_SCENES,
   ARRIVAL_ADDONS,
   TERRAIN_NARRATIVE_HOOKS,
-  POLITICAL_FLAVOR,
 } from '../data/narrativeData.js';
+// PRESSURE_SENTENCES + POLITICAL_FLAVOR hold render-time rng/pickRandom2 closures,
+// so they live in the generators layer (A+ Track H data-schema.3), not src/data.
+import { PRESSURE_SENTENCES, POLITICAL_FLAVOR } from './narrativeText.js';
 import { checkInstCompat } from './structuralValidator.js';
 import { genRelNarrative, genSuccessionNarr } from './powerGenerator.js';
 import { mergeNPCLists } from './npcGenerator.js';

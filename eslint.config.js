@@ -265,6 +265,19 @@ export default [
     },
   },
 
+  // Narrative template tables that hold render-time rng/pickRandom2 closures
+  // (A+ Track H data-schema.3: moved out of src/data so the data layer stays
+  // pure-import). They are still uniform-signature data tables — every entry is
+  // `(r) => …` even when an individual line doesn't read `r` — so the same
+  // intentional-shape rationale as the src/data override applies: flagging the
+  // unused `r` would be pure noise.
+  {
+    files: ['src/generators/narrativeText.js'],
+    rules: {
+      'no-unused-vars': 'off',
+    },
+  },
+
   // Data tables: arrow functions are written with uniform signatures
   // (e.g. `(r, s) => ...`) even when an individual entry only uses one
   // parameter. The shape is intentional — it lets callers invoke any
@@ -274,6 +287,18 @@ export default [
     files: ['src/data/**/*.{js,jsx}'],
     rules: {
       'no-unused-vars': 'off',
+      // ── A+ Track H (data-schema.2) — src/data purity ─────────────────────────
+      // src/data/** must be PURE DATA: no runtime imports of the generators,
+      // store, or lib layers (which would re-introduce RNG capture / IO leaks
+      // into the data tables). Executable closures live in the generators layer
+      // (stressNarrative.js, narrativeText.js); the data files hold only fields.
+      // @enforced-by this rule + tests/domain/dataPurity.test.js
+      'no-restricted-imports': ['error', {
+        patterns: [{
+          group: ['**/generators/**', '**/store/**', '**/lib/**'],
+          message: 'src/data/** must be pure data — no runtime imports of generators/store/lib. Move executable logic into the generators layer and import data, not behavior.',
+        }],
+      }],
     },
   },
 

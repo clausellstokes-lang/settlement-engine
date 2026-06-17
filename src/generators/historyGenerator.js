@@ -9,7 +9,7 @@
  *  - pickRandom2/random01 were local re-implementations; now imported from helpers
  */
 
-import { POLITICAL_FLAVOR } from '../data/narrativeData.js';
+import { POLITICAL_FLAVOR } from './narrativeText.js';
 import { getInstFlags, getStressFlags, pick, pickRandom2, random01, randInt } from './helpers.js';
 import { random as _rng } from './rngContext.js';
 
