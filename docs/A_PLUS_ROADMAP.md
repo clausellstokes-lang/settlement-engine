@@ -191,13 +191,13 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 - ✅ Close the preview≡apply gap on projected nextSettlement with now-threading — domain.6 (40eb1a9); apply path now pure of (settlement, event, now), store threads the wall-clock
 - ✅ Turn on tsc strictness for the domain — domain.7 (5881cb8); shipped as a per-file regression-blocking RATCHET (4649-error baseline, gate-wired) — full burn-down to zero is the tracked worklist (XL, ~133 files)
 
-### Track B — Generators data-flow integrity (owner: generators)
-- Declare step reads/mutates/scratch contracts + enforce in runPipeline [critical/M x2]
-- Derive run order from the data-flow graph, demote deps to a cross-check [high/L]
-- Convert traditions/magic-transit gates to id-first matching [high/M]
-- Convert INSTITUTIONAL_SERVICE_MAP and resource/chain gates to id-sets [high/M + medium/M]
-- Replace tradeDependencies 12-char prefix join with id/pattern matching [medium/M]
-- Golden-lock the institution mutation sequence + scratch-key lifecycle [medium/S]
+### Track B — Generators data-flow integrity (owner: generators) — ✅ substantially complete
+- ✅ Declare step mutates/scratch contracts + enforce in runPipeline — done in P1.7 (+ getStepMeta now surfaces mutates/scratch, generators.8)
+- ⏸ Derive run order from the data-flow graph, demote deps to a cross-check [high/L] — DEFERRED: needs a `reads` contract declared across all 19 steps + careful golden validation (a focused architectural sub-project); the order is already golden-stable via deps
+- ✅ Convert traditions/magic-transit gates to id-first matching — generators.4
+- ✅ Convert INSTITUTIONAL_SERVICE_MAP and resource/chain gates to id-sets — generators.5 + generators.6 (export gates + mill special-case unified, rename-proof, golden-safe)
+- ⏸ Replace tradeDependencies prefix join with id matching [medium/M] — DEFERRED: id-match ≠ prefix-match on live rosters (flips a chain.dependency for one config), so it's an owner balance decision like the frozen Mill false-matches, not a silent output change
+- ✅ Golden-lock the institution mutation sequence + scratch-key lifecycle — generators.8
 
 ### Track C — UI decomposition (owner: frontend; depends only on the max-lines ratchet + smoke harness)
 - OutputContainer.jsx -> JSX [critical/XL]
