@@ -27,6 +27,8 @@ import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, s
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
 import CampaignSyncBanner from './components/CampaignSyncBanner.jsx';
+import Button from './components/primitives/Button.jsx';
+import IconButton from './components/primitives/IconButton.jsx';
 
 // Lazy-loaded views
 const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
@@ -371,19 +373,19 @@ export default function App() {
             {HERO_LINKS.map(({ id, label }) => {
               const active = id === 'compare' ? view.startsWith('compare') : view === id;
               return (
-                <button
+                <Button
                   key={id}
+                  variant="ghost"
+                  size="sm"
                   onClick={() => setView(id)}
                   style={{
-                    background: 'none', border: 'none', cursor: 'pointer',
                     color: active ? GOLD : MUTED,
-                    fontSize: FS.xs, fontWeight: active ? 700 : 500,
-                    fontFamily: sans, letterSpacing: '0.06em', textTransform: 'uppercase',
-                    padding: `${SP.xs}px ${SP.sm}px`, minHeight: 36,
+                    fontWeight: active ? 700 : 500,
+                    letterSpacing: '0.06em', textTransform: 'uppercase',
                   }}
                 >
                   {label}
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -422,19 +424,20 @@ export default function App() {
                 {HERO_LINKS.map(({ id, label }) => {
                   const active = id === 'compare' ? view.startsWith('compare') : view === id;
                   return (
-                    <button
+                    <Button
                       key={id}
+                      variant="ghost"
+                      size="md"
                       onClick={() => setView(id)}
                       style={{
-                        background: 'none', border: 'none', cursor: 'pointer',
                         color: active ? GOLD : MUTED,
-                        fontSize: FS.sm, fontWeight: active ? 700 : 500,
-                        fontFamily: sans, letterSpacing: '0.04em', textTransform: 'uppercase',
-                        padding: `${SP.xs}px 0`, transition: 'color 0.2s',
+                        fontWeight: active ? 700 : 500,
+                        letterSpacing: '0.04em', textTransform: 'uppercase',
+                        padding: `${SP.xs}px 0`,
                       }}
                     >
                       {label}
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -446,6 +449,7 @@ export default function App() {
                   return (
                     <button
                       key={id}
+                      type="button"
                       onClick={() => handleNavClick(id)}
                       style={{
                         display: 'flex', alignItems: 'center', gap: SP.xs,
@@ -471,44 +475,26 @@ export default function App() {
               {/* Credits button — retired from the header (showHeaderCredits=false);
                   credits are bought at the moment of need. Kept, not deleted. */}
               {showHeaderCredits && authTier !== 'anon' && (
-                <button
+                <Button
+                  variant="ai"
                   onClick={() => setPurchaseModalOpen(true)}
                   aria-label="Buy credits"
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 4,
-                    padding: `${SP.sm}px ${SP.lg}px`, marginLeft: SP.xs,
-                    background: 'rgba(90,42,138,0.15)',
-                    border: '1px solid rgba(160,100,220,0.3)',
-                    borderRadius: R.md, cursor: 'pointer',
-                    color: swatch['#C8A0F0'],
-                    fontSize: FS.sm, fontWeight: 600,
-                    fontFamily: sans,
-                  }}
+                  icon={<Zap size={13} />}
+                  style={{ marginLeft: SP.xs }}
                 >
-                  <Zap size={13} />
                   {isElevated ? '\u221E' : creditBalance}
-                </button>
+                </Button>
               )}
 
               {/* Admin button (developer/admin only) */}
               {isElevated && (
-                <button
-                  onClick={() => setView('admin')}
-                  aria-label="Admin panel"
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 4,
-                    padding: `${SP.sm}px ${SP.md}px`, marginLeft: SP.xs,
-                    background: 'rgba(124,58,237,0.15)',
-                    border: '1px solid rgba(124,58,237,0.3)',
-                    borderRadius: R.md, cursor: 'pointer',
-                    color: swatch['#C8A0F0'],
-                    fontSize: FS.sm, fontWeight: 600,
-                    fontFamily: sans,
-                  }}
+                <IconButton
+                  Icon={Shield}
+                  label="Admin panel"
                   title="Developer Admin Panel"
-                >
-                  <Shield size={13} />
-                </button>
+                  onClick={() => setView('admin')}
+                  size="md"
+                />
               )}
 
               {/* Account identity + menu (Account / Manage subscription & credits) */}
@@ -603,6 +589,7 @@ export default function App() {
               return (
                 <button
                   key={id}
+                  type="button"
                   onClick={() => handleNavClick(id)}
                   style={{
                     flex: 1, display: 'flex', flexDirection: 'column',
@@ -628,6 +615,7 @@ export default function App() {
                 for anon, green-fill for signed-in. */}
             {_readFlag('mobileSingleChrome') && (
               <button
+                type="button"
                 onClick={() => authTier === 'anon' ? setAuthModalOpen(true) : setView('account')}
                 aria-label={authTier === 'anon' ? 'Sign in' : 'Account'}
                 style={{
@@ -672,11 +660,11 @@ export default function App() {
             display: 'flex', flexDirection: 'column', gap: 8,
           }}>
             {showScrollTop && (
-              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 title="Back to top" aria-label="Scroll to top" style={btn}>↑</button>
             )}
             {showScrollBottom && (
-              <button onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}
+              <button type="button" onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}
                 title="Jump to bottom" aria-label="Scroll to bottom" style={btn}>↓</button>
             )}
           </div>

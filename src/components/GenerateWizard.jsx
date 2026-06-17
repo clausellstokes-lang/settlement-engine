@@ -27,6 +27,7 @@ import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
+import Button from './primitives/Button.jsx';
 import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
 import { ModeSelector } from './generate/ModeSelector.jsx';
 import { StepIndicator } from './generate/StepIndicator.jsx';
@@ -388,6 +389,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         </div>
 
         <button
+          type="button"
           onClick={handleGenerate}
           data-onboard-highlight={onboardingActive && onboardingStep === 1 ? 'true' : undefined}
           style={{
@@ -506,45 +508,34 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
           {/* Navigation */}
           <div style={{ display: 'flex', gap: SP.sm + 2, justifyContent: 'space-between' }}>
-            <button
+            <Button
+              variant="secondary"
+              size="lg"
               onClick={() => setWizardStep(Math.max(0, wizardStep - 1))}
               disabled={wizardStep === 0}
-              style={{
-                display: 'flex', alignItems: 'center', gap: R.md,
-                padding: `${SP.sm + 2}px ${SP.xl}px`, background: CARD_HDR,
-                border: `1px solid ${BORDER}`, borderRadius: R.lg,
-                cursor: wizardStep === 0 ? 'not-allowed' : 'pointer',
-                opacity: wizardStep === 0 ? 0.4 : 1,
-                fontFamily: sans, fontSize: FS.md, fontWeight: 600, color: SECOND,
-              }}
+              icon={<ChevronLeft size={16} />}
             >
-              <ChevronLeft size={16} /> Back
-            </button>
+              Back
+            </Button>
 
             {wizardStep < STEPS.length - 1 ? (
-              <button
+              <Button
+                variant="primary"
+                size="lg"
                 onClick={() => setWizardStep(wizardStep + 1)}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: R.md,
-                  padding: `${SP.sm + 2}px ${SP.xl}px`, background: GOLD,
-                  border: `1px solid ${GOLD}`, borderRadius: R.lg, cursor: 'pointer',
-                  fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: swatch.white,
-                }}
+                trailingIcon={<ChevronRight size={16} />}
               >
-                Next <ChevronRight size={16} />
-              </button>
+                Next
+              </Button>
             ) : (
-              <button
+              <Button
+                variant="primary"
+                size="lg"
                 onClick={() => setWizardStep(STEPS.length)}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: R.md,
-                  padding: `${SP.sm + 2}px ${SP.xl}px`, background: GOLD,
-                  border: 'none', borderRadius: R.lg, cursor: 'pointer',
-                  fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: swatch.white,
-                }}
+                trailingIcon={<ChevronRight size={16} />}
               >
-                Ready to Generate <ChevronRight size={16} />
-              </button>
+                Ready to Generate
+              </Button>
             )}
           </div>
         </>
@@ -562,6 +553,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       {(settlement || (isAdvanced && wizardStep >= STEPS.length)) && (
         <div>
           <button
+            type="button"
             onClick={handleGenerate}
             style={{
               width: '100%', padding: isMobile ? `${SP.lg}px 0` : `${SP.lg - 2}px 0`,
@@ -685,16 +677,13 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 {settlement.tier}
               </span>
             </div>
-            <button
+            <Button
+              variant="success"
+              size="sm"
               onClick={() => setShowOutput(true)}
-              style={{
-                padding: `${SP.sm}px ${SP.lg}px`, background: swatch['#2A7A2A'],
-                color: swatch.white, border: 'none', borderRadius: R.md,
-                cursor: 'pointer', fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-              }}
             >
               View Settlement
-            </button>
+            </Button>
           </div>
 
           {/* Mode picker — let the user start fresh in either generation mode.
