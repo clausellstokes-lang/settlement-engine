@@ -106,7 +106,11 @@ function foodCore(viability) {
     importCoverage: fb?.importCoverage ?? null,
     rawDeficit: fb?.rawDeficit ?? null,
     coveragePct: coveragePct(fb?.importCoverage, fb?.rawDeficit),
-    deficitPct: fb?.deficitPercent ?? (legacyNeed > 0 && legacyDef > 0 ? Math.round((legacyDef / legacyNeed) * 100) : null),
+    // Residual deficit ÷ daily need — the SAME "% of need" the flag-on branch and
+    // the screen show. NOT the engine's gross fb.deficitPercent (deficit ÷
+    // adjustedNeed, pre-import), which disagrees on every import-dependent
+    // settlement. (A+ pdf.2 — one fact, one derivation, even on the killswitch path.)
+    deficitPct: legacyNeed > 0 && legacyDef > 0 ? Math.round((legacyDef / legacyNeed) * 100) : null,
   };
 }
 

@@ -13,7 +13,7 @@
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
-import { deriveFoodBalance } from '../../src/domain/display/dossierViewModel.js';
+import { deriveFoodBalance, deriveDossierViewModel } from '../../src/domain/display/dossierViewModel.js';
 
 // One key per on-screen dossier section (OutputContainer tabs). aiAppendix is
 // intentionally excluded - it only exists in the AI-narrative path.
@@ -62,10 +62,19 @@ describe('PDF viewModel — food-balance value parity with deriveFoodBalance', (
       const canonical = deriveFoodBalance(s);
       const vm = buildViewModel({ settlement: s });
 
+      // The convergence layer itself (deriveDossierViewModel) is the canonical
+      // model the web reads; assert the PDF matches IT, the way the screen does.
+      const canon = deriveDossierViewModel(s);
+      expect(canon.foodBalance.deficitPct).toBe(canonical.deficitPct);
+
       // overview slice coalesces 0 → null (`m.deficit || null`); normalize for compare.
       expect(vm.overview.foodBalance.deficit ?? 0).toBe(canonical.deficit);
       expect(vm.overview.foodBalance.surplus ?? 0).toBe(canonical.surplus);
       expect(vm.overview.foodBalance.deficitPct).toBe(canonical.deficitPct);
+
+      // economics slice (the EconomicsTrade chapter's FoodBalanceBlock) — the path
+      // the web Economics tab must also match after routing through deriveFoodBalance.
+      expect(vm.economics.foodBalance.deficitPct).toBe(canonical.deficitPct);
 
       // identity anchor (mirrors the DailyLifeTab anchor) must use the clamped helper
       // value, not the raw unclamped field (the divergence this harness closed).

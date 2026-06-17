@@ -4,6 +4,7 @@ import { TIER_LABELS, catColor } from './design';
 import { serif, TabIntro } from './Primitives';
 import { BODY } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import Button from '../primitives/Button.jsx';
 
@@ -102,7 +103,9 @@ function SummaryTab({ settlement:r }) {
   const tradeAccess=(cfg.tradeRouteAccess||'road').replace(/_/g,' ');
   const tierLabel=TIER_LABELS[tier]||tier;
   const firstQuarter=spatial?.quarters?.[0];
-  const foodBal=via?.metrics?.foodBalance;
+  // Deficit % from the canonical display model (residual ÷ daily need), matching
+  // the PDF — not the engine's gross deficitPercent. (A+ pdf.3.)
+  const foodCanon=deriveFoodBalance(r);
   const _topIssue=via?.issues?.[0];
   const topNPCs=[...(w||[])].sort((a,b)=>(b.power||0)-(a.power||0)).slice(0,6);
   const dp=r.defenseProfile||{};
@@ -125,7 +128,7 @@ function SummaryTab({ settlement:r }) {
       r.arrivalScene?`\n> ${r.arrivalScene}`:'',
       `\n**${characterSentence(r)}**`,
       `\n**Power:** ${allFactions.slice(0,3).map(f=>`${f.faction} (${f.power}%)`).join(', ')}. ${ps?.stability||''}`,
-      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodBal?.deficit>0?` Food deficit ${foodBal.deficitPercent}%.`:''}`,
+      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodCanon.deficit>0?` Food deficit ${foodCanon.deficitPct}%.`:''}`,
       `**Defense:** ${dp.readiness?.label||'Unknown'}`,
       `\n**Key NPCs:**`,...topNPCs.map(v=>{
         const traits=normalizeNpcTraits(v).filter(t=>t.visibility!=='gm').slice(0,4).map(t=>`${t.label}: ${t.value}`).join('; ');
@@ -139,7 +142,7 @@ function SummaryTab({ settlement:r }) {
 
   // Economy situation tile values
   const ecoTileColor=eco.prosperity==='Thriving'||eco.prosperity==='Prosperous'?'#1a5a28':eco.prosperity==='Struggling'||eco.prosperity==='Poor'||eco.prosperity==='Impoverished'?'#8b1a1a':'#a0762a';
-  const ecoSub=foodBal?.deficit>0?`Food deficit ${foodBal.deficitPercent}%`:foodBal?.surplus>0?'Food surplus':'';
+  const ecoSub=foodCanon.deficit>0?`Food deficit ${foodCanon.deficitPct}%`:foodCanon.surplus>0?'Food surplus':'';
 
   // Defense tile
   const defScore=dp.scores?Math.round((dp.scores.military+dp.scores.monster+dp.scores.internal+dp.scores.economic+dp.scores.magical)/5):null;
