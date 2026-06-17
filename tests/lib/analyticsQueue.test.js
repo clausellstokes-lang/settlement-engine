@@ -70,6 +70,24 @@ describe('oversize envelope is force-drained, never a no-op stall', () => {
   });
 });
 
+describe('force-drain preserves essential events over research data', () => {
+  test('research records are shed before essential events under byte pressure', () => {
+    const fetchMock = vi.fn(() => new Promise(() => {}));
+    vi.stubGlobal('fetch', fetchMock);
+
+    enqueueEvent('homepage_view', { a: 1 }, { _class: 'essential' });
+    enqueueEvent('generation_completed', { a: 2 }, { _class: 'essential' });
+    enqueueEvent('world_pulse_advanced', { a: 3 }, { _class: 'essential' });
+    for (let i = 0; i < 12; i++) enqueueSnapshot({ id: `s${i}`, blob: 'x'.repeat(30 * 1024) });
+
+    flush();
+
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(sent.events.length).toBe(3);          // all essential events preserved
+    expect(sent.droppedCount).toBeGreaterThan(0); // research snapshots shed to fit
+  });
+});
+
 describe('per-record cap rejects an oversize record at enqueue', () => {
   test('a record larger than 64KB is dropped, not queued', () => {
     enqueueSnapshot({ id: 'huge', blob: 'x'.repeat(100 * 1024) });

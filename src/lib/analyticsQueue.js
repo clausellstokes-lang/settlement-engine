@@ -36,6 +36,7 @@ let _droppedCount = 0;
 let _attempt = 0;
 let _inFlight = false; // guards against overlapping flushes (interval + size-trigger + retry)
 let _intervalStarted = false;
+let _intervalId = null;
 let _ring = [];       // DEV ring buffer for the debug overlay (last 100)
 
 function nowMs() { try { return Date.now(); } catch { return 0; } }
@@ -113,14 +114,20 @@ function recordBytes(r) {
  * forever and nothing — including research data — ever delivered).
  */
 function dropLargestRecord() {
-  const lanes = [_events, _pulseEffects, _edits, _snapshots];
-  let best = null;
-  for (const arr of lanes) {
-    for (let i = 0; i < arr.length; i++) {
-      const size = recordBytes(arr[i]);
-      if (!best || size > best.size) best = { arr, idx: i, size };
+  // Class-aware: shed RESEARCH-plane bulk before essential events. Under envelope
+  // byte pressure the essential class must survive longer than research data, so we
+  // only ever drop an event as a LAST resort (no research record left to drop).
+  const pickLargest = (lanes) => {
+    let best = null;
+    for (const arr of lanes) {
+      for (let i = 0; i < arr.length; i++) {
+        const size = recordBytes(arr[i]);
+        if (!best || size > best.size) best = { arr, idx: i, size };
+      }
     }
-  }
+    return best;
+  };
+  const best = pickLargest([_pulseEffects, _edits, _snapshots]) || pickLargest([_events]);
   if (!best) return false;
   best.arr.splice(best.idx, 1);
   _droppedCount += 1;
@@ -182,7 +189,7 @@ function maybeFlush() {
 function startInterval() {
   if (_intervalStarted || typeof setInterval === 'undefined') return;
   _intervalStarted = true;
-  try { setInterval(() => flush(), FLUSH_INTERVAL_MS); } catch { /* ignore */ }
+  try { _intervalId = setInterval(() => flush(), FLUSH_INTERVAL_MS); } catch { /* ignore */ }
 }
 
 function buildEnvelope() {
@@ -224,6 +231,9 @@ export function flush({ beacon = false } = {}) {
       body = JSON.stringify(buildEnvelope());
     }
     if (body.length > MAX_ENVELOPE_BYTES) return; // nothing left to drop yet still over — give up this pass
+    // If force-drain emptied every lane (e.g. a single oversize event was the only
+    // record), don't POST a record-free envelope — nothing to deliver this pass.
+    if (!_events.length && !_edits.length && !_snapshots.length && !_pulseEffects.length) return;
 
     // Snapshot what we're sending so a concurrent enqueue isn't lost on success.
     const sentCounts = { e: _events.length, d: _edits.length, s: _snapshots.length, p: _pulseEffects.length };
@@ -295,5 +305,7 @@ export function debugSnapshot() {
 /** Test seam: reset module state. */
 export function __resetQueueForTests() {
   _events = []; _edits = []; _snapshots = []; _pulseEffects = []; _droppedCount = 0; _attempt = 0; _inFlight = false; _ring = [];
+  try { if (_intervalId != null && typeof clearInterval !== 'undefined') clearInterval(_intervalId); } catch { /* ignore */ }
+  _intervalId = null; _intervalStarted = false;
   clearSpill();
 }
