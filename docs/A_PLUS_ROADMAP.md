@@ -199,13 +199,14 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 - ✅ Replace tradeDependencies prefix join with id matching — generators.7 (owner-approved): fixed a flour-Mill→timber false dependency (one golden config updated); last raw prefix join in the file gone
 - ✅ Golden-lock the institution mutation sequence + scratch-key lifecycle — generators.8
 
-### Track C — UI decomposition (owner: frontend; depends only on the max-lines ratchet + smoke harness)
-- OutputContainer.jsx -> JSX [critical/XL]
-- Decompose WorldMap.jsx into hooks + shell, resolve the :387 exhaustive-deps warning [high/XL]
-- EventComposer.jsx -> reducer + form-config table (~35 useState -> <=3) [high/XL]
-- GenerateWizard.jsx -> per-step components + useWizard hook [high/XL]
-- Split SettlementsPanel.jsx + CompendiumPanel.jsx by internal seams [high/L]
-- Add render/smoke tests as the lock-in harness for every decomposition [high/L]
+### Track C — UI decomposition (owner: frontend) — 🟡 in progress
+- ✅ max-lines ratchet (components-core.1) — done in P1.4; ✅ zero-inline-object-selector (Step 9) — done in P1.5
+- ✅ OutputContainer.jsx -> JSX [critical/XL] — components-core.2 (createElement→JSX, swatch-tokenized, preview-verified, ~zero visual change; file now under the design-system gate)
+- ⬜ Decompose WorldMap.jsx into hooks + shell, resolve the :387 exhaustive-deps warning [high/XL]
+- ⬜ EventComposer.jsx -> reducer + form-config table (~35 useState -> <=3) [high/XL]
+- ⬜ GenerateWizard.jsx -> per-step components + useWizard hook [high/XL]
+- ⬜ Split SettlementsPanel.jsx + CompendiumPanel.jsx by internal seams [high/L]
+- ⬜ Add render/smoke tests as the lock-in harness for every decomposition [high/L] — PREREQUISITE for the four decompositions above; each decomposition is a behavior-preserving refactor to land behind its smoke test + preview verification
 
 ### Track D — Design system & a11y (owner: design; can run alongside UI decomposition but coordinate on touched files)
 - Strengthen no-raw-color to inspect all literals + ban local hex consts (the ratchet) [critical/M]
