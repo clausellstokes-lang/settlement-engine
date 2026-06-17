@@ -408,6 +408,30 @@ describe('export institution gates decide by id, keep the mill special-case', ()
   });
 });
 
+// ── 3e. tradeDependencies join is id-first (A+ generators.7) ──────────────────
+
+describe('tradeDependencies join matches by id, not a fragile name prefix', () => {
+  const CFG = { settType: 'town', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'isolated', monsterThreat: 'civilized' };
+  const SEED = 'golden-master-v1';
+
+  it('a flour "Mill" dependency no longer false-joins the timber/lumber chain', () => {
+    // The prefix heuristic matched dependency "Mill" against the timber chain's
+    // "Sawmill" processor ("sawmill".includes("mill")), stamping a nonsensical
+    // grain/flour dependency on a lumber chain. Id-match (catalogId 'mill' ∉
+    // processorPatternIdSet('Sawmill')) drops it.
+    const s = generateSettlementPipeline(CFG, null, { seed: SEED, customContent: {} });
+    const timber = (s.economicState?.activeChains || []).find(c => c.chainId === 'timber');
+    expect(timber, 'fixture must still produce a timber chain').toBeTruthy();
+    expect(timber.dependency, 'a flour Mill must not false-join the timber chain').toBeFalsy();
+  });
+
+  it('genuine same-domain dependencies still attach (the join still works)', () => {
+    const s = generateSettlementPipeline(CFG, null, { seed: SEED, customContent: {} });
+    const garrison = (s.economicState?.activeChains || []).find(c => c.chainId === 'garrison');
+    expect(garrison?.dependency?.institution).toBe('Town watch');
+  });
+});
+
 // ── 4. institutionLifecycle parity (the second load-bearing joint) ───────────
 
 describe("institutionLifecycle's processor join is id-first with the same fallback", () => {

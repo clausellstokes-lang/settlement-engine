@@ -349,21 +349,25 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   // Enrich each chain with dependency status by cross-referencing tradeDependencies
   if (tradeDependencies.length > 0) {
     activeChains.forEach(chain => {
-      // Find matching trade dependency for any processing institution in this chain.
-      // A+ generators.7 (DEFERRED): converting this mutual 10-char-prefix join to
-      // id-matching (catalogIdForName(d.institution) ∈ processorPatternIdSet(p))
-      // is NOT output-neutral — id-match ≠ prefix-match on real rosters (e.g.
-      // town|germanic|river|isolated), changing a chain.dependency/status. Like
-      // the frozen 'Mill' false-matches, re-pointing this is an owner balance
-      // decision, not a silent generation change — so the prefix join stays
-      // FROZEN until that sign-off. (The chain-processor, tradition, service, and
-      // export gates were already converted golden-safely in generators.4-6.)
-      const dep = tradeDependencies.find(d =>
-        chain.processingInstitutions.some(p =>
-          d.institution.toLowerCase().includes(p.toLowerCase().slice(0, 10)) ||
-          p.toLowerCase().includes(d.institution.toLowerCase().slice(0, 10))
-        )
-      );
+      // Find matching trade dependency for any processing institution in this
+      // chain (A+ generators.7, owner-approved). Id-first: when the dependency
+      // names a catalog institution, resolve it to its id and ask whether it is
+      // in the chain pattern's id-set — the same rename-proof join the chain
+      // processors use. The fragile mutual 10-char-prefix substring match
+      // remains ONLY as the fallback for unstamped/custom dependency
+      // institutions. This is NOT output-neutral: id-match is stricter than the
+      // prefix heuristic, which over-joined a "Mill" dependency onto the timber
+      // chain (whose processor is a sawmill, not a flour mill) — that false
+      // dependency is now correctly dropped (golden manifest updated).
+      const dep = tradeDependencies.find(d => {
+        const depId = catalogIdForName(d.institution);
+        return chain.processingInstitutions.some(p =>
+          depId
+            ? processorPatternIdSet(p).has(depId)
+            : (d.institution.toLowerCase().includes(p.toLowerCase().slice(0, 10)) ||
+               p.toLowerCase().includes(d.institution.toLowerCase().slice(0, 10)))
+        );
+      });
       if (dep) {
         chain.dependency = {
           institution: dep.institution,
