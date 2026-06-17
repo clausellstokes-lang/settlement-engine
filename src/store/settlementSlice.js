@@ -1427,6 +1427,9 @@ export const createSettlementSlice = (set, get) => ({
       settlement: state.settlement,
       systemState: state.systemState,
       event,
+      // The store is the I/O boundary: thread the real apply time so the domain
+      // stays a pure function of (settlement, event, now) (A+ domain.6).
+      now: new Date().toISOString(),
     });
     nextSettlement = reconcileSettlementChange(nextSettlement, state.settlement, {
       source: state.phase === 'canon' ? 'canon_event' : 'draft_event',

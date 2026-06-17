@@ -181,9 +181,12 @@ describe('applyEvent', () => {
       settlement: baseSettlement,
       systemState,
       event: ev({ type: 'DAMAGE_INSTITUTION', targetId: 'granary' }),
+      // A+ domain.6: applyEvent is a pure function of (settlement, event, now) —
+      // it no longer reads the wall clock, so the caller threads the apply time.
+      now: '2026-06-04T12:00:00.000Z',
     });
     expect(logEntry.event.type).toBe('DAMAGE_INSTITUTION');
-    expect(logEntry.appliedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+    expect(logEntry.appliedAt).toBe('2026-06-04T12:00:00.000Z');
     expect(logEntry.beforeState).toBeTruthy();
     expect(logEntry.afterState).toBeTruthy();
     expect(logEntry.deltas.length).toBeGreaterThan(0);

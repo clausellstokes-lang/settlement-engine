@@ -46,7 +46,12 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
 export function mutateSettlement({ settlement, event, now = null }) {
   if (!settlement || !event) return settlement;
   const timedEvent = /** @type {any} */ (event);
-  const timestamp = timedEvent.timestamp || timedEvent.createdAt || now || new Date().toISOString();
+  // Deterministic by construction (A+ domain.6): the timestamp is a pure
+  // function of (event, now). No wall-clock fallback — a caller that wants a
+  // real apply time threads `now` (the store does); preview/replay with no now
+  // get a stable null, mirroring status.js's deliberate appliedAt:null so the
+  // projected nextSettlement is reproducible and preview≡apply holds.
+  const timestamp = timedEvent.timestamp || timedEvent.createdAt || now || null;
   const stampedEvent = timedEvent.timestamp ? timedEvent : { ...event, timestamp };
   let next = { ...settlement };
 
