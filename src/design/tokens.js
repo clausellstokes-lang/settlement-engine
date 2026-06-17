@@ -2,15 +2,20 @@
  * design/tokens.js — Single source of truth for every visual value in the app.
  *
  * This is the foundation the rest of the design system stands on. Every
- * colour, font, spacing value, radius, elevation, motion curve comes from
- * here. Three big consequences:
+ * colour, font, spacing value, radius, elevation, motion curve is meant to
+ * come from here. Two consequences hold today, one is aspirational:
  *
- *   1. Adding dark mode later means swapping `light` for `dark` in one
- *      `theme` map — no component changes.
+ *   1. WCAG contrast fixes happen by editing token values here, not by
+ *      hunting hard-coded hex strings across 80+ components. (Holds today.)
  *   2. Adding a brand variant means a new theme map, not a fork of every
- *      component file.
- *   3. WCAG contrast fixes happen by editing token values, not by hunting
- *      hard-coded hex strings across 80+ components.
+ *      component file. (Holds today, for code that reads tokens.)
+ *   3. ASPIRATIONAL — NOT YET TRUE: "dark mode is one map swap." The app
+ *      ships ONLY the light theme; there is no dark theme, no toggle, and no
+ *      prefers-color-scheme handling. A true one-swap dark mode is also blocked
+ *      by two escape hatches that bypass this map: the exact-value `swatch[...]`
+ *      hex keys below and inline `rgba()`/gradient literals in components. Those
+ *      must be migrated to semantic tokens before a dark theme could "just work."
+ *      Do not claim dark-mode support until that work lands.
  *
  * The legacy flat constants in `src/components/theme.js` are now a thin
  * re-export shim pointing here. New code should import from this file or
@@ -32,8 +37,9 @@
  */
 
 // ── Colours ────────────────────────────────────────────────────────────────
-// Light theme (canonical). A dark theme can be added later by defining
-// `darkColors` with the same keys and swapping which map is exported.
+// Light theme — the ONLY theme the app ships. A dark theme is NOT implemented;
+// adding one would mean defining `darkColors` with the same keys AND first
+// migrating the swatch/inline-rgba escape hatches (see header note 3).
 const lightColors = Object.freeze({
   // Parchment — page + card surfaces
   'parchment-50':  '#FBF5E6',  // page background, default card surface
