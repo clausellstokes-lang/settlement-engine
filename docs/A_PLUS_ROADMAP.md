@@ -191,12 +191,12 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 - ✅ Close the preview≡apply gap on projected nextSettlement with now-threading — domain.6 (40eb1a9); apply path now pure of (settlement, event, now), store threads the wall-clock
 - ✅ Turn on tsc strictness for the domain — domain.7 (5881cb8); shipped as a per-file regression-blocking RATCHET (4649-error baseline, gate-wired) — full burn-down to zero is the tracked worklist (XL, ~133 files)
 
-### Track B — Generators data-flow integrity (owner: generators) — ✅ substantially complete
-- ✅ Declare step mutates/scratch contracts + enforce in runPipeline — done in P1.7 (+ getStepMeta now surfaces mutates/scratch, generators.8)
-- ⏸ Derive run order from the data-flow graph, demote deps to a cross-check [high/L] — DEFERRED: needs a `reads` contract declared across all 19 steps + careful golden validation (a focused architectural sub-project); the order is already golden-stable via deps
+### Track B — Generators data-flow integrity (owner: generators) — ✅ COMPLETE
+- ✅ Declare step reads/mutates/scratch contracts + enforce in runPipeline — P1.7 (writes) + generators.3 (reads); strict mode asserts declared reads are produced before each step; getStepMeta surfaces reads/mutates/scratch
+- ✅ Derive run order from the data-flow graph, demote deps to a cross-check — generators.3: reads contract declared on all 19 steps + soundness/compatibility cross-check (deps order proven to respect every data edge). Full runtime order-SWAP intentionally not done — `economicState` is produced twice (generateEconomy→generatePower read→economyReconcile re-derive), so a pure data order cycles without versioned keys; deps stays the golden-stable authority, now cross-checked
 - ✅ Convert traditions/magic-transit gates to id-first matching — generators.4
 - ✅ Convert INSTITUTIONAL_SERVICE_MAP and resource/chain gates to id-sets — generators.5 + generators.6 (export gates + mill special-case unified, rename-proof, golden-safe)
-- ⏸ Replace tradeDependencies prefix join with id matching [medium/M] — DEFERRED: id-match ≠ prefix-match on live rosters (flips a chain.dependency for one config), so it's an owner balance decision like the frozen Mill false-matches, not a silent output change
+- ✅ Replace tradeDependencies prefix join with id matching — generators.7 (owner-approved): fixed a flour-Mill→timber false dependency (one golden config updated); last raw prefix join in the file gone
 - ✅ Golden-lock the institution mutation sequence + scratch-key lifecycle — generators.8
 
 ### Track C — UI decomposition (owner: frontend; depends only on the max-lines ratchet + smoke harness)
