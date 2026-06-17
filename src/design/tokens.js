@@ -272,6 +272,13 @@ export const swatch = Object.freeze({
   '#FFF0E0': '#fff0e0',
   '#FFF3ED': '#fff3ed',
   '#FFF7EC': '#fff7ec',
+  // Referenced via swatch['#…'] in src but previously absent — they resolved to
+  // `undefined` and rendered as no color (silent bug caught by
+  // tests/lint/swatchResolves.test.js). Exact values; zero intended change.
+  '#EEE9DF': '#eee9df', // CampaignFolder
+  '#FAF3E8': '#faf3e8', // pdf primitives/sections (Dense, StatTile, PowerStructure, …)
+  '#FBF5E6': '#fbf5e6', // pdf Cover
+  '#F5F0FF': '#f5f0ff', // pdf Relationships / ViabilityAssessment
 });
 
 // ── Typography ─────────────────────────────────────────────────────────────
