@@ -13,9 +13,8 @@
  * Reads all state from the Zustand store — zero props.
  */
 import { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react';
-import { ChevronRight, ChevronLeft, Zap, Settings, ArrowLeft, Save } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Zap, ArrowLeft } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { saves as savesService } from '../lib/saves.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import ConfigurationPanel from './ConfigurationPanel';
 import InstitutionalGrid from './InstitutionalGrid';
@@ -23,13 +22,16 @@ import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
 import WizardCloseout from './generate/WizardCloseout.jsx';
 import WizardNextSteps from './generate/WizardNextSteps.jsx';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
-import { backgroundImageUrl, MODE_BACKGROUNDS } from '../config/pageBackgrounds.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import HomeHero from './HomeHero.jsx';
+import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
+import { ModeSelector } from './generate/ModeSelector.jsx';
+import { StepIndicator } from './generate/StepIndicator.jsx';
+import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
 // P128 / H-2 — Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
 // flip. Mounted directly below HomeHero so anon visitors see proof of
@@ -41,37 +43,6 @@ const OutputContainer = lazy(() => import('./OutputContainer'));
 // P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
 // surfaces don't pay for the playback animator).
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
-
-// "Change mode" back button — shown above the mode-specific UI once a card
-// is picked. Module-scope so React Compiler can memoize without seeing it
-// reborn on every render of the parent wizard.
-function ChangeModeBar({ mode, onChangeMode }) {
-  return (
-    <div style={{
-      display: 'flex', alignItems: 'center', gap: SP.sm,
-      padding: `${SP.sm}px ${SP.md}px`,
-      background: CARD_HDR,
-      border: `1px solid ${BORDER}`,
-      borderRadius: R.md,
-      fontSize: FS.sm, color: SECOND,
-    }}>
-      <button
-        onClick={() => onChangeMode(null)}
-        style={{
-          display: 'flex', alignItems: 'center', gap: SP.xs,
-          background: 'transparent', border: 'none', cursor: 'pointer',
-          color: GOLD, fontFamily: sans, fontSize: FS.sm, fontWeight: 600, padding: 0,
-        }}
-      >
-        <ChevronLeft size={14} /> Change mode
-      </button>
-      <span style={{ color: MUTED }}>·</span>
-      <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
-        {mode === 'basic' ? 'Basic Generate' : 'Advanced Generate'}
-      </span>
-    </div>
-  );
-}
 
 // ── Step definitions ─────────────────────────────────────────────────────────
 
@@ -113,223 +84,6 @@ const dwellBand = (ms) => {
   if (ms < 1800000) return '5_30m';
   return 'gt_30m';
 };
-
-// ── Mode selector ────────────────────────────────────────────────────────────
-
-function ModeSelector({ mode, onModeChange, large = false }) {
-  // The wizard exposes two named generation modes:
-  //   - Basic    (formerly "Quick"): one-screen config + Generate.
-  //     The hero's instant generation routes here under the hood so
-  //     a user landing on the wizard sees the same shape.
-  //   - Advanced: step-by-step config with institution toggles,
-  //     services, and trade dynamics.
-  // (Custom Generate / the Workshop was removed.) The HomeHero's instant
-  // generation is its OWN surface (homepage card with size-picker chips),
-  // not a mode listed here. Anonymous users see the hero only — these mode
-  // cards are gated to signed-in users (Basic/Advanced require a free sign-in).
-  const modes = [
-    { id: 'basic',    label: 'Basic Generate',    desc: 'One screen. Set the foundations and go', Icon: Zap,      longDesc: 'Pick a tier, culture, and terrain. Everything else is randomized. Produces a draft you can refine, save, and canonize.' },
-    { id: 'advanced', label: 'Advanced Generate', desc: 'Full configuration, step by step',         Icon: Settings, longDesc: 'Walk through general config, institutions, services, and trade. Full control over the probability space. Produces a draft you can refine, save, and canonize.' },
-  ];
-
-  return (
-    <div style={{
-      display: 'flex',
-      gap: large ? SP.xl : SP.md,
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      padding: large ? `${SP.xxl}px 0` : `${SP.sm}px 0`,
-    }}>
-      {modes.map(({ id, label, desc, Icon, longDesc }) => {
-        const active = mode === id;
-        return (
-          <button
-            key={id}
-            onClick={() => onModeChange(id)}
-            className={large ? `mode-card-bg${active ? ' is-active' : ''}` : undefined}
-            style={{
-              flex: large ? '1 1 280px' : '1 1 200px',
-              maxWidth: large ? 360 : 260,
-              padding: large ? `${SP.xxl}px ${SP.xl}px` : `${SP.xl - 2}px ${SP.lg}px`,
-              ...(large
-                ? { '--card-bg': backgroundImageUrl(MODE_BACKGROUNDS[id]) }
-                : { background: active ? GOLD_BG : CARD }),
-              border: `2px solid ${(large || active) ? GOLD : BORDER2}`,
-              borderRadius: R.lg,
-              cursor: 'pointer',
-              textAlign: 'center',
-              transition: 'all 0.2s',
-              boxShadow: large ? '0 4px 16px rgba(28,20,9,0.08)' : 'none',
-            }}
-            onMouseOver={e => {
-              if (!large) return;
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(160,118,42,0.25)';
-              e.currentTarget.style.borderColor = GOLD;
-            }}
-            onFocus={e => {
-              if (!large) return;
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(160,118,42,0.25)';
-              e.currentTarget.style.borderColor = GOLD;
-            }}
-            onMouseOut={e => {
-              if (!large) return;
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 16px rgba(28,20,9,0.08)';
-              e.currentTarget.style.borderColor = active ? GOLD : BORDER2;
-            }}
-            onBlur={e => {
-              if (!large) return;
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 16px rgba(28,20,9,0.08)';
-              e.currentTarget.style.borderColor = active ? GOLD : BORDER2;
-            }}
-          >
-            <Icon size={large ? 40 : 24} color={active ? GOLD : (large ? GOLD : MUTED)} style={{ marginBottom: large ? SP.md : 6 }} />
-            <div style={{
-              fontSize: large ? FS.xxl : FS.lg,
-              fontWeight: 700,
-              fontFamily: serif_,
-              color: active ? INK : (large ? INK : SECOND),
-            }}>
-              {label}
-            </div>
-            <div style={{ fontSize: large ? FS.md : FS.sm, color: MUTED, marginTop: SP.xs }}>{desc}</div>
-            {large && (
-              <div style={{ fontSize: FS.sm, color: SECOND, marginTop: SP.md, lineHeight: 1.5, fontStyle: 'italic' }}>
-                {longDesc}
-              </div>
-            )}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-// ── Step indicator ───────────────────────────────────────────────────────────
-
-function StepIndicator({ currentStep, totalSteps }) {
-  return (
-    <div style={{ display: 'flex', gap: R.md, justifyContent: 'center', padding: `${SP.sm}px 0` }}>
-      {Array.from({ length: totalSteps }, (_, i) => (
-        <div
-          key={i}
-          style={{
-            width: i === currentStep ? 28 : 10,
-            height: 10,
-            borderRadius: R.sm + 1,
-            background: i === currentStep ? GOLD : i < currentStep ? 'rgba(160,118,42,0.5)' : BORDER2,
-            transition: 'all 0.3s',
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// ── Save to library button ──────────────────────────────────────────────────
-
-function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
-  const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [saveError, setSaveError] = useState(null);
-
-  const handleSave = async () => {
-    if (!settlement || saving) return;
-    setSaveError(null);
-    setSaving(true);
-    try {
-      await savesService.save({
-        name: settlement.name || 'Untitled Settlement',
-        tier: settlement.tier || 'unknown',
-        settlement,
-        config: settlement._config || null,
-      });
-      setSaved(true);
-      setTimeout(() => setSaved(false), 3000);
-    } catch (e) {
-      console.error('Save failed:', e);
-      setSaveError(`Failed to save: ${e.message || e}`);
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  // P101 / X-3 — Save-as-signup. When the user can't save (anonymous,
-  // or hit the per-tier cap), instead of a disabled tombstone we render
-  // an active "free account" door. Clicking stashes the current dossier
-  // as a pending intent, opens the AuthModal, and on success the auth
-  // intent registry fires savesService.save with the same payload —
-  // the user lands back to a saved settlement.
-  if (!canSave) {
-    const handleSignupSave = () => {
-      if (typeof onSignIn === 'function') onSignIn();
-      // Lazy-load to avoid pulling authIntents into the wizard bundle
-      // until the user actually clicks the button.
-      import('../lib/authIntents.js').then(({ setPending, INTENTS }) => {
-        setPending(INTENTS.SAVE_SETTLEMENT, {
-          name: settlement.name || 'Untitled Settlement',
-          tier: settlement.tier || 'unknown',
-          settlement,
-          config: settlement._config || null,
-        });
-        // Analytics + auth flow open
-        import('../lib/analytics.js').then(({ Funnel, EVENTS }) => {
-          Funnel.track(EVENTS.SAVE_BUTTON_CLICKED, { tier: settlement.tier });
-          Funnel.track(EVENTS.SAVE_SIGNUP_INTENT_OPENED, { tier: settlement.tier });
-        });
-      });
-    };
-
-    return (
-      <button
-        onClick={handleSignupSave}
-        style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-          padding: isMobile ? '13px 24px' : '12px 24px',
-          background: swatch.white,
-          color: GOLD, fontWeight: 700,
-          border: `1.5px solid ${GOLD}`,
-          borderBottom: `2px solid ${GOLD}`,
-          borderRadius: R.md,
-          cursor: 'pointer',
-          fontFamily: sans, fontSize: FS.md,
-          boxShadow: '0 1px 0 rgba(140,111,50,0.15)',
-          transition: 'all 0.15s',
-        }}
-        title="We'll save your dossier as soon as you're in."
-      >
-        <Save size={15} />
-        Save this town. Free account →
-      </button>
-    );
-  }
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs }}>
-      <button onClick={handleSave} disabled={saving || saved} style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-        padding: isMobile ? '13px 24px' : '10px 24px',
-        background: saved ? '#2a7a2a' : '#1a4a2a',
-        color: swatch.white, border: 'none', borderRadius: R.md,
-        cursor: saving || saved ? 'default' : 'pointer',
-        fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-        boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-        transition: 'all 0.2s',
-      }}>
-        <Save size={15} />
-        {saved ? '✓ Saved to Library' : saving ? 'Saving...' : 'Save to Library'}
-      </button>
-      {saveError && (
-        <div style={{ color: swatch.danger, fontSize: FS.xs, fontFamily: sans, maxWidth: 420, textAlign: 'center' }}>
-          {saveError}
-        </div>
-      )}
-    </div>
-  );
-}
 
 // ── Main wizard component ────────────────────────────────────────────────────
 
