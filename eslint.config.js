@@ -226,6 +226,18 @@ export default [
     },
   },
 
+  // ── A+ P1.3 — forked design-token const guard (components) ──────────────────
+  // no-raw-color only inspects JSX style props; this catches `const X = '#hex'`
+  // re-declarations of token values. 43 files are grandfathered in
+  // scripts/.forked-color-baseline.json (burn-down worklist); a NEW fork in any
+  // non-baselined component file errors. The baseline cannot grow (pinned).
+  // @enforced-by visual-budget/no-forked-color-const + tests/lint/forkedColorBaseline.test.js
+  {
+    files: ['src/components/**/*.{js,jsx}'],
+    plugins: { 'visual-budget': visualBudget },
+    rules: { 'visual-budget/no-forked-color-const': 'error' },
+  },
+
   // Data tables: arrow functions are written with uniform signatures
   // (e.g. `(r, s) => ...`) even when an individual entry only uses one
   // parameter. The shape is intentional — it lets callers invoke any

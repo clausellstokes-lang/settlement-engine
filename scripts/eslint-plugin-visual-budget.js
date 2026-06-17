@@ -20,11 +20,35 @@
  *     verbs ("Generate", "Reroll", "Save"). Encourages routing through
  *     copy/index.js so the verb-unification (C-1) stays honest.
  *
- * Used by eslint.config.js as a local plugin. Keep this file
- * dependency-free — it imports nothing.
+ * no-forked-color-const (A+ P1.3) — a module-scope `const X = '#hex'` that
+ *   re-declares a value the token system owns. no-raw-color only inspects JSX
+ *   `style` props, so these forks (≈43 files) bypassed it entirely. ERROR for any
+ *   file NOT in the checked-in baseline (scripts/.forked-color-baseline.json) and
+ *   not a token-definition file — so a NEW fork in a clean file fails the gate,
+ *   while the grandfathered files burn down (the baseline pin forbids growth).
+ *
+ * Used by eslint.config.js as a local plugin. Only node builtins imported (to read
+ * the baseline); no third-party deps.
  */
 
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, relative } from 'node:path';
+
 const RAW_HEX_PATTERN = /^#[0-9a-fA-F]{3,8}$/;
+
+// Repo root = parent of scripts/. The forked-color baseline grandfathers files
+// that currently re-declare token hexes; new files must import from theme.js.
+const _REPO_ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
+let _forkedColorBaseline = new Set();
+try {
+  _forkedColorBaseline = new Set(
+    JSON.parse(readFileSync(join(_REPO_ROOT, 'scripts/.forked-color-baseline.json'), 'utf8')),
+  );
+} catch { /* no baseline file → empty set; every fork errors, surfacing the gap */ }
+// Token DEFINITION sources legitimately hold raw hexes.
+const _isTokenSource = (rel) => /(?:design\/tokens|components\/theme)\b|src\/design\//.test(rel);
+const _relPath = (abs) => relative(_REPO_ROOT, abs || '').replace(/\\/g, '/');
 const COLOR_PROPS = new Set(['color', 'background', 'backgroundColor', 'borderColor', 'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor', 'fill', 'stroke']);
 
 // Verbs the critique unified. Strings that match these inside button
@@ -114,6 +138,31 @@ export default {
                   message: `Raw hex color "${valueNode.value}" on ${keyName} — use a token (GOLD, INK, BODY, MUTED, BORDER, …) or a semantic var.`,
                 });
               }
+            }
+          },
+        };
+      },
+    },
+
+    'no-forked-color-const': {
+      meta: {
+        type: 'suggestion',
+        docs: { description: 'Disallow re-declaring a token hex as a local const. Import GOLD/INK/BODY/… from theme.js.' },
+        schema: [],
+      },
+      create(context) {
+        const rel = _relPath(context.filename);
+        // Grandfathered (baseline) files and the token sources themselves are exempt.
+        if (_forkedColorBaseline.has(rel) || _isTokenSource(rel)) return {};
+        return {
+          VariableDeclarator(node) {
+            const init = node.init;
+            if (init && init.type === 'Literal' && typeof init.value === 'string'
+                && RAW_HEX_PATTERN.test(init.value.trim())) {
+              context.report({
+                node: init,
+                message: `Forked design token "${init.value}" — import the token from theme.js/tokens.js instead of re-declaring the hex.`,
+              });
             }
           },
         };
