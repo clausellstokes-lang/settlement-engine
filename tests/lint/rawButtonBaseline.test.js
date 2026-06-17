@@ -8,7 +8,16 @@
  *   - it must equal the set of files that actually still contain a raw <button>
  *     (no new violator escapes via the baseline; no stale entry lingers after a
  *     file is migrated onto the primitive);
- *   - it can never grow past its committed ceiling (you may shrink it, not pad it).
+ *   - the total raw-button DEBT can never grow.
+ *
+ * Debt is measured as the COUNT of raw <button> occurrences, not the number of
+ * files. File count is not split-invariant — decomposing a god-component
+ * relocates its existing buttons into new sibling files (Track C), which would
+ * trip a file-count ceiling even though no NEW button was written. Occurrence
+ * count IS split-invariant: it only drops when a button is migrated onto the
+ * Button/IconButton primitive (design-a11y.3). New raw buttons are still blocked
+ * two ways — a new non-baselined file errors under no-raw-button, and adding a
+ * button to a baselined file pushes the occurrence count over the ceiling here.
  *
  * The detector regex `/<button[\s/>]/` is verified to match exactly the same file
  * set the AST rule flags (multi-line opening tags included).
@@ -19,9 +28,12 @@ import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const BASELINE_CEILING = 118; // committed max — lower it as files migrate; never raise it
+// Committed max raw-button occurrence count — lower it as buttons migrate onto
+// the primitive; never raise it. (Splitting files does NOT change this number.)
+const BUTTON_BUDGET = 359;
 
-const BUTTON_RE = /<button[\s/>]/;
+const BUTTON_FILE_RE = /<button[\s/>]/;
+const BUTTON_OCC_RE = /<button[\s/>]/g;
 const isPrimitive = (rel) => /^src\/components\/primitives\//.test(rel);
 
 function walk(dir, out = []) {
@@ -33,11 +45,18 @@ function walk(dir, out = []) {
   return out;
 }
 
-const currentRawButtonFiles = walk(join(ROOT, 'src'))
+const srcFiles = walk(join(ROOT, 'src'))
   .map(p => relative(ROOT, p).replace(/\\/g, '/'))
-  .filter(rel => !isPrimitive(rel))
-  .filter(rel => BUTTON_RE.test(readFileSync(join(ROOT, rel), 'utf8')))
+  .filter(rel => !isPrimitive(rel));
+
+const currentRawButtonFiles = srcFiles
+  .filter(rel => BUTTON_FILE_RE.test(readFileSync(join(ROOT, rel), 'utf8')))
   .sort();
+
+const currentButtonCount = srcFiles.reduce((n, rel) => {
+  const m = readFileSync(join(ROOT, rel), 'utf8').match(BUTTON_OCC_RE);
+  return n + (m ? m.length : 0);
+}, 0);
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'scripts/.raw-button-baseline.json'), 'utf8')).sort();
 
@@ -48,7 +67,7 @@ describe('raw-button baseline ratchet (A+ enforcement.5)', () => {
     expect(baseline).toEqual(currentRawButtonFiles);
   });
 
-  test('baseline never grows past its committed ceiling', () => {
-    expect(baseline.length).toBeLessThanOrEqual(BASELINE_CEILING);
+  test('total raw-button debt never grows past its committed budget', () => {
+    expect(currentButtonCount).toBeLessThanOrEqual(BUTTON_BUDGET);
   });
 });
