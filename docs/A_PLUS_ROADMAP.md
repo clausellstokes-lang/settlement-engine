@@ -208,12 +208,12 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 - ✅ Split SettlementsPanel.jsx + CompendiumPanel.jsx by internal seams [high/L] — components-core.6a (SettlementsPanel 1104→517) + 6b (CompendiumPanel 1165→229; CustomContent split <600). Both behavior-preserving, smoke-tested, gate-green.
 - 🟡 Add render/smoke tests as the lock-in harness for every decomposition [high/L] — established the pattern (tests/ui/settlementsPanel.smoke + compendiumPanel.smoke); extend to the three XL components as each is decomposed.
 
-### Track D — Design system & a11y (owner: design; can run alongside UI decomposition but coordinate on touched files)
-- Strengthen no-raw-color to inspect all literals + ban local hex consts (the ratchet) [critical/M]
-- Codemod the 39 forked-token files to import from theme.js, then promote no-raw-color to error [critical/L]
-- Codemod the 372 raw <button> onto Button/IconButton primitives + prefer-button-primitive lint [high/XL]
-- Icon-only button accessible names + Alert live region + Dialog focus-trap test [high/M + high/S + medium/S]
-- Ship dark mode OR delete the claim from tokens.js [medium/L]
+### Track D — Design system & a11y (owner: design) — 🟡 started
+- ⬜ Strengthen no-raw-color to inspect all literals + ban local hex consts (the ratchet) [critical/M] — note: no-raw-color already covers style-prop hex (P1.3); this widens to ALL literals
+- ⬜ Codemod the 39 forked-token files to import from theme.js, then promote no-raw-color to error [critical/L]
+- ⬜ Codemod the 372 raw <button> onto Button/IconButton primitives + prefer-button-primitive lint [high/XL]
+- 🟡 Icon-only button accessible names + Alert live region + Dialog focus-trap test — ✅ Alert live region (design-a11y.4) + ✅ Dialog focus-trap test (design-a11y.6) done; ⬜ icon-only button names (depends on the button codemod) remain
+- ⬜ Ship dark mode OR delete the claim from tokens.js [medium/L]
 
 ### Track E — Lib/edge resilience (owner: platform)
 - Force-drain oversize envelope + dedicated analyticsQueue.test.js [critical/M + critical/L]
