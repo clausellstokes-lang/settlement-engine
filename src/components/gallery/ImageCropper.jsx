@@ -199,6 +199,7 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           type="button"
           onClick={reset}
           title="Reset zoom & position"
+          aria-label="Reset zoom and position"
           style={iconBtn}
         >
           <RotateCcw size={13} />

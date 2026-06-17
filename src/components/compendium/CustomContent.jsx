@@ -501,8 +501,8 @@ export function CustomContentManager({ search }) {
                 <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, flex:1 }}>{item.name}</span>
                 <Tag label="Custom" color='#7c3aed'/>
                 {item.category && <Tag label={item.category} color={catDef.color}/>}
-                <button onClick={() => handleEdit(item)} style={{ background:'none', border:'none', color:MUT, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
-                <button onClick={() => setDeleteId(deleteId===item.id?null:item.id)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><Trash2 size={11}/></button>
+                <button aria-label="Edit item" onClick={() => handleEdit(item)} style={{ background:'none', border:'none', color:MUT, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
+                <button aria-label="Delete item" onClick={() => setDeleteId(deleteId===item.id?null:item.id)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><Trash2 size={11}/></button>
               </div>
               {item.description && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description}</div>}
               <CustomItemAttributes item={item} />

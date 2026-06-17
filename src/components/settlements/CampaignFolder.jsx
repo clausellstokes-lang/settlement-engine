@@ -51,7 +51,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
     <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>
       {/* Campaign header */}
       <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
-        <button onClick={() => toggleCollapsed(campaign.id)} style={{ background:'none', border:'none', cursor:'pointer', padding:0, display:'flex', color:MUTED }}>
+        <button onClick={() => toggleCollapsed(campaign.id)} aria-label={collapsed ? 'Expand campaign' : 'Collapse campaign'} style={{ background:'none', border:'none', cursor:'pointer', padding:0, display:'flex', color:MUTED }}>
           {collapsed ? <ChevronRight size={14}/> : <ChevronDown size={14}/>}
         </button>
         <FolderOpen size={14} color={GOLD}/>
@@ -61,8 +61,8 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               onKeyDown={e => { if (e.key === 'Enter') { onRenameCampaign(campaign.id, editDraft); setEditing(false); } if (e.key === 'Escape') setEditing(false); }}
               // eslint-disable-next-line jsx-a11y/no-autofocus -- inline rename field appears on user action; focus lets them type the new name immediately
               style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, borderRadius:3, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
-            <button onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} style={{ background:'none', border:'none', color:swatch['#2A7A2A'], cursor:'pointer' }}><Check size={12}/></button>
-            <button onClick={() => setEditing(false)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer' }}><X size={12}/></button>
+            <button onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} aria-label="Save name" style={{ background:'none', border:'none', color:swatch['#2A7A2A'], cursor:'pointer' }}><Check size={12}/></button>
+            <button onClick={() => setEditing(false)} aria-label="Cancel rename" style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer' }}><X size={12}/></button>
           </div>
         ) : (
           <span style={{ flex:1, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
@@ -78,8 +78,8 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               style={{ display:'flex', alignItems:'center', gap:3, background: settlements.length === 0 ? '#d8cdbc' : '#7a1a1a', color:swatch.white, border:'none', borderRadius:4, padding:'3px 7px', cursor: settlements.length === 0 ? 'not-allowed' : 'pointer', fontSize:FS.micro, fontWeight:700, fontFamily:sans }}>
               <FileText size={10}/> PDF
             </button>
-            <button onClick={() => { setEditing(true); setEditDraft(campaign.name); }} style={{ background:'none', border:'none', color:MUTED, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
-            <button onClick={() => setConfirmDelete(!confirmDelete)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><X size={11}/></button>
+            <button onClick={() => { setEditing(true); setEditDraft(campaign.name); }} aria-label="Rename campaign" style={{ background:'none', border:'none', color:MUTED, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
+            <button onClick={() => setConfirmDelete(!confirmDelete)} aria-label="Delete campaign" style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><X size={11}/></button>
           </div>
         )}
       </div>

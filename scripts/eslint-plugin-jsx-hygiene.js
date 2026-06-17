@@ -146,5 +146,54 @@ export default {
         };
       },
     },
+
+    'icon-button-needs-label': {
+      meta: {
+        type: 'problem',
+        docs: {
+          description:
+            'An icon-only <button> (an element child, no text content) must carry an accessible name (aria-label / aria-labelledby / title), or a screen reader announces only "button".',
+        },
+        schema: [],
+        messages: {
+          needsLabel:
+            'Icon-only <button> has no accessible name — a screen reader announces only "button". Add an aria-label (e.g. aria-label="Close"), or use the IconButton primitive which requires a label.',
+        },
+      },
+      create(context) {
+        const LABEL_ATTRS = new Set(['aria-label', 'aria-labelledby', 'title', 'alt']);
+        const elHasLabelAttr = (el) =>
+          el.openingElement && (el.openingElement.attributes || []).some(
+            (a) => a.type === 'JSXAttribute' && a.name && LABEL_ATTRS.has(a.name.name),
+          );
+        // Conservative accessible-name probe over the WHOLE subtree: real text,
+        // any text-bearing/ambiguous expression ({label}, {`x`}, {obj.name},
+        // {fn()}, {cond && …}, {a ? b : c}), or any descendant element carrying a
+        // label attr (e.g. <span>{name}</span>, <img alt>) all count as a name.
+        // Ambiguous expressions are treated as "named" so the rule never flags a
+        // button that might already be announced — only the clear icon-only case
+        // (element child(ren), zero text anywhere) fires.
+        const NAME_EXPR = new Set(['Literal', 'Identifier', 'TemplateLiteral', 'MemberExpression', 'CallExpression', 'LogicalExpression', 'ConditionalExpression', 'BinaryExpression']);
+        const subtreeHasName = (node) =>
+          (node.children || []).some((c) => {
+            if (c.type === 'JSXText') return c.value.trim().length > 0;
+            if (c.type === 'JSXExpressionContainer') return c.expression && NAME_EXPR.has(c.expression.type);
+            if (c.type === 'JSXElement') return elHasLabelAttr(c) || subtreeHasName(c);
+            return false;
+          });
+        const hasElementChild = (node) =>
+          (node.children || []).some((c) => c.type === 'JSXElement');
+        return {
+          JSXElement(node) {
+            const open = node.openingElement;
+            if (open?.name?.type !== 'JSXIdentifier' || open.name.name !== 'button') return;
+            if (elHasLabelAttr(node)) return;
+            if (hasElementChild(node) && !subtreeHasName(node)) {
+              context.report({ node: open, messageId: 'needsLabel' });
+            }
+          },
+        };
+      },
+    },
   },
 };

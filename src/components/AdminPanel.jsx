@@ -118,10 +118,10 @@ function UserRow({ user, onUpdate }) {
               <option value="admin">Admin</option>
               <option value="developer">Developer</option>
             </select>
-            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
+            <button aria-label="Save role" onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
               <Check size={12} />
             </button>
-            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
+            <button aria-label="Cancel" onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
               <X size={12} />
             </button>
           </div>
@@ -146,10 +146,10 @@ function UserRow({ user, onUpdate }) {
               <option value="free">Free</option>
               <option value="premium">Premium</option>
             </select>
-            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
+            <button aria-label="Save tier" onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
               <Check size={12} />
             </button>
-            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
+            <button aria-label="Cancel" onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
               <X size={12} />
             </button>
           </div>
@@ -174,10 +174,10 @@ function UserRow({ user, onUpdate }) {
               style={{ width: 60, fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}`, textAlign: 'right' }}
               // eslint-disable-next-line jsx-a11y/no-autofocus -- inline edit field should focus on open
               autoFocus />
-            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
+            <button aria-label="Save credits" onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
               <Check size={12} />
             </button>
-            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
+            <button aria-label="Cancel" onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
               <X size={12} />
             </button>
           </div>

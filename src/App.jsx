@@ -473,6 +473,7 @@ export default function App() {
               {showHeaderCredits && authTier !== 'anon' && (
                 <button
                   onClick={() => setPurchaseModalOpen(true)}
+                  aria-label="Buy credits"
                   style={{
                     display: 'flex', alignItems: 'center', gap: 4,
                     padding: `${SP.sm}px ${SP.lg}px`, marginLeft: SP.xs,
@@ -493,6 +494,7 @@ export default function App() {
               {isElevated && (
                 <button
                   onClick={() => setView('admin')}
+                  aria-label="Admin panel"
                   style={{
                     display: 'flex', alignItems: 'center', gap: 4,
                     padding: `${SP.sm}px ${SP.md}px`, marginLeft: SP.xs,

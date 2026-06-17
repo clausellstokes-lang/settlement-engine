@@ -47,7 +47,7 @@ export default function ControlsStrip({
             style={{ width: '100%', padding: '5px 8px 5px 24px', border: `1px solid ${BORDER}`, borderRadius: 5, fontSize: FS['11.5'], background: `rgba(250,248,244,0.97)`, color: INK, boxSizing: 'border-box', fontFamily: sans }}
           />
           {search && (
-            <button onClick={() => setSearch('')} style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 0, lineHeight: 1 }}>
+            <button onClick={() => setSearch('')} aria-label="Clear search" style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 0, lineHeight: 1 }}>
               <X size={11} />
             </button>
           )}

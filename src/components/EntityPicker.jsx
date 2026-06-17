@@ -152,6 +152,7 @@ export default function EntityPicker({
                 <button
                   type="button"
                   onClick={() => removeRef(refId)}
+                  aria-label="Remove"
                   style={{
                     background: 'transparent', border: 'none',
                     color: accent, cursor: 'pointer', padding: 0,

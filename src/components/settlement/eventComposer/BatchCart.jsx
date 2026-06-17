@@ -35,7 +35,7 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRe
             <span style={{ flex: 1 }}>
               {EVENT_REGISTRY[e.type]?.label || e.type}{e.targetId ? `: ${labelOfTarget(e.targetId)}` : ''}
             </span>
-            <button onClick={() => onRemove(i)} title="Remove" style={{ background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 2, display: 'flex' }}>
+            <button onClick={() => onRemove(i)} aria-label="Remove staged change" title="Remove" style={{ background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 2, display: 'flex' }}>
               <X size={12} />
             </button>
           </div>

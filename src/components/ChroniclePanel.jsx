@@ -155,7 +155,7 @@ function FullEntryModal({ entry, onClose }) {
               </span>
             </div>
           </div>
-          <button onClick={onClose} style={{
+          <button onClick={onClose} aria-label="Close" style={{
             background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)',
             color: swatch['#F5EDE0'], borderRadius: 5, padding: '5px 8px', cursor: 'pointer',
             display: 'flex', alignItems: 'center',

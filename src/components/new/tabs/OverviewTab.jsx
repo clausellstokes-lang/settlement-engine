@@ -234,7 +234,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
 
       {/* ── SPATIAL LAYOUT ────────────────────────────────────────────────── */}
       {r.spatialLayout?.quarters?.length>0&&<div style={{border:'1px solid #c8d8b0',borderRadius:8,overflow:'hidden',marginBottom:14}}>
-        <button onClick={()=>setSpatialOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:spatialOpen?'#edf5e8':'#f4faf0',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <button onClick={()=>setSpatialOpen(v=>!v)} aria-label={spatialOpen?'Collapse spatial layout':'Expand spatial layout'} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:spatialOpen?'#edf5e8':'#f4faf0',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <div style={{display:'flex',alignItems:'center',gap:8}}>
             <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#1A4A2A'],textTransform:'uppercase',letterSpacing:'0.06em'}}>Spatial Layout</span>
             <span style={{fontSize:FS.xs,color:MUTED}}>{r.spatialLayout.quarters.length} quarters</span>
@@ -281,7 +281,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
 
       {/* ── INSTITUTIONS ──────────────────────────────────────────────────── */}
       <div style={{border:'1px solid #e0d0b0',borderRadius:8,overflow:'hidden'}}>
-        <button onClick={()=>setInstOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <button onClick={()=>setInstOpen(v=>!v)} aria-label={instOpen?'Collapse institutions':'Expand institutions'} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <div style={{display:'flex',alignItems:'center',gap:10}}>
             <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
             <span style={{fontSize:FS.xs,color:MUTED}}>{(r.institutions||[]).length} total</span>

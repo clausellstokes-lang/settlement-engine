@@ -101,7 +101,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
             aria-label="Search services"
             placeholder='Search services, "healing", "horse", "fence", "wizard"…'
             style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',borderRadius:6,fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
-          {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize: FS['18'],color:MUTED,lineHeight:1,padding:0}}>×</button>}
+          {search&&<button onClick={()=>setSearch('')} aria-label="Clear search" style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize: FS['18'],color:MUTED,lineHeight:1,padding:0}}>×</button>}
         </div>
 
         {searchResults !== null && (

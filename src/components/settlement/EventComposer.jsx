@@ -425,7 +425,7 @@ export default function EventComposer() {
                 {target && (
                   <div style={pickedChipStyle}>
                     <span>{target}</span>
-                    <button onClick={() => { setTarget(''); setAddCategory(''); }} title="Clear" style={chipClearBtn}><X size={11} /></button>
+                    <button onClick={() => { setTarget(''); setAddCategory(''); }} aria-label="Remove institution" title="Clear" style={chipClearBtn}><X size={11} /></button>
                   </div>
                 )}
                 <CatalogPicker
@@ -445,7 +445,7 @@ export default function EventComposer() {
                 {target && (
                   <div style={pickedChipStyle}>
                     <span>{stressorPick?.name || target}</span>
-                    <button onClick={() => { setTarget(''); setStressorPick(null); }} title="Clear" style={chipClearBtn}><X size={11} /></button>
+                    <button onClick={() => { setTarget(''); setStressorPick(null); }} aria-label="Remove stressor" title="Clear" style={chipClearBtn}><X size={11} /></button>
                   </div>
                 )}
                 <CatalogPicker

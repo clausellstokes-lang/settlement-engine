@@ -874,7 +874,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         )}
         {/* Tab strip */}
         <div data-onboard-highlight={onboardingActive && onboardingStep === 2 ? 'true' : undefined} style={{ position: 'relative', borderBottom: '1px solid #e0d0b0', background: swatch['#F7F0E4'] }}>
-          <button onClick={() => scroll(-1)} style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronLeft size={14} /></button>
+          <button onClick={() => scroll(-1)} aria-label="Scroll tabs left" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronLeft size={14} /></button>
           {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus -- roving tabIndex lives on the child tabs (WAI-ARIA tabs pattern); the tablist container forwards arrow keys but is not itself a focus stop */}
           <div
             ref={scrollRef}
@@ -930,7 +930,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               );
             })}
           </div>
-          <button onClick={() => scroll(1)} style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronRight size={14} /></button>
+          <button onClick={() => scroll(1)} aria-label="Scroll tabs right" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronRight size={14} /></button>
         </div>
         {/* Content — dimmed overlay during regenerate so the user sees "something is changing" */}
         <div style={{ position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' }}>

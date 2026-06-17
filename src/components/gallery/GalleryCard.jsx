@@ -57,6 +57,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
       <button
         type="button"
         onClick={() => onOpen(item.slug)}
+        aria-label={`Open ${item.name || t('gallery.untitled')}`}
         style={{ border: 'none', padding: 0, background: 'transparent', cursor: 'pointer', textAlign: 'left' }}
       >
         <div style={{ position: 'relative' }}>

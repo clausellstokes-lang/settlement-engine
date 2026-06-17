@@ -248,10 +248,19 @@ export default [
   // (burn-down worklist); a NEW raw button in any non-baselined file errors. The
   // baseline cannot grow (pinned to monotone shrink).
   // @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js
+  //
+  // A+ design-a11y.5 — icon-only <button> (element child, no text anywhere in the
+  // subtree) must carry an accessible name (aria-label/aria-labelledby/title), or
+  // a screen reader announces only "button". The 82 historical offenders were all
+  // labeled; this is ERROR with NO baseline — the count is zero and stays zero.
+  // @enforced-by jsx-hygiene/icon-button-needs-label + tests/ui/a11y.audit.test.jsx
   {
     files: ['src/**/*.jsx'],
     plugins: { 'jsx-hygiene': jsxHygiene },
-    rules: { 'jsx-hygiene/no-raw-button': 'error' },
+    rules: {
+      'jsx-hygiene/no-raw-button': 'error',
+      'jsx-hygiene/icon-button-needs-label': 'error',
+    },
   },
 
   // Data tables: arrow functions are written with uniform signatures

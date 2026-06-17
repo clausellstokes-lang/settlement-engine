@@ -695,7 +695,7 @@ export default function SettlementDetail({
             <div style={{width:6,height:6,borderRadius:'50%',background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
             <span style={{fontSize:FS.xxs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 6px',borderRadius:3}}>{rel}</span>
-            <button onClick={()=>removeNeighbour(i)} title="Remove link" style={{background:'none',border:'none',cursor:'pointer',color:MUTED,padding:2,display:'flex'}}>
+            <button onClick={()=>removeNeighbour(i)} aria-label="Remove link" title="Remove link" style={{background:'none',border:'none',cursor:'pointer',color:MUTED,padding:2,display:'flex'}}>
               <X size={13}/>
             </button>
           </div>;

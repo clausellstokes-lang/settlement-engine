@@ -161,6 +161,7 @@ export default function PurchaseModal({ onClose }) {
                 <button
                   key={key}
                   onClick={() => handlePurchase(key)}
+                  aria-label={`Buy ${p.credits} credits for ${p.price}`}
                   disabled={loading || !isConfigured}
                   style={{
                     flex: 1, padding: `${SP.lg}px ${SP.sm}px`,

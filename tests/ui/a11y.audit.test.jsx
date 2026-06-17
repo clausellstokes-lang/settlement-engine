@@ -207,3 +207,33 @@ describe('A+ design-a11y.6 — Dialog focus trap', () => {
   });
 });
 
+// ── A+ design-a11y.5 — every icon-only button has an accessible name ──────────
+// An icon-only <button> with no text and no aria-label is announced as just
+// "button" by a screen reader. The statically-enforcing guarantee is the
+// jsx-hygiene/icon-button-needs-label lint rule (ERROR, zero offenders); this
+// render test confirms the accessible name actually COMPUTES at runtime — i.e.
+// the rule isn't satisfied by an empty aria-label that resolves to nothing.
+
+describe('A+ design-a11y.5 — icon-only buttons carry an accessible name', () => {
+  // jsdom doesn't compute the full ARIA accessible-name algorithm, so approximate
+  // its primary sources: aria-label, then visible text, then title.
+  const accName = (btn) =>
+    (btn.getAttribute('aria-label') || btn.textContent || btn.getAttribute('title') || '').trim();
+
+  test('Dialog Shell: every button (incl. the icon-only close) resolves to a non-empty name', async () => {
+    const { ConfirmDialog } = await import('../../src/components/primitives/Dialog.jsx');
+    const { container } = render(
+      <ConfirmDialog open title="Confirm?" body="Body" onCancel={() => {}} onConfirm={() => {}} />,
+    );
+    const buttons = Array.from(container.querySelectorAll('button'));
+    expect(buttons.length).toBeGreaterThanOrEqual(3); // close (icon-only) + cancel + confirm
+    for (const b of buttons) {
+      expect(accName(b), `a button rendered with no accessible name: ${b.outerHTML.slice(0, 90)}`).not.toBe('');
+    }
+    // The top-right close is icon-only; it must resolve via aria-label, not text.
+    const close = buttons.find((b) => b.getAttribute('aria-label') === 'Close');
+    expect(close, 'expected an icon-only close button labeled "Close"').toBeTruthy();
+    expect(close.textContent.trim()).toBe(''); // genuinely icon-only — name comes from the label
+  });
+});
+
