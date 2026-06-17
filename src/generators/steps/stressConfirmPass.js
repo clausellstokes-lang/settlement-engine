@@ -60,6 +60,7 @@ function suppressorNames(stressType, institutions) {
 registerStep('stressConfirmPass', {
   deps: ['resolveStress', 'isolationPass'],
   provides: ['stress', 'stressTypes'],
+  mutates: ['effectiveConfig'], // re-stamps confirmed stress keys on effectiveConfig in place (A+ P1.7)
   phase: 'config',
 }, (ctx, rng) => {
   const { tier, effectiveConfig, institutions } = ctx;

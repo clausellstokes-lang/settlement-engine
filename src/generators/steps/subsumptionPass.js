@@ -144,7 +144,9 @@ function applySubsumption(institutions, ctx = null, trace = {}) {
 
 registerStep('subsumptionPass', {
   deps: ['assembleInstitutions'],
-  provides: [], // mutates institutions in place
+  provides: [],
+  mutates: ['institutions'], // subsumes/merges roster entries in place (A+ P1.7)
+  scratch: ['_subsumed'],     // sets a flag recording what was subsumed
   phase: 'institutions',
 }, (ctx) => {
   ctx._subsumed = applySubsumption(ctx.institutions, ctx);

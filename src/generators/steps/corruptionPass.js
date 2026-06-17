@@ -37,6 +37,7 @@ registerStep('corruptionPass', {
   // economicState, which the reconcile step may replace after the faction pull.
   deps: ['generatePopulation', 'economyReconcilePass'],
   provides: [],
+  mutates: ['factions', 'npcs'], // stamps corruption onto the rosters in place (A+ P1.7)
   phase: 'population',
 }, (ctx, rng) => {
   const npcs = Array.isArray(ctx.npcs) ? ctx.npcs : [];

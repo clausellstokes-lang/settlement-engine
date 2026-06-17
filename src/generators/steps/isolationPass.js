@@ -27,6 +27,7 @@ function instId(name) {
 registerStep('isolationPass', {
   deps: ['cascadePass'],
   provides: [],
+  mutates: ['institutions', 'effectiveConfig', 'stressTypes'], // prunes the roster + stamps isolation flags / stress on effectiveConfig+stressTypes in place (A+ P1.7)
   phase: 'institutions',
 }, (ctx, rng) => {
   const { institutions, tier, tradeRoute, effectiveConfig, catalogForTier } = ctx;

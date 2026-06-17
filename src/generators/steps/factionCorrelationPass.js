@@ -30,6 +30,8 @@ function instId(name) {
 registerStep('factionCorrelationPass', {
   deps: ['neighbourFactions', 'generateEconomy'],
   provides: [],
+  mutates: ['institutions'],                 // re-correlates roster vs factions in place (A+ P1.7)
+  scratch: ['_rosterChangedAfterEconomy'],   // internal flag for downstream steps
   phase: 'power',
 }, (ctx) => {
   const {

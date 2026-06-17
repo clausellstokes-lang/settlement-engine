@@ -14,6 +14,7 @@ import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 registerStep('resolveStress', {
   deps: ['resolveConfig', 'resolveResources'],
   provides: ['stress', 'stressTypes'],
+  mutates: ['effectiveConfig'], // stamps derived stress keys onto effectiveConfig (A+ P1.7)
   phase: 'config',
 }, (ctx) => {
   const { tier, effectiveConfig, population } = ctx;

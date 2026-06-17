@@ -37,6 +37,7 @@ registerStep('assembleSettlement', {
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
   deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
   provides: ['settlement'],
+  mutates: ['powerStructure'], // normalizes the power roster in place (A+ P1.7 contract)
   phase: 'assembly',
 }, (ctx) => {
   const {

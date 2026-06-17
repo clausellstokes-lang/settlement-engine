@@ -20,6 +20,7 @@ function instId(name) {
 registerStep('cascadePass', {
   deps: ['subsumptionPass'],
   provides: [],
+  mutates: ['institutions'], // re-rolls/adds catalog entries on the roster in place (A+ P1.7)
   phase: 'institutions',
 }, (ctx, rng) => {
   // terrainType comes from resolveConfig — the cascade re-rolls catalog
