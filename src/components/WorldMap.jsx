@@ -15,7 +15,7 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import {
-  FolderOpen, Save, Trash2, RefreshCw, Eye, Mountain, PenTool, Layers, Loader, Map as MapIcon, Globe, Link as LinkIcon,
+  FolderOpen, Save, Trash2, RefreshCw, Layers, Loader, Map as MapIcon, Globe,
   Newspaper, SlidersHorizontal, Zap, HelpCircle, Image as ImageIcon, X as XIcon, Share2, Undo2,
 } from 'lucide-react';
 import { flag } from '../lib/flags.js';
@@ -29,6 +29,10 @@ import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans, 
 import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
+import { ModeSwitch } from './map/ModeSwitch.jsx';
+import { IconButton } from './map/IconButton.jsx';
+import { legacyPlacementsArray } from './map/legacyPlacements.js';
+import { useMapAutosave } from '../hooks/useMapAutosave.js';
 
 const MapOverlay     = lazy(() => import('./MapOverlay.jsx'));
 const PlacementDetailCard = lazy(() => import('./map/PlacementDetailCard.jsx'));
@@ -165,27 +169,10 @@ export default function WorldMap({ onNavigate } = {}) {
   }, [activeCampaignId, activeCampaign, setActiveCampaign]);
 
   // P112 / M-5 — Auto-save the working map into the active campaign so it
-  // persists per account and across devices without a manual click. The key
-  // mirrors AutoSaveChip's "dirty" fingerprint (placement ids + layer counts);
-  // the save is debounced and only fires when the live map differs from the
-  // campaign's persisted map (so no save loop, no redundant writes).
-  // saveCampaignMap bumps the campaign's updatedAt, which rides the existing
-  // campaign cloud sync. Gated on the mapAutosave flag + an active campaign.
-  const mapDirtyKey = useStore(s => {
-    const m = s.mapState || {};
-    return `${Object.keys(m.placements || {}).sort().join(',')}|${(m.labels || []).length}|${(m.markers || []).length}|${(m.forests || []).length}|${m.customBackdrop?.imageUrl || ''}`;
-  });
-  useEffect(() => {
-    if (!flag('mapAutosave') || !activeCampaignId) return undefined;
-    const p = activeCampaign?.mapState || {};
-    const persistedKey = `${Object.keys(p.placements || {}).sort().join(',')}|${(p.labels || []).length}|${(p.markers || []).length}|${(p.forests || []).length}|${p.customBackdrop?.imageUrl || ''}`;
-    if (mapDirtyKey === persistedKey) return undefined;
-    const t = setTimeout(() => {
-      try { saveCampaignMap(activeCampaignId, useStore.getState().mapState); }
-      catch { /* autosave is best-effort; the manual Save action remains */ }
-    }, 3500);
-    return () => clearTimeout(t);
-  }, [mapDirtyKey, activeCampaignId, activeCampaign, saveCampaignMap]);
+  // persists per account and across devices without a manual click. Extracted
+  // to a side-effect hook; behaviour (debounce, dirty-key gate, flag gate) is
+  // unchanged.
+  useMapAutosave(activeCampaignId, activeCampaign, saveCampaignMap);
 
   // When a campaign is selected, only its settlements are draggable.
   // Layered: campaign membership first, then canon filter on top.
@@ -1236,103 +1223,4 @@ export default function WorldMap({ onNavigate } = {}) {
       `}</style>
     </div>
   );
-}
-
-// ── Subcomponents ────────────────────────────────────────────────────────
-
-function ModeSwitch({ mapMode, setMapMode, imageMode }) {
-  // P110 / M-4 — Routes mode appended to the mode pill group. The
-  // existing mode pill is already segmented; this is one more entry.
-  // Click promotes relationship/road/supply-chain layers to primary
-  // content and fires MAP_ROUTES_MODE_ENTERED analytics.
-  // Image-mode maps have no FMG geometry, so Terrain (heightmap/biome editor)
-  // and Routes (geography-charted trails) are omitted.
-  const modes = [
-    { id: MAP_MODES.VIEW,     label: 'View',     Icon: Eye },
-    { id: MAP_MODES.TERRAIN,  label: 'Terrain',  Icon: Mountain },
-    { id: MAP_MODES.ANNOTATE, label: 'Annotate', Icon: PenTool },
-    { id: MAP_MODES.ROUTES,   label: 'Routes',   Icon: LinkIcon },
-  ].filter(m => !imageMode || (m.id !== MAP_MODES.TERRAIN && m.id !== MAP_MODES.ROUTES));
-  const handleClick = (id) => {
-    setMapMode(id);
-    if (id === MAP_MODES.ROUTES) {
-      Funnel.track(EVENTS.MAP_ROUTES_MODE_ENTERED);
-    }
-  };
-  return (
-    <div style={{
-      display: 'flex', gap: 2, padding: 2,
-      background: BORDER2, borderRadius: R.md,
-    }}>
-      {modes.map(m => {
-        const active = mapMode === m.id;
-        return (
-          <button
-            key={m.id}
-            onClick={() => handleClick(m.id)}
-            style={{
-              display: 'flex', alignItems: 'center', gap: 5,
-              padding: '5px 12px',
-              background: active ? CARD : 'transparent',
-              border: 'none', borderRadius: R.sm,
-              color: active ? INK : SECOND,
-              fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-              cursor: 'pointer',
-              boxShadow: active ? '0 1px 3px rgba(0,0,0,0.15)' : 'none',
-            }}
-          >
-            <m.Icon size={13} /> {m.label}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-function IconButton({ children, onClick, title, primary, active, ...rest }) {
-  return (
-    <button
-      onClick={onClick}
-      title={title}
-      {...rest}
-      style={{
-        display: 'flex', alignItems: 'center', gap: 4,
-        padding: '5px 10px',
-        background: primary ? GOLD : active ? GOLD_BG : CARD,
-        color: primary ? '#fff' : INK,
-        border: `1px solid ${primary ? GOLD : BORDER}`,
-        borderRadius: R.sm,
-        fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
-        cursor: 'pointer',
-      }}
-    >
-      {children}
-    </button>
-  );
-}
-
-// ── Helpers ──────────────────────────────────────────────────────────────
-/**
- * Convert mapState.placements (burgId → {settlementId, x, y, ...}) into the
- * flat array shape that bridge.restorePlacements expects.
- */
-function legacyPlacementsArray(ms) {
-  if (!ms?.placements) return [];
-  // If _legacyPlacements already exists (v1 migration), use it
-  if (Array.isArray(ms._legacyPlacements) && ms._legacyPlacements.length) {
-    return ms._legacyPlacements;
-  }
-  const out = [];
-  for (const [burgIdStr, p] of Object.entries(ms.placements)) {
-    if (typeof p?.x !== 'number' || typeof p?.y !== 'number') continue;
-    out.push({
-      burgId: Number(burgIdStr),
-      settlementId: p.settlementId || null,
-      x: p.x,
-      y: p.y,
-      name: p.name,
-      population: p.population,
-    });
-  }
-  return out;
 }
