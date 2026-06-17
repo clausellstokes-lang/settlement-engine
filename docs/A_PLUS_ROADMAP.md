@@ -473,14 +473,32 @@ concrete change, rationale, and acceptance criterion.
 - **Why:** A data file that captures the RNG makes its output non-deterministic and order-dependent at a layer that's supposed to be replayable pure data — and it drags the generator chunk into the import graph (the exact reason stressTypesMeta.js was forked, per its header). Passing rng/instFlags explicitly makes the dependency visible and testable, removes the import-graph coupling, and lets the data file be statically analyzable. This is the remediation the eslint rule in Step 2 demands; it also fixes a real determinism seam, not just a stylistic one.
 - **Done when:** stressTypes.js and narrativeData.js have zero `import` of generators/store/lib (Step 2 lint + pin green). stressTypesMeta.test.js still passes (keys aligned). A determinism test: generating the same settlement twice with a fixed seed yields identical stressor `summary` text. `npx vitest run` full suite green; no new entries appear in tests/joins/labelJoins.test.js inventory.
 
-### data-schema.4 Collapse the 5 competing classifications behind one catalog-derived source
+### data-schema.4 Collapse the 5 competing classifications behind one catalog-derived source ✅ DONE (RE-SCOPED: govern, don't collapse)
 `high · effort XL · high risk`
+
+> **Re-scoped after investigation (owner-approved).** The "collapse" premise is
+> false for this codebase: the grouping axis (`institution.category`, TitleCase)
+> and the faction-role axis (`priorityCategory`, lowercase) are INDEPENDENT by
+> design — ~100 of 301 catalog entries deliberately diverge (e.g. 34 Crafts-grouped
+> guilds are `priorityCategory: government`; Economy entries are `military`). The
+> runtime OR-chain (`economicGenerator.js`) matches BOTH axes on purpose: the
+> `religious` role is carried by the grouping, `military` by priorityCategory.
+> Forcing `priorityCategory = derived-from-group` would change generation output
+> for ~1/3 of entries and discard intent. Instead, the dual-axis design is now
+> GOVERNED (behavior-preserving, golden-master byte-identical): canonical
+> vocabularies declared in `src/data/categoryVocabulary.js`; both axes pinned as
+> closed sets; the cascade grouping walk (`CASCADE_GROUPING_ORDER`) pinned to reach
+> every live grouping; and the key prevention pin — every `FACTION_DESCRIPTORS`
+> role stays MATCHABLE through ≥1 axis so no role silently matches nothing. The
+> OR-chain carries a doc comment explaining both clauses are load-bearing.
+> See `tests/data/categoryGovernance.test.js`. (Original collapse plan below, kept
+> for record.)
 
 - **Change:** Five vocabularies disagree: (1) catalog grouping keys [Government, Religious, Criminal, Infrastructure, Economy, Magic, Defense, Crafts, Entertainment, Adventuring, Exotic]; (2) `priorityCategory` [economy, government, military, religion, ...] — note grouping `Defense` maps to priorityCategory:'military' for 28/29 entries (institutionalCatalog.js, verified) but 'defense' for 1; grouping `Religious`→'religion'; (3) powerData.js FACTION_DESCRIPTORS keys [economy, government, military, religious, magic, criminal, other]; (4) entityTags TAG vs catalog `tags`; (5) tradeGoodsData GOODS_CATEGORIES. Step: define ONE canonical category enum (new export CATEGORY in entityTags.js or a new src/data/categories.js: ECONOMY, GOVERNMENT, MILITARY, RELIGION, MAGIC, CRIMINAL, INFRASTRUCTURE, CRAFTS, ENTERTAINMENT, ADVENTURING, EXOTIC, OTHER) and a single CATALOG_GROUP_TO_CATEGORY map. Derive priorityCategory from the grouping key at catalog-build time instead of hand-typing it on every entry, and replace the powerData key set + the runtime reconciliation in economicGenerator.js:1531/1572 (`i.priorityCategory===category || i.category?.toLowerCase()===category`) and historyGenerator.js:176 (`i.category==='Religious' || tags.includes('religious') || tags.includes('church')`) with a single canonCategory(inst) accessor.
 - **Why:** The runtime OR-chains in economicGenerator and historyGenerator exist solely to reconcile vocabularies that were never reconciled at the source — that's detection/repair on the hot path, the opposite of prevention-by-construction. Every such chain is a silent false-match waiting for the next respelling (the same failure mode constants.js:44-46 documents for prosperity tiers: the resilience dial credited only extremes for a long time because it matched a vocabulary the generator never produced). One canonical category, derived not duplicated, makes the disagreement structurally impossible.
 - **Done when:** New pin asserts: every catalog grouping key has an entry in CATALOG_GROUP_TO_CATEGORY; every entry's priorityCategory equals CATALOG_GROUP_TO_CATEGORY[its group] (catches the lone Defense→defense outlier — decide and pin it); powerData FACTION_DESCRIPTORS keys ⊆ CATEGORY values. The `i.category?.toLowerCase()===category` fallback is deleted from economicGenerator.js:1531,1572 and the suite stays green (proving the reconciliation was redundant once canonicalized).
 
-### data-schema.5 Extend coverage pins to service/resource/tradeGood tags and TAG_GROUPS
+### data-schema.5 Extend coverage pins to service/resource/tradeGood tags and TAG_GROUPS ✅ DONE
 `medium · effort M · low risk`
 
 - **Change:** Step 1 pins only the institutionalCatalog. Generalize: in tests/domain/tagVocabularyCoverage.test.js add walks over src/data/institutionServices.js, resourceData.js (category:'water'|'land'|'special' — pin the closed set), and tradeGoodsData.js GOODS_CATEGORIES, asserting each emitted tag/category is in the governing vocabulary. Also add a TAG_GROUPS reachability assertion: every TAG.* constant should appear in at least one TAG_GROUPS bundle OR be referenced by the keyword-backfill in entities.js:138-152 — flag orphan tags that no query can ever select (today several of the 14 unused-by-catalog tags like COMMUNICATION, PUBLIC_AUTHORITY may be orphans). Decide per orphan: wire into a group or delete.

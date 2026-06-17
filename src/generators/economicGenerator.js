@@ -1528,6 +1528,13 @@ export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
       }
       if (
         category === 'other' ||
+        // Dual-axis match (see src/data/categoryVocabulary.js): a faction role
+        // matches an institution by EITHER its semantic priorityCategory OR its
+        // grouping (category). Both clauses are load-bearing — e.g. the
+        // 'religious' role is carried by the grouping while 'military' is carried
+        // by priorityCategory — so neither can be dropped without silently
+        // losing matches. categoryGovernance.test.js pins that every role stays
+        // matchable through one of the two axes.
         institutions.some((i) => i.priorityCategory === category || i.category?.toLowerCase() === category)
       )
         result.push({ ...role, category });
@@ -1569,6 +1576,13 @@ const _getUpgradeOpps = (institutions, tier, config = {}) => {
       }
       if (
         category === 'other' ||
+        // Dual-axis match (see src/data/categoryVocabulary.js): a faction role
+        // matches an institution by EITHER its semantic priorityCategory OR its
+        // grouping (category). Both clauses are load-bearing — e.g. the
+        // 'religious' role is carried by the grouping while 'military' is carried
+        // by priorityCategory — so neither can be dropped without silently
+        // losing matches. categoryGovernance.test.js pins that every role stays
+        // matchable through one of the two axes.
         institutions.some((i) => i.priorityCategory === category || i.category?.toLowerCase() === category)
       )
         result.push({ ...role, category });
