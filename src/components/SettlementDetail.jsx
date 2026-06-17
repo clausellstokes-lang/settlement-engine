@@ -1,13 +1,13 @@
-import { useState, useMemo, useEffect, lazy, Suspense, Component } from 'react';
-import {Link2, ChevronLeft, X, FileText, RotateCcw, Loader2, Edit3, Lock, Share2} from 'lucide-react';
+import { useState, useEffect, lazy, Suspense, Component } from 'react';
+import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2} from 'lucide-react';
 import ShareToGallery from './ShareToGallery.jsx';
+import Button from './primitives/Button.jsx';
+import IconButton from './primitives/IconButton.jsx';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
 // section components. Import lazily on user click so opening a settlement
 // detail view doesn't pay for export machinery up front.
 const generateSettlementPDF = (...args) =>
   import('../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
-import {getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS} from '../lib/relationshipGraph.js';
-import { RELATIONSHIP_SELECTIONS } from '../domain/relationships/canonicalRelationship.js';
 import { validateDossier } from '../domain/validation/consistency.js';
 import { useStore } from '../store/index.js';
 
@@ -20,6 +20,7 @@ import PhaseBadge       from './settlement/PhaseBadge.jsx';
 import SystemStateBar   from './settlement/SystemStateBar.jsx';
 import EventComposer    from './settlement/EventComposer.jsx';
 import Timeline         from './settlement/Timeline.jsx';
+import PendingIntentions from './settlement/PendingIntentions.jsx';
 import CoherencePanel   from './settlement/CoherencePanel.jsx';
 // Wave 2 audit components: contextual AI, action rail, provenance,
 // export sheet picker. Each is small and additive — they replace
@@ -39,103 +40,16 @@ import { triggerPricingMoment } from '../lib/pricingMoments.js';
 // announcement under one shared component.
 import StateBadge        from './primitives/StateBadge.jsx';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
+import NetworkEffectsPanel from './settlementDetail/SettlementDetailNetworkEffectsPanel.jsx';
+import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourCard.jsx';
+import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
 
 const REL_COLORS = {
   trade_partner:'#1a5a28', allied:'#1a3a7a', patron:'#4a1a6a',
   client:'#6a3a1a', rival:'#8a5010', cold_war:'#8a3010',
   hostile:'#8b1a1a', neutral:'#6b5340',
 };
-
-// ── Network Effects panel — shows cascading modifiers from the relationship graph ──
-
-function NetworkEffectsPanel({ settlementId, saves }) {
-  const mods = useMemo(
-    () => getSettlementModifiers(settlementId, saves),
-    [settlementId, saves]
-  );
-
-  const hasEffects = mods.sources.length > 0;
-  if (!hasEffects) return null;
-
-  const maxAbs = Math.max(0.01, ...EFFECT_CATEGORIES.map(c => Math.abs(mods.totals[c.key])));
-
-  return (
-    <div style={{ background: swatch['#F8F4EE'], border: `1px solid ${BORDER}`, borderRadius: 8, padding: '12px 14px', marginBottom: 14 }}>
-      <div style={{ fontSize: FS.xs, fontWeight: 700, color: swatch['#5A3A1A'], textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>
-        Network Effects
-      </div>
-
-      {/* Category bars */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
-        {EFFECT_CATEGORIES.map(({ key, label, _color }) => {
-          const val = mods.totals[key];
-          const pct = Math.min(Math.abs(val) / maxAbs, 1) * 100;
-          const isPos = val >= 0;
-          return (
-            <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ fontSize: FS.xxs, fontWeight: 600, color: SECOND, minWidth: 80, fontFamily: sans }}>{label}</span>
-              <div style={{ flex: 1, height: 8, background: swatch['#E8E0D4'], borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
-                <div style={{
-                  position: 'absolute',
-                  [isPos ? 'left' : 'right']: 0,
-                  top: 0, height: '100%',
-                  width: `${pct}%`,
-                  background: isPos ? '#2a7a3a' : '#8b1a1a',
-                  borderRadius: 4,
-                  transition: 'width 0.3s',
-                }} />
-              </div>
-              <span style={{
-                fontSize: FS.xxs, fontWeight: 700, fontFamily: 'monospace', minWidth: 42, textAlign: 'right',
-                color: Math.abs(val) < 0.005 ? MUTED : isPos ? '#1a5a28' : '#8b1a1a',
-              }}>
-                {fmtMod(val)}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Source breakdown */}
-      <div style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
-        Sources
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-        {mods.sources.map((src, i) => {
-          const relLabel = REL_LABELS[src.relType] || src.relType;
-          const relColor = REL_COLORS[src.relType] || MUTED;
-          const dominant = EFFECT_CATEGORIES.reduce((best, c) =>
-            Math.abs(src.modifiers[c.key]) > Math.abs(src.modifiers[best] || 0) ? c.key : best
-          , EFFECT_CATEGORIES[0].key);
-          const domVal = src.modifiers[dominant];
-          const depthLabel = src.depth > 1 ? ` (${src.depth}-hop, ${Math.round(src.decay * 100)}% strength)` : '';
-          const trLabel = src.tierRatio && Math.abs(src.tierRatio - 1) > 0.05
-            ? ` TR:${src.tierRatio.toFixed(1)}x` : '';
-
-          return (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 0', borderBottom: i < mods.sources.length - 1 ? '1px solid #e8e0d4' : 'none' }}>
-              <div style={{ width: 5, height: 5, borderRadius: '50%', background: relColor, flexShrink: 0 }} />
-              <span style={{ fontSize: FS.xs, fontWeight: 600, color: INK, flex: 1 }}>
-                {src.settlementName}
-              </span>
-              <span style={{ fontSize: FS.micro, color: relColor, fontWeight: 600, background: `${relColor}18`, padding: '1px 5px', borderRadius: 3 }}>
-                {relLabel}
-              </span>
-              <span style={{ fontSize: FS.micro, color: MUTED }}>{depthLabel}{trLabel}</span>
-              <span style={{
-                fontSize: FS.xxs, fontWeight: 700, fontFamily: 'monospace',
-                color: domVal >= 0 ? '#1a5a28' : '#8b1a1a',
-              }}>
-                {fmtMod(domVal)}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
 
 class DetailErrorBoundary extends Component {
   constructor(props) {
@@ -157,45 +71,6 @@ class DetailErrorBoundary extends Component {
     }
     return this.props.children;
   }
-}
-
-function LinkNeighbourCard({currentSave, allSaves, onLink}){
-  const[selected,setSelected]=useState(null);
-  const[relType,setRelType]=useState('neutral');
-  const others=allSaves.filter(s=>{
-    if(s.id===currentSave?.saveData?.id) return false;
-    if(currentSave?.settlement?.neighbourNetwork?.some(n=>n.id===s.id||n.name===s.name)) return false;
-    return true;
-  });
-  if(!others.length) return<div style={{padding:'12px 14px',fontSize:FS.sm,color:MUTED,background:swatch['#F7F0E4'],borderRadius:8,border:`1px solid ${BORDER}`}}>No other saved settlements to link.</div>;
-  return<div style={{background:swatch.infoBg,border:'1px solid #c0c8e8',borderRadius:8,padding:'12px 14px'}}>
-    <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
-      <Link2 size={12}/> Link as Neighbour
-    </div>
-    <div style={{display:'flex',flexDirection:'column',gap:6,marginBottom:8}}>
-      {others.map(s=><button key={s.id} onClick={()=>setSelected(selected?.id===s.id?null:s)} style={{display:'flex',alignItems:'center',gap:8,padding:'7px 10px',borderRadius:5,border:`1px solid ${selected?.id===s.id?'#2a3a7a':BORDER}`,background:selected?.id===s.id?'#e8eeff':CARD,cursor:'pointer',textAlign:'left',fontFamily:sans}}>
-        <span style={{flex:1,fontSize:FS.sm,fontWeight:600,color:INK}}>{s.name}</span>
-        <span style={{fontSize:FS.xxs,color:MUTED}}>{s.tier}</span>
-      </button>)}
-    </div>
-    {selected&&<div style={{padding:'8px 10px',background:swatch['#E8EEFF'],borderRadius:5,border:'1px solid #c0c8e8',display:'flex',flexDirection:'column',gap:8}}>
-      <div style={{display:'flex',alignItems:'center',gap:8}}>
-        <span style={{fontSize:FS.sm,flex:1,color:swatch.info,fontWeight:600}}>Link: {selected.name}</span>
-      </div>
-      <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-        <span style={{fontSize:FS.xs,color:SECOND}}>Relationship:</span>
-        <select value={relType} onChange={e=>setRelType(e.target.value)} style={{fontSize:FS.xs,padding:'2px 6px',borderRadius:4,border:`1px solid ${BORDER}`,background:CARD,color:INK,fontFamily:sans,cursor:'pointer'}}>
-          {RELATIONSHIP_SELECTIONS.map(option => (
-            <option key={option.value} value={option.value}>{option.label}</option>
-          ))}
-        </select>
-      </div>
-      <div style={{display:'flex',gap:8}}>
-        <button onClick={()=>onLink(selected,relType)} style={{padding:'4px 12px',borderRadius:4,background:swatch.info,color:swatch.white,border:'none',cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>Confirm</button>
-        <button onClick={()=>setSelected(null)} style={{padding:'4px 10px',borderRadius:4,background:CARD,color:SECOND,border:`1px solid ${BORDER}`,cursor:'pointer',fontSize:FS.xs,fontFamily:sans}}>Cancel</button>
-      </div>
-    </div>}
-  </div>;
 }
 
 // ── Save migration ─────────────────────────────────────────────────────────
@@ -325,6 +200,11 @@ export default function SettlementDetail({
   const aiDailyLife  = useStore(s => s.aiDailyLife);
   const narrated = !!(aiSettlement || aiDailyLife);
 
+  // Campaign-clock identity lock: NPC + faction names freeze once the settlement
+  // is canonized. The store hydrates `phase` from the opened save, so the live
+  // store value tracks this detail view. Renames are a draft-only affordance.
+  const isCanonLocked = useStore(s => s.phase) === 'canon';
+
   // Tier 5.4 — premium-gated manual editing. The edit toggle lives on
   // the store so per-tab EditableText components can read it without
   // prop threading. Non-premium users see a greyed-out button that
@@ -380,6 +260,8 @@ export default function SettlementDetail({
 
   // Wrapper: call parent applyRename then clear local edit state
   const handleApplyRename = (type, id, oldName, newName) => {
+    // Names freeze at canonization — guard even though the affordance is hidden.
+    if (isCanonLocked && (type === 'npc' || type === 'faction')) return;
     applyRename(type, id, oldName, newName);
     setEditingName(null);
     setEditDraft('');
@@ -451,9 +333,9 @@ export default function SettlementDetail({
       <style>{'@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}'}</style>
       <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16,padding:'12px 14px',background:swatch['#F5EDE0'],border:`1px solid ${BORDER}`,borderRadius:8}}>
         <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-          <button onClick={()=>{setDetail(null);setLinking(false);}} style={{display:'flex',alignItems:'center',gap:5,background:'rgba(255,251,245,0.96)',border:`1px solid ${BORDER}`,borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:FS.sm,fontWeight:700,color:SECOND,fontFamily:sans}}>
-            <ChevronLeft size={13}/> Back to list
-          </button>
+          <Button variant="secondary" size="sm" icon={<ChevronLeft size={13}/>} onClick={()=>{setDetail(null);setLinking(false);}}>
+            Back to list
+          </Button>
           <span style={{fontFamily:serif_,fontSize:FS.lg,fontWeight:600,color:INK}}>{detail.name}</span>
           <PhaseBadge />
           <span style={{flex:1}} />
@@ -466,13 +348,15 @@ export default function SettlementDetail({
               : 'This save has no narrative layer. The raw simulator output is shown.'}
           />
           {editMode && narrated && (
-            <button
+            <Button
+              variant="ai"
+              size="sm"
+              icon={<RotateCcw size={12}/>}
               onClick={handleRevertToRaw}
               title="Clear the narrative refinement and daily-life prose on this save, returning it to the raw simulator output. Chronicle history is preserved."
-              style={{display:'flex',alignItems:'center',gap:5,background:CARD,color:swatch.ai,border:'1px solid rgba(160,100,220,0.45)',borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}
             >
-              <RotateCcw size={12}/> Revert to Raw
-            </button>
+              Revert to Raw
+            </Button>
           )}
 
           {/* Tier 5.4 — Edited badge surfaces when ANY field on this
@@ -497,7 +381,10 @@ export default function SettlementDetail({
           {/* Tier 5.4 — Edit-mode toggle. Premium-gated; non-premium
               users see a greyed-out variant that opens the pricing
               modal so they understand it's a premium feature. */}
-          <button
+          <Button
+            variant={!canEdit ? 'secondary' : 'ai'}
+            size="sm"
+            icon={!canEdit ? <Lock size={12}/> : <Edit3 size={12}/>}
             onClick={() => {
               if (canEdit) { toggleEditMode(); }
               else if (setPurchaseModalOpen) { setPurchaseModalOpen(true); }
@@ -507,51 +394,32 @@ export default function SettlementDetail({
                   ? 'Stop editing. Fields return to read-only display.'
                   : 'Edit dossier prose in place. Edits are preserved across rerolls and respected by the AI overlay.')
               : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
-            style={{
-              display:'flex',alignItems:'center',gap:5,
-              background: !canEdit ? '#e8e0d2' : (editMode ? '#6a2a9a' : CARD),
-              color: !canEdit ? MUTED : (editMode ? '#fff' : '#6a2a9a'),
-              border: `1px solid ${!canEdit ? BORDER : 'rgba(160,100,220,0.45)'}`,
-              borderRadius:5, padding:'5px 10px',
-              cursor:'pointer',
-              fontSize:FS.xs, fontWeight:700, fontFamily:sans,
-              opacity: !canEdit ? 0.85 : 1,
-            }}
           >
             {!canEdit
-              ? <><Lock size={12}/> Edit (Premium)</>
-              : (editMode ? <><Edit3 size={12}/> Stop Editing</> : <><Edit3 size={12}/> Edit Dossier</>)}
-          </button>
-          <button
-            disabled={exporting}
+              ? 'Edit (Premium)'
+              : (editMode ? 'Stop Editing' : 'Edit Dossier')}
+          </Button>
+          <Button
+            variant="danger"
+            size="sm"
+            busy={exporting}
+            icon={<FileText size={12}/>}
             onClick={() => setExportSheetOpen(true)}
             title="Choose Draft Brief / Canon Dossier / Timeline Packet."
-            style={{
-              display:'flex',alignItems:'center',gap:5,
-              background: exporting ? '#5a1414' : '#7a1a1a',
-              color:swatch.white,border:'none',borderRadius:5,padding:'5px 12px',
-              cursor: exporting ? 'wait' : 'pointer',
-              fontSize:FS.sm,fontWeight:700,fontFamily:sans,
-              opacity: exporting ? 0.85 : 1,
-            }}
           >
-            {exporting
-              ? <><Loader2 size={12} style={{animation:'spin 1s linear infinite'}}/> Building PDF…</>
-              : <><FileText size={12}/> Export Dossier</>}
-          </button>
+            {exporting ? 'Building PDF…' : 'Export Dossier'}
+          </Button>
           {saveId && (
-            <button
+            <Button
+              variant="info"
+              size="sm"
+              icon={<Share2 size={13}/>}
+              aria-pressed={shareOpen}
               onClick={() => setShareOpen(v => !v)}
               title="Publish this dossier to the public gallery, or manage its listing."
-              style={{
-                display:'flex',alignItems:'center',gap:5,
-                background: shareOpen ? '#1f4a6a' : swatch.info,
-                color:swatch.white,border:'none',borderRadius:5,padding:'5px 12px',
-                cursor:'pointer',fontSize:FS.sm,fontWeight:700,fontFamily:sans,
-              }}
             >
-              <Share2 size={13}/> {shareOpen ? 'Close Gallery' : (liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery')}
-            </button>
+              {shareOpen ? 'Close Gallery' : (liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery')}
+            </Button>
           )}
         </div>
       </div>
@@ -589,9 +457,9 @@ export default function SettlementDetail({
           clean dossier. */}
       {editMode && (<>
       <div style={{display:'flex',gap:8,marginBottom:12,alignItems:'center',flexWrap:'wrap'}}>
-        <button onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}} style={{padding:'7px 14px',background:swatch.info,color:swatch.white,border:'none',borderRadius:5,cursor:'pointer',fontFamily:sans,fontSize:FS.xs,fontWeight:700}}>
+        <Button variant="info" size="sm" onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}}>
           ↩ Apply Saved Configuration &amp; Regenerate
-        </button>
+        </Button>
         <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',borderRadius:4,border:`1px solid ${BORDER}`}}>
           Restores settings &amp; runs a fresh generation. The new settlement will differ from the saved one.
         </span>
@@ -629,6 +497,7 @@ export default function SettlementDetail({
       />
       <CoherencePanel />
       <EventComposer />
+      <PendingIntentions />
       <Timeline />
       <RegionalImpactInbox
         saveId={detail?.saveData?.id || detail?.id}
@@ -667,7 +536,7 @@ export default function SettlementDetail({
           card here, under Edit Dossier. The toggle reveals the linking picker;
           the network list below shows existing links. */}
       <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden', marginBottom:14 }}>
-        <button onClick={()=>setLinking(v=>!v)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:linking?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
+        <button type="button" aria-pressed={linking} onClick={()=>setLinking(v=>!v)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:linking?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
           <Link2 size={14} color="#2a3a7a"/>
           <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
           <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
@@ -686,15 +555,13 @@ export default function SettlementDetail({
             <div style={{width:6,height:6,borderRadius:'50%',background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
             <span style={{fontSize:FS.xxs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 6px',borderRadius:3}}>{rel}</span>
-            <button onClick={()=>removeNeighbour(i)} title="Remove link" style={{background:'none',border:'none',cursor:'pointer',color:MUTED,padding:2,display:'flex'}}>
-              <X size={13}/>
-            </button>
+            <IconButton Icon={X} label="Remove link" tone="ghost" size="md" onClick={()=>removeNeighbour(i)} />
           </div>;
         })}
       </div>}
 
       {/* ── Network Effects (cascading modifiers) ─────────────────────────── */}
-      {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} />}
+      {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} relColors={REL_COLORS} />}
 
       {/* The Settlement Editor (catalog roster + Tune priorities) now lives
           inside the Make Changes panel above, embedded below the change form.
@@ -703,114 +570,17 @@ export default function SettlementDetail({
 
       {/* ── Full settlement output ──────────────────────────────────────────── */}
       {/* ── Edit Names ─────────────────────────────────────────────────────── */}
-      {detail.settlement&&<div style={{marginBottom:14,border:`1px solid ${BORDER}`,borderRadius:8,overflow:'hidden'}}>
-        <button onClick={()=>{setEditNamesOpen(v=>!v);setEditingName(null);setEditDraft('');}}
-          style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'10px 14px',
-            background:editNamesOpen?'#f5ede0':CARD,border:'none',cursor:'pointer',textAlign:'left'}}>
-          <span style={{fontFamily:serif_,fontSize:FS.md,fontWeight:600,color:INK,flex:1}}>
-            Edit Names
-          </span>
-          <span style={{fontSize:FS.xxs,color:MUTED}}>NPC &amp; faction names only</span>
-          <span style={{fontSize:FS.xs,color:MUTED,marginLeft:4}}>{editNamesOpen?'▲':'▼'}</span>
-        </button>
-        {editNamesOpen&&<div style={{padding:'10px 14px',background:CARD,borderTop:`1px solid ${BORDER}`}}>
-
-          {/* NPCs */}
-          {(detail.settlement.npcs||[]).length>0&&<>
-            <div style={{fontSize:FS.xxs,fontWeight:800,color:MUTED,textTransform:'uppercase',
-              letterSpacing:'0.06em',marginBottom:6}}>NPCs</div>
-            <div style={{display:'flex',flexDirection:'column',gap:4,marginBottom:12}}>
-              {(detail.settlement.npcs||[]).map(npc=>{
-                const isEditing = editingName?.type==='npc' && editingName?.id===npc.id;
-                return <div key={npc.id} style={{display:'flex',alignItems:'center',gap:8}}>
-                  <span style={{fontSize:FS.xs,color:MUTED,minWidth:130,flexShrink:0}}>
-                    {npc.role}
-                  </span>
-                  {isEditing
-                    ? <><input
-                        autoFocus
-                        value={editDraft}
-                        onChange={e=>setEditDraft(e.target.value)}
-                        onKeyDown={e=>{
-                          if(e.key==='Enter') handleApplyRename('npc',npc.id,npc.name,editDraft);
-                          if(e.key==='Escape'){setEditingName(null);setEditDraft('');}
-                        }}
-                        style={{flex:1,fontSize:FS.sm,padding:'3px 7px',border:`1px solid ${GOLD}`,
-                          borderRadius:4,fontFamily:sans,color:INK}}
-                      />
-                      <button onClick={()=>handleApplyRename('npc',npc.id,npc.name,editDraft)}
-                        style={{padding:'3px 10px',background:GOLD,color:swatch.white,border:'none',
-                          borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>
-                        Save
-                      </button>
-                      <button onClick={()=>{setEditingName(null);setEditDraft('');}}
-                        style={{padding:'3px 8px',background:CARD,color:MUTED,
-                          border:`1px solid ${BORDER}`,borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontFamily:sans}}>
-                        Cancel
-                      </button></>
-                    : <><span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{npc.name}</span>
-                      <button onClick={()=>{setEditingName({type:'npc',id:npc.id,oldName:npc.name});setEditDraft(npc.name);}}
-                        style={{padding:'2px 9px',background:swatch.infoBg,color:swatch.info,
-                          border:'1px solid #c0c8e8',borderRadius:4,cursor:'pointer',fontSize:FS.xxs,fontWeight:700,fontFamily:sans}}>
-                        Rename
-                      </button></>}
-                </div>;
-              })}
-            </div>
-          </>}
-
-          {/* Factions */}
-          {(detail.settlement.factions||[]).length>0&&<>
-            <div style={{fontSize:FS.xxs,fontWeight:800,color:MUTED,textTransform:'uppercase',
-              letterSpacing:'0.06em',marginBottom:6}}>Factions</div>
-            <div style={{display:'flex',flexDirection:'column',gap:4}}>
-              {(detail.settlement.factions||[]).map((fac,fi)=>{
-                const isEditing = editingName?.type==='faction' && editingName?.id===fac.name;
-                return <div key={fi} style={{display:'flex',alignItems:'center',gap:8}}>
-                  <span style={{fontSize:FS.xs,color:MUTED,minWidth:130,flexShrink:0}}>
-                    {fac.dominantCategory&&fac.dominantCategory!=='other'
-                      ? fac.dominantCategory
-                      : fac.powerFactionName||fac.powerFactionCat||'mixed'}
-                  </span>
-                  {isEditing
-                    ? <><input
-                        autoFocus
-                        value={editDraft}
-                        onChange={e=>setEditDraft(e.target.value)}
-                        onKeyDown={e=>{
-                          if(e.key==='Enter') handleApplyRename('faction',fac.name,fac.name,editDraft);
-                          if(e.key==='Escape'){setEditingName(null);setEditDraft('');}
-                        }}
-                        style={{flex:1,fontSize:FS.sm,padding:'3px 7px',border:`1px solid ${GOLD}`,
-                          borderRadius:4,fontFamily:sans,color:INK}}
-                      />
-                      <button onClick={()=>handleApplyRename('faction',fac.name,fac.name,editDraft)}
-                        style={{padding:'3px 10px',background:GOLD,color:swatch.white,border:'none',
-                          borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>
-                        Save
-                      </button>
-                      <button onClick={()=>{setEditingName(null);setEditDraft('');}}
-                        style={{padding:'3px 8px',background:CARD,color:MUTED,
-                          border:`1px solid ${BORDER}`,borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontFamily:sans}}>
-                        Cancel
-                      </button></>
-                    : <><span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{fac.name}</span>
-                      <button onClick={()=>{setEditingName({type:'faction',id:fac.name,oldName:fac.name});setEditDraft(fac.name);}}
-                        style={{padding:'2px 9px',background:swatch.infoBg,color:swatch.info,
-                          border:'1px solid #c0c8e8',borderRadius:4,cursor:'pointer',fontSize:FS.xxs,fontWeight:700,fontFamily:sans}}>
-                        Rename
-                      </button></>}
-                </div>;
-              })}
-            </div>
-          </>}
-
-          <p style={{fontSize:FS.xxs,color:MUTED,margin:'10px 0 0',fontStyle:'italic',lineHeight:1.5}}>
-            Renaming updates this settlement's JSON export and any linked neighbour references.
-            Press Enter or click Save to confirm. Escape to cancel.
-          </p>
-        </div>}
-      </div>}
+      <SettlementDetailEditNames
+        settlement={detail.settlement}
+        editNamesOpen={editNamesOpen}
+        setEditNamesOpen={setEditNamesOpen}
+        editingName={editingName}
+        setEditingName={setEditingName}
+        editDraft={editDraft}
+        setEditDraft={setEditDraft}
+        isCanonLocked={isCanonLocked}
+        handleApplyRename={handleApplyRename}
+      />
 
       {/* ── Chronicle: collapsible history log, only surfaced when a save has entries ── */}
       {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (

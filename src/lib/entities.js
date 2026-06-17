@@ -134,7 +134,9 @@ export function idOf(entity, prefix = 'entity') {
 // catalog gains richer declared tags, the keyword fallback simply stops firing.
 //
 // Each rule maps a name-keyword pattern to the canonical TAG.* values it implies.
-const INSTITUTION_KEYWORD_TAGS = Object.freeze([
+// Exported so the tag-vocabulary coverage pin (dataVocabularyCoverage.test.js)
+// can compute tag reachability from the real rules, not a source scrape.
+export const INSTITUTION_KEYWORD_TAGS = Object.freeze([
   { re: /watch|guard|garrison|constab|militia|sheriff|patrol|sentinel/i, tags: [TAG.SECURITY, TAG.LAW, TAG.PUBLIC_ORDER] },
   { re: /barracks|fort|keep|citadel|rampart|armory|armoury/i,           tags: [TAG.MILITARY, TAG.DEFENSE] },
   { re: /temple|church|cathedral|chapel|shrine|monaster|parish|abbey|sanctuar/i, tags: [TAG.RELIGIOUS, TAG.WELFARE] },

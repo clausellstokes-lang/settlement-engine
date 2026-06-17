@@ -192,6 +192,7 @@ export function collapseUpgradeChains(institutions) {
 
 registerStep('assembleInstitutions', {
   deps: ['resolveConfig', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
+  reads: ['categoryToggles', 'effectiveConfig', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['institutions', 'catalogForTier'],
   phase: 'institutions',
 }, (ctx, rng) => {

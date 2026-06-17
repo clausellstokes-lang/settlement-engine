@@ -20,11 +20,35 @@
  *     verbs ("Generate", "Reroll", "Save"). Encourages routing through
  *     copy/index.js so the verb-unification (C-1) stays honest.
  *
- * Used by eslint.config.js as a local plugin. Keep this file
- * dependency-free — it imports nothing.
+ * no-forked-color-const (A+ P1.3) — a module-scope `const X = '#hex'` that
+ *   re-declares a value the token system owns. no-raw-color only inspects JSX
+ *   `style` props, so these forks (≈43 files) bypassed it entirely. ERROR for any
+ *   file NOT in the checked-in baseline (scripts/.forked-color-baseline.json) and
+ *   not a token-definition file — so a NEW fork in a clean file fails the gate,
+ *   while the grandfathered files burn down (the baseline pin forbids growth).
+ *
+ * Used by eslint.config.js as a local plugin. Only node builtins imported (to read
+ * the baseline); no third-party deps.
  */
 
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, relative } from 'node:path';
+
 const RAW_HEX_PATTERN = /^#[0-9a-fA-F]{3,8}$/;
+
+// Repo root = parent of scripts/. The forked-color baseline grandfathers files
+// that currently re-declare token hexes; new files must import from theme.js.
+const _REPO_ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
+let _forkedColorBaseline = new Set();
+try {
+  _forkedColorBaseline = new Set(
+    JSON.parse(readFileSync(join(_REPO_ROOT, 'scripts/.forked-color-baseline.json'), 'utf8')),
+  );
+} catch { /* no baseline file → empty set; every fork errors, surfacing the gap */ }
+// Token DEFINITION sources legitimately hold raw hexes.
+const _isTokenSource = (rel) => /(?:design\/tokens|components\/theme)\b|src\/design\//.test(rel);
+const _relPath = (abs) => relative(_REPO_ROOT, abs || '').replace(/\\/g, '/');
 const COLOR_PROPS = new Set(['color', 'background', 'backgroundColor', 'borderColor', 'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor', 'fill', 'stroke']);
 
 // Verbs the critique unified. Strings that match these inside button
@@ -120,6 +144,31 @@ export default {
       },
     },
 
+    'no-forked-color-const': {
+      meta: {
+        type: 'suggestion',
+        docs: { description: 'Disallow re-declaring a token hex as a local const. Import GOLD/INK/BODY/… from theme.js.' },
+        schema: [],
+      },
+      create(context) {
+        const rel = _relPath(context.filename);
+        // Grandfathered (baseline) files and the token sources themselves are exempt.
+        if (_forkedColorBaseline.has(rel) || _isTokenSource(rel)) return {};
+        return {
+          VariableDeclarator(node) {
+            const init = node.init;
+            if (init && init.type === 'Literal' && typeof init.value === 'string'
+                && RAW_HEX_PATTERN.test(init.value.trim())) {
+              context.report({
+                node: init,
+                message: `Forked design token "${init.value}" — import the token from theme.js/tokens.js instead of re-declaring the hex.`,
+              });
+            }
+          },
+        };
+      },
+    },
+
     'no-raw-button-copy': {
       meta: {
         type: 'suggestion',
@@ -142,6 +191,41 @@ export default {
                 });
               }
             }
+          },
+        };
+      },
+    },
+
+    // no-raw-color-literal (A+ design-a11y.1) — broadens color governance beyond
+    // JSX style props (no-raw-color) and beyond `const X='#hex'` consts
+    // (no-forked-color-const) to ANY pure-hex string literal anywhere (object
+    // values, JSX attrs, config maps, …). The token DEFINITION files are exempt,
+    // and so is the sanctioned exact-value escape hatch `swatch['#HEX']`. There is
+    // a large grandfathered population of legitimate local design data (per-tab
+    // accent maps, the PDF theme, palettes), so this rule is NOT wired into the
+    // gate at error/warn — the live ratchet is the occurrence BUDGET in
+    // tests/lint/rawColorLiteralBudget.test.js (count can only shrink). Flip this
+    // rule on once that budget reaches zero.
+    'no-raw-color-literal': {
+      meta: {
+        type: 'suggestion',
+        docs: { description: 'Disallow a pure raw-hex color string literal outside the token sources. Use a token or swatch[…].' },
+        schema: [],
+      },
+      create(context) {
+        const rel = _relPath(context.filename);
+        if (_isTokenSource(rel)) return {}; // definition files legitimately hold raw hexes
+        return {
+          Literal(node) {
+            if (typeof node.value !== 'string' || !RAW_HEX_PATTERN.test(node.value.trim())) return;
+            // Exempt the sanctioned exact-value escape hatch: swatch['#HEX'].
+            const p = node.parent;
+            if (p && p.type === 'MemberExpression' && p.computed && p.property === node
+                && p.object && p.object.type === 'Identifier' && p.object.name === 'swatch') return;
+            context.report({
+              node,
+              message: `Raw color literal "${node.value}" — import a token from tokens.js/theme.js, or route through swatch['${node.value.toUpperCase()}'].`,
+            });
           },
         };
       },

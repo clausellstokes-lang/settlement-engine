@@ -25,11 +25,13 @@ import { useEffect, useState } from 'react';
 import { Sparkles, X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
-import { GOLD, INK, BORDER, sans, serif_, SP, R, FS, swatch, GOLD_DEEP } from './theme.js';
+import { GOLD, INK, sans, serif_, SP, R, FS, swatch, GOLD_DEEP } from './theme.js';
+import Button from './primitives/Button.jsx';
+import IconButton from './primitives/IconButton.jsx';
 
 const DISMISS_KEY = 'sf.postGenCoachDismissedAt';
-const MUTED = '#6b5340';
-const BODY  = '#4A3B22';
+const MUTED = swatch['#6B5340'];
+const BODY  = swatch['#4A3B22'];
 
 function readDismissed() {
   if (typeof window === 'undefined') return false;
@@ -128,18 +130,13 @@ export default function PostGenCoach() {
         }}>
           {t('onboarding.coach.welcomeTitle')}
         </span>
-        <button
-          type="button"
+        <IconButton
+          Icon={X}
+          label="Dismiss coach"
           onClick={close}
-          aria-label="Dismiss coach"
-          style={{
-            background: 'transparent', border: 'none',
-            color: MUTED, cursor: 'pointer',
-            padding: 2, lineHeight: 0,
-          }}
-        >
-          <X size={14} />
-        </button>
+          tone="ghost"
+          size="md"
+        />
       </div>
 
       {/* Body */}
@@ -184,45 +181,32 @@ export default function PostGenCoach() {
           marginTop: SP.md,
         }}>
           {step > 0 && (
-            <button
-              type="button"
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={back}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 4,
-                padding: '6px 10px', borderRadius: R.md,
-                background: 'transparent', color: MUTED,
-                border: `1px solid ${BORDER}`,
-                fontFamily: sans, fontSize: FS.xs, cursor: 'pointer',
-              }}
+              icon={<ChevronLeft size={12} />}
             >
-              <ChevronLeft size={12} /> Back
-            </button>
+              Back
+            </Button>
           )}
           <span style={{ flex: 1 }} />
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={close}
-            style={{
-              background: 'transparent', border: 'none',
-              color: MUTED, fontSize: FS.xs, fontFamily: sans,
-              cursor: 'pointer', padding: '6px 8px',
-            }}
           >
             {t('onboarding.coach.dismiss')}
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
             onClick={next}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 4,
-              padding: '6px 12px', borderRadius: R.md,
-              background: GOLD, color: swatch.white, border: 'none',
-              fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
-              cursor: 'pointer',
-            }}
+            icon={isLast ? <Check size={12} /> : undefined}
+            trailingIcon={isLast ? undefined : <ChevronRight size={12} />}
           >
-            {isLast ? (<><Check size={12} /> Done</>) : (<>Next <ChevronRight size={12} /></>)}
-          </button>
+            {isLast ? 'Done' : 'Next'}
+          </Button>
         </div>
       </div>
     </div>

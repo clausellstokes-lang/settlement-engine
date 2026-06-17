@@ -29,6 +29,7 @@ import {
 import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier } from './galleryUtils.js';
 import { useStore } from '../../store/index.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
+import Button from '../primitives/Button.jsx';
 import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
 import GalleryImage from './GalleryImage.jsx';
@@ -89,9 +90,9 @@ export default function GalleryDetail({
   if (error || !dossier) {
     return (
       <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.xl, display: 'grid', gap: SP.md }}>
-        <button type="button" onClick={onBack} style={{ justifySelf: 'start', border: 'none', background: 'transparent', color: GOLD, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, cursor: 'pointer' }}>
-          <ChevronLeft size={14} /> {t('gallery.backToList')}
-        </button>
+        <Button variant="ghost" onClick={onBack} icon={<ChevronLeft size={14} />} style={{ justifySelf: 'start' }}>
+          {t('gallery.backToList')}
+        </Button>
         <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, color: BODY, padding: SP.xl, textAlign: 'center' }}>
           {error || 'This settlement is not available.'}
         </div>
@@ -109,9 +110,9 @@ export default function GalleryDetail({
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, display: 'grid', gap: SP.lg }}>
       <style>{GALLERY_RESPONSIVE_CSS}</style>
-      <button type="button" onClick={onBack} style={{ justifySelf: 'start', display: 'inline-flex', alignItems: 'center', gap: 5, border: 'none', background: 'transparent', color: GOLD, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, cursor: 'pointer' }}>
-        <ChevronLeft size={14} /> {t('gallery.backToList')}
-      </button>
+      <Button variant="ghost" onClick={onBack} icon={<ChevronLeft size={14} />} style={{ justifySelf: 'start' }}>
+        {t('gallery.backToList')}
+      </Button>
       {actionError && <StatusMessage tone="danger">{actionError}</StatusMessage>}
       {actionNotice && <StatusMessage tone="success">{actionNotice}</StatusMessage>}
       {ownedSave && (
@@ -183,14 +184,16 @@ export default function GalleryDetail({
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
                 <MessageCircle size={13} /> {formatNumber(dossier.commentCount)} comments
               </span>
-              <button
-                type="button"
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={onShare}
                 title="Share this dossier"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', color: shared ? GREEN : MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, padding: 0 }}
+                icon={shared ? <Check size={13} /> : <Share2 size={13} />}
+                style={shared ? { color: GREEN } : undefined}
               >
-                {shared ? <Check size={13} /> : <Share2 size={13} />} {shared ? 'Link copied' : 'Share'}
-              </button>
+                {shared ? 'Link copied' : 'Share'}
+              </Button>
               <GalleryReportDialog
                 dossier={dossier}
                 auth={auth}

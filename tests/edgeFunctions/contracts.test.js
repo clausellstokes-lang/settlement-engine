@@ -106,8 +106,13 @@ describe('Tier 3.3 — stripe-webhook signature verification', () => {
   });
 
   it('verifies signature BEFORE creating the admin client', () => {
+    // NOTE: this static order-check is now superseded behaviorally by the EXECUTED
+    // boundary test in supabase/functions/stripe-webhook/index.test.ts (forged
+    // requests get 400 with zero DB writes). Kept until the deno-tests CI job is
+    // confirmed green (tests-tooling.6 prunes it then). The admin-client line is
+    // `const supabase = (deps.adminClient ?? adminClient)()` post-edges.2 DI seam.
     const constructIdx = src.search(/constructEvent(Async)?\s*\(/);
-    const adminIdx = src.search(/const supabase\s*=\s*adminClient\(/);
+    const adminIdx = src.search(/const supabase\s*=[^;]*\badminClient\b/);
     expect(constructIdx).toBeGreaterThan(0);
     expect(adminIdx).toBeGreaterThan(0);
     expect(constructIdx).toBeLessThan(adminIdx);
@@ -159,7 +164,14 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
 
   it('handles single_dossier without requiring a user account', () => {
     expect(src).toMatch(/product\s*===\s*['"]single_dossier['"]/);
-    expect(src).toMatch(/single_dossier[\s\S]{0,500}(no account|no supabase_user_id|customer_email)/i);
+    expect(src).toMatch(/single_dossier[\s\S]{0,500}(no account|no supabase_user_id)/i);
+  });
+
+  it('never logs customer PII (A+ P0.2 — no customer_email in any console.* call)', () => {
+    // The session id reconciles to the email inside Stripe; the email must not
+    // land in the function log sink. Pins the redaction so it cannot regress.
+    expect(src).not.toMatch(/console\.[a-z]+\([^)]*customer_email/);
+    expect(src).not.toMatch(/email=\$\{[^}]*customer_email/);
   });
 
   it('handles bare credit pack purchase (credits > 0)', () => {
@@ -395,6 +407,18 @@ describe('Tier 3.3 — generate-narrative AI invariants', () => {
     expect(src).toMatch(/relationshipMemoryContext/);
     expect(src).toMatch(/sanitizeRelationshipMemoryContext\(relationshipMemoryContext\)/);
     expect(src).toMatch(/REGIONAL RELATIONSHIP MEMORY FOR DAILY LIFE/);
+  });
+
+  // edges.2 — a hung provider socket must not block the edge invocation after the
+  // user was already debited. Every provider fetch carries an AbortController with
+  // a wall-clock budget; removing it must fail CI.
+  it('aborts a hung provider fetch with an AbortController + wall-clock timeout', () => {
+    expect(src).toMatch(/AbortController/);
+    // The retry helper must thread a signal into fetch (per-attempt budget).
+    expect(src).toMatch(/fetch\(url,\s*\{\s*\.\.\.init,\s*signal/);
+    // A per-attempt cap and an overall deadline below the edge platform limit.
+    expect(src).toMatch(/PER_ATTEMPT_TIMEOUT_MS/);
+    expect(src).toMatch(/TOTAL_BUDGET_MS/);
   });
 });
 

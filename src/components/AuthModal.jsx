@@ -20,6 +20,7 @@ import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_HDR, serif_, SP,
 import { getTierDisplayName } from '../config/pricing.js';
 import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
+import IconButton from './primitives/IconButton.jsx';
 import AuthPanel from './auth/AuthPanel.jsx';
 import { Button, RoleBadge } from './auth/authUI.jsx';
 
@@ -43,6 +44,10 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
   return (
     <div
       onClick={onClose}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
+      role="button"
+      tabIndex={0}
+      aria-label={t('common.close')}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(0,0,0,0.6)',
@@ -50,6 +55,8 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
         backdropFilter: 'blur(4px)',
       }}
     >
+      {/* Propagation guard only: stops a click inside the card from bubbling to the backdrop's close handler — not a real interaction, so no keyboard handler is warranted. */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <div
         onClick={e => e.stopPropagation()}
         role="dialog"
@@ -72,9 +79,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
           <h2 id="auth-modal-title" style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
             {showAccount ? 'Account' : 'Welcome'}
           </h2>
-          <button onClick={onClose} aria-label={t('common.close')} style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer' }}>
-            <X size={20} />
-          </button>
+          <IconButton Icon={X} label={t('common.close')} onClick={onClose} tone="ghost" size="lg" />
         </div>
 
         <div style={{ padding: `${SP.xxl}px ${SP.xl}px` }}>

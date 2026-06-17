@@ -22,6 +22,7 @@ import { applyPopulationOutcomeToSettlement } from './populationDynamics.js';
 import { applyResourceOutcomeToSettlement, applyTierOutcomeToSettlement } from './tierResourceDynamics.js';
 import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
+import { wallClockNow } from '../clock.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { rolesForCanonicalEdge } from '../relationships/canonicalRelationship.js';
 
@@ -749,7 +750,7 @@ export function applyWorldPulseOutcomes({
  * @param {string} [args.proposalId]
  * @param {string} [args.now]
  */
-export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now = new Date().toISOString() } = {}) {
+export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now = wallClockNow() } = {}) {
   const proposal = (campaign?.worldState?.proposals || []).find(item => item.id === proposalId);
   if (!proposal || proposal.status !== 'pending') return null;
   const outcome = { ...(proposal.outcome || {}), applyMode: 'auto' };

@@ -30,6 +30,7 @@ import { t, tx } from '../copy/index.js';
 import { useCopy } from '../hooks/useCopy.js';
 import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, BODY, swatch, PAGE_MAX } from './theme.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
+import Button from './primitives/Button.jsx';
 
 // Tier-icon mapping. Kept here (not in pricing config) because icons
 // are a UI concern — the config stays headless.
@@ -141,26 +142,16 @@ function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderS
         {features.map((f, i) => <FeatureRow key={i}>{f}</FeatureRow>)}
       </ul>
 
-      <button
+      <Button
         type="button"
         onClick={onCta}
         disabled={loading || (!isConfigured && tier.priceCents > 0)}
-        style={{
-          width: '100%', padding: `${SP.md}px 0`,
-          background: emphasised
-            ? `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`
-            : 'transparent',
-          color: emphasised ? '#fff' : GOLD,
-          border: emphasised ? 'none' : `1.5px solid ${GOLD}`,
-          borderRadius: R.lg,
-          fontSize: FS.md, fontWeight: 700, fontFamily: sans,
-          cursor: loading ? 'wait' : 'pointer',
-          opacity: loading ? 0.6 : 1,
-          letterSpacing: '0.02em',
-        }}
+        variant={emphasised ? 'primary' : 'gold'}
+        size="lg"
+        fullWidth
       >
         {loading ? 'Redirecting…' : ctaLabel}
-      </button>
+      </Button>
       {ctaSub && (
         <p style={{
           margin: 0, fontSize: FS.xxs, color: MUTED,
@@ -463,21 +454,16 @@ export default function PricingPage({ onNavigate }) {
               one-time
             </span>
           </div>
-          <button
+          <Button
             type="button"
             onClick={() => buy(SINGLE_DOSSIER.key)}
             disabled={loading === SINGLE_DOSSIER.key || !isConfigured}
-            style={{
-              marginTop: SP.lg,
-              padding: `${SP.md}px ${SP.xl}px`,
-              background: GOLD, color: INK,
-              border: 'none', borderRadius: R.lg,
-              fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-              cursor: 'pointer', opacity: loading === SINGLE_DOSSIER.key ? 0.6 : 1,
-            }}
+            variant="primary"
+            size="lg"
+            style={{ marginTop: SP.lg }}
           >
             {loading === SINGLE_DOSSIER.key ? 'Redirecting…' : t('pricing.singleDossier.cta')}
-          </button>
+          </Button>
         </section>
       )}
     </div>

@@ -24,8 +24,9 @@ import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { GOLD, INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
-const VIOLET = '#7B4FCF';
+const VIOLET = swatch['#7B4FCF'];
 
 // Reasons that want the violet (Cartographer / Founder upgrade) accent
 // rather than the gold (tier-unlock / signup) accent. Anything not in
@@ -126,36 +127,20 @@ export default function PricingMomentCard() {
         {body}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <button
+        <Button
+          variant="primary"
           onClick={handleClick}
-          style={{
-            padding: `${SP.sm}px ${SP.md}px`,
-            background: accent,
-            color: swatch.white,
-            border: 'none',
-            borderRadius: R.sm,
-            fontSize: FS.sm,
-            fontWeight: 700,
-            fontFamily: sans,
-            cursor: 'pointer',
-          }}
+          style={{ background: accent, color: swatch.white, border: `1px solid ${accent}` }}
         >
           {isViolet ? 'See Cartographer' : 'Sign in to unlock'}
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={handleDismiss}
-          style={{
-            padding: `${SP.sm}px ${SP.sm}px`,
-            background: 'transparent',
-            color: MUTED,
-            border: 'none',
-            fontSize: FS.xs,
-            fontFamily: sans,
-            cursor: 'pointer',
-          }}
         >
           Not now
-        </button>
+        </Button>
         <span style={{ flex: 1 }} />
         <span style={{
           fontSize: FS.xxs, color: MUTED,

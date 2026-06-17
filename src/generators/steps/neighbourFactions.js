@@ -23,7 +23,9 @@ function powerLabelFor(power) {
 
 registerStep('neighbourFactions', {
   deps: ['generatePower', 'resolveNeighbour'],
+  reads: ['neighbourFacBias', 'neighbourProfile'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
+  mutates: ['powerStructure'], // mirrors neighbour-derived factions into powerStructure.factions in place when a neighbour is bound (A+ P1.7)
   phase: 'power',
 }, (ctx, rng) => {
   const { neighbourFacBias, neighbourProfile, powerStructure } = ctx;

@@ -30,10 +30,14 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
              (economic, power, npc, faction, defense, history, resource, …).
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
-             Was the only gate-typechecked layer; the gate now covers the full tree.
-store/       Zustand slices (12) — the single client state container.
+             Was the only gate-typechecked layer; the gate now covers the full tree. <!-- @enforced-by tsconfig.full.json -->
+store/       Zustand slices (14) — the single client state container.
 components/   React UI. Inline-styled, token-driven. Large feature panels +
-             primitives/ (accessible Dialog/Button/Toast, no native dialogs) +
+             primitives/ (accessible Dialog/Button/Toast, no native dialogs;
+             raw <button> outside primitives/ is forbidden for new files —
+             @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js,
+             existing 118 files burning down; every icon-only button must carry an
+             accessible name — @enforced-by jsx-hygiene/icon-button-needs-label) +
              new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ + auth/.
 pdf/         PDF generation: sections/ + primitives/ + lib/viewModel.js.
 lib/         Services + glue: saves (Supabase+localStorage), analytics, flags,
@@ -74,7 +78,7 @@ saves when the shape changes.
 
 ## State (`store/index.js`)
 
-One Zustand store composed from 12 slices, with `immer + persist +
+One Zustand store composed from 14 slices, with `immer + persist +
 subscribeWithSelector + devtools`. **`persist.partialize` deliberately persists
 only lightweight, user-owned data (config + toggles)** — never the large
 generated settlement object. `onRehydrate` resets the wizard to the mode picker.
@@ -118,7 +122,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
     metadata keys/roles (anti-privilege-escalation).
   - `create-checkout`, `send-email` — JWT-authed.
   - `_shared/` — `aiGroundingBundle.js` is **built** from app code by
-    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift.
+    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/analyticsEventsBundle.freshness.test.js -->
 
 Secrets live in the Supabase dashboard / Vercel env, never in the repo. Client
 reads only `VITE_*` vars (see `.env.example`); the anon key is public by design

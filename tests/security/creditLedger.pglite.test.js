@@ -20,12 +20,38 @@
  * can't be exercised here. The atomic balance guard is verified by its logical
  * effect (sequential spends stop exactly at the floor); genuine race testing
  * still needs `supabase test db`.
+ *
+ * GRANTS: the EXECUTE-grant hardening (migration 033 makes refund_credits
+ * service_role-only — the audit's #1 CRITICAL: any authenticated user could
+ * refund) is DDL, not executable behavior, and single-connection pglite does
+ * not enforce role grants. So it is asserted SEPARATELY below by scanning every
+ * migration for the NET-CURRENT grant state of refund_credits — which catches a
+ * later migration silently re-granting it to `authenticated`.
  */
 
 import { describe, it, expect, beforeAll, beforeEach } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+
+/** Compute the NET-CURRENT set of roles holding EXECUTE on a public function,
+ *  by replaying every migration's grant/revoke in file order. Implicit PUBLIC
+ *  default-grants aren't tracked (Supabase revokes function EXECUTE from PUBLIC
+ *  at the platform level); this pins the EXPLICIT grants the migrations manage. */
+function netExecuteGrants(fnName) {
+  const files = readdirSync(dir).filter(f => /^\d.*\.sql$/.test(f)).sort();
+  const re = new RegExp(`(grant|revoke)\\s+execute\\s+on\\s+function\\s+public\\.${fnName}\\b[\\s\\S]*?\\b(?:to|from)\\s+(\\w+)`, 'i');
+  const roles = new Set();
+  for (const f of files) {
+    for (const stmt of readFileSync(resolve(dir, f), 'utf-8').split(';')) {
+      const m = stmt.match(re);
+      if (!m) continue;
+      if (/grant/i.test(m[1])) roles.add(m[2].toLowerCase());
+      else roles.delete(m[2].toLowerCase());
+    }
+  }
+  return roles;
+}
 
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
@@ -216,5 +242,15 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     expect(await balanceOf(UID)).toBe(7);
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);
     expect(await balanceOf(UID)).toBe(12);
+  });
+
+  // ── net-current EXECUTE grants (the audit's #1 CRITICAL) ──────────────────────
+  it('refund_credits is service_role-only across all migrations (033 hardening not reverted)', () => {
+    const roles = netExecuteGrants('refund_credits');
+    // 009 granted it to `authenticated` (the bug); 033 revoked authenticated+anon
+    // and granted service_role. The net of every migration must be service-role-only.
+    expect(roles.has('service_role')).toBe(true);
+    expect(roles.has('authenticated')).toBe(false);
+    expect(roles.has('anon')).toBe(false);
   });
 });

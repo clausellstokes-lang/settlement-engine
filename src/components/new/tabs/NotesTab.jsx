@@ -3,11 +3,12 @@ import { Save } from 'lucide-react';
 import { useStore } from '../../../store/index.js';
 import { FS, swatch } from '../../theme.js';
 import { sans, TabIntro } from '../Primitives';
+import Button from '../../primitives/Button.jsx';
 
-const BORDER = '#e0d0b0';
-const INK = '#1c1409';
-const SECOND = '#6b5340';
-const GOLD = '#a0762a';
+const BORDER = swatch['#E0D0B0'];
+const INK = swatch['#1C1409'];
+const SECOND = swatch['#6B5340'];
+const GOLD = swatch['#A0762A'];
 
 /**
  * NotesTab — owner-private prep notes for a settlement.
@@ -89,6 +90,7 @@ export default function NotesTab({ saveId, notes, section }) {
               DM Notes
             </div>
             <textarea
+              aria-label="DM Notes"
               value={dmNotes}
               onChange={e => setDmNotes(e.target.value)}
               placeholder="Private prep, table rulings, secrets, reminders."
@@ -103,6 +105,7 @@ export default function NotesTab({ saveId, notes, section }) {
               Campaign Context
             </div>
             <textarea
+              aria-label="Campaign Context"
               value={aiGuidance}
               onChange={e => setAiGuidance(e.target.value)}
               placeholder="How does this settlement fit your campaign? e.g. an orc warband hold with a militarized culture; the baron here owes the party a debt..."
@@ -115,28 +118,16 @@ export default function NotesTab({ saveId, notes, section }) {
         )}
 
         {saveId ? (
-          <button
+          <Button
             type="button"
+            variant="primary"
             onClick={save}
             disabled={saving}
-            style={{
-              justifySelf: 'start',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              border: 'none',
-              borderRadius: 6,
-              background: GOLD,
-              color: swatch.white,
-              padding: '9px 14px',
-              cursor: saving ? 'wait' : 'pointer',
-              fontWeight: 800,
-              fontSize: FS.sm,
-            }}
+            icon={<Save size={15} />}
+            style={{ justifySelf: 'start' }}
           >
-            <Save size={15} />
             {saving ? 'Saving...' : saved ? 'Saved' : 'Save notes'}
-          </button>
+          </Button>
         ) : (
           <p style={{ margin: 0, fontSize: FS.xs, color: SECOND, fontStyle: 'italic', lineHeight: 1.5 }}>
             Type freely. Save this settlement to keep your notes with it.

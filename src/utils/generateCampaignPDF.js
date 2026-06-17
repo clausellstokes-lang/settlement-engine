@@ -16,6 +16,20 @@ import { jsPDF } from 'jspdf';
 import { autoLayout } from './graphLayout.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
 import { truncateAtWord } from '../lib/text.js';
+import { track, EVENTS } from '../lib/analytics.js';
+import { captureFingerprint } from '../lib/researchCapture.js';
+
+/** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
+function durationBand(ms) {
+  const n = Number(ms);
+  if (!Number.isFinite(n) || n < 0) return 'unknown';
+  if (n < 5000) return 'lt_5s';
+  if (n < 15000) return '5_15s';
+  if (n < 60000) return '15_60s';
+  if (n < 300000) return '1_5m';
+  if (n < 1800000) return '5_30m';
+  return 'gt_30m';
+}
 
 // ── Page geometry ──────────────────────────────────────────────────────────────
 const PW = 210, PH = 297;
@@ -713,6 +727,7 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
 export function generateCampaignPDF(campaign, allSaves) {
   if (!campaign) throw new Error('generateCampaignPDF: missing campaign');
 
+  const startedAt = Date.now();
   const ids = new Set(campaign.settlementIds || []);
   const settlements = (allSaves || []).filter(s => ids.has(s.id));
 
@@ -771,4 +786,25 @@ export function generateCampaignPDF(campaign, allSaves) {
     .slice(0, 40) || 'campaign';
 
   doc.save(`campaign-${slug}.pdf`);
+
+  // Export succeeded (doc.save triggered the download). Fire-and-forget; never
+  // let an analytics fault surface as an export failure. canon_phase is omitted
+  // at campaign scope (a multi-settlement export has no single phase), and the
+  // campaign PDF has no narrative variant. captureFingerprint is per-settlement
+  // only, so it's not emitted here.
+  try {
+    track(EVENTS.PDF_EXPORT_COMPLETED, {
+      scope: 'campaign',
+      narrative_mode: false,
+      duration_band: durationBand(Date.now() - startedAt),
+    });
+    // Per-settlement 'exported' structural snapshots — the campaign export is a
+    // real lifecycle moment for each member settlement, same as a single-PDF
+    // export. captureFingerprint silently skips uuid-less (unsaved) members.
+    for (const save of settlements) {
+      if (save?.settlement && save?.id) {
+        captureFingerprint('exported', save.settlement, { settlementUuid: String(save.id), save });
+      }
+    }
+  } catch { /* analytics never breaks export */ }
 }

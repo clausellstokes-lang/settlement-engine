@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { cloneElement, isValidElement, useId, useState } from 'react';
 import { Eye, Settings2, X } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
@@ -11,6 +11,7 @@ import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, RED, SP, sans,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 const PROPAGATION_OPTIONS = [
   ['full', 'Full regional'],
@@ -56,19 +57,24 @@ function rulesKeyFor(campaign) {
 }
 
 function Field({ label, children }) {
+  const controlId = useId();
   return (
-    <label style={{ display: 'grid', gap: 6, minWidth: 0 }}>
+    // htmlFor associates the label with the cloned control's injected id; the
+    // rule's static nesting check can't see through the custom child component.
+    // eslint-disable-next-line jsx-a11y/label-has-for
+    <label htmlFor={controlId} style={{ display: 'grid', gap: 6, minWidth: 0 }}>
       <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
         {label}
       </span>
-      {children}
+      {isValidElement(children) ? cloneElement(children, { id: controlId }) : children}
     </label>
   );
 }
 
-function Select({ value, options, onChange }) {
+function Select({ id, value, options, onChange }) {
   return (
     <select
+      id={id}
       value={value}
       onChange={event => onChange(event.target.value)}
       style={{
@@ -90,8 +96,9 @@ function Select({ value, options, onChange }) {
 }
 
 function Toggle({ checked, label, onChange }) {
+  const controlId = useId();
   return (
-    <label style={{
+    <label htmlFor={controlId} style={{
       display: 'flex',
       alignItems: 'center',
       gap: 8,
@@ -107,7 +114,9 @@ function Toggle({ checked, label, onChange }) {
       cursor: 'pointer',
     }}>
       <input
+        id={controlId}
         type="checkbox"
+        aria-label={label}
         checked={checked}
         onChange={event => onChange(event.target.checked)}
       />
@@ -268,21 +277,13 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
               {[campaign?.name || 'Campaign', activePreset?.label || 'Custom'].join(' - ')}
             </div>
           </div>
-          <button
-            type="button"
-            aria-label="Close simulation rules"
+          <IconButton
+            Icon={X}
+            label="Close simulation rules"
             onClick={onClose}
-            style={{
-              border: 'none',
-              background: 'transparent',
-              color: MUTED,
-              cursor: 'pointer',
-              padding: SP.xs,
-              display: 'inline-flex',
-            }}
-          >
-            <X size={17} />
-          </button>
+            tone="ghost"
+            size="lg"
+          />
         </header>
 
         <div style={{ padding: SP.lg, display: 'grid', gap: SP.lg }}>

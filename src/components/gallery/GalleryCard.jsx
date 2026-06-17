@@ -21,6 +21,7 @@ import {
 } from '../theme.js';
 import { formatDate, formatNumber, human, shareGalleryDossier } from './galleryUtils.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
+import Button from '../primitives/Button.jsx';
 import GalleryImage from './GalleryImage.jsx';
 import VoteButton from './VoteButton.jsx';
 
@@ -57,6 +58,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
       <button
         type="button"
         onClick={() => onOpen(item.slug)}
+        aria-label={`Open ${item.name || t('gallery.untitled')}`}
         style={{ border: 'none', padding: 0, background: 'transparent', cursor: 'pointer', textAlign: 'left' }}
       >
         <div style={{ position: 'relative' }}>
@@ -106,16 +108,18 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
         </div>
       </button>
       <div style={{ padding: SP.md, display: 'grid', gap: 8 }}>
-        <button
-          type="button"
+        <Button
+          variant="ghost"
           onClick={() => onOpen(item.slug)}
           style={{
+            display: 'block',
             border: 'none',
             padding: 0,
+            minHeight: 0,
             background: 'transparent',
             textAlign: 'left',
             color: INK,
-            cursor: 'pointer',
+            whiteSpace: 'normal',
           }}
         >
           <h3 style={{
@@ -129,7 +133,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
           }}>
             {item.name || t('gallery.untitled')}
           </h3>
-        </button>
+        </Button>
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
           {meta.join(' / ')}
         </div>
@@ -176,14 +180,15 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
             <MessageCircle size={12} /> {formatNumber(item.commentCount)}
           </span>
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={onShare}
             title="Share this dossier"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, padding: 0 }}
+            icon={shared ? <Check size={12} /> : <Share2 size={12} />}
           >
-            {shared ? <Check size={12} /> : <Share2 size={12} />} {shared ? 'Copied' : 'Share'}
-          </button>
+            {shared ? 'Copied' : 'Share'}
+          </Button>
           <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
             {formatDate(item.updatedAt || item.publishedAt)}
           </span>

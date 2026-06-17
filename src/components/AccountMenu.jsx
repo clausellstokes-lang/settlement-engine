@@ -15,30 +15,30 @@
  */
 import { useState, useRef, useEffect } from 'react';
 import { User, ChevronDown, Settings, CreditCard } from 'lucide-react';
-import { GOLD, GOLD_BG, INK, BORDER, sans, FS, SP, R, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, BORDER, FS, SP, R, swatch } from './theme.js';
+import Button from './primitives/Button.jsx';
 
 function MenuRow({ icon, label, onClick }) {
   const [hover, setHover] = useState(false);
   return (
-    <button
-      type="button"
+    <Button
+      variant="ghost"
+      fullWidth
       role="menuitem"
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      icon={<span style={{ display: 'flex', color: GOLD, flexShrink: 0 }}>{icon}</span>}
       style={{
-        display: 'flex', alignItems: 'center', gap: SP.sm,
-        width: '100%', textAlign: 'left',
+        justifyContent: 'flex-start', gap: SP.sm, textAlign: 'left',
         padding: `${SP.sm}px ${SP.md}px`,
         background: hover ? GOLD_BG : 'transparent',
-        border: 'none', borderRadius: R.sm, cursor: 'pointer',
-        color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 600,
-        whiteSpace: 'nowrap',
+        border: 'none', borderRadius: R.sm,
+        color: INK, fontSize: FS.sm, fontWeight: 600,
       }}
     >
-      <span style={{ display: 'flex', color: GOLD, flexShrink: 0 }}>{icon}</span>
       {label}
-    </button>
+    </Button>
   );
 }
 
@@ -74,24 +74,20 @@ export default function AccountMenu({
 
   if (isAnon) {
     return (
-      <button
-        type="button"
+      <Button
+        variant="gold"
+        size={compact ? 'sm' : 'md'}
+        icon={<User size={iconSize} />}
         onClick={onSignIn}
         style={{
-          display: 'flex', alignItems: 'center', gap: SP.xs,
-          padding: chipPad,
           marginLeft: compact ? 0 : SP.xs,
           minHeight: compact ? 44 : undefined,
-          background: GOLD_BG,
-          border: '1px solid rgba(160,118,42,0.3)',
-          borderRadius: R.md, cursor: 'pointer',
-          color: GOLD,
-          fontSize: chipFont, fontWeight: compact ? 700 : 600,
-          fontFamily: sans, letterSpacing: '0.04em', textTransform: 'uppercase',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase',
         }}
       >
-        <User size={iconSize} /> Sign In
-      </button>
+        Sign In
+      </Button>
     );
   }
 
@@ -102,30 +98,30 @@ export default function AccountMenu({
 
   return (
     <div ref={ref} style={{ position: 'relative', marginLeft: compact ? 0 : SP.xs }}>
-      <button
-        type="button"
+      <Button
+        variant="secondary"
         onClick={() => setOpen(o => !o)}
         aria-haspopup="menu"
         aria-expanded={open}
+        icon={<User size={iconSize} style={{ flexShrink: 0 }} />}
+        trailingIcon={<ChevronDown size={iconSize} style={{ flexShrink: 0, opacity: 0.8 }} />}
         style={{
-          display: 'flex', alignItems: 'center', gap: SP.xs,
+          gap: SP.xs,
           padding: chipPad,
           minHeight: compact ? 44 : undefined,
           maxWidth: compact ? 168 : 220,
           background: chipBg,
           border: `1px solid ${chipBorder}`,
-          borderRadius: R.md, cursor: 'pointer',
+          borderRadius: R.md,
           color: chipColor,
           fontSize: chipFont, fontWeight: compact ? 700 : 600,
-          fontFamily: sans, letterSpacing: '0.04em', textTransform: 'uppercase',
+          letterSpacing: '0.04em', textTransform: 'uppercase',
         }}
       >
-        <User size={iconSize} style={{ flexShrink: 0 }} />
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {name}
         </span>
-        <ChevronDown size={iconSize} style={{ flexShrink: 0, opacity: 0.8 }} />
-      </button>
+      </Button>
 
       {open && (
         <div

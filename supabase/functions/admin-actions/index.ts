@@ -48,11 +48,11 @@ function corsHeadersFor(req: Request): Record<string, string> {
 const ALLOWED_ROLES = ["user", "developer", "admin"];
 const ALLOWED_TIERS = ["free", "premium"];
 const ALLOWED_METADATA_KEYS = ["role", "tier", "display_name", "is_founder"];
-// Owner-override email — configurable via the OWNER_EMAIL env var so the
-// privileged identity isn't hardcoded in source. Falls back to the historical
-// value so existing deployments are unaffected until the env var is set.
-const OWNER_EMAIL = (Deno.env.get("OWNER_EMAIL") || "clausellstokes@aol.com")
-  .trim().toLowerCase();
+// Owner-override email — configurable via the OWNER_EMAIL env var ONLY. No
+// hardcoded fallback: a missing env var FAILS CLOSED (owner override disabled,
+// access falls back to profiles.role), never fails privileged. Deployments that
+// want the override must set OWNER_EMAIL explicitly.
+const OWNER_EMAIL = (Deno.env.get("OWNER_EMAIL") || "").trim().toLowerCase();
 
 function errorMessage(err: unknown) {
   return err instanceof Error ? err.message : String(err);
@@ -170,20 +170,165 @@ serve(async (req) => {
     const callerEmail = String(callingUser.email || callerProfile?.email || "")
       .trim()
       .toLowerCase();
-    if (
-      callerEmail !== OWNER_EMAIL &&
-      (!callerProfile || !["developer", "admin"].includes(callerProfile.role))
-    ) {
+    // Owner override applies ONLY when OWNER_EMAIL is configured AND matches —
+    // an empty OWNER_EMAIL can never match (so an empty caller email can't
+    // accidentally equal an empty owner email and bypass the role gate).
+    const ownerOverride = OWNER_EMAIL !== "" && callerEmail === OWNER_EMAIL;
+    const hasElevatedRole = !!callerProfile && ["developer", "admin"].includes(callerProfile.role);
+    if (!ownerOverride && !hasElevatedRole) {
       return json({ error: "Insufficient privileges" }, 403);
     }
 
     // Parse the request body
-    const { action, userId, metadata, credits, reason } = await req.json();
+    const {
+      action, userId, metadata, credits, reason, dashboard,
+      from: fromDate, to: toDate,
+      // Trends-panel params (migration 040 report_* functions)
+      metric, field, granularity, rowField, colField, limit,
+      // System-mutation params (migration 041 report_* functions)
+      configSignature,
+    } = await req.json();
     const auditReason = typeof reason === "string" && reason.trim()
       ? reason.trim()
       : null;
 
+    // Shared date defaults for the analytics reads (last 30 days).
+    const today = new Date().toISOString().slice(0, 10);
+    const monthAgo = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+    const asDate = (v: unknown, fallback: string) =>
+      typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : fallback;
+    const pFrom = asDate(fromDate, monthAgo);
+    const pTo = asDate(toDate, today);
+
     switch (action) {
+      // Read-only analytics dashboards (migration 038 report_* functions). The
+      // privilege gate above already enforced developer/admin/owner. The edge
+      // function assembles NO SQL — it only dispatches to a fixed report fn.
+      case "get_analytics_dashboard": {
+        const REPORT_FNS: Record<string, string> = {
+          funnel: "report_funnel",
+          preferences: "report_preferences",
+          edit_heatmap: "report_edit_heatmap",
+          ai_usage: "report_ai_usage",
+          retention: "report_retention",
+        };
+        const fn = typeof dashboard === "string" ? REPORT_FNS[dashboard] : undefined;
+        if (!fn) return json({ error: "Unknown dashboard" }, 400);
+        const args = fn === "report_retention" ? {} : { p_from: pFrom, p_to: pTo };
+        const { data, error } = await adminClient.rpc(fn, args);
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, dashboard, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      // ── Trends panel (migration 040). Same posture as get_analytics_dashboard:
+      // the privilege gate above already enforced developer/admin/owner, and the
+      // edge function assembles NO SQL — it forwards scalar args to fixed report
+      // functions whose own allowlists reject any metric/field outside the set.
+      case "get_analytics_trend": {
+        if (typeof metric !== "string") return json({ error: "Missing metric" }, 400);
+        const { data, error } = await adminClient.rpc("report_trend", {
+          p_metric: metric,
+          p_granularity: typeof granularity === "string" ? granularity : "day",
+          p_from: pFrom,
+          p_to: pTo,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, metric, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_analytics_distribution": {
+        if (typeof field !== "string") return json({ error: "Missing field" }, 400);
+        const args: Record<string, unknown> = { p_field: field, p_from: pFrom, p_to: pTo };
+        if (typeof granularity === "string" && granularity) args.p_granularity = granularity;
+        if (Number.isFinite(Number(limit))) args.p_limit = Math.trunc(Number(limit));
+        const { data, error } = await adminClient.rpc("report_distribution", args);
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, field, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_analytics_summary": {
+        const { data, error } = await adminClient.rpc("report_summary", { p_from: pFrom, p_to: pTo });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_analytics_crosstab": {
+        if (typeof rowField !== "string" || typeof colField !== "string") {
+          return json({ error: "Missing rowField or colField" }, 400);
+        }
+        const { data, error } = await adminClient.rpc("report_crosstab", {
+          p_row: rowField,
+          p_col: colField,
+          p_from: pFrom,
+          p_to: pTo,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, rowField, colField, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      // ── System-mutation reports (migration 041). Same posture: fixed report
+      // functions whose own allowlists reject out-of-set input; no SQL here.
+      case "get_pulse_mutations": {
+        const { data, error } = await adminClient.rpc("report_pulse_mutations", { p_from: pFrom, p_to: pTo });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_stressor_genesis": {
+        const { data, error } = await adminClient.rpc("report_stressor_genesis", { p_from: pFrom, p_to: pTo });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_proposal_decisions": {
+        const { data, error } = await adminClient.rpc("report_proposal_decisions", { p_from: pFrom, p_to: pTo });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_config_variance": {
+        if (typeof configSignature !== "string" || !configSignature) {
+          return json({ error: "Missing configSignature" }, 400);
+        }
+        const { data, error } = await adminClient.rpc("report_config_variance", {
+          p_config_signature: configSignature, p_from: pFrom, p_to: pTo,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, configSignature, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      // ── Regional / NPC reports (migration 042) ──────────────────────────────
+      case "get_regional_impacts": {
+        const { data, error } = await adminClient.rpc("report_regional_impacts", { p_from: pFrom, p_to: pTo });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_channel_funnel": {
+        const { data, error } = await adminClient.rpc("report_channel_funnel", { p_from: pFrom, p_to: pTo });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_regional_arcs": {
+        const { data, error } = await adminClient.rpc("report_regional_arcs", { p_from: pFrom, p_to: pTo });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_regional_propagation": {
+        const { data, error } = await adminClient.rpc("report_regional_propagation", { p_from: pFrom, p_to: pTo });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      case "get_npc_distribution": {
+        if (typeof field !== "string") return json({ error: "Missing field" }, 400);
+        const { data, error } = await adminClient.rpc("report_npc_distribution", { p_field: field, p_from: pFrom, p_to: pTo });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, field, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
       case "update_user_metadata": {
         if (!userId || !metadata) {
           return json({ error: "Missing userId or metadata" }, 400);

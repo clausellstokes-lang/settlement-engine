@@ -1,51 +1,15 @@
-// INSTITUTION_TAGS — institution tag constants (matching institutionalCatalog.js)
-const INSTITUTION_TAGS = {
-  TRADE: "trade",
-  MARKET: "market",
-  GUILD: "guild",
-  BANKING: "banking",
-  PORT: "port",
-  WAREHOUSE: "warehouse",
-  DEFENSE: "defense",
-  MILITARY: "military",
-  FORTIFICATION: "fortification",
-  LAW_ENFORCEMENT: "law_enforcement",
-  RELIGIOUS: "religious",
-  CHURCH: "church",
-  MONASTERY: "monastery",
-  HEALING: "healing",
-  ARCANE: "arcane",
-  ALCHEMY: "alchemy",
-  ENCHANTING: "enchanting",
-  PLANAR: "planar",
-  DIVINE: "divine",
-  CRIMINAL: "criminal",
-  SMUGGLING: "smuggling",
-  UNDERGROUND: "underground",
-  WATER: "water",
-  SANITATION: "sanitation",
-  CIVIC: "civic",
-  LEGAL: "legal",
-  EDUCATION: "education",
-  METALWORK: "metalwork",
-  TEXTILE: "textile",
-  FOOD: "food",
-  LEATHER: "leather",
-  LUXURY: "luxury",
-  ESSENTIAL: "essential",
-  HOUSING: "housing",
-  AGRICULTURE: "agriculture",
-  TRANSPORT: "transport",
-  SHIPBUILDING: "shipbuilding",
-  KNOWLEDGE: "knowledge",
-  LODGING: "lodging",
-  ENTERTAINMENT: "entertainment",
-  ADVENTURING: "adventuring",
-  EXOTIC: "exotic",
-};
-
 // resourceData.js — extracted from bundle
 // De-minified from original minified identifiers
+//
+// Institution tags reference the canonical vocabulary in entityTags.js
+// instead of a hand-maintained local duplicate, so the two can no longer
+// drift. The old local copy was missing the MAGIC key (which silently
+// made the magicalNode boost a no-op) and carried 'knowledge' /
+// 'entertainment' tags that don't exist in TAG. The 7 tags actually used
+// below — arcane, healing, magic, metalwork, military, religious, trade —
+// all resolve to identical values in TAG. (src/data → src/data import,
+// permitted by the data-purity lint rule.)
+import { TAG } from './entityTags.js';
 
 export const RESOURCE_DATA = {
   fishing_grounds: {
@@ -620,8 +584,8 @@ export const SPECIAL_RESOURCES = {
     description: "Intersection of magical energy",
     effects: {
       institutionModifiers: [
-        { tags: [INSTITUTION_TAGS.ARCANE], modifier: 2 },
-        { tags: [INSTITUTION_TAGS.MAGIC], modifier: 1.8 },
+        { tags: [TAG.ARCANE], modifier: 2 },
+        { tags: [TAG.MAGIC], modifier: 1.8 },
         { name: "Mages' guild", modifier: 2.5 },
         { name: "Enchanter's shop", modifier: 2 },
       ],
@@ -634,7 +598,7 @@ export const SPECIAL_RESOURCES = {
     description: "Location of religious significance",
     effects: {
       institutionModifiers: [
-        { tags: [INSTITUTION_TAGS.RELIGIOUS], modifier: 2.5 },
+        { tags: [TAG.RELIGIOUS], modifier: 2.5 },
         { name: "Pilgrimage shrine", modifier: 3 },
         { name: "Monastery", modifier: 2 },
         { name: "Cathedral", modifier: 2 },
@@ -650,7 +614,7 @@ export const SPECIAL_RESOURCES = {
       institutionModifiers: [
         { name: "Bathhouse", modifier: 3 },
         { name: "Spa/healing house", modifier: 2.5 },
-        { tags: [INSTITUTION_TAGS.HEALING], modifier: 1.5 },
+        { tags: [TAG.HEALING], modifier: 1.5 },
       ],
       resources: ["thermal water", "minerals"],
       tourism: !0,
@@ -663,7 +627,7 @@ export const SPECIAL_RESOURCES = {
       institutionModifiers: [
         { name: "Mine", modifier: 2 },
         { name: "Smelter", modifier: 2 },
-        { tags: [INSTITUTION_TAGS.METALWORK], modifier: 1.8 },
+        { tags: [TAG.METALWORK], modifier: 1.8 },
       ],
       resources: ["abundant ore", "rare metals"],
       economicBoost: "Major mining boom",
@@ -674,8 +638,8 @@ export const SPECIAL_RESOURCES = {
     description: "Controls key trade/military route",
     effects: {
       institutionModifiers: [
-        { tags: [INSTITUTION_TAGS.MILITARY], modifier: 1.8 },
-        { tags: [INSTITUTION_TAGS.TRADE], modifier: 1.5 },
+        { tags: [TAG.MILITARY], modifier: 1.8 },
+        { tags: [TAG.TRADE], modifier: 1.5 },
         { name: "Customs house", modifier: 2 },
         { name: "Toll station", modifier: 2.5 },
       ],

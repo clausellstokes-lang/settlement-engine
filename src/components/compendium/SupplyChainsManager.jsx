@@ -15,25 +15,16 @@ import { Check, X, Trash2, Sparkles } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { inferSupplyChains } from '../../domain/inferSupplyChains.js';
 import { ChainRow } from '../new/SupplyChainsPanel.jsx';
+import Button from '../primitives/Button.jsx';
 import { FS, swatch } from '../theme.js';
 
-const INK = '#1B1408';
-const BODY = '#3A2F18';
-const MUTED = '#9C8068';
-const BORDER = '#E8D9B0';
-const GREEN = '#1a5a28';
-const RED = '#8b1a1a';
-const AMBER = '#8a5010';
+const INK = swatch['#1B1408'];
+const BODY = swatch['#3A2F18'];
+const MUTED = swatch['#9C8068'];
+const BORDER = swatch['#E8D9B0'];
+const GREEN = swatch['#1A5A28'];
+const AMBER = swatch['#8A5010'];
 const sans = '"Nunito", system-ui, sans-serif';
-
-function btn(color, bg) {
-  return {
-    display: 'inline-flex', alignItems: 'center', gap: 4,
-    padding: '4px 10px', borderRadius: 5, cursor: 'pointer',
-    border: `1px solid ${color}`, background: bg, color,
-    fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
-  };
-}
 
 export default function SupplyChainsManager() {
   const customContent = useStore((s) => s.customContent);
@@ -95,9 +86,9 @@ export default function SupplyChainsManager() {
               <div key={chain.id || chain.chainId} style={{ border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GREEN}`, borderRadius: 7, padding: '8px 12px', background: 'rgba(240,250,242,0.6)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 6 }}>
                   <span style={{ fontSize: FS.sm, fontWeight: 800, color: INK, fontFamily: sans }}>{chain.label}</span>
-                  <button type="button" onClick={() => deleteCustomItem('supplyChains', chain.id)} style={btn(MUTED, 'transparent')}>
-                    <Trash2 size={12} /> Remove
-                  </button>
+                  <Button variant="ghost" size="sm" icon={<Trash2 size={12} />} onClick={() => deleteCustomItem('supplyChains', chain.id)}>
+                    Remove
+                  </Button>
                 </div>
                 <ChainRow chain={chain} instNames={instNames} primaryExports={exportsOf(chain)} />
               </div>
@@ -121,17 +112,18 @@ export default function SupplyChainsManager() {
               <ChainRow chain={chain} instNames={instNames} primaryExports={exportsOf(chain)} />
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
                 <input
+                  aria-label="Name this chain"
                   value={names[chain.chainId] ?? ''}
                   onChange={(e) => setNames((d) => ({ ...d, [chain.chainId]: e.target.value }))}
                   placeholder={`Name this chain (e.g. ${chain.label})`}
                   style={{ flex: '1 1 220px', minWidth: 180, padding: '5px 8px', border: `1px solid ${BORDER}`, borderRadius: 4, fontSize: FS.xs, fontFamily: sans, color: INK, background: swatch.white, outline: 'none' }}
                 />
-                <button type="button" onClick={() => confirm(chain)} style={btn(GREEN, 'rgba(26,90,40,0.08)')}>
-                  <Check size={12} /> Confirm
-                </button>
-                <button type="button" onClick={() => reject(chain.chainId)} style={btn(RED, 'transparent')}>
-                  <X size={12} /> Reject
-                </button>
+                <Button variant="success" size="sm" icon={<Check size={12} />} onClick={() => confirm(chain)}>
+                  Confirm
+                </Button>
+                <Button variant="danger" size="sm" icon={<X size={12} />} onClick={() => reject(chain.chainId)}>
+                  Reject
+                </Button>
               </div>
             </div>
           ))}

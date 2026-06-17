@@ -13,6 +13,9 @@
  * terrain mode support.
  */
 
+import { track, EVENTS } from '../lib/analytics.js';
+import { computeRoadEdges } from '../lib/roadNetwork.js';
+
 export const MAP_MODES = {
   VIEW: 'view',
   TERRAIN: 'terrain',
@@ -90,6 +93,13 @@ function freshMapState() {
     // FMG geography snapshot (base64 blob, nullable if not yet captured)
     fmgSnapshot: null,
     seed: null,
+    // Custom image backdrop (premium). When set, the map renders this image
+    // instead of the FMG terrain and suppresses heightmap/biome tools + the
+    // geography-derived charted trails. { imageUrl, w, h } | null.
+    // Placements in image mode are stored in image-PIXEL space (0..w, 0..h) —
+    // the same <g>-space as the backdrop <image> — so every existing overlay
+    // layer renders them unchanged (the <g> transform handles display scaling).
+    customBackdrop: null,
     // Settlement burgs placed on the map: burgId -> { settlementId, x, y, cellId, placedAt }
     placements: {},
     // User-added text labels
@@ -105,13 +115,34 @@ function freshMapState() {
   };
 }
 
-// Snapshot the current mapState onto the undo stack before a mutating annotate/
-// placement action, so the AnnotateToolbar Undo/Redo buttons actually work
-// (pushMapUndo was never called from anywhere). Operates on the immer draft.
+// The annotate/placement undo stack only needs the MUTABLE sub-slices — NOT the
+// heavy fmgSnapshot geography blob (often ~1MB+), the custom backdrop, layer
+// toggles, or the camera viewport. Snapshotting the whole mapState cloned that
+// blob on every label/marker/forest op (F6), and restoring it wrongly reverted
+// geography + camera on undo. We snapshot + restore only these keys.
+const MAP_UNDO_KEYS = ['placements', 'labels', 'markers', 'forests'];
+
+function snapshotAnnotations(mapState) {
+  const snap = {};
+  for (const k of MAP_UNDO_KEYS) {
+    snap[k] = JSON.parse(JSON.stringify(mapState[k] ?? (k === 'placements' ? {} : [])));
+  }
+  return snap;
+}
+
+function restoreAnnotations(mapState, snap) {
+  for (const k of MAP_UNDO_KEYS) {
+    if (snap[k] !== undefined) mapState[k] = JSON.parse(JSON.stringify(snap[k]));
+  }
+}
+
+// Snapshot the current annotation/placement sub-slices onto the undo stack
+// before a mutating annotate/placement action, so the AnnotateToolbar Undo/Redo
+// buttons work. Operates on the immer draft.
 function snapshotForUndo(state, action) {
   state.mapUndoStack.push({
     action,
-    snapshot: JSON.parse(JSON.stringify(state.mapState)),
+    snapshot: snapshotAnnotations(state.mapState),
     timestamp: Date.now(),
   });
   if (state.mapUndoStack.length > 30) state.mapUndoStack.shift();
@@ -217,7 +248,10 @@ export const createMapSlice = (set, get) => ({
 
   // ── Viewport ──────────────────────────────────────────────────────────────
   setMapViewport: (vp) => set(state => {
-    state.mapState.viewport = { ...state.mapState.viewport, ...vp };
+    // Tag the camera with its coordinate space so restore paths (image-mode
+    // initial-fit, FMG reload) never reuse a viewport from the other mode.
+    const mode = state.mapState.customBackdrop?.imageUrl ? 'image' : 'fmg';
+    state.mapState.viewport = { ...state.mapState.viewport, ...vp, mode };
   }),
 
   // ── Layer toggles ─────────────────────────────────────────────────────────
@@ -231,24 +265,79 @@ export const createMapSlice = (set, get) => ({
   }),
 
   // ── Placements (settlement drops) ─────────────────────────────────────────
-  addPlacement: ({ burgId, settlementId, x, y, cellId }) => set(state => {
-    snapshotForUndo(state, 'place settlement');
-    state.mapState.placements[burgId] = {
-      settlementId,
-      x, y,
-      cellId: cellId ?? null,
-      placedAt: new Date().toISOString(),
-    };
-  }),
+  addPlacement: ({ burgId, settlementId, x, y, cellId, via }) => {
+    // Route count BEFORE the add — used only to detect whether this placement
+    // brought a new derived road edge into being (the MAP_ROUTE_DRAWN proxy).
+    let routeCountBefore = 0;
+    try {
+      const prev = get();
+      routeCountBefore = computeRoadEdges(prev.savedSettlements, prev.mapState.placements).length;
+    } catch { /* analytics-only; never block the placement */ }
 
-  removePlacementLocal: (burgId) => set(state => {
-    snapshotForUndo(state, 'remove placement');
-    delete state.mapState.placements[burgId];
-  }),
+    set(state => {
+      snapshotForUndo(state, 'place settlement');
+      state.mapState.placements[burgId] = {
+        settlementId,
+        x, y,
+        cellId: cellId ?? null,
+        placedAt: new Date().toISOString(),
+      };
+    });
+
+    // Fire-and-forget analytics — coarse counts only, NEVER coordinates.
+    try {
+      const next = get();
+      const placementCountAfter = Object.keys(next.mapState.placements || {}).length;
+      // Tier of the just-placed settlement, derived inline as a coarse enum.
+      const save = settlementId
+        ? (next.savedSettlements || []).find(s => String(s?.id) === String(settlementId))
+        : null;
+      const tier = save?.settlement?.tier || save?.tier || 'unknown';
+      track(EVENTS.MAP_PLACEMENT_ADDED, {
+        placement_count_after: placementCountAfter,
+        tier,
+        via: via === 'picker' ? 'picker' : 'drop',
+      });
+
+      // MAP_ROUTE_DRAWN — routes are derived (computeRoadEdges), not hand-drawn;
+      // a placement that grows the road graph is the natural "a route appeared"
+      // moment. Only fire when the edge count strictly increases.
+      const edges = computeRoadEdges(next.savedSettlements, next.mapState.placements);
+      if (edges.length > routeCountBefore) {
+        // Did this add link two settlement-backed placements (vs an empty burg)?
+        const linksTwoPlaced = edges.some(e => {
+          const a = next.mapState.placements[e.fromBurgId];
+          const b = next.mapState.placements[e.toBurgId];
+          return !!(a?.settlementId && b?.settlementId);
+        });
+        track(EVENTS.MAP_ROUTE_DRAWN, {
+          route_count_after: edges.length,
+          links_two_placed_settlements: linksTwoPlaced,
+        });
+      }
+    } catch { /* analytics is best-effort; never affect placement behavior */ }
+  },
+
+  removePlacementLocal: (burgId) => {
+    set(state => {
+      snapshotForUndo(state, 'remove placement');
+      delete state.mapState.placements[burgId];
+    });
+    try {
+      const placementCountAfter = Object.keys(get().mapState.placements || {}).length;
+      track(EVENTS.MAP_PLACEMENT_REMOVED, { placement_count_after: placementCountAfter });
+    } catch { /* analytics is best-effort */ }
+  },
 
   // Update x/y (and optionally cellId) for an existing placement. Used by
   // drag-to-move on the selected map icon.
   updatePlacement: (burgId, patch) => set(state => {
+    // Placement move-lock (campaign-clock): once the active campaign's world is
+    // canonized, placed settlements can no longer be moved. Adding new ones is
+    // still allowed (addPlacement is ungated). The UI also disables the drag
+    // affordance; this is the authoritative backstop (incl. autosave paths).
+    const camp = state.campaigns?.find(c => c.id === state.activeCampaignId);
+    if (camp?.worldState?.canonizedAt) return;
     const p = state.mapState.placements[burgId];
     if (!p) return;
     if (typeof patch?.x === 'number') p.x = patch.x;
@@ -341,6 +430,35 @@ export const createMapSlice = (set, get) => ({
     if (seed != null) state.mapState.seed = seed;
   }),
 
+  // ── Custom image backdrop (premium) ───────────────────────────────────────
+  /**
+   * Switch the map to a custom image backdrop. Non-destructive: the FMG
+   * snapshot is left intact so clearMapBackdrop restores terrain mode. Bumps
+   * geometryVersion so derived layers (roads) recompute and skip A*.
+   * @param {{imageUrl:string,w:number,h:number}} backdrop
+   */
+  setMapBackdrop: (backdrop) => set(state => {
+    if (!backdrop || !backdrop.imageUrl) return;
+    state.mapState.customBackdrop = {
+      imageUrl: backdrop.imageUrl,
+      w: Number(backdrop.w) || 0,
+      h: Number(backdrop.h) || 0,
+    };
+    // CRITICAL: the camera viewport is mode-specific (FMG map-pixels vs image
+    // pixels). Reset on the FMG→image switch so a stale FMG-space camera can't
+    // place the backdrop off-screen; the overlay then contain-fits the image.
+    state.mapState.viewport = { ...DEFAULT_VIEWPORT };
+    state.geometryVersion = (state.geometryVersion || 0) + 1;
+  }),
+
+  /** Drop back to FMG terrain mode (keeps any existing fmgSnapshot). */
+  clearMapBackdrop: () => set(state => {
+    state.mapState.customBackdrop = null;
+    // Drop the image-space camera so it can't be pushed into FMG d3.zoom on reload.
+    state.mapState.viewport = { ...DEFAULT_VIEWPORT };
+    state.geometryVersion = (state.geometryVersion || 0) + 1;
+  }),
+
   /**
    * Bump the geometry-version counter. Called by WorldMap.jsx after a fresh
    * FMG snapshot has been loaded, the world has been regenerated, or the
@@ -369,6 +487,7 @@ export const createMapSlice = (set, get) => ({
       labels:   next.labels   || [],
       markers:  next.markers  || [],
       forests:  next.forests  || [],
+      customBackdrop: next.customBackdrop || null, // older campaigns → null (FMG mode)
     };
   }),
 
@@ -383,17 +502,12 @@ export const createMapSlice = (set, get) => ({
     state.hoveredSettlementId = null;
   }),
 
-  // ── Undo/redo (coarse — snapshot-per-action) ──────────────────────────────
+  // ── Undo/redo (per-action snapshot of annotation/placement sub-slices) ─────
+  // Public action: components call this ONCE at drag-start (move/edit, which
+  // otherwise mutate per-pointermove and would flood the stack) so the whole
+  // drag collapses to a single undo entry.
   pushMapUndo: (action) => set(state => {
-    state.mapUndoStack.push({
-      action,
-      snapshot: JSON.parse(JSON.stringify(state.mapState)),
-      timestamp: Date.now(),
-    });
-    // Cap at 30 entries
-    if (state.mapUndoStack.length > 30) state.mapUndoStack.shift();
-    // Any new action invalidates redo
-    state.mapRedoStack = [];
+    snapshotForUndo(state, action);
   }),
 
   mapUndo: () => set(state => {
@@ -401,10 +515,12 @@ export const createMapSlice = (set, get) => ({
     if (!entry) return;
     state.mapRedoStack.push({
       action: entry.action,
-      snapshot: JSON.parse(JSON.stringify(state.mapState)),
+      snapshot: snapshotAnnotations(state.mapState),
       timestamp: Date.now(),
     });
-    state.mapState = entry.snapshot;
+    // Restore ONLY the annotation/placement sub-slices — geography (fmgSnapshot),
+    // layers, backdrop, and camera are left as they are.
+    restoreAnnotations(state.mapState, entry.snapshot);
   }),
 
   mapRedo: () => set(state => {
@@ -412,10 +528,10 @@ export const createMapSlice = (set, get) => ({
     if (!entry) return;
     state.mapUndoStack.push({
       action: entry.action,
-      snapshot: JSON.parse(JSON.stringify(state.mapState)),
+      snapshot: snapshotAnnotations(state.mapState),
       timestamp: Date.now(),
     });
-    state.mapState = entry.snapshot;
+    restoreAnnotations(state.mapState, entry.snapshot);
   }),
 
   // ── Derived selectors (also exposed on store/selectors.js) ────────────────

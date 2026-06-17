@@ -36,6 +36,7 @@ import { useEffect } from 'react';
 import { ArrowRight, Sparkles, Check, X as XIcon } from 'lucide-react';
 import { t } from '../copy/index.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, SP, R, FS, GOLD_DEEP, AMBER, CARD_HDR, swatch, PAGE_MAX } from './theme.js';
+import Button from './primitives/Button.jsx';
 
 // ── Tiny meta helper ───────────────────────────────────────────────────────
 // We don't have react-helmet wired up; for these flat pages a side-effect
@@ -195,20 +196,15 @@ function ForgeCTA({ onNavigate }) {
           Free anonymous generation. No account needed for the first dossier.
         </div>
       </div>
-      <button
-        type="button"
+      <Button
+        variant="primary"
+        size="lg"
         onClick={() => onNavigate?.('generate')}
-        style={{
-          padding: `${SP.md}px ${SP.xl}px`,
-          background: GOLD, color: swatch.white, border: 'none',
-          borderRadius: R.button,
-          fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-          cursor: 'pointer',
-          display: 'inline-flex', alignItems: 'center', gap: 6,
-        }}
+        icon={<Sparkles size={16} />}
+        trailingIcon={<ArrowRight size={16} />}
       >
-        <Sparkles size={14} /> {t('hero.cta')} <ArrowRight size={14} />
-      </button>
+        {t('hero.cta')}
+      </Button>
     </div>
   );
 }

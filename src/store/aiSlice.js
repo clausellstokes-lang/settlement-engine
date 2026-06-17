@@ -24,7 +24,9 @@ import { generateNarrative } from '../lib/ai.js';
 import { saves as savesService } from '../lib/saves.js';
 import { applyRenameToAiData } from '../lib/narrativeMutations.js';
 import { settlementFingerprint } from '../lib/settlementFingerprint.js';
-import { getAiCostForModel } from '../config/pricing.js';
+import { getAiCostForModel, isFastModelPreference } from '../config/pricing.js';
+import { track, EVENTS } from '../lib/analytics.js';
+import { captureFingerprint } from '../lib/researchCapture.js';
 import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
 import { verifyAiOverlay } from '../domain/aiOverlayVerifier.js';
@@ -74,6 +76,62 @@ function logHardViolations(verification, where) {
     hard.slice(0, 5),
   );
 }
+
+// ── Analytics helpers (coarse, fire-and-forget; never control-flow) ──────────
+//
+// The AI namespace events (docs/analytics-event-taxonomy.md §4) are additive and
+// must carry only enums/bands/counts/hashes. These derive bands inline so no raw
+// duration/error text ever reaches a prop.
+
+/** Map a 'narrative'|'dailyLife'|'progression' request type to the taxonomy enum. */
+const aiTypeEnum = (type) => (type === 'dailyLife' ? 'daily_life' : type);
+
+/** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
+const durationBand = (ms) => {
+  const n = Number(ms);
+  if (!Number.isFinite(n) || n < 0) return 'unknown';
+  if (n < 5000) return 'lt_5s';
+  if (n < 15000) return '5_15s';
+  if (n < 60000) return '15_60s';
+  if (n < 300000) return '1_5m';
+  if (n < 1800000) return '5_30m';
+  return 'gt_30m';
+};
+
+/** Classify a thrown generation error into the coarse failure taxonomy. */
+const errorKindFromError = (e) => {
+  const msg = (e && typeof e.message === 'string' ? e.message : String(e || '')).toLowerCase();
+  const name = (e && typeof e.name === 'string' ? e.name : '').toLowerCase();
+  if (name === 'aborterror' || msg.includes('abort')) return 'aborted';
+  if (msg.includes('insufficient credit') || msg.includes('credits')) return 'credits';
+  if (/http 5\d\d/.test(msg) || msg.includes('truncated') || msg.includes('completion marker')) return 'server';
+  if (msg.includes('failed to fetch') || msg.includes('network') || msg.includes('networkerror')
+      || msg.includes('load failed') || msg.includes('timeout')) return 'network';
+  return 'server';
+};
+
+/** Derive the canon phase enum for a save entry, analytics-only. */
+const canonPhaseOf = (entry) => (isCanonSave(entry) ? 'canon' : 'draft');
+
+/**
+ * Fire AI_VERIFIER_REPORT from an overlay verification result. Counters are
+ * read verbatim from the verifier summary (counts only — never entity names).
+ */
+const reportVerifier = (type, verification) => {
+  const s = verification?.summary || {};
+  const hardCount = (s.invented || 0) + (s.renamed || 0) + (s.contradicted || 0) + (s.canonChanged || 0);
+  track(EVENTS.AI_VERIFIER_REPORT, {
+    type: aiTypeEnum(type),
+    ok: !!verification?.ok,
+    invented: s.invented || 0,
+    removed: s.removed || 0,
+    renamed: s.renamed || 0,
+    contradicted: s.contradicted || 0,
+    canon_changed: s.canonChanged || 0,
+    history_dropped: s.historyDropped || 0,
+    hard_violation_count: hardCount,
+  });
+};
 
 // §8 M3c — compact, weighted Chronicle context (recent + party-caused events)
 // sent to the AI overlay + Daily Life so prose can reference what's been
@@ -203,6 +261,7 @@ export const createAiSlice = (set, get) => ({
       state.aiDataVersion = Date.now();
       state.aiSourceFingerprint = aiData ? settlementFingerprint(state.settlement) : null;
       state.aiViolations = aiData ? verification : null;
+      if (aiData) reportVerifier('narrative', verification);
     }),
 
   clearAiSettlement: () =>
@@ -234,10 +293,27 @@ export const createAiSlice = (set, get) => ({
     set(state => { state.aiProgress = msg; }),
 
   toggleNarrativeView: () =>
-    set(state => { state.showNarrative = !state.showNarrative; }),
+    set(state => {
+      state.showNarrative = !state.showNarrative;
+      track(EVENTS.NARRATIVE_VIEW_TOGGLED, {
+        to_mode: state.showNarrative ? 'ai' : 'raw',
+        has_daily_life: !!state.aiDailyLife,
+      });
+    }),
 
   setShowNarrative: (show) =>
-    set(state => { state.showNarrative = show; }),
+    set(state => {
+      const next = !!show;
+      // Only emit when the mode actually changes — programmatic no-op sets
+      // shouldn't look like user toggles. Additive; never affects the set.
+      if (next !== state.showNarrative) {
+        track(EVENTS.NARRATIVE_VIEW_TOGGLED, {
+          to_mode: next ? 'ai' : 'raw',
+          has_daily_life: !!state.aiDailyLife,
+        });
+      }
+      state.showNarrative = show;
+    }),
 
   /**
    * Check if the current narrative is stale (settlement changed since generation).
@@ -279,8 +355,18 @@ export const createAiSlice = (set, get) => ({
     if (!elevated && creditBalance < cost) {
       set(state => { state.aiError = `Insufficient credits (need ${cost}, have ${state.creditBalance})`; });
       get().setPurchaseModalOpen(true);
+      track(EVENTS.AI_GENERATION_FAILED, { type: 'narrative', error_kind: 'credits' });
       return;
     }
+
+    track(EVENTS.AI_GENERATION_STARTED, {
+      type: 'narrative',
+      fast_variant: isFastModelPreference(modelPreference),
+      credits_cost: cost,
+      is_regeneration: isRegenerate,
+      canon_phase: canonPhaseOf(saveEntry),
+    });
+    const startedAt = Date.now();
 
     set(state => {
       state.aiLoading = true;
@@ -380,6 +466,20 @@ export const createAiSlice = (set, get) => ({
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
 
+      track(EVENTS.AI_GENERATION_COMPLETED, {
+        type: 'narrative',
+        duration_band: durationBand(Date.now() - startedAt),
+        partial_failure: !!partialFailure,
+        failed_field_count: Array.isArray(failedFields) ? failedFields.length : 0,
+      });
+      reportVerifier('narrative', verificationN);
+      // Structural snapshot at the ai-polish lifecycle moment (consent-gated,
+      // best-effort). saveId is a saved-settlement uuid here (gated above).
+      captureFingerprint('ai_polished', result, {
+        settlementUuid: saveId,
+        save: get().savedSettlements.find(s => s.id === saveId) || null,
+      });
+
       // Persist the refined narrative + mode flip to the saved settlement.
       // Generation succeeded — don't let a persist error lose what the user just paid for.
       try {
@@ -417,6 +517,7 @@ export const createAiSlice = (set, get) => ({
         // On failure during regenerate, keep the old aiSettlement intact.
         // On first-time failure, it was already null.
       });
+      track(EVENTS.AI_GENERATION_FAILED, { type: 'narrative', error_kind: errorKindFromError(e) });
     } finally {
       clearInterval(rotation);
     }
@@ -450,8 +551,18 @@ export const createAiSlice = (set, get) => ({
     if (!elevated && creditBalance < cost) {
       set(state => { state.aiError = `Insufficient credits (need ${cost}, have ${state.creditBalance})`; });
       get().setPurchaseModalOpen(true);
+      track(EVENTS.AI_GENERATION_FAILED, { type: 'daily_life', error_kind: 'credits' });
       return;
     }
+
+    track(EVENTS.AI_GENERATION_STARTED, {
+      type: 'daily_life',
+      fast_variant: isFastModelPreference(modelPreference),
+      credits_cost: cost,
+      is_regeneration: isRegenerate,
+      canon_phase: canonPhaseOf(saveEntry),
+    });
+    const startedAt = Date.now();
 
     set(state => {
       state.aiLoading = true;
@@ -508,6 +619,13 @@ export const createAiSlice = (set, get) => ({
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
 
+      track(EVENTS.AI_GENERATION_COMPLETED, {
+        type: 'daily_life',
+        duration_band: durationBand(Date.now() - startedAt),
+        partial_failure: false,
+        failed_field_count: 0,
+      });
+
       // Persist daily-life prose to the saved settlement. Mode flips to 'narrated'
       // if either narrative OR daily life exists.
       try {
@@ -532,6 +650,7 @@ export const createAiSlice = (set, get) => ({
         state.aiRegenerating = false;
         state.aiProgress = '';
       });
+      track(EVENTS.AI_GENERATION_FAILED, { type: 'daily_life', error_kind: errorKindFromError(e) });
     } finally {
       clearInterval(rotation);
     }
@@ -585,8 +704,18 @@ export const createAiSlice = (set, get) => ({
     if (!elevated && creditBalance < cost) {
       set(state => { state.aiError = `Insufficient credits (need ${cost}, have ${state.creditBalance})`; });
       get().setPurchaseModalOpen(true);
+      track(EVENTS.AI_GENERATION_FAILED, { type: 'progression', error_kind: 'credits' });
       return;
     }
+
+    track(EVENTS.AI_GENERATION_STARTED, {
+      type: 'progression',
+      fast_variant: isFastModelPreference(modelPreference),
+      credits_cost: cost,
+      is_regeneration: true, // progression is always regenerate-shaped
+      canon_phase: canonPhaseOf(saveEntry),
+    });
+    const startedAt = Date.now();
 
     // Progression is always "regenerate-shaped": keep old aiSettlement
     // rendering (dimmed) until the new one is ready to swap in.
@@ -660,6 +789,18 @@ export const createAiSlice = (set, get) => ({
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
 
+      track(EVENTS.AI_GENERATION_COMPLETED, {
+        type: 'progression',
+        duration_band: durationBand(Date.now() - startedAt),
+        partial_failure: !!partialFailure,
+        failed_field_count: Array.isArray(failedFields) ? failedFields.length : 0,
+      });
+      reportVerifier('progression', verificationP);
+      captureFingerprint('ai_polished', result, {
+        settlementUuid: saveId,
+        save: get().savedSettlements.find(s => s.id === saveId) || null,
+      });
+
       // Persist the evolved narrative. Daily life is carried through
       // unchanged — progression v1 doesn't touch it.
       try {
@@ -696,6 +837,7 @@ export const createAiSlice = (set, get) => ({
         state.aiProgress = '';
         // Old aiSettlement stays intact — the user didn't lose anything.
       });
+      track(EVENTS.AI_GENERATION_FAILED, { type: 'progression', error_kind: errorKindFromError(e) });
     } finally {
       clearInterval(rotation);
     }

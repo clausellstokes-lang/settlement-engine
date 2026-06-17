@@ -1,13 +1,11 @@
-// @ts-nocheck — legacy data file with implicit globals (getInstFlags
-// is supplied by helpers.js at runtime). Excluded from type-checking
-// until the stress-types module is normalized to explicit imports.
-/* eslint-disable no-undef -- getInstFlags is detected at runtime via
-   typeof check (the closures use `typeof getInstFlags == "function"`
-   to gracefully no-op when it's not bound). Stress-type refactor will
-   make the import explicit. */
-import { random as _rng } from "../generators/rngContext.js";
-// stressTypes.js — extracted from bundle
-// De-minified from original minified identifiers
+// stressTypes.js — PURE DATA (A+ Track H / data-schema.3).
+//
+// The executable `summary: (r) => …` closures (which captured rngContext.random
+// and a runtime-global getInstFlags) were extracted to
+// src/generators/stressNarrative.js (stressSummary). This file now holds only
+// pure stressor fields — no runtime imports, no RNG capture — and is covered by
+// the src/data purity lint (eslint.config.js) + tests/domain/dataPurity.test.js.
+// De-minified from original minified identifiers.
 
 export const STRESS_TYPE_MAP = {
   under_siege: {
@@ -16,8 +14,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#8b1a1a",
     probability: 0.025,
     requiresTier: null,
-    summary: (r) =>
-      `${r.name} is under active siege. Land supply lines are cut or contested. Morale is fracturing under sustained pressure. Every decision carries the weight of survival.`,
     crisisHook:
       "The settlement is surrounded. Someone in the leadership is considering terms. Someone else is considering a desperate sortie. The players arrive as this decision is being forced.",
     viabilityNote:
@@ -30,8 +26,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#8b5a1a",
     probability: 0.027,
     requiresTier: null,
-    summary: (r) =>
-      `${r.name} is in its second failed harvest season. Rationing has begun. The wealthy are hoarding. Children are visibly hungry.`,
     crisisHook:
       "A grain merchant has food — enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
     viabilityNote: "Short-term economic viability is critically compromised. Normal income projections do not apply.",
@@ -43,8 +37,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#4a3a6b",
     probability: 0.021,
     requiresTier: null,
-    summary: (r) =>
-      `${r.name} is under the administrative control of an outside power. Locals comply outwardly. Resistance exists, distributed and careful.`,
     crisisHook:
       "A resistance cell needs outside help — people who aren't known faces. The occupation's local collaborators include someone the players will recognise.",
     viabilityNote: "Revenue flows to the occupying authority. Local institutions continue under oversight.",
@@ -56,8 +48,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#5a4a1a",
     probability: 0.034,
     requiresTier: null,
-    summary: (r) =>
-      `${r.name} has no stable governing authority. Two or three factions each control part of the settlement and none will yield. Daily life continues, but every interaction has a political valence.`,
     crisisHook:
       "Something important — a resource, a prisoner, a decision — falls into the contested space between factions. The players can't avoid taking a side.",
     viabilityNote:
@@ -70,8 +60,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#1a4a5a",
     probability: 0.036,
     requiresTier: null,
-    summary: (r) =>
-      `${r.name} owes a debt it cannot repay to an external power — a merchant house, a noble, a guild confederation, or something older. The debt is now a leash.`,
     crisisHook:
       "The creditor has sent a representative to collect — not money, but something specific. Locals are divided between compliance and resistance, and neither option is clean.",
     viabilityNote:
@@ -84,8 +72,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#6b1a2a",
     probability: 0.027,
     requiresTier: null,
-    summary: (r) =>
-      `${r.name} was betrayed from within — recently enough that the wound hasn't closed. Someone trusted sold something important. The settlement knows it, but the full picture is not yet known.`,
     crisisHook:
       "The betrayal had consequences that are still unfolding. The betrayer may still be here. The players know something that could help identify them — or they are the only people who don't have a motive.",
     viabilityNote: "Trust in institutions is low. Some key systems are not operating at full capacity as a result.",
@@ -97,8 +83,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#1a3a4a",
     probability: 0.023,
     requiresTier: null,
-    summary: (r) =>
-      `${r.name} has been quietly penetrated by an outside interest — enemy agents, a cult, a merchant intelligence network. The settlement does not know. Key decisions are being subtly shaped.`,
     crisisHook:
       "Something is slightly wrong — a decision that doesn't make sense, a face seen in too many places, a piece of information that reached the wrong hands. The players can notice if they pay attention.",
     viabilityNote: "No economic impact yet. The infiltration is strategic, not extractive — so far.",
@@ -110,8 +94,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#2a5a2a",
     probability: 0.027,
     requiresTier: null,
-    summary: (r) =>
-      `Something is spreading in ${r.name}. It is not yet a plague — but it will be if nothing changes. Healers are overwhelmed. The origin is disputed. Quarantine measures are being resisted.`,
     crisisHook:
       "The healer who identified the outbreak first has gone quiet. Their last message suggested the disease is not natural. Accessing them means navigating a quarantine that is not being enforced consistently.",
     viabilityNote: "Market activity is reduced. Travel is being discouraged. Some supply chains are disrupted.",
@@ -123,8 +105,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#5a3a1a",
     probability: 0.03,
     requiresTier: null,
-    summary: (r) =>
-      `The last strong leader of ${r.name} died recently. No one has consolidated authority. Power is available to whoever moves first, and several parties are aware of this simultaneously.`,
     crisisHook:
       "Three different factions have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
     viabilityNote: "Major decisions are deferred. Some institutions are operating autonomously, for better or worse.",
@@ -136,8 +116,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#3a1a1a",
     probability: 0.03,
     requiresTier: null,
-    summary: (r) =>
-      "Something in the surrounding region has grown bolder. Caravans are disappearing. A farmstead burned last week. Whether wolves, raiders, or worse — the settlement's defences are adequate for normal times, but these are not normal times.",
     crisisHook:
       "The attacks are following a pattern that suggests coordination, not desperation. Someone is directing this — whether a rival lord, a beast of unusual cunning, or something stranger. The evidence is there for anyone who looks carefully.",
     viabilityNote:
@@ -150,21 +128,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#6b1a3a",
     probability: 0.029,
     requiresTier: null,
-    summary: (r) => {
-      const s = typeof getInstFlags == "function" ? getInstFlags(r || {}) : {},
-        o = s.criminalEffective || 0,
-        d = s.militaryEffective || 0,
-        l = s.economyOutput || 50,
-        m = o > d && l < 48,
-        h = r && r.name ? r.name : "the settlement";
-      return m
-        ? "Popular revolt is brewing in " +
-            h +
-            ". The common population has moved beyond grievance into organised defiance. Market stalls are closing early. The watch is being followed when it patrols."
-        : "A powerful faction in " +
-            h +
-            " has decided the current government is illegitimate. The challenge is quiet, institutional, and dangerous — not street fighting but the systematic withdrawal of cooperation.";
-    },
     crisisHook:
       "The governing faction knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
     viabilityNote:
@@ -177,21 +140,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#3a1a5a",
     probability: 0.023,
     requiresTier: null,
-    summary: (r) => {
-      const s = r && r.name ? r.name : "the settlement",
-        o = r && r.name ? r.name.length % 3 : 0;
-      return o === 0
-        ? "A new faith is gaining ground in " +
-            s +
-            ". The old religious institution still holds its buildings and its records, but it is losing the congregation. The priest gives a service on Sunday to a room that is quietly, consistently, slightly emptier than the week before."
-        : o === 1
-          ? "The religious community of " +
-            s +
-            " has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither."
-          : "An outside authority is requiring " +
-            s +
-            " to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows.";
-    },
     crisisHook:
       "The contested religious authority has left a gap in the institutions that depended on it — records, oaths, property, sanctuary. Someone is about to exploit that gap.",
     viabilityNote:
@@ -204,10 +152,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#6b1a1a",
     probability: 0.012,
     requiresTier: "town",
-    summary: (r) =>
-      "The enslaved population of " +
-      (r && r.name ? r.name : "the settlement") +
-      " has organised. What began as work stoppages and passive resistance has moved into open defiance. The slave market's holding facilities have been breached. The governing authority's first response was inadequate. Its second response is still being decided.",
     crisisHook:
       "The revolt's leadership has demands. Some of them are negotiable. The governing faction has not admitted this publicly, and one of them is attempting to open a back channel.",
     viabilityNote:
@@ -220,14 +164,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#5a2a0a",
     probability: 0.026,
     requiresTier: null,
-    summary: (r) => {
-      const s = r && r.name ? r.name : "the settlement";
-      return _rng() < 0.45
-        ? s +
-            " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. The garrison is reinforced and well-supplied. Prices are high and merchants with the right connections are getting richer. The cost will come due — it always does — but for now the war is good for business."
-        : s +
-            " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
-    },
     crisisHook:
       "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing faction must decide whether to comply, negotiate, or find a third option.",
     viabilityNote:
@@ -240,17 +176,6 @@ export const STRESS_TYPE_MAP = {
     colour: "#2a4a6b",
     probability: 0.025,
     requiresTier: null,
-    summary: (r) => {
-      const d =
-          ((typeof getInstFlags == "function" ? getInstFlags(r || {}) : {}).economyOutput || 50) >= 50 || _rng() < 0.5,
-        l = r && r.name ? r.name : "The settlement";
-      return d
-        ? l +
-            " is receiving more people than its infrastructure was built for. New arrivals come faster than housing, food, and employment can absorb them. The old residents and the new ones are not yet the same community."
-        : "People are leaving " +
-            l +
-            " faster than they are arriving. The reasons vary but the effect is uniform — emptying streets, abandoned workshops, institutions running thin on staff and thinner on confidence.";
-    },
     crisisHook:
       "The question is not whether things will change, but who will shape the change and what they will want in return.",
     viabilityNote:

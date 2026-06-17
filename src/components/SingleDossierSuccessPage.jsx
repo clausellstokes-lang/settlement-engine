@@ -28,9 +28,10 @@ import { verifySingleDossierPurchase } from '../lib/stripe.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
 import { GOLD, INK, BORDER, CARD, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
+import Button from './primitives/Button.jsx';
 
-const MUTED = '#6b5340';
-const BODY  = '#4A3B22';
+const MUTED = swatch['#6B5340'];
+const BODY  = swatch['#4A3B22'];
 
 export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }) {
   const [pending, setPending] = useState(() => readPendingDossier());
@@ -218,24 +219,16 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.sm,
         marginTop: SP.xl,
       }}>
-        <button
-          type="button"
+        <Button
+          variant="primary"
+          size="lg"
+          icon={<Download size={16} />}
+          busy={downloading}
           onClick={handleDownload}
           disabled={downloading || verification.status !== 'verified'}
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: `${SP.md}px ${SP.xl}px`,
-            background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-            color: swatch.white, border: 'none',
-            borderRadius: R.button,
-            fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-            cursor: downloading ? 'wait' : 'pointer',
-            opacity: downloading ? 0.7 : 1,
-            boxShadow: '0 4px 14px rgba(201,162,76,0.35)',
-          }}
         >
-          <Download size={16} /> {downloading ? 'Preparing PDF…' : autoDownloadedRef.current ? 'Download again' : 'Download PDF'}
-        </button>
+          {downloading ? 'Preparing PDF…' : autoDownloadedRef.current ? 'Download again' : 'Download PDF'}
+        </Button>
 
         {downloadError && (
           <div style={{
@@ -276,36 +269,22 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         <div style={{
           marginTop: SP.md, display: 'flex', gap: SP.sm, justifyContent: 'center', flexWrap: 'wrap',
         }}>
-          <button
-            type="button"
+          <Button
+            variant="gold"
+            size="md"
+            icon={<LogIn size={14} />}
             onClick={handleKeep}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              padding: `${SP.sm + 2}px ${SP.lg}px`,
-              background: 'transparent', color: GOLD,
-              border: `1.5px solid ${GOLD}`,
-              borderRadius: R.button,
-              fontFamily: sans, fontSize: FS.sm, fontWeight: 700,
-              cursor: 'pointer',
-            }}
           >
-            <LogIn size={14} /> Create a free account
-          </button>
-          <button
-            type="button"
+            Create a free account
+          </Button>
+          <Button
+            variant="secondary"
+            size="md"
+            trailingIcon={<ArrowRight size={14} />}
             onClick={() => { clearPendingDossier(); onGenerateAnother?.(); }}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              padding: `${SP.sm + 2}px ${SP.lg}px`,
-              background: 'transparent', color: BODY,
-              border: `1px solid ${BORDER}`,
-              borderRadius: R.button,
-              fontFamily: sans, fontSize: FS.sm, fontWeight: 600,
-              cursor: 'pointer',
-            }}
           >
-            Generate another <ArrowRight size={14} />
-          </button>
+            Generate another
+          </Button>
         </div>
       </div>
     </div>

@@ -232,6 +232,7 @@ export function TextInputDialog({
         style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}
       >
         {label && (
+          // eslint-disable-next-line jsx-a11y/label-has-for -- associated via htmlFor/id; nesting the input would break the flex layout
           <label htmlFor={inputId} style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
             {label}
           </label>
@@ -241,6 +242,8 @@ export function TextInputDialog({
           id={inputId}
           name="dialog-value"
           defaultValue={initialValue || ''}
+          aria-label={label || title}
+          // eslint-disable-next-line jsx-a11y/no-autofocus -- intentional: focus the prompt field when the modal opens
           autoFocus
           style={{
             minHeight: 38,

@@ -11,6 +11,7 @@ import { addRegionalChannels, deriveRegionalGraphFromSaves, normalizeChannel } f
 import { goodCriticality, goodsIntersect } from './goodsCatalog.js';
 import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
 import { healingLedger } from '../healingLedger.js';
+import { wallClockNow } from '../clock.js';
 import { TIER_ORDER } from '../../data/constants.js';
 
 const TRADE_FRIENDLY_RELATIONSHIPS = new Set([
@@ -188,7 +189,7 @@ function relationshipConfidence(rel) {
 function candidate(raw) {
   return normalizeChannel({
     status: 'suggested',
-    discoveredAt: new Date().toISOString(),
+    discoveredAt: wallClockNow(),
     ...raw,
   });
 }

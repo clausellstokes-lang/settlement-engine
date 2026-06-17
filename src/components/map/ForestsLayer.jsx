@@ -45,6 +45,7 @@ function Forest({ forest }) {
   const selectedId   = useStore(s => s.selectedAnnotationId);
   const setSelected  = useStore(s => s.setSelectedAnnotationId);
   const updateForest = useStore(s => s.updateForest);
+  const pushMapUndo  = useStore(s => s.pushMapUndo);
 
   const dragRef = useRef(null);
   const isEditable = mapMode === MAP_MODES.ANNOTATE && annotateTool === ANNOTATE_TOOLS.SELECT;
@@ -93,6 +94,7 @@ function Forest({ forest }) {
     dragRef.current = {
       grabDx: pt.x - forest.x,
       grabDy: pt.y - forest.y,
+      moved: false,
     };
     try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {}
   }
@@ -101,6 +103,10 @@ function Forest({ forest }) {
     if (!dragRef.current) return;
     const pt = eventToMap(e);
     if (!pt) return;
+    if (!dragRef.current.moved) {
+      dragRef.current.moved = true;
+      pushMapUndo('move forest'); // snapshot ONCE per drag, on the first real move
+    }
     updateForest(forest.id, {
       x: pt.x - dragRef.current.grabDx,
       y: pt.y - dragRef.current.grabDy,

@@ -76,12 +76,17 @@ function idFromSeed(seed) {
   return `s_${part1}${part2}`;
 }
 
-function randomId() {
-  // Non-crypto random id for settlements without a seed (very rare —
-  // mostly imported/mock data). 16 hex chars to match the seed-derived form.
-  const hex = Math.floor(Math.random() * 0xffffffff).toString(16).padStart(8, '0');
-  const hex2 = Math.floor(Math.random() * 0xffffffff).toString(16).padStart(8, '0');
-  return `s_${hex}${hex2}`;
+// Deterministic fallback id for settlements lacking BOTH an id and a _seed (rare —
+// imported / mock data). Derived from identifying content via idFromSeed so the same
+// settlement always normalizes to the same id. Math.random here produced a fresh id
+// on every load, violating this file's idempotency contract
+// (normalize(normalize(s)) === normalize(s)).
+function contentId(settlement) {
+  return idFromSeed(JSON.stringify({
+    name: settlement?.name ?? null,
+    tier: settlement?.tier ?? null,
+    population: settlement?.population ?? null,
+  }));
 }
 
 /**
@@ -112,7 +117,7 @@ export function normalizeSettlement(settlement) {
       schemaVersion:     SCHEMA_VERSION,
       simulationVersion: SIMULATION_VERSION,
       generatorVersion:  GENERATOR_VERSION,
-      id:                randomId(),
+      id:                contentId(settlement),
       activeConditions:  [],
       simulationTrace:   [],
       aiOverlays:        [],
@@ -133,7 +138,7 @@ export function normalizeSettlement(settlement) {
 
   // ── 2. Stable id ──────────────────────────────────────────────────────
   if (!out.id) {
-    out.id = out._seed ? idFromSeed(out._seed) : randomId();
+    out.id = out._seed ? idFromSeed(out._seed) : contentId(out);
   }
 
   // ── 3. Resolve aliased fields ─────────────────────────────────────────

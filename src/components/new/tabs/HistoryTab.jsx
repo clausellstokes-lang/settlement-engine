@@ -5,15 +5,16 @@ import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
+import Button from '../../primitives/Button.jsx';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
-const PARTY = '#8a2f4a';
-const PARTY_BG = '#f7ebf0';
+const PARTY = swatch['#8A2F4A'];
+const PARTY_BG = swatch['#F7EBF0'];
 // Chronicle source accents (spec §8 M3c): manual edits in muted gold; world-pulse
 // uses the existing info blue (swatch.info).
-const SRC_EDIT = '#7a5a2a';
-const SRC_EDIT_BG = '#f5ecd8';
+const SRC_EDIT = swatch['#7A5A2A'];
+const SRC_EDIT_BG = swatch['#F5ECD8'];
 
 function formatRecentDate(value) {
   if (!value) return '';
@@ -79,7 +80,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3}}>{age} years old</span>
           {sortedEvents.length>0&&<span style={{fontSize:FS.sm,color:MUTED}}>{sortedEvents.length} historical events · {currentTensions.length} current tensions</span>}
-          {onReroll&&<button onClick={onReroll} style={{marginLeft:'auto',fontSize:FS.xs,fontWeight:700,color:swatch['#A0762A'],background:swatch['#F7F0E4'],border:'1px solid #c8b89a',borderRadius:5,padding:'5px 12px',cursor:'pointer',flexShrink:0}}>↺ Reroll</button>}
+          {onReroll&&<Button variant="gold" size="sm" onClick={onReroll} style={{marginLeft:'auto',flexShrink:0}}>↺ Reroll</Button>}
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>
@@ -265,7 +266,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                 borderRadius:7, overflow:'hidden',
                 background: isAnchored?ec.bg:'#faf8f4',
                 cursor:'pointer',
-              }} onClick={()=>setExpandedEvent(isExp?null:i)}>
+              }} role="button" tabIndex={0} onClick={()=>setExpandedEvent(isExp?null:i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedEvent(isExp?null:i);}}}>
                 {/* Anchored banner */}
                 {isAnchored&&<div style={{background:ec.color,padding:'3px 12px',display:'flex',alignItems:'center',gap:6}}>
                   <span style={{fontSize:FS.xxs,fontWeight:800,color:swatch.white,letterSpacing:'0.06em'}}> STILL RELEVANT TODAY</span>

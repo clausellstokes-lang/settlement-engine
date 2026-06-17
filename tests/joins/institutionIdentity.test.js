@@ -35,6 +35,9 @@ import {
 import {
   computeActiveChains,
   institutionMatchesProcessor,
+  institutionMatchesKeyword,
+  institutionMatchesGate,
+  deriveInstitutionalServices,
   processorPatternIdSet,
 } from '../../src/generators/computeActiveChains.js';
 import { institutionContribution } from '../../src/domain/worldPulse/institutionLifecycle.js';
@@ -292,6 +295,140 @@ describe('id-first joins select EXACTLY what the fuzzy matcher selected', () => 
       'sawmill',
       'sawmill_commercial',
     ]);
+  });
+});
+
+// ── 3b. tradition / magic-transit gates are id-first (A+ generators.4) ────────
+
+// The keywords the tradition + magic-transit gates in computeActiveChains match
+// institutions against (druid/divine/arcane/alchemy + the magic-transit hub).
+const TRADITION_KEYWORDS = [
+  'druid circle', 'grove shrine', 'elder grove', "warden's lodge", 'sacred grove',
+  'cathedral', 'monastery', 'great cathedral', 'parish church', 'friary', 'priest',
+  'wizard', 'mages', 'arcane', 'enchant', 'spellcasting', 'academy of magic',
+  'alchemist', 'apothecary district', 'alchemist quarter',
+  'teleportation', 'planar', 'airship',
+];
+
+describe('tradition / magic-transit gates select EXACTLY what name-includes selected', () => {
+  it('for every catalog institution × every tradition keyword, id-match === substring-match', () => {
+    // institutionMatchesKeyword's id-set is BUILT from the same name.includes
+    // rule the gates used, so this holds by construction — this pin keeps the
+    // id path and the substring path from ever drifting apart.
+    const disagreements = [];
+    for (const name of ALL_CATALOG_NAMES) {
+      const stamped = { name, catalogId: catalogIdForName(name) };
+      for (const kw of TRADITION_KEYWORDS) {
+        const idMatch = institutionMatchesKeyword(stamped, kw);
+        const substringMatch = name.toLowerCase().includes(kw.toLowerCase());
+        if (idMatch !== substringMatch) disagreements.push(`${name} × ${kw}`);
+      }
+    }
+    expect(disagreements).toEqual([]);
+  });
+
+  it('unstamped institutions keep the substring matcher verbatim', () => {
+    for (const kw of TRADITION_KEYWORDS) {
+      for (const name of ["Mages' guild", 'The Spire', 'My Bespoke Wizard Hut']) {
+        expect(institutionMatchesKeyword({ name }, kw), `${name} × ${kw}`)
+          .toBe(name.toLowerCase().includes(kw.toLowerCase()));
+      }
+    }
+  });
+
+  it('the cure: a RENAMED stamped arcane institution still reads as a mages tradition; a bare rename does not', () => {
+    const renamedStamped = { id: 'i1', name: 'The Obsidian Spire', catalogId: catalogIdForName("Mages' guild") };
+    const renamedBare = { id: 'i1', name: 'The Obsidian Spire' };
+    // The arcane tradition gate fires on the 'mages' keyword; the stamp carries
+    // it through a rename, the bare rename severs it.
+    expect(catalogIdForName("Mages' guild")).toBeTruthy(); // guard: the fixture is a real catalog name
+    expect(institutionMatchesKeyword(renamedStamped, 'mages')).toBe(true);
+    expect(institutionMatchesKeyword(renamedBare, 'mages')).toBe(false);
+    // The id set carries only what the catalog NAME carried — "Mages' guild"
+    // has no 'arcane' substring, so the stamp does not invent an arcane match.
+    expect(institutionMatchesKeyword(renamedStamped, 'arcane')).toBe(false);
+  });
+});
+
+// ── 3c. institutional-services map is id-first (A+ generators.5) ──────────────
+
+describe('deriveInstitutionalServices decides membership by id (rename-proof)', () => {
+  it('a stamped-renamed "Banking houses" still yields Banking & Finance; a bare rename does not', () => {
+    const stampedRenamed = [{ id: 'i1', name: 'The Gilded Vault', catalogId: catalogIdForName('Banking houses') }];
+    const bareRenamed = [{ id: 'i1', name: 'The Gilded Vault' }];
+    expect(catalogIdForName('Banking houses')).toBeTruthy();
+    const stampedServices = deriveInstitutionalServices(stampedRenamed).map(s => s.label);
+    const bareServices = deriveInstitutionalServices(bareRenamed).map(s => s.label);
+    expect(stampedServices).toContain('Banking & Finance');
+    expect(bareServices).not.toContain('Banking & Finance');
+  });
+
+  it('an unrenamed catalog institution derives the same services with and without its stamp', () => {
+    const named = [{ id: 'i1', name: 'Banking houses' }];
+    const stamped = [{ id: 'i1', name: 'Banking houses', catalogId: catalogIdForName('Banking houses') }];
+    expect(deriveInstitutionalServices(stamped)).toEqual(deriveInstitutionalServices(named));
+  });
+});
+
+// ── 3d. export gates are id-first, mill special-case preserved (A+ generators.6)
+
+describe('export institution gates decide by id, keep the mill special-case', () => {
+  it('the mill gate matches real processing units (id) but NOT "access to external mill"', () => {
+    expect(institutionMatchesGate({ name: 'Sawmill', catalogId: catalogIdForName('Sawmill') }, 'mill')).toBe(true);
+    expect(institutionMatchesGate({ name: 'Mill', catalogId: catalogIdForName('Mill') }, 'mill')).toBe(true);
+    // The frozen false-match the special case exists to prevent — preserved.
+    expect(institutionMatchesGate(
+      { name: 'Access to external mill', catalogId: catalogIdForName('Access to external mill') }, 'mill',
+    )).toBe(false);
+  });
+
+  it('a stamped-renamed sawmill still satisfies the mill gate; a bare rename does not', () => {
+    const renamedStamped = { id: 'i1', name: 'The Old Wheel', catalogId: catalogIdForName('Sawmill') };
+    const renamedBare = { id: 'i1', name: 'The Old Wheel' };
+    expect(catalogIdForName('Sawmill')).toBeTruthy();
+    expect(institutionMatchesGate(renamedStamped, 'mill')).toBe(true);
+    expect(institutionMatchesGate(renamedBare, 'mill')).toBe(false);
+  });
+
+  it('id-gate === name-predicate for catalog institutions (no drift) on a representative keyword set', () => {
+    const KEYWORDS = ['mill', 'mine', 'smith', 'tannery', 'weaver', 'brewery', 'dock', 'quarry'];
+    const disagreements = [];
+    for (const name of ALL_CATALOG_NAMES) {
+      const lower = name.toLowerCase();
+      const stamped = { name, catalogId: catalogIdForName(name) };
+      for (const kw of KEYWORDS) {
+        const idMatch = institutionMatchesGate(stamped, kw);
+        const predMatch = kw === 'mill'
+          ? (lower === 'mill' || lower.startsWith('mills (') || lower === 'maltster' || lower === 'sawmill') && !lower.includes('access to external')
+          : lower.includes(kw);
+        if (idMatch !== predMatch) disagreements.push(`${name} × ${kw}`);
+      }
+    }
+    expect(disagreements).toEqual([]);
+  });
+});
+
+// ── 3e. tradeDependencies join is id-first (A+ generators.7) ──────────────────
+
+describe('tradeDependencies join matches by id, not a fragile name prefix', () => {
+  const CFG = { settType: 'town', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'isolated', monsterThreat: 'civilized' };
+  const SEED = 'golden-master-v1';
+
+  it('a flour "Mill" dependency no longer false-joins the timber/lumber chain', () => {
+    // The prefix heuristic matched dependency "Mill" against the timber chain's
+    // "Sawmill" processor ("sawmill".includes("mill")), stamping a nonsensical
+    // grain/flour dependency on a lumber chain. Id-match (catalogId 'mill' ∉
+    // processorPatternIdSet('Sawmill')) drops it.
+    const s = generateSettlementPipeline(CFG, null, { seed: SEED, customContent: {} });
+    const timber = (s.economicState?.activeChains || []).find(c => c.chainId === 'timber');
+    expect(timber, 'fixture must still produce a timber chain').toBeTruthy();
+    expect(timber.dependency, 'a flour Mill must not false-join the timber chain').toBeFalsy();
+  });
+
+  it('genuine same-domain dependencies still attach (the join still works)', () => {
+    const s = generateSettlementPipeline(CFG, null, { seed: SEED, customContent: {} });
+    const garrison = (s.economicState?.activeChains || []).find(c => c.chainId === 'garrison');
+    expect(garrison?.dependency?.institution).toBe('Town watch');
   });
 });
 

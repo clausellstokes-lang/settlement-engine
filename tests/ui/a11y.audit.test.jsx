@@ -15,8 +15,11 @@
  * What this test does NOT do:
  *   - Run axe-core or other full-tree audits (would require an extra dep
  *     and slow the gate)
- *   - Test keyboard focus traps (jsdom doesn't move focus realistically)
  *   - Test color contrast (no rendered pixels in jsdom)
+ *
+ * (A+ design-a11y.6 update: the Dialog focus-trap IS now tested below — jsdom
+ *  moves focus enough for Tab/Shift-Tab wrap, Escape, and focus-restore via
+ *  element.focus() + a window keydown the trap listens on.)
  *
  * For full a11y coverage we'd add @axe-core/playwright in the e2e suite.
  * That's not in scope for Tier 7.17 — the audit doc captures it.
@@ -24,7 +27,7 @@
 
 import React from 'react';
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 
 // Mock stripe + supabase before importing modals that pull them in.
 vi.mock('../../src/lib/stripe.js', () => ({
@@ -118,6 +121,119 @@ describe('Tier 7.17 — Primitive a11y contracts', () => {
     // FounderBadge renders nothing when the user isn't a founder. That's
     // fine — we just assert it doesn't crash.
     expect(container).toBeDefined();
+  });
+});
+
+// ── A+ design-a11y.4 — conditionally-rendered Alert is a live region ─────────
+// A WCAG 4.1.3 (Status Messages) contract: an error/status that appears after
+// the user acts must be announced by assistive tech. Errors are assertive
+// (role=alert); other tones polite (role=status).
+
+describe('A+ design-a11y.4 — Alert live region', () => {
+  test('error Alert is an assertive live region (role=alert)', async () => {
+    const { Alert } = await import('../../src/components/auth/authUI.jsx');
+    const { container } = render(<Alert type="error">Bad password</Alert>);
+    const node = container.querySelector('[role="alert"]');
+    expect(node).not.toBeNull();
+    expect(node.getAttribute('aria-live')).toBe('assertive');
+    expect(node.textContent).toContain('Bad password');
+  });
+
+  test('success Alert is a polite status region (role=status)', async () => {
+    const { Alert } = await import('../../src/components/auth/authUI.jsx');
+    const { container } = render(<Alert type="success">Saved</Alert>);
+    const node = container.querySelector('[role="status"]');
+    expect(node).not.toBeNull();
+    expect(node.getAttribute('aria-live')).toBe('polite');
+  });
+});
+
+// ── A+ design-a11y.6 — Dialog focus-trap is keyboard-locked ──────────────────
+// Shell remembers the trigger, focuses the first focusable on open, wraps
+// Tab/Shift-Tab, closes on Escape, and restores focus on unmount. These pin
+// that contract so a refactor (e.g. dropping preventDefault in the trap) reds.
+
+describe('A+ design-a11y.6 — Dialog focus trap', () => {
+  async function openConfirm(onCancel = () => {}, onConfirm = () => {}) {
+    const { ConfirmDialog } = await import('../../src/components/primitives/Dialog.jsx');
+    const utils = render(
+      <ConfirmDialog open title="Confirm?" body="Body" onCancel={onCancel} onConfirm={onConfirm} />,
+    );
+    const dialog = utils.container.querySelector('[role="dialog"]');
+    const buttons = Array.from(dialog.querySelectorAll('button'));
+    return { ...utils, dialog, buttons };
+  }
+
+  test('Tab from the last focusable wraps to the first', async () => {
+    const { buttons } = await openConfirm();
+    expect(buttons.length).toBeGreaterThanOrEqual(2);
+    const first = buttons[0];
+    const last = buttons[buttons.length - 1];
+    last.focus();
+    expect(document.activeElement).toBe(last);
+    fireEvent.keyDown(window, { key: 'Tab' });
+    expect(document.activeElement).toBe(first);
+  });
+
+  test('Shift+Tab from the first focusable wraps to the last', async () => {
+    const { buttons } = await openConfirm();
+    const first = buttons[0];
+    const last = buttons[buttons.length - 1];
+    first.focus();
+    fireEvent.keyDown(window, { key: 'Tab', shiftKey: true });
+    expect(document.activeElement).toBe(last);
+  });
+
+  test('Escape invokes onCancel', async () => {
+    const onCancel = vi.fn();
+    await openConfirm(onCancel);
+    fireEvent.keyDown(window, { key: 'Escape' });
+    expect(onCancel).toHaveBeenCalledTimes(1);
+  });
+
+  test('focus restores to the trigger element on close', async () => {
+    const trigger = document.createElement('button');
+    trigger.textContent = 'open';
+    document.body.appendChild(trigger);
+    trigger.focus();
+    expect(document.activeElement).toBe(trigger);
+    const { unmount } = await openConfirm();
+    // The trap moved focus into the dialog on open…
+    expect(document.activeElement).not.toBe(trigger);
+    unmount();
+    // …and restored it to the trigger on close.
+    expect(document.activeElement).toBe(trigger);
+    trigger.remove();
+  });
+});
+
+// ── A+ design-a11y.5 — every icon-only button has an accessible name ──────────
+// An icon-only <button> with no text and no aria-label is announced as just
+// "button" by a screen reader. The statically-enforcing guarantee is the
+// jsx-hygiene/icon-button-needs-label lint rule (ERROR, zero offenders); this
+// render test confirms the accessible name actually COMPUTES at runtime — i.e.
+// the rule isn't satisfied by an empty aria-label that resolves to nothing.
+
+describe('A+ design-a11y.5 — icon-only buttons carry an accessible name', () => {
+  // jsdom doesn't compute the full ARIA accessible-name algorithm, so approximate
+  // its primary sources: aria-label, then visible text, then title.
+  const accName = (btn) =>
+    (btn.getAttribute('aria-label') || btn.textContent || btn.getAttribute('title') || '').trim();
+
+  test('Dialog Shell: every button (incl. the icon-only close) resolves to a non-empty name', async () => {
+    const { ConfirmDialog } = await import('../../src/components/primitives/Dialog.jsx');
+    const { container } = render(
+      <ConfirmDialog open title="Confirm?" body="Body" onCancel={() => {}} onConfirm={() => {}} />,
+    );
+    const buttons = Array.from(container.querySelectorAll('button'));
+    expect(buttons.length).toBeGreaterThanOrEqual(3); // close (icon-only) + cancel + confirm
+    for (const b of buttons) {
+      expect(accName(b), `a button rendered with no accessible name: ${b.outerHTML.slice(0, 90)}`).not.toBe('');
+    }
+    // The top-right close is icon-only; it must resolve via aria-label, not text.
+    const close = buttons.find((b) => b.getAttribute('aria-label') === 'Close');
+    expect(close, 'expected an icon-only close button labeled "Close"').toBeTruthy();
+    expect(close.textContent.trim()).toBe(''); // genuinely icon-only — name comes from the label
   });
 });
 

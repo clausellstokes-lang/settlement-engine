@@ -21,8 +21,8 @@ import {
   SP,
   sans,
   serif_,
-  swatch,
 } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 import { formatDate } from './galleryUtils.js';
 
 export default function GalleryComments({ dossier, auth, onCountChange }) {
@@ -99,6 +99,7 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
             rows={4}
             maxLength={2000}
             placeholder="Add a public comment"
+            aria-label="Add a public comment"
             style={{
               width: '100%',
               boxSizing: 'border-box',
@@ -114,26 +115,15 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
             }}
           />
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-            <button
-              type="button"
+            <Button
+              variant="primary"
+              size="md"
               onClick={submit}
+              busy={busy}
               disabled={busy || !commentText.trim()}
-              style={{
-                minHeight: 34,
-                padding: '7px 12px',
-                border: `1px solid ${GOLD}`,
-                borderRadius: R.md,
-                background: GOLD,
-                color: swatch.white,
-                fontFamily: sans,
-                fontSize: FS.sm,
-                fontWeight: 900,
-                cursor: busy || !commentText.trim() ? 'not-allowed' : 'pointer',
-                opacity: busy || !commentText.trim() ? 0.65 : 1,
-              }}
             >
               {busy ? 'Posting...' : 'Post comment'}
-            </button>
+            </Button>
             <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 750 }}>
               {commentText.length}/2000
             </span>
@@ -164,14 +154,15 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
                 {formatDate(comment.createdAt)}
               </span>
               {comment.canDelete && (
-                <button
-                  type="button"
+                <Button
+                  variant="danger"
+                  size="sm"
                   onClick={() => remove(comment.id)}
                   disabled={busy}
-                  style={{ marginLeft: 'auto', border: 'none', background: 'transparent', color: RED, cursor: 'pointer', fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
+                  style={{ marginLeft: 'auto' }}
                 >
                   Delete
-                </button>
+                </Button>
               )}
             </div>
             <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>

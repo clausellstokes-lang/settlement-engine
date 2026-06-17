@@ -74,7 +74,15 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
 
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={onToggle}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onToggle();
+        }
+      }}
       title={`${meta.label}: ${dim.band}. Click for details.`}
       style={{
         cursor: 'pointer',

@@ -24,8 +24,12 @@ import { isConfigured } from '../../lib/supabase.js';
 import { getTierDisplayName } from '../../config/pricing.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
+import Button from '../primitives/Button.jsx';
 import {
-  Input, Checkbox, Button, Alert, OAuthButton, OrDivider, GoogleGlyph, DiscordGlyph,
+  // `Button` here is the auth-page full-width CTA (its own prop API: always
+  // width:100%, variants primary/success/danger/ghost) — kept under an alias so
+  // the design-system Button primitive above can own the canonical name.
+  Input, Checkbox, Button as AuthCTAButton, Alert, OAuthButton, OrDivider, GoogleGlyph, DiscordGlyph,
 } from './authUI.jsx';
 
 // AuthPanel's internal mode vocabulary → the public route view id its
@@ -165,9 +169,9 @@ export default function AuthPanel({
         <Alert type="success">
           We sent a confirmation link to <strong>{email}</strong>. Check your inbox and click the link to activate your account.
         </Alert>
-        <Button variant="ghost" onClick={() => requestMode('signin')}>
+        <AuthCTAButton variant="ghost" onClick={() => requestMode('signin')}>
           Back to Sign In
-        </Button>
+        </AuthCTAButton>
       </div>
     );
   }
@@ -182,13 +186,12 @@ export default function AuthPanel({
         {error && <Alert type="error">{error}</Alert>}
         {message && <Alert type="success">{message}</Alert>}
         <Input type="email" placeholder="Email address" value={email} onChange={setEmail} />
-        <Button onClick={handleResetPassword} disabled={loading}>
+        <AuthCTAButton onClick={handleResetPassword} disabled={loading}>
           {loading ? 'Sending...' : 'Send Reset Link'}
-        </Button>
-        <button onClick={() => requestMode('signin')}
-          style={{ background: 'none', border: 'none', color: GOLD, fontSize: FS.sm, cursor: 'pointer', fontFamily: sans }}>
+        </AuthCTAButton>
+        <Button variant="ghost" size="sm" onClick={() => requestMode('signin')}>
           Back to Sign In
-        </button>
+        </Button>
       </div>
     );
   }
@@ -199,7 +202,13 @@ export default function AuthPanel({
       {showTabs && (
         <div style={{ display: 'flex', borderRadius: R.md, overflow: 'hidden', border: `1px solid ${BORDER}` }}>
           {[['signin', 'Sign In'], ['signup', 'Create Account']].map(([id, label]) => (
-            <button key={id} onClick={() => requestMode(id)}
+            // Bespoke segmented-control tab: flex:1 borderless square segments
+            // clipped by the parent's overflow:hidden, with a conditional gold
+            // active fill driven by `mode === id`. The Button primitive forces
+            // its own 1px border + R.lg rounding, which would break the seamless
+            // segmented look — so this stays raw (accessible via its text label).
+            <button key={id} type="button" onClick={() => requestMode(id)}
+              aria-pressed={mode === id}
               style={{
                 flex: 1, padding: `${SP.sm}px 0`,
                 background: mode === id ? GOLD_BG : 'transparent',
@@ -255,26 +264,22 @@ export default function AuthPanel({
         <Checkbox checked={rememberMe} onChange={setRememberMe} label={t('auth.rememberMe')} />
       )}
 
-      <Button onClick={submit} disabled={loading}>
+      <AuthCTAButton onClick={submit} disabled={loading}>
         {loading
           ? t('auth.button.working')
           : authMethod === 'magic'
             ? t('auth.button.sendLink')
             : (mode === 'signup' ? t('auth.button.createAcct') : t('auth.button.signIn'))}
-      </Button>
+      </AuthCTAButton>
 
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="sm"
         onClick={() => setMoreOpen(o => !o)}
         aria-expanded={moreOpen}
-        style={{
-          background: 'none', border: 'none', padding: 0,
-          color: GOLD, fontSize: FS.xs, cursor: 'pointer',
-          fontFamily: sans, textAlign: 'center',
-        }}
       >
         {moreOpen ? t('auth.button.moreClose') : t('auth.button.moreOpen')}
-      </button>
+      </Button>
 
       {moreOpen && (
         <div style={{
@@ -285,21 +290,23 @@ export default function AuthPanel({
           borderRadius: R.md,
           fontSize: FS.xs, color: SECOND,
         }}>
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => { setAuthMethod(m => m === 'magic' ? 'password' : 'magic'); setError(null); setMessage(null); }}
-            style={{ background: 'none', border: 'none', color: GOLD, fontSize: FS.xs, cursor: 'pointer', fontFamily: sans, textAlign: 'left', padding: 0 }}
+            style={{ justifyContent: 'flex-start' }}
           >
             {authMethod === 'magic' ? t('auth.button.usePassword') : t('auth.button.useMagic')}
-          </button>
+          </Button>
           {authMethod === 'password' && mode === 'signin' && (
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => requestMode('reset')}
-              style={{ background: 'none', border: 'none', color: GOLD, fontSize: FS.xs, cursor: 'pointer', fontFamily: sans, textAlign: 'left', padding: 0 }}
+              style={{ justifyContent: 'flex-start' }}
             >
               {t('auth.password.forgot')}
-            </button>
+            </Button>
           )}
         </div>
       )}

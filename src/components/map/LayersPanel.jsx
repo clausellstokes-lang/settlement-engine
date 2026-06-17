@@ -13,6 +13,8 @@
  */
 
 import { X, Check } from 'lucide-react';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
@@ -96,16 +98,13 @@ export default function LayersPanel({ onClose }) {
         }}>
           Layers
         </div>
-        <button
+        <IconButton
+          Icon={X}
+          label="Close"
           onClick={onClose}
-          style={{
-            background: 'transparent', border: 'none', cursor: 'pointer',
-            color: MUTED, padding: 2, display: 'flex', alignItems: 'center',
-          }}
-          title="Close"
-        >
-          <X size={14} />
-        </button>
+          tone="ghost"
+          size="md"
+        />
       </div>
 
       {/* Layer list */}
@@ -173,7 +172,9 @@ export default function LayersPanel({ onClose }) {
                 onClick={() => toggleRegionalImpactStatus(status)}
               />
             ))}
-            <label style={{
+            <label
+              htmlFor="regional-min-severity"
+              style={{
               display: 'flex',
               alignItems: 'center',
               gap: SP.xs,
@@ -185,7 +186,9 @@ export default function LayersPanel({ onClose }) {
             }}>
               Severity
               <input
+                id="regional-min-severity"
                 type="range"
+                aria-label="Minimum severity"
                 min="0"
                 max="0.8"
                 step="0.1"
@@ -241,8 +244,12 @@ export default function LayersPanel({ onClose }) {
 }
 
 function LayerToggle({ label, checked, onChange }) {
+  const inputId = `layer-toggle-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
   return (
-    <label style={{
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only apply decorative hover styling to this label-for-checkbox; no interactive behavior added
+    <label
+      htmlFor={inputId}
+      style={{
       display: 'flex', alignItems: 'center', gap: SP.xs,
       padding: `${SP.xs}px ${SP.sm}px`,
       cursor: 'pointer', userSelect: 'none',
@@ -253,7 +260,9 @@ function LayerToggle({ label, checked, onChange }) {
       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
     >
       <input
+        id={inputId}
         type="checkbox"
+        aria-label={label}
         checked={checked}
         onChange={onChange}
         style={{ accentColor: GOLD, cursor: 'pointer' }}
@@ -265,22 +274,26 @@ function LayerToggle({ label, checked, onChange }) {
 
 function FilterChip({ label, color, active, onClick }) {
   return (
-    <button
+    <Button
+      variant={active ? 'primary' : 'secondary'}
+      size="sm"
       onClick={onClick}
+      aria-pressed={active}
       style={{
-        display: 'inline-flex', alignItems: 'center', gap: 4,
+        gap: 4,
         padding: '3px 8px',
         margin: '2px 3px 2px 0',
+        minHeight: undefined,
         background: active ? color : 'transparent',
         color: active ? '#fff' : INK,
         border: `1px solid ${color}`,
         borderRadius: 12,
         fontSize: FS.xxs, fontWeight: 700, fontFamily: sans,
-        cursor: 'pointer',
+        boxShadow: 'none',
       }}
     >
       {active && <Check size={9} />}
       {label}
-    </button>
+    </Button>
   );
 }

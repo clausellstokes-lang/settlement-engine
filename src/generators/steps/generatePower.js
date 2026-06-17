@@ -19,6 +19,7 @@ import { deriveFactionProfile } from '../../domain/factionProfile.js';
 
 registerStep('generatePower', {
   deps: ['generateEconomy', 'resolveNeighbour'],
+  reads: ['economicState', 'effectiveConfig', 'institutions', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['powerStructure'],
   phase: 'power',
 }, (ctx) => {

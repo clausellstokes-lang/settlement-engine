@@ -26,6 +26,7 @@
 import { useStore } from '../../store';
 import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, MUTED, sans, FS, SP, R, swatch } from '../theme.js';
 import { Link as LinkIcon, AlertTriangle, ChevronRight, Eye, EyeOff } from 'lucide-react';
+import Button from '../primitives/Button.jsx';
 
 const REL_TYPES = [
   { id: 'trade_partner', label: 'Trade',   color: '#4A7A3A' },
@@ -100,20 +101,22 @@ export default function RoutesToolbar() {
         {REL_TYPES.map(rt => {
           const active = activeFilter.includes(rt.id);
           return (
-            <button
+            <Button
               key={rt.id}
-              type="button"
+              variant="ghost"
+              size="sm"
+              aria-pressed={active}
               onClick={() => toggleRelType(rt.id)}
               title={`Toggle ${rt.label} edges`}
               style={{
-                display: 'inline-flex', alignItems: 'center', gap: 4,
+                gap: 4,
+                minHeight: 'auto',
                 padding: '3px 8px',
                 background: active ? `${rt.color}1A` : 'transparent',
                 border: `1px solid ${active ? rt.color : BORDER2}`,
                 borderRadius: R.sm,
                 color: active ? INK : SECOND,
-                fontSize: FS.xs, fontWeight: active ? 700 : 500,
-                cursor: 'pointer', fontFamily: sans,
+                fontWeight: active ? 700 : 500,
               }}
             >
               <span style={{
@@ -122,57 +125,43 @@ export default function RoutesToolbar() {
                 opacity: active ? 1 : 0.45,
               }} />
               {rt.label}
-            </button>
+            </Button>
           );
         })}
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={activeFilter.length === REL_TYPES.length ? hideAllRels : showAllRels}
-          style={{
-            background: 'transparent', border: 'none',
-            color: MUTED, fontSize: FS.xs, fontWeight: 500,
-            cursor: 'pointer', fontFamily: sans, padding: '3px 6px',
-          }}
         >
           {activeFilter.length === REL_TYPES.length ? 'None' : 'All'}
-        </button>
+        </Button>
       </div>
 
       <div style={{ width: 1, height: 18, background: BORDER }} />
 
       {/* Roads toggle */}
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="sm"
         onClick={() => toggleLayer('roads')}
-        style={{
-          display: 'inline-flex', alignItems: 'center', gap: 4,
-          background: 'transparent', border: 'none',
-          color: layers?.roads ? INK : MUTED,
-          fontSize: FS.xs, fontWeight: 600,
-          cursor: 'pointer', fontFamily: sans, padding: '3px 6px',
-        }}
         title="Toggle the roads layer"
+        aria-pressed={!!layers?.roads}
+        icon={layers?.roads ? <Eye size={11} /> : <EyeOff size={11} />}
       >
-        {layers?.roads ? <Eye size={11} /> : <EyeOff size={11} />}
         Roads
-      </button>
+      </Button>
 
       {/* Chains toggle */}
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="sm"
         onClick={() => toggleLayer('chains')}
-        style={{
-          display: 'inline-flex', alignItems: 'center', gap: 4,
-          background: 'transparent', border: 'none',
-          color: layers?.chains ? INK : MUTED,
-          fontSize: FS.xs, fontWeight: 600,
-          cursor: 'pointer', fontFamily: sans, padding: '3px 6px',
-        }}
         title="Toggle the supply-chain layer"
+        aria-pressed={!!layers?.chains}
+        icon={layers?.chains ? <Eye size={11} /> : <EyeOff size={11} />}
       >
-        {layers?.chains ? <Eye size={11} /> : <EyeOff size={11} />}
         Chains
-      </button>
+      </Button>
 
       {/* Network-stress callout — pulled to the right so it reads as a
           red flag, not a setting */}

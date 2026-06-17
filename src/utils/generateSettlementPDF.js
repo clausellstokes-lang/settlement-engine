@@ -18,6 +18,20 @@ import React from 'react';
 import { pdf } from '@react-pdf/renderer';
 import { SettlementPDF } from '../pdf/SettlementPDF.jsx';
 import { normalizeSettlement } from '../domain/normalizeSettlement.js';
+import { track, EVENTS } from '../lib/analytics.js';
+import { captureFingerprint } from '../lib/researchCapture.js';
+
+/** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
+function durationBand(ms) {
+  const n = Number(ms);
+  if (!Number.isFinite(n) || n < 0) return 'unknown';
+  if (n < 5000) return 'lt_5s';
+  if (n < 15000) return '5_15s';
+  if (n < 60000) return '15_60s';
+  if (n < 300000) return '1_5m';
+  if (n < 1800000) return '5_30m';
+  return 'gt_30m';
+}
 
 export async function generateSettlementPDF(settlement, options = {}) {
   const {
@@ -48,6 +62,8 @@ export async function generateSettlementPDF(settlement, options = {}) {
     // resale and signals "free preview" without being obnoxious.
     isAnonymous = false,
   } = options;
+
+  const startedAt = Date.now();
 
   // Run the canonical-shape adapter at the export boundary. Saves loaded
   // from before Phase 6 don't yet carry version stamps; normalizing here
@@ -85,6 +101,20 @@ export async function generateSettlementPDF(settlement, options = {}) {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+
+  // Export succeeded (download triggered) — emit the success event + structural
+  // snapshot. Both are fire-and-forget; a fault here must never surface as an
+  // export failure to the caller. captureFingerprint silently skips when no
+  // stable uuid is available (anonymous exports).
+  try {
+    track(EVENTS.PDF_EXPORT_COMPLETED, {
+      scope: 'settlement',
+      narrative_mode: !!narrativeMode,
+      canon_phase: typeof phase === 'string' ? phase : 'draft',
+      duration_band: durationBand(Date.now() - startedAt),
+    });
+    captureFingerprint('exported', settlement, { settlementUuid: options.settlementUuid });
+  } catch { /* analytics never breaks export */ }
 }
 
 export default generateSettlementPDF;

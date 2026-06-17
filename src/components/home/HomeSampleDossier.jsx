@@ -25,15 +25,15 @@ import { t } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { SAMPLE_DOSSIER } from '../../data/sampleDossier.js';
 
-const PARCH = '#FBF5E6';
-const INK_DEEP = '#1B1408';
-const INK = '#2C2210';
-const GOLD = '#C9A24C';
-const MUTED = '#9C8068';
-const BORDER = '#E8D9B0';
-const GREEN = '#4A7A3A';
-const VIOLET = '#7B4FCF';
-const AMBER = '#D08020';
+const PARCH = swatch['#FBF5E6'];
+const INK_DEEP = swatch['#1B1408'];
+const INK = swatch['#2C2210'];
+const GOLD = swatch['#C9A24C'];
+const MUTED = swatch['#9C8068'];
+const BORDER = swatch['#E8D9B0'];
+const GREEN = swatch['#4A7A3A'];
+const VIOLET = swatch['#7B4FCF'];
+const AMBER = swatch['#D08020'];
 const sans = '"Nunito", system-ui, sans-serif';
 const serif = '"Crimson Text", Georgia, serif';
 

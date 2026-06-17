@@ -14,7 +14,8 @@
  */
 
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { Search } from 'lucide-react';
+import { Search, X } from 'lucide-react';
+import IconButton from '../primitives/IconButton.jsx';
 import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { searchCompendium } from '../../domain/compendium/searchIndex.js';
@@ -115,20 +116,18 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           }}
         />
         {query && (
-          <button
-            type="button"
+          <IconButton
+            Icon={X}
+            label="Clear search"
+            tone="ghost"
+            size="sm"
             onClick={() => { setQuery(''); setActive(0); setOpen(false); }}
-            aria-label="Clear search"
-            style={{
-              border: 'none', background: 'none', cursor: 'pointer',
-              color: MUT, fontSize: FS.lg, padding: 0, lineHeight: 1,
-            }}
-          >×</button>
+          />
         )}
       </div>
 
       {showDropdown && (
-        <ul
+        <div
           id="compendium-search-results"
           role="listbox"
           style={{
@@ -142,7 +141,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           {results.map((r, i) => {
             const color = CAT_COLOR[r.category] || GOLD;
             return (
-              <li key={r.id} role="option" aria-selected={i === active}>
+              <div key={r.id} role="option" aria-selected={i === active} aria-label={`${r.term} (${r.category})`}>
                 <button
                   type="button"
                   onMouseEnter={() => setActive(i)}
@@ -167,10 +166,10 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                     {r.category}
                   </span>
                 </button>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
       )}
 
       {showEmpty && (

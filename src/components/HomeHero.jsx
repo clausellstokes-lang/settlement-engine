@@ -32,6 +32,7 @@ import { Funnel } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import AnonTierTeaser from './AnonTierTeaser.jsx';
+import Button from './primitives/Button.jsx';
 import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } from './theme.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
@@ -292,68 +293,42 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                 <b>Sign in (free)</b> to unlock thorp through metropolis,
                 save unlimited drafts, and export the PDF.
               </div>
-              <button
-                type="button"
+              <Button
+                variant="primary"
+                size="lg"
                 onClick={onSignIn}
-                style={{
-                  marginTop: SP.md,
-                  padding: `${SP.md}px ${SP.xl}px`,
-                  background: GOLD, color: swatch.white,
-                  border: 'none',
-                  borderBottom: `2px solid #8C6F32`,
-                  borderRadius: R.sm,
-                  fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-                  cursor: 'pointer',
-                }}
+                style={{ marginTop: SP.md }}
               >
                 Create free account →
-              </button>
+              </Button>
               <div style={{
                 marginTop: SP.md, paddingTop: SP.sm,
                 borderTop: `1px dashed ${BORDER}`,
                 fontSize: FS.xs, color: swatch.inkMag3, fontStyle: 'italic',
               }}>
                 or just take this one{' '}
-                <a
-                  href="#"
+                <button
+                  type="button"
                   onClick={(e) => { e.preventDefault(); document.querySelector('[data-buy-this-dossier]')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  style={{ color: GOLD_DEEP, fontWeight: 700, fontStyle: 'normal' }}
+                  style={{ color: GOLD_DEEP, fontWeight: 700, fontStyle: 'normal', background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer', textDecoration: 'underline' }}
                 >
                   buy the dossier for $2.99 ↓
-                </a>
+                </button>
               </div>
             </div>
             <AnonTierTeaser onSignIn={onSignIn} />
           </>
         ) : (
           <>
-            <button
-              type="button"
+            <Button
+              variant="primary"
+              size="lg"
               onClick={handleBegin}
               disabled={generating}
-              style={{
-                // P117 / H-5 — flat CTA under heroV2; gradient legacy under
-                // the off-flag path. The gradient reads as 2018; flat
-                // gold-on-gold-700-bottom-edge is the modern read.
-                padding: `${SP.md + 2}px ${SP.xxl}px`,
-                background: flag('heroV2')
-                  ? GOLD
-                  : `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-                color: swatch.white, border: 'none',
-                borderBottom: flag('heroV2') ? `2px solid #8C6F32` : 'none',
-                borderRadius: R.button,
-                fontFamily: serif_, fontWeight: 600,
-                fontSize: FS.xxl, letterSpacing: '0.02em',
-                cursor: generating ? 'wait' : 'pointer',
-                opacity: generating ? 0.7 : 1,
-                boxShadow: flag('heroV2')
-                  ? '0 2px 0 rgba(140,111,50,0.25)'
-                  : '0 4px 18px rgba(201,162,76,0.45)',
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                transition: 'transform 0.1s',
-              }}
+              busy={generating}
+              icon={<Sparkles size={18} />}
+              trailingIcon={!generating ? <ArrowRight size={16} /> : null}
             >
-              <Sparkles size={18} />
               {generating
                 ? 'Forging…'
                 : flag('heroV2') && isAnon
@@ -361,8 +336,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                   : isAnon
                     ? t('hero.cta')
                     : `Generate a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
-              {!generating && <ArrowRight size={16} />}
-            </button>
+            </Button>
             {isAnon && (
               <p style={{
                 margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: BODY,

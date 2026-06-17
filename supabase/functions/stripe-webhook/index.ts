@@ -82,7 +82,8 @@ async function findUserIdForStripeCustomer(
       const customer = await stripe.customers.retrieve(customerId) as Stripe.Customer;
       email = customer.email || null;
     } catch (e) {
-      console.warn('[stripe-webhook] customer lookup failed:', e);
+      // Log only the message — the raw Stripe error object can echo customer PII.
+      console.warn('[stripe-webhook] customer lookup failed:', (e as Error)?.message ?? 'unknown');
     }
   }
   if (!email) return null;
@@ -166,7 +167,15 @@ async function grantMonthlyAllowanceIfNeeded(
 // The contract test in tests/edgeFunctions/contracts.test.js
 // (Tier 0.5 — webhook trust boundaries) locks this in.
 
-serve(async (req) => {
+// Exported (not just inlined into serve) so the trust boundary can be
+// EXECUTION-tested: index.test.ts feeds forged vs. correctly-signed requests and
+// asserts no DB write happens before signature verification. `deps.adminClient`
+// is an optional injection seam for the test's recording stub; production passes
+// nothing, so behavior is identical to the previous inline handler.
+export async function handleStripeWebhook(
+  req: Request,
+  deps: { adminClient?: typeof adminClient } = {},
+): Promise<Response> {
   // ── Signature verification — MUST run before any metadata read ─────
   const signature = req.headers.get('stripe-signature');
   if (!signature) return new Response('Missing signature', { status: 400 });
@@ -184,7 +193,7 @@ serve(async (req) => {
     return new Response('Invalid signature', { status: 400 });
   }
 
-  const supabase = adminClient();
+  const supabase = (deps.adminClient ?? adminClient)();
 
   switch (event.type) {
     case 'checkout.session.completed': {
@@ -252,7 +261,9 @@ serve(async (req) => {
         // user state — the customer's receipt + the success-page redirect
         // (handled client-side via session_id query param) deliver the PDF.
         // We log it so audit can match against Stripe payments.
-        console.log(`single_dossier purchased: session=${session.id} email=${session.customer_email}`);
+        // PII: do NOT log customer_email — the session id reconciles to the email
+        // inside Stripe's own access controls. (A+ P0.2)
+        console.log(`single_dossier purchased: session=${session.id}`);
       } else if (credits > 0) {
         // Credit pack purchase. The RPC handles ledger, legacy counter,
         // compatibility table, and audit writes atomically.
@@ -306,4 +317,6 @@ serve(async (req) => {
   return new Response(JSON.stringify({ received: true }), {
     headers: { 'Content-Type': 'application/json' },
   });
-});
+}
+
+serve(handleStripeWebhook);

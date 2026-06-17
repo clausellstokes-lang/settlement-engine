@@ -8,7 +8,9 @@
 import { MousePointer2, Type, Pin, Trash2, Undo2, Redo2 } from 'lucide-react';
 import { useStore } from '../../store';
 import { ANNOTATE_TOOLS } from '../../store/mapSlice.js';
-import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 export default function AnnotateToolbar() {
   const annotateTool    = useStore(s => s.annotateTool);
@@ -69,6 +71,7 @@ export default function AnnotateToolbar() {
             type="range" min={8} max={48} step={1}
             value={opts.labelSize}
             onChange={e => setOpt('labelSize', Number(e.target.value))}
+            aria-label="Size"
             style={{ width: 90, accentColor: GOLD }}
           />
           <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 18 }}>{opts.labelSize}</span>
@@ -90,6 +93,7 @@ export default function AnnotateToolbar() {
             type="color"
             value={opts.labelColor}
             onChange={e => setOpt('labelColor', e.target.value)}
+            aria-label="Color"
             style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}
           />
         </>
@@ -113,6 +117,7 @@ export default function AnnotateToolbar() {
             type="color"
             value={opts.markerColor}
             onChange={e => setOpt('markerColor', e.target.value)}
+            aria-label="Color"
             style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}
           />
         </>
@@ -122,50 +127,36 @@ export default function AnnotateToolbar() {
 
       {/* Selection actions */}
       {selectedId && annotateTool === ANNOTATE_TOOLS.SELECT && (
-        <button
+        <Button
+          variant="danger"
+          size="sm"
           onClick={handleDelete}
           title="Delete selected annotation"
-          style={{
-            display: 'flex', alignItems: 'center', gap: 4,
-            padding: '5px 10px',
-            background: swatch['#8A2A2A'], color: swatch.white,
-            border: 'none', borderRadius: R.sm,
-            fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
-          }}
+          icon={<Trash2 size={12} />}
         >
-          <Trash2 size={12} /> Delete
-        </button>
+          Delete
+        </Button>
       )}
 
       {/* Undo / Redo */}
-      <button onClick={mapUndo} title="Undo" style={iconBtnStyle}>
-        <Undo2 size={13} />
-      </button>
-      <button onClick={mapRedo} title="Redo" style={iconBtnStyle}>
-        <Redo2 size={13} />
-      </button>
+      <IconButton Icon={Undo2} label="Undo" onClick={mapUndo} size="md" />
+      <IconButton Icon={Redo2} label="Redo" onClick={mapRedo} size="md" />
     </div>
   );
 }
 
 function ToolButton({ active, onClick, Icon, label }) {
   return (
-    <button
+    <Button
+      variant={active ? 'secondary' : 'ghost'}
+      size="sm"
       onClick={onClick}
       title={label}
-      style={{
-        display: 'flex', alignItems: 'center', gap: 4,
-        padding: '5px 10px',
-        background: active ? CARD : 'transparent',
-        border: 'none', borderRadius: R.sm,
-        color: active ? INK : SECOND,
-        fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
-        cursor: 'pointer',
-        boxShadow: active ? '0 1px 3px rgba(0,0,0,0.15)' : 'none',
-      }}
+      icon={<Icon size={13} />}
+      aria-pressed={active}
     >
-      <Icon size={13} /> {label}
-    </button>
+      {label}
+    </Button>
   );
 }
 
@@ -187,14 +178,4 @@ const selectStyle = {
   background: CARD,
   fontSize: FS.xxs, fontFamily: sans, color: INK,
   cursor: 'pointer',
-};
-
-const iconBtnStyle = {
-  display: 'flex', alignItems: 'center', justifyContent: 'center',
-  width: 28, height: 26,
-  padding: 0,
-  background: CARD,
-  border: `1px solid ${BORDER}`,
-  borderRadius: R.sm,
-  color: INK, cursor: 'pointer',
 };

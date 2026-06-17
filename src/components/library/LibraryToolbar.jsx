@@ -15,15 +15,16 @@
  * whenever the user has at least one save.
  */
 
+import { X } from 'lucide-react';
 import { sans, FS, SP, R, swatch } from '../theme.js';
 import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
-const BORDER = '#E8D9B0';
-const PARCH = '#FBF5E6';
-const INK = '#1B1408';
-const MUTED = '#9C8068';
-const GOLD = '#C9A24C';
-const GOLD_BG = 'rgba(201,162,76,0.10)';
+const BORDER = swatch['#E8D9B0'];
+const PARCH = swatch['#FBF5E6'];
+const INK = swatch['#1B1408'];
+const MUTED = swatch['#9C8068'];
 
 /** Sort options. Stable keys; renames break callers. */
 export const SORT_OPTIONS = Object.freeze({
@@ -124,6 +125,7 @@ export default function LibraryToolbar({
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          aria-label="Search settlements, NPCs, and factions"
           placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'} + NPCs + factions…`}
           style={{
             flex: 1, border: 'none', outline: 'none',
@@ -132,21 +134,18 @@ export default function LibraryToolbar({
           }}
         />
         {query && (
-          <button
-            type="button"
+          <IconButton
+            Icon={X}
+            label="Clear search"
+            tone="ghost"
+            size="sm"
             onClick={() => setQuery('')}
-            aria-label="Clear search"
-            style={{
-              background: 'transparent', border: 'none',
-              color: MUTED, cursor: 'pointer', padding: 0,
-              fontSize: FS.md, lineHeight: 1,
-            }}
-          >×</button>
+          />
         )}
       </div>
 
       {/* Sort */}
-      <label style={{
+      <label htmlFor="library-sort" style={{
         display: 'inline-flex', alignItems: 'center', gap: SP.xs,
         padding: '4px 8px',
         background: swatch.white,
@@ -156,6 +155,7 @@ export default function LibraryToolbar({
       }}>
         <span style={{ color: MUTED, fontWeight: 700 }}>Sort:</span>
         <select
+          id="library-sort"
           value={sort}
           onChange={(e) => setSort(e.target.value)}
           style={{
@@ -171,36 +171,22 @@ export default function LibraryToolbar({
       </label>
 
       {/* Phase chips */}
-      <button
-        type="button"
+      <Button
+        size="sm"
+        variant={filters?.canonOnly ? 'success' : 'secondary'}
+        aria-pressed={!!filters?.canonOnly}
         onClick={() => toggleFilter('canonOnly')}
-        style={{
-          padding: '4px 9px',
-          background: filters?.canonOnly ? 'rgba(74,122,58,0.10)' : '#fff',
-          border: `1px solid ${filters?.canonOnly ? '#4A7A3A' : BORDER}`,
-          borderRadius: R.sm,
-          fontSize: FS.xs, fontWeight: 700,
-          color: filters?.canonOnly ? '#4A7A3A' : MUTED,
-          cursor: 'pointer', fontFamily: sans,
-        }}
       >
         Canon only
-      </button>
-      <button
-        type="button"
+      </Button>
+      <Button
+        size="sm"
+        variant={filters?.hasNeighbours ? 'gold' : 'secondary'}
+        aria-pressed={!!filters?.hasNeighbours}
         onClick={() => toggleFilter('hasNeighbours')}
-        style={{
-          padding: '4px 9px',
-          background: filters?.hasNeighbours ? GOLD_BG : '#fff',
-          border: `1px solid ${filters?.hasNeighbours ? GOLD : BORDER}`,
-          borderRadius: R.sm,
-          fontSize: FS.xs, fontWeight: 700,
-          color: filters?.hasNeighbours ? '#8C6F32' : MUTED,
-          cursor: 'pointer', fontFamily: sans,
-        }}
       >
         🔗 Linked
-      </button>
+      </Button>
 
       {/* Result count */}
       <span style={{

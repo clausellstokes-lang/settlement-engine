@@ -7,6 +7,8 @@ import {isMobile} from '../tabConstants';
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
+import { deriveFoodBalance } from '../../../domain/display/dossierViewModel.js';
+import Button from '../../primitives/Button.jsx';
 
 // ── Status palette for chain cards ────────────────────────────────────────
 // Module-scope so the object identity is stable across renders (avoids
@@ -21,8 +23,8 @@ const FLOW_STATUS = {
 };
 
 // §14 Phase 3b — trade-direction arrow colours (module-scope const = lint-safe).
-const TRADE_IN_COLOR = '#7a5010';   // ← imported from a neighbour
-const TRADE_OUT_COLOR = '#1a5a28';  // → exported to a neighbour
+const TRADE_IN_COLOR = swatch['#7A5010'];   // ← imported from a neighbour
+const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
 
 /**
  * EconomicFlowsSection — extracted from a 150-line IIFE that lived inline
@@ -59,12 +61,13 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
           entrepotCount > 0                   && {key:'entrepot',  label:` Entrepôt (${entrepotCount})`,              color:'#a0762a'},
           institutionalServices.length > 0    && {key:'services',  label:` Services (${institutionalServices.length})`, color:'#5a3a1a'},
         ].filter(Boolean).map(f => (
-          <button key={f.key} onClick={() => setFlowFilter(f.key)} style={{
-            padding:'4px 10px',borderRadius:4,border:'1px solid',fontSize:FS.xxs,fontWeight:flowFilter===f.key?700:500,cursor:'pointer',
+          <Button key={f.key} variant="secondary" size="sm" aria-pressed={flowFilter===f.key}
+            onClick={() => setFlowFilter(f.key)} style={{
+            padding:'4px 10px',borderRadius:4,minHeight:undefined,fontSize:FS.xxs,fontWeight:flowFilter===f.key?700:500,
             background:flowFilter===f.key?(f.color?`${f.color}18`:'#1c140918'):'#fff',
             color:flowFilter===f.key?(f.color||'#1c1409'):'#6b5340',
-            borderColor:flowFilter===f.key?(f.color||'#1c1409'):'#c8b89a',
-          }}>{f.label}</button>
+            border:`1px solid ${flowFilter===f.key?(f.color||'#1c1409'):'#c8b89a'}`,
+          }}>{f.label}</Button>
         ))}
       </div>
 
@@ -187,6 +190,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
   const fb = via?.metrics?.foodBalance;
+  // Deficit % MUST come from the canonical display model (residual ÷ daily need),
+  // the same value the PDF prints — NOT the engine's gross metrics.foodBalance
+  // .deficitPercent (deficit ÷ adjustedNeed, pre-import), which disagrees with the
+  // PDF on every import-dependent settlement. (A+ pdf.3 — one fact, one source.)
+  const fbal = deriveFoodBalance(s);
   // Terrain-critical imports (things this terrain physically cannot produce)
   const terrainCriticals = (() => {
     const res = s?.resourceAnalysis;
@@ -205,7 +213,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const foodSurplus = fb?.surplus > 0;
   const foodDeficit = fb?.deficit > 0;
   const foodColor = foodDeficit ? '#8b1a1a' : foodSurplus ? '#1a5a28' : '#a0762a';
-  const foodLabel = foodDeficit ? `Deficit ${fb.deficitPercent}%` : foodSurplus ? 'Surplus' : 'Balanced';
+  const foodLabel = foodDeficit ? `Deficit ${fbal.deficitPct}%` : foodSurplus ? 'Surplus' : 'Balanced';
 
   return (
     <div style={{...sans}}>
@@ -371,8 +379,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,borderRadius:6,padding:'8px 12px',fontSize:FS.sm,color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
-              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fb.deficitPercent}%. Settlement is trade-dependent for food security.`
-              : ` Production deficit of ${fb.deficitPercent}%. Settlement requires food imports to sustain population.`
+              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.`
+              : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`
             : `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`
           }
         </div>

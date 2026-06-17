@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
 import { useStore } from '../../store/index.js';
+import IconButton from '../primitives/IconButton.jsx';
 import { BORDER, BODY, CARD, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
 
 function kindLabel(kind) {
@@ -52,8 +53,12 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
 
   if (!context || (!context.incoming.length && !context.outgoingEvents.length)) return null;
 
-  const handleApply = (impactId) => {
-    const result = applyQueuedRegionalImpact(context.campaign.id, impactId);
+  const handleApply = async (impactId) => {
+    // applyQueuedRegionalImpact is async now (it awaits the settlement save before
+    // marking the campaign applied — F2). The store updates the live settlement
+    // optimistically in phase 1; onApplied refreshes this detail's local copy
+    // once the durable write confirms.
+    const result = await applyQueuedRegionalImpact(context.campaign.id, impactId);
     if (result && String(result.saveId) === String(saveId)) onApplied?.(result);
   };
 
@@ -61,8 +66,12 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
     ignoreQueuedRegionalImpact(context.campaign.id, impactId);
   };
 
-  const handleResolve = (impactId) => {
-    const result = resolveRegionalImpact(context.campaign.id, impactId);
+  const handleResolve = async (impactId) => {
+    // resolveRegionalImpact is async now (it awaits the condition-removed settlement
+    // save before marking the campaign 'resolved' — F2). Phase 1 updates the live
+    // settlement optimistically; onApplied refreshes this detail once the durable
+    // write confirms.
+    const result = await resolveRegionalImpact(context.campaign.id, impactId);
     if (result && String(result.saveId) === String(saveId)) onApplied?.(result);
   };
 
@@ -115,68 +124,28 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                 </div>
                 {impact.status === 'queued' && (
                   <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
-                    <button
-                      type="button"
+                    <IconButton
+                      Icon={Check}
+                      label={available ? 'Apply regional impact' : 'Impact is delayed'}
+                      tone="primary"
                       disabled={!available}
                       onClick={() => handleApply(impact.id)}
-                      title={available ? 'Apply regional impact' : 'Impact is delayed'}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: 28,
-                        height: 28,
-                        border: 'none',
-                        borderRadius: 5,
-                        background: available ? swatch.success : BORDER,
-                        color: swatch.white,
-                        cursor: available ? 'pointer' : 'not-allowed',
-                      }}
-                    >
-                      <Check size={14} />
-                    </button>
-                    <button
-                      type="button"
+                    />
+                    <IconButton
+                      Icon={CircleSlash}
+                      label="Ignore regional impact"
                       onClick={() => handleIgnore(impact.id)}
-                      title="Ignore regional impact"
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: 28,
-                        height: 28,
-                        border: `1px solid ${BORDER}`,
-                        borderRadius: 5,
-                        background: CARD,
-                        color: MUTED,
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <CircleSlash size={14} />
-                    </button>
+                    />
                   </div>
                 )}
                 {impact.status === 'applied' && (
-                  <button
-                    type="button"
-                    onClick={() => handleResolve(impact.id)}
-                    title="Resolve regional impact"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: 28,
-                      height: 28,
-                      border: `1px solid ${BORDER}`,
-                      borderRadius: 5,
-                      background: CARD,
-                      color: SECOND,
-                      cursor: 'pointer',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Undo2 size={14} />
-                  </button>
+                  <div style={{ flexShrink: 0 }}>
+                    <IconButton
+                      Icon={Undo2}
+                      label="Resolve regional impact"
+                      onClick={() => handleResolve(impact.id)}
+                    />
+                  </div>
                 )}
               </div>
             );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 import { isMobile } from './tabConstants';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
 import { exactGoodId } from '../../domain/region/goodsCatalog.js';
@@ -205,12 +206,18 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
 
   return (
     <div style={{ marginBottom: 8 }}>
-      <button onClick={() => setOpen(o => !o)} style={{
-        width: '100%', display: 'flex', alignItems: 'center', gap: 8,
-        padding: '6px 10px', background: swatch['#FAF8F4'],
-        border: '1px solid #e0d0b0', borderRadius: 5,
-        cursor: 'pointer', textAlign: 'left',
-      }}>
+      <Button
+        variant="secondary"
+        size="sm"
+        fullWidth
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        style={{
+          justifyContent: 'flex-start', gap: 8, padding: '6px 10px',
+          background: swatch['#FAF8F4'], border: '1px solid #e0d0b0',
+          borderRadius: 5, textAlign: 'left', fontWeight: 'inherit',
+        }}
+      >
         <span style={{ fontSize: FS['14'] }}>{needIcon || '️'}</span>
         <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1,
           textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -220,7 +227,7 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
         {impaired > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.danger, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: 3, padding: '1px 5px' }}>✕ {impaired}</span>}
         {vulnerable > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A5010'], background: swatch['#FDF8EC'], border: '1px solid #e0c070', borderRadius: 3, padding: '1px 5px' }}>◐ {vulnerable}</span>}
         <span style={{ fontSize: FS.micro, color: MUTED }}>{open ? '▲' : '▼'}</span>
-      </button>
+      </Button>
 
       {open && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginTop: 4, paddingLeft: 8 }}>

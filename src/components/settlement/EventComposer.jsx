@@ -10,167 +10,31 @@
  */
 
 import { useState, useMemo } from 'react';
-import { Zap, Flame, Trash2, Plus, MapPinOff, AlertOctagon, X, Check } from 'lucide-react';
+import { Zap, X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
 import { inferImportance } from '../../domain/entities/npcs.js';
-import { validateBatch } from '../../domain/events/batch.js';
 import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../domain/roles/roleCatalog.js';
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
 import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
-import { canonExports, canonImports, canonStressors } from '../../domain/canonicalAccessors.js';
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
-import CatalogPicker from './CatalogPicker.jsx';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
-
-const _TYPE_ICONS = {
-  ADD_INSTITUTION:    Plus,
-  REMOVE_INSTITUTION: Trash2,
-  DAMAGE_INSTITUTION: Flame,
-  DEPLETE_RESOURCE:   AlertOctagon,
-  CUT_TRADE_ROUTE:    MapPinOff,
-};
-
-// Code-review fix: target field used to be a free-text input. The user
-// shouldn't have to TYPE the name of an NPC they want to kill — the NPC
-// is already in the dossier. This map declares which dossier collection
-// to pull the target dropdown from for each event type. ADD_*
-// (institution / npc) and CUT_TRADE_ROUTE genuinely have no source list
-// (the user is naming something new), so they keep the text input.
-const TARGET_ENTITY_BY_EVENT = Object.freeze({
-  ADD_INSTITUTION:      null,           // new entity — free text
-  ADD_FACTION:          null,           // new entity — free-text name
-  REMOVE_INSTITUTION:   'institutions',
-  DAMAGE_INSTITUTION:   'institutions',
-  IMPAIR_INSTITUTION:   'institutions',
-  ADD_NPC:              null,           // new entity — free text
-  KILL_NPC:             'npcs',
-  IMPOSE_CORRUPTION:    'npcs',          // pick the clean NPC to turn; criminal org picked below
-  ASSIGN_NPC_TO_ROLE:   'npcs',
-  IMPAIR_FACTION:       'factions',
-  RESTORE_FACTION:      'factions',     // recover a faction that is currently impaired
-  EXPOSE_CORRUPTION:    'factions',     // or institutions; pick factions as the dominant case
-  RESTORE_INSTITUTION:  'institutions', // recover an institution that is currently impaired
-  DEPLETE_RESOURCE:     'resources',
-  RECOVERED_RESOURCE:   'resources',    // recover a resource the campaign already depleted
-  CUT_TRADE_ROUTE:      null,           // route names aren't tracked as entities — free text
-  SETTLEMENT_DISPUTE:   'neighbours',   // §9b — pick a linked neighbour
-  BROKERED_ALLIANCE:    'neighbours',   // §9g
-  OPENED_TRADE_ROUTE:   'neighbours',   // §9h
-  // Editor roster wave.
-  RESOLVE_STRESSOR:     'stressors',    // pick one of the settlement's current stressors
-  ADD_TRADE_GOOD:       null,           // new label — free text + datalist suggestions below
-  REMOVE_TRADE_GOOD:    'tradeGoods',   // union of exports / imports / transit
-  ADD_RESOURCE:         null,           // catalog select + custom name (custom UI below)
-  REMOVE_RESOURCE:      'resources',
-  PROMOTE_NPC:          null,           // faction-grouped NPC pair picker (custom UI below)
-  DEMOTE_NPC:           null,
-});
-
-// §9b/§9g/§9h — relationship events target a neighbouring settlement and set a
-// relationship type. The per-event option list drives the relationship dropdown;
-// these events are only offered when the settlement has linked neighbours.
-const RELATIONSHIP_OPTIONS = Object.freeze({
-  SETTLEMENT_DISPUTE: ['neutral', 'rival', 'cold_war', 'hostile'],
-  BROKERED_ALLIANCE:  ['allied'],
-  OPENED_TRADE_ROUTE: ['allied', 'client', 'patron', 'trade_partners'],
-});
-const RELATIONSHIP_LABELS = Object.freeze({
-  neutral: 'Neutral', rival: 'Rival', cold_war: 'Cold War', hostile: 'Hostile',
-  allied: 'Allied', client: 'Client', patron: 'Patron', trade_partners: 'Trade Partners',
-});
-
-// Events the DM cannot hand-author from the Make Changes dropdown. They stay in
-// the registry — and the world engine still produces them via simulation /
-// regional propagation — they're just not one-click authorable here:
-//   - KILL_LEADER folds into KILL_NPC (consequences derive from the NPC).
-//   - REFUGEE_WAVE / PLAGUE / RAID_OR_MONSTER_ATTACK / REMOVED_THREAT /
-//     STARTED_RIOT are authored via Stressors in the Roster below, not as
-//     one-off events — a stressor IS the ongoing condition these represented.
-//   - DAMAGE_INSTITUTION duplicated IMPAIR_INSTITUTION once the severity slider
-//     was hidden, so Impair Institution is the single "weaken it" action.
-const NON_AUTHORABLE_EVENTS = new Set([
-  'KILL_LEADER',
-  'CUT_TRADE_ROUTE',          // §9b — replaced by Settlement Dispute (neighbour + relationship)
-  'DAMAGE_INSTITUTION',
-  'REFUGEE_WAVE',
-  'PLAGUE',
-  'RAID_OR_MONSTER_ATTACK',
-  'REMOVED_THREAT',
-  'STARTED_RIOT',
-]);
-
-/** Build {id, name} options from a dossier collection for the target dropdown. */
-function buildTargetOptions(settlement, collectionKey) {
-  if (!collectionKey || !settlement) return [];
-  let list;
-  switch (collectionKey) {
-    case 'institutions': list = settlement.institutions || []; break;
-    case 'npcs':         list = settlement.npcs || []; break;
-    case 'factions':     list = settlement.powerStructure?.factions || []; break;
-    case 'neighbours':   {
-      const net = settlement.neighbourNetwork || settlement.neighbourLinks || [];
-      list = net.map((l) => ({ id: l.name || l.neighbourName || l.id, name: l.name || l.neighbourName || l.id }));
-      break;
-    }
-    case 'resources':    {
-      // Nearby resources are stored as keys in nearbyResources (config) and
-      // sometimes additionally on settlement.resources. Combine + dedupe.
-      const fromConfig = (settlement.config?.nearbyResources || []).map(k => ({ id: k, name: k }));
-      const fromList   = (settlement.resources || []).map(r => ({
-        id: r.id || r.key || r.name,
-        name: r.name || r.id || r.key,
-      }));
-      list = [...fromList, ...fromConfig];
-      break;
-    }
-    case 'stressors':    {
-      // canonStressors covers the mutation's full probe: the array containers
-      // AND the bare-object shape pipeline settlements carry (assembleSettlement
-      // dual-writes the single rolled stressor as a bare object under stress +
-      // stressors). The old Array.isArray-only probe returned [] for every
-      // pipeline-generated settlement, so Resolve Stressor fell back to free
-      // text instead of offering the live crisis.
-      list = canonStressors(settlement).filter(Boolean).map(st => ({
-        id: st.type || st.name || st.label,
-        name: st.label || st.name || st.type,
-      }));
-      break;
-    }
-    case 'tradeGoods':   {
-      // Union of the canonical export/import lists + transit, tolerant of
-      // legacy {name, good} object entries the Roster editor writes.
-      const ec = settlement.economicState || {};
-      const labels = [
-        ...canonExports(settlement),
-        ...canonImports(settlement),
-        ...(Array.isArray(ec.transit) ? ec.transit : []),
-      ]
-        .map(e => (typeof e === 'string' ? e : e?.name || e?.good || ''))
-        .filter(Boolean);
-      list = labels.map(l => ({ id: l, name: l }));
-      break;
-    }
-    default: return [];
-  }
-  // Normalize to {id, name}, dedupe by id, keep insertion order.
-  const seen = new Set();
-  const out = [];
-  for (const item of list) {
-    const id = item.id || item.faction || item.name;
-    const name = item.name || item.faction || item.id;
-    if (!id || !name) continue;
-    if (seen.has(id)) continue;
-    seen.add(id);
-    out.push({ id: String(id), name: String(name) });
-  }
-  return out;
-}
+import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import { buildTargetOptions, labelOfTarget, PARTY, PARTY_BG } from './eventComposer/helpers.js';
+import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
+import { BatchCart } from './eventComposer/BatchCart.jsx';
+import { Field } from './eventComposer/Field.jsx';
+import { EventComposerTargetField } from './eventComposer/EventComposerTargetField.jsx';
+import {
+  RELATIONSHIP_OPTIONS, RELATIONSHIP_LABELS,
+  NON_AUTHORABLE_EVENTS, STRESSOR_SEVERITY_VALUES, CUSTOM_RESOURCE_OPTION,
+  inputStyle, selectStyle,
+} from './eventComposer/EventComposerConstants.js';
 
 export default function EventComposer() {
   const phase     = useStore(s => s.phase);
@@ -428,8 +292,10 @@ export default function EventComposer() {
     // Post-apply staleness notice: the event committed (and stays committed
     // regardless of what the modal answers) — on a narrated save the AI
     // prose was written against the previous state, so offer regenerate /
-    // continue-with-raw. Raw saves have nothing to go stale.
-    if (entry && narrated) {
+    // continue-with-raw. Raw saves have nothing to go stale. A clock-bound
+    // settlement only QUEUED the event (entry.queued) — nothing changed yet,
+    // so the narrative isn't stale until the next World Pulse resolves it.
+    if (entry && !entry.queued && narrated) {
       setStaleNotice({ label: EVENT_REGISTRY[evType]?.label || evType });
     }
   }
@@ -476,210 +342,28 @@ export default function EventComposer() {
           </select>
         </Field>
 
-        {(() => {
-          // Catalog-backed adds. Institutions come from the catalog picker
-          // (searchable, filtered to what's not already here); factions from
-          // the descriptor compendium, grouped by category and filtered the
-          // same way. Both set the event target to the chosen name — no free
-          // typing of names the engine already knows.
-          if (type === 'ADD_INSTITUTION') {
-            return (
-              <Field label="Institution" hint={target ? `Adding: ${target}` : 'Pick from the catalog'}>
-                {target && (
-                  <div style={pickedChipStyle}>
-                    <span>{target}</span>
-                    <button onClick={() => { setTarget(''); setAddCategory(''); }} title="Clear" style={chipClearBtn}><X size={11} /></button>
-                  </div>
-                )}
-                <CatalogPicker
-                  closeOnPick
-                  items={institutionCatalogItems}
-                  onAdd={(item) => { setTarget(item.name); setAddCategory(item.category || 'civic'); }}
-                  placeholder="Search institutions..."
-                  categoryFilters={institutionCategories}
-                  triggerLabel={target ? 'Pick a different institution' : undefined}
-                />
-              </Field>
-            );
-          }
-          if (type === 'APPLY_STRESSOR') {
-            return (
-              <Field label="Stressor" hint={target ? `Applying: ${stressorPick?.name || target}` : 'Pick from the full catalog (incl. custom)'}>
-                {target && (
-                  <div style={pickedChipStyle}>
-                    <span>{stressorPick?.name || target}</span>
-                    <button onClick={() => { setTarget(''); setStressorPick(null); }} title="Clear" style={chipClearBtn}><X size={11} /></button>
-                  </div>
-                )}
-                <CatalogPicker
-                  closeOnPick
-                  items={stressorPickerItems}
-                  onAdd={(item) => { setTarget(item.key); setStressorPick(item); }}
-                  placeholder="Search stressors..."
-                  categoryFilters={['Settlement', 'Campaign', 'Custom']}
-                  triggerLabel={target ? 'Pick a different stressor' : undefined}
-                />
-              </Field>
-            );
-          }
-          if (type === 'CHANGE_RULING_POWER') {
-            return (
-              <Field label="New ruling power" hint={spec?.targetPrompt}>
-                <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
-                  <option value="">, Pick a faction -</option>
-                  {rulingPowerOptions.map(o => (
-                    <option key={o.id} value={o.id}>{o.name}</option>
-                  ))}
-                </select>
-                {rulingPowerOptions.length === 0 && (
-                  <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-                    No other faction holds power here — add a faction first.
-                  </span>
-                )}
-              </Field>
-            );
-          }
-          if (type === 'ADD_FACTION') {
-            return (
-              <Field label="Faction" hint="Choose a faction that isn't here yet">
-                <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
-                  <option value="">Select a faction</option>
-                  {factionGroups.map(g => (
-                    <optgroup key={g.category} label={g.label}>
-                      {g.options.map(o => <option key={o.name} value={o.name}>{o.name}</option>)}
-                    </optgroup>
-                  ))}
-                </select>
-                {factionGroups.length === 0 && (
-                  <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-                    Every catalogued faction is already present. Name a new one in Description.
-                  </span>
-                )}
-              </Field>
-            );
-          }
-          // ADD_TRADE_GOOD — free text with catalog suggestions; the label is
-          // the storage format, so anything typed is a valid good.
-          if (type === 'ADD_TRADE_GOOD') {
-            return (
-              <Field label="Good" hint={spec?.targetPrompt}>
-                <input
-                  list="event-trade-good-suggestions"
-                  value={target}
-                  onChange={e => setTarget(e.target.value)}
-                  placeholder="Type a label or pick a suggestion"
-                  style={inputStyle}
-                />
-                <datalist id="event-trade-good-suggestions">
-                  {tradeGoodSuggestions.map(n => <option key={n} value={n} />)}
-                </datalist>
-              </Field>
-            );
-          }
-          // ADD_RESOURCE — catalog select (label shown, underscore key stored)
-          // plus a "Custom resource…" escape hatch with a free-text name.
-          if (type === 'ADD_RESOURCE') {
-            return (
-              <Field label="Resource" hint={target === CUSTOM_RESOURCE_OPTION ? 'Name the custom resource' : spec?.targetPrompt}>
-                <select
-                  value={target}
-                  onChange={e => { setTarget(e.target.value); setCustomResourceName(''); }}
-                  style={selectStyle}
-                >
-                  <option value="">, Pick a resource -</option>
-                  {resourceCatalogOptions.map(o => (
-                    <option key={o.id} value={o.id}>{o.name}</option>
-                  ))}
-                  <option value={CUSTOM_RESOURCE_OPTION}>Custom resource…</option>
-                </select>
-                {target === CUSTOM_RESOURCE_OPTION && (
-                  <input
-                    value={customResourceName}
-                    onChange={e => setCustomResourceName(e.target.value)}
-                    placeholder='e.g. "Moonpetal grove"'
-                    style={{ ...inputStyle, marginTop: 4 }}
-                  />
-                )}
-              </Field>
-            );
-          }
-          // PROMOTE_NPC / DEMOTE_NPC — pick the NPC (grouped by faction), then
-          // the same-faction counterpart they swap standing with.
-          if (type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') {
-            const pickedGroup = npcSwapGroups.find(g => g.npcs.some(n => n.id === target));
-            const counterparts = pickedGroup ? pickedGroup.npcs.filter(n => n.id !== target) : [];
-            return (
-              <>
-                <Field label="NPC" hint={spec?.targetPrompt}>
-                  <select
-                    value={target}
-                    onChange={e => { setTarget(e.target.value); setSwapWithNpcId(''); }}
-                    style={selectStyle}
-                  >
-                    <option value="">, Pick an NPC -</option>
-                    {npcSwapGroups.map(g => (
-                      <optgroup key={g.faction} label={g.faction}>
-                        {g.npcs.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
-                      </optgroup>
-                    ))}
-                  </select>
-                </Field>
-                <Field
-                  label={type === 'PROMOTE_NPC' ? 'Displaces' : 'Displaced by'}
-                  hint="Same faction — the two swap standing"
-                >
-                  <select
-                    value={swapWithNpcId}
-                    onChange={e => setSwapWithNpcId(e.target.value)}
-                    style={selectStyle}
-                    disabled={!target}
-                  >
-                    <option value="">, Pick the counterpart -</option>
-                    {counterparts.map(n => (
-                      <option key={n.id} value={n.id}>{n.name}</option>
-                    ))}
-                  </select>
-                </Field>
-              </>
-            );
-          }
-          // Code-review fix: source the target from existing dossier
-          // entities rather than asking the user to type a name that
-          // must match. Falls back to a text input for ADD_* events
-          // (new entities) and route-type events that aren't in the
-          // dossier as discrete records.
-          const collectionKey = TARGET_ENTITY_BY_EVENT[type];
-          const targetOpts = buildTargetOptions(settlement, collectionKey);
-          if (collectionKey && targetOpts.length > 0) {
-            return (
-              <Field label="Target" hint={spec?.targetPrompt}>
-                <select
-                  value={target}
-                  onChange={e => setTarget(e.target.value)}
-                  style={selectStyle}
-                >
-                  <option value="">, Pick a {collectionKey.replace(/s$/, '')} -</option>
-                  {targetOpts.map(o => (
-                    <option key={o.id} value={o.id}>{o.name}</option>
-                  ))}
-                </select>
-              </Field>
-            );
-          }
-          // No collection or empty list → keep the free text input so
-          // the user can still author an event (e.g. ADD_NPC of a brand
-          // new NPC, CUT_TRADE_ROUTE without a tracked route record).
-          return (
-            <Field label="Target" hint={spec?.targetPrompt}>
-              <input
-                value={target}
-                onChange={e => setTarget(e.target.value)}
-                placeholder={spec?.targetPrompt || 'optional'}
-                style={inputStyle}
-              />
-            </Field>
-          );
-        })()}
+        <EventComposerTargetField
+          type={type}
+          target={target}
+          setTarget={setTarget}
+          spec={spec}
+          settlement={settlement}
+          setAddCategory={setAddCategory}
+          setStressorPick={setStressorPick}
+          stressorPick={stressorPick}
+          setCustomResourceName={setCustomResourceName}
+          customResourceName={customResourceName}
+          setSwapWithNpcId={setSwapWithNpcId}
+          swapWithNpcId={swapWithNpcId}
+          institutionCatalogItems={institutionCatalogItems}
+          institutionCategories={institutionCategories}
+          stressorPickerItems={stressorPickerItems}
+          rulingPowerOptions={rulingPowerOptions}
+          factionGroups={factionGroups}
+          tradeGoodSuggestions={tradeGoodSuggestions}
+          resourceCatalogOptions={resourceCatalogOptions}
+          npcSwapGroups={npcSwapGroups}
+        />
 
         {/* IMPOSE_CORRUPTION — which criminal organization gets its hooks into the NPC */}
         {type === 'IMPOSE_CORRUPTION' && (
@@ -832,7 +516,7 @@ export default function EventComposer() {
           }
           return (
             <Field label="Role" hint="e.g. High Priestess, Watch Captain">
-              <input value={role} onChange={e => setRole(e.target.value)} placeholder="optional" style={inputStyle} />
+              <input value={role} onChange={e => setRole(e.target.value)} placeholder="optional" aria-label="Role" style={inputStyle} />
             </Field>
           );
         })()}
@@ -873,11 +557,12 @@ export default function EventComposer() {
         )}
 
         <Field label="Description" hint="optional">
-          <input value={description} onChange={e => setDesc(e.target.value)} placeholder="e.g. burned during a brawl" style={inputStyle} />
+          <input value={description} onChange={e => setDesc(e.target.value)} placeholder="e.g. burned during a brawl" aria-label="Description" style={inputStyle} />
         </Field>
 
         {/* §8 M3b — party attribution. A canonical "the party did this" flag. */}
         <label
+          htmlFor="event-party-caused"
           title="Mark this change as a direct result of the party's actions. In a canon campaign it also ripples through the world."
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 6, alignSelf: 'flex-end',
@@ -888,9 +573,11 @@ export default function EventComposer() {
           }}
         >
           <input
+            id="event-party-caused"
             type="checkbox"
             checked={partyCaused}
             onChange={e => setPartyCaused(e.target.checked)}
+            aria-label="Caused by the party"
             style={{ margin: 0 }}
           />
           Caused by the party
@@ -898,9 +585,9 @@ export default function EventComposer() {
       </div>
 
       <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
-        <button onClick={onPreview} disabled={!canSubmit} style={primaryBtn(!canSubmit)}>
+        <Button variant="primary" size="sm" onClick={onPreview} disabled={!canSubmit}>
           Preview
-        </button>
+        </Button>
         {(() => {
           // Apply is always offered — preview is an optional look-ahead, not
           // a gate. With a preview pending, Apply commits exactly the
@@ -922,33 +609,36 @@ export default function EventComposer() {
                     value={destroyConfirm}
                     onChange={(e) => setDestroyConfirm(e.target.value)}
                     placeholder={`Type "${settlement?.name || ''}" to confirm`}
+                    aria-label="Type the settlement name to confirm destruction"
                     style={{ width: '100%', padding: '5px 8px', border: `1px solid ${swatch.danger}`, borderRadius: 4, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, boxSizing: 'border-box' }}
                   />
                 </div>
               )}
-              <button onClick={onApply} disabled={!applyOk} style={{ ...confirmBtn, ...(isDestroy ? { background: swatch.danger, borderColor: swatch.danger } : {}), opacity: applyOk ? 1 : 0.5, cursor: applyOk ? 'pointer' : 'not-allowed' }}>
-                <Check size={11} /> {isDestroy ? 'Destroy settlement' : (phase === 'canon' ? 'Apply to Timeline' : 'Apply')}
-              </button>
+              <Button
+                variant={isDestroy ? 'danger' : 'success'}
+                size="sm"
+                icon={<Check size={11} />}
+                onClick={onApply}
+                disabled={!applyOk}
+              >
+                {isDestroy ? 'Destroy settlement' : (phase === 'canon' ? 'Apply to Timeline' : 'Apply')}
+              </Button>
               {pendingPreview && (
-                <button onClick={() => { dismissPreview(); setDestroyConfirm(''); }} style={cancelBtn}>
-                  <X size={11} /> Cancel
-                </button>
+                <Button variant="secondary" size="sm" icon={<X size={11} />} onClick={() => { dismissPreview(); setDestroyConfirm(''); }}>
+                  Cancel
+                </Button>
               )}
             </>
           );
         })()}
-        <button
+        <Button
+          variant="gold"
+          size="sm"
           onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); }}
           disabled={!canSubmit}
-          style={{
-            padding: '5px 12px', background: 'transparent', color: GOLD,
-            border: `1px solid ${GOLD}`, borderRadius: R.sm,
-            fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
-            cursor: canSubmit ? 'pointer' : 'not-allowed', opacity: canSubmit ? 1 : 0.5,
-          }}
         >
           + Add to batch
-        </button>
+        </Button>
       </div>
 
       {pendingPreview && <PreviewPanel preview={pendingPreview} />}
@@ -966,8 +656,9 @@ export default function EventComposer() {
             const r = applyBatch(staged);
             if (r?.ok) {
               // One staleness notice for the whole batch — the modal fires
-              // once per apply click, never once per staged event.
-              if (narrated) setStaleNotice({ label: `${staged.length} changes` });
+              // once per apply click, never once per staged event. Skip it when
+              // the batch only queued (clock-bound): nothing changed yet.
+              if (narrated && !r.queuedOnly) setStaleNotice({ label: `${staged.length} changes` });
               setStaged([]);
             }
           }}
@@ -993,201 +684,3 @@ export default function EventComposer() {
     </div>
   );
 }
-
-function PreviewPanel({ preview }) {
-  if (!preview) return null;
-  const { deltas, factionResponses, narrativeSummary, warnings } = preview;
-  const partyCaused = !!(preview.event?.partyCaused || preview.event?.cause === 'party_action');
-  return (
-    <div style={{
-      marginTop: SP.sm, padding: SP.sm,
-      background: CARD, border: `1px solid ${GOLD}`, borderRadius: R.sm,
-    }}>
-      {partyCaused && (
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 4, marginBottom: 6,
-          padding: '2px 8px', borderRadius: 999,
-          background: PARTY_BG, color: PARTY, border: `1px solid ${PARTY}`,
-          fontSize: FS.xxs, fontFamily: sans, fontWeight: 800, letterSpacing: '0.04em',
-        }}>
-          ⚔ Party-caused
-        </div>
-      )}
-      <div style={{ fontSize: FS.sm, fontFamily: sans, color: INK, fontWeight: 700, marginBottom: 4 }}>
-        {narrativeSummary || 'Preview'}
-      </div>
-      {warnings?.length > 0 && (
-        <ul style={{ margin: '4px 0', paddingLeft: 18, color: swatch.danger, fontSize: FS.xs, fontFamily: sans }}>
-          {warnings.map((w, i) => <li key={i}>{w.message}</li>)}
-        </ul>
-      )}
-      {deltas?.length > 0 && (
-        <div style={{ marginTop: 6 }}>
-          {deltas.map((d, i) => <DeltaRow key={i} d={d} />)}
-        </div>
-      )}
-      {factionResponses?.length > 0 && (
-        <div style={{ marginTop: 8 }}>
-          <div style={{
-            fontSize: FS.xxs, color: MUTED, fontWeight: 800, fontFamily: sans,
-            letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 4,
-          }}>
-            Faction responses
-          </div>
-          {factionResponses.map((r, i) => (
-            <div key={i} style={{
-              fontSize: FS.xs, fontFamily: sans, color: INK, lineHeight: 1.5, marginBottom: 4,
-            }}>
-              <strong style={{ color: GOLD }}>{r.factionName}:</strong> {r.response}
-              {r.hookSeed && (
-                <div style={{ color: SECOND, fontStyle: 'italic', marginTop: 2 }}>
-                  Hook seed: {r.hookSeed}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function DeltaRow({ d }) {
-  const arrow = d.change > 0 ? '↑' : '↓';
-  const sevColor = d.severity === 'major' ? '#8b1a1a' : d.severity === 'moderate' ? '#a0762a' : MUTED;
-  return (
-    <div style={{
-      display: 'flex', alignItems: 'center', gap: 6,
-      fontSize: FS.xs, fontFamily: sans, color: INK, lineHeight: 1.5,
-    }}>
-      <span style={{ color: sevColor, fontWeight: 800, minWidth: 12 }}>{arrow}</span>
-      <span>{d.explanation}</span>
-      <span style={{ color: MUTED, marginLeft: 'auto' }}>
-        {d.before} → {d.after}
-      </span>
-    </div>
-  );
-}
-
-function labelOfTarget(targetId) {
-  const tail = String(targetId || '').split('.').pop();
-  return tail.replace(/_/g, ' ');
-}
-
-/**
- * BatchCart — the staging area for "multiple simultaneous changes". Lists the
- * staged events, surfaces blocking cross-reference warnings live (a change
- * that targets an entity neither in the settlement nor earlier in the batch),
- * and offers one Preview + one Apply for the whole set.
- */
-function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRemove, onClear, onPreview, onApply }) {
-  const validation = validateBatch(settlement, staged);
-  const blocks = (validation.warnings || []).filter(w => w.severity === 'block');
-  return (
-    <div style={{
-      marginTop: SP.sm, padding: SP.sm,
-      background: swatch['#FAF8F4'], border: `1px solid ${GOLD}`, borderRadius: R.sm,
-    }}>
-      <div style={{
-        fontSize: FS.xs, fontWeight: 800, color: MUTED, fontFamily: sans,
-        textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs,
-      }}>
-        Staged changes ({staged.length})
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        {staged.map((e, i) => (
-          <div key={e.id || i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.xs, fontFamily: sans, color: INK }}>
-            <span style={{ fontWeight: 700, minWidth: 16, color: GOLD }}>{i + 1}.</span>
-            <span style={{ flex: 1 }}>
-              {EVENT_REGISTRY[e.type]?.label || e.type}{e.targetId ? `: ${labelOfTarget(e.targetId)}` : ''}
-            </span>
-            <button onClick={() => onRemove(i)} title="Remove" style={{ background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 2, display: 'flex' }}>
-              <X size={12} />
-            </button>
-          </div>
-        ))}
-      </div>
-      {blocks.length > 0 && (
-        <ul style={{ margin: '6px 0 0', paddingLeft: 16, color: swatch.danger, fontSize: FS.xxs, fontFamily: sans }}>
-          {blocks.map((w, i) => <li key={i}>{w.message}</li>)}
-        </ul>
-      )}
-      {pendingBatchPreview?.systemStateDeltas?.length > 0 && (
-        <div style={{ marginTop: 6 }}>
-          {pendingBatchPreview.systemStateDeltas.map((d, i) => <DeltaRow key={i} d={d} />)}
-        </div>
-      )}
-      <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
-        <button onClick={onPreview} style={primaryBtn(false)}>Preview batch</button>
-        <button
-          onClick={onApply}
-          disabled={blocks.length > 0}
-          style={{ ...confirmBtn, opacity: blocks.length > 0 ? 0.5 : 1, cursor: blocks.length > 0 ? 'not-allowed' : 'pointer' }}
-        >
-          <Check size={11} /> {phase === 'canon' ? `Apply ${staged.length} to timeline` : `Apply all (${staged.length})`}
-        </button>
-        <button onClick={onClear} style={cancelBtn}>Clear</button>
-      </div>
-    </div>
-  );
-}
-
-function Field({ label, hint, children }) {
-  return (
-    <label style={{ display: 'flex', flexDirection: 'column', gap: 2, fontSize: FS.xxs, fontFamily: sans, color: MUTED }}>
-      {label}
-      {children}
-      {hint && <span style={{ fontStyle: 'italic', color: MUTED, opacity: 0.7 }}>{hint}</span>}
-    </label>
-  );
-}
-
-// Party-attribution accent — a heraldic crimson, distinct from the gold brand
-// accent and the purple AI-narrative tint, so "the party did this" reads clearly.
-const PARTY = '#8a2f4a';
-const PARTY_BG = '#f7ebf0';
-
-// APPLY_STRESSOR severity words → engine severity. Words at the table,
-// numbers in the engine (same posture as the hidden impair sliders).
-const STRESSOR_SEVERITY_VALUES = Object.freeze({ minor: 0.35, moderate: 0.6, severe: 0.85 });
-
-// ADD_RESOURCE — sentinel select value for "name a custom resource"; the real
-// target comes from the companion text input while this is picked.
-const CUSTOM_RESOURCE_OPTION = '__custom_resource__';
-
-const inputStyle = {
-  padding: '4px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm,
-  fontSize: FS.xs, fontFamily: sans, color: INK, minWidth: 180, background: '#fff',
-};
-const selectStyle = { ...inputStyle, minWidth: 180 };
-const pickedChipStyle = {
-  display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 4,
-  padding: '3px 8px', border: `1px solid ${GOLD}`, borderRadius: R.sm,
-  fontSize: FS.xs, fontFamily: sans, color: INK, fontWeight: 700, background: swatch['#FAF8F4'],
-};
-const chipClearBtn = {
-  background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 0, display: 'flex', lineHeight: 1,
-};
-
-function primaryBtn(disabled) {
-  return {
-    padding: '5px 12px',
-    background: disabled ? '#eee' : GOLD,
-    color: disabled ? '#999' : '#fff',
-    border: 'none', borderRadius: R.sm,
-    fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
-    cursor: disabled ? 'not-allowed' : 'pointer',
-  };
-}
-const confirmBtn = {
-  display: 'inline-flex', alignItems: 'center', gap: 4,
-  padding: '5px 12px', background: '#1a5a28', color: '#fff',
-  border: 'none', borderRadius: R.sm,
-  fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
-};
-const cancelBtn = {
-  display: 'inline-flex', alignItems: 'center', gap: 4,
-  padding: '5px 12px', background: '#fff', color: INK,
-  border: `1px solid ${BORDER}`, borderRadius: R.sm,
-  fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
-};

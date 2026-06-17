@@ -23,11 +23,16 @@
  */
 
 import { describe, it, expect } from 'vitest';
+import fs from 'node:fs';
+import path from 'node:path';
+import url from 'node:url';
 import { runEventPipeline, summarizeEventResult, layerAuthoredDeltas } from '../../src/domain/events/eventPipeline.js';
 import { previewEvent } from '../../src/domain/events/previewEvent.js';
 import { applyEvent } from '../../src/domain/events/applyEvent.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { compareCausalState, deriveCausalState } from '../../src/domain/causalState.js';
+
+const REPO_ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..', '..');
 
 // ── Fixture ────────────────────────────────────────────────────────────
 
@@ -407,5 +412,38 @@ describe('Phase 18 backward compatibility', () => {
     });
     expect(result.logEntry.appliedAt).toBe('2026-06-04T12:00:00.000Z');
     expect(result.nextSettlement.config._cutRoutes[0].atTimestamp).toBe('2026-06-04T12:00:00.000Z');
+  });
+});
+
+// ── A+ domain.6 — preview≡apply on the projected nextSettlement (now-threading)
+describe('preview≡apply: nextSettlement is a pure function of (settlement, event, now)', () => {
+  const NOW = '2026-06-04T12:00:00.000Z';
+
+  it('runEventPipeline(...,{now}).nextSettlement deep-equals applyEvent({...,now}).nextSettlement', () => {
+    const settlement = baseSettlement();
+    const event = { ...ev(), type: 'CUT_TRADE_ROUTE', targetId: 'north road' };
+    const preview = runEventPipeline(settlement, event, { now: NOW });
+    const apply = applyEvent({ settlement, systemState: deriveSystemState(settlement), event, now: NOW });
+    // The PROJECTED settlements — including the wall-clock-prone annotation
+    // ledgers (_cutRoutes[].atTimestamp) — agree exactly when threaded the same now.
+    expect(preview.nextSettlement).toEqual(apply.nextSettlement);
+    expect(preview.nextSettlement.config._cutRoutes[0].atTimestamp).toBe(NOW);
+  });
+
+  it('with no now the projected nextSettlement is deterministic (no wall-clock divergence)', () => {
+    const settlement = baseSettlement();
+    const event = { ...ev(), type: 'CUT_TRADE_ROUTE', targetId: 'north road' };
+    const a = runEventPipeline(settlement, event); // no now
+    const b = runEventPipeline(settlement, event); // no now, separate call
+    expect(a.nextSettlement).toEqual(b.nextSettlement);
+    // The fallback is a stable absent value, not a wall-clock date string.
+    expect(a.nextSettlement.config._cutRoutes[0].atTimestamp).toBeUndefined();
+  });
+
+  it('the apply path holds no wall-clock read (no `new Date(` in mutate.js / applyEvent.js)', () => {
+    for (const rel of ['src/domain/events/mutate.js', 'src/domain/events/applyEvent.js']) {
+      const src = fs.readFileSync(path.join(REPO_ROOT, rel), 'utf8');
+      expect(src, `${rel} must thread \`now\`, never read the wall clock`).not.toMatch(/new Date\s*\(/);
+    }
   });
 });

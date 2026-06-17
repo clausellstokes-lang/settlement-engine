@@ -475,6 +475,45 @@ describe('DM-visible activation behavior (computeActiveChains)', () => {
   });
 });
 
+// R2: the banalité export lockout is scoped to chains that contemplate EXTERNAL-mill
+// processing (only the grain chain lists "Access to external mill" as a processor) —
+// NOT any chain that merely uses a local 'Mills (2-5)'/'Sawmill'. A prior /\bmill/i
+// scope wrongly suppressed floodplain_agriculture / river_milling exports and stamped
+// the grain-specific banalité note on them.
+describe('external-mill banalité lockout scope (R2)', () => {
+  const inst = (...names) => names.map((name, i) => ({ id: `i${i}`, name }));
+
+  it('locks grain export when the settlement mills externally with no local mill', () => {
+    const chains = computeActiveChains(inst('Access to external mill'), ['grain_fields'], 'town', 'road');
+    const grain = chains.find(c => c.chainId === 'grain');
+    expect(grain).toBeTruthy();
+    expect(grain.exportable).toBe(false);
+    expect(grain.externalMillNote).toBeTruthy();
+  });
+
+  it('does NOT lock grain export when a local mill is present', () => {
+    const chains = computeActiveChains(inst('Mill'), ['grain_fields'], 'town', 'road');
+    const grain = chains.find(c => c.chainId === 'grain');
+    expect(grain).toBeTruthy();
+    expect(grain.exportable).toBe(true);
+    expect(grain.externalMillNote).toBeNull();
+  });
+
+  it('does NOT lock a non-grain chain (floodplain_agriculture) that only uses a local mill', () => {
+    // Same external-mill + no-local-mill context that locks grain — floodplain must
+    // stay exportable with no banalité note, because it does not process at the
+    // external mill (its processingInstitutions omit "Access to external mill").
+    const chains = computeActiveChains(
+      inst('Farmland', 'Access to external mill', 'Town granary'),
+      ['fertile_floodplain'], 'town', 'road',
+    );
+    const floodplain = chains.find(c => c.chainId === 'floodplain_agriculture');
+    expect(floodplain).toBeTruthy();
+    expect(floodplain.exportable).toBe(true);
+    expect(floodplain.externalMillNote).toBeNull();
+  });
+});
+
 describe('healing classifier covers the catalog medical vocabulary', () => {
   it('hospitals, almshouses, and monastic houses read as healing-capable', () => {
     for (const name of [

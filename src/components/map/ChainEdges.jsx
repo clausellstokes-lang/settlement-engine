@@ -12,8 +12,9 @@
 import { useMemo } from 'react';
 import { useStore } from '../../store';
 import { computeMapChains } from '../../lib/computeMapChains.js';
+import { swatch } from '../theme.js';
 
-const GOLD = '#a0762a';
+const GOLD = swatch['#A0762A'];
 
 export default function ChainEdges() {
   // Subscribe to minimal primitives; compute derived data in useMemo so the

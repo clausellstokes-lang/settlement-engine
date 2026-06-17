@@ -37,13 +37,13 @@ import { simulationSpineRows } from '../domain/simulationSpine.js';
 import { t } from '../copy/index.js';
 
 // Visual grammar — kept here so the rail's identity is one read.
-const COG_COLOR = '#8C6F32';      // gold-700 (procedural, bronze cog)
-const QUILL_COLOR = '#7B4FCF';    // violet-500 (AI refinement, quill)
-const RAIL_BG = '#FBF5E6';        // parchment-50
-const RAIL_BORDER = '#E8D9B0';    // parchment-200
-const INK = '#1B1408';
-const BODY = '#4A3B22';           // ink-600 (WCAG-passing)
-const MUTED = '#6b5340';
+const COG_COLOR = swatch['#8C6F32'];      // gold-700 (procedural, bronze cog)
+const QUILL_COLOR = swatch['#7B4FCF'];    // violet-500 (AI refinement, quill)
+const RAIL_BG = swatch['#FBF5E6'];        // parchment-50
+const RAIL_BORDER = swatch['#E8D9B0'];    // parchment-200
+const INK = swatch['#1B1408'];
+const BODY = swatch['#4A3B22'];           // ink-600 (WCAG-passing)
+const MUTED = swatch['#6B5340'];
 
 function StepRow({ entry, isLast, traces }) {
   const [open, setOpen] = useState(false);

@@ -37,7 +37,8 @@ function ServiceCard({ svcName, def, toggled, onCycle }) {
   const labelColor = isForced ? GOLD : MUTED;
 
   return (
-    <div onClick={onCycle} style={{
+    <div onClick={onCycle} role="button" tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onCycle(); }} style={{
       display:'flex', alignItems:'flex-start', gap:8,
       padding:'6px 12px 6px 10px',
       background:bg, borderLeft, borderBottom:'1px solid #f0e8d8',
@@ -191,7 +192,8 @@ export default function ServicesTogglePanel() {
 
               return (
                 <div key={svcKey} style={{borderBottom:'1px solid #e8dcc8'}}>
-                  <button onClick={()=>setExpanded(e=>({...e,[svcKey]:!e[svcKey]}))}
+                  <button type="button" aria-expanded={isOpen} aria-label={`${catName} services, ${isOpen ? 'collapse' : 'expand'}`}
+                    onClick={()=>setExpanded(e=>({...e,[svcKey]:!e[svcKey]}))}
                     style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'7px 12px',
                       background: isOpen ? '#f0ead8' : '#faf4e8',
                       border:'none', borderTop:'1px solid #e0d0b0', cursor:'pointer', textAlign:'left', fontFamily:sans,

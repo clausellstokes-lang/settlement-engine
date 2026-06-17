@@ -29,7 +29,10 @@ import { captureEventUndoSnapshot } from './undoEvent.js';
 export function applyEvent({ settlement, systemState, event, now = null }) {
   const beforeState = systemState || deriveSystemState(settlement);
   const timedEvent = /** @type {any} */ (event);
-  const appliedAt = timedEvent?.timestamp || timedEvent?.createdAt || now || new Date().toISOString();
+  // Pure function of (settlement, event, now) — no wall-clock read (A+ domain.6).
+  // The store passes a real `now` at the apply boundary; preview/replay with no
+  // now record a deterministic null appliedAt.
+  const appliedAt = timedEvent?.timestamp || timedEvent?.createdAt || now || null;
   const result = runEventPipeline(settlement, event, { now: appliedAt });
 
   // Pre-event snapshot of the authored records whose writes aren't exactly

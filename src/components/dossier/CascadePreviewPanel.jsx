@@ -17,22 +17,25 @@
  */
 
 import { useEffect, useMemo } from 'react';
+import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { previewCascade } from '../../domain/pendingEdits.js';
-import { sans, serif_, FS, SP, R, swatch, PARCH, MUTED, GOLD_DEEP } from '../theme.js';
+import { sans, serif_, FS, SP, R, swatch, PARCH, GOLD_DEEP } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
-const VIOLET = '#7B4FCF';
-const VIOLET_BG = '#EBE2FA';
-const AMBER = '#D08020';
-const AMBER_BG = '#FBEAD0';
-const GREEN = '#4A7A3A';
-const GREEN_BG = '#E2EEDB';
-const BLUE = '#2A5A7A';
-const BLUE_BG = '#E0E8F0';
-const RED = '#A23434';
-const RED_BG = '#F4DEDE';
-const INK = '#1B1408';
-const BORDER = '#E8D9B0';
+const VIOLET = swatch['#7B4FCF'];
+const VIOLET_BG = swatch['#EBE2FA'];
+const AMBER = swatch['#D08020'];
+const AMBER_BG = swatch['#FBEAD0'];
+const GREEN = swatch['#4A7A3A'];
+const GREEN_BG = swatch['#E2EEDB'];
+const BLUE = swatch['#2A5A7A'];
+const BLUE_BG = swatch['#E0E8F0'];
+const RED = swatch['#A23434'];
+const RED_BG = swatch['#F4DEDE'];
+const INK = swatch['#1B1408'];
+const BORDER = swatch['#E8D9B0'];
 
 function ImpactRow({ accent, accentBg, title, body }) {
   return (
@@ -84,18 +87,22 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
     : 'No structural changes.';
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- overlay backdrop: click/key here is dismiss-only; Escape also closes (see useEffect above)
     <div
       role="dialog"
       aria-label="Cascade preview"
       onClick={onClose}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose?.(); }}
       style={{
         position: 'fixed', inset: 0, zIndex: 9100,
         background: 'rgba(24,20,16,0.5)',
         backdropFilter: 'blur(4px)',
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- panel container: handlers only stop backdrop click/key from bubbling, not an interactive control */}
       <aside
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
         style={{
           position: 'absolute', right: 0, top: 0, bottom: 0,
           width: 'min(400px, 100vw)',
@@ -117,16 +124,13 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
           }}>
             Cascade preview
           </h2>
-          <button
-            type="button"
+          <IconButton
+            Icon={X}
+            label="Close"
             onClick={onClose}
-            aria-label="Close"
-            style={{
-              background: 'transparent', border: 'none',
-              fontSize: FS.xxl, color: MUTED, cursor: 'pointer',
-              padding: 0, lineHeight: 1,
-            }}
-          >×</button>
+            tone="ghost"
+            size="lg"
+          />
         </header>
 
         <div style={{ flex: 1, overflow: 'auto', padding: SP.lg }}>
@@ -213,33 +217,19 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
           borderTop: `1px solid ${BORDER}`,
           display: 'flex', gap: SP.sm,
         }}>
-          <button
-            type="button"
+          <Button
+            variant="primary"
             onClick={onCommit}
-            style={{
-              flex: 1, padding: `${SP.sm}px ${SP.md}px`,
-              background: GOLD_DEEP, color: swatch.white,
-              border: 'none', borderRadius: R.sm,
-              fontWeight: 700, cursor: 'pointer',
-              fontFamily: sans, fontSize: FS.sm,
-            }}
+            style={{ flex: 1 }}
           >
             Apply
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="secondary"
             onClick={onClose}
-            style={{
-              padding: `${SP.sm}px ${SP.md}px`,
-              background: swatch.white, color: swatch['#3A2F18'],
-              border: `1px solid ${BORDER}`,
-              borderRadius: R.sm,
-              fontWeight: 600, cursor: 'pointer',
-              fontFamily: sans, fontSize: FS.sm,
-            }}
           >
             Cancel
-          </button>
+          </Button>
         </footer>
       </aside>
     </div>

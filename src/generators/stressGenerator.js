@@ -8,6 +8,8 @@
 
 import { random as _rng } from './rngContext.js';
 import {tierAtLeast, getTradeRouteFeatures} from './helpers.js';
+import { getInstFlags } from './priorityHelpers.js';
+import { stressSummary } from './stressNarrative.js';
 
 import {STRESS_TYPE_MAP} from '../data/stressTypes.js';
 
@@ -21,16 +23,23 @@ const isSmallTier = (tier) => SMALL_TIERS.includes(tier);
 /**
  * Construct a full stress entry object from a stress type key and its map data.
  *
+ * The summary text used to be an embedded `stressData.summary({ name })` closure
+ * inside the STRESS_TYPE_MAP data; A+ Track H moved it to stressNarrative.js with
+ * rng + instFlags as EXPLICIT params. We pass rngContext.random (the same draw
+ * the pipeline uses) so wartime's `rng() < 0.45` fires at the identical point —
+ * preserving byte-identical, same-seed output.
+ *
  * @param {string} settlementName
  * @param {string} stressType    - key from STRESS_TYPE_MAP
  * @param {Object} stressData    - STRESS_TYPE_MAP[stressType]
+ * @param {Object} instFlags     - getInstFlags(config, institutions) output
  */
-const buildStressEntry = (settlementName, stressType, stressData) => ({
+const buildStressEntry = (settlementName, stressType, stressData, instFlags) => ({
   type:          stressType,
   label:         stressData.label,
   icon:          stressData.icon,
   colour:        stressData.colour,
-  summary:       stressData.summary({ name: settlementName }),
+  summary:       stressSummary(stressType, { name: settlementName }, { rng: _rng, instFlags }),
   crisisHook:    stressData.crisisHook,
   viabilityNote: stressData.viabilityNote,
   historyColour: stressData.historyColour,
@@ -206,11 +215,17 @@ const STRESS_SEVERITY_WEIGHT = {
 export const generateStress = (settlement, config = {}) => {
   const { tier, institutions = [], name } = settlement;
 
+  // Institution/priority flags for the stressor summaries. getInstFlags is
+  // RNG-neutral (no random()/pick()/chance() draw — it derives from priorities +
+  // institution names), so computing it here does not perturb draw order. It is
+  // passed explicitly to every summary so the data layer stays pure.
+  const instFlags = getInstFlags(config, institutions);
+
   // ── Mode 0: stressTypes array (from UI/config) ─────────────────────────
   if (config.stressTypes?.length && config.selectedStressesRandom !== false) {
     const entries = config.stressTypes
       .filter(t => STRESS_TYPE_MAP[t])
-      .map(t => buildStressEntry(name, t, STRESS_TYPE_MAP[t]));
+      .map(t => buildStressEntry(name, t, STRESS_TYPE_MAP[t], instFlags));
     if (entries.length === 1) return entries[0];
     if (entries.length > 1) return entries;
   }
@@ -218,7 +233,7 @@ export const generateStress = (settlement, config = {}) => {
   // ── Mode 1: Forced single stress type ─────────────────────────────────
   if (config.stressType && STRESS_TYPE_MAP[config.stressType] &&
       config.selectedStressesRandom !== false) {
-    return buildStressEntry(name, config.stressType, STRESS_TYPE_MAP[config.stressType]);
+    return buildStressEntry(name, config.stressType, STRESS_TYPE_MAP[config.stressType], instFlags);
   }
 
   // ── Mode 2: User-selected pool (checkbox list) ─────────────────────────
@@ -228,7 +243,7 @@ export const generateStress = (settlement, config = {}) => {
 
     const entries = selected
       .filter(type => STRESS_TYPE_MAP[type])
-      .map(type => buildStressEntry(name, type, STRESS_TYPE_MAP[type]));
+      .map(type => buildStressEntry(name, type, STRESS_TYPE_MAP[type], instFlags));
 
     if (entries.length === 0) return null;
     return entries.length === 1 ? entries[0] : entries;
@@ -266,6 +281,6 @@ export const generateStress = (settlement, config = {}) => {
                : _rng() < 0.10 ? sorted.slice(0, 2) : sorted.slice(0, 1);
 
   if (active.length === 0) return null;
-  if (active.length === 1) return buildStressEntry(name, active[0], STRESS_TYPE_MAP[active[0]]);
-  return active.map(type => buildStressEntry(name, type, STRESS_TYPE_MAP[type]));
+  if (active.length === 1) return buildStressEntry(name, active[0], STRESS_TYPE_MAP[active[0]], instFlags);
+  return active.map(type => buildStressEntry(name, type, STRESS_TYPE_MAP[type], instFlags));
 };

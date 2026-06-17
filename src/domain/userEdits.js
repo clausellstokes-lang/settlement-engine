@@ -37,6 +37,8 @@
  * mutable clone they own.
  */
 
+import { wallClockNow } from './clock.js';
+
 // ── Editable-field registry ────────────────────────────────────────────
 //
 // Tightly scoped to PROSE ONLY. Structural fields (population, tier,
@@ -157,7 +159,7 @@ export function applyUserEdit(entity, path, newValue, options = {}) {
   if (!entity || typeof entity !== 'object' || typeof path !== 'string' || !path) {
     return entity;
   }
-  const editedAt = options.editedAt || new Date().toISOString();
+  const editedAt = options.editedAt || wallClockNow();
 
   if (!entity._userEdits || typeof entity._userEdits !== 'object') {
     entity._userEdits = {};

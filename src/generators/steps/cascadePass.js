@@ -19,7 +19,9 @@ function instId(name) {
 
 registerStep('cascadePass', {
   deps: ['subsumptionPass'],
+  reads: ['institutionToggles', 'institutions', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
+  mutates: ['institutions'], // re-rolls/adds catalog entries on the roster in place (A+ P1.7)
   phase: 'institutions',
 }, (ctx, rng) => {
   // terrainType comes from resolveConfig — the cascade re-rolls catalog

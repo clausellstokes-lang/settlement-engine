@@ -9,7 +9,7 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
   const label=(relType||'linked').replace(/_/g,' ');
   return (
     <div style={{border:`1px solid ${st.border}`,borderLeft:`3px solid ${st.color}`,borderRadius:8,overflow:'hidden'}}>
-      <button onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:10,padding:'10px 14px',background:open?st.bg:'#faf8f4',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+      <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:10,padding:'10px 14px',background:open?st.bg:'#faf8f4',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1}}>
           <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
             <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{link.neighbourName||link.name}</span>

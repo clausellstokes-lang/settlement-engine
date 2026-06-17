@@ -64,8 +64,6 @@ import {
 } from '../domain/crisisLifecycle.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
-import { inferSuccessors }   from '../domain/entities/successors.js';
-import { inferImportance }   from '../domain/entities/npcs.js';
 import { metaForStep }       from '../generators/steps/stepMetadata.js';
 import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
 import {
@@ -79,10 +77,13 @@ import {
 // Workshop, sample fork — counts against the same 3/day allowance. The
 // cap used to live only in HomeHero, which let regeneration bypass it.
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
-import { saves as savesService } from '../lib/saves.js';
 import { activeSaveCount } from '../lib/saveAccess.js';
-
-const MAX_VERSION_HISTORY = 50;
+// WS4 decomposition — pure/leaf helpers extracted to a sibling.
+import {
+  cloneJson, persistSaveUpdate, cappedVersionHistory, saveEnvelopeFor,
+  visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
+  stripImpairmentsForEvent, computePendingSuccession,
+} from './settlementSliceHelpers.js';
 
 // ── Derived-config strip ────────────────────────────────────────────────
 // settlement.config is the RESOLVED effectiveConfig snapshot: pipeline steps
@@ -114,140 +115,6 @@ export function stripDerivedConfigKeys(config) {
   const out = { ...config };
   for (const key of DERIVED_CONFIG_KEYS) delete out[key];
   return out;
-}
-
-function cloneJson(value) {
-  if (value === undefined || value === null) return value;
-  return JSON.parse(JSON.stringify(value));
-}
-
-function persistSaveUpdate(saveId, partial) {
-  if (!saveId || !partial) return;
-  savesService.update(saveId, partial).catch(e => {
-    console.warn('[settlementSlice] save update failed', e);
-  });
-}
-
-function cappedVersionHistory(history) {
-  return Array.isArray(history) ? history.slice(-MAX_VERSION_HISTORY) : [];
-}
-
-function saveEnvelopeFor(saveId, save, settlement, campaignState) {
-  return {
-    ...(save || {}),
-    id: saveId || save?.id || settlement?.id || null,
-    name: save?.name || settlement?.name || 'Untitled Settlement',
-    tier: save?.tier || settlement?.tier || 'unknown',
-    settlement,
-    campaignState: campaignState || save?.campaignState || null,
-  };
-}
-
-function visibleSettlementIdsForCampaign(state, campaign) {
-  const placements = campaign?.mapState?.placements || state.mapState?.placements || {};
-  return Object.values(placements)
-    .map(p => p?.settlementId)
-    .filter(Boolean);
-}
-
-// ── Per-entity-kind nested array resolver ──────────────────────────────
-//
-// Mirrors the layout used by domain/userEdits.js#walkUserEdits and
-// aiOverlayVerifier#locateEntity. Centralized so a future schema move
-// (e.g. factions out of powerStructure) touches one map, not three.
-const ENTITY_ARRAY_PATH_BY_KIND = Object.freeze({
-  npc:             ['npcs'],
-  institution:     ['institutions'],
-  faction:         ['powerStructure', 'factions'],
-  conflict:        ['powerStructure', 'conflicts'],
-  hook:            ['hooks'],
-  plotHook:        ['plotHooks'],
-  condition:       ['activeConditions'],
-  supplyChain:     ['supplyChains'],
-  historicalEvent: ['history', 'historicalEvents'],
-  currentTension:  ['history', 'currentTensions'],
-});
-
-function _resolveEntity(settlement, kind, entityIndex) {
-  if (kind === 'settlement') return settlement;
-  const segs = ENTITY_ARRAY_PATH_BY_KIND[kind];
-  if (!segs) return null;
-  let ref = settlement;
-  for (const seg of segs) {
-    if (ref == null || typeof ref !== 'object') return null;
-    ref = ref[seg];
-  }
-  if (!Array.isArray(ref)) return null;
-  return ref[entityIndex] || null;
-}
-
-/**
- * Build a `campaignState` snapshot from the live slice for persistence
- * into a save record. Centralizing the shape means the round-trip
- * (save → reload → hydrateFromSave) is symmetric and a single edit
- * keeps both sides in step.
- */
-function pickleCampaignState(state) {
-  return {
-    phase:         state.phase || 'draft',
-    eventLog:      Array.isArray(state.eventLog) ? [...state.eventLog] : [],
-    systemState:   state.systemState ? JSON.parse(JSON.stringify(state.systemState)) : null,
-    locks:         state.locks ? { ...state.locks } : {},
-    generatedAt:   state.generatedAt || null,
-    editedAt:      new Date().toISOString(),
-    canonizedAt:   state.canonizedAt || null,
-    lastExportAt:  state.lastExportAt || null,
-    narrativeDrift: null,
-    exportState:   null,
-  };
-}
-
-/**
- * Curried predicate-flavored helper for undoLastEvent: returns a map
- * function that strips any impairment whose causeEventId matches the
- * supplied event id, and resets `status` to 'active' if no impairments
- * remain. Centralizing here keeps the undo logic consistent across
- * institution, faction, and npc entity lists.
- */
-const stripImpairmentsForEvent = (eventId) => (entity) => {
-  if (!entity) return entity;
-  const impairments = (entity.impairments || []).filter(i => i.causeEventId !== eventId);
-  const next = { ...entity, impairments };
-  // If undo also reversed a removal/destruction caused by the same
-  // event, restore status. We track removedByEventId on entities for this.
-  if (entity.removedByEventId === eventId) {
-    next.status = 'active';
-    delete next.removedByEventId;
-  } else if (entity.status === 'impaired' && impairments.length === 0) {
-    next.status = 'active';
-  }
-  return next;
-};
-
-/**
- * Successor detection for applyEvent: when a pillar-tier NPC dies, surface the
- * engine's ranked successor list so the DM doesn't have to invent a replacement
- * from scratch. The prompt is informational and dismissible; it does not block
- * other UI flow. Pure — reads the PRE-mutation settlement (the source of truth
- * for "who was alive and linked to whom"; the post-mutation copy already shows
- * the NPC as removed/dead). Returns null when no prompt is warranted.
- */
-function computePendingSuccession(settlement, event) {
-  if (event?.type !== 'KILL_NPC') return null;
-  const outgoing = (settlement.npcs || []).find(n =>
-    (n.id && n.id === event.targetId) ||
-    (n.name && n.name.toLowerCase() === String(event.targetId || '').toLowerCase()),
-  );
-  const importance = event.payload?.importance || (outgoing ? inferImportance(outgoing) : 'notable');
-  if (importance !== 'pillar' || !outgoing) return null;
-  return {
-    outgoingNpcId:   outgoing.id || outgoing.name,
-    outgoingNpcName: outgoing.name || 'Unknown',
-    outgoingRole:    outgoing.role || '',
-    linkedInstitutionIds: outgoing.linkedInstitutionIds || [],
-    suggestedSuccessorIds: inferSuccessors({ outgoing, settlement, limit: 3 }),
-    originEventId:   event.id,
-  };
 }
 
 /**
@@ -288,6 +155,18 @@ function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, 
     });
     if (result.impacts.length > 0) {
       afterState.setCampaignRegionalGraph(campaign.id, result.graph);
+      // The canon-edit cross-settlement propagation moment — this path fired NO
+      // analytics. result is a plain domain return; emit the redacted summary.
+      Promise.all([
+        import('../lib/analytics.js'),
+        import('../lib/regionalFingerprint.js'),
+      ]).then(([{ track, EVENTS }, { extractRegionalPropagation }]) => {
+        const p = extractRegionalPropagation({
+          impacts: result.impacts, changes: result.localDelta?.changes,
+          genesis: 'canon_edit', maxDepth: 2,
+        });
+        if (p) track(EVENTS.REGIONAL_PROPAGATION_APPLIED, p);
+      }).catch(() => {});
     }
   }
 
@@ -377,15 +256,27 @@ export const createSettlementSlice = (set, get) => ({
   /** Add an edit to the queue. Returns the edit so the caller can
    *  reference its id (e.g. for an undo-this-edit affordance). */
   queueEdit: (kind, payload) => {
+    // Campaign-clock identity lock: reject (rather than queue) NPC/faction
+    // renames once the settlement is canonized — names are frozen post-canon.
+    if (get().phase === 'canon' && (kind === 'rename-npc' || kind === 'rename-faction')) {
+      return null;
+    }
     const clock = (get().pendingEditsClock || 0) + 1;
     const edit = _pe_buildEdit(kind, payload, clock);
     set(state => {
       state.pendingEditsClock = clock;
       state.pendingEditsQueue = _pe_appendEdit(state.pendingEditsQueue || [], edit);
     });
-    // Analytics — once per queued edit
+    // Analytics — once per queued edit. Read coarse context AFTER the append so
+    // queue_depth_after reflects the new active depth. Fire-and-forget.
+    const canonPhase = get().phase;
+    const queueDepthAfter = _pe_activeEdits(get().pendingEditsQueue || []).length;
     import('../lib/analytics.js').then(({ Funnel, EVENTS }) => {
-      Funnel.track(EVENTS.EDIT_PENDING_QUEUED, { kind });
+      Funnel.track(EVENTS.EDIT_PENDING_QUEUED, {
+        kind,
+        canon_phase: canonPhase,
+        queue_depth_after: queueDepthAfter,
+      });
     }).catch(() => {});
     return edit;
   },
@@ -395,13 +286,23 @@ export const createSettlementSlice = (set, get) => ({
     set(state => {
       state.pendingEditsQueue = _pe_revertEdit(state.pendingEditsQueue || [], editId);
     });
+    // Analytics — fire-and-forget; reverting one queued edit.
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.EDIT_REVERTED, { count: 1, scope: 'single' });
+    }).catch(() => {});
   },
 
   /** Discard the entire queue without applying. */
   revertPendingEdits: () => {
+    // Count the active edits being discarded BEFORE clearing, for analytics.
+    const droppedCount = _pe_activeEdits(get().pendingEditsQueue || []).length;
     set(state => {
       state.pendingEditsQueue = [];
     });
+    // Analytics — fire-and-forget; whole-queue discard.
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.EDIT_REVERTED, { count: droppedCount, scope: 'all' });
+    }).catch(() => {});
   },
 
   /** Apply the queue against the live settlement. Each edit dispatches
@@ -453,6 +354,63 @@ export const createSettlementSlice = (set, get) => ({
         fn({ kind: 'auto-commit', label: `Edits: ${labels}` });
       }
     } catch (_e) { /* silent — snapshot failure shouldn't undo the commit */ }
+
+    // Analytics — fire-and-forget. Band the committed edits into coarse
+    // structural / rename / prose counts (same kind groupings as previewCascade).
+    let structuralCount = 0;
+    let renameCount = 0;
+    let proseCount = 0;
+    for (const e of active) {
+      switch (e.kind) {
+        case 'add-institution':
+        case 'remove-institution':
+        case 'add-resource':
+        case 'remove-resource':
+        case 'add-stressor':
+        case 'remove-stressor':
+          structuralCount += 1;
+          break;
+        case 'rename-npc':
+        case 'rename-faction':
+        case 'rename-settlement':
+          renameCount += 1;
+          break;
+        case 'edit-prose':
+          proseCount += 1;
+          break;
+        default:
+          break;
+      }
+    }
+    const canonPhase = get().phase;
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.EDIT_COMMITTED, {
+        count: active.length,
+        structural_count: structuralCount,
+        rename_count: renameCount,
+        prose_count: proseCount,
+        canon_phase: canonPhase,
+      });
+    }).catch(() => {});
+
+    // Research plane (edit_events) — feed the long-built but previously-unfed
+    // edit ledger. Saved settlements only (a stable uuid is required), research
+    // consent gated, payloads redacted to enum/count only (never edit prose).
+    const editUuid = state.activeSaveId;
+    if (editUuid) {
+      const preSettlement = state.settlement; // Immer-immutable pre-commit ref
+      Promise.all([
+        import('../lib/consent.js'),
+        import('../lib/analyticsQueue.js'),
+        import('../lib/editFingerprint.js'),
+        import('../domain/pendingEdits.js'),
+      ]).then(([{ getConsent }, { enqueueEdit }, { extractEditRows }, { previewCascade }]) => {
+        if (!getConsent().research) return;
+        let cascade = null;
+        try { cascade = previewCascade(preSettlement, queue); } catch { /* coarse cascade is best-effort */ }
+        for (const row of extractEditRows(active, { settlementUuid: editUuid, cascade })) enqueueEdit(row);
+      }).catch(() => {});
+    }
   },
 
   // ── P133 / E-5 · Version history mutations ──────────────────────────
@@ -654,7 +612,10 @@ export const createSettlementSlice = (set, get) => ({
       // the summarizer don't fail the run — they just produce a null
       // summary and the rail falls back to the label.
     const pipelineHistory = [];
-    const result = eng.generateSettlementPipeline(fullConfig, neighbor, {
+    const genStart = (typeof performance !== 'undefined' ? performance.now() : Date.now());
+    let result;
+    try {
+      result = eng.generateSettlementPipeline(fullConfig, neighbor, {
         seed,
         // §14 P2 — only expose homebrew that passes its tier gate to this
         // settlement's tier. Fail-open for random/custom/unknown types, so it
@@ -670,7 +631,19 @@ export const createSettlementSlice = (set, get) => ({
           catch { summary = null; }
           pipelineHistory.push({ id: name, ts: Date.now(), summary });
         },
-    });
+      });
+    } catch (genErr) {
+      // Analytics — fire-and-forget GENERATION_FAILED, then re-throw so the
+      // existing propagation behaviour is unchanged (additive only).
+      import('../lib/analytics.js').then(({ track, EVENTS }) => {
+        track(EVENTS.GENERATION_FAILED, {
+          error_kind: 'exception',
+          step_name: pipelineHistory.length ? pipelineHistory[pipelineHistory.length - 1].id : undefined,
+        });
+      }).catch(() => {});
+      throw genErr;
+    }
+    const generationMs = Math.round((typeof performance !== 'undefined' ? performance.now() : Date.now()) - genStart);
       // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
       // authored conditions survive a local regeneration — a reroll replaces
       // the town, not the campaign layer's crises. No-op on a first
@@ -736,6 +709,53 @@ export const createSettlementSlice = (set, get) => ({
       else incrementAnonFull();
     }
 
+    // Analytics — fire-and-forget, never affects the return. GENERATION_COMPLETED
+    // carries the reduced (enum/count-only) fingerprint; fires alongside (not
+    // replacing) the component-layer anonymous_generation_completed. When this
+    // run replaced an on-screen draft it is also a re-roll, so REGENERATION_TRIGGERED
+    // fires with regen_mode 'full' (this action does a fresh whole-pipeline roll).
+    Promise.all([
+      import('../lib/analytics.js'),
+      import('../lib/structuralFingerprint.js'),
+      import('../lib/regionalFingerprint.js'),
+    ]).then(async ([{ track, EVENTS }, fp, { extractNeighbourGenerated }]) => {
+      const { extractReducedFingerprint, computeFingerprintHash, computeConfigSignature, usedRandomSentinels, extractStressorGenesis, band5 } = fp;
+      const reduced = extractReducedFingerprint(reconciled) || {};
+      const power = reconciled?.powerStructure || {};
+      // The variance grouping key (config_signature) + an output identity hash
+      // (content_hash) are async (SubtleCrypto); resolve them, but never let a
+      // hashing hiccup drop the event.
+      let config_signature; let content_hash;
+      try { config_signature = await computeConfigSignature(fullConfig); } catch { /* omit */ }
+      try { content_hash = await computeFingerprintHash(reduced); } catch { /* omit */ }
+      track(EVENTS.GENERATION_COMPLETED, {
+        ...reduced,
+        config_signature,
+        content_hash,
+        used_random_sentinels: usedRandomSentinels(fullConfig),
+        is_regeneration: hadSettlement,
+        duration_ms: generationMs,
+        conflict_count: Array.isArray(power.conflicts) ? power.conflicts.length : 0,
+        relationship_count: Array.isArray(reconciled?.relationships) ? reconciled.relationships.length : 0,
+        service_count: Array.isArray(reconciled?.services) ? reconciled.services.length : 0,
+        hook_count: Array.isArray(reconciled?.plotHooks || reconciled?.hooks) ? (reconciled.plotHooks || reconciled.hooks).length : 0,
+        legitimacy_band: band5(power.publicLegitimacy?.score),
+        defense_readiness: reconciled?.defenseProfile?.readiness?.label,
+        neighbour_present: !!(neighbor || reconciled?.neighborRelationship),
+        neighbour_relationship_type: reconciled?.neighborRelationship?.relationshipType || fullConfig._neighbourRelType,
+        custom_content_active: fullConfig.useCustomContent !== false,
+        // per-type stressor genesis (forced-pre / emergent / post-gen / suppressed)
+        stressor_genesis: extractStressorGenesis(reconciled),
+      });
+      // Activate the dead neighbour_generated event: the generation-time
+      // neighbour bias (which axes it shifted), only when a neighbour was bound.
+      const neigh = extractNeighbourGenerated(reconciled);
+      if (neigh) track(EVENTS.NEIGHBOUR_GENERATED, neigh);
+      if (hadSettlement) {
+        track(EVENTS.REGENERATION_TRIGGERED, { regen_mode: 'full', config_signature });
+      }
+    }).catch(() => {});
+
     return reconciled;
   },
 
@@ -780,6 +800,12 @@ export const createSettlementSlice = (set, get) => ({
     }
     const cfg = settlement.config || config;
     const eng = await loadEngine();
+
+    // Analytics — fire-and-forget. A section regen re-rolls one subsystem
+    // under the existing config (so config is, by construction, unchanged).
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.REGENERATION_TRIGGERED, { regen_mode: section, config_changed: false });
+    }).catch(() => {});
 
     // Capture the pre-regen snapshot before mutation so the delta
     // composer has a clean `before` reference.
@@ -1025,12 +1051,18 @@ export const createSettlementSlice = (set, get) => ({
     const wasFirstSave = activeCount === 0;
     const wasThirdSave = activeCount === 2 && max === 3;
 
+    // Lift the new save id + campaignState out of the set() so the
+    // research-capture below can address the freshly-saved record by id.
+    // Same id shape and value as before — purely a hoist, no behaviour change.
+    const newSaveId = `local_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    const newCampaignState = pickleCampaignState(state);
+
     set(s => {
       s.savedSettlements.push({
         ...settlement,
         savedAt: Date.now(),
-        id: `local_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-        campaignState: pickleCampaignState(state),
+        id: newSaveId,
+        campaignState: newCampaignState,
       });
     });
 
@@ -1046,6 +1078,17 @@ export const createSettlementSlice = (set, get) => ({
         }, { tier: state.auth?.tier });
       }).catch(() => { /* never block a save */ });
     }
+
+    // Analytics — fire-and-forget structural snapshot at the 'saved' moment.
+    // captureFingerprint skips silently without a stable uuid (local ids) or
+    // consent; it never throws and never affects the save's return.
+    import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
+      captureFingerprint('saved', settlement, {
+        save: { ...settlement, id: newSaveId, campaignState: newCampaignState },
+        settlementUuid: newSaveId,
+      });
+    }).catch(() => {});
+
     return true;
   },
 
@@ -1131,12 +1174,17 @@ export const createSettlementSlice = (set, get) => ({
   // ── NPC / Faction renaming ─────────────────────────────────────────────────
   renameNPC: (npcIndex, newName) =>
     set(state => {
+      // Campaign-clock identity lock: NPC names freeze at canonization. Renames
+      // are a draft-only affordance (the UI hides them post-canon; guard here too).
+      if (state.phase === 'canon') return;
       if (!state.settlement?.npcs?.[npcIndex]) return;
       state.settlement.npcs[npcIndex].name = newName;
     }),
 
   renameFaction: (factionIndex, newName) =>
     set(state => {
+      // Campaign-clock identity lock: faction names freeze at canonization.
+      if (state.phase === 'canon') return;
       // Canonical factions live on powerStructure.factions; settlement.factions
       // is a usually-empty legacy mirror. The old code only saw the mirror, so
       // a rename silently no-opped on every generated settlement. Resolve the
@@ -1224,6 +1272,7 @@ export const createSettlementSlice = (set, get) => ({
    * canonizedAt provenance timestamp.
    */
   canonize: () => {
+    const fromPhase = get().phase;
     set(state => {
       state.phase = 'canon';
       state.eventLog = [];
@@ -1231,17 +1280,38 @@ export const createSettlementSlice = (set, get) => ({
     });
     // Persist so canon sticks across reload and the library reflects it.
     get().persistActiveSaveLifecycle?.();
+    // Analytics — fire-and-forget. CANON_PHASE_CHANGED records the transition;
+    // captureFingerprint('canonized') snapshots the structural shape at canon
+    // (skips silently without a stable settlement uuid / consent).
+    const after = get();
+    const activeSaveId = after.activeSaveId || null;
+    const save = activeSaveId
+      ? after.savedSettlements.find(s => String(s.id) === String(activeSaveId))
+      : null;
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'canon' });
+    }).catch(() => {});
+    if (after.settlement && activeSaveId) {
+      import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
+        captureFingerprint('canonized', after.settlement, { save, settlementUuid: activeSaveId });
+      }).catch(() => {});
+    }
   },
 
   /** Drop back to draft. Useful if the DM wants to keep tinkering before
    *  the campaign actually starts. Discards any prior event log. */
   uncanonize: () => {
+    const fromPhase = get().phase;
     set(state => {
       state.phase = 'draft';
       state.eventLog = [];
       state.canonizedAt = null;
     });
     get().persistActiveSaveLifecycle?.();
+    // Analytics — fire-and-forget; the canon→draft transition.
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'draft' });
+    }).catch(() => {});
   },
 
   /**
@@ -1329,6 +1399,20 @@ export const createSettlementSlice = (set, get) => ({
     const state = get();
     if (!state.settlement) return null;
     const activeSaveId = state.activeSaveId || null;
+    // Campaign-clock (Phase C1): a settlement bound to a CANONIZED campaign
+    // world surrenders its independent timeline. Its events don't resolve now —
+    // they queue as pending intentions and resolve simultaneously with every
+    // other member at the next world-pulse advance (drainQueuedEvents). Only in
+    // canon; draft edits stay authorial and immediate.
+    if (activeSaveId && state.phase === 'canon'
+        && typeof state.isSettlementClockBound === 'function'
+        && state.isSettlementClockBound(activeSaveId)) {
+      const queued = state.queueSettlementEvent(activeSaveId, event);
+      if (queued) {
+        set(s => { s.pendingPreview = null; s.pendingBatchPreview = null; });
+        return queued;
+      }
+    }
     const beforeSave = activeSaveId
       ? state.savedSettlements.find(save => String(save.id) === String(activeSaveId))
       : null;
@@ -1343,6 +1427,9 @@ export const createSettlementSlice = (set, get) => ({
       settlement: state.settlement,
       systemState: state.systemState,
       event,
+      // The store is the I/O boundary: thread the real apply time so the domain
+      // stays a pure function of (settlement, event, now) (A+ domain.6).
+      now: new Date().toISOString(),
     });
     nextSettlement = reconcileSettlementChange(nextSettlement, state.settlement, {
       source: state.phase === 'canon' ? 'canon_event' : 'draft_event',
@@ -1495,7 +1582,11 @@ export const createSettlementSlice = (set, get) => ({
       if (entry) logEntries.push(entry);
     }
     set(s => { s.pendingBatchPreview = null; });
-    return { ok: true, warnings: [], logEntries };
+    // Campaign-clock: on a clock-bound settlement every event only QUEUED (the
+    // markers carry `queued:true`); nothing mutated, so callers should not raise
+    // the stale-narrative notice.
+    const queuedOnly = logEntries.length > 0 && logEntries.every(e => e?.queued);
+    return { ok: true, warnings: [], logEntries, queuedOnly };
   },
 
   dismissBatchPreview: () => set(state => { state.pendingBatchPreview = null; }),

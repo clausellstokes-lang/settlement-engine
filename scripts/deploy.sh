@@ -159,6 +159,14 @@ ok "Deployed: admin-actions"
 npx supabase functions deploy send-email --project-ref "$PROJECT_REF"
 ok "Deployed: send-email"
 
+# Analytics intelligence layer (docs/simulation-intelligence-layer.md). ingest is
+# anonymous (--no-verify-jwt); export is secret-gated (called by cron via pg_net).
+npx supabase functions deploy ingest-events --project-ref "$PROJECT_REF" --no-verify-jwt
+ok "Deployed: ingest-events"
+
+npx supabase functions deploy analytics-export --project-ref "$PROJECT_REF"
+ok "Deployed: analytics-export"
+
 # ── Step 6: Stripe setup ───────────────────────────────────────────────────
 
 info "Step 6: Stripe product and price setup"
@@ -261,6 +269,21 @@ if [ -n "$RESEND_KEY" ]; then
     RESEND_API_KEY="$RESEND_KEY" RESEND_FROM_EMAIL="$RESEND_FROM"
   ok "Resend secrets configured"
 fi
+
+# Analytics intelligence layer secrets. ANALYTICS_HASH_PEPPER peppers the device-
+# token hash so a DB dump alone can't correlate tokens to actors; EXPORT_SHARED_
+# SECRET gates the analytics-export function. Auto-generate strong random values
+# when not supplied.
+read -rp "  Analytics device-hash pepper (ANALYTICS_HASH_PEPPER) [auto-generate]: " ANALYTICS_PEPPER
+ANALYTICS_PEPPER="${ANALYTICS_PEPPER:-$(openssl rand -hex 32)}"
+read -rp "  Research export secret (EXPORT_SHARED_SECRET) [auto-generate]: " EXPORT_SECRET
+EXPORT_SECRET="${EXPORT_SECRET:-$(openssl rand -hex 32)}"
+npx supabase secrets set --project-ref "$PROJECT_REF" \
+  ANALYTICS_HASH_PEPPER="$ANALYTICS_PEPPER" EXPORT_SHARED_SECRET="$EXPORT_SECRET"
+ok "Analytics secrets configured (pepper + export secret)"
+
+# OPTIONAL: also add the owner-override email (fail-closed when unset):
+#   npx supabase secrets set --project-ref "$PROJECT_REF" OWNER_EMAIL="you@example.com"
 
 ok "All secrets configured"
 

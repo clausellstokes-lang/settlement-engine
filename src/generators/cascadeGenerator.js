@@ -6,6 +6,18 @@ import { random as _rng } from './rngContext.js';
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 
+// The grouping ("shelf") keys the cascade walks, in iteration order. Order is
+// behaviourally significant — it is the order cascade candidates are evaluated
+// under the rng sequence and the per-tier cap — so it is a fixed list, NOT
+// derived/sorted. 'Essential' is reserved: no catalog tier populates it today,
+// so iterating it is a no-op (a documented superset of the live groupings).
+// categoryGovernance.test.js pins that every live catalog grouping is reachable
+// through this list. See src/data/categoryVocabulary.js for the axis model.
+export const CASCADE_GROUPING_ORDER = Object.freeze([
+  'Essential', 'Economy', 'Crafts', 'Religious', 'Government',
+  'Infrastructure', 'Defense', 'Magic', 'Adventuring', 'Criminal', 'Entertainment', 'Exotic',
+]);
+
 // ══ Supply Chain Cascade Pass ════════════════════════════════════════════════
 // Builds institution-to-institution adjacency from supply chain data, then
 // gives chain-neighbouring institutions a boosted second chance to appear.
@@ -98,10 +110,7 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
 
   if (!Object.keys(boosts).length) return [];
 
-  const CATS = [
-    'Essential','Economy','Crafts','Religious','Government',
-    'Infrastructure','Defense','Magic','Adventuring','Criminal','Entertainment','Exotic',
-  ];
+  const CATS = CASCADE_GROUPING_ORDER;
 
   const added = [];
   // Tier-appropriate cap on total cascade additions

@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import {generateCrossSettlementConflicts} from '../../../generators/crossSettlementConflicts';
 import {serif, Section, TabIntro} from '../Primitives';
+import Button from '../../primitives/Button.jsx';
 
 import {NPCRelCard2, ConflictCard} from '../npcComponents';
 import {NeighbourLinkCard} from '../neighbourComponents';
@@ -205,18 +206,22 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
         <div style={{display:'flex',gap:6,marginBottom:8,flexWrap:'wrap'}}>
           {relTypes.map(({key,label})=>{
             const n=key==='all'?rels.length:rels.filter(rel=>rel.type===key).length;
-            return <button key={key} onClick={()=>setTypeFilter(key)} style={{padding:'4px 11px',borderRadius:20,border:'1px solid',fontSize:FS.xs,fontWeight:700,cursor:'pointer',background:typeFilter===key?'#1c1409':'#faf8f4',color:typeFilter===key?'#f5efe0':'#6b5340',borderColor:typeFilter===key?'#1c1409':'#c8b89a'}}>
+            return <Button key={key} onClick={()=>setTypeFilter(key)}
+              variant={typeFilter===key?'primary':'secondary'} size="sm"
+              aria-pressed={typeFilter===key} style={{flexShrink:0}}>
               {label} ({n})
-            </button>;
+            </Button>;
           })}
         </div>
         {/* From filter (only when neighbours exist) */}
         {neighbours.length>0&&<div style={{display:'flex',gap:5,marginBottom:12,flexWrap:'wrap',paddingBottom:10,borderBottom:'1px solid #f0e8d8',alignItems:'center'}}>
           <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',flexShrink:0}}>From:</span>
           {['all',...allSettlements].map(name=>(
-            <button key={name} onClick={()=>setFromFilter(name)} style={{padding:'3px 9px',borderRadius:20,border:'1px solid',fontSize:FS.xs,fontWeight:600,cursor:'pointer',background:fromFilter===name?'#2a3a7a':'#faf8f4',color:fromFilter===name?'#fff':'#3a4a7a',borderColor:fromFilter===name?'#2a3a7a':'#c0c8e8'}}>
+            <Button key={name} onClick={()=>setFromFilter(name)}
+              variant={fromFilter===name?'primary':'secondary'} size="sm"
+              aria-pressed={fromFilter===name} style={{flexShrink:0}}>
               {name==='all'?'All settlements':name}
-            </button>
+            </Button>
           ))}
         </div>}
 

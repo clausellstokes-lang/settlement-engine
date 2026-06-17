@@ -1,0 +1,8 @@
+{
+  "//": "Deno toolchain for the supabase/functions edge-function execution tests (A+ Track F). Test-only: no imports/compilerOptions, so `supabase functions deploy` bundling is unaffected. Edge functions use full https://esm.sh/ URL imports, so no import map is needed. Run: `deno task test:edge` (or the CI `deno-tests` job).",
+  "tasks": {
+    "test:edge": "deno test --allow-env --allow-net --no-check supabase/functions/"
+  },
+  "fmt": { "exclude": ["**/*"] },
+  "lint": { "exclude": ["**/*"] }
+}

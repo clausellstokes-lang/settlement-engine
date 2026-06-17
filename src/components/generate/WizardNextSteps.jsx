@@ -22,6 +22,7 @@
 
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
+import Button from '../primitives/Button.jsx';
 import {
   GOLD, GOLD_BG, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, R,
 } from '../theme.js';
@@ -142,19 +143,16 @@ export default function WizardNextSteps() {
         <span style={{ fontSize: FS.xs, color: MUTED, flex: 1, minWidth: 0 }}>
           {guide.headline}
         </span>
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={handleDismiss}
           aria-label="Dismiss what's next"
           title="Got it"
-          style={{
-            flexShrink: 0, background: 'transparent', border: 'none',
-            color: MUTED, cursor: 'pointer', fontFamily: sans,
-            fontSize: FS.xs, fontWeight: 700, padding: '2px 6px', lineHeight: 1,
-          }}
+          style={{ flexShrink: 0 }}
         >
           Got it ×
-        </button>
+        </Button>
       </div>
 
       <ol style={{

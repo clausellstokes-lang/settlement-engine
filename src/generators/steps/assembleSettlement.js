@@ -36,7 +36,9 @@ registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
   deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
+  reads: ['availableServices', 'conflicts', 'culture', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'history', 'institutions', 'neighbourProfile', 'npcs', 'population', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['settlement'],
+  mutates: ['powerStructure'], // normalizes the power roster in place (A+ P1.7 contract)
   phase: 'assembly',
 }, (ctx) => {
   const {

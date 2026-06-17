@@ -9,6 +9,7 @@
 
 import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
 import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
+import { wallClockNow } from '../clock.js';
 
 export const REGIONAL_GRAPH_SCHEMA_VERSION = 2;
 
@@ -70,7 +71,7 @@ const DEFAULT_GM_CHANNEL_TYPES = new Set([
 ]);
 
 function nowIso() {
-  return new Date().toISOString();
+  return wallClockNow();
 }
 
 // H12: the paid 'Opened Trade Route' event historically wrote the PLURAL

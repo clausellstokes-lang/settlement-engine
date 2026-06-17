@@ -1,17 +1,15 @@
 import { SlidersHorizontal, X } from 'lucide-react';
+import { useId } from 'react';
 
 import { TIER_LABELS } from '../new/design.js';
+import Button from '../primitives/Button.jsx';
 import {
   BORDER,
-  BORDER2,
-  CARD,
   CARD_ALT,
   FS,
   GOLD,
-  GOLD_BG,
   INK,
   R,
-  SECOND,
   SP,
   sans,
 } from '../theme.js';
@@ -24,24 +22,6 @@ import {
   TERRAIN_OPTIONS,
   TIER_OPTIONS,
 } from './galleryUtils.js';
-
-function chipStyle(active) {
-  return {
-    display: 'inline-flex',
-    alignItems: 'center',
-    minHeight: 26,
-    padding: '4px 8px',
-    border: `1px solid ${active ? GOLD : BORDER2}`,
-    borderRadius: R.sm,
-    background: active ? GOLD_BG : CARD,
-    color: active ? GOLD : SECOND,
-    fontFamily: sans,
-    fontSize: FS.xxs,
-    fontWeight: 850,
-    textTransform: 'capitalize',
-    cursor: 'pointer',
-  };
-}
 
 function SidebarSection({ title, children }) {
   return (
@@ -67,22 +47,24 @@ function FilterChips({ options, value = [], onToggle }) {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
       {options.map(option => (
-        <button
+        <Button
           key={option}
-          type="button"
+          variant={selected.has(option) ? 'gold' : 'secondary'}
+          size="sm"
           onClick={() => onToggle(option)}
-          style={chipStyle(selected.has(option))}
+          style={{ textTransform: 'capitalize' }}
         >
           {human(TIER_LABELS[option] || option)}
-        </button>
+        </Button>
       ))}
     </div>
   );
 }
 
 function ToggleRow({ checked, label, onChange }) {
+  const inputId = useId();
   return (
-    <label style={{
+    <label htmlFor={inputId} style={{
       display: 'flex',
       alignItems: 'center',
       gap: 8,
@@ -92,7 +74,7 @@ function ToggleRow({ checked, label, onChange }) {
       fontWeight: 850,
       cursor: 'pointer',
     }}>
-      <input type="checkbox" checked={checked} onChange={event => onChange(event.target.checked)} />
+      <input id={inputId} type="checkbox" aria-label={label} checked={checked} onChange={event => onChange(event.target.checked)} />
       <span>{label}</span>
     </label>
   );
@@ -115,25 +97,15 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
           Filters
         </h2>
         {activeFilterCount(filters) > 0 && (
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
+            icon={<X size={12} />}
             onClick={onClear}
-            style={{
-              marginLeft: 'auto',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 4,
-              border: 'none',
-              background: 'transparent',
-              color: GOLD,
-              fontFamily: sans,
-              fontSize: FS.xs,
-              fontWeight: 850,
-              cursor: 'pointer',
-            }}
+            style={{ marginLeft: 'auto', color: GOLD }}
           >
-            <X size={12} /> Clear
-          </button>
+            Clear
+          </Button>
         )}
       </div>
       {isSignedIn && (

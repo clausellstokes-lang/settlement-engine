@@ -22,7 +22,9 @@
 import { Mountain, Trees as TreesIcon, Undo2, Redo2, Info, Pencil } from 'lucide-react';
 import { useStore } from '../../store';
 import { TERRAIN_TOOLS } from '../../store/mapSlice.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R } from '../theme.js';
+import { MUTED, BORDER, BORDER2, CARD, FS, SP, R } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 export default function TerrainToolbar({ bridgeRef }) {
   const terrainTool    = useStore(s => s.terrainTool);
@@ -97,37 +99,19 @@ export default function TerrainToolbar({ bridgeRef }) {
           title="Toggle the biomes overlay on or off. Click again to reverse."
           attached="right"
         />
-        <button
+        <IconButton
+          Icon={Pencil}
+          label="Open FMG's biomes editor. Repaint biome regions or change classification."
           onClick={editBiomes}
-          title="Open FMG's biomes editor. Repaint biome regions or change classification."
-          style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '0 8px',
-            background: nativeBiomes ? GOLD_BG : CARD,
-            // Long-hand borders so React doesn't conflict-warn between
-            // `border` shorthand and `borderLeft: none` longhand.
-            borderTop:    `1px solid ${nativeBiomes ? GOLD : BORDER}`,
-            borderRight:  `1px solid ${nativeBiomes ? GOLD : BORDER}`,
-            borderBottom: `1px solid ${nativeBiomes ? GOLD : BORDER}`,
-            borderLeft:   'none',
-            borderTopRightRadius: R.sm,
-            borderBottomRightRadius: R.sm,
-            color: nativeBiomes ? INK : SECOND,
-            cursor: 'pointer',
-          }}
-        >
-          <Pencil size={12} />
-        </button>
+          pressed={!!nativeBiomes}
+          size="sm"
+        />
       </div>
 
       <div style={{ width: 1, height: 24, background: BORDER2 }} />
 
-      <button onClick={undo} title="Undo" style={iconBtnStyle}>
-        <Undo2 size={13} />
-      </button>
-      <button onClick={redo} title="Redo" style={iconBtnStyle}>
-        <Redo2 size={13} />
-      </button>
+      <IconButton Icon={Undo2} label="Undo" onClick={undo} size="md" />
+      <IconButton Icon={Redo2} label="Redo" onClick={redo} size="md" />
 
       <div style={{ flex: 1 }} />
 
@@ -149,35 +133,21 @@ export default function TerrainToolbar({ bridgeRef }) {
 function ToolButton({ active, onClick, Icon, label, title, attached }) {
   // `attached="right"` flattens the right side so the button can dock against
   // a sibling (the biomes-editor pencil) without a visible seam between them.
+  // This is essential layout the Button variants can't express, so it's passed
+  // through as style residue (Button merges `style` last).
   const radiusStyle = attached === 'right'
-    ? { borderTopLeftRadius: R.sm, borderBottomLeftRadius: R.sm,
-        borderTopRightRadius: 0, borderBottomRightRadius: 0 }
-    : { borderRadius: R.sm };
+    ? { borderTopRightRadius: 0, borderBottomRightRadius: 0 }
+    : undefined;
   return (
-    <button
-      onClick={onClick}
+    <Button
+      variant={active ? 'gold' : 'secondary'}
+      size="sm"
+      icon={<Icon size={13} />}
       title={title || label}
-      style={{
-        display: 'flex', alignItems: 'center', gap: 5,
-        padding: '6px 12px',
-        background: active ? GOLD_BG : CARD,
-        border: `1px solid ${active ? GOLD : BORDER}`,
-        ...radiusStyle,
-        color: active ? INK : SECOND,
-        fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
-      }}
+      onClick={onClick}
+      style={radiusStyle}
     >
-      <Icon size={13} /> {label}
-    </button>
+      {label}
+    </Button>
   );
 }
-
-const iconBtnStyle = {
-  display: 'flex', alignItems: 'center', justifyContent: 'center',
-  width: 28, height: 26,
-  padding: 0,
-  background: CARD,
-  border: `1px solid ${BORDER}`,
-  borderRadius: R.sm,
-  color: INK, cursor: 'pointer',
-};

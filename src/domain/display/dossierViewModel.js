@@ -294,6 +294,72 @@ export function deriveMagicPosture(settlement) {
  * overlays); these are canonical simulation facts and always read from the
  * base settlement, never an AI clone.
  */
+/**
+ * Headcounts (§overview). The institution / NPC / faction totals that BOTH the
+ * screen overview and the PDF overview render — sourced identically here so the
+ * two surfaces can never disagree on a count.
+ * @param {any} settlement
+ * @returns {{ institutions: number, npcs: number, factions: number }}
+ */
+export function deriveHeadcounts(settlement) {
+  const s = settlement || {};
+  return {
+    institutions: (s.institutions || []).length,
+    npcs: (s.npcs || []).length,
+    // PowerStructure.factions is the canonical faction roster (legacy .factions fallback).
+    factions: (s.powerStructure?.factions || s.factions || []).length,
+  };
+}
+
+/**
+ * Prosperity label (§overview/economics) — the prosperity enum BOTH the screen and
+ * the PDF render. The COLOR/tone is intentionally per-surface (the web uses an RGB
+ * scale, the PDF a print palette), so only the label is a shared scalar.
+ * @param {any} settlement
+ * @returns {{ label: string | null }}
+ */
+export function deriveProsperityPosture(settlement) {
+  return { label: settlement?.economicState?.prosperity || null };
+}
+
+/**
+ * Safety label (§overview) — the safetyProfile.safetyLabel BOTH surfaces render.
+ * Tone is per-surface (see deriveProsperityPosture); only the label is shared.
+ * @param {any} settlement
+ * @returns {{ label: string | null }}
+ */
+export function deriveSafetyPosture(settlement) {
+  return { label: settlement?.economicState?.safetyProfile?.safetyLabel || null };
+}
+
+/**
+ * Defense posture (§overview/defense) — the readiness label + average defense
+ * score BOTH surfaces render. scoreAvg mirrors the PDF avgScore helper exactly
+ * (rounded mean of the numeric score values); the parity pin guards the two copies
+ * against future drift.
+ * @param {any} settlement
+ * @returns {{ readinessLabel: string | null, scoreAvg: number | null }}
+ */
+export function deriveDefensePosture(settlement) {
+  const dp = settlement?.defenseProfile || {};
+  const vals = Object.values(dp.scores || {}).filter((v) => typeof v === 'number');
+  const scoreAvg = vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length) : null;
+  return { readinessLabel: dp.readiness?.label || null, scoreAvg };
+}
+
+/**
+ * Top export label (§summary) — labelOfThing(primaryExports[0]); mirrors the PDF
+ * labelOfThing helper exactly (the good/name/label of the first primary export).
+ * @param {any} settlement
+ * @returns {{ label: string }}
+ */
+export function deriveTopExport(settlement) {
+  const item = settlement?.economicState?.primaryExports?.[0];
+  if (!item) return { label: '' };
+  if (typeof item === 'string') return { label: item };
+  return { label: item.good || item.name || item.label || '' };
+}
+
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {
     foodBalance: deriveFoodBalance(settlement),
@@ -301,5 +367,10 @@ export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = nul
     viability: deriveViability(settlement),
     magic: deriveMagicPosture(settlement),
     blockade: deriveBlockadeRelief(settlement),
+    headcounts: deriveHeadcounts(settlement),
+    prosperity: deriveProsperityPosture(settlement),
+    safety: deriveSafetyPosture(settlement),
+    defense: deriveDefensePosture(settlement),
+    topExport: deriveTopExport(settlement),
   };
 }

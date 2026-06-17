@@ -62,6 +62,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
 
 import { createSettlementSlice, stripDerivedConfigKeys } from '../../src/store/settlementSlice.js';
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
+import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
@@ -415,6 +416,7 @@ function makeCampaignStore() {
   return create(immer((...a) => ({
     ...stubSlice(...a),
     ...createCampaignSlice(...a),
+    ...createCampaignRegionalSlice(...a),
     ...createSettlementSlice(...a),
   })));
 }
@@ -461,7 +463,14 @@ function seedCampaignStore(store, phase = 'canon') {
       settlementIds: ['ashford'],
       regionalGraph: ensureRegionalGraph(),
       wizardNews: { currentTick: 0, entries: [] },
-      worldState: { rngSeed: 'undo-bridge-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      // The bridge inverse covered here is the IMMEDIATE applyEvent path: a
+      // canonized settlement that is a campaign member injects/withdraws its
+      // roaming twin at author time, and undoLastEvent reverses it. That path
+      // is the pre-world-canon (non-clock-bound) behavior — once the campaign
+      // WORLD is canonized the settlement is clock-bound and its events queue
+      // to the world pulse instead (see campaign-clock C1; the drain-time
+      // injection + pulse-undo are covered in campaignClockQueue.test.js).
+      worldState: { rngSeed: 'undo-bridge-seed', tick: 0, canonizedAt: null },
     }];
   });
   store.getState().hydrateFromSave(save);

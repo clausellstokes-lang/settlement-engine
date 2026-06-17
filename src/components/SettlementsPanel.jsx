@@ -1,21 +1,18 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import {Link2, Clock, Save, FolderOpen, FolderPlus, ChevronDown, ChevronRight, ArrowRight, Edit3, Check, X, Map as MapIcon, FileText, GitBranch, Unlock} from 'lucide-react';
+import {FolderPlus} from 'lucide-react';
+
+import { track, EVENTS } from '../lib/analytics.js';
+import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
 
 import {generateCrossSettlementConflicts} from '../generators/crossSettlementConflicts';
-import {getAllModifiers, EFFECT_CATEGORIES, fmtMod} from '../lib/relationshipGraph.js';
-// Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
-// Lazy-load on user action so the Settlements first paint stays light —
-// users only need this code when they click "Export Campaign PDF".
-const generateCampaignPDF = (...args) =>
-  import('../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY, PAGE_MAX } from './theme.js';
+import {getAllModifiers} from '../lib/relationshipGraph.js';
+import { MUTED, BORDER, sans, FS, swatch, PAGE_MAX } from './theme.js';
 import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
-import { t } from '../copy/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
-import { activeSaveCount, inactiveRetentionCount, isPlanInactiveSave, isSaveActive } from '../lib/saveAccess.js';
+import { activeSaveCount, inactiveRetentionCount, isSaveActive } from '../lib/saveAccess.js';
 import {
   relationshipDefinition,
   relationshipLinkMetadata,
@@ -23,402 +20,12 @@ import {
 import { buildInterSettlementNPCs } from '../domain/relationships/neighbourBackLink.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
-import DeleteConfirmation from './DeleteConfirmation';
-import RegionalGraphSummary from './region/RegionalGraphSummary.jsx';
-import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../data/sampleSettlements.js';
-
-// ── Save migration ─────────────────────────────────────────────────────────
-function migrateConfig(config) {
-  if (!config) return {};
-  const c = { ...config };
-  if (c.magicExists === undefined) c.magicExists = (c.priorityMagic ?? 50) > 0;
-  if (!c.nearbyResourcesState) c.nearbyResourcesState = {};
-  return c;
-}
-
-// buildInterSettlementNPCs (shared with the canonical save flow) is imported
-// from domain/relationships/neighbourBackLink.js. The manual-link and
-// remove-neighbour handlers below still build links by hand, so they keep this
-// small lookup.
-function findSaveById(saves, id) { return saves.find(s => s.id === id) || null; }
-
-const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', allied:'#1a5a28', secret_alliance:'#1a5a28', trade_partner:'#a0762a', patron:'#2a3a7a', client:'#2a3a7a', criminal_network:'#5a2a8a' };
-const _REL_TYPES = ['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
-
-function regionalCountsForSave(campaign, saveId) {
-  const impacts = campaign?.regionalGraph?.queuedImpacts || [];
-  const counts = { queued: 0, applied: 0, resolved: 0, ignored: 0, expired: 0 };
-  for (const impact of impacts) {
-    if (String(impact.targetSettlementId) !== String(saveId)) continue;
-    if (counts[impact.status] !== undefined) counts[impact.status] += 1;
-  }
-  return counts;
-}
-
-// ── Settlement Card (reused in campaigns + unassigned) ────────────────────
-function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId }) {
-  const [moveOpen, setMoveOpen] = useState(false);
-  const ts = (t) => { try { return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; } };
-  const active = isSaveActive(s);
-  const planInactive = isPlanInactiveSave(s);
-  const retentionUntil = s.retentionExpiresAt ? ts(s.retentionExpiresAt) : null;
-
-  // No overflow:hidden on the wrapper — would clip the "move to campaign"
-  // popover that opens below the arrow button. DeleteConfirmation below
-  // carries its own rounded corners + top margin, so nothing visually escapes.
-  return (
-    <div style={{ background: active ? 'rgba(255,251,245,0.96)' : '#eee9df', border:`1px solid ${active ? BORDER : '#c9c0b2'}`, borderRadius:7, opacity: active ? 1 : 0.68 }}>
-      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'9px 12px' }}>
-        <div style={{ flex:1, minWidth:0 }}>
-          <div style={{ fontSize:FS.md, fontWeight:700, color:INK, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</div>
-          <div style={{ fontSize:FS.xxs, color:MUTED, display:'flex', alignItems:'center', gap:6, marginTop:1, flexWrap:'wrap' }}>
-            <Clock size={10}/> {ts(s.timestamp)} · {s.tier}
-          </div>
-          {!active && (
-            <div style={{ fontSize:FS.micro, color:GOLD, background:GOLD_BG, border:`1px solid ${BORDER}`, borderRadius:8, padding:'2px 6px', display:'inline-flex', alignItems:'center', gap:4, marginTop:4, fontWeight:700 }}>
-              Retained inactive{retentionUntil ? ` until ${retentionUntil}` : ''}
-            </div>
-          )}
-          {(s.settlement?.neighbourNetwork?.length > 0) && (
-            <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginTop:3 }}>
-              {(s.settlement.neighbourNetwork||[]).slice(0,3).map((n,ni) => {
-                const nc = REL_COLORS[n.relationshipType] || MUTED;
-                return <span key={ni} style={{ fontSize:FS.micro, fontWeight:700, color:nc, background:`${nc}18`, border:`1px solid ${nc}40`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap' }}>
-                  <Link2 size={8} style={{display:'inline',verticalAlign:'middle',marginRight:2}}/>{n.neighbourName||n.name} · {(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ')}
-                </span>;
-              })}
-              {(s.settlement.neighbourNetwork||[]).length > 3 && <span style={{fontSize:FS.micro,color:MUTED}}>+{s.settlement.neighbourNetwork.length - 3} more</span>}
-            </div>
-          )}
-          {/* Network effect badges */}
-          {(() => {
-            const m = allModifiers.get(s.id);
-            if (!m || m.sources.length === 0) return null;
-            const badges = EFFECT_CATEGORIES.filter(c => Math.abs(m.totals[c.key]) >= 0.05);
-            if (!badges.length) return null;
-            return <div style={{display:'flex',gap:3,flexWrap:'wrap',marginTop:3}}>
-              {badges.map(c => {
-                const v = m.totals[c.key]; const pos = v >= 0;
-                return <span key={c.key} style={{ fontSize:FS.micro, fontWeight:700, color:pos?'#1a5a28':'#8b1a1a', background:pos?'#e8f5e8':'#fde8e8', border:`1px solid ${pos?'#a0d0a0':'#e0b0b0'}`, borderRadius:8, padding:'1px 5px', whiteSpace:'nowrap' }}>
-                  {c.label} {fmtMod(v)}
-                </span>;
-              })}
-            </div>;
-          })()}
-          {regionalCounts && (regionalCounts.queued || regionalCounts.applied || regionalCounts.resolved) > 0 && (
-            <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:3 }}>
-              {regionalCounts.queued > 0 && (
-                <span style={{ fontSize:FS.micro, fontWeight:700, color:GOLD, background:GOLD_BG, border:`1px solid ${BORDER}`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
-                  <GitBranch size={8}/> {regionalCounts.queued} queued
-                </span>
-              )}
-              {regionalCounts.applied > 0 && (
-                <span style={{ fontSize:FS.micro, fontWeight:700, color:swatch.success, background:swatch.successBg, border:`1px solid ${BORDER}`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
-                  <GitBranch size={8}/> {regionalCounts.applied} applied
-                </span>
-              )}
-              {regionalCounts.resolved > 0 && (
-                <span style={{ fontSize:FS.micro, fontWeight:700, color:SECOND, background:swatch.infoBg, border:`1px solid ${BORDER}`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
-                  <GitBranch size={8}/> {regionalCounts.resolved} resolved
-                </span>
-              )}
-            </div>
-          )}
-        </div>
-        <div style={{ display:'flex', gap:4, alignItems:'center', flexShrink:0 }}>
-          {/* Move to campaign */}
-          <div style={{ position:'relative' }}>
-            <button disabled={!active} onClick={() => active && setMoveOpen(!moveOpen)} title={active ? (currentCampaignId ? 'Move to...' : 'Add to campaign') : 'Reactivate to use campaigns'} style={{ padding:'4px 6px', background:active ? GOLD_BG : '#ddd5c8', color:active ? GOLD : MUTED, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xxs, fontWeight:700, fontFamily:sans, display:'flex', alignItems:'center', gap:3 }}>
-              <ArrowRight size={10}/> {currentCampaignId ? 'Move' : 'Add to Campaign'}
-            </button>
-            {moveOpen && (
-              <div style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, borderRadius:6, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:160, padding:4 }}>
-                {currentCampaignId && (
-                  <button onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:swatch.danger, fontFamily:sans, borderRadius:3 }}
-                    onMouseEnter={e => e.target.style.background='#fdf4f4'} onMouseLeave={e => e.target.style.background='none'}>
-                    Remove from campaign
-                  </button>
-                )}
-                {campaigns.map(c => c.id === currentCampaignId ? null : (
-                  <button key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:INK, fontFamily:sans, borderRadius:3, display:'flex', alignItems:'center', gap:4 }}
-                    onMouseEnter={e => e.target.style.background='#f5ede0'} onMouseLeave={e => e.target.style.background='none'}>
-                    <FolderOpen size={10} color={GOLD}/> {c.name}
-                  </button>
-                ))}
-                {campaigns.length === 0 && <div style={{ padding:'5px 8px', fontSize:FS.xxs, color:MUTED }}>No campaigns yet</div>}
-              </div>
-            )}
-          </div>
-          {!active && planInactive && (
-            <button
-              onClick={() => onReactivate?.(s)}
-              disabled={!canReactivate || reactivatingId === s.id}
-              style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', background:canReactivate ? GOLD_BG : '#e0d8ca', color:canReactivate ? GOLD : MUTED, border:`1px solid ${BORDER}`, borderRadius:4, cursor:canReactivate ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}
-            >
-              <Unlock size={11}/>{reactivatingId === s.id ? 'Restoring...' : 'Reactivate'}
-            </button>
-          )}
-          <button disabled={!active} onClick={() => active && onView(s)} style={{ padding:'4px 10px', background:active ? swatch.infoBg : '#ddd5c8', color:active ? swatch.info : MUTED, border:'1px solid #c0c8e8', borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>View</button>
-          <button
-            disabled={!active}
-            onClick={() => active && setDeleteId(deleteId === s.id ? null : s.id)}
-            style={{ padding:'4px 10px', background:active ? swatch.dangerBg : '#ddd5c8', color:active ? swatch.danger : MUTED, border:'1px solid #e8c0c0', borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}
-          >
-            Delete
-          </button>
-        </div>
-      </div>
-      {deleteId === s.id && (
-        <DeleteConfirmation
-          entityName={s.name}
-          details={(s.settlement?.neighbourNetwork||[]).length > 0
-            ? `This settlement has ${s.settlement.neighbourNetwork.length} neighbour link(s). Deleting it will remove those relationships from linked settlements. Any data not exported as JSON will be permanently lost.`
-            : 'All data not physically exported as a JSON file will be permanently lost.'}
-          onConfirm={() => deleteConfirmed(s.id)}
-          onCancel={() => setDeleteId(null)}
-        />
-      )}
-    </div>
-  );
-}
-
-// ── Campaign Folder ──────────────────────────────────────────────────────────
-function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns }) {
-  const [editing, setEditing] = useState(false);
-  const [editDraft, setEditDraft] = useState('');
-  const [confirmDelete, setConfirmDelete] = useState(false);
-  const collapsed = campaign.collapsed;
-  const retainedInactive = !isCampaignActive(campaign);
-  const active = !retainedInactive && canManageCampaigns;
-
-  if (!active) {
-    const retainedUntil = campaign.retentionExpiresAt
-      ? new Date(campaign.retentionExpiresAt).toLocaleDateString()
-      : null;
-    return (
-      <div style={{
-        display:'flex', alignItems:'center', gap:8, padding:'12px 14px',
-        background:swatch['#EEE9DF'], border:'1px solid #c9c0b2', borderRadius:8,
-        opacity:0.72, color:MUTED, fontFamily:sans,
-      }}>
-        <FolderOpen size={14}/>
-        <span style={{ flex:1, fontFamily:serif_, fontWeight:700, color:SECOND }}>{campaign.name}</span>
-        <span style={{ fontSize:FS.xxs, fontWeight:700 }}>
-          {retainedInactive
-            ? `Retained inactive${retainedUntil ? ` until ${retainedUntil}` : ''}`
-            : 'Available again with Premium'}
-        </span>
-      </div>
-    );
-  }
-
-  // No overflow:hidden on the wrapper — would clip the "move to campaign"
-  // popover on cards inside this section. The header's top corners are
-  // rounded explicitly to match the parent so the cream background doesn't
-  // poke outside the rounded outer border.
-  return (
-    <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>
-      {/* Campaign header */}
-      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
-        <button onClick={() => toggleCollapsed(campaign.id)} style={{ background:'none', border:'none', cursor:'pointer', padding:0, display:'flex', color:MUTED }}>
-          {collapsed ? <ChevronRight size={14}/> : <ChevronDown size={14}/>}
-        </button>
-        <FolderOpen size={14} color={GOLD}/>
-        {editing ? (
-          <div style={{ flex:1, display:'flex', alignItems:'center', gap:4 }}>
-            <input value={editDraft} onChange={e => setEditDraft(e.target.value)}
-              onKeyDown={e => { if (e.key === 'Enter') { onRenameCampaign(campaign.id, editDraft); setEditing(false); } if (e.key === 'Escape') setEditing(false); }}
-              style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, borderRadius:3, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
-            <button onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} style={{ background:'none', border:'none', color:swatch['#2A7A2A'], cursor:'pointer' }}><Check size={12}/></button>
-            <button onClick={() => setEditing(false)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer' }}><X size={12}/></button>
-          </div>
-        ) : (
-          <span style={{ flex:1, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
-        )}
-        <span style={{ fontSize:FS.xxs, color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
-        {campaign.mapState && <MapIcon size={11} color={GOLD} title="Map saved"/>}
-        {!editing && (
-          <div style={{ display:'flex', gap:2, alignItems:'center' }}>
-            <button
-              onClick={(e) => { e.stopPropagation(); generateCampaignPDF(campaign, settlements); }}
-              disabled={settlements.length === 0}
-              title="Export Campaign PDF"
-              style={{ display:'flex', alignItems:'center', gap:3, background: settlements.length === 0 ? '#d8cdbc' : '#7a1a1a', color:swatch.white, border:'none', borderRadius:4, padding:'3px 7px', cursor: settlements.length === 0 ? 'not-allowed' : 'pointer', fontSize:FS.micro, fontWeight:700, fontFamily:sans }}>
-              <FileText size={10}/> PDF
-            </button>
-            <button onClick={() => { setEditing(true); setEditDraft(campaign.name); }} style={{ background:'none', border:'none', color:MUTED, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
-            <button onClick={() => setConfirmDelete(!confirmDelete)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><X size={11}/></button>
-          </div>
-        )}
-      </div>
-
-      {/* Campaign delete confirmation */}
-      {confirmDelete && (
-        <DeleteConfirmation
-          entityName={campaign.name}
-          details={`This campaign contains ${settlements.length} settlement(s). They will become unassigned, not deleted.${campaign.mapState ? ' The saved map state will be lost.' : ''}`}
-          onConfirm={() => { onDeleteCampaign(campaign.id); setConfirmDelete(false); }}
-          onCancel={() => setConfirmDelete(false)}
-        />
-      )}
-
-      {!collapsed && (
-        <RegionalGraphSummary
-          campaign={campaign}
-          settlementCount={settlements.length}
-          onDiscover={onDiscoverRegional}
-          onConfirmChannel={onConfirmRegionalChannel}
-          onApplyImpact={onApplyRegionalImpact}
-          onIgnoreImpact={onIgnoreRegionalImpact}
-          onResolveImpact={onResolveRegionalImpact}
-          onAdvanceImpacts={onAdvanceRegionalImpacts}
-          onApplyAllImpacts={onApplyAllRegionalImpacts}
-          onIgnoreAllImpacts={onIgnoreAllRegionalImpacts}
-        />
-      )}
-
-      {/* Nested settlements */}
-      {!collapsed && (
-        <div style={{ padding:'6px 8px 8px', display:'flex', flexDirection:'column', gap:4 }}>
-          {settlements.length === 0 ? (
-            <div style={{ padding:'10px 8px', fontSize:FS.xs, color:MUTED, textAlign:'center', fontStyle:'italic' }}>
-              No settlements in this campaign yet. Use the arrow button to move settlements here.
-            </div>
-          ) : settlements.map(s => (
-            <SettlementCard key={s.id} s={s} allModifiers={allModifiers}
-              onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}
-              deleteConfirmed={deleteConfirmed} campaigns={campaigns}
-              addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
-              currentCampaignId={campaign.id}
-              regionalCounts={regionalCountsForSave(campaign, s.id)}
-              onReactivate={onReactivate}
-              canReactivate={canReactivate}
-              reactivatingId={reactivatingId}/>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ── Sample dashboard (Tier 8.2) ────────────────────────────────────────────
-// Rendered in the saves empty state. Three teaser cards seed expectations
-// so new accounts never see "you have nothing — go figure it out." Forking
-// loads the sample's config into the wizard with a user-suffixed seed.
-
-function SampleCard({ sample, onFork, forking }) {
-  return (
-    <article style={{
-      background: CARD,
-      border: `1px solid ${BORDER}`,
-      borderLeft: `3px solid ${GOLD}`,
-      borderRadius: 8,
-      padding: '14px 16px',
-      display: 'flex', flexDirection: 'column', gap: 8,
-      fontFamily: sans,
-      boxShadow: '0 2px 8px rgba(27,20,8,0.06)',
-    }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
-        <h4 style={{
-          margin: 0, fontFamily: serif_, fontSize: FS['16'], fontWeight: 600,
-          color: INK, lineHeight: 1.2,
-        }}>
-          {sample.name}
-        </h4>
-        <span style={{
-          fontSize: FS.micro, fontWeight: 800, color: swatch['#7A5A1A'],
-          background: 'rgba(201,162,76,0.14)',
-          border: '1px solid rgba(201,162,76,0.45)',
-          padding: '1px 6px', borderRadius: 999,
-          letterSpacing: '0.06em', textTransform: 'uppercase',
-        }}>
-          Sample
-        </span>
-        <span style={{
-          marginLeft: 'auto', fontSize: FS.xs, color: MUTED,
-          textTransform: 'capitalize',
-        }}>
-          {sample.tier} · {sample.terrain}
-        </span>
-      </div>
-      <p style={{
-        margin: 0, fontSize: FS['12.5'], color: BODY,
-        fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
-      }}>
-        {sample.teaser}
-      </p>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-        {sample.tags.map(tag => (
-          <span key={tag} style={{
-            fontSize: FS['9.5'], fontWeight: 700, color: SECOND,
-            background: swatch['#FAF6EE'],
-            border: `1px solid ${BORDER}`,
-            padding: '1px 6px', borderRadius: 4,
-            textTransform: 'uppercase', letterSpacing: '0.05em',
-          }}>
-            {tag}
-          </span>
-        ))}
-      </div>
-      <button
-        onClick={() => onFork(sample)}
-        disabled={forking}
-        style={{
-          alignSelf: 'flex-start', marginTop: 4,
-          padding: '6px 12px',
-          background: 'transparent',
-          color: GOLD,
-          border: `1.5px solid ${GOLD}`,
-          borderRadius: 999,
-          fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
-          cursor: forking ? 'wait' : 'pointer',
-          opacity: forking ? 0.6 : 1,
-          letterSpacing: '0.04em', textTransform: 'uppercase',
-        }}
-      >
-        {forking ? 'Generating…' : t('generate.button')}
-      </button>
-    </article>
-  );
-}
-
-function SampleDashboard({ onFork, forkingId }) {
-  return (
-    <div style={{
-      padding: '20px 16px',
-      background: 'rgba(255,251,245,0.96)',
-      border: `1px solid ${BORDER}`,
-      borderRadius: 8,
-    }}>
-      <div style={{
-        fontSize: FS.xs, fontWeight: 800, color: MUTED,
-        textTransform: 'uppercase', letterSpacing: '0.06em',
-        marginBottom: 10,
-        textAlign: 'center',
-      }}>
-        Start from a sample. Or roll your own
-      </div>
-      <p style={{
-        margin: '0 auto 14px', maxWidth: 460,
-        fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
-        textAlign: 'center', fontFamily: sans,
-      }}>
-        Three hand-picked seeds you can fork into your own saves. Each forks
-        with a unique character. Same setting, different settlement.
-      </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {SAMPLE_SETTLEMENTS.map(sample => (
-          <SampleCard
-            key={sample.id}
-            sample={sample}
-            onFork={onFork}
-            forking={forkingId === sample.id}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+import { forkSeedFor } from '../data/sampleSettlements.js';
+import { migrateConfig, findSaveById, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData } from './settlements/helpers.js';
+import { SettlementCard } from './settlements/SettlementCard.jsx';
+import { CampaignFolder } from './settlements/CampaignFolder.jsx';
+import { SampleDashboard } from './settlements/SampleDashboard.jsx';
+import Button from './primitives/Button.jsx';
 
 // ── Main Panel ──────────────────────────────────────────────────────────────
 
@@ -590,6 +197,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       .catch(e => { console.error('Failed to load saves:', e); setSavesLoading(false); });
   }, [setSaves]);
 
+  // LIBRARY_VIEWED — once per session, after saves have loaded so the count
+  // band is accurate. useFunnelEvent fires on the false→true transition and
+  // self-dedupes per session; payload resolves at fire time. Fire-and-forget.
+  useFunnelEvent(
+    EVENTS.LIBRARY_VIEWED,
+    !savesLoading,
+    () => ({ save_count_band: saveCountBand(saves.length), campaign_count: campaigns.length }),
+  );
+
   const handleReactivateSave = async (save) => {
     if (!save?.id || !canReactivateInactive) {
       setReactivationError('Choose an inactive settlement after freeing one of your three free slots.');
@@ -712,6 +328,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // ── Rename ──────────────────────────────────────────────────────────────
   const applyRename = (type, id, oldName, newName) => {
     if (!newName.trim() || newName.trim() === oldName) return;
+    // Campaign-clock identity lock (defense in depth): NPC + faction names freeze
+    // once the owning settlement is canonized. The detail view hides the rename
+    // affordance, but guard the persisting mutation itself so no future caller
+    // can rename a canon settlement's NPCs/factions. Settlement-name renames and
+    // the draft phase are unaffected.
+    if ((type === 'npc' || type === 'faction') && canonPhaseOf(detail?.saveData) === 'canon') return;
     const trimmed = newName.trim();
     const saveId = detail?.saveData?.id;
     let updatedSaves = saves.map(s => {
@@ -747,6 +369,16 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // ── Delete ──────────────────────────────────────────────────────────────
   const deleteConfirmed = (id) => {
     const deletedSave = saves.find(s => s.id === id);
+    // SETTLEMENT_DELETED — fired at the confirmed delete, before the save
+    // leaves local state. Coarse enums/bands/booleans only.
+    if (deletedSave) {
+      track(EVENTS.SETTLEMENT_DELETED, {
+        canon_phase: canonPhaseOf(deletedSave),
+        age_days_band: dayGapBand(lastEditedMs(deletedSave)),
+        had_ai_data: hasAiData(deletedSave),
+        was_published: !!deletedSave.is_public,
+      });
+    }
     const deletedNet = deletedSave?.settlement?.neighbourNetwork || [];
     let updated = saves.filter(s => s.id !== id).map(s => {
       const wasLinked = deletedNet.some(n => n.id === s.id || n.linkId);
@@ -895,6 +527,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   const onViewSettlement = (s) => {
     if (!isSaveActive(s)) return;
+    // SETTLEMENT_REOPENED — the revisit-gap event. Fired at the explicit
+    // library open. Coarse props only; never throws / affects control flow.
+    track(EVENTS.SETTLEMENT_REOPENED, {
+      days_since_edited_band: dayGapBand(lastEditedMs(s)),
+      canon_phase: canonPhaseOf(s),
+      has_ai_data: hasAiData(s),
+      save_count_band: saveCountBand(saves.length),
+      via: 'library',
+    });
     setDetail({ ...s, saveData: s });
   };
 
@@ -945,17 +586,18 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         <div style={{ display:'flex', gap:8, alignItems:'center' }}>
           {showNewCampaign ? (
             <div style={{ flex:1, display:'flex', gap:6 }}>
-              <input value={newCampaignName} onChange={e => setNewCampaignName(e.target.value)}
+              <input value={newCampaignName} onChange={e => setNewCampaignName(e.target.value)} aria-label="Campaign name"
                 onKeyDown={e => { if (e.key === 'Enter') handleCreateCampaign(); if (e.key === 'Escape') setShowNewCampaign(false); }}
+                // eslint-disable-next-line jsx-a11y/no-autofocus -- new-campaign field appears on user action; focus lets them type the name immediately
                 placeholder="Campaign name..." autoFocus
                 style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, borderRadius:5, fontSize:FS.sm, fontFamily:sans, outline:'none' }}/>
-              <button onClick={handleCreateCampaign} disabled={!newCampaignName.trim()} style={{ padding:'6px 12px', background:newCampaignName.trim()?GOLD:'#ccc', color:swatch.white, border:'none', borderRadius:5, cursor:newCampaignName.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>Create</button>
-              <button onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }} style={{ padding:'6px 10px', background:CARD, color:SECOND, border:`1px solid ${BORDER}`, borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontFamily:sans }}>Cancel</button>
+              <Button variant="primary" size="sm" onClick={handleCreateCampaign} disabled={!newCampaignName.trim()}>Create</Button>
+              <Button variant="secondary" size="sm" onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }}>Cancel</Button>
             </div>
           ) : (
-            <button onClick={() => setShowNewCampaign(true)} style={{ display:'flex', alignItems:'center', gap:6, padding:'7px 14px', background:CARD, color:GOLD, border:`1px solid rgba(160,118,42,0.55)`, borderRadius:6, cursor:'pointer', fontSize:FS.sm, fontWeight:700, fontFamily:sans, boxShadow:'0 1px 6px rgba(27,20,8,0.08)' }}>
-              <FolderPlus size={14}/> New Campaign
-            </button>
+            <Button variant="gold" size="md" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>}>
+              New Campaign
+            </Button>
           )}
         </div>
       )}

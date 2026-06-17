@@ -59,6 +59,7 @@ export default function SettlementPalette({ saves = [], placements = {}, activeC
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search…"
+            aria-label="Search settlements"
             style={{
               width: '100%',
               padding: '6px 8px 6px 26px',
@@ -165,6 +166,9 @@ function SettlementCard({ save, placed, onHover }) {
   return (
     <div
       draggable
+      role="button"
+      tabIndex={0}
+      aria-label={`Drag ${name} onto the map`}
       onDragStart={handleDragStart}
       style={{
         display: 'flex', alignItems: 'flex-start', gap: SP.xs,
@@ -182,6 +186,8 @@ function SettlementCard({ save, placed, onHover }) {
       onMouseUp={e => (e.currentTarget.style.cursor = 'grab')}
       onMouseEnter={() => onHover?.(true)}
       onMouseLeave={() => onHover?.(false)}
+      onFocus={() => onHover?.(true)}
+      onBlur={() => onHover?.(false)}
     >
       <GripVertical size={12} color={MUTED} style={{ marginTop: 2 }} />
       <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>

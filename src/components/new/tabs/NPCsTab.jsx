@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { X } from 'lucide-react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Collapsible, Empty, TabIntro } from '../Primitives';
 import {relStyle} from '../tabConstants';
@@ -7,6 +8,8 @@ import {isMobile} from '../tabConstants';
 import {NPCCategoryGroup, NPCRelCard2} from '../npcComponents';
 
 import {NarrativeNote} from '../NarrativeNote';
+import Button from '../../primitives/Button.jsx';
+import IconButton from '../../primitives/IconButton.jsx';
 
 export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedIds, onTogglePin}) {
   const [search, setSearch] = useState('');
@@ -65,7 +68,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
             ⚲ {pinnedCount} PINNED
           </span>
         )}
-        {onRerollNPCs&&<button onClick={onRerollNPCs} style={{fontSize:FS.xs,fontWeight:700,color:swatch['#A0762A'],background:swatch['#F7F0E4'],border:'1px solid #c8b89a',borderRadius:5,padding:'5px 12px',cursor:'pointer',flexShrink:0}}>↺ Reroll</button>}
+        {onRerollNPCs&&<Button variant="gold" size="sm" onClick={onRerollNPCs} style={{flexShrink:0}}>↺ Reroll</Button>}
       </div>
 
       {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}
@@ -73,9 +76,10 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
         <div style={{position:'relative',flex:1,minWidth:140}}>
           <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',color:MUTED,fontSize:FS.md}}></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
+            aria-label="Filter by name, role, or faction"
             placeholder="Filter by name, role, or faction…"
             style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',borderRadius:5,fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
-          {search&&<button onClick={()=>setSearch('')} style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize: FS['16'],color:MUTED,padding:0,lineHeight:1}}>×</button>}
+          {search&&<span style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear filter" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
         {[
           {key:'all',   label:'All'},
@@ -83,13 +87,11 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
           {key:'moderate', label:'●● Moderate'},
           {key:'low',   label:'● Low'},
         ].map(f=>(
-          <button key={f.key} onClick={()=>setImpFilter(f.key)}
-            style={{padding:'6px 11px',borderRadius:5,border:'1px solid',fontSize:FS.xs,fontWeight:impFilter===f.key?700:500,cursor:'pointer',flexShrink:0,
-              background:impFilter===f.key?'#1c1409':'#f7f0e4',
-              color:impFilter===f.key?'#c49a3c':'#6b5340',
-              borderColor:impFilter===f.key?'#1c1409':'#c8b89a'}}>
+          <Button key={f.key} onClick={()=>setImpFilter(f.key)}
+            variant={impFilter===f.key?'primary':'secondary'} size="sm"
+            aria-pressed={impFilter===f.key} style={{flexShrink:0}}>
             {f.label}
-          </button>
+          </Button>
         ))}
       </div>
 

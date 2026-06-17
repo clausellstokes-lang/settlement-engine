@@ -15,7 +15,9 @@
  */
 import { useState, useMemo } from 'react';
 import { Plus, X, Search } from 'lucide-react';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, sans, FS, swatch, CARD_ALT } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, swatch, CARD_ALT } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 export default function CatalogPicker({
   items,
@@ -53,9 +55,9 @@ export default function CatalogPicker({
 
   if (!open) {
     return (
-      <button onClick={() => setOpen(true)} style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', background:GOLD_BG, color:GOLD, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:'pointer', fontSize:FS.xxs, fontWeight:700, fontFamily:sans, marginTop:6 }}>
-        <Plus size={11}/> {triggerLabel || `Add from catalog (${items.length} available)`}
-      </button>
+      <Button variant="gold" size="sm" icon={<Plus size={11}/>} onClick={() => setOpen(true)} style={{ marginTop:6 }}>
+        {triggerLabel || `Add from catalog (${items.length} available)`}
+      </Button>
     );
   }
 
@@ -64,17 +66,19 @@ export default function CatalogPicker({
       {/* Search bar */}
       <div style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 8px', borderBottom:`1px solid ${BORDER}` }}>
         <Search size={11} color={MUTED}/>
-        <input value={query} onChange={e => setQuery(e.target.value)} placeholder={placeholder || 'Search catalog...'} autoFocus style={{ flex:1, border:'none', background:'transparent', fontSize:FS.xs, fontFamily:sans, color:INK, outline:'none' }}/>
-        <button onClick={collapse} style={{ background:'none', border:'none', cursor:'pointer', color:MUTED, padding:0 }}><X size={12}/></button>
+        {/* eslint-disable-next-line jsx-a11y/no-autofocus -- focus the search field when the picker panel expands */}
+        <input value={query} onChange={e => setQuery(e.target.value)} placeholder={placeholder || 'Search catalog...'} aria-label={placeholder || 'Search catalog'} autoFocus style={{ flex:1, border:'none', background:'transparent', fontSize:FS.xs, fontFamily:sans, color:INK, outline:'none' }}/>
+        <IconButton Icon={X} label="Close catalog" tone="ghost" size="md" onClick={collapse}/>
       </div>
 
       {/* Category filter pills */}
       {categoryFilters && categoryFilters.length > 1 && (
         <div style={{ display:'flex', gap:3, padding:'4px 8px', flexWrap:'wrap', borderBottom:`1px solid ${BORDER}` }}>
           {['All', ...categoryFilters].map(c => (
-            <button key={c} onClick={() => setCatFilter(c)} style={{ padding:'1px 7px', borderRadius:8, fontSize:FS.micro, fontWeight:catFilter===c?700:500, cursor:'pointer', border:`1px solid ${catFilter===c?GOLD:BORDER}`, background:catFilter===c?GOLD_BG:'transparent', color:catFilter===c?GOLD:SECOND }}>
+            <Button key={c} variant={catFilter===c ? 'gold' : 'ghost'} size="sm" aria-pressed={catFilter===c} onClick={() => setCatFilter(c)}
+              style={{ minHeight:'auto', padding:'1px 7px', borderRadius:8, fontSize:FS.micro, fontWeight:catFilter===c?700:500, border:`1px solid ${catFilter===c?GOLD:BORDER}`, color:catFilter===c?GOLD:SECOND }}>
               {c}
-            </button>
+            </Button>
           ))}
         </div>
       )}
@@ -84,7 +88,7 @@ export default function CatalogPicker({
         {filtered.length === 0 ? (
           <div style={{ padding:'8px 6px', fontSize:FS.xxs, color:MUTED, textAlign:'center' }}>No matching items</div>
         ) : filtered.map(item => (
-          <button key={item.id || item.name} onClick={() => handlePick(item)}
+          <button type="button" key={item.id || item.name} onClick={() => handlePick(item)}
             style={{ width:'100%', display:'flex', alignItems:'flex-start', gap:6, padding:'5px 8px', border:'none', background:'none', cursor:'pointer', borderRadius:4, textAlign:'left', fontFamily:sans }}
             onMouseEnter={e => e.currentTarget.style.background='#f0ebe0'}
             onMouseLeave={e => e.currentTarget.style.background='none'}>

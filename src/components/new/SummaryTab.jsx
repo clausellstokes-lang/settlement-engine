@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import { TIER_LABELS, catColor } from './design';
-import { serif, sans, TabIntro } from './Primitives';
+import { serif, TabIntro } from './Primitives';
 import { BODY } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
+import Button from '../primitives/Button.jsx';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
 // changes — keep the local `second` name so we don't churn every usage.
-const gold='#a0762a', ink='#1c1409', muted='#9c8068', second=BODY;
+const gold=swatch['#A0762A'], ink=swatch['#1C1409'], muted=swatch['#9C8068'], second=BODY;
 const factionColors=['#a0762a','#8b1a1a','#1a4a2a','#2a3a7a','#5a2a8a'];
 
 // ── Settlement character sentence ─────────────────────────────────────────────
@@ -101,7 +103,9 @@ function SummaryTab({ settlement:r }) {
   const tradeAccess=(cfg.tradeRouteAccess||'road').replace(/_/g,' ');
   const tierLabel=TIER_LABELS[tier]||tier;
   const firstQuarter=spatial?.quarters?.[0];
-  const foodBal=via?.metrics?.foodBalance;
+  // Deficit % from the canonical display model (residual ÷ daily need), matching
+  // the PDF — not the engine's gross deficitPercent. (A+ pdf.3.)
+  const foodCanon=deriveFoodBalance(r);
   const _topIssue=via?.issues?.[0];
   const topNPCs=[...(w||[])].sort((a,b)=>(b.power||0)-(a.power||0)).slice(0,6);
   const dp=r.defenseProfile||{};
@@ -124,7 +128,7 @@ function SummaryTab({ settlement:r }) {
       r.arrivalScene?`\n> ${r.arrivalScene}`:'',
       `\n**${characterSentence(r)}**`,
       `\n**Power:** ${allFactions.slice(0,3).map(f=>`${f.faction} (${f.power}%)`).join(', ')}. ${ps?.stability||''}`,
-      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodBal?.deficit>0?` Food deficit ${foodBal.deficitPercent}%.`:''}`,
+      `**Economy:** ${eco.prosperity||'?'} - ${eco.economicComplexity||''}. Exports: ${eco.primaryExports?.join(', ')||'none'}.${foodCanon.deficit>0?` Food deficit ${foodCanon.deficitPct}%.`:''}`,
       `**Defense:** ${dp.readiness?.label||'Unknown'}`,
       `\n**Key NPCs:**`,...topNPCs.map(v=>{
         const traits=normalizeNpcTraits(v).filter(t=>t.visibility!=='gm').slice(0,4).map(t=>`${t.label}: ${t.value}`).join('; ');
@@ -138,7 +142,7 @@ function SummaryTab({ settlement:r }) {
 
   // Economy situation tile values
   const ecoTileColor=eco.prosperity==='Thriving'||eco.prosperity==='Prosperous'?'#1a5a28':eco.prosperity==='Struggling'||eco.prosperity==='Poor'||eco.prosperity==='Impoverished'?'#8b1a1a':'#a0762a';
-  const ecoSub=foodBal?.deficit>0?`Food deficit ${foodBal.deficitPercent}%`:foodBal?.surplus>0?'Food surplus':'';
+  const ecoSub=foodCanon.deficit>0?`Food deficit ${foodCanon.deficitPct}%`:foodCanon.surplus>0?'Food surplus':'';
 
   // Defense tile
   const defScore=dp.scores?Math.round((dp.scores.military+dp.scores.monster+dp.scores.internal+dp.scores.economic+dp.scores.magical)/5):null;
@@ -159,9 +163,9 @@ function SummaryTab({ settlement:r }) {
             <div style={{...serif,fontSize:isMobile?22:28,fontWeight:600,color:swatch['#C49A3C'],lineHeight:1.1,marginBottom:4}}>{name}</div>
             <div style={{fontSize:FS.xs,color:swatch.inkMag3,letterSpacing:'0.02em'}}>{tierLabel} · {pop?.toLocaleString()} pop. · {tradeAccess} · est. {hist?.age?`~${hist.age} yrs ago`:'unknown'}</div>
           </div>
-          <button onClick={copyText} style={{flexShrink:0,padding:'7px 14px',borderRadius:6,background:'rgba(196,154,60,0.18)',border:'1px solid rgba(196,154,60,0.35)',color:swatch['#C49A3C'],fontSize:FS.sm,fontWeight:700,cursor:'pointer',...sans,display:'flex',alignItems:'center',gap:6}}>
-            {copied?'✓':''} {copied?'Copied!':'Copy'}
-          </button>
+          <Button variant="gold" size="md" onClick={copyText} style={{flexShrink:0}}>
+            {copied?'✓ Copied!':'Copy'}
+          </Button>
         </div>
         <p style={{fontSize: FS['13.5'],...serif,color:swatch['#E8D8B0'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>
           {name} is a {characterSentence(r)}
@@ -271,10 +275,9 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── PLOT HOOKS (collapsible) ───────────────────────────────────────── */}
       {allHooks.length>0&&<div style={{border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',borderRadius:8,overflow:'hidden',marginBottom:12}}>
-        <button onClick={()=>setHooksOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <Button variant="ghost" aria-expanded={hooksOpen} aria-pressed={hooksOpen} onClick={()=>setHooksOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:FS.xs,color:muted}}>{hooksOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em'}}>Plot Hooks ({allHooks.length})</span>
-          <span style={{fontSize:FS.xs,color:muted}}>{hooksOpen?'▲':'▼'}</span>
-        </button>
+        </Button>
         {hooksOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #c8b0e0'}}>
           <div style={{display:'flex',gap:5,flexWrap:'wrap',marginBottom:10}}>
             {Object.entries(hookCounts).map(([cat,count])=>{
@@ -308,10 +311,9 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── SETTING accordion ─────────────────────────────────────────────── */}
       {(firstQuarter||spatial?.layout||hist?.historicalCharacter||Array.isArray(reason))&&<div style={{border:'1px solid #c8d8b0',borderRadius:8,overflow:'hidden',marginBottom:10}}>
-        <button onClick={()=>setSettingOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:settingOpen?'#edf5e8':'#f4faf0',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <Button variant="ghost" aria-expanded={settingOpen} aria-pressed={settingOpen} onClick={()=>setSettingOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:FS.xs,color:muted}}>{settingOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:settingOpen?'#edf5e8':'#f4faf0',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#1A4A2A'],textTransform:'uppercase',letterSpacing:'0.06em'}}>Setting & Context</span>
-          <span style={{fontSize:FS.xs,color:muted}}>{settingOpen?'▲':'▼'}</span>
-        </button>
+        </Button>
         {settingOpen&&<div style={{padding:'12px 14px',borderTop:'1px solid #c8d8b0'}}>
           {/* Layout + historical character */}
           {(spatial?.layout||hist?.historicalCharacter)&&<div style={{display:'flex',gap:16,flexWrap:'wrap',marginBottom:8}}>
@@ -339,7 +341,7 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── INSTITUTIONS (categorized) ────────────────────────────────────── */}
       <div style={{border:'1px solid #e0d0b0',borderRadius:8,overflow:'hidden'}}>
-        <button onClick={()=>setInstOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <button type="button" aria-expanded={instOpen} onClick={()=>setInstOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <div style={{display:'flex',alignItems:'center',gap:10}}>
             <span style={{fontSize:FS.xs,fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
             <span style={{fontSize:FS.xs,color:muted}}>{g.length} total</span>

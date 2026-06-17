@@ -25,20 +25,21 @@ import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { FS, ELEV, swatch } from './theme.js';
 import { tonightAtTheTable } from '../domain/summary/tonightAtTheTable.js';
+import IconButton from './primitives/IconButton.jsx';
 
-const GOLD = '#8C6F32';
-const GOLD_ACCENT = '#C9A24C';
-const INK = '#1B1408';
-const INK_DEEP = '#2C2210';
-const BODY = '#3A2F18';
-const MUTED = '#9C8068';
-const PARCH = '#FBF5E6';
-const BORDER = '#E8D9B0';
+const GOLD = swatch['#8C6F32'];
+const GOLD_ACCENT = swatch['#C9A24C'];
+const INK = swatch['#1B1408'];
+const INK_DEEP = swatch['#2C2210'];
+const BODY = swatch['#3A2F18'];
+const MUTED = swatch['#9C8068'];
+const PARCH = swatch['#FBF5E6'];
+const BORDER = swatch['#E8D9B0'];
 
-const GREEN = '#4A7A3A';
-const VIOLET = '#7B4FCF';
-const AMBER = '#D08020';
-const RED = '#A23434';
+const GREEN = swatch['#4A7A3A'];
+const VIOLET = swatch['#7B4FCF'];
+const AMBER = swatch['#D08020'];
+const RED = swatch['#A23434'];
 
 const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
@@ -61,11 +62,14 @@ export default function TableView({ settlement, onClose }) {
   const prosperity = settlement?.economicState?.prosperity?.tier || '';
 
   return (
+    // Backdrop click/Enter/Space closes the modal; role="dialog" is required for modal semantics so it can't become a native button.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       role="dialog"
       aria-modal="true"
       aria-label={`Table view: ${settlement?.name || 'settlement'}`}
       onClick={onClose}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose?.(); }}
       style={{
         position: 'fixed', inset: 0, zIndex: 1100,
         background: 'rgba(12,8,4,0.72)',
@@ -73,8 +77,11 @@ export default function TableView({ settlement, onClose }) {
         padding: 12,
       }}
     >
+      {/* Handlers only stopPropagation to keep clicks/keys inside the panel from closing the backdrop; the panel is not itself interactive. */}
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
         style={{
           width: '100%', maxWidth: 380,
           height: '100%', maxHeight: 760,
@@ -113,21 +120,15 @@ export default function TableView({ settlement, onClose }) {
               {prosperity && <> · {String(prosperity).toUpperCase()}</>}
             </div>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close table view"
-            style={{
-              flexShrink: 0,
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(201,162,76,0.35)',
-              borderRadius: 8, padding: 6,
-              color: GOLD_ACCENT, cursor: 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}
-          >
-            <X size={16} />
-          </button>
+          <div style={{ flexShrink: 0 }}>
+            <IconButton
+              Icon={X}
+              label="Close table view"
+              onClick={onClose}
+              tone="ghost"
+              size="lg"
+            />
+          </div>
         </header>
 
         {/* Scrollable body */}

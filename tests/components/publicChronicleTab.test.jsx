@@ -139,7 +139,9 @@ describe('campaign-context confirm copy (sibling rename pin)', () => {
     const { join } = await import('node:path');
     // import.meta.url is not a file: URL under jsdom; vitest runs from the repo root.
     const src = readFileSync(join(process.cwd(), 'src', 'components', 'OutputContainer.jsx'), 'utf8');
-    expect(src).toMatch(/title: 'Send campaign context\?'/);
+    // Syntax-agnostic: the ConfirmDialog title prop is now JSX (title="…") after
+    // the createElement→JSX conversion (A+ components-core.2); match either form.
+    expect(src).toMatch(/title[:=]\s*['"]Send campaign context\?['"]/);
     expect(src).toMatch(/woven into the narration as established lore\. Settlement facts still take precedence\. DM Notes stay private and are not included\./);
     expect(src).not.toMatch(/Send AI guidance\?/);
   });

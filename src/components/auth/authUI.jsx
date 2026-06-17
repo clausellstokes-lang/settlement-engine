@@ -11,6 +11,7 @@ import {
   GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_,
   SP, R, FS, swatch, VIOLET, VIOLET_BG, FORM_MAX,
 } from '../theme.js';
+import DSButton from '../primitives/Button.jsx';
 
 // ── OAuth brand glyphs ──────────────────────────────────────────────────────
 // Inline SVG (vs. a brand-icon package) to control bundle size — each glyph
@@ -37,27 +38,15 @@ export function DiscordGlyph() {
 
 export function OAuthButton({ glyph, label, onClick, disabled, soonNote }) {
   return (
-    <button
-      type="button"
+    <DSButton
+      variant="secondary"
+      size="lg"
+      fullWidth
       onClick={onClick}
       disabled={disabled}
       title={soonNote || `Continue with ${label}`}
-      style={{
-        width: '100%', padding: `${SP.md}px ${SP.md}px`,
-        background: swatch.white,
-        color: INK,
-        border: `1px solid ${BORDER}`,
-        borderRadius: R.lg,
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        opacity: disabled ? 0.55 : 1,
-        fontFamily: sans, fontSize: FS['14'], fontWeight: 600,
-        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-        transition: 'border-color 0.15s, background 0.15s',
-      }}
-    >
-      {glyph}
-      <span>Continue with {label}</span>
-      {soonNote && (
+      icon={glyph}
+      trailingIcon={soonNote && (
         <span style={{
           fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.06em',
           textTransform: 'uppercase', color: VIOLET,
@@ -67,7 +56,9 @@ export function OAuthButton({ glyph, label, onClick, disabled, soonNote }) {
           Soon
         </span>
       )}
-    </button>
+    >
+      <span>Continue with {label}</span>
+    </DSButton>
   );
 }
 
@@ -110,6 +101,7 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }
     <input
       type={type}
       placeholder={placeholder}
+      aria-label={placeholder}
       value={value}
       onChange={e => onChange(e.target.value)}
       onKeyDown={onKeyDown}
@@ -125,14 +117,17 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }
 }
 
 export function Checkbox({ checked, onChange, label }) {
+  const id = `checkbox-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
   return (
-    <label style={{
+    <label htmlFor={id} style={{
       display: 'flex', alignItems: 'center', gap: SP.sm,
       cursor: 'pointer', fontSize: FS.sm, color: SECOND,
       fontFamily: sans, userSelect: 'none',
     }}>
       <input
+        id={id}
         type="checkbox"
+        aria-label={label}
         checked={checked}
         onChange={e => onChange(e.target.checked)}
         style={{ accentColor: GOLD, width: 16, height: 16, cursor: 'pointer' }}
@@ -143,28 +138,26 @@ export function Checkbox({ checked, onChange, label }) {
 }
 
 export function Button({ onClick, children, variant = 'primary', disabled, style: extra }) {
-  const styles = {
-    primary: { background: GOLD, color: swatch.white, border: 'none' },
-    success: { background: 'linear-gradient(135deg, #2a7a2a 0%, #4a8a4a 100%)', color: swatch.white, border: 'none' },
-    danger:  { background: 'transparent', color: '#8b1a1a', border: '1px solid rgba(139,26,26,0.3)' },
-    ghost:   { background: 'transparent', color: GOLD, border: `1px solid ${GOLD}` },
+  // Map this auth-CTA primitive's variants onto the design-system Button.
+  // `ghost` here is gold-on-transparent with a gold border → DS `gold` (the
+  // softest gold variant) is the closest faithful match.
+  const variantMap = {
+    primary: 'primary',
+    success: 'success',
+    danger:  'danger',
+    ghost:   'gold',
   };
   return (
-    <button
+    <DSButton
+      variant={variantMap[variant] || 'primary'}
+      size="lg"
+      fullWidth
       onClick={onClick}
       disabled={disabled}
-      style={{
-        width: '100%', padding: `${SP.md}px 0`,
-        borderRadius: R.lg, cursor: disabled ? 'not-allowed' : 'pointer',
-        fontFamily: sans, fontSize: FS['14'], fontWeight: 700,
-        opacity: disabled ? 0.6 : 1,
-        transition: 'opacity 0.15s',
-        ...styles[variant],
-        ...extra,
-      }}
+      style={extra}
     >
       {children}
-    </button>
+    </DSButton>
   );
 }
 
@@ -175,13 +168,20 @@ export function Alert({ type, children }) {
     info:    { bg: '#fef9ee', border: GOLD, text: SECOND, Icon: Mail },
   };
   const c = colors[type] || colors.info;
+  // A+ design-a11y.4 — conditionally-rendered errors are the textbook live-region
+  // case (the content appears after the user acts), so assistive tech must
+  // announce it: errors assertively (role=alert), everything else politely
+  // (role=status). Mirrors the Toast primitive's role=status pattern.
   return (
-    <div style={{
-      display: 'flex', alignItems: 'flex-start', gap: SP.sm,
-      padding: `${SP.sm + 2}px ${SP.md}px`,
-      background: c.bg, border: `1px solid ${c.border}`, borderRadius: R.md,
-      fontSize: FS.sm, color: c.text, lineHeight: 1.5,
-    }}>
+    <div
+      role={type === 'error' ? 'alert' : 'status'}
+      aria-live={type === 'error' ? 'assertive' : 'polite'}
+      style={{
+        display: 'flex', alignItems: 'flex-start', gap: SP.sm,
+        padding: `${SP.sm + 2}px ${SP.md}px`,
+        background: c.bg, border: `1px solid ${c.border}`, borderRadius: R.md,
+        fontSize: FS.sm, color: c.text, lineHeight: 1.5,
+      }}>
       <c.Icon size={16} style={{ flexShrink: 0, marginTop: 1 }} />
       <span>{children}</span>
     </div>

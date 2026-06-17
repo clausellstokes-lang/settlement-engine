@@ -9,11 +9,15 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   Users, Shield, Zap, Search, ChevronLeft,
-  Check, X, AlertCircle, RefreshCw, Crown, Flag,
+  Check, X, AlertCircle, RefreshCw, Crown, Flag, BarChart3, TrendingUp,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
+import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
+import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
+import Button from './primitives/Button.jsx';
+import IconButton from './primitives/IconButton.jsx';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
 
 function Section({ title, icon: Icon, children, actions }) {
@@ -116,22 +120,19 @@ function UserRow({ user, onUpdate }) {
               <option value="admin">Admin</option>
               <option value="developer">Developer</option>
             </select>
-            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
-              <Check size={12} />
-            </button>
-            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
-              <X size={12} />
-            </button>
+            <IconButton Icon={Check} label="Save role" onClick={saveEdit} disabled={saving} tone="default" size="sm" />
+            <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
           </div>
         ) : (
-          <button onClick={() => startEdit('role', user.role)}
+          <Button variant="ghost" size="sm" onClick={() => startEdit('role', user.role)}
             style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontSize: FS.xxs, fontWeight: 700, color: user.role === 'developer' ? '#7c3aed' : user.role === 'admin' ? '#dc2626' : MUTED,
-              textTransform: 'uppercase', padding: 0,
+              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
+              fontSize: FS.xxs, fontWeight: 700,
+              color: user.role === 'developer' ? '#7c3aed' : user.role === 'admin' ? '#dc2626' : MUTED,
+              textTransform: 'uppercase',
             }}>
             {user.role || 'user'}
-          </button>
+          </Button>
         )}
       </div>
 
@@ -144,22 +145,19 @@ function UserRow({ user, onUpdate }) {
               <option value="free">Free</option>
               <option value="premium">Premium</option>
             </select>
-            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
-              <Check size={12} />
-            </button>
-            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
-              <X size={12} />
-            </button>
+            <IconButton Icon={Check} label="Save tier" onClick={saveEdit} disabled={saving} tone="default" size="sm" />
+            <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
           </div>
         ) : (
-          <button onClick={() => startEdit('tier', user.tier || 'free')}
+          <Button variant="ghost" size="sm" onClick={() => startEdit('tier', user.tier || 'free')}
             style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontSize: FS.xxs, fontWeight: 600, color: user.tier === 'premium' ? '#2a7a2a' : GOLD,
-              textTransform: 'uppercase', padding: 0,
+              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
+              fontSize: FS.xxs, fontWeight: 600,
+              color: user.tier === 'premium' ? '#2a7a2a' : GOLD,
+              textTransform: 'uppercase',
             }}>
             {user.tier || 'free'}
-          </button>
+          </Button>
         )}
       </div>
 
@@ -167,25 +165,23 @@ function UserRow({ user, onUpdate }) {
       <div style={{ flex: 1, minWidth: 60, textAlign: 'right' }}>
         {editing === 'credits' ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 2, justifyContent: 'flex-end' }}>
-            <input type="number" value={editValue} onChange={e => setEditValue(e.target.value)}
+            <input type="number" aria-label="Credits" value={editValue} onChange={e => setEditValue(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && saveEdit()}
               style={{ width: 60, fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}`, textAlign: 'right' }}
+              // eslint-disable-next-line jsx-a11y/no-autofocus -- inline edit field should focus on open
               autoFocus />
-            <button onClick={saveEdit} disabled={saving} style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer', padding: 0 }}>
-              <Check size={12} />
-            </button>
-            <button onClick={() => setEditing(null)} style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer', padding: 0 }}>
-              <X size={12} />
-            </button>
+            <IconButton Icon={Check} label="Save credits" onClick={saveEdit} disabled={saving} tone="default" size="sm" />
+            <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
           </div>
         ) : (
-          <button onClick={() => startEdit('credits', user.credits)}
+          <Button variant="ghost" size="sm" onClick={() => startEdit('credits', user.credits)}
+            icon={<Zap size={11} />}
             style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontSize: FS.sm, fontWeight: 700, color: swatch['#7C3AED'], padding: 0,
+              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
+              fontSize: FS.sm, fontWeight: 700, color: swatch['#7C3AED'],
             }}>
-            <Zap size={11} style={{ verticalAlign: 'middle' }} /> {user.credits ?? 0}
-          </button>
+            {user.credits ?? 0}
+          </Button>
         )}
       </div>
     </div>
@@ -275,15 +271,9 @@ export default function AdminPanel({ onBack }) {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
         {onBack && (
-          <button onClick={onBack} style={{
-            display: 'flex', alignItems: 'center', gap: SP.xs,
-            padding: `${SP.sm}px ${SP.md}px`,
-            background: GOLD_BG, border: `1px solid rgba(160,118,42,0.3)`,
-            borderRadius: R.md, cursor: 'pointer',
-            color: GOLD, fontSize: FS.sm, fontWeight: 600, fontFamily: sans,
-          }}>
-            <ChevronLeft size={14} /> Back
-          </button>
+          <Button variant="gold" size="md" onClick={onBack} icon={<ChevronLeft size={14} />}>
+            Back
+          </Button>
         )}
         <div>
           <h1 style={{ margin: 0, fontSize: FS.xxl, fontFamily: serif_, color: INK }}>Admin Panel</h1>
@@ -314,12 +304,9 @@ export default function AdminPanel({ onBack }) {
 
       {/* User management */}
       <Section title="User Management" icon={Users} actions={
-        <button onClick={fetchUsers} style={{
-          background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
-          display: 'flex', alignItems: 'center', gap: 4, fontSize: FS.xxs,
-        }}>
-          <RefreshCw size={12} /> Refresh
-        </button>
+        <Button variant="ghost" size="sm" onClick={fetchUsers} icon={<RefreshCw size={12} />}>
+          Refresh
+        </Button>
       }>
         {/* Search */}
         <div style={{
@@ -329,7 +316,7 @@ export default function AdminPanel({ onBack }) {
         }}>
           <Search size={14} color={MUTED} />
           <input
-            type="text" placeholder="Search users by email or name..."
+            type="text" aria-label="Search users by email or name" placeholder="Search users by email or name..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && fetchUsers()}
@@ -375,14 +362,19 @@ export default function AdminPanel({ onBack }) {
         <GalleryModerationPanel />
       </Section>
 
+      <Section title="Usage Trends" icon={TrendingUp}>
+        <AdminTrendsPanel />
+      </Section>
+
+      <Section title="Analytics" icon={BarChart3}>
+        <AdminAnalyticsPanel />
+      </Section>
+
       {/* Support Messages */}
       <Section title="Support Messages" icon={AlertCircle} actions={
-        <button onClick={fetchSupport} style={{
-          background: 'none', border: 'none', color: MUTED, cursor: 'pointer',
-          display: 'flex', alignItems: 'center', gap: 4, fontSize: FS.xxs,
-        }}>
-          <RefreshCw size={12} /> Refresh
-        </button>
+        <Button variant="ghost" size="sm" onClick={fetchSupport} icon={<RefreshCw size={12} />}>
+          Refresh
+        </Button>
       }>
         {supportLoading ? (
           <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontSize: FS.sm }}>Loading...</div>

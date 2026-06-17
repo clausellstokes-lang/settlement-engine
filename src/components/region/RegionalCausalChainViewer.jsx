@@ -2,6 +2,7 @@ import { Check, ChevronDown, ChevronRight, CircleSlash, SlidersHorizontal, Undo2
 import { useMemo, useState } from 'react';
 
 import { conditionFromRegionalImpact, ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
+import IconButton from '../primitives/IconButton.jsx';
 import { BORDER, BODY, CARD, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
 
 function human(value) {
@@ -105,10 +106,12 @@ export default function RegionalCausalChainViewer({
           <option value="all">All sources</option>
           {model.sources.map(([id, name]) => <option key={id} value={id}>{name}</option>)}
         </select>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 5, marginLeft: 'auto', fontSize: FS.micro, color: MUTED, fontFamily: sans }}>
+        <label htmlFor="regional-causal-chain-severity" style={{ display: 'flex', alignItems: 'center', gap: 5, marginLeft: 'auto', fontSize: FS.micro, color: MUTED, fontFamily: sans }}>
           Severity
           <input
+            id="regional-causal-chain-severity"
             type="range"
+            aria-label="Minimum severity"
             min="0"
             max="0.8"
             step="0.1"
@@ -147,27 +150,37 @@ export default function RegionalCausalChainViewer({
               <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                 {row.impact.status === 'queued' && (
                   <>
-                    <button type="button" disabled={!available} onClick={() => onApplyImpact?.(campaign.id, row.impact.id)} title={available ? 'Apply regional impact' : 'Impact is delayed'} style={iconButton(available ? swatch.success : BORDER, swatch.white, available)}>
-                      <Check size={12} />
-                    </button>
-                    <button type="button" onClick={() => onIgnoreImpact?.(campaign.id, row.impact.id)} title="Ignore regional impact" style={iconButton(CARD, MUTED)}>
-                      <CircleSlash size={12} />
-                    </button>
+                    <IconButton
+                      Icon={Check}
+                      label={available ? 'Apply regional impact' : 'Impact is delayed'}
+                      tone="primary"
+                      size="sm"
+                      disabled={!available}
+                      onClick={() => onApplyImpact?.(campaign.id, row.impact.id)}
+                    />
+                    <IconButton
+                      Icon={CircleSlash}
+                      label="Ignore regional impact"
+                      size="sm"
+                      onClick={() => onIgnoreImpact?.(campaign.id, row.impact.id)}
+                    />
                   </>
                 )}
                 {row.impact.status === 'applied' && (
-                  <button type="button" onClick={() => onResolveImpact?.(campaign.id, row.impact.id)} title="Resolve applied regional impact" style={iconButton(CARD, SECOND)}>
-                    <Undo2 size={12} />
-                  </button>
+                  <IconButton
+                    Icon={Undo2}
+                    label="Resolve applied regional impact"
+                    size="sm"
+                    onClick={() => onResolveImpact?.(campaign.id, row.impact.id)}
+                  />
                 )}
-                <button
-                  type="button"
+                <IconButton
+                  Icon={expandedImpactId === row.impact.id ? ChevronDown : ChevronRight}
+                  label={expandedImpactId === row.impact.id ? 'Hide causal details' : 'Show causal details'}
+                  size="sm"
+                  pressed={expandedImpactId === row.impact.id}
                   onClick={() => setExpandedImpactId(expandedImpactId === row.impact.id ? null : row.impact.id)}
-                  title={expandedImpactId === row.impact.id ? 'Hide causal details' : 'Show causal details'}
-                  style={iconButton(CARD, SECOND)}
-                >
-                  {expandedImpactId === row.impact.id ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
-                </button>
+                />
               </div>
               {expandedImpactId === row.impact.id && (
                 <div style={{
@@ -267,18 +280,3 @@ function DetailBlock({ label, value, meta }) {
   );
 }
 
-function iconButton(background, color, enabled = true) {
-  return {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 24,
-    height: 24,
-    border: background === CARD ? `1px solid ${BORDER}` : 'none',
-    borderRadius: 5,
-    background,
-    color,
-    cursor: enabled ? 'pointer' : 'not-allowed',
-    opacity: enabled ? 1 : 0.68,
-  };
-}

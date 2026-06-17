@@ -24,6 +24,7 @@
 
 import { useEffect, useState } from 'react';
 import { FS, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 const DISMISS_KEY = 'sf.devEmailBanner.dismissed';
 const IS_DEV = !!import.meta?.env?.DEV;
@@ -104,23 +105,15 @@ export default function DevEmailBanner() {
 npx supabase secrets set RESEND_FROM_EMAIL="SettlementForge <hello@settlementforge.com>"`}
         </pre>
       </div>
-      <button
+      <Button
         type="button"
+        variant="danger"
+        size="sm"
         onClick={dismiss}
-        style={{
-          background: 'transparent',
-          color: swatch['#FFCFCF'],
-          border: '1px solid #8b1a1a',
-          borderRadius: 4,
-          padding: '4px 8px',
-          cursor: 'pointer',
-          fontFamily: 'inherit',
-          fontSize: FS.xs,
-        }}
         aria-label="Dismiss email-unconfigured banner"
       >
         Dismiss
-      </button>
+      </Button>
     </div>
   );
 }

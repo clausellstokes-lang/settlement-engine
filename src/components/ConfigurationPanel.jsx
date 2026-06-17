@@ -5,8 +5,9 @@ import {getCompatibleResources} from '../generators/terrainHelpers';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
+import Button from './primitives/Button.jsx';
 
-const PARCHMENT='#f7f0e4';
+const PARCHMENT=swatch['#F7F0E4'];
 
 const ARCHETYPES=[
   {key:'balanced',name:'Balanced',desc:'No dominant characteristic',threat:'frontier',e:50,m:50,mg:50,r:50,c:50},
@@ -55,7 +56,7 @@ function Lbl({children,topic}){
 function Sel({value,onChange,children}){return<select value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
 function Collapsible({title,status,children}){
   const[open,setOpen]=useState(false);
-  return<div><button onClick={()=>setOpen(o=>!o)} style={{background:'none',border:'none',cursor:'pointer',textAlign:'left',fontSize:FS.sm,fontWeight:600,color:SECOND,display:'flex',alignItems:'center',gap:6,padding:'4px 0',width:'100%',fontFamily:sans}}>{open?<ChevronUp size={14}/>:<ChevronDown size={14}/>}<span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:swatch['#F0EAD8'],borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</button>{open&&children}</div>;
+  return<div><Button variant="ghost" size="sm" fullWidth onClick={()=>setOpen(o=>!o)} aria-expanded={open} icon={open?<ChevronUp size={14}/>:<ChevronDown size={14}/>} style={{justifyContent:'flex-start',textAlign:'left',padding:'4px 0',whiteSpace:'normal'}}><span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:swatch['#F0EAD8'],borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</Button>{open&&children}</div>;
 }
 
 function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode}){
@@ -69,7 +70,7 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
   return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:randomSliderMode?0:10}}>
       <Lbl>Priority Sliders</Lbl>
-      <button onClick={()=>setRandomSliderMode(!randomSliderMode)} style={{fontSize:FS.xs,fontWeight:700,padding:'3px 10px',border:`1px solid ${randomSliderMode?GOLD:BORDER2}`,borderRadius:5,cursor:'pointer',background:randomSliderMode?GOLD:CARD,color:randomSliderMode?'#fff':SECOND,fontFamily:sans}}> {randomSliderMode?'Random':'Set manually'}</button>
+      <Button variant={randomSliderMode?'primary':'secondary'} size="sm" aria-pressed={randomSliderMode} onClick={()=>setRandomSliderMode(!randomSliderMode)}>{randomSliderMode?'Random':'Set manually'}</Button>
     </div>
     {randomSliderMode
       ? <p style={{fontSize:FS.xs,color:MUTED,margin:'6px 0 0',lineHeight:1.4}}>Each generation randomises all priority sliders. Toggle off to set values manually or choose an archetype.</p>
@@ -94,6 +95,7 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
                 {label}
               </span>
               <input type="range"
+                aria-label={label}
                 min={5} max={95}
                 value={Math.max(5,val)}
                 onChange={e=>updateConfig({[key]:Number(e.target.value)})}
@@ -122,12 +124,12 @@ function StressPanel({config,updateConfig}){
         <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random stress may fire each Generate (~40% chance). All types are eligible.':`${selected.length} of ${allKeys.length} stress types selected.`}</p>
       </div>
       <div style={{display:'flex',gap:5,flexShrink:0}}>
-        <button onClick={toggleRandom} style={{fontSize:FS.xs,fontWeight:700,padding:'4px 10px',border:`1px solid ${isRandom?'#8b5a1a':BORDER2}`,borderRadius:5,cursor:'pointer',background:isRandom?'#8b5a1a':CARD,color:isRandom?'#fff':SECOND,fontFamily:sans}}> {isRandom?'Random ON':'Random'}</button>
-        {!isRandom&&<><button onClick={()=>updateConfig({selectedStresses:allKeys})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>All</button><button onClick={()=>updateConfig({selectedStresses:[]})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>None</button></>}
+        <Button variant={isRandom?'primary':'secondary'} size="sm" aria-pressed={isRandom} onClick={toggleRandom}>{isRandom?'Random ON':'Random'}</Button>
+        {!isRandom&&<><Button variant="secondary" size="sm" onClick={()=>updateConfig({selectedStresses:allKeys})}>All</Button><Button variant="secondary" size="sm" onClick={()=>updateConfig({selectedStresses:[]})}>None</Button></>}
       </div>
     </div>
     {!isRandom&&<div style={{display:'flex',flexDirection:'column',gap:4,maxHeight:200,overflowY:'auto'}}>
-      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<button key={key} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 8px',borderRadius:4,cursor:'pointer',textAlign:'left',border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent',fontFamily:sans}}><span style={{fontSize: FS['14'],flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</button>;})}
+      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<Button key={key} variant={on?'gold':'secondary'} size="sm" aria-pressed={on} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',justifyContent:'flex-start',gap:8,padding:'5px 8px',borderRadius:4,textAlign:'left',minHeight:'auto',whiteSpace:'normal',fontWeight:400,border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent'}}><span style={{fontSize: FS['14'],flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</Button>;})}
     </div>}
   </div>;
 }
@@ -208,10 +210,10 @@ function NearbyResourcesPanel({config,updateConfig}){
         <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random compatible subset is selected each Generate.':`${selected.filter(k=>compatible.some(r=>r.key===k)).length} of ${compatible.length} compatible resources selected.`}</p>
       </div>
       <div style={{display:'flex',gap:5,flexShrink:0}}>
-        <button onClick={toggleRandom} style={{fontSize:FS.xs,fontWeight:700,padding:'4px 10px',border:`1px solid ${isRandom?GOLD:BORDER2}`,borderRadius:5,cursor:'pointer',background:isRandom?GOLD:CARD,color:isRandom?'#fff':SECOND,fontFamily:sans}}> {isRandom?'Random ON':'Random'}</button>
+        <Button variant={isRandom?'primary':'secondary'} size="sm" aria-pressed={isRandom} onClick={toggleRandom}>{isRandom?'Random ON':'Random'}</Button>
         {!isRandom&&<>
-          <button onClick={()=>updateConfig({nearbyResources:compatible.map(r=>r.key)})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>All</button>
-          <button onClick={()=>updateConfig({nearbyResources:[],nearbyResourcesState:{}})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>None</button>
+          <Button variant="secondary" size="sm" onClick={()=>updateConfig({nearbyResources:compatible.map(r=>r.key)})}>All</Button>
+          <Button variant="secondary" size="sm" onClick={()=>updateConfig({nearbyResources:[],nearbyResourcesState:{}})}>None</Button>
         </>}
       </div>
     </div>
@@ -224,25 +226,25 @@ function NearbyResourcesPanel({config,updateConfig}){
             if(!r.compatible && !selected.includes(r.key) && !isRandom) {
               const incompatTip = (r.incompatibleReason||'Not compatible with current access') + '. Click to force include anyway';
               return(
-                <button key={r.key}
+                <Button key={r.key} variant="ghost" size="sm"
                   onClick={()=>cycleResourceState(r.key)}
                   title={incompatTip}
-                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,border:'1px dashed #c8b8a0',
-                    background:'transparent',color:MUTED,fontFamily:sans,opacity:0.45,cursor:'pointer'}}>
+                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',fontWeight:400,border:'1px dashed #c8b8a0',
+                    background:'transparent',color:MUTED,opacity:0.45}}>
                   {r.name||r.key.replace(/_/g,' ')}
-                </button>);
+                </Button>);
             }
 
             if (isRandom) {
               // RANDOM MODE: all in pool — clearly shown as included/active
               return(
-                <button key={r.key} disabled
+                <Button key={r.key} variant="gold" size="sm" disabled
                   title={`In random pool. Eligible for this generation. Actual selection happens at generation time based on route and terrain.`}
-                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,
+                  style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',opacity:1,
                     border:`1px solid #c8a84a`,background:`rgba(160,118,42,0.08)`,color:`#8a6020`,
-                    fontFamily:sans,cursor:'default',userSelect:'none',fontWeight:600}}>
+                    cursor:'default',userSelect:'none',fontWeight:600}}>
                   {r.name||r.key.replace(/_/g,' ')}
-                </button>);
+                </Button>);
             }
 
             // MANUAL MODE — single card cycles through all four states
@@ -264,13 +266,13 @@ function NearbyResourcesPanel({config,updateConfig}){
               : {border:`1px solid ${STATE_BORDER[st]}`,background:STATE_BG[st],
                  color:STATE_COLORS[st],fontWeight:700};
             return(
-              <button key={r.key} onClick={()=>cycleResourceState(r.key)} title={tip}
-                style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,cursor:'pointer',
-                  fontFamily:sans,WebkitTapHighlightColor:'transparent',userSelect:'none',
+              <Button key={r.key} variant="secondary" size="sm" onClick={()=>cycleResourceState(r.key)} title={tip}
+                style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,minHeight:'auto',
+                  WebkitTapHighlightColor:'transparent',userSelect:'none',
                   transition:'all 0.1s',...btnStyle}}>
                 {!isOff&&st!=='allow'&&<span style={{fontSize:FS.micro,marginRight:3,opacity:0.85}}>{STATE_LABELS[st].split(' ')[0]}</span>}
                 {r.name||r.key.replace(/_/g,' ')}
-              </button>);
+              </Button>);
           })}
         </div>
       </div>)}
@@ -315,15 +317,15 @@ export default function ConfigurationPanel(){
     <div style={{padding:'0 16px 14px'}}>
       <div style={{marginBottom:12}}>
         <Lbl>Settlement Name (optional)</Lbl>
-        <input type="text" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
+        <input type="text" aria-label="Settlement Name (optional)" maxLength={25} placeholder="Leave blank to generate automatically" value={config.customName||''} onChange={e=>updateConfig({customName:e.target.value.slice(0,25)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box',background:config.customName?'#fffbf5':CARD}}/>
         {config.customName&&<div style={{fontSize:FS.xs,color:MUTED,marginTop:3,textAlign:'right'}}>{25-(config.customName||'').length} characters remaining</div>}
       </div>
       {/* §14b — Use custom content toggle (homebrew data layer). Default ON. */}
       {canUseCustom && customCount > 0 && (() => {
         const on = config.useCustomContent !== false;
         return (
-          <label style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,borderRadius:6,background:on?'rgba(124,58,237,0.06)':CARD}}>
-            <input type="checkbox" checked={on} onChange={e=>updateConfig({useCustomContent:e.target.checked})} style={{accentColor:swatch.magic,width:15,height:15,flexShrink:0}}/>
+          <label htmlFor="useCustomContent" style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,borderRadius:6,background:on?'rgba(124,58,237,0.06)':CARD}}>
+            <input id="useCustomContent" aria-label="Use my custom content" type="checkbox" checked={on} onChange={e=>updateConfig({useCustomContent:e.target.checked})} style={{accentColor:swatch.magic,width:15,height:15,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:700,color:on?swatch.magic:SECOND,fontFamily:sans}}>✦ Use my custom content</span>
             <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',textAlign:'right',lineHeight:1.3}}>{customCount} item{customCount===1?'':'s'} · institutions, services, resources, trade, factions, stressors &amp; chains</span>
           </label>
@@ -402,7 +404,7 @@ export default function ConfigurationPanel(){
           </Sel>
         </div>
       </div>
-      {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
+      {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" aria-label="Custom Population" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="culture">Culture</Lbl>
           <Sel value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
@@ -431,6 +433,7 @@ export default function ConfigurationPanel(){
           {config.settlementAgeMode==='custom'&&(
             <input
               type="number"
+              aria-label="Custom years"
               min={0}
               max={5000}
               value={config.settlementAgeYears||0}

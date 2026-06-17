@@ -6,7 +6,6 @@ import {
   BLUE_BG,
   BODY,
   BORDER,
-  CARD,
   FS,
   GOLD,
   GREEN,
@@ -21,8 +20,8 @@ import {
   SP,
   sans,
   serif_,
-  swatch,
 } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
 import GalleryCard from './GalleryCard.jsx';
 import GallerySidebar from './GallerySidebar.jsx';
@@ -83,28 +82,13 @@ export default function GalleryList({
             {t('gallery.pageSubtitle')}
           </p>
         </div>
-        <button
-          type="button"
+        <Button
+          variant="primary"
+          icon={<Sparkles size={14} />}
           onClick={() => onNavigate?.('generate')}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 7,
-            minHeight: 38,
-            padding: '8px 12px',
-            border: `1px solid ${GOLD}`,
-            borderRadius: R.md,
-            background: GOLD,
-            color: swatch.white,
-            fontFamily: sans,
-            fontSize: FS.sm,
-            fontWeight: 900,
-            cursor: 'pointer',
-            whiteSpace: 'nowrap',
-          }}
         >
-          <Sparkles size={14} /> {t('gallery.forgeYourOwn')}
-        </button>
+          {t('gallery.forgeYourOwn')}
+        </Button>
       </header>
 
       {actionError && <StatusMessage tone="danger">{actionError}</StatusMessage>}
@@ -158,25 +142,14 @@ export default function GalleryList({
           )}
           {hasMore && (
             <div style={{ textAlign: 'center', marginTop: SP.xl }}>
-              <button
-                type="button"
+              <Button
+                variant="gold"
                 onClick={loadMore}
+                busy={listLoading}
                 disabled={listLoading}
-                style={{
-                  minHeight: 38,
-                  padding: '8px 16px',
-                  border: `1px solid ${GOLD}`,
-                  borderRadius: R.md,
-                  background: CARD,
-                  color: GOLD,
-                  fontFamily: sans,
-                  fontSize: FS.sm,
-                  fontWeight: 900,
-                  cursor: listLoading ? 'wait' : 'pointer',
-                }}
               >
                 {listLoading ? 'Loading...' : 'Load more'}
-              </button>
+              </Button>
             </div>
           )}
         </main>

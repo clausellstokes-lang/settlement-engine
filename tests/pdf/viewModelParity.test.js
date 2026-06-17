@@ -13,6 +13,8 @@
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
+import { deriveFoodBalance, deriveDossierViewModel } from '../../src/domain/display/dossierViewModel.js';
+import { SHARED_FIELDS, getByPath } from '../../src/domain/display/parityContract.js';
 
 // One key per on-screen dossier section (OutputContainer tabs). aiAppendix is
 // intentionally excluded - it only exists in the AI-narrative path.
@@ -39,5 +41,56 @@ describe('PDF viewModel parity', () => {
     expect(vm.raw).toBe(settlement);
     expect(vm.active).toBeTruthy();
     expect(vm.narrativeMode).toBe(false);
+  });
+});
+
+// A+ pdf.5 — field-level VALUE parity driven by the SHARED_FIELDS contract (DATA,
+// not hand-listed asserts). The PDF must render the SAME values the canonical
+// display model (deriveDossierViewModel) produces, for every shared fact — so a
+// slice can't silently read a raw/unclamped source and drift from the screen.
+// New shared facts default to "must match": add a SHARED_FIELDS row (or a
+// documented PARITY_EXEMPT entry), and this harness asserts it automatically.
+describe('PDF viewModel — SHARED_FIELDS value parity (canon ↔ PDF view-model)', () => {
+  const configs = [
+    { settType: 'thorp', culture: 'norse', terrain: 'mountain', tradeRouteAccess: 'isolated' },
+    { settType: 'town', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'road' },
+    { settType: 'city', culture: 'imperial', terrain: 'coast', tradeRouteAccess: 'port' },
+  ];
+
+  for (const cfg of configs) {
+    it(`every SHARED_FIELDS fact matches canon for ${cfg.settType}/${cfg.terrain}`, () => {
+      const s = generateSettlementPipeline(cfg, null, { seed: `parity-${cfg.settType}-2026`, customContent: {} });
+      const canon = deriveDossierViewModel(s);
+      const vm = buildViewModel({ settlement: s });
+
+      for (const row of SHARED_FIELDS) {
+        const canonVal = getByPath(canon, row.canonPath);
+        for (const vmPath of row.vmPaths) {
+          const raw = getByPath(vm, vmPath);
+          const vmVal = row.normalizeVm ? row.normalizeVm(raw) : raw;
+          expect(vmVal, `${row.fact} — PDF ${vmPath} must equal canon ${row.canonPath}`).toBe(canonVal);
+        }
+      }
+
+      // Identity anchor mirrors the DailyLifeTab anchor (not a deriveDossierViewModel
+      // path, so it stays a direct assertion alongside the registry walk).
+      const fbal = deriveFoodBalance(s);
+      expect(vm.identity.anchor.foodDeficit).toBe(fbal.deficit);
+      expect(vm.identity.anchor.foodSurplus).toBe(fbal.surplus);
+    });
+  }
+
+  // pdf.7 — rot-proof the contract itself: SHARED_FIELDS must stay non-trivially
+  // populated and well-formed, so it can't silently decay back toward the
+  // key-only guard (the failure mode pdf.5 exists to kill). The walk above
+  // already proves every row's paths resolve; this guards the registry's shape.
+  it('SHARED_FIELDS is a non-trivial, well-formed contract', () => {
+    expect(SHARED_FIELDS.length).toBeGreaterThanOrEqual(8);
+    for (const row of SHARED_FIELDS) {
+      expect(typeof row.fact, `row missing fact: ${JSON.stringify(row)}`).toBe('string');
+      expect(typeof row.canonPath).toBe('string');
+      expect(Array.isArray(row.vmPaths) && row.vmPaths.length > 0).toBe(true);
+      if (row.normalizeVm !== undefined) expect(typeof row.normalizeVm).toBe('function');
+    }
   });
 });

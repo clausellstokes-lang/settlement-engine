@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {filterCatalogForMagic} from '../domain/magicFilter.js';
 import ControlsStrip from './ControlsStrip.jsx';
+import Button from './primitives/Button.jsx';
 import { GOLD as gold, INK as ink, MUTED as muted, BORDER as border, sans, FS, swatch, MUTED } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog, selectTierInstitutionNames, selectIsManualTier } from '../store/selectors.js';
@@ -60,13 +61,15 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
 
   return (
     <div style={{ marginBottom: 6 }}>
-      <button
+      <Button
+        variant="secondary"
+        fullWidth
         onClick={() => setOpen(o => !o)}
         style={{
-          width: '100%', display: 'flex', alignItems: 'center', gap: 8,
+          display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 8,
           padding: '5px 10px', background: swatch['#F5F0E8'],
-          border: '1px dashed #c8b89a', borderRadius: 5,
-          cursor: 'pointer', textAlign: 'left', marginBottom: open ? 4 : 0,
+          border: '1px dashed #c8b89a', borderRadius: 5, minHeight: 0,
+          textAlign: 'left', fontWeight: 400, marginBottom: open ? 4 : 0,
         }}
       >
         <span style={{ fontSize: FS.xxs, color: MUTED }}>▸</span>
@@ -84,7 +87,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
         <span style={{ fontSize: FS.micro, color: MUTED, fontStyle: 'italic' }}>
           {open ? '▲ hide' : '▼ show'}
         </span>
-      </button>
+      </Button>
 
       {open && !allCollapsed && (
         <div style={{ paddingLeft: 8, display: 'flex', flexDirection: 'column', gap: 3 }}>
@@ -97,7 +100,10 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
             const isForced = st.require;
             return (
               <div key={name}
+                role="button"
+                tabIndex={0}
                 onClick={() => handleToggle(name, instDef)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle(name, instDef); } }}
                 style={{
                   display: 'flex', alignItems: 'flex-start', gap: 8,
                   padding: '5px 8px', borderRadius: 5, cursor: 'pointer',
@@ -202,7 +208,10 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
 
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={handleClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(e); } }}
       title={
         reqOverridden           ? 'Force-excluded. Click to restore'
         : isOutOfTier && !req   ? `Out-of-tier (${def.nativeTier || 'other'} tier). Click to force include`
@@ -283,15 +292,17 @@ function CategorySection({ category, institutions, tier, toggles, onToggle, isEn
   return (
     <div style={{ borderBottom: `1px solid ${border}` }}>
       {/* Category header */}
-      <button
+      <Button
+        variant="secondary"
+        fullWidth
         onClick={() => setCollapsed(c => !c)}
         style={{
-          width: '100%', display: 'flex', alignItems: 'center', gap: 8,
-          padding: '7px 12px',
+          display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 8,
+          padding: '7px 12px', minHeight: 0,
           background: isCollapsed ? '#faf4e8' : '#f0ead8',
           borderTop: `1px solid ${border}`,
-          border: 'none', cursor: 'pointer',
-          textAlign: 'left', userSelect: 'none',
+          border: 'none', borderRadius: 0, fontWeight: 400,
+          textAlign: 'left', userSelect: 'none', whiteSpace: 'normal',
           WebkitTapHighlightColor: 'transparent',
         }}
       >
@@ -330,7 +341,7 @@ function CategorySection({ category, institutions, tier, toggles, onToggle, isEn
           </span>}
         </>}
         <span style={{ fontSize: FS.xxs, color: muted, marginRight: 4 }}>{isCollapsed ? '▼' : '▲'}</span>
-      </button>
+      </Button>
 
       {!isCollapsed && (
         <div style={{ display: 'flex', flexDirection: 'column' }}>

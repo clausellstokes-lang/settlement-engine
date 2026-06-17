@@ -29,7 +29,9 @@ const RARE_RESOURCES = { 'ancient_ruins': 0.15, 'magical_node': 0.15 };
 
 registerStep('resolveResources', {
   deps: ['resolveConfig'],
+  reads: ['resolvedTerrain', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['nearbyResources', 'nearbyResourcesDepleted', 'nearbyResourcesCustom'],
+  mutates: ['effectiveConfig'], // stamps derived resource keys onto effectiveConfig (A+ P1.7)
   phase: 'config',
 }, (ctx, rng) => {
   const { tier, tradeRoute, resolvedTerrain, effectiveConfig } = ctx;

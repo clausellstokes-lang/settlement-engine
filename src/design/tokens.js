@@ -2,15 +2,20 @@
  * design/tokens.js — Single source of truth for every visual value in the app.
  *
  * This is the foundation the rest of the design system stands on. Every
- * colour, font, spacing value, radius, elevation, motion curve comes from
- * here. Three big consequences:
+ * colour, font, spacing value, radius, elevation, motion curve is meant to
+ * come from here. Two consequences hold today, one is aspirational:
  *
- *   1. Adding dark mode later means swapping `light` for `dark` in one
- *      `theme` map — no component changes.
+ *   1. WCAG contrast fixes happen by editing token values here, not by
+ *      hunting hard-coded hex strings across 80+ components. (Holds today.)
  *   2. Adding a brand variant means a new theme map, not a fork of every
- *      component file.
- *   3. WCAG contrast fixes happen by editing token values, not by hunting
- *      hard-coded hex strings across 80+ components.
+ *      component file. (Holds today, for code that reads tokens.)
+ *   3. ASPIRATIONAL — NOT YET TRUE: "dark mode is one map swap." The app
+ *      ships ONLY the light theme; there is no dark theme, no toggle, and no
+ *      prefers-color-scheme handling. A true one-swap dark mode is also blocked
+ *      by two escape hatches that bypass this map: the exact-value `swatch[...]`
+ *      hex keys below and inline `rgba()`/gradient literals in components. Those
+ *      must be migrated to semantic tokens before a dark theme could "just work."
+ *      Do not claim dark-mode support until that work lands.
  *
  * The legacy flat constants in `src/components/theme.js` are now a thin
  * re-export shim pointing here. New code should import from this file or
@@ -32,8 +37,9 @@
  */
 
 // ── Colours ────────────────────────────────────────────────────────────────
-// Light theme (canonical). A dark theme can be added later by defining
-// `darkColors` with the same keys and swapping which map is exported.
+// Light theme — the ONLY theme the app ships. A dark theme is NOT implemented;
+// adding one would mean defining `darkColors` with the same keys AND first
+// migrating the swatch/inline-rgba escape hatches (see header note 3).
 const lightColors = Object.freeze({
   // Parchment — page + card surfaces
   'parchment-50':  '#FBF5E6',  // page background, default card surface
@@ -122,6 +128,46 @@ export const semantic = Object.freeze({
 // A future consolidation pass repoints keys here at curated tokens — call
 // sites never change again.
 export const swatch = Object.freeze({
+  // Forked-color burndown (A+ design-a11y.2) — exact-value hex KEYS for consts
+  // the codemod routed through swatch; zero rendered change, consolidation deferred.
+  '#1A3A6A': '#1a3a6a',
+  '#1A5A28': '#1a5a28',
+  '#1B1408': '#1b1408',
+  '#1C1409': '#1c1409',
+  '#2A3A7A': '#2a3a7a',
+  '#2C2210': '#2c2210',
+  '#3A3A6A': '#3a3a6a',
+  '#3A5A2A': '#3a5a2a',
+  '#4A7A3A': '#4a7a3a',
+  '#5A2A8A': '#5a2a8a',
+  '#6A2A9A': '#6a2a9a',
+  '#6B5340': '#6b5340',
+  '#7C3AED12': '#7c3aed12',
+  '#7C3AED40': '#7c3aed40',
+  '#8A2F4A': '#8a2f4a',
+  '#8B1A1A': '#8b1a1a',
+  '#8C6F32': '#8c6f32',
+  '#9C8068': '#9c8068',
+  '#A23434': '#a23434',
+  '#C8D0E8': '#c8d0e8',
+  '#C9A24C': '#c9a24c',
+  '#D08020': '#d08020',
+  '#D4A445': '#d4a445',
+  '#D8C8A8': '#d8c8a8',
+  '#D9B566': '#d9b566',
+  '#E0D0B0': '#e0d0b0',
+  '#E0E8F0': '#e0e8f0',
+  '#E8D9B0': '#e8d9b0',
+  '#EBE2FA': '#ebe2fa',
+  '#EBE2FA80': '#ebe2fa80',
+  '#F4DEDE': '#f4dede',
+  '#F5ECD8': '#f5ecd8',
+  '#F7EBF0': '#f7ebf0',
+  '#FAF6EF': '#faf6ef',
+  '#FBBF24': '#fbbf24',
+  '#FBEAD0': '#fbead0',
+  '#FCF6E7': '#fcf6e7',
+  '#FFFBF5': '#fffbf5',
   // Recurring tones — named for readability (exact values; consolidation deferred)
   danger: '#8b1a1a',
   dangerBg: '#fdf4f4',
@@ -135,6 +181,14 @@ export const swatch = Object.freeze({
   inkMag: '#1c1409',
   inkMag2: '#3d2b1a',
   inkMag3: '#6b5340',
+  // OutputContainer JSX migration (A+ components-core.2) — exact values, zero
+  // rendered change; consolidation deferred like the rest of the long tail.
+  errorBgDeep: '#2d0a0a',
+  errorText: '#f0a0a0',
+  stressAmber: '#ffd080',
+  mutedBrown: '#9c8068',
+  '#4A3B22': '#4a3b22',
+  '#7B4FCF': '#7b4fcf',
   // Long tail — keyed by exact hex (consolidation deferred)
   '#1A2A5A': '#1a2a5a',
   '#1A3A8B': '#1a3a8b',
@@ -264,6 +318,13 @@ export const swatch = Object.freeze({
   '#FFF0E0': '#fff0e0',
   '#FFF3ED': '#fff3ed',
   '#FFF7EC': '#fff7ec',
+  // Referenced via swatch['#…'] in src but previously absent — they resolved to
+  // `undefined` and rendered as no color (silent bug caught by
+  // tests/lint/swatchResolves.test.js). Exact values; zero intended change.
+  '#EEE9DF': '#eee9df', // CampaignFolder
+  '#FAF3E8': '#faf3e8', // pdf primitives/sections (Dense, StatTile, PowerStructure, …)
+  '#FBF5E6': '#fbf5e6', // pdf Cover
+  '#F5F0FF': '#f5f0ff', // pdf Relationships / ViabilityAssessment
 });
 
 // ── Typography ─────────────────────────────────────────────────────────────

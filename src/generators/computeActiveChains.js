@@ -64,6 +64,74 @@ export function institutionMatchesProcessor(inst, pattern) {
   return fuzzyProcessorMatch(String(inst?.name || '').toLowerCase(), pattern);
 }
 
+// ── Keyword (substring) id-set — the tradition / magic-transit twin of the
+// processor id-set (A+ generators.4). The tradition + _hasInst gates match by
+// raw `name.includes(keyword)`, a DIFFERENT rule than fuzzyProcessorMatch, so
+// they need their own keyword→catalog-id resolution built from that exact rule.
+// Built once per keyword: id-match === name-includes-match for an unrenamed
+// catalog institution BY CONSTRUCTION, so generation output is byte-identical;
+// a DM-renamed-but-stamped institution stays matched (rename-proof), a
+// bare-renamed (unstamped) one falls to the fuzzy substring path and is lost.
+const _keywordIdSets = new Map();
+function keywordIdSet(keyword) {
+  const key = String(keyword || '').toLowerCase();
+  let set = _keywordIdSets.get(key);
+  if (!set) {
+    set = new Set();
+    for (const name of ALL_CATALOG_NAMES) {
+      if (name.toLowerCase().includes(key)) {
+        const id = catalogIdForName(name);
+        if (id) set.add(id);
+      }
+    }
+    _keywordIdSets.set(key, set);
+  }
+  return set;
+}
+
+/** Does this institution match a keyword? Id-first for stamped, substring fallback. */
+export function institutionMatchesKeyword(inst, keyword) {
+  if (inst?.catalogId) return keywordIdSet(keyword).has(inst.catalogId);
+  return String(inst?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
+}
+
+// ── Export-gate id-set (A+ generators.6). The export extraction/processing
+// gates match by whole-name predicates with one bespoke special case: the
+// 'mill' keyword must NOT match "access to external mill" (a non-local access
+// note), only the real processing units. Build the gate's id-set from that
+// EXACT predicate so id-match === name-predicate-match by construction, and the
+// hand-rolled special case no longer has to live at every call site.
+const _gateKeywordIdSets = new Map();
+function gateKeywordPredicate(kw) {
+  if (kw === 'mill') {
+    return (n) => (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill')
+      && !n.includes('access to external');
+  }
+  return (n) => n.includes(kw);
+}
+function gateKeywordIdSet(kw) {
+  let set = _gateKeywordIdSets.get(kw);
+  if (!set) {
+    const pred = gateKeywordPredicate(kw);
+    set = new Set();
+    for (const name of ALL_CATALOG_NAMES) {
+      if (pred(name.toLowerCase())) {
+        const id = catalogIdForName(name);
+        if (id) set.add(id);
+      }
+    }
+    _gateKeywordIdSets.set(kw, set);
+  }
+  return set;
+}
+
+/** Export-gate membership: id-first for stamped, bespoke name predicate fallback. */
+export function institutionMatchesGate(inst, keyword) {
+  const kw = String(keyword || '').toLowerCase();
+  if (inst?.catalogId) return gateKeywordIdSet(kw).has(inst.catalogId);
+  return gateKeywordPredicate(kw)(String(inst?.name || '').toLowerCase());
+}
+
 // Map resource labels → RESOURCE_DATA keys for matching
 // Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words
 function resourceLabelToKey(label) {
@@ -104,11 +172,11 @@ const _INCOME_TO_CHAINS = {
 
 export function computeActiveChains(institutions = [], resources = [], tier = 'village', tradeRoute = 'road', tradeDependencies = [], depletedResources = [], magicPriority = 50) {
   const insts = institutions.filter(Boolean);
-  const instNames = institutions.map(i => (i.name || '').toLowerCase());
 
   // Helper: does this settlement have an institution matching any of the names?
+  // Id-first for stamped institutions (rename-proof), substring fallback otherwise.
   const _hasInst = (...patterns) => patterns.some(p =>
-    instNames.some(n => n.includes(p.toLowerCase()))
+    insts.some(i => institutionMatchesKeyword(i, p))
   );
 
   // Active resource keys
@@ -119,8 +187,9 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   const isResourceDepleted = (key) => !!key && depletedResourceKeys.has(key);
 
   // Tradition detection — which magical traditions are present?
-  // instNames already declared above
-  const hasTradition = (...kws) => instNames.some(n => kws.some(kw => n.includes(kw)));
+  // Id-first for stamped institutions (a renamed-but-stamped "Mages' guild"
+  // still enables the arcane tradition), substring fallback for unstamped.
+  const hasTradition = (...kws) => insts.some(i => kws.some(kw => institutionMatchesKeyword(i, kw)));
 
   const traditions = {
     druid:   magicPriority >= 30 && hasTradition("druid circle","grove shrine","elder grove","warden's lodge","sacred grove"),
@@ -197,11 +266,11 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // running after the settlement lost its Teleportation circle mid-campaign.
       const isOwnProcessor = (i) => chain.processingInstitutions.some(p =>
         institutionMatchesProcessor(i, p));
-      const hasMagicTransit = insts.some(i => {
-        const n = String(i.name || '').toLowerCase();
-        return (n.includes('teleportation') || n.includes('planar') || n.includes('airship')) &&
-          !isOwnProcessor(i);
-      });
+      const hasMagicTransit = insts.some(i =>
+        (institutionMatchesKeyword(i, 'teleportation')
+          || institutionMatchesKeyword(i, 'planar')
+          || institutionMatchesKeyword(i, 'airship'))
+        && !isOwnProcessor(i));
       const isEntrepotRoute = ['crossroads', 'port', 'river'].includes(tradeRoute)
         || (isArcaneChain && hasMagicTransit);
 
@@ -226,18 +295,25 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // External mill detection: if the settlement has "Access to external mill" but no
       // actual local mill institution, the grain chain functions (food security is real)
       // but surplus cannot be exported — the lord's mill toll captures any excess.
-      // NOTE: can't use matchedInsts for this check because the fuzzy slice(0,12) match
-      // causes "Mill" processingInstitution to match "access to external mill" in instNames.
-      // Instead check actual institution names directly.
-      const hasLocalMill = instNames.some(n =>
-        (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill')
+      // Id-first (A+ generators.6): the local-mill gate reuses the shared
+      // export-gate matcher (its 'mill' predicate already excludes "access to
+      // external mill"); external-mill access is a plain keyword match. Both are
+      // rename-proof for stamped institutions and id===name-predicate by
+      // construction, so this check no longer hand-rolls the mill name special-case.
+      const hasLocalMill = insts.some(i => institutionMatchesGate(i, 'mill'));
+      const hasExternalMill = insts.some(i => institutionMatchesKeyword(i, 'access to external mill'));
+      // The banalité lockout applies ONLY to a chain whose processing happens at an
+      // EXTERNAL mill — i.e. the chain itself lists "Access to external mill" as a
+      // processing option (today, only the grain chain). A prior fix scoped on
+      // /\bmill/i over processingInstitutions, which still over-matched any chain that
+      // merely uses a LOCAL 'Mills (2-5)'/'Sawmill' — e.g. floodplain_agriculture and
+      // river_milling — wrongly suppressing their exports and stamping the grain-specific
+      // banalité note on a non-grain chain. Keying off external-mill support is the exact
+      // mechanism and stays correct if a future chain genuinely supports external milling.
+      const supportsExternalMill = (chain.processingInstitutions || []).some(p =>
+        /access to external mill/i.test(p)
       );
-      const hasExternalMill = instNames.some(n => n.includes('access to external mill'));
-      // The banalité lockout is a MILLING concern — scope it to mill-processed chains
-      // (the grain chain), not every active chain. Otherwise a hamlet with "Access to
-      // external mill" had its livestock, fish, timber, etc. exports all suppressed.
-      const isMillChain = (chain.processingInstitutions || []).some(p => /\bmill/i.test(p));
-      const externalMillOnly = isMillChain && hasExternalMill && !hasLocalMill;
+      const externalMillOnly = supportsExternalMill && hasExternalMill && !hasLocalMill;
       const effectiveExportable = externalMillOnly ? false : chain.exportable;
       const externalMillNote = externalMillOnly
         ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +
@@ -273,13 +349,25 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   // Enrich each chain with dependency status by cross-referencing tradeDependencies
   if (tradeDependencies.length > 0) {
     activeChains.forEach(chain => {
-      // Find matching trade dependency for any processing institution in this chain
-      const dep = tradeDependencies.find(d =>
-        chain.processingInstitutions.some(p =>
-          d.institution.toLowerCase().includes(p.toLowerCase().slice(0, 10)) ||
-          p.toLowerCase().includes(d.institution.toLowerCase().slice(0, 10))
-        )
-      );
+      // Find matching trade dependency for any processing institution in this
+      // chain (A+ generators.7, owner-approved). Id-first: when the dependency
+      // names a catalog institution, resolve it to its id and ask whether it is
+      // in the chain pattern's id-set — the same rename-proof join the chain
+      // processors use. The fragile mutual 10-char-prefix substring match
+      // remains ONLY as the fallback for unstamped/custom dependency
+      // institutions. This is NOT output-neutral: id-match is stricter than the
+      // prefix heuristic, which over-joined a "Mill" dependency onto the timber
+      // chain (whose processor is a sawmill, not a flour mill) — that false
+      // dependency is now correctly dropped (golden manifest updated).
+      const dep = tradeDependencies.find(d => {
+        const depId = catalogIdForName(d.institution);
+        return chain.processingInstitutions.some(p =>
+          depId
+            ? processorPatternIdSet(p).has(depId)
+            : (d.institution.toLowerCase().includes(p.toLowerCase().slice(0, 10)) ||
+               p.toLowerCase().includes(d.institution.toLowerCase().slice(0, 10)))
+        );
+      });
       if (dep) {
         chain.dependency = {
           institution: dep.institution,
@@ -551,19 +639,11 @@ export function deriveExportsFromChains(activeChains, nearbyResources, tier, rou
   // Use actual settlement institution names for gating processed exports.
   // This prevents "Access to external mill" from passing the 'mill' keyword check —
   // we match only the institution name as a whole, not substrings of longer names.
-  const _settlementInstNames = institutions.map(i => (i.name || '').toLowerCase());
-  const _hasInstForGate = (keyword) => {
-    const kw = keyword.toLowerCase();
-    // Special case: "mill" keyword should NOT match "access to external mill"
-    // Only match institutions that ARE the processing unit, not access to one elsewhere
-    if (kw === 'mill') {
-      return _settlementInstNames.some(n =>
-        (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill') &&
-        !n.includes('access to external')
-      );
-    }
-    return _settlementInstNames.some(n => n.includes(kw));
-  };
+  // Id-first for stamped institutions (rename-proof exports), with the bespoke
+  // gate name-predicate — including the 'mill' ≠ "access to external mill"
+  // special case — preserved as the fallback for unstamped institutions
+  // (A+ generators.6). id-match === name-predicate by construction → golden-stable.
+  const _hasInstForGate = (keyword) => institutions.some(i => institutionMatchesGate(i, keyword));
 
   nearbyResources.forEach(rk => {
     if (depletedKeys.has(rk)) return; // depleted: no surplus to export
@@ -797,12 +877,17 @@ const INSTITUTIONAL_SERVICE_MAP = [
  * @returns {Array} serviceEntries
  */
 export function deriveInstitutionalServices(institutions = []) {
-  const instNames = institutions.map(i => (i.name || '').toLowerCase());
   const services = [];
   const usedLabels = new Set();
 
   INSTITUTIONAL_SERVICE_MAP.forEach(def => {
-    const matched = instNames.filter(n => def.patterns.some(p => n.includes(p)));
+    // Membership decided by catalog id (rename-proof) for stamped institutions,
+    // substring fallback for unstamped — matched[] still reports display names.
+    // id-match === substring-match for catalog institutions by construction, so
+    // the derived services are byte-identical for generated rosters.
+    const matched = institutions
+      .filter(i => def.patterns.some(p => institutionMatchesKeyword(i, p)))
+      .map(i => (i.name || '').toLowerCase());
     if (matched.length === 0) return;
     if (usedLabels.has(def.incomeLabel)) return;
     usedLabels.add(def.incomeLabel);

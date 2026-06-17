@@ -40,6 +40,8 @@
  * tracesFor, tracesByStep) which never mutate.
  */
 
+import { wallClockMs } from './clock.js';
+
 // ── Dev-only shape validation ──────────────────────────────────────────────
 // Defensive enough to catch the most common authoring mistakes (forgot
 // targetId, mixed up step/result, passed a string where an array was
@@ -120,14 +122,15 @@ export function recordTrace(ctx, trace) {
   // seed and customContent={} (the "headless deterministic" mode),
   // tests / snapshot diffs want trace[].ts to NOT vary across runs.
   // The pipeline can pass a monotonic counter via ctx._traceClock —
-  // if present we use it; otherwise we fall back to Date.now().
+  // if present we use it; otherwise we fall back to wallClockMs()
+  // (domain/clock.js, the sole sanctioned wall-clock read).
   let ts = trace?.ts;
   if (ts == null) {
     if (typeof ctx._traceClock === 'number') {
       ts = ctx._traceClock;
       ctx._traceClock += 1;
     } else {
-      ts = Date.now();
+      ts = wallClockMs();
     }
   }
   const enriched = {

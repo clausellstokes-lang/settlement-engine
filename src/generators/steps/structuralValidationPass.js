@@ -21,6 +21,7 @@ import { checkStructuralValidity } from '../structuralValidator.js';
 
 registerStep('structuralValidationPass', {
   deps: ['factionCorrelationPass'],
+  reads: ['effectiveConfig', 'institutions', 'magicLevel', 'threat', 'tier', 'townPlus', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['structural'],
   phase: 'institutions',
 }, (ctx) => {

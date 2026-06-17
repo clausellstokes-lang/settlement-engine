@@ -31,6 +31,7 @@ import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
 import { normalizeSimulationRules } from './simulationRules.js';
+import { wallClockNow } from '../clock.js';
 
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
@@ -153,7 +154,7 @@ function usableTickInterval(interval) {
  * @param {boolean} [args.commit]
  * @param {string} [args.now]
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now = new Date().toISOString() } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now = wallClockNow() } = {}) {
   /** @type {import('../settlement.schema.js').TickInterval} */
   const tickInterval = usableTickInterval(interval);
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);

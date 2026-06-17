@@ -24,6 +24,7 @@ function Marker({ marker, onEditMarker }) {
   const selectedId   = useStore(s => s.selectedAnnotationId);
   const setSelected  = useStore(s => s.setSelectedAnnotationId);
   const updateMarker = useStore(s => s.updateMarker);
+  const pushMapUndo  = useStore(s => s.pushMapUndo);
 
   const dragRef = useRef(null);
   const isEditable = mapMode === MAP_MODES.ANNOTATE && annotateTool === ANNOTATE_TOOLS.SELECT;
@@ -49,6 +50,7 @@ function Marker({ marker, onEditMarker }) {
     dragRef.current = {
       grabDx: pt.x - marker.x,
       grabDy: pt.y - marker.y,
+      moved: false,
     };
     try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {}
   }
@@ -57,6 +59,10 @@ function Marker({ marker, onEditMarker }) {
     if (!dragRef.current) return;
     const pt = eventToMap(e);
     if (!pt) return;
+    if (!dragRef.current.moved) {
+      dragRef.current.moved = true;
+      pushMapUndo('move marker'); // snapshot ONCE per drag, on the first real move
+    }
     updateMarker(marker.id, {
       x: pt.x - dragRef.current.grabDx,
       y: pt.y - dragRef.current.grabDy,

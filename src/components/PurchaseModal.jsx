@@ -17,6 +17,7 @@ import { isConfigured } from '../lib/supabase.js';
 import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
 import { t } from '../copy/index.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, ELEV, swatch } from './theme.js';
+import IconButton from './primitives/IconButton.jsx';
 
 export default function PurchaseModal({ onClose }) {
   const creditBalance = useStore(s => s.creditBalance);
@@ -49,6 +50,10 @@ export default function PurchaseModal({ onClose }) {
   return (
     <div
       onClick={onClose}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
+      role="button"
+      tabIndex={0}
+      aria-label={t('common.close')}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(0,0,0,0.6)',
@@ -56,8 +61,10 @@ export default function PurchaseModal({ onClose }) {
         backdropFilter: 'blur(4px)',
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only stop propagation to the backdrop, not real interactivity */}
       <div
         onClick={e => e.stopPropagation()}
+        onKeyDown={e => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="purchase-modal-title"
@@ -78,13 +85,13 @@ export default function PurchaseModal({ onClose }) {
           <h2 id="purchase-modal-title" style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
             {t('purchase.title')}
           </h2>
-          <button
+          <IconButton
+            Icon={X}
+            label={t('common.close')}
             onClick={onClose}
-            aria-label={t('common.close')}
-            style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer' }}
-          >
-            <X size={20} />
-          </button>
+            tone="ghost"
+            size="lg"
+          />
         </div>
 
         <div style={{ padding: `${SP.xxl}px ${SP.xl}px`, display: 'flex', flexDirection: 'column', gap: SP.lg }}>
@@ -154,7 +161,9 @@ export default function PurchaseModal({ onClose }) {
               return (
                 <button
                   key={key}
+                  type="button"
                   onClick={() => handlePurchase(key)}
+                  aria-label={`Buy ${p.credits} credits for ${p.price}`}
                   disabled={loading || !isConfigured}
                   style={{
                     flex: 1, padding: `${SP.lg}px ${SP.sm}px`,

@@ -13,7 +13,9 @@
 import { useMemo } from 'react';
 import { X, ExternalLink, Trash2 } from 'lucide-react';
 import { useStore } from '../../store';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, R, swatch } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, R } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 export default function PlacementDetailCard({ onOpenDetail }) {
   const selectedSettlementId = useStore(s => s.selectedSettlementId);
@@ -88,16 +90,13 @@ export default function PlacementDetailCard({ onOpenDetail }) {
         }}>
           Settlement
         </div>
-        <button
+        <IconButton
+          Icon={X}
+          label="Close"
           onClick={handleClose}
-          style={{
-            background: 'transparent', border: 'none', cursor: 'pointer',
-            color: MUTED, padding: 2, display: 'flex', alignItems: 'center',
-          }}
-          title="Close"
-        >
-          <X size={14} />
-        </button>
+          tone="ghost"
+          size="md"
+        />
       </div>
 
       {/* Body */}
@@ -117,35 +116,25 @@ export default function PlacementDetailCard({ onOpenDetail }) {
         )}
 
         <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
-          <button
+          <Button
             onClick={handleOpen}
-            style={{
-              flex: 1,
-              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 4,
-              padding: `${SP.xs}px ${SP.sm}px`,
-              background: GOLD, color: swatch.white,
-              border: 'none', borderRadius: R.sm,
-              fontSize: FS.xs, fontWeight: 700, cursor: 'pointer',
-            }}
+            variant="primary"
+            size="sm"
+            icon={<ExternalLink size={11} />}
             title="Open full detail"
+            style={{ flex: 1 }}
           >
-            <ExternalLink size={11} />
             Open
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={handleRemove}
-            style={{
-              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 4,
-              padding: `${SP.xs}px ${SP.sm}px`,
-              background: 'transparent', color: swatch['#991B1B'],
-              border: `1px solid #f0c8cc`, borderRadius: R.sm,
-              fontSize: FS.xs, fontWeight: 700, cursor: 'pointer',
-            }}
+            variant="danger"
+            size="sm"
+            icon={<Trash2 size={11} />}
             title="Remove from map"
           >
-            <Trash2 size={11} />
             Remove
-          </button>
+          </Button>
         </div>
       </div>
     </div>
