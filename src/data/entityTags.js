@@ -72,7 +72,12 @@ export const TAG = Object.freeze({
   // Civic infrastructure
   INFRASTRUCTURE: 'infrastructure',
   TRANSPORT:     'transport',
-  COMMUNICATION: 'communication',
+  // (A+ data-schema.5 removed COMMUNICATION — it was an orphan: no catalog
+  // entry declared it, no TAG_GROUPS bundle held it, and no keyword-backfill
+  // rule produced it, so no query could ever select it. Dead vocabulary that
+  // implied a capability the engine never had. A TAG.* becoming unreachable
+  // like this again fails the gate.
+  // @enforced-by tests/data/dataVocabularyCoverage.test.js)
 
   // Underground / illicit
   CRIMINAL:   'criminal',
