@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
-import { FS } from './theme.js';
+import { FS, swatch } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
 import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, ChevronLeft, ChevronRight, RefreshCw, Eye, EyeOff, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText } from 'lucide-react';
 import { TIER_LABELS } from './new/design';
@@ -493,44 +493,47 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const renderTab = () => {
     const s = activeSettlement;
     switch (selectedTab) {
-      case 'summary':    return React.createElement(React.Fragment, null,
-        // First-dossier teaching callouts now live inside the DM summary (was a
-        // top-of-dossier banner above every tab). Self-gates inside.
-        !readOnly && React.createElement(Suspense, { fallback: null },
-          React.createElement(FirstDossierCallouts)),
-        flag('summaryMagazineV2')
-          ? React.createElement(SummaryTabV2, {
-              settlement: s,
-              onOpenTableView: flag('tableView')
-                ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
-                : undefined,
-            })
-          : React.createElement(SummaryTab, { settlement: s }),
+      case 'summary':    return (
+        <>
+          {/* First-dossier teaching callouts now live inside the DM summary (was a
+              top-of-dossier banner above every tab). Self-gates inside. */}
+          {!readOnly && <Suspense fallback={null}><FirstDossierCallouts /></Suspense>}
+          {flag('summaryMagazineV2')
+            ? <SummaryTabV2
+                settlement={s}
+                onOpenTableView={flag('tableView')
+                  ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
+                  : undefined}
+              />
+            : <SummaryTab settlement={s} />}
+        </>
       );
-      case 'plot_hooks': return React.createElement(PlotHooksTab, { settlement: s });
-      case 'chronicle':  return React.createElement(ChronicleTab, { entries: chronicle });
-      case 'daily_life': return React.createElement(DailyLifeTab, { settlement: s, aiSettlement, saveId, onRequestDailyLife: () => requestAiAction('dailyLife') });
-      case 'overview':   return React.createElement(OverviewTab, { settlement: s, narrativeNote: null });
-      case 'economics':  return React.createElement(EconomicsTab, { settlement: s, narrativeNote: null });
-      case 'services':   return React.createElement(ServicesTab, { services: s.availableServices, settlement: s, narrativeNote: null });
-      case 'power':      return React.createElement(PowerTab, { powerStructure: s.powerStructure, settlement: s, narrativeNote: null });
-      case 'defense':    return React.createElement(DefenseTab, { settlement: s, narrativeNote: null });
-      case 'npcs':       return React.createElement(NPCsTab, { npcs: s.npcs, settlement: s, onRerollNPCs: onRegenerate ? () => onRegenerate('npcs') : null, narrativeNote: null, pinnedIds, onTogglePin });
-      case 'history':    return React.createElement(HistoryTab, { settlement: s, narrativeNote: null, recentEvents, onReroll: onRegenerate ? () => onRegenerate('history') : null });
-      case 'resources':  return React.createElement(ResourcesTab, { settlement: s, narrativeNote: null });
-      case 'viability':  return React.createElement(ViabilityTab, { settlement: s, narrativeNote: null });
-      case 'dm_compass': return React.createElement(DMCompassTab, { settlement: compassSource || s });
-      case 'dm_notes':   return React.createElement(NotesTab, { saveId, notes: dossierNotes, section: 'dm' });
-      case 'ai_notes':   return React.createElement(NotesTab, { saveId, notes: dossierNotes, section: 'ai' });
-      case 'neighbours':    return React.createElement(RelationshipsTab, { settlement: s, narrativeNote: null, neighboursOnly: true });
-      case 'relationships': return React.createElement(RelationshipsTab, { settlement: s, narrativeNote: null });
+      case 'plot_hooks': return <PlotHooksTab settlement={s} />;
+      case 'chronicle':  return <ChronicleTab entries={chronicle} />;
+      case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
+      case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} />;
+      case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} />;
+      case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
+      case 'power':      return <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />;
+      case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} />;
+      case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} onRerollNPCs={onRegenerate ? () => onRegenerate('npcs') : null} narrativeNote={null} pinnedIds={pinnedIds} onTogglePin={onTogglePin} />;
+      case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
+      case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
+      case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} />;
+      case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;
+      case 'dm_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="dm" />;
+      case 'ai_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="ai" />;
+      case 'neighbours':    return <RelationshipsTab settlement={s} narrativeNote={null} neighboursOnly={true} />;
+      case 'relationships': return <RelationshipsTab settlement={s} narrativeNote={null} />;
       // Simulation = full PipelineRail (non-compact). Since the rail now
       // lives inside the dossier card, we surface the full pipeline view
       // here — step labels + traces + the eventual causal expand-on-tap.
-      case 'simulation': return React.createElement('div', { style: { padding: '16px 18px' } },
-        React.createElement(PipelineRail, { compact: false })
+      case 'simulation': return (
+        <div style={{ padding: '16px 18px' }}>
+          <PipelineRail compact={false} />
+        </div>
       );
-      default:           return React.createElement('div', null);
+      default:           return <div />;
     }
   };
 
@@ -564,41 +567,47 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
 
     // State 1: no narrative yet → single generate button
     if (!aiSettlement && !aiLoading) {
-      return React.createElement('div', { style: { position: 'relative', display: 'flex', alignItems: 'center', gap: 6 } },
-        React.createElement('button', {
-          onClick: runNarrativeLayer,
-          title: 'Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement. Uses credits.',
-          style: {
-            ...btnBase,
-            background: 'rgba(90,42,138,0.2)',
-            border: '1px solid rgba(160,100,220,0.35)',
-            color: '#c8a0f0',
-          }
-        },
-          React.createElement('span', { style: { fontSize: FS.xs } }, '\u2726'),
-          `Generate Narrative${costLabel}`
-        ),
-        aiError && React.createElement('div', {
-          style: { position: 'absolute', top: '110%', right: 0, background: '#2d0a0a', border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: '#f0a0a0', whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }
-        }, ' ', aiError)
+      return (
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <button
+            onClick={runNarrativeLayer}
+            title="Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement. Uses credits."
+            style={{
+              ...btnBase,
+              background: 'rgba(90,42,138,0.2)',
+              border: '1px solid rgba(160,100,220,0.35)',
+              color: swatch['#C8A0F0'],
+            }}
+          >
+            <span style={{ fontSize: FS.xs }}>{'\u2726'}</span>
+            {`Generate Narrative${costLabel}`}
+          </button>
+          {aiError && (
+            <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
+              {' '}{aiError}
+            </div>
+          )}
+        </div>
       );
     }
 
     // State 2: loading (first-time) → progress chip
     if (aiLoading && !aiRegenerating) {
-      return React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: 6 } },
-        React.createElement('div', {
-          style: {
-            ...btnBase,
-            background: 'rgba(90,42,138,0.3)',
-            border: '1px solid rgba(160,100,220,0.35)',
-            color: 'rgba(200,160,240,0.8)',
-            cursor: 'default',
-          }
-        },
-          React.createElement('span', { style: { display: 'inline-block', animation: 'spin 1.2s linear infinite' } }, '\u2726'),
-          displayProgress || 'Weaving\u2026'
-        )
+      return (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div
+            style={{
+              ...btnBase,
+              background: 'rgba(90,42,138,0.3)',
+              border: '1px solid rgba(160,100,220,0.35)',
+              color: 'rgba(200,160,240,0.8)',
+              cursor: 'default',
+            }}
+          >
+            <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>{'\u2726'}</span>
+            {displayProgress || 'Weaving\u2026'}
+          </div>
+        </div>
       );
     }
 
@@ -608,53 +617,57 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     const inNarrativeView = storeShowNarrative;
     const regenerating = aiLoading && aiRegenerating;
 
-    return React.createElement('div', { style: { position: 'relative', display: 'flex', alignItems: 'center', gap: 6 } },
-      // Toggle view button — free action
-      React.createElement('button', {
-        onClick: () => setShowNarrative(!inNarrativeView),
-        disabled: regenerating,
-        title: inNarrativeView
-          ? 'Switch to the raw generated data (no AI polish). No credits used.'
-          : 'Switch to the AI-refined view. No credits used.',
-        style: {
-          ...btnBase,
-          background: inNarrativeView
-            ? 'rgba(156,128,104,0.2)'
-            : 'linear-gradient(135deg, #4a1a7a, #6a2a9a)',
-          border: inNarrativeView
-            ? '1px solid rgba(156,128,104,0.35)'
-            : '1px solid rgba(160,100,220,0.6)',
-          color: inNarrativeView ? '#c8b89a' : '#f0d8ff',
-          opacity: regenerating ? 0.5 : 1,
-          cursor: regenerating ? 'default' : 'pointer',
-        }
-      },
-        inNarrativeView
-          ? React.createElement(EyeOff, { size: 12 })
-          : React.createElement(Eye, { size: 12 }),
-        inNarrativeView ? 'View Raw Simulation' : 'View Narrative'
-      ),
-      // Regenerate button — spends credits
-      React.createElement('button', {
-        onClick: runNarrativeLayer,
-        disabled: regenerating,
-        title: `Regenerate the Narrative Layer from the simulator output. Spends ${getCost('narrative')} credits.`,
-        style: {
-          ...btnBase,
-          background: regenerating ? 'rgba(90,42,138,0.3)' : 'rgba(90,42,138,0.2)',
-          border: '1px solid rgba(160,100,220,0.35)',
-          color: regenerating ? 'rgba(200,160,240,0.6)' : '#c8a0f0',
-          cursor: regenerating ? 'default' : 'pointer',
-        }
-      },
-        regenerating
-          ? React.createElement('span', { style: { display: 'inline-block', animation: 'spin 1.2s linear infinite' } }, '\u21ba')
-          : React.createElement(RefreshCw, { size: 12 }),
-        regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`
-      ),
-      aiError && React.createElement('div', {
-        style: { position: 'absolute', top: '110%', right: 0, background: '#2d0a0a', border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: '#f0a0a0', whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }
-      }, ' ', aiError)
+    return (
+      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
+        {/* Toggle view button — free action */}
+        <button
+          onClick={() => setShowNarrative(!inNarrativeView)}
+          disabled={regenerating}
+          title={inNarrativeView
+            ? 'Switch to the raw generated data (no AI polish). No credits used.'
+            : 'Switch to the AI-refined view. No credits used.'}
+          style={{
+            ...btnBase,
+            background: inNarrativeView
+              ? 'rgba(156,128,104,0.2)'
+              : 'linear-gradient(135deg, #4a1a7a, #6a2a9a)',
+            border: inNarrativeView
+              ? '1px solid rgba(156,128,104,0.35)'
+              : '1px solid rgba(160,100,220,0.6)',
+            color: inNarrativeView ? '#c8b89a' : swatch['#F0D8FF'],
+            opacity: regenerating ? 0.5 : 1,
+            cursor: regenerating ? 'default' : 'pointer',
+          }}
+        >
+          {inNarrativeView
+            ? <EyeOff size={12} />
+            : <Eye size={12} />}
+          {inNarrativeView ? 'View Raw Simulation' : 'View Narrative'}
+        </button>
+        {/* Regenerate button — spends credits */}
+        <button
+          onClick={runNarrativeLayer}
+          disabled={regenerating}
+          title={`Regenerate the Narrative Layer from the simulator output. Spends ${getCost('narrative')} credits.`}
+          style={{
+            ...btnBase,
+            background: regenerating ? 'rgba(90,42,138,0.3)' : 'rgba(90,42,138,0.2)',
+            border: '1px solid rgba(160,100,220,0.35)',
+            color: regenerating ? 'rgba(200,160,240,0.6)' : swatch['#C8A0F0'],
+            cursor: regenerating ? 'default' : 'pointer',
+          }}
+        >
+          {regenerating
+            ? <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>{'\u21ba'}</span>
+            : <RefreshCw size={12} />}
+          {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
+        </button>
+        {aiError && (
+          <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
+            {' '}{aiError}
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -662,251 +675,278 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // All hooks are now committed; safe to early-exit.
   if (earlyExitOnNoSettlement) return null;
 
-  return React.createElement(React.Fragment, null,
-    // Note: the "How this was simulated" rail used to render here as an
-    // always-on banner above the dossier card. User feedback was that
-    // it pushed the actual DM-facing dossier below the fold. Now it
-    // lives as the last tab inside the dossier ("Simulation"), so the
-    // dossier itself is the default landing surface and the simulation
-    // metadata is one tap away rather than top-of-page chrome.
-    React.createElement('div', { style: { background: 'rgba(255,251,245,0.96)', border: '1px solid #c8b89a', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' } },
-      // Header — suppressed via hideHeader in the embedded generate-flow view,
-      // where the wizard's own sticky toolbar already shows name/tier/pop, so
-      // the two dark identity bars collapse into one.
-      hideHeader ? null : React.createElement('div', { style: { padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' } },
-        React.createElement('div', { style: { flex: 1, minWidth: 0 } },
-          React.createElement('div', { style: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 } },
-            (!readOnly && queueEdit) ? React.createElement(EditableInline, {
-              value: settlement.name || '',
-              ariaLabel: 'Edit settlement name',
-              textStyle: { fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: '#c49a3c', lineHeight: 1.1 },
-              trackEvent: EVENTS.EDIT_PENDING_QUEUED,
-              provenance: { kind: 'rename-settlement', entityId: saveId || 'unsaved' },
-              onCommit: (newName) => {
-                queueEdit('rename-settlement', { newName });
-              },
-            }) : settlement.name
-          ),
-          React.createElement('div', { style: { display: 'flex', gap: 8, marginTop: 5, flexWrap: 'wrap', alignItems: 'center' } },
-            React.createElement('span', { style: { fontSize: FS.sm, color: '#9c8068', textTransform: 'capitalize', fontWeight: 600 } }, TIER_LABELS[settlement.tier] || settlement.tier),
-            React.createElement('span', { style: { fontSize: FS.sm, color: '#6b5340' } }, '\u00b7'),
-            React.createElement('span', { style: { fontSize: FS.sm, color: '#9c8068' } }, settlement.population?.toLocaleString() + ' pop.'),
-            settlement.config?.tradeRouteAccess && React.createElement('span', { style: { fontSize: FS.sm, color: '#9c8068' } }, settlement.config.tradeRouteAccess.replace(/_/g,' ')),
-            settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && React.createElement('span', { style: { fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? '#c87060' : '#c49a3c', background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' } }, settlement.config.monsterThreat === 'plagued' ? ' Embattled' : ' Frontier'),
-            stressObj && React.createElement('span', { style: { fontSize: FS.xxs, fontWeight: 800, color: '#ffd080', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' } }, stressObj.label)
-          )
-        ),
-        REROLLABLE[selectedTab] && onRegenerate && React.createElement('button', {
-          onClick: () => onRegenerate(selectedTab),
-          style: { display: 'flex', alignItems: 'center', gap: 5, padding: '6px 14px', borderRadius: 5, background: 'rgba(196,154,60,0.15)', border: '1px solid rgba(196,154,60,0.3)', color: '#c49a3c', fontSize: FS.sm, fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }
-        }, React.createElement(RefreshCw, { size: 12 }), ' ', REROLLABLE[selectedTab]),
-        // ── AI Narrative Layer button group ──────────────────────────────────
-        // P121 / D-4 — When `narrativeLayerStrip` flag is on, the
-        // narrative buttons move out of the header into a labeled strip
-        // below (rendered further down). The header remains lean. When
-        // the flag is off, the legacy header-button cluster renders.
-        // readOnly exception: the strip below is suppressed in readOnly
-        // (SettlementDetail's saved-dossier view), so keep the header
-        // buttons there or the free View Narrative/Raw toggle vanishes.
-        (!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()
-      ),
-      // P121 — Labeled narrative-layer strip. Below the header, above
-      // the tab strip. Lives in its own card with title + cost pill +
-      // single primary action. The renderNarrativeButtons() output
-      // sits inside the strip; the buttons themselves are unchanged.
-      flag('narrativeLayerStrip') && !readOnly && React.createElement('div', {
-        style: {
-          margin: '8px 18px',
-          padding: '10px 12px',
-          background: 'linear-gradient(135deg, rgba(123,79,207,0.05), rgba(123,79,207,0.02))',
-          border: '1px solid rgba(123,79,207,0.30)',
-          borderLeft: '3px solid rgba(123,79,207,0.70)',
-          borderRadius: 5,
-          display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap',
-        }
-      },
-        React.createElement('div', { style: { flex: 1, minWidth: 0 } },
-          React.createElement('div', {
-            style: { fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7B4FCF' }
-          }, 'Narrative Layer · AI prose pass'),
-          React.createElement('div', {
-            style: { fontSize: FS.xs, color: '#4A3B22', marginTop: 2, lineHeight: 1.4 }
-          }, narrativeEnabled
-               ? 'Refines the simulated dossier into prose your players can hear.'
-               : 'Save this settlement to your library to refine it into prose your players can hear.')
-        ),
-        renderNarrativeButtons()
-      ),
-      // Owner / visitor actions strip — share-to-gallery (owners) and
-      // buy-this-dossier (anonymous visitors). Each child decides
-      // whether to render based on auth/save state. Skipped entirely
-      // in readOnly mode (public dossier viewer).
-      !readOnly && React.createElement('div', {
-        style: {
-          padding: '8px 18px',
-          background: 'rgba(255,251,245,0.6)',
-          borderBottom: '1px solid #e0d0b0',
-          display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
-        }
-      },
-        React.createElement(BuyThisDossier, { settlement }),
-        React.createElement(ShareToGallery, {
-          saveId,
-          isPublic: liveSaveEntry?.is_public,
-          publicSlug: liveSaveEntry?.public_slug,
-          settlement,
-          galleryDescription: liveSaveEntry?.gallery_description,
-          galleryImageUrl: liveSaveEntry?.gallery_image_url,
-          galleryImageAlt: liveSaveEntry?.gallery_image_alt,
-          galleryTags: liveSaveEntry?.gallery_tags,
-          campaignState: liveSaveEntry?.campaignState,
-          galleryShareNarrated: liveSaveEntry?.gallery_share_narrated,
-          galleryShareDm: liveSaveEntry?.gallery_share_dm,
-        }),
-        // P135 / D-5 — "How this was simulated" trigger. Lives next to
-        // BuyThisDossier so the user finds it as a "more info" affordance,
-        // not a chrome surface.
-        React.createElement(Suspense, { fallback: null },
-          React.createElement(SimulationDrawer)
-        )
-      ),
-      // P104 — Welcome credit gift card. Self-gates inside; shown to
-      // signed-in users on their first saved dossier when their ledger
-      // still has an available welcome grant.
-      !readOnly && React.createElement(Suspense, { fallback: null },
-        React.createElement(WelcomeCreditCard, { saveId })
-      ),
-      // P106 / E-2 — Pending changes bar + cascade preview. Self-gates
-      // inside; renders nothing when no edits are queued.
-      !readOnly && React.createElement(Suspense, { fallback: null },
-        React.createElement(PendingChangesBar)
-      ),
-      // P130 / O-2 — First-dossier teaching callouts now render INSIDE the
-      // Summary tab (the DM summary), not as a banner above every tab — see
-      // renderTab's 'summary' case.
-      // P102 / D-1 — Thematic group tab strip (Summary / Systems / World /
-      // Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
-      // group selects its first sub-tab and filters the strip below.
-      fiveTabsEnabled && React.createElement('div', {
-        role: 'tablist',
-        'aria-label': 'Dossier sections',
-        onKeyDown: (e) => {
-          const ids = visibleGroupEntries.map(([gid]) => gid);
-          const i = ids.indexOf(selectedGroup);
-          if (i < 0) return;
-          let j;
-          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % ids.length;
-          else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + ids.length) % ids.length;
-          else if (e.key === 'Home') j = 0;
-          else if (e.key === 'End') j = ids.length - 1;
-          else return;
-          e.preventDefault();
-          handleGroupClick(ids[j]);
-          if (typeof requestAnimationFrame !== 'undefined') {
-            requestAnimationFrame(() => {
-              try { document.getElementById('sf-group-' + ids[j])?.focus(); } catch { /* no-op */ }
-            });
-          }
-        },
-        style: {
-          display: 'flex', gap: 2, padding: 4,
-          background: '#f7f0e4', borderBottom: '1px solid #e0d0b0',
-        }
-      },
-        visibleGroupEntries.map(([gid, group]) => {
-          const active = selectedGroup === gid;
-          return React.createElement('button', {
-            key: gid,
-            id: 'sf-group-' + gid,
-            role: 'tab',
-            'aria-selected': active,
-            tabIndex: active ? 0 : -1,
-            onClick: () => handleGroupClick(gid),
-            style: {
-              flex: 1, padding: '8px 6px',
-              background: active ? 'rgba(201,162,76,0.10)' : 'transparent',
-              border: active ? '1px solid rgba(201,162,76,0.40)' : '1px solid transparent',
-              borderRadius: 3,
-              fontSize: FS.sm,
-              fontWeight: active ? 700 : 500,
-              color: active ? '#8C6F32' : '#6B5340',
-              fontFamily: 'Nunito, sans-serif',
-              textAlign: 'center',
-              cursor: 'pointer',
-            }
-          }, group.label);
-        })
-      ),
-      // Tab strip
-      React.createElement('div', { 'data-onboard-highlight': onboardingActive && onboardingStep === 2 ? 'true' : undefined, style: { position: 'relative', borderBottom: '1px solid #e0d0b0', background: '#f7f0e4' } },
-        React.createElement('button', { onClick: () => scroll(-1), style: { position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: '#9c8068', padding: '0 8px' } }, React.createElement(ChevronLeft, { size: 14 })),
-        React.createElement('div', {
-          ref: scrollRef,
-          role: 'tablist',
-          'aria-label': 'Dossier tabs',
-          // WAI-ARIA tabs keyboard pattern: arrows move between tabs (with
-          // roving tabIndex below, only the active tab is in the tab order, so
-          // Tab enters the strip once and arrows navigate within it). Home/End
-          // jump to the ends. Focus follows selection.
-          onKeyDown: (e) => {
-            const i = tabs.findIndex(t => t.id === selectedTab);
-            if (i < 0) return;
-            let j;
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % tabs.length;
-            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
-            else if (e.key === 'Home') j = 0;
-            else if (e.key === 'End') j = tabs.length - 1;
-            else return;
-            e.preventDefault();
-            const target = tabs[j];
-            setActiveTab(target.id);
-            if (typeof requestAnimationFrame !== 'undefined') {
-              requestAnimationFrame(() => {
-                try { document.getElementById('sf-tab-' + target.id)?.focus(); } catch { /* no-op */ }
-              });
-            }
-          },
-          style: { display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', paddingLeft: 28, paddingRight: 28, WebkitOverflowScrolling: 'touch' } },
-          tabs.map(({ id, label, Icon }) => {
-            const active = selectedTab === id;
-            // Guidance (DM Compass) is the AI-narrated layer — give it a subtle
-            // purple tint so the AI surface reads as distinct from the
-            // simulation tabs.
-            const purple = id === 'dm_compass';
-            const accent = purple ? '#7a3aa8' : '#a0762a';
-            const idle   = purple ? '#7a5a92' : '#6b5340';
-            const bg = active
-              ? (purple ? '#f7f0fa' : '#fffbf5')
-              : (purple ? 'rgba(122,58,168,0.05)' : 'transparent');
-            return React.createElement('button', {
-              key: id, onClick: () => setActiveTab(id),
-              id: 'sf-tab-' + id,
-              role: 'tab',
-              'aria-selected': active,
-              // Roving tabIndex: only the selected tab is tabbable; the rest are
-              // reached via the arrow-key handler on the tablist.
-              tabIndex: active ? 0 : -1,
-              style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? accent : idle, fontSize: 9.5, fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }
-            }, React.createElement(Icon, { size: 14 }), label);
-          })
-        ),
-        React.createElement('button', { onClick: () => scroll(1), style: { position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: '#9c8068', padding: '0 8px' } }, React.createElement(ChevronRight, { size: 14 }))
-      ),
-      // Content — dimmed overlay during regenerate so the user sees "something is changing"
-      React.createElement('div', { style: { position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' } },
-        // ── Banners above tab content ────────────────────────────────────────
-        // Banner targeting:
-        //   • Thesis (identity-level prose) lives only on Summary & Overview —
-        //     the high-altitude reads.
-        //   • Per-tab notes (`narrativeNotes[selectedTab]`) replace the thesis
-        //     on every functional tab so each tab gets a contextual lens
-        //     instead of re-reading the same identity statement.
-        //   • Daily Life, DM Compass, and Neighbours/Relationships carry
-        //     their own AI prose inside the tab — no banner.
-        // The partial-failure notice was lifted out of the thesis block so it
-        // surfaces on every tab (it's a session-level concern, not an
-        // identity-banner concern).
-        (() => {
+  return (
+    <>
+      {/* Note: the "How this was simulated" rail used to render here as an
+          always-on banner above the dossier card. User feedback was that
+          it pushed the actual DM-facing dossier below the fold. Now it
+          lives as the last tab inside the dossier ("Simulation"), so the
+          dossier itself is the default landing surface and the simulation
+          metadata is one tap away rather than top-of-page chrome. */}
+      <div style={{ background: 'rgba(255,251,245,0.96)', border: '1px solid #c8b89a', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' }}>
+        {/* Header — suppressed via hideHeader in the embedded generate-flow view,
+            where the wizard's own sticky toolbar already shows name/tier/pop, so
+            the two dark identity bars collapse into one. */}
+        {hideHeader ? null : (
+          <div style={{ padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: swatch['#C49A3C'], lineHeight: 1.1 }}>
+                {(!readOnly && queueEdit) ? (
+                  <EditableInline
+                    value={settlement.name || ''}
+                    ariaLabel="Edit settlement name"
+                    textStyle={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: swatch['#C49A3C'], lineHeight: 1.1 }}
+                    trackEvent={EVENTS.EDIT_PENDING_QUEUED}
+                    provenance={{ kind: 'rename-settlement', entityId: saveId || 'unsaved' }}
+                    onCommit={(newName) => {
+                      queueEdit('rename-settlement', { newName });
+                    }}
+                  />
+                ) : settlement.name}
+              </div>
+              <div style={{ display: 'flex', gap: 8, marginTop: 5, flexWrap: 'wrap', alignItems: 'center' }}>
+                <span style={{ fontSize: FS.sm, color: swatch.mutedBrown, textTransform: 'capitalize', fontWeight: 600 }}>{TIER_LABELS[settlement.tier] || settlement.tier}</span>
+                <span style={{ fontSize: FS.sm, color: swatch.inkMag3 }}>{'\u00b7'}</span>
+                <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{settlement.population?.toLocaleString() + ' pop.'}</span>
+                {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{settlement.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
+                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? '#c87060' : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{settlement.config.monsterThreat === 'plagued' ? ' Embattled' : ' Frontier'}</span>}
+                {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}
+              </div>
+            </div>
+            {REROLLABLE[selectedTab] && onRegenerate && (
+              <button
+                onClick={() => onRegenerate(selectedTab)}
+                style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 14px', borderRadius: 5, background: 'rgba(196,154,60,0.15)', border: '1px solid rgba(196,154,60,0.3)', color: swatch['#C49A3C'], fontSize: FS.sm, fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }}
+              >
+                <RefreshCw size={12} />{' '}{REROLLABLE[selectedTab]}
+              </button>
+            )}
+            {/* ── AI Narrative Layer button group ──────────────────────────────────
+                P121 / D-4 — When `narrativeLayerStrip` flag is on, the
+                narrative buttons move out of the header into a labeled strip
+                below (rendered further down). The header remains lean. When
+                the flag is off, the legacy header-button cluster renders.
+                readOnly exception: the strip below is suppressed in readOnly
+                (SettlementDetail's saved-dossier view), so keep the header
+                buttons there or the free View Narrative/Raw toggle vanishes. */}
+            {(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
+          </div>
+        )}
+        {/* P121 — Labeled narrative-layer strip. Below the header, above
+            the tab strip. Lives in its own card with title + cost pill +
+            single primary action. The renderNarrativeButtons() output
+            sits inside the strip; the buttons themselves are unchanged. */}
+        {flag('narrativeLayerStrip') && !readOnly && (
+          <div
+            style={{
+              margin: '8px 18px',
+              padding: '10px 12px',
+              background: 'linear-gradient(135deg, rgba(123,79,207,0.05), rgba(123,79,207,0.02))',
+              border: '1px solid rgba(123,79,207,0.30)',
+              borderLeft: '3px solid rgba(123,79,207,0.70)',
+              borderRadius: 5,
+              display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div
+                style={{ fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: swatch['#7B4FCF'] }}
+              >Narrative Layer · AI prose pass</div>
+              <div
+                style={{ fontSize: FS.xs, color: swatch['#4A3B22'], marginTop: 2, lineHeight: 1.4 }}
+              >{narrativeEnabled
+                ? 'Refines the simulated dossier into prose your players can hear.'
+                : 'Save this settlement to your library to refine it into prose your players can hear.'}</div>
+            </div>
+            {renderNarrativeButtons()}
+          </div>
+        )}
+        {/* Owner / visitor actions strip — share-to-gallery (owners) and
+            buy-this-dossier (anonymous visitors). Each child decides
+            whether to render based on auth/save state. Skipped entirely
+            in readOnly mode (public dossier viewer). */}
+        {!readOnly && (
+          <div
+            style={{
+              padding: '8px 18px',
+              background: 'rgba(255,251,245,0.6)',
+              borderBottom: '1px solid #e0d0b0',
+              display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
+            }}
+          >
+            <BuyThisDossier settlement={settlement} />
+            <ShareToGallery
+              saveId={saveId}
+              isPublic={liveSaveEntry?.is_public}
+              publicSlug={liveSaveEntry?.public_slug}
+              settlement={settlement}
+              galleryDescription={liveSaveEntry?.gallery_description}
+              galleryImageUrl={liveSaveEntry?.gallery_image_url}
+              galleryImageAlt={liveSaveEntry?.gallery_image_alt}
+              galleryTags={liveSaveEntry?.gallery_tags}
+              campaignState={liveSaveEntry?.campaignState}
+              galleryShareNarrated={liveSaveEntry?.gallery_share_narrated}
+              galleryShareDm={liveSaveEntry?.gallery_share_dm}
+            />
+            {/* P135 / D-5 — "How this was simulated" trigger. Lives next to
+                BuyThisDossier so the user finds it as a "more info" affordance,
+                not a chrome surface. */}
+            <Suspense fallback={null}>
+              <SimulationDrawer />
+            </Suspense>
+          </div>
+        )}
+        {/* P104 — Welcome credit gift card. Self-gates inside; shown to
+            signed-in users on their first saved dossier when their ledger
+            still has an available welcome grant. */}
+        {!readOnly && (
+          <Suspense fallback={null}>
+            <WelcomeCreditCard saveId={saveId} />
+          </Suspense>
+        )}
+        {/* P106 / E-2 — Pending changes bar + cascade preview. Self-gates
+            inside; renders nothing when no edits are queued. */}
+        {!readOnly && (
+          <Suspense fallback={null}>
+            <PendingChangesBar />
+          </Suspense>
+        )}
+        {/* P130 / O-2 — First-dossier teaching callouts now render INSIDE the
+            Summary tab (the DM summary), not as a banner above every tab — see
+            renderTab's 'summary' case. */}
+        {/* P102 / D-1 — Thematic group tab strip (Summary / Systems / World /
+            Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
+            group selects its first sub-tab and filters the strip below. */}
+        {fiveTabsEnabled && (
+          // eslint-disable-next-line jsx-a11y/interactive-supports-focus -- roving tabIndex lives on the child tabs (WAI-ARIA tabs pattern); the tablist container forwards arrow keys but is not itself a focus stop
+          <div
+            role="tablist"
+            aria-label="Dossier sections"
+            onKeyDown={(e) => {
+              const ids = visibleGroupEntries.map(([gid]) => gid);
+              const i = ids.indexOf(selectedGroup);
+              if (i < 0) return;
+              let j;
+              if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % ids.length;
+              else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + ids.length) % ids.length;
+              else if (e.key === 'Home') j = 0;
+              else if (e.key === 'End') j = ids.length - 1;
+              else return;
+              e.preventDefault();
+              handleGroupClick(ids[j]);
+              if (typeof requestAnimationFrame !== 'undefined') {
+                requestAnimationFrame(() => {
+                  try { document.getElementById('sf-group-' + ids[j])?.focus(); } catch { /* no-op */ }
+                });
+              }
+            }}
+            style={{
+              display: 'flex', gap: 2, padding: 4,
+              background: swatch['#F7F0E4'], borderBottom: '1px solid #e0d0b0',
+            }}
+          >
+            {visibleGroupEntries.map(([gid, group]) => {
+              const active = selectedGroup === gid;
+              return (
+                <button
+                  key={gid}
+                  id={'sf-group-' + gid}
+                  role="tab"
+                  aria-selected={active}
+                  tabIndex={active ? 0 : -1}
+                  onClick={() => handleGroupClick(gid)}
+                  style={{
+                    flex: 1, padding: '8px 6px',
+                    background: active ? 'rgba(201,162,76,0.10)' : 'transparent',
+                    border: active ? '1px solid rgba(201,162,76,0.40)' : '1px solid transparent',
+                    borderRadius: 3,
+                    fontSize: FS.sm,
+                    fontWeight: active ? 700 : 500,
+                    color: active ? '#8C6F32' : '#6B5340',
+                    fontFamily: 'Nunito, sans-serif',
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                  }}
+                >{group.label}</button>
+              );
+            })}
+          </div>
+        )}
+        {/* Tab strip */}
+        <div data-onboard-highlight={onboardingActive && onboardingStep === 2 ? 'true' : undefined} style={{ position: 'relative', borderBottom: '1px solid #e0d0b0', background: swatch['#F7F0E4'] }}>
+          <button onClick={() => scroll(-1)} style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronLeft size={14} /></button>
+          {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus -- roving tabIndex lives on the child tabs (WAI-ARIA tabs pattern); the tablist container forwards arrow keys but is not itself a focus stop */}
+          <div
+            ref={scrollRef}
+            role="tablist"
+            aria-label="Dossier tabs"
+            // WAI-ARIA tabs keyboard pattern: arrows move between tabs (with
+            // roving tabIndex below, only the active tab is in the tab order, so
+            // Tab enters the strip once and arrows navigate within it). Home/End
+            // jump to the ends. Focus follows selection.
+            onKeyDown={(e) => {
+              const i = tabs.findIndex(t => t.id === selectedTab);
+              if (i < 0) return;
+              let j;
+              if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % tabs.length;
+              else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+              else if (e.key === 'Home') j = 0;
+              else if (e.key === 'End') j = tabs.length - 1;
+              else return;
+              e.preventDefault();
+              const target = tabs[j];
+              setActiveTab(target.id);
+              if (typeof requestAnimationFrame !== 'undefined') {
+                requestAnimationFrame(() => {
+                  try { document.getElementById('sf-tab-' + target.id)?.focus(); } catch { /* no-op */ }
+                });
+              }
+            }}
+            style={{ display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', paddingLeft: 28, paddingRight: 28, WebkitOverflowScrolling: 'touch' }}
+          >
+            {tabs.map(({ id, label, Icon }) => {
+              const active = selectedTab === id;
+              // Guidance (DM Compass) is the AI-narrated layer — give it a subtle
+              // purple tint so the AI surface reads as distinct from the
+              // simulation tabs.
+              const purple = id === 'dm_compass';
+              const accent = purple ? '#7a3aa8' : '#a0762a';
+              const idle   = purple ? '#7a5a92' : swatch.inkMag3;
+              const bg = active
+                ? (purple ? '#f7f0fa' : '#fffbf5')
+                : (purple ? 'rgba(122,58,168,0.05)' : 'transparent');
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActiveTab(id)}
+                  id={'sf-tab-' + id}
+                  role="tab"
+                  aria-selected={active}
+                  // Roving tabIndex: only the selected tab is tabbable; the rest are
+                  // reached via the arrow-key handler on the tablist.
+                  tabIndex={active ? 0 : -1}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? accent : idle, fontSize: FS.xxs, fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
+                ><Icon size={14} />{label}</button>
+              );
+            })}
+          </div>
+          <button onClick={() => scroll(1)} style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronRight size={14} /></button>
+        </div>
+        {/* Content — dimmed overlay during regenerate so the user sees "something is changing" */}
+        <div style={{ position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' }}>
+          {/* ── Banners above tab content ────────────────────────────────────────
+              Banner targeting:
+                • Thesis (identity-level prose) lives only on Summary & Overview —
+                  the high-altitude reads.
+                • Per-tab notes (`narrativeNotes[selectedTab]`) replace the thesis
+                  on every functional tab so each tab gets a contextual lens
+                  instead of re-reading the same identity statement.
+                • Daily Life, DM Compass, and Neighbours/Relationships carry
+                  their own AI prose inside the tab — no banner.
+              The partial-failure notice was lifted out of the thesis block so it
+              surfaces on every tab (it's a session-level concern, not an
+              identity-banner concern). */}
+          {(() => {
           // Owner views read the narrative overlay (aiSettlement); a public gallery
           // dossier embeds the narrative INTO the published settlement, so read the
           // thesis / per-tab note from the rendered settlement there. Either way
@@ -921,99 +961,110 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           const showNote = typeof note === 'string' && note.length > 0;
           if (!showThesis && !showNote) return null;
 
-          return React.createElement('div', {
-            style: {
-              padding: '12px 18px',
-              borderBottom: '1px solid rgba(160,100,220,0.2)',
-              background: 'linear-gradient(135deg, rgba(74,26,122,0.06), rgba(106,42,154,0.04))',
-              opacity: aiRegenerating ? 0.55 : 1,
-            }
-          },
-            React.createElement('div', { style: { display: 'flex', alignItems: 'flex-start', gap: 10 } },
-              React.createElement('span', { style: { fontSize: FS.md, flexShrink: 0, marginTop: 2, color: '#8a50b0' } }, '\u2726'),
-              React.createElement('div', { style: { flex: 1, minWidth: 0 } },
-                React.createElement('div', { style: { fontSize: FS.micro, fontWeight: 800, color: '#8a50b0', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 } },
-                  showThesis ? 'Narrative Layer \u2014 Identity' : 'Narrative Layer \u2014 Lens'
-                ),
-                showThesis
-                  ? nsrc.thesis.split(/\n\n+/).map((para, i, arr) =>
-                      React.createElement('p', { key: i, style: { margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: 12.5, color: '#2d1f0e', lineHeight: 1.65, fontFamily: 'Georgia, serif' } }, para.trim())
-                    )
-                  : React.createElement('p', { style: { margin: 0, fontSize: 12.5, color: '#2d1f0e', lineHeight: 1.65, fontFamily: 'Georgia, serif' } }, note)
-              )
-            )
+          return (
+            <div
+              style={{
+                padding: '12px 18px',
+                borderBottom: '1px solid rgba(160,100,220,0.2)',
+                background: 'linear-gradient(135deg, rgba(74,26,122,0.06), rgba(106,42,154,0.04))',
+                opacity: aiRegenerating ? 0.55 : 1,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                <span style={{ fontSize: FS.md, flexShrink: 0, marginTop: 2, color: swatch['#8A50B0'] }}>{'\u2726'}</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A50B0'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
+                    {showThesis ? 'Narrative Layer \u2014 Identity' : 'Narrative Layer \u2014 Lens'}
+                  </div>
+                  {showThesis
+                    ? nsrc.thesis.split(/\n\n+/).map((para, i, arr) => (
+                        <p key={i} style={{ margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>{para.trim()}</p>
+                      ))
+                    : <p style={{ margin: 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>{note}</p>}
+                </div>
+              </div>
+            </div>
           );
-        })(),
-        // Partial-refinement notice — independent of which tab is active.
-        showNarrative && storeAiPartialFailure && storeAiPartialFailure.failedFields?.length > 0 && React.createElement('div', {
-          style: {
-            margin: '8px 18px 0', padding: '6px 10px',
-            background: 'rgba(196,128,60,0.08)',
-            border: '1px solid rgba(196,128,60,0.2)',
-            borderRadius: 4, fontSize: 10.5, color: '#8a5a20',
-            fontFamily: 'Nunito, sans-serif',
-          }
-        }, `Partial refinement: ${storeAiPartialFailure.failedFields.join(', ')} kept raw data.`),
-        // Tier 6.7 — runtime verifier findings. Surfaces hard
-        // violations (invented entity, renamed proper noun,
-        // overwritten user edit) so the DM sees the AI output isn't
-        // safe to ship without inspection.
-        showNarrative && React.createElement(AiOverlayViolations, {
-          violations: storeAiViolations,
-          onDismiss: clearAiViolations,
-        }),
-        // Tier 5.1 — what changed in the most recent regenerate.
-        // Visible regardless of narrative mode so the DM can audit
-        // engine-side decisions independently of AI prose.
-        React.createElement(RegenerationDeltaCard, {
-          delta: storeLastRegenerationDelta,
-          onDismiss: clearLastRegenerationDelta,
-        }),
-        // Regenerate overlay — floats progress above the dimmed existing content
-        aiRegenerating && React.createElement('div', {
-          style: {
-            position: 'absolute', top: 10, left: '50%', transform: 'translateX(-50%)',
-            zIndex: 20, background: 'rgba(74,26,122,0.95)', color: '#f0d8ff',
-            padding: '8px 16px', borderRadius: 20, border: '1px solid rgba(160,100,220,0.6)',
-            fontSize: 11.5, fontWeight: 700, fontFamily: 'Nunito, sans-serif',
-            display: 'flex', alignItems: 'center', gap: 8,
-            boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
-          }
-        },
-          React.createElement('span', { style: { display: 'inline-block', animation: 'spin 1.2s linear infinite' } }, '\u2726'),
-          displayProgress || 'Regenerating\u2026'
-        ),
-        React.createElement(
-          Suspense,
-          { fallback: React.createElement('div', {
-              style: { padding: 32, textAlign: 'center', color: '#9c8068',
-                       fontFamily: 'Nunito,sans-serif', fontSize: FS.md }
-            }, 'Loading\u2026') },
-          React.createElement('div', { ref: dossierContentRef, style: { opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' } },
-            renderTab()
-          )
-        ),
-        React.createElement('style', null, '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }')
-      )
-    ),
-    // P142 / D-6 — Table View overlay. Rendered as a sibling of the dossier
-    // card so it takes over the full viewport. Gated on flag + the
-    // tableViewOpen pref so the lazy chunk only loads when actually opened.
-    flag('tableView') && tableViewOpen && React.createElement(Suspense, { fallback: null },
-      React.createElement(TableView, {
-        settlement: activeSettlement,
-        onClose: () => setUserPref && setUserPref('tableViewOpen', false),
-      })
-    ),
-    React.createElement(ConfirmDialog, {
-      open: !!pendingAiAction,
-      tone: 'warning',
-      title: 'Send campaign context?',
-      body: 'Your Campaign Context from Notes will be woven into the narration as established lore. Settlement facts still take precedence. DM Notes stay private and are not included.',
-      confirmLabel: 'Send context',
-      cancelLabel: 'Cancel',
-      onConfirm: confirmGuidedAiAction,
-      onCancel: () => setPendingAiAction(null),
-    })
-  ); // close Fragment
+        })()}
+          {/* Partial-refinement notice — independent of which tab is active. */}
+          {showNarrative && storeAiPartialFailure && storeAiPartialFailure.failedFields?.length > 0 && (
+            <div
+              style={{
+                margin: '8px 18px 0', padding: '6px 10px',
+                background: 'rgba(196,128,60,0.08)',
+                border: '1px solid rgba(196,128,60,0.2)',
+                borderRadius: 4, fontSize: FS.xs, color: swatch['#8A5A20'],
+                fontFamily: 'Nunito, sans-serif',
+              }}
+            >{`Partial refinement: ${storeAiPartialFailure.failedFields.join(', ')} kept raw data.`}</div>
+          )}
+          {/* Tier 6.7 — runtime verifier findings. Surfaces hard
+              violations (invented entity, renamed proper noun,
+              overwritten user edit) so the DM sees the AI output isn't
+              safe to ship without inspection. */}
+          {showNarrative && (
+            <AiOverlayViolations
+              violations={storeAiViolations}
+              onDismiss={clearAiViolations}
+            />
+          )}
+          {/* Tier 5.1 — what changed in the most recent regenerate.
+              Visible regardless of narrative mode so the DM can audit
+              engine-side decisions independently of AI prose. */}
+          <RegenerationDeltaCard
+            delta={storeLastRegenerationDelta}
+            onDismiss={clearLastRegenerationDelta}
+          />
+          {/* Regenerate overlay — floats progress above the dimmed existing content */}
+          {aiRegenerating && (
+            <div
+              style={{
+                position: 'absolute', top: 10, left: '50%', transform: 'translateX(-50%)',
+                zIndex: 20, background: 'rgba(74,26,122,0.95)', color: swatch['#F0D8FF'],
+                padding: '8px 16px', borderRadius: 20, border: '1px solid rgba(160,100,220,0.6)',
+                fontSize: FS.sm, fontWeight: 700, fontFamily: 'Nunito, sans-serif',
+                display: 'flex', alignItems: 'center', gap: 8,
+                boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
+              }}
+            >
+              <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>{'\u2726'}</span>
+              {displayProgress || 'Regenerating\u2026'}
+            </div>
+          )}
+          <Suspense
+            fallback={
+              <div style={{ padding: 32, textAlign: 'center', color: swatch.mutedBrown,
+                fontFamily: 'Nunito,sans-serif', fontSize: FS.md }}>Loading\u2026</div>
+            }
+          >
+            <div ref={dossierContentRef} style={{ opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}>
+              {renderTab()}
+            </div>
+          </Suspense>
+          <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
+        </div>
+      </div>
+      {/* P142 / D-6 — Table View overlay. Rendered as a sibling of the dossier
+          card so it takes over the full viewport. Gated on flag + the
+          tableViewOpen pref so the lazy chunk only loads when actually opened. */}
+      {flag('tableView') && tableViewOpen && (
+        <Suspense fallback={null}>
+          <TableView
+            settlement={activeSettlement}
+            onClose={() => setUserPref && setUserPref('tableViewOpen', false)}
+          />
+        </Suspense>
+      )}
+      <ConfirmDialog
+        open={!!pendingAiAction}
+        tone="warning"
+        title="Send campaign context?"
+        body="Your Campaign Context from Notes will be woven into the narration as established lore. Settlement facts still take precedence. DM Notes stay private and are not included."
+        confirmLabel="Send context"
+        cancelLabel="Cancel"
+        onConfirm={confirmGuidedAiAction}
+        onCancel={() => setPendingAiAction(null)}
+      />
+    </>
+  );
 }

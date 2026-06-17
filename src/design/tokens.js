@@ -135,6 +135,14 @@ export const swatch = Object.freeze({
   inkMag: '#1c1409',
   inkMag2: '#3d2b1a',
   inkMag3: '#6b5340',
+  // OutputContainer JSX migration (A+ components-core.2) — exact values, zero
+  // rendered change; consolidation deferred like the rest of the long tail.
+  errorBgDeep: '#2d0a0a',
+  errorText: '#f0a0a0',
+  stressAmber: '#ffd080',
+  mutedBrown: '#9c8068',
+  '#4A3B22': '#4a3b22',
+  '#7B4FCF': '#7b4fcf',
   // Long tail — keyed by exact hex (consolidation deferred)
   '#1A2A5A': '#1a2a5a',
   '#1A3A8B': '#1a3a8b',
