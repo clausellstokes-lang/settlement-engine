@@ -294,6 +294,23 @@ export function deriveMagicPosture(settlement) {
  * overlays); these are canonical simulation facts and always read from the
  * base settlement, never an AI clone.
  */
+/**
+ * Headcounts (§overview). The institution / NPC / faction totals that BOTH the
+ * screen overview and the PDF overview render — sourced identically here so the
+ * two surfaces can never disagree on a count.
+ * @param {any} settlement
+ * @returns {{ institutions: number, npcs: number, factions: number }}
+ */
+export function deriveHeadcounts(settlement) {
+  const s = settlement || {};
+  return {
+    institutions: (s.institutions || []).length,
+    npcs: (s.npcs || []).length,
+    // PowerStructure.factions is the canonical faction roster (legacy .factions fallback).
+    factions: (s.powerStructure?.factions || s.factions || []).length,
+  };
+}
+
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {
     foodBalance: deriveFoodBalance(settlement),
@@ -301,5 +318,6 @@ export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = nul
     viability: deriveViability(settlement),
     magic: deriveMagicPosture(settlement),
     blockade: deriveBlockadeRelief(settlement),
+    headcounts: deriveHeadcounts(settlement),
   };
 }

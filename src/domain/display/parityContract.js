@@ -69,6 +69,11 @@ export const SHARED_FIELDS = Object.freeze([
     vmPaths: ['overview.foodBalance.surplus'],
     normalizeVm: (v) => v ?? 0,
   },
+  // Headcounts (pdf.4) — institution / NPC / faction totals, sourced identically
+  // by deriveHeadcounts and the PDF overview slice.
+  { fact: 'headcounts.institutions', canonPath: 'headcounts.institutions', vmPaths: ['overview.institutionsCount'] },
+  { fact: 'headcounts.npcs',         canonPath: 'headcounts.npcs',         vmPaths: ['overview.npcsCount'] },
+  { fact: 'headcounts.factions',     canonPath: 'headcounts.factions',     vmPaths: ['overview.factionsCount'] },
 ]);
 
 export const PARITY_EXEMPT = Object.freeze([
