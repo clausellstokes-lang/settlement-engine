@@ -6,7 +6,7 @@
  * could stall delivery forever; (2) overlapping flushes are guarded so the batch
  * isn't double-POSTed; (3) a single oversize record is rejected at enqueue.
  */
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: true }));
 vi.mock('../../src/lib/consent.js', () => ({ getConsent: () => ({ essential: true, research: true }) }));
@@ -20,6 +20,12 @@ beforeEach(() => {
   vi.stubEnv('VITE_SUPABASE_URL', 'https://example.supabase.co');
   vi.unstubAllGlobals();
 });
+
+afterEach(() => { vi.useRealTimers(); });
+
+// Drain microtasks so a fetch promise's .then/.catch (drain / scheduleRetry) runs
+// even under fake timers.
+const settle = async () => { for (let i = 0; i < 4; i++) await Promise.resolve(); };
 
 describe('in-flight guard', () => {
   test('overlapping flushes POST the batch only once', () => {
@@ -93,5 +99,47 @@ describe('per-record cap rejects an oversize record at enqueue', () => {
     enqueueSnapshot({ id: 'huge', blob: 'x'.repeat(100 * 1024) });
     expect(debugSnapshot().depth).toBe(0);
     expect(debugSnapshot().dropped).toBe(1);
+  });
+});
+
+describe('retry timer lifecycle (A+ lib.4b/lib.5)', () => {
+  test('a successful flush cancels a pending backoff retry (no double-fire)', async () => {
+    vi.useFakeTimers();
+    let n = 0;
+    const fetchMock = vi.fn(() => (++n === 1 ? Promise.reject(new Error('net')) : Promise.resolve({ ok: true })));
+    vi.stubGlobal('fetch', fetchMock);
+
+    enqueueEvent('homepage_view', {}, { _class: 'essential' });
+    flush();                       // call 1 → rejects → schedules a backoff retry
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    await settle();                // .catch runs: scheduleRetry sets _retryTimer, _inFlight cleared
+
+    flush();                       // call 2 → 200 → drain() must cancel the pending retry
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    await settle();
+
+    enqueueEvent('generation_completed', {}, { _class: 'essential' }); // queue non-empty again
+    // Advance past the 1s retry backoff but under the 30s flush interval, so only a
+    // LEAKED retry could fire here. Cancelled on drain → no call 3.
+    vi.advanceTimersByTime(2_000);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  test('reset cancels a pending retry so it cannot flush into the next test', async () => {
+    vi.useFakeTimers();
+    const fetchMock = vi.fn(() => Promise.reject(new Error('net')));
+    vi.stubGlobal('fetch', fetchMock);
+
+    enqueueEvent('homepage_view', {}, { _class: 'essential' });
+    flush();                       // call 1 → rejects → schedules retry
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    await settle();
+
+    __resetQueueForTests();        // must clear the pending retry timer (+ spill timer)
+    enqueueEvent('generation_completed', {}, { _class: 'essential' });
+    // Past the 1s retry backoff, under the 30s interval — a leaked retry would
+    // flush() the new event here → call 2. Cleared by reset → stays 1.
+    vi.advanceTimersByTime(2_000);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });

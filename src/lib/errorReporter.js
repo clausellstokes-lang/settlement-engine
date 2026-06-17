@@ -67,7 +67,10 @@ export function reportError(error, context = {}) {
       body,
       keepalive: true,
       headers: { 'content-type': 'application/json' },
-    }).catch(() => {}),
+      // Silent for the USER (an error reporter must never surface errors), but
+      // observable for the DEVELOPER — a reporter that silently fails to report
+      // is the worst silent failure, so leave a DEV breadcrumb.
+    }).catch((e) => { if (import.meta?.env?.DEV) console.warn('[errorReporter] send failed', e?.message); }),
   );
 }
 

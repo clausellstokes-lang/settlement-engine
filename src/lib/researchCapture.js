@@ -130,6 +130,10 @@ export function captureFingerprint(moment, settlement, opts = {}) {
         prev_fingerprint_hash: _prevHash.get(settlementUuid),
       }, { subjectId: settlementUuid });
       _prevHash.set(settlementUuid, fingerprintHash);
-    }).catch(() => { /* fingerprint capture is best-effort */ });
+    }).catch((e) => {
+      // Best-effort for the USER; observable for the DEVELOPER — a broken
+      // fingerprint extractor would otherwise silently emit zero research data.
+      if (import.meta?.env?.DEV) console.warn('[researchCapture] fingerprint capture failed', e?.message);
+    });
   } catch { /* never throw */ }
 }

@@ -58,6 +58,10 @@ function appVersion() {
   try { return import.meta.env.VITE_APP_VERSION || undefined; } catch { return undefined; }
 }
 
+// Tracked retry handle so a queued backoff retry can be cancelled when a later
+// flush already succeeded (no double-fire) and on reset (no cross-test leak).
+let _retryTimer = null;
+
 // ── Durable spill ────────────────────────────────────────────────────────────
 let _spillTimer = null;
 function scheduleSpill() {
@@ -86,6 +90,9 @@ function restoreSpill() {
   } catch { /* ignore malformed spill */ }
 }
 function clearSpill() {
+  // Cancel a pending spill write (queue is empty / being reset — nothing to persist)
+  // and drop any already-persisted spill.
+  if (_spillTimer) { try { clearTimeout(_spillTimer); } catch { /* ignore */ } _spillTimer = null; }
   try { if (typeof localStorage !== 'undefined') localStorage.removeItem(SPILL_KEY); } catch { /* ignore */ }
 }
 
@@ -256,6 +263,9 @@ export function flush({ beacon = false } = {}) {
 }
 
 function drain(sent) {
+  // A successful delivery supersedes any queued backoff retry — cancel it so it
+  // can't double-fire a redundant flush after we've already shipped.
+  if (_retryTimer) { try { clearTimeout(_retryTimer); } catch { /* ignore */ } _retryTimer = null; }
   _events.splice(0, sent.e);
   _edits.splice(0, sent.d);
   _snapshots.splice(0, sent.s);
@@ -269,7 +279,8 @@ function scheduleRetry() {
   if (_attempt >= MAX_ATTEMPTS) { _attempt = 0; scheduleSpill(); return; } // re-spill for next session
   const delay = BACKOFF_MS[Math.min(_attempt, BACKOFF_MS.length - 1)];
   _attempt += 1;
-  try { setTimeout(() => flush(), delay); } catch { /* ignore */ }
+  // Track the handle so a later success (drain) or a reset can cancel it.
+  try { _retryTimer = setTimeout(() => { _retryTimer = null; flush(); }, delay); } catch { /* ignore */ }
 }
 
 // ── Lifecycle wiring ─────────────────────────────────────────────────────────
@@ -307,5 +318,7 @@ export function __resetQueueForTests() {
   _events = []; _edits = []; _snapshots = []; _pulseEffects = []; _droppedCount = 0; _attempt = 0; _inFlight = false; _ring = [];
   try { if (_intervalId != null && typeof clearInterval !== 'undefined') clearInterval(_intervalId); } catch { /* ignore */ }
   _intervalId = null; _intervalStarted = false;
-  clearSpill();
+  // Cancel any pending backoff retry so it can't fire flush() into the next test.
+  if (_retryTimer) { try { clearTimeout(_retryTimer); } catch { /* ignore */ } _retryTimer = null; }
+  clearSpill(); // also cancels the pending spill-write timer
 }
