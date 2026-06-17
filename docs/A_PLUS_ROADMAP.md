@@ -106,8 +106,10 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 
 ## How to run it — phasing
 
-### Phase 0 — Stop the bleeding (edges fail-safe + verified leaks)
+### Phase 0 — Stop the bleeding (edges fail-safe + verified leaks) — ✅ COMPLETE
 *Goal:* Close every confirmed silent-data-loss / PII / security-floor finding and make the deploy gated, so nothing else regresses while the uplift runs. Small, low-risk, high-severity.
+
+**STATUS: shipped (P0.1–P0.9, gate-green, committed). Corrections vs the original plan: P0.7 validateDossier was already wired → converted to a wiring pin; P0.9 line-counts were already accurate → no-op.**
 
 - Make CI the only path to production: branch protection on `check` + `e2e`, PR flow, delete the independent-deploy caveat [Testing critical/S]
 - Unify persistSaveUpdate into one Promise-returning, failure-reporting impl + route canon settlement path through it + singleImpl pin [State/Edges/Enforcement critical/M]
@@ -117,18 +119,20 @@ Rebuild the risk register (done); blanket-validate every boundary with zod (clas
 - Remove the flag() + two Math.random domain leaks [Domain critical/S + high/S x2]
 - Remove the 10 throwaway repo-root scripts + .gitignore fence [Edges medium/S]
 
-### Phase 1 — The enforcement spine (make claims self-policing)
+### Phase 1 — The enforcement spine (make claims self-policing) — ✅ COMPLETE
 *Goal:* Stand up the meta-pin and the foundational ratchets/lints/pins so that every Phase-2 'now enforced' claim is mechanically verified and cannot be overstated.
 
-- Meta-pin: doc completeness claims must map to a resolvable @enforced-by test/lint wired into `check` [Enforcement critical/L]
-- Widen the determinism eslint guard from generators to src/domain/** [Domain critical/M]
-- Strengthen no-raw-color to inspect ALL literals + ban local hex consts (the design ratchet) [Design/Enforcement critical/M]
-- Ratchet the max-lines ESLint guard at the current six god-components [UI critical/S]
-- Encode the zero-inline-object-selector lint rule [UI medium/S]
-- Catalog->vocabulary coverage pin + reconcile entityTags.TAG to 42 tags [Data/Enforcement critical/M]
-- Declare + enforce the generator step data-flow contract (__PIPELINE_STRICT__) [Generators critical/M x2]
-- Field-level PDF VALUE parity harness [PDF critical/M]
-- Dedicated tests/lib/analyticsQueue.test.js pinning the resilience invariants [Lib critical/L]
+**STATUS: shipped (all 9 items, gate-green, committed on `analytics-intelligence-layer`). The spine is now self-policing — the meta-pin (P1.1) closes the loop so no future "now enforced" claim can outrun its enforcer.**
+
+- ✅ P1.1 Meta-pin: doc completeness claims must map to a resolvable @enforced-by test/lint wired into `check` [Enforcement critical/L] — `tests/docs/enforcement-claims.test.js` (913faa7)
+- ✅ P1.2 Widen the determinism eslint guard from generators to src/domain/** [Domain critical/M] — scoped to entropy/env/config; the wall-clock `new Date()` ban deferred to Track A now-threading
+- ✅ P1.3 Strengthen no-raw-color to inspect ALL literals + ban local hex consts (the design ratchet) [Design/Enforcement critical/M] — `visual-budget/no-forked-color-const` + `.forked-color-baseline.json` ratchet
+- ✅ P1.4 Ratchet the max-lines ESLint guard at the current six god-components [UI critical/S]
+- ✅ P1.5 Encode the zero-inline-object-selector lint rule [UI medium/S] — `jsx-hygiene/no-inline-store-selector`
+- ✅ P1.6 Catalog->vocabulary coverage pin + reconcile entityTags.TAG to 42 tags [Data/Enforcement critical/M] — 42/42
+- ✅ P1.7 Declare + enforce the generator step data-flow contract (__PIPELINE_STRICT__) [Generators critical/M x2] — `mutates`/`scratch` declarations + strict tripwire + `pipelineContract`/`pipelineStrictMode` pins (fa34391)
+- ✅ P1.8 Field-level PDF VALUE parity harness [PDF critical/M] — identity-anchor convergence; viability-slice richer object deferred to Track G
+- ✅ P1.9 Dedicated tests/lib/analyticsQueue.test.js pinning the resilience invariants [Lib critical/L] — landed with P0.3
 
 ### Phase 2 — Area uplifts (parallel tracks behind the spine)
 *Goal:* Run Tracks A-H concurrently. Each lands behind a Phase-1 pin/lint so the gate verifies the improvement and prevents regression. Engine refactors must keep same-seed golden output byte-identical.
