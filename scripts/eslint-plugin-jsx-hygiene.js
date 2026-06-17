@@ -54,5 +54,45 @@ export default {
         };
       },
     },
+
+    // no-inline-store-selector (A+ P1.5) — disallow an inline object/array selector
+    //   passed directly to useStore: `useStore(s => ({ ... }))` / `useStore(s => [ ... ])`.
+    //   These build a NEW reference every render, so the default Object.is equality
+    //   never matches and the component re-renders on every store change (the #1
+    //   Zustand footgun, and at scale an infinite-render risk). The codebase currently
+    //   has ZERO of these across ~250 useStore sites; this rule locks that invariant
+    //   through the coming UI churn. A useShallow()-wrapped selector is fine — the arg
+    //   is then a CallExpression, not a bare arrow, so it is not flagged.
+    'no-inline-store-selector': {
+      meta: {
+        type: 'problem',
+        docs: {
+          description:
+            'Disallow inline object/array selectors in useStore() — they return a new reference each render (re-render footgun). Select primitives, split into multiple useStore calls, or wrap with useShallow().',
+        },
+        schema: [],
+        messages: {
+          inline:
+            'Inline {{kind}} selector in useStore() returns a new reference every render (re-render footgun). Return a primitive, use separate useStore() calls, or wrap with useShallow().',
+        },
+      },
+      create(context) {
+        return {
+          CallExpression(node) {
+            const callee = node.callee;
+            if (!callee || callee.type !== 'Identifier' || callee.name !== 'useStore') return;
+            const arg = node.arguments && node.arguments[0];
+            if (!arg || (arg.type !== 'ArrowFunctionExpression' && arg.type !== 'FunctionExpression')) return;
+            const body = arg.body;
+            if (!body) return;
+            if (body.type === 'ObjectExpression') {
+              context.report({ node: body, messageId: 'inline', data: { kind: 'object' } });
+            } else if (body.type === 'ArrayExpression') {
+              context.report({ node: body, messageId: 'inline', data: { kind: 'array' } });
+            }
+          },
+        };
+      },
+    },
   },
 };
