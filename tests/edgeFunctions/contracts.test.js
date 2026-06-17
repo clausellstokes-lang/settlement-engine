@@ -106,11 +106,17 @@ describe('Tier 3.3 — stripe-webhook signature verification', () => {
   });
 
   it('verifies signature BEFORE creating the admin client', () => {
-    // NOTE: this static order-check is now superseded behaviorally by the EXECUTED
-    // boundary test in supabase/functions/stripe-webhook/index.test.ts (forged
-    // requests get 400 with zero DB writes). Kept until the deno-tests CI job is
-    // confirmed green (tests-tooling.6 prunes it then). The admin-client line is
-    // `const supabase = (deps.adminClient ?? adminClient)()` post-edges.2 DI seam.
+    // NOTE (tests-tooling.6): this static order-check is superseded BEHAVIORALLY by
+    // the EXECUTED boundary test in supabase/functions/stripe-webhook/index.test.ts
+    // (forged requests get 400 with zero DB writes) — now verified passing locally
+    // under Deno (`deno task test:edge`, 4/4). It is DELIBERATELY NOT pruned yet:
+    // the Deno suite runs in the separate `deno-tests` CI job, which is NOT part of
+    // `npm run check` and NOT yet a REQUIRED status check (branch protection is the
+    // outstanding owner action). Until the Deno job is an enforced gate, deleting
+    // this vitest contract would move the trust-boundary coverage from always-run
+    // to non-enforced — a regression. Prune once `deno-tests` is required on master.
+    // The admin-client line is `const supabase = (deps.adminClient ?? adminClient)()`
+    // post-edges.2 DI seam.
     const constructIdx = src.search(/constructEvent(Async)?\s*\(/);
     const adminIdx = src.search(/const supabase\s*=[^;]*\badminClient\b/);
     expect(constructIdx).toBeGreaterThan(0);
