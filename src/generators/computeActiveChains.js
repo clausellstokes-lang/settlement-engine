@@ -64,6 +64,37 @@ export function institutionMatchesProcessor(inst, pattern) {
   return fuzzyProcessorMatch(String(inst?.name || '').toLowerCase(), pattern);
 }
 
+// ── Keyword (substring) id-set — the tradition / magic-transit twin of the
+// processor id-set (A+ generators.4). The tradition + _hasInst gates match by
+// raw `name.includes(keyword)`, a DIFFERENT rule than fuzzyProcessorMatch, so
+// they need their own keyword→catalog-id resolution built from that exact rule.
+// Built once per keyword: id-match === name-includes-match for an unrenamed
+// catalog institution BY CONSTRUCTION, so generation output is byte-identical;
+// a DM-renamed-but-stamped institution stays matched (rename-proof), a
+// bare-renamed (unstamped) one falls to the fuzzy substring path and is lost.
+const _keywordIdSets = new Map();
+function keywordIdSet(keyword) {
+  const key = String(keyword || '').toLowerCase();
+  let set = _keywordIdSets.get(key);
+  if (!set) {
+    set = new Set();
+    for (const name of ALL_CATALOG_NAMES) {
+      if (name.toLowerCase().includes(key)) {
+        const id = catalogIdForName(name);
+        if (id) set.add(id);
+      }
+    }
+    _keywordIdSets.set(key, set);
+  }
+  return set;
+}
+
+/** Does this institution match a keyword? Id-first for stamped, substring fallback. */
+export function institutionMatchesKeyword(inst, keyword) {
+  if (inst?.catalogId) return keywordIdSet(keyword).has(inst.catalogId);
+  return String(inst?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
+}
+
 // Map resource labels → RESOURCE_DATA keys for matching
 // Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words
 function resourceLabelToKey(label) {
@@ -107,8 +138,9 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   const instNames = institutions.map(i => (i.name || '').toLowerCase());
 
   // Helper: does this settlement have an institution matching any of the names?
+  // Id-first for stamped institutions (rename-proof), substring fallback otherwise.
   const _hasInst = (...patterns) => patterns.some(p =>
-    instNames.some(n => n.includes(p.toLowerCase()))
+    insts.some(i => institutionMatchesKeyword(i, p))
   );
 
   // Active resource keys
@@ -119,8 +151,9 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   const isResourceDepleted = (key) => !!key && depletedResourceKeys.has(key);
 
   // Tradition detection — which magical traditions are present?
-  // instNames already declared above
-  const hasTradition = (...kws) => instNames.some(n => kws.some(kw => n.includes(kw)));
+  // Id-first for stamped institutions (a renamed-but-stamped "Mages' guild"
+  // still enables the arcane tradition), substring fallback for unstamped.
+  const hasTradition = (...kws) => insts.some(i => kws.some(kw => institutionMatchesKeyword(i, kw)));
 
   const traditions = {
     druid:   magicPriority >= 30 && hasTradition("druid circle","grove shrine","elder grove","warden's lodge","sacred grove"),
@@ -197,11 +230,11 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // running after the settlement lost its Teleportation circle mid-campaign.
       const isOwnProcessor = (i) => chain.processingInstitutions.some(p =>
         institutionMatchesProcessor(i, p));
-      const hasMagicTransit = insts.some(i => {
-        const n = String(i.name || '').toLowerCase();
-        return (n.includes('teleportation') || n.includes('planar') || n.includes('airship')) &&
-          !isOwnProcessor(i);
-      });
+      const hasMagicTransit = insts.some(i =>
+        (institutionMatchesKeyword(i, 'teleportation')
+          || institutionMatchesKeyword(i, 'planar')
+          || institutionMatchesKeyword(i, 'airship'))
+        && !isOwnProcessor(i));
       const isEntrepotRoute = ['crossroads', 'port', 'river'].includes(tradeRoute)
         || (isArcaneChain && hasMagicTransit);
 
