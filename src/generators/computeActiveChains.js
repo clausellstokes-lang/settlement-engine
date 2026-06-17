@@ -95,6 +95,43 @@ export function institutionMatchesKeyword(inst, keyword) {
   return String(inst?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
 }
 
+// ── Export-gate id-set (A+ generators.6). The export extraction/processing
+// gates match by whole-name predicates with one bespoke special case: the
+// 'mill' keyword must NOT match "access to external mill" (a non-local access
+// note), only the real processing units. Build the gate's id-set from that
+// EXACT predicate so id-match === name-predicate-match by construction, and the
+// hand-rolled special case no longer has to live at every call site.
+const _gateKeywordIdSets = new Map();
+function gateKeywordPredicate(kw) {
+  if (kw === 'mill') {
+    return (n) => (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill')
+      && !n.includes('access to external');
+  }
+  return (n) => n.includes(kw);
+}
+function gateKeywordIdSet(kw) {
+  let set = _gateKeywordIdSets.get(kw);
+  if (!set) {
+    const pred = gateKeywordPredicate(kw);
+    set = new Set();
+    for (const name of ALL_CATALOG_NAMES) {
+      if (pred(name.toLowerCase())) {
+        const id = catalogIdForName(name);
+        if (id) set.add(id);
+      }
+    }
+    _gateKeywordIdSets.set(kw, set);
+  }
+  return set;
+}
+
+/** Export-gate membership: id-first for stamped, bespoke name predicate fallback. */
+export function institutionMatchesGate(inst, keyword) {
+  const kw = String(keyword || '').toLowerCase();
+  if (inst?.catalogId) return gateKeywordIdSet(kw).has(inst.catalogId);
+  return gateKeywordPredicate(kw)(String(inst?.name || '').toLowerCase());
+}
+
 // Map resource labels → RESOURCE_DATA keys for matching
 // Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words
 function resourceLabelToKey(label) {
@@ -135,7 +172,6 @@ const _INCOME_TO_CHAINS = {
 
 export function computeActiveChains(institutions = [], resources = [], tier = 'village', tradeRoute = 'road', tradeDependencies = [], depletedResources = [], magicPriority = 50) {
   const insts = institutions.filter(Boolean);
-  const instNames = institutions.map(i => (i.name || '').toLowerCase());
 
   // Helper: does this settlement have an institution matching any of the names?
   // Id-first for stamped institutions (rename-proof), substring fallback otherwise.
@@ -259,13 +295,13 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // External mill detection: if the settlement has "Access to external mill" but no
       // actual local mill institution, the grain chain functions (food security is real)
       // but surplus cannot be exported — the lord's mill toll captures any excess.
-      // NOTE: can't use matchedInsts for this check because the fuzzy slice(0,12) match
-      // causes "Mill" processingInstitution to match "access to external mill" in instNames.
-      // Instead check actual institution names directly.
-      const hasLocalMill = instNames.some(n =>
-        (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill')
-      );
-      const hasExternalMill = instNames.some(n => n.includes('access to external mill'));
+      // Id-first (A+ generators.6): the local-mill gate reuses the shared
+      // export-gate matcher (its 'mill' predicate already excludes "access to
+      // external mill"); external-mill access is a plain keyword match. Both are
+      // rename-proof for stamped institutions and id===name-predicate by
+      // construction, so this check no longer hand-rolls the mill name special-case.
+      const hasLocalMill = insts.some(i => institutionMatchesGate(i, 'mill'));
+      const hasExternalMill = insts.some(i => institutionMatchesKeyword(i, 'access to external mill'));
       // The banalité lockout applies ONLY to a chain whose processing happens at an
       // EXTERNAL mill — i.e. the chain itself lists "Access to external mill" as a
       // processing option (today, only the grain chain). A prior fix scoped on
@@ -591,19 +627,11 @@ export function deriveExportsFromChains(activeChains, nearbyResources, tier, rou
   // Use actual settlement institution names for gating processed exports.
   // This prevents "Access to external mill" from passing the 'mill' keyword check —
   // we match only the institution name as a whole, not substrings of longer names.
-  const _settlementInstNames = institutions.map(i => (i.name || '').toLowerCase());
-  const _hasInstForGate = (keyword) => {
-    const kw = keyword.toLowerCase();
-    // Special case: "mill" keyword should NOT match "access to external mill"
-    // Only match institutions that ARE the processing unit, not access to one elsewhere
-    if (kw === 'mill') {
-      return _settlementInstNames.some(n =>
-        (n === 'mill' || n.startsWith('mills (') || n === 'maltster' || n === 'sawmill') &&
-        !n.includes('access to external')
-      );
-    }
-    return _settlementInstNames.some(n => n.includes(kw));
-  };
+  // Id-first for stamped institutions (rename-proof exports), with the bespoke
+  // gate name-predicate — including the 'mill' ≠ "access to external mill"
+  // special case — preserved as the fallback for unstamped institutions
+  // (A+ generators.6). id-match === name-predicate by construction → golden-stable.
+  const _hasInstForGate = (keyword) => institutions.some(i => institutionMatchesGate(i, keyword));
 
   nearbyResources.forEach(rk => {
     if (depletedKeys.has(rk)) return; // depleted: no surplus to export

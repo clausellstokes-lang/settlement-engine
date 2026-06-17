@@ -36,6 +36,7 @@ import {
   computeActiveChains,
   institutionMatchesProcessor,
   institutionMatchesKeyword,
+  institutionMatchesGate,
   deriveInstitutionalServices,
   processorPatternIdSet,
 } from '../../src/generators/computeActiveChains.js';
@@ -366,6 +367,44 @@ describe('deriveInstitutionalServices decides membership by id (rename-proof)', 
     const named = [{ id: 'i1', name: 'Banking houses' }];
     const stamped = [{ id: 'i1', name: 'Banking houses', catalogId: catalogIdForName('Banking houses') }];
     expect(deriveInstitutionalServices(stamped)).toEqual(deriveInstitutionalServices(named));
+  });
+});
+
+// ── 3d. export gates are id-first, mill special-case preserved (A+ generators.6)
+
+describe('export institution gates decide by id, keep the mill special-case', () => {
+  it('the mill gate matches real processing units (id) but NOT "access to external mill"', () => {
+    expect(institutionMatchesGate({ name: 'Sawmill', catalogId: catalogIdForName('Sawmill') }, 'mill')).toBe(true);
+    expect(institutionMatchesGate({ name: 'Mill', catalogId: catalogIdForName('Mill') }, 'mill')).toBe(true);
+    // The frozen false-match the special case exists to prevent — preserved.
+    expect(institutionMatchesGate(
+      { name: 'Access to external mill', catalogId: catalogIdForName('Access to external mill') }, 'mill',
+    )).toBe(false);
+  });
+
+  it('a stamped-renamed sawmill still satisfies the mill gate; a bare rename does not', () => {
+    const renamedStamped = { id: 'i1', name: 'The Old Wheel', catalogId: catalogIdForName('Sawmill') };
+    const renamedBare = { id: 'i1', name: 'The Old Wheel' };
+    expect(catalogIdForName('Sawmill')).toBeTruthy();
+    expect(institutionMatchesGate(renamedStamped, 'mill')).toBe(true);
+    expect(institutionMatchesGate(renamedBare, 'mill')).toBe(false);
+  });
+
+  it('id-gate === name-predicate for catalog institutions (no drift) on a representative keyword set', () => {
+    const KEYWORDS = ['mill', 'mine', 'smith', 'tannery', 'weaver', 'brewery', 'dock', 'quarry'];
+    const disagreements = [];
+    for (const name of ALL_CATALOG_NAMES) {
+      const lower = name.toLowerCase();
+      const stamped = { name, catalogId: catalogIdForName(name) };
+      for (const kw of KEYWORDS) {
+        const idMatch = institutionMatchesGate(stamped, kw);
+        const predMatch = kw === 'mill'
+          ? (lower === 'mill' || lower.startsWith('mills (') || lower === 'maltster' || lower === 'sawmill') && !lower.includes('access to external')
+          : lower.includes(kw);
+        if (idMatch !== predMatch) disagreements.push(`${name} × ${kw}`);
+      }
+    }
+    expect(disagreements).toEqual([]);
   });
 });
 
