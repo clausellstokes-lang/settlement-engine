@@ -214,18 +214,20 @@ export default [
     ),
   },
 
-  // ── A+ P1.4 — component size ratchet (max-lines) ─────────────────────────────
-  // Six god-components currently exceed 600 lines (WorldMap 1338, EventComposer
-  // 1208, CompendiumPanel 1165, GenerateWizard 1140, SettlementsPanel 1104,
-  // OutputContainer 1019). They WARN (a visible burn-down worklist), they don't
-  // block. Everything else is already under 600, so the ratchet prevents any NEW
-  // god-component from the moment it lands. After the Phase-2 decompositions bring
-  // the six under 600, flip 'warn'→'error' and lower max to 500.
-  // @enforced-by eslint max-lines (this rule)
+  // ── A+ P1.4 + components-core — component size ratchet (max-lines) ───────────
+  // The ten historical god-components (WorldMap 1338, EventComposer 1208,
+  // CompendiumPanel 1165, GenerateWizard 1140, SettlementsPanel 1104,
+  // OutputContainer 1019, SettlementDetail, WorldPulsePanel, AdminTrendsPanel,
+  // AccountPage) have all been decomposed below 600 effective lines via
+  // behavior-preserving extraction (Track C). Every src/components/**/*.jsx file
+  // is now under 600, so the ratchet is promoted from 'warn' to 'error': a NEW
+  // god-component fails the gate the moment it lands.
+  // @enforced-by max-lines (this rule)
+  // (Future tightening: lower max to 500 once the remaining 5xx files are split.)
   {
     files: ['src/components/**/*.jsx'],
     rules: {
-      'max-lines': ['warn', { max: 600, skipBlankLines: true, skipComments: true }],
+      'max-lines': ['error', { max: 600, skipBlankLines: true, skipComments: true }],
     },
   },
 

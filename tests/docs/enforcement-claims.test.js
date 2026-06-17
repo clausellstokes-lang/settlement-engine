@@ -202,8 +202,10 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
   //    rule must all be REJECTED; a real error-rule / referenced script ACCEPTED.
   describe('resolver discriminates (negative + positive controls)', () => {
     it('rejects an eslint rule that is only at warn severity', () => {
-      // max-lines is warn (not error) for the component layer — a downgrade must not pass.
-      expect(resolveTarget('max-lines').ok).toBe(false);
+      // react-hooks/exhaustive-deps is intentionally warn (not error) — a claim
+      // backed only by a warn-severity rule must not pass. (max-lines was promoted
+      // to error in components-core, so it is no longer a valid warn example.)
+      expect(resolveTarget('react-hooks/exhaustive-deps').ok).toBe(false);
     });
     it('rejects a missing test/file path', () => {
       expect(resolveTarget('tests/__does_not_exist__/missing.test.js').ok).toBe(false);
