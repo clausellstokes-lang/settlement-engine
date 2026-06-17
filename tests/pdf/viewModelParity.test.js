@@ -13,6 +13,7 @@
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
+import { deriveFoodBalance } from '../../src/domain/display/dossierViewModel.js';
 
 // One key per on-screen dossier section (OutputContainer tabs). aiAppendix is
 // intentionally excluded - it only exists in the AI-narrative path.
@@ -40,4 +41,36 @@ describe('PDF viewModel parity', () => {
     expect(vm.active).toBeTruthy();
     expect(vm.narrativeMode).toBe(false);
   });
+});
+
+// A+ P1.8 — field-level VALUE parity (not just key-existence). The PDF must render
+// the SAME food-balance numbers the shared deriveFoodBalance produces (the value the
+// on-screen dossier shows), across every slice that surfaces them — so a slice can't
+// silently read the raw, unclamped metrics.foodBalance and drift from the screen.
+// (Convergence of the remaining richer foodBalance objects — viability slice — is
+// Phase-2 Track G; this harness pins the headline scalar facts now.)
+describe('PDF viewModel — food-balance value parity with deriveFoodBalance', () => {
+  const configs = [
+    { settType: 'thorp', culture: 'norse', terrain: 'mountain', tradeRouteAccess: 'isolated' },
+    { settType: 'town', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'road' },
+    { settType: 'city', culture: 'imperial', terrain: 'coast', tradeRouteAccess: 'port' },
+  ];
+
+  for (const cfg of configs) {
+    it(`overview + identity-anchor food match canonical for ${cfg.settType}/${cfg.terrain}`, () => {
+      const s = generateSettlementPipeline(cfg, null, { seed: `parity-${cfg.settType}-2026`, customContent: {} });
+      const canonical = deriveFoodBalance(s);
+      const vm = buildViewModel({ settlement: s });
+
+      // overview slice coalesces 0 → null (`m.deficit || null`); normalize for compare.
+      expect(vm.overview.foodBalance.deficit ?? 0).toBe(canonical.deficit);
+      expect(vm.overview.foodBalance.surplus ?? 0).toBe(canonical.surplus);
+      expect(vm.overview.foodBalance.deficitPct).toBe(canonical.deficitPct);
+
+      // identity anchor (mirrors the DailyLifeTab anchor) must use the clamped helper
+      // value, not the raw unclamped field (the divergence this harness closed).
+      expect(vm.identity.anchor.foodDeficit).toBe(canonical.deficit);
+      expect(vm.identity.anchor.foodSurplus).toBe(canonical.surplus);
+    });
+  }
 });

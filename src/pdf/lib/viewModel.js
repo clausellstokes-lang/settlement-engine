@@ -277,7 +277,10 @@ function identitySlice(s) {
   const ec = s?.economicState || {};
   const dp = s?.defenseProfile || {};
   const sp = ec?.safetyProfile || {};
-  const fb = s?.economicViability?.metrics?.foodBalance || null;
+  // A+ P1.8: source food via the shared deriveFoodBalance (clamped, screen-parity),
+  // not the raw unclamped metrics.foodBalance — the anchor mirrors DailyLifeTab, so
+  // it must show the same number the screen + the PDF overview do (one source per fact).
+  const food = deriveFoodBalance(s);
   const governing = getGoverningFaction(s);
   return {
     name:           s?.name || 'Unnamed Settlement',
@@ -303,8 +306,8 @@ function identitySlice(s) {
       prosperity:     ec?.prosperity || null,
       complexity:     ec?.economicComplexity || null,
       safety:         sp?.safetyLabel || null,
-      foodDeficit:    fb?.deficit ?? null,
-      foodSurplus:    fb?.surplus ?? null,
+      foodDeficit:    food.deficit ?? null,
+      foodSurplus:    food.surplus ?? null,
       culturalNotes:  s?.culturalNotes || null,
       magicDependency: !!dp?.magicDependency,
       magicalCapability: dp?.magicalCapability || null,
