@@ -1,4 +1,5 @@
 import { normalizeSimulationRules } from './simulationRules.js';
+import { wallClockNow } from '../clock.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 1;
 
@@ -103,7 +104,7 @@ export function ensureWorldState(raw = {}, campaign = {}) {
   };
 }
 
-export function canonizeWorldState(worldState, now = new Date().toISOString(), campaign = {}) {
+export function canonizeWorldState(worldState, now = wallClockNow(), campaign = {}) {
   const current = ensureWorldState(worldState, campaign);
   return {
     ...current,
@@ -156,7 +157,7 @@ export function updateProposalStatus(worldState, proposalId, status, patch = {})
     ...current,
     proposals: current.proposals.map(proposal => (
       proposal.id === proposalId
-        ? { ...proposal, ...patch, status, updatedAt: patch.updatedAt || new Date().toISOString() }
+        ? { ...proposal, ...patch, status, updatedAt: patch.updatedAt || wallClockNow() }
         : proposal
     )),
   };

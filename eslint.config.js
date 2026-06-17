@@ -170,11 +170,17 @@ export default [
   // a flag()/Math.random() trio). This locks the entropy/env/config leak classes by
   // CONSTRUCTION: no Math.random(), no import.meta, and no importing lib config/store
   // modules (flags/saves/campaigns) from domain. @enforced-by this rule block.
-  // NOTE: the wall-clock ban (new Date()/Date.now()) is intentionally staged for the
-  // Phase-2 now-threading track (Track A) — ~20 `now = new Date()` default-param
-  // fallbacks must be threaded deterministically first, or it would red the gate.
+  // NOTE: the wall-clock ban (new Date()/Date.now()) is now active — the Phase-2
+  // now-threading track (Track A) finished threading the ~20 `now = new Date()`
+  // default-param fallbacks, so this block bans no-arg `new Date()` and `Date.now()`
+  // alongside Math.random()/import.meta. src/domain/clock.js is the sole exemption
+  // (the documented wall-clock seam, mirroring rngContext/prng for randomness); a
+  // source-regex guard (tests/domain/domainWallClock.test.js) backs this up if lint
+  // is skipped. Parsing calls (`new Date(someValue)`) are deterministic-given-input
+  // and intentionally NOT matched — only the no-arg readers are.
   {
     files: ['src/domain/**/*.js'],
+    ignores: ['src/domain/clock.js'],
     rules: {
       'no-restricted-syntax': ['error',
         {
@@ -184,6 +190,14 @@ export default [
         {
           selector: "MetaProperty[meta.name='import']",
           message: 'Purity: no import.meta in the domain kernel — it reads build/env config. Pass config in as an argument.',
+        },
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Determinism: new Date() reads wall-clock — thread `now` from the caller (default wallClockNow() from domain/clock.js, the sole sanctioned wall-clock entry).',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Determinism: Date.now() reads wall-clock — use wallClockMs() from domain/clock.js (the sole sanctioned entry) or thread a value in.',
         },
       ],
       'no-restricted-imports': ['error', {

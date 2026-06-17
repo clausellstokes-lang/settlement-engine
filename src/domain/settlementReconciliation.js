@@ -1,4 +1,5 @@
 import { preserveWorldConditions, worldAuthoredConditions } from './worldPulse/reconcile.js';
+import { wallClockNow } from './clock.js';
 
 function conditionId(condition) {
   return condition?.archetype || condition?.id || condition?.label || null;
@@ -14,7 +15,7 @@ export function reconcileSettlementChange(nextSettlement, priorSettlement, optio
   const carried = worldAuthoredConditions(priorSettlement).map(conditionId).filter(Boolean);
   const reconciled = preserveWorldConditions(nextSettlement, priorSettlement);
   const entry = {
-    at: options.now || new Date().toISOString(),
+    at: options.now || wallClockNow(),
     source: options.source || 'settlement_change',
     changeType: compactLabel(options.changeType) || 'update',
     changeLabel: compactLabel(options.changeLabel),

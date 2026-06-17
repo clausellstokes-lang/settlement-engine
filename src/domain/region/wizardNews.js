@@ -1,5 +1,6 @@
 import { goodCriticality } from './goodsCatalog.js';
 import { ensureRegionalGraph } from './graph.js';
+import { wallClockNow } from '../clock.js';
 
 export const WIZARD_NEWS_SCHEMA_VERSION = 1;
 export const WIZARD_NEWS_SIGNIFICANCE = Object.freeze({
@@ -52,7 +53,7 @@ const TRANSITION_LABELS = Object.freeze({
 });
 
 function nowIso() {
-  return new Date().toISOString();
+  return wallClockNow();
 }
 
 function finiteNumber(value, fallback = 0) {

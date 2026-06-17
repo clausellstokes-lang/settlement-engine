@@ -38,12 +38,13 @@ import { mapEventToPartyImpact } from './partyEventLinkage.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { reconcileSettlementChange } from '../settlementReconciliation.js';
 import { twinDirectiveForEvent } from '../crisisLifecycle.js';
+import { wallClockNow } from '../clock.js';
 
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
 }
 
-export function drainQueuedEvents({ queue = [], saves = [], now = new Date().toISOString(), tick = null } = {}) {
+export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow(), tick = null } = {}) {
   const updates = [];
   const twinDirectives = [];
   const partyImpacts = [];

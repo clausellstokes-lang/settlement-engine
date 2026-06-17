@@ -16,6 +16,7 @@ import {
 } from './graph.js';
 import { goodCriticality } from './goodsCatalog.js';
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
+import { wallClockNow } from '../clock.js';
 
 const REGIONAL_RULE_TYPES = new Set([
   'trade_dependency',
@@ -135,7 +136,7 @@ function impact(channel, localDelta, change, kind, goods, detail = {}) {
       chainId: change.chain?.id || null,
     },
     explanation: detail.explanation || explainImpact(kind, channel, localDelta, goods),
-    createdAt: new Date().toISOString(),
+    createdAt: wallClockNow(),
   };
 }
 
@@ -262,7 +263,7 @@ function waveImpactForChannel(channel, sourceImpact, depth, decay) {
       chainId: sourceImpact.sourceChange?.chainId || null,
     },
     explanation: `${sourceImpact.explanation || 'Regional pressure'} The pressure continues through ${channel.type.replace(/_/g, ' ')}.`,
-    createdAt: new Date().toISOString(),
+    createdAt: wallClockNow(),
   };
 }
 
