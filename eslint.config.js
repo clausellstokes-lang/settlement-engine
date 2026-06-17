@@ -164,6 +164,36 @@ export default [
     },
   },
 
+  // ── A+ P1.2 — Determinism/purity guard widened to the domain kernel ──────────
+  // The domain layer must be a pure function of its inputs (see P0.5, which removed
+  // a flag()/Math.random() trio). This locks the entropy/env/config leak classes by
+  // CONSTRUCTION: no Math.random(), no import.meta, and no importing lib config/store
+  // modules (flags/saves/campaigns) from domain. @enforced-by this rule block.
+  // NOTE: the wall-clock ban (new Date()/Date.now()) is intentionally staged for the
+  // Phase-2 now-threading track (Track A) — ~20 `now = new Date()` default-param
+  // fallbacks must be threaded deterministically first, or it would red the gate.
+  {
+    files: ['src/domain/**/*.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          message: 'Determinism: the domain kernel must be pure — no Math.random(). Thread a seeded/derived value from the caller.',
+        },
+        {
+          selector: "MetaProperty[meta.name='import']",
+          message: 'Purity: no import.meta in the domain kernel — it reads build/env config. Pass config in as an argument.',
+        },
+      ],
+      'no-restricted-imports': ['error', {
+        patterns: [{
+          group: ['**/lib/flags', '**/lib/flags.js', '**/lib/saves', '**/lib/saves.js', '**/lib/campaigns', '**/lib/campaigns.js'],
+          message: 'Purity: the domain kernel must not import lib config/store modules. Pass values in as arguments.',
+        }],
+      }],
+    },
+  },
+
   // ── Accessibility (jsx-a11y) — ERROR (hardened 2026-06) ──────────────────────
   // The component/PDF JSX layer is excluded from tsc and had no a11y linting, so
   // accessibility gaps accumulated invisibly. These started at WARN for an
