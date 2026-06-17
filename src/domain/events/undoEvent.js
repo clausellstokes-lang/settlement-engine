@@ -87,6 +87,10 @@ const ENTITY_GRAPH_KEYS = Object.freeze(['npcs', 'institutions', 'powerStructure
 // Roster-only events that mutate NPC records in place (no impairment
 // propagation, no condition) — only the npcs subtree needs the pre-event copy.
 const NPC_ROSTER_KEYS = Object.freeze(['npcs']);
+// Every container a stressor can sit in (mutate.js removedThreat's sweep +
+// crisisResolve). REMOVED_THREAT and RESOLVE_STRESSOR strike a live stressor
+// entry with no provenance stamp, so the pre-event copy is the only way back.
+const STRESS_CONTAINER_KEYS = Object.freeze(['stressors', 'stress', 'stresses']);
 
 const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   CHANGE_RULING_POWER: Object.freeze(['powerStructure']),
@@ -116,6 +120,26 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   KILL_NPC:            ENTITY_GRAPH_KEYS,
   KILL_LEADER:         ENTITY_GRAPH_KEYS,
   REMOVE_INSTITUTION:  ENTITY_GRAPH_KEYS,
+  // Same in-place-edit-without-provenance gap, found by the whole-registry undo
+  // round-trip pin (A+ domain.5):
+  //  - ASSIGN_NPC_TO_ROLE rewrites an NPC's role/quality/standing in place and
+  //    clears prior staffing impairments on the linked institution;
+  //  - RESTORE_INSTITUTION / RESTORE_FACTION DELETE impairments from the entity,
+  //    so undo (which only strips impairments tagged with ITS own id) cannot put
+  //    the cleared impairment back — the pre-event copy is the only way back.
+  ASSIGN_NPC_TO_ROLE:  ENTITY_GRAPH_KEYS,
+  RESTORE_INSTITUTION: ENTITY_GRAPH_KEYS,
+  RESTORE_FACTION:     ENTITY_GRAPH_KEYS,
+  // REMOVED_THREAT strikes a live stressor entry from the stressors/stress/
+  // stresses containers with a plain array splice — no provenance stamp and no
+  // stressorEdits record, so without the pre-event copy the stressor is lost
+  // permanently on undo. (RESOLVE_STRESSOR deliberately does NOT snapshot these
+  // containers: it routes through the crisis lifecycle, which restores the
+  // stressorEdits record so the live entry returns on the next regeneration —
+  // a documented limitation pinned by tests/joins/crisisTripleSync.test.js.
+  // Resurrecting the live entry directly there would double-count against that
+  // regeneration path, so RESOLVE_STRESSOR's live-entry residue is expected.)
+  REMOVED_THREAT:      STRESS_CONTAINER_KEYS,
 });
 
 // The dual-written record keys mirrored into the raw _config. The handlers
