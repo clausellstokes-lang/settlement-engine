@@ -1,6 +1,8 @@
 import { useState, useEffect, lazy, Suspense, Component } from 'react';
-import {Link2, ChevronLeft, X, FileText, RotateCcw, Loader2, Edit3, Lock, Share2} from 'lucide-react';
+import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2} from 'lucide-react';
 import ShareToGallery from './ShareToGallery.jsx';
+import Button from './primitives/Button.jsx';
+import IconButton from './primitives/IconButton.jsx';
 // Settlement PDF export drags in @react-pdf/renderer (~1MB) plus all PDF
 // section components. Import lazily on user click so opening a settlement
 // detail view doesn't pay for export machinery up front.
@@ -331,9 +333,9 @@ export default function SettlementDetail({
       <style>{'@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}'}</style>
       <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16,padding:'12px 14px',background:swatch['#F5EDE0'],border:`1px solid ${BORDER}`,borderRadius:8}}>
         <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-          <button onClick={()=>{setDetail(null);setLinking(false);}} style={{display:'flex',alignItems:'center',gap:5,background:'rgba(255,251,245,0.96)',border:`1px solid ${BORDER}`,borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:FS.sm,fontWeight:700,color:SECOND,fontFamily:sans}}>
-            <ChevronLeft size={13}/> Back to list
-          </button>
+          <Button variant="secondary" size="sm" icon={<ChevronLeft size={13}/>} onClick={()=>{setDetail(null);setLinking(false);}}>
+            Back to list
+          </Button>
           <span style={{fontFamily:serif_,fontSize:FS.lg,fontWeight:600,color:INK}}>{detail.name}</span>
           <PhaseBadge />
           <span style={{flex:1}} />
@@ -346,13 +348,15 @@ export default function SettlementDetail({
               : 'This save has no narrative layer. The raw simulator output is shown.'}
           />
           {editMode && narrated && (
-            <button
+            <Button
+              variant="ai"
+              size="sm"
+              icon={<RotateCcw size={12}/>}
               onClick={handleRevertToRaw}
               title="Clear the narrative refinement and daily-life prose on this save, returning it to the raw simulator output. Chronicle history is preserved."
-              style={{display:'flex',alignItems:'center',gap:5,background:CARD,color:swatch.ai,border:'1px solid rgba(160,100,220,0.45)',borderRadius:5,padding:'5px 10px',cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}
             >
-              <RotateCcw size={12}/> Revert to Raw
-            </button>
+              Revert to Raw
+            </Button>
           )}
 
           {/* Tier 5.4 — Edited badge surfaces when ANY field on this
@@ -377,7 +381,10 @@ export default function SettlementDetail({
           {/* Tier 5.4 — Edit-mode toggle. Premium-gated; non-premium
               users see a greyed-out variant that opens the pricing
               modal so they understand it's a premium feature. */}
-          <button
+          <Button
+            variant={!canEdit ? 'secondary' : 'ai'}
+            size="sm"
+            icon={!canEdit ? <Lock size={12}/> : <Edit3 size={12}/>}
             onClick={() => {
               if (canEdit) { toggleEditMode(); }
               else if (setPurchaseModalOpen) { setPurchaseModalOpen(true); }
@@ -387,51 +394,32 @@ export default function SettlementDetail({
                   ? 'Stop editing. Fields return to read-only display.'
                   : 'Edit dossier prose in place. Edits are preserved across rerolls and respected by the AI overlay.')
               : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
-            style={{
-              display:'flex',alignItems:'center',gap:5,
-              background: !canEdit ? '#e8e0d2' : (editMode ? '#6a2a9a' : CARD),
-              color: !canEdit ? MUTED : (editMode ? '#fff' : '#6a2a9a'),
-              border: `1px solid ${!canEdit ? BORDER : 'rgba(160,100,220,0.45)'}`,
-              borderRadius:5, padding:'5px 10px',
-              cursor:'pointer',
-              fontSize:FS.xs, fontWeight:700, fontFamily:sans,
-              opacity: !canEdit ? 0.85 : 1,
-            }}
           >
             {!canEdit
-              ? <><Lock size={12}/> Edit (Premium)</>
-              : (editMode ? <><Edit3 size={12}/> Stop Editing</> : <><Edit3 size={12}/> Edit Dossier</>)}
-          </button>
-          <button
-            disabled={exporting}
+              ? 'Edit (Premium)'
+              : (editMode ? 'Stop Editing' : 'Edit Dossier')}
+          </Button>
+          <Button
+            variant="danger"
+            size="sm"
+            busy={exporting}
+            icon={<FileText size={12}/>}
             onClick={() => setExportSheetOpen(true)}
             title="Choose Draft Brief / Canon Dossier / Timeline Packet."
-            style={{
-              display:'flex',alignItems:'center',gap:5,
-              background: exporting ? '#5a1414' : '#7a1a1a',
-              color:swatch.white,border:'none',borderRadius:5,padding:'5px 12px',
-              cursor: exporting ? 'wait' : 'pointer',
-              fontSize:FS.sm,fontWeight:700,fontFamily:sans,
-              opacity: exporting ? 0.85 : 1,
-            }}
           >
-            {exporting
-              ? <><Loader2 size={12} style={{animation:'spin 1s linear infinite'}}/> Building PDF…</>
-              : <><FileText size={12}/> Export Dossier</>}
-          </button>
+            {exporting ? 'Building PDF…' : 'Export Dossier'}
+          </Button>
           {saveId && (
-            <button
+            <Button
+              variant="info"
+              size="sm"
+              icon={<Share2 size={13}/>}
+              aria-pressed={shareOpen}
               onClick={() => setShareOpen(v => !v)}
               title="Publish this dossier to the public gallery, or manage its listing."
-              style={{
-                display:'flex',alignItems:'center',gap:5,
-                background: shareOpen ? '#1f4a6a' : swatch.info,
-                color:swatch.white,border:'none',borderRadius:5,padding:'5px 12px',
-                cursor:'pointer',fontSize:FS.sm,fontWeight:700,fontFamily:sans,
-              }}
             >
-              <Share2 size={13}/> {shareOpen ? 'Close Gallery' : (liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery')}
-            </button>
+              {shareOpen ? 'Close Gallery' : (liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery')}
+            </Button>
           )}
         </div>
       </div>
@@ -469,9 +457,9 @@ export default function SettlementDetail({
           clean dossier. */}
       {editMode && (<>
       <div style={{display:'flex',gap:8,marginBottom:12,alignItems:'center',flexWrap:'wrap'}}>
-        <button onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}} style={{padding:'7px 14px',background:swatch.info,color:swatch.white,border:'none',borderRadius:5,cursor:'pointer',fontFamily:sans,fontSize:FS.xs,fontWeight:700}}>
+        <Button variant="info" size="sm" onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}}>
           ↩ Apply Saved Configuration &amp; Regenerate
-        </button>
+        </Button>
         <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',borderRadius:4,border:`1px solid ${BORDER}`}}>
           Restores settings &amp; runs a fresh generation. The new settlement will differ from the saved one.
         </span>
@@ -548,7 +536,7 @@ export default function SettlementDetail({
           card here, under Edit Dossier. The toggle reveals the linking picker;
           the network list below shows existing links. */}
       <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden', marginBottom:14 }}>
-        <button onClick={()=>setLinking(v=>!v)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:linking?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
+        <button type="button" aria-pressed={linking} onClick={()=>setLinking(v=>!v)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:linking?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
           <Link2 size={14} color="#2a3a7a"/>
           <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
           <span style={{ fontSize:FS.xxs, color:MUTED }}>{linking?'Cancel':'Connect to another saved settlement'}</span>
@@ -567,9 +555,7 @@ export default function SettlementDetail({
             <div style={{width:6,height:6,borderRadius:'50%',background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
             <span style={{fontSize:FS.xxs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 6px',borderRadius:3}}>{rel}</span>
-            <button onClick={()=>removeNeighbour(i)} aria-label="Remove link" title="Remove link" style={{background:'none',border:'none',cursor:'pointer',color:MUTED,padding:2,display:'flex'}}>
-              <X size={13}/>
-            </button>
+            <IconButton Icon={X} label="Remove link" tone="ghost" size="md" onClick={()=>removeNeighbour(i)} />
           </div>;
         })}
       </div>}

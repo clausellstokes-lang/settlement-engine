@@ -1,6 +1,8 @@
 import { Check, CheckCheck, CircleSlash, FastForward, Network, RadioTower, RefreshCw, Sparkles } from 'lucide-react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 import { BORDER, BODY, CARD, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
 import RegionalCausalChainViewer from './RegionalCausalChainViewer.jsx';
 
@@ -67,119 +69,56 @@ export default function RegionalGraphSummary({
         </span>
         {availableImpacts.length > 1 && (
           <>
-            <button
-              type="button"
+            <IconButton
+              Icon={CheckCheck}
+              label="Apply all queued regional impacts"
               onClick={() => onApplyAllImpacts?.(campaign.id)}
-              title="Apply all queued regional impacts"
-              style={{
-                marginLeft: 'auto',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 24,
-                height: 24,
-                border: 'none',
-                borderRadius: 5,
-                background: swatch.success,
-                color: swatch.white,
-                cursor: 'pointer',
-              }}
-            >
-              <CheckCheck size={13} />
-            </button>
-            <button
-              type="button"
+              tone="primary"
+              size="md"
+              style={{ marginLeft: 'auto' }}
+            />
+            <IconButton
+              Icon={CircleSlash}
+              label="Ignore all queued regional impacts"
               onClick={() => onIgnoreAllImpacts?.(campaign.id)}
-              title="Ignore all queued regional impacts"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 24,
-                height: 24,
-                border: `1px solid ${BORDER}`,
-                borderRadius: 5,
-                background: CARD,
-                color: MUTED,
-                cursor: 'pointer',
-              }}
-            >
-              <CircleSlash size={13} />
-            </button>
+              tone="default"
+              size="md"
+            />
           </>
         )}
         {delayedImpacts.length > 0 && (
           <>
-            <button
-              type="button"
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={<FastForward size={11} />}
               onClick={() => onAdvanceImpacts?.(campaign.id, 1)}
               title="Advance regional impacts 1 tick"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 4,
-                padding: '4px 7px',
-                border: `1px solid ${BORDER}`,
-                borderRadius: 5,
-                background: CARD,
-                color: SECOND,
-                cursor: 'pointer',
-                fontSize: FS.xxs,
-                fontWeight: 800,
-                fontFamily: sans,
-                marginLeft: availableImpacts.length > 1 ? 0 : 'auto',
-              }}
+              style={{ marginLeft: availableImpacts.length > 1 ? 0 : 'auto' }}
             >
-              <FastForward size={11} />
               +1
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={<FastForward size={11} />}
               onClick={() => onAdvanceImpacts?.(campaign.id, 3)}
               title="Advance regional impacts 3 ticks"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 4,
-                padding: '4px 7px',
-                border: `1px solid ${BORDER}`,
-                borderRadius: 5,
-                background: CARD,
-                color: SECOND,
-                cursor: 'pointer',
-                fontSize: FS.xxs,
-                fontWeight: 800,
-                fontFamily: sans,
-              }}
             >
-              <FastForward size={11} />
               +3
-            </button>
+            </Button>
           </>
         )}
-        <button
-          type="button"
+        <Button
+          variant="gold"
+          size="sm"
+          icon={<RefreshCw size={11} />}
           onClick={() => onDiscover?.(campaign.id)}
           title="Discover regional channels"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 4,
-            padding: '4px 7px',
-            border: `1px solid ${BORDER}`,
-            borderRadius: 5,
-            background: GOLD_BG,
-            color: GOLD,
-            cursor: 'pointer',
-            fontSize: FS.xxs,
-            fontWeight: 800,
-            fontFamily: sans,
-            marginLeft: availableImpacts.length > 1 || delayedImpacts.length > 0 ? 0 : 'auto',
-          }}
+          style={{ marginLeft: availableImpacts.length > 1 || delayedImpacts.length > 0 ? 0 : 'auto' }}
         >
-          <RefreshCw size={11} />
           Discover
-        </button>
+        </Button>
       </div>
 
       {topSuggestions.length > 0 && (
@@ -205,25 +144,13 @@ export default function RegionalGraphSummary({
                   {Math.round((channel.confidence || 0) * 100)}% confidence · strength {Math.round((channel.strength || 0) * 100)}%
                 </div>
               </div>
-              <button
-                type="button"
+              <IconButton
+                Icon={Check}
+                label="Confirm channel"
                 onClick={() => onConfirmChannel?.(campaign.id, channel.id)}
-                title="Confirm channel"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 24,
-                  height: 24,
-                  border: 'none',
-                  borderRadius: 5,
-                  background: swatch.success,
-                  color: swatch.white,
-                  cursor: 'pointer',
-                }}
-              >
-                <Check size={13} />
-              </button>
+                tone="primary"
+                size="md"
+              />
             </div>
           ))}
         </div>
@@ -255,45 +182,21 @@ export default function RegionalGraphSummary({
                   {impactGoodsLabel(impact)} · severity {Math.round((impact.severity || 0) * 100)}%
                 </div>
               </div>
-              <button
-                type="button"
+              <IconButton
+                Icon={Check}
+                label={available ? 'Apply regional impact' : 'Impact is delayed'}
                 disabled={!available}
                 onClick={() => onApplyImpact?.(campaign.id, impact.id)}
-                title={available ? 'Apply regional impact' : 'Impact is delayed'}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 24,
-                  height: 24,
-                  border: 'none',
-                  borderRadius: 5,
-                  background: available ? swatch.success : BORDER,
-                  color: swatch.white,
-                  cursor: available ? 'pointer' : 'not-allowed',
-                }}
-              >
-                <Check size={13} />
-              </button>
-              <button
-                type="button"
+                tone="primary"
+                size="md"
+              />
+              <IconButton
+                Icon={CircleSlash}
+                label="Ignore regional impact"
                 onClick={() => onIgnoreImpact?.(campaign.id, impact.id)}
-                title="Ignore regional impact"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 24,
-                  height: 24,
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: 5,
-                  background: CARD,
-                  color: MUTED,
-                  cursor: 'pointer',
-                }}
-              >
-                <CircleSlash size={13} />
-              </button>
+                tone="default"
+                size="md"
+              />
             </div>
             );
           })}

@@ -10,8 +10,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useStore } from '../../store';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
+import Button from '../primitives/Button.jsx';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH,
+  GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH,
   sans, serif_, SP, R, FS, swatch,
 } from '../theme.js';
 
@@ -88,10 +89,7 @@ export default function GalleryMaps({ onNavigate }) {
         const memberList = Array.isArray(d.members) ? d.members : [];
         return (
           <div>
-            <button type="button" onClick={() => setViewingSlug(null)} style={{
-              marginBottom: SP.md, padding: `${SP.xs}px ${SP.sm}px`, borderRadius: R.md, cursor: 'pointer',
-              fontFamily: sans, fontSize: FS.xs, fontWeight: 600, color: SECOND, border: `1px solid ${BORDER}`, background: 'transparent',
-            }}>← Back to maps</button>
+            <Button variant="ghost" size="sm" onClick={() => setViewingSlug(null)} style={{ marginBottom: SP.md }}>← Back to maps</Button>
             {detailLoading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading preview…</p>}
             {!detailLoading && !d.slug && <p style={{ color: MUTED, fontSize: FS.sm }}>This map is no longer available.</p>}
             {!detailLoading && d.slug && (
@@ -118,13 +116,11 @@ export default function GalleryMaps({ onNavigate }) {
                       </div>
                     </div>
                   )}
-                  <button type="button" onClick={() => handleImport(d.slug, d.kind)} disabled={importingSlug === d.slug}
+                  <Button variant="gold" size="md" onClick={() => handleImport(d.slug, d.kind)} busy={importingSlug === d.slug}
                     title={isPremium ? 'Import into a new campaign' : 'Importing is a premium feature'}
-                    style={{ alignSelf: 'flex-start', marginTop: SP.xs, padding: `${SP.xs}px ${SP.md}px`, borderRadius: R.md,
-                      cursor: importingSlug === d.slug ? 'default' : 'pointer', fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: INK,
-                      border: `1px solid ${GOLD}`, background: GOLD_BG, opacity: importingSlug === d.slug ? 0.6 : 1 }}>
+                    style={{ alignSelf: 'flex-start', marginTop: SP.xs }}>
                     {importingSlug === d.slug ? 'Importing…' : (isPremium ? (d.kind === 'map_with_campaign' ? 'Import map + settlements' : 'Import map') : 'Import (premium)')}
-                  </button>
+                  </Button>
                 </div>
               </div>
             )}
@@ -167,29 +163,22 @@ export default function GalleryMaps({ onNavigate }) {
               )}
               <div style={{ flex: 1 }} />
               <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.xs }}>
-                <button
-                  type="button"
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => setViewingSlug(m.slug)}
                   title="Preview this map (and its settlements) before importing"
-                  style={{
-                    padding: `${SP.xs}px ${SP.sm}px`, borderRadius: R.md, cursor: 'pointer',
-                    fontFamily: sans, fontSize: FS.xs, fontWeight: 600, color: SECOND,
-                    border: `1px solid ${BORDER}`, background: 'transparent',
-                  }}
-                >View</button>
-                <button
-                  type="button"
+                >View</Button>
+                <Button
+                  variant="gold"
+                  size="sm"
                   onClick={() => handleImport(m.slug, m.kind)}
-                  disabled={importingSlug === m.slug}
+                  busy={importingSlug === m.slug}
                   title={isPremium ? 'Import this map into a new campaign' : 'Importing maps is a premium feature'}
-                  style={{
-                    flex: 1, padding: `${SP.xs}px ${SP.sm}px`, borderRadius: R.md, cursor: importingSlug === m.slug ? 'default' : 'pointer',
-                    fontFamily: sans, fontSize: FS.xs, fontWeight: 700, color: INK,
-                    border: `1px solid ${GOLD}`, background: GOLD_BG, opacity: importingSlug === m.slug ? 0.6 : 1,
-                  }}
+                  style={{ flex: 1 }}
                 >
                   {importingSlug === m.slug ? 'Importing…' : (isPremium ? 'Import' : 'Import (premium)')}
-                </button>
+                </Button>
               </div>
             </div>
           </div>

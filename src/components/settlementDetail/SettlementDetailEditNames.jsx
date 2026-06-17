@@ -1,4 +1,5 @@
-import { GOLD, INK, MUTED, BORDER, CARD, sans, serif_, FS, swatch } from '../theme';
+import { GOLD, INK, MUTED, BORDER, CARD, sans, serif_, FS } from '../theme';
+import Button from '../primitives/Button.jsx';
 
 // ── Edit Names ───────────────────────────────────────────────────────────────
 // Inline rename affordance for NPC & faction names. Presentational: all state
@@ -14,7 +15,8 @@ export default function SettlementDetailEditNames({
 }) {
   return (
       settlement&&<div style={{marginBottom:14,border:`1px solid ${BORDER}`,borderRadius:8,overflow:'hidden'}}>
-        <button onClick={()=>{setEditNamesOpen(v=>!v);setEditingName(null);setEditDraft('');}}
+        <button type="button" onClick={()=>{setEditNamesOpen(v=>!v);setEditingName(null);setEditDraft('');}}
+          aria-expanded={editNamesOpen}
           style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'10px 14px',
             background:editNamesOpen?'#f5ede0':CARD,border:'none',cursor:'pointer',textAlign:'left'}}>
           <span style={{fontFamily:serif_,fontSize:FS.md,fontWeight:600,color:INK,flex:1}}>
@@ -56,22 +58,16 @@ export default function SettlementDetailEditNames({
                         style={{flex:1,fontSize:FS.sm,padding:'3px 7px',border:`1px solid ${GOLD}`,
                           borderRadius:4,fontFamily:sans,color:INK}}
                       />
-                      <button onClick={()=>handleApplyRename('npc',npc.id,npc.name,editDraft)}
-                        style={{padding:'3px 10px',background:GOLD,color:swatch.white,border:'none',
-                          borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>
+                      <Button variant="primary" size="sm" onClick={()=>handleApplyRename('npc',npc.id,npc.name,editDraft)}>
                         Save
-                      </button>
-                      <button onClick={()=>{setEditingName(null);setEditDraft('');}}
-                        style={{padding:'3px 8px',background:CARD,color:MUTED,
-                          border:`1px solid ${BORDER}`,borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontFamily:sans}}>
+                      </Button>
+                      <Button variant="secondary" size="sm" onClick={()=>{setEditingName(null);setEditDraft('');}}>
                         Cancel
-                      </button></>
+                      </Button></>
                     : <><span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{npc.name}</span>
-                      <button onClick={()=>{setEditingName({type:'npc',id:npc.id,oldName:npc.name});setEditDraft(npc.name);}}
-                        style={{padding:'2px 9px',background:swatch.infoBg,color:swatch.info,
-                          border:'1px solid #c0c8e8',borderRadius:4,cursor:'pointer',fontSize:FS.xxs,fontWeight:700,fontFamily:sans}}>
+                      <Button variant="info" size="sm" onClick={()=>{setEditingName({type:'npc',id:npc.id,oldName:npc.name});setEditDraft(npc.name);}}>
                         Rename
-                      </button></>}
+                      </Button></>}
                 </div>;
               })}
             </div>
@@ -104,22 +100,16 @@ export default function SettlementDetailEditNames({
                         style={{flex:1,fontSize:FS.sm,padding:'3px 7px',border:`1px solid ${GOLD}`,
                           borderRadius:4,fontFamily:sans,color:INK}}
                       />
-                      <button onClick={()=>handleApplyRename('faction',fac.name,fac.name,editDraft)}
-                        style={{padding:'3px 10px',background:GOLD,color:swatch.white,border:'none',
-                          borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontWeight:700,fontFamily:sans}}>
+                      <Button variant="primary" size="sm" onClick={()=>handleApplyRename('faction',fac.name,fac.name,editDraft)}>
                         Save
-                      </button>
-                      <button onClick={()=>{setEditingName(null);setEditDraft('');}}
-                        style={{padding:'3px 8px',background:CARD,color:MUTED,
-                          border:`1px solid ${BORDER}`,borderRadius:4,cursor:'pointer',fontSize:FS.xs,fontFamily:sans}}>
+                      </Button>
+                      <Button variant="secondary" size="sm" onClick={()=>{setEditingName(null);setEditDraft('');}}>
                         Cancel
-                      </button></>
+                      </Button></>
                     : <><span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{fac.name}</span>
-                      <button onClick={()=>{setEditingName({type:'faction',id:fac.name,oldName:fac.name});setEditDraft(fac.name);}}
-                        style={{padding:'2px 9px',background:swatch.infoBg,color:swatch.info,
-                          border:'1px solid #c0c8e8',borderRadius:4,cursor:'pointer',fontSize:FS.xxs,fontWeight:700,fontFamily:sans}}>
+                      <Button variant="info" size="sm" onClick={()=>{setEditingName({type:'faction',id:fac.name,oldName:fac.name});setEditDraft(fac.name);}}>
                         Rename
-                      </button></>}
+                      </Button></>}
                 </div>;
               })}
             </div>

@@ -16,6 +16,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { User, ChevronDown, Settings, CreditCard } from 'lucide-react';
 import { GOLD, GOLD_BG, INK, BORDER, sans, FS, SP, R, swatch } from './theme.js';
+import Button from './primitives/Button.jsx';
 
 function MenuRow({ icon, label, onClick }) {
   const [hover, setHover] = useState(false);
@@ -74,24 +75,20 @@ export default function AccountMenu({
 
   if (isAnon) {
     return (
-      <button
-        type="button"
+      <Button
+        variant="gold"
+        size={compact ? 'sm' : 'md'}
+        icon={<User size={iconSize} />}
         onClick={onSignIn}
         style={{
-          display: 'flex', alignItems: 'center', gap: SP.xs,
-          padding: chipPad,
           marginLeft: compact ? 0 : SP.xs,
           minHeight: compact ? 44 : undefined,
-          background: GOLD_BG,
-          border: '1px solid rgba(160,118,42,0.3)',
-          borderRadius: R.md, cursor: 'pointer',
-          color: GOLD,
-          fontSize: chipFont, fontWeight: compact ? 700 : 600,
-          fontFamily: sans, letterSpacing: '0.04em', textTransform: 'uppercase',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase',
         }}
       >
-        <User size={iconSize} /> Sign In
-      </button>
+        Sign In
+      </Button>
     );
   }
 

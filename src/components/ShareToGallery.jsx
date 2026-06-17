@@ -21,7 +21,8 @@ import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '.
 import { validateDossier } from '../domain/validation/consistency.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
-import { GOLD, BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
+import Button from './primitives/Button.jsx';
+import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
 
 const MUTED = swatch['#6B5340'];
 const _BODY  = swatch['#4A3B22'];
@@ -350,29 +351,16 @@ export default function ShareToGallery({
         />
       </Field>
       {isPublic && (
-        <button
-          type="button"
+        <Button
+          variant="gold"
+          size="sm"
+          icon={<Save size={12} />}
           onClick={handleSaveDetails}
-          disabled={busy}
-          style={{
-            justifySelf: 'start',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 5,
-            minHeight: 30,
-            padding: '5px 9px',
-            border: `1px solid ${GOLD}`,
-            borderRadius: R.md,
-            background: CARD,
-            color: GOLD,
-            fontFamily: sans,
-            fontSize: FS.xs,
-            fontWeight: 850,
-            cursor: busy ? 'wait' : 'pointer',
-          }}
+          busy={busy}
+          style={{ justifySelf: 'start' }}
         >
-          <Save size={12} /> {savedDetails ? 'Saved' : 'Save gallery details'}
-        </button>
+          {savedDetails ? 'Saved' : 'Save gallery details'}
+        </Button>
       )}
     </div>
   );
@@ -394,47 +382,31 @@ export default function ShareToGallery({
         }}>
           <Globe size={11} /> Public
         </span>
-        <button
-          type="button"
+        <Button
+          variant="gold"
+          size="sm"
           onClick={handleCopy}
           title="Copy public URL"
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: 5,
-            padding: '4px 9px', borderRadius: R.md,
-            background: 'transparent', color: GOLD,
-            border: `1px solid ${GOLD}`,
-            fontSize: FS.xs, fontFamily: sans, cursor: 'pointer',
-          }}
+          icon={copied ? <Check size={12} /> : <Copy size={12} />}
         >
-          {copied ? <><Check size={12} /> Copied</> : <><Copy size={12} /> Copy link</>}
-        </button>
-        <button
-          type="button"
+          {copied ? 'Copied' : 'Copy link'}
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={() => setDetailsOpen(open => !open)}
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: 5,
-            padding: '4px 9px', borderRadius: R.md,
-            background: 'transparent', color: BODY,
-            border: `1px solid ${BORDER}`,
-            fontSize: FS.xs, fontFamily: sans, cursor: 'pointer',
-          }}
+          icon={<ImageIcon size={12} />}
         >
-          <ImageIcon size={12} /> Gallery details
-        </button>
-        <button
-          type="button"
+          Gallery details
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={handleUnpublish}
-          disabled={busy}
-          style={{
-            padding: '4px 9px', borderRadius: R.md,
-            background: 'transparent', color: MUTED,
-            border: `1px solid ${BORDER}`,
-            fontSize: FS.xs, fontFamily: sans, cursor: 'pointer',
-            opacity: busy ? 0.6 : 1,
-          }}
+          busy={busy}
         >
           {busy ? 'Working…' : 'Unshare'}
-        </button>
+        </Button>
         {error && (
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 4,
@@ -462,36 +434,25 @@ export default function ShareToGallery({
       display: 'flex', alignItems: 'center', gap: SP.sm,
       flexWrap: 'wrap', fontFamily: sans, width: '100%',
     }}>
-      <button
-        type="button"
+      <Button
+        variant="gold"
+        size="sm"
         onClick={handlePublish}
-        disabled={busy || !canonReady}
+        busy={busy}
+        disabled={!canonReady}
         title="Make this dossier readable to anyone with the link"
-        style={{
-          display: 'inline-flex', alignItems: 'center', gap: 5,
-          padding: '4px 10px', borderRadius: R.md,
-          background: 'transparent', color: GOLD,
-          border: `1px solid ${GOLD}`,
-          fontSize: FS.xs, fontFamily: sans, fontWeight: 700,
-          cursor: busy ? 'wait' : canonReady ? 'pointer' : 'not-allowed',
-          opacity: busy || !canonReady ? 0.6 : 1,
-        }}
+        icon={<Globe size={12} />}
       >
-        <Globe size={12} /> {busy ? 'Publishing…' : 'Share to gallery'}
-      </button>
-      <button
-        type="button"
+        {busy ? 'Publishing…' : 'Share to gallery'}
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
         onClick={() => setDetailsOpen(open => !open)}
-        style={{
-          display: 'inline-flex', alignItems: 'center', gap: 5,
-          padding: '4px 9px', borderRadius: R.md,
-          background: 'transparent', color: BODY,
-          border: `1px solid ${BORDER}`,
-          fontSize: FS.xs, fontFamily: sans, cursor: 'pointer',
-        }}
+        icon={<ImageIcon size={12} />}
       >
-        <ImageIcon size={12} /> Details
-      </button>
+        Details
+      </Button>
       {error && (
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 4,

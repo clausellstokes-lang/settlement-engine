@@ -3,6 +3,7 @@ import { Check, ExternalLink, RefreshCw, XCircle } from 'lucide-react';
 
 import { fetchGalleryReports, resolveGalleryReport } from '../../lib/gallery.js';
 import { navigate } from '../../hooks/useRoute.js';
+import Button from '../primitives/Button.jsx';
 import {
   BODY,
   BORDER,
@@ -10,10 +11,6 @@ import {
   CARD,
   CARD_ALT,
   FS,
-  GOLD,
-  GOLD_BG,
-  GREEN,
-  GREEN_BG,
   INK,
   MUTED,
   R,
@@ -55,36 +52,16 @@ function StatusPill({ status }) {
 }
 
 function ActionButton({ children, tone = 'secondary', busy, icon, onClick }) {
-  const cfg = tone === 'success'
-    ? { border: GREEN, bg: GREEN_BG, color: GREEN }
-    : tone === 'danger'
-      ? { border: RED, bg: RED_BG, color: RED }
-      : { border: BORDER, bg: CARD, color: SECOND };
   return (
-    <button
-      type="button"
+    <Button
+      variant={tone}
+      size="sm"
+      busy={busy}
+      icon={icon}
       onClick={onClick}
-      disabled={busy}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 5,
-        minHeight: 30,
-        padding: '5px 9px',
-        border: `1px solid ${cfg.border}`,
-        borderRadius: R.md,
-        background: cfg.bg,
-        color: cfg.color,
-        fontFamily: sans,
-        fontSize: FS.xs,
-        fontWeight: 850,
-        cursor: busy ? 'wait' : 'pointer',
-        opacity: busy ? 0.65 : 1,
-      }}
     >
-      {icon}
       {children}
-    </button>
+    </Button>
   );
 }
 
@@ -133,50 +110,28 @@ export default function GalleryModerationPanel() {
           {STATUS_OPTIONS.map(([id, label]) => {
             const active = status === id;
             return (
-              <button
+              <Button
                 key={id}
-                type="button"
+                variant={active ? 'gold' : 'ghost'}
+                size="sm"
+                aria-pressed={active}
                 onClick={() => setStatus(id)}
-                style={{
-                  minHeight: 32,
-                  padding: '6px 10px',
-                  border: 'none',
-                  borderRight: id === 'all' ? 'none' : `1px solid ${BORDER}`,
-                  background: active ? GOLD_BG : CARD,
-                  color: active ? GOLD : SECOND,
-                  fontFamily: sans,
-                  fontSize: FS.xs,
-                  fontWeight: 900,
-                  cursor: 'pointer',
-                }}
+                style={{ borderRadius: 0, border: 'none', borderRight: id === 'all' ? 'none' : `1px solid ${BORDER}` }}
               >
                 {label}
-              </button>
+              </Button>
             );
           })}
         </div>
-        <button
-          type="button"
+        <Button
+          variant="secondary"
+          size="sm"
+          busy={loading}
+          icon={<RefreshCw size={12} />}
           onClick={loadReports}
-          disabled={loading}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 5,
-            minHeight: 32,
-            padding: '6px 10px',
-            border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
-            background: CARD,
-            color: SECOND,
-            fontFamily: sans,
-            fontSize: FS.xs,
-            fontWeight: 850,
-            cursor: loading ? 'wait' : 'pointer',
-          }}
         >
-          <RefreshCw size={12} /> Refresh
-        </button>
+          Refresh
+        </Button>
       </div>
 
       {error && (
@@ -224,29 +179,16 @@ export default function GalleryModerationPanel() {
                     {human(report.tier)} / {human(report.reason)} / {report.reporterLabel} / {formatDate(report.createdAt)}
                   </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => report.slug && navigate('gallery', { params: { slug: report.slug } })}
+                <Button
+                  variant="secondary"
+                  size="sm"
                   disabled={!report.slug}
                   title="Open public dossier"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 4,
-                    minHeight: 30,
-                    padding: '5px 8px',
-                    border: `1px solid ${BORDER}`,
-                    borderRadius: R.md,
-                    background: CARD,
-                    color: report.slug ? GOLD : MUTED,
-                    fontFamily: sans,
-                    fontSize: FS.xs,
-                    fontWeight: 850,
-                    cursor: report.slug ? 'pointer' : 'not-allowed',
-                  }}
+                  icon={<ExternalLink size={12} />}
+                  onClick={() => report.slug && navigate('gallery', { params: { slug: report.slug } })}
                 >
-                  <ExternalLink size={12} /> Open
-                </button>
+                  Open
+                </Button>
               </div>
               {report.body && (
                 <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.45, whiteSpace: 'pre-wrap' }}>

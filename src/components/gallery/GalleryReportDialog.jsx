@@ -10,15 +10,14 @@ import {
   FS,
   GOLD,
   INK,
-  MUTED,
   R,
   RED,
   RED_BG,
-  SECOND,
   SP,
   sans,
-  swatch,
 } from '../theme.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 import { REPORT_REASON_OPTIONS } from './galleryUtils.js';
 
 export default function GalleryReportDialog({ dossier, auth, disabled, onReport }) {
@@ -60,30 +59,16 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
 
   return (
     <>
-      <button
-        type="button"
+      <Button
+        variant="secondary"
+        size="sm"
         onClick={requestOpen}
         disabled={disabled}
         title="Report settlement"
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 5,
-          minHeight: 28,
-          padding: '4px 8px',
-          border: `1px solid ${BORDER}`,
-          borderRadius: R.sm,
-          background: CARD,
-          color: SECOND,
-          fontFamily: sans,
-          fontSize: FS.xs,
-          fontWeight: 900,
-          cursor: disabled ? 'not-allowed' : 'pointer',
-          opacity: disabled ? 0.65 : 1,
-        }}
+        icon={<Flag size={13} />}
       >
-        <Flag size={13} /> Report
-      </button>
+        Report
+      </Button>
       {open && (
         <div
           role="presentation"
@@ -127,15 +112,15 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
               <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, fontWeight: 950 }}>
                 Report Settlement
               </h2>
-              <button
-                type="button"
-                aria-label="Close"
+              <IconButton
+                Icon={X}
+                label="Close"
+                tone="ghost"
+                size="lg"
                 onClick={() => setOpen(false)}
                 disabled={busy}
-                style={{ marginLeft: 'auto', border: 'none', background: 'transparent', color: MUTED, cursor: busy ? 'not-allowed' : 'pointer', padding: SP.xs }}
-              >
-                <X size={16} />
-              </button>
+                style={{ marginLeft: 'auto' }}
+              />
             </header>
             <div style={{ display: 'grid', gap: SP.md, padding: SP.lg }}>
               <label htmlFor="gallery-report-reason" style={{ display: 'grid', gap: 6, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
@@ -190,44 +175,22 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
                 </div>
               )}
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
-                <button
-                  type="button"
+                <Button
+                  variant="secondary"
+                  size="md"
                   onClick={() => setOpen(false)}
                   disabled={busy}
-                  style={{
-                    minHeight: 34,
-                    padding: '7px 12px',
-                    border: `1px solid ${BORDER}`,
-                    borderRadius: R.md,
-                    background: CARD,
-                    color: SECOND,
-                    fontFamily: sans,
-                    fontSize: FS.sm,
-                    fontWeight: 850,
-                    cursor: busy ? 'not-allowed' : 'pointer',
-                  }}
                 >
                   Cancel
-                </button>
-                <button
+                </Button>
+                <Button
                   type="submit"
-                  disabled={busy}
-                  style={{
-                    minHeight: 34,
-                    padding: '7px 12px',
-                    border: `1px solid ${GOLD}`,
-                    borderRadius: R.md,
-                    background: GOLD,
-                    color: swatch.white,
-                    fontFamily: sans,
-                    fontSize: FS.sm,
-                    fontWeight: 900,
-                    cursor: busy ? 'wait' : 'pointer',
-                    opacity: busy ? 0.7 : 1,
-                  }}
+                  variant="primary"
+                  size="md"
+                  busy={busy}
                 >
                   {busy ? 'Sending...' : 'Send report'}
-                </button>
+                </Button>
               </div>
             </div>
           </form>

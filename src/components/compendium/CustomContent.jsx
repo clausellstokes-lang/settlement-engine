@@ -8,6 +8,8 @@ import { useStore } from '../../store/index.js';
 import DeleteConfirmation from '../DeleteConfirmation';
 import { Tag } from './primitives.jsx';
 import { DependencySummary, DependenciesSection } from './Dependencies.jsx';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 // ── Custom Content Manager ──────────────────────────────────────────────────
 
@@ -193,18 +195,9 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
       {isAnon ? (
         <div style={{ fontSize: FS.sm, color: MUT }}>Sign in and upgrade to Premium to unlock.</div>
       ) : (
-        <button
-          onClick={() => setPurchaseModalOpen(true)}
-          style={{
-            padding: '10px 22px',
-            background: 'linear-gradient(135deg, #7c3aed 0%, #5a2a8a 100%)',
-            color: swatch.white, border: 'none', borderRadius: 7, cursor: 'pointer',
-            fontSize: FS.md, fontWeight: 700, fontFamily: sans, letterSpacing: '0.04em',
-            boxShadow: '0 3px 12px rgba(124,58,237,0.35)',
-          }}
-        >
+        <Button variant="ai" size="lg" onClick={() => setPurchaseModalOpen(true)}>
           Upgrade to Premium
-        </button>
+        </Button>
       )}
     </div>
   );
@@ -235,7 +228,7 @@ export function ReadOnlyCustomContentList({ search }) {
           const count = (customContent[c.key] || []).length;
           if (count === 0) return null;
           return (
-            <button key={c.key} onClick={() => setActiveCat(c.key)} style={{
+            <button key={c.key} type="button" onClick={() => setActiveCat(c.key)} style={{
               display: 'flex', alignItems: 'center', gap: 4, padding: '4px 10px',
               borderRadius: 12, fontSize: FS.xs,
               fontWeight: activeCat === c.key ? 700 : 500, cursor: 'pointer',
@@ -453,8 +446,8 @@ export function CustomContentManager({ search }) {
       )}
 
       <div style={{ display:'flex', gap:6, marginTop:8 }}>
-        <button onClick={handleSave} disabled={!draft.name?.trim()} style={{ padding:'5px 14px', background:draft.name?.trim()?'#5a2a8a':'#ccc', color:swatch.white, border:'none', borderRadius:4, cursor:draft.name?.trim()?'pointer':'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>{editingId?'Update':'Add'}</button>
-        <button onClick={resetDraft} style={{ padding:'5px 10px', background:CARD, color:SEC, border:`1px solid ${BOR}`, borderRadius:4, cursor:'pointer', fontSize:FS.xs, fontFamily:sans }}>Cancel</button>
+        <Button variant="ai" size="sm" onClick={handleSave} disabled={!draft.name?.trim()}>{editingId?'Update':'Add'}</Button>
+        <Button variant="secondary" size="sm" onClick={resetDraft}>Cancel</Button>
       </div>
     </div>
   );
@@ -466,7 +459,7 @@ export function CustomContentManager({ search }) {
         {CUSTOM_CATEGORIES.map(c => {
           const count = (customContent[c.key]||[]).length;
           return (
-            <button key={c.key} onClick={() => { setActiveCat(c.key); resetDraft(); }}
+            <button key={c.key} type="button" onClick={() => { setActiveCat(c.key); resetDraft(); }}
               style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', borderRadius:12, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
               <c.Icon size={11}/> {c.label}
               {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
@@ -480,9 +473,9 @@ export function CustomContentManager({ search }) {
 
       {/* Add button */}
       {activeCat !== 'supplyChains' && !addingNew && !editingId && (
-        <button onClick={() => { setAddingNew(true); setDraft({}); }} style={{ display:'flex', alignItems:'center', gap:5, padding:'6px 12px', background:swatch.magic, color:swatch.white, border:'none', borderRadius:5, cursor:'pointer', fontSize:FS.xs, fontWeight:700, fontFamily:sans, marginBottom:10 }}>
-          <Plus size={12}/> Add Custom {catDef.label.slice(0,-1)}
-        </button>
+        <Button variant="ai" size="sm" icon={<Plus size={12}/>} onClick={() => { setAddingNew(true); setDraft({}); }} style={{ marginBottom:10 }}>
+          Add Custom {catDef.label.slice(0,-1)}
+        </Button>
       )}
 
       {/* Add/edit form */}
@@ -501,8 +494,8 @@ export function CustomContentManager({ search }) {
                 <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, flex:1 }}>{item.name}</span>
                 <Tag label="Custom" color='#7c3aed'/>
                 {item.category && <Tag label={item.category} color={catDef.color}/>}
-                <button aria-label="Edit item" onClick={() => handleEdit(item)} style={{ background:'none', border:'none', color:MUT, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
-                <button aria-label="Delete item" onClick={() => setDeleteId(deleteId===item.id?null:item.id)} style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><Trash2 size={11}/></button>
+                <IconButton Icon={Edit3} label="Edit item" tone="ghost" size="sm" onClick={() => handleEdit(item)} />
+                <IconButton Icon={Trash2} label="Delete item" tone="danger" size="sm" onClick={() => setDeleteId(deleteId===item.id?null:item.id)} />
               </div>
               {item.description && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description}</div>}
               <CustomItemAttributes item={item} />

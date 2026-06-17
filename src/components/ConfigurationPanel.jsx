@@ -5,6 +5,7 @@ import {getCompatibleResources} from '../generators/terrainHelpers';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
+import Button from './primitives/Button.jsx';
 
 const PARCHMENT=swatch['#F7F0E4'];
 
@@ -55,7 +56,7 @@ function Lbl({children,topic}){
 function Sel({value,onChange,children}){return<select value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
 function Collapsible({title,status,children}){
   const[open,setOpen]=useState(false);
-  return<div><button onClick={()=>setOpen(o=>!o)} style={{background:'none',border:'none',cursor:'pointer',textAlign:'left',fontSize:FS.sm,fontWeight:600,color:SECOND,display:'flex',alignItems:'center',gap:6,padding:'4px 0',width:'100%',fontFamily:sans}}>{open?<ChevronUp size={14}/>:<ChevronDown size={14}/>}<span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:swatch['#F0EAD8'],borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</button>{open&&children}</div>;
+  return<div><Button variant="ghost" size="sm" fullWidth onClick={()=>setOpen(o=>!o)} aria-expanded={open} icon={open?<ChevronUp size={14}/>:<ChevronDown size={14}/>} style={{justifyContent:'flex-start',textAlign:'left',padding:'4px 0',whiteSpace:'normal'}}><span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:swatch['#F0EAD8'],borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</Button>{open&&children}</div>;
 }
 
 function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode}){
@@ -69,7 +70,7 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
   return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:randomSliderMode?0:10}}>
       <Lbl>Priority Sliders</Lbl>
-      <button onClick={()=>setRandomSliderMode(!randomSliderMode)} style={{fontSize:FS.xs,fontWeight:700,padding:'3px 10px',border:`1px solid ${randomSliderMode?GOLD:BORDER2}`,borderRadius:5,cursor:'pointer',background:randomSliderMode?GOLD:CARD,color:randomSliderMode?'#fff':SECOND,fontFamily:sans}}> {randomSliderMode?'Random':'Set manually'}</button>
+      <Button variant={randomSliderMode?'primary':'secondary'} size="sm" aria-pressed={randomSliderMode} onClick={()=>setRandomSliderMode(!randomSliderMode)}>{randomSliderMode?'Random':'Set manually'}</Button>
     </div>
     {randomSliderMode
       ? <p style={{fontSize:FS.xs,color:MUTED,margin:'6px 0 0',lineHeight:1.4}}>Each generation randomises all priority sliders. Toggle off to set values manually or choose an archetype.</p>
@@ -123,12 +124,12 @@ function StressPanel({config,updateConfig}){
         <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random stress may fire each Generate (~40% chance). All types are eligible.':`${selected.length} of ${allKeys.length} stress types selected.`}</p>
       </div>
       <div style={{display:'flex',gap:5,flexShrink:0}}>
-        <button onClick={toggleRandom} style={{fontSize:FS.xs,fontWeight:700,padding:'4px 10px',border:`1px solid ${isRandom?'#8b5a1a':BORDER2}`,borderRadius:5,cursor:'pointer',background:isRandom?'#8b5a1a':CARD,color:isRandom?'#fff':SECOND,fontFamily:sans}}> {isRandom?'Random ON':'Random'}</button>
-        {!isRandom&&<><button onClick={()=>updateConfig({selectedStresses:allKeys})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>All</button><button onClick={()=>updateConfig({selectedStresses:[]})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>None</button></>}
+        <Button variant={isRandom?'primary':'secondary'} size="sm" aria-pressed={isRandom} onClick={toggleRandom}>{isRandom?'Random ON':'Random'}</Button>
+        {!isRandom&&<><Button variant="secondary" size="sm" onClick={()=>updateConfig({selectedStresses:allKeys})}>All</Button><Button variant="secondary" size="sm" onClick={()=>updateConfig({selectedStresses:[]})}>None</Button></>}
       </div>
     </div>
     {!isRandom&&<div style={{display:'flex',flexDirection:'column',gap:4,maxHeight:200,overflowY:'auto'}}>
-      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<button key={key} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 8px',borderRadius:4,cursor:'pointer',textAlign:'left',border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent',fontFamily:sans}}><span style={{fontSize: FS['14'],flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</button>;})}
+      {allKeys.map(key=>{const d=STRESS_TYPE_MAP[key];const on=selected.includes(key);return<button key={key} type="button" aria-pressed={on} onClick={()=>toggleStress(key)} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 8px',borderRadius:4,cursor:'pointer',textAlign:'left',border:`1px solid ${on?d.colour||GOLD:BORDER}`,background:on?`${d.colour||GOLD}15`:'transparent',fontFamily:sans}}><span style={{fontSize: FS['14'],flexShrink:0}}>{d.icon}</span><span style={{fontSize:FS.xs,fontWeight:on?700:400,color:on?d.colour||GOLD:SECOND}}>{d.label}</span>{on&&<span style={{marginLeft:'auto',fontSize:FS.xxs,color:d.colour||GOLD}}>✓</span>}</button>;})}
     </div>}
   </div>;
 }
@@ -209,10 +210,10 @@ function NearbyResourcesPanel({config,updateConfig}){
         <p style={{fontSize:FS.xs,color:SECOND,margin:0,lineHeight:1.4}}>{isRandom?'A random compatible subset is selected each Generate.':`${selected.filter(k=>compatible.some(r=>r.key===k)).length} of ${compatible.length} compatible resources selected.`}</p>
       </div>
       <div style={{display:'flex',gap:5,flexShrink:0}}>
-        <button onClick={toggleRandom} style={{fontSize:FS.xs,fontWeight:700,padding:'4px 10px',border:`1px solid ${isRandom?GOLD:BORDER2}`,borderRadius:5,cursor:'pointer',background:isRandom?GOLD:CARD,color:isRandom?'#fff':SECOND,fontFamily:sans}}> {isRandom?'Random ON':'Random'}</button>
+        <Button variant={isRandom?'primary':'secondary'} size="sm" aria-pressed={isRandom} onClick={toggleRandom}>{isRandom?'Random ON':'Random'}</Button>
         {!isRandom&&<>
-          <button onClick={()=>updateConfig({nearbyResources:compatible.map(r=>r.key)})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>All</button>
-          <button onClick={()=>updateConfig({nearbyResources:[],nearbyResourcesState:{}})} style={{fontSize:FS.xxs,fontWeight:700,padding:'4px 8px',border:`1px solid ${BORDER2}`,borderRadius:4,background:CARD,cursor:'pointer',color:SECOND,fontFamily:sans}}>None</button>
+          <Button variant="secondary" size="sm" onClick={()=>updateConfig({nearbyResources:compatible.map(r=>r.key)})}>All</Button>
+          <Button variant="secondary" size="sm" onClick={()=>updateConfig({nearbyResources:[],nearbyResourcesState:{}})}>None</Button>
         </>}
       </div>
     </div>
@@ -225,7 +226,7 @@ function NearbyResourcesPanel({config,updateConfig}){
             if(!r.compatible && !selected.includes(r.key) && !isRandom) {
               const incompatTip = (r.incompatibleReason||'Not compatible with current access') + '. Click to force include anyway';
               return(
-                <button key={r.key}
+                <button key={r.key} type="button"
                   onClick={()=>cycleResourceState(r.key)}
                   title={incompatTip}
                   style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,border:'1px dashed #c8b8a0',
@@ -237,7 +238,7 @@ function NearbyResourcesPanel({config,updateConfig}){
             if (isRandom) {
               // RANDOM MODE: all in pool — clearly shown as included/active
               return(
-                <button key={r.key} disabled
+                <button key={r.key} type="button" disabled
                   title={`In random pool. Eligible for this generation. Actual selection happens at generation time based on route and terrain.`}
                   style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,
                     border:`1px solid #c8a84a`,background:`rgba(160,118,42,0.08)`,color:`#8a6020`,
@@ -265,7 +266,7 @@ function NearbyResourcesPanel({config,updateConfig}){
               : {border:`1px solid ${STATE_BORDER[st]}`,background:STATE_BG[st],
                  color:STATE_COLORS[st],fontWeight:700};
             return(
-              <button key={r.key} onClick={()=>cycleResourceState(r.key)} title={tip}
+              <button key={r.key} type="button" onClick={()=>cycleResourceState(r.key)} title={tip}
                 style={{fontSize:FS.xs,padding:'3px 9px',borderRadius:4,cursor:'pointer',
                   fontFamily:sans,WebkitTapHighlightColor:'transparent',userSelect:'none',
                   transition:'all 0.1s',...btnStyle}}>

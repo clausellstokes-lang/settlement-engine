@@ -5,6 +5,8 @@
  */
 import {Search, X} from 'lucide-react';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD_HDR, sans, FS, swatch } from './theme.js';
+import Button from './primitives/Button.jsx';
+import IconButton from './primitives/IconButton.jsx';
 
 export default function ControlsStrip({
   // Search
@@ -47,17 +49,17 @@ export default function ControlsStrip({
             style={{ width: '100%', padding: '5px 8px 5px 24px', border: `1px solid ${BORDER}`, borderRadius: 5, fontSize: FS['11.5'], background: `rgba(250,248,244,0.97)`, color: INK, boxSizing: 'border-box', fontFamily: sans }}
           />
           {search && (
-            <button onClick={() => setSearch('')} aria-label="Clear search" style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 0, lineHeight: 1 }}>
-              <X size={11} />
-            </button>
+            <span style={{ position: 'absolute', right: 6, top: '50%', transform: 'translateY(-50%)', display: 'inline-flex' }}>
+              <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={() => setSearch('')} />
+            </span>
           )}
         </div>
-        <button onClick={onForceAll} style={btnStyle(`1px solid ${GOLD}`, `${GOLD}18`, GOLD, 700)}>Force All</button>
-        <button onClick={onReset} style={btnStyle(`1px solid ${BORDER}`, `rgba(250,248,244,0.97)`, SECOND, 700)}>Reset</button>
-        <button onClick={onExcludeAll} style={btnStyle('1px solid #e8b0b0', '#fdf4f4', '#8b1a1a', 700)}>Exclude All</button>
+        <Button onClick={onForceAll} variant="gold" size="sm">Force All</Button>
+        <Button onClick={onReset} variant="secondary" size="sm">Reset</Button>
+        <Button onClick={onExcludeAll} variant="danger" size="sm">Exclude All</Button>
         {(onExpandAll || onCollapseAll) && <span style={{ width: 1, height: 18, background: swatch['#D0C0A8'], flexShrink: 0 }} />}
-        {onExpandAll  && <button onClick={onExpandAll}  style={btnStyle(`1px solid ${BORDER}`, `rgba(250,248,244,0.97)`, SECOND, 700)}>Expand All</button>}
-        {onCollapseAll && <button onClick={onCollapseAll} style={btnStyle(`1px solid ${BORDER}`, `rgba(250,248,244,0.97)`, SECOND, 700)}>Collapse All</button>}
+        {onExpandAll  && <Button onClick={onExpandAll}  variant="secondary" size="sm">Expand All</Button>}
+        {onCollapseAll && <Button onClick={onCollapseAll} variant="secondary" size="sm">Collapse All</Button>}
       </div>
 
       {/* Stats + filter pills */}
@@ -69,15 +71,15 @@ export default function ControlsStrip({
           }
         </span>
         {setFilterMode && ['all', 'forced', 'excluded'].map(m => (
-          <button key={m} onClick={() => setFilterMode(m)} style={{
-            fontSize: FS.xxs, fontWeight: filterMode === m ? 700 : 500,
-            padding: '2px 8px', borderRadius: 4, cursor: 'pointer',
-            border: `1px solid ${filterMode === m ? GOLD : BORDER}`,
-            background: filterMode === m ? `${GOLD}20` : `rgba(250,248,244,0.97)`,
-            color: filterMode === m ? GOLD : SECOND, fontFamily: sans,
-          }}>
+          <Button
+            key={m}
+            onClick={() => setFilterMode(m)}
+            variant={filterMode === m ? 'gold' : 'secondary'}
+            size="sm"
+            aria-pressed={filterMode === m}
+          >
             {m === 'all' ? 'All' : m === 'forced' ? `Forced (${forcedCount})` : `Excluded (${excludedCount})`}
-          </button>
+          </Button>
         ))}
         {extraStats}
         {tier === 'all' && (
@@ -93,12 +95,4 @@ export default function ControlsStrip({
       </div>
     </div>
   );
-}
-
-function btnStyle(border, background, color, fontWeight = 500) {
-  return {
-    padding: '4px 9px', borderRadius: 4, border, background, color,
-    fontSize: FS.xxs, fontWeight, cursor: 'pointer',
-    fontFamily: 'Nunito, sans-serif', whiteSpace: 'nowrap',
-  };
 }

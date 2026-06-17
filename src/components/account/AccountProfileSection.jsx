@@ -11,7 +11,9 @@ import {
 } from 'lucide-react';
 import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
+import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 
@@ -80,27 +82,34 @@ export default function AccountProfileSection({
                   // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the inline name editor when it opens
                   autoFocus
                 />
-                <button onClick={handleSaveName} disabled={nameSaving}
-                  aria-label="Save name"
-                  style={{ background: 'none', border: 'none', color: swatch['#2A7A2A'], cursor: 'pointer' }}>
-                  <Check size={18} />
-                </button>
-                <button onClick={() => setEditingName(false)}
-                  aria-label="Cancel editing"
-                  style={{ background: 'none', border: 'none', color: swatch.danger, cursor: 'pointer' }}>
-                  <X size={18} />
-                </button>
+                <IconButton
+                  Icon={Check}
+                  label="Save name"
+                  onClick={handleSaveName}
+                  disabled={nameSaving}
+                  tone="ghost"
+                  size="lg"
+                />
+                <IconButton
+                  Icon={X}
+                  label="Cancel editing"
+                  onClick={() => setEditingName(false)}
+                  tone="danger"
+                  size="lg"
+                />
               </>
             ) : (
               <>
                 <span style={{ fontSize: FS.xl, fontWeight: 700, color: INK, fontFamily: serif_ }}>
                   {auth.displayName || t('account.setDisplayName')}
                 </span>
-                <button onClick={() => { setNameInput(auth.displayName || ''); setEditingName(true); }}
-                  aria-label="Edit name"
-                  style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer' }}>
-                  <Edit3 size={14} />
-                </button>
+                <IconButton
+                  Icon={Edit3}
+                  label="Edit name"
+                  onClick={() => { setNameInput(auth.displayName || ''); setEditingName(true); }}
+                  tone="ghost"
+                  size="md"
+                />
               </>
             )}
           </div>
@@ -152,22 +161,16 @@ export default function AccountProfileSection({
             ))}
           </select>
         </label>
-        <button
-          type="button"
+        <Button
+          variant="primary"
+          size="md"
           onClick={handleSaveProfilePreferences}
-          disabled={profileSaving}
-          style={{
-            alignSelf: 'flex-start',
-            display: 'inline-flex', alignItems: 'center', gap: SP.xs,
-            padding: `${SP.sm}px ${SP.lg}px`,
-            background: GOLD, color: swatch.white, border: 'none',
-            borderRadius: R.md, cursor: profileSaving ? 'wait' : 'pointer',
-            fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-            opacity: profileSaving ? 0.65 : 1,
-          }}
+          busy={profileSaving}
+          icon={<Check size={14} />}
+          style={{ alignSelf: 'flex-start' }}
         >
-          <Check size={14} /> {profileSaving ? 'Saving...' : profileSaved ? 'Saved' : 'Save profile'}
-        </button>
+          {profileSaving ? 'Saving...' : profileSaved ? 'Saved' : 'Save profile'}
+        </Button>
       </div>
     </Section>
   );

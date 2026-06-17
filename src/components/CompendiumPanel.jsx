@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { GOLD, GOLD_BG, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
+import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2 } from 'lucide-react';
+import Button from './primitives/Button.jsx';
 import { useStore } from '../store/index.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
@@ -178,13 +179,13 @@ export default function CompendiumPanel({ config, standalone=false }) {
       : { borderRadius:8, overflow:'hidden' }}>
       {/* Mode toggle */}
       <div style={{ display:'flex', background:swatch['#F5EDE0'], borderBottom:`1px solid ${BOR}`, padding:'6px 14px', gap:4 }}>
-        <button onClick={()=>setMode('catalog')} style={{ flex:1, padding:'7px 12px', borderRadius:6, border:`1px solid ${mode==='catalog'?GOLD:BOR}`, background:mode==='catalog'?GOLD_BG:'transparent', color:mode==='catalog'?GOLD:SEC, fontSize:FS.sm, fontWeight:mode==='catalog'?700:500, fontFamily:sans, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
-          <Building2 size={13}/> Built-in Catalog
-        </button>
-        <button onClick={()=>setMode('custom')} style={{ flex:1, padding:'7px 12px', borderRadius:6, border:`1px solid ${mode==='custom'?'#7c3aed':'transparent'}`, background:mode==='custom'?'rgba(124,58,237,0.1)':'transparent', color:mode==='custom'?'#7c3aed':SEC, fontSize:FS.sm, fontWeight:mode==='custom'?700:500, fontFamily:sans, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}>
-          <Sparkles size={13}/> My Custom Content
+        <Button onClick={()=>setMode('catalog')} variant={mode==='catalog'?'gold':'ghost'} size="sm" icon={<Building2 size={13}/>} aria-pressed={mode==='catalog'} style={{ flex:1 }}>
+          Built-in Catalog
+        </Button>
+        <Button onClick={()=>setMode('custom')} variant={mode==='custom'?'ai':'ghost'} size="sm" icon={<Sparkles size={13}/>} aria-pressed={mode==='custom'} style={{ flex:1 }}>
+          My Custom Content
           {customContentCount > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:'rgba(124,58,237,0.15)', color:swatch['#7C3AED'], borderRadius:8, padding:'1px 6px' }}>{customContentCount}</span>}
-        </button>
+        </Button>
       </div>
 
       {mode === 'catalog' ? (
@@ -195,14 +196,14 @@ export default function CompendiumPanel({ config, standalone=false }) {
           <div style={{ background:PARCH, borderBottom:`1px solid ${BOR}` }}>
             <div style={{ display:'flex', overflowX:'auto', gap:0 }}>
               {TABS.map(({ id, label, Icon }) => (
-                <button key={id} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'8px 13px', background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
+                <button key={id} type="button" aria-pressed={activeTab===id} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'8px 13px', background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
                   <Icon size={12}/> {label}
                 </button>))}
             </div>
             <div style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 14px', borderTop:`1px solid ${BOR}` }}>
               <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
               <input aria-label="Search catalog" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
-              {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:FS.md, padding:0 }}>x</button>}
+              {search && <Button onClick={()=>setSearch('')} variant="ghost" size="sm" aria-label="Clear search">x</Button>}
             </div>
           </div>
           <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
@@ -217,7 +218,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
           <div style={{ display:'flex', alignItems:'center', gap:8, padding:'8px 14px', background:PARCH, borderBottom:`1px solid ${BOR}` }}>
             <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
             <input aria-label="Search custom content" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
-            {search && <button onClick={()=>setSearch('')} style={{ border:'none', background:'none', cursor:'pointer', color:MUT, fontSize:FS.md, padding:0 }}>x</button>}
+            {search && <Button onClick={()=>setSearch('')} variant="ghost" size="sm" aria-label="Clear search">x</Button>}
           </div>
           <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <CustomContentManager search={search.toLowerCase()}/>

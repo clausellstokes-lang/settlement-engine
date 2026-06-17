@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import { TIER_LABELS, catColor } from './design';
-import { serif, sans, TabIntro } from './Primitives';
+import { serif, TabIntro } from './Primitives';
 import { BODY } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
+import Button from '../primitives/Button.jsx';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -159,9 +160,9 @@ function SummaryTab({ settlement:r }) {
             <div style={{...serif,fontSize:isMobile?22:28,fontWeight:600,color:swatch['#C49A3C'],lineHeight:1.1,marginBottom:4}}>{name}</div>
             <div style={{fontSize:FS.xs,color:swatch.inkMag3,letterSpacing:'0.02em'}}>{tierLabel} · {pop?.toLocaleString()} pop. · {tradeAccess} · est. {hist?.age?`~${hist.age} yrs ago`:'unknown'}</div>
           </div>
-          <button onClick={copyText} style={{flexShrink:0,padding:'7px 14px',borderRadius:6,background:'rgba(196,154,60,0.18)',border:'1px solid rgba(196,154,60,0.35)',color:swatch['#C49A3C'],fontSize:FS.sm,fontWeight:700,cursor:'pointer',...sans,display:'flex',alignItems:'center',gap:6}}>
-            {copied?'✓':''} {copied?'Copied!':'Copy'}
-          </button>
+          <Button variant="gold" size="md" onClick={copyText} style={{flexShrink:0}}>
+            {copied?'✓ Copied!':'Copy'}
+          </Button>
         </div>
         <p style={{fontSize: FS['13.5'],...serif,color:swatch['#E8D8B0'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>
           {name} is a {characterSentence(r)}
@@ -271,7 +272,7 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── PLOT HOOKS (collapsible) ───────────────────────────────────────── */}
       {allHooks.length>0&&<div style={{border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',borderRadius:8,overflow:'hidden',marginBottom:12}}>
-        <button onClick={()=>setHooksOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <button type="button" aria-expanded={hooksOpen} onClick={()=>setHooksOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em'}}>Plot Hooks ({allHooks.length})</span>
           <span style={{fontSize:FS.xs,color:muted}}>{hooksOpen?'▲':'▼'}</span>
         </button>
@@ -308,7 +309,7 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── SETTING accordion ─────────────────────────────────────────────── */}
       {(firstQuarter||spatial?.layout||hist?.historicalCharacter||Array.isArray(reason))&&<div style={{border:'1px solid #c8d8b0',borderRadius:8,overflow:'hidden',marginBottom:10}}>
-        <button onClick={()=>setSettingOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:settingOpen?'#edf5e8':'#f4faf0',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <button type="button" aria-expanded={settingOpen} onClick={()=>setSettingOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:settingOpen?'#edf5e8':'#f4faf0',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#1A4A2A'],textTransform:'uppercase',letterSpacing:'0.06em'}}>Setting & Context</span>
           <span style={{fontSize:FS.xs,color:muted}}>{settingOpen?'▲':'▼'}</span>
         </button>
@@ -339,7 +340,7 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── INSTITUTIONS (categorized) ────────────────────────────────────── */}
       <div style={{border:'1px solid #e0d0b0',borderRadius:8,overflow:'hidden'}}>
-        <button onClick={()=>setInstOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
+        <button type="button" aria-expanded={instOpen} onClick={()=>setInstOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <div style={{display:'flex',alignItems:'center',gap:10}}>
             <span style={{fontSize:FS.xs,fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
             <span style={{fontSize:FS.xs,color:muted}}>{g.length} total</span>

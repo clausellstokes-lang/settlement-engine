@@ -18,11 +18,12 @@
 
 import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
-import { FileText, Loader2, X, BookMarked, Clock, Edit3 } from 'lucide-react';
+import { FileText, X, BookMarked, Clock, Edit3 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { PDF_VARIANTS } from '../../pdf/variants.js';
 import { COPY } from '../../copy/strings.js';
 import IconButton from '../primitives/IconButton.jsx';
+import Button from '../primitives/Button.jsx';
 
 const VARIANT_ICON = {
   draft_brief:     Edit3,
@@ -96,22 +97,16 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
             <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Source</div>
             <div style={{ display: 'flex', gap: 6 }}>
               {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'AI-Enhanced' }].map(opt => (
-                <button
+                <Button
                   key={opt.label}
-                  type="button"
+                  variant={useAi === opt.ai ? 'gold' : 'secondary'}
+                  size="sm"
                   onClick={() => setUseAi(opt.ai)}
                   aria-pressed={useAi === opt.ai}
-                  style={{
-                    flex: 1, padding: '6px 10px', fontSize: FS.xs, fontWeight: 700,
-                    fontFamily: 'system-ui, -apple-system, sans-serif',
-                    background: useAi === opt.ai ? 'rgba(160,118,42,0.12)' : '#fff',
-                    border: `1px solid ${useAi === opt.ai ? '#a0762a' : '#d2bd96'}`,
-                    borderRadius: 6, cursor: 'pointer',
-                    color: useAi === opt.ai ? swatch['#A0762A'] : swatch.inkMag3,
-                  }}
+                  style={{ flex: 1 }}
                 >
                   {opt.label}
-                </button>
+                </Button>
               ))}
             </div>
             <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
@@ -123,19 +118,18 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
         )}
 
         <footer style={footerStyle}>
-          <button type="button" onClick={onClose} style={cancelBtnStyle} disabled={exporting}>
+          <Button variant="secondary" size="sm" onClick={onClose} disabled={exporting}>
             Cancel
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
             onClick={() => onExport(picked, useAi)}
             disabled={exporting}
-            style={primaryBtnStyle(exporting)}
+            busy={exporting}
           >
-            {exporting
-              ? <><Loader2 size={12} style={{ animation: 'spin 1s linear infinite' }} /> Building PDF…</>
-              : <>Export {PDF_VARIANTS[picked].label}</>}
-          </button>
+            {exporting ? 'Building PDF…' : <>Export {PDF_VARIANTS[picked].label}</>}
+          </Button>
         </footer>
       </div>
     </div>
@@ -215,20 +209,3 @@ const footerStyle = {
   padding: 12,
   borderTop: '1px solid #d2bd96',
 };
-const cancelBtnStyle = {
-  padding: '6px 12px',
-  background: '#fff', color: '#1c1409',
-  border: '1px solid #d2bd96', borderRadius: 4,
-  fontSize: FS.sm, fontWeight: 700, fontFamily: 'system-ui, -apple-system, sans-serif',
-  cursor: 'pointer',
-};
-function primaryBtnStyle(exporting) {
-  return {
-    display: 'inline-flex', alignItems: 'center', gap: 5,
-    padding: '6px 14px',
-    background: exporting ? '#a89880' : '#a0762a', color: '#fff',
-    border: 'none', borderRadius: 4,
-    fontSize: FS.sm, fontWeight: 700, fontFamily: 'system-ui, -apple-system, sans-serif',
-    cursor: exporting ? 'not-allowed' : 'pointer',
-  };
-}

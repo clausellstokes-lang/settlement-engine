@@ -44,7 +44,7 @@ export function NPCCategoryGroup({category, label, group, impFilter, search, rel
   });
   return (
     <div style={{marginBottom:14}}>
-      <button onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,background:'none',border:'none',cursor:'pointer',padding:'4px 0',WebkitTapHighlightColor:'transparent',marginBottom:open?8:0}}>
+      <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,background:'none',border:'none',cursor:'pointer',padding:'4px 0',WebkitTapHighlightColor:'transparent',marginBottom:open?8:0}}>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
         <span style={{fontSize:FS.xs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.07em',flexShrink:0}}>{displayLabel} ({filtered.length})</span>
         {sorted.filter(n=>n.influence==='high').length > 0 &&
@@ -64,7 +64,7 @@ function NPCRelCard({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}
   const [open,setOpen]=useState(false);
   return (
     <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,borderRadius:7,overflow:'hidden',marginBottom:10}}>
-      <button aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+      <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>
@@ -90,7 +90,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
   const [open,setOpen]=useState(false);
   return (
     <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,borderRadius:7,overflow:'hidden',marginBottom:10}}>
-      <button aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+      <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>
@@ -185,7 +185,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
       // Subtle tint when pinned — mirrors the narrative panel's purple wash.
       boxShadow: isPinned ? `inset 2px 0 0 rgba(106,42,154,0.08)` : 'none',
     }}>
-      <button onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+      <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1,minWidth:0}}>
           <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
             <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{npc.name}</span>

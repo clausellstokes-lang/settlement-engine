@@ -19,6 +19,8 @@
 import { useState } from 'react';
 import { FS, swatch } from './theme.js';
 import { BookOpen, History, RotateCcw, Sparkles, Zap, X } from 'lucide-react';
+import Button from './primitives/Button.jsx';
+import IconButton from './primitives/IconButton.jsx';
 
 // ── Visual tokens, aligned with SettlementDetail / Primitives ────────────────
 const BORDER = swatch['#E0D0B0'];
@@ -155,13 +157,7 @@ function FullEntryModal({ entry, onClose }) {
               </span>
             </div>
           </div>
-          <button onClick={onClose} aria-label="Close" style={{
-            background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)',
-            color: swatch['#F5EDE0'], borderRadius: 5, padding: '5px 8px', cursor: 'pointer',
-            display: 'flex', alignItems: 'center',
-          }} title="Close">
-            <X size={14} />
-          </button>
+          <IconButton Icon={X} label="Close" tone="ghost" size="sm" onClick={onClose} />
         </div>
 
         {/* Body */}
@@ -254,21 +250,14 @@ function EntryCard({ entry, onOpen }) {
         </span>
         <div style={{ flex: 1 }} />
         {isFull && onOpen && (
-          <button
+          <Button
+            variant="ai"
+            size="sm"
+            icon={<BookOpen size={12} />}
             onClick={() => onOpen(entry)}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 4,
-              background: 'rgba(106,42,154,0.08)',
-              color: swatch.ai,
-              border: '1px solid rgba(106,42,154,0.3)',
-              borderRadius: 4,
-              padding: '3px 9px',
-              cursor: 'pointer',
-              fontSize: FS['10.5'], fontWeight: 700, fontFamily: 'Nunito, sans-serif',
-            }}
           >
-            <BookOpen size={11} /> Read full
-          </button>
+            Read full
+          </Button>
         )}
       </div>
       {entry.triggeredBy && (
@@ -296,6 +285,8 @@ export default function ChroniclePanel({ entries }) {
   return (
     <div style={{ marginBottom: 14, border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
       <button
+        type="button"
+        aria-expanded={open}
         onClick={() => setOpen(v => !v)}
         style={{
           width: '100%', display: 'flex', alignItems: 'center', gap: 8,

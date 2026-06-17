@@ -10,9 +10,11 @@
 import { X, Check } from 'lucide-react';
 import { validateBatch } from '../../../domain/events/batch.js';
 import { EVENT_REGISTRY } from '../../../domain/events/registry.js';
-import { GOLD, INK, MUTED, BORDER, sans, FS, SP, R, swatch } from '../../theme.js';
+import { GOLD, INK, MUTED, sans, FS, SP, R, swatch } from '../../theme.js';
 import { labelOfTarget } from './helpers.js';
 import { DeltaRow } from './PreviewPanel.jsx';
+import Button from '../../primitives/Button.jsx';
+import IconButton from '../../primitives/IconButton.jsx';
 
 export function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRemove, onClear, onPreview, onApply }) {
   const validation = validateBatch(settlement, staged);
@@ -35,9 +37,7 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRe
             <span style={{ flex: 1 }}>
               {EVENT_REGISTRY[e.type]?.label || e.type}{e.targetId ? `: ${labelOfTarget(e.targetId)}` : ''}
             </span>
-            <button onClick={() => onRemove(i)} aria-label="Remove staged change" title="Remove" style={{ background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 2, display: 'flex' }}>
-              <X size={12} />
-            </button>
+            <IconButton Icon={X} label="Remove staged change" onClick={() => onRemove(i)} tone="ghost" size="sm" />
           </div>
         ))}
       </div>
@@ -52,39 +52,18 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRe
         </div>
       )}
       <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
-        <button onClick={onPreview} style={primaryBtn(false)}>Preview batch</button>
-        <button
+        <Button variant="primary" size="sm" onClick={onPreview}>Preview batch</Button>
+        <Button
+          variant="success"
+          size="sm"
+          icon={<Check size={11} />}
           onClick={onApply}
           disabled={blocks.length > 0}
-          style={{ ...confirmBtn, opacity: blocks.length > 0 ? 0.5 : 1, cursor: blocks.length > 0 ? 'not-allowed' : 'pointer' }}
         >
-          <Check size={11} /> {phase === 'canon' ? `Apply ${staged.length} to timeline` : `Apply all (${staged.length})`}
-        </button>
-        <button onClick={onClear} style={cancelBtn}>Clear</button>
+          {phase === 'canon' ? `Apply ${staged.length} to timeline` : `Apply all (${staged.length})`}
+        </Button>
+        <Button variant="secondary" size="sm" onClick={onClear}>Clear</Button>
       </div>
     </div>
   );
 }
-
-function primaryBtn(disabled) {
-  return {
-    padding: '5px 12px',
-    background: disabled ? '#eee' : GOLD,
-    color: disabled ? '#999' : '#fff',
-    border: 'none', borderRadius: R.sm,
-    fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
-    cursor: disabled ? 'not-allowed' : 'pointer',
-  };
-}
-const confirmBtn = {
-  display: 'inline-flex', alignItems: 'center', gap: 4,
-  padding: '5px 12px', background: '#1a5a28', color: '#fff',
-  border: 'none', borderRadius: R.sm,
-  fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
-};
-const cancelBtn = {
-  display: 'inline-flex', alignItems: 'center', gap: 4,
-  padding: '5px 12px', background: '#fff', color: INK,
-  border: `1px solid ${BORDER}`, borderRadius: R.sm,
-  fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
-};

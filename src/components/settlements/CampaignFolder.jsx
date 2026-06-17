@@ -8,6 +8,8 @@ const generateCampaignPDF = (...args) =>
   import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
 import { GOLD, INK, MUTED, SECOND, BORDER, sans, serif_, FS, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import RegionalGraphSummary from '../region/RegionalGraphSummary.jsx';
 import { SettlementCard } from './SettlementCard.jsx';
@@ -51,9 +53,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
     <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>
       {/* Campaign header */}
       <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
-        <button onClick={() => toggleCollapsed(campaign.id)} aria-label={collapsed ? 'Expand campaign' : 'Collapse campaign'} style={{ background:'none', border:'none', cursor:'pointer', padding:0, display:'flex', color:MUTED }}>
-          {collapsed ? <ChevronRight size={14}/> : <ChevronDown size={14}/>}
-        </button>
+        <IconButton Icon={collapsed ? ChevronRight : ChevronDown} label={collapsed ? 'Expand campaign' : 'Collapse campaign'} onClick={() => toggleCollapsed(campaign.id)} tone="ghost" size="md"/>
         <FolderOpen size={14} color={GOLD}/>
         {editing ? (
           <div style={{ flex:1, display:'flex', alignItems:'center', gap:4 }}>
@@ -61,8 +61,8 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               onKeyDown={e => { if (e.key === 'Enter') { onRenameCampaign(campaign.id, editDraft); setEditing(false); } if (e.key === 'Escape') setEditing(false); }}
               // eslint-disable-next-line jsx-a11y/no-autofocus -- inline rename field appears on user action; focus lets them type the new name immediately
               style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, borderRadius:3, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
-            <button onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} aria-label="Save name" style={{ background:'none', border:'none', color:swatch['#2A7A2A'], cursor:'pointer' }}><Check size={12}/></button>
-            <button onClick={() => setEditing(false)} aria-label="Cancel rename" style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer' }}><X size={12}/></button>
+            <IconButton Icon={Check} label="Save name" onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} tone="ghost" size="sm"/>
+            <IconButton Icon={X} label="Cancel rename" onClick={() => setEditing(false)} tone="danger" size="sm"/>
           </div>
         ) : (
           <span style={{ flex:1, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
@@ -71,15 +71,17 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         {campaign.mapState && <MapIcon size={11} color={GOLD} title="Map saved"/>}
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
-            <button
+            <Button
+              variant="danger"
+              size="sm"
+              icon={<FileText size={10}/>}
               onClick={(e) => { e.stopPropagation(); generateCampaignPDF(campaign, settlements); }}
               disabled={settlements.length === 0}
-              title="Export Campaign PDF"
-              style={{ display:'flex', alignItems:'center', gap:3, background: settlements.length === 0 ? '#d8cdbc' : '#7a1a1a', color:swatch.white, border:'none', borderRadius:4, padding:'3px 7px', cursor: settlements.length === 0 ? 'not-allowed' : 'pointer', fontSize:FS.micro, fontWeight:700, fontFamily:sans }}>
-              <FileText size={10}/> PDF
-            </button>
-            <button onClick={() => { setEditing(true); setEditDraft(campaign.name); }} aria-label="Rename campaign" style={{ background:'none', border:'none', color:MUTED, cursor:'pointer', padding:2 }}><Edit3 size={11}/></button>
-            <button onClick={() => setConfirmDelete(!confirmDelete)} aria-label="Delete campaign" style={{ background:'none', border:'none', color:swatch.danger, cursor:'pointer', padding:2 }}><X size={11}/></button>
+              title="Export Campaign PDF">
+              PDF
+            </Button>
+            <IconButton Icon={Edit3} label="Rename campaign" onClick={() => { setEditing(true); setEditDraft(campaign.name); }} tone="ghost" size="sm"/>
+            <IconButton Icon={X} label="Delete campaign" onClick={() => setConfirmDelete(!confirmDelete)} tone="danger" size="sm" pressed={confirmDelete}/>
           </div>
         )}
       </div>

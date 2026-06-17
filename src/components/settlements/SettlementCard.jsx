@@ -4,6 +4,7 @@ import {Link2, Clock, FolderOpen, ArrowRight, GitBranch, Unlock} from 'lucide-re
 import { EFFECT_CATEGORIES, fmtMod } from '../../lib/relationshipGraph.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme.js';
 import { isPlanInactiveSave, isSaveActive } from '../../lib/saveAccess.js';
+import Button from '../primitives/Button.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 
 const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', allied:'#1a5a28', secret_alliance:'#1a5a28', trade_partner:'#a0762a', patron:'#2a3a7a', client:'#2a3a7a', criminal_network:'#5a2a8a' };
@@ -82,19 +83,26 @@ export function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, s
         <div style={{ display:'flex', gap:4, alignItems:'center', flexShrink:0 }}>
           {/* Move to campaign */}
           <div style={{ position:'relative' }}>
-            <button disabled={!active} onClick={() => active && setMoveOpen(!moveOpen)} title={active ? (currentCampaignId ? 'Move to...' : 'Add to campaign') : 'Reactivate to use campaigns'} style={{ padding:'4px 6px', background:active ? GOLD_BG : '#ddd5c8', color:active ? GOLD : MUTED, border:`1px solid rgba(160,118,42,0.3)`, borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xxs, fontWeight:700, fontFamily:sans, display:'flex', alignItems:'center', gap:3 }}>
-              <ArrowRight size={10}/> {currentCampaignId ? 'Move' : 'Add to Campaign'}
-            </button>
+            <Button
+              variant="gold"
+              size="sm"
+              disabled={!active}
+              onClick={() => active && setMoveOpen(!moveOpen)}
+              title={active ? (currentCampaignId ? 'Move to...' : 'Add to campaign') : 'Reactivate to use campaigns'}
+              icon={<ArrowRight size={12}/>}
+            >
+              {currentCampaignId ? 'Move' : 'Add to Campaign'}
+            </Button>
             {moveOpen && (
               <div style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, borderRadius:6, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:160, padding:4 }}>
                 {currentCampaignId && (
-                  <button onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:swatch.danger, fontFamily:sans, borderRadius:3 }}
+                  <button type="button" onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:swatch.danger, fontFamily:sans, borderRadius:3 }}
                     onMouseEnter={e => e.target.style.background='#fdf4f4'} onMouseLeave={e => e.target.style.background='none'}>
                     Remove from campaign
                   </button>
                 )}
                 {campaigns.map(c => c.id === currentCampaignId ? null : (
-                  <button key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:INK, fontFamily:sans, borderRadius:3, display:'flex', alignItems:'center', gap:4 }}
+                  <button type="button" key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMoveOpen(false); }} style={{ width:'100%', textAlign:'left', padding:'5px 8px', border:'none', background:'none', cursor:'pointer', fontSize:FS.xs, color:INK, fontFamily:sans, borderRadius:3, display:'flex', alignItems:'center', gap:4 }}
                     onMouseEnter={e => e.target.style.background='#f5ede0'} onMouseLeave={e => e.target.style.background='none'}>
                     <FolderOpen size={10} color={GOLD}/> {c.name}
                   </button>
@@ -104,22 +112,26 @@ export function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, s
             )}
           </div>
           {!active && planInactive && (
-            <button
+            <Button
+              variant="gold"
+              size="sm"
               onClick={() => onReactivate?.(s)}
               disabled={!canReactivate || reactivatingId === s.id}
-              style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', background:canReactivate ? GOLD_BG : '#e0d8ca', color:canReactivate ? GOLD : MUTED, border:`1px solid ${BORDER}`, borderRadius:4, cursor:canReactivate ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}
+              busy={reactivatingId === s.id}
+              icon={<Unlock size={12}/>}
             >
-              <Unlock size={11}/>{reactivatingId === s.id ? 'Restoring...' : 'Reactivate'}
-            </button>
+              {reactivatingId === s.id ? 'Restoring...' : 'Reactivate'}
+            </Button>
           )}
-          <button disabled={!active} onClick={() => active && onView(s)} style={{ padding:'4px 10px', background:active ? swatch.infoBg : '#ddd5c8', color:active ? swatch.info : MUTED, border:'1px solid #c0c8e8', borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}>View</button>
-          <button
+          <Button variant="info" size="sm" disabled={!active} onClick={() => active && onView(s)}>View</Button>
+          <Button
+            variant="danger"
+            size="sm"
             disabled={!active}
             onClick={() => active && setDeleteId(deleteId === s.id ? null : s.id)}
-            style={{ padding:'4px 10px', background:active ? swatch.dangerBg : '#ddd5c8', color:active ? swatch.danger : MUTED, border:'1px solid #e8c0c0', borderRadius:4, cursor:active ? 'pointer' : 'not-allowed', fontSize:FS.xs, fontWeight:700, fontFamily:sans }}
           >
             Delete
-          </button>
+          </Button>
         </div>
       </div>
       {deleteId === s.id && (

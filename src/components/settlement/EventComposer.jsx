@@ -23,7 +23,8 @@ import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
-import { GOLD, INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 import { buildTargetOptions, labelOfTarget, PARTY, PARTY_BG } from './eventComposer/helpers.js';
 import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
 import { BatchCart } from './eventComposer/BatchCart.jsx';
@@ -32,7 +33,7 @@ import { EventComposerTargetField } from './eventComposer/EventComposerTargetFie
 import {
   RELATIONSHIP_OPTIONS, RELATIONSHIP_LABELS,
   NON_AUTHORABLE_EVENTS, STRESSOR_SEVERITY_VALUES, CUSTOM_RESOURCE_OPTION,
-  inputStyle, selectStyle, primaryBtn, confirmBtn, cancelBtn,
+  inputStyle, selectStyle,
 } from './eventComposer/EventComposerConstants.js';
 
 export default function EventComposer() {
@@ -584,9 +585,9 @@ export default function EventComposer() {
       </div>
 
       <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
-        <button onClick={onPreview} disabled={!canSubmit} style={primaryBtn(!canSubmit)}>
+        <Button variant="primary" size="sm" onClick={onPreview} disabled={!canSubmit}>
           Preview
-        </button>
+        </Button>
         {(() => {
           // Apply is always offered — preview is an optional look-ahead, not
           // a gate. With a preview pending, Apply commits exactly the
@@ -613,29 +614,31 @@ export default function EventComposer() {
                   />
                 </div>
               )}
-              <button onClick={onApply} disabled={!applyOk} style={{ ...confirmBtn, ...(isDestroy ? { background: swatch.danger, borderColor: swatch.danger } : {}), opacity: applyOk ? 1 : 0.5, cursor: applyOk ? 'pointer' : 'not-allowed' }}>
-                <Check size={11} /> {isDestroy ? 'Destroy settlement' : (phase === 'canon' ? 'Apply to Timeline' : 'Apply')}
-              </button>
+              <Button
+                variant={isDestroy ? 'danger' : 'success'}
+                size="sm"
+                icon={<Check size={11} />}
+                onClick={onApply}
+                disabled={!applyOk}
+              >
+                {isDestroy ? 'Destroy settlement' : (phase === 'canon' ? 'Apply to Timeline' : 'Apply')}
+              </Button>
               {pendingPreview && (
-                <button onClick={() => { dismissPreview(); setDestroyConfirm(''); }} style={cancelBtn}>
-                  <X size={11} /> Cancel
-                </button>
+                <Button variant="secondary" size="sm" icon={<X size={11} />} onClick={() => { dismissPreview(); setDestroyConfirm(''); }}>
+                  Cancel
+                </Button>
               )}
             </>
           );
         })()}
-        <button
+        <Button
+          variant="gold"
+          size="sm"
           onClick={() => { setStaged(prev => [...prev, buildEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); }}
           disabled={!canSubmit}
-          style={{
-            padding: '5px 12px', background: 'transparent', color: GOLD,
-            border: `1px solid ${GOLD}`, borderRadius: R.sm,
-            fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
-            cursor: canSubmit ? 'pointer' : 'not-allowed', opacity: canSubmit ? 1 : 0.5,
-          }}
         >
           + Add to batch
-        </button>
+        </Button>
       </div>
 
       {pendingPreview && <PreviewPanel preview={pendingPreview} />}
