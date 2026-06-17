@@ -164,7 +164,9 @@ export default defineConfig({
     // running dev server (handled by playwright.config.js#webServer).
     // Without this exclusion, vitest tries to load them and fails on
     // the Playwright-only `test.describe` global.
-    exclude: ['e2e/**', 'node_modules/**', 'dist/**', '.git/**'],
+    // supabase/functions/** are Deno edge functions; their *.test.ts use Deno
+    // APIs and run under the dedicated `deno-tests` CI job, not vitest.
+    exclude: ['e2e/**', 'node_modules/**', 'dist/**', '.git/**', 'supabase/functions/**'],
     // Route .jsx/.tsx files through Vite's web transform (which applies
     // the @vitejs/plugin-react JSX transform) instead of the default
     // SSR transform (which doesn't). Without this, importing any .jsx

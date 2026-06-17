@@ -106,8 +106,13 @@ describe('Tier 3.3 — stripe-webhook signature verification', () => {
   });
 
   it('verifies signature BEFORE creating the admin client', () => {
+    // NOTE: this static order-check is now superseded behaviorally by the EXECUTED
+    // boundary test in supabase/functions/stripe-webhook/index.test.ts (forged
+    // requests get 400 with zero DB writes). Kept until the deno-tests CI job is
+    // confirmed green (tests-tooling.6 prunes it then). The admin-client line is
+    // `const supabase = (deps.adminClient ?? adminClient)()` post-edges.2 DI seam.
     const constructIdx = src.search(/constructEvent(Async)?\s*\(/);
-    const adminIdx = src.search(/const supabase\s*=\s*adminClient\(/);
+    const adminIdx = src.search(/const supabase\s*=[^;]*\badminClient\b/);
     expect(constructIdx).toBeGreaterThan(0);
     expect(adminIdx).toBeGreaterThan(0);
     expect(constructIdx).toBeLessThan(adminIdx);

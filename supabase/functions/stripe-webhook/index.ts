@@ -167,7 +167,15 @@ async function grantMonthlyAllowanceIfNeeded(
 // The contract test in tests/edgeFunctions/contracts.test.js
 // (Tier 0.5 — webhook trust boundaries) locks this in.
 
-serve(async (req) => {
+// Exported (not just inlined into serve) so the trust boundary can be
+// EXECUTION-tested: index.test.ts feeds forged vs. correctly-signed requests and
+// asserts no DB write happens before signature verification. `deps.adminClient`
+// is an optional injection seam for the test's recording stub; production passes
+// nothing, so behavior is identical to the previous inline handler.
+export async function handleStripeWebhook(
+  req: Request,
+  deps: { adminClient?: typeof adminClient } = {},
+): Promise<Response> {
   // ── Signature verification — MUST run before any metadata read ─────
   const signature = req.headers.get('stripe-signature');
   if (!signature) return new Response('Missing signature', { status: 400 });
@@ -185,7 +193,7 @@ serve(async (req) => {
     return new Response('Invalid signature', { status: 400 });
   }
 
-  const supabase = adminClient();
+  const supabase = (deps.adminClient ?? adminClient)();
 
   switch (event.type) {
     case 'checkout.session.completed': {
@@ -309,4 +317,6 @@ serve(async (req) => {
   return new Response(JSON.stringify({ received: true }), {
     headers: { 'Content-Type': 'application/json' },
   });
-});
+}
+
+serve(handleStripeWebhook);

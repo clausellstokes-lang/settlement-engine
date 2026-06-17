@@ -96,3 +96,21 @@ jobs:
 
       - name: Audit mobile pointer targets
         run: npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari
+
+  # Execution tests for the Supabase edge functions (Deno runtime, not vitest).
+  # The money-path trust boundaries (stripe-webhook signature verification; later
+  # the generate-narrative refund decision) are RUN here against forged vs. signed
+  # requests — the regex-over-source contracts in vitest can't prove behavior.
+  deno-tests:
+    name: Edge function execution tests (Deno)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Run edge-function Deno tests
+        run: deno task test:edge
