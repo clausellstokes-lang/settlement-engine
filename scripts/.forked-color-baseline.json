@@ -40,6 +40,6 @@
   "src/components/primitives/CategorySelect.jsx",
   "src/components/primitives/EditableInline.jsx",
   "src/components/primitives/LockedDestination.jsx",
-  "src/components/settlement/EventComposer.jsx",
-  "src/components/settlement/VersionsTab.jsx"
+  "src/components/settlement/VersionsTab.jsx",
+  "src/components/settlement/eventComposer/helpers.js"
 ]

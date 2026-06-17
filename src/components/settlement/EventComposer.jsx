@@ -14,19 +14,21 @@ import { Zap, Flame, Trash2, Plus, MapPinOff, AlertOctagon, X, Check } from 'luc
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
 import { inferImportance } from '../../domain/entities/npcs.js';
-import { validateBatch } from '../../domain/events/batch.js';
 import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../domain/roles/roleCatalog.js';
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';
 import { buildInstitutionCatalog } from '../../domain/institutions/institutionCatalog.js';
 import { buildStressorPickerItems } from '../../domain/stressorPicker.js';
 import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPower.js';
-import { canonExports, canonImports, canonStressors } from '../../domain/canonicalAccessors.js';
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import CatalogPicker from './CatalogPicker.jsx';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { buildTargetOptions, labelOfTarget, PARTY, PARTY_BG } from './eventComposer/helpers.js';
+import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
+import { BatchCart } from './eventComposer/BatchCart.jsx';
+import { Field } from './eventComposer/Field.jsx';
 
 const _TYPE_ICONS = {
   ADD_INSTITUTION:    Plus,
@@ -104,73 +106,6 @@ const NON_AUTHORABLE_EVENTS = new Set([
   'REMOVED_THREAT',
   'STARTED_RIOT',
 ]);
-
-/** Build {id, name} options from a dossier collection for the target dropdown. */
-function buildTargetOptions(settlement, collectionKey) {
-  if (!collectionKey || !settlement) return [];
-  let list;
-  switch (collectionKey) {
-    case 'institutions': list = settlement.institutions || []; break;
-    case 'npcs':         list = settlement.npcs || []; break;
-    case 'factions':     list = settlement.powerStructure?.factions || []; break;
-    case 'neighbours':   {
-      const net = settlement.neighbourNetwork || settlement.neighbourLinks || [];
-      list = net.map((l) => ({ id: l.name || l.neighbourName || l.id, name: l.name || l.neighbourName || l.id }));
-      break;
-    }
-    case 'resources':    {
-      // Nearby resources are stored as keys in nearbyResources (config) and
-      // sometimes additionally on settlement.resources. Combine + dedupe.
-      const fromConfig = (settlement.config?.nearbyResources || []).map(k => ({ id: k, name: k }));
-      const fromList   = (settlement.resources || []).map(r => ({
-        id: r.id || r.key || r.name,
-        name: r.name || r.id || r.key,
-      }));
-      list = [...fromList, ...fromConfig];
-      break;
-    }
-    case 'stressors':    {
-      // canonStressors covers the mutation's full probe: the array containers
-      // AND the bare-object shape pipeline settlements carry (assembleSettlement
-      // dual-writes the single rolled stressor as a bare object under stress +
-      // stressors). The old Array.isArray-only probe returned [] for every
-      // pipeline-generated settlement, so Resolve Stressor fell back to free
-      // text instead of offering the live crisis.
-      list = canonStressors(settlement).filter(Boolean).map(st => ({
-        id: st.type || st.name || st.label,
-        name: st.label || st.name || st.type,
-      }));
-      break;
-    }
-    case 'tradeGoods':   {
-      // Union of the canonical export/import lists + transit, tolerant of
-      // legacy {name, good} object entries the Roster editor writes.
-      const ec = settlement.economicState || {};
-      const labels = [
-        ...canonExports(settlement),
-        ...canonImports(settlement),
-        ...(Array.isArray(ec.transit) ? ec.transit : []),
-      ]
-        .map(e => (typeof e === 'string' ? e : e?.name || e?.good || ''))
-        .filter(Boolean);
-      list = labels.map(l => ({ id: l, name: l }));
-      break;
-    }
-    default: return [];
-  }
-  // Normalize to {id, name}, dedupe by id, keep insertion order.
-  const seen = new Set();
-  const out = [];
-  for (const item of list) {
-    const id = item.id || item.faction || item.name;
-    const name = item.name || item.faction || item.id;
-    if (!id || !name) continue;
-    if (seen.has(id)) continue;
-    seen.add(id);
-    out.push({ id: String(id), name: String(name) });
-  }
-  return out;
-}
 
 export default function EventComposer() {
   const phase     = useStore(s => s.phase);
@@ -1003,164 +938,6 @@ export default function EventComposer() {
     </div>
   );
 }
-
-function PreviewPanel({ preview }) {
-  if (!preview) return null;
-  const { deltas, factionResponses, narrativeSummary, warnings } = preview;
-  const partyCaused = !!(preview.event?.partyCaused || preview.event?.cause === 'party_action');
-  return (
-    <div style={{
-      marginTop: SP.sm, padding: SP.sm,
-      background: CARD, border: `1px solid ${GOLD}`, borderRadius: R.sm,
-    }}>
-      {partyCaused && (
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 4, marginBottom: 6,
-          padding: '2px 8px', borderRadius: 999,
-          background: PARTY_BG, color: PARTY, border: `1px solid ${PARTY}`,
-          fontSize: FS.xxs, fontFamily: sans, fontWeight: 800, letterSpacing: '0.04em',
-        }}>
-          ⚔ Party-caused
-        </div>
-      )}
-      <div style={{ fontSize: FS.sm, fontFamily: sans, color: INK, fontWeight: 700, marginBottom: 4 }}>
-        {narrativeSummary || 'Preview'}
-      </div>
-      {warnings?.length > 0 && (
-        <ul style={{ margin: '4px 0', paddingLeft: 18, color: swatch.danger, fontSize: FS.xs, fontFamily: sans }}>
-          {warnings.map((w, i) => <li key={i}>{w.message}</li>)}
-        </ul>
-      )}
-      {deltas?.length > 0 && (
-        <div style={{ marginTop: 6 }}>
-          {deltas.map((d, i) => <DeltaRow key={i} d={d} />)}
-        </div>
-      )}
-      {factionResponses?.length > 0 && (
-        <div style={{ marginTop: 8 }}>
-          <div style={{
-            fontSize: FS.xxs, color: MUTED, fontWeight: 800, fontFamily: sans,
-            letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 4,
-          }}>
-            Faction responses
-          </div>
-          {factionResponses.map((r, i) => (
-            <div key={i} style={{
-              fontSize: FS.xs, fontFamily: sans, color: INK, lineHeight: 1.5, marginBottom: 4,
-            }}>
-              <strong style={{ color: GOLD }}>{r.factionName}:</strong> {r.response}
-              {r.hookSeed && (
-                <div style={{ color: SECOND, fontStyle: 'italic', marginTop: 2 }}>
-                  Hook seed: {r.hookSeed}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function DeltaRow({ d }) {
-  const arrow = d.change > 0 ? '↑' : '↓';
-  const sevColor = d.severity === 'major' ? '#8b1a1a' : d.severity === 'moderate' ? '#a0762a' : MUTED;
-  return (
-    <div style={{
-      display: 'flex', alignItems: 'center', gap: 6,
-      fontSize: FS.xs, fontFamily: sans, color: INK, lineHeight: 1.5,
-    }}>
-      <span style={{ color: sevColor, fontWeight: 800, minWidth: 12 }}>{arrow}</span>
-      <span>{d.explanation}</span>
-      <span style={{ color: MUTED, marginLeft: 'auto' }}>
-        {d.before} → {d.after}
-      </span>
-    </div>
-  );
-}
-
-function labelOfTarget(targetId) {
-  const tail = String(targetId || '').split('.').pop();
-  return tail.replace(/_/g, ' ');
-}
-
-/**
- * BatchCart — the staging area for "multiple simultaneous changes". Lists the
- * staged events, surfaces blocking cross-reference warnings live (a change
- * that targets an entity neither in the settlement nor earlier in the batch),
- * and offers one Preview + one Apply for the whole set.
- */
-function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRemove, onClear, onPreview, onApply }) {
-  const validation = validateBatch(settlement, staged);
-  const blocks = (validation.warnings || []).filter(w => w.severity === 'block');
-  return (
-    <div style={{
-      marginTop: SP.sm, padding: SP.sm,
-      background: swatch['#FAF8F4'], border: `1px solid ${GOLD}`, borderRadius: R.sm,
-    }}>
-      <div style={{
-        fontSize: FS.xs, fontWeight: 800, color: MUTED, fontFamily: sans,
-        textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs,
-      }}>
-        Staged changes ({staged.length})
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        {staged.map((e, i) => (
-          <div key={e.id || i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.xs, fontFamily: sans, color: INK }}>
-            <span style={{ fontWeight: 700, minWidth: 16, color: GOLD }}>{i + 1}.</span>
-            <span style={{ flex: 1 }}>
-              {EVENT_REGISTRY[e.type]?.label || e.type}{e.targetId ? `: ${labelOfTarget(e.targetId)}` : ''}
-            </span>
-            <button onClick={() => onRemove(i)} title="Remove" style={{ background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 2, display: 'flex' }}>
-              <X size={12} />
-            </button>
-          </div>
-        ))}
-      </div>
-      {blocks.length > 0 && (
-        <ul style={{ margin: '6px 0 0', paddingLeft: 16, color: swatch.danger, fontSize: FS.xxs, fontFamily: sans }}>
-          {blocks.map((w, i) => <li key={i}>{w.message}</li>)}
-        </ul>
-      )}
-      {pendingBatchPreview?.systemStateDeltas?.length > 0 && (
-        <div style={{ marginTop: 6 }}>
-          {pendingBatchPreview.systemStateDeltas.map((d, i) => <DeltaRow key={i} d={d} />)}
-        </div>
-      )}
-      <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
-        <button onClick={onPreview} style={primaryBtn(false)}>Preview batch</button>
-        <button
-          onClick={onApply}
-          disabled={blocks.length > 0}
-          style={{ ...confirmBtn, opacity: blocks.length > 0 ? 0.5 : 1, cursor: blocks.length > 0 ? 'not-allowed' : 'pointer' }}
-        >
-          <Check size={11} /> {phase === 'canon' ? `Apply ${staged.length} to timeline` : `Apply all (${staged.length})`}
-        </button>
-        <button onClick={onClear} style={cancelBtn}>Clear</button>
-      </div>
-    </div>
-  );
-}
-
-function Field({ label, hint, children }) {
-  return (
-    // The control is implicitly associated by nesting inside this <label>, which
-    // is a valid accessible label association; a static htmlFor can't be used on a
-    // reusable wrapper without colliding ids, so the htmlFor half of label-has-for
-    // is intentionally waived here.
-    // eslint-disable-next-line jsx-a11y/label-has-for
-    <label style={{ display: 'flex', flexDirection: 'column', gap: 2, fontSize: FS.xxs, fontFamily: sans, color: MUTED }}>
-      {label}
-      {children}
-      {hint && <span style={{ fontStyle: 'italic', color: MUTED, opacity: 0.7 }}>{hint}</span>}
-    </label>
-  );
-}
-
-// Party-attribution accent — a heraldic crimson, distinct from the gold brand
-// accent and the purple AI-narrative tint, so "the party did this" reads clearly.
-const PARTY = '#8a2f4a';
-const PARTY_BG = '#f7ebf0';
 
 // APPLY_STRESSOR severity words → engine severity. Words at the table,
 // numbers in the engine (same posture as the hidden impair sliders).
