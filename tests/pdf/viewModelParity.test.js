@@ -14,6 +14,7 @@ import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { deriveFoodBalance, deriveDossierViewModel } from '../../src/domain/display/dossierViewModel.js';
+import { SHARED_FIELDS, getByPath } from '../../src/domain/display/parityContract.js';
 
 // One key per on-screen dossier section (OutputContainer tabs). aiAppendix is
 // intentionally excluded - it only exists in the AI-narrative path.
@@ -43,13 +44,13 @@ describe('PDF viewModel parity', () => {
   });
 });
 
-// A+ P1.8 — field-level VALUE parity (not just key-existence). The PDF must render
-// the SAME food-balance numbers the shared deriveFoodBalance produces (the value the
-// on-screen dossier shows), across every slice that surfaces them — so a slice can't
-// silently read the raw, unclamped metrics.foodBalance and drift from the screen.
-// (Convergence of the remaining richer foodBalance objects — viability slice — is
-// Phase-2 Track G; this harness pins the headline scalar facts now.)
-describe('PDF viewModel — food-balance value parity with deriveFoodBalance', () => {
+// A+ pdf.5 — field-level VALUE parity driven by the SHARED_FIELDS contract (DATA,
+// not hand-listed asserts). The PDF must render the SAME values the canonical
+// display model (deriveDossierViewModel) produces, for every shared fact — so a
+// slice can't silently read a raw/unclamped source and drift from the screen.
+// New shared facts default to "must match": add a SHARED_FIELDS row (or a
+// documented PARITY_EXEMPT entry), and this harness asserts it automatically.
+describe('PDF viewModel — SHARED_FIELDS value parity (canon ↔ PDF view-model)', () => {
   const configs = [
     { settType: 'thorp', culture: 'norse', terrain: 'mountain', tradeRouteAccess: 'isolated' },
     { settType: 'town', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'road' },
@@ -57,29 +58,25 @@ describe('PDF viewModel — food-balance value parity with deriveFoodBalance', (
   ];
 
   for (const cfg of configs) {
-    it(`overview + identity-anchor food match canonical for ${cfg.settType}/${cfg.terrain}`, () => {
+    it(`every SHARED_FIELDS fact matches canon for ${cfg.settType}/${cfg.terrain}`, () => {
       const s = generateSettlementPipeline(cfg, null, { seed: `parity-${cfg.settType}-2026`, customContent: {} });
-      const canonical = deriveFoodBalance(s);
+      const canon = deriveDossierViewModel(s);
       const vm = buildViewModel({ settlement: s });
 
-      // The convergence layer itself (deriveDossierViewModel) is the canonical
-      // model the web reads; assert the PDF matches IT, the way the screen does.
-      const canon = deriveDossierViewModel(s);
-      expect(canon.foodBalance.deficitPct).toBe(canonical.deficitPct);
+      for (const row of SHARED_FIELDS) {
+        const canonVal = getByPath(canon, row.canonPath);
+        for (const vmPath of row.vmPaths) {
+          const raw = getByPath(vm, vmPath);
+          const vmVal = row.normalizeVm ? row.normalizeVm(raw) : raw;
+          expect(vmVal, `${row.fact} — PDF ${vmPath} must equal canon ${row.canonPath}`).toBe(canonVal);
+        }
+      }
 
-      // overview slice coalesces 0 → null (`m.deficit || null`); normalize for compare.
-      expect(vm.overview.foodBalance.deficit ?? 0).toBe(canonical.deficit);
-      expect(vm.overview.foodBalance.surplus ?? 0).toBe(canonical.surplus);
-      expect(vm.overview.foodBalance.deficitPct).toBe(canonical.deficitPct);
-
-      // economics slice (the EconomicsTrade chapter's FoodBalanceBlock) — the path
-      // the web Economics tab must also match after routing through deriveFoodBalance.
-      expect(vm.economics.foodBalance.deficitPct).toBe(canonical.deficitPct);
-
-      // identity anchor (mirrors the DailyLifeTab anchor) must use the clamped helper
-      // value, not the raw unclamped field (the divergence this harness closed).
-      expect(vm.identity.anchor.foodDeficit).toBe(canonical.deficit);
-      expect(vm.identity.anchor.foodSurplus).toBe(canonical.surplus);
+      // Identity anchor mirrors the DailyLifeTab anchor (not a deriveDossierViewModel
+      // path, so it stays a direct assertion alongside the registry walk).
+      const fbal = deriveFoodBalance(s);
+      expect(vm.identity.anchor.foodDeficit).toBe(fbal.deficit);
+      expect(vm.identity.anchor.foodSurplus).toBe(fbal.surplus);
     });
   }
 });
