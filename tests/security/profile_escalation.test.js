@@ -29,50 +29,14 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-// ── Server-side verification checklist (run manually) ──────────────────────
-//
-// These are written as pgTAP-style assertions. Save to a file like
-// supabase/tests/profile_security.sql and run with `supabase test db`.
-// They assume the test session is authenticated as a regular user
-// (auth.uid() returns a real, non-privileged uuid).
-//
-//   begin;
-//   select plan(8);
-//
-//   -- 1. Direct role escalation is rejected.
-//   prepare attempt_role as update profiles set role='developer' where id = auth.uid();
-//   select throws_ok('execute attempt_role', null, null, 'role update blocked');
-//
-//   -- 2. Direct tier upgrade is rejected.
-//   prepare attempt_tier as update profiles set tier='premium' where id = auth.uid();
-//   select throws_ok('execute attempt_tier', null, null, 'tier update blocked');
-//
-//   -- 3. Direct credit grant is rejected.
-//   prepare attempt_credits as update profiles set credits=99999 where id = auth.uid();
-//   select throws_ok('execute attempt_credits', null, null, 'credit update blocked');
-//
-//   -- 4. Direct founder grant is rejected.
-//   prepare attempt_founder as update profiles set is_founder=true where id = auth.uid();
-//   select throws_ok('execute attempt_founder', null, null, 'is_founder update blocked');
-//
-//   -- 5. display_name update via RPC succeeds.
-//   select isnt(public.update_display_name('Newname'), null, 'rpc accepts display name');
-//
-//   -- 6. spend_credits returns ok=false when balance is zero.
-//   update profiles set credits = 0 where id = auth.uid(); -- via service role
-//   select is(public.spend_credits('narrative')->>'ok', 'false', 'insufficient funds returns ok=false');
-//
-//   -- 7. spend_credits decrements atomically when balance is sufficient.
-//   update profiles set credits = 10 where id = auth.uid(); -- via service role
-//   select is(public.spend_credits('narrative')->>'balance', '7', 'cost=3 decrement');
-//
-//   -- 8. admin_set_role rejected from non-privileged caller.
-//   select throws_ok($$select public.admin_set_role(auth.uid(), 'admin')$$,
-//                    null, null, 'admin_set_role rejected for unprivileged user');
-//
-//   select * from finish();
-//   rollback;
-// ────────────────────────────────────────────────────────────────────────
+// ── Server-side verification — NOW EXECUTED (no longer a manual checklist) ──
+// Migration 009's column-lock UPDATE policy (role/tier/credits/is_founder pinned)
+// is executed by tests/security/profileEscalation.pglite.test.js: it loads the
+// REAL policy DDL into in-process Postgres and runs every escalation attempt
+// under a forced-RLS non-superuser role, asserting each is rejected and that
+// display_name updates still succeed — in the standard `npm run test` (no
+// Docker). supabase/tests/profile_security.sql remains the pg_prove/Docker
+// superset (it also covers the spend_credits/admin_set_role RPCs).
 
 // ── Client-side path tests ────────────────────────────────────────────────
 
