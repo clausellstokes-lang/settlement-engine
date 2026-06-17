@@ -20,6 +20,8 @@
  * Pure; never mutates its input.
  */
 
+import { deepClone } from '../clone.js';
+
 // Recursive key denylist. Any object key matching this is dropped entirely.
 // The `dm`/`gm` alternations use a word boundary (\bdm/\bgm) so they match the
 // real DM-private keys (dmNotes, dmCompass, dmNote, and any future dm*/gm* key)
@@ -70,9 +72,7 @@ export function sanitizePublicValue(value, path = []) {
  */
 export function toPublicSafe(settlement, { full = false } = {}) {
   if (full) {
-    let clone;
-    try { clone = structuredClone(settlement || {}); }
-    catch { clone = JSON.parse(JSON.stringify(settlement || {})); }
+    const clone = deepClone(settlement || {});
     // AI prose blobs are the narrated toggle's domain, not this one.
     delete clone.aiData;
     delete clone.aiDailyLife;

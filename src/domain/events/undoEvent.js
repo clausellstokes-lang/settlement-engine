@@ -29,6 +29,7 @@
  */
 
 import { deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
+import { deepClone } from '../clone.js';
 
 // ── Pre-event snapshot (applyEvent stamps it onto logEntry.undo) ─────────
 
@@ -147,7 +148,7 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
 // pre-event _config copy — one snapshot restores both.
 const MIRRORED_RECORD_KEYS = Object.freeze(['resourceEdits', 'customTradeGoods', 'stressorEdits']);
 
-const clone = (v) => JSON.parse(JSON.stringify(v));
+const clone = (v) => deepClone(v);
 
 /** { keys: every key audited, values: only the keys present (cloned) } —
  *  presence matters: a key the event GREW must be deleted on undo, not

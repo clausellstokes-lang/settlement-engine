@@ -25,9 +25,10 @@ import { normalizeSimulationRules, propagationDepthForRules } from './simulation
 import { wallClockNow } from '../clock.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { rolesForCanonicalEdge } from '../relationships/canonicalRelationship.js';
+import { deepClone } from '../clone.js';
 
 function clone(value) {
-  return value == null ? value : JSON.parse(JSON.stringify(value));
+  return value == null ? value : deepClone(value);
 }
 
 function clamp01(value) {

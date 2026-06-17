@@ -41,6 +41,7 @@ import { withActiveCondition, withEventConditionsSynced } from './activeConditio
 import { archetypeForStressor, promoteStressorsToConditions } from './conditionPromotion.js';
 import { STRESSOR_CATALOG, normalizeStressor } from './worldPulse/stressors.js';
 import { GEN_TO_PULSE_TYPE, pulseTypeForStressorKey } from './stressorPicker.js';
+import { deepClone } from './clone.js';
 
 /** The event types whose settlement handlers are crisis-lifecycle transitions.
  *  settlementSlice gates its twin snapshot + directive consumer on this list —
@@ -549,5 +550,5 @@ export function crisisTwinFor(worldStressors, event, settlementId) {
       && (String(n.originSettlementId || '') === sid
         || (n.affectedSettlementIds || []).map(String).includes(sid));
   });
-  return raw ? JSON.parse(JSON.stringify(raw)) : null;
+  return raw ? deepClone(raw) : null;
 }

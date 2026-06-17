@@ -178,9 +178,20 @@ export default [
   // source-regex guard (tests/domain/domainWallClock.test.js) backs this up if lint
   // is skipped. Parsing calls (`new Date(someValue)`) are deterministic-given-input
   // and intentionally NOT matched — only the no-arg readers are.
+  // ── A+ P3.1 — bare JSON.parse(JSON.stringify) clone ban (clone seam) ─────────
+  // The hot-path deep clone is centralized in src/domain/clone.js (deepClone),
+  // which uses structuredClone with a JSON fallback. Bare JSON.parse(JSON.stringify)
+  // on the store/domain hot paths is slower and lossy (drops undefined-valued keys,
+  // coerces Dates to strings), so it is banned by construction here. The selector is
+  // ADDED to this existing domain determinism block (flat-config is last-wins per
+  // rule, so a second no-restricted-syntax block would CLOBBER the determinism
+  // selectors above). src/domain/clone.js is exempt — it is the sole sanctioned
+  // clone seam and legitimately holds the JSON fallback. A source-scan guard
+  // (tests/lint/deepCloneHotPath.test.js) backs this up if lint is skipped.
+  // @enforced-by this rule + tests/lint/deepCloneHotPath.test.js
   {
     files: ['src/domain/**/*.js'],
-    ignores: ['src/domain/clock.js'],
+    ignores: ['src/domain/clock.js', 'src/domain/clone.js'],
     rules: {
       'no-restricted-syntax': ['error',
         {
@@ -199,12 +210,33 @@ export default [
           selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
           message: 'Determinism: Date.now() reads wall-clock — use wallClockMs() from domain/clock.js (the sole sanctioned entry) or thread a value in.',
         },
+        {
+          selector: "CallExpression[callee.object.name='JSON'][callee.property.name='parse'] > CallExpression[callee.object.name='JSON'][callee.property.name='stringify']",
+          message: 'Use deepClone() from src/domain/clone.js — bare JSON.parse(JSON.stringify) is slower and lossy (drops undefined keys). The clone seam is centralized.',
+        },
       ],
       'no-restricted-imports': ['error', {
         patterns: [{
           group: ['**/lib/flags', '**/lib/flags.js', '**/lib/saves', '**/lib/saves.js', '**/lib/campaigns', '**/lib/campaigns.js'],
           message: 'Purity: the domain kernel must not import lib config/store modules. Pass values in as arguments.',
         }],
+      }],
+    },
+  },
+
+  // ── A+ P3.1 — bare JSON.parse(JSON.stringify) clone ban (store hot paths) ────
+  // The store layer routes every hot-path deep clone through deepClone() (imported
+  // from ../domain/clone.js) — structuredClone with a JSON fallback, faster and
+  // lossless vs bare JSON.parse(JSON.stringify) (which drops undefined keys and
+  // coerces Dates). The store has no other no-restricted-syntax block, so this is a
+  // standalone block (no clobber risk). Backed by tests/lint/deepCloneHotPath.test.js.
+  // @enforced-by this rule + tests/lint/deepCloneHotPath.test.js
+  {
+    files: ['src/store/**/*.{js,jsx}'],
+    rules: {
+      'no-restricted-syntax': ['error', {
+        selector: "CallExpression[callee.object.name='JSON'][callee.property.name='parse'] > CallExpression[callee.object.name='JSON'][callee.property.name='stringify']",
+        message: 'Use deepClone() from src/domain/clone.js — bare JSON.parse(JSON.stringify) is slower and lossy (drops undefined keys). The clone seam is centralized.',
       }],
     },
   },

@@ -14,10 +14,11 @@ import {
   primeCampaignSync,
   syncCampaignChanges,
 } from '../lib/campaignSync.js';
+import { deepClone } from '../domain/clone.js';
 
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
-  return JSON.parse(JSON.stringify(value));
+  return deepClone(value);
 }
 
 /** Unique, sorted channel-type enums from an array of regional impacts. */

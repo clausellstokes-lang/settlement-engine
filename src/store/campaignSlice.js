@@ -51,6 +51,7 @@ import {
   newCampaignId, isUuid, findActiveCampaign,
 } from './campaignSliceShared.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import { deepClone } from '../domain/clone.js';
 
 const SCHEMA_VERSION = 2;
 
@@ -488,7 +489,7 @@ export const createCampaignSlice = (set, get) => {
       if (!c) return;
       // Pull a deep-cloneable copy of mapState. Override wins if provided.
       const source = mapStateOverride || state.mapState;
-      const clean = JSON.parse(JSON.stringify(source || {}));
+      const clean = deepClone(source || {});
       c.mapState = {
         schemaVersion: SCHEMA_VERSION,
         fmgSnapshot: clean.fmgSnapshot || null,

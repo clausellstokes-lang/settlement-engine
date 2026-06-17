@@ -15,6 +15,7 @@
  */
 import { inferSuccessors } from '../domain/entities/successors.js';
 import { inferImportance } from '../domain/entities/npcs.js';
+import { deepClone } from '../domain/clone.js';
 
 // A+ P0.1: persistSaveUpdate is UNIFIED. The canon settlement path (applyEvent,
 // undoLastEvent, recordSnapshot, revertToSnapshot, destroySavedSettlement) imports
@@ -28,7 +29,7 @@ const MAX_VERSION_HISTORY = 50;
 
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
-  return JSON.parse(JSON.stringify(value));
+  return deepClone(value);
 }
 
 export function cappedVersionHistory(history) {
@@ -94,7 +95,7 @@ export function pickleCampaignState(state) {
   return {
     phase:         state.phase || 'draft',
     eventLog:      Array.isArray(state.eventLog) ? [...state.eventLog] : [],
-    systemState:   state.systemState ? JSON.parse(JSON.stringify(state.systemState)) : null,
+    systemState:   state.systemState ? deepClone(state.systemState) : null,
     locks:         state.locks ? { ...state.locks } : {},
     generatedAt:   state.generatedAt || null,
     editedAt:      new Date().toISOString(),

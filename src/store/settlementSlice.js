@@ -78,6 +78,7 @@ import {
 // cap used to live only in HomeHero, which let regeneration bypass it.
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
 import { activeSaveCount } from '../lib/saveAccess.js';
+import { deepClone } from '../domain/clone.js';
 // WS4 decomposition — pure/leaf helpers extracted to a sibling.
 import {
   cloneJson, persistSaveUpdate, cappedVersionHistory, saveEnvelopeFor,
@@ -445,7 +446,7 @@ export const createSettlementSlice = (set, get) => ({
       ts,
       kind: opts.kind || 'manual',
       label: opts.label || 'Snapshot',
-      settlement: sourceSettlement ? JSON.parse(JSON.stringify(sourceSettlement)) : null,
+      settlement: sourceSettlement ? deepClone(sourceSettlement) : null,
     };
     let persistedHistory = null;
     if (targetSaveId) {
@@ -500,13 +501,13 @@ export const createSettlementSlice = (set, get) => ({
       if (targetSaveId) {
         const idx = s.savedSettlements.findIndex(e => String(e.id) === String(targetSaveId));
         if (idx === -1) return;
-        s.savedSettlements[idx].settlement = JSON.parse(JSON.stringify(target.settlement));
+        s.savedSettlements[idx].settlement = deepClone(target.settlement);
         persistedSettlement = cloneJson(s.savedSettlements[idx].settlement);
         persistedHistory = cloneJson(s.savedSettlements[idx].versionHistory || []);
       }
       // Always also refresh the live settlement view so the user sees
       // the revert immediately.
-      s.settlement = JSON.parse(JSON.stringify(target.settlement));
+      s.settlement = deepClone(target.settlement);
     });
     if (targetSaveId && persistedSettlement) {
       persistSaveUpdate(targetSaveId, {
@@ -809,7 +810,7 @@ export const createSettlementSlice = (set, get) => ({
 
     // Capture the pre-regen snapshot before mutation so the delta
     // composer has a clean `before` reference.
-    const before = JSON.parse(JSON.stringify(settlement));
+    const before = deepClone(settlement);
 
     if (section === 'npcs') {
       const parts = eng.regenNPCsPipeline(settlement, cfg);

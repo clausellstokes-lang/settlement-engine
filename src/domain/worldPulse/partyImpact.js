@@ -30,6 +30,7 @@ import { resolveStressorById, adjustStressorSeverityById, setStressorAttacker } 
 import { ensureRelationshipState } from './relationshipEvolution.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { deriveAllActiveConditions, deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
+import { deepClone } from '../clone.js';
 
 const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
 
@@ -386,7 +387,7 @@ export function applyPartyImpact({ campaign, saves = [], action, now = null } = 
     partyAction: action,
     settlementUpdates: (result.settlementUpdates || []).map(update => ({
       ...update,
-      settlement: update.settlement == null ? update.settlement : JSON.parse(JSON.stringify(update.settlement)),
+      settlement: update.settlement == null ? update.settlement : deepClone(update.settlement),
     })),
   };
 }

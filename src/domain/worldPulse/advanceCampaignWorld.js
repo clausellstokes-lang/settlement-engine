@@ -32,9 +32,10 @@ import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
+import { deepClone } from '../clone.js';
 
 function clone(value) {
-  return value == null ? value : JSON.parse(JSON.stringify(value));
+  return value == null ? value : deepClone(value);
 }
 
 function compactNpcPatch(patch = null) {
