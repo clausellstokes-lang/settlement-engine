@@ -82,6 +82,41 @@ export const TAG = Object.freeze({
   // Production
   RESOURCE_EXTRACTION: 'resource_extraction',
   INDUSTRY:            'industry',
+
+  // ── A+ P1.6 — the 27 tags the institutionalCatalog actually uses that were
+  // previously ungoverned (validateTag/isKnownTag silently passed them). Adding
+  // them as canonical constants brings catalog coverage to 42/42 WITHOUT editing
+  // the catalog data (zero behavior change). Some are synonyms of the tags above
+  // (economy≈economic, church/divine/monastery≈religious, law_enforcement≈law,
+  // fortification≈defense, underground≈illicit) — folding/normalizing those in the
+  // catalog data is a deliberate follow-on; governing them is the safe first step.
+  LAW_ENFORCEMENT: 'law_enforcement',
+  FORTIFICATION:   'fortification',
+  CHURCH:          'church',
+  DIVINE:          'divine',
+  MONASTERY:       'monastery',
+  ECONOMY:         'economy',
+  BANKING:         'banking',
+  GUILD:           'guild',
+  LUXURY:          'luxury',
+  EXOTIC:          'exotic',
+  WAREHOUSE:       'warehouse',
+  PORT:            'port',
+  ALCHEMY:         'alchemy',
+  ENCHANTING:      'enchanting',
+  METALWORK:       'metalwork',
+  LEATHER:         'leather',
+  TEXTILE:         'textile',
+  TIMBER:          'timber',
+  SHIPBUILDING:    'shipbuilding',
+  PLANAR:          'planar',
+  HOUSING:         'housing',
+  LODGING:         'lodging',
+  SANITATION:      'sanitation',
+  WATER:           'water',
+  ADVENTURING:     'adventuring',
+  ESSENTIAL:       'essential',
+  UNDERGROUND:     'underground',
 });
 
 // ── Tag groups ─────────────────────────────────────────────────────────────
