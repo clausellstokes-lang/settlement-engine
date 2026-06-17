@@ -36,6 +36,7 @@ import {
   computeActiveChains,
   institutionMatchesProcessor,
   institutionMatchesKeyword,
+  deriveInstitutionalServices,
   processorPatternIdSet,
 } from '../../src/generators/computeActiveChains.js';
 import { institutionContribution } from '../../src/domain/worldPulse/institutionLifecycle.js';
@@ -345,6 +346,26 @@ describe('tradition / magic-transit gates select EXACTLY what name-includes sele
     // The id set carries only what the catalog NAME carried — "Mages' guild"
     // has no 'arcane' substring, so the stamp does not invent an arcane match.
     expect(institutionMatchesKeyword(renamedStamped, 'arcane')).toBe(false);
+  });
+});
+
+// ── 3c. institutional-services map is id-first (A+ generators.5) ──────────────
+
+describe('deriveInstitutionalServices decides membership by id (rename-proof)', () => {
+  it('a stamped-renamed "Banking houses" still yields Banking & Finance; a bare rename does not', () => {
+    const stampedRenamed = [{ id: 'i1', name: 'The Gilded Vault', catalogId: catalogIdForName('Banking houses') }];
+    const bareRenamed = [{ id: 'i1', name: 'The Gilded Vault' }];
+    expect(catalogIdForName('Banking houses')).toBeTruthy();
+    const stampedServices = deriveInstitutionalServices(stampedRenamed).map(s => s.label);
+    const bareServices = deriveInstitutionalServices(bareRenamed).map(s => s.label);
+    expect(stampedServices).toContain('Banking & Finance');
+    expect(bareServices).not.toContain('Banking & Finance');
+  });
+
+  it('an unrenamed catalog institution derives the same services with and without its stamp', () => {
+    const named = [{ id: 'i1', name: 'Banking houses' }];
+    const stamped = [{ id: 'i1', name: 'Banking houses', catalogId: catalogIdForName('Banking houses') }];
+    expect(deriveInstitutionalServices(stamped)).toEqual(deriveInstitutionalServices(named));
   });
 });
 

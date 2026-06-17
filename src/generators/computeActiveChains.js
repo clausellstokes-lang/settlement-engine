@@ -837,12 +837,17 @@ const INSTITUTIONAL_SERVICE_MAP = [
  * @returns {Array} serviceEntries
  */
 export function deriveInstitutionalServices(institutions = []) {
-  const instNames = institutions.map(i => (i.name || '').toLowerCase());
   const services = [];
   const usedLabels = new Set();
 
   INSTITUTIONAL_SERVICE_MAP.forEach(def => {
-    const matched = instNames.filter(n => def.patterns.some(p => n.includes(p)));
+    // Membership decided by catalog id (rename-proof) for stamped institutions,
+    // substring fallback for unstamped — matched[] still reports display names.
+    // id-match === substring-match for catalog institutions by construction, so
+    // the derived services are byte-identical for generated rosters.
+    const matched = institutions
+      .filter(i => def.patterns.some(p => institutionMatchesKeyword(i, p)))
+      .map(i => (i.name || '').toLowerCase());
     if (matched.length === 0) return;
     if (usedLabels.has(def.incomeLabel)) return;
     usedLabels.add(def.incomeLabel);
