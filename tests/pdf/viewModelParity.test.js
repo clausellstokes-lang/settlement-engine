@@ -79,4 +79,18 @@ describe('PDF viewModel — SHARED_FIELDS value parity (canon ↔ PDF view-model
       expect(vm.identity.anchor.foodSurplus).toBe(fbal.surplus);
     });
   }
+
+  // pdf.7 — rot-proof the contract itself: SHARED_FIELDS must stay non-trivially
+  // populated and well-formed, so it can't silently decay back toward the
+  // key-only guard (the failure mode pdf.5 exists to kill). The walk above
+  // already proves every row's paths resolve; this guards the registry's shape.
+  it('SHARED_FIELDS is a non-trivial, well-formed contract', () => {
+    expect(SHARED_FIELDS.length).toBeGreaterThanOrEqual(8);
+    for (const row of SHARED_FIELDS) {
+      expect(typeof row.fact, `row missing fact: ${JSON.stringify(row)}`).toBe('string');
+      expect(typeof row.canonPath).toBe('string');
+      expect(Array.isArray(row.vmPaths) && row.vmPaths.length > 0).toBe(true);
+      if (row.normalizeVm !== undefined) expect(typeof row.normalizeVm).toBe('function');
+    }
+  });
 });
