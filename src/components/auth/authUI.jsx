@@ -179,13 +179,20 @@ export function Alert({ type, children }) {
     info:    { bg: '#fef9ee', border: GOLD, text: SECOND, Icon: Mail },
   };
   const c = colors[type] || colors.info;
+  // A+ design-a11y.4 — conditionally-rendered errors are the textbook live-region
+  // case (the content appears after the user acts), so assistive tech must
+  // announce it: errors assertively (role=alert), everything else politely
+  // (role=status). Mirrors the Toast primitive's role=status pattern.
   return (
-    <div style={{
-      display: 'flex', alignItems: 'flex-start', gap: SP.sm,
-      padding: `${SP.sm + 2}px ${SP.md}px`,
-      background: c.bg, border: `1px solid ${c.border}`, borderRadius: R.md,
-      fontSize: FS.sm, color: c.text, lineHeight: 1.5,
-    }}>
+    <div
+      role={type === 'error' ? 'alert' : 'status'}
+      aria-live={type === 'error' ? 'assertive' : 'polite'}
+      style={{
+        display: 'flex', alignItems: 'flex-start', gap: SP.sm,
+        padding: `${SP.sm + 2}px ${SP.md}px`,
+        background: c.bg, border: `1px solid ${c.border}`, borderRadius: R.md,
+        fontSize: FS.sm, color: c.text, lineHeight: 1.5,
+      }}>
       <c.Icon size={16} style={{ flexShrink: 0, marginTop: 1 }} />
       <span>{children}</span>
     </div>
