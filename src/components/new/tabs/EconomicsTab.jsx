@@ -7,6 +7,7 @@ import {isMobile} from '../tabConstants';
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
+import Button from '../../primitives/Button.jsx';
 
 // ── Status palette for chain cards ────────────────────────────────────────
 // Module-scope so the object identity is stable across renders (avoids
@@ -59,12 +60,13 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
           entrepotCount > 0                   && {key:'entrepot',  label:` Entrepôt (${entrepotCount})`,              color:'#a0762a'},
           institutionalServices.length > 0    && {key:'services',  label:` Services (${institutionalServices.length})`, color:'#5a3a1a'},
         ].filter(Boolean).map(f => (
-          <button key={f.key} onClick={() => setFlowFilter(f.key)} style={{
-            padding:'4px 10px',borderRadius:4,border:'1px solid',fontSize:FS.xxs,fontWeight:flowFilter===f.key?700:500,cursor:'pointer',
+          <Button key={f.key} variant="secondary" size="sm" aria-pressed={flowFilter===f.key}
+            onClick={() => setFlowFilter(f.key)} style={{
+            padding:'4px 10px',borderRadius:4,minHeight:undefined,fontSize:FS.xxs,fontWeight:flowFilter===f.key?700:500,
             background:flowFilter===f.key?(f.color?`${f.color}18`:'#1c140918'):'#fff',
             color:flowFilter===f.key?(f.color||'#1c1409'):'#6b5340',
-            borderColor:flowFilter===f.key?(f.color||'#1c1409'):'#c8b89a',
-          }}>{f.label}</button>
+            border:`1px solid ${flowFilter===f.key?(f.color||'#1c1409'):'#c8b89a'}`,
+          }}>{f.label}</Button>
         ))}
       </div>
 

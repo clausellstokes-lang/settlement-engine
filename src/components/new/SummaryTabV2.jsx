@@ -28,9 +28,9 @@
 import { useMemo } from 'react';
 import { FS, swatch } from '../theme.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
+import Button from '../primitives/Button.jsx';
 
 const GOLD = swatch['#8C6F32'];
-const GOLD_ACCENT = swatch['#C9A24C'];
 const INK = swatch['#1B1408'];
 const INK_DEEP = swatch['#2C2210'];
 const BODY = swatch['#3A2F18'];
@@ -287,24 +287,16 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
           )}
 
           {typeof onOpenTableView === 'function' && (
-            <button
+            <Button
               type="button"
+              variant="primary"
+              size="sm"
+              fullWidth
               onClick={onOpenTableView}
-              style={{
-                marginTop: 6,
-                padding: '7px 0',
-                background: INK,
-                color: GOLD_ACCENT,
-                border: 'none',
-                borderRadius: 4,
-                fontSize: FS.xxs, fontWeight: 700,
-                letterSpacing: '0.06em',
-                cursor: 'pointer',
-                fontFamily: sans,
-              }}
+              style={{ marginTop: 6 }}
             >
               📱 Open in Table View
-            </button>
+            </Button>
           )}
         </aside>
       </div>

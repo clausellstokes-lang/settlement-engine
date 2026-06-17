@@ -3,6 +3,7 @@ import { RefreshCw } from 'lucide-react';
 import { TIER_LABELS } from '../new/design';
 import { EVENTS } from '../../lib/analytics.js';
 import EditableInline from '../primitives/EditableInline.jsx';
+import Button from '../primitives/Button.jsx';
 
 // Dossier header bar — extracted verbatim from OutputContainer's render.
 // Presentational only: every value/handler arrives via props; the parent
@@ -46,12 +47,14 @@ export default function DossierHeaderRow({
               </div>
             </div>
             {REROLLABLE[selectedTab] && onRegenerate && (
-              <button
+              <Button
+                variant="gold"
+                size="md"
+                icon={<RefreshCw size={12} />}
                 onClick={() => onRegenerate(selectedTab)}
-                style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 14px', borderRadius: 5, background: 'rgba(196,154,60,0.15)', border: '1px solid rgba(196,154,60,0.3)', color: swatch['#C49A3C'], fontSize: FS.sm, fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }}
               >
-                <RefreshCw size={12} />{' '}{REROLLABLE[selectedTab]}
-              </button>
+                {REROLLABLE[selectedTab]}
+              </Button>
             )}
             {/* ── AI Narrative Layer button group ──────────────────────────────────
                 P121 / D-4 — When `narrativeLayerStrip` flag is on, the

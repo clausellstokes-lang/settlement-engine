@@ -280,7 +280,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
       {/* ── ARMED FORCES & FORTIFICATIONS ───────────────────────────────── */}
       <div style={{marginBottom:14}}>
-        <button onClick={()=>setShowForces(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 0',background:'none',border:'none',borderBottom:'1px solid #e0d0b0',cursor:'pointer',marginBottom:showForces?10:0,WebkitTapHighlightColor:'transparent'}}>
+        <button type="button" aria-expanded={showForces} onClick={()=>setShowForces(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 0',background:'none',border:'none',borderBottom:'1px solid #e0d0b0',cursor:'pointer',marginBottom:showForces?10:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{...serif,fontSize: FS['16'],fontWeight:600,color:swatch.inkMag}}>
             Armed Forces & Fortifications
             <span style={{fontSize:FS.sm,fontWeight:400,color:MUTED,marginLeft:8}}>

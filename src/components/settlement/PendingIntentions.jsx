@@ -13,7 +13,8 @@
 import { useMemo } from 'react';
 import { Hourglass, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { MUTED, INK, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 const TYPE_LABELS = {
   APPLY_STRESSOR: 'Apply stressor',
@@ -89,19 +90,15 @@ export default function PendingIntentions() {
             <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
               {labelFor(item.event)}
             </span>
-            <button
+            <Button
+              variant="danger"
+              size="sm"
+              icon={<X size={10} />}
               onClick={() => cancelQueuedEvent(campaignId, item.queueId)}
               title="Cancel this queued intention before the next World Pulse"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 3,
-                padding: '2px 6px',
-                background: swatch.white, color: swatch.danger,
-                border: '1px solid #c89a9a', borderRadius: R.sm,
-                fontSize: FS.xxs, fontFamily: sans, fontWeight: 700, cursor: 'pointer',
-              }}
             >
-              <X size={10} /> Cancel
-            </button>
+              Cancel
+            </Button>
           </div>
         ))}
       </div>

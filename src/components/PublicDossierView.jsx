@@ -19,8 +19,9 @@
 
 import { ArrowRight, Eye } from 'lucide-react';
 import OutputContainer from './OutputContainer.jsx';
+import Button from './primitives/Button.jsx';
 import { TIER_LABELS } from './new/design.js';
-import { GOLD, INK, BORDER, sans, serif_, SP, R, FS, swatch } from './theme.js';
+import { INK, BORDER, sans, serif_, SP, R, FS, swatch } from './theme.js';
 import { t } from '../copy/index.js';
 
 const MUTED = swatch['#6B5340'];
@@ -90,21 +91,14 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
           </div>
         </div>
         {onForge && (
-          <button
+          <Button
             type="button"
+            variant="primary"
             onClick={onForge}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              padding: `${SP.sm}px ${SP.lg}px`,
-              background: GOLD, color: swatch.white,
-              border: 'none', borderRadius: R.button,
-              fontFamily: sans, fontSize: FS.sm, fontWeight: 700,
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-            }}
+            trailingIcon={<ArrowRight size={14} />}
           >
-            {t('gallery.forgeYourOwn')} <ArrowRight size={14} />
-          </button>
+            {t('gallery.forgeYourOwn')}
+          </Button>
         )}
       </header>}
 

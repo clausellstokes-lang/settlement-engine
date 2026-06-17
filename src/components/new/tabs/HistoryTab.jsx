@@ -5,6 +5,7 @@ import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
 import {isMobile} from '../tabConstants';
 
 import {NarrativeNote} from '../NarrativeNote';
+import Button from '../../primitives/Button.jsx';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
@@ -79,7 +80,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3}}>{age} years old</span>
           {sortedEvents.length>0&&<span style={{fontSize:FS.sm,color:MUTED}}>{sortedEvents.length} historical events · {currentTensions.length} current tensions</span>}
-          {onReroll&&<button onClick={onReroll} style={{marginLeft:'auto',fontSize:FS.xs,fontWeight:700,color:swatch['#A0762A'],background:swatch['#F7F0E4'],border:'1px solid #c8b89a',borderRadius:5,padding:'5px 12px',cursor:'pointer',flexShrink:0}}>↺ Reroll</button>}
+          {onReroll&&<Button variant="gold" size="sm" onClick={onReroll} style={{marginLeft:'auto',flexShrink:0}}>↺ Reroll</Button>}
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
       </div>

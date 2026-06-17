@@ -20,6 +20,7 @@ import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_HDR, serif_, SP,
 import { getTierDisplayName } from '../config/pricing.js';
 import { t } from '../copy/index.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
+import IconButton from './primitives/IconButton.jsx';
 import AuthPanel from './auth/AuthPanel.jsx';
 import { Button, RoleBadge } from './auth/authUI.jsx';
 
@@ -78,9 +79,7 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
           <h2 id="auth-modal-title" style={{ margin: 0, fontSize: FS.xl + 1, fontFamily: serif_, fontWeight: 600 }}>
             {showAccount ? 'Account' : 'Welcome'}
           </h2>
-          <button onClick={onClose} aria-label={t('common.close')} style={{ background: 'none', border: 'none', color: MUTED, cursor: 'pointer' }}>
-            <X size={20} />
-          </button>
+          <IconButton Icon={X} label={t('common.close')} onClick={onClose} tone="ghost" size="lg" />
         </div>
 
         <div style={{ padding: `${SP.xxl}px ${SP.xl}px` }}>

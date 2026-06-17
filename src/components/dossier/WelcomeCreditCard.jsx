@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 const VIOLET = swatch['#7B4FCF'];
 const VIOLET_BG = swatch['#EBE2FA'];
@@ -163,32 +164,12 @@ export default function WelcomeCreditCard({ saveId = null }) {
           <div>Cost: <s>3 credits</s></div>
           <div style={{ fontWeight: 700, color: VIOLET }}>This one: free</div>
         </div>
-        <button
-          onClick={onNarrate}
-          style={{
-            padding: `${SP.sm}px ${SP.md}px`,
-            background: VIOLET,
-            color: swatch.white, border: 'none',
-            borderRadius: R.sm,
-            fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-            cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(123,79,207,0.35)',
-          }}
-        >
+        <Button variant="ai" size="md" onClick={onNarrate}>
           ✦ Narrate this town
-        </button>
-        <button
-          onClick={onLater}
-          style={{
-            padding: `${SP.sm}px ${SP.sm}px`,
-            background: 'transparent',
-            color: MUTED, border: 'none',
-            fontSize: FS.xs, fontFamily: sans,
-            cursor: 'pointer',
-          }}
-        >
+        </Button>
+        <Button variant="ghost" size="sm" onClick={onLater}>
           Maybe later
-        </button>
+        </Button>
       </div>
     </div>
   );

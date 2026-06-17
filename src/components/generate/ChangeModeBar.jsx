@@ -7,7 +7,8 @@
  */
 
 import { ChevronLeft } from 'lucide-react';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD_HDR, sans, serif_, SP, R, FS } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD_HDR, serif_, SP, R, FS } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 // "Change mode" back button — shown above the mode-specific UI once a card
 // is picked. Module-scope so React Compiler can memoize without seeing it
@@ -22,16 +23,15 @@ export function ChangeModeBar({ mode, onChangeMode }) {
       borderRadius: R.md,
       fontSize: FS.sm, color: SECOND,
     }}>
-      <button
+      <Button
+        variant="ghost"
+        size="md"
+        icon={<ChevronLeft size={14} />}
         onClick={() => onChangeMode(null)}
-        style={{
-          display: 'flex', alignItems: 'center', gap: SP.xs,
-          background: 'transparent', border: 'none', cursor: 'pointer',
-          color: GOLD, fontFamily: sans, fontSize: FS.sm, fontWeight: 600, padding: 0,
-        }}
+        style={{ padding: 0 }}
       >
-        <ChevronLeft size={14} /> Change mode
-      </button>
+        Change mode
+      </Button>
       <span style={{ color: MUTED }}>·</span>
       <span style={{ fontFamily: serif_, fontWeight: 600, color: INK }}>
         {mode === 'basic' ? 'Basic Generate' : 'Advanced Generate'}

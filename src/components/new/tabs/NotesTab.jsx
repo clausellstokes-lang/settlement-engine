@@ -3,6 +3,7 @@ import { Save } from 'lucide-react';
 import { useStore } from '../../../store/index.js';
 import { FS, swatch } from '../../theme.js';
 import { sans, TabIntro } from '../Primitives';
+import Button from '../../primitives/Button.jsx';
 
 const BORDER = swatch['#E0D0B0'];
 const INK = swatch['#1C1409'];
@@ -117,28 +118,16 @@ export default function NotesTab({ saveId, notes, section }) {
         )}
 
         {saveId ? (
-          <button
+          <Button
             type="button"
+            variant="primary"
             onClick={save}
             disabled={saving}
-            style={{
-              justifySelf: 'start',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              border: 'none',
-              borderRadius: 6,
-              background: GOLD,
-              color: swatch.white,
-              padding: '9px 14px',
-              cursor: saving ? 'wait' : 'pointer',
-              fontWeight: 800,
-              fontSize: FS.sm,
-            }}
+            icon={<Save size={15} />}
+            style={{ justifySelf: 'start' }}
           >
-            <Save size={15} />
             {saving ? 'Saving...' : saved ? 'Saved' : 'Save notes'}
-          </button>
+          </Button>
         ) : (
           <p style={{ margin: 0, fontSize: FS.xs, color: SECOND, fontStyle: 'italic', lineHeight: 1.5 }}>
             Type freely. Save this settlement to keep your notes with it.

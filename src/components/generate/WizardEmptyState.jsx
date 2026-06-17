@@ -9,9 +9,10 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { GOLD, INK, MUTED, SECOND, sans, serif_, SP, FS } from '../theme.js';
+import { INK, MUTED, SECOND, sans, serif_, SP, FS } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
+import Button from '../primitives/Button.jsx';
 
 // P128 / H-2 — Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
@@ -75,12 +76,9 @@ export function WizardEmptyState({
       {!showModePicker && authTier === 'anon' && (
         <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
           Want full control?{' '}
-          <button
-            onClick={onSignIn}
-            style={{ background: 'transparent', border: 'none', padding: 0, color: GOLD, fontWeight: 700, fontFamily: sans, fontSize: FS.sm, cursor: 'pointer', textDecoration: 'underline' }}
-          >
+          <Button variant="ghost" size="sm" onClick={onSignIn} style={{ display: 'inline-flex', textDecoration: 'underline' }}>
             Sign in (free)
-          </button>
+          </Button>
           {' '}to unlock Basic &amp; Advanced generation.
         </div>
       )}

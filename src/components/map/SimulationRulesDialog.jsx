@@ -11,6 +11,7 @@ import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, RED, SP, sans,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 const PROPAGATION_OPTIONS = [
   ['full', 'Full regional'],
@@ -276,21 +277,13 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
               {[campaign?.name || 'Campaign', activePreset?.label || 'Custom'].join(' - ')}
             </div>
           </div>
-          <button
-            type="button"
-            aria-label="Close simulation rules"
+          <IconButton
+            Icon={X}
+            label="Close simulation rules"
             onClick={onClose}
-            style={{
-              border: 'none',
-              background: 'transparent',
-              color: MUTED,
-              cursor: 'pointer',
-              padding: SP.xs,
-              display: 'inline-flex',
-            }}
-          >
-            <X size={17} />
-          </button>
+            tone="ghost"
+            size="lg"
+          />
         </header>
 
         <div style={{ padding: SP.lg, display: 'grid', gap: SP.lg }}>

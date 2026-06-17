@@ -14,26 +14,18 @@ import { Bold, Italic, Underline, Heading, List, ListOrdered, Link2, Eraser, Che
 
 import { sanitizeGalleryHtml } from '../lib/sanitizeGalleryHtml.js';
 import { BORDER2, CARD, CARD_ALT, INK, R, FS, sans } from './theme.js';
+import IconButton from './primitives/IconButton.jsx';
 
 const exec = (cmd, value = null) => {
   try { document.execCommand(cmd, false, value); } catch { /* command unsupported */ }
 };
 
 function ToolbarButton({ icon: Icon, title, onMouseDown }) {
-  return (
-    <button
-      type="button"
-      title={title}
-      onMouseDown={onMouseDown}
-      style={{
-        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        width: 26, height: 26, border: `1px solid ${BORDER2}`, borderRadius: R.sm,
-        background: CARD, color: INK, cursor: 'pointer',
-      }}
-    >
-      <Icon size={13} />
-    </button>
-  );
+  // Icon-only toolbar control: design-system IconButton (default tone ≈ card
+  // bg + border, md size for the ~13px icon). title becomes the required
+  // aria-label; onMouseDown passes through via ...rest (kept so execCommand
+  // applies to the live selection instead of blurring first).
+  return <IconButton Icon={Icon} label={title} size="md" tone="default" onMouseDown={onMouseDown} />;
 }
 
 export default function GalleryDescriptionEditor({ value = '', onChange, maxLength = 4000 }) {

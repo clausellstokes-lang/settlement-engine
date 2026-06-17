@@ -6,6 +6,7 @@ import {isMobile} from '../tabConstants';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
+import Button from '../../primitives/Button.jsx';
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -192,30 +193,19 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           {' '}to refine Daily Life into narrative. Five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
         </div>
       ) : (
-        <button
+        <Button
+          variant="primary"
+          size="lg"
+          fullWidth
           onClick={generate}
-          disabled={loading}
+          busy={loading}
           title={hasContent
             ? `Regenerate replaces the current daily-life prose with a fresh narrative pass against the simulator output. Spends ${getCost('dailyLife')} credits.`
             : `Refine the simulator output into daily-life prose for this settlement. Spends ${getCost('dailyLife')} credits.`}
-          style={{
-            width: '100%', padding: '13px 20px',
-            background: loading ? '#e8dcc8' : 'linear-gradient(135deg, #a0762a, #7a5a1a)',
-            color: loading ? MUTED : '#fffbf5',
-            border: 'none',
-            borderRadius: 8,
-            cursor: loading ? 'default' : 'pointer',
-            fontSize: FS.md, fontWeight: 700, fontFamily: sans,
-            letterSpacing: '0.03em', marginBottom: 16,
-            transition: 'opacity 0.2s',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-          }}
+          style={{ marginBottom: 16 }}
         >
-          {loading && (
-            <span style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}>⟳</span>
-          )}
           {buttonLabel}
-        </button>
+        </Button>
       )}
 
       <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>

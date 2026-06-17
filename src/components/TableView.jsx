@@ -25,6 +25,7 @@ import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { FS, ELEV, swatch } from './theme.js';
 import { tonightAtTheTable } from '../domain/summary/tonightAtTheTable.js';
+import IconButton from './primitives/IconButton.jsx';
 
 const GOLD = swatch['#8C6F32'];
 const GOLD_ACCENT = swatch['#C9A24C'];
@@ -119,21 +120,15 @@ export default function TableView({ settlement, onClose }) {
               {prosperity && <> · {String(prosperity).toUpperCase()}</>}
             </div>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close table view"
-            style={{
-              flexShrink: 0,
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(201,162,76,0.35)',
-              borderRadius: 8, padding: 6,
-              color: GOLD_ACCENT, cursor: 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}
-          >
-            <X size={16} />
-          </button>
+          <div style={{ flexShrink: 0 }}>
+            <IconButton
+              Icon={X}
+              label="Close table view"
+              onClick={onClose}
+              tone="ghost"
+              size="lg"
+            />
+          </div>
         </header>
 
         {/* Scrollable body */}

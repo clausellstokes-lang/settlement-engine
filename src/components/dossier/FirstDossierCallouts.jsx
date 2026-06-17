@@ -23,9 +23,10 @@
  */
 
 import { useState } from 'react';
-import { FS, swatch, MUTED } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
+import Button from '../primitives/Button.jsx';
 
 const DISMISS_KEY_PREFIX = 'sf:dismissed_callouts:';
 const GREEN = swatch['#4A7A3A'];
@@ -123,25 +124,16 @@ export default function FirstDossierCallouts() {
                 {body}
               </div>
             </div>
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => handleDismiss(key)}
               aria-label={t('firstDossierCallouts.dismissLabel')}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: MUTED,
-                cursor: 'pointer',
-                fontSize: FS.xs, fontWeight: 700,
-                padding: '2px 8px',
-                lineHeight: 1,
-                fontFamily: sans,
-                flexShrink: 0,
-              }}
               title={t('firstDossierCallouts.dismissLabel')}
+              style={{ flexShrink: 0 }}
             >
               {t('firstDossierCallouts.dismissLabel')} ×
-            </button>
+            </Button>
           </div>
         );
       })}

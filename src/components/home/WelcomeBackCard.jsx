@@ -19,7 +19,8 @@ import { flag } from '../../lib/flags.js';
 import { useReturnVisit } from '../../hooks/useReturnVisit.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { t } from '../../copy/index.js';
-import { GOLD, INK, BODY, BORDER, sans, serif_, FS, SP, R, GOLD_DEEP, swatch } from '../theme.js';
+import { INK, BODY, BORDER, sans, serif_, FS, SP, R, GOLD_DEEP } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 export default function WelcomeBackCard({ onOpen, onForge }) {
   const tier = useStore(s => s.auth.tier);
@@ -78,33 +79,22 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
             `How did your session in ${settlementName} go?`}
         </p>
         <div style={{ display: 'flex', gap: SP.sm, marginTop: SP.md, flexWrap: 'wrap' }}>
-          <button
+          <Button
             type="button"
+            variant="primary"
+            size="md"
             onClick={handleOpen}
-            style={{
-              padding: `${SP.sm}px ${SP.lg}px`,
-              background: INK, color: GOLD,
-              border: 'none', borderRadius: R.sm,
-              fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-              cursor: 'pointer',
-            }}
           >
             {t('hero.welcomeBack.openCta', { settlementName }) || `Open ${settlementName}`}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="secondary"
+            size="md"
             onClick={handleForge}
-            style={{
-              padding: `${SP.sm}px ${SP.lg}px`,
-              background: swatch.white, color: BODY,
-              border: `1px solid ${BORDER}`,
-              borderRadius: R.sm,
-              fontSize: FS.sm, fontWeight: 600, fontFamily: sans,
-              cursor: 'pointer',
-            }}
           >
             {t('hero.welcomeBack.followUp') || 'Forge a follow-up'}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

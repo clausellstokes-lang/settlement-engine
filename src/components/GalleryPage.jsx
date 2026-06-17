@@ -10,7 +10,8 @@ import GalleryDetail from './gallery/GalleryDetail.jsx';
 import GalleryList from './gallery/GalleryList.jsx';
 import GalleryMaps from './gallery/GalleryMaps.jsx';
 import { useGalleryPageState } from '../hooks/useGalleryPageState.js';
-import { GOLD, GOLD_BG, INK, SECOND, BORDER, sans, SP, R, FS, PAGE_MAX } from './theme.js';
+import Button from './primitives/Button.jsx';
+import { SP, PAGE_MAX } from './theme.js';
 
 function GalleryTabs({ tab, setTab }) {
   const tabs = [{ id: 'settlements', label: 'Settlements' }, { id: 'maps', label: 'Maps' }];
@@ -19,12 +20,15 @@ function GalleryTabs({ tab, setTab }) {
       {tabs.map(t => {
         const active = tab === t.id;
         return (
-          <button key={t.id} type="button" onClick={() => setTab(t.id)} style={{
-            padding: `${SP.xs}px ${SP.md}px`, borderRadius: R.md, cursor: 'pointer', fontFamily: sans,
-            fontSize: FS.sm, fontWeight: active ? 700 : 500,
-            border: `1px solid ${active ? GOLD : BORDER}`, background: active ? GOLD_BG : 'transparent',
-            color: active ? INK : SECOND,
-          }}>{t.label}</button>
+          <Button
+            key={t.id}
+            variant={active ? 'gold' : 'ghost'}
+            size="md"
+            onClick={() => setTab(t.id)}
+            aria-pressed={active}
+          >
+            {t.label}
+          </Button>
         );
       })}
     </div>

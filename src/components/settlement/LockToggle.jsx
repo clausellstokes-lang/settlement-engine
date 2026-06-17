@@ -11,7 +11,7 @@
 
 import { Lock, Unlock } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, MUTED, BORDER, sans, FS, R } from '../theme.js';
+import IconButton from '../primitives/IconButton.jsx';
 
 /**
  * @param {Object} props
@@ -41,23 +41,16 @@ export default function LockToggle({ which, id, label }) {
 
   const Icon = isLocked ? Lock : Unlock;
   return (
-    <button
+    <IconButton
       type="button"
+      Icon={Icon}
       onClick={toggle}
-      title={label || (isLocked
+      pressed={isLocked}
+      tone="ghost"
+      size="sm"
+      label={label || (isLocked
         ? 'Locked. Preserved through regeneration'
         : 'Unlocked. May change on regeneration')}
-      style={{
-        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        width: 22, height: 22, padding: 0,
-        background: isLocked ? '#fff7e0' : 'transparent',
-        border: `1px solid ${isLocked ? GOLD : BORDER}`,
-        borderRadius: R.sm,
-        color: isLocked ? GOLD : MUTED,
-        fontSize: FS.xxs, fontFamily: sans, cursor: 'pointer',
-      }}
-    >
-      <Icon size={11} />
-    </button>
+    />
   );
 }

@@ -29,6 +29,8 @@ export function NarrativeNote({ note }) {
     }}>
       {/* Header */}
       <button
+        type="button"
+        aria-expanded={open}
         onClick={() => setOpen(o => !o)}
         style={{
           width: '100%', display: 'flex', alignItems: 'center', gap: 8,

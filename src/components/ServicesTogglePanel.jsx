@@ -192,7 +192,8 @@ export default function ServicesTogglePanel() {
 
               return (
                 <div key={svcKey} style={{borderBottom:'1px solid #e8dcc8'}}>
-                  <button onClick={()=>setExpanded(e=>({...e,[svcKey]:!e[svcKey]}))}
+                  <button type="button" aria-expanded={isOpen} aria-label={`${catName} services, ${isOpen ? 'collapse' : 'expand'}`}
+                    onClick={()=>setExpanded(e=>({...e,[svcKey]:!e[svcKey]}))}
                     style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'7px 12px',
                       background: isOpen ? '#f0ead8' : '#faf4e8',
                       border:'none', borderTop:'1px solid #e0d0b0', cursor:'pointer', textAlign:'left', fontFamily:sans,

@@ -9,7 +9,8 @@
 import { Eye, Mountain, PenTool, Link as LinkIcon } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
-import { BORDER2, R, CARD, INK, SECOND, FS, sans } from '../theme.js';
+import { BORDER2, R } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 export function ModeSwitch({ mapMode, setMapMode, imageMode }) {
   // P110 / M-4 — Routes mode appended to the mode pill group. The
@@ -38,22 +39,16 @@ export function ModeSwitch({ mapMode, setMapMode, imageMode }) {
       {modes.map(m => {
         const active = mapMode === m.id;
         return (
-          <button
+          <Button
             key={m.id}
             onClick={() => handleClick(m.id)}
-            style={{
-              display: 'flex', alignItems: 'center', gap: 5,
-              padding: '5px 12px',
-              background: active ? CARD : 'transparent',
-              border: 'none', borderRadius: R.sm,
-              color: active ? INK : SECOND,
-              fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-              cursor: 'pointer',
-              boxShadow: active ? '0 1px 3px rgba(0,0,0,0.15)' : 'none',
-            }}
+            variant={active ? 'secondary' : 'ghost'}
+            size="md"
+            icon={<m.Icon size={13} />}
+            aria-pressed={active}
           >
-            <m.Icon size={13} /> {m.label}
-          </button>
+            {m.label}
+          </Button>
         );
       })}
     </div>

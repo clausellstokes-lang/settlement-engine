@@ -24,6 +24,8 @@ import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { FS, swatch } from '../theme.js';
 import { X } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
+import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 
 const PipelineRail = lazy(() => import('../PipelineRail.jsx'));
 
@@ -64,24 +66,19 @@ export default function SimulationDrawer() {
 
   return (
     <>
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="sm"
         onClick={() => setOpen(true)}
-        style={{
-          display: 'inline-flex', alignItems: 'center', gap: 6,
-          padding: '4px 10px',
-          background: 'transparent',
-          border: `1px solid ${BORDER}`,
-          borderRadius: 4,
-          color: MUTED,
-          fontSize: FS.xs, fontFamily: sans, fontWeight: 600,
-          cursor: 'pointer',
-        }}
         title="See the 17-step simulation pipeline that built this settlement"
+        icon={<span style={{ color: GOLD }}>✦</span>}
+        style={{
+          border: `1px solid ${BORDER}`,
+          color: MUTED,
+        }}
       >
-        <span style={{ color: GOLD }}>✦</span>
         How this was simulated
-      </button>
+      </Button>
 
       {open && (
         <>
@@ -146,19 +143,14 @@ export default function SimulationDrawer() {
                   Tap a step to see what it decided and why.
                 </div>
               </div>
-              <button
-                type="button"
+              <IconButton
+                Icon={X}
+                label="Close"
+                tone="ghost"
+                size="lg"
                 onClick={() => setOpen(false)}
-                aria-label="Close"
-                style={{
-                  background: 'transparent', border: 'none',
-                  color: MUTED, cursor: 'pointer',
-                  padding: 4, marginLeft: 8,
-                  display: 'inline-flex', alignItems: 'center',
-                }}
-              >
-                <X size={16} />
-              </button>
+                style={{ marginLeft: 8 }}
+              />
             </header>
 
             <div style={{ flex: 1, overflow: 'auto', padding: 16 }}>

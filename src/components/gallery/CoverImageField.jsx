@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ImagePlus, UploadCloud, Trash2, AlertCircle } from 'lucide-react';
 
 import ImageCropper from './ImageCropper.jsx';
+import Button from '../primitives/Button.jsx';
 import { validateImageFile, uploadGalleryCover, removeGalleryCover } from '../../lib/imageUpload.js';
 import { BORDER, BORDER2, CARD, CARD_ALT, INK, BODY, GOLD, MUTED, RED, sans, FS, R, SP } from '../theme.js';
 
@@ -106,12 +107,12 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
           <img src={value} alt={alt || 'Gallery cover'} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         </div>
         <div style={{ display: 'flex', gap: SP.sm }}>
-          <button type="button" onClick={() => inputRef.current?.click()} style={ghostBtn}>
-            <ImagePlus size={13} /> Replace
-          </button>
-          <button type="button" onClick={onRemove} style={{ ...ghostBtn, color: MUTED }}>
-            <Trash2 size={13} /> Remove
-          </button>
+          <Button variant="ghost" size="sm" icon={<ImagePlus size={13} />} onClick={() => inputRef.current?.click()}>
+            Replace
+          </Button>
+          <Button variant="ghost" size="sm" icon={<Trash2 size={13} />} onClick={onRemove} style={{ color: MUTED }}>
+            Remove
+          </Button>
         </div>
         {error && <ErrorLine text={error} />}
         <input ref={inputRef} type="file" accept="image/*" onChange={onPick} aria-label="Choose a cover image file" style={{ display: 'none' }} />
@@ -155,9 +156,3 @@ function ErrorLine({ text }) {
     </span>
   );
 }
-
-const ghostBtn = {
-  display: 'inline-flex', alignItems: 'center', gap: 5,
-  padding: '5px 10px', border: `1px solid ${BORDER}`, borderRadius: R.md,
-  background: 'transparent', color: BODY, fontFamily: sans, fontSize: FS.xs, cursor: 'pointer',
-};

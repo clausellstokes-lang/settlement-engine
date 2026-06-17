@@ -39,6 +39,9 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
         return (
           <button
             key={id}
+            type="button"
+            aria-pressed={active}
+            aria-label={label}
             onClick={() => onModeChange(id)}
             className={large ? `mode-card-bg${active ? ' is-active' : ''}` : undefined}
             style={{

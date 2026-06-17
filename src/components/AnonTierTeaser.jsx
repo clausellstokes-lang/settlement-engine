@@ -13,7 +13,8 @@
  */
 import { getVisibleTiers, getTierDisplayName } from '../config/pricing.js';
 import { t, tx } from '../copy/index.js';
-import { GOLD, GOLD_DEEP, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R, swatch } from './theme.js';
+import { GOLD, GOLD_DEEP, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R } from './theme.js';
+import Button from './primitives/Button.jsx';
 
 export default function AnonTierTeaser({ onSignIn }) {
   const tiers = getVisibleTiers();
@@ -72,20 +73,15 @@ export default function AnonTierTeaser({ onSignIn }) {
                   </li>
                 ))}
               </ul>
-              <button
+              <Button
                 type="button"
                 onClick={onSignIn}
-                style={{
-                  width: '100%', padding: `${SP.sm}px 0`,
-                  background: emphasised ? GOLD : 'transparent',
-                  color: emphasised ? swatch.white : GOLD,
-                  border: emphasised ? 'none' : `1.5px solid ${GOLD}`,
-                  borderRadius: R.sm,
-                  fontFamily: sans, fontSize: FS.sm, fontWeight: 700, cursor: 'pointer',
-                }}
+                variant={emphasised ? 'primary' : 'gold'}
+                size="md"
+                fullWidth
               >
                 Sign in (free)
-              </button>
+              </Button>
             </article>
           );
         })}

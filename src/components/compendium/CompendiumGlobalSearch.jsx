@@ -14,7 +14,8 @@
  */
 
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { Search } from 'lucide-react';
+import { Search, X } from 'lucide-react';
+import IconButton from '../primitives/IconButton.jsx';
 import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { searchCompendium } from '../../domain/compendium/searchIndex.js';
@@ -115,15 +116,13 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           }}
         />
         {query && (
-          <button
-            type="button"
+          <IconButton
+            Icon={X}
+            label="Clear search"
+            tone="ghost"
+            size="sm"
             onClick={() => { setQuery(''); setActive(0); setOpen(false); }}
-            aria-label="Clear search"
-            style={{
-              border: 'none', background: 'none', cursor: 'pointer',
-              color: MUT, fontSize: FS.lg, padding: 0, lineHeight: 1,
-            }}
-          >×</button>
+          />
         )}
       </div>
 

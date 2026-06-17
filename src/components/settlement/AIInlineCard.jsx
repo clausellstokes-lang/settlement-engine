@@ -17,10 +17,11 @@
  */
 
 import { useState } from 'react';
-import { FS, swatch, CARD } from '../theme.js';
+import { FS, swatch } from '../theme.js';
 import { Sparkles, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import Card from '../primitives/Card.jsx';
+import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { COPY } from '../../copy/strings.js';
 
@@ -65,21 +66,15 @@ export default function AIInlineCard({ settlement, onPolish, creditCost = '1' })
         streams section by section. Partial failures keep your raw draft intact, and you can
         revert to raw any time.
       </p>
-      <button
+      <Button
         type="button"
+        variant="primary"
+        size="md"
+        icon={<Sparkles size={12} aria-hidden="true" />}
         onClick={onPolish}
-        style={{
-          display: 'inline-flex', alignItems: 'center', gap: 5,
-          padding: '6px 12px',
-          background: swatch['#A0762A'], color: CARD,
-          border: 'none', borderRadius: 4,
-          fontSize: FS.sm, fontWeight: 700,
-          fontFamily: 'system-ui, -apple-system, sans-serif',
-          cursor: 'pointer',
-        }}
       >
-        <Sparkles size={12} aria-hidden="true" /> {COPY.ai.polishCta}
-      </button>
+        {COPY.ai.polishCta}
+      </Button>
     </Card>
   );
 }

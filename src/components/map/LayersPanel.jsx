@@ -13,6 +13,7 @@
  */
 
 import { X, Check } from 'lucide-react';
+import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
@@ -96,16 +97,13 @@ export default function LayersPanel({ onClose }) {
         }}>
           Layers
         </div>
-        <button
+        <IconButton
+          Icon={X}
+          label="Close"
           onClick={onClose}
-          style={{
-            background: 'transparent', border: 'none', cursor: 'pointer',
-            color: MUTED, padding: 2, display: 'flex', alignItems: 'center',
-          }}
-          title="Close"
-        >
-          <X size={14} />
-        </button>
+          tone="ghost"
+          size="md"
+        />
       </div>
 
       {/* Layer list */}
@@ -276,7 +274,9 @@ function LayerToggle({ label, checked, onChange }) {
 function FilterChip({ label, color, active, onClick }) {
   return (
     <button
+      type="button"
       onClick={onClick}
+      aria-pressed={active}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
         padding: '3px 8px',

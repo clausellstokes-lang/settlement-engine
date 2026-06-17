@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
 import { useStore } from '../../store/index.js';
+import Button from '../primitives/Button.jsx';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
 
 function percent(value) {
@@ -313,22 +314,18 @@ export default function WizardNewsPanel({ campaign }) {
             <span>{total} update{total === 1 ? '' : 's'}</span>
           </div>
         </div>
-        <button
-          type="button"
+        <Button
+          variant="gold"
+          size="sm"
+          icon={<Sparkles size={13} />}
+          busy={chronicleBusy}
           onClick={generateChronicle}
           disabled={chronicleBusy || total === 0}
           title="Turn this tick's grounded news into a two-credit campaign chronicle"
-          style={{
-            marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 6,
-            padding: '7px 10px', border: `1px solid ${GOLD}`, borderRadius: 6,
-            background: GOLD_BG, color: GOLD, fontFamily: sans, fontSize: FS.xs,
-            fontWeight: 900, cursor: chronicleBusy || total === 0 ? 'not-allowed' : 'pointer',
-            opacity: chronicleBusy || total === 0 ? 0.55 : 1,
-          }}
+          style={{ marginLeft: 'auto' }}
         >
-          <Sparkles size={13}/>
           {chronicleBusy ? 'Writing' : 'Chronicle'}
-        </button>
+        </Button>
       </header>
 
       {(chronicles.length > 0 || chronicleError) && (

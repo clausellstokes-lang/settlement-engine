@@ -20,6 +20,7 @@ import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { Plus, Minus } from 'lucide-react';
 import { t } from '../../copy/index.js';
+import Button from '../primitives/Button.jsx';
 
 const GOLD = swatch['#8C6F32'];
 const INK = swatch['#1B1408'];
@@ -62,26 +63,28 @@ export default function AccountFAQ() {
               background: swatch.white,
             }}
           >
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              size="md"
+              fullWidth
               onClick={() => setOpen(isOpen ? null : key)}
               aria-expanded={isOpen}
+              icon={isOpen
+                ? <Minus size={13} color={GOLD} />
+                : <Plus size={13} color={GOLD} />}
               style={{
-                width: '100%',
-                display: 'flex', alignItems: 'center', gap: 8,
+                gap: 8,
                 padding: '10px 12px',
                 background: isOpen ? '#FBF5E6' : 'transparent',
-                border: 'none', cursor: 'pointer',
+                justifyContent: 'flex-start',
                 textAlign: 'left',
+                whiteSpace: 'normal',
                 fontFamily: sans, fontSize: FS.md, fontWeight: 600,
                 color: INK,
               }}
             >
-              {isOpen
-                ? <Minus size={13} color={GOLD} />
-                : <Plus size={13} color={GOLD} />}
               <span style={{ flex: 1 }}>{question}</span>
-            </button>
+            </Button>
             {isOpen && (
               <div style={{
                 padding: '8px 14px 12px',

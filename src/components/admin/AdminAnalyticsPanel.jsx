@@ -10,7 +10,8 @@
  */
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 const DASHBOARDS = [
   { id: 'funnel', label: 'First-gen funnel' },
@@ -62,16 +63,13 @@ export default function AdminAnalyticsPanel() {
         {DASHBOARDS.map(d => {
           const active = d.id === dashboard;
           return (
-            <button
+            <Button
               key={d.id} type="button" role="tab" aria-selected={active}
+              variant={active ? 'gold' : 'ghost'} size="sm"
               onClick={() => setDashboard(d.id)}
-              style={{
-                padding: `${SP.xs}px ${SP.sm}px`, borderRadius: R.md, cursor: 'pointer', fontFamily: sans, fontSize: FS.xs, fontWeight: active ? 700 : 500,
-                border: `1px solid ${active ? GOLD : BORDER}`, background: active ? GOLD_BG : 'transparent', color: active ? INK : SECOND,
-              }}
             >
               {d.label}
-            </button>
+            </Button>
           );
         })}
       </div>

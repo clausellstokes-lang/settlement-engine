@@ -25,7 +25,8 @@ import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import { flag } from '../../lib/flags.js';
 import { startCheckout } from '../../lib/stripe.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { INK, sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import { sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 const GOLD_500 = swatch['#C9A24C'];
 const GOLD_400 = swatch['#D9B566'];
@@ -141,27 +142,20 @@ export default function FounderTile() {
             </div>
           )}
         </div>
-        <button
-          type="button"
+        <Button
+          variant="primary"
+          size="lg"
+          fullWidth
           onClick={handleClick}
           disabled={loading}
-          style={{
-            marginTop: SP.md,
-            width: '100%', padding: SP.md,
-            background: `linear-gradient(135deg, ${GOLD_500}, #8C6F32)`,
-            color: INK, border: 'none', borderRadius: R.sm,
-            fontFamily: serif_, fontSize: FS.lg, fontWeight: 700,
-            letterSpacing: '0.02em',
-            cursor: loading ? 'wait' : 'pointer',
-            opacity: loading ? 0.7 : 1,
-          }}
+          style={{ marginTop: SP.md }}
         >
           {loading
             ? 'Starting checkout…'
             : claimSeat
               ? `Claim seat ${claimSeat}, $99 one-time`
               : 'Claim a Founder seat, $99 one-time'}
-        </button>
+        </Button>
       </div>
     </div>
   );

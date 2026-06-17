@@ -1,5 +1,6 @@
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY } from '../theme.js';
 import { t } from '../../copy/index.js';
+import Button from '../primitives/Button.jsx';
 
 // ── Sample dashboard (Tier 8.2) ────────────────────────────────────────────
 // Rendered in the saves empty state. Three teaser cards seed expectations
@@ -60,24 +61,15 @@ export function SampleCard({ sample, onFork, forking }) {
           </span>
         ))}
       </div>
-      <button
+      <Button
+        variant="gold"
+        size="sm"
         onClick={() => onFork(sample)}
-        disabled={forking}
-        style={{
-          alignSelf: 'flex-start', marginTop: 4,
-          padding: '6px 12px',
-          background: 'transparent',
-          color: GOLD,
-          border: `1.5px solid ${GOLD}`,
-          borderRadius: 999,
-          fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
-          cursor: forking ? 'wait' : 'pointer',
-          opacity: forking ? 0.6 : 1,
-          letterSpacing: '0.04em', textTransform: 'uppercase',
-        }}
+        busy={forking}
+        style={{ alignSelf: 'flex-start', marginTop: 4 }}
       >
         {forking ? 'Generating…' : t('generate.button')}
-      </button>
+      </Button>
     </article>
   );
 }

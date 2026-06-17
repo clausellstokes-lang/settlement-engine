@@ -46,7 +46,7 @@ export function Collapsible({ title, defaultOpen = true, children }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div style={{ marginBottom: 14, border: '1px solid #e0d0b0', borderRadius: 7, overflow: 'hidden' }}>
-      <button onClick={() => setOpen(v => !v)} style={{
+      <button type="button" aria-expanded={open} onClick={() => setOpen(v => !v)} style={{
         width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '9px 13px', background: open ? '#f5ede0' : '#faf8f4', border: 'none',
         cursor: 'pointer', textAlign: 'left', borderBottom: open ? '1px solid #e0d0b0' : 'none',
@@ -70,7 +70,7 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
     const titleColor = accent || '#1c1409';
     return (
       <div style={{ marginBottom: 16, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', borderRadius: 7, overflow: 'hidden' }}>
-        <button onClick={() => setOpen(v => !v)} style={{
+        <button type="button" aria-expanded={open} onClick={() => setOpen(v => !v)} style={{
           width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '9px 13px', background: headerBg, border: 'none',
           cursor: 'pointer', textAlign: 'left', borderBottom: open ? `1px solid ${borderColor}` : 'none',

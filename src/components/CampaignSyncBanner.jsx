@@ -7,8 +7,10 @@
  * records the failure in `campaignSyncError`; this dismissible top banner makes
  * it visible so the user knows their change may not have persisted.
  */
+import { X } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { RED, RED_BG, FS, R, SP, sans, ELEV } from './theme.js';
+import IconButton from './primitives/IconButton.jsx';
 
 export default function CampaignSyncBanner() {
   const error = useStore(s => s.campaignSyncError);
@@ -30,17 +32,13 @@ export default function CampaignSyncBanner() {
       }}
     >
       <span style={{ flex: 1 }}>{error}</span>
-      <button
-        type="button"
+      <IconButton
+        Icon={X}
+        label="Dismiss cloud-sync warning"
         onClick={clear}
-        aria-label="Dismiss cloud-sync warning"
-        style={{
-          flexShrink: 0, background: 'transparent', border: 'none', color: RED,
-          cursor: 'pointer', fontWeight: 900, fontSize: FS.md, lineHeight: 1, padding: '0 2px',
-        }}
-      >
-        ×
-      </button>
+        tone="danger"
+        size="sm"
+      />
     </div>
   );
 }

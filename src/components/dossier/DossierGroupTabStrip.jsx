@@ -1,4 +1,5 @@
-import { FS, swatch } from '../theme.js';
+import { swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 // P102 / D-1 — Thematic group tab strip (Summary / Systems / World / Notes).
 // Extracted verbatim from OutputContainer's render; the parent still owns the
@@ -40,26 +41,17 @@ export default function DossierGroupTabStrip({
             {visibleGroupEntries.map(([gid, group]) => {
               const active = selectedGroup === gid;
               return (
-                <button
+                <Button
                   key={gid}
                   id={'sf-group-' + gid}
                   role="tab"
                   aria-selected={active}
                   tabIndex={active ? 0 : -1}
                   onClick={() => handleGroupClick(gid)}
-                  style={{
-                    flex: 1, padding: '8px 6px',
-                    background: active ? 'rgba(201,162,76,0.10)' : 'transparent',
-                    border: active ? '1px solid rgba(201,162,76,0.40)' : '1px solid transparent',
-                    borderRadius: 3,
-                    fontSize: FS.sm,
-                    fontWeight: active ? 700 : 500,
-                    color: active ? '#8C6F32' : '#6B5340',
-                    fontFamily: 'Nunito, sans-serif',
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                  }}
-                >{group.label}</button>
+                  variant={active ? 'gold' : 'ghost'}
+                  size="sm"
+                  style={{ flex: 1 }}
+                >{group.label}</Button>
               );
             })}
           </div>

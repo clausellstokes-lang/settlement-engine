@@ -6,8 +6,9 @@
 import { useState } from 'react';
 import { ShieldAlert } from 'lucide-react';
 
-import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
+import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
 import { human, percent } from './WorldPulseData.js';
+import Button from '../primitives/Button.jsx';
 
 export function Pill({ children, tone = 'neutral' }) {
   const bg = tone === 'major' ? GOLD_BG : tone === 'good' ? swatch.successBg : CARD_ALT;
@@ -139,33 +140,17 @@ export function OutcomeCard({ title, summary, severity, reasons = [], actions = 
 }
 
 export function SmallButton({ children, onClick, tone = 'neutral', title, disabled = false }) {
-  const primary = tone === 'good';
-  const danger = tone === 'danger';
+  const variant = tone === 'good' ? 'success' : tone === 'danger' ? 'danger' : 'secondary';
   return (
-    <button
-      type="button"
+    <Button
+      variant={variant}
+      size="sm"
       onClick={onClick}
       title={title}
       disabled={disabled}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 5,
-        minHeight: 30,
-        padding: '5px 9px',
-        border: `1px solid ${primary ? GREEN : danger ? RED : BORDER2}`,
-        borderRadius: 6,
-        background: primary ? swatch.successBg : danger ? 'rgba(197,74,74,0.08)' : CARD,
-        color: primary ? GREEN : danger ? RED : SECOND,
-        fontFamily: sans,
-        fontSize: FS.xs,
-        fontWeight: 900,
-        opacity: disabled ? 0.62 : 1,
-        cursor: disabled ? 'not-allowed' : 'pointer',
-      }}
     >
       {children}
-    </button>
+    </Button>
   );
 }
 

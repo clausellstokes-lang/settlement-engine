@@ -8,7 +8,8 @@
  */
 
 import { ArrowLeft, Zap } from 'lucide-react';
-import { GOLD, INK, INK_DEEP, MUTED, sans, serif_, SP, R, FS, swatch } from '../theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 export function WizardOutputToolbar({
   settlement,
@@ -25,20 +26,15 @@ export function WizardOutputToolbar({
       boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
       position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
     }}>
-      <button
+      <Button
+        variant="gold"
+        size="md"
+        icon={<ArrowLeft size={14} />}
         onClick={handleBack}
-        style={{
-          display: 'flex', alignItems: 'center', gap: SP.xs,
-          padding: `${SP.sm}px ${SP.md}px`,
-          background: 'rgba(160,118,42,0.15)',
-          border: `1px solid rgba(160,118,42,0.3)`,
-          borderRadius: R.md, cursor: 'pointer',
-          color: GOLD, fontSize: FS.sm, fontWeight: 600, fontFamily: sans,
-        }}
         title="Back to configuration"
       >
-        <ArrowLeft size={14} /> Back
-      </button>
+        Back
+      </Button>
 
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
@@ -61,19 +57,14 @@ export function WizardOutputToolbar({
           pointing at the same outcome was confusing and meant
           users frequently clicked the worse one. */}
       <div style={{ display: 'flex', gap: SP.xs }}>
-        <button
+        <Button
+          variant="primary"
+          size="md"
+          icon={<Zap size={14} />}
           onClick={handleNewSettlement}
-          style={{
-            display: 'flex', alignItems: 'center', gap: SP.xs,
-            padding: `${SP.sm}px ${SP.md}px`,
-            background: GOLD,
-            border: 'none',
-            borderRadius: R.md, cursor: 'pointer',
-            color: swatch.white, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-          }}
         >
-          <Zap size={14} /> New
-        </button>
+          New
+        </Button>
       </div>
     </div>
   );

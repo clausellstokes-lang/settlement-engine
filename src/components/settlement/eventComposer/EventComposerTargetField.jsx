@@ -12,12 +12,13 @@
 
 import { X } from 'lucide-react';
 import CatalogPicker from '../CatalogPicker.jsx';
+import IconButton from '../../primitives/IconButton.jsx';
 import { MUTED, FS } from '../../theme.js';
 import { buildTargetOptions } from './helpers.js';
 import { Field } from './Field.jsx';
 import {
   TARGET_ENTITY_BY_EVENT, CUSTOM_RESOURCE_OPTION,
-  inputStyle, selectStyle, pickedChipStyle, chipClearBtn,
+  inputStyle, selectStyle, pickedChipStyle,
 } from './EventComposerConstants.js';
 
 export function EventComposerTargetField({
@@ -40,7 +41,7 @@ export function EventComposerTargetField({
         {target && (
           <div style={pickedChipStyle}>
             <span>{target}</span>
-            <button onClick={() => { setTarget(''); setAddCategory(''); }} aria-label="Remove institution" title="Clear" style={chipClearBtn}><X size={11} /></button>
+            <IconButton Icon={X} label="Remove institution" title="Clear" onClick={() => { setTarget(''); setAddCategory(''); }} tone="ghost" size="sm" />
           </div>
         )}
         <CatalogPicker
@@ -60,7 +61,7 @@ export function EventComposerTargetField({
         {target && (
           <div style={pickedChipStyle}>
             <span>{stressorPick?.name || target}</span>
-            <button onClick={() => { setTarget(''); setStressorPick(null); }} aria-label="Remove stressor" title="Clear" style={chipClearBtn}><X size={11} /></button>
+            <IconButton Icon={X} label="Remove stressor" title="Clear" onClick={() => { setTarget(''); setStressorPick(null); }} tone="ghost" size="sm" />
           </div>
         )}
         <CatalogPicker

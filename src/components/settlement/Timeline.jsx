@@ -10,7 +10,8 @@
 
 import { Clock, Undo2, ChevronRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 export default function Timeline() {
   const phase    = useStore(s => s.phase);
@@ -94,19 +95,15 @@ function Entry({ entry, isLatest, onUndo }) {
           {ts.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
         </span>
         {isLatest && (
-          <button
+          <Button
+            variant="danger"
+            size="sm"
+            icon={<Undo2 size={10} />}
             onClick={onUndo}
             title="Undo this event. Restores prior state"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 3,
-              padding: '2px 6px',
-              background: swatch.white, color: swatch.danger,
-              border: `1px solid #c89a9a`, borderRadius: R.sm,
-              fontSize: FS.xxs, fontFamily: sans, fontWeight: 700, cursor: 'pointer',
-            }}
           >
-            <Undo2 size={10} /> Undo
-          </button>
+            Undo
+          </Button>
         )}
       </div>
       {entry.event.description && (

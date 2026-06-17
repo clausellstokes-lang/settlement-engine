@@ -9,10 +9,14 @@
 
 import { useState } from 'react';
 import { saves as savesService } from '../../lib/saves.js';
-import { GOLD, R, sans, FS, SP, swatch } from '../theme.js';
+import { sans, FS, SP, swatch } from '../theme.js';
 import { Save } from 'lucide-react';
+import Button from '../primitives/Button.jsx';
 
-export function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn }) {
+// isMobile is part of the public prop contract (callers still pass it); the
+// responsive padding it drove now lives in the Button primitive's size, so the
+// value is intentionally unused here — aliased to _isMobile to keep lint clean.
+export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, onSignIn }) {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saveError, setSaveError] = useState(null);
@@ -65,44 +69,29 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile, onSignIn })
     };
 
     return (
-      <button
+      <Button
+        variant="gold"
+        size="lg"
+        icon={<Save size={15} />}
         onClick={handleSignupSave}
-        style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-          padding: isMobile ? '13px 24px' : '12px 24px',
-          background: swatch.white,
-          color: GOLD, fontWeight: 700,
-          border: `1.5px solid ${GOLD}`,
-          borderBottom: `2px solid ${GOLD}`,
-          borderRadius: R.md,
-          cursor: 'pointer',
-          fontFamily: sans, fontSize: FS.md,
-          boxShadow: '0 1px 0 rgba(140,111,50,0.15)',
-          transition: 'all 0.15s',
-        }}
         title="We'll save your dossier as soon as you're in."
       >
-        <Save size={15} />
         Save this town. Free account →
-      </button>
+      </Button>
     );
   }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs }}>
-      <button onClick={handleSave} disabled={saving || saved} style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
-        padding: isMobile ? '13px 24px' : '10px 24px',
-        background: saved ? '#2a7a2a' : '#1a4a2a',
-        color: swatch.white, border: 'none', borderRadius: R.md,
-        cursor: saving || saved ? 'default' : 'pointer',
-        fontFamily: sans, fontSize: FS.md, fontWeight: 700,
-        boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-        transition: 'all 0.2s',
-      }}>
-        <Save size={15} />
+      <Button
+        variant="success"
+        size="lg"
+        icon={<Save size={15} />}
+        onClick={handleSave}
+        disabled={saving || saved}
+      >
         {saved ? '✓ Saved to Library' : saving ? 'Saving...' : 'Save to Library'}
-      </button>
+      </Button>
       {saveError && (
         <div style={{ color: swatch.danger, fontSize: FS.xs, fontFamily: sans, maxWidth: 420, textAlign: 'center' }}>
           {saveError}

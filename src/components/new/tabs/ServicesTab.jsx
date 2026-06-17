@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { X } from 'lucide-react';
 import { FS, MUTED, swatch } from '../../theme.js';
+import IconButton from '../../primitives/IconButton.jsx';
 import { sans, TabIntro } from '../Primitives';
 import {Ts, J0} from '../tabConstants';
 import {isMobile} from '../tabConstants';
@@ -101,7 +103,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
             aria-label="Search services"
             placeholder='Search services, "healing", "horse", "fence", "wizard"…'
             style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',borderRadius:6,fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
-          {search&&<button onClick={()=>setSearch('')} aria-label="Clear search" style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize: FS['18'],color:MUTED,lineHeight:1,padding:0}}>×</button>}
+          {search&&<span style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear search" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
 
         {searchResults !== null && (
@@ -206,8 +208,12 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 borderLeft:`3px solid ${accentColor}`,
                 borderRadius:7,overflow:'hidden'
               }}>
-                {/* Category toggle */}
-                <button onClick={()=>toggleCat(cat)} style={{
+                {/* Category toggle — bespoke: full-width header row with left-aligned
+                    icon/label/count, conditional impairment badges, an auto-pushed
+                    chevron, and an open-state-dependent bottom border. The Button
+                    primitive centers content and can't express this layout, so it
+                    stays raw (this file remains in the raw-button baseline). */}
+                <button type="button" onClick={()=>toggleCat(cat)} style={{
                   width:'100%',display:'flex',alignItems:'center',gap:8,
                   padding:'10px 14px',background:'transparent',border:'none',
                   borderBottom:open?`1px solid ${isCriminal?'#3a1a1a':`${meta.accent}20`}`:'none',

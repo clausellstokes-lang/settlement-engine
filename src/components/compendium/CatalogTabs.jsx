@@ -6,6 +6,7 @@ import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../gener
 // global-search index (CP-4) and these tabs render from one source of truth.
 import { ARCHETYPES, REL_TYPES } from '../../domain/compendium/catalogData.js';
 import { Tag, Row, Card } from './primitives.jsx';
+import Button from '../primitives/Button.jsx';
 
 // REL_TYPES + ARCHETYPES are imported from '../../domain/compendium/catalogData.js'
 // (see import block above). CAT_COLORS stays here — it's display-only.
@@ -56,7 +57,7 @@ export function PowerTab_({ search='' }) {
   return <>
     <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes emerge when slider combinations cross thresholds. Faction power = institutional base x public legitimacy.</p>
     <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:12 }}>
-      {cats.map(c => <button key={c} onClick={() => setCat(c)} style={{ padding:'3px 10px', borderRadius:12, fontSize:FS.xs, fontWeight:700, cursor:'pointer', border:'1px solid', background:cat===c?INK:'transparent', color:cat===c?'#f5ede0':SEC, borderColor:cat===c?INK:BOR }}>{c}</button>)}
+      {cats.map(c => <Button key={c} onClick={() => setCat(c)} variant={cat===c?'primary':'ghost'} size="sm" aria-pressed={cat===c}>{c}</Button>)}
     </div>
     <div id="archetypes" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))', gap:8 }}>
       {filtered.map(a => (
