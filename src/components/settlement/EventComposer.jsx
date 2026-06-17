@@ -10,7 +10,7 @@
  */
 
 import { useState, useMemo } from 'react';
-import { Zap, Flame, Trash2, Plus, MapPinOff, AlertOctagon, X, Check } from 'lucide-react';
+import { Zap, X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { EVENT_REGISTRY } from '../../domain/events/registry.js';
 import { inferImportance } from '../../domain/entities/npcs.js';
@@ -22,90 +22,18 @@ import { RULING_POWER_CAUSES, governingFactionOf } from '../../domain/rulingPowe
 import { EXPORT_GOODS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
-import CatalogPicker from './CatalogPicker.jsx';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
 import { GOLD, INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import { buildTargetOptions, labelOfTarget, PARTY, PARTY_BG } from './eventComposer/helpers.js';
 import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
 import { BatchCart } from './eventComposer/BatchCart.jsx';
 import { Field } from './eventComposer/Field.jsx';
-
-const _TYPE_ICONS = {
-  ADD_INSTITUTION:    Plus,
-  REMOVE_INSTITUTION: Trash2,
-  DAMAGE_INSTITUTION: Flame,
-  DEPLETE_RESOURCE:   AlertOctagon,
-  CUT_TRADE_ROUTE:    MapPinOff,
-};
-
-// Code-review fix: target field used to be a free-text input. The user
-// shouldn't have to TYPE the name of an NPC they want to kill — the NPC
-// is already in the dossier. This map declares which dossier collection
-// to pull the target dropdown from for each event type. ADD_*
-// (institution / npc) and CUT_TRADE_ROUTE genuinely have no source list
-// (the user is naming something new), so they keep the text input.
-const TARGET_ENTITY_BY_EVENT = Object.freeze({
-  ADD_INSTITUTION:      null,           // new entity — free text
-  ADD_FACTION:          null,           // new entity — free-text name
-  REMOVE_INSTITUTION:   'institutions',
-  DAMAGE_INSTITUTION:   'institutions',
-  IMPAIR_INSTITUTION:   'institutions',
-  ADD_NPC:              null,           // new entity — free text
-  KILL_NPC:             'npcs',
-  IMPOSE_CORRUPTION:    'npcs',          // pick the clean NPC to turn; criminal org picked below
-  ASSIGN_NPC_TO_ROLE:   'npcs',
-  IMPAIR_FACTION:       'factions',
-  RESTORE_FACTION:      'factions',     // recover a faction that is currently impaired
-  EXPOSE_CORRUPTION:    'factions',     // or institutions; pick factions as the dominant case
-  RESTORE_INSTITUTION:  'institutions', // recover an institution that is currently impaired
-  DEPLETE_RESOURCE:     'resources',
-  RECOVERED_RESOURCE:   'resources',    // recover a resource the campaign already depleted
-  CUT_TRADE_ROUTE:      null,           // route names aren't tracked as entities — free text
-  SETTLEMENT_DISPUTE:   'neighbours',   // §9b — pick a linked neighbour
-  BROKERED_ALLIANCE:    'neighbours',   // §9g
-  OPENED_TRADE_ROUTE:   'neighbours',   // §9h
-  // Editor roster wave.
-  RESOLVE_STRESSOR:     'stressors',    // pick one of the settlement's current stressors
-  ADD_TRADE_GOOD:       null,           // new label — free text + datalist suggestions below
-  REMOVE_TRADE_GOOD:    'tradeGoods',   // union of exports / imports / transit
-  ADD_RESOURCE:         null,           // catalog select + custom name (custom UI below)
-  REMOVE_RESOURCE:      'resources',
-  PROMOTE_NPC:          null,           // faction-grouped NPC pair picker (custom UI below)
-  DEMOTE_NPC:           null,
-});
-
-// §9b/§9g/§9h — relationship events target a neighbouring settlement and set a
-// relationship type. The per-event option list drives the relationship dropdown;
-// these events are only offered when the settlement has linked neighbours.
-const RELATIONSHIP_OPTIONS = Object.freeze({
-  SETTLEMENT_DISPUTE: ['neutral', 'rival', 'cold_war', 'hostile'],
-  BROKERED_ALLIANCE:  ['allied'],
-  OPENED_TRADE_ROUTE: ['allied', 'client', 'patron', 'trade_partners'],
-});
-const RELATIONSHIP_LABELS = Object.freeze({
-  neutral: 'Neutral', rival: 'Rival', cold_war: 'Cold War', hostile: 'Hostile',
-  allied: 'Allied', client: 'Client', patron: 'Patron', trade_partners: 'Trade Partners',
-});
-
-// Events the DM cannot hand-author from the Make Changes dropdown. They stay in
-// the registry — and the world engine still produces them via simulation /
-// regional propagation — they're just not one-click authorable here:
-//   - KILL_LEADER folds into KILL_NPC (consequences derive from the NPC).
-//   - REFUGEE_WAVE / PLAGUE / RAID_OR_MONSTER_ATTACK / REMOVED_THREAT /
-//     STARTED_RIOT are authored via Stressors in the Roster below, not as
-//     one-off events — a stressor IS the ongoing condition these represented.
-//   - DAMAGE_INSTITUTION duplicated IMPAIR_INSTITUTION once the severity slider
-//     was hidden, so Impair Institution is the single "weaken it" action.
-const NON_AUTHORABLE_EVENTS = new Set([
-  'KILL_LEADER',
-  'CUT_TRADE_ROUTE',          // §9b — replaced by Settlement Dispute (neighbour + relationship)
-  'DAMAGE_INSTITUTION',
-  'REFUGEE_WAVE',
-  'PLAGUE',
-  'RAID_OR_MONSTER_ATTACK',
-  'REMOVED_THREAT',
-  'STARTED_RIOT',
-]);
+import { EventComposerTargetField } from './eventComposer/EventComposerTargetField.jsx';
+import {
+  RELATIONSHIP_OPTIONS, RELATIONSHIP_LABELS,
+  NON_AUTHORABLE_EVENTS, STRESSOR_SEVERITY_VALUES, CUSTOM_RESOURCE_OPTION,
+  inputStyle, selectStyle, primaryBtn, confirmBtn, cancelBtn,
+} from './eventComposer/EventComposerConstants.js';
 
 export default function EventComposer() {
   const phase     = useStore(s => s.phase);
@@ -413,213 +341,28 @@ export default function EventComposer() {
           </select>
         </Field>
 
-        {(() => {
-          // Catalog-backed adds. Institutions come from the catalog picker
-          // (searchable, filtered to what's not already here); factions from
-          // the descriptor compendium, grouped by category and filtered the
-          // same way. Both set the event target to the chosen name — no free
-          // typing of names the engine already knows.
-          if (type === 'ADD_INSTITUTION') {
-            return (
-              <Field label="Institution" hint={target ? `Adding: ${target}` : 'Pick from the catalog'}>
-                {target && (
-                  <div style={pickedChipStyle}>
-                    <span>{target}</span>
-                    <button onClick={() => { setTarget(''); setAddCategory(''); }} aria-label="Remove institution" title="Clear" style={chipClearBtn}><X size={11} /></button>
-                  </div>
-                )}
-                <CatalogPicker
-                  closeOnPick
-                  items={institutionCatalogItems}
-                  onAdd={(item) => { setTarget(item.name); setAddCategory(item.category || 'civic'); }}
-                  placeholder="Search institutions..."
-                  categoryFilters={institutionCategories}
-                  triggerLabel={target ? 'Pick a different institution' : undefined}
-                />
-              </Field>
-            );
-          }
-          if (type === 'APPLY_STRESSOR') {
-            return (
-              <Field label="Stressor" hint={target ? `Applying: ${stressorPick?.name || target}` : 'Pick from the full catalog (incl. custom)'}>
-                {target && (
-                  <div style={pickedChipStyle}>
-                    <span>{stressorPick?.name || target}</span>
-                    <button onClick={() => { setTarget(''); setStressorPick(null); }} aria-label="Remove stressor" title="Clear" style={chipClearBtn}><X size={11} /></button>
-                  </div>
-                )}
-                <CatalogPicker
-                  closeOnPick
-                  items={stressorPickerItems}
-                  onAdd={(item) => { setTarget(item.key); setStressorPick(item); }}
-                  placeholder="Search stressors..."
-                  categoryFilters={['Settlement', 'Campaign', 'Custom']}
-                  triggerLabel={target ? 'Pick a different stressor' : undefined}
-                />
-              </Field>
-            );
-          }
-          if (type === 'CHANGE_RULING_POWER') {
-            return (
-              <Field label="New ruling power" hint={spec?.targetPrompt}>
-                <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
-                  <option value="">, Pick a faction -</option>
-                  {rulingPowerOptions.map(o => (
-                    <option key={o.id} value={o.id}>{o.name}</option>
-                  ))}
-                </select>
-                {rulingPowerOptions.length === 0 && (
-                  <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-                    No other faction holds power here — add a faction first.
-                  </span>
-                )}
-              </Field>
-            );
-          }
-          if (type === 'ADD_FACTION') {
-            return (
-              <Field label="Faction" hint="Choose a faction that isn't here yet">
-                <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
-                  <option value="">Select a faction</option>
-                  {factionGroups.map(g => (
-                    <optgroup key={g.category} label={g.label}>
-                      {g.options.map(o => <option key={o.name} value={o.name}>{o.name}</option>)}
-                    </optgroup>
-                  ))}
-                </select>
-                {factionGroups.length === 0 && (
-                  <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-                    Every catalogued faction is already present. Name a new one in Description.
-                  </span>
-                )}
-              </Field>
-            );
-          }
-          // ADD_TRADE_GOOD — free text with catalog suggestions; the label is
-          // the storage format, so anything typed is a valid good.
-          if (type === 'ADD_TRADE_GOOD') {
-            return (
-              <Field label="Good" hint={spec?.targetPrompt}>
-                <input
-                  list="event-trade-good-suggestions"
-                  value={target}
-                  onChange={e => setTarget(e.target.value)}
-                  placeholder="Type a label or pick a suggestion"
-                  aria-label="Good"
-                  style={inputStyle}
-                />
-                <datalist id="event-trade-good-suggestions">
-                  {tradeGoodSuggestions.map(n => <option key={n} value={n} aria-label={n} />)}
-                </datalist>
-              </Field>
-            );
-          }
-          // ADD_RESOURCE — catalog select (label shown, underscore key stored)
-          // plus a "Custom resource…" escape hatch with a free-text name.
-          if (type === 'ADD_RESOURCE') {
-            return (
-              <Field label="Resource" hint={target === CUSTOM_RESOURCE_OPTION ? 'Name the custom resource' : spec?.targetPrompt}>
-                <select
-                  value={target}
-                  onChange={e => { setTarget(e.target.value); setCustomResourceName(''); }}
-                  style={selectStyle}
-                >
-                  <option value="">, Pick a resource -</option>
-                  {resourceCatalogOptions.map(o => (
-                    <option key={o.id} value={o.id}>{o.name}</option>
-                  ))}
-                  <option value={CUSTOM_RESOURCE_OPTION}>Custom resource…</option>
-                </select>
-                {target === CUSTOM_RESOURCE_OPTION && (
-                  <input
-                    value={customResourceName}
-                    onChange={e => setCustomResourceName(e.target.value)}
-                    placeholder='e.g. "Moonpetal grove"'
-                    aria-label="Custom resource name"
-                    style={{ ...inputStyle, marginTop: 4 }}
-                  />
-                )}
-              </Field>
-            );
-          }
-          // PROMOTE_NPC / DEMOTE_NPC — pick the NPC (grouped by faction), then
-          // the same-faction counterpart they swap standing with.
-          if (type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') {
-            const pickedGroup = npcSwapGroups.find(g => g.npcs.some(n => n.id === target));
-            const counterparts = pickedGroup ? pickedGroup.npcs.filter(n => n.id !== target) : [];
-            return (
-              <>
-                <Field label="NPC" hint={spec?.targetPrompt}>
-                  <select
-                    value={target}
-                    onChange={e => { setTarget(e.target.value); setSwapWithNpcId(''); }}
-                    style={selectStyle}
-                  >
-                    <option value="">, Pick an NPC -</option>
-                    {npcSwapGroups.map(g => (
-                      <optgroup key={g.faction} label={g.faction}>
-                        {g.npcs.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
-                      </optgroup>
-                    ))}
-                  </select>
-                </Field>
-                <Field
-                  label={type === 'PROMOTE_NPC' ? 'Displaces' : 'Displaced by'}
-                  hint="Same faction — the two swap standing"
-                >
-                  <select
-                    value={swapWithNpcId}
-                    onChange={e => setSwapWithNpcId(e.target.value)}
-                    style={selectStyle}
-                    disabled={!target}
-                  >
-                    <option value="">, Pick the counterpart -</option>
-                    {counterparts.map(n => (
-                      <option key={n.id} value={n.id}>{n.name}</option>
-                    ))}
-                  </select>
-                </Field>
-              </>
-            );
-          }
-          // Code-review fix: source the target from existing dossier
-          // entities rather than asking the user to type a name that
-          // must match. Falls back to a text input for ADD_* events
-          // (new entities) and route-type events that aren't in the
-          // dossier as discrete records.
-          const collectionKey = TARGET_ENTITY_BY_EVENT[type];
-          const targetOpts = buildTargetOptions(settlement, collectionKey);
-          if (collectionKey && targetOpts.length > 0) {
-            return (
-              <Field label="Target" hint={spec?.targetPrompt}>
-                <select
-                  value={target}
-                  onChange={e => setTarget(e.target.value)}
-                  style={selectStyle}
-                >
-                  <option value="">, Pick a {collectionKey.replace(/s$/, '')} -</option>
-                  {targetOpts.map(o => (
-                    <option key={o.id} value={o.id}>{o.name}</option>
-                  ))}
-                </select>
-              </Field>
-            );
-          }
-          // No collection or empty list → keep the free text input so
-          // the user can still author an event (e.g. ADD_NPC of a brand
-          // new NPC, CUT_TRADE_ROUTE without a tracked route record).
-          return (
-            <Field label="Target" hint={spec?.targetPrompt}>
-              <input
-                value={target}
-                onChange={e => setTarget(e.target.value)}
-                placeholder={spec?.targetPrompt || 'optional'}
-                aria-label="Target"
-                style={inputStyle}
-              />
-            </Field>
-          );
-        })()}
+        <EventComposerTargetField
+          type={type}
+          target={target}
+          setTarget={setTarget}
+          spec={spec}
+          settlement={settlement}
+          setAddCategory={setAddCategory}
+          setStressorPick={setStressorPick}
+          stressorPick={stressorPick}
+          setCustomResourceName={setCustomResourceName}
+          customResourceName={customResourceName}
+          setSwapWithNpcId={setSwapWithNpcId}
+          swapWithNpcId={swapWithNpcId}
+          institutionCatalogItems={institutionCatalogItems}
+          institutionCategories={institutionCategories}
+          stressorPickerItems={stressorPickerItems}
+          rulingPowerOptions={rulingPowerOptions}
+          factionGroups={factionGroups}
+          tradeGoodSuggestions={tradeGoodSuggestions}
+          resourceCatalogOptions={resourceCatalogOptions}
+          npcSwapGroups={npcSwapGroups}
+        />
 
         {/* IMPOSE_CORRUPTION — which criminal organization gets its hooks into the NPC */}
         {type === 'IMPOSE_CORRUPTION' && (
@@ -938,48 +681,3 @@ export default function EventComposer() {
     </div>
   );
 }
-
-// APPLY_STRESSOR severity words → engine severity. Words at the table,
-// numbers in the engine (same posture as the hidden impair sliders).
-const STRESSOR_SEVERITY_VALUES = Object.freeze({ minor: 0.35, moderate: 0.6, severe: 0.85 });
-
-// ADD_RESOURCE — sentinel select value for "name a custom resource"; the real
-// target comes from the companion text input while this is picked.
-const CUSTOM_RESOURCE_OPTION = '__custom_resource__';
-
-const inputStyle = {
-  padding: '4px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm,
-  fontSize: FS.xs, fontFamily: sans, color: INK, minWidth: 180, background: '#fff',
-};
-const selectStyle = { ...inputStyle, minWidth: 180 };
-const pickedChipStyle = {
-  display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 4,
-  padding: '3px 8px', border: `1px solid ${GOLD}`, borderRadius: R.sm,
-  fontSize: FS.xs, fontFamily: sans, color: INK, fontWeight: 700, background: swatch['#FAF8F4'],
-};
-const chipClearBtn = {
-  background: 'none', border: 'none', cursor: 'pointer', color: MUTED, padding: 0, display: 'flex', lineHeight: 1,
-};
-
-function primaryBtn(disabled) {
-  return {
-    padding: '5px 12px',
-    background: disabled ? '#eee' : GOLD,
-    color: disabled ? '#999' : '#fff',
-    border: 'none', borderRadius: R.sm,
-    fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
-    cursor: disabled ? 'not-allowed' : 'pointer',
-  };
-}
-const confirmBtn = {
-  display: 'inline-flex', alignItems: 'center', gap: 4,
-  padding: '5px 12px', background: '#1a5a28', color: '#fff',
-  border: 'none', borderRadius: R.sm,
-  fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
-};
-const cancelBtn = {
-  display: 'inline-flex', alignItems: 'center', gap: 4,
-  padding: '5px 12px', background: '#fff', color: INK,
-  border: `1px solid ${BORDER}`, borderRadius: R.sm,
-  fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
-};

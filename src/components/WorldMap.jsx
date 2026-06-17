@@ -13,66 +13,24 @@
  * actions. There is no local placement/burg state in React.
  */
 
-import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
-import {
-  FolderOpen, Save, Trash2, RefreshCw, Layers, Loader, Map as MapIcon, Globe,
-  Newspaper, SlidersHorizontal, Zap, HelpCircle, Image as ImageIcon, X as XIcon, Share2, Undo2,
-} from 'lucide-react';
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { flag } from '../lib/flags.js';
-import { Funnel, EVENTS, track } from '../lib/analytics.js';
+import { EVENTS, track } from '../lib/analytics.js';
 import { useStore } from '../store/index.js';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, PARCH, sans, FS, SP, R, swatch, PARCH_100 } from './theme.js';
+import { SP } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
-import { ConfirmDialog } from './primitives/Dialog.jsx';
-import { ModeSwitch } from './map/ModeSwitch.jsx';
-import { IconButton } from './map/IconButton.jsx';
 import { legacyPlacementsArray } from './map/legacyPlacements.js';
 import { useMapAutosave } from '../hooks/useMapAutosave.js';
 
-const MapOverlay     = lazy(() => import('./MapOverlay.jsx'));
-const PlacementDetailCard = lazy(() => import('./map/PlacementDetailCard.jsx'));
-import WorldMapTour from './map/WorldMapTour.jsx';
-
-// §16 — guided-help steps. Each spotlights a control by its data-tour anchor;
-// a step whose target isn't on screen (e.g. campaign-only controls) shows a
-// centered card instead of being skipped silently.
-const WORLD_MAP_TOUR_STEPS = [
-  { sel: 'mode',     title: 'Map modes', body: 'Switch between View, Terrain, Annotate, and Routes. Each mode swaps the toolbar below for tools specific to that task.' },
-  { sel: 'map',      title: 'Place & select settlements', body: 'Drag a saved canon settlement from the palette onto the map to place it, then click any placed settlement to select and inspect it.' },
-  { sel: 'campaign', title: 'Campaign', body: 'Pick the campaign this map belongs to. Settlements, relationships, and the World Pulse are all scoped to the active campaign.' },
-  { sel: 'save',     title: 'Save the map', body: 'Save your placements, layers, and viewport to the campaign so the map is exactly as you left it next time.' },
-  { sel: 'layers',   title: 'Layers', body: 'Toggle overlays — relationships, supply chains, labels, biomes, borders — to focus on what matters right now.' },
-  { sel: 'pulse',    title: 'World Pulse', body: 'Advance the realm simulation. Linked settlements ripple events to their neighbours over time.' },
-  { sel: 'news',     title: 'Wizard News', body: 'Read the in-world bulletin of recent realm events — a narrative digest of what the simulation produced.' },
-  { sel: 'help',     title: 'Replay this tour', body: 'You can reopen this walkthrough any time from this ? button. That’s the tour — happy worldbuilding!' },
-];
-
-const AnnotateToolbar = lazy(() => import('./map/AnnotateToolbar.jsx'));
-const TerrainToolbar  = lazy(() => import('./map/TerrainToolbar.jsx'));
-// P132 / M-4 promote — Routes mode contextual toolbar. Lazy because
-// terrain/annotate users never need it.
-const RoutesToolbar   = lazy(() => import('./map/RoutesToolbar.jsx'));
-// P136 / M-5 — "Saved 2 min ago" pill. Self-gated by flag +
-// activeCampaign; lazy because it touches a date-formatting tick.
-const AutoSaveChip    = lazy(() => import('./map/AutoSaveChip.jsx'));
-// P136 / M-6 — Hover-peek for placed settlements. Self-gated by flag
-// and hoveredSettlementId presence.
-const QuickInspector  = lazy(() => import('./map/QuickInspector.jsx'));
-const LayersPanel     = lazy(() => import('./map/LayersPanel.jsx'));
-const SettlementPalette = lazy(() => import('./map/SettlementPalette.jsx'));
-const WizardNewsPanel = lazy(() => import('./map/WizardNewsPanel.jsx'));
-const WorldPulsePanel = lazy(() => import('./map/WorldPulsePanel.jsx'));
-const SimulationRulesDialog = lazy(() => import('./map/SimulationRulesDialog.jsx'));
-
-// Cachebuster bumped whenever public/map/* changes so browsers don't serve
-// a stale iframe bundle (e.g. old drop handler missing the settlementforge
-// path). Bump this when you edit anything under /public/map.
-const FMG_URL = '/map/index.html?v=sfdrop12';
+import { WorldMapToolbar } from './map/WorldMapToolbar.jsx';
+import { WorldMapContextToolbars } from './map/WorldMapContextToolbars.jsx';
+import { WorldMapStage } from './map/WorldMapStage.jsx';
+import { WorldMapOverlays } from './map/WorldMapOverlays.jsx';
 
 export default function WorldMap({ onNavigate } = {}) {
   // ── Refs & local state ────────────────────────────────────────────────
@@ -746,481 +704,52 @@ export default function WorldMap({ onNavigate } = {}) {
       minHeight: 500,
     }}>
       {/* ── Top toolbar row: mode switcher + campaign + utility ────────── */}
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
-        padding: `${SP.sm}px ${SP.md}px`,
-        background: CARD, borderRadius: R.lg, border: `1px solid ${BORDER}`,
-      }}>
-        {/* Mode switcher */}
-        {!showingCampaignPanel ? (
-          <span data-tour="mode" style={{ display: 'inline-flex' }}>
-            <ModeSwitch mapMode={mapMode} setMapMode={setMapMode} imageMode={imageMode} />
-          </span>
-        ) : showingWizardNews ? (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            padding: '5px 10px',
-            border: `1px solid ${BORDER}`,
-            borderRadius: R.sm,
-            background: GOLD_BG,
-            color: GOLD,
-            fontFamily: sans,
-            fontSize: FS.sm,
-            fontWeight: 800,
-          }}>
-            <Newspaper size={13} />
-            Wizard News
-          </div>
-        ) : (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            padding: '5px 10px',
-            border: `1px solid ${BORDER}`,
-            borderRadius: R.sm,
-            background: GOLD_BG,
-            color: GOLD,
-            fontFamily: sans,
-            fontSize: FS.sm,
-            fontWeight: 800,
-          }}>
-            <Zap size={13} />
-            World Pulse
-          </div>
-        )}
-
-        <div style={{ width: 1, height: 24, background: BORDER2 }} />
-
-        {/* Campaign controls */}
-        {canManageCampaigns && (
-          <>
-            <FolderOpen size={14} color={activeCampaign ? GOLD : MUTED} />
-            <select
-              data-tour="campaign"
-              value={activeCampaignId || ''}
-              onChange={e => handleSelectCampaign(e.target.value || null)}
-              style={{
-                padding: '5px 10px',
-                border: `1px solid ${BORDER}`, borderRadius: R.sm,
-                background: CARD, fontSize: FS.sm, fontFamily: sans, color: INK,
-                cursor: 'pointer', minWidth: 180,
-              }}
-            >
-              <option value="">— No campaign</option>
-              {activeCampaigns.map(c => (
-                <option key={c.id} value={c.id}>
-                  {c.name}{c.mapState ? ' ●' : ''}
-                  {c.settlementIds?.length ? ` (${c.settlementIds.length})` : ''}
-                </option>
-              ))}
-            </select>
-            {activeCampaignId && (
-              <>
-                <IconButton data-tour="save" onClick={handleSaveMapToCampaign} title="Save map to campaign" primary>
-                  <Save size={13} /> Save
-                </IconButton>
-                <Suspense fallback={null}>
-                  <AutoSaveChip />
-                </Suspense>
-                {activeCampaign?.mapState && (
-                  <IconButton onClick={handleClearMapFromCampaign} title="Clear campaign map">
-                    <Trash2 size={13} />
-                  </IconButton>
-                )}
-                <div style={{ width: 1, height: 24, background: BORDER2 }} />
-                <IconButton
-                  onClick={() => setCampaignWorkspace('map')}
-                  title="Show campaign map"
-                  active={campaignWorkspace === 'map'}
-                  aria-pressed={campaignWorkspace === 'map'}
-                >
-                  <MapIcon size={13} /> Map
-                </IconButton>
-                <IconButton
-                  data-tour="pulse"
-                  onClick={() => setCampaignWorkspace('pulse')}
-                  title="Show World Pulse"
-                  active={campaignWorkspace === 'pulse'}
-                  aria-pressed={campaignWorkspace === 'pulse'}
-                >
-                  <Zap size={13} /> Pulse
-                </IconButton>
-                <IconButton
-                  onClick={() => setShowSimulationRules(true)}
-                  title="Simulation rules"
-                  active={showSimulationRules}
-                  aria-pressed={showSimulationRules}
-                >
-                  <SlidersHorizontal size={13} /> Rules
-                </IconButton>
-                <IconButton
-                  data-tour="news"
-                  onClick={() => setCampaignWorkspace('news')}
-                  title="Show Wizard News"
-                  active={campaignWorkspace === 'news'}
-                  aria-pressed={campaignWorkspace === 'news'}
-                >
-                  <Newspaper size={13} /> News
-                </IconButton>
-                <select
-                  value={worldPulseInterval}
-                  onChange={e => setWorldPulseInterval(e.target.value)}
-                  title="Realm advancement interval"
-                  style={{
-                    padding: '5px 9px',
-                    border: `1px solid ${BORDER}`, borderRadius: R.sm,
-                    background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
-                    cursor: 'pointer',
-                  }}
-                >
-                  <option value="one_week">Week</option>
-                  <option value="one_month">Month</option>
-                  <option value="one_season">Season</option>
-                  <option value="one_year">Year</option>
-                </select>
-                <IconButton
-                  onClick={handleAdvanceRealm}
-                  title="Advance realm simulation"
-                  primary
-                  disabled={worldPulseBusy}
-                >
-                  <Zap size={13} /> {worldPulseBusy ? 'Advancing' : 'Advance Realm'}
-                </IconButton>
-                {canUndoPulse && (
-                  <IconButton
-                    onClick={handleUndoRealm}
-                    title="Undo the last realm advance — restores the pre-pulse world and every settlement"
-                    disabled={worldPulseBusy}
-                  >
-                    <Undo2 size={13} /> Undo Advance
-                  </IconButton>
-                )}
-              </>
-            )}
-            <div style={{ width: 1, height: 24, background: BORDER2 }} />
-          </>
-        )}
-
-        {/* Utility buttons */}
-        {!showingCampaignPanel && (
-          <>
-            <IconButton
-              data-tour="layers"
-              onClick={() => setShowLayersPanel(v => !v)}
-              title="Toggle layer visibility"
-              active={showLayersPanel}
-            >
-              <Layers size={13} /> Layers
-            </IconButton>
-            <IconButton
-              data-tour="help"
-              onClick={() => setTourOpen(true)}
-              title="Guided tour of the world map"
-            >
-              <HelpCircle size={13} /> Help
-            </IconButton>
-            {/* Canon-only is enforced (only canon settlements can be placed),
-                so the former Canon / All Phases toggle was removed. */}
-            {/* Custom map image (premium + active campaign). Import enters image
-                mode; Clear reverts to generated terrain. */}
-            {canManageCampaigns && activeCampaignId && (
-              imageMode ? (
-                <IconButton onClick={handleClearImage} title="Revert to generated terrain">
-                  <XIcon size={13} /> Clear Image
-                </IconButton>
-              ) : (
-                <IconButton onClick={handleImportImage} title="Import a custom image to use as the map">
-                  <ImageIcon size={13} /> Import Image
-                </IconButton>
-              )
-            )}
-            {canManageCampaigns && activeCampaignId && (
-              <IconButton onClick={() => handleShareMap('map')} disabled={sharingMap} title="Share this map to the gallery as a reusable blank canvas">
-                <Share2 size={13} /> {sharingMap ? 'Sharing…' : 'Share Map'}
-              </IconButton>
-            )}
-            {canManageCampaigns && activeCampaignId && (activeCampaign?.settlementIds?.length > 0) && (
-              <IconButton onClick={() => handleShareMap('map_with_campaign')} disabled={sharingMap} title="Share this map WITH its settlements (public-safe dossiers)">
-                <Share2 size={13} /> Share + Settlements
-              </IconButton>
-            )}
-            {/* Island shape picker — terrain generation, hidden in image mode */}
-            {!imageMode && mapTemplates.length > 0 && (
-              <>
-                <Globe size={14} color={MUTED} />
-                <select
-                  value={currentTemplate}
-                  onChange={e => handleTemplateChange(e.target.value)}
-                  title="Island shape for next regeneration"
-                  style={{
-                    padding: '5px 10px',
-                    border: `1px solid ${BORDER}`, borderRadius: R.sm,
-                    background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
-                    cursor: 'pointer',
-                  }}
-                >
-                  <option value="">Random island</option>
-                  {mapTemplates.map(t => (
-                    <option key={t.id} value={t.id}>{t.label}</option>
-                  ))}
-                </select>
-                <div style={{ width: 1, height: 24, background: BORDER2 }} />
-              </>
-            )}
-
-            <IconButton onClick={handleFit} title="Fit entire map in view">
-              <MapIcon size={13} /> Fit
-            </IconButton>
-            {!imageMode && (
-              <IconButton onClick={handleRegenerate} title="Regenerate a new world">
-                <RefreshCw size={13} /> Regenerate
-              </IconButton>
-            )}
-          </>
-        )}
-
-        <div style={{ flex: 1 }} />
-
-        {/* Status line */}
-        {!showingCampaignPanel && mapLoading && (
-          <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: MUTED, fontSize: FS.xs }}>
-            <Loader size={12} className="sf-spin" /> Loading…
-          </span>
-        )}
-        {!showingCampaignPanel && mapError && (
-          <span style={{ color: swatch['#C54A4A'], fontSize: FS.xs, fontWeight: 700 }}>
-            {String(mapError)}
-          </span>
-        )}
-      </div>
+      <WorldMapToolbar
+        showingCampaignPanel={showingCampaignPanel} showingWizardNews={showingWizardNews}
+        mapMode={mapMode} setMapMode={setMapMode} imageMode={imageMode}
+        canManageCampaigns={canManageCampaigns} activeCampaign={activeCampaign} activeCampaignId={activeCampaignId}
+        handleSelectCampaign={handleSelectCampaign} activeCampaigns={activeCampaigns}
+        handleSaveMapToCampaign={handleSaveMapToCampaign} handleClearMapFromCampaign={handleClearMapFromCampaign}
+        campaignWorkspace={campaignWorkspace} setCampaignWorkspace={setCampaignWorkspace}
+        setShowSimulationRules={setShowSimulationRules} showSimulationRules={showSimulationRules}
+        worldPulseInterval={worldPulseInterval} setWorldPulseInterval={setWorldPulseInterval}
+        handleAdvanceRealm={handleAdvanceRealm} worldPulseBusy={worldPulseBusy}
+        canUndoPulse={canUndoPulse} handleUndoRealm={handleUndoRealm}
+        setShowLayersPanel={setShowLayersPanel} showLayersPanel={showLayersPanel} setTourOpen={setTourOpen}
+        handleClearImage={handleClearImage} handleImportImage={handleImportImage}
+        handleShareMap={handleShareMap} sharingMap={sharingMap}
+        mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange}
+        handleFit={handleFit} handleRegenerate={handleRegenerate}
+        mapLoading={mapLoading} mapError={mapError}
+      />
 
       {/* ── Contextual toolbar for current mode ──────────────────────── */}
-      {!showingCampaignPanel && mapMode === MAP_MODES.ANNOTATE && (
-        <Suspense fallback={null}><AnnotateToolbar /></Suspense>
-      )}
-      {/* Terrain + Routes toolbars are FMG-only (need pack.cells); suppressed in image mode. */}
-      {!showingCampaignPanel && !imageMode && mapMode === MAP_MODES.TERRAIN && (
-        <Suspense fallback={null}><TerrainToolbar bridgeRef={bridgeRef} /></Suspense>
-      )}
-      {!showingCampaignPanel && !imageMode && mapMode === MAP_MODES.ROUTES && (
-        <Suspense fallback={null}><RoutesToolbar /></Suspense>
-      )}
+      <WorldMapContextToolbars
+        showingCampaignPanel={showingCampaignPanel}
+        mapMode={mapMode}
+        imageMode={imageMode}
+        bridgeRef={bridgeRef}
+      />
 
       {/* ── Main body: sidebar + map ─────────────────────────────────── */}
-      {showingWizardNews ? (
-        <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
-          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
-            <WizardNewsPanel campaign={activeCampaign} />
-          </Suspense>
-        </div>
-      ) : showingWorldPulse ? (
-        <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
-          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
-            <WorldPulsePanel campaign={activeCampaign} />
-          </Suspense>
-        </div>
-      ) : (
-      <div style={{ display: 'flex', gap: SP.sm, flex: 1, minHeight: 0 }}>
-        {/* Settlement palette — left sidebar */}
-        <div style={{
-          width: 240, minHeight: 0, display: 'flex', flexDirection: 'column',
-          background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
-          overflow: 'hidden',
-        }}>
-          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
-            <SettlementPalette
-              saves={activeSaves}
-              placements={placements}
-              activeCampaign={activeCampaign}
-            />
-          </Suspense>
-        </div>
-
-        {/* Map container */}
-        {/* a11y: passive drag-and-drop target (settlements are dragged from the
-            palette); no keyboard-clickable widget semantics apply to the map shell. */}
-        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-        <div
-          ref={mapContainerRef}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          style={{
-            flex: 1,
-            position: 'relative',
-            background: PARCH,
-            border: `2px solid ${isDraggingOver ? GOLD : BORDER}`,
-            borderRadius: R.lg,
-            overflow: 'hidden',
-            minHeight: 0,
-          }}
-        >
-          {/* Custom image backdrop mode skips FMG entirely — MapOverlay renders
-              the image + owns pan/zoom. Otherwise the FMG iframe is the bottom plane. */}
-          {!imageMode && (
-            <iframe
-              ref={iframeRef}
-              data-tour="map"
-              src={FMG_URL}
-              title="Fantasy Map"
-              style={{
-                width: '100%',
-                height: '100%',
-                border: 'none',
-                display: 'block',
-                pointerEvents: mapMode === MAP_MODES.ANNOTATE ? 'none' : 'auto',
-              }}
-            />
-          )}
-          {(bridgeReady || imageMode) && (
-            <Suspense fallback={null}>
-              {/* bridgeRef.current is read during render to pass into the overlay.
-                  Strictly a react-hooks/refs violation, but the bridge is
-                  constructed once during the bridge-init effect and never
-                  reassigned for the lifetime of this WorldMap instance. In image
-                  mode there is no bridge (the overlay self-drives). */}
-              {/* eslint-disable-next-line react-hooks/refs */}
-              <MapOverlay bridge={imageMode ? null : bridgeRef.current} transformOut={overlayTransformRef} />
-            </Suspense>
-          )}
-          <Suspense fallback={null}>
-            <PlacementDetailCard
-              onOpenDetail={(_settlementId) => {
-                // SettlementsPanel reads `selectedSettlementId` from the store
-                // on mount and opens the matching save in detail view. So we
-                // just need to navigate — the id is already in the store from
-                // the map click that opened this card.
-                if (typeof onNavigate === 'function') onNavigate('settlements');
-              }}
-            />
-          </Suspense>
-          {/* P136 / M-6 — Hover peek. Self-gated; renders nothing
-              when no hover-id is set or when click-selection wins. */}
-          <Suspense fallback={null}>
-            <QuickInspector />
-          </Suspense>
-          {!mapReady && !imageMode && (
-            <div style={{
-              position: 'absolute', inset: 0, display: 'flex',
-              alignItems: 'center', justifyContent: 'center',
-              background: 'rgba(247,240,228,0.7)', backdropFilter: 'blur(2px)',
-              flexDirection: 'column', gap: SP.sm, pointerEvents: 'none',
-            }}>
-              <Loader size={32} color={GOLD} className="sf-spin" />
-              <div style={{ fontSize: FS.md, fontWeight: 700, color: SECOND }}>
-                Summoning the world…
-              </div>
-            </div>
-          )}
-          {isDraggingOver && mapMode !== MAP_MODES.ANNOTATE && (
-            <>
-              <div style={{
-                position: 'absolute', inset: 12, border: `3px dashed ${GOLD}`,
-                borderRadius: R.lg, background: 'rgba(160,118,42,0.06)',
-                pointerEvents: 'none',
-              }} />
-              {/* P111 / M-3 — Drop preview tooltip. Shows during drag with
-                  the data the user needs to decide if this is a sensible
-                  placement: terrain hint + trade-route candidacy +
-                  proximity to existing placements. We render a static
-                  hint card (top-right) under the flag — a future
-                  iteration can hover-follow the cursor with live FMG
-                  cell data. */}
-              {flag('mapDropPreview') && (
-                // a11y: presentational hint card (pointerEvents:'none'); the
-                // onMouseEnter is fire-and-forget analytics, not a user control.
-                // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-                <div
-                  onMouseEnter={() => {
-                    Funnel.track(EVENTS.MAP_DROP_PREVIEW_SHOWN);
-                  }}
-                  style={{
-                    position: 'absolute', top: 24, right: 24,
-                    padding: '8px 12px', background: INK,
-                    color: PARCH_100,
-                    border: `1px solid ${GOLD}`, borderRadius: R.sm,
-                    fontSize: FS.xs, lineHeight: 1.45,
-                    boxShadow: '0 12px 32px rgba(0,0,0,0.40)',
-                    pointerEvents: 'none', maxWidth: 220,
-                  }}
-                >
-                  <div style={{
-                    fontWeight: 700, color: GOLD, fontSize: FS.sm,
-                    marginBottom: 4,
-                  }}>
-                    Drop to place
-                  </div>
-                  <div style={{ color: swatch['#C8B098'] }}>
-                    Settlements land at the nearest valid cell. Trade-route
-                    candidates auto-link to neighbours within 2 days.
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-        </div>
-
-        {/* Layers panel — right sidebar (toggleable) */}
-        {showLayersPanel && (
-          <Suspense fallback={null}>
-            <LayersPanel onClose={() => setShowLayersPanel(false)} />
-          </Suspense>
-        )}
-      </div>
-      )}
-
-      {/* Toast */}
-      {toast && (
-        <div style={{
-          position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)',
-          padding: '10px 18px',
-          background: toast.kind === 'error' ? '#8a2a2a' : toast.kind === 'info' ? '#3a4a5a' : '#1a5a28',
-          color: swatch.white, borderRadius: R.md, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-          boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
-          zIndex: 100,
-        }}>
-          {toast.text}
-        </div>
-      )}
-
-      <ConfirmDialog
-        open={!!regenerateConfirm}
-        tone="warning"
-        title="Regenerate world?"
-        body={regenerateConfirm || ''}
-        confirmLabel="Regenerate"
-        onConfirm={performRegenerate}
-        onCancel={() => setRegenerateConfirm(null)}
+      <WorldMapStage
+        showingWizardNews={showingWizardNews} showingWorldPulse={showingWorldPulse}
+        activeCampaign={activeCampaign} activeSaves={activeSaves} placements={placements}
+        mapContainerRef={mapContainerRef} handleDragOver={handleDragOver}
+        handleDragLeave={handleDragLeave} handleDrop={handleDrop} isDraggingOver={isDraggingOver}
+        imageMode={imageMode} iframeRef={iframeRef} mapMode={mapMode}
+        bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
+        onNavigate={onNavigate} mapReady={mapReady}
+        showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
       />
 
-      <ConfirmDialog
-        open={mapSaveConfirm}
-        title="Save canonized map?"
-        body="This campaign's world is canonized, so placed settlements can no longer be moved. Any settlements you've newly added will be saved where they sit. Continue?"
-        confirmLabel="Save map"
-        onConfirm={() => { setMapSaveConfirm(false); performSaveMap(); }}
-        onCancel={() => setMapSaveConfirm(false)}
+      <WorldMapOverlays
+        toast={toast} regenerateConfirm={regenerateConfirm} performRegenerate={performRegenerate}
+        setRegenerateConfirm={setRegenerateConfirm} mapSaveConfirm={mapSaveConfirm}
+        setMapSaveConfirm={setMapSaveConfirm} performSaveMap={performSaveMap}
+        showSimulationRules={showSimulationRules} activeCampaign={activeCampaign}
+        setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen}
       />
-
-      <Suspense fallback={null}>
-        <SimulationRulesDialog
-          open={showSimulationRules}
-          campaign={activeCampaign}
-          onClose={() => setShowSimulationRules(false)}
-        />
-      </Suspense>
-
-      {/* §16 — guided help walkthrough */}
-      <WorldMapTour open={tourOpen} steps={WORLD_MAP_TOUR_STEPS} onClose={() => setTourOpen(false)} />
-
-      {/* Spinner animation */}
-      <style>{`
-        .sf-spin { animation: sf-spin 1.2s linear infinite; }
-        @keyframes sf-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      `}</style>
     </div>
   );
 }

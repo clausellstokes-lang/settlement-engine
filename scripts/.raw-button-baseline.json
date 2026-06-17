@@ -124,6 +124,7 @@
   "src/components/settlement/Timeline.jsx",
   "src/components/settlement/VersionsTab.jsx",
   "src/components/settlement/eventComposer/BatchCart.jsx",
+  "src/components/settlement/eventComposer/EventComposerTargetField.jsx",
   "src/components/settlementDetail/SettlementDetailEditNames.jsx",
   "src/components/settlementDetail/SettlementDetailLinkNeighbourCard.jsx",
   "src/components/settlements/CampaignFolder.jsx",
