@@ -1,7 +1,6 @@
 [
   "src/components/BuyThisDossier.jsx",
   "src/components/ChroniclePanel.jsx",
-  "src/components/CompendiumPanel.jsx",
   "src/components/ConfigurationPanel.jsx",
   "src/components/DeleteConfirmation.jsx",
   "src/components/EntityPicker.jsx",
@@ -13,6 +12,7 @@
   "src/components/StaleNarrativeModal.jsx",
   "src/components/TableView.jsx",
   "src/components/account/AccountFAQ.jsx",
+  "src/components/compendium/CustomContent.jsx",
   "src/components/compendium/SupplyChainsManager.jsx",
   "src/components/dossier/CascadePreviewPanel.jsx",
   "src/components/dossier/FirstDossierCallouts.jsx",
