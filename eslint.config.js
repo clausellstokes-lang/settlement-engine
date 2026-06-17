@@ -73,6 +73,9 @@ export default [
       // react's jsx-no-duplicate-props isn't loadable on ESLint 10, so this is
       // the local equivalent. Error: a dropped prop is a real bug.
       'jsx-hygiene/no-duplicate-jsx-props': 'error',
+      // A+ P1.5 — inline object/array selectors in useStore() re-render every change
+      // (the Zustand footgun). Count is zero today; ERROR locks it. @enforced-by this rule.
+      'jsx-hygiene/no-inline-store-selector': 'error',
       'no-fallthrough': 'error',
       'no-self-assign': 'error',
       'no-unreachable': 'error',
@@ -176,6 +179,21 @@ export default [
     rules: Object.fromEntries(
       Object.keys(jsxA11y.flatConfigs.recommended.rules).map(rule => [rule, 'error']),
     ),
+  },
+
+  // ── A+ P1.4 — component size ratchet (max-lines) ─────────────────────────────
+  // Six god-components currently exceed 600 lines (WorldMap 1338, EventComposer
+  // 1208, CompendiumPanel 1165, GenerateWizard 1140, SettlementsPanel 1104,
+  // OutputContainer 1019). They WARN (a visible burn-down worklist), they don't
+  // block. Everything else is already under 600, so the ratchet prevents any NEW
+  // god-component from the moment it lands. After the Phase-2 decompositions bring
+  // the six under 600, flip 'warn'→'error' and lower max to 500.
+  // @enforced-by eslint max-lines (this rule)
+  {
+    files: ['src/components/**/*.jsx'],
+    rules: {
+      'max-lines': ['warn', { max: 600, skipBlankLines: true, skipComments: true }],
+    },
   },
 
   // Data tables: arrow functions are written with uniform signatures
