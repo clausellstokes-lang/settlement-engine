@@ -13,6 +13,8 @@
     "build:edge-shared": "node scripts/build-edge-shared.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.full.json",
     "typecheck:domain": "tsc --noEmit",
+    "typecheck:domain:strict": "node scripts/check-domain-strict.mjs",
+    "typecheck:domain:strict:update": "node scripts/check-domain-strict.mjs --update",
     "lint": "eslint src/ tests/ scripts/",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -22,7 +24,7 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
-    "check": "npm run validate:data && npm run validate:edge && npm run validate:map && npm run typecheck && npm run lint && npm run test && npm run build",
+    "check": "npm run validate:data && npm run validate:edge && npm run validate:map && npm run typecheck && npm run typecheck:domain:strict && npm run lint && npm run test && npm run build",
     "check:quick": "npm run lint && npm run test",
     "prepare": "husky"
   },
