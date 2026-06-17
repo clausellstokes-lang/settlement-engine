@@ -311,6 +311,27 @@ export function deriveHeadcounts(settlement) {
   };
 }
 
+/**
+ * Prosperity label (§overview/economics) — the prosperity enum BOTH the screen and
+ * the PDF render. The COLOR/tone is intentionally per-surface (the web uses an RGB
+ * scale, the PDF a print palette), so only the label is a shared scalar.
+ * @param {any} settlement
+ * @returns {{ label: string | null }}
+ */
+export function deriveProsperityPosture(settlement) {
+  return { label: settlement?.economicState?.prosperity || null };
+}
+
+/**
+ * Safety label (§overview) — the safetyProfile.safetyLabel BOTH surfaces render.
+ * Tone is per-surface (see deriveProsperityPosture); only the label is shared.
+ * @param {any} settlement
+ * @returns {{ label: string | null }}
+ */
+export function deriveSafetyPosture(settlement) {
+  return { label: settlement?.economicState?.safetyProfile?.safetyLabel || null };
+}
+
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {
     foodBalance: deriveFoodBalance(settlement),
@@ -319,5 +340,7 @@ export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = nul
     magic: deriveMagicPosture(settlement),
     blockade: deriveBlockadeRelief(settlement),
     headcounts: deriveHeadcounts(settlement),
+    prosperity: deriveProsperityPosture(settlement),
+    safety: deriveSafetyPosture(settlement),
   };
 }

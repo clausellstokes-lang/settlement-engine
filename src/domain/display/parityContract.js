@@ -74,6 +74,10 @@ export const SHARED_FIELDS = Object.freeze([
   { fact: 'headcounts.institutions', canonPath: 'headcounts.institutions', vmPaths: ['overview.institutionsCount'] },
   { fact: 'headcounts.npcs',         canonPath: 'headcounts.npcs',         vmPaths: ['overview.npcsCount'] },
   { fact: 'headcounts.factions',     canonPath: 'headcounts.factions',     vmPaths: ['overview.factionsCount'] },
+  // Prosperity / safety LABELS (pdf.4) — the enum both surfaces render. Tone/color
+  // is per-surface (web RGB scale vs PDF palette) and exempt; only the label is shared.
+  { fact: 'prosperity.label', canonPath: 'prosperity.label', vmPaths: ['overview.prosperity'] },
+  { fact: 'safety.label',     canonPath: 'safety.label',     vmPaths: ['overview.safety'] },
 ]);
 
 export const PARITY_EXEMPT = Object.freeze([
@@ -82,4 +86,11 @@ export const PARITY_EXEMPT = Object.freeze([
   { fact: 'aiAppendix.*',          reason: 'AI-narrative path only; absent from the data dossier.' },
   { fact: 'daily.passages',        reason: 'AI-only prose passages (narrativeMode).' },
   { fact: 'tone color hex / bar widths', reason: 'Pure layout/formatting, not a shared data value.' },
+  { fact: 'prosperity/safety/viability TONE', reason: 'Per-surface rendering of the shared LABEL: the web maps the enum to an RGB scale, the PDF to a print palette. The labels ARE pinned (prosperity.label, safety.label); the color mapping is medium-specific, not a shared value.' },
+  // Viability: the underlying SHARED facts already agree across surfaces —
+  // viability.viable (both read economicViability.viable) and viability.summary
+  // (both render deriveViability().summary, behind canonicalViewModel). What
+  // differs is intentional PER-SURFACE FRAMING of that same `viable` boolean:
+  { fact: 'viability.verdict label/tone',
+    reason: 'Per-surface framing of the SAME `viable` boolean — the web shows a coherence badge (✓ COHERENT / MARGINAL / ✗ NOT COHERENT), the PDF a viability badge (Viable / Not Viable). The shared granular verdict lives in viability.summary, which IS converged via deriveViability. Not a shared scalar; do not force string-equality.' },
 ]);
