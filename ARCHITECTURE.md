@@ -30,7 +30,7 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
              (economic, power, npc, faction, defense, history, resource, …).
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary.
-             Was the only gate-typechecked layer; the gate now covers the full tree.
+             Was the only gate-typechecked layer; the gate now covers the full tree. <!-- @enforced-by tsconfig.full.json -->
 store/       Zustand slices (14) — the single client state container.
 components/   React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs) +
@@ -118,7 +118,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
     metadata keys/roles (anti-privilege-escalation).
   - `create-checkout`, `send-email` — JWT-authed.
   - `_shared/` — `aiGroundingBundle.js` is **built** from app code by
-    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift.
+    `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/analyticsEventsBundle.freshness.test.js -->
 
 Secrets live in the Supabase dashboard / Vercel env, never in the repo. Client
 reads only `VITE_*` vars (see `.env.example`); the anon key is public by design

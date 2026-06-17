@@ -133,6 +133,7 @@ the follow-on. See the wave sections below.
 | P144 | A-4 — Wizard step focus | **shipped** | Focus moves to the new step heading when the advanced wizard advances/retreats, so keyboard + screen-reader users are oriented instead of stranded on a now-disabled nav button. Flag: `wizardStepFocus`. |
 | P145 | W-2 — Wizard close-out summary | **shipped** | Pre-generate recap card at the wizard's final "Ready to Generate" step (tier/culture/route/threat/magic + priority emphasis + manual force/exclude counts) so Generate is a confirmation, not a leap. Flag: `wizardCloseout`. |
 | P146 | — Funnel event-name contract | **shipped (no flag)** | Local ESLint plugin `scripts/eslint-plugin-analytics.js`, rule `analytics/funnel-event-contract` (error): flags raw-string / template-literal first args to `track`/`Funnel.*`, enforcing the `EVENTS.*` constant discipline at build time. Import-binding-aware; zero violations on the current corpus. |
+<!-- @enforced-by analytics/funnel-event-contract -->
 
 ## Closeout — final two phases (118–119)
 
@@ -194,5 +195,6 @@ What's left is operational, not architectural:
 - **Visual-budget debt — done (Phase 120–122).** The `visual-budget`
   warnings were burned to zero and the three rules (`no-raw-fontsize`,
   `no-raw-color`, `no-raw-button-copy`) promoted from warn to error.
+  <!-- @enforced-by visual-budget/no-raw-fontsize, visual-budget/no-raw-color, visual-budget/no-raw-button-copy -->
 - **Revert-snapshot soak** — P133's version-revert mutation is wired but
   warrants real-world soak before `versionHistory` defaults on.

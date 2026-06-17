@@ -118,6 +118,7 @@ export default [
       // P121 burn-down migrated every raw fontSize, color, and inline
       // button verb to a token (zero rendered change). Count is now zero,
       // so they are promoted to ERROR — new drift fails the gate.
+      // @enforced-by visual-budget/no-raw-fontsize, visual-budget/no-raw-color, visual-budget/no-raw-button-copy
       'visual-budget/no-raw-fontsize':   'error',
       'visual-budget/no-raw-color':      'error',
       'visual-budget/no-raw-button-copy': 'error',
@@ -199,7 +200,9 @@ export default [
   // accessibility gaps accumulated invisibly. These started at WARN for an
   // incremental cleanup; once the recommended-rule count reached zero (WS3
   // burn-down across 55 files) they were promoted to ERROR so regressions block
-  // the gate — mirroring how the visual-budget rules were hardened. A handful of
+  // the gate — mirroring how the visual-budget rules were hardened.
+  // @enforced-by jsx-a11y/alt-text
+  // A handful of
   // genuinely-intentional cases (focus-on-open inline editors, the deprecated
   // label-has-for vs label-has-associated-control split) carry justified
   // per-line eslint-disable comments.
