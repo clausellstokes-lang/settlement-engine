@@ -1696,8 +1696,39 @@ function getCorsHeaders(req?: Request) {
 // that section silently falls back to raw, and the dossier shows only the
 // thesis — the "Generate Narrative only writes the identity" bug. Retry
 // transient throttle/overload responses with backoff (honoring Retry-After).
+// A hung provider socket would otherwise block the whole edge invocation until the
+// Supabase runtime wall-clock-kills it — AFTER the user was already debited (the
+// credit deduction precedes generation). So every provider fetch carries an
+// AbortController with a wall-clock budget: a per-attempt cap (a fresh budget per
+// retry) bounded by an overall deadline kept below the edge platform limit. On
+// timeout the fetch rejects (AbortError/TimeoutError); the per-pass caller already
+// falls back to raw section text, so one slow pass can't hang or 500 the batch.
+const PER_ATTEMPT_TIMEOUT_MS = 30_000; // single provider fetch
+const TOTAL_BUDGET_MS = 55_000;        // whole call across retries (< edge wall-clock)
+
+function withTimeout(ms: number): { signal: AbortSignal; cancel: () => void } {
+  const ctrl = new AbortController();
+  const id = setTimeout(() => ctrl.abort(new DOMException(`provider fetch timed out after ${ms}ms`, 'TimeoutError')), ms);
+  return { signal: ctrl.signal, cancel: () => clearTimeout(id) };
+}
+
 async function fetchAiWithRetry(url: string, init: RequestInit, maxRetries = 4): Promise<Response> {
-  let res = await fetch(url, init);
+  const deadline = Date.now() + TOTAL_BUDGET_MS;
+  // Each attempt gets its OWN controller+timer (a retry must not inherit a spent
+  // budget), capped by whatever remains of the overall deadline. The timer is
+  // always cleared so a completed fetch never leaks a pending abort.
+  const fetchOnce = async (): Promise<Response> => {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) throw new DOMException('generation budget exceeded', 'TimeoutError');
+    const t = withTimeout(Math.min(PER_ATTEMPT_TIMEOUT_MS, remaining));
+    try {
+      return await fetch(url, { ...init, signal: t.signal });
+    } finally {
+      t.cancel();
+    }
+  };
+
+  let res = await fetchOnce();
   for (
     let attempt = 0;
     !res.ok && attempt < maxRetries && [429, 500, 503, 529].includes(res.status);
@@ -1708,8 +1739,10 @@ async function fetchAiWithRetry(url: string, init: RequestInit, maxRetries = 4):
       ? Math.min(15000, retryAfter * 1000)
       : Math.min(8000, 400 * (2 ** attempt)) + Math.floor(Math.random() * 250);
     try { await res.text(); } catch { /* drain the body so the socket frees */ }
+    // Don't start a retry we can't finish within the overall budget.
+    if (Date.now() + backoffMs >= deadline) break;
     await new Promise(resolve => setTimeout(resolve, backoffMs));
-    res = await fetch(url, init);
+    res = await fetchOnce();
   }
   return res;
 }

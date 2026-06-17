@@ -403,6 +403,18 @@ describe('Tier 3.3 — generate-narrative AI invariants', () => {
     expect(src).toMatch(/sanitizeRelationshipMemoryContext\(relationshipMemoryContext\)/);
     expect(src).toMatch(/REGIONAL RELATIONSHIP MEMORY FOR DAILY LIFE/);
   });
+
+  // edges.2 — a hung provider socket must not block the edge invocation after the
+  // user was already debited. Every provider fetch carries an AbortController with
+  // a wall-clock budget; removing it must fail CI.
+  it('aborts a hung provider fetch with an AbortController + wall-clock timeout', () => {
+    expect(src).toMatch(/AbortController/);
+    // The retry helper must thread a signal into fetch (per-attempt budget).
+    expect(src).toMatch(/fetch\(url,\s*\{\s*\.\.\.init,\s*signal/);
+    // A per-attempt cap and an overall deadline below the edge platform limit.
+    expect(src).toMatch(/PER_ATTEMPT_TIMEOUT_MS/);
+    expect(src).toMatch(/TOTAL_BUDGET_MS/);
+  });
 });
 
 describe('Tier 3.3 — generate-narrative grounding fidelity', () => {
