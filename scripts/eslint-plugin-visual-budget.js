@@ -195,5 +195,40 @@ export default {
         };
       },
     },
+
+    // no-raw-color-literal (A+ design-a11y.1) — broadens color governance beyond
+    // JSX style props (no-raw-color) and beyond `const X='#hex'` consts
+    // (no-forked-color-const) to ANY pure-hex string literal anywhere (object
+    // values, JSX attrs, config maps, …). The token DEFINITION files are exempt,
+    // and so is the sanctioned exact-value escape hatch `swatch['#HEX']`. There is
+    // a large grandfathered population of legitimate local design data (per-tab
+    // accent maps, the PDF theme, palettes), so this rule is NOT wired into the
+    // gate at error/warn — the live ratchet is the occurrence BUDGET in
+    // tests/lint/rawColorLiteralBudget.test.js (count can only shrink). Flip this
+    // rule on once that budget reaches zero.
+    'no-raw-color-literal': {
+      meta: {
+        type: 'suggestion',
+        docs: { description: 'Disallow a pure raw-hex color string literal outside the token sources. Use a token or swatch[…].' },
+        schema: [],
+      },
+      create(context) {
+        const rel = _relPath(context.filename);
+        if (_isTokenSource(rel)) return {}; // definition files legitimately hold raw hexes
+        return {
+          Literal(node) {
+            if (typeof node.value !== 'string' || !RAW_HEX_PATTERN.test(node.value.trim())) return;
+            // Exempt the sanctioned exact-value escape hatch: swatch['#HEX'].
+            const p = node.parent;
+            if (p && p.type === 'MemberExpression' && p.computed && p.property === node
+                && p.object && p.object.type === 'Identifier' && p.object.name === 'swatch') return;
+            context.report({
+              node,
+              message: `Raw color literal "${node.value}" — import a token from tokens.js/theme.js, or route through swatch['${node.value.toUpperCase()}'].`,
+            });
+          },
+        };
+      },
+    },
   },
 };
