@@ -31,39 +31,46 @@ describe('flag() resolution', () => {
     for (const [name, decl] of Object.entries(FLAGS)) {
       expect(flag(name)).toBe(decl.default);
     }
-    // discordOauth defaults to false (off until OAuth review).
+    // discordOauth/googleOauth default to FALSE (Phase A1): the OAuth code is
+    // complete, but the buttons stay hidden until the operator enables the
+    // providers in the Supabase dashboard AND flips these flags — so users never
+    // see a button that errors before the dashboard config is live.
     expect(flag('discordOauth')).toBe(false);
+    expect(flag('googleOauth')).toBe(false);
+    // mobileSingleChrome is also default-false, used below to exercise the
+    // override-over-false-default resolution mechanics.
+    expect(flag('mobileSingleChrome')).toBe(false);
   });
 
   it('localStorage override beats default', () => {
     // An explicit true override wins over the false default…
-    setFlagOverride('discordOauth', true);
-    expect(flag('discordOauth')).toBe(true);
+    setFlagOverride('mobileSingleChrome', true);
+    expect(flag('mobileSingleChrome')).toBe(true);
 
     // …and an explicit false override is honored, not treated as "unset"
     // (guards the nullish-coalescing precedence in flag()).
-    setFlagOverride('discordOauth', false);
-    expect(flag('discordOauth')).toBe(false);
+    setFlagOverride('mobileSingleChrome', false);
+    expect(flag('mobileSingleChrome')).toBe(false);
   });
 
   it('removing the override falls back to default', () => {
-    setFlagOverride('discordOauth', true);
-    expect(flag('discordOauth')).toBe(true);
+    setFlagOverride('mobileSingleChrome', true);
+    expect(flag('mobileSingleChrome')).toBe(true);
 
-    setFlagOverride('discordOauth', null);
-    expect(flag('discordOauth')).toBe(false);
+    setFlagOverride('mobileSingleChrome', null);
+    expect(flag('mobileSingleChrome')).toBe(false);
   });
 
   it('URL parameter beats localStorage', () => {
-    setFlagOverride('discordOauth', false);
-    window.history.replaceState({}, '', '/?flag.discordOauth=true');
-    expect(flag('discordOauth')).toBe(true);
+    setFlagOverride('mobileSingleChrome', false);
+    window.history.replaceState({}, '', '/?flag.mobileSingleChrome=true');
+    expect(flag('mobileSingleChrome')).toBe(true);
   });
 
   it('URL parameter persists to localStorage as a side effect', () => {
-    window.history.replaceState({}, '', '/?flag.discordOauth=true');
-    flag('discordOauth'); // trigger resolution
-    expect(window.localStorage.getItem('flag.discordOauth')).toBe('true');
+    window.history.replaceState({}, '', '/?flag.mobileSingleChrome=true');
+    flag('mobileSingleChrome'); // trigger resolution
+    expect(window.localStorage.getItem('flag.mobileSingleChrome')).toBe('true');
   });
 
   it('warns and returns false for unknown flags', () => {
@@ -73,10 +80,10 @@ describe('flag() resolution', () => {
   });
 
   it('parses both "true/false" and "1/0" override values', () => {
-    setFlagOverride('discordOauth', 1);
-    expect(flag('discordOauth')).toBe(true);
-    setFlagOverride('discordOauth', 0);
-    expect(flag('discordOauth')).toBe(false);
+    setFlagOverride('mobileSingleChrome', 1);
+    expect(flag('mobileSingleChrome')).toBe(true);
+    setFlagOverride('mobileSingleChrome', 0);
+    expect(flag('mobileSingleChrome')).toBe(false);
   });
 });
 

@@ -182,41 +182,238 @@ async function mockSignInWithMagicLink(email) {
 }
 
 /**
- * OAuth sign-in. Supabase handles the full redirect dance — we tell it
- * the provider and the URL to return to. On success, the user's session
- * is established when their browser lands back on our origin and the
- * onAuthStateChange listener fires.
+ * The single OAuth redirect target. We send the browser back to the app
+ * ROOT (not a bespoke /auth/callback): the Supabase client is created with
+ * `detectSessionInUrl: true`, so on return it parses the access/refresh
+ * tokens out of the URL hash, persists the session, and fires
+ * `onAuthStateChange('SIGNED_IN')` — which authSlice.initAuth already
+ * listens for. No dedicated callback route or extra handling is needed.
  *
- * Provider notes:
- *   - 'google'  — works once the user enables Google as an auth provider
- *                 in the Supabase dashboard (no app code needed beyond
- *                 the dashboard config + redirect-allowlist entry).
- *   - 'discord' — same drill; gated behind the `discordOauth` flag in
- *                 the UI until the Anthropic-Discord review completes.
+ * Constrained to our own origin so a tampered redirect can't bounce a user
+ * into an attacker-controlled callback (mirrors the magic-link redirect).
+ */
+function oauthRedirectTo() {
+  return `${window.location.origin}`;
+}
+
+/**
+ * Translate a raw Supabase OAuth error into a safe, user-facing message.
+ *
+ * Account-linking / provider-conflict is the security-sensitive case: if the
+ * email behind the OAuth identity is already registered (e.g. via password),
+ * Supabase rejects the implicit link rather than silently merging accounts.
+ * We surface a clear "sign in with your password" nudge WITHOUT leaking which
+ * provider owns the account or whether the email exists — only what's safe.
+ *
+ * @param {{ message?: string, code?: string, status?: number } | null} error
+ * @returns {string} a safe message to show the user
+ */
+function describeOAuthError(error) {
+  const raw = String(error?.message || '').toLowerCase();
+  const code = String(error?.code || '').toLowerCase();
+  // Supabase reports identity/email collisions a few ways across versions.
+  if (
+    code.includes('identity_already_exists') ||
+    code === 'email_exists' ||
+    raw.includes('already registered') ||
+    raw.includes('already been registered') ||
+    raw.includes('already exists') ||
+    raw.includes('already linked') ||
+    raw.includes('identity is already')
+  ) {
+    return 'This email is already registered. Sign in with your password instead, then link this provider from your account settings.';
+  }
+  // Anything else: a generic, non-leaky failure message.
+  return 'Sign-in failed. Please try again.';
+}
+
+/**
+ * Low-level OAuth kickoff. Supabase handles the full redirect dance — we tell
+ * it the provider and the URL to return to. The browser then navigates to the
+ * provider, so this never resolves to a session; that arrives via
+ * `onAuthStateChange` once the user lands back on our origin (see
+ * `oauthRedirectTo`).
+ *
+ * Returns `{ data, error }` (mirroring the Supabase shape) so callers can
+ * branch without a try/catch. `error.userMessage` carries the safe,
+ * already-sanitized string for direct display.
+ *
+ * @param {'google' | 'discord' | 'github'} provider
+ */
+async function startOAuth(provider) {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: oauthRedirectTo(),
+      // Default scopes are sufficient for both Google and Discord (email +
+      // basic profile). We deliberately request no extra scopes to keep the
+      // consent screen minimal and the review surface small.
+    },
+  });
+  if (error) {
+    // `userMessage` is our own safe-display augmentation; the Supabase
+    // AuthError type doesn't declare it, so attach it through a loose cast.
+    /** @type {any} */ (error).userMessage = describeOAuthError(error);
+  }
+  return { data, error };
+}
+
+/**
+ * Google OAuth. Works once Google is enabled as a provider in the Supabase
+ * dashboard (client id/secret + the Supabase callback URL added to the Google
+ * Cloud OAuth app's authorized redirect URIs). Until then the call no-ops
+ * gracefully: Supabase returns a "provider is not enabled" error which we map
+ * to a safe message rather than throwing.
+ */
+async function supabaseSignInWithGoogle() {
+  return startOAuth('google');
+}
+
+/**
+ * Discord OAuth. Same setup as Google — enable the provider in the Supabase
+ * dashboard with the Discord developer-portal app's client id/secret and the
+ * Supabase callback URL registered as a redirect.
+ */
+async function supabaseSignInWithDiscord() {
+  return startOAuth('discord');
+}
+
+/**
+ * Back-compat generic entry. Existing callers (authSlice.authOAuth) pass a
+ * provider string; new code should prefer the named wrappers above. Throws on
+ * error to preserve the prior contract; the named wrappers return { data,
+ * error } instead.
  *
  * @param {'google' | 'discord' | 'github'} provider
  */
 async function supabaseSignInWithOAuth(provider) {
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider,
-    options: {
-      redirectTo: `${window.location.origin}`,
-    },
-  });
-  if (error) throw error;
-  // signInWithOAuth returns a redirect URL but Supabase navigates the
-  // browser itself, so the caller never resolves to a session — that
-  // arrives via onAuthStateChange once the user lands back on our origin.
+  const { data, error } = await startOAuth(provider);
+  if (error) {
+    // Preserve the safe message on the thrown error so UI catch-blocks show it.
+    error.message = /** @type {any} */ (error).userMessage || error.message;
+    throw error;
+  }
   return data;
 }
 
 /** Mock equivalent — surfaces a friendly hint and resolves to no session. */
+async function mockSignInWithGoogle() {
+  return { data: { provider: 'google', mock: true }, error: null };
+}
+
+/** Mock equivalent — surfaces a friendly hint and resolves to no session. */
+async function mockSignInWithDiscord() {
+  return { data: { provider: 'discord', mock: true }, error: null };
+}
+
+/** Mock equivalent for the back-compat generic entry. */
 async function mockSignInWithOAuth(provider) {
   return { provider, mock: true };
 }
 
 async function supabaseUpdatePassword(newPassword) {
   const { error } = await supabase.auth.updateUser({ password: newPassword });
+  if (error) throw error;
+}
+
+/**
+ * Re-authenticate the signed-in user with their CURRENT password before a
+ * sensitive change (password change / account deletion). We verify by
+ * attempting a password sign-in against the user's own email; on success the
+ * caller may proceed. On failure we throw a single, non-leaky error so we never
+ * disclose whether the email exists vs. the password was wrong — the only thing
+ * the user learns is "re-auth failed".
+ *
+ * NOTE: signInWithPassword refreshes the session for the SAME user, so this is
+ * safe to call mid-session; it does not log anyone else in.
+ *
+ * @param {string} currentPassword
+ */
+async function supabaseReauthenticateWithPassword(currentPassword) {
+  const { data: { user } } = await supabase.auth.getUser();
+  const email = user?.email;
+  if (!email || !currentPassword) {
+    throw new Error('Re-authentication failed. Please check your password and try again.');
+  }
+  const { error } = await supabase.auth.signInWithPassword({ email, password: currentPassword });
+  if (error) {
+    // Deliberately generic — never reveal which factor failed.
+    throw new Error('Re-authentication failed. Please check your password and try again.');
+  }
+}
+
+/**
+ * Change password with a current-password re-auth gate. Verifies the current
+ * password first (so a hijacked, still-open session can't silently rotate the
+ * password), then updates. Errors are mapped to safe, generic messages.
+ *
+ * @param {{ currentPassword: string, newPassword: string }} args
+ */
+async function supabaseChangePassword({ currentPassword, newPassword }) {
+  await supabaseReauthenticateWithPassword(currentPassword);
+  const { error } = await supabase.auth.updateUser({ password: newPassword });
+  if (error) {
+    // Surface validation problems (e.g. too-short) but keep it generic.
+    throw new Error(error.message || 'Could not update your password. Please try again.');
+  }
+}
+
+/**
+ * List the OAuth/email identities linked to this account. Used by the Linked
+ * Accounts UI to show which providers are connected and offer link/unlink.
+ * Returns a plain array (empty on any failure) so the UI degrades gracefully.
+ *
+ * @returns {Promise<Array<{ id: string, provider: string, identity_id?: string, email?: string }>>}
+ */
+async function supabaseGetIdentities() {
+  try {
+    const { data, error } = await supabase.auth.getUserIdentities();
+    if (error || !data) return [];
+    return data.identities || [];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Link an additional OAuth provider to the current account. Supabase begins a
+ * redirect dance just like sign-in; on return the new identity is attached.
+ * Constrained to our own origin (mirrors the sign-in redirect).
+ *
+ * @param {'google' | 'discord'} provider
+ */
+async function supabaseLinkIdentity(provider) {
+  const { data, error } = await supabase.auth.linkIdentity({
+    provider,
+    options: { redirectTo: oauthRedirectTo() },
+  });
+  if (error) {
+    /** @type {any} */ (error).userMessage = describeOAuthError(error);
+    throw new Error(/** @type {any} */ (error).userMessage);
+  }
+  return data;
+}
+
+/**
+ * Unlink an OAuth identity. Supabase refuses to remove the LAST identity (that
+ * would orphan the account), so the UI must keep one provider connected; we let
+ * the server enforce it and surface a safe message if it rejects.
+ *
+ * @param {{ provider: string, identity_id?: string }} identity an entry from getIdentities()
+ */
+async function supabaseUnlinkIdentity(identity) {
+  const { error } = await supabase.auth.unlinkIdentity(/** @type {any} */ (identity));
+  if (error) {
+    throw new Error('Could not unlink this provider. You must keep at least one sign-in method.');
+  }
+}
+
+/**
+ * Sign out of ALL sessions everywhere (every device/tab), not just this one.
+ * Uses Supabase's global scope so a lost/forgotten device is revoked.
+ */
+async function supabaseSignOutEverywhere() {
+  const { error } = await supabase.auth.signOut({ scope: 'global' });
   if (error) throw error;
 }
 
@@ -377,6 +574,33 @@ async function mockUpdatePassword() {
   // No-op in mock mode
 }
 
+async function mockReauthenticateWithPassword() {
+  // Local dev has no real password store; treat re-auth as a no-op success.
+}
+
+async function mockChangePassword() {
+  // No-op in mock mode (no real credential to rotate).
+}
+
+async function mockGetIdentities() {
+  // Mirror a typical password-only account: a single email identity.
+  const saved = mockLoadAuth();
+  if (!saved?.user) return [];
+  return [{ id: 'mock-email', identity_id: 'mock-email', provider: 'email', email: saved.user.email }];
+}
+
+async function mockLinkIdentity(provider) {
+  return { provider, mock: true };
+}
+
+async function mockUnlinkIdentity() {
+  // No-op in mock mode.
+}
+
+async function mockSignOutEverywhere() {
+  mockSaveAuth(null);
+}
+
 async function mockUpdateDisplayName() {
   // No-op in mock mode
 }
@@ -406,10 +630,18 @@ export const auth = {
   signIn:             isConfigured ? supabaseSignIn              : mockSignIn,
   signInWithMagicLink:isConfigured ? supabaseSignInWithMagicLink : mockSignInWithMagicLink,
   signInWithOAuth:    isConfigured ? supabaseSignInWithOAuth     : mockSignInWithOAuth,
+  signInWithGoogle:   isConfigured ? supabaseSignInWithGoogle    : mockSignInWithGoogle,
+  signInWithDiscord:  isConfigured ? supabaseSignInWithDiscord   : mockSignInWithDiscord,
   signOut:            isConfigured ? supabaseSignOut             : mockSignOut,
   getSession:         isConfigured ? supabaseGetSession          : mockGetSession,
   resetPassword:      isConfigured ? supabaseResetPassword       : mockResetPassword,
   updatePassword:     isConfigured ? supabaseUpdatePassword      : mockUpdatePassword,
+  reauthenticateWithPassword: isConfigured ? supabaseReauthenticateWithPassword : mockReauthenticateWithPassword,
+  changePassword:     isConfigured ? supabaseChangePassword      : mockChangePassword,
+  getIdentities:      isConfigured ? supabaseGetIdentities       : mockGetIdentities,
+  linkIdentity:       isConfigured ? supabaseLinkIdentity        : mockLinkIdentity,
+  unlinkIdentity:     isConfigured ? supabaseUnlinkIdentity      : mockUnlinkIdentity,
+  signOutEverywhere:  isConfigured ? supabaseSignOutEverywhere   : mockSignOutEverywhere,
   updateDisplayName:  isConfigured ? supabaseUpdateDisplayName   : mockUpdateDisplayName,
   updateProfilePreferences: isConfigured ? supabaseUpdateProfilePreferences : mockUpdateProfilePreferences,
   onAuthChange:       isConfigured ? supabaseOnAuthChange        : mockOnAuthChange,

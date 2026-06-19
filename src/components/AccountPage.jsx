@@ -11,20 +11,21 @@
  */
 import { useState } from 'react';
 import {
-  User, Shield, Headphones, ChevronRight,
+  User, Shield, ChevronRight,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { auth as authService } from '../lib/auth.js';
+import { saves as savesService } from '../lib/saves.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
-import { supabase } from '../lib/supabase.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 import { activeSaveCount, inactiveRetentionCount } from '../lib/saveAccess.js';
-import PrivacySettings from './PrivacySettings.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, SP, R } from './theme.js';
-import Section from './account/AccountSection.jsx';
+import { INK, MUTED, SECOND, BORDER, sans, FS, SP, R } from './theme.js';
 import Button from './primitives/Button.jsx';
 import AccountProfileSection from './account/AccountProfileSection.jsx';
+import AccountSecuritySection from './account/AccountSecuritySection.jsx';
 import AccountSubscriptionSection from './account/AccountSubscriptionSection.jsx';
+import AccountDataPrivacySection from './account/AccountDataPrivacySection.jsx';
+import AccountPreferencesSection from './account/AccountPreferencesSection.jsx';
 import AccountSupportSection from './account/AccountSupportSection.jsx';
 // FAQ relocated to the About page (spec §13); the full accordion (AccountFAQ)
 // is rendered there now, with a slim pointer left on this page.
@@ -35,8 +36,12 @@ export default function AccountPage({ onNavigateAdmin }) {
   const isElevated = useStore(s => s.isElevated());
   const _isDeveloper = useStore(s => s.isDeveloper());
   const savedSettlements = useStore(s => s.savedSettlements);
+  const campaigns = useStore(s => s.campaigns);
   const maxSaves = useStore(s => s.maxSaves());
   const authSignOut = useStore(s => s.authSignOut);
+  const removeSavedSettlement = useStore(s => s.removeSavedSettlement);
+  const clearSavedSettlements = useStore(s => s.clearSavedSettlements);
+  const deleteCampaign = useStore(s => s.deleteCampaign);
   const activeSaves = activeSaveCount(savedSettlements);
   const inactiveSaves = inactiveRetentionCount(savedSettlements);
 
@@ -59,12 +64,7 @@ export default function AccountPage({ onNavigateAdmin }) {
   const [profileSaved, setProfileSaved] = useState(false);
   const [profileError, setProfileError] = useState(null);
 
-  // Support form
-  const [supportSubject, setSupportSubject] = useState('');
-  const [supportMessage, setSupportMessage] = useState('');
-  const [supportSending, setSupportSending] = useState(false);
-  const [supportSent, setSupportSent] = useState(false);
-  const [supportError, setSupportError] = useState(null);
+  // Support form moved into AccountSupportSection (A5 ticket workflow).
 
   // Purchase state
   const [purchasing, setPurchasing] = useState(null);
@@ -158,30 +158,6 @@ export default function AccountPage({ onNavigateAdmin }) {
     }
   };
 
-  const handleSendSupport = async () => {
-    if (!supportSubject.trim() || !supportMessage.trim()) return;
-    setSupportSending(true);
-    setSupportError(null);
-    try {
-      if (supabase) {
-        const { error } = await supabase.from('support_messages').insert({
-          user_id: auth.user?.id,
-          email: auth.user?.email || 'unknown',
-          subject: supportSubject.trim(),
-          message: supportMessage.trim(),
-        });
-        if (error) throw error;
-      }
-      setSupportSent(true);
-      setSupportSubject('');
-      setSupportMessage('');
-    } catch (e) {
-      setSupportError(e.message || 'Failed to send message');
-    } finally {
-      setSupportSending(false);
-    }
-  };
-
   const handlePurchase = async (product) => {
     setPurchaseError(null);
     setPurchasing(product);
@@ -191,6 +167,23 @@ export default function AccountPage({ onNavigateAdmin }) {
       setPurchaseError(e.message);
       setPurchasing(null);
     }
+  };
+
+  // Bulk content deletion (Data & Privacy). Delete each saved settlement
+  // through the saves service so the server copy goes too, then clear local
+  // state. Failures on individual rows are swallowed so one bad row can't wedge
+  // the whole wipe — local state is cleared regardless.
+  const handleDeleteAllSettlements = async () => {
+    const ids = (savedSettlements || []).map(s => s.id);
+    await Promise.allSettled(ids.map(id => savesService.delete?.(id)));
+    if (typeof clearSavedSettlements === 'function') clearSavedSettlements();
+    else ids.forEach(id => removeSavedSettlement?.(id));
+  };
+
+  const handleDeleteAllCampaigns = async () => {
+    const ids = (campaigns || []).map(c => c.id);
+    // deleteCampaign persists each removal (deletePersistedCampaignState).
+    ids.forEach(id => deleteCampaign?.(id));
   };
 
   if (!auth.user) {
@@ -220,7 +213,10 @@ export default function AccountPage({ onNavigateAdmin }) {
         handleSaveProfilePreferences={handleSaveProfilePreferences}
       />
 
-      {/* ── Subscription & Credits ──────────────────────────────── */}
+      {/* ── Login & Security ────────────────────────────────────── */}
+      <AccountSecuritySection auth={auth} onSignOut={authSignOut} />
+
+      {/* ── Subscription & Credits (Billing) ────────────────────── */}
       <AccountSubscriptionSection
         auth={auth}
         isElevated={isElevated}
@@ -235,28 +231,23 @@ export default function AccountPage({ onNavigateAdmin }) {
         handlePurchase={handlePurchase}
       />
 
-      {/* ── FAQ (relocated to the About page, spec §13) ───────────────
-          The Account page is no longer the primary FAQ location; keep a slim
-          pointer to the full FAQ that now lives on the About page. */}
-      <Section title="Frequently asked" icon={Headphones}>
-        <p style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.55, margin: 0, fontFamily: sans }}>
-          Questions about credits, billing, gallery privacy, or how the simulator relates to AI
-          now live in the{' '}
-          <a href="/how-to?tab=faq" style={{ color: GOLD, fontWeight: 700, textDecoration: 'underline' }}>
-            FAQ on the About page
-          </a>. Account-specific controls — your plan, credit balance, and billing portal — stay here.
-        </p>
-      </Section>
-
-      {/* ── Customer Support ────────────────────────────────────── */}
-      <AccountSupportSection
+      {/* ── Data & Privacy (export, deletion, consent, visibility) ── */}
+      <AccountDataPrivacySection
         auth={auth}
-        supportSent={supportSent} setSupportSent={setSupportSent}
-        supportError={supportError}
-        supportSubject={supportSubject} setSupportSubject={setSupportSubject}
-        supportMessage={supportMessage} setSupportMessage={setSupportMessage}
-        supportSending={supportSending} handleSendSupport={handleSendSupport}
+        settlementCount={(savedSettlements || []).length}
+        campaignCount={(campaigns || []).length}
+        onDeleteAllSettlements={handleDeleteAllSettlements}
+        onDeleteAllCampaigns={handleDeleteAllCampaigns}
       />
+
+      {/* ── Product Preferences ─────────────────────────────────── */}
+      <AccountPreferencesSection
+        emailNotifications={emailNotifications}
+        setEmailNotifications={setEmailNotifications}
+      />
+
+      {/* ── Customer Support (FAQ-first, then tickets) ──────────── */}
+      <AccountSupportSection auth={auth} />
 
       {/* ── Developer / Admin Panel link ────────────────────────── */}
       {isElevated && onNavigateAdmin && (
@@ -280,9 +271,6 @@ export default function AccountPage({ onNavigateAdmin }) {
           <ChevronRight size={20} color={MUTED} />
         </button>
       )}
-
-      {/* Privacy & data consent (P/§3) */}
-      <PrivacySettings />
 
       {/* Sign out */}
       <Button variant="danger" size="lg" fullWidth onClick={authSignOut}>

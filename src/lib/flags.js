@@ -40,11 +40,11 @@ export const FLAGS = Object.freeze({
   // ── Auth ─────────────────────────────────────────────────────────────────
   discordOauth: {
     default: false,
-    description: 'Discord OAuth button (off until the OAuth review completes).',
+    description: 'Discord OAuth button (below the password form). Code is complete — flip to TRUE once the Discord provider is enabled in the Supabase dashboard, so users never see a button that errors.',
   },
   googleOauth: {
     default: false,
-    description: 'Google OAuth button (off until the Supabase provider is configured).',
+    description: 'Google OAuth button (below the password form). Code is complete — flip to TRUE once the Google provider is enabled in the Supabase dashboard, so users never see a button that errors.',
   },
 
   // ── Dark-shipped / not-yet-enabled critique work ───────────────────────────

@@ -82,6 +82,10 @@ export const useStore = create(
             // persisted from userPrefs — the other keys (tableViewOpen) stay
             // transient. Persist-merge re-applies this over the slice default.
             userPrefs: { detailLevel: state.userPrefs?.detailLevel },
+            // Durable Account → Product Preferences. Persist the whole bag so a
+            // returning user keeps their default detail level, PDF style,
+            // player-view/AI-polish defaults, etc.
+            productPrefs: state.productPrefs,
           }),
           // Deep-merge `userPrefs` so the persisted `detailLevel` overlays the
           // slice defaults WITHOUT clobbering the transient keys (tableViewOpen).
@@ -94,6 +98,10 @@ export const useStore = create(
               ...current,
               ...p,
               userPrefs: { ...current.userPrefs, ...(p.userPrefs || {}) },
+              // Same deep-merge rationale as userPrefs: overlay persisted product
+              // prefs onto the slice defaults so a newly-added pref key isn't
+              // dropped for users who persisted before it existed.
+              productPrefs: { ...current.productPrefs, ...(p.productPrefs || {}) },
             };
           },
           // On rehydrate: always start the Create page at the mode picker.

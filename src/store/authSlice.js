@@ -318,19 +318,42 @@ export const createAuthSlice = (set, get) => ({
    * established when the user lands back on our origin and the
    * onAuthStateChange listener fires SIGNED_IN.
    *
+   * The named wrappers (`signInWithGoogle`/`signInWithDiscord`) return the
+   * Supabase `{ data, error }` shape; we normalize so the caller always sees
+   * `{ mock }` in local mode and a thrown, already-sanitized Error otherwise.
+   * `error.userMessage` (set in lib/auth.js) is a safe, non-leaky string —
+   * including the account-linking conflict nudge — so the UI shows it directly
+   * rather than constructing its own.
+   *
    * @param {'google' | 'discord' | 'github'} provider
    */
   authOAuth: async (provider) => {
     set(state => { state.auth.loading = true; state.auth.error = null; });
     try {
-      const result = /** @type {any} */ (await authService.signInWithOAuth(provider));
+      const fn = provider === 'google'
+        ? authService.signInWithGoogle
+        : provider === 'discord'
+          ? authService.signInWithDiscord
+          : null;
+      const { data, error } = fn
+        ? /** @type {any} */ (await fn())
+        : /** @type {any} */ ({ data: await authService.signInWithOAuth(provider), error: null });
+
+      if (error) {
+        // error.userMessage is the safe display string set in lib/auth.js.
+        const safe = error.userMessage || error.message || 'Sign-in failed. Please try again.';
+        set(state => { state.auth.loading = false; state.auth.error = safe; });
+        const err = new Error(safe);
+        throw err;
+      }
+
       // Mock-mode short-circuit: there's no real redirect, so report
       // back to the caller instead of leaving the UI in a loading state.
-      if (result?.mock) {
+      if (data?.mock) {
         set(state => { state.auth.loading = false; });
       }
       // In real mode the browser is navigating away; no UI update needed.
-      return result;
+      return data;
     } catch (e) {
       set(state => { state.auth.loading = false; state.auth.error = e.message; });
       throw e;

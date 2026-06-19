@@ -122,6 +122,7 @@ export default function App() {
   // the moment of need (the insufficient-credits modal). Flip to restore.
   const showHeaderCredits = false;
   const initAuth = useStore(s => s.initAuth);
+  const authSignOut = useStore(s => s.authSignOut);
   const initOnboarding = useStore(s => s.initOnboarding);
   const onboardingNudge = useStore(s => s.onboardingNudge);
   const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
@@ -290,6 +291,15 @@ export default function App() {
     }
   };
 
+  // Sign out from the account menu: clear the session + per-account state
+  // (the authSignOut store action calls supabase.auth.signOut() then
+  // clearAuth(), which also drops campaigns/saves/custom content), then route
+  // home so the user never lingers on an auth-guarded page (e.g. /account).
+  const handleSignOut = async () => {
+    await authSignOut();
+    setView('generate');
+  };
+
   // Filter nav items based on visibility. UX Phase 4 — the Realm is REACHABLE
   // for anon (a locked-state preview), no longer hidden; the old `map`-for-anon
   // hide is gone. Nothing is filtered today, but the seam stays for future gates.
@@ -371,6 +381,7 @@ export default function App() {
               onSignIn={() => setAuthModalOpen(true)}
               onAccount={() => setView('account')}
               onManageSubscription={() => setView('pricing')}
+              onSignOut={handleSignOut}
             />
           </header>
         )}
@@ -536,6 +547,7 @@ export default function App() {
                 onSignIn={() => setAuthModalOpen(true)}
                 onAccount={() => setView('account')}
                 onManageSubscription={() => setView('pricing')}
+                onSignOut={handleSignOut}
               />
             </div>
           </header>

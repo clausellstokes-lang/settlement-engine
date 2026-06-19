@@ -128,6 +128,15 @@ export const en = Object.freeze({
       placeholder: 'Coming soon. We’re finishing the OAuth review.',
     },
     google:  { label: 'Continue with Google' },
+    oauth: {
+      // Divider shown above the Google/Discord buttons, which sit BELOW the
+      // email/password form as alternatives to the primary password path.
+      divider:  'or continue with',
+      // Safe, non-leaky fallback when an OAuth sign-in fails for an unknown
+      // reason. The account-linking conflict message is generated in
+      // lib/auth.js (describeOAuthError) so it can stay close to the error.
+      failed:   'Sign-in failed. Please try again.',
+    },
     email: {
       label:       'Send a magic link',
       placeholder: 'you@example.com',

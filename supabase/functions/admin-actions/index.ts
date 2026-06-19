@@ -174,10 +174,51 @@ serve(async (req) => {
     // an empty OWNER_EMAIL can never match (so an empty caller email can't
     // accidentally equal an empty owner email and bypass the role gate).
     const ownerOverride = OWNER_EMAIL !== "" && callerEmail === OWNER_EMAIL;
-    const hasElevatedRole = !!callerProfile && ["developer", "admin"].includes(callerProfile.role);
+    // A3: `support` is an elevated role for REDACTED reads / ticket triage, but
+    // NOT for user-management writes or full-PII. `admin`/`developer` (the
+    // "highest" roles) get everything. We track both so each action can pick its
+    // own gate below.
+    const callerRole = callerProfile?.role || "";
+    const isHighestRole = ["developer", "admin"].includes(callerRole);
+    const hasElevatedRole = isHighestRole || callerRole === "support";
     if (!ownerOverride && !hasElevatedRole) {
       return json({ error: "Insufficient privileges" }, 403);
     }
+    // Highest-role gate (full-PII + user-management writes). Owner override
+    // counts as highest. Used by the write/full-PII switch arms below.
+    const isHighest = ownerOverride || isHighestRole;
+
+    // A3: append-only audit writer. Every mutating action writes exactly one
+    // row through the SECURITY DEFINER write_audit RPC (the ONLY insert path
+    // into audit_log). before/after are REDACTED snapshots — never raw PII.
+    const writeAudit = async (entry: {
+      action: string;
+      targetUserId?: string | null;
+      targetType?: string | null;
+      targetId?: string | null;
+      before?: unknown;
+      after?: unknown;
+      destructive?: boolean;
+      reversible?: boolean;
+      notified?: boolean;
+    }) => {
+      const { error: auditErr } = await adminClient.rpc("write_audit", {
+        p_action: entry.action,
+        p_target_user_id: entry.targetUserId ?? null,
+        p_target_type: entry.targetType ?? null,
+        p_target_id: entry.targetId ?? null,
+        p_reason: auditReason,
+        p_before: entry.before ?? null,
+        p_after: entry.after ?? null,
+        p_was_destructive: entry.destructive ?? false,
+        p_was_reversible: entry.reversible ?? true,
+        p_user_notified: entry.notified ?? false,
+        p_actor_id: callingUser.id,
+      });
+      if (auditErr) {
+        console.warn("[admin-actions] audit write failed:", auditErr.message);
+      }
+    };
 
     // Parse the request body
     const {
@@ -187,10 +228,50 @@ serve(async (req) => {
       metric, field, granularity, rowField, colField, limit,
       // System-mutation params (migration 041 report_* functions)
       configSignature,
+      // A4 user-management params
+      severity, note, settlementId, enabled, full, emailTemplate, emailPayload,
+      // A5 ticket-queue params
+      ticketId, status, body: replyBody, visibility, faq,
     } = await req.json();
     const auditReason = typeof reason === "string" && reason.trim()
       ? reason.trim()
       : null;
+
+    // A4: resolve the target user's email server-side (NEVER returned to the
+    // client) so we can notify them on an action. Returns null if the profile or
+    // email is missing. Used only by the notify path; the client never sees it.
+    const resolveTargetEmail = async (target: string): Promise<string | null> => {
+      const { data } = await adminClient
+        .from("profiles").select("email").eq("id", target).single();
+      const email = data?.email;
+      return typeof email === "string" && email.includes("@") ? email : null;
+    };
+
+    // A4: notify a TARGET user by email (not the actor). Sends via Resend with the
+    // service-role-resolved address. Soft-fails (returns false) when Resend is
+    // unconfigured or errors — notification is never allowed to block or fail an
+    // admin action. Returns whether the user was actually notified (drives the
+    // `notified` audit flag).
+    const notifyTargetEmail = async (
+      target: string, subject: string, text: string,
+    ): Promise<boolean> => {
+      try {
+        const apiKey = Deno.env.get("RESEND_API_KEY");
+        const fromEmail = Deno.env.get("RESEND_FROM_EMAIL");
+        if (!apiKey || !fromEmail) return false; // unconfigured — soft fail
+        const to = await resolveTargetEmail(target);
+        if (!to) return false;
+        const res = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ from: fromEmail, to: [to], subject, text }),
+        });
+        return res.ok;
+      } catch (e) {
+        console.warn("[admin-actions] notify failed:", errorMessage(e));
+        return false;
+      }
+    };
 
     // Shared date defaults for the analytics reads (last 30 days).
     const today = new Date().toISOString().slice(0, 10);
@@ -363,6 +444,19 @@ serve(async (req) => {
             user_metadata: profilePatch,
           });
 
+        // A3: audit the mutation. Snapshot is REDACTED — only the patched keys
+        // and the actor/target, never raw email/payment ids. A role change is
+        // reversible; none of these patches are destructive.
+        await writeAudit({
+          action: "update_user_metadata",
+          targetUserId: userId,
+          targetType: "profile",
+          targetId: String(userId),
+          after: { keys: Object.keys(profilePatch) },
+          destructive: false,
+          reversible: true,
+        });
+
         if (mirrorError) {
           console.warn("[admin-actions] user_metadata mirror failed:", mirrorError.message);
           return json({
@@ -383,9 +477,13 @@ serve(async (req) => {
         // can't break out of the .or() expression (commas/parens/operator tokens).
         const search = rawSearch.replace(/[,()*\\]/g, " ").trim();
 
+        // A3: REDACTED BY DEFAULT. Select an explicit non-PII column set — never
+        // `select("*")` (which leaked raw email + stripe_customer_id to every
+        // elevated role). The raw email for a single user is reachable only via
+        // the audited get_user_full action below (highest role + reason).
         let query = adminClient
           .from("profiles")
-          .select("*")
+          .select("id, role, tier, is_founder, credits, display_name, email, created_at")
           .order("created_at", { ascending: false })
           .limit(100);
 
@@ -396,7 +494,56 @@ serve(async (req) => {
         const { data, error } = await query;
         if (error) return json({ error: error.message }, 500);
 
-        return json({ users: data || [] });
+        // Mask the email in the response; the raw value is used ONLY server-side
+        // for the search filter, never returned. No payment ids are selected.
+        const masked = (data || []).map((u: Record<string, unknown>) => {
+          const email = typeof u.email === "string" ? u.email : "";
+          const at = email.indexOf("@");
+          const email_masked = at > 0
+            ? (email.length && at >= 1 ? email[0] + "***" : "*") + email.slice(at)
+            : null;
+          const { email: _raw, ...rest } = u;
+          return { ...rest, email_masked, redacted: true };
+        });
+
+        return json({ users: masked });
+      }
+
+      // A3: REDACTED per-user summary (support+). Masked email, counts, status —
+      // no raw PII. The default "open a user" read.
+      case "get_user_summary": {
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const { data, error } = await adminClient.rpc("admin_user_summary", {
+          target_user: userId,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, summary: data });
+      }
+
+      // A3: FULL-PII per-user read (HIGHEST role only + reason + audited). The
+      // RPC itself re-checks the role and writes the audit row; we also gate at
+      // the edge so support never reaches it.
+      case "get_user_full": {
+        if (!isHighest) return json({ error: "Insufficient privileges for full PII" }, 403);
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        if (!auditReason) return json({ error: "A reason is required to read full PII" }, 400);
+        const { data, error } = await adminClient.rpc("admin_user_full", {
+          target_user: userId,
+          p_reason: auditReason,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, user: data });
+      }
+
+      // A3: REDACTED support-ticket list (support+). Masked sender email.
+      case "list_support_messages": {
+        const status = typeof metadata?.status === "string" ? metadata.status : null;
+        const { data, error } = await adminClient.rpc("admin_support_messages", {
+          p_status: status,
+          p_limit: 100,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, messages: data || [] });
       }
 
       case "update_user_credits": {
@@ -420,6 +567,21 @@ serve(async (req) => {
         if (creditError) {
           return json({ error: creditError.message }, 500);
         }
+
+        // A3: audit the credit change. before/after balances are not PII; we log
+        // them for accountability. Reversible (a credit set can be re-set).
+        await writeAudit({
+          action: "update_user_credits",
+          targetUserId: userId,
+          targetType: "profile",
+          targetId: String(userId),
+          before: result && typeof result === "object" && "prev" in result
+            ? { credits: (result as Record<string, unknown>).prev }
+            : null,
+          after: { credits: newCredits },
+          destructive: false,
+          reversible: true,
+        });
 
         return json({ success: true, ...(result || {}) });
       }
@@ -446,6 +608,341 @@ serve(async (req) => {
           totalCredits,
           developerCount,
         });
+      }
+
+      // ── A4 user-management action set ───────────────────────────────────────
+      // Each forwards the SERVER-VERIFIED actor id (callingUser.id) to a SECURITY
+      // DEFINER RPC that re-checks the role AND writes its OWN single audit row.
+      // We DON'T double-audit here — the RPC owns the audit so the role snapshot
+      // and reason are written in one place. Soft-delete-first throughout.
+
+      // Issue a warning (support+). Optionally notify the user by email.
+      case "issue_warning": {
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        if (!auditReason) return json({ error: "A warning reason is required" }, 400);
+        const sev = typeof severity === "string" ? severity : "notice";
+        let notified = false;
+        if (metadata?.notify === true) {
+          notified = await notifyTargetEmail(
+            userId,
+            "A notice about your SettlementForge account",
+            `An administrator has issued a ${sev} warning on your account.\n\nReason: ${auditReason}\n\nIf you believe this is in error, reply to this email.`,
+          );
+        }
+        const { data, error } = await adminClient.rpc("issue_warning", {
+          p_actor: callingUser.id, p_target: userId,
+          p_severity: sev, p_reason: auditReason, p_notified: notified,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, warningId: data, notified });
+      }
+
+      // Add an internal note about a user (support+). The user can never read it.
+      case "add_internal_note": {
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        if (typeof note !== "string" || !note.trim()) {
+          return json({ error: "A note body is required" }, 400);
+        }
+        const { data, error } = await adminClient.rpc("add_internal_note", {
+          p_actor: callingUser.id, p_target: userId, p_note: note,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, noteId: data });
+      }
+
+      // Read warning / internal-note history (support+). Notes are gated in the
+      // RPC; the requesting user can never reach their own notes.
+      case "list_warnings": {
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const { data, error } = await adminClient.rpc("admin_list_warnings", { p_target: userId });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, warnings: data || [] });
+      }
+      case "list_internal_notes": {
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const { data, error } = await adminClient.rpc("admin_list_internal_notes", { p_target: userId });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, notes: data || [] });
+      }
+
+      // Grant / refund credits — REUSES the audited service_set_credits RPC via
+      // the existing update_user_credits path conceptually, but here we apply a
+      // DELTA (grant +N / refund +N) computed from the current balance so the
+      // caller doesn't have to know the absolute value. HIGHEST role only.
+      case "grant_credits": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const delta = parseInt(String(credits), 10);
+        if (!Number.isFinite(delta) || Number.isNaN(delta) || delta === 0) {
+          return json({ error: "credits delta must be a non-zero integer" }, 400);
+        }
+        const { data: prof } = await adminClient
+          .from("profiles").select("credits").eq("id", userId).single();
+        const prev = Number(prof?.credits ?? 0);
+        const next = Math.max(0, prev + delta);
+        const { data: result, error: creditError } =
+          await adminClient.rpc("service_set_credits", {
+            actor_user: callingUser.id, target_user: userId,
+            new_credits: next, reason: auditReason,
+          });
+        if (creditError) return json({ error: creditError.message }, 500);
+        // service_set_credits audits to admin_actions; mirror a row into the A3
+        // append-only log so the unified trail captures grant/refund too.
+        await writeAudit({
+          action: delta > 0 ? "grant_credits" : "refund_credits",
+          targetUserId: userId, targetType: "profile", targetId: String(userId),
+          before: { credits: prev }, after: { credits: next },
+          destructive: false, reversible: true,
+        });
+        return json({ success: true, prev, next, ...(result || {}) });
+      }
+
+      // Review billing — REDACTED Stripe summary (support+, masked customer id).
+      case "review_billing": {
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const { data, error } = await adminClient.rpc("admin_billing_summary", {
+          p_actor: callingUser.id, p_target: userId,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, billing: data });
+      }
+
+      // Disable / enable account — reversible soft flag. HIGHEST role only.
+      // `enabled` semantics: pass enabled:true to RE-ENABLE; anything else (the
+      // default) disables.
+      case "set_account_disabled": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const wantDisabled = !(enabled === true);
+        const { data, error } = await adminClient.rpc("set_account_disabled", {
+          p_actor: callingUser.id, p_target: userId,
+          p_disabled: wantDisabled, p_reason: auditReason,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Ban / unban account — reversible soft flag. HIGHEST role only.
+      case "set_account_banned": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const wantBanned = !(enabled === true);
+        let notified = false;
+        if (wantBanned && metadata?.notify === true) {
+          notified = await notifyTargetEmail(
+            userId,
+            "Your SettlementForge account has been suspended",
+            `Your account has been suspended.${auditReason ? `\n\nReason: ${auditReason}` : ""}\n\nReply to this email to appeal.`,
+          );
+        }
+        const { data, error } = await adminClient.rpc("set_account_banned", {
+          p_actor: callingUser.id, p_target: userId,
+          p_banned: wantBanned, p_reason: auditReason,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, notified, ...(data || {}) });
+      }
+
+      // Soft-delete / restore a settlement — reversible. HIGHEST role only.
+      case "soft_delete_settlement": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!settlementId) return json({ error: "Missing settlementId" }, 400);
+        const del = !(enabled === true); // enabled:true ⇒ restore
+        const { data, error } = await adminClient.rpc("admin_soft_delete_settlement", {
+          p_actor: callingUser.id, p_id: settlementId,
+          p_delete: del, p_reason: auditReason,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Remove a public gallery item — unpublish (reversible). HIGHEST role only.
+      case "remove_gallery_item": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!settlementId) return json({ error: "Missing settlementId" }, 400);
+        const { data, error } = await adminClient.rpc("admin_remove_gallery_item", {
+          p_actor: callingUser.id, p_id: settlementId, p_reason: auditReason,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Revoke a public share link — clears the slug (reversible). HIGHEST role.
+      case "revoke_share_link": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!settlementId) return json({ error: "Missing settlementId" }, 400);
+        const { data, error } = await adminClient.rpc("admin_revoke_share_link", {
+          p_actor: callingUser.id, p_id: settlementId, p_reason: auditReason,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Diagnostic bundle — REDACTED by default (support+). full:true ⇒ a FULL
+      // debug copy: HIGHEST role + a justification (reason). The RPC enforces
+      // both and audits which variant it produced.
+      case "diagnostic_bundle": {
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const wantFull = full === true;
+        if (wantFull && !isHighest) {
+          return json({ error: "A full debug copy requires admin or developer" }, 403);
+        }
+        if (wantFull && !auditReason) {
+          return json({ error: "A justification is required for a full debug copy" }, 400);
+        }
+        const { data, error } = await adminClient.rpc("admin_diagnostic_bundle", {
+          p_actor: callingUser.id, p_target: userId,
+          p_full: wantFull, p_reason: auditReason,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, bundle: data, full: wantFull });
+      }
+
+      // Send an email to a user (reuse a send-email lifecycle template). The
+      // template+payload are forwarded; the target's address is resolved
+      // server-side. Writes one audit row (notified reflects the send result).
+      case "send_user_email": {
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const subject = typeof emailPayload?.subject === "string"
+          ? emailPayload.subject : "A message from SettlementForge";
+        const body = typeof emailPayload?.body === "string"
+          ? emailPayload.body
+          : (typeof emailTemplate === "string" ? emailTemplate : "");
+        if (!body.trim()) return json({ error: "An email body is required" }, 400);
+        const notified = await notifyTargetEmail(userId, subject, body);
+        await writeAudit({
+          action: "send_user_email",
+          targetUserId: userId, targetType: "profile", targetId: String(userId),
+          after: { subject, length: body.length },
+          destructive: false, reversible: true, notified,
+        });
+        return json({ success: true, notified });
+      }
+
+      // ── A5 support-ticket agent queue ───────────────────────────────────────
+      // The queue + claim/assign/transition/reply/link surface for support+.
+      // Each mutation forwards the SERVER-VERIFIED actor (callingUser.id) to a
+      // SECURITY DEFINER RPC that re-checks the support role AND writes its OWN
+      // audit row where material (claim / status / link). The lifecycle email is
+      // sent here via notifyTargetEmail (service-role-resolved, soft-fail).
+
+      // List the ticket pool (support+), filter by status. Masked sender email.
+      case "list_ticket_pool": {
+        const filter = typeof status === "string" && status ? status : null;
+        const { data, error } = await adminClient.rpc("list_ticket_pool", {
+          p_status: filter, p_limit: 100,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, tickets: data || [] });
+      }
+
+      // Read the full thread of a ticket (support+ sees ALL events including
+      // internal notes). We call the RPC as the verified support agent via a
+      // user-scoped client so its current_user_is_support_or_higher() resolves.
+      case "list_ticket_thread": {
+        if (typeof ticketId !== "string" || !ticketId) {
+          return json({ error: "A ticketId is required" }, 400);
+        }
+        const { data, error } = await userClient.rpc("list_ticket_thread", { p_id: ticketId });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, events: data || [] });
+      }
+
+      // Claim a ticket — assign to the calling agent. Audited in the RPC.
+      case "claim_ticket": {
+        if (typeof ticketId !== "string" || !ticketId) {
+          return json({ error: "A ticketId is required" }, 400);
+        }
+        const { data, error } = await adminClient.rpc("claim_ticket", {
+          p_actor: callingUser.id, p_id: ticketId,
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Transition status — audited in the RPC. Fires the lifecycle email to the
+      // ticket owner on the notable transitions (assigned/waiting/resolved/etc).
+      case "set_ticket_status": {
+        if (typeof ticketId !== "string" || !ticketId) {
+          return json({ error: "A ticketId is required" }, 400);
+        }
+        if (typeof status !== "string" || !status) {
+          return json({ error: "A status is required" }, 400);
+        }
+        const { data, error } = await adminClient.rpc("set_ticket_status", {
+          p_actor: callingUser.id, p_id: ticketId, p_status: status, p_reason: auditReason,
+        });
+        if (error) return json({ error: error.message }, 500);
+        // Resolve the ticket owner to notify them of the lifecycle change.
+        let notified = false;
+        const NOTIFY_STATES: Record<string, string> = {
+          assigned: "An agent is now looking at your ticket.",
+          waiting_on_user: "We need a bit more information to continue.",
+          resolved: "We've marked your ticket as resolved.",
+          closed: "Your ticket has been closed.",
+          reopened: "Your ticket has been reopened.",
+        };
+        if (NOTIFY_STATES[status]) {
+          const { data: ticketRow } = await adminClient
+            .from("support_messages").select("user_id, ticket_number").eq("id", ticketId).single();
+          const ownerId = ticketRow?.user_id;
+          if (ownerId) {
+            notified = await notifyTargetEmail(
+              ownerId,
+              `Update on your support ticket ${ticketRow?.ticket_number ?? ""}`,
+              `${NOTIFY_STATES[status]}${auditReason ? `\n\nNote: ${auditReason}` : ""}\n\n` +
+              `You can view and reply from the Support section of your account.`,
+            );
+          }
+        }
+        return json({ success: true, notified, ...(data || {}) });
+      }
+
+      // Post a reply — agent may post a user-visible reply OR an internal note.
+      // An internal note is NEVER visible to the ticket owner (enforced in the
+      // RPC + RLS). On a user-visible reply we notify the owner by email.
+      case "post_ticket_reply": {
+        if (typeof ticketId !== "string" || !ticketId) {
+          return json({ error: "A ticketId is required" }, 400);
+        }
+        if (typeof replyBody !== "string" || !replyBody.trim()) {
+          return json({ error: "A reply body is required" }, 400);
+        }
+        const vis = visibility === "internal" ? "internal" : "user";
+        const { data, error } = await adminClient.rpc("post_ticket_reply", {
+          p_actor: callingUser.id, p_id: ticketId, p_body: replyBody.trim(), p_visibility: vis,
+        });
+        if (error) return json({ error: error.message }, 500);
+        let notified = false;
+        if (vis === "user") {
+          const { data: ticketRow } = await adminClient
+            .from("support_messages").select("user_id, ticket_number").eq("id", ticketId).single();
+          const ownerId = ticketRow?.user_id;
+          if (ownerId) {
+            notified = await notifyTargetEmail(
+              ownerId,
+              `New reply on your support ticket ${ticketRow?.ticket_number ?? ""}`,
+              `Support has replied to your ticket.\n\nView and reply from the Support ` +
+              `section of your account.`,
+            );
+          }
+        }
+        return json({ success: true, notified, ...(data || {}) });
+      }
+
+      // Link an FAQ article to a ticket when answering (support+). Audited.
+      case "link_ticket_faq": {
+        if (typeof ticketId !== "string" || !ticketId) {
+          return json({ error: "A ticketId is required" }, 400);
+        }
+        if (typeof faq !== "string" || !faq.trim()) {
+          return json({ error: "An FAQ slug is required" }, 400);
+        }
+        const { data, error } = await adminClient.rpc("link_ticket_faq", {
+          p_actor: callingUser.id, p_id: ticketId, p_faq: faq.trim(),
+        });
+        if (error) return json({ error: error.message }, 500);
+        return json({ success: true, ...(data || {}) });
       }
 
       default:

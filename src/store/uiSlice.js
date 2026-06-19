@@ -35,6 +35,33 @@ export const DETAIL_LEVELS = Object.freeze(['guided', 'standard', 'expert']);
 /** The default altitude rung (a new DM lands at Overview / guided). */
 export const DEFAULT_DETAIL_LEVEL = 'guided';
 
+/**
+ * Durable, user-owned product preferences surfaced on the Account page
+ * ("Product Preferences" section). UNLIKE the transient userPrefs keys these
+ * ARE persisted (see store/index.js partialize/merge) so a returning user keeps
+ * their defaults. Each key is a default the relevant surface reads when it has
+ * no per-artifact override:
+ *
+ *   defaultDetailLevel    — mirrors the altitude rung a fresh dossier opens at.
+ *   playerViewDefault     — whether new settlements default to player-safe view.
+ *   pdfStyle              — preferred PDF/export visual style ('classic'|'compact'|'parchment').
+ *   aiPolishDefault       — opt-in default for AI prose polish on generation.
+ *   galleryPublicDefault  — whether shares default to public gallery visibility.
+ *   shareDefault          — default share scope for new player-view links.
+ *   campaignMapAutosave   — auto-save map edits while running a campaign.
+ *   emailNotifications    — product/lifecycle email opt-in (mirrors the profile flag).
+ */
+export const PRODUCT_PREF_DEFAULTS = Object.freeze({
+  defaultDetailLevel: DEFAULT_DETAIL_LEVEL,
+  playerViewDefault: false,
+  pdfStyle: 'classic',
+  aiPolishDefault: false,
+  galleryPublicDefault: false,
+  shareDefault: 'unlisted',
+  campaignMapAutosave: true,
+  emailNotifications: true,
+});
+
 export const createUiSlice = (set, get) => ({
   // ── State ────────────────────────────────────────────────────────────────
   userPrefs: {
@@ -42,7 +69,30 @@ export const createUiSlice = (set, get) => ({
     detailLevel: DEFAULT_DETAIL_LEVEL,
   },
 
+  /** Durable product-preference defaults (Account → Product Preferences). */
+  productPrefs: { ...PRODUCT_PREF_DEFAULTS },
+
   // ── Actions ──────────────────────────────────────────────────────────────
+
+  /**
+   * Set a single durable product preference. Unknown keys are ignored so a
+   * stale persisted/UI value can't introduce a bogus pref. Persisted via the
+   * store-index partialize.
+   * @param {keyof typeof PRODUCT_PREF_DEFAULTS} key
+   * @param {*} value
+   */
+  setProductPref: (key, value) =>
+    set(state => {
+      if (!Object.prototype.hasOwnProperty.call(PRODUCT_PREF_DEFAULTS, key)) return;
+      if (!state.productPrefs) state.productPrefs = { ...PRODUCT_PREF_DEFAULTS };
+      state.productPrefs[key] = value;
+    }),
+
+  /** Read a product preference, falling back to its default. */
+  getProductPref: (key) => {
+    const prefs = get().productPrefs || {};
+    return Object.prototype.hasOwnProperty.call(prefs, key) ? prefs[key] : PRODUCT_PREF_DEFAULTS[key];
+  },
 
   /** Set a transient UI preference by key. */
   setUserPref: (key, value) =>
