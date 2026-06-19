@@ -124,6 +124,16 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
   },
+  // ── P9 — Pricing copy A/B experiment (decision 4) ──────────────────────────
+  // The current concrete "unlimited saves" pitch vs. the simulation-led copy
+  // ("Generate a town in seconds, then run the region for years."). Ship the
+  // simulation-led variant behind this flag against the current copy; the
+  // storage/saves line stays a SECONDARY bullet either way. Size is FREE, so the
+  // simulation-led variant must NOT pitch size/metropolis/capital as premium.
+  pricingSimulationCopy: {
+    default: false,
+    description: 'P9 / decision 4: simulation-led premium pricing copy variant (A/B). OFF = current "unlimited saves / full size" copy; ON = "generate a town, then run the region" — names the simulation, never size.',
+  },
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

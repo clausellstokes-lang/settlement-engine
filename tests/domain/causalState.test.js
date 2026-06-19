@@ -35,8 +35,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // ── Canonical catalog ──────────────────────────────────────────────────
 
 describe('SYSTEM_VARIABLES', () => {
-  it('exposes 14 canonical variable names', () => {
-    expect(SYSTEM_VARIABLES).toHaveLength(14);
+  it('exposes 15 canonical variable names', () => {
+    expect(SYSTEM_VARIABLES).toHaveLength(15);
   });
 
   it('contains every variable named in the Tier 2.4 roadmap', () => {
@@ -525,7 +525,7 @@ describe('deriveCausalState()', () => {
       ...state.summary.critical,
       ...state.summary.collapsed,
     ];
-    expect(new Set(flat).size).toBe(14);
+    expect(new Set(flat).size).toBe(15);
   });
 
   it('every band value is canonical', () => {
@@ -600,7 +600,7 @@ describe('summarizeCausalState()', () => {
 describe('supportedSystemVariables()', () => {
   it('returns a copy of the canonical list', () => {
     const list = supportedSystemVariables();
-    expect(list).toHaveLength(14);
+    expect(list).toHaveLength(15);
     expect(list).not.toBe(SYSTEM_VARIABLES);  // copy, not the frozen original
   });
 });

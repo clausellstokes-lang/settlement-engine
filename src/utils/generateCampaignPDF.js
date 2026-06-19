@@ -18,6 +18,15 @@ import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relations
 import { truncateAtWord } from '../lib/text.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
+// UX Phase 7 — the campaign PDF's Realm Chronicle & Geopolitics section reads the
+// SAME pure selectors the settlement PDF + the on-screen Realm surfaces use, so
+// the three artifacts can never drift. All inert ([]/null) when dormant.
+import {
+  activeDeployments, liveSieges, liveTradeWars,
+  dispositionStandings, warExhaustionStandings,
+} from '../domain/display/warStatus.js';
+import { pantheonStandings, deityDisplayName } from '../domain/display/pantheonDepth.js';
+import { realmArcLines } from '../domain/display/realmArcSummary.js';
 
 /** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
 function durationBand(ms) {
@@ -722,6 +731,123 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Realm Chronicle & Geopolitics (UX Phase 7)
+// ─────────────────────────────────────────────────────────────────────────────
+// Reads the live worldState through the shared warStatus / pantheon / realmArc
+// selectors (no recompute, no three-way drift). Renders NOTHING when the realm
+// is dormant — no worldState, no war, no deity ⇒ a non-simulated campaign export
+// is unchanged.
+function buildRealmGeopolitics(d, campaignName, settlements, worldState, regionalGraph, pageN) {
+  const sieges = liveSieges({ worldState, regionalGraph });
+  const deployments = activeDeployments(worldState);
+  const tradeWars = liveTradeWars({ worldState, regionalGraph });
+  const standings = dispositionStandings(worldState);
+  const exhaustion = warExhaustionStandings(worldState);
+  const pantheon = pantheonStandings(worldState);
+  const arcs = realmArcLines({ worldState, regionalGraph, settlements });
+
+  // Dormant realm ⇒ render nothing (byte-identical off-state).
+  if (!sieges.length && !deployments.length && !tradeWars.length
+    && !standings.length && !exhaustion.length && !pantheon.length && !arcs.length) {
+    return { pageN, rendered: false };
+  }
+
+  /** @type {Map<string, string>} */
+  const nameById = new Map();
+  for (const sv of settlements) {
+    const id = sv?.id != null ? String(sv.id) : null;
+    const nm = sv?.name || sv?.settlement?.name;
+    if (id && nm) nameById.set(id, String(nm));
+  }
+  const nameFor = (id) => nameById.get(String(id)) || String(id);
+
+  d.addPage();
+  pageN++;
+  let y = MT;
+  y = secBar(d, y, 'Realm Chronicle & Geopolitics', INK);
+
+  const ensure = (h) => {
+    if (y + h > BOT - 10) {
+      footer(d, campaignName, pageN);
+      d.addPage();
+      pageN++;
+      y = MT;
+      y = secBar(d, y, 'Realm Chronicle & Geopolitics (cont.)', INK);
+    }
+  };
+
+  const subhead = (text) => {
+    ensure(10);
+    d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, BROWN);
+    d.text(s(text).toUpperCase(), ML, y);
+    hline(d, ML, y + 1.5, ML + CW, TAN, 0.3);
+    y += 6;
+  };
+
+  const bullet = (text, clr = INK) => {
+    const lines = wrap(d, text, CW - 6, 8);
+    ensure(lines.length * 4 + 2);
+    d.setFont('helvetica', 'normal'); d.setFontSize(8);
+    st(d, GOLD); d.text('•', ML, y);
+    st(d, clr);
+    for (const line of lines) { d.text(line, ML + 4, y); y += 4; }
+    y += 1;
+  };
+
+  // ── Named realm arcs (the epic). ──────────────────────────────────────────
+  if (arcs.length) {
+    subhead('Realm Arcs');
+    for (const arc of arcs) bullet(arc);
+    y += 2;
+  }
+
+  // ── Active sieges + deployments. ──────────────────────────────────────────
+  if (sieges.length || deployments.length) {
+    subhead('Wars & Sieges');
+    for (const siege of sieges) {
+      const coalition = siege.coalition.map(nameFor).join(', ');
+      bullet(`${nameFor(siege.targetId)} is besieged${coalition ? ` by ${coalition}` : ''}.`, [139, 26, 26]);
+    }
+    for (const dep of deployments) {
+      bullet(`${nameFor(dep.homeId)} has an army deployed against ${nameFor(dep.targetId)} (${s(dep.role)}).`);
+    }
+    y += 2;
+  }
+
+  // ── Trade wars. ───────────────────────────────────────────────────────────
+  if (tradeWars.length) {
+    subhead('Trade Wars');
+    for (const war of tradeWars) {
+      bullet(`${nameFor(war.winnerId)} seizes ${nameFor(war.buyerId)}'s ${s(war.commodityLabel)} market.`);
+    }
+    y += 2;
+  }
+
+  // ── Disposition + war-weariness standings. ───────────────────────────────
+  if (standings.length || exhaustion.length) {
+    subhead('Standings');
+    for (const row of standings) {
+      bullet(`${nameFor(row.id)}: ${row.wins}W / ${row.losses}L (net ${row.score > 0 ? '+' : ''}${row.score}).`);
+    }
+    for (const row of exhaustion) {
+      bullet(`${nameFor(row.id)} is ${s(row.band)} (war-exhaustion ${row.warExhaustion.toFixed(2)}).`, MUTED);
+    }
+    y += 2;
+  }
+
+  // ── Pantheon. ─────────────────────────────────────────────────────────────
+  if (pantheon.length) {
+    subhead('Pantheon');
+    for (const p of pantheon) {
+      const tail = p.tier !== 'major' && p.fromMajor > 0 ? `, ${p.fromMajor} from Major` : '';
+      bullet(`${deityDisplayName(p.id)} — ${s(p.tier)}, ${p.seats} seat${p.seats === 1 ? '' : 's'}${tail}.`);
+    }
+  }
+
+  return { pageN, rendered: true };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Main entry point
 // ─────────────────────────────────────────────────────────────────────────────
 export function generateCampaignPDF(campaign, allSaves) {
@@ -776,6 +902,19 @@ export function generateCampaignPDF(campaign, allSaves) {
     const r5 = buildNetworkAppendix(doc, campaign.name, settlements, pageN);
     pageN = r5.pageN;
     footer(doc, campaign.name, pageN);
+  }
+
+  // Realm Chronicle & Geopolitics — the living-world section (UX Phase 7).
+  // Self-gates: a dormant / non-simulated campaign carries no worldState ledgers
+  // ⇒ buildRealmGeopolitics renders nothing and adds no page.
+  if (settlements.length > 0) {
+    const worldState = campaign.worldState || null;
+    const regionalGraph = campaign.regionalGraph || campaign.worldState?.regionalGraph || null;
+    const r6 = buildRealmGeopolitics(doc, campaign.name, settlements, worldState, regionalGraph, pageN);
+    if (r6.rendered) {
+      pageN = r6.pageN;
+      footer(doc, campaign.name, pageN);
+    }
   }
 
   // Filename

@@ -64,4 +64,54 @@ describe('SimulationRulesDialog', () => {
       expect(onClose).toHaveBeenCalled();
     });
   });
+
+  // ── UX Phase 4 — the THREE living-world gates (the unreachable-engine fix) ──
+  test('renders the 3 living-world gates, OFF by default', () => {
+    render(<SimulationRulesDialog
+      open
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
+      onClose={() => {}}
+    />);
+
+    expect(screen.getByText('Living-world systems (advanced)')).toBeTruthy();
+    const warGate = screen.getByRole('checkbox', { name: 'War layer' });
+    const strategyGate = screen.getByRole('checkbox', { name: 'Settlement strategy' });
+    const religionGate = screen.getByRole('checkbox', { name: 'Religion dynamics' });
+
+    // The three gates default FALSE (DEFAULT_SIMULATION_RULES), so they render OFF
+    // even though every other toggle is on-unless-explicitly-false.
+    expect(warGate.checked).toBe(false);
+    expect(strategyGate.checked).toBe(false);
+    expect(religionGate.checked).toBe(false);
+  });
+
+  test('toggling the 3 gates ON reaches simulationRules on save', async () => {
+    actions.updateCampaignSimulationRules.mockResolvedValue({});
+    const onClose = vi.fn();
+
+    render(<SimulationRulesDialog
+      open
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
+      onClose={onClose}
+    />);
+
+    fireEvent.click(screen.getByRole('checkbox', { name: 'War layer' }));
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Settlement strategy' }));
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Religion dynamics' }));
+
+    expect(screen.getByRole('checkbox', { name: 'War layer' }).checked).toBe(true);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    await waitFor(() => {
+      // The toggles reach the rules object passed to updateCampaignSimulationRules —
+      // this is the proof the premium engine is now reachable from the UI.
+      expect(actions.updateCampaignSimulationRules).toHaveBeenCalledWith('camp-1', expect.objectContaining({
+        warLayerEnabled: true,
+        settlementStrategyEnabled: true,
+        religionDynamicsEnabled: true,
+      }));
+      expect(onClose).toHaveBeenCalled();
+    });
+  });
 });

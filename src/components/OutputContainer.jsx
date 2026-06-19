@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { FS, swatch } from './theme.js';
 import { runAiLayer } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText } from 'lucide-react';
+import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText, Network, Wand2 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
 import PipelineRail from './PipelineRail.jsx';
@@ -40,6 +40,11 @@ import DossierHeaderRow from './dossier/DossierHeaderRow.jsx';
 import DossierNarrativeBanner from './dossier/DossierNarrativeBanner.jsx';
 import DossierTabStrip from './dossier/DossierTabStrip.jsx';
 import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
+// UX overhaul Phase 2 — the single altitude axis. The control lives in the
+// dossier header strip; `useAltitude` drops the Substrate sub-tab from the strip
+// at Overview (the clean face) so a new DM never lands on the empty 15-var grid.
+import AltitudeControl from './common/AltitudeControl.jsx';
+import { useAltitude } from '../hooks/useAltitude.js';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
 const SummaryTab = lazy(() => import('./new/SummaryTab'));
@@ -54,6 +59,11 @@ const EconomicsTab = lazy(() => import('./new/tabs/EconomicsTab'));
 const ServicesTab = lazy(() => import('./new/tabs/ServicesTab'));
 const PowerTab = lazy(() => import('./new/tabs/PowerTab'));
 const DefenseTab = lazy(() => import('./new/tabs/DefenseTab'));
+// UX overhaul Phase 2 — new Systems sub-tabs: the 15-var causal Substrate and the
+// 10-facet Magic profile. Both mount the P0/P1 building blocks and self-gate /
+// altitude-gate inside.
+const SubstrateTab = lazy(() => import('./new/tabs/SubstrateTab.jsx'));
+const MagicTab = lazy(() => import('./new/tabs/MagicTab.jsx'));
 const NPCsTab = lazy(() => import('./new/tabs/NPCsTab'));
 const HistoryTab = lazy(() => import('./new/tabs/HistoryTab'));
 const ResourcesTab = lazy(() => import('./new/tabs/ResourcesTab'));
@@ -86,7 +96,7 @@ const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 // from the strip by the resolver below.
 export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
-  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability'] },
+  systems: { label: 'Systems', tabs: ['substrate', 'magic', 'services', 'economics', 'power', 'defense', 'resources', 'viability'] },
   world:   { label: 'World',   tabs: ['relationships', 'daily_life', 'npcs', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle'] },
 });
@@ -94,6 +104,8 @@ export const TAB_GROUPS = Object.freeze({
 const TABS = [
   { id: 'overview',   label: 'Overview',   Icon: MapPin },
   { id: 'summary',    label: 'DM Summary', Icon: Scroll },
+  { id: 'substrate',  label: 'Substrate',  Icon: Network },
+  { id: 'magic',      label: 'Magic',      Icon: Wand2 },
   { id: 'power',      label: 'Power',      Icon: Shield },
   { id: 'economics',  label: 'Economics',  Icon: Coins },
   { id: 'services',   label: 'Services',   Icon: Building2 },
@@ -152,7 +164,7 @@ export function collectChronicle(saveEntry, settlement, publicChronicle = null) 
   }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
 }
 
-export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null }) {
+export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, allowRename = false, onRenameSettlement = null }) {
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
@@ -211,6 +223,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // the pref reactively so the overlay mounts/unmounts on toggle.
   const tableViewOpen = useStore(s => s.userPrefs?.tableViewOpen);
   const setUserPref = useStore(s => s.setUserPref);
+  // UX overhaul Phase 2 — the single progressive-disclosure altitude axis.
+  const { level: altitude } = useAltitude();
   const [activeTab, _setActiveTab] = useState('overview');
   // Analytics: how the next resolved tab came to be selected. A direct tab-strip
   // click reports 'tab_click', a group click 'group_click'; the resolver falling
@@ -353,6 +367,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // entry point, so drop the Simulation entry from the tab strip.
   const baseTabs = TABS.filter(t => {
     if (t.id === 'simulation') return false;
+    // UX overhaul Phase 2 — the Substrate sub-tab renders nothing at Overview
+    // (the 15-var grid is engine depth). Drop it from the strip at 'guided' so a
+    // new DM never lands on an empty tab; it returns at Detail / Engine.
+    if (t.id === 'substrate' && altitude === 'guided') return false;
     // Notes (DM/AI) are owner-private prep: hidden from the public player
     // view, but shown on saved settlements even though the dossier prose is
     // readOnly (editability is keyed on saveId inside NotesTab, not readOnly).
@@ -509,7 +527,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
                   ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
                   : undefined}
               />
-            : <SummaryTab settlement={s} />}
+            : <SummaryTab settlement={s} saveId={saveId} />}
         </>
       );
       case 'plot_hooks': return <PlotHooksTab settlement={s} />;
@@ -519,7 +537,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
       case 'power':      return <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />;
-      case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} />;
+      case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} saveId={saveId} />;
+      case 'substrate':  return <SubstrateTab settlement={s} saveId={saveId} />;
+      case 'magic':      return <MagicTab settlement={s} />;
       case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} onRerollNPCs={onRegenerate ? () => onRegenerate('npcs') : null} narrativeNote={null} pinnedIds={pinnedIds} onTogglePin={onTogglePin} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
@@ -594,6 +614,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             selectedTab={selectedTab}
             onRegenerate={onRegenerate}
             REROLLABLE={REROLLABLE}
+            allowRename={allowRename}
+            onRenameSettlement={onRenameSettlement}
             narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
           />
         )}
@@ -652,6 +674,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               campaignState={liveSaveEntry?.campaignState}
               galleryShareNarrated={liveSaveEntry?.gallery_share_narrated}
               galleryShareDm={liveSaveEntry?.gallery_share_dm}
+              galleryImportable={liveSaveEntry?.gallery_importable}
             />
             {/* P135 / D-5 — "How this was simulated" trigger. Lives next to
                 BuyThisDossier so the user finds it as a "more info" affordance,
@@ -689,6 +712,21 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             handleGroupClick={handleGroupClick}
           />
         )}
+        {/* UX overhaul Phase 2 — the single altitude axis (Overview / Detail /
+            Engine). Sits in the dossier header so every read surface (the promoted
+            4-dim strip, the Substrate grid, War & Faith depth) reads ONE pref.
+            Replaces the scattered detail flags with one control a new DM can keep
+            at Overview and a power user can pin to Engine. */}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 8,
+          padding: '6px 18px', borderBottom: '1px solid #e0d0b0',
+          background: 'rgba(255,251,245,0.6)',
+        }}>
+          <span style={{ fontSize: FS.xxs, color: swatch.mutedBrown, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+            Detail
+          </span>
+          <AltitudeControl size="sm" ariaLabel="Dossier detail level" />
+        </div>
         {/* Tab strip */}
         <DossierTabStrip
           onboardingActive={onboardingActive}

@@ -13,7 +13,7 @@
  * actions. There is no local placement/burg state in React.
  */
 
-import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import { flag } from '../lib/flags.js';
 import { EVENTS, track } from '../lib/analytics.js';
 import { useStore } from '../store/index.js';
@@ -26,11 +26,15 @@ import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { legacyPlacementsArray } from './map/legacyPlacements.js';
 import { useMapAutosave } from '../hooks/useMapAutosave.js';
+import { useRealmInspector } from '../hooks/useRealmInspector.js';
 
 import { WorldMapToolbar } from './map/WorldMapToolbar.jsx';
 import { WorldMapContextToolbars } from './map/WorldMapContextToolbars.jsx';
 import { WorldMapStage } from './map/WorldMapStage.jsx';
 import { WorldMapOverlays } from './map/WorldMapOverlays.jsx';
+import { hasPantheon as pantheonActive } from './map/PantheonPanel.jsx';
+
+const RealmInspector = lazy(() => import('./map/RealmInspector.jsx'));
 
 export default function WorldMap({ onNavigate } = {}) {
   // ── Refs & local state ────────────────────────────────────────────────
@@ -47,7 +51,6 @@ export default function WorldMap({ onNavigate } = {}) {
   const [tourOpen, setTourOpen] = useState(false);   // §16 — guided help walkthrough
   const [mapTemplates, setMapTemplates] = useState([]);
   const [currentTemplate, setCurrentTemplate] = useState('');
-  const [campaignWorkspace, setCampaignWorkspace] = useState('map');
   const [worldPulseInterval, setWorldPulseInterval] = useState('one_month');
   const [worldPulseBusy, setWorldPulseBusy] = useState(false);
   const [showSimulationRules, setShowSimulationRules] = useState(false);
@@ -102,6 +105,9 @@ export default function WorldMap({ onNavigate } = {}) {
   const clearCampaignMap  = useStore(s => s.clearCampaignMap);
   const getCampaignMapState = useStore(s => s.getCampaignMapState);
   const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
+  const updateCampaignSimulationRules = useStore(s => s.updateCampaignSimulationRules);
+  const pendingMapWorkspace = useStore(s => s.pendingMapWorkspace);
+  const consumeMapWorkspace = useStore(s => s.consumeMapWorkspace);
   // Campaign-clock (Phase C2/C3): multi-step undo of the last World Pulse.
   const undoLastPulse = useStore(s => s.undoLastPulse);
   const canUndoPulse = useStore(s =>
@@ -111,9 +117,12 @@ export default function WorldMap({ onNavigate } = {}) {
     () => activeCampaigns.find(c => c.id === activeCampaignId) || null,
     [activeCampaigns, activeCampaignId],
   );
-  const showingWizardNews = Boolean(activeCampaign && campaignWorkspace === 'news');
-  const showingWorldPulse = Boolean(activeCampaign && campaignWorkspace === 'pulse');
-  const showingCampaignPanel = showingWizardNews || showingWorldPulse;
+  // UX Phase 4 — the old campaign-workspace body-swap is RETIRED. Pulse / News /
+  // Pantheon now render in the Realm Inspector OVERLAY, so the map stays mounted at
+  // all times (the WorldMapStage never swaps the map away; its `showing*` props are
+  // pinned false). The toolbar's Pulse/News/Pantheon tabs open the Inspector.
+  // §S4 — the Pantheon tab still self-hides when religion is dormant.
+  const campaignHasPantheon = pantheonActive(activeCampaign);
 
   // Audit recommendation: when a campaign is active, default to canon-
   // only filtering so the map represents the *deployed* world, not
@@ -125,6 +134,24 @@ export default function WorldMap({ onNavigate } = {}) {
   useEffect(() => {
     if (activeCampaignId && !activeCampaign) setActiveCampaign(null);
   }, [activeCampaignId, activeCampaign, setActiveCampaign]);
+
+  // ── Toasts ─── (declared early so the Realm-inspector hook below can use it)
+  const toastTimerRef = useRef(null);
+  function showToast(kind, text) {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    setToast({ kind, text });
+    toastTimerRef.current = setTimeout(() => setToast(null), 2600);
+  }
+
+  // UX Phase 4 — the Realm Inspector state + handlers live in a dedicated hook so
+  // this component stays under the size ratchet. The Inspector OVERLAYS the map.
+  const {
+    inspectorOpen, setInspectorOpen, inspectorSection, setInspectorSection,
+    openInspectorAt, handleApplyPreset, handleUpgrade,
+  } = useRealmInspector({
+    canManageCampaigns, pendingMapWorkspace, activeCampaign, activeCampaignId,
+    consumeMapWorkspace, updateCampaignSimulationRules, onNavigate, showToast,
+  });
 
   // P112 / M-5 — Auto-save the working map into the active campaign so it
   // persists per account and across devices without a manual click. Extracted
@@ -288,7 +315,7 @@ export default function WorldMap({ onNavigate } = {}) {
       }
     }
     if (placementReject) {
-      // eslint-disable-next-line react-hooks/immutability
+       
       showToast('info', placementReject);
       return;
     }
@@ -338,7 +365,6 @@ export default function WorldMap({ onNavigate } = {}) {
   // (which sets the ref first) doesn't double-load.
   const autoSyncedRef = useRef(null);
   const handleSelectCampaign = useCallback(async (id) => {
-    setCampaignWorkspace('map');
     autoSyncedRef.current = id || 'none';
     const bridge = bridgeRef.current;
     if (!id) {
@@ -488,7 +514,9 @@ export default function WorldMap({ onNavigate } = {}) {
     setWorldPulseBusy(true);
     try {
       const result = await advanceCampaignWorld(activeCampaignId, worldPulseInterval);
-      setCampaignWorkspace('pulse');
+      // Surface the result in the Inspector (overlay), not a body-swap — the map
+      // stays mounted while the user reads the pulse digest.
+      openInspectorAt('pulse');
       if (result?.reason === 'world_not_canonized') {
         showToast('error', 'Canonize the campaign world before advancing the realm');
       } else if (result?.ok === false) {
@@ -504,7 +532,7 @@ export default function WorldMap({ onNavigate } = {}) {
     } finally {
       setWorldPulseBusy(false);
     }
-  }, [activeCampaignId, advanceCampaignWorld, worldPulseBusy, worldPulseInterval]);
+  }, [activeCampaignId, advanceCampaignWorld, worldPulseBusy, worldPulseInterval, openInspectorAt]);
 
   // Campaign-clock: reverse the most recent World Pulse for this campaign,
   // restoring the pre-pulse world + every member settlement. Multi-step — the
@@ -686,14 +714,6 @@ export default function WorldMap({ onNavigate } = {}) {
 
   }, [setMapMode, handleFit, handleSaveMapToCampaign]);
 
-  // ── Toasts ─────────────────────────────────────────────────────────────
-  const toastTimerRef = useRef(null);
-  function showToast(kind, text) {
-    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
-    setToast({ kind, text });
-    toastTimerRef.current = setTimeout(() => setToast(null), 2600);
-  }
-
   // ── Render ─────────────────────────────────────────────────────────────
   // Use viewport height minus header/padding so the map fills the screen.
   // The parent <main> has padding and the header is ~52px on desktop.
@@ -705,12 +725,11 @@ export default function WorldMap({ onNavigate } = {}) {
     }}>
       {/* ── Top toolbar row: mode switcher + campaign + utility ────────── */}
       <WorldMapToolbar
-        showingCampaignPanel={showingCampaignPanel} showingWizardNews={showingWizardNews}
+        showingCampaignPanel={false} campaignHasPantheon={campaignHasPantheon}
         mapMode={mapMode} setMapMode={setMapMode} imageMode={imageMode}
         canManageCampaigns={canManageCampaigns} activeCampaign={activeCampaign} activeCampaignId={activeCampaignId}
         handleSelectCampaign={handleSelectCampaign} activeCampaigns={activeCampaigns}
         handleSaveMapToCampaign={handleSaveMapToCampaign} handleClearMapFromCampaign={handleClearMapFromCampaign}
-        campaignWorkspace={campaignWorkspace} setCampaignWorkspace={setCampaignWorkspace}
         setShowSimulationRules={setShowSimulationRules} showSimulationRules={showSimulationRules}
         worldPulseInterval={worldPulseInterval} setWorldPulseInterval={setWorldPulseInterval}
         handleAdvanceRealm={handleAdvanceRealm} worldPulseBusy={worldPulseBusy}
@@ -721,27 +740,42 @@ export default function WorldMap({ onNavigate } = {}) {
         mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange}
         handleFit={handleFit} handleRegenerate={handleRegenerate}
         mapLoading={mapLoading} mapError={mapError}
+        inspectorOpen={inspectorOpen} onToggleInspector={() => setInspectorOpen(v => !v)}
+        openInspectorAt={openInspectorAt}
+        activePresetId={activeCampaign?.worldState?.simulationRules?.presetId} handleApplyPreset={handleApplyPreset}
       />
 
       {/* ── Contextual toolbar for current mode ──────────────────────── */}
       <WorldMapContextToolbars
-        showingCampaignPanel={showingCampaignPanel}
-        mapMode={mapMode}
-        imageMode={imageMode}
-        bridgeRef={bridgeRef}
+        showingCampaignPanel={false} mapMode={mapMode} imageMode={imageMode} bridgeRef={bridgeRef}
       />
 
       {/* ── Main body: sidebar + map ─────────────────────────────────── */}
-      <WorldMapStage
-        showingWizardNews={showingWizardNews} showingWorldPulse={showingWorldPulse}
-        activeCampaign={activeCampaign} activeSaves={activeSaves} placements={placements}
-        mapContainerRef={mapContainerRef} handleDragOver={handleDragOver}
-        handleDragLeave={handleDragLeave} handleDrop={handleDrop} isDraggingOver={isDraggingOver}
-        imageMode={imageMode} iframeRef={iframeRef} mapMode={mapMode}
-        bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
-        onNavigate={onNavigate} mapReady={mapReady}
-        showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
-      />
+      {/* UX Phase 4 — relative container so the Realm Inspector can OVERLAY the
+          stage (the map stays mounted underneath; no body-swap). */}
+      <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
+        <WorldMapStage
+          showingWizardNews={false} showingWorldPulse={false} showingPantheon={false}
+          activeCampaign={activeCampaign} activeSaves={activeSaves} placements={placements}
+          mapContainerRef={mapContainerRef} handleDragOver={handleDragOver}
+          handleDragLeave={handleDragLeave} handleDrop={handleDrop} isDraggingOver={isDraggingOver}
+          imageMode={imageMode} iframeRef={iframeRef} mapMode={mapMode}
+          bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
+          onNavigate={onNavigate} mapReady={mapReady}
+          showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
+        />
+
+        {inspectorOpen && (
+          <Suspense fallback={null}>
+            <RealmInspector
+              open={inspectorOpen} section={inspectorSection}
+              onSection={setInspectorSection} onClose={() => setInspectorOpen(false)}
+              campaign={activeCampaign} canManageCampaigns={canManageCampaigns}
+              tier={authTier} onUpgrade={handleUpgrade}
+            />
+          </Suspense>
+        )}
+      </div>
 
       <WorldMapOverlays
         toast={toast} regenerateConfirm={regenerateConfirm} performRegenerate={performRegenerate}

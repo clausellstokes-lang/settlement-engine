@@ -97,6 +97,83 @@ describe('applyLibraryFilters — pipeline', () => {
     expect(SORT_OPTIONS.recent).toBeDefined();
     expect(SORT_OPTIONS.name).toBeDefined();
     expect(SORT_OPTIONS.tier).toBeDefined();
+    expect(SORT_OPTIONS.attention).toBeDefined();
     expect(typeof SORT_OPTIONS.recent.compare).toBe('function');
+  });
+});
+
+// ── Phase 3 — the now-wired orphaned filters + living-world filters + attention sort.
+describe('applyLibraryFilters — Phase 3 filters', () => {
+  const deityTown = {
+    id: 'd1', name: 'Faithful', tier: 'town', savedAt: 10,
+    settlement: { config: { primaryDeitySnapshot: { name: 'Sol', rankAxis: 'major', alignmentAxis: 'good' } } },
+    campaignState: { phase: 'canon', canonizedAt: '2026-01-01', editedAt: '2026-01-01' },
+  };
+  const editedDraft = {
+    id: 'd2', name: 'Workbench', tier: 'village', savedAt: 20,
+    settlement: { config: {} },
+    // A plain draft with no pending-edit timestamp — should NOT match hasPendingEdits.
+    campaignState: { phase: 'draft' },
+  };
+  const pendingCanon = {
+    id: 'd3', name: 'Tweaked', tier: 'city', savedAt: 30,
+    settlement: { config: {} },
+    campaignState: { phase: 'canon', canonizedAt: '2026-01-01', editedAt: '2026-03-03' },
+  };
+  const all = [deityTown, editedDraft, pendingCanon];
+
+  it('draftOnly chip (previously orphaned) now filters to drafts', () => {
+    const out = applyLibraryFilters(all, { filters: { draftOnly: true } });
+    expect(out.map(s => s.id)).toEqual(['d2']);
+  });
+
+  it('hasPendingEdits chip (previously orphaned) filters to edited-after-canon', () => {
+    const out = applyLibraryFilters(all, { filters: { hasPendingEdits: true } });
+    expect(out.map(s => s.id)).toEqual(['d3']);
+  });
+
+  it('hasDeity filters to settlements with an embedded primary deity', () => {
+    const out = applyLibraryFilters(all, { filters: { hasDeity: true } });
+    expect(out.map(s => s.id)).toEqual(['d1']);
+  });
+
+  it('atWar matches nothing without campaign context (degrades safely)', () => {
+    const out = applyLibraryFilters(all, { filters: { atWar: true } });
+    expect(out).toEqual([]);
+  });
+
+  it('atWar uses the parent-supplied live-world context', () => {
+    const atWarSave = { id: 'w1', name: 'Besieged', tier: 'town', savedAt: 5, settlement: { config: {} } };
+    const context = {
+      liveWorldFor: (s) => s.id === 'w1'
+        ? { worldState: { deployments: { enemy: { targetId: 'w1' } } }, regionalGraph: null }
+        : null,
+    };
+    const out = applyLibraryFilters([atWarSave, editedDraft], { filters: { atWar: true } }, context);
+    expect(out.map(s => s.id)).toEqual(['w1']);
+  });
+
+  it('campaign selector restricts to one campaign via the parent resolver', () => {
+    const context = { campaignIdFor: (s) => (s.id === 'd1' ? 'camp-A' : 'camp-B') };
+    const out = applyLibraryFilters(all, { filters: { campaignId: 'camp-A' } }, context);
+    expect(out.map(s => s.id)).toEqual(['d1']);
+  });
+
+  it('"Needs attention" sort floats the worst-band settlement up', () => {
+    const healthy = {
+      id: 'h', name: 'Calm', tier: 'town', savedAt: 1,
+      settlement: { economicState: { prosperity: 'Wealthy' }, config: { monsterThreat: 'safe' } },
+    };
+    const crisis = {
+      id: 'c', name: 'Burning', tier: 'town', savedAt: 2,
+      settlement: {
+        economicState: { prosperity: 'Struggling' },
+        config: { monsterThreat: 'plagued', nearbyResourcesState: { iron: 'depleted' }, tradeRouteAccess: 'isolated' },
+        powerStructure: { factions: [{}, {}, {}, {}, {}], conflicts: [{}, {}, {}] },
+        stressors: [{ type: 'siege' }, { type: 'war' }],
+      },
+    };
+    const out = applyLibraryFilters([healthy, crisis], { sort: 'attention' });
+    expect(out[0].id).toBe('c');
   });
 });

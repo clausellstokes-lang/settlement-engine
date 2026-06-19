@@ -45,6 +45,11 @@ export async function generateSettlementPDF(settlement, options = {}) {
     systemState = null,
     eventLog = [],
     phase = 'draft',
+    // UX Phase 7 — the LIVE campaign world ({ worldState, regionalGraph,
+    // settlements?, nameFor? }) for the Faith & War chapter. Passed ONLY for
+    // premium exports (the caller gates at the data layer). Absent/null for
+    // free/anon/non-campaign exports ⇒ the base PDF renders unchanged.
+    campaign = null,
     // Audit recommendation: three export variants. Default preserves
     // the previous behavior so any pre-existing caller gets the same
     // PDF it always got.
@@ -79,6 +84,7 @@ export async function generateSettlementPDF(settlement, options = {}) {
     systemState,
     eventLog,
     phase,
+    campaign,
     variant,
     isFounder,
     isAnonymous,

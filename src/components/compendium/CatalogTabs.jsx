@@ -5,6 +5,10 @@ import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../gener
 // P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
 // global-search index (CP-4) and these tabs render from one source of truth.
 import { ARCHETYPES, REL_TYPES } from '../../domain/compendium/catalogData.js';
+// UX Phase 8 — the Religion & the Pantheon catalog tab documents the deity axes
+// + their effects FROM THE SHARED SINGLE SOURCE (the same coupling strings the
+// engine + the dossier read), never hand-copied numbers.
+import { DEITY_AXIS_EFFECTS } from '../../domain/display/deityEffects.js';
 import { Tag, Row, Card } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -73,14 +77,104 @@ export function PowerTab_({ search='' }) {
   </>;
 }
 
+const DEITY_ACCENT = swatch['#7A5A1A'];
+
+// The three deity axes documented for the catalog, each effect string pulled
+// from the SHARED single source (DEITY_AXIS_EFFECTS) so the reference never
+// drifts from the engine. Axis label + the per-value effect copy.
+const PANTHEON_AXES = [
+  {
+    axis: 'Alignment', sub: 'good / evil / neutral → corruption',
+    rows: [
+      ['Good', DEITY_AXIS_EFFECTS.alignment.good.effect],
+      ['Evil', DEITY_AXIS_EFFECTS.alignment.evil.effect],
+      ['Neutral', 'No pull on corruption.'],
+    ],
+  },
+  {
+    axis: 'Temperament', sub: 'warlike / peacelike / neutral → aggression',
+    rows: [
+      ['Warlike', DEITY_AXIS_EFFECTS.temperament.warlike.effect],
+      ['Peacelike', DEITY_AXIS_EFFECTS.temperament.peacelike.effect],
+      ['Neutral', "No pull on the realm's aggression."],
+    ],
+  },
+  {
+    axis: 'Rank', sub: 'major / minor / cult → religious authority (+ magic legality)',
+    rows: [
+      ['Major', `${DEITY_AXIS_EFFECTS.rank.major.effect}. Only a major god also tightens magic legality (a warlike/evil major makes magic openly opposed).`],
+      ['Minor', DEITY_AXIS_EFFECTS.rank.minor.effect],
+      ['Cult', DEITY_AXIS_EFFECTS.rank.cult.effect],
+    ],
+  },
+];
+
+// Religion & the Pantheon (UX Phase 8) — replaces the stale "Magic & Religion"
+// tab. Documents the three deity axes + their effects (from the shared source),
+// the dormant-until-assigned model, the conversion contest, tiers, and the
+// Ascendancy / Twilight arcs. Keeps the legacy `#magic` anchor so search index
+// + ANCHOR_TO_TAB deep-links still land here.
 export function ArcaneTab() {
   return <>
     <div id="magic" />
-    <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic acts as a buffer against deficits. Arcane institutions can substitute for missing production.</Card>
+    <p id="religion" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
+      A homebrew pantheon steers the living world through three frozen axes. A god is
+      <strong> dormant</strong> until you assign it as a settlement&rsquo;s primary deity and turn on
+      Religion dynamics — until then it changes nothing (byte-identical to a deity-free world).
+    </p>
+
+    {PANTHEON_AXES.map(({ axis, sub, rows }) => (
+      <div key={axis} style={{ marginBottom:10 }}>
+        <div style={{ fontFamily:serif_, fontSize:FS['14'], fontWeight:700, color:DEITY_ACCENT }}>{axis}</div>
+        <div style={{ fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginBottom:4 }}>{sub}</div>
+        {rows.map(([k, v]) => (
+          <div key={k} style={{ display:'flex', gap:10, padding:'5px 0', borderBottom:`1px solid ${BOR}` }}>
+            <span style={{ fontSize:FS.xs, fontWeight:700, color:DEITY_ACCENT, minWidth:70, flexShrink:0 }}>{k}</span>
+            <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{v}</span>
+          </div>
+        ))}
+      </div>
+    ))}
+
+    <div style={{ fontFamily:serif_, fontSize:FS['14'], fontWeight:600, color:INK, margin:'14px 0 8px' }}>The conversion contest</div>
+    <Card title="Dormant until assigned" accent={DEITY_ACCENT}>A deity only acts once it is a settlement&rsquo;s primary god (the embed-on-assign bridge) AND the campaign&rsquo;s Religion-dynamics rule is on. No assignment, no effect.</Card>
+    <Card title="Contesting converts" accent='#1a4a2a'>With religion dynamics on, neighbouring faiths contest each tick — alignment-direction match, warlike posture, and rank weight the pull. A winning faith gains seats; a losing one cedes them.</Card>
+    <Card title="Tiers — major / minor / cult" accent='#3a1a7a'>Rank scales how hard a god anchors religious authority and whether it regulates magic. A major pantheon-head outweighs a fringe cult.</Card>
+    <Card title="Ascendancy & Twilight arcs" accent='#5a2a8a'>A faith that keeps winning rises through an <em>Ascendancy</em> arc (more seats, firmer orthodoxy); one that keeps losing slides into a <em>Twilight</em> arc toward irrelevance.</Card>
+
+    <div style={{ fontFamily:serif_, fontSize:FS['14'], fontWeight:600, color:INK, margin:'14px 0 8px' }}>Magic &amp; faith interplay (generation)</div>
     <Card title="Magic Suppression" accent='#5a2a8a'>Religion 65+ with Magic 38 or less triggers Heresy Suppression. Magic goods suppressed.</Card>
-    <Card title="Arcane-Criminal Ecosystem" accent='#4a1a4a'>Magic 52+ and Criminal 58+ creates an Arcane Black Market archetype.</Card>
-    <Card title="Religion & Governance" accent='#1a4a2a'>Religion 72+ with low Military produces Theocracy. With strong Crime produces Religious Fraud.</Card>
-    <Card title="Magic & Faith Unified" accent='#2a1a6a'>Magic 70+ and Religion 65+ produces Mage Theocracy. Arcane clergy governs.</Card>
+    <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic buffers deficits — arcane institutions can substitute for missing production.</Card>
+    <Card title="Magic &amp; Faith Unified" accent='#2a1a6a'>Magic 70+ and Religion 65+ produces Mage Theocracy. Arcane clergy governs.</Card>
+  </>;
+}
+
+// Living World (UX Phase 8) — the missing static→living-world bridge in the
+// reference catalog. Five plain-language groups documenting the simulation
+// substrate the generator feeds into once a campaign runs.
+const LIVING_WORLD_GROUPS = [
+  ['Causal Substrate', '#1a3a7a',
+    'Fifteen canonical variables (legitimacy, food security, unrest, religious authority, …) the engine carries per settlement. Generation seeds them; each advance re-derives them from prior state — never wall-clock.'],
+  ['Pressures & Strength', '#a0762a',
+    'Nine pressures (military, economic, social, religious, …) score how much a settlement is being pushed. settlementStrength rolls them into one defend/yield signal that drives strategy.'],
+  ['World Pulse', '#1a5a28',
+    'The per-tick advance: stressors fire, populations and trade drift, institutions are born and die, proposals queue for the DM. Off-by-default toggles keep a peacetime save byte-identical.'],
+  ['War Layer', '#8b1a1a',
+    'Armies march, sieges form, conquests change rulers; warExhaustion rises until a self-ending peace. Entirely dormant unless the War-layer rule is enabled.'],
+  ['Religion & Pantheon', DEITY_ACCENT,
+    'Assigned deities contest converts, gain seats, and steer corruption / aggression / magic legality through their axes. Dormant until a primary deity is assigned and Religion dynamics are on.'],
+];
+
+export function LivingWorldTab() {
+  return <>
+    <p id="living-world" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
+      The generator builds a town in seconds; the <strong>living world</strong> then runs the region for
+      years. These are the systems that wake up once a campaign advances — each opt-in, off by default,
+      and silent for a non-campaign save.
+    </p>
+    {LIVING_WORLD_GROUPS.map(([title, accent, body]) => (
+      <Card key={title} title={title} accent={accent}>{body}</Card>
+    ))}
   </>;
 }
 

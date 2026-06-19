@@ -142,6 +142,66 @@ export function satisfiesOptions(customContent) {
 export const SATISFIES_CATEGORIES = Object.freeze(TRADE_CATEGORIES.filter((c) => c.demandLive));
 export const SATISFIES_KEYS = Object.freeze(SATISFIES_CATEGORIES.map((c) => c.key));
 
+// ── Deities (Feature D / R1) ──────────────────────────────────────────────────
+// A homebrew deity is authored content under the `religious` group. It is INERT
+// (dormant) until a DM assigns it as a settlement's primary deity — only then
+// does a resolved snapshot embed on the settlement record (the embed bridge) and
+// feed the religion substrate. Three frozen tag axes describe the god; all three
+// are required at author time (the DB CHECK in 049 mirrors these enums exactly).
+
+// Moral alignment — good / evil / neutral. Feeds the good↔evil NPC substrate (D.5)
+// and the contest's alignment-direction match (D.3).
+export const DEITY_ALIGNMENT = Object.freeze([
+  { key: 'good',    label: 'Good' },
+  { key: 'evil',    label: 'Evil' },
+  { key: 'neutral', label: 'Neutral' },
+]);
+export const DEITY_ALIGNMENT_KEYS = Object.freeze(DEITY_ALIGNMENT.map((a) => a.key));
+
+// Temperament — warlike / peacelike / neutral. A warlike-evil god is a casus belli
+// (D.4); feeds the warlike-posture term of the contest.
+export const DEITY_TEMPER = Object.freeze([
+  { key: 'warlike',   label: 'Warlike' },
+  { key: 'peacelike', label: 'Peacelike' },
+  { key: 'neutral',   label: 'Neutral' },
+]);
+export const DEITY_TEMPER_KEYS = Object.freeze(DEITY_TEMPER.map((t) => t.key));
+
+// Rank/scale — major / minor / cult. Scales how strongly the deity lifts
+// religious_authority (a major pantheon-head outweighs a fringe cult).
+export const DEITY_TIER = Object.freeze([
+  { key: 'major', label: 'Major — a pillar of the pantheon' },
+  { key: 'minor', label: 'Minor — a lesser god' },
+  { key: 'cult',  label: 'Cult — a fringe or secret following' },
+]);
+export const DEITY_TIER_KEYS = Object.freeze(DEITY_TIER.map((r) => r.key));
+
+/**
+ * Validate an authored deity record. Returns { ok, errors } — mirrors the
+ * write-time validation the other buckets perform implicitly (a name is
+ * required; the three axes must each be one of their frozen enums). Pure; no
+ * store/React. The store slice rejects a write whose `errors` is non-empty so a
+ * bad axis never reaches the cloud (where the 049 CHECK would hard-reject it).
+ *
+ * @param {any} deity
+ * @returns {{ ok: boolean, errors: string[] }}
+ */
+export function validateDeity(deity = {}) {
+  const errors = [];
+  const name = String(deity?.name || '').trim();
+  if (!name) errors.push('A deity needs a name.');
+  if (!DEITY_ALIGNMENT_KEYS.includes(deity?.alignmentAxis)) {
+    errors.push(`alignmentAxis must be one of: ${DEITY_ALIGNMENT_KEYS.join(', ')}.`);
+  }
+  if (!DEITY_TEMPER_KEYS.includes(deity?.temperamentAxis)) {
+    errors.push(`temperamentAxis must be one of: ${DEITY_TEMPER_KEYS.join(', ')}.`);
+  }
+  if (!DEITY_TIER_KEYS.includes(deity?.rankAxis)) {
+    errors.push(`rankAxis must be one of: ${DEITY_TIER_KEYS.join(', ')}.`);
+  }
+  return { ok: errors.length === 0, errors };
+}
+
 // Settlement tiers, smallest → largest, for tier gates (min/max).
 export const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 

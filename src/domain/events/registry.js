@@ -123,6 +123,9 @@ export const RERUN_KEYS_FOR_EVENT = {
   REMOVE_RESOURCE:        ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
   PROMOTE_NPC:            ['npcs', 'powerStructure', 'narrative'],
   DEMOTE_NPC:             ['npcs', 'powerStructure', 'narrative'],
+  // Feature D / R1 — assigning a primary deity re-derives the religion substrate
+  // (the deity term in deriveReligiousAuthority) and refreshes the narrative.
+  SET_PRIMARY_DEITY:      ['powerStructure', 'narrative'],
 };
 
 /**
@@ -731,6 +734,27 @@ export const EVENT_REGISTRY = {
     narrate(event) {
       const label = event.payload?.label || labelOf(event.targetId);
       return `${label} is now worked near the settlement.`;
+    },
+  },
+
+  SET_PRIMARY_DEITY: {
+    label: 'Assign primary deity',
+    description: 'A settlement adopts (or sheds) a primary deity. The resolved deity snapshot is embedded on the settlement record so the religion substrate reads it without ever touching the custom-content store. No deity ⇒ the religion layer stays dormant.',
+    requiresTarget: false,
+    stateDeltas() {
+      // A change of patron god is a legitimacy/ritual event, not an economic
+      // shock — a small steadying nudge. The substrate weight lives in
+      // deriveReligiousAuthority (read off the embedded snapshot), not here.
+      return {};
+    },
+    /** @param {any} event */
+    narrate(event) {
+      const snap = event.payload?.snapshot;
+      if (!snap || !(event.payload?.deityRef ?? event.targetId)) {
+        return 'The settlement turns away from its patron god — no deity now holds primacy.';
+      }
+      const name = snap.name || 'a new god';
+      return `${name} is proclaimed the settlement's primary deity.`;
     },
   },
 

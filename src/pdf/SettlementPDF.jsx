@@ -38,6 +38,7 @@ import { PlotHooks } from './sections/PlotHooks.jsx';
 import { Relationships } from './sections/Relationships.jsx';
 import { AIAppendix } from './sections/AIAppendix.jsx';
 import { SystemStateSnapshot } from './sections/SystemStateSnapshot.jsx';
+import { FaithWar } from './sections/FaithWar.jsx';
 import { Timeline as TimelineChapter } from './sections/Timeline.jsx';
 import { buildViewModel } from './lib/viewModel.js';
 import { PDF_VARIANTS, shouldInclude } from './variants.js';
@@ -54,6 +55,12 @@ export function SettlementPDF({
   systemState = null,
   eventLog = [],
   phase = 'draft',
+  // UX Phase 7 — the LIVE campaign world for this settlement
+  // ({ worldState, regionalGraph, settlements?, nameFor? }). Threaded ONLY for
+  // premium exports (data-layer gate in SettlementDetail). When absent/dormant
+  // the liveWorld slice resolves to null and the Faith & War chapter renders
+  // nothing ⇒ byte-identical to a non-campaign export.
+  campaign = null,
   // Audit recommendation: three export variants, same engine
   // underneath. Defaults to canon_dossier (the previous behavior) so
   // legacy callers that don't supply a variant get exactly what they
@@ -71,7 +78,7 @@ export function SettlementPDF({
   const safe = settlement || {};
   const vm = buildViewModel({
     settlement, aiSettlement, aiDailyLife, narrativeMode,
-    systemState, eventLog, phase,
+    systemState, eventLog, phase, campaign,
   });
   const useAi = vm.narrativeMode;
   const variantSpec = PDF_VARIANTS[variant] || PDF_VARIANTS.canon_dossier;
@@ -79,6 +86,14 @@ export function SettlementPDF({
   const inc = (key) => shouldInclude(variantSpec.chapters[key], ctx);
   const showState    = inc('systemState') && !!systemState;
   const showTimeline = inc('timeline');
+  // The live "Faith & War" chapter — variant-gated AND self-gating on the
+  // dormant liveWorld slice (null when peaceful/deity-free/non-campaign). Both
+  // gates must pass; a dormant slice ⇒ no chapter ⇒ byte-identical.
+  const showFaithWar = inc('faithWar') && !!vm.liveWorld;
+  // The "Campaign State / War Room" variant promotes the State chapter to its
+  // layered causal-detail form (15-var grid + pressures). Every other variant
+  // keeps the default 4-dim snapshot byte-identical.
+  const stateCausalDetail = variant === 'campaign_state';
 
   // ToC entries — must match the chapters actually rendered below, which
   // are now variant-gated. Build by filtering against the same `inc()`
@@ -90,8 +105,9 @@ export function SettlementPDF({
     inc('overview')            && { no: '01',  title: 'Overview', note: useAi ? 'narrative + raw' : 'systems' },
     inc('tonightAtTheTable')   && { no: '02',  title: 'Tonight at the Table', note: 'quick prep' },
     inc('npcQuickRef')         && { no: '03',  title: 'NPC Quick Reference', note: 'index' },
-    showState                  && { no: '03B', title: 'Current State', note: '4-dim snapshot' },
+    showState                  && { no: '03B', title: 'Current State', note: stateCausalDetail ? 'state + substrate' : '4-dim snapshot' },
     showTimeline               && { no: '03C', title: 'Timeline', note: `${eventLog.length} event${eventLog.length === 1 ? '' : 's'}` },
+    showFaithWar               && { no: '03D', title: 'Faith & War', note: 'live campaign state' },
     inc('notableNpcs')         && { no: '04',  title: 'Notable NPCs', note: 'detailed sheets' },
     inc('plotHooks')           && { no: '05',  title: 'Plot Hooks & Quests' },
     inc('powerStructure')      && { no: '06',  title: 'Power Structure' },
@@ -119,8 +135,9 @@ export function SettlementPDF({
       {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('tonightAtTheTable')   && <TonightAtTheTable    settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
       {showTimeline               && <TimelineChapter      settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} />}

@@ -48,6 +48,22 @@ const TOGGLES = [
   ['majorChangesRequireProposal', 'Major proposals'],
 ];
 
+// ── UX Phase 4 — the THREE living-world system gates ─────────────────────────
+// These default to FALSE (see DEFAULT_SIMULATION_RULES) and — until this dialog
+// shipped — had NO UI toggle ANYWHERE, leaving the premium war/strategy/religion
+// engine unreachable. Each carries a one-line "what it does" + the byte-identical-
+// when-off promise. They render in a separate "advanced" group below the 12 core
+// toggles, and (unlike the core toggles, which are on-unless-explicitly-false) are
+// shown as OFF unless explicitly true — matching their false default.
+const ADVANCED_GATES = [
+  ['warLayerEnabled', 'War layer',
+    'Armies march, sieges form, conquests change rulers. Off = no war fronts (byte-identical to today).'],
+  ['settlementStrategyEnabled', 'Settlement strategy',
+    'Settlements choose to defend, deploy, or sue for peace. Off = no strategy candidates.'],
+  ['religionDynamicsEnabled', 'Religion dynamics',
+    'Deities contest converts and gain seats — only once a settlement carries a primary deity. Off (or deity-free) = no faith drift.'],
+];
+
 function human(value) {
   return String(value || '').replace(/_/g, ' ');
 }
@@ -121,6 +137,38 @@ function Toggle({ checked, label, onChange }) {
         onChange={event => onChange(event.target.checked)}
       />
       <span>{label}</span>
+    </label>
+  );
+}
+
+// A gate row with a one-line "what it does" description. Distinct from Toggle:
+// (1) it shows OFF unless explicitly `true` (these gates default false), and
+// (2) it carries the explanatory copy the plan requires for each living-world gate.
+function GateToggle({ checked, label, description, onChange }) {
+  const controlId = useId();
+  return (
+    <label htmlFor={controlId} style={{
+      display: 'grid',
+      gap: 4,
+      padding: '10px 12px',
+      border: `1px solid ${checked ? GOLD : BORDER2}`,
+      borderRadius: R.md,
+      background: checked ? 'rgba(201,162,76,0.12)' : CARD,
+      cursor: 'pointer',
+    }}>
+      <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <input
+          id={controlId}
+          type="checkbox"
+          aria-label={label}
+          checked={checked}
+          onChange={event => onChange(event.target.checked)}
+        />
+        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>{label}</span>
+      </span>
+      <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
+        {description}
+      </span>
     </label>
   );
 }
@@ -377,6 +425,44 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                 onChange={value => setField(key, value)}
               />
             ))}
+          </div>
+
+          {/* ── UX Phase 4 — Living-world systems (advanced) ─────────────────
+              The three premium gates (war / strategy / religion) that had no
+              UI toggle anywhere until now. Each defaults OFF and is byte-
+              identical when off. This is the fix that makes the premium engine
+              reachable. */}
+          <div style={{
+            display: 'grid',
+            gap: SP.sm,
+            padding: SP.md,
+            border: `1px solid ${GOLD}`,
+            borderRadius: R.md,
+            background: 'rgba(201,162,76,0.05)',
+          }}>
+            <div style={{ display: 'grid', gap: 2 }}>
+              <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+                Living-world systems (advanced)
+              </div>
+              <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+                Opt-in subsystems, off by default. Each is byte-identical to today while off — turn one on and the realm starts moving.
+              </div>
+            </div>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
+              gap: SP.sm,
+            }}>
+              {ADVANCED_GATES.map(([key, label, description]) => (
+                <GateToggle
+                  key={key}
+                  label={label}
+                  description={description}
+                  checked={draft[key] === true}
+                  onChange={value => setField(key, value)}
+                />
+              ))}
+            </div>
           </div>
 
           <div style={{

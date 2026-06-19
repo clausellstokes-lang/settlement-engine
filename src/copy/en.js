@@ -175,9 +175,11 @@ export const en = Object.freeze({
         priceSub:    'forever',
         tagline:     'For the curious DM trying things out.',
         cta:         'Start free',
+        // Size is FREE: a free account generates ANY size up to metropolis
+        // (anon visitors cap at town — signing up is what unlocks full size).
         features: [
+          'Generate any size — hamlet through metropolis',
           '3 saved settlements',
-          'Up to town size',
           'PDF export of any saved dossier',
           'Pay-per-use narrative refinement (credit packs)',
         ],
@@ -188,12 +190,16 @@ export const en = Object.freeze({
         priceSub:    'per month',
         tagline:     'For the DM running a real campaign.',
         cta:         'Subscribe',
+        // NOTE: size is FREE (free accounts reach metropolis), so "capital size"
+        // is no longer a premium bullet. The premium product is the living
+        // SIMULATION; storage/saves stays as a secondary bullet.
         features: [
-          'Unlimited saves',
-          'Up to capital size',
-          'Neighbourhood System (linked settlements)',
+          'Advance time — run the region for years',
+          'Campaigns: link settlements into one living world',
+          'The self-ending war layer + the living pantheon',
+          'Custom content + share to the Gallery',
+          'Unlimited saves + cloud sync',
           'PDF + JSON export',
-          'Map supply chains across settlements',
           'Pay-per-use narrative refinement (credit packs)',
         ],
       },
@@ -227,6 +233,85 @@ export const en = Object.freeze({
       value:    'Most popular',
     },
     faqLink: 'See the full pricing FAQ',
+
+    // ── P9 — Simulation-led pricing variant (A/B, decision 4) ───────────────
+    // Selected when the `pricingSimulationCopy` flag is ON. Leads with the
+    // actual premium product — the living simulation — and DELIBERATELY names
+    // NO size/metropolis/capital as a premium feature (size is free). The
+    // storage/saves line stays present but as a SECONDARY bullet. The
+    // Wanderer variant explicitly states full-size generation is free.
+    variant: {
+      pageSubtitle: 'Generate a town in seconds. Then run the region for years.',
+      tiers: {
+        wanderer: {
+          tagline:  'Generate any town, full size, free. See if the engine earns a campaign.',
+          features: [
+            'Generate any size — hamlet through metropolis, free',
+            '3 saved settlements',
+            'PDF export of any saved dossier',
+            'Pay-per-use narrative refinement (credit packs)',
+          ],
+        },
+        cartographer: {
+          tagline:  'Generate a town in seconds, then run the region for years.',
+          features: [
+            'Advance time — the region runs for years',
+            'The self-ending war layer: sieges, coalitions, conquest',
+            'The living pantheon: deities contest converts and rise',
+            'Campaigns + a chronicle that writes itself',
+            'Custom content + share to the Gallery',
+            'Unlimited saves + cloud sync',   // secondary bullet — storage stays
+          ],
+        },
+        founder: {
+          tagline:  'The whole living simulation, forever. Pay once.',
+          features: [
+            'Everything in Cartographer, forever',
+            'Founder badge on your dossiers',
+            'Direct line to the dev (Discord)',
+            'Early access to new simulators',
+          ],
+        },
+      },
+    },
+  },
+
+  // ── P9 — The "What the Realm unlocks" value ladder ───────────────────────
+  // Three rungs (anon TRIES / free SAVES + full-size generation / premium
+  // SIMULATES), lens-labeled. Size is FREE — it lives on the FREE rung, never
+  // pitched as premium. Rendered on the About landing + the canonical
+  // premium-value surface (PricingPage). Lens labels tailor the headline to
+  // the reader (new DM → "a great town in seconds"; worldbuilder → "a living
+  // region you can run").
+  valueLadder: {
+    heading:  'Three rungs, one engine',
+    subhead:  'It generates a town in seconds, then it runs the region for years.',
+    lens: {
+      new:          'A great town in seconds — and a region that grows with you.',
+      intermediate: 'A town a week, then a campaign that runs itself.',
+      worldbuilder: 'A living region you can run for years.',
+    },
+    rungs: {
+      tries: {
+        eyebrow: 'Try it',
+        tier:    'No account',
+        body:    'Generate a coherent town up to town size, no signup. See the moat before you commit.',
+        cta:     'Forge a settlement',
+      },
+      saves: {
+        eyebrow: 'Save it',
+        tier:    'Free account',
+        // Full-size generation belongs to the FREE rung — size is not premium.
+        body:    'A free account generates ANY size — hamlet through metropolis — saves your work, and exports the PDF.',
+        cta:     'Create a free account',
+      },
+      simulates: {
+        eyebrow: 'Run it',
+        tier:    'Cartographer',
+        body:    'Advance time and the region runs for years: wars ignite and end, faiths rise, trade routes flip, and a chronicle writes itself. Off by default, opt-in, reversible.',
+        cta:     'See what the Realm unlocks',
+      },
+    },
   },
 
   // ── AI feature labels (with inline cost) ─────────────────────────────────
@@ -434,6 +519,11 @@ export const en = Object.freeze({
       headline: 'World Map unlocks with Cartographer.',
       body:     'Place settlements, draw routes, surface supply-chain stress. Your campaigns become a place.',
     },
+    // ── UX Phase 4 — the Realm hub locked-state teaser ───────────────────
+    map_realm_teaser: {
+      headline: 'The Realm is where your world comes alive.',
+      body:     'Advance time and watch wars ignite and end, faiths rise, and the chronicle write itself. Cartographer runs the living simulation across your whole campaign.',
+    },
     weekly_user: {
       headline: 'Three sessions in two weeks.',
       body:     'You’re using SettlementForge weekly. Cartographer pays for itself in two.',
@@ -447,21 +537,23 @@ export const en = Object.freeze({
   // ── Audience-led pricing tile copy (P122 / X-10) ─────────────────────────
   // The three tiers each get an audience-shifted pitch line that
   // PricingPage surfaces above the existing feature list.
+  // NOTE: size is FREE (free accounts reach metropolis), so NO pitch line here
+  // sells size/metropolis/capital as premium. Premium is the simulation.
   pricingPitch: {
     wanderer: {
-      lineNew:          'Three towns, fully prepped. Find out if this works for you.',
-      lineIntermediate: 'Three towns. Free forever. See if a session a week earns the upgrade.',
-      lineWorldbuilder: 'Try the engine. Three towns is enough to see if the moat is real.',
+      lineNew:          'Generate any town, full size, free. Find out if this works for you.',
+      lineIntermediate: 'Any size, free forever. See if a session a week earns the upgrade.',
+      lineWorldbuilder: 'Try the engine, full size. Three saves is enough to see if the moat is real.',
     },
     cartographer: {
-      lineNew:          'When you’re ready for a campaign instead of an evening: unlimited saves, every size.',
-      lineIntermediate: 'For DMs running a town a week. Unlimited saves, every size, full export.',
-      lineWorldbuilder: 'The worldbuilder’s tier: neighbour network, locks, drift, full export.',
+      lineNew:          'When you’re ready for a campaign instead of an evening: advance time and watch the region run.',
+      lineIntermediate: 'For DMs running a town a week. Advance time, link a campaign, let the chronicle write itself.',
+      lineWorldbuilder: 'The worldbuilder’s tier: the war layer, the pantheon, campaigns, and the chronicle.',
     },
     founder: {
-      lineNew:          'For DMs who already know they’ll build campaigns. Pay once, ship every settlement.',
+      lineNew:          'For DMs who already know they’ll build campaigns. Pay once, run every region.',
       lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 500 seats only.',
-      lineWorldbuilder: 'For DMs building campaigns. Pay once, ship every settlement you’ll ever run.',
+      lineWorldbuilder: 'For DMs running living regions. Pay once, ship every campaign you’ll ever run.',
     },
   },
 
@@ -573,13 +665,78 @@ export const en = Object.freeze({
   footer: {
     tagline:  'A simulator for Dungeon Masters.',
     antiAi:   'Simulated, not AI-generated.',
+    about:    'About',
     pricing:  'Pricing',
+    compendium: 'Compendium',
     gallery:  'Gallery',
     discord:  'Discord',
     privacy:  'Privacy',
     terms:    'Terms',
     contact:  'Contact',
     copyright: '© {year} SettlementForge',
+  },
+
+  // ── P9 — AuthModal premium blurb (simulation-led) ─────────────────────────
+  // Rewritten to lead with the SIMULATION, not storage. Size is free — a free
+  // account unlocks FULL-SIZE generation, so it sits on the free line, never
+  // the premium one.
+  authBlurb: {
+    freeLabel:    'Free account',
+    freeBody:     'Generate any size — hamlet through metropolis — save your work, and export the PDF.',
+    premiumLabel: 'Cartographer',
+    premiumBody:  'Advance time and run the region for years: the self-ending war, the living pantheon, campaigns, and a chronicle that writes itself.',
+  },
+
+  // ── P9 — About "The Living World" tab + landing thesis ────────────────────
+  // The About page is reframed as LANDING + HOW-TO around one thesis. The
+  // Living World tab names each premium system as a claim + a one-line
+  // "how it stays coherent" + the opt-in / off-by-default / reversible
+  // qualifier. Size is FREE and is never sold here as premium.
+  aboutLiving: {
+    thesis:      'It generates a town in seconds, then it runs the region for years.',
+    thesisSub:   'The static dossier is the start. Advance time and the whole region becomes a living, self-consistent simulation — wars that end themselves, faiths that rise, a chronicle that writes itself.',
+    premiumChip: 'Cartographer',
+    qualifier:   'Off by default · opt-in · reversible',
+    intro:       'These are the systems the simulation runs once you advance time. Each one is premium, opt-in, and off until you turn it on — a peacetime, non-campaign save renders exactly as it does today.',
+    systems: {
+      advanceTime: {
+        title:     'Advance Time',
+        claim:     'Push the world forward a month at a time and the whole region responds at once.',
+        coherence: 'Every change is derived from the same causal substrate the dossier already shows — nothing moves at random; each delta carries a "what changed and why".',
+      },
+      war: {
+        title:     'The self-ending war',
+        claim:     'Sieges form, coalitions gather, settlements fall — and wars burn themselves out.',
+        coherence: 'War drains the economy, which feeds war-exhaustion, which drives the realm back to peace. The homeostasis is the engine, not a script.',
+      },
+      pantheon: {
+        title:     'The living pantheon',
+        claim:     'Deities contest converts, win seats, and rise from cult to major across the region.',
+        coherence: 'Faith couples back into the world: alignment shifts corruption, temperament shifts aggression, rank shifts magic legality — the same constants the dossier reads.',
+      },
+      chronicle: {
+        title:     'The chronicle',
+        claim:     'Every advance writes itself into a scrubbable history of what happened and to whom.',
+        coherence: 'The chronicle is derived from the pulse record, not authored separately — it can only say what the simulation actually did.',
+      },
+    },
+  },
+
+  // ── P9 — Anon "Watch a region wake up" replay ─────────────────────────────
+  // A READ-ONLY, deterministic, pre-baked sequence over a small canned fixture,
+  // rendered through the EXISTING projections (no live engine, no rng). The
+  // anon teaser that lets a no-account user SEE the premium product.
+  replay: {
+    eyebrow:  'A region waking up',
+    title:    'Watch a region wake up',
+    subtitle: 'A pre-baked campaign, advanced four months. No account, no live engine — just the same read-outs the simulation produces.',
+    stepLabel: 'Month {step} of {total}',
+    prev:     'Back',
+    next:     'Advance a month',
+    restart:  'Restart',
+    footer:   'This is the living world. Cartographer runs it across your whole campaign.',
+    cta:      'See what the Realm unlocks',
+    empty:    'At peace.',
   },
 
   // P138 / AC-4 — Inline FAQ on the Account page. Each entry is a

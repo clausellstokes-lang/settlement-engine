@@ -20,6 +20,12 @@ import Button from '../primitives/Button.jsx';
 // the moat without scrolling.
 const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
 
+// P9 / §4.7 — "Watch a region wake up" read-only replay. Self-gates inside on
+// anon + no-settlement (same as the sample dossier), so it renders nothing once
+// the visitor has the real thing. Mounted below the sample dossier so the
+// teaser ladder reads: proof of the static dossier → proof of the LIVING world.
+const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
+
 export function WizardEmptyState({
   showHomeHero,
   showModePicker,
@@ -37,6 +43,9 @@ export function WizardEmptyState({
           <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
           <Suspense fallback={null}>
             <HomeSampleDossier />
+          </Suspense>
+          <Suspense fallback={null}>
+            <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
           </Suspense>
         </>
       )}

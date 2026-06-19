@@ -246,7 +246,54 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
           ))}
         </View>
       )}
+
+      {/* ── Rule & Succession (self-gating: regime lineage / conquest) ──── */}
+      <RuleAndSuccession lineage={p.lineage} occupied={vm?.liveWorld?.occupied || null} />
     </PageChrome>
+  );
+}
+
+/**
+ * Rule & Succession — the regime lineage (`previousGovernments`) with conquest
+ * provenance, plus the live occupation flag. Renders NOTHING when there's no
+ * lineage and no live occupation (byte-identical off-state for a settlement that
+ * has never changed hands).
+ */
+function RuleAndSuccession({ lineage, occupied }) {
+  if ((!lineage || lineage.length === 0) && !occupied) return null;
+  return (
+    <View style={{ marginTop: space.sm }} wrap={false}>
+      <HairRule />
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+        RULE &amp; SUCCESSION
+      </Text>
+      {occupied && (
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 3 }}>
+          <Tag tone="bad">OCCUPIED</Tag>
+          <Text style={{ ...type.body, fontSize: pt['9'], color: palette.bad, marginLeft: 4, flex: 1 }}>
+            Held under {occupied.occupier} by right of conquest
+            {occupied.sinceTick != null ? ` (since tick ${occupied.sinceTick})` : ''}.
+          </Text>
+        </View>
+      )}
+      {(lineage || []).map((g, i) => (
+        <View key={`lin-${i}`} style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
+          <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, flex: 1 }}>
+            {g.government || 'Prior government'}
+          </Text>
+          {g.cause && (
+            <Tag tone={g.cause === 'conquest' ? 'bad' : g.cause === 'coup' ? 'warn' : 'muted'}>
+              {humanize(g.cause)}
+            </Tag>
+          )}
+          {g.tick != null && (
+            <Text style={{ ...type.caption, color: palette.faint, fontSize: pt['7.5'], marginLeft: 4 }}>
+              tick {g.tick}
+            </Text>
+          )}
+        </View>
+      ))}
+    </View>
   );
 }
 

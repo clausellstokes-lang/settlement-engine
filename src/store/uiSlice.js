@@ -12,19 +12,34 @@
  *                   "Open in Table View" button in SummaryTabV2 (routed via
  *                   OutputContainer) and back to false by the close
  *                   affordance inside TableView.
+ *   detailLevel   — UX overhaul Phase 1. The single progressive-disclosure
+ *                   "altitude" axis ('guided' | 'standard' | 'expert' ↔
+ *                   Overview / Detail / Engine) every surface reads to decide
+ *                   how much engine depth to show. Defaults to 'guided'.
+ *                   UNLIKE the transient keys above this one IS persisted (a
+ *                   returning power user should stay at Engine) — see the
+ *                   `userPrefs.detailLevel` line in store/index.js partialize.
  *
  * The generic setUserPref(key, value) shape matches the call site the
  * Summary tab already speaks — `setUserPref('tableViewOpen', true)` — and
  * gives future transient prefs a home without minting a new slice each time.
  *
- * NOTE: intentionally left out of the persist `partialize` in store/index.js
- * so none of these prefs survive a reload.
+ * NOTE: the transient keys here are intentionally left out of the persist
+ * `partialize` in store/index.js so they do not survive a reload; `detailLevel`
+ * is the deliberate exception (explicitly persisted there).
  */
+
+/** The valid altitude rungs, in ascending depth. Frozen so callers can validate. */
+export const DETAIL_LEVELS = Object.freeze(['guided', 'standard', 'expert']);
+
+/** The default altitude rung (a new DM lands at Overview / guided). */
+export const DEFAULT_DETAIL_LEVEL = 'guided';
 
 export const createUiSlice = (set, get) => ({
   // ── State ────────────────────────────────────────────────────────────────
   userPrefs: {
     tableViewOpen: false,
+    detailLevel: DEFAULT_DETAIL_LEVEL,
   },
 
   // ── Actions ──────────────────────────────────────────────────────────────
@@ -34,6 +49,18 @@ export const createUiSlice = (set, get) => ({
     set(state => {
       if (!state.userPrefs) state.userPrefs = {};
       state.userPrefs[key] = value;
+    }),
+
+  /**
+   * Set the progressive-disclosure altitude ('guided' | 'standard' | 'expert').
+   * Ignores anything outside DETAIL_LEVELS so a bad value can't wedge the UI.
+   * @param {'guided'|'standard'|'expert'} level
+   */
+  setDetailLevel: (level) =>
+    set(state => {
+      if (!DETAIL_LEVELS.includes(level)) return;
+      if (!state.userPrefs) state.userPrefs = {};
+      state.userPrefs.detailLevel = level;
     }),
 
   /**

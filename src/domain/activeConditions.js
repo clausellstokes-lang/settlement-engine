@@ -273,7 +273,7 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   regional_religious_pressure: {
     label: 'Regional religious pressure',
     description: 'Religious authority or crisis is echoing through connected institutions.',
-    affectedSystems: ['public_legitimacy', 'social_trust', 'healing_capacity'],
+    affectedSystems: ['public_legitimacy', 'social_trust', 'healing_capacity', 'religious_authority'],
     defaultExpiresAtTicks: 6,
     defaultStatus: 'stable',
     defaultSeverity: 0.45,
@@ -309,6 +309,87 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultExpiresAtTicks: 6,
     defaultStatus: 'easing',
     defaultSeverity: 0.3,
+  },
+  // ── Geopolitical war layer (Feature A) — the AGGRESSOR's home conditions. Every
+  // pre-existing war archetype models the VICTIM; these model the cost a settlement
+  // pays to wage war. war_drain is the missing SOURCE of the economic-homeostasis
+  // loop (deriveEconomicCapacity subtracts severity×18 for any economic_capacity
+  // condition); it deliberately lists ONLY economic_capacity so it does not double-
+  // count with the trade/economy pressure archetypes in pressureModel.
+  war_drain: {
+    label: 'War drain',
+    description: 'Sustaining a campaign abroad is bleeding the home economy.',
+    affectedSystems: ['economic_capacity'],
+    defaultExpiresAtTicks: 9,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.5,
+  },
+  army_deployed: {
+    label: 'Army deployed',
+    description: 'The settlement\'s standing army is committed abroad, thinning the home garrison.',
+    affectedSystems: ['defense_readiness'],
+    defaultExpiresAtTicks: 9,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.5,
+  },
+  // The NON-REVERTING war-exhaustion SCAR (Z2a homeostasis). war_drain is a
+  // reverting condition (re-upserted each tick from the live front count, drifting
+  // and expiring like any condition); the SCAR is the lasting mark a long war leaves.
+  // It accumulates from a worldState ledger that ratchets up with sustained
+  // deployment and decays only SLOWLY when the war ends — so unlike a relationship
+  // (which mean-reverts ~12%/tick), a protracted campaign leaves a durable economic
+  // wound that keeps pushing the aggressor toward suing for peace. Lists ONLY
+  // economic_capacity (the homeostasis sink), like war_drain; the strength penalty is
+  // applied directly in settlementStrength. A long expiry so it lingers as a scar.
+  war_exhaustion: {
+    label: 'War exhaustion',
+    description: 'Years of campaigning have left a lasting wound on the war economy and the public will to fight.',
+    affectedSystems: ['economic_capacity'],
+    defaultExpiresAtTicks: 18,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.4,
+  },
+  // The recovery counterpart of occupation (polarity clone of siege_lifted): an
+  // occupied settlement has been liberated and is rebuilding its authority.
+  occupation_lifted: {
+    label: 'Occupation lifted',
+    description: 'A foreign occupation has ended; the settlement is restoring its own authority.',
+    affectedSystems: ['defense_readiness', 'public_legitimacy', 'trade_connectivity', 'ruling_authority'],
+    defaultExpiresAtTicks: 6,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.3,
+  },
+  // Sending relief to a besieged ally strains capacity (alliance_burden shape).
+  relief_burden: {
+    label: 'Relief burden',
+    description: 'Marching relief to a besieged ally is straining local capacity.',
+    affectedSystems: ['defense_readiness', 'trade_connectivity', 'public_legitimacy'],
+    defaultExpiresAtTicks: 5,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.45,
+  },
+  // ── Geopolitical war layer (Feature B) — trade war. ─────────────────────────
+  // A buyer realigning its primary supplier (the WINNER side's market gain is a
+  // mild local adjustment as new trade lanes settle in). Reversible, light.
+  trade_realignment: {
+    label: 'Trade realignment',
+    description: 'A new primary supplier is reshaping local trade flows.',
+    affectedSystems: ['trade_connectivity', 'public_legitimacy'],
+    defaultExpiresAtTicks: 5,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.4,
+  },
+  // A vassal forced by its overlord into a dictated trade allocation. Routes the
+  // coercion through the vassal's trade/legitimacy capacity (the SAME systems
+  // vassal_extraction strains) so vassalStrain rises and vassal_rebellion stays
+  // reachable — a ruinous forced trade is not a silent one-way trap.
+  vassal_trade_coercion: {
+    label: 'Vassal trade coercion',
+    description: 'The overlord dictates the trade allocation, straining the local economy.',
+    affectedSystems: ['trade_connectivity', 'public_legitimacy', 'faction_power'],
+    defaultExpiresAtTicks: 7,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.5,
   },
 });
 

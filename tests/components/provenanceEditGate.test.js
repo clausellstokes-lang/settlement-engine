@@ -1,20 +1,18 @@
 /**
- * provenanceEditGate.test.js — owner requirement: the Provenance card
- * (Seed / Generated / Last edited / Canonized / Last export / Campaign)
- * is edit-mode chrome. It must NOT render in the read-only View — only
- * when "Edit Dossier" is active.
+ * provenanceEditGate.test.js — the Provenance card after the Workshop reorg
+ * (UX overhaul Phase 6, plan §4.3).
  *
- * SettlementDetail historically rendered ProvenanceBlock twice: once
- * inside the `{editMode && (<>…</>)}` chrome block and once inside the
- * `{!editMode && (…)}` read view. The read-only site was removed
- * (2026-06-11); these tests pin that removal structurally, in the same
- * source-level style as noNativeDialogs.test.js (mounting the full
- * SettlementDetail would require mocking the entire store).
+ * History: SettlementDetail rendered ProvenanceBlock as edit-mode chrome (and,
+ * earlier, in the read-only View too — that read site was removed 2026-06-11).
+ * Phase 6 then moved it into the editor Workshop as card #7 "Provenance & Links"
+ * — a READ surface (the seed / timestamps / campaign link are the free→premium
+ * teaser), so it is no longer SettlementDetail-local edit-only chrome.
  *
- * Markers (each unique in SettlementDetail.jsx at the relevant range):
- *   • `{editMode && (<>`  — edit-mode chrome gate open
- *   • `</>)}`             — first occurrence after the open = gate close
- *   • `{!editMode && (`   — read-only View gate open
+ * These tests pin the NEW home structurally (mounting the full tree would mean
+ * mocking the whole store):
+ *   • ProvenanceBlock is rendered by exactly ONE component — the Workshop.
+ *   • SettlementDetail no longer renders it directly.
+ *   • The Workshop hosts it inside its "provenance-links" card.
  */
 
 import { describe, expect, test } from 'vitest';
@@ -23,14 +21,11 @@ import { join } from 'node:path';
 
 const COMPONENTS_ROOT = join(process.cwd(), 'src', 'components');
 const DETAIL_PATH = join(COMPONENTS_ROOT, 'SettlementDetail.jsx');
+const WORKSHOP_PATH = join(COMPONENTS_ROOT, 'settlement', 'Workshop.jsx');
 // Factory, not a shared constant — `g`-flagged regexes are stateful
 // (`lastIndex` persists across .test() calls), which would corrupt the
 // per-file filter below.
 const renderSite = () => /<ProvenanceBlock\b/g;
-
-const EDIT_GATE_OPEN = '{editMode && (<>';
-const EDIT_GATE_CLOSE = '</>)}';
-const READ_GATE_OPEN = '{!editMode && (';
 
 function walk(dir) {
   return readdirSync(dir).flatMap(entry => {
@@ -41,39 +36,28 @@ function walk(dir) {
   });
 }
 
-describe('ProvenanceBlock is exclusively Edit Dossier chrome', () => {
-  test('SettlementDetail.jsx is the only component that renders it', () => {
+describe('ProvenanceBlock lives in the editor Workshop (Phase 6)', () => {
+  test('the Workshop is the only component that renders it', () => {
     const renderers = walk(COMPONENTS_ROOT)
       .filter(path => renderSite().test(readFileSync(path, 'utf8')));
 
-    expect(renderers).toEqual([DETAIL_PATH]);
+    expect(renderers).toEqual([WORKSHOP_PATH]);
   });
 
-  test('the single render site sits inside the editMode gate', () => {
+  test('SettlementDetail no longer renders ProvenanceBlock directly', () => {
     const source = readFileSync(DETAIL_PATH, 'utf8');
+    expect(source).not.toMatch(renderSite());
+  });
+
+  test('the Workshop hosts it inside the Provenance & Links card', () => {
+    const source = readFileSync(WORKSHOP_PATH, 'utf8');
 
     const sites = [...source.matchAll(renderSite())];
     expect(sites).toHaveLength(1);
 
-    const editOpen = source.indexOf(EDIT_GATE_OPEN);
-    const editClose = source.indexOf(EDIT_GATE_CLOSE, editOpen);
-    expect(editOpen).toBeGreaterThan(-1);
-    expect(editClose).toBeGreaterThan(editOpen);
-
-    const siteIdx = sites[0].index;
-    expect(siteIdx).toBeGreaterThan(editOpen);
-    expect(siteIdx).toBeLessThan(editClose);
-  });
-
-  test('the read-only View block contains no ProvenanceBlock', () => {
-    const source = readFileSync(DETAIL_PATH, 'utf8');
-
-    const readOpen = source.indexOf(READ_GATE_OPEN);
-    expect(readOpen).toBeGreaterThan(-1);
-
-    // The only render site is inside the edit gate, which closes before
-    // the read-only gate opens — so everything from the read gate to EOF
-    // must be ProvenanceBlock-free.
-    expect(source.slice(readOpen)).not.toMatch(renderSite());
+    // The single render site sits after the card's id marker.
+    const cardIdx = source.indexOf("id=\"provenance-links\"");
+    expect(cardIdx).toBeGreaterThan(-1);
+    expect(sites[0].index).toBeGreaterThan(cardIdx);
   });
 });

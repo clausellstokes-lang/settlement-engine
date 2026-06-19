@@ -8,6 +8,7 @@ import {isMobile} from '../tabConstants';
 import {NPCCategoryGroup, NPCRelCard2} from '../npcComponents';
 
 import {NarrativeNote} from '../NarrativeNote';
+import { NpcAgencySection } from '../../dossier/EngineSections.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
 
@@ -127,6 +128,11 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
           </div>
         </Collapsible>
       )}
+
+      {/* UX overhaul Phase 2 — NPC agency disclosure: goals / ambition /
+          rivalries / consequenceIfRemoved. Self-gates to nothing when no NPC
+          carries agency fields. */}
+      <NpcAgencySection npcs={npcs} />
 </div>
   );
 }

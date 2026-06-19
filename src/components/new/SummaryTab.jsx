@@ -4,9 +4,34 @@ import { TIER_LABELS, catColor } from './design';
 import { serif, TabIntro } from './Primitives';
 import { BODY } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
-import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
+import { deriveFoodBalance, deriveDefensePosture } from '../../domain/display/dossierViewModel.js';
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
+import ReadSystemStateBar from '../settlement/ReadSystemStateBar.jsx';
+import WarFaithSection from '../settlement/WarFaithSection.jsx';
+import WhatChangedPanel from '../settlement/WhatChangedPanel.jsx';
+import { useSettlementLiveWorld } from '../../hooks/useSettlementLiveWorld.js';
 import Button from '../primitives/Button.jsx';
+
+// ── Live Faith & War block (UX overhaul Phase 2) ──────────────────────────────
+// REPLACED the thin inline FaithWarBlock with the fuller, self-gating
+// WarFaithSection (strategy posture, aggressiveness + named inputs, war-exhaustion,
+// disposition W/L, trade-war prize, coalition/siege/occupation, Faith Effects).
+// This wrapper resolves the owning campaign's LIVE worldState via the shared
+// useSettlementLiveWorld hook (same lookup the old block did) and hands the pure
+// projections down. Self-gates to nothing for a peaceful, deity-free, non-campaign
+// town — byte-identical off-state.
+function FaithWarBlock({ settlement, saveId }) {
+  const { worldState, regionalGraph, nameFor } = useSettlementLiveWorld(saveId);
+  return (
+    <WarFaithSection
+      settlement={settlement}
+      settlementId={saveId || settlement?.id || settlement?.config?.id}
+      worldState={worldState}
+      regionalGraph={regionalGraph}
+      nameFor={nameFor}
+    />
+  );
+}
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -89,7 +114,7 @@ function SitTile({ icon, label, value, color, sub }) {
 }
 
 // ── Main component ────────────────────────────────────────────────────────────
-function SummaryTab({ settlement:r }) {
+function SummaryTab({ settlement:r, saveId=null }) {
   const [copied,setCopied]=useState(false);
   const [settingOpen,setSettingOpen]=useState(false);
   const [hooksOpen,setHooksOpen]=useState(true);
@@ -144,8 +169,11 @@ function SummaryTab({ settlement:r }) {
   const ecoTileColor=eco.prosperity==='Thriving'||eco.prosperity==='Prosperous'?'#1a5a28':eco.prosperity==='Struggling'||eco.prosperity==='Poor'||eco.prosperity==='Impoverished'?'#8b1a1a':'#a0762a';
   const ecoSub=foodCanon.deficit>0?`Food deficit ${foodCanon.deficitPct}%`:foodCanon.surplus>0?'Food surplus':'';
 
-  // Defense tile
-  const defScore=dp.scores?Math.round((dp.scores.military+dp.scores.monster+dp.scores.internal+dp.scores.economic+dp.scores.magical)/5):null;
+  // Defense tile — use the canonical posture helper so the screen and PDF
+  // share ONE formula (rounded mean of ALL numeric score keys, incl.
+  // `disaster`). The old inline 5-key mean diverged from the PDF/canon average
+  // and rendered NaN when a score key was absent.
+  const defScore=deriveDefensePosture(r).scoreAvg;
   const defColor=defScore>=70?'#1a5a28':defScore>=45?'#a0762a':defScore>=25?'#8a4010':'#8b1a1a';
 
   // Power stability color
@@ -155,6 +183,12 @@ function SummaryTab({ settlement:r }) {
   return (
     <div>
       <TabIntro tabKey="summary" />
+
+      {/* ── STATE AT A GLANCE (promoted read-view 4-dim strip) ───────────────
+          UX overhaul Phase 2: the SystemStateBar twin, derived purely from the
+          settlement, promoted OUT of premium editMode to the top of every read
+          view at every altitude — the clean 4-dim glance for a new DM. */}
+      <ReadSystemStateBar settlement={r} />
 
       {/* ── IDENTITY HEADER ──────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 70%,#1c1409 100%)',borderRadius:8,padding:isMobile?'14px':'16px 20px',marginBottom:16}}>
@@ -208,6 +242,19 @@ function SummaryTab({ settlement:r }) {
         <SitTile icon="" label="Economy" value={eco.prosperity||', '} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split(', ')[0].trim()}/>
         <SitTile icon="" label="Defense" value={dp.readiness?.label||', '} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
       </div>
+
+      {/* ── FAITH & WAR (live worldState; self-gates when at peace) ───────── */}
+      <FaithWarBlock settlement={r} saveId={saveId} />
+
+      {/* ── WHAT CHANGED & WHY (post-advance; self-gates without a prior snapshot) ──
+          UX overhaul Phase 2: compareCausalState before→after + populationHistory.
+          Renders nothing for a freshly-generated, never-advanced settlement. */}
+      <WhatChangedPanel
+        settlement={r}
+        priorSettlement={r.priorSettlement || null}
+        before={r.priorCausalState || null}
+        populationHistory={r.populationHistory}
+      />
 
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}
       <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',borderRadius:8,padding:'12px 14px',marginBottom:12}}>

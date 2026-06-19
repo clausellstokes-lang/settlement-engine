@@ -25,16 +25,18 @@ import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 
 // Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
 // This map mirrors those ceilings so the auth-gating layer never drifts:
-//   wanderer/free    → town       (pricing.js:85)
-//   cartographer/    → capital    (pricing.js:102)
-//   founder lifetime → capital    (pricing.js:119)
+//   wanderer/free    → metropolis  (a free ACCOUNT generates any size — no size paywall)
+//   cartographer/    → metropolis  (size is not a premium lever)
+//   founder lifetime → metropolis
 //
-// Anonymous gets the same ceiling as Wanderer (town) so the funnel hero can
-// preview at the same tier the user would reach by signing up.
+// Anonymous caps at `town` (NOT the same as Wanderer anymore): a free account is
+// what unlocks full-size generation, so signing up is the first funnel step. The
+// PREMIUM product is the living simulation (advance-time / campaigns / custom
+// content / gallery), never settlement size or generation depth.
 const TIER_GATE = {
-  anon:    { maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
-  free:    { maxTier: 'town',    maxSaves: 3,        neighbour: false, export: true,  mapChains: false, customContent: false },
-  premium: { maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true  },
+  anon:    { maxTier: 'town',       maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
+  free:    { maxTier: 'metropolis', maxSaves: 3,        neighbour: false, export: true,  mapChains: false, customContent: false },
+  premium: { maxTier: 'metropolis', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true  },
 };
 
 // `capital` is the legacy tier name that lines up with pricing.js's maxSize

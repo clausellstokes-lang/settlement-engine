@@ -56,6 +56,7 @@ import { scrubUndoneEvent } from '../domain/events/undoEvent.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 import { eligibleCustomContent } from '../domain/customContentSchema.js';
+import { buildRegistryFromStore } from '../lib/customRegistry.js';
 import {
   CRISIS_EVENT_TYPES,
   crisisTwinFor,
@@ -1316,6 +1317,55 @@ export const createSettlementSlice = (set, get) => ({
   },
 
   /**
+   * Canonize a saved settlement BY ID — the Settlements-list affordance. The
+   * dossier canonize() only works on the loaded activeSaveId; this lets the
+   * library canonize any draft in one tap. Mirrors canonize()'s semantics
+   * exactly: phase→canon, the draft event log resets to an empty timeline, and
+   * canonizedAt is stamped. If the save is the one currently loaded, the live
+   * slice is kept in sync. No-ops on a missing or already-canon save. Returns
+   * whether anything changed.
+   */
+  canonizeSavedSettlement: (id) => {
+    const now = new Date().toISOString();
+    let changed = false;
+    let fromPhase = 'draft';
+    let campaignStateOut = null;
+    let settlementSnapshot = null;
+    set(state => {
+      const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
+      if (idx === -1) return;
+      const save = state.savedSettlements[idx];
+      const current = save.campaignState || {};
+      fromPhase = typeof current.phase === 'string' ? current.phase : 'draft';
+      if (fromPhase === 'canon') return; // already canon — nothing to do
+      const campaignState = { ...current, phase: 'canon', eventLog: [], canonizedAt: now, editedAt: now };
+      state.savedSettlements[idx] = { ...save, campaignState, timestamp: now };
+      if (String(state.activeSaveId || '') === String(id)) {
+        state.phase = 'canon';
+        state.eventLog = [];
+        state.canonizedAt = now;
+      }
+      changed = true;
+      campaignStateOut = cloneJson(campaignState);
+      settlementSnapshot = save.settlement ? cloneJson(save.settlement) : null;
+    });
+    if (!changed) return false;
+    // Single persist path — the campaign_state column carries canon; the panel's
+    // savedSettlements subscription refreshes the row, so no optimistic re-read.
+    persistSaveUpdate(id, { campaignState: campaignStateOut, timestamp: now });
+    // Analytics — fire-and-forget, identical to canonize().
+    import('../lib/analytics.js').then(({ track, EVENTS }) => {
+      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'canon' });
+    }).catch(() => {});
+    if (settlementSnapshot) {
+      import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
+        captureFingerprint('canonized', settlementSnapshot, { settlementUuid: id });
+      }).catch(() => {});
+    }
+    return true;
+  },
+
+  /**
    * Persist the live lifecycle (phase / eventLog / canonizedAt) + settlement
    * to the active save, so deliberate lifecycle changes (canonize, uncanonize)
    * survive reload and the library reflects them. Mirrors applyEvent's persist.
@@ -1514,6 +1564,58 @@ export const createSettlementSlice = (set, get) => ({
 
   /** Dismiss the successor prompt without taking action. */
   dismissPendingSuccession: () => set(state => { state.pendingSuccession = null; }),
+
+  /**
+   * Assign (or clear) the current settlement's primary deity — the STORE half
+   * of the embed-on-assign bridge (Feature D / R1). This is the ONLY place a
+   * deity ref is resolved against customContent: we look the authored deity up
+   * here (where the store is available), build a self-contained snapshot, and
+   * dispatch SET_PRIMARY_DEITY with the snapshot already in the payload. The
+   * pure mutate.js handler commits it; the pulse/derivers then read ONLY
+   * `config.primaryDeitySnapshot`, never the store — preserving the headless /
+   * single-snapshot determinism contract.
+   *
+   * Pass a falsy `deityRefId` to clear the assignment (returns to dormant).
+   * Premium gating is enforced at the UI (canUseCustomContent) — a free user
+   * who somehow dispatched this still can't advance time, so the assignment is
+   * inert (D.0). Returns the resulting log entry, or null if nothing happened.
+   *
+   * @param {string|null} deityRefId  a `custom:<localUid>` ref, or null to clear
+   */
+  setPrimaryDeity: (deityRefId) => {
+    const state = get();
+    if (!state.settlement) return null;
+
+    if (!deityRefId) {
+      return state.applyEvent({
+        type: 'SET_PRIMARY_DEITY',
+        targetId: null,
+        payload: { deityRef: null, snapshot: null },
+      });
+    }
+
+    // Resolve the ref → authored deity → frozen snapshot. Resolution happens
+    // HERE (intent time, store layer), never inside the pulse.
+    const registry = buildRegistryFromStore(get);
+    const entry = registry.resolve(deityRefId);
+    const raw = entry?.raw;
+    if (!raw) {
+      // Unknown ref — refuse rather than embed a half-resolved record.
+      return null;
+    }
+    const snapshot = {
+      name: raw.name,
+      alignmentAxis: raw.alignmentAxis,
+      temperamentAxis: raw.temperamentAxis,
+      rankAxis: raw.rankAxis,
+      ...(raw.domain ? { domain: raw.domain } : {}),
+    };
+    return state.applyEvent({
+      type: 'SET_PRIMARY_DEITY',
+      targetId: deityRefId,
+      payload: { deityRef: deityRefId, snapshot },
+    });
+  },
 
   /**
    * Commit the currently-pending preview event. This is the audit's

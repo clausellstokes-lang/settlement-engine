@@ -3,6 +3,7 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
 import { isMobile } from '../tabConstants';
 import { NarrativeNote } from '../NarrativeNote';
+import { PowerSuccessionSection } from '../../dossier/EngineSections.jsx';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
@@ -302,6 +303,11 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
           })}
         </Section>
       )}
+
+      {/* UX overhaul Phase 2 — ruler identity, coup-risk forecast (coupContenders),
+          government lineage (previousGovernments / conquest provenance). Self-gates
+          to nothing for a placeholder with no ruler, challengers, or lineage. */}
+      <PowerSuccessionSection settlement={s} />
 
     </div>
   );

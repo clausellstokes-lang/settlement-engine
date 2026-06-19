@@ -59,6 +59,23 @@ export async function publishSettlement(settlementId, metadata = null) {
   return data; // slug string
 }
 
+/**
+ * Fetch a clone-ready, server-sanitized dossier for import. Server-gated on
+ * gallery_importable + is_public + auth (migration 048): returns null when the
+ * dossier isn't importable / not found / the caller is anonymous. The payload
+ * is the SAME sanitized projection the gallery page shows (never raw data, never
+ * the generation seed) — importing exposes nothing the viewer didn't already see.
+ */
+export async function fetchDossierForImport(slug) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  if (!slug || typeof slug !== 'string') return null;
+  const { data, error } = await supabase.rpc('import_gallery_dossier', { dossier_slug: slug });
+  if (error) throw new Error(error.message || 'Import fetch failed');
+  const row = Array.isArray(data) ? data[0] : data;
+  if (!row) return null;
+  return { id: row.id, name: row.name, tier: row.tier, settlement: row.data };
+}
+
 /** Remove from the gallery. Slug is preserved server-side for re-share. */
 export async function unpublishSettlement(settlementId) {
   if (!isConfigured) throw new Error('Supabase not configured');
@@ -454,6 +471,24 @@ function sanitizeChronicle(entries) {
   return entries.map(sanitizeChronicleEntry).filter(Boolean).slice(-CHRONICLE_LIMIT);
 }
 
+// ── Public realm-arc summary (§S4) ───────────────────────────────────────────
+// The campaign's war/pantheon epic ("The Ascendancy of X", "The War of Y") is a
+// PUBLIC-SAFE digest DERIVED from the already-public ledgers (pantheon tiers + war
+// state) — NOT the raw chronicle, which is DM-private and stripped by both
+// sanitizers. It rides its OWN column (gallery_realm_arc_summary), separate from
+// the settlement `data` (which toPublicSafe would strip via /chronicle/i if the
+// narrative lived inside it). We re-clamp it to a plain bounded scalar here,
+// defense in depth, so a drifted/malicious row can never smuggle markup or an
+// unbounded blob through this field.
+const REALM_ARC_SUMMARY_LIMIT = 600;
+
+function sanitizeRealmArcSummary(value) {
+  if (typeof value !== 'string') return '';
+  // Plain text only — strip any angle brackets so the digest can never carry
+  // markup into the gallery page, and bound the length.
+  return value.replace(/[<>]/g, '').trim().slice(0, REALM_ARC_SUMMARY_LIMIT);
+}
+
 function sanitizeDossier(row) {
   return {
     id:           row.id,
@@ -467,10 +502,15 @@ function sanitizeDossier(row) {
     // The event chronicle (separate allowlisted column, migration 032) —
     // deliberately NOT routed through toPublicSafe; see sanitizeChronicle.
     chronicle:    sanitizeChronicle(row.chronicle),
+    // §S4 — the public-safe realm-arc digest (a derived scalar, NOT the raw
+    // chronicle). Its own column, re-clamped to plain bounded text here.
+    realmArcSummary: sanitizeRealmArcSummary(row.gallery_realm_arc_summary),
     // Owner opted to reveal DM-private content — the public viewer must render in
     // DM mode (not player view), or the DM tabs/secrets stay hidden despite the
     // data being present. See PublicDossierView.
     shareDm:      row.gallery_share_dm === true,
+    // Owner opt-in (migration 047): may other users clone this into their library?
+    importable:   row.gallery_importable === true,
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
@@ -568,6 +608,18 @@ function galleryMetadataPatch(metadata = {}) {
   // gallery RPC honors this flag (see migration 026).
   if (metadata.shareDm !== undefined) {
     patch.gallery_share_dm = metadata.shareDm === true;
+  }
+  // Owner opt-in: let other users import (clone) this public dossier into their
+  // own library. Off by default; the import RPC honors this flag (migration 047).
+  if (metadata.importable !== undefined) {
+    patch.gallery_importable = metadata.importable === true;
+  }
+  // §S4 — the public-safe realm-arc digest (war/pantheon epic). A DERIVED scalar,
+  // not the raw chronicle. Sanitized to plain bounded text so the gallery row can
+  // never carry markup or an unbounded blob.
+  if (metadata.realmArcSummary !== undefined) {
+    const summary = sanitizeRealmArcSummary(String(metadata.realmArcSummary || ''));
+    patch.gallery_realm_arc_summary = summary || null;
   }
   return patch;
 }

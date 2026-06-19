@@ -173,7 +173,13 @@ export const TIERS = Object.freeze({
     billing:      'forever',
     seatLimit:    null,                   // unlimited seats
     saveLimit:    3,
-    maxSize:      'town',                 // anonymous now also gets town
+    maxSize:      'metropolis',           // free ACCOUNTS generate any size up to
+                                          // metropolis — size is NOT a paywall. The
+                                          // premium product is the living simulation
+                                          // (advance-time/campaigns/custom content),
+                                          // never settlement size. (Anon still caps
+                                          // at town — see authSlice TIER_GATE — so a
+                                          // free account is what unlocks full size.)
     features: {
       neighbourhoodSystem: false,
       pdfExport:           true,
@@ -191,7 +197,7 @@ export const TIERS = Object.freeze({
     monthlyCredits: 30,
     seatLimit:    null,
     saveLimit:    Infinity,
-    maxSize:      'capital',
+    maxSize:      'metropolis',           // size is not a premium lever; free reaches it too
     features: {
       neighbourhoodSystem: true,
       pdfExport:           true,
@@ -209,7 +215,7 @@ export const TIERS = Object.freeze({
     oneTimeCredits: 30,
     seatLimit:    500,
     saveLimit:    Infinity,
-    maxSize:      'capital',
+    maxSize:      'metropolis',           // size is not a premium lever; free reaches it too
     features: {
       neighbourhoodSystem: true,
       pdfExport:           true,

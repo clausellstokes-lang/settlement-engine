@@ -6,37 +6,13 @@ import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } fro
 import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
+// UX overhaul Phase 6 — the 17 archetypes moved to a shared module so the
+// promoted top-level Character card and this legacy slider dropdown read the
+// SAME data (archetypePatch writes the identical config patch → byte-identical).
+import { ARCHETYPES, ARCHETYPE_GROUPS, archetypePatch } from './generate/characterPresets.js';
 
 const PARCHMENT=swatch['#F7F0E4'];
 
-const ARCHETYPES=[
-  {key:'balanced',name:'Balanced',desc:'No dominant characteristic',threat:'frontier',e:50,m:50,mg:50,r:50,c:50},
-  {key:'merchant_republic',name:'Merchant Republic',desc:'Trade hub; guild security',threat:'heartland',e:82,m:38,mg:42,r:32,c:62},
-  {key:'trade_crossroads',name:'Trade Crossroads',desc:'Major overland hub; active guilds',threat:'heartland',e:85,m:55,mg:45,r:40,c:55},
-  {key:'mining_colony',name:'Mining Colony',desc:'Resource extraction; high military',threat:'frontier',e:68,m:72,mg:22,r:35,c:52},
-  {key:'military_fortress',name:'Military Fortress',desc:'Heavily garrisoned; spartan',threat:'frontier',e:28,m:92,mg:18,r:42,c:28},
-  {key:'frontier_outpost',name:'Frontier Outpost',desc:'Small post on edge of civilisation',threat:'frontier',e:35,m:80,mg:25,r:38,c:40},
-  {key:'besieged_holdout',name:'Besieged Holdout',desc:'Under constant threat; fortified by necessity',threat:'plagued',e:25,m:88,mg:32,r:65,c:35},
-  {key:'plague_of_beasts',name:'Embattled: Creature Threat',desc:'Hostile incursion; survival economy',threat:'plagued',e:22,m:75,mg:38,r:78,c:48},
-  {key:'theocracy',name:'Theocracy',desc:'Church controls civic life',threat:'heartland',e:38,m:52,mg:35,r:92,c:18},
-  {key:'holy_sanctuary',name:'Holy Sanctuary',desc:'Peaceful pilgrimage centre',threat:'heartland',e:35,m:22,mg:38,r:95,c:15},
-  {key:'crusader_chapter',name:'Crusader Chapter',desc:'Faith and force unified',threat:'frontier',e:32,m:82,mg:28,r:82,c:18},
-  {key:'mage_city',name:'Mage City',desc:'Arcane research centre',threat:'heartland',e:62,m:28,mg:92,r:22,c:38},
-  {key:'arcane_academy',name:'Arcane Academy',desc:'Magical education above all',threat:'heartland',e:52,m:32,mg:96,r:28,c:35},
-  {key:'monster_hunters',name:"Monster Hunters' Lodge",desc:'Magic and military vs creatures',threat:'plagued',e:42,m:72,mg:68,r:38,c:30},
-  {key:'lawless_frontier',name:'Lawless Frontier',desc:'Criminal networks fill the vacuum',threat:'frontier',e:42,m:58,mg:30,r:28,c:82},
-  {key:'criminal_haven',name:'Criminal Haven',desc:'The guild IS the government',threat:'heartland',e:72,m:25,mg:35,r:20,c:90},
-  {key:'safe_province_capital',name:'Safe Province Capital',desc:'Peaceful administrative centre',threat:'heartland',e:68,m:42,mg:48,r:55,c:38},
-];
-const ARCHETYPE_GROUPS=[
-  {label:'Neutral',keys:['balanced']},
-  {label:'Economic',keys:['merchant_republic','trade_crossroads','mining_colony']},
-  {label:'Military',keys:['military_fortress','frontier_outpost','besieged_holdout','plague_of_beasts']},
-  {label:'Religious',keys:['theocracy','holy_sanctuary','crusader_chapter']},
-  {label:'Arcane',keys:['mage_city','arcane_academy','monster_hunters']},
-  {label:'Criminal',keys:['lawless_frontier','criminal_haven']},
-  {label:'Civic',keys:['safe_province_capital']},
-];
 const PRIORITIES=[
   {key:'priorityEconomy',label:'Economy',accent:'#a0762a'},
   {key:'priorityMilitary',label:'Military',accent:'#8b1a1a'},
@@ -63,8 +39,8 @@ function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode})
   const[applied,setApplied]=useState(null);
   const apply=e=>{
     const key=e.target.value;if(!key)return;
-    const arc=ARCHETYPES.find(a=>a.key===key);if(!arc)return;
-    updateConfig({priorityEconomy:arc.e,priorityMilitary:arc.m,priorityMagic:arc.mg,priorityReligion:arc.r,priorityCriminal:arc.c,monsterThreat:arc.threat});
+    const patch=archetypePatch(key);if(!patch)return;
+    updateConfig(patch);
     setApplied(key);e.target.value='';
   };
   return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
@@ -470,9 +446,17 @@ export default function ConfigurationPanel(){
           </Sel>
         </div>
       </div>
-      <SliderPanel config={config} updateConfig={updateConfig} randomSliderMode={randomSliderMode} setRandomSliderMode={setRandomSliderMode}/>
-      <div style={{marginTop:10}}><Collapsible title=" Nearby Resources" status={config.nearbyResourcesRandom!==false?' Random':(config.nearbyResources?.length??0)+' selected'}><NearbyResourcesPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
-      <div style={{marginTop:6}}><Collapsible title=" Settlement Stress" status={config.selectedStressesRandom!==false?' Random':(config.selectedStresses?.length??0)+' selected'}><StressPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
+      {/* ── Fine-tune (UX overhaul Phase 6) ─────────────────────────────────
+            The priority sliders + the Character archetype dropdown + nearby
+            resources + stress collapse into ONE "Fine-tune" disclosure so the
+            Foundations above read as a clean first surface for a new DM, while
+            the depth stays one tap away. The controls are unchanged — this is a
+            layout reshuffle, byte-identical to generation. */}
+      <Collapsible title="Fine-tune — priorities, resources, stress" status="optional">
+        <SliderPanel config={config} updateConfig={updateConfig} randomSliderMode={randomSliderMode} setRandomSliderMode={setRandomSliderMode}/>
+        <div style={{marginTop:10}}><Collapsible title=" Nearby Resources" status={config.nearbyResourcesRandom!==false?' Random':(config.nearbyResources?.length??0)+' selected'}><NearbyResourcesPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
+        <div style={{marginTop:6}}><Collapsible title=" Settlement Stress" status={config.selectedStressesRandom!==false?' Random':(config.selectedStresses?.length??0)+' selected'}><StressPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
+      </Collapsible>
     </div>
   </div>;
 }

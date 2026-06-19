@@ -60,9 +60,16 @@ import { defenseLedger } from './defenseLedger.js';
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 /**
- * The 14 canonical system variables per the roadmap. Frozen so the
+ * The 15 canonical system variables per the roadmap. Frozen so the
  * shape of the substrate is stable; consumers can rely on iterating
  * this array to cover every dimension.
+ *
+ * `economic_capacity` (15th) is the live "war-affordability / economic slack"
+ * dial added for the geopolitical war layer (OQ7=A, docs/GEOPOLITICAL_WAR_LAYER.md
+ * Phase 0): economicState.prosperity/economicComplexity are generation-frozen, so
+ * they seed a BASELINE that active conditions (war_drain / vassal_extraction /
+ * market_shock / occupation extraction) move live — the seam the homeostasis loop
+ * and the trade-war contest read. Distinct from trade_connectivity (routes/chains).
  */
 export const SYSTEM_VARIABLES = Object.freeze([
   'food_security',
@@ -79,6 +86,7 @@ export const SYSTEM_VARIABLES = Object.freeze([
   'infrastructure_condition',
   'magical_stability',
   'social_trust',
+  'economic_capacity',
 ]);
 
 /**
@@ -393,6 +401,46 @@ function deriveTradeConnectivity(s) {
   return { score, contributors };
 }
 
+// economic_capacity — live war-affordability / economic slack. prosperity +
+// economicComplexity are generation-frozen, so they seed the BASELINE; active
+// conditions (war_drain / vassal_extraction / market_shock / occupation
+// extraction) move it live. This — NOT the frozen prosperity string and NOT
+// trade_connectivity — is what the war homeostasis loop and the trade-war
+// contest read. (OQ7=A; docs/GEOPOLITICAL_WAR_LAYER.md Phase 0.)
+const PROSPERITY_BASE = Object.freeze({
+  impoverished: 22, subsistence: 28, struggling: 30, poor: 38, modest: 46,
+  moderate: 50, comfortable: 62, prosperous: 74, wealthy: 86, thriving: 88,
+});
+/** @param {any} s */
+function deriveEconomicCapacity(s) {
+  /** @type {any[]} */
+  const contributors = [];
+  const eco = s.economicState || {};
+  const prosperity = String(eco.prosperity || '').trim();
+  const base = /** @type {Record<string, number>} */ (PROSPERITY_BASE)[prosperity.toLowerCase()] ?? 50;
+  let score = base;
+  push(contributors, 'economicState.prosperity', prosperity || 'unknown', base - 50,
+    prosperity ? `Prosperity is ${prosperity}.` : 'Prosperity unrecorded — neutral baseline.');
+
+  // Diversified economies absorb shocks; concentrated/specialized ones are brittle.
+  const complexity = String(eco.economicComplexity || '').toLowerCase();
+  if (/diversified/.test(complexity)) {
+    score += 6; push(contributors, 'economicState.economicComplexity', 'diversified', +6, 'A diversified economy is resilient.');
+  } else if (/concentrated|specialized/.test(complexity)) {
+    score -= 6; push(contributors, 'economicState.economicComplexity', 'concentrated', -6, 'A concentrated economy is brittle.');
+  }
+
+  // Active conditions move economic capacity live — the war-layer seam.
+  for (const cond of deriveAllActiveConditions(s)) {
+    if (!cond.affectedSystems.includes('economic_capacity')) continue;
+    const magnitude = Math.round(cond.severity * 18);
+    score -= magnitude;
+    push(contributors, cond.id, 'drain', -magnitude, `${cond.label} drains the war economy.`);
+  }
+
+  return { score, contributors };
+}
+
 function deriveHealingCapacity(s) {
   let score = 50;
   const contributors = [];
@@ -490,8 +538,16 @@ function deriveCriminalOpportunity(s) {
   return { score, contributors };
 }
 
+// How strongly an assigned primary deity lifts religious_authority, by rank.
+// A major god is a pillar of the pantheon; a cult is a fringe following. Absent
+// from this map ⇒ no deity term (the dormancy guarantee — a deity-free
+// settlement never reads any of this).
+export const DEITY_RANK_AUTHORITY = Object.freeze({ major: 18, minor: 10, cult: 5 });
+
+/** @param {any} s */
 function deriveReligiousAuthority(s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   const profiles = deriveAllFactionProfiles(s);
@@ -503,6 +559,33 @@ function deriveReligiousAuthority(s) {
   } else {
     score -= 5;
     push(contributors, 'powerStructure', 'no_religious', -5, 'No religious faction in the power structure.');
+  }
+
+  // Active conditions move religious authority live — the religion-layer seam
+  // (mirrors deriveEconomicCapacity's condition scan). regional_religious_pressure
+  // now declares `religious_authority` (F5, landed with this consumer), so a
+  // regional spread presses the substrate here. Filtered on the affectedSystems
+  // contract like every other deriver; signed by the condition's status.
+  for (const cond of deriveAllActiveConditions(s)) {
+    if (!cond.affectedSystems.includes('religious_authority')) continue;
+    const magnitude = Math.round(cond.severity * 15);
+    if (magnitude === 0) continue;
+    score += magnitude;
+    push(contributors, cond.id, 'religious_pressure', magnitude,
+      `${cond.label} amplifies religious authority.`);
+  }
+
+  // Deity term — DORMANT until assigned. Only a settlement with an embedded
+  // primaryDeitySnapshot (the embed-on-assign bridge) reads this; a deity-free
+  // settlement sees NONE of it, so its score is unchanged except by the
+  // condition scan above. Tier-scaled: a major god lifts more than a cult. The
+  // snapshot is self-contained — we never touch customContent here.
+  const deity = s.config?.primaryDeitySnapshot;
+  if (deity && /** @type {Record<string, number>} */ (DEITY_RANK_AUTHORITY)[deity.rankAxis] != null) {
+    const lift = /** @type {Record<string, number>} */ (DEITY_RANK_AUTHORITY)[deity.rankAxis];
+    score += lift;
+    push(contributors, deity._deityRef || 'primaryDeity', 'deity_patronage', lift,
+      `${deity.name || 'The patron deity'} (${deity.rankAxis}) anchors religious authority.`);
   }
 
   return { score, contributors };
@@ -651,6 +734,7 @@ const DERIVERS = Object.freeze({
   infrastructure_condition: deriveInfrastructureCondition,
   magical_stability:       deriveMagicalStability,
   social_trust:            deriveSocialTrust,
+  economic_capacity:       deriveEconomicCapacity,
 });
 
 function finalizeVariable(name, raw, contributors) {
@@ -772,7 +856,7 @@ const HIGHER_IS_BETTER = new Set([
   'food_security', 'labor_capacity', 'public_legitimacy', 'ruling_authority',
   'faction_power', 'trade_connectivity', 'healing_capacity', 'defense_readiness',
   'religious_authority', 'housing_pressure', 'infrastructure_condition',
-  'magical_stability', 'social_trust',
+  'magical_stability', 'social_trust', 'economic_capacity',
 ]);
 
 const LOWER_IS_BETTER = new Set([
@@ -807,6 +891,7 @@ const VARIABLE_LABEL = Object.freeze({
   infrastructure_condition: 'Infrastructure condition',
   magical_stability:       'Magical stability',
   social_trust:            'Social trust',
+  economic_capacity:       'Economic capacity',
 });
 
 function explainCausalDelta(variable, before, after, change, bandBefore, bandAfter) {

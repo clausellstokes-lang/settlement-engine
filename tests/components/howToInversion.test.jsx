@@ -18,8 +18,11 @@ import { render, screen, cleanup } from '@testing-library/react';
 import HowToUse from '../../src/components/HowToUse.jsx';
 
 const STEPS_ANCHOR = 'First settlement in 60 seconds';
-const ESSAY_ANCHOR = /A settlement generator that thinks/;
-const ESSAY_TEXT = 'A settlement generator that thinks';
+// P9 — the concept essay now leads with the living-world thesis ("It generates a
+// town in seconds, then it runs the region for years."). The inversion contract
+// (steps lead, essay demoted under "Why it works this way") is unchanged.
+const ESSAY_ANCHOR = /It generates a town in seconds/;
+const ESSAY_TEXT = 'It generates a town in seconds';
 const CODA_HEADER = 'Why it works this way';
 
 describe('HowToUse — HT-1 Quick Start inversion', () => {

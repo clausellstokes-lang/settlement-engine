@@ -4,6 +4,7 @@ import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
   patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
+  hasCorruptingDeity, npcDeityDisfavor,
 } from '../corruption.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
@@ -506,19 +507,40 @@ export function relaxNpcStates(worldState) {
  * forked per (npc, tick) so replays are deterministic. No criminal institution →
  * no onset/exposure pressure (the rule).
  *
- * @returns {{ worldState: object, exposures: Array<object> }}
+ * Feature D (R3): when `religionActive` (the caller's religionDynamicsEnabled +
+ * isSubsystemActive gate) AND a settlement carries an embedded EVIL deity, the
+ * onset gate is RELAXED (`hasCriminalInst || hasCorruptingDeity`) so the evil
+ * deity can corrupt the faithful even in a crime-free town. A per-NPC,
+ * bounded, centered-on-1.0 `deityDisfavor` then modulates the chosen knob (evil
+ * → onset, good → exposure) by the NPC's AUTHORED alignment. `religionActive`
+ * false (default) ⇒ deityDisfavor 1.0, gate unrelaxed ⇒ byte-identical.
+ *
+ * @param {object} worldState
+ * @param {any} snapshot
+ * @param {{ fork: (k:string)=>{ random: ()=>number } }} rng
+ * @param {{ tick?: number, guildStrengthBy?: Map<string, number>|null, religionActive?: boolean }} [opts]
+ * @returns {{ worldState: object, exposures: Array<{npcId:string,settlementId:any,name:string,kind:string,criminalInstitution?:any,homeInstitution?:any}> }}
  */
-export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guildStrengthBy = null } = {}) {
+export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guildStrengthBy = null, religionActive = false } = {}) {
   const npcStates = { ...(worldState.npcStates || {}) };
+  /** @type {Array<{npcId:string,settlementId:any,name:string,kind:string,criminalInstitution?:any,homeInstitution?:any}>} */
   const exposures = [];
   for (const item of (snapshot?.settlements || [])) {
     const climate = readCorruptionClimate(item.settlement);
+    // Feature D (R3): the embedded deity snapshot (only consulted when the
+    // religion layer is ACTIVE — religionDynamicsEnabled + isSubsystemActive).
+    // null ⇒ deityDisfavor stays 1.0 and the gate is unrelaxed ⇒ byte-identical.
+    const deity = religionActive ? (item.settlement?.config?.primaryDeitySnapshot || null) : null;
+    const corruptingDeity = religionActive && hasCorruptingDeity(item.settlement);
     // ONSET requires criminal infrastructure (the rule) — but EXPOSURE must
     // run regardless: betrayal-seeded conspirators (whose patron is a foreign
     // sponsor, not a local guild) would otherwise be permanently immune to
     // discovery in any settlement without a criminal institution, and each
     // betrayal re-ignition would monotonically corrupt one more NPC.
-    const onsetEnabled = climate.hasCriminalInst;
+    // Feature D (R3) RELAXES this gate: an embedded EVIL deity enables onset in
+    // a crime-free town ("the faithful are corrupted from within"). Additive
+    // and 0 when no deity ⇒ a deity-free town is byte-identical.
+    const onsetEnabled = climate.hasCriminalInst || corruptingDeity;
     // §corruption Phase 3 — real thieves-guild strength (if threaded) drags
     // effective security down (the feedback loop); falls back to the crime proxy.
     const gs = guildStrengthBy ? guildStrengthBy.get(String(item.id)) : undefined;
@@ -542,11 +564,19 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
 
       const priorExposures = s.timesExposed || 0;
 
+      // Feature D (R3): the per-NPC, bounded, centered-on-1.0 deity-disfavor
+      // multipliers (at most ONE knob ≠ 1.0). Reads the AUTHORED personality
+      // only — NO rng draw, NO extra fork, so the deterministic stream position
+      // is unchanged (an additive-after-sum term moves the threshold, not the
+      // draw). Both 1.0 when no deity ⇒ byte-identical.
+      const disfavor = npcDeityDisfavor(deity, npc);
+
       if (!s.corruption) {
         // Onset — only eligible NPCs, only the corruptible ones turn, and only
-        // where criminal infrastructure exists. A prior exposure (organic or
-        // DM) makes re-corruption progressively harder.
-        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures })) {
+        // where criminal infrastructure exists (RELAXED for an evil deity, R3).
+        // A prior exposure (organic or DM) makes re-corruption progressively
+        // harder. An evil deity's onset disfavor rides here.
+        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset })) {
           npcStates[id] = {
             ...s,
             corruption: true,
@@ -568,7 +598,9 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
         return a === b || a.includes(b) || b.includes(a);
       }) ? PATRONAGE_TUNING.proximityVisibilityBonus : 0;
       const visibility = Math.min(1, (s.dotRank || 1) / 3 + proximity);
-      const exposeP = exposureChance({ security: exposureSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures });
+      // A good deity's repression rides the EXPOSURE side (which runs regardless
+      // of a criminal institution): a misaligned/corrupt NPC is outed faster.
+      const exposeP = exposureChance({ security: exposureSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures, deityDisfavor: disfavor.exposure });
       if (local.random() >= exposeP) return;
 
       const homeInstitution = npc.factionAffiliation || npc.factionLink || npc.institutionId || null;

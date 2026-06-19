@@ -37,13 +37,25 @@ function conditionsFor(item) {
 const INFLUX_ARCHETYPES = new Set(['regional_migration_pressure']);
 const FOOD_CRISIS_ARCHETYPES = new Set(['famine', 'food_anchor_lost', 'regional_import_shortage']);
 const DISEASE_CRISIS_ARCHETYPES = new Set(['plague']);
-const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure']);
-const BURDEN_ARCHETYPES = new Set(['alliance_burden', 'regional_protection_gap']);
+// Z1 — population is no longer blind to occupation or to the cost of waging war.
+// vassal_extraction is the canonical OCCUPATION condition (conditionPromotion maps
+// the 'occupied' stressor AND the A1 conquest aftermath into it — see §Z1): an
+// occupied town bleeds people (extraction + a hated garrison). war_drain is the
+// AGGRESSOR's home condition: a settlement bankrupting itself abroad sheds people
+// too. Both are gated behind warLayerEnabled at the SOURCE (the A1 evaluator never
+// mints war_drain when OFF, and a generation-occupied town already carried
+// vassal_extraction pre-Z1 — but it never lost population for it until now), so a
+// no-war campaign that never stamps either is byte-identical.
+const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure', 'vassal_extraction', 'war_drain']);
+const BURDEN_ARCHETYPES = new Set(['alliance_burden', 'regional_protection_gap', 'relief_burden']);
 // siege_lifted belongs HERE and only here: it is the post-siege recovery bonus.
-const RECOVERY_ARCHETYPES = new Set(['siege_lifted', 'stressor_residual']);
+const RECOVERY_ARCHETYPES = new Set(['siege_lifted', 'occupation_lifted', 'stressor_residual']);
 // One crisis-flight class feeds both the severe classifier and the
-// mass-emigration gate; recovery archetypes are deliberately absent.
-const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'regional_migration_pressure']);
+// mass-emigration gate; recovery archetypes are deliberately absent. Occupation
+// (vassal_extraction) drives REFUGEE FLIGHT — the column flees the occupier — so it
+// joins the flight set alongside war_pressure; war_drain is austerity, not flight,
+// so it stays out of the flight set (it presses the rate, not the emigration gate).
+const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'vassal_extraction', 'regional_migration_pressure']);
 
 function hasConditionSignal(item, archetypes, systems = []) {
   return conditionsFor(item).some(c => {

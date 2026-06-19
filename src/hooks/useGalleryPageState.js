@@ -47,6 +47,8 @@ export function useGalleryPageState(routeSlug = null) {
   const [dossierError, setDossierError] = useState(null);
   const [voteBusyId, setVoteBusyId] = useState(null);
   const [reportBusyId, setReportBusyId] = useState(null);
+  const [importBusyId, setImportBusyId] = useState(null);
+  const [importedSlugs, setImportedSlugs] = useState(() => new Set());
   const [actionError, setActionError] = useState(null);
   const [actionNotice, setActionNotice] = useState(null);
 
@@ -230,6 +232,28 @@ export function useGalleryPageState(routeSlug = null) {
     }
   }, [auth?.user, reportBusyId]);
 
+  const importDossier = useCallback(async (item) => {
+    if (!auth?.user) {
+      setActionError('Sign in to import settlements into your library.');
+      setActionNotice(null);
+      return;
+    }
+    const slug = item?.slug;
+    if (!slug || importBusyId) return;
+    setImportBusyId(slug);
+    setActionError(null);
+    setActionNotice(null);
+    try {
+      await useStore.getState().importGallerySettlement(slug);
+      setImportedSlugs(prev => new Set(prev).add(slug));
+      setActionNotice('Imported to your library.');
+    } catch (err) {
+      setActionError(err?.message || 'Import could not be completed.');
+    } finally {
+      setImportBusyId(null);
+    }
+  }, [auth?.user, importBusyId]);
+
   const setDossierCommentCount = useCallback((count) => {
     const nextCount = Math.max(0, Number(count) || 0);
     setDossier(current => current ? { ...current, commentCount: nextCount } : current);
@@ -254,6 +278,8 @@ export function useGalleryPageState(routeSlug = null) {
     dossierError,
     voteBusyId,
     reportBusyId,
+    importBusyId,
+    importedSlugs,
     actionError,
     actionNotice,
     loadMore,
@@ -264,6 +290,7 @@ export function useGalleryPageState(routeSlug = null) {
     clearFilters,
     voteOn,
     reportOn,
+    importDossier,
     setDossierCommentCount,
   };
 }

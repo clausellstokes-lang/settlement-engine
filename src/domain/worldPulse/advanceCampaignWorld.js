@@ -6,6 +6,12 @@ import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor 
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
+import { evaluateWarLayer } from './warDeployment.js';
+import { evaluateTradeWar } from './tradeWar.js';
+import { evaluateReligiousContest } from './religiousContest.js';
+import { isSubsystemActive } from './subsystemActivation.js';
+import { deploymentReturnOutcomes } from './deploymentReturn.js';
+import { addRegionalChannels } from '../region/graph.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
 import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
 import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
@@ -24,8 +30,12 @@ import {
   projectFactionStatesOntoSettlement,
 } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
+import { applyDispositionDeltas, dispositionFactorMap } from './dispositionLedger.js';
+import { advancePantheon, collectFaithDeltas } from './pantheon.js';
+import { computeDispositionFactorMap } from './disposition.js';
+import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
-import { synthesizeRealmEvents } from './realmEvents.js';
+import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
@@ -185,14 +195,19 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // factions; it drags effective security down inside this tick's onset /
   // exposure / capture rolls (the feedback loop), bounded so it never runs away.
   let guildStrengthBy = computeGuildStrengthBy(worldState, snapshot);
-  const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption'), { tick: worldState.tick, guildStrengthBy });
+  // Feature D (R3): the religion layer is ACTIVE for the deity→corruption effects
+  // only when BOTH the opt-in flag AND the F2 activation gate hold (≥1 settlement
+  // carries an embedded config.primaryDeitySnapshot). false ⇒ the corruption /
+  // capture gates are unrelaxed and deityDisfavor is 1.0 ⇒ byte-identical legacy.
+  const religionActive = simulationRules.religionDynamicsEnabled && isSubsystemActive(snapshot, 'religion');
+  const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption'), { tick: worldState.tick, guildStrengthBy, religionActive });
   worldState = corruption.worldState;
   // Seat NPCs into their factions so internalSeats reflect who holds power.
   worldState = seatNpcsIntoFactions(worldState);
   // §corruption Phase 2 — faction capture: corrupt seat-holders pull their
   // faction up the criminalCaptureState ladder (faster the higher the seat);
   // clean factions recede toward 'none'. Runs after seating so seats are current.
-  const factionCapture = advanceFactionCapture(worldState, snapshot, rng.fork('faction-capture'), { tick: worldState.tick, guildStrengthBy });
+  const factionCapture = advanceFactionCapture(worldState, snapshot, rng.fork('faction-capture'), { tick: worldState.tick, guildStrengthBy, religionActive });
   worldState = factionCapture.worldState;
   // Recompute guild strength from the UPDATED capture states for this tick's
   // settlement mirror (power floor + legitimacy cap below).
@@ -240,11 +255,18 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // FOOD_IMPORT_RATES), and a campaign-emergent famine cuts production —
     // blockades and crop failures both literally eat the stores.
     const blockade = blockadeFor(worldState.stressors, item.id);
+    // Z1 — a settlement with an active OUTBOUND deployment feeds its army from the
+    // home granary. Read the one-army ledger (keyed by home save id) ONLY when the
+    // war layer is on; a no-war campaign passes deployment:null ⇒ byte-identical.
+    const deployment = simulationRules.warLayerEnabled
+      ? (worldState.deployments?.[String(item.id)] || null)
+      : null;
     const stocked = advanceFoodStockpile(result.newSettlement, {
       interval: tickInterval,
       tick: worldState.tick,
       blockade,
       famine: famineFor(worldState.stressors, item.id),
+      deployment,
     });
     // Siege vs the airship dock: blockade-running impairs the dock itself —
     // a visible 'access' impairment while the siege grips, lifted when it ends.
@@ -346,7 +368,131 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     return { ...save, settlement: localSettlements.get(id) };
   });
   const postTimeCampaign = { ...campaign, worldState, regionalGraph: snapshot.regionalGraph };
-  const postTimeSnapshot = buildWorldSnapshot({ campaign: postTimeCampaign, saves: postTimeSaves, worldState });
+  let postTimeSnapshot = buildWorldSnapshot({ campaign: postTimeCampaign, saves: postTimeSaves, worldState });
+  // Feature A (war/deployment) — GATED behind simulationRules.warLayerEnabled
+  // (default false ⇒ pure no-op ⇒ byte-identical legacy). Reads the SINGLE pre-tick
+  // postTimeSnapshot: resolves coalition sieges (a fallen target → a conquest
+  // power_transfer), opens new sieges (confident attacker → weaker hostile target →
+  // a directed war_front mint + war_drain/army_deployed home conditions), and turns
+  // each army that came home (a resolved siege) into a CONTEXTUAL return outcome.
+  // war_drain severity is derived from the PRE-TICK war_front count INSIDE the
+  // evaluator (this-tick's fresh mints are appended to graphChannels, never re-read),
+  // so a fresh deploy raises the drain only NEXT tick — no intra-tick read-after-write.
+  const war = evaluateWarLayer({
+    snapshot: postTimeSnapshot,
+    worldState,
+    rng: rng.fork('war-layer'),
+    tick: worldState.tick,
+    now,
+    rules: simulationRules,
+  });
+  let warReturnOutcomes = [];
+  let tradeWarOutcomes = [];
+  // Feature C (C1) write-side accumulator: the id-stable win/loss deltas from the
+  // contests resolved this tick (siege conquests + trade-war flips). Empty unless
+  // the war layer is ON and something actually resolved — so the post-apply fold
+  // is byte-neutral (applyDispositionDeltas returns the input ledger on []) on the
+  // OFF path and on quiet ticks.
+  /** @type {any[]} */
+  let pendingDispositionDeltas = [];
+  if (simulationRules.warLayerEnabled) {
+    // Persist the updated one-army ledger so it survives to the next tick. The Z2a
+    // war-exhaustion scar ledger rides alongside it (non-reverting; ratcheted by the
+    // evaluator, decayed slowly when armies come home) — read-last/write-next.
+    worldState = { ...worldState, deployments: war.deployments, warExhaustion: war.warExhaustion };
+    // Land the war_front directed mints on the graph BEFORE candidate generation and
+    // the apply pass, then rebuild the snapshot so downstream reads see the new front.
+    if (war.graphChannels.length) {
+      const mintedGraph = addRegionalChannels(postTimeSnapshot.regionalGraph, war.graphChannels, { now });
+      const mintedCampaign = { ...campaign, worldState, regionalGraph: mintedGraph };
+      postTimeSnapshot = buildWorldSnapshot({ campaign: mintedCampaign, saves: postTimeSaves, worldState });
+    }
+    // Contextual returns read the POST-mint graph (so "is my home besieged?" is
+    // current) and the pre-tick snapshot for home state. Forked 'deployment-return'.
+    warReturnOutcomes = deploymentReturnOutcomes({
+      resolvedDeployments: war.resolvedDeployments,
+      snapshot: postTimeSnapshot,
+      graph: postTimeSnapshot.regionalGraph,
+      rng: rng.fork('war-layer'),
+      tick: worldState.tick,
+    });
+
+    // Feature B (trade war) — A2. The per-commodity primary-supplier contest
+    // composes with A1 inside the SAME gated block: a flip re-points C's primary
+    // trade_dependency channel and (confidence-gated) either winds the defeated
+    // incumbent down or escalates to a war_front the A1 layer picks up next tick.
+    // Reads the SAME post-mint snapshot (so A1's fresh fronts are visible) and
+    // persists its per-prize cooldown ledger onto worldState.tradeWarState.
+    const tradeWar = evaluateTradeWar({
+      snapshot: postTimeSnapshot,
+      worldState,
+      rng: rng.fork('trade-war'),
+      tick: worldState.tick,
+      now,
+      rules: simulationRules,
+    });
+    worldState = { ...worldState, tradeWarState: tradeWar.tradeWarState };
+    tradeWarOutcomes = tradeWar.outcomes;
+    if (tradeWar.graphChannels.length) {
+      const realignedGraph = addRegionalChannels(postTimeSnapshot.regionalGraph, tradeWar.graphChannels, { now });
+      const realignedCampaign = { ...campaign, worldState, regionalGraph: realignedGraph };
+      postTimeSnapshot = buildWorldSnapshot({ campaign: realignedCampaign, saves: postTimeSaves, worldState });
+    }
+    // C1 write-side: gather this tick's resolved-contest win/loss deltas (H16-
+    // attributed at the resolver). Folded into next-tick dispositionStats below,
+    // after outcomes apply — the READ-LAST/WRITE-NEXT timing discipline.
+    pendingDispositionDeltas = collectDispositionDeltas(war, tradeWar);
+  }
+  // Feature D (R2) — religion dynamics: the deity contest + conversion spread +
+  // religious_authority mint. DOUBLE-GATED, its OWN block parallel to the war
+  // block: it acts ONLY when BOTH the opt-in flag religionDynamicsEnabled AND the
+  // F2 activation gate (≥1 settlement carries config.primaryDeitySnapshot) hold.
+  // Either false ⇒ pure no-op (no mints, no contests, no conversions) ⇒
+  // byte-identical legacy. A no-deity campaign is unchanged even with the flag on
+  // (the evaluator short-circuits on the activation gate before any fork/mint).
+  // Mirrors the war block: mint the religious_authority directed channels onto the
+  // graph BEFORE candidate generation + apply, rebuild the snapshot so downstream
+  // reads see the new faith paths, then thread the conversion outcomes (which
+  // re-embed the winning deity snapshot and seed the existing
+  // religious_conversion_fracture stressor for the deity-driven spread) into the
+  // deterministic apply set.
+  let religiousOutcomes = [];
+  // R4 pantheon write-side accumulator: the per-deity win/loss deltas from this
+  // tick's resolved conversions + the PRE-conversion snapshot seats are aggregated
+  // from. Both are captured here (inside the religion block) so the post-apply
+  // ratchet below sees PRE-TICK deity assignments (no intra-tick read-after-write).
+  // Empty / null unless religion is active and a contest ran — so the post-apply
+  // fold is a pure no-op (and the pantheon key is never materialized) otherwise.
+  /** @type {any[]} */
+  let pendingFaithDeltas = [];
+  /** @type {any} */
+  let pantheonSeatSnapshot = null;
+  const religionActiveThisTick = simulationRules.religionDynamicsEnabled && isSubsystemActive(postTimeSnapshot, 'religion');
+  if (religionActiveThisTick) {
+    // Capture the PRE-conversion snapshot for seat aggregation BEFORE the contest's
+    // fresh mints rebuild it. (Mints only add graph channels, not deity seats, so
+    // either snapshot counts the same seats — but pinning the pre-contest one keeps
+    // the aggregation provably pre-tick.)
+    pantheonSeatSnapshot = postTimeSnapshot;
+    const religion = evaluateReligiousContest({
+      snapshot: postTimeSnapshot,
+      worldState,
+      rng: rng.fork('religious-contest'),
+      tick: worldState.tick,
+      now,
+      rules: simulationRules,
+    });
+    religiousOutcomes = religion.outcomes;
+    // The winner banks a win, the displaced incumbent a loss — read from the
+    // PRE-TICK snapshot's deity assignments, never this tick's fresh re-embed.
+    pendingFaithDeltas = collectFaithDeltas(religion, pantheonSeatSnapshot);
+    if (religion.graphChannels.length) {
+      const faithGraph = addRegionalChannels(postTimeSnapshot.regionalGraph, religion.graphChannels, { now });
+      const faithCampaign = { ...campaign, worldState, regionalGraph: faithGraph };
+      postTimeSnapshot = buildWorldSnapshot({ campaign: faithCampaign, saves: postTimeSaves, worldState });
+    }
+  }
+  const warOutcomes = [...war.outcomes, ...warReturnOutcomes, ...tradeWarOutcomes, ...religiousOutcomes];
   const pressures = deriveSettlementPressures(postTimeSnapshot);
   const pIndex = pressureIndex(pressures);
   const tierResource = evaluateTierResourceDynamics(worldState, postTimeSnapshot, pIndex, {
@@ -369,12 +515,31 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     interval: tickInterval,
     simulationRules,
   });
+  // Feature C: read LAST-TICK disposition memory into per-settlement multipliers
+  // (centered on 1.0). The next-tick WRITE (ratchet from this tick's resolved
+  // contests) lands post-apply below.
+  //   • Layer OFF — the F4 history-only path: empty ledger ⇒ empty map ⇒ every
+  //     candidate factor is 1.0 ⇒ BYTE-IDENTICAL legacy. We compute NO baseline.
+  //   • Layer ON — the C1 live path: blend computeAggressiveness (govBaseline +
+  //     authored NPC personality + ratcheted history) per settlement. A
+  //     no-signal settlement is omitted ⇒ still 1.0 (`{}`-equivalent). This map
+  //     SUPERSEDES dispositionFactorMap (history is folded in via
+  //     readDispositionMultiplier — they are never both applied).
+  const dispositionFactor = simulationRules.warLayerEnabled
+    ? computeDispositionFactorMap(postTimeSnapshot, worldState)
+    : dispositionFactorMap(worldState.dispositionStats);
   const candidates = evaluateWorldPulseRules(postTimeSnapshot, {
     pressures,
     pressureIndex: pIndex,
     tick: worldState.tick,
     interval: tickInterval,
     simulationRules,
+    dispositionFactor,
+    // C2: thread a stable fork to the settlement strategy chooser (the ONLY
+    // candidate rule that samples). Forked from the master pulse rng on a constant
+    // key; the chooser re-forks per settlement (`strategy:<S>:<tick>`) so the draw
+    // is order-free. The chooser short-circuits before touching it when OFF.
+    rng: rng.fork('settlement-strategy'),
   });
   const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates];
   const { selected, rollExplanations } = rollCandidates(
@@ -382,7 +547,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     rng.fork('candidate-rolls'),
     { maxAuto: 7, maxProposals: 5, volatility: volatilityMultiplier(worldState.volatility) },
   );
-  const deterministicExplanations = [...coupOutcomes, ...structuralCandidates].map(candidate => ({
+  const deterministicExplanations = [...coupOutcomes, ...warOutcomes, ...structuralCandidates].map(candidate => ({
     candidateId: candidate.id,
     candidateType: candidate.candidateType,
     ruleId: candidate.ruleId || null,
@@ -400,7 +565,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     proposalPayload: candidate.proposalPayload || null,
     conflictResolution: { selected: true, deterministic: true },
   }));
-  const selectedForApply = [...coupOutcomes, ...structuralCandidates, ...selected];
+  const selectedForApply = [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...selected];
 
   const settlementMap = buildSettlementMap(postTimeSnapshot, localSettlements);
   const applied = applyWorldPulseOutcomes({
@@ -418,7 +583,43 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // applied.worldState already carries this tick's posture/memory stamp:
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
-  const memoryState = applied.worldState;
+  let memoryState = applied.worldState;
+  // Feature C (C1) write-side, the READ-LAST/WRITE-NEXT seam: fold this tick's
+  // resolved-contest win/loss deltas into NEXT-tick dispositionStats. The deltas
+  // were READ from contests that resolved THIS tick; the ledger they produce is
+  // first READ at candidate-build NEXT tick — never mid-tick. applyDispositionDeltas
+  // sorts by id (commutative, order-independent) and returns the input ledger
+  // unchanged for [] — so this is byte-neutral on the OFF path / quiet ticks.
+  if (pendingDispositionDeltas.length) {
+    memoryState = {
+      ...memoryState,
+      dispositionStats: applyDispositionDeltas(memoryState.dispositionStats, pendingDispositionDeltas),
+    };
+  }
+  // R4 pantheon — the READ-LAST/WRITE-NEXT pantheon ratchet, post-apply, mirroring
+  // the dispositionStats seam directly above. ONLY when religion is active this tick
+  // (the CONDITIONAL materialization: a dormant world never gains a pantheon key, so
+  // a deity-free campaign stays byte-identical under the dormancy oracle). The
+  // ratchet folds this tick's conversion wins/losses (commutative, sorted by
+  // deityId), re-counts seatsControlled from the PRE-TICK snapshot (codepoint-sorted
+  // save-id order), and re-derives each deity's tier as a LAZY VIEW with hysteresis
+  // dwell + a per-tick containment cap. The tier CHANGES feed the realm-arc synthesis
+  // below (Ascendancy / Twilight).
+  /** @type {Array<{deityId:string, from:string, to:string}>} */
+  let pantheonTierChanges = [];
+  if (religionActiveThisTick && pantheonSeatSnapshot) {
+    const advanced = advancePantheon({
+      pantheon: memoryState.pantheon || {},
+      snapshot: pantheonSeatSnapshot,
+      faithDeltas: pendingFaithDeltas,
+    });
+    // Only materialize the pantheon key when the ledger is non-empty — an active
+    // religion with no seats/deltas yet stays absent (byte-neutral under the oracle).
+    if (Object.keys(advanced.pantheon).length) {
+      memoryState = { ...memoryState, pantheon: advanced.pantheon };
+      pantheonTierChanges = advanced.changes;
+    }
+  }
   // Wave 7 #2 — the dossier stops lying: project the per-faction live state
   // (capture rung, momentum band, rivals, institution control) onto each
   // settlement's powerStructure.factions. Seam choice: HERE, after
@@ -439,7 +640,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     committed: commit,
     createdAt: now,
     calendar: memoryState.calendar,
-    candidateCount: candidates.length + tierResource.candidates.length + instLifecycle.candidates.length + structuralCandidates.length + coupOutcomes.length,
+    candidateCount: candidates.length + tierResource.candidates.length + instLifecycle.candidates.length + structuralCandidates.length + coupOutcomes.length + warOutcomes.length,
     selectedCount: selectedForApply.length,
     autoAppliedCount: applied.autoApplied.length,
     proposalCount: applied.proposals.length,
@@ -486,8 +687,26 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       e.impactKind === entry.impactKind
       && JSON.stringify((e.settlementIds || []).slice().sort()) === JSON.stringify((entry.settlementIds || []).slice().sort()));
   };
-  const realmEntries = synthesizeRealmEvents({ worldState: memoryState, tick: worldState.tick, now })
+  const realmEntries = synthesizeRealmEvents({
+    worldState: memoryState,
+    tick: worldState.tick,
+    now,
+    // §S4 — the post-apply regional graph carries this tick's war_front mints, so
+    // a coalition siege names its instigators + supporters and "The War" counts the
+    // belligerents, not just the besieged victim. Absent ⇒ legacy victim-count.
+    regionalGraph: applied.regionalGraph,
+  })
     .filter(isFreshArcEntry);
+  // R4 pantheon realm arcs: a deity crossing into 'major' ("The Ascendancy of X")
+  // or falling to 'cult' ("The Twilight of X"). Derived from this tick's tier
+  // CHANGES (fires once, on the crossing) — empty unless religion is active and a
+  // tier actually flipped this tick. Names resolved off the pre-tick snapshot.
+  const pantheonArcEntries = synthesizePantheonArcs({
+    changes: pantheonTierChanges,
+    snapshot: pantheonSeatSnapshot,
+    tick: worldState.tick,
+    now,
+  });
   const aftermathEntries = [
     ...aftermathNewsEntries(agedStressors.resolved, worldState.tick, now),
     ...graduationNewsEntries(agedStressors.graduated || [], worldState.tick, now),
@@ -502,7 +721,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const captureNewsEntries = captureTransitionNewsEntries(
     factionCapture.transitions, settlementNameFor, worldState.tick, now,
   );
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...realmEntries];
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...realmEntries, ...pantheonArcEntries];
   const wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend) : applied.wizardNews;
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
 
@@ -518,7 +737,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       ...update,
       settlement: clone(update.settlement),
     })),
-    candidates: [...coupOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...instLifecycle.candidates],
+    candidates: [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...instLifecycle.candidates],
     selected: selectedForApply,
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     autoApplied: applied.autoApplied,

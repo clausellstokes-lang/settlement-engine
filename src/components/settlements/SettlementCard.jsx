@@ -1,9 +1,13 @@
-import { useState } from 'react';
-import {Link2, Clock, FolderOpen, ArrowRight, GitBranch, Unlock} from 'lucide-react';
+import { useMemo, useState } from 'react';
+import {Link2, Clock, FolderOpen, ArrowRight, GitBranch, Unlock, BookMarked} from 'lucide-react';
 
 import { EFFECT_CATEGORIES, fmtMod } from '../../lib/relationshipGraph.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, CARD, FS, swatch } from '../theme.js';
 import { isPlanInactiveSave, isSaveActive } from '../../lib/saveAccess.js';
+import { canonPhaseOf } from './helpers.js';
+import { settlementSignals, healthPip } from './livingWorldSignals.js';
+import LivingWorldSignalRow from './LivingWorldSignalRow.jsx';
+import HealthPip from './HealthPip.jsx';
 import Button from '../primitives/Button.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 
@@ -11,24 +15,53 @@ const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', all
 const _REL_TYPES = ['neutral','trade_partner','allied','rival','cold_war','patron','client','criminal_network'];
 
 // ── Settlement Card (reused in campaigns + unassigned) ────────────────────
-export function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId }) {
+export function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId, onCanonize, worldState = null, regionalGraph = null, nameFor, onAdvanceTime, selectMode = false, selected = false, onToggleSelect }) {
   const [moveOpen, setMoveOpen] = useState(false);
   const ts = (t) => { try { return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; } };
   const active = isSaveActive(s);
   const planInactive = isPlanInactiveSave(s);
+  const isCanon = canonPhaseOf(s) === 'canon';
   const retentionUntil = s.retentionExpiresAt ? ts(s.retentionExpiresAt) : null;
+
+  // Living-world signal model — REUSES the dossier's read-models (settlementSignals
+  // over warStatus + the embedded deity snapshot + computeAggressiveness). Self-
+  // gates: hasLiveWorld is false for a peaceful, non-campaign, deity-free card, so
+  // LivingWorldSignalRow renders nothing and the card looks exactly as today.
+  const signals = useMemo(() => settlementSignals({
+    settlement: s.settlement,
+    settlementId: s.id,
+    worldState,
+    regionalGraph,
+    nameFor,
+  }), [s.settlement, s.id, worldState, regionalGraph, nameFor]);
+  const health = useMemo(() => healthPip(s.settlement), [s.settlement]);
 
   // No overflow:hidden on the wrapper — would clip the "move to campaign"
   // popover that opens below the arrow button. DeleteConfirmation below
   // carries its own rounded corners + top margin, so nothing visually escapes.
   return (
-    <div style={{ background: active ? 'rgba(255,251,245,0.96)' : '#eee9df', border:`1px solid ${active ? BORDER : '#c9c0b2'}`, borderRadius:7, opacity: active ? 1 : 0.68 }}>
+    <div data-testid="settlement-card" style={{ background: active ? 'rgba(255,251,245,0.96)' : '#eee9df', border:`1px solid ${selected ? GOLD : (active ? BORDER : '#c9c0b2')}`, borderRadius:7, opacity: active ? 1 : 0.68, boxShadow: selected ? `0 0 0 1px ${GOLD}` : undefined }}>
       <div style={{ display:'flex', alignItems:'center', gap:8, padding:'9px 12px' }}>
+        {selectMode && (
+          <input
+            type="checkbox"
+            checked={selected}
+            disabled={!active}
+            onChange={() => active && onToggleSelect?.(s.id)}
+            aria-label={`Select ${s.name}`}
+            style={{ width:16, height:16, flexShrink:0, cursor: active ? 'pointer' : 'not-allowed', accentColor: GOLD }}
+          />
+        )}
         <div style={{ flex:1, minWidth:0 }}>
-          <div style={{ fontSize:FS.md, fontWeight:700, color:INK, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</div>
+          <div style={{ display:'flex', alignItems:'center', gap:8, minWidth:0 }}>
+            <div style={{ fontSize:FS.md, fontWeight:700, color:INK, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', minWidth:0 }}>{s.name}</div>
+            {health && <span style={{ flexShrink:0 }}><HealthPip pip={health}/></span>}
+          </div>
           <div style={{ fontSize:FS.xxs, color:MUTED, display:'flex', alignItems:'center', gap:6, marginTop:1, flexWrap:'wrap' }}>
             <Clock size={10}/> {ts(s.timestamp)} · {s.tier}
           </div>
+          {/* Living-world signal row (self-gating — nothing for a peaceful card). */}
+          <LivingWorldSignalRow model={signals} />
           {!active && (
             <div style={{ fontSize:FS.micro, color:GOLD, background:GOLD_BG, border:`1px solid ${BORDER}`, borderRadius:8, padding:'2px 6px', display:'inline-flex', alignItems:'center', gap:4, marginTop:4, fontWeight:700 }}>
               Retained inactive{retentionUntil ? ` until ${retentionUntil}` : ''}
@@ -114,6 +147,49 @@ export function SettlementCard({ s, allModifiers, onView, _onDelete, deleteId, s
               </div>
             )}
           </div>
+          {/* Canonize (draft → canon) or a static Canon marker. Canonizing locks
+              NPC/faction names and starts the in-world timeline; it's reversible
+              from the dossier (Reset to draft). */}
+          {active && !isCanon && (
+            <Button
+              variant="gold"
+              size="sm"
+              onClick={() => onCanonize?.(s)}
+              title="Canonize — lock names and start the campaign timeline"
+              icon={<BookMarked size={12}/>}
+            >
+              Canonize
+            </Button>
+          )}
+          {isCanon && (
+            <span
+              title="Canon — names locked; further changes log as timeline events"
+              style={{ fontSize:FS.micro, fontWeight:700, color:GOLD, background:GOLD_BG, border:`1px solid ${BORDER}`, borderRadius:8, padding:'3px 8px', display:'inline-flex', alignItems:'center', gap:4, whiteSpace:'nowrap' }}
+            >
+              <BookMarked size={10}/> Canon
+            </span>
+          )}
+          {/* Advance Time — a gold premium CTA (no longer the inert hint-toggle).
+              In a campaign: deep-links into the campaign-advance flow via the
+              forward-compatible ADVANCE_TIME_NAV_TARGET (onAdvanceTime). Standalone:
+              the world pulse is campaign-level, so it routes to the move-to-campaign
+              popover instead of dead-ending. */}
+          {active && (
+            <Button
+              variant="gold"
+              size="sm"
+              onClick={() => {
+                if (currentCampaignId) onAdvanceTime?.(currentCampaignId);
+                else setMoveOpen(true);
+              }}
+              title={currentCampaignId
+                ? 'Advance the campaign world and open the post-advance results'
+                : 'Advancing time runs a campaign world — add this settlement to a campaign first'}
+              icon={<Clock size={12}/>}
+            >
+              Advance Time
+            </Button>
+          )}
           {!active && planInactive && (
             <Button
               variant="gold"

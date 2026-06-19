@@ -77,7 +77,25 @@ export const useStore = create(
             categoryToggles:    state.categoryToggles,
             goodsToggles:       state.goodsToggles,
             servicesToggles:    state.servicesToggles,
+            // The progressive-disclosure altitude is a durable, user-owned pref
+            // (a returning power user should stay at Engine). ONLY detailLevel is
+            // persisted from userPrefs — the other keys (tableViewOpen) stay
+            // transient. Persist-merge re-applies this over the slice default.
+            userPrefs: { detailLevel: state.userPrefs?.detailLevel },
           }),
+          // Deep-merge `userPrefs` so the persisted `detailLevel` overlays the
+          // slice defaults WITHOUT clobbering the transient keys (tableViewOpen).
+          // The default zustand merge is shallow — it would replace the whole
+          // userPrefs object with `{ detailLevel }`, dropping the rest. Everything
+          // else uses the shallow default (current state over persisted).
+          merge: (persisted, current) => {
+            const p = /** @type {any} */ (persisted) || {};
+            return {
+              ...current,
+              ...p,
+              userPrefs: { ...current.userPrefs, ...(p.userPrefs || {}) },
+            };
+          },
           // On rehydrate: always start the Create page at the mode picker.
           // (Also wipes any stale wizardMode persisted by older builds.)
           onRehydrateStorage: () => (state) => {

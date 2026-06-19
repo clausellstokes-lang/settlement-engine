@@ -90,6 +90,32 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
+      {/* ── Magic legality (UX Phase 7, premium live exports only) ──────── */}
+      {/* Additive + self-gating: only a campaign export (vm.liveWorld present)
+          with a functioning magic system surfaces the legality facets, so a
+          non-campaign / dead-magic export is byte-identical. */}
+      {vm?.liveWorld && v.magicProfile?.exists && v.magicProfile.lines.length > 0 && (
+        <View
+          style={{
+            marginBottom: space.sm,
+            padding: 6,
+            borderLeft: `2pt solid ${palette.cool}`,
+            backgroundColor: palette.coolBg,
+            borderRadius: 2,
+          }}
+          wrap={false}
+        >
+          <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 2 }}>
+            MAGIC LEGALITY
+          </Text>
+          {v.magicProfile.lines.map((line, i) => (
+            <Text key={`mag-${i}`} style={{ ...type.body, fontSize: pt['9'], color: palette.ink, lineHeight: 1.4 }}>
+              {line}
+            </Text>
+          ))}
+        </View>
+      )}
+
       {/* ── By-design contradictions ───────────────────────── */}
       {contradictions.length > 0 && (
         <View style={{ marginBottom: space.sm }}>

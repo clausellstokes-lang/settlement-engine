@@ -19,21 +19,36 @@ export default function DossierHeaderRow({
   onRegenerate,
   REROLLABLE,
   narrativeButtons,
+  // UX overhaul Phase 6 — the dossier header is the ONE place a settlement is
+  // renamed. In the live editor that goes through queueEdit('rename-settlement');
+  // in the saved-dossier editor (readOnly OutputContainer) allowRename + an
+  // explicit onRenameSettlement callback enable the same inline edit there too,
+  // so the old config.customName / Edit-Names triple-path collapses into this.
+  allowRename = false,
+  onRenameSettlement = null,
 }) {
+  // Editable when the live editor is active (write store via queueEdit), or when
+  // the saved-dossier editor opted in via allowRename + a rename callback.
+  const nameEditable = (!readOnly && queueEdit) || (allowRename && typeof onRenameSettlement === 'function');
+  const commitRename = (newName) => {
+    if (allowRename && typeof onRenameSettlement === 'function') {
+      onRenameSettlement(newName);
+    } else if (queueEdit) {
+      queueEdit('rename-settlement', { newName });
+    }
+  };
   return (
           <div style={{ padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' }}>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: swatch['#C49A3C'], lineHeight: 1.1 }}>
-                {(!readOnly && queueEdit) ? (
+                {nameEditable ? (
                   <EditableInline
                     value={settlement.name || ''}
                     ariaLabel="Edit settlement name"
                     textStyle={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: swatch['#C49A3C'], lineHeight: 1.1 }}
                     trackEvent={EVENTS.EDIT_PENDING_QUEUED}
                     provenance={{ kind: 'rename-settlement', entityId: saveId || 'unsaved' }}
-                    onCommit={(newName) => {
-                      queueEdit('rename-settlement', { newName });
-                    }}
+                    onCommit={commitRename}
                   />
                 ) : settlement.name}
               </div>

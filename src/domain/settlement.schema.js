@@ -652,7 +652,7 @@ export const FIELD_ALIASES = Object.freeze({
  *          | 'ruling_authority' | 'faction_power' | 'trade_connectivity'
  *          | 'healing_capacity' | 'defense_readiness' | 'criminal_opportunity'
  *          | 'religious_authority' | 'housing_pressure' | 'infrastructure_condition'
- *          | 'magical_stability' | 'social_trust'} SystemVariableName
+ *          | 'magical_stability' | 'social_trust' | 'economic_capacity'} SystemVariableName
  *
  * Tier 2.4 canonical substrate variable names. Every subsystem (events,
  * conditions, institutions, factions, supply chains, AI) reads from

@@ -66,6 +66,12 @@ const SNAPSHOT_CONFIG_KEYS = Object.freeze({
   // it cleared.
   APPLY_STRESSOR:     Object.freeze(['stressorEdits']),
   RESOLVE_STRESSOR:   Object.freeze(['stressorEdits']),
+  // Feature D / R1: SET_PRIMARY_DEITY writes config.primaryDeityRef +
+  // primaryDeitySnapshot (or deletes them on a clear). Snapshotting both keys
+  // makes undo a true inverse — restoreKeys deletes a key that was absent
+  // pre-event and restores a key (and its exact value) that was present, so an
+  // undone assignment returns the settlement to its prior dormancy/deity.
+  SET_PRIMARY_DEITY:  Object.freeze(['primaryDeityRef', 'primaryDeitySnapshot']),
 });
 
 const SNAPSHOT_ECONOMIC_KEYS = Object.freeze({

@@ -19,6 +19,7 @@
  */
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
+import { TRAIT_ALIGNMENT } from '../data/npcData.js';
 
 // ── Eligibility: corruptible flaws → corruption vector ──────────────────────
 // Maps the susceptible NPC personality flaws (from npcData.js negative+neutral)
@@ -86,6 +87,125 @@ export const CORRUPTION_TUNING = Object.freeze({
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
 const n01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 
+// ── Feature D (R3): good/evil deity → corruption pressure ───────────────────
+// A bounded, centered-on-1.0 multiplier into the corruption knobs. ONE
+// multiplier (onset OR exposure per NPC, never both stacked) keeps the deity
+// pressure inside corruption's deliberate equilibrium damping — no death
+// spiral. The span is DELIBERATELY small (±0.40 max swing) so the deity tilts
+// the loop's balance, it never overwhelms the security/prosperity counter-force.
+export const DEITY_CORRUPTION_TUNING = Object.freeze({
+  // Max swing of the centered-on-1.0 multiplier at full per-NPC disfavor.
+  // 0.40 ⇒ multiplier ∈ [0.60, 1.40] — bounded, well inside the equilibrium.
+  span: 0.40,
+  // The deity's own alignment-axis magnitude as a signed direction.
+  axisSign: Object.freeze({ evil: -1, good: 1, neutral: 0 }),
+});
+
+/** Lowercased authored personality descriptor strings for an NPC: reads the
+ *  {dominant, flaw, modifier} slots the generator writes, tolerant of a flat
+ *  string / array shape. NEVER reads npcStates.alignment (RNG-rolled, OQ13).
+ * @param {any} npc @returns {string[]} */
+function authoredAlignmentTraits(npc = {}) {
+  const p = npc?.personality;
+  if (!p) return [];
+  if (typeof p === 'string') return [p];
+  if (Array.isArray(p)) return p.filter((x) => typeof x === 'string');
+  return [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
+}
+
+/** Signed good↔evil conscience score for an NPC's AUTHORED personality (Σ of
+ *  TRAIT_ALIGNMENT weights, clamped to [-1, 1]). + is good-leaning, − is
+ *  evil-leaning. Absent personality ⇒ 0 (neutral, no signal).
+ * @param {any} npc @returns {number} */
+export function npcAlignmentScore(npc) {
+  let score = 0;
+  for (const trait of authoredAlignmentTraits(npc)) {
+    const w = /** @type {Record<string, number>} */ (TRAIT_ALIGNMENT)[String(trait).trim().toLowerCase()];
+    if (Number.isFinite(w)) score += w;
+  }
+  return clamp(score, -1, 1);
+}
+
+/** The signed alignment direction of an embedded deity snapshot: evil → −1,
+ *  good → +1, neutral / absent → 0.
+ * @param {any} deity @returns {-1|0|1} */
+export function deityAlignmentDirection(deity) {
+  if (!deity) return 0;
+  const sign = /** @type {Record<string, number>} */ (DEITY_CORRUPTION_TUNING.axisSign)[deity.alignmentAxis];
+  return /** @type {-1|0|1} */ (Number.isFinite(sign) ? sign : 0);
+}
+
+/** True iff the settlement carries an embedded EVIL-aligned primary deity. This
+ *  is the per-settlement form of the F2 activation gate: the caller still gates
+ *  on religionDynamicsEnabled + isSubsystemActive, but the per-settlement deity
+ *  presence is what relaxes the onset gate for THAT settlement.
+ * @param {any} settlement @returns {boolean} */
+export function hasCorruptingDeity(settlement) {
+  return deityAlignmentDirection(settlement?.config?.primaryDeitySnapshot) < 0;
+}
+
+/** True iff the settlement carries an embedded GOOD-aligned primary deity.
+ * @param {any} settlement @returns {boolean} */
+export function hasRepressingDeity(settlement) {
+  return deityAlignmentDirection(settlement?.config?.primaryDeitySnapshot) > 0;
+}
+
+/**
+ * The per-NPC deity-disfavor multipliers (each centered on 1.0) for the
+ * corruption knobs, given a deity snapshot and an NPC. The KEY invariant: AT
+ * MOST ONE of `{onset, exposure}` differs from 1.0 for any NPC — the deity
+ * pressure is a SINGLE bounded multiplier, never stacked across knobs (stacking
+ * onset+exposure+demotion blows past corruption's equilibrium damping →
+ * death-spiral). Routing:
+ *
+ *   • EVIL deity (dir −1) → drives the ONSET side ("corrupts the faithful from
+ *     within"). An evil-aligned NPC (score < 0) ⇒ onset > 1 (corrupts faster);
+ *     a good-aligned NPC (score > 0) ⇒ onset < 1 (resists). exposure = 1.0.
+ *   • GOOD deity (dir +1) → drives the EXPOSURE side, which runs REGARDLESS of a
+ *     criminal institution ("the temple installs an incorruptible successor").
+ *     An evil-aligned corrupt NPC (score < 0) ⇒ exposure > 1 (outed faster); a
+ *     good-aligned NPC ⇒ exposure < 1. onset = 1.0 (a good deity NEVER raises
+ *     onset).
+ *   • NEUTRAL / absent deity ⇒ both EXACTLY 1.0 (byte-identical).
+ *
+ * Each multiplier lies in [1 − span, 1 + span] (bounded), so it can never
+ * death-spiral the substrate.
+ *
+ * @param {any} deity - an embedded primaryDeitySnapshot (or null)
+ * @param {any} npc - the NPC record (reads AUTHORED personality only)
+ * @returns {{ onset: number, exposure: number }} centered-on-1.0 multipliers
+ */
+export function npcDeityDisfavor(deity, npc) {
+  const dir = deityAlignmentDirection(deity);
+  if (dir === 0) return { onset: 1.0, exposure: 1.0 };
+  const score = npcAlignmentScore(npc); // −1 (evil-leaning) .. +1 (good-leaning)
+
+  if (dir < 0) {
+    // EVIL deity → ONSET side. It RECRUITS its own kind: amplify onset for an
+    // evil-aligned NPC (score < 0 ⇒ −score > 0 ⇒ mult > 1), suppress for a
+    // good-aligned one (score > 0 ⇒ mult < 1, they resist). exposure untouched.
+    const onset = 1 + DEITY_CORRUPTION_TUNING.span * clamp(-score, -1, 1);
+    return { onset, exposure: 1.0 };
+  }
+  // GOOD deity → EXPOSURE side (runs regardless of a criminal institution). It
+  // PURGES its enemies: amplify exposure of an evil-aligned corrupt NPC
+  // (score < 0 ⇒ −score > 0 ⇒ mult > 1, outed faster), protect a good-aligned
+  // one (score > 0 ⇒ mult < 1). onset stays EXACTLY 1.0 (a good deity NEVER
+  // raises onset). One knob moves — never both.
+  const exposure = 1 + DEITY_CORRUPTION_TUNING.span * clamp(-score, -1, 1);
+  return { onset: 1.0, exposure };
+}
+
+/** Re-clamp an externally-supplied disfavor multiplier into the bounded span so
+ *  a caller can never push the corruption knob past the equilibrium damping.
+ * @param {number} mult @returns {number} */
+function deityDisfavorMult(mult) {
+  if (!Number.isFinite(mult)) return 1.0;
+  const lo = 1 - DEITY_CORRUPTION_TUNING.span;
+  const hi = 1 + DEITY_CORRUPTION_TUNING.span;
+  return clamp(mult, lo, hi);
+}
+
 /**
  * Generation-time corruption probability for an ELIGIBLE NPC with a criminal
  * institution present. Caller must check eligibility + criminal presence first.
@@ -101,22 +221,41 @@ export function spawnCorruptionChance({ crime = 0, security = 0.5, prosperity = 
  * Per-tick onset hazard for a clean eligible NPC (criminal institution present).
  * Independent per-NPC rolls make the settlement's corrupt FRACTION saturate
  * naturally (corrupt NPCs stop rolling), so no explicit logistic is needed here.
+ *
+ * `deityDisfavor` (Feature D / R3) is a bounded, centered-on-1.0 multiplier
+ * applied AFTER the existing sum and BEFORE the final clamp — an evil deity's
+ * patronage (>1) raises the hazard for its aligned faithful; a good deity (<1)
+ * represses onset. Defaults to 1.0 ⇒ deity-free / dormant is byte-identical (the
+ * sum and clamp are unchanged). NEVER mutates the frozen TUNING.
+ *
+ * @param {{crime?:number, security?:number, prosperity?:number, priorExposures?:number, deityDisfavor?:number}} [args]
+ * @returns {number}
  */
-export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0 } = {}) {
+export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0, deityDisfavor = 1 } = {}) {
   const t = CORRUPTION_TUNING.onset;
   let p = t.base + n01(crime) * t.crime - n01(security) * t.security - n01(prosperity) * t.prosperity;
   // A burned official is warier + more watched: each prior exposure makes
   // re-corruption progressively harder (diminishing, never zero).
   p /= 1 + t.exposurePenalty * Math.max(0, priorExposures);
+  p *= deityDisfavorMult(deityDisfavor);
   return clamp(p, t.min, t.max);
 }
 
 /**
  * Per-tick organic exposure probability for a corrupt NPC. Rises with security +
  * prosperity and the NPC's visibility (standing); falls with guild strength.
- * @param {{security?:number, prosperity?:number, guildStrength?:number, visibility?:number, priorExposures?:number}} args
+ *
+ * `deityDisfavor` (Feature D / R3) is the SAME bounded centered-on-1.0
+ * multiplier as `onsetHazard`, applied AFTER the existing product and BEFORE the
+ * clamp. This is the side that runs REGARDLESS of a criminal institution, so a
+ * GOOD deity's repression rides HERE: a good deity passes a disfavor > 1 for an
+ * evil-aligned corrupt NPC ⇒ faster exposure / demotion ("the temple installed
+ * an incorruptible successor"). Defaults to 1.0 ⇒ byte-identical when dormant.
+ *
+ * @param {{security?:number, prosperity?:number, guildStrength?:number, visibility?:number, priorExposures?:number, deityDisfavor?:number}} [args]
+ * @returns {number}
  */
-export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength = 0, visibility = 0.5, priorExposures = 0 } = {}) {
+export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength = 0, visibility = 0.5, priorExposures = 0, deityDisfavor = 1 } = {}) {
   const t = CORRUPTION_TUNING.exposure;
   let p = t.base
     + n01(security) * t.security
@@ -125,6 +264,7 @@ export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength
     + n01(visibility) * t.visibility;
   // A repeat offender draws more scrutiny: each prior exposure makes re-exposure easier.
   p *= 1 + t.repeatBoost * Math.max(0, priorExposures);
+  p *= deityDisfavorMult(deityDisfavor);
   return clamp(p, t.min, t.max);
 }
 

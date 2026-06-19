@@ -19,6 +19,7 @@ import {
   stressorSummary,
 } from './WorldPulseData.js';
 import { NameAttackerControl, OutcomeCard, Pill, Section, SmallButton } from './WorldPulsePrimitives.jsx';
+import LiveWarStatus from './LiveWarStatus.jsx';
 
 export default function WorldPulsePanel({ campaign }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
@@ -197,6 +198,10 @@ export default function WorldPulsePanel({ campaign }) {
         gap: 16,
         alignItems: 'start',
       }}>
+        {/* §S3 — LIVE war/trade/faith status from the post-pulse worldState +
+            regional graph. Self-gates: a no-war campaign renders nothing. */}
+        <LiveWarStatus campaign={campaign} nameById={nameById} />
+
         <Section title="Pending Proposals" count={pending.length}>
           {actionError && (
             <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>

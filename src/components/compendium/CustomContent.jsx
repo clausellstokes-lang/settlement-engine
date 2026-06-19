@@ -1,92 +1,29 @@
 import { useState } from 'react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, sans, serif_, FS, swatch } from '../theme.js';
-import { Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, HeartHandshake, Flag, Coins } from 'lucide-react';
-import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, TRADE_CATEGORIES, satisfiesOptions } from '../../domain/customContentSchema.js';
+import { Sparkles, Plus, Edit3, Trash2, Copy, Wand2 } from 'lucide-react';
+import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, TRADE_CATEGORIES, DEITY_ALIGNMENT, DEITY_TEMPER, DEITY_TIER, satisfiesOptions } from '../../domain/customContentSchema.js';
 import SupplyChainsManager from './SupplyChainsManager.jsx';
 import CategorySelect from '../primitives/CategorySelect.jsx';
 import { useStore } from '../../store/index.js';
+import { navigate } from '../../hooks/useRoute.js';
+import { buildRegistry } from '../../lib/customRegistry.js';
 import DeleteConfirmation from '../DeleteConfirmation';
 import { Tag } from './primitives.jsx';
 import { DependencySummary, DependenciesSection } from './Dependencies.jsx';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import DeityEffectPreview from './DeityEffectPreview.jsx';
+import PantheonActivationStrip from './PantheonActivationStrip.jsx';
+import ContentPackBar from './ContentPackBar.jsx';
+import FactionEventBanner from './FactionEventBanner.jsx';
+// Per-bucket schema + the two authoring lanes live in customCategories.js (data
+// only) so they're importable without the manager (and re-exported here for the
+// existing CUSTOM_CATEGORIES import sites, e.g. Dependencies.jsx).
+import { CUSTOM_CATEGORIES, AUTHORING_LANES, CATEGORY_BY_KEY } from './customCategories.js';
+
+export { CUSTOM_CATEGORIES, AUTHORING_LANES, CATEGORY_BY_KEY };
 
 // ── Custom Content Manager ──────────────────────────────────────────────────
-
-// Per-category schema:
-//   fields:        flat scalar fields rendered in the main form
-//   dependencies:  refId-array fields rendered in the always-visible Dependencies
-//                  section (it's what wires custom content into generation + chain
-//                  discovery, so it never collapses). Each dep field is
-//                  { key, label, category | categories[], single?, hint? } where
-//                  `category` (or `categories` for a multi-bucket picker, e.g.
-//                  tradeGoods + services) is the registry category to pick from.
-export const CUSTOM_CATEGORIES = [
-  { key:'institutions', label:'Institutions', Icon:Building2, color:'#1a3a7a',
-    fields:['name','category','authority','tags','essential','magical','criminal','defenseRole','foodImpact','satisfies','description','tierMin','tierMax'],
-    dependencies: [
-      { key:'produces',    label:'Produces (goods/services)', categories:['tradeGoods','services'],
-        hint:'Trade goods or services this institution generates when present.' },
-      { key:'requires',    label:'Requires (inputs)',          categories:['resources','tradeGoods','services'],
-        hint:'Resources, goods, or services this institution consumes — its absence makes the institution viability-marginal.' },
-      { key:'subsumes',    label:'Subsumes (absorbs)',         category:'institutions',
-        hint:'Institutions this one represents — when present, the smaller ones aren’t listed separately.' },
-    ],
-  },
-  { key:'services',     label:'Services',     Icon:HeartHandshake, color:'#0e7c86',
-    fields:['name','category','authority','criticality','economicWeight','magical','criminal','foodImpact','description','tierMin','tierMax'],
-    dependencies: [
-      { key:'providedBy', label:'Provided by (institution)', category:'institutions', single:true,
-        hint:'The institution that offers this service (a service is something an institution provides).' },
-      { key:'requires',   label:'Requires (inputs)',          categories:['resources','tradeGoods','services'],
-        hint:'Resources, goods, or services this service consumes to operate.' },
-    ],
-  },
-  { key:'resources',    label:'Resources',    Icon:Package,   color:'#1a5a28',
-    fields:['name','category','criticality','foodImpact','commodities','description'],
-    dependencies: [
-      { key:'yields',  label:'Output (goods/services)', categories:['tradeGoods','services'],
-        hint:'Goods or services this base resource yields once worked (built-in + custom) — feeds supply-chain discovery as the resource → processor → output flow.' },
-      { key:'enables', label:'Enables institutions', category:'institutions',
-        hint:'Institutions whose viability is boosted by access to this resource.' },
-    ],
-  },
-  { key:'stressors',    label:'Stressors',    Icon:AlertTriangle, color:'#8b1a1a',
-    fields:['name','description','severity','affects'],
-    dependencies: [
-      { key:'disablesInstitutions', label:'Disables institutions', category:'institutions',
-        hint:'Institutions suspended or degraded while this stressor is active.' },
-      { key:'disablesGoods',        label:'Disables trade goods',  category:'tradeGoods',
-        hint:'Goods whose production halts under this stressor.' },
-    ],
-  },
-  { key:'tradeGoods',   label:'Trade Goods',  Icon:Coins,     color:'#a0762a',
-    fields:['name','category','criticality','economicWeight','foodImpact','satisfies','description'],
-    dependencies: [
-      { key:'requiredInstitution', label:'Required institution',  category:'institutions', single:true,
-        hint:'Single institution that must be present for this good to be produced.' },
-      { key:'requiredResources',   label:'Required resources',     categories:['resources','tradeGoods','services'],
-        hint:'Resources, intermediate goods, or services needed to produce this good (built-in + custom).' },
-    ],
-  },
-  { key:'factions',     label:'Factions',     Icon:Flag,      color:'#6a1a4a',
-    fields:['name','authority','archetype','agenda','scale','methods','magical','criminal','defenseRole','description','tierMin'],
-    dependencies: [
-      { key:'controls',  label:'Controls institutions', category:'institutions',
-        hint:'Institutions this faction holds sway over.' },
-      { key:'rivals',    label:'Rivals (conflicts with)', category:'factions',
-        hint:'Factions this one is in conflict with — flagged if both are present.' },
-    ],
-  },
-  // Supply Chains are DISCOVERED (inferred from the inputs/outputs of the types
-  // above), not hand-authored — this tab renders its own discover/verify
-  // manager (SupplyChainsManager) instead of the generic add form.
-  { key:'supplyChains', label:'Supply Chains', Icon:Link2,   color:'#a0762a', discovered:true },
-  // Trade Routes / Power Presets / Defense Presets removed (§14): redundant with
-  // the trade-route, government, and defense controls already in the generation
-  // config. Supply chains are not hand-authored here either — they're discovered
-  // (see the Supply Chains tab) from entity inputs/outputs.
-];
 
 const STRESSOR_AFFECT_CATEGORIES = [
   'economy', 'safety', 'supply chains', 'military', 'religion', 'magic',
@@ -117,6 +54,10 @@ const FIELD_HINTS = {
   agenda:         'What this faction is trying to achieve.',
   scale:          'How much reach and influence this faction has.',
   methods:        'How it pursues its agenda — e.g. bribery, force, diplomacy.',
+  alignmentAxis:  'The god’s moral cast — good, evil, or neutral. Shapes how its faithful behave and which settlements it can win.',
+  temperamentAxis:'Whether the god is warlike, peacelike, or neutral. A warlike god is a banner for conquest.',
+  rankAxis:       'How grand the god is — a major pillar of the pantheon, a minor god, or a fringe cult. A major god anchors religious authority more strongly.',
+  domain:         'What the god presides over — e.g. war, the harvest, the dead (optional flavour).',
 };
 
 // §14 — resolve a stored enum key to its human label for the detail view.
@@ -139,6 +80,10 @@ export function CustomItemAttributes({ item }) {
   if (item.economicWeight) chips.push({ label: keyLabel(ECONOMIC_WEIGHT, item.economicWeight), color: '#1a5a28' });
   if (item.foodImpact) chips.push({ label: `Food · ${item.foodImpact}`, color: '#7a5010' });
   if (item.satisfies) chips.push({ label: `Trade category · ${keyLabel(TRADE_CATEGORIES, item.satisfies) || item.satisfies}`, color: '#7c3aed' });
+  if (item.alignmentAxis) chips.push({ label: `Alignment · ${keyLabel(DEITY_ALIGNMENT, item.alignmentAxis)}`, color: '#7a5a1a' });
+  if (item.temperamentAxis) chips.push({ label: `Temperament · ${keyLabel(DEITY_TEMPER, item.temperamentAxis)}`, color: '#7a5a1a' });
+  if (item.rankAxis) chips.push({ label: `Rank · ${keyLabel(DEITY_TIER, item.rankAxis).split(' —')[0]}`, color: '#7a5a1a' });
+  if (item.domain) chips.push({ label: `Domain · ${item.domain}`, color: '#7a5a1a' });
   if (item.archetype) chips.push({ label: `Archetype · ${item.archetype}`, color: '#6a1a4a' });
   if (item.scale) chips.push({ label: `Scale · ${item.scale}`, color: '#6a1a4a' });
   if (item.severity) chips.push({ label: `Severity · ${item.severity}`, color: '#8b1a1a' });
@@ -176,8 +121,9 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
         fontSize: FS.md, color: SEC, lineHeight: 1.55, marginBottom: 16,
         maxWidth: 460, margin: '0 auto 16px',
       }}>
-        Build your own institutions, resources, stressors, trade goods, power presets, and defense
-        scenarios. Custom content is synced to your account and available across devices.
+        Author your own institutions, services, resources, trade goods, and stressors &mdash;
+        plus a living-world pantheon of deities that steer the simulation. Export and import
+        content packs; everything syncs to your account across devices.
       </div>
 
       {existingCount > 0 && (
@@ -276,6 +222,21 @@ export function ReadOnlyCustomContentList({ search }) {
   );
 }
 
+/** Clone a prebuilt registry seed into an editable draft. Maps the registry
+ *  entry's stable display fields onto the form's draft shape — a starting point
+ *  the author then edits + saves as their own custom item ("start from a built-in"). */
+function seedDraftFromPrebuilt(entry) {
+  if (!entry) return {};
+  const draft = {
+    name: entry.name ? `${entry.name} (copy)` : '',
+    description: entry.desc || '',
+  };
+  if (entry.subcategory && entry.subcategory !== 'custom') draft.category = entry.subcategory;
+  if (Array.isArray(entry.tags) && entry.tags.length) draft.tags = entry.tags.join(', ');
+  if (entry.tierMin) draft.tierMin = entry.tierMin;
+  return draft;
+}
+
 export function CustomContentManager({ search }) {
   const customContent = useStore(s => s.customContent);
   const addCustomItem = useStore(s => s.addCustomItem);
@@ -291,6 +252,10 @@ export function CustomContentManager({ search }) {
   const [editingId, setEditingId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   const [draft, setDraft] = useState({});
+  // "Start from a built-in" — when open, surface the prebuilt seeds the author
+  // can clone into an editable draft. Only meaningful for buckets that have a
+  // prebuilt registry catalog (institutions/resources/stressors/tradeGoods).
+  const [showSeeds, setShowSeeds] = useState(false);
 
   const catDef = CUSTOM_CATEGORIES.find(c => c.key === activeCat);
   const items = customContent[activeCat] || [];
@@ -314,7 +279,13 @@ export function CustomContentManager({ search }) {
     );
   }
 
-  const resetDraft = () => { setDraft({}); setAddingNew(false); setEditingId(null); };
+  const resetDraft = () => { setDraft({}); setAddingNew(false); setEditingId(null); setShowSeeds(false); };
+
+  // A fresh draft for the active bucket — deities open with valid default axes so
+  // validateDeity passes; everything else starts blank.
+  const freshDraft = () => (activeCat === 'deities'
+    ? { alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor' }
+    : {});
 
   const handleSave = () => {
     if (!draft.name?.trim()) return;
@@ -326,13 +297,29 @@ export function CustomContentManager({ search }) {
       setAddingNew(false);
     }
     setDraft({});
+    setShowSeeds(false);
   };
 
   const handleEdit = (item) => {
     setEditingId(item.id);
     setDraft({ ...item });
     setAddingNew(false);
+    setShowSeeds(false);
   };
+
+  // "Start from a built-in" — clone a prebuilt registry seed into an editable
+  // draft (the author then tweaks + saves it as their own custom item).
+  const cloneFromSeed = (entry) => {
+    setDraft(seedDraftFromPrebuilt(entry));
+    setAddingNew(true);
+    setEditingId(null);
+    setShowSeeds(false);
+  };
+  // Buckets with a prebuilt catalog to clone from.
+  const SEEDABLE = new Set(['institutions', 'services', 'resources', 'stressors', 'tradeGoods']);
+  const seedEntries = (showSeeds && SEEDABLE.has(activeCat))
+    ? buildRegistry(customContent).listPrebuilt(activeCat === 'services' ? 'services' : activeCat).slice(0, 60)
+    : [];
 
   // Multi-select "pill" picker for controlled-vocabulary list fields (tags,
   // commodities, stressor channels) — selectable, not free text. Stores the
@@ -384,6 +371,11 @@ export function CustomContentManager({ search }) {
       case 'criticality': return <select {...shared} value={val||''}><option value="">Select…</option>{CRITICALITY.map(c=><option key={c.key} value={c.key}>{c.label}</option>)}</select>;
       case 'economicWeight': return <select {...shared} value={val||''}><option value="">Select…</option>{ECONOMIC_WEIGHT.map(w=><option key={w.key} value={w.key}>{w.label}</option>)}</select>;
       case 'scale': return <select {...shared} value={val||''}><option value="">Select…</option>{['cell','minor','significant','dominant'].map(s=><option key={s} value={s}>{s}</option>)}</select>;
+      // Deity axes (Feature D / R1). Default to a valid enum so a saved deity
+      // always passes validateDeity / the 049 DB CHECK; never an empty option.
+      case 'alignmentAxis': return <select {...shared} value={val||'neutral'}>{DEITY_ALIGNMENT.map(a=><option key={a.key} value={a.key}>{a.label}</option>)}</select>;
+      case 'temperamentAxis': return <select {...shared} value={val||'neutral'}>{DEITY_TEMPER.map(t=><option key={t.key} value={t.key}>{t.label}</option>)}</select>;
+      case 'rankAxis': return <select {...shared} value={val||'minor'}>{DEITY_TIER.map(r=><option key={r.key} value={r.key}>{r.label}</option>)}</select>;
       case 'essential':
       case 'magical':
       case 'criminal': {
@@ -435,6 +427,10 @@ export function CustomContentManager({ search }) {
         ))}
       </div>
 
+      {/* Deity Effect Preview — "this god will…", read live from the shared
+          single-source describeDeityEffects (the SAME numbers the engine uses). */}
+      {activeCat === 'deities' && <DeityEffectPreview draft={draft} />}
+
       {/* Dependencies — collapsible. Categories without `dependencies` skip this. */}
       {Array.isArray(catDef.dependencies) && catDef.dependencies.length > 0 && (
         <DependenciesSection
@@ -451,30 +447,81 @@ export function CustomContentManager({ search }) {
     </div>
   );
 
+  const isLivingLane = AUTHORING_LANES.find(l => l.buckets.includes(activeCat))?.key === 'living';
+
   return (
-    <div>
-      {/* Category tabs */}
-      <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginBottom:12 }}>
-        {CUSTOM_CATEGORIES.map(c => {
-          const count = (customContent[c.key]||[]).length;
-          return (
-            <button key={c.key} type="button" onClick={() => { setActiveCat(c.key); resetDraft(); }}
-              style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', borderRadius:12, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
-              <c.Icon size={11}/> {c.label}
-              {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
-            </button>
-          );
-        })}
-      </div>
+    <div data-testid="custom-content-manager">
+      {/* Content-pack export/import (premium reuse + sharing). */}
+      <ContentPackBar />
+
+      {/* Two authoring lanes: STATIC settlement content vs the LIVING-WORLD
+          content that powers the simulation. The dead buckets appear in neither. */}
+      {AUTHORING_LANES.map(lane => (
+        <div key={lane.key} data-testid={`authoring-lane-${lane.key}`} style={{ marginBottom: 12 }}>
+          <div style={{ fontSize:FS.xs, fontWeight:800, color: lane.key === 'living' ? swatch['#7A5A1A'] : INK, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:2 }}>
+            {lane.label}
+          </div>
+          <div style={{ fontSize:FS.micro, color:MUT, lineHeight:1.4, marginBottom:6 }}>{lane.blurb}</div>
+          <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
+            {lane.buckets.map(key => {
+              const c = CATEGORY_BY_KEY[key];
+              if (!c) return null;
+              const count = (customContent[c.key]||[]).length;
+              return (
+                <button key={c.key} type="button" onClick={() => { setActiveCat(c.key); resetDraft(); }}
+                  style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', borderRadius:12, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
+                  <c.Icon size={11}/> {c.label}
+                  {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+
+      {/* Pantheon activation strip — only meaningful in the living-world lane. */}
+      {isLivingLane && <PantheonActivationStrip />}
+
+      {/* Faction relabel banner — factions arrive via an in-world event, not generation. */}
+      {activeCat === 'factions' && <FactionEventBanner />}
 
       {/* Supply Chains: discovered + verified, not hand-authored — its own manager. */}
       {activeCat === 'supplyChains' && <SupplyChainsManager />}
 
-      {/* Add button */}
+      {/* Add / Start-from-a-built-in / Test-in-a-generation affordances. */}
       {activeCat !== 'supplyChains' && !addingNew && !editingId && (
-        <Button variant="ai" size="sm" icon={<Plus size={12}/>} onClick={() => { setAddingNew(true); setDraft({}); }} style={{ marginBottom:10 }}>
-          Add Custom {catDef.label.slice(0,-1)}
-        </Button>
+        <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginBottom:10 }}>
+          <Button variant="ai" size="sm" icon={<Plus size={12}/>} onClick={() => { setAddingNew(true); setDraft(freshDraft()); setShowSeeds(false); }}>
+            Add Custom {catDef.label.slice(0,-1)}
+          </Button>
+          {SEEDABLE.has(activeCat) && (
+            <Button variant="secondary" size="sm" icon={<Copy size={12}/>} onClick={() => setShowSeeds(s => !s)} aria-pressed={showSeeds}>
+              Start from a built-in
+            </Button>
+          )}
+          <Button variant="secondary" size="sm" icon={<Wand2 size={12}/>} onClick={() => navigate('generate')} title="Run a generation that draws on your custom content.">
+            Test in a generation
+          </Button>
+        </div>
+      )}
+
+      {/* Built-in seed picker (clone a catalog entry into an editable draft). */}
+      {!addingNew && !editingId && showSeeds && seedEntries.length > 0 && (
+        <div data-testid="builtin-seed-picker" style={{ border:`1px solid ${BOR}`, borderRadius:7, padding:'8px 10px', marginBottom:10, background:CARD, maxHeight:200, overflowY:'auto' }}>
+          <div style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em', marginBottom:6 }}>
+            Clone a built-in {catDef.label.toLowerCase().replace(/s$/,'')} as a starting point
+          </div>
+          <div style={{ display:'flex', flexDirection:'column', gap:3 }}>
+            {seedEntries.map(entry => (
+              <Button key={entry.refId} variant="ghost" size="sm" onClick={() => cloneFromSeed(entry)}
+                style={{ display:'flex', alignItems:'center', gap:6, justifyContent:'flex-start', textAlign:'left', border:`1px solid ${BOR}`, borderRadius:5, padding:'5px 8px', background:'transparent', color:INK }}>
+                <Copy size={11} style={{ color:MUT, flexShrink:0 }}/>
+                <span style={{ fontSize:FS.xs, fontWeight:600, flex:1 }}>{entry.name}</span>
+                {entry.subcategory && <Tag label={entry.subcategory} color={catDef.color}/>}
+              </Button>
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Add/edit form */}

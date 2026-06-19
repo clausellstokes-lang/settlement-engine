@@ -59,6 +59,10 @@ const DEFAULT_LAYERS = {
   regionalImpactStatusFilter: ['queued', 'applied', 'resolved'],
   regionalMinSeverity: 0,
   regionalShowGm: true,
+  // UX Phase 5 — spatial war/faith glyph overlay (deployment arrows, siege rings +
+  // coalition badge, occupation shading, trade-war prize). On by default; honors
+  // channel visibility via the same regionalShowGm gate as the other overlays.
+  warFaith: true,
   roads: true,
   labels: true,
   markers: true,

@@ -987,7 +987,28 @@ function spreadTargetsFor(snapshot, stressor) {
       targets.set(to, Math.max(targets.get(to) ?? 0, sourceSeverity));
     }
   }
-  return [...targets.entries()].map(([targetSaveId, sourceSeverity]) => ({ targetSaveId, sourceSeverity }));
+  const out = [...targets.entries()].map(([targetSaveId, sourceSeverity]) => ({ targetSaveId, sourceSeverity }));
+  // Feature D (R2): a religious conversion flows to the WEAKEST orthodoxies first
+  // (most convertible), codepoint tie-break — so the downstream `.slice(0,3)` cap
+  // is deterministic AND legible (conversions chase the thinnest faith, not Map
+  // insertion order). Scoped to `religious_conversion_fracture` so every other
+  // stressor keeps its exact legacy spread order (byte-identical). The orthodoxy
+  // key is the target's religious_authority causal score (lower = more
+  // convertible), read from the SINGLE pre-tick snapshot.
+  if (stressor.type === 'religious_conversion_fracture') {
+    const orthodoxyOf = (/** @type {any} */ id) => {
+      const item = snapshot?.byId?.get?.(String(id));
+      const score = item?.causal?.scores?.religious_authority;
+      return Number.isFinite(score) ? score : 50;
+    };
+    out.sort((a, b) => {
+      const oa = orthodoxyOf(a.targetSaveId);
+      const ob = orthodoxyOf(b.targetSaveId);
+      if (oa !== ob) return oa - ob; // weakest orthodoxy first
+      return a.targetSaveId < b.targetSaveId ? -1 : a.targetSaveId > b.targetSaveId ? 1 : 0;
+    });
+  }
+  return out;
 }
 
 export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {

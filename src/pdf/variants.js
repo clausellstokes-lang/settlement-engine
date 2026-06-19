@@ -19,7 +19,7 @@
  *   'if-events'     — include only when eventLog has entries
  */
 
-/** @typedef {'draft_brief' | 'canon_dossier' | 'timeline_packet'} PdfVariant */
+/** @typedef {'draft_brief' | 'canon_dossier' | 'timeline_packet' | 'campaign_state'} PdfVariant */
 
 export const PDF_VARIANTS = {
   draft_brief: {
@@ -31,6 +31,9 @@ export const PDF_VARIANTS = {
       overview: true,
       systemState: true,
       timeline: false,
+      // The Faith & War chapter is canon-only AND self-gates on dormant
+      // live-world state — a draft brief never carries live war/faith.
+      faithWar: false,
       tonightAtTheTable: true,
       npcQuickRef: true,
       notableNpcs: true,
@@ -58,6 +61,10 @@ export const PDF_VARIANTS = {
       overview: true,
       systemState: true,
       timeline: 'if-canon',
+      // Live "Faith & War" chapter — canon-only (the campaign artifact), and
+      // self-gates to nothing when the live-world slice is dormant ⇒ a
+      // peaceful / deity-free canon save is byte-identical.
+      faithWar: 'if-canon',
       tonightAtTheTable: true,
       npcQuickRef: true,
       notableNpcs: true,
@@ -85,6 +92,7 @@ export const PDF_VARIANTS = {
       overview: false,
       systemState: true,
       timeline: 'if-canon',
+      faithWar: false,
       tonightAtTheTable: false,
       npcQuickRef: false,
       notableNpcs: false,
@@ -99,6 +107,41 @@ export const PDF_VARIANTS = {
       historyFounding: false,
       viabilityAssessment: false,
       relationships: false,
+      aiAppendix: false,
+    },
+  },
+
+  // Campaign State / War Room — the premium living-world artifact. Leads with
+  // the current State chapter (causal-detail enabled), the live Faith & War
+  // chapter, and the Timeline; drops the static reference chapters a DM already
+  // has from the dossier. Self-gates exactly like canon: with a dormant
+  // live-world slice the Faith & War chapter renders nothing, so a no-campaign
+  // export of this variant degrades gracefully to the state-of-the-settlement
+  // chapters.
+  campaign_state: {
+    label: 'Campaign State / War Room',
+    description: 'The living-world snapshot — state, the war front & pantheon, and the timeline.',
+    chapters: {
+      cover: true,
+      toc: true,
+      overview: true,
+      systemState: true,
+      timeline: 'if-canon',
+      faithWar: 'if-canon',
+      tonightAtTheTable: true,
+      npcQuickRef: false,
+      notableNpcs: false,
+      plotHooks: true,
+      powerStructure: true,
+      identityDailyLife: false,
+      services: false,
+      institutions: false,
+      economicsTrade: false,
+      resourcesProduction: false,
+      defenseSecurity: true,
+      historyFounding: false,
+      viabilityAssessment: false,
+      relationships: true,
       aiAppendix: false,
     },
   },

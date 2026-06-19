@@ -139,7 +139,7 @@ export function governingFactionOf(settlement) {
 // different rates — a garrison couples better than a craft guild. Influence
 // ranking still dominates (factors stay near 1).
 
-const COUP_COERCION = Object.freeze({
+export const COUP_COERCION = Object.freeze({
   [A.MILITARY]: 1.25,
   [A.NOBLE]: 1.1,
   [A.ARCANE]: 1.05,

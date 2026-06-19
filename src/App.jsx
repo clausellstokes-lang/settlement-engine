@@ -24,6 +24,7 @@ import { flag as _readFlag } from './lib/flags.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { titleForView, guardForView, viewToPath } from './lib/routes.js';
 import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, sans, serif_, SP, R, FS, swatch } from './components/theme.js';
+import { t } from './copy/index.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
 import CampaignSyncBanner from './components/CampaignSyncBanner.jsx';
@@ -62,13 +63,21 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 // Top-nav destinations. Gallery sits between Compendium and About. (Workshop /
 // "Custom Generate" was removed; the /workshop route redirects to Create.)
 // Pricing stays a header hero link (HERO_LINKS), not a primary destination.
+//
+// UX Phase 4 (the Realm IA move):
+//   - `settlements` keeps its view id + /settlements path for back-compat, but the
+//     LABEL is now "Library".
+//   - `realm` is the new destination — the simulation's IA home. It hosts the
+//     World Map (+ Pulse / Chronicle / Pantheon via the Realm Inspector). The old
+//     `map` view redirects into it; the Realm body IS the World Map workspace.
+//     Visible to anon (a locked-state preview), no longer hidden.
 const NAV = [
-  { id: 'generate',    label: 'Create',      Icon: MapPin },
-  { id: 'settlements', label: 'Settlements', Icon: FolderOpen },
-  { id: 'map',         label: 'World Map',   Icon: MapIcon },
-  { id: 'compendium',  label: 'Compendium',  Icon: BookOpen },
-  { id: 'gallery',     label: 'Gallery',     Icon: Images },
-  { id: 'howto',       label: 'About',       Icon: Info },
+  { id: 'generate',    label: 'Create',     Icon: MapPin },
+  { id: 'settlements', label: 'Library',    Icon: FolderOpen },
+  { id: 'realm',       label: 'Realm',      Icon: MapIcon },
+  { id: 'compendium',  label: 'Compendium', Icon: BookOpen },
+  { id: 'gallery',     label: 'Gallery',    Icon: Images },
+  { id: 'howto',       label: 'About',      Icon: Info },
 ];
 
 // Secondary header links. "Pricing" was pulled from the top bar — subscription
@@ -190,9 +199,16 @@ export default function App() {
   // Custom Generate (the Workshop) was removed; /compare* is now a section in
   // About. The route entries stay (so the URLs still resolve and old links /
   // SEO keep working), but we bounce them to the new surface.
+  //
+  // UX Phase 4 — the World Map moved INTO the Realm hub. `/map` (and any
+  // `?view=map`, which resolveLocation already aliases to `realm`) redirects to
+  // `/realm` so legacy links + bookmarks never 404. The Realm body IS the World
+  // Map workspace, so the destination is identical content under the new URL.
   useEffect(() => {
     if (view === 'workshop') {
       navigate('generate', { replace: true });
+    } else if (view === 'map') {
+      navigate('realm', { replace: true });
     } else if (view.startsWith('compare')) {
       navigate('howto', { replace: true, search: '?tab=compare' });
     }
@@ -261,12 +277,12 @@ export default function App() {
   // Gate premium-only views
   const handleNavClick = (id) => {
     setView(id);
-    // P103 / X-2 — map_clicked pricing moment. Wanderers clicking the
-    // World Map nav see a Cartographer-upgrade pitch (cooldown 24h via
-    // the moments library; premium users are auto-skipped). Fires on
-    // navigation rather than landing because the locked-state Map page
-    // (P109/X-7) needs the moment context.
-    if (id === 'map' && authTier !== 'anon' && authTier !== 'premium') {
+    // UX Phase 4 — the Realm nav. Free wanderers clicking Realm see a
+    // Cartographer-upgrade pitch (cooldown 24h; premium auto-skipped). Anon are
+    // NOT skipped here at click time — the Realm Dashboard fires the richer
+    // `map_realm_teaser` moment on landing for both anon and free, so we only
+    // fire the lighter `map_clicked` for free users on the click itself.
+    if (id === 'realm' && authTier !== 'anon' && authTier !== 'premium') {
       import('./lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
         const setActive = useStore.getState().setActivePricingMoment;
         triggerPricingMoment('map_clicked', setActive, { tier: authTier });
@@ -274,17 +290,16 @@ export default function App() {
     }
   };
 
-  // Filter nav items based on visibility
-  const visibleNav = NAV.filter(item => {
-    if (item.id === 'map' && authTier === 'anon') return false;
-    return true;
-  });
+  // Filter nav items based on visibility. UX Phase 4 — the Realm is REACHABLE
+  // for anon (a locked-state preview), no longer hidden; the old `map`-for-anon
+  // hide is gone. Nothing is filtered today, but the seam stays for future gates.
+  const visibleNav = NAV;
 
   // Mobile bottom nav: pick the slots from an EXPLICIT priority order rather than
   // slicing the desktop NAV order — otherwise inserting/reordering a NAV item
   // silently evicts whatever falls past the slice (this is how About, then Gallery,
   // got dropped). About lives in the account menu on mobile, so it ranks last.
-  const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'map', 'gallery', 'compendium', 'howto'];
+  const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'realm', 'gallery', 'compendium', 'howto'];
   const mobileNav = MOBILE_NAV_PRIORITY
     .map(id => visibleNav.find(item => item.id === id))
     .filter(Boolean)
@@ -497,6 +512,22 @@ export default function App() {
                 />
               )}
 
+              {/* UX Phase 4 — persistent tier chip. Anon → "Sign in" (the
+                  AccountMenu below). Free → an "Upgrade" chip routing to the
+                  canonical premium-value surface. Premium → the account chip
+                  (no upgrade chip). */}
+              {authTier === 'free' && (
+                <Button
+                  variant="gold"
+                  size="md"
+                  icon={<Zap size={13} />}
+                  onClick={() => setView('pricing')}
+                  style={{ letterSpacing: '0.04em', textTransform: 'uppercase' }}
+                >
+                  Upgrade
+                </Button>
+              )}
+
               {/* Account identity + menu (Account / Manage subscription & credits) */}
               <AccountMenu
                 isAnon={authTier === 'anon'}
@@ -520,7 +551,11 @@ export default function App() {
           <Suspense fallback={<Loading />}>
             {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
             {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
-            {view === 'map'         && <WorldMap onNavigate={setView} />}
+            {/* UX Phase 4 — the Realm hub. WorldMap is the Realm body (Map + the
+                Realm Inspector's Pulse / Chronicle / Pantheon sections). `map`
+                still renders it for the one frame before the redirect effect
+                upgrades the URL to /realm, so there's no blank flash. */}
+            {(view === 'realm' || view === 'map') && <WorldMap onNavigate={setView} />}
             {view === 'compendium'  && <CompendiumPanel standalone />}
             {view === 'howto'       && <HowToUse standalone />}
             {/* Guarded views: render only once authorized. The guard effect
@@ -543,7 +578,11 @@ export default function App() {
           </Suspense>
         </main>
 
-        {/* ── Footer ──────────────────────────────────────────── */}
+        {/* ── Footer ──────────────────────────────────────────────
+            P9 — restored navigation links (About / Pricing / Compendium /
+            Gallery / legal). Pricing routes to the canonical premium-value
+            surface (the same target as the header tier chip + the Realm
+            locked-state), so there is ONE "What the Realm unlocks" destination. */}
         <footer style={{
           background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
           borderTop: '1px solid rgba(160,118,42,0.25)',
@@ -555,23 +594,50 @@ export default function App() {
           letterSpacing: '0.04em',
           userSelect: 'none',
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          gap: SP.sm,
           alignItems: 'center',
-          gap: SP.lg,
-          flexWrap: 'wrap',
         }}>
-          <span>&copy; 2026 SettlementForge</span>
-          <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
-          <span>All rights reserved</span>
-          <span style={{ color: 'rgba(160,118,42,0.3)' }}>|</span>
-          <a href="mailto:clausellstokes@aol.com" style={{
-            color: MUTED, textDecoration: 'none', display: 'inline-flex',
-            alignItems: 'center', gap: 4,
-            padding: isMobile ? `0 ${SP.sm}px` : 0,
-            minHeight: isMobile ? 44 : undefined,
+          <nav aria-label="Footer" style={{
+            display: 'flex', justifyContent: 'center', alignItems: 'center',
+            gap: SP.md, flexWrap: 'wrap',
           }}>
-            <Headphones size={11} /> Support
-          </a>
+            {[
+              { label: t('footer.about'),      onClick: () => setView('howto') },
+              { label: t('footer.pricing'),    onClick: () => setView('pricing') },
+              { label: t('footer.compendium'), onClick: () => setView('compendium') },
+              { label: t('footer.gallery'),    onClick: () => setView('gallery') },
+            ].map(({ label, onClick }, i) => (
+              <span key={label} style={{ display: 'inline-flex', alignItems: 'center', gap: SP.md }}>
+                {i > 0 && <span style={{ color: 'rgba(160,118,42,0.3)' }} aria-hidden="true">|</span>}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onClick}
+                  style={{
+                    color: MUTED, fontFamily: sans, fontSize: FS.sm, fontWeight: 500,
+                    letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined,
+                  }}
+                >
+                  {label}
+                </Button>
+              </span>
+            ))}
+            <span style={{ color: 'rgba(160,118,42,0.3)' }} aria-hidden="true">|</span>
+            <a href="mailto:clausellstokes@aol.com" style={{
+              color: MUTED, textDecoration: 'none', display: 'inline-flex',
+              alignItems: 'center', gap: 4,
+              padding: isMobile ? `0 ${SP.sm}px` : 0,
+              minHeight: isMobile ? 44 : undefined,
+            }}>
+              <Headphones size={11} /> {t('footer.contact')}
+            </a>
+          </nav>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
+            <span>{t('footer.copyright', { year: 2026 })}</span>
+            <span style={{ color: 'rgba(160,118,42,0.3)' }} aria-hidden="true">|</span>
+            <span style={{ fontStyle: 'italic' }}>{t('footer.antiAi')}</span>
+          </div>
         </footer>
 
         {/* ── Mobile bottom nav ───────────────────────────────── */}

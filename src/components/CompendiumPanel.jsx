@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
-import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2 } from 'lucide-react';
+import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Globe } from 'lucide-react';
 import Button from './primitives/Button.jsx';
 import { useStore } from '../store/index.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
-import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
+import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, LivingWorldTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
 import { CustomContentManager } from './compendium/CustomContent.jsx';
 
 // ── Built-in Catalog Tabs ───────────────────────────────────────────────────
 
 const TABS = [
-  { id:'tiers',       label:'Tiers & Routes',    Icon: Layers },
-  { id:'economy',     label:'Economy',            Icon: Coins },
-  { id:'power',       label:'Power & Factions',   Icon: Shield },
-  { id:'arcane',      label:'Magic & Religion',   Icon: Sparkles },
-  { id:'stress',      label:'Stress',             Icon: AlertTriangle },
-  { id:'neighbour',   label:'Neighbour System',   Icon: Link2 },
-  { id:'institutions',label:'Institutions',       Icon: Building2 },
+  { id:'tiers',       label:'Tiers & Routes',         Icon: Layers },
+  { id:'economy',     label:'Economy',                 Icon: Coins },
+  { id:'power',       label:'Power & Factions',        Icon: Shield },
+  { id:'arcane',      label:'Religion & the Pantheon', Icon: Sparkles },
+  { id:'living',      label:'Living World',            Icon: Globe },
+  { id:'stress',      label:'Stress',                  Icon: AlertTriangle },
+  { id:'neighbour',   label:'Neighbour System',        Icon: Link2 },
+  { id:'institutions',label:'Institutions',            Icon: Building2 },
 ];
 
 // P127 / CP-3 — Anchor → tab map. HelpPopover and external deep-links
@@ -36,6 +37,8 @@ const ANCHOR_TO_TAB = Object.freeze({
   'magic':        'arcane',
   'cultures':     'arcane',
   'religion':     'arcane',
+  'pantheon':     'arcane',
+  'living-world': 'living',
   'stress':       'stress',
   'threat':       'stress',
   'neighbours':   'neighbour',
@@ -56,8 +59,10 @@ const TAB_META = Object.freeze({
                   desc: 'Prosperity tiers, priority sliders, exports/imports, supply chains, viability scoring. The simulator\'s economic model, documented.' },
   power:        { title: 'Power & faction archetypes: SettlementForge Compendium',
                   desc: 'Forty-plus settlement archetypes (Merchant Republic, Mage Theocracy, Frontier Outpost, Crusader Synthesis) keyed to slider + threat conditions.' },
-  arcane:       { title: 'Magic & religion reference: SettlementForge Compendium',
-                  desc: 'How magic and religious institutions interact in the simulator: heresy suppression, arcane economy, theocratic governance, sacred goods trade.' },
+  arcane:       { title: 'Religion & the Pantheon reference: SettlementForge Compendium',
+                  desc: 'The deity axes (alignment, temperament, rank) and their living-world effects, dormant-until-assigned, the conversion contest, magic legality, and theocratic governance in SettlementForge.' },
+  living:       { title: 'The Living World reference: SettlementForge Compendium',
+                  desc: 'The simulation substrate behind the generator: causal variables, pressures and settlement strength, the World Pulse, the self-ending war layer, and the pantheon.' },
   stress:       { title: 'Stress conditions: SettlementForge Compendium',
                   desc: 'Famine, siege, plague, political fracture, monster pressure: how each stress shifts institutions, factions, and supply chains.' },
   neighbour:    { title: 'Neighbour System reference: SettlementForge Compendium',
@@ -138,6 +143,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
       case 'economy':      return <EconomyTab/>;
       case 'power':        return <PowerTab_ search={q}/>;
       case 'arcane':       return <ArcaneTab/>;
+      case 'living':       return <LivingWorldTab/>;
       case 'stress':       return <StressTab search={q}/>;
       case 'neighbour':    return <NeighbourTab search={q}/>;
       case 'institutions': return <InstitutionsTab config={config} search={search}/>;

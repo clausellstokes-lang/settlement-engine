@@ -180,3 +180,79 @@ describe('compareSystemState', () => {
     expect(delta.explanation).toContain('Strained');
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// S2 — 15-var causal movement folded into the 4-dim drivers/risks.
+//
+// The war-layer / religion causal movement (war_drain on economic_capacity, the
+// deepened religious_authority, war_pressure, army_deployed) surfaces as NAMED
+// drivers/risks within the EXISTING four dimensions — NOT a new section. The
+// hard guarantee: a settlement with NO war/religion conditions produces the
+// IDENTICAL drivers/risks as before; the new entries appear ONLY when the
+// matching condition/deity is present.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('S2 — war/religion causal movement as named drivers/risks', () => {
+  const base = (patch = {}) => ({
+    economicState: { prosperity: 'Moderate', primaryExports: ['grain'] },
+    powerStructure: { factions: [{ faction: 'A' }, { faction: 'B' }] },
+    institutions: [],
+    config: {},
+    ...patch,
+  });
+
+  test('no-condition settlement is byte-identical with vs without empty arrays', () => {
+    const plain = base();
+    const withEmpties = base({ activeConditions: [], stress: [] });
+    expect(JSON.stringify(deriveSystemState(withEmpties)))
+      .toBe(JSON.stringify(deriveSystemState(plain)));
+  });
+
+  test('a plain settlement carries NONE of the war/religion strings', () => {
+    const st = deriveSystemState(base());
+    const allText = JSON.stringify(st);
+    expect(allText).not.toContain('War economy');
+    expect(allText).not.toContain('wartime pressure');
+    expect(allText).not.toContain('deployed abroad');
+    expect(allText).not.toContain('religious authority');
+  });
+
+  test('war_drain surfaces a war-labeled FALLING economic driver in resilience', () => {
+    const plain = deriveSystemState(base());
+    const war = deriveSystemState(base({ activeConditions: [{ archetype: 'war_drain', severity: 0.5 }] }));
+    expect(war.resilience.risks).toContain('War economy is bleeding the home treasury');
+    // It is a FALLING driver — resilience drops vs the same town at peace.
+    expect(war.resilience.value).toBeLessThan(plain.resilience.value);
+    // The plain town does NOT carry the string.
+    expect(plain.resilience.risks).not.toContain('War economy is bleeding the home treasury');
+  });
+
+  test('war_pressure + army_deployed surface as external-threat risks', () => {
+    const plain = deriveSystemState(base());
+    const war = deriveSystemState(base({ activeConditions: [
+      { archetype: 'war_pressure', severity: 0.6 },
+      { archetype: 'army_deployed', severity: 0.5 },
+    ] }));
+    expect(war.externalThreat.risks).toContain('Under active wartime pressure');
+    expect(war.externalThreat.risks).toContain('Standing army deployed abroad — home garrison thinned');
+    // External threat RISES — these are pressures, not relief.
+    expect(war.externalThreat.value).toBeGreaterThan(plain.externalThreat.value);
+  });
+
+  test('a dominant deity surfaces a religious_authority driver in volatility', () => {
+    const plain = deriveSystemState(base());
+    const deityTown = deriveSystemState(base({ config: { primaryDeitySnapshot: { name: 'Pelor', rankAxis: 'major' } } }));
+    expect(deityTown.volatility.drivers).toContain('Pelor anchors religious authority');
+    expect(plain.volatility.drivers).not.toContain('Pelor anchors religious authority');
+  });
+
+  test('a minor/cult deity surfaces a weaker, named religious driver', () => {
+    const cultTown = deriveSystemState(base({ config: { primaryDeitySnapshot: { name: 'The Whispered One', rankAxis: 'cult' } } }));
+    expect(cultTown.volatility.drivers).toContain('The Whispered One shapes religious authority');
+  });
+
+  test('a deity with no recognized rankAxis is inert (no driver, byte-neutral)', () => {
+    const plain = deriveSystemState(base());
+    const weird = deriveSystemState(base({ config: { primaryDeitySnapshot: { name: 'X', rankAxis: 'unknown' } } }));
+    expect(JSON.stringify(weird.volatility)).toBe(JSON.stringify(plain.volatility));
+  });
+});

@@ -366,6 +366,54 @@ const strongestPressure = (pressureIdx, saveId, types) =>
 
 const mean = (...values) => values.reduce((sum, value) => sum + (Number(value) || 0), 0) / values.length;
 
+// ── Feature C disposition seam ──────────────────────────────────────────────
+// A settlement's centered-on-1.0 aggressiveness multiplier modulates the
+// candidates it drives, SIGNED BY INTENT: aggression boosts escalation and damps
+// de-escalation (and a pacifist does the reverse), so an aggressive settlement
+// does not also "sue for peace" harder. A factor of exactly 1.0 (empty/legacy
+// ledger) is a no-op in every branch ⇒ byte-identical.
+const EMPTY_DISPOSITION = Object.freeze({});
+
+// Relationship hostility ordering — higher = more adversarial. A label change
+// toward a higher rank is escalation; toward a lower rank, de-escalation.
+const HOSTILITY_RANK = Object.freeze({
+  allied: 0, patron: 1, client: 1, vassal: 1, trade_partner: 2, neutral: 3,
+  criminal_network: 4, rival: 4, cold_war: 5, hostile: 6,
+});
+const hostilityRank = (/** @type {any} */ type) => {
+  const r = /** @type {Record<string, number>} */ (HOSTILITY_RANK)[normalizeRelationshipType(type)];
+  return Number.isFinite(r) ? r : 3;
+};
+
+// Internal drifts carry no toType; classify by candidateType keyword. An unmatched
+// type is NEUTRAL (factor 1.0 ⇒ no effect), so a misclassification can never churn
+// legacy and only ever damps/boosts once dispositions are non-trivial.
+const ESCALATION_HINT = /(arms_race|sabotage|incident|overreach|coup|rebellion|hostile|raid|extract|power_play|autonomy_bid|debt_spiral|forces_align|subjugat|war|sanction)/i;
+const DEESCALATION_HINT = /(thaw|recovery|compact|protect|stability|alliance|allied|trade_partner|patronage|compliance|support|reconcil)/i;
+
+export function candidateDirection(/** @type {any} */ candidateType, /** @type {any} */ relState, /** @type {any} */ metadataAny) {
+  const toType = typeof metadataAny?.toType === "string" ? metadataAny.toType : null;
+  if (toType) {
+    const delta = hostilityRank(toType) - hostilityRank(relState?.relationshipType);
+    if (delta > 0) return "escalation";
+    if (delta < 0) return "de_escalation";
+    return "neutral";
+  }
+  const t = String(candidateType || "");
+  if (ESCALATION_HINT.test(t)) return "escalation";
+  if (DEESCALATION_HINT.test(t)) return "de_escalation";
+  return "neutral";
+}
+
+// Signed, centered-on-1.0 disposition factor. raw==1.0 ⇒ 1.0 in EVERY branch.
+export function signedDispositionFactor(/** @type {any} */ rawFactor, /** @type {any} */ direction) {
+  const raw = Number.isFinite(rawFactor) ? rawFactor : 1.0;
+  if (raw === 1.0) return 1.0;
+  if (direction === "escalation") return raw;
+  if (direction === "de_escalation") return 2 - raw;
+  return 1.0;
+}
+
 const candidateBase = ({
   edge,
   relState,
@@ -383,11 +431,20 @@ const candidateBase = ({
   condition,
   targetSaveId,
   conflictTags = [],
+  dispositionFactor = EMPTY_DISPOSITION,
 }) => {
   const key = relationshipKeyFromEdge(edge);
   const settlements = getRelationshipSettlements(edge);
   const metadataAny = /** @type {any} */ (metadata);
   const toType = typeof metadataAny.toType === "string" ? metadataAny.toType : null;
+  // The actor (the settlement driving this candidate) is the attributed save. Its
+  // disposition multiplier, signed by the candidate's escalation/de-escalation
+  // intent, scales severity + probability. 1.0 for a legacy/empty ledger.
+  const actorId = String(targetSaveId || settlements.from);
+  const factor = signedDispositionFactor(
+    /** @type {Record<string, any>} */ (dispositionFactor)?.[actorId],
+    candidateDirection(candidateType, relState, metadataAny),
+  );
   return {
     id: `candidate.relationship.${candidateType}.${key}.${tick}`,
     type: condition ? "condition" : "relationship",
@@ -396,8 +453,8 @@ const candidateBase = ({
     ruleFamily: "relationship",
     relationshipKey: key,
     targetSaveId: targetSaveId || settlements.from,
-    severity: clamp01(severity),
-    probability: clamp01(probability),
+    severity: clamp01(severity * factor),
+    probability: clamp01(probability * factor),
     applyMode,
     headline: toType
       ? `${relState.relationshipType.replace(/_/g, " ")} may become ${toType.replace(/_/g, " ")}`
@@ -476,15 +533,53 @@ function populationFor(item) {
   return Math.max(0, Number(item?.settlement?.population) || 0);
 }
 
-function settlementStrength(item, pressure = {}) {
+// Z2a homeostasis gearing — the DIRECT war-cost penalty subtracted from raw
+// strength. The headline finding (§6): war_drain dropped economic_capacity 18pts but
+// settlementStrength moved <1% per front, because economic_capacity has NO wired path
+// into the `economy` PRESSURE the strength term reads (pressureModel's economy is
+// trade/labor/infra/food only). So the homeostasis loop never closed — a besieging
+// realm never lost the confidence to keep fighting and wars ran forever. The fix
+// reads the AGGRESSOR's own war conditions DIRECTLY off the item and subtracts a
+// meaningful penalty: war_drain (the reverting per-tick bleed) AND war_exhaustion
+// (the NON-REVERTING scar — see activeConditions). Both are stamped ONLY by the gated
+// war layer, so a no-war settlement carries neither ⇒ penalty 0 ⇒ BYTE-IDENTICAL.
+const WAR_DRAIN_STRENGTH_WEIGHT = 0.20;      // a full war_drain costs up to 0.20 strength
+const WAR_EXHAUSTION_STRENGTH_WEIGHT = 0.22; // the scar bites at least as hard, and lasts
+function warCostPenalty(/** @type {any} */ item) {
+  const conditions = item?.settlement?.activeConditions || item?.activeConditions || [];
+  if (!Array.isArray(conditions) || !conditions.length) return 0;
+  let drain = 0;
+  let exhaustion = 0;
+  for (const c of conditions) {
+    if (!c) continue;
+    const sev = Number(c.severity) || 0;
+    if (c.archetype === "war_drain") drain = Math.max(drain, sev);
+    else if (c.archetype === "war_exhaustion") exhaustion = Math.max(exhaustion, sev);
+  }
+  return drain * WAR_DRAIN_STRENGTH_WEIGHT + exhaustion * WAR_EXHAUSTION_STRENGTH_WEIGHT;
+}
+
+// Exported for the war layer (Feature A): the SAME confidence input the
+// subjugation/rival contests read, reused verbatim so a deploy-confidence gate
+// and the relationship gate can never diverge. 0..1.
+export function settlementStrength(/** @type {any} */ item, /** @type {any} */ pressure = {}) {
   const pop = populationFor(item);
   const popScore = Math.min(1, Math.log10(Math.max(10, pop)) / 5);
+  // economy (0.12) is the war-layer homeostasis lever (OQ7=A, Phase 0). conflict
+  // stays 0.18 so war's direct effect isn't diluted; the weight came from tier/pop/
+  // trade/legitimacy. Weights sum to 1.0. The war-cost penalty (Z2a) is then
+  // subtracted OUTSIDE the weighted blend — it is a direct, gearing-raising erosion
+  // (not a pressure diluted by a small weight), so sustained war meaningfully lowers
+  // the aggressor's confidence and the homeostasis loop CLOSES. Byte-identical when
+  // no war_drain/war_exhaustion condition is present (no-war settlement).
   return clamp01(
-    tierRankFor(item) / Math.max(1, TIER_ORDER.length - 1) * 0.42
-    + popScore * 0.22
+    tierRankFor(item) / Math.max(1, TIER_ORDER.length - 1) * 0.36
+    + popScore * 0.20
     + (1 - (pressure.conflict || 0)) * 0.18
-    + (1 - (pressure.trade || 0)) * 0.1
-    + (1 - (pressure.legitimacy || 0)) * 0.08,
+    + (1 - (pressure.trade || 0)) * 0.08
+    + (1 - (pressure.legitimacy || 0)) * 0.06
+    + (1 - (pressure.economy || 0)) * 0.12
+    - warCostPenalty(item),
   );
 }
 
@@ -1998,7 +2093,10 @@ const RULE_EVALUATORS = {
   criminal_network: criminalNetworkRules,
 };
 
-function buildPressureSummary(pressureIdx, saveId) {
+// Exported for the war layer (Feature A): builds the {conflict,trade,legitimacy,
+// economy,...} summary settlementStrength reads, so the deploy gate consumes the
+// identical pressure vector the relationship rules do.
+export function buildPressureSummary(/** @type {any} */ pressureIdx, /** @type {any} */ saveId) {
   return {
     food: pressureFor(pressureIdx, saveId, "food"),
     disease: pressureFor(pressureIdx, saveId, "disease"),
@@ -2012,7 +2110,7 @@ function buildPressureSummary(pressureIdx, saveId) {
   };
 }
 
-export function evaluateRelationshipRules(snapshot, pressureIdx, context = {}) {
+export function evaluateRelationshipRules(snapshot, pressureIdx, /** @type {any} */ context = {}) {
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const states = snapshot?.worldState?.relationshipStates || {};
 
@@ -2033,6 +2131,9 @@ export function evaluateRelationshipRules(snapshot, pressureIdx, context = {}) {
       pressureIdx,
       snapshot,
       tick,
+      // Feature C: per-settlement aggressiveness multipliers (centered on 1.0).
+      // Empty/absent ⇒ every candidate factor is 1.0 ⇒ byte-identical legacy.
+      dispositionFactor: context.dispositionFactor || EMPTY_DISPOSITION,
     };
     return [
       ...evaluator(ctx),

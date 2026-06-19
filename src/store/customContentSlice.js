@@ -17,6 +17,7 @@
 
 import { customContentService } from '../lib/customContent.js';
 import { migrateCustomContent } from '../domain/customContentMigrations.js';
+import { validateDeity } from '../domain/customContentSchema.js';
 
 const LOCAL_KEY = 'sf_custom_content';
 const LOCAL_KEY_PREFIX = 'sf_custom_content:';
@@ -63,6 +64,7 @@ const EMPTY = {
   stressors: [],
   tradeGoods: [],
   factions: [],
+  deities: [],
   supplyChains: [],
   tradeRoutes: [],
   powerPresets: [],
@@ -133,6 +135,16 @@ export const createCustomContentSlice = (set, get) => {
 
   /** Add a custom item to a category. */
   addCustomItem: (category, item) => {
+    // Schema validation for buckets that declare frozen enum axes. The deities
+    // bucket's three axes mirror the 049 DB CHECK exactly — reject a bad axis
+    // here so it never reaches the cloud (where the CHECK would hard-reject it).
+    if (category === 'deities') {
+      const { ok, errors } = validateDeity(item);
+      if (!ok) {
+        set(state => { state.customContentError = errors.join(' '); });
+        return null;
+      }
+    }
     // Optimistic local insert
     const entry = {
       ...item,
@@ -183,6 +195,16 @@ export const createCustomContentSlice = (set, get) => {
 
   /** Update a custom item. */
   updateCustomItem: (category, id, partial) => {
+    // Validate the merged result for axis-bearing buckets so an edit can't
+    // demote a valid deity to a bad axis (which the cloud CHECK would reject).
+    if (category === 'deities') {
+      const existing = (get().customContent.deities || []).find(x => x.id === id) || {};
+      const { ok, errors } = validateDeity({ ...existing, ...partial });
+      if (!ok) {
+        set(state => { state.customContentError = errors.join(' '); });
+        return null;
+      }
+    }
     set(state => {
       const list = state.customContent[category];
       const idx = list.findIndex(x => x.id === id);

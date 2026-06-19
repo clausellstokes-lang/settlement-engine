@@ -31,7 +31,14 @@ const DEFAULT_VIEW = 'generate';
 // `guard` — 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
 export const ROUTES = Object.freeze([
   { view: 'generate',              path: '/create',                title: 'Create a Settlement' },
-  { view: 'settlements',           path: '/settlements',           title: 'Your Settlements' },
+  // UX Phase 4 — `settlements` keeps its view id + /settlements path (back-compat),
+  // but the nav LABEL becomes "Library" (App's NAV array).
+  { view: 'settlements',           path: '/settlements',           title: 'Your Library' },
+  // UX Phase 4 — the Realm hub: the simulation's new IA home (World Map + Pulse +
+  // Chronicle + Pantheon as one destination). The old World Map lives here as the
+  // Map sub-tab. `/map` (and `?view=map`) redirect into `/realm` — see
+  // LEGACY_VIEW_ALIASES + App's redirect effect.
+  { view: 'realm',                 path: '/realm',                 title: 'Realm' },
   { view: 'map',                   path: '/map',                   title: 'World Map' },
   { view: 'compendium',            path: '/compendium',            title: 'Compendium' },
   { view: 'howto',                 path: '/how-to',                title: 'About' },
@@ -58,11 +65,18 @@ const PARAM_ROUTES = Object.freeze([
   { view: 'gallery', re: /^\/gallery\/([^/]+)$/, build: m => ({ slug: decodeURIComponent(m[1]) }) },
 ]);
 
-// Old view ids that have since been renamed map here (old → new). Empty
-// today (every legacy ?view= id still matches a current view id 1:1) but
-// kept as the single forward-compat seam so a future rename only edits one
-// place instead of hunting through email templates and old links.
-const LEGACY_VIEW_ALIASES = Object.freeze({});
+// Old view ids that have since been renamed map here (old → new). The single
+// forward-compat seam so a rename only edits one place instead of hunting
+// through email templates and old links.
+//
+// UX Phase 4: the World Map moved INTO the Realm hub. A legacy `?view=map`
+// link now resolves straight to `realm` (the Map sub-tab is the Realm's
+// default body). The `/map` PATH still resolves to the `map` view in ROUTES,
+// which App's redirect effect bounces to `realm` — so both legacy seams land
+// in the same place without a 404.
+const LEGACY_VIEW_ALIASES = Object.freeze({
+  map: 'realm',
+});
 
 // ── Fast lookups (built once) ───────────────────────────────────────────────
 const VIEW_TO_ROUTE = Object.freeze(
