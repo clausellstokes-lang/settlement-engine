@@ -59,17 +59,17 @@ export default function WorldMap({ onNavigate } = {}) {
   const [mapSaveConfirm, setMapSaveConfirm] = useState(false);
 
   // ── Store selectors ───────────────────────────────────────────────────
+  // mapMode/imageMode remain here because WorldMapContextToolbars still receives
+  // them as props; setMapMode drives the keymap. The read-only mapReady/
+  // mapLoading/mapError/isDraggingOver/placements selectors moved into the
+  // memoized child shells that consume them, so they're no longer read here.
   const mapMode       = useStore(s => s.mapMode);
   const setMapMode    = useStore(s => s.setMapMode);
-  const mapReady      = useStore(s => s.mapReady);
-  const mapLoading    = useStore(s => s.mapLoading);
-  const mapError      = useStore(s => s.mapError);
   const setMapReady   = useStore(s => s.setMapReady);
   const setMapLoading = useStore(s => s.setMapLoading);
   const setMapError   = useStore(s => s.setMapError);
   const setSelectedBurgId = useStore(s => s.setSelectedBurgId);
   const setDraggingOver   = useStore(s => s.setDraggingOver);
-  const isDraggingOver    = useStore(s => s.isDraggingOver);
 
   const addPlacement    = useStore(s => s.addPlacement);
   const removePlacementLocal = useStore(s => s.removePlacementLocal);
@@ -79,7 +79,6 @@ export default function WorldMap({ onNavigate } = {}) {
   const resetMapState   = useStore(s => s.resetMapState);
   const setMapSnapshot  = useStore(s => s.setMapSnapshot);
   const bumpGeometryVersion = useStore(s => s.bumpGeometryVersion);
-  const placements      = useStore(s => s.mapState.placements);
   // Custom image backdrop (Project 1, premium). When set, the FMG iframe is not
   // mounted — MapOverlay renders the image + owns pan/zoom — and terrain tools +
   // geography-charted trails are suppressed.
@@ -403,7 +402,11 @@ export default function WorldMap({ onNavigate } = {}) {
           // know about settlementId, so we need to re-restore)
           const arr = legacyPlacementsArray(ms);
           if (arr.length) await bridge.restorePlacements(arr);
-          showToast('success', `Loaded map for ${activeCampaign?.name || 'campaign'}`);
+          // Resolve the campaign by id at call time — the closed-over
+          // `activeCampaign` is the PREVIOUS selection when this fires from a
+          // fresh select, so the toast would name the wrong (or no) campaign.
+          const camp = useStore.getState().campaigns?.find(c => c.id === id);
+          showToast('success', `Loaded map for ${camp?.name || 'campaign'}`);
         } else if (Array.isArray(ms._legacyPlacements) && ms._legacyPlacements.length) {
           await bridge.clearAllPlacements();
           await bridge.restorePlacements(ms._legacyPlacements);
@@ -437,7 +440,10 @@ export default function WorldMap({ onNavigate } = {}) {
       }
     }
      
-  }, [getCampaignMapState, replaceMapState, resetMapState, setActiveCampaign, activeCampaign, bumpGeometryVersion]);
+    // `activeCampaign` is no longer a dependency: the success toast now resolves
+    // the campaign by `id` from the live store (above) instead of the closed-over
+    // value, so this callback no longer reads it.
+  }, [getCampaignMapState, replaceMapState, resetMapState, setActiveCampaign, bumpGeometryVersion]);
 
   // On entry to the map (bridge ready) — and whenever the active campaign
   // resolves — re-sync the map. With a campaign active, its saved snapshot is
@@ -609,6 +615,12 @@ export default function WorldMap({ onNavigate } = {}) {
     try { await bridge.fitMap(); } catch (e) {}
   }, []);
 
+  // Stable toggle for the Realm Inspector. Memoized so the memoized
+  // WorldMapToolbar isn't re-rendered by an inline arrow on every parent render.
+  const handleToggleInspector = useCallback(() => {
+    setInspectorOpen(v => !v);
+  }, [setInspectorOpen]);
+
   // ── Custom map image (Project 1, premium) ─────────────────────────────
   // Pick → validate → downscale (≤4096px) → upload to Supabase Storage → set
   // the campaign's customBackdrop. Premium + active-campaign gated at the call
@@ -724,9 +736,10 @@ export default function WorldMap({ onNavigate } = {}) {
       minHeight: 500,
     }}>
       {/* ── Top toolbar row: mode switcher + campaign + utility ────────── */}
+      {/* mapMode/setMapMode, mapLoading, mapError, and imageMode are no longer
+          passed down — the memoized toolbar reads them directly from the store. */}
       <WorldMapToolbar
         showingCampaignPanel={false} campaignHasPantheon={campaignHasPantheon}
-        mapMode={mapMode} setMapMode={setMapMode} imageMode={imageMode}
         canManageCampaigns={canManageCampaigns} activeCampaign={activeCampaign} activeCampaignId={activeCampaignId}
         handleSelectCampaign={handleSelectCampaign} activeCampaigns={activeCampaigns}
         handleSaveMapToCampaign={handleSaveMapToCampaign} handleClearMapFromCampaign={handleClearMapFromCampaign}
@@ -739,8 +752,7 @@ export default function WorldMap({ onNavigate } = {}) {
         handleShareMap={handleShareMap} sharingMap={sharingMap}
         mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange}
         handleFit={handleFit} handleRegenerate={handleRegenerate}
-        mapLoading={mapLoading} mapError={mapError}
-        inspectorOpen={inspectorOpen} onToggleInspector={() => setInspectorOpen(v => !v)}
+        inspectorOpen={inspectorOpen} onToggleInspector={handleToggleInspector}
         openInspectorAt={openInspectorAt}
         activePresetId={activeCampaign?.worldState?.simulationRules?.presetId} handleApplyPreset={handleApplyPreset}
       />
@@ -754,14 +766,16 @@ export default function WorldMap({ onNavigate } = {}) {
       {/* UX Phase 4 — relative container so the Realm Inspector can OVERLAY the
           stage (the map stays mounted underneath; no body-swap). */}
       <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
+        {/* placements, isDraggingOver, mapMode, mapReady, and imageMode are no
+            longer passed down — the memoized stage reads them from the store. */}
         <WorldMapStage
           showingWizardNews={false} showingWorldPulse={false} showingPantheon={false}
-          activeCampaign={activeCampaign} activeSaves={activeSaves} placements={placements}
+          activeCampaign={activeCampaign} activeSaves={activeSaves}
           mapContainerRef={mapContainerRef} handleDragOver={handleDragOver}
-          handleDragLeave={handleDragLeave} handleDrop={handleDrop} isDraggingOver={isDraggingOver}
-          imageMode={imageMode} iframeRef={iframeRef} mapMode={mapMode}
+          handleDragLeave={handleDragLeave} handleDrop={handleDrop}
+          iframeRef={iframeRef}
           bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
-          onNavigate={onNavigate} mapReady={mapReady}
+          onNavigate={onNavigate}
           showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
         />
 

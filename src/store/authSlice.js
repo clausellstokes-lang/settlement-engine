@@ -406,8 +406,15 @@ export const createAuthSlice = (set, get) => ({
 
   isTierAllowed: (settlementTier) => {
     if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    // Fail-open for tiers outside the rank table (e.g. the 'random'/'custom'
+    // sentinels, or any unknown value): an absent rank made `undefined <= n`
+    // evaluate to false, silently clamping a sentinel to disallowed. The live
+    // caller guards the sentinels first, but make the gate safe in isolation so
+    // a future caller can't be silently blocked. Only RANKED tiers are gated.
+    const rank = TIER_RANK[settlementTier];
+    if (rank === undefined) return true;
     const maxTier = get().maxAllowedTier();
-    return TIER_RANK[settlementTier] <= TIER_RANK[maxTier];
+    return rank <= TIER_RANK[maxTier];
   },
 
   /** Whether the user can afford AI features (developers get unlimited) */

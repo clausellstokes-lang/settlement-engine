@@ -202,10 +202,12 @@ export default {
     // values, JSX attrs, config maps, …). The token DEFINITION files are exempt,
     // and so is the sanctioned exact-value escape hatch `swatch['#HEX']`. There is
     // a large grandfathered population of legitimate local design data (per-tab
-    // accent maps, the PDF theme, palettes), so this rule is NOT wired into the
-    // gate at error/warn — the live ratchet is the occurrence BUDGET in
-    // tests/lint/rawColorLiteralBudget.test.js (count can only shrink). Flip this
-    // rule on once that budget reaches zero.
+    // accent maps, the PDF theme, palettes), so this rule is INTENTIONALLY DORMANT
+    // — it is NOT wired into eslint.config.js at error/warn (turning it on today
+    // would emit ~1546 warnings). The live ratchet is instead the occurrence
+    // BUDGET test in tests/lint/rawColorLiteral.test.js (count can only shrink;
+    // it also RuleTester-proves this rule). Flip this rule on in eslint.config.js
+    // once that budget burns to zero.
     'no-raw-color-literal': {
       meta: {
         type: 'suggestion',

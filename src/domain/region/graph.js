@@ -8,7 +8,10 @@
  */
 
 import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
-import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
+import {
+  canonicalEdgeForLink,
+  canonicalRelationshipLabel as canonicalRelationshipLabelShared,
+} from '../relationships/canonicalRelationship.js';
 import { wallClockNow } from '../clock.js';
 
 export const REGIONAL_GRAPH_SCHEMA_VERSION = 2;
@@ -74,18 +77,15 @@ function nowIso() {
   return wallClockNow();
 }
 
-// H12: the paid 'Opened Trade Route' event historically wrote the PLURAL
-// label 'trade_partners', which no other subsystem recognizes (channel
-// bundles minted 0 channels from it, discovery confidence dropped). The
-// producer now writes the canonical 'trade_partner'; this shim heals LEGACY
-// saves wherever link/edge labels enter the regional layer.
-const LEGACY_RELATIONSHIP_LABEL_ALIASES = Object.freeze({
-  trade_partners: 'trade_partner',
-});
-
+// B06 #3: the regional layer's label normalizer now DELEGATES to the single
+// canonical alias table in relationships/canonicalRelationship.js, so the three
+// regional systems can no longer drift. The old local table only healed the
+// H12 plural 'trade_partners'; the shared table covers that plus 'ally',
+// 'overlord', cold-war spellings, etc. Re-exported under the same name so
+// existing importers (worldPulse/stressorDynamics, worldPulse/populationDynamics)
+// are unaffected.
 export function canonicalRelationshipLabel(label) {
-  const raw = String(label || '').trim();
-  return LEGACY_RELATIONSHIP_LABEL_ALIASES[raw.toLowerCase()] || raw;
+  return canonicalRelationshipLabelShared(label);
 }
 
 export function stablePart(value) {
@@ -101,8 +101,12 @@ export function edgeIdFor(from, to) {
 }
 
 export function channelIdFor(channel) {
+  // B06 #7: an id-less good object used to stringify to '[object Object]', so two
+  // distinct un-normalized goods sets collapsed onto one channel id and merged
+  // semantically different channels. Coerce each good to a stable scalar key
+  // (id, then label) so malformed/un-normalized goods still mint distinct ids.
   const goods = Array.isArray(channel.goods) && channel.goods.length
-    ? channel.goods.map(g => g.id || g).sort().join('_')
+    ? channel.goods.map(g => stablePart(g?.id || g?.label || (typeof g === 'string' ? g : 'good'))).sort().join('_')
     : 'general';
   return [
     'channel',
@@ -501,7 +505,10 @@ export function relationshipChannelBundle(edge, relationshipType, options = {}) 
       ...twoWayChannels('resource_competition', from, to, rel, base, 0.56, 0.6),
       ...twoWayChannels('information_flow', from, to, rel, base, 0.44, 0.56, { visibility: 'gm' }),
     );
-  } else if (rel === 'criminal_network' || rel === 'criminal_corridor') {
+  } else if (rel === 'criminal_network' || rel === 'criminal_corridor' || rel === 'smuggling_partner') {
+    // B06 #1: a 'smuggling_partner' label used to mint ZERO channels here (no
+    // branch matched), so an authored smuggling relationship transmitted nothing
+    // through the regional layer. It is a criminal-corridor relationship.
     out.push(
       ...twoWayChannels('criminal_corridor', from, to, rel, base, 0.68, 0.72, { visibility: 'gm' }),
       ...twoWayChannels('information_flow', from, to, rel, base, 0.36, 0.52, { visibility: 'hidden' }),

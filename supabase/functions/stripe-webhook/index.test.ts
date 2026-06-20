@@ -97,3 +97,90 @@ Deno.test('credit grant trusts ONLY session.metadata.credits, not smuggled body 
   assertEquals(grant !== undefined, true);
   assertEquals((grant!.args as { amount: number }).amount, 10);            // the metadata value, not 99999
 });
+
+// ── Monthly allowance (invoice.paid / invoice.payment_succeeded) ──────────────
+// Subscription renewals grant 30 expiring credits/month. Stripe delivers
+// at-least-once AND fires invoice.paid + invoice.payment_succeeded for the same
+// invoice — so the path must grant EXACTLY ONCE per invoice id. (review B16 #10)
+
+/** Richer stub for the invoice path: profile lookup by stripe_customer_id resolves
+ *  a user, and the credit_ledger dedup reports an invoice as already-granted once
+ *  the test records it. `granted` is the set of invoice ids the handler has granted. */
+function makeInvoiceStub() {
+  const granted = new Set<string>();
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const client = {
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    from: (table: string) => ({
+      select: (_cols?: string) => {
+        // chainable .eq() that ends in .maybeSingle()
+        const chain: Record<string, string> = {};
+        const builder = {
+          eq: (col: string, val: string) => { chain[col] = val; return builder; },
+          ilike: () => builder,
+          maybeSingle: () => {
+            if (table === 'profiles') {
+              return Promise.resolve({ data: { id: 'sub_user', is_founder: false }, error: null });
+            }
+            if (table === 'credit_ledger') {
+              // dedup: report existing only when this invoice was already granted.
+              const invoiceId = chain['metadata->>stripe_invoice_id'];
+              return Promise.resolve({ data: granted.has(invoiceId) ? { id: 'existing' } : null, error: null });
+            }
+            return Promise.resolve({ data: null, error: null });
+          },
+        };
+        return builder;
+      },
+      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+    }),
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      if (fn === 'system_grant_credits') {
+        const meta = (args as { metadata?: { stripe_invoice_id?: string } }).metadata;
+        if (meta?.stripe_invoice_id) granted.add(meta.stripe_invoice_id);
+      }
+      return Promise.resolve({ error: null });
+    },
+  };
+  return { rpc, granted, adminClient: () => client };
+}
+
+const invoiceEvent = (type: string, invoiceId: string) =>
+  JSON.stringify({
+    id: `evt_${invoiceId}_${type}`,
+    type,
+    data: { object: { id: invoiceId, customer: 'cus_sub', customer_email: 'sub@x.com', period_end: 1893456000, lines: { data: [{ period: { end: 1893456000 } }] } } },
+  });
+
+Deno.test('a signed invoice.paid grants exactly 30 monthly credits with a computed expiry', async () => {
+  const stub = makeInvoiceStub();
+  const body = invoiceEvent('invoice.paid', 'in_1');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  const grants = stub.rpc.filter((c) => c.fn === 'system_grant_credits');
+  assertEquals(grants.length, 1);
+  const args = grants[0].args as { amount: number; source: string; expires_at: string | null };
+  assertEquals(args.amount, 30);
+  assertEquals(args.source, 'monthly_allowance');
+  assertEquals(typeof args.expires_at, 'string');   // expiry derived from the period end
+});
+
+Deno.test('a replayed invoice.paid (same invoice id) does NOT double-grant', async () => {
+  const stub = makeInvoiceStub();
+  const body = invoiceEvent('invoice.paid', 'in_dup');
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  const grants = stub.rpc.filter((c) => c.fn === 'system_grant_credits');
+  assertEquals(grants.length, 1);   // the second delivery is a no-op
+});
+
+Deno.test('invoice.paid + invoice.payment_succeeded for the SAME invoice grant only once', async () => {
+  const stub = makeInvoiceStub();
+  const paid = invoiceEvent('invoice.paid', 'in_double_fire');
+  const succeeded = invoiceEvent('invoice.payment_succeeded', 'in_double_fire');
+  await handleStripeWebhook(req(paid, { 'stripe-signature': await sign(paid, SECRET) }), stub);
+  await handleStripeWebhook(req(succeeded, { 'stripe-signature': await sign(succeeded, SECRET) }), stub);
+  const grants = stub.rpc.filter((c) => c.fn === 'system_grant_credits');
+  assertEquals(grants.length, 1);   // Stripe's double-fire is collapsed to one grant
+});

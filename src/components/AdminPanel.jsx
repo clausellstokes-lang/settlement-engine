@@ -200,23 +200,28 @@ export default function AdminPanel({ onBack }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [stats, setStats] = useState(null);
 
-  // Fetch users from profiles
+  // Fetch users via the audited admin-actions edge function.
   const fetchUsers = useCallback(async () => {
     if (!supabase) return;
     setUsersLoading(true);
     try {
-      let query = supabase.from('profiles').select('*').order('created_at', { ascending: false }).limit(100);
-      if (searchQuery.trim()) {
-        query = query.or(`email.ilike.%${searchQuery}%,display_name.ilike.%${searchQuery}%`);
-      }
-      const { data, error } = await query;
+      // Route through the audited `list_users` admin-actions edge function rather
+      // than a direct client `profiles.select('*')`: the edge enforces role
+      // gating, returns a redacted (non-PII-leaking) column set, runs the search
+      // server-side, and writes an audit row — none of which a raw client query
+      // did (it returned raw email + every column to any elevated role, unaudited).
+      const { data, error } = await supabase.functions.invoke('admin-actions', {
+        body: { action: 'list_users', metadata: { search: searchQuery.trim() } },
+      });
       if (error) throw error;
-      setUsers(data || []);
+      if (data?.error) throw new Error(data.error);
+      const list = Array.isArray(data?.users) ? data.users : [];
+      setUsers(list);
 
       // Compute stats
-      const total = data?.length || 0;
-      const premiumCount = data?.filter(u => u.tier === 'premium').length || 0;
-      const totalCredits = data?.reduce((sum, u) => sum + (u.credits || 0), 0) || 0;
+      const total = list.length;
+      const premiumCount = list.filter(u => u.tier === 'premium').length;
+      const totalCredits = list.reduce((sum, u) => sum + (u.credits || 0), 0);
       setStats({ total, premiumCount, totalCredits });
     } catch (e) {
       console.error('Failed to fetch users:', e);

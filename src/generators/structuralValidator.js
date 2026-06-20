@@ -4,16 +4,38 @@
  * institution-to-narrative text adaptation.
  */
 
-import { random as _rng } from './rngContext.js';
 import {getTradeRouteFeatures, hasTeleportationInfra, pickRandom, tierAtLeast} from './helpers.js';
 export { getBaseChance } from './institutionProbability.js';
 
-import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
 
 // RELATION_TYPES re-exported as alias so existing importers don't break.
 export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
+
+/**
+ * Deterministic 0..1 hash keyed on identity text (FNV-1a + fmix32 avalanche).
+ * Same construction as domain/region/contestMath.hash01 (kept local so this
+ * generator carries no domain import). Used for stable probabilistic gates that
+ * must NOT depend on a live RNG draw — the validator runs on the re-render-heavy
+ * draft path where no seeded RNG is active.
+ * @param {string} text
+ * @returns {number} a value in [0, 1)
+ */
+const hash01 = (text) => {
+  let h = 0x811c9dc5;
+  const s = String(text);
+  for (let i = 0; i < s.length; i += 1) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return (h >>> 0) / 4294967296;
+};
 
 // ─── SPATIAL_FEATURES ────────────────────────────────────────────────────────
 // Maps an institution name to the list of lesser institutions it implies
@@ -148,21 +170,11 @@ const expandInstitutionSet = (names) => {
   return set;
 };
 
-// ─── getPriorityModifiers ─────────────────────────────────────────────────────
-// Apply goods-toggle penalties to institution keyword → chance multiplier map.
-
-const _getPriorityModifiers = (tier, goodsToggles = {}) => {
-  const tierGoods = GOODS_MODIFIERS_BY_TIER[tier] || {};
-  const penalties = {};
-  Object.entries(tierGoods).forEach(([goodName, good]) => {
-    if (goodsToggles[`${tier}_good_${goodName}`] === false && good.institutionKeywords) {
-      good.institutionKeywords.forEach(keyword => {
-        penalties[keyword] = (penalties[keyword] || 1) * 0.35;
-      });
-    }
-  });
-  return penalties;
-};
+// NOTE: a dead _getPriorityModifiers() lived here — it mirrored the goods-toggle
+// penalty in institutionProbability.js, which was inert because no good defines
+// `institutionKeywords` on GOODS_MODIFIERS_BY_TIER. Removed along with the unused
+// GOODS_MODIFIERS_BY_TIER import; the live (also-removed) copy is documented in
+// institutionProbability.js.
 
 // ─── getTierConstraints ───────────────────────────────────────────────────────
 /**
@@ -561,8 +573,16 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   // ── Isolation viability ───────────────────────────────────────────────────
   // Small isolated settlements (thorp/hamlet) are subsistence economies — historically valid
   if (['thorp','hamlet'].includes(tier) && route === 'isolated') {
-    const struggleChance = _rng();
-    if (struggleChance < 0.40) {
+    // Derive the ~40% subsistence-struggle gate from a STABLE hash of the
+    // settlement's identity (tier + route + sorted institution names) instead of
+    // a live RNG draw. The validator is also called on the re-render-heavy draft
+    // path (domain/coherence/checkDraftEdit) where no seeded RNG is active, so a
+    // raw _rng() previously fell back to Math.random() and the warning flickered
+    // on/off each render (and tripped the rngContext 'not reproducible' warning).
+    // Hashing keeps the result deterministic and identical for the same
+    // settlement on every call, on both the generation and draft paths.
+    const struggleKey = `${tier}|${route}|${[...instNames].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0)).join(',')}`;
+    if (hash01(struggleKey) < 0.40) {
       violations.push({
         type:        'subsistence_struggle',
         institution: `${tier.charAt(0).toUpperCase()+tier.slice(1)} Settlement`,

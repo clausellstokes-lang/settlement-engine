@@ -464,6 +464,11 @@ export const createAiSlice = (set, get) => ({
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
         state.aiViolations = verificationN;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
+        // Reader-audience signal (P104 / X-4): a successful narrate run is the
+        // "I'm coming back to use this" behaviour useReaderAudience keys on.
+        // Bumped here on the success path (the server-authoritative spend has
+        // just landed) rather than from the never-called spendCredits action.
+        state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
       });
 
       track(EVENTS.AI_GENERATION_COMPLETED, {
@@ -617,6 +622,9 @@ export const createAiSlice = (set, get) => ({
         state.aiRegenerating = false;
         state.aiProgress = '';
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
+        // Reader-audience signal (P104 / X-4): see requestNarrative — a paid
+        // daily-life run is the same return-engagement signal.
+        state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
       });
 
       track(EVENTS.AI_GENERATION_COMPLETED, {
@@ -787,6 +795,9 @@ export const createAiSlice = (set, get) => ({
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
         state.aiViolations = verificationP;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
+        // Reader-audience signal (P104 / X-4): see requestNarrative — a paid
+        // progression run is the same return-engagement signal.
+        state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
       });
 
       track(EVENTS.AI_GENERATION_COMPLETED, {

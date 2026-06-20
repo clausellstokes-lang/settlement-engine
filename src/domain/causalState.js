@@ -852,13 +852,16 @@ function deriveSocialTrust(s) {
   let score = 50;
   const contributors = [];
 
-  // Strongly downstream of public legitimacy
-  const leg = s.powerStructure?.publicLegitimacy;
-  if (leg && typeof leg.score === 'number') {
-    const c = Math.round((leg.score - 50) * 0.4);
+  // Strongly downstream of public legitimacy. Read via the conserved governance
+  // ledger (like derivePublicLegitimacy / deriveRulingAuthority) so legacy saves
+  // that persist a bare numeric legitimacy still move social_trust — previously
+  // this lens silently ignored a collapsing government on those saves.
+  const gov = governanceLedger(s);
+  if (gov.present) {
+    const c = Math.round((gov.legitimacyScore - 50) * 0.4);
     score += c;
     push(contributors, 'powerStructure.publicLegitimacy', 'tracks_legitimacy', c,
-      `Public legitimacy ${leg.score} colors trust.`);
+      `Public legitimacy ${gov.legitimacyScore} colors trust.`);
   }
 
   // Conditions that affect social_trust
@@ -980,6 +983,18 @@ export function pressuresOn(settlement) {
   return [...state.summary.strained, ...state.summary.critical, ...state.summary.collapsed];
 }
 
+// Problem-term phrasing for lower_is_better variables. Their band is computed
+// off the INVERTED score, so a 'collapsed'/'critical' band means the underlying
+// value (e.g. criminal_opportunity) is HIGH — a problem. Reusing the raw band
+// word in the summary ("Collapsed: criminal_opportunity") reads as a positive
+// (crime collapsed = good) when it actually means rampant crime. These lines
+// phrase the worst bands in problem terms instead.
+const LOWER_IS_BETTER_PROBLEM_TERM = Object.freeze({
+  collapsed: 'Rampant',
+  critical:  'Acute',
+  strained:  'Elevated',
+});
+
 /**
  * Human-readable summary of what's wrong (or right) with the settlement
  * right now. Returns an array of single-line strings.
@@ -987,17 +1002,28 @@ export function pressuresOn(settlement) {
 export function summarizeCausalState(settlement) {
   const state = deriveCausalState(settlement);
   const out = [];
-  if (state.summary.collapsed.length) {
-    out.push(`Collapsed: ${state.summary.collapsed.join(', ')}.`);
+  // Pull lower_is_better variables out of the raw-band lines so the band word
+  // never reads inverted; emit them with problem-term phrasing afterwards.
+  const inverted = (name) => variablePolarity(name) === 'lower_is_better';
+  const higherOnly = (band) => state.summary[band].filter((n) => !inverted(n));
+  if (higherOnly('collapsed').length) {
+    out.push(`Collapsed: ${higherOnly('collapsed').join(', ')}.`);
   }
-  if (state.summary.critical.length) {
-    out.push(`Critical: ${state.summary.critical.join(', ')}.`);
+  if (higherOnly('critical').length) {
+    out.push(`Critical: ${higherOnly('critical').join(', ')}.`);
   }
-  if (state.summary.strained.length) {
-    out.push(`Strained: ${state.summary.strained.join(', ')}.`);
+  if (higherOnly('strained').length) {
+    out.push(`Strained: ${higherOnly('strained').join(', ')}.`);
   }
-  if (state.summary.surplus.length) {
-    out.push(`Surplus: ${state.summary.surplus.join(', ')}.`);
+  // lower_is_better problems, phrased in problem terms (rampant/acute/elevated).
+  for (const band of ['collapsed', 'critical', 'strained']) {
+    const problems = state.summary[band].filter(inverted);
+    if (problems.length) {
+      out.push(`${LOWER_IS_BETTER_PROBLEM_TERM[band]}: ${problems.join(', ')}.`);
+    }
+  }
+  if (higherOnly('surplus').length) {
+    out.push(`Surplus: ${higherOnly('surplus').join(', ')}.`);
   }
   if (out.length === 0) out.push('All variables are within the adequate band.');
   return out;

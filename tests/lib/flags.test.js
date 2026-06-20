@@ -11,7 +11,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { flag, setFlagOverride, getAllFlags, FLAGS } from '../../src/lib/flags.js';
+import { flag, setFlagOverride, getAllFlags, persistUrlFlags, FLAGS } from '../../src/lib/flags.js';
 
 // jsdom provides window + localStorage in vitest by default.
 beforeEach(() => {
@@ -65,10 +65,20 @@ describe('flag() resolution', () => {
     expect(flag('mobileSingleChrome')).toBe(true);
   });
 
-  it('URL parameter persists to localStorage as a side effect', () => {
+  it('flag() reading a URL override is PURE — no localStorage write during resolution (#5)', () => {
+    // flag() runs inside useSyncExternalStore's getSnapshot; it must NOT write to
+    // localStorage as a side effect. The URL value still wins precedence, but
+    // persistence is deferred to persistUrlFlags() (called once at boot).
     window.history.replaceState({}, '', '/?flag.mobileSingleChrome=true');
-    flag('mobileSingleChrome'); // trigger resolution
+    expect(flag('mobileSingleChrome')).toBe(true);          // URL still resolves
+    expect(window.localStorage.getItem('flag.mobileSingleChrome')).toBeNull(); // but no write
+  });
+
+  it('persistUrlFlags() persists URL overrides to localStorage at boot (#5)', () => {
+    window.history.replaceState({}, '', '/?flag.mobileSingleChrome=true&flag.heroV2=false');
+    persistUrlFlags();
     expect(window.localStorage.getItem('flag.mobileSingleChrome')).toBe('true');
+    expect(window.localStorage.getItem('flag.heroV2')).toBe('false');
   });
 
   it('warns and returns false for unknown flags', () => {

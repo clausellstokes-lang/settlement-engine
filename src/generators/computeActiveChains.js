@@ -133,8 +133,12 @@ export function institutionMatchesGate(inst, keyword) {
 }
 
 // Map resource labels → RESOURCE_DATA keys for matching
-// Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words
-function resourceLabelToKey(label) {
+// Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words.
+// Exported for the resolution guard test (tests/generators/chainResourceResolution
+// .test.js): the fuzzy matcher is correct for today's closed label set but is
+// rename-fragile, so a test pins that every chain.resource / resourceSubstitute
+// resolves to a real RESOURCE_DATA key.
+export function resourceLabelToKey(label) {
   if (!label) return null;
   const words = label.toLowerCase().split(/\s+/).filter(w => w.length > 3);
   let bestKey = null, bestScore = 0;

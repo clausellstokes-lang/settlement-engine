@@ -25,9 +25,11 @@
  *
  *   3. Resolves duplicate field names (FIELD_ALIASES from the schema
  *      file). For `stressors`, reads from any of `stressors / stress /
- *      stresses / stressTypes` and writes the unified value to
- *      `stressors`. Legacy aliases are PRESERVED, not deleted, so any
- *      code still reading the old name keeps working.
+ *      stresses` and writes the unified value to `stressors`. Legacy
+ *      aliases are PRESERVED, not deleted, so any code still reading the
+ *      old name keeps working. `stressTypes` is DELIBERATELY NOT an alias
+ *      — it holds type STRINGS, not stressor objects; see the exclusion
+ *      rationale on FIELD_ALIASES in settlement.schema.js. Do not add it.
  *
  *   4. Defaults canonical containers that future consumers expect:
  *      `activeConditions`, `simulationTrace`, `aiOverlays` default to

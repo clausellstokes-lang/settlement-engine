@@ -23,7 +23,7 @@ import { createNpc, killNpc, assignNpcToRole, inferImportance } from '../entitie
 import { applyCorruptionImpairments } from '../worldPulse/corruptionImpair.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
 import { createPRNG } from '../../generators/prng.js';
-import { withActiveCondition, withoutActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
+import { withActiveCondition, withoutActiveCondition, withEventConditionsSynced, conditionIdFromArchetype } from '../activeConditions.js';
 import { corruptionVectorForFlaw, npcCorruptibleFlaw, readCorruptionClimate } from '../corruption.js';
 import { crisisOnset, crisisResolve } from '../crisisLifecycle.js';
 import { transferRulingPower } from '../rulingPower.js';
@@ -506,16 +506,23 @@ function depleteResource(s, event) {
 function recoveredResource(s, event) {
   const config = s.config || {};
   const raw = String(event.targetId || '').trim();
-  const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
-  if (!keys.size) return s;
-  const state = { ...(config.nearbyResourcesState || {}) };
-  for (const k of keys) if (state[k] === 'depleted') state[k] = 'allow';
-  const depleted = (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k));
+  if (!raw) return s;
   // Recorded under the roster-resolved form — the key a regenerated roster
   // holds. Recorded even when nothing was depleted LIVE: in random mode the
   // depletion may exist only in the re-roll, and the recovered record is
   // what forces it out there.
   const key = resolveRosterKey(config, raw);
+  // Clear the LIVE depleted entry with the SAME slug-equivalent tolerance the
+  // record uses (slugEq against the resolved key), not an exact membership test
+  // over {raw, slug, label}. A depleted key stored in a form outside that set
+  // (e.g. a verbatim custom name that only slug-matches) used to survive the
+  // live filter while the record cleared it — the two formats then disagreed.
+  const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
+  const state = { ...(config.nearbyResourcesState || {}) };
+  for (const k of Object.keys(state)) {
+    if (state[k] === 'depleted' && (keys.has(k) || slugEq(k, key))) state[k] = 'allow';
+  }
+  const depleted = (config.nearbyResourcesDepleted || []).filter(k => !keys.has(k) && !slugEq(k, key));
   const edits = resourceEditsOf(config);
   return withResourceEdits(s, {
     nearbyResourcesState: state,
@@ -536,10 +543,24 @@ function removedThreat(s, event) {
   const label = labelFromTarget(event.targetId).toLowerCase();
   let next = { ...s };
   let removed = null;
+  // Match precedence: an EXACT name/type hit wins over a substring hit so the
+  // removal strikes the intended stressor, not the first one whose text merely
+  // CONTAINS the label (substring collisions — 'rats' inside 'pirates'). A
+  // substring fallback still helps free-text targets, but only for labels long
+  // enough (≥4 chars) to be discriminating — a 1–3 char label matched far too
+  // greedily.
+  const exactMatch = (/** @type {any} */ st) => {
+    const name = String(st?.name || '').toLowerCase();
+    const type = String(st?.type || '').toLowerCase();
+    return name === label || type === label;
+  };
+  const looseMatch = (/** @type {any} */ st) =>
+    label.length >= 4 && `${st?.name || ''} ${st?.type || ''}`.toLowerCase().includes(label);
   for (const key of ['stressors', 'stress', 'stresses']) {
     const arr = Array.isArray(next[key]) ? next[key] : null;
     if (!arr || !label) continue;
-    const idx = arr.findIndex(st => `${st?.name || ''} ${st?.type || ''}`.toLowerCase().includes(label));
+    let idx = arr.findIndex(exactMatch);
+    if (idx < 0) idx = arr.findIndex(looseMatch);
     if (idx >= 0) {
       removed = arr[idx];
       next = { ...next, [key]: arr.filter((_, i) => i !== idx) };
@@ -718,13 +739,26 @@ function assignNpcMutation(s, event) {
   if (institutionId) {
     const targetInst = findInstitution(next, institutionId);
     if (targetInst) {
-      // Walk back any impairments whose causeEventId was a KILL_NPC
-      // for an NPC that linked to this institution. v1 simplification:
-      // remove all staffing impairments and apply the new restorations.
+      // Clear ONLY the staffing wound this assignment actually fills, so an
+      // institution that lost two pillars and gets ONE vacancy filled keeps
+      // the second role's penalty. Discriminator precedence:
+      //   1. payload.fillsVacancyEventId — the exact prior KILL_NPC's id;
+      //   2. the role being filled — the kill stamped the dead NPC's role into
+      //      the staffing impairment description ('… (Captain)'), so a same-role
+      //      fill heals only that role's vacancy;
+      //   3. neither — fall back to the v1 single-vacancy behaviour (clear all
+      //      staffing) so callers that supply no discriminator are unchanged.
+      const fillsEventId = event.payload?.fillsVacancyEventId;
+      const role = String(event.payload?.role || '').trim().toLowerCase();
+      const healsThisVacancy = (/** @type {any} */ imp) => {
+        if (imp.type !== 'staffing') return false;
+        if (fillsEventId) return imp.causeEventId === fillsEventId;
+        if (role) return String(imp.description || '').toLowerCase().includes(`(${role})`);
+        return true; // no discriminator → v1 single-vacancy clear
+      };
       const cleared = {
         ...targetInst,
-        impairments: (targetInst.impairments || [])
-          .filter(i => i.type !== 'staffing'),
+        impairments: (targetInst.impairments || []).filter(i => !healsThisVacancy(i)),
       };
       let withCleared = replaceInstitution(next, targetInst, cleared);
       for (const { impairment } of result.restorations) {
@@ -902,6 +936,28 @@ function withoutGenerationTwin(s, archetype) {
 }
 
 /**
+ * Stable condition id for an event-promoted condition. When the event names a
+ * target the default id (hash of sourceEventType:targetId) is already distinct
+ * per target. But a TARGET-LESS onset (an unnamed plague / refugee wave) hashes
+ * to a single id per archetype, so a SECOND such onset overwrites the first
+ * (withActiveCondition replaces by id) — the two crises collapse into one even
+ * though the substrate deltas and stacked impairments both accumulated.
+ * Keying the id off the EVENT id when no target is present gives distinct
+ * onsets distinct conditions so consecutive unnamed crises compound. Stays
+ * deterministic (event ids are stable) and replay-safe (same event ⇒ same id).
+ *
+ * @param {string} archetype
+ * @param {Event} event
+ */
+function conditionIdForOnset(archetype, event) {
+  return conditionIdFromArchetype(archetype, {
+    sourceEventId: event.targetId
+      ? `${event.type}:${event.targetId}`
+      : `${event.type}:${event.id}`,
+  });
+}
+
+/**
  * REFUGEE_WAVE — population shift annotation. Records the wave on the
  * settlement so downstream pipeline reruns and the foodSecurity model
  * can consume it. Coarse for v1; future versions will derive specific
@@ -928,6 +984,7 @@ function refugeeWave(s, event) {
   // substrate and AI overlay see the influx, not just the write-only annotation.
   const severity = size === 'large' ? 0.65 : size === 'small' ? 0.35 : 0.5;
   return withActiveCondition(withoutGenerationTwin(next, 'regional_migration_pressure'), {
+    id: conditionIdForOnset('regional_migration_pressure', event),
     archetype: 'regional_migration_pressure',
     severity,
     triggeredAt: { sourceEventType: 'REFUGEE_WAVE', sourceEventTargetId: event.targetId || null },
@@ -979,6 +1036,7 @@ function plague(s, event) {
   // outbreak is durable substrate state — the causal layer, AI overlay, and time
   // progression all read it — not just the write-only _activePlague annotation.
   return withActiveCondition(withoutGenerationTwin(next, 'plague'), {
+    id: conditionIdForOnset('plague', event),
     archetype: 'plague',
     severity,
     triggeredAt: { sourceEventType: 'PLAGUE', sourceEventTargetId: event.targetId || null },
@@ -1351,10 +1409,16 @@ function swapNpcStanding(s, event) {
     return s;
   }
 
+  // Swap presence AS WELL AS value: when `from` carries the field, copy it
+  // over; when `from` LACKS it but `onto` has it, DELETE it from next rather
+  // than assigning `undefined` (which downstream readers that distinguish
+  // 'absent' from 'undefined' — inferImportance fallbacks, dotRank adoption —
+  // treat differently). The swap is then symmetric in presence and value.
   const carryStanding = (from, onto) => {
     const next = { ...onto };
     for (const field of NPC_STANDING_FIELDS) {
-      if (field in from || field in onto) next[field] = from[field];
+      if (field in from) next[field] = from[field];
+      else if (field in next) delete next[field];
     }
     return next;
   };

@@ -2,30 +2,34 @@
  * WorldMapToolbar.jsx — top toolbar row for the world map.
  *
  * Extracted verbatim from WorldMap.jsx (no logic change). Pure presentational:
- * mode switcher + campaign controls + utility buttons + status line. All state,
- * handlers, and refs live in the parent WorldMap and are passed in as props.
+ * mode switcher + campaign controls + utility buttons + status line.
+ *
+ * Render-optimization (2026-06): the store-derived values this shell needs
+ * (mapMode/setMapMode, mapLoading, mapError, imageMode) are now read directly
+ * via useStore selectors instead of being prop-drilled. Only genuinely
+ * parent-owned state, parent-derived values, and stabilized callbacks remain as
+ * props. The component is wrapped in React.memo so an unrelated parent re-render
+ * no longer re-renders the toolbar. Rendered DOM is unchanged.
  */
 
-import { Suspense, lazy } from 'react';
+import { memo, Suspense, lazy } from 'react';
 import {
   FolderOpen, Save, Trash2, RefreshCw, Layers, Loader, Map as MapIcon, Globe,
   Newspaper, SlidersHorizontal, Zap, HelpCircle, Image as ImageIcon, X as XIcon, Share2, Undo2, Sparkles,
   PanelRight,
 } from 'lucide-react';
+import { useStore } from '../../store/index.js';
 import { GOLD, GOLD_BG, INK, MUTED, BORDER, BORDER2, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import { ModeSwitch } from './ModeSwitch.jsx';
 import { IconButton } from './IconButton.jsx';
 
 const AutoSaveChip = lazy(() => import('./AutoSaveChip.jsx'));
 
-export function WorldMapToolbar({
+function WorldMapToolbarImpl({
   showingCampaignPanel,
   showingWizardNews,
   showingPantheon,
   campaignHasPantheon,
-  mapMode,
-  setMapMode,
-  imageMode,
   canManageCampaigns,
   activeCampaign,
   activeCampaignId,
@@ -53,14 +57,18 @@ export function WorldMapToolbar({
   handleTemplateChange,
   handleFit,
   handleRegenerate,
-  mapLoading,
-  mapError,
   inspectorOpen,
   onToggleInspector,
   openInspectorAt,
   activePresetId,
   handleApplyPreset,
 }) {
+  // Store-derived values read directly (formerly prop-drilled from WorldMap).
+  const mapMode    = useStore(s => s.mapMode);
+  const setMapMode = useStore(s => s.setMapMode);
+  const mapLoading = useStore(s => s.mapLoading);
+  const mapError   = useStore(s => s.mapError);
+  const imageMode  = useStore(s => !!s.mapState.customBackdrop?.imageUrl);
   return (
       <div style={{
         display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
@@ -372,3 +380,10 @@ export function WorldMapToolbar({
       </div>
   );
 }
+
+/**
+ * Memoized so an unrelated parent re-render (e.g. toast/drag state churn in
+ * WorldMap) doesn't re-render this shell. The remaining props are either
+ * parent-owned state or callbacks the parent stabilizes with useCallback.
+ */
+export const WorldMapToolbar = memo(WorldMapToolbarImpl);

@@ -23,11 +23,21 @@ jobs:
         run: npm ci
 
       # A+ P0.4: fail the gate on a HIGH+ vulnerability in a PRODUCTION dependency
-      # (e.g. the dompurify advisory behind the gallery XSS floor). Dev-only
-      # advisories (esbuild/vite dev server) are excluded via --omit=dev and tracked
-      # separately — they require a breaking major bump.
+      # (e.g. the dompurify advisory behind the gallery XSS floor). NOTE: --omit=dev
+      # is a RUNTIME-ONLY filter, not a toolchain-safety guarantee — it excludes the
+      # build toolchain (esbuild/vite/rollup/postcss/autoprefixer), which produces
+      # the shipped bytes. The non-blocking "full audit" step below surfaces those
+      # build-toolchain advisories (many need a breaking major bump, so they don't
+      # block here) so a supply-chain compromise in the toolchain is at least visible.
       - name: Audit production dependencies
         run: npm audit --audit-level=high --omit=dev
+
+      # Build-toolchain + dev-dependency advisories. Non-blocking (|| true) because
+      # they often require a breaking major and shouldn't wedge the gate — but they
+      # ARE printed in the log so esbuild/vite/rollup advisories are no longer a
+      # blind spot. Promote to blocking once the toolchain is on advisory-clean pins.
+      - name: Audit full dependency tree (build toolchain — non-blocking)
+        run: npm audit --audit-level=high || true
 
       # Fail fast on data corruption: duplicate object keys silently
       # overwrite earlier definitions in JS, so a regression here would

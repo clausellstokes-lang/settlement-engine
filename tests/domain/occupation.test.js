@@ -421,20 +421,48 @@ describe('occupation — integration: liberation exits the ledger; vassalization
   });
 
   test('an occupation that reaches vassalized emits a relationship_label_change to vassal on the real edge', () => {
-    const snapshot = snapshotForSaves(
-      [richCity('a', 'Ironhold'), richCity('b', 'Goldport')],
-      { edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'hostile' }], relationshipStates: { 'edge.a.b': { relationshipType: 'hostile' } } },
-    );
-    // A just-arrived vassalized occupation (stateHeld 0, lastTick = this tick).
-    const ws = { occupations: { b: { occupierId: 'a', state: 'vassalized', stateHeld: 0, resistance: 0.05, sinceTick: 0, lastTick: 5, benefitYield: 0 } } };
+    const baseSaves = [richCity('a', 'Ironhold'), richCity('b', 'Goldport')];
+    const snapOpts = { edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'hostile' }], relationshipStates: { 'edge.a.b': { relationshipType: 'hostile' } } };
+    const snapshot = snapshotForSaves(baseSaves, snapOpts);
+    // Make 'b' carry a compliant regime so its stabilized occupation climbs to vassalized:
+    // a compliant occupied item lifts suitability above the advance threshold, and with
+    // the dwell already at +1 the state matures to vassalized THIS tick.
+    const compliantSnapshot = { ...snapshot, byId: new Map(snapshot.byId) };
+    compliantSnapshot.byId.set('b', compliantItem(snapshot, 'b'));
+
+    // A stabilized occupation with +1 advance dwell that ARRIVES at vassalized this tick.
+    const ws = { occupations: { b: { occupierId: 'a', state: 'stabilized', stateHeld: 1, resistance: 0.05, sinceTick: 0, lastTick: 4, benefitYield: 0 } } };
     const out = evaluateOccupations({
-      snapshot, worldState: ws, graph: snapshot.regionalGraph, deployments: {},
+      snapshot: compliantSnapshot, worldState: ws, graph: compliantSnapshot.regionalGraph, deployments: {},
       warOutcomes: [], returnOutcomes: [], tick: 5, rules: { warLayerEnabled: true },
     });
+    expect(out.occupations.b.state).toBe('vassalized'); // it climbed this tick
     const vassal = out.outcomes.find(o => o.candidateType === 'occupation_vassalized');
     expect(vassal).toBeTruthy();
     expect(vassal.proposalPayload).toEqual(expect.objectContaining({ kind: 'relationship_label_change', toType: 'vassal' }));
     expect(vassal.relationshipKey).toBeTruthy();
+  });
+
+  test('a STABLE vassalized occupation does NOT re-emit the vassalization outcome every tick (finding 3)', () => {
+    const snapshot = snapshotForSaves(
+      [richCity('a', 'Ironhold'), richCity('b', 'Goldport')],
+      { edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'hostile' }], relationshipStates: { 'edge.a.b': { relationshipType: 'hostile' } } },
+    );
+    // An occupation that has ALREADY been vassalized for a while (it merely HOLDS at the
+    // top rung). advanceOccupationState returns stateHeld 0 + lastTick = tick when the top
+    // rung holds, so the OLD stateHeld/lastTick gate re-fired the outcome every tick.
+    let ws = { occupations: { b: { occupierId: 'a', state: 'vassalized', stateHeld: 0, resistance: 0.05, sinceTick: 0, lastTick: 5, benefitYield: 0 } } };
+    let reEmitted = false;
+    for (let t = 6; t <= 9; t++) {
+      const out = evaluateOccupations({
+        snapshot, worldState: ws, graph: snapshot.regionalGraph, deployments: {},
+        warOutcomes: [], returnOutcomes: [], tick: t, rules: { warLayerEnabled: true },
+      });
+      if (out.occupations.b) expect(out.occupations.b.state).toBe('vassalized'); // stays vassalized
+      if (out.outcomes.some(o => o.candidateType === 'occupation_vassalized')) reEmitted = true;
+      ws = { occupations: out.occupations };
+    }
+    expect(reEmitted).toBe(false); // emitted exactly zero times across the stable run
   });
 });
 

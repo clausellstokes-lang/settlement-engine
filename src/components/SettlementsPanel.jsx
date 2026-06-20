@@ -48,6 +48,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const isElevated = useStore(s => s.isElevated());
   const authUser = useStore(s => s.auth.user);
   const setSavedSettlements = useStore(s => s.setSavedSettlements);
+  const notePersistedSave = useStore(s => s.notePersistedSave);
   const canonizeSavedSettlement = useStore(s => s.canonizeSavedSettlement);
   const applyCosmeticRename = useStore(s => s.applyCosmeticRename);
   const generateSettlement = useStore(s => s.generateSettlement);
@@ -146,12 +147,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     // the sample becomes a real save, not just an unsaved draft.
     if (canSave) {
       try {
-        await savesService.save({
-          name: result.name || sample.name,
-          tier: result.tier || sample.tier,
-          settlement: result,
-          config: result._config || forkedConfig,
-        });
+        // Persist, refresh savedSettlements so the count is correct, then fire
+        // the real-save instrumentation (first_save/third_save pricing moments
+        // + 'saved' fingerprint). Fire-and-forget; never blocks the fork.
+        const saveId = await savesService.save({ name: result.name || sample.name, tier: result.tier || sample.tier, settlement: result, config: result._config || forkedConfig });
+        await savesService.list().then(setSavedSettlements).catch(() => {});
+        notePersistedSave?.(result, saveId);
       } catch (e) {
         console.error('[SettlementsPanel] fork auto-save failed:', e);
       }
@@ -161,8 +162,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     setForkingId(null);
     onNavigate?.('generate');
   }, [
-    authUser?.id, updateConfig, generateSettlement, canSave,
-    clearLoadedFromSave, onNavigate, setPurchaseModalOpen, forkingId,
+    authUser?.id, updateConfig, generateSettlement, canSave, clearLoadedFromSave,
+    onNavigate, setPurchaseModalOpen, forkingId, setSavedSettlements, notePersistedSave,
   ]);
 
   const [saves, _setSavesLocal] = useState([]);
@@ -633,7 +634,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // ── Detail view ─────────────────────────────────────────────────────────
   if (detail) {
     return <SettlementDetail
-      detail={detail} setDetail={setDetail} saves={saves} setSaves={setSaves}
+      detail={detail} setDetail={setDetail} saves={saves}
       linking={linking} setLinking={setLinking}
       editNamesOpen={editNamesOpen} setEditNamesOpen={setEditNamesOpen}
       handleLink={handleLink} removeNeighbour={removeNeighbour}

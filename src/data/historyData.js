@@ -154,6 +154,80 @@ export const HISTORY_EVENTS = {
       minTier: 'town',
       goalCategories: ['wealth', 'justice'],
     },
+    // ── Noble / feudal leadership ────────────────────────────────────────────
+    // Merged from the former HISTORY_EVENTS.noble bucket. That key was a dead
+    // bucket: getUpgradeOpportunities (economicGenerator.js) matches a bucket
+    // only when some institution carries priorityCategory/category equal to the
+    // bucket key, but no catalog entry uses 'noble' on either axis — and the
+    // closed-set governance pin (categoryVocabulary.js + categoryGovernance
+    // .test.js) forbids introducing one. The codebase already treats 'noble' as
+    // an alias of 'government' at the domain layer (deriveNpcProfile maps noble
+    // leverage to government; see wave1CohesionFixes.test.js), so these feudal
+    // leadership roles belong in the reachable 'government' bucket. They now
+    // surface for any settlement with a government institution at the right tier.
+    {
+      role: 'Lord/Lady of the Manor',
+      title: 'noble',
+      priority: 8,
+      minTier: 'village',
+      goalCategories: ['power', 'wealth'],
+    },
+    {
+      role: 'Baron/Baroness',
+      title: 'noble',
+      priority: 9,
+      minTier: 'town',
+      goalCategories: ['power', 'wealth'],
+    },
+    {
+      role: 'Court Advisor',
+      title: 'advisor',
+      priority: 7,
+      minTier: 'town',
+      goalCategories: ['power', 'knowledge'],
+    },
+    {
+      role: 'House Steward',
+      title: 'steward',
+      priority: 6,
+      minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
+    },
+    {
+      role: 'Noble Heir',
+      title: 'noble',
+      priority: 5,
+      minTier: 'hamlet',
+      goalCategories: ['personal', 'power'],
+    },
+    {
+      role: 'Land Agent',
+      title: 'agent',
+      priority: 5,
+      minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
+    },
+    {
+      role: 'Knight/Dame',
+      title: 'knight',
+      priority: 7,
+      minTier: 'village',
+      goalCategories: ['protection', 'personal'],
+    },
+    {
+      role: 'Duke/Duchess',
+      title: 'noble',
+      priority: 10,
+      minTier: 'metropolis',
+      goalCategories: ['power', 'wealth'],
+    },
+    {
+      role: 'Royal Chamberlain',
+      title: 'noble',
+      priority: 8,
+      minTier: 'city',
+      goalCategories: ['power', 'personal'],
+    },
   ],
   religious: [
     {
@@ -271,73 +345,6 @@ export const HISTORY_EVENTS = {
       minTier: 'town',
       goalCategories: ['spiritual', 'justice'],
       requiresInstKeyword: ['monastery', 'cathedral', 'friary'],
-    },
-  ],
-  noble: [
-    {
-      role: 'Lord/Lady of the Manor',
-      title: 'noble',
-      priority: 8,
-      minTier: 'village',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Baron/Baroness',
-      title: 'noble',
-      priority: 9,
-      minTier: 'town',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Court Advisor',
-      title: 'advisor',
-      priority: 7,
-      minTier: 'town',
-      goalCategories: ['power', 'knowledge'],
-    },
-    {
-      role: 'House Steward',
-      title: 'steward',
-      priority: 6,
-      minTier: 'village',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Noble Heir',
-      title: 'noble',
-      priority: 5,
-      minTier: 'hamlet',
-      goalCategories: ['personal', 'power'],
-    },
-    {
-      role: 'Land Agent',
-      title: 'agent',
-      priority: 5,
-      minTier: 'village',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Knight/Dame',
-      title: 'knight',
-      priority: 7,
-      minTier: 'village',
-      goalCategories: ['protection', 'personal'],
-    },
-    {
-      role: 'Duke/Duchess',
-      title: 'noble',
-      priority: 10,
-      minTier: 'metropolis',
-      goalCategories: ['power', 'wealth'],
-      requiresInstKeyword: ['palace', 'royal seat', "noble governor", "government complex"],
-    },
-    {
-      role: 'Royal Chamberlain',
-      title: 'noble',
-      priority: 8,
-      minTier: 'city',
-      goalCategories: ['power', 'personal'],
-      requiresInstKeyword: ['palace', 'royal seat', "government complex"],
     },
   ],
   crafts: [
@@ -1316,5 +1323,5 @@ export const EVENT_TYPE_NAMES = {
   external_threat:     'The Siege',
   religious_tension:   'The Religious Conflict',
   magical_controversy: 'The Arcane Incident',
-  exile_return:        'The Return',
+  crime_wave:          'The Crime Wave',
 }

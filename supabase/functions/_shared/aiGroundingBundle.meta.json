@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-20T01:34:06.608Z",
+  "generatedAt": "2026-06-20T07:56:52.697Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "146a658e9deb4c47",
+  "sourceHash": "da828a792c150977",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -29,6 +29,7 @@
     "src/domain/magicProfile.js",
     "src/domain/npcProfile.js",
     "src/domain/regionalGraph.js",
+    "src/domain/relationships/canonicalRelationship.js",
     "src/domain/simulationSpine.js",
     "src/domain/supplyChainState.js",
     "src/domain/threatProfile.js",

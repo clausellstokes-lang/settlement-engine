@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, R, SECOND, SP, sans } from '../theme.js';
 import Badge from './Badge.jsx';
@@ -13,6 +13,7 @@ export default function Disclosure({
   style,
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const panelId = useId();
   const Icon = open ? ChevronDown : ChevronRight;
 
   return (
@@ -29,6 +30,7 @@ export default function Disclosure({
         type="button"
         onClick={() => setOpen(value => !value)}
         aria-expanded={open}
+        aria-controls={panelId}
         style={{
           width: '100%',
           display: 'flex',
@@ -59,7 +61,7 @@ export default function Disclosure({
         {actions && <span style={{ color: SECOND }}>{actions}</span>}
       </button>
       {open && (
-        <div style={{ padding: compact ? SP.md : SP.lg }}>
+        <div id={panelId} style={{ padding: compact ? SP.md : SP.lg }}>
           {children}
         </div>
       )}

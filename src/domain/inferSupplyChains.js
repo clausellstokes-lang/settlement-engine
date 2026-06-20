@@ -41,6 +41,15 @@ function toList(v) {
 
 const slug = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
+/** Codepoint comparator. The file's determinism header promises codepoint-stable
+ *  ordering; localeCompare is locale-dependent and would betray that the moment a
+ *  non-ASCII char leaks into a uid/label, so we sort on raw codepoints instead.
+ *  @param {string} a
+ *  @param {string} b
+ *  @returns {number}
+ */
+const byCodepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
 /**
  * @param {Object} customContent  the slice blob {institutions, services, resources, tradeGoods, ...}
  * @param {Object} [opts]
@@ -163,11 +172,11 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
   const out = new Map(nodes.map((n) => [n.uid, []]));
   const inbound = new Map(nodes.map((n) => [n.uid, 0]));
   for (const e of edges) { out.get(e.from).push(e); inbound.set(e.to, inbound.get(e.to) + 1); }
-  for (const arr of out.values()) arr.sort((x, y) => `${x.commodity}${x.to}`.localeCompare(`${y.commodity}${y.to}`));
+  for (const arr of out.values()) arr.sort((x, y) => byCodepoint(`${x.commodity}${x.to}`, `${y.commodity}${y.to}`));
 
   // Sources: no inbound edge but at least one outbound. Walk to maximal paths.
   const sources = nodes.filter((n) => inbound.get(n.uid) === 0 && out.get(n.uid).length > 0)
-    .sort((a, b) => a.uid.localeCompare(b.uid));
+    .sort((a, b) => byCodepoint(a.uid, b.uid));
   const paths = [];
   const walk = (uid, path, visited) => {
     const outs = out.get(uid) || [];
@@ -239,5 +248,5 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
       verification: { state: 'discovered', userName: null, corrections: {} },
     });
   }
-  return discovered.sort((a, b) => a.chainId.localeCompare(b.chainId));
+  return discovered.sort((a, b) => byCodepoint(a.chainId, b.chainId));
 }

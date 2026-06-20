@@ -88,14 +88,49 @@ function getCorsHeaders(req?: Request) {
   const origin = req?.headers?.get('Origin') || '';
   const match = allowed.includes(origin) || !origin;
   return {
-    'Access-Control-Allow-Origin': match ? (origin || '*') : allowed[0],
+    // Fail closed: never emit '*' for this credentialed endpoint. Echo the
+    // matched origin, else pin to the first allowed host (a missing Origin is
+    // treated as same-origin, not as a wildcard grant).
+    'Access-Control-Allow-Origin': match ? (origin || allowed[0]) : allowed[0],
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     ...(match ? { 'Vary': 'Origin' } : {}),
   };
 }
 
-serve(async (req) => {
+/** Default user-scoped client (anon key + the caller's Authorization header). */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_ANON_KEY')!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (bypasses RLS for the profile read/write). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+  );
+}
+
+// Exported (not just inlined into serve) so the money gate can be EXECUTION-
+// tested: index.test.ts feeds requests with injected stubs and asserts the
+// credits/product are derived server-side from PRICE_MAP/CREDIT_AMOUNTS and the
+// user_id put into session.metadata comes from the verified JWT, never the
+// request body. `deps` is the optional injection seam; production passes nothing.
+export async function handleCreateCheckout(
+  req: Request,
+  deps: {
+    stripeClient?: typeof stripe;
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
+): Promise<Response> {
+  const stripeApi = deps.stripeClient ?? stripe;
+  const userClient = deps.userClient ?? defaultUserClient;
+  const adminClient = deps.adminClient ?? defaultAdminClient;
   const corsHeaders = getCorsHeaders(req);
 
   if (req.method === 'OPTIONS') {
@@ -134,11 +169,7 @@ serve(async (req) => {
       // If auth is provided (even for an anonymous-allowed product), try
       // to resolve the user so the purchase binds to the account when
       // possible. Failures fall through to anonymous handling.
-      const supabase = createClient(
-        Deno.env.get('SUPABASE_URL')!,
-        Deno.env.get('SUPABASE_ANON_KEY')!,
-        { global: { headers: { Authorization: authHeader } } },
-      );
+      const supabase = userClient(authHeader);
       const { data: { user: authedUser }, error: authError } = await supabase.auth.getUser();
       if (!authError && authedUser) {
         user = { id: authedUser.id, email: authedUser.email ?? null };
@@ -156,10 +187,7 @@ serve(async (req) => {
     let stripeCustomerId: string | null = null;
 
     if (user) {
-      const admin = createClient(
-        Deno.env.get('SUPABASE_URL')!,
-        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-      );
+      const admin = adminClient();
       const { data: profile } = await admin
         .from('profiles')
         .select('stripe_customer_id')
@@ -171,7 +199,7 @@ serve(async (req) => {
         : null;
 
       if (!stripeCustomerId) {
-        const customer = await stripe.customers.create({
+        const customer = await stripeApi.customers.create({
           email: user.email || undefined,
           metadata: { supabase_user_id: user.id },
         });
@@ -206,7 +234,7 @@ serve(async (req) => {
     } else if (user?.email) {
       sessionParams.customer_email = user.email;
     }
-    const session = await stripe.checkout.sessions.create(sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]);
+    const session = await stripeApi.checkout.sessions.create(sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]);
 
     return new Response(
       JSON.stringify({ url: session.url }),
@@ -219,4 +247,6 @@ serve(async (req) => {
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }
-});
+}
+
+serve(handleCreateCheckout);

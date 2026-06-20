@@ -12,6 +12,16 @@
  * or deity-strength × orthodoxy × proximity). Multiplying probabilities saturates
  * to ~0 the instant ONE factor is weak, collapsing the field. Summing in LOG-ODDS
  * space and squashing ONCE keeps every factor's marginal influence alive.
+ *
+ * Cross-platform reproducibility caveat (B06 #10): logistic/logit/softmax use
+ * Math.exp and Math.log, which the ECMAScript spec does NOT require to be
+ * bit-identical across engines/platforms. In rare boundary cases — a contest
+ * score sitting exactly on its pHold cutoff, or a near-tie cumulative-weight
+ * boundary in stableSampleByWeight — the same seed could in principle resolve
+ * differently on a different platform. This is inherent to transcendentals and
+ * accepted as-is; if byte-identical cross-platform snapshots ever become a hard
+ * requirement, quantize scores/weights to a fixed precision before the
+ * threshold comparison.
  */
 
 /** @param {number} v @returns {number} */

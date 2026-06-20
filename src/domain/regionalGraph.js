@@ -22,6 +22,7 @@
  * graph that future propagation logic will read.
  */
 
+import { canonicalRelationshipLabel } from './relationships/canonicalRelationship.js';
 
 // ── Catalog ──────────────────────────────────────────────────────────────
 
@@ -60,18 +61,18 @@ function neighbourName(n) {
   return n?.name || n?.id || 'Unnamed';
 }
 
-// Map legacy relationshipType strings → canonical regional relationship types.
+// Map CANONICAL relationship labels → regional relationship types. Raw legacy
+// strings are first run through the shared canonicalRelationshipLabel normalizer
+// (B06 #3), so spelling/synonym variants ('ally', 'alliance', 'overlord',
+// 'trade_partners', 'coldwar', ...) are collapsed there rather than re-listed
+// here. This map only needs the canonical bases plus regional-only aliases.
 const LEGACY_RELATIONSHIP_MAP = Object.freeze({
   hostile:             'military_threat',
   cold_war:            'rival',
   rival:               'rival',
-  ally:                'protector',
   allied:              'protector',
-  alliance:            'protector',
   vassal:              'tax_authority',         // we are vassal -> they are tax authority
-  overlord:            'tax_authority',
   trade_partner:       'market_hub',
-  trade:               'market_hub',
   supplier:            'supplier',
   pilgrim:             'pilgrimage_center',
   pilgrimage:          'pilgrimage_center',
@@ -79,7 +80,6 @@ const LEGACY_RELATIONSHIP_MAP = Object.freeze({
   religious_superior:  'religious_superior',
   resource_partner:    'resource_provider',
   refugee_source:      'refugee_source',
-  smuggling:           'smuggling_partner',
   smuggling_partner:   'smuggling_partner',
   neutral:             'other',
 });
@@ -101,8 +101,12 @@ function inferRelationshipType(rawNeighbour) {
       && REGIONAL_RELATIONSHIP_TYPES.includes(rawNeighbour.regionalType)) {
     return rawNeighbour.regionalType;
   }
-  // Map legacy relationshipType
-  const legacy = String(rawNeighbour.relationshipType || '').toLowerCase();
+  // Map legacy relationshipType — normalize spelling/synonym variants through
+  // the shared canonical label table first (B06 #3), then map the canonical
+  // base to a regional type.
+  const legacy = canonicalRelationshipLabel(
+    String(rawNeighbour.relationshipType || '').toLowerCase()
+  ).toLowerCase();
   if (legacy && LEGACY_RELATIONSHIP_MAP[legacy]) return LEGACY_RELATIONSHIP_MAP[legacy];
   // Fall back to name pattern
   const name = String(rawNeighbour.name || '');

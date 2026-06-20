@@ -106,7 +106,9 @@ export async function generateSettlementPDF(settlement, options = {}) {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  // Defer revocation: some browsers truncate the download if the object URL is
+  // revoked synchronously after click() (the download hasn't claimed the blob yet).
+  setTimeout(() => { try { URL.revokeObjectURL(url); } catch { /* already gone */ } }, 0);
 
   // Export succeeded (download triggered) — emit the success event + structural
   // snapshot. Both are fire-and-forget; a fault here must never surface as an
@@ -119,7 +121,9 @@ export async function generateSettlementPDF(settlement, options = {}) {
       canon_phase: typeof phase === 'string' ? phase : 'draft',
       duration_band: durationBand(Date.now() - startedAt),
     });
-    captureFingerprint('exported', settlement, { settlementUuid: options.settlementUuid });
+    // Fingerprint the NORMALIZED settlement — the exact shape the PDF rendered —
+    // so field-presence analytics match the artifact (not the pre-adapter shape).
+    captureFingerprint('exported', normalizedSettlement, { settlementUuid: options.settlementUuid });
   } catch { /* analytics never breaks export */ }
 }
 

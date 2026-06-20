@@ -193,6 +193,14 @@ const THREAT_TYPE_TEMPLATES = Object.freeze({
 
 const SEVERITY_BANDS = Object.freeze(['low', 'medium', 'high', 'critical']);
 
+// NOTE: severityBand (4-band) and currentStage (5-stage) measure DIFFERENT
+// axes of the same threat — band is "how bad" (matching Phase 16 conditions'
+// 4-band cut points) while stage is "how far along the progression." Their
+// boundaries are intentionally offset (e.g. critical≥0.75 vs imminent≥0.6),
+// so a high-band threat can read as 'active' rather than 'imminent'. This is by
+// design, not an off-by error; do not "align" them — consumers that quote both
+// rely on the two scales being independent.
+
 /** 0..1 score → 4-band severity. Matches Phase 16 conditions. */
 export function threatSeverityBand(severity) {
   const s = typeof severity === 'number' ? Math.max(0, Math.min(1, severity)) : 0;
@@ -479,11 +487,35 @@ export function deriveThreatProfile(source, _settlement) {
   };
 }
 
-/** Derive every threat across all surfaces. Returns []. */
+/**
+ * De-duplicate threats by (type, target), keeping the highest-severity
+ * instance. The same underlying pressure is frequently expressed on more
+ * than one surface (e.g. config.monsterThreat AND a matching stressor, or an
+ * activeCondition AND a stressor of the same kind). Without this collapse,
+ * every downstream consumer that sums threat contributions — most importantly
+ * capacityModel's demand math — counts the one pressure multiple times,
+ * inflating demand and tipping capacity bands on phantom load.
+ *
+ * @param {Object[]} profiles
+ * @returns {Object[]} one profile per (type, target), max severity wins.
+ */
+function dedupeThreatProfiles(profiles) {
+  const byKey = new Map();
+  for (const p of profiles) {
+    if (!p) continue;
+    const key = `${p.type || 'other'}|${p.target || 'settlement'}`;
+    const prior = byKey.get(key);
+    if (!prior || (p.severity || 0) > (prior.severity || 0)) byKey.set(key, p);
+  }
+  return Array.from(byKey.values());
+}
+
+/** Derive every threat across all surfaces, de-duplicated by (type, target). */
 export function deriveAllThreatProfiles(settlement) {
   if (!settlement) return [];
   const sources = collectThreatSources(settlement);
-  return sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean);
+  const profiles = sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean);
+  return dedupeThreatProfiles(profiles);
 }
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────

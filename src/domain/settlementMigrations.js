@@ -80,6 +80,23 @@ function currentVersion(settlement) {
 export function migrateSettlementToLatest(settlement) {
   if (!settlement || typeof settlement !== 'object') return settlement;
 
+  // Surface a forward-versioned (newer-than-this-engine) save instead of silently
+  // treating it as already-current. The migration chain only walks UPWARD; a save
+  // stamped with a higher schemaVersion than this build knows about may carry a
+  // shape this engine cannot read, and handing it to consumers that assume the
+  // older shape risks subtle corruption. We warn loudly (rather than throwing) so a
+  // single-user session can still attempt to open the save — and pass it through
+  // UNCHANGED rather than fabricating a downgrade, since no down-migration exists.
+  const startVersion = currentVersion(settlement);
+  if (startVersion > SCHEMA_VERSION) {
+    console.warn(
+      `[settlementMigrations] settlement schemaVersion=${startVersion} is newer than this engine's ` +
+      `SCHEMA_VERSION=${SCHEMA_VERSION}. The save was made by a newer version of SettlementForge — ` +
+      `update the app to load it safely. Passing it through unchanged (no down-migration exists).`,
+    );
+    return settlement;
+  }
+
   let out = settlement;
   let safety = 0;
   while (currentVersion(out) < SCHEMA_VERSION) {

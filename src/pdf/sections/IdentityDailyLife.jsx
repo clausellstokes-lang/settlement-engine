@@ -191,6 +191,11 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
               </View>
             ))
           ) : (
+            // Only render a verdict when food was actually calculated (foodBalance is
+            // null when deriveFoodBalance reports available:false). Distinguish a true
+            // surplus from a merely-balanced ledger so we never claim "Surplus of 0
+            // units / supply is reliable" — the bug other chapters avoid by showing
+            // the clamped canonical number.
             d.foodBalance && (
               <Callout
                 tone={d.foodBalance.deficit > 0 ? 'bad' : 'good'}
@@ -199,7 +204,9 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
                 <Text style={{ ...type.body, fontSize: pt['9.5'] }}>
                   {d.foodBalance.deficit > 0
                     ? `Deficit of ${smart(d.foodBalance.deficit)} units. The settlement depends on imports for daily survival.`
-                    : `Surplus of ${smart(d.foodBalance.surplus || 0)} units. The local food supply is reliable.`}
+                    : d.foodBalance.surplus > 0
+                      ? `Surplus of ${smart(d.foodBalance.surplus)} units. The local food supply is reliable.`
+                      : 'Food production and need are balanced. The local food supply meets demand.'}
                 </Text>
               </Callout>
             )

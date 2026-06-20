@@ -405,6 +405,20 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         if (!st.contextSignature) {
           const context = contextForNpc(snapshot, { settlementId: item.id });
           st = { ...st, contextSignature: context.signature, contextTier: context.tier };
+        } else {
+          // Keep contextSignature current even when the context shift produces NO
+          // branched goals. evaluateNpcRules only advances the signature through a
+          // goal_rebranch candidate, so a non-branching transition (e.g. a hostile
+          // edge cooling to neutral for a role with no neutral branch) used to
+          // leave the signature permanently stale — re-classifying every tick with
+          // no effect and mis-labelling a LATER branching transition's "from"
+          // context. When the live context still branches we leave the signature
+          // alone so evaluateNpcRules can fire the rebranch; only the no-branch
+          // case is reconciled silently here (no candidate, no news).
+          const context = contextForNpc(snapshot, { settlementId: st.settlementId });
+          if (context.signature !== st.contextSignature && !branchedGoals(st, context)) {
+            st = { ...st, contextSignature: context.signature, contextTier: context.tier };
+          }
         }
         npcStates[id] = st;
         return;
@@ -469,6 +483,91 @@ export function ensureNpcStates(worldState, snapshot, rng) {
     });
   }
   return { ...worldState, npcStates };
+}
+
+// Grace window before a roster-absent NPC state is pruned. Mirrors
+// FACTION_STATE_PRUNE_GRACE_TICKS: long enough to survive a transient roster
+// hiccup (a save that briefly fails to surface its NPCs), short enough that a
+// renamed/removed NPC ghost doesn't haunt the per-tick npcStates loops and the
+// persisted save for a season.
+export const NPC_STATE_PRUNE_GRACE_TICKS = 3;
+
+/**
+ * Prune NPC states whose NPC no longer exists on any live settlement roster.
+ * npcId is name/id-keyed (npcId()), so editing the roster, renaming an NPC, or
+ * removing a settlement strands a permanent ghost: ensureNpcStates never deletes
+ * it, evaluateNpcRules / seatNpcsIntoFactions / rivalryTargetFor still iterate
+ * it, and it serializes forever. Mirrors pruneFactionStates:
+ *  • a grace window (missingSinceTick, NPC_STATE_PRUNE_GRACE_TICKS) so a
+ *    transient absence doesn't amnesia NPC history;
+ *  • pruned ids are stripped from surviving rivalryTargets[] lists.
+ * Note: the §corruption 1b-ii-c ousted-and-replaced cleanup in
+ * advanceCampaignWorld deletes ousted ids immediately (their replacement carries
+ * a new id); this is the general roster-reconciliation pass for every other way
+ * an NPC leaves. Identity no-op when nothing changes. Deterministic — derived
+ * purely from the snapshot.
+ *
+ * @param {any} worldState
+ * @param {any} snapshot
+ * @param {{ tick?: number, graceTicks?: number }} [opts]
+ * @returns {any}
+ */
+export function pruneNpcStates(worldState, snapshot, { tick = 0, graceTicks = NPC_STATE_PRUNE_GRACE_TICKS } = {}) {
+  /** @type {Record<string, any>} */
+  const states = worldState?.npcStates || {};
+  const ids = Object.keys(states);
+  if (!ids.length) return worldState;
+
+  /** @type {Set<string>} */
+  const liveNpcIds = new Set();
+  for (const item of snapshot?.settlements || []) {
+    const npcs = item.settlement?.npcs || [];
+    npcs.forEach((/** @type {any} */ npc, /** @type {number} */ index) => {
+      liveNpcIds.add(npcId(item.id, npc, index));
+    });
+  }
+
+  let changed = false;
+  /** @type {Set<string>} */
+  const prunedIds = new Set();
+  /** @type {Record<string, any>} */
+  const next = {};
+  for (const [id, state] of Object.entries(states)) {
+    if (liveNpcIds.has(id)) {
+      // Back on (or still on) the roster: clear any absence stamp.
+      if (state.missingSinceTick != null) {
+        const { missingSinceTick: _gone, ...rest } = state;
+        next[id] = rest;
+        changed = true;
+      } else {
+        next[id] = state;
+      }
+      continue;
+    }
+    const since = Number.isFinite(state.missingSinceTick) ? state.missingSinceTick : tick;
+    if (tick - since >= graceTicks) {
+      prunedIds.add(id);
+      changed = true;
+      continue;
+    }
+    if (state.missingSinceTick === since) {
+      next[id] = state;
+    } else {
+      next[id] = { ...state, missingSinceTick: since };
+      changed = true;
+    }
+  }
+
+  if (prunedIds.size) {
+    for (const [id, state] of Object.entries(next)) {
+      const targets = state.rivalryTargets || [];
+      const kept = targets.filter((/** @type {any} */ rid) => !prunedIds.has(rid));
+      if (kept.length !== targets.length) next[id] = { ...state, rivalryTargets: kept };
+    }
+  }
+
+  if (!changed) return worldState;
+  return { ...worldState, npcStates: next };
 }
 
 // Per-tick mean-reversion: momentum/heat/leverage decay toward zero on quiet
@@ -707,11 +806,29 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
   };
 }
 
-function rivalryTargetFor(state, states) {
-  const rivals = states
-    .filter(other => other.npcId !== state.npcId && other.settlementId === state.settlementId)
-    .sort((a, b) => (b.dotRank || 1) - (a.dotRank || 1));
-  return rivals.find(other => other.factionId !== state.factionId) || rivals[0] || null;
+// Group npcStates by settlementId ONCE per pass (insertion order preserved, so
+// the stable dotRank sort below is byte-identical to the previous full-list
+// filter). Avoids the per-NPC O(N) rescan that made rivalry lookup O(N^2).
+/** @param {any[]} states @returns {Map<string, any[]>} */
+function npcStatesBySettlement(states) {
+  /** @type {Map<string, any[]>} */
+  const bySettlement = new Map();
+  for (const state of states) {
+    const sid = String(state.settlementId);
+    let list = bySettlement.get(sid);
+    if (!list) { list = []; bySettlement.set(sid, list); }
+    list.push(state);
+  }
+  return bySettlement;
+}
+
+/** @param {any} state @param {Map<string, any[]>} bySettlement */
+function rivalryTargetFor(state, bySettlement) {
+  const peers = bySettlement.get(String(state.settlementId)) || [];
+  const rivals = peers
+    .filter((/** @type {any} */ other) => other.npcId !== state.npcId)
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => (b.dotRank || 1) - (a.dotRank || 1));
+  return rivals.find((/** @type {any} */ other) => other.factionId !== state.factionId) || rivals[0] || null;
 }
 
 // Goal culmination — a long-burning ambition finally pays off. Fires when an
@@ -807,6 +924,9 @@ function npcGoalRebranch(state, context, tick) {
 export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
   const tick = options.tick ?? snapshot.worldState.tick + 1;
   const states = Object.values(snapshot.worldState.npcStates || {});
+  // Group NPC states by settlement ONCE so rivalry lookup is O(degree) per NPC
+  // instead of an O(N) rescan (the whole pass was O(N^2)).
+  const bySettlement = npcStatesBySettlement(states);
   const out = [];
 
   for (const state of states) {
@@ -841,7 +961,7 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
     if (!best || best.pressure < minimum || state.ambition < 0.42) continue;
 
     const rivalTarget = ['seek_promotion', 'undermine_rival', 'sabotage', 'expose'].includes(best.actionFamily)
-      ? rivalryTargetFor(state, states)
+      ? rivalryTargetFor(state, bySettlement)
       : null;
     out.push(candidateForAction(state, best.actionFamily, best.pressure, tick, rivalTarget));
   }

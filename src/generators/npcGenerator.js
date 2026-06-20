@@ -13,6 +13,7 @@ import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';
 import { computeRelTension } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from './helpers.js';
+import { roleToCategory, institutionCategoryFlags, isCommerceGuild } from './roleCategory.js';
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -36,8 +37,9 @@ const pickFromArray = r => ctxPick(r);
 
 // ─── NPC_ROLES sub-generators ────────────────────────────────
 
-// generateNPCGoal
-const generateNPCGoal = role => {
+// generateNPCPowerLevel — returns the NPC's { level, power } on a 1-10 scale,
+// keyed off the role keyword (was misleadingly named generateNPCGoal).
+const generateNPCPowerLevel = role => {
   const HIGH_POWER = [
     'mayor',
     'lord',
@@ -63,14 +65,14 @@ const generateSingleNPC = (role, namingTier, category, culture, tier, config = {
   const lastName = pickLast(culture, namingTier || culture);
   const religion = generateReligionType();
   const appearance = generateNPCAppearance(category);
-  const goal = generateNPCRelType(role, category, config);
+  const goal = generateNPCGoal(role, category, config);
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeader(category, config, institutions);
   const title1 = generateCharacterTitle(category, config);
   const title2 = _rng() > 0.5 ? generateCharacterTitle(category, config) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
-  const powerLevel = generateNPCGoal(role);
+  const powerLevel = generateNPCPowerLevel(role);
   return {
     id: null,
     name: fullName,
@@ -208,10 +210,10 @@ const pickLast = (r = 'germanic', s = 'mayor') => {
 };
 
 const filterByGuild = (institutions, culture, tier, config = {}) => {
-  const guildInsts = institutions.filter(i => {
-    const n = (i.name || '').toLowerCase();
-    return (i.tags?.includes('guild') || n.includes('guild')) && !n.includes('thieves');
-  });
+  // Commerce-guild detection by catalog metadata: a 'guild' tag is the catalog's
+  // own marker; criminal guilds (Thieves'/Assassins') are excluded via the
+  // criminal detector rather than a single `!n.includes('thieves')` substring.
+  const guildInsts = institutions.filter(isCommerceGuild);
   if (!guildInsts.length) return null;
   const guild = pick(guildInsts);
   const guildName = guild.name.replace(/\s*\(.*?\)/, '').replace(/s'?\s*guild$/i, "s'");
@@ -242,8 +244,9 @@ const generateNPCAppearance = (r = 'other') => ({
   clothes: pickFromArray(NPC_WANTS[r] || NPC_WANTS.other),
 });
 
-// generateNPCRelType
-const generateNPCRelType = (role, category = 'other', config = {}) => {
+// generateNPCGoal — returns the NPC's goal ({ short, long, driven_by }), keyed
+// off role/category/stress (was misleadingly named generateNPCRelType).
+const generateNPCGoal = (role, category = 'other', config = {}) => {
   const stressType = config.stressType || null;
   const commodity = config.tradeCommodity || config._tradeCommodity || null;
   const topFaction = config._dominantFaction || null;
@@ -397,10 +400,12 @@ const generateFactionLeader = (_category = 'other', config = {}, institutions = 
     magic: config.priorityMagic ?? 50,
     criminal: config.priorityCriminal ?? 50,
   };
-  const names = (institutions || []).map(i => (i.name || '').toLowerCase());
-  const hasCriminal = names.some(n => n.includes('thieves') || n.includes('black market') || n.includes('smuggl'));
-  const hasMagic = names.some(n => n.includes('wizard') || n.includes('mage') || n.includes('alchemist'));
-  const hasReligion = names.some(n => n.includes('church') || n.includes('cathedral') || n.includes('monastery'));
+  // Institution presence drives secret-type weighting. Categorize by catalog
+  // metadata (group category + tags, id-first via institutionMatchesKeyword for
+  // unstamped) instead of name substrings: the old `name.includes('thieves'|
+  // 'wizard'|'church')` triple missed whole families ('Street gang', 'Wayside
+  // shrine', 'Teleportation circle', …) and could false-hit on coincidental text.
+  const { hasCriminal, hasMagic, hasReligion } = institutionCategoryFlags(institutions);
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
 
   // Secret type weights driven by institution presence and priorities
@@ -992,31 +997,16 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
 
     // Stress-modified goals
     if (stressType && enriched.goal) {
-      const isGov =
-        roleLower.includes('mayor') ||
-        roleLower.includes('elder') ||
-        roleLower.includes('reeve') ||
-        roleLower.includes('steward') ||
-        roleLower.includes('governor') ||
-        roleLower.includes('council');
-      const isMil =
-        roleLower.includes('captain') ||
-        roleLower.includes('commander') ||
-        roleLower.includes('constable') ||
-        roleLower.includes('warden') ||
-        roleLower.includes('marshal');
-      const isRel =
-        roleLower.includes('priest') ||
-        roleLower.includes('cleric') ||
-        roleLower.includes('bishop') ||
-        roleLower.includes('abbot') ||
-        roleLower.includes('friar') ||
-        roleLower.includes('monk');
-      const isMerchant =
-        roleLower.includes('merchant') ||
-        roleLower.includes('guild') ||
-        roleLower.includes('factor') ||
-        roleLower.includes('overseer');
+      // Classify the role via the shared role→category map (longest-keyword-first)
+      // instead of four hand-rolled substring lists. The override below is keyed
+      // gov/mil/rel/merchant; map the role's category onto those buckets, keeping
+      // the same gov > mil > rel > merchant priority by virtue of single-category
+      // resolution. Pure string work — no rng, so draw order is unchanged.
+      const roleCat = roleToCategory(roleLower);
+      const isGov = roleCat === 'government';
+      const isMil = roleCat === 'military';
+      const isRel = roleCat === 'religious';
+      const isMerchant = roleCat === 'economy';
 
       const STRESS_GOAL_OVERRIDES = {
         wartime: {

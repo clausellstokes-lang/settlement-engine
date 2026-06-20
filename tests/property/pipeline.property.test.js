@@ -13,8 +13,11 @@
  * specific points in the config space. Properties fuzz the rest. If a
  * new tier × terrain combination breaks the engine, the fixed-fixture
  * tests miss it but a property catches it and shrinks the failure to a
- * minimal repro. numRuns is intentionally low (~15-25) because each
- * generation runs the full pipeline (~10ms each, ~250ms per property).
+ * minimal repro. numRuns is bounded by the cost of the full pipeline
+ * (~10ms each): the single-generation properties run ~100 cases, while
+ * the seed-sensitivity property runs fewer cases because each case does
+ * 16 generations (8 paired runs), keeping the per-property wall time
+ * comparable.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -61,7 +64,7 @@ describe('pipeline (property-based)', () => {
   test('generation never throws across the config space', () => {
     fc.assert(fc.property(configArb, (config) => {
       expect(() => gen(config)).not.toThrow();
-    }), { numRuns: 25 });
+    }), { numRuns: 100 });
   });
 
   test('output is structurally complete for any valid config', () => {
@@ -87,7 +90,7 @@ describe('pipeline (property-based)', () => {
       expect(s.history).toBeDefined();
       // EconomicState always present.
       expect(s.economicState).toBeDefined();
-    }), { numRuns: 25 });
+    }), { numRuns: 100 });
   });
 
   test('same seed produces structurally identical output (determinism)', () => {
@@ -95,7 +98,7 @@ describe('pipeline (property-based)', () => {
       const a = gen(config, { seed: SEED });
       const b = gen(config, { seed: SEED });
       expect(fingerprint(a)).toEqual(fingerprint(b));
-    }), { numRuns: 15 });
+    }), { numRuns: 100 });
   });
 
   test('same seed produces a DEEP-identical settlement (full-JSON determinism)', () => {
@@ -109,7 +112,7 @@ describe('pipeline (property-based)', () => {
       const a = gen(config, { seed: SEED });
       const b = gen(config, { seed: SEED });
       expect(JSON.stringify(a)).toBe(JSON.stringify(b));
-    }), { numRuns: 15 });
+    }), { numRuns: 100 });
   });
 
   test('different seeds usually produce different fingerprints (seed sensitivity)', () => {
@@ -131,7 +134,7 @@ describe('pipeline (property-based)', () => {
       // legitimately match across seeds. But if ALL 8 pairs match, the
       // seed is being ignored.
       expect(differingPairs).toBeGreaterThanOrEqual(3);
-    }), { numRuns: 6 });
+    }), { numRuns: 25 });
   });
 
   // Bonus: thorps are tiny — population should fit in the tier band.
@@ -139,6 +142,6 @@ describe('pipeline (property-based)', () => {
     fc.assert(fc.property(culture, terrain, (cul, terr) => {
       const s = gen({ settType: 'thorp', culture: cul, terrain: terr, tradeRouteAccess: 'isolated' });
       expect(s.population).toBeLessThanOrEqual(60);
-    }), { numRuns: 12 });
+    }), { numRuns: 100 });
   });
 });

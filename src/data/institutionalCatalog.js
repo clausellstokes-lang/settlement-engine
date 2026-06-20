@@ -916,12 +916,14 @@ export const institutionalCatalog = {
       },
       'Inn (multiple)': {
         required: true,
+        baseChance: 1,
         desc: 'Lodging for traveling merchants.',
         tags: ['trade'],
         priorityCategory: 'economy',
       },
       'Taverns (5-20)': {
         required: true,
+        baseChance: 1,
         desc: 'Drinking establishments. Social hubs.',
         tags: ['food'],
         priorityCategory: 'economy',
@@ -1495,6 +1497,7 @@ export const institutionalCatalog = {
       },
       'Inns and taverns (district)': {
         required: true,
+        baseChance: 1,
         desc: 'Multiple inn districts catering to merchants, travelers, and long-term visitors.',
         tags: ['trade', 'lodging'],
         priorityCategory: 'economy',
@@ -1529,6 +1532,7 @@ export const institutionalCatalog = {
       },
       'Warehouse district': {
         required: true,
+        baseChance: 1,
         desc: 'Storage for merchant goods.',
         tags: ['warehouse', 'trade'],
         priorityCategory: 'economy',
@@ -1776,6 +1780,7 @@ export const institutionalCatalog = {
       },
       Garrison: {
         required: true,
+        baseChance: 1,
         desc: 'Professional soldiers. Noble or royal.',
         tags: ['military', 'defense'],
         priorityCategory: 'military',

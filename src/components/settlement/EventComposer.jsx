@@ -103,7 +103,14 @@ export default function EventComposer() {
     () => [...new Set(institutionCatalogItems.map(i => i.category).filter(Boolean))].sort(),
     [institutionCatalogItems],
   );
-  const factionGroups = useMemo(() => factionCompendium(settlement), [settlement]);
+  // Narrow deps to exactly what factionCompendium reads (powerStructure.factions
+  // with a top-level factions fallback) so this catalog doesn't recompute on
+  // every unrelated settlement re-allocation in edit mode.
+  const factionGroups = useMemo(
+    () => factionCompendium(settlement),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [settlement?.powerStructure?.factions, settlement?.factions],
+  );
   // APPLY_STRESSOR — the FULL stressor vocabulary: generation types +
   // campaign-only types (rebellion, market shock, criminal corridor, magical
   // instability, coup d'état) + the user's custom stressors, deduped.
@@ -118,7 +125,10 @@ export default function EventComposer() {
       .filter(f => f && f !== governing)
       .map(f => ({ id: String(f.faction || f.name || ''), name: String(f.faction || f.name || '') }))
       .filter(o => o.id);
-  }, [settlement]);
+    // Narrow deps to what this reads — the faction list + which one is seated
+    // (governingFactionOf keys off powerStructure.factions + governingName).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settlement?.powerStructure?.factions, settlement?.powerStructure?.governingName]);
   // ADD_TRADE_GOOD — datalist suggestions: every catalogued export label
   // across all tiers (free text still wins; the label is the storage format).
   const tradeGoodSuggestions = useMemo(() => {

@@ -206,6 +206,45 @@ async function supabaseList() {
   });
 }
 
+/**
+ * Fetch only the ACTIVE save row(s) whose name matches `name`, mapped to the
+ * lean save shape buildNeighbourBackLink needs (id, name, tier, settlement,
+ * accessState). The partner is matched by the row `name` column OR the embedded
+ * settlement name (data->>name) — mirroring findSaveByName — so we filter on both.
+ *
+ * This replaces the previous full-table supabaseList() read on the back-link path:
+ * that pulled every save's data/config/toggles blobs and ran the v2 + canonical
+ * adapters on all of them just to find one partner by name. The remaining
+ * read-modify-write race (the back-link is computed from a snapshot read OUTSIDE
+ * the batch RPC's transaction) needs a server-side fix — see crossBundleNotes.
+ */
+async function fetchActivePartnersByName(name) {
+  if (!name) return [];
+  const cols = 'id, name, tier, data, access_state';
+  const toSave = (row) => ({
+    id: row.id,
+    name: row.name,
+    tier: row.tier,
+    settlement: row.data,
+    accessState: row.access_state || ACTIVE_SAVE_STATE,
+  });
+  // Two parameterized .eq() queries (row name + embedded settlement name), merged
+  // on id. .eq() values are escaped by the client, so a settlement name containing
+  // a comma/paren — which would break a single .or() filter string — is safe here.
+  const byName = supabase
+    .from('settlements').select(cols)
+    .eq('access_state', ACTIVE_SAVE_STATE).eq('name', name);
+  const byDataName = supabase
+    .from('settlements').select(cols)
+    .eq('access_state', ACTIVE_SAVE_STATE).eq('data->>name', name);
+  const [a, b] = await Promise.all([byName, byDataName]);
+  if (a.error) throw a.error;
+  if (b.error) throw b.error;
+  const merged = new Map();
+  for (const row of [...(a.data || []), ...(b.data || [])]) merged.set(row.id, toSave(row));
+  return [...merged.values()];
+}
+
 async function supabaseSave(entry) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error('Not authenticated');
@@ -220,7 +259,8 @@ async function supabaseSave(entry) {
   // generated neighbour or no matching active partner.
   if (settlement?.neighborRelationship?.name) {
     const saveId = newSaveId();
-    const existing = (await supabaseList()).filter(isSaveActive);
+    // Targeted single-name lookup instead of a full-table read (see helper).
+    const existing = (await fetchActivePartnersByName(settlement.neighborRelationship.name)).filter(isSaveActive);
     const link = buildNeighbourBackLink({ ...v2, id: saveId, settlement }, existing);
     if (link) {
       await supabaseMutateBatch({
@@ -349,7 +389,10 @@ async function localSaveEntry(entry) {
 
 async function localUpdate(id, partial) {
   const saves = localLoad();
-  const idx = saves.findIndex(s => s.id === id);
+  // String()=== both sides: a numeric local id round-tripped as a string (route
+  // param, JSON re-parse, a caller that String()s the id) must still match, or the
+  // update silently no-ops ("my edit didn't save"). Mirrors the other methods here.
+  const idx = saves.findIndex(s => String(s.id) === String(id));
   if (idx !== -1) {
     Object.assign(saves[idx], partial);
     localWrite(saves);
@@ -357,7 +400,7 @@ async function localUpdate(id, partial) {
 }
 
 async function localDelete(id) {
-  localWrite(localLoad().filter(s => s.id !== id));
+  localWrite(localLoad().filter(s => String(s.id) !== String(id)));
 }
 
 async function localCount() {
@@ -380,7 +423,11 @@ async function localReactivateFreeSettlement(id) {
   return { ok: true };
 }
 
-/** Batch-write the full saves array (local mode only). */
+/**
+ * Batch-write the full saves array (local mode only). Retained as part of the
+ * local-backend API surface (exercised by saves.smoke.test.js) and exposed as
+ * `null` in supabase mode so callers can branch on backend capability.
+ */
 async function localWriteAll(entries) {
   localWrite(entries);
 }
@@ -409,7 +456,7 @@ export const saves = {
   count:    isConfigured ? supabaseCount    : localCount,
   reactivateFreeSettlement: isConfigured ? supabaseReactivateFreeSettlement : localReactivateFreeSettlement,
   mutateBatch: isConfigured ? supabaseMutateBatch : localMutateBatch,
-  /** Write entire saves array — only available in local mode. */
+  /** Write entire saves array — local-only API surface (null in supabase mode). */
   writeAll: isConfigured ? null             : localWriteAll,
   isConfigured,
 };

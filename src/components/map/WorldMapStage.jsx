@@ -3,14 +3,21 @@
  *
  * Extracted verbatim from WorldMap.jsx (no logic change). Pure presentational:
  * it renders either a campaign panel (Wizard News / World Pulse) or the
- * settlement palette + map container + overlays + layers panel. All state,
- * refs, and handlers live in the parent WorldMap and are passed in as props.
+ * settlement palette + map container + overlays + layers panel.
+ *
+ * Render-optimization (2026-06): the store-derived values this shell needs
+ * (mapMode, isDraggingOver, mapReady, imageMode, placements) are now read
+ * directly via useStore selectors instead of being prop-drilled. Only
+ * parent-owned refs/handlers/state remain as props. The component is wrapped in
+ * React.memo so an unrelated parent re-render no longer re-renders the stage.
+ * Rendered DOM is unchanged.
  */
 
-import { Suspense, lazy } from 'react';
+import { memo, Suspense, lazy } from 'react';
 import { Loader } from 'lucide-react';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
+import { useStore } from '../../store/index.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, PARCH, FS, SP, R, swatch, PARCH_100 } from '../theme.js';
 
@@ -29,29 +36,30 @@ const MapLegend       = lazy(() => import('./MapLegend.jsx'));
 // path). Bump this when you edit anything under /public/map.
 const FMG_URL = '/map/index.html?v=sfdrop12';
 
-export function WorldMapStage({
+function WorldMapStageImpl({
   showingWizardNews,
   showingWorldPulse,
   showingPantheon,
   activeCampaign,
   activeSaves,
-  placements,
   mapContainerRef,
   handleDragOver,
   handleDragLeave,
   handleDrop,
-  isDraggingOver,
-  imageMode,
   iframeRef,
-  mapMode,
   bridgeReady,
   bridgeRef,
   overlayTransformRef,
   onNavigate,
-  mapReady,
   showLayersPanel,
   setShowLayersPanel,
 }) {
+  // Store-derived values read directly (formerly prop-drilled from WorldMap).
+  const placements    = useStore(s => s.mapState.placements);
+  const isDraggingOver = useStore(s => s.isDraggingOver);
+  const mapMode       = useStore(s => s.mapMode);
+  const mapReady      = useStore(s => s.mapReady);
+  const imageMode     = useStore(s => !!s.mapState.customBackdrop?.imageUrl);
   return (
       showingWizardNews ? (
         <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
@@ -228,3 +236,10 @@ export function WorldMapStage({
       )
   );
 }
+
+/**
+ * Memoized so an unrelated parent re-render (e.g. toast/inspector state churn in
+ * WorldMap) doesn't re-render this shell. The remaining props are stable refs,
+ * parent-owned state, and callbacks the parent stabilizes with useCallback.
+ */
+export const WorldMapStage = memo(WorldMapStageImpl);

@@ -27,7 +27,6 @@ import { INDUSTRY_WATER_NEEDS, RESOURCE_DATA } from '../data/resourceData.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 import { GOODS_MODIFIERS_BY_TIER, COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES } from '../data/tradeGoodsData.js';
 import { evaluateWaterDependency } from './helpers.js';
-import { SERVICE_TIER_DATA } from './servicesGenerator.js';
 import { subsumeTradeGoods, reconcileTradeLists } from '../domain/region/goodsCatalog.js';
 // ─── Economic helper functions ──────────────────────────────
 import {
@@ -216,7 +215,12 @@ const computeFactionPowers = (institutions, terrain, nearbyResources, config = {
       .filter(
         (chain) =>
           chain.processingInstitutions.length > 0 &&
-          chain.processingInstitutions.some((name) => inst.name.includes(name))
+          // Lowercase both sides to match the rest of the function's convention
+          // (instNames / matchesProcessor) — a raw `inst.name.includes(name)`
+          // missed processors whose casing differed from the catalog.
+          chain.processingInstitutions.some((name) =>
+            (inst.name || '').toLowerCase().includes(String(name || '').toLowerCase())
+          )
       )
       .forEach((chain) => {
         const resource = chain.resource || '';
@@ -619,7 +623,7 @@ const buildFactionList = (population, terrain, institutions, config) => {
       severity: SEVERITY.CRITICAL,
       category: 'Food Storage',
       title: 'No Grain Storage Facility',
-      description: `Settlement of ${population.toLocaleString()} lacks a granary — cannot buffer harvests or maintain strategic food reserves.`,
+      description: `Settlement of ${population.toLocaleString('en-US')} lacks a granary — cannot buffer harvests or maintain strategic food reserves.`,
       impact: 'Vulnerable to seasonal shortages and siege starvation without grain reserves.',
       suggestedFixes: ['Add Town granary, City granaries, or State granary complex'],
     });
@@ -682,27 +686,6 @@ const buildFactionList = (population, terrain, institutions, config) => {
   };
 };
 
-// generateTradeScore
-const _generateTradeScore = (deficitPercent, config = {}, institutions = []) => {
-  const econCategory = priorityToCategory(getInstFlags(config, institutions).economyOutput);
-  const isIsolated = (config?.tradeRouteAccess || 'road') === 'isolated';
-  if (deficitPercent <= 0) return null;
-  if (isIsolated) {
-    if (hasTeleportationInfra(institutions, config))
-      return `Food deficit of ${Math.round(deficitPercent)}% persists even with magical supply lines — teleportation imports are reliable but extraordinarily expensive, rationed to necessities rather than plenty, and dependent on the circle's own upkeep. Any disruption to the magical infrastructure means immediate food crisis.`;
-    if (deficitPercent > 40)
-      return `Food deficit of ${Math.round(deficitPercent)}% far outstrips the trickle of sanctioned caravans and minor routes that reach this isolated settlement. Starvation or mass emigration is the long-term outcome without change.`;
-    return `Food deficit of ${Math.round(deficitPercent)}% with no major trade route — local production carries the burden, topped up only by expensive, irregular caravans on minor routes. A poor harvest means genuine hunger.`;
-  }
-  if (econCategory === 'very_high' || econCategory === 'high')
-    return `Food deficit of ${Math.round(deficitPercent)}% is covered through active grain imports — merchant networks ensure supply chain resilience.`;
-  if (econCategory === 'low')
-    return `Food deficit of ${Math.round(deficitPercent)}% is a genuine vulnerability — limited trade capacity means shortages are only one poor harvest away.`;
-  if (econCategory === 'very_low')
-    return `Food deficit of ${Math.round(deficitPercent)}% is a chronic crisis — without meaningful trade, famine is a recurring threat.`;
-  return null;
-};
-
 // generatePowerDynamics
 const generatePowerDynamics = (population, institutions, economicState, config = {}) => {
   const issues = [];
@@ -719,7 +702,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       severity: SEVERITY.CRITICAL,
       category: 'Economic Structure',
       title: 'No Trade Infrastructure',
-      description: `Population of ${population.toLocaleString()} without any markets or trade institutions.`,
+      description: `Population of ${population.toLocaleString('en-US')} without any markets or trade institutions.`,
       impact: 'Economy cannot support this population.',
       suggestedFixes: ["Add Market Square, Merchants' Quarter, or Trade Guild"],
     });
@@ -742,7 +725,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         severity: water.strength === 'moderate' ? SEVERITY.INEFFICIENCY : SEVERITY.IMPLAUSIBLE,
         category: 'Economic Diversity',
         title: 'Insufficient Craft Industries',
-        description: `Population of ${population.toLocaleString()} with only ${craftCount} craft institution${craftCount !== 1 ? 's' : ''}. ${water.note}`,
+        description: `Population of ${population.toLocaleString('en-US')} with only ${craftCount} craft institution${craftCount !== 1 ? 's' : ''}. ${water.note}`,
         impact: water.buffered
           ? 'Craft economy depends on trade imports.'
           : 'Lacks diversity to employ the population.',
@@ -954,49 +937,6 @@ const getCommoditiesForResources = (resources = []) => {
   return [...commodities];
 };
 
-// computeIncomeStreams
-const _computeIncomeStreams = (tier, institutions = [], route = 'road', goodsToggles = {}, config = {}) => {
-  const localProduction = getInstitutionEconomicBonus(config.nearbyResources || [], institutions);
-  const necessityImports = getInstitutionServices(
-    tier,
-    route,
-    localProduction,
-    institutions,
-    config.nearbyResources || []
-  );
-  const isEntrepot = getTradeModifiers(route, institutions);
-  const hasSaltLocal = necessityImports.some((i) => i.toLowerCase() === 'salt');
-  const exports = getHistoryModifiers(tier, institutions, goodsToggles)
-    .filter((item) => !necessityImports.includes(item.name))
-    .filter((item) => {
-      const name = typeof item === 'string' ? item : item?.name || '';
-      return !(hasSaltLocal && !isEntrepot && isSaltPreserved(name));
-    });
-  const imports = getUpgradeChain(tier, route, false, goodsToggles);
-  const bonuses = [];
-  if (isEntrepot && route === 'crossroads' && !['thorp', 'hamlet'].includes(tier))
-    bonuses.push({
-      source: 'Entrepôt Trade',
-      percentage: tier === 'metropolis' ? 25 : tier === 'city' ? 20 : 18,
-      desc: 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads position.',
-    });
-  if (route === 'port' && institutions.some((i) => i.name.toLowerCase().includes('international trade')))
-    bonuses.push({
-      source: 'International Commerce',
-      percentage: 25,
-      desc: 'Revenue from international trade: licensing fees, currency exchange, and commodity brokerage.',
-    });
-  return {
-    exports,
-    imports,
-    isEntrepot,
-    transit: isEntrepot ? imports.filter((i) => !necessityImports.includes(i)).slice(0, 4) : [],
-    incomeBonuses: bonuses,
-    localProduction,
-    necessityImports,
-  };
-};
-
 // getInstitutionServices
 const getInstitutionServices = (tier, route, localProduction, institutions = [], nearbyResources = []) => {
   // Isolated settlements cannot import anything — they are self-contained by definition.
@@ -1039,25 +979,6 @@ const getTradeModifiers = (route, institutions = []) => {
     route === 'crossroads' ||
     (route === 'port' && instNames.some((name) => name.includes('international trade') || name.includes('warehouse district')))
   );
-};
-
-// getHistoryModifiers
-const getHistoryModifiers = (tier, institutions = [], goodsToggles = {}) => {
-  const tierData = SERVICE_TIER_DATA[tier] || {};
-  const exports = [];
-  Object.entries(tierData).forEach(([goodName, spec]) => {
-    const toggleKey = `${tier}_export_${goodName}`;
-    // Custom-content extension: resolve `requiredInstitution` if it's a
-    // refId. For prebuilt entries it's a plain name → passthrough.
-    const reqInst = spec.requiredInstitution
-      ? _customDeps.resolveInstitutionRequirement(spec.requiredInstitution)
-      : '';
-    (goodsToggles[toggleKey] !== void 0 ? goodsToggles[toggleKey] : spec.on) &&
-      ((reqInst &&
-        !institutions.some((inst) => inst.name === reqInst || inst.name.includes(reqInst))) ||
-        (_rng() < spec.p && exports.push(goodName)));
-  });
-  return exports;
 };
 
 // isSaltPreserved
@@ -1159,10 +1080,12 @@ const generateEconomicNarrative = (prosperity, config = {}, institutions = []) =
   const LABELS = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
   const BASE = { Subsistence: 0, Poor: 1, Moderate: 2, Comfortable: 3, Prosperous: 4, Wealthy: 5 };
   let idx = BASE[prosperity] !== undefined ? BASE[prosperity] : 2;
-  // Subsistence isolated settlements can still struggle further — 35% chance of Struggling
+  // Subsistence settlements never rise above Poor: 40% Struggling, 60% Poor.
+  // The second _rng() roll is retained (its branches both resolve to Poor)
+  // ONLY to preserve the seeded RNG consumption order — removing it would
+  // shift every downstream draw and break same-seed determinism.
   if (prosperity === 'Subsistence') {
-    idx = _rng() < 0.4 ? 0 : _rng() < 0.5 ? 1 : 2; // 40% Struggling, 30% Poor, 30% luckier
-    idx = Math.max(0, Math.min(1, idx)); // cap at Poor — subsistence can never be Moderate+
+    idx = _rng() < 0.4 ? 0 : (_rng(), 1); // 40% Struggling, 60% Poor (capped at Poor)
   }
   // Economy output adjustments — calibrated for truly random sliders (5-95 uniform)
   // Low econOut = low commercial investment, not necessarily crisis
@@ -1543,55 +1466,7 @@ export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
   result.forEach((role) => {
     role.effectivePriority = role.priority * (config?.[role.category] ?? 1);
   });
-  return result.sort((a, safetyProfile) => safetyProfile.effectivePriority - a.effectivePriority);
-};
-
-// ─── Private helpers (auto-extracted) ────────────────────
-
-// getUpgradeOpps
-const _getUpgradeOpps = (institutions, tier, config = {}) => {
-  const tierIndex = TIER_ORDER.indexOf(tier);
-  const result = [];
-  Object.entries(HISTORY_EVENTS).forEach(([category, roles]) => {
-    roles.forEach((role) => {
-      if (tierIndex < TIER_ORDER.indexOf(role.minTier)) return;
-      if (role.requiresGuild && !institutions.some((i) => i.tags?.includes('guild'))) return;
-      // Keyword gate: at least one institution name must contain one of the keywords
-      if (
-        role.requiresInstKeyword &&
-        !institutions.some((i) => role.requiresInstKeyword.some((kw) => (i.name || '').toLowerCase().includes(kw)))
-      )
-        return;
-      if (role.requiresPort) {
-        const waterRoute = ['port', 'river', 'coastal'].includes(config?.tradeRouteAccess);
-        const hasWaterInst = institutions.some(
-          (i) =>
-            i.tags?.includes('port') ||
-            (i.name || '').toLowerCase().includes('port') ||
-            (i.name || '').toLowerCase().includes('harbour') ||
-            (i.name || '').toLowerCase().includes('harbor') ||
-            ((i.name || '').toLowerCase().includes('dock') && waterRoute)
-        );
-        if (!waterRoute && !hasWaterInst) return;
-      }
-      if (
-        category === 'other' ||
-        // Dual-axis match (see src/data/categoryVocabulary.js): a faction role
-        // matches an institution by EITHER its semantic priorityCategory OR its
-        // grouping (category). Both clauses are load-bearing — e.g. the
-        // 'religious' role is carried by the grouping while 'military' is carried
-        // by priorityCategory — so neither can be dropped without silently
-        // losing matches. categoryGovernance.test.js pins that every role stays
-        // matchable through one of the two axes.
-        institutions.some((i) => i.priorityCategory === category || i.category?.toLowerCase() === category)
-      )
-        result.push({ ...role, category });
-    });
-  });
-  result.forEach((role) => {
-    role.effectivePriority = role.priority * (config?.[role.category] ?? 1);
-  });
-  return result.sort((a, safetyProfile) => safetyProfile.effectivePriority - a.effectivePriority);
+  return result.sort((a, b) => b.effectivePriority - a.effectivePriority);
 };
 
 // ─────────────────────────────────────────────────────────
@@ -1610,17 +1485,34 @@ const _getUpgradeOpps = (institutions, tier, config = {}) => {
 // Pushes import labels when demand exceeds supply; export bonus when surplus.
 // Builds on top of TRADE_DEPENDENCY_NEEDS (raw resources) without replacing it.
 function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResources, chainExports, chainImports) {
-  const TIER_ORDER = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+  // Uses the imported canonical TIER_ORDER (constants.js) — no local copy.
   const tierIdx = TIER_ORDER.indexOf(tier);
   const instNames = (institutions || []).map((i) => (i.name || '').toLowerCase());
   const resKeys = nearbyResources || [];
 
-  const hasInst = (keyword) => instNames.some((n) => n.includes(keyword.toLowerCase()));
   const hasRes = (key) => resKeys.some((r) => r === key || r.includes(key));
   const alreadyImporting = (label) => chainImports.some((i) => i.toLowerCase().includes(label.toLowerCase()));
   const alreadyExporting = (label) => chainExports.some((e) => e.toLowerCase().includes(label.toLowerCase()));
 
   const presentInst = new Set(instNames);
+
+  // Longest-match-wins per institution: each present institution name contributes
+  // ONLY the value of the single longest keyword it contains, so overlapping
+  // substring keys (e.g. 'parish church' ⊂ 'parish churches (2-5)', or
+  // 'specialized metal' ⊂ 'specialized metalworkers') no longer double-count a
+  // single institution. Different institutions still sum additively.
+  const sumLongestMatch = (entries) => {
+    let total = 0;
+    for (const name of instNames) {
+      let best = null;
+      for (const [keyword, value] of entries) {
+        const kw = keyword.toLowerCase();
+        if (name.includes(kw) && (best === null || kw.length > best.kw.length)) best = { kw, value };
+      }
+      if (best) total += best.value;
+    }
+    return total;
+  };
 
   for (const [category, cfg] of Object.entries(INSTITUTION_FINISHED_GOODS_DEMAND)) {
     // Tier gate
@@ -1631,10 +1523,9 @@ function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResour
     if (cfg.routeRequired && !cfg.routeRequired.includes(tradeRoute)) continue;
 
     // ── Compute total demand from present consumer institutions ────────────
-    let totalDemand = 0;
-    for (const [keyword, { demand }] of Object.entries(cfg.consumers)) {
-      if (hasInst(keyword)) totalDemand += demand;
-    }
+    const totalDemand = sumLongestMatch(
+      Object.entries(cfg.consumers).map(([keyword, { demand }]) => [keyword, demand])
+    );
 
     // §14 — local supply the user's PRESENT custom content contributes to this
     // demand category (a good/institution declaring `satisfies: <category>`).
@@ -1648,14 +1539,19 @@ function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResour
 
     // ── Compute local supply from present supplier institutions/resources ──
     let totalSupply = customSupply.supply;
+    // Resource-key suppliers (e.g. 'managed_forest', 'magical_node') match the
+    // separate nearbyResources namespace and sum directly.
+    const instSupplierEntries = [];
     for (const [keyword, { supply }] of Object.entries(cfg.suppliers)) {
-      // Some suppliers are resource keys (e.g. 'managed_forest', 'magical_node')
       if (keyword.includes('_')) {
         if (hasRes(keyword)) totalSupply += supply;
       } else {
-        if (hasInst(keyword)) totalSupply += supply;
+        instSupplierEntries.push([keyword, supply]);
       }
     }
+    // Institution-key suppliers use longest-match-wins so overlapping variants
+    // (e.g. 'specialized metal' ⊂ 'specialized metalworkers') don't double-count.
+    totalSupply += sumLongestMatch(instSupplierEntries);
 
     const gap = totalDemand - totalSupply;
 
@@ -1872,8 +1768,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     "wizard's tower",
     'magical academy'
   );
-  const TIER_ORDER_LOCAL = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-  const tierIdx = TIER_ORDER_LOCAL.indexOf(tier);
+  // Uses the imported canonical TIER_ORDER (constants.js) — no local copy.
+  const tierIdx = TIER_ORDER.indexOf(tier);
 
   if (magPri > 0) {
     // LOW: apothecary / hedge magic — alchemists, herbalists, hedge wizards
@@ -2107,6 +2003,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       });
     }
   } // ── Stage 3: Income normalization ───────────────────────────────────────────
+  // NOTE: incomeMultiplier is applied uniformly to every entry, so it cancels
+  // out in the (weight / incomeTotalWeight) ratio below and does NOT affect the
+  // normalized `percentage`. It only scales the `weight` field that ships in
+  // `incomeSources`; left intact to preserve that output value byte-for-byte.
   const incomeMultiplier = priorityToMultiplier(ecoInstFlags.economyOutput);
   const incomeWeighted = incomeBuild.map((ee) => ({ ...ee, weight: ee.percentage * incomeMultiplier }));
   const incomeTotalWeight = incomeWeighted.reduce((sum, e) => sum + e.weight, 0) || 1;

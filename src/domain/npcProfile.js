@@ -432,12 +432,16 @@ export function deriveAllNpcProfiles(settlement) {
  * faction-roster surfaces.
  */
 export function npcArchetypeBreakdown(settlement) {
-  const out = {
-    government: 0, military: 0, religious: 0, merchant: 0,
-    craft: 0, criminal: 0, arcane: 0, occupation: 0, other: 0,
-  };
+  // Seed one bucket per canonical archetype from NPC_TEMPLATES (the single source
+  // of the archetype vocabulary every profile resolves into — archetypeFromCategory
+  // falls back to 'other', itself a template key). Building the buckets dynamically
+  // means a newly-added archetype can never be silently undercounted by a stale literal.
+  /** @type {Record<string, number>} */
+  const out = {};
+  for (const archetype of Object.keys(NPC_TEMPLATES)) out[archetype] = 0;
   for (const p of deriveAllNpcProfiles(settlement)) {
-    if (out[p.archetype] !== undefined) out[p.archetype] += 1;
+    if (out[p.archetype] === undefined) out[p.archetype] = 0; // defensive: any unforeseen value still counts
+    out[p.archetype] += 1;
   }
   return out;
 }

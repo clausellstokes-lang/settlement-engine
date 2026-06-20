@@ -241,8 +241,11 @@ export const createSettlementSlice = (set, get) => ({
   }),
 
   // P104 / X-4 — Lifetime narrate count, used by useReaderAudience to
-  // bump anonymous → intermediate after first narrate spend. Bumped
-  // alongside spendCredits in creditsSlice; here we just declare it.
+  // bump anonymous → intermediate after first narrate spend. Bumped on the
+  // AI generation SUCCESS paths in aiSlice (requestNarrative / requestDailyLife
+  // / requestProgression), where the server-authoritative credit spend has
+  // just landed — NOT from the unused spendCredits action. Persisted via the
+  // store's partialize so the audience signal survives reloads.
   lifetimeNarrateCount: 0,
   bumpLifetimeNarrate: () => set(state => {
     state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
@@ -1032,15 +1035,24 @@ export const createSettlementSlice = (set, get) => ({
   // ── Saved settlements ──────────────────────────────────────────────────────
 
   /**
-   * Save the current settlement, snapshotting the live lifecycle state
-   * (phase / eventLog / systemState / locks / provenance timestamps) into
-   * the save record's `campaignState` so a subsequent reload restores
-   * exactly what the user is looking at.
+   * Save the current settlement to the LOCAL store, snapshotting the live
+   * lifecycle state (phase / eventLog / systemState / locks / provenance
+   * timestamps) into the save record's `campaignState` so a subsequent reload
+   * restores exactly what the user is looking at.
    *
    * Without this snapshot, two saves would share whatever was last in
    * the global slice — exactly the bug the audit flagged. The
    * `campaign_state` JSONB column on Supabase plus the migration helper
    * in `lib/saves.js` round-trip these fields.
+   *
+   * IMPORTANT — not the live save path. The real "Save to Library" buttons
+   * (SaveToLibraryButton / WizardOutputToolbar / SettlementsPanel) call
+   * `savesService.save()` directly and rehydrate via setSavedSettlements, so
+   * this action's first_save/third_save pricing moments, 'saved' research
+   * fingerprint, and in-action slot guard DO NOT fire for those users. It is
+   * retained for the optimistic local-save flow and tests; wiring the UI
+   * buttons through it (so those moments fire) is tracked for the UI bundle.
+   * If you route a real button here, drop the duplicate save in the component.
    */
   saveSettlement: (settlement) => {
     const state = get();
@@ -1092,6 +1104,65 @@ export const createSettlementSlice = (set, get) => ({
     }).catch(() => {});
 
     return true;
+  },
+
+  /**
+   * Instrumentation hook for the REAL (cloud/localStorage) save path.
+   *
+   * Complements `saveSettlement` (the local-only optimistic path): the live
+   * "Save to Library" buttons call `savesService.save()` directly and rehydrate
+   * via `setSavedSettlements`, bypassing `saveSettlement` entirely — so its
+   * first_save/third_save pricing moments and 'saved' research fingerprint never
+   * fired for real users. Call this AFTER a successful `savesService.save()` AND
+   * after `savedSettlements` has been refreshed (so the count is correct).
+   *
+   * Because the new save is already in `savedSettlements` when this runs, the
+   * counts are post-increment: `activeCount === 1` is the first save, and
+   * `activeCount === 3 && max === 3` is the third (cap-touching) save.
+   *
+   * Fully fire-and-forget — never throws, never blocks the save.
+   *
+   * @param {object} settlement The settlement object that was just persisted.
+   * @param {string|number} [saveId] The real save's id (from savesService.save);
+   *   used as the fingerprint's settlementUuid/save id. Omit to fire the pricing
+   *   moment without an addressable fingerprint id.
+   * @returns {void}
+   */
+  notePersistedSave: (settlement, saveId) => {
+    try {
+      const state = get();
+      const activeCount = activeSaveCount(state.savedSettlements);
+      const max = state.maxSaves();
+
+      // Post-increment: the new save is already in savedSettlements.
+      const wasFirstSave = activeCount === 1;
+      const wasThirdSave = activeCount === 3 && max === 3;
+
+      // P103 / X-2 — first_save + third_save pricing moments. Fire-and-forget;
+      // the moment library enforces a 24h-per-moment cooldown so firing from
+      // multiple save sites can't spam.
+      if (wasFirstSave || wasThirdSave) {
+        import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
+          const reason = wasThirdSave ? 'third_save' : 'first_save';
+          triggerPricingMoment(reason, (content) => {
+            get().setActivePricingMoment(content);
+          }, { tier: state.auth?.tier });
+        }).catch(() => { /* never block a save */ });
+      }
+
+      // Analytics — fire-and-forget structural snapshot at the 'saved' moment.
+      // captureFingerprint skips silently without a stable uuid or consent; it
+      // never throws and never affects the save. With no saveId we still fire
+      // the moment above but omit the addressable fingerprint id.
+      if (saveId != null) {
+        import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
+          captureFingerprint('saved', settlement, {
+            save: { ...settlement, id: String(saveId) },
+            settlementUuid: String(saveId),
+          });
+        }).catch(() => {});
+      }
+    } catch { /* instrumentation must never throw */ }
   },
 
   /** Bulk-replace the savedSettlements array (used for hydration from savesService). */
@@ -1823,11 +1894,19 @@ export const createSettlementSlice = (set, get) => ({
     state.lastExportAt   = cs.lastExportAt || null;
     state.pendingPreview = null;
     state.pendingChange  = null;
-    // The refined narrative lives at save.aiData.aiSettlement, not a flat
-    // save.aiSettlement. Reading the wrong path nulled the narrative on every
-    // reload (it ran right after hydrateAiFromSave had loaded it correctly),
-    // while daily life — untouched here — survived. Read aiData first.
-    state.aiSettlement   = save.aiData?.aiSettlement || save.aiSettlement || null;
+    // Reset the FULL AI session from this save's aiData blob, not just
+    // aiSettlement. Previously only aiSettlement was set here, so callers that
+    // open a save via hydrateFromSave alone (e.g. the deity-from-map picker)
+    // carried the previously-open settlement's aiDailyLife / showNarrative /
+    // aiDataVersion / aiSourceFingerprint, leaking another town's daily-life
+    // prose and skewing isNarrativeStale. Mirror hydrateAiFromSave's derivation
+    // so the two entry points agree and a single hydrateFromSave call is safe.
+    const aiBlob = save.aiData || {};
+    state.aiSettlement   = aiBlob.aiSettlement || save.aiSettlement || null;
+    state.aiDailyLife    = aiBlob.aiDailyLife || null;
+    state.aiDataVersion  = aiBlob.narrativeGeneratedAt ? new Date(aiBlob.narrativeGeneratedAt).getTime() : null;
+    state.aiSourceFingerprint = aiBlob.narrativeSourceFingerprint || null;
+    state.showNarrative  = aiBlob.narrativeMode === 'narrated' && !!aiBlob.aiSettlement;
 
     // SystemState: prefer the persisted snapshot; if absent or stale,
     // re-derive from the settlement so the rail/timeline never crashes.

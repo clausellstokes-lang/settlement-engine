@@ -48,7 +48,10 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
       />
 
       <ChapterHeadline tone="gold">
-        {resourcesHeadline({ primaryExports: r.exports || r.exportPotential || [], primaryImports: importsCritical })}
+        {/* resourcesHeadline reads exportPotential + nearbyDepleted; the old
+            `primaryImports` key was never consulted, so the depleted-resources
+            clause silently dropped. Pass the keys the function actually expects. */}
+        {resourcesHeadline({ exportPotential: r.exportPotential, nearbyDepleted: r.nearbyDepleted })}
       </ChapterHeadline>
 
       {/* ── Strategic value ────────────────────────────────────── */}

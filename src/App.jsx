@@ -242,16 +242,23 @@ export default function App() {
   // sign-in (tracked via a user-scoped localStorage migration flag).
   useEffect(() => {
     if (authLoading) return;
+    // Cancellation guard: rapid tier transitions / remounts can start a second
+    // migrate→load chain before the first resolves, interleaving migrate and load
+    // so the displayed custom content reflects a stale cloud snapshot (or migrate
+    // runs twice). On cleanup we set ignore=true so a superseded chain bails before
+    // its load call. Matches the cancellation pattern in useGalleryPageState.
+    let ignore = false;
     const canSyncCloud = authTier === 'premium' || isElevated;
     if (canSyncCloud) {
       // First migrate any local items, then load the canonical cloud state
       migrateLocalCustomContentToCloud()
-        .then(() => loadCustomContentFromCloud())
-        .catch(err => console.error('Custom content cloud sync failed:', err));
+        .then(() => { if (!ignore) return loadCustomContentFromCloud(); })
+        .catch(err => { if (!ignore) console.error('Custom content cloud sync failed:', err); });
     } else if (authTier === 'anon') {
       // Sign-out: drop cloud cache, fall back to local (grandfathered) items
       clearCloudCustomContent();
     }
+    return () => { ignore = true; };
   }, [authTier, authUserId, isElevated, authLoading, loadCustomContentFromCloud, migrateLocalCustomContentToCloud, clearCloudCustomContent]);
 
   // Auto-dismiss onboarding nudge after 8s

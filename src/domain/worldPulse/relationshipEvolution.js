@@ -621,7 +621,71 @@ export function settlementStrength(/** @type {any} */ item, /** @type {any} */ p
   );
 }
 
-function relationshipTypeBetween(snapshot, a, b) {
+// ── Per-tick relationship index ──────────────────────────────────────────────
+// The candidate helpers (protectorBackingScore, relationshipThirdParties,
+// sharedHostileThird, relationshipTypeBetween) each used to RESCAN the full
+// edge list and re-run normalizeRelationshipEdge + ensureRelationshipState on
+// every edge, every call — making the per-tick relationship pass O(E^2)–O(E^3)
+// with thousands of redundant state allocations. buildRelationshipIndex runs
+// ONCE per evaluateRelationshipRules and precomputes:
+//   • records:    one normalized edge + ensured relState per raw edge, in
+//                 edge-list order (so order-dependent tiebreaks are preserved);
+//   • adjacency:  Map<settlementId, record[]> of incident edges, edge-order;
+//   • pairType:   Map<"a|b", relationshipType> — FIRST edge pairing a&b wins
+//                 (matches relationshipTypeBetween's first-match-in-order);
+//   • hostileTo:  Map<settlementId, Set<otherId>> for hostile/cold_war edges.
+// The helpers below read from this index (O(degree) instead of O(E)) and
+// produce byte-identical results to the pre-index scans.
+function buildRelationshipIndex(snapshot) {
+  const states = snapshot?.worldState?.relationshipStates || {};
+  const rawEdges = snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
+  /** @type {Array<{key:string, edge:any, relState:any, from:string, to:string}>} */
+  const records = [];
+  /** @type {Map<string, Array<{key:string, edge:any, relState:any, from:string, to:string}>>} */
+  const adjacency = new Map();
+  /** @type {Map<string, string>} */
+  const pairType = new Map();
+  /** @type {Map<string, Set<string>>} */
+  const hostileTo = new Map();
+  const addAdj = (/** @type {string} */ id, /** @type {any} */ rec) => {
+    let list = adjacency.get(id);
+    if (!list) { list = []; adjacency.set(id, list); }
+    list.push(rec);
+  };
+  const addHostile = (/** @type {string} */ id, /** @type {string} */ other) => {
+    let set = hostileTo.get(id);
+    if (!set) { set = new Set(); hostileTo.set(id, set); }
+    set.add(other);
+  };
+  for (const rawEdge of rawEdges) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const key = relationshipKeyFromEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[key]);
+    const s = getRelationshipSettlements(edge);
+    const from = String(s.from);
+    const to = String(s.to);
+    const rec = { key, edge, relState, from, to };
+    records.push(rec);
+    addAdj(from, rec);
+    if (to !== from) addAdj(to, rec);
+    // First-match-in-edge-order pair → type (mirrors relationshipTypeBetween).
+    const pairKeyFwd = `${from}|${to}`;
+    const pairKeyRev = `${to}|${from}`;
+    if (!pairType.has(pairKeyFwd)) pairType.set(pairKeyFwd, relState.relationshipType);
+    if (!pairType.has(pairKeyRev)) pairType.set(pairKeyRev, relState.relationshipType);
+    if (relState.relationshipType === "hostile" || relState.relationshipType === "cold_war") {
+      addHostile(from, to);
+      addHostile(to, from);
+    }
+  }
+  return { records, adjacency, pairType, hostileTo };
+}
+
+function relationshipTypeBetween(ctx, a, b) {
+  const index = ctx?.relIndex;
+  if (index) return index.pairType.get(`${String(a)}|${String(b)}`) || null;
+  // Fallback for callers without a precomputed index (legacy/direct callers).
+  const snapshot = ctx?.snapshot || ctx;
   const states = snapshot?.worldState?.relationshipStates || {};
   for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
     const edge = normalizeRelationshipEdge(rawEdge);
@@ -635,14 +699,16 @@ function relationshipTypeBetween(snapshot, a, b) {
 }
 
 function protectorBackingScore(ctx, targetId, attackerId) {
-  const states = ctx.snapshot?.worldState?.relationshipStates || {};
+  // Only the target's incident edges can carry a protector — read them from the
+  // per-tick adjacency index (O(degree)) instead of rescanning every edge.
+  const index = ctx.relIndex || buildRelationshipIndex(ctx.snapshot);
+  const selfKey = relationshipKeyFromEdge(ctx.originalEdge || ctx.edge);
+  const targetStr = String(targetId);
   let max = 0;
-  for (const rawEdge of ctx.snapshot?.regionalGraph?.edges || ctx.snapshot?.relationships || []) {
-    const edge = normalizeRelationshipEdge(rawEdge);
-    const key = relationshipKeyFromEdge(rawEdge);
-    if (key === relationshipKeyFromEdge(ctx.originalEdge || ctx.edge)) continue;
-    const relState = ensureRelationshipState(edge, states[key]);
-    const s = getRelationshipSettlements(edge);
+  for (const rec of index.adjacency.get(targetStr) || []) {
+    const { key, edge, relState } = rec;
+    if (key === selfKey) continue;
+    const s = { from: rec.from, to: rec.to };
     let protectorId = null;
     let score = 0;
 
@@ -667,7 +733,7 @@ function protectorBackingScore(ctx, targetId, attackerId) {
     if (!protectorId || String(protectorId) === String(attackerId)) continue;
     const protector = itemFor(ctx.snapshot, protectorId);
     score += settlementStrength(protector) * 0.16;
-    const protectorToAttacker = relationshipTypeBetween(ctx.snapshot, protectorId, attackerId);
+    const protectorToAttacker = relationshipTypeBetween(ctx, protectorId, attackerId);
     if (["allied", "trade_partner", "patron", "vassal"].includes(protectorToAttacker)) score *= 0.48;
     if (["hostile", "cold_war", "rival"].includes(protectorToAttacker)) score *= 1.18;
     max = Math.max(max, clamp01(score));
@@ -763,21 +829,21 @@ function patronageEligibility(ctx) {
   return forward.eligible ? forward : reverse.eligible ? reverse : forward;
 }
 
-function relationshipThirdParties(snapshot, settlementId, types = []) {
+function relationshipThirdParties(ctx, settlementId, types = []) {
   const typeSet = new Set(types);
-  const states = snapshot?.worldState?.relationshipStates || {};
+  const index = ctx?.relIndex || buildRelationshipIndex(ctx?.snapshot || ctx);
+  const sid = String(settlementId);
   const out = [];
-  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
-    const edge = normalizeRelationshipEdge(rawEdge);
-    const key = relationshipKeyFromEdge(rawEdge);
-    const relState = ensureRelationshipState(edge, states[key]);
-    if (typeSet.size && !typeSet.has(relState.relationshipType)) continue;
-    const s = getRelationshipSettlements(edge);
+  for (const rec of index.adjacency.get(sid) || []) {
+    if (typeSet.size && !typeSet.has(rec.relState.relationshipType)) continue;
+    // Match the original first/second-assignment semantics: from===sid resolves
+    // the third party to `to`, but a to===sid match (incl. a self-loop) wins and
+    // resolves to `from`.
     let thirdPartyId = null;
-    if (String(s.from) === String(settlementId)) thirdPartyId = String(s.to);
-    if (String(s.to) === String(settlementId)) thirdPartyId = String(s.from);
+    if (rec.from === sid) thirdPartyId = rec.to;
+    if (rec.to === sid) thirdPartyId = rec.from;
     if (!thirdPartyId) continue;
-    out.push({ relationshipKey: key, thirdPartyId, relationshipType: relState.relationshipType, relState });
+    out.push({ relationshipKey: rec.key, thirdPartyId, relationshipType: rec.relState.relationshipType, relState: rec.relState });
   }
   return out;
 }
@@ -802,23 +868,14 @@ function activeRebellionAgainstVassal(snapshot, vassalId) {
   );
 }
 
-function sharedHostileThird(snapshot, a, b) {
-  const states = snapshot?.worldState?.relationshipStates || {};
-  const hostileToA = new Set();
-  const hostileToB = new Set();
-  for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
-    const key = relationshipKeyFromEdge(edge);
-    const state = ensureRelationshipState(edge, states[key]);
-    if (!["hostile", "cold_war"].includes(state.relationshipType)) continue;
-    const s = getRelationshipSettlements(edge);
-    if (String(s.from) === String(a)) hostileToA.add(String(s.to));
-    if (String(s.to) === String(a)) hostileToA.add(String(s.from));
-    if (String(s.from) === String(b)) hostileToB.add(String(s.to));
-    if (String(s.to) === String(b)) hostileToB.add(String(s.from));
-  }
-  // Lowest-sorted shared enemy: iterating A's set followed B's edge-list
-  // insertion order, so reversed authoring of the a/b edge could surface a
-  // DIFFERENT common enemy when several exist.
+function sharedHostileThird(ctx, a, b) {
+  // The hostile/cold_war adjacency sets are precomputed once per tick; the
+  // intersection is sorted, so the result is stable regardless of edge-authoring
+  // order (the lowest-sorted common enemy when several exist).
+  const index = ctx?.relIndex || buildRelationshipIndex(ctx?.snapshot || ctx);
+  const hostileToA = index.hostileTo.get(String(a));
+  const hostileToB = index.hostileTo.get(String(b));
+  if (!hostileToA || !hostileToB) return null;
   return [...hostileToA].filter(id => hostileToB.has(id)).sort()[0] || null;
 }
 
@@ -826,7 +883,10 @@ function sharedEnemyAllianceCandidate(ctx) {
   const settlements = getRelationshipSettlements(ctx.edge);
   if (!settlements.from || !settlements.to) return null;
   if (["allied", "hostile", "cold_war", "vassal"].includes(ctx.relState.relationshipType)) return null;
-  const enemyId = sharedHostileThird(ctx.snapshot, settlements.from, settlements.to);
+  // Cheap precheck inside sharedHostileThird: returns null immediately unless
+  // BOTH parties have at least one hostile/cold_war edge in the precomputed
+  // index, so this is no longer an unconditional O(E) scan per edge.
+  const enemyId = sharedHostileThird(ctx, settlements.from, settlements.to);
   if (!enemyId) return null;
   const trustGate = ctx.relState.trust + ctx.relState.pactStrength * 0.4 - ctx.relState.resentment * 0.35;
   if (trustGate < 0.22) return null;
@@ -1028,7 +1088,7 @@ function tradePartnerRules(ctx) {
 }
 
 function alliedRules(ctx) {
-  const { edge, relState, sourcePressure, targetPressure, snapshot } = ctx;
+  const { edge, relState, sourcePressure, targetPressure } = ctx;
   const settlements = getRelationshipSettlements(edge);
   // H16: the alliance burden lands on the side actually carrying the support
   // cost. Each direction is scored with the original formula (the partner's
@@ -1110,8 +1170,8 @@ function alliedRules(ctx) {
   // side is the supporter, whichever way the save authored the edge. When
   // both allies have cold-war fronts the higher-resentment front is supported
   // first; an exact tie breaks on the sorted pair.
-  const fromColdWar = relationshipThirdParties(snapshot, settlements.from, ["cold_war"])[0];
-  const toColdWar = relationshipThirdParties(snapshot, settlements.to, ["cold_war"])[0];
+  const fromColdWar = relationshipThirdParties(ctx, settlements.from, ["cold_war"])[0];
+  const toColdWar = relationshipThirdParties(ctx, settlements.to, ["cold_war"])[0];
   let supportedColdWar = fromColdWar || toColdWar;
   let supportedAllyId = String(fromColdWar ? settlements.from : settlements.to);
   if (fromColdWar && toColdWar) {
@@ -1123,7 +1183,7 @@ function alliedRules(ctx) {
   }
   if (supportedColdWar) {
     const supportingAllyId = String(supportedAllyId === String(settlements.from) ? settlements.to : settlements.from);
-    const supporterToThird = relationshipTypeBetween(snapshot, supportingAllyId, supportedColdWar.thirdPartyId);
+    const supporterToThird = relationshipTypeBetween(ctx, supportingAllyId, supportedColdWar.thirdPartyId);
     const hesitation = ["allied", "trade_partner", "patron", "vassal"].includes(supporterToThird) ? 0.46 : 1;
     candidates.push(
       internalDrift(ctx, "ally_cold_war_support", {
@@ -1431,7 +1491,7 @@ function vassalRules(ctx) {
     }),
   );
 
-  const overlordColdWar = relationshipThirdParties(ctx.snapshot, overlordId, ["cold_war"])[0];
+  const overlordColdWar = relationshipThirdParties(ctx, overlordId, ["cold_war"])[0];
   if (overlordColdWar) {
     candidates.push(
       internalDrift(ctx, "vassal_cold_war_support", {
@@ -2285,6 +2345,12 @@ export function buildPressureSummary(/** @type {any} */ pressureIdx, /** @type {
 export function evaluateRelationshipRules(snapshot, pressureIdx, /** @type {any} */ context = {}) {
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const states = snapshot?.worldState?.relationshipStates || {};
+  // Build the per-tick relationship index ONCE: the candidate helpers
+  // (protectorBackingScore, relationshipThirdParties, sharedHostileThird,
+  // relationshipTypeBetween) read from it via ctx.relIndex instead of each
+  // rescanning the full edge list — collapsing the pass from O(E^2)–O(E^3) to
+  // ~O(E·avgDegree) with one ensureRelationshipState allocation per edge.
+  const relIndex = buildRelationshipIndex(snapshot);
 
   return (snapshot?.regionalGraph?.edges || snapshot?.relationships || []).flatMap((edge) => {
     const key = relationshipKeyFromEdge(edge);
@@ -2302,6 +2368,9 @@ export function evaluateRelationshipRules(snapshot, pressureIdx, /** @type {any}
       targetPressure,
       pressureIdx,
       snapshot,
+      // Precomputed per-tick adjacency / relationship-state / hostile-set index
+      // shared by every candidate helper (see buildRelationshipIndex).
+      relIndex,
       tick,
       // Feature C: per-settlement aggressiveness multipliers (centered on 1.0).
       // Empty/absent ⇒ every candidate factor is 1.0 ⇒ byte-identical legacy.

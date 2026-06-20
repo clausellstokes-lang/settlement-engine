@@ -1,5 +1,4 @@
 import { preserveWorldConditions, worldAuthoredConditions } from './worldPulse/reconcile.js';
-import { wallClockNow } from './clock.js';
 
 function conditionId(condition) {
   return condition?.archetype || condition?.id || condition?.label || null;
@@ -15,7 +14,15 @@ export function reconcileSettlementChange(nextSettlement, priorSettlement, optio
   const carried = worldAuthoredConditions(priorSettlement).map(conditionId).filter(Boolean);
   const reconciled = preserveWorldConditions(nextSettlement, priorSettlement);
   const entry = {
-    at: options.now || wallClockNow(),
+    // `at` is a deterministic, caller-supplied timestamp. When options.now is
+    // omitted we record null rather than stamping wall-clock: a reconciliationLog
+    // entry is persisted into settlement state, so a Date.now() here would make a
+    // regenerated/replayed settlement differ byte-for-byte from its original
+    // (breaking snapshot/replay determinism — the same property pendingEdits.js and
+    // normalizeSettlement.js preserve by avoiding Math.random on the persist path).
+    // Call sites that have a real apply instant (e.g. applyEvent threads
+    // logEntry.appliedAt) pass options.now and keep a precise timestamp.
+    at: options.now ?? null,
     source: options.source || 'settlement_change',
     changeType: compactLabel(options.changeType) || 'update',
     changeLabel: compactLabel(options.changeLabel),

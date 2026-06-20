@@ -36,6 +36,7 @@ import { genRelNarrative, genSuccessionNarr } from './powerGenerator.js';
 import { mergeNPCLists } from './npcGenerator.js';
 import { enrichNPCsWithStructure } from './npcStructure.js';
 import { generateCrimeLevel, getStressHistory } from './npcGenerator.js';
+import { roleToCategory } from './roleCategory.js';
 
 // ─── buildTradeNarrative ─────────────────────────────────────────────────────
 /**
@@ -405,7 +406,14 @@ const genSettSummary = settlement => {
     relFaction,
     age: history.age || 100,
     access: config.tradeRouteAccess || 'road',
-    npcNames: npcs.slice(0, 6).map(n => ({ name: n.name, role: n.role })),
+    // Role category via the shared role→category map (the same source npcGenerator
+    // uses), preferring the NPC's own carried category when present. Centralizes
+    // the role-keyword classification that both files used to derive ad hoc.
+    npcNames: npcs.slice(0, 6).map(n => ({
+      name: n.name,
+      role: n.role,
+      category: n.category || roleToCategory(n.role),
+    })),
     pickNPC: (exclude = -1) => {
       const pool = npcs.slice(0, 6).filter((_, i) => i !== exclude);
       return pool.length > 0 ? pickRandom2(pool) : null;

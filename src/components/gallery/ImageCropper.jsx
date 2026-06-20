@@ -18,12 +18,15 @@ import {
   cropRectFromTransform,
   outputSize,
 } from './cropGeometry.js';
-import { BORDER2, CARD_ALT, GOLD, MUTED, R, SP } from '../theme.js';
+import { BORDER2, CARD_ALT, GOLD, MUTED, R, RED, SP, FS, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
 const MAX_ZOOM = 4;
 const ZOOM_STEPS = 0.01;
+
+/** Local file selections (blob:/data:) are same-origin; only remote URLs need CORS. */
+const needsCrossOrigin = (src) => typeof src === 'string' && !/^(blob:|data:)/i.test(src);
 
 export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit, busy = false }) {
   const viewportRef = useRef(null);
@@ -37,6 +40,7 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
   const [zoom, setZoomState] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
+  const [error, setError] = useState(null);
 
   // Single setter that keeps the ref mirror in lock-step with state.
   const setZoom = (z) => { zoomRef.current = z; setZoomState(z); };
@@ -121,16 +125,27 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
   const commit = () => {
     const img = imgRef.current;
     if (!img || !natural || !viewport.w) return;
-    const rect = cropRectFromTransform({ natural, viewport, zoom, offset });
-    const out = outputSize(aspect, 1280);
-    const canvas = document.createElement('canvas');
-    canvas.width = out.w;
-    canvas.height = out.h;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    ctx.imageSmoothingQuality = 'high';
-    ctx.drawImage(img, rect.sx, rect.sy, rect.sWidth, rect.sHeight, 0, 0, out.w, out.h);
-    canvas.toBlob((blob) => { if (blob) onCommit?.(blob); }, 'image/jpeg', 0.85);
+    setError(null);
+    // Drawing a cross-origin image without an anonymous CORS grant taints the
+    // canvas, so toBlob throws (or yields null). Surface a real error instead of
+    // a silently dead Apply button.
+    try {
+      const rect = cropRectFromTransform({ natural, viewport, zoom, offset });
+      const out = outputSize(aspect, 1280);
+      const canvas = document.createElement('canvas');
+      canvas.width = out.w;
+      canvas.height = out.h;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) { setError('Could not prepare the image for cropping.'); return; }
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, rect.sx, rect.sy, rect.sWidth, rect.sHeight, 0, 0, out.w, out.h);
+      canvas.toBlob((blob) => {
+        if (blob) onCommit?.(blob);
+        else setError('Could not export the cropped image. The source may not allow cross-origin use.');
+      }, 'image/jpeg', 0.85);
+    } catch {
+      setError('Could not export the cropped image. The source may not allow cross-origin use.');
+    }
   };
 
   return (
@@ -157,13 +172,17 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           userSelect: 'none',
         }}
       >
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- onLoad is a resource-load lifecycle event (reads naturalWidth/Height to drive crop geometry), not a user interaction */}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- onLoad/onError are resource-load lifecycle events (onLoad reads naturalWidth/Height to drive crop geometry), not user interactions */}
         <img
           ref={imgRef}
           src={src}
           alt=""
           draggable={false}
+          // Request an anonymous CORS grant for remote images so the canvas
+          // isn't tainted on commit. Omitted for blob:/data: (same-origin).
+          {...(needsCrossOrigin(src) ? { crossOrigin: 'anonymous' } : {})}
           onLoad={onImgLoad}
+          onError={() => setError('Could not load the image.')}
           style={{
             position: 'absolute',
             left: 0,
@@ -227,6 +246,12 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           {busy ? 'Uploading…' : 'Apply crop'}
         </Button>
       </div>
+
+      {error && (
+        <div role="alert" data-testid="cropper-error" style={{ color: RED, fontFamily: sans, fontSize: FS.xs }}>
+          {error}
+        </div>
+      )}
     </div>
   );
 }

@@ -150,17 +150,32 @@ function parseBool(s) {
   return undefined;
 }
 
-// Read from URL (?flag.X=true) and persist to localStorage as a side
-// effect so the override survives a page refresh.
+// Read from URL (?flag.X=true). PURE: no persistence — flag() is called inside
+// useSyncExternalStore's getSnapshot, and a side-effecting getSnapshot (a synchronous
+// localStorage write on every render) violates React's contract. The one-time
+// URL→localStorage persistence happens once at app boot via persistUrlFlags().
 function fromUrl(name) {
   if (typeof window === 'undefined') return undefined;
   const params = new URLSearchParams(window.location.search);
-  const raw = params.get(URL_PARAM_PREFIX + name);
-  const v = parseBool(raw);
-  if (v !== undefined) {
+  return parseBool(params.get(URL_PARAM_PREFIX + name));
+}
+
+/**
+ * Persist any `?flag.X=...` URL overrides into localStorage so they survive a
+ * refresh / navigation that drops the query string. Call ONCE at app boot — not
+ * from flag()/getSnapshot (that runs during render). Safe to call repeatedly.
+ */
+export function persistUrlFlags() {
+  if (typeof window === 'undefined') return;
+  let params;
+  try { params = new URLSearchParams(window.location.search); } catch { return; }
+  for (const [key, raw] of params.entries()) {
+    if (!key.startsWith(URL_PARAM_PREFIX)) continue;
+    const v = parseBool(raw);
+    if (v === undefined) continue;
+    const name = key.slice(URL_PARAM_PREFIX.length);
     try { window.localStorage.setItem(STORAGE_PREFIX + name, String(v)); } catch { /* private mode */ }
   }
-  return v;
 }
 
 function fromLocalStorage(name) {

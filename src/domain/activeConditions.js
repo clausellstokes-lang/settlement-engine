@@ -537,7 +537,12 @@ export function conditionIdFromArchetype(archetype, opts = {}) {
   if (opts.suffix) {
     return `condition.${arche}.${snakeCase(opts.suffix)}`;
   }
-  return `condition.${arche}.${shortHash(`${arche}.${opts.label || ''}.${opts.tick ?? 0}`)}`;
+  // Fallback id is tick-INVARIANT (archetype + label only): a condition
+  // re-minted from a partial that lost its id but whose triggeredAt.tick
+  // differs must still hash to the same id, so id-keyed dedup (withActiveCondition
+  // replace-by-id, eventConditions sync) keeps working. Matches the stability
+  // intent stated in the header comment above.
+  return `condition.${arche}.${shortHash(`${arche}.${opts.label || ''}`)}`;
 }
 
 // ── Pure derivation ──────────────────────────────────────────────────────

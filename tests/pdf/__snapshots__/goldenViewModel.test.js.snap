@@ -9,7 +9,7 @@ exports[`pdf.6 — golden snapshot of the SHARED_FIELDS canon values > canon val
   "food.surplus (lb/day)": 5449,
   "headcounts.factions": 6,
   "headcounts.institutions": 55,
-  "headcounts.npcs": 12,
+  "headcounts.npcs": 10,
   "prosperity.label": "Prosperous",
   "safety.label": "Moderate",
   "topExport.label": "Salted fish",

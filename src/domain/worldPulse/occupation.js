@@ -601,17 +601,29 @@ function edgeBetween(snapshot, a, b) {
  * @param {any} snapshot   the pre-tick snapshot (for the occupier↔occupied edge).
  * @param {(id:string)=>any} nameFor
  * @param {number} tick
+ * @param {Set<string>|null} [arrivedThisTick]  occupied ids that FIRST reached `vassalized`
+ *   this tick (prevState !== 'vassalized'). Only these emit — a stable vassalized occupation,
+ *   which also holds at stateHeld 0 / lastTick = tick, must NOT re-emit (finding 3).
  * @returns {any[]}
  */
-export function vassalizationOutcomes(occupations, snapshot, nameFor, tick) {
+export function vassalizationOutcomes(occupations, snapshot, nameFor, tick, arrivedThisTick = null) {
   const out = [];
   for (const occupiedId of Object.keys(occupations || {}).sort(codepoint)) {
     const rec = occupations[occupiedId];
     if (!rec?.occupierId) continue;
     if (rec.state !== 'vassalized') continue;
-    // Only freshly-arrived-at-vassalized (stateHeld reset to 0 this tick) emits once;
-    // a long-standing vassal occupation does not re-emit every tick (byte-light).
-    if (num(rec.stateHeld) !== 0 || num(rec.lastTick) !== num(tick)) continue;
+    // Emit ONCE, on the tick the occupation first ARRIVES at vassalized. A stable
+    // vassalized occupation that merely HELD this tick also carries stateHeld 0 +
+    // lastTick = tick (advanceOccupationState returns stateHeld 0 when the top rung
+    // holds), so the old stateHeld/lastTick gate re-fired the relationship_label_change
+    // + 'bends the knee' chronicle every tick. The arrived-this-tick signal is the
+    // authoritative one-shot edge; fall back to the old gate only when it is not provided
+    // (direct callers/tests that do not thread the prev-state transition).
+    if (arrivedThisTick) {
+      if (!arrivedThisTick.has(String(occupiedId))) continue;
+    } else if (num(rec.stateHeld) !== 0 || num(rec.lastTick) !== num(tick)) {
+      continue;
+    }
     // The apply path RELABELS an existing edge — locate the real occupier↔occupied edge.
     const found = edgeBetween(snapshot, rec.occupierId, occupiedId);
     if (!found) continue;
@@ -696,9 +708,13 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
   }
   const liberatedIds = liberatedIdsFrom(returnOutcomes);
   for (const { occupiedId, occupierId } of freshConquestsFrom(warOutcomes)) {
-    // A fresh conquest (re-)seeds a contested occupation. If the same settlement was
-    // already occupied (a re-conquest by a new occupier), the new occupier takes over at
-    // contested — the prior occupation is overwritten (one occupier holds a settlement).
+    // A fresh conquest seeds a contested occupation. IDEMPOTENCY (finding 2): if the SAME
+    // occupier already holds this settlement, treat the re-conquest as a NO-OP — do not
+    // reset it to `contested`/0.35 resistance, which would rewind all stabilization
+    // progress every tick a stale war_front re-fires the conquest. Only a DIFFERENT
+    // occupier (a genuine re-conquest) overwrites the record (one occupier per settlement).
+    const prior = occupations[occupiedId];
+    if (prior?.occupierId && String(prior.occupierId) === String(occupierId)) continue;
     occupations[occupiedId] = createOccupationRecord(occupierId, t);
   }
   // Liberated settlements exit the ledger (a returning army broke the occupation).
@@ -710,6 +726,11 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
   const outcomes = [];
   /** @type {Array<{id:string, outcome:'win'|'loss', magnitude?:number}>} */
   const dispositionDeltas = [];
+  // Occupied ids that FIRST reached `vassalized` this tick (prevState !== 'vassalized').
+  // The vassalization relationship outcome fires ONCE on arrival, not every tick the
+  // occupation holds at vassalized (finding 3).
+  /** @type {Set<string>} */
+  const arrivedAtVassalized = new Set();
 
   // ── Step 3: advance resistance + state for each surviving occupation. ─────────────
   for (const occupiedId of Object.keys(occupations).sort(codepoint)) {
@@ -764,6 +785,11 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
       dispositionDeltas.push({ id: String(rec.occupierId), outcome: 'win', magnitude: 0.3 });
     } else if (stateRank(advanced.state) < stateRank(prevState)) {
       dispositionDeltas.push({ id: String(rec.occupierId), outcome: 'loss', magnitude: 0.3 });
+    }
+    // Record the one-shot arrival edge for the vassalization outcome (finding 3): the
+    // occupation just CLIMBED to vassalized from a lower rung this tick.
+    if (advanced.state === 'vassalized' && prevState !== 'vassalized') {
+      arrivedAtVassalized.add(String(occupiedId));
     }
 
     // ── Resistance condition on the OCCUPIED (grows on intact/loyalist, shrinks on
@@ -852,8 +878,10 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     }
   }
 
-  // ── Vassalization: a stabilized occupation converts to a vassal edge. ─────────────
-  for (const v of vassalizationOutcomes(occupations, snapshot, nameFor, t)) outcomes.push(v);
+  // ── Vassalization: a stabilized occupation converts to a vassal edge. Fires ONCE on
+  // the tick the occupation first reaches vassalized (arrivedAtVassalized), never again
+  // while it holds there (finding 3). ──────────────────────────────────────────────────
+  for (const v of vassalizationOutcomes(occupations, snapshot, nameFor, t, arrivedAtVassalized)) outcomes.push(v);
 
   return { outcomes, occupations, dispositionDeltas };
 }

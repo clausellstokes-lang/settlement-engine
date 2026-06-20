@@ -9,6 +9,7 @@
 
 import { useState } from 'react';
 import { saves as savesService } from '../../lib/saves.js';
+import { useStore } from '../../store/index.js';
 import { sans, FS, SP, swatch } from '../theme.js';
 import { Save } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
@@ -20,13 +21,15 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saveError, setSaveError] = useState(null);
+  const notePersistedSave = useStore(s => s.notePersistedSave);
+  const setSavedSettlements = useStore(s => s.setSavedSettlements);
 
   const handleSave = async () => {
     if (!settlement || saving) return;
     setSaveError(null);
     setSaving(true);
     try {
-      await savesService.save({
+      const saveId = await savesService.save({
         name: settlement.name || 'Untitled Settlement',
         tier: settlement.tier || 'unknown',
         settlement,
@@ -34,6 +37,14 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
       });
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
+      // Refresh the store's savedSettlements so the count is accurate, then
+      // fire the real-save instrumentation (first_save/third_save pricing
+      // moments + 'saved' fingerprint). Fire-and-forget — never blocks the UI.
+      try {
+        const refreshed = await savesService.list();
+        setSavedSettlements?.(refreshed);
+      } catch { /* count may be stale; instrumentation still safe */ }
+      notePersistedSave?.(settlement, saveId);
     } catch (e) {
       console.error('Save failed:', e);
       setSaveError(`Failed to save: ${e.message || e}`);

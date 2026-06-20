@@ -271,7 +271,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const activeSettlement = showNarrative ? aiSettlement : rawSettlement;
   const dossierNotes = liveSaveEntry?.aiData?.dossierNotes || null;
   const aiGuidance = typeof dossierNotes?.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
-  const chronicle = collectChronicle(liveSaveEntry, rawSettlement, publicChronicle);
+  // Memoized on the same inputs collectChronicle reads, so tab switches / AI
+  // state changes / unrelated store churn don't re-merge + re-sort the up-to-60
+  // entry feed every render (matches the treatment of hasPlotHooks/pinnedIds).
+  const chronicle = React.useMemo(
+    () => collectChronicle(liveSaveEntry, rawSettlement, publicChronicle),
+    [liveSaveEntry, rawSettlement, publicChronicle],
+  );
   // History tab keeps a short "Recent Events" glance; the full Chronicle lives
   // under Notes (spec §8 M3c relocation).
   const recentEvents = chronicle.slice(0, 8);
@@ -407,13 +413,16 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // filters the strip to its sub-tabs and selects the group's primary.
   // When the flag is off, the strip behaves as before (legacy 14 tabs).
   const fiveTabsEnabled = flag('dossierFiveTabs');
-  const tabToGroup = (() => {
+  // TAB_GROUPS is frozen/constant, so this map has a stable value for the life
+  // of the component. Memoizing it (rather than rebuilding a fresh object every
+  // render) keeps the tabGroupRef-sync effect below from firing on every render.
+  const tabToGroup = React.useMemo(() => {
     const m = {};
     Object.entries(TAB_GROUPS).forEach(([gid, g]) => {
       g.tabs.forEach(tid => { m[tid] = gid; });
     });
     return m;
-  })();
+  }, []);
   // Initial group derives from the active tab so deep links land correctly.
   const initialGroup = tabToGroup[selectedTab] || 'summary';
   const [activeGroup, setActiveGroup] = useState(initialGroup);

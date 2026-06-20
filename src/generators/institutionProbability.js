@@ -3,21 +3,15 @@
 // Pure function: given a base chance, applies priority/resource/config multipliers.
 
 import {TIER_ORDER} from '../data/constants.js';
-import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
 import {ECONOMY_MODE_MARKET_MULT} from './neighbourGenerator.js';
 
-const getPriorityModifiers = (tier, goodsToggles = {}) => {
-  const tierGoods = GOODS_MODIFIERS_BY_TIER[tier] || {};
-  const penalties = {};
-  Object.entries(tierGoods).forEach(([goodName, good]) => {
-    if (goodsToggles[`${tier}_good_${goodName}`] === false && good.institutionKeywords) {
-      good.institutionKeywords.forEach(keyword => {
-        penalties[keyword] = (penalties[keyword] || 1) * 0.35;
-      });
-    }
-  });
-  return penalties;
-};
+// NOTE: the former getPriorityModifiers() goods-toggle penalty was dead code.
+// It keyed off `good.institutionKeywords` on GOODS_MODIFIERS_BY_TIER entries, but
+// NO good in the catalog defines that field — so it always produced an empty
+// penalty map and toggling a good never affected institution probability. Removed
+// along with the now-unused GOODS_MODIFIERS_BY_TIER import. The trailing
+// goodsToggles parameter is retained (positional) so existing call sites that
+// still pass it keep working unchanged.
 
 export const getBaseChance = (
   baseChance,
@@ -25,7 +19,7 @@ export const getBaseChance = (
   name,
   config,
   neighbor,
-  goodsToggles = {},
+  _goodsToggles = {},
 ) => {
   const cat  = category.toLowerCase();
   const inst = name.toLowerCase();
@@ -265,14 +259,9 @@ export const getBaseChance = (
     }
   }
 
-  // ── Goods-toggle penalties ────────────────────────────────────────────────
-  const modifiers = getPriorityModifiers(
-    resolvedTier || 'town',
-    goodsToggles
-  );
-  Object.entries(modifiers).forEach(([keyword, multiplier]) => {
-    if (inst.includes(keyword)) chance *= multiplier;
-  });
+  // (Goods-toggle penalties removed — see note at top of file: the feature's
+  //  backing data, GOODS_MODIFIERS_BY_TIER[*].institutionKeywords, never existed,
+  //  so the penalty path was inert.)
 
   return Math.min(Math.max(chance, 0), 1);
 };

@@ -14,13 +14,13 @@ import { evaluateReligiousContest } from './religiousContest.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
 import { evaluateOccupations } from './occupation.js';
-import { addRegionalChannels } from '../region/graph.js';
+import { addRegionalChannels, setRegionalChannelStatus } from '../region/graph.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
 import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
 import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
-import { ensureNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
+import { ensureNpcStates, pruneNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
 import { applyCorruptionImpairments, advanceInstitutionReform } from './corruptionImpair.js';
 import {
   advanceFactionCapture, settlementCaptureState,
@@ -209,6 +209,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // it; rivals[] keeps pointing at it). Prune states absent from the roster
   // for FACTION_STATE_PRUNE_GRACE_TICKS, preserving live capture arcs.
   worldState = pruneFactionStates(worldState, snapshot, { tick: worldState.tick });
+  // Same ghost hygiene for NPC states: an NPC that leaves the roster (death,
+  // ouster, rename) otherwise strands its state forever. Runs after
+  // ensureNpcStates so freshly-ensured live NPCs are never pruned, and before
+  // the corruption/seating passes.
+  worldState = pruneNpcStates(worldState, snapshot, { tick: worldState.tick });
   // Mean-reversion: relax momentum / heat / resentment toward baseline each
   // tick so quiet periods cool the world down instead of ratcheting it up.
   worldState = relaxNpcStates(worldState);
@@ -480,9 +485,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     worldState = { ...worldState, deployments: war.deployments, warExhaustion: war.warExhaustion };
     // Land the war_front directed mints on the graph BEFORE candidate generation and
     // the apply pass, then rebuild the snapshot so downstream reads see the new front.
-    if (war.graphChannels.length) {
-      const mintedGraph = addRegionalChannels(postTimeSnapshot.regionalGraph, war.graphChannels, { now });
-      const mintedCampaign = { ...campaign, worldState, regionalGraph: mintedGraph };
+    // ALSO retire any war_front channels whose siege resolved this tick (conquest or
+    // withdrawal): evaluateWarLayer reports them in war.retiredChannels. Dropping them
+    // to 'dormant' is what stops a resolved siege from being re-discovered — and
+    // re-conquered — every subsequent tick. Retirements must apply even when no new
+    // fronts were minted (a siege can resolve on a tick that opens no new front).
+    const retiredChannels = war.retiredChannels || [];
+    if (war.graphChannels.length || retiredChannels.length) {
+      let warGraph = postTimeSnapshot.regionalGraph;
+      if (war.graphChannels.length) {
+        warGraph = addRegionalChannels(warGraph, war.graphChannels, { now });
+      }
+      for (const channelId of retiredChannels) {
+        warGraph = setRegionalChannelStatus(warGraph, channelId, 'dormant', { now });
+      }
+      const mintedCampaign = { ...campaign, worldState, regionalGraph: warGraph };
       postTimeSnapshot = buildWorldSnapshot({ campaign: mintedCampaign, saves: postTimeSaves, worldState });
     }
     // Contextual returns read the POST-mint graph (so "is my home besieged?" is

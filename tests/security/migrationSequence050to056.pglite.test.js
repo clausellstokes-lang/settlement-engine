@@ -25,6 +25,14 @@ const band = allMigrations.filter(f => {
   return n >= 50 && n <= 56;
 });
 
+// Hard-fail (not a silent vacuous skip) if the 050–056 band vanished from disk:
+// the runIf(band.length > 0) suites below would otherwise go GREEN with 0 tests.
+describe('migrations 050–056 band exists (guards against silent vacuous skip)', () => {
+  it('the 050–056 migration band is present on disk (a moved band must fail loudly)', () => {
+    expect(band.length, 'no 050–056 migrations found — sequence coverage dropped').toBeGreaterThan(0);
+  });
+});
+
 describe.runIf(band.length > 0)('migrations 050–056 — sequence integrity', () => {
   it('the 050–056 band is numerically GAPLESS on disk', () => {
     const numbers = band.map(f => Number(f.slice(0, 3)));

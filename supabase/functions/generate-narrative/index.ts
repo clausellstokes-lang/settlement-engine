@@ -1683,7 +1683,9 @@ function getCorsHeaders(req?: Request) {
   const isLocalhost = /^http:\/\/localhost:\d+$/.test(origin);
   const match = allowed.includes(origin) || isLocalhost || !origin;
   return {
-    'Access-Control-Allow-Origin': match ? (origin || '*') : allowed[0],
+    // Fail closed: never emit '*' for this credentialed endpoint. Echo the
+    // matched origin, else pin to the first allowed host.
+    'Access-Control-Allow-Origin': match ? (origin || allowed[0]) : allowed[0],
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     ...(match ? { 'Vary': 'Origin' } : {}),

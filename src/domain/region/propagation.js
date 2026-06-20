@@ -425,7 +425,11 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
   if (!localDelta?.sourceSettlementId) return [];
   const now = options.now ?? null;
   const current = ensureRegionalGraph(graph || {}, { now });
-  const channels = activeChannelsFrom(graph, localDelta.sourceSettlementId, {
+  // B06 #6: feed the already-normalized `current` (not the raw `graph`) so the
+  // direct-impact path doesn't re-run a full ensureRegionalGraph inside
+  // activeChannelsFrom — matching the wave path below. Functionally equivalent
+  // (activeChannelsFrom mints no escaping timestamps) but one normalize, not two.
+  const channels = activeChannelsFrom(current, localDelta.sourceSettlementId, {
     includeSuggested: !!options.includeSuggested,
     types: options.types || [...REGIONAL_RULE_TYPES],
   });

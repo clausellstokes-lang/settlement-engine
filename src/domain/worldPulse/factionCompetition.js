@@ -163,12 +163,24 @@ export function ensureFactionStates(worldState, snapshot, rng) {
     });
   }
 
+  // Group faction states by settlement ONCE (insertion order preserved) so the
+  // rivals-seeding pass reads each settlement's peers directly instead of
+  // rescanning every faction per faction — O(F) rather than O(F^2).
+  /** @type {Map<string, any[]>} */
+  const factionsBySettlement = new Map();
+  for (const state of Object.values(factionStates)) {
+    if (!state) continue;
+    const sid = String(state.settlementId);
+    let list = factionsBySettlement.get(sid);
+    if (!list) { list = []; factionsBySettlement.set(sid, list); }
+    list.push(state);
+  }
   for (const state of Object.values(factionStates)) {
     if (!state || state.rivals?.length) continue;
-    state.rivals = Object.values(factionStates)
-      .filter(other => other.settlementId === state.settlementId && other.factionId !== state.factionId)
+    state.rivals = (factionsBySettlement.get(String(state.settlementId)) || [])
+      .filter((/** @type {any} */ other) => other.factionId !== state.factionId)
       .slice(0, 2)
-      .map(other => other.factionId);
+      .map((/** @type {any} */ other) => other.factionId);
   }
 
   return { ...worldState, factionStates };
@@ -272,13 +284,23 @@ export function relaxFactionStates(worldState) {
 export function seatNpcsIntoFactions(worldState) {
   const npcStates = worldState?.npcStates || {};
   const factionStates = { ...(worldState?.factionStates || {}) };
+  // Group NPC states by settlement ONCE (insertion order preserved) so each
+  // faction only scans its OWN settlement's NPCs instead of the full roster —
+  // O(F + N) rather than O(F·N).
+  /** @type {Map<string, any[]>} */
+  const npcsBySettlement = new Map();
+  for (const npc of Object.values(npcStates)) {
+    const sid = String(npc.settlementId);
+    let list = npcsBySettlement.get(sid);
+    if (!list) { list = []; npcsBySettlement.set(sid, list); }
+    list.push(npc);
+  }
   for (const [fid, faction] of Object.entries(factionStates)) {
     const factionName = stablePart(faction.name);
-    const members = Object.values(npcStates).filter(npc =>
-      String(npc.settlementId) === String(faction.settlementId)
-      && (stablePart(npc.factionId) === factionName
+    const members = (npcsBySettlement.get(String(faction.settlementId)) || []).filter((/** @type {any} */ npc) =>
+      stablePart(npc.factionId) === factionName
         || `${faction.settlementId}:${stablePart(npc.factionId)}` === fid
-        || npc.factionId === fid),
+        || npc.factionId === fid,
     );
     const seats = { leader_champion: null, lieutenant_operator: null, agent_protege: null };
     for (const seat of Object.keys(seats)) {

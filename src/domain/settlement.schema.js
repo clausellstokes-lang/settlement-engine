@@ -105,7 +105,9 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {StressorEntry[]} [stressors]
  *   Active stressors (plague, drought, raid pressure, etc.) that shape
  *   this generation run. Canonical name; legacy code may write to
- *   `stress`, `stresses`, or `stressTypes`.
+ *   `stress` or `stresses` (resolved by FIELD_ALIASES). NOTE: `stressTypes`
+ *   is a SEPARATE field of type STRINGS and is deliberately excluded from
+ *   the aliases — see the FIELD_ALIASES exclusion rationale above.
  *
  * @property {ActiveCondition[]} [activeConditions]
  *   Persistent world conditions (Tier 2.3 in the roadmap) — initially empty.

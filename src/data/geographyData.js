@@ -1,48 +1,7 @@
-// INSTITUTION_TAGS — institution tag constants (matching institutionalCatalog.js)
-const INSTITUTION_TAGS = {
-  TRADE: "trade",
-  MARKET: "market",
-  GUILD: "guild",
-  BANKING: "banking",
-  PORT: "port",
-  WAREHOUSE: "warehouse",
-  DEFENSE: "defense",
-  MILITARY: "military",
-  FORTIFICATION: "fortification",
-  LAW_ENFORCEMENT: "law_enforcement",
-  RELIGIOUS: "religious",
-  CHURCH: "church",
-  MONASTERY: "monastery",
-  HEALING: "healing",
-  ARCANE: "arcane",
-  ALCHEMY: "alchemy",
-  ENCHANTING: "enchanting",
-  PLANAR: "planar",
-  DIVINE: "divine",
-  CRIMINAL: "criminal",
-  SMUGGLING: "smuggling",
-  UNDERGROUND: "underground",
-  WATER: "water",
-  SANITATION: "sanitation",
-  CIVIC: "civic",
-  LEGAL: "legal",
-  EDUCATION: "education",
-  METALWORK: "metalwork",
-  TEXTILE: "textile",
-  FOOD: "food",
-  LEATHER: "leather",
-  LUXURY: "luxury",
-  ESSENTIAL: "essential",
-  HOUSING: "housing",
-  AGRICULTURE: "agriculture",
-  TRANSPORT: "transport",
-  SHIPBUILDING: "shipbuilding",
-  KNOWLEDGE: "knowledge",
-  LODGING: "lodging",
-  ENTERTAINMENT: "entertainment",
-  ADVENTURING: "adventuring",
-  EXOTIC: "exotic"
-};
+// Tag vocabulary is single-sourced from entityTags.TAG (the canonical source).
+// This file previously kept a third private copy of the constants, which invited
+// drift and carried dead KNOWLEDGE/ENTERTAINMENT keys that don't exist in TAG.
+import { TAG as INSTITUTION_TAGS } from "./entityTags.js";
 
 // geographyData.js — extracted from bundle
 // De-minified from original minified identifiers

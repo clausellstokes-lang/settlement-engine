@@ -366,18 +366,44 @@ function reEmbedPrimaryDeity(/** @type {any} */ settlement, /** @type {any} */ s
  * PRE-TICK record), this is byte-identical to the prior behavior: take the
  * incoming stressor wholesale, preserve createdAt, stamp updatedAt.
  *
- * The COMMUTATIVE branch fires ONLY when the prior record was minted THIS SAME
- * tick (prior.createdAt === now) — i.e. two outcomes collided on the same stressor
- * id within one apply pass (Feature D: same-tick multi-seat religious conversions
- * seeding the same `religious_conversion_fracture` record). There the merge is a
- * FIELD-MERGE that cannot depend on apply order: UNION of affectedSettlementIds,
- * MAX of severity, MAX of per-settlement severityBySettlement, MAX peakSeverity.
- * So reversing the outcome order yields a byte-identical record.
+ * The COMMUTATIVE branch fires when the prior record was minted THIS SAME tick
+ * (prior.createdAt === now) OR the caller flags `forceCommutative` — i.e. two
+ * outcomes collided on the same stressor id within one apply pass. That covers
+ * Feature D's same-tick multi-seat religious conversions seeding one fresh
+ * `religious_conversion_fracture` record (createdAt === now), AND — via the
+ * caller's this-pass write tracking — multiple spread/escalate outcomes of a
+ * PRE-TICK record colliding in one tick (B02-1/2): without forceCommutative the
+ * second write would clobber the first as order-dependent last-write-wins,
+ * silently dropping spread targets and reverting escalate↔spread effects. The
+ * merge is a FIELD-MERGE that cannot depend on apply order: UNION of
+ * affectedSettlementIds, MAX of severity, MAX of per-settlement
+ * severityBySettlement, MAX peakSeverity. So reversing the outcome order yields a
+ * byte-identical record.
  */
-function mergeStressorUpsert(/** @type {any} */ prior, /** @type {any} */ incoming, /** @type {any} */ now) {
+function mergeStressorUpsert(/** @type {any} */ prior, /** @type {any} */ incoming, /** @type {any} */ now, /** @type {boolean} */ forceCommutative = false, /** @type {number} */ tick = NaN) {
+  // B02-9: a war stressor wound down THIS tick (its sponsoring hostility ended)
+  // must not be re-raised by a same-tick escalate/spread of the same record —
+  // that would defeat the wind-down's purpose of letting the next aging tick end
+  // the war. When the prior carries a this-tick windDown stamp, the wound-down
+  // severity is a hard ceiling for the merged result.
+  const windDownCeiling = prior?.originContext?.windDown?.tick === tick
+    ? clamp01(prior.severity ?? 0)
+    : null;
+  const capSeverity = (/** @type {number} */ s) => (windDownCeiling == null ? s : Math.min(s, windDownCeiling));
   const base = { ...incoming, createdAt: prior?.createdAt || now, updatedAt: now };
-  // Only a SAME-TICK collision (prior born this tick) takes the commutative path.
-  if (!prior || prior.createdAt !== now) return base;
+  // The commutative path fires for a SAME-TICK collision (prior born this tick)
+  // or when the caller has already written this id earlier in the same pass.
+  if (!prior || (prior.createdAt !== now && !forceCommutative)) {
+    if (windDownCeiling == null) return base;
+    // A this-tick wind-down: cap severity AND preserve the prior's windDown
+    // stamp (the incoming escalate/spread snapshot carries no originContext, so
+    // a wholesale take would erase the wind-down record the aging tick relies on).
+    return {
+      ...base,
+      severity: capSeverity(clamp01(incoming.severity ?? 0)),
+      originContext: prior.originContext ?? base.originContext,
+    };
+  }
   const affected = [...new Set([
     ...(prior.affectedSettlementIds || []),
     ...(incoming.affectedSettlementIds || []),
@@ -394,13 +420,17 @@ function mergeStressorUpsert(/** @type {any} */ prior, /** @type {any} */ incomi
   /** @type {Record<string, any>} */
   const severityBySettlement = {};
   for (const id of Object.keys(mergedSev).sort()) severityBySettlement[id] = mergedSev[id];
-  const severity = Math.max(prior.severity ?? 0, incoming.severity ?? 0);
+  const severity = capSeverity(Math.max(prior.severity ?? 0, incoming.severity ?? 0));
   return {
     ...base,
     severity,
     peakSeverity: Math.max(prior.peakSeverity ?? 0, incoming.peakSeverity ?? 0, severity),
     affectedSettlementIds: affected,
     severityBySettlement,
+    // Preserve the prior's windDown stamp when capping (incoming carries none).
+    // Only on the wind-down path so the existing same-tick commutative merge
+    // stays byte-identical.
+    ...(windDownCeiling == null ? {} : { originContext: prior.originContext ?? base.originContext }),
   };
 }
 
@@ -454,14 +484,25 @@ function relationshipEdgeForOutcome(graph, outcome) {
  * so channels and dossiers assert the real hierarchy. Symmetric labels and
  * unstamped (DM-authored) hierarchy edges resolve as not-reversed and pass
  * through untouched.
+ *
+ * B02-3: every alias pair is oriented from the SINGLE canonical senior/junior
+ * (relationshipRoles already derives these from the from/to pair), never by
+ * swapping each pair against its own raw values. An edge with a partial alias
+ * set (e.g. from/to plus a lone `source`) would otherwise come out
+ * inconsistently oriented — asserting the wrong hierarchy direction downstream.
  */
 function roleOrientedEdge(edge, relState) {
-  if (!edge || !relationshipRoles(edge, relState).reversed) return edge;
+  if (!edge) return edge;
+  const { seniorId, juniorId, reversed } = relationshipRoles(edge, relState);
+  if (!reversed) return edge;
   const oriented = { ...edge };
+  // Only rewrite alias slots the edge actually carries; the senior id goes in
+  // each pair's senior slot and the junior id in its junior slot, so all
+  // populated aliases agree on the same orientation.
   for (const [senior, junior] of [['from', 'to'], ['source', 'target'], ['a', 'b'], ['settlementAId', 'settlementBId']]) {
     if (edge[senior] === undefined && edge[junior] === undefined) continue;
-    oriented[senior] = edge[junior];
-    oriented[junior] = edge[senior];
+    if (edge[senior] !== undefined) oriented[senior] = seniorId;
+    if (edge[junior] !== undefined) oriented[junior] = juniorId;
   }
   return oriented;
 }
@@ -667,6 +708,13 @@ export function applyWorldPulseOutcomes({
   const autoApplied = [];
   const proposals = [];
   const newsEntries = [];
+  // B02-1/2: stressor ids already written by an EARLIER outcome in this same
+  // apply pass. A second outcome touching the same id (escalate after spread,
+  // multi-target spread of one record) must field-MERGE with the first write,
+  // not clobber it — otherwise spread targets vanish and escalate/spread revert
+  // each other order-dependently. The merge is commutative, so the persisted
+  // record reflects every reported event regardless of iteration order.
+  const stressorWrittenThisPass = new Set();
 
   // Time advances BEFORE this tick's propagation queues: the previous pulse's
   // delayed impacts mature now, while impacts the loop below queues stay
@@ -849,7 +897,12 @@ export function applyWorldPulseOutcomes({
       // so the FIRST createdAt wins (the crisis was born once) while
       // updatedAt moves with every touch.
       const prior = byId.get(outcome.stressor.id);
-      const merged = mergeStressorUpsert(prior, outcome.stressor, now);
+      // Force the commutative field-merge when an earlier outcome in THIS pass
+      // already wrote this id (B02-1/2): a pre-tick record's createdAt !== now,
+      // so without this flag the second collision would last-write-win, dropping
+      // the first write's spread targets / reverting its severity.
+      const merged = mergeStressorUpsert(prior, outcome.stressor, now, stressorWrittenThisPass.has(outcome.stressor.id), tick);
+      stressorWrittenThisPass.add(outcome.stressor.id);
       byId.set(outcome.stressor.id, merged);
       state = { ...state, stressors: [...byId.values()] };
       // A betrayal's birth seeds the traitor its variant implies (one corrupt

@@ -24,14 +24,20 @@ If the client app's already up but a new feature is missing, the cause
 is almost always **a) missing migration** or **b) stale edge-function
 bundle**. Check the two manual sections.
 
-## Gating production on CI (recommended)
+## Gating production on CI
 
-Today CI and the Vercel deploy are **independent**: a push to `master`
-triggers the Vercel production build immediately, regardless of whether
-`.github/workflows/ci.yml` passed. The local `pre-push` hook is the only
-thing between a red gate and a live deploy — and hooks can be skipped
-(`--no-verify`). For a product that handles payments, make CI a hard gate.
-Two ways, weakest → strongest:
+**In-repo gate (now wired): `vercel.json` → `ignoreCommand`.** `vercel.json`
+sets `"ignoreCommand": "node scripts/vercel-ignore-build.mjs"`. Vercel runs that
+BEFORE every build and reads its exit code (exit 0 = skip build, exit 1 =
+proceed — Vercel's inverted convention). The script queries the GitHub Checks
+API for the commit being deployed and only PROCEEDS when the required checks
+(`check`, `e2e`, `deno-tests`) are all green. To activate the hard gate, set a
+read-only `GITHUB_CI_STATUS_TOKEN` (a PAT with `repo:status`/checks read) in
+Vercel → Project → Settings → Environment Variables. **Until that token is set
+the script fails OPEN** (it proceeds, deferring to branch protection) so it can
+never wedge every deploy — see the script header for the fail-closed switch.
+
+For defense in depth, also do one of the two below (weakest → strongest):
 
 1. **Branch protection + PR flow (minimum).** GitHub → Settings → Branches
    → add a rule for `master`: *Require status checks to pass before

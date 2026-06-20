@@ -39,6 +39,11 @@ const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
  */
 function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
   const [flowFilter, setFlowFilter] = useState('all');
+  // Guard: a single malformed income entry (no string `source`) must not throw
+  // and white-screen the whole tab — in the live generate flow this section is
+  // rendered without an error boundary around it. Filter to entries we can
+  // safely .toLowerCase() before the .some/.find matching below.
+  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string');
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
@@ -76,14 +81,15 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
       <div style={{display:'flex',flexDirection:'column',gap:6}}>
         {filtered.map((chain, i) => {
           const st = FLOW_STATUS[chain.status] || FLOW_STATUS.operational;
-          const hasIncome = incomeSources.some(inc =>
-            inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
-            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'))
-          );
-          const incomeEntry = hasIncome ? incomeSources.find(inc =>
-            inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
-            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'))
-          ) : null;
+          // A chain may lack a label; default to '' so .split(' ')[0] is always
+          // a defined string before .toLowerCase() (matches a malformed entry).
+          const chainKeyword = String(chain.label || '').split(' ')[0].toLowerCase();
+          const matchesIncome = (inc) =>
+            inc.source.toLowerCase().includes(chainKeyword) ||
+            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'));
+          const incomeEntry = chainKeyword
+            ? (safeIncome.find(matchesIncome) || null)
+            : (chain.needKey === 'trade_entrepot' ? (safeIncome.find(matchesIncome) || null) : null);
 
           return (
             <div key={i} style={{
@@ -215,6 +221,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const foodDeficit = fb?.deficit > 0;
   const foodColor = foodDeficit ? '#8b1a1a' : foodSurplus ? '#1a5a28' : '#a0762a';
   const foodLabel = foodDeficit ? `Deficit ${fbal.deficitPct}%` : foodSurplus ? 'Surplus' : 'Balanced';
+  // Single safe denominator for the two "trade covers % of gap" readouts so a
+  // falsy/zero rawDeficit can never render NaN% and the bar caption + narrative
+  // always agree on the same number.
+  const foodGap = Math.max(1, fb?.rawDeficit || 0);
 
   return (
     <div style={{...sans}}>
@@ -373,14 +383,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xxs,color:MUTED,marginTop:3}}>
             <span>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
             {fb.stressModifier&&fb.stressModifier<1&&<span style={{color:swatch.danger}}>Stress penalty: ×{fb.stressModifier}</span>}
-            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
+            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/foodGap*100)}% of gap</span>}
           </div>
         </div>
         {/* Narrative */}
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,borderRadius:6,padding:'8px 12px',fontSize:FS.sm,color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
-              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.`
+              ? `Production covers ${Math.round(fb.dailyProduction/Math.max(1,fb.dailyNeed)*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/foodGap*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.`
               : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`
             : `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`
           }

@@ -16,15 +16,18 @@
  */
 
 import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes.js';
+import { classifyInstitution } from './registry.js';
 
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../types.js').FactionResponse} FactionResponse */
 
 /**
- * Compute responses from every faction in `settlement.powerStructure.factions`
- * that matches a known archetype, given an event.
+ * Compute responses from every faction in `settlement.powerStructure.factions`,
+ * given an event. Factions that match one of the four specific archetypes get
+ * that archetype's response; every other faction falls through to the generic
+ * neutral responder, so each faction emits at least a stance.
  *
- * @param {Object} settlement
+ * @param {any} settlement
  * @param {Event}  event
  * @returns {FactionResponse[]}
  */
@@ -34,17 +37,18 @@ export function generateFactionResponses(settlement, event) {
   const out = [];
   for (const faction of factions) {
     const archetype = matchArchetype(faction);
-    if (!archetype) continue;
-    const response = ARCHETYPE_RESPONDERS[archetype]?.(faction, event, settlement);
+    const responder = ARCHETYPE_RESPONDERS[archetype] || respondAsGeneric;
+    const response = responder(faction, event, settlement);
     if (response) out.push(/** @type {FactionResponse} */ (response));
   }
   return out;
 }
 
-// Canonical archetype → the responder key this module ships. Only these four
-// archetypes produce a response today; every other canonical archetype maps to
-// null (the caller skips it). New archetypes: add a mapping here + a responder in
-// ARCHETYPE_RESPONDERS.
+// Canonical archetype → the responder key this module ships. These four
+// archetypes produce archetype-specific responses; every other canonical
+// archetype falls through to the generic neutral responder (so every faction
+// emits at least a stance). New specific archetypes: add a mapping here + a
+// responder in ARCHETYPE_RESPONDERS.
 const CANONICAL_TO_RESPONDER = Object.freeze({
   [FA.CRIMINAL]:  'thieves_guild',
   [FA.RELIGIOUS]: 'temple',
@@ -55,7 +59,9 @@ const CANONICAL_TO_RESPONDER = Object.freeze({
 /**
  * Map a faction to its responder key via the shared canonical archetype detector,
  * so faction responses classify factions the same way every other layer does.
- * Falls back to `null` for archetypes with no responder (the caller skips them).
+ * Falls back to `null` for archetypes with no specific responder; the caller then
+ * routes those through the generic neutral responder.
+ * @param {any} faction
  */
 function matchArchetype(faction) {
   return CANONICAL_TO_RESPONDER[factionArchetype(faction)] || null;
@@ -550,15 +556,45 @@ function respondAsThievesGuild(faction, event /* , settlement */) {
   }
 }
 
+/**
+ * Generic fallback archetype.
+ *
+ * Catch-all for any faction whose canonical archetype has no specific responder
+ * (nobles, arcane orders, craft guilds, labor blocs, outsiders, plain "other",
+ * etc.). Rather than stay silent — which left whole settlements with factions
+ * that never reacted to anything — these factions register a coherent NEUTRAL
+ * stance: they have noticed the event but are not yet committing to a side.
+ *
+ * Deterministic and authored, like the specific responders: a single neutral
+ * line keyed off the event type, never model-driven prose. This is intentionally
+ * minimal — when a faction earns its own archetype card, add a specific responder
+ * and it stops falling through here.
+ * @param {any} faction
+ * @param {any} event
+ */
+function respondAsGeneric(faction, event /* , settlement */) {
+  const name = faction.name || faction.faction || 'The faction';
+  const id   = faction.id   || `faction.${name.toLowerCase().replace(/\s+/g, '_')}`;
+
+  return {
+    factionId: id, factionName: name,
+    stance: 'neutral',
+    response: `${name} takes note of the ${labelOf(event.type).toLowerCase()} but stays neutral, weighing how it touches their own interests before committing to a side.`,
+  };
+}
+
 // ── helpers shared with registry's classification ──────────────────────────
 
+// Single source of truth: delegate to the registry's classifyInstitution so a
+// faction response keyed off a target ('trade hall', 'guild') classifies the
+// SAME way the registry's state deltas do for that target — no drift between
+// the narrative and the mechanics. (The local copy covered only 5 of the
+// registry's categories and could diverge as either side changed.) The event
+// target may be a slug or a name; classifyInstitution lowercases its arg, so
+// passing targetId verbatim matches the prior behaviour for every category the
+// local copy recognised.
 function classifyInstitutionTarget(targetId) {
-  const n = String(targetId || '').toLowerCase();
-  if (/granary|mill|silo|storage|warehouse/.test(n))           return 'food_storage';
-  if (/temple|cathedral|shrine|monastery|church/.test(n))      return 'religious';
-  if (/watch|garrison|barracks|militia|guard/.test(n))         return 'law_enforcement';
-  if (/market|bazaar|exchange|trade hall/.test(n))             return 'trade';
-  return 'other';
+  return classifyInstitution(targetId);
 }
 
 function labelOf(targetId) {

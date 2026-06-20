@@ -139,9 +139,15 @@ export function computeEconomyState(ctx) {
   // (field left unset) when the user has confirmed none.
   const confirmedChains = customDeps.confirmedSupplyChains?.() || [];
   if (confirmedChains.length) {
+    // Codepoint-stable order, NOT localeCompare: customChains is part of the
+    // deterministic settlement output, so its array order must not vary by
+    // locale/ICU build for a given seed.
     economicState.customChains = confirmedChains
       .slice()
-      .sort((a, b) => String(a.label || a.chainId || '').localeCompare(String(b.label || b.chainId || '')))
+      .sort((a, b) => {
+        const al = String(a.label || a.chainId || ''), bl = String(b.label || b.chainId || '');
+        return al < bl ? -1 : al > bl ? 1 : 0;
+      })
       .map((c) => ({
         chainId: c.chainId || null,
         label: c.label || c.chainId || 'Custom chain',

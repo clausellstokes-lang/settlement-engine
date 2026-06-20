@@ -166,22 +166,22 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     expect(supabaseCalled).toBe(false);
   });
 
-  test('modal closes when the user clicks outside / close button', async ({ page }) => {
+  test('clicking the close button dismisses the AuthModal', async ({ page }) => {
     await openAuthModal(page);
-    // Try to find a close affordance. The modal usually has an X or
-    // backdrop click-to-close. We escape-key as a robust fallback.
-    await page.keyboard.press('Escape');
-    // The modal MAY or MAY NOT close on Escape depending on
-    // implementation. Try clicking the backdrop as fallback.
-    const stillOpen = await page.getByText('Sign in to keep your work', { exact: false }).isVisible();
-    if (stillOpen) {
-      // Backdrop click — top-left corner outside the modal box.
-      await page.mouse.click(2, 2);
-    }
-    await page.waitForTimeout(300);
-    // We tolerate either close strategy; the test simply asserts the
-    // backdrop area is interactive. Strict close-on-escape is left to
-    // the unit tests once the modal implementation stabilizes.
+    // The modal renders a labelled close affordance (IconButton with
+    // aria-label "Close" — src/components/AuthModal.jsx). Click it and
+    // assert the modal is GONE. (Escape is intentionally NOT bound on the
+    // modal, so this targets the real close path rather than tolerating
+    // "may or may not close".)
+    const modalHeading = page.getByText('Sign in to keep your work', { exact: false });
+    await expect(modalHeading).toBeVisible();
+    // Scope to the dialog: the modal BACKDROP is also a role="button" labelled
+    // "Close" (click-to-dismiss) that wraps the dialog, so a bare .first() match
+    // hits the backdrop (whose centre is the dialog card → no dismiss). Target
+    // the real X close affordance INSIDE the dialog.
+    await page.getByRole('dialog').getByRole('button', { name: /^Close$/i }).click();
+    // Unconditional post-condition: the modal heading is removed from the DOM.
+    await expect(modalHeading).toHaveCount(0);
   });
 
   test('soft-cap "Sign in to continue" also opens AuthModal', async ({ page }) => {
@@ -201,13 +201,17 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
 
     await waitForDossier(page);
 
-    // The Save-to-library CTA exists below the dossier for unauthenticated
-    // users — clicking it should open the auth modal. If the CTA is not
-    // rendered for anon users, the gate is enforced higher up (also fine).
+    // The save gate has TWO valid shapes, and we assert ONE of them holds
+    // unconditionally (the old test only asserted inside `if (CTA visible)`,
+    // so it passed vacuously when the CTA wasn't found):
+    //   (a) a Save-to-library CTA is shown and clicking it routes to auth, OR
+    //   (b) no Save CTA is shown — and crucially the auth-gated inline Save
+    //       button (title="Save settlement", canSave-only) is also absent, so
+    //       there is no silent-save path for an anonymous user.
     const saveToLibrary = page.getByRole('button', { name: /Save to library|Save settlement|Save\b/i }).first();
     if (await saveToLibrary.isVisible().catch(() => false)) {
       await saveToLibrary.click();
-      // Either auth modal opens OR a sign-in nudge appears inline.
+      // Auth modal opens OR a sign-in nudge appears inline.
       await expect.poll(async () => {
         const authOpened = await page.getByText('Sign in to keep your work', { exact: false })
           .isVisible().catch(() => false);
@@ -215,6 +219,10 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
           .isVisible().catch(() => false);
         return authOpened || nudgeShown;
       }, { timeout: 10_000 }).toBe(true);
+    } else {
+      // No Save CTA at all — verify there is also no canSave-gated inline Save
+      // button an anon user could use to persist silently.
+      await expect(page.locator('button[title="Save settlement"]')).toHaveCount(0);
     }
   });
 

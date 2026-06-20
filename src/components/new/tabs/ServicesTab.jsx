@@ -142,7 +142,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 const borderColor = hasImp?'#e8a0a0':hasDeg?'#e0b050':'#c8d8a0';
                 const bg = hasImp?'#fdf4f4':hasDeg?'#fdf8e8':'#f4faf0';
                 return (
-                  <div key={cat} role="button" tabIndex={0} style={{background:bg,border:`1px solid ${borderColor}`,borderLeft:`3px solid ${hasImp?'#c0392b':hasDeg?'#b8860b':meta.accent}`,borderRadius:5,padding:'6px 10px',cursor:'pointer'}}
+                  <div key={cat} role="button" tabIndex={0} aria-label={`Show ${meta.label} services`} style={{background:bg,border:`1px solid ${borderColor}`,borderLeft:`3px solid ${hasImp?'#c0392b':hasDeg?'#b8860b':meta.accent}`,borderRadius:5,padding:'6px 10px',cursor:'pointer'}}
                     onClick={()=>{
                       setOpenCats(prev=>({...prev,[cat]:true}));
                       setTimeout(()=>{const el=document.getElementById('svc-cat-'+cat);el&&el.scrollIntoView({behavior:'smooth',block:'start'});},50);

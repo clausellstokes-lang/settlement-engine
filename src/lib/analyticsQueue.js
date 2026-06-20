@@ -18,6 +18,7 @@
 import { isConfigured } from './supabase.js';
 import { getConsent } from './consent.js';
 import { EVENTS_REV } from './analyticsEvents.js';
+import { getDeviceToken } from './deviceToken.js';
 
 const SPILL_KEY = 'sf_evt_queue_v1';
 const FLUSH_SIZE = 20;
@@ -51,11 +52,26 @@ function ingestUrl() {
   } catch { return null; }
 }
 function deviceToken() {
-  try { return typeof localStorage !== 'undefined' ? localStorage.getItem('sf_view_token') || undefined : undefined; }
+  // Mint/read via getDeviceToken() so the token is created consistently with the
+  // gallery view-dedup path (and the storage-key literal isn't duplicated here —
+  // a rename in deviceToken.js would otherwise silently strip the analytics token).
+  try { return getDeviceToken() || undefined; }
   catch { return undefined; }
 }
 function appVersion() {
   try { return import.meta.env.VITE_APP_VERSION || undefined; } catch { return undefined; }
+}
+
+// Session-id seam: wired from the lifecycle install (see installAnalyticsQueue) so
+// this module stays dependency-free from session.js. Until wired, envelopes ship
+// without a sessionId (the prior behaviour) rather than throwing.
+let _sessionIdGetter = null;
+/** Wire the session-id source so buildEnvelope can stamp `sessionId`. */
+export function setSessionIdGetter(getter) {
+  _sessionIdGetter = typeof getter === 'function' ? getter : null;
+}
+function sessionId() {
+  try { return (_sessionIdGetter && _sessionIdGetter()) || undefined; } catch { return undefined; }
 }
 
 // Tracked retry handle so a queued backoff retry can be cancelled when a later
@@ -155,11 +171,42 @@ function purgeRevoked() {
   }
 }
 
+// ── PII backstop ─────────────────────────────────────────────────────────────
+// The no-PII contract (taxonomy §: coarse enums/bands/counts only) is enforced by
+// convention at every track() call site. This is a cheap defense-in-depth backstop
+// at the transport layer: a single mis-built call must not persist a settlement
+// name / free-text / email to the plaintext localStorage spill or POST it. We drop
+// string values that look like an email or are long free-text; primitives, enums,
+// bands, and short labels pass through unchanged. Drops are silent (analytics never
+// throws); a key is replaced with '[redacted]' so the event still records that the
+// prop was present (shape) without leaking its value.
+const EMAIL_RE = /[^\s@]+@[^\s@]+\.[^\s@]+/;
+const MAX_PROP_STR_LEN = 80; // enum/band/short-label values are well under this
+function sanitizeProps(props) {
+  if (!props || typeof props !== 'object') return {};
+  let mutated = false;
+  const out = {};
+  for (const k of Object.keys(props)) {
+    const v = props[k];
+    if (typeof v === 'string' && (v.length > MAX_PROP_STR_LEN || EMAIL_RE.test(v))) {
+      out[k] = '[redacted]';
+      mutated = true;
+    } else {
+      out[k] = v;
+    }
+  }
+  if (mutated && import.meta?.env?.DEV) {
+
+    console.warn('[analyticsQueue] redacted suspected PII/free-text in event props');
+  }
+  return out;
+}
+
 // ── Public enqueue API ───────────────────────────────────────────────────────
 /** Enqueue a product/research event. _class is the resolved EVENT_CLASS. */
 export function enqueueEvent(event, props, opts = {}) {
   if (!isConfigured) return;            // no backend sink configured
-  _events.push({ event, props: props || {}, ts: nowMs(), subjectId: opts.subjectId, _class: opts._class || 'essential' });
+  _events.push({ event, props: sanitizeProps(props), ts: nowMs(), subjectId: opts.subjectId, _class: opts._class || 'essential' });
   if (import.meta?.env?.DEV) pushRing({ kind: 'event', event, _class: opts._class || 'essential', props });
   capQueue(); scheduleSpill(); maybeFlush();
 }
@@ -177,7 +224,7 @@ export function enqueueSnapshot(row) {
   const rec = { ...row, ts: row.ts || nowMs() };
   if (recordBytes(rec) > MAX_RECORD_BYTES) { _droppedCount += 1; return; }
   _snapshots.push(rec);
-  capQueue(); scheduleSpill();
+  capQueue(); scheduleSpill(); maybeFlush();
 }
 /** Enqueue a world-pulse per-effect mutation row (research-plane, redacted). */
 export function enqueuePulseEffect(row) {
@@ -185,7 +232,7 @@ export function enqueuePulseEffect(row) {
   const rec = { ...row, ts: row.ts || nowMs(), consentTier: 'research' };
   if (recordBytes(rec) > MAX_RECORD_BYTES) { _droppedCount += 1; return; }
   _pulseEffects.push(rec);
-  capQueue(); scheduleSpill();
+  capQueue(); scheduleSpill(); maybeFlush();
 }
 
 function maybeFlush() {
@@ -203,7 +250,7 @@ function buildEnvelope() {
   const c = getConsent();
   return {
     batchId: uuid(),
-    sessionId: undefined, // stamped by caller wiring if available
+    sessionId: sessionId(), // wired via setSessionIdGetter (no-op until then)
     deviceToken: deviceToken(),
     appVersion: appVersion(),
     eventsRev: EVENTS_REV,
@@ -222,9 +269,15 @@ export function flush({ beacon = false } = {}) {
     if (!isConfigured) return;
     // In-flight guard: a fetch already in flight will drain on success; a second
     // concurrent flush (interval / size-trigger / retry) would double-POST the same
-    // batch and desync the backoff counter. Beacon is the last-chance leave path and
-    // is always allowed (it can't observe the fetch promise anyway).
-    if (_inFlight && !beacon) return;
+    // batch and desync the backoff counter.
+    //
+    // The beacon (leave) path ALSO honours the guard: the in-flight fetch uses
+    // keepalive:true, so it already survives tab unload. Firing a beacon for the
+    // same un-drained records would double-deliver them (duplicate ingest rows) and
+    // could over-drain the queue (the beacon drains optimistically on the synchronous
+    // sendBeacon ok, but those records were never confirmed delivered by EITHER
+    // transport). Skip the beacon while a fetch owns the current batch.
+    if (_inFlight) return;
     purgeRevoked();
     if (!_events.length && !_edits.length && !_snapshots.length && !_pulseEffects.length) return;
     const url = ingestUrl();
@@ -243,7 +296,13 @@ export function flush({ beacon = false } = {}) {
     if (!_events.length && !_edits.length && !_snapshots.length && !_pulseEffects.length) return;
 
     // Snapshot what we're sending so a concurrent enqueue isn't lost on success.
-    const sentCounts = { e: _events.length, d: _edits.length, s: _snapshots.length, p: _pulseEffects.length };
+    // droppedCount is captured too: the envelope reports the CURRENT _droppedCount,
+    // so on drain we subtract exactly that (not reset to 0) — a concurrent
+    // enqueue+cap between send and drain bumps _droppedCount for the NEXT envelope.
+    const sentCounts = {
+      e: _events.length, d: _edits.length, s: _snapshots.length, p: _pulseEffects.length,
+      dropped: _droppedCount,
+    };
 
     if (beacon && typeof navigator !== 'undefined' && navigator.sendBeacon) {
       const ok = navigator.sendBeacon(url, new Blob([body], { type: 'application/json' }));
@@ -270,7 +329,10 @@ function drain(sent) {
   _edits.splice(0, sent.d);
   _snapshots.splice(0, sent.s);
   _pulseEffects.splice(0, sent.p || 0);
-  _droppedCount = 0;
+  // Subtract only the droppedCount that was actually reported in the sent envelope,
+  // preserving any drops that occurred AFTER the snapshot (concurrent enqueue+cap)
+  // so the next envelope still carries them. Clamp at 0 for safety.
+  _droppedCount = Math.max(0, _droppedCount - (sent.dropped || 0));
   if (!_events.length && !_edits.length && !_snapshots.length && !_pulseEffects.length) clearSpill();
   else scheduleSpill();
 }

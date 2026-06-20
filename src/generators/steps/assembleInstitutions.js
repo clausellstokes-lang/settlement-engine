@@ -401,10 +401,16 @@ registerStep('assembleInstitutions', {
   // real `category` so they land in the right dossier section. Iterated in a
   // stable name order so the rng rolls are deterministic; when the user has no
   // custom institutions this loop is a no-op and consumes no rng (zero change to
-  // existing generation).
+  // existing generation). The order MUST be codepoint-stable, NOT localeCompare:
+  // the loop below consumes rng per item, so a locale-/ICU-dependent sort would
+  // make the SAME seed pick a DIFFERENT set of custom institutions across
+  // machines — a direct 'same seed => same settlement' violation.
   const customInstitutions = (customDeps.registry().listCustom?.('institutions') || [])
     .slice()
-    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+    .sort((a, b) => {
+      const an = String(a.name), bn = String(b.name);
+      return an < bn ? -1 : an > bn ? 1 : 0;
+    });
   for (const entry of customInstitutions) {
     const item = entry.raw || {};
     const name = entry.name;

@@ -222,10 +222,16 @@ function deriveHealing(s, ctx) {
     supply -= 10; push(supplyContributors, 'institutions', 'absent', -10, 'No dedicated healing institutions or services.');
   }
 
-  // SUPPLY: magic level
-  const magic = s.config?.magicLevel || 'low';
-  if (magic === 'high' || magic === 'pervasive') {
+  // SUPPLY: magic level (conserved dial via magicLedger, matching deriveMagical).
+  // The prior `s.config?.magicLevel` read used a stale vocabulary: it missed the
+  // canonical 'medium' band (the widest tier) entirely and checked 'pervasive',
+  // which the generator never emits — so medium-magic settlements got zero
+  // magical-healing supply and biased toward strained.
+  const healMagic = magicLedger(s);
+  if (healMagic.present && healMagic.magicLevel === 'high') {
     supply += 10; push(supplyContributors, 'config.magicLevel', 'high', +10, `High magic supports magical healing.`);
+  } else if (healMagic.present && healMagic.magicLevel === 'medium') {
+    supply += 5; push(supplyContributors, 'config.magicLevel', 'medium', +5, `Moderate magic supports some magical healing.`);
   }
 
   // SUPPLY: religious faction power supports relief
@@ -295,15 +301,12 @@ function deriveDefense(s, ctx) {
     supply += 8; push(supplyContributors, 'faction.military', 'power', +8, `Military faction at power ${milPower}.`);
   }
 
-  // DEMAND: monsterThreat
-  const monster = s.config?.monsterThreat || 'safe';
-  if (monster === 'plagued') {
-    demand += 25; push(demandContributors, 'config.monsterThreat', 'plagued', +25, 'Region overrun with monsters.');
-  } else if (monster === 'frontier') {
-    demand += 15; push(demandContributors, 'config.monsterThreat', 'frontier', +15, 'Frontier monster pressure.');
-  }
-
-  // DEMAND: threats
+  // DEMAND: threats. config.monsterThreat is intentionally NOT charged here
+  // directly — collectThreatSources already materializes it as a canonical
+  // monster_pressure threat (severity 0.85 plagued / 0.45 frontier), so the
+  // threat loop below is the single source of truth for monster demand.
+  // Charging both double-counted the same pressure and over-inflated defense
+  // demand for every frontier/plagued settlement.
   for (const threat of ctx.threats) {
     if (['siege', 'bandit_raids', 'rival_neighbor', 'monster_pressure'].includes(threat.type)) {
       const m = Math.round(threat.severity * 15);
@@ -401,6 +404,15 @@ function deriveFoodProduction(s, ctx) {
       supply -= 15; push(supplyContributors, c.id, c.status, -15, `${c.name} is ${c.status}.`);
     } else if (c.status !== 'stable') {
       supply -= 6; push(supplyContributors, c.id, c.status, -6, `${c.name} is ${c.status}.`);
+    }
+    // Surface the ORIGINATING regional condition as a (delta-0) contributor so
+    // conditionTrajectory's source-join sees it. The chain's degraded status
+    // already moved supply above; this row only carries provenance, so a chain
+    // dragged down by a worsening regional condition now reports trajectory
+    // 'worsening' instead of mis-reporting 'stable'.
+    for (const rp of Array.isArray(c.regionalPressures) ? c.regionalPressures : []) {
+      if (!rp || typeof rp.id !== 'string') continue;
+      push(supplyContributors, rp.id, 'regional_pressure', 0, `${rp.label || rp.id} pressures ${c.name}.`);
     }
   }
 

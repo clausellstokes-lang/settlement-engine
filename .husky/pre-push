@@ -1,7 +1,27 @@
 # Pre-push: full check before code leaves the local machine.
-# Same gate CI runs (validate:data → typecheck → lint → tests → build).
-# Slow (~30s) but catches everything before pushing — saves CI round-trips.
+# Runs the SAME `check` gate CI's `check` job runs
+# (validate:data → validate:edge → validate:map → typecheck → typecheck:domain:strict
+#  → lint → vitest → build). Slow (~30s) but catches most failures locally.
 #
 # To skip in an emergency: git push --no-verify
 # (but only when you've already run `npm run check` locally and it passed).
 npm run check
+
+# CI also runs two jobs that `npm run check` does NOT:
+#   - deno-tests : the edge-function execution tests (money-path signature
+#                  verification, refund decisions). Fast — run here when Deno
+#                  is installed so a broken edge function is caught pre-push.
+#   - e2e        : Playwright Chromium + mobile-safari. Deliberately NOT run
+#                  on every push (needs `npx playwright install` browsers + a
+#                  dev server, ~minutes). Run it manually before risky UI
+#                  changes: `npm run test:e2e`. CI is the backstop.
+#
+# So `npm run check` is a SUBSET of CI. With production deploying independently
+# of CI today (see docs/DEPLOY.md "Gating production on CI"), do not rely on a
+# green local `check` alone — let this hook finish and watch the Actions tab.
+if command -v deno >/dev/null 2>&1; then
+  deno task test:edge
+else
+  echo "pre-push: deno not installed — SKIPPING edge-function execution tests."
+  echo "          CI's deno-tests job still runs them. Install: https://deno.land"
+fi

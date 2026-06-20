@@ -460,10 +460,18 @@ function dailySlice(active, aiDailyLife) {
         { time: 'Night',   text: aiDailyLife.night },
       ].filter(p => p.text)
     : [];
+  // A+ P1.8: source food via the shared deriveFoodBalance (clamped, screen-parity),
+  // not the raw unclamped metrics.foodBalance — so the daily-life fallback shows the
+  // SAME food number as the identity anchor, the overview/economics chapters, and the
+  // on-screen DailyLifeTab. `available` is false when food was never calculated, which
+  // lets the section omit the verdict instead of printing a false "Surplus of 0 units".
+  const food = deriveFoodBalance(active);
   return {
     hasPassages: passages.length > 0,
     passages,
-    foodBalance: active?.economicViability?.metrics?.foodBalance || null,
+    foodBalance: food.available
+      ? { available: true, deficit: food.deficit, surplus: food.surplus }
+      : null,
     services:    active?.availableServices || {},
     institutions: active?.institutions || [],
     safetyRatio: active?.economicState?.safetyProfile?.safetyRatio,
@@ -1255,6 +1263,11 @@ function cleanHooks(arr) {
  */
 function normalizeIncomeSources(arr) {
   if (!Array.isArray(arr) || arr.length === 0) return [];
+  // Intentional divergence from the screen: drop zero-valued sources. A 0%-rounded
+  // (or zero-amount) source has no bar to draw and would only add noise / risk a
+  // degenerate total here, where the bar fill and label MUST agree. The screen may
+  // still list such sources; this is a per-surface formatting choice, not a data
+  // disagreement. (See cross-bundle note re: documenting in display/PARITY_EXEMPT.)
   const items = arr.map(s => ({
     ...s,
     raw: s?.percentage ?? s?.value ?? s?.amount ?? 0,

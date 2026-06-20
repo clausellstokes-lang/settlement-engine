@@ -11,6 +11,15 @@
  *
  * Server-side cost gates: `supabase/functions/generate-narrative/index.ts`
  * has its own CREDIT_COSTS — the contract test guards against drift.
+ *
+ * Spend model: the SERVER is the sole authority on credit burn. The AI
+ * generation success paths in aiSlice set `creditBalance` directly from the
+ * server's returned `creditsRemaining`; the client never decrements locally.
+ * `spendCredits`/`addCredits` below are therefore NOT on the live spend path —
+ * they remain as a self-contained balance API (and to keep `setCreditBalance`/
+ * `canAfford` company) but are currently uncalled. Do not reintroduce a client
+ * decrement on the generation path: it would double-count against the
+ * server-set balance.
  */
 
 import { getActiveAiCosts, getAiCost, getAiCostForModel } from '../config/pricing.js';
@@ -45,6 +54,8 @@ export const createCreditsSlice = (set, get) => ({
   setCreditBalance: (balance) =>
     set(state => { state.creditBalance = balance; }),
 
+  // NOTE: not on the live purchase path (a completed purchase refreshes the
+  // balance from the server via setCreditBalance). Kept as a balance API.
   addCredits: (amount, source) =>
     set(state => {
       state.creditBalance += amount;
@@ -56,6 +67,9 @@ export const createCreditsSlice = (set, get) => ({
       });
     }),
 
+  // NOTE: not on the live spend path (the server decrements and returns the
+  // new balance, which aiSlice writes via setCreditBalance). Kept as a
+  // self-contained balance API; see the slice docstring.
   spendCredits: (amount, feature) => {
     if (get().isElevated()) return true; // elevated roles have unlimited credits
     const { creditBalance } = get();
@@ -71,7 +85,8 @@ export const createCreditsSlice = (set, get) => ({
       });
     });
 
-    // Analytics: credit-burn shape at the spend chokepoint (fire-and-forget).
+    // Analytics: credit-burn shape if a local spend is ever performed
+    // (fire-and-forget). The live spend chokepoint is server-side.
     track(EVENTS.CREDITS_SPENT, {
       action_type: feature,
       cost: amount,

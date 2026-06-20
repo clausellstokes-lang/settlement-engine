@@ -1,0 +1,283 @@
+/**
+ * services/serviceTierData.js
+ * Static service-availability data tables — split out of servicesGenerator.js.
+ * Pure data, no logic. Re-exported unchanged from servicesGenerator.js.
+ */
+
+export const SERVICE_TIER_DATA = {
+  thorp: {
+    Eggs: { category: 'agricultural', baseChance: 0.9, defaultEnabled: !0, desc: 'Fresh eggs from household chickens' },
+    'Small game': {
+      category: 'agricultural',
+      baseChance: 0.6,
+      defaultEnabled: !0,
+      desc: 'Rabbits, fowl from local hunting',
+    },
+    'Foraged goods': {
+      category: 'agricultural',
+      baseChance: 0.7,
+      defaultEnabled: !0,
+      desc: 'Mushrooms, berries, herbs',
+    },
+  },
+  hamlet: {
+    'Grain surplus': {
+      category: 'agricultural',
+      baseChance: 0.8,
+      defaultEnabled: !0,
+      desc: 'Wheat, barley, oats beyond subsistence needs',
+    },
+    'Raw wool': { category: 'raw_materials', baseChance: 0.7, defaultEnabled: !0, desc: 'Unprocessed wool from sheep' },
+    'Dairy products': { category: 'food_processed', baseChance: 0.6, defaultEnabled: !0, desc: 'Cheese, butter, milk' },
+    Livestock: { category: 'agricultural', baseChance: 0.5, defaultEnabled: !0, desc: 'Cattle, sheep, pigs for sale' },
+    'Honey and beeswax': {
+      category: 'food_processed',
+      baseChance: 0.4,
+      defaultEnabled: !0,
+      desc: 'Local beekeeping products',
+    },
+  },
+  village: {
+    'Agricultural surplus': {
+      category: 'agricultural',
+      baseChance: 0.9,
+      defaultEnabled: !0,
+      desc: 'Grain, wheat, barley in quantity',
+    },
+    'Raw wool and hides': {
+      category: 'raw_materials',
+      baseChance: 0.8,
+      defaultEnabled: !0,
+      desc: 'Bulk unprocessed animal products',
+    },
+    Livestock: {
+      category: 'agricultural',
+      baseChance: 0.7,
+      defaultEnabled: !0,
+      desc: 'Cattle, sheep, pigs in regular supply',
+    },
+    'Eggs and dairy': {
+      category: 'food_processed',
+      baseChance: 0.8,
+      defaultEnabled: !0,
+      desc: 'Regular production for market',
+    },
+    'Honey and beeswax': {
+      category: 'food_processed',
+      baseChance: 0.5,
+      defaultEnabled: !0,
+      desc: 'Established beekeeping',
+    },
+    'Milled flour': {
+      category: 'food_processed',
+      baseChance: 0.9,
+      requiredInstitution: 'Mill',
+      defaultEnabled: !0,
+      desc: 'Ground grain for bread-making',
+    },
+    'Basic metalwork': {
+      category: 'manufactured',
+      baseChance: 0.6,
+      requiredInstitution: 'Blacksmith',
+      defaultEnabled: !0,
+      desc: 'Horseshoes, nails, simple tools',
+    },
+  },
+  town: {
+    'Guild-manufactured goods': {
+      category: 'manufactured',
+      baseChance: 0.9,
+      requiredInstitution: 'Craft guilds (5-15)',
+      defaultEnabled: !0,
+      desc: 'Cloth, leather goods, metalwork',
+    },
+    'Processed textiles': {
+      category: 'manufactured',
+      baseChance: 0.8,
+      requiredInstitution: 'Weavers/Textile workers',
+      defaultEnabled: !0,
+      desc: 'Woven cloth, finished fabrics',
+    },
+    'Quality tools and weapons': {
+      category: 'manufactured',
+      baseChance: 0.7,
+      requiredInstitution: 'Blacksmiths (3-10)',
+      defaultEnabled: !0,
+      desc: 'Well-crafted implements and basic arms',
+    },
+    'Baked goods': {
+      category: 'food_processed',
+      baseChance: 0.8,
+      requiredInstitution: 'Bakers (5-15)',
+      defaultEnabled: !0,
+      desc: 'Bread, pastries for market',
+    },
+    'Preserved foods': {
+      category: 'food_processed',
+      baseChance: 0.6,
+      defaultEnabled: !0,
+      desc: 'Salted meats, pickled vegetables',
+    },
+    'Barrels and containers': {
+      category: 'manufactured',
+      baseChance: 0.5,
+      requiredInstitution: 'Craft guilds (5-15)',
+      defaultEnabled: !0,
+      desc: 'Wooden casks for storage/transport',
+    },
+    'Leather goods': {
+      category: 'manufactured',
+      baseChance: 0.7,
+      requiredInstitution: 'Tanners',
+      defaultEnabled: !0,
+      desc: 'Tanned hides, leather products',
+    },
+    'Pottery and ceramics': {
+      category: 'manufactured',
+      baseChance: 0.6,
+      requiredInstitution: 'Craft guilds (5-15)',
+      defaultEnabled: !0,
+      desc: 'Household vessels and tiles',
+    },
+    'Rope and cordage': {
+      category: 'manufactured',
+      baseChance: 0.5,
+      requiredInstitution: 'Craft guilds (5-15)',
+      defaultEnabled: !0,
+      desc: 'Essential for shipping and construction',
+    },
+  },
+  city: {
+    'Luxury manufactured goods': {
+      category: 'luxury',
+      baseChance: 0.8,
+      defaultEnabled: !0,
+      desc: 'High-quality crafted items',
+    },
+    'Fine metalwork and jewelry': {
+      category: 'luxury',
+      baseChance: 0.7,
+      requiredInstitution: 'Specialized metalworkers',
+      defaultEnabled: !0,
+      desc: 'Precious metal goods, gemstone work',
+    },
+    'Legal services': {
+      category: 'services',
+      baseChance: 0.9,
+      requiredInstitution: 'Multiple courthouses',
+      defaultEnabled: !0,
+      desc: 'Contracts, court access, legal expertise',
+    },
+    'Financial services': {
+      category: 'services',
+      baseChance: 0.7,
+      requiredInstitution: 'Banking houses',
+      defaultEnabled: !0,
+      desc: 'Letters of credit, money changing',
+    },
+    'Specialized guild crafts': {
+      category: 'manufactured',
+      baseChance: 0.9,
+      requiredInstitution: 'Craft guilds (30-80)',
+      defaultEnabled: !0,
+      desc: '50+ specializations available',
+    },
+    'Books and manuscripts': {
+      category: 'luxury',
+      baseChance: 0.6,
+      requiredInstitution: 'Craft guilds (30-80)',
+      defaultEnabled: !0,
+      desc: 'Hand-copied texts, illuminated works',
+    },
+    'Advanced weapons and armor': {
+      category: 'manufactured',
+      baseChance: 0.6,
+      requiredInstitution: 'Specialized metalworkers',
+      defaultEnabled: !0,
+      desc: 'Professional military equipment',
+    },
+    'Fine textiles': {
+      category: 'luxury',
+      baseChance: 0.7,
+      requiredInstitution: 'Craft guilds (30-80)',
+      defaultEnabled: !0,
+      desc: 'Silk, velvet, high-quality woolens',
+    },
+    'Dyed cloth': {
+      category: 'manufactured',
+      baseChance: 0.8,
+      requiredInstitution: 'Craft guilds (30-80)',
+      defaultEnabled: !0,
+      desc: 'Colored fabrics, specialty dyes',
+    },
+    Glassware: {
+      category: 'manufactured',
+      baseChance: 0.5,
+      requiredInstitution: 'Glassmakers',
+      defaultEnabled: !0,
+      desc: 'Windows, vessels, decorative glass',
+    },
+  },
+  metropolis: {
+    'International banking services': {
+      category: 'services',
+      baseChance: 0.9,
+      requiredInstitution: 'Banking district',
+      defaultEnabled: !0,
+      desc: 'Letters of credit, international finance',
+    },
+    'Extreme luxury goods': {
+      category: 'luxury',
+      baseChance: 0.8,
+      defaultEnabled: !0,
+      desc: 'Rare items, masterwork crafts',
+    },
+    'High art and culture': {
+      category: 'services',
+      baseChance: 0.7,
+      defaultEnabled: !0,
+      desc: 'Theater, music, commissioned art',
+    },
+    'Educational services': {
+      category: 'services',
+      baseChance: 0.8,
+      requiredInstitution: 'University',
+      defaultEnabled: !0,
+      desc: 'University degrees, advanced training',
+    },
+    'Political influence': {
+      category: 'services',
+      baseChance: 0.9,
+      defaultEnabled: !0,
+      desc: 'Access to power, legal frameworks',
+    },
+    'Rare spices and dyes': {
+      category: 'luxury',
+      baseChance: 0.7,
+      defaultEnabled: !0,
+      desc: 'Imported exotic materials',
+    },
+    'Master-crafted weapons': {
+      category: 'luxury',
+      baseChance: 0.6,
+      requiredInstitution: 'Specialist craftsmen quarters',
+      defaultEnabled: !0,
+      desc: 'Legendary quality arms and armor',
+    },
+    'Architectural services': {
+      category: 'services',
+      baseChance: 0.7,
+      requiredInstitution: 'Craft guilds (100-150+)',
+      defaultEnabled: !0,
+      desc: 'Cathedral design, fortress planning',
+    },
+    'Printing services': {
+      category: 'services',
+      baseChance: 0.5,
+      defaultEnabled: !0,
+      desc: 'Mass-produced texts (if technology exists)',
+    },
+  },
+};
+
+export const SERVICE_TIER_CHANCE = { thorp: 0.25, hamlet: 0.35, village: 0.5, town: 0.65, city: 0.8, metropolis: 0.95 };

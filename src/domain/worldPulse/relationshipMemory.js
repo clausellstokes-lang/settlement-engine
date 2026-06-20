@@ -106,7 +106,12 @@ export function relationshipMemoryWeight(
     maxLookbackTicks = RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS,
   } = {},
 ) {
-  if (!Number.isFinite(eventTick)) return 0.35;
+  // Undated rows (legacy/malformed history with no tick) must NOT carry a fixed
+  // weight forever — that inflated memoryScore / dailyLifeWeight / posture
+  // classification permanently (e.g. nudging rival -> escalating_rivalry via
+  // memoryScore > 0.5). They age out to nothing instead; the apply path stamps
+  // worldState.tick on every fresh row, so the gap is only legacy data.
+  if (!Number.isFinite(eventTick)) return 0;
   const age = Math.max(0, Number(currentTick || 0) - eventTick);
   if (age > maxLookbackTicks) return 0;
   return clamp01(Math.pow(0.5, age / Math.max(1, halfLifeTicks)));
@@ -447,7 +452,8 @@ export function refreshRelationshipMemory(worldState = {}, regionalGraph = {}, s
 
 function directionFor(posture, settlementId) {
   const id = String(settlementId);
-  if (posture.from === id && posture.to === id) return 'self';
+  // (No self-loop branch: buildRelationshipPostures only emits pair edges with
+  // distinct from/to, so from === to === id is unreachable for a normal edge.)
   if (posture.from === id) {
     if (posture.relationshipType === 'vassal') return 'overlord_to_vassal';
     if (posture.relationshipType === 'patron') return 'patron_to_client';

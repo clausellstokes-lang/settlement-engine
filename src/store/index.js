@@ -28,7 +28,7 @@ import { immer } from 'zustand/middleware/immer';
 import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 
 import { createAuthSlice }       from './authSlice.js';
-import { createConfigSlice }     from './configSlice.js';
+import { createConfigSlice, DEFAULT_CONFIG } from './configSlice.js';
 import { createToggleSlice }     from './toggleSlice.js';
 import { createSettlementSlice } from './settlementSlice.js';
 import { createAiSlice }         from './aiSlice.js';
@@ -43,6 +43,29 @@ import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
 import { setCustomContentSource }   from '../lib/dependencyEngine.js';
 import { saves as savesService }    from '../lib/saves.js';
+
+/**
+ * Persist-rehydration merge. Exported (not just inlined in the persist config)
+ * so it can be unit-tested without importing the full store + its side effects.
+ *
+ * Deep-merges the durable bags (config / userPrefs / productPrefs) over the
+ * slice defaults instead of zustand's shallow replace. Critically, `config` is
+ * overlaid on DEFAULT_CONFIG so a key ADDED to DEFAULT_CONFIG after a user last
+ * persisted reads back its default rather than `undefined` (a missing boolean
+ * would otherwise be treated as falsy and silently mis-resolve generation). The
+ * persisted user values still win over the defaults for keys they DID persist.
+ */
+export function mergePersistedState(persisted, current) {
+  const c = /** @type {any} */ (current) || {};
+  const p = /** @type {any} */ (persisted) || {};
+  return {
+    ...c,
+    ...p,
+    config: { ...DEFAULT_CONFIG, ...(p.config || {}) },
+    userPrefs: { ...c.userPrefs, ...(p.userPrefs || {}) },
+    productPrefs: { ...c.productPrefs, ...(p.productPrefs || {}) },
+  };
+}
 
 export const useStore = create(
   devtools(
@@ -86,24 +109,18 @@ export const useStore = create(
             // returning user keeps their default detail level, PDF style,
             // player-view/AI-polish defaults, etc.
             productPrefs: state.productPrefs,
+            // Lifetime narrate-spend count (P104 / X-4) feeds useReaderAudience's
+            // anonymous → intermediate progression. Persist it so the signal
+            // survives reloads instead of resetting to 0 every session.
+            lifetimeNarrateCount: state.lifetimeNarrateCount,
           }),
-          // Deep-merge `userPrefs` so the persisted `detailLevel` overlays the
-          // slice defaults WITHOUT clobbering the transient keys (tableViewOpen).
-          // The default zustand merge is shallow — it would replace the whole
-          // userPrefs object with `{ detailLevel }`, dropping the rest. Everything
-          // else uses the shallow default (current state over persisted).
-          merge: (persisted, current) => {
-            const p = /** @type {any} */ (persisted) || {};
-            return {
-              ...current,
-              ...p,
-              userPrefs: { ...current.userPrefs, ...(p.userPrefs || {}) },
-              // Same deep-merge rationale as userPrefs: overlay persisted product
-              // prefs onto the slice defaults so a newly-added pref key isn't
-              // dropped for users who persisted before it existed.
-              productPrefs: { ...current.productPrefs, ...(p.productPrefs || {}) },
-            };
-          },
+          // Deep-merge the durable bags (config / userPrefs / productPrefs) so a
+          // persisted value overlays the slice defaults WITHOUT clobbering keys
+          // it predates. zustand's default merge is shallow — it would replace
+          // each whole object, dropping the rest (the userPrefs/tableViewOpen
+          // bug, and the config-key-undefined bug for returning users). See
+          // mergePersistedState for the rationale.
+          merge: mergePersistedState,
           // On rehydrate: always start the Create page at the mode picker.
           // (Also wipes any stale wizardMode persisted by older builds.)
           onRehydrateStorage: () => (state) => {
@@ -140,6 +157,16 @@ function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
         settlement: payload.settlement,
         config: payload.config || null,
       });
+      // Refresh savedSettlements so the count is accurate, then fire the
+      // real-save instrumentation (first_save/third_save pricing moments +
+      // 'saved' fingerprint) for post-login saves too. Fire-and-forget.
+      try {
+        const refreshed = await savesService.list();
+        useStore.getState().setSavedSettlements?.(refreshed);
+      } catch { /* count may be stale; instrumentation still safe */ }
+      try {
+        useStore.getState().notePersistedSave?.(payload.settlement, result);
+      } catch { /* instrumentation must never throw */ }
       // Fire analytics + a toast via the store so the user sees the result.
       const { Funnel, EVENTS } = await import('../lib/analytics.js');
       Funnel.track(EVENTS.SAVE_SIGNUP_INTENT_FULFILLED, {

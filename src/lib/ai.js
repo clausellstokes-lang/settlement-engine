@@ -45,10 +45,11 @@ const AUTH_TOKEN_LS_KEY = (() => {
  * regression (supabase-js upgrade, stale tab, etc.).
  */
 async function getAccessTokenSafe() {
-  const readLS = () => {
-    if (!AUTH_TOKEN_LS_KEY) return null;
+  // Read the persisted token from a given store, validating expiry.
+  const readFrom = (store) => {
+    if (!AUTH_TOKEN_LS_KEY || !store) return null;
     try {
-      const raw = localStorage.getItem(AUTH_TOKEN_LS_KEY);
+      const raw = store.getItem(AUTH_TOKEN_LS_KEY);
       if (!raw) return null;
       const parsed = JSON.parse(raw);
       const token = parsed?.access_token;
@@ -57,6 +58,15 @@ async function getAccessTokenSafe() {
       if (typeof expAt === 'number' && expAt * 1000 < Date.now()) return null;
       return token;
     } catch { return null; }
+  };
+  // "Remember me off" routes the supabase auth token to sessionStorage (see the
+  // storage adapter in supabase.js), so the fallback must check BOTH stores or a
+  // session-only user on a slow getSession() gets a spurious "not signed in".
+  const readLS = () => {
+    let ls = null, ss = null;
+    try { ls = typeof localStorage !== 'undefined' ? localStorage : null; } catch { /* sandboxed */ }
+    try { ss = typeof sessionStorage !== 'undefined' ? sessionStorage : null; } catch { /* sandboxed */ }
+    return readFrom(ss) || readFrom(ls);
   };
 
   try {

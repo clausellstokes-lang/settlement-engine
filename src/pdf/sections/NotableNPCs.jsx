@@ -196,7 +196,14 @@ function FullCard({ npc }) {
             SECRETS
           </Text>
           {npc.secrets.map((s, si) => {
-            const t = typeof s === 'string' ? s : (s?.text || s?.description || '');
+            // Mirror cleanSecrets' admittance criteria (viewModel.js): object secrets
+            // can carry only what/stakes/label. The old text||description-only read
+            // dropped those even though the slice deliberately preserved them.
+            const t = typeof s === 'string'
+              ? s
+              : (s?.text || s?.description ||
+                 (s?.what ? (s.stakes ? `${s.what} — ${s.stakes}` : s.what) : '') ||
+                 s?.stakes || s?.label || '');
             if (!t) return null;
             return (
               <View key={`sec-${si}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>

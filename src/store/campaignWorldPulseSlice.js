@@ -166,6 +166,21 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
      *  immediate path's rippleEventThroughWorld party branch). */
     let drainedPartyImpacts = [];
     const now = options.now || new Date().toISOString();
+
+    // ── Phase 1: snapshot + drain, then lift the (plain, already-drained)
+    // simulation inputs OUT of the Immer producer. The heavy organic pulse is a
+    // pure function over plain clones, so running it on the draft only made
+    // Immer track a draft it never touches. We split it out below WITHOUT an
+    // await between the two set() calls — JS is single-threaded, so no other
+    // action can observe the intermediate (drained-but-not-advanced) state, and
+    // the drain already committed unconditionally in the prior implementation
+    // (advance returning null still left the drain applied), so behaviour is
+    // preserved. This also removes the second full clone of every member save:
+    // the simulation now consumes the SAME plain clones we hand it here. */
+    /** @type {any} */ let preSnapshot = null;
+    /** @type {any} */ let simCampaign = null;
+    /** @type {any} */ let simSaves = null;
+    /** @type {any} */ let authoredEventBySave = null;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -178,51 +193,76 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       // every member save + the live active view) BEFORE anything mutates, so
       // the advance can be reversed by undoLastPulse. Pushed to the stack only
       // after the pulse is confirmed below.
-      const preSnapshot = capturePulseSnapshot(state, c, now);
+      preSnapshot = capturePulseSnapshot(state, c, now);
       // Campaign-clock C1: drain queued player intentions into the member
       // settlements (and inject any crisis twins into worldState) BEFORE the
       // organic pulse, so every settlement's events resolve simultaneously at
       // this tick and the pulse simulates the post-intervention world. The
       // augmented worldState is written onto the draft campaign so the pulse's
-      // cloneJson(c) carries the injected stressors + the cleared queue.
+      // input clone carries the injected stressors + the cleared queue.
       const drained = drainCampaignQueueIntoState(state, c, worldState, now);
       c.worldState = drained.worldState;
       drainedPartyImpacts = drained.partyImpacts || [];
-      result = domainAdvanceCampaignWorld({
-        campaign: cloneJson(c),
-        saves: cloneJson(campaignSettlements(state, campaignId)),
-        interval,
-        now,
-      });
-      if (!result) return;
-      // The pulse landed — retain the pre-pulse snapshot for multi-step undo.
-      // Cap PER campaign so churn in one campaign can't evict another's history:
-      // drop only this campaign's oldest snapshot when it exceeds the cap.
-      {
-        const next = [...(state.pulseUndoStack || []), preSnapshot];
-        const mineCount = next.reduce((n, s) => n + (s.campaignId === campaignId ? 1 : 0), 0);
-        if (mineCount > PULSE_UNDO_CAP) {
-          const oldestIdx = next.findIndex(s => s.campaignId === campaignId);
-          if (oldestIdx !== -1) next.splice(oldestIdx, 1);
-        }
-        state.pulseUndoStack = next;
-      }
+      // drainCampaignQueueIntoState read these authored events off THIS (Phase-1)
+      // draft, so their values are draft proxies that Immer revokes the moment
+      // this producer returns. Lift them to plain objects now (mirroring the
+      // cloneJson of simCampaign/simSaves below) so the Phase-2 commit's
+      // layerAuthoredDeltas can safely read event.type after revocation.
+      authoredEventBySave = drained.authoredEventBySave instanceof Map
+        ? new Map([...drained.authoredEventBySave].map(([k, v]) => [k, cloneJson(v)]))
+        : drained.authoredEventBySave;
       // Snapshot the pre-pulse queued-impact ids (primitive Set — safe to read
       // outside set) so we can isolate this pulse's NEW propagation impacts.
       priorQueuedIds = new Set((c.regionalGraph?.queuedImpacts || []).map(i => String(i.id)));
-      persistUpdates = applyWorldPulseResultToState(state, c, result, now, drained.authoredEventBySave);
-      campaignPersist = cacheCampaignState(state);
-      // Collect the affected saves (post-apply) for the research fingerprint,
-      // capped at 5 per pulse so a large constellation doesn't flood capture.
-      const affectedIds = (Array.isArray(result.settlementUpdates) ? result.settlementUpdates : [])
-        .map(u => String(u.saveId));
-      const affected = new Set(affectedIds);
-      fingerprintSaves = (state.savedSettlements || [])
-        .filter(save => affected.has(String(save.id)))
-        .slice(0, 5)
-        .map(save => ({ id: save.id, settlement: cloneJson(save.settlement), save: { id: save.id, campaignState: cloneJson(save.campaignState) } }));
-      campaignNpcStates = cloneJson(c.worldState?.npcStates) || null;
+      // Lift plain (post-drain) simulation inputs out of the draft. These are
+      // the ONLY clones the pure pulse needs — the previous code re-cloned the
+      // member saves a second time inside domainAdvanceCampaignWorld's args.
+      simCampaign = cloneJson(c);
+      simSaves = cloneJson(campaignSettlements(state, campaignId));
     });
+
+    // Pure, heavy compute OUTSIDE the producer (synchronous — no await before
+    // the commit set() below, so the action stays atomic w.r.t. other actions).
+    if (simCampaign) {
+      result = domainAdvanceCampaignWorld({
+        campaign: simCampaign,
+        saves: simSaves,
+        interval,
+        now,
+      });
+    }
+
+    // ── Phase 2: commit the pure result back onto the draft.
+    if (simCampaign && result) {
+      set(state => {
+        const c = findActiveCampaign(state.campaigns, campaignId);
+        if (!c) return;
+        // The pulse landed — retain the pre-pulse snapshot for multi-step undo.
+        // Cap PER campaign so churn in one campaign can't evict another's
+        // history: drop only this campaign's oldest snapshot past the cap.
+        {
+          const next = [...(state.pulseUndoStack || []), preSnapshot];
+          const mineCount = next.reduce((n, s) => n + (s.campaignId === campaignId ? 1 : 0), 0);
+          if (mineCount > PULSE_UNDO_CAP) {
+            const oldestIdx = next.findIndex(s => s.campaignId === campaignId);
+            if (oldestIdx !== -1) next.splice(oldestIdx, 1);
+          }
+          state.pulseUndoStack = next;
+        }
+        persistUpdates = applyWorldPulseResultToState(state, c, result, now, authoredEventBySave);
+        campaignPersist = cacheCampaignState(state);
+        // Collect the affected saves (post-apply) for the research fingerprint,
+        // capped at 5 per pulse so a large constellation doesn't flood capture.
+        const affectedIds = (Array.isArray(result.settlementUpdates) ? result.settlementUpdates : [])
+          .map(u => String(u.saveId));
+        const affected = new Set(affectedIds);
+        fingerprintSaves = (state.savedSettlements || [])
+          .filter(save => affected.has(String(save.id)))
+          .slice(0, 5)
+          .map(save => ({ id: save.id, settlement: cloneJson(save.settlement), save: { id: save.id, campaignState: cloneJson(save.campaignState) } }));
+        campaignNpcStates = cloneJson(c.worldState?.npcStates) || null;
+      });
+    }
 
     // Fire-and-forget analytics — additive, after state has settled.
     if (result && result.ok === false && result.reason === 'world_not_canonized') {

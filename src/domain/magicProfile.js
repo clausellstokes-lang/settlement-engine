@@ -15,14 +15,13 @@
  *     contributors[],
  *   }
  *
- * Pure read-only. Composes Phase 9 factions, Phase 17 substrate,
- * Phase 21 magical capacity. No mutation.
+ * Pure read-only. Composes Phase 9 factions and Phase 17 substrate.
+ * No mutation.
  */
 
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveCausalState } from './causalState.js';
-import { deriveCapacityProfile } from './capacityModel.js';
-import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN } from './magicLedger.js';
+import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN, magicLedger } from './magicLedger.js';
 import { HEALING_INSTITUTION_PATTERN as HEALING_PATTERN } from './healingLedger.js';
 
 const MAGIC_LEVEL_VALUES = Object.freeze({
@@ -263,8 +262,16 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
   return 'wary';
 }
 
-function deriveRoles(settlement, profiles, capacity, contributors) {
+function deriveRoles(settlement, profiles, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
+  // The 'integral' role tier keyed on magic === 'pervasive', a band the GENERATOR
+  // never emits (getMagicLevel tops out at 'high'), so every procedurally-generated
+  // settlement's economic/military/infrastructure roles capped at 'common'. Route the
+  // top-band check through magicLedger's canonical band — which folds the generator's
+  // 'high' AND the legacy/manual 'pervasive' into the same top tier — the same fix
+  // capacityModel.deriveMagical already uses. 'high'-magic generated content can now
+  // reach 'integral'; legacy 'pervasive' configs are unchanged (both canon to 'high').
+  const topBand = magicLedger(settlement).magicLevel === 'high';
   const arcanePower = profiles.find(p => p.archetype === 'arcane')?.power || 0;
   const arcaneInstCount = institutionsByPattern(settlement, ARCANE_PATTERN).length;
   const healingInstCount = institutionsByPattern(settlement, HEALING_PATTERN).length;
@@ -284,10 +291,10 @@ function deriveRoles(settlement, profiles, capacity, contributors) {
     return 'absent';
   }
 
-  const economic     = role('economic',     arcanePower >= 30 || arcaneInstCount >= 1, magic === 'pervasive');
-  const military     = role('military',     arcanePower >= 35, magic === 'pervasive' && arcanePower >= 50);
-  const medical      = role('medical',      healingInstCount >= 1 && magic !== 'rare' && magic !== 'low', healingInstCount >= 2 && (magic === 'high' || magic === 'pervasive'));
-  const infrastructure = role('infrastructure', arcaneInstCount >= 1 && (magic === 'high' || magic === 'pervasive'), magic === 'pervasive' && arcaneInstCount >= 1);
+  const economic     = role('economic',     arcanePower >= 30 || arcaneInstCount >= 1, topBand);
+  const military     = role('military',     arcanePower >= 35, topBand && arcanePower >= 50);
+  const medical      = role('medical',      healingInstCount >= 1 && magic !== 'rare' && magic !== 'low', healingInstCount >= 2 && topBand);
+  const infrastructure = role('infrastructure', arcaneInstCount >= 1 && topBand, topBand && arcaneInstCount >= 1);
 
   return { economic, military, medical, infrastructure };
 }
@@ -341,7 +348,6 @@ export function deriveMagicProfile(settlement) {
 
   const profiles = deriveAllFactionProfiles(settlement);
   const causal = deriveCausalState(settlement);
-  const capacity = deriveCapacityProfile('magical', settlement);
   const contributors = [];
 
   return {
@@ -352,7 +358,7 @@ export function deriveMagicProfile(settlement) {
     cost:                 deriveCost(settlement, contributors),
     risk:                 deriveRisk(settlement, causal, contributors),
     religiousAcceptance:  deriveReligiousAcceptance(settlement, profiles, contributors),
-    roles:                deriveRoles(settlement, profiles, capacity, contributors),
+    roles:                deriveRoles(settlement, profiles, contributors),
     contributors,
   };
 }

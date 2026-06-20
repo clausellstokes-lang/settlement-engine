@@ -1,5 +1,3 @@
-import { activeChannelsFrom } from '../region/index.js';
-
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
@@ -44,9 +42,31 @@ function matchedConditionArchetypes(item, archetypes, systems = []) {
   return [...new Set(matched)];
 }
 
-function countChannels(snapshot, settlementId, types = []) {
+// B02-6: build ONE from-keyed index of confirmed channels per pressure pass.
+// countChannels/activeChannelsFrom used to re-run ensureRegionalGraph (a full
+// graph re-normalize) on every call — ~3N times per tick. The snapshot's graph
+// is already ensured, so a single Map<fromId, channel[]> over its confirmed
+// channels lets the per-settlement lookups stay O(matching channels).
+/** @param {any} graph */
+function buildConfirmedChannelIndex(graph) {
+  /** @type {Map<string, any[]>} */
+  const index = new Map();
+  for (const channel of graph?.channels || []) {
+    if (channel?.status !== 'confirmed') continue;
+    const from = String(channel.from);
+    const bucket = index.get(from);
+    if (bucket) bucket.push(channel);
+    else index.set(from, [channel]);
+  }
+  return index;
+}
+
+/** @param {Map<string, any[]>} channelIndex */
+function countChannels(channelIndex, settlementId, types = []) {
   const set = new Set(types);
-  return activeChannelsFrom(snapshot.regionalGraph, settlementId, { types }).filter(channel => set.has(channel.type)).length;
+  const bucket = channelIndex.get(String(settlementId));
+  if (!bucket) return 0;
+  return bucket.filter(channel => set.has(channel.type)).length;
 }
 
 // ── Relationship → pressure feedback ─────────────────────────────────────────
@@ -94,6 +114,9 @@ function supplierInFoodCrisis(snapshot, settlementId) {
 export function deriveSettlementPressures(snapshot) {
   const out = [];
   const season = snapshot.worldState.calendar?.season;
+  // B02-6: index the confirmed channels once for all per-settlement lookups
+  // below instead of re-normalizing the whole graph on each countChannels call.
+  const channelIndex = buildConfirmedChannelIndex(snapshot.regionalGraph);
 
   for (const item of snapshot.settlements) {
     const scores = item.causal?.scores || {};
@@ -112,7 +135,7 @@ export function deriveSettlementPressures(snapshot) {
       food += 0.18;
       foodReasons.push(`active condition: ${foodConditions.join(', ')}`);
     }
-    if (countChannels(snapshot, item.id, ['trade_dependency']) > 0 && scores.trade_connectivity < 45) {
+    if (countChannels(channelIndex, item.id, ['trade_dependency']) > 0 && scores.trade_connectivity < 45) {
       food += 0.08;
       foodReasons.push('trade-dependent food access is strained');
     }
@@ -142,7 +165,7 @@ export function deriveSettlementPressures(snapshot) {
       conflict += 0.18;
       conflictReasons.push(`active condition: ${conflictConditions.join(', ')}`);
     }
-    if (countChannels(snapshot, item.id, ['war_front', 'military_protection']) > 0) {
+    if (countChannels(channelIndex, item.id, ['war_front', 'military_protection']) > 0) {
       conflict += 0.08;
       conflictReasons.push('military regional channel exists');
     }
@@ -211,7 +234,7 @@ export function deriveSettlementPressures(snapshot) {
       defense += 0.16;
       defenseReasons.push(`active condition: ${defenseConditions.join(', ')}`);
     }
-    if (countChannels(snapshot, item.id, ['war_front']) > 0) {
+    if (countChannels(channelIndex, item.id, ['war_front']) > 0) {
       defense += 0.08;
       defenseReasons.push('war-front regional channel exists');
     }

@@ -233,6 +233,10 @@ function conditionMatchesChain(condition, chain, haystack) {
   if (!condition || !chain) return false;
   const systems = Array.isArray(condition.affectedSystems) ? condition.affectedSystems : [];
   if (systems.includes(chain.needKey)) return true;
+  // 'merchant_wealth' is a tolerant legacy-only alias (retired as a live tag;
+  // see activeConditions.js merchant_wealth-retirement note). Kept so saved
+  // conditions carrying the old tag still match exportable chains; new economic
+  // bite routes through trade_connectivity.
   if (chain.exportable && systems.some(s => ['trade_connectivity', 'merchant_wealth'].includes(s))) return true;
   if (chain.entrepot && systems.includes('trade_connectivity')) return true;
   const conditionText = [

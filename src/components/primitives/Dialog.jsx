@@ -1,42 +1,18 @@
-import { useEffect, useId, useRef } from 'react';
+import { useId } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import {
   BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, SP,
   RED, AMBER, sans,
 } from '../theme.js';
 import Button from './Button.jsx';
-
-const FOCUSABLE = 'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
+import { useDialogFocusTrap } from './useDialogFocusTrap.js';
 
 function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
-  const dialogRef = useRef(null);
-  const restoreRef = useRef(null);
-
-  useEffect(() => {
-    if (!open) return undefined;
-    // aria-modal promises the background is inert — back it with real focus
-    // management: remember the trigger, move focus in, trap Tab, and restore on close.
-    restoreRef.current = typeof document !== 'undefined' ? document.activeElement : null;
-    const node = dialogRef.current;
-    const focusables = () => node ? Array.from(node.querySelectorAll(FOCUSABLE)) : [];
-    (focusables()[0] || node)?.focus?.();
-
-    const onKey = event => {
-      if (event.key === 'Escape') { onCancel?.(); return; }
-      if (event.key !== 'Tab' || !node) return;
-      const items = focusables();
-      if (!items.length) { event.preventDefault(); node.focus?.(); return; }
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      restoreRef.current?.focus?.();
-    };
-  }, [open, onCancel]);
+  // Shared focus trap: focus-in on open, Tab cycling, Escape-to-cancel, and
+  // focus restore on close. onCancel is read through a ref inside the hook so a
+  // new handler identity on a parent re-render does NOT re-run focus-in
+  // mid-typing.
+  const dialogRef = useDialogFocusTrap(open, onCancel);
 
   if (!open) return null;
   const iconColor = tone === 'danger' ? RED : tone === 'warning' ? AMBER : GOLD;

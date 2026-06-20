@@ -12,9 +12,11 @@
  *   5. Edits re-run the whole pipeline with the same seed (deterministic); a
  *      step-level partial-rerun engine was retired as a dead/buggy landmine.
  *
- * Strangler Fig: the old generateSettlement() runs as a single "legacy" step
- * initially. We extract phases one at a time, replacing the legacy step's
- * scope until it's empty and can be deleted.
+ * Migration status: COMPLETE. The Strangler Fig extraction of the old monolithic
+ * generateSettlement() finished — there is no longer a "legacy" catch-all step,
+ * and this step pipeline is the sole generation path. (legacyGenerator.js only
+ * derives historical "legacy annotations" for the dossier — it is unrelated to
+ * the retired legacy generator despite the name.)
  */
 
 import { setActiveRng, clearActiveRng } from './rngContext.js';

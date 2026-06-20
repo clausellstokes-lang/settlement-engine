@@ -7,15 +7,21 @@ import './styles/a11y.css';
 import { useStore } from './store';
 import { emitCssTokens } from './design/tokens.js';
 import { installAnalyticsProvider } from './lib/analyticsProvider.js';
-import { installAnalyticsQueue } from './lib/analyticsQueue.js';
+import { installAnalyticsQueue, setSessionIdGetter } from './lib/analyticsQueue.js';
 import { track, EVENTS } from './lib/analytics.js';
-import { returnVisitBand, stampVisit } from './lib/session.js';
+import { returnVisitBand, stampVisit, getSessionId } from './lib/session.js';
 import { reportError, installGlobalErrorHandlers } from './lib/errorReporter.js';
+import { persistUrlFlags } from './lib/flags.js';
 
 // Emit design tokens as CSS custom properties on :root so stylesheets and
 // inline styles can read them as `var(--color-gold-500)`, `var(--space-4)`,
 // `var(--sem-text-body)`, etc. JS imports keep working unchanged.
 emitCssTokens();
+
+// Persist any ?flag.X= URL overrides to localStorage once, at boot — so they
+// survive a refresh that drops the query string. flag()/useFlag still READ the URL
+// (highest precedence) but no longer write during render (see flags.js).
+persistUrlFlags();
 
 // Tier 8.8 - install the analytics provider (Plausible by default, when
 // VITE_PLAUSIBLE_DOMAIN is set; PostHog as an opt-in alternative). No-op
@@ -29,6 +35,10 @@ installAnalyticsProvider();
 // First-party analytics sink: restore any spilled queue + install flush-on-leave
 // handlers, then open the session. Fire-and-forget; no-op if Supabase is
 // unconfigured (the queue self-disables) or DNT/opt-out silences telemetry.
+// Wire the session-id source into the queue so every envelope carries a sessionId
+// (session.js rotates after 30 min idle). Done before installAnalyticsQueue so any
+// spill restored + flushed on boot is already stamped.
+setSessionIdGetter(getSessionId);
 installAnalyticsQueue();
 {
   const rv = returnVisitBand();

@@ -68,106 +68,17 @@ class DetailErrorBoundary extends Component {
   }
 }
 
-// ── Save migration ─────────────────────────────────────────────────────────
-// Upgrades old save format to current schema. Safe to call on any save.
-function _migrateConfig(config) {
-  if (!config) return {};
-  const c = { ...config };
-  // Add magicExists if missing (infer from priorityMagic)
-  if (c.magicExists === undefined) {
-    c.magicExists = (c.priorityMagic ?? 50) > 0;
-  }
-  // Ensure nearbyResourcesState exists
-  if (!c.nearbyResourcesState) c.nearbyResourcesState = {};
-  return c;
-}
-
-// ── NPC pairing categories by relationship type ───────────────────────────────
-const NPC_PAIR_CATS = {
-  trade_partner:['economy'],
-  allied:       ['economy','military'],
-  patron:       ['military','economy'],
-  client:       ['economy'],
-  rival:        ['economy','military'],
-  cold_war:     ['military','criminal'],
-  hostile:      ['military'],
-  neutral:      ['economy'],
-};
-
-const CONTACT_DESC = {
-  trade_partner:(a,ar,b,br,bs)=>`${a} (${ar}) maintains trade connections with ${b} (${br}) in ${bs}.`,
-  allied:       (a,ar,b,br,bs)=>`${a} (${ar}) coordinates with ${b} (${br}) of ${bs} on matters of mutual defense and policy.`,
-  patron:       (a,ar,b,br,bs)=>`${a} (${ar}) reports to ${b} (${br}) of ${bs}, who exercises oversight authority.`,
-  client:       (a,ar,b,br,bs)=>`${a} (${ar}) supplies goods and services to ${b} (${br}) in ${bs}.`,
-  rival:        (a,ar,b,br,bs)=>`${a} (${ar}) and ${b} (${br}) of ${bs} are known adversaries competing for the same interests.`,
-  cold_war:     (a,ar,b,br,bs)=>`${a} (${ar}) runs quiet intelligence operations against ${b} (${br}) of ${bs}, officially unacknowledged.`,
-  hostile:      (a,ar,b,br,bs)=>`${a} (${ar}) and ${b} (${br}) of ${bs} are active enemies.`,
-  neutral:      (a,ar,b,br,bs)=>`${a} (${ar}) has occasional dealings with ${b} (${br}) in ${bs}.`,
-};
-
-// Build paired inter-settlement NPC relationships between two settlements
-function _buildInterSettlementNPCs(settlementA, settlementB, relType, linkId) {
-  const cats = NPC_PAIR_CATS[relType] || ['economy'];
-  const descFn = CONTACT_DESC[relType] || CONTACT_DESC.neutral;
-  let npcsA = (settlementA.npcs||[]).filter(n => cats.includes((n.category||'').toLowerCase()));
-  let npcsB = (settlementB.npcs||[]).filter(n => cats.includes((n.category||'').toLowerCase()));
-
-  // Fallback: if preferred categories yield nothing, use any available NPC
-  if (!npcsA.length) npcsA = (settlementA.npcs||[]).slice(0, 3);
-  if (!npcsB.length) npcsB = (settlementB.npcs||[]).slice(0, 3);
-  if (!npcsA.length || !npcsB.length) return { forA:[], forB:[] };
-
-  const pairs = [];
-  const maxPairs = Math.min(npcsA.length, npcsB.length, 2);
-  const usedB = new Set();
-  for (let i = 0; i < maxPairs; i++) {
-    const a = npcsA[i];
-    const b = npcsB.find(n => !usedB.has(n.id) && n.category === a.category)
-           || npcsB.find(n => !usedB.has(n.id));
-    if (!b) break;
-    usedB.add(b.id);
-    pairs.push({ a, b });
-  }
-
-  const forA = pairs.map(({a,b}) => ({
-    linkId,
-    npcId:        a.id,
-    npcName:      a.name,
-    npcRole:      a.role,
-    partnerName:  b.name,
-    partnerRole:  b.role,
-    partnerSettlement: settlementB.name,
-    relType,
-    description: descFn(a.name, a.role, b.name, b.role, settlementB.name),
-  }));
-  const forB = pairs.map(({a,b}) => ({
-    linkId,
-    npcId:        b.id,
-    npcName:      b.name,
-    npcRole:      b.role,
-    partnerName:  a.name,
-    partnerRole:  a.role,
-    partnerSettlement: settlementA.name,
-    relType,
-    description: descFn(b.name, b.role, a.name, a.role, settlementA.name),
-  }));
-
-  return { forA, forB };
-}
-
-// Find a save entry by settlement name
-function _findSaveByName(saves, name) {
-  return saves.find(s => s.name === name || s.settlement?.name === name) || null;
-}
-
-// Find a save entry by id
-function _findSaveById(saves, id) {
-  return saves.find(s => s.id === id) || null;
-}
+// NOTE: a block of local duplicate logic (`_migrateConfig`,
+// `_buildInterSettlementNPCs` + its `NPC_PAIR_CATS`/`CONTACT_DESC` tables, and
+// `_findSaveByName`/`_findSaveById`) was deleted here. It was dead — shadowed by
+// the canonical versions that actually run: NPC pairing lives in
+// `src/domain/relationships/neighbourBackLink.js` (used by SettlementsPanel),
+// config migration + save lookup in `src/components/settlements/helpers.js`.
+// The local copies had diverged and only served to mislead.
 
 export default function SettlementDetail({
   detail, setDetail,
-  saves, _setSaves,
+  saves,
   linking, setLinking,
   editNamesOpen, setEditNamesOpen,
   handleLink, removeNeighbour, applyRename,
@@ -563,7 +474,11 @@ export default function SettlementDetail({
         {network.map((n,i)=>{
           const c=REL_COLORS[n.relationshipType]||SECOND;
           const rel=(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ');
-          return<div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'4px 0',borderBottom:'1px solid #dde4f8'}}>
+          // Key by a stable identity (not the array index) so removing a
+          // neighbour can't momentarily render the wrong row / mis-place the X
+          // button's feedback. removeNeighbour still takes the index `i`, which
+          // is the live position into detail.settlement.neighbourNetwork.
+          return<div key={n.linkId||n.id||n.name||i} style={{display:'flex',alignItems:'center',gap:8,padding:'4px 0',borderBottom:'1px solid #dde4f8'}}>
             <div style={{width:6,height:6,borderRadius:'50%',background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
             <span style={{fontSize:FS.xxs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 6px',borderRadius:3}}>{rel}</span>

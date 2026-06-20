@@ -150,6 +150,30 @@ function warFrontsInto(graph, toId) {
 }
 
 /**
+ * The channel IDs of CONFIRMED war_front channels FROM `fromId` TO `toId`, read straight
+ * off the pre-tick graph (so the id matches whatever the graph actually carries — robust
+ * against any id-format drift). Used to RETIRE a front when its siege resolves (conquest
+ * or withdrawal): a resolved siege must drop its war_front channel(s) to 'dormant' so the
+ * next tick does not re-discover the same besieger→target front and re-fire the conquest.
+ * Codepoint-sorted for determinism.
+ * @param {any} graph
+ * @param {any} fromId
+ * @param {any} toId
+ * @returns {string[]}
+ */
+function warFrontChannelIds(graph, fromId, toId) {
+  const out = [];
+  for (const channel of graph?.channels || []) {
+    if (channel.type !== 'war_front') continue;
+    if (channel.status !== 'confirmed') continue;
+    if (String(channel.from) !== String(fromId)) continue;
+    if (String(channel.to) !== String(toId)) continue;
+    if (channel.id != null) out.push(String(channel.id));
+  }
+  return out.sort(codepoint);
+}
+
+/**
  * Build a per-settlement strength lookup from the SINGLE pre-tick snapshot. The
  * pressure vector is the SAME one the relationship contests read (buildPressureSummary
  * over the derived pressure index), so a deploy-confidence gate and the subjugation
@@ -569,10 +593,13 @@ function pickOccupier(besiegers, capacityFor, effectiveStrengthFor) {
  * @param {number} args.tick
  * @param {string|null} [args.now]
  * @param {{ warLayerEnabled?: boolean }} args.rules
- * @returns {{ outcomes: any[], deployments: Record<string, any>, graphChannels: any[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number}>, warExhaustion: Record<string, number> }}
+ * @returns {{ outcomes: any[], deployments: Record<string, any>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number}>, warExhaustion: Record<string, number> }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
  *   - graphChannels: war_front directed channels to upsert into the regional graph
+ *   - retiredChannels: war_front channel IDs whose siege RESOLVED this tick (conquest or
+ *     withdrawal) — the caller drops each to 'dormant' (setRegionalChannelStatus) so a
+ *     resolved siege is not re-discovered and re-fired next tick.
  *   - resolvedDeployments: armies that returned home this tick (for deploymentReturn)
  *   - dispositionDeltas: id-stable win/loss attributions from sieges resolved this tick (Feature C)
  *   - warExhaustion: the UPDATED non-reverting war-exhaustion scar ledger (Z2a) to persist
@@ -581,7 +608,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   const existing = worldState?.deployments || {};
   // ── Gate: byte-identical no-op when the war layer is OFF. ────────────────────
   if (!rules?.warLayerEnabled) {
-    return { outcomes: [], deployments: existing, graphChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {} };
+    return { outcomes: [], deployments: existing, graphChannels: [], retiredChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {} };
   }
 
   const graph = snapshot?.regionalGraph || {};
@@ -596,6 +623,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   const warPosture = worldState?.warPosture && typeof worldState.warPosture === 'object' ? worldState.warPosture : {};
   const outcomes = [];
   const graphChannels = [];
+  // war_front channel IDs whose siege RESOLVED this tick (conquest or withdrawal). The
+  // caller drops each to 'dormant' so the SAME front is not re-discovered next tick and
+  // the (idempotent) conquest does not re-fire forever. Deduped + codepoint-sorted below.
+  /** @type {string[]} */
+  const retiredChannels = [];
   const resolvedDeployments = [];
   // Feature C (C1) write-side: id-stable win/loss attributions from the contests
   // resolved THIS tick. The occupier/conquered ids are already state-decided
@@ -727,6 +759,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
             resolvedDeployments.push({ attackerId, deployment: withdrawnRec, targetId, outcome: 'withdrawal' });
             delete deployments[attackerId];
             clearedAttackers.add(attackerId);
+            // Retire this besieger's war_front channel: the siege is broken off, so the
+            // front must not persist as 'confirmed' (which would leave the former target
+            // permanently 'under siege' and re-seed a phantom siege next tick).
+            for (const channelId of warFrontChannelIds(graph, attackerId, targetId)) retiredChannels.push(channelId);
             // B2 point 5 — WAR OUTCOME → FUTURE RISK (reuse the disposition path): a
             // settlement that abandoned a siege banked a war LOSS, and a BADLY-DAMAGED
             // returning army banks a HEAVIER loss. This lowers its disposition
@@ -756,6 +792,17 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
             }));
           }
           continue; // the siege is broken off — no harassment on top.
+        }
+        // No live deployment to withdraw, but a STALE confirmed war_front channel may
+        // still point at the target from a former besieger (its army already returned a
+        // prior tick, but the front was never retired). The matchup is no longer
+        // siege-feasible, so retire those stale fronts too — otherwise the target stays
+        // permanently 'under siege' for pressure/strategy and the former besieger can
+        // never mount a new campaign (finding 4). A still-feasible front would have rolled
+        // above and is left untouched.
+        for (const attackerId of besiegers) {
+          if (deployments[attackerId]?.targetId === targetId) continue; // (none here — withdrawn.length was 0)
+          for (const channelId of warFrontChannelIds(graph, attackerId, targetId)) retiredChannels.push(channelId);
         }
       }
       // ── HARASSMENT: a feasibility-gated weak attacker that cannot storm the town
@@ -835,6 +882,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         delete deployments[attackerId];
         clearedAttackers.add(attackerId);
       }
+      // RETIRE every besieger's war_front channel — the siege RESOLVED (the target fell).
+      // Without this the front stays 'confirmed', so next tick the (idempotent) conquest
+      // re-fires every tick forever: a fresh conquest realm-event + chronicle entry, a
+      // re-seeded 'contested' occupation, and disposition deltas, for a siege that already
+      // ended (finding 1). Drop EVERY besieger's channel (coalition members included),
+      // whether or not it still has a live deployment.
+      for (const channelId of warFrontChannelIds(graph, attackerId, targetId)) retiredChannels.push(channelId);
     }
   }
 
@@ -1046,5 +1100,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     }
   }
 
-  return { outcomes, deployments, graphChannels, resolvedDeployments, dispositionDeltas, warExhaustion };
+  // Dedup + codepoint-sort the retired channel ids (a coalition can list the same
+  // target front once per besieger; the caller's setRegionalChannelStatus is idempotent,
+  // but a stable, deduped list keeps the output order-independent).
+  const retiredChannelsOut = [...new Set(retiredChannels)].sort(codepoint);
+
+  return { outcomes, deployments, graphChannels, retiredChannels: retiredChannelsOut, resolvedDeployments, dispositionDeltas, warExhaustion };
 }

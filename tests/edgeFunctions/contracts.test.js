@@ -782,7 +782,9 @@ describe('Tier 3.3 — create-checkout authentication', () => {
 
   it('verifies the user before creating any Stripe session', () => {
     const authIdx = src.search(/auth\.getUser\s*\(/);
-    const sessIdx = src.search(/stripe\.checkout\.sessions\.create/);
+    // The handler was refactored to a DI seam (edges.2): the Stripe client may
+    // be referenced as `stripe` or the injected `stripeApi`. Accept both.
+    const sessIdx = src.search(/stripe(Api)?\.checkout\.sessions\.create/);
     expect(authIdx).toBeGreaterThan(0);
     expect(sessIdx).toBeGreaterThan(0);
     expect(authIdx).toBeLessThan(sessIdx);
@@ -884,7 +886,8 @@ describe('single-dossier payment verification', () => {
   beforeAll(() => { src = readFunction('verify-single-dossier'); });
 
   it('retrieves the Stripe session server-side', () => {
-    expect(src).toMatch(/stripe\.checkout\.sessions\.retrieve/);
+    // DI seam (edges.2): the Stripe client may be `stripe` or injected `stripeApi`.
+    expect(src).toMatch(/stripe(Api)?\.checkout\.sessions\.retrieve/);
   });
 
   it('requires a complete paid single-dossier session with matching token', () => {
@@ -1186,7 +1189,7 @@ describe('Tier 0.5 — create-checkout metadata population is server-controlled'
   it('product is validated against PRICE_MAP before being put into metadata', () => {
     // Pattern: !PRICE_MAP[product] → throw → never reaches checkout.create.
     const validateIdx = checkoutSrc.search(/!PRICE_MAP\[product\]/);
-    const createIdx   = checkoutSrc.search(/stripe\.checkout\.sessions\.create/);
+    const createIdx   = checkoutSrc.search(/stripe(Api)?\.checkout\.sessions\.create/);
     expect(validateIdx).toBeGreaterThan(0);
     expect(createIdx).toBeGreaterThan(0);
     expect(validateIdx).toBeLessThan(createIdx);
