@@ -424,6 +424,22 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'worsening',
     defaultSeverity: 0.5,
   },
+  // ── Phase B4 — STRATEGIC TRADE. trade_embargo is the DEPENDENT-side wound when a
+  // valuable, hard-to-replace trade tie is weaponized under military/religious tension
+  // (the tradeLeverageCandidate embargo-collapse branch). It is the hostile escalation
+  // of regional_import_shortage — a critical supplier deliberately cutting the flow — so
+  // it bites the same systems: trade_connectivity (the severed lane), food_security (the
+  // tie is most often a food dependency the embargo starves), and public_legitimacy (the
+  // ruler who let the town be cornered). Stamped ONLY behind the gated war layer, so a
+  // no-war settlement never carries it ⇒ byte-identical when OFF.
+  trade_embargo: {
+    label: 'Trade embargo',
+    description: 'A critical supplier has cut off the flow — the dependent economy reels.',
+    affectedSystems: ['trade_connectivity', 'food_security', 'public_legitimacy'],
+    defaultExpiresAtTicks: 8,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.55,
+  },
   // ── Phase B3 — OCCUPATION layer (the stateful occupier-benefit/burden/resistance
   // loop). occupation_resistance is the OCCUPIED-side condition: sabotage, noncompliance,
   // and an organizing resistance that GROWS when the occupied is intact/loyalist/populous

@@ -2200,13 +2200,12 @@ function tradeLeverageCandidate(ctx) {
         trajectory: "embargo_collapse",
       },
       condition: {
+        // label / description / affectedSystems now come from the trade_embargo
+        // catalog template (activeConditions.js) — same as alliance_burden et al.
         archetype: "trade_embargo",
-        label: "Trade embargo",
-        description: "A critical supplier has cut off the flow — the dependent economy reels.",
         severity: sev,
         source: "world_pulse_relationship",
         relatedSettlementId: supplierId,
-        affectedSystems: ["trade_connectivity", "food_security", "public_legitimacy"],
       },
       metadata: {
         incidentType: "trade_embargo",
