@@ -27,6 +27,7 @@ import { liveSieges, activeDeployments, dispositionStandings, liveTradeWars, war
 import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
 import { latentStrength, deployedArmyStandings } from '../../domain/display/armyStrength.js';
 import { occupationStandings } from '../../domain/display/occupationStatus.js';
+import { pantheonStandings, deityDisplayName } from '../../domain/display/pantheonDepth.js';
 import { runVisibilityAudit } from '../../domain/display/visibilityAudit.js';
 import { OCCUPATION_TUNING } from '../../domain/worldPulse/occupation.js';
 import { Card, BarList, MiniTable, Empty, Select } from './AdminTrendsCharts.jsx';
@@ -120,6 +121,7 @@ export default function AdminSimTuningPanel() {
       mobilizing: mobilizationStandings({ worldState, includeCovert: true }),
       armies: deployedArmyStandings({ worldState, nameFor }),
       occupations: occupationStandings({ worldState, nameFor }),
+      pantheon: pantheonStandings(worldState),
       strengthRows: members.map(m => ({ dim: m.settlement?.name || m.id, value: 0, phrase: latentStrength(m).phrase })),
       warnings: balanceWarnings(campaign, members),
       dormancy: dormancyReport(campaign),
@@ -227,10 +229,30 @@ export default function AdminSimTuningPanel() {
             </Card>
           )}
 
-          {/* ── Deity / pantheon standings ───────────────────────────────── */}
+          {/* ── War-weariness (exhaustion band) ──────────────────────────── */}
           {data.weary.length > 0 && (
             <Card title="War-weariness (exhaustion band)">
               <BarList rows={data.weary.map(w => ({ dim: data.nameFor(w.id), value: Math.round(w.warExhaustion * 100) }))} />
+            </Card>
+          )}
+
+          {/* ── Deity / pantheon standings (B5 4-axis) ───────────────────── */}
+          {/* Reads the SAME live pantheon ledger selectors the DM PantheonPanel
+              and the PDF liveWorld slice consume. Self-gating: a religion-dormant
+              campaign carries no `pantheon` key ⇒ pantheonStandings → [] ⇒ this
+              Card renders nothing (byte-identical off-state). */}
+          {data.pantheon.length > 0 && (
+            <Card title="Pantheon standings (seats + W–L)">
+              <MiniTable
+                rows={data.pantheon.map(p => ({
+                  deity: deityDisplayName(p.id),
+                  tier: p.tier,
+                  seats: p.seats,
+                  'W–L': `${p.wins}–${p.losses}`,
+                }))}
+                columns={['deity', 'tier', 'seats', 'W–L']}
+                numeric={['seats']}
+              />
             </Card>
           )}
         </>
