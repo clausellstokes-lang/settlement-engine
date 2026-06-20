@@ -195,6 +195,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
           disabled={step === 0}
           aria-label={t('replay.prev')}
           icon={<ChevronLeft size={14} />}
+          style={{ minHeight: 44 }}
         >
           {t('replay.prev')}
         </Button>
@@ -204,7 +205,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
             size="sm"
             onClick={() => setStep(0)}
             icon={<RotateCcw size={13} />}
-            style={{ marginLeft: 'auto' }}
+            style={{ marginLeft: 'auto', minHeight: 44 }}
           >
             {t('replay.restart')}
           </Button>
@@ -214,7 +215,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
             size="sm"
             onClick={() => setStep(s => Math.min(last, s + 1))}
             trailingIcon={<ChevronRight size={14} />}
-            style={{ marginLeft: 'auto' }}
+            style={{ marginLeft: 'auto', minHeight: 44 }}
           >
             {t('replay.next')}
           </Button>
@@ -234,7 +235,7 @@ export default function RegionWakeReplay({ onUpgrade }) {
             variant="gold"
             size="sm"
             onClick={onUpgrade}
-            style={{ marginTop: 8 }}
+            style={{ marginTop: 8, minHeight: 44 }}
           >
             {t('replay.cta')}
           </Button>

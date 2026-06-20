@@ -85,7 +85,7 @@ export function WizardEmptyState({
       {!showModePicker && authTier === 'anon' && (
         <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
           Want full control?{' '}
-          <Button variant="ghost" size="sm" onClick={onSignIn} style={{ display: 'inline-flex', textDecoration: 'underline' }}>
+          <Button variant="ghost" size="sm" onClick={onSignIn} style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'underline', minHeight: 44 }}>
             Sign in (free)
           </Button>
           {' '}to unlock Basic &amp; Advanced generation.
