@@ -14,12 +14,17 @@
  * from theme tokens / rgba (no raw hex) so the visual-budget lint stays clean.
  */
 import { useState, useRef, useEffect } from 'react';
-import { User, ChevronDown, Settings, CreditCard } from 'lucide-react';
+import { User, ChevronDown, Settings, CreditCard, LogOut } from 'lucide-react';
 import { GOLD, GOLD_BG, INK, BORDER, FS, SP, R, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 
-function MenuRow({ icon, label, onClick }) {
+function MenuRow({ icon, label, onClick, tone = 'default' }) {
   const [hover, setHover] = useState(false);
+  // `danger` tones the icon + label red (sign-out): a destructive-ish action
+  // gets a visual cue without leaving the same ghost-row affordance.
+  const isDanger = tone === 'danger';
+  const accent = isDanger ? swatch.danger : GOLD;
+  const labelColor = isDanger ? swatch.danger : INK;
   return (
     <Button
       variant="ghost"
@@ -28,13 +33,13 @@ function MenuRow({ icon, label, onClick }) {
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      icon={<span style={{ display: 'flex', color: GOLD, flexShrink: 0 }}>{icon}</span>}
+      icon={<span style={{ display: 'flex', color: accent, flexShrink: 0 }}>{icon}</span>}
       style={{
         justifyContent: 'flex-start', gap: SP.sm, textAlign: 'left',
         padding: `${SP.sm}px ${SP.md}px`,
-        background: hover ? GOLD_BG : 'transparent',
+        background: hover ? (isDanger ? 'rgba(139,26,26,0.08)' : GOLD_BG) : 'transparent',
         border: 'none', borderRadius: R.sm,
-        color: INK, fontSize: FS.sm, fontWeight: 600,
+        color: labelColor, fontSize: FS.sm, fontWeight: 600,
       }}
     >
       {label}
@@ -49,6 +54,7 @@ export default function AccountMenu({
   onSignIn,
   onAccount,
   onManageSubscription,
+  onSignOut,
   compact = false,
 }) {
   const [open, setOpen] = useState(false);
@@ -146,6 +152,17 @@ export default function AccountMenu({
             label="Manage subscription & credits"
             onClick={() => { setOpen(false); onManageSubscription?.(); }}
           />
+          {onSignOut && (
+            <>
+              <div style={{ height: 1, background: BORDER, margin: `4px ${SP.xs}px` }} aria-hidden="true" />
+              <MenuRow
+                icon={<LogOut size={15} />}
+                label="Sign out"
+                tone="danger"
+                onClick={() => { setOpen(false); onSignOut(); }}
+              />
+            </>
+          )}
         </div>
       )}
     </div>

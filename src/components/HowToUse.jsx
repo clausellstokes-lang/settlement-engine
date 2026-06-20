@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { BookOpen, Zap, Star, Cpu, List, Scale, HelpCircle } from 'lucide-react';
+import { BookOpen, Zap, Star, Cpu, List, Scale, HelpCircle, Globe2 } from 'lucide-react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, PAGE_MAX, sans, serif_, FS, swatch } from './theme.js';
 import AccountFAQ from './account/AccountFAQ.jsx';
+import LivingWorldTab from './howto/LivingWorldTab.jsx';
+import UnderTheHoodTab from './howto/UnderTheHoodTab.jsx';
 
 // Responsive multi-column container for card/list-heavy tab content. Uses
 // `column-width` (not a fixed count) so it fills a wide desktop card with as
@@ -13,13 +15,16 @@ const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 
 
 const TABS = [
-  { id:'quick',  label:'Quick Start',   Icon: Zap },
-  { id:'power',  label:'Power User',    Icon: Star },
-  { id:'logic',  label:'Under the Hood',Icon: Cpu },
-  { id:'phil',   label:'DM Philosophy', Icon: BookOpen },
-  { id:'ref',    label:'Reference',     Icon: List },
-  { id:'compare',label:'How We Compare',Icon: Scale },
-  { id:'faq',    label:'FAQ',           Icon: HelpCircle },
+  { id:'quick',  label:'Quick Start',     Icon: Zap },
+  { id:'power',  label:'Power User',      Icon: Star },
+  // P9 — "The Living World" sits between Power User and Under the Hood: the
+  // bridge from the static dossier to the premium living simulation.
+  { id:'living', label:'The Living World',Icon: Globe2 },
+  { id:'logic',  label:'Under the Hood',  Icon: Cpu },
+  { id:'phil',   label:'DM Philosophy',   Icon: BookOpen },
+  { id:'ref',    label:'Reference',       Icon: List },
+  { id:'compare',label:'How We Compare',  Icon: Scale },
+  { id:'faq',    label:'FAQ',             Icon: HelpCircle },
 ];
 
 function Insight({ title, children }) {
@@ -74,12 +79,14 @@ function QuickTab() {
     <div style={{ padding:'12px 14px', background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
       borderRadius:7, marginBottom:14 }}>
       <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:GOLD, marginBottom:6 }}>
-        A settlement generator that thinks. And stays within your constraints.
+        It generates a town in seconds, then it runs the region for years.
       </div>
       <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:'0 0 8px' }}>
         Most generators roll on a table. This one simulates. Every output. Institutions, NPC secrets,
         faction tensions, export economy. Emerges from interlocking mechanical relationships that governed
-        real historical settlements. The outputs aren't random. They're derived.
+        real historical settlements. The outputs aren't random. They're derived. And the static dossier is
+        only the start: advance time and the whole region becomes a living simulation. See
+        <strong style={{ color:GOLD }}> The Living World</strong> tab.
       </p>
       <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:'0 0 8px' }}>
         <strong style={{ color:GOLD }}>Constraint-driven</strong> is the core principle. You don't describe
@@ -200,103 +207,6 @@ function PowerTab() {
       </section>
     </div>
   );
-}
-
-function LogicTab() {
-  return <>
-    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:12 }}>
-      Understanding these mechanics lets you use the generator as a world-building tool rather than a
-      random oracle. The outputs aren't random. They're derived.
-    </p>
-    <div style={COLS()}>
-    <Insight title="Constraint-Driven, Not Random">
-      The distinction matters. A random generator picks from tables. This engine resolves constraints.
-      Your slider values, trade route, terrain, stress conditions, forced/excluded institutions, and
-      neighbour relationship are all constraints. The engine finds the most internally coherent
-      settlement satisfying all of them simultaneously. This is why changing one constraint produces
-      a systematically different settlement rather than a random variation. The outputs feel inevitable
-      rather than arbitrary because they are: given those constraints, this is what the town is.
-    </Insight>
-    <Insight title="Sliders as Probability Weights">
-      The sliders don't guarantee institutions. They shift their probability. Military ≥80 makes a
-      Garrison very likely but not certain. It also raises the probability of walls, fortifications,
-      and military-aligned NPCs, and the chance the dominant faction is a military bloc.
-      Interaction between sliders creates compound archetypes: Military ≥70 + Religion ≥68 can trigger
-      Crusader Synthesis where church and military are fused.
-    </Insight>
-    <Insight title="Magic as an Economic Buffer">
-      High Magic doesn't just add magic institutions. It acts as a buffer against economic and food
-      deficits. Arcane institutions can substitute for missing production infrastructure. A settlement
-      with no farmland and no road access but high magic will survive because the generator treats
-      magical supply as a partial substitute for material supply chains. Lower the Magic slider and
-      that same settlement faces a viability warning.
-    </Insight>
-    <Insight title="Prosperity Cascades from Multiple Inputs">
-      Prosperity isn't set by a dial. It's the output of export volume × export value, income source
-      count, trade route access, supply chain completeness, safety profile, and stress conditions.
-      A comfortable prosperity can mask a fragile foundation. The Viability tab shows exactly which
-      factors are propping the number up and which are absent.
-    </Insight>
-    <Insight title="Stress Compounds, Not Stacks">
-      Multiple stresses create compound conditions. Famine + Politically Fractured means food
-      distribution is contested by factions, not just scarce. The compound modifies NPC secrets
-      (who is hoarding, who is profiteering), faction tensions (which bloc controls the grain), and
-      safety profile. The DM Summary names the compound condition explicitly.
-    </Insight>
-    <Insight title="Faction Power Reflects Institutional Base and Settlement Performance">
-      Faction raw power comes from institutional presence and slider priorities. But effective power
-      is modified by public legitimacy. The governing authority's performance multiplier ranges from
-      ×0.60 (legitimacy crisis) to ×1.30 (endorsed). Criminal factions receive an inverse multiplier:
-      when governance fails, criminal power grows. The public legitimacy score derives from prosperity,
-      safety, defensibility, and food security. So every economic and military decision affects the
-      power structure indirectly. NPC groups are distributed across all power factions using
-      power-weighted assignment with a diversity cap, so no single faction monopolises the settlement's
-      organised population.
-    </Insight>
-    <Insight title="Neighbour Relationships Bias the Economy">
-      When generating with an active neighbour, the relationship type modifies the economic engine
-      before institutions are selected. A trade_partner skews production toward complementary exports.
-      A rival suppresses them. A patron introduces dependency: the client's economy is partially shaped
-      by what the patron demands. Two identical configurations produce different economies depending
-      on who their neighbour is.
-    </Insight>
-    <Insight title="NPC Structural Positions Derive from the Live Settlement State">
-      Each significant NPC carries a structural position, a goal, and a constraint. All derived from
-      the settlement's current conditions, not from generic role templates. A Guild Master in a
-      legitimacy-crisis city with corrupted criminal capture gets a fundamentally different position
-      than one in a prosperous, well-governed settlement. The top NPCs by power relevance also carry
-      a rank indicator. Dominant or subordinate within their faction type. Producing different
-      templates for the most powerful government NPC versus a secondary civic official. The goal field
-      on those NPCs reflects the settlement's specific pressures rather than a generic role description.
-    </Insight>
-    <Insight title="History and Present Are Structurally Connected">
-      Historical events connect to current conditions through a temporal plausibility filter. A famine
-      500 years ago does not explain today's food shortage. Only recent events (within roughly 30-80
-      years depending on event type) can explain current economic or safety conditions. Political
-      crises within the last 80 years can explain current legitimacy deficits. Religious events 60-300
-      years ago can explain current institutional prominence or decline. Where a historical event and
-      the current state are in meaningful tension. A prior political disruption whose pressure hasn't
-      resolved, a recovery the settlement has moved through. A legacy annotation surfaces it using
-      the event's own name and lasting effects. The annotation tells the DM the structural relationship;
-      the DM supplies the world-specific meaning.
-    </Insight>
-    <Insight title="Supply Chains Create Fragility">
-      Production isn't isolated. It's sequential. A tannery requires hides (hunting economy or
-      livestock). A leatherworker requires tanned leather. An armorer requires leather and metal.
-      Break any link and the downstream chain fails. A Prosperous settlement may be one institution
-      away from struggling: remove the mill and the grain surplus collapses, exports drop, and
-      prosperity slides within a generation. The Viability tab shows exactly which chains are
-      intact, which are broken, and which are propped up by magic or trade substitutes.
-    </Insight>
-    <Insight title="The AI Narrative Prompt is a Structured Brief">
-      The export isn't a description. It's a structured brief: settlement name, tier, economic profile,
-      power structure summary, active NPCs with goals and secrets, stress conditions, history events,
-      and faction tensions. When given to an AI assistant, this brief enables consistent fiction across
-      multiple queries because everything the AI needs is in the brief, not in its training.
-      The coherence of the brief is what makes the AI coherent.
-    </Insight>
-    </div>
-  </>;
 }
 
 function PhilosophyTab() {
@@ -421,10 +331,10 @@ function RefTab() {
   const sections = [
     { title: 'Navigation', rows: [
       ['Create','The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).'],
-      ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
-      ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
-      ['Compendium','Browse the built-in catalog of institutions, archetypes, stresses, and relationship systems. Switch to My Custom Content to create your own custom items.'],
-      ['How to Use','This guide.'],
+      ['Library','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
+      ['Realm','The simulation’s home: the World Map plus the World Pulse, Chronicle, and Pantheon. Advance time and watch the region run. Reachable for everyone; the live controls are Cartographer.'],
+      ['Compendium','Browse the built-in catalog of institutions, archetypes, stresses, and the Living-World systems. Switch to My Custom Content to author your own.'],
+      ['About','This guide — landing, how-to, and the Living-World walkthrough.'],
     ]},
     { title: 'Settlement Detail Tabs', rows: [
       ['DM Summary','One-paragraph brief, arrival scene, and consolidated plot hooks for mid-session quick reference.'],
@@ -454,8 +364,14 @@ function RefTab() {
       ['Supply Chain Overlay','Toggle "Chains" to draw supply-chain routes between exporters and importers across your saved settlements.'],
     ]},
     { title: 'Compendium', rows: [
-      ['Built-in Catalog','Searchable reference for tiers, archetypes, stress types, relationship effects, and the full institution catalog.'],
-      ['My Custom Content','Create custom institutions, resources, stressors, trade goods, trade routes, power presets, and defense presets. Custom items appear in the Settlement Editor catalog with a purple badge. All custom content persists to your browser.'],
+      ['Built-in Catalog','Searchable reference for tiers, archetypes, stress types, relationship effects, the full institution catalog, and the Living-World systems (substrate, pressures, world pulse, war layer, pantheon).'],
+      ['My Custom Content','Author custom institutions, resources, stressors, trade goods — and, for the simulation, deities and factions. Custom items appear in the editor catalog with a purple badge. Authoring is a Cartographer feature.'],
+    ]},
+    { title: 'The Living World (Realm)', rows: [
+      ['Advance Time','Push the campaign forward a month at a time. The whole region responds at once — wars, faiths, trade, population — each change derived, with a "what changed and why". Off by default, opt-in, reversible.'],
+      ['War Layer','Sieges, coalitions, conquest, and trade wars. War drains the economy and scars war-exhaustion, which drives the realm back to peace — the war ends itself. Toggle it on in the simulation rules.'],
+      ['Pantheon','Assign a primary deity and the living pantheon awakens: deities contest converts, win seats, and rise from cult to major. Faith couples back into corruption, aggression, and magic legality.'],
+      ['Chronicle','A scrubbable history of every advance, derived from the pulse record. Click a headline to highlight the settlements it touched.'],
     ]},
   ];
   return (
@@ -562,7 +478,8 @@ export default function HowToUse({ standalone=false }) {
         <div style={{ padding:'24px 28px' }}>
           {activeTab==='quick' && <QuickTab />}
           {activeTab==='power' && <PowerTab />}
-          {activeTab==='logic' && <LogicTab />}
+          {activeTab==='living' && <LivingWorldTab />}
+          {activeTab==='logic' && <UnderTheHoodTab />}
           {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}
           {activeTab==='compare' && <CompareTab />}
@@ -595,7 +512,8 @@ export default function HowToUse({ standalone=false }) {
         <div style={{ padding:'14px', background:CARD, maxHeight:'60vh', overflowY:'auto' }}>
           {activeTab==='quick' && <QuickTab />}
           {activeTab==='power' && <PowerTab />}
-          {activeTab==='logic' && <LogicTab />}
+          {activeTab==='living' && <LivingWorldTab />}
+          {activeTab==='logic' && <UnderTheHoodTab />}
           {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}
           {activeTab==='compare' && <CompareTab />}

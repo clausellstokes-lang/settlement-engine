@@ -169,6 +169,9 @@ export function mutateSettlement({ settlement, event, now = null }) {
     case 'DEMOTE_NPC':
       next = swapNpcStanding(next, stampedEvent);
       break;
+    case 'SET_PRIMARY_DEITY':
+      next = setPrimaryDeity(next, stampedEvent);
+      break;
 
     default:
       // Unknown event type — no entity mutation. SystemState delta still
@@ -1371,6 +1374,52 @@ function swapNpcStanding(s, event) {
   let next = replaceNpc(s, a, nextA);
   next = replaceNpc(next, b, nextB);
   return next;
+}
+
+// ── Religion (Feature D / R1) ──────────────────────────────────────────────
+
+/**
+ * SET_PRIMARY_DEITY — assign (or clear) a settlement's primary deity. This is
+ * the COMMIT half of the embed-on-assign bridge: the store layer RESOLVES the
+ * deity ref → a self-contained snapshot (it can read customContent; mutate.js is
+ * pure and CANNOT), then dispatches the already-resolved snapshot in the event
+ * payload. This handler just commits `config.primaryDeityRef` + the frozen
+ * `config.primaryDeitySnapshot` so the pulse/derivers read ONLY the snapshot,
+ * never the store. A null/absent payload deity clears the assignment (returns
+ * the settlement to dormant). No wall-clock field is written.
+ *
+ * @param {any} s
+ * @param {{ targetId?: string, payload?: { deityRef?: string|null, snapshot?: any } }} event
+ */
+function setPrimaryDeity(s, event) {
+  const ref = event.payload?.deityRef ?? event.targetId ?? null;
+  const snapshot = event.payload?.snapshot ?? null;
+  const config = { ...(s.config || {}) };
+
+  if (!ref || !snapshot) {
+    // Clear → dormant. Drop both keys so a deity-free settlement is structurally
+    // identical to one that never had a deity (the dormancy byte-identity oracle).
+    delete config.primaryDeityRef;
+    delete config.primaryDeitySnapshot;
+    return { ...s, config };
+  }
+
+  config.primaryDeityRef = ref;
+  // Embed a self-contained copy. We re-pick the exact snapshot fields (never
+  // spread the raw payload) so an unexpected field — especially any wall-clock
+  // stamp — can never leak into the embedded record a deriver reads.
+  config.primaryDeitySnapshot = Object.freeze({
+    _deityRef: ref,
+    name: String(snapshot.name || ''),
+    alignmentAxis: snapshot.alignmentAxis || 'neutral',
+    temperamentAxis: snapshot.temperamentAxis || 'neutral',
+    rankAxis: snapshot.rankAxis || 'minor',
+    // lawAxis (B5): a legacy 3-axis deity carries none ⇒ default 'neutral' (no
+    // law_order term, byte-identical to a deity-free settlement on that axis).
+    lawAxis: snapshot.lawAxis || 'neutral',
+    ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),
+  });
+  return { ...s, config };
 }
 
 // ── Lookups + identity helpers ─────────────────────────────────────────────

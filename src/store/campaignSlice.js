@@ -172,6 +172,11 @@ export const createCampaignSlice = (set, get) => {
   campaignsLoaded: false,
   /** The currently-loaded campaign id (null if none) — used by WorldMap */
   activeCampaignId: null,
+  /** One-shot: which WorldMap workspace ('map'|'news'|'pulse') an outside view
+   *  wants opened on arrival (e.g. the Settlements "Advance Time" button asks
+   *  for 'news'). WorldMap reads & clears it on mount. Session-only — NOT in
+   *  persist.partialize, so it never survives a reload. */
+  pendingMapWorkspace: null,
   /** Set when a cloud save of campaign/save state fails; surfaced as a banner.
    *  null when the last persist succeeded (or was cleared by the user). */
   campaignSyncError: null,
@@ -410,6 +415,75 @@ export const createCampaignSlice = (set, get) => {
     return campaignId;
   },
 
+  /**
+   * Import a single public dossier into the importer's own library as a fresh
+   * DRAFT. Gated auth + save-limit (NOT premium): the server RPC (048) only
+   * returns the payload for a gallery_importable dossier to a signed-in caller,
+   * and the 014 BEFORE INSERT trigger enforces the per-tier slot cap on save.
+   * The clone is the public-safe projection (DM-private content already stripped
+   * server-side); cross-settlement refs and the generation seed are dropped, and
+   * provenance is stamped. Returns the new save id.
+   */
+  importGallerySettlement: async (slug) => {
+    const st = get();
+    if (!st.auth?.user) throw new Error('Sign in to import settlements.');
+    // Slot pre-flight for a friendly message; the 014 trigger is the real gate.
+    const max = (typeof st.maxSaves === 'function') ? st.maxSaves() : Infinity;
+    const activeNow = (st.savedSettlements || []).length;
+    if (Number.isFinite(max) && activeNow + 1 > max) {
+      throw new Error('Your library is full — free up a slot or upgrade to import more settlements.');
+    }
+    const { fetchDossierForImport } = await import('../lib/gallery.js');
+    const dossier = await fetchDossierForImport(slug);
+    if (!dossier) throw new Error('That settlement is not available to import.');
+    const src = (dossier.settlement && typeof dossier.settlement === 'object') ? dossier.settlement : {};
+    const importedAt = new Date().toISOString();
+    const entry = {
+      name: `${dossier.name || src.name || 'Imported settlement'} (imported)`,
+      tier: dossier.tier || src.tier,
+      // Static clone of the public-safe projection. Strip cross-settlement refs
+      // (they would re-trigger supabaseSave's back-link wiring into the importer's
+      // unrelated saves) and scrub EVERY generation seed — top-level and the one
+      // embedded in settlement.config — so an imported copy can NEVER regenerate
+      // the unsanitized original via the deterministic engine.
+      settlement: {
+        ...src,
+        neighbourNetwork: [],
+        neighborRelationship: null,
+        interSettlementRelationships: [],
+        _seed: undefined,
+        // Strip the seed AND the religion embed bridge (Feature D / R1): an
+        // imported settlement must arrive DORMANT — no foreign pantheon. Without
+        // this, the preserved config would carry the source's primaryDeityRef +
+        // primaryDeitySnapshot and the imported copy would be non-dormant,
+        // resurrecting a deity the importer never authored.
+        config: src.config
+          ? (() => {
+              // eslint-disable-next-line no-unused-vars
+              const { _seed, primaryDeityRef, primaryDeitySnapshot, ...rest } = src.config;
+              return rest;
+            })()
+          : src.config,
+        importedFrom: { slug, sourceName: dossier.name || src.name || null, importedAt },
+      },
+      config: null,
+      seed: null,
+      aiData: {},
+      campaignState: { phase: 'draft', eventLog: [] },
+      versionHistory: [],
+    };
+    let newSaveId;
+    try {
+      newSaveId = await savesService.save(entry);
+    } catch (err) {
+      // Surface the save-limit trigger's message verbatim (server-authoritative).
+      throw new Error(err?.message || 'Import failed while saving the settlement.', { cause: err });
+    }
+    set(state => { state.savedSettlements.push({ ...entry, id: newSaveId, savedAt: Date.now() }); });
+    try { track(EVENTS.GALLERY_IMPORTED, { kind: 'settlement' }); } catch { /* analytics never affects import */ }
+    return newSaveId;
+  },
+
   renameCampaign: (id, name) =>
     set(state => {
       const c = findActiveCampaign(state.campaigns, id);
@@ -562,6 +636,18 @@ export const createCampaignSlice = (set, get) => {
       const campaign = findActiveCampaign(state.campaigns, id);
       state.activeCampaignId = id && campaign ? id : null;
     }),
+
+  /** Ask WorldMap to open on a specific workspace the next time it mounts with
+   *  an active campaign. One-shot; pass null to clear. */
+  requestMapWorkspace: (workspace) =>
+    set(state => { state.pendingMapWorkspace = workspace || null; }),
+
+  /** Read-and-clear the pending workspace request (one-shot). Returns it. */
+  consumeMapWorkspace: () => {
+    const w = get().pendingMapWorkspace;
+    if (w) set(state => { state.pendingMapWorkspace = null; });
+    return w;
+  },
 
   /**
    * Resolve the campaign's map state to a v2 object (migrating v1 on the fly).

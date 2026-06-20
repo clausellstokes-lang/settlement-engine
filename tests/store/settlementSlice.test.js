@@ -449,3 +449,61 @@ describe('settlementSlice — renameFaction (canonical powerStructure path)', ()
     expect(store.getState().settlement.powerStructure.factions[0].name).toBe('Council');
   });
 });
+
+// canonizeSavedSettlement is the library-row affordance: canonize a draft save
+// BY ID without first loading it as the active settlement. It must match the
+// dossier canonize() semantics (phase→canon, eventLog reset, canonizedAt stamp)
+// and keep the live slice in sync only when the save is the active one.
+describe('settlementSlice — canonizeSavedSettlement (library row)', () => {
+  let store;
+  const draftSave = (id) => ({
+    id,
+    name: `Save ${id}`,
+    settlement: fixture(),
+    campaignState: { phase: 'draft', eventLog: [{ id: 'draft.1', type: 'NOTE', timestamp: 't' }] },
+    timestamp: '2026-01-01T00:00:00.000Z',
+  });
+
+  beforeEach(() => {
+    store = makeStore();
+    store.setState(s => { s.savedSettlements = [draftSave('save-1'), draftSave('save-2')]; });
+  });
+
+  test('promotes a draft save to canon: phase, canonizedAt, cleared timeline', () => {
+    const ok = store.getState().canonizeSavedSettlement('save-1');
+    expect(ok).toBe(true);
+    const save = store.getState().savedSettlements.find(s => s.id === 'save-1');
+    expect(save.campaignState.phase).toBe('canon');
+    expect(typeof save.campaignState.canonizedAt).toBe('string');
+    expect(save.campaignState.eventLog).toEqual([]);
+    expect(typeof save.campaignState.editedAt).toBe('string');
+    // the sibling draft is untouched
+    expect(store.getState().savedSettlements.find(s => s.id === 'save-2').campaignState.phase).toBe('draft');
+  });
+
+  test('is a no-op (returns false) on an already-canon save', () => {
+    store.getState().canonizeSavedSettlement('save-1');
+    const at = store.getState().savedSettlements.find(s => s.id === 'save-1').campaignState.canonizedAt;
+    expect(store.getState().canonizeSavedSettlement('save-1')).toBe(false);
+    expect(store.getState().savedSettlements.find(s => s.id === 'save-1').campaignState.canonizedAt).toBe(at);
+  });
+
+  test('returns false for a missing id', () => {
+    expect(store.getState().canonizeSavedSettlement('does-not-exist')).toBe(false);
+  });
+
+  test('mirrors to the live slice when the canonized save is the active one', () => {
+    store.setState(s => { s.activeSaveId = 'save-1'; s.settlement = fixture(); s.phase = 'draft'; s.eventLog = [{ id: 'x' }]; });
+    store.getState().canonizeSavedSettlement('save-1');
+    const s = store.getState();
+    expect(s.phase).toBe('canon');
+    expect(s.eventLog).toEqual([]);
+    expect(typeof s.canonizedAt).toBe('string');
+  });
+
+  test('does NOT touch the live slice when a non-active save is canonized', () => {
+    store.setState(s => { s.activeSaveId = 'save-2'; s.phase = 'draft'; });
+    store.getState().canonizeSavedSettlement('save-1');
+    expect(store.getState().phase).toBe('draft'); // active save-2 unaffected
+  });
+});

@@ -17,15 +17,10 @@ import ChroniclePanel from './ChroniclePanel.jsx';
 // timeline, coherence checks. Each is hidden when not relevant
 // (Timeline only shows in canon, CoherencePanel only in draft).
 import PhaseBadge       from './settlement/PhaseBadge.jsx';
-import SystemStateBar   from './settlement/SystemStateBar.jsx';
-import EventComposer    from './settlement/EventComposer.jsx';
-import Timeline         from './settlement/Timeline.jsx';
-import PendingIntentions from './settlement/PendingIntentions.jsx';
-import CoherencePanel   from './settlement/CoherencePanel.jsx';
-// Wave 2 audit components: contextual AI, action rail, provenance,
-// export sheet picker. Each is small and additive — they replace
-// scattered chrome with consistent surfaces in the right rail.
-import ProvenanceBlock  from './settlement/ProvenanceBlock.jsx';
+// UX overhaul Phase 6 — the editor Workshop. Replaces the binary editMode
+// long-scroll with a right-rail of READ-then-WRITE collapsible cards
+// (the engine read surfaces are the free→premium teaser; write is premium).
+import Workshop         from './settlement/Workshop.jsx';
 import AIInlineCard     from './settlement/AIInlineCard.jsx';
 import ExportSheet      from './settlement/ExportSheet.jsx';
 // Modal that fires after pillar-tier KILL_NPC commits. Reads
@@ -303,11 +298,39 @@ export default function SettlementDetail({
     } catch { /* a validator fault must never break export */ }
     try {
       const liveStore = useStore.getState();
+      // UX Phase 7 — resolve the owning campaign worldState the SAME way the
+      // screen's Faith & War block does (useSettlementLiveWorld), and pass it as
+      // `campaign` so the PDF can render the live war/faith chapter.
+      //
+      // PREMIUM DATA GATE: only premium/founder/elevated exporters get the live
+      // world threaded. A free/anon export passes `campaign: null` ⇒ no
+      // worldState reaches buildViewModel ⇒ the liveWorld slice is null ⇒ the
+      // base (byte-identical) PDF renders. The gate lives here at the data layer.
+      const owningCampaign = (canEdit && saveId)
+        ? (liveStore.campaigns || []).find(
+            c => (c.settlementIds || []).map(String).includes(String(saveId)),
+          ) || null
+        : null;
+      const campaignArg = owningCampaign
+        ? {
+            settlementId: saveId,
+            worldState: owningCampaign.worldState || null,
+            regionalGraph: owningCampaign.regionalGraph || owningCampaign.worldState?.regionalGraph || null,
+            settlements: (liveStore.savedSettlements || []).filter(
+              sv => (owningCampaign.settlementIds || []).map(String).includes(String(sv?.id)),
+            ),
+            nameFor: (/** @type {any} */ id) => {
+              const hit = (liveStore.savedSettlements || []).find(sv => String(sv?.id) === String(id));
+              return hit?.name || hit?.settlement?.name || String(id);
+            },
+          }
+        : null;
       await generateSettlementPDF(detail.settlement, {
         aiSettlement, aiDailyLife, narrativeMode: useAi,
         systemState: liveStore.systemState,
         eventLog: liveStore.eventLog,
         phase: liveStore.phase,
+        campaign: campaignArg,
         variant,
         isFounder: liveStore.isFounder?.() ?? false,
       });
@@ -446,6 +469,7 @@ export default function SettlementDetail({
             campaignState={liveSaveEntry?.campaignState || detail.saveData?.campaignState}
             galleryShareNarrated={liveSaveEntry?.gallery_share_narrated}
             galleryShareDm={liveSaveEntry?.gallery_share_dm}
+            galleryImportable={liveSaveEntry?.gallery_importable}
           />
         </div>
       )}
@@ -455,7 +479,9 @@ export default function SettlementDetail({
           provenance, settlement editor, name editing, neighbour links, network
           effects, and the chronicle live behind this gate so View opens to a
           clean dossier. */}
-      {editMode && (<>
+      {/* The Apply-Saved-Config regenerate affordance stays edit-only — it
+          discards the current dossier for a fresh roll, a destructive write. */}
+      {editMode && (
       <div style={{display:'flex',gap:8,marginBottom:12,alignItems:'center',flexWrap:'wrap'}}>
         <Button variant="info" size="sm" onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}}>
           ↩ Apply Saved Configuration &amp; Regenerate
@@ -464,17 +490,10 @@ export default function SettlementDetail({
           Restores settings &amp; runs a fresh generation. The new settlement will differ from the saved one.
         </span>
       </div>
+      )}
 
-      {/* ── Campaign-state engine ─────────────────────────────────────────
-            SystemStateBar shows the four-dimension health snapshot,
-            AIInlineCard prompts for AI polish when not yet narrated,
-            CoherencePanel surfaces structural warnings in draft mode,
-            the Make Changes panel (EventComposer) applies in-world events
-            (writes to the timeline in canon mode; the Roster & Tune
-            correction editor it once hosted was removed — every change
-            goes through the event catalog now), Timeline displays the
-            canon log. */}
-      <SystemStateBar />
+      {/* AI polish prompt — edit-only (it triggers a narrative write). */}
+      {editMode && (
       <AIInlineCard
         settlement={detail.settlement}
         onPolish={() => {
@@ -495,21 +514,28 @@ export default function SettlementDetail({
           }, { tier: live.auth?.tier });
         }}
       />
-      <CoherencePanel />
-      <EventComposer />
-      <PendingIntentions />
-      <Timeline />
+      )}
+
+      {/* ── The Workshop ──────────────────────────────────────────────────────
+            The layered right-rail (UX overhaul Phase 6). Replaces the binary
+            editMode long-scroll: each card READS in view mode (the free→premium
+            teaser — the Phase 2 dossier read components) and becomes EDITABLE in
+            edit mode (write controls premium). The 3 subsystem gate toggles live
+            in the Faith/War cards, each byte-identical when off. Mounted at all
+            times so a free user sees the engine read surfaces. */}
+      <Workshop
+        settlement={detail.settlement}
+        saveId={detail?.saveData?.id || detail?.id}
+        save={detail.saveData || detail}
+        editMode={editMode}
+        canEdit={canEdit}
+      />
+
+      {editMode && (<>
       <RegionalImpactInbox
         saveId={detail?.saveData?.id || detail?.id}
         onApplied={handleRegionalImpactApplied}
       />
-
-      {/* Provenance block. The "Next best action" rail was removed: its
-          Canonize / Polish with AI / Export actions are now in the always-
-          visible dossier header, so the rail was pure duplication. */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 12, marginBottom: 12 }}>
-        <ProvenanceBlock save={detail.saveData || detail} />
-      </div>
 
       {/* Successor prompt — modal that appears after a pillar-tier
           KILL_NPC commits. Reads `pendingSuccession` off the slice;
@@ -517,20 +543,6 @@ export default function SettlementDetail({
           is set inside applyEvent() in the slice, so the modal mounts
           here at the dossier level rather than at App-root. */}
       <SuccessorPrompt />
-
-      {/* PDF export variant picker — opened by the Export Dossier button
-          in the header. Closed by Cancel or successful export. */}
-      <ExportSheet
-        open={exportSheetOpen}
-        exporting={exporting}
-        onClose={() => setExportSheetOpen(false)}
-        onExport={handlePdfExport}
-      />
-      {pdfError && (
-        <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
-          {pdfError}
-        </div>
-      )}
 
       {/* Neighbour links — moved out of the always-visible header into its own
           card here, under Edit Dossier. The toggle reveals the linking picker;
@@ -563,13 +575,8 @@ export default function SettlementDetail({
       {/* ── Network Effects (cascading modifiers) ─────────────────────────── */}
       {detail?.saveData?.id && <NetworkEffectsPanel settlementId={detail.saveData.id} saves={saves} relColors={REL_COLORS} />}
 
-      {/* The Settlement Editor (catalog roster + Tune priorities) now lives
-          inside the Make Changes panel above, embedded below the change form.
-          It is no longer a separate panel — institution add/remove is owned by
-          that panel's ADD_INSTITUTION / REMOVE_INSTITUTION events. */}
-
-      {/* ── Full settlement output ──────────────────────────────────────────── */}
-      {/* ── Edit Names ─────────────────────────────────────────────────────── */}
+      {/* ── Edit Names — NPC & faction renames (the settlement's OWN name is now
+            renamed inline on the dossier header, the single consolidated control). ── */}
       <SettlementDetailEditNames
         settlement={detail.settlement}
         editNamesOpen={editNamesOpen}
@@ -588,35 +595,36 @@ export default function SettlementDetail({
       )}
       </>)}
 
-      {!editMode && (
-        <>
-          <ExportSheet
-            open={exportSheetOpen}
-            exporting={exporting}
-            onClose={() => setExportSheetOpen(false)}
-            onExport={handlePdfExport}
-          />
-          {pdfError && (
-            <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
-              {pdfError}
-            </div>
-          )}
-          {/* SystemStateBar (the raw "Settlement State" engine snapshot),
-              the Provenance card (seed / timestamps / campaign link), the
-              Narrative Chronicles log, and the Network Effects panel are
-              edit-only — they render inside the editMode block above. View
-              mode opens to the polished dossier (OutputContainer) with no
-              raw state or bookkeeping. */}
-        </>
+      {/* PDF export variant picker — opened by the Export Dossier button in the
+          header, available in both view and edit mode. */}
+      <ExportSheet
+        open={exportSheetOpen}
+        exporting={exporting}
+        onClose={() => setExportSheetOpen(false)}
+        onExport={handlePdfExport}
+      />
+      {pdfError && (
+        <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
+          {pdfError}
+        </div>
       )}
 
       {detail.settlement&&<div style={{marginBottom:12}}>
         <DetailErrorBoundary>
           <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
             {/* P139 — cap the dossier body to the shared page width (the
-                detail toolbar above stays full-width). */}
+                detail toolbar above stays full-width). The settlement name is
+                inline-editable on the dossier header in edit mode (the single
+                consolidated rename control); the commit routes through the
+                parent's applyRename('settlement', …). */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
-              <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />
+              <OutputContainer
+                settlement={detail.settlement}
+                readOnly
+                saveId={saveId}
+                allowRename={editMode && canEdit && !isCanonLocked}
+                onRenameSettlement={(newName) => handleApplyRename('settlement', saveId, detail.settlement.name, newName)}
+              />
             </div>
           </Suspense>
         </DetailErrorBoundary>

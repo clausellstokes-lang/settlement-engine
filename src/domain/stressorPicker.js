@@ -46,6 +46,14 @@ export const GEN_TO_PULSE_TYPE = Object.freeze({
   mass_migration: 'mass_migration',
 });
 
+// GEN_TO_PULSE_TYPE above is the SINGLE SOURCE of the gen↔pulse stressor vocabulary.
+// Its inverse (pulse/roaming type → generation stress key) is built mechanically in
+// domain/display/warStatusVocab.js as PULSE_TO_GEN — never re-typed, so the two
+// vocabularies cannot drift. warStatusVocab also owns resolveMilitaryStress, the
+// shared "is this settlement at war?" resolver both war banners (the PDF viewModel
+// and DefenseTab) consume. We do NOT re-export those here: warStatusVocab imports
+// this map at module-init, so re-importing it back would form an init-time cycle.
+
 /** The roaming type an authored stressor key maps to (identity for campaign-only types). */
 export function pulseTypeForStressorKey(key) {
   if (!key) return null;

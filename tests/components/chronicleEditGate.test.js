@@ -5,17 +5,20 @@
  *
  * SettlementDetail historically rendered ChroniclePanel twice: once
  * inside the `{editMode && (<>…</>)}` chrome block and once inside the
- * `{!editMode && (…)}` read view. The read-only site was removed
- * (2026-06-11); these tests pin that removal structurally, in the same
- * source-level style as provenanceEditGate.test.js (mounting the full
- * SettlementDetail would require mocking the entire store).
+ * `{!editMode && (…)}` read view. The read-only site was removed; the
+ * Workshop reorg (UX overhaul Phase 6) then dropped the `{!editMode && (`
+ * read gate entirely (the read surfaces moved into the always-mounted
+ * Workshop rail). ChroniclePanel + NetworkEffectsPanel remain EDIT-ONLY
+ * chrome, inside the one `{editMode && (<>…</>)}` block. These tests pin
+ * that structurally, in the same source-level style as
+ * provenanceEditGate.test.js (mounting the full SettlementDetail would
+ * require mocking the entire store).
  *
  * Markers (each unique in SettlementDetail.jsx at the relevant range):
- *   • `{editMode && (<>`  — edit-mode chrome gate open
- *   • `</>)}`             — first occurrence after the open = gate close
- *                           (an earlier `</>)}` exists in the header button
- *                           row, so the search MUST start at the gate open)
- *   • `{!editMode && (`   — read-only View gate open
+ *   • `{editMode && (<>`  — edit-mode chrome gate open (last occurrence —
+ *                           there are earlier single-child `{editMode && (`
+ *                           blocks, so we anchor on the fragment form)
+ *   • `</>)}`             — gate close (first occurrence after the open)
  *
  * Also pins the owner rename (2026-06-11): the panel's user-facing copy
  * says "Narrative Chronicles", not bare "Chronicle".
@@ -35,7 +38,6 @@ const renderSite = () => /<ChroniclePanel\b/g;
 
 const EDIT_GATE_OPEN = '{editMode && (<>';
 const EDIT_GATE_CLOSE = '</>)}';
-const READ_GATE_OPEN = '{!editMode && (';
 
 function walk(dir) {
   return readdirSync(dir).flatMap(entry => {
@@ -70,16 +72,16 @@ describe('ChroniclePanel is exclusively Edit Dossier chrome', () => {
     expect(siteIdx).toBeLessThan(editClose);
   });
 
-  test('the read-only View block contains no ChroniclePanel', () => {
+  test('nothing after the editMode gate closes renders ChroniclePanel', () => {
     const source = readFileSync(DETAIL_PATH, 'utf8');
 
-    const readOpen = source.indexOf(READ_GATE_OPEN);
-    expect(readOpen).toBeGreaterThan(-1);
+    const editOpen = source.indexOf(EDIT_GATE_OPEN);
+    const editClose = source.indexOf(EDIT_GATE_CLOSE, editOpen);
+    expect(editClose).toBeGreaterThan(editOpen);
 
-    // The only render site is inside the edit gate, which closes before
-    // the read-only gate opens — so everything from the read gate to EOF
-    // must be ChroniclePanel-free.
-    expect(source.slice(readOpen)).not.toMatch(renderSite());
+    // Everything past the gate close (the always-mounted Workshop + export
+    // chrome + the read-only OutputContainer) must be ChroniclePanel-free.
+    expect(source.slice(editClose + EDIT_GATE_CLOSE.length)).not.toMatch(renderSite());
   });
 });
 
@@ -124,11 +126,12 @@ describe('NetworkEffectsPanel is exclusively Edit Dossier chrome (owner, 2026-06
     expect(siteIdx).toBeLessThan(editClose);
   });
 
-  test('the read-only View block contains no NetworkEffectsPanel', () => {
+  test('nothing after the editMode gate closes renders NetworkEffectsPanel', () => {
     const source = readFileSync(DETAIL_PATH, 'utf8');
 
-    const readOpen = source.indexOf(READ_GATE_OPEN);
-    expect(readOpen).toBeGreaterThan(-1);
-    expect(source.slice(readOpen)).not.toMatch(networkSite());
+    const editOpen = source.indexOf(EDIT_GATE_OPEN);
+    const editClose = source.indexOf(EDIT_GATE_CLOSE, editOpen);
+    expect(editClose).toBeGreaterThan(editOpen);
+    expect(source.slice(editClose + EDIT_GATE_CLOSE.length)).not.toMatch(networkSite());
   });
 });

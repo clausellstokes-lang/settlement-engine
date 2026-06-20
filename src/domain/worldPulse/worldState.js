@@ -1,5 +1,6 @@
 import { normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
+import { deepClone } from '../clone.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 1;
 
@@ -45,6 +46,42 @@ function cloneObject(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? { ...value } : {};
 }
 
+// cloneObject is SHALLOW. Nested simulation ledgers (dispositionStats, deployments,
+// and later pantheon) are read inside the per-tick snapshot and mutated across
+// ticks, so a shallow copy would let a snapshot alias live state and corrupt
+// determinism. These ledgers route through deepClone (the sole sanctioned clone
+// seam) instead. Non-objects normalize to an empty ledger.
+function deepCloneLedger(value) {
+  return value && typeof value === 'object' && !Array.isArray(value) ? deepClone(value) : {};
+}
+
+// CONDITIONAL ledger clone (R4 pantheon). UNLIKE the additive ledgers above, the
+// pantheon is CONDITIONALLY MATERIALIZED: it must be ABSENT from worldState while
+// religion is dormant so a legacy/deity-free campaign stays byte-identical under
+// the dormancy oracle (which treats an absent key as `{}`). So this returns
+// `undefined` (key omitted by the conditional spread below) when the value is
+// absent or empty, and a DEEP clone of a present, non-empty pantheon otherwise —
+// never the `{}` default deepCloneLedger materializes unconditionally.
+function deepCloneConditionalLedger(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
+  if (Object.keys(value).length === 0) return undefined;
+  return deepClone(value);
+}
+
+// Forward-compatible worldState migration chain. Empty today (schemaVersion stays
+// 1; the new ledgers are ADDITIVE and need no migration — an absent key normalizes
+// to its empty default). Modelled on settlementMigrations: each entry bumps a
+// breaking shape. The first future BREAKING change registers its step here so the
+// upgrade path is explicit and ordered, never an ad-hoc inline coercion.
+const WORLD_STATE_MIGRATIONS = Object.freeze([
+  // { to: 2, migrate: (raw) => ({ ...raw, /* breaking reshape */ }) },
+]);
+
+export function runWorldStateMigrations(raw = {}) {
+  const input = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
+  return WORLD_STATE_MIGRATIONS.reduce((state, step) => step.migrate(state), input);
+}
+
 export function createDefaultWorldState(campaign = {}) {
   const seedPart = campaign.id || campaign.name || 'campaign';
   return {
@@ -70,15 +107,42 @@ export function createDefaultWorldState(campaign = {}) {
     // Campaign-clock: player events/edits authored on clock-bound member
     // settlements queue here and resolve simultaneously at the next pulse tick.
     pendingEvents: [],
+    // Additive simulation ledgers (F1, geopolitical layer). Empty on a fresh
+    // world; populated by later phases (dispositionStats: cross-settlement
+    // win/loss disposition memory; deployments: active army records;
+    // tradeWarState: per-prize primary-supplier crown + flip cooldown;
+    // warExhaustion: Z2a — the NON-REVERTING per-home war-exhaustion scar that
+    // ratchets up with sustained deployment and decays only slowly, closing the
+    // homeostasis loop). A legacy keyless save normalizes equal to these empties —
+    // byte-neutral under the dormancy oracle. `pantheon` is intentionally NOT here
+    // (conditional, R4).
+    dispositionStats: {},
+    deployments: {},
+    tradeWarState: {},
+    warExhaustion: {},
   };
 }
 
-export function ensureWorldState(raw = {}, campaign = {}) {
+export function ensureWorldState(rawInput = {}, campaign = {}) {
+  const raw = runWorldStateMigrations(rawInput);
   const base = createDefaultWorldState(campaign);
   const calendar = raw?.calendar && typeof raw.calendar === 'object' ? raw.calendar : {};
+  // R4 pantheon — the SHALLOW `...cloneObject(raw)` spread would otherwise carry a
+  // present-but-EMPTY `pantheon:{}` through to the result (breaking dormancy). Strip
+  // it from the shallow spread; the conditional deep-clone below is the SOLE source
+  // of the key — materialized only when non-empty. B1 `warPosture` is CONDITIONAL the
+  // same way: a no-war campaign carries NO warPosture key at all (byte-neutral under
+  // the dormancy oracle), so it is stripped here and re-added conditionally below.
+  const shallowRaw = cloneObject(raw);
+  if ('pantheon' in shallowRaw) delete shallowRaw.pantheon;
+  if ('warPosture' in shallowRaw) delete shallowRaw.warPosture;
+  if ('occupations' in shallowRaw) delete shallowRaw.occupations;
+  const clonedPantheon = deepCloneConditionalLedger(raw?.pantheon);
+  const clonedWarPosture = deepCloneConditionalLedger(raw?.warPosture);
+  const clonedOccupations = deepCloneConditionalLedger(raw?.occupations);
   return {
     ...base,
-    ...cloneObject(raw),
+    ...shallowRaw,
     schemaVersion: WORLD_STATE_SCHEMA_VERSION,
     canonizedAt: raw?.canonizedAt || null,
     tick: Math.max(0, Math.floor(finite(raw?.tick, 0))),
@@ -101,6 +165,33 @@ export function ensureWorldState(raw = {}, campaign = {}) {
     pulseHistory: cloneArray(raw?.pulseHistory).slice(-MAX_HISTORY),
     settlementTickStates: cloneObject(raw?.settlementTickStates),
     pendingEvents: cloneArray(raw?.pendingEvents).slice(-MAX_PENDING),
+    // DEEP-cloned (not the shallow `...cloneObject(raw)` spread above) so a
+    // pre-tick snapshot never aliases live ledger state across ticks.
+    dispositionStats: deepCloneLedger(raw?.dispositionStats),
+    deployments: deepCloneLedger(raw?.deployments),
+    tradeWarState: deepCloneLedger(raw?.tradeWarState),
+    warExhaustion: deepCloneLedger(raw?.warExhaustion),
+    // R4 pantheon — CONDITIONAL materialization. Stripped from the shallow spread
+    // above; re-added here as a DEEP clone ONLY when present and non-empty, so a
+    // dormant/legacy world carries NO pantheon key (byte-identical under the
+    // dormancy oracle), while an active world's pantheon never aliases live state
+    // across ticks.
+    ...(clonedPantheon !== undefined ? { pantheon: clonedPantheon } : {}),
+    // B1 warPosture — CONDITIONAL materialization, identical discipline to pantheon:
+    // the per-settlement mobilization posture ledger ({ id -> { state, progress,
+    // sinceTick, covert } }). ABSENT while no settlement has left peace (a no-war /
+    // layer-off campaign carries NO warPosture key ⇒ byte-identical under the
+    // dormancy oracle), DEEP-cloned when present so a pre-tick snapshot never aliases
+    // live posture state across ticks.
+    ...(clonedWarPosture !== undefined ? { warPosture: clonedWarPosture } : {}),
+    // B3 occupations — CONDITIONAL materialization, identical discipline to pantheon/
+    // warPosture: the per-OCCUPIED-settlement occupation-state ledger ({ occupiedId ->
+    // { occupierId, state, sinceTick, stateHeld, resistance, benefitYield, lastTick } }).
+    // ABSENT until the first conquest creates an occupation (a no-war / layer-off
+    // campaign carries NO occupations key ⇒ byte-identical under the dormancy oracle),
+    // DEEP-cloned when present so a pre-tick snapshot never aliases live occupation state
+    // across ticks (read-last/write-next).
+    ...(clonedOccupations !== undefined ? { occupations: clonedOccupations } : {}),
   };
 }
 

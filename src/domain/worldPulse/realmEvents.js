@@ -98,6 +98,37 @@ const REALM_LABELS = Object.freeze({
 
 const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 
+// War-shaped stressor types whose realm membership must count the BELLIGERENTS
+// (instigators + supporters + the besieged), not just the besieged victim. A
+// 4-attacker-vs-1 coalition siege touches ONE victim — so the old victim-only
+// `affectedSettlementIds` count never crossed the realm threshold. The coalition
+// (the besiegers) comes from the regional graph's confirmed war_front channels
+// INTO each affected victim; the union of besiegers + victims is the war's true
+// participant set.
+const WAR_SHAPED_TYPES = new Set(['siege', 'wartime', 'occupation']);
+
+/**
+ * The confirmed war_front SOURCES (besiegers) pointing INTO any of the given
+ * victim ids, from a regional graph. Codepoint-sorted, deduped. Tolerates an
+ * absent graph / channels (returns []).
+ * @param {any} regionalGraph
+ * @param {Set<string>} victimIds
+ * @returns {string[]}
+ */
+function besiegersInto(regionalGraph, victimIds) {
+  const channels = Array.isArray(regionalGraph?.channels) ? regionalGraph.channels : [];
+  /** @type {Set<string>} */
+  const out = new Set();
+  for (const channel of channels) {
+    if (channel?.type !== 'war_front') continue;
+    if (channel.status !== 'confirmed') continue;
+    if (channel.from == null || channel.to == null) continue;
+    if (!victimIds.has(String(channel.to))) continue;
+    out.add(String(channel.from));
+  }
+  return [...out].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+}
+
 /**
  * Detect named cross-type stressor combinations per settlement.
  * Pure + deterministic; reads worldState.stressors (+ factionStates for the
@@ -183,14 +214,130 @@ export function synthesizeCompoundSignatures({ worldState, tick = 0, now = null 
   return entries;
 }
 
+// ── Pantheon realm arcs (R4) ────────────────────────────────────────────────
+// A deity crossing INTO 'major' is the campaign-epic payoff — "The Ascendancy of
+// X". A deity falling TO 'cult' (or losing its last seat — extinction) is "The
+// Twilight of X". A minor↔minor drift is not realm news. These are synthesized
+// from the per-tick tier CHANGES the pantheon ratchet emits, NOT re-derived from
+// the ledger (so an Ascendancy fires ONCE, on the crossing tick, never re-emitted
+// every tick the deity holds major). Gated by religion activity at the call site.
+
+/**
+ * A human display name for a deity ref, given the pre-tick snapshot to resolve it.
+ * @param {any} snapshot
+ * @param {any} deityId
+ * @returns {string}
+ */
+function deityNameForRef(snapshot, deityId) {
+  const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
+  for (const item of items) {
+    const deity = item?.settlement?.config?.primaryDeitySnapshot;
+    if (!deity) continue;
+    const ref = deity._deityRef || deity.primaryDeityRef || (deity.name ? `deity:${deity.name}` : null);
+    if (String(ref) === String(deityId) && deity.name) return String(deity.name);
+  }
+  // Fall back to a readable tail of the ref (e.g. 'custom:lu_vael' → 'Vael').
+  const tail = String(deityId).split(/[:_]/).filter(Boolean).pop() || String(deityId);
+  return tail.charAt(0).toUpperCase() + tail.slice(1);
+}
+
+/**
+ * Synthesize "The Ascendancy of X" / "The Twilight of X" realm arcs from this
+ * tick's pantheon tier changes. An ascendancy fires when a deity reaches 'major';
+ * a twilight when a deity falls TO 'cult'. Codepoint-sorted by deity id (stable).
+ *
+ * @param {Object} [args]
+ * @param {Array<{deityId:string, from:string, to:string}>} [args.changes]
+ * @param {any} [args.snapshot]  the pre-tick snapshot, to resolve deity names.
+ * @param {number} [args.tick]
+ * @param {(string|null)} [args.now]
+ * @returns {Array<Object>} Wizard-News-shaped realm entries (may be empty)
+ */
+export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0, now = null } = {}) {
+  if (!Array.isArray(changes) || !changes.length) return [];
+  const entries = [];
+  const ordered = [...changes].sort((a, b) => (String(a.deityId) < String(b.deityId) ? -1 : String(a.deityId) > String(b.deityId) ? 1 : 0));
+  for (const change of ordered) {
+    const ascendancy = change.to === 'major' && change.from !== 'major';
+    const twilight = change.to === 'cult' && change.from !== 'cult';
+    if (!ascendancy && !twilight) continue;
+    const name = deityNameForRef(snapshot, change.deityId);
+    if (ascendancy) {
+      entries.push({
+        id: `wizard_news.${tick}.pantheon.ascendancy.${stablePantheonPart(change.deityId)}`,
+        tick,
+        scope: 'realm',
+        significance: 'major',
+        score: 86,
+        headline: `The Ascendancy of ${name}`,
+        summary: `${name} has risen to a major power in the realm's pantheon — temples multiply, rivals bend the knee, and the faithful walk the roads in numbers.`,
+        kind: 'pantheon',
+        impactKind: 'pantheon_ascendancy',
+        channelType: null,
+        severity: 0.8,
+        settlementIds: [],
+        impactIds: [],
+        channelIds: [],
+        reasons: [
+          `${name} crossed into the major tier of the pantheon.`,
+          'A decisive lead in seats held has been sustained past the hysteresis dwell.',
+        ],
+        tags: ['world_pulse', 'pantheon', 'ascendancy', String(change.deityId)],
+        createdAt: now,
+      });
+    } else {
+      entries.push({
+        id: `wizard_news.${tick}.pantheon.twilight.${stablePantheonPart(change.deityId)}`,
+        tick,
+        scope: 'realm',
+        significance: 'major',
+        score: 84,
+        headline: `The Twilight of ${name}`,
+        summary: `${name} has fallen to a cult — abandoned altars, scattered clergy, and a faith remembered more than practised.`,
+        kind: 'pantheon',
+        impactKind: 'pantheon_twilight',
+        channelType: null,
+        severity: 0.78,
+        settlementIds: [],
+        impactIds: [],
+        channelIds: [],
+        reasons: [
+          `${name} fell to the cult tier of the pantheon.`,
+          'Its seats held collapsed past the hysteresis dwell.',
+        ],
+        tags: ['world_pulse', 'pantheon', 'twilight', String(change.deityId)],
+        createdAt: now,
+      });
+    }
+  }
+  return entries;
+}
+
+/**
+ * A filesystem-safe, codepoint-stable id part for a deity ref.
+ * @param {any} deityId
+ * @returns {string}
+ */
+function stablePantheonPart(deityId) {
+  return String(deityId || 'deity')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .slice(0, 60) || 'deity';
+}
+
 /**
  * @param {Object} [args]
  * @param {any} [args.worldState]  post-tick world state (reads `stressors`)
  * @param {number} [args.tick]
  * @param {(string|null)} [args.now]
+ * @param {any} [args.regionalGraph]  the live regional graph — its confirmed
+ *   war_front channels name the besieging COALITION for war-shaped stressors, so
+ *   "The War" counts instigators + supporters, not just the besieged victim
+ *   (§S4). Absent ⇒ war-shaped stressors fall back to victim-count (legacy).
  * @returns {Array<Object>} Wizard-News-shaped realm entries (may be empty)
  */
-export function synthesizeRealmEvents({ worldState, tick = 0, now = null } = {}) {
+export function synthesizeRealmEvents({ worldState, tick = 0, now = null, regionalGraph = null } = {}) {
   const compoundEntries = synthesizeCompoundSignatures({ worldState, tick, now });
   const stressors = worldState?.stressors || [];
   const byType = new Map();
@@ -199,6 +346,16 @@ export function synthesizeRealmEvents({ worldState, tick = 0, now = null } = {})
     const set = byType.get(s.type) || new Set();
     for (const id of s.affectedSettlementIds || []) set.add(String(id));
     byType.set(s.type, set);
+  }
+  // §S4 fix — count the COALITION for war-shaped types. The membership the realm
+  // threshold tests is the union of the besieged victims AND the war_front
+  // besiegers into them (instigators + supporters). This is what makes a
+  // 4-vs-1 coalition siege promote to "The War" — the old victim-only count
+  // saw a single besieged settlement and never crossed the threshold.
+  for (const type of WAR_SHAPED_TYPES) {
+    const victims = byType.get(type);
+    if (!victims) continue;
+    for (const besieger of besiegersInto(regionalGraph, victims)) victims.add(besieger);
   }
 
   const entries = [];

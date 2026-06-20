@@ -180,6 +180,14 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     // to confirm a path back to a fresh state exists.
     if (await newBtn.isVisible().catch(() => false)) {
       await newBtn.click();
+      // UX overhaul added an unsaved-draft guard: clicking "New" on an
+      // anonymous, unsaved (randomly rolled) draft opens a "Leave this
+      // settlement?" confirm so the result isn't lost silently. Discard it
+      // to actually start fresh; if the guard didn't fire, proceed anyway.
+      const discardNew = page.getByRole('button', { name: /Discard and start new/i });
+      if (await discardNew.isVisible().catch(() => false)) {
+        await discardNew.click();
+      }
       await page.waitForTimeout(500);
       // Fresh state: either hero re-mounts OR wizard mode picker shows.
       await expect.poll(async () => {

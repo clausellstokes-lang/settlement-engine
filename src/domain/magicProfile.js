@@ -64,6 +64,40 @@ function institutionsByPattern(s, pattern) {
   return inst.filter(i => pattern.test(String(i?.name || '')));
 }
 
+// ── Z2b: dominant-deity ⇄ magic regulation (gated follow-up) ─────────────────
+// A theocracy regulates magic. When a settlement carries an embedded major-deity
+// snapshot (the same config.primaryDeitySnapshot the religion layer activates on),
+// a dominant orthodox god shifts magic LEGALITY tighter and RELIGIOUS ACCEPTANCE more
+// hostile — a WARLIKE or EVIL major god harder still. Absent deity ⇒ no term ⇒ the
+// magic profile is byte-identical to legacy (a deity-free world reads NONE of this).
+// Pure: reads the self-contained snapshot, never customContent. Bounded to one band
+// step so the deity nudges, never overrides, the faction-derived baseline.
+
+/** The embedded major-deity snapshot, or null. ONLY a MAJOR god regulates a realm's
+ *  magic — a minor god or fringe cult lacks the institutional reach.
+ *  @param {any} settlement
+ *  @returns {any} */
+function dominantDeityOf(settlement) {
+  const deity = settlement?.config?.primaryDeitySnapshot;
+  if (!deity || deity.rankAxis !== 'major') return null;
+  return deity;
+}
+
+/** True when the major deity is the kind that REGULATES magic hard — a warlike or
+ *  evil orthodoxy polices arcane power as a rival authority. A good/neutral peacelike
+ *  major god still tightens legality one notch (the theocracy term) but is not hostile.
+ *  @param {any} deity
+ *  @returns {boolean} */
+export function deityIsRegulatory(deity) {
+  return deity.temperamentAxis === 'warlike' || deity.alignmentAxis === 'evil';
+}
+
+// The number of band-steps a MAJOR deity tightens magic legality by: one for any
+// major god (the theocracy term), a second for a WARLIKE/EVIL orthodoxy that
+// polices arcane power as a rival authority. Exported as the single source the
+// shared deityEffects coupling reads (proven equal to deriveLegality's inline use).
+export const DEITY_MAGIC_LEGALITY_STEPS = Object.freeze({ regulatory: 2, major: 1 });
+
 // ── Derivers ─────────────────────────────────────────────────────────────
 
 function deriveAvailability(settlement, contributors) {
@@ -109,6 +143,21 @@ function deriveLegality(settlement, profiles, contributors) {
       source: arcane.id,
       effect: 'normalizes',
       reason: `${arcane.name} (power ${arcane.power}) normalizes arcane practice.`,
+    });
+  }
+
+  // Z2b — a dominant major deity regulates magic (a theocracy polices arcane power).
+  // One band tighter for any major god; a WARLIKE/EVIL orthodoxy tightens a second
+  // step (it treats free magic as a rival authority). Gated on the embedded deity
+  // snapshot ⇒ a deity-free settlement is byte-identical.
+  const deity = dominantDeityOf(settlement);
+  if (deity) {
+    const steps = deityIsRegulatory(deity) ? DEITY_MAGIC_LEGALITY_STEPS.regulatory : DEITY_MAGIC_LEGALITY_STEPS.major;
+    legality = downBand(LEGALITY_BANDS, legality, steps);
+    contributors.push({
+      source: deity._deityRef || 'primaryDeity',
+      effect: 'theocratic_regulation',
+      reason: `${deity.name || 'The patron deity'} (major${deityIsRegulatory(deity) ? `, ${deity.temperamentAxis === 'warlike' ? 'warlike' : 'evil'}` : ''}) regulates arcane practice as a rival authority.`,
     });
   }
   return legality;
@@ -170,7 +219,28 @@ function deriveRisk(settlement, causal, contributors) {
 function deriveReligiousAcceptance(settlement, profiles, contributors) {
   const religious = profiles.find(p => p.archetype === 'religious');
   const arcane = profiles.find(p => p.archetype === 'arcane');
+  const deity = dominantDeityOf(settlement);
+
+  // Z2b — a dominant WARLIKE/EVIL major deity forces OPEN hostility toward magic
+  // regardless of the faction balance (the orthodoxy treats arcane power as a rival
+  // it must suppress). This OVERRIDES the faction-derived band. A non-regulatory
+  // major god nudges acceptance one notch warier below. Gated on the deity snapshot.
+  if (deity && deityIsRegulatory(deity)) {
+    contributors.push({
+      source: deity._deityRef || 'primaryDeity',
+      effect: 'hostile',
+      reason: `${deity.name || 'The patron deity'} (major, ${deity.temperamentAxis === 'warlike' ? 'warlike' : 'evil'}) brooks no rival to its authority — magic is openly opposed.`,
+    });
+    return 'hostile';
+  }
+
   if (!religious) {
+    // A benevolent major deity with no formal religious faction still makes the realm
+    // wary of magic (the orthodoxy exists in the snapshot even without a power bloc).
+    if (deity) {
+      contributors.push({ source: deity._deityRef || 'primaryDeity', effect: 'wary', reason: `${deity.name || 'The patron deity'} (major) lends the realm a wary orthodoxy toward arcane practice.` });
+      return 'wary';
+    }
     contributors.push({ source: 'powerStructure', effect: 'no_religious', reason: 'No religious faction — acceptance defaults to indifferent.' });
     return 'indifferent';
   }
@@ -181,6 +251,11 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
     return 'hostile';
   }
   if (arcPower > relPower + 20) {
+    // A benevolent major deity tempers a syncretic balance into wary coexistence.
+    if (deity) {
+      contributors.push({ source: deity._deityRef || 'primaryDeity', effect: 'wary', reason: `${deity.name || 'The patron deity'} (major) keeps the realm wary even where arcane power runs strong.` });
+      return 'wary';
+    }
     contributors.push({ source: arcane?.id || 'powerStructure', effect: 'syncretic', reason: 'Arcane power dwarfs religious — magic woven into ritual.' });
     return 'syncretic';
   }

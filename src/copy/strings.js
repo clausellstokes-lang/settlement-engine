@@ -129,6 +129,29 @@ export const COPY = {
         headline: 'World Map unlocks with Cartographer.',
         body:     'Place settlements, draw routes, surface supply-chain stress. Your campaigns become a place.',
       },
+      // ── UX Phase 4 — the Realm hub locked-state teaser ─────────────────
+      // Fired from the Realm Dashboard when an anon/free user opens the
+      // Realm. Names the actual premium product: the living simulation.
+      map_realm_teaser: {
+        headline: 'The Realm is where your world comes alive.',
+        body:     'Advance time and watch wars ignite and end, faiths rise, and the chronicle write itself. Cartographer runs the living simulation across your whole campaign.',
+      },
+      // ── UX Phase 9 — simulation-intent moments ─────────────────────────
+      // Fired when a non-premium user reaches toward a specific simulation
+      // system. Each NAMES that system (never size — size is free) and routes
+      // to the canonical "What the Realm unlocks" surface.
+      first_advance_attempt: {
+        headline: 'Advance Time runs the region forward.',
+        body:     'Push the world a month and the whole region responds — wars, faiths, trade, population — each change derived, not rolled. Cartographer unlocks the living simulation.',
+      },
+      war_layer_curiosity: {
+        headline: 'The war layer ends its own wars.',
+        body:     'Sieges form, coalitions gather, settlements fall — and war-exhaustion drives the realm back to peace. Cartographer turns it on; it stays off by default until you do.',
+      },
+      pantheon_preview: {
+        headline: 'The pantheon is alive.',
+        body:     'Deities contest converts, win seats, and rise from cult to major across your region. Cartographer unlocks the living pantheon, opt-in and reversible.',
+      },
       weekly_user: {
         headline: 'Three sessions in two weeks.',
         body:     'You’re using SettlementForge weekly. Cartographer pays for itself in two.',

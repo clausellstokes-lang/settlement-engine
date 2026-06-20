@@ -21,6 +21,8 @@ const LayersPanel     = lazy(() => import('./LayersPanel.jsx'));
 const SettlementPalette = lazy(() => import('./SettlementPalette.jsx'));
 const WizardNewsPanel = lazy(() => import('./WizardNewsPanel.jsx'));
 const WorldPulsePanel = lazy(() => import('./WorldPulsePanel.jsx'));
+const PantheonPanel   = lazy(() => import('./PantheonPanel.jsx'));
+const MapLegend       = lazy(() => import('./MapLegend.jsx'));
 
 // Cachebuster bumped whenever public/map/* changes so browsers don't serve
 // a stale iframe bundle (e.g. old drop handler missing the settlementforge
@@ -30,6 +32,7 @@ const FMG_URL = '/map/index.html?v=sfdrop12';
 export function WorldMapStage({
   showingWizardNews,
   showingWorldPulse,
+  showingPantheon,
   activeCampaign,
   activeSaves,
   placements,
@@ -60,6 +63,12 @@ export function WorldMapStage({
         <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
           <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
             <WorldPulsePanel campaign={activeCampaign} />
+          </Suspense>
+        </div>
+      ) : showingPantheon ? (
+        <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
+            <PantheonPanel campaign={activeCampaign} />
           </Suspense>
         </div>
       ) : (
@@ -141,6 +150,12 @@ export function WorldMapStage({
               when no hover-id is set or when click-selection wins. */}
           <Suspense fallback={null}>
             <QuickInspector />
+          </Suspense>
+          {/* UX Phase 5 — persistent collapsible legend (channel/relationship colors,
+              war glyphs, impact-magnitude scale). Default-collapsed; bottom-left so it
+              never collides with the right-dock Realm Inspector. */}
+          <Suspense fallback={null}>
+            <MapLegend />
           </Suspense>
           {!mapReady && !imageMode && (
             <div style={{

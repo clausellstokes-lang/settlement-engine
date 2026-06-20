@@ -48,9 +48,19 @@ const storeState = {
   isElevated: () => false,
   isDeveloper: () => false,
   savedSettlements: [],
+  campaigns: [],
   maxSaves: () => 3,
   authSignOut: vi.fn(),
   setAuth: vi.fn(),
+  // Phase A2 — new selectors/actions the page (and its new sections) read.
+  removeSavedSettlement: vi.fn(),
+  clearSavedSettlements: vi.fn(),
+  deleteCampaign: vi.fn(),
+  productPrefs: {
+    defaultDetailLevel: 'guided', galleryPublicDefault: false, shareDefault: 'unlisted',
+    playerViewDefault: false, pdfStyle: 'classic', aiPolishDefault: false, campaignMapAutosave: true,
+  },
+  setProductPref: vi.fn(),
 };
 
 vi.mock('../../src/store/index.js', () => {

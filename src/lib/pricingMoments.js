@@ -29,7 +29,7 @@ import { COPY } from '../copy/strings.js';
 const COOLDOWN_MS = 24 * 60 * 60 * 1000;   // 24 hours
 const STORAGE_PREFIX = 'sf:pricing_moment:';
 
-/** @typedef {'first_canonize'|'first_ai_use'|'first_canon_export'|'cloud_save'|'first_save'|'third_save'|'first_pdf_export'|'regen_burst'} MomentReason */
+/** @typedef {'first_canonize'|'first_ai_use'|'first_canon_export'|'cloud_save'|'first_save'|'third_save'|'first_pdf_export'|'regen_burst'|'map_clicked'|'map_realm_teaser'|'weekly_user'|'welcome_credit'|'anon_cap_hit'|'founder_eligible'|'first_advance_attempt'|'war_layer_curiosity'|'pantheon_preview'} MomentReason */
 
 /**
  * Try to fire a pricing moment. Silently no-ops if:

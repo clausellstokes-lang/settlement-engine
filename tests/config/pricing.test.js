@@ -137,10 +137,18 @@ describe('TIERS', () => {
     expect(TIERS).toHaveProperty('founder');
   });
 
-  it('wanderer is free and capped at town size', () => {
+  it('wanderer is free and generates any size up to metropolis (size is NOT a paywall)', () => {
     expect(TIERS.wanderer.priceCents).toBe(0);
     expect(TIERS.wanderer.saveLimit).toBe(3);
-    expect(TIERS.wanderer.maxSize).toBe('town');
+    // A free ACCOUNT reaches the top generation size; the premium product is the
+    // living simulation, never settlement size. Anon still caps at town (authSlice).
+    expect(TIERS.wanderer.maxSize).toBe('metropolis');
+  });
+
+  it('size is not a premium lever — every account tier reaches metropolis', () => {
+    expect(TIERS.wanderer.maxSize).toBe('metropolis');
+    expect(TIERS.cartographer.maxSize).toBe('metropolis');
+    expect(TIERS.founder.maxSize).toBe('metropolis');
   });
 
   it('cartographer is $6/mo and unlocks neighbourhood + supply chain', () => {

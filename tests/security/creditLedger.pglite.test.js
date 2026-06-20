@@ -76,6 +76,8 @@ const OTHER = '22222222-2222-2222-2222-222222222222';
 let db;
 const asUser = (uid) => db.exec(`set test.uid = '${uid}';`);
 const setPrivileged = (v) => db.exec(`set test.privileged = '${v}';`);
+/** Set the JWT role auth.role() reports — 'service_role' unlocks system_grant_credits. */
+const asRole = (role) => db.exec(`set test.role = '${role}';`);
 const scalar = async (q) => (await db.query(q)).rows[0];
 const balanceOf = async (uid) => (await scalar(`select public.get_credit_balance('${uid}') as b`)).b;
 /** Seed a grant ledger row (the spendable unit in the ledger model). */
@@ -92,6 +94,9 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
       create schema if not exists auth;
       create or replace function auth.uid() returns uuid language sql stable as $fn$
         select nullif(current_setting('test.uid', true), '')::uuid
+      $fn$;
+      create or replace function auth.role() returns text language sql stable as $fn$
+        select coalesce(nullif(current_setting('test.role', true), ''), 'authenticated')
       $fn$;
       create or replace function public.current_user_is_privileged() returns boolean language sql stable as $fn$
         select coalesce(nullif(current_setting('test.privileged', true), '')::boolean, false)
@@ -123,18 +128,34 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
         created_at timestamptz not null default now(),
         primary key (spend_id, grant_id)
       );
+      -- Webhook-replay idempotency claim table (migration 024). Minimal mirror:
+      -- the real one FKs user_id -> auth.users; we drop that (no auth.users here).
+      create table public.credit_grant_idempotency (
+        source text not null,
+        idempotency_key text not null,
+        user_id uuid not null,
+        ledger_id uuid references public.credit_ledger(id) on delete set null,
+        created_at timestamptz not null default now(),
+        primary key (source, idempotency_key)
+      );
     `);
     // Load the REAL, net-current function bodies.
     await db.exec(extractFn('018', 'get_credit_balance'));
     await db.exec(extractFn('024', 'spend_credits'));
+    // pglite's PG build won't resolve the <<grant_fn>> block label as a qualifier
+    // for a function PARAMETER (real Supabase PG does); re-qualify the one such
+    // reference by the function name — behaviorally identical — so the rest of the
+    // real idempotency claim/grant body runs verbatim.
+    await db.exec(extractFn('024', 'system_grant_credits').replace(/\bgrant_fn\.source\b/g, 'system_grant_credits.source'));
     await db.exec(extractFn('009', 'refund_credits'));
     await db.exec(extractFn('009', 'admin_grant_credits'));
   });
 
   beforeEach(async () => {
-    await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions cascade;');
+    await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_grant_idempotency, public.credit_ledger, public.credit_transactions cascade;');
     await db.exec(`insert into public.profiles (id, role, credits) values ('${UID}', 'user', 0), ('${OTHER}', 'user', 0);`);
     await setPrivileged(false);
+    await asRole('authenticated');
     await asUser(UID);
   });
 
@@ -242,6 +263,54 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     expect(await balanceOf(UID)).toBe(7);
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);
     expect(await balanceOf(UID)).toBe(12);
+  });
+
+  // ── system_grant_credits — webhook-replay idempotency (review finding R2) ─────
+  // The single highest-dollar invariant: a Stripe webhook is delivered
+  // at-least-once, so a replayed delivery MUST NOT double-grant credits. The
+  // defense (024) is a claim-before-grant against credit_grant_idempotency.
+  // Previously this was only regex-asserted; here the real PL/pgSQL is RUN.
+  const sessionMeta = (id) => `{"stripe_session_id":"${id}"}`;
+  const grantSys = (uid, amount, source, metaJson) =>
+    db.query('select public.system_grant_credits($1,$2,$3,$4::jsonb) as b', [uid, amount, source, metaJson]);
+  const grantCount = async () => (await scalar("select count(*)::int n from public.credit_ledger where kind='grant'")).n;
+
+  it('grants once and is replay-safe: the same delivery key cannot double-grant', async () => {
+    await asRole('service_role');
+    const first = (await grantSys(UID, 10, 'purchase', sessionMeta('cs_replay'))).rows[0].b;
+    expect(first).toBe(10);
+    // Replay the SAME stripe_session_id (Stripe at-least-once redelivery).
+    const second = (await grantSys(UID, 10, 'purchase', sessionMeta('cs_replay'))).rows[0].b;
+    expect(second).toBe(10);              // balance unchanged — NOT 20
+    expect(await balanceOf(UID)).toBe(10);
+    expect(await grantCount()).toBe(1);   // exactly one grant row was written
+    expect((await scalar('select count(*)::int n from public.credit_grant_idempotency')).n).toBe(1);
+  });
+
+  it('distinct delivery keys grant independently (separate purchases both land)', async () => {
+    await asRole('service_role');
+    await grantSys(UID, 10, 'purchase', sessionMeta('cs_1'));
+    await grantSys(UID, 10, 'purchase', sessionMeta('cs_2'));
+    expect(await balanceOf(UID)).toBe(20);
+    expect(await grantCount()).toBe(2);
+  });
+
+  it('rejects a non-service-role caller', async () => {
+    await asRole('authenticated');
+    await expect(grantSys(UID, 10, 'purchase', sessionMeta('cs_x'))).rejects.toThrow(/service-role only/i);
+    expect(await balanceOf(UID)).toBe(0);
+  });
+
+  it('requires idempotency metadata for a Stripe-backed grant', async () => {
+    await asRole('service_role');
+    await expect(grantSys(UID, 10, 'purchase', '{}')).rejects.toThrow(/idempotency metadata is required/i);
+  });
+
+  it('system_grant_credits is service_role-only across all migrations', () => {
+    const roles = netExecuteGrants('system_grant_credits');
+    expect(roles.has('service_role')).toBe(true);
+    expect(roles.has('authenticated')).toBe(false);
+    expect(roles.has('anon')).toBe(false);
   });
 
   // ── net-current EXECUTE grants (the audit's #1 CRITICAL) ──────────────────────

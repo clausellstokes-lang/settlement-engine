@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen} from 'lucide-react';
+import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock} from 'lucide-react';
 
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
 // Lazy-load on user action so the Settlements first paint stays light —
@@ -13,10 +13,17 @@ import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import RegionalGraphSummary from '../region/RegionalGraphSummary.jsx';
 import { SettlementCard } from './SettlementCard.jsx';
+import RealmStrip from './RealmStrip.jsx';
 import { regionalCountsForSave } from './helpers.js';
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
-export function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns }) {
+export function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns, onCanonize, onAdvanceTime, worldCanonized, selectMode = false, selectedIds, onToggleSelect }) {
+  const worldState = campaign?.worldState || null;
+  const regionalGraph = campaign?.regionalGraph || campaign?.worldState?.regionalGraph || null;
+  const nameFor = (id) => {
+    const match = (settlements || []).find(sv => String(sv?.id) === String(id));
+    return match?.name || match?.settlement?.name || String(id);
+  };
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -72,6 +79,17 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
             <Button
+              variant="gold"
+              size="sm"
+              icon={<Clock size={10}/>}
+              onClick={(e) => { e.stopPropagation(); onAdvanceTime?.(campaign.id); }}
+              disabled={settlements.length === 0 || !worldCanonized}
+              title={worldCanonized
+                ? 'Advance the campaign world and open Wizard News on the map'
+                : 'Canonize this campaign world on the World Map before advancing time'}>
+              Advance Time
+            </Button>
+            <Button
               variant="danger"
               size="sm"
               icon={<FileText size={10}/>}
@@ -85,6 +103,10 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
           </div>
         )}
       </div>
+
+      {/* State-of-the-realm strip — self-hides when the world is dormant
+          (not canonized). Byte-identical for a non-simulated campaign. */}
+      {!collapsed && <RealmStrip campaign={campaign} settlements={settlements} />}
 
       {/* Campaign delete confirmation */}
       {confirmDelete && (
@@ -127,7 +149,15 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               regionalCounts={regionalCountsForSave(campaign, s.id)}
               onReactivate={onReactivate}
               canReactivate={canReactivate}
-              reactivatingId={reactivatingId}/>
+              reactivatingId={reactivatingId}
+              onCanonize={onCanonize}
+              onAdvanceTime={onAdvanceTime}
+              worldState={worldState}
+              regionalGraph={regionalGraph}
+              nameFor={nameFor}
+              selectMode={selectMode}
+              selected={!!selectedIds?.has?.(s.id)}
+              onToggleSelect={onToggleSelect}/>
           ))}
         </div>
       )}

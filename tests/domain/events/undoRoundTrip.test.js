@@ -167,6 +167,9 @@ const FIXTURES = {
   REMOVE_TRADE_GOOD: (s) => ({ before: s, event: ev('REMOVE_TRADE_GOOD', { targetId: (s.economicState.primaryExports || [])[0] }) }),
   PROMOTE_NPC: (s) => ({ before: s, event: ev('PROMOTE_NPC', { targetId: s.npcs[0].id, payload: { swapWithNpcId: s.npcs[1].id } }) }),
   DEMOTE_NPC: (s) => ({ before: s, event: ev('DEMOTE_NPC', { targetId: s.npcs[0].id, payload: { swapWithNpcId: s.npcs[1].id } }) }),
+  // Feature D / R1: assigning a primary deity onto a deity-free settlement must
+  // undo to exactly the dormant pre-event state (both config keys removed).
+  SET_PRIMARY_DEITY: (s) => ({ before: s, event: ev('SET_PRIMARY_DEITY', { targetId: 'custom:lu_vael', payload: { deityRef: 'custom:lu_vael', snapshot: { name: 'Vael', alignmentAxis: 'good', temperamentAxis: 'warlike', rankAxis: 'major', domain: 'war' } } }) }),
 };
 
 // Documented residue: undoing a RESOLVE_STRESSOR does not resurrect the LIVE

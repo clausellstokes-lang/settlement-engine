@@ -1,6 +1,8 @@
 import { evaluateFactionRules } from './factionCompetition.js';
 import { evaluateNpcRules } from './npcAgency.js';
 import { evaluateRelationshipRules } from './relationshipEvolution.js';
+import { evaluateSettlementStrategyRules } from './settlementStrategy.js';
+import { evaluateMobilizationReactions } from './mobilizationReactions.js';
 import { evaluateStressorRules, stressorCandidateForPressure } from './stressors.js';
 import { deriveFlowCandidates } from './flows.js';
 import { normalizeSimulationRules } from './simulationRules.js';
@@ -107,7 +109,7 @@ function compareStableKeys(a, b) {
 }
 
 function exclusiveTags(candidate) {
-  return (candidate.conflictTags || []).filter(tag =>
+  const tags = (candidate.conflictTags || []).filter(tag =>
     /^label:/.test(tag)
     || /:government_change$/.test(tag)
     || /:institution:/.test(tag)
@@ -116,7 +118,23 @@ function exclusiveTags(candidate) {
     || /^population_transfer:[^:]+$/.test(tag)
     || /^npc:[^:]+$/.test(tag)
     || /^faction:[^:]+$/.test(tag)
+    || /^strategy:[^:]+$/.test(tag)
   );
+  // C2 de-conflict: the strategy chooser emits one move per settlement under a
+  // `strategy:<S>` exclusive tag. A REACTIVE war candidate (hostileRules raid /
+  // occupation pressure) where S is the state-decided aggressor resolves to the
+  // SAME exclusive tag here — derived from its `metadata.aggressorSaveId` — so
+  // resolveCandidateConflicts admits exactly ONE for S and the strategy move (the
+  // higher-severity, structurally-prioritized candidate) wins. This makes the
+  // hard-override return-home suppress the reactive escalation WITHOUT touching the
+  // reactive rules. Only escalation-shaped war candidates carry an aggressor; a
+  // de-escalation / wind-down candidate has none, so it is never crowded out.
+  const aggressorId = candidate.metadata?.aggressorSaveId;
+  if (aggressorId != null && candidate.ruleFamily !== 'strategy') {
+    const tag = `strategy:${String(aggressorId)}`;
+    if (!tags.includes(tag)) tags.push(tag);
+  }
+  return tags;
 }
 
 export function resolveCandidateConflicts(candidates = [], budgets = {}) {
@@ -200,6 +218,29 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
   if (rules.relationshipDynamicsEnabled) {
     candidates.push(...evaluateRelationshipRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
   }
+  // Feature C (C2) — the settlement strategy chooser. GATED behind
+  // settlementStrategyEnabled (default false ⇒ no candidate emitted, no rng draw ⇒
+  // byte-identical). Runs ONCE per settlement (not per edge), softmax-samples one
+  // move via the threaded rng (forked on `strategy:<S>:<tick>`), and emits a
+  // probability-1 candidate that flows through the SAME conflict resolution + apply.
+  // Its `strategy:<S>` exclusive tag de-conflicts with the reactive escalation for S.
+  candidates.push(...evaluateSettlementStrategyRules(snapshot, pressureIndex, {
+    ...context,
+    tick,
+    simulationRules: rules,
+    rng: /** @type {any} */ (context).rng,
+  }));
+  // Phase B1 — NEIGHBOUR REACTIONS to a visibly-mobilizing rival/target/trade-
+  // dependent. GATED behind warLayerEnabled (default false ⇒ [] ⇒ byte-identical).
+  // rng-FREE here (the candidate's own downstream roll is the only stochastic step);
+  // reads the persisted worldState.warPosture written by the war block this tick.
+  // Each reactor shares a `strategy:<reactor>` exclusive tag so a reaction and a
+  // strategy move never double-fire for the same settlement.
+  candidates.push(...evaluateMobilizationReactions(snapshot, pressureIndex, {
+    ...context,
+    tick,
+    simulationRules: rules,
+  }));
   if (rules.npcAgencyEnabled) {
     candidates.push(...evaluateNpcRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
   }

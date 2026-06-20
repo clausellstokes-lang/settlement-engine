@@ -9,7 +9,8 @@
 import { Suspense, lazy } from 'react';
 import {
   FolderOpen, Save, Trash2, RefreshCw, Layers, Loader, Map as MapIcon, Globe,
-  Newspaper, SlidersHorizontal, Zap, HelpCircle, Image as ImageIcon, X as XIcon, Share2, Undo2,
+  Newspaper, SlidersHorizontal, Zap, HelpCircle, Image as ImageIcon, X as XIcon, Share2, Undo2, Sparkles,
+  PanelRight,
 } from 'lucide-react';
 import { GOLD, GOLD_BG, INK, MUTED, BORDER, BORDER2, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import { ModeSwitch } from './ModeSwitch.jsx';
@@ -20,6 +21,8 @@ const AutoSaveChip = lazy(() => import('./AutoSaveChip.jsx'));
 export function WorldMapToolbar({
   showingCampaignPanel,
   showingWizardNews,
+  showingPantheon,
+  campaignHasPantheon,
   mapMode,
   setMapMode,
   imageMode,
@@ -30,8 +33,6 @@ export function WorldMapToolbar({
   activeCampaigns,
   handleSaveMapToCampaign,
   handleClearMapFromCampaign,
-  campaignWorkspace,
-  setCampaignWorkspace,
   setShowSimulationRules,
   showSimulationRules,
   worldPulseInterval,
@@ -54,6 +55,11 @@ export function WorldMapToolbar({
   handleRegenerate,
   mapLoading,
   mapError,
+  inspectorOpen,
+  onToggleInspector,
+  openInspectorAt,
+  activePresetId,
+  handleApplyPreset,
 }) {
   return (
       <div style={{
@@ -82,6 +88,23 @@ export function WorldMapToolbar({
           }}>
             <Newspaper size={13} />
             Wizard News
+          </div>
+        ) : showingPantheon ? (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '5px 10px',
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.sm,
+            background: GOLD_BG,
+            color: GOLD,
+            fontFamily: sans,
+            fontSize: FS.sm,
+            fontWeight: 800,
+          }}>
+            <Sparkles size={13} />
+            Pantheon
           </div>
         ) : (
           <div style={{
@@ -141,20 +164,13 @@ export function WorldMapToolbar({
                   </IconButton>
                 )}
                 <div style={{ width: 1, height: 24, background: BORDER2 }} />
-                <IconButton
-                  onClick={() => setCampaignWorkspace('map')}
-                  title="Show campaign map"
-                  active={campaignWorkspace === 'map'}
-                  aria-pressed={campaignWorkspace === 'map'}
-                >
-                  <MapIcon size={13} /> Map
-                </IconButton>
+                {/* UX Phase 4 — the body-swap "Map" tab is retired (the map is
+                    always mounted now). Pulse / News / Pantheon open the Realm
+                    Inspector overlay rather than swapping the map away. */}
                 <IconButton
                   data-tour="pulse"
-                  onClick={() => setCampaignWorkspace('pulse')}
-                  title="Show World Pulse"
-                  active={campaignWorkspace === 'pulse'}
-                  aria-pressed={campaignWorkspace === 'pulse'}
+                  onClick={() => openInspectorAt?.('pulse')}
+                  title="Show World Pulse in the Realm Inspector"
                 >
                   <Zap size={13} /> Pulse
                 </IconButton>
@@ -168,13 +184,47 @@ export function WorldMapToolbar({
                 </IconButton>
                 <IconButton
                   data-tour="news"
-                  onClick={() => setCampaignWorkspace('news')}
-                  title="Show Wizard News"
-                  active={campaignWorkspace === 'news'}
-                  aria-pressed={campaignWorkspace === 'news'}
+                  onClick={() => openInspectorAt?.('chronicle')}
+                  title="Show the Chronicle in the Realm Inspector"
                 >
                   <Newspaper size={13} /> News
                 </IconButton>
+                {/* §S4 — the Pantheon tab self-hides while religion is dormant
+                    (no materialized pantheon key). It appears the instant a deity
+                    is assigned and the ledger materializes. */}
+                {campaignHasPantheon && (
+                  <IconButton
+                    data-tour="pantheon"
+                    onClick={() => openInspectorAt?.('pantheon')}
+                    title="Show the Pantheon in the Realm Inspector"
+                  >
+                    <Sparkles size={13} /> Pantheon
+                  </IconButton>
+                )}
+                {/* UX Phase 4 — preset chips. One-click Quiet / Realistic /
+                    Dramatic so a new DM never has to open the 15-toggle matrix. */}
+                {typeof handleApplyPreset === 'function' && (
+                  <span style={{ display: 'inline-flex', gap: 4 }}>
+                    {[
+                      ['quiet_local', 'Quiet'],
+                      ['realistic_regional', 'Realistic'],
+                      ['dramatic_campaign', 'Dramatic'],
+                    ].map(([id, label]) => {
+                      const active = activePresetId === id;
+                      return (
+                        <IconButton
+                          key={id}
+                          onClick={() => handleApplyPreset(id)}
+                          aria-pressed={active}
+                          active={active}
+                          title={`Apply the ${label} simulation preset`}
+                        >
+                          {label}
+                        </IconButton>
+                      );
+                    })}
+                  </span>
+                )}
                 <select
                   value={worldPulseInterval}
                   onChange={e => setWorldPulseInterval(e.target.value)}
@@ -290,6 +340,20 @@ export function WorldMapToolbar({
               </IconButton>
             )}
           </>
+        )}
+
+        {/* UX Phase 4 — Realm Inspector toggle. Always visible (anon can re-open
+            the locked Dashboard teaser); overlays the map, never body-swaps. */}
+        {typeof onToggleInspector === 'function' && (
+          <IconButton
+            data-tour="inspector"
+            onClick={onToggleInspector}
+            title="Toggle the Realm Inspector"
+            active={inspectorOpen}
+            aria-pressed={inspectorOpen}
+          >
+            <PanelRight size={13} /> Inspector
+          </IconButton>
         )}
 
         <div style={{ flex: 1 }} />

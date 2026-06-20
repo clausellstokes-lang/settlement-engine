@@ -142,10 +142,10 @@ describe('buildAiGroundingPayload() — envelope shape', () => {
     const p = buildAiGroundingPayload(fixture());
     expect(p.bands).toHaveProperty('substrate');
     expect(p.bands).toHaveProperty('capacities');
-    // 14 substrate variables; capacities expose ONLY the five canonical
+    // 16 substrate variables; capacities expose ONLY the five canonical
     // lenses (W6#4) — labor/craft/transport are noise, religious_welfare
     // is not one of the plan's food/defense/governance/magic/healing.
-    expect(Object.keys(p.bands.substrate).length).toBe(14);
+    expect(Object.keys(p.bands.substrate).length).toBe(16);
     expect(Object.keys(p.bands.capacities).sort()).toEqual([
       'administrative', 'defense', 'food_production', 'healing', 'magical',
     ]);

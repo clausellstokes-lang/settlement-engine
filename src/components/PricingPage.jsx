@@ -28,6 +28,7 @@ import {
 } from '../config/pricing.js';
 import { t, tx } from '../copy/index.js';
 import { useCopy } from '../hooks/useCopy.js';
+import { useFlag } from '../lib/flags.js';
 import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, PARCH, sans, serif_, SP, R, FS, BODY, swatch, PAGE_MAX } from './theme.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
 import Button from './primitives/Button.jsx';
@@ -59,13 +60,21 @@ function FeatureRow({ children }) {
   );
 }
 
-function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderSeatsRemaining, audienceLine }) {
+function TierCard({ tier, ctaLabel, ctaSub, onCta, loading, emphasised, founderSeatsRemaining, audienceLine, simulationVariant }) {
   const Icon = TIER_ICONS[tier.key] || Sparkles;
-  const features = tx(`pricing.tiers.${tier.key}.features`) || [];
+  // P9 / decision 4 — when the simulation-led A/B variant is on, source the
+  // feature list + tagline from pricing.variant.tiers.<key>.*, falling back to
+  // the current copy. The variant DELIBERATELY names no size as premium (size
+  // is free); the audience pitch line still takes precedence when present.
+  const variantFeatures = simulationVariant ? tx(`pricing.variant.tiers.${tier.key}.features`) : null;
+  const features = (Array.isArray(variantFeatures) && variantFeatures.length)
+    ? variantFeatures
+    : (tx(`pricing.tiers.${tier.key}.features`) || []);
+  const variantTagline = simulationVariant ? t(`pricing.variant.tiers.${tier.key}.tagline`) : null;
   // P122 / X-10 — Prefer audience-led pitch over generic tagline when the
-  // flag is on and a per-audience line is available. Falls back cleanly
-  // to the legacy tagline.
-  const tagline  = audienceLine || t(`pricing.tiers.${tier.key}.tagline`);
+  // flag is on and a per-audience line is available. Falls back to the
+  // simulation-variant tagline, then the legacy tagline.
+  const tagline  = audienceLine || variantTagline || t(`pricing.tiers.${tier.key}.tagline`);
   const priceLabel = t(`pricing.tiers.${tier.key}.priceLabel`);
   const priceSub   = t(`pricing.tiers.${tier.key}.priceSub`);
   const name       = getTierDisplayName(tier.legacyKey) || t(`pricing.tiers.${tier.key}.name`);
@@ -217,6 +226,16 @@ export default function PricingPage({ onNavigate }) {
   const tiers = getVisibleTiers();
   const packs = Object.values(getActivePacks());
 
+  // P9 / decision 4 — simulation-led pricing copy A/B. When ON, the page
+  // subtitle + tier taglines + feature lists lead with the living simulation
+  // (and name NO size as premium); when OFF, the current "unlimited saves /
+  // full size" copy stands. The storage/saves line stays a secondary bullet
+  // either way.
+  const simulationVariant = useFlag('pricingSimulationCopy');
+  const pageSubtitle = simulationVariant
+    ? t('pricing.variant.pageSubtitle')
+    : t('pricing.pageSubtitle');
+
   // P122 / X-10 — Audience-led pricing pitch. The same tier gets a
   // different lead line depending on the current reader's archetype.
   const copy = useCopy();
@@ -314,7 +333,7 @@ export default function PricingPage({ onNavigate }) {
           fontSize: FS.lg, color: BODY,
           fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
         }}>
-          {t('pricing.pageSubtitle')}
+          {pageSubtitle}
         </p>
         {/* ── Anti-AI positioning (Tier 7.13) ─────────────────────────── */}
         <p style={{
@@ -366,6 +385,7 @@ export default function PricingPage({ onNavigate }) {
               emphasised={tier.key === 'cartographer'}
               founderSeatsRemaining={tier.key === 'founder' ? founderSeatsRemaining : undefined}
               audienceLine={audienceLineFor(tier.key)}
+              simulationVariant={simulationVariant}
             />
           );
         })}

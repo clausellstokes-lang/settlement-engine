@@ -42,6 +42,7 @@ export const REGISTRY_CATEGORIES = [
   'resources',
   'stressors',
   'tradeGoods',
+  'deities',
   'resourceChains',
 ];
 
@@ -55,6 +56,7 @@ export const CUSTOM_SLICE_KEY_FOR = {
   resources:      'resources',
   stressors:      'stressors',
   tradeGoods:     'tradeGoods',
+  deities:        'deities',
   resourceChains: null,  // not yet user-creatable
 };
 
@@ -380,6 +382,7 @@ export function buildRegistry(customContent) {
     resources:      enumerateCustom('resources', customContent),
     stressors:      enumerateCustom('stressors', customContent),
     tradeGoods:     enumerateCustom('tradeGoods', customContent),
+    deities:        enumerateCustom('deities', customContent),
     resourceChains: [],
   };
 

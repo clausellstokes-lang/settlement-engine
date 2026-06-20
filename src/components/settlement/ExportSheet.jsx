@@ -18,7 +18,7 @@
 
 import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
-import { FileText, X, BookMarked, Clock, Edit3 } from 'lucide-react';
+import { FileText, X, BookMarked, Clock, Edit3, Swords } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { PDF_VARIANTS } from '../../pdf/variants.js';
 import { COPY } from '../../copy/strings.js';
@@ -29,13 +29,18 @@ const VARIANT_ICON = {
   draft_brief:     Edit3,
   canon_dossier:   BookMarked,
   timeline_packet: Clock,
+  campaign_state:  Swords,
 };
+
+// Variants that print canon-only chapters as their reason for being — disabled
+// in draft (a draft export of them would degrade to a thin shell).
+const CANON_ONLY_VARIANTS = new Set(['timeline_packet', 'campaign_state']);
 
 /**
  * @param {Object} props
  * @param {boolean} props.open
  * @param {() => void} props.onClose
- * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet', useAi?: boolean) => Promise<void>} props.onExport
+ * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet'|'campaign_state', useAi?: boolean) => Promise<void>} props.onExport
  * @param {boolean} [props.exporting]
  */
 export default function ExportSheet({ open, onClose, onExport, exporting }) {
@@ -55,8 +60,8 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
   const variants = Object.entries(PDF_VARIANTS).map(([id, spec]) => ({
     id, ...spec,
     Icon: VARIANT_ICON[id] || FileText,
-    disabled: id === 'timeline_packet' && phase !== 'canon',
-    disabledReason: id === 'timeline_packet' && phase !== 'canon'
+    disabled: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon',
+    disabledReason: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon'
       ? 'Available once the settlement is canonized.'
       : null,
   }));

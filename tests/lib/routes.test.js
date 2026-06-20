@@ -56,6 +56,8 @@ describe('routes — view ↔ path round-trip', () => {
     expect(viewToPath('generate')).toBe('/create');
     expect(viewToPath('settlements')).toBe('/settlements');
     expect(viewToPath('map')).toBe('/map');
+    // UX Phase 4 — the Realm hub.
+    expect(viewToPath('realm')).toBe('/realm');
     expect(viewToPath('howto')).toBe('/how-to');
     expect(viewToPath('signin')).toBe('/signin');
     expect(viewToPath('register')).toBe('/register');
@@ -147,6 +149,35 @@ describe('routes — legacy ?view= back-compat', () => {
   it('ignores an unknown legacy view and falls through to the path', () => {
     const r = resolveLocation('/compendium?view=bogus');
     expect(r.view).toBe('compendium');
+  });
+});
+
+describe('routes — UX Phase 4 Realm IA back-compat', () => {
+  it('the Realm route resolves both ways', () => {
+    expect(viewToPath('realm')).toBe('/realm');
+    expect(resolveLocation('/realm').view).toBe('realm');
+    expect(resolveLocation('/realm').notFound).toBeFalsy();
+    expect(isKnownView('realm')).toBe(true);
+  });
+
+  it('/map still resolves (App bounces the `map` view → realm; no 404)', () => {
+    const r = resolveLocation('/map');
+    expect(r.view).toBe('map');
+    expect(r.notFound).toBeFalsy();
+  });
+
+  it('legacy ?view=map resolves straight to the Realm (the Map sub-tab home)', () => {
+    const r = resolveLocation('/?view=map');
+    expect(r.view).toBe('realm');
+    expect(r.legacy).toBe(true);
+  });
+
+  it('/settlements (the renamed-to-Library destination) is preserved', () => {
+    expect(viewToPath('settlements')).toBe('/settlements');
+    expect(resolveLocation('/settlements').view).toBe('settlements');
+    expect(resolveLocation('/?view=settlements').view).toBe('settlements');
+    // The /settlements/:id deep link still parses.
+    expect(resolveLocation('/settlements/abc').params.id).toBe('abc');
   });
 });
 

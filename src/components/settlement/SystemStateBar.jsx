@@ -24,12 +24,23 @@ const DIM_ORDER = ['resilience', 'volatility', 'externalThreat', 'resourcePressu
 
 export default function SystemStateBar() {
   const systemState = useStore(s => s.systemState);
-  const [openKey, setOpenKey] = useState(null);
-
   if (!systemState) return null;
+  return <SystemStateGrid systemState={systemState} />;
+}
 
+/**
+ * Presentational 4-dimension grid (UX overhaul Phase 2). The store-bound
+ * SystemStateBar above and the read-view ReadSystemStateBar below both render
+ * through this, so the promoted read-view strip and the edit-mode bar share ONE
+ * visual. Pure — takes the already-derived systemState; no store read.
+ * @param {{ systemState: any, title?: string }} props
+ */
+export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
+  const [openKey, setOpenKey] = useState(null);
+  if (!systemState) return null;
   return (
     <div
+      data-testid="system-state-grid"
       style={{
         background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
         padding: SP.sm,
@@ -41,7 +52,7 @@ export default function SystemStateBar() {
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.xs,
       }}>
-        Settlement State
+        {title}
         <Info size={11} style={{ opacity: 0.6 }} />
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: SP.sm }}>

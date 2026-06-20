@@ -28,6 +28,9 @@ import {
   deriveDefenseReadiness, deriveArmedForces,
 } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
+import { resolveMilitaryStress } from '../../domain/display/warStatusVocab.js';
+import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
+import { buildPdfLiveWorld } from './liveWorld.js';
 
 const TIER_LABELS = {
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
@@ -156,7 +159,13 @@ export function buildViewModel({
   systemState = null,
   eventLog = [],
   phase = 'draft',
-} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string }} */ ({})) {
+  // UX Phase 7 — the LIVE campaign world for this settlement. Shape:
+  //   { worldState, regionalGraph, settlements?, nameFor? }
+  // Threaded ONLY for premium exports (data-layer gate in SettlementDetail).
+  // When absent / dormant, the liveWorld slice resolves to `null` — so a
+  // non-campaign / free / anon export is BYTE-IDENTICAL to today.
+  campaign = null,
+} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any }} */ ({})) {
   const raw = settlement || {};
   const ai = aiSettlement || null;
   const useAi = !!(narrativeMode && ai);
@@ -171,6 +180,12 @@ export function buildViewModel({
     systemState,
     eventLog,
     phase,
+
+    // UX Phase 7 — live-world slice. Built ONLY from the existing pure
+    // warStatus / pantheon / realmArc / deityEffects selectors (NO recompute,
+    // NO screen↔PDF drift). `null` when dormant ⇒ the Faith & War chapter and
+    // the additive enrichments self-gate to nothing ⇒ byte-identical off-state.
+    liveWorld:     buildPdfLiveWorld({ settlement: raw, campaign }),
 
     summary:       summarySlice(active, ai, useAi, aiDailyLife),
     identity:      identitySlice(active),
@@ -519,6 +534,18 @@ function powerSlice(active) {
     governanceFractured: !!s?.powerStructure?.publicLegitimacy?.governanceFractured,
     criminalCapture: s?.powerStructure?.criminalCaptureState || null,
     governmentType:  s?.powerStructure?.governmentType || s?.governmentType || null,
+    // Rule & Succession lineage — the conquest/coup provenance the engine records
+    // on `previousGovernments` (warDeployment mints a `conquest`-cause transfer
+    // when a siege falls). Self-gating: an empty array renders nothing, so a
+    // settlement with no regime history is byte-identical.
+    lineage: (Array.isArray(s?.powerStructure?.previousGovernments)
+      ? s.powerStructure.previousGovernments
+      : []).map(g => ({
+        government: g?.government || g?.governingName || g?.name || null,
+        cause: g?.cause || null,
+        tick: Number.isFinite(g?.tick) ? g.tick : null,
+        by: g?.by || g?.successor || null,
+      })).filter(g => g.government || g.cause),
     conflicts,
     tensions,
   };
@@ -639,9 +666,12 @@ function defenseSlice(active) {
   const threatReadiness = deriveDefenseReadiness(s);
   const armedForces = deriveArmedForces(s);
 
-  // Active military status override (from stress). Match on the stressor TYPE the
-  // engine emits, not icon/key sentinels that never held these values.
-  const militaryStress = stress.find(x => ['under_siege', 'occupied', 'wartime', 'insurgency'].includes(x?.type));
+  // Active military status override. Resolved through the SHARED war-status alias
+  // (domain/display/warStatusVocab) so a PULSE-born siege (war_pressure / war_drain
+  // / army_deployed conditions) lights this banner identically to a GENERATION-born
+  // one. A generation stress is returned UNCHANGED — byte-identical legacy render.
+  // The `types` set is exactly the inline predicate's prior scope (faithful superset).
+  const militaryStress = resolveMilitaryStress(s, { types: ['under_siege', 'occupied', 'wartime', 'insurgency'] });
 
   // Criminal architecture. Operations come from the safety profile's criminal
   // institutions (the source the web Defense tab uses), each carrying an
@@ -843,6 +873,22 @@ function viabilitySlice(active) {
   const byDesignContradictions = (v.issues || []).filter(i => i?.severity === 'by_design');
   const activeMagicChains = (s?.economicState?.activeChains || []).filter(isArcaneChain);
 
+  // Magic legality facets (UX Phase 7) — the 10-facet magic profile summarized
+  // for the Viability/Identity chapter, via the SAME summarizeMagic the screen
+  // Magic sub-tab reads. Self-gating: a dead-magic world (magicExists === false)
+  // yields { exists:false, lines:[] } ⇒ the section renders nothing extra, so a
+  // no-magic save is byte-identical. The profile is `null` for a null settlement.
+  const magicProf = deriveMagicProfile(s);
+  const magicProfile = magicProf
+    ? {
+        exists: magicProf.magicExists !== false,
+        legality: magicProf.legality || null,
+        availability: magicProf.availability || null,
+        institutionalControl: magicProf.institutionalControl || null,
+        lines: magicProf.magicExists === false ? [] : summarizeMagic(s),
+      }
+    : { exists: false, legality: null, availability: null, institutionalControl: null, lines: [] };
+
   return {
     viable:                v.viable,
     verdict:               v?.verdict || (v?.viable === true ? 'viable' : v?.viable === false ? 'notViable' : null),
@@ -867,6 +913,7 @@ function viabilitySlice(active) {
     magicDependency:       !!dp?.magicDependency,
     activeMagicChains:     v?.activeMagicChains?.length ? v.activeMagicChains : activeMagicChains,
     byDesignContradictions: v?.byDesignContradictions?.length ? v.byDesignContradictions : byDesignContradictions,
+    magicProfile,
   };
 }
 

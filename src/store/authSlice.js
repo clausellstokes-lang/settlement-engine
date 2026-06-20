@@ -25,16 +25,18 @@ import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 
 // Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
 // This map mirrors those ceilings so the auth-gating layer never drifts:
-//   wanderer/free    → town       (pricing.js:85)
-//   cartographer/    → capital    (pricing.js:102)
-//   founder lifetime → capital    (pricing.js:119)
+//   wanderer/free    → metropolis  (a free ACCOUNT generates any size — no size paywall)
+//   cartographer/    → metropolis  (size is not a premium lever)
+//   founder lifetime → metropolis
 //
-// Anonymous gets the same ceiling as Wanderer (town) so the funnel hero can
-// preview at the same tier the user would reach by signing up.
+// Anonymous caps at `town` (NOT the same as Wanderer anymore): a free account is
+// what unlocks full-size generation, so signing up is the first funnel step. The
+// PREMIUM product is the living simulation (advance-time / campaigns / custom
+// content / gallery), never settlement size or generation depth.
 const TIER_GATE = {
-  anon:    { maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
-  free:    { maxTier: 'town',    maxSaves: 3,        neighbour: false, export: true,  mapChains: false, customContent: false },
-  premium: { maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true  },
+  anon:    { maxTier: 'town',       maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
+  free:    { maxTier: 'metropolis', maxSaves: 3,        neighbour: false, export: true,  mapChains: false, customContent: false },
+  premium: { maxTier: 'metropolis', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true  },
 };
 
 // `capital` is the legacy tier name that lines up with pricing.js's maxSize
@@ -316,19 +318,42 @@ export const createAuthSlice = (set, get) => ({
    * established when the user lands back on our origin and the
    * onAuthStateChange listener fires SIGNED_IN.
    *
+   * The named wrappers (`signInWithGoogle`/`signInWithDiscord`) return the
+   * Supabase `{ data, error }` shape; we normalize so the caller always sees
+   * `{ mock }` in local mode and a thrown, already-sanitized Error otherwise.
+   * `error.userMessage` (set in lib/auth.js) is a safe, non-leaky string —
+   * including the account-linking conflict nudge — so the UI shows it directly
+   * rather than constructing its own.
+   *
    * @param {'google' | 'discord' | 'github'} provider
    */
   authOAuth: async (provider) => {
     set(state => { state.auth.loading = true; state.auth.error = null; });
     try {
-      const result = /** @type {any} */ (await authService.signInWithOAuth(provider));
+      const fn = provider === 'google'
+        ? authService.signInWithGoogle
+        : provider === 'discord'
+          ? authService.signInWithDiscord
+          : null;
+      const { data, error } = fn
+        ? /** @type {any} */ (await fn())
+        : /** @type {any} */ ({ data: await authService.signInWithOAuth(provider), error: null });
+
+      if (error) {
+        // error.userMessage is the safe display string set in lib/auth.js.
+        const safe = error.userMessage || error.message || 'Sign-in failed. Please try again.';
+        set(state => { state.auth.loading = false; state.auth.error = safe; });
+        const err = new Error(safe);
+        throw err;
+      }
+
       // Mock-mode short-circuit: there's no real redirect, so report
       // back to the caller instead of leaving the UI in a loading state.
-      if (result?.mock) {
+      if (data?.mock) {
         set(state => { state.auth.loading = false; });
       }
       // In real mode the browser is navigating away; no UI update needed.
-      return result;
+      return data;
     } catch (e) {
       set(state => { state.auth.loading = false; state.auth.error = e.message; });
       throw e;

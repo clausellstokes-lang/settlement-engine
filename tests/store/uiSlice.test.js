@@ -15,7 +15,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
-import { createUiSlice } from '../../src/store/uiSlice.js';
+import { createUiSlice, PRODUCT_PREF_DEFAULTS } from '../../src/store/uiSlice.js';
 
 const makeStore = () => create(immer((...a) => ({ ...createUiSlice(...a) })));
 
@@ -43,5 +43,34 @@ describe('uiSlice — transient UI prefs', () => {
     store.getState().setUserPref('tableViewOpen', true);
     expect(store.getState().getUserPref('tableViewOpen')).toBe(true);
     expect(store.getState().getUserPref('missing')).toBeUndefined();
+  });
+});
+
+describe('uiSlice — product preferences (Account → Product Preferences)', () => {
+  let store;
+  beforeEach(() => { store = makeStore(); });
+
+  it('seeds productPrefs from the defaults', () => {
+    expect(store.getState().productPrefs).toEqual(PRODUCT_PREF_DEFAULTS);
+  });
+
+  it('setProductPref writes a known key through', () => {
+    store.getState().setProductPref('pdfStyle', 'parchment');
+    expect(store.getState().productPrefs.pdfStyle).toBe('parchment');
+    store.getState().setProductPref('aiPolishDefault', true);
+    expect(store.getState().productPrefs.aiPolishDefault).toBe(true);
+  });
+
+  it('setProductPref ignores unknown keys (no bogus prefs)', () => {
+    store.getState().setProductPref('totallyMadeUp', 'nope');
+    expect(store.getState().productPrefs.totallyMadeUp).toBeUndefined();
+  });
+
+  it('getProductPref reads through and falls back to the default', () => {
+    expect(store.getState().getProductPref('pdfStyle')).toBe('classic');
+    store.getState().setProductPref('pdfStyle', 'compact');
+    expect(store.getState().getProductPref('pdfStyle')).toBe('compact');
+    // unknown key → its default (here undefined, since not a real pref)
+    expect(store.getState().getProductPref('galleryPublicDefault')).toBe(false);
   });
 });

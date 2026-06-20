@@ -155,10 +155,13 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                     <strong>Developer Access:</strong> All features unlocked, unlimited saves, unlimited AI credits, admin panel.
                   </>
                 ) : (
+                  // P9 — lead with the SIMULATION, not storage. Size is free (a
+                  // free account unlocks full-size generation), so it sits on
+                  // the free line, never the premium one.
                   <>
-                    <strong>Free Account:</strong> All tiers, 10 saves, custom content
+                    <strong>{t('authBlurb.freeLabel')}:</strong> {t('authBlurb.freeBody')}
                     <br />
-                    <strong>Premium:</strong> Unlimited saves, Neighbourhood System, PDF/JSON export, Map supply chains
+                    <strong>{t('authBlurb.premiumLabel')}:</strong> {t('authBlurb.premiumBody')}
                   </>
                 )}
               </div>

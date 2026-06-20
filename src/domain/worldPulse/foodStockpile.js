@@ -67,6 +67,13 @@ export const STOCKPILE_TUNING = Object.freeze({
   blockadeSeverityGate: 0.4,    // siege/occupation severity that cuts imports
   famineSeverityGate: 0.3,      // famine severity below this is ambient scarcity, not crop failure
   famineDeficitScale: 45,       // a full-severity famine cuts ~45% of need (production failure)
+  // Z1 — a settlement with an active OUTBOUND deployment feeds its army from the
+  // home granary: the marching host eats ~12% of home need beyond civilian demand
+  // (mirrors economicGenerator's ×1.2 occupier consumption, the other side of the
+  // same coin). Lands on the SAME effectiveDeficit the blockade/famine use — never a
+  // parallel counter — so it composes (a deploying town also under famine drains
+  // faster) and the drawdown answers it. Gated on a live deployment; OFF ⇒ 0.
+  deploymentDrainPct: 12,
 });
 
 const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
@@ -218,13 +225,13 @@ export function famineFor(worldStateStressors = [], settlementId) {
  * with the granary instead of freezing at the generation value.
  *
  * @param {Object} settlement
- * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any }} [options]
+ * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any, deployment?: any }} [options]
  * @returns {{ settlement: Object, changed: boolean,
  *            summary: { storageMonths: number, effectiveDeficitPct: number,
  *                       resilienceScore: number, reliefPct: number, tithed: boolean,
  *                       blockaded: boolean, famished: boolean } | null }}
  */
-export function advanceFoodStockpile(settlement, { interval = 'one_month', tick = 0, blockade = null, famine = null } = {}) {
+export function advanceFoodStockpile(settlement, { interval = 'one_month', tick = 0, blockade = null, famine = null, deployment = null } = {}) {
   const ledger = foodLedger(settlement);
   if (!ledger.present) return { settlement, changed: false, summary: null };
   const fs = settlement.economicState?.foodSecurity || {};
@@ -268,7 +275,15 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   const faminePct = famished
     ? clamp(famine.severity ?? 0, 0, 1) * T.famineDeficitScale
     : 0;
-  let effectiveDeficit = clamp(baseDeficitPct + blockadePct + faminePct, 0, 95);
+  // Z1 — an active OUTBOUND deployment eats the home granary (the army eats its
+  // home stockpile). Don't double-cut an origin already under blockade: a BESIEGED
+  // settlement's army defends home (the A1 layer never deploys a besieged town), and
+  // even on a legacy save the blockade cut already models a starving garrison — so
+  // the deploy drain only applies when the home is NOT itself blockaded. Lands on the
+  // same effectiveDeficit so it composes with famine and gets answered by the drawdown.
+  const deploying = !!deployment && !blockaded;
+  const deployDrainPct = deploying ? T.deploymentDrainPct : 0;
+  let effectiveDeficit = clamp(baseDeficitPct + blockadePct + faminePct + deployDrainPct, 0, 95);
 
   if (effectiveDeficit <= 0) {
     // 1. Surplus fills, capped by the granary infrastructure.
@@ -332,6 +347,7 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
       blockaded,
       blockadeBypass,
       famished,
+      deployed: deploying,
       lastTick: tick,
     },
   };
@@ -344,6 +360,7 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
     fs.stockpile.blockaded !== blockaded
     || (fs.stockpile.blockadeBypass ?? null) !== blockadeBypass
     || fs.stockpile.famished !== famished
+    || (fs.stockpile.deployed ?? false) !== deploying
   );
   const changed = nextFoodSecurity.storageMonths !== fs.storageMonths
     || nextFoodSecurity.deficitPct !== fs.deficitPct

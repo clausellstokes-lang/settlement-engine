@@ -8,6 +8,7 @@ import {
   legacyRegionalConditionId,
   propagateRegionalEvent,
   setRegionalImpactStatus,
+  stablePart,
   syncRelationshipChannelBundle,
 } from '../region/index.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
@@ -192,10 +193,76 @@ function affectedSaveIdsForOutcome(outcome) {
   for (const delta of outcome.populationDeltas || []) {
     if (delta?.saveId) ids.add(String(delta.saveId));
   }
-  if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch || outcome.institutionPatch || outcome.powerTransfer)) {
+  if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch || outcome.institutionPatch || outcome.powerTransfer || outcome.deityReembed)) {
     ids.add(String(outcome.targetSaveId));
   }
   return [...ids];
+}
+
+// Z1 occupation-parity multipliers — mirror the GENERATOR's `occupied`-stress
+// transform (powerGenerator.js ~1223): the conqueror disarms the locals so a
+// PULSE-conquered town looks like a GENERATION-occupied one, not a town that
+// merely swapped a flag. A local military/guard faction is gutted (×0.3 — the
+// "disarm"); the deposed governing seat is humbled (×0.6) + marked 'occupied';
+// every other local civic faction is suppressed (×0.82). Idempotent by the
+// 'occupied'/'disarmed' modifier guard so a re-fired conquest never re-cuts.
+const OCCUPATION_DISARM = 0.3;
+const OCCUPATION_GOVERNING_CUT = 0.6;
+const OCCUPATION_CIVIC_CUT = 0.82;
+
+/** @param {any} f */
+const factionNameOf = (f) => String(f?.faction || f?.name || '').trim();
+/** @param {any} f */
+const isMilitaryFaction = (f) => {
+  const cat = String(f?.category || f?.archetype || '').toLowerCase();
+  const nm = factionNameOf(f).toLowerCase();
+  return cat === 'military' || /\b(milit|guard|garrison|warrior|legion|soldier)\b/.test(nm);
+};
+
+/**
+ * Reproduce generation-time occupation RICHNESS on a faction roster that has just
+ * been conquered via the pulse: disarm the local military, humble the deposed seat,
+ * suppress the civic factions, then seed the foreign occupation authority that
+ * transferRulingPower crowns (it only promotes an EXISTING faction). A no-op if the
+ * named power already exists (idempotent re-fire) or there is no powerStructure.
+ * Used ONLY on cause:'conquest', so every pre-existing (coup) transfer is untouched.
+ */
+function installOccupationAuthority(/** @type {any} */ settlement, /** @type {any} */ powerName) {
+  const name = String(powerName || '').trim();
+  if (!name) return settlement;
+  const ps = settlement?.powerStructure;
+  if (!ps) return settlement;
+  const factions = Array.isArray(ps.factions) ? ps.factions : [];
+  const exists = factions.some((/** @type {any} */ f) => factionNameOf(f).toLowerCase() === name.toLowerCase());
+  if (exists) return settlement;
+  // Disarm/suppress the locals first (idempotent: a faction already carrying the
+  // 'occupied'/'disarmed' modifier is left alone, so a re-fired conquest is a no-op).
+  const round = (/** @type {number} */ v) => Math.max(0, Math.round(v));
+  const num = (/** @type {any} */ v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
+  const disarmedFactions = factions.map((/** @type {any} */ f) => {
+    const mods = Array.isArray(f?.modifiers) ? f.modifiers : [];
+    if (mods.includes('occupied') || mods.includes('disarmed')) return f;
+    if (f?.isGoverning) {
+      return { ...f, power: round(num(f.power) * OCCUPATION_GOVERNING_CUT), modifiers: [...mods, 'occupied'] };
+    }
+    if (isMilitaryFaction(f)) {
+      return { ...f, power: round(num(f.power) * OCCUPATION_DISARM), modifiers: [...mods, 'disarmed'] };
+    }
+    return { ...f, power: round(num(f.power) * OCCUPATION_CIVIC_CUT), modifiers: [...mods, 'occupied'] };
+  });
+  const occupier = {
+    faction: name,
+    name,
+    category: 'military',
+    power: 90,
+    isGoverning: false,
+    desc: 'A foreign occupation authority installed by conquest.',
+    modifiers: ['occupier'],
+  };
+  return {
+    ...settlement,
+    powerStructure: { ...ps, factions: [...disarmedFactions, occupier] },
+  };
 }
 
 function applyOutcomeToSettlement(settlement, outcome, saveId) {
@@ -219,6 +286,36 @@ function applyOutcomeToSettlement(settlement, outcome, saveId) {
   // is gone, or already governs) safely no-ops; the condition below still
   // records the turmoil.
   if (outcome.powerTransfer && String(outcome.targetSaveId) === String(saveId)) {
+    // A CONQUEST (Feature A, war layer) installs a foreign occupation authority —
+    // a power that does NOT exist among the target's own factions. transferRulingPower
+    // can only promote an EXISTING faction, so seed the occupation authority as a
+    // new non-governing power first; the transfer then crowns it. Gated on
+    // cause === 'conquest' so every pre-existing (coup) transfer is byte-identical.
+    if (outcome.powerTransfer.cause === 'conquest') {
+      next = installOccupationAuthority(next, outcome.powerTransfer.toPowerName);
+      // Z1 occupation parity: a GENERATION-occupied town carries the
+      // vassal_extraction condition (conditionPromotion maps the 'occupied' stress
+      // into it), so a PULSE-conquered town must too — that condition is what the
+      // substrate (deriveCausalState), the pressure model, AND population flight all
+      // read as "occupation." Stamp it alongside the conquest's war_pressure so the
+      // two faces of an occupation (military strain + economic extraction) both land.
+      // Idempotent by id (withActiveCondition replaces same-id), so a re-fired
+      // conquest never double-stamps. Conquest-only ⇒ a coup is byte-identical.
+      next = withActiveCondition(next, {
+        archetype: 'vassal_extraction',
+        severity: clamp01(0.55 + (outcome.severity || 0) * 0.15),
+        triggeredAt: {
+          tick: outcome.powerTransfer.tick ?? null,
+          sourceEventType: 'WAR_LAYER_CONQUEST',
+          sourceEventTargetId: String(saveId),
+        },
+        causes: [{
+          source: outcome.powerTransfer.toPowerName,
+          effect: 'occupation_extraction',
+          reason: `${outcome.powerTransfer.toPowerName} extracts wealth, troops, and authority from the conquered settlement.`,
+        }],
+      });
+    }
     const result = transferRulingPower(next, outcome.powerTransfer.toPowerName, {
       cause: outcome.powerTransfer.cause || 'coup',
       tick: outcome.powerTransfer.tick ?? null,
@@ -226,10 +323,85 @@ function applyOutcomeToSettlement(settlement, outcome, saveId) {
     });
     if (!result.error) next = result.settlement;
   }
+  // Feature D (R2): a religious conversion RE-EMBEDS the winning neighbour's
+  // EXISTING deity snapshot onto the convert's config.primaryDeitySnapshot so the
+  // conversion STICKS (the pulse/derivers read only the snapshot, never the
+  // store/customContent). We re-pick the exact snapshot fields (never spread the
+  // raw record) — the SAME field set SET_PRIMARY_DEITY embeds — so a re-embed is
+  // structurally identical to an assign and carries no wall-clock stamp.
+  if (outcome.deityReembed?.snapshot && String(outcome.targetSaveId) === String(saveId)) {
+    next = reEmbedPrimaryDeity(next, outcome.deityReembed.snapshot);
+  }
   if (outcome.condition && String(outcome.targetSaveId) === String(saveId)) {
     next = withActiveCondition(next, outcome.condition);
   }
   return next;
+}
+
+/**
+ * Re-embed a deity snapshot onto a settlement's config (the conversion commit).
+ * Re-picks the exact embed field set (mirrors mutate.setPrimaryDeity) so a
+ * conversion is structurally identical to a DM assign — never leaking a foreign
+ * field or wall-clock stamp into the embedded record.
+ */
+function reEmbedPrimaryDeity(/** @type {any} */ settlement, /** @type {any} */ snapshot) {
+  if (!settlement || !snapshot) return settlement;
+  const config = { ...(settlement.config || {}) };
+  const ref = snapshot._deityRef || config.primaryDeityRef || `converted:${stablePart(snapshot.name || 'deity')}`;
+  config.primaryDeityRef = ref;
+  config.primaryDeitySnapshot = Object.freeze({
+    _deityRef: ref,
+    name: String(snapshot.name || ''),
+    alignmentAxis: snapshot.alignmentAxis || 'neutral',
+    temperamentAxis: snapshot.temperamentAxis || 'neutral',
+    rankAxis: snapshot.rankAxis || 'minor',
+    ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),
+  });
+  return { ...settlement, config };
+}
+
+/**
+ * The stressor upsert merge. Birth time is sacred (FIRST createdAt wins). For the
+ * legacy single-write path (a fresh birth, or an escalation/spread re-upsert of a
+ * PRE-TICK record), this is byte-identical to the prior behavior: take the
+ * incoming stressor wholesale, preserve createdAt, stamp updatedAt.
+ *
+ * The COMMUTATIVE branch fires ONLY when the prior record was minted THIS SAME
+ * tick (prior.createdAt === now) — i.e. two outcomes collided on the same stressor
+ * id within one apply pass (Feature D: same-tick multi-seat religious conversions
+ * seeding the same `religious_conversion_fracture` record). There the merge is a
+ * FIELD-MERGE that cannot depend on apply order: UNION of affectedSettlementIds,
+ * MAX of severity, MAX of per-settlement severityBySettlement, MAX peakSeverity.
+ * So reversing the outcome order yields a byte-identical record.
+ */
+function mergeStressorUpsert(/** @type {any} */ prior, /** @type {any} */ incoming, /** @type {any} */ now) {
+  const base = { ...incoming, createdAt: prior?.createdAt || now, updatedAt: now };
+  // Only a SAME-TICK collision (prior born this tick) takes the commutative path.
+  if (!prior || prior.createdAt !== now) return base;
+  const affected = [...new Set([
+    ...(prior.affectedSettlementIds || []),
+    ...(incoming.affectedSettlementIds || []),
+  ].map(String))].sort();
+  // Codepoint-sort the severityBySettlement keys so the merged object is
+  // order-INDEPENDENT under JSON.stringify (object key order is otherwise
+  // insertion-dependent and would make the merge non-commutative byte-wise).
+  /** @type {Record<string, any>} */
+  const mergedSev = {};
+  for (const [id, sev] of Object.entries(prior.severityBySettlement || {})) mergedSev[id] = sev;
+  for (const [id, sev] of Object.entries(incoming.severityBySettlement || {})) {
+    mergedSev[id] = Math.max(mergedSev[id] ?? 0, sev);
+  }
+  /** @type {Record<string, any>} */
+  const severityBySettlement = {};
+  for (const id of Object.keys(mergedSev).sort()) severityBySettlement[id] = mergedSev[id];
+  const severity = Math.max(prior.severity ?? 0, incoming.severity ?? 0);
+  return {
+    ...base,
+    severity,
+    peakSeverity: Math.max(prior.peakSeverity ?? 0, incoming.peakSeverity ?? 0, severity),
+    affectedSettlementIds: affected,
+    severityBySettlement,
+  };
 }
 
 function settlementChanged(beforeSettlement, afterSettlement) {
@@ -677,7 +849,8 @@ export function applyWorldPulseOutcomes({
       // so the FIRST createdAt wins (the crisis was born once) while
       // updatedAt moves with every touch.
       const prior = byId.get(outcome.stressor.id);
-      byId.set(outcome.stressor.id, { ...outcome.stressor, createdAt: prior?.createdAt || now, updatedAt: now });
+      const merged = mergeStressorUpsert(prior, outcome.stressor, now);
+      byId.set(outcome.stressor.id, merged);
       state = { ...state, stressors: [...byId.values()] };
       // A betrayal's birth seeds the traitor its variant implies (one corrupt
       // NPC, gated on an existing corruptible flaw — no flaw, no traitor).

@@ -13,6 +13,8 @@ import { viewToPath } from '../lib/routes.js';
 import { saves as savesService } from '../lib/saves.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { activeSaveCount, inactiveRetentionCount, isSaveActive } from '../lib/saveAccess.js';
+import { useLibraryBulkSelect } from '../hooks/useLibraryBulkSelect.js';
+import { useLibraryLiveWorld } from '../hooks/useLibraryLiveWorld.js';
 import {
   relationshipDefinition,
   relationshipLinkMetadata,
@@ -21,10 +23,13 @@ import { buildInterSettlementNPCs } from '../domain/relationships/neighbourBackL
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import { forkSeedFor } from '../data/sampleSettlements.js';
-import { migrateConfig, findSaveById, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData } from './settlements/helpers.js';
+import { migrateConfig, findSaveById, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData, computeBulkDelete } from './settlements/helpers.js';
 import { SettlementCard } from './settlements/SettlementCard.jsx';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
+import SaveQuotaMeter from './settlements/SaveQuotaMeter.jsx';
+import LibraryBulkBar from './settlements/LibraryBulkBar.jsx';
+import { ADVANCE_TIME_NAV_TARGET } from './settlements/advanceTimeTarget.js';
 import Button from './primitives/Button.jsx';
 
 // ── Main Panel ──────────────────────────────────────────────────────────────
@@ -43,6 +48,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const isElevated = useStore(s => s.isElevated());
   const authUser = useStore(s => s.auth.user);
   const setSavedSettlements = useStore(s => s.setSavedSettlements);
+  const canonizeSavedSettlement = useStore(s => s.canonizeSavedSettlement);
   const applyCosmeticRename = useStore(s => s.applyCosmeticRename);
   const generateSettlement = useStore(s => s.generateSettlement);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
@@ -61,6 +67,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const toggleCampaignCollapsed = useStore(s => s.toggleCampaignCollapsed);
   const addToCampaign = useStore(s => s.addToCampaign);
   const removeFromCampaign = useStore(s => s.removeFromCampaign);
+  const setActiveCampaign = useStore(s => s.setActiveCampaign);
+  const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
+  const requestMapWorkspace = useStore(s => s.requestMapWorkspace);
   const discoverCampaignRegionalChannels = useStore(s => s.discoverCampaignRegionalChannels);
   const setRegionalChannelStatus = useStore(s => s.setRegionalChannelStatus);
   const applyQueuedRegionalImpact = useStore(s => s.applyQueuedRegionalImpact);
@@ -336,6 +345,27 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     if ((type === 'npc' || type === 'faction') && canonPhaseOf(detail?.saveData) === 'canon') return;
     const trimmed = newName.trim();
     const saveId = detail?.saveData?.id;
+
+    // Consolidated settlement-name rename (UX overhaul Phase 6): the dossier
+    // header's single inline edit is the ONE place a settlement is renamed.
+    // Settlement renames are NOT canon-locked; they cascade into neighbours'
+    // interSettlementRelationships.partnerSettlement.
+    if (type === 'settlement') {
+      const oldNm = detail?.settlement?.name || oldName;
+      const next = saves.map(s => {
+        if (s.id === saveId) return { ...s, name: trimmed, settlement: { ...s.settlement, name: trimmed } };
+        const isr = s.settlement?.interSettlementRelationships || [];
+        if (!isr.some(r => r.partnerSettlement === oldNm)) return s;
+        return { ...s, settlement: { ...s.settlement, interSettlementRelationships:
+          isr.map(r => r.partnerSettlement === oldNm ? { ...r, partnerSettlement: trimmed } : r) } };
+      });
+      setSaves(next);
+      persistBatch(next, next.filter((s, i) => s !== saves[i]).map(s => s.id));
+      const upd = next.find(s => s.id === saveId);
+      if (upd) setDetail(d => ({ ...d, ...upd, name: trimmed, settlement: upd.settlement, saveData: upd }));
+      return;
+    }
+
     let updatedSaves = saves.map(s => {
       if (s.id !== saveId) {
         const needsUpdate = (s.settlement?.interSettlementRelationships||[]).some(r => r.partnerSettlement === detail.settlement.name && (r.partnerName === oldName || r.npcName === oldName || r.partnerFactionName === oldName || r.factionName === oldName));
@@ -393,6 +423,50 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     const modifiedIds = updated.filter((s, i) => s !== saves.filter(x => x.id !== id)[i]).map(s => s.id);
     persistBatch(updated, modifiedIds, { deletes: [id] });
   };
+
+  // ── Bulk delete ───────────────────────────────────────────────────────────
+  // Remove every selected id in ONE batch (so neighbour cleanup + persistence run
+  // against a single coherent snapshot, not N racing closures over a stale list).
+  // The pure array work lives in computeBulkDelete; this owns the side effects.
+  const bulkDeleteConfirmed = (ids) => {
+    const idSet = new Set(ids.map(String));
+    for (const ds of saves.filter(s => idSet.has(String(s.id)))) {
+      track(EVENTS.SETTLEMENT_DELETED, {
+        canon_phase: canonPhaseOf(ds), age_days_band: dayGapBand(lastEditedMs(ds)),
+        had_ai_data: hasAiData(ds), was_published: !!ds.is_public,
+      });
+    }
+    const { remaining, modifiedIds } = computeBulkDelete(saves, ids);
+    setSaves(remaining);
+    if (detail?.saveData?.id && idSet.has(String(detail.saveData.id))) setDetail(null);
+    persistBatch(remaining, modifiedIds, { deletes: ids });
+  };
+
+  // ── Canonize ──────────────────────────────────────────────────────────────
+  // Promote a draft save to canon straight from the library row. The store
+  // action owns the mutation + persistence; the savedSettlements subscription
+  // (above) refreshes the local list, so the row flips draft → Canon. Guarded
+  // (active + draft) at the button; the action also no-ops on already-canon.
+  const handleCanonize = useCallback((s) => {
+    if (!isSaveActive(s) || canonPhaseOf(s) !== 'draft') return;
+    canonizeSavedSettlement(s.id);
+  }, [canonizeSavedSettlement]);
+
+  // ── Advance Time ────────────────────────────────────────────────────────────
+  // Advance a campaign's world one step, then jump to the World Map's Wizard
+  // News panel for that campaign. Reuses the campaign-world pulse (the button is
+  // disabled when the world isn't canonized, so the {ok:false} branch is just a
+  // defensive guard). The 'news' workspace is requested via a one-shot store
+  // signal WorldMap consumes on mount.
+  const handleAdvanceCampaignTime = useCallback(async (campaignId) => {
+    const result = await advanceCampaignWorld(campaignId, 'one_month');
+    if (result && result.ok === false) return; // not canonized / nothing to do
+    setActiveCampaign(campaignId);
+    // Forward-compatible nav: the Realm hub (Phase 4) repoints ADVANCE_TIME_NAV_TARGET
+    // in one place; today it lands on the World Map's Wizard-News workspace.
+    requestMapWorkspace(ADVANCE_TIME_NAV_TARGET.workspace);
+    onNavigate?.(ADVANCE_TIME_NAV_TARGET.view);
+  }, [advanceCampaignWorld, setActiveCampaign, requestMapWorkspace, onNavigate]);
 
   // ── Link ────────────────────────────────────────────────────────────────
   const handleLink = (linkedSave, relType) => {
@@ -501,13 +575,30 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [libraryQuery, setLibraryQuery] = useState('');
   const [librarySort, setLibrarySort] = useState('recent');
   const [libraryFilters, setLibraryFilters] = useState({});
+
+  // Save → owning campaign + the living-world filter context (reuses the same
+  // owning-campaign worldState the cards render from — one source of truth).
+  const { filterContext } = useLibraryLiveWorld(activeCampaigns);
+
   const filteredSaves = useMemo(() => {
     return _applyLibraryFilters(saves, {
       query: libraryQuery,
       sort: librarySort,
       filters: libraryFilters,
-    });
-  }, [saves, libraryQuery, librarySort, libraryFilters]);
+    }, filterContext);
+  }, [saves, libraryQuery, librarySort, libraryFilters, filterContext]);
+
+  // ── Bulk multi-select (state + actions live in the extracted hook) ─────────
+  const bulk = useLibraryBulkSelect({
+    saves,
+    addToCampaign,
+    canonizeSavedSettlement,
+    bulkDeleteConfirmed,
+    isActive: isSaveActive,
+    isDraft: (sv) => canonPhaseOf(sv) === 'draft',
+  });
+  const { selectMode, selectedIds, toggleSelect } = bulk;
+
   // Set of save ids surviving the active query/filter — the rendered collections
   // below intersect with this so the toolbar isn't inert.
   const filteredIds = useMemo(() => new Set(filteredSaves.map(s => s.id)), [filteredSaves]);
@@ -562,7 +653,16 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         </div>
       )}
 
-      {/* P108 / E-6 — Library toolbar (search + sort + filter chips). */}
+      {/* Save-quota meter + funnel header (Phase 3) — COUNT limit, not size. */}
+      <SaveQuotaMeter
+        tier={authTier}
+        used={activeSlotsUsed}
+        max={maxSaves}
+        onUpgrade={() => onNavigate?.('pricing')}
+        onSignIn={() => onNavigate?.('pricing')}
+      />
+
+      {/* P108 / E-6 — Library toolbar (search + sort + Filters▾ + Select). */}
       {saves.length > 0 && (
         <LibraryToolbar
           query={libraryQuery}
@@ -573,7 +673,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           setFilters={setLibraryFilters}
           totalCount={saves.length}
           visibleCount={filteredSaves.length}
+          campaigns={activeCampaigns}
+          selectMode={selectMode}
+          onToggleSelectMode={bulk.toggleMode}
         />
+      )}
+
+      {/* Bulk multi-select action bar + its delete confirm (Phase 3). */}
+      {selectMode && saves.length > 0 && (
+        <LibraryBulkBar bulk={bulk} campaigns={activeCampaigns} canManageCampaigns={canManageCampaigns} />
       )}
 
       {/* The old "Saved Settlements / Save Current Settlement / N of ∞ slots"
@@ -634,7 +742,13 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 onReactivate={handleReactivateSave}
                 canReactivate={canReactivateInactive}
                 reactivatingId={reactivatingId}
-                canManageCampaigns={canManageCampaigns}/>
+                canManageCampaigns={canManageCampaigns}
+                onCanonize={handleCanonize}
+                onAdvanceTime={handleAdvanceCampaignTime}
+                worldCanonized={!!campaign.worldState?.canonizedAt}
+                selectMode={selectMode}
+                selectedIds={selectedIds}
+                onToggleSelect={toggleSelect}/>
             );
           })}
 
@@ -655,7 +769,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                     currentCampaignId={null}
                     onReactivate={handleReactivateSave}
                     canReactivate={canReactivateInactive}
-                    reactivatingId={reactivatingId}/>
+                    reactivatingId={reactivatingId}
+                    onCanonize={handleCanonize}
+                    onAdvanceTime={handleAdvanceCampaignTime}
+                    selectMode={selectMode}
+                    selected={selectedIds.has(s.id)}
+                    onToggleSelect={toggleSelect}/>
                 ))}
               </div>
             </div>

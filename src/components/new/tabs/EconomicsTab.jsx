@@ -8,6 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
 import { deriveFoodBalance } from '../../../domain/display/dossierViewModel.js';
+import { EconomicsGranarySection } from '../../dossier/EngineSections.jsx';
 import Button from '../../primitives/Button.jsx';
 
 // ── Status palette for chain cards ────────────────────────────────────────
@@ -570,6 +571,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
           </div>
         </Section>;
       })()}
+
+      {/* UX overhaul Phase 2 — economic_capacity band + live granary gauge
+          (deriveBlockadeRelief: storageMonths vs capacity + tithe/drawdown/
+          blockade/deployment flags). Self-gates to nothing without a band or a
+          live stockpile record. */}
+      <EconomicsGranarySection settlement={settlement} />
 
     </div>
   );

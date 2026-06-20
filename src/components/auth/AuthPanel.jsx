@@ -232,29 +232,6 @@ export default function AuthPanel({
       {error && <Alert type="error">{error}</Alert>}
       {message && <Alert type="success">{message}</Alert>}
 
-      {(showDiscord || showGoogle) && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-          {showDiscord && (
-            <OAuthButton
-              glyph={<DiscordGlyph />}
-              label="Discord"
-              onClick={() => handleOAuth('discord')}
-              disabled={true}
-              soonNote={t('auth.discord.placeholder')}
-            />
-          )}
-          {showGoogle && (
-            <OAuthButton
-              glyph={<GoogleGlyph />}
-              label="Google"
-              onClick={() => handleOAuth('google')}
-              disabled={loading || !isConfigured}
-            />
-          )}
-          <OrDivider />
-        </div>
-      )}
-
       <Input type="email" placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
       {authMethod === 'password' && (
         <Input type="password" placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
@@ -271,6 +248,34 @@ export default function AuthPanel({
             ? t('auth.button.sendLink')
             : (mode === 'signup' ? t('auth.button.createAcct') : t('auth.button.signIn'))}
       </AuthCTAButton>
+
+      {/* ── OAuth alternatives ────────────────────────────────────────────────
+          Placed BELOW the email/password form, never above it: password +
+          magic-link stay the primary path; Google/Discord are alternatives.
+          Each button no-ops gracefully until the provider is enabled in the
+          Supabase dashboard (the wrapper maps "provider not enabled" to a safe
+          message rather than throwing). */}
+      {(showGoogle || showDiscord) && (
+        <div data-testid="oauth-section" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+          <OrDivider label={t('auth.oauth.divider')} />
+          {showGoogle && (
+            <OAuthButton
+              glyph={<GoogleGlyph />}
+              label="Google"
+              onClick={() => handleOAuth('google')}
+              disabled={loading}
+            />
+          )}
+          {showDiscord && (
+            <OAuthButton
+              glyph={<DiscordGlyph />}
+              label="Discord"
+              onClick={() => handleOAuth('discord')}
+              disabled={loading}
+            />
+          )}
+        </div>
+      )}
 
       <Button
         variant="ghost"

@@ -142,6 +142,92 @@ export function satisfiesOptions(customContent) {
 export const SATISFIES_CATEGORIES = Object.freeze(TRADE_CATEGORIES.filter((c) => c.demandLive));
 export const SATISFIES_KEYS = Object.freeze(SATISFIES_CATEGORIES.map((c) => c.key));
 
+// ── Deities (Feature D / R1) ──────────────────────────────────────────────────
+// A homebrew deity is authored content under the `religious` group. It is INERT
+// (dormant) until a DM assigns it as a settlement's primary deity — only then
+// does a resolved snapshot embed on the settlement record (the embed bridge) and
+// feed the religion substrate. Three frozen tag axes describe the god; all three
+// are required at author time (the DB CHECK in 049 mirrors these enums exactly).
+
+// Moral alignment — good / evil / neutral. Feeds the good↔evil NPC substrate (D.5)
+// and the contest's alignment-direction match (D.3).
+export const DEITY_ALIGNMENT = Object.freeze([
+  { key: 'good',    label: 'Good' },
+  { key: 'evil',    label: 'Evil' },
+  { key: 'neutral', label: 'Neutral' },
+]);
+export const DEITY_ALIGNMENT_KEYS = Object.freeze(DEITY_ALIGNMENT.map((a) => a.key));
+
+// Temperament — warlike / peacelike / neutral. A warlike-evil god is a casus belli
+// (D.4); feeds the warlike-posture term of the contest.
+export const DEITY_TEMPER = Object.freeze([
+  { key: 'warlike',   label: 'Warlike' },
+  { key: 'peacelike', label: 'Peacelike' },
+  { key: 'neutral',   label: 'Neutral' },
+]);
+export const DEITY_TEMPER_KEYS = Object.freeze(DEITY_TEMPER.map((t) => t.key));
+
+// Rank/scale — major / minor / cult. Scales how strongly the deity lifts
+// religious_authority (a major pantheon-head outweighs a fringe cult).
+export const DEITY_TIER = Object.freeze([
+  { key: 'major', label: 'Major — a pillar of the pantheon' },
+  { key: 'minor', label: 'Minor — a lesser god' },
+  { key: 'cult',  label: 'Cult — a fringe or secret following' },
+]);
+export const DEITY_TIER_KEYS = Object.freeze(DEITY_TIER.map((r) => r.key));
+
+// Law/chaos (Feature D / B5) — lawful / chaotic / neutral. The 4th axis. Couples
+// into the law_order causal variable (B0): a lawful god RAISES order/legitimacy
+// pressure; a chaotic god LOWERS order AND makes corruption more TOLERATED — a
+// DISTINCT lever from the good/evil corruption knobs (R3), which drive onset/
+// exposure directly. `neutral` is the back-compat default: a 3-axis deity
+// authored before B5 is tolerated as lawAxis === 'neutral' (no law_order term).
+export const DEITY_LAW = Object.freeze([
+  { key: 'lawful',  label: 'Lawful — upholds order and oaths' },
+  { key: 'chaotic', label: 'Chaotic — erodes order, tolerates corruption' },
+  { key: 'neutral', label: 'Neutral' },
+]);
+export const DEITY_LAW_KEYS = Object.freeze(DEITY_LAW.map((l) => l.key));
+
+/**
+ * Validate an authored deity record. Returns { ok, errors } — mirrors the
+ * write-time validation the other buckets perform implicitly (a name is
+ * required; the first three axes must each be one of their frozen enums). Pure;
+ * no store/React. The store slice rejects a write whose `errors` is non-empty so
+ * a bad axis never reaches the cloud (where the 049/056 CHECK would hard-reject
+ * it).
+ *
+ * The 4th axis `lawAxis` (B5) is BACK-COMPAT TOLERANT: a NEW deity should set it
+ * (the authoring UI always does), but a deity authored before B5 carries no
+ * lawAxis at all — that ABSENCE is tolerated and read as `neutral` (no law_order
+ * term), so legacy deity content never breaks. An explicitly PRESENT-but-invalid
+ * lawAxis is still rejected (a typo can't slip through). The 056 DB CHECK mirrors
+ * exactly this: NULL/absent lawAxis is admitted, a present bad value rejected.
+ *
+ * @param {any} deity
+ * @returns {{ ok: boolean, errors: string[] }}
+ */
+export function validateDeity(deity = {}) {
+  const errors = [];
+  const name = String(deity?.name || '').trim();
+  if (!name) errors.push('A deity needs a name.');
+  if (!DEITY_ALIGNMENT_KEYS.includes(deity?.alignmentAxis)) {
+    errors.push(`alignmentAxis must be one of: ${DEITY_ALIGNMENT_KEYS.join(', ')}.`);
+  }
+  if (!DEITY_TEMPER_KEYS.includes(deity?.temperamentAxis)) {
+    errors.push(`temperamentAxis must be one of: ${DEITY_TEMPER_KEYS.join(', ')}.`);
+  }
+  if (!DEITY_TIER_KEYS.includes(deity?.rankAxis)) {
+    errors.push(`rankAxis must be one of: ${DEITY_TIER_KEYS.join(', ')}.`);
+  }
+  // lawAxis (B5): tolerate ABSENCE (legacy 3-axis deity ⇒ neutral); reject only a
+  // present-but-invalid value. `== null` covers both undefined and null.
+  if (deity?.lawAxis != null && !DEITY_LAW_KEYS.includes(deity.lawAxis)) {
+    errors.push(`lawAxis must be one of: ${DEITY_LAW_KEYS.join(', ')}.`);
+  }
+  return { ok: errors.length === 0, errors };
+}
+
 // Settlement tiers, smallest → largest, for tier gates (min/max).
 export const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 

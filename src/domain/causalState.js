@@ -10,7 +10,7 @@
  * read from one canonical map.
  *
  *   deriveCausalState(settlement) -> {
- *     variables: { food_security: SystemVariable, ... },   // 14 entries
+ *     variables: { food_security: SystemVariable, ... },   // 16 entries
  *     bands:     { food_security: 'adequate', ... },        // flat band map
  *     scores:    { food_security: 65, ... },                // flat 0-100 score map
  *     summary:   { surplus: string[], adequate: [], ... },  // group by band
@@ -47,6 +47,7 @@
 
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
+import { deityLawDirection, DEITY_LAW_TUNING } from './corruption.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { tradeRouteSemantics } from './tradeRouteSemantics.js';
@@ -60,9 +61,23 @@ import { defenseLedger } from './defenseLedger.js';
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 /**
- * The 14 canonical system variables per the roadmap. Frozen so the
+ * The 16 canonical system variables per the roadmap. Frozen so the
  * shape of the substrate is stable; consumers can rely on iterating
  * this array to cover every dimension.
+ *
+ * `economic_capacity` (15th) is the live "war-affordability / economic slack"
+ * dial added for the geopolitical war layer (OQ7=A, docs/GEOPOLITICAL_WAR_LAYER.md
+ * Phase 0): economicState.prosperity/economicComplexity are generation-frozen, so
+ * they seed a BASELINE that active conditions (war_drain / vassal_extraction /
+ * market_shock / occupation extraction) move live — the seam the homeostasis loop
+ * and the trade-war contest read. Distinct from trade_connectivity (routes/chains).
+ *
+ * `law_order` (16th) is the rule-of-law dial added the same way (Phase B0): it
+ * reads government archetype, public legitimacy, the internal-security score, the
+ * law/order institution roster, and the crime/corruption signals — higher = more
+ * lawful/ordered. Purely ADDITIVE — it reads only signals other derivers already
+ * read, so the existing 15 scores are byte-identical. B5's lawful/chaotic deity
+ * axis will later couple INTO this.
  */
 export const SYSTEM_VARIABLES = Object.freeze([
   'food_security',
@@ -79,6 +94,8 @@ export const SYSTEM_VARIABLES = Object.freeze([
   'infrastructure_condition',
   'magical_stability',
   'social_trust',
+  'economic_capacity',
+  'law_order',
 ]);
 
 /**
@@ -393,6 +410,199 @@ function deriveTradeConnectivity(s) {
   return { score, contributors };
 }
 
+// economic_capacity — live war-affordability / economic slack. prosperity +
+// economicComplexity are generation-frozen, so they seed the BASELINE; active
+// conditions (war_drain / vassal_extraction / market_shock / occupation
+// extraction) move it live. This — NOT the frozen prosperity string and NOT
+// trade_connectivity — is what the war homeostasis loop and the trade-war
+// contest read. (OQ7=A; docs/GEOPOLITICAL_WAR_LAYER.md Phase 0.)
+const PROSPERITY_BASE = Object.freeze({
+  impoverished: 22, subsistence: 28, struggling: 30, poor: 38, modest: 46,
+  moderate: 50, comfortable: 62, prosperous: 74, wealthy: 86, thriving: 88,
+});
+/** @param {any} s */
+function deriveEconomicCapacity(s) {
+  /** @type {any[]} */
+  const contributors = [];
+  const eco = s.economicState || {};
+  const prosperity = String(eco.prosperity || '').trim();
+  const base = /** @type {Record<string, number>} */ (PROSPERITY_BASE)[prosperity.toLowerCase()] ?? 50;
+  let score = base;
+  push(contributors, 'economicState.prosperity', prosperity || 'unknown', base - 50,
+    prosperity ? `Prosperity is ${prosperity}.` : 'Prosperity unrecorded — neutral baseline.');
+
+  // Diversified economies absorb shocks; concentrated/specialized ones are brittle.
+  const complexity = String(eco.economicComplexity || '').toLowerCase();
+  if (/diversified/.test(complexity)) {
+    score += 6; push(contributors, 'economicState.economicComplexity', 'diversified', +6, 'A diversified economy is resilient.');
+  } else if (/concentrated|specialized/.test(complexity)) {
+    score -= 6; push(contributors, 'economicState.economicComplexity', 'concentrated', -6, 'A concentrated economy is brittle.');
+  }
+
+  // Active conditions move economic capacity live — the war-layer seam.
+  for (const cond of deriveAllActiveConditions(s)) {
+    // war_spoils (Phase B3) is the INVERSE of war_drain/war_exhaustion: the CAPPED
+    // benefit a stabilized occupation yields RELIEVES the occupier's war economy
+    // (extends supply endurance) rather than draining it. It is the ONLY economic-
+    // capacity condition that adds a POSITIVE magnitude — and the occupation layer
+    // HARD-CAPS its severity (the anti-snowball containment), so this relief is bounded
+    // no matter how many settlements the occupier holds. A lighter scale than the drain
+    // (war is never free): occupations soften, but never erase, the cost of campaigning.
+    if (cond.archetype === 'war_spoils') {
+      const magnitude = Math.round(cond.severity * 12);
+      score += magnitude;
+      push(contributors, cond.id, 'spoils', +magnitude, `${cond.label} sustains the war economy (capped).`);
+      continue;
+    }
+    if (!cond.affectedSystems.includes('economic_capacity')) continue;
+    const magnitude = Math.round(cond.severity * 18);
+    score -= magnitude;
+    push(contributors, cond.id, 'drain', -magnitude, `${cond.label} drains the war economy.`);
+  }
+
+  return { score, contributors };
+}
+
+// law_order — how lawful / ordered the settlement is. Higher = a strong rule of
+// law (courts, watch, an authoritative government, low corruption); lower = an
+// anarchic / lawless settlement where crime and corruption run the streets. The
+// 16th SYSTEM_VARIABLE, added the same way economic_capacity was — purely
+// ADDITIVE: it reads only signals other derivers already read (governance
+// ledger, defense ledger's internal-order score, the safetyProfile crime
+// signals, the criminal faction, and the institution roster), so the existing
+// 15 scores are byte-identical. B5's lawful/chaotic deity axis will later couple
+// INTO this; B0 only establishes the variable + a sensible base deriver.
+//
+// Government archetypes that concentrate authority (autocracy, military rule,
+// theocracy, monarchy/lordship) lift law_order; anarchic / weakly-governed forms
+// (communes, free cities, peasant/frontier governance) lower it. A government
+// string absent from BOTH lists contributes nothing.
+const LAWFUL_GOVERNMENT_PATTERN = /autocra|authoritarian|militar|junta|despot|tyrann|imperial|monarch|lordship|theocra|magocra|ecclesiastical|magistrat/i;
+const ANARCHIC_GOVERNMENT_PATTERN = /anarch|commune|free city|free council|peasant|frontier|lawless|warlord|failed/i;
+// Institutions that embody the rule of law: courts, the watch/guard, magistrates,
+// gaols. Mirrors healingLedger's name-pattern classifier — name-only, defensive.
+const LAW_ORDER_INSTITUTION_PATTERN = /court|magistrat|tribunal|watch|constab|gaol|jail|prison|assize|sheriff|marshal|justice/i;
+
+/** @param {any} s */
+function deriveLawOrder(s) {
+  let score = 50;
+  /** @type {any[]} */
+  const contributors = [];
+
+  // Governing legitimacy: a legitimate order can enforce its law; a contested
+  // one cannot. Weighted 0.4 (lighter than ruling_authority's 0.5 — legitimacy
+  // is necessary but not sufficient for order). Reads the conserved quantity.
+  const gov = governanceLedger(s);
+  if (gov.present) {
+    const c = Math.round((gov.legitimacyScore - 50) * 0.4);
+    if (c !== 0) {
+      score += c;
+      push(contributors, 'powerStructure.publicLegitimacy', gov.legitimacyLabel || 'measured', c,
+        `Governing legitimacy ${gov.legitimacyScore} underwrites the rule of law.`);
+    }
+  }
+
+  // Government archetype — authoritarian/lawful forms enforce order; anarchic
+  // forms cede it. Read the persisted government TYPE string (powerGenerator
+  // returns it on powerStructure.government).
+  const governmentLabel = String(s?.powerStructure?.government || s?.config?.government || '');
+  if (governmentLabel) {
+    if (LAWFUL_GOVERNMENT_PATTERN.test(governmentLabel)) {
+      score += 8;
+      push(contributors, 'powerStructure.government', 'authoritarian', +8,
+        `${governmentLabel} concentrates authority and enforces order.`);
+    } else if (ANARCHIC_GOVERNMENT_PATTERN.test(governmentLabel)) {
+      score -= 8;
+      push(contributors, 'powerStructure.government', 'anarchic', -8,
+        `${governmentLabel} disperses authority, leaving order loosely held.`);
+    }
+  }
+
+  // Internal security / public order — the defense ledger's `internal` score is
+  // exactly "internal security / public order", so it is the most direct order
+  // signal we have. Weighted 0.4 off its 50 baseline.
+  const led = defenseLedger(s);
+  if (led.present) {
+    const c = Math.round((led.internal - 50) * 0.4);
+    if (c !== 0) {
+      score += c;
+      push(contributors, 'defenseProfile.scores.internal', 'public_order', c,
+        `Internal-security score ${led.internal} reflects how well order is kept.`);
+    }
+  }
+
+  // Law/order institutions — courts, the watch, magistrates, gaols give the law
+  // teeth. Classified by name like healingLedger's healer pattern.
+  const institutions = Array.isArray(s?.institutions) ? s.institutions : [];
+  const lawCount = institutions.filter(i => LAW_ORDER_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
+  if (lawCount >= 2) {
+    score += 10; push(contributors, 'institutions', 'broad', +10, `${lawCount} law-and-order institutions uphold the courts and the watch.`);
+  } else if (lawCount === 1) {
+    score += 5; push(contributors, 'institutions', 'limited', +5, 'A single law-and-order institution maintains the peace.');
+  } else if (institutions.length > 0) {
+    score -= 6; push(contributors, 'institutions', 'absent', -6, 'No courts or watch — order rests on informal mechanisms.');
+  }
+
+  // Criminal / corruption signals erode the rule of law. Black-market capture is
+  // a direct measure of how much crime has displaced lawful commerce; a powerful
+  // criminal faction means the streets answer to it, not the law.
+  const safety = s?.economicState?.safetyProfile || s?.safetyProfile || {};
+  if (typeof safety.blackMarketCapture === 'number' && safety.blackMarketCapture > 0) {
+    const c = Math.round(safety.blackMarketCapture * 0.3);
+    if (c !== 0) {
+      score -= c;
+      push(contributors, 'safetyProfile.blackMarketCapture', 'crime', -c,
+        `Black-market capture at ${safety.blackMarketCapture}% undermines lawful order.`);
+    }
+  }
+  const profiles = deriveAllFactionProfiles(s);
+  const criminal = profiles.find(p => p.archetype === 'criminal');
+  if (criminal && typeof criminal.power === 'number' && criminal.power > 30) {
+    const c = Math.round((criminal.power - 30) * 0.35);
+    if (c !== 0) {
+      score -= c;
+      push(contributors, criminal.id, 'criminal_power', -c, `${criminal.name} (power ${criminal.power}) rivals the law.`);
+    }
+  }
+
+  // Active conditions move law_order live (the war/religion-layer seam, mirroring
+  // deriveEconomicCapacity). corruption_exposed / unrest / occupation-style
+  // archetypes that declare law_order press here; signed by the condition's
+  // status. A condition that does NOT declare law_order is ignored, so no-op for
+  // every settlement today (none declare it yet) ⇒ byte-identical.
+  for (const cond of deriveAllActiveConditions(s)) {
+    if (!cond.affectedSystems.includes('law_order')) continue;
+    const direction = cond.archetype === 'siege_lifted' ? +1 : -1;
+    const magnitude = Math.round(cond.severity * 15) * direction;
+    if (magnitude === 0) continue;
+    score += magnitude;
+    push(contributors, cond.id, direction > 0 ? 'restored' : 'eroded', magnitude,
+      `${cond.label} ${direction > 0 ? 'restores' : 'erodes'} the rule of law.`);
+  }
+
+  // Deity term (Phase B5) — DORMANT until assigned, exactly like the deity term
+  // in deriveReligiousAuthority. Only a settlement with an embedded
+  // primaryDeitySnapshot whose lawAxis is lawful/chaotic reads this; a deity-free
+  // settlement, a legacy 3-axis deity (no lawAxis ⇒ dir 0), and a law-NEUTRAL
+  // deity all see NONE of it ⇒ byte-identical. A lawful patron RAISES order
+  // (oaths kept, courts backed); a chaotic patron LOWERS it (order tolerated to
+  // erode, corruption shrugged at). This is the law-axis lever; the good/evil
+  // axis touches corruption ONSET/EXPOSURE through a SEPARATE path (corruption.js
+  // npcDeityDisfavor), so the two never double-count.
+  const lawDir = deityLawDirection(s?.config?.primaryDeitySnapshot);
+  if (lawDir !== 0) {
+    const lift = lawDir * DEITY_LAW_TUNING.lawOrderSwing;
+    score += lift;
+    const deity = s.config.primaryDeitySnapshot;
+    push(contributors, deity._deityRef || 'primaryDeity', lawDir > 0 ? 'lawful_patron' : 'chaotic_patron', lift,
+      `${deity.name || 'The patron deity'} (${deity.lawAxis}) ${lawDir > 0
+        ? 'strengthens law & order'
+        : 'erodes order and tolerates corruption'}.`);
+  }
+
+  return { score, contributors };
+}
+
 function deriveHealingCapacity(s) {
   let score = 50;
   const contributors = [];
@@ -490,8 +700,16 @@ function deriveCriminalOpportunity(s) {
   return { score, contributors };
 }
 
+// How strongly an assigned primary deity lifts religious_authority, by rank.
+// A major god is a pillar of the pantheon; a cult is a fringe following. Absent
+// from this map ⇒ no deity term (the dormancy guarantee — a deity-free
+// settlement never reads any of this).
+export const DEITY_RANK_AUTHORITY = Object.freeze({ major: 18, minor: 10, cult: 5 });
+
+/** @param {any} s */
 function deriveReligiousAuthority(s) {
   let score = 50;
+  /** @type {any[]} */
   const contributors = [];
 
   const profiles = deriveAllFactionProfiles(s);
@@ -503,6 +721,33 @@ function deriveReligiousAuthority(s) {
   } else {
     score -= 5;
     push(contributors, 'powerStructure', 'no_religious', -5, 'No religious faction in the power structure.');
+  }
+
+  // Active conditions move religious authority live — the religion-layer seam
+  // (mirrors deriveEconomicCapacity's condition scan). regional_religious_pressure
+  // now declares `religious_authority` (F5, landed with this consumer), so a
+  // regional spread presses the substrate here. Filtered on the affectedSystems
+  // contract like every other deriver; signed by the condition's status.
+  for (const cond of deriveAllActiveConditions(s)) {
+    if (!cond.affectedSystems.includes('religious_authority')) continue;
+    const magnitude = Math.round(cond.severity * 15);
+    if (magnitude === 0) continue;
+    score += magnitude;
+    push(contributors, cond.id, 'religious_pressure', magnitude,
+      `${cond.label} amplifies religious authority.`);
+  }
+
+  // Deity term — DORMANT until assigned. Only a settlement with an embedded
+  // primaryDeitySnapshot (the embed-on-assign bridge) reads this; a deity-free
+  // settlement sees NONE of it, so its score is unchanged except by the
+  // condition scan above. Tier-scaled: a major god lifts more than a cult. The
+  // snapshot is self-contained — we never touch customContent here.
+  const deity = s.config?.primaryDeitySnapshot;
+  if (deity && /** @type {Record<string, number>} */ (DEITY_RANK_AUTHORITY)[deity.rankAxis] != null) {
+    const lift = /** @type {Record<string, number>} */ (DEITY_RANK_AUTHORITY)[deity.rankAxis];
+    score += lift;
+    push(contributors, deity._deityRef || 'primaryDeity', 'deity_patronage', lift,
+      `${deity.name || 'The patron deity'} (${deity.rankAxis}) anchors religious authority.`);
   }
 
   return { score, contributors };
@@ -651,6 +896,8 @@ const DERIVERS = Object.freeze({
   infrastructure_condition: deriveInfrastructureCondition,
   magical_stability:       deriveMagicalStability,
   social_trust:            deriveSocialTrust,
+  economic_capacity:       deriveEconomicCapacity,
+  law_order:               deriveLawOrder,
 });
 
 function finalizeVariable(name, raw, contributors) {
@@ -772,7 +1019,7 @@ const HIGHER_IS_BETTER = new Set([
   'food_security', 'labor_capacity', 'public_legitimacy', 'ruling_authority',
   'faction_power', 'trade_connectivity', 'healing_capacity', 'defense_readiness',
   'religious_authority', 'housing_pressure', 'infrastructure_condition',
-  'magical_stability', 'social_trust',
+  'magical_stability', 'social_trust', 'economic_capacity', 'law_order',
 ]);
 
 const LOWER_IS_BETTER = new Set([
@@ -807,6 +1054,8 @@ const VARIABLE_LABEL = Object.freeze({
   infrastructure_condition: 'Infrastructure condition',
   magical_stability:       'Magical stability',
   social_trust:            'Social trust',
+  economic_capacity:       'Economic capacity',
+  law_order:               'Law & order',
 });
 
 function explainCausalDelta(variable, before, after, change, bandBefore, bandAfter) {

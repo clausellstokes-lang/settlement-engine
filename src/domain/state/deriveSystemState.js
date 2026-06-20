@@ -26,6 +26,7 @@ import { bandFor, clamp01 } from './bands.js';
 import { deriveExportPosture } from '../display/dossierViewModel.js';
 import { isIsolatedRoute } from '../tradeRouteSemantics.js';
 import { canonStressors, canonImports } from '../canonicalAccessors.js';
+import { deriveAllActiveConditions } from '../activeConditions.js';
 import { foodLedger } from '../foodLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { prosperityRank } from '../../data/constants.js';
@@ -123,6 +124,20 @@ function deriveResilience(s) {
     risks.push(`${impaired} impaired institution${impaired === 1 ? '' : 's'}`);
   }
 
+  // War-layer economic drain (S2). A war_drain condition is the SOURCE of the
+  // economic_capacity homeostasis loop — a campaign abroad bleeds the home
+  // economy. Additive: present only on a settlement actively waging war, so a
+  // peacetime settlement's resilience is unchanged. Severity-scaled penalty
+  // mirrors the deriveEconomicCapacity drain (severity×18, banded to this dial).
+  const { warDrain } = readWarReligionMovement(s);
+  if (warDrain) {
+    const penalty = Math.min(15, Math.round((warDrain.severity || 0) * 18));
+    if (penalty > 0) {
+      value -= penalty;
+      risks.push('War economy is bleeding the home treasury');
+    }
+  }
+
   return finalize(value, drivers, risks);
 }
 
@@ -194,6 +209,25 @@ function deriveVolatility(s) {
     risks.push(`${stresses.length} active stressors`);
   }
 
+  // Religion-layer movement (S2). A dominant primary deity anchors religious
+  // authority — a named driver on the internal-conflict axis (a unifying state
+  // cult concentrates social authority and damps faction friction; a fringe cult
+  // is a weaker anchor). Additive: present ONLY when a deity is assigned, so a
+  // deity-free settlement is byte-identical. Tier-scaled to match
+  // deriveReligiousAuthority's DEITY_RANK_AUTHORITY (major anchors most).
+  const { deity } = readWarReligionMovement(s);
+  if (deity) {
+    const rank = String(deity.rankAxis || '').toLowerCase();
+    const name = deity.name || 'the patron deity';
+    if (rank === 'major') {
+      value -= 6;
+      drivers.push(`${name} anchors religious authority`);
+    } else if (rank === 'minor' || rank === 'cult') {
+      value -= 2;
+      drivers.push(`${name} shapes religious authority`);
+    }
+  }
+
   return finalize(value, drivers, risks);
 }
 
@@ -241,6 +275,21 @@ function deriveExternalThreat(s) {
     risks.push(`Active threat: ${threatStresses.map(t => t.name || t.type).join(', ')}`);
   }
 
+  // War-layer conditions (S2). A PULSE-born war surfaces as a CONDITION, not a
+  // stress[] entry — so the threatStresses scan above (which reads stress TYPE)
+  // misses it. war_pressure is the besieged VICTIM under active war; army_deployed
+  // marks an army committed to a campaign abroad. Additive — present only on a
+  // settlement the war layer has touched, so a peacetime save is unchanged.
+  const { warPressure, armyDeployed } = readWarReligionMovement(s);
+  if (warPressure) {
+    value += Math.min(16, Math.round((warPressure.severity || 0) * 20));
+    risks.push('Under active wartime pressure');
+  }
+  if (armyDeployed) {
+    value += 6;
+    risks.push('Standing army deployed abroad — home garrison thinned');
+  }
+
   return finalize(value, drivers, risks);
 }
 
@@ -284,6 +333,37 @@ function deriveResourcePressure(s) {
   }
 
   return finalize(value, drivers, risks);
+}
+
+// ── War / religion causal movement (S2) ──────────────────────────────────────
+/**
+ * Read the war-layer + religion causal movement once. These are the conditions /
+ * embedded snapshot the world pulse stamps; every entry below is ADDITIVE — it
+ * only contributes when the matching condition/deity is present, so a settlement
+ * with NO war/religion state produces byte-identical drivers/risks to before.
+ *
+ *   - war_drain   (→ economic_capacity): a campaign abroad is bleeding the home
+ *     economy; surfaces as a FALLING economic driver labeled for war.
+ *   - war_pressure (→ defense/legitimacy): the settlement is under active war;
+ *     surfaces as an external-threat risk.
+ *   - army_deployed (→ defense_readiness): the standing army is committed abroad.
+ *   - primaryDeitySnapshot: a dominant deity moving religious_authority — a named
+ *     driver on the internal-conflict (volatility) axis.
+ *
+ * @param {any} s
+ * @returns {{ warDrain: any|null, warPressure: any|null, armyDeployed: any|null, deity: any|null }}
+ */
+function readWarReligionMovement(s) {
+  let warDrain = null;
+  let warPressure = null;
+  let armyDeployed = null;
+  for (const cond of deriveAllActiveConditions(s)) {
+    if (cond.archetype === 'war_drain' && !warDrain) warDrain = cond;
+    else if (cond.archetype === 'war_pressure' && !warPressure) warPressure = cond;
+    else if (cond.archetype === 'army_deployed' && !armyDeployed) armyDeployed = cond;
+  }
+  const deity = s?.config?.primaryDeitySnapshot || null;
+  return { warDrain, warPressure, armyDeployed, deity };
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────

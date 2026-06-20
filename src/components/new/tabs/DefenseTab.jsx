@@ -8,12 +8,23 @@ import {isMobile} from '../tabConstants';
 import {buildThreatAssessment} from '../../../generators/defenseGenerator';
 import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities } from '../../../domain/display/defenseDisplay.js';
+import { resolveMilitaryStress } from '../../../domain/display/warStatusVocab.js';
+import { settlementWarStatus } from '../../../domain/display/warStatus.js';
+import { DefenseWarFrontSection } from '../../dossier/EngineSections.jsx';
+import { useSettlementLiveWorld } from '../../../hooks/useSettlementLiveWorld.js';
 import { truncateAtWord } from '../../../lib/text.js';
 
-export function DefenseTab({ settlement:r, narrativeNote}) {
+export function DefenseTab({ settlement:r, narrativeNote, saveId = null}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
   const _mobile = isMobile();
+  // UX overhaul Phase 2 — resolve the owning campaign's live war status so the
+  // frozen defenseProfile can be reframed into a war-front readout. Self-gates to
+  // nothing (null status) for a non-campaign / at-peace settlement.
+  const { worldState, regionalGraph, nameFor } = useSettlementLiveWorld(saveId);
+  const liveWarStatus = (r && saveId)
+    ? settlementWarStatus({ settlementId: saveId, worldState, regionalGraph })
+    : null;
   if (!r) return null;
 
   const d = r.defenseProfile || {};
@@ -23,8 +34,6 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const f = r.economicState?.compound?.inst || {};
   const sp = r.economicState?.safetyProfile || {};
   const ra = r.resourceAnalysis || {};
-  const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
-  const stressTypes = stresses.map(s=>s?.type).filter(Boolean);
   const crimCapture = r.powerStructure?.criminalCaptureState || 'none';
 
   // Score color helper
@@ -75,18 +84,27 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const orderColor = isDangerous?'#8b1a1a':isUnsafe?'#8a4010':isControlled?'#5a2a6b':isModerate?'#1a5a28':'#a0762a';
   const orderBg    = isDangerous?'#fdf4f4':isUnsafe?'#fdf0e8':isControlled?'#f8f0fc':isModerate?'#f0faf4':'#faf8ec';
 
-  // Stress military status
+  // Stress military status. `wartime` is the AGGRESSOR posture a PULSE-born war
+  // surfaces as (war_drain / army_deployed conditions resolve to it via the shared
+  // alias) — additive, so a generation save without a wartime status is unchanged.
   const STRESS_STATUS = {
     under_siege:          {posture:'ACTIVE SIEGE',          colour:'#8b1a1a', icon:'️'},
+    wartime:              {posture:'AT WAR',                colour:'#8b1a1a', icon:'️'},
     famine:               {posture:'INTERNAL PRESSURE',     colour:'#8b5a1a', icon:'️'},
     occupied:             {posture:'UNDER OCCUPATION',      colour:'#4a3a6b', icon:''},
     politically_fractured:{posture:'COMMAND SPLIT',         colour:'#5a4a1a', icon:''},
     recently_betrayed:    {posture:'SECURITY COMPROMISED',  colour:'#6b1a2a', icon:'️'},
     plague_onset:         {posture:'QUARANTINE ACTIVE',     colour:'#2a5a2a', icon:''},
   };
-  const activeStress = stressTypes.find(t=>STRESS_STATUS[t]);
+  // Resolve through the SHARED war-status alias (domain/display/warStatusVocab)
+  // so a PULSE-born siege/war (war_pressure / war_drain / army_deployed conditions)
+  // lights this banner identically to a GENERATION-born one. A real generation
+  // stress is returned UNCHANGED → byte-identical legacy render. The `types` set
+  // is exactly the prior STRESS_STATUS scope (faithful superset).
+  const militaryStatus = resolveMilitaryStress(r, { types: Object.keys(STRESS_STATUS) });
+  const activeStress = militaryStatus?.type || null;
   const stressStatus = activeStress ? STRESS_STATUS[activeStress] : null;
-  const stressObj    = stresses.find(s=>s?.type===activeStress);
+  const stressObj    = militaryStatus;
 
   // Supporting capabilities (shared with the PDF viewModel)
   const caps = deriveSupportingCapabilities(r);
@@ -364,6 +382,11 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
           ✓ No critical defense vulnerabilities identified.
         </div>
       }
+
+      {/* UX overhaul Phase 2 — bridge the frozen defenseProfile.scores to the
+          live defense_readiness band + contributors, and reframe militaryStress
+          into a war-front readout (coalition/garrison-thinning) when at war. */}
+      <DefenseWarFrontSection settlement={r} warStatus={liveWarStatus} nameFor={nameFor} />
 
     </div>
   );

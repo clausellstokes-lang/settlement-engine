@@ -18,20 +18,41 @@
  */
 import {
   readCorruptionClimate, captureAdvanceChance, captureRecoverChance, advanceCaptureState,
-  guildEffectiveSecurity,
+  guildEffectiveSecurity, hasCorruptingDeity,
 } from '../corruption.js';
 
-export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, guildStrengthBy = null } = {}) {
+/**
+ * Feature D (R3): the PARALLEL onset-style gate (a corrupt seat-holder climbs
+ * the capture ladder only with `hasCriminalInst`) is relaxed the SAME way as
+ * the corruption.js onset gate — an embedded EVIL deity also enables the climb
+ * in a crime-free town, so the evil-deity effect is NOT half-applied. Gated
+ * behind `religionActive` (the caller's religionDynamicsEnabled +
+ * isSubsystemActive). false (default) ⇒ gate unrelaxed ⇒ byte-identical.
+ *
+ * @param {object} worldState
+ * @param {any} snapshot
+ * @param {{ fork: (k:string)=>{ random: ()=>number } }} rng
+ * @param {{ tick?: number, guildStrengthBy?: Map<string, number>|null, religionActive?: boolean }} [opts]
+ * @returns {{ worldState: object, transitions: Array<object> }}
+ */
+export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, guildStrengthBy = null, religionActive = false } = {}) {
   const factionStates = { ...(worldState.factionStates || {}) };
   const npcStates = worldState.npcStates || {};
   const climateBy = new Map();
+  /** @type {Map<string, boolean>} */
+  const corruptingDeityBy = new Map();
   for (const item of (snapshot?.settlements || [])) {
     climateBy.set(String(item.id), readCorruptionClimate(item.settlement));
+    // Per-settlement evil-deity presence (only when the religion layer is
+    // ACTIVE). Absent ⇒ false ⇒ the gate behaves exactly as before.
+    corruptingDeityBy.set(String(item.id), religionActive && hasCorruptingDeity(item.settlement));
   }
 
   const transitions = [];
   for (const [fid, fs] of Object.entries(factionStates)) {
     const climate = climateBy.get(String(fs.settlementId)) || { security: 0.5, prosperity: 0.5, hasCriminalInst: false };
+    // R3: relax the parallel gate with the same additive evil-deity term.
+    const onsetEnabled = climate.hasCriminalInst || corruptingDeityBy.get(String(fs.settlementId)) === true;
 
     // Highest-ranked corrupt seat-holder drives the climb.
     let maxCorruptRank = 0;
@@ -47,7 +68,7 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, gui
     const cur = fs.captureState || 'none';
     const local = rng.fork(`cap:${fid}:${tick}`);
     let next = cur;
-    if (maxCorruptRank > 0 && climate.hasCriminalInst) {
+    if (maxCorruptRank > 0 && onsetEnabled) {
       if (local.random() < captureAdvanceChance({ rank: maxCorruptRank, security: effSecurity, prosperity: climate.prosperity })) {
         next = advanceCaptureState(cur, true);
       }

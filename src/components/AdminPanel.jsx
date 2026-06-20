@@ -9,16 +9,19 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   Users, Shield, Zap, Search, ChevronLeft,
-  Check, X, AlertCircle, RefreshCw, Crown, Flag, BarChart3, TrendingUp,
+  Check, X, RefreshCw, Crown, Flag, BarChart3, TrendingUp, Ticket, Swords,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
 import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
 import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
+import AdminSimTuningPanel from './admin/AdminSimTuningPanel.jsx';
+import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
+import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
+import { GOLD, INK, MUTED, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
 
 function Section({ title, icon: Icon, children, actions }) {
   return (
@@ -196,8 +199,6 @@ export default function AdminPanel({ onBack }) {
   const [usersLoading, setUsersLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [stats, setStats] = useState(null);
-  const [supportMessages, setSupportMessages] = useState([]);
-  const [supportLoading, setSupportLoading] = useState(true);
 
   // Fetch users from profiles
   const fetchUsers = useCallback(async () => {
@@ -224,35 +225,15 @@ export default function AdminPanel({ onBack }) {
     }
   }, [searchQuery]);
 
-  // Fetch support messages
-  const fetchSupport = useCallback(async () => {
-    if (!supabase) return;
-    setSupportLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('support_messages')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(50);
-      if (error) throw error;
-      setSupportMessages(data || []);
-    } catch (e) {
-      console.error('Failed to fetch support:', e);
-    } finally {
-      setSupportLoading(false);
-    }
-  }, []);
-
-  // Mount-fetch pattern: the two fetches each setState internally,
-  // which trips react-hooks/set-state-in-effect under React Compiler.
-  // Migrating away requires a query library (TanStack Query, SWR) or
-  // Suspense — outside the scope of this panel's one-time admin load.
+  // Mount-fetch pattern: the fetch setStates internally, which trips
+  // react-hooks/set-state-in-effect under React Compiler. Migrating away
+  // requires a query library (TanStack Query, SWR) or Suspense — outside the
+  // scope of this panel's one-time admin load.
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
     fetchUsers();
-    fetchSupport();
     /* eslint-enable react-hooks/set-state-in-effect */
-  }, [fetchUsers, fetchSupport]);
+  }, [fetchUsers]);
 
   if (!isElevated) {
     return (
@@ -358,6 +339,12 @@ export default function AdminPanel({ onBack }) {
         </div>
       </Section>
 
+      {/* A4: search / inspect / act on a single user (redacted-by-default,
+          audited, role-gated server-side; reveal-full requires a reason). */}
+      <Section title="User Search & Actions" icon={Search}>
+        <AdminUsersPanel />
+      </Section>
+
       <Section title="Gallery Reports" icon={Flag}>
         <GalleryModerationPanel />
       </Section>
@@ -370,47 +357,16 @@ export default function AdminPanel({ onBack }) {
         <AdminAnalyticsPanel />
       </Section>
 
-      {/* Support Messages */}
-      <Section title="Support Messages" icon={AlertCircle} actions={
-        <Button variant="ghost" size="sm" onClick={fetchSupport} icon={<RefreshCw size={12} />}>
-          Refresh
-        </Button>
-      }>
-        {supportLoading ? (
-          <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontSize: FS.sm }}>Loading...</div>
-        ) : supportMessages.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontSize: FS.sm }}>No support messages</div>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, maxHeight: 400, overflowY: 'auto' }}>
-            {supportMessages.map(msg => (
-              <div key={msg.id} style={{
-                padding: `${SP.sm + 2}px ${SP.md}px`,
-                background: msg.status === 'new' ? '#fef9ee' : CARD_HDR,
-                border: `1px solid ${msg.status === 'new' ? GOLD : BORDER2}`,
-                borderRadius: R.md,
-              }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: SP.xs }}>
-                  <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>{msg.subject}</span>
-                  <span style={{
-                    fontSize: FS.xxs, fontWeight: 600,
-                    padding: '1px 6px', borderRadius: R.sm,
-                    background: msg.status === 'new' ? GOLD_BG : '#e0e0e0',
-                    color: msg.status === 'new' ? GOLD : MUTED,
-                    textTransform: 'uppercase',
-                  }}>
-                    {msg.status}
-                  </span>
-                </div>
-                <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5, marginBottom: SP.xs }}>
-                  {msg.message}
-                </div>
-                <div style={{ fontSize: FS.xxs, color: MUTED }}>
-                  From: {msg.email} &middot; {new Date(msg.created_at).toLocaleDateString()}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+      {/* F1 — simulation tuning: war/occupation/trade/faith balance + the
+          player-safe visibility audit, read from the live campaigns' worldState. */}
+      <Section title="Sim Tuning" icon={Swords}>
+        <AdminSimTuningPanel />
+      </Section>
+
+      {/* A5: support-ticket queue — claim / assign / transition / reply /
+          internal-note / link-FAQ, all audited + role-gated server-side. */}
+      <Section title="Support Queue" icon={Ticket}>
+        <SupportQueuePanel />
       </Section>
     </div>
   );

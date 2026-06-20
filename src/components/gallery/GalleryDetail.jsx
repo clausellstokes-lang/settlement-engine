@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, ChevronLeft, Eye, MessageCircle, Share2 } from 'lucide-react';
+import { Check, ChevronLeft, Eye, MessageCircle, Share2, Download } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -62,9 +62,12 @@ export default function GalleryDetail({
   onOpen,
   onVote,
   onReport,
+  onImport,
   onCommentCountChange,
   voteBusy,
   reportBusy,
+  importBusy,
+  imported,
   auth,
 }) {
   const [shared, setShared] = React.useState(false);
@@ -135,6 +138,7 @@ export default function GalleryDetail({
             galleryTags={ownedSave.gallery_tags}
             galleryShareNarrated={ownedSave.gallery_share_narrated}
             galleryShareDm={ownedSave.gallery_share_dm}
+            galleryImportable={ownedSave.gallery_importable}
             // Re-fetch the dossier in place after a save so the public view
             // reflects the new narrated / DM-visibility choices — WITHOUT a full
             // page reload (which would land on a fresh gallery URL where saves
@@ -171,6 +175,18 @@ export default function GalleryDetail({
                 No public creator description was added.
               </p>
             )}
+            {/* §S4 — the public-safe realm-arc digest (war/pantheon epic). A DERIVED
+                scalar string, NOT the raw chronicle; rendered as plain text. */}
+            {dossier.realmArcSummary ? (
+              <div style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.md, background: CARD_ALT, padding: SP.md }}>
+                <div style={{ color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
+                  Realm Chronicle
+                </div>
+                <p style={{ margin: 0, color: BODY, fontFamily: serif_, fontSize: FS.md, lineHeight: 1.55 }}>
+                  {dossier.realmArcSummary}
+                </p>
+              </div>
+            ) : null}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
               <VoteButton
                 count={dossier.netVotes}
@@ -200,6 +216,24 @@ export default function GalleryDetail({
                 disabled={reportBusy}
                 onReport={onReport}
               />
+              {/* Import: clone the public-safe dossier into your own library.
+                  Only when the owner opted in (dossier.importable), you're signed
+                  in, and you don't already own this one. Server-gated by the
+                  import RPC (048); the save-limit trigger enforces the slot cap. */}
+              {dossier.importable && auth?.user && !ownedSave && (
+                <Button
+                  variant="gold"
+                  size="sm"
+                  onClick={() => onImport?.(dossier)}
+                  busy={importBusy}
+                  disabled={imported || importBusy}
+                  title={imported ? 'Imported to your library' : 'Clone the public-safe version into your library'}
+                  icon={imported ? <Check size={13} /> : <Download size={13} />}
+                  style={imported ? { color: GREEN } : undefined}
+                >
+                  {imported ? 'Imported' : 'Import'}
+                </Button>
+              )}
             </div>
           </div>
         </div>
